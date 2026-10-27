@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-strict-quotient-completed-horizontal",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Former coefficient-twists proof step 5, as extracted in lem-pur-derived-pullback-tensor-iso: constructing the quotient tensor/pullback towers before their coherence equations; lem-pur-integral-coherence-tower former step 1, from actual quotient transitions through K-flat models and normalized transition-adjoints. Extraction: extraction of original steps 1-5 and coherent-tower part of step 10 of lem-pur-quotient-expression-kflat-normalization.",
+   "via": [
+    "lem-pur-quotient-expression-strict-kflat-towers-tower-data",
+    "lem-pur-quotient-expression-kflat-normalization",
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; the restriction-of-scalars and actual horizontal-map clause of def-coef-ringed-sequence-site."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientExpressionStrictKFlatTowers",
+  "date": "2026-10-26",
+  "group": "N3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of a sheaf of modules leaves the underlying section maps unchanged",
+   "results": "8 hits: SheafOfModules.restrictScalars_map_val, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj_map, PresheafOfModules.restrictScalars_map_app, PresheafOfModules.restrictScalars_obj, ModuleCat.Tilde.res_apply, PresheafOfModules.restrictScalarsObj",
+   "date": "2026-10-26",
+   "verdict": "Partial: scalar restriction retains the underlying maps, but these lemmas do not characterize the completed coefficient tower functor chosen by coefficientSequenceRestriction_exists."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.presheaf_map_apply_coe",
+   "results": "1 hit: PresheafOfModules.presheaf_map_apply_coe, Mathlib.Algebra.Category.ModuleCat.Presheaf",
+   "date": "2026-10-26",
+   "verdict": "Used: identifies the underlying additive section map with the module-presheaf map. The tower characterization is supplied by the existing coefficient sequence-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "presheaf_map_apply_coe|restrictScalars.*map",
+   "results": "25 hits, primarily restriction of scalars in differential fields, number fields and algebra operations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the actual completed coefficient tower section formula."
+  }
+ ],
+ "mathlib_match": null,
+ "title": "Completed scalar restriction preserves horizontal section maps",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, W a scheme, and M a module sheaf on the vertical coefficient sequence site [def-coef-ringed-sequence-site]. For positive levels n+1 <= m+1, the map on sections of the completed-scalar restriction tower of M is heterogeneously equal to the original horizontal map of M [def-pur-strict-quotient-expressions]. This is an equality of the actual section functions, including their domains, and requires no flatness assumption.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-strict-quotient-expressions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the horizontal-map clause in the unique characterization coefficientSequenceRestriction_exists to M, m, n, the inequality and the site object. It identifies the restricted tower map with the original module-presheaf map.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941; the restriction-of-scalars and actual horizontal-map clause of def-coef-ringed-sequence-site."
+   }
+  },
+  {
+   "text": "The module-presheaf map and its underlying additive-presheaf map agree by PresheafOfModules.presheaf_map_apply_coe. Extend this pointwise identity to the section functions and compose its heterogeneous equality with the preceding characterization. By the definition of horizontal this is the claimed formula.",
+   "uses": [
+    "def-pur-strict-quotient-expressions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941; the restriction-of-scalars and actual horizontal-map clause of def-coef-ringed-sequence-site."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-strict-quotient-expressions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; the restriction-of-scalars and actual horizontal-map clause of def-coef-ringed-sequence-site."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictQuotientCompletedHorizontal",
+  "file": "lean/Sheaf/Paper/StrictQuotientCompletedHorizontal.lean",
+  "declaration": "WeilConjectures.StrictQuotient.completedHorizontal",
+  "statement": "theorem completedHorizontal {W : Scheme.{t}}\n    (M : coefficientSequenceModules l E W) (m n : ℕ) (hmn : n ≤ m)\n    (U : W.ProEtᵒᵖ) :\n    HEq (fun x ↦ ((((coefficientSequenceRestriction l E W).obj M).map\n      (homOfLE hmn).op).val.app U) x)\n      (fun x : M.val.obj (op (m, U.unop)) ↦\n        horizontal l E M hmn U.unop x)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T130555-L-3477889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T130555-L-3477889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-cartesian-lift-pullback-square",
+ "kind": "statement",
+ "title": "A strongly cartesian lift of a base pullback square is a pullback",
+ "statement": "Use the fixed universes of [def-weil-size-convention], with all categories small in the ambient universe. Let $p:\\mathcal S\\to\\mathcal C$ be a functor between categories. Call an arrow $a:s'\\to s$ over $u:c'\\to c$ strongly cartesian if for every arrow $h:t\\to s$ and base arrow $v:p(t)\\to c'$ with $p(h)=u\\circ v$, there is a unique $k:t\\to s'$ with $p(k)=v$ and $a\\circ k=h$. Let $f:x\\to y$ be strongly cartesian and $g:z\\to y$ any arrow. Suppose the base pullback $P=p(x)\\times_{p(y)}p(z)$ exists with projections $\\pi_x$ and $\\pi_z$. Suppose $a:w\\to z$ is strongly cartesian with $p(w)=P$ and $p(a)=\\pi_z$. There is a unique arrow $b:w\\to x$ with $p(b)=\\pi_x$ and $f\\circ b=g\\circ a$. The commutative square with sides $b,a,f,g$ is a pullback in $\\mathcal S$: for every $h:t\\to x$ and $k:t\\to z$ with $f\\circ h=g\\circ k$, there is a unique $l:t\\to w$ with $b\\circ l=h$ and $a\\circ l=k$. In particular this constructs $x\\times_y z$ over the specified base pullback $P$, with strongly cartesian projection to $z$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 06N4, label lemma-strongly-cartesian-fibre-product; the canonical comparison map and square are the ones constructed in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "By the base pullback equation and functoriality, $p(g\\circ a)=p(g)\\circ\\pi_z=p(f)\\circ\\pi_x$. Apply the strongly cartesian property of $f$ to $g\\circ a:w\\to y$ and $\\pi_x:p(w)=P\\to p(x)$. It gives a unique $b:w\\to x$ with $p(b)=\\pi_x$ and $f\\circ b=g\\circ a$. Thus the proposed square commutes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 06N4, label lemma-strongly-cartesian-fibre-product, proof, construction of b"
+   }
+  },
+  {
+   "text": "Fix $h:t\\to x$ and $k:t\\to z$ with $f\\circ h=g\\circ k$. Applying $p$ gives $p(f)\\circ p(h)=p(g)\\circ p(k)$. The defining property of the base pullback gives a unique $q:p(t)\\to P$ with $\\pi_x\\circ q=p(h)$ and $\\pi_z\\circ q=p(k)$. Since $p(a)\\circ q=p(k)$, strong cartesianness of $a$ gives a unique $l:t\\to w$ with $p(l)=q$ and $a\\circ l=k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 06N4, label lemma-strongly-cartesian-fibre-product, proof, first two Hom-set equalities, expanded on a cone"
+   }
+  },
+  {
+   "text": "The arrows $b\\circ l$ and $h$ have the same base map: $p(b\\circ l)=\\pi_x\\circ q=p(h)$. Also $f\\circ(b\\circ l)=(f\\circ b)\\circ l=(g\\circ a)\\circ l=g\\circ k=f\\circ h$. Uniqueness in the strongly cartesian property of $f$, applied to $f\\circ h:t\\to y$ and the fixed base map $p(h)$, therefore gives $b\\circ l=h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 06N4, label lemma-strongly-cartesian-fibre-product, proof, last Hom-set equality, expanded as uniqueness for f"
+   }
+  },
+  {
+   "text": "If $l':t\\to w$ also satisfies $b\\circ l'=h$ and $a\\circ l'=k$, then $\\pi_x\\circ p(l')=p(h)$ and $\\pi_z\\circ p(l')=p(k)$. Uniqueness for the base pullback forces $p(l')=q$. Now $l'$ and $l$ both lift $q$ and have composite $k$ with $a$, so uniqueness for the strongly cartesian arrow $a$ gives $l'=l$. This proves precisely the pullback universal property in $\\mathcal S$. Its projection to $z$ is the given strongly cartesian arrow $a$, and its image object is the specified $P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 06N4, label lemma-strongly-cartesian-fibre-product, proof, uniqueness in the Hom-set bijection"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 06N4, label lemma-strongly-cartesian-fibre-product, proof; explicit cone-wise form of its Hom-set calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a fibered category a strongly cartesian arrow admits pullbacks lifted from pullbacks in the base category",
+   "results": "8 hits; CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, HasFibers.pullbackMap.isCartesian, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_exists_isCartesian, CategoryTheory.Functor.IsStronglyCartesian.map, CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian, CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian, CategoryTheory.Functor.IsStronglyCartesian.isCartesian_of_isStronglyCartesian, CategoryTheory.Functor.IsStronglyCartesian.toIsHomLift",
+   "date": "2026-10-24",
+   "verdict": "no match: results provide cartesian lift constructions and universal properties, or unrelated categorical pullbacks; none states the total-category pullback-square criterion of Stacks 06N4. Read Fibered.lean and Cartesian.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStronglyCartesian\", \"IsPullback\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results provide cartesian lift constructions and universal properties, or unrelated categorical pullbacks; none states the total-category pullback-square criterion of Stacks 06N4. Read Fibered.lean and Cartesian.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPullback|pullback|Pullback",
+   "results": "10 hits; Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean (CategoryTheory/FiberedCategory)",
+   "date": "2026-10-24",
+   "verdict": "no match: results provide cartesian lift constructions and universal properties, or unrelated categorical pullbacks; none states the total-category pullback-square criterion of Stacks 06N4. Read Fibered.lean and Cartesian.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a fibered category pullbacks along strongly cartesian morphisms exist when the corresponding pullback in the base exists",
+   "results": "8 hits; CategoryTheory.MorphismProperty.instHasPullbackSndHomDiscretePUnitOfHasPullbacksAlongOfIsStableUnderBaseChangeAlong, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, CategoryTheory.ChosenPullbacksAlong.ofHasPullbacksAlong, HasFibers.mkPullback, CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift, CategoryTheory.Functor.IsPreFibered.pullbackMap, CategoryTheory.MorphismProperty.HasPullbacks, HasFibers.pullbackMap.isCartesian",
+   "date": "2026-10-24",
+   "verdict": "no match: results provide cartesian lift constructions and universal properties, or unrelated categorical pullbacks; none states the total-category pullback-square criterion of Stacks 06N4. Read Fibered.lean and Cartesian.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square whose parallel arrows are strongly cartesian over a functor is a pullback if its image in the base is a pullback",
+   "results": "8 hits; CategoryTheory.Functor.IsStronglyCartesian.isCartesian_of_isStronglyCartesian, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, CategoryTheory.IsPullback.of_right', CategoryTheory.Limits.CategoricalPullback.CatCommSqOver, CategoryTheory.BicartesianSq.toIsPullback, CategoryTheory.Functor.relativelyRepresentable.isPullback, CategoryTheory.Square.IsPullback",
+   "date": "2026-10-24",
+   "verdict": "no match: results provide cartesian lift constructions and universal properties, or unrelated categorical pullbacks; none states the total-category pullback-square criterion of Stacks 06N4. Read Fibered.lean and Cartesian.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPullback|pullback|Pullback",
+   "results": "0 hits;  (CategoryTheory/FiberedCategory/Cartesian.lean)",
+   "date": "2026-10-24",
+   "verdict": "no match: results provide cartesian lift constructions and universal properties, or unrelated categorical pullbacks; none states the total-category pullback-square criterion of Stacks 06N4. Read Fibered.lean and Cartesian.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strongly cartesian lift of one projection of a base fiber product is a fiber product in the total category if the other arrow is strongly cartesian",
+   "results": "8 hits; CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, HasFibers.fiber_factorization, CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift, CategoryTheory.Functor.IsStronglyCartesian.map_comp_map, CategoryTheory.Functor.IsStronglyCartesian.toIsHomLift, CategoryTheory.Functor.IsStronglyCartesian.fac, CategoryTheory.Functor.IsStronglyCartesian.map, CategoryTheory.Functor.IsStronglyCartesian.universal_property",
+   "date": "2026-10-24",
+   "verdict": "no match: results provide cartesian lift constructions and universal properties, or unrelated categorical pullbacks; none states the total-category pullback-square criterion of Stacks 06N4. Read Fibered.lean and Cartesian.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPullback|pullback|Pullback",
+   "results": "10 hits; Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean (searched CategoryTheory/FiberedCategory)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the cartesian-lift API; universal_property and map concern one strongly cartesian arrow, not the total-category pullback criterion. Square.IsPullback.map_iff additionally assumes limit reflection; relativelyRepresentable.isPullback constructs a square in the target category under a different hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative square with two parallel strongly cartesian morphisms is a pullback when its image in the base category is a pullback",
+   "results": "8 hits; CategoryTheory.Square.IsPullback.map_iff, CategoryTheory.IsPullback.mk, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare, CategoryTheory.IsPullback, CategoryTheory.Limits.Types.isPullback_iff, CategoryTheory.Square.IsPullback, CategoryTheory.Square.mk, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the cartesian-lift API; universal_property and map concern one strongly cartesian arrow, not the total-category pullback criterion. Square.IsPullback.map_iff additionally assumes limit reflection; relativelyRepresentable.isPullback constructs a square in the target category under a different hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStronglyCartesian\", \"IsPullback\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the cartesian-lift API; universal_property and map concern one strongly cartesian arrow, not the total-category pullback criterion. Square.IsPullback.map_iff additionally assumes limit reflection; relativelyRepresentable.isPullback constructs a square in the target category under a different hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strongly cartesian lift of a projection of a pullback in the base category gives a pullback square in the total category",
+   "results": "8 hits; CategoryTheory.Functor.IsStronglyCartesian.map, CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian, HasFibers.pullbackMap.isCartesian, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, CategoryTheory.Functor.IsStronglyCartesian.map_isHomLift, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_exists_isCartesian, CategoryTheory.Functor.IsStronglyCartesian.isCartesian_of_isStronglyCartesian, CategoryTheory.ChosenPullbacksAlong.lift",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the cartesian-lift API; universal_property and map concern one strongly cartesian arrow, not the total-category pullback criterion. Square.IsPullback.map_iff additionally assumes limit reflection; relativelyRepresentable.isPullback constructs a square in the target category under a different hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If f and a are cartesian lifts for a functor and their images form a pullback then the induced commutative square is a categorical pullback",
+   "results": "8 hits; CategoryTheory.Functor.relativelyRepresentable.isPullback, CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian, HasFibers.pullbackMap.isCartesian, CategoryTheory.ChosenPullbacksAlong.isPullback, CategoryTheory.Functor.IsCartesian.map, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, CategoryTheory.Functor.IsCartesian, CategoryTheory.Functor.relativelyRepresentable.lift",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the cartesian-lift API; universal_property and map concern one strongly cartesian arrow, not the total-category pullback criterion. Square.IsPullback.map_iff additionally assumes limit reflection; relativelyRepresentable.isPullback constructs a square in the target category under a different hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStronglyCartesian|universal_property|map_uniq|fac",
+   "results": "5 hits; 25, 30, 32, 62, 76 (searched CategoryTheory/FiberedCategory/Cartesian.lean)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the cartesian-lift API; universal_property and map concern one strongly cartesian arrow, not the total-category pullback criterion. Square.IsPullback.map_iff additionally assumes limit reflection; relativelyRepresentable.isPullback constructs a square in the target category under a different hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fibred-site-functor-continuity",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The flat affine-presentation dictionary used before taking the norm of a lift of an invariant section. Supporting module theorem: descent on the fppf quotient groupoid, tensor products and cokernels, before descending multiplication and unit. Supporting input: Stackification preserves module sheaves and quasi-coherence. Functoriality of the inherited fppf sites before applying the comparison lemma (Stacks 06WQ). Supporting categorical input to the inherited-site functoriality: Stacks 06NU pullback axiom and 06NW preservation of covering pullbacks, both using the lifted pullback square of Categories 06N4.",
+   "via": [
+    "lem-sfb-fibred-site-functor-continuity",
+    "lem-sfb-stackification-module-equivalence",
+    "lem-sfb-groupoid-module-descent-tensor-cokernel",
+    "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cartesian-lift-pullback-square",
+  "worker": "stage1",
+  "summary": "Read Stacks 06N4 and expanded its Hom-set calculation into construction of b, construction of the cone lift, its first projection identity, and uniqueness. All four steps instantiate the universal properties already specified in the statement and are elementary; no new nodes are needed. Statement and statement dependencies unchanged. No exact project attachment or Mathlib match found after two semantic phrasings and source inspection.",
+  "blueprint": "Supporting categorical prerequisite of lem-sfb-fibred-site-functor-continuity, used for the covering pullback arguments of Stacks 06NU and 06NW. Retained the inherited from.place and null ancestor, as in the accepted parent: blueprint_refs ancestor produces no id. The current blueprint direct-image proof (3) is the recorded distant origin; this split supplies its descendant categorical input, without changing the unit route. No whole-blueprint duplicate was found."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-56c8b4bd5",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-56c8b4bd5 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full against Stacks 06N4 (categories.tex, lemma-strongly-cartesian-fibre-product). Its hypotheses match the source's (1)-(3) one by one, and the inline definition of strongly cartesian is the source's Hom bijection written elementwise. The item states b with both p(b)=pi_x and f b=g a, which the source's uniqueness needs but does not write out. No new nodes. All 4 steps are correct direct uses of the hypotheses (C1/C2 OK): step 1 checks the admissibility p(g a)=p(f) pi_x; step 2 gets q from the base pullback and l from a; step 3 checks base map and composite before using uniqueness for f; step 4 proves p(l')=q from both projections, then uses uniqueness for a. Small cases checked: p=id, f=id, terminal base. Both uses in the parent lem-sfb-fibred-site-functor-continuity (steps 2 and 3) fit the statement. rg over the DAG and all blueprint snapshots found no duplicate, only coef infinity-category nodes and geometric nodes. Not a re-split item; no SGA cited. Metadata: from.node null, inherited from the parent as accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianLiftPullbackSquare",
+  "declaration": "CategoryTheory.Functor.cartesian_lift_pullback_square",
+  "file": "lean/Sheaf/CategoryTheory/CartesianLiftPullbackSquare.lean",
+  "statement": "theorem cartesian_lift_pullback_square {S : Type u₁} {C : Type u₂} [Category.{v₁} S] [Category.{v₂} C] (p : S ⥤ C) {x y z w : S} (f : x ⟶ y) (g : z ⟶ y) [p.IsStronglyCartesian (p.map f) f] {P : C} (piX : P ⟶ p.obj x) (piZ : P ⟶ p.obj z) (hP : IsPullback piX piZ (p.map f) (p.map g)) (a : w ⟶ z) [p.IsStronglyCartesian piZ a] : ∃ b : w ⟶ x, p.IsHomLift piX b ∧ b ≫ f = a ≫ g ∧ (∀ b' : w ⟶ x, p.IsHomLift piX b' → b' ≫ f = a ≫ g → b' = b) ∧ IsPullback b a f g",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8bead26e9",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read node (Stacks 06N4), def-weil-size-convention, delivered module and report. Mathlib IsStronglyCartesian (universal_property' over g≫f) = node's inline definition; [IsStronglyCartesian piZ a] encodes p(w)=P via IsHomLift.domain_eq and p(a)=π_z; hP uses the specified base pullback. Conclusion: ∃ b over piX with b≫f=a≫g, unrestricted uniqueness, IsPullback b a f g (argument order checked) = node's full clauses incl. 'in particular'. Universes u₁ v₁ u₂ v₂ independent; no extra hypotheses (no IsFibered/HasPullbacks). No Mathlib or project duplicate (loogle 0 hits; rg side-live lean shows only unrelated IsStronglyCartesian uses); live node lean=None. sorry-only proof, source/blueprint docstrings with 4 proof steps, lean.statement verbatim, report has Worker report + Second reading by Q69. No file changed, no compile run. No findings."
+ }
+}

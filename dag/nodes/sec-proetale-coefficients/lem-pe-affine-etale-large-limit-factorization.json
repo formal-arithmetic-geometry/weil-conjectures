@@ -1,0 +1,144 @@
+{
+ "id": "lem-pe-affine-etale-large-limit-factorization",
+ "kind": "lemma",
+ "title": "Factorization of maps from larger affine etale limits",
+ "statement": "Let X be a scheme in universe u, I a small cofiltered category in universe u+1, D : I → X.ProEt a diagram with affine étale stages, and c a cone whose image under the forgetful functor to schemes over X is limiting. Let V be an affine étale object of X.ProEt. These objects and the forgetful functor are as in [det-pe-classical-definition-continuity-map]. For each map a : c.pt → V in X.ProEt there are an index i in I and a map b : D(i) → V with c.π_i ≫ b = a.",
+ "stmt_deps": [
+  "det-pe-classical-definition-continuity-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "proposition-characterize-locally-finite-presentation (Tag 01ZC), (1) implies (3), clause (b), surjectivity proof; proetale.tex lemma-limit-pullback (Tag 099S); larger-index form of parent step 2."
+ },
+ "proof": [
+  {
+   "text": "Let F be the fully faithful inclusion of the spectrum-based affine etale category of X into X.ProEt. For each stage, the canonical affine isomorphism with Spec of its global sections exhibits it in the essential image A of F. Mathlib gives EssentiallySmall in universe u for X.AffineEtale, hence for A. The category of structured arrows from c.pt to the inclusion of A is also essentially small in u, since the pro-etale category is locally small in u. Lift the given diagram into this category using its projections, and let E be the full subcategory on its actual object-image. E is essentially small in u by full faithfulness of its inclusion.",
+   "uses": [
+    "det-pe-classical-definition-continuity-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The category E is cofiltered. It is nonempty because I is. For two objects represented by i and j, use a common predecessor in I and the images of its two arrows. For parallel arrows f,g from the object represented by i to that represented by j, their structured-arrow equations say that the composites with the limit projection are equal. Apply lem-pe-affine-etale-large-limit-equality with target D(j), which is affine and etale by the given hypotheses. Its refinement k -> i gives an arrow in E equalizing f and g; faithfulness of forgetting the structured arrows reflects this equality.",
+   "uses": [
+    "lem-pe-affine-etale-large-limit-equality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let K:E -> X.ProEt forget the structured arrows. The maps belonging to those structured arrows define a cone d with vertex c.pt. Its image in schemes over X is limiting: restrict any competing cone along the object-surjective functor H:I -> E and use the supplied limit hc. The factorization equations for all E-objects follow because each is H(i), and uniqueness follows by restricting the equations to all H(i). This explicitly verifies the universal property, without asserting an initial functor or a small coinitial subcategory of I.",
+   "uses": [
+    "det-pe-classical-definition-continuity-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Replace E by its universe-u SmallModel using equivSmallModel, whisker d with the inverse equivalence, and transport its limit property. Cofilteredness transports along this equivalence. Forgetting schemes over X to schemes preserves this connected limit. Every stage remains affine, so the underlying schemes are quasi-compact and quasi-separated and their transition maps are affine. The target V -> X is locally of finite presentation because it is etale. Apply lem-weil-pbc-finite-presentation-map-limit-factorization to this small diagram and the underlying map a, with the structure maps supplying the compatibility equation. This gives a stage map b over X with the required projection composite.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-map-limit-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The selected small-model object maps to an actual image object H(i) of E. Transport b along this equality, regard it as a pro-etale morphism by fullness over X, and use naturality of the cone d to identify its composite with c.pi_i with a. The construction imposes no nonemptiness condition on a stage or on the limit, so also includes the empty scheme.",
+   "uses": [
+    "det-pe-classical-definition-continuity-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-pe-classical-definition-continuity-map",
+  "lem-pe-affine-etale-large-limit-equality",
+  "lem-weil-pbc-finite-presentation-map-limit-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZC, proposition-characterize-locally-finite-presentation, existence part; use the existing Mathlib finite-presentation theorem after the explicit essentially-small image-category reduction written in Lean by C4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a cofiltered inverse system of affine etale schemes indexed in a larger universe, maps to an affine etale scheme factor through a stage and equality is eventual",
+   "results": "exists_appTop_π_eq_of_isAffine_of_isLimit and eventually constant diagram lemmas; no larger-index geometric factorization or equality theorem.",
+   "verdict": "no direct match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a map from a cofiltered limit of affine etale schemes over X into an affine etale scheme factors through a stage; arbitrary large index category",
+   "results": "Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; exists_appTop_π_eq_of_isAffine_of_isLimit. All have I : Type u for Scheme.{u}.",
+   "verdict": "small-index templates only",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_hom_comp_eq_comp_of_locallyOfFiniteType\"",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, with I : Type u and Category.{u} I.",
+   "verdict": "does not cover the larger index",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_π_app_comp_eq_of_locallyOfFinitePresentation|exists_hom_comp_eq_comp_of_locallyOfFiniteType|affineEtale_largeLimit",
+   "results": "Mathlib.AlgebraicGeometry.AffineTransitionLimit contains the small-index versions. Sheaf has the parent preservation assertion, but no individual larger-index factorization or equality assertion. Whole-DAG and blueprint searches found the same small-index factorization and equality nodes, not these larger-index clauses.",
+   "verdict": "no duplicate at the stated universes",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleLargeLimitMaps",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-classical-sheaves-image",
+   "place": "Proof, (1) implies (2): factorization in the geometric representable-continuity argument.",
+   "via": [
+    "lem-pe-affine-etale-large-limit-maps",
+    "lem-pe-affine-presentation-large-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-classical-sheaves",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleLargeLimitFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleLargeLimitFactorization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.affineEtale_largeLimit_factorization",
+  "statement": "theorem affineEtale_largeLimit_factorization {X : Scheme.{u}}\n    {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ X.ProEt) (haff : ∀ i, IsAffine (D.obj i).left)\n    (het : ∀ i, Etale (D.obj i).hom) (c : Cone D)\n    (hc : IsLimit ((Scheme.ProEt.forget X).mapCone c))\n    (V : X.ProEt) [IsAffine V.left] [Etale V.hom]\n    (a : c.pt ⟶ V) :\n    ∃ (i : I) (b : D.obj i ⟶ V), c.π.app i ≫ b = a",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T091008-L-3294845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T104359-L-799945",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

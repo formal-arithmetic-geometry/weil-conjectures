@@ -14,31 +14,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Sheaf.Paper.KFlatScalarComparisonNormalization
-import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.Paper.FiniteLevelProEtaleBaseChange
-import Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport
-import Sheaf.CategoryTheory.ExactEquivalenceDerivedSquares
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.Algebra.Homology.RoosConeCalculus
-import Sheaf.Paper.DerivedNakayamaFirstReduction
-import Sheaf.CategoryTheory.PastedMatesCounitNormalization
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.CategoryTheory.CanonicalRightDerivedAdjunctionShift
-import Sheaf.CategoryTheory.ExactDerivedComposition
-import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
-import Sheaf.CategoryTheory.ModuleObjects.LiftExact
-import Sheaf.AlgebraicGeometry.QcqsProperLocalizingCoproducts
-import Sheaf.CategoryTheory.Triangulated.LocalizingIsoLocus
-import Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Localization.Predicate
-import Mathlib.CategoryTheory.Shift.CommShift
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.Topology.Constructible
+import Sheaf.Paper.ProperConstructibleClosedExchangeHeart
+import all Sheaf.Paper.IndConstructibleFilteredColimits
+import Sheaf.Paper.AmbientQcqsExchangeCanonicalShifts
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 
 /-! # Closed proper base change on bounded constructible finite-Tor inputs
 
@@ -54,13 +34,15 @@ objects. The coefficient predicate retains exactly the node's norm-topological c
 
 set_option autoImplicit false
 
-universe u
+universe u uA vA wA uB vB wB
 
 open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The six coefficient families with the discrete or induced norm-topological convention.
+/-- The five coefficient families A, Z_l, Q_l, E and O_E with the discrete or induced norm-topological
+convention. The ring of all continuous maps to the algebraic closure is not admissible (2026-10-25).
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
 coefficient convention, restricted to the exact list in the present theorem
@@ -76,12 +58,43 @@ def IsNormTopologicalLocalizingAdmissibleCoefficient (ℓ : ℕ) [Fact ℓ.Prime
   (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
     Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
   (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
-    Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨
-  Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ)))
+    Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E)))
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+/-- Finite Postnikov induction for a shift-compatible morphism of triangulated functors.
+Keeping this argument abstract prevents expansion of concrete coefficient pullbacks. -/
+private theorem isIso_of_bounded_cohomology
+    {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
+    {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B]
+    (F G : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [G.CommShift ℤ]
+    (hF : F.IsTriangulated) (hG : G.IsTriangulated) (τ : F ⟶ G)
+    (hshift : ∀ (n : ℤ) (K : DerivedCategory A),
+      τ.app (K⟦n⟧) ≫ (G.commShiftIso n).hom.app K =
+        (F.commShiftIso n).hom.app K ≫ (τ.app K)⟦n⟧')
+    (P : ObjectProperty A) (hPiso : P.IsClosedUnderIsomorphisms)
+    (hP : ∀ M, P M → IsIso (τ.app ((DerivedCategory.singleFunctor A 0).obj M)))
+    (K : DerivedCategory A) (hb : DerivedCategory.TStructure.t.bounded K)
+    (hK : ∀ n : ℤ, P ((DerivedCategory.homologyFunctor A n).obj K)) :
+    IsIso (τ.app K) := by
+  have := hF
+  have := hG
+  have := hPiso
+  have : NatTrans.CommShift τ ℤ := ⟨fun n ↦ by
+    apply NatTrans.ext
+    funext M
+    exact (hshift n M).symm⟩
+  exact DerivedCategory.prop_of_bounded τ.isoLocus P hP K hb hK
 
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
+  upperStar lowerStar upperStarFromPoint condensedAmbientExchange
+  modulePullbackDerivedCommShift modulePushforwardDerivedCommShift modulePullbackExactComparison
 
 /-- Closed proper base change over any qcqs base, on bounded constructible complexes of
 finite Tor amplitude, for the discrete or induced ell-adic admissible coefficient list.
@@ -90,46 +103,16 @@ Source: blueprint main-20261015, det-sf-comp-coherence-refinement.proof.md, (2),
 closed-complement calculation on the bounded constructible finite-Tor generator
 (blueprint: lem-sfb-qcqs-proper-constructible-closed-base-change).
 
-Proof plan, following the six steps of the DAG node:
-1. Properness makes X and Y qcqs; the closed subschemes and the base-changed proper
-   morphism remain qcqs. Constructible closed inverse image preserves finite constant
-   scalar models and finite Tor amplitude, by the scalar/pullback comparison and closed
-   counit (lem-sfb-kflat-scalar-comparison-normalization and
-   lem-weil-pbc-proetale-ringed-closed-counit). For finite discrete coefficients, use
-   lem-sf-module-object-ordinary-coefficient-equivalence and sk-thm-pe-constructible-comparison
-   to obtain an etale-origin witness. thm-weil-pbc-finite-level-proetale proves the exchange
-   invertible. lem-sfb-internal-module-operations-transport and
-   lem-derived-exact-equivalence-squares identify the actual normalized mate.
-2. For integral coefficients, lem-sfb-qcqs-integral-finite-model-completeness gives complete
-   inputs with classical finite reductions. lem-sfb-integral-ambient-tower-comparison makes
-   ordinary direct images complete. Closed inverse image is exact and preserves products
-   (lem-weil-pbc-proetale-immersion-limit-preservation), hence preserves the strict Roos
-   complex and its augmentation (lem-pe-roos-cone-calculus), and the two-term quotient
-   resolutions. Both exchange endpoints are therefore complete.
-3. lem-sfb-integral-quotient-exchange-comparison identifies the reduced actual exchange
-   with finite-coefficient exchange. Apply step 1, then
-   det-pe-derived-nakayama-first-reduction through the exact internal/section equivalences
-   to conclude integral invertibility.
-4. For rational coefficients use the integral scalar-extension generators from
-   lem-sfb-qcqs-rational-integral-localizing-generators. The two scalar projection maps
-   are invertible by lem-sfb-qcqs-proper-integral-rational-scalar-comparison. The square
-   comparing integral and rational exchange commutes: transpose both composites by the
-   base-changed adjunction, use lem-sfb-pasted-mates-counit-normalization to cancel units,
-   and use scalar/pullback coherence to identify the common transpose. Thus step 3 implies
-   invertibility on every scalar-extension generator.
-5. Exact pullback and triangulated ordinary direct image carry canonical shifts. The
-   canonical derived adjunction has shift-compatible unit and counit by
-   lem-sp-canonical-right-derived-adjunction-shift. The exact-derived composition and
-   natural-isomorphism comparisons are induced termwise, so commute with shifts, including
-   the signs in differentials. The composite mate therefore commutes with shifts and the
-   connecting maps of distinguished triangles.
-6. On the localizing hull, lem-sfb-qcqs-proper-localizing-coproducts applies to f over S
-   and to its base change over C. Pullback preserves the input classes by step 1 and
-   preserves coproducts as a left adjoint. det-sf-determination-localizing makes the
-   isomorphism locus localizing. It contains the integral scalar-extension generators
-   by step 4, and hence every rational bounded constructible finite-Tor input by the
-   generation lemma. Together with steps 1--3 this covers the exact coefficient list,
-   including all continuous norm-topological algebraic-closure sections. -/
+Proof: Properness of q makes Y qcqs. The degree-zero closed-test theorem proves
+exchange on every constructible module sheaf, for each of the six coefficient families;
+the coefficient disjunction lists the same six families. The actual ambient
+exchange carries the canonical shift structures and is a transformation of triangulated
+functors. Its isomorphism locus is therefore replete and triangulated. Constructibility
+is invariant under module isomorphisms: transport each finite scalar model along the
+induced isomorphism on the stratum and its pro-etale trivializing cover. Finite Postnikov
+induction now places every bounded complex with constructible cohomology in this
+isomorphism locus. Apply this to L; its finite Tor amplitude is not needed in the
+induction. -/
 theorem qcqs_proper_constructible_closed_baseChange
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -147,6 +130,35 @@ theorem qcqs_proper_constructible_closed_baseChange
         isoPullback := Iso.refl _
         hom_fst := Category.id_comp _
         hom_snd := Category.id_comp _ }).app L.obj) := by
-  sorry
+  apply isIso_of_bounded_cohomology
+    (moduleObjectDerivedPushforward Λ f ⋙ moduleObjectDerivedPullback Λ c)
+    (moduleObjectDerivedPullback Λ (pullback.fst f c) ⋙
+      moduleObjectDerivedPushforward Λ (pullback.snd f c))
+    (ambient_qcqs_exchange_canonical_shifts Λ
+      { w := pullback.condition
+        isoPullback := Iso.refl _
+        hom_fst := Category.id_comp _
+        hom_snd := Category.id_comp _ }).1
+    (ambient_qcqs_exchange_canonical_shifts Λ
+      { w := pullback.condition
+        isoPullback := Iso.refl _
+        hom_fst := Category.id_comp _
+        hom_snd := Category.id_comp _ }).2.1
+    (condensedAmbientExchange Λ
+      { w := pullback.condition
+        isoPullback := Iso.refl _
+        hom_fst := Category.id_comp _
+        hom_snd := Category.id_comp _ })
+    (ambient_qcqs_exchange_canonical_shifts Λ
+      { w := pullback.condition
+        isoPullback := Iso.refl _
+        hom_fst := Category.id_comp _
+        hom_snd := Category.id_comp _ }).2.2
+    (IsConstantModelConstructible Λ X) (constructible_iso Λ X)
+    ?_ L.obj L.property.1.1 L.property.1.2
+  intro M hM
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace q
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated q
+  exact proper_constructible_closed_exchange_heart Λ ℓ hΛ f c M hM
 
 end AlgebraicGeometry.ProEtale.CondensedRing

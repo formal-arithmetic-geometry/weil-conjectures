@@ -6,7 +6,6 @@ Authors: SHEAF group Q107
 module
 
 public import Sheaf.GroupTheory.RationalRank
-import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
@@ -53,6 +52,13 @@ Proof plan:
 theorem rationalizationMap_injective (G : Type u) [AddCommGroup G]
     (hT : ∀ (m : ℤ) (g : G), 0 < m → m • g = 0 → g = 0) :
     Function.Injective (rationalizationMap G) := by
-  sorry
+  intro x y h
+  change TensorProduct.mk ℤ ℚ G 1 x = TensorProduct.mk ℤ ℚ G 1 y at h
+  obtain ⟨m, hm⟩ := IsLocalizedModule.exists_of_eq (S := Submonoid.pos ℤ)
+    (f := TensorProduct.mk ℤ ℚ G 1) h
+  apply sub_eq_zero.mp
+  apply hT (m : ℤ) (x - y) m.property
+  rw [smul_sub, sub_eq_zero]
+  exact hm
 
 end AddCommGroup

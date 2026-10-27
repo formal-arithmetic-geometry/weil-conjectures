@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-ample-polarization-positive-spectrum",
+ "kind": "statement",
+ "title": "Positive real spectrum of the comparison of ample polarizations",
+ "statement": "Let $k$ be a field [def-weil-field], let $A/k$ be an abelian variety [def-sc-abelian-variety], and let $L,M$ be ample invertible modules on $A$ [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Use the dual variety and line-module homomorphisms of [lem-sfb-polarization-calculus-over-field]. Put $E=\\operatorname{End}_k(A)\\otimes_{\\mathbf Z}\\mathbf Q$, with composition as multiplication, using [def-sc-group-scheme, def-weil-pbc-module-tensor-product]. Set\n$$\\lambda=\\phi_L,\\qquad u=\\lambda^{-1}\\phi_M\\in E,\\qquad v^\\dagger=\\lambda^{-1}v^\\vee\\lambda.$$\nThen $u^\\dagger=u$. Let $C=\\mathbf Q[u]\\subseteq E$ be the image of the polynomial evaluation map $\\mathbf Q[T]\\to E$, $T\\mapsto u$. This is a finite-dimensional commutative unital $\\mathbf Q$-algebra. For some integer $d\\geq0$ there is an isomorphism of unital $\\mathbf R$-algebras\n$$\\rho:C\\otimes_{\\mathbf Q}\\mathbf R\\xrightarrow{\\sim}\\mathbf R^d$$\nsuch that every coordinate of $\\rho(u\\otimes1)$ is strictly positive. Here $\\mathbf R^d$ has coordinatewise addition and multiplication; a $\\mathbf Q$-algebra is a ring with a unital map from $\\mathbf Q$, and finite-dimensional means that its underlying $\\mathbf Q$-vector space has a finite basis. The zero algebra and $d=0$ are allowed (in particular when $\\dim A=0$), with the positivity condition then vacuous. No symmetry of $L$ or $M$, and no characteristic or algebraic-closedness hypothesis on $k$, is required.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent auxiliary for the abelian endomorphism-span input: consequence of I Proposition 14.2 and Theorem 14.3, pp.61–62, Theorem 11.1, p.54, and Proposition 10.20 / Corollary 10.24, pp.50–53. The positive-spectrum deduction, including arbitrary-field descent, is written in the report; this is not a separately numbered theorem in Milne."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-polarization-calculus-over-field",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $K/k$ using [def-weil-algebraic-closure]. By [lem-sfb-abelian-field-extension], $A_K$ is abelian of the same dimension; [lem-trf-scheme-relative-ample-base-change], with base $\\operatorname{Spec}k$, makes $L_K,M_K$ ample. The normalized Poincare universal property of [def-sfb-abelian-dual-poincare-datum] restricts to $K$-schemes: $A_K\\times_K T=A\\times_k T$, so the base-changed datum represents the required families. Uniqueness identifies $(A^\\vee)_K$ with $(A_K)^\\vee$. The translated-difference and dual-pullback families also base change, hence their classifying maps, inverses in rational Hom, and dagger do so. The map $j:E\\to\\operatorname{End}^0_K(A_K)$ is injective: after multiplying a putative kernel element by a positive integer, its geometric Tate action is zero, so [lem-sfb-abelian-tate-action-saturation] makes the integral endomorphism zero. We use geometry over $K$ below, but keep $C=\\mathbf Q[u]$ over the original field.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-abelian-field-extension",
+    "lem-trf-scheme-relative-ample-base-change",
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-sfb-abelian-tate-action-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§§8–10: normalized Poincare universal property, field extension and faithful geometric Tate action; Stacks Tag 0893 for ample base change"
+   }
+  },
+  {
+   "text": "By [lem-sfb-abelian-hom-finite-free], a finite integral basis of $\\operatorname{End}_k(A)$ becomes a rational basis of $E$. Thus $E$ and its subspace $C$ are finite-dimensional. The image of polynomial evaluation is a commutative unital subalgebra, since powers of one element commute. By [lem-pc-ample-affine-loci-criterion], applied to the proper $K$-scheme $A_K$, the module $L_K$, ample in the affine-nonvanishing-locus sense by step 1, is ample in the sense required by [lem-sfb-rosati-trace-positive]. Restrict the positive symmetric form of [lem-sfb-rosati-trace-positive] along $j$, obtaining $B(x,y)=\\operatorname{Tr}_{A_K}(j(x)^\\dagger j(y))$ on $E$; injectivity makes it positive definite. If $g=\\dim A=0$, [lem-sfb-abelian-tate-action-saturation] gives Tate rank zero and injectivity, whence $E=C=0$; take $d=0$. Henceforth $g>0$.",
+   "uses": [
+    "lem-pc-ample-affine-loci-criterion",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-abelian-tate-action-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 10.15 p.49 and Theorem 14.3 p.62; zero-dimensional case by Tate faithfulness"
+   }
+  },
+  {
+   "text": "Over $K$ write $e_L(x,y)=e(x,V_\\ell(\\lambda)y)$ and $e_M(x,y)=e(x,V_\\ell(\\phi_M)y)$ for a prime $\\ell\\ne\\operatorname{char}K$. By [lem-sfb-abelian-weil-pairing] both are alternating; perfection and the rational inverse to $\\lambda$ make $e_L$ nondegenerate. Since $\\lambda u=\\phi_M$, $e_L(x,uy)=e_M(x,y)$. Consequently $e_L(ux,y)=-e_L(y,ux)=-e_M(y,x)=e_M(x,y)=e_L(x,uy)$. Functoriality of the Weil pairing and the formula for dagger in [lem-sfb-polarization-calculus-over-field] give $e_L(ux,y)=e_L(x,u^\\dagger y)$. Nondegeneracy identifies the two Tate operators; after clearing denominators, [lem-sfb-abelian-tate-action-saturation] identifies the rational endomorphisms. Injection of $j$ then gives $u^\\dagger=u$ over $k$.",
+   "uses": [
+    "lem-sfb-abelian-weil-pairing",
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-abelian-tate-action-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.2 pp.61–62: its symmetry direction, written via the alternating pairings of §13"
+   }
+  },
+  {
+   "text": "Dagger fixes every polynomial in $u$, because it fixes rational scalars and $u$ and reverses products. Hence on $C$, $B(c,d)=\\operatorname{Tr}_{A_K}(j(cd))$, and multiplication by $u$ is symmetric: $B(uc,d)=B(c,ud)$. By [lem-sfb-rational-symmetric-form-orthogonal-basis], choose an orthogonal rational basis of $C$. Its nonzero basis vectors have strictly positive rational squared lengths. Extending scalars to $\\mathbf R$ gives the positive form $\\sum_i B(e_i,e_i)x_i^2$, hence an inner product on $C_{\\mathbf R}=C\\otimes_{\\mathbf Q}\\mathbf R$. Multiplication by $u\\otimes1$ remains symmetric. Apply [lem-sfb-real-symmetric-orthonormal-eigenbasis] to obtain an eigenbasis with real eigenvalues.",
+   "uses": [
+    "lem-sfb-rational-symmetric-form-orthogonal-basis",
+    "lem-sfb-real-symmetric-orthonormal-eigenbasis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 14.3 p.62, finite-dimensional linear-algebra deduction; pinned Mathlib spectral theorem"
+   }
+  },
+  {
+   "text": "Let $a_1,\\ldots,a_d$ be the distinct eigenvalues just obtained. Every element of $C_{\\mathbf R}$ is a real polynomial in $u\\otimes1$: expand a tensor in rational powers of $u$ and collect its real coefficients. For such a polynomial define $\\rho(p(u\\otimes1))=(p(a_i))_i$. This is well defined and injective: on each eigenvector multiplication by $p(u\\otimes1)$ is $p(a_i)$, and the regular representation is faithful, since multiplication by $c$ sends $1$ to $c$. It is onto: the Lagrange polynomials $\\prod_{j\\ne i}(T-a_j)/(a_i-a_j)$ map to the coordinate unit vectors. Therefore $\\rho$ is a unital real-algebra isomorphism, and $\\rho(u\\otimes1)=(a_i)_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent algebra calculation from the preceding eigenbasis: polynomial evaluation and Lagrange interpolation"
+   }
+  },
+  {
+   "text": "We check the isogeny hypothesis needed for the degree calculation. Over $K$, [lem-sfb-abelian-polarization-calculus] gives $\\dim A_K^\\vee=g$. Clear denominators in the inverse from [lem-sfb-polarization-calculus-over-field]: for some $n>0$ there is an integral $h:A_K^\\vee\\to A_K$ with $\\lambda h=[n]$. This equality holds integrally because Hom is torsion-free by [lem-sfb-abelian-hom-finite-free]. The map $[n]$ is surjective by [lem-sc-mult-n-isogeny], so $\\lambda$ is surjective. Since source and target have the same dimension, [lem-sfb-equal-dimension-isogeny-criterion] makes $\\lambda$ an isogeny.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sc-mult-n-isogeny",
+    "lem-sfb-equal-dimension-isogeny-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§§7–11: rational inverse and the isogeny criterion; Proposition 8.1 and §8 dual dimension"
+   }
+  },
+  {
+   "text": "All intersections in this step are on $A_K$. Put $c_i=(L_K^iM_K^{g-i}\\cdot A_K)$, $b=(L_K^g\\cdot A_K)/g!$, and $Q(T)=\\sum_{i=0}^g\\binom gi c_iT^i/g!$. For each integer $n\\geq0$, [lem-sfb-top-intersection-multilinear] gives $Q(n)=((L_K^{\\otimes n}\\otimes M_K)^g\\cdot A_K)/g!$. By [lem-sfb-polarization-calculus-over-field], the associated homomorphism is $n\\lambda+\\phi_M$. Apply [lem-sfb-isogeny-relative-tate-determinant] with this homomorphism and the inverse of $\\lambda$. The formula [lem-sfb-abelian-line-bundle-degree-square], applied to this line and to $L_K$, gives\n$$\\det(n\\,1+V_\\ell(u))=Q(n)^2/b^2.$$\nBy [lem-sfb-ample-mixed-intersection-positive], $b>0$. Let $P=P_{-j(u)}\\in\\mathbf Q[T]$ from [lem-sfb-abelian-tate-charpoly]; it maps to $\\det(T\\,1+V_\\ell(u))$. Thus $P(n)=Q(n)^2/b^2$ in $\\mathbf Q$, by injectivity of $\\mathbf Q\\to\\mathbf Q_\\ell$. The two polynomials agree at infinitely many integers, so $P(T)=Q(T)^2/b^2$.",
+   "uses": [
+    "lem-sfb-top-intersection-multilinear",
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-isogeny-relative-tate-determinant",
+    "lem-sfb-abelian-line-bundle-degree-square",
+    "lem-sfb-ample-mixed-intersection-positive",
+    "lem-sfb-abelian-tate-charpoly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 10.20 pp.50–52 and Theorem 11.1 p.54; Stacks Tags 0BER and 0BEV for expansion and positivity"
+   }
+  },
+  {
+   "text": "For every $i$, [lem-sfb-ample-mixed-intersection-positive] gives $c_i>0$. Hence $Q(t)>0$ for every real $t\\geq0$: its terms are nonnegative and its constant term $c_0/g!$ is positive. The polynomial identity of the preceding step implies $P(t)>0$ there. On the other hand, [lem-weil-cayley-hamilton-free-module], applied to $-V_\\ell(u)$ and the characteristic polynomial supplied by [lem-sfb-abelian-tate-charpoly], gives $P(-j(u))=0$: first the Tate operator vanishes, then [lem-sfb-abelian-tate-action-saturation] removes it after clearing denominators. Injection of $j$ gives $P(-u)=0$ in $C$. Applying $\\rho$ yields $P(-a_i)=0$ for every coordinate. Positivity of $P$ on $[0,\\infty)$ forces $-a_i<0$, so $a_i>0$. This proves the required positivity with no symmetry assumption on either line and over the original arbitrary field.",
+   "uses": [
+    "lem-sfb-ample-mixed-intersection-positive",
+    "lem-weil-cayley-hamilton-free-module",
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-abelian-tate-action-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent positive-spectrum deduction from Theorem 11.1 p.54, Theorem 14.3 p.62 and Proposition 10.20; Stacks Tag 0BEV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-sfb-abelian-field-extension",
+  "lem-trf-scheme-relative-ample-base-change",
+  "def-sfb-abelian-dual-poincare-datum",
+  "lem-sfb-abelian-tate-action-saturation",
+  "lem-sfb-abelian-hom-finite-free",
+  "lem-pc-ample-affine-loci-criterion",
+  "lem-sfb-rosati-trace-positive",
+  "lem-sfb-abelian-weil-pairing",
+  "lem-sfb-polarization-calculus-over-field",
+  "lem-sfb-rational-symmetric-form-orthogonal-basis",
+  "lem-sfb-real-symmetric-orthonormal-eigenbasis",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sc-mult-n-isogeny",
+  "lem-sfb-equal-dimension-isogeny-criterion",
+  "lem-sfb-top-intersection-multilinear",
+  "lem-sfb-isogeny-relative-tate-determinant",
+  "lem-sfb-abelian-line-bundle-degree-square",
+  "lem-sfb-ample-mixed-intersection-positive",
+  "lem-sfb-abelian-tate-charpoly",
+  "lem-weil-cayley-hamilton-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 14.2 and Theorem 14.3 pp.61–62; Theorem 10.15 p.49, Proposition 10.20 pp.50–52, Theorem 11.1 p.54; the full spectral, mixed-intersection and arbitrary-field assembly is written here, not claimed as a numbered Milne theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For two ample line bundles on an abelian variety the ratio of their polarization maps generates a totally real commutative rational algebra and has strictly positive real eigenvalues",
+   "results": "8 hits. RootPairing.algebraMap_posRootForm_posForm, RootPairing.RootPositiveForm.algebraMap_posForm, RootPairing.RootPositiveForm.algebraMap_apply_eq_form_iff, RootPairing.prod_rootFormIn_smul_coroot_mem_range_PolarizationIn, RootPairing.RootPositiveForm.exists_pos_eq, RootPairing.exists_ge_zero_eq_rootForm, RootPairing.posRootForm_posForm_anisotropic, RootPairing.RootPositiveForm.algebraMap_rootLength; Root-system positive forms and polarizations are unrelated to the ratio of ample abelian-variety polarizations.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison endomorphism of two ample polarizations has positive real eigenvalues",
+   "results": "8 hits. Module.End.HasEigenvalue, eigenvalue_pos_of_pos, Module.End.Eigenvalues, LinearMap.IsPositive.nonneg_eigenvalues, Module.End.HasUnifEigenvalue, LinearMap.IsSymmetric.hasEigenvalue_eigenvalues, Matrix.IsHermitian.posDef_iff_eigenvalues_pos, Matrix.IsHermitian.eigenvalues₀; Spectral theorems for an already positive linear operator do not prove positivity for the geometric comparison endomorphism or construct its split-real algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"polarization\"",
+   "results": "12 hits. LinearMap.BilinForm.IsSymm.polarization, RootPairing.CoPolarization, RootPairing.Polarization, RootPairing.CoPolarization_eq, RootPairing.CoPolarization_apply, RootPairing.Polarization_apply, RootPairing.ker_copolarization_eq_ker_corootForm, RootPairing.ker_polarization_eq_ker_rootForm; Bilinear-form polarization identities and root-pairing polarization maps are not abelian-variety polarizations.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosati|[Pp]olarization|[Pp]olarisation|[Aa]belian[Vv]ariety",
+   "results": "0 hits. ; No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ratio of two ample polarizations of an abelian variety is Rosati symmetric and has positive real spectrum",
+   "results": "8 hits: RootPairing.algebraMap_posRootForm_posForm, RootPairing.RootPositiveForm.algebraMap_posForm, RootPairing.PolarizationIn_eq, RootPairing.posRootForm_posForm_apply_apply, RootPairing.RootPositiveForm.isSymm_posForm, RootPairing.posRootForm, RootPairing.prod_rootFormIn_smul_coroot_mem_range_PolarizationIn, RootPairing.RootPositiveForm.exists_pos_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing polarizations are unrelated and the grep finds no abelian-variety polarization theory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rosati\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing polarizations are unrelated and the grep finds no abelian-variety polarization theory"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosati|[Pp]olarization|[Aa]belian[Vv]ariety",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing polarizations are unrelated and the grep finds no abelian-variety polarization theory"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+  "date": "2026-10-24",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Agent auxiliary for the abelian endomorphism-span input: consequence of I Proposition 14.2 and Theorem 14.3, pp.61–62, Theorem 11.1, p.54, and Proposition 10.20 / Corollary 10.24, pp.50–53. The positive-spectrum deduction, including arbitrary-field descent, is written in the report; this is not a separately numbered theorem in Milne.",
+   "via": [
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ample-polarization-positive-spectrum",
+  "worker": "stage1",
+  "summary": "Checked the item against Milne AV I §§8–14 and Stacks 0BEV. Proved symmetry by alternating Weil pairings, split the real algebra using the existing rational orthogonal-basis leaf plus a spectral-theorem Mathlib leaf, and excluded nonpositive coordinates via the degree/intersection polynomial with strictly positive mixed coefficients. Arbitrary-field base change is explicit; dimension zero is treated first. Two new nodes: a general mixed-intersection statement and one Mathlib leaf. Statement unchanged.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs.py ancestor prints None. This supports the existing auxiliary polarization input beneath the stable pointed-level route from det-thm-sf-ctf-stability-direct-images proof (3). The latest blueprint has no Rosati, orthonormal-eigenbasis, mixed-intersection or positive-spectrum node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-relative-ample-base-change",
+    "why": "Generic ample base-change theorem for the field extension K/k; the unit has no alternative ample base-change statement."
+   },
+   {
+    "node": "lem-sc-mult-n-isogeny",
+    "why": "Generic surjectivity of positive multiplication on the dual abelian variety, used only to check the isogeny hypothesis of the determinant formula."
+   },
+   {
+    "node": "lem-weil-cayley-hamilton-free-module",
+    "why": "Generic finite-rank Cayley–Hamilton theorem on the rational Tate module, used to pass its characteristic polynomial to a polynomial relation in C."
+   },
+   {
+    "node": "lem-pc-ample-affine-loci-criterion",
+    "why": "Generic comparison on a proper scheme over a field: ampleness by affine nonvanishing loci (Stacks 01PS, the notion of the item and of the base-change theorem) implies the very-ample-power notion def-sc-ample assumed by lem-sfb-rosati-trace-positive; no node of the unit gives it. Added by the cc reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-relative-ample-base-change",
+  "lem-sc-mult-n-isogeny",
+  "lem-weil-cayley-hamilton-free-module",
+  "lem-pc-ample-affine-loci-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-adc4887a8",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-adc4887a8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The item statement (total positivity of u=λ⁻¹φ_M, d=0 allowed) is true and unchanged. Tested cases: L=M gives u=1; on an elliptic curve O(P),O(2P) gives u=2; dim A=0 gives E=0. Steps 1-8 check out against the cited statements. Ample base change (Stacks 0893) holds with T=Spec k. The dual datum base-changes because A_K×_K T=A×_k T and the dual is unique. j is injective by Tate saturation. The sign chain e_L(ux,y)=−e_M(y,x)=e_M(x,y)=e_L(x,uy) is right, and e_N is alternating for every N, so no symmetry of L or M is needed. Step 4 uses the orthogonal basis plus the spectral leaf; step 5 (Lagrange) is a genuine few-line step. Step 6 proves λ is an isogeny via λh=[n] and the equal-dimension criterion. Step 7 gives det(n+V(u))=Q(n)²/b² from the determinant node and the degree-square node with h=nλ+φ_M. Step 8: Cayley-Hamilton over Q_ℓ gives P(−u)=0, and since every mixed coefficient c_i>0, all a_i>0. New node lem-sfb-ample-mixed-intersection-positive equals Stacks 0BEV (varieties.tex:10580) with Z=X. It adds the nonemptiness that def-sc-intersection-number needs; d≥1 is harmless. It is not a duplicate: grepping 0BEV over the DAG finds only single-line or reduction-step nodes. The spectral leaf matches Mathlib Spectrum.lean at exactly lines 279/300/325. Batch-5: every listed citation reaches only generic lemmas (Stacks 0893/01VA/01OB/00JZ/021O, eq_of_infinite_eval_eq, p-linear-triangular, torsion-free rationalization), none part of the trace formula or Poincaré duality. FIX (B3/C4): step 2 applies lem-sfb-rosati-trace-positive, which needs def-sc-ample (a power very ample). Step 1 only gives Stacks 01PS ampleness. I added a citation of lem-pc-ample-affine-loci-criterion (Stacks 01VT, proper scheme over a field) to step 2's text/uses and to proof_deps, plus a tool_use entry. File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-ample-polarization-positive-spectrum.json. Accepted the worker's tool_uses (ample base change, mult-n isogeny, Cayley-Hamilton).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.AmplePolarizationPositiveSpectrum",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.ample_polarization_positive_spectrum",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/AmplePolarizationPositiveSpectrum.lean",
+  "statement": "theorem IsAbelianVariety.ample_polarization_positive_spectrum {k : Type u} [Field k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (L M : A.left.Modules) [hL : L.IsInvertible] [hM : M.IsInvertible] (hLamp : IsAmple A.left L) (hMamp : IsAmple A.left M) (c : ∀ (B C F : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [GrpObj F] [IsAbelianVariety B] [IsAbelianVariety C] [IsAbelianVariety F], abelianRationalHom B C →ₗ[ℚ] abelianRationalHom C F →ₗ[ℚ] abelianRationalHom B F) (hc : ∀ (B C F : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [GrpObj F] [IsAbelianVariety B] [IsAbelianVariety C] [IsAbelianVariety F] (r s : ℚ) (f : abelianHom B C) (g : abelianHom C F), c B C F (r ⊗ₜ[ℤ] f) (s ⊗ₜ[ℤ] g) = (r * s) ⊗ₜ[ℤ] abelianHomComp f g) (D : AbelianDualPoincareDatum A) (φL φM : abelianHom A D.dual) (hφL : ClassifiesAbelianDifference D L (abelianHomMap φL)) (hφM : ClassifiesAbelianDifference D M (abelianHomMap φM)) (dQ : abelianRationalHom A A →ₗ[ℚ] abelianRationalHom D.dual D.dual) (hdQ : ∀ (r : ℚ) (b : abelianHom A A), ∃ db : abelianHom D.dual D.dual, Nonempty ((Scheme.Modules.pullback (abelianHomMap b ▷ D.dual).left).obj D.poincare ≅ (Scheme.Modules.pullback (A ◁ abelianHomMap db).left).obj D.poincare) ∧ dQ (r ⊗ₜ[ℤ] b) = r ⊗ₜ[ℤ] db) (invLambda : abelianRationalHom D.dual A) (hinv : c A D.dual A (abelianHomToRational φL) invLambda = abelianHomToRational (abelianHomId A)) (hinv' : c D.dual A D.dual invLambda (abelianHomToRational φL) = abelianHomToRational (abelianHomId D.dual)) (E : Type v) [Ring E] [Algebra ℚ E] (e : E ≃ₗ[ℚ] abelianRationalHom A A) (hone : e 1 = abelianHomToRational (abelianHomId A)) (hmul : ∀ x y : E, e (x * y) = c A A A (e y) (e x)) (u : E) (hu : e u = c A D.dual A (abelianHomToRational φM) invLambda) (dagger : E →ₗ[ℚ] E) (hdagger : ∀ x : E, e (dagger x) = c A D.dual A (c A D.dual D.dual (abelianHomToRational φL) (dQ (e x))) invLambda) : dagger u = u ∧ FiniteDimensional ℚ (Algebra.adjoin ℚ {u}) ∧ ∃ (d : ℕ) (ρ : (ℝ ⊗[ℚ] Algebra.adjoin ℚ {u}) ≃ₐ[ℝ] (Fin d → ℝ)), ∀ i : Fin d, 0 < ρ (1 ⊗ₜ[ℚ] ⟨u, Algebra.self_mem_adjoin_singleton ℚ u⟩) i",
+  "branch": "sheaf-dag",
+  "by": "Q147",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e24be0faa",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Only the node lean field plus one sorry theorem module are delivered; the record statement is verbatim the file signature. Every clause matches the node: c/hc copy the dependency's pure-tensor characterization; φL/φM are pinned by ClassifiesAbelianDifference (the dependency's iff); dQ is pinned by hdQ, which equals the dependency's iff with DB=DC=D; invLambda is a unique two-sided inverse. The model ring E has unit and product fixed through e (hmul: e(xy) = e x ∘ e y), and the project has no Ring instance on abelianRationalHom or RationalEndomorphisms. u = invLambda∘φM and dagger = invLambda∘x^∨∘φL are in the right order. C = Algebra.adjoin ℚ {u}, finite dimension is a conclusion, and ρ : ℝ⊗C ≃ₐ[ℝ] Fin d → ℝ has strict positivity. Edge cases dim 0 (zero E, d=0), char 2, non-closed k, L=M and non-symmetric lines are covered. No hollow definitions; docstrings with source and blueprint id and all 8 proof steps; all imported modules exist. Advisory: the Second reading section is an author self-check. No file changed, so no compile."
+ }
+}

@@ -128,7 +128,32 @@
   "lemma-weil-pbc-pushout-monicity"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      322,
+      370
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -168,5 +193,46 @@
   "landing": "20261012T194127-L-460521",
   "kind": "interface",
   "note": "independent Codex review: Matched delivered proofs, signatures, imports, node records, retirement change record and report against the library, unit route and cited sources; compilation and axiom checks pass."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $T=\\operatorname{Spec}A$,\n$T_0=\\operatorname{Spec}(A/I)$, let $\\Lambda$ be a commutative ring and let $F$ be a\nsheaf of $\\Lambda$-modules on $T_{\\Et}$ which is torsion\n[def-weil-pbc-torsion-etale-sheaf], with restriction $F_0$ to $T_0$. Every class\n$c\\in H^q(T_0,F_0)$ with $q>0$ admits a monomorphism $F\\hookrightarrow F'$ into a\ntorsion sheaf of $\\Lambda$-modules $F'$ such that the image of $c$ in\n$H^q(T_0,F'_0)$ is zero.",
+  "proof": [
+   {
+    "text": "*Step 1: a bounded representative.* $F$ is the filtered union of its subsheaves\n$F[n]$ killed by $n$ [def-weil-pbc-torsion-etale-sheaf], inverse image to $T_0$\ncommutes with this colimit, and cohomology of the quasi-compact quasi-separated\nscheme $T_0$ commutes with filtered colimits. Hence there are a sheaf of\n$\\Lambda$-modules $G$ with $nG=0$ for some $n\\geq1$, a morphism $b:G\\to F$ and a\nclass $z\\in H^q(T_0,G_0)$ with $b_0(z)=c$.",
+    "uses": [
+     "def-weil-pbc-torsion-etale-sheaf"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2: lifting $z$ to $T$.* For an abelian sheaf $G$ killed by $n$, restriction\n$H^q(T,G)\\to H^q(T_0,G_0)$ is surjective. Indeed, regard $G$ as a sheaf of\n$\\mathbf Z/n$-modules. A closed-fibre class of a $\\mathbf Z/n$-sheaf comes from a\nconstructible $\\mathbf Z/n$-sheaf $C$ mapping to it\n[lemma-weil-pbc-constructible-approximation]; $C$ embeds into a finite sum of\ndirect images of finite constant sheaves along finite finitely presented maps\n[lemma-weil-pbc-constructible-finite-pushforward]; each component of the class is\nkilled by a finite finitely presented cover;\npushing out along $C\\to G$ [lemma-weil-pbc-pushout-monicity] gives a\nmonomorphism of $\\mathbf Z/n$-sheaves $G\\hookrightarrow G'$ killing the class.\nWith this effacement, induction on $q$ in the long exact cohomology sequences of\n$0\\to G\\to G'\\to G'/G\\to0$ on $T$ and on $T_0$ (degree zero being\n[lemma-weil-pbc-etale-degree-zero]) shows that restriction is bijective for all\n$\\mathbf Z/n$-sheaves in all degrees, in particular surjective. Choose\n$x\\in H^q(T,G)$ restricting to $z$.",
+    "uses": [
+     "lemma-weil-pbc-constructible-approximation",
+     "lemma-weil-pbc-constructible-finite-pushforward",
+     "lemma-weil-pbc-pushout-monicity",
+     "lemma-weil-pbc-etale-degree-zero"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: an acyclic target.* Embed $G$ into an injective sheaf $J$ of\n$\\Lambda$-modules and let $E=\\ker(n:J\\to J)$. Since $nG=0$ the embedding factors\nthrough a monomorphism $a:G\\hookrightarrow E$. The sheaf $E$ is killed by $n$,\nhence torsion, and $H^q(T,E)=0$ for $q>0$: $E$ is an injective sheaf of\n$\\Lambda/n$-modules, because $\\operatorname{Hom}_{\\Lambda/n}(-,E)=\n\\operatorname{Hom}_\\Lambda(-,J)$ on sheaves of $\\Lambda/n$-modules, and injective\nsheaves of modules are acyclic. Therefore the image of $z$ in\n$H^q(T_0,E_0)$, which is the restriction of the image of $x$ in $H^q(T,E)=0$,\nvanishes.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 4: pushout.* Let $F'=F\\amalg_GE$ be the pushout of $b$ and $a$. Since $a$ is\na monomorphism, so is $F\\to F'$ [lemma-weil-pbc-pushout-monicity], and $F'$ is a\nquotient of the torsion sheaf $F\\oplus E$, hence torsion. The image of\n$c=b_0(z)$ in $H^q(T_0,F'_0)$ equals the image of $a_0(z)=0$ under\n$E\\to F'$, so it is zero.",
+    "uses": [
+     "lemma-weil-pbc-pushout-monicity"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

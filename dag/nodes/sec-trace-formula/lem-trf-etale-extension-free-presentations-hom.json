@@ -1,0 +1,330 @@
+{
+ "id": "lem-trf-etale-extension-free-presentations-hom",
+ "kind": "statement",
+ "title": "Tensor extension, local free presentations and Hom comparison",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], with its Zariski site [def-sc-zariski-site] and small etale site [def-weil-pbc-etale-site], and put $\\mathcal O_{T,\\mathrm{et}}(v:V\\to T)=\\Gamma(V,\\mathcal O_V)$. Write $L_T=\\epsilon_T^*$ for tensor pullback and $R_T=\\epsilon_{T,*}$ for restriction to open subschemes along the canonical morphism of ringed sites $\\epsilon_T:T_{\\mathrm{et}}\\to T_{\\mathrm{Zar}}$ [lem-trf-zariski-etale-tensor-sections]. Modules mean sheaves of modules [def-weil-sheaf-of-modules-category]; Zariski quasi-coherence is [pqf-def-coherent] and site quasi-coherence is [def-trf-space-quasi-coherent-module]. Then $L_T\\dashv R_T$, $L_T$ preserves all small colimits, and $L_T\\mathcal O_T\\simeq\\mathcal O_{T,\\mathrm{et}}$. For each quasi-coherent $F$, there is a canonical natural identification $L_TF(v)=\\Gamma(V,v^*F)$, with scalar action and module maps given by pullback of sections [def-sc-etale-qcoherent-module, def-pc-module-pullback]. There is an affine open cover $T=\\bigcup W_\\alpha$ and presentations $\\mathcal O_{W_\\alpha}^{(I_\\alpha)}\\to\\mathcal O_{W_\\alpha}^{(J_\\alpha)}\\to F|_{W_\\alpha}\\to0$, whose images under $L_{W_\\alpha}$ are free presentations of $(L_TF)|_{(W_\\alpha)_{\\mathrm{et}}}$; here all index sets are small. In particular $L_TF$ is site quasi-coherent. For each etale $u:V\\to T$ there is a natural identification $(L_TF)|_{V_{\\mathrm{et}}}\\simeq L_V(u^*F)$, compatible with module maps and composition. For every open $W\\subseteq T$, the adjunction unit $F(W)\\to(R_TL_TF)(W)$ is the identity under the displayed section identification. For quasi-coherent $F,H$ the induced map $\\operatorname{Hom}(F,H)\\to\\operatorname{Hom}(L_TF,L_TH)$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03FH (remark-change-topologies-ringed-sites), 03DV (lemma-quasi-coherent-gives-quasi-coherent), part (2), and 0GN7 (lemma-fully-faithful-associated): tensor extension, local free presentations, etale restriction and Hom comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-trf-space-quasi-coherent-module",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-module-adjunction] to the ringed morphism $\\epsilon_T$ of [lem-trf-zariski-etale-tensor-sections]. Its module direct image is precisely $R_T$, with the stated scalar action, so $L_T\\dashv R_T$. By [lem-weil-pbc-left-adjoint-preserves-colimits], $L_T$ preserves every small colimit. These conclusions hold for all modules, not just quasi-coherent ones.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-trf-zariski-etale-tensor-sections",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03FH (remark-change-topologies-ringed-sites), 070S (lemma-compare-sites), and 03D7 (sites-modules, lemma-adjoint-pullback-pushforward-modules)"
+   }
+  },
+  {
+   "text": "For quasi-coherent $F$, [lem-sc-etale-qcoherent-descent] says that $P_F(v)=\\Gamma(V,v^*F)$ is already a sheaf. Hence the sheafification in [lem-trf-zariski-etale-tensor-sections] can be removed, using the universal property [def-weil-presheaf-modules-sheafification]. The comparison is natural in module maps; its scalar action and restrictions are exactly pullback of sections, as specified in the tensor-section comparison. Thus $L_TF=P_F$ canonically as module sheaves.",
+   "uses": [
+    "lem-sc-etale-qcoherent-descent",
+    "lem-trf-zariski-etale-tensor-sections",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DR (section-quasi-coherent-sheaves), 070S (lemma-compare-sites (2)), 03FH (remark-change-topologies-ringed-sites (1))"
+   }
+  },
+  {
+   "text": "For etale $u:V\\to T$, identify the slice $T_{\\mathrm{et}}/V$ with $V_{\\mathrm{et}}$ by [lem-weil-pbc-etale-site-localization-open]. The restricted ring is literally $\\Gamma(A,\\mathcal O_A)$ on $a:A\\to V$. By [lem-weil-pbc-module-pullback-quasi-coherent], $u^*F$ is quasi-coherent, so step 2 applies on $V$. At $a$ the comparison is $\\Gamma(A,c_{a,u,F}):\\Gamma(A,a^*u^*F)\\to\\Gamma(A,(u a)^*F)$. The normalized composition and restriction laws [lem-sc-etale-qcoherent-presheaf-functorial] make these module isomorphisms a sheaf isomorphism. Their compatibility with module maps is [lem-sc-etale-tensor-sections-map-naturality]. For three successive maps the two composites agree: each is the unique composition comparison normalized by the composite adjunction unit, so uniqueness gives the cocycle equality. This proves the asserted compatibility with composition, as well as restriction to any open subscheme.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-sc-etale-tensor-sections-map-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03FH (remark-change-topologies-ringed-sites (2)); the section formula gives the localized comparison"
+   }
+  },
+  {
+   "text": "For the unit module, scheme pullback gives $v^*\\mathcal O_T\\simeq\\mathcal O_V$: locally the multiplication map $b\\otimes r\\mapsto b v^\\sharp(r)$ has inverse $b\\mapsto b\\otimes1$, and the balancing relation proves both composites are identities. These maps respect further pullback and glue. The module $\\mathcal O_T$ is quasi-coherent: on each affine open $W=\\operatorname{Spec}A$ the rank-one case of [lem-weil-pbc-spec-tilde-free-module] gives $\\mathcal O_W\\simeq\\widetilde A$. Therefore step 2, applied to $\\mathcal O_T$, identifies $L_T\\mathcal O_T$ with $\\mathcal O_{T,\\mathrm{et}}$ on every object and restriction. The same applies with any scheme in place of $T$.",
+   "uses": [
+    "lem-trf-zariski-etale-tensor-sections",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03FH (remark-change-topologies-ringed-sites (1)), explicit tensor-unit calculation"
+   }
+  },
+  {
+   "text": "Choose an affine open cover $W=\\operatorname{Spec}A$ on which $F|_W\\simeq\\widetilde M$, as permitted by [pqf-def-coherent]. For each such $M$, let $J$ be its underlying set and map $A^{(J)}\\to M$ by $e_m\\mapsto m$. This is surjective. Let $I$ be the underlying set of its kernel and map $A^{(I)}\\to A^{(J)}$ by $e_k\\mapsto k$. This exhibits $M$ as the cokernel. Apply [lem-weil-pbc-affine-tilde-gamma-adjunction], which preserves all small colimits, to this cokernel and to the coproducts $A^{(I)}$, $A^{(J)}$. The rank-one case of [lem-weil-pbc-spec-tilde-free-module] identifies $\\widetilde A$ with $\\mathcal O_W$, so the resulting presentation is $\\mathcal O_W^{(I)}\\to\\mathcal O_W^{(J)}\\to F|_W\\to0$. The underlying sets of $M$ and its kernel are small in the module universe; no finite generation is used.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DV (lemma-quasi-coherent-gives-quasi-coherent), opening paragraph; the affine construction expands the reference to Modules Definition 01BE"
+   }
+  },
+  {
+   "text": "Apply $L_W$ to the presentations of step 5. Step 1 preserves the two coproducts and their cokernel; step 4 identifies the unit summands. Step 3 identifies $L_W(F|_W)$ with $(L_TF)|_{W_{\\mathrm{et}}}$, using [lem-weil-pbc-open-immersion-module-pullback-restriction] to replace $F|_W$ by $i_W^*F$. These are the requested free presentations. To check site quasi-coherence on an arbitrary $v:V\\to T$, apply step 5 instead to the quasi-coherent module $v^*F$ on $V$ and then apply $L$ on its affine open cover. Step 3 identifies the resulting presentations with restrictions of $L_TF$ to that cover of $V$. Thus the local presentation condition in [def-trf-space-quasi-coherent-module] holds for every site object; it is not merely a presentation near the final object.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DV (lemma-quasi-coherent-gives-quasi-coherent (2)), expanding the local-final-object check"
+   }
+  },
+  {
+   "text": "Here is also the normalization of the unit, which is needed for the Hom claim. For any $M$, restrict a map $P_M^\\#\\to G$ to $P_M$, then on opens precompose with $\\Gamma(W,\\kappa_W):M(W)\\to\\Gamma(W,i_W^*M)$. These components form an $\\mathcal O_T$-linear map $M\\to R_TG$: for opens $W'\\subseteq W$ and $m\\in M(W)$, the unit normalization of the composition comparison [lem-sc-etale-qcoherent-presheaf-functorial] sends the restriction of $\\eta^{i_W}(m)$ to $\\eta^{i_{W'}}(m)$, and the unit equation of $\\kappa$ identifies both with $\\kappa_{W'}(m|_{W'})$. The sheafification universal property and [lem-trf-etale-tensor-sections-adjunction-extension] give surjectivity of this Hom map, and [lem-trf-etale-tensor-sections-open-determination] gives injectivity. Consequently this is the adjunction Hom bijection for the canonical tensor-section comparison. In particular the identity of $L_TF=P_F$ corresponds to the maps $\\Gamma(W,\\kappa_W)$. By [lem-weil-pbc-open-immersion-module-pullback-restriction], $\\kappa_W$ is the unit-compatible identification of restriction with open pullback. Hence the adjunction unit $F(W)\\to P_F(i_W)$ becomes the identity of $F(W)$ under the displayed section identification, for every open $W$, including the empty open.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-trf-etale-tensor-sections-adjunction-extension",
+    "lem-trf-etale-tensor-sections-open-determination",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0GN7 (lemma-fully-faithful-associated), restriction and unit calculation; Tag 070S (lemma-compare-sites (2)), tensor-section normalization"
+   }
+  },
+  {
+   "text": "For quasi-coherent $F,H$, adjunction gives $\\operatorname{Hom}(L_TF,L_TH)\\simeq\\operatorname{Hom}(F,R_TL_TH)$. Step 7 identifies the unit $\\eta_H:H\\to R_TL_TH$ with an isomorphism (indeed the identity on every open). Thus postcomposition with $\\eta_H$ gives a bijection $\\operatorname{Hom}(F,H)\\to\\operatorname{Hom}(F,R_TL_TH)$. The adjoint of $L_T(h)$ is $R_TL_T(h)\\eta_F=\\eta_H h$ by naturality of the unit. Therefore the composite bijection is exactly the map $h\\mapsto L_T(h)$ in the statement. This proves its bijectivity without assuming any counit is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0GN7 (lemma-fully-faithful-associated), displayed Hom calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-zariski-etale-tensor-sections",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sc-etale-qcoherent-descent",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-sc-etale-tensor-sections-map-naturality",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-etale-tensor-sections-adjunction-extension",
+  "lem-trf-etale-tensor-sections-open-determination"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03FH (remark-change-topologies-ringed-sites), 03DV (lemma-quasi-coherent-gives-quasi-coherent (2)), 0GN7 (lemma-fully-faithful-associated); affine presentation and unit details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme the tensor pullback from Zariski modules to small etale modules preserves colimits and quasi coherence, commutes with etale restriction, and is fully faithful on quasi coherent modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).l =\\n    (AlgebraicGeometry.Scheme.Modules.pullback f.as.unop).toCatHom\", \"doc\": \"For any morphism $f: X \\to Y$ between schemes, the left component of the pseudofunctor map applied to $f$ in the bicategory of module adjunctions equals the categorical morphism induced by the pullback\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme module adjunctions, site presentation definitions and the fully faithful etale-object forgetful functor do not prove Zariski-to-etale quasi-coherent extension or its Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated small etale module sheaf of a quasicoherent scheme module has local free presentations and restriction to open subschemes is the original module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.tildeInModuleCat\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \": TopCat.Presheaf (ModuleCat R) (PrimeSpectrum.Top R)\", \"doc\": \"The sheaf $\\\\widetilde{M}$ associated to an $R$-module $M$ over $\\\\operatorname{Spec}(R)$, constructed by localizing $M$ in the Zariski topology and restricting scalars via the global sections of the st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) (x : U) : U.toScheme.presheaf.stalk x ≅ X.presheaf.stalk x.1\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.isSheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) : M.presheaf.IsSheaf\", \"doc\": \"For any sheaf of modules $ M $ over the structure sheaf of a scheme $ X $, the underlying presheaf of abelian groups on $ X $ satisfies the sheaf condition with respect to open covers of the topologic\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme module adjunctions, site presentation definitions and the fully faithful etale-object forgetful functor do not prove Zariski-to-etale quasi-coherent extension or its Hom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isQuasicoherent\", \"FullyFaithful\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme module adjunctions, site presentation definitions and the fully faithful etale-object forgetful functor do not prove Zariski-to-etale quasi-coherent extension or its Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale.*(quasicoherent|fullyFaithful)|quasicoherent.*(etale|fullyFaithful))",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"177\", \"text\": \"def Etale.forgetFullyFaithful : (Etale.forget X).FullyFaithful :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"183\", \"text\": \"  (Etale.forgetFullyFaithful X).full\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"186\", \"text\": \"  (Etale.forgetFullyFaithful X).faithful\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme module adjunctions, site presentation definitions and the fully faithful etale-object forgetful functor do not prove Zariski-to-etale quasi-coherent extension or its Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski to etale extension of scalars identifies Hom sets of quasicoherent modules and carries arbitrary free presentations to free presentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"RingHom.formallyEtale_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (algebraMap R S).FormallyEtale ↔ Algebra.FormallyEtale R S\", \"doc\": \"The canonical ring homomorphism from $ R $ to $ S $ is formally étale if and only if $ S $ is a formally étale algebra over $ R $. This equivalence establishes that the formal étaleness of the algebra\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R S] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra S Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (M : Submonoid R) [inst_3 : Algebra R Sₘ] [inst_4 : Algebra R Rₘ] [inst_5 : Algebra Rₘ Sₘ] [IsScalarTower R Rₘ Sₘ]\\n  [IsLocalization M Rₘ] [Algebra.FormallyEtale R Sₘ], Algebra.Formal\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"RingHom.etale_algebraMap\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (algebraMap R S).Etale ↔ Algebra.Etale R S\", \"doc\": \"The canonical algebra map from a commutative ring $ R $ to an $ R $-algebra $ S $ is étale if and only if $ S $ is an étale algebra over $ R $. This equivalence holds because both conditions require $\"}\n  {\"name\": \"Algebra.FormallyEtale.instLocalization\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FormallyEtale R S] (M : Submonoid S), Algebra.FormallyEtale R (Localization M)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ M $ is a submonoid of $ S $, then the localization of $ S $ at $ M $ inherits the formally étale property over $ R $. This means the localized ring $ S\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme module adjunctions, site presentation definitions and the fully faithful etale-object forgetful functor do not prove Zariski-to-etale quasi-coherent extension or its Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale.*(quasicoherent|fullyFaithful)|quasicoherent.*(etale|fullyFaithful))",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned forgetful functors, topology comparison and ordinary scheme pullback, not the Zariski-to-small-etale module extension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski to etale extension of a quasi coherent module agrees with sections of scheme pullback and induces a bijection on morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.IsLocalAtTarget.of_isPullback, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.subcanonical_zariskiTopology, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: returned forgetful functors, topology comparison and ordinary scheme pullback, not the Zariski-to-small-etale module extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, Functor.FullyFaithful",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.FullyFaithful'",
+   "date": "2026-10-23",
+   "verdict": "unavailable: loogle: unknown identifier 'Functor.FullyFaithful'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback from Zariski module sheaves to small etale module sheaves is fully faithful on quasicoherent modules and preserves their local free presentations",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, SheafOfModules.fullyFaithfulForget, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, LightCondMod.LocallyConstant.fullyFaithfulFunctor, AlgebraicGeometry.Scheme.Modules.instFullPushforward",
+   "date": "2026-10-23",
+   "verdict": "no match: returned forgetful functors, topology comparison and ordinary scheme pullback, not the Zariski-to-small-etale module extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isQuasicoherent\", \"FullyFaithful\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned forgetful functors, topology comparison and ordinary scheme pullback, not the Zariski-to-small-etale module extension theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C) in the specialization chain below lem-trf-local-term-locality: Zariski and small etale quasi-coherent modules agree functorially. Historical imported ancestry retained. Re-split of lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, old proof steps 1,2,3,4: Tensor extension, local free presentations and Hom comparison.",
+   "via": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-extension-free-presentations-hom",
+  "worker": "stage1",
+  "summary": "Checked Stacks 03FH, 03DV, 0GN7 and the existing tensor-section inputs. Wrote an eight-step proof, expanding arbitrary-rank affine presentations, slice restrictions, unit normalization and the precise induced Hom map. Reused existing nodes; no new nodes or statement changes.",
+  "blueprint": "Historical ancestry below lem-trf-local-term-locality, through the polarized-ampleness section-algebra descent input. Realizes the tensor-extension/free-presentation/Hom part of the re-split of lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (old steps 1-4); the current blueprint does not separately restate this auxiliary comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "General tensor-pullback adjunction for the canonical ringed-site morphism; not a replacement of the unit route. No node of sk-i-curve-zero supplies this generic module/site fact."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent",
+    "why": "Sheaf condition for the tensor-section presheaf; needed to remove sheafification. No node of sk-i-curve-zero supplies this generic module/site fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "General identification of an etale slice site, used to evaluate restriction. No node of sk-i-curve-zero supplies this generic module/site fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "General preservation of quasi-coherence under scheme pullback, needed on arbitrary etale objects. No node of sk-i-curve-zero supplies this generic module/site fact."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-presheaf-functorial",
+    "why": "Normalized composition comparisons and their restriction laws for sections. No node of sk-i-curve-zero supplies this generic module/site fact."
+   },
+   {
+    "node": "lem-sc-etale-tensor-sections-map-naturality",
+    "why": "Naturality of the section restriction maps in module morphisms. No node of sk-i-curve-zero supplies this generic module/site fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Affine associated-sheaf functor preserves arbitrary coproducts and cokernels, producing local presentations. No node of sk-i-curve-zero supplies this generic module/site fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-sc-etale-tensor-sections-map-naturality",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-66e13fc44",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-66e13fc44 (reviewer sub-agent of L); spot-checked: Read Stacks descent 03FH, 03DV(2) and 0GN7 with their proofs; the item's clauses (adjunction and colimits, local free presentations, etale restriction, unit identity on open sections, Hom bijection) match those places for (T_et,O_et)->(T_Zar,O_T), and no target is weakened. The statement, stmt_deps and blueprint are byte-identical to live; live and side-live still have the item unsplit; there are no new nodes and no dependency cycle (closure of 208 nodes); proof_deps equals the union of the step uses; no SGA citation. Steps 1-3, 5, 6 and 8 check out against the cited statements: the etale-localization node holds for any etale U->X; the composition cocycle follows from the uniqueness clause of presheaf-functorial; arbitrary-rank presentations use the underlying sets of M and its kernel with tilde(4) and the rank-one tilde-free node; site quasi-coherence is checked on every object through v^*F, so the local-final-object lemma is not needed; step 8 is plain adjunction algebra and does not use the counit. Step 7's bijection (surjective by adjunction-extension plus the universal property of sheafification, injective by open-determination, natural by Theta naturality) defines an adjunction whose unit is Gamma(W,kappa_W) for any canonical comparison, which is harmless for the parent. Two small faults repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-extension-free-presentations-hom.json: (C1) step 4 applied step 2 to O_T without justifying that O_T is quasi-coherent, so the rank-one lem-weil-pbc-spec-tilde-free-module citation was added; (E5) step 7 did not check that the open components give a Zariski module map M->R_T G, so a sentence using the unit normalization of c (lem-sc-etale-qcoherent-presheaf-functorial) and the unit equation of kappa was added. Duplicate search over 03DV/0GN7/03FH and fully-faithful qcoh etale nodes found only the parent and siblings. The worker's tool_uses are generic module/site facts and are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleExtensionFreePresentationsHom",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleExtension_free_presentations_hom",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.etaleExtensionAssociator",
+   "AlgebraicGeometry.Scheme.Modules.etaleExtension_free_presentations_hom"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleExtensionFreePresentationsHom.lean",
+  "statement": "theorem etaleExtension_free_presentations_hom : ∃ c : ∀ T : Scheme.{u}, ZariskiEtaleModuleContext T, (∀ T : Scheme.{u}, PreservesColimitsOfSize.{v, w} (c T).extension) ∧ (∀ T : Scheme.{u}, Nonempty ((c T).extension.obj (SheafOfModules.unit T.ringCatSheaf) ≅ SheafOfModules.unit (smallEtaleModuleRing T))) ∧ (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent], ((c T).extension.obj F).IsQuasicoherent) ∧ (∀ (T : Scheme.{u}) (F H : T.Modules) [F.IsQuasicoherent] [H.IsQuasicoherent], Function.Bijective (fun h : F ⟶ H ↦ (c T).extension.map h)) ∧ ∃ e : ∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent], (SheafOfModules.toSheaf (smallEtaleModuleRing T)).obj ((c T).extension.obj F) ≅ etaleTensorSectionsSheaf F, (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (V : T.Etale) (r : Γ(V.left, ⊤)) (s : ((c T).extension.obj F).val.obj (op V)), (e T F).hom.hom.app (op V) (r • s) = r • (@id (Γ((tensorPullback V.hom).obj F, ⊤)) ((e T F).hom.hom.app (op V) s))) ∧ (∀ (T : Scheme.{u}) (F H : T.Modules) [F.IsQuasicoherent] [H.IsQuasicoherent] (h : F ⟶ H) (V : T.Etale), ((SheafOfModules.toSheaf (smallEtaleModuleRing T)).map ((c T).extension.map h)).hom.app (op V) ≫ (e T H).hom.hom.app (op V) = (e T F).hom.hom.app (op V) ≫ ((tensorPullback V.hom).map h).app ⊤) ∧ (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (W : T.Opens), ((c T).adjunction.unit.app F).app W ≫ (e T F).hom.hom.app (op ((AlgebraicGeometry.gabberOpenEtale T).obj W)) ≫ (tensorOpenSectionIso T F W).hom = 𝟙 _) ∧ ∃ k : ∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (U : T.Etale), (Scheme.Etale.etaleToOver U ⋙ Over.forget U).op ⋙ ((c T).extension.obj F).val.presheaf ≅ ((c U.left).extension.obj ((tensorPullback U.hom).obj F)).val.presheaf, (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (U : T.Etale) (A : U.left.Etale), (k T F U).hom.app (op A) ≫ (e U.left ((tensorPullback U.hom).obj F)).hom.hom.app (op A) ≫ ((tensorSectionsComp A.hom U.hom).hom.app F).app ⊤ = (e T F).hom.hom.app (op (Scheme.Etale.mk (A.hom ≫ U.hom)))) ∧ (∀ (T : Scheme.{u}) (F H : T.Modules) [F.IsQuasicoherent] [H.IsQuasicoherent] (h : F ⟶ H) (U : T.Etale) (A : U.left.Etale), ((SheafOfModules.toSheaf (smallEtaleModuleRing T)).map ((c T).extension.map h)).hom.app (op (Scheme.Etale.mk (A.hom ≫ U.hom))) ≫ (k T H U).hom.app (op A) = (k T F U).hom.app (op A) ≫ ((SheafOfModules.toSheaf (smallEtaleModuleRing U.left)).map ((c U.left).extension.map ((tensorPullback U.hom).map h))).hom.app (op A)) ∧ (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (U : T.Etale) (A : U.left.Etale) (B : A.left.Etale), (k T F U).hom.app (op (Scheme.Etale.mk (B.hom ≫ A.hom))) ≫ (k U.left ((tensorPullback U.hom).obj F) A).hom.app (op B) ≫ ((SheafOfModules.toSheaf (smallEtaleModuleRing A.left)).map ((c A.left).extension.map ((tensorSectionsComp A.hom U.hom).hom.app F))).hom.app (op B) = ((c T).extension.obj F).val.presheaf.map (etaleExtensionAssociator U A B).inv.op ≫ (k T F (Scheme.Etale.mk (A.hom ≫ U.hom))).hom.app (op B)) ∧ ∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent], ∃ (ι : Type u) (W : ι → T.Opens), (∀ x : T, ∃ i : ι, x ∈ W i) ∧ (∀ i : ι, IsAffineOpen (W i)) ∧ ∀ i : ι, ∃ (I J : Type u) (f : SheafOfModules.free (R := (W i).toScheme.ringCatSheaf) I ⟶ SheafOfModules.free J) (g : SheafOfModules.free J ⟶ (tensorPullback (W i).ι).obj F) (z : f ≫ g = 0), Nonempty (IsColimit (CokernelCofork.ofπ g z)) ∧ Nonempty ((c (W i).toScheme).extension.obj (SheafOfModules.free I) ≅ SheafOfModules.free (R := smallEtaleModuleRing (W i).toScheme) I) ∧ Nonempty ((c (W i).toScheme).extension.obj (SheafOfModules.free J) ≅ SheafOfModules.free (R := smallEtaleModuleRing (W i).toScheme) J) ∧ ∃ z' : (c (W i).toScheme).extension.map f ≫ (c (W i).toScheme).extension.map g = 0, Nonempty (IsColimit (CokernelCofork.ofπ ((c (W i).toScheme).extension.map g) z'))",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76389b245",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Statement matches node/Stacks 03FH,03DV(2),0GN7 clause by clause: canonical Prop-only ZariskiEtaleModuleContext adjunction; PreservesColimitsOfSize.{v,w}; Nonempty L(unit)≅unit(smallEtaleModuleRing); e onto etaleTensorSectionsSheaf with linearity, h-naturality and open unit = 𝟙 (pins e uniquely); k etale localization pinned by tensorSectionsComp equation, naturality and 3-arrow cocycle (types traced, associator direction correct); Mathlib site IsQuasicoherent of L_T F; affine cover ι:Type u, I J:Type u cokernel presentations of tensorPullback ι F whose L-images are free cokernels; Bijective h↦L.map h. No extra hypotheses, universes free, empty cases fine. Only node change is the lean field; statement verbatim; associator is real data; sorry only; docstrings with source/blueprint/8 steps; report sections present; no existing match in live/side-live. Advisory: instance isQuasicoherent_tensorPullback from non-stmt_dep def-weil-pbc-tensor-pullback-ordinary-comparison used for typing; second reading is a same-worker re-read. No compile rerun (per instruction)."
+ }
+}

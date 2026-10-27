@@ -1,0 +1,158 @@
+{
+ "id": "lem-zl-classical-frontier-exists",
+ "kind": "statement",
+ "title": "A canonical finite-field frontier subordinate to the chosen partition",
+ "statement": "For D,l,Ω and any normalized realization R, let Y₀ be separated and finite type over its finite field. Choose either the geometric fibre or its reduction as support T and a common-stage heart object M there with supplied PartitionData P of reduced locally closed strata and lattices [def-zl-classical-lisse-restriction-maps]. There exists a Frontier [def-zl-classical-frontier-restriction-data] subordinate to P with iT the actual supportInclusion. Its closed chain and all clopen nonempty smooth affine geometrically connected pieces are over one positive finite extension, with canonical geometric base-change maps factoring scheme-theoretically through the original strata, dimension-zero pieces isomorphic to the point of that same field, and length zero when the original scheme is empty. No Weil structure or restriction-coherence conclusion is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 6-7; normalized classical restriction, descent of the finite frontier and its actual Weil structures."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraic-closure",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-base-change",
+  "def-weil-constructible-heart",
+  "def-weil-algebraically-closed-coefficients",
+  "def-constructible-stratification",
+  "def-weil-pbc-scheme-reduction",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-tw-lisse-rational-realization",
+  "lem-per-lisse-completed-system-comparison",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-local-frobenius-trace",
+  "lem-zl-smooth-affine-frontier-stratification",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-zl-classical-lisse-restriction-models",
+  "def-zl-classical-lisse-restriction-maps",
+  "def-zl-adic-lisse-calculus-models",
+  "def-per-adic-base-stages",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-zl-classical-local-fibre-comparison",
+  "def-zl-weil-ind-sheaf-category",
+  "def-wf-fundamental-representation",
+  "def-pod-lisse-adic-fibre-functors",
+  "def-zl-normalized-finite-realization-fibre",
+  "def-zl-normalized-finite-fibre-models",
+  "def-zl-classical-frontier-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the smooth-affine frontier theorem to the supplied partition of $Y_{\\mathrm{red}}$. If $T=Y$, regard each reduced $T_\\nu$ as a locally closed subscheme of $Y_{\\mathrm{red}}$: locally an immersion is a quotient $A\\to A/I$ with reduced target, so every nilpotent of $A$ maps to zero, and the quotient factors through $A/\\sqrt{0}$. This gives the same reduced partition, not a factorization inferred just from containment of underlying sets. The theorem supplies one $m$, all the reduced closed $Z_a$ over $k_m$, and their smooth geometrically connected affine clopen pieces, with constant dimension on each piece and actual locally closed geometric factorizations through the $T_\\nu$. It also supplies the dimension-zero and empty-scheme clauses. Apply Step 1 along each factorization: the original $E$-lattices restrict, and all localization, scalar and successive-pullback comparisons are those already fixed. If $M$ is Weil and $T=Y$, every piece inclusion is a $j_0$ over this same $k_m$, so Steps 2-5 put the required classical Weil isomorphism on each piece. The construction never asks the original partition or its lattices to be stable under $g_Y$. If $Y_0$ is empty there are no pieces to treat and the theorem's length-zero chain completes the assertion. The existing Lean frontier theorem quantifies an arbitrary ambient Over isomorphism χ, whereas Frontier.geometric_piece pins constantExtensionFiberIso. Form τ = χ followed by the inverse of that canonical Over isomorphism. Descend τ and τ⁻¹ and the two inverse equations to one further finite constant extension, using finite presentation of the ambient scheme. Base change the finite diagram and compose every ambient inclusion with the descended automorphism. The initial reduction isomorphism is transported through its reduction automorphism; the closed chain and clopen-cover equations are unchanged. Geometric connectedness and relative smooth dimension persist under this field extension. The canonical geometric inclusion of each corrected piece is now precisely its original map via χ, giving the required stratum factorization. In the empty case construct the length-zero chain directly rather than using the existing theorem, which does not state that clause.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-zl-smooth-affine-frontier-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 6-7: finite-field smooth affine frontier refinement and restriction to its pieces"
+   }
+  },
+  {
+   "text": "For the canonical-associativity correction, apply morphism and equality descent to the finite family consisting of the ambient automorphism, its inverse, and their two inverse equations. A common refinement of their stages gives one automorphism over a finite subfield. Base change the frontier and compose its ambient maps with this automorphism; use the induced reduction automorphism at the start. These equations identify the geometric ambient maps with the canonical ones, preserving all frontier assertions.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(2),(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "lem-zl-smooth-affine-frontier-stratification",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 6-7; normalized classical restriction, descent of the finite frontier and its actual Weil structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lisse adic sheaf realization normalized pullback comparison composition; finite field smooth affine geometrically connected frontier stratification; classical lisse Weil sheaf lifting isomorphism finite coefficient field geometric Frobenius",
+   "results": "SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv give ordinary module pullback composition; Algebra.isOpen_smoothLocus gives the open smooth locus; FiniteField.frobeniusAlgEquivOfAlgebraic gives the field automorphism. None states the normalized classical/common-stage comparison, finite-field frontier diagram or the finite sf local-operator assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "classical lisse Weil sheaf normalized successive pullback comparison finite field frontier stratification",
+   "results": "AlgebraicGeometry.exists_map_preimage_le_map_preimage and exists_map_preimage_eq_map_preimage (Mathlib.AlgebraicGeometry.AffineTransitionLimit); SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; Scheme.Modules.pullbackComp. No normalized adic/classical theorem or full finite-field frontier diagram.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i lisse.*weil|frontier.*strati|normalized.*pullback Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; rg preimageIso Mathlib/CategoryTheory/Functor/FullyFaithful.lean; repository search for WeilRestrictionResult, SuccessiveRestrictions, Frontier",
+   "results": "No matching Mathlib normalized adic or frontier theorem. FullyFaithful.preimageIso supplies the categorical isomorphism lift only. Existing Sheaf.Paper.ClassicalSystemRawLisseRealization is existential in its realization family; it does not directly supply the uniform conclusion for the given R,S,A,C. Existing Sheaf.DeligneLaumon.SmoothAffineFrontierStratification supplies the geometric diagram, requiring scheme-theoretic reduction and canonical-associativity glue. No duplicate of the three assembly lemmas.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClassicalLisseWeilFrontierRestriction",
+  "date": "2026-10-25",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 6-7; normalized classical restriction, descent of the finite frontier and its actual Weil structures.",
+   "via": [
+    "lem-zl-classical-lisse-weil-frontier-restriction",
+    "lem-zl-raw-heart-adic-lisse-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClassicalFrontierExistence",
+  "file": "lean/Sheaf/Paper/ClassicalFrontierExistence.lean",
+  "declaration": "WeilConjectures.ZlFrontier.classical_frontier_exists",
+  "declarations": [
+   "WeilConjectures.ZlFrontier.classical_frontier_exists"
+  ],
+  "statement": "theorem classical_frontier_exists (R : Realization D l Ω) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (reduced : Bool) (M : sfCommonStageHeart l (supportBase D (fiberBase D Y₀) reduced).scheme Ω) (P : PartitionData D l Ω R (supportBase D (fiberBase D Y₀) reduced) M) : Nonempty (Frontier D l Ω R Y₀ (supportBase D (fiberBase D Y₀) reduced) M P (supportInclusion D (fiberBase D Y₀) reduced))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2848",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T123002-L-1822144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2848",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T123002-L-1822144",
+  "kind": "interface",
+  "note": "independent cc review: live item module vs delivered Data module (verbatim move, item theorem signature unchanged, public re-export); three sorried step theorems vs the three clauses of RestrictionConclusion; node proof_deps vs the Lean proof"
+ }
+}

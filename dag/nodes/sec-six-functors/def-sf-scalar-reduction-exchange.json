@@ -1,0 +1,104 @@
+{
+ "id": "def-sf-scalar-reduction-exchange",
+ "kind": "definition",
+ "title": "The mixed scalar and quotient adjunction mate",
+ "statement": "Fix a prime l, finite extensions E,L of Q_l, an embedding iota:E→L over Q_l, a scheme X, and n≤m. Use the finite coefficient categories and scalar extension/restriction of [def-weil-pbc-bounded-constructible-tower], the quotient maps of [def-coef-finite-dualizing-data], and the normalized restrictions of [def-coef-normalized-dvr-tower]. The single quotient q_F:A_(F,m+1)→A_(F,n+1) is constant-sheafified with commutativity retained. The coefficient square iota_m;q_L=q_E;iota_n holds on residue representatives. Normalized restriction is derived restriction along q_F. Identity on sections gives an isomorphism R_(iota_n);Res_E≅Res_L;R_(iota_m) by the two canonical composition isomorphisms. Define the mixed map scalarReductionExchange:Res_E;T_(iota_m)→T_(iota_n);Res_L as its inverse mate under the two scalar adjunctions. This is a specified natural transformation; no invertibility is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-integer-quotient-inclusions",
+  "def-coef-finite-dualizing-data",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a commutative coefficient restriction square commutes with tensor quotient transition maps and exceptional counits",
+   "results": "mateEquiv, mateEquiv_counit, mateEquiv_square and mateEquiv_counit_symm provide general adjunction calculus; no normalized DVR or finite dualizing statement.",
+   "verdict": "generic ingredient only",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dualizing coefficient extension counit commutes with reduction quotient transitions",
+   "results": "Eight results: ordinary adic completion transition naturality and unrelated coalgebra counits; no sheaf derived coefficient comparison. Loogle finds Adjunction.homEquiv_naturality_right only.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizing|normalizedDVRReductionTransition|tensorSquare",
+   "results": "msearch Mathlib grep: zero hits. Project search: CoefIntegralFiniteExtensionModels defines quotient and finiteU; FiniteDualizing proves same-field cocycles, FiniteFreeCoefficientExtension provides a stage calculus; no mixed scalar restriction transition theorem.",
+   "verdict": "no duplicate; use existing model declarations",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteDualizingCoherence",
+  "date": "2026-10-26",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers.",
+   "via": [
+    "lem-sf-integral-finite-dualizing-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefScalarReductionExchange",
+  "file": "lean/Sheaf/SixFunctors/CoefScalarReductionExchange.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.scalarReductionExchange",
+  "declarations": [
+   "WeilConjectures.IntegralFiniteExtension.scalarQuotient",
+   "WeilConjectures.IntegralFiniteExtension.scalarQuotient_square",
+   "WeilConjectures.IntegralFiniteExtension.scalarQuotient_restrict",
+   "WeilConjectures.IntegralFiniteExtension.scalarRestrictionSquare",
+   "WeilConjectures.IntegralFiniteExtension.scalarReductionExchange"
+  ],
+  "statement": "def scalarReductionExchange {m n : ℕ} (h : n ≤ m) :\n    normalizedDVRRes l E X h ⋙\n        pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m) ⟶\n      pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n) ⋙\n        normalizedDVRRes l L X h",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T202604-L-2732657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T202604-L-2732657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

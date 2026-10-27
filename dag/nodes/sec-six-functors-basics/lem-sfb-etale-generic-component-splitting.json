@@ -1,0 +1,366 @@
+{
+ "id": "lem-sfb-etale-generic-component-splitting",
+ "kind": "statement",
+ "title": "Splitting generic irreducible components over an irreducible finite etale model",
+ "statement": "Let $f:X\\to S$ be a finite type morphism [def-weil-finite-type-morphism] of schemes [def-pc-scheme], and suppose $S$ is nonempty and irreducible (any two nonempty open subsets intersect). There exist a nonempty open subscheme $U\\subseteq S$, a nonempty irreducible affine scheme $B$ [def-weil-affine-spectrum], and a finite etale surjective morphism $g:B\\to U$ [def-weil-finite-integral-morphism, def-weil-etale-morphism, def-weil-surjective-morphism] such that every irreducible component [def-weil-irreducible-components] of the scheme-theoretic generic fibre $P_\\xi$ of $P=X\\times_S B\\to B$ [def-pc-fibre-product, def-pc-scheme-fibre], where $\\xi$ is the generic point of $B$ [def-sc-generic-point], is geometrically irreducible over $\\kappa(\\xi)$ [def-weil-residue-field, def-pc-geometrically-irreducible]: its inverse image after every field extension is nonempty and irreducible. The generic fibre is allowed to be empty. There is no Noetherian, reducedness, separatedness or flatness hypothesis on $S$ or $f$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0551, label lemma-make-components-generic-fibre-geometrically-irreducible, statement (1)--(7)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-irreducible-components",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-residue-field",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Choose a point of the nonempty base and a nonempty affine open $V=\\operatorname{Spec}A$ through it by [lem-weil-pbc-affine-opens-basis]. This open is irreducible: two of its nonempty opens are nonempty opens of $S$ and intersect. By [lem-zl-spectrum-irreducible-nilradical-prime], the nilradical $\\mathfrak p$ of $A$ is prime. In the Zariski topology its closure is $V(\\mathfrak p)=\\operatorname{Spec}A$, since every prime contains every nilpotent element. Thus $\\mathfrak p$ is the generic point of $V$. Put $K=\\kappa(\\mathfrak p)$ and $Y=X\\times_S\\operatorname{Spec}K$, with the canonical residue-field point through $V$. Finite-type base change [lem-sfb-finite-type-composition-base-change] makes $Y/K$ finite type.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-generic-components-split] to $Y/K$. Obtain $L/K$ with finite etale spectrum map and all components of $Y_L$ geometrically irreducible, in the explicit inverse-image sense of the item. The affine definition of finiteness [def-weil-finite-integral-morphism] says that $L$ is a finite $K$-module. At the unique point of each field spectrum, [lem-weil-pbc-etale-residue-field-extension-separable] says that this same field extension is separable algebraic. Hence [lem-weil-pbc-finite-separable-primitive-element] gives $\\alpha\\in L$ with $L=K(\\alpha)$.",
+   "uses": [
+    "lem-sbc-generic-components-split",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-etale-residue-field-extension-separable",
+    "lem-weil-pbc-finite-separable-primitive-element"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-residue-polynomial-lift] to $A,\\mathfrak p,L,\\alpha$. Obtain $c\\notin\\mathfrak p$ and a monic $F\\in A[T]$ whose image in $K[T]$ is the minimal polynomial of $\\beta=\\bar c\\alpha$. Since $\\bar c\\ne0$, $K(\\beta)=K(\\alpha)=L$. Put $d=\\deg F\\ge1$ and $D=A[T]/(F)$. The degree agrees with that of its image: the leading coefficient is $1$ and remains nonzero in $K$. By [lem-weil-pbc-monic-quotient-free], $D$ is finite free on $1,t,\\ldots,t^{d-1}$. By [lem-sfb-monic-quotient-faithful-tensor-coordinates], $A\\to D$ is faithfully flat, hence flat. Thus $h:\\operatorname{Spec}D\\to V$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine], finite by [lem-weil-pbc-spec-finite-ring-map-finite], and locally of finite presentation by its displayed one-generator one-relation presentation [def-sbc-locally-finite-presentation].",
+   "uses": [
+    "lem-weil-pbc-etale-residue-polynomial-lift",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  },
+  {
+   "text": "The fibre of $h$ at $\\mathfrak p$ is affine: finite base change and the affine-target assertion of [lem-weil-pbc-finite-morphism-permanence] apply. Its section algebra is $D\\otimes_AK$ by [lem-sbc-affine-fibre-sections-tensor]. There is a $K$-algebra isomorphism $D\\otimes_AK\\simeq K[T]/(\\bar F)\\simeq L$. For the first map, send $t\\otimes1$ to $T$ and $1\\otimes k$ to $k$; the inverse sends a polynomial class to its evaluation at $t\\otimes1$, and the relations on each side make both composites identities. For the second, evaluate at $\\beta$. Evaluation is onto since $K[\\beta]=L$ (the finite-dimensional subalgebra generated by an algebraic element is a field); division by the monic minimal polynomial shows its kernel is $(\\bar F)$, since a nonzero remainder of smaller degree cannot vanish. Consequently $h_{\\mathfrak p}\\simeq\\operatorname{Spec}L$ over $K$. In particular the set-theoretic fibre consists of a single point $q$, by [def-pc-scheme-fibre].",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sbc-affine-fibre-sections-tensor",
+    "def-weil-affine-spectrum",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  },
+  {
+   "text": "The fibre in Step 4 is etale: its structure map is precisely the finite etale field-spectrum map of Step 2. Apply [lem-sbc-flat-fibre-etale-neighbourhoods] to $h$, with flatness and local finite presentation supplied in Step 3. Obtain an open neighbourhood $W$ of the sole fibre point $q$ such that $W\\to V$ is etale. The closed-map assertion [lem-weil-pbc-finite-closed-map-finite-fibres] makes $Z=h(\\operatorname{Spec}D\\setminus W)$ closed in $V$. It misses $\\mathfrak p$, since $q\\in W$ is its only preimage. Choose an affine open $U$ with $\\mathfrak p\\in U\\subseteq V\\setminus Z$ by [lem-weil-pbc-affine-opens-basis]. This is a nonempty open of $S$.",
+   "uses": [
+    "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  },
+  {
+   "text": "Set $B=h^{-1}(U)$ with its open subscheme structure, and let $g:B\\to U$ be the restriction. It is the base change of the finite morphism $h$, hence finite; since $U$ is affine, $B$ is affine by [lem-weil-pbc-finite-morphism-permanence]. By the definition of $Z$, $B\\subseteq W$. Thus $B=W\\times_VU$ (both are the same restricted open subscheme), and [lem-weil-pbc-etale-scheme-base-change] makes $g$ etale. The image $g(B)$ is closed in $U$ by [lem-weil-pbc-finite-closed-map-finite-fibres]. It contains $\\mathfrak p$. Every closed subset of $U$ containing this point is all of $U$, since its closure in $V$ is $V$. Therefore $g$ is surjective, and $B$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  },
+  {
+   "text": "The point $q$ remains the sole preimage of $\\mathfrak p$ in $B$. For every nonempty open $O\\subseteq B$, [lem-weil-pbc-etale-morphism-open-map] makes $g(O)$ a nonempty open of $U$. Such an open contains $\\mathfrak p$: a closed complement containing the generic point would contain its whole closure. Hence $q\\in O$. Thus $\\overline{\\{q\\}}=B$, and $q$ is generic [def-sc-generic-point]. The closure of a singleton is irreducible: if covered by two closed subsets, one contains the singleton and therefore its closure. It follows that $B$ is irreducible [def-weil-irreducible-components]. This uses no reducedness and does not claim that the coordinate ring of $B$ is a domain.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  },
+  {
+   "text": "The identification in Step 4 also gives $\\kappa_B(q)=L$ compatibly with $K\\to L$. Indeed [lem-weil-pbc-affine-open-stalk-localization] identifies the local ring at $q$ before and after restriction to $B$ with $D_q$. Localizing the fibre algebra $D\\otimes_AK=L$ at its unique prime gives $D_q/\\mathfrak pD_q=L$. Since this quotient is a field, $\\mathfrak pD_q$ is the maximal ideal of the local ring $D_q$; its residue field is therefore $L$ by [def-weil-residue-field]. The maps from $A$ in these quotient/localization identifications are the original maps, so the residue-field point $\\operatorname{Spec}\\kappa_B(q)\\to B\\to S$ is the given composite $\\operatorname{Spec}L\\to\\operatorname{Spec}K\\to S$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  },
+  {
+   "text": "Put $P=X\\times_SB$ and $\\xi=q$. By [def-pc-scheme-fibre] and the compatible residue-field map in Step 8, its generic fibre is isomorphic over $L$ to $Y_L$. Explicitly, both $(X\\times_SB)\\times_B\\operatorname{Spec}L$ and $(X\\times_S\\operatorname{Spec}K)\\times_K\\operatorname{Spec}L$ represent a map to $X$ and a map to $\\operatorname{Spec}L$ agreeing in $S$ [def-pc-fibre-product]. The maps preserving these projections are inverse by uniqueness. After any extension $E/L$ the same construction gives the compatible isomorphism of $E$-fibres. Isomorphisms give homeomorphisms, which preserve maximal irreducible subsets [def-weil-irreducible-components], and the commuting projections identify their inverse images after extension. Step 2 therefore gives precisely nonempty irreducibility of each such inverse image. If $Y$ is empty, both generic fibres are empty and the component assertion is vacuous. The cover constructed above still exists, including when $L=K$ and $d=1$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-generic-point",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "lem-sbc-affine-fibre-sections-tensor",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-sbc-generic-components-split",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-weil-pbc-etale-residue-polynomial-lift",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-separable-primitive-element",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "lem-zl-spectrum-irreducible-nilradical-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0551, lemma-make-components-generic-fibre-geometrically-irreducible, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism over an irreducible scheme there is a finite etale surjective cover of an open subset which is irreducible and makes every generic fibre component geometrically irreducible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsFinite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.cover_I₀, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.instUniqueI₀SchemeCover",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "3219629892ae7fb7"
+  },
+  {
+   "tool": "grep",
+   "query": "0551|make.*components.*generic|generic.*geometricallyIrreducible",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spread a finite separable extension of the generic field to an irreducible finite etale cover of a dense open of an irreducible scheme",
+   "results": "8 hits: Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_isSeparable, IsSepClosure.recOn, IsSepClosed.lift, Algebra.IsSeparable.finInsepDegree_eq",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "d3ee8847eda6ad83"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.GeometricallyIrreducible",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, AdjoinRoot",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable extension of the residue field of a prime ideal can be lifted to a finite free algebra over a principal localization, etale at the point over that prime",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.isUnramifiedAt_iff_map_eq, Algebra.QuasiFinite.instFiniteResidueField, Algebra.QuasiFinite.instResidueField, RingHom.Etale.ofLocalizationSpan",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "19c3490769af71d4"
+  },
+  {
+   "tool": "grep",
+   "query": "0551|generic.*geometricallyIrreducible|geometric.*component.*extension",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite separable generic field extension spreads to a finite etale surjective cover of a nonempty open of an irreducible scheme",
+   "results": "8 hits: Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.IsSeparable.finInsepDegree_eq, IsSepClosure.recOn, Algebra.FormallyEtale.iff_isSeparable, Algebra.Etale.iff_exists_algEquiv_prod, IsGalois.to_isSeparable",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "28d7bbafefeed8ff"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.GeometricallyIrreducible",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism over an irreducible possibly nonreduced scheme a finite etale surjective irreducible affine cover of an open makes generic fibre components geometrically irreducible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "fe8229db80320e80"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-connected-count-generic-constancy",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative Picard detection by the three identity faces; normal-base step: pass from residue-field fibre triviality to local base pullbacks; normal-base Picard locality: unpointed normal arithmetic models, before descending a line or its generic trivialization; constructibility of the one-geometric-component locus, replacing the section-component shortcut in the unpointed arithmetic-model input. Stacks 055I: Noetherian reduction, then 055H generic constancy on irreducible closed subsets. Generic-constancy input, independent of constructible level sets. Supporting input: Tag 0551, label lemma-make-components-generic-fibre-geometrically-irreducible, statement (1)--(7).",
+   "via": [
+    "lem-sfb-geometric-connected-count-generic-constancy",
+    "lem-sfb-geometric-connected-fibre-locus-constructible",
+    "lem-sfb-normal-domain-smooth-family-models",
+    "lem-sfb-normal-base-fibrewise-line-locality",
+    "lem-sfb-relative-picard-cube-face-detection",
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-generic-component-splitting",
+  "worker": "stage1",
+  "summary": "Read Stacks 0551 and its polynomial construction. Reused existing generic-field splitting, polynomial lifting, positive-rank monic quotient flatness, fibre-etale neighbourhood, and finite-map/open-map nodes. Wrote the construction and the arguments for surjectivity, irreducibility and compatible generic fibre in nine steps. Statement unchanged; no new nodes. No Noetherian or reducedness assumption introduced.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability, direct-images proof (3), through the existing long supporting chain recorded in blueprint.from.place; realizes its Tag 0551 generic-component-splitting input. The inherited from.node is null, as tools/blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-affine-fibre-sections-tensor",
+    "why": "Generic algebraic-geometry input for the monic-polynomial construction in Stacks 0551; used with its stated hypotheses, not as a replacement of a unit-level six-functor step."
+   },
+   {
+    "node": "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "why": "Generic algebraic-geometry input for the monic-polynomial construction in Stacks 0551; used with its stated hypotheses, not as a replacement of a unit-level six-functor step."
+   },
+   {
+    "node": "lem-sbc-generic-components-split",
+    "why": "Generic algebraic-geometry input for the monic-polynomial construction in Stacks 0551; used with its stated hypotheses, not as a replacement of a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-residue-polynomial-lift",
+    "why": "Generic algebraic-geometry input for the monic-polynomial construction in Stacks 0551; used with its stated hypotheses, not as a replacement of a unit-level six-functor step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-affine-fibre-sections-tensor",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-sbc-generic-components-split",
+  "lem-weil-pbc-etale-residue-polynomial-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-562950acb",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-562950acb (reviewer sub-agent of L); spot-checked: Read Stacks Tag 0551 (more-morphisms.tex, lemma-make-components-generic-fibre-geometrically-irreducible), its statement and full proof, and all 26 cited statements. Compared with clones/live: statement, stmt_deps, source and blueprint are unchanged; only the proof, proof_deps, proof_origin, split_report, status and the added searches differ. Live still has the node unsplit with no review, so the delivery is not superseded. No re-split note exists. There are no new nodes. The 9 steps follow Stacks: nilradical prime gives K; generic-components-split gives L with a finite étale spectrum map; separability via the étale residue-field node; primitive element; scaled monic lift gives D=A[T]/(F), free and faithfully flat (d>=1 checked), flat, finite and lfp; the fibre is D⊗K≅K[T]/(F̄)≅L with a single point q. Stacks' 00U6 step is replaced by the flat-fibre étale-neighbourhood node, whose flat and lfp hypotheses come from Step 3. Z=h(Spec D∖W) is closed and misses p. B=h^{-1}(U) is affine, finite, étale (B⊆W) and surjective (closed image containing the generic point). B is irreducible through the étale open map, with no domain claim. Elementary steps 4, 8 and 9 (fibre algebra, κ_B(q)=L compatibly, pullback isomorphism of generic fibres after every E/L) are a few lines each. uses equals proof_deps. No cycle: the 183-node closure does not contain the item, and no cited node is merged. Small cases checked: Spec k[ε]/ε² (D≅L[ε], irreducible but not a domain), L=K with d=1, X or generic fibre empty, a non-Noetherian base. No duplicate: the trf integral-Noetherian version is a special case, and the sbc étale-model nodes are not finite surjective models over an open. The four declared tool_uses (sbc affine-fibre-sections-tensor, flat-fibre-etale-neighbourhoods, generic-components-split, weil-pbc etale-residue-polynomial-lift) are generic and accepted. blueprint.from.node is null, inherited from the base (ancestor returns None), and the blueprint search for 0551 found nothing. No SGA. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGenericComponentSplitting",
+  "declaration": "AlgebraicGeometry.exists_finite_etale_irreducible_generic_component_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGenericComponentSplitting.lean",
+  "statement": "theorem exists_finite_etale_irreducible_generic_component_splitting {X S : Scheme.{u}} [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] : ∃ U : S.Opens, (U : Set S).Nonempty ∧ ∃ B : Scheme.{u}, IrreducibleSpace B ∧ IsAffine B ∧ ∃ g : B ⟶ U.toScheme, IsFinite g ∧ Etale g ∧ Surjective g ∧ ∃ ξ : B, IsGenericPoint ξ Set.univ ∧ ∀ A ∈ irreducibleComponents ↥((pullback.snd f (g ≫ U.ι)).fiber ξ), ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (B.residueField ξ)), IsIrreducible ((pullback.fst ((pullback.snd f (g ≫ U.ι)).fiberToSpecResidueField ξ) z) ⁻¹' A)",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2cd2f611",
+  "group": "Q13",
+  "result": "pass",
+  "note": "The node copy differs from live only in lean. The live node is still split with no lean record, so it is not superseded. lean.statement is verbatim in the file and the theorem proof is the only sorry. Matched each clause against Stacks 0551 and the node: finite type = LocallyOfFiniteType+QuasiCompact; IrreducibleSpace S includes nonemptiness; U is a nonempty Opens; B is IrreducibleSpace+IsAffine, not IsIntegral, which is correct for a nonreduced base; g is IsFinite+Etale+Surjective; P = pullback f (g≫U.ι); ξ via IsGenericPoint univ; the fibre's irreducibleComponents; for all E : Type u fields and z : Spec E → Spec κ(ξ), IsIrreducible of the inverse image of each component, with universe u as in Mathlib's geometrically and the upstream generic-components-split interface. No extra hypotheses. Edge cases: empty fibre, k[ε]/ε², non-Noetherian base, L=K. The live trf exists_finite_etale_generic_component_splitting assumes an integral Noetherian compact base, so it is a strict specialization and not a duplicate. Imports exist; docstrings give the source and blueprint and carry the 9 proof steps; the report has both required sections. No recompile: no file changed."
+ }
+}

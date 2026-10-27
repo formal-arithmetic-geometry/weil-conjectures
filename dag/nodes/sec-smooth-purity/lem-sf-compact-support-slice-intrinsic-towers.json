@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-compact-support-slice-intrinsic-towers",
+ "kind": "statement",
+ "title": "Slice and intrinsic presentations of the completed compact-support towers",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6 and its coefficient-reduction construction; Stacks Project, Tags 03DI, 0D6E and 0E8I."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfIntegralCompactSupportConstructible",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Statement, integral construction: the derived limit of the finite compact-support images, with the specified coefficient quotient transitions.",
+   "via": [
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for sheaves of modules commutes with restriction of scalar coefficients",
+   "results": "8 hits: SheafOfModules.restrictScalars and restrictScalars_obj_val; PresheafOfModules.restrictScalarsObj; ordinary module scalar adjunctions and linear-map zero lemmas. None compares the two pro-etale open models or the completed quotient towers.",
+   "date": "2026-10-25",
+   "verdict": "no specialized match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "12 generic adjunction uniqueness identities, including leftAdjointUniq, unit_leftAdjointUniq_hom_app and transitivity. These supply the finite-adjunction step, not its pro-etale scalar and site identifications.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Tt]ower|finiteExtension.*sfIntrinsic",
+   "results": "msearch grep returned 0 hits. Local source search found the existing specified tower definitions and CompactSupportProperImageTower; its systems use slice extension and coefficientProEtaleModuleDirectImage, rather than the intrinsic consumer definitions.",
+   "date": "2026-10-25",
+   "verdict": "reuse the existing definitions; no presentation comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "statement": "Fix a prime l, a finite extension E/Q_l and a compactification c=(j,p) of a morphism f:X→Y. Let o be the section-normalized IntegralOpenReduction.Operations for j [lem-sf-integral-open-reduction-comparison], d the finite proper direct-image comparison data normalized on sections and K-injective representatives, and e the finite open scalar-comparison data normalized on extension summands [lem-sf-compact-support-proper-image-tower]. Then (i) at every finite exponent the slice extension o.finiteExtension is naturally isomorphic to the intrinsic finite extension by zero [def-weil-extension-by-zero]; and (ii) for every derived-complete K, the ordinary-image tower sfDirectImageTransition for p applied to the completed extension j_!K [def-weil-derived-direct-image] is naturally isomorphic to the slice properTower, while the slice supportTower is naturally isomorphic to the specified intrinsic compact-support tower [def-sf-integral-compact-support-tower]. These are isomorphisms of whole inverse systems, not just levelwise object isomorphisms. No constructibility or finite-field hypothesis is imposed.",
+ "stmt_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-compact-support-proper-image-tower",
+  "def-weil-extension-by-zero",
+  "def-weil-derived-direct-image",
+  "def-sf-integral-compact-support-tower"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the finite open comparison family with its ordinary coefficient compatibility from sfFiniteOpenPresentation. Each member supplies the finite-extension Nonempty conclusion. The adjacent quotient comparison in that module is proved directly from ofOpSequence.",
+   "uses": [
+    "lem-sf-finite-open-presentation-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite ordinary direct-image functors are definitionally equal. For the completed extension of any K, sfDirectImageTransition_presentation identifies the ordinary adjacent transition with properTransition. Use the identity isomorphisms as level comparisons.",
+   "uses": [
+    "lem-sf-direct-image-adjacent-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct each support level comparison by exact localization of the supplied finite open natural isomorphism followed by finite derived direct image and completed restriction. sfSupportTransition_presentation, applied to its ordinary coefficient compatibility, gives the adjacent support square.",
+   "uses": [
+    "lem-sf-support-adjacent-presentation",
+    "lem-sf-finite-open-presentation-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use NatTrans.ofOpSequence to extend each adjacent square to naturality for every arrow in ℕᵒᵖ. Every component is an isomorphism, so NatTrans.isIso_iff_isIso_app and asIso give the required two system isomorphisms. This is proved by the private towerIsoOfSteps helper. No equality of morphisms in a derived system category is inferred merely from evaluations.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-open-presentation-coefficients",
+  "lem-sf-direct-image-adjacent-presentation",
+  "lem-sf-support-adjacent-presentation",
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6 and the existing Steps 1--6; formal assembly from the finite ordinary coefficient square and the two adjacent-arrow identities, using NatTrans.ofOpSequence."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfCompactSupportTowerPresentation",
+  "file": "lean/Sheaf/Paper/SfCompactSupportTowerPresentation.lean",
+  "declaration": "WeilConjectures.sfCompactSupportTower_presentation",
+  "statement": "theorem sfCompactSupportTower_presentation (c : Compactification f) (o : IntegralOpenReduction.Operations l E c.i) (d : CompactSupportProperImageTower.DirectData l E c.g) (e : CompactSupportProperImageTower.OpenData l E c.i o) : (∀ n : ℕ, Nonempty (IntegralOpenReduction.finiteExtension l E c.i o n ≅ sfIntrinsicExtensionByZero c.i (Padic.coefficientExtensionRing l E (n + 1)))) ∧ ∀ K : (IntegralOpenReduction.complete l E X).FullSubcategory, Nonempty (Functor.ofOpSequence (sfDirectImageTransition l E c.g ((IntegralOpenReduction.shriek l E c.i o).obj K.obj)) ≅ CompactSupportProperImageTower.properTower l E c.i c.g o (d := d) K.obj) ∧ Nonempty (CompactSupportProperImageTower.supportTower l E c.i c.g o (d := d) e K.obj ≅ Functor.ofOpSequence (sfCompactSupportTransition l E c K.obj))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c744e",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261025T011011-L-3633664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T222755-L-694270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

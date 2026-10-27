@@ -1,0 +1,387 @@
+{
+ "id": "lem-sfb-stable-relative-picard-kummer",
+ "kind": "statement",
+ "title": "Relative semiabelian Picard object and smooth Kummer comparison",
+ "statement": "Let $k$ be an algebraically closed field, let $S$ be a locally Noetherian $k$-scheme, and let $f:X\\to S$ be a stable unpointed genus-$g$ family, $g\\geq2$, in [def-sfb-stable-pointed-moduli-groupoids]. The identity component $N=\\operatorname{Pic}^0_{X/S}$ of the relative Picard fppf sheaf is a separated smooth commutative group algebraic space of finite presentation over $S$, with geometrically connected fibres. The relative Picard sheaf is the fppf sheafification of $T\\mapsto\\operatorname{Pic}(X_T)/f_T^*\\operatorname{Pic}(T)$; a Picard group is the group of isomorphism classes of invertible modules under tensor product [def-sc-invertible-module]. On every geometric fibre, $N$ classifies the line bundle classes of degree zero on each irreducible component and is an extension of an abelian variety by a torus. A torus is a group scheme becoming a product of copies of $\\mathbf G_m$ over a separable closure; an abelian variety is a smooth proper geometrically connected group variety. Formation of $N$ commutes with base change between locally Noetherian schemes and is functorial for family isomorphisms. Let $V\\subseteq S$ be the smooth-family locus. Then $N_V$ is an abelian scheme. For every integer $n\\geq1$ invertible on $S$, the kernel $N[n]$ of multiplication by $n$ is an etale group algebraic space, and, on $V_{\\mathrm{et}}$, the Kummer sequence gives a natural isomorphism\n$$R^1(f_V)_*\\mu_n\\;\\xrightarrow{\\sim}\\;N_V[n].$$\nHere $\\mu_n$ is the etale sheaf of units $z$ with $z^n=1$. Upon choosing a primitive $n$th root in $k$, the map $a\\mapsto\\zeta^a$ identifies $\\underline{\\mathbf Z/n\\mathbf Z}$ with $\\mu_n$. The displayed isomorphism is compatible with base change between locally Noetherian bases and with pullback by isomorphisms of families, using the usual cohomology pullback maps. In particular its geometric stalk at $s$ is the Kummer isomorphism $H^1(X_{\\bar s},\\mu_n)\\simeq\\operatorname{Pic}^0(X_{\\bar s})[n]$. Algebraic spaces, etale cohomology and direct image are [def-trf-algebraic-space], [def-weil-pbc-etale-cohomology] and [def-weil-pbc-direct-image].",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Sections 1.1 and 3.3--3.5, especially the relative Picard object in the proof of Proposition 3.5, printed pp.138--141; Kummer comparison: Stacks etale-cohomology.tex Tag 03PL, Lemma lemma-kummer-sequence, after applying relative direct image. Local Deligne PDF WANTED; primary PDF read online.",
+  "url": "https://numdam.org/item/AST_1985__127__131_0.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sc-invertible-module",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-direct-image",
+  "sk-def-picard-pic"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the stable-family definition: $f$ is flat and of finite presentation with nonempty connected reduced nodal geometric fibres, and is projective in the projective-bundle convention. The projective-bundle properness theorem gives properness. The universal global-sections theorem therefore supplies the canonical isomorphism $\\mathcal O_T\\simeq(f_T)_*\\mathcal O_{X_T}$ for every base change $T\\to S$. In particular $(f_T)_*\\mathbf G_{m,X_T}=\\mathbf G_{m,T}$: a section is a unit precisely when it has an inverse, and the structure-sheaf isomorphism preserves multiplication and $1$.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "lem-trf-projective-bundle-proper",
+    "lem-sc-proper-flat-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Universal structure-sheaf pushforward for proper flat geometrically reduced connected families, as recorded by lem-sc-proper-flat-global-sections; units obtained by taking invertible sections."
+   }
+  },
+  {
+   "text": "Apply relative Picard representability to obtain the smooth quasi-separated locally finitely presented commutative group space $P=\\operatorname{Pic}_{X/S}$. Its functor is the sheafification stated in the item. Let $D\\subseteq P$ be the multidegree-zero subfunctor. The nodal multidegree-locus theorem makes it an open subgroup, quasi-compact and separated over $S$. As an open subspace of smooth $P$, $D$ is smooth and locally of finite presentation; quasi-compactness and separatedness give finite presentation. This constructs $D$ without yet identifying its fibres with the neutral components.",
+   "uses": [
+    "lem-sfb-picard-space-curves-smooth",
+    "sk-def-picard-pic",
+    "lem-sfb-nodal-multidegree-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 2, printed p.135: construction of the open multidegree-zero subspace; representability and smoothness as in Stacks Tags 0D2C and 0DPK."
+   }
+  },
+  {
+   "text": "Fix a geometric fibre $C=X_{\\bar s}$ and its connected dual graph, with vertices $I$ and edges $E$. By the relative Picard base-change theorem, $D_{\\bar s}=D\\times_S\\operatorname{Spec}\\Omega$ is the subfunctor of $\\operatorname{Pic}_{C/\\Omega}$ of classes whose pullback to every normalized component has degree $\\chi(\\nu_Z^*L)-\\chi(\\mathcal O)=0$ on all geometric test fibres; by the degree decomposition of the geometric Picard theorem (degree $=\\chi(L)-\\chi(\\mathcal O)$) this is the inverse image under $\\nu^*$ of $\\prod_i\\operatorname{Pic}^0_{\\widetilde C_i/\\Omega}=\\prod_iJ(\\widetilde C_i)$. The normalization sequence then identifies $D_{\\bar s}$ with the inverse image of $B=\\prod_i J(\\widetilde C_i)$ and gives $D_{\\bar s}\\to B$ as a smooth surjective torsor under $Q=\\operatorname{coker}(\\mathbf G_m^I\\to\\mathbf G_m^E)$. Choose a root vertex and a spanning tree. Starting at the root, rescale the vertex trivializations so that the gluing parameter along every tree edge is $1$. The remaining $|E|-|I|+1$ parameters are free, and changing the common root scalar does not affect them. This identifies $Q$ with $\\mathbf G_m^{|E|-|I|+1}$. Thus the kernel is a split torus and the quotient $B$ is an abelian variety. Both are geometrically connected. A clopen partition of $D_{\\bar s}$ would partition $B$ into two disjoint open subsets: smoothness makes the images open, and connected torsor fibres ensure they are disjoint. Hence $D_{\\bar s}$ is connected. Since it is an open subgroup of $P_{\\bar s}$, its cosets are open and its complement is open; the connected identity component cannot leave it, and its own connectedness gives $D_{\\bar s}=P_{\\bar s}^0$. This proves the claimed fibrewise identity and semiabelian description.",
+   "uses": [
+    "lem-sfb-nodal-normalization-picard-sequence",
+    "lem-pd-picard-base-change",
+    "sk-thm-picard-main"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M, lemma-glue-points, in its fppf normalization-sequence form; the spanning-tree calculation and connectedness argument are written here."
+   }
+  },
+  {
+   "text": "The relative Picard base-change theorem identifies $P\\times_SS'$ with $\\operatorname{Pic}_{X_{S'}/S'}$ for every locally Noetherian base change. Under this identification the multidegree-zero condition is identical: restrictions of a class to geometric fibres and then to their normalized components have the same degrees. Thus $D\\times_SS'$ is exactly the corresponding multidegree-zero subfunctor. Pullback along an isomorphism of families preserves each of those conditions and tensor products, so gives the analogous functorial identification. By the fibre identification of the previous step, $D$ is the relative identity component $N$.",
+   "uses": [
+    "lem-pd-picard-base-change",
+    "lem-sfb-nodal-multidegree-zero-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9L, definition-picard-functor and the base-change observation following it; the multidegree condition is tested on geometric fibres."
+   }
+  },
+  {
+   "text": "Over $V$ the curves are smooth, so the geometric fibres of $N_V$ are the degree-zero Picard varieties of smooth proper connected curves; these are abelian varieties by the geometric Picard theorem. The ample-line-module theorem for stable-curve Picard spaces ensures that $N_V$ is a scheme. It is smooth, separated and of finite presentation by step 2, and its fibres are nonempty connected and proper. The connected-proper-fibres criterion therefore makes $N_V\\to V$ proper. Thus it is an abelian scheme, meaning a proper smooth group scheme with geometrically connected fibres. The empty smooth locus causes no exception.",
+   "uses": [
+    "sk-thm-picard-main",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-connected-proper-fibres-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 1.1 (properness from fibres) and Sections 4.1--4.3 (relative ample line module and scheme representability); geometric Jacobian: Stacks Tag 0BA0."
+   }
+  },
+  {
+   "text": "For an integer $n\\geq1$ invertible on $S$, apply the smooth-commutative-group multiplication theorem to $N$. It gives an etale map $[n]:N\\to N$ and an etale group algebraic space $N[n]$, with the specified fibre-product kernel. On $V$ this is an etale scheme because $N_V$ is a scheme. No claim that $N[n]$ is finite or locally constant across singular fibres is used.",
+   "uses": [
+    "lem-sfb-smooth-group-invertible-multiplication"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Differential argument underlying Tags 0BF5 and 0BFH, generalized by the cited input to smooth group spaces."
+   }
+  },
+  {
+   "text": "For each etale $U\\to V$, the exact Kummer sequence on $X_U$ gives the homomorphism $H^1(X_U,\\mu_n)\\to H^1(X_U,\\mathbf G_m)=\\operatorname{Pic}(X_U)$. Exactness of the cohomology sequence says its image is killed by $n$. Therefore the associated relative Picard class lies in $P_U[n]$ and has degree zero on every geometric component: its integer degree $d$ satisfies $nd=0$, hence $d=0$. By the multidegree criterion it lies in $N_U[n]$. The torsor description of Hilbert 90 shows that the map to Picard classes is pullback-compatible: pulling back $\\operatorname{Isom}(\\mathcal O,L)$ gives $\\operatorname{Isom}(\\mathcal O,u^*L)$. Consequently these maps form a presheaf morphism on $V_{\\mathrm{et}}$. Sheafifying the source by the higher-direct-image presheaf theorem produces a specified map $\\kappa:R^1(f_V)_*\\mu_n\\to N_V[n]$.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "thm-sc-hilbert-90",
+    "lem-sfb-nodal-multidegree-zero-locus",
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence; Tag 03P8, theorem-picard-group; Tag 03Q8, higher-direct-image presheaf description."
+   }
+  },
+  {
+   "text": "At a geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to V$, proper base change for the torsion sheaf $\\mu_n$ identifies the source stalk with $H^1(X_{\\bar s},\\mu_n)$, via the usual restriction map. The stalk theorem for an etale representing scheme identifies the target stalk with $N_{\\bar s}[n](\\Omega)$. The universal structure-sheaf theorem applied to the proper geometrically reduced connected curve $X_{\\bar s}$ gives $\\Gamma(X_{\\bar s},\\mathcal O)^\\times=\\Omega^\\times$. Since $\\Omega$ is algebraically closed, every unit has an $n$th root. Kummer exactness and Hilbert 90 therefore identify $H^1(X_{\\bar s},\\mu_n)$ with $\\operatorname{Pic}(X_{\\bar s})[n]$. The degree decomposition of the smooth-curve Picard scheme puts every $n$-torsion class in degree zero, since $\\mathbf Z$ has no $n$-torsion. Thus this is precisely $N_{\\bar s}[n](\\Omega)$. The map on stalks is this Kummer map, because $\\kappa$ was defined by the same coefficient inclusion and line-bundle pullback. Every geometric stalk is bijective, so geometric stalk detection makes $\\kappa$ an isomorphism of sheaves (and of groups).",
+   "uses": [
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-galois-stalk-representable",
+    "lem-sc-proper-flat-global-sections",
+    "lem-amb-kummer-any-base",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "thm-sc-hilbert-90",
+    "sk-thm-picard-main",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL and Tag 03P8; section-pic-curves, Kummer computation in degree one. Proper base change is used only for the finite invertible-exponent sheaf mu_n."
+   }
+  },
+  {
+   "text": "For any base change $S'\\to S$ between locally Noetherian bases, restrict to the inverse image of $V$. A cohomology class represented on $X_U$ pulls back to its usual cohomology pullback on $X_U\\times_SS'$. The coefficient maps $\\mu_n\\hookrightarrow\\mathbf G_m$ commute with pullback of units, and the cohomology naturality theorem makes the resulting square of $H^1$ maps commute. Under Hilbert 90 its Picard class is the pullback line bundle, as the explicit torsor formula in step 7 shows. The identification of $N$ with the multidegree-zero subfunctor respects precisely that line-bundle pullback. Hence the square with $g^{-1}R^1(f_V)_*\\mu_n\\to R^1(f'_V)_*\\mu_n$ on the left and the base-change identification of $N_V[n]$ on the right commutes after sheafification. The proper-base-change theorem gives the derived exchange isomorphism; the existing cohomology criterion gives its degree-one isomorphism, and the exchange-on-cohomology theorem identifies this with the usual degree-one map. The same calculation for a family isomorphism proves the requested isomorphism-functoriality. In particular the stalk identification in step 8 uses the ordinary cohomology pullback, not a chosen abstract group isomorphism.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "thm-sc-hilbert-90",
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-pd-picard-base-change",
+    "thm-weil-pbc-bounded-below",
+    "sk-thm-iff",
+    "lem-kun-bc-map-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P8, torsor interpretation of Hilbert 90, with the natural Kummer sequence Tag 03PL; naturality of the usual cohomology pullback."
+   }
+  },
+  {
+   "text": "If $S$ is empty, all sheaves on its etale site are uniquely isomorphic and the assertions are immediate. Otherwise choose a point of $S$: the field map from $k$ to its residue field shows that invertibility of $n$ forces $n$ to be prime to $\\operatorname{char}k$. Choose a primitive $n$th root $\\zeta\\in k$ by the primitive-root theorem. The sections $1,\\zeta,\\ldots,\\zeta^{n-1}$ give all roots of $T^n-1$ and are distinct in every geometric fibre; since $n$ is invertible, their pairwise differences are nonzero elements of $k$, hence units on every $k$-scheme. The Chinese remainder decomposition of $\\mathcal O[T]/(T^n-1)$ therefore identifies the roots-of-unity sheaf with the constant cyclic sheaf by $a\\mapsto\\zeta^a$. This formula commutes with pullback. It also covers $n=1$, when both sheaves are the trivial group.",
+   "uses": [
+    "lem-sc-primitive-root"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section-pic-curves, roots-of-unity trivialization following the degree-one Kummer computation; explicit root formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-curve",
+  "lem-trf-projective-bundle-proper",
+  "lem-sc-proper-flat-global-sections",
+  "lem-sfb-picard-space-curves-smooth",
+  "sk-def-picard-pic",
+  "lem-sfb-nodal-multidegree-zero-locus",
+  "lem-sfb-nodal-normalization-picard-sequence",
+  "lem-pd-picard-base-change",
+  "sk-thm-picard-main",
+  "lem-sfb-stable-picard-theta-ampleness",
+  "lem-sfb-connected-proper-fibres-proper",
+  "lem-sfb-smooth-group-invertible-multiplication",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "thm-sc-hilbert-90",
+  "sbc-lem-higher-direct-image-presheaf",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "thm-weil-pbc-bounded-below",
+  "sk-thm-iff",
+  "lem-kun-bc-map-on-cohomology",
+  "lem-sc-primitive-root"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Combination of the Picard construction in Section 2, pp.135--136, Sections 1.1 and 4.1--4.3, and Stacks Kummer exactness 03PL with 03P8; stalk construction and naturality written by N9. Local Deligne PDF WANTED, primary PDF read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a projective flat family of stable nodal curves the identity component of the relative Picard functor is a separated smooth semiabelian algebraic space compatible with base change, and on the smooth locus Kummer identifies its ell torsion with first etale cohomology after choosing roots of unity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Picard\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semiAbelian|relativePicard|picardFunctor|Kummer",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"13\", \"text\": \"# Kummer-Dedekind theorem\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"15\", \"text\": \"This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"29\", \"text\": \"* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"35\", \"text\": \"* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"56\", \"text\": \"kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"45\", \"text\": \"* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"50\", \"text\": \"* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"612\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"622\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"632\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"28\", \"text\": \"This is a special case of the so-called *Kummer's lemma* (see for example [washington_cyclotomic],\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"99\", \"text\": \"This is a special case of the so-called *Kummer's lemma*. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"45\", \"text\": \"  case of Kummer's lemma.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"14\", \"text\": \"# Kummer-Dedekind criterion for the splitting of prime numbers\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"16\", \"text\": \"In this file, we give a specialized version of the Kummer-Dedekind criterion for the case of the\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"54\", \"text\": \"open Polynomial NumberField Ideal KummerDedekind UniqueFactorizationMonoid\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.KummerPolynomial\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"14\", \"text\": \"# Kummer Extensions\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"17\", \"text\": \"Kummer theory is about the classification of finite extensions of `L` whose Galois group is cyclic\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"49\", \"text\": \"TODO: relate Kummer extensions of degree 2 with the class `Algebra.IsQuadraticExtension`.\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"170\", \"text\": \"scoped[KummerExtension] notation3 \\\"K[\\\" n \\\"√\\\" a \\\"]\\\" => AdjoinRoot (Polynomial.X ^ n - Polynomial.C a)\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"172\", \"text\": \"attribute [nolint docBlame] KummerExtension.«termK[_√_]»\"}\n  {\"file\": \"Mathlib/Data/Nat/Multiplicity.lean\", \"line\": \"25\", \"text\": \"* `Nat.Prime.multiplicity_choose`: Kummer's Theorem. The multiplicity of `p` in `n.choose k` is the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative generalized Jacobian of a nodal family with semiabelian fibres, Kummer comparison with R1 of the constant finite coefficient sheaf on smooth fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Jacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \": Type r\", \"doc\": \"The Jacobian of a Weierstrass curve over a given type $ R $ is defined as the Weierstrass curve itself.\"}\n  {\"name\": \"WeierstrassCurve.toJacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"(W : WeierstrassCurve R) : Jacobian R\", \"doc\": \"The function maps a Weierstrass curve $ W $ over a ring $ R $ to its Jacobian, which is defined as $ W $ itself.\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \": PresheafOfModules.{u} (R ⋙ forget₂ _ _)\", \"doc\": \"A presheaf of modules constructed by assigning to each object $X$ in the opposite category the module of Kähler differentials $\\\\Omega_{\\\\phi'(X)/R(X)}$, and to each morphism $f: X \\\\to Y$ the $R(Y)$-lin\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobian.congr_simp\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P P_1 : Algebra.PreSubmersivePresentation R S ι σ), P = P_1 → ∀ [inst_3 : Finite σ], P.jacobian = P_1.jacobian\", \"doc\": \"If two pre-submersive presentations $ P $ and $ P_1 $ of an $ R $-algebra $ S $ are equal, then their Jacobian determinants are equal, provided that the type $ \\\\sigma $ is finite.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Core\", \"type\": \": MvPolynomial ι R₀\", \"doc\": \"The Jacobian determinant of a submersive presentation with coefficients in R₀ is the determinant of the Jacobi matrix derived from the pre-submersive presentation constructed using coefficients in R₀.\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobian\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Submersive\", \"type\": \": S\", \"doc\": \"The Jacobian is defined as the determinant of the differential operator $\\\\partial_i$ acting on relations in the polynomial ring $R[\\\\iota]$, mapped through the canonical algebra homomorphism from $P.\\\\t\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Submersive\", \"type\": \": P.jacobian = P.aevalDifferential.det\", \"doc\": \"The Jacobian determinant of a pre-submersive presentation is equal to the determinant of the linear map defined by evaluating partial derivatives of relations with respect to generators through the al\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Subgroup (Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard scheme of a semistable curve and its prime to characteristic torsion as an etale sheaf, natural under curve isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural Kummer comparison between first etale direct image of roots of unity and invertible torsion in the relative Picard identity component of a stable curve family",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"NumberField.Units.rootsOfUnity_eq_torsion\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K],\\n  rootsOfUnity (NumberField.Units.torsionOrder K) (NumberField.RingOfIntegers K) = NumberField.Units.torsion K\", \"doc\": \"For a number field $K$, the torsion subgroup of the unit group of its ring of integers $\\\\mathcal{O}_K$ is equal to the subgroup of $n$-th roots of unity in $\\\\mathcal{O}_K$, where $n = \\\\#\\\\text{torsion}\"}\n  {\"name\": \"modularCyclotomicCharacter.spec\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ (L : Type u) [inst : CommRing L] [inst_1 : IsDomain L] {n : ℕ} [inst_2 : NeZero n]\\n  (hn : Fintype.card ↥(rootsOfUnity n L) = n) (g : L ≃+* L) {t : Lˣ},\\n  t ∈ rootsOfUnity n L → g ↑t = ↑t ^ (↑((modularCyclotomicCharacter L hn) g)).val\", \"doc\": \"For any automorphism $ g $ of the field $ L $ and any $ n $-th root of unity $ t $ in $ L $, the modular cyclotomic character $ \\\\chi $ satisfies $ g(t) = t^{\\\\chi(g)} $, where $ \\\\chi(g) $ is interprete\"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] {n : ℕ} [hn : Fact (0 < n)],\\n  IsDedekindDomain.selmerGroup.fromUnit.ker = (powMonoidHom n).range\", \"doc\": \"The kernel of the homomorphism from the group of units $ R^\\times $ to the Selmer group $ K^\\times/(K^\\times)^n $ is equal to the subgroup of $ R^\\times $ consisting of all $ n $-th powers of units in $ R\"}\n  {\"name\": \"Ideal.rootsOfUnityMapQuot_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/Basic\", \"type\": \"∀ {K : Type u_1} [inst : Field K] (I : Ideal (NumberField.RingOfIntegers K)) (n : ℕ)\\n  {x : (NumberField.RingOfIntegers K)ˣ} (hx : x ∈ rootsOfUnity n (NumberField.RingOfIntegers K)),\\n  ↑((I.rootsOfUnityMapQuot n) ⟨x, hx⟩) = (Ideal.Quotient.mk I) ↑x\", \"doc\": \"For a number field $ K $ with ring of integers $ \\\\mathcal{O}_K $ and an ideal $ I $, the group homomorphism from the multiplicative group of $ n $-th roots of unity in $ \\\\mathcal{O}_K $ to the unit gr\"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      {K : Type v} →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              {n : ℕ} → [Fact (0 < n)] → Rˣ ⧸ (powMonoidHom n).range →* ↥IsDedekindDomain.selmer\", \"doc\": \"A group homomorphism from the quotient group $ R^\\times/(R^\\times)^n $ to the Selmer group $ K^\\times/(K^\\times)^n $, constructed by lifting through the kernel of the valuation map and using the canonical\"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnit\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      {K : Type v} →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [inst_4 : IsFractionRing R K] → {n : ℕ} → Rˣ →* ↥IsDedekindDomain.selmerGroup\", \"doc\": \"The function maps the group of units $ R^\\times $ of a Dedekind domain $ R $ into the Selmer group $ K^\\times/(K^\\times)^n $ of its fraction field $ K $, where the Selmer group consists of elements with \"}\n  {\"name\": \"modularCyclotomicCharacter'.spec'\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ (L : Type u) [inst : CommRing L] [inst_1 : IsDomain L] (n : ℕ) [inst_2 : NeZero n] (g : L ≃+* L) {t : Lˣ},\\n  t ∈ rootsOfUnity n L → g ↑t = ↑t ^ (↑((modularCyclotomicCharacter' L n) g)).val\", \"doc\": \"For any automorphism $ g $ of the field $ L $ and any $ n $-th root of unity $ t $ in $ L $, the image of $ t $ under $ g $ is equal to $ t $ raised to the power of the modular cyclotomic character ev\"}\n  {\"name\": \"Ideal.rootsOfUnityMapQuot\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/Basic\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    (I : Ideal (NumberField.RingOfIntegers K)) →\\n      (n : ℕ) → ↥(rootsOfUnity n (NumberField.RingOfIntegers K)) →* (NumberField.RingOfIntegers K ⧸ I)ˣ\", \"doc\": \"For a number field $ K $ with ring of integers $ \\\\mathcal{O}_K $ and an ideal $ I $, this is the group homomorphism from the multiplicative group of $ n $-th roots of unity in $ \\\\mathcal{O}_K $ to the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: roots of unity in number fields, Selmer groups and Weierstrass Jacobian coordinates do not state relative Picard representability or the etale Kummer comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Jacobian of a family of nodal curves is semiabelian and its torsion over the smooth locus is first etale cohomology with roots of unity",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Jacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \": Type r\", \"doc\": \"The Jacobian of a Weierstrass curve over a given type $ R $ is defined as the Weierstrass curve itself.\"}\n  {\"name\": \"WeierstrassCurve.toJacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"(W : WeierstrassCurve R) : Jacobian R\", \"doc\": \"The function maps a Weierstrass curve $ W $ over a ring $ R $ to its Jacobian, which is defined as $ W $ itself.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Jacobian R → Type r\", \"doc\": \"Given a commutative ring $ R $ and a Weierstrass curve $ C $ over $ R $, this constructs the type of points on the Jacobian of $ C $, which in this context is the curve $ C $ itself.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Jacobian R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"For any commutative ring $ R $ and any Weierstrass curve over $ R $, a point on the Jacobian (which is the curve itself) is nonsingular if and only if every representative of its equivalence class und\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingularLift_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"[Nontrivial R] : W'.NonsingularLift ⟦![1, 1, 0]⟧\", \"doc\": \"For any nontrivial commutative ring $ R $, the zero element of the Jacobian of a Weierstrass curve, represented by the point class $ [1, 1, 0] $, is nonsingular.\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Free\", \"type\": \"(b : Module.Basis σ S P.toExtension.Cotangent)\\n  (hb : ∀ r, b r = Extension.Cotangent.mk ⟨P.relation r, P.relation_mem_ker r⟩)\\n  (h : Function.Bijective (P.cotangentRestrict P.map_inj)) : IsUnit P.jacobian\", \"doc\": \"Given a pre-submersive presentation $ P $ of an $ R $-algebra $ S $, if the cotangent restriction map $ P.\\text{cotangentRestrict} $ is bijective and the basis $ b $ of the cotangent module satisfies $\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.zero_def\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"[Nontrivial R] : (0 : W'.Point) = ⟨nonsingularLift_zero⟩\", \"doc\": \"For any nontrivial commutative ring $ R $, the zero element in the group of points on the Jacobian of a Weierstrass curve is defined as the equivalence class represented by the nonsingular point $[1, \"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.zero_point\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"[Nontrivial R] : (0 : W'.Point).point = ⟦![1, 1, 0]⟧\", \"doc\": \"For any nontrivial commutative ring $ R $, the zero element in the group of points on the Jacobian of a Weierstrass curve over $ R $ is the equivalence class represented by the nonsingular point $[1, \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: roots of unity in number fields, Selmer groups and Weierstrass Jacobian coordinates do not state relative Picard representability or the etale Kummer comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"Kummer\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: roots of unity in number fields, Selmer groups and Weierstrass Jacobian coordinates do not state relative Picard representability or the etale Kummer comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|relativePicard|semiabelian",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: roots of unity in number fields, Selmer groups and Weierstrass Jacobian coordinates do not state relative Picard representability or the etale Kummer comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-level-versal-branch-freeness",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family.",
+   "via": [
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stable-relative-picard-kummer",
+  "worker": "stage1",
+  "summary": "Constructed the multidegree-zero open subgroup from general relative Picard representability, identified its fibres by the normalization gluing sequence and a spanning tree, checked base change from the functor, established scheme/properness on the smooth locus, and constructed and checked the natural Kummer comparison on geometric stalks. Six statement-only inputs; no Lean changes. Revalidated against the current live unsplit item and all current cited statements: all 34 citation entries still agree, all 18 existing proof-dependency statement fingerprints are unchanged, and the six new ids remain absent from the live DAG.",
+  "blueprint": "Implements the relative Picard input for the level-structure comparison in det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. The inherited blueprint ancestor is null (ancestor command returns None); the exact det-thm-sf-ctf-stability-direct-images proof-(3) route and inherited via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic Projective-bundle morphisms are proper input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-sc-proper-flat-global-sections",
+    "why": "Generic Proper flat geometrically reduced connected fibres have universal structure-sheaf pushforward input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-pd-picard-base-change",
+    "why": "Generic The Picard functor is compatible with base change input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "sk-thm-picard-main",
+    "why": "Generic The Picard scheme and Jacobian of a geometric curve input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic The Kummer sequence on an arbitrary base input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Generic Pullback maps form a morphism of long exact cohomology sequences input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "thm-sc-hilbert-90",
+    "why": "Generic Hilbert 90 for a scheme input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Generic Higher direct image as a sheafified cohomology presheaf input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Generic Finite-coefficient geometric-fiber formula input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-galois-stalk-representable",
+    "why": "Generic Stalk of a representable etale sheaf at a geometric point input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Generic Geometric stalks detect isomorphisms of etale sheaves of sets input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Generic The pullback on etale cohomology is well defined and functorial input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Generic Bounded-below derived proper base change input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "sk-thm-iff",
+    "why": "Generic PBC and injective acyclicity input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-kun-bc-map-on-cohomology",
+    "why": "Generic Cohomology of a derived base-change map input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   },
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Generic Primitive roots of unity input used only for relative Picard/Kummer bookkeeping; the alteration unit has no replacement for this general theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-sc-proper-flat-global-sections",
+  "lem-pd-picard-base-change",
+  "sk-thm-picard-main",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "thm-sc-hilbert-90",
+  "sbc-lem-higher-direct-image-presheaf",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "thm-weil-pbc-bounded-below",
+  "sk-thm-iff",
+  "lem-kun-bc-map-on-cohomology",
+  "lem-sc-primitive-root"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-a890c3782",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-a890c3782 (reviewer sub-agent of L); spot-checked: This is the fourth delivery of this split. Heads ecfa1831, 094f9475 and 6a0bf15f were all reviewed FIX, and each landing was refused because the side completion was not in the live DAG, so each repair was lost. In this head the six new nodes are byte-identical to 6a0bf15f by sha256, and the item differs only in split_report.date and split_report.summary. In clones/live and clones/side-live the item is still unsplit with no proof and no reviewed record, none of the six new ids exists there, and there is no repair note, so the delivery is not superseded. I read the item, all ten steps, the six new nodes and the current statement of every cited node in full; each cited statement supports its use. Global sections hold after any base change. Picard base change holds for any S'→S. Proper base change applies to the finite Z/n-sheaf μ_n. The étale-scheme stalk lemma is used only for N_V[n]. Hilbert 90 is used through its Isom-torsor formula, and sheafification through 03Q8. Mathematics checked: the spanning-tree torus has rank |E|−|I|+1, including loops and the single-vertex case; the torsor is connected; D_s̄ is P^0; Ω^× is n-divisible; the empty base and n=1 are handled. I re-read EGA IV-3 Cor. 15.7.10 at p.247 (locally Noetherian base, separated of finite type, universally submersive, geometrically connected fibres); it proves the proper-fibres criterion for the scheme N_V. Repairs re-applied in fixes/dag/nodes/sec-six-functors-basics: (1) C3, item step 3: D_s̄=(ν^*)^{-1}(∏J_i) now follows from lem-pd-picard-base-change and the deg=χ(L)−χ(O) convention of sk-thm-picard-main; both nodes were already in proof_deps, the union of uses equals proof_deps, and the step is 1739 characters. (2) B5: lem-sfb-connected-proper-fibres-proper source.place gains EGA IV-3 15.7.9/15.7.10, pp.245–247. Batch-5 check: the item serves constructibility of direct images (det-thm-sf-ctf-stability-direct-images, proof (3)), a finiteness input outside both assumptions. Every flagged citation is generic. def-trf-algebraic-space, def-trf-nodal-geometric-fibres, def-trf-projective-bundle-morphism, def-trf-schematically-dense-open and def-pod-ring-scalar-extension are definitions. lem-trf-projective-bundle-proper (projective implies proper) and lem-trf-curve-euler-tensor-generic-rank (χ on a curve) are generic scheme theory. Proper base change reaches Poincaré duality only through lem-pod-lisse-module-sheaves-as-module-objects, a generic comparison, and steps 8–9 use it only for stalks and base change of R^1f_*μ_n. None of these is a step of the trace-formula or Poincaré-duality proofs, so none needs an assumption leaf. Accepted: the 16 generic tool uses. Advisory: the theta-ampleness node and the step-9 exchange citations are stronger than needed, and the Deligne Astérisque 127 PDF is still WANTED locally. Maintainer note: this is the side-completion promotion loop and the FIX has now been lost three times; these repairs must land together with the promotion.; 2 file(s) fixed by the reviewer"
+ }
+}

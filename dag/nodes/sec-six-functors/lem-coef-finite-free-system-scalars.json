@@ -1,0 +1,137 @@
+{
+ "id": "lem-coef-finite-free-system-scalars",
+ "kind": "lemma",
+ "title": "Finite free scalar normalization on the sequence site",
+ "statement": "Fix a prime l, finite extensions E and L of Q_l in universe u+1, and an embedding i:E→L. Use the actual A_n, B_n, levelMap and coefficient systems of [def-coef-finite-free-system-data]. Let d be a natural number and b:Fin d→O_L. Assume for every n the reductions of b give the displayed coordinate bijection A_n^d→B_n. For every scheme X in universe u, ScalarAssertions holds: actual lower and upper semilinear system calculi, normalized scalar model and adjunction, exact ordinary extension computing on every complex, restriction preserving K-injectives, normalization of the coefficient system for all m≥n, levelwise constructibility and Tor amplitude [0,0]. No geometric comparison or compactification coherence is asserted.",
+ "stmt_deps": [
+  "def-coef-finite-free-system-data",
+  "def-coef-semilinear-derived-calculus",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/sk-prop-scalar-six.proof.md",
+  "place": "Finite-free integral coefficient extension follows from finite sums (lines 37--44); specialization of lem-coef-finite-free-system-restriction proof Steps 2--5 to the entire sequence site."
+ },
+ "proof": [
+  {
+   "text": "use semilinearDerivedSections to obtain the lower and upper system calculi.\nThe displayed quotient bases commute with transitions, since the same integral\nsections b are used at every level. They identify the restricted coefficient system\nwith d copies of the lower unit. For every m >= n, ordinary tensor reduction of\nthis presentation is the corresponding presentation at n; its generators are free,\nso it also computes derived reduction. This proves Normalized for the specified\ntransition adjuncts. Each level is a constant finite free module over the finite\nring A_n: the one-stratum constructibility criterion applies, and tensor is a finite\nsum of identity functors, giving Tor amplitude [0,0]. This includes the empty site.\nApply the ordinary sheaf-ring coefficient adjunction on the sequence site and\nfiniteFreeScalarExtension to this free presentation. Restriction is exact and its\ncomposite with extension is d copies of the identity, so extension is exact.\nThe canonical cochain change-of-rings model and derived coefficient adjunction\nsupply ScalarData with the required unit and transpose formulas. Exact extension\ncomputes on every complex, by the uniqueness of its derived functor. Finally the\nexact left scalar adjoint makes restriction preserve K-injectives: maps from an\nacyclic complex to the restriction transpose to maps from its acyclic extension.\nNo choice of unrelated finite-level bases or uniform cohomological bound occurs.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-pur-finite-free-scalar-extension",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-finite-free-scalar-extension",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/sk-prop-scalar-six.proof.md",
+  "place": "Finite-free integral coefficient extension follows from finite sums (lines 37--44); specialization of lem-coef-finite-free-system-restriction proof Steps 2--5 to the entire sequence site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves of modules commutes with derived pushforward and extension by zero",
+   "results": "SheafOfModules.pushforwardSections, PresheafOfModules.restrictScalars and ModuleCat.restrictScalars; no whole-system normalization and coherence assertion.",
+   "date": "2026-10-26",
+   "verdict": "Generic constructions only, not these specialized statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val, restrictScalars_map_val.",
+   "date": "2026-10-26",
+   "verdict": "Restriction is present, but neither scalar normalization nor geometric-generator coherence is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars preserves pullback pushforward extension by zero adjunction mates and compositors for sheaf systems",
+   "results": "SheafOfModules.pullbackComp, pullbackPushforwardAdjunction and unit-section helpers; no simultaneous semilinear system result.",
+   "date": "2026-10-26",
+   "verdict": "Useful general tools, no exact specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg scalarAssertions|geometryCompatibility|Compatibility.*Geometry lean/Sheaf lean/WeilConjectures; rg restrictScalars.*(exact|IsKInjective)|Normalized|torAmplitudeIn Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "Only the assigned module defines the specialized ScalarAssertions and Compatibility. No matching Mathlib scalar-normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "New genuine intermediate steps required."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "finite free system; restriction scalar",
+   "results": "No blueprint nodes match either query. Current scalar-six proof describes finite sums and compatible adjunction maps.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate specialized node found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeSystemRestriction",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Finite-free system restriction proof Steps 2--5 (scalar part) and Steps 6--12 (geometric part); agent expansion of the coefficient comparison.",
+   "via": [
+    "lem-coef-finite-free-system-restriction",
+    "lem-coef-finite-free-compact-composition",
+    "lem-coef-dual-formula-scalar-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeSystemScalars",
+  "file": "lean/Sheaf/Paper/FiniteFreeSystemScalars.lean",
+  "declaration": "WeilConjectures.FiniteFreeSystemRestriction.scalarAssertions_of_reducedBasis",
+  "statement": "theorem scalarAssertions_of_reducedBasis\n    (d : ℕ) (b : Fin d → Padic.coefficientExtensionIntegers l L)\n    (hb : ∀ n : ℕ, Function.Bijective\n      (fun a : Fin d → A l E n ↦ ∑ j,\n        (levelMap l E L i n).hom (a j) *\n          Ideal.Quotient.mk ((Ideal.span {integralScalarIntegerInclusion l E L i\n            (Padic.coefficientExtensionUniformizer l E)}) ^ (n + 1)) (b j)))\n    (X : Scheme.{u}) : Nonempty (ScalarAssertions l E L i X)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4aa84",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261026T023301-L-540319",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4aa84",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261026T023301-L-540319",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteFreeSystemRestriction{,Data,Scalars,Geometry} vs live module (verbatim move except U/compactIso/compactCompositionWord, declared in change record); item proof vs Assertions; sorried lemmas vs original fields; nodes vs live"
+ }
+}

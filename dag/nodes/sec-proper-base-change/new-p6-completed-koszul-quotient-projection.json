@@ -1,0 +1,136 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulTensorQuotientAugmentationExists",
+  "date": "2026-10-27",
+  "group": "P6"
+ },
+ "status": "split",
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.zeroEquiv",
+   "results": "4 hits: exteriorPower.zeroEquiv, exteriorPower.zeroEquiv_naturality, exteriorPower.zeroEquiv_ιMulti, exteriorPower.zeroEquiv_symm_apply",
+   "date": "2026-10-27",
+   "verdict": "generic exterior-degree-zero APIs only; no completed-coefficient specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero exterior Koszul complex augmentation quotient kills differential scalar extension unit isomorphism",
+   "results": "8 hits: exteriorPower.zeroEquiv_symm_apply, ExteriorAlgebra.toTrivSqZeroExt_ι, ModuleCat.exteriorPower.natIso₀, ExteriorAlgebra.ιInv, ModuleCat.exteriorPower.iso₀, ModuleCat.exteriorPower.natIso₁, ModuleCat.exteriorPower.iso₁, ModuleCat.exteriorPower.iso₀_hom_apply",
+   "date": "2026-10-27",
+   "verdict": "generic exterior-degree-zero APIs only; no completed-coefficient specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "completedAdicKoszulUnitZero|koszulBoundary_zero_quotient_formula",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "generic exterior-degree-zero APIs only; no completed-coefficient specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completed Koszul quotient projection residue augmentation kills differential",
+   "results": "8 hits: IsLocalRing.residue; CategoryTheory.ProjectiveResolution.complex_d_comp_π_f_zero; HomologicalComplex.p_fromOpcycles; CategoryTheory.ProjectiveResolution.cokernelCofork; Algebra.Extension.Cotangent.val; derivationQuotKerSq_mk; KaehlerDifferential.fromIdeal; tensorKaehlerQuotKerSqEquiv_tmul_D.",
+   "date": "2026-10-27",
+   "verdict": "No direct completed-Koszul projection theorem; generic projective-resolution and quotient-residue APIs are informative but not applicable without the recorded sheaf construction."
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Strict augmentation argument, order 1248: degree-zero quotient augmentation on the completed exterior Koszul tower.",
+   "via": [
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation",
+    "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+    "new-y2-completed-koszul-tensor-quotient-augmentation-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "new-p6-completed-koszul-quotient-projection",
+ "title": "The normalized completed Koszul degree-zero residue projection kills boundaries",
+ "statement": "Let T be a scheme, A a commutative ring, and d an adic coefficient datum with ideal I [def-weil-pbc-adic-coefficient-datum]. Let r≥0 and a:Fin r→A satisfy span(range a)=I. For each n≥0, let Q_n be the completed scalar extension of the constant exterior Koszul complex on a_i^(n+1), with normalized unit u_n:1→Q_n^0 [def-weil-pbc-intrinsic-koszul-completion, lem-weil-pbc-completed-adic-koszul-unit-chain-map]. Let B_n be the restricted finite quotient module and q_n:1→B_n its recorded quotient unit [def-weil-pbc-koszul-reconstruction-models]. There exists an A_T-linear sheaf map p_n:Q_n^0→B_n such that u_n followed by p_n is q_n and the differential Q_n^(-1)→Q_n^0 followed by p_n is zero.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0623, definition-koszul and definition-koszul-complex, the quotient augmentation; sites-modules.tex, Tag 03DA, lemma-sheafification-presheaf-modules, and Tag 03EK, section-tensor-product."
+ },
+ "proof": [
+  {
+   "text": "Use the canonical zeroth exterior identification and A→A/I^(n+1). On the degree-one boundary the zeroth exterior identification gives the linear combination with coefficients a_i^(n+1). Each coefficient lies in I^(n+1), so the residue of that boundary is zero, including r=0.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map a section of the constant degree-zero module presheaf to the constant finite coefficient section of its residue. The normalization of completedAdicScalar identifies its scalar action with the composite through the completed ring projection. Hence this is a linear presheaf map into the twice restricted quotient module; naturality follows from the finite scalar map. Extend it by the module sheafification adjunction.",
+   "uses": [
+    "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose that sheaf map under the normalized scalar-extension/restriction adjunction. Evaluating on one tensor one gives exactly q_n, by the two adjunction section formulas and the normalization of the Koszul and quotient units. The constant boundary composite is zero by the residue calculation and sheafification uniqueness. Naturality of the scalar-extension adjunction transports that zero composite to the desired completed boundary composite.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-weil-pbc-koszul-reconstruction-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-weil-pbc-koszul-reconstruction-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0623, definition-koszul and definition-koszul-complex, the quotient augmentation; sites-modules.tex, Tag 03DA, lemma-sheafification-presheaf-modules, and Tag 03EK, section-tensor-product."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+  "def-weil-pbc-koszul-reconstruction-models"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulQuotientProjection",
+  "file": "lean/Sheaf/Paper/CompletedKoszulQuotientProjection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulQuotientProjection_exists",
+  "statement": "theorem completedKoszulQuotientProjection_exists\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (n : ℕ) :\n    ∃ p : (completedAdicKoszul T d r a n).X 0 ⟶ completedAdicFiniteModule T d n,\n      completedAdicKoszulUnitZero T d r a n ≫ p = reconstructionQuotientUnit T d n ∧\n      (completedAdicKoszul T d r a n).d (-1) 0 ≫ p = 0",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T054606-L-968321",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T054606-L-968321",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

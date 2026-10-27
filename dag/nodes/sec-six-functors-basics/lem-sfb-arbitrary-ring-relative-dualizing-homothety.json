@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-arbitrary-ring-relative-dualizing-homothety",
+ "kind": "statement",
+ "title": "Algebraic relative dualizing homothety over arbitrary rings",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of arbitrary commutative rings [def-weil-pbc-flat-ring-map], [def-weil-pbc-finitely-presented-algebra]. Put $B=A\\otimes_R A$, $p_1(a)=a\\otimes1$, and give $A$ its $B$-module structure via multiplication. Use the module derived categories [def-weil-abstract-derived-category], derived scalar extension and diagonal object [def-trf-affine-diagonal-module-data], and derived Hom [def-pur-derived-internal-hom] on the one-object ringed site. For $T\\in D(A)$ put $T_1=T\\otimes^{\\mathbf L}_{A,p_1}B$. Say $T$ is $R$-perfect if it is pseudo-coherent over $A$ [def-pc-ring-pseudo-coherent-complex] and has finite Tor amplitude over $R$: there are integers $a\\le b$ with $H^i(T\\otimes_R^{\\mathbf L}Q)=0$ for all $R$-modules $Q$ and $i\\notin[a,b]$. If $M\\in D(A)$ is $R$-perfect and $R\\operatorname{Hom}_B(A,M_1)\\cong A[0]$ in $D(B)$, the scalar-action map $A[0]\\to R\\operatorname{Hom}_A(M,M)$ (the transpose of the unit action) is an isomorphism in $D(A)$. Consequently scalar multiplication identifies $A$ with $\\operatorname{End}_{D(A)}(M)$ as a ring, identifies $A^\\times$ with $\\operatorname{Aut}_{D(A)}(M)$, and $\\operatorname{Hom}_{D(A)}(M,M[i])=0$ for every $i<0$. No Noetherian or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0E2G, lemma-relative-dualizing-RHom; Definition 0E2C, definition-relative-dualizing-complex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pur-derived-internal-hom",
+  "def-trf-affine-diagonal-module-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-flat-subring-model-system] to $R\\to A$, then start at its flat stage. Obtain a small directed tail of finitely generated integer subalgebras $R_i\\subset R$, a flat finitely presented $R_0\\to A_0$, and $A_i=A_0\\otimes_{R_0}R_i$, $A=A_0\\otimes_{R_0}R$. The identifications are compatible with all transition maps. The integers are a PID: in a nonzero ideal choose its least positive integer and use division with remainder to show it generates the ideal; the zero ideal is principal as well. Thus [lem-weil-pbc-pid-noetherian-normal] makes $\\mathbf Z$ Noetherian, and [lem-weil-pbc-finite-type-algebra-noetherian] makes every $R_i$ and $A_i$ Noetherian. No injectivity of $A_i\\to A$ is claimed.",
+   "uses": [
+    "lem-trf-flat-subring-model-system",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2G, lemma-relative-dualizing-RHom, proof; Noetherian reduction and filtered continuity. Consequences by scalar action and shifted Hom."
+   }
+  },
+  {
+   "text": "Choose a polynomial presentation $P_0=R_0[x_1,\\ldots,x_n]\\twoheadrightarrow A_0$ (finite presentation includes finite generation), and put $C_0=R\\operatorname{Hom}_{P_0}(A_0,P_0)[n]$ with the coinduction action. By [lem-trf-algebraic-diagonal-class-normalization], $C_0$ is $R_0$-perfect and $R\\operatorname{Hom}_{A_0\\otimes_{R_0}A_0}(A_0,(C_0)_1)\\cong A_0$. On the one-object ringed site sections are the identity exact functor, so [lem-pur-rhom-global-sections] identifies degree zero of this isomorphism with the diagonal Hom module. Choose the inverse image $\\gamma_0$ of $1$ under an $A_0$-linear identification of that module with $A_0$. It generates the diagonal Hom module. For every $i$ and also over $R$, apply [lem-sfb-algebraic-diagonal-generator-base-change] to $C_0,\\gamma_0$. With $C_i=C_0\\otimes_{A_0}^{\\mathbf L}A_i$ and $C=C_0\\otimes_{A_0}^{\\mathbf L}A$, it gives the diagonal-Hom condition and generators $\\gamma_i,\\gamma$. The maps $R_0\\to R_i$ and $R_0\\to R$ need not be flat.",
+   "uses": [
+    "lem-trf-algebraic-diagonal-class-normalization",
+    "lem-pur-rhom-global-sections",
+    "lem-sfb-algebraic-diagonal-generator-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2G, lemma-relative-dualizing-RHom, proof; Noetherian reduction and filtered continuity. Consequences by scalar action and shifted Hom."
+   }
+  },
+  {
+   "text": "The objects $C_i$ and $C$ are relatively perfect. Here is the full translation needed to apply the existing scheme base-change theorem. Under [lem-pc-affine-qcoh-derived-equivalence] let $E_0=\\widetilde C_0$ on $\\operatorname{Spec}A_0$. It is pseudo-coherent by [lem-pc-affine-pseudo-coherent-criterion] and has locally finite Tor dimension over $\\operatorname{Spec}R_0$ by [lem-trf-affine-relative-tor-amplitude-criterion]. Apply [lem-sfb-scheme-relative-perfect-base-change] along $\\operatorname{Spec}R_i\\to\\operatorname{Spec}R_0$ and along $\\operatorname{Spec}R\\to\\operatorname{Spec}R_0$: the original structure morphism is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine], and locally finitely presented by [def-sbc-locally-finite-presentation], using the given global affine presentation as the neighbourhood at every point. By [lem-weil-pbc-fibre-product-affine-spectra] the fibre products are $\\operatorname{Spec}A_i$ and $\\operatorname{Spec}A$, with first projection induced by $A_0\\to A_i$, $A_0\\to A$; then by [lem-pc-affine-derived-pullback-tensor-tilde] the outputs are $\\widetilde C_i$ and $\\widetilde C$. Applying the same two affine criteria in reverse gives pseudo-coherence and finite base-ring Tor amplitude for each. In particular no global amplitude bound for a non-quasi-compact scheme is being inferred. Each scheme here is affine, precisely the hypothesis of the Tor criterion.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-sfb-scheme-relative-perfect-base-change",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2G, lemma-relative-dualizing-RHom, proof; Noetherian reduction and filtered continuity. Consequences by scalar action and shifted Hom."
+   }
+  },
+  {
+   "text": "Over each Noetherian pair $R_i\\to A_i$, the generator $\\gamma_i$ from step 2 makes multiplication $A_i\\to R\\operatorname{Hom}_{A_i\\otimes_{R_i}A_i}(A_i,(C_i)_1)$ an isomorphism: the target has only degree-zero cohomology, freely generated by $\\gamma_i$, so that map is an isomorphism on every cohomology group. The derived-category localization at quasi-isomorphisms gives the asserted isomorphism. Apply [lem-trf-algebraic-diagonal-class-normalization] with $M=N=C_i$ and $\\gamma=\\theta=\\gamma_i$. Its hypotheses are step 3 and the preceding multiplication isomorphism. Its conclusion gives the actual scalar map $h_i:A_i\\to R\\operatorname{Hom}_{A_i}(C_i,C_i)$ as an isomorphism.",
+   "uses": [
+    "lem-trf-algebraic-diagonal-class-normalization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2G, lemma-relative-dualizing-RHom, proof; Noetherian reduction and filtered continuity. Consequences by scalar action and shifted Hom."
+   }
+  },
+  {
+   "text": "Fix $q\\in\\mathbf Z$. Apply [lem-sfb-relative-perfect-hom-filtered-colimit] with $K_0=C_0$, $L_0=C_0[q]$: $C_0$ is pseudo-coherent and its finite $R_0$-Tor interval shifts by $-q$. It gives\n$$\\operatorname{Hom}_{D(A)}(C,C[q])=\\varinjlim_i\\operatorname{Hom}_{D(A_i)}(C_i,C_i[q]).$$\nBy [lem-pur-rhom-global-sections] and the shift convention of [def-sc-module-total-hom-complex], the groups on the right are $H^qR\\operatorname{Hom}_{A_i}(C_i,C_i)$, hence are $A_i$ for $q=0$ and zero otherwise, by step 4. These identifications respect the transition maps: derived extension takes $a\\,1_{C_i}$ to its image scalar times $1_{C_j}$, since tensoring sends $a(z)\\otimes t$ to $z\\otimes at$. Thus the degree-zero map is exactly $a\\mapsto a\\,1_C$ and identifies the colimit with $A$; for $q\\ne0$ the groups vanish. The same Hom/cohomology identification shows that the actual transpose $h_C:A\\to R\\operatorname{Hom}_A(C,C)$ is an isomorphism on every cohomology group, so is an isomorphism in the derived category [def-weil-abstract-derived-category]. This does not assert arbitrary base change of the whole unbounded Hom complex.",
+   "uses": [
+    "lem-sfb-relative-perfect-hom-filtered-colimit",
+    "lem-pur-rhom-global-sections",
+    "def-sc-module-total-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2G, lemma-relative-dualizing-RHom, proof; Noetherian reduction and filtered continuity. Consequences by scalar action and shifted Hom."
+   }
+  },
+  {
+   "text": "Both $C$ and the supplied $M$ are $R$-perfect and satisfy the diagonal-Hom condition, by steps 2--3 and the hypotheses. Therefore [lem-sfb-arbitrary-ring-relative-dualizing-isomorphism] gives an $A$-linear isomorphism $u:M\\xrightarrow{\\sim}C$. Conjugation gives an isomorphism $R\\operatorname{Hom}_A(M,M)\\to R\\operatorname{Hom}_A(C,C)$ by the two-variable functor [def-pur-derived-internal-hom]. It sends $h_M$ to $h_C$: for any scalar $a$, $u(a m)=a u(m)$, and equivalently the transposes agree by the naturality of the unit action. Thus $h_M$ is an isomorphism. No preservation of the chosen diagonal generator by $u$ is needed.",
+   "uses": [
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2G, lemma-relative-dualizing-RHom, proof; Noetherian reduction and filtered continuity. Consequences by scalar action and shifted Hom."
+   }
+  },
+  {
+   "text": "By [lem-pur-rhom-global-sections] and the Hom shift formula of [def-sc-module-total-hom-complex], $\\operatorname{Hom}_{D(A)}(M,M[q])\\cong H^qR\\operatorname{Hom}_A(M,M)$. The isomorphism $h_M$ identifies these with $H^q(A[0])$. For $q<0$ this is zero. For $q=0$ the resulting bijection is scalar multiplication $A\\to\\operatorname{End}(M)$; it preserves sums, products and $1$ since $(a\\,1_M)(b\\,1_M)=ab\\,1_M$. Its units are precisely the invertible endomorphisms, so it also identifies $A^\\times$ with $\\operatorname{Aut}(M)$. If $A=0$, the derived category has only its zero object; these assertions include its one-element endomorphism ring and automorphism group.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2G, lemma-relative-dualizing-RHom, proof; Noetherian reduction and filtered continuity. Consequences by scalar action and shifted Hom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pur-rhom-global-sections",
+  "lem-sfb-algebraic-diagonal-generator-base-change",
+  "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+  "lem-sfb-relative-perfect-hom-filtered-colimit",
+  "lem-sfb-scheme-relative-perfect-base-change",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-trf-algebraic-diagonal-class-normalization",
+  "lem-trf-flat-subring-model-system",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-pid-noetherian-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0E2G, lemma-relative-dualizing-RHom, proof; Noetherian reduction and filtered continuity. Consequences by scalar action and shifted Hom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing complexes for flat finitely presented algebras over arbitrary rings have scalar derived endomorphisms and are isomorphic",
+   "results": "8 hits: IsBaseChange.toDualBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.Extension.tensorH1Cotangent, Module.Flat.iff_characterModule_injective, Module.Flat.iff_characterModule_baer, KaehlerDifferential.endEquiv, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, Module.Flat.self; digest=e4728ce990b04cae; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|RelativeDualizing|dualizing.*[Uu]niq|[Hh]omothety",
+   "results": "25 hits: Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean; digest=b85b881582a7b804; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complexes for flat finitely presented algebras are unique and their derived endomorphisms are scalars",
+   "results": "8 hits: RingHom.Flat, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, RingHom.FaithfullyFlat, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, DualNumber.algHom_ext, Algebra.Smooth.flat, Module.flat_iff_of_isLocalization, RingHom.flat_algebraMap_iff; digest=27be7af85051a484; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semidualizing complex of a flat finitely presented algebra is unique up to isomorphism and its derived endomorphism ring is the algebra",
+   "results": "8 hits: IsAzumaya, IsAzumaya.id, IsMoritaEquivalent.refl, IsAzumaya.toProjective, IsMoritaEquivalent, Algebra.formallySmooth_iff, Algebra.FormallySmooth.iff_subsingleton_and_projective, Module.free_of_flat_of_isLocalRing; digest=a19ebebbc5cd07e9; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?dualiz|semidualiz|homothety",
+   "results": "25 hits; top=['Mathlib/Topology/Algebra/Affine.lean', 'Mathlib/Topology/Algebra/Affine.lean', 'Mathlib/Topology/Algebra/Affine.lean', 'Mathlib/Topology/Algebra/Affine.lean', 'Mathlib/Topology/Algebra/Affine.lean', 'Mathlib/Geometry/Euclidean/Incenter.lean', 'Mathlib/Geometry/Euclidean/Inversion/Basic.lean', 'Mathlib/Geometry/Euclidean/Inversion/Basic.lean']; note=; digest=4228014d06a51a02",
+   "date": "2026-10-23",
+   "verdict": "no match: returned underived scalar action, flatness, differentials, projective dimension or affine homotheties; none states the relative-dualizing homothety theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar action on a relative dualizing complex is an isomorphism with its derived endomorphism complex",
+   "results": "8 hits; top=['DomAddAct.symm_mk_nsmul', 'AddMonoid.End.isCentralScalar', \"OrderDual.instSMul'\", 'LinearMap.IsPerfPair.dualEval', 'ModuleCat.smulShortComplex_f', 'LinearMap.instIsCentralScalar', \"Module.End.instSMulCommClass'\", 'Module.End.apply_isScalarTower']; note=; digest=50a62fb21b28f25e",
+   "date": "2026-10-23",
+   "verdict": "no match: returned underived scalar action, flatness, differentials, projective dimension or affine homotheties; none states the relative-dualizing homothety theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: returned underived scalar action, flatness, differentials, projective dimension or affine homotheties; none states the relative-dualizing homothety theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing complex of a flat finitely presented algebra over arbitrary commutative rings has derived endomorphisms given by scalar multiplication",
+   "results": "8 hits; top=['KaehlerDifferential.endEquiv', 'KaehlerDifferential.endEquivAuxEquiv', 'Algebra.FormallyUnramified.sec', 'Algebra.FormallyUnramified.comp_sec', 'IsAzumaya.tensorEquivEnd', 'CommRing.Pic.mapAlgebra', 'CommRing.Pic.mapAlgebra_apply', 'FGModuleCat.FGModuleCatEvaluation']; note=; digest=6b9f5136c7c3819e",
+   "date": "2026-10-23",
+   "verdict": "no match: returned underived scalar action, flatness, differentials, projective dimension or affine homotheties; none states the relative-dualizing homothety theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semidualizing complex over a commutative algebra has no higher self Ext and its endomorphism ring is the algebra",
+   "results": "8 hits; top=[\"CategoryTheory.HasProjectiveDimensionLT.mk'\", 'isZero_Ext_succ_of_projective', \"CategoryTheory.HasInjectiveDimensionLT.mk'\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", 'CategoryTheory.HasProjectiveDimensionLT.subsingleton', 'CategoryTheory.hasProjectiveDimensionLT_iff', 'CategoryTheory.HasProjectiveDimensionLT.mk']; note=; digest=3f7dde95fea5ff48",
+   "date": "2026-10-23",
+   "verdict": "no match: returned underived scalar action, flatness, differentials, projective dimension or affine homotheties; none states the relative-dualizing homothety theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-dualizing-pair-open-rigidity",
+  "date": "2026-10-23",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine scalar endomorphisms and negative Ext input, before sheaf localization.",
+   "via": [
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-arbitrary-ring-relative-dualizing-homothety",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0E2G and its Noetherian/continuity route. Reused arbitrary-ring uniqueness, diagonal base change, Noetherian normalization and affine relative-perfect tools; added only general shifted Hom continuity (0DHX(2)). Wrote the scalar-map compatibility and all ring/unit/negative-Ext consequences. No statement change, no Lean writes or builds.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the inherited alteration/moduli prerequisite chain: affine homothety in supplied coherent relative-dualizing pair rigidity. The current latest blueprint direct-image step and unit route are unchanged; this item is a subordinate algebraic tool, not the unit key node. The inherited ancestor lookup returns null; the existing provenance chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine or coherent-derived algebra tool used with exactly its stated hypotheses in the Stacks 0E2G reduction; it supplies the identification of affine pullback with derived scalar extension. This generic tool does not replace the unit direct-image/alteration route."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine or coherent-derived algebra tool used with exactly its stated hypotheses in the Stacks 0E2G reduction; it supplies both directions of affine pseudo-coherence. This generic tool does not replace the unit direct-image/alteration route."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine or coherent-derived algebra tool used with exactly its stated hypotheses in the Stacks 0E2G reduction; it supplies the affine module/sheaf derived equivalence. This generic tool does not replace the unit direct-image/alteration route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic affine or coherent-derived algebra tool used with exactly its stated hypotheses in the Stacks 0E2G reduction; it supplies derived Hom as cohomology on the one-object ringed site. This generic tool does not replace the unit direct-image/alteration route."
+   },
+   {
+    "node": "lem-trf-affine-relative-tor-amplitude-criterion",
+    "why": "Generic affine or coherent-derived algebra tool used with exactly its stated hypotheses in the Stacks 0E2G reduction; it supplies both directions of affine relative Tor amplitude, including its local-to-global clause. This generic tool does not replace the unit direct-image/alteration route."
+   },
+   {
+    "node": "lem-trf-algebraic-diagonal-class-normalization",
+    "why": "Generic affine or coherent-derived algebra tool used with exactly its stated hypotheses in the Stacks 0E2G reduction; it supplies the Noetherian polynomial complex and homothety. This generic tool does not replace the unit direct-image/alteration route."
+   },
+   {
+    "node": "lem-trf-flat-subring-model-system",
+    "why": "Generic affine or coherent-derived algebra tool used with exactly its stated hypotheses in the Stacks 0E2G reduction; it supplies compatible flat integer-subalgebra models. This generic tool does not replace the unit direct-image/alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pur-rhom-global-sections",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-trf-algebraic-diagonal-class-normalization",
+  "lem-trf-flat-subring-model-system"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-ce280bd74",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-ce280bd74 (reviewer sub-agent of L); spot-checked: I read all of it: Stacks 0E2G and its proof, 0DHX(2) with 0E1U, the 7 item steps, the new node and every cited statement. This is a first split; the item statement and stmt_deps match the base exactly. Live has the item unsplit and no parallel split. No SGA, no cycles. The route follows the 0E2G proof: step 1 builds a 05FE model over Noetherian finite-type Z-subalgebras (the PID argument is written, R_i and A_i are Noetherian); step 2 takes the 0BZW coinduction complex C_0 and generator, and 0E2F base change; step 3 gets relative perfection through 0DI5 and the affine pseudo-coherence and Tor criteria; step 4 is the Noetherian homothety, after showing the generator is a basis so multiplication is a quasi-isomorphism; step 5 uses the new 0DHX(2) node for every shift q, with the scalar transition maps written out; step 6 transports to M by 0E2D uniqueness and conjugation; step 7 is elementary. The new node lem-sfb-relative-perfect-hom-filtered-colimit states 0DHX(2) exactly. It is self-contained, statement-only and true on the small cases (singleton index, zero objects, K=A[m], nonflat transitions). It is not a duplicate: the lem-pc perfect-hom colimit nodes are about algebra-perfect complexes and Q38's node is flat Noetherian base change. When it is split, it should cite the existing 0E1U node lem-sfb-relative-rhom-finite-flat-base-change-model. Batch-5: the closure of each flagged citation reaches only generic trf lem/def algebra tools (05FE, 0BZW/0E2D/0E2F, 0DHY, 0DI5, the derived scalar-extension definition). None reaches a trace-formula or Poincaré theorem, an nt-assume leaf or sk-thm-trace-transport. Étale trace formula and Poincaré duality do not give these algebraic relative-dualizing facts, so all are accepted. FIX (C1): step 3 identified X×_S S' with Spec A_i without citing the existing Mathlib leaf for it. I added lem-weil-pbc-fibre-product-affine-spectra to the step 3 text, its uses and proof_deps in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-arbitrary-ring-relative-dualizing-homothety.json. The tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ArbitraryRingRelativeDualizingHomothety",
+  "declaration": "AlgebraicGeometry.arbitraryRing_relativeDualizing_homothety",
+  "file": "lean/Sheaf/RingTheory/ArbitraryRingRelativeDualizingHomothety.lean",
+  "statement": "theorem arbitraryRing_relativeDualizing_homothety (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (_hflat : (algebraMap R A).Flat) [Algebra.FinitePresentation R A] (M : DerivedCategory (ModuleCat.{u} A)) (_hpc : DerivedCategory.IsPseudoCoherent M) (_hTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj M) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj Q))) (_hdiag : Nonempty ((ordinaryModuleDerivedInternalHom (A ⊗[R] A)).obj (op (relativeDualizingModuleDiagonal R A), (relativeDualizingDerivedExtension (Algebra.TensorProduct.includeLeft : A →ₐ[R] A ⊗[R] A).toRingHom).obj M) ≅ relativeDualizingModuleDiagonal R A)) : IsIso (MonoidalClosed.curry' (𝟙 M)) ∧ (∃ e : A ≃+* End M, ∀ a : A, e a = a • 𝟙 M) ∧ (∃ e : Aˣ ≃* Aut M, ∀ a : Aˣ, (e a).hom = (a : A) • 𝟙 M) ∧ ∀ i : ℤ, i < 0 → Subsingleton (M ⟶ M⟦i⟧)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05fe73dd2",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Item record differs from live only in lean; lean.statement verbatim; one theorem, by sorry, docstrings with 0E2C/0E2G source + blueprint + all 7 steps. Clause check vs node and Stacks 0E2C/0E2G: RingHom.Flat, Algebra.FinitePresentation, B = A⊗[R]A with includeLeft, diagonal = relativeDualizingModuleDiagonal, M₁ = relativeDualizingDerivedExtension (K-flat), IsPseudoCoherent, relative Tor amplitude ∃a≤b ∀Q ∀i∉[a,b] IsZero H^i(res M ⊗ Q[0]), unnormalized Nonempty diagonal-Hom iso; conclusions: IsIso curry'(𝟙 M) (transpose of right unitor, unit A[0], target = ordinaryModuleDerivedInternalHom by abbrev), A≃+*End M and Aˣ≃*Aut M pinned to a•𝟙, Subsingleton(M⟶M⟦i⟧) for i<0. No extra hypotheses; shared universe u matches the diagonal dependency's convention; A=0, R=A, a=b covered. No new defs, no hollow defs. Not recompiled (no change). Advisory: second reading is a self-check by the worker; AlgebraicDiagonalGeneratorBaseChange module recorded since base is not imported (proof stage only)."
+ }
+}

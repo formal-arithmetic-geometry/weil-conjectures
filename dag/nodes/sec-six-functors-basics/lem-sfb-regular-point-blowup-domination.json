@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-regular-point-blowup-domination",
+ "kind": "statement",
+ "title": "Domination by point blowups at regular surface points",
+ "statement": "Let $X$ be a Noetherian scheme (locally Noetherian [pqf-def-locnoeth] and quasi-compact, meaning every open cover has a finite subcover). Let $T\\subseteq X$ be a finite set of closed points such that $\\mathcal O_{X,t}$ is a regular local ring of Krull dimension $2$ for every $t\\in T$ [def-weil-regular-scheme, def-weil-pbc-krull-dimension-ring]. Let $f:Y\\to X$ be a proper morphism [def-weil-proper-morphism] whose restriction over $X\\setminus T$ is an isomorphism. There exist $n\\geq0$, a sequence $X_n\\xrightarrow{b_n}\\cdots\\xrightarrow{b_1}X_0=X$, and a morphism $h:X_n\\to Y$ such that $f\\circ h=b_1\\circ\\cdots\\circ b_n$. Each $b_{i+1}:X_{i+1}\\to X_i$ is the blowup [def-nagata-global-blowup] in the reduced closed subscheme consisting of a single closed point $p_i\\in X_i$ whose image in $X$ lies in $T$. The empty sequence is permitted.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AHI, resolve-lemma-dominate-by-blowing-up-in-points."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-proper-morphism",
+  "def-nagata-global-blowup",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=X\\setminus T$. It is open because $T$ is a finite union of closed points. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], $U$ is quasi-compact; by [lem-weil-pbc-locally-noetherian-quasi-separated], $X$ is quasi-separated. Together with the assumed quasi-compactness of $X$, these are the base and open hypotheses for elimination of indeterminacy.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHI, first sentence of the proof, checking the hypotheses of flat.tex Tag 081T; properties.tex Tags 01OW, 01OY and 01OZ."
+   }
+  },
+  {
+   "text": "Properness of $f$ includes separatedness and finite type by [def-weil-proper-morphism], and $Y\\times_XU\\to U$ is an isomorphism by hypothesis. Apply [sk-lem-nagata-sketch-elimination] with base $X$, open $U$ and morphism $f$. It gives a $U$-admissible blowup $b:B\\to X$ such that the strict-transform map $g:Y^{\\mathrm{st}}\\to B$ is an open immersion and $b^{-1}(U)$ is schematically dense in $B$. Unpack [def-nagata-admissible-blowup]: there is a finite-type quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_X$, with $\\mathcal I|_U=\\mathcal O_U$, and an identification $B\\cong\\operatorname{Bl}_{\\mathcal I}(X)$ over $X$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "sk-lem-nagata-sketch-elimination",
+    "def-nagata-admissible-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHI, first sentence; flat.tex Tags 081T (lemma-dominate-modification-by-blowup) and 081S (lemma-zariski-after-blowup), with the preliminary dense-open blowup included."
+   }
+  },
+  {
+   "text": "Use [def-nagata-strict-transform] relative to the open $U$ as in its main-20261015 statement: take the closure of the open over $U$, rather than changing $U$ to the complement of a chosen center. By [def-nagata-scheme-theoretic-closure], $Y^{\\mathrm{st}}$ is a closed subscheme of $Y\\times_XB$. The projection $Y\\times_XB\\to B$ is proper by [lem-weil-pbc-proper-base-change]. Clause (b) of [lem-weil-pbc-closed-immersion-proper] makes its composite $g$ proper. In particular $g$ is a closed map by [def-weil-proper-morphism], so its image is closed. That image contains $b^{-1}(U)$: the open over $U$ used to form the strict transform maps isomorphically onto $b^{-1}(U)$ because $f$ is an isomorphism there. Its complement must be empty. Indeed, on an open $V$ disjoint from $b^{-1}(U)$, schematic density makes $\\mathcal O_B|_V\\to0$ injective, forcing every local ring on $V$ to be zero, so $V=\\varnothing$. Thus $g$ is surjective. By [def-weil-open-immersion], an open immersion identifies its source with its open image, hence $g$ is an isomorphism. Compose $g^{-1}:B\\to Y^{\\mathrm{st}}$ with $Y^{\\mathrm{st}}\\to Y\\times_XB\\to Y$ to obtain $q:B\\to Y$. The fibre-product square gives $f\\circ q=b$.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "def-nagata-scheme-theoretic-closure",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHI, reduction to an ideal blowup; flat.tex Tag 081T, last two sentences, including the details omitted there; morphisms.tex Tags 01W4 and 01W5."
+   }
+  },
+  {
+   "text": "For $x\\notin T$, the equality $\\mathcal I|_U=\\mathcal O_U$ says $(\\mathcal O_X/\\mathcal I)_x=0$. Hence $\\operatorname{Supp}(\\mathcal O_X/\\mathcal I)\\subseteq T$. Apply [lem-sfb-surface-point-ideal-principalization] to $(X,T,\\mathcal I)$: its Noetherian, finite-closed-set and regular-local dimension-two hypotheses are exactly those of the item, and its ideal hypothesis is supplied by Step 2. It gives a finite tower $X_n\\to\\cdots\\to X_0=X$ of blowups at single reduced closed points mapping into $T$, and $\\mathcal I\\mathcal O_{X_n}$ is an effective Cartier ideal and in particular invertible. Write $t:X_n\\to X$ for the composite.",
+   "uses": [
+    "lem-sfb-surface-point-ideal-principalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHI, second paragraph, applying Tag 0AHH (lemma-make-ideal-principal)."
+   }
+  },
+  {
+   "text": "By [def-nagata-extended-ideal], $\\mathcal I\\mathcal O_{X_n}$ is the ideal of the inverse image on $X_n$ of the center $V(\\mathcal I)$. Step 4 makes it effective Cartier and invertible. Apply the final-object assertion of [thm-nagata-blowup-universal-property] (with the data spelled out in its main-20261015 blueprint statement) to $t:X_n\\to X$ and $\\mathcal I$. It supplies an $X$-morphism $a:X_n\\to\\operatorname{Bl}_{\\mathcal I}(X)=B$, so $b\\circ a=t$. Set $h=q\\circ a$. Then $f\\circ h=(f\\circ q)\\circ a=b\\circ a=t$. The centers and their images in $T$ are precisely those furnished in Step 4. The construction allows the length-zero tower; when $T=\\varnothing$, one may take $n=0$ and $h=f^{-1}$.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHI, final paragraph; divisors.tex Tag 0806 (lemma-universal-property-blowing-up)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-extended-ideal",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-strict-transform",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-sfb-surface-point-ideal-principalization",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proper-base-change",
+  "sk-lem-nagata-sketch-elimination",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AHI, resolve-lemma-dominate-by-blowing-up-in-points; expands the domination reduction via flat.tex 081T/081S and finishes with resolve.tex 0AHH and divisors.tex 0806."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|Blowup",
+   "results": "Retained searches.jsonl: OK 6 hits; Mathlib/Algebra/HierarchyDesign.lean, Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean, Mathlib/Tactic/ITauto.lean, Mathlib/Tactic/Linarith/Frontend.lean, Mathlib/Tactic/GRewrite/Core.lean, Mathlib/RingTheory/ReesAlgebra.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the retained results do not construct a finite tower of blowups at closed surface points dominating the given proper morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Domination of a proper modification of a regular surface by a finite tower of blowups in closed points",
+   "results": "Retained searches.jsonl: OK 8 hits; AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsDominant, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsDominant.comp_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the retained results do not construct a finite tower of blowups at closed surface points dominating the given proper morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "Retained searches.jsonl: OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the retained results do not construct a finite tower of blowups at closed surface points dominating the given proper morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism that is an isomorphism outside finitely many regular local dimension two points is dominated by successive blowups at closed points",
+   "results": "Retained searches.jsonl: OK 8 hits; AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.RationalMap.exists_rep",
+   "date": "2026-10-22",
+   "verdict": "no match: the retained results do not construct a finite tower of blowups at closed surface points dominating the given proper morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Principalization of an ideal supported at finitely many regular surface points by blowing up points",
+   "results": "Retained searches.jsonl: OK 8 hits; Ideal.finite_mulSupport_coe, Ideal.finite_mulSupport_inv, Ideal.finite_mulSupport, IsDedekindDomain.exists_forall_sub_mem_ideal, Ideal.exist_integer_multiples_notMem, FractionalIdeal.isPrincipal.of_finite_maximals_of_inv, FractionalIdeal.finite_factors, FractionalIdeal.finprod_heightOneSpectrum_factorization_principal",
+   "date": "2026-10-22",
+   "verdict": "no match: the retained results do not construct a finite tower of blowups at closed surface points dominating the given proper morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 6: dominate the reduced graph modification of the regular nodal resolution by finitely many blowups of closed surface points.",
+   "via": [
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-point-blowup-domination",
+  "worker": "Q09",
+  "summary": "Rebased the retained promotion-return repair onto the current live DAG on 2026-10-23 through the mandatory delivery tool; the first dry run exited 0 at e912930864f. The live item remains unsplit, with identical statement, statement dependencies and ancestry; retain the substantive five-step Stacks 0AHI proof and one statement-only 0AHH prerequisite. Re-read every cited statement and current blueprint update: elimination supplies the admissible ideal and dense open, the proper open strict transform relative to the original U is an isomorphism, and principalization supplies the effective Cartier extended ideal for the universal lift. Verified all 14 literal citation pairs and exact proof-dependency union. Re-read Stacks 0AHH/0AHI, 081S/081T and 0806, the new prerequisite definition dependencies and all nine logged searches. No mathematical hypothesis or route change is required; no dropped node is used as a dependency. One new unsplit node, no Mathlib leaves. Final dry run and push use the freshly fetched live baseline, without relying on the unpromoted side completion.",
+  "blueprint": "Realizes the inherited de Jong Lemma 3.13 rational-exceptional-curve input, Step 6 of nodal-trait rational domination: dominate its reduced graph modification by point blowups. Steps 1-3 expand the Stacks 081T reduction, Step 4 is Stacks 0AHH and Step 5 is Stacks 0806. No chapter/unit route change. Whole-blueprint searches find no imported point-principalization or point-domination statement.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-nagata-sketch-elimination",
+    "why": "Generic elimination of indeterminacy (081S with the dense-open preliminary blowup), used only to obtain an admissible blowup with open strict transform. The unit has no such generic scheme-theoretic interface."
+   },
+   {
+    "node": "thm-nagata-blowup-universal-property",
+    "why": "Generic blowup final-object property (0806), used after principalization to lift the tower. This is a generic tool and replaces no step of the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-nagata-sketch-elimination",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-899fadab4",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-899fadab4 (reviewer sub-agent of L); spot-checked: I re-read the item and the new node on this snapshot. This head is a re-push after a promotion/landing return, and both files are identical to the PASSed head feb8b245 (only split_report and the search logs differ). Against 857c the only change is Step 3's first sentence, which now makes the strict transform relative to U as in def-nagata-strict-transform's blueprint_update. Item statement and stmt_deps are unchanged from base. Item steps: (1) Noetherian X gives quasi-compact U = X∖T and quasi-separated X. (2) Elimination (081S) gives a U-admissible Bl_I X with an open strict transform and schematically dense b⁻¹(U). (3) The strict transform is closed in the proper Y×_X B, so g is proper; its closed image contains the dense b⁻¹(U), so g is a surjective open immersion, hence an isomorphism, and fq = b. (4) Supp(O/I) ⊆ T, so the new node applies. (5) The extended ideal is invertible, so the blowup universal property (BU) gives a with ba = t, and h = qa; T = ∅ gives n = 0 and h = f⁻¹. proof_deps equals the union of uses. New node lem-sfb-surface-point-ideal-principalization matches resolve.tex l.845 Tag 0AHH: same hypotheses, invertible conclusion. The effective-Cartier strengthening is true: the 0AHH proof ends with a sum of effective Cartier divisors. It is statement-only, all 8 stmt_deps exist, and it is not a restatement of the item. Small cases on A²: (x,y) needs one blowup, (x,y²) needs two, O_X needs none. Duplicate search (rg -L for 0AHH/0AHI): the only same-statement matches are the dropped lem-per predecessors, which neither node cites. The 0C5S/0C5H sfb nodes and the citers lem-sfb-surface-rational-map-point-resolution and lem-sfb-nodal-trait-rational-domination (step 6 in each) are different statements and use the item as stated. Accepted tool_uses: elimination 081S and blowup universal property 0806. No SGA. Maintainer note: this is the side-completion promotion loop; the null blueprint.from.node and the self-referential main statement of thm-nagata-blowup-universal-property are base faults. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularPointBlowupDomination",
+  "declaration": "AlgebraicGeometry.exists_regular_point_blowup_domination",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularPointBlowupDomination.lean",
+  "statement": "theorem exists_regular_point_blowup_domination (X Y : Scheme.{u}) [IsNoetherian X] (T : TopologicalSpace.Closeds X) (hT : (T : Set X).Finite) (hclosed : ∀ t ∈ (T : Set X), IsClosed ({t} : Set X)) (hregular : ∀ t ∈ (T : Set X), IsRegularLocalRing (X.presheaf.stalk t)) (hdim : ∀ t ∈ (T : Set X), ringKrullDim (X.presheaf.stalk t) = 2) (f : Y ⟶ X) [IsProper f] (hiso : IsIso (f ∣_ T.compl)) : ∃ (A : OrdinaryBlowupTower X) (h : A.level (Fin.last A.length) ⟶ Y), h ≫ f = A.toBase (Fin.last A.length) ∧ ∀ i : Fin A.length, ∃ (p : A.level i.castSucc) (hp : IsClosed ({p} : Set _)), A.center i = Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩ ∧ A.toBase i.castSucc p ∈ (T : Set X)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11038afe1",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read node, Stacks 0AHI (resolve.tex l.928-941), all 6 stmt_deps and the delivered module. Clauses match: IsNoetherian X; T as Closeds + Finite + closed singletons; IsRegularLocalRing and ringKrullDim=2 on stalks at T; IsProper f; IsIso (f ∣_ T.compl); exists OrdinaryBlowupTower X (structure read: initial iso, coherent transitions, blowupIso/blowup_fac) with h ≫ f = toBase last and each center = vanishingIdeal of a closed singleton whose toBase image is in T. Length 0 / empty T / empty X covered; single universe u; no extra hypotheses. Node diff vs live: only lean + added landed def stmt_dep def-trf-ordinary-resolution-rule (owner of OrdinaryBlowupTower). lean.statement verbatim. No duplicate (grep 0AHI/0AHH/BlowupDomination). Proof sorry only, docstrings with source and blueprint plus 5-step plan, no new defs, no pro-etale. No changes; no compile needed."
+ }
+}

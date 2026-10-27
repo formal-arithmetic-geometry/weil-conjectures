@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-norm-scalar-test-assembly",
+ "kind": "statement",
+ "title": "Passage from complete scalar tests to norm-topological algebraic-closure scalar tests",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, a finite extension $E/\\mathbf Q_\\ell$ with its norm topology [def-weil-l-adic-numbers], and an algebraic closure $\\Omega\\supset E$ with its extended norm topology. Let $I$ be a small directed poset with least element $0$, and let $(X_i)_{i\\in I}$ be an inverse system of regular affine finite-type $k$-schemes [def-weil-regular-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism]. Assume every transition $X_j\\to X_i$ is finite locally free, meaning affine with locally finite free coordinate module [def-weil-finite-integral-morphism]. Choose $f_0\\in\\Gamma(X_0,\\mathcal O_{X_0})$ whose pullback $f_i$ is a nonzerodivisor for every $i$, and put $X=\\operatorname{Spec}(\\varinjlim_i\\Gamma(X_i,\\mathcal O_{X_i}))$ and $W=X[1/f_0]$ [def-weil-pbc-category-colimit]. For a normed field $F$ put $C_F(P)=C(P,F)$ on profinite sets using all continuous maps, and $C_{F,Z}=p_Z^*C_F$ [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use ordinary derived categories of abelian sheaves and K-injective derived sections [def-weil-abstract-derived-category, def-pur-ringed-site-zeroth-hypercohomology].\n\nAssume that for every affine weakly contractible pro-etale $v:V\\to X$ [def-weil-pbc-proetale-site, sk-def-pe-weak-contractible], with $T=V\\times_XW$, restriction on the constant sheaf $\\mathbf Z/\\ell\\mathbf Z$ induces a bijection on degree-zero sections [def-weil-pbc-constant-sheaf]. Assume also that, for every such $V,T$ and every complete nonarchimedean normed field $B$ extending $\\mathbf Q_\\ell$ isometrically, the actual restriction $R\\Gamma(V,C_{B,V}[0])\\to R\\Gamma(T,C_{B,T}[0])$ is an isomorphism.\n\nThen for every such $V,T$ and $F=E,\\Omega$, the actual scalar restriction\n$$R\\Gamma(V,C_{F,V}[0])\\longrightarrow R\\Gamma(T,C_{F,T}[0])$$\nis an isomorphism in $D(\\mathbf{Ab})$. In degree zero it is restriction of all continuous $F$-valued functions. In positive degrees $H^q(T,C_{F,T})=0$. No completeness of $\\Omega$ and no replacement of $C(-,\\Omega)$ by a union of finite-extension-valued function sheaves is assumed. Empty test schemes and identity opens are allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof steps 6-7: clopens and component spaces in degree zero; complete E and positive-cohomology injection into the norm completion of Omega. Agent-formulated sublemma; the complete retained argument and its existing citations are in report.md, not a theorem attributed to the blueprint."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-regular-scheme",
+  "sk-def-pe-weak-contractible",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Fix a test $V$ and put $T=V[1/f_V]$. The finite constant representation identifies sections of $\\mathbf Z/\\ell$ on either scheme with locally constant functions to the finite discrete field. A morphism to the labelled coproduct is precisely its clopen partition into label fibres. Naturality in finite label maps identifies multiplication and constants pointwise. Hence the hypothesized restriction bijection is a ring isomorphism. Its idempotents are characteristic functions of clopens: pointwise $a^2=a$ implies $a=0$ or $1$, and conversely each such characteristic function is locally constant. Restriction and its inverse preserve idempotents, so inverse image $\\operatorname{Clop}(V)\\to\\operatorname{Clop}(T)$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-constant-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf; finite labelled-coproduct realization, followed by the elementary idempotent calculation."
+   }
+  },
+  {
+   "text": "The schemes $V$ and $T$ are affine, the latter being a principal open of the former. Thus both are qcqs by [lem-weil-pbc-affine-scheme-qcqs], and spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Apply [lem-sfb-spectral-clopen-component-homeomorphism] to the continuous inclusion $j:T\\to V$ and step 1. It gives a homeomorphism $h:\\pi_0(T)\\to\\pi_0(V)$, with $h q_T=q_Vj$, where $q$ denotes the quotient map to connected components.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-sfb-spectral-clopen-component-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0906, lemma-spectral-pi0, through the existing clopen component-homeomorphism criterion; properties.tex Tag 094L, lemma-quasi-compact-quasi-separated-spectral."
+   }
+  },
+  {
+   "text": "By [lem-weil-l-adic-extension-absolute-value], $E$ is nonarchimedean. Any two elements of $\\Omega$ lie in a finite extension of $\\mathbf Q_\\ell$, so the same lemma makes its given extended norm nonarchimedean. Both fields are totally disconnected: for $a\\ne b$, the ball $|x-a|<|a-b|$ contains $a$, excludes $b$, and is clopen. Indeed any point outside this ball has a ball disjoint from it by the ultrametric inequality. A connected subset therefore cannot contain two distinct points. The continuous-function realization now identifies $\\Gamma(Z,C_{F,Z})$ with $C(|Z|,F)$ for $Z=V,T$ and $F=E,\\Omega$. By [lem-weil-proetale-weakly-etale-localization] the open $T$ is an object of $V_{\\mathrm{proet}}$ and $T_{\\mathrm{proet}}$ is the slice at it; the realization on $V_{\\mathrm{proet}}$ is an isomorphism of sheaves, so it commutes with restriction to $T$, which therefore becomes precomposition by $j$.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, continuous-function realization; ultrametric separation written out using the existing finite-extension absolute-value theorem."
+   }
+  },
+  {
+   "text": "Every continuous $g:|T|\\to F$ is constant on each connected component, since its image on that component is connected and $F$ is totally disconnected. Its induced function $\\bar g:\\pi_0(T)\\to F$ is continuous by the definition of quotient topology. Its unique extension to $V$ is $\\bar g h^{-1}q_V$; restricting gives $g$, because $h q_T=q_Vj$. Conversely every continuous function on $V$ factors through $q_V$, so the surjectivity of $h$ proves uniqueness. Step 3 identifies this inverse with the inverse to the actual degree-zero coefficient restriction. This works also for empty spaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Elementary quotient-topology factorization and composition with the component homeomorphism from step 2."
+   }
+  },
+  {
+   "text": "Evaluation on an affine weakly contractible $V$ preserves homology by [lem-weil-pbc-proetale-abelian-evaluation-colimits]. Applied to a K-injective resolution $C_{F,V}[0]\\to J$, it shows that $C_{F,V}(V)[0]\\to J(V)$ is a quasi-isomorphism. Thus $H^q(V,C_{F,V})=0$ for $q>0$, for any of our coefficient fields. This is the same evaluation functor on the small site of $V$: by [lem-weil-proetale-weakly-etale-localization], $V_{\\mathrm{proet}}$ is the slice $X_{\\mathrm{proet}}/V$, whose final object is $V$; an epimorphism in the slice is an epimorphism over $h_V$ in $X_{\\mathrm{proet}}$, and a lift over $V$ of a section lying over $\\mathrm{id}_V$ still lies over $\\mathrm{id}_V$, so $V$ is weakly contractible in $V_{\\mathrm{proet}}$ as well. For $F=E$, completeness [lem-weil-l-adic-extension-complete] and step 3 allow the assumed complete-field restriction test with $B=E$. It proves the required actual derived restriction for $E$ and $H^q(T,C_{E,T})=0$ for $q>0$.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-evaluation-colimits",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof steps 6-7: clopens and component spaces in degree zero; complete E and positive-cohomology injection into the norm completion of Omega. Agent-formulated sublemma; the complete retained argument and its existing citations are in report.md, not a theorem attributed to the blueprint."
+   }
+  },
+  {
+   "text": "Form $\\widehat\\Omega$ by [lem-sfb-normed-field-completion]. Its canonical inclusion is isometric, so its restriction to $\\mathbf Q_\\ell$ is isometric. Its norm is nonarchimedean: approximate two completed elements by sequences in $\\Omega$ and pass the ultrametric inequality to the limit, using continuity of norm, addition and maximum. The assumed complete-field test therefore applies to $B=\\widehat\\Omega$. Step 5 gives $H^q(V,C_{\\widehat\\Omega,V})=0$, whence $H^q(T,C_{\\widehat\\Omega,T})=0$ for $q\\ge1$. Apply [lem-sfb-norm-completion-positive-cohomology-mono] to the given regular affine finite-type tower, its finite locally free transitions, the stagewise nonzerodivisors and our affine weakly contractible $V$. Its map into these zero groups is injective; thus $H^q(T,C_{\\Omega,T})=0$ for every $q\\ge1$.",
+   "uses": [
+    "lem-sfb-normed-field-completion",
+    "lem-sfb-norm-completion-positive-cohomology-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof steps 6-7: clopens and component spaces in degree zero; complete E and positive-cohomology injection into the norm completion of Omega. Agent-formulated sublemma; the complete retained argument and its existing citations are in report.md, not a theorem attributed to the blueprint."
+   }
+  },
+  {
+   "text": "For either $Z=V,T$, sections on abelian sheaves are left exact: kernels and finite limits are computed sectionwise. Abelian sheaves are modules over the constant integer ring sheaf; [lem-weil-pbc-ring-sheaves-grothendieck] gives the Grothendieck hypothesis. Apply [lem-weil-pbc-derived-functor-negative-vanishing] with bound $0$ to obtain $H^q(R\\Gamma(Z,C_{F,Z}[0]))=0$ for $q<0$. The bounded-below computation agrees with the stipulated unbounded K-injective computation by [src-right-derived-functor-plus-compatibility]. In degree zero, left exactness identifies the kernel of the first differential of a nonnegative injective resolution with the original sections, naturally for restriction. Consequently the actual restriction for $\\Omega$ induces the bijection of step 4 in degree zero and maps between zero groups in all other degrees by steps 5--6. On resolution complexes this is a quasi-isomorphism, hence is inverted in the derived category [def-weil-abstract-derived-category]. This proves all claims, including the identity open and empty cases.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "src-right-derived-functor-plus-compatibility",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof steps 6-7: clopens and component spaces in degree zero; complete E and positive-cohomology injection into the norm completion of Omega. Agent-formulated sublemma; the complete retained argument and its existing citations are in report.md, not a theorem attributed to the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-norm-completion-positive-cohomology-mono",
+  "lem-sfb-normed-field-completion",
+  "lem-sfb-spectral-clopen-component-homeomorphism",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-proetale-abelian-evaluation-colimits",
+  "lem-weil-pbc-proetale-finite-constant-representable",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-proetale-weakly-etale-localization",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof steps 6-7: clopens and component spaces in degree zero; complete E and positive-cohomology injection into the norm completion of Omega. Agent-formulated sublemma; the complete retained argument and its existing citations are in report.md, not a theorem attributed to the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On regular affine finite flat inverse limits finite torsion open acyclicity gives scalar restriction for a norm topological algebraic closure using clopen component spaces and injectivity of cohomology under completion",
+   "results": "8 hits: groupCohomology.exists_mul_galRestrict_of_norm_eq_one, InfiniteGalois.algEquivToLimit, IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, Algebra.Extension.tensorH1Cotangent, AdicCompletion.flat_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, InfiniteGalois.algEquivToLimit_continuous, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; digest 9f2874566d0c1496",
+   "date": "2026-10-22",
+   "verdict": "no match: normed-field completion and algebraic-closure declarations do not give degree-zero component comparison and positive sheaf cohomology of the actual norm coefficient map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic restriction for complete normed fields and injectivity under field completion imply acyclic restriction for the norm topological algebraic closure using connected components in degree zero",
+   "results": "8 hits: NormedField.instCompletableTopField, UniformSpace.Completion.instNormedAlgebra, IsNonarchimedeanLocalField.instCompleteSpace, AlgebraicClosure.isAlgClosed, spectrum.isClosed, AlgebraicClosure.instCharZero, Subalgebra.spectrum_isBounded_connectedComponentIn, Valued.completable; digest 7f0a41271f4a3e44",
+   "date": "2026-10-22",
+   "verdict": "no match: normed-field completion and algebraic-closure declarations do not give degree-zero component comparison and positive sheaf cohomology of the actual norm coefficient map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Completion\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: normed-field completion and algebraic-closure declarations do not give degree-zero component comparison and positive sheaf cohomology of the actual norm coefficient map"
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomology|Sheaf).*(Completion|clopen)|(Completion|clopen).*(cohomology|Sheaf)",
+   "results": "2 hits: Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean; digest 45cb4427fd683402",
+   "date": "2026-10-22",
+   "verdict": "no match: normed-field completion and algebraic-closure declarations do not give degree-zero component comparison and positive sheaf cohomology of the actual norm coefficient map"
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomology|Sheaf).*(Completion|clopen)|(Completion|clopen).*(cohomology|Sheaf)",
+   "results": "2 hits: Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean; digest 45cb4427fd683402",
+   "date": "2026-10-22",
+   "verdict": "no match: returned field-completion, affine-localization, Galois and locally constant-function results do not assert the scalar derived restriction with these hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections of continuous functions with values in an incomplete algebraic closure compared with its norm completion on a pro etale site",
+   "results": "8 hits: UniformSpace.Completion.map, UniformSpace.Completion.mapRingHom, PadicComplex.norm_extends, PadicComplex.nnnorm_extends, PadicAlgCl.normedField, PadicAlgCl.valued, UniformSpace.Completion.extensionHom, UniformSpace.Completion.instNormedAlgebra; digest 5ed43859b706d668",
+   "date": "2026-10-22",
+   "verdict": "no match: returned field-completion, affine-localization, Galois and locally constant-function results do not assert the scalar derived restriction with these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Completion\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: returned field-completion, affine-localization, Galois and locally constant-function results do not assert the scalar derived restriction with these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of all continuous norm valued coefficient sheaves to an affine open is a derived isomorphism using a clopen component homeomorphism and injectivity on positive cohomology under field completion",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app, AlgebraicGeometry.Scheme.Opens.topIso; digest ca6dd742b3bb3a8f",
+   "date": "2026-10-22",
+   "verdict": "no match: returned field-completion, affine-localization, Galois and locally constant-function results do not assert the scalar derived restriction with these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclicity of complete nonarchimedean scalar coefficient sheaves and a bijection on clopens imply open restriction for continuous algebraic closure valued functions when positive cohomology injects under completion",
+   "results": "8 hits: InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup, krullTopology_isTotallySeparated, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, Profinite.NobelingProof.Nobeling_aux, Profinite.NobelingProof.CC_exact, Profinite.NobelingProof.Linear_CC'₁, LocallyConstant.freeOfProfinite, CompHausLike.LocallyConstant.presheaf_ext; digest ecb9f52438bc52f5",
+   "date": "2026-10-22",
+   "verdict": "no match: returned field-completion, affine-localization, Galois and locally constant-function results do not assert the scalar derived restriction with these hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torsion-acyclic-norm-coefficient-test",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof steps 6-7: clopens and component spaces in degree zero; complete E and positive-cohomology injection into the norm completion of Omega.",
+   "via": [
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-norm-scalar-test-assembly",
+  "worker": "stage1",
+  "summary": "Kept the statement; expanded retained steps 6--7 into clopen/component degree-zero comparison and complete-field plus completion-injection assembly. Reused all intermediate nodes; no new nodes. Checked actual restriction maps, noncomplete Omega, and empty/identity cases.",
+  "blueprint": "Realizes paragraph (3) of det-thm-sf-ctf-stability-direct-images, through retained original steps 6--7 in coord/reports/Q67/lem-sfb-torsion-acyclic-norm-coefficient-test.md; this expanded norm-coefficient argument is agent-formulated, not asserted by the blueprint text.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Generic coefficient realization, affine topology, or derived-sections infrastructure used with its stated hypotheses; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic coefficient realization, affine topology, or derived-sections infrastructure used with its stated hypotheses; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-abelian-evaluation-colimits",
+    "why": "Generic coefficient realization, affine topology, or derived-sections infrastructure used with its stated hypotheses; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-constant-representable",
+    "why": "Generic coefficient realization, affine topology, or derived-sections infrastructure used with its stated hypotheses; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic coefficient realization, affine topology, or derived-sections infrastructure used with its stated hypotheses; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "Generic coefficient realization, affine topology, or derived-sections infrastructure used with its stated hypotheses; no replacement of the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-proetale-abelian-evaluation-colimits",
+  "lem-weil-pbc-proetale-finite-constant-representable",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-0056ceeb1",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-0056ceeb1 (reviewer sub-agent of L); spot-checked: Read in full: the item, the 13 cited statements, Q67's retained original steps 6–7, blueprint main-20261015 direct-images §(3), and Stacks 0H7J, 0906 and 094L. The statement is unchanged from live. No new nodes, no cycle (closure of 485 nodes), no SGA citation. Steps 1–4 (degree zero) check out: clopen partitions from the finite-constant representable, then spectral clopen-component homeomorphism, then the clopen-ball proof that the norm fields are totally disconnected, then continuous-function realization and factorization through π0. Steps 5–7 also check out: exact evaluation on weakly contractible V, then the complete-field hypothesis for B=E (complete) and B=Ω̂ (isometric and nonarchimedean, written out), then the mono node's hypotheses copied exactly so injection into 0 gives vanishing, then negative vanishing plus the D+/unbounded comparison. Edge cases checked: empty V or T, f a unit, ℓ=2, incomplete Ω. One C1 fault, fixed: steps 5 and 3 used V_proet = X_proet/V (moving weak contractibility to V_proet, and treating T as an object of V_proet) without citing a node. Added lem-weil-proetale-weakly-etale-localization (unit sk-def-sf-operations, cited by the item's unit) to both steps and to proof_deps, and wrote out the transfer of epimorphisms and lifts. Accepted tool_uses: condensed-field-continuous-realization, derived-functor-negative-vanishing, proetale-abelian-evaluation-colimits, proetale-finite-constant-representable, ring-sheaves-grothendieck, src-right-derived-functor-plus-compatibility.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormScalarTestAssembly",
+  "declaration": "AlgebraicGeometry.ProEtale.norm_scalar_test_assembly",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normScalarEvaluation",
+   "AlgebraicGeometry.ProEtale.normScalarSectionRestriction",
+   "AlgebraicGeometry.ProEtale.normScalarCoefficient",
+   "AlgebraicGeometry.ProEtale.normScalarDerivedSections",
+   "AlgebraicGeometry.ProEtale.normScalarDerivedRestriction",
+   "AlgebraicGeometry.ProEtale.normScalarH0SectionsIso",
+   "AlgebraicGeometry.ProEtale.normScalarPuncturedTest",
+   "AlgebraicGeometry.ProEtale.normScalarPuncturedInclusion",
+   "AlgebraicGeometry.ProEtale.normScalarContinuousSheaf",
+   "AlgebraicGeometry.ProEtale.NormScalarTestResult",
+   "AlgebraicGeometry.ProEtale.norm_scalar_test_assembly"
+  ],
+  "file": "lean/Sheaf/Paper/NormScalarTestAssembly.lean",
+  "statement": "theorem norm_scalar_test_assembly (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E Ω : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] (I : Type u) [PartialOrder I] [OrderBot I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [HasColimit R] (κ : (Functor.const I).obj (CommRingCat.of k) ⟶ R) (hregular : ∀ i : I, IsRegularScheme (Spec (R.obj i))) (hfiniteType : ∀ i : I, LocallyOfFiniteType (Spec.map (κ.app i)) ∧ QuasiCompact (Spec.map (κ.app i))) (hfiniteFlat : ∀ (i j : I) (h : i ≤ j), IsFinite (Spec.map (R.map (homOfLE h))) ∧ Flat (Spec.map (R.map (homOfLE h)))) (f₀ : R.obj ⊥) (hregularElement : ∀ i : I, (R.map (homOfLE (bot_le : ⊥ ≤ i))).hom f₀ ∈ nonZeroDivisors (R.obj i)) (htorsion : ∀ (V : (Spec (colimit R)).ProEt) [IsAffine V.left], (Scheme.ProEt.topology (Spec (colimit R))).IsWeaklyContractible.{u + 1} V → Function.Bijective (((constantSheaf (Scheme.ProEt.topology (Spec (colimit R))) AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ)))).obj.map (normScalarPuncturedInclusion (Spec (colimit R)) ((Scheme.ΓSpecIso (colimit R)).inv ((colimit.ι R ⊥).hom f₀)) V).op)) (hcomplete : ∀ (V : (Spec (colimit R)).ProEt) [IsAffine V.left], (Scheme.ProEt.topology (Spec (colimit R))).IsWeaklyContractible.{u + 1} V → ∀ (B : Type u) [NormedField B] [NormedAlgebra ℚ_[ℓ] B] [CompleteSpace B] [IsUltrametricDist B], IsIso (normScalarDerivedRestriction (normScalarPuncturedInclusion (Spec (colimit R)) ((Scheme.ΓSpecIso (colimit R)).inv ((colimit.ι R ⊥).hom f₀)) V) (normScalarCoefficient (Spec (colimit R)) B))) : ∀ (V : (Spec (colimit R)).ProEt) [IsAffine V.left], (Scheme.ProEt.topology (Spec (colimit R))).IsWeaklyContractible.{u + 1} V → NormScalarTestResult (Spec (colimit R)) ((Scheme.ΓSpecIso (colimit R)).inv ((colimit.ι R ⊥).hom f₀)) V E ∧ NormScalarTestResult (Spec (colimit R)) ((Scheme.ΓSpecIso (colimit R)).inv ((colimit.ι R ⊥).hom f₀)) V Ω",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ddba343f5",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read the item, all 13 stmt_dep records, the side sources (ContinuousMapCondensedRing, ContinuousCoefficientUniverse, CondensedFieldContinuousRealization, WeaklyContractible) and the parent TorsionAcyclicNormCoefficientTest. Every clause matches: primes and char p; E isometric NormedAlgebra over Q_l, finite-dimensional; Omega IsAlgClosure with the extended norm and no completeness; directed I with bot; affine tower R with kappa; IsRegularScheme; LocallyOfFiniteType and QuasiCompact; IsFinite and Flat (equivalent to finite locally free on Noetherian stages); nonzerodivisor f0; X = Spec colim R; T = basic open of V at v^*f. Hypotheses use the actual constant Z/l sheaf bijection and IsIso of the derived restriction for every complete ultrametric B : Type u. The conclusion holds for E and Omega: IsIso in D(Ab); degree-zero square through the canonical H0 iso and the unique adjunct-normalized realization e; positive H^q(T) vanish. Edge cases (empty, identity open, l=2, singleton I) are covered. lean.statement is verbatim and all 11 declarations exist; only the lean field changed; no hollow helper, sorry only in the theorem; docstrings and seven-step proof present. Advisories: profiniteTestProjection and continuousCoefficientRingSheaf owners are not stmt_deps; normScalarEvaluation duplicates Mathlib sheafSections (refl); H^q(T) is rendered via X-site evaluation (slice localization); unused plain imports. No recompile (no file changed)."
+ }
+}

@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-totally-ramified-uniformizer-presentation",
+ "kind": "statement",
+ "title": "Uniformizer presentation of a totally ramified complete DVR extension",
+ "statement": "Let $R$ be a complete discrete valuation ring with fraction field $F$ [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring, def-pc-field-extension]. Let $E/F$ be a finite separable field extension of degree $n\\geq1$ [def-weil-pbc-separable-algebraic-extension], and let $S\\subset E$ be the integral closure of $R$ [def-weil-pbc-integral-closure]. Assume $S$ is a discrete valuation ring, that $R\\to S$ is local, that the induced map $R/\\mathfrak m_R\\to S/\\mathfrak m_S$ is an isomorphism, and that $\\mathfrak m_RS=\\mathfrak m_S^n$. For every uniformizer $\\pi$ of $R$ and every uniformizer $t$ of $S$, there is a polynomial $P(T)=T^n+\\sum_{i<n}a_iT^i\\in R[T]$ [def-weil-polynomial-ring] with $a_i\\in\\pi R$ for all $i<n$ and $a_0\\in\\pi R\\setminus\\pi^2R$, such that evaluation $T\\mapsto t$ induces isomorphisms $R[T]/(P)\\cong S$ and $F[T]/(P)\\cong E$. Local means that the inverse image of the maximal ideal is the maximal ideal; finite degree means vector-space dimension.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: first paragraph, from the choice of uniformizers through the displayed minimal polynomial and e=[K_1:K]"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Since R is a DVR, it is a PID and hence Noetherian and normal. Apply IsIntegralClosure.finite to obtain that S is finite over R. Apply the existing integral-closure rank theorem IsIntegralClosure.rank to get finrank_R S = finrank_F E = n. The finite algebraic normalization also has E as its localization at the nonzero elements of R, by IsIntegralClosure.isLocalization; this is the localization used in the rank theorem.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-sfb-integral-closure-rank",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: first paragraph, from the choice of uniformizers through the displayed minimal polynomial and e=[K_1:K]"
+   }
+  },
+  {
+   "text": "Surjectivity on residue fields gives, for each s in S, an r in R and y in S with s = r + t y. Induct on k to expand s as sum_{i<k} r_i t^i + t^k y. At k=n the remainder lies in m_R S, because m_R S = m_S^n = (t^n). Thus the images of 1,t,...,t^(n-1) span S/m_R S. This is a finite induction, with no use of completeness or infinite series.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: first paragraph, from the choice of uniformizers through the displayed minimal polynomial and e=[K_1:K]"
+   }
+  },
+  {
+   "text": "Nakayama (IsLocalRing.map_mkQ_eq_top) applied to the finite R-module S shows that the n powers span S itself. Their cardinality equals finrank_R S by step 1, so Mathlib basisOfTopLeSpanOfCardEqFinrank makes precisely these vectors a basis. This uses the Orzech property of the Noetherian ring R, as encoded in that theorem. Package the basis as a PowerBasis pb with gen=t and dim=n; no valuation-order independence argument is needed.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-sfb-integral-closure-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: first paragraph, from the choice of uniformizers through the displayed minimal polynomial and e=[K_1:K]"
+   }
+  },
+  {
+   "text": "The uniformizer and ramification equalities give (pi)S=(t^n). Choose v,w in S with t^n=pi*v and pi=t^n*w. Since t is nonzero, cancellation of t^n gives w*v=1, so v is a unit.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: first paragraph, from the choice of uniformizers through the displayed minimal polynomial and e=[K_1:K]"
+   }
+  },
+  {
+   "text": "Set P=pb.minpolyGen, the monic degree-n polynomial X^n minus the coordinate expansion of t^n in the basis. If c_i are the R-coordinates of v, linearity of the coordinate map and t^n=pi*v give P.coeff i = -pi*c_i for every i<n. All required lower coefficients therefore lie in (pi). If the constant coefficient lay in (pi^2), cancellation of nonzero pi would put c_0 in m_R. In the coordinate expansion v=sum c_i*t^i, its constant term would then belong to m_S by locality, while every remaining term belongs to m_S because t does and i>0. This would make the unit v a nonunit. Hence P.coeff 0 is not in (pi^2).",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: first paragraph, from the choice of uniformizers through the displayed minimal polynomial and e=[K_1:K]"
+   }
+  },
+  {
+   "text": "The standard PowerBasis and AdjoinRoot equivalence for the basis polynomial gives R[X]/(P) isomorphic to S by evaluation at t. Localize the same basis along R to F and S to E, using Basis.localizationLocalization and the localization from step 1. Its vectors are the images t^i, and its coordinate maps on S are the original coordinate maps followed by R to F. Consequently its basis polynomial equals P.map (algebraMap R F), term by term. Apply the same AdjoinRoot.equiv' construction to this localized power basis. Both equivalences satisfy the requested evaluation identities by AdjoinRoot.liftAlgHom_mk.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: first paragraph, from the choice of uniformizers through the displayed minimal polynomial and e=[K_1:K]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-sfb-integral-closure-rank",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, first proof paragraph. Lean proof uses finite residue expansion and Nakayama, replaces distinct-order independence by the integral-closure rank theorem, and uses coordinates of t^n=pi*v for the Eisenstein coefficient conditions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure in a finite totally ramified extension of a complete discrete valuation field is generated by any uniformizer whose minimal polynomial is Eisenstein",
+   "results": "{\"t\": \"2026-10-24T07:03:48Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure in a finite totally ramified extension of a complete discrete valuation field is generated by any uniformizer whose minimal polynomial is Eisenstein\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"mem_adjoin_of_smul_prime_smul_of_minpoly_isEisensteinAt\", \"mem_adjoin_of_smul_prime_pow_smul_of_minpoly_isEisensteinAt\", \"Valuation.Uniformizer.is_generator\", \"Valuation.IsUniformizer.is_generator\", \"Valuation.Uniformizer.val\", \"Valuation.exists_pow_Uniformizer\", \"Valuation.Uniformizer.instCoeSubtypeMemSubringInteger\", \"Valuation.pow_Uniformizer_is_pow_generator\"], \"digest\": \"631da3769b3048b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Eisenstein IsIntegral lemmas assume an Eisenstein power basis; powerBasis constructors do not prove that a uniformizer generates the normalization or that its minimal polynomial is Eisenstein"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEisensteinAt|[Tt]otally[Rr]amified|monogenic",
+   "results": "{\"t\": \"2026-10-24T07:04:23Z\", \"tool\": \"grep\", \"query\": \"IsEisensteinAt|[Tt]otally[Rr]amified|monogenic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\"], \"digest\": \"8b6a6fb797ec22d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Eisenstein IsIntegral lemmas assume an Eisenstein power basis; powerBasis constructors do not prove that a uniformizer generates the normalization or that its minimal polynomial is Eisenstein"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Polynomial.IsEisensteinAt",
+   "results": "{\"t\": \"2026-10-24T07:04:24Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Polynomial.IsEisensteinAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Eisenstein IsIntegral lemmas assume an Eisenstein power basis; powerBasis constructors do not prove that a uniformizer generates the normalization or that its minimal polynomial is Eisenstein"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sDiscreteValuationRing|[Ii]ntegrallyClosed|[Mm]inpoly",
+   "results": "{\"t\": \"2026-10-24T07:04:56Z\", \"tool\": \"grep\", \"query\": \"[Ii]sDiscreteValuationRing|[Ii]ntegrallyClosed|[Mm]inpoly\", \"sub\": \"RingTheory/Polynomial/Eisenstein\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\"], \"digest\": \"44168768649ed517\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Eisenstein IsIntegral lemmas assume an Eisenstein power basis; powerBasis constructors do not prove that a uniformizer generates the normalization or that its minimal polynomial is Eisenstein"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral closure in a totally ramified finite extension of a complete discrete valuation field is generated by a uniformizer with Eisenstein minimal polynomial",
+   "results": "{\"t\": \"2026-10-24T07:04:56Z\", \"tool\": \"leansearch\", \"query\": \"An integral closure in a totally ramified finite extension of a complete discrete valuation field is generated by a uniformizer with Eisenstein minimal polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"integralClosure.AlgebraIsIntegral\", \"mem_adjoin_of_smul_prime_smul_of_minpoly_isEisensteinAt\", \"integralClosure\", \"integralClosure.isIntegralClosure\", \"integralClosure.isIntegral\", \"Ring.NormalClosure\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\"], \"digest\": \"00a56ef4ea13f0e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Eisenstein IsIntegral lemmas assume an Eisenstein power basis; powerBasis constructors do not prove that a uniformizer generates the normalization or that its minimal polynomial is Eisenstein"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A totally ramified finite extension of complete DVRs admits a power basis consisting of powers of a uniformizer and an Eisenstein minimal polynomial",
+   "results": "{\"t\": \"2026-10-24T07:04:57Z\", \"tool\": \"leanfinder\", \"query\": \"A totally ramified finite extension of complete DVRs admits a power basis consisting of powers of a uniformizer and an Eisenstein minimal polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.powerBasis'\", \"AdjoinRoot.powerBasis\", \"PowerBasis.ofAdjoinEqTop'\", \"PowerBasis\", \"Algebra.adjoin.powerBasis'\", \"PowerBasis.ofGenMemAdjoin'\", \"Algebra.adjoin.powerBasis'_gen\", \"IntermediateField.powerBasisAux\"], \"digest\": \"3854e196687c1c4f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Eisenstein IsIntegral lemmas assume an Eisenstein power basis; powerBasis constructors do not prove that a uniformizer generates the normalization or that its minimal polynomial is Eisenstein"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a complete discrete valuation ring in a finite totally ramified extension has a power basis given by any uniformizer",
+   "results": "{\"t\": \"2026-10-24T07:31:39Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a complete discrete valuation ring in a finite totally ramified extension has a power basis given by any uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerBasis.ofAdjoinEqTop'\", \"PowerBasis.ofGenMemAdjoin'\", \"Algebra.adjoin.powerBasis'\", \"Algebra.adjoin.powerBasis'_gen\", \"PowerBasis.ofAdjoinEqTop'_gen\", \"PowerBasis.ofGenMemAdjoin'_gen\", \"PowerBasis\", \"PowerBasis.ofAdjoinEqTop\"], \"digest\": \"3d613e761f60a859\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-basis constructors require generation in advance; Eisenstein integral-element lemmas assume an Eisenstein minimal polynomial; uniformizer definitions and maximal-ideal generators do not give either presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEisensteinAt|totallyRamified|monogenic",
+   "results": "{\"t\": \"2026-10-24T07:32:43Z\", \"tool\": \"grep\", \"query\": \"IsEisensteinAt|totallyRamified|monogenic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\"], \"digest\": \"8b6a6fb797ec22d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-basis constructors require generation in advance; Eisenstein integral-element lemmas assume an Eisenstein minimal polynomial; uniformizer definitions and maximal-ideal generators do not give either presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any uniformizer generates a totally ramified finite extension of complete discrete valuation rings and has Eisenstein minimal polynomial",
+   "results": "{\"t\": \"2026-10-24T07:32:43Z\", \"tool\": \"leansearch\", \"query\": \"Any uniformizer generates a totally ramified finite extension of complete discrete valuation rings and has Eisenstein minimal polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.Uniformizer.mk'\", \"ValuativeRel.uniformizer\", \"Valuation.Uniformizer\", \"Valuation.IsUniformizer\", \"Valuation.IsUniformizer.congr_simp\", \"Valuation.Uniformizer.ext_iff\", \"Valuation.Uniformizer.mk\", \"Valuation.IsUniformizer.not_isUnit\"], \"digest\": \"2cead16b36abe634\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-basis constructors require generation in advance; Eisenstein integral-element lemmas assume an Eisenstein minimal polynomial; uniformizer definitions and maximal-ideal generators do not give either presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Polynomial.IsEisensteinAt",
+   "results": "{\"t\": \"2026-10-24T07:32:43Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Polynomial.IsEisensteinAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-basis constructors require generation in advance; Eisenstein integral-element lemmas assume an Eisenstein minimal polynomial; uniformizer definitions and maximal-ideal generators do not give either presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniformizer in a finite extension of complete DVRs with unchanged residue field generates the ring of integers as an algebra and its minimal polynomial is Eisenstein",
+   "results": "{\"t\": \"2026-10-24T07:33:23Z\", \"tool\": \"leanfinder\", \"query\": \"A uniformizer in a finite extension of complete DVRs with unchanged residue field generates the ring of integers as an algebra and its minimal polynomial is Eisenstein\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"mem_adjoin_of_smul_prime_smul_of_minpoly_isEisensteinAt\", \"mem_adjoin_of_smul_prime_pow_smul_of_minpoly_isEisensteinAt\", \"Valuation.IsUniformizer.is_generator\", \"Valuation.Uniformizer.val\", \"Valuation.Uniformizer\", \"Valuation.Uniformizer.is_generator\", \"Valuation.IsUniformizer\", \"Valuation.Uniformizer.instCoeSubtypeMemSubringInteger\"], \"digest\": \"48f0351cd9253574\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-basis constructors require generation in advance; Eisenstein integral-element lemmas assume an Eisenstein minimal polynomial; uniformizer definitions and maximal-ideal generators do not give either presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-totally-ramified-base-change",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified; completeness is a harmless strengthening of its hypotheses. Supporting Tag 09ER proof: first paragraph, from the choice of uniformizers through the displayed minimal polynomial and e=[K_1:K]",
+   "via": [
+    "lem-sfb-epp-totally-ramified-base-change",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-totally-ramified-uniformizer-presentation",
+  "worker": "stage1",
+  "summary": "Expanded the generation and Eisenstein-polynomial assertions of Stacks Tag 09ER into finite normalization, residue generation, Nakayama, distinct uniformizer orders, coefficient checks, and explicit evaluation-kernel arguments. Reused existing Mathlib leaves throughout; no new nodes and no statement change. Checked arbitrary uniformizers, n=1, and mixed/equal characteristic.",
+  "blueprint": "Historical auxiliary algebra input through the creation chain recorded in blueprint.from. Read latest sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3); its current proof does not state this auxiliary algebra result. The split realizes the first paragraph of the source Tag 09ER, not a replacement of a current unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-ec8b2c560",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-ec8b2c560 (reviewer sub-agent of L); spot-checked: I read the item in full and checked Stacks Tag 09ER (more-algebra.tex, lemma-weakly-unramified-goes-up-along-totally-ramified), first proof paragraph. The statement matches the source and is unchanged; completeness is assumed but not used. There are no new nodes. All 8 steps are correct against the statements of the cited nodes. Step 1: DVR is a PID, so pid-noetherian-normal gives R and S Noetherian and R normal; 032L-finite gives S finite over R; the integral-closure node gives Frac(S)=E. Step 2: pi=u t^n with u a unit, by cancellation. Step 3: S=R+tS iterated n times, so the t^i span S/m_R S. Step 4: Nakayama local generators, with S finite and R local, gives S=R[t]. Step 5: the unit-times-power leaf gives distinct exponents nk_i+i mod n, so a unique least term and linear independence. Step 6: each nonzero a_i is a unit times pi^k, so the least-exponent rule applies; this gives a_i in pi R, then b_0 a unit via the local map, so a_0 is not in pi^2 R. Step 7: division by monic P gives kernel (P). Step 8: S[1/pi]=Frac(S)=E via the factorization of S, with independence over F by clearing denominators. Edge cases checked: n=1 (P=T-t), Z_p(sqrt p), arbitrary pairs (pi,t), wild ramification and equal characteristic. Duplicate search found only lem-sfb-eisenstein-quotient-dvr, which is the converse, so no duplicate. All cited inputs are Mathlib leaves or definitions, so tool_uses is not needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TotallyRamifiedUniformizerPresentation",
+  "declaration": "IsDiscreteValuationRing.exists_uniformizer_polynomial_presentation",
+  "file": "lean/Sheaf/RingTheory/TotallyRamifiedUniformizerPresentation.lean",
+  "statement": "theorem exists_uniformizer_polynomial_presentation (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsAdicComplete (maximalIdeal R) R] (F : Type v) [Field F] [Algebra R F] [IsFractionRing R F] (E : Type w) [Field E] [Algebra F E] [Algebra R E] [IsScalarTower R F E] [FiniteDimensional F E] [Algebra.IsSeparable F E] (n : ℕ) (hn : 1 ≤ n) (hdegree : Module.finrank F E = n) (S : Subalgebra R E) (hS : S = integralClosure R E) [IsDiscreteValuationRing S] [IsLocalHom (algebraMap R S)] (hresidue : Function.Bijective (IsLocalRing.ResidueField.map (algebraMap R S))) (hramification : (maximalIdeal R).map (algebraMap R S) = maximalIdeal S ^ n) (pi : R) (hpi : maximalIdeal R = Ideal.span {pi}) (t : S) (ht : maximalIdeal S = Ideal.span {t}) : ∃ P : R[X], P.Monic ∧ P.natDegree = n ∧ (∀ i : ℕ, i < n → P.coeff i ∈ Ideal.span {pi}) ∧ P.coeff 0 ∉ Ideal.span {pi ^ 2} ∧ (∃ e : (R[X] ⧸ Ideal.span {P}) ≃ₐ[R] S, ∀ Q : R[X], e (Ideal.Quotient.mk (Ideal.span {P}) Q) = aeval t Q) ∧ (∃ e : (F[X] ⧸ Ideal.span {P.map (algebraMap R F)}) ≃ₐ[F] E, ∀ Q : F[X], e (Ideal.Quotient.mk (Ideal.span {P.map (algebraMap R F)}) Q) = aeval (t : E) Q)",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9fbb626e",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Read node, Tag 09ER first proof paragraph (more-algebra.tex), module, report and all 6 stmt_dep records; citer lem-sfb-epp-totally-ramified-base-change uses it as stated. Clause-by-clause: complete DVR (IsAdicComplete maximalIdeal), F=Frac R, E/F finite separable with finrank=n>=1 (hn redundant but node's), S=integralClosure R E via hS, S DVR, IsLocalHom, canonical residue map bijective, m_R S = m_S^n, arbitrary uniformizers pi,t as span generators; conclusion Monic natDegree n, coeff i in (pi) for i<n, coeff 0 notin (pi^2), both AlgEquivs pinned to aeval t / aeval (t:E). Edge cases n=1, arbitrary pairs, wild/mixed/equal char OK; universes u v w independent. Node copy differs from side-live only in lean; lean.statement verbatim in module; no defs, docstrings with source+blueprint, sorry-only, report has Worker report and Second reading sections, no pro-etale. No findings; no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T082552-L-2191635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

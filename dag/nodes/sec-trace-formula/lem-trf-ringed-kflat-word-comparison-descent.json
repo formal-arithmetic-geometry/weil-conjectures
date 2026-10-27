@@ -1,0 +1,358 @@
+{
+ "id": "lem-trf-ringed-kflat-word-comparison-descent",
+ "kind": "statement",
+ "title": "Simultaneous K-flat word models and normalized comparison descent",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Let a finite collection of small sites $\\mathcal C_i$ with sheaves of commutative rings $R_i$ be given, in fixed sufficiently large universes [def-weil-size-convention, def-weil-pbc-ringed-topos-morphism]. Put $\\mathcal A_i=\\operatorname{Mod}(R_i)$ and let $Q_i$ denote localization of their unbounded cochain complexes at quasi-isomorphisms [def-weil-sheaf-of-modules-category, def-pc-cochain-complex-modules, def-weil-abstract-derived-category]. Each edge $a:i\\to j$ is the ordinary additive pullback $F_a:\\mathcal A_i\\to\\mathcal A_j$ of a specified morphism of ringed topoi, including extension of scalars on the identity underlying topos. Choose its total left derived functor $LF_a$ with universal cochain counit $\\varepsilon_a:LF_aQ_i\\to Q_jC(F_a)$, normalized to the canonical K-flat computation of ringed pullback; an exact $F_a$ may instead use its canonically identified exact derived functor. Here $C(F_a)$ means degreewise application. A word $w=(a_1,\\ldots,a_r)$ is a finite composable string, with $F_w=F_{a_r}\\cdots F_{a_1}$, $LF_w=LF_{a_r}\\cdots LF_{a_1}$; the empty word is the identity. Let $\\varepsilon_w:LF_wQ_i\\to Q_jC(F_w)$ be the composite of the edge counits in this order.\n\nEvery complex $K$ admits one quasi-isomorphism $p:P\\to K$ of entire $R_i$-module complexes, with $P$ K-flat and all its terms flat [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. For this same $P$, every intermediate $C(F_{a_s}\\cdots F_{a_1})P$ in every finite word starting at $i$ is K-flat with flat terms, and every $\\varepsilon_{w,P}$ is invertible. For words $w,v:i\\to j$ and an ordinary natural transformation $t:F_w\\to F_v$, there is a unique natural transformation $t^L:LF_w\\to LF_v$ with\n$$\\varepsilon_{v,P}\\circ t^L_{Q_iP}=Q_j(C(t)_P)\\circ\\varepsilon_{w,P}$$\nfor every flat-term K-flat $P$. This assignment preserves identities, vertical composition and whiskering by any of the specified edge functors, using the displayed composite counits for words; it takes ordinary isomorphisms to derived isomorphisms. Consequently every equality of finite pastings of such ordinary transformations induces the corresponding equality of the normalized derived transformations. Natural transformations between the derived word functors are determined on these $Q_iP$.\n\nIn particular the derived scalar associator for $R\\to S\\to T$ is uniquely normalized by the ordinary map $c\\otimes(b\\otimes x)\\mapsto cb\\otimes x$, and identity scalar change is uniquely identified with the identity by $s\\otimes x\\mapsto sx$. The result applies when each $\\mathcal C_i$ is a ringed sequence site [def-coef-ringed-sequence-site]: $P$ resolves the whole strict system, and the formulas are identities there before any evaluation or inverse limit. No boundedness, normalization, finite Tor-amplitude or flatness of any structural ring map is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition). Agent-formulated finite-word comparison descent from these common resolving models; old proof steps 7-8 of lem-trf-quotient-system-mixed-coherence."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-coef-ringed-sequence-site",
+  "def-pur-cochain-tensor-coherence-data",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "def-trf-scalar-tensor-section"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal P_i$ be the flat-term K-flat complexes on the ith ringed site. By [lem-pc-kflat-resolution], choose a single quasi-isomorphism $p:P\\to K$ with $P\\in\\mathcal P_i$. By [lem-weil-pbc-ringed-topos-kflat-pullback], each specified edge sends $\\mathcal P_i$ into $\\mathcal P_j$, including scalar change on the identity topos, without requiring the structural ring map to be flat. Induct on the length of a word: length zero leaves $P$ unchanged; adjoining the next edge preserves membership in the next $\\mathcal P$. Thus this same $P$ works for all words, independently of how many words are considered. The resolution theorem records flatness using the monoidal tensor presentation; transport exactness through siteSheafTensorRightIso [def-pur-site-sheaf-tensor-presentation-data] to obtain the stated IsFlatOnSite predicate.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition); agent finite-word argument."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-pullback-resolving-computation], the specified universal edge counit $\\varepsilon_{a,P}$ is invertible for $P\\in\\mathcal P_i$. This applies to the actual chosen left-derived pair, not just to an abstract isomorphic functor; the exact alternative has the canonical identification required in the statement. For a word $w:i\\to j$ and an edge $a:j\\to k$, the definition of the composite counit is\n$$\\varepsilon_{aw,P}=\\varepsilon_{a,C(F_w)P}\\circ LF_a(\\varepsilon_{w,P}).$$\nFor the empty word the counit is the identity. Step 1 makes $C(F_w)P$ resolving; induction and preservation of isomorphisms by a functor show that every displayed composite is invertible.",
+   "uses": [
+    "lem-weil-pbc-pullback-resolving-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition); agent finite-word argument."
+   }
+  },
+  {
+   "text": "For $t:F_w\\to F_v$ and $P\\in\\mathcal P_i$, put\n$$\\alpha_P=\\varepsilon_{v,P}^{-1}\\circ Q_j(C(t)_P)\\circ\\varepsilon_{w,P}.$$\nNaturality of the two counits and of $C(t)$ gives $LF_v(Q_i f)\\circ\\alpha_P=\\alpha_{P'}\\circ LF_w(Q_i f)$ for every chain map $f:P\\to P'$ in $\\mathcal P_i$: substitute the formula and cancel the two counit isomorphisms. Work now in the homotopy category of complexes, whose localization is the derived category [def-weil-abstract-derived-category]. An additive functor sends a homotopy $f-g=dh+hd$ to $F(f)-F(g)=dF(h)+F(h)d$, so the above equality holds for every homotopy class as well. The objects of the homotopy category are the complexes themselves; hence this supplies exactly a natural family on its full subcategory $\\mathcal P_i$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition); agent finite-word argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-nattrans-from-resolving-class] with source the homotopy category, weak equivalences its quasi-isomorphisms, resolving predicate $\\mathcal P_i$, and functors $A=LF_wQ_i$, $B=LF_vQ_i$ valued in $D(\\mathcal A_j)$. The right calculus of fractions is [lem-pc-quasi-isomorphisms-multiplicative-system]; the incoming resolutions are those of Step 1, and $A$ inverts all quasi-isomorphisms because $Q_i$ does. Step 3 verifies the required naturality on every morphism between resolving objects. We obtain a natural transformation $\\beta:LF_wQ_i\\to LF_vQ_i$. Both these functors factor through the localization of the homotopy category, so the full faithfulness in [lem-weil-pbc-localization-universal-property], clause (2), gives a natural transformation $t^L:LF_w\\to LF_v$ whose restriction is $\\beta$. Its components on resolving objects are $\\alpha_P$, giving the required normalization.",
+   "uses": [
+    "lem-sc-nattrans-from-resolving-class",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VC and 04VK; derived.tex Tag 05RT. Agent application of the existing resolving-class extension theorem and localization full faithfulness."
+   }
+  },
+  {
+   "text": "If $\\sigma,\\tau:LF_w\\to LF_v$ agree on the $Q_iP$, naturality along the resolution $p:P\\to K$ gives, for either transformation,\n$$\\sigma_{Q_iK}=LF_v(Q_i p)\\circ\\sigma_{Q_iP}\\circ LF_w(Q_i p)^{-1}.$$\nThus their components agree on every $Q_iK$. Clause (3) of [lem-weil-pbc-localization-universal-property] makes them equal. The same argument works for any two functors out of $D(\\mathcal A_i)$, proving the final determination assertion and uniqueness of the normalization in Step 4.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition); agent finite-word argument."
+   }
+  },
+  {
+   "text": "For an identity $t$, the formula of Step 3 is an identity. For $t:F_w\\to F_v$ and $s:F_v\\to F_u$, multiplication of the two formulas cancels $\\varepsilon_{v,P}\\varepsilon_{v,P}^{-1}$ and gives $\\alpha_{s,P}\\alpha_{t,P}=\\alpha_{st,P}$. Step 5 then gives preservation of identity and vertical composition. If $t$ is an ordinary isomorphism, apply this to its ordinary inverse; the two descended composites are identities, so $t^L$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition); agent finite-word argument."
+   }
+  },
+  {
+   "text": "Check precomposition by an edge $b:h\\to i$. Write $B=C(F_b)P$ for $P\\in\\mathcal P_h$, so $B\\in\\mathcal P_i$ by Step 1. Naturality of $t^L$ along the isomorphism $\\varepsilon_{b,P}:LF_bQ_hP\\to Q_iB$ gives\n$$LF_v(\\varepsilon_{b,P})\\circ t^L_{LF_bQ_hP}=t^L_{Q_iB}\\circ LF_w(\\varepsilon_{b,P}).$$\nPostcompose with $\\varepsilon_{v,B}$ and apply the normalization at $B$. Using $\\varepsilon_{vb,P}=\\varepsilon_{v,B}\\circ LF_v(\\varepsilon_{b,P})$ and the analogous formula for $w$, the result is\n$$\\varepsilon_{vb,P}\\circ t^L_{LF_bQ_hP}=Q_j(C(t)_{B})\\circ\\varepsilon_{wb,P}.$$\nThis is precisely the required normalization for the ordinary cell $tF_b$. Step 5 identifies its descent with the prewhiskered $t^L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition); agent finite-word argument."
+   }
+  },
+  {
+   "text": "For postcomposition by $a:j\\to k$, naturality of the edge counit on the chain map $C(t)_P:C(F_w)P\\to C(F_v)P$ gives\n$$\\varepsilon_{a,C(F_v)P}\\circ LF_a(Q_j(C(t)_P))=Q_k(C(F_a)C(t)_P)\\circ\\varepsilon_{a,C(F_w)P}.$$\nApply $LF_a$ to the normalization for $t$, and substitute this equality and the composite counit formulas. This gives\n$$\\varepsilon_{av,P}\\circ LF_a(t^L_{Q_iP})=Q_k(C(F_at)_P)\\circ\\varepsilon_{aw,P}.$$\nBy Step 5 this is the descent of $F_at$. Steps 7 and 8 iterate over arbitrary words. Every finite pasting is built from these two whiskerings, vertical composition and identities; substitute the proved compatibilities at each operation. Equal ordinary pastings therefore have the same descended transformation. No assertion that a nonexact edge preserves arbitrary quasi-isomorphisms was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition); agent finite-word argument."
+   }
+  },
+  {
+   "text": "For scalar extension along a and b, use [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] to equip the three prescribed ordinary functors with extension/restriction adjunctions whose units send x to the sheafified 1 tensor x. Successive restrictions equal restriction along a composite by the canonical isomorphism having identity section maps. Mathlib Adjunction.leftAdjointUniq gives Fa.E followed by Fb.E isomorphic to Fba.E. Transpose its component twice. The adjoint uniqueness equation identifies the double transpose with the unit of Fba. Linearity and the normalized units give t tensor (s tensor x) mapping to (b(s) * t) tensor x. Identity restriction is similarly the identity by its canonical sectionwise identity; left adjoint uniqueness gives F.E isomorphic to the identity, and its transpose equation gives s tensor x mapping to s*x. Apply the generic resolving-class descent argument of Steps 3-5 to the cochain comparison maps. The source comparison is the composite of Fa and Fb counits. Its components are invertible on resolving complexes, since Fa computes on K-flat complexes and [lem-pur-kflat-change-of-rings-all-independent] makes Fa(P) K-flat, so Fb computes there too. The target counit is invertible by Fba.computes. Descending an ordinary isomorphism yields an isomorphism: its resolving components are invertible; naturality along incoming quasi-isomorphisms propagates this to every Q(K), and essential surjectivity of Q propagates it to every derived object. The identity scalar comparison is the same construction with target counit the identity. Uniqueness is the uniqueness already proved in Step 5. This argument permits independent universes for all three chosen derived categories.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-pur-kflat-change-of-rings-all-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03EK (extension/restriction adjunction and normalized unit), 0G7E (K-flat scalar change), and 06YY (derived comparison); Mathlib Adjunction.leftAdjointUniq; agent assembly."
+   }
+  },
+  {
+   "text": "By [def-coef-ringed-sequence-site], a strict quotient-semilinear system is a module sheaf on the single sequence ringed site. Apply Step 1 there, taking $K$ to be its entire complex. The augmentation $P\\to K$ is one morphism of module-sheaf complexes on that site, and every $C(F_w)P$, counit and $C(t)_P$ above is formed there. Hence the normalization and the pasting equations already hold in its unbounded derived category; the ordinary formulas used to produce them are morphisms of the entire strict systems. This construction makes no evaluation or inverse-limit operation. The arguments used only flat-term K-flat replacement and ringed pullback preservation, which impose none of the additional boundedness, normalization, Tor-amplitude or structural-flatness assumptions listed in the statement.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition); agent finite-word argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-pullback-resolving-computation",
+  "def-weil-abstract-derived-category",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-weil-pbc-localization-universal-property",
+  "def-coef-ringed-sequence-site",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-kflat-change-of-rings-all-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 0G7E, 06YY and 0D6D; existing right-fraction resolving-class extension and Mathlib localization; scalar comparisons via the normalized extension/restriction adjunction (sites-modules Tags 03D7 and 03EK). C5 stage-3 proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedLift|leftDerived_fac_app|IsKFlat",
+   "results": "7 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean. Subdirectory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "results": "6 hits: CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerived_fac_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One flat term K-flat resolution on a ringed sequence site simultaneously computes finite composites of geometric pullback and scalar extension, with the canonical derived comparison counits",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.lan_flat_of_flat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, comonadicExtendScalars, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "leansearch",
+   "query": "One K-flat resolution of strict quotient systems computes all intermediate scalar pullback composites and the universal cochain normalized associator unitor and comparison maps",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose_map_rightUnitor, HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap_fac_assoc, HomRel.FactorsThroughLocalization.strictUniversalPropertyFixedTarget, ComplexShape.strictUniversalPropertyFixedTargetQuotient, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal derived counits for finite words in exact inverse image and nonflat scalar extension are simultaneously invertible on whole diagram K-flat models and identify canonical composition and scalar unit maps",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, CategoryTheory.lan_flat_of_flat, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite diagram of ringed topoi, flat term K-flat models compute every finite word in derived pullbacks; natural transformations of ordinary words descend uniquely and preserve whiskering and pasting",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, CategoryTheory.lan_flat_of_flat, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CategoryTheory.lan_preservesFiniteLimits_of_flat, CategoryTheory.RepresentablyFlat, CategoryTheory.RepresentablyFlat.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|flat.*resolution|fullyFaithfulWhiskeringLeft",
+   "results": "5 hits: Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean. Subdirectory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: read LeftDerived.lean:74-141 and Predicate.lean:278-291. Generic derived-cell and localization APIs cover parts, but not common flat-term K-flat models and nonexact finite-word whiskering on arbitrary ringed sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "results": "6 hits: CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerived_fac_app_assoc.",
+   "date": "2026-10-22",
+   "verdict": "no match: read LeftDerived.lean:74-141 and Predicate.lean:278-291. Generic derived-cell and localization APIs cover parts, but not common flat-term K-flat models and nonexact finite-word whiskering on arbitrary ringed sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between composites of derived ringed topos pullbacks uniquely computed on K-flat resolutions",
+   "results": "8 hits: CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.NatTrans.leftDerived.",
+   "date": "2026-10-22",
+   "verdict": "no match: read LeftDerived.lean:74-141 and Predicate.lean:278-291. Generic derived-cell and localization APIs cover parts, but not common flat-term K-flat models and nonexact finite-word whiskering on arbitrary ringed sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived functors on a common resolving subcategory preserve composition of natural transformations and horizontal pasting",
+   "results": "8 hits: CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.leftDerived_fac_app_assoc, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerivedNatTrans_comp_assoc, CategoryTheory.NatTrans.rightDerived_comp_assoc.",
+   "date": "2026-10-22",
+   "verdict": "no match: read LeftDerived.lean:74-141 and Predicate.lean:278-291. Generic derived-cell and localization APIs cover parts, but not common flat-term K-flat models and nonexact finite-word whiskering on arbitrary ringed sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat flat term resolutions on ringed sites simultaneously compute finite composites of derived pullbacks and descend natural transformations compatibly with whiskering",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.RepresentablyFlat.comp, CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CategoryTheory.lan_flat_of_flat, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, CategoryTheory.RepresentablyCoflat.comp, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'.",
+   "date": "2026-10-22",
+   "verdict": "no match: read LeftDerived.lean:74-141 and Predicate.lean:278-291. Generic derived-cell and localization APIs cover parts, but not common flat-term K-flat models and nonexact finite-word whiskering on arbitrary ringed sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-quotient-system-mixed-coherence",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "prop-trf-karoubi-independence.proof.md, final sentence: Frobenius transport at a common stage; simultaneous comparison normalization and localization in old mixed-coherence steps 7-8.",
+   "via": [
+    "lem-trf-quotient-system-mixed-coherence",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-ringed-kflat-word-comparison-descent",
+  "worker": "stage1",
+  "summary": "Q98 retained the statement and all imported metadata; reused existing site-level resolution, pullback preservation, universal counit computation, resolving-class natural-transformation extension, fractions and localization nodes. Explicitly checked both whiskerings and scalar associator/unit formulas. No new nodes are needed.",
+  "blueprint": "Realizes the final Frobenius/common-stage transporting-isomorphism sentence in prop-trf-karoubi-independence.proof.md through the existing mixed-coherence ancestor chain; supplies normalized finite-word comparisons for unit sk-thm-trace-transport Steps 2-4.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic arbitrary ringed-site flat-term K-flat replacement; no trace-specific construction replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-topos preservation of flat-term K-flat complexes; needed for nonflat scalar change as well as geometric pullback."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-resolving-computation",
+    "why": "Generic universal cochain counit computation on resolving models, with independent sizes; the trace unit does not prove this homological algebra."
+   },
+   {
+    "node": "lem-sc-nattrans-from-resolving-class",
+    "why": "Generic right-fraction extension theorem, used to extend a natural family from resolving complexes; supplies the missing descent rather than assuming it."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "Generic right calculus of fractions in the homotopy category, required by the extension theorem."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic Stacks 0GMW comparison of sheaf tensor with sheafified presheaf tensor; needed in Step 9 to compute the ordinary sheaf-level scalar associator on sections, which no node of the trace unit gives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-pullback-resolving-computation",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-sites-module-sheafification-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-8692627e9",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-8692627e9 (reviewer sub-agent of L); spot-checked: Read the item, all ten steps and every cited statement: lem-pc-kflat-resolution, lem-weil-pbc-ringed-topos-kflat-pullback (covers scalar change along a non-flat map on the identity topos), lem-weil-pbc-pullback-resolving-computation, lem-sc-nattrans-from-resolving-class (all four hypotheses supplied by Steps 1 and 3, the fractions node and the localization), lem-weil-pbc-localization-universal-property clauses 2 and 3, def-coef-ringed-sequence-site, and the parent's Step 4 use. The statement and stmt_deps are verbatim from the Q70 base. There are no new nodes and no SGA citation. I recomputed by hand the naturality in Step 3, the uniqueness in Step 5, the composition in Step 6, and both whiskerings in Steps 7 and 8. Step 7's concatenation-counit identity was checked by induction from the recursive definition. Edge cases checked: empty word, zero ring, Z to Z/4 to Z/2, non-invertible cells, exact edges. One fault (C1/C2): Step 9 was marked elementary but built the sheaf-level scalar associator from sectionwise formulas on a sheafified inner tensor, which needs Stacks 0GMW. FIXED by citing lem-pc-sites-module-sheafification-tensor (second clause, O=S) and the Mathlib leaf lem-weil-pbc-module-tensor-cancel-base-change (cancelBaseChange). Step 9 is now non-elementary, proof_deps is updated, and a tool_uses entry is added for the off-unit 0GMW node (no cycle). The five declared generic tool uses are accepted. Overlap note: lem-sfb-successive-derived-quotient-normalization states the derived associator with the same representative formula; it is not a duplicate of the item's general word or pasting descent.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedKFlatWordComparisonDescent",
+  "declaration": "CategoryTheory.RingedKFlatWord.word_comparison_descent",
+  "declarations": [
+   "CategoryTheory.RingedKFlatWord.Site",
+   "CategoryTheory.RingedKFlatWord.Edge",
+   "CategoryTheory.RingedKFlatWord.Word",
+   "CategoryTheory.RingedKFlatWord.Word.ordinaryData",
+   "CategoryTheory.RingedKFlatWord.Word.ordinary",
+   "CategoryTheory.RingedKFlatWord.Word.additive",
+   "CategoryTheory.RingedKFlatWord.Word.complex",
+   "CategoryTheory.RingedKFlatWord.Word.derived",
+   "CategoryTheory.RingedKFlatWord.Word.counit",
+   "CategoryTheory.RingedKFlatWord.Resolving",
+   "CategoryTheory.RingedKFlatWord.simultaneous_resolution",
+   "CategoryTheory.RingedKFlatWord.word_computation",
+   "CategoryTheory.RingedKFlatWord.Normalized",
+   "CategoryTheory.RingedKFlatWord.descent_existsUnique",
+   "CategoryTheory.RingedKFlatWord.Word.cell",
+   "CategoryTheory.RingedKFlatWord.determined_on_resolving",
+   "CategoryTheory.RingedKFlatWord.cell_normalized",
+   "CategoryTheory.RingedKFlatWord.Expression",
+   "CategoryTheory.RingedKFlatWord.Expression.ordinary",
+   "CategoryTheory.RingedKFlatWord.Expression.derived",
+   "CategoryTheory.RingedKFlatWord.word_comparison_descent",
+   "CategoryTheory.RingedKFlatWord.scalar_associator",
+   "CategoryTheory.RingedKFlatWord.scalar_unit",
+   "CategoryTheory.RingedKFlatWord.coefficientSequenceSite"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedKFlatWordComparisonDescent.lean",
+  "statement": "theorem word_comparison_descent [Finite I] : (∀ {i j : I} {w v : Word E i j} (f : Expression S E A w v), f.derived S E A = Word.cell S E A (f.ordinary S E A)) ∧ (∀ {i j : I} {w v : Word E i j} (f g : Expression S E A w v), f.ordinary S E A = g.ordinary S E A → f.derived S E A = g.derived S E A) ∧ (∀ {i j : I} {w v : Word E i j} (t : w.ordinary S E A ⟶ v.ordinary S E A), IsIso t → IsIso (Word.cell S E A t))",
+  "branch": "sheaf-dag",
+  "by": "Q146",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The eight theorem declarations collectively state every clause: simultaneous_resolution, word_computation, descent_existsUnique, determined_on_resolving, cell_normalized, word_comparison_descent, scalar_associator, scalar_unit. Helpers bundle the existing ringed pullback and universal cochain pair, finite words, their literal composite counits, and finite pastings; coefficientSequenceSite is the recorded sequence site itself. Added statement dependencies are already landed interfaces used verbatim: RingedPullback, DerivedChangeOfRingsCochainModel and scalarTensorSection. No mathematical statement or proof plan is changed. Returned-head e6d4fae26d0d repair: statement dependencies cite the definition owners def-sfb-derived-change-of-rings-cochain-model and def-trf-scalar-tensor-section instead of the two theorem nodes; all mathematical signatures are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-982efc2ed",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed e6d4fae26d0d (A3/H2 theorem stmt_deps). Snapshot diff vs returned head: Lean module changes only imports (PullbackTensorResolvingComputation now plain; KFlatIndependentCoefficients and Functor.Derived.LeftDerived public for signature use); all signatures unchanged, so the prior clause-by-clause verdict on the mathematics stands. stmt_deps: lem-pur-derived-change-of-rings -> landed existing:true def-sfb-derived-change-of-rings-cochain-model (owns DerivedChangeOfRingsCochainModel); lem-pur-finite-free-completion-exchange-coherence -> new def-trf-scalar-tensor-section, an existing:true record of the real def PrincipalQuotientCompletion.scalarTensorSection (FiniteFreeCompletionExchangeCoherence.lean:71, eqToHom of sheafified pure tensor). Node statement matches the def and its hypotheses (V/wV not included); record starts at def and is verbatim in live; deps are all live definition nodes, no cycle; no other owner node in live. Item lean.statement verbatim, 24 declarations present, 8 sorries, all 8 base stmt_deps kept. Report has Worker report, Second reading by Q146 and a re-read of the repair. Advisory only: the plain proof-tool import is unused while proofs are sorry. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261024T014437-L-2197253",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

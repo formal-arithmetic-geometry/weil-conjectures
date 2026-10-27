@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-bounded-exponent-reduced-p-kernel",
+ "kind": "statement",
+ "title": "The reduced neutral component of a bounded p-power torsion group has nontrivial p-kernel",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Assume $\\operatorname{char}k=p>0$ and every element of $k$ is a $p$-th power. Let $C$ be smooth, connected, commutative and nontrivial ($C\\not\\simeq\\operatorname{Spec}k$). Suppose $[p^e]_C=0$ for some integer $e\\geq1$, where $[m]_C$ sends a section $c$ to its $m$-fold sum. Let $H=\\ker([p]_C:C\\to C)$ be the scheme-theoretic kernel, that is the fibre over the identity section [def-pc-fibre-product]. Let $K=(H_{\\mathrm{red}})^\\circ$, where $H_{\\mathrm{red}}$ is the reduced closed subscheme obtained by quotienting the coordinate algebra by its nilpotent elements [def-pc-reduced-scheme], and the superscript denotes the connected component containing the identity. Then $K$ is a nontrivial smooth connected closed subgroup scheme of $C$, is commutative, and $[p]_K=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.55 proof, printed p.297, the subgroup (U double-prime)_red^0; Corollary 1.39, printed p.18, and Propositions 1.34 and 1.52 on identity components. The nontriviality of this reduced p-kernel, implicit in 14.55, is made explicit under the bounded-exponent hypothesis."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-kernel-subgroup], $H=\\ker[p]_C$ is a closed subgroup of $C$. The affine closed-immersion criterion [lem-weil-pbc-closed-immersion-affine-cover-criterion] writes $H=\\operatorname{Spec}(A/J)$ when $C=\\operatorname{Spec}A$. A finite generating family for $A$ maps to one for $A/J$ and its further quotient by nilpotents, so $H$ and $H_{\\mathrm{red}}$ are affine of finite type [def-weil-finite-type-morphism]. Apply the reduction clause of [lem-sfb-perfect-field-groupoid-image-closure] to the group $H$, viewed as a groupoid on $\\operatorname{Spec}k$ with source and target its structure map and composition its multiplication [def-a1-groupoid-scheme, def-sc-group-scheme]. The hypothesis holds because the assumed surjectivity of $a\\mapsto a^p$ makes $k$ perfect. Thus $H_{\\mathrm{red}}\\hookrightarrow H$ is a subgroup homomorphism as well as the canonical closed immersion [def-weil-pbc-scheme-reduction].",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-perfect-field-groupoid-image-closure",
+    "def-a1-groupoid-scheme",
+    "def-sc-group-scheme",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.55, printed p.297, reduced neutral p-kernel; Corollary 1.39 and Proposition 1.34, pp.16-18. The minimal-exponent factorization makes the implicit nontriviality argument explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-type-group-identity-subgroup] to $G=H_{\\mathrm{red}}$, which is a finite-type group over the given field; algebraic closedness is unnecessary. It gives the connected clopen subgroup $K$ with its open-subscheme structure and a closed immersion $K\\hookrightarrow H_{\\mathrm{red}}$. Composing with $H_{\\mathrm{red}}\\hookrightarrow H\\hookrightarrow C$ gives a closed subgroup of $C$ by [lem-weil-pbc-closed-immersion-products]. Apply [lem-weil-pbc-closed-immersion-affine-cover-criterion] to $K\\hookrightarrow H_{\\mathrm{red}}$: $K$ is affine with coordinate algebra a quotient of that of $H_{\\mathrm{red}}$, hence finitely generated over $k$ [def-weil-finite-type-morphism]. Since $K$ is also an open subscheme of the reduced scheme $H_{\\mathrm{red}}$, its local rings are the same reduced local rings [def-pc-reduced-scheme].",
+   "uses": [
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-finite-type-morphism",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.55, printed p.297, reduced neutral p-kernel; Corollary 1.39 and Proposition 1.34, pp.16-18. The minimal-exponent factorization makes the implicit nontriviality argument explicit."
+   }
+  },
+  {
+   "text": "The reduced finite-type $k$-scheme $K$ is geometrically reduced by [lem-kun-geometric-reduced-perfect], since $k$ is perfect. As $K$ is a group scheme, [lem-sfb-geometrically-reduced-group-smooth] proves that $K$ is smooth. For every $k$-algebra $R$, the inclusion $K(R)\\hookrightarrow C(R)$ is an injective homomorphism by [def-sc-group-scheme-subgroup]. Its image is commutative and lies in $H(R)=\\ker[p]_{C(R)}$ by [lem-sc-kernel-subgroup]. Therefore $K(R)$ is commutative and $[p]_{K(R)}=0$, compatibly with every $R$; these are exactly commutativity of $K$ and the identity $[p]_K=0$ of group-scheme maps.",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "def-sc-group-scheme-subgroup",
+    "lem-sc-kernel-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.55, printed p.297, reduced neutral p-kernel; Corollary 1.39 and Proposition 1.34, pp.16-18. The minimal-exponent factorization makes the implicit nontriviality argument explicit."
+   }
+  },
+  {
+   "text": "It remains to prove $K\\not\\simeq\\operatorname{Spec}k$. Choose the least $n\\geq1$ with $[p^n]_C=0$; the hypothesis supplies one. Put $a=[p^{n-1}]_C$. If $n>1$, minimality gives $a\\ne0$; if $n=1$, then $a=[1]_C=\\mathrm{id}_C\\ne0$, since $\\mathrm{id}_C=0$ would make the structure morphism and identity section inverse isomorphisms $C\\simeq\\operatorname{Spec}k$. On sections, $[p]\\circ a=[p^n]=0$, so the kernel fibre product gives $b:C\\to H$ with composite $a:C\\to C$ [lem-sc-kernel-subgroup, def-sc-group-scheme].",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.55, printed p.297, reduced neutral p-kernel; Corollary 1.39 and Proposition 1.34, pp.16-18. The minimal-exponent factorization makes the implicit nontriviality argument explicit."
+   }
+  },
+  {
+   "text": "By [sbc-lem-smooth-geometrically-reduced], the smooth scheme $C/k$ is geometrically reduced (it is the fibre over the only point of $\\operatorname{Spec}k$), hence reduced. Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $b:C\\to H$: it factors as $b_{\\mathrm{red}}:C\\to H_{\\mathrm{red}}\\hookrightarrow H$. The lift sends the identity to the identity, since its composite does and the reduction inclusion is a monomorphism. Its continuous image is connected: any decomposition of that image into two nonempty relatively clopen pieces would pull back to such a decomposition of the connected space $C$ [def-weil-connected-scheme]. Hence the image lies in the maximal connected subset of $H_{\\mathrm{red}}$ containing the identity, namely $|K|$. Because $K$ is open, [lem-weil-pbc-morphism-factors-through-open-subscheme] factors $b_{\\mathrm{red}}$ through $K$. If $K\\simeq\\operatorname{Spec}k$, this factorization makes $a$ the constant identity map: the identity section of $K$ is then the inverse of its structure morphism. This contradicts $a\\ne0$ from step 4. Thus $K$ is nontrivial.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.55, printed p.297, reduced neutral p-kernel; Corollary 1.39 and Proposition 1.34, pp.16-18. The minimal-exponent factorization makes the implicit nontriviality argument explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kernel-subgroup",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-perfect-field-groupoid-image-closure",
+  "def-a1-groupoid-scheme",
+  "def-sc-group-scheme",
+  "def-weil-pbc-scheme-reduction",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "lem-weil-pbc-closed-immersion-products",
+  "def-pc-reduced-scheme",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.55, printed p.297, reduced neutral p-kernel; Corollary 1.39 and Proposition 1.34, pp.16-18. The minimal-exponent factorization makes the implicit nontriviality argument explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a perfect field of characteristic p a nontrivial smooth connected commutative group scheme killed by a power of p has positive dimensional reduced identity component of its p kernel",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); PerfectClosure.instNontrivialOfIsReduced, PerfectField.toPerfectRing, PerfectRing.ofFiniteOfIsReduced, IsAlgClosed.perfectRing, PerfectRing, PerfectClosure.instReduced, RingHom.pNilradical_le_ker_of_perfectRing, PerfectRing.pNilradical_eq_bot",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommGroup\", \"exponent\"",
+   "date": "2026-10-24",
+   "results": "[loogle] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "reduced.*(kernel|identity)|exponent.*(group|Group)",
+   "date": "2026-10-24",
+   "results": "[grep] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced neutral component of the kernel of multiplication by p in a bounded p torsion connected algebraic group is nontrivial",
+   "date": "2026-10-24",
+   "results": "[leansearch] OK 8 hit(s); AddCommGroup.primaryComponent, CommGroup.primaryComponent, RingHom.pNilradical_le_ker_of_perfectRing, AddCommGroup.coe_primaryComponent, not_isMulTorsionFree_of_isTorsion, CommGroup.primaryComponent.isPGroup, IsPGroup.bot_lt_center, AddCircle.finite_torsion_of_isSMulRegular",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nilpotent multiplication by p endomorphism of a positive dimensional commutative algebraic group has a positive dimensional kernel",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); LinearMap.exists_isNilRegular, LinearMap.exists_isNilRegular_of_finrank_le_card, JacobsonNoether.exist_pow_eq_zero_of_le, Module.End.exists_ker_pow_eq_ker_pow_succ, Module.End.ker_pow_le_ker_pow_finrank, LinearMap.IsNilRegular, LinearMap.nilRank_le_finrank, Module.End.ker_pow_eq_ker_pow_finrank_of_le",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "reduced.*(kernel|identity)|groupScheme.*kernel",
+   "results": "{\"t\": \"2026-10-23T22:30:44Z\", \"tool\": \"grep\", \"query\": \"reduced.*(kernel|identity)|groupScheme.*kernel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these searches return abstract torsion groups, perfect closures or nilpotent linear/Lie endomorphisms, not the asserted reduced p-kernel of a smooth connected algebraic group.",
+   "directory": "Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected smooth algebraic group of bounded p power exponent has a nontrivial smooth connected p torsion subgroup",
+   "results": "{\"t\": \"2026-10-23T22:30:45Z\", \"tool\": \"leansearch\", \"query\": \"A connected smooth algebraic group of bounded p power exponent has a nontrivial smooth connected p torsion subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGroup.torsion\", \"CommGroup.torsion\", \"IsPGroup.center_nontrivial\", \"ExponentExists.is_add_torsion\", \"AddCommGroup.primaryComponent\", \"IsPGroup.isNilpotent\", \"IsPGroup\", \"Sylow.toSubgroup\"], \"digest\": \"b2fea1109316c4eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these searches return abstract torsion groups, perfect closures or nilpotent linear/Lie endomorphisms, not the asserted reduced p-kernel of a smooth connected algebraic group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"kernel\"",
+   "results": "{\"t\": \"2026-10-23T22:30:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"kernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these searches return abstract torsion groups, perfect closures or nilpotent linear/Lie endomorphisms, not the asserted reduced p-kernel of a smooth connected algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected commutative algebraic group killed by a power of p has a nontrivial reduced identity component in the kernel of multiplication by p",
+   "results": "{\"t\": \"2026-10-23T22:30:46Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected commutative algebraic group killed by a power of p has a nontrivial reduced identity component in the kernel of multiplication by p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModP.nontrivial\", \"CommGroup.primaryComponent\", \"PerfectClosure.instNontrivialOfIsReduced\", \"CommGroup.primaryComponent.isPGroup\", \"AddCommGroup.primaryComponent\", \"CommGroup.coe_primaryComponent\", \"PerfectClosure.instReduced\", \"ModP.mul_ne_zero_of_pow_p_ne_zero\"], \"digest\": \"3a8f707bbd7f5b3d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these searches return abstract torsion groups, perfect closures or nilpotent linear/Lie endomorphisms, not the asserted reduced p-kernel of a smooth connected algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a nilpotent multiplication endomorphism of a connected smooth group scheme contains nonzero p torsion",
+   "results": "{\"t\": \"2026-10-23T22:31:35Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a nilpotent multiplication endomorphism of a connected smooth group scheme contains nonzero p torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isNilpotent_f\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"LieModule.mem_posFittingCompOf\", \"isNilpotent_tensor_residueField_iff\", \"LieModule.exists_forall_pow_toEnd_eq_zero\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"LinearMap.exists_isNilRegular\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat\"], \"digest\": \"ee4504cc303bfa56\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these searches return abstract torsion groups, perfect closures or nilpotent linear/Lie endomorphisms, not the asserted reduced p-kernel of a smooth connected algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group over an arbitrary field has a canonical connected identity subgroup which is open and closed when it has finite type",
+   "results": "{\"t\": \"2026-10-23T22:34:01Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group over an arbitrary field has a canonical connected identity subgroup which is open and closed when it has finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"Subgroup.pathComponentOne\", \"AddSubgroup.connectedComponentOfZero\", \"OpenSubgroup.instInhabited\", \"mul_mem_connectedComponent_one\", \"OpenNormalSubgroup.pathComponentOne\", \"Subgroup.Normal.pathComponentOne\", \"Subgroup.coe_pathComponentOne\"], \"digest\": \"eefbbc005c7e8fe0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these searches return abstract torsion groups, perfect closures or nilpotent linear/Lie endomorphisms, not the asserted reduced p-kernel of a smooth connected algebraic group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-central-additive-subgroup",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: The reduced neutral component of a bounded p-power torsion group has nontrivial p-kernel.",
+   "via": [
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bounded-exponent-reduced-p-kernel",
+  "worker": "stage1",
+  "summary": "Q83 checked Milne 14.55, 1.34 and 1.39, Stacks 0B7R and every cited statement. Retained the statement and all its hypotheses. The proof constructs the reduced identity subgroup and proves nontriviality by factoring the last nonzero p-power map through it. Added only the general arbitrary-field identity-subgroup lemma, because the existing geometric component nodes assume algebraically closed fields. No dimension formula or image theorem is needed.",
+  "blueprint": "The supporting reduced p-kernel argument in the inherited det-thm-sf-ctf-stability-direct-images (3) dependency chain. The latest main-20261024 direct-image proof and unit were read; this auxiliary algebraic-group lemma is below that fixed route. blueprint_refs.py ancestor returns None, as in the inherited metadata; the original null from.node and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic kernel-as-closed-subgroup theorem used to construct H; this unit has no alternative group-kernel theorem."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Only its generic composition-of-closed-immersions clause is used for the subgroup inclusion into C."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic perfect-field geometric reducedness applied to K; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-fibre reducedness supplies reducedness of C."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic reduction factorization applied to a morphism from the reduced scheme C."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kernel-subgroup",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-kun-geometric-reduced-perfect",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-4c9dfc666",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-4c9dfc666 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item, all five steps and the one new node, lem-sfb-finite-type-group-identity-subgroup, against the cited statements and the sources. Sources: Milne iAG2017 Cor. 14.55 (p.297), whose subgroup (U'')°_red is the item; Prop. 1.34; Cor. 1.39; and Stacks groupoids.tex proposition-connected-component = Tag 0B7R, which gives the closed identity subgroup over any field. The item's statement and stmt_deps are byte-equal to live, where it is still unsplit; this is its first split, so no re-split note applies. The new node is true over an arbitrary field: a clopen open subscheme is closed, and G^0×G^0 is connected because G^0 has the rational point e. I tested it on the trivial group, alpha_p, mu_p, constant Z/2 and a finite étale group. A duplicate search over snapshot dag/nodes (0B7R, identity/neutral component, clopen) found only nodes that assume an algebraically closed field (locally-algebraic-group-identity-component, group-neutral-component-translates) or concern other properties. The item only assumes a perfect field, so the node is needed, and it is strictly smaller than the item. Steps: (1) lem-sc-kernel-subgroup, the affine closed-immersion criterion, and the explicit a=id reduction clause of lem-sfb-perfect-field-groupoid-image-closure (k perfect) make H_red a subgroup. (2) The new node, composition of closed immersions, and an open subscheme of a reduced scheme being reduced. (3) kun geometric-reduced-perfect, then geometrically-reduced-group-smooth; commutativity and [p]_K=0 follow from the injections K(R) ⊂ H(R) = ker[p]. (4) Least n with [p^n]=0 gives a=[p^(n-1)] ≠ 0, with n=1 handled through C not ≅ Spec k; a factors through H. (5) C is reduced since smooth over a field; a factors through H_red, then by connectedness and the identity point through the open K; K trivial would force a=0. I checked edge cases G_a, W_2, alpha_p, Z/p and G_m. No SGA. Advisory only: Lean GroupScheme/Basic.lean already has GrpObj.identityComponent, identityComponentι (IsMonHom), isClopen_connectedComponent_onePoint and a ConnectedSpace instance, all without sorry; stage-2 attachment of the new node should start there."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedExponentReducedPKernel",
+  "declaration": "AlgebraicGeometry.exists_nontrivial_reduced_neutral_p_kernel_of_bounded_exponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedExponentReducedPKernel.lean",
+  "statement": "theorem exists_nontrivial_reduced_neutral_p_kernel_of_bounded_exponent (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hperfect : Function.Surjective (fun a : k => a ^ p)) (C : Over (Spec (CommRingCat.of k))) [GrpObj C] [IsCommMonObj C] [IsAffine C.left] [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [Smooth C.hom] [ConnectedSpace C.left] (hC : ¬ IsIso C.hom) (e : ℕ) (he : 1 ≤ e) (hexponent : 𝟙 C ^ (p ^ e) = 1) : ∃ (K : Over (Spec (CommRingCat.of k))) (_ : GrpObj K) (j : K ⟶ GrpObj.ker (𝟙 C ^ p)), IsClosedImmersion j.left ∧ j.left.ker = Scheme.IdealSheafData.vanishingIdeal ⟨connectedComponent (GrpObj.onePoint (GrpObj.ker (𝟙 C ^ p))), isClosed_connectedComponent⟩ ∧ IsClosedSubgroupScheme (j ≫ GrpObj.kerι (𝟙 C ^ p)) ∧ IsAffine K.left ∧ LocallyOfFiniteType K.hom ∧ QuasiCompact K.hom ∧ IsReduced K.left ∧ ¬ IsIso K.hom ∧ Smooth K.hom ∧ ConnectedSpace K.left ∧ IsCommMonObj K ∧ 𝟙 K ^ p = 1",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "K is specified up to its unique isomorphism over H by a closed immersion j into H = ker[p] and the exact vanishing ideal of the identity component of H. This is the reduced induced closed structure, hence precisely (H_red)^0; reduction is a homeomorphism and the component is clopen. The group structure is supplied existentially on this specified scheme, with its canonical inclusion into C a closed subgroup homomorphism. No arbitrary subgroup or map substitutes for K."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f500c1a26",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in its lean record, and lean.statement matches the file verbatim. All hypotheses match one for one (field, CharP p with p>0, surjective p-th power, affine finite type smooth connected commutative GrpObj over Spec k, ¬IsIso C.hom, 𝟙^(p^e)=1 with e≥1); none is stronger. H = GrpObj.ker (𝟙 C ^ p), a pullback along η. K is pinned by a closed immersion j into H whose ideal is the vanishing ideal of the identity component of H; vanishingIdeal_top = nilradical shows this is the radical ideal, and the component is clopen for finite type (isOpen_connectedComponent_onePoint), so K is exactly (H_red)°. The existential GrpObj is unique because IsClosedSubgroupScheme includes IsMonHom and kerι is mono. Every conclusion clause is present: closed subgroup of C, affine, finite type, reduced, nontrivial, smooth, connected, commutative, 𝟙 K ^ p = 1. Edge cases checked: e=1, G_a, W_2, trivial group, α_p, Z/p, p=0 and 1, universes. Gates: no definitions, proof is sorry, docstrings with source and blueprint and the five proof steps, proof-dep imports exist, no pro-étale substitute, report sections present. No compile because no file changed. Advisory: IsReduced K.left is redundant given the ideal clause."
+ }
+}

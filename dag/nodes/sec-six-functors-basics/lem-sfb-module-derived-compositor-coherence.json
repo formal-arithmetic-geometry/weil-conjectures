@@ -20,91 +20,44 @@
  ],
  "proof": [
   {
-   "text": "For each scheme $T$ use its small site in [def-weil-pbc-proetale-site], write $B_T$ for the section-ring sheaf reconstructed from $\\Lambda_T$, and write $E_T$ for the fixed internal/sectionwise equivalence. By [lem-sfb-internal-module-operations-transport], $E_T$ is additive exact and identifies the module direct image with the sectionwise direct image for the structural ring map adjunct to $\\alpha_f$. These are ringed-topos morphisms with commutative rings: the commutativity is part of [sk-def-sfb-pulled-back-coefficients]. Their composition is the structural map for the composite scheme map. Indeed [lem-sfb-eta-comp] gives $\\eta_{gf}=c_{g,f,\\Lambda_X}\\,g_*\\eta_f\\,\\eta_g$. Apply [lem-sfb-section-ring-lax-pushforward-coherence] to base-change precomposition on these sites and these coefficient maps. Its composition and identity assertions identify the ordinary internal compositors with the sectionwise geometric compositors, including the coefficient actions. Thus this identification concerns the specified maps, and not just their endpoints.",
+   "text": "Use the existing module upperStarLowerStarAdjunction and exactness of upperStar to install preservation of K-injectives by lowerStar, by lem-weil-pbc-right-adjoint-preserves-kinjective. Apply the existing canonical composition isomorphism of lem-fin-kinjective-derived-composition to lowerStarComp. Reuse UnboundedSectionsLocalization.compIso_objQ from lem-sfb-unbounded-sections-localization (made public in its original module): at Q(I), successive K-injective computation isomorphisms cancel the composite unit. Functor.rightDerivedFunctorNatTrans_app_Q_obj applies the inverse ordinary compositor termwise. These two calculations give exactly module_derived_compositor_normalization, including the inverse compositor direction.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-sfb-internal-module-operations-transport",
-    "sk-def-sfb-pulled-back-coefficients",
-    "lem-sfb-eta-comp",
-    "lem-sfb-section-ring-lax-pushforward-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; internal-module specialization and coherence via the existing ringed cocycle theorem. See also derived.tex Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070Y (lemma-K-injective-defined)."
-   }
-  },
-  {
-   "text": "The adjunction $f^*\\dashv f_*$ is supplied by [sk-def-sfb-module-pushforward-pullback], and its left adjoint is additive exact for every scheme morphism by [det-prop-sfb-module-pullback-exact-main]. Consequently [lem-weil-pbc-right-adjoint-preserves-kinjective] applies with $u=f_*$ and $v=f^*$: $f_*$ carries K-injective complexes to K-injective complexes. This applies also to $g,h$ and their composites. By [lem-pd-section-derived-pushpull-normalization], termwise $E_T$ induces an equivalence $\\mathcal E_T=D(E_T)$, preserves and reflects K-injectives, and identifies the derived direct images together with their resolution transformations. Write its comparison as $a_f:\\mathcal E_Y Rf_*\\xrightarrow{\\sim}R f_{*,\\mathrm{sec}}\\mathcal E_X$. All the hypotheses here concern arbitrary schemes and commutative condensed coefficients; no finite-type or field hypothesis has been introduced.",
-   "uses": [
-    "sk-def-sfb-module-pushforward-pullback",
-    "det-prop-sfb-module-pullback-exact-main",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-pd-section-derived-pushpull-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; internal-module specialization and coherence via the existing ringed cocycle theorem. See also derived.tex Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070Y (lemma-K-injective-defined)."
-   }
-  },
-  {
-   "text": "Let $I$ be an internal K-injective complex on $X$. Step 2 says that $f_*I$ and $E_Y(f_*I)$ are K-injective. In the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] choose the identity resolution $j:E_Y(f_*I)\\to E_Y(f_*I)$. Then the comparison, after identifying the composite ordinary direct image with the iterated one, is $[g_*j]=1$. Undoing that ordinary identification gives $[c_{g,f,I}^{-1}]:(gf)_*I\\to g_*f_*I$, where $c_{g,f}$ is precisely [def-sfb-module-lower-star-comp] by Step 1. The comparisons $a_f$ of [lem-pd-section-derived-pushpull-normalization] respect the resolution transformations, so this is also the formula for the comparison transported to internal modules. It proves the normalization required in the item for every K-injective representative, with the inverse direction as stated.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-fin-kinjective-derived-composition",
     "def-sfb-module-lower-star-comp",
-    "lem-pd-section-derived-pushpull-normalization"
+    "lem-sfb-unbounded-sections-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; internal-module specialization and coherence via the existing ringed cocycle theorem. See also derived.tex Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070Y (lemma-K-injective-defined)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pur-ringed-derived-composition-cocycle] to the four ringed topoi $(T_{\\mathrm{proet}},B_T)$ and the three morphisms of Step 1. Its $\\kappa$ is the same normalized comparison as in Step 3. To spell out transport of the equation, let $A=a_{hgf}$ and let $B$ be the composite comparison from $\\mathcal E_W Rh_*Rg_*Rf_*$ to $Rh_{*,\\mathrm{sec}}Rg_{*,\\mathrm{sec}}Rf_{*,\\mathrm{sec}}\\mathcal E_X$, obtained by successively using $a_h,a_g,a_f$. Put $L=(Rh_*\\kappa_{g,f})\\kappa_{h,gf}$ and $P=(\\kappa_{h,g}Rf_*)\\kappa_{hg,f}$. The resolution-compatible comparisons of [lem-pd-section-derived-pushpull-normalization] and the compositor identification of [lem-sfb-section-ring-lax-pushforward-coherence] give\n$$\\mathcal E_W L=B^{-1}(L_{\\mathrm{sec}}\\mathcal E_X)A,\\qquad \\mathcal E_W P=B^{-1}(P_{\\mathrm{sec}}\\mathcal E_X)A.$$\nHere the intermediate $a_{gf}$ and $a_{hg}$ cancel against their inverses; naturality moves $a_h,a_g$ past the relevant components. This is the usual substitution of the transported comparison into each of the two composites. The cited ringed cocycle gives $L_{\\mathrm{sec}}=P_{\\mathrm{sec}}$. Since $\\mathcal E_W$ is an equivalence and hence faithful on each morphism set, $L=P$ componentwise. Functor associators are inserted in the definition of $B$; equalities of composite scheme maps use the same geometric fibre-product identifications fixed in Step 1.",
+   "text": "Specialize the already proved generic Functor.rightDerivedFunctorCompIso'_assoc from WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp to the six module pushforward functors. The hypothesis is lowerStarComp_assoc, with lowerStarCongr appended to the left composite to account for scheme associativity. Functoriality of rightDerivedFunctorNatIso identifies derivation of this appended comparison with the composite of derived comparisons (private helper derivedComp_post). Invert the resulting equality of natural isomorphisms and cancel the equality-transport inverse. Componentwise the derived functor associator is the identity, giving the displayed module_derived_compositor_coherence.",
    "uses": [
-    "lem-pur-ringed-derived-composition-cocycle",
-    "lem-pd-section-derived-pushpull-normalization",
-    "lem-sfb-section-ring-lax-pushforward-coherence"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-fin-kinjective-derived-composition",
+    "def-sfb-module-lower-star-comp"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; internal-module specialization and coherence via the existing ringed cocycle theorem. See also derived.tex Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070Y (lemma-K-injective-defined)."
-   }
+   "elementary": false
   },
   {
-   "text": "The identity comparison $\\epsilon_T$ in [lem-pur-ringed-derived-composition-cocycle] is induced by the termwise identity direct image. Step 1 identifies this ordinary identity comparison with the sectionwise identity for internal modules, and [lem-pd-section-derived-pushpull-normalization] identifies their resolution transformations. Hence its transport is exactly the canonical $R(1_T)_*\\cong1_{D_T}$ in the item. For example on a K-injective $I$ the identity resolution gives the identity of $I$ under the ordinary identity-direct-image identification. The two ringed equations in the cited cocycle theorem therefore transport, by the same cancellation of comparison isomorphisms as in Step 4, to\n$$(\\epsilon_Y Rf_*)\\circ\\kappa_{1_Y,f}=1_{Rf_*},\\qquad (Rf_*\\epsilon_X)\\circ\\kappa_{f,1_X}=1_{Rf_*}.$$\nThese are precisely both identity compositor constraints. The transported equations include the canonical unitors and equality identifications of scheme maps. The argument uses small-site derived categories and exact inverse image only; it places no properness, density, Noetherian or field condition on the maps.",
+   "text": "The comparison (identity).rightDerivedFunctorIsoMapDerivedCategory followed by mapDerivedCategoryIdIso equals the generic rightDerivedFunctorIdIso by right-derived extensionality: both send the derived unit to the identity. Naturality with quotientCompQhIso and rightDerivedFunctorIdIso_fac_app identify its component at Q(I) with the inverse unit followed by Q(mapHomologicalComplexIdIso). Combine this with rightDerivedFunctorNatTrans_app_Q_obj for lowerStarId to obtain module_derived_identity_normalization. For both unit laws use the generic rightDerivedFunctorCompIso'_hom_of_iso_id_left/right from the same adopted source module. lowerStarComp_id_left/right identify their ordinary compositors with lowerStarComp followed by lowerStarCongr. Apply derivedComp_post, identify the derived identity as above, and cancel the derived compositor hom against its inverse. This gives both displayed module unit constraints.",
    "uses": [
-    "lem-pur-ringed-derived-composition-cocycle",
-    "lem-pd-section-derived-pushpull-normalization"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-fin-kinjective-derived-composition",
+    "def-sfb-module-lower-star-comp"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; internal-module specialization and coherence via the existing ringed cocycle theorem. See also derived.tex Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070Y (lemma-K-injective-defined)."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "lem-sfb-internal-module-operations-transport",
-  "sk-def-sfb-pulled-back-coefficients",
-  "lem-sfb-eta-comp",
-  "lem-sfb-section-ring-lax-pushforward-coherence",
-  "sk-def-sfb-module-pushforward-pullback",
-  "det-prop-sfb-module-pullback-exact-main",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-pd-section-derived-pushpull-normalization",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-fin-kinjective-derived-composition",
   "def-sfb-module-lower-star-comp",
-  "lem-pur-ringed-derived-composition-cocycle"
+  "lem-sfb-unbounded-sections-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Specialization of the normalized ringed-topos comparison (Tag 0D6E) and existing cocycle to internal module objects; exactness and K-injective normalization from derived.tex Tags 08BJ and 070Y."
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/LowerStarComp.lean",
+  "place": "Generic unbounded right-derived composition associativity and unit lemmas, specialized to the module-object ordinary coherence; K-injective normalization by the universal resolution-unit equations (Stacks 0D6E). Reuse the existing compIso_objQ proof in Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization, exposing it in place instead of duplicating it."
  },
  "mathlib_searches": [
   {
@@ -198,63 +151,28 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-module-derived-compositor-coherence",
   "worker": "stage1",
-  "summary": "Kept the full statement and all its hypotheses. Reused the existing ringed composition cocycle and the canonical internal/sectionwise comparisons, checked preservation of K-injectives from exact module inverse image, and wrote the compositor and identity normalization explicitly. No new nodes or Mathlib leaves.",
+  "summary": "Repair of the human re-split return: statement unchanged; extracted two independent statement-only work items of comparable size. All arguments of the five old proof steps are retained in the report and assigned to the comparison-square or formal-conjugation work item. The parent now assembles their conclusions with the existing ringed cocycle in three short steps.",
   "blueprint": "det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms: the canonical Rp_*Rh_* = R(ph)_* identification used to define rho_h and to deduce rho_id = id and rho_hk = rho_k rho_h. This item isolates just the structural compositor coherence needed there.",
   "tool_uses": [
    {
-    "node": "lem-sfb-internal-module-operations-transport",
-    "why": "Identifies the actual internal and sectionwise module direct images and provides the exact equivalence; needed to specialize the ringed-topos tool."
-   },
-   {
-    "node": "lem-sfb-section-ring-lax-pushforward-coherence",
-    "why": "Its composition square and identity comparison ensure that the actual module compositors, including coefficient actions, agree under section realization."
-   },
-   {
-    "node": "lem-sfb-eta-comp",
-    "why": "The coefficient structural maps compose with the specified ordinary direct-image compositor."
-   },
-   {
-    "node": "det-prop-sfb-module-pullback-exact-main",
-    "why": "Exactness of the specified module inverse image verifies the hypothesis of K-injective preservation for arbitrary schemes."
-   },
-   {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "Generic exact-left-adjoint criterion proves that each module direct image preserves K-injective complexes."
-   },
-   {
-    "node": "lem-pd-section-derived-pushpull-normalization",
-    "why": "Generic canonical section-realization comparison of derived direct images, with resolution transformations, for arbitrary schemes; no restricted geometric setting is used."
-   },
-   {
     "node": "lem-pur-ringed-derived-composition-cocycle",
-    "why": "Generic ringed-topos normalized coherence theorem; it provides the equation to specialize, while the unit route requires this coherence for compactification comparisons."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "The comparison named by the statement, with its precise K-injective normalization."
+    "why": "Generic normalized ringed-topos associativity and two unit laws, transferred via the new comparison square and explicit conjugation lemma; it does not replace a compactification argument."
    }
   ]
  },
  "tool_uses": [
-  "lem-sfb-internal-module-operations-transport",
-  "lem-sfb-section-ring-lax-pushforward-coherence",
-  "lem-sfb-eta-comp",
-  "det-prop-sfb-module-pullback-exact-main",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-pd-section-derived-pushpull-normalization",
-  "lem-pur-ringed-derived-composition-cocycle",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-O1-bf0702427",
-  "group": "O1",
+  "reviewer": "NT-cc-Q138-30c6ff7fd",
+  "group": "Q138",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-bf0702427 (reviewer sub-agent of L); spot-checked: Zero-new-node split (5 steps); I read all five in full. Statement and stmt_deps are byte-identical to live, which is still unsplit, so no parallel group has split it. The item is not on the drop list and has no repair note; no cycle; no SGA. Source checked: det-sf-comp-coherence-cocycle.proof.md 'Refinement isomorphisms' (lines 13-18) is the identification Rp_*Rh_* = R(ph)_* this item serves. Stacks 0D6E (sites-cohomology 4011) gives only Rg_*Rf_* = R(gf)_*, so proof_origin=agent is right; 08BJ (derived 9857) matches lem-weil-pbc-right-adjoint-preserves-kinjective. Step 1: the lax-pushforward coherence lemma applies with F = -x_Z Y, G = -x_Y X and κ the fibre-product associator; with ψ=η_g, θ=η_f its composition hypothesis χ = η_gf is exactly lem-sfb-eta-comp, so the actual compositors (identity clause included) are identified. Step 2: det-prop-sfb-module-pullback-exact-main and the adjunction give K-injective preservation; the pd node gives D(E_T) and the resolution-compatible a_f. Step 3: with f_*I K-injective the identity resolution is allowed, so κ = [c^{-1}], in the direction the item states. Steps 4-5: lem-pur-ringed-derived-composition-cocycle (PASSed, read in full) is transported by conjugating with the a's; κ_int is defined by transport, and faithfulness of the equivalence finishes; both unit laws come out with the correct sides. Edge cases (identities, zero complex, empty scheme, non-flat finite coefficients) checked. Batch-5 flag lem-pd-section-derived-pushpull-normalization: accepted. It is a generic internal-vs-sectionwise module derived-category comparison for any scheme map and any commutative condensed ring, given by neither assumption. Its 649-node closure contains no sec-trace-formula, no sk-thm-trace-transport and no nt-* node, and its only pd-chapter nodes are itself and one definition. Four sfb nodes already cite it. Off-unit generic tools are listed in split_report.tool_uses for the maintainer to record. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-30c6ff7fd (reviewer sub-agent of L); spot-checked: Re-split delivery for the 2026-10-21 human note (repair note released 2026-10-22). Item statement and stmt_deps are byte-identical to live, and no other group has re-split it in live or side-live. The proof is now 3 steps and 1897 characters. All five old arguments became cited statements. Old steps 1-3 and the identity half of step 5 went to lem-sfb-module-section-derived-comparison-square: ordinary composition and identity squares (eta-comp plus lax-pushforward coherence), K-injective preservation, the derived square b(Eκ^i)=(κ^sE)a_{gf}, and κ^i_{QI}=[c^{-1}], in the item's direction. Old step 4 and the unit half of step 5 went to lem-sfb-compositor-equivalence-conjugation: generic raw compositor data with pair and identity squares, giving E_lL=B^{-1}(L̄E)a_{cba}, the same formula for P, E_jU=a^{-1}(ŪE)a, the same for V, and reflection by faithfulness. I verified the types and the derivations by hand (naturality of a_c, interchange giving the same B, naturality of ε̄ and of a_a). Both statements are true, statement-only, of comparable size and self-contained, with deps that match the inline citations. Neither restates the item: node A has no associativity or unit law, and node B has no module content. The parent steps instantiate A, then B with the cocycle lem-pur-ringed-derived-composition-cocycle (same K-injective-normalized κ, commutative ring sheaves on small sites), then the unit laws. Each citation says what the step uses. Sources: Stacks 0D6E (sites-cohomology line 4011, tags line 16519) for Rg_*Rf_*=R(gf)_*, marked as an agent specialization; blueprint det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms (ρ_id, ρ_hk). Duplicate scan of the DAG found nothing: equivalence-square-inverse-mate-coherence, the pseudofunctor transports and the derived-section transports differ. Batch-5 flag on lem-pd-section-derived-pushpull-normalization: accepted. It is a generic internal-vs-sectionwise derived push/pull comparison for any scheme map and any commutative condensed ring, not a step of the trace-formula or Poincaré-duality proofs, and the base item already cited it. The item's closure grows only by the two new nodes and def-sf-induced-category, and contains no nt-* or trace-transport node. The cocycle tool_use is the same generic tool as in the base and is accepted. No SGA. No fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.ModuleDerivedCompositorCoherence",
@@ -283,5 +201,27 @@
   "group": "NH",
   "result": "pass",
   "note": "All node clauses (admissible Λ, unbounded D(Mod_{Λ_T}), κ: R(f≫g)≅Rf⋙Rg via rightDerivedFunctorCompIso' of the recorded lowerStarComp, inverse-termwise K-injective normalization, associativity with associator and lowerStarCongr assoc, identity comparison from lowerStarId with its K-injective formula, both unit laws) match the Lean with no extra hypotheses. Universes are the framework's (Scheme.{u}, Ab.{u+1}). Statement verbatim; 7 declarations present; node changes lean only; 9 dep records byte-identical to live; not dropped. nt_compile --json clean in 30.0 s. Advisory: live Q13 DerivedDirectImageOpenCoherence.directImageComposition duplicates moduleDerivedCompositor; shown definitionally equal (Iso.ext rfl) against a verbatim copy, since importing Q13's module times out at 60 s; it is theorem-owned and outside stmt_deps, so not reusable at S2. lowerStarId/lowerStarCongr are non-stmt_dep framework declarations (advisory)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261023T151855-L-418610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

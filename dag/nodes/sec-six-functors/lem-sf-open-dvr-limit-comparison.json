@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-open-dvr-limit-comparison",
+ "kind": "statement",
+ "title": "Projection-normalized scalar transport of total inverse limit",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, an adic datum d on its valuation ring, a scheme T and a coefficient model C of [def-sf-open-quotient-koszul-models]. The pointwise derived scalar equivalence carries the total right-derived strict inverse limit to the derived scalar equivalence after the original total inverse limit. There is such a natural comparison whose equation on every complex is the localization of the ordinary scalar/limit comparison. The latter is the inverse comparison normalized by every ordinary tower projection, exactly the limit_model formula in OpenDvrLimitComparison. No quotient reduction, completeness predicate or open immersion is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; exact equivalences preserve the universal right-derived pair (Tag 05RR). Unique ordinary inverse-limit comparison by its projections."
+ },
+ "stmt_deps": [
+  "def-sf-open-quotient-koszul-models",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Proof: scalar restriction is an exact equivalence. Its ordinary limit comparison is\npreservesLimitNatIso, hence is fixed by all projections. Apply rightDerivedSquare to\nthe coefficient equivalence and its pointwise tower equivalence, with the universal\nright-derived pairs. Its factorization equation is the required equation on complexes.\nThe localization comparison through the homotopy category is the recorded\nreconstructionRlimComparison. Compose the factorization equation with the inverse\ntower-localization isomorphism and the derived comparison to obtain limit_model.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares",
+    "def-sf-open-quotient-koszul-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-derived-exact-equivalence-squares",
+  "def-sf-open-quotient-koszul-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; exact equivalences preserve the universal right-derived pair (Tag 05RR). Unique ordinary inverse-limit comparison by its projections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of abelian categories commutes with the total right derived inverse limit, with its comparison on complexes normalized by the ordinary limit projections",
+   "results": "OK 8 hits: Ext.mapExactFunctor_hom; mapDerivedCategoryFactorsh; mapDerivedCategoryFactors; mapDerivedCategorySingleFunctor; mapDerivedCategoryFactorsh_hom_app; rightDerivedZeroIsoSelf_inv_hom_id_assoc; mapHomologicalComplexUpToQuasiIsoFactorsh and its hom_app lemma. None supplies the displayed normalized total-limit square.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesLimitNatIso\"",
+   "results": "OK 3 hits: preservesLimitNatIso, preservesLimitNatIso_hom_app, preservesLimitNatIso_inv_app in Mathlib.CategoryTheory.Limits.Preserves.Limits. Used for the ordinary comparison; total derived compatibility is separate.",
+   "date": "2026-10-24",
+   "verdict": "partial match: ordinary limit comparison only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ll]imit|[Ll]imit.*rightDerived",
+   "results": "OK 1 hit: HasPointwiseRightDerivedFunctorAt.hasColimit, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean:63.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion over a discrete valuation ring is preserved by extension by zero along a quasicompact open immersion, using a Koszul quotient tower and its derived inverse limit",
+   "results": "OK 8 hits: AdicCompletion ring/module definitions and basic zero identities, IsAdicComplete.bot, Valuation.Completion, DerivedCategory.instHasZeroObject; none identifies the normalized derived sheaf completion or its coefficient comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenQuotientKoszulCompleteness",
+  "date": "2026-10-24",
+  "group": "M3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”: Projection-normalized scalar transport of total inverse limit",
+   "via": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrLimitComparison",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrLimitComparison.lean",
+  "declaration": "WeilConjectures.openDvrLimitComparison",
+  "declarations": [
+   "WeilConjectures.openDvrLimitComparison",
+   "WeilConjectures.OpenDvrLimitComparison"
+  ],
+  "statement": "theorem openDvrLimitComparison\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T) :\n    Nonempty (OpenDvrLimitComparison l E C)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-04b5d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261024T190304-L-4015494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-04b5d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261024T190304-L-4015494",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/models/4 new modules vs clone item module (verbatim move, identical target signature), new node lean.statements vs files, three sorried statements vs landed completedOpenExchangeComparison / IsDerivedCompleteUnrestricted / CoefficientDerivedSystemCalculus; 7 delivered modules + 2 direct importers compiled together clean; #print axioms"
+ }
+}

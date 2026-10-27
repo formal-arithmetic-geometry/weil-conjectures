@@ -1,0 +1,321 @@
+{
+ "id": "lem-trf-projective-bidual-representative-comparison",
+ "kind": "statement",
+ "title": "Canonical biduality on bounded-above projective representatives",
+ "statement": "Let $B$ be a commutative ring. Let $\\mathcal T$ be the category with one object $*$ and only its identity arrow, with only the maximal sieve covering, and let $\\underline B$ be its ring sheaf with value $B$. Evaluation at $*$ and the inverse one-object sheaf construction give an exact equivalence $\\operatorname{Mod}(\\underline B)\\simeq B\\text{-}\\operatorname{Mod}$ [def-weil-sheaf-of-modules-category]. The induced equivalence of ordinary unbounded derived categories [def-weil-abstract-derived-category], with localization universe equal to the coefficient universe, identifies product total sheaf Hom with the product total module Hom $H$ [def-sc-module-total-hom-complex], carries K-injective complexes and their resolution augmentations to K-injective complexes and resolution augmentations, and identifies derived internal Hom [def-pur-derived-internal-hom], coefficient evaluation, and its Koszul-symmetry bidual transpose. Write $Q$ for module localization, $O=B[0]$, $V^\\vee=R\\operatorname{Hom}_B(V,QO)$, and $b_V:V\\to V^{\\vee\\vee}$ for that canonical transpose [lem-sfb-ringed-site-duality-maps]. If $T$ and $D=H(T,O)$ are both bounded above with projective terms [def-weil-pbc-projective-module], then for either $S=T,D$ the fixed K-injective augmentation $\\eta_O:O\\to I(O)$ induces a quasi-isomorphism $H(S,\\eta_O)$ and the canonical comparison $\\gamma_S:QH(S,O)\\xrightarrow{\\sim}(QS)^\\vee$. For the signed chain map $\\delta_T:T\\to H(D,O)$ specified by $\\delta_T(x)(\\phi)=(-1)^{|x||\\phi|}\\phi(x)$ on homogeneous elements, with zero coordinates away from $|x|+|\\phi|=0$, these comparisons satisfy $(\\gamma_T)^\\vee b_{QT}=\\gamma_D Q(\\delta_T)$. The comparisons are natural in chain maps and the derived bidual maps are natural on the whole derived category: $b_W e=e^{\\vee\\vee}b_V$ for every $e:V\\to W$. No finite generation of the terms of $T$ or invertibility of $b_V$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A66, lemma-RHom-out-of-projective, including the map to the K-injective Hom model; sites-cohomology.tex Tag 0A97, lemma-internal-hom-evaluate, coefficient-unit transpose and naturality; sites.tex Tag 00X9, section-topoi, punctual topos. Terminal-site Hom and resolution transport are the explicit specialization needed for the returned parent proof steps 1 and 3."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-weil-pbc-projective-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-derived-internal-hom",
+  "lem-sfb-ringed-site-duality-maps",
+  "def-trf-singleton-site-operations",
+  "def-coef-hom-representative-evaluation",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "def-trf-ringed-site-ordinary-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-singleton-site-module-comparison] with $R=B$. It supplies the exact module equivalence, its constant-sheaf inverse, and the degreewise complex, homotopy and derived equivalences commuting with localization. Use these ordinary derived categories in the coefficient universe on both sides. It also supplies preservation of quasi-isomorphisms, K-flatness and tensor products. No geometric point or pro-etale point comparison is being substituted for this one-object site.",
+   "uses": [
+    "lem-weil-pbc-singleton-site-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X9, section-topoi, punctual topos; explicit one-object specialization."
+   }
+  },
+  {
+   "text": "The slice $\\mathcal T/*$ again has one object and only its identity. Thus [def-pur-sheaf-hom] evaluates to $\\operatorname{Hom}_B(M(*),N(*))$, including its $B$-action. Products are sectionwise, so [def-pur-hom-complex] evaluates in degree $n$ to $\\prod_p\\operatorname{Hom}_B(L^p,M^{p+n})$; its differential is $d_Mf-(-1)^nfd_L$. This is exactly [def-sc-module-total-hom-complex], with pre- and postcomposition unchanged. For K-injectivity use [def-pur-kinjective-complex]: a chain map from an acyclic complex and a null-homotopy are transported componentwise by the equivalence and its inverse. The equations $f=dh+hd$ remain the same, and acyclicity is preserved by step 1. Hence K-injectivity is preserved and reflected; an augmentation remains a quasi-isomorphism to a K-injective complex. In particular keep the image of the fixed augmentation, rather than choose a new map.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "def-sc-module-total-hom-complex",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes; Tag 08J7, section-internal-hom; specialization to the punctual site."
+   }
+  },
+  {
+   "text": "Compute derived internal Hom by [def-pur-derived-internal-hom] on the transported K-injective resolutions from step 2. The resulting complexes on both sides are the same product Hom; [lem-pur-rhom-well-defined] gives the canonical comparison if the module-side replacement is written using another K-injective model. This identifies the bifunctors after localization, including their maps. For evaluation retain the actual projections and the inverse localized augmentation of [def-coef-hom-representative-evaluation]. For a K-flat representative with flat terms and a K-injective target, [lem-sfb-hom-kflat-chain-transpose] states that the derived tensor-Hom transpose of the existing closed structure is represented by the uncurrying rule $x\\otimes y\\mapsto\\phi(x)(y)$, the normalization of [def-coef-ringed-tensor-hom-model]; this holds on both sides, so their evaluations agree. The tensor and natural adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal] identify their transposes; its Koszul symmetry is $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on both sides. Consequently the coefficient-unit evaluation transpose is exactly the map $b$ of [lem-sfb-ringed-site-duality-maps]. These identifications use the transported augmentations and normalized localization comparisons, not an arbitrary isomorphism of the derived Hom objects.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "def-coef-hom-representative-evaluation",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A97 (lemma-internal-hom-evaluate), 08J9 (lemma-internal-hom), 0FPT (lemma-symmetric-monoidal-derived); normalized evaluation on representatives."
+   }
+  },
+  {
+   "text": "For either $S=T$ or $S=D$, bounded-above projective terms imply K-projectivity by [lem-sc-bounded-above-projective-kprojective]. Put $C=\\operatorname{Cone}(\\eta_O)$. The augmentation is a quasi-isomorphism, so $C$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. K-projectivity gives that $H(S,C)$ is acyclic. Apply [lem-sc-hom-complex-mapping-cone] on the one-object site and the identification of step 2 to obtain $\\operatorname{Cone}(H(S,\\eta_O))\\cong H(S,C)$. A second application of [lem-pur-quasi-iso-cone-acyclic] shows that $H(S,\\eta_O)$ is a quasi-isomorphism. This applies to the actual fixed augmentation, even when its target is unbounded.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-sc-hom-complex-mapping-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective, proof using the map to a K-injective resolution."
+   }
+  },
+  {
+   "text": "Write $\\lambda_{S,O}:(QS)^\\vee\\xrightarrow{\\sim}QH(S,I(O))$ for the fixed resolution factorization. By [def-trf-ringed-hom-representative-comparison] the comparison is the actual composite $\\gamma_S=\\lambda_{S,O}^{-1}\\circ Q(H(S,\\eta_O))$. Step 4 makes it invertible. For a chain map $f:S\\to S'$ between such representatives, postcomposition with $\\eta_O$ commutes with precomposition by $f$: both composites send $h$ to $\\eta_O\\circ h\\circ f$. The localization factorization in [def-pur-derived-internal-hom] is natural. Therefore $\\gamma_S\\circ QH(f,O)=(Qf)^\\vee\\circ\\gamma_{S'}$. This proves naturality of the specified comparisons without assuming finite generation.",
+   "uses": [
+    "def-trf-ringed-hom-representative-comparison",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes; Tag 08J7, section-internal-hom; specialization to the punctual site."
+   }
+  },
+  {
+   "text": "Apply the bidual representative normalization of [lem-sfb-ringed-site-duality-maps] to $E=T$ on the one-object site. Its two hypotheses are precisely the quasi-isomorphisms of step 4 for $T$ and $D$. Its signed chain map evaluates to $(-1)^{|x||\\phi|}\\phi(x)$; every coordinate with $|x|+|\\phi|\\ne0$ lands in a zero term of $O$. Thus it is the specified $\\delta_T$ under step 2. The fixed comparisons in that normalization are the $\\gamma_T,\\gamma_D$ of step 5. Written with their codomains displayed, the normalization says $H(\\gamma_T,QO)\\circ b_{QT}=\\gamma_D\\circ Q(\\delta_T)$, which is the required equation. The same cited node states covariance of $b$ on all derived objects, so $b_W\\circ e=e^{\\vee\\vee}\\circ b_V$ for every derived morphism $e:V\\to W$. Neither this normalization nor its naturality assumes invertibility of $b$, and step 4 used projectivity without finite generation.",
+   "uses": [
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A97, lemma-internal-hom-evaluate, coefficient-unit transpose, with the Hom differential of section-hom-complexes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-sc-module-total-hom-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "def-coef-hom-representative-evaluation",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sc-hom-complex-mapping-cone",
+  "def-trf-ringed-hom-representative-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A66, lemma-RHom-out-of-projective; explicit punctual-site assembly with sites.tex Tag 00X9 and sites-cohomology.tex Tag 0A97."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RHom|bidual|double.?dual|toIhomIhomUnit|isKProjective_of_projective",
+   "results": "{\"t\": \"2026-10-23T10:27:07Z\", \"tool\": \"grep\", \"query\": \"RHom|bidual|double.?dual|toIhomIhomUnit|isKProjective_of_projective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\"], \"digest\": \"5866f9da26161f5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projectivity and exact derived functors do not state the terminal-site Hom/resolution transport and canonical signed-bidual comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective",
+   "results": "{\"t\": \"2026-10-23T10:27:08Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKProjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_shift_iff\"], \"digest\": \"e0ddf9103d922dcb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projectivity and exact derived functors do not state the terminal-site Hom/resolution transport and canonical signed-bidual comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a projective complex computes double derived Hom naturally and preserves the canonical bidual evaluation map",
+   "results": "{\"t\": \"2026-10-23T10:27:08Z\", \"tool\": \"leansearch\", \"query\": \"Derived Hom from a projective complex computes double derived Hom naturally and preserves the canonical bidual evaluation map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Dual.eval_naturality\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality\", \"Module.Dual.eval\", \"Module.evalEquiv\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality\"], \"digest\": \"1fda21c635de4bb9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projectivity and exact derived functors do not state the terminal-site Hom/resolution transport and canonical signed-bidual comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization of the signed chain bidual map agrees with the canonical derived bidual map when both the complex and its Hom dual are bounded above projective",
+   "results": "{\"t\": \"2026-10-23T10:27:09Z\", \"tool\": \"leanfinder\", \"query\": \"The localization of the signed chain bidual map agrees with the canonical derived bidual map when both the complex and its Hom dual are bounded above projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"HomologicalComplex.extend.XOpIso_hom_d_op_assoc\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"HomologicalComplex.extend.XOpIso_hom_d_op\", \"CategoryTheory.ProjectiveResolution.extMk_hom\"], \"digest\": \"c039f8599bf8f494\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projectivity and exact derived functors do not state the terminal-site Hom/resolution transport and canonical signed-bidual comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on the one object site is an exact closed monoidal equivalence of module derived categories preserving K injective resolutions and signed bidual maps",
+   "results": "{\"t\": \"2026-10-23T10:36:45Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation on the one object site is an exact closed monoidal equivalence of module derived categories preserving K injective resolutions and signed bidual maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"Ext\", \"CategoryTheory.Tor\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"0d10c42b31b39a78\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projectivity and exact derived functors do not state the terminal-site Hom/resolution transport and canonical signed-bidual comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded above complex of projective modules the canonical signed bidual chain map agrees with the canonical double derived Hom transpose after the K injective resolution comparisons",
+   "results": "{\"t\": \"2026-10-23T12:24:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a bounded above complex of projective modules the canonical signed bidual chain map agrees with the canonical double derived Hom transpose after the K injective resolution comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq\", \"CategoryTheory.ProjectiveResolution.isoExt\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\"], \"digest\": \"f67909ae8d037cd2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern K-projectivity, ordinary projective resolutions or abstract adjunction naturality; none supplies the full punctual-site and fixed-augmentation signed-bidual comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective",
+   "results": "{\"t\": \"2026-10-23T12:24:52Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKProjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_shift_iff\"], \"digest\": \"e0ddf9103d922dcb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern K-projectivity, ordinary projective resolutions or abstract adjunction naturality; none supplies the full punctual-site and fixed-augmentation signed-bidual comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation on a one object site preserves product total Hom complexes K injective resolutions and canonical derived biduality",
+   "results": "{\"t\": \"2026-10-23T12:24:52Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation on a one object site preserves product total Hom complexes K injective resolutions and canonical derived biduality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instPreservesLimitsOfShapeEvalOfHasLimitsOfShape\", \"HomologicalComplex.instPreservesColimitEval\", \"HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"HomologicalComplex.instPreservesColimitsOfShapeEvalOfHasColimitsOfShape\", \"HomologicalComplex₂.total\", \"HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits\"], \"digest\": \"8cdd9c1107e18ca1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern K-projectivity, ordinary projective resolutions or abstract adjunction naturality; none supplies the full punctual-site and fixed-augmentation signed-bidual comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|toIhomIhom|isKProjective_of_projective|quasiIso.*[Hh]omComplex",
+   "results": "{\"t\": \"2026-10-23T12:24:52Z\", \"tool\": \"grep\", \"query\": \"bidual|toIhomIhom|isKProjective_of_projective|quasiIso.*[Hh]omComplex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"88ae4fd8c8af6889\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern K-projectivity, ordinary projective resolutions or abstract adjunction naturality; none supplies the full punctual-site and fixed-augmentation signed-bidual comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The double dual natural transformation in a symmetric closed monoidal derived category is computed by signed evaluation on cochain Hom complexes",
+   "results": "{\"t\": \"2026-10-23T12:30:16Z\", \"tool\": \"leanfinder\", \"query\": \"The double dual natural transformation in a symmetric closed monoidal derived category is computed by signed evaluation on cochain Hom complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.coev_naturality\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorRightHomEquiv_symm_naturality\", \"CategoryTheory.Functor.ihom_coev_app\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.coev_expComparison\", \"CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm\", \"CategoryTheory.MonoidalClosed.coev_app_comp_pre_app\"], \"digest\": \"4474db0cf17843d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern K-projectivity, ordinary projective resolutions or abstract adjunction naturality; none supplies the full punctual-site and fixed-augmentation signed-bidual comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-perfect-complex-derived-biduality",
+  "date": "2026-10-23",
+  "group": "Q109"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; the algebraic upper-shriek relative-perfection calculation used before the marked dualizing construction. Returned biduality proof steps 1 and 3 and naturality in step 5: terminal-site closed comparison and K-injective representative normalization.",
+   "via": [
+    "lem-trf-perfect-complex-derived-biduality",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projective-bidual-representative-comparison",
+  "worker": "stage1",
+  "summary": "Reused the existing punctual-site equivalence, K-projectivity and cone lemmas and the general signed bidual normalization. Explicitly identified product Hom, K-injectivity, augmentations, evaluation and transpose, then proved the two augmentation quasi-isomorphisms. No new nodes and no statement change.",
+  "blueprint": "Ancestor lem-trf-local-term-locality, proof (1)--(2), specialization/relative-duality branch recorded in blueprint.from.place: this representative calculation discharges the returned perfect-biduality input, without altering the contracting-local-term route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-singleton-site-module-comparison",
+    "why": "Exact equivalence and localization of the punctual ringed site; a generic coefficient calculation, with no replacement of a geometric unit step."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Independence of a K-injective Hom representative under quasi-isomorphisms."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Closed tensor-Hom adjunction and Koszul symmetry used to identify the canonical transpose."
+   },
+   {
+    "node": "lem-sfb-ringed-site-duality-maps",
+    "why": "General signed representative normalization and whole-derived-category naturality of coefficient biduality."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "General quasi-isomorphism criterion by acyclic cones."
+   },
+   {
+    "node": "lem-sc-hom-complex-mapping-cone",
+    "why": "Unbounded product Hom commutes with the cone in its second variable."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "Representative uncurrying formula for the existing derived tensor-Hom transpose on K-flat/K-injective models (added by the reviewer)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pur-rhom-well-defined",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sc-hom-complex-mapping-cone",
+  "lem-sfb-hom-kflat-chain-transpose"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-b589bf4a7",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-b589bf4a7 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes and its statement is unchanged; there is no re-split note for it. Stacks sources checked: 0A66 (more-algebra l.18708, the K-injective Hom map), 0A97 (sites-cohomology l.8965) and 00X9. The equation has the right type on both sides, QT→(QD)^∨, and it is the 'under these identifications' clause of lem-sfb-ringed-site-duality-maps. I checked by hand that the signed δ_T is a chain map with the def-pur-hom-complex differential. The D-bounded-above hypothesis is needed (counterexample: ⊕_{n≥0}B[n]). Step 4 is correct: K-projective plus the cone criterion plus the unbounded Hom-cone lemma, applied to the actual η_O. Step 5 naturality is in the right direction, and step 6 meets both hypotheses of lem-sfb. lem-pod-projective-hom-evaluation-model and lem-sc-affine-projective-complex-derived-hom are not duplicates: the first uses a different comparison map, the second needs a bounded-below target. No cycle, no SGA. Two faults fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-projective-bidual-representative-comparison.json. (1) C4: step 3 took the uncurrying rule of the existing closed structure from def-coef-ringed-tensor-hom-model, which only defines what such a model is. It now also cites lem-sfb-hom-kflat-chain-transpose, which states that rule; the node is added to proof_deps and tool_uses. (2) B5: steps 2 and 5 gave the source 'Tag 0A95, section-internal-hom'; 0A95 is lemma-RHom-well-defined, so the tag is corrected to 08J7.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ProjectiveBidualRepresentativeComparison",
+  "declaration": "CategoryTheory.ProjectiveBidualRepresentative.projective_bidual_representative_comparison",
+  "declarations": [
+   "CategoryTheory.ProjectiveBidualRepresentative.evaluation",
+   "CategoryTheory.ProjectiveBidualRepresentative.constantAdditive",
+   "CategoryTheory.ProjectiveBidualRepresentative.constant",
+   "CategoryTheory.ProjectiveBidualRepresentative.sheafGrothendieck",
+   "CategoryTheory.ProjectiveBidualRepresentative.koszulBraiding",
+   "CategoryTheory.ProjectiveBidualRepresentative.coefficient",
+   "CategoryTheory.ProjectiveBidualRepresentative.sheafHom",
+   "CategoryTheory.ProjectiveBidualRepresentative.resolution",
+   "CategoryTheory.ProjectiveBidualRepresentative.augmentation",
+   "CategoryTheory.ProjectiveBidualRepresentative.comparison",
+   "CategoryTheory.ProjectiveBidualRepresentative.bidual",
+   "CategoryTheory.ProjectiveBidualRepresentative.Transport",
+   "CategoryTheory.ProjectiveBidualRepresentative.Statement",
+   "CategoryTheory.ProjectiveBidualRepresentative.projective_bidual_representative_comparison"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ProjectiveBidualRepresentativeComparison.lean",
+  "statement": "theorem projective_bidual_representative_comparison : Statement B",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The accepted stage-1 split is unchanged. Transport and Statement expand the complete assertion, including coefficient-universe localizations, actual product-coordinate Hom transport, the fixed K-injective augmentation, normalized derived-Hom comparison, evaluation and Koszul transpose. Auxiliary definitions have real data. H, ev and delta are existentially specified on every homogeneous coordinate, so they are canonical constructions rather than arbitrary maps. No invertibility of the bidual or finite generation is asserted. stmt_deps gains already landed owners of the punctual constructions, Hom projections, K-injective resolution and ordinary comparison used in this signature. Return repair: the ordinary-Hom maps are owned by def-trf-ringed-site-ordinary-hom-comparison, replacing the theorem-node dependency; the Lean module is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64f97d98f",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Re-delivery of returned head 180e0cd6b553. The Lean module is byte-identical to the head reviewed before, whose mathematics was found correct; only the item stmt_dep swap (lem-sfb-ringed-site-ordinary-hom-comparison -> def-trf-ringed-site-ordinary-hom-comparison) and the new node changed. The new definition node owns, existing:true, the plain defs ringedSiteHomAugmentation, ringedSiteHomComplexMap and ringedSiteOrdinaryHomComparison in Sheaf.CategoryTheory.RingedSiteOrdinaryHomComparison (live l.42/49/60). Its statement matches the bodies (eta = toKInjectiveResolution, H(f,g) = pre then post, c = Q H(id,eta) ; lambda^-1, no invertibility asserted, universes c,v,r,w); lean.statement is verbatim l.60-64; its stmt_deps are all definition nodes covering the signature; tags 0A8X/08J7/0A95/079P checked; no SGA. Mechanical finding: prop-pur-kinjective-resolutions-exist has only the theorem in its module and the item uses its conclusion .1 (the IsGrothendieckAbelian instance), so the statement genuinely depends on it: PASS on this point. Advisory: 079P lives in injectives.tex, not the stated document; the item could also cite def-per-ringed-site-bidual-transpose and def-zl-ringed-site-duality-model; constantAdditive is proved by rfl. No compile run (no file changed); the delivery's scompile was clean and its dry run OK."
+ }
+}

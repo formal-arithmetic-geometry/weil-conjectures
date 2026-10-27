@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-space-local-properties-chart-test",
+ "kind": "statement",
+ "title": "Etale scheme charts detect the local morphism properties of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fix one property $P$ from flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and locally of finite type [def-weil-finite-type-morphism]. On algebraic spaces these properties mean their extensions by etale scheme charts. Let $V\\to Y$ be a surjective etale morphism from a scheme, and let $U\\to X\\times_YV$ be a surjective etale morphism from a scheme [lem-trf-space-fibre-products-etale-covers]. Then $f$ has $P$ if and only if the scheme morphism $U\\to V$ has $P$. The criterion holds for every such pair of charts, including $V=Y$ when $Y$ is a scheme. If $X$ and $Y$ are schemes, the extended property agrees with the indicated scheme property. No quasi-compactness, separation, or other one of the three properties is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03MJ (lemma-local-source-target), 03MM (lemma-flat-local), 0410 (lemma-finite-presentation-local), 040Y (lemma-finite-type-local)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-etale-presentation-property-criterion"
+ ],
+ "proof": [
+  {
+   "text": "Fix the indicated scheme property $P$. By [lem-sfb-scheme-etale-source-target-properties], each of flatness, local finite presentation and local finite type is etale local on source-and-target. Thus $P$ satisfies the hypothesis of the algebraic-space presentation criterion; we use its chart extension, defined by requiring $P$ on every etale scheme presentation diagram. No implication between the three properties is used. These properties are invariant under scheme isomorphisms: the defining local rings, affine opens and finite algebra presentations are carried to isomorphic ones [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), hypothesis; descent.tex Tags 04QZ (definition-local-source-target), 04R3 (remark-list-local-source-target), entries (1)--(3)."
+   }
+  },
+  {
+   "text": "Put $Z=X\\times_YV$, let $p:Z\\to X$ be the projection, and write $q:U\\to Z$ for the given chart and $h:U\\to V$ for the composite $U\\to Z\\to V$. By [lem-trf-space-fibre-products-etale-covers], $Z$ is an algebraic space and the sheaf fibre product of $f$ and $b:V\\to Y$, so $p$ is the base change of $b$ along $f$. By [lem-trf-space-representable-etale-scheme-tests], representable surjective etale morphisms are stable under arbitrary algebraic-space base change and under composition, and $q$, a surjective etale map from a scheme, is representable surjective etale. Hence $p$ and then $a=pq:U\\to X$ are representable surjective etale. The fibre-product square gives $fa=bh$, where $b$ is the given representable etale map. Thus $(a,b,h)$ is a presentation diagram with surjective source chart.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), diagrams; spaces.tex Tag 02X2 (lemma-fibre-product-spaces), Tags 02WK (lemma-composition-representable-transformations-property) and 02WL (lemma-base-change-representable-transformations-property) for etale and surjective."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-etale-presentation-property-criterion] to $P$ and the diagram of Step 2. Its conditions (1) and (2) are equivalent: the universal chart test defining $P(f)$ implies $P(h)$ for this diagram, and conversely $P(h)$ in this one diagram, whose source chart $a$ is surjective, implies the universal chart test. Consequently $P(f)\\Longleftrightarrow P(U\\to V)$.",
+   "uses": [
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), equivalence (1) and (2), and definition-P; Tags 03MM (lemma-flat-local), 0410 (lemma-finite-presentation-local), 040Y (lemma-finite-type-local), conditions (7),(8)."
+   }
+  },
+  {
+   "text": "The pair of charts in Steps 2--3 was arbitrary, so the equivalence holds for every such pair. If $Y$ is a scheme, the identity $Y\\to Y$ is an isomorphism, hence representable surjective etale by [lem-trf-space-representable-etale-scheme-tests], so it is an allowed target chart, and then $X\\times_YY=X$. If both $X$ and $Y$ are schemes, the final scheme-comparison clause of [lem-sfb-space-etale-presentation-property-criterion] identifies the universal chart extension with the original scheme property. All inputs apply without quasi-compactness or separation hypotheses.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), representable-source-and-target comparison; isomorphisms are representable surjective etale (cited node)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MJ (lemma-local-source-target), specialized using descent.tex Tag 04R3 to the properties in Tags 03MM, 0410 and 040Y."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flatness local finite presentation and local finite type for morphisms of algebraic spaces can be tested on etale scheme charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale source and target presentations detect local properties of algebraic space morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|local.source.target",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale charts detect flatness and local finite presentation of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": Flat f ↔ ∀ x, (f.stalkMap x).hom.Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|local.source.target",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space morphism local property equivalent to property on etale presentations",
+   "results": "8 hit(s): RingHom.Etale.propertyIsLocal, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.Etale.ofLocalizationSpan, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.IsEtale, AlgebraicGeometry.affineLocally, AlgebraicGeometry.LocallyOfFinitePresentation.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Flat\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented and locally finite type morphisms of algebraic spaces are detected on etale scheme charts",
+   "results": "8 hit(s): AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing the source and target etale atlases does not change flatness or local finite presentation of an algebraic space morphism",
+   "results": "8 hit(s): AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|local.source.target",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Etale\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness local finite presentation and local finite type for morphisms of algebraic spaces can be tested on etale scheme charts",
+   "results": "8 hit(s): AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale source and target presentations detect local properties of algebraic space morphisms",
+   "results": "8 hit(s): RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or rings, not algebraic-space presentation independence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-proper-fp-locality",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Property descent in quot-lemma-spaces-stack and base change in quot-lemma-spaces-fibred-in-groupoids, as used by quot-lemma-curves-stack. Supporting chart/descent input: the etale-chart tests used in Tags 041W and 041T, before descent on scheme charts",
+   "via": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-local-properties-chart-test",
+  "worker": "stage1",
+  "group": "Q117",
+  "summary": "Reused the existing general algebraic-space presentation criterion and the existing scheme etale-locality theorem. Verified that the supplied two-stage atlas gives a representable surjective etale source chart by fibre-product and covering composition calculus, then specialized the criterion and its scheme comparison. No new nodes and no mathematical statement change. Recorded actual Mathlib searches, inspected cited statements, and checked empty and non-quasi-compact examples.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Property descent in quot-lemma-spaces-stack and base change in quot-lemma-spaces-fibred-in-groupoids, as used by quot-lemma-curves-stack. Supporting chart/descent input: the etale-chart tests used in Tags 041W and 041T, before descent on scheme charts Current latest blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md, (3), uses proper/open direct images and compactification. The inherited historical alteration-chain place is retained as provenance; the present split supplies only its local chart/descent prerequisite, without modifying the chapter or unit route. The ancestor command returns None; the existing null ancestor and via history are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product and covering-base-change calculus constructs the source atlas; no lemma of the unit supplies this site calculus."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic stability of representable surjective etale maps of algebraic spaces under base change and composition (and isomorphisms) builds the source chart U -> X and the identity target chart; no node of the unit supplies this space calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-2efcd614d",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-2efcd614d (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes. The statement is byte-identical to the live and side-live unsplit node; the only statement-field change is the added stmt_dep lem-sfb-space-etale-presentation-property-criterion, which is justified because the statement's 'extensions by etale scheme charts' is that node's definition (1). Checked against Stacks spaces-morphisms 03MJ (l.4097), 03MM (l.5834) (7)/(8), 040Y (l.4398) and 0410 (l.5481), and against the cited statements word for word. Step 1: the scheme etale-locality node lists flat, lfp and lft, and isomorphism invariance follows from the three definitions. Step 3: the criterion's condition (2) (a surjective, b not required) gives (1), which defines P(f), and (1) gives P(h) back. Fault, C4 (Steps 2 and 4): they went through lem-trf-space-chartwise-etale-permanence, whose coverings are jointly surjective on field-valued point classes. That node never identifies this with the surjectivity of def-trf-algebraic-space (every scheme base change surjective) that the criterion requires, in either direction. FIX: Steps 2 and 4 now cite lem-trf-space-representable-etale-scheme-tests (spaces.tex 02WK/02WL), which states that maps from schemes are representable, that representable surjective etale maps are stable under composition and arbitrary base change, and that isomorphisms are representable surjective etale. So p = base change of b along f, then a = pq, is representable surjective etale; the identity Y->Y works when Y is a scheme. proof_deps and split_report.tool_uses are updated to match. Batch-5: the flagged lem-trf-space-chartwise-etale-permanence is generic algebraic-space etale calculus (Stacks 03FT/03FU/041F); its 292-node closure has no trace-formula or Poincare node, so it is outside both assumptions. After the FIX it is no longer cited. The newly cited representable-tests node is likewise generic: its 141-node closure has no trace-formula or Poincare node and no cycle. Fibre-products was already a stmt_dep on the base. Both are accepted as tool uses, since no unit node gives algebraic-space site calculus. Edge cases checked: X empty, Y empty forces X empty, X and Y schemes with V=Y, a non-quasi-compact disjoint union, and the lfp but non-flat closed immersion Spec k -> Spec k[t]. Duplicate search with rg -L over 03MJ/03MM/0410/040Y: the general criterion is reused, not duplicated, and lem-sfb-unramified-etale-compatible-charts covers different properties. No SGA, no cycle, and proof_deps equals the union of uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceLocalPropertiesChartTest",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.local_properties_chart_test",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.local_properties_chart_test",
+   "AlgebraicGeometry.AlgebraicSpace.local_properties_chart_test_iff_scheme"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceLocalPropertiesChartTest.lean",
+  "statement": "theorem local_properties_chart_test {S : Scheme.{u}} (P : MorphismProperty Scheme.{u}) (hP : P = @Flat ∨ P = @LocallyOfFinitePresentation ∨ P = @LocallyOfFiniteType) {X Y : AlgebraicSpace S} (f : X ⟶ Y) (V : Over S) (b : yoneda.obj V ⟶ Y.obj.obj) (hb : IsEtale b) (hbs : IsSurjective b) (U : Over S) (q : yoneda.obj U ⟶ Limits.pullback f.hom.hom b) (hq : IsEtale q) (hqs : IsSurjective q) : MapIsLocally P f ↔ P (yoneda.preimage (q ≫ Limits.pullback.snd f.hom.hom b)).left",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem states the arbitrary surjective etale pullback-chart test for exactly the three named properties. The second theorem gives agreement of the universal chart extension with the scheme property. Reuses MapIsLocally and EtalePresentation from the recorded dependencies; no additional locality or isomorphism-invariance hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eac300707",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Only change is the item lean record plus the new module SpaceLocalPropertiesChartTest (not on side-live); lean.statement verbatim; 8 dep node records identical to side-live. Statement matches node and Stacks 03MJ/03MM(7,8)/0410/040Y: S:Scheme.{u}, f : X ⟶ Y algebraic spaces, hP picks Flat/LocallyOfFinitePresentation/LocallyOfFiniteType (= dep records), extension = landed MapIsLocally, b and q surjective+etale representable predicates of def-trf-algebraic-space, presheaf pullback = sheaf fibre product, U→V = canonical yoneda.preimage(q≫snd).left; scheme clause via EtalePresentation on yoneda.map f, same form as dep etalePresentation_property_iff_scheme. No extra RespectsIso/locality/qc/universe assumptions. Edge cases (empty X/Y, identity/iso target chart, non-qc atlas, each property alone) covered. Only sorry; docstrings have source, blueprint and proof steps; proof_dep imports justified; no duplicate; no pro-etale. Advisories: MapIsLocally owner def-sfb-space-morphism-properties not a stmt_dep; EtalePresentation plain structure from theorem stmt_dep added at S1; neither changeable at S2. No files changed, so no compile."
+ }
+}

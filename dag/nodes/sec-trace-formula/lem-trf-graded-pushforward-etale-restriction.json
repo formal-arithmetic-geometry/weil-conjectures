@@ -1,0 +1,298 @@
+{
+ "id": "lem-trf-graded-pushforward-etale-restriction",
+ "kind": "statement",
+ "title": "Etale localization preserves graded direct images and their evaluation counits",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be any morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $g:Y'\\to Y$ be etale. Put $X'=X\\times_Y Y'$ [lem-trf-space-fibre-products-etale-covers], with projections $h:X'\\to X$ and $f':X'\\to Y'$. Use module direct images and tensor pullbacks on the small etale ringed topoi [def-trf-space-etale-module-functors]. Let $(B_d)_{d\\geq0}$ be $\\mathcal O_X$-module sheaves [def-weil-sheaf-of-modules-category], with restriction-compatible bilinear products $B_m\\otimes B_n\\to B_{m+n}$ and unit $\\mathcal O_X\\to B_0$ satisfying associativity, ordinary commutativity, and the unit laws. All tensors are sheaf tensors [def-pur-sheaf-tensor-product] and all sums are coproducts of module sheaves. Set $C=\\bigoplus_d f_*B_d$, $B'_d=h^*B_d$, and $C'=\\bigoplus_d f'_*B'_d$, each with its homogeneous products of compatible sections. The canonical restriction isomorphisms $\\beta_d:g^*f_*B_d\\xrightarrow{\\sim}f'_*h^*B_d$ identify both sides on an etale scheme $V\\to Y'$ with the same compatible sections over $X\\times_YV=X'\\times_{Y'}V$. Their sum, through the canonical pullback/coproduct comparison, is an isomorphism of commutative unital graded algebras $\\beta:g^*C\\xrightarrow{\\sim}C'$: $\\beta_{m+n}(st)=\\beta_m(s)\\beta_n(t)$ and $\\beta_0(1)=1$. Let $\\epsilon_f:f^*C\\to\\bigoplus_d B_d$ and $\\epsilon_{f'}:f'^*C'\\to\\bigoplus_d B'_d$ be the sums of the canonical module-adjunction counits. Under the canonical comparison $h^*f^*C\\simeq f'^*g^*C$ and the pullback/coproduct comparisons, one has $h^*\\epsilon_f=\\epsilon_{f'}\\circ f'^*\\beta$. On a chart $W\\to X'$ both sides send the local tensor $a\\otimes s$ to $a\\,s|_W$, also for sections with arbitrary local scalar coefficients. If $B_d=L^{\\otimes d}$ for a line module $L$, the canonical tensor comparisons give $h^*B_d\\simeq(h^*L)^{\\otimes d}$ for all $d\\geq0$, with $h^*\\mathcal O_X\\simeq\\mathcal O_{X'}$ in degree zero; they preserve every homogeneous product and the unit, so the displayed algebra and evaluation comparisons use the actual tensor powers of the restricted line module.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03LX (lemma-pushforward-etale-base-change-modules), including the tensor-pullback footnote, applied to the homogeneous products and counits; spaces-descent.tex Tag 0D3C (lemma-descending-property-ample), proof: pullback compatibility of psi_d and their graded sum."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-etale-graded-module-algebra",
+  "def-trf-etale-module-evaluation-tensor-powers",
+  "def-trf-module-chart-etale-base-change",
+  "def-sfb-space-small-ringed-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-space-etale-module-pushforward-restriction] to $F=B_d$ for each $d$. Its hypotheses are precisely the cartesian square and the etaleness of $g$; no quasi-compactness or quasi-coherence is needed. It identifies $g^*f_*B_d$ and $f'_*h^*B_d$ with the same compatible sections over $X\\times_YV=X'\\times_{Y'}V$, by the identity on every chart projection. These are the required $\\beta_d$, natural in $B_d$ and in $V$. The same lemma identifies $h^*f^*G$ with $f'^*g^*G$ with the stipulated scalar-multiplication normalization.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX, lemma-pushforward-etale-base-change-modules, degree zero and footnote"
+   }
+  },
+  {
+   "text": "For localization along $h$ or $g$, apply [lem-sfb-localized-site-tensor-restriction] on each target scheme chart, where the localized site is the small etale site of its pullback. These comparisons agree on overlaps: both send every pure tensor of sections to the same pure tensor, so the uniqueness in [lem-pc-sites-sheaf-tensor-bilinear-universal] makes them equal. They therefore give the canonical tensor comparisons for $h^*$ and $g^*$. Their associativity and symmetry diagrams agree on $(s\\otimes t)\\otimes u$ and $s\\otimes t$, respectively, hence agree as sheaf maps by the same uniqueness. By [lem-trf-space-chart-adjunction-tensor-realization], the structure ring is restricted with unchanged functions and the unit comparison is $a\\otimes b\\mapsto ab$, with inverse $a\\mapsto a\\otimes1$. Thus these tensor comparisons also preserve the tensor unit.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL (lemma-tensor-product-pullback) and 03DH (definition-localize-ringed-site); tensor universal property after Tag 0GMW"
+   }
+  },
+  {
+   "text": "Fix $m,n$ and an etale $V\\to Y'$. Write compatible sections as families $(s_T)_T,(t_T)_T$ on charts of $X\\times_YV$. Homogeneous multiplication in either direct image is the family $(\\mu_{m,n}(s_T\\otimes t_T))_T$. Step 1 leaves both families and every projection unchanged; Step 2 leaves the pure tensor unchanged. Consequently $\\beta_{m+n}(st)=\\beta_m(s)\\beta_n(t)$. This equality on section pairings is equality of the maps from the sheaf tensor by [lem-pc-sites-sheaf-tensor-bilinear-universal]. The unit section is the family of images of $1$ under $\\mathcal O_X\\to B_0$; the same calculation gives $\\beta_0(1)=1$. Associativity, ordinary commutativity and the unit laws hold componentwise, since they hold in the given $B_d$. Equality of compatible families is detected by their chart projections [def-trf-space-etale-module-functors].",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX, identity on restricted sections, applied to homogeneous pairings and unit"
+   }
+  },
+  {
+   "text": "Every tensor pullback under consideration is a left adjoint [def-trf-space-etale-module-functors]. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the small discrete index category $\\mathbf N$. In particular $g^*C\\simeq\\bigoplus_d g^*f_*B_d$. Compose this comparison with $\\bigoplus_d\\beta_d$; its inverse is the sum of the inverses. It respects the grading. Products of homogeneous summands and the degree-zero unit commute with it by Step 3, so the resulting $\\beta$ is an isomorphism of unital commutative graded algebras. This is a coproduct argument in module sheaves, and makes no assertion that sections of an infinite coproduct are globally a direct sum of sections.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1), applied to the discrete category of nonnegative integers"
+   }
+  },
+  {
+   "text": "First compute a single counit $\\epsilon_{f,F}:f^*f_*F\\to F$. A chart tensor from $s\\in(f_*F)(V)$ is $a\\,\\pi_{W,b}(\\eta_{f_*F}(s))$ by [def-trf-space-etale-module-functors]. Naturality of the chart projections gives its image under $\\epsilon_{f,F}$ as $a\\,\\pi_{W,b}(f_*\\epsilon_{f,F}(\\eta_{f_*F}(s)))$. The adjunction triangle identity reduces this to $a\\,\\pi_{W,b}(s)=a\\,s|_W$. The tensor realization [lem-trf-space-chart-adjunction-tensor-realization] identifies these with actual local tensors, rather than just unit sections. Now set $F=B_d$. Step 1 fixes $s$ and its restrictions, and its pullback comparison multiplies scalar coefficients. Thus the two degree-$d$ paths in the asserted square both send $a\\otimes s$ to $a\\,s|_W$, for arbitrary $a$. They agree on finite sums by linearity, and on sheaf tensors by uniqueness of extension through sheafification [def-weil-presheaf-modules-sheafification]. No global pure-tensor expression is required. Finally Step 4, also applied to $f^*,h^*,f'^*$, identifies the source and target coproducts; two maps from a coproduct are equal if their composites with every inclusion are equal. This proves $h^*\\epsilon_f=\\epsilon_{f'}\\circ f'^*\\beta$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C, lemma-descending-property-ample, paragraph on pullback of psi_d; explicit adjunction-triangle calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-canonical-etale-line-power-algebra] to L and its local rank-one hypothesis, obtaining A with canonical products. Apply the general graded restriction theorem (Steps 1--5 above) to A to obtain R. Apply [lem-trf-etale-line-power-comparison] to h, R.hh, A and R.restrictedAlgebra, using R.restrictedProducts to supply exactly the unchanged chart products and unit. This gives the actual power algebra A′, theta, its homogeneous algebra map and its first-power equation. For each d, naturality of the specified adjunction counit for f′ applied to (theta d).hom gives the last evaluation equation directly. This is CategoryTheory.Adjunction.counit_naturality, not an additional geometric compatibility assumption.",
+   "uses": [
+    "lem-trf-canonical-etale-line-power-algebra",
+    "lem-trf-etale-line-power-comparison",
+    "def-trf-space-etale-module-functors",
+    "def-trf-etale-power-product-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, iterated with the tensor unit; spaces-descent.tex Tag 0D3C, the maps psi_d; final equality is adjunction counit naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-trf-canonical-etale-line-power-algebra",
+  "lem-trf-etale-line-power-comparison",
+  "def-trf-etale-power-product-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "General theorem retains the Tag 03LX plan in Steps 1--5 and remains unproved. Step 6 is implemented from canonical power-algebra existence, etale power comparison, the general theorem, and adjunction counit naturality (W4, 2026-10-26)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change for a graded algebra of sheaves on an algebraic space identifies degreewise direct images and preserves multiplication unit and tensor pullback adjunction counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the pullback isomorphism $\\\\operatorname{Spec}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the isomorphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(fg\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              CategoryTheory.Functor.comp\\n                  (AlgebraicGeometry.ProjectiveSpectrum.Struc\", \"doc\": \"The composition of the structure presheaf of commutative rings on the projective spectrum with the forgetful functor to the category of sets is naturally isomorphic to the underlying sheaf of sets of \"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A)\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n                { carrier := HomogeneousLocalization.Awa\", \"doc\": \"For any open set $U$ in the projective spectrum $\\\\text{Proj}(A)$, the composition of the structure sheaf restriction map $\\\\mathcal{O}_{\\\\text{Proj}(A)}(D_+(f)) \\\\to \\\\mathcal{O}_{\\\\text{Proj}(A)}(U)$ with\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"counit\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "grep",
+   "query": "(graded.*base[Cc]hange|base[Cc]hange.*graded|etale.*counit|counit.*etale)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"line\": \"15\", \"text\": \"`S ⊗[R] 𝒜` is a graded `S`-algebra with the grading `fun i ↦ (𝒜 i).baseChange S`.\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"line\": \"37\", \"text\": \"instance baseChange : GradedAlgebra fun i ↦ (𝒜 i).baseChange S where\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"line\": \"38\", \"text\": \"  one_mem := tmul_mem_baseChange_of_mem _ <| one_mem_graded 𝒜\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"line\": \"117\", \"text\": \"1. `𝒜 ↦ (𝒜 · |>.baseChange S)`, a functor from Graded `R`-Algebra to Graded `S`-Algebra; and:\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a graded direct image algebra to an etale base commutes with its algebra evaluation map",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a ringed etale topos preserves the graded module pushforward and its adjunction evaluation on local tensor generators",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R S : CommRingCat) (p : PrimeSpectrum ↑R) [inst : Algebra ↑R ↑S]\\n  (y :\\n    ↑(((TopCat.Presheaf.pushforward CommRingCat\\n                (AlgebraicGeometry.Spec.topMap (CommRingCat.ofHom (algebraMap ↑R ↑S)))).obj\\n            (AlgebraicGeometry.Spec.structureSheaf ↑S).val).stalk\\n        p)),\\n  ∃ x,\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ S $, and a prime ideal $ p $ in $ S $, there exists a canonical $ R $-algebra homomorphism from $ S $ to the stalk of the pushforward of the structur\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              CategoryTheory.Functor.comp\\n                  (AlgebraicGeometry.ProjectiveSpectrum.Struc\", \"doc\": \"The composition of the structure presheaf of commutative rings on the projective spectrum with the forgetful functor to the category of sets is naturally isomorphic to the underlying sheaf of sets of \"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^\\\\mathrm{op}$ and any element $a$ in the presheaf $S.\\\\text{val}.\\\\text{obj}\\\\, X$, the application of the unit morphism $\\\\text{unitToPushforwardOb\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) →\\n        ModuleCat.of R ↑M ⟶ M.tildeInModuleCat.obj (Opposite.op U)\", \"doc\": \"For an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the restriction map from the module $ M $ localized at $ U $ to the sections of the sheaf $ \\\\widetilde{M} $ over\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"counit\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes with open immersions, ring modules, or projective spectra do not state this arbitrary algebraic-space graded direct-image/counit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(graded.*pushforward|pushforward.*graded|etale.*counit|counit.*etale)",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes with open immersions, ring modules, or projective spectra do not state this arbitrary algebraic-space graded direct-image/counit assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale base change for module direct images respects graded multiplication and adjunction evaluation",
+   "results": "OK 8 hits: SetLike.GradedSMul, SheafOfModules.PullbackConstruction.adjunction, IsBaseChange.toDualBaseChange_tmul, TensorProduct.gradedMul, RingHom.Etale.isStableUnderBaseChange, Module.Dual.baseChange_apply_tmul, IsBaseChange.directSumPow, Algebra.Etale.baseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes with open immersions, ring modules, or projective spectra do not state this arbitrary algebraic-space graded direct-image/counit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale restriction commutes with direct image of a graded algebra of sheaves of modules and preserves the evaluation adjunction counit",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE. ",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes with open immersions, ring modules, or projective spectra do not state this arbitrary algebraic-space graded direct-image/counit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(baseChange|base_change|counit)",
+   "results": "OK 8 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes with open immersions, ring modules, or projective spectra do not state this arbitrary algebraic-space graded direct-image/counit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an etale slice site identifies ringed module pullback with restriction and commutes with multiplication in graded sheaf algebras",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.Proj.res_apply, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc. ",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes with open immersions, ring modules, or projective spectra do not state this arbitrary algebraic-space graded direct-image/counit assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-section-algebra-etale-base-change",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical polarized-descent branch of lem-trf-local-term-locality, realized by lem-trf-algebraic-space-ample-local Step 3 (section algebra and evaluation in Stacks 0D3C). Returned steps 5--6: etale restriction, tensor powers, graded operations, and base-change equality of evaluations.",
+   "via": [
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-graded-pushforward-etale-restriction",
+  "worker": "stage1",
+  "group": "Q44",
+  "summary": "Reused existing section-normalized etale module base change, chart tensor realization, localized-site tensor comparison, bilinear universal property, and left-adjoint preservation of coproducts. Wrote the homogeneous product and unit checks, counit calculation by the triangle identity with arbitrary local scalars, and induction on tensor powers. No statement change and no new nodes.",
+  "blueprint": "Historical polarized-descent branch recorded in blueprint.from.place, through space-section-algebra-etale-base-change and Stacks 0D3C; current latest local-term-locality follows contracting correspondences, so this item is only the existing historical foundation, not a replacement route for that current theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic tensor restriction on localized ringed sites, used on etale scheme charts; the unit does not state this sheaf tensor comparison."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property detects equality of module-sheaf tensor maps on pure tensors; the unit gives no such category-of-modules fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-645c36210",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-645c36210 (reviewer sub-agent of L); spot-checked: Read the item's statement and all six steps in full, plus every cited statement. The statement, stmt_deps, source and blueprint are byte-identical to an earlier snapshot; only the proof fields changed. No new nodes, no repair note, no SGA. Source check: Stacks 03LX (spaces-properties l.4422) with its footnote gives f'_*(F|X')=(f_*F)|Y' and the tensor-pullback comparison for étale g with no finiteness hypotheses; the 0D3C proof (spaces-descent l.2125ff) has 'ψ_d pull back to ψ_{i,d}'. Step 1 applies lem-trf-space-etale-module-pushforward-restriction to F=B_d; its hypotheses (cartesian square, étale g) hold. Step 2 builds the h^*/g^* tensor comparisons chartwise from lem-sfb-localized-site-tensor-restriction, glued and checked for coherence by the bilinear bijection, with the unit a⊗b↦ab from the étale clause of the chart-realization node. Advisory: h étale is elementary from def-trf-algebraic-space and not cited. Step 3: the homogeneous products are the same chart families, so β_{m+n}(st)=β_m(s)β_n(t) and β_0(1)=1. Step 4: g^* is a left adjoint and preserves ℕ-coproducts; the algebra claim is only homogeneous. Step 5: the counit calculation ε(b·π(η(m)))=b·π(f_*ε∘η(m))=b·m|_T is correct, the other path goes through the 03LX scalar-multiplying comparison, and the extension goes through sheafification uniqueness and the coproduct summands; this is a genuine argument, not E5. Step 6: induction for θ_d with stated base cases and successor step, preserving concatenation including m=0 or n=0. Edge cases checked: non-surjective g, empty charts, zero modules, non-qc f, single-chart ring case, d=0 and d=1. Accepted the declared tool_uses lem-sfb-localized-site-tensor-restriction and lem-pc-sites-sheaf-tensor-bilinear-universal as generic ringed-site tensor facts. Duplicate scan: the nearest node, lem-trf-graded-evaluation-zariski-etale-comparison (Zariski vs étale), is different. Both citers use the item exactly as stated. No cycle (351 transitive dependencies traversed)."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GradedPushforwardEtaleRestriction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.graded_pushforward_etale_restriction",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsGradedEtaleRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.HasChartwiseGradedDirectImage",
+   "AlgebraicGeometry.AlgebraicSpace.gradedEtaleCofan",
+   "AlgebraicGeometry.AlgebraicSpace.GradedPushforwardEtaleRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.graded_pushforward_etale_restriction",
+   "AlgebraicGeometry.AlgebraicSpace.graded_pushforward_etale_restriction_line_powers"
+  ],
+  "file": "lean/Sheaf/TraceFormula/GradedPushforwardEtaleRestriction.lean",
+  "statement": "theorem graded_pushforward_etale_restriction (f : X ⟶ Y) (g : Y' ⟶ Y) (h : X' ⟶ X) (f' : X' ⟶ Y') (hg : IsEtale g.hom.hom) (hp : IsPullback h.hom f'.hom f.hom g.hom) (B : ℕ → X.Modules) (A : EtaleGradedModuleAlgebra B) : Nonempty (GradedPushforwardEtaleRestriction f g h f' hg hp B A)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "H2 repair of immutable head 9a3e7d59a5ca: moduleChartBaseChange is now cited through its existing:true definition owner def-trf-module-chart-etale-base-change, and def-sfb-space-small-ringed-model is a direct statement dependency. The module explicitly publicly imports the small-ringed-model interface. Both theorem signatures and all mathematical hypotheses and clauses remain unchanged; no inline copy and no comparison-theorem statement dependency is added. W4 moved the three canonical power normalizations verbatim to Sheaf.TraceFormula.EtalePowerProductNormalization, owned by def-trf-etale-power-product-normalization; their public names and bodies are preserved and re-exported. The line-power theorem is reduced to two strictly smaller tensor-power statements and counit naturality; the general theorem remains sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e1f3236d",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 9a3e: new existing:true def node def-trf-module-chart-etale-base-change owns moduleChartBaseChange (real CostructuredArrow data, signature matches the node, square need not be cartesian); def-sfb-space-small-ringed-model added to stmt_deps and publicly imported. All declarations in the statement are owned by cited def nodes; no theorem stmt_dep. Clause check: beta pinned by chart-projection identity; algebraHom (EtaleGradedModuleAlgebra.Hom mul+unit) gives products and unit; cofans with left-adjoint colimit facts determine total/sourceTotal; lambda pinned on local tensors with arbitrary scalars; evaluation square h^*eps_f = eps_f' . f'^*beta typed correctly with actual counits; line-power theta pinned by unit, unitor and products. lean.statement verbatim; 2 sorry only; no extra hypotheses; universe u; edge cases d=0, m or n=0, empty charts and non-surjective g covered. No recompile (no file changed); worker's compile and dry run are clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-724b9",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261026T083436-L-2354896",
+  "kind": "interface",
+  "note": "independent cc review: Relocated defs in EtalePowerProductNormalization vs the clone's item module (byte-identical); item node vs the clone (only proof/proof_deps/proof_origin/lean changed); new lemma statements vs their nodes and the EtaleGradedModuleAlgebra/IsLineModule definitions"
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "def-wf-weil-coefficient-comparison-interface",
+ "kind": "definition",
+ "title": "Normalized coefficient comparison for the concrete Weil stage categories",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite-field and coefficient datum, a separated finite-type $k_0$-scheme $X_0$ and its geometric fibre $X$, and the finite and common PBC Weil categories of [def-wf-weil-category]. Let $S$ be the normalized coefficient-comparison system of [lem-fd-rational-coefficient-category-comparison]. On the SF Weil categories of [def-weil-weil-sheaf-complex], define $J_E$ by applying the finite coefficient equivalence with the comparison from completed pullback to exact scheme-isomorphism transport; this comparison is uniquely fixed by its equation with the completion unit and ordinary derived transport. Its rational version is fixed on every localized integral arrow. Define the finite SF stage inclusion $i_E$, SF scalar functor $T^s_h$ and transition $t^s_h:T^s_hi_L\\cong i_E$ using the recorded pullback/scalar comparison and underlying common-stage maps. Define $j_h:J_ET^p_h\\cong T^s_hJ_L$ to have the prescribed normalized coefficient scalar map on carriers. A ConstantTwistWeilComparison is an equivalence $J$ from SF common-stage Weil pairs to PBC common-stage Weil pairs, together with natural isomorphisms $a_E:i_EJ\\cong J_E\\iota_E$. Require for every $h:E\\subseteq L$ and finite SF Weil pair $K$ the transition square\n$$J(t^s_{h,K})\\,a_{E,K}=a_{L,T^s_hK}\\,\\iota_L(j_{h,K}^{-1})\\,t^p_{h,J_EK},$$\nwhere $t^p_h:T^p_h\\iota_L\\cong\\iota_E$ is the specified PBC transition, and products are written in order of application. The equation includes equal stages; successive extensions use the specified scalar associators. These data are the normalized common-stage presentation induced by $S$, not independent choices of stage identifications. Define the interface record with this equation and its finite functors, scalar maps and transition maps; its existence is the common-stage descent obligation.",
+ "stmt_deps": [
+  "def-wf-weil-category",
+  "lem-fd-rational-coefficient-category-comparison",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-constant-twist-weight.proof.md",
+  "place": "First sentence; passage from the coefficient comparison to the concrete common-stage Weil categories, expanded in comparison node proof steps 1 and 7"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Coefficient equivalence of Weil pairs compatible with finite scalar extension and the transition maps into the common stage category",
+   "results": [
+    "RootPairing.restrictScalars_pairing",
+    "Module.Basis.mapCoeffs_repr",
+    "RootPairing.restrictScalars'",
+    "Module.Basis.mapCoeffs",
+    "RootPairing.restrictScalars_coe_coroot",
+    "Equiv.smul",
+    "WittVector.liftEquiv",
+    "FiniteField.instIsScalarTowerZModExtension"
+   ],
+   "date": "2026-10-24",
+   "verdict": "Generic base change results; no Weil comparison interface."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Weil fixed pairs coefficient comparison colimit finite fields transition squares",
+   "results": [
+    "LightCondensed.isColimitLocallyConstantPresheaf_desc_apply",
+    "CategoryTheory.PreGaloisCategory.PointedGaloisObject.isColimit",
+    "InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj",
+    "Condensed.isColimitLocallyConstantPresheaf_desc_apply",
+    "LightProfinite.proj_comp_transitionMap",
+    "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+    "LightProfinite.proj_comp_transitionMapLE",
+    "LightProfinite.proj_comp_transitionMapLE'"
+   ],
+   "date": "2026-10-24",
+   "verdict": "Generic filtered limit and Galois constructions, not the normalized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "ConstantTwistWeilComparison|constantTwistFiniteComparison|constantTwistSfTransition (Mathlib; lean/WeilConjectures; lean/Sheaf); tools/blueprint_refs.py search Weil coefficient comparison; DAG fixed-pair colimit/transition square",
+   "results": [
+    "Mathlib: 0 hits",
+    "WeilConjectures and Sheaf: no declaration of this interface",
+    "Blueprint search: 0 nodes",
+    "DAG: existing Weil and SF categories, coefficient comparison and generic fixed-pair/colimit lemmas; no node for the transport to the concrete WeilDQbar with this pinned stage equation"
+   ],
+   "date": "2026-10-24",
+   "verdict": "Keep the proved coefficient-comparison node unchanged; the supplement is a new interface definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-constant-twist-coefficient-comparison",
+  "date": "2026-10-24",
+  "group": "O3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-constant-twist-weight",
+   "place": "Coefficient comparison on Weil pairs with the prescribed finite-stage transition maps",
+   "via": [
+    "lem-wf-constant-twist-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "lean": {
+  "module": "Sheaf.Paper.PbcWeilCoefficientComparison",
+  "declaration": "WeilConjectures.ConstantTwistWeilComparison",
+  "declarations": [
+   "WeilConjectures.constantTwistDimension_bound",
+   "WeilConjectures.constantTwistDimension",
+   "WeilConjectures.constantTwistPrimeUnit",
+   "WeilConjectures.constantTwistIntegralTransport_existsUnique",
+   "WeilConjectures.constantTwistIntegralTransport",
+   "WeilConjectures.constantTwistRationalTransport_existsUnique",
+   "WeilConjectures.constantTwistRationalTransport",
+   "WeilConjectures.constantTwistFinitePullbackComparison",
+   "WeilConjectures.constantTwistFiniteComparison",
+   "WeilConjectures.constantTwistFiniteComparison_isEquivalence",
+   "WeilConjectures.constantTwistSfInclusion_existsUnique",
+   "WeilConjectures.constantTwistSfInclusion",
+   "WeilConjectures.constantTwistSfScalar",
+   "WeilConjectures.constantTwistFiniteScalar_existsUnique",
+   "WeilConjectures.constantTwistFiniteScalar",
+   "WeilConjectures.constantTwistSfTransition_existsUnique",
+   "WeilConjectures.constantTwistSfTransition",
+   "WeilConjectures.ConstantTwistWeilComparison",
+   "WeilConjectures.constantTwistWeilComparison_exists"
+  ],
+  "file": "lean/Sheaf/Paper/PbcWeilCoefficientComparison.lean",
+  "statement": "structure ConstantTwistWeilComparison",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Supplemental interface only. The proved lem-fd-rational-coefficient-category-comparison record and source are unchanged. The stage_transition field pins stage isomorphisms by the prescribed SF and PBC transition squares; constantTwistWeilComparison_exists is the existence obligation for these data."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8919d0f4a",
+  "group": "O3",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8919d0f4a",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after the 8da7a3dc RETURN; all three points repaired: (1) H2 stmt_dep now def-per-lisse-completed-system-data with the LisseCompletedSystemData import; (2) lem-fd record unchanged, the interface owned by new def node def-wf-weil-coefficient-comparison-interface (fields per H12), ConstantTwistWeilComparison.stage_transition pins the stage isos to the SF transition, normalized finite scalar and PBC transIso; (3) citer audit of the def-wf-constant-weil-twist rebind lists 16 citers (spot-checked d-real-cohom docstring-only, lem-wf-constant-twist-weight). Mechanical theorem stmt_dep lem-weil-constant-weil-structure-stage-independence: the item uses constantWeilStageScalar = .choose of that module's ∃! Weil iso over alpha (clause 1 of the theorem), i.e. an object the theorem's conclusion constructs -> PASS on that point; the rebuilt dependency module states both clauses, finite type only. Clause by clause: J_E with unit-normalized transport; B = J(E_X,b theta) as pbcConstantWeilLine; integral rep R[0], section-normalized; rank one, vacuous on empty X; E-independence plus associator; eta ∃!-pinned to the completed right unit (wfCompletionExtend of rightUnitor) with naturality, scalar square, common descent keeping b, J^-1 transport; local conjugacy at extension and closed points with recorded localQbar operators; connected clause with rho = b^deg via a pinned etale theta and a fully faithful realization; universes lifted via ULift. No hollow defs, all sorry, docstrings OK, lines <=100. Advisory: lem-fd and koszul-reflector theorem modules own FdCoefficientComparisonSystem/wfCompletionExtend uses; the stage-independence module imports the new interface without a stmt_dep (dependency nodes change lean only); H11 self second reading. No compile (no change)."
+ }
+}

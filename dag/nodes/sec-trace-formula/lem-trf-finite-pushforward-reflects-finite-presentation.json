@@ -1,0 +1,369 @@
+{
+ "id": "lem-trf-finite-pushforward-reflects-finite-presentation",
+ "kind": "statement",
+ "title": "Finite finitely presented direct image reflects finite presentation",
+ "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Write $f_*\\mathcal F$ for its Zariski direct image, defined on an open $V\\subseteq Y$ by $(f_*\\mathcal F)(V)=\\mathcal F(f^{-1}V)$, with $\\mathcal O_Y(V)$ acting through $f^\\sharp(V):\\mathcal O_Y(V)\\to\\mathcal O_X(f^{-1}V)$. If $f_*\\mathcal F$ is of finite presentation as an $\\mathcal O_Y$-module, then $\\mathcal F$ is of finite presentation as an $\\mathcal O_X$-module [def-weil-pbc-module-finite-type-presentation].",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05B4, label lemma-finite-finitely-presented-module, reverse implication and its affine proof."
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Let $V\\subseteq Y$ be any affine open and put $U=f^{-1}V$, $R=\\mathcal O_Y(V)$, $S=\\mathcal O_X(U)$ and $M=\\mathcal F(U)$. By the definition of a finite morphism, $U$ is affine and $S$ is finite as an $R$-module. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to the affine opens $U,V$: its containment hypothesis is $f(U)\\subseteq V$, true by construction. Thus $S$ is also finitely presented as an $R$-algebra.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B4, lemma-finite-finitely-presented-module, affine reduction; Morphisms Tag 01TQ, lemma-locally-finite-presentation-characterize"
+   }
+  },
+  {
+   "text": "By hypothesis $f_*\\mathcal F$ is of finite presentation. Clause (0) of [lem-weil-pbc-quasi-coherent-finite-type-affine] makes it quasi-coherent, so clause (b) on $V$ shows that $(f_*\\mathcal F)(V)$ is finitely presented over $R$. By the direct-image definition in the statement this is exactly $M=\\mathcal F(U)$, and its $R$-action is restriction of its $S$-action through $f^\\sharp(V):R\\to S$. Consequently $M$ is finitely presented as an $R$-module.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PC, lemma-finite-presentation-module; Modules Tag 01BO, lemma-finite-presentation-quasi-coherent"
+   }
+  },
+  {
+   "text": "The ring map $R\\to S$ satisfies both hypotheses of [lem-trf-finite-extension-module-finite-presentation] by Step 1. Apply its implication from finite presentation over $R$ to finite presentation over $S$ to the $S$-module $M$ of Step 2. This gives that $\\mathcal F(U)$ is finitely presented over $\\mathcal O_X(U)$.",
+   "uses": [
+    "lem-trf-finite-extension-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0564, lemma-finite-finitely-presented-extension, implication from the base ring to the extension ring"
+   }
+  },
+  {
+   "text": "Apply clause (b) of [lem-weil-pbc-quasi-coherent-finite-type-affine] to the given quasi-coherent module $\\mathcal F$ and the affine open $U$. The finite presentation of $M$ over $S$ from Step 3 implies that $\\mathcal F|_U$ is of finite presentation. The opens $f^{-1}V$, for affine opens $V$ of $Y$, cover $X$: for each $x\\in X$, choose an affine neighbourhood of $f(x)$ in the scheme $Y$. At each $x$ the local finite presentation on this $U$ supplies exactly the finite free presentation required by [def-weil-pbc-module-finite-type-presentation](2). Hence $\\mathcal F$ is of finite presentation on $X$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B4, lemma-finite-finitely-presented-module, final affine criterion; Properties Tag 01PC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-trf-finite-extension-module-finite-presentation",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05B4, lemma-finite-finitely-presented-module, reverse implication; its cited Algebra Tag 0564 and Properties Tag 01PC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of a quasi-coherent module on a scheme can be detected by its direct image along a finite finitely presented morphism",
+   "results": {
+    "t": "2026-10-22T06:46:44Z",
+    "tool": "leanfinder",
+    "query": "Finite presentation of a quasi-coherent module on a scheme can be detected by its direct image along a finite finitely presented morphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+     "SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+     "SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+     "SheafOfModules.isFinitePresentation"
+    ],
+    "digest": "6be5b07b4518992b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give finite-presentation definitions, affine ring-map properties, or unrelated algebra presentations; none states this direction of finite direct image for arbitrary quasi-coherent modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, Module.FinitePresentation",
+   "results": {
+    "t": "2026-10-22T06:46:34Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.IsFinitePresentation, Module.FinitePresentation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give finite-presentation definitions, affine ring-map properties, or unrelated algebra presentations; none states this direction of finite direct image for arbitrary quasi-coherent modules."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*(restrictScalars|pushforward)|finite_presentation.*(restrictScalars|pushforward)|IsFinitePresentation.*pushforward",
+   "results": {
+    "t": "2026-10-22T06:46:34Z",
+    "tool": "grep",
+    "query": "finitePresentation.*(restrictScalars|pushforward)|finite_presentation.*(restrictScalars|pushforward)|IsFinitePresentation.*pushforward",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Extension/Presentation/Basic.lean"
+    ],
+    "digest": "b8ef3ec0910b0e8e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give finite-presentation definitions, affine ring-map properties, or unrelated algebra presentations; none states this direction of finite direct image for arbitrary quasi-coherent modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the pushforward of a quasi-coherent sheaf under a finite morphism of finite presentation is finitely presented then the sheaf is finitely presented",
+   "results": {
+    "t": "2026-10-22T06:46:34Z",
+    "tool": "leansearch",
+    "query": "If the pushforward of a quasi-coherent sheaf under a finite morphism of finite presentation is finitely presented then the sheaf is finitely presented",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.mk",
+     "SheafOfModules.pushforward",
+     "AlgebraicGeometry.Scheme.Modules.pushforward",
+     "SheafOfModules.IsFinitePresentation.mk",
+     "SheafOfModules.pushforwardSections",
+     "TopCat.Sheaf.pushforward",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.isFinitePresentation"
+    ],
+    "digest": "0f7b03239972a815"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give finite-presentation definitions, affine ring-map properties, or unrelated algebra presentations; none states this direction of finite direct image for arbitrary quasi-coherent modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented direct image along a finite finitely presented morphism implies finite presentation of the source quasi-coherent sheaf without any Noetherian assumption",
+   "results": {
+    "t": "2026-10-22T06:48:25Z",
+    "tool": "leanfinder",
+    "query": "A finitely presented direct image along a finite finitely presented morphism implies finite presentation of the source quasi-coherent sheaf without any Noetherian assumption",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+     "SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+     "SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+     "SheafOfModules.isFinitePresentation"
+    ],
+    "digest": "93d35ff634d96610"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give finite-presentation definitions, affine ring-map properties, or unrelated algebra presentations; none states this direction of finite direct image for arbitrary quasi-coherent modules."
+  },
+  {
+   "tool": "grep",
+   "query": "(finitePresentation|IsFinitePresentation|finite_presentation).*(pushforward|restrictScalars)|(pushforward|restrictScalars).*(finitePresentation|IsFinitePresentation|finite_presentation)",
+   "results": {
+    "t": "2026-10-23T09:47:29Z",
+    "tool": "grep",
+    "query": "(finitePresentation|IsFinitePresentation|finite_presentation).*(pushforward|restrictScalars)|(pushforward|restrictScalars).*(finitePresentation|IsFinitePresentation|finite_presentation)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Extension/Presentation/Basic.lean"
+    ],
+    "digest": "b8ef3ec0910b0e8e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are local finite-presentation definitions or the affine ring-map characterization, not reflection by finite scheme direct image; grep hit is finite presentation of an algebra quotient, not a sheaf theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, SheafOfModules.pushforward",
+   "results": {
+    "t": "2026-10-23T09:47:30Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.IsFinitePresentation, SheafOfModules.pushforward",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are local finite-presentation definitions or the affine ring-map characterization, not reflection by finite scheme direct image; grep hit is finite presentation of an algebra quotient, not a sheaf theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent module is finitely presented if its direct image under a finite finitely presented morphism is finitely presented",
+   "results": {
+    "t": "2026-10-23T09:47:30Z",
+    "tool": "leansearch",
+    "query": "A quasi coherent module is finitely presented if its direct image under a finite finitely presented morphism is finitely presented",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.mk",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.IsFinitePresentation.mk",
+     "SheafOfModules.isFinitePresentation",
+     "SheafOfModules.Presentation.IsFinite",
+     "SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+     "SheafOfModules.IsFinitePresentation"
+    ],
+    "digest": "ca461ba71066d52b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are local finite-presentation definitions or the affine ring-map characterization, not reflection by finite scheme direct image; grep hit is finite presentation of an algebra quotient, not a sheaf theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of a quasi-coherent sheaf is reflected by direct image along a finite morphism of finite presentation",
+   "results": {
+    "t": "2026-10-23T09:47:32Z",
+    "tool": "leanfinder",
+    "query": "Finite presentation of a quasi-coherent sheaf is reflected by direct image along a finite morphism of finite presentation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+     "SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+     "SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+     "SheafOfModules.isFinitePresentation",
+     "SheafOfModules.instIsQuasicoherentOfIsFinitePresentation"
+    ],
+    "digest": "11f46df376a0159c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are local finite-presentation definitions or the affine ring-map characterization, not reflection by finite scheme direct image; grep hit is finite presentation of an algebra quotient, not a sheaf theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the restriction of scalars of a quasi-coherent module along a finite affine scheme morphism is locally finitely presented then the original module sheaf is locally finitely presented",
+   "results": {
+    "t": "2026-10-23T09:48:54Z",
+    "tool": "leanfinder",
+    "query": "If the restriction of scalars of a quasi-coherent module along a finite affine scheme morphism is locally finitely presented then the original module sheaf is locally finitely presented",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+     "SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+     "AlgebraicGeometry.locallyOfFinitePresentation_iff",
+     "SheafOfModules.isFinitePresentation",
+     "SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+     "AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE"
+    ],
+    "digest": "0b90b03892cdb6e9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are local finite-presentation definitions or the affine ring-map characterization, not reflection by finite scheme direct image; grep hit is finite presentation of an algebra quotient, not a sheaf theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-pushforward-module-finite-presentation",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting elementary-devissage branch of lem-trf-local-term-locality, proof (1)--(2), through the recorded alteration/flatification ancestry: Stacks 057T neighbourhood comparison of the sheaf with its finite pushforward, and its final stalk comparison. More precisely, the reflection direction of the affine finite-direct-image comparison in Descent 05B4, used in Flatness 057T (2) versus (3).",
+   "via": [
+    "lem-trf-finite-pushforward-module-finite-presentation",
+    "lem-trf-elementary-devissage-finite-presentation",
+    "lem-trf-finite-type-flat-etale-neighborhood",
+    "lem-trf-flat-finite-type-flat-point-local",
+    "lem-trf-flat-finite-type-dense-presentation",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-pushforward-reflects-finite-presentation",
+  "worker": "stage1",
+  "summary": "Unchanged statement; expanded the reverse implication of Stacks 05B4 on arbitrary affine target opens, checked finite and finitely presented ring-map hypotheses, identified direct-image sections with restriction of scalars, and applied the existing algebraic and affine-sheaf criteria. No new nodes.",
+  "blueprint": "Supporting finite-pushforward/elementary-devissage branch of lem-trf-local-term-locality, proof (1)--(2), through the recorded alteration/flatification ancestry; realizes the reverse comparison needed in Stacks 057T (2) versus (3), via Descent 05B4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic affine-chart characterization of local finite presentation supplies the ring-map hypothesis; no same-unit node is needed to replace this characterization."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine module-sheaf finite-presentation criterion (0),(b), used as the exact Properties 01PC tool cited by 05B4, not as a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-947bae93e",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-947bae93e (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item and all its steps in full; the delivery adds no new nodes and leaves the statement unchanged. Source: Stacks 05B4 reverse direction (descent.tex l.2099). Its hypothesis 'finite and of finite presentation' equals finite plus locally of finite presentation, because finite implies affine, so the item's hypotheses match. The proof follows 0564 (algebra.tex l.7876), 01PC (properties.tex l.2113) and 01BO (modules.tex l.1421), all read. Step 1: def-weil-finite-integral-morphism gives U=f^{-1}V affine and R->S finite; lem-weil-pbc-lfp-affine-opens-finite-presentation (01TQ) applies because f(U) is contained in V, so R->S is a finitely presented algebra. Step 2: clause (0) makes f_*F quasi-coherent, then clause (b) on V shows F(U) is finitely presented over R; the identification of sections with the restricted R-action is the item's own direct-image definition. Step 3: lem-trf-finite-extension-module-finite-presentation (0564); Step 1 supplies both of its ring-map hypotheses. Step 4: clause (b) on U, the opens f^{-1}V cover X, and the definition's clause (2) gives F of finite presentation; correctly marked elementary. proof_deps equals the union of the step citations and there is no cycle. grep 05B4 over the DAG shows only the parent, the sibling (forward direction) and the devissage transfer node, none of which states this result, so there is no duplicate. Small cases checked: X empty, identity, closed immersion of a point; no quasi-compactness or Noetherian hypothesis is used. Accepted tool_uses: two generic affine criteria from unit sk-thm-p1 (lfp-affine-opens, a Mathlib leaf; quasi-coherent finite-type-affine), both invoked by the source proof itself. No SGA citation. The item is still unsplit on live and side-live, so no other group has superseded this delivery."
+ }
+}

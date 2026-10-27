@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, naturality of the tensor projection map and contraction by the trace."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCoordinateTraceContractions",
+  "date": "2026-10-25",
+  "group": "G5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient.",
+   "via": [
+    "lem-sfb-etale-coordinate-trace-contractions",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-sfb-etale-projection-trace-normalization",
+ "title": "Projection mate naturality and unit normalization for etale coefficients",
+ "statement": "For any commutative ring A, morphism f:X→Y, M∈D(X_et,A), N∈D(Y_et,A), and t:N→A_Y, the ordinary projection map Rf*M tensor N→Rf*(M tensor f*N), followed by Rf* of identity tensor (f*t followed by the canonical pullback unit comparison), followed by Rf* of the right unitor, equals identity on Rf*M tensor t followed by the right unitor. All maps are the canonical maps on the ordinary unbounded categories of [def-sfb-etale-coordinate-trace-data]. No properness, finiteness or boundedness is required.",
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "apply naturality in the second argument of rightDerivedLowerStarProjectionMap\nto t:N→A_Y. It reduces the composite to tensoring t with the identity on Rf*M,\nfollowed by projection at the tensor unit, then Rf* of identity tensor the pullback\nunit comparison and the right unitor. The tensor-unit projection is the right unitor\nfollowed by Rf* of the inverse right unitor and inverse pullback-unit comparison,\nby rightAdjointProjectionMap_app_app_tensorUnit. The pullback oplax unit is the\nspecified leftDerivedUpperStarUnitIso by its normalization on degree-zero complexes.\nThe inverse unit comparison and the two right unitors cancel inside Rf*. The remaining\nmap is precisely identity tensor t followed by the right unitor. This calculation needs\nno properness or coefficient finiteness. In Lean the tensor-unit identity is Adjunction.rightAdjointProjectionMap_app_app_tensorUnit in the source ProjectionMapUnit module; leftDerivedUpperStarOplaxMonoidal_η identifies the unit comparison. The existing natural transformation supplies naturality directly. A general coefficient-category helper avoids comparing two concretely elaborated derived monoidal instances.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-tensor-unit",
+    "lem-kun-inverse-image-monoidal",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, naturality of the tensor projection map and contraction by the trace."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-unit",
+  "lem-kun-inverse-image-monoidal",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient. Expanded from the recorded parent proof with the stated ringed coherence inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Kunneth map on a self fibre product has two factorizations by projection formula and proper base change",
+   "results": "IsProperMap.prodMap, HomologicalComplex.biprodXIso_hom_fst, Prod.comul_comp_fst, IsTensorProduct.map_mul, AddHom.prodMap_def, Pi.comul_comp_proj, CochainComplex.cm5b.fac, ContinuousAffineMap.prodMap_toAffineMap",
+   "date": "2026-10-25",
+   "verdict": "No matching projection/exchange identity on unbounded etale module derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection exchange trace contraction for an object whose tensor self braiding is the identity",
+   "results": "MonoidalCategory.tensorμ_tensorδ, tensorδ_tensorμ, BraidedCategory.tensorLeftIsoTensorRight, Dial.symmetry, SymmetricCategory.symmetry, CartesianMonoidalCategory.tensorδ_snd, MonoidalCategory.externalProductSwap, BraidedCategory.exactPairing_swap",
+   "date": "2026-10-25",
+   "verdict": "Generic symmetric tensor constraints only; no canonical etale projection/exchange contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(trace|kunneth)|exchange.*(tensor|trace)",
+   "results": "Mathlib hits concern monoidal whisker exchange and tactic projection diagnostics; no derived sheaf comparison theorem. Local library has ringedKunnethFactorizations and ringedExchangeTensorCoherence on SheafOfModules, requiring transport to the ModuleCat-valued etale interface.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of these specialized canonical-map equations."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProjectionTraceNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProjectionTraceNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.projectionTraceNormalization",
+  "statement": "theorem projectionTraceNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (M : DerivedCategoryModule A X) (N : DerivedCategoryModule A Y)\n    (t : N ⟶ constantComplex A Y) :\n    ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app M).app N ≫\n        (push A f).map\n          (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map\n              ((pull A f).map t ≫\n                (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom) ≫\n            (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X M).hom) =\n      ((derivedTensor (ModuleCat.{u + 1} A) Y).obj ((push A f).obj M)).map t ≫\n        (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y ((push A f).obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7a53",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T123006-L-1822645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7a53",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T123006-L-1822645",
+  "kind": "interface",
+  "note": "independent cc review: contractions signature and node lean.statement vs clone (identical); 14 extracted defs vs clone item module (verbatim apart from blueprint tags, item re-exports Data); three new sorried statements vs parent node steps 1-6 (true, needed, not restatements); projectionTraceNormalization axioms (propext/choice/Quot.sound)"
+ }
+}

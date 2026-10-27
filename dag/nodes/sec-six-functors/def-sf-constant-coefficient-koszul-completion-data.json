@@ -1,0 +1,109 @@
+{
+ "id": "def-sf-constant-coefficient-koszul-completion-data",
+ "kind": "definition",
+ "title": "Koszul presentation and unit for constant or completed coefficients",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, let $A$ be a commutative ring and $I\\subset A$ an ideal. Use the constant sheaf $\\underline A$, the completed sheaf $B=\\lim_n\\underline{A/I^{n+1}}$, and their standard module, complex and derived categories [def-sfb-constant-completion-coefficient-data]. For $b\\in\\{\\mathrm{false},\\mathrm{true}\\}$ let $\\mathcal O_b$ be respectively $\\underline A$ or $B$, with its canonical map from $\\underline A$ [def-pur-strict-quotient-completion-data]. For $r\\geq0$ and $a:\\operatorname{Fin}(r)\\to A$, let $a_i^{\\mathcal O_b}$ be the image of $a_i$ under this map, using the constant-sheaf sheafification unit. Define $\\operatorname{KoszulPresentation}(J,A,I,b,r,a)$ to be the existing strict derived Koszul-limit presentation for $\\mathcal O_b$ and these global sections [def-weil-pbc-ringed-koszul-system], with the standard derived localizations for modules and strict module towers. Thus its tensor tower is the strict tower of tensors with the dual Koszul complexes, and its inverse-limit functor has its universal right-derived comparison. For such a presentation $K$, define $\\operatorname{koszulCompletion}(J,A,I,K)=K.\\operatorname{completion}$ and $\\operatorname{koszulUnit}(J,A,I,K,M)=K.\\operatorname{unit}(M)$ for every $M\\in D(\\mathcal O_b)$. The unit uses the actual degree-zero Koszul augmentation and the presentation's derived-limit comparison. These are presentation data and their projections; no equivalence, completeness, Noetherian hypothesis or reflector theorem is asserted.",
+ "stmt_deps": [
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul; existing coefficient specialization of the strict Koszul system"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul derived completion presentation functor and unit for module sheaves and uniformizer local derived completeness test",
+   "results": "8 hits: BDeRhamPlus, BDeRham, AdicCompletion.module, AdicCompletion, localCohomology.diagram, IsAdicComplete, Hausdorffification, AdicCompletion.of",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib declaration; reuse the existing project definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion by the total limit of the Koszul tower for sheaves of modules and derived internal Hom from localization at a uniformizer ideal section",
+   "results": "8 hits: AdicCompletion.module, AdicCompletion, AdicCompletion.instModuleOfIsScalarTower, AlgebraicGeometry.Scheme.Modules.instHasLimits, AdicCompletion.instModuleOfIsScalarTower.congr_simp, IsAdicComplete.StrictMono.of_comp_lift, SheafOfModules.hasLimitsOfShape, SheafOfModules.hasLimit",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib declaration; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "KoszulPresentation|koszulCompletion|koszulUnit|integralCompletionScalarValue|integralCompletionLocalTest",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib declaration; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n KoszulPresentation|koszulCompletion|koszulUnit|integralCompletionScalarValue|integralCompletionLocalTest lean/WeilConjectures lean/Sheaf; rg -l KoszulPresentation|integralCompletionScalarValue|integralCompletionLocalTest dag/nodes; tools/blueprint_refs.py search Koszul presentation",
+   "results": "No exact wrapper in WeilConjectures. The three Koszul wrappers occur in ConstantCompletionEquivalence; the two integral helpers occur in RoosIntrinsicCompletenessEquivalence. No definition node owns these five names. The generic RingedKoszulLimitPresentation is owned by def-weil-pbc-ringed-koszul-system and is reused. Blueprint search: zero matches for Koszul presentation.",
+   "date": "2026-10-23",
+   "verdict": "Existing project definitions without definition-node owners; add existing:true records only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ambient-completed-tensor-adjunction",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof Step 1, tensor–internal-Hom adjunction at the integral stage; returned detailed step 2: strict quotient balancing, Koszul completion of the ordinary tensor and the completion-unit mapping property (returned step 1, ambient currying, is the closed structure of lem-sf-ringed-derived-closed-symmetric-monoidal)",
+   "via": [
+    "lem-sf-ambient-completed-tensor-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantCompletionCore",
+  "file": "lean/Sheaf/Paper/ConstantCompletionCore.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.KoszulPresentation",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.KoszulPresentation",
+   "CategoryTheory.ConstantCompletion.koszulCompletion",
+   "CategoryTheory.ConstantCompletion.koszulUnit"
+  ],
+  "statement": "abbrev KoszulPresentation (b : Bool) (r : ℕ) (a : Fin r → A)",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing unchanged wrappers in ConstantCompletionEquivalence. KoszulPresentation specializes RingedKoszulLimitPresentation; koszulCompletion and koszulUnit project its data. None is a choice from the constant-completion equivalence theorem. Definition ownership requested by return F1 of head 8af3b04444db. 2026-10-27: module split (maintainer); the declaration now lives in Sheaf.Paper.ConstantCompletionCore, and Sheaf.Paper.ConstantCompletionEquivalence re-exports all parts."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b28c55bd",
+  "group": "Q59",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b28c55bd",
+  "group": "Q59",
+  "result": "fix",
+  "note": "Re-delivery of returned 8af3b04444db. F1 done: theorem nodes lem-weil-pbc-constant-completion-equivalence and lem-pur-roos-intrinsic-completeness-equivalence moved to proof_deps only; def-sfb-constant-completion-coefficient-data, def-pur-strict-quotient-completion-data and def-sfb-quotient-kernel-completeness cited; new existing:true nodes def-sf-constant-coefficient-koszul-completion-data (KoszulPresentation/koszulCompletion/koszulUnit) and def-sf-integral-local-completion-test (integralCompletionScalarValue/integralCompletionLocalTest) checked against live bodies and owner records. F2 done: copied bare Nonempty clause dropped; the Lean diff vs 8af3 is only that clause and its docstring; main signature byte-identical to the one accepted earlier; dep nodes identical to side-live; item not yet landed live. FIX (H12): integralCompletionScalarValue is the sectionwise value of PrincipalKoszulStrictReplacement.uniformizer, whose owner def-sp-completed-uniformizer-section is on base; fixes/def-sf-integral-local-completion-test.json cites that node in text and stmt_deps and extends lean.note; no Lean change, so no compile. Advisories: Good uses K-flat and flat-term predicates whose owner nodes are outside stmt_deps (accepted before); site and coefficient ring share universe u in the general declaration."
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-finite-short-complex-adic-cohomology-limit",
+ "kind": "statement",
+ "title": "Adic quotient cohomology of a finite short complex has the completed cohomology as limit",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, and $U\\xrightarrow{u}V\\xrightarrow{v}W$ a short complex of finitely generated $A$-modules [def-weil-finitely-generated-module], meaning $vu=0$. Put $H=\\ker(v)/\\operatorname{im}(u)$. For $n\\geq1$, let $u_n,v_n$ be the induced maps on the quotients by $I^n$ and put $H_n=\\ker(v_n)/\\operatorname{im}(u_n)$. Give $(H_n)$ the transitions induced by the quotient maps. The canonical maps $H/I^nH\\to H_n$, sending the class of a cycle to its class modulo $I^nV$, induce an $A$-linear isomorphism\n$$\\varprojlim_{n\\geq1}H/I^nH\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}H_n.$$\nHere each inverse limit is the module of compatible sequences, and the limit on the left is the module adic completion, defined by this compatible-sequence formula. The isomorphism is natural for all triples of $A$-linear maps between such short complexes commuting with $u,v$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EGU (lemma-consequence-Artin-Rees), assertion (2), with the canonical maps preceding the enumeration; naturality is induced by the displayed cycle maps."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-sf-adic-module-quotient-data",
+  "def-sfb-adic-short-complex-quotient-tower"
+ ],
+ "proof": [
+  {
+   "text": "Write $Z=\\ker v$, $B=\\operatorname{im}u$, and $P_n=v^{-1}(I^nW)$. Since $vu=0$, $B+I^nV\\subseteq P_n$, and lifting representatives gives $H_n=P_n/(B+I^nV)$. Also $H/I^nH=Z/(B+I^nZ)$: the image of $I^nZ$ in $Z/B$ is $I^nH$ by expanding finite sums of ideal multiples. Thus inclusion $Z\\subseteq P_n$ defines $\\phi_n:H/I^nH\\to H_n$. Inclusion of the numerator and denominator submodules for $m\\geq n$ defines all transition maps. Both routes in each transition square send a representative $z$ to its class at level $n$; hence $(\\phi_n)$ induces the stated linear map $\\Phi$ on compatible sequences.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EGU (lemma-consequence-Artin-Rees), proof of (2) and preceding construction of the maps psi_n."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-artin-rees] to $v(V)\\subseteq W$ and $Z\\subseteq V$. Its hypotheses hold because $A$ is Noetherian and the ambient modules $W,V$ are finite. Obtain $a,b\\geq0$ with $v(V)\\cap I^nW\\subseteq I^{n-a}v(V)$ for $n\\geq a$ and $Z\\cap I^rV\\subseteq I^{r-b}Z$ for $r\\geq b$. Set $c=a+b+1$. If $y\\in P_n$ and $n\\geq c$, the first inclusion gives $v(y)\\in I^{n-a}v(V)=v(I^{n-a}V)$. The equality follows by writing an element as a finite sum of ideal multiples and lifting each image term to $V$. Choose $w\\in I^{n-a}V$ with $v(w)=v(y)$; then $z=y-w\\in Z$.",
+   "uses": [
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EGU (lemma-consequence-Artin-Rees), proof of (2) and preceding construction of the maps psi_n."
+   }
+  },
+  {
+   "text": "For $n\\geq c+1$ define $\\psi_n:H_n\\to H/I^{n-c}H$ by sending the class of $y=z+w$ from step 2 to the class of $z$. To check independence, let $y'=z'+w'$ represent the same class. Then $y'-y=ut+t_n$ with $t_n\\in I^nV$, and $z'-z-ut=t_n+w-w'\\in Z\\cap I^{n-a}V$. The second bound of step 2 puts this in $I^{n-a-b}Z\\subseteq I^{n-c}Z$. Hence $z,z'$ give the same class modulo $B+I^{n-c}Z$. Sums of chosen decompositions and their scalar multiples are decompositions of the sums and scalar multiples, so independence of choices proves that $\\psi_n$ is $A$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EGU (lemma-consequence-Artin-Rees), proof of (2) and preceding construction of the maps psi_n."
+   }
+  },
+  {
+   "text": "The maps $\\psi_n$ commute with transitions: for $m\\geq n\\geq c+1$, a decomposition $y=z+w$ at level $m$ is also valid at level $n$, since $I^{m-a}V\\subseteq I^{n-a}V$. Both routes therefore send $y$ to the class of $z$ in $H/I^{n-c}H$. Furthermore $\\psi_n\\phi_n$ is the quotient map $H/I^nH\\to H/I^{n-c}H$, by taking $w=0$ for a true cycle. The composite $\\phi_{n-c}\\psi_n$ is the transition $H_n\\to H_{n-c}$, since $y-z=w\\in I^{n-a}V\\subseteq I^{n-c}V$. These checks use representatives and so assert the equalities of the actual canonical maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EGU (lemma-consequence-Artin-Rees), proof of (2) and preceding construction of the maps psi_n."
+   }
+  },
+  {
+   "text": "For a compatible sequence $x=(x_n)$ in $(H_n)$, put $\\Psi(x)_k=\\psi_{k+c}(x_{k+c})$ for every $k\\geq1$. Transition compatibility from step 4 makes this a compatible sequence in $(H/I^kH)$, and $\\Psi$ is linear. For a compatible sequence $h=(h_n)$ on the left, step 4 gives $(\\Psi\\Phi h)_k$ equal to the reduction of $h_{k+c}$ at level $k$, namely $h_k$. For $x$ on the right it gives $(\\Phi\\Psi x)_k$ equal to the transition of $x_{k+c}$ to level $k$, namely $x_k$. Thus $\\Psi$ and $\\Phi$ are inverse linear maps; no exactness-of-inverse-limit theorem or pro-category identification is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EGU (lemma-consequence-Artin-Rees), proof of (2) and preceding construction of the maps psi_n."
+   }
+  },
+  {
+   "text": "For a commuting triple $(f_U,f_V,f_W)$ between the short complexes, $f_V$ sends $Z$ into $Z'$, $B$ into $B'$, $I^nV$ into $I^nV'$, and $P_n$ into $P_n'$: $v'f_V(y)=f_Wv(y)\\in I^nW'$ for $y\\in P_n$. It therefore induces both maps on quotient cohomology and the map $H/I^nH\\to H'/I^nH'$. The square with $\\phi_n,\\phi_n'$ commutes because each route sends a cycle $z$ to the class of $f_V(z)$. The same representative computation commutes with quotient transitions. Taking compatible sequences gives $f_{\\mathrm{right}}\\Phi=\\Phi'f_{\\mathrm{left}}$, the asserted naturality. Multiplication by the inverses gives naturality of the inverse as well, without choosing compatible Artin–Rees constants for different complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EGU (lemma-consequence-Artin-Rees), proof of (2) and preceding construction of the maps psi_n."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artin-rees"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EGU (lemma-consequence-Artin-Rees), proof of (2) and preceding construction of the maps psi_n."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a three term complex of finite modules over a Noetherian ring commutes with adic completion and inverse limit of quotient cohomology",
+   "results": "8 hits: groupCohomology.isoShortComplexH1_inv, groupCohomology.isoShortComplexH2_hom, groupCohomology.isoShortComplexH1_hom, groupCohomology.π_comp_H1Iso_hom_assoc, groupCohomology.π_comp_H2Iso_hom, groupCohomology.π_comp_H1Iso_hom, groupCohomology.π_comp_H2Iso_hom_apply, groupCohomology.π_comp_H2Iso_hom_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin–Rees and AdicCompletion.map_exact are ingredients, but no hit compares the limit of quotient cohomology to completed cohomology; group-cohomology hits concern unrelated short-complex realizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"homology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin–Rees and AdicCompletion.map_exact are ingredients, but no hit compares the limit of quotient cohomology to completed cohomology; group-cohomology hits concern unrelated short-complex realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "(AdicCompletion.*(homology|cohomology)|(homology|cohomology).*AdicCompletion|consequence.Artin.Rees)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin–Rees and AdicCompletion.map_exact are ingredients, but no hit compares the limit of quotient cohomology to completed cohomology; group-cohomology hits concern unrelated short-complex realizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Rees theorem identifies the inverse limit of homology of adic quotient finite module complexes with completion of homology",
+   "results": "8 hits: Ideal.exists_pow_inf_eq_pow_smul, AdicCompletion.module, AdicCompletion.sumInv_comp_sum, AdicCompletion.liftRingHom.congr_simp, AdicCompletion, AdicCompletion.instCommRing, AdicCompletion.instAddCommGroup, AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin–Rees and AdicCompletion.map_exact are ingredients, but no hit compares the limit of quotient cohomology to completed cohomology; group-cohomology hits concern unrelated short-complex realizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite complex of Noetherian modules the pro system of quotient cohomology is isomorphic to the ideal adic quotient system of cohomology",
+   "results": "8 hits: localCohomology.isoSelfLERadical, AdicCompletion.piEquivOfFintype_apply, AdicCompletion.piEquivOfFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.map_exact, localCohomology, AdicCompletion.of_apply, AdicCompletion",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin–Rees and AdicCompletion.map_exact are ingredients, but no hit compares the limit of quotient cohomology to completed cohomology; group-cohomology hits concern unrelated short-complex realizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a finite three term module complex completed at an ideal is the inverse limit of cohomology of termwise ideal power quotients",
+   "results": "8 hits: localCohomology, AdicCompletion.map_exact, localCohomology.diagram, localCohomology.isoSelfLERadical, Hausdorffification, AdicCompletion.of_apply, AdicCompletion, AdicCompletion.eval_comp_of",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin–Rees and AdicCompletion.map_exact are ingredients, but no hit compares the limit of quotient cohomology to completed cohomology; group-cohomology hits concern unrelated short-complex realizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"ShortComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin–Rees and AdicCompletion.map_exact are ingredients, but no hit compares the limit of quotient cohomology to completed cohomology; group-cohomology hits concern unrelated short-complex realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "(homology|cohomology).*(completion|Adic)|(completion|Adic).*(homology|cohomology)",
+   "results": "0 hits: ; directory Mathlib/RingTheory/AdicCompletion",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin–Rees and AdicCompletion.map_exact are ingredients, but no hit compares the limit of quotient cohomology to completed cohomology; group-cohomology hits concern unrelated short-complex realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "(AdicCompletion.*(homology|cohomology)|(homology|cohomology).*AdicCompletion|consequence.Artin.Rees)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, finite products, and tensor descriptions do not state the inverse-limit comparison for quotient cohomology; source candidates read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homology of a finite module complex commutes with adic completion and is the limit of homology modulo powers of an ideal",
+   "results": "8 hits: AdicCompletion, AdicCompletion.module, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.flat_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.instCommRing, AdicCompletion.instAddCommGroup, AdicCompletion.liftRingHom.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, finite products, and tensor descriptions do not state the inverse-limit comparison for quotient cohomology; source candidates read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"homology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, finite products, and tensor descriptions do not state the inverse-limit comparison for quotient cohomology; source candidates read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of the homology of ideal power quotients of a short complex of finitely generated modules over a Noetherian ring equals the adic completion of its homology",
+   "results": "8 hits: AdicCompletion.map_exact, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.of_apply, AdicCompletion, IsAdicComplete, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.eval_of, AdicCompletion.eval_comp_of",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, finite products, and tensor descriptions do not state the inverse-limit comparison for quotient cohomology; source candidates read."
+  },
+  {
+   "tool": "grep",
+   "query": "(homology|cohomology).*(completion|Adic)|(completion|Adic).*(homology|cohomology)",
+   "results": "0 hits: ; directory Mathlib/RingTheory/AdicCompletion",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, finite products, and tensor descriptions do not state the inverse-limit comparison for quotient cohomology; source candidates read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a three term finite module complex modulo ideal powers has inverse limit naturally isomorphic to completed cohomology by Artin Rees",
+   "results": "8 hits: AdicCompletion.piEquivOfFintype, AdicCompletion.piEquivFin, localCohomology.isoSelfLERadical, AdicCompletion.sumEquivOfFintype, AdicCompletion.eval_comp_of, AdicCompletion.eval_of, Hausdorffification, AdicCompletion.of_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, finite products, and tensor descriptions do not state the inverse-limit comparison for quotient cohomology; source candidates read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-complex-ext-completion",
+  "date": "2026-10-23",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Tangent comparison for N=P, before passing from the J-adic completion to its complete local factors. Supporting lemma: Supported pseudo-coherent Ext is unchanged by completing coefficients. Finite three-term Hom calculation: Artin–Rees comparison of quotient cohomology with completed cohomology.",
+   "via": [
+    "lem-sfb-supported-complex-ext-completion",
+    "lem-sfb-exal-completion-smooth-complement",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-short-complex-adic-cohomology-limit",
+  "worker": "stage1",
+  "summary": "Read Stacks 0EGU and reused the existing Artin–Rees Mathlib leaf twice. Wrote the cycle-quotient maps, shifted inverse, transition identities, inverse on compatible sequences and naturality. Removed a ring-only completion citation and repaired the broken blueprint ancestor reference; no new nodes.",
+  "blueprint": "Direct-images proof paragraph (3), proper/open finiteness support chain recorded in the inherited from.place: supported pseudo-coherent Ext completion requires precisely the finite short-complex comparison here. Latest blueprint read at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-3c01a1c51",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-3c01a1c51 (reviewer sub-agent of L); spot-checked: S1 split of the item with no new nodes; no repair note applies and live still has the item unsplit. I read Stacks more-algebra.tex Tag 0EGU (lemma-consequence-Artin-Rees) in full; the item is its assertion (2), with explicit compatible-sequence limits and naturality proved in step 6, and the hypotheses match the source (A Noetherian, any ideal I, finite terms, vu=0). Step 2 cites the Mathlib leaf lem-weil-pbc-artin-rees twice: for v(V) inside W, giving a, and for Z=ker v inside V, giving b, with c=a+b+1. Its hypotheses hold because A is Noetherian and W, V are finite. This replaces Stacks' map-AR citation by an elementary lift through v(I^{n-a}V). I re-derived step 3: z'-z-ut lies in Z and in I^{n-a}V, hence in I^{n-c+1}Z. I also re-derived step 4 (both composite identities use a<=c and n-c>=1), the step-5 inverse with shift c, and step 6 naturality. Small cases checked: I=0, I=A, u=v=0, and Z with I=(p), U=0, v = multiplication by p, where H=0, each H_n is Z/p with zero transitions, and the limit is 0. Removing the stmt_dep def-weil-pbc-adic-completion is justified because that node defines only the ring completion; the inline formula is complete and the parent is unaffected. from.node is set to det-thm-sf-ctf-stability-direct-images, which is a real blueprint node already named in the inherited place. No duplicate: 0EGU appears only in this item and its parent, and the ML/09C5, 02OB and 00MB nodes are different statements. No SGA, no cycle, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteShortComplexAdicCohomologyLimit",
+  "declaration": "AdicCohomology.finite_short_complex_adic_cohomology_limit",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteShortComplexAdicCohomologyLimit.lean",
+  "statement": "theorem finite_short_complex_adic_cohomology_limit {R : Type u} [CommRing R] [IsNoetherianRing R] (I : Ideal R) : ∃ e : ∀ (S : ShortComplex (ModuleCat.{u} R)), Module.Finite R S.X₁ → Module.Finite R S.X₂ → Module.Finite R S.X₃ → AdicCompletion I S.homology ≃ₗ[R] ↥(ModuleCat.sectionsSubmodule (tower I S)), ∀ (S : ShortComplex (ModuleCat.{u} R)) (h₁ : Module.Finite R S.X₁) (h₂ : Module.Finite R S.X₂) (h₃ : Module.Finite R S.X₃), (∀ (x : AdicCompletion I S.homology) (n : ℕ) (h : S.homology), AdicCompletion.eval I S.homology (n + 1) x = (power I S.homology (n + 1)).mkQ h → (e S h₁ h₂ h₃ x).val (op n) = ShortComplex.homologyMap (S.mapNatTrans (projection I (n + 1))) h) ∧ ∀ (T : ShortComplex (ModuleCat.{u} R)) (k₁ : Module.Finite R T.X₁) (k₂ : Module.Finite R T.X₂) (k₃ : Module.Finite R T.X₃) (f : S ⟶ T) (x : AdicCompletion I S.homology) (n : ℕ), ShortComplex.homologyMap ((quotient I (n + 1)).mapShortComplex.map f) ((e S h₁ h₂ h₃ x).val (op n)) = (e T k₁ k₂ k₃ (AdicCompletion.map I (ShortComplex.homologyMap f).hom x)).val (op n)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair of returned head caf70077b99e: the statement uses only existing data, not the Mittag-Leffler theorem. Quotient, power, projection and transition are owned by def-sf-adic-module-quotient-data; shortComplexTower and tower are owned by def-sfb-adic-short-complex-quotient-tower, both existing:true. Lean is unchanged. Mathlib completion includes the forced-zero quotient at exponent zero; the right tower has exponents n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f33bda0a",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Third delivery, answering the c8d7952c refusal: the new node's blueprint.from.node is now null. Lean and item record are byte-identical to c8d7952c; besides that field, only the report and the regenerated blueprint-index.tsv changed. blueprint_refs.chain on live side-live plus snapshot gives ancestor None, and the computed via equals the recorded 18-node via, so the stage2_delivery check is met. Item differs from live only in lean and stmt_deps; all four stmt_deps are definition nodes, so H2 is resolved. def-sfb-adic-short-complex-quotient-tower matches the live plain defs shortComplexTower (S.map (quotient I (n+1)), mapNatTrans transition) and tower (⋙ homologyFunctor); no competing owner; lean.statements verbatim. Maths reread against Stacks 0EGU(2): Noetherian R, any I, three Module.Finite, compatible-sequence limits, component clause pins the canonical map (H_n is killed by I^(n+1); mkQ surjective), naturality for every f : S ⟶ T; edge cases I=0, I=R, U=0/v=p on ℤ. Gates: sorry only, docstrings with source and blueprint, private Artin–Rees import, no new defs, no pro-étale, report sections present. No compile (no file changed). Advisories: owner module docstrings name the theorem node and Tag 09C5; the item's stage-1 from.node differs from the resolver but is unchanged from live."
+ }
+}

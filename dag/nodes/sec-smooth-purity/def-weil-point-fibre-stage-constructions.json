@@ -1,0 +1,220 @@
+{
+ "id": "def-weil-point-fibre-stage-constructions",
+ "kind": "definition",
+ "title": "The finite-stage point fibres and their representative formula",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. For $s=\\operatorname{Spec}k$, construct the finite-torsion sections functor, the integral sections functor through the constant coefficient action, and its rationalization on the raw rational Hom tensors. Their targets are the full subcategories with bounded finite, finitely generated derived-complete, and finite-dimensional cohomology respectively. These are the three sections constructions with values guaranteed by [lem-weil-point-sections-finiteness]. For a finite coefficient field $E\\subset\\Omega$, let $\\Phi_E$ be its rational fibre followed by the recorded Shrink coefficient identification, and let $\\phi_{F/E}:\\Phi_F T_{F/E}\\cong T^{\\mathrm{fd}}_{F/E}\\Phi_E$ be the comparison normalized by [lem-weil-point-sections-scalar-extension], coefficient transport and the canonical tensor tower. For the literal pairs of [def-weil-algebraically-closed-coefficients] define $O(E,K)=(E,\\Phi_E K)$ in [def-weil-point-fd-qlbar-category]. For $A=(E,K)$, $B=(F,L)$ and $u:T_{G/E}K\\to T_{G/F}L$, define $R_G(u):O(A)\\to O(B)$ by the inverse source-stage comparison, then the image in the target stage $G$ of $\\phi_{G/E}^{-1}\\,\\Phi_G(u)\\,\\phi_{G/F}$ in Lean composition order, then the target-stage comparison. This defines only the arrow on representatives, with no assertion here that it descends to equivalence classes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Evaluation at the geometric point and the final paragraph on descent of objects and morphisms to finite coefficient fields; retained stagewise construction spelled out by lem-weil-point-sections-scalar-extension."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-abstract-derived-category",
+  "def-weil-point-finite-cohomology-complexes",
+  "def-weil-point-fg-complete-complexes",
+  "def-weil-point-fd-complexes",
+  "def-weil-point-fd-qlbar-category",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Preserve bounded finite-dimensional cohomology under the exact coefficient and carrier universe lift using its homology comparison. For essential surjectivity split field complexes into their cohomology, shrink each finite-dimensional vector space, and lift the zero-differential complex. The bijection from derived maps to graded homology maps proves fullness and faithfulness.",
+   "uses": [
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent derived sheaves by cochain complexes, apply the three sections-finiteness conclusions, and transport their target predicates through mapDerivedCategoryFactors and isomorphisms. For the finite torsion input transport the constructible predicate through its representative isomorphism.",
+   "uses": [
+    "lem-weil-point-sections-finiteness",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the constant integral coefficient action termwise and descend the equality through the derived localization. Apply the integral linearity specification and then the coefficient semilinearity of fraction-field tensor and size descent.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the rational fibre map by the balanced tensor universal property on each Hom group. Check identities and composition on pure tensors and extend by tensor induction; tensor generators also prove uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the coefficient-down comparison by TensorProduct.congr for the ULift ring equivalence and the unchanged section module. Construct the tensor/carrier-lift comparison by ULift.moduleEquiv and AlgebraTensorModule.congr. Verify naturality and uniqueness by induction on tensors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compare the carrier-only lift with the already proved coefficient-and-carrier size equivalence, followed by coefficient restriction, to obtain full faithfulness. Assemble the normalized integral sections isomorphism from the size-descent counit and the coefficient-down comparison. The pure-tensor specifications at scalar one give natural isomorphisms identifying rational fibre and scalar transition after integral localization. Compose these with the rational sections scalar comparison and the tensor/carrier comparison, and cancel the fully faithful carrier lift. Extend this integral natural isomorphism uniquely through raw scalar localization. Its normalization equation follows by cancellation of the inverse tensor and rational-normalization comparisons and equality transport. That equation determines all components, hence the natural isomorphism uniquely.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-real-raw-localization-natural-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite coefficient subfield, apply its rational point fibre and then the recorded Shrink coefficient equivalence. The conjugated coefficient inclusions commute by the Shrink algebra equivalences. Whisker the normalized rational scalar comparison with these equivalences and the canonical tensor towers to define the stage comparison. For a pair object retain its coefficient stage and take its finite-stage fibre. For a common-stage map, conjugate its finite-stage fibre by the two stage comparisons and the two canonical target-stage comparisons. All data are explicit constructions; quotient descent is a separate statement.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category",
+  "lem-real-raw-localization-natural-iso",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Evaluation at the geometric point and the final paragraph on descent of objects and morphisms to finite coefficient fields; retained stagewise construction spelled out by lem-weil-point-sections-scalar-extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of constructible pro-etale sheaves at a geometric point gives finite dimensional derived modules compatible with finite extension of p-adic coefficients",
+   "results": "SheafOfModules.evaluation, PresheafOfModules.evaluation, PresheafOfModules.evaluation_obj, ModuleCat.Tilde.const_apply, SheafOfModules.Finite.evaluationPreservesFiniteLimits, PresheafOfModules.sections.eval, smoothSheaf.evalHom, CategoryTheory.evalEquiv",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project constructions and the common-stage calculus are reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project constructions and the common-stage calculus are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "pointStageFibre|proEtale.*[Ss]ections|pointQbarFibreRepresentative",
+   "results": "No Mathlib source matches.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project constructions and the common-stage calculus are reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientPoint",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Evaluation at the geometric point and the final paragraph on descent of objects and morphisms to finite coefficient fields; retained stagewise construction spelled out by lem-weil-point-sections-scalar-extension.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientPointStages",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientPointStages.lean",
+  "declaration": "WeilConjectures.pointQbarFibreRepresentative",
+  "declarations": [
+   "WeilConjectures.pointFibreBaseIsAlgClosed",
+   "WeilConjectures.pointFibreModuleLift",
+   "WeilConjectures.pointFibreModuleLift_exact",
+   "WeilConjectures.pointFibreModuleLiftAdditive",
+   "WeilConjectures.pointFibreModuleLiftLimits",
+   "WeilConjectures.pointFibreModuleLiftColimits",
+   "WeilConjectures.pointFibreModuleLift_mem",
+   "WeilConjectures.pointFibreSizeLift",
+   "WeilConjectures.pointFibreSizeLift_equivalence",
+   "WeilConjectures.pointFibreSizeDescent",
+   "WeilConjectures.pointFibreFinite_exact",
+   "WeilConjectures.pointFibreFiniteLimits",
+   "WeilConjectures.pointFibreFiniteColimits",
+   "WeilConjectures.pointFibreIntegral_exact",
+   "WeilConjectures.pointFibreFraction_exact",
+   "WeilConjectures.pointFibreIntegralLimits",
+   "WeilConjectures.pointFibreIntegralColimits",
+   "WeilConjectures.pointFibreFractionLimits",
+   "WeilConjectures.pointFibreFractionColimits",
+   "WeilConjectures.pointFibreIntegralAmbient",
+   "WeilConjectures.pointFibreRationalAmbient",
+   "WeilConjectures.pointFibre_sections_mem",
+   "WeilConjectures.pointFiniteFibre",
+   "WeilConjectures.pointIntegralFibre",
+   "WeilConjectures.pointIntegralFibre_linear",
+   "WeilConjectures.pointIntegralRationalFibre",
+   "WeilConjectures.pointRationalFibre_existsUnique",
+   "WeilConjectures.pointRationalFibre",
+   "WeilConjectures.pointFibreCoefficientDown",
+   "WeilConjectures.pointFibreCoefficientDown_exact",
+   "WeilConjectures.pointFibreCoefficientDownLimits",
+   "WeilConjectures.pointFibreCoefficientDownColimits",
+   "WeilConjectures.pointFibreLiftDown_existsUnique",
+   "WeilConjectures.pointFibreLiftDownIso",
+   "WeilConjectures.pointFibreRationalDown_existsUnique",
+   "WeilConjectures.pointFibreRationalDownIso",
+   "WeilConjectures.pointFibreRationalLarge",
+   "WeilConjectures.pointIntegralRationalNormalization",
+   "WeilConjectures.pointRationalFibreObjIso",
+   "WeilConjectures.pointRationalNormalization",
+   "WeilConjectures.pointFibreTensorLift_existsUnique",
+   "WeilConjectures.pointFibreTensorLiftIso",
+   "WeilConjectures.pointRationalFibreScalar_existsUnique",
+   "WeilConjectures.pointRationalFibreScalarIso",
+   "WeilConjectures.pointFibreFdTensorTower",
+   "WeilConjectures.pointStageFibre",
+   "WeilConjectures.pointStageCoefficientSquare",
+   "WeilConjectures.pointStageTensorSquare",
+   "WeilConjectures.pointStageFibreScalarIso",
+   "WeilConjectures.pointQbarFibreObj",
+   "WeilConjectures.pointQbarFibreRepresentative"
+  ],
+  "statement": "def pointQbarFibreRepresentative (A B : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) (F : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ F) (hB : B.stage ≤ F) (f : A.toStage hA ⟶ B.toStage hB) : pointQbarFibreObj D l hl Ω A ⟶ pointQbarFibreObj D l hl Ω B",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5aa9e",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T023120-L-522042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5aa9e",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T023120-L-522042",
+  "kind": "interface",
+  "note": "independent cc review: the moved 51 public declarations, diffed against the published FiniteCoefficientPoint.lean (bodies unchanged); the descent proof against pointQbarFibre_existsUnique (axioms: sorryAx only via the new transport theorem); the transport sorry against the pinned stageSystem associators and the proved sections tower clause; the 89 direct importers compiled against the delivered modules"
+ }
+}

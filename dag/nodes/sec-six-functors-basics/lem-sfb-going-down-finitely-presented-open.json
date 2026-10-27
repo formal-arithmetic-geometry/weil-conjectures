@@ -1,0 +1,96 @@
+{
+ "id": "lem-sfb-going-down-finitely-presented-open",
+ "kind": "statement",
+ "title": "A finitely presented ring map satisfying going down is open",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings of finite presentation [def-weil-pbc-finitely-presented-algebra]. Assume that $\\varphi$ satisfies going down: for prime ideals $\\mathfrak p\\subseteq\\mathfrak p\\prime$ of $R$ and a prime $\\mathfrak q\\prime$ of $S$ with $\\varphi^{-1}(\\mathfrak q\\prime)=\\mathfrak p\\prime$, there is a prime $\\mathfrak q\\subseteq\\mathfrak q\\prime$ of $S$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$. Then $\\operatorname{Spec}(S)\\to\\operatorname{Spec}(R)$ [def-weil-affine-spectrum], $\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$, is open: the image of every open subset is open.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00I1, proposition-fppf-open, second assertion (finite presentation and going down)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isOpenMap_comap_of_hasGoingDown_of_finitePresentation",
+   "results": "Actual search: 2 hits; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean. Subdirectory: RingTheory/Spectrum/Prime",
+   "date": "2026-10-22",
+   "verdict": "match: PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, source read at Chevalley.lean:59-68"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented algebra with going down induces an open map on spectra",
+   "results": "Actual search: 8 hits; PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, AlgebraicGeometry.isOpenMap_of_generalizingMap, Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap, Ideal.exists_ltSeries_of_hasGoingDown, AlgebraicGeometry.Polynomial.isOpenMap_comap_C, Algebra.HasGoingDown.of_comap_localRingHom_surjective, Algebra.isOpen_smoothLocus, Algebra.HasGoingDown.mk",
+   "date": "2026-10-22",
+   "verdict": "match: PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, source read at Chevalley.lean:59-68"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.HasGoingDown, Algebra.FinitePresentation",
+   "results": "Actual search: 1 hits; PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation",
+   "date": "2026-10-22",
+   "verdict": "match: PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, source read at Chevalley.lean:59-68"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Going down for a finitely presented ring algebra implies its map of prime spectra is open",
+   "results": "Actual search: 8 hits; PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, Algebra.isOpen_smoothLocus, Algebra.isOpen_etaleLocus, Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap, Algebra.HasGoingDown, MvPolynomial.isOpenMap_comap_C, Algebra.isOpen_unramifiedLocus, Algebra.HasGoingDown.of_comap_localRingHom_surjective",
+   "date": "2026-10-22",
+   "verdict": "match: PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, source read at Chevalley.lean:59-68"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+  "line": 59,
+  "how": "exact: lines 59-68, with the R-algebra structure on S induced by φ; Algebra.HasGoingDown is precisely the displayed prime-lifting condition (the equality case is immediate), and Algebra.FinitePresentation is the finite polynomial presentation of the cited definition. No domain, flatness, or Noetherian hypothesis is required."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-dominant-normal-base-universally-open",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; justification that the full fibre product has a dense generic point after a finite extension of constants; finite normal-base openness proof: finite-presentation and going-down criterion for openness of polynomial spectra",
+   "via": [
+    "lem-sfb-finite-dominant-normal-base-universally-open",
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

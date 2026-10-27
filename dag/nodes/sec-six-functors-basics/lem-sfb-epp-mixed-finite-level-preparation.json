@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-epp-mixed-finite-level-preparation",
+ "kind": "statement",
+ "title": "Mixed finite level preparation",
+ "statement": "Let $p$ be prime and let $A\\to B\\to C$ be injective local maps of complete discrete valuation rings [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring], with fraction fields $K\\subseteq L\\subseteq M$ [def-pc-field-extension], and $M/L$ finite. Write $k_R=R/\\mathfrak m_R$ for a residue field. Assume $\\mathfrak m_AB=\\mathfrak m_B$ and $\\operatorname{char}(k_A)=p$. For any injective local map $R\\to S$ of discrete valuation rings with fraction fields $E\\subseteq Q$ and finite field extension $E'/E$, let $R'$ be the integral closure of $R$ in $E'$ and $S'$ that of $S$ in $(Q\\otimes_E E')_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. Call $E'/E$ a weak solution if, for every maximal ideal $q$ of $S'$, its contraction $n$ in $R'$ is maximal, $R'_n,S'_q$ are discrete valuation rings, and $nS'_q=qS'_q$ [def-weil-pbc-localization-at-prime]. Reduction is quotient by nilpotents; finite means finite-dimensional; local means pulling back the maximal ideal. For a finite extension $K_1/K$ put $A_1=\\operatorname{IntCl}_{{K_1}}(A)$, $L_1=(L\\otimes_KK_1)_{\\mathrm{red}}$, $M_1=(M\\otimes_KK_1)_{\\mathrm{red}}$, and let $B_1,C_1$ be the integral closures of $B,C$ in these reduced algebras [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. A finite separable extension is totally ramified with respect to a complete DVR when its integral closure is a DVR with unchanged residue field and ramification index equal to the field degree; the ramification index $e$ is defined by $\\mathfrak m_R S=\\mathfrak m_S^e$. A field extension is normal if every irreducible polynomial over the base with a root in the extension splits there. If $B$ contains a primitive $p$th root of unity $\\zeta$, put $w=1-\\zeta$ and $P(Z)=((1+wZ)^p-1)/w^p\\in L[Z]$. For a degree-$p$ extension $M/L$ of mixed characteristic, finite level means that some generator $z$ has $\\xi=P(z)\\in L$ and $w^p\\xi\\in\\mathfrak m_B$. Its level is the minimum of $\\max(0,-v_B(P(z)))/v_B(w)$ over such generators with $P(z)\\in L$, where $v_B$ is the integer valuation taking a uniformizer to $1$ (and $v_B(0)=+\\infty$). Assume $\\operatorname{char}(K)=0$, $k_A$ is algebraically closed (every nonconstant polynomial has a root), and $M/L$ is Galois of degree $p$. There is a finite separable totally ramified $K_1/K$ such that either it is a weak solution for $A\\to C$, or $L_1,M_1$ are fields, $A_1\\to B_1$ is weakly unramified ($\\mathfrak m_{A_1}B_1=\\mathfrak m_{B_1}$), $B_1$ contains a primitive $p$th root of unity, and $M_1/L_1$ has finite level in the displayed sense [def-weil-pbc-separable-algebraic-extension]. In the latter case its level lies in $[0,p)$; level $0$ implies $\\mathfrak m_{B_1}C_1=\\mathfrak m_{C_1}$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F4, lemma-make-finite-level, preceded by adjoining a primitive pth root to the coefficient field; finite-level definition and bounds in the paragraphs following that lemma, before Tag 09F5."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Normalization of a complete DVR. Let $R$ be a complete DVR with fraction field $F$, let $F'/F$ be finite and $R'$ the integral closure of $R$ in $F'$. By [lem-weil-pbc-complete-local-nagata] $R$ is Nagata, so the domain $R=R/(0)$ is N-2 and $R'$ is a finite $R$-module. As $R'$ is a domain, [lem-weil-pbc-finite-over-complete-local-product] makes it local and complete, with $\\mathfrak m_{R'}$ its only prime over $\\mathfrak m_R$. Since $\\dim R=1$ by [lem-sc-dvr-dimension-one], [lem-sfb-finite-normalization-local-dvr] (with $D=R$, $\\mathfrak q=\\mathfrak m_{R'}$) makes $R'_{\\mathfrak q}$ a DVR with fraction field $F'$; as $R'$ is local, every element outside $\\mathfrak q$ is a unit, so $R'=R'_{\\mathfrak q}$. Uniqueness: let $V\\subseteq F'$ be a DVR with fraction field $F'$, containing $R$, with $\\mathfrak m_V\\cap R=\\mathfrak m_R$. Then $V$ is normal by [lem-weil-pbc-pid-noetherian-normal], so $R'\\subseteq V$, and $\\mathfrak m_V\\cap R'$ is a prime over $\\mathfrak m_R$, hence equals $\\mathfrak m_{R'}$. If $x\\in V\\setminus R'$, write $x=u\\varpi^{-k}$ with $u\\in R'^\\times$, $k>0$, $\\varpi$ a uniformizer of $R'$; then $x^{-1}\\in\\mathfrak m_{R'}\\subseteq\\mathfrak m_V$, contradicting $x\\in V$. So $V=R'$. Applied to $B\\to C$, the given $C$ is the integral closure of $B$ in $M$; in particular $C$ is integral over $B$. Consequently, by [lem-sfb-integral-element-tower-descent], for any ring $B'$ with $B\\subseteq B'$ integral over $B$ inside a field $F''\\supseteq M$, the integral closures of $C$, of $B$ and of $B'$ in $F''$ coincide.",
+   "uses": [
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-sc-dvr-dimension-one",
+    "lem-sfb-finite-normalization-local-dvr",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sfb-integral-element-tower-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4 proof: the integral closures of the complete DVRs A, B, C in the coefficient base changes are DVRs; complete normalization via Tags 032W and 0325."
+   }
+  },
+  {
+   "text": "Choose a primitive $p$th root $\\zeta$ in an algebraic closure of $K$ [def-weil-algebraic-closure]: $X^p-1$ has $p$ distinct roots in characteristic zero and any nonidentity root has order $p$. Put $K_0=K(\\zeta)$. It is finite separable; [lem-sfb-epp-complete-coefficient-field-arithmetic] makes it totally ramified, with unchanged algebraically closed residue field. Its normalization $A_0$ is a complete DVR by step 1. Apply [lem-sfb-epp-totally-ramified-base-change] to obtain the field $L_0=L\\otimes_KK_0$ and the complete DVR $B_0=B\\otimes_AA_0$, weakly unramified over $A_0$. The element $\\zeta$ belongs to $A_0$ because it satisfies the monic equation $X^p-1=0$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-epp-complete-coefficient-field-arithmetic",
+    "lem-sfb-epp-totally-ramified-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Preparation preceding Tag 09F4: adjoining roots of unity, with complete coefficient arithmetic."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-epp-prime-galois-scalar-algebra] to $M/L$ and $L_0/L$. Associativity identifies $M\\otimes_L L_0=M\\otimes_KK_0$. The algebra is reduced and either a degree-$p$ Galois field over $L_0$, or a product of $p$ copies of $L_0$. In the split case, each factor is $L_0$, receiving $M$ through its projection; by step 1 the integral closure of $C$ in it is that of $B$, which is $B_0$ by [lem-sfb-epp-totally-ramified-base-change]. Normalized base change for the original $A\\to C$ is identified branchwise by [lem-sfb-epp-weak-solution-descent]. Every branch is therefore weakly unramified over $A_0$, so $K_0$ is a weak solution. Otherwise put $M_0=M\\otimes_KK_0$; it is a Galois field of degree $p$ over $L_0$.",
+   "uses": [
+    "lem-sfb-epp-prime-galois-scalar-algebra",
+    "lem-sfb-epp-weak-solution-descent",
+    "lem-sfb-epp-totally-ramified-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, alternatives under coefficient base change; complete normalized branches."
+   }
+  },
+  {
+   "text": "In the field case, [lem-weil-pbc-finite-galois-fixed-field] gives $|\\operatorname{Aut}_{L_0}(M_0)|=p$, and [lem-sfb-epp-prime-order-group-cyclic] makes this group cyclic. Apply [lem-sfb-epp-cyclic-kummer-generator] to choose $y$ with $M_0=L_0(y)$ and $b=y^p\\in L_0$. Here $y,b\\ne0$, since $[M_0:L_0]=p>1$. Let $\\pi$ be a uniformizer of $A_0$, hence of $B_0$. Write $n=v_{B_0}(b)\\in\\mathbf Z$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "lem-sfb-epp-prime-order-group-cyclic",
+    "lem-sfb-epp-cyclic-kummer-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, first paragraph: Kummer generator."
+   }
+  },
+  {
+   "text": "If $p\\mid n$, retain $K_0$. Otherwise set $K_1=K_0(\\theta)$ with $\\theta^p=\\pi$. The explicit algebra $A_0[X]/(X^p-\\pi)$ is a DVR with uniformizer $\\theta$ by [lem-sbc-dvr-uniformizer-root-algebra]. It is free of rank $p$ on $1,\\theta,\\ldots,\\theta^{p-1}$, by division by the monic defining polynomial; inverting $\\pi=\\theta^p$ gives its fraction field, so $[K_1:K_0]=p$. It is separable because $X^p-\\pi$ has no common root with $pX^{p-1}$ in characteristic zero. This root DVR is integral over $A_0$ (generated by $\\theta$) and normal by [lem-weil-pbc-pid-noetherian-normal], with fraction field $K_1$, so it equals the integral closure of $A_0$ in $K_1$; and [lem-sfb-epp-complete-coefficient-field-arithmetic] gives total ramification over the original $A$. By [lem-sfb-epp-totally-ramified-base-change], $L_1$ is a field and $A_1\\to B_1$ remains weakly unramified. Thus $\\pi$ has valuation $p$ in $B_1$, and $v_{B_1}(b)=pn$ is divisible by $p$.",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra",
+    "lem-sfb-epp-complete-coefficient-field-arithmetic",
+    "lem-sfb-epp-totally-ramified-base-change",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, second paragraph; Tag 09EV root construction."
+   }
+  },
+  {
+   "text": "In the case of a further extension, apply [lem-sfb-epp-prime-galois-scalar-algebra] to $M_0/L_0$ and $L_1/L_0$. Thus $M_0\\otimes_{L_0}L_1=M_0\\otimes_{K_0}K_1$ is either a degree-$p$ field or a product of $p$ copies of $L_1$. In the split case each branch is $L_1$ and, by step 1, the integral closure of $C$ in it equals that of $B$, which is $B_1$ by [lem-sfb-epp-totally-ramified-base-change], so the original $K_1/K$ is a weak solution by the branchwise normalization identification of [lem-sfb-epp-weak-solution-descent]. In the field case (also when $p\\mid n$ and no further extension was needed), rename the final fields $K_1,L_1,M_1$ and choose a uniformizer $\\rho$ of $B_1$. The image of $y$ still generates $M_1/L_1$. Since $v_{B_1}(b)=pm$ for an integer $m$, replacing $y$ by $y/\\rho^m$ gives $y^p=u\\in B_1^\\times$ without changing the generated field.",
+   "uses": [
+    "lem-sfb-epp-prime-galois-scalar-algebra",
+    "lem-sfb-epp-weak-solution-descent",
+    "lem-sfb-epp-totally-ramified-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, second paragraph: split alternative and removal of a p-divisible valuation."
+   }
+  },
+  {
+   "text": "If the residue $\\bar u\\in k_{B_1}$ is not a $p$th power, [lem-sfb-epp-residue-nonpower-root-dvr] identifies the normalization as $B_1[y]$ and says its maximal ideal is generated by that of $B_1$. By step 1 (with $B'=B_1$, integral over $B$) this is also the integral closure $C_1$ of $C$ in $M_1$. Since $\\mathfrak m_{A_1}B_1=\\mathfrak m_{B_1}$, extension of ideals gives $\\mathfrak m_{A_1}C_1=\\mathfrak m_{C_1}$, the weak-solution alternative. Otherwise choose $\\bar v\\in k_{B_1}$ with $\\bar v^p=\\bar u$, and lift it to a unit $v\\in B_1$; it is nonzero since $u$ is a unit. Replace $y$ by $y/v$. Now $y^p=1+d$ for $d\\in\\mathfrak m_{B_1}$.",
+   "uses": [
+    "lem-sfb-epp-residue-nonpower-root-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, third paragraph: nonpower residue or rescaling the unit."
+   }
+  },
+  {
+   "text": "The primitive root $\\zeta$ survives all the field embeddings. Put $w=1-\\zeta$ and $z=(y-1)/w$. Since $w\\ne0$, $L_1(z)=L_1(y)=M_1$. Direct substitution gives $P(z)=(y^p-1)/w^p=d/w^p\\in L_1$, and hence $w^pP(z)=d\\in\\mathfrak m_{B_1}$. This proves finite level with the actual generator, not just a polynomial having a root. All coefficient extensions used are finite separable, and their composite is totally ramified over $A$ by [lem-sfb-epp-complete-coefficient-field-arithmetic].",
+   "uses": [
+    "lem-sfb-epp-complete-coefficient-field-arithmetic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, final displayed equations."
+   }
+  },
+  {
+   "text": "Finally [lem-sfb-epp-kummer-pole-calculus] gives $0<v_{B_1}(w)=e_1\\in\\mathbf Z$. For every eligible generator set $N_z=\\max(0,-v_{B_1}(P(z)))$, with $N_z=0$ when $P(z)=0$. These are nonnegative integers; their nonempty set has a minimum. For the generator in step 8, $v(w^pP(z))>0$ gives $N_z<pe_1$, so the minimum divided by $e_1$ lies in $[0,p)$. If the level is zero, some generator has $\\xi=P(z)\\in B_1$. Since $P$ is monic of degree $p$ and $z$ generates the degree-$p$ field, $L_1[Z]/(P(Z)-\\xi)$ is $M_1$. Apply the integral-parameter clause of [lem-sfb-epp-kummer-branch-classification] with $R=B_1$, $\\eta=\\xi\\in B_1$, and $w^p\\xi\\in\\mathfrak m_{B_1}$, which follows from $w\\in\\mathfrak m_{B_1}$. Its normalized field factor is the integral closure of $B_1$ in $M_1$, which is $C_1$ by step 1, and has ramification index one, giving $\\mathfrak m_{B_1}C_1=\\mathfrak m_{C_1}$.",
+   "uses": [
+    "lem-sfb-epp-kummer-pole-calculus",
+    "lem-sfb-epp-kummer-branch-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Paragraphs defining level after Tag 09F4 and before Tag 09F5; Tag 09F3 case (A)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sc-dvr-dimension-one",
+  "lem-sfb-finite-normalization-local-dvr",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sfb-integral-element-tower-descent",
+  "def-weil-algebraic-closure",
+  "lem-sfb-epp-complete-coefficient-field-arithmetic",
+  "lem-sfb-epp-totally-ramified-base-change",
+  "lem-sfb-epp-prime-galois-scalar-algebra",
+  "lem-sfb-epp-weak-solution-descent",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-sfb-epp-prime-order-group-cyclic",
+  "lem-sfb-epp-cyclic-kummer-generator",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sfb-epp-residue-nonpower-root-dvr",
+  "lem-sfb-epp-kummer-pole-calculus",
+  "lem-sfb-epp-kummer-branch-classification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F4, lemma-make-finite-level; finite-level definition and level remarks through the paragraph before Tag 09F5. Root-of-unity preparation uses complete-DVR coefficient arithmetic."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cyclic degree p extension of mixed characteristic DVRs becomes weakly unramified or has a Kummer generator of finite level after a finite separable totally ramified coefficient extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsPRadical.isPurelyInseparable\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (p : ℕ) [ExpChar K p]\\n  [IsPRadical (algebraMap K L) p], IsPurelyInseparable K L\", \"doc\": \"If the canonical algebra map from a commutative semiring $ K $ to a semiring $ L $ satisfies the $ p $-radical condition, then the field extension $ L $ over $ K $ is purely inseparable, meaning every\"}\n  {\"name\": \"Algebra.FormallyUnramified.isReduced_of_field\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A], IsReduced A\", \"doc\": \"If $ A $ is a formally unramified algebra over a field $ R $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.of_liesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a Dedekind domain $ S $, and let $ P $ be a prime ideal in a domain $ T $ that is torsion-free as an $ S $-module. If $ T $ is of essential finite type over $ S $, which \"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsNoetherianRing S] [Algebra.IsUnramifiedAt R p],\\n  p ≠ ⊥ → ∀ [IsDomain S] [Algebra.EssFiniteType R S], Ideal.ramificationIdx (algebraMap R S) (Ideal.under R p) p = \", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"Algebra.Unramified\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → (A : Type u_2) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative ring $ R $ and a commutative ring $ A $ equipped with an $ R $-algebra structure, this is the proposition that $ A $ is unramified over $ R $.\"}\n  {\"name\": \"NumberField.InfinitePlace.even_finrank_of_not_isUnramifiedIn\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra k K] [IsGalois k K]\\n  {w : NumberField.InfinitePlace k}, ¬NumberField.InfinitePlace.IsUnramifiedIn K w → Even (Module.finrank k K)\", \"doc\": \"Let $ K/k $ be a Galois extension of number fields. If an infinite place $ w $ of $ k $ is ramified in $ K $, then the degree $[K : k]$ of the extension is even. This follows from the condition that r\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces_of_odd_finrank\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra k K] [IsGalois k K],\\n  Odd (Module.finrank k K) → IsUnramifiedAtInfinitePlaces k K\", \"doc\": \"If $ K/k $ is a Galois field extension and the degree $[K : k]$ is an odd integer, then the extension $ K/k $ is unramified at all infinite places (i.e., it does not introduce ramification in archimed\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsDedekindDomain S] [Algebra.EssFiniteType R S] [IsDomain R] [Module.Finite ℤ R] [CharZero R]\\n  [Algebra.IsIntegral R S],\\n  p ≠ ⊥ → (Algebra.IsUnramifiedAt R p ↔ Ide\", \"doc\": \"Let $ S $ be a Dedekind domain that is an essentially finite type algebra over a domain $ R $, where $ R $ is finitely generated as a $ \\\\mathbb{Z} $-module, has characteristic zero, and $ S $ is integ\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer cyclicity and cyclotomic number-field ramification do not give finite-level preparation for arbitrary mixed-characteristic coefficient DVRs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed characteristic ramification can be put in a Kummer equation P(z)=xi with valuation of (1-zeta)^p xi positive",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply'\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial (ZMod p)}\\n  (hQ : Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  Ideal.ramificationIdx (algebraMap ℤ (NumberField.Ri\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, there is a canonical bijection between the set of prime ideals of $ \\\\math\"}\n  {\"name\": \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial ℤ}\\n  (hQ : Polynomial.map (Int.castRingHom (ZMod p)) Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  Ideal.ramificati\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, there exists a canonical equivalence between the set of prime ideals of $\"}\n  {\"name\": \"WittVector.RecursionBase.solution_pow\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [IsAlgClosed k] (a₁ a₂ : WittVector p k),\\n  ∃ x, x ^ (p - 1) = a₂.coeff 0 / a₁.coeff 0\", \"doc\": \"For any two Witt vectors $\\\\mathbf{a}_1$ and $\\\\mathbf{a}_2$ over an algebraically closed field $k$ of characteristic $p$, there exists an element $x \\\\in k$ such that $x^{p-1} = \\\\frac{\\\\mathbf{a}_2^{(0)}\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (n : ℕ) {m p k : ℕ} [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  (P : Ideal (NumberField.RingOfIntegers K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver (Ideal.span {↑p})]\\n  [IsCyclotomicExtension {n} ℚ K],\\n  n = p ^ (k + 1) * m →\\n    ¬p ∣ m → Ideal.ramificationIdx (\", \"doc\": \"Let $ K $ be a cyclotomic extension of $ \\\\mathbb{Q} $ generated by a root of unity of order $ n $, and let $ p $ be a prime number. Suppose $ n = p^{k+1}m $ where $ p $ does not divide $ m $. Then the\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdxIn_eq\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (n : ℕ) {m p k : ℕ} [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  [IsCyclotomicExtension {n} ℚ K],\\n  n = p ^ (k + 1) * m → ¬p ∣ m → (Ideal.span {↑p}).ramificationIdxIn (NumberField.RingOfIntegers K) = p ^ k * (p - 1)\", \"doc\": \"Let $K$ be a cyclotomic field generated by roots of unity of order $n = p^{k+1}m$ where $p$ does not divide $m$. Then the ramification index of the prime ideal $\\\\mathfrak{p}$ in the ring of integers $\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq_of_prime_pow\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (p k : ℕ) [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  [hK : IsCyclotomicExtension {p ^ (k + 1)} ℚ K] (P : Ideal (NumberField.RingOfIntegers K)) [hP₁ : P.IsPrime]\\n  [hP₂ : P.LiesOver (Ideal.span {↑p})],\\n  Ideal.ramificationIdx (algebraMap ℤ (NumberField.Ring\", \"doc\": \"In a cyclotomic extension of the rational numbers, if a prime ideal $ P $ lies over a prime $ p $, then the ramification index of $ P $ with respect to the ring homomorphism from $ \\\\mathbb{Z} $ to the\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdxIn_eq_of_prime_pow\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (p k : ℕ) [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  [hK : IsCyclotomicExtension {p ^ (k + 1)} ℚ K],\\n  (Ideal.span {↑p}).ramificationIdxIn (NumberField.RingOfIntegers K) = p ^ k * (p - 1)\", \"doc\": \"For a prime $ p $ and a natural number $ k $, if $ K $ is a cyclotomic extension of $ \\\\mathbb{Q} $ generated by roots of unity of order $ p^k $, then the ramification index of the prime ideal $ (p) $ \"}\n  {\"name\": \"PreTilt.valAux\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    Valuation K NNReal →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [Algebra O K] → (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → PreTilt O p → NNReal\", \"doc\": \"The function $\\\\text{valAux}$ maps a sequence $ (f_n) $ in the pretilt $\\\\mathrm{PreTilt}(O, p)$ to a non-negative real number. If all coefficients $f_n$ are zero, it returns $0$. Otherwise, it finds th\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer cyclicity and cyclotomic number-field ramification do not give finite-level preparation for arbitrary mixed-characteristic coefficient DVRs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cyclic degree p extension of mixed characteristic DVRs becomes weakly unramified or has a Kummer generator of finite level after a finite separable totally ramified coefficient extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isCyclic_tfae\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"(K L) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L]\\n  (hK : (primitiveRoots (Module.finrank K L) K).Nonempty) :\\n  List.TFAE\\n    [IsGalois K L ∧ IsCyclic Gal(L/K),\\n      ∃ a : K, Irreducible (X ^ (finrank K L) - C a) ∧ IsSplittingField K L (X ^ (finrank K L) - C a),\\n      ∃ (α : L), α ^ (\", \"doc\": \"Let $L/K$ be a finite field extension of degree $n = [L:K]$. Suppose that the base field $K$ contains a primitive $n$-th root of unity. Then the following statements are equivalent:\\\\n1. The extension \"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \"(hn : n = p ^ (k + 1) * m) (hm : ¬p ∣ m) : ramificationIdx (algebraMap ℤ (𝓞 K)) 𝒑 P = p ^ k * (p - 1)\", \"doc\": \"Let $ K $ be a cyclotomic extension of $ \\\\mathbb{Q} $ generated by a root of unity of order $ n $, and let $ p $ be a prime number. Suppose $ n = p^{k+1}m $ where $ p $ does not divide $ m $. Then the\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq_of_prime_pow\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \"(P : Ideal (𝓞 K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver 𝒑] : ramificationIdx (algebraMap ℤ (𝓞 K)) 𝒑 P = p ^ k * (p - 1)\", \"doc\": \"In a cyclotomic extension of the rational numbers, if a prime ideal $ P $ lies over a prime $ p $, then the ramification index of $ P $ with respect to the ring homomorphism from $ \\\\mathbb{Z} $ to the\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdxIn_eq\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \"(hn : n = p ^ (k + 1) * m) (hm : ¬p ∣ m) : 𝒑.ramificationIdxIn (𝓞 K) = p ^ k * (p - 1)\", \"doc\": \"Let $K$ be a cyclotomic field generated by roots of unity of order $n = p^{k+1}m$ where $p$ does not divide $m$. Then the ramification index of the prime ideal $\\\\mathfrak{p}$ in the ring of integers $\"}\n  {\"name\": \"IsCyclotomicExtension.isSeparable\", \"module\": \"Mathlib.NumberTheory.Cyclotomic.Basic\", \"type\": \"[IsCyclotomicExtension S K L] : Algebra.IsSeparable K L\", \"doc\": \"If $ L $ is a cyclotomic extension of a field $ K $ generated by roots of unity whose orders belong to a set $ S $ of natural numbers, then $ L $ is a separable algebra over $ K $.\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.inertiaDegIn_eq_of_prime_pow\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \": 𝒑.inertiaDegIn (𝓞 K) = 1\", \"doc\": \"In a cyclotomic extension of the rational numbers, the inertia degree of a prime ideal lying above a prime power is equal to one in the ring of integers of the number field.\"}\n  {\"name\": \"IsCyclotomicExtension.isGalois\", \"module\": \"Mathlib.NumberTheory.Cyclotomic.Basic\", \"type\": \"[IsCyclotomicExtension S K L] : IsGalois K L\", \"doc\": \"If $ L $ is a cyclotomic extension of a field $ K $ generated by roots of unity whose orders belong to a set $ S $, then the field extension $ L/K $ is Galois (i.e., algebraic, normal, and separable).\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq_of_prime\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \"(P : Ideal (𝓞 K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver 𝒑] : ramificationIdx (algebraMap ℤ (𝓞 K)) 𝒑 P = p - 1\", \"doc\": \"In a cyclotomic extension of $ \\\\mathbb{Q} $, if $ \\\\mathfrak{P} $ is a prime ideal in the ring of integers $ \\\\mathcal{O}_K $ lying over the rational prime $ p $, then the ramification index of $ \\\\mathf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer cyclicity and cyclotomic number-field ramification do not give finite-level preparation for arbitrary mixed-characteristic coefficient DVRs."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsGalois",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer cyclicity and cyclotomic number-field ramification do not give finite-level preparation for arbitrary mixed-characteristic coefficient DVRs."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]ummer|finite.level|ramification.*level",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"13\", \"text\": \"# Kummer-Dedekind theorem\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"15\", \"text\": \"This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"29\", \"text\": \"* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"35\", \"text\": \"* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"56\", \"text\": \"kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"45\", \"text\": \"* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"50\", \"text\": \"* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"612\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"622\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"632\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"45\", \"text\": \"  case of Kummer's lemma.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"14\", \"text\": \"# Kummer-Dedekind criterion for the splitting of prime numbers\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"16\", \"text\": \"In this file, we give a specialized version of the Kummer-Dedekind criterion for the case of the\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"54\", \"text\": \"open Polynomial NumberField Ideal KummerDedekind UniqueFactorizationMonoid\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"28\", \"text\": \"This is a special case of the so-called *Kummer's lemma* (see for example [washington_cyclotomic],\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"99\", \"text\": \"This is a special case of the so-called *Kummer's lemma*. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer cyclicity and cyclotomic number-field ramification do not give finite-level preparation for arbitrary mixed-characteristic coefficient DVRs."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|finite.level|make_finite_level",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"13\", \"text\": \"# Kummer-Dedekind theorem\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"15\", \"text\": \"This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"29\", \"text\": \"* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"35\", \"text\": \"* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"56\", \"text\": \"kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"45\", \"text\": \"* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"50\", \"text\": \"* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"612\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"622\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"632\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"14\", \"text\": \"# Kummer-Dedekind criterion for the splitting of prime numbers\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"16\", \"text\": \"In this file, we give a specialized version of the Kummer-Dedekind criterion for the case of the\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"54\", \"text\": \"open Polynomial NumberField Ideal KummerDedekind UniqueFactorizationMonoid\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"28\", \"text\": \"This is a special case of the so-called *Kummer's lemma* (see for example [washington_cyclotomic],\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"99\", \"text\": \"This is a special case of the so-called *Kummer's lemma*. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"45\", \"text\": \"  case of Kummer's lemma.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.KummerPolynomial\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"14\", \"text\": \"# Kummer Extensions\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"17\", \"text\": \"Kummer theory is about the classification of finite extensions of `L` whose Galois group is cyclic\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"49\", \"text\": \"TODO: relate Kummer extensions of degree 2 with the class `Algebra.IsQuadraticExtension`.\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"170\", \"text\": \"scoped[KummerExtension] notation3 \\\"K[\\\" n \\\"√\\\" a \\\"]\\\" => AdjoinRoot (Polynomial.X ^ n - Polynomial.C a)\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"172\", \"text\": \"attribute [nolint docBlame] KummerExtension.«termK[_√_]»\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1104\", \"text\": \"Then any affine open cover of `lim Xᵢ` comes from a finite level. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer theory is present but not the finite-level preparation with normalized coefficient DVRs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cyclic degree p extension of complete mixed characteristic discrete valuation rings admits a finite level Kummer equation after a totally ramified coefficient extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PerfectClosure.R\", \"module\": \"Mathlib/FieldTheory/PerfectClosure\", \"type\": \"(K : Type u) → [inst : CommRing K] → (p : ℕ) → [Fact (Nat.Prime p)] → [CharP K p] → ℕ × K → ℕ × K → Prop\", \"doc\": \"An inductive relation on pairs $(n, a)$ and $(m, b)$ in $\\\\mathbb{N} \\\\times K$, used in the construction of the perfect closure. This relation encodes equivalence conditions between elements of the fie\"}\n  {\"name\": \"exists_root_adjoin_eq_top_of_isCyclic\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ (K : Type u) [inst : Field K] (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L],\\n  (primitiveRoots (Module.finrank K L) K).Nonempty →\\n    ∀ [IsGalois K L] [IsCyclic Gal(L/K)], ∃ α, α ^ Module.finrank K L ∈ Set.range ⇑(algebraMap K L) ∧ K⟮α⟯ = ⊤\", \"doc\": \"In a Galois field extension $ L/K $ with cyclic Galois group $ \\\\text{Gal}(L/K) $, there exists an element $ \\\\alpha \\\\in L $ such that $ \\\\alpha^{[L:K]} $ lies in the image of the canonical embedding $ K\"}\n  {\"name\": \"WittVector.exists_frobenius_solution_fractionRing\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [inst_2 : IsAlgClosed k]\\n  {a : FractionRing (WittVector p k)},\\n  a ≠ 0 → ∃ b, b ≠ 0 ∧ ∃ m, (IsFractionRing.ringEquivOfRingEquiv (WittVector.frobeniusEquiv p k)) b * a = ↑p ^ m * b\", \"doc\": \"For any non-zero element $ a $ in the fraction field of Witt vectors over a perfect field $ k $ of characteristic $ p $, there exist a non-zero element $ b $ and an integer $ m $ such that $ \\\\varphi(b\"}\n  {\"name\": \"isCyclic_tfae\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L],\\n  (primitiveRoots (Module.finrank K L) K).Nonempty →\\n    [IsGalois K L ∧ IsCyclic Gal(L/K),\\n        ∃ a,\\n          Irreducible (Polynomial.X ^ Module.finrank K L - Polynomial.C a) ∧\\n  \", \"doc\": \"Let $L/K$ be a finite field extension of degree $n = [L:K]$. Suppose that the base field $K$ contains a primitive $n$-th root of unity. Then the following statements are equivalent:\\\\n1. The extension \"}\n  {\"name\": \"WittVector.RecursionBase.solution_pow\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [IsAlgClosed k] (a₁ a₂ : WittVector p k),\\n  ∃ x, x ^ (p - 1) = a₂.coeff 0 / a₁.coeff 0\", \"doc\": \"For any two Witt vectors $\\\\mathbf{a}_1$ and $\\\\mathbf{a}_2$ over an algebraically closed field $k$ of characteristic $p$, there exists an element $x \\\\in k$ such that $x^{p-1} = \\\\frac{\\\\mathbf{a}_2^{(0)}\"}\n  {\"name\": \"PerfectClosure\", \"module\": \"Mathlib/FieldTheory/PerfectClosure\", \"type\": \"(K : Type u) → [inst : CommRing K] → (p : ℕ) → [Fact (Nat.Prime p)] → [CharP K p] → Type u\", \"doc\": \"The perfect closure of a field $ K $ of characteristic $ p $, constructed as the quotient of $ \\\\mathbb{N} \\\\times K $ by the equivalence relation $ R $ encoding $ p $-th power relationships between ele\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.inertiaDeg_span_zeta_sub_one\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (p k : ℕ) [hp : Fact (Nat.Prime p)] {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]\\n  [hK : IsCyclotomicExtension {p ^ (k + 1)} ℚ K] {ζ : K} (hζ : IsPrimitiveRoot ζ (p ^ (k + 1))),\\n  (Ideal.span {↑p}).inertiaDeg (Ideal.span {hζ.toInteger - 1}) = 1\", \"doc\": \"The inertia degree of the ideal generated by $\\\\zeta - 1$ (where $\\\\zeta$ is a primitive root of unity) in the ring of integers of a cyclotomic extension of $\\\\mathbb{Q}$ is equal to 1.\"}\n  {\"name\": \"IsPRadical.isPurelyInseparable\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (p : ℕ) [ExpChar K p]\\n  [IsPRadical (algebraMap K L) p], IsPurelyInseparable K L\", \"doc\": \"If the canonical algebra map from a commutative semiring $ K $ to a semiring $ L $ satisfies the $ p $-radical condition, then the field extension $ L $ over $ K $ is purely inseparable, meaning every\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer theory is present but not the finite-level preparation with normalized coefficient DVRs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cyclic degree p extension of mixed characteristic DVRs has finite ramification level after a finite totally ramified base extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"[IsDedekindDomain B] [IsDedekindDomain C] (hp : map (algebraMap A C) p ≠ ⊥) (hP : map (algebraMap B C) P ≠ ⊥) :\\n  p.ramificationIdxIn B * P.ramificationIdxIn C = p.ramificationIdxIn C\", \"doc\": \"For prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$, with $B$ and $C$ being Dedekind domains and the images of $\\\\mathfrak{p}$ and $\\\\mathfrak{P}$ under the respective algebra map\"}\n  {\"name\": \"Ideal.sum_ramification_inertia\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"{p : Ideal R} [p.IsMaximal] (hp0 : p ≠ ⊥) :\\n  ∑ P ∈ primesOverFinset p S, ramificationIdx (algebraMap R S) p P * inertiaDeg p P = finrank K L\", \"doc\": \"For a maximal ideal $\\\\mathfrak{p}$ in a commutative ring $R$, with $B$ a Dedekind domain over $R$, and $\\\\mathfrak{P}_1, \\\\ldots, \\\\mathfrak{P}_n$ the prime ideals in $B$ lying over $\\\\mathfrak{p}$, the s\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdxIn_eq\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \"(hn : n = p ^ (k + 1) * m) (hm : ¬p ∣ m) : 𝒑.ramificationIdxIn (𝓞 K) = p ^ k * (p - 1)\", \"doc\": \"Let $K$ be a cyclotomic field generated by roots of unity of order $n = p^{k+1}m$ where $p$ does not divide $m$. Then the ramification index of the prime ideal $\\\\mathfrak{p}$ in the ring of integers $\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \"(hn : n = p ^ (k + 1) * m) (hm : ¬p ∣ m) : ramificationIdx (algebraMap ℤ (𝓞 K)) 𝒑 P = p ^ k * (p - 1)\", \"doc\": \"Let $ K $ be a cyclotomic extension of $ \\\\mathbb{Q} $ generated by a root of unity of order $ n $, and let $ p $ be a prime number. Suppose $ n = p^{k+1}m $ where $ p $ does not divide $ m $. Then the\"}\n  {\"name\": \"Ideal.card_inertia_eq_ramificationIdxIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"[IsDedekindDomain R] [IsDedekindDomain S] [Module.Finite R S] [IsTorsionFree R S] (p : Ideal R) (hp : p ≠ ⊥)\\n  (P : Ideal S) [P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparable (R ⧸ p) (S ⧸ P)] :\\n  Nat.card (P.toAddSubgroup.inertia G) = Ideal.ramificationIdxIn p S\", \"doc\": \"In a finite, torsion-free extension of Dedekind domains $ R \\\\to S $, for a non-zero prime ideal $ \\\\mathfrak{p} $ of $ R $ and a maximal ideal $ \\\\mathfrak{P} $ of $ S $ lying over $ \\\\mathfrak{p} $ with\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq_of_prime_pow\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \"(P : Ideal (𝓞 K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver 𝒑] : ramificationIdx (algebraMap ℤ (𝓞 K)) 𝒑 P = p ^ k * (p - 1)\", \"doc\": \"In a cyclotomic extension of the rational numbers, if a prime ideal $ P $ lies over a prime $ p $, then the ramification index of $ P $ with respect to the ring homomorphism from $ \\\\mathbb{Z} $ to the\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[IsLocalRing S] {p : Ideal R} [p.IsMaximal] (hp0 : p ≠ ⊥) :\\n  ramificationIdx (algebraMap R S) p (IsLocalRing.maximalIdeal S) * p.inertiaDeg (IsLocalRing.maximalIdeal S) =\\n    Module.finrank K L\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq_of_prime\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Ideal\", \"type\": \"(P : Ideal (𝓞 K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver 𝒑] : ramificationIdx (algebraMap ℤ (𝓞 K)) 𝒑 P = p - 1\", \"doc\": \"In a cyclotomic extension of $ \\\\mathbb{Q} $, if $ \\\\mathfrak{P} $ is a prime ideal in the ring of integers $ \\\\mathcal{O}_K $ lying over the rational prime $ p $, then the ramification index of $ \\\\mathf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer theory is present but not the finite-level preparation with normalized coefficient DVRs."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsGalois",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer theory is present but not the finite-level preparation with normalized coefficient DVRs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elimination of wild ramification mixed characteristic finite level preparation Epp theorem",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"split_by_characteristic_localRing\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {P : Prop} [IsLocalRing R],\\n  (∀ (p : ℕ), IsPrimePow p → CharP R p → P) →\\n    (∀ (a : Algebra ℚ R), P) → (∀ (p : ℕ), Nat.Prime p → MixedCharZero R p → P) → P\", \"doc\": \"For a local ring $ R $, if $ P $ holds in three cases: (1) for every prime power $ p $ such that $ R $ has characteristic $ p $, (2) when $ R $ is a $\\\\mathbb{Q}$-algebra (characteristic zero), and (3)\"}\n  {\"name\": \"split_by_characteristic\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {P : Prop},\\n  (∀ (p : ℕ), p ≠ 0 → CharP R p → P) → (∀ (a : Algebra ℚ R), P) → (∀ (p : ℕ), Nat.Prime p → MixedCharZero R p → P) → P\", \"doc\": \"For any commutative ring $ R $, a property $ P $ holds if it is satisfied in three cases: (1) for every positive characteristic $ p $ of $ R $, (2) when $ R $ is a $\\\\mathbb{Q}$-algebra (characteristic\"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}\n  {\"name\": \"split_by_characteristic_domain\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {P : Prop} [IsDomain R],\\n  (∀ (p : ℕ), Nat.Prime p → CharP R p → P) →\\n    (∀ (a : Algebra ℚ R), P) → (∀ (p : ℕ), Nat.Prime p → MixedCharZero R p → P) → P\", \"doc\": \"For any integral domain $ R $, if $ P $ holds when $ R $ has positive prime characteristic $ p $, when $ R $ is a $\\\\mathbb{Q}$-algebra (characteristic zero), and when $ R $ has mixed characteristic ze\"}\n  {\"name\": \"split_equalCharZero_mixedCharZero\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {P : Prop} [CharZero R],\\n  (∀ (a : Algebra ℚ R), P) → (∀ (p : ℕ), Nat.Prime p → MixedCharZero R p → P) → P\", \"doc\": \"For a ring $ R $ with characteristic zero, if a proposition $ P $ holds whenever $ R $ is an algebra over $ \\\\mathbb{Q} $ (equal characteristic case) and also holds for every prime $ p $ when $ R $ has\"}\n  {\"name\": \"PreTilt.instCharP\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (O : Type u₂) [inst : CommRing O] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p],\\n  CharP (PreTilt O p) p\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo a prime $ p $ has characteristic $ p $. This means that $ p \\\\cdot 1 = 0 $ in the pretilt ring, and $ p $ is the smallest positive integer with this prope\"}\n  {\"name\": \"PreTilt.instPerfectRing\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (O : Type u₂) [inst : CommRing O] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p],\\n  PerfectRing (PreTilt O p) p\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo a prime $ p $, defined as the perfection of the quotient ring $ O/(p) $, is a perfect ring with respect to $ p $. This means every element in the pretilt\"}\n  {\"name\": \"Tactic.ReduceModChar.TypeToCharPResult.intLike.elim\", \"module\": \"Mathlib/Tactic/ReduceModChar\", \"type\": \"{u : Lean.Level} →\\n  {α : Q(Type u)} →\\n    {motive : Tactic.ReduceModChar.TypeToCharPResult α → Sort u} →\\n      (t : Tactic.ReduceModChar.TypeToCharPResult α) →\\n        t.ctorIdx = 0 →\\n          ((n : Q(ℕ)) →\\n              (instRing : Q(Ring «$α»)) →\\n                (instCharP : Q(CharP «$α» «$n»)) \", \"doc\": \"An eliminator for the inductive type representing reduction of a type $\\\\alpha$ modulo a prime characteristic $p$, specifically handling the integer-like case. Given a motive $P$, a reduction result $t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no Epp or finite-level preparation theorem in the hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-finite-coefficient-triple",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09F4, lemma-make-finite-level, preceded by adjoining a primitive pth root to the coefficient field; finite-level definition and bounds in the paragraphs following that lemma, before Tag 09F5.",
+   "via": [
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-mixed-finite-level-preparation",
+  "worker": "stage1",
+  "summary": "Followed Tag 09F4 with explicit cyclotomic preparation, both split-tensor alternatives, p-divisible valuation rescaling and the minimum-level argument. Reused complete-normalization, root-DVR, residue-nonpower and Kummer pole/branch nodes. Added one smaller field-algebra lemma and two exact Mathlib leaves; item statement unchanged. Maintainer review FIX (2026-10-24): the dropped 2026-10-19 complete-DVR normalization route node replaced by a new step 1 (032W + 0325 + finite-normalization-local-dvr + PID normality + integral tower descent); later steps cite step 1.",
+  "blueprint": "Historical support under det-thm-sf-ctf-stability-direct-images proof (3), via the existing creation chain. The current latest proof (3) does not contain this auxiliary Epp statement. blueprint_refs.py ancestor returns None, preserved rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-galois-fixed-field",
+    "why": "Generic finite-Galois automorphism count used before the Kummer theorem; not an alteration of the unit route."
+   },
+   {
+    "node": "lem-sbc-dvr-uniformizer-root-algebra",
+    "why": "Generic explicit uniformizer-root algebra is a DVR for all positive n, including wild n=p; the tame root lemmas would not suffice."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic: a complete Noetherian local ring is Nagata, giving finiteness of the normalization of a complete DVR in a finite extension (step 1); replaces the dropped complete-DVR normalization node."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic: a finite domain over a complete local ring is local, complete, with a unique prime over the maximal ideal (step 1); replaces the dropped complete-DVR normalization node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O3-f566dd790",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-f566dd790 (reviewer sub-agent of L); spot-checked: I read Stacks more-algebra.tex 09F2, 09F3, the finite-level definition, the 09F4 proof and the level remarks before 09F5; Mathlib KummerExtension.lean:470-476 and Cyclic/Basic.lean:169; the item, all 3 new nodes and the full statement of every cited node. The item is 09F4 with the zeta-adjunction built in (char K = 0, k_A algebraically closed, so every finite K_1/K is totally ramified by coefficient-arithmetic) plus the level remarks; the statement is unchanged and not weakened. The report's 09F3 typo remark is right: y=1+wz gives y^p = 1 + w^p xi, and only clause (A) is used. Every step checks out: zeta in A_0; base change gives L_0 a field and B_0 a complete DVR; both split cases are weak solutions for the original A->C, branch by branch; Kummer generator via |Aut|=p, cyclicity and the leaf; theta^p = pi gives a degree-p root DVR and v_{B1}(b) = pn, also for negative n; nonpower residue via 09EX gives C_1 = B_1[y]; z=(y-1)/w has w^p P(z) = d in the maximal ideal; level in [0,p) since N_z < p e_1; level 0 uses the integral-parameter clause of branch-classification after L_1[Z]/(P-xi) = M_1. Edge cases p=2, K_0=K and level 0 checked. New nodes: the two Mathlib leaves match exactly. The unsplit prime-Galois scalar-algebra lemma is true (E tensor L = L[x]/(f) is reduced and its factors have degree 1 or p; tested Q(i) with L=Q(i) and L=R), is not a duplicate (closest is lem-exc-finite-galois-tensor-decomposition, which is only E tensor_L E), and is not a restatement of the item. Batch-5 flags: both totally-ramified-base-change and weak-solution-descent reach sec-trace-formula only through the Mathlib leaf lem-trf-localization-maximal-contraction (the maximal ideal of R_P contracts to P), which is generic commutative algebra, so both citations are accepted. 2026-10-19 route flag: the delivery cited the dropped lem-per-complete-dvr-finite-normalization in steps 1, 2, 4, 5 and 6 and in tool_uses, without justification; this is one repairable fault. FIX: a new step 1 proves what was taken from it (032W Nagata gives finiteness; 0325 gives local, complete, unique prime over m; dvr-dimension-one plus lem-sfb-finite-normalization-local-dvr give a DVR; uniqueness via PID normality and an inverse-in-maximal-ideal argument; integral-element-tower-descent gives IntCl(C) = IntCl(B) = IntCl(B')). The root DVR equals the integral closure via pid-noetherian-normal; split branches cite base change plus step 1. The dropped id is removed from proof, proof_deps and tool_uses; 032W and 0325 are added as tool_uses. Checked: no cycle and no batch-5 contact from the new citations. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-epp-mixed-finite-level-preparation.json (9 steps, all under 2000 characters).; 1 file(s) fixed by the reviewer"
+ }
+}

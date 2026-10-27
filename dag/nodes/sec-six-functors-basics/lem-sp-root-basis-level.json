@@ -1,0 +1,162 @@
+{
+ "id": "lem-sp-root-basis-level",
+ "kind": "statement",
+ "title": "The normalized linear basis of one finite integral Tate level",
+ "statement": "Use the universe convention [def-weil-size-convention], the pro-etale site [def-weil-pbc-proetale-site], the roots module [def-pur-roots-of-unity-sheaf], the finite integral twist construction [sk-def-sp-tate-twist], slice restriction [def-pur-localized-ringed-site], and section reconstruction [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Let X be a scheme, ell a prime, W an object of X_proet, and n a nonnegative integer. Put N = ell^(n+1). Let zeta be a section of mu_N on W, and let e be an isomorphism from the constant Z/N module unit restricted to W to mu_N restricted to W. Suppose that on every slice object V -> W and for every section a of the restricted constant ring, e_V(a) = a times zeta restricted to V. For every finite intermediate extension E of Q_ell inside its fixed algebraic closure, let B = O_E/(N), let B_X be its actual pulled-back continuous-function condensed coefficient, and retain the O_E,X action through the specified quotient map. There is an O_E,X|W-linear isomorphism from B_X|W to (B_X tensor_Z mu_N)|W, the actual n-th finite integral twist level, whose value at every section b on every V -> W is the canonical sheaf tensor section b tensor zeta|V. Here canonical sheaf tensor means the image of the sectionwise integer tensor under the lax monoidal comparison from presheaf tensors to the sheaf tensor. No root section or basis at any other exponent, and no transition compatibility, is assumed or asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), the finite-level basis before transition compatibility and inverse limits"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sp-tate-twist",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sp-ell-coefficient-cone-limit"
+ ],
+ "proof": [
+  {
+   "text": "Let N = ell^(n+1) and B = O_E/(N). The ideal generator is zero in B. Hence N times the identity of its continuous-function condensed abelian sheaf is zero, sectionwise. The actual inverse image from the point is a left adjoint between abelian categories and is additive; applying it shows N times every section of the actual pulled-back coefficient sheaf is zero. No comparison with a constant B sheaf, finiteness assertion or chosen coefficient presentation is needed.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-pullback-from-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define p on every slice object V -> W by b maps to the image of b tensor the restriction of zeta under the lax monoidal sheaf-tensor comparison. Naturality of this comparison and functoriality of root restrictions give a presheaf morphism. The lax monoidal associativity equation and naturality for O_E,X -> B_X identify multiplication on the coefficient factor with the specified action on the free B_X tensor module. Thus p is a morphism of the actual reconstructed O_E,X|W-module sheaves.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any abelian group A killed by N, give A its canonical ZMod N action. The map A -> A tensor_Z ULift(ZMod N), b maps to b tensor 1, is bijective. Its inverse on pure tensors is b tensor a maps to a.down times b. Integer balancing makes this additive map well-defined. To check the other composite, lift a to an integer k and move k across the integer tensor; the first composite is one times b = b. This supplies componentwise bijectivity of the insertion presheaf map on the slice.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Forget the constant commutative-ring sheafification unit to abelian presheaves. It is locally bijective. Tensor it with the coefficient presheaf; stability of local equivalences under tensor keeps it locally bijective. Restrict this map and the sheaf-tensor comparison to the slice using cocontinuity of Over.forget W. Tensor the given basis e with the coefficient presheaf on the slice, an isomorphism. Their composite with the componentwise bijective insertion of the previous step equals p: the constant unit maps 1 to 1, and the normalization he gives e(1) = zeta. Thus the underlying sheaf map p is locally bijective and is an isomorphism. The forgetful functor from module sheaves reflects isomorphisms, giving the required normalized linear isomorphism. The construction also applies to zero coefficients and empty slices.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-pur-localized-ringed-site",
+    "def-pur-roots-of-unity-sheaf",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), the finite-level basis before transition compatibility and inverse limits",
+  "note": "Explicit local-equivalence proof of the normalized finite basis. Integer tensoring with the constant cyclic presheaf is computed sectionwise, and coefficient annihilation is preserved by the additive point inverse image. No new split statements are used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a locally trivial rank one module sheaf over the constant residue ring with a finite coefficient sheaf gives its normalized basis on the slice site",
+   "results": "Module.Basis.baseChange and SheafOfModules.unit were returned, but no comparison retaining the actual finite condensed coefficient and its normalized slice tensor map.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized basis of a sheaf of modules over the constant ZMod ring induces a normalized basis after tensoring with a finite coefficient sheaf on a slice",
+   "results": "Module.Basis.baseChange_apply, Module.Basis.tensorProduct, and SheafOfModules.freeSection; none gives this sheafified tensor comparison with its normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.rid",
+   "results": "The ordinary module tensor unit isomorphism and its pure-tensor formula exist. They supply the final sectionwise algebra, not the sheaf comparison and restriction.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*ZMod|ZMod.*tensor|spRootBasisTowerComparison",
+   "results": "The search service returned zero hits. Direct repository search additionally found constantZMod_scalarTensor and spIntegralTwistLevel_comparison, whose conclusions give unnormalized abelian-sheaf isomorphisms and do not state the required linear normalized slice basis.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SpRootBasisTowerComparison",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "via": [
+    "lem-sp-root-basis-tower-comparison",
+    "lem-sp-integral-rational-root-basis",
+    "lem-route-sp-twists-common-cover",
+    "lem-sfb-integral-tate-line-constructible"
+   ],
+   "place": "clause (3), the finite-level basis a maps to zeta_n tensor a, before transition compatibility"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpRootBasisLevel",
+  "file": "lean/Sheaf/Paper/SpRootBasisLevel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spRootBasisLevel",
+  "statement": "theorem spRootBasisLevel\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (W : X.ProEt) (n : ℕ)\n    (ζ : (Scheme.purTwistRootsModule X ℓ n).val.obj (op W))\n    (e :\n      (SheafOfModules.unit (Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n))).over W ≅\n        (Scheme.purTwistRootsModule X ℓ n).over W)\n    (he : ∀ (V : (Over W)ᵒᵖ)\n      (a : ((Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n)).over W).obj.obj V),\n      e.hom.val.app V a =\n        a • (Scheme.purTwistRootsModule X ℓ n).val.map V.unop.hom.op ζ)\n    (E : PadicAlgCl.FiniteIntermediateField ℓ) :\n    ∃ i : (spRootBasisSliceSections X\n        (condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) W).obj\n          (spEllCoefficientLevel X ℓ E n) ≅\n      (spRootBasisSliceSections X\n        (condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) W).obj\n          (spIntegralTwistLevel X ℓ E n),\n      ∀ (V : (Over W)ᵒᵖ)\n        (b : ((spRootBasisSliceSections X\n          (condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) W).obj\n            (spEllCoefficientLevel X ℓ E n)).val.obj V),\n        i.hom.val.app V b =\n          (Functor.LaxMonoidal.μ\n            (sheafToPresheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})\n            (condensedRingObj.{u} (spEllPointRingObj ℓ E n) X)\n            (Scheme.proEtaleRootsOfUnitySheaf X (ℓ ^ (n + 1)))).app (op V.unop.left)\n              (b ⊗ₜ[ℤ] (Scheme.purTwistRootsModule X ℓ n).val.map V.unop.hom.op ζ)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "sk-def-sp-tate-twist",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-pullback-from-point",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "sk-def-sfb-sheaf-tensor",
+  "def-pur-roots-of-unity-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T235907-L-1466489",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T012911-L-2345116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

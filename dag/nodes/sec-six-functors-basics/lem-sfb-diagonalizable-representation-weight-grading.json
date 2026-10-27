@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-diagonalizable-representation-weight-grading",
+ "kind": "statement",
+ "title": "Weight grading of representations of arbitrary diagonalizable group schemes",
+ "statement": "Let $k$ be a field [def-weil-field] and $M$ a finitely generated additive abelian group. Let $k[M]$ have basis $e_m$ indexed by $m\\in M$, multiplication $e_me_n=e_{m+n}$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$, and antipode $e_m\\mapsto e_{-m}$. Put $D_k(M)=\\operatorname{Spec}k[M]$ [def-weil-affine-spectrum, def-sc-group-scheme]. Its character $\\chi_m:D_k(M)\\to\\mathbf G_m$ is dual to $t\\mapsto e_m$, with $\\mathbf G_m$ as in [def-sc-gm-ga]. Let $V$ be a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace] and $\\rho:D_k(M)\\to\\operatorname{GL}(V)$ a homomorphism of group schemes. Here $\\operatorname{GL}(V)(A)=\\operatorname{Aut}_A(V\\otimes_k A)$ for every commutative $k$-algebra $A$, with tensor products as in [def-weil-pbc-module-tensor-product]; in a basis this is [def-sc-general-linear-group], and for $V=0$ it is the trivial group. Define\n$$V_m=\\{v\\in V:\\rho_A(c)(v\\otimes1)=v\\otimes\\chi_m(c)\\text{ for every commutative }k\\text{-algebra }A\\text{ and }c\\in D_k(M)(A)\\}.$$\nOnly finitely many $V_m$ are nonzero, and the sum map $\\bigoplus_{m\\in M}V_m\\to V$ is an isomorphism of vector spaces. For every commutative $k$-algebra $A$, the direct sum decomposition base changes to $V\\otimes_k A=\\bigoplus_m(V_m\\otimes_k A)$, and $D_k(M)_A$ acts on $V_m\\otimes_k A$ by $\\chi_m$. Moreover, if an $A$-linear endomorphism $u$ of $V\\otimes_k A$ commutes with the action of $D_k(M)(B)$ after extension to every commutative $A$-algebra $B$, then $u$ preserves every summand $V_m\\otimes_k A$. All assertions allow $M=0$, $V=0$, and torsion in $M$, including torsion divisible by the characteristic of $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.12(a) implies (d), and Remark 12.13, printed pp.234–235; coefficient projection proof gives the base-change decomposition and preservation by equivariant endomorphisms."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-general-linear-group",
+  "def-weil-pbc-direct-sum-modules",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=k[M]$. Choose finitely many group generators $a_1,\\ldots,a_s$ of $M$. The elements $e_{a_i},e_{-a_i}$ generate $C$ as a $k$-algebra: every $m$ is an integral combination of the $a_i$, and the corresponding product is $e_m$. Thus $D_k(M)=\\operatorname{Spec}C$ is affine of finite type (the single affine chart over the one-point scheme $\\operatorname{Spec}k$ meets [def-weil-finite-type-morphism]). Apply [lem-sfb-rational-representation-comodule-dictionary] to $\\rho$. It supplies a linear map $c:V\\to V\\otimes_k C$ with $(c\\otimes1)c=(1\\otimes\\Delta)c$ and $(1\\otimes\\epsilon)c=1$. If $c(v)=\\sum_i v_i\\otimes h_i$, then $\\rho_A(x)(v\\otimes a)=\\sum_i v_i\\otimes x(h_i)a$ for every $k$-algebra $A$ and $x:C\\to A$. In particular $c(v)=\\rho_C(\\mathrm{id}_C)(v\\otimes1)$. The dictionary allows $V=0$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, equations (24)--(25); Theorem 12.12(a) implies (b), printed p.235."
+   }
+  },
+  {
+   "text": "For $h\\in C$ write $[h]_m$ for its coefficient at $e_m$. For any $k$-vector space $W$, the bilinear formula $(w,h)\\mapsto[h]_m w$ induces $E_m^W:W\\otimes_k C\\to W$ by [def-weil-pbc-module-tensor-product]. Expanding a finite sum of pure tensors gives $z=\\sum_m E_m^W(z)\\otimes e_m$, with finite support; applying $E_n^W$ shows uniqueness. Set $p_m=E_m^V c$, so $c(v)=\\sum_m p_m(v)\\otimes e_m$. All $p_m$ are linear. Tensor reassociation and unit identifications here are the maps on pure tensors $(v\\otimes h)\\otimes h'\\leftrightarrow v\\otimes(h\\otimes h')$ and $v\\otimes a\\leftrightarrow av$; the inverse identities hold on the generating pure tensors.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(a) implies (b), printed p.235: expansion in the group-like basis; coefficient maps made explicit."
+   }
+  },
+  {
+   "text": "The two coaction identities from Step 1, using the Hopf formulas in the statement, read $\\sum_m c(p_m(v))\\otimes e_m=\\sum_m p_m(v)\\otimes e_m\\otimes e_m$ and $v=\\sum_m p_m(v)$. Apply $E_n^{V\\otimes C}$ from Step 2 to the last tensor factor in the first equality: $c(p_n(v))=p_n(v)\\otimes e_n$. Consequently $p_m p_n=0$ for $m\\ne n$ and $p_n^2=p_n$, by extracting the remaining coefficient $m$. These are finite identities for each vector; no infinite sum of operators is used.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(a) implies (b), printed p.235: coassociativity, counit and coefficient comparison."
+   }
+  },
+  {
+   "text": "The equation $c(v)=v\\otimes e_m$ is equivalent to $v\\in V_m$. Forward: the formula of [lem-sfb-rational-representation-comodule-dictionary] gives $\\rho_A(x)(v\\otimes1)=v\\otimes x(e_m)=v\\otimes\\chi_m(x)$ for every $A,x$. Reverse: use $A=C$ and the universal point $x=\\mathrm{id}_C$; the same dictionary gives $c(v)=\\rho_C(x)(v\\otimes1)$, while $\\chi_m(x)=e_m$ by the specified dual character map. Thus $V_m$ is the subspace cut out by a linear equation, $p_m(V)=V_m$, and $p_n|_{V_m}=\\delta_{nm}\\mathrm{id}$.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, universal element; Theorem 12.12 and Remark 12.13, printed p.235."
+   }
+  },
+  {
+   "text": "The sum map from the finite-support families defining [def-weil-pbc-direct-sum-modules] has inverse $v\\mapsto(p_m(v))_m$: Step 3 gives the sum identity, and Step 4 recovers every component of a family. This proves the claimed isomorphism. Take a finite spanning list $v_1,\\ldots,v_t$ of $V$ using [def-weil-finite-dimensional-subspace], and let $F$ be the union of their finite coefficient supports. For $m\\notin F$, linearity implies $p_m=0$ on $V$; since it is the identity on $V_m$, that space is zero. Thus only finitely many summands are nonzero, including when the spanning list is empty.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(d) and Remark 12.13, printed pp.234--235; finite support from a finite spanning list."
+   }
+  },
+  {
+   "text": "Write $j_m:V_m\\hookrightarrow V$ and $q_m:V\\to V_m$, $q_m(v)=p_m(v)$. Tensor the maps using [def-weil-pbc-module-tensor-product]. For each $A$, the sum map $J_A:\\bigoplus_m(V_m\\otimes_k A)\\to V\\otimes_k A$ induced by $j_m\\otimes1$ has inverse $Q_A(v\\otimes a)=(q_m(v)\\otimes a)_m$. The latter exists by bilinearity and the tensor universal property; its values have support in the fixed finite set $F$ of Step 5. On generating pure tensors, $J_AQ_A(v\\otimes a)=\\sum_m p_m(v)\\otimes a=v\\otimes a$ and the $n$-component of $Q_AJ_A(w\\otimes a)$ from the $m$-summand is $\\delta_{nm}w\\otimes a$. Hence both composites are identities, with no flatness hypothesis on $A$. In particular the summand maps are injective. Denote the corresponding projections on $V\\otimes_k A$ by $P_m=p_m\\otimes1$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 coefficient projection argument, printed p.235; explicit tensor extension of the inverse sum map."
+   }
+  },
+  {
+   "text": "For $w\\in V_m$, Step 4 and the all-algebras formula of [lem-sfb-rational-representation-comodule-dictionary] give $\\rho_A(x)(w\\otimes a)=w\\otimes\\chi_m(x)a$. Pure tensors generate $V_m\\otimes_k A$, so this is scalar action on the entire summand. The same computation for every $A$-algebra $B$ proves that the base-changed group scheme $D_k(M)_A$ acts by the base-changed character, rather than merely giving a formula on its $A$-points.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 12.11 and Theorem 12.12, printed pp.234--235, all-algebras action; Remark 12.13."
+   }
+  },
+  {
+   "text": "Fix $A$ and $u$ as in the statement. Use the commutative $A$-algebra $B=A[M]$, the finite formal sums $\\sum_m a_me_m$ with $e_me_n=e_{m+n}$. Let $x\\in D_k(M)(B)$ be the point $C\\to B$, $e_m\\mapsto e_m$. Put $W=V\\otimes_k A$. Under the canonical identification $(V\\otimes_k A)\\otimes_A B\\simeq V\\otimes_k B$, $((v\\otimes a)\\otimes b)\\mapsto v\\otimes ab$ with inverse $v\\otimes b\\mapsto(v\\otimes1)\\otimes b$, Step 7 gives $\\rho_B(x)(z\\otimes1)=\\sum_m P_m(z)\\otimes e_m$ for every $z\\in W$. Commutation with $u_B=u\\otimes1$ therefore gives $\\sum_m P_m(u z)\\otimes e_m=\\sum_m u(P_m z)\\otimes e_m$. Extract the coefficient $n$ via the $A$-bilinear map $(w,\\sum_m a_me_m)\\mapsto a_nw$, whose induced tensor map exists by [def-weil-pbc-module-tensor-product]. It follows that $P_nu=uP_n$. If $z$ belongs to the $n$-summand, $P_nz=z$, whence $P_nu(z)=u(z)$; its image is the same summand by Step 6. Thus $u$ preserves every summand.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed p.235, coefficient method; preservation follows by the displayed universal-point calculation."
+   }
+  },
+  {
+   "text": "When $M=0$, $C=k$ and the counit says $c(v)=v\\otimes1$; the only weight is $0$ with $V_0=V$. When $V=0$, all summands and maps are zero and the decomposition is the empty sum. The zero test algebra also gives the zero module. For torsion $M$, the $e_m$ remain distinct formal basis vectors even if $k[M]$ is nonreduced: for example, in characteristic $p$, $k[\\mathbf Z/p]=k[t]/(t^p-1)$ still has basis $1,t,\\ldots,t^{p-1}$. Every coefficient calculation above uses this formal basis and no division by a group order, smoothness, reducedness, or separation by $k$-points. Thus all stated torsion and characteristic cases are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed pp.234--235, arbitrary diagonalizable groups; edge cases written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Remark 4.1, printed p.84; Theorem 12.12(a) implies (d), and Remark 12.13, printed pp.234--235. Explicit coefficient calculations also prove the stated scalar-extension and equivariant-endomorphism consequences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every representation of a diagonalizable group scheme D(M) is the direct sum of its character weight spaces over an arbitrary field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.diagonalHomEquiv\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → (n : ℕ) → (A : Rep k G) → (Rep.diagonal k G (n + 1) ⟶ A) ≃ₗ[k] (Fin n → G) → ↑A.V\", \"doc\": \"For a commutative ring $ k $, group $ G $, natural number $ n $, and representation $ A $ of $ G $ over $ k $, there is a $ k $-linear equivalence between the set of $ G $-equivariant $ k $-linear map\"}\n  {\"name\": \"Rep.diagonalHomEquiv_apply\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} {A : Rep k G} (f : Rep.diagonal k G (n + 1) ⟶ A)\\n  (x : Fin n → G),\\n  (Rep.diagonalHomEquiv n A) f x = (CategoryTheory.ConcreteCategory.hom f.hom) (Finsupp.single (Fin.partialProd x) 1)\", \"doc\": \"For a commutative ring $ k $, group $ G $, natural number $ n $, and representation $ A $ of $ G $ over $ k $, there is a $ k $-linear equivalence between the set of $ G $-equivariant $ k $-linear map\"}\n  {\"name\": \"Rep.diagonalSuccIsoFree\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] → [inst_1 : Group G] → (n : ℕ) → Rep.diagonal k G (n + 1) ≅ Rep.free k G (Fin n → G)\", \"doc\": \"For a commutative ring $ k $, group $ G $, and natural number $ n $, there exists a canonical isomorphism in the category $ \\\\text{Rep}(k,G) $ between the diagonal representation $ \\\\text{Rep.diagonal}(\"}\n  {\"name\": \"Rep.diagonal\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Monoid G] → ℕ → Rep k G\", \"doc\": \"For a commutative ring $ k $, a monoid $ G $, and a natural number $ n $, this constructs the diagonal representation in the category $ \\\\text{Rep}(k, G) $. It is defined by the component-wise action o\"}\n  {\"name\": \"Representation.diagonal\", \"module\": \"Mathlib/RepresentationTheory/Basic\", \"type\": \"(k : Type u_1) →\\n  [inst : CommSemiring k] → (G : Type u_2) → [inst_1 : Monoid G] → (n : ℕ) → Representation k G ((Fin n → G) →₀ k)\", \"doc\": \"For a natural number $n$, the diagonal representation is constructed by applying the monoid action component-wise on the product space $G^n$, where each element of the monoid $G$ acts diagonally on ea\"}\n  {\"name\": \"Rep.diagonalOneIsoLeftRegular\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Monoid G] → Rep.diagonal k G 1 ≅ Rep.leftRegular k G\", \"doc\": \"For a commutative ring $k$ and monoid $G$, the diagonal representation $\\\\text{Rep}(k,G)$ with $n=1$ is isomorphic to the left regular representation. This is established via a linear equivalence induc\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"Rep.diagonalOneIsoLeftRegular_hom_hom\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Monoid G],\\n  (Rep.diagonalOneIsoLeftRegular k G).hom.hom = ModuleCat.ofHom ↑(Finsupp.domLCongr (Equiv.funUnique (Fin 1) G))\", \"doc\": \"The underlying linear map of the isomorphism between the diagonal representation $\\\\text{Rep}(k,G)$ with $n=1$ and the left regular representation is given by the linear equivalence induced by the cano\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract-group representations, coalgebra structures or gradings already specified as data, not the weight decomposition of an arbitrary group-scheme representation; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"DirectSum\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract-group representations, coalgebra structures or gradings already specified as data, not the weight decomposition of an arbitrary group-scheme representation; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|diagonalisable|weightSpace|weight_space",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract-group representations, coalgebra structures or gradings already specified as data, not the weight decomposition of an arbitrary group-scheme representation; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A comodule over the group algebra of an abelian group is a graded vector space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Coalgebra.toCoalgebraStruct\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    {inst : CommSemiring R} →\\n      {inst_1 : AddCommMonoid A} → {inst_2 : Module R A} → [self : Coalgebra R A] → CoalgebraStruct R A\", \"doc\": \"A coalgebra over a commutative semiring $ R $ is an $ R $-module $ A $ equipped with comultiplication $ \\\\Delta: A \\\\to A \\\\otimes A $ and counit $ \\\\epsilon: A \\\\to R $, satisfying coassociativity and cou\"}\n  {\"name\": \"GroupLike\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"(R : Type u_2) →\\n  (A : Type u_3) →\\n    [inst : CommSemiring R] → [inst_1 : AddCommMonoid A] → [inst_2 : Module R A] → [Coalgebra R A] → Type u_3\", \"doc\": \"A structure for a commutative semiring $ R $ and an additive commutative monoid $ A $ equipped with an $ R $-module structure and coalgebra structure, extending these with group-like properties.\"}\n  {\"name\": \"GroupLike.noConfusion\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"{P : Sort u} →\\n  {R : Type u_2} →\\n    {A : Type u_3} →\\n      {inst : CommSemiring R} →\\n        {inst_1 : AddCommMonoid A} →\\n          {inst_2 : Module R A} →\\n            {inst_3 : Coalgebra R A} →\\n              {t : GroupLike R A} →\\n                {R' : Type u_2} →\\n                  {A' : Type u_3}\", \"doc\": \"A structure for a commutative semiring $ R $ and an additive commutative monoid $ A $ equipped with an $ R $-module structure and coalgebra structure, extending these with properties analogous to grou\"}\n  {\"name\": \"GroupLike.ctorIdx\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"{R : Type u_2} →\\n  {A : Type u_3} →\\n    {inst : CommSemiring R} →\\n      {inst_1 : AddCommMonoid A} → {inst_2 : Module R A} → {inst_3 : Coalgebra R A} → GroupLike R A → ℕ\", \"doc\": \"A structure for a commutative semiring $ R $ and an additive commutative monoid $ A $ equipped with an $ R $-module structure and coalgebra structure, extending these with group-like properties where \"}\n  {\"name\": \"CoalgCat.ofComonObj\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : ModuleCat R) → [CategoryTheory.ComonObj X] → CoalgCat R\", \"doc\": \"Given a commutative ring $ R $, a left $ R $-module $ X $, and a comonoid structure on $ X $ in the monoidal category of $ R $-modules, this function constructs the corresponding coalgebra over $ R $ \"}\n  {\"name\": \"CoalgCat.ofComonObjCoalgebraStruct\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : ModuleCat R) → [CategoryTheory.ComonObj X] → CoalgebraStruct R ↑X\", \"doc\": \"Given a commutative ring $ R $, a left $ R $-module $ X $, and a comonoid structure on $ X $ in the monoidal category of $ R $-modules, this function constructs the corresponding coalgebra structure o\"}\n  {\"name\": \"CoalgCat.toComonObj\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → CoalgCat R → CategoryTheory.Comon (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and a coalgebra $ X $ over $ R $, this constructs the comonoid structure on the underlying $ R $-module of $ X $ in the monoidal category of $ R $-modules. The comultipl\"}\n  {\"name\": \"CoalgCat.instComonObjModuleCatOfCarrier\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : CoalgCat R) → CategoryTheory.ComonObj (ModuleCat.of R ↑X.toModuleCat)\", \"doc\": \"Given a commutative ring $ R $ and a coalgebra $ X $ over $ R $, this constructs the comonoid structure on the underlying $ R $-module of $ X $ in the monoidal category of $ R $-modules. The comultipl\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract-group representations, coalgebra structures or gradings already specified as data, not the weight decomposition of an arbitrary group-scheme representation; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coaction of a group algebra on a finite dimensional vector space determines a finite grading preserved by equivariant maps after base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TannakaDuality.FiniteGroup.ofRightFDRep_hom\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G] [inst_3 : Fintype G] (X : FDRep k G)\\n  (v : ↑X.V),\\n  (TannakaDuality.FiniteGroup.ofRightFDRep X v).hom =\\n    CategoryTheory.InducedCategory.homMk (ModuleCat.ofHom (TannakaDuality.FiniteGroup.sumSMulInv v))\", \"doc\": \"For a finite group $G$, commutative ring $k$, and representation $X$ in $\\\\text{FDRep}_k(G)$, this constructs a morphism from the right regular representation of $G$ to $X$ by mapping each function $f:\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.ofRightFDRep\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      [inst_2 : Finite G] → [Fintype G] → (X : FDRep k G) → ↑X.V → (TannakaDuality.FiniteGroup.rightFDRep ⟶ X)\", \"doc\": \"For a finite group $G$, commutative ring $k$, and representation $X$ in $\\\\text{FDRep}_k(G)$, this constructs a morphism from the right regular representation of $G$ to $X$ by mapping each function $f:\"}\n  {\"name\": \"AddMonoidAlgebra.grade.gradedAlgebra\", \"module\": \"Mathlib/Algebra/MonoidAlgebra/Grading\", \"type\": \"{ι : Type u_2} →\\n  {R : Type u_3} →\\n    [inst : DecidableEq ι] →\\n      [inst_1 : AddMonoid ι] → [inst_2 : CommSemiring R] → GradedAlgebra (AddMonoidAlgebra.grade R)\", \"doc\": \"Let $R$ be a commutative semiring and $M$ be an additive monoid. The additive monoid algebra $R[M]$ has a canonical structure as a graded algebra over $R$, indexed by the monoid $M$ itself. For each $\"}\n  {\"name\": \"Rep.coindVEquiv_apply_hom\", \"module\": \"Mathlib/RepresentationTheory/Coinduced\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Monoid G] [inst_2 : Monoid H] (φ : G →* H) (A : Rep k G)\\n  (f : ↥(Representation.coindV φ A.ρ)), ((Rep.coindVEquiv φ A) f).hom = ModuleCat.ofHom (Finsupp.linearCombination k ↑f)\", \"doc\": \"For a commutative ring $k$, monoids $G$ and $H$, a monoid homomorphism $\\\\varphi: G \\\\to H$, and a $k$-representation $A$ of $G$, applying the coinduced representation equivalence to a $\\\\varphi$-equivar\"}\n  {\"name\": \"Rep.coindFunctorIso_hom_app_hom_hom_apply_hom_hom_apply\", \"module\": \"Mathlib/RepresentationTheory/Coinduced\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Monoid G] [inst_2 : Monoid H] (φ : G →* H) (X : Rep k G)\\n  (f : ↥(Representation.coindV φ X.ρ)) (d : H →₀ k),\\n  (ModuleCat.Hom.hom ((ModuleCat.Hom.hom ((Rep.coindFunctorIso φ).hom.app X).hom) f).hom) d = d.sum fun i c => c • ↑f i\", \"doc\": \"For a commutative ring $ k $, monoids $ G $ and $ H $, a monoid homomorphism $ \\\\varphi: G \\\\to H $, and a representation $ X $ of $ G $ over $ k $, the double application of the coinduced functor isomo\"}\n  {\"name\": \"GradedModule.isModule\", \"module\": \"Mathlib/Algebra/Module/GradedModule\", \"type\": \"{ιA : Type u_1} →\\n  {ιM : Type u_2} →\\n    {A : Type u_4} →\\n      {M : Type u_5} →\\n        {σ : Type u_6} →\\n          {σ' : Type u_7} →\\n            [inst : AddMonoid ιA] →\\n              [inst_1 : AddAction ιA ιM] →\\n                [inst_2 : Semiring A] →\\n                  (𝓐 : ιA → σ') →\\n            \", \"doc\": \"Given a graded ring $ A $ indexed by an additive monoid $ \\\\iota_A $ and a graded module $ M $ indexed by an additive monoid $ \\\\iota_M $ with a compatible grading action $ \\\\iota_A \\\\curvearrowright \\\\iot\"}\n  {\"name\": \"AddMonoidAlgebra.gradeBy.gradedAlgebra\", \"module\": \"Mathlib/Algebra/MonoidAlgebra/Grading\", \"type\": \"{M : Type u_1} →\\n  {ι : Type u_2} →\\n    {R : Type u_3} →\\n      [inst : AddMonoid M] →\\n        [inst_1 : DecidableEq ι] →\\n          [inst_2 : AddMonoid ι] →\\n            [inst_3 : CommSemiring R] → (f : M →+ ι) → GradedAlgebra (AddMonoidAlgebra.gradeBy R ⇑f)\", \"doc\": \"Given a commutative semiring $ R $, an additive monoid $ M $, and a grading function $ f : M → ι $ to an additive monoid $ ι $, the additive monoid algebra $ R[M] $ is equipped with a graded algebra s\"}\n  {\"name\": \"DirectSum.GAlgebra.smul_def\", \"module\": \"Mathlib/Algebra/DirectSum/Algebra\", \"type\": \"∀ {ι : Type uι} {R : Type uR} {A : ι → Type uA} {inst : CommSemiring R} {inst_1 : (i : ι) → AddCommMonoid (A i)}\\n  {inst_2 : (i : ι) → Module R (A i)} {inst_3 : AddMonoid ι} {inst_4 : DirectSum.GSemiring A}\\n  [self : DirectSum.GAlgebra R A] (r : R) (x : GradedMonoid A),\\n  r • x = GradedMonoid.mk 0 (\", \"doc\": \"For any scalar $ r $ in a commutative semiring $ R $ and any element $ x $ in the graded monoid $ \\\\bigoplus_{i \\\\in \\\\iota} A_i $, the scalar multiplication $ r \\\\cdot x $ is defined as the product of th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract-group representations, coalgebra structures or gradings already specified as data, not the weight decomposition of an arbitrary group-scheme representation; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|diagonalizable|diagonalisable|weightSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract-group representations, coalgebra structures or gradings already specified as data, not the weight decomposition of an arbitrary group-scheme representation; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|diagonalisable|weightSpace|weight_space",
+   "results": "OK 25 hits, all in Lie algebra weight-space files; read Mathlib/Algebra/Lie/Weights/Basic.lean:57--68: LieModule.weightSpace concerns Lie algebra actions.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group module semisimplicity, Lie-module weight spaces and pre-existing graded structures do not supply arbitrary diagonalizable group-scheme weight gradings, especially characteristic-p torsion and all-algebras equivariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"DirectSum\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group module semisimplicity, Lie-module weight spaces and pre-existing graded structures do not supply arbitrary diagonalizable group-scheme weight gradings, especially characteristic-p torsion and all-algebras equivariance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comodules over a group algebra decompose into the direct sum of homogeneous weight spaces",
+   "results": "OK 8 hits: MonoidAlgebra.Submodule.instIsSemisimpleModule, HomogeneousSubmodule.noConfusion, HomogeneousSubmodule, LieModule.weightSpace, MvPolynomial.weightedHomogeneousComponent_directSum, AddMonoidAlgebra.grade.isInternal, HomogeneousSubmodule.is_homogeneous', MvPolynomial.weightedDecomposition.decompose'_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group module semisimplicity, Lie-module weight spaces and pre-existing graded structures do not supply arbitrary diagonalizable group-scheme weight gradings, especially characteristic-p torsion and all-algebras equivariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every representation of a diagonalizable group scheme decomposes into character weight spaces, including nonreduced groups",
+   "results": "OK 8 hits: Rep.diagonalHomEquiv, Rep.diagonal, Rep.diagonalHomEquiv_apply, Representation.diagonal, Rep.diagonalSuccIsoFree, Rep.diagonalHomEquiv_symm_apply, Rep.diagonal_succ_projective, Rep.diagonalOneIsoLeftRegular",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group module semisimplicity, Lie-module weight spaces and pre-existing graded structures do not supply arbitrary diagonalizable group-scheme weight gradings, especially characteristic-p torsion and all-algebras equivariance."
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|coaction|diagonalizable|diagonalisable",
+   "results": "OK 0 hits in RepresentationTheory.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group module semisimplicity, Lie-module weight spaces and pre-existing graded structures do not supply arbitrary diagonalizable group-scheme weight gradings, especially characteristic-p torsion and all-algebras equivariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coaction of a group algebra gives orthogonal coefficient projections whose images are the weight spaces and whose sum is identity",
+   "results": "OK 8 hits: TannakaDuality.FiniteGroup.sumSMulInv_single_id, MonoidAlgebra.Submodule.exists_isCompl, TannakaDuality.FiniteGroup.sumSMulInv, TannakaDuality.FiniteGroup.sumSMulInv_apply, Representation.isProj_averageMap, LieModule.iSup_genWeightSpace_eq_top, LieModule.iSup_genWeightSpace_eq_top', RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group module semisimplicity, Lie-module weight spaces and pre-existing graded structures do not supply arbitrary diagonalizable group-scheme weight gradings, especially characteristic-p torsion and all-algebras equivariance."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-diagonalizable-derived-intersection-finite",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Definition 19.26, Proposition 19.27, Example 19.25 and Remark 19.30, printed pp.404--405. Use the simply connected covering in Remark 19.30, allowing a noninjective homomorphism on centres; Proposition 19.27 identifies the derived subgroup and torus quotient. Supporting input: Proposition 12.46(a), printed pp.245--246, its faithful-representation weight-block determinant argument extended from a central torus to a central diagonalizable subgroup; Theorem 12.12 and Remark 12.13, pp.234--235, supply arbitrary diagonalizable weight decompositions. Weight-decomposition input: Milne Theorem 12.12 and Remark 12.13 for D_F(M), including torsion M and base change.",
+   "via": [
+    "lem-sfb-central-diagonalizable-derived-intersection-finite",
+    "lem-sfb-reductive-central-pushout-reconstruction",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-diagonalizable-representation-weight-grading",
+  "worker": "stage1",
+  "summary": "Retain the statement and all imported metadata. Use the existing representation/comodule dictionary and give coefficient projections, their orthogonality and finite support, the inverse sum maps before and after arbitrary scalar extension, and the universal A[M]-point test for equivariant endomorphisms. No new nodes; add the existing direct-sum definition. Checked trivial group, zero space, nonreduced characteristic-p torsion and zero test algebra.",
+  "blueprint": "Realizes the inherited from.place: Milne Theorem 12.12 and Remark 12.13 weight-decomposition input to the central diagonalizable weight-block determinant argument, below det-thm-sf-ctf-stability-direct-images (3). Read the latest blueprint unit and direct-images proof. Whole-blueprint searches for diagonalizable, comodule, coaction, gradation and eigenspace found no same statement. Retain inherited null ancestor: blueprint_refs.py ancestor returns None."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-33422efde",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-33422efde (reviewer sub-agent of L); spot-checked: I read every step and cited statement against Milne iAG2017: eq. (24) and Remark 4.1 (printed p.84); Thm 12.12 (a)=>(b)/(d) and Rem 12.13 (printed pp.234-235). The statement is byte-identical to Q37's unsplit node. The only stmt_deps change adds def-weil-pbc-direct-sum-modules, which the statement's ⊕ uses. No new nodes. Step 1: finite type of D_k(M) follows from the e_{±a_i} generators, so every hypothesis of lem-sfb-rational-representation-comodule-dictionary (same unit) holds, and the step uses only that node's stated formula, its universal-element identity and its comodule identities. Steps 3-5 are Milne's group-like-basis coefficient argument: coassociativity gives c(p_n v)=p_n v⊗e_n, and the counit gives Σp_m=id. The reverse inclusion in Step 4 uses the universal point id_C, so it is valid for nonreduced C (μ_p in char p). Global finiteness comes from a finite spanning list. Step 6: the base-change inverse is built on pure tensors and needs no flatness. Step 8: the universal point in B=A[M] plus A-linear coefficient extraction gives P_n u=u P_n. Tested G_m with weights ±1, μ_p in char p via the regular coaction, trivial Z/2 in char 2, M=0, V=0 and the zero algebra. No duplicate found: the split-torus weight decomposition covers free M only, and the character-eigenspaces node needs algebraically closed k and proves independence only. Advisory only: def-sfb-diagonalizable-group defines the same D_F(M) that the item inlines; citing it would help stage 2. No off-route use, no tool_uses, no cycle, no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalizableRepresentationWeightGrading",
+  "declaration": "AlgebraicGeometry.DiagonalizableRepresentation.weightGrading",
+  "declarations": [
+   "AlgebraicGeometry.DiagonalizableRepresentation.Representation",
+   "AlgebraicGeometry.DiagonalizableRepresentation.characterValue",
+   "AlgebraicGeometry.DiagonalizableRepresentation.pointAction",
+   "AlgebraicGeometry.DiagonalizableRepresentation.weightSpace",
+   "AlgebraicGeometry.DiagonalizableRepresentation.weightSum",
+   "AlgebraicGeometry.DiagonalizableRepresentation.summandMap",
+   "AlgebraicGeometry.DiagonalizableRepresentation.sumMap",
+   "AlgebraicGeometry.DiagonalizableRepresentation.extendEnd",
+   "AlgebraicGeometry.DiagonalizableRepresentation.weightGrading"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalizableRepresentationWeightGrading.lean",
+  "statement": "theorem weightGrading [AddGroup.FG M] (rho : Representation (k := k) (M := M) (V := V)) [IsMonHom rho] : {m : M | weightSpace rho m ≠ ⊥}.Finite ∧ (Function.Bijective (weightSum rho)) ∧ (∀ (A : Type u) [CommRing A] [Algebra k A], Function.Bijective (sumMap rho A) ∧ (∀ (m : M) (x : points (diagonalizableGroup k M).X A) (z : A ⊗[k] weightSpace rho m), pointAction rho A x (summandMap rho A m z) = characterValue m A x • summandMap rho A m z) ∧ ∀ (f : A ⊗[k] V →ₗ[A] A ⊗[k] V), (∀ (B : Type u) [CommRing B] [Algebra k B] [Algebra A B] [IsScalarTower k A B] (x : points (diagonalizableGroup k M).X B), extendEnd A B f ∘ₗ (pointAction rho B x).toLinearMap = (pointAction rho B x).toLinearMap ∘ₗ extendEnd A B f) → ∀ m : M, Set.MapsTo f (summandMap rho A m).range (summandMap rho A m).range)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed diagonalizable group and the actual rational morphism to GL(V) in the existing finiteBasis, including dimension zero. Weight spaces are intersections of all-algebras equalizers. Canonical sum maps, base-changed inclusions and tensor-cancellation transport are real definitions; the only postponed theorem gives every clause. Added the already-landed def-sfb-diagonalizable-group to stmt_deps; no statement correction or new node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3edb80a94",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Item node changed only stmt_deps (+landed def-sfb-diagonalizable-group) and lean; no new nodes, dep records untouched; lean.statement verbatim, all 9 decls present. Clause-by-clause match: Field k; AddCommGroup M + AddGroup.FG; landed diagonalizableGroup (AddMonoidAlgebra Hopf spectrum); characterValue = x^*(e_m); rho = RationalHom to GL over finiteBasis index with IsMonHom, pointAction = toLin' in finiteBasis.baseChange A of homMulEquiv(x≫rho); weightSpace = ⨅ over all Type-u k-algebras and points of eqLocus (all-points, not k-points); finite nonzero weights; Bijective coeLinearMap; ∀A Bijective sumMap of actual subtype.baseChange; scalar action by χ_m on summands for every A (covers D(M)_A); commutant via f.baseChange conjugated by cancelBaseChange over all A-algebras B ⇒ MapsTo on summand ranges. Edge cases M=0, V=0 (empty index, GL_0), zero algebra, char-p torsion (μ_p), free part: covered, no extra hypotheses. Common universe u forced by landed diagonalizableGroup; harmless (k[M], A[M] in Type u). No duplicate (GmRepresentationWeightBasis ℤ only, TorusCharacterTangentWeights, SplitTorus.weightSpace = other node). Real data in all defs, sole theorem sorry, docstrings with Milne 12.12/12.13 + blueprint and 9 proof steps, lines ≤100. Note: FiniteIndex/finiteBasis are plain defs owned by theorem lem-sfb-rational-representation-comodule-dictionary (proof_dep); accepted as the single GL(V)-in-basis realization (copy would be H4); suggest existing:true def node later. No file changed, no compile run."
+ }
+}

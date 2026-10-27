@@ -44,7 +44,7 @@ Source: Stacks Project, Tag 099V (1), viewed as the special case of (2)
 noncomputable def supportComparisonSource
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     CochainComplex.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
-  ⟨(CochainComplex.singleFunctor _ 0).obj F, ⟨0, inferInstance⟩⟩
+  ⟨(HomologicalComplex.single _ (.up ℤ) 0).obj F, ⟨0, inferInstance⟩⟩
 
 /-- The ordinary comparison unit followed by the direct image of the resolution map.
 Source: Stacks Project, Tags 099V (2), 09B1 (2); the augmentation specified in the node

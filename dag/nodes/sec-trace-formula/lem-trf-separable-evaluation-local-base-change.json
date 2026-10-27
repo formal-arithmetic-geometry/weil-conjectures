@@ -1,0 +1,325 @@
+{
+ "id": "lem-trf-separable-evaluation-local-base-change",
+ "kind": "statement",
+ "title": "Local field extension at a specified separable evaluation point",
+ "statement": "Let $k$ be a field and $S$ a finitely generated commutative $k$-algebra [def-weil-pbc-finite-type-algebra]. Let $\\mathfrak p\\subset S$ be a maximal ideal, put $F=S/\\mathfrak p$, and assume $F/k$ is finite separable [def-weil-pbc-separable-algebraic-extension]. Let $K/k$ be a field extension and $\\iota:F\\hookrightarrow K$ a $k$-algebra embedding. Put $C=S\\otimes_kK$ [def-weil-pbc-module-tensor-product], define $\\epsilon:C\\to K$ by $s\\otimes\\lambda\\mapsto\\iota(\\bar s)\\lambda$, and put $\\mathfrak q=\\ker\\epsilon$, $A=S_{\\mathfrak p}$, $B=C_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], and $\\mathfrak m=\\mathfrak pA$. Then $\\epsilon$ is surjective, $\\mathfrak q$ is maximal and contracts to $\\mathfrak p$ in $S$, and $C$ is a finitely generated $K$-algebra. The rings $A,B$ are Noetherian local rings [def-weil-pbc-noetherian-ring]. The canonical map $g:A\\to B$, $s/u\\mapsto(s\\otimes1)/(u\\otimes1)$, is a faithfully flat local homomorphism [def-weil-pbc-faithfully-flat-ring-map]. Define $\\mathfrak r=\\ker(F\\otimes_kK\\to K)$ using $a\\otimes\\lambda\\mapsto\\iota(a)\\lambda$. The $K$-algebra $F\\otimes_kK$ is finite-dimensional and reduced, and there are canonical $K$-algebra isomorphisms $B/\\mathfrak mB\\xrightarrow{\\sim}(F\\otimes_kK)_{\\mathfrak r}\\xrightarrow{\\sim}K$. Their composite sends the class of $(s\\otimes\\lambda)/v$ to $\\iota(\\bar s)\\lambda/\\epsilon(v)$ for $v\\notin\\mathfrak q$. In particular $\\mathfrak mB=\\mathfrak qB$ is the maximal ideal of $B$, and $B/\\mathfrak qB\\cong K$ via this same evaluation map.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C4Y (lemma-change-fields-flat), proof and clauses (1), (3), (4), and 0C50 (lemma-change-fields-algebraic-unramified), reduced zero-dimensional fibre argument; here finiteness of F/k gives fibre dimension zero directly, without a dimension-equality assumption."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Use the algebra tensor pushout universal property to construct $\\epsilon$ from $S\\to F\\xrightarrow{\\iota}K$ and $\\mathrm{id}_K$. It sends $1\\otimes\\lambda$ to $\\lambda$, hence is surjective. Thus $C/\\mathfrak q\\cong K$, so $\\mathfrak q$ is maximal. For $s\\in S$, $\\epsilon(s\\otimes1)=0$ exactly when $\\bar s=0$, since $\\iota$ is injective; therefore $\\mathfrak q\\cap S=\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y, affine setup and evaluation point (explicit specialization)."
+   }
+  },
+  {
+   "text": "Choose algebra generators $s_1,\\ldots,s_n$ for $S/k$. Expanding each $s$ as a polynomial shows that $s\\otimes\\lambda$ is a polynomial over $K$ in $s_i\\otimes1$; pure tensors generate $C$ additively. Hence these elements generate $C/K$. Every ideal of a field is zero or the unit ideal, so $k,K$ are Noetherian. Apply the finite-type algebra Noetherian theorem to $S/k$ and $C/K$ to conclude that $S,C$ are Noetherian.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence; finite-type base extension by generators."
+   }
+  },
+  {
+   "text": "The field-extension base-change theorem makes $S\\to C$, $s\\mapsto s\\otimes1$, faithfully flat, hence flat. Apply the flat-local-ring-maps theorem to the prime $\\mathfrak q$ and its contraction $\\mathfrak p$ found in Step 1. It gives Noetherian local rings $A,B$ and the flat local map $g(s/u)=(s\\otimes1)/(u\\otimes1)$; the denominator is invertible because $u\\notin\\mathfrak p$. The flat local homomorphism theorem makes $g$ faithfully flat.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y, lemma-change-fields-flat, proof of (1); Algebra Tags 00HT and 00HR."
+   }
+  },
+  {
+   "text": "Put $D=F\\otimes_kK$ and let $\\pi:C\\to D$ send $s\\otimes\\lambda$ to $\\bar s\\otimes\\lambda$. Quotient base change gives $C/\\mathfrak pC\\cong C\\otimes_SF\\cong D$: the last isomorphism and its inverse send $(s\\otimes\\lambda)\\otimes a$ to $\\bar s a\\otimes\\lambda$ and $a\\otimes\\lambda$ to $(1\\otimes\\lambda)\\otimes a$. Thus $\\pi$ is onto with kernel $\\mathfrak pC$. Construct $e:D\\to K$ by $e(a\\otimes\\lambda)=\\iota(a)\\lambda$. It is onto, $\\mathfrak r=\\ker e$ is maximal, and $\\epsilon=e\\pi$, so $\\pi^{-1}\\mathfrak r=\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y, proof of (4); Algebra Tag 00DF and tensor universal property."
+   }
+  },
+  {
+   "text": "Write $U=C\\setminus\\mathfrak q$. Surjectivity of $\\pi$ and $\\pi^{-1}\\mathfrak r=\\mathfrak q$ give $\\pi(U)=D\\setminus\\mathfrak r$. Define $\\theta:B\\to D_{\\mathfrak r}$ by $c/u\\mapsto\\pi(c)/\\pi(u)$. This is well defined by the equality-of-fractions relation and is onto by lifting numerator and denominator along $\\pi$. Its kernel is $(\\mathfrak pC)B$: if $\\pi(c)/\\pi(u)=0$, there is $w\\notin\\mathfrak r$ with $w\\pi(c)=0$; lift $w$ to $v\\notin\\mathfrak q$, so $vc\\in\\mathfrak pC$, and $c/u=(vc)/(vu)\\in(\\mathfrak pC)B$. The reverse inclusion is immediate. Finally $(\\mathfrak pC)B=\\mathfrak mB$, since $\\mathfrak m=\\mathfrak pA$ and the denominators from $S\\setminus\\mathfrak p$ are already units in $B$. Hence $\\theta$ induces the first required isomorphism $B/\\mathfrak mB\\cong D_{\\mathfrak r}$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y, proof of (4), with the quotient-localization argument expanded; Algebra Tag 00CT, proposition-localize-quotient."
+   }
+  },
+  {
+   "text": "Choose a finite $k$-basis $b_1,\\ldots,b_d$ of $F$. Bilinearity gives $a\\otimes\\lambda=\\sum_i b_i\\otimes a_i\\lambda$ when $a=\\sum_i a_i b_i$, so the $b_i\\otimes1$ span $D$ over $K$ and $D$ is finite-dimensional. The finite-separable-tensor-field-reduced theorem, with $L=k$, $K\\prime=F$, $E=K$, gives reducedness of $D$. Its hypotheses are precisely the assumed finiteness and separability of $F/k$; no separability of $K/k$ is used.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C50, lemma-change-fields-algebraic-unramified, reduced-fibre argument; Algebra Tag 030U, lemma-separable-extension-preserves-reducedness."
+   }
+  },
+  {
+   "text": "Every prime $P$ of $D$ is maximal: $D/P$ is a nonzero finite-dimensional domain over $K$, and multiplication by any nonzero element is an injective endomorphism, hence surjective, so that element has an inverse. In particular if $P\\subseteq\\mathfrak r$, both are maximal and equal; thus $\\mathfrak r$ is a minimal prime.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C50, zero-dimensional fibre argument; finite dimension replaces the dimension-equality hypothesis."
+   }
+  },
+  {
+   "text": "Apply the reduced-minimal-prime localization theorem to $D,\\mathfrak r$, using Steps 6 and 7: $D_{\\mathfrak r}$ is a field and $\\mathfrak rD_{\\mathfrak r}=0$. Evaluation extends to $e_{\\mathfrak r}:D_{\\mathfrak r}\\to K$ by $a/w\\mapsto e(a)/e(w)$, since $w\\notin\\mathfrak r$ means $e(w)\\ne0$. This unital map from a field is injective and is surjective because it sends $(1\\otimes\\lambda)/1$ to $\\lambda$. It is therefore a $K$-algebra isomorphism. Composing with Step 5 sends $[(s\\otimes\\lambda)/v]$ to $\\iota(\\bar s)\\lambda/\\epsilon(v)$, as asserted. For a general $c/v\\in B$ the same formula is $\\epsilon(c)/\\epsilon(v)$, whose kernel is exactly $\\mathfrak qB$. Step 5 and injectivity of $e_{\\mathfrak r}$ identify this kernel with $\\mathfrak mB$. The localization definition identifies $\\mathfrak qB$ as the maximal ideal of $B$, and gives the asserted evaluation identification $B/\\mathfrak qB\\cong K$.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C50, reduced zero-dimensional local fibre is a field; Algebra Tag 00EU, lemma-minimal-prime-reduced-ring."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C4Y and 0C50, affine evaluation specialization; explicit quotient-localization computation of Algebra 00CT and finite-dimensional prime-quotient argument supplied by Q118."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsSeparable.*[Ll]ocal|[Ll]ocal.*IsSeparable|residueField.*[Tt]ensor|[Tt]ensor.*residueField",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"grep\", \"query\": \"IsSeparable.*[Ll]ocal|[Ll]ocal.*IsSeparable|residueField.*[Tt]ensor|[Tt]ensor.*residueField\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\"], \"digest\": \"90bb572dbbb09ee3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local unramified criteria assume formal unramifiedness or the maximal-ideal equality; none computes the separable evaluation fibre and constructs the localized faithfully flat map with the specified residue formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, TensorProduct, Localization",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSeparable, TensorProduct, Localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local unramified criteria assume formal unramifiedness or the maximal-ideal equality; none computes the separable evaluation fibre and constructs the localized faithfully flat map with the specified residue formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Field extension base change of a finite type algebra at a separable closed point preserves the maximal ideal and has residue field the larger field",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"leansearch\", \"query\": \"Field extension base change of a finite type algebra at a separable closed point preserves the maximal ideal and has residue field the larger field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FiniteType.baseChange\", \"Algebra.Unramified.baseChange\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"IsSepClosed.lift_def\"], \"digest\": \"44e1edeac3f7fc33\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local unramified criteria assume formal unramifiedness or the maximal-ideal equality; none computes the separable evaluation fibre and constructs the localized faithfully flat map with the specified residue formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the tensor product of a finite separable residue field with an extension containing it at the evaluation kernel gives that extension field, and the induced map on local rings is faithfully flat",
+   "results": "{\"t\": \"2026-10-22T06:00:39Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing the tensor product of a finite separable residue field with an extension containing it at the evaluation kernel gives that extension field, and the induced map on local rings is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ResidueField.exists_smul_eq_tmul_one\", \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Ideal.fiberIsoOfBijectiveResidueField\", \"PrimeSpectrum.preimageEquivFiber_apply_asIdeal\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\"], \"digest\": \"a2075e899320c59c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local unramified criteria assume formal unramifiedness or the maximal-ideal equality; none computes the separable evaluation fibre and constructs the localized faithfully flat map with the specified residue formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separable rational point after base extension has local fibre equal to the new base field and extended maximal ideal equals the maximal ideal",
+   "results": "{\"t\": \"2026-10-22T06:01:24Z\", \"tool\": \"leanfinder\", \"query\": \"A separable rational point after base extension has local fibre equal to the new base field and extended maximal ideal equals the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallyUnramified.map_maximalIdeal\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.isSeparable_residueField_iff\", \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"instIsSeparableResidueFieldOfQuotientIdeal\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\"], \"digest\": \"0abf017a2d9e7718\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local unramified criteria assume formal unramifiedness or the maximal-ideal equality; none computes the separable evaluation fibre and constructs the localized faithfully flat map with the specified residue formula."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_map_maximalIdeal_eq|isUnramifiedAt_iff_map_eq|instIsAdicCompleteSpanRangeXOfFinite|algEquivQuotientWeierstrassDistinguished",
+   "results": "{\"t\": \"2026-10-22T06:02:13Z\", \"tool\": \"grep\", \"query\": \"iff_map_maximalIdeal_eq|isUnramifiedAt_iff_map_eq|instIsAdicCompleteSpanRangeXOfFinite|algEquivQuotientWeierstrassDistinguished\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\"], \"digest\": \"39d07e28b68660ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local unramified criteria assume formal unramifiedness or the maximal-ideal equality; none computes the separable evaluation fibre and constructs the localized faithfully flat map with the specified residue formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the tensor product of a finite separable field extension with a larger field at the kernel of evaluation gives the larger field",
+   "results": "{\"t\": \"2026-10-23T04:22:54Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing the tensor product of a finite separable field extension with a larger field at the kernel of evaluation gives the larger field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.isLocalization_of_isSeparable\", \"instIsSeparableFractionRingLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"Algebra.tensorH1CotangentOfIsLocalization\"], \"digest\": \"79208eb0774860c5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern individual localization, integral-closure, quotient or unramified results, not all clauses with this specified evaluation and fibre formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, IsLocalization",
+   "results": "{\"t\": \"2026-10-23T04:23:51Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSeparable, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"IsIntegralClosure.isLocalization_of_isSeparable\", \"IsDedekindDomain.differentIdeal_dvd_map_differentIdeal\", \"Submodule.traceDual_le_span_map_traceDual\", \"Submodule.traceDual_eq_span_map_traceDual_of_linearDisjoint\", \"FractionRing.isSeparable_of_isLocalization\"], \"digest\": \"d0c4bc79b80dcefe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern individual localization, integral-closure, quotient or unramified results, not all clauses with this specified evaluation and fibre formula."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_map_maximalIdeal_eq|isUnramifiedAt_iff_map_eq|isField.*isReduced|isField_of_isArtinian",
+   "results": "{\"t\": \"2026-10-23T04:24:17Z\", \"tool\": \"grep\", \"query\": \"iff_map_maximalIdeal_eq|isUnramifiedAt_iff_map_eq|isField.*isReduced|isField_of_isArtinian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean\", \"Mathlib/RingTheory/Unramified/Field.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\"], \"digest\": \"8a3ca494936c97e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern individual localization, integral-closure, quotient or unramified results, not all clauses with this specified evaluation and fibre formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite separable residue field at a closed point gives a faithfully flat local base extension with residue field the extension field",
+   "results": "{\"t\": \"2026-10-23T04:24:17Z\", \"tool\": \"leansearch\", \"query\": \"A finite separable residue field at a closed point gives a faithfully flat local base extension with residue field the extension field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.finite_of_finite\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"instIsSeparableResidueFieldOfQuotientIdeal\", \"separableClosure\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"IsSepClosure.recOn\", \"instIsSeparableQuotientIdealOfResidueField\"], \"digest\": \"4f9ffd4d7929ab5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern individual localization, integral-closure, quotient or unramified results, not all clauses with this specified evaluation and fibre formula."
+  },
+  {
+   "tool": "grep",
+   "query": "instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap|quotient.*[Ii]s[Ll]ocalization|localization.*quotient",
+   "results": "{\"t\": \"2026-10-23T04:38:15Z\", \"tool\": \"grep\", \"query\": \"instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap|quotient.*[Ii]s[Ll]ocalization|localization.*quotient\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\"], \"digest\": \"0131780cf4bea3b8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern individual localization, integral-closure, quotient or unramified results, not all clauses with this specified evaluation and fibre formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a localization by an extended ideal is a localization of the quotient ring",
+   "results": "{\"t\": \"2026-10-23T04:38:15Z\", \"tool\": \"leansearch\", \"query\": \"Quotient of a localization by an extended ideal is a localization of the quotient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.of_surjective\", \"IsLocalization.Away.mvPolynomialQuotientEquiv\", \"localizedQuotientEquiv\", \"IsLocalization.AtPrime.equivQuotMaximalIdeal.congr_simp\", \"IsLocalization.Away.quotient_of_isIdempotentElem\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"instIsLocalizedModuleQuotientSubmoduleLocalizedModuleLocalizationLocalizedToLocalizedQuotient\", \"Algebra.Extension.localization\"], \"digest\": \"cc182c01a9e294bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern individual localization, integral-closure, quotient or unramified results, not all clauses with this specified evaluation and fibre formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-23T04:38:15Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern individual localization, integral-closure, quotient or unramified results, not all clauses with this specified evaluation and fibre formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If T is a localization of a commutative ring R at a multiplicative set M, then T modulo the extension of an ideal I is the localization of R modulo I at the image of M",
+   "results": "{\"t\": \"2026-10-23T04:38:16Z\", \"tool\": \"leanfinder\", \"query\": \"If T is a localization of a commutative ring R at a multiplicative set M, then T modulo the extension of an ideal I is the localization of R modulo I at the image of M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.idealMap_isLocalizedModule\", \"IsLocalization.mapFrameHom_apply\", \"Algebra.idealMap_eq_ofEq_comp_toLocalized₀\", \"Ideal.localized'_eq_map\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"Ideal.localized₀_eq_restrictScalars_map\", \"IsLocalization.AtPrime.exists_algebraMap_quot_eq_of_mem_quot\", \"IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply\"], \"digest\": \"57575a5c6ee687e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern individual localization, integral-closure, quotient or unramified results, not all clauses with this specified evaluation and fibre formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separable-closed-point-formal-presentation",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Pointwise nodal field-change ingredient of lem-trf-local-term-locality, via the listed ancestors: returned item proof step 5, evaluation prime, localized faithful flatness and separable residue-fibre computation (Varieties 0C4Y/0C50).",
+   "via": [
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-separable-evaluation-local-base-change",
+  "worker": "stage1",
+  "summary": "Eight steps prove every clause with the evaluation maps specified. Reused existing algebra nodes; no new node. Expanded the omitted localized-fibre identification by fractions, and proved zero-dimensionality from finite-dimensional prime quotients rather than importing a dimension-equality hypothesis. No statement correction.",
+  "blueprint": "Realizes the separable evaluation-point local algebra needed by the pointwise nodal field-change ingredient of lem-trf-local-term-locality through the recorded ancestor chain. Uses 0C4Y/0C50 without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "why": "Generic separable-field tensor reducedness; the trace-formula unit has no algebraic reducedness replacement. Used only as a tool in the existing local field-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-separable-tensor-field-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-2fb7d4cb9",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-2fb7d4cb9 (reviewer sub-agent of L); spot-checked: I read the item, all 14 cited node statements, the citers, unit sk-i-curve-zero and the source (Varieties 0C4Y/0C50, varieties.tex l.238 and l.300); review.md has the step-by-step checks. The statement is unchanged. It is the affine, chosen-embedding case of 0C50, with zero-dimensionality taken from dim_K(F⊗K)<∞ instead of the dimension-equality hypothesis. Adding the pushout node to stmt_deps is right, because the module-tensor definition gives no ring structure. Step checks: (1) ε comes from the pushout of ι∘(S→F) and id_K; 𝔮 is maximal and contracts to 𝔭 since ι is injective. (2) Generators s_i⊗1 and the 00FN leaf over k and K give S and C Noetherian. (3) Base change along a field extension is faithfully flat, the flat-local-ring-maps leaf applies at 𝔮 over 𝔭, and 00HR gives faithful flatness. (4) 00CT-type quotient base change, with the C⊗_SF≅F⊗_kK formulas checked to be S-balanced and mutually inverse. (5) θ is well defined, surjective, and its kernel argument via lifting w is complete; (𝔭C)B=𝔪B. (6) The finite-separable-tensor-reduced node applies with L=k, K'=F, E=K, which needs no separability of K/k. (7) Every prime of D is maximal, so 𝔯 is minimal. (8) 00EU makes D_𝔯 a field; e_𝔯 is injective because it is a unital map from a field; the composite's kernel 𝔮B equals 𝔪B. Small cases checked: S=F=k; k[t]/(t²); a quadratic F split in K; the purely inseparable failure, which the hypothesis excludes. No duplicate in the DAG: the separable-point-flat-completion-map node is larger and cites this item. The tool use of lem-weil-pbc-finite-separable-tensor-field-reduced (generic Stacks 030U algebra) is accepted. No SGA, no new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SeparableEvaluationLocalBaseChange",
+  "declaration": "Algebra.SeparableEvaluation.local_base_change",
+  "declarations": [
+   "Algebra.SeparableEvaluation.residueEvaluation",
+   "Algebra.SeparableEvaluation.evaluation",
+   "Algebra.SeparableEvaluation.evaluationIdeal",
+   "Algebra.SeparableEvaluation.residueEvaluationIdeal",
+   "Algebra.SeparableEvaluation.evaluation_surjective",
+   "Algebra.SeparableEvaluation.evaluationIdeal_isMaximal",
+   "Algebra.SeparableEvaluation.evaluationIdeal_comap",
+   "Algebra.SeparableEvaluation.residueEvaluationIdeal_isMaximal",
+   "Algebra.SeparableEvaluation.localRing",
+   "Algebra.SeparableEvaluation.residueLocalRing",
+   "Algebra.SeparableEvaluation.localMap",
+   "Algebra.SeparableEvaluation.closedFibreIdeal",
+   "Algebra.SeparableEvaluation.evaluationLocalIdeal",
+   "Algebra.SeparableEvaluation.tensorQuotient",
+   "Algebra.SeparableEvaluation.residueLocalAlgebra",
+   "Algebra.SeparableEvaluation.fibreAlgebra",
+   "Algebra.SeparableEvaluation.local_base_change"
+  ],
+  "file": "lean/Sheaf/RingTheory/SeparableEvaluationLocalBaseChange.lean",
+  "statement": "theorem local_base_change [Algebra.FiniteType k S] [FiniteDimensional k (S ⧸ p)] [Algebra.IsSeparable k (S ⧸ p)] : (Algebra.TensorProduct.includeRight : K →ₐ[k] S ⊗[k] K).toRingHom.FiniteType ∧ IsNoetherianRing (Localization.AtPrime p) ∧ IsLocalRing (Localization.AtPrime p) ∧ IsNoetherianRing (localRing p ι) ∧ IsLocalRing (localRing p ι) ∧ (localMap p ι).FaithfullyFlat ∧ IsLocalHom (localMap p ι) ∧ @FiniteDimensional K ((S ⧸ p) ⊗[k] K) _ _ Algebra.TensorProduct.rightAlgebra.toModule ∧ IsReduced ((S ⧸ p) ⊗[k] K) ∧ closedFibreIdeal p ι = evaluationLocalIdeal p ι ∧ evaluationLocalIdeal p ι = IsLocalRing.maximalIdeal (localRing p ι) ∧ ∃ θ : @AlgEquiv K (localRing p ι ⧸ closedFibreIdeal p ι) (residueLocalRing p ι) _ _ _ (fibreAlgebra p ι (closedFibreIdeal p ι)) (residueLocalAlgebra p ι), ∃ φ : @AlgEquiv K (residueLocalRing p ι) K _ _ _ (residueLocalAlgebra p ι) _, ∃ ψ : @AlgEquiv K (localRing p ι ⧸ evaluationLocalIdeal p ι) K _ _ _ (fibreAlgebra p ι (evaluationLocalIdeal p ι)) _, (∀ (c : S ⊗[k] K) (v : (evaluationIdeal p ι).primeCompl), θ (Ideal.Quotient.mk _ (IsLocalization.mk' (localRing p ι) c v)) * algebraMap ((S ⧸ p) ⊗[k] K) (residueLocalRing p ι) (tensorQuotient p v) = algebraMap ((S ⧸ p) ⊗[k] K) (residueLocalRing p ι) (tensorQuotient p c)) ∧ (∀ (d : (S ⧸ p) ⊗[k] K) (w : (residueEvaluationIdeal p ι).primeCompl), φ (IsLocalization.mk' (residueLocalRing p ι) d w) = residueEvaluation p ι d / residueEvaluation p ι w) ∧ (∀ (s : S) (a : K) (v : (evaluationIdeal p ι).primeCompl), φ (θ (Ideal.Quotient.mk _ (IsLocalization.mk' (localRing p ι) (s ⊗ₜ[k] a) v))) = ι (Ideal.Quotient.mk p s) * a / evaluation p ι v) ∧ (∀ (c : S ⊗[k] K) (v : (evaluationIdeal p ι).primeCompl), ψ (Ideal.Quotient.mk _ (IsLocalization.mk' (localRing p ι) c v)) = evaluation p ι c / evaluation p ι v)",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The evaluation, kernel maximality and contraction clauses are stated in evaluation_surjective, evaluationIdeal_isMaximal and evaluationIdeal_comap. The main theorem gives all remaining clauses, with explicitly specified K-algebra structures and fraction formulas characterizing the canonical isomorphisms. All helper data are constructed explicitly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0755836b3",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, module (17 decls), report (Worker report + Second reading by Q34 present), Varieties 0C4Y l.238/0C50 l.300. Node diff vs side-live: lean only; no live lean/name clash. lean.statement verbatim and declarations match file. Hypotheses: FiniteType, FiniteDimensional k (S/p), IsSeparable, maximal p, ι k-alg hom; none stronger than node; universes u,v,w independent. Clauses: ε surjective/𝔮 maximal/contraction as unconditional sorry lemmas; C f.t. over K; A,B Noetherian local; localMap = Localization.localRingHom of includeLeftRingHom, faithfully flat + local; F⊗K finite-dim over K (rightAlgebra) and reduced; 𝔪B=𝔮B=maximalIdeal; θ,φ,ψ K-AlgEquivs with explicit K-structures, pinned by fraction formulas (θ via π(v)/1 unit), composite formula ι(s̄)λ/ε(v) literal. Helpers concrete, no choice; sorry-only; docstrings with source+blueprint and 8 proof steps; proof import isReduced_tensorProduct_of_finiteSeparable exists. Edge cases S=F=k, nonreduced S, split F, inseparable F excluded, any char. Cosmetic only: residueEvaluation docstring 'a ⊗ a'. No compile (no change)."
+ }
+}

@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Algebra.Hom
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.GroupWithZero.Basic
 import Mathlib.RingTheory.TensorProduct.Maps
+import Mathlib.RingTheory.Nilpotent.Defs
 
 /-!
 # Reducedness under an equivalence of scalar algebras
@@ -50,6 +51,12 @@ theorem isReduced_tensorProduct_iff_of_bijective
     [Field k] [CommRing A] [Algebra k A] [Field L] [Algebra k L]
     [Field M] [Algebra k M] (e : L →ₐ[k] M) (he : Function.Bijective e) :
     IsReduced (A ⊗[k] L) ↔ IsReduced (A ⊗[k] M) := by
-  sorry
+  let E : A ⊗[k] L ≃ₐ[k] A ⊗[k] M :=
+    TensorProduct.congr (AlgEquiv.refl : A ≃ₐ[k] A) (AlgEquiv.ofBijective e he)
+  constructor
+  · intro h
+    exact isReduced_of_injective E.symm E.symm.injective
+  · intro h
+    exact isReduced_of_injective E E.injective
 
 end Algebra

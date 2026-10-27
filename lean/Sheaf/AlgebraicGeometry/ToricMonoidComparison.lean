@@ -4,20 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group NN
 -/
 
-import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
-import WeilConjectures.Blowup.FiniteDegree.Algebra
-import Sheaf.RingTheory.AffineMonoidAlgebraNormalization
-import Sheaf.GroupTheory.FineMonoidFiniteSaturation
-import Sheaf.TraceFormula.SmoothGeometricallyNormal
-import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
-import Sheaf.TraceFormula.FsFaceSharpening
-import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
-import WeilConjectures.AlgebraicGeometry.Regular
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.Algebra.Module.SpanRankOperations
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Mathlib.Algebra.Field.ULift
+module
+
+public import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
+public import WeilConjectures.Blowup.FiniteDegree.Algebra
+public import Sheaf.RingTheory.AffineMonoidAlgebraNormalization
+public import Sheaf.GroupTheory.FineMonoidFiniteSaturation
+public import Sheaf.TraceFormula.SmoothGeometricallyNormal
+public import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
+public import Sheaf.TraceFormula.FsFaceSharpening
+public import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
+public import WeilConjectures.AlgebraicGeometry.Regular
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.Algebra.Module.SpanRankOperations
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Mathlib.Algebra.Field.ULift
+import Sheaf.AlgebraicGeometry.MonoschemeSmoothLocalCharts
+import Sheaf.AlgebraicGeometry.ToricRealizationFiniteType
 
 /-!
 # Toric comparison of ideals, saturated blowups and smoothness
@@ -29,6 +33,8 @@ All comparisons retain their maps to the base. Equivariance is expressed by the 
 lifts of the original torus action to each modification; dense torus embeddings are
 specified over the original embedding. No arbitrary comparison map is substituted.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 
@@ -167,7 +173,26 @@ and Laurent variables as units across square-zero extensions. A lift of a unit i
 unit because 1+n has inverse 1-n for n²=0. Apply smoothness local on the source. -/
 theorem realizationMap_smooth (k : Type u) [Field k] {N M : Fine.{u}}
     (f : Hom N M) (hf : f.IsSmooth) : Smooth (realizationMap k f) := by
-  sorry
+  classical
+  choose U hy hUmin hUsp hUgerm using exists_smallest_affine_neighborhood N
+  choose V hx hVmin hVsp hVgerm using exists_smallest_affine_neighborhood M
+  let cover : (realization k N).OpenCover := Scheme.Cover.mkOfCovers N.space
+    (fun y ↦ (realizationDiagram k N).obj (U y))
+    (fun y ↦ realizationι k N (U y))
+    (smallest_neighborhood_realizations_cover k N U hy hUmin)
+  apply IsZariskiLocalAtSource.of_openCover (P := @Smooth) cover
+  intro y
+  obtain ⟨hUV, _, _, hsmooth⟩ := restrict_smallest_neighborhoods f y
+    (U y) (V (f.map.hom.base y)) (hy y) (hx (f.map.hom.base y))
+    (hUmin y) (hVmin (f.map.hom.base y))
+  obtain ⟨r, t, e, he⟩ := hsmooth hf
+  have hchart := (realized_smallest_product_chart k f (U y)
+    (V (f.map.hom.base y)) hUV r t e he).2
+  have hmap : IsRealizationMap k f (realizationMap k f) :=
+    Classical.choose_spec (existsUnique_realizationMap k f).exists
+  change Smooth (realizationι k N (U y) ≫ realizationMap k f)
+  rw [hmap (U y) (V (f.map.hom.base y)) hUV]
+  exact smooth_comp _ _
 
 /-- Smoothness of a torsion-free toric realization reflects monoscheme smoothness.
 Source: ILO VIII 3.2.12(ii) (blueprint: lem-trf-toric-monoid-comparison).
@@ -200,6 +225,13 @@ theorem isSmooth_of_rational_realization_regular (M : Fine.{u})
     ∀ x : M.space, ∃ r t : ℕ, Nonempty
       ((FineFan.stalk M.space.presheaf x) ≃*
         (Multiplicative (Fin r → ℕ) × Multiplicative (Fin t → ℤ))) := by
-  sorry
+  have : LocallyOfFiniteType (realizationToBase (ULift.{u} ℚ) M) :=
+    (toric_realization_finite_type M hM).2.1
+  have : IsRegular (realization (ULift.{u} ℚ) M) := h.2
+  have : PerfectField (ULift.{u} ℚ) := PerfectField.of_ringEquiv ULift.ringEquiv.symm
+  exact isSmooth_of_realization_smooth (ULift.{u} ℚ) M hM
+    (smooth_of_isRegular (realizationToBase (ULift.{u} ℚ) M))
 
 end AlgebraicGeometry.Monoscheme
+
+

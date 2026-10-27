@@ -1,0 +1,269 @@
+{
+ "id": "lem-trf-module-pushout-quotient-presentation",
+ "kind": "statement",
+ "title": "Explicit quotient presentation of a module pushout",
+ "statement": "Let $R$ be a commutative ring, let $P,Q,Q'$ be $R$-modules, and let $a:P\\to Q$ and $b:P\\to Q'$ be $R$-linear maps. Put $D=Q'\\oplus Q$ [def-weil-pbc-direct-sum-modules], $\\delta(x)=(b(x),-a(x))$, and $E=D/\\delta(P)$ [def-weil-pbc-quotient-module], with quotient $\\pi:D\\to E$ and maps $j(y)=\\pi(y,0)$, $k(z)=\\pi(0,z)$. Then $\\pi$ is surjective, $\\ker\\pi=\\operatorname{im}\\delta$, and $jb=ka$. For every $R$-module $T$ and linear maps $u:Q'\\to T$, $v:Q\\to T$ with $ub=va$, there is a unique linear map $h:E\\to T$ such that $hj=u$ and $hk=v$, and it satisfies $h(\\pi(y,z))=u(y)+v(z)$. In particular $(E,k,j)$ is a pushout of $(a,b)$, the colimit of the finite span in $R$-modules [def-weil-pbc-category-colimit]. For every chosen pushout $(Q'',c:Q\\to Q'',b':Q'\\to Q'')$ of $(a,b)$, there is a unique linear isomorphism $e:E\\xrightarrow{\\sim}Q''$ with $ej=b'$ and $ek=c$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0AUM, lemma-domination-universally-injective, proof first paragraph: quotient of the direct sum by the image of (g,-f), expanded into its universal property and exact sequence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "By the componentwise operations of [def-weil-pbc-direct-sum-modules], $\\delta(x+x_1)=\\delta(x)+\\delta(x_1)$ and $\\delta(rx)=r\\delta(x)$. Thus $N=\\delta(P)$ is a submodule: it contains $0$, and sums and scalar multiples are images of the corresponding sums and scalar multiples in $P$. Applying [def-weil-pbc-quotient-module] to $D,N$ gives a linear surjection $\\pi:D\\to E$ and $\\ker\\pi=N=\\operatorname{im}\\delta$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM (lemma-domination-universally-injective), first proof paragraph: expansion of the quotient construction."
+   }
+  },
+  {
+   "text": "The coordinate inclusions and $\\pi$ are linear, so $j,k$ are linear. For $x\\in P$, $j(b(x))-k(a(x))=\\pi(b(x),-a(x))=\\pi(\\delta(x))=0$, since $\\delta(x)\\in N$. Consequently $jb=ka$. Also $(y,z)=(y,0)+(0,z)$ gives $\\pi(y,z)=j(y)+k(z)$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM (lemma-domination-universally-injective), first proof paragraph: expansion of the quotient construction."
+   }
+  },
+  {
+   "text": "Given $u,v$ as in the statement, set $w(y,z)=u(y)+v(z)$. The coordinatewise operations show that $w$ is linear, and $w(\\delta(x))=u(b(x))-v(a(x))=0$. Hence $w(N)\\subseteq\\{0\\}$. Apply clause (1) of [lem-weil-pbc-quotient-module-induced-map] with $M=D$, $N=\\operatorname{im}\\delta$, $M'=T$, $N'=\\{0\\}$ (and $M''=T$, $N''=\\{0\\}$ for its unused third module). This gives $\\bar w:E\\to T/\\{0\\}$ with $\\bar w(\\pi(y,z))=w(y,z)+\\{0\\}$. The map $\\epsilon:T/\\{0\\}\\to T$, $t+\\{0\\}\\mapsto t$, is well defined because these cosets are singletons, and is linear by the quotient operations. Put $h=\\epsilon\\bar w$. Then $h(\\pi(y,z))=u(y)+v(z)$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module",
+    "lem-weil-pbc-quotient-module-induced-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM (lemma-domination-universally-injective), first proof paragraph: expansion of the quotient construction."
+   }
+  },
+  {
+   "text": "Setting $z=0$ and $y=0$ in the formula just obtained gives $hj=u$ and $hk=v$. If $h_1:E\\to T$ is another linear map with these identities, then $h_1(\\pi(y,z))=h_1(j(y)+k(z))=u(y)+v(z)=h(\\pi(y,z))$. Surjectivity of $\\pi$ implies $h_1=h$.",
+   "uses": [
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM (lemma-domination-universally-injective), first proof paragraph: expansion of the quotient construction."
+   }
+  },
+  {
+   "text": "The indexing category of the span has three objects $P,Q,Q'$ and two nonidentity arrows $a,b$, so it is small. A cocone with vertex $T$ is precisely a pair $v:Q\\to T$, $u:Q'\\to T$ with $va=ub$; its map from $P$ must be this common composite. Steps 2--4 say precisely that the cocone with vertex $E$ and legs $k,j$ has the existence and uniqueness property of [def-weil-pbc-category-colimit]. It is therefore the required pushout.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM (lemma-domination-universally-injective), first proof paragraph: expansion of the quotient construction."
+   }
+  },
+  {
+   "text": "For the chosen pushout, its legs satisfy $b' b=ca$, so step 3 gives $e:E\\to Q''$ with $ej=b'$ and $ek=c$. Its pushout property gives $d:Q''\\to E$ with $db'=j$ and $dc=k$. The maps $de$ and $1_E$ have the same composites with $j,k$, hence agree by step 4. Likewise $ed$ and $1_{Q''}$ have the same composites with $b',c$, hence agree by uniqueness for the chosen pushout. Thus $e$ is a linear isomorphism with inverse $d$; any other such isomorphism has the same underlying linear map by step 4.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM (lemma-domination-universally-injective), first proof paragraph: expansion of the quotient construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-quotient-module",
+  "lem-weil-pbc-quotient-module-induced-map",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0AUM, first proof paragraph; explicit expansion of its recalled quotient presentation using existing quotient-map and colimit nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pushout|Pushout",
+   "results": "{\"t\": \"2026-10-22T06:45:31Z\", \"tool\": \"grep\", \"query\": \"pushout|Pushout\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical cokernel and comparison ingredients do not alone identify the explicit two-coordinate quotient and its legs in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The module pushout of two linear maps is the quotient of their direct sum by the image of the difference map",
+   "results": "{\"t\": \"2026-10-22T06:45:31Z\", \"tool\": \"leansearch\", \"query\": \"The module pushout of two linear maps is the quotient of their direct sum by the image of the difference map\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat, pushout, cokernel",
+   "results": "{\"t\": \"2026-10-22T06:45:32Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat, pushout, cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'pushout'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no usable result: loogle: unknown identifier 'pushout'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of the direct sum of two modules by the image of (b,-a) is their pushout, with its two specified legs and an exact quotient sequence",
+   "results": "{\"t\": \"2026-10-22T06:45:48Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of the direct sum of two modules by the image of (b,-a) is their pushout, with its two specified legs and an exact quotient sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Presentation.cokernel_R\", \"ModuleCat.instHasCoequalizers\", \"Module.Presentation.ofExact\", \"ModuleCat.cokernelIsColimit\", \"Module.Presentation.cokernel_relation\", \"Submodule.piQuotientLift\", \"Module.Presentation.CokernelData\", \"ModuleCat.cokernelCocone\"], \"digest\": \"83b064be21da0677\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical cokernel and comparison ingredients do not alone identify the explicit two-coordinate quotient and its legs in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout.*[Cc]okernel|[Cc]okernel.*pushout|isColimit.*[Bb]iprod|[Bb]iprod.*isColimit",
+   "results": "{\"t\": \"2026-10-22T06:46:13Z\", \"tool\": \"grep\", \"query\": \"pushout.*[Cc]okernel|[Cc]okernel.*pushout|isColimit.*[Bb]iprod|[Bb]iprod.*isColimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"49cbee16e5c6f37e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical cokernel and comparison ingredients do not alone identify the explicit two-coordinate quotient and its legs in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pushout, CategoryTheory.Limits.cokernel",
+   "results": "{\"t\": \"2026-10-22T06:46:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.pushout, CategoryTheory.Limits.cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical cokernel and comparison ingredients do not alone identify the explicit two-coordinate quotient and its legs in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushout of homomorphisms of modules constructed as a quotient of a binary direct sum, the comparison isomorphism preserves both inclusion maps",
+   "results": "{\"t\": \"2026-10-22T06:46:23Z\", \"tool\": \"leanfinder\", \"query\": \"Pushout of homomorphisms of modules constructed as a quotient of a binary direct sum, the comparison isomorphism preserves both inclusion maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasCoequalizersOfHasPushoutsAndBinaryCoproducts.pushoutInl_eq_pushout_inr\", \"CategoryTheory.IsPushout.inl_isoPushout_hom\", \"Monoid.PushoutI.ofCoprodI_of\", \"ModuleCat.ι_coprodIsoDirectSum_hom\", \"CategoryTheory.Limits.inl_pushoutZeroZeroIso_hom\", \"CategoryTheory.IsPushout.inl_isoPushout_inv\", \"CategoryTheory.Limits.inr_pushoutZeroZeroIso_hom\", \"CategoryTheory.Limits.inl_pushoutRightPushoutInlIso_hom\"], \"digest\": \"b0eaf8dfcd5ebc7f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical cokernel and comparison ingredients do not alone identify the explicit two-coordinate quotient and its legs in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.liftQ, LinearMap.range",
+   "results": "{\"t\": \"2026-10-23T22:44:38Z\", \"tool\": \"loogle\", \"query\": \"Submodule.liftQ, LinearMap.range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Submodule.range_liftQ\", \"LinearMap.surjective_range_liftQ\", \"LinearMap.ker_eq_bot_range_liftQ_iff\", \"LinearMap.injective_range_liftQ_of_exact\", \"Function.Exact.linearEquivOfSurjective_apply\", \"CategoryTheory.ShortComplex.moduleCatLeftHomologyData_descH_hom\"], \"digest\": \"fa47e9f4e3a26f43\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the whole item: module coequalizers and quotient lifts supply ingredients; the abelian biproduct-to-pushout cokernel theorem still needs identification with this concrete coordinate quotient and its specified legs."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|Pushout",
+   "results": "{\"t\": \"2026-10-23T22:44:38Z\", \"tool\": \"grep\", \"query\": \"pushout|Pushout\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the whole item: module coequalizers and quotient lifts supply ingredients; the abelian biproduct-to-pushout cokernel theorem still needs identification with this concrete coordinate quotient and its specified legs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of Q prime direct sum Q by the image of (b, -a) is the pushout of module linear maps a and b, with quotient kernel and unique comparison isomorphism",
+   "results": "{\"t\": \"2026-10-23T22:44:41Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of Q prime direct sum Q by the image of (b, -a) is the pushout of module linear maps a and b, with quotient kernel and unique comparison isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instHasCoequalizers\", \"LinearMap.coprodEquiv\", \"LinearMap.coprodEquiv_apply\", \"Submodule.quotientPiLift\", \"Module.Presentation.cokernel_R\", \"LinearMap.subToSupQuotient\", \"Submodule.piQuotientLift\", \"Module.Relations.Solution.IsPresentation.desc\"], \"digest\": \"f0b6bc7bf035b7da\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the whole item: module coequalizers and quotient lifts supply ingredients; the abelian biproduct-to-pushout cokernel theorem still needs identification with this concrete coordinate quotient and its specified legs."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*[Cc]okernel|[Cc]okernel.*[Pp]ushout|[Pp]ushout.*[Cc]okernel",
+   "results": "{\"t\": \"2026-10-23T22:45:00Z\", \"tool\": \"grep\", \"query\": \"isColimit.*[Cc]okernel|[Cc]okernel.*[Pp]ushout|[Pp]ushout.*[Cc]okernel\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\"], \"digest\": \"4b61114019e3df41\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the whole item: module coequalizers and quotient lifts supply ingredients; the abelian biproduct-to-pushout cokernel theorem still needs identification with this concrete coordinate quotient and its specified legs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of linear maps is quotient of direct sum by range of their difference",
+   "results": "{\"t\": \"2026-10-23T22:45:00Z\", \"tool\": \"leansearch\", \"query\": \"Pushout of linear maps is quotient of direct sum by range of their difference\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.Pushout'\", \"CategoryTheory.Limits.Types.Pushout\", \"CategoryTheory.Limits.Types.Pushout.inl\", \"CategoryTheory.Limits.Types.Pushout.cocone\", \"CategoryTheory.Limits.Types.Pushout.Rel.casesOn\", \"LinearPMap.coprod\", \"LinearMap.range_coprod\", \"DirectSum.lmap\"], \"digest\": \"547055fb45e26495\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the whole item: module coequalizers and quotient lifts supply ingredients; the abelian biproduct-to-pushout cokernel theorem still needs identification with this concrete coordinate quotient and its specified legs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An explicit pushout cocone in modules as cokernel of the map into a binary biproduct",
+   "results": "{\"t\": \"2026-10-23T22:45:01Z\", \"tool\": \"leanfinder\", \"query\": \"An explicit pushout cocone in modules as cokernel of the map into a binary biproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.BiproductToPushoutIsCokernel.biproductToPushout\", \"CategoryTheory.Abelian.BiproductToPushoutIsCokernel.biproductToPushoutCofork\", \"CategoryTheory.IsPushout.isColimitCokernelCofork\", \"CategoryTheory.Square.IsPushout.isColimitCokernelCofork\", \"CategoryTheory.Abelian.BiproductToPushoutIsCokernel.isColimitBiproductToPushout\", \"CategoryTheory.CommSq.isColimitEquivIsColimitCokernelCofork\", \"CategoryTheory.Square.isPushoutEquivIsColimitCokernelCofork\", \"CategoryTheory.Limits.biprod.isCokernelInlCokernelFork\"], \"digest\": \"4a8b020834d8c774\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the whole item: module coequalizers and quotient lifts supply ingredients; the abelian biproduct-to-pushout cokernel theorem still needs identification with this concrete coordinate quotient and its specified legs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-domination-pushout-universal-injective",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0AUM first proof paragraph, explicit quotient pushout; supporting algebraic input under lem-trf-local-term-locality via the recorded Mittag-Leffler descent ancestry; returned item Step 1.",
+   "via": [
+    "lem-trf-domination-pushout-universal-injective",
+    "lem-trf-mittag-leffler-faithfully-flat-descent",
+    "lem-trf-countable-projective-faithfully-flat-descent",
+    "lem-trf-local-projective-faithfully-flat-descent",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-module-pushout-quotient-presentation",
+  "worker": "stage1",
+  "summary": "Expanded the explicit quotient construction of Stacks Tag 0AUM into six checked steps. Reused the existing quotient-map Mathlib leaf, quotient and direct-sum definitions, and the full colimit universal property. No statement changes and no new nodes. The chosen-pushout comparison is constructed with its inverse and both leg identities.",
+  "blueprint": "Supporting algebraic input below lem-trf-local-term-locality through the recorded descent ancestry: Tag 0AUM first paragraph used by lem-trf-domination-pushout-universal-injective, Step 1. The present split expands only this quotient-pushout input; no geometric unit step or route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-6123bf7db",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-6123bf7db (reviewer sub-agent of L); spot-checked: Read the item in full; it has six steps and no new nodes. Read the four cited nodes (the direct-sum and quotient-module definitions, the colimit definition, and the Mathlib leaf lem-weil-pbc-quotient-module-induced-map, i.e. Submodule.mapQ) and the citer, step 1 of lem-trf-domination-pushout-universal-injective. The source is Stacks algebra.tex, lemma-domination-universally-injective (0AUM), first proof sentence 'M'⊕N modulo (g(x),-f(x))'. With M=P, f=a, g=b this gives D=Q'⊕Q and δ=(b,-a), so the order and the sign match, and the legs are f'=j and g'=k. On both live and side-live the item is unsplit with an identical statement, and it has no repair note, so the re-split rule does not apply. Checked each step. Step 1: δ is linear, and the quotient node gives a surjection with kernel N. Step 2: j b - k a = π δ = 0 and π(y,z) = j y + k z. Step 3: w δ = u b - v a = 0, mapQ with N'=0 applies within its hypotheses, and ε: T/0 → T is the inverse of a linear bijection. Step 4: uniqueness follows from surjectivity. Step 5: span cocones are exactly the compatible pairs. Step 6: the inverse d comes from the chosen pushout's universal property, and both inverse identities and the uniqueness of e follow. The only remark is cosmetic: step 6 says 'step 3' where 'steps 3-4' is meant. Small cases: P=0, Q=Q'=0, a=b=0, a=b=id, a=0 with b=id, and the zero ring all hold. proof_deps equal the union of the step uses, and every citation is a definition or a Mathlib leaf, so there is no route issue and no tool_uses are needed. The DAG pushout search found only lem-weil-pbc-pushout-short-exact-sequence and lem-weil-pbc-abelian-pushout-mono, neither a duplicate. The Mathlib searches cover all three kinds, and the abelian BiproductToPushoutIsCokernel is not a one-line specialization. The route uses Stacks, not SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.PushoutQuotientPresentation",
+  "declaration": "LinearMap.pushout_quotient_presentation",
+  "declarations": [
+   "LinearMap.pushoutRelation",
+   "LinearMap.PushoutQuotient",
+   "LinearMap.pushoutQuotientMap",
+   "LinearMap.pushoutQuotientInl",
+   "LinearMap.pushoutQuotientInr",
+   "LinearMap.pushout_quotient_presentation"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/PushoutQuotientPresentation.lean",
+  "statement": "theorem pushout_quotient_presentation {R : Type u} [CommRing R] {P Q Q' : Type v} [AddCommGroup P] [AddCommGroup Q] [AddCommGroup Q'] [Module R P] [Module R Q] [Module R Q'] (a : P →ₗ[R] Q) (b : P →ₗ[R] Q') : Function.Surjective (pushoutQuotientMap a b) ∧ LinearMap.ker (pushoutQuotientMap a b) = LinearMap.range (pushoutRelation a b) ∧ (pushoutQuotientInl a b).comp b = (pushoutQuotientInr a b).comp a ∧ (∀ (T : Type t) [AddCommGroup T] [Module R T] (u : Q' →ₗ[R] T) (v : Q →ₗ[R] T), u.comp b = v.comp a → ∃ h : PushoutQuotient a b →ₗ[R] T, h.comp (pushoutQuotientInl a b) = u ∧ h.comp (pushoutQuotientInr a b) = v ∧ (∀ h' : PushoutQuotient a b →ₗ[R] T, h'.comp (pushoutQuotientInl a b) = u → h'.comp (pushoutQuotientInr a b) = v → h' = h) ∧ ∀ (y : Q') (z : Q), h (pushoutQuotientMap a b (y, z)) = u y + v z) ∧ CategoryTheory.IsPushout (ModuleCat.ofHom a) (ModuleCat.ofHom b) (ModuleCat.ofHom (pushoutQuotientInr a b)) (ModuleCat.ofHom (pushoutQuotientInl a b)) ∧ (∀ (Q'' : Type v) [AddCommGroup Q''] [Module R Q''] (c : Q →ₗ[R] Q'') (b' : Q' →ₗ[R] Q''), CategoryTheory.IsPushout (ModuleCat.ofHom a) (ModuleCat.ofHom b) (ModuleCat.ofHom c) (ModuleCat.ofHom b') → ∃! e : PushoutQuotient a b ≃ₗ[R] Q'', e.toLinearMap.comp (pushoutQuotientInl a b) = b' ∧ e.toLinearMap.comp (pushoutQuotientInr a b) = c)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The binary direct sum is Mathlib's product module, with standard LinearMap.inl/inr; the concrete relation, quotient and two specified legs are exposed as helpers. Uniqueness of the descended map assumes only its two leg equations, independently of the evaluation formula."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf02fddc5",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read the node, 3 stmt_deps, Stacks 0AUM (algebra.tex 20935-20963), the item module and the report. Node copy = side-live except the lean field; lean.statement matches the file verbatim. Clause by clause: CommRing R; P,Q,Q' modules in a common universe v (needed for IsPushout in ModuleCat.{v}; helpers polymorphic); delta = b.prod(-a) = (b x,-a x), same order/sign as the source (g,-f); E = (Q'xQ)/range delta via mkQ; j = pi∘inl, k = pi∘inr; surjective, ker = range, jb = ka; universal property for T : Type t with uniqueness from the leg equations only, plus the evaluation formula; IsPushout (ofHom a)(ofHom b)(ofHom k)(ofHom j), argument order checked; ∃! linear equiv to every chosen IsPushout (Q'',c,b') fixing both legs. Edge cases P=0, a=b=0, zero target, a=b=id, zero ring, T=0 covered. Helpers not hollow, source/blueprint docstrings present, proof plan in the theorem docstring, only sorry, no deps/new nodes, report sections present. No name clash in Mathlib/live/side-live; Mathlib BiproductToPushoutIsCokernel is abstract only, not an existing match. No compile run (no file changed)."
+ }
+}

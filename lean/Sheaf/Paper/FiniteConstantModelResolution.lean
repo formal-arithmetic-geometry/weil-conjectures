@@ -27,7 +27,10 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.Algebra.Homology.Double
 import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
-import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Two-term resolutions of finite constant scalar models

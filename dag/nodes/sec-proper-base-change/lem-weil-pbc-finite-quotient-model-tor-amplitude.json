@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-model-tor-amplitude",
+ "kind": "statement",
+ "title": "Tor interval of an algebraic local finite-quotient model",
+ "statement": "Let X be a scheme, (A,I) an adic coefficient datum and M an arbitrary derived object over its completed coefficient sheaf. Let phi be isomorphisms from the constant finite quotient rings to the actual finite coefficient sheaves, satisfying both compatibility equations [def-weil-pbc-finite-perfect-quotient-model-data]. Fix an etale chart V and integers a,b, and assume the residue reduction has etale-local constant finite-projective models in [a,b]. For any n, any W->V, and any algebraic A/I^(n+1)-complex P, suppose either W is nonempty or P is zero. If the actual nth reduction of M and the changed constant realization of P become isomorphic after actual derived restriction to W, then Q(P) has Tor amplitude [a,b]: tensor with every A/I^(n+1)-module in degree zero has cohomology zero outside that interval. P need not have finite terms, bounded terms, or projective terms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094I (lemma-bounded, coefficient ideal filtration) and 094G (lemma-locally-constant); proetale.tex Tag 09C2 (lemma-describe-constructible-complexes)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "If P is zero as a complex, Q(P) is zero since localization preserves zero objects. For each module N, tensorRight(N[0]) preserves zero objects, so Q(P) tensor-derived N[0] has zero cohomology in every degree. This proves the conclusion on the zero-complex alternative, including empty charts.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On the nonempty-chart alternative apply [lem-weil-pbc-finite-quotient-model-residue-projective]. With B = A/I^(n+1) and J the image of I in B, obtain a universal derived scalar extension L to B/J and a projective complex E in [a,b] representing L(Q(P)). Only the residue complex, not Q(P), has been replaced by a bounded projective model here.",
+   "uses": [
+    "lem-weil-pbc-finite-quotient-model-residue-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image ideal J satisfies J^(n+1) = image(I^(n+1)) = 0. Apply [lem-weil-pbc-nilpotent-projective-complex-lift] to B, J, the universal derived extension L with its counit, Q(P), and E. It gives a projective complex F representing Q(P), together with a complex isomorphism F tensor_B B/J = E. For any module T whose scalar extension is zero, the tensor-quotient identification gives T/JT = 0. Thus T = JT, and induction gives T = J^m T for every m. Taking m = n+1 gives T = 0. Apply this to F^i whenever E^i = 0, so F is strictly supported in [a,b], retaining both original endpoints.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-projective-complex-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09AR, lemma-lift-complex-projectives; nilpotent Nakayama argument as in Tag 00DV"
+   }
+  },
+  {
+   "text": "Every projective term of F is flat. The generic bounded-flat Tor theorem [lem-trf-source-bounded-flat-tor-amplitude] makes Q(F) have Tor amplitude [a,b]. Transport it through the supplied isomorphism Q(F) = Q(P), using invariance of Tor amplitude under isomorphisms. No hypothesis on the finite generation of P or of a tensor test module is introduced.",
+   "uses": [
+    "lem-trf-source-bounded-flat-tor-amplitude"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-source-bounded-flat-tor-amplitude",
+  "lem-weil-pbc-finite-quotient-model-residue-projective",
+  "lem-weil-pbc-nilpotent-projective-complex-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 094I, residue identification, followed by the alternative projective-lifting argument of Tag 09AR and bounded-flat Tor amplitude"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded derived complex with finite locally constant cohomology is locally a bounded complex of finite modules, and Tor amplitude over a nilpotent quotient is detected after reduction",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, standard localization and bounded-complex lemmas. No finite constant-model or nilpotent Tor detection theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf or finite-coefficient statement in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect residue model implies finite projective constant complexes for finite adic quotient reductions",
+   "results": "BDeRhamPlus, AdicCompletion approximation and functoriality, IsAdicComplete.henselianRing, IsLocalRing.finite_quotient_iff.",
+   "date": "2026-10-27",
+   "verdict": "Only ring-theoretic completion and quotient results, no derived sheaf lifting theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; the project has the algebraic Tor-amplitude API."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*perfect|perfect.*nilpotent|residue.*torAmplitude",
+   "results": "Only perfect-field/nilpotence statements in Mathlib.LinearAlgebra.JordanChevalley and Mathlib.GroupTheory.IsPerfect. Project search found BoundedFiniteTorPerfect, SiteBoundedConstantModel and the abstract TorAmplitudeResidueIdeal API.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing algebraic bounded-finite-Tor perfectness theorem; neither coefficient-filtration sheaf statement is duplicated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectQuotientModels",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-residue-perfect-finite-quotient-models",
+   "place": "Tor interval of an algebraic local finite-quotient model"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientModelTorAmplitude",
+  "file": "lean/Sheaf/Paper/FiniteQuotientModelTorAmplitude.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_model_torAmplitude",
+  "statement": "theorem finiteQuotient_model_torAmplitude\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale) (a b : ℤ)\n    (hresidue : FinitePerfectModelsOn X d φ M 0 V a b)\n    (n : ℕ) (W : X.Etale) (g : W ⟶ V)\n    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ℤ)\n    (hchart : Nonempty W.left ∨ IsZero P)\n    (e : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)\n          ((toProEt X).obj W) ((completedAdicQuotientReduction X d n).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)\n          ((toProEt X).obj W) ((completedAdicDerivedChange X (φ n)).obj\n            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))) :\n    DerivedCategory.torAmplitudeIn (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) a b\n      (DerivedCategory.Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ccff",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T052607-L-456495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T064458-L-2186441",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

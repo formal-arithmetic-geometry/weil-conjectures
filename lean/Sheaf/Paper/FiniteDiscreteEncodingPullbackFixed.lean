@@ -170,7 +170,10 @@ private theorem normalizedPushforward_action (T U : Scheme.{u}) (f : U ⟶ T)
 
 attribute [local irreducible] canonicalAbelianMap
 
-private theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
+/-- The common underlying direct-image sections have the same constant scalar action.
+Source: normalized constant-section action and coefficient naturality
+(blueprint: lem-pe-finite-discrete-encoding-pullback-fixed). -/
+theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) (M : Internal A U)
     (V : T.ProEtᵒᵖ) (a : ULift.{u + 1} A)
     (m : M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V)) :
@@ -184,7 +187,10 @@ private theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
     ((normalizedPushforward_action A T U f M V a m).trans
       (fixedPushforward_action A T U f eU M V a m).symm)
 
-private def sectionPushforwardIso (T U : Scheme.{u}) (f : U ⟶ T)
+/-- The identity on additive direct-image sections, as an isomorphism of module sheaves.
+Source: normalized constant-section action and coefficient naturality
+(blueprint: lem-pe-finite-discrete-encoding-pullback-fixed). -/
+def sectionPushforwardIso (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) (M : Internal A U) :
     (sectionEncoding A T eT.ringIso ⋙ fixedRestriction A T).obj
       ((CondensedRing.lowerStar (coefficient A) f).obj M) ≅
@@ -206,7 +212,10 @@ private def sectionPushforwardIso (T U : Scheme.{u}) (f : U ⟶ T)
     ext m
     rfl
 
-private def encodingPushforwardNatIso (T U : Scheme.{u}) (f : U ⟶ T)
+/-- The normalized encoding comparison for the complete direct-image functors.
+Source: normalized constant-section action and coefficient naturality
+(blueprint: lem-pe-finite-discrete-encoding-pullback-fixed). -/
+def encodingPushforwardNatIso (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) :
     CondensedRing.lowerStar (coefficient A) f ⋙ eT.ordinary.functor ⋙ eT.fixed.functor ≅
       (eU.ordinary.functor ⋙ eU.fixed.functor) ⋙

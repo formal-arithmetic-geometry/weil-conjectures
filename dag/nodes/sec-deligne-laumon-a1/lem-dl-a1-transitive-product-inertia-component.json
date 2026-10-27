@@ -1,0 +1,217 @@
+{
+ "id": "lem-dl-a1-transitive-product-inertia-component",
+ "kind": "statement",
+ "title": "The inertia component of an equivariant product with purely inseparable residues",
+ "statement": "Let $G$ be a finite group acting by ring automorphisms on a commutative ring $S$. For $H\\leq G$ write $S^H=\\{s:h(s)=s\\text{ for all }h\\in H\\}$ and put $B=S^G$. Let $\\mathfrak p\\subset B$ be prime. Suppose $S\\simeq\\prod_{j=1}^n S_j$, $n\\geq1$, is a product decomposition with corresponding orthogonal idempotents $e_j$, and $G$ permutes the $e_j$ and hence the factors. Suppose each factor has exactly one prime over $\\mathfrak p$, corresponding to $\\mathfrak Q_j\\subset S$, and each field extension $\\kappa(\\mathfrak Q_j)/\\kappa(\\mathfrak p)$ is purely inseparable (in characteristic $p>0$, every element $x$ satisfies $x^{p^m}\\in\\kappa(\\mathfrak p)$ for some $m\\geq0$, or the extension is trivial in characteristic zero). Here $\\kappa(Q)=\\operatorname{Frac}(S/Q)$, and similarly for $B$. Put $I=\\{g:g\\mathfrak Q_1=\\mathfrak Q_1,\\ g|_{\\kappa(\\mathfrak Q_1)}=1\\}$. Then $G$ is transitive on the factors, and $I$ is both the stabilizer of $\\mathfrak Q_1$ and the stabilizer of $e_1$. Projection induces a $B$-algebra isomorphism $B=S^G\\simeq(e_1S)^I$. For any representatives $g_jI$ sending $e_1$ to $e_j$, with $g_1=1$, its inverse sends $a\\in(e_1S)^I$ to $\\sum_jg_j(a)\\in S^G$; this value is independent of the representatives. Moreover projection gives $S^I\\simeq(e_1S)^I\\times((1-e_1)S)^I$. The first factor defines an open and closed subscheme $W\\subset\\operatorname{Spec}S^I$ [def-weil-affine-spectrum], [def-weil-open-immersion] containing $\\mathfrak Q_1\\cap S^I$, and the structural morphism $W\\to\\operatorname{Spec}B$ is an isomorphism. No faithfulness, Noetherian or group-order-invertibility hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BST, lemma-inertia-invariants-etale, final paragraph: decomposition and inertia stabilizers, transitive product invariants, and the first open component."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-dl-a1-finite-invariant-prime-orbits-residues] with $H=G$, $D=S$, $A=B$: all $\\mathfrak Q_j$ contract to $\\mathfrak p$, so for each $j$ there is $g_j$ with $g_j\\mathfrak Q_1=\\mathfrak Q_j$. A prime belonging to factor $j$ contains every $e_k$ for $k\\ne j$ and does not contain $e_j$: their images are orthogonal idempotents summing to one in a domain. Because $G$ permutes the $e_k$, the equality of primes forces $g_j(e_1)=e_j$. Thus the action on factors is transitive. Conversely, any $g$ fixing $e_1$ sends $\\mathfrak Q_1$ to a prime in that factor over $\\mathfrak p$ (it fixes $B$), hence fixes $\\mathfrak Q_1$ by the assumed uniqueness. This also proves equality of the prime and factor stabilizers.",
+   "uses": [
+    "lem-dl-a1-finite-invariant-prime-orbits-residues"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, final paragraph"
+   }
+  },
+  {
+   "text": "Let $D$ denote this common stabilizer. Since $g\\in D$ preserves $\\mathfrak Q_1$, its ring automorphism descends to $S/\\mathfrak Q_1$ and then acts on fractions by $u/v\\mapsto g(u)/g(v)$. It fixes $B$ pointwise, so this is a $\\kappa(\\mathfrak p)$-automorphism of $L=\\kappa(\\mathfrak Q_1)$. In characteristic $p>0$, for $x\\in L$ choose $m$ with $x^{p^m}\\in\\kappa(\\mathfrak p)$. Then $(g(x)-x)^{p^m}=g(x^{p^m})-x^{p^m}=0$, so $g(x)=x$ since $L$ is a field. In characteristic zero the extension is trivial. Thus $D\\subseteq I$, and $I\\subseteq D$ holds by definition, proving $I=D$. The elements sending $e_1$ to $e_j$ are exactly the left coset $g_jI$: $g(e_1)=g_j(e_1)$ is equivalent to $g_j^{-1}g\\in I$. Choose $g_1=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, final paragraph"
+   }
+  },
+  {
+   "text": "For $a\\in(e_1S)^I$ put $T(a)=\\sum_jg_j(a)$. Replacing $g_j$ by $g_ji$ with $i\\in I$ changes no summand. For $h\\in G$, write $hg_j=g_{h\\cdot j}i_j$ with $i_j\\in I$; the preceding coset description gives this equality. Hence $hT(a)=\\sum_jg_{h\\cdot j}(a)=T(a)$, because $j\\mapsto h\\cdot j$ is a permutation. Thus $T(a)\\in B$. Each $g_j(a)$ belongs to $e_jS$, so orthogonality gives $e_1T(a)=a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, final paragraph"
+   }
+  },
+  {
+   "text": "Projection $P:B\\to(e_1S)^I$, $b\\mapsto e_1b$, is well defined because $I$ fixes both $e_1$ and $b$. It preserves addition and multiplication and sends $1$ to the identity $e_1$ of $e_1S$. For $b\\in B$, $T(P(b))=\\sum_jg_j(e_1b)=\\sum_je_jb=b$, while the preceding step gives $P(T(a))=a$. Thus $P$ is a ring isomorphism with inverse $T$. Give $(e_1S)^I$ its structural $B$-action $b\\mapsto e_1b$; then $P$ and its inverse are $B$-linear, proving the claimed $B$-algebra isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, final paragraph"
+   }
+  },
+  {
+   "text": "Since $I$ fixes $e_1$ and $1-e_1$, the map $s\\mapsto(e_1s,(1-e_1)s)$ restricts to $S^I\\to(e_1S)^I\\times((1-e_1)S)^I$. Its inverse is $(a,c)\\mapsto a+c$: this sum is $I$-fixed, its projections are $a,c$, and $e_1s+(1-e_1)s=s$. Orthogonality proves multiplication is preserved, and the identities correspond. This proves the stated product decomposition, with the first projection exactly multiplication by $e_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, final paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-affine-coproduct-spectrum] to the two rings $(e_1S)^I$ and $((1-e_1)S)^I$, using the preceding ring isomorphism. By [lem-weil-pbc-scheme-coproduct-family] its first coprojection identifies $W=\\operatorname{Spec}((e_1S)^I)$ with an open and closed subscheme of $\\operatorname{Spec}S^I$. Its map is the spectrum of the first projection. More explicitly, the image is $D(e_1)$: in the product the idempotent $e_1$ is $(1,0)$, so a prime from the first spectrum omits it and a prime from the second contains it. Since $e_1\\in S^I$ and $e_1\\notin\\mathfrak Q_1$, this open component contains $\\mathfrak Q_1\\cap S^I$. The structural map from $W$ is $\\operatorname{Spec}P$, by composition of the inclusion $B\\to S^I$ with this projection. By functoriality in [def-weil-affine-spectrum], $\\operatorname{Spec}(P^{-1})$ is its inverse. This gives the asserted isomorphism over $B$.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-dl-a1-finite-invariant-prime-orbits-residues",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BST, lemma-inertia-invariants-etale, final paragraph; explicit coset and inverse calculations expanding the source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite group permuting ring factors transitively has invariant ring isomorphic to invariants of one factor under its stabilizer",
+   "results": "[leanfinder] OK 8 hit(s); Ideal.Quotient.stabilizerHom, instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring, IsFractionRing.stabilizerHom, Ideal.Quotient.stabilizerHom_apply, instMulSemiringActionQuotientSubgroupSubtypeMemSubalgebraSubalgebra, Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux, Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, FixedPoints.toAlgHomEquiv. Hits concern stabilizer actions, orbit-stabilizer bijections, fields or module coinvariants; none gives this ring isomorphism and the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group action on a product of rings with purely inseparable fibre residue extensions inertia is the factor stabilizer and its invariant spectrum has a component isomorphic to the base",
+   "results": "[leanfinder] OK 8 hit(s); arithFrobAt, IsArithFrobAt.exists_of_isInvariant, Ideal.inertiaDeg_eq_of_isGaloisGroup, IsArithFrobAt.arithFrobAt, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, IsArithFrobAt.mul_inv_mem_inertia. Hits concern stabilizer actions, orbit-stabilizer bijections, fields or module coinvariants; none gives this ring isomorphism and the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FixedPoints.subring, MulAction.stabilizer",
+   "results": "[loogle] OK 0 hit(s); . Hits concern stabilizer actions, orbit-stabilizer bijections, fields or module coinvariants; none gives this ring isomorphism and the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(fixedPoints|invariant).*(transitive|stabilizer|[Pp]rod)|(transitive|stabilizer).*(fixedPoints|invariant)",
+   "results": "[grep] OK 25 hit(s); Mathlib/Dynamics/Ergodic/Action/Basic.lean, Mathlib/Dynamics/Transitive.lean, Mathlib/Dynamics/Transitive.lean, Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean, Mathlib/NumberTheory/ModularForms/Basic.lean, Mathlib/NumberTheory/ModularForms/Basic.lean, Mathlib/Topology/Algebra/InfiniteSum/Defs.lean, Mathlib/LinearAlgebra/Matrix/Transvection.lean. Hits concern stabilizer actions, orbit-stabilizer bijections, fields or module coinvariants; none gives this ring isomorphism and the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection onto one factor identifies the fixed ring of a transitive group action on a product with the stabilizer fixed subring",
+   "results": "[leansearch] OK 8 hit(s); FixedPoints.subalgebra, MulAction.orbitProdStabilizerEquivGroup, MulAction.stabilizer, FixedPoints.subring, SubMulAction.ofFixingSubgroup_insert_map_apply, SubMulAction.fixingSubgroup_of_insert, IsGalois.of_fixed_field, AddAction.fixingAddSubgroup_le_stabilizer. Hits concern stabilizer actions, orbit-stabilizer bijections, fields or module coinvariants; none gives this ring isomorphism and the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on a product of commutative rings with one prime over a fixed base prime in each factor and purely inseparable residue extensions has inertia fixed component isomorphic to the invariant base",
+   "results": "8 hits: Ideal.inertiaDegIn_mul_inertiaDegIn, arithFrobAt, IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDegIn_eq_inertiaDeg.  Read returned signatures: prime ramification degrees, field fixed-subring automorphisms, subgroup actions, product projections or invariant-subring stability; none states the transitive product fixed-ring isomorphism together with the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(fixedPoints|invariant).*(transitive|stabilizer|[Pp]rod)|(transitive|stabilizer).*(fixedPoints|invariant)",
+   "results": "25 hits: Mathlib/Dynamics/Ergodic/Action/Basic.lean, Mathlib/Dynamics/Transitive.lean, Mathlib/Dynamics/Transitive.lean, Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean, Mathlib/NumberTheory/ModularForms/Basic.lean, Mathlib/NumberTheory/ModularForms/Basic.lean, Mathlib/Topology/Algebra/InfiniteSum/Defs.lean, Mathlib/LinearAlgebra/Matrix/Transvection.lean.  Read returned signatures: prime ramification degrees, field fixed-subring automorphisms, subgroup actions, product projections or invariant-subring stability; none states the transitive product fixed-ring isomorphism together with the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection to one factor of a transitive product of rings identifies the invariant ring with the stabilizer invariant subring",
+   "results": "8 hits: Ideal.map_fst_prod, Subring.range_fst, LinearPMap.fst, NonUnitalSubring.prod_top, RingHom.fst, RingHom.coe_fst, NonUnitalRingHom.coe_fst, IsInvariantSubring.mk.  Read returned signatures: prime ramification degrees, field fixed-subring automorphisms, subgroup actions, product projections or invariant-subring stability; none states the transitive product fixed-ring isomorphism together with the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FixedPoints.subring, MulAction.stabilizer",
+   "results": "0 hits: .  Read returned signatures: prime ramification degrees, field fixed-subring automorphisms, subgroup actions, product projections or invariant-subring stability; none states the transitive product fixed-ring isomorphism together with the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed subring of a transitive permutation action on a product of rings is isomorphic to the fixed subring of one factor under its stabilizer",
+   "results": "8 hits: SubMulAction.fixingSubgroupInsertEquiv, DomMulAct.stabilizerMulEquiv, SubMulAction.ofFixingSubgroup_insert_map, instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring, SubMulAction.fixingSubgroupEquivFixingSubgroup, IsGaloisGroup.map_mulEquivAlgEquiv_fixingSubgroup, SubAddAction.fixingAddSubgroupInsertEquiv, FixedPoints.toAlgAut_bijective.  Read returned signatures: prime ramification degrees, field fixed-subring automorphisms, subgroup actions, product projections or invariant-subring stability; none states the transitive product fixed-ring isomorphism together with the inertia component.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-finite-group-inertia-invariants-etale",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph of rem-dl-a1-conventions, equivalence between lisse extension across infinity and trivial inertia, via lem-dl-a1-lisse-extension-inertia and lem-dl-a1-weil-kernel-inertia; finite-quotient argument of Stacks 0BTD. Specific argument: Tag 0BST, lemma-inertia-invariants-etale, final paragraph: decomposition and inertia stabilizers, transitive product invariants, and the first open component.",
+   "via": [
+    "lem-dl-a1-finite-group-inertia-invariants-etale",
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-dl-a1-transitive-product-inertia-component",
+  "worker": "stage1",
+  "summary": "Repaired the return of head 4a3c83b1b3c against the current unsplit DAG, preserving its statement and all existing searches. Reread every cited statement and Tag 0BST. Made the residue-field action on fractions explicit in step 2 and identified the open component as D(e_1) in step 6. All four citation excerpts remain valid; no new nodes or statement changes.",
+  "blueprint": "Expands the finite-quotient inertia step underlying the equivalence between extension across infinity and trivial inertia in rem-dl-a1-conventions, through the existing chain recorded in blueprint.from; precisely the final paragraph of Tag 0BST.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-4718fd422",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-4718fd422 (reviewer sub-agent of L); spot-checked: I read the whole delivery; review.md has the checks for every step. Shape: an ordinary stage-1 split with no re-split note and no new nodes. The live and side-live copies are still unsplit with no proof. Against the live node, only the proof, proof_deps, proof_origin, split_report, status and mathlib_searches fields differ, so the statement, stmt_deps, source, unit and created fields are unchanged. proof_deps equal the union of the step uses. There is no SGA citation (the only hits are Mathlib names like IsGaloisGroup). This re-delivers 4a3c83b1b3ce, which was PASSed and then refused at landing because the node had not been promoted. The diff against that head is added wording in step 2 (how g acts on the fractions of S/Q_1) and step 6 (the image is D(e_1), via (1,0)). Both additions are correct. Source: Stacks pione.tex Tag 0BST, final paragraph. It derives R^I=A_1^I x A'^I, I=D, G as the disjoint union of cosets sigma_i I, and R^G=A_1^I. The item states exactly this, with the explicit inverse sum_j g_j(a) and the clopen component W=Spec B that parent step 4 cites. Step 1: the orbit clause of lem-dl-a1-finite-invariant-prime-orbits-residues with q=Q_1; the idempotent argument gives g_j(e_1)=e_j and equal prime and factor stabilizers. Step 2: in characteristic p, (gx-x)^{p^m}=0, so I=D; the coset description is correct. Step 3: T(a) does not depend on the representatives and is G-invariant because h g_j lies in g_{h.j}I; also e_1 T(a)=a. Step 4: P is a unital B-linear ring map inverse to T. Step 5: the S^I product holds, with the zero ring when n=1. Step 6: the coproduct-spectrum and coproduct-family lemmas give a clopen W containing Q_1 cap S^I, and Spec P is inverted by functoriality. Tested: k x k with the Z/2 swap, n=1 with trivial action, nonfaithful actions, and characteristic dividing |G|. Duplicate search found no duplicate (Q157 is the sibling that constructs the product). No tool_uses. No changes. Maintainer note: this is another round of the promotion and landing refusal loop."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TransitiveProductInertiaComponent",
+  "declaration": "RingTheory.transitive_product_inertia_component",
+  "file": "lean/Sheaf/RingTheory/TransitiveProductInertiaComponent.lean",
+  "statement": "theorem transitive_product_inertia_component (G : Type u) [Group G] [Finite G] (S : Type v) [CommRing S] [MulSemiringAction G S] (J : Type w) [Fintype J] (j₀ : J) (e : J → S) (he : CompleteOrthogonalIdempotents e) (hperm : ∀ (g : G) (j : J), ∃ k : J, g • e j = e k) (p : PrimeSpectrum (FixedPoints.subring S G)) (Q : J → PrimeSpectrum S) (hQ : ∀ j : J, p.asIdeal = (Q j).asIdeal.comap (FixedPoints.subring S G).subtype) (hfactor : ∀ j : J, e j ∉ (Q j).asIdeal) (hunique : ∀ (j : J) (q : PrimeSpectrum S), q.asIdeal.comap (FixedPoints.subring S G).subtype = p.asIdeal → e j ∉ q.asIdeal → q = Q j) (hpure : ∀ j : J, (Ideal.ResidueField.map p.asIdeal (Q j).asIdeal (FixedPoints.subring S G).subtype (hQ j)).IsPurelyInseparable) : (∀ j k : J, ∃ g : G, g • e j = e k) ∧ (Q j₀).asIdeal.inertia G = MulAction.stabilizer G (Q j₀).asIdeal ∧ (Q j₀).asIdeal.inertia G = MulAction.stabilizer G (e j₀) ∧ ∃ (eI : FixedPoints.subring S ((Q j₀).asIdeal.inertia G)) (heI : IsIdempotentElem eI), (eI : S) = e j₀ ∧ ∃ (aC : Algebra (FixedPoints.subring S G) heI.Corner) (P : @AlgEquiv (FixedPoints.subring S G) (FixedPoints.subring S G) heI.Corner _ _ _ _ aC) (D : FixedPoints.subring S ((Q j₀).asIdeal.inertia G) ≃+* heI.Corner × heI.one_sub.Corner) (bI : FixedPoints.subring S G →+* FixedPoints.subring S ((Q j₀).asIdeal.inertia G)), (∀ b : FixedPoints.subring S G, ((P b).val : S) = e j₀ * (b : S)) ∧ (∀ r : J → G, r j₀ = 1 → (∀ j : J, r j • e j₀ = e j) → ∀ a : heI.Corner, (P.symm a : S) = ∑ j : J, r j • (a.val : S)) ∧ (∀ r r' : J → G, r j₀ = 1 → (∀ j : J, r j • e j₀ = e j) → r' j₀ = 1 → (∀ j : J, r' j • e j₀ = e j) → ∀ a : heI.Corner, (∑ j : J, r j • (a.val : S)) = ∑ j : J, r' j • (a.val : S)) ∧ (∀ s : FixedPoints.subring S ((Q j₀).asIdeal.inertia G), (((D s).1).val : S) = e j₀ * (s : S) ∧ (((D s).2).val : S) = (1 - e j₀) * (s : S)) ∧ (∀ b : FixedPoints.subring S G, (bI b : S) = (b : S)) ∧ IsOpenImmersion (Spec.map (CommRingCat.ofHom ((RingHom.fst heI.Corner heI.one_sub.Corner).comp D.toRingHom))) ∧ IsClosed (Set.range (Spec.map (CommRingCat.ofHom ((RingHom.fst heI.Corner heI.one_sub.Corner).comp D.toRingHom)))) ∧ PrimeSpectrum.comap (FixedPoints.subring S ((Q j₀).asIdeal.inertia G)).subtype (Q j₀) ∈ Set.range (Spec.map (CommRingCat.ofHom ((RingHom.fst heI.Corner heI.one_sub.Corner).comp D.toRingHom))) ∧ Spec.map (CommRingCat.ofHom ((RingHom.fst heI.Corner heI.one_sub.Corner).comp D.toRingHom)) ≫ Spec.map (CommRingCat.ofHom bI) = Spec.map (CommRingCat.ofHom P.toRingHom) ∧ IsIso (Spec.map (CommRingCat.ofHom P.toRingHom))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The finite nonempty product is encoded by CompleteOrthogonalIdempotents indexed by a Fintype J with distinguished j₀. The first and complementary inertia-fixed factors are Mathlib corners of the inertia-fixed subring, which are exactly the fixed elements supported on the corresponding idempotents. The base-algebra structure and maps are characterized by their projection and inclusion formulas; no auxiliary choice of action or map is assumed. The node statement and dependencies are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9ff244b7",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Node changed only in lean; statement verbatim; no other delivery or landing of this item. Hypotheses match the node with nothing extra: CompleteOrthogonalIdempotents with j0 (n>=1), hperm, hQ/hfactor/hunique, hpure via RingHom.IsPurelyInseparable of Ideal.ResidueField.map (char 0 = trivial), Ideal.inertia = node's I. All 10 conclusions match and are true: transitivity, inertia = prime and e1 stabilizers, Corner of S^I = (e1S)^I, P B-AlgEquiv pinned to projection (aC fixed by commutes), inverse sum for every r and independent of r, D pinned by both projections, clopen W via IsOpenImmersion + closed range, contains Q1 cap S^I, Spec.map(fst∘D) ≫ Spec.map bI = Spec.map P and IsIso. Matches Stacks 0BST final paragraph. Edge cases n=1, S=0, char 0, char dividing |G|, non-faithful, independent universes OK. No duplicate notion; sibling TransitiveDomainProductInvariants is a different node. The two plain imports are proof_dep mathlib_match modules required by brief §3, not H9. Docstrings carry source, blueprint id and 6-step plan. Not recompiled (no change). No fixes."
+ }
+}

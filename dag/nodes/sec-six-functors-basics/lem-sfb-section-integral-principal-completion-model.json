@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-section-integral-principal-completion-model",
+ "kind": "statement",
+ "title": "The integral section presentation and principal quotient model have the same complete locus",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "The integral section presentation and principal quotient model have the same complete locus. The precise assertion, including all universes and canonical-unit conditions, is:\n\ntheorem section_integral_principal_completion_model\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})\n    (T : Presentation.{u + 2, u + 1, u + 1}\n      (ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X))\n    (hT : IsSectionIntegral l E X T) :\n    ∃ (a : (SheafOfModules.unit\n        (SheafOfModules.derivedChangeRingIndependentCoefficients.{u + 1, u + 1, u}\n        (Scheme.ProEt.topology X)\n        (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X))).sections)\n      (_ha : Mono (CategoryTheory.globalSectionMultiplication.{u + 1, u, u + 1}\n        (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X) a))\n      (F : PrincipalQuotientCompletion.Model.{u + 1, u, u + 1, u + 1}\n        (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X) a),\n      ∀ K : DerivedCategory\n          (ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X),\n        IsIso (T.unit.app K) ↔ IsIso (F.unit.app K)\n\nDefinitions and statement dependencies: [def-sfb-strict-completion-restriction-data] [def-pur-principal-quotient-completion-model].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Lemma 3.4.12 and Proposition 3.5.1; Stacks Tags 06YS, 06YT, 0941. The normalized principal quotient completion identification in step 2 of lem-sfb-supported-image-derived-completeness."
+ },
+ "stmt_deps": [
+  "def-sfb-strict-completion-restriction-data",
+  "def-pur-principal-quotient-completion-model"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the canonical scalar-cone datum of IsSectionIntegral. Its scalar is multiplication by the pulled-back uniformizer on sections. Apply the coefficient resolution and the exact section-action equivalence to obtain a monic coefficient multiplication and identify each positive-power quotient with the actual finite quotient ring sheaf, including quotient maps and consecutive transitions.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct a universal principal quotient completion Model by nonempty_model. The SectionReductionModels in IsSectionIntegral identify on every K-flat representative its levels with the actual quotient tensor levels. The unit and step equations make one compatible strict augmented tower comparison. The quotient coefficient identification in the preceding step identifies this with the universal Model tower.",
+   "uses": [
+    "lem-pur-principal-quotient-completion-exists",
+    "lem-sfb-strict-section-principal-quotient-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Products of the level comparisons identify the two Roos coordinates and their augmentations, with zero shifted coordinate. Exact countable products and the Roos cone calculation make the localized comparison invertible. Compare the presentation unit and the Model unit through their computation equations; cancel the invertible comparisons. K-flat resolutions and naturality along their representative isomorphisms extend the invertibility equivalence to every derived object.",
+   "uses": [
+    "lem-pe-roos-cone-calculus",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-derived-nakayama-resolution",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-pur-principal-quotient-completion-exists",
+  "lem-sfb-strict-section-principal-quotient-models",
+  "lem-pe-roos-cone-calculus",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Lemma 3.4.12 and Proposition 3.5.1, specialized to the normalized integral section-coefficient presentation; Stacks Tags 06YS, 06YT and 0941 for its quotient and Roos models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kernels and images of derived complete modules remain derived complete",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.toIsPrecomplete\", \"IsPrecomplete.top\", \"AdicCompletion.map_exact\", \"IsPrecomplete\", \"IsAdicComplete\", \"IsAdicComplete.toIsHausdorff\", \"AdicCompletion.instIsHausdorff\", \"Hausdorffification.instIsHausdorff\"]}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedComplete",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsDerivedComplete'\", \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|complete_heart_kernels",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageDerivedCompleteness",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-supported-image-derived-completeness",
+   "place": "step 2, normalized principal-quotient completion identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionIntegralPrincipalCompletionModel",
+  "file": "lean/Sheaf/Paper/SectionIntegralPrincipalCompletionModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictCompletionRestriction.section_integral_principal_completion_model",
+  "statement": "theorem section_integral_principal_completion_model\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})\n    (T : Presentation.{u + 2, u + 1, u + 1}\n      (ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X))\n    (hT : IsSectionIntegral l E X T) :\n    ∃ (a : (SheafOfModules.unit\n        (SheafOfModules.derivedChangeRingIndependentCoefficients.{u + 1, u + 1, u}\n        (Scheme.ProEt.topology X)\n        (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X))).sections)\n      (_ha : Mono (CategoryTheory.globalSectionMultiplication.{u + 1, u, u + 1}\n        (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X) a))\n      (F : PrincipalQuotientCompletion.Model.{u + 1, u, u + 1, u + 1}\n        (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X) a),\n      ∀ K : DerivedCategory\n          (ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X),\n        IsIso (T.unit.app K) ↔ IsIso (F.unit.app K)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T094926-L-3274518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T094926-L-3274518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

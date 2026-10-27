@@ -1,0 +1,423 @@
+{
+ "id": "lem-sfb-weil-restriction-geometric-properties",
+ "kind": "statement",
+ "title": "Geometric properties preserved by representable Weil restriction",
+ "statement": "Let $p:S'\\to S$ be a finite locally free morphism of schemes [def-pc-scheme, def-pc-finite-locally-free], and let $Z\\to S'$ be a scheme. Suppose an $S$-scheme $W$ represents $X\\mapsto\\operatorname{Hom}_{S'}(X\\times_SS',Z)$ by natural bijections [def-pc-fibre-product]. Each of the following implications holds independently: if $Z\\to S'$ is separated, then $W\\to S$ is separated; if it is locally of finite type, then $W\\to S$ is locally of finite type; if it is smooth, then $W\\to S$ is smooth [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Separated means the diagonal is a closed immersion [def-weil-closed-immersion]. If $S$ is locally Noetherian [pqf-def-locnoeth] and $Z\\to S'$ is quasi-compact, then $W\\to S$ is quasi-compact. Quasi-compact means the inverse image of each affine open in the target has a finite subcover from any open cover.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.6 Proposition 5, printed pp.195–198 (PDF pp.201–204), properties (a),(b),(c),(h): (a) with locally Noetherian base, the other three without additional hypotheses. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "The representing bijections give an evaluation $W\\times_SS'\\to Z$. For every $B\\to S$, their restriction to $B$-schemes identifies $W\\times_SB$ with the restriction of $Z\\times_SB$ along $S'\\times_SB\\to B$: both sides assign to $T/B$ the same set $\\operatorname{Hom}_{S'}(T\\times_SS',Z)$. Likewise maps to a fibre product correspond to pairs with equal composites, so restriction preserves fibre products and diagonals. These are identities of the specified functors, not extra representability assumptions. We may work over affine opens of $S$ on which $p$ has constant rank and its section algebra has a finite basis; the rank and basis results cited apply without a Noetherian hypothesis.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-a1-finite-locally-free-principal-basis-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 after Lemma 1 and Proposition 5: base change, fibre products; Stacks Tags 04MH and 02K9 for affine basis charts"
+   }
+  },
+  {
+   "text": "Assume $Z/S'$ separated. Set $B=W\\times_SW$, $E=B\\times_SS'$, and let $D\\hookrightarrow E$ be the equalizer of the two evaluation maps to $Z$, i.e. the pullback of $\\Delta_{Z/S'}$. It is closed: on affine charts a pullback of a quotient ring map $A\\to A/I$ is $A'\\to A'/IA'$, still surjective. By the degree theorem $B=\\coprod_dB_d$ with $B_d$ open and closed and $E_d=E\\times_BB_d\\to B_d$ finite locally free of degree $d$. Apply the containment-locus theorem to $f=p_B:E\\to B$ and the $B$-scheme $T=B_d$ (so $X_T=E_d$), taking as its finite locally free closed subscheme all of $E_d\\subseteq X_T$ (degree $d$ over $B_d$) and as its closed immersion $D\\cap E_d\\hookrightarrow E_d$ (letters of the theorem renamed to avoid the $Z,W$ of the item): it gives a closed $C_d\\hookrightarrow B_d$, and $C=\\coprod_dC_d$ is closed in $B$. A $B$-scheme $T$ splits as $\\coprod_dT\\times_BB_d$, so $T\\to B$ factors through $C$ exactly when $E_T\\to E$ factors through $D$, i.e. when the two evaluation maps on $E_T$ agree; the representing bijections say exactly that the two maps $T\\to W$ agree. Thus $C\\hookrightarrow B$ represents the diagonal $W\\to W\\times_SW$, which is therefore a closed immersion, proving separatedness.",
+   "uses": [
+    "lem-pc-hilb-containment-locus",
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(b), using Proposition 2(ii)"
+   }
+  },
+  {
+   "text": "Work over $S=\\operatorname{Spec}R$, $S'=\\operatorname{Spec}B$ with a basis of rank $d$. For any affine $S'$-scheme $U=\\operatorname{Spec}C$ choose a $B$-presentation of $C$. The existing affine-chart node supplies an affine restriction $H_U$. The coefficient-algebra node gives its coordinate algebra $D$: its natural bijection on affine tests identifies $\\operatorname{Spec}D$ with $H_U$, and these identifications extend to scheme tests by gluing morphisms on affine covers. If $C$ has finitely many algebra generators, choose $I$ finite: $D$ is a quotient of a polynomial algebra on $d|I|$ variables, so is finitely generated, without any finiteness requirement on the relation ideal. If $C$ is finitely presented, choose both $I,K$ finite: $D$ has $d|I|$ generators and at most $d|K|$ specified relations, hence is finitely presented. These deductions are exactly the definitions of finite generation and presentation.",
+   "uses": [
+    "lem-sfb-finite-free-algebra-map-coordinates",
+    "def-weil-finite-type-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-affine-weil-restriction-charts",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(c),(d), affine case; Stacks 05Y6 coefficient equations"
+   }
+  },
+  {
+   "text": "Let $(U_i)$ be an affine open cover of $Z$, and form $A=\\coprod_iU_i\\to Z$. This map is etale and surjective: on each open summand it is an open immersion. For each finite subset $J$ of indices put $A_J=\\coprod_{i\\in J}U_i$, an affine scheme. The preceding step gives an affine restriction $H_J$. Its map to $W$ is etale: over a scheme $T\\to W$ its fibre is the section space of the etale map $(T\\times_SS')\\times_Z A_J\\to T\\times_SS'$, so the etale-section-space theorem applies to the finite locally free family $T\\times_SS'\\to T$. The family $(H_J\\to W)_J$ is jointly surjective. Indeed apply the local-section theorem to $A\\times_Z(W\\times_SS')\\to W\\times_SS'$ to obtain an etale surjection $V\\to W$ and a lift $V\\times_SS'\\to A$. Restrict $V$ to affine opens. Its finite preimage is affine and quasi-compact, so the disjoint open summands of $A$ meet its image in only finitely many indices. The lift therefore factors through some $A_J$, yielding $V\\to H_J\\to W$. Thus the images of the $H_J$ cover $W$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-etale-sections-finite-locally-free",
+    "lem-sfb-finite-etale-cover-local-sections",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(c),(d), affine reduction made precise by Stacks 05XR and 05XQ"
+   }
+  },
+  {
+   "text": "Suppose $Z\\to S'$ is locally of finite type. Choose the affine opens $U_i$ in step 4 with finitely generated $B$-algebras of sections. Each finite union $A_J$ has coordinate ring a finite product of these algebras. This product is finitely generated over $B$: adjoin the finitely many coordinate idempotents and the finitely many generators in their respective factors. Step 3 makes $H_J\\to S$ locally of finite type. Since the $H_J\\to W$ are a jointly surjective etale family, they are flat and locally finitely presented, and local finite type descends along their coproduct by the cited source-descent theorem. Hence $W\\to S$ is locally of finite type. No separatedness, quasi-compactness, or Noetherian assumption was used.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-a1-lft-flat-lfp-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(c); Stacks 02KL (local finite type through flat lfp surjective source maps)"
+   }
+  },
+  {
+   "text": "For later use the same affine atlas also proves that $W/S$ is locally of finite presentation whenever $Z/S'$ is. For each $U_i$, the affine-opens theorem makes its coordinate algebra finitely presented over $B$. Their finite coproduct $A_J/S'$ is locally finitely presented by the finite-coproduct theorem, and, being affine over the affine $S'$, its coordinate algebra is finitely presented by the affine-opens theorem again. The finite-variable finite-relation calculation in step 3 makes each $H_J/S$ locally finitely presented. Apply local finite presentation's fppf-source locality to the jointly surjective etale atlas in step 4.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+    "lem-trf-lfp-fppf-source-locality",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(d); Stacks 01TQ and 036N"
+   }
+  },
+  {
+   "text": "Suppose $Z/S'$ is smooth. It is locally finitely presented, so step 6 gives local finite presentation of $W/S$. Given an affine first-order thickening $T_0\\hookrightarrow T$ over $S$ and $T_0\\to W$, the representing bijection gives $T_0\\times_SS'\\to Z$. The schemes $T\\times_SS'$ and $T_0\\times_SS'$ are affine because they are finite over affine schemes. The induced immersion is first order: locally it is the quotient by $IB$ for a square-zero ideal $I$, and $(IB)^2=0$. Formal smoothness of $Z/S'$ supplies a lift $T\\times_SS'\\to Z$. The representing bijection gives the required lift $T\\to W$, whose restriction is the original map by naturality. Thus $W/S$ is formally smooth and locally finitely presented, hence smooth in the cited definition.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-formally-smooth",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(h); Stacks 02H0 and 02H6"
+   }
+  },
+  {
+   "text": "We now prove quasi-compactness only. The following radicial case will also be used for an intermediate base: let $p:E\\to B$ be finite locally free and a universal homeomorphism, and let $Y/E$ be quasi-compact. The restriction $R$ exists as an algebraic space by the cited existence theorem. Over an affine basis chart of $B$, $E$ is affine and $Y$ has a finite affine open cover $(U_i)$. Each $R(U_i)$ is affine by step 3 (no finiteness condition on its equations). It is an open subspace of $R$: over any test $T\\to R$, the condition that the evaluation on $E_T$ lies in $U_i$ is exactly the open containment locus. These finitely many open subspaces cover $R$. Indeed a point can be tested after a field extension, and $E\\times_B\\operatorname{Spec}K$ has exactly one underlying point; its map to $Y$ factors through an affine open containing its image. Thus $R$ has a finite affine etale cover on every affine basis chart of $B$. For an arbitrary affine scheme $V\\to B$, the base change $E_V\\to V$ is again finite locally free and a universal homeomorphism, $Y_V/E_V$ is quasi-compact, and $R\\times_BV$ is the restriction of $Y_V$ along $E_V\\to V$ (step 1); $V$ is covered by finitely many affine basis charts, so $R\\times_BV$ is covered by finitely many open subspaces with finite affine etale covers and is quasi-compact. By the affine-test theorem $R\\to B$ is quasi-compact. This argument also applies to $B$ empty.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "lem-sfb-finite-locally-free-weil-restriction",
+    "lem-sfb-finite-free-universal-containment-loci",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(a), radicial case; Stacks 05YF for intermediate space existence"
+   }
+  },
+  {
+   "text": "If $E\\to B$ is finite etale and $Y\\to E$ is quasi-compact (a scheme or one of the open-affine-covered spaces just constructed), its restriction is quasi-compact. Restrict to affine constant-degree pieces of $B$ and trivialize the finite etale morphism etale-locally by the cited splitting theorem. Over each trivializing scheme $V$, the restriction is the finite fibre product over $V$ of the pullbacks $Y_i$ to the copies of $V$. Quasi-compactness of each $Y_i\\to V$ follows from base-change stability. Over an affine open in $V$, choose finite affine charts of each $Y_i$; products of those charts over this affine base are affine, and finitely many suffice to cover the product. Thus the product is quasi-compact. To descend, for each affine open in $B$ take finitely many affine opens of the etale trivializing family whose open images cover it, and form their finite coproduct $V_0$. Then $V_0\\to B$ is flat, surjective and quasi-compact (source quasi-compact and target affine), so fpqc quasi-compactness descent applies when the restriction is a scheme, in particular to the given $W$. The empty product is $V$ and is quasi-compact over itself.",
+   "uses": [
+    "lem-fet-locally-trivial",
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-pc-quasi-compact-base-change",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-finite-coproduct-lfp-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(a), finite etale case and products"
+   }
+  },
+  {
+   "text": "Assume $S$ locally Noetherian and $Z/S'$ quasi-compact. Work over an affine open $S_0=\\operatorname{Spec}A$ with $A$ Noetherian, from a covering of $S$ as in the definition of locally Noetherian; its underlying space is Noetherian, and every closed subscheme of $S_0$ is the spectrum of a Noetherian quotient of $A$. On each integral reduced closed subscheme $C\\subseteq S$, work affine-locally and apply the generic-factorization node to $S'\\times_SC\\to C$. On a nonempty open $U\\subseteq C$ this gives $S'_U\\xrightarrow{u}T\\xrightarrow{e}U$, with $u$ finite locally free and a universal homeomorphism, and $e$ finite etale. First restrict $Z_U$ along $u$, obtaining the quasi-compact algebraic space of step 8. Restrict that space along $e$. On functors this composite is the original restriction, since for every $A/U$ the evaluation on $A\\times_UT$ of the first restriction is $\\operatorname{Hom}_{S'_U}(A\\times_US'_U,Z_U)$. Thus its representing space is $W_U$, which is a scheme by the hypothesis and base change in step 1. Step 9 applies to $W_U$ and makes it quasi-compact over $U$. The rank-zero case is included: the restriction of the empty family is $U$.",
+   "uses": [
+    "lem-sfb-generic-finite-free-etale-radicial-factorization",
+    "lem-sfb-finite-locally-free-weil-restriction",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(a), generic etale/radicial factorization and transitivity"
+   }
+  },
+  {
+   "text": "Finish by Noetherian induction on closed subsets $C$ of the affine base. Give each $C$ its reduced scheme structure; this does not change the space of $W_C$, since base change of a quotient by a nil ideal is again a quotient by a nil ideal. The empty subset is the base case. A Noetherian closed set has finitely many irreducible components; discard their pairwise intersections and choose a nonempty affine open in each remaining integral component to which step 10 applies. Their union $U\\subseteq C$ is open, meets every generic point, and $W_U$ is a finite union of quasi-compact spaces after choosing quasi-compact opens as supplied there. The complement $C\\setminus U$ is a proper closed subset, so the induction hypothesis makes $W_{C\\setminus U}$ quasi-compact. Its underlying space together with $|W_U|$ covers $|W_C|$. A finite union of quasi-compact subspaces is quasi-compact: restrict any open cover to each and take the union of the finite subcovers. This proves quasi-compactness of $W_C$. For $C=S_0$ the scheme $W_{S_0}$ is quasi-compact and $S_0$ is affine, hence quasi-separated, so $W_{S_0}\\to S_0$ is quasi-compact by the permanence theorem. These $S_0$ cover $S$, so $W\\to S$ is quasi-compact by the open-covering criterion of the affine-test theorem, which for this representable morphism is quasi-compactness in the scheme sense.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.6 Proposition 5(a), final Noetherian induction; elementary finite-union argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-a1-finite-locally-free-principal-basis-cover",
+  "lem-pc-hilb-containment-locus",
+  "def-weil-closed-immersion",
+  "lem-sfb-finite-free-algebra-map-coordinates",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-affine-weil-restriction-charts",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-etale-sections-finite-locally-free",
+  "lem-sfb-finite-etale-cover-local-sections",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-etale-morphism",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+  "lem-trf-lfp-fppf-source-locality",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-formally-smooth",
+  "def-weil-universal-homeomorphism",
+  "lem-sfb-finite-locally-free-weil-restriction",
+  "lem-sfb-finite-free-universal-containment-loci",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-pc-quasi-compact-base-change",
+  "lem-fet-locally-trivial",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-generic-finite-free-etale-radicial-factorization",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.6 Proposition 5(a),(b),(c),(h), with Proposition 2 and the Stacks 05XR/05XQ affine-atlas completion of the affine reduction; local BLR PDF WANTED, primary scan read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Representable Weil restriction along a finite locally free morphism preserves smoothness separatedness and locally finite type and over a locally Noetherian base preserves quasi compactness",
+   "results": "{\"t\": \"2026-10-24T07:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"Representable Weil restriction along a finite locally free morphism preserves smoothness separatedness and locally finite type and over a locally Noetherian base preserves quasi compactness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"f3bf1a87bc7b46e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary base change or restriction to open subschemes, not Weil restriction; Loogle reported an unknown IsSmooth name, and the two semantic searches and source grep give no matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-24T07:09:09Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary base change or restriction to open subschemes, not Weil restriction; Loogle reported an unknown IsSmooth name, and the two semantic searches and source grep give no matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|weil.?[Rr]estriction|restrictScalars.*[Ss]cheme",
+   "results": "{\"t\": \"2026-10-24T07:09:08Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|weil.?[Rr]estriction|restrictScalars.*[Ss]cheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"ce6cf319771c83cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary base change or restriction to open subschemes, not Weil restriction; Loogle reported an unknown IsSmooth name, and the two semantic searches and source grep give no matching theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil restriction preserves smooth separated schemes locally of finite type and quasi compact schemes over Noetherian bases",
+   "results": "{\"t\": \"2026-10-24T07:09:09Z\", \"tool\": \"leansearch\", \"query\": \"Weil restriction preserves smooth separated schemes locally of finite type and quasi compact schemes over Noetherian bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instResLE\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.instLocallyOfFiniteTypeResLE\", \"AlgebraicGeometry.instQuasiCompactMorphismRestrict\", \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"ea0e392478c73b91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary base change or restriction to open subschemes, not Weil restriction; Loogle reported an unknown IsSmooth name, and the two semantic searches and source grep give no matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of a smooth scheme is smooth and restriction of a finite type scheme over a field has finite type",
+   "results": "{\"t\": \"2026-10-24T07:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars of a smooth scheme is smooth and restriction of a finite type scheme over a field has finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"Algebra.Smooth.comp\"], \"digest\": \"4191d19c89dad3c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary base change or restriction to open subschemes, not Weil restriction; Loogle reported an unknown IsSmooth name, and the two semantic searches and source grep give no matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable Weil restriction along a finite locally free morphism preserves smoothness separatedness locally finite type and quasi compactness over a Noetherian base",
+   "results": "{\"t\": \"2026-10-24T07:52:25Z\", \"tool\": \"leanfinder\", \"query\": \"Representable Weil restriction along a finite locally free morphism preserves smoothness separatedness locally finite type and quasi compactness over a Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"ebb6d9bcb64ed732\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: base change and open-restriction properties are not properties of geometric Weil restriction; no corresponding project or Mathlib declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsSeparated",
+   "results": "{\"t\": \"2026-10-24T07:52:23Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsSeparated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ext_of_apply_eq\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType\", \"AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization\", \"AlgebraicGeometry.Scheme.Hom.exists_isIso_morphismRestrict_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\"], \"digest\": \"92abd276211535d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: base change and open-restriction properties are not properties of geometric Weil restriction; no corresponding project or Mathlib declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|weil.?[Rr]estriction",
+   "results": "{\"t\": \"2026-10-24T07:52:23Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|weil.?[Rr]estriction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: base change and open-restriction properties are not properties of geometric Weil restriction; no corresponding project or Mathlib declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil restriction of schemes preserves geometric properties smooth separated finite type",
+   "results": "{\"t\": \"2026-10-24T07:52:23Z\", \"tool\": \"leansearch\", \"query\": \"Weil restriction of schemes preserves geometric properties smooth separated finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instResLE\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\"], \"digest\": \"87025528a8002285\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: base change and open-restriction properties are not properties of geometric Weil restriction; no corresponding project or Mathlib declaration was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-lft-weil-restriction-geometry",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4). BLR 7.6 Proposition 5, printed pp.195–198 (PDF pp.201–204), properties (a),(b),(c),(h): (a) with locally Noetherian base, the other three without additional hypotheses.",
+   "via": [
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weil-restriction-geometric-properties",
+  "worker": "stage1",
+  "summary": "Q101: checked BLR 7.6 Proposition 5 and split all four independent clauses; retained statement, supplied etale affine atlas without a hidden separatedness assumption, and exposed universal containment, coefficient equations, and generic etale/radicial factorization as three smaller statement-only inputs. No Lean attachment or Mathlib match. No SGA route.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), open direct image via sk-prop-open-coefficients; inherited Néron-lft-model descent refinement, BLR 7.6 Proposition 5; steps 1–7 give BLR 7.6 Proposition 5(b),(c),(h) and its auxiliary (d), steps 8–11 give (a).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-a1-finite-locally-free-principal-basis-cover",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-a1-lft-flat-lfp-source-descent",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-trf-lfp-fppf-source-locality",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "def-sbc-formally-smooth",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-fet-locally-trivial",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic scheme, finite-family, etale-atlas, or finiteness descent tool in the BLR 7.6 argument; no statement in this unit provides this interface. It does not replace a step of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-pc-hilb-containment-locus",
+    "why": "Maintainer review: existing closed containment-locus theorem of the Picard/Hilbert unit gives the closed half of BLR 7.6 Proposition 2 used for the diagonal in step 2; no node of this unit states it, and the delivered duplicate clause was removed from lem-sfb-finite-free-universal-containment-loci."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-a1-finite-locally-free-principal-basis-cover",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+  "lem-trf-lfp-fppf-source-locality",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-formally-smooth",
+  "lem-fet-locally-trivial",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "pqf-def-locnoeth",
+  "lem-pc-hilb-containment-locus"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-24d61640d",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-24d61640d (reviewer sub-agent of L); spot-checked: FIX for Q101 (BLR 7.6 Prop 5 (a),(b),(c),(h)). I read the item, all 11 steps, the 3 new nodes and the statement of every cited node; the BLR PDF is not under literature/ (WANTED), so the source page could not be reopened. The item statement is unchanged from the base and matches Prop 5: Noetherian base only for quasi-compactness. Checks: separatedness via the closed whole-family locus representing the diagonal; finite type and finite presentation via the coefficient quotient D on d|I| variables and d|K| relations; étale atlas H_J->W via the section-space and local-section theorems, with quasi-compactness forcing the lift into finitely many summands; local finite type and local finite presentation descend along the étale family; smoothness via formal lifting, since (IB'')^2=0; quasi-compactness via the radicial chart cover (E_K has one point), finite étale trivialization with fpqc descent, the generic étale/radicial factorization and Noetherian induction. New nodes tested on d=0, E empty, k[eps] and products of local Artinian algebras; the coefficient node and the generic-factorization node are true and not duplicates. The coefficient calculation exists only inside the proof of lem-sfb-affine-finite-free-hom, so citing it would break C3. Three repairs, written to fixes/: (1) C5: the closed half of lem-sfb-finite-free-universal-containment-loci duplicates the existing lem-pc-hilb-containment-locus; step 2 now cites it on the constant-degree pieces B_d, the new node is narrowed to the open locus, and a tool_uses entry is added. (2) Step 8 only checked quasi-compactness over basis charts; it now treats an arbitrary affine V->B by base change, as the affine-test criterion requires. (3) Steps 10/11: the Noetherian affine opens are now taken from the definition's cover, and step 11 ends by citing qcqs permanence and local-on-target. Batch-5: the four lem-sfb space nodes reach sec-trace-formula only through def-trf-algebraic-space, which is a general definition, and lem-trf-lfp-fppf-source-locality is a generic lfp locality lemma (Stacks 036N); none is part of the trace formula or Poincaré duality, so all are accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.WeilRestrictionGeometricProperties",
+  "declaration": "AlgebraicGeometry.weilRestriction_geometric_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/WeilRestrictionGeometricProperties.lean",
+  "statement": "theorem weilRestriction_geometric_properties {S S' Z W : Scheme.{u}} (p : S' ⟶ S) [p.IsFiniteLocallyFree] (z : Z ⟶ S') (w : W ⟶ S) (hrep : Nonempty (yoneda.obj (Over.mk w) ≅ (Over.pullback p).op ⋙ yoneda.obj (Over.mk z))) : (IsSeparated z → IsSeparated w) ∧ (LocallyOfFiniteType z → LocallyOfFiniteType w) ∧ (Smooth z → Smooth w) ∧ (IsLocallyNoetherian S → QuasiCompact z → QuasiCompact w)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80571da51",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Statement matches node and BLR 7.6 Prop 5(a),(b),(c),(h): p finite locally free via the recorded IsFiniteLocallyFree; the representability hypothesis is a Nonempty natural iso yoneda(W/S) ≅ (Over.pullback p).op ⋙ yoneda(Z/S'), checked against Mathlib Over.pullback obj = pullback.snd, so it is Hom_S(X,W) ≅ Hom_S'(X×_S S',Z), one universe u, nothing chosen; four independent conjuncts IsSeparated/LocallyOfFiniteType/Smooth/QuasiCompact, with IsLocallyNoetherian S only on the quasi-compact clause; no extra hypotheses; rank 0, empty and identity edge cases covered; all notions are the recorded stmt_dep declarations, no duplicates; lean.statement verbatim in the file; sorry-only proof, docstrings with source place, blueprint id and 11-step plan; imports exist; report has Worker report and Second reading sections. No findings; no compile since no file changed."
+ }
+}

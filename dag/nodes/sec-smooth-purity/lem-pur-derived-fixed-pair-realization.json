@@ -1,0 +1,315 @@
+{
+ "id": "lem-pur-derived-fixed-pair-realization",
+ "kind": "statement",
+ "title": "Derived realization of an exact automorphism action",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], let $P:\\mathcal A\\to\\mathcal A$ be an additive exact autoequivalence, and let $\\mathcal S\\subseteq\\mathcal A$ be a strictly full subcategory containing a zero object and closed under kernels, cokernels and extensions and preserved by $P$ and its inverse. Put $\\mathcal B=\\mathcal A^P$, the category of fixed pairs [def-weil-endofunctor-fixed-pair-category], and write $U:\\mathcal B\\to\\mathcal A$ for forgetting the structure. Its abelian structure and exact $U$ are those of [lem-sf-fixed-pair-created-abelian-structure]. Use ordinary derived categories [def-weil-abstract-derived-category]. Define $\\mathcal C\\subseteq D(\\mathcal A)$ to be the full subcategory on the objects with bounded cohomology in $\\mathcal S$, and $\\mathcal D\\subseteq D(\\mathcal B)$ to be the full subcategory on the objects with bounded cohomology whose underlying cohomology objects lie in $\\mathcal S$. The standard $t$-structures [def-sbc-standard-tstructure-derived-category, def-weil-t-structure] restrict to these categories. Let $D(P)$ and $D(U)$ be the functors induced by termwise application of the exact functors.\n\nThere is a canonical functor\n$$\\mathcal R:\\mathcal D\\longrightarrow\\mathcal C^{D(P)},\\qquad K\\longmapsto(D(U)K,\\theta_K),$$\nwhere $\\theta_K:D(P)D(U)K\\xrightarrow{\\sim}D(U)K$ is induced by the structure isomorphisms of a representing complex of fixed pairs, and $\\mathcal R$ sends $a$ to $D(U)(a)$. This description descends through quasi-isomorphisms, is natural in derived morphisms, and respects the shift identifications. On objects concentrated in degree zero it induces an equivalence from the heart of $\\mathcal D$ to the full subcategory of $\\mathcal C^{D(P)}$ whose underlying objects lie in the heart of $\\mathcal C$.\n\nIf $0\\to M\\to J\\to N\\to0$ is a nonsplit short exact sequence in $\\mathcal B$, with all three carriers in $\\mathcal S$, whose image under $U$ is split exact, then its derived connecting morphism $\\delta:N[0]\\to M[0][1]$ is nonzero and $\\mathcal R(\\delta)=0$. In particular the existence of such an extension implies that $\\mathcal R$ is not faithful.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+  "place": "Complement, comparison from the derived category of Weil modules to strict pairs, equivalence on hearts, and the Jordan extension warning; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-t-structure",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sf-cyclic-derived-hom-data"
+ ],
+ "proof": [
+  {
+   "text": "First fix the universe of small diagrams and Hom sets as in the ordinary derived-category convention. The Grothendieck hypothesis supplies small colimits, and [lem-coef-grothendieck-small-limits] supplies all small limits in that universe. Thus [lem-sf-fixed-pair-created-abelian-structure] applies to $P$: $\\mathcal B$ is abelian and $U$ is additive, exact and faithful, creating zero objects, kernels and cokernels. Let $\\mathcal S_B$ be the strictly full subcategory of fixed pairs whose carriers belong to $\\mathcal S$. It contains zero. If a morphism has both ends in $\\mathcal S_B$, its kernel and cokernel have carriers the corresponding kernel and cokernel in $\\mathcal A$, hence belong to $\\mathcal S$. Applying exact $U$ to an extension with ends in $\\mathcal S_B$ likewise puts its middle carrier in $\\mathcal S$. Consequently [lem-sbc-cohomology-in-weak-serre-subcategory], applied first to $(\\mathcal A,\\mathcal S)$ and then to $(\\mathcal B,\\mathcal S_B)$, makes $\\mathcal C$ and $\\mathcal D$ full triangulated subcategories of the indicated ordinary derived categories. No equivalence $D(\\mathcal S_B)\\simeq\\mathcal D$ is being used.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-coef-grothendieck-small-limits",
+    "lem-sf-fixed-pair-created-abelian-structure",
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0754 (homology.tex, lemma-characterize-weak-serre-subcategory) and 06UQ (lemma-cohomology-in-serre-subcategory); fixed-pair abelian structure and Grothendieck limits are the cited existing nodes"
+   }
+  },
+  {
+   "text": "Use the standard t-structures [def-sbc-standard-tstructure-derived-category]. A good truncation has the original cohomology on one side of the cut and zero on the other, so it stays in $\\mathcal C$, respectively $\\mathcal D$, and remains bounded. Its canonical truncation triangle therefore lies in the same full triangulated subcategory. Orthogonality and the shift inclusions are inherited from the ambient standard t-structure. This proves restriction and boundedness. Apply [lem-weil-pbc-exact-functor-derived-factorization] to $U$ and $P$ to obtain $D(U),D(P)$ with their cochain factorizations and shift comparisons. By [lem-weil-pbc-exact-functor-complex-cohomology], and descent through localization, $H^r(D(U)K)\\simeq U H^r(K)$ and $H^r(D(P)L)\\simeq P H^r(L)$ naturally. Thus $D(U)$ sends $\\mathcal D$ into $\\mathcal C$, and $D(P)$ preserves $\\mathcal C$; they preserve the two standard halves. Apply the same reasoning to $P^{-1}$ if an inverse to the restricted $D(P)$ is wanted.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08J5 (remark-truncation-distinguished-triangle) and 015F (lemma-right-derived-exact-functor), with homology.tex Tag 010N (lemma-exact-functor); naturality descends by the cited localization universal property"
+   }
+  },
+  {
+   "text": "For $(M,\\theta_M)\\in\\mathcal B$, put $t_M=\\theta_M:PUM\\xrightarrow{\\sim}UM$. The defining commuting square of a fixed-pair arrow says precisely that $t:PU\\xrightarrow{\\sim}U$ is a natural isomorphism [def-weil-endofunctor-fixed-pair-category]. For a cochain complex $K$ of fixed pairs its components satisfy $U(d^r)\\theta_{K^r}=\\theta_{K^{r+1}}P(U(d^r))$, so they give an isomorphism $C(P)C(U)K\\to C(U)K$ of complexes, natural in cochain maps. Write $a_F:D(F)Q\\xrightarrow{\\sim}QC(F)$ for the factorizations of [lem-weil-pbc-exact-functor-derived-factorization] and put $b_K=a_{P,C(U)K}\\circ D(P)(a_{U,K})$. For the two functors $D(P)D(U),D(U):D(\\mathcal B)\\to D(\\mathcal A)$, [lem-weil-pbc-localization-universal-property](2) lifts this natural cochain isomorphism uniquely to a natural isomorphism $\\Theta:D(P)D(U)\\xrightarrow{\\sim}D(U)$ characterized by\n$$\\Theta_{QK}=a_{U,K}^{-1}\\circ Q(C(t)_K)\\circ b_K.$$\nIts inverse is the lift of the inverse cochain isomorphism. This constructs the structure on every derived object and establishes naturality for every derived arrow, without choosing roofs or simultaneous representatives of them.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); categorical localization, Tag 04VG (categories.tex, lemma-properties-left-localization), enhanced to natural transformations by the existing localization-universal-property node"
+   }
+  },
+  {
+   "text": "Restrict the preceding construction to $\\mathcal D$. Set $\\mathcal R(K)=(D(U)K,\\Theta_K)$ and $\\mathcal R(a)=D(U)(a)$. Naturality gives\n$$D(U)(a)\\Theta_K=\\Theta_L D(P)(D(U)(a)),$$\nwhich is exactly the fixed-pair morphism equation [def-weil-endofunctor-fixed-pair-category]; identities and composition follow from those of $D(U)$. A cochain quasi-isomorphism is carried to an invertible derived carrier map by [lem-weil-pbc-exact-functor-derived-factorization]. Its inverse intertwines too, by multiplying the displayed square by the carrier inverses. Thus the representative description descends. For the shift comparisons $\\sigma_U,\\sigma_P$, the required equation is\n$$\\sigma_{U,K,n}\\Theta_{K[n]}=\\Theta_K[n]\\,\\sigma_{P,D(U)K,n}\\,D(P)(\\sigma_{U,K,n}).$$\nAfter precomposition with $Q_{\\mathcal B}$, the shift-compatible factorizations reduce this equation to equality of the degreewise maps $\\theta_{K^{r+n}}$. The differential sign $(-1)^n$ commutes with these maps by additivity. The equality on the whole derived category follows from [lem-weil-pbc-localization-universal-property](3). Therefore the carrier shift comparison is a fixed-pair isomorphism, with its identity and iterated-shift equations inherited from $D(U)$.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F and the cochain shift convention; localization uniqueness of natural transformations in the cited universal-property node"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-derived-single-fully-faithful], placing objects in degree zero is fully faithful for both $\\mathcal A$ and $\\mathcal B$. By [lem-sf-derived-concentrated-single] with $r=0$, every object of either standard heart is isomorphic to its sole cohomology object placed in degree zero. Restricting to $\\mathcal C,\\mathcal D$ identifies their hearts with $\\mathcal S,\\mathcal S_B$, respectively: for the latter the defining condition is exactly $UH^0(K)\\in\\mathcal S$. The termwise single-complex description in [lem-sf-exact-functor-derived-triangulated] and the displayed formula for $\\Theta_{QK}$ show that on $M[0]$, for a fixed pair $M=(UM,\\theta_M)$, $\\mathcal R$ is $(UM[0],\\theta_M[0])$, using the canonical comparison $D(P)(UM[0])\\simeq(PUM)[0]$. The same comparison identifies its map on an arrow with its underlying degree-zero map.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-derived-concentrated-single",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XS (lemma-negative-exts, part (2)), 08J5 and 015F; single complexes in degree zero"
+   }
+  },
+  {
+   "text": "For $M,N\\in\\mathcal S_B$, an arrow between $\\mathcal R(M[0])$ and $\\mathcal R(N[0])$ is a derived arrow $u:UM[0]\\to UN[0]$ satisfying the fixed-pair equation. Full faithfulness of the single embedding [lem-weil-pbc-derived-single-fully-faithful] gives a unique $f:UM\\to UN$ inducing $u$. Under the termwise comparisons of the previous step, that equation is the degree-zero image of $f\\theta_M=\\theta_N P(f)$. Faithfulness of the same embedding, applied to $PUM$ and $UN$, reflects this equality. Thus $f$ is precisely a morphism $M\\to N$ in $\\mathcal B$ [def-weil-endofunctor-fixed-pair-category]. Conversely every such $f$ gives an arrow of pairs. Full faithfulness of the single embedding for $\\mathcal B$ now proves that $\\mathcal R$ induces a bijection on Hom sets between these degree-zero objects. The isomorphisms from the preceding step extend the bijection to all objects of the heart of $\\mathcal D$.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS (lemma-negative-exts, degree zero), applied to both abelian categories; fixed-pair morphism equation"
+   }
+  },
+  {
+   "text": "Let $(X,\\eta)$ be a fixed pair with $X$ in the heart of $\\mathcal C$. Choose $e:X\\xrightarrow{\\sim}M[0]$ using [lem-sf-derived-concentrated-single]; then $M\\in\\mathcal S$. Conjugate $\\eta$ to\n$$e\\eta D(P)(e^{-1}):D(P)(M[0])\\xrightarrow{\\sim}M[0].$$\nIdentify its source with $(PM)[0]$ by [lem-sf-exact-functor-derived-triangulated]. By fullness of [lem-weil-pbc-derived-single-fully-faithful] this is $\\theta[0]$ for a unique $\\theta:PM\\to M$. Fullness also lifts its inverse, and faithfulness reflects both inverse identities, so $\\theta$ is an isomorphism in $\\mathcal A$. Therefore $(M,\\theta)\\in\\mathcal S_B$. The construction gives $e\\eta=\\theta[0]D(P)(e)$, so $e$ is an isomorphism from $(X,\\eta)$ to $\\mathcal R((M,\\theta)[0])$ in the fixed-pair category [def-weil-endofunctor-fixed-pair-category]. This proves essential surjectivity onto the stated full subcategory. Together with the preceding Hom bijection it proves the asserted equivalence on hearts.",
+   "uses": [
+    "lem-sf-derived-concentrated-single",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08J5, 015F and 06XS; transport of the structure along an explicitly chosen carrier isomorphism"
+   }
+  },
+  {
+   "text": "Now take the short exact sequence in the statement. By [lem-sf-derived-ses-triangle] it gives the distinguished triangle $M[0]\\to J[0]\\xrightarrow{p}N[0]\\xrightarrow{\\delta}M[0][1]$ in $D(\\mathcal B)$; all its vertices are in $\\mathcal D$. If $\\delta=0$, apply [lem-weil-pbc-hom-into-triangle-exact](ii) to the rotated triangle $J[0]\\xrightarrow{p}N[0]\\to M[0][1]\\to J[0][1]$, with $W=N[0]$ and $a=1_{N[0]}$. It supplies $s:N[0]\\to J[0]$ with $ps=1$. Full faithfulness of [lem-weil-pbc-derived-single-fully-faithful] for $\\mathcal B$ lifts $s$ to a section of $J\\to N$ in $\\mathcal B$. Such a section splits the sequence: $1-sp$ factors through the kernel $M\\to J$, giving the inverse of $(i,s):M\\oplus N\\to J$. This contradicts nonsplitting. Hence $\\delta\\ne0$.",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 0149 (lemma-representable-homological) on the rotated triangle, and 06XS"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-ses-triangle-image] to exact $U$. Its canonical single and shift comparisons identify $D(U)(\\delta)$ with the connecting morphism $\\delta_U:UN[0]\\to UM[0][1]$ of the underlying short exact sequence. Choose an underlying section $s:UN\\to UJ$, available by its split-exact hypothesis. The consecutive composite $\\delta_U\\circ Up[0]$ is zero by [lem-weil-pbc-hom-into-triangle-exact](i) on the rotated underlying distinguished triangle. Therefore\n$$\\delta_U=\\delta_U\\circ Up[0]\\circ s[0]=0.$$\nSince the comparison maps are invertible, $D(U)(\\delta)=0$. In the fixed-pair category morphisms are their carrier maps and the forgetful functor is faithful [def-weil-endofunctor-fixed-pair-category], so $\\mathcal R(\\delta)=0=\\mathcal R(0)$. The maps $\\delta$ and $0$ belong to the same Hom set of $\\mathcal D$ and are distinct by the previous step. Hence the existence of this extension makes $\\mathcal R$ nonfaithful.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (canonical connecting map), 015F (exact functor), and 0149 (consecutive composites of a distinguished triangle)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-coef-grothendieck-small-limits",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-derived-concentrated-single",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-derived-ses-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-exact-functor-ses-triangle-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+  "place": "Complement: derived-to-strict comparison, heart equivalence and nonsplit Jordan extension warning; general categorical assembly from Stacks 015F, 06XS, 08J5, 0152, 0149 and the cited localization universal property"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact autoequivalence of an abelian category comparison from derived category of equivariant objects to equivariant objects of derived category equivalence on hearts",
+   "results": "Hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.abelianOfEquivalence, AddCommGrpCat.leftExactFunctorForgetEquivalence, CategoryTheory.Functor.exact_tfae, AddCommGrpCat.leftExactFunctorForgetEquivalence.unitIso, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.mapDerivedCategorySingleFunctor. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra, DerivedCategory",
+   "results": "Hits: . loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra'",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|derived.*equivariant|equivariant.*derived",
+   "results": "Hits: Mathlib/Algebra/Category/AlgCat/Basic.lean. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category fixed pairs endofunctor forgetful realization functor heart equivalence",
+   "results": "Hits: CategoryTheory.LeftExactFunctor.forget_obj, CategoryTheory.RightExactFunctor.forget_obj_of, CategoryTheory.LeftExactFunctor.forget_obj_of, CategoryTheory.LeftExactFunctor.forget_map, CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor, CategoryTheory.RightExactFunctor.forget_map, CategoryTheory.HasForget₂.mk', CategoryTheory.RightExactFunctor.forget_obj. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived forgetting action of an automorphism not faithful split underlying nonsplit equivariant extension",
+   "results": "Hits: CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction, TannakaDuality.FiniteGroup.toRightFDRepComp_injective, CategoryTheory.PreGaloisCategory.functorToAction, CategoryTheory.PreGaloisCategory.toAut_hom_app_apply, CategoryTheory.PreGaloisCategory.instMulActionAutCarrierVFintypeCatFunctorObjActionFunctorToAction, CategoryTheory.PreGaloisCategory.toAut, CategoryTheory.PreGaloisCategory.toAut_injective_of_non_trivial, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact automorphism action comparison derived category of fixed pairs to fixed pairs in the derived category equivalence on hearts nonfaithful",
+   "results": "Hits: DerivedCategory.instFaithfulSingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.PreGaloisCategory.functorToAction, DerivedCategory.singleFunctors, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.mapExactFunctor_smul. ",
+   "date": "2026-10-26",
+   "verdict": "no match: generic derived functor, single embedding or localization ingredients only; none states the fixed-pair comparison together with the heart and extension conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId. ",
+   "date": "2026-10-26",
+   "verdict": "no match: generic derived functor, single embedding or localization ingredients only; none states the fixed-pair comparison together with the heart and extension conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|derived.*equivariant|equivariant.*derived",
+   "results": "Hits: Mathlib/Algebra/Category/AlgCat/Basic.lean. ",
+   "date": "2026-10-26",
+   "verdict": "no match: generic derived functor, single embedding or localization ingredients only; none states the fixed-pair comparison together with the heart and extension conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category of equivariant objects forgetful comparison to equivariant objects of derived category",
+   "results": "Hits: CategoryTheory.ExactFunctor.forget_map, CategoryTheory.RightExactFunctor.forget_obj, CategoryTheory.LeftExactFunctor.forget_obj_of, CategoryTheory.ExactFunctor.forget_obj, CategoryTheory.GradedObject.instHasForget.congr_simp, CategoryTheory.Comonad.comparisonForget, CategoryTheory.LeftExactFunctor.forget_map, CategoryTheory.Mod_.forget. ",
+   "date": "2026-10-26",
+   "verdict": "no match: generic derived functor, single embedding or localization ingredients only; none states the fixed-pair comparison together with the heart and extension conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization at quasi isomorphisms of complexes with an automorphism action strict pairs derived heart comparison",
+   "results": "Hits: CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.isHomological_of_localization, HomologicalComplexUpToQuasiIso.Q. ",
+   "date": "2026-10-26",
+   "verdict": "no match: generic derived functor, single embedding or localization ingredients only; none states the fixed-pair comparison together with the heart and extension conclusions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-sf-weil-complexes",
+  "date": "2026-10-26",
+  "group": "NB"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-weil-complexes",
+ "blueprint": {
+  "from": {
+   "node": "sk-def-sf-weil-complexes",
+   "place": "Complement, comparison from the derived category of Weil modules to strict pairs, equivalence on hearts, and the Jordan extension warning",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-pur-derived-fixed-pair-realization",
+  "worker": "stage1",
+  "summary": "Nine-step proof using only existing DAG nodes. Constructed the structure natural isomorphism by fully faithful precomposition with the cochain localization, checked shifts, proved the heart Hom bijection and essential surjectivity, and detected nonsplit extensions with a rotated Hom exact sequence. STATEMENT-DISPUTED edge case repaired: the coefficient subcategory is explicitly strictly full and contains zero. No new nodes, no Lean and no compilation.",
+  "blueprint": "Complement sentences: the triangulated category of Weil modules maps to strict pairs, is an equivalence on hearts, and loses the Jordan extension connecting map. Steps 1-4 construct and descend the comparison, 5-7 give the heart equivalence, 8-9 give the conditional nonfaithfulness warning.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-fixed-pair-created-abelian-structure",
+    "why": "Provides the abelian source and exact carrier functor for an arbitrary automorphism, as explicitly required by the item; the unit only states the Weil interpretation."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic ordinary derived-category restriction to bounded cohomology in a weak Serre subcategory, applied to S and its inverse image under U; does not replace any geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic full faithfulness of precomposition with a localization is needed to descend the structure isomorphism and its equations; the unit has no separate localization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NM-fd5e4c9f8",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-fd5e4c9f8 (reviewer sub-agent of L); spot-checked: I read all nine steps and the full statements of the 6 stmt_deps and 15 proof_deps; I made no fixes and the delivery adds no new nodes. Source: blueprint latest sk-def-sf-weil-complexes, Complement (lines 36-51). It gives the derived-to-pairs map, the equivalence on hearts, the 'not faithful' claim and the Jordan block. The item states this in general categorical form, so proof_origin 'agent' is correct. Statement change (base 59c6d26a): 'full subcategory' became 'strictly full subcategory containing a zero object'. This is justified: with S empty, C and D are empty and cannot carry a t-structure, and without strict fullness membership depends on the choice of cohomology object. The change matches the weak Serre characterisation (Stacks 0754) and the hypotheses of lem-sbc-cohomology-in-weak-serre-subcategory. The only citer, sk-def-sf-weil-complexes, uses the constructible heart, which satisfies the new hypotheses. Truth: checked with S={0} and with Vect, P=id and the Jordan block. That extension is nonsplit as pairs and split on carriers; delta is nonzero in Ext^1 of pairs and becomes 0 in Ext^1_k(k,k)=0. Step checks: (1) the Grothendieck hypothesis and lem-coef-grothendieck-small-limits supply the small limits and colimits the created-abelian node needs; S_B is closed under kernels, cokernels and extensions. (2) The truncations stay in C and D, and H^r D(U) is isomorphic to U H^r. (3) The types of b_K and Theta_QK check out; Theta is obtained from clause (2) of the localization node with F1 = Q C(P)C(U) and F2 = Q C(U). (4) The shift equation reduces on Q_B K, by clause (2) of the factorization node, to tau = id and theta commuting with the sign (-1)^n; clause (3) of the localization node concludes. (5)-(7) Heart objects are single complexes; full faithfulness of singles gives the Hom bijection, and essential surjectivity follows by conjugating and lifting the structure and its inverse. (8) Clause (ii) of the Hom-into-triangle node on the rotated triangle gives a section, which contradicts nonsplitting. (9) The triangle-image node and clause (i) with the underlying section give D(U)(delta)=0, with delta and 0 in the same Hom set of D. No duplicate: I compared lem-sf-fixed-pair-derived-forget-comparison, lem-zl-texact-fixed-pair-heart-cohomology, lem-sf-exact-adjoint-forget-derived-detection and the native-weil comparison nodes. Accepted tool_uses: lem-sf-fixed-pair-created-abelian-structure, lem-sbc-cohomology-in-weak-serre-subcategory, lem-weil-pbc-localization-universal-property (a Mathlib leaf). No SGA is cited and no re-split note applies."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedFixedPairRealization",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.derivedFixedPairRealization",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairRealizationTarget",
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairRealizationSource",
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairRealizationAction",
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairRealizationForget",
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairRealizationSourceHeart",
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairRealizationTargetHeart",
+   "CategoryTheory.Endofunctor.IsoAlgebra.derivedFixedPairRealization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedFixedPairRealization.lean",
+  "statement": "theorem derivedFixedPairRealization [IsGrothendieckAbelian.{v} A] [S.ContainsZero] [S.IsClosedUnderIsomorphisms] [S.IsClosedUnderKernels] [S.IsClosedUnderCokernels] [S.IsClosedUnderExtensions] (hPS : ∀ M : A, S M → S (P.obj M)) (hPinvS : ∀ M : A, S M → S (P.inv.obj M)) : ∃ (hP : ∀ K, fixedPairRealizationTarget S K → fixedPairRealizationTarget S (P.mapDerivedCategory.obj K)) (hU : ∀ K, fixedPairRealizationSource P S K → fixedPairRealizationTarget S ((forget P).mapDerivedCategory.obj K)), (fixedPairRealizationTarget S).IsTriangulated ∧ (fixedPairRealizationSource P S).IsTriangulated ∧ (∀ (K : DerivedCategory A), fixedPairRealizationTarget S K → ∀ n : ℤ, fixedPairRealizationTarget S ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧ fixedPairRealizationTarget S ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧ (∀ (K : DerivedCategory (IsoAlgebra P)), fixedPairRealizationSource P S K → ∀ n : ℤ, fixedPairRealizationSource P S ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧ fixedPairRealizationSource P S ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧ (∀ K : CochainComplex (IsoAlgebra P) ℤ, (cyclicDerivedStructure P).hom.app (DerivedCategory.Q.obj K) ≫ (forget P).mapDerivedCategoryFactors.hom.app K = P.mapDerivedCategory.map ((forget P).mapDerivedCategoryFactors.hom.app K) ≫ P.mapDerivedCategoryFactors.hom.app (((forget P).mapHomologicalComplex (.up ℤ)).obj K) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (strNatIso P).hom (.up ℤ)).app K)) ∧ (∀ (K : DerivedCategory (IsoAlgebra P)) (n : ℤ), (cyclicDerivedStructure P).hom.app (K⟦n⟧) ≫ ((forget P).mapDerivedCategory.commShiftIso n).hom.app K = P.mapDerivedCategory.map (((forget P).mapDerivedCategory.commShiftIso n).hom.app K) ≫ (P.mapDerivedCategory.commShiftIso n).hom.app ((forget P).mapDerivedCategory.obj K) ≫ ((cyclicDerivedStructure P).hom.app K)⟦n⟧') ∧ ∃ R : (fixedPairRealizationSource P S).FullSubcategory ⥤ IsoAlgebra (fixedPairRealizationAction P S hP), R ⋙ forget (fixedPairRealizationAction P S hP) = fixedPairRealizationForget P S hU ∧ (∀ K : (fixedPairRealizationSource P S).FullSubcategory, HEq ((R.obj K).str.hom.hom) ((cyclicDerivedStructure P).hom.app K.obj)) ∧ (∃ hR : ∀ K : (fixedPairRealizationSourceHeart P S).FullSubcategory, fixedPairRealizationTargetHeart P S hP (R.obj (((fixedPairRealizationSourceHeart P S).ι).obj K)), ((fixedPairRealizationTargetHeart P S hP).lift ((fixedPairRealizationSourceHeart P S).ι ⋙ R) hR).IsEquivalence) ∧ (∀ (E : ShortComplex (IsoAlgebra P)) (hE : E.ShortExact), S E.X₁.carrier → S E.X₂.carrier → S E.X₃.carrier → ¬ Nonempty E.Splitting → Nonempty (E.map (forget P)).Splitting → hE.singleδ ≠ 0 ∧ (forget P).mapDerivedCategory.map hE.singleδ = 0 ∧ ¬ R.Faithful ∧ ∃ (X Y : (fixedPairRealizationSource P S).FullSubcategory) (eX : X.obj ≅ (DerivedCategory.singleFunctor (IsoAlgebra P) 0).obj E.X₃) (eY : Y.obj ≅ ((DerivedCategory.singleFunctor (IsoAlgebra P) 0).obj E.X₁)⟦1⟧), R.map (ObjectProperty.homMk (eX.hom ≫ hE.singleδ ≫ eY.inv)) = 0)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "Reuses cyclicDerivedStructure from Sheaf.CategoryTheory.CyclicDerivedHomData, owned by the existing definition node def-sf-cyclic-derived-hom-data; its lean.declaration is CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedStructure. The cyclic-derived-Hom exact-sequence theorem is not needed. Triangulated closure and stability under both good truncations state restriction of the standard t-structures; the hearts are their inverse images under the full inclusions. The realization is existentially specified by its exact underlying functor and canonical structure maps, not chosen as an arbitrary map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ee0ae043",
+  "group": "NI",
+  "result": "pass",
+  "note": "Clause-by-clause check of derivedFixedPairRealization against node lem-pur-derived-fixed-pair-realization. Hypotheses match: IsGrothendieckAbelian.{v}, P.Additive+IsEquivalence, S closed under isomorphisms/zero/kernels/cokernels/extensions (Mathlib classes), hPS/hPinvS; independent HasDerivedCategory universes w,wB. C = homologyProperty S ⊓ bounded; D = homologyProperty (S.inverseImage forget) ⊓ bounded. t-structure restriction stated as triangulated closure plus truncLE/truncGE stability. Theta = canonical cyclicDerivedStructure (def-sf-cyclic-derived-hom-data owner, H2 repair correct); cochain formula and shift equation are the node's formulas in diagrammatic order (types and directions checked). R pinned by functor equality with the D(U) restriction and by HEq of structure maps to Theta. Heart equivalence is IsEquivalence of R's own restriction. Extension clause: canonical hE.singleδ ≠ 0, D(U)δ = 0, ¬Faithful, R(δ)=0 via endpoint isos (equivalent). Edge cases S={0} and Jordan block checked. No hollow defs, docstrings ok, statement verbatim, no compile (no file changed). Advisory only: private imports CohomologyInWeakSerreSubcategory and Ext.Map are not needed for the sorry statement."
+ }
+}

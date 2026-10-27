@@ -1,0 +1,221 @@
+{
+ "id": "lem-sf-finite-span-scalar-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 1--7 of lem-sf-finite-span-module-derived-comparison; its data and scalar transport construction, separate from the exchange argument in step 8.",
+   "via": [
+    "lem-sf-finite-span-module-derived-comparison",
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized scalar module transport for a supplied coefficient isomorphism",
+ "statement": "Let l be prime, and let theta_X be a monoid-object isomorphism from the condensed coefficient pulled to each scheme X to the native locally finite-span function sheaf. Assume the coefficient pushforward square commutes for every scheme morphism. Then there exists the Data of def-sf-finite-span-module-comparison-data with exactly this theta, satisfying coefficient_sections, rho_composition, ordinary_mate, push_identity, underlying, finiteFree_sections, pushComposition_sections, pullComposition_mate, ordinary_composition, K-injective preservation in both directions, derived_push_normalization and field_normalization. The input theta need not satisfy a finite-field chart normalization. The inverse coefficient square and rho invertibility are proved separately by adjunction transposition and are not part of this conclusion. No exchange assertion is included.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1, 6.8.3; Lemma 6.8.2; Remark 6.8.15. Agent expansion of returned proof steps 1--3 and the comparison part of step 8, using the finite-subextension convention and the existing ring-realization and module/ringed-topos comparison nodes. This source is not a claim that all of these comparison equalities are literal statements of the paper."
+ },
+ "stmt_deps": [
+  "def-sf-finite-span-module-comparison-data",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-coefficient-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Use the input ring isomorphisms theta and their assumed direct-image coefficient square. Put $B_T$ for the reconstructed section-ring sheaf of $A_T$, and identify it with $A_T$ when writing ring maps. The assumed square says that the adjunct coefficient map $A_W\\to v_*A_Z$ and the precomposition map $\\mathcal R_W\\to v_*\\mathcal R_Z$ commute with $c_W$ and $v_*c_Z$. Taking adjuncts gives $c_Z\\alpha_v=\\rho_v v^{-1}c_W$. By sk-prop-sfb-cartesian-coefficients, $\\alpha_v$ is an isomorphism; hence $\\rho_v=c_Z\\alpha_v(v^{-1}c_W)^{-1}$ is an isomorphism. For composable $v:Z\\to W$, $u:W\\to T$, precomposing functions twice is precomposing with the composite projection. This holds before sheafification, hence also after it, and proves the composition identity for $\\rho$ under the canonical inverse-image compositor. The same identity for $\\alpha$ follows from its definition as the pullback-from-the-point comparison in sk-def-sfb-coefficient-morphisms. Thus the displayed coefficient squares respect composition.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.1, 6.8.3 and Remark 6.8.15; agent comparison using the normalized ring realization, not an identification with all norm-continuous functions"
+   }
+  },
+  {
+   "text": "Let $J_T$ be the internal-to-section equivalence of def-weil-pbc-internal-abelian-sheaf-module-equivalence. For a $B_T$-module $M$, define $S_TM$ by the same abelian sheaf and action $r\\cdot_{S_T}m=c_T^{-1}(r)\\cdot_M m$. Its inverse sends an $\\mathcal R_T$-module $N$ to the action $a\\cdot n=c_T(a)\\cdot_N n$; both functors keep every arrow and restriction map. The two composites are the identity on actions as well. Set $E_T=S_TJ_T$. The equivalence $J_T$ is additive exact by lem-sfb-internal-module-operations-transport; $S_T$ preserves kernels and cokernels since their underlying abelian sheaves and induced actions are unchanged, using the kernel/cokernel description of def-weil-sheaf-of-modules-category. Hence $E_T$ and its inverse are exact. A finite free trivialization $M|_U\\cong A_T|_U^{\\oplus n}$ is sent to a trivialization with $\\mathcal R_T|_U^{\\oplus n}$: the basis correspondence is coordinatewise $c_T$. This works also for rank zero and on every local trivializing object, with identical restrictions.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-internal-module-operations-transport",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV, definition-sheaf-modules; Tag 03DA, lemma-abelian; explicit scalar action transport along the given ring isomorphism"
+   }
+  },
+  {
+   "text": "Use lem-sfb-internal-module-operations-transport to compare the internal operations with the ordinary $B$-module operations and their specified ordinary adjunction. Write $\\beta_v:B_W\\to v_*B_Z$ and $\\gamma_v:\\mathcal R_W\\to v_*\\mathcal R_Z$ for their coefficient maps. Step 1 gives $c_Z\\beta_v=\\gamma_v c_W$ on the appropriate sections. Thus on $v_*M$, the two candidate $\\mathcal R_W$-actions agree: the action through $\\beta_v(c_W^{-1}r)$ equals that through $c_Z^{-1}(\\gamma_v r)$. Identity on the underlying abelian sheaf is therefore the required direct-image comparison. Pullback over $B$ is inverse image with action transported by $\\alpha_v^{-1}$, and pullback over $\\mathcal R$ uses $\\rho_v^{-1}$. Inverting step 1 gives $v^{-1}(c_W^{-1})\\rho_v^{-1}=\\alpha_v^{-1}c_Z^{-1}$, so these two actions agree too. The resulting pullback comparison is the identity on underlying inverse-image abelian sheaves. Equivalently, the tensor presentation of the ringed pullback collapses by $r\\otimes m\\mapsto\\rho_v^{-1}(r)m$; its inverse is $m\\mapsto1\\otimes m$. This also proves exactness of both pullbacks, using the exactness in sk-prop-sfb-cartesian-coefficients.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6, definition-pushforward; scalar comparison of the already identified ordinary operations"
+   }
+  },
+  {
+   "text": "The ordinary transposition for section modules sends a linear map out of $v^*M$ to its underlying abelian inverse-image/direct-image transpose; in its tensor presentation it first evaluates at $1\\otimes m$. The comparisons in step 3 keep these abelian maps and $1\\otimes m$ unchanged, so the two Hom bijections are equal. By lem-sfb-internal-module-operations-transport the internal Hom bijection is already the $B$-module one. Hence the ordinary units and counits, which are transposes of identity maps, agree after $E$. Retain the geometric direct-image compositor and its inverse-image mate specified in def-pd-section-module-operations-data. On sections the geometric compositor is the canonical identification between iterated and single base change of a test object. Relabelling scalars by $c$ preserves it by step 1; equality of the just-verified Hom bijections then preserves its mate, the inverse-image compositor. This proves the claimed ordinary adjunction and composition normalizations, not merely isomorphism of the endpoint functors.",
+   "uses": [
+    "def-pd-section-module-operations-data",
+    "def-weil-pbc-adjunction-mate",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules, and lemma-push-pull-composition-modules; evaluation at the unit tensor"
+   }
+  },
+  {
+   "text": "Apply lem-weil-pbc-exact-functor-derived-factorization to $E_T$ and its exact inverse. The termwise functors carry quasi-isomorphisms to quasi-isomorphisms, and their inverse identities give inverse equivalences on the unbounded derived categories. They preserve chain homotopies: applying an additive functor to $f-g=dh+hd$ gives the same equation. For an acyclic complex $N$ on the target side and a K-injective $I$ on the source side, full faithfulness gives $\\operatorname{Hom}_{K}(N,E_TI)\\cong\\operatorname{Hom}_{K}(E_T^{-1}N,I)=0$, since $E_T^{-1}N$ is acyclic by exactness. The criterion in def-pur-kinjective-complex proves preservation of K-injectivity; interchanging the two functors proves reflection and preservation by the inverse. In particular, they carry every K-injective resolution to a K-injective resolution.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 070H, definition-K-injective; direct Hom computation for the equivalence"
+   }
+  },
+  {
+   "text": "The small-site hypothesis allows prop-pur-kinjective-resolutions-exist for the section-module categories; step 5 transports these resolutions internally. For a complex $K$ choose $K\\to I$ K-injective. Compute $Rv_*^A K$ on $v_*^A I$, and $Rv_*^{\\mathcal R}E_ZK$ on $v_*^{\\mathcal R}E_ZI$, since $E_ZI$ is K-injective. The ordinary direct-image comparison of step 3 gives the isomorphism $D(E_W)Rv_*^A K\\cong Rv_*^{\\mathcal R}D(E_Z)K$ on these representatives. For a derived morphism, lem-sf-kinjective-derived-map-computation represents it by the unique homotopy class between the chosen K-injective resolutions and computes its derived direct image by applying the ordinary functor to that class. Naturality of step 3 therefore proves naturality of this comparison. The same node's canonical transition maps between resolutions prove independence of the choices and compatibility with the right-derived comparison transformations. This proves a comparison of total right derived functors on arbitrary unbounded complexes, rather than separate cohomology isomorphisms.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070Y, lemma-K-injective-defined; canonical resolution comparisons"
+   }
+  },
+  {
+   "text": "Now impose the stated finite-type scheme setting. Apply lem-pd-section-derived-pushpull-normalization with the condensed ring $C$ and reconstructed section rings $B_T$. It identifies the independently derived internal and $B$-module adjunctions, their units, counits and pullback compositors. It remains to relabel $B$ by $c$. Let $L$ be any complex and $I$ K-injective. The ordinary exact pullback $P=v_{\\mathcal R}^*$ and its right adjoint $G=v_*^{\\mathcal R}$ satisfy $\\operatorname{Hom}_K(N,GI)\\cong\\operatorname{Hom}_K(PN,I)=0$ for acyclic $N$, so $GI$ is K-injective. Thus lem-weil-pbc-kinjective-hom-derived identifies both sides of the derived adjunction with homotopy classes of ordinary maps $PL\\to I$ and $L\\to GI$. Their bijection is exactly ordinary chain transposition: the ordinary Hom bijection commutes with differentials and homotopies, and on the $B$ side the canonical derived adjunction identified by lem-pd-section-derived-pushpull-normalization is the one derived from the ordinary adjunction, whose counit by lem-sc-derived-adjunction-from-underived is induced by the ordinary counit; since the pullback is exact its derived comparison is invertible on every complex, and the comparison for the direct image is invertible on the K-injective $I$, so the derived transpose of the class of $h:L\\to v_*I$ is the class of $\\varepsilon_I\\circ v^*h$, the ordinary transpose. Step 4 preserves that bijection under $S$, and step 6 identifies its right-derived comparison on $I$. Hence the relabelled derived Hom bijection sends the class of each chain map to the class of its ordinary transpose, as required. Every derived map into $I$ has such a representative by the cited Hom theorem, so this is equality on all morphisms. Identity transposes give equal units and counits. The localized geometric pullback compositors agree by step 4 and exact localization. This establishes the specified derived adjunction, not an adjunction chosen by transport.",
+   "uses": [
+    "lem-pd-section-derived-pushpull-normalization",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-kinjective-complex",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; derived.tex Tags 070I, lemma-K-injective, and 09T5, lemma-derived-adjoint-functors; exact-pullback representative normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-module-operations-data",
+  "def-pur-kinjective-complex",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6, 03D7 and lemma-push-pull-composition-modules; derived.tex Tags 070I, 070Y and 09T5; assembly with the existing internal/section derived normalization and finite-span ring realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact scalar restriction equivalence for isomorphic ring sheaves preserves derived pushforward adjunction mates and exchange maps",
+   "results": "SheafOfModules.pushforwardCongr; pushforwardPushforwardAdj; pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; pushforwardSections_unitHomEquiv; pushforwardPushforwardAdj_unit_app_val_app; pushforwardPushforwardAdj_counit_app_val_app; pushforwardNatIso",
+   "date": "2026-10-26",
+   "verdict": "Ordinary ringed-site interfaces; no theorem constructs the specified finite-span normalized scalar transport data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv; mateEquiv_counit; unit_mateEquiv; mateEquiv_vcomp; mateEquiv_hcomp and iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-26",
+   "verdict": "Use the already proved exchangeMate_cube for the exchange step; these do not construct scalar transport data."
+  },
+  {
+   "tool": "grep",
+   "query": "comapEquivalenceOfIsIso|FiniteSpanComparison|scalar.*[Tt]ransport|mapDerivedCategorySquareIso_comp|exchangeMate_cube",
+   "results": "Local rg found the existing comap equivalence, InternalModuleOperationsTransport, DerivedExactSquareComposition.mapDerivedCategorySquareIso_comp, CompatibleSquareComponents.square_pasting and ExchangeMateCube.exchangeMate_cube. msearch grep returned no Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "Reuse all three proved categorical pasting lemmas. The supplied-theta scalar transport construction still needs a dedicated intermediate statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module categories induced by ring isomorphisms preserves K injective resolutions and derived adjunctions",
+   "results": "ModuleCat.restrictScalarsEquivalenceOfRingEquiv; Functor.preservesInjectiveObjects_of_isEquivalence; ModuleCat.restrictScalars_isEquivalence_of_ringEquiv; ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive; Iso.ringCatIsoToRingEquiv; MoritaEquivalence.mk; instIsIsoAppToRightDerivedZeroOfInjective",
+   "date": "2026-10-27",
+   "verdict": "No normalized sheaf scalar transport construction. Use the existing restriction equivalence and K-injective/derived comparison lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSpanModuleDerivedComparison",
+  "date": "2026-10-26",
+  "group": "C8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSpanScalarTransport",
+  "file": "lean/Sheaf/Paper/FiniteSpanScalarTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteSpanComparison.finiteSpanScalarTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.finiteSpanScalarTransport"
+  ],
+  "statement": "theorem finiteSpanScalarTransport (l : ℕ) [Fact l.Prime] (theta : ∀ X : Scheme.{u}, condensedRingObj (Profinite.padicAlgClRingObj l) X ≅ nativeAb l X) [∀ X : Scheme.{u}, IsMonHom (theta X).hom] (hcoeff : ∀ (X Y : Scheme.{u}) (f : X ⟶ Y), condensedPushforwardHom (Profinite.padicAlgClRingObj l) f ≫ (lowerStar Ab.{u + 1} f).map (theta X).hom = (theta Y).hom ≫ (weilCoefficientsForgetAb l Y).map (adicConstantSheafToLowerStar l f)) : ∃ d : Data.{u} l, letI := d; d.theta = theta ∧ -- coefficient_sections (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.ProEtᵒᵖ) (r : (ring l Y).obj.obj V) (x : ((InternalModuleOperations.siteMap f).obj V.unop).left), (((d.coefficientMap f).hom.app V r).down.1 x) = r.down.1 ((Limits.pullback.fst V.unop.hom f).base x)) ∧ -- rho_composition (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z), rho l (f ≫ g) = (upperStarComp Ab.{u + 1} f g).hom.app (nativeAb l Z) ≫ (upperStar Ab.{u + 1} f).map (rho l g) ≫ rho l f) ∧ -- ordinary_mate (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (mateEquiv (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f) (adjunction l f (d.coefficientMap f)) (d.pullComparison f).inv).natTrans = (d.pushComparison f).hom) ∧ -- push_identity (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (M : internal l X) (V : Y.ProEtᵒᵖ) (m : ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).obj M).X.obj.obj V), (((d.pushComparison f).hom.app M).val.app V) m = m) ∧ -- underlying (∀ X : Scheme.{u}, (equivalence l X (d.theta X)).functor ⋙ SheafOfModules.toSheaf (ring l X) = Mod.forget (condensedRingObj (Profinite.padicAlgClRingObj l) X)) ∧ -- finiteFree_sections (∀ (X : Scheme.{u}) (V : X.ProEtᵒᵖ) (M : internal l X) (n : ℕ) (b : Module.Basis (Fin n) ((InternalModuleOperations.ring (Profinite.padicAlgClRingObj l) X).obj.obj V) (((InternalModuleOperations.equivalence (Profinite.padicAlgClRingObj l) X).functor.obj M).val.obj V)), ∃ b' : Module.Basis (Fin n) ((ring l X).obj.obj V) (((equivalence l X (d.theta X)).functor.obj M).val.obj V), ∀ i : Fin n, b' i = b i) ∧ -- pushComposition_sections (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (M : modules l X) (V : Z.ProEtᵒᵖ) (m : ((direct l g (d.coefficientMap g)).obj ((direct l f (d.coefficientMap f)).obj M)).val.obj V), (((d.pushComposition f g).hom.app M).val.app V).hom m = (((ProEtale.lowerStarComp Ab.{u + 1} f g).hom.app ((SheafOfModules.toSheaf (ring l X)).obj M)).hom.app V).hom m) ∧ -- pullComposition_mate (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z), d.pullComposition f g = (Adjunction.leftAdjointCompIso (adjunction l g (d.coefficientMap g)) (adjunction l f (d.coefficientMap f)) (adjunction l (f ≫ g) (d.coefficientMap (f ≫ g))) (d.pushComposition f g)).symm) ∧ -- ordinary_composition (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (M : internal l Z), (d.pullComparison (f ≫ g)).hom.app M ≫ (d.pullComposition f g).hom.app ((equivalence l Z (d.theta Z)).functor.obj M) = (equivalence l X (d.theta X)).functor.map ((CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l) f g).hom.app M) ≫ (d.pullComparison f).hom.app ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l) g).obj M) ≫ (inverse l f (d.coefficientMap f)).map ((d.pullComparison g).hom.app M)) ∧ -- kinjective_forward (∀ (X : Scheme.{u}) (I : CochainComplex (internal l X) ℤ), I.IsKInjective → CochainComplex.IsKInjective (((equivalence l X (d.theta X)).functor.mapHomologicalComplex (.up ℤ)).obj I)) ∧ -- kinjective_inverse (∀ (X : Scheme.{u}) (I : CochainComplex (modules l X) ℤ), I.IsKInjective → CochainComplex.IsKInjective (((equivalence l X (d.theta X)).inverse.mapHomologicalComplex (.up ℤ)).obj I)) ∧ -- derived_push_normalization (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (P : CochainComplex (internal l X) ℤ), (equivalence l Y (d.theta Y)).functor.mapDerivedCategory.map ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).rightDerivedFunctorUnitQ P) ≫ (d.derivedPushComparison f).hom.app (DerivedCategory.Q.obj P) ≫ (direct l f (d.coefficientMap f)).rightDerivedFunctor.map ((equivalence l X (d.theta X)).functor.mapDerivedCategoryFactors.hom.app P) = (equivalence l Y (d.theta Y)).functor.mapDerivedCategoryFactors.hom.app (((CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (d.pushComparison f) (.up ℤ)).hom.app P) ≫ (direct l f (d.coefficientMap f)).rightDerivedFunctorUnitQ (((equivalence l X (d.theta X)).functor.mapHomologicalComplex (.up ℤ)).obj P)) ∧ -- field_normalization (∀ (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p], p ≠ l → ∀ (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y), DerivedNormalization l f.left)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e73a5",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T222606-L-671605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e73a5",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T222606-L-671605",
+  "kind": "interface",
+  "note": "independent cc review: Item finiteSpanModuleDerivedComparison (statement unchanged) and the new hole finiteSpanScalarTransport against node lem-sf-finite-span-module-derived-comparison, the new nodes and the change record; moved data module diffed against the clone; DerivedNormalization equal to the original by Iff.rfl, ExchangeEquation equal after delta (elaborator; kernel timeout on instance terms); delivered set and all 3 direct importers compiled OK in a sandbox; axioms only propext/Classical.choice/Quot.sound plus sorryAx from the named hole"
+ }
+}

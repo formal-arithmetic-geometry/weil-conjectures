@@ -1,0 +1,210 @@
+{
+ "id": "lem-trf-local-irredundant-relation-matrix",
+ "kind": "statement",
+ "title": "A local relation matrix fixing an irredundant tuple is invertible",
+ "statement": "Let $R$ be a commutative local ring, meaning a commutative ring with a unique maximal ideal $\\mathfrak m$, and let $n\\ge0$ be an integer. Let $a_1,\\ldots,a_n\\in R$ be irredundant: for every $j$, there are no $c_i\\in R$ with $a_j=\\sum_{i\\ne j}a_i c_i$. Let $B=(b_{ij})$ be an $n\\times n$ matrix over $R$ [def-weil-matrix] such that $a_j=\\sum_{i=1}^n a_i b_{ij}$ for every $j$. Then $1-b_{jj}\\in\\mathfrak m$ and $b_{jj}$ is a unit for every $j$, while $b_{ij}\\in\\mathfrak m$ whenever $i\\ne j$. Moreover, the determinant [def-weil-pbc-matrix-determinant] $\\det B$ is a unit, and $B$ is invertible: there is an $n\\times n$ matrix $V$ over $R$ with $BV=VB=I_n$. A unit of $R$ means an element $u$ admitting $v\\in R$ with $uv=1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0592, lemma-projective-freeness-criteria, proof last paragraph (irredundancy forces unit diagonal and nonunit off-diagonal; determinant is a unit)"
+ },
+ "stmt_deps": [
+  "def-weil-matrix",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Fix $j$. Rearranging the given relation gives $(1-b_{jj})a_j=\\sum_{i\\ne j}a_i b_{ij}$. If $1-b_{jj}$ were a unit with inverse $v$, then $a_j=\\sum_{i\\ne j}a_i(vb_{ij})$, contradicting irredundancy at $j$. The local-ring unit criterion therefore gives $1-b_{jj}\\in\\mathfrak m$. If also $b_{jj}\\in\\mathfrak m$, closure of the ideal under addition would give $1\\in\\mathfrak m$, impossible for a maximal ideal. Thus $b_{jj}\\notin\\mathfrak m$ and the same criterion makes $b_{jj}$ a unit.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, final paragraph, lines 20672–20680; expanded coefficient and determinant arguments"
+   }
+  },
+  {
+   "text": "Fix $i\\ne j$. If $b_{ij}$ were a unit with inverse $v$, the same column relation would give $a_i=a_jv(1-b_{jj})-\\sum_{k\\ne i,j}a_kvb_{kj}$. This expresses $a_i$ as a linear combination of the other tuple entries, contrary to irredundancy at $i$. Hence $b_{ij}$ is not a unit, and the local-ring unit criterion gives $b_{ij}\\in\\mathfrak m$. No cancellation by an $a_i$ is used.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, final paragraph, lines 20672–20680; expanded coefficient and determinant arguments"
+   }
+  },
+  {
+   "text": "Use the Leibniz formula for $\\det B$. Each nonidentity permutation $\\sigma$ moves some $k$, so its product has the factor $b_{\\sigma(k),k}\\in\\mathfrak m$ by Step 2; that signed product lies in $\\mathfrak m$. The identity-permutation term is $\\prod_j b_{jj}$. Write $b_{jj}=1+u_j$ with $u_j\\in\\mathfrak m$ by Step 1. Expanding the finite product, every term of $\\prod_j(1+u_j)-1$ contains a factor $u_j$, so it too belongs to $\\mathfrak m$. Adding these terms proves $\\det B-1\\in\\mathfrak m$. If $\\det B$ belonged to $\\mathfrak m$, subtracting $\\det B-1$ would put $1$ in this proper ideal. Thus $\\det B\\notin\\mathfrak m$ and the unit criterion makes it a unit. This also covers $n=0$: the determinant formula gives the empty product $1$ and there are no nonidentity terms.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, final paragraph, lines 20672–20680; expanded coefficient and determinant arguments"
+   }
+  },
+  {
+   "text": "Choose $d\\in R$ with $d\\det B=1$, which is possible by Step 3 and commutativity. Let $V=d\\operatorname{adj}(B)$. The adjugate identity states $B\\operatorname{adj}(B)=\\operatorname{adj}(B)B=(\\det B)I_n$. Scalar multiplication commutes with matrix multiplication over the commutative ring $R$, as follows entrywise from distributivity in each finite row-column sum. Consequently $BV=d(B\\operatorname{adj}(B))=I_n$ and $VB=d(\\operatorname{adj}(B)B)=I_n$. For $n=0$ these are equalities of empty matrices.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, last sentence; adjugate identity as in Tag 07DQ, lemma-matrix-left-inverse, proof lines 2689–2691"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-matrix-adjugate-identity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0592, lemma-projective-freeness-criteria, final paragraph; elementary expansions of its two assertions, and Tag 07DQ adjugate identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a local ring an irredundant tuple a satisfying a equals a times B forces the matrix B to be invertible",
+   "results": "{\"t\": \"2026-10-22T06:46:32Z\", \"tool\": \"leanfinder\", \"query\": \"Over a local ring an irredundant tuple a satisfying a equals a times B forces the matrix B to be invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.diagonal_transvection_induction_of_det_ne_zero\", \"invariantBasisNumber_iff_matrix\", \"IsAzumaya.matrix\", \"rankCondition_iff_matrix\", \"Matrix.mulVec_injective_iff_isUnit\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Matrix.linearIndependent_rows_iff_isUnit\", \"Matrix.mulVec_surjective_iff_isUnit\"], \"digest\": \"12d751b684b674cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: matrix inversion from an already unit determinant and field/PID rank criteria do not deduce the local diagonal, off-diagonal and determinant assertions from the irredundant tuple relation."
+  },
+  {
+   "tool": "grep",
+   "query": "irredundant|nonunit.*matrix|matrix.*nonunit|diagonal.*unit",
+   "results": "{\"t\": \"2026-10-22T06:47:05Z\", \"tool\": \"grep\", \"query\": \"irredundant|nonunit.*matrix|matrix.*nonunit|diagonal.*unit\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: matrix inversion from an already unit determinant and field/PID rank criteria do not deduce the local diagonal, off-diagonal and determinant assertions from the irredundant tuple relation."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, Matrix, IsUnit",
+   "results": "{\"t\": \"2026-10-22T06:47:05Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing, Matrix, IsUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: matrix inversion from an already unit determinant and field/PID rank criteria do not deduce the local diagonal, off-diagonal and determinant assertions from the irredundant tuple relation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A matrix fixing a minimal generating tuple over a local ring has unit determinant and unit diagonal and nonunit off diagonal",
+   "results": "{\"t\": \"2026-10-22T06:47:06Z\", \"tool\": \"leansearch\", \"query\": \"A matrix fixing a minimal generating tuple over a local ring has unit determinant and unit diagonal and nonunit off diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.isUnit_det_of_invertible\", \"FixedDetMatrix\", \"Matrix.isUnit_iff_isUnit_det\", \"Matrix.isUnits_det_units\", \"Matrix.invertibleOfIsUnitDet\", \"Matrix.isUnit_det_of_left_inverse\", \"Matrix.UnitaryGroup.det_isUnit\", \"Matrix.SpecialLinearGroup\"], \"digest\": \"95be8f0a8ec286b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: matrix inversion from an already unit determinant and field/PID rank criteria do not deduce the local diagonal, off-diagonal and determinant assertions from the irredundant tuple relation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irredundant generating family of an ideal in a local ring has only invertible matrices fixing that family",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"leanfinder\", \"query\": \"An irredundant generating family of an ideal in a local ring has only invertible matrices fixing that family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Ideal.exists_smith_normal_form\", \"Ideal.smithCoeffs\", \"Ideal.smithCoeffs_ne_zero\", \"Matrix.isRepresentation.toEnd_exists_mem_ideal\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Ideal.selfBasis_def\"], \"digest\": \"09c20d1aa89f182a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: matrix inversion from an already unit determinant and field/PID rank criteria do not deduce the local diagonal, off-diagonal and determinant assertions from the irredundant tuple relation."
+  },
+  {
+   "tool": "grep",
+   "query": "irredundant|[Mm]inimal.*[Gg]enerat|[Rr]elation.*[Mm]atrix",
+   "results": "{\"t\": \"2026-10-23T10:50:49Z\", \"tool\": \"grep\", \"query\": \"irredundant|[Mm]inimal.*[Gg]enerat|[Rr]elation.*[Mm]atrix\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Etale.lean\"], \"digest\": \"fc661d19adecef8b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned presentation, regular-sequence, basis, localization and fixed-determinant declarations do not assert the irredundant tuple relation-matrix criterion; the local-ring grep hit only concerns a minimal polynomial."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficients of a linear relation between a minimal generating family over a local ring belong to the maximal ideal",
+   "results": "{\"t\": \"2026-10-23T10:50:50Z\", \"tool\": \"leansearch\", \"query\": \"Coefficients of a linear relation between a minimal generating family over a local ring belong to the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Relations.relation\", \"LinearIndependent.of_isLocalized_maximal\", \"LinearRecurrence.coeffs\", \"Algebra.Presentation.HasCoeffs.coeffs_relation_mem_range\", \"Mathlib.Tactic.Linarith.Comp.coeffs\", \"AlgebraicClosure.le_maxIdeal\", \"Algebra.Presentation.coeffs_relation_subset_core\", \"Module.Relations.Solution.linearCombination_var_relation\"], \"digest\": \"7bf074e26e70e09d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned presentation, regular-sequence, basis, localization and fixed-determinant declarations do not assert the irredundant tuple relation-matrix criterion; the local-ring grep hit only concerns a minimal polynomial."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, Matrix, IsUnit",
+   "results": "{\"t\": \"2026-10-23T10:50:50Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing, Matrix, IsUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned presentation, regular-sequence, basis, localization and fixed-determinant declarations do not assert the irredundant tuple relation-matrix criterion; the local-ring grep hit only concerns a minimal polynomial."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A matrix fixing an irredundant finite tuple in a local ring is congruent to the identity modulo the maximal ideal and invertible",
+   "results": "{\"t\": \"2026-10-23T10:50:51Z\", \"tool\": \"leanfinder\", \"query\": \"A matrix fixing an irredundant finite tuple in a local ring is congruent to the identity modulo the maximal ideal and invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedDetMatrices.reps_one_id\", \"Algebra.SubmersivePresentation.jacobian_isUnit\", \"FixedDetMatrices.reduce_mem_reps\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"FixedDetMatrices.reduce\", \"FixedDetMatrices.reduceStep\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\"], \"digest\": \"0b213f1b1adb6bb0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned presentation, regular-sequence, basis, localization and fixed-determinant declarations do not assert the irredundant tuple relation-matrix criterion; the local-ring grep hit only concerns a minimal polynomial."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a local ring every coefficient in a relation on an irredundant generating family is in the maximal ideal",
+   "results": "{\"t\": \"2026-10-23T10:55:36Z\", \"tool\": \"leanfinder\", \"query\": \"In a local ring every coefficient in a relation on an irredundant generating family is in the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Algebra.Presentation.coeffs_relation_subset_core\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"IsLocalRing.basisQuotient_repr\", \"IsLocalRing.basisQuotient_apply\", \"LinearIndependent.of_isLocalized_maximal\", \"Algebra.Presentation.coeffs_relation_subset_coeffs\"], \"digest\": \"aa9fe9da622f5a85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned presentation, regular-sequence, basis, localization and fixed-determinant declarations do not assert the irredundant tuple relation-matrix criterion; the local-ring grep hit only concerns a minimal polynomial."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-element-free-summand",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'Hence by Lemmas 05FQ and 05FT the map S^{⊕r}→N_p is R-universally injective' (Tag 05FQ). Within the proof of Tag 05FQ: the first sentence invokes Algebra, Theorem 0593 to make the projective source free. In the proof of Tag 0593, the invocation of Lemma 0592 (lemma-projective-freeness-criteria) for the complementary projective module. Within Tag 0592: Tag 0592, lemma-projective-freeness-criteria, proof last paragraph (irredundancy forces unit diagonal and nonunit off-diagonal; determinant is a unit).",
+   "via": [
+    "lem-trf-projective-element-free-summand",
+    "lem-trf-projective-over-local-free",
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-local-irredundant-relation-matrix",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0592 final paragraph into coefficient contradictions, Leibniz determinant calculation, and an explicit two-sided adjugate inverse. Reused the existing local-ring criterion, determinant definition, and adjugate Mathlib leaf; no new nodes or statement change. Checked empty matrices and zero-divisor examples.",
+  "blueprint": "lem-trf-local-term-locality proof (1)–(2), specialization/normal-cone route: the existing flattening chain reaches Stacks 05FQ, then 0593 and the element-wise projective freeness criterion 0592. These steps realize precisely the final relation-matrix argument of 0592 named in the inherited blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-4aaa93dc8",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-4aaa93dc8 (reviewer sub-agent of L); spot-checked: I read the item in full: 4 steps, 0 new nodes, statement unchanged; the base had an empty proof. It matches Stacks algebra.tex Tag 0592 lemma-projective-freeness-criteria, proof lines 20672-20680, including the relation a_j=sum_i a_i b_ij in the same convention and the conclusions (unit diagonal, off-diagonal entries non-units, unit determinant). Step 1: the rearrangement plus lem-weil-pbc-local-ring-unit-criterion give 1-b_jj in m and b_jj a unit; when n=1 the empty sum forces a_j=0, which irredundancy excludes. Step 2: I checked the displayed solution a_i=a_j v(1-b_jj)-sum_{k!=i,j} a_k v b_kj; it contradicts irredundancy at i. Step 3: the Leibniz index convention b_{sigma(k),k} matches def-weil-pbc-matrix-determinant; every non-identity permutation has an off-diagonal factor in m and the identity term is 1 mod m, so det B is a unit; n=0 is covered. Step 4: V=d adj(B), by the two-sided lem-weil-pbc-matrix-adjugate-identity. All steps are genuinely elementary relative to the cited Mathlib-leaf statements. Small cases: n=0; k[e]/(e^2) with a=e, b=1+e; a field forces n<=1. Duplicate search (rg -L irredundant): lem-trf-minimal-support-fixed-vector-coordinates only produces the relation; the parent lem-trf-projective-element-free-summand cites the item for the inverse of B. No re-split note, no Lean declaration names the id, no SGA, no tool_uses needed, blueprint from-chain inherited with same_as []. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalIrredundantRelationMatrix",
+  "declaration": "IsLocalRing.irredundant_relation_matrix",
+  "file": "lean/Sheaf/RingTheory/LocalIrredundantRelationMatrix.lean",
+  "statement": "theorem irredundant_relation_matrix {R : Type u} [CommRing R] [IsLocalRing R] (n : ℕ) (a : Fin n → R) (hirr : ∀ j : Fin n, ¬ ∃ c : Fin n → R, a j = ∑ i ∈ Finset.univ.erase j, a i * c i) (B : Matrix (Fin n) (Fin n) R) (hrel : ∀ j : Fin n, a j = ∑ i : Fin n, a i * B i j) : (∀ j : Fin n, 1 - B j j ∈ maximalIdeal R ∧ IsUnit (B j j)) ∧ (∀ i j : Fin n, i ≠ j → B i j ∈ maximalIdeal R) ∧ IsUnit B.det ∧ ∃ V : Matrix (Fin n) (Fin n) R, B * V = 1 ∧ V * B = 1",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-596bfeae7",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read item node, both stmt_deps (Matrix, Matrix.det existing Mathlib, unchanged), Stacks algebra.tex 0592 lines 20672-20680, module and report. Clause-by-clause match: CommRing+IsLocalRing, n:ℕ, a:Fin n→R, irredundancy via erase-j sum (equivalent), hrel a j = Σ a i * B i j (same convention), conclusions 1-B j j ∈ m ∧ IsUnit (B j j), off-diagonal ∈ m, IsUnit det, two-sided inverse. Statement true; edge cases n=0, n=1, k[ε]/ε², zero ring fine. Single sorry, docstrings with source and blueprint and 4 proof steps, statement verbatim, adjugate plain import is a proof_dep. Name new (rg Mathlib/Sheaf/WeilConjectures); live node identical except lean, no supersession. No findings."
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-zl-prescribed-weil-isomorphism-lifts",
+ "kind": "statement",
+ "title": "Prescribed compatible module isomorphisms lift uniquely as Weil isomorphisms",
+ "statement": "For D,l,Omega,Y0 as above, every supplied normalized classical realization R and classical Weil object M satisfy ZlPrescribedWeilLifts R M: at every finite field and every supplied pinned diagram stage, a compatible module isomorphism to a given lisse heart Weil object lifts uniquely with its specified finite and common-stage arrows. No finite diagram, coefficient field of descent or coherent family of stages is constructed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS 6.8.14(2), Remark 6.8.15; parent step 9"
+ },
+ "stmt_deps": [
+  "def-zl-finite-weil-diagram-data",
+  "def-zl-normalized-classical-weil-realization"
+ ],
+ "proof": [
+  {
+   "text": "For the arbitrary finite stage and lisse target in ZlPrescribedWeilLifts, lift xi and xi inverse by the normalized lisse-heart Hom bijection. Faithfulness proves the inverse identities. Naturality of Along and the module Weil compatibility show the resulting heart isomorphism psi is Weil-equivariant.",
+   "uses": [
+    "lem-tw-lisse-rational-realization",
+    "def-zl-finite-weil-diagram-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport psi to the common stage, compose with eta, and precompose by R.weil applied to beta inverse. The supplied stage pinning gives its Weil equation and fixes its underlying map to the required composite. The Hom bijection makes psi unique from xi; the faithful common-stage Weil forgetful functor then makes B unique. E and eta were arbitrary, so all further coefficient enlargements are included. Zero objects satisfy the same cancellation identities.",
+   "uses": [
+    "def-zl-normalized-classical-weil-realization",
+    "def-weil-weil-sheaf-complex",
+    "def-zl-finite-weil-diagram-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-zl-finite-weil-diagram-data",
+  "def-zl-normalized-classical-weil-realization",
+  "lem-tw-lisse-rational-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS 6.8.14(2), Remark 6.8.15; parent step 9; explicit interface refinement of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preimageIso|isoEquiv|fullyFaithful.*IsoAlgebra",
+   "results": "Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical or algebraic tools do not supply this normalized classical Weil interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prescribed compatible module sheaf isomorphism lifts uniquely to a Weil sheaf isomorphism through a fully faithful realization",
+   "results": "SheafOfModules.fullyFaithfulForget; AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift; CategoryTheory.GrothendieckTopology.isoSheafify_inv; SheafOfModules.sheafificationCompPullback; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; FGModuleCat.fullyFaithfulULift",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical or algebraic tools do not supply this normalized classical Weil interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed compatible module sheaf isomorphism lifts uniquely to a Weil sheaf isomorphism through a fully faithful realization",
+   "results": "PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf; CategoryTheory.Functor.IsCoverDense.sheafIso; CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso; CategoryTheory.GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso; SheafOfModules.toSheafCompSheafToPresheafIso; CategoryTheory.Functor.IsCoverDense.Types.sheafIso; PresheafOfModules.homEquivOfIsLocallyBijective; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical or algebraic tools do not supply this normalized classical Weil interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClassicalFiniteWeilDiagramRealization",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, finite classical Weil filtration transport; BS 6.8.14(2), Remark 6.8.15; parent step 9",
+   "via": [
+    "lem-zl-classical-finite-weil-diagram-realization",
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClassicalWeilPrescribedIsomorphismLifts",
+  "file": "lean/Sheaf/Paper/ClassicalWeilPrescribedIsomorphismLifts.lean",
+  "declaration": "WeilConjectures.zl_prescribed_weil_isomorphism_lifts",
+  "declarations": [
+   "WeilConjectures.zl_prescribed_weil_isomorphism_lifts"
+  ],
+  "statement": "theorem zl_prescribed_weil_isomorphism_lifts (R : ZlClassicalRealization D l hl Ω Y₀) (M : ZlClassicalWeil D l Ω Y₀) : ZlPrescribedWeilLifts D l hl Ω Y₀ R M",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ee1f2",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T122605-L-1788533",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ee1f2",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T122605-L-1788533",
+  "kind": "interface",
+  "note": "independent cc review: item module vs clone (theorem statement byte-identical, 14 defs moved verbatim to ClassicalFiniteWeilDiagramData and publicly re-exported), three new sorry step statements vs the item conclusion and the node plan, item node fields vs clone (only proof/proof_deps/proof_origin/tool_uses/lean changed), scratch --all compile + #print axioms [propext, sorryAx, Classical.choice, Quot.sound]"
+ }
+}

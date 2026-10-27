@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-normalized-rational-closed-comparison",
+ "kind": "statement",
+ "title": "Normalized rational closed term and proper adjunction unit",
+ "statement": "Fix the finite-field datum D and coefficient data l and E as in [def-weil-weil-sheaf-complex]. For a separated finite-type model X₀ and finite-type Z₀ with a closed immersion i₀:Z₀→X₀, let i be its actual geometric base change. Suppose P and Q are the integral and rational presentations normalized as in [def-sf-recollement-presentation-data]. There is a natural isomorphism from Q.closedTerm to fieldWeilPull(i₀) followed by fieldWeilProper(i₀), the actual rational pullback and its specified right adjoint of [def-zl-field-weil-shriek-shift-data]. For every object K the composite of Q.unit at K with this isomorphism is precisely the unit of fieldWeilProperAdj at K. This is an identification of functors with their prescribed units; no Frobenius structure or open square is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-field-weil-shriek-shift-data"
+ ],
+ "proof": [
+  {
+   "text": "The quotient-normalized immersion comparison identifies ordinary exact completed-ring inverse image with the specified completed pullback. Closed direct image is exact; derive the actual module adjunction and restrict it to the full integral constructible categories. This gives the same closed composite and the same unit as in the integral normalization, first on complexes and then on all objects by essential surjectivity and naturality.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison",
+    "def-sf-recollement-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+   }
+  },
+  {
+   "text": "Raw scalar localization transports the integral adjunction and unit. Its object map is unchanged, and tensor bilinearity extends naturality from integral arrows to all rational arrows. Uniqueness of right adjoints identifies the rationalized image with fieldWeilProper, with unit equation unit_rightAdjointUniq_hom_app. Compose with the closed natural isomorphism in the rational normalization of Q. The two unit equations give the displayed equation. The same construction applies to the empty closed scheme and zero objects.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-zl-field-weil-shriek-shift-data",
+    "def-sf-recollement-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-immersion-completed-pullback-comparison",
+  "def-sf-recollement-presentation-data",
+  "def-weil-rationalization-karoubi",
+  "def-zl-field-weil-shriek-shift-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of an adjunction is preserved by the unique natural isomorphism between two right adjoints and by localization",
+   "results": "CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_assoc, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app_assoc, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app, CategoryTheory.Adjunction.Localization.η",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and localization unit formulas; no normalized completed-coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_rightAdjointUniq|localization_unit|map_restrictFullyFaithful_unit",
+   "results": "Mathlib/Algebra/Category/Ring/Instances.lean, Mathlib/Algebra/Category/Ring/Instances.lean, Mathlib/Algebra/Category/Ring/Instances.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction-unit transport only; no comparison for the normalized completed presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "results": "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction-unit transport only; no comparison for the normalized completed presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized closed unit identifies with the right adjunction unit under a natural isomorphism of closed direct image functors and rational scalar localization",
+   "results": "CompHausLike.LocallyConstant.adjunction_unit, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CompHausLike.LocallyConstant.adjunction_left_triangle, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction-unit transport only; no comparison for the normalized completed presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfNormalizedRationalWeilSquares",
+  "date": "2026-10-25",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "The triangle, first paragraph: exact closed direct image and actual unit; Weil structures paragraph: the exchange maps paste with the same units",
+   "via": [
+    "lem-sf-normalized-rational-recollement-weil-squares"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfNormalizedRationalClosedComparison",
+  "file": "lean/Sheaf/Paper/SfNormalizedRationalClosedComparison.lean",
+  "declaration": "WeilConjectures.sfNormalizedRationalRecollement_closed_comparison",
+  "statement": "theorem sfNormalizedRationalRecollement_closed_comparison\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (X₀ Z₀ : Over (Spec (.of D.k₀)))\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom]\n    [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom]\n    (i₀ : Z₀ ⟶ X₀) [IsClosedImmersion i₀.left]\n    (i : (D.geometricFiber Z₀).left ⟶ (D.geometricFiber X₀).left)\n    [IsClosedImmersion i]\n    (_hi : i = ((Over.pullback\n      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map i₀).left)\n    (P : SfRecollementPresentation\n      (sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left))\n    (Q : SfRecollementPresentation\n      (sfRationalConstructibleCategory l E (D.geometricFiber X₀).left))\n    (_hP : SfIntegralRecollementNormalization l E i (sfRecollementGeometricNoetherian D X₀) P)\n    (_hQ : SfRationalRecollementNormalization l E (D.geometricFiber X₀).left P Q) :\n    ∃ c : Q.closedTerm ≅ fieldWeilPull D l hl E i₀ ⋙ fieldWeilProper D l hl E i₀,\n      ∀ K, Q.unit.app K ≫ c.hom.app K = (fieldWeilProperAdj D l hl E i₀).unit.app K",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261025T122810-L-1807992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261025T122810-L-1807992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

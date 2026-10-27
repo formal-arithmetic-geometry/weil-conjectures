@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-intrinsic-open-unit-generators",
+ "kind": "statement",
+ "title": "Canonical intrinsic open unit generators and coefficient restriction",
+ "statement": "Let j:X→Z be any open immersion, A and B finite commutative coefficient rings in the scheme universe, and φ:A→B a ring map. The canonical inverse-realization identification on underlying abelian sheaves and its open restriction define sfOpenGeneratorEvaluate. Define sfOpenUnitGenerator by evaluating the actual intrinsic extension adjunction unit through this map. For every intrinsic B-module M on X, W in Z_proet, a:W→openObject(j), and x in the A-restricted module on sliceSite(Over.mk(a)), the published sfOpenRestriction coefficient comparison takes sfOpenUnitGenerator at A on the restricted module and x to sfOpenUnitGenerator at B on M and that same underlying section. The generator is also natural in M. The node supplies the actual realization, inverse-realization and open underlying isomorphisms, their coordinate formula, and the generic transported left-adjoint uniqueness unit equation used by its parent. No slice coefficient square, slice operations or coefficient tower is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03DI: extension by zero and its direct-sum adjunction unit; 03DJ: restriction of an extension; 00YV: canonical sheafification realization. Scalar compatibility is the normalized unit equation of lem-sf-open-extension-scalar-restriction-coherence."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfFiniteOpenCoefficientGenerators",
+  "date": "2026-10-27",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-open-coefficient-generators",
+   "place": "Canonical intrinsic section evaluation and coefficient unit identity, proof steps 2 and 4.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unit generator of extension by zero commutes with restriction of coefficient scalars via a normalized adjunction square",
+   "results": "8 hits, including ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.Unit.map and ModuleCat.extendRestrictScalarsAdj_unit_app_apply.",
+   "date": "2026-10-27",
+   "verdict": "These concern algebraic scalar-extension units, not the intrinsic open adjunction and its realization section map. Use the existing project normalized coefficient-square equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom",
+   "results": "1 hit: CategoryTheory.Adjunction.unit_leftAdjointUniq_hom.",
+   "date": "2026-10-27",
+   "verdict": "Provides the generic uniqueness principle; the realization coordinate and coefficient-unit calculation are proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "sfOpenUnitGenerator|sfOpenGeneratorUnderlying|openImmersion.*unit.*restrictScalars",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No existing intrinsic unit-generator section API."
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [
+  "lem-sf-finite-open-restriction-presentation",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "On underlying abelian sheaves, the canonical realization map is the sheafification unit. Its input is already a sheaf, so this unit is invertible. Whisker it by inverse realization and compose with the realization counit to identify inverse-realization sections with intrinsic sections. The resulting inverse map has precisely the published sfFixedToIntrinsicSection formula.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the inverse realization identification through ordinary restriction to the open, canceling the open realization unit. This defines the canonical openUnderlying isomorphism. Evaluate it at sliceSite(Over.mk(a)) and transport along the canonical recomposition isomorphism to W. Define the intrinsic generator by applying this evaluation to the actual intrinsic extension adjunction unit. Naturality of the unit and the underlying isomorphism proves naturality in M.",
+   "uses": [
+    "lem-sf-finite-open-restriction-presentation",
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise normalization of sfRealizationRestriction says that it identifies the two realization units. Naturality and the equivalence triangle identities identify inverse realization under scalar restriction. Whiskering through ordinary open restriction identifies openUnderlying under sfOpenRestrictionCoefficientSquare. Thus the corresponding evaluation of a restricted section agrees with its original evaluation.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-sf-open-extension-scalar-restriction-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the published sfOpenRestriction_normalized_unique equation at M. Naturality of evaluation moves the extension coefficient comparison through evaluation, and the compatibility just proved moves the coefficient square through it. The normalized equation identifies the remaining restricted unit with the unit at the other coefficient, proving the stated generator equation. Separately, apply left-adjoint uniqueness and transport its unit through an equivalence counit and any forward functor isomorphism; naturality of that isomorphism gives sfOpenGeneratorTransportedUnit.",
+   "uses": [
+    "lem-sf-open-extension-scalar-restriction-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-sf-finite-open-restriction-presentation",
+  "def-weil-extension-by-zero",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sf-open-extension-scalar-restriction-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03DI direct-sum unit, 03DJ and canonical realization (00YV), expanded by actual unit/counit and normalized coefficient-square identities. Factored from the proved parent to keep each compilation within 60 seconds."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfIntrinsicOpenUnitGenerators",
+  "file": "lean/Sheaf/Paper/SfIntrinsicOpenUnitGenerators.lean",
+  "declaration": "WeilConjectures.sfOpenUnitGenerator_restriction",
+  "declarations": [
+   "WeilConjectures.sfOpenGeneratorFixedUnderlying",
+   "WeilConjectures.sfOpenGeneratorIntrinsicUnderlying",
+   "WeilConjectures.sfOpenGeneratorRealizeMap",
+   "WeilConjectures.sfOpenGeneratorRealizeMap_isIso",
+   "WeilConjectures.sfOpenGeneratorRealize",
+   "WeilConjectures.sfOpenGeneratorInverse",
+   "WeilConjectures.sfOpenGeneratorInverse_hom",
+   "WeilConjectures.sfOpenGeneratorTransportedUnit",
+   "WeilConjectures.sfOpenGeneratorUnderlying",
+   "WeilConjectures.sfOpenGeneratorEvaluate",
+   "WeilConjectures.sfOpenUnitGenerator",
+   "WeilConjectures.sfOpenUnitGenerator_map",
+   "WeilConjectures.sfOpenUnitGenerator_restriction"
+  ],
+  "statement": "theorem sfOpenUnitGenerator_restriction {A B : Type u}\n    [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)\n    (M : proEtaleRingModules X (proEtaleConstantRing X B)) (W : Z.ProEt)\n    (a : W ⟶ IntegralOpenReduction.openObject j)\n    (x : ((proEtaleCoefficientRestrictScalars X φ).obj M).val.obj\n      (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a)))) :\n    ((sfOpenRestriction j φ).hom.app M).val.app (op W)\n        (sfOpenUnitGenerator j A ((proEtaleCoefficientRestrictScalars X φ).obj M) W a x) =\n      sfOpenUnitGenerator j B M W a x",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T050645-L-250250",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T050645-L-250250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

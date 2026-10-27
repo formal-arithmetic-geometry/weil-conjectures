@@ -1,0 +1,149 @@
+{
+ "id": "lem-sf-finite-tor-pullback-affine-projective-charts",
+ "kind": "statement",
+ "title": "Base change of explicit finite-projective affine charts",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$. Use the completed coefficient sheaves and ordinary ringed derived pullback of [def-sf-integral-system-canonical-bridge, def-fix-qcqs-completion-ordinary-models]. Let $f:X\\to Y$ be separated, locally of finite type and quasi-compact. Let $K\\in D(Y_{\\mathrm{proet}},\\widehat{\\mathcal O}_E)$. Assume either that on every affine open $V\\subset Y$ there is a finite qcqs open--closed tree [def-sfb-qcqs-open-closed-tree] such that each nonempty leaf has a finite covering family of qcqs pro-etale schemes on which the ordinary restriction of $K$ is isomorphic to the image of a bounded cochain complex whose terms have explicit split inclusions into finite products of the completed regular coefficient sheaf, or that $K$ is the tensor unit of the integral calculus. Then for every affine open $U\\subset X$ there is such a finite tree and such leaf covers and bounded finite-free-retract representatives for the ordinary ringed pullback of $K$. Boundedness means that all terms outside an integer interval are zero objects. Every retract is specified by maps $i,p$ with $ip=1$. No hypothesis or conclusion asserts derived completeness, and no model condition is imposed on an empty leaf.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5 finite-projective reduction and Lemma 6.5.8 constructible restriction; Stacks sites-cohomology.tex Tag 0G7E (lemma-pullback-K-flat), proetale.tex Tag 09C3 (lemma-local-structure-constructible-complex). Agent-written base-change assembly from explicit source charts."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-sfb-qcqs-open-closed-tree"
+ ],
+ "proof": [
+  {
+   "text": "Apply the purely geometric affineOpenClosedChartFactorization with C(T,g) asserting that the ordinary pullback of K along g has a bounded finite-free-retract model. It supplies a qcqs tree and covering charts whose maps to Y factor through original source charts. The geometric lemma enumerates the source leaves, pulls their immersions back along a finite affine cover of U, and reuses the proved constructible-immersion partition_tree argument before pulling back the original pro-etale covers.",
+   "uses": [
+    "lem-sf-affine-open-closed-chart-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a bounded model P on a source chart, apply ordinaryIntegralModulePull termwise. The existing ordinaryPull_limits and ordinaryPull_colimits comparisons supply finite-limit and finite-colimit preservation, and ordinaryCounitExact identifies derived pullback of Q(P) with Q of this termwise pullback. Zero terms stay zero; PreservesProduct.iso and pullbackObjUnitToUnit identify finite products of the regular coefficient module; functoriality transports each splitting. Use ordinaryPullIso, IntegralOrdinary.pullIso and ringedPullComp to identify the result along the geometric factorization with the chart restriction of ringedPull f K. All of these are the existing normalized ordinary comparisons; no assertion about infinite products or completion is used.",
+   "uses": [
+    "lem-tw-ordinary-pullback-stratified-models",
+    "lem-sf-projective-chart-ordinary-tensor-model",
+    "lem-sf-integral-ordinary-pullback-comparison",
+    "def-sf-integral-system-canonical-bridge",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the tensor-unit alternative, comparison_exists identifies the recorded tensor with the native tensor. Its two unitors identify the recorded unit with the native unit, and RingedDerivedNative.unitIso identifies that unit with the regular module concentrated in degree zero. This complex is bounded with rank-one splitting in degree zero and rank-zero splittings in all other degrees. Apply the preceding termwise-model transport first along f and then along the identity chart over U; take the one-vertex tree and its identity pro-etale cover.",
+   "uses": [
+    "lem-pd-ringed-kflat-native-model-identification",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent-written assembly for the finite-projective argument in Lemma 6.5.5, using the proved constructible-immersion tree refinement argument and existing exact ordinary-pullback comparisons. C4, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary pullback of finite Tor constructible integral complexes has bounded finite projective sheaf models on stratified pro etale affine charts",
+   "results": "Eight hits: finite-limit preservation, pullbackObjFreeIso and scheme fibre-product properties. No chart-refinement theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a constructible finite Tor integral sheaf complex has bounded finite projective models locally on strata",
+   "results": "Eight general scheme base-change and gluing hits, no projective-chart transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "Five hits give pullback of a free module sheaf and its generator equations. They handle free terms, not finite constructible trees or derived model transport.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.pullbackObjFreeIso|kFlat.*pullback|pullback.*kFlat",
+   "results": "No Mathlib grep hits. Local rg searches found the project ringed K-flat pullback theorem and tensor-chart comparison, but no base-change theorem for supplied projective charts.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteTorOrdinaryPullCompleteFixedDatum",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Primitive completion effectivity: finite-projective local model for ordinary pullback, before bounded-projective completeness and descent.",
+   "via": [
+    "lem-sf-finite-tor-ordinary-pull-complete",
+    "lem-sf-primitive-completion-effectivity",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteTorPullbackAffineProjectiveCharts",
+  "file": "lean/Sheaf/SixFunctors/FiniteTorPullbackAffineProjectiveCharts.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.finiteTorPullbackAffineProjectiveCharts",
+  "statement": "theorem finiteTorPullbackAffineProjectiveCharts\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (_hs : IsSeparated f) (_ht : LocallyOfFiniteType f) (_hq : QuasiCompact f)\n    (K : DerivedCategory (scalarReductionSource l E Y))\n    (_hK : (∀ (V : Y.Opens), IsAffine V.toScheme →\n      ∃ tree : QcqsOpenClosedTree V.toScheme,\n        ∀ (S : Scheme.{u}) (p : tree.Path S), p.IsLeaf → Nonempty S →\n          ∃ (c : ℕ) (A : Fin c → S.ProEt),\n            (∀ i, CompactSpace (A i).left) ∧\n            (∀ i, QuasiSeparatedSpace (A i).left) ∧\n            (∀ x : S, ∃ i, x ∈ Set.range (A i).hom.base) ∧\n            ∀ i : Fin c,\n              ∃ P : CochainComplex (scalarReductionSource l E (A i).left) ℤ,\n                (∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (P.X k)) ∧\n                (∀ k : ℤ, ∃ r : ℕ,\n                  ∃ ι : P.X k ⟶ ∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit\n                    (completedIntegralCoefficientSheafUnrestricted l E (A i).left)),\n                  ∃ π : (∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit\n                    (completedIntegralCoefficientSheafUnrestricted l E (A i).left))) ⟶ P.X k,\n                  ι ≫ π = 𝟙 _) ∧\n                Nonempty ((IntegralOnSlice.ordinaryDerivedPull l E\n                  ((A i).hom ≫ p.toRoot ≫ V.ι)).obj K ≅ DerivedCategory.Q.obj P)) ∨\n      K = (IntegralSystemRealization.calculus l E Y).integralClosed.monoidal.tensorUnit)\n    (U : X.Opens) [IsAffine U.toScheme] :\n    ∃ tree : QcqsOpenClosedTree U.toScheme,\n      ∀ (S : Scheme.{u}) (p : tree.Path S), p.IsLeaf → Nonempty S →\n        ∃ (c : ℕ) (A : Fin c → S.ProEt),\n          (∀ i, CompactSpace (A i).left) ∧\n          (∀ i, QuasiSeparatedSpace (A i).left) ∧\n          (∀ x : S, ∃ i, x ∈ Set.range (A i).hom.base) ∧\n          ∀ i : Fin c,\n            ∃ P : CochainComplex (scalarReductionSource l E (A i).left) ℤ,\n              (∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (P.X k)) ∧\n              (∀ k : ℤ, ∃ r : ℕ,\n                ∃ ι : P.X k ⟶ ∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit\n                  (completedIntegralCoefficientSheafUnrestricted l E (A i).left)),\n                ∃ π : (∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit\n                  (completedIntegralCoefficientSheafUnrestricted l E (A i).left))) ⟶ P.X k,\n                ι ≫ π = 𝟙 _) ∧\n              Nonempty ((IntegralOnSlice.ordinaryDerivedPull l E\n                ((A i).hom ≫ p.toRoot ≫ U.ι)).obj\n                  ((IntegralSystemRealization.ringedPull l E f).obj K) ≅\n                    DerivedCategory.Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-sf-affine-open-closed-chart-factorization",
+  "lem-tw-ordinary-pullback-stratified-models",
+  "lem-sf-projective-chart-ordinary-tensor-model",
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "def-sf-integral-system-canonical-bridge",
+  "def-fix-qcqs-completion-ordinary-models",
+  "lem-pd-ringed-kflat-native-model-identification"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6c446",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T050609-L-242600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T103413-L-1067844",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -152,7 +152,32 @@
   "item": "lem-weil-pbc-etale-local-finite-multiple-points",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isolated_fiber_point_base_change"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isolated_fiber_point_base_change",
+     "module": "WeilConjectures.AlgebraicGeometry.IsolatedFibrePointBaseChange",
+     "lines": [
+      52,
+      118
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -194,5 +219,37 @@
   "landing": "20261012T085229-L-10293",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism], let $g:S'\\to S$ be a morphism of schemes, and let $X'=X\\times_SS'$ be the fibre product with projections $g':X'\\to X$ and $f':X'\\to S'$. Let $x'\\in X'$, and put $x=g'(x')$, $s'=f'(x')$, $s=f(x)=g(s')$. If $x$ is an isolated point of the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ of $f$ at $s$ (the singleton is open in $X_s$), then $x'$ is an isolated point of the fibre $X'_{s'}=X'\\times_{S'}\\operatorname{Spec}\\kappa(s')$ of $f'$ at $s'$.",
+  "proof": [
+   {
+    "text": "Fibre of the base change. Let $r:\\kappa(s)\\to\\kappa(s')$ be the map induced by $g$ on residue fields. Since the fibre of a base change is the base change of the fibre, there is a morphism $h:X'_{s'}\\to X_s$ with $\\iota\\circ h=g'\\circ\\iota'$ (where $\\iota:X_s\\to X$, $\\iota':X'_{s'}\\to X'$ are the first projections) which, together with the projection $X'_{s'}\\to\\operatorname{Spec}\\kappa(s')$, makes $X'_{s'}$ a fibre product $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$, the map $\\operatorname{Spec}\\kappa(s')\\to\\operatorname{Spec}\\kappa(s)$ being $\\operatorname{Spec}(r)$. Since $f'(x')=s'$ and the projection $X'_{s'}\\to X'$ is a homeomorphism onto $f'^{-1}(s')$, there is a unique point $\\xi'\\in X'_{s'}$ with $\\iota'(\\xi')=x'$; this is the point of the fibre meant by '$x'$ is isolated in $X'_{s'}$'. Put $\\xi=h(\\xi')$. Then $\\iota(\\xi)=g'(\\iota'(\\xi'))=g'(x')=x$, and since $\\iota$ is injective (a homeomorphism onto $f^{-1}(s)$), $\\xi$ is the point of $X_s$ corresponding to $x$; by hypothesis $\\{\\xi\\}$ is open in $X_s$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The open point as a scheme over $\\kappa(s)$. Let $W\\subseteq X_s$ be the open subscheme with underlying set $\\{\\xi\\}$ and $w:W\\to X_s$ its inclusion, an open immersion. The morphism $w$ is locally of finite type, as every immersion is; the projection $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ is the base change of the morphism $f$, locally of finite type, along $\\operatorname{Spec}\\kappa(s)\\to S$, hence locally of finite type (stability under base change); so $\\pi\\circ w:W\\to\\operatorname{Spec}\\kappa(s)$ is locally of finite type (stability under composition). The underlying space of $W$ is one point, hence discrete; so $\\pi\\circ w$ is locally of finite type with finite discrete fibres, i.e. locally quasi-finite.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Base change of the open point is discrete and open. The base change $W_{\\kappa(s')}=W\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$ (via $r$) is locally quasi-finite over the field $\\kappa(s')$, since local quasi-finiteness is stable under base change. A scheme locally quasi-finite over a field is locally Artinian, hence has discrete underlying space; so $W_{\\kappa(s')}$ is discrete. Applying the restriction of the fibre-product square of the first step to the open $W\\subseteq X_s$ (an open subscheme of a fibre product is the fibre product of the corresponding open), the canonical morphism $W_{\\kappa(s')}\\to X'_{s'}$ is an open immersion with image $h^{-1}(W)$. Hence $h^{-1}(W)$ is an open subset of $X'_{s'}$ and, being homeomorphic to $W_{\\kappa(s')}$, is discrete in the subspace topology. No quasi-finiteness of the original morphism is assumed.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Conclusion. Since $h(\\xi')=\\xi\\in W$, $\\xi'\\in h^{-1}(W)$. As $h^{-1}(W)$ is discrete, $\\{\\xi'\\}$ is open in $h^{-1}(W)$, and as $h^{-1}(W)$ is open in $X'_{s'}$, $\\{\\xi'\\}$ is open in $X'_{s'}$: $x'$ is an isolated point of $X'_{s'}$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

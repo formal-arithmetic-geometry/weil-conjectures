@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-finite-model-ordinary-scalar",
+ "kind": "statement",
+ "title": "Scalar-compatible rank-one ordinary quotient comparison",
+ "statement": "Fix a prime l, a finite extension E of Q_l, its recorded integral ring A and positive quotient R_n=A/(varpi_E^(n+1)), a scheme T and a normalized Encoding e of [def-sfb-finite-model-quotient-coordinates]. There is an isomorphism from the image of the lifted rank-one A-module under modelFunctor, ordinary extension along the actual quotient and e.ordinary followed by e.fixed, to the constant sheaf of the lifted regular R_n-module. For every x in A, this single isomorphism intertwines the image of multiplication by x with constant multiplication by its actual residue in R_n. This concerns only rank one and scalar endomorphisms; no matrix or complex is involved.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models: the finite free scalar resolution tensored with N is [N^a → N^b]; the ordinary quotient matrix calculation in specified normalized coordinates."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-model-quotient-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Identify the lifted scalar regular module with the internal regular module. Constant sheaves and monoidal inverse image preserve regular modules. Apply the regular extension comparison along scalarToContinuous. Its naturality, tested on the unit, identifies every integral scalar endomorphism with the regular lift of the pulled-back continuous constant scalar section.",
+   "uses": [
+    "def-sfb-finite-constant-model-data",
+    "lem-weil-pbc-regular-extension-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the regular extension comparison along the actual quotient. To identify the encoded quotient regular object, express it as the scalar constant extension of the scalar regular module and use the existing normalized constant-model isomorphism and scalar regular coordinates. The finite quotient is discrete because its defining ideal is open by the integer coset basis.",
+   "uses": [
+    "lem-weil-pbc-regular-extension-comparison",
+    "lem-pe-finite-discrete-scalar-constant-models",
+    "det-def-sfb-constructible-local-model",
+    "lem-sfb-integers-coset-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved scalar_encoded lemma identifies the internal action of the pulled-back integral constant after quotient with multiplication by the actual residue in fixed module coordinates. regularLift_eq identifies that action with the regular lift used above. Every fixed module morphism commutes with scalar multiplication. Finally constant sheafification carries scalar multiplication to sectionwise multiplication, by naturality of toSheafify and linearity of its components. Compose the commuting squares to obtain the required scalar-compatible isomorphism.",
+   "uses": [
+    "det-proper-heart-bound-torsion",
+    "lem-sfb-regular-scalar-extension-multiplication"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-constant-model-data",
+  "lem-weil-pbc-regular-extension-comparison",
+  "lem-pe-finite-discrete-scalar-constant-models",
+  "det-def-sfb-constructible-local-model",
+  "det-proper-heart-bound-torsion",
+  "lem-sfb-regular-scalar-extension-multiplication",
+  "lem-sfb-integers-coset-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models: the finite free scalar resolution tensored with N is [N^a → N^b]; the ordinary quotient matrix calculation in specified normalized coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars finite free module constant sheaf normalized encoding matrix",
+   "results": "8 hits, including ordinary module and sheaf free-module APIs; none for this normalized model functor.",
+   "date": "2026-10-25",
+   "verdict": "Use project regular-extension and normalized-encoding APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\", \"double\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "The matrix-complex assembly must be proved explicitly; isolate its rank-one input."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*[Ee]xtend|extendScalarsComp|double.*Iso",
+   "results": "Found change-of-scalars composition and doubleXIso APIs. Project rg found scalarRegularIso, scalarConstantEncodedIso, scalar_encoded and regularExtensionIso_naturality.",
+   "date": "2026-10-25",
+   "verdict": "Existing proved helpers suffice for the rank-one calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of a regular module commutes with scalar multiplication and constant sheaf realization",
+   "results": "8 hits, including ModuleCat.ExtendScalars.smul_tmul, ModuleCat.extendScalars and ModuleCat.extendRestrictScalarsAdj.",
+   "date": "2026-10-25",
+   "verdict": "These concern ordinary scalar modules, not internal sheaf modules with the specified normalized encoding."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelOrdinaryFreeComplex",
+  "date": "2026-10-25",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Local models and Locality paragraphs of the finite-model proof; returned proof steps 8--9. Agent finite-quotient matrix calculation and finite-stratification descent; compare Bhatt--Scholze Section 6.3 for classical finite coefficients. Local models and Locality: compare quotient extension with a specified scalar resolution, before taking cohomology. Subargument: Local models: the finite free scalar resolution tensored with N is [N^a → N^b]; the ordinary quotient matrix calculation in specified normalized coordinates.",
+   "via": [
+    "lem-sfb-finite-model-ordinary-free-complex",
+    "lem-sfb-finite-model-quotient-chart-comparison",
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteModelOrdinaryScalar",
+  "file": "lean/Sheaf/Paper/FiniteModelOrdinaryScalar.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelQuotient.ordinary_scalar",
+  "statement": "theorem ordinary_scalar (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T) :\n    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField\n    let F := FiniteConstantModel.modelFunctor (A l E) T ⋙\n      Mod.extendScalars (AdicCompletion.quotient l E T n) ⋙\n      (e.ordinary.trans e.fixed).functor\n    let G := constantSheaf (Scheme.ProEt.topology T)\n      (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n)))\n    ∃ i : F.obj (ModuleCat.of (A l E) (ULift.{u + 1} (A l E))) ≅\n        G.obj (ModuleCat.of (ULift.{u + 1} (R l E n)) (ULift.{u + 1} (R l E n))),\n      ∀ x : A l E,\n        F.map (ModuleCat.ofHom (LinearMap.lsmul (A l E) (ULift.{u + 1} (A l E)) x)) ≫\n            i.hom =\n          i.hom ≫ G.map (ModuleCat.ofHom\n            (LinearMap.lsmul (ULift.{u + 1} (R l E n)) (ULift.{u + 1} (R l E n))\n              (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))\n                x))))",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T164504-L-1024577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T164504-L-1024577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

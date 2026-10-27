@@ -1,0 +1,210 @@
+{
+ "id": "lem-per-ample-finite-group-quotient-construction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 second paragraph through its last paragraph, printed pp.254--255: semistable G-alteration, ell-Sylow H, tame equivariant modification, quotient over T=S prime/H, and log resolution. Geometric construction only, before applying Theorem 3.6.2 and Proposition 3.5.7; preliminary finite extension to normalize constants in the first paragraph. Specifically: XVI 3.7: scheme quotient X double-prime/H, projectivity over X, and the prime-to-ell generic cover.; Original lem-per-projective-finite-group-quotient Steps 2--7; Rydh arXiv:0708.3333v2 Theorem 4.4 and Proposition 4.7, pp.20--23 (read online; WANTED locally); Stacks Groupoids 03JE, Algebra 00IS, Schemes 01JA--01JC.",
+   "via": [
+    "lem-per-projective-finite-group-quotient",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invariant-affine construction of a finite quotient from an ample source",
+ "statement": "Let B and V be Noetherian schemes [pqf-def-locnoeth], p:V→B locally of finite type [def-weil-finite-type-morphism], L an absolutely ample invertible module on V [def-sc-invertible-module, def-weil-pbc-ample-invertible-module], and H a finite group acting on V over B. There exist a scheme Q and morphisms q:V→Q and r:Q→B with qr=p such that q is an admissible finite scheme quotient [def-per-admissible-finite-scheme-quotient], surjective and categorical among all schemes, with nonempty actual geometric pullbacks on which the induced H action is transitive. The morphism r is locally of finite type. Restricting q to every H-invariant open U gives its admissible finite categorical quotient onto an open W of Q with q^-1(W)=U. This includes non-quasi-compact invariant opens. No quasi-projectivity, projectivity, ampleness or integrality assertion about Q is included.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Original lem-per-projective-finite-group-quotient Steps 2--7; Rydh arXiv:0708.3333v2 Theorem 4.4 and Proposition 4.7, pp.20--23 (read online; WANTED locally); Stacks Groupoids 03JE, Algebra 00IS, Schemes 01JA--01JC."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "def-per-admissible-finite-scheme-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Each orbit is finite. The ample finite-principal-affine theorem encloses it in an affine open inside any specified invariant open. Apply invariant affine shrinking to the action groupoid, whose arrows are the disjoint union of H copies of V. Its source and target are finite locally free: on the components they are identities and automorphisms. Thus invariant affine opens cover V and refine every invariant open, including inverse images of base affine opens.",
+   "uses": [
+    "lem-sc-ample-finite-principal-affine",
+    "lem-sfb-locally-free-groupoid-invariant-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 2--7"
+   }
+  },
+  {
+   "text": "On each invariant W=Spec A form C=A^H. The monic polynomial product_h(T-h(a)) shows each a integral over C. Over an affine T=Spec R of B with W⊆p^-1(T), the affine-pairs finite-type criterion makes A finite type over R. The same generators generate over C, so integral finite generation makes A finite as a C-module. Artin--Tate over the Noetherian R makes C finite type over R.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sc-finite-generated-integral-subring",
+    "lem-sfb-artin-tate-subalgebra-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 2--7"
+   }
+  },
+  {
+   "text": "The affine-groupoid orbit-fibres theorem gives surjectivity and orbit fibres for Spec A→Spec C, including over each algebraically closed field. A point of the geometric pullback is a rational point: its residue field is algebraic over the algebraically closed field because this morphism is finite. Thus the theorem on field-valued points gives transitivity on the actual pullback carrier, using the maps induced by each a_h and the pullback universal property. The integral spectrum map is closed, hence a topological quotient.",
+   "uses": [
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-weil-pbc-integral-spec-closed-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 2--7"
+   }
+  },
+  {
+   "text": "For f∈C prove C_f=(A_f)^H. Injectivity follows from the zero-fraction criterion. For a fixed fraction a/f^r, choose for each h an exponent killing h(a)-a. Their maximum works for every h, so f^n*a∈C represents the same fraction. This argument includes zero divisors, nilpotent f and zero rings. These identifications commute with restriction and identify the invariant sheaf with O_Spec(C) on the distinguished-open basis and hence on all opens.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 2--7"
+   }
+  },
+  {
+   "text": "On the topological orbit space |V|/H put the sheaf of invariant sections. The images of invariant affine opens are open, with inverse image exactly W. Steps 3--4 identify the restrictions with Spec C. The identifications on overlaps are the identity on the common invariant sheaf, so the cocycle condition holds. Glue these charts to Q and the local ring maps to q. Finiteness is local on the target, hence q is finite and surjective, with the orbit topology, orbit fibres and sectionwise invariant-sheaf formula.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 2--7"
+   }
+  },
+  {
+   "text": "An invariant morphism V→Z factors continuously through the orbit topology. On every open of Z its pullback on sections is fixed and therefore factors uniquely through the invariant sheaf. The resulting ringed-space map is local: for a point of Q choose a point above it; the image of a nonunit germ in O_Z is a nonunit upstairs, so cannot be a unit downstairs. This gives the unique scheme morphism Q→Z. Apply it to p to obtain r and q r=p.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 2--7"
+   }
+  },
+  {
+   "text": "The affine charts in Step 2 cover each r^-1(T), proving r locally of finite type. For any invariant open U, its image W in Q is open and q^-1(W)=U. Restrict the action and the same invariant sheaf. Step 1 gives its affine charts even when U is not quasi-compact. The same arguments prove the admissible finite quotient and categorical assertions for q_U:U→W.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-artin-tate-subalgebra-finite-type",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 2--7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sc-finite-generated-integral-subring",
+  "lem-sfb-artin-tate-subalgebra-finite-type",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-local-on-target",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Original lem-per-projective-finite-group-quotient Steps 2--7; Rydh arXiv:0708.3333v2 Theorem 4.4 and Proposition 4.7, pp.20--23 (read online; WANTED locally); Stacks Groupoids 03JE, Algebra 00IS, Schemes 01JA--01JC.; H1 formalization of the indicated steps, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite group acting on a scheme with affine orbit neighbourhoods has a categorical geometric quotient scheme",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, AddAction.finite_quotient_of_finite_quotient_of_finite_quotient, Finite.of_finite_addAction_orbitRel_quotient, AddAction.finite_quotient_of_pretransitive_of_finite_quotient, Finite.of_finite_mulAction_orbitRel_quotient, MulAction.orbitRel.Quotient, AddSubgroup.finite_quotient_of_pretransitive_of_index_ne_zero, IsQuotientCoveringMap.mk",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\"",
+   "results": "12 hits: Quotient, Quotient.mk, Quotient.mk', Quotient.decidableEq, Quotient.exists_rep, Quotient.ind, Quotient.inductionOn, Quotient.exact",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]inite[Gg]roup.*[Qq]uotient|[Ii]nvariant.*[Ss]ection",
+   "results": "3 hits: Mathlib/LinearAlgebra/Eigenspace/Pi.lean, Mathlib/Geometry/Manifold/Sheaf/Basic.lean, Mathlib/Geometry/Manifold/Sheaf/Smooth.lean",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveFiniteGroupQuotient",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AmpleFiniteGroupQuotientConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleFiniteGroupQuotientConstruction.lean",
+  "declaration": "AlgebraicGeometry.exists_finiteGroup_quotient_of_ample",
+  "statement": "theorem exists_finiteGroup_quotient_of_ample\n    (B V : Scheme.{u}) [IsNoetherian B] [IsNoetherian V]\n    (p : V ⟶ B) [LocallyOfFiniteType p]\n    (L : V.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple V L)\n    (H : Type v) [Group H] [Finite H] (a : H →* Aut V)\n    (ha : ∀ h : H, (a h).hom ≫ p = p) :\n    ∃ (Q : Scheme.{u}) (r : Q ⟶ B) (q : V ⟶ Q),\n      q ≫ r = p ∧ IsAdmissibleFiniteSchemeQuotient a q ∧ Surjective q ∧\n      (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Q),\n        Nonempty ↥(pullback (C := Scheme.{u}) q t) ∧\n        ∀ x y : ↥(pullback (C := Scheme.{u}) q t),\n          ∃ (h : H) (l : pullback q t ⟶ pullback q t),\n            l ≫ pullback.fst q t = pullback.fst q t ≫ (a h).hom ∧\n            l ≫ pullback.snd q t = pullback.snd q t ∧ l x = y) ∧\n      (∀ (Z : Scheme.{u}) (f : V ⟶ Z), (∀ h : H, (a h).hom ≫ f = f) →\n        ∃! g : Q ⟶ Z, q ≫ g = f) ∧\n      LocallyOfFiniteType r ∧\n      ∀ U : V.Opens, (∀ h : H, (a h).hom ⁻¹ᵁ U = U) →\n        ∃ (W : Q.Opens) (aU : H →* Aut U.toScheme) (qU : U.toScheme ⟶ W.toScheme),\n          q ⁻¹ᵁ W = U ∧\n          (∀ h : H, (aU h).hom ≫ U.ι = U.ι ≫ (a h).hom) ∧\n          qU ≫ W.ι = U.ι ≫ q ∧ IsAdmissibleFiniteSchemeQuotient aU qU ∧\n          ∀ (Z : Scheme.{u}) (f : U.toScheme ⟶ Z),\n            (∀ h : H, (aU h).hom ≫ f = f) →\n              ∃! g : W.toScheme ⟶ Z, qU ≫ g = f",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-per-ample-finite-group-quotient-construction",
+  "worker": "stage3",
+  "summary": "Invariant-affine construction of a finite quotient from an ample source",
+  "blueprint": "Original lem-per-projective-finite-group-quotient Steps 2--7; Rydh arXiv:0708.3333v2 Theorem 4.4 and Proposition 4.7, pp.20--23 (read online; WANTED locally); Stacks Groupoids 03JE, Algebra 00IS, Schemes 01JA--01JC.; blueprint_refs searches for quasi-projective ample, finite group quotient and quotient ample found no matching blueprint nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091653-L-3362064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091653-L-3362064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,165 @@
+{
+ "id": "def-pur-affine-dualizing-tower-comparison",
+ "kind": "definition",
+ "title": "The specified unbounded affine coordinate-tower compact-support comparison",
+ "status": "split",
+ "statement": "Let $u$ be a universe, $A$ a finite commutative ring of universe $u+1$, and $S$ a Noetherian scheme of universe $u$. Use the ordered coordinate tower $X_0=S$, $X_{r+1}=\\mathbf A^1_{X_r}$ and its projections $p_r:X_r\\to S$, with the standard affine-line compactifications $c_r$ [def-amb-affine-trace-tower]. Write $F_r:D(X_{r,\\mathrm{et}},A)\\to D(S_{\\mathrm{et}},A)$ for the literal ordered left functor of [def-amb-affine-trace-construction], so $F_0=1$ and $F_{r+1}=F_r\\circ F_{\\mathrm{line},r}$. Write $Rf_!$ for the ordinary unbounded compact-support functor of [def-amb-etale-compact-support]. Define the specified natural isomorphism $C_r:F_r\\xrightarrow\\sim Rp_{r!}$ by recursion. At zero it is the inverse of the identity comparison $R(1_S)_!\\xrightarrow\\sim1$. At $r+1$, first compare the chosen standard line compactification functor $F_{\\mathrm{line},r}$ with $Ru_{r!}$ by the compactification comparison, whiskered by $F_r$; next apply $C_r$ after $Ru_{r!}$; finally apply the proper/open unbounded compositor $Rp_{r!}Ru_{r!}\\xrightarrow\\sim R(p_ru_r)_!$. All identity, compactification and composition comparisons are precisely those of [lem-amb-unbounded-compact-support-comparisons]. This defines $C_r$ on all unbounded inputs, including $r=0$, with no invertibility assertion about an affine trace and no use of uniqueness of right adjoints.",
+ "stmt_deps": [
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-trace-tower",
+  "def-amb-etale-compact-support",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "Last paragraph: ordered affine-line tower on chosen compactifications. Exact existing construction: lean/Sheaf/SixFunctors/AffineDualizingCoefficient.lean, affineDualizingTowerComparison, lines 53-75."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affineDualizingTowerComparison|affineTraceLeft|unboundedEtaleLowerShriekCompIso",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for the ordinary-etale ordered compact-support comparison; reuse the existing project definition unchanged."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical natural isomorphism from the iterated affine line compact support functor to the compact support functor of affine space",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineSpace.functor",
+     "AlgebraicGeometry.AffineSpace.isoOfIsAffine.congr_simp",
+     "AlgebraicGeometry.AffineSpace.functor_obj_obj",
+     "CategoryTheory.Mat_.embeddingLiftIso",
+     "Rep.indCoindNatIso",
+     "AlgebraicGeometry.AffineSpace.homOverEquiv",
+     "AlgebraicGeometry.AffineSpace.SpecIso_inv_over",
+     "AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over"
+    ],
+    "digest": "04fbf46a3901b659"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for the ordinary-etale ordered compact-support comparison; reuse the existing project definition unchanged."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered coordinate tower comparison for compact support, formed by proper open composition and the identity isomorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompactlySupportedContinuousMap.partialOrder",
+     "CompactlySupportedContinuousMap.instIsScalarTower",
+     "CompactlySupportedContinuousMap.comp",
+     "CompactlySupportedContinuousMap.lt_def",
+     "CompactlySupportedContinuousMap.comp_id",
+     "CompactlySupportedContinuousMap.le_def",
+     "CompactlySupportedContinuousMap.comp_assoc",
+     "HasCompactSupport.comp_left"
+    ],
+    "digest": "031010bd88abcacc"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for the ordinary-etale ordered compact-support comparison; reuse the existing project definition unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l affineDualizingTowerComparison dag/nodes; rg -n affineDualizingTowerComparison lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search \"affine dualizing tower comparison\"",
+   "results": {
+    "dag": [
+     "dag/nodes/sec-six-functors/lem-coef-dualizing-affine-space.json"
+    ],
+    "WeilConjectures": [],
+    "Sheaf": [
+     "lean/Sheaf/SixFunctors/AffineDualizingCoefficient.lean:37,57,71,98,194"
+    ],
+    "blueprint": "0 blueprint nodes match"
+   },
+   "date": "2026-10-24",
+   "verdict": "Only the theorem node records the existing plain recursive definition. Add a definition-only owner as explicitly required by return L, without copying or moving the declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ordinary-affine-counit-tensor-normalization",
+  "date": "2026-10-24",
+  "group": "Q136"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Proof paragraph 2: identify the literal ordered affine-space integration functor with ordinary unbounded compact support before transporting its actual counit.",
+   "via": [
+    "lem-pur-ordinary-affine-counit-tensor-normalization",
+    "lem-pur-vector-trace-geometric-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.SixFunctors.AffineDualizingCoefficient",
+  "declaration": "AlgebraicGeometry.Etale.affineDualizingTowerComparison",
+  "statement": "def affineDualizingTowerComparison (A : Type (u + 1)) [CommRing A] [Finite A]\n    (S : Scheme.{u}) [IsNoetherian S] : (r : ℕ) →\n    affineTraceLeft A S r ≅\n      rightDerivedLowerShriek (ModuleCat.{u + 1} A) (affineTraceProjection S r)",
+  "branch": "sheaf-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only ownership explicitly required by return L at 8a5a4c598e0a. Reuse the published @[irreducible] def unchanged in its existing module; no move, copy, theorem conclusion, .choose or arbitrary isomorphism. Its body recursively composes the specified identity, standard compactification and proper/open composition isomorphisms."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11dbefb8",
+  "group": "Q136",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11dbefb8",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 8a5a4c598e0a. Lean change = 4 public imports of the owning modules of the newly cited def nodes (all exist live); statement and 5 helpers byte-identical, so the earlier full math check holds: N>0, finite A with NA=0 and no Nontrivial, Noetherian S with N a unit, all d, unbounded K; eps = actual transported affineTraceAdjunction counit; t_d its unit value; P.hom = compactSupportProjectionMap so P.inv is the node's inverse; P.inv >> (K⊗t) >> rho order correct; d=0, zero ring, empty scheme covered. Item: only stmt_deps and lean changed (statement, proof, proof_deps = live; proof_deps = union of step uses); lem-amb-shriek-tensor-composition -> def-pur-compact-support-projection-map, lem-coef-dualizing-affine-space -> new def-pur-affine-dualizing-tower-comparison, plus def-amb-affine-trace-construction/-tower and def-asd-ordinary-finite-p1-data/-arrows. New node: existing:true owner of the live @[irreducible] def affineDualizingTowerComparison, statement verbatim; body = inverse identity comparison at 0, then compactification iso whiskered by F_r, C_r after Ru_!, proper/open compositor, matching the node text; no .choose/Nonempty; stmt_deps as requested; import_flags present. All snapshot dep records byte-identical to live. Q06's parallel delivery was returned; item not landed, not superseded. Lean statement verbatim; one sorry; 8-step docstring; both report sections present. Advisory: ordinaryFiniteUnit/Line, leftDerivedUpperStarComp, derivedTensorAssociator are owned by def nodes outside stmt_deps (base-era). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T142927-L-853118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.affine_dualizing_coefficient"
+  ],
+  "sorry_after": []
+ }
+}

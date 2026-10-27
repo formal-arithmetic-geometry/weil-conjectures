@@ -1,0 +1,215 @@
+{
+ "id": "lem-trf-ordered-block-permutation-sign",
+ "kind": "statement",
+ "title": "Sign of a permutation on two ordered complementary blocks",
+ "statement": "Let $q\\ge0$ and $0\\le s\\le q$ be integers and write $[m]=\\{1,\\ldots,m\\}$, with $[0]=\\varnothing$. For each $m$, let $S_m$ be the permutations of $[m]$ and let $\\operatorname{sgn}:S_m\\to\\{\\pm1\\}\\subset\\mathbf Z$ be the homomorphism taking each transposition to $-1$, as defined in [def-weil-pbc-matrix-determinant]. Let $T,I\\subseteq[q]$ have size $s$ and list them increasingly as $T=(t_1,\\ldots,t_s)$ and $I=(i_1,\\ldots,i_s)$. List their complements increasingly as $T^c=(u_1,\\ldots,u_{q-s})$ and $I^c=(v_1,\\ldots,v_{q-s})$. If $\\sigma\\in S_q$ satisfies $\\sigma(T)=I$, define $\\alpha\\in S_s$ and $\\beta\\in S_{q-s}$ by $\\sigma(t_a)=i_{\\alpha(a)}$ and $\\sigma(u_b)=v_{\\beta(b)}$. Then\n$$\\operatorname{sgn}(\\sigma)=(-1)^{\\sum_{i\\in I}i+\\sum_{t\\in T}t}\\operatorname{sgn}(\\alpha)\\operatorname{sgn}(\\beta)\\quad\\text{in }\\mathbf Z.$$\nThe assertion includes $s=0$, $s=q$ and $q=0$, with the sign of the unique empty permutation equal to $1$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z7, lemma-ideals-generated-by-minors, omitted proof and column/row expansion hint; agent-supplied permutation calculation for the ordered complementary-minor expansion, not a statement asserted verbatim by Stacks."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "For each $s$-element subset $A\\subseteq[q]$, with increasing lists $A=(a_1,\\ldots,a_s)$ and $A^c=(c_1,\\ldots,c_{q-s})$, define the permutation $\\rho_A$ by $\\rho_A(j)=a_j$ for $1\\le j\\le s$ and $\\rho_A(s+b)=c_b$ for $1\\le b\\le q-s$. The lists are disjoint and exhaust $[q]$, so this is a bijection. Since $\\sigma$ is bijective and maps $T$ onto $I$, it maps $T^c$ onto $I^c$. Thus the displayed rules in the statement define bijections $\\alpha$ and $\\beta$. Put $\\delta=\\rho_I^{-1}\\circ\\sigma\\circ\\rho_T$. Evaluating on the two blocks gives $\\delta(j)=\\alpha(j)$ and $\\delta(s+b)=s+\\beta(b)$; equivalently $\\sigma=\\rho_I\\circ\\delta\\circ\\rho_T^{-1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7, lemma-ideals-generated-by-minors, proof lines 1350-1352: omitted determinant expansion hint; the ordered-shuffle calculation below is supplied by Q54, not asserted by Stacks."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-permutation-sign-inversion-product] to $\\rho_A$, first for $A=T$ and then for $A=I$. That node is stated for permutations of $\\{0,\\ldots,m-1\\}$; transport along the order-preserving bijection $x\\mapsto x-1$ from $[m]$ sends transpositions to transpositions, so it preserves $\\operatorname{sgn}$ and all order comparisons, and the same product formula holds for permutations of $[m]$. Both image blocks in its defining list are increasing, so their internal pair factors are $1$. For the cross pairs with first entry $j\\le s$, the factor is $-1$ exactly when $c_b<a_j$. Of the $a_j-1$ integers below $a_j$, exactly $j-1$ belong to $A$; hence exactly $a_j-j$ belong to $A^c$. Regrouping these factors gives $$\\operatorname{sgn}(\\rho_A)=(-1)^{e_A},\\qquad e_A=\\sum_{j=1}^s(a_j-j)=\\sum_{a\\in A}a-\\frac{s(s+1)}2.$$ Each $a_j\\ge j$, so these exponents are nonnegative. This is a count of the factors in the cited product, with no shuffle-sign identity assumed.",
+   "uses": [
+    "lem-sfb-permutation-sign-inversion-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7, lemma-ideals-generated-by-minors, proof lines 1350-1352: omitted determinant expansion hint; the ordered-shuffle calculation below is supplied by Q54, not asserted by Stacks."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-permutation-sign-inversion-product] (with the same relabelling as in step 2) to $\\delta$, $\\alpha$ and $\\beta$. In the product for $\\delta$, a pair meeting both position blocks has image in the same block order: $\\alpha(j)\\le s<s+\\beta(b)$. All such factors equal $1$. For pairs within the first block, the factors are exactly those for $\\alpha$. Within the second block, subtracting $s$ from the two arguments and their images gives exactly the factors for $\\beta$. Partitioning the finite product into these three disjoint sets of pairs therefore yields $$\\operatorname{sgn}(\\delta)=\\operatorname{sgn}(\\alpha)\\operatorname{sgn}(\\beta).$$ This also applies when either block is empty.",
+   "uses": [
+    "lem-sfb-permutation-sign-inversion-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7, lemma-ideals-generated-by-minors, proof lines 1350-1352: omitted determinant expansion hint; the ordered-shuffle calculation below is supplied by Q54, not asserted by Stacks."
+   }
+  },
+  {
+   "text": "The sign is a homomorphism by [def-weil-pbc-matrix-determinant], so the identity from step 1 and steps 2-3 give $$\\operatorname{sgn}(\\sigma)=(-1)^{e_I+e_T}\\operatorname{sgn}(\\alpha)\\operatorname{sgn}(\\beta).$$ Here $\\operatorname{sgn}(\\rho_T^{-1})=\\operatorname{sgn}(\\rho_T)$, because a sign is $1$ or $-1$, its own inverse. The integer $e_I+e_T$ equals $\\sum_{i\\in I}i+\\sum_{t\\in T}t-s(s+1)$. The subtracted integer is even, since one of $s,s+1$ is even, so the power of $-1$ is the one asserted in the statement. If $s=0$, both shuffles are the identity, $\\alpha$ is empty and $\\beta=\\sigma$. If $s=q$, both shuffles are again the identity, $\\beta$ is empty and $\\alpha=\\sigma$; the exponent is $q(q+1)$, which is even. If $q=0$, every permutation is the identity on the empty set and a homomorphism sends it to $1$. Thus every boundary case has the stated convention.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7, lemma-ideals-generated-by-minors, proof lines 1350-1352: omitted determinant expansion hint; the ordered-shuffle calculation below is supplied by Q54, not asserted by Stacks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-permutation-sign-inversion-product",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z7, lemma-ideals-generated-by-minors, proof lines 1350-1352: omitted determinant expansion hint; the ordered-shuffle calculation below is supplied by Q54, not asserted by Stacks.",
+  "note": "Q54 supplies the ordered-shuffle argument, using Mathlib ordered-pair signs; Stacks omits the determinant-expansion proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.sign, \"sumCongr\"",
+   "results": "Hits: Equiv.Perm.sign_sumCongr Read candidate statements in Mathlib/GroupTheory/Perm/Sign.lean: sign_sumCongr multiplies block signs but has no ordered-subset numerical shuffle factor.",
+   "date": "2026-10-23",
+   "verdict": "no match: block-preserving sign products and inversion primitives do not give the explicit ordered-subset shuffle factor"
+  },
+  {
+   "tool": "grep",
+   "query": "sign.*(sumCongr|extendDomain|subtypePerm|ofSubtype|restrict)|shuffle|inversion",
+   "results": "Hits: Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean Read candidate statements in Mathlib/GroupTheory/Perm/Sign.lean: sign_sumCongr multiplies block signs but has no ordered-subset numerical shuffle factor.",
+   "date": "2026-10-23",
+   "verdict": "no match: block-preserving sign products and inversion primitives do not give the explicit ordered-subset shuffle factor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a permutation mapping a subset T onto I the sign equals minus one to sum I plus sum T times the signs of the two induced permutations on the subsets and complements",
+   "results": "Hits: Equiv.Perm.sign_subtypeCongr, Equiv.Perm.signAux3, Equiv.Perm.signAux_eq_signAux2, Equiv.Perm.signAux, Equiv.Perm.decomposeFin.symm_sign, Equiv.Perm.sign_subtypePerm, Equiv.Perm.sign_ofSubtype, Equiv.Perm.sign Read candidate statements in Mathlib/GroupTheory/Perm/Sign.lean: sign_sumCongr multiplies block signs but has no ordered-subset numerical shuffle factor.",
+   "date": "2026-10-23",
+   "verdict": "no match: block-preserving sign products and inversion primitives do not give the explicit ordered-subset shuffle factor"
+  },
+  {
+   "tool": "grep",
+   "query": "sign_sumCongr|sign.*(fin|order|sort|shuffle)|sign.*[Ii]nv",
+   "results": "Hits: Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean Read candidate statements in Mathlib/GroupTheory/Perm/Sign.lean: sign_sumCongr multiplies block signs but has no ordered-subset numerical shuffle factor.",
+   "date": "2026-10-23",
+   "verdict": "no match: block-preserving sign products and inversion primitives do not give the explicit ordered-subset shuffle factor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sign of a permutation mapping a subset onto another subset in terms of the restrictions and complementary shuffles",
+   "results": "Hits: Equiv.Perm.sign_sumCongr, Equiv.Perm.sign_subtypeCongr, Equiv.Perm.sign_bij, Equiv.Perm.sign_subtypePerm, Equiv.Perm.sign_ofSubtype, Equiv.Perm.signAux_mul, Equiv.Perm.sign, Equiv.Perm.sign_extendDomain Read candidate statements in Mathlib/GroupTheory/Perm/Sign.lean: sign_sumCongr multiplies block signs but has no ordered-subset numerical shuffle factor.",
+   "date": "2026-10-23",
+   "verdict": "no match: block-preserving sign products and inversion primitives do not give the explicit ordered-subset shuffle factor"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.sign, \"shuffle\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: block-preserving sign products and inversion primitives do not give the explicit ordered-subset shuffle factor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sign of a permutation decomposed into two ordered blocks with row and column shuffles is the product of the two block signs times the shuffle signs",
+   "results": "Hits: Equiv.Perm.sign_sumCongr, Equiv.Perm.signAux_mul, Equiv.Perm.signAux, Equiv.Perm.signAux2, Equiv.Perm.decomposeFin.symm_sign, Equiv.Perm.sign_subtypeCongr, Equiv.Perm.signAux3_mul_and_swap, Equiv.Perm.sign_eq_prod_prod_Ioi Read candidate statements in Mathlib/GroupTheory/Perm/Sign.lean: sign_sumCongr multiplies block signs but has no ordered-subset numerical shuffle factor.",
+   "date": "2026-10-23",
+   "verdict": "no match: block-preserving sign products and inversion primitives do not give the explicit ordered-subset shuffle factor"
+  },
+  {
+   "tool": "grep",
+   "query": "sign.*(sumCongr|bij|inv)|sign.*[Ii]nversion|sign_eq.*card",
+   "results": "Hits: Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean, Mathlib/GroupTheory/Perm/Sign.lean. Read Mathlib/GroupTheory/Perm/Sign.lean:358-405 and Fin.lean:497-511. The block-sign and inversion-product declarations do not themselves state the explicit ordered-subset sum parity formula.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; inversion-product formula is a building block"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sign of a permutation decomposed by two increasingly ordered complementary subsets with the explicit subset sum parity factor",
+   "results": "Hits: Equiv.Perm.sign_sumCongr, Equiv.Perm.sign_mul, Equiv.Perm.decomposeFin.symm_sign, Equiv.Perm.sign, Equiv.Perm.signAux, Equiv.Perm.sign_subtypeCongr, Equiv.Perm.signAux_mul, Equiv.Perm.sign_trans. Read Mathlib/GroupTheory/Perm/Sign.lean:358-405 and Fin.lean:497-511. The block-sign and inversion-product declarations do not themselves state the explicit ordered-subset sum parity formula.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; inversion-product formula is a building block"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.sign, \"sumCongr\"",
+   "results": "Hits: Equiv.Perm.sign_sumCongr. Read Mathlib/GroupTheory/Perm/Sign.lean:358-405 and Fin.lean:497-511. The block-sign and inversion-product declarations do not themselves state the explicit ordered-subset sum parity formula.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; inversion-product formula is a building block"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sign of a permutation mapping an ordered subset T onto I equals the product of the two induced block signs times minus one to the sums of T and I",
+   "results": "Hits: Equiv.Perm.sign_eq_prod_prod_Ioi, Equiv.Perm.sign_eq_prod_prod_Iio, Equiv.Perm.signAux3, Equiv.Perm.signAux, Equiv.Perm.sign_subtypeCongr, Equiv.Perm.decomposeFin.symm_sign, Equiv.Perm.signAux_eq_signAux2, Equiv.Perm.sign_sumCongr. Read Mathlib/GroupTheory/Perm/Sign.lean:358-405 and Fin.lean:497-511. The block-sign and inversion-product declarations do not themselves state the explicit ordered-subset sum parity formula.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; inversion-product formula is a building block"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Permutation sign formula Laplace expansion ordered complementary minors shuffle signs equal minus one to sums of selected row and column indices",
+   "results": "Hits: Matrix.adjugate_fin_succ_eq_det_submatrix, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det, Matrix.det_eq_sum_row_mul_submatrix_succAbove_succAbove_det, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.detp, Matrix.det_permutation, Matrix.det_eq_detp_sub_detp, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det'. Read Mathlib/GroupTheory/Perm/Sign.lean:358-405 and Fin.lean:497-511. The block-sign and inversion-product declarations do not themselves state the explicit ordered-subset sum parity formula.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; inversion-product formula is a building block"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-minor-laplace-coefficient-formula",
+  "date": "2026-10-23",
+  "group": "Q67"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "General determinant-ideal tool below the nodal-family geometry dependency of lem-trf-local-term-locality; Stacks 07Z7 column/row expansion hint. The ordered permutation sign used in grouping the Leibniz terms for lem-trf-minor-laplace-coefficient-formula. The latest blueprint proof has no separate Fitting or determinant clause.",
+   "via": [
+    "lem-trf-minor-laplace-coefficient-formula",
+    "lem-trf-fitting-ideal-minor-inclusions",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ordered-block-permutation-sign",
+  "worker": "stage1",
+  "summary": "Kept the statement and its sign definition unchanged. Constructed the two increasing shuffles explicitly, counted their ordered-pair factors, computed the block-preserving middle sign from the same existing Mathlib leaf, and combined the homomorphism and parity identities. No new nodes: the ordered-pair sign formula is the existing Mathlib leaf lem-sfb-permutation-sign-inversion-product, relabelled to 1-based indices; all empty cases checked.",
+  "blueprint": "Generic determinant-expansion tool in the inherited chain below lem-trf-local-term-locality; the latest blueprint proof concerns contracting correspondences and contains no direct determinant or permutation-sign sentence. This split makes explicit the numerical sign needed in the 07Z7 expansion tool and does not replace a unit-level geometric step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-53caa60a0",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-53caa60a0 (reviewer sub-agent of L); spot-checked: Read Stacks 07Z7 (more-algebra.tex 1325-1353: the proof is omitted, with only an expansion hint; the item is honestly marked as an agent-supplied sign calculation), Mathlib Perm/Fin.lean 497-511 and def-weil-pbc-matrix-determinant. The item statement is unchanged; I brute-force checked it for all q<=5 (4283 cases, including q=0, s=0 and s=q). Step 1: delta = rho_I^-1 sigma rho_T, checked by hand. Step 2: the cross-pair count a_j-j gives e_A = sum A - s(s+1)/2. Step 3: the block factorization is correct. Step 4: homomorphism and parity argument, boundary cases correct. Fault C5: the new Mathlib leaf lem-trf-permutation-sign-ordered-pairs duplicates the existing base node lem-sfb-permutation-sign-inversion-product (the same Equiv.Perm.sign_eq_prod_prod_Ioi at Fin.lean:508, 0-based instead of 1-based). FIX: steps 2 and 3 cite the existing leaf, with a one-sentence relabelling by the order-preserving shift x->x-1 (transpositions go to transpositions, order comparisons are preserved); uses, proof_deps and split_report are updated; the duplicate is dropped. No other duplicate of the item found (signed-face-permutation, shuffle-mixed-corner, column-extension-minor and others read). No cycle. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.OrderedBlockPermutationSign",
+  "declaration": "Equiv.Perm.sign_orderedBlocks",
+  "file": "lean/Sheaf/GroupTheory/OrderedBlockPermutationSign.lean",
+  "statement": "theorem sign_orderedBlocks {q s : ℕ} (hs : s ≤ q) (T I : Finset (Fin q)) (hT : T.card = s) (hI : I.card = s) (σ : Equiv.Perm (Fin q)) (hσ : T.image σ = I) (α : Equiv.Perm (Fin s)) (β : Equiv.Perm (Fin (q - s))) (hα : ∀ a : Fin s, σ (T.orderEmbOfFin hT a) = I.orderEmbOfFin hI (α a)) (hβ : ∀ b : Fin (q - s), σ ((Tᶜ).orderEmbOfFin (by simp [Finset.card_compl, hT]) b) = (Iᶜ).orderEmbOfFin (by simp [Finset.card_compl, hI]) (β b)) : (Equiv.Perm.sign σ : ℤ) = (-1 : ℤ) ^ ((∑ i ∈ I, (i.val + 1)) + ∑ t ∈ T, (t.val + 1)) * (Equiv.Perm.sign α : ℤ) * (Equiv.Perm.sign β : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2eab8f6be",
+  "group": "Q139",
+  "result": "pass",
+  "note": "sign_orderedBlocks matches the node clause by clause: Fin q with 1-based labels i.val+1; T, I as Finsets with card s; canonical increasing enumerations via orderEmbOfFin for the subsets and their complements; hσ is T.image σ = I; α, β determined by their defining equations hα, hβ; conclusion is Equiv.Perm.sign coerced to ℤ, exactly as in def-weil-pbc-matrix-determinant. Edge cases q=0, s=0 and s=q covered with no extra hypotheses; no universes. The node differs from live only in lean; lean.statement is verbatim in the file; no collision or supersession. No definitions, proof is sorry only, docstrings have the source and blueprint tags and the 4-step proof, imports are the stmt_dep, Finset.Sort and the proof_dep module. Mathlib has no duplicate. Not recompiled because no file was changed; worker's compile is clean. No findings."
+ }
+}

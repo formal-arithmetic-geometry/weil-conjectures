@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-fixed-hyperplane-restriction-cohomology",
+ "kind": "statement",
+ "title": "Restriction sequence and cohomology for a fixed injective hyperplane section",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq1$, $X=\\mathbf P^n_k$ with twists [def-pc-projective-space-twist], and $E$ a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Let $s\\in H^0(X,\\mathcal O_X(1))$ be nonzero and let $i:H=V(s)\\hookrightarrow X$ be the closed immersion [def-weil-closed-immersion] of its zero scheme $V(s)=Z(s)$ [def-pc-zero-scheme]. Put $G=i^*E$ [def-pc-module-pullback] and $G(d)=G\\otimes i^*\\mathcal O_X(d)$. Assume $G$ is coherent and multiplication by $s$ on $E(d-1)\\to E(d)$ is injective for every integer $d$. For each $d\\in\\mathbf Z$, the canonical restriction map gives a short exact sequence\n$$0\\longrightarrow E(d-1)\\xrightarrow{s}E(d)\\longrightarrow i_*G(d)\\longrightarrow0,$$\nwhere $(i_*M)(U)=M(i^{-1}U)$ with the induced $\\mathcal O_X(U)$-action. The natural edge map identifies $H^q(X,i_*G(d))$ with $H^q(H,G(d))$ for every $q\\geq0$, using module sheaf cohomology [pqf-def-cohomology] and the edge map of [def-weil-pbc-module-cohomology-fmap]. Thus the associated long exact sequence begins\n$$0\\longrightarrow H^0(X,E(d-1))\\xrightarrow{s}H^0(X,E(d))\\xrightarrow{r_d}H^0(H,G(d))\\longrightarrow H^1(X,E(d-1))\\xrightarrow{s}H^1(X,E(d))\\longrightarrow\\cdots,$$\nand has consecutive terms\n$$H^q(X,E(d-1))\\xrightarrow{s}H^q(X,E(d))\\longrightarrow H^q(H,G(d))\\longrightarrow H^{q+1}(X,E(d-1)).$$\nThe maps to cohomology on $H$ are the canonical restriction maps. Restriction $H^0(X,\\mathcal O_X(1))\\to H^0(H,i^*\\mathcal O_X(1))$ is surjective. For $u\\in H^0(X,E(d))$ and $v\\in H^0(X,\\mathcal O_X(1))$, one has\n$$r_{d+1}(uv)=r_d(u)\\,(v|_H),$$\nwhere products use the canonical twist multiplications, locally $e_j^{(d)}\\otimes e_j^{(1)}\\mapsto e_j^{(d+1)}$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 089Z (lemma-hyperplane, including its coordinate proof), Tag 08A0 (lemma-exact-sequence-induction, local description of the quotient after injectivity is given), and Tag 0EGK (remark-exact-sequence-induction-cohomology). Fixed-section variant: the infinite-field hypothesis of 08A0 is needed only to choose an injective section; here injectivity is a hypothesis."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-projective-space-twist",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-pc-zero-scheme",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sfb-regular-hyperplane-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Fix $d\\in\\mathbf Z$ and write $J=\\mathcal I_H$. On any open trivializing $\\mathcal O_X(1)$, write $s=ae$; the zero-scheme definition gives $J=(a)$. The twist multiplication identifies the map $E(d-1)\\to E(d)$ with multiplication by $a$ in these frames, so its image is exactly $J E(d)$. The closed-immersion unit-quotient theorem, applied to the module $E(d)$, says that $\\eta_d:E(d)\\to i_*i^*E(d)$ is onto and has kernel $J E(d)$. The canonical pullback-tensor isomorphism identifies $i^*E(d)=i^*(E\\otimes\\mathcal O_X(d))$ with $G\\otimes i^*\\mathcal O_X(d)=G(d)$. Compose $\\eta_d$ with this identification to obtain the canonical restriction $\\rho_d:E(d)\\to i_*G(d)$. Its kernel is the image of multiplication by $s$, and that multiplication is injective by hypothesis. This proves the asserted short exact sequence. The quotient calculation itself used no coherence hypothesis.",
+   "uses": [
+    "def-pc-zero-scheme",
+    "lem-pc-twist-tensor",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 08A0 (lemma-exact-sequence-induction, local quotient calculation) and 0EGK (remark-exact-sequence-induction-cohomology), adapted to a prescribed section whose multiplication is injective."
+   }
+  },
+  {
+   "text": "Check the hypotheses needed for the cohomology edge map. The standard opens of $X$ are $U_j=\\operatorname{Spec} A_j$ with $A_j=k[T_l/T_j:l\\ne j]$: in the degree-zero localization describing $D_+(T_j)$, a degree-zero monomial is a product of these ratios, which are algebraically independent. The local zero-scheme formula gives $H\\cap U_j=\\operatorname{Spec}(A_j/(a_j))$, where $a_j$ represents $s$ in the frame $T_j$. A field is Noetherian (its only ideals are $0$ and $k$); the finite-type-algebra Noetherian theorem therefore makes each $A_j/(a_j)$ Noetherian. These affine opens cover $H$, so $H$ is locally Noetherian. By the coherent/quasi-coherent finite-type equivalence, the assumed coherent $G$ is quasi-coherent. Each $i^*\\mathcal O_X(d)$ is locally free of rank one: pulling back its displayed local frame gives a frame, directly from the tensor definition of pullback. Hence $G(d)$ is locally isomorphic to $G$, so is quasi-coherent as well. Finally $i$ is affine, by the affine-quotient characterization of a closed immersion.",
+   "uses": [
+    "def-pc-proj",
+    "def-pc-projective-space-twist",
+    "lem-pc-zero-scheme-properties",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-pc-module-pullback",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 089Z (lemma-hyperplane), local equations; coherent.tex Tag 01XZ (lemma-coherent-Noetherian); Noetherianity is checked on the displayed affine charts."
+   }
+  },
+  {
+   "text": "The category of module sheaves on $X$ is abelian with enough injectives, and $\\Gamma(X,-)$ is additive and left exact, by the two cited module-category theorems. Apply the derived-functor long-exact-sequence theorem to the short exact sequence of Step 1. Since module cohomology is right derived global sections, it gives\n$$0\\to H^0(X,E(d-1))\\xrightarrow{s}H^0(X,E(d))\\xrightarrow{H^0(\\rho_d)}H^0(X,i_*G(d))\\to H^1(X,E(d-1))\\to\\cdots$$\nand, for every $q\\ge0$, the terms $H^q(X,E(d-1))\\xrightarrow{s}H^q(X,E(d))\\to H^q(X,i_*G(d))\\to H^{q+1}(X,E(d-1))$.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0EGK (remark-exact-sequence-induction-cohomology); derived.tex Tag 015B (lemma-higher-derived-functors)."
+   }
+  },
+  {
+   "text": "By Step 2, the affine-morphism cohomology-edge theorem applies to $i$ and $G(d)$: the specified edge map $e_{i,G(d)}:H^q(X,i_*G(d))\\to H^q(H,G(d))$ is an isomorphism for every $q\\ge0$. Replace the corresponding terms of the sequence in Step 3 using this isomorphism, and define the new boundary by composing the old boundary with $e_{i,G(d)}^{-1}$; composition with isomorphisms preserves equality of kernels and images. This gives exactly both displayed cohomology sequences in the statement. To identify the arrows, the composition clause for cohomology of module maps gives\n$$e_{i,G(d)}\\circ H^q(\\rho_d)=(\\rho_d)^*.$$\nHere $\\rho_d$ is the $i$-map obtained from the pullback unit followed by $i^*E(d)\\cong G(d)$ in Step 1; by the definition of module-cohomology pullback this is the canonical restriction map. In degree zero the degree-zero clause identifies it with the actual map on global sections. Thus the identifications use the specified edge map, including the restriction arrows, rather than just abstract isomorphisms of groups.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0EGK; coherent.tex Tag 089W (lemma-relative-affine-cohomology); cohomology.tex Section 01F7 (section-functoriality)."
+   }
+  },
+  {
+   "text": "The projective-twist cohomology calculation identifies $s$ with a linear form $\\sum_{l=0}^n b_lT_l$ having at least one nonzero coefficient. On $U_j$, its multiplier is the nonzero polynomial $a_j=b_j+\\sum_{l\\ne j}b_l(T_l/T_j)$. Multiplication by $a_j$ is injective on $A_j$: for any nonzero polynomial $f$, the leading coefficient of $a_jf$ in a monomial order is the product of two nonzero coefficients in the field $k$, so $a_jf\\ne0$. This remains injective after localization (if $a_j f/t=0$, some allowed denominator $u$ has $u a_j f=0$, hence $u f=0$). Thus $s:\\mathcal O_X\\to\\mathcal O_X(1)$ is injective. Apply the quotient-and-pullback-tensor calculation of Step 1 with $E=\\mathcal O_X$ and $d=1$ to get\n$$0\\to\\mathcal O_X\\xrightarrow{s}\\mathcal O_X(1)\\to i_*i^*\\mathcal O_X(1)\\to0.$$\nThe long exact sequence from Step 3 and the equality of degree-zero direct-image sections give\n$$H^0(X,\\mathcal O_X(1))\\to H^0(H,i^*\\mathcal O_X(1))\\to H^1(X,\\mathcal O_X).$$\nThe same projective-twist cohomology theorem gives $H^1(X,\\mathcal O_X)=0$ for every $n\\ge1$, including $n=1$. Exactness therefore proves the asserted surjectivity over every field.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology",
+    "def-pc-proj",
+    "def-pc-zero-scheme",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-twist-tensor",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 089Z (lemma-hyperplane), coordinate description; coherent.tex Tag 01XT (lemma-cohomology-projective-space-over-ring), with d=0."
+   }
+  },
+  {
+   "text": "For $u\\in H^0(X,E(d))$ and $v\\in H^0(X,\\mathcal O_X(1))$, the pullback-tensor isomorphism sends $i^*(u\\otimes v)$ to $i^*u\\otimes i^*v$. On each standard trivializing open, the twist product sends $m e_j^{(d)}\\otimes c e_j^{(1)}$ to $(cm)e_j^{(d+1)}$. After restriction both coefficients are mapped to $\\mathcal O_H$, and the resulting product is $\\bar c\\bar m$ in either order of operations. These local equalities agree on overlaps since they use the canonical twist multiplications. Since Step 4 identified $r_d$ with this restriction on sections, they give $r_{d+1}(uv)=r_d(u)(v|_H)$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-twist-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 089Z and 0EGK, compatibility of the restriction construction with twist multiplication; the section-level identity is written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "def-pc-zero-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-twist-tensor",
+  "lem-pc-zero-scheme-properties",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-module-pullback-tensor",
+  "pqf-def-cohomology",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Adaptation of Tags 089Z, 08A0 and 0EGK to a fixed injective section; the local quotient, edge-map identification, linear restriction surjectivity and product compatibility are explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hyperplane|regularSection|restriction.*[Ss]hortExact|[Ss]hortExact.*restriction",
+   "results": "{\"t\": \"2026-10-23T04:29:09Z\", \"tool\": \"grep\", \"query\": \"hyperplane|regularSection|restriction.*[Ss]hortExact|[Ss]hortExact.*restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Reflection.lean\", \"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\", \"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\", \"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\", \"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\"], \"digest\": \"c18a9863a492cad8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj structure-sheaf maps, abstract Ext sequences, group cohomology, Mayer-Vietoris squares or real hyperplanes; none identifies the fixed hyperplane quotient of a coherent projective module and its cohomology restriction maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf with an injective section of an invertible sheaf has exact restriction sequence to the zero scheme of the section and associated long exact cohomology sequence",
+   "results": "{\"t\": \"2026-10-23T04:29:09Z\", \"tool\": \"leansearch\", \"query\": \"A coherent sheaf with an injective section of an invertible sheaf has exact restriction sequence to the zero scheme of the section and associated long exact cohomology sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.res_apply\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.Opens.ι_app\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"CategoryTheory.InjectiveResolution.exact_succ\", \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"groupCohomology.H1InfRes\"], \"digest\": \"4cedebec44187d05\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj structure-sheaf maps, abstract Ext sequences, group cohomology, Mayer-Vietoris squares or real hyperplanes; none identifies the fixed hyperplane quotient of a coherent projective module and its cohomology restriction maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"ShortExact\"",
+   "results": "{\"t\": \"2026-10-23T04:29:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"ShortExact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj structure-sheaf maps, abstract Ext sequences, group cohomology, Mayer-Vietoris squares or real hyperplanes; none identifies the fixed hyperplane quotient of a coherent projective module and its cohomology restriction maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a given nonzero hyperplane section that acts injectively on a coherent sheaf on projective space, its restriction gives a short exact sequence of twists and the long exact cohomology sequence with restriction commuting with multiplication",
+   "results": "{\"t\": \"2026-10-23T04:29:11Z\", \"tool\": \"leanfinder\", \"query\": \"For a given nonzero hyperplane section that acts injectively on a coherent sheaf on projective space, its restriction gives a short exact sequence of twists and the long exact cohomology sequence with restriction commuting with multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"groupCohomology.map_cochainsFunctor_shortExact\", \"groupCohomology.mapShortComplex₁_exact\", \"groupCohomology.mapShortComplex₃_exact\", \"CategoryTheory.Abelian.Ext.contravariantSequence_exact\", \"CategoryTheory.Abelian.Ext.covariantSequence_exact\"], \"digest\": \"863f1f885a500cc4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj structure-sheaf maps, abstract Ext sequences, group cohomology, Mayer-Vietoris squares or real hyperplanes; none identifies the fixed hyperplane quotient of a coherent projective module and its cohomology restriction maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary nonzero linear form acting as a nonzerodivisor on a coherent projective sheaf gives quotient equal to pushforward of pullback to its hyperplane and restriction of products of sections is multiplicative",
+   "results": "{\"t\": \"2026-10-23T04:31:50Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary nonzero linear form acting as a nonzerodivisor on a coherent projective sheaf gives quotient equal to pushforward of pullback to its hyperplane and restriction of products of sections is multiplicative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\"], \"digest\": \"538f132cd99488b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj structure-sheaf maps, abstract Ext sequences, group cohomology, Mayer-Vietoris squares or real hyperplanes; none identifies the fixed hyperplane quotient of a coherent projective module and its cohomology restriction maps."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|[Ss]hortExact|regularSection",
+   "results": "{\"t\": \"2026-10-23T04:36:46Z\", \"tool\": \"grep\", \"query\": \"hyperplane|[Ss]hortExact|regularSection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj structure-sheaf maps, abstract Ext sequences, group cohomology, Mayer-Vietoris squares or real hyperplanes; none identifies the fixed hyperplane quotient of a coherent projective module and its cohomology restriction maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On projective space over a field, an injective hyperplane multiplication gives a short exact restriction sequence of coherent sheaves, the long exact cohomology sequence, and surjectivity of restriction of linear forms",
+   "results": "{\"t\": \"2026-10-23T11:31:16Z\", \"tool\": \"leanfinder\", \"query\": \"On projective space over a field, an injective hyperplane multiplication gives a short exact restriction sequence of coherent sheaves, the long exact cohomology sequence, and surjectivity of restriction of linear forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.map_injective\", \"Profinite.NobelingProof.succ_exact\", \"Profinite.NobelingProof.CC_exact\", \"LinearMap.injective_of_surjective_of_injective_of_right_exact\", \"LinearMap.injective_of_surjective_of_injective_of_injective\", \"lTensor_injective_of_exact_of_exact_of_rTensor_injective\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\"], \"digest\": \"0345878c0b700868\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract exactness, unrelated projectivization, or Proj structure sheaves; none states the fixed-hyperplane restriction theorem for coherent module twists."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"ShortExact\"",
+   "results": "{\"t\": \"2026-10-23T11:31:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"ShortExact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract exactness, unrelated projectivization, or Proj structure sheaves; none states the fixed-hyperplane restriction theorem for coherent module twists."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|regularSection|restriction.*[Ss]hortExact|[Ss]hortExact.*restriction",
+   "results": "{\"t\": \"2026-10-23T11:31:43Z\", \"tool\": \"grep\", \"query\": \"hyperplane|regularSection|restriction.*[Ss]hortExact|[Ss]hortExact.*restriction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract exactness, unrelated projectivization, or Proj structure sheaves; none states the fixed-hyperplane restriction theorem for coherent module twists."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent module on projective space and an injective hyperplane section have a short exact restriction sequence of twists and a long exact cohomology sequence",
+   "results": "{\"t\": \"2026-10-23T11:31:44Z\", \"tool\": \"leansearch\", \"query\": \"A coherent module on projective space and an injective hyperplane section have a short exact restriction sequence of twists and a long exact cohomology sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.res_apply\", \"groupCohomology.H1InfRes\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"Function.Exact.linearMap_rangeRestrict\", \"CategoryTheory.Abelian.Ext.covariantSequence_exact\", \"groupCohomology.instMonoModuleCatFH1InfRes\"], \"digest\": \"a787c8d3d144506b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract exactness, unrelated projectivization, or Proj structure sheaves; none states the fixed-hyperplane restriction theorem for coherent module twists."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonzero linear form acting injectively on a coherent projective sheaf, the quotient of successive twists is the pushforward of restriction to its zero scheme and restriction of sections commutes with multiplication",
+   "results": "{\"t\": \"2026-10-23T11:32:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a nonzero linear form acting injectively on a coherent projective sheaf, the quotient of successive twists is the pushforward of restriction to its zero scheme and restriction of sections commutes with multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\"], \"digest\": \"8b84336f5574f590\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract exactness, unrelated projectivization, or Proj structure sheaves; none states the fixed-hyperplane restriction theorem for coherent module twists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hyperplane-cohomology-tail-bound",
+  "date": "2026-10-23",
+  "group": "NO"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Stacks 08AG, middle cohomology paragraphs: regular hyperplane restriction implies higher-cohomology vanishing and strict decrease of nonzero H1 dimensions. Fixed-section structural input: Tags 089Z and 0EGK, with the local quotient argument of 08A0, for the given section rather than an existence choice.",
+   "via": [
+    "lem-sfb-hyperplane-cohomology-tail-bound",
+    "lem-sfb-free-quotient-kernel-regularity-bound",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fixed-hyperplane-restriction-cohomology",
+  "worker": "stage1",
+  "summary": "Statement preserved. Proved the fixed-section restriction quotient locally using the existing unit-quotient and tensor-pullback results, checked quasi-coherence on Noetherian charts, applied derived long exactness and the specified affine cohomology edge map, proved linear-form surjectivity using H1(O)=0, and wrote out multiplicativity. No new nodes were necessary.",
+  "blueprint": "The current blueprint det-thm-sf-ctf-stability-direct-images, proof (3), is the ancestor route described in blueprint.from.place: this supplies the fixed-section structural input to the hyperplane cohomology induction used below the Hilbert boundedness step. The supplied ancestry resolves to null; its existing via list and detailed place are retained. All six steps refine the fixed-section structural input of Tags 089Z/08A0/0EGK.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "The general global-sections theorem verifies the left-exactness hypothesis for the long exact sequence. No node in the item unit supplies this generic tool in the required form."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-global-sections-left-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-bab341410",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-bab341410 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the PASS rests on that reading. It is a one-commit split of the item with no new nodes. On live and side-live the item is unsplit and has no repair note, so the 2026-10-21 re-split order does not apply. Statement, stmt_deps and blueprint are unchanged from live. proof_deps equals the union of the step uses, and a closure over 493 nodes shows no cycle. Sources read: Stacks varieties 089Z, 08A0 (its D_+(T_0) multiplier a_0+Σa_ix_i and the im(s^∨) ideal) and 0EGK (twisted sequences and 089W edge iso). Step 1: im(s)=J·E(d) is checked in frames; the unit-quotient lemma applies to every module; the pullback-tensor iso gives G(d); injectivity is the hypothesis. Step 2: the A_j/(a_j) charts are finite type over k, hence Noetherian, so H is locally Noetherian; coherent G is then quasi-coherent; G(d) is locally ≅ G; a closed immersion is affine. Step 3: enough injectives, left-exact Γ and the derived LES apply with the right hypotheses. Step 4: the edge iso holds for quasi-coherent G(d). The functoriality composition clauses give e∘H^q(ρ_d)=(ρ_d)^*=H^q(κ)∘i^*, and the degree-zero clause gives the section map. Step 5: s is a linear form whose multiplier on each chart is a nonzero polynomial, so multiplication by it is injective. With H^1(P^n,O)=0 (twist-cohomology node, clause iii) this gives surjectivity over any field. Step 6 is genuinely elementary from the section formula of pullback-tensor and the frame product. Small cases checked: n=1, E=0, E supported off H, torsion along H (excluded by the hypothesis), finite k, negative d. I accept the declared tool use of lem-sc-global-sections-left-exact as generic. The Q25 and Q27 hyperplane nodes are existential infinite-field variants, not duplicates. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FixedHyperplaneRestrictionCohomology",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.fixed_hyperplane_restriction_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.fixedHyperplaneGlobalSectionsMap",
+   "AlgebraicGeometry.ProjectiveSpace.fixedHyperplaneCohomologyMultiplication",
+   "AlgebraicGeometry.ProjectiveSpace.fixedHyperplaneCohomologyRestriction",
+   "AlgebraicGeometry.ProjectiveSpace.fixed_hyperplane_restriction_cohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedHyperplaneRestrictionCohomology.lean",
+  "statement": "theorem fixed_hyperplane_restriction_cohomology (k : Type u) [Field k] (n : ℕ) (hn : 1 ≤ n) (E : (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).Modules) (hE : RingedSpace.IsCoherent (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace E) (s : Γ(twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1, ⊤)) (hs : s ≠ 0) {H : Scheme.{u}} (i : H ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))) [IsClosedImmersion i] (hH : i.ker = Scheme.Modules.Hom.zeroLocus (Scheme.Modules.homOfGlobalSection _ s)) (hG : RingedSpace.IsCoherent H.toRingedSpace ((Scheme.Modules.tensorPullback i).obj E)) (hinj : ∀ d : ℤ, Mono (regularHyperplaneMultiplication k n E d s)) : (∀ d : ℤ, ∃ w : regularHyperplaneMultiplication k n E d s ≫ regularHyperplaneRestriction i E (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d)) = 0, ∃ hS : (ShortComplex.mk (regularHyperplaneMultiplication k n E d s) (regularHyperplaneRestriction i E (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d))) w).ShortExact, Function.Injective (fixedHyperplaneCohomologyMultiplication k n E d s 0) ∧ ∀ q : ℕ, ∃ he : IsIso (Scheme.Modules.moduleCohomologyEdgeMap i (MonoidalCategoryStruct.tensorObj (C := H.Modules) ((Scheme.Modules.tensorPullback i).obj E) ((Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d)))) q), Function.Exact (fixedHyperplaneCohomologyMultiplication k n E d s q) (fixedHyperplaneCohomologyRestriction k n i E (1 + d) q) ∧ Function.Exact (fixedHyperplaneCohomologyRestriction k n i E (1 + d) q) (regularHyperplaneConnecting i (regularHyperplaneMultiplication k n E d s) (regularHyperplaneRestriction i E (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d))) w hS q he) ∧ Function.Exact (regularHyperplaneConnecting i (regularHyperplaneMultiplication k n E d s) (regularHyperplaneRestriction i E (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d))) w hS q he) (fixedHyperplaneCohomologyMultiplication k n E d s (q + 1))) ∧ Function.Surjective (fixedHyperplaneGlobalSectionsMap i ((Scheme.Modules.tensorPullbackSectionAdjunction i).unit.app (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1))) ∧ (∀ (d : ℤ) (v v' : Γ(twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1, ⊤)), fixedHyperplaneGlobalSectionsMap i ((Scheme.Modules.tensorPullbackSectionAdjunction i).unit.app (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1)) v = fixedHyperplaneGlobalSectionsMap i ((Scheme.Modules.tensorPullbackSectionAdjunction i).unit.app (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1)) v' → regularHyperplaneRestrictedMultiplication k n i E d v = regularHyperplaneRestrictedMultiplication k n i E d v') ∧ ∀ (d : ℤ) (u : Γ(E ⊗ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d, ⊤)) (v : Γ(twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1, ⊤)), fixedHyperplaneGlobalSectionsMap i (regularHyperplaneRestriction i E (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d))) ((regularHyperplaneMultiplication k n E d v).app ⊤ u) = (regularHyperplaneRestrictedMultiplication k n i E d v).app ⊤ (fixedHyperplaneGlobalSectionsMap i (regularHyperplaneRestriction i E (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) u)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The degree pair d, 1+d ranges over exactly all pairs D-1,D. The four canonical hyperplane helpers are reused from Sheaf.AlgebraicGeometry.CoherentRegularHyperplaneRestriction through their existing:true definition owner def-sfb-regular-hyperplane-restriction-maps; the finite-family existence theorem is not used. No Infinite k assumption is used. All three repeating exactness positions and the initial injection are included. The edge and restriction are the recorded module-cohomology maps. The final section identity uses actual global-section restriction and multiplication by the restricted linear section, defined by tensor pullback through its canonical tensor comparison. Coherence is the full RingedSpace.IsCoherent definition (finite type with finite-type kernels) from WeilConjectures.AlgebraicGeometry.Coherent, as required by the node and Stacks 01BV. The landed pqf-def-coherent record IsQuasiCoherentFiniteType is retained byte-identical: on these locally Noetherian projective spaces its predicate is equivalent by pqf-lem-coherent-ft-locnoeth; this item uses IsCoherent directly without rebinding that shared node. Stage-2 review FIX (2026-10-23): added the clause that regularHyperplaneRestrictedMultiplication k n i E d v depends only on the restriction v|_H (the section map of the normalized unit on O(1)); without it the product identity follows from unit naturality alone and never involves v|_H. With it the right side is multiplication by the section v|_H, as the node states.",
+  "fixed_by": "NT-stage2-cc-527558414"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-527558414",
+  "group": "Q44",
+  "result": "fix",
+  "note": "R1/R2 repairs verified: pqf-def-coherent byte-identical to live; new existing:true def-sfb-regular-hyperplane-restriction-maps owns the 4 unchanged plain defs (checked against its TeX), stmt_deps cover their owners; Lean byte-identical to 591f. All other clauses match (any field, n≥1, ker=zeroLocus, IsCoherent E/G, Mono for all d, SES, edge IsIso ∀q, initial injection + 3 exact positions with δ∘e⁻¹, linear surjectivity). F1 H3: product clause RHS c∘i^*(m_v)∘c⁻¹ makes it pure unit naturality, never involving v|_H, which tail-bound needs. FIX adds the conjunct ∀ d v v', sectionsMap(unit O(1)) v = … v' → RestrictedMultiplication v = … v'; no new decls or stmt_deps; record statement regenerated verbatim; nt_compile --json clean 3.8 s."
+ }
+}

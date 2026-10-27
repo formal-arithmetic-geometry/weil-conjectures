@@ -1,0 +1,133 @@
+{
+ "id": "lem-sp-uniform-bounds-origin-lower",
+ "kind": "statement",
+ "title": "Finite origins and ambient lower bounds from uniform level bounds",
+ "statement": "Let l be prime, E a finite extension of Q_l and b the ordinary tower base of [def-sp-twisted-pullback-tower-domain-data]. Let T be Noetherian and let K be any object in the ordinary strict-system derived category. Suppose a<=z, s<=t, and every evaluated level is bounded constructible finite-Tor with cohomological support in [a,z] and Tor interval [s,t], in the bounds sense of [lem-sp-tower-chart-admissibility]. Then at each level K has an OriginIn witness with Tor interval [s,t], and K.IsGE a. Origins are independent, with no transition condition. This uses finite-ring constructible derived comparison [lem-weil-pbc-finite-ring-constructible-derived-origin], interval reflection [lem-exc-comparison-tor-interval], and exact level evaluation [det-sp-coefficient-towers-abelian].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "paragraph (2), uniform tensor-transpose domain checks"
+ },
+ "stmt_deps": [
+  "def-sp-twisted-pullback-tower-domain-data",
+  "lem-sp-tower-chart-admissibility",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-exc-comparison-tor-interval",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For each finite coefficient ring use bounded constructible finite-ring derived comparison to choose a bounded constructible etale complex and an isomorphism to the given level. Regard it as bounded below and use exact comparison compatibility to construct the actual Origin fields. Reflect the stated Tor interval along comparison. Only a proposition asserting origin existence is constructed, not data of a new definition.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For i<a each evaluated cohomology object is zero. Exact evaluation commutes with derived cohomology. Each component of the identity of the ambient cohomology system is consequently zero, by evaluation at its level; extensionality gives identity=0. Thus that cohomology system is zero. The derived t-structure characterization gives IsGE a.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-exc-comparison-tor-interval",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "paragraph (2), uniform tensor-transpose domain checks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback tensor a Tate line preserves uniform constructible Tor bounds in coefficient towers",
+   "results": "Eight algebraic pullback/tensor hits; no result about constructible Tor bounds for coefficient towers. Local rg finds the original node and the declared pullback/Tate inputs.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "Zero hits. The ringed-site Tor-amplitude API is in the project library.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*twist|constructible.*Tor|Tor.*amplitude",
+   "results": "Two hits in Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, unrelated to coefficient towers.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of strict coefficient towers detects a uniform cohomological lower bound and finite constructible etale origins preserve Tor amplitude",
+   "results": "Eight hits: CochainComplex.isStrictlyGE_of_ge; HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits; SheafOfModules.Finite.evaluationPreservesFiniteLimits; HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits; MvPowerSeries.coe_aeval; CochainComplex.isStrictlyGE_iff; CochainComplex.isStrictlyGE_of_iso; Algebra.FormallyEtale.instTensorProduct. Generic cochain support and exactness results only; use the project finite-ring comparison and exact-derived-evaluation API.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blueprint_refs.py search \"uniform Tor\"; search \"etale origin\"; search \"twisted pullback\"; ancestor lem-sp-twisted-pullback-tower-domain",
+   "results": "3, 10, and 0 imported blueprint matches respectively. Uniform Tor hits concern compact-support output bounds, affine-limit cohomological dimension and biduality; etale-origin hits concern fixed-scalar comparison, exceptional images and base change. None states this extracted data or the two tower steps. Ancestor is det-sp-integral-adjunction-bijection.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint statement; same_as is empty."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedPullbackTowerDomain",
+  "date": "2026-10-25",
+  "group": "F8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity; gamma paragraph (2)",
+   "via": [
+    "lem-sp-twisted-pullback-tower-domain",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TwistedPullbackTowerOrigins",
+  "file": "lean/Sheaf/Paper/TwistedPullbackTowerOrigins.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTwistedTowerDomain.uniform_bounds_origin_lower",
+  "statement": "theorem uniform_bounds_origin_lower\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (b : SpTowerShriek.Base l E) (T : Scheme.{u})\n    [IsNoetherian T]\n    (K : SpTowerShriek.D l E T) (a z s t : ℤ)\n    (_haz : a ≤ z) (hst : s ≤ t)\n    (h : SpChartAdmissibility.bounds l E T K a z s t) :\n    (∀ n : ℕ, OriginIn l E b T n K s t) ∧ K.IsGE a",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3e8dc",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T163626-L-734076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3e8dc",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T163626-L-734076",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules vs clone item (verbatim def move, unchanged theorem signature) and node JSONs vs statement owners; sandbox run_set rc 0, axioms as expected"
+ }
+}

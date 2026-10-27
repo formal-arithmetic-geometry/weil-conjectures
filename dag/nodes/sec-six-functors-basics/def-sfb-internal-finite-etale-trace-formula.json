@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-internal-finite-etale-trace-formula",
+ "kind": "definition",
+ "title": "The canonical sheet-sum normalization of an internal trace",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, $p:U\\to X$ a scheme morphism and $P$ an internal $\\Lambda_X$-module [sk-def-sfb-module-objects], with the coefficient pullbacks, direct images and adjunction of [sk-def-sfb-module-pushforward-pullback]. For $\\tau:p_*p^*P\\to P$, define its sheet-sum condition as follows. For every weakly etale $g:Y\\to X$, finite list $t_j:Y\\to U$ with $t_jp=g$ whose induced maps $Y\\to U\\times_XY$ form a coproduct decomposition, $g^*\\tau$ equals the sum of the canonical sheet projections. The $j$th projection is $g^*p_*p^*P\\cong t_j^*p^*p_*p^*P\\to t_j^*p^*P\\cong g^*P$, with middle arrow the pullback of the actual counit at $p^*P$ and outer arrows the composition comparisons of [def-sfb-module-upper-star-comp]. Empty lists give the zero sum. This is a predicate on an actual morphism, not a choice of trace.",
+ "stmt_deps": [
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-upper-star-comp"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, first paragraph: trace is the sum of the sheet projections"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, first paragraph: trace is the sum of the sheet projections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The epimorphic finite etale trace on continuous coefficient sheaf modules is the sum of the sheet projections",
+   "results": "8 hits, including trace_eq_sum_embeddings, LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace, SheafOfModules.GeneratingSections.ofEpi_s, SheafOfModules.GeneratingSections.ofEpi, PresheafOfModules.epi_of_surjective; none states the internal trace formula.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale surjective trace map on a locally free sheaf has locally free integral lattice image",
+   "results": "8 hits: IsIntegralClosure.module_free, Algebra.intTrace, Algebra.intTraceAux, Algebra.intTrace_eq_trace, ClassGroup.fintypeOfAdmissibleOfFinite, Algebra.trace_localization, Algebra.normalizedTrace_surjective, trace_quotient_eq_trace_localization_quotient. These concern algebraic traces, not this sheaf trace.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtaleTraceFormula|ContinuousFunctionPresentation|trace.*[Ii]mage.*[Cc]hart|continuous.*[Ll]attice.*[Ff]ree",
+   "results": "0 hits",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleTraceLattice",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, first paragraph: trace is the sum of the sheet projections",
+   "via": [
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteEtaleTraceFormula",
+  "file": "lean/Sheaf/Paper/FiniteEtaleTraceFormula.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.FiniteEtaleTraceFormula",
+  "statement": "def FiniteEtaleTraceFormula\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (τ : (lowerStar Λ p).obj ((upperStar Λ p).obj P) ⟶ P) : Prop",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.FiniteEtaleModuleChart",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleTraceSheetComparison_exists",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleTraceSheetComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleTraceSheetComparison_eq",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleTraceSheetSum",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FiniteEtaleTraceFormula"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022850-L-489971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e7396",
+  "group": "M9",
+  "result": "fix",
+  "landing": "20261026T070326-L-3543209",
+  "kind": "interface",
+  "note": "independent cc review: continuousFiniteEtaleTrace_exists (lem-sfb-continuous-finite-etale-trace) and adapted FiniteEtaleTraceFormula (def-sfb-internal-finite-etale-trace-formula, equivalent chart-bundled body, change record) against their nodes; new sorry nodes lem-sfb-finite-etale-split-hom-descent / lem-sfb-finite-etale-sheet-sum-compatible against their statements; importers ImageCharts and Lattice compiled against the delivery"
+ }
+}

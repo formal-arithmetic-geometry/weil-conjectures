@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-solvable-subgroup-flag-realization",
+ "kind": "statement",
+ "title": "Realizing a solvable subgroup as a flag stabilizer",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness, connectedness and morphism properties have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-pc-morphism-conventions]. A group is solvable if its successive scheme-theoretic commutator subgroups eventually become trivial. Let $G$ be smooth and connected and let $H\\subseteq G$ be smooth, connected and solvable. There exist a nonzero finite-dimensional $F$-vector space $V$, a faithful group-scheme representation $r:G\\to\\operatorname{GL}(V)$ (a closed immersion), and a complete flag $\\mathcal F:0=V_0\\subset V_1\\subset\\cdots\\subset V_n=V$, $\\dim V_i=i$, whose scheme-theoretic stabilizer in $G$ is exactly $H$. The functor $\\operatorname{Fl}(V)$ of complete flags of locally direct-summand submodules of $V\\otimes_F A$ is represented by a projective finite-type $F$-scheme; in particular every closed reduced subscheme of it is proper and of finite type over $F$. For any faithful representation of $G$ on a finite-dimensional vector space and any complete flag $\\mathcal E$, let $K$ be its scheme-theoretic stabilizer. Then $K_{\\mathrm{red}}^\\circ$, the identity component of the reduced subgroup scheme, is smooth, connected and solvable and has $\\dim K_{\\mathrm{red}}^\\circ=\\dim K$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorems 4.9 and 4.27, pp.87,94--95 (add a faithful representation to the line-stabilizer representation before forming the flag); Theorem 16.30, pp.334--335, applied to H on V/V_1 in the proof of Theorem 17.9, p.354; Propositions 7.29--7.30, pp.146--147; reduced identity subgroup over a perfect field, Section 1 (1.39), and solvable triangular subgroups, Section 16a."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-morphism-conventions",
+  "def-sc-general-linear-group",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-scheme-reduction",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-complete-flag-points"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-chevalley-scheme-line-stabilizer] to $H\\subseteq G$, obtaining a rational representation $E$ and a line $L\\subseteq E$ with stabilizer $H$ on every $F$-algebra. For a faithful representation, apply [lem-sfb-normal-subgroup-representation-kernel] with the trivial normal subgroup of $G$. Its homomorphism $s:G\\to\\operatorname{GL}(W)$ has trivial scheme-theoretic kernel. By [lem-sfb-algebraic-group-homomorphism-factorization], its closed image is the fppf sheaf quotient by that kernel, hence is $G$ itself. Therefore $s$ is a closed immersion, with $\\dim W\\geq1$.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer",
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27, pp.94–95; Theorem 4.9, p.87; closed faithful representation via the existing prescribed-kernel and homomorphism theorems."
+   }
+  },
+  {
+   "text": "Put $V=E\\oplus W$ with the direct-sum representation $r=\\rho\\oplus s$, and regard $L$ as $L\\oplus0$. Its stabilizer remains $H$ on every algebra, since $g(L\\oplus0)=L\\oplus0$ if and only if $\\rho(g)L=L$. The block-diagonal inclusion $\\operatorname{GL}(E)\\times\\operatorname{GL}(W)\\hookrightarrow\\operatorname{GL}(V)$ is closed: set the off-diagonal entries to zero; invertibility of the full determinant makes both block determinants units. The graph of $\\rho$ over the closed copy $s(G)$ is closed, since in affine coordinates it is defined by equating each first-block matrix entry and inverse determinant to the corresponding regular function on $s(G)$. Thus $r$ is a closed immersion. In particular $V\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9, p.354, first paragraph, with the faithful direct-summand refinement justified by the displayed block equations."
+   }
+  },
+  {
+   "text": "Induct on $d=\\dim M$ to construct an $H$-stable complete flag in every rational $H$-module $M$, $\\sigma:H\\to\\operatorname{GL}(M)$. At $d=0$ use the empty flag. At $d>0$, let $Y=G_F(d,d-1)$ from [lem-sfb-free-quotient-grassmann-projective]; its $T$-points are rank-$(d-1)$ quotients of $M\\otimes_F\\mathcal O_T$, equivalently their kernels, the rank-one locally direct summands (a locally free quotient splits locally, and the summand determines its quotient). The rule $(h,S)\\mapsto\\sigma_T(h)S$ is natural in $T$ and satisfies the action identities, so by representability it is an action $H\\times_FY\\to Y$. For $d=1$, $Y=\\operatorname{Spec}F$; for $d\\geq2$, $Y$ has the Plücker closed immersion into $\\mathbf P^{d-1}_F$, and is quasi-compact. Hence $Y$ is projective, proper by [lem-pc-projective-proper], of finite type by [def-weil-proper-morphism], and nonempty since $M$ has a line. [lem-sfb-solvable-proper-fixed-point] gives $y\\in Y(F)$ fixed by $H$: $y$ is a line $D\\subseteq M$, $y_A$ is $D\\otimes_FA$, so $\\sigma_A(h)(D\\otimes_FA)=D\\otimes_FA$ for all $A$ and $h\\in H(A)$. In a basis beginning with $D$, the lower-left block of the action is zero, so the lower-right block gives a rational action on $M/D$. The inductive flag there pulls back, preceded by $0\\subset D$, to a complete flag in $M$, stable over every algebra. Apply this construction to the rational $H$-module $V/L$. Taking inverse images in $V$ gives a complete flag $\\mathcal F$ with $V_1=L$. Every $H(A)$ preserves it; conversely its stabilizer preserves $L_A$ and therefore belongs to $H(A)$ by step 1. The equality is natural in $A$, proving equality of subgroup schemes.",
+   "uses": [
+    "lem-sfb-free-quotient-grassmann-projective",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-solvable-proper-fixed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.3 (Borel fixed point) and Theorem 17.4 (Lie–Kolchin via 17.3), p.353; Theorem 17.9, p.354, first paragraph."
+   }
+  },
+  {
+   "text": "For $n=\\dim V$, [lem-sfb-free-quotient-grassmann-projective] represents rank-$i$ subbundles of $V$ by $X_i=G_F(n,n-i)$ with universal kernel $S_i$ and quotient $Q_i$. Indeed a locally free quotient has a locally split surjection, so its kernel is a locally direct summand; conversely such a summand determines its quotient. Work on $P=\\prod_{i=1}^{n-1}X_i$; if $n=1$, put $P=\\operatorname{Spec}F$. Impose, for $1\\leq i<n-1$, that the composite $S_i\\to V\\otimes_F\\mathcal O_P\\to Q_{i+1}$ vanish. In local frames its finitely many matrix entries generate an ideal; frame changes multiply by invertible matrices, so these ideals agree on overlaps and define a closed subscheme $Z\\subseteq P$. For every test scheme $T$, a map $T\\to P$ factors through $Z$ exactly when all these pulled-back entries vanish, namely $S_i|_T\\subseteq S_{i+1}|_T$. The resulting filtration has locally free successive quotients: locally split $V/S_i\\twoheadrightarrow V/S_{i+1}$; its kernel is $S_{i+1}/S_i$. Adding $0$ and $V_T$ therefore identifies $Z$ with the stated full-flag functor, naturally under all base changes, including nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-free-quotient-grassmann-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.29–7.30, pp.146–147: Grassmannian incidence construction, written on arbitrary test schemes; quotient Grassmannians: Stacks Tag 089T, constructions.tex, lemma-gkn-representable."
+   }
+  },
+  {
+   "text": "Each $X_i$ has a Plücker closed immersion into a finite projective space by [lem-sfb-free-quotient-grassmann-projective]. Repeated [lem-chow-segre] embeds the finite product $P$ into a single projective space. The product of the closed immersions is closed (on affine charts its ideal is the sum of the pulled-back ideals), and composing with $Z\\hookrightarrow P$ is closed (successive quotient ring maps are surjective). For $n=1$ use $\\operatorname{Spec}F=\\mathbf P^0_F$. Hence $Z=\\operatorname{Fl}(V)$ is projective; it is quasi-compact as a closed subscheme of $\\mathbf P^N_F$. Every closed subscheme $C\\subseteq Z$, including every closed reduced one, has the same kind of closed embedding by composition. By [lem-pc-projective-proper] both $Z$ and $C$ are proper over $F$; by [def-weil-proper-morphism] properness includes finite type. This proves all the geometric clauses.",
+   "uses": [
+    "lem-sfb-free-quotient-grassmann-projective",
+    "lem-chow-segre",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.30, p.147; Stacks constructions.tex, Tag 01WD, lemma-segre-embedding; morphisms.tex, Tag 01WC, lemma-locally-projective-proper."
+   }
+  },
+  {
+   "text": "Now take any faithful representation and complete flag $\\mathcal E$ on a space of dimension $m$. For $m=0$, faithfulness forces $G=1$, so all remaining assertions are immediate. For $m>0$ choose an adapted basis. The subgroup of $\\operatorname{GL}_m$ preserving this flag is $B_m$, defined on every algebra by setting all entries below the diagonal to zero. Thus $K=G\\times_{\\operatorname{GL}_m}B_m$ is an affine closed subgroup of finite type; its defining equations are the pullbacks of those entries. By [lem-sfb-locally-algebraic-group-identity-component], $J=(K^0)_{\\mathrm{red}}$ is a smooth connected closed subgroup with the same topological space as $K^0$. It equals $(K_{\\mathrm{red}})^0$: reduction does not change the topological space, and restriction to the open and closed identity component commutes with quotienting by the nilradical. This is the requested $K_{\\mathrm{red}}^\\circ$, and $J\\subseteq B_m$.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1, Corollary 1.39, pp.18–19; Theorem 17.9, p.354, stabilizers paragraph, with reduction before taking the smooth identity subgroup; Stacks groupoids.tex, Tags 0B7R,047R,047P,047N."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-triangular-diagonal-kernel] to the smooth connected subgroup $J\\subseteq B_m$. It gives a smooth unipotent normal subgroup $U$ and a quotient $J/U$ embedded into $(\\mathbf G_m)^m$, hence commutative. By [lem-sfb-smooth-unipotent-solvable], $U$ has a terminating closed normal series with commutative quotients. Prepend $J\\supseteq U$ to that series. If its terms are $J=J_0\\supseteq J_1\\supseteq\\cdots\\supseteq J_t=1$, the commutator morphism of each $J_i$ is trivial in its commutative quotient, so $\\mathcal D(J_i)\\subseteq J_{i+1}$. Monotonicity of commutator subgroups then gives $\\mathcal D^i(J)\\subseteq J_i$ by induction, and $\\mathcal D^t(J)=1$. This is solvability in the item\\'s convention.",
+   "uses": [
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-smooth-unipotent-solvable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 16a, Proposition 16.2(c)⇒(d), p.325, and Proposition 14.21, pp.284–285; pass explicitly from a solvable normal series to the derived series."
+   }
+  },
+  {
+   "text": "Finally [lem-sfb-group-neutral-component-translates] gives finitely many connected components of $K$, each isomorphic to $K^0$ by a translation. An irreducible closed chain lies in a single component of a finite clopen partition; consequently the topological Krull dimension of $K$ is the maximum of the dimensions of its components, all equal to $\\dim K^0$. Since $J$ and $K^0$ have the same underlying space by step 6, their closed chains and dimensions agree. Therefore $\\dim K_{\\mathrm{red}}^\\circ=\\dim J=\\dim K^0=\\dim K$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1, Proposition 1.34, Corollary 1.35 and dimension discussion preceding Proposition 1.37, pp.16–18; Stacks Tag 0B7R, groupoids.tex, proposition-connected-component."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "lem-sfb-normal-subgroup-representation-kernel",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-free-quotient-grassmann-projective",
+  "lem-chow-segre",
+  "lem-pc-projective-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-triangular-diagonal-kernel",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-solvable-proper-fixed-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne Theorem 17.9, p.354, Chevalley and Lie–Kolchin construction; Propositions 7.29–7.30, pp.146–147. Agent supplies incidence equations over arbitrary algebras, faithful direct summand and reduction details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected solvable subgroup of an affine algebraic group is exactly the stabilizer of a complete flag in a finite dimensional representation; complete flag varieties are projective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"normalClosure_of_stabilizer_eq_top\", \"module\": \"Mathlib/GroupTheory/GroupAction/Jordan\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : Group G] [inst_1 : MulAction G α],\\n  2 < ENat.card α →\\n    MulAction.IsMultiplyPretransitive G α 2 → ∀ {a : α}, Subgroup.normalClosure ↑(MulAction.stabilizer G a) = ⊤\", \"doc\": \"For a group $G$ acting 2-multiply pretransitively on a set $\\\\alpha$ with cardinality greater than 2, and for any element $a \\\\in \\\\alpha$, the normal closure of the stabilizer subgroup of $a$ in $G$ is \"}\n  {\"name\": \"MulAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [Nontrivial X] [MulAction.IsPreprimitive G X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a)\", \"doc\": \"Let $G$ be a group acting on a non-trivial set $X$. If the action is preprimitive, then for any element $a \\\\in X$, the stabilizer subgroup of $a$ is a maximal subgroup of $G$.\"}\n  {\"name\": \"MulAction.stabilizer_subgroup\", \"module\": \"Mathlib/Algebra/Pointwise/Stabilizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (s : Subgroup G), MulAction.stabilizer G ↑s = s\", \"doc\": \"For a group $G$ and a subgroup $s$ of $G$, the stabilizer of $s$ (when considered as a subset of $G$) under the group action is equal to $s$ itself, i.e., $\\\\text{stabilizer}_G(s) = s$.\"}\n  {\"name\": \"MulAction.isCoatom_stabilizer_iff_preprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [MulAction.IsPretransitive G X] [Nontrivial X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a) ↔ MulAction.IsPreprimitive G X\", \"doc\": \"For a pretransitive group action of $G$ on a nontrivial set $X$, the stabilizer subgroup of any element $a \\\\in X$ is a coatom in the subgroup lattice of $G$ if and only if the action is preprimitive. \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X] (x : (F.obj X).carrier),\\n  (MulAction.stabilize\", \"doc\": \"In a pre-Galois category satisfying the Galois axioms, for any Galois object $X$ and element $x$ in the image of $X$ under a fiber functor $F$, the stabilizer subgroup of $x$ under the action of the a\"}\n  {\"name\": \"Subgroup.isPretransitive_of_stabilizer_lt\", \"module\": \"Mathlib/GroupTheory/Perm/MaximalSubgroups\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : Group M] [inst_1 : MulAction M α] {s : Set α} {G : Subgroup M},\\n  MulAction.stabilizer M s < G →\\n    (∀ {s : Set α}, ∀ a ∈ s, ∀ b ∈ s, ∃ g ∈ MulAction.stabilizer M s, g • a = b) → MulAction.IsPretransitive (↥G) α\", \"doc\": \"Let $ G $ be a subgroup of a group $ M $ acting on a set $ \\\\alpha $. If the stabilizer subgroup $ \\\\mathrm{Stab}_M(s) $ of a set $ s \\\\subseteq \\\\alpha $ is a proper subgroup of $ G $ (i.e., $ \\\\mathrm{St\"}\n  {\"name\": \"MulAction.IwasawaStructure.commutator_le\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"∀ {M : Type u_1} [inst : Group M] {α : Type u_2} [inst_1 : MulAction M α] (IwaS : MulAction.IwasawaStructure M α)\\n  [MulAction.IsQuasiPreprimitive M α] (N : Subgroup M) [nN : N.Normal],\\n  MulAction.fixedPoints (↥N) α ≠ Set.univ → commutator M ≤ N\", \"doc\": \"If a group $M$ acts quasi-preprimitively on a set $\\\\alpha$ via an Iwasawa structure, and $N$ is a normal subgroup of $M$ such that the fixed-point set of $N$ on $\\\\alpha$ is not the entire set $\\\\alpha$\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley line stabilizer theorem Lie Kolchin invariant complete flag projective flag variety",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"Module.End.exists_ker_pow_eq_ker_pow_succ\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Lemmas\", \"type\": \"[FiniteDimensional K V] (f : End K V) : ∃ k : ℕ, k ≤ finrank K V ∧ LinearMap.ker (f ^ k) = LinearMap.ker (f ^ k.succ)\", \"doc\": \"For any finite-dimensional vector space $ V $ over a division ring $ K $ and any linear endomorphism $ f : V \\\\to V $, there exists a natural number $ k $ with $ k \\\\leq \\\\dim(V) $ such that $ \\\\ker(f^k) \"}\n  {\"name\": \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"module\": \"Mathlib.Algebra.Lie.InvariantForm\", \"type\": \": IsSemisimple K L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $K$ admits a non-degenerate invariant bilinear form, then $\\\\mathfrak{g}$ is semisimple.\"}\n  {\"name\": \"Ideal.Quotient.ker_stabilizerHom\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \": (stabilizerHom P p G).ker = (P.toAddSubgroup.inertia G).subgroupOf _\", \"doc\": \"The kernel of the stabilizer homomorphism from $\\\\text{Stab}_G(P)$ to the automorphism group of $B/P$ is equal to the inertia subgroup of $G$ relative to $P$, defined as the subgroup of elements $\\\\sigm\"}\n  {\"name\": \"LinearMap.BilinForm.lieInvariant_iff\", \"module\": \"Mathlib.Algebra.Lie.InvariantForm\", \"type\": \"[LieAlgebra R L] [LieModule R L M] : Φ.lieInvariant L ↔ Φ ∈ LieModule.maxTrivSubmodule R L (LinearMap.BilinForm R M)\", \"doc\": \"A bilinear form $\\\\Phi$ on $M$ is Lie invariant if and only if $\\\\Phi$ lies in the maximal trivial submodule of the space of bilinear forms on $M$ under the Lie algebra action.\"}\n  {\"name\": \"LieAlgebra.finrank_engel\", \"module\": \"Mathlib.Algebra.Lie.Rank\", \"type\": \"(x : L) : finrank K (engel K x) = (ad K L x).charpoly.natTrailingDegree\", \"doc\": \"For any element $ x $ in a Lie algebra $ L $ over a field $ K $, the finite rank of the Engel subalgebra associated with $ x $ is equal to the natural trailing degree of the characteristic polynomial \"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom.congr_simp\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \"∀ {A : Type u_3} {B : Type u_4} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (P : Ideal B)\\n  (p : Ideal A) [inst_3 : P.LiesOver p] (G : Type u_6) [inst_4 : Group G] [inst_5 : MulSemiringAction G B]\\n  [inst_6 : SMulCommClass G A B], Ideal.Quotient.stabilizerHom P p G = Ideal.Quoti\", \"doc\": \"Under commuting scalar actions, the stabilizer homomorphism from the stabilizer subgroup of an ideal $P \\\\subseteq B$ to the automorphism group of the quotient ring $B/P$ is congruent to itself, assert\"}\n  {\"name\": \"IsFractionRing.stabilizerHom.congr_simp\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] (P : Ideal A) (Q : Ideal B)\\n  [inst_6 : Q.LiesOver P] (K : Type u_4) (L : Type u_5) [inst_7 : Field K] \", \"doc\": \"The stabilizer homomorphism from the stabilizer subgroup of an ideal $ Q $ in $ G $ to the Galois group $ \\\\mathrm{Gal}(L/K) $ is congruent under identical parameters, i.e., $ \\\\mathrm{stabilizerHom}(G,\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flag\", \"stabilizer\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|LieKolchin|flagVariety|FlagVariety",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"15\", \"text\": \"# Chevalley's theorem with complexity bound\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"17\", \"text\": \"⚠ For general usage, see `Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"19\", \"text\": \"Chevalley's theorem states that if `f : R → S` is a finitely presented ring hom between commutative\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"31\", \"text\": \"This file proves a complexity-aware version of Chevalley's theorem, namely that a constructible set\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"42\", \"text\": \"used to describe `(C₁ ∪ ... ∪ Cₖ)`. See the (private) lemma `chevalley_polynomialC`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"line\": \"103\", \"text\": \"/-- The degree bound on a constructible set for Chevalley's theorem for the inclusion `R ↪ R[X]`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"13\", \"text\": \"# Chevalley's theorem\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"15\", \"text\": \"In this file we provide the usual (algebraic) version of Chevalley's theorem.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"16\", \"text\": \"For the proof see `Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"32\", \"text\": \"  obtain ⟨T, hT, -⟩ := ChevalleyThm.chevalley_polynomialC _ Submodule.mem_top S (by simp)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"13\", \"text\": \"# Jordan-Chevalley-Dunford decomposition\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"15\", \"text\": \"Given a finite-dimensional linear endomorphism `f`, the Jordan-Chevalley-Dunford theorem provides a\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"31\", \"text\": \"* `Module.End.isNilpotent_isSemisimple_unique`: the Jordan-Chevalley-Dunford decomposition is\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"72\", \"text\": \"/-- **Jordan-Chevalley-Dunford decomposition**: an endomorphism of a finite-dimensional vector space\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"82\", \"text\": \"/-- **Uniqueness of Jordan-Chevalley-Dunford decomposition**: if `n₁ + s₁ = n₂ + s₂` with `nᵢ`\"}\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"17\", \"text\": \"as Hensel's lemma and the Jordan-Chevalley decomposition.\"}\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"28\", \"text\": \"  Jordan-Chevalley decomposition of linear endomorphisms.\"}\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"105\", \"text\": \"This can be used to prove the Jordan-Chevalley decomposition of linear endomorphisms. -/\"}\n  {\"file\": \"Mathlib/Algebra/LieRinehartAlgebra/Defs.lean\", \"line\": \"17\", \"text\": \"terms of the Chevalley-Eilenberg algebra of a Lie-Rinehart algebra.\"}\n  {\"file\": \"Mathlib/Combinatorics/Additive/ErdosGinzburgZiv.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.FieldTheory.ChevalleyWarning\"}\n  {\"file\": \"Mathlib/Combinatorics/Additive/ErdosGinzburgZiv.lean\", \"line\": \"15\", \"text\": \"This file proves the Erdős–Ginzburg–Ziv theorem as a corollary of Chevalley-Warning. This theorem\"}\n  {\"file\": \"Mathlib/Combinatorics/Additive/ErdosGinzburgZiv.lean\", \"line\": \"66\", \"text\": \"  -- Chevalley-Warning gives us that `p ∣ n` because the total degrees of `f₁` and `f₂` are at most\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.LinearAlgebra.JordanChevalley\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"12\", \"text\": \"# Jordan–Chevalley decomposition and the adjoint action\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|Kolchin|flag.*stabiliz|stabiliz.*flag",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.Chevalley\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"117\", \"text\": \"/-- **Chevalley's Theorem**: The image of a locally constructible set under a\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"162\", \"text\": \"/-- **Chevalley's Theorem**: The image of a constructible set under a\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.Chevalley\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern Lie algebra modules, abstract or topological group stabilizers, categorical projectivity, or Chevalley constructibility; none gives the stated rational group-scheme assertion in arbitrary characteristic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flag\", \"stabilizer\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern Lie algebra modules, abstract or topological group stabilizers, categorical projectivity, or Chevalley constructibility; none gives the stated rational group-scheme assertion in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective scheme of full flags with solvable triangular stabilizers over an algebraically closed field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.standardComplex.x_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k : Type u) [inst : CommRing k] (G : Type u) [inst_1 : Group G] (n : ℕ),\\n  CategoryTheory.Projective ((Rep.standardComplex k G).X n)\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the $n$-th term of the standard chain complex in the category $\\\\text{Rep}(k, G)$ is a projective object. This term is the free $k$-modu\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"Projectivization.finite_of_finite\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Cardinality\", \"type\": \"∀ (k : Type u_1) (V : Type u_2) [inst : DivisionRing k] [inst_1 : AddCommGroup V] [inst_2 : Module k V] [Finite V],\\n  Finite (Projectivization k V)\", \"doc\": \"If $ V $ is a finite module over a division ring $ K $, then its projectivization $ \\\\mathbb{P}(K, V) $, defined as the quotient of nonzero vectors in $ V $ under scalar multiplication by invertible el\"}\n  {\"name\": \"Rep.instProjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Projective V\", \"doc\": \"Every object $ V $ in the category $ \\\\text{Rep}(k, G) $ of representations of a monoid $ G $ over a ring $ k $ is a projective object. This means that for any epimorphism $ e : A \\\\to B $ in $ \\\\text{Re\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"Projectivization.finite_iff_of_finite\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Cardinality\", \"type\": \"∀ (k : Type u_1) (V : Type u_2) [inst : DivisionRing k] [inst_1 : AddCommGroup V] [inst_2 : Module k V] [Finite k],\\n  Finite (Projectivization k V) ↔ Finite V\", \"doc\": \"Let $ k $ be a finite division ring and $ V $ a module over $ k $. The projectivization $ \\\\mathbb{P}(V) $ of $ V $ is finite if and only if $ V $ itself is finite.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern Lie algebra modules, abstract or topological group stabilizers, categorical projectivity, or Chevalley constructibility; none gives the stated rational group-scheme assertion in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected solvable subgroup of an affine algebraic group is the scheme theoretic stabilizer of a complete flag in a faithful representation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MulAction.IwasawaStructure.T\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"{M : Type u_1} →\\n  [inst : Group M] → {α : Type u_2} → [inst_1 : MulAction M α] → MulAction.IwasawaStructure M α → α → Subgroup M\", \"doc\": \"Given a group $M$ acting on a type $\\\\alpha$, the function $T$ maps each element $a \\\\in \\\\alpha$ to a subgroup of $M$ defined by the Iwasawa structure on the group action. Specifically, for each $a$, $T\"}\n  {\"name\": \"normalClosure_of_stabilizer_eq_top\", \"module\": \"Mathlib/GroupTheory/GroupAction/Jordan\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : Group G] [inst_1 : MulAction G α],\\n  2 < ENat.card α →\\n    MulAction.IsMultiplyPretransitive G α 2 → ∀ {a : α}, Subgroup.normalClosure ↑(MulAction.stabilizer G a) = ⊤\", \"doc\": \"For a group $G$ acting 2-multiply pretransitively on a set $\\\\alpha$ with cardinality greater than 2, and for any element $a \\\\in \\\\alpha$, the normal closure of the stabilizer subgroup of $a$ in $G$ is \"}\n  {\"name\": \"MulAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [Nontrivial X] [MulAction.IsPreprimitive G X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a)\", \"doc\": \"Let $G$ be a group acting on a non-trivial set $X$. If the action is preprimitive, then for any element $a \\\\in X$, the stabilizer subgroup of $a$ is a maximal subgroup of $G$.\"}\n  {\"name\": \"MulAction.IwasawaStructure.is_generator\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"∀ {M : Type u_1} [inst : Group M] {α : Type u_2} [inst_1 : MulAction M α] (self : MulAction.IwasawaStructure M α),\\n  iSup self.T = ⊤\", \"doc\": \"For any group $M$ acting on a type $\\\\alpha$ with an Iwasawa structure, the supremum of the subgroups $T(a)$ for all $a \\\\in \\\\alpha$ equals the entire group $M$, i.e., $\\\\bigvee_{a \\\\in \\\\alpha} T(a) = M$.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X] (x : (F.obj X).carrier),\\n  (MulAction.stabilize\", \"doc\": \"In a pre-Galois category satisfying the Galois axioms, for any Galois object $X$ and element $x$ in the image of $X$ under a fiber functor $F$, the stabilizer subgroup of $x$ under the action of the a\"}\n  {\"name\": \"MulAction.isCoatom_stabilizer_iff_preprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [MulAction.IsPretransitive G X] [Nontrivial X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a) ↔ MulAction.IsPreprimitive G X\", \"doc\": \"For a pretransitive group action of $G$ on a nontrivial set $X$, the stabilizer subgroup of any element $a \\\\in X$ is a coatom in the subgroup lattice of $G$ if and only if the action is preprimitive. \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern Lie algebra modules, abstract or topological group stabilizers, categorical projectivity, or Chevalley constructibility; none gives the stated rational group-scheme assertion in arbitrary characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley line stabilizer Lie Kolchin complete flag projective flag scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Quotient.ker_stabilizerHom\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \": (stabilizerHom P p G).ker = (P.toAddSubgroup.inertia G).subgroupOf _\", \"doc\": \"The kernel of the stabilizer homomorphism from $\\\\text{Stab}_G(P)$ to the automorphism group of $B/P$ is equal to the inertia subgroup of $G$ relative to $P$, defined as the subgroup of elements $\\\\sigm\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LinearAlgebra.Projectivization.termℙ\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The notation $\\\\mathbb{P}$ for projective spaces in linear algebra.\"}\n  {\"name\": \"LieSubalgebra.completeLattice\", \"module\": \"Mathlib.Algebra.Lie.Subalgebra\", \"type\": \": CompleteLattice (LieSubalgebra R L)\", \"doc\": \"The collection of Lie subalgebras over a commutative ring $ R $ of a Lie algebra $ L $ forms a complete lattice, where the infimum of any family of Lie subalgebras is their intersection, and the supre\"}\n  {\"name\": \"LieSubalgebra.toSubmodule_eq_top\", \"module\": \"Mathlib.Algebra.Lie.Subalgebra\", \"type\": \"(K : LieSubalgebra R L) : K.toSubmodule = ⊤ ↔ K = ⊤\", \"doc\": \"For any Lie subalgebra $ K $ of a Lie algebra $ L $ over a commutative ring $ R $, the underlying submodule of $ K $ is equal to the entire module $ L $ if and only if $ K $ itself is equal to the ent\"}\n  {\"name\": \"LieSubmodule.instCompleteLattice\", \"module\": \"Mathlib.Algebra.Lie.Submodule\", \"type\": \": CompleteLattice (LieSubmodule R L M)\", \"doc\": \"For any commutative ring $ R $, Lie ring $ L $, and $ R $-module $ M $ equipped with a Lie ring module structure, the collection of all Lie submodules of $ M $ forms a complete lattice. In this lattic\"}\n  {\"name\": \"Flag.instUnique\", \"module\": \"Mathlib.Order.Preorder.Chain\", \"type\": \"[LinearOrder α] : Unique (Flag α)\", \"doc\": \"In any linearly ordered set $\\\\alpha$, every maximal chain (flag) is equal to the universal set containing all elements of $\\\\alpha$, hence the type of flags on $\\\\alpha$ has a unique element.\"}\n  {\"name\": \"LieAlgebra.finrank_engel\", \"module\": \"Mathlib.Algebra.Lie.Rank\", \"type\": \"(x : L) : finrank K (engel K x) = (ad K L x).charpoly.natTrailingDegree\", \"doc\": \"For any element $ x $ in a Lie algebra $ L $ over a field $ K $, the finite rank of the Engel subalgebra associated with $ x $ is equal to the natural trailing degree of the characteristic polynomial \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern Lie algebra modules, abstract or topological group stabilizers, categorical projectivity, or Chevalley constructibility; none gives the stated rational group-scheme assertion in arbitrary characteristic"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-borel-pair-structure",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Chevalley flag realization in Milne 17.9: turn maximal solvable dimension into minimal orbit dimension; properness comes from a closed orbit in a flag scheme.",
+   "via": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-solvable-subgroup-flag-realization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the newly available Chevalley scheme-line-stabilizer node and existing faithful-image, Grassmannian and reduced-component inputs. The invariant line of Lie–Kolchin is obtained from the existing Borel fixed-point node on the scheme of lines (Milne 17.4); the item assembles the faithful flag, proves functorial incidence representability and projectivity, and handles nonreduced stabilizers by reduction.",
+  "blueprint": "Inherited ancestry ends at a non-node (blueprint.from.node null, preserved); realizes its named supporting Milne 17.9 flag-realization argument below det-thm-sf-ctf-stability-direct-images proof (3), without changing the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-chow-segre",
+    "why": "Generic Segre closed embedding for a product of projective spaces in the flag incidence construction; no node of this unit states it."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic projective-implies-proper theorem applied to the explicitly constructed flag scheme and its closed subschemes; no node of this unit states precisely this general theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-segre",
+  "lem-pc-projective-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-db24118e1",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-db24118e1 (reviewer sub-agent of L); spot-checked: I read Milne iAG 2017 at Thm 16.30 (pp.334-335), Cor 17.3 and Thm 17.4 (p.353), and Thm 17.9 (p.354, first paragraph). The statement is unchanged. Steps 1-2, 4 and 6-8 hold against the cited statements. Step 1: the kernel node with N=1 plus the homomorphism-factorization node (affine, so separated) give a closed immersion. Step 2: the direct sum with a block-diagonal graph is closed. Step 4: G_F(n,n-i) kernels with incidence ideals represent Fl(V) over nonreduced algebras; n=1 and n=2 checked. Step 6: (K^0)_red = (K_red)^0. Step 7: the triangular-diagonal-kernel node applies (J smooth and connected, k algebraically closed); its unipotence clause matches the hypothesis of the smooth-unipotent-solvable node; D(J_i) is contained in J_{i+1}, so the derived series ends at 1. Step 8: dim K = dim K^0 = dim J via finitely many component translates. Repair (C5/C1): the new Lie-Kolchin eigenline node is true (connectedness is needed, e.g. S_3; smoothness too, Milne 17.5), but it follows in a few lines from the existing reviewed node lem-sfb-solvable-proper-fixed-point (Borel fixed point, same unit, same solvability convention) applied to the scheme of lines G_F(d,d-1); this is Milne 17.4's route. Step 3 now builds the H-action by representability, gets properness from Plücker plus lem-pc-projective-proper (Spec F when d=1), and cites the fixed-point node. I dropped the new node and updated proof_deps, which now equal the union of the steps' uses; I also updated source.place and the split_report summary. Neither the item nor the dropped node is in the fixed-point node's closure, so there is no cycle. Minor: step 5 now states quasi-compactness, which def-pc-projective-morphism requires. Accepted tool_uses: lem-chow-segre and lem-pc-projective-proper, both generic. Batch-5 findings: lem-trf-fppf-covering-base-change (a Mathlib leaf: fppf coverings stable under base change) and def-trf-scheme-cover-descent-datum (the definition of fppf descent data) are general facts, outside the trace formula and Poincaré duality, so both are accepted. The fixed-point node's closure has no trace-formula or Poincaré node. No SGA source is used. Details are in review.md; the corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SolvableSubgroupFlagRealization",
+  "declaration": "AlgebraicGeometry.solvableSubgroup_flag_realization",
+  "declarations": [
+   "AlgebraicGeometry.solvableSubgroup_flag_realization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SolvableSubgroupFlagRealization.lean",
+  "statement": "theorem solvableSubgroup_flag_realization {k : Type u} [Field k] [IsAlgClosed k] (G H : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [Smooth G.hom] [ConnectedSpace G.left] [Smooth H.hom] [ConnectedSpace H.left] (i : H ⟶ G) [IsClosedSubgroupScheme i] (hsolv : IsSolvableGroupScheme H) : (∃ (n : ℕ) (r : G ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} n) k) (L : CompleteFlagPoints.Points n k), 0 < n ∧ IsMonHom r ∧ IsClosedImmersion r.left ∧ CompleteFlagPoints.IsStabilizer i r L ∧ ∃ (X : Over (Spec (.of k))) (e : ∀ (A : Type u) [CommRing A] [Algebra k A], ((Spec (.of A)).asOver (Spec (.of k)) ⟶ X) ≃ CompleteFlagPoints.Points n A), IsProjective X.hom ∧ LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom ∧ (∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra k A] [Algebra k B] (f : A →ₐ[k] B) (x : (Spec (.of A)).asOver (Spec (.of k)) ⟶ X), (e B ((Spec.map (CommRingCat.ofHom f.toRingHom)).asOver (Spec (.of k)) ≫ x)).val = CompleteFlagPoints.extend f.toRingHom (e A x).val) ∧ ∀ (Z : Over (Spec (.of k))) (j : Z ⟶ X), IsClosedImmersion j.left → IsReduced Z.left → IsProper Z.hom ∧ LocallyOfFiniteType Z.hom ∧ QuasiCompact Z.hom) ∧ (∀ (m : ℕ) (s : G ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} m) k) (E : CompleteFlagPoints.Points m k), IsMonHom s → IsClosedImmersion s.left → ∃ (K : Over (Spec (.of k))) (_ : GrpObj K) (j : K ⟶ G), IsClosedSubgroupScheme j ∧ CompleteFlagPoints.IsStabilizer j s E ∧ ∃ U : K.left.Opens, (U : Set K.left) = connectedComponent (GrpObj.onePoint K) ∧ ∃ gJ : GrpObj (Over.mk (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ K.hom)), IsClosedSubgroupScheme (Over.homMk (U := Over.mk (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ K.hom)) (V := K) (U.toScheme.nilradical.subschemeι ≫ U.ι)) ∧ Smooth (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ K.hom) ∧ ConnectedSpace U.toScheme.nilradical.subscheme ∧ @IsSolvableGroupScheme k _ (Over.mk (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ K.hom)) gJ ∧ topologicalKrullDim U.toScheme.nilradical.subscheme = topologicalKrullDim K.left)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4e297dd5",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: alg-closed k, affine finite-type smooth connected G, H, closed subgroup, scheme-theoretic solvability (landed IsSolvableGroupScheme); exists n>0, closed-immersion hom r, flag L with IsStabilizer on all k-algebras; flag scheme X representing Points n A naturally (extend), projective and finite type, closed reduced Z proper and finite type; for every faithful s and flag E, K with IsStabilizer and the reduced identity component (U pinned by carrier = connectedComponent(onePoint), gJ pinned by closed-subgroup inclusion) smooth, connected, solvable, same topologicalKrullDim. New node def-sfb-complete-flag-points: complement + finite + rankAtStalk = i matches Milne 7.29 direct factors of constant rank; real data; no existing equivalent (CompleteFlagBundle differs). Item JSON differs from live only in lean and 2 used stmt_deps; lean.statement verbatim; sorry only; docstrings and 8-step proof present; imported modules exist. Edge cases m=0, n=1, zero algebra, nonreduced, empty Z, char p checked. Minor: second-reading section is an author self-check. No compile (no file changed)."
+ }
+}

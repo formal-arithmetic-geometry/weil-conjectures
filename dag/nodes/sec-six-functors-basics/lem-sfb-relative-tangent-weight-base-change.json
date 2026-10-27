@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-relative-tangent-weight-base-change",
+ "kind": "statement",
+ "title": "Relative smooth tangent module and torus weights under base change",
+ "statement": "Let $A$ be a nonzero commutative Noetherian ring [def-weil-pbc-noetherian-ring], $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $r\\geq0$. An $A$-group scheme means a scheme over $X$ with multiplication, identity and inverse satisfying associativity, unit and inverse diagrams, as in [def-sc-group-scheme] with this base in place of a field. Put $T=\\mathbf G_{m,A}^r=\\operatorname{Spec}A[M]$, $M=\\mathbf Z^r$, where $A[M]=A[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$, $e^m=\\prod_jz_j^{m_j}$, and the group law is multiplication of units. Write $\\chi_m:T\\to\\mathbf G_{m,A}$ for the character $e^m$. Let $G$ be any smooth affine finite-type $A$-group scheme, with an action of $T$ by $A$-group automorphisms. Define $\\mathfrak g=\\ker(G(A[\\epsilon]/(\\epsilon^2))\\to G(A))$, with addition given by the group law and scalar multiplication given by $\\epsilon\\mapsto a\\epsilon$. Then $\\mathfrak g$ is a finite projective $A$-module (a direct summand of a finite free module). The differentiated action is an $A$-linear coaction $\\rho:\\mathfrak g\\to\\mathfrak g\\otimes_A A[M]$. For $\\mathfrak g_m=\\{v:\\rho(v)=v\\otimes e^m\\}$ one has $\\mathfrak g=\\bigoplus_{m\\in M}\\mathfrak g_m$, only finitely many summands are nonzero, and each summand is finite projective. For every commutative $A$-algebra $B$, the natural tangent comparison $B\\otimes_A\\mathfrak g\\xrightarrow{\\sim}\\ker(G_B(B[\\epsilon]/(\\epsilon^2))\\to G_B(B))$ is $B$-linear and carries $B\\otimes_A\\mathfrak g_m$ isomorphically onto the $m$-weight summand for the full $T_B$-coaction. These comparisons are compatible with successive algebra extensions. No reductivity, connectedness, local-ring hypothesis, or restriction on residue characteristic is required.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, background on Lie functors, printed p.2; introduction to Section 4, printed p.107, M-graded vector bundle and arbitrary base change. General smooth tangent module uses the smooth cotangent bundle at the identity; the coaction argument is the same for any torus action. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-module-base-change",
+  "def-sfb-ring-diagonalizable-group",
+  "def-sfb-split-torus-comodule-weights",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}C$ and let $u:C\\to A$ be the identity section on coordinates. Apply [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] to the given smooth affine structure morphism: $A\\to C$ is a smooth ring map. By [def-weil-pbc-smooth-ring-map], $\\Omega=\\Omega_{C/A}$ is a direct summand of $C^N$ for some finite $N$. Put $Q=A\\otimes_{C,u}\\Omega$. Tensor the inclusion and retraction of this summand with $A$; their composite remains the identity, so $Q$ is a direct summand of $A^N$. The identification $A\\otimes_C C^N=A^N$ sends $a\\otimes(c_j)_j$ to $(a u(c_j))_j$, with inverse $(a_j)_j\\mapsto\\sum_j a_j\\otimes e_j$. Thus $Q$ is finite projective.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T2, definition-smooth; affine input Tags 01V6 (morphisms.tex, lemma-smooth-characterize) and 02H6 (more-morphisms.tex, lemma-smooth-formally-smooth)."
+   }
+  },
+  {
+   "text": "For any commutative $A$-algebra $R$, an $R$-valued tangent point of $G_R$ is uniquely a map $C\\to R[\\epsilon]/(\\epsilon^2)$ of the form $c\\mapsto u(c)+\\epsilon D(c)$, with $u(c)$ now mapped into $R$. Multiplying two such values says exactly $D(cc')=u(c)D(c')+u(c')D(c)$; additivity and $D(A)=0$ are the other algebra-map conditions. By the universal property of $\\Omega$, these derivations are $C$-linear maps $\\Omega\\to R$, where $C$ acts through $u$. The tensor universal property identifies these with $\\operatorname{Hom}_A(Q,R)$: a functional $f$ corresponds to $D(c)=f(1\\otimes dc)$, and the inverse sends $a\\otimes\\omega$ to $a\\,\\widetilde D(\\omega)$. Both formulas commute with $R\\to R'$. In particular the tangent set in the item is $Q^*=\\operatorname{Hom}_A(Q,A)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO, lemma-universal-omega; the first-order coefficient calculation and tensor adjunction are written out here."
+   }
+  },
+  {
+   "text": "This identification gives exactly the operations in the question. On coordinates write the multiplication pullback $\\mu^*(c)=\\sum_i c_i\\otimes c_i'\\in C\\otimes_A C$. Multiplying the tangent points belonging to $D,E$ gives first-order coefficient $\\sum_i D(c_i)u(c_i')+u(c_i)E(c_i')=D(c)+E(c)$: the two unit identities say $\\sum_i c_i u(c_i')=c=\\sum_i u(c_i)c_i'$. The constant coefficient is $u(c)$ and the product of two $\\epsilon$ terms is zero. The change $\\epsilon\\mapsto a\\epsilon$ changes $D$ to $aD$. Hence the group kernel is an $A$-module with the required addition and scalar multiplication, and its identification with $Q^*$ is linear. The same computation works over every $R$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product, and the commutative-algebra tensor pushout; elementary first-order expansion of multiplication and its unit identities."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sf-finite-projective-dual] hold for the finite projective $A$-module $Q$ from step 1. Its dual $Q^*$ is therefore finitely generated and projective. By step 3 this is the module $\\mathfrak g$ of the item. It is also explicitly a summand of a finite free module: dualize a chosen splitting $Q\\xrightarrow{i}A^N\\xrightarrow{s}Q$, obtaining $Q^*\\xrightarrow{s^*}(A^N)^*\\xrightarrow{i^*}Q^*$ with composite identity, and identify $(A^N)^*$ with $A^N$ by its coordinate functionals.",
+   "uses": [
+    "lem-sf-finite-projective-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex, termwise finite-projective duality; existing node is a Mathlib leaf."
+   }
+  },
+  {
+   "text": "Fix any commutative $A$-algebra $B$. Kähler base change gives $\\Omega_{(B\\otimes_A C)/B}\\simeq (B\\otimes_A C)\\otimes_C\\Omega$, carrying $d(1\\otimes c)$ to $1\\otimes dc$. Pullback by the identity $B\\otimes_A C\\to B$ gives $Q_B\\simeq B\\otimes_A Q$; the reassociation sends $b\\otimes(a\\otimes\\omega)$ to $ba\\otimes\\omega$, and its inverse inserts $1$ in the middle. The natural dual comparison\n$$B\\otimes_A Q^*\\longrightarrow\\operatorname{Hom}_B(B\\otimes_A Q,B),\\qquad b\\otimes f\\longmapsto(b'\\otimes q\\mapsto bb'f(q))$$\nis invertible without flatness: choose $q_j=s(e_j)$ and $f_j=e_j^*i$ from step 4, so $q=\\sum_j f_j(q)q_j$. Its inverse sends $F$ to $\\sum_j F(1\\otimes q_j)\\otimes f_j$; the two composites are identities by this formula for $q$ and its dual $f=\\sum_j f(q_j)f_j$. With step 2 this proves the required tangent comparison $\\Phi_B$. Its value at $b\\otimes D$ has coefficient $D_B(b'\\otimes c)=bb'D(c)$, so it is the natural comparison and is $B$-linear.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV, lemma-differentials-base-change; finite-summand dual-basis calculation given explicitly, not an appeal to Hom base change without hypotheses."
+   }
+  },
+  {
+   "text": "For $A\\to B\\xrightarrow{h}B'$, compare $\\Phi_{B'}$ with extension of $\\Phi_B$ using $B'\\otimes_B(B\\otimes_A\\mathfrak g)\\simeq B'\\otimes_A\\mathfrak g$, $b'\\otimes(b\\otimes D)\\mapsto b'h(b)\\otimes D$. On $c\\in C$ both resulting tangent points have coefficient $b'h(b)D(c)$. On $b''\\otimes c\\in B'\\otimes_A C$ multiply this by $b''$. Pure tensors generate, so the comparisons agree. The map for $A\\to A$ is the identity by the same formula.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CV, section-tensor-product, generator formulas; explicit verification of successive scalar extensions."
+   }
+  },
+  {
+   "text": "Put $H=A[M]$. The action $a:T\\times_A G\\to G$ gives on coordinates $a^*:C\\to H\\otimes_A C$. The generic point $t\\in T(H)$ is the identity map of $H$. Apply $t$ to the scalar extension of $e+\\epsilon D$ and use $\\Phi_H^{-1}$ from step 5, followed by interchange of tensor factors; this defines $\\rho:\\mathfrak g\\to\\mathfrak g\\otimes_A H$. More explicitly, if $a^*(c)=\\sum_i h_i\\otimes c_i$, the resulting tangent coefficient at $c$ is $\\sum_i h_iD(c_i)$. It is a derivation at $u_H$ because the action is an algebra map and fixes the identity. This formula is $A$-linear in $D$, proving linearity of $\\rho$. It also proves compatibility with any algebra map $H\\to R$: applying that map gives the differentiated action of the corresponding element of $T(R)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coordinate description of an action; the tangent-coaction construction for the given action is an explicit calculation here."
+   }
+  },
+  {
+   "text": "The identity element of $T$ is the counit $\\varepsilon:H\\to A$, so the coefficient formula of step 7 and the identity-action diagram give $(1\\otimes\\varepsilon)\\rho=1$. Over $H\\otimes_A H$, let $t_1,t_2$ be the two generic elements. Applying first $t_2$ and then $t_1$ to $e+\\epsilon D$ gives the same point as applying $t_1t_2$, by the given action diagram. Under the invertible tangent comparisons of steps 5–6 these two coefficients are respectively $(\\rho\\otimes1)\\rho(D)$ and $(1\\otimes\\Delta)\\rho(D)$, with $\\Delta(e^m)=e^m\\otimes e^m$. Thus $\\rho$ satisfies both coaction identities as actual module maps. This comparison uses generic points, not only points over residue fields.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, proof comparing the two action composites; the same generic-coordinate comparison applied to first-order coefficients."
+   }
+  },
+  {
+   "text": "Use the existing ring-coaction theorem on the square-zero $A$-algebra $E=A\\oplus\\mathfrak g$, with $(a,v)(b,w)=(ab,aw+bv)$. Extend $\\rho$ by $\\theta(a,v)=a\\otimes1+\\rho(v)$ in $E\\otimes_A H$, with the two terms in the constant and square-zero summands. This is an algebra homomorphism: multiplying images gives constant part $ab$ and module part $a\\rho(w)+b\\rho(v)$, since the product of two square-zero terms is zero. Step 8 gives its counit and coassociativity. The ring $A$, group $M$, algebra $E$, and $\\theta$ therefore satisfy [lem-sfb-group-algebra-coaction-grading]. Restrict its unique finite homogeneous expansion of $(0,v)$ to the square-zero summand. Coefficient projections preserve that summand, so this gives the unique expansion $v=\\sum_m v_m$ with $\\rho(v_m)=v_m\\otimes e^m$. Thus the sum map $\\bigoplus_m\\mathfrak g_m\\to\\mathfrak g$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-group-algebra-coaction-grading",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm; arbitrary-base/group-algebra form is precisely the cited existing node; square-zero specialization written out."
+   }
+  },
+  {
+   "text": "Choose finite module generators $v_1,\\ldots,v_s$ of $\\mathfrak g$. The union $F$ of the finite supports of their homogeneous expansions is finite. Every linear combination of the $v_i$ has support in $F$, so $\\mathfrak g_m=0$ for $m\\notin F$. Let $p_m$ be the coefficient projection and $j_m$ the inclusion of $\\mathfrak g_m$. Uniqueness of the expansion gives $p_mj_m=1$ and $j_mp_mj_m=j_m$. Since $\\mathfrak g$ is a summand of $A^N$, composing its inclusion and retraction with $j_m,p_m$ exhibits $\\mathfrak g_m$ as a summand of the same finite free module. It is finite projective, including when it is zero.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient projections; finite-support and finite-summand arguments are explicit consequences."
+   }
+  },
+  {
+   "text": "For arbitrary $B$, tensor the maps $j_m,p_m$ for the finite set $F$. They still satisfy $p_mj_n=\\delta_{mn}$ and $\\sum_{m\\in F}j_mp_m=1$, so $B\\otimes_A\\mathfrak g=\\bigoplus_{m\\in F}(B\\otimes_A\\mathfrak g_m)$ with each tensor inclusion injective. Steps 5 and 7 show that $\\Phi_B$ intertwines the coaction with the scalar extension of $\\rho$: on the coefficient belonging to $b\\otimes D$ at $a_B^*(b'\\otimes c)$ both give $bb'\\sum_i h_iD(c_i)$, now in $B[M]$, whenever $a^*(c)=\\sum_i h_i\\otimes c_i$. Hence each displayed summand has coaction $w\\mapsto w\\otimes e^m$. Conversely write a vector as $\\sum_{n\\in F}w_n$ in this decomposition. If its coaction is $w\\otimes e^m$, comparison of the free Laurent basis coefficients gives $w_n=0$ for $n\\ne m$ and $w=w_m$ (or $w=0$ if $m\\notin F$). Coefficient comparison remains valid over every $B$: the coefficient maps on $B[M]$ give inverse maps between $W\\otimes_B B[M]$ and finitely supported families in any $B$-module $W$, by $w\\otimes\\sum b_n e^n\\mapsto(b_nw)_n$ and $(w_n)_n\\mapsto\\sum w_n\\otimes e^n$. This proves exact identification with the full coaction weight module, including nonflat and zero $B$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient comparison; base-change proof uses split maps and Laurent coefficients, with no kernel-exactness assumption."
+   }
+  },
+  {
+   "text": "Finally, the tower comparison of step 6 restricts to $b'\\otimes(b\\otimes v_m)\\mapsto b'h(b)\\otimes v_m$ on every weight summand, because both coactions on this vector are its tensor with $e^m$. These pure tensors generate each summand. Thus the weight comparisons as well as the tangent comparisons are compatible with successive algebra extensions. If $r=0$ only weight $0$ occurs; if $\\mathfrak g=0$ all summands and maps are zero. No step used reductivity, connectedness, localness, or a residue-characteristic assumption.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CV, section-tensor-product; explicit tower formula restricted to the split summands."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sf-finite-projective-dual",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-sfb-group-algebra-coaction-grading",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Agent-written relative tangent and finite-summand argument, using the coefficient method of Tag 0EKK, lemma-complete-reducibility-Gm; algebra inputs Tags 00RO, 00RV, 00T2, 01V6 and 02H6. Conrad printed pp.2 and 107 checked online for intent; no SGA source used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A smooth affine group scheme acted on by a split torus has finite projective tangent character weight summands commuting with any base change",
+   "results": "{\"t\": \"2026-10-24T04:44:27Z\", \"tool\": \"leansearch\", \"query\": \"A smooth affine group scheme acted on by a split torus has finite projective tangent character weight summands commuting with any base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.Smooth.baseChange\", \"AffineBasis.reindex_smul\", \"LieModule.Weight.instFintype\", \"Algebra.IsStandardSmooth.baseChange\"], \"digest\": \"6451adff3410b99f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Lie module at the identity of a smooth group scheme is finite projective and torus character weights commute with scalar extension",
+   "results": "{\"t\": \"2026-10-24T04:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"The Lie module at the identity of a smooth group scheme is finite projective and torus character weights commute with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.weightSpaceOfIsLieTower\", \"LieModule.instLinearWeightsOfCharZero\", \"LieModule.instLinearWeightsOfIsLieAbelian\", \"LieModule.LinearWeights\", \"LieModule.shiftedGenWeightSpace.instLieRingModuleSubtypeMemLieSubmodule\", \"LieModule.Weight\", \"LieModule.Weight.apply_lie\", \"LieModule.exists_forall_lie_eq_smul\"], \"digest\": \"78f352d104a57d47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Lie\"",
+   "results": "{\"t\": \"2026-10-24T04:47:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Lie\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|root.?subgroup|reductive|LieAlgebra",
+   "results": "{\"t\": \"2026-10-24T04:47:33Z\", \"tool\": \"grep\", \"query\": \"torus|root.?subgroup|reductive|LieAlgebra\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth affine group scheme Lie module finite projective over a ring arbitrary base change split torus weights",
+   "results": "{\"t\": \"2026-10-24T05:10:38Z\", \"tool\": \"leansearch\", \"query\": \"Smooth affine group scheme Lie module finite projective over a ring arbitrary base change split torus weights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.toFun\", \"LieModule.weightSpace\", \"LieModule.Weight.mk\", \"LieModule.map_genWeightSpace_eq\", \"LieModule.Weight\", \"LieModule.Weight.ext_iff\", \"LieModule.Weight.recOn\", \"LieModule.Weight.instFinite\"], \"digest\": \"9472b882285960d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie weights, cotangent algebra, or elliptic-curve formulas do not give the smooth group-scheme tangent module and its full torus-coaction base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tangent space of a smooth affine group scheme over a commutative ring is dual to its cotangent module and commutes with scalar extension",
+   "results": "{\"t\": \"2026-10-24T05:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"Tangent space of a smooth affine group scheme over a commutative ring is dual to its cotangent module and commutes with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent\", \"Algebra.Extension.tensorCotangentSpace\", \"Algebra.Extension.tensorCotangentInvFun\", \"Algebra.Extension.contangentEquiv_tmul\", \"Algebra.Extension.cotangentComplex\", \"Algebra.Extension.CotangentSpace\", \"Algebra.SubmersivePresentation.cotangentEquiv\", \"Algebra.SubmersivePresentation.cotangentEquiv_apply\"], \"digest\": \"14c5175a6ca77d36\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie weights, cotangent algebra, or elliptic-curve formulas do not give the smooth group-scheme tangent module and its full torus-coaction base change."
+  },
+  {
+   "tool": "grep",
+   "query": "tangent|coaction|comodule|LieAlgebra",
+   "results": "{\"t\": \"2026-10-24T05:11:28Z\", \"tool\": \"grep\", \"query\": \"tangent|coaction|comodule|LieAlgebra\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"7aea64d808d4d443\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie weights, cotangent algebra, or elliptic-curve formulas do not give the smooth group-scheme tangent module and its full torus-coaction base change."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|Projective|Dual",
+   "results": "{\"t\": \"2026-10-24T05:13:43Z\", \"tool\": \"grep\", \"query\": \"baseChange|Projective|Dual\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\"], \"digest\": \"643f218b3d8fcedc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie weights, cotangent algebra, or elliptic-curve formulas do not give the smooth group-scheme tangent module and its full torus-coaction base change."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-split-root-data-weyl-lifts",
+  "date": "2026-10-24",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, background on Lie functors, printed p.2; introduction to Section 4, printed p.107, M-graded vector bundle and arbitrary base change. General smooth tangent module uses the smooth cotangent bundle at the identity; the coaction argument is the same for any torus action. ",
+   "via": [
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-tangent-weight-base-change",
+  "worker": "stage1",
+  "summary": "Twelve-step proof from existing smooth-affine, differential, duality and ring-coaction nodes; no new nodes. First-order coefficients identify the tangent operations; a finite dual basis proves arbitrary scalar comparison; the square-zero algebra specializes the existing ring-grading theorem; split projections prove nonflat weight base change. Statement preserved. All uses checked verbatim in citations.json.",
+  "blueprint": "Retains the inherited created-node chain to det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction. Realizes the relative tangent/torus-weight prerequisite of lem-sfb-local-split-root-data-weyl-lifts (Conrad Section 4 introductory grading sentence). Latest chapter/unit text read; no unit or chapter route changed. The ancestor tool returns null for this inherited chain; blueprint.from.node is retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine smoothness criterion, used only to identify the finite-projective cotangent module of the given smooth affine group; the current unit has no relative ring criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-fa90bf579",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-fa90bf579 (reviewer sub-agent of L); spot-checked: Seeded item with no prior proof and no repair note; the delivery leaves the statement unchanged, adds 12 proof steps and creates no new nodes. Step 1: lem-weil-pbc-smooth-ring-map-iff-smooth-affine (accepted declared tool use, unit sk-thm-p1) with def-weil-pbc-smooth-ring-map (iii) makes Q=A⊗_CΩ a summand of A^N. Step 2: the derivation, Ω universal property and Hom_A(Q,R) identifications are natural in R. Step 3: recomputed the first-order coefficient from μ* and the counit identities; it equals D+E. Step 4: lem-sf-finite-projective-dual plus the dualized splitting. Step 5: lem-weil-pbc-kahler-differentials-base-change; the dual-basis inverse of B⊗Q*→Hom_B(B⊗Q,B) needs no flatness, and both composites were checked. Step 7: the coaction coefficient Σh_iD(c_i); its constant term is u(c) because the action fixes the identity. Step 8: coassociativity rechecked at generic points over H⊗H, using that t_1 acts (H⊗H)-linearly. Step 9: θ on the square-zero algebra A⊕g is multiplicative (ρ(v)ρ(w)=0); every hypothesis of lem-sfb-group-algebra-coaction-grading holds, and comparing the A⊗H component forces a_m=0. Steps 10–12: split p_m/j_m give finite projectivity and nonflat base change; the converse weight identification uses W⊗B[M]≅⊕_M W; tower compatibility holds on generators. Edge cases tested: r=0, g=0, G_a with weight m (m divisible by p allowed), nonflat B=A/I, disconnected A, B=0. Duplicate search over dual-number, tangent and Lie nodes found only field-only nodes; none states the relative result. Stacks tags 00RO, 00RV, 00T2, 01V6, 02H6 and 0EKK verified, and the 0EKK coefficient method was read. Conrad is WANTED locally; proof_origin agent. The null blueprint.from.node is inherited from the seed. Parent lem-sfb-local-split-root-data-weyl-lifts steps 1 and 7 use exactly these clauses. No SGA citations, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeTangentWeightBaseChange",
+  "declaration": "AlgebraicGeometry.RelativeTangentWeights.exists_data",
+  "declarations": [
+   "AlgebraicGeometry.RelativeTangentWeights.Kernel",
+   "AlgebraicGeometry.RelativeTangentWeights.dualMap",
+   "AlgebraicGeometry.RelativeTangentWeights.act",
+   "AlgebraicGeometry.RelativeTangentWeights.torusPoint",
+   "AlgebraicGeometry.RelativeTangentWeights.evaluatedAction",
+   "AlgebraicGeometry.RelativeTangentWeights.Data",
+   "AlgebraicGeometry.RelativeTangentWeights.exists_data"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTangentWeightBaseChange.lean",
+  "statement": "theorem exists_data (r : ℕ) [Nontrivial A] [IsNoetherianRing A] (G : Grp (Over (Spec (.of A)))) [IsAffine G.X.left] [Smooth G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (a : ModObj (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X G.X) (hgroup : ∀ (B : Type u) [CommRing B] [Algebra A B] (t : points (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X B) (x y : points G.X B), act a t (x * y) = act a t x * act a t y) : Nonempty (Data r G a)",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Data exposes all clauses and fixes E by add/scale, normalization by the existing GrpObj.tangentPoint, and naturality for all algebra maps. rho is fixed by evaluation of the actual given scheme action at all algebra-valued torus points and all extended tangent vectors; hence the full extended coaction is SplitTorus.baseChangeCoaction transported through E. Kernel G B is canonically the B-points of the base-changed group reducing to the identity. ULift of Fin r → ℤ is the same finite-rank character lattice at the ring universe. No reductivity, connectedness, localness, flatness or characteristic hypotheses are imposed. Helpers construct only actual maps, with one postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4de51bfb8",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery of returned head d0f63ca1ea5b. The Lean module is byte-identical (sha256 299d1a2e) and its statement was already found correct clause by clause. The H2 repair is done exactly as requested: new definition node def-sfb-split-torus-comodule-weights, existing:true on Sheaf.RepresentationTheory.RelativeTorusBundleWeights, owning SplitTorus.weightSpace and SplitTorus.baseChangeCoaction. Its text matches the live definitions (kernel of rho minus tensor with e^m; baseChange, then distribBaseChange, then scalarTensorEquiv), the signature is verbatim, the universes are general, the source is Conrad Prop 3.1.9(1) p.86, and its stmt_deps are the three it cites. No other node owns these defs. The item's stmt_deps swap the theorem node for this definition node. The item otherwise differs from live only by its lean record. The gates hold: docstrings present, the only proof is sorry, no hollow definitions, autoImplicit off, and both report sections present. No file changed, so no compile was run; the worker reports a clean compile and a deliver2 dry-run OK."
+ }
+}

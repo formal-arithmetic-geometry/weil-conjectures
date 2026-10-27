@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-smooth-curve-abelian-level-rigidification",
+ "kind": "statement",
+ "title": "Smooth-curve abelian level rigidification",
+ "statement": "Let $k$ be a field, $g\\geq2$, and $\\ell\\geq3$ a prime different from $\\operatorname{char}(k)$. Use the unpointed smooth moduli groupoid $\\mathcal M_{g,0}$ and its abelian level groupoid $\\mathcal L_{g,\\ell}$ from [def-sfb-stable-pointed-moduli-groupoids]. The groupoid $\\mathcal L_{g,\\ell}$ is represented by a smooth finite-type $k$-scheme $L_{g,\\ell}$. For every $k$-scheme $T$ and every smooth projective geometrically connected genus-$g$ family $X\\to T$, the sheaf $\\mathcal H_{X/T}$ of that definition is locally constant free of rank $2g$ over $\\mathbf Z/\\ell\\mathbf Z$, compatibly with arbitrary base change. Its frame functor $T'\\mapsto\\operatorname{Isom}((\\mathbf Z/\\ell\\mathbf Z)^{2g}_{T'},\\mathcal H_{X_{T'}/T'})$ is represented by a finite etale surjective $T$-scheme. Every automorphism of a smooth genus-$g$ family preserving a frame is the identity, and the 2-fibre product $T\\times_{\\mathcal M_{g,0}}L_{g,\\ell}$ is naturally equivalent to this discrete frame functor. In particular its objects include an actual isomorphism to $X_{T'}$, not merely equality of coarse moduli points. Finite type, smoothness, finiteness and etaleness use [def-weil-finite-type-morphism], [def-sbc-smooth-morphisms], [def-weil-finite-integral-morphism] and [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+  "place": "Sections 1.1 and 2.3.3--2.3.7, especially Proposition 2.3.4 and Remark 2.3.7; genus g >= 2 throughout. Local PDF WANTED; primary arXiv PDF read online.",
+  "url": "https://arxiv.org/pdf/alg-geom/9501003"
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-projective",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-projective-curve-cohomology-local-system] to the test family. The moduli definition supplies smoothness, projective-bundle projectivity and geometric genus $g$; $\\ell$ is invertible on every $k$-scheme since it differs from $\\operatorname{char}(k)$. Hence $\\mathcal H_{X/T}$ has constant rank $2g$ and the specified $\\mathrm{BC}^1$ is an isomorphism under every base change.",
+   "uses": [
+    "lem-sfb-smooth-projective-curve-cohomology-local-system",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Section 2.3.3; returned Step 1."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-local-system-frame-scheme] to $H=\\mathcal H_{X/T}$ and $n=2g$. For each $v:T^\\prime\\to T$, Step 1 gives the specified isomorphism $\\mathrm{BC}^1_v:v^{-1}H\\simeq\\mathcal H_{X_{T^\\prime}/T^\\prime}$. Compose a frame of $v^{-1}H$ with $\\mathrm{BC}^1_v$; the inverse sends $\\alpha$ to $(\\mathrm{BC}^1_v)^{-1}\\alpha$. These $\\mathrm{BC}^1_v$ are compatible with composites $T^{\\prime\\prime}\\to T^\\prime\\to T$ and with the canonical inverse-image associators by the vertical-pasting compatibility of the exchange map [lemma-weil-pbc-derived-exchange-coherence], so the transport commutes with the restriction maps of both functors. Thus the lemma's universal frame represents exactly the asserted cohomology-frame functor on every $T$-scheme. Its finite etale surjective scheme $P$ and base-change compatibility give the required cover.",
+   "uses": [
+    "lem-sfb-finite-local-system-frame-scheme",
+    "lemma-weil-pbc-derived-exchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Section 2.3.3; returned Step 2."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-framed-groupoid-two-fibre] to the smooth moduli groupoid and its cohomology sheaves. Step 1 makes its base-change comparisons invertible; the identity and composition equations hold because $\\mathrm{BC}^1$ is compatible with identity squares and with horizontal and vertical pasting [lemma-weil-pbc-derived-exchange-coherence], and $\\alpha^*$ is functorial in family isomorphisms with the composite pullback convention of [def-sfb-stable-pointed-moduli-groupoids]. The equivalence sends $(Y,\\lambda,\\phi)$ to $(\\phi^*)^{-1}\\lambda$ and retains the actual family isomorphism $\\phi:Y\\simeq X_{T^\\prime}$.",
+   "uses": [
+    "lem-sfb-framed-groupoid-two-fibre",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lemma-weil-pbc-derived-exchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Section 2.3.3; returned Step 3."
+   }
+  },
+  {
+   "text": "The coarse-moduli lemma supplies a smooth finite-type DM stack $\\mathcal L_{g,\\ell}$ and its coarse scheme $C_{g,\\ell}$. Over an algebraically closed field, $u^*\\lambda=\\lambda$ implies $u^*=\\mathrm{id}$ because $\\lambda$ is invertible. Step 1 identifies this geometric action with that on $H^1$ of the fibre. Geometric curve-level faithfulness gives $u=\\mathrm{id}$. Apply [lem-sfb-inertia-free-coarse-scheme]: the coarse map is an equivalence, $C_{g,\\ell}$ is smooth of finite type, and frame-preserving automorphisms over every test scheme are trivial. Set $L_{g,\\ell}=C_{g,\\ell}$.",
+   "uses": [
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-inertia-free-coarse-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Sections 2.3.2--2.3.3; returned Steps 4--5."
+   }
+  },
+  {
+   "text": "Replace $\\mathcal L_{g,\\ell}$ by its representing scheme in the natural equivalence of Step 3, and use Step 2 to identify its value with $P$. This gives the asserted 2-fibre product and the finite etale surjective frame scheme on every test family. The triviality of frame-preserving family automorphisms is the all-test-schemes conclusion of Step 4. The explicit $\\phi$ in Step 3 gives the asserted isomorphism to $X_{T^\\prime}$. All constructions use full linear frames, so no choice of a root of unity, rational frame, or symplectic pairing was imposed.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Section 2.3.3, conclusion and full (not symplectic) abelian level convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-projective-curve-cohomology-local-system",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-finite-local-system-frame-scheme",
+  "lem-sfb-framed-groupoid-two-fibre",
+  "lem-sfb-abelian-level-coarse-moduli",
+  "lem-sfb-geometric-curve-level-faithfulness",
+  "lem-sfb-inertia-free-coarse-scheme",
+  "lemma-weil-pbc-derived-exchange-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+  "place": "Section 2.3.3, with explicit frame-sheaf and 2-fibre-product calculations; local PDF WANTED, read primary online PDF; Stacks Tags 0GLI, 03RV, 04SZ and proper base change supply the auxiliary inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smooth curves of genus at least two with abelian level at least three form a fine moduli scheme finite etale over the moduli stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trivializations of first etale cohomology of a smooth proper genus g curve form a nonempty finite etale scheme and kill automorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"Let $\\\\mathcal{C}$ be a pre-Galois category with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and let $G$ be a group acting on $F$. For any finite family of Galois objects $\\\\{X_i\\\\}_{i \\\\in I\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Level\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "levelStructure|level_structure|moduli|rigidification",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"57\", \"text\": \"* [N Katz and B Mazur, *Arithmetic Moduli of Elliptic Curves*][katz_mazur]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "levelStructure|level_structure|rigidification|Teichmuller",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"18\", \"text\": \"`Perfection.teichmuller`, such that it composed with the quotient map `R →+* R ⧸ I` is the\"}\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"31\", \"text\": \"noncomputable def teichmullerAux (x : Perfection (R ⧸ I) p) : ℕ → R\"}\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"35\", \"text\": \"theorem teichmullerAux_sModEq (x : Perfection (R ⧸ I) p) (m : ℕ) :\"}\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"36\", \"text\": \"    teichmullerAux x m ≡ teichmullerAux x (m + 1) [SMOD I ^ m] := by\"}\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"40\", \"text\": \"  rw [teichmullerAux, pow_succ' p, pow_mul]\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Teichmuller\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"50\", \"text\": \"  teichmuller p _\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"59\", \"text\": \"  mk_teichmuller x\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"69\", \"text\": \"  mk_comp_teichmuller' ..\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.WittVector.TeichmullerSeries\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"25\", \"text\": \"* `fontaineTheta_teichmuller` : `θ([x])` is the untilt of `x`.\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"122\", \"text\": \"theorem ghostComponentModPPow_teichmuller_coeff (n : ℕ) (x : R♭) :\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"123\", \"text\": \"    ghostComponentModPPow n (teichmuller p (PreTilt.coeff n x)) =\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"126\", \"text\": \"    (teichmuller p ((((_root_.frobeniusEquiv _ p).symm ^ n) x).untilt))\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.WittVector.Teichmuller\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"12\", \"text\": \"# Teichmuller Series\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"16\", \"text\": \"(`p`-adic) summation of Teichmuller series, namely\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"17\", \"text\": \"`∑ i, (teichmuller p\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"22\", \"text\": \"* `WittVector.dvd_sub_sum_teichmuller_iterateFrobeniusEquiv_coeff` : `p ^ (n + 1)` divides\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.WittVector.Teichmuller\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"13\", \"text\": \"This file defines `WittVector.teichmuller`, a monoid hom `R →* 𝕎 R`, which embeds `r : R` as the\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"18\", \"text\": \"- `WittVector.teichmuller`: the Teichmuller map.\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"19\", \"text\": \"- `WittVector.map_teichmuller`: `WittVector.teichmuller` is a natural transformation.\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"20\", \"text\": \"- `WittVector.ghostComponent_teichmuller`:\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"21\", \"text\": \"  the `n`-th ghost component of `WittVector.teichmuller p r` is `r ^ p ^ n`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth curves with a basis of first etale cohomology have a fine moduli scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \"[FinitePresentation R S] :\\n  IsStandardSmooth R S ↔\\n    Subsingleton (H1Cotangent R S) ∧ ∃ (I : Type) (b : Module.Basis I S (Ω[S⁄R])), Set.range b ⊆ Set.range (D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \"[FinitePresentation R S] [Subsingleton (H1Cotangent R S)] {I : Type*} (b : Module.Basis I S (Ω[S⁄R]))\\n  (hb : Set.range b ⊆ Set.range (D R S)) : IsStandardSmooth R S\", \"doc\": \"If $ S $ is finitely presented over $ R $, the first cohomology group $ H^1 $ of the cotangent complex of $ S $ over $ R $ is trivial, and there exists a basis for the module of Kähler differentials $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Level\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full abelian level structures rigidify smooth projective curves of genus at least two as a fine smooth moduli scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The Jacobian of a Weierstrass curve over a given type $ R $ is defined as the Weierstrass curve itself.\"}\n  {\"name\": \"WeierstrassCurve\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"Type u → Type u\", \"doc\": \"The type of Weierstrass curves over a given type $ R $.\"}\n  {\"name\": \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"{F : Type u_2} → [inst : Field F] → [DecidableEq F] → Inhabited { W // W.IsElliptic }\", \"doc\": \"For any field $ F $ with decidable equality, there exists an elliptic Weierstrass curve over $ F $ with j-invariant $ 37 $. This curve is constructed explicitly using the standard form for j-invariant\"}\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"WeierstrassCurve.instInhabited\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"{R : Type u} → [Inhabited R] → Inhabited (WeierstrassCurve R)\", \"doc\": \"For any inhabited ring $ R $, the type of Weierstrass curves over $ R $ is inhabited. This instance provides a canonical trivial Weierstrass curve constructed using the default elements of $ R $ for a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme of frames of first etale cohomology is finite etale over a smooth curve moduli stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-stable-pointed-level-parameter",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification.",
+   "via": [
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "worker": "stage1",
+  "summary": "Q61 repair of the re-split return: statement unchanged. Extract four independent statement-only lemmas for curve-cohomology local systems, finite local-system frame schemes, framed-groupoid two-fibres, and identification of an inertia-free stack with its coarse scheme. The parent only checks hypotheses, applies these statements, cancels the geometric frame to apply curve faithfulness, and assembles the conclusions. The full old six-step proof and all its arguments are preserved in report.md. Logged searches and actual cited statements were checked. Landing-return repair: rebased by deliver.py onto current origin/sheaf-dag, preserving current maintainer and Lean metadata. Re-read all current cited statements and the released stage-1 repair order; no cited statement changed relative to the retained citation evidence. Step 3 now explicitly checks invertibility and the identity/composition hypotheses of the framed-groupoid lemma. Four statement-only work items and all original arguments are retained. Current-DAG follow-up: read and distinguished the newly present same-03Q1 normalized rational fibre-pullback node in report.md; Step 4 explicitly identifies the geometric H1 action via Step 1 before applying faithfulness. Current landing-refusal repair (2026-10-23): compared the retained delivery to the current shared DAG after an initial passing dry run cf82c6e963d; all four extracted nodes remain absent and only the parent proof, proof_deps and split_report differ. Re-read the current direct dependency statements, verified all nine quotation witnesses, and made Step 2 explicit about both directions of transport along the specified BC^1 map, so its represented functor is the cohomology-frame functor with the current definition's normalization. Maintainer and Lean metadata and the locked statement are retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Realizes the smooth abelian-level rigidification prerequisite of the prime-to-characteristic choice: Steps 1--2 local systems and frames, Step 3 actual family isomorphisms, Steps 4--5 fine scheme, Step 6 assembly. Q61 re-split: returned Step 1 is assigned to the curve-cohomology node, Step 2 to the frame node, Step 3 to the two-fibre node, and the DM and universal-property arguments in Steps 4--5 to the coarse node. The parent only assembles them and applies geometric faithfulness.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lemma-weil-pbc-prime-proper-base-change",
+  "thm-sc-proper-cohomology",
+  "lem-galois-flc-representable",
+  "lem-galois-stalk-representable",
+  "lem-galois-inverse-image-representable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-a8212e4aa",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-a8212e4aa (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the Q61 re-split (earlier heads fee621, 788ef and 01e16e all got FIX), and the reader FIX was lost again. Against 01e16e (sha256), the four new nodes (frame-scheme, framed-groupoid two-fibre, inertia-free-coarse, curve-cohomology local system) and def-sfb-stable-pointed-moduli-groupoids are byte-identical. The item statement, stmt_deps, steps 1, 3, 4 and 5 and proof_deps are unchanged. Only Step 2 changes: it now writes out the transport along BC^1_v (beta goes to BC^1_v∘beta, alpha goes to (BC^1_v)^{-1}alpha), which is correct, plus the split_report. I re-read the item and the frame-scheme and two-fibre statements; the other two new nodes are unchanged since my last full read. Frame-scheme is true for any T, n>=0 and empty T. Two-fibre is true: the arrow is forced to be u=phi'^{-1}phi, and it assumes the identity/composition equations with the inverse-image associators. Curve-cohomology (0GLI/03RQ/03Q1) and inertia-free-coarse (04SZ through the dm-inertia node, DM needed because of B mu_p) stand. The re-split audit holds: each old step went to a new node, nothing was dropped or merged, the nodes are of comparable size and the assembly is short. No duplicates and no SGA citation (the only occurrence is the phrase 'No SGA source' in a maintainer note); the statement is not weakened. Fault C, the same as before: the definition only gives the pullback composite through BC^1 and asserts no coherence. Step 2 needs BC^1 to be compatible with composites T''→T'→T and the inverse-image associators to match the restriction maps of Fr_H. Step 3 needs the identity-square and pasting compatibility to meet the two-fibre lemma's identity/composition hypotheses. The fix is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-curve-abelian-level-rigidification.json, patched onto the new head so the new Step 2 wording is kept. Step 2 gains a vertical-pasting sentence citing lemma-weil-pbc-derived-exchange-coherence. Step 3 now cites the lemma's identity/horizontal/vertical pasting for the identity and composition equations. Both steps add it to uses and proof_deps gains it. The rest of the file is byte-identical. Tool_uses and the batch-5 trf definitions are accepted. Maintainer note: this is the fourth loss of this FIX across landing re-deliveries; please carry fixes/ over.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCurveAbelianLevelRigidification",
+  "declaration": "AlgebraicGeometry.smoothCurveAbelianLevelRigidification",
+  "declarations": [
+   "AlgebraicGeometry.smoothCurveModuliBase",
+   "AlgebraicGeometry.abelianLevelForgetSmooth",
+   "AlgebraicGeometry.smoothCurveModuliPullback",
+   "AlgebraicGeometry.smoothCurveAbelianLevelRigidification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveAbelianLevelRigidification.lean",
+  "statement": "theorem smoothCurveAbelianLevelRigidification (k : Type u) [Field k] (g : ℕ) (hg : 2 ≤ g) (ℓ : AbelianLevelPrime (Spec (.of k))) : ∃ L : Over (Spec (.of k)), Smooth L.hom ∧ LocallyOfFiniteType L.hom ∧ QuasiCompact L.hom ∧ IsRepresentedByScheme (BasedCategory.ofFunctor (AbelianLevelModuli.forget (Spec (.of k)) g ℓ)) L ∧ (∀ (T : Over (Spec (.of k))) (Y : AbelianLevelModuli.Fiber (Spec (.of k)) g ℓ T) (a : Y ⟶ Y), a = 𝟙 Y) ∧ ∀ X : StablePointedModuli.Smooth (Spec (.of k)) g 0, (∃ 𝒰 : X.obj.base.left.Cover.{u} (Scheme.precoverage @Etale), ∀ i : 𝒰.I₀, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ.val))) (𝒰.f i)).obj (abelianLevelCohomology X.obj.projection ℓ.val) ≅ abelianLevelConstant (𝒰.X i) g ℓ.val)) ∧ (∀ (T : Over (Spec (.of k))) (a : T ⟶ X.obj.base), IsIso (abelianLevelBaseChange (IsPullback.of_hasPullback X.obj.projection a.left).toCommSq ℓ.val)) ∧ ∃ (P : Over (Spec (.of k))) (r : P ⟶ X.obj.base), IsFinite r.left ∧ Etale r.left ∧ Surjective r.left ∧ ∃ frameP : abelianLevelConstant P.left g ℓ.val ≅ abelianLevelCohomology (smoothCurveModuliPullback X P r).obj.projection ℓ.val, (∀ (T : Over (Spec (.of k))) (a : T ⟶ X.obj.base) (α : abelianLevelConstant T.left g ℓ.val ≅ abelianLevelCohomology (smoothCurveModuliPullback X T a).obj.projection ℓ.val), ∃! b : T ⟶ P, b ≫ r = a ∧ ∃ q : smoothCurveModuliPullback X T a ⟶ smoothCurveModuliPullback X P r, q.hom.base = b ∧ q.hom.map ≫ pullback.fst X.obj.projection r.left = pullback.fst X.obj.projection a.left ∧ AbelianLevelModuli.HomCondition (⟨smoothCurveModuliPullback X T a, α⟩ : AbelianLevelModuli (Spec (.of k)) g ℓ) (⟨smoothCurveModuliPullback X P r, frameP⟩ : AbelianLevelModuli (Spec (.of k)) g ℓ) q) ∧ ∃ t : BasedFunctor (discreteModuli (yoneda.obj X.obj.base)) (BasedCategory.ofFunctor (smoothCurveModuliBase (Spec (.of k)) g)), ∃ η : t.toFunctor ⟶ (Functor.const _).obj X, (∀ (z : (discreteModuli (yoneda.obj X.obj.base)).obj), (smoothCurveModuliBase (Spec (.of k)) g).IsHomLift (yoneda.preimage z.hom) (η.app z)) ∧ ∃ e : BasedFunctor (discreteModuli (yoneda.obj P)) (moduliTwoFiberProduct t (abelianLevelForgetSmooth (Spec (.of k)) g ℓ)), e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (moduliTwoFiberFst t (abelianLevelForgetSmooth (Spec (.of k)) g ℓ))) (discreteModuliMap (yoneda.map r)))",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80f469656",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read the item node, all 9 stmt_dep records (identical to live; live item lean is null), the full live StablePointedModuliGroupoids module and the delivered module; lean.statement is verbatim. Clauses: field k; g>=2; AbelianLevelPrime(Spec k) = prime>=3 and a unit in the stalk k, i.e. exactly l != char k; L smooth, LocallyOfFiniteType and QuasiCompact with IsRepresentedByScheme of the full level category; for all smooth genus-g families over any base: an etale Cover with upperStar H iso to the rank-2g constant sheaf, IsIso of the canonical abelianLevelBaseChange for every base change, and P finite etale surjective with universal frameP and a unique classifying b via the canonical pullback map q and HomCondition (a universal-element bijection); automorphisms trivial in every level Fiber; the 2-fibre product with the classifier t (pinned by cartesian eta components up to unique 2-iso) is based-equivalent to h_P over h_T. The three helpers are real data with docstrings and are not duplicates. One sorry, universes bound, lines <=100, source and blueprint docstrings, proof plan with node ids; proof-input declarations exist. Edge cases checked: empty T, non-Noetherian bases, g=2, l=3, no symplectic condition. Advisory: the def-kun-projective import is not used in the statement. No compile (no change; the worker's server compile and dry run are recorded). No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

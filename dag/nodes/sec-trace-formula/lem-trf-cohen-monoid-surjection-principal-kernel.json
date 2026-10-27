@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-cohen-monoid-surjection-principal-kernel",
+ "kind": "statement",
+ "title": "Principal kernel of a Cohen monoid presentation with full boundary image",
+ "statement": "Let $C$ be a Cohen ring with residue field $k$ of prime characteristic $p$ [def-weil-pbc-cohen-ring], let $P$ be a fine saturated sharp additive monoid [def-trf-fs-log-blowup], and let $n\\ge0$. Sharp means that $0$ is its only invertible element, and put $r=\\operatorname{rank}_{\\mathbf Z}P^{\\rm gp}$. Write $C[P][T_1,\\ldots,T_n]$ for the finite-sum ring with monomials $z^qT^e$ and $z^qz^{q'}=z^{q+q'}$, and let $B$ be its completion at $(p,z^q\\ (q\\ne0),T_1,\\ldots,T_n)$ [def-weil-pbc-adic-completion]. Put $J=(z^q\\ (q\\ne0),T_1,\\ldots,T_n)B$. Let $(S,\\mathfrak m_S)$ be a nonzero Noetherian local commutative ring [def-weil-pbc-noetherian-ring] of finite Krull dimension $n+r$ [def-weil-pbc-krull-dimension-ring], and let $\\phi:B\\twoheadrightarrow S$ be a surjective local ring homomorphism satisfying $\\phi(J)=\\mathfrak m_S$. Then there exists $j\\in J$ with $\\phi(j)=\\phi(p)$. For every such $j$, put $\\theta=p-j$. One has $\\theta-p\\in J$ and $\\ker\\phi=(\\theta)$, and the induced map $B/(\\theta)\\xrightarrow{\\sim}S$ is an isomorphism of local rings taking the classes of $z^q,T_i$ to $\\phi(z^q),\\phi(T_i)$. More precisely, for $N=(z^q:q\\ne0)B$ the canonical quotient $B/N\\cong D=C[[T_1,\\ldots,T_n]]$ [def-weil-pbc-multivariate-power-series] carries $\\theta$ to $\\overline\\theta\\equiv p\\pmod{(T_1,\\ldots,T_n)}$, with $\\overline\\theta\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2$, where $\\mathfrak m_D=(p,T_1,\\ldots,T_n)D$. The ring $B/(\\theta)$ is a Noetherian local integral domain of dimension $n+r$. No completeness, log structure or presentation of $S$ is assumed. The cases $P=\\{0\\}$ and $n=0$ are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(ii), printed p. 70, the relation congruent to p modulo the monomials and parameters; agent refinement of the principal-kernel argument, extracted from old completed-chart Step 5 together with its invocation of the Step 4 prime-chain argument. Model dimension and normality are the existing separate lem-trf-formal-monoid-ring-dimension and lem-trf-log-regular-saturation-normality, not new claims to duplicate."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-complete-toric-model"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=C[[T_1,\\ldots,T_n]]$. By [lem-weil-pbc-power-series-field-cohen-regular-complete], $D$ is nonzero complete regular Noetherian local of dimension $n+1$, with maximal ideal $(p,T_1,\\ldots,T_n)$. The comparison [lem-trf-polynomial-power-series-monoid-completion] identifies $B$ with the completed monoid ring $H$ over $D$, fixing coefficients, monomials and variables, and identifies $B/N$ canonically with $D$. Apply [lem-trf-formal-monoid-ring-dimension] to $D,P$: $B$ is a Noetherian local domain of dimension $n+1+r$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-trf-polynomial-power-series-monoid-completion",
+    "lem-trf-formal-monoid-ring-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(ii), printed p. 70; agent-supplied principal-kernel argument using the existing dimension and normality inputs."
+   }
+  },
+  {
+   "text": "The element $p$ is a nonunit in $B$: its image under $B\\to D$ is in $\\mathfrak m_D$, whereas homomorphisms preserve units. Since $B$ is local, $p$ lies in its maximal ideal; since $\\phi$ is local, $\\phi(p)\\in\\mathfrak m_S=\\phi(J)$. Choose $j\\in J$ with $\\phi(j)=\\phi(p)$. Fix any such $j$ and put $\\theta=p-j$. Then $\\phi(\\theta)=0$ and $\\theta-p=-j\\in J$. Under $B/N=D$, the generators of $N$ vanish and the $T_i$ remain $T_i$, so $\\overline j\\in(T_1,\\ldots,T_n)D$ and $\\overline\\theta\\equiv p$ modulo this ideal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(ii), printed p. 70; agent-supplied principal-kernel argument using the existing dimension and normality inputs."
+   }
+  },
+  {
+   "text": "The constant-coefficient homomorphism $D\\to C$ sends $\\mathfrak m_D$ into $pC$ and sends $\\overline\\theta$ to $p$ [def-weil-pbc-multivariate-power-series]. Therefore $\\overline\\theta\\in\\mathfrak m_D$ and membership in $\\mathfrak m_D^2$ would imply $p\\in p^2C$. This is impossible: $C$ is a domain, $p\\ne0$, and $p$ is a nonunit [def-weil-pbc-cohen-ring]; cancellation in $p=p^2c$ would make $p$ a unit. Hence $\\overline\\theta\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(ii), printed p. 70; agent-supplied principal-kernel argument using the existing dimension and normality inputs."
+   }
+  },
+  {
+   "text": "Apply the primitive-element clause of [lem-trf-formal-monoid-ring-dimension] to $\\theta$ under the comparison of Step 1. It gives $\\dim Q=(n+1)+r-1=n+r$ for $Q=B/(\\theta)$. Since $P$ is fine saturated sharp and $\\theta-p\\in J$, case (ii) of [lem-trf-log-regular-saturation-normality] says that $Q$ is a nonzero integral domain. As a quotient of the Noetherian local ring $B$ by an ideal in its maximal ideal, $Q$ is Noetherian local: ideals pull back to finitely generated ideals, and its maximal ideals correspond to those of $B$ containing $(\\theta)$.",
+   "uses": [
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-regular-saturation-normality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(ii), printed p. 70; agent-supplied principal-kernel argument using the existing dimension and normality inputs."
+   }
+  },
+  {
+   "text": "Because $\\theta\\in\\ker\\phi$, $\\phi$ induces a surjection $\\psi:Q\\to S$. Write $K=\\ker\\psi$ and $d=n+r$. If $K\\ne0$, take a prime chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_d$ in $S$; such a chain exists because its dimension is the finite integer $d$ [def-weil-pbc-krull-dimension-ring]. Its inverse images in $Q$ are prime (test products under $\\psi$), distinct (use surjectivity), and all contain $K$. Their first member is nonzero. Since $Q$ is a domain, $(0)$ is prime, and prepending it gives a chain of length $d+1$ in $Q$, contradicting $\\dim Q=d$. Thus $K=0$, and pulling back to $B$ gives $\\ker\\phi=(\\theta)$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(ii), printed p. 70; agent-supplied principal-kernel argument using the existing dimension and normality inputs."
+   }
+  },
+  {
+   "text": "The induced map $\\psi:B/(\\theta)\\to S$ is now bijective, hence a ring isomorphism; it carries every indicated generator class to its image under $\\phi$ by its defining formula. An isomorphism preserves units in both directions, so it identifies the unique maximal ideals and is an isomorphism of local rings. The choice of $j$ was arbitrary throughout. Empty generators cause no change: for $P=\\{0\\}$ one has $N=0$; for $n=0$ the constant-coefficient map is the identity on $C$. When both vanish, $J=0$, $\\theta=p$, and the argument gives $S\\cong C/(p)$, a domain of dimension $0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(ii), printed p. 70; agent-supplied principal-kernel argument using the existing dimension and normality inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-trf-polynomial-power-series-monoid-completion",
+  "lem-trf-formal-monoid-ring-dimension",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-cohen-ring",
+  "lem-trf-log-regular-saturation-normality",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(ii), printed p. 70; agent-supplied principal-kernel argument using the existing dimension and normality inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjection from a completed saturated sharp monoid algebra over a Cohen ring onto a local ring of dimension rank plus parameters has principal kernel theta congruent to p modulo monomials and variables when those generators map onto the maximal ideal.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.kerProj_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {A : Type u_4} [inst_2 : CommRing A]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R S] {f : S →ₐ[R] A} (hf : Function.Surjective ⇑f),\\n  Function.Surjective ⇑(AdicCompletion.kerProj hf)\", \"doc\": \"If $ f : S \\\\to A $ is a surjective $ S $-algebra homomorphism, then the kernel projection associated with $ f $ is surjective.\"}\n  {\"name\": \"AdicCompletion.evalOneₐ_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R), Function.Surjective ⇑(AdicCompletion.evalOneₐ I)\", \"doc\": \"The evaluation map from the I-adic completion of a commutative ring $ R $ to the quotient ring $ R/I $, defined as the projection to the first component in the inverse limit $ \\\\varprojlim R/I^n $, is \"}\n  {\"name\": \"AdicCompletion.surjective_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ), Function.Surjective ⇑(AdicCompletion.evalₐ I n)\", \"doc\": \"For any natural number $ n $, the canonical $ R $-algebra homomorphism from the $ I $-adic completion of $ R $ to the quotient ring $ R/I^n $ is surjective, meaning every element of $ R/I^n $ is the i\"}\n  {\"name\": \"surjective_fontaineTheta\", \"module\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) R],\\n  Function.Surjective ⇑(frobenius (ModP R p) p) → Function.Surjective ⇑(WittVector.fontaineTheta R p)\", \"doc\": \"If the Frobenius endomorphism on the ring $ R/pR $ is surjective, then the Fontaine theta homomorphism from the Witt vectors over the pretilt of $ R $ to $ R $ is surjective.\"}\n  {\"name\": \"Ideal.quotientToQuotientRangePowQuotSucc_surjective\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) (P : Ideal S) [inst_2 : Algebra R S]\\n  [hfp : NeZero (Ideal.ramificationIdx (algebraMap R S) p P)] [IsDedekindDomain S],\\n  P ≠ ⊥ →\\n    ∀ [hP : P.IsPrime] {i : ℕ},\\n      i < Ideal.ramificationIdx (algebraMap R S) p P \", \"doc\": \"In a Dedekind domain $ S $, for a non-zero prime ideal $ \\\\mathfrak{P} $ with ramification index $ e $, and for any natural number $ i < e $, if an element $ a $ belongs to $ \\\\mathfrak{P}^i $ but not t\"}\n  {\"name\": \"surjective_of_mk_map_comp_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {S : Type u_6} [inst_1 : CommRing S] (f : R →+* S)\\n  [IsPrecomplete I R] [haus : IsHausdorff (Ideal.map f I) S],\\n  Function.Surjective ⇑((Ideal.Quotient.mk (Ideal.map f I)).comp f) → Function.Surjective ⇑f\", \"doc\": \"Let $ R $ and $ S $ be commutative rings, $ I $ an ideal of $ R $, and $ f : R \\to S $ a ring homomorphism. If $ R $ is precomplete with respect to $ I $, $ S $ satisfies the Hausdorff condition with r\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Surjective ⇑P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"AdicCompletion.kerProj\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        {A : Type u_4} →\\n          [inst_2 : CommRing A] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R S] →\\n                {f : S →ₐ[R] A} → Function.Surjective ⇑f → AdicCompletion\", \"doc\": \"Let $R, S, A$ be commutative rings, where $S$ and $A$ are algebras over $R$. For any surjective $R$-algebra homomorphism $f: S \\\\to A$, this definition constructs an $R$-algebra homomorphism from the a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Principal kernel of a dimension preserving surjection from a mixed characteristic formal toric hypersurface, obtained by lifting p into the monomial and parameter ideal.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.IsPrincipal.of_comap\", \"module\": \"Mathlib.RingTheory.PrincipalIdealDomain\", \"type\": \"(f : F) (hf : Function.Surjective f) (I : Ideal S) [hI : IsPrincipal (I.comap f)] : IsPrincipal I\", \"doc\": \"Let $ f : R \\\\to S $ be a surjective ring homomorphism, and let $ I $ be an ideal of $ S $. If the preimage $ f^{-1}(I) $ is a principal ideal of $ R $, then $ I $ is a principal ideal of $ S $.\"}\n  {\"name\": \"Submodule.IsPrincipal.of_comap\", \"module\": \"Mathlib.RingTheory.PrincipalIdealDomain\", \"type\": \"(f : M →ₗ[R] N) (hf : Function.Surjective f) (S : Submodule R N) [hI : IsPrincipal (S.comap f)] : IsPrincipal S\", \"doc\": \"Let $ f : M \\\\to N $ be a surjective linear map over a semiring $ R $. If the preimage $ f^{-1}(S) $ of a submodule $ S \\\\subseteq N $ under $ f $ is a principal submodule of $ M $, then $ S $ itself is\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Function.Surjective g)\\n  (hg' : IsNilpotent <| RingHom.ker (g : B →+* C)) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Submodule.ker_liftQ_eq_bot\", \"module\": \"Mathlib.LinearAlgebra.Quotient.Basic\", \"type\": \"(f : M →ₛₗ[τ₁₂] M₂) (h) (h' : ker f ≤ p) : ker (p.liftQ f h) = ⊥\", \"doc\": \"Given a linear map $ f : M → M_2 $ between modules over semirings with a ring homomorphism $ \\\\tau: R → R_2 $, and a submodule $ p $ contained in the kernel of $ f $, the kernel of the induced linear m\"}\n  {\"name\": \"CharP.ker_intAlgebraMap_eq_span\", \"module\": \"Mathlib.Algebra.CharP.Quotient\", \"type\": \"{R : Type*} [Ring R] (p : ℕ) [CharP R p] : RingHom.ker (algebraMap ℤ R) = Ideal.span {(p : ℤ)}\", \"doc\": \"For a ring $ R $ with characteristic $ p $, the kernel of the canonical ring homomorphism from the integers $ \\\\mathbb{Z} $ to $ R $ is equal to the principal ideal generated by $ p $ in $ \\\\mathbb{Z} $\"}\n  {\"name\": \"Con.kerLift_range_eq\", \"module\": \"Mathlib.GroupTheory.Congruence.Basic\", \"type\": \": MonoidHom.mrange (kerLift f) = MonoidHom.mrange f\", \"doc\": \"The image of the monoid homomorphism obtained by lifting through the kernel quotient is equal to the image of the original monoid homomorphism, i.e., $\\\\mathrm{im}(\\\\mathrm{kerLift}\\\\, f) = \\\\mathrm{im}(f\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Function.Surjective g) (hg' : IsNilpotent <| RingHom.ker g)\\n  (x : A) : g (FormallySmooth.liftOfSurjective f g hg hg' x) = f x\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"AlgHom.liftOfSurjective\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Operations\", \"type\": \"(f : A →ₐ[R] B) (hf : Function.Surjective f) (g : A →ₐ[R] C) (H : RingHom.ker f.toRingHom ≤ RingHom.ker g.toRingHom) :\\n  B →ₐ[R] C\", \"doc\": \"Given a surjective algebra homomorphism $ f : A → B $ over a commutative semiring $ R $, and another algebra homomorphism $ g : A → C $ whose kernel contains the kernel of $ f $, this constructs the i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, RingHom.ker, Ideal.span",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Cohen|MonoidAlgebra).*(ker|hypersurface)|(principal|span_singleton).*ker",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/HopkinsLevitzki.lean\", \"line\": \"152\", \"text\": \"    rw [LinearMap.span_singleton_eq_range, ← (LinearMap.quotKerEquivRange _).isNoetherian_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"line\": \"106\", \"text\": \"      Submodule.mem_annihilator_span_singleton, LinearMap.mem_ker, Submodule.liftQ_apply,\"}\n  {\"file\": \"Mathlib/Order/Filter/Ker.lean\", \"line\": \"16\", \"text\": \"We also prove that `Filter.principal` and `Filter.ker` form a Galois coinsertion\"}\n  {\"file\": \"Mathlib/Order/Filter/Ker.lean\", \"line\": \"33\", \"text\": \"/-- `Filter.principal` forms a Galois coinsertion with `Filter.ker`. -/\"}\n  {\"file\": \"Mathlib/Order/Filter/Ker.lean\", \"line\": \"34\", \"text\": \"def giPrincipalKer : GaloisCoinsertion (𝓟 : Set α → Filter α) ker :=\"}\n  {\"file\": \"Mathlib/Order/Filter/Ker.lean\", \"line\": \"39\", \"text\": \"alias gi_principal_ker := giPrincipalKer\"}\n  {\"file\": \"Mathlib/Order/Filter/Ker.lean\", \"line\": \"41\", \"text\": \"lemma ker_mono : Monotone (ker : Filter α → Set α) := giPrincipalKer.gc.monotone_u\"}\n  {\"file\": \"Mathlib/RingTheory/ZMod.lean\", \"line\": \"32\", \"text\": \"  rw [Ideal.mem_span_singleton, RingHom.mem_ker, Int.coe_castRingHom,\"}\n  {\"file\": \"Mathlib/Order/Filter/Cofinite.lean\", \"line\": \"323\", \"text\": \"    exact mem_inf_of_right (mem_principal_self f.kerᶜ)\"}\n  {\"file\": \"Mathlib/Order/Filter/Cofinite.lean\", \"line\": \"327\", \"text\": \"    rw [ker_sup, ker_principal, le_cofinite_iff_ker.mp hq.1, union_empty] at hqk\"}\n  {\"file\": \"Mathlib/Order/Filter/Map.lean\", \"line\": \"377\", \"text\": \"theorem kernMap_principal {s : Set α} : kernMap m (𝓟 s) = 𝓟 (kernImage m s) := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SesquilinearForm/Orthogonal.lean\", \"line\": \"94\", \"text\": \"theorem orthogonal_span_singleton_eq_to_lin_ker {B : V →ₗ[K] V →ₛₗ[J] V₂} (x : V) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SesquilinearForm/Orthogonal.lean\", \"line\": \"107\", \"text\": \"  rw [orthogonal_span_singleton_eq_to_lin_ker]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SesquilinearForm/Orthogonal.lean\", \"line\": \"108\", \"text\": \"  exact (B x).span_singleton_sup_ker_eq_top hx\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Ideal.lean\", \"line\": \"42\", \"text\": \"  simp [Ideal.mem_span_singleton, dvd_iff_isRoot, RingHom.mem_ker]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"line\": \"473\", \"text\": \"        sup_le_iff, Submodule.span_singleton_le_iff_mem, LinearMap.mem_ker, LinearMap.sub_apply,\"}\n  {\"file\": \"Mathlib/Topology/Separation/AlexandrovDiscrete.lean\", \"line\": \"26\", \"text\": \"  simp [discreteTopology_iff_nhds, ← principal_nhdsKer_singleton]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Quotient/Basic.lean\", \"line\": \"142\", \"text\": \"  (R ∙ x).liftQ f <| by rw [span_singleton_le_iff_mem, LinearMap.mem_ker, h]\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"line\": \"698\", \"text\": \"/-- The principal unit group agrees with the kernel of the canonical map from\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"line\": \"701\", \"text\": \"    A.principalUnitGroup ≃* (Units.map (IsLocalRing.residue A).toMonoidHom).ker where\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"line\": \"716\", \"text\": \"theorem principalUnitGroup_symm_apply (a : (Units.map (IsLocalRing.residue A).toMonoidHom).ker) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"293\", \"text\": \"    fun a ↦ ?_) g ?_) ((Ideal.span_singleton_le_iff_mem _).mpr ?_ : _ ≤ RingHom.ker _)\"}\n  {\"file\": \"Mathlib/Topology/AlexandrovDiscrete.lean\", \"line\": \"171\", \"text\": \"@[simp] lemma principal_nhdsKer (s : Set α) : 𝓟 (nhdsKer s) = 𝓝ˢ s := by\"}\n  {\"file\": \"Mathlib/Topology/AlexandrovDiscrete.lean\", \"line\": \"174\", \"text\": \"lemma principal_nhdsKer_singleton (a : α) : 𝓟 (nhdsKer {a}) = 𝓝 a := by\"}\n  {\"file\": \"Mathlib/Topology/AlexandrovDiscrete.lean\", \"line\": \"175\", \"text\": \"  rw [principal_nhdsKer, nhdsSet_singleton]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Cohen formal monoid ring choose j in the boundary ideal mapping to p; dimension and normality of the quotient imply kernel generated by p minus j.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.ker_naive\", \"module\": \"Mathlib/RingTheory/Extension/Generators\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {σ : Type u_8} {I : Ideal (MvPolynomial σ R)}\\n  (s : MvPolynomial σ R ⧸ I → MvPolynomial σ R) (hs : ∀ (x : MvPolynomial σ R ⧸ I), (Ideal.Quotient.mk I) (s x) = x),\\n  (Algebra.Generators.naive s hs).ker = I\", \"doc\": \"For a commutative ring $ R $, a type $ \\\\sigma $ of variables, and an ideal $ I $ in the multivariate polynomial ring $ R[\\\\sigma] $, if $ s $ is a section of the quotient map $ \\\\pi: R[\\\\sigma] \\\\to R[\\\\si\"}\n  {\"name\": \"RingHom.ker_evalRingHom\", \"module\": \"Mathlib/RingTheory/Ideal/Maps\", \"type\": \"∀ {ι : Type u_1} [inst : DecidableEq ι] (R : ι → Type u_2) [inst_1 : (i : ι) → CommRing (R i)] (i : ι),\\n  RingHom.ker (Pi.evalRingHom R i) = Ideal.span {1 - Pi.single i 1}\", \"doc\": \"For a product of commutative rings indexed by a type $\\\\iota$ with decidable equality, the kernel of the evaluation homomorphism at index $i$ (which maps each product element to its $i$-th component) i\"}\n  {\"name\": \"Algebra.Presentation.mem_ker_naive\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ {R : Type u} {ι : Type w} {σ : Type t} [inst : CommRing R] {v : ι → MvPolynomial σ R}\\n  (s : optParam (MvPolynomial σ R ⧸ Ideal.span (Set.range v) → MvPolynomial σ R) (Function.surjInv ⋯))\\n  (hs :\\n    autoParam\\n      (∀ (x : MvPolynomial σ R ⧸ Ideal.span (Set.range v)), (Ideal.Quotient.mk (Ideal.s\", \"doc\": \"For each index $i$ in the generating set $\\\\iota$, the image of the generator $v(i)$ under the canonical algebra map lies in the kernel of the naive algebra presentation constructed by quotienting the \"}\n  {\"name\": \"Algebra.Extension.Cotangent.ker_mk\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Algebra.Extension.Cotangent.mk.ker = P.ker • ⊤\", \"doc\": \"The kernel of the canonical quotient map from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ is equal to the square of the ideal $\\\\ker(\\\\phi)^2$.\"}\n  {\"name\": \"Ideal.mem_toCotangent_ker\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {x : ↥I}, x ∈ I.toCotangent.ker ↔ ↑x ∈ I ^ 2\", \"doc\": \"An element $ x $ of the ideal $ I $ lies in the kernel of the canonical quotient map $ I \\\\to I/I^2 $ if and only if $ x $ belongs to the ideal $ I^2 $ generated by products of elements of $ I $.\"}\n  {\"name\": \"Algebra.Extension.Cotangent.span_eq_top_of_span_eq_ker\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {ι : Type u_1} (s : ι → P.Ring) (hs : Ideal.span (Set.range s) = P.ker),\\n  Submodule.span S (Set.range fun i => Algebra.Extension.Cotangent.mk ⟨s i, ⋯⟩) = ⊤\", \"doc\": \"If the ideal generated by a set $\\\\{s_i\\\\}$ equals the kernel ideal $\\\\ker(\\\\phi)$ of the algebra homomorphism $\\\\phi: R \\\\to S$, then the span of the images of $\\\\{s_i\\\\}$ in the cotangent module $\\\\ker(\\\\phi)\"}\n  {\"name\": \"Algebra.exists_aeval_invOf_eq_zero_of_idealMap_adjoin_sup_span_eq_top\", \"module\": \"Mathlib/RingTheory/Polynomial/Ideal\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (x : S) (I : Ideal R),\\n  I ≠ ⊤ →\\n    ∀ [inst_3 : Invertible x],\\n      Ideal.map (algebraMap R ↥(Algebra.adjoin R {x})) I ⊔ Ideal.span {⟨x, ⋯⟩} = ⊤ →\\n        ∃ p, p.leadingCoeff - 1 ∈ I ∧ (Polynomial.aeva\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$. Let $x \\\\in S$ be an invertible element and let $I$ be a proper ideal of $R$. Let $R[x]$ denote the $R$-subalgebra of $S$ generated by $x$.\"}\n  {\"name\": \"Ideal.map_toCotangent_ker\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R), Submodule.map (Submodule.subtype I) I.toCotangent.ker = I ^ 2\", \"doc\": \"The image of the kernel of the canonical quotient map $ I \\\\to I/I^2 $ (where $ I $ is an ideal in a commutative ring) under the inclusion $ I \\\\subseteq R $ is equal to the square of the ideal $ I $, i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Cohen|MonoidAlgebra).*(ker|hypersurface)|(principal|span_singleton).*ker",
+   "results": "25 hits; Mathlib/Algebra/Lie/Weights/IsSimple.lean, Mathlib/Algebra/Lie/Weights/IsSimple.lean, Mathlib/LinearAlgebra/Quotient/Basic.lean, Mathlib/Algebra/Module/CharacterModule.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/BilinearForm/Orthogonal.lean, Mathlib/LinearAlgebra/BilinearForm/Orthogonal.lean, Mathlib/LinearAlgebra/SesquilinearForm/Orthogonal.lean. Read returned types: none states the formal toric principal-kernel theorem; quotient dimension inequalities alone do not construct the primitive relation or prove toric normality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A mixed characteristic complete formal toric hypersurface has no proper quotient of the same finite Krull dimension.",
+   "results": "8 hits; ringKrullDim_quotient_le, EqualCharZero.of_not_mixedCharZero, EqualCharZero.to_not_mixedCharZero, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_quotient_succ_le_of_nonZeroDivisor, MixedCharZero.charP_quotient, Module.supportDim_quotient_eq_ringKrullDim. Read returned types: none states the formal toric principal-kernel theorem; quotient dimension inequalities alone do not construct the primitive relation or prove toric normality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, RingHom.ker, Ideal.span",
+   "results": "0 hits; . Read returned types: none states the formal toric principal-kernel theorem; quotient dimension inequalities alone do not construct the primitive relation or prove toric normality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjection from a completed saturated sharp monoid algebra over a Cohen ring with full boundary image and target dimension rank plus parameters has kernel generated by p minus a boundary element.",
+   "results": "8 hits; AdicCompletion.kerProj_surjective, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, Algebra.Presentation.differentials.surjective_hom₁, AdicCompletion.kerProj_of, AdicCompletion.kerProj, AdicCompletion.surjective_evalₐ, AdicCompletion.evalOneₐ_surjective, KaehlerDifferential.linearCombination_surjective. Read returned types: none states the formal toric principal-kernel theorem; quotient dimension inequalities alone do not construct the primitive relation or prove toric normality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-completed-chart",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-cycle duality alteration ancestry through trace specialization; Expose VI 1.6(ii). In lem-trf-log-regular-completed-chart, former Step 5 and the prime-chain argument from Step 4: construction of p-j and identification of the principal kernel.",
+   "via": [
+    "lem-trf-log-regular-completed-chart",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cohen-monoid-surjection-principal-kernel",
+  "worker": "stage1",
+  "summary": "Q113: checked the local model in Gabber VI 1.6(ii); assembled the existing completion comparison, regular power-series model, primitive-element dimension and saturation-normality statements. Wrote out constant-coefficient primitivity, lifting p from the full boundary image, and the finite prime-chain contradiction. No statement change and no new nodes.",
+  "blueprint": "Proof (1)--(2), nearby-cycle duality alteration ancestry through trace specialization; Expose VI 1.6(ii). In lem-trf-log-regular-completed-chart, former Step 5 and the prime-chain argument from Step 4: construction of p-j and identification of the principal kernel.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic coefficient-ring tool: it supplies completeness, regularity and dimension n+1 of C[[T]], needed to apply the formal monoid dimension theorem; this unit has no separate coefficient-ring theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-16f44234d",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-16f44234d (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement and stmt_deps are byte-identical to NI's base copy, and proof_deps equals the union of the step uses. Source: ILO VI 1.6(ii), printed p. 70, gives C(k)[[P]][[t]]/(f) with f ≡ p mod (P−0, t_i); the item is the algebraic kernel of that statement, and proof_origin=agent is correct. Step 1: lem-weil-pbc-power-series-field-cohen-regular-complete supplies every hypothesis (nonzero, complete, regular, Noetherian local, dim n+1) of lem-trf-formal-monoid-ring-dimension, and the unsplit lem-trf-polynomial-power-series-monoid-completion identifies B with H. Step 2: p is a nonunit through B→B/N≅D, and j lifts φ(p) into J with j̄ ∈ (T)D. Step 3: the constant-coefficient map sends m_D² into p²C, and p ∉ p²C in the DVR. Step 4: the primitive-element clause gives dim B/(θ)=n+r, and the condition m∖m² does not depend on which isomorphism H/L≅D is used; case (ii) of lem-trf-log-regular-saturation-normality gives a nonzero domain because θ−p ∈ J. Step 5: putting (0) in front of the pulled-back prime chain gives a contradiction, so the kernel is 0. Step 6: bijective implies isomorphism of local rings. Edge cases tested: P={0}, n=0 (S=k, θ=p) and P=ℕ, n=0 over Z_p (S=Z_p[[z]]/(p−z)). There is no cycle (closure of 144 nodes), no duplicate found in a whole-DAG search, and no SGA citation. The tool_use of the sk-thm-p1 power-series node is accepted: it is the same generic tool already recorded in the parent completed-chart's tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CohenMonoidSurjectionPrincipalKernel",
+  "declaration": "AddMonoidAlgebra.cohenMonoidSurjection_principalKernel",
+  "file": "lean/Sheaf/RingTheory/CohenMonoidSurjectionPrincipalKernel.lean",
+  "statement": "theorem cohenMonoidSurjection_principalKernel (C : Type u) [CommRing C] [IsLocalRing C] (p : ℕ) (hC : IsCohenRing p C) (P : Type v) [AddCommMonoid P] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : P, IsUnit (Multiplicative.ofAdd q) → q = 0) (n r : ℕ) (hr : r = Module.finrank ℚ (TensorProduct ℤ ℚ (Additive (Algebra.GrothendieckGroup (Multiplicative P))))) (N : Ideal (ToricMonoid.Complete C P n)) (hN : N = Ideal.span {b | ∃ q : P, q ≠ 0 ∧ b = algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra C P)) (ToricMonoid.Complete C P n) (MvPolynomial.C (single q (1 : C)))}) (S : Type w) [CommRing S] [IsNoetherianRing S] [IsLocalRing S] (hdim : ringKrullDim S = ((n + r : ℕ) : WithBot ℕ∞)) (φ : ToricMonoid.Complete C P n →+* S) [IsLocalHom φ] (hφ : Function.Surjective φ) (hJ : Ideal.map φ (ToricMonoid.completedChartIdeal C P n) = IsLocalRing.maximalIdeal S) : (∃ j ∈ ToricMonoid.completedChartIdeal C P n, φ j = φ (p : ToricMonoid.Complete C P n)) ∧ IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) C) = Ideal.span (insert (MvPowerSeries.C (p : C)) (Set.range (MvPowerSeries.X : Fin n → MvPowerSeries (Fin n) C))) ∧ ∃ e : (ToricMonoid.Complete C P n ⧸ N) ≃ₐ[C] MvPowerSeries (Fin n) C, (∀ i : Fin n, e (Ideal.Quotient.mk N (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra C P)) (ToricMonoid.Complete C P n) (MvPolynomial.X i))) = MvPowerSeries.X i) ∧ ∀ j ∈ ToricMonoid.completedChartIdeal C P n, φ j = φ (p : ToricMonoid.Complete C P n) → ((p : ToricMonoid.Complete C P n) - j) - p ∈ ToricMonoid.completedChartIdeal C P n ∧ RingHom.ker φ = Ideal.span {(p : ToricMonoid.Complete C P n) - j} ∧ e (Ideal.Quotient.mk N ((p : ToricMonoid.Complete C P n) - j)) - MvPowerSeries.C (p : C) ∈ Ideal.span (Set.range (MvPowerSeries.X : Fin n → MvPowerSeries (Fin n) C)) ∧ e (Ideal.Quotient.mk N ((p : ToricMonoid.Complete C P n) - j)) ∈ IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) C) ∧ e (Ideal.Quotient.mk N ((p : ToricMonoid.Complete C P n) - j)) ∉ (IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) C)) ^ 2 ∧ IsNoetherianRing (ToricMonoid.Complete C P n ⧸ Ideal.span {(p : ToricMonoid.Complete C P n) - j}) ∧ IsLocalRing (ToricMonoid.Complete C P n ⧸ Ideal.span {(p : ToricMonoid.Complete C P n) - j}) ∧ IsDomain (ToricMonoid.Complete C P n ⧸ Ideal.span {(p : ToricMonoid.Complete C P n) - j}) ∧ ringKrullDim (ToricMonoid.Complete C P n ⧸ Ideal.span {(p : ToricMonoid.Complete C P n) - j}) = ((n + r : ℕ) : WithBot ℕ∞) ∧ ∃ eS : (ToricMonoid.Complete C P n ⧸ Ideal.span {(p : ToricMonoid.Complete C P n) - j}) ≃+* S, (∀ b : ToricMonoid.Complete C P n, eS (Ideal.Quotient.mk _ b) = φ b) ∧ IsLocalHom eS.toRingHom",
+  "branch": "sheaf-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses ToricMonoid.Complete and ToricMonoid.completedChartIdeal owned by def-trf-complete-toric-model. The normality theorem remains a proof-only input. The local-ring class on C supplies the structure already entailed by IsCohenRing; no completeness or log structure on S is required. The displayed N and rank are named by exact equality hypotheses. The stratum equivalence is a C-algebra equivalence fixing every parameter, and the hypersurface equivalence agrees with phi on every element."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3144a5642",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by Q60 + H2 repair), module, all stmt_dep declarations (IsCohenRing, ToricMonoid.Complete/completedChartIdeal = CompletedLocalModel/boundary ideals, IsFineSaturatedMonoid, Mathlib AdicCompletion/IsNoetherianRing/ringKrullDim/MvPowerSeries) and ILO VI 1.6(ii). Every hypothesis matches: Cohen C (IsLocalRing entailed), fs and sharp P, r = finrank_Q(P^gp⊗Q), B = completion at (m_C=(p), z^q, T), J = completed chart ideal, N = span of nonzero monomials, S Noetherian local nonzero of dim n+r, phi surjective local with phi(J)=m_S. Every conclusion matches: j exists; m_D=(p,T); the C-algebra equivalence B/N≅D fixing T_i (unique, so canonical); for every lift j: theta-p∈J, ker phi=(theta), theta-bar ≡ p mod T and in m_D\\m_D², B/(theta) Noetherian local domain of dim n+r, eS agreeing with phi on all elements and local. Edge cases P=0, n=0, both, and P=N pass. Statement field verbatim; only lean+stmt_deps differ from live (added the landed def-trf-complete-toric-model, the earlier H2 repair); theorem nodes only as proof-only imports; no definitions, sorry only, docstrings with source/blueprint/proof steps. Advisory: IsFineSaturatedMonoid is owned by def-trf-log-regular-pair but is the fs rendering used by the cited def-trf-fs-log-blowup and by the landed siblings. No compile (none required; no files changed)."
+ }
+}

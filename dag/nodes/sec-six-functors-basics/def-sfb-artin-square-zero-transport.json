@@ -1,0 +1,118 @@
+{
+ "id": "def-sfb-artin-square-zero-transport",
+ "kind": "definition",
+ "title": "Square-zero parameter arrows and transport on isomorphism classes",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $k$ a field [def-weil-field] of finite type over $R$ [def-weil-finite-type-morphism]. Use the marked Artinian test category $\\mathcal C_{R,k}$, the square-zero tests $k[V]=k\\oplus V$, and groupoid-valued pseudofunctors $\\mathcal D$ of [def-sfb-artin-deformation-test-category]. For finite-dimensional $k$-vector spaces $V,W$ [def-weil-finite-dimensional-subspace] and a $k$-linear map $f:V\\to W$, define the marked test arrow $k[f]:k[V]\\to k[W]$ by $(a,v)\\mapsto(a,f(v))$. For every arrow $g:A\\to B$ of $\\mathcal C_{R,k}$, define transport on isomorphism classes by $\\pi_0\\mathcal D(g):\\pi_0\\mathcal D(A)\\to\\pi_0\\mathcal D(B)$, $[x]\\mapsto[g_*x]$, using the pseudofunctor transport functor $g_*$. These definitions require neither the predeformation nor the Rim--Schlessinger condition.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-deformation-test-category",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "The square-zero algebras preceding definition-S1-S2; section-tangent-spaces-functors before Tag 06IA (lemma-tangent-space-functor); Tag 06IG (definition-tangent-space) and remark-predeformation-functor for the associated isomorphism-class functor."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear map induces map on square zero algebras and functor induces map on isomorphism classes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TrivSqZeroExt.map\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : M →ₗ[R'] N) : TrivSqZeroExt R' M →ₐ[R'] TrivSqZeroExt R' N\", \"doc\": \"Given a linear map $ f : M \\\\to N $ over a commutative semiring $ R' $, this constructs the algebra homomorphism from the trivial square-zero extension $ R' \\\\times M $ to $ R' \\\\times N $ defined by sen\"}\n  {\"name\": \"TrivSqZeroExt.inrHom\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[Semiring R] [AddCommMonoid M] [Module R M] : M →ₗ[R] tsze R M\", \"doc\": \"The linear map sending each element $ m $ of the $ R $-module $ M $ to the pair $ (0, m) $ in the trivial square-zero extension $ R \\\\times M $, embedding $ M $ as an ideal with zero multiplication in \"}\n  {\"name\": \"Submodule.mapQ_zero\", \"module\": \"Mathlib.LinearAlgebra.Quotient.Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (p : Submodule R M)\\n  {R₂ : Type u_3} {M₂ : Type u_4} [inst_3 : Ring R₂] [inst_4 : AddCommGroup M₂] [inst_5 : Module R₂ M₂] {τ₁₂ : R →+* R₂}\\n  (q : Submodule R₂ M₂) (h : optParam (p ≤ Submodule.comap 0 q)\", \"doc\": \"For any submodules $ p $ of $ M $ and $ q $ of $ M_2 $, the induced linear map $ \\\\overline{0} : M/p \\\\to M_2/q $ via the zero linear map $ 0 : M \\\\to M_2 $ is the zero map. This holds because the preima\"}\n  {\"name\": \"TrivSqZeroExt.map_inl\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : M →ₗ[R'] N) (r : R') : map f (inl r) = inl r\", \"doc\": \"For any commutative semiring $ R' $, $ R' $-modules $ M $ and $ N $, and a linear map $ f : M \\\\to N $, the algebra homomorphism induced by $ f $ between the trivial square-zero extensions $ R' \\\\times \"}\n  {\"name\": \"TrivSqZeroExt.map_inr\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : M →ₗ[R'] N) (x : M) : map f (inr x) = inr (f x)\", \"doc\": \"For any linear map $ f : M \\\\to N $ over a commutative semiring $ R' $, the algebra homomorphism induced by $ f $ between the trivial square-zero extensions $ R' \\\\times M $ and $ R' \\\\times N $ satisfie\"}\n  {\"name\": \"TrivSqZeroExt.map_comp_map\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : M →ₗ[R'] N) (g : N →ₗ[R'] P) : map (g.comp f) = (map g).comp (map f)\", \"doc\": \"For any linear maps $ f : M \\\\to N $ and $ g : N \\\\to P $ over a commutative semiring $ R' $, the algebra homomorphism induced by the composition $ g \\\\circ f $ on the trivial square-zero extensions $ R'\"}\n  {\"name\": \"liftOfDerivationToSquareZero\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A I) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\to I $ over $ R $, this constructs an $ R $-algebra homomor\"}\n  {\"name\": \"TrivSqZeroExt.lift\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : R →ₐ[S] A) (g : M →ₗ[S] A) (hg : ∀ x y, g x * g y = 0) (hfg : ∀ r x, g (r •> x) = f r * g x)\\n  (hgf : ∀ r x, g (x <• r) = g x * f r) : tsze R M →ₐ[S] A\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib has the underlying TrivSqZeroExt.map and isomorphism-class quotient; the exact marked test arrow and quotient transport are already defined as ArtinDeformation.squareZeroMap and isoClassesMap in Sheaf.AlgebraicGeometry.ArtinRSTangentTensor. Reuse these plain definitions, not the tangent-tensor theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "linear map induces map on square zero algebras and functor induces map on isomorphism classes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TrivSqZeroExt.liftEquiv\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"{S : Type u_1} →\\n  {R : Type u} →\\n    {M : Type v} →\\n      [inst : CommSemiring S] →\\n        [inst_1 : Semiring R] →\\n          [inst_2 : AddCommMonoid M] →\\n            [inst_3 : Algebra S R] →\\n              [inst_4 : Module S M] →\\n                [inst_5 : Module R M] →\\n                  [inst_6 : M\", \"doc\": \"This equivalence establishes a bijection between pairs $(f,g)$ consisting of an $S$-algebra homomorphism $f: R \\\\to A$ and an $S$-linear map $g: M \\\\to A$ satisfying $g(x)g(y) = 0$ for all $x,y \\\\in M$, \"}\n  {\"name\": \"ExteriorAlgebra.toTrivSqZeroExt_comp_map\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"∀ {R : Type u1} [inst : CommRing R] {M : Type u2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u4}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : Module Rᵐᵒᵖ M] [inst_6 : IsCentralScalar R M]\\n  [inst_7 : Module Rᵐᵒᵖ N] [inst_8 : IsCentralScalar R N] (f : M →ₗ[R] N),\\n  Exter\", \"doc\": \"For a commutative ring $ R $ and $ R $-modules $ M $ and $ N $ with central scalar actions, the composition of the exterior algebra homomorphism induced by a linear map $ f: M \\\\to N $ with the canonic\"}\n  {\"name\": \"MoritaEquivalence.linear\", \"module\": \"Mathlib/RingTheory/Morita/Basic\", \"type\": \"∀ {R : Type u₀} [inst : CommSemiring R] {A : Type u₁} [inst_1 : Ring A] [inst_2 : Algebra R A] {B : Type u₂}\\n  [inst_3 : Ring B] [inst_4 : Algebra R B] (self : MoritaEquivalence R A B),\\n  CategoryTheory.Functor.Linear R self.eqv.functor\", \"doc\": \"Given a commutative semiring $ R $ and rings $ A $ and $ B $ equipped with $ R $-algebra structures, any Morita equivalence between $ A $ and $ B $ ensures that the induced equivalence functor between\"}\n  {\"name\": \"CategoryTheory.InducedCategory.homLinearEquiv\", \"module\": \"Mathlib/CategoryTheory/Linear/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      {R : Type w} →\\n        [inst_2 : Semiring R] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            {D : Type u'} → {F : D → C} → {X Y : CategoryTheory.InducedCategory C F} → (X ⟶\", \"doc\": \"Given a semiring $ R $, an $ R $-linear category $ \\\\mathcal{C} $, and a functor $ F : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, there exists a natural linear equivalence between the hom-set $ \\\\text{Hom}_{\\\\mathca\"}\n  {\"name\": \"CategoryTheory.Free.lift_linear\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {C : Type u} [inst_1 : CategoryTheory.Category.{v, u} C] {D : Type u}\\n  [inst_2 : CategoryTheory.Category.{v, u} D] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryTheory.Linear R D] (F : CategoryTheory.Functor C D),\\n  CategoryTheory.Functor.Linear R \", \"doc\": \"For any commutative ring $ R $, category $ \\\\mathcal{C} $, and $ R $-linear category $ \\\\mathcal{D} $, the functor $ \\\\text{Free}_R(\\\\mathcal{C}) \\\\to \\\\mathcal{D} $ constructed from a functor $ F: \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.Free.ext\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        {D : Type u} →\\n          [inst_2 : CategoryTheory.Category.{v, u} D] →\\n            [inst_3 : CategoryTheory.Preadditive D] →\\n              [inst_4 : CategoryTheory.Linear R D] →\\n  \", \"doc\": \"Given a commutative ring $ R $, a category $ \\\\mathcal{C} $, and an $ R $-linear preadditive category $ \\\\mathcal{D} $, if two additive $ R $-linear functors $ F, G : \\\\text{Free}_R(\\\\mathcal{C}) \\\\to \\\\mat\"}\n  {\"name\": \"CommRingCat.moduleCatExtendScalarsPseudofunctor\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete CommRingCat) CategoryTheory.Cat\", \"doc\": \"The pseudofunctor assigns to each commutative ring $ R $ its category of modules $ \\text{Module}_R $, and to each ring homomorphism $ f: R \\to S $ the extension of scalars functor $ \\text{Module}_R \\to \\te\"}\n  {\"name\": \"CategoryTheory.Free.liftUnique\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        {D : Type u} →\\n          [inst_2 : CategoryTheory.Category.{v, u} D] →\\n            [inst_3 : CategoryTheory.Preadditive D] →\\n              [inst_4 : CategoryTheory.Linear R D] →\\n  \", \"doc\": \"Given a commutative ring $ R $, categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, and an additive $ R $-linear functor $ L : \\\\text{Free}_R(\\\\mathcal{C}) \\\\to\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib has the underlying TrivSqZeroExt.map and isomorphism-class quotient; the exact marked test arrow and quotient transport are already defined as ArtinDeformation.squareZeroMap and isoClassesMap in Sheaf.AlgebraicGeometry.ArtinRSTangentTensor. Reuse these plain definitions, not the tangent-tensor theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "squareZeroMap|isoClassesMap|TrivSqZeroExt.map|isIsomorphicSetoid",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/IsomorphismClasses.lean\", \"line\": \"37\", \"text\": \"def isIsomorphicSetoid : Setoid C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/IsomorphismClasses.lean\", \"line\": \"46\", \"text\": \"  obj C := Quotient (isIsomorphicSetoid C.α)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"line\": \"245\", \"text\": \"    obtain ⟨e⟩ := @Quotient.mk_out' _ (isIsomorphicSetoid _) Q\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"line\": \"448\", \"text\": \"    toTrivSqZeroExt.comp (map f) = (TrivSqZeroExt.map f).comp toTrivSqZeroExt := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"line\": \"452\", \"text\": \"    AlgHom.toLinearMap_apply, map_apply_ι, toTrivSqZeroExt_ι, TrivSqZeroExt.map_inr, forall_const]\"}\n  {\"file\": \"Mathlib/RingTheory/PicardGroup.lean\", \"line\": \"471\", \"text\": \"  equivShrinkLinearEquiv R _ ≪≫ₗ (Quotient.mk_out (s := isIsomorphicSetoid _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"54\", \"text\": \"attribute [local instance] isIsomorphicSetoid\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"76\", \"text\": \"def Skeleton : Type u₁ := InducedCategory (C := Quotient (isIsomorphicSetoid C)) C Quotient.out\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"228\", \"text\": \"  Quotient (isIsomorphicSetoid C)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"239\", \"text\": \"    @Quotient.lift₂ C C _ (isIsomorphicSetoid C) (isIsomorphicSetoid C)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"302\", \"text\": \"    @Quotient.map₂ C D (isIsomorphicSetoid C) (isIsomorphicSetoid D) E (isIsomorphicSetoid E)\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib has the underlying TrivSqZeroExt.map and isomorphism-class quotient; the exact marked test arrow and quotient transport are already defined as ArtinDeformation.squareZeroMap and isoClassesMap in Sheaf.AlgebraicGeometry.ArtinRSTangentTensor. Reuse these plain definitions, not the tangent-tensor theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-schlessinger-groupoid-hull-criterion",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: the abstract Schlessinger input of examples-defos Tag 0ET5; no scheme-specific hypothesis. Square-zero parameter and isomorphism-class transport in the definition of the classical tangent operations.",
+   "via": [
+    "lem-sfb-schlessinger-groupoid-hull-criterion",
+    "lem-sfb-proper-scheme-deformation-hull",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinRSTangentTensor",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.squareZeroMap",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.squareZeroMap",
+   "AlgebraicGeometry.ArtinDeformation.isoClassesMap"
+  ],
+  "statement": "def squareZeroMap {V W : Type u} [AddCommGroup V] [Module k V] [FiniteDimensional k V]\n    [AddCommGroup W] [Module k W] [FiniteDimensional k W] (f : V →ₗ[k] W) :\n    squareZeroTest (R := R) (k := k) V ⟶ squareZeroTest (R := R) (k := k) W",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing plain definitions in ArtinRSTangentTensor. squareZeroMap is the actual marked square-zero arrow, and isoClassesMap is Quotient.map of push. This definition node records precisely these helpers; its meaning and the hull statements do not use artinRS_tangent_tensor. Added to repair reviewer H2/H12 at returned head ce8ccc3e8aeb, using the explicitly permitted existing:true option."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-832a02cf2",
+  "group": "Q37",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-832a02cf2",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Re-delivery after H2/H12 RETURN at ce8ccc3e8aeb; Lean files byte-identical to the returned head. New def node def-sfb-artin-square-zero-transport has an existing:true record for squareZeroMap/isoClassesMap in ArtinRSTangentTensor (signature verbatim, TeX matches bodies and variable context, stmt_deps = cited ids, all §5 fields correct). Item and def-sfb-classical-deformation-hull now cite it instead of theorem lem-sfb-artin-rs-tangent-tensor, which stays a proof_dep only. Item differs from base only in lean and stmt_deps (adds existing test-category node plus the two new def nodes). Mathematics re-read clause by clause and unchanged correct; only sorry is the item proof; no hollow defs; statement fields verbatim. No compile needed (no file changed)."
+ }
+}

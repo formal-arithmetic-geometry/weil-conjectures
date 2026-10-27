@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-etale-stalk-invariants",
+ "kind": "statement",
+ "title": "Normality, regularity and dimension under an etale stalk map",
+ "statement": "Let $e:U\\to X$ be an etale morphism of schemes [def-weil-etale-morphism], let $u\\in U$, and put $x=e(u)$, $A=\\mathcal O_{X,x}$ and $B=\\mathcal O_{U,u}$. Then the local homomorphism $A\\to B$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map],\n$$\\dim A=\\dim B,$$\nwith Krull dimension [def-weil-pbc-krull-dimension-ring], and\n$$A\\text{ is a regular local ring}\\ \\Longleftrightarrow\\ B\\text{ is a regular local ring},$$\n$$A\\text{ is an integrally closed domain}\\ \\Longleftrightarrow\\ B\\text{ is an integrally closed domain}$$\n[def-weil-regular-scheme, def-weil-pbc-normal-ring]. Here neither scheme is assumed globally Noetherian. The normality comparison concerns the indicated local rings, and does not assert that their fraction fields or residue fields are isomorphic.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QP (lemma-dimension-etale-extension) and Tag 0AH0 (lemma-regular-etale-extension); normality via algebra.tex Tag 033C (lemma-normal-goes-up) and Tag 033G (lemma-descent-normal), applied after base change to the base local ring. Agent scheme-stalk assembly of these ring results, extracted from inherited step 14."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "The stalk map of the etale morphism is flat and local. Give the target stalk the algebra structure induced by this map and apply faithful flatness of flat local homomorphisms. This is the first conjunct.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an etale ring map f:R→S and a prime q of S put A=R_(f⁻¹q) and B=S_q. Apply RingHom.Etale.ringKrullDim_localization_eq for dimension equality, including infinite dimension. Regularity ascends directly by the already proved upstream localized etale ascent theorem. For descent A→B is flat local, hence faithfully flat. A regular local B is regular by regular-local localization; faithful flat descent makes A regular, hence regular local since it is local.",
+   "uses": [
+    "lem-sc-etale-local-dimension",
+    "lem-sfb-etale-localization-regular-ascent",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the same localizations normal-domain ascent is precisely the already proved upstream localized etale normal-domain ascent theorem. For descent, B a normal domain implies every prime localization is a normal domain. Apply faithfully flat normal-ring descent to A→B. The localization of the local ring A at its maximal ideal is isomorphic to A, because all elements inverted are units. Transport its domain and integral-closedness predicates back along that isomorphism.",
+   "uses": [
+    "lem-sfb-etale-localization-normal-ascent",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-sfb-faithfully-flat-normal-ring-descent",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The conjunction of dimension equality, equivalence of regular localness and equivalence of being an integrally closed domain respects ring isomorphisms at either end: transport dimension with ringKrullDim, regularity with IsRegularLocalRing.of_ringEquiv, domainhood with MulEquiv.isDomain and integral closedness with IsIntegrallyClosed.of_equiv. Apply Mathlib HasRingHomProperty.stalkMap_of_respectsIso to the etale morphism and the localized ring result. This theorem chooses affine neighborhoods, identifies the stalk map with the map on prime localizations, and transports along the resulting ring isomorphisms. Combine with the faithful flatness from the first step.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-sc-etale-local-dimension",
+  "lem-sfb-etale-localization-regular-ascent",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+  "def-weil-regular-scheme",
+  "lem-sfb-etale-localization-normal-ascent",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-sfb-faithfully-flat-normal-ring-descent",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-spec-map-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Scheme-stalk assembly of Tags 07QP and 0AH0 with normal-domain ascent from algebra.tex Tag 033C and faithfully flat descent Tag 033G. Uses proved localized upstream ascent lemmas and Mathlib HasRingHomProperty.stalkMap_of_respectsIso instead of repeating tensor-base-change and affine-chart calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of locally Noetherian schemes, source and target local rings at corresponding points have equal dimension and are simultaneously regular or normal domains, in both ascent and descent directions.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsRegularLocalRing\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*([Rr]egular|[Nn]ormal|[Dd]imension)|([Rr]egular|[Nn]ormal).*([Ee]tale)",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"23\", \"text\": \"- `AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero`: Etale is equivalent to\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"99\", \"text\": \"lemma eq_smoothOfRelativeDimension_zero : @Etale = @SmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"102\", \"text\": \"  have : @RingHom.Etale = @RingHom.IsStandardSmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"103\", \"text\": \"    ext; apply RingHom.etale_iff_isStandardSmoothOfRelativeDimension_zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"108\", \"text\": \"lemma iff_smoothOfRelativeDimension_zero : Etale f ↔ SmoothOfRelativeDimension 0 f := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality and regularity of a local ring are invariant under pointed etale neighbourhoods and local Krull dimensions agree.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ringKrullDim_eq_of_ringEquiv\", \"module\": \"Mathlib.RingTheory.KrullDimension.Basic\", \"type\": \"(e : R ≃+* S) : ringKrullDim R = ringKrullDim S\", \"doc\": \"If $ R $ and $ S $ are isomorphic commutative semirings via a ring isomorphism $ e $, then their Krull dimensions are equal, i.e., $\\\\dim(R) = \\\\dim(S)$.\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"RingEquiv.ringKrullDim\", \"module\": \"Mathlib.RingTheory.KrullDimension.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] (e : R ≃+* S),\\n  ringKrullDim R = ringKrullDim S\", \"doc\": \"If $ R $ and $ S $ are commutative semirings and there exists a ring equivalence $ e : R \\\\simeq S $, then the Krull dimension of $ R $ equals the Krull dimension of $ S $, i.e., $ \\\\dim(R) = \\\\dim(S) $.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"[IsLocalRing R] : (IsLocalRing.maximalIdeal R).primeHeight = ringKrullDim R\", \"doc\": \"In a local ring $ R $, the prime height of the maximal ideal $ \\\\mathfrak{m} $ is equal to the Krull dimension of $ R $, i.e., $ \\\\operatorname{ht}(\\\\mathfrak{m}) = \\\\dim(R) $.\"}\n  {\"name\": \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"[FiniteRingKrullDim R] [IsLocalRing R] {I : Ideal R} [I.IsPrime] :\\n  Ideal.primeHeight I = ringKrullDim R ↔ I = IsLocalRing.maximalIdeal R\", \"doc\": \"In a commutative local ring $ R $ with finite Krull dimension, the height of a prime ideal $ I $ is equal to the Krull dimension of $ R $ if and only if $ I $ is the unique maximal ideal of $ R $.\"}\n  {\"name\": \"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"[IsLocalRing R] : (IsLocalRing.maximalIdeal R).height = ringKrullDim R\", \"doc\": \"In a local ring $ R $, the height of the unique maximal ideal $ \\\\mathfrak{m} $ coincides with the Krull dimension of $ R $, i.e., $ \\\\operatorname{ht}(\\\\mathfrak{m}) = \\\\dim(R) $. This equality follows f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local ring homomorphism obtained by localizing an etale ring map, normality and regularity hold on one side if and only if on the other side, and Krull dimension is unchanged.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R S] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra S Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (M : Submonoid R) [inst_3 : Algebra R Sₘ] [inst_4 : Algebra R Rₘ] [inst_5 : Algebra Rₘ Sₘ] [IsScalarTower R Rₘ Sₘ]\\n  [IsLocalization M Rₘ] [Algebra.FormallyEtale R Sₘ], Algebra.Formal\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardEtale R S] {Sₛ : Type u_4} [inst_4 : CommRing Sₛ] [inst_5 : Algebra S Sₛ] [inst_6 : Algebra R Sₛ]\\n  [IsScalarTower R S Sₛ] (s : S) [IsLocalization.Away s Sₛ], Algebra.IsStandardEtale\", \"doc\": \"If $ S $ is a standard étale algebra over a commutative ring $ R $, and $ S_\\\\mathfrak{s} $ is the localization of $ S $ at the powers of an element $ s \\\\in S $, then $ S_\\\\mathfrak{s} $ is also a stand\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*(IsIntegrallyClosed|IsRegular|ringKrullDim)|(IsIntegrallyClosed|IsRegular|ringKrullDim).*Etale",
+   "results": "0 hits: . Read returned lines; none states the proposed lemma.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*(IsIntegrallyClosed|IsRegularLocalRing|ringKrullDim)|(IsIntegrallyClosed|IsRegularLocalRing|ringKrullDim).*Etale",
+   "results": "No hits.  Read the returned types; none states the full stalk-invariance package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local rings of an etale scheme morphism have the same Krull dimension and are simultaneously regular or normal.",
+   "results": "Hits: Algebra.Etale.of_isLocalizationAway, RingHom.Etale.propertyIsLocal, ringKrullDim_eq_of_ringEquiv, RingHom.Etale, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale.of_isLocalization_Away, AlgebraicGeometry.IsEtale.instFormallyUnramified, Ideal.primeHeight_eq_ringKrullDim_iff.  Read the returned types; none states the full stalk-invariance package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"IsRegularLocalRing\"",
+   "results": "No hits.  Read the returned types; none states the full stalk-invariance package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of arbitrary schemes, the map on local rings at corresponding points is faithfully flat, preserves Krull dimension and reflects regularity and normality.",
+   "results": "Hits: AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instFormallyUnramified, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale.  Read the returned types; none states the full stalk-invariance package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(dimension|regular|normal)|(dimension|regular|normal).*etale",
+   "results": "Hits: Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean.  Read the returned types; none states the full stalk-invariance package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism obtained by localizing an etale ring map is faithfully flat; its source and target have equal dimension, and one is regular or a normal domain if and only if the other is.",
+   "results": "Hits: RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, Algebra.Etale.of_isLocalizationAway, Algebra.Etale.of_isLocalization_Away, Algebra.IsEtaleAt.  Read the returned types; none states the full stalk-invariance package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; de Jong Lemma 3.13: explicit local equation and one singular-point blowup, before global resolution or domination; inherited step 14: comparison of the stalks on each leg of a common pointed etale neighbourhood",
+   "via": [
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-stalk-invariants",
+  "worker": "stage1",
+  "summary": "Q37 replaces the empty proof by six fully cited steps, reusing existing algebra, stalk, and base-change nodes. The statement and its statement dependencies are unchanged. No new node is needed; localization before smooth ascent avoids asserting that an arbitrary stalk map is finitely presented etale.",
+  "blueprint": "Preserves the inherited from.place: dvr-nodal-chart-blowup-calculus step 14, comparison on both legs of a common pointed etale neighbourhood, within det-thm-sf-ctf-stability-direct-images proof (3). The computed nearest blueprint ancestor is null in the live imported chain; its inherited via list and explicit place are retained. Whole-blueprint searches found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic étale localizations preserve dimension used in the affine-local stalk assembly; the fixed alteration unit has no replacement for this algebra/geometry tool and its route is unchanged."
+   },
+   {
+    "node": "lem-sbc-finite-affine-tensor-base-change",
+    "why": "Generic tensor base change of a finite affine coproduct used in the affine-local stalk assembly; the fixed alteration unit has no replacement for this algebra/geometry tool and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic a localization of a regular local ring at a prime is a regular local ring used in the affine-local stalk assembly; the fixed alteration unit has no replacement for this algebra/geometry tool and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic regularity ascends along smooth ring maps used in the affine-local stalk assembly; the fixed alteration unit has no replacement for this algebra/geometry tool and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic a localization of a regular ring is regular used in the affine-local stalk assembly; the fixed alteration unit has no replacement for this algebra/geometry tool and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+    "why": "Generic regularity descends along faithfully flat ring maps used in the affine-local stalk assembly; the fixed alteration unit has no replacement for this algebra/geometry tool and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic an etale algebra over a normal ring is a normal ring used in the affine-local stalk assembly; the fixed alteration unit has no replacement for this algebra/geometry tool and its route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-06f0d24ec",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-06f0d24ec (reviewer sub-agent of L); spot-checked: First split of an item that is still unsplit live, with no repair note, so the re-split rule does not apply. Statement, stmt_deps and blueprint are unchanged; only proof, proof_deps, status, split_report, proof_origin and mathlib_searches changed. No new nodes. Every step's citations are justified by the cited statements. Step 1: flat + local stalk map, so faithfully flat by 00HR. Step 2: affine étale chart from the def-weil-etale-morphism statement, 01HV stalk identification, 07QP dimension equality (infinite dimension allowed). Step 3: C=(R∖p)⁻¹S≅A⊗_R S with explicit formulas; the r=1 case of finite-affine-tensor-base-change plus etale-base-change(1) make Spec C→Spec A étale; 02GJ iff plus the smooth definition make A→C smooth; C_Q≅S_q is explicit. This avoids assuming the stalk map is finitely presented. Steps 4-5: regularity by 0AFS, smooth ascent 07NF and localization of a regular ring, and conversely by faithfully flat descent 07NG. Step 6: normality by 00GY, étale-over-normal (033C) and faithfully flat descent 033G, with no Noetherian hypothesis and no assumption that C is a domain. I read the Stacks sources more-algebra 07QP/0AH0 and algebra 07NF/07NG/033C/033G; their hypotheses match the cited nodes. proof_deps equals the union of uses; no cycle in the 544-node closure; no SGA. No duplicate among the 0AH0/07QP citers. Edge cases checked: identity, separable field extension (residue fields differ but the statement does not claim otherwise), products (C not a domain), singular and non-Noetherian identity maps, empty U, infinite dimension. Accepted the 7 generic-algebra tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleStalkInvariants",
+  "declaration": "AlgebraicGeometry.etale_stalk_invariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStalkInvariants.lean",
+  "statement": "theorem etale_stalk_invariants {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] (u : U) : (e.stalkMap u).hom.FaithfullyFlat ∧ ringKrullDim (X.presheaf.stalk (e u)) = ringKrullDim (U.presheaf.stalk u) ∧ (IsRegularLocalRing (X.presheaf.stalk (e u)) ↔ IsRegularLocalRing (U.presheaf.stalk u)) ∧ ((IsDomain (X.presheaf.stalk (e u)) ∧ IsIntegrallyClosed (X.presheaf.stalk (e u))) ↔ (IsDomain (U.presheaf.stalk u) ∧ IsIntegrallyClosed (U.presheaf.stalk u)))",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0e718578",
+  "group": "NI",
+  "result": "pass",
+  "note": "Only the lean record changed; lean.statement matches the file signature verbatim. Clauses match the node: [Etale e] (def-weil-etale-morphism record), the actual stalks, (e.stalkMap u).hom.FaithfullyFlat in the right direction, ringKrullDim in WithBot ℕ∞, IsRegularLocalRing iff (includes Noetherian, no added assumption), IsDomain ∧ IsIntegrallyClosed iff (normal-ring record). No extra hypotheses and no field-isomorphism claim. Agrees with Stacks 07QP/0AH0/033C/033G. Edge cases fine: empty U, identity, non-Noetherian, infinite dimension, separable field extension. Searches found no existing four-clause statement, only one-direction or private helpers. No definitions, proof is sorry only, source and blueprint docstrings present, all six proof steps in the docstring with cites matching each step's uses, universe declared, proof-only imports all exist. Not recompiled since no file was changed; relied on the worker's reported clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T083223-L-2299141",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

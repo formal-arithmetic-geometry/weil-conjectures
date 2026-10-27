@@ -1,0 +1,107 @@
+{
+ "id": "lem-trf-tensor-right-adjunction-normalization",
+ "kind": "statement",
+ "title": "Normalize a tensor right adjunction at the coefficient unit",
+ "statement": "Let C and D be categories, with D monoidal. Let P:C->D be a functor and H:D->D a fully faithful functor. Let I be an object of C, L and M objects of D, and u:P(I)≅1_D. Put G=(P followed by tensorRight(L)) followed by H. Let F:D->C and R:C->D be functors and let a:F⊣G and b:F⊣R be adjunctions. Given isomorphisms q:G(I)≅M and z:M≅R(I), there exists an adjunction adj:F⊣G such that the inverse of the composite of the counit-compatible right-adjoint uniqueness isomorphism b.rightAdjointUniq(adj) at I with q equals z.hom. The right-adjoint uniqueness comparison is the specified one of [det-sp-unique-right-adjoint].",
+ "stmt_deps": [
+  "det-sp-unique-right-adjoint"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, affine-space adjunction and the coefficient orientation: categorical normalization used in parent proof Step 1."
+ },
+ "proof": [
+  {
+   "text": "Let v:P(I) tensor L≅L be tensorRight(L).mapIso(u) followed by the left unitor, and let w=H.mapIso(v). For an automorphism k of G(I), full faithfulness of H gives a unique automorphism e of L whose image is w inverse followed by k followed by w. Tensoring on the right by e, and whiskering by P and H, gives a natural automorphism h of G. Naturality of the left unitor and the tensor exchange law show h(I)=k. This is the proved private lift_tensor_auto lemma.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let e0 be the component at I of b.rightAdjointUniq(a) followed by q, using [det-sp-unique-right-adjoint]. Apply the first step to k=q followed by z followed by e0 followed by q inverse. Transport a across h inverse to obtain adj. The hom-equivalence formula for a transported adjunction and the formula for rightAdjointUniq imply b.rightAdjointUniq(adj).hom=b.rightAdjointUniq(a).hom followed by h inverse. Substitute h(I)=k, cancel q and the uniqueness component, and obtain that the new uniqueness component followed by q followed by z is identity. Cancellation of the isomorphism component followed by q identifies its inverse with z.hom. All helpers and the combining calculation are proved.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, affine-space adjunction and the coefficient orientation: categorical normalization used in parent proof Step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor and fully faithful functor right adjoint can be normalized to a prescribed isomorphism at the unit",
+   "results": "8 hits: CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_η_comp_η_assoc",
+   "date": "2026-10-26",
+   "verdict": "The generic adjunction transport and right-adjoint uniqueness components are used. No returned theorem gives the full normalization of this tensor right functor at the specified coefficient object."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "5 hits: CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit, CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_apply, CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_symm_apply",
+   "date": "2026-10-26",
+   "verdict": "The generic adjunction transport and right-adjoint uniqueness components are used. No returned theorem gives the full normalization of this tensor right functor at the specified coefficient object."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq.*ofNatIsoRight|tensorRightAdjunction",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-26",
+   "verdict": "The generic adjunction transport and right-adjoint uniqueness components are used. No returned theorem gives the full normalization of this tensor right functor at the specified coefficient object."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionCoordinateCounitNormalization",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-section-coordinate-counit-normalization",
+   "place": "Local construction, affine-space adjunction and the coefficient orientation: categorical normalization used in parent proof Step 1.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TensorAdjunctionNormalization",
+  "file": "lean/Sheaf/CategoryTheory/TensorAdjunctionNormalization.lean",
+  "declaration": "CategoryTheory.tensorRightAdjunction_normalize",
+  "statement": "theorem tensorRightAdjunction_normalize {C D : Type*} [Category C] [Category D] [MonoidalCategory D] (P : C ⥤ D) (H : D ⥤ D) [H.Full] [H.Faithful] (I : C) (L M : D) (u : P.obj I ≅ 𝟙_ D) {F : D ⥤ C} {R : C ⥤ D} (a : F ⊣ ((P ⋙ tensorRight L) ⋙ H)) (b : F ⊣ R) (q : ((P ⋙ tensorRight L) ⋙ H).obj I ≅ M) (z : M ≅ R.obj I) : ∃ adj : F ⊣ ((P ⋙ tensorRight L) ⋙ H), ((b.rightAdjointUniq adj).app I ≪≫ q).inv = z.hom",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T222634-L-676271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T222634-L-676271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

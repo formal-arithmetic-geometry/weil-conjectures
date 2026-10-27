@@ -1,0 +1,125 @@
+{
+ "id": "lem-sp-strict-system-geometric-realization",
+ "kind": "statement",
+ "title": "Coherent system and geometric coordinates on actual strict quotient towers",
+ "statement": "For each prime $\\ell$ and finite extension $E/\\mathbf Q_\\ell$, on the actual strict quotient systems with $R_n=\\mathcal O_E/\\ell^{n+1}$ there exist Base coordinates $b$ and Operations $o$ [def-sp-strict-compactification-comparison-interfaces] such that every selected calculus $b_T$ is the systems field of semilinear derived sections data [lem-coef-semilinear-derived-sections]. For all $r\\ge m\\ge n$, scalar extension of the scalar/tensor comparison for $r\\to m$, followed by that for $m\\to n$ and the tensor of scalar associators, equals the scalar associator on the tensor followed by the scalar/tensor comparison for $r\\to n$. For every scheme map $f$, scalar extension of its coefficient direct-image mate for $r\\to m$, followed by its mate for $m\\to n$ and direct image of the source scalar associator, equals the target scalar associator followed by the mate for $r\\to n$. The coefficient mates and scalar associators are exactly the normalized ones of the recorded calculus, including equal indices. This assertion does not assert open or compactification word evaluation, finite realization compatibility, or bounded-below compatibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps"
+ },
+ "stmt_deps": [
+  "def-sp-strict-compactification-comparison-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Construct Base b and Operations o with their semilinear-derived-sections witnesses, without asserting either three-index equation.",
+   "uses": [
+    "lem-sp-strict-coordinates-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic scalarTensor_composition theorem to b.calculus T. comparisonLevelTensor is definitionally its recorded level tensor, so this gives the scalar/tensor conjunct unchanged.",
+   "uses": [
+    "lem-sp-semilinear-scalar-tensor-composition",
+    "def-sp-strict-compactification-comparison-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficientPullback_composition to the generic geometry of each scheme map. Transpose the desired coefficient-mate equation through the level-n adjunction. Counit naturality moves the target scalar associator; mateEquiv_counit removes each of the three mates. Naturality of the intermediate square and source scalar associator reduce the result to the coefficientPullback_composition equation. This proves the geometric mate equation without inverting a mate or assuming derived evaluation is faithful.",
+   "uses": [
+    "lem-sp-semilinear-coefficient-pullback-composition",
+    "lem-weil-pbc-mate-pasting",
+    "def-sp-strict-compactification-comparison-interfaces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-strict-coordinates-existence",
+  "lem-sp-semilinear-scalar-tensor-composition",
+  "def-sp-strict-compactification-comparison-interfaces",
+  "lem-sp-semilinear-coefficient-pullback-composition",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "Paragraph (2): actual coordinates, scalar/tensor composition, and a proved counit-transpose reduction of coefficient-mate composition to the inverse-image coefficient square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical coefficient extension tensor associativity three indices semilinear derived systems normalized geometric operations",
+   "results": "8 hits: TensorProduct.tensorTensorTensorAssoc, Holor.mul_assoc, Holor.mul_assoc0, TensorProduct.assoc_tensor, TensorProduct.assoc_tensor'', TensorProduct.tensorTensorTensorAssoc_tmul, TensorProduct.assoc_tensor', TensorProduct.AlgebraTensorModule.assoc",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical/algebraic tools only; the project-specific normalized comparison is not stated in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical/algebraic tools only; the project-specific normalized comparison is not stated in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensor.*[Cc]omposition|coefficientMate.*[Cc]omposition",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical/algebraic tools only; the project-specific normalized comparison is not stated in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityStrictCompactificationComparisonRealization",
+  "date": "2026-10-25",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps",
+   "via": [
+    "lem-sp-strict-compactification-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityStrictSystemGeometricRealization",
+  "file": "lean/Sheaf/Paper/SmoothPurityStrictSystemGeometricRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.strictSystemGeometricRealization",
+  "statement": "theorem strictSystemGeometricRealization :\n    ∃ b : Base l E, ∃ o : Operations l E b,\n  (∀ T : Scheme.{u},\n    ∃ s : SemilinearSections.SemilinearDerivedSectionsData.{u + 1, u, u + 1}\n      (Scheme.ProEt.topology T) (B l E T) (tau l E T), s.systems = b.calculus T) ∧\n    (∀ (T : Scheme.{u}) {r m n : ℕ} (h : n ≤ m) (k : m ≤ r)\n    (K L : SemilinearSections.D.{u + 1, u, u + 1}\n      (Scheme.ProEt.topology T) (B l E T r)),\n    ((b.calculus T).scalar h).T.map\n        (((b.calculus T).scalarTensor k).hom.app (K, L)) ≫\n      ((b.calculus T).scalarTensor h).hom.app\n        (((b.calculus T).scalar k).T.obj K, ((b.calculus T).scalar k).T.obj L) ≫\n      (comparisonLevelTensor l E b T n).map\n        (Prod.mkHom (((b.calculus T).scalarComposition h k).hom.app K)\n          (((b.calculus T).scalarComposition h k).hom.app L)) =\n    ((b.calculus T).scalarComposition h k).hom.app\n        ((comparisonLevelTensor l E b T r).obj (K, L)) ≫\n      ((b.calculus T).scalarTensor (h.trans k)).hom.app (K, L)) ∧\n    (∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {r m n : ℕ} (h : n ≤ m) (k : m ≤ r)\n    (Q : SemilinearSections.D.{u + 1, u, u + 1}\n      (Scheme.ProEt.topology X) ((o.geometry f).generic.coefficients r)),\n    ((b.calculus Y).scalar h).T.map\n        ((comparisonCoefficientMate l E b o f k).app Q) ≫\n      (comparisonCoefficientMate l E b o f h).app\n        (((o.geometry f).generic.target.scalar k).T.obj Q) ≫\n      ((o.geometry f).generic.levelPush n).rightDerivedFunctor.map\n        (((o.geometry f).generic.target.scalarComposition h k).hom.app Q) =\n    ((b.calculus Y).scalarComposition h k).hom.app\n        (((o.geometry f).generic.levelPush r).rightDerivedFunctor.obj Q) ≫\n      (comparisonCoefficientMate l E b o f (h.trans k)).app Q)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-44687",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T143221-L-967072",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261027T034819-L-3689166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

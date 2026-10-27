@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-stable-curve-framed-trait-smoothing",
+ "kind": "statement",
+ "title": "Stable smoothing with a prescribed ten-canonical projective frame",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $g\\geq2$, and let $C/k$ be an unpointed stable genus-$g$ curve [def-sfb-stable-pointed-curve, def-sfb-stable-pointed-moduli-groupoids]. Put $r=19(g-1)$ and let a projective frame $\\tau:\\mathbf P(H^0(C,\\omega_C^{\\otimes10}))\\xrightarrow{\\sim}\\mathbf P^{r-1}_k$ be prescribed, using the dualizing-line and projective-frame conventions of [lem-sfb-ten-canonical-hilbert-parameter]. Let $R=k[[t]]$, $K=k((t))=R[1/t]$, and $S=\\operatorname{Spec}R$ [def-weil-pbc-multivariate-power-series, def-sc-discrete-valuation-ring]. There exist a projective flat finitely presented unpointed stable genus-$g$ family $f:\\mathcal C\\to S$, an isomorphism $\\mathcal C_k\\simeq C$, and a projective frame $\\widetilde\\tau:\\mathbf P(f_*\\omega_{\\mathcal C/R}^{\\otimes10})\\xrightarrow{\\sim}\\mathbf P^{r-1}_R$ restricting to $\\tau$. The generic fibre $\\mathcal C_K$ is smooth [def-sbc-smooth-morphisms]. The frame gives a closed relative complete ten-canonical embedding, hence a morphism $\\alpha:S\\to J$ whose special point is the prescribed framed curve, where $J$ is the ten-canonical Hilbert parameter over $k$ from [lem-sfb-ten-canonical-hilbert-parameter]. Its generic embedded curve has degree $20(g-1)$ and genus $g$.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Stacks Tags 0E7Y (examples-defos.tex lemma-smoothing-proper-curve-isolated-lci), 0E76 (moduli-curves.tex lemma-stable-curves), 0E78 (lemma-stable-one-piece-per-genus); Morrison Section 3.3 Corollary 11(2), printed p.17, smoothing and framing. Agent synthesis; local Morrison PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sc-discrete-valuation-ring",
+  "def-sfb-stable-pointed-curve",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-algebraic-closure",
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-sfb-ten-canonical-hilbert-parameter",
+  "def-sc-hilbert-degree",
+  "def-sc-genus"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sfb-stable-pointed-curve], $C$ is flat and finitely presented over $k$, with nonempty reduced nodal geometric fibre of pure dimension one. Because $k$ is algebraically closed, $C$ itself is its geometric fibre. Its projective-bundle morphism is proper by [lem-trf-projective-bundle-proper]. Apply [lem-trf-nodal-curve-lci-criterion] to $C/k$: its hypotheses of local finite type and equidimension one hold, and every closed point is smooth or a node by stability. We obtain that $C$ is a local complete intersection over $k$, and that its first-Fitting singular subscheme $Z$ is unramified over $k$.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "lem-trf-projective-bundle-proper",
+    "lem-trf-nodal-curve-lci-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4E, lemma-nodal-lci; properness: morphisms.tex Tag 01WC, lemma-locally-projective-proper"
+   }
+  },
+  {
+   "text": "By [lem-trf-nodal-family-fitting-singular], $|Z|$ is exactly the nonsmooth locus of $C/k$. By [lem-weil-pbc-unramified-over-field-discrete], $|Z|$ is discrete. It is a closed subset of the quasi-compact space $|C|$, hence quasi-compact; its cover by singleton opens therefore has a finite subcover. Thus $C/k$ is smooth away from finitely many closed points (each singleton is closed in $Z$, and $Z$ is closed in $C$). The empty singular locus is allowed.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-weil-pbc-unramified-over-field-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59, lemma-nodal-family, and 0C5B, lemma-base-change-nodal-family; morphisms.tex Tag 02G7, lemma-unramified-over-field"
+   }
+  },
+  {
+   "text": "The preceding steps verify all hypotheses of [lem-sfb-isolated-lci-curve-smoothing]: properness, the local complete-intersection condition, dimension at most one, and only finitely many nonsmooth points. It supplies a flat finitely presented projective $f:Y\\to S=\\operatorname{Spec}k[[t]]$, an isomorphism $Y_k\\simeq C$, and smooth generic fibre $Y_K$. Retain this chosen special-fibre isomorphism throughout.",
+   "uses": [
+    "lem-sfb-isolated-lci-curve-smoothing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7Y, lemma-smoothing-proper-curve-isolated-lci"
+   }
+  },
+  {
+   "text": "The family $Y/S$ is proper by [lem-kun-projective-implies-proper]. By [lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous], the locus where its fibres have dimension at most one is open and contains the closed point, since $Y_k\\simeq C$. $R=k[[t]]$ is local with maximal ideal $(t)$: a series is invertible exactly when its constant term is nonzero. An open of its spectrum containing the closed point is the whole spectrum: a basic open $D(a)$ inside it containing the maximal ideal has $a$ a unit, so $D(a)=S$. Thus every scheme-theoretic fibre $Y_s$ has dimension at most one. For a geometric point $\\operatorname{Spec}\\Omega\\to S$ over $s$, every point of $Y_s\\otimes_{\\kappa(s)}\\Omega$ has the same local fibre dimension as its image in $Y_s$ by [lem-sc-fibre-dimension-after-base-change] ($Y\\to S$ is of finite type); so every geometric fibre has dimension at most one. Apply [lem-sfb-stable-and-smooth-family-open-loci] to this proper flat finitely presented family. Its stable-genus-$g$ open contains the closed point and hence is all of $S$ by the same argument. Since this open is $S$, the identity of $S$ factors through it; its stated universal property now says that $f$ itself is an unpointed stable genus-$g$ family. Write $\\mathcal C=Y$. Its generic fibre remains smooth.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-sfb-stable-and-smooth-family-open-loci"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E76, lemma-stable-curves, and 0E78, lemma-stable-one-piece-per-genus; more-morphisms.tex Tag 0D4I, lemma-dimension-fibres-proper; morphisms.tex Tag 02FY, lemma-dimension-fibre-after-base-change, part (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-gorenstein-curve-relative-dualizing] to $f$: all geometric fibres are nonempty reduced pure-one-dimensional nodal curves, and $f$ is proper flat finitely presented. Its dualizing invertible module restricts to $\\omega_C$ under our chosen special-fibre isomorphism: the cited compatibility with base change and with isomorphisms of families gives this identification for that chosen isomorphism. Apply [lem-sfb-ten-canonical-hilbert-parameter] to this stable genus-$g$ family. The module $V=f_*\\omega_{\\mathcal C/R}^{\\otimes10}$ is locally free of rank $r=19(g-1)$ and commutes with arbitrary base change. In particular $V\\otimes_Rk\\simeq H^0(C,\\omega_C^{\\otimes10})$, and evaluation gives a closed complete ten-canonical embedding $\\mathcal C\\hookrightarrow\\mathbf P_S(V)$.",
+   "uses": [
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6R, lemma-gorenstein-dualizing; ten-canonical relative embedding as in the cited Hilbert-parameter node"
+   }
+  },
+  {
+   "text": "By the local-freeness definition [def-amb-finite-locally-free-module], some open neighbourhood of the closed point trivializes $V$. This open is all of $S$ by the basic-open argument of step 4. Choose $V\\simeq\\mathcal O_S^r$ and let $\\phi_0:\\mathbf P_S(V)\\simeq\\mathbf P^{r-1}_S$ be its induced projective frame. Let $\\phi_{0,k}$ denote its special-fibre frame, with the cohomological identification of step 5.",
+   "uses": [
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01C6 and 01C7, local-freeness definition; elementary local-spectrum argument"
+   }
+  },
+  {
+   "text": "The automorphism $a=\\tau\\circ\\phi_{0,k}^{-1}$ of $\\mathbf P^{r-1}_k$ is induced by some $A\\in\\operatorname{GL}_r(k)$ by [lem-sfb-projective-frames-pgl]: its assertion that matrices represent projective automorphisms Zariski locally is global on the one-point scheme $\\operatorname{Spec}k$. Here $r\\geq19$, so the cited hypothesis $r\\geq2$ holds. Regard $A$ and its inverse as constant matrices over $R$ via $k\\hookrightarrow k[[t]]$. The coefficient inclusion is a section of the residue map $R\\to k$, so their matrix products remain the identity and their reductions are the original matrices. Thus they induce an automorphism $\\widetilde a$ of $\\mathbf P^{r-1}_R$ reducing to $a$. Set $\\widetilde\\tau=\\widetilde a\\circ\\phi_0$. Then $\\widetilde\\tau_k=a\\circ\\phi_{0,k}=\\tau$, exactly the prescribed frame.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Projective-bundle quotient convention, Tag 01OA; matrix lifting is the agent argument using the cited projective-automorphism statement"
+   }
+  },
+  {
+   "text": "Compose the closed complete embedding of step 5 with $\\widetilde\\tau$. The functor represented by $J$ in [lem-sfb-ten-canonical-hilbert-parameter] takes precisely a stable genus-$g$ family with this projective frame, so the pair defines $\\alpha:S\\to J$. Its reduction is the framed curve $(C,\\tau)$ by steps 3 and 7. On the smooth generic stable fibre, [lem-sfb-stable-curve-pluricanonical-linear-series] at $n=10$ gives degree $10(2g-2)=20(g-1)$; its arithmetic genus is $g$ by step 4. All projectivity, flatness and finite-presentation conclusions were already supplied in step 3.",
+   "uses": [
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-stable-curve-pluricanonical-linear-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E8X, lemma-tricanonical (the n=3 source input of the cited general pluricanonical node), and Tag 0BS6, lemma-rr; represented functor of the ten-canonical Hilbert parameter"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-sfb-stable-pointed-curve",
+  "lem-kun-projective-implies-proper",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sfb-gorenstein-curve-relative-dualizing",
+  "lem-sfb-isolated-lci-curve-smoothing",
+  "lem-sfb-projective-frames-pgl",
+  "lem-sfb-stable-and-smooth-family-open-loci",
+  "lem-sfb-stable-curve-pluricanonical-linear-series",
+  "lem-sfb-ten-canonical-hilbert-parameter",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "lem-weil-pbc-unramified-over-field-discrete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7Y followed by moduli-curves.tex Tags 0E76, 0E78; explicit constant-matrix extension of the prescribed projective frame"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every stable curve over an algebraically closed field has a projective stable smoothing over the formal power series DVR with a prescribed projective frame of its ten-canonical embedding",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion, elliptic-reduction and smooth-morphism declarations do not state this family, polarization or deformation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nodal stable curve can be deformed to a smooth curve over k power series t with a framed relative pluricanonical embedding",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion, elliptic-reduction and smooth-morphism declarations do not state this family, polarization or deformation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Smoothing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration with the requested geometric notion"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth(ing|able)|pluricanonical|stableCurve|StableCurve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal stability, balanced-polarization, or stable-curve smoothing declaration in the searched source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothing of proper nodal stable curves over a power series trait and extension of a projective frame of pluricanonical sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{n : ℕ} →\\n  {X Y : AlgebraicGeometry.Scheme} →\\n    {f : X ⟶ Y} →\\n      {motive : AlgebraicGeometry.IsSmoothOfRelativeDimension n f → Sort u_1} →\\n        (t : AlgebraicGeometry.IsSmoothOfRelativeDimension n f) →\\n          ((exists_isStandardSmoothOfRelativeDimension :\\n                ∀ (x : ↥X),\\n    \", \"doc\": \"A recursor for the proposition that a morphism of schemes is smooth of relative dimension $n$. It allows proving properties about smooth morphisms by reducing to the case where the morphism is locally\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{n : ℕ} →\\n  {X Y : AlgebraicGeometry.Scheme} →\\n    {f : X ⟶ Y} →\\n      {motive : AlgebraicGeometry.IsSmoothOfRelativeDimension n f → Sort u_1} →\\n        (t : AlgebraicGeometry.IsSmoothOfRelativeDimension n f) →\\n          ((exists_isStandardSmoothOfRelativeDimension :\\n                ∀ (x : ↥X),\\n    \", \"doc\": \"A recursor for the proposition that a morphism of schemes is smooth of relative dimension $ n $. It allows proving properties about smooth morphisms by reducing to the case where the morphism is local\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial/support specialization, topological bundles and smoothness declarations do not state this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth(ing|able)|pluricanonical|StableCurve|stableCurve",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these smoothness, flatness and Weierstrass declarations do not construct a stable genus-at-least-two smoothing or extend its pluricanonical frame"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nodal stable curve admits a flat projective deformation over the power series ring with smooth generic fibre and extending a projective frame",
+   "results": "8 hits: Algebra.Smooth.flat, AlgebraicGeometry.IsSmooth.recOn, RingHom.Flat.isStableUnderBaseChange, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.IsSmooth.casesOn, Module.Flat.of_projective, Algebra.FormallySmooth.mk, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: these smoothness, flatness and Weierstrass declarations do not construct a stable genus-at-least-two smoothing or extend its pluricanonical frame"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Smoothing\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these smoothness, flatness and Weierstrass declarations do not construct a stable genus-at-least-two smoothing or extend its pluricanonical frame"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every stable curve over an algebraically closed field admits a projective smoothing over k[[t]] extending a prescribed projective frame of its tenth canonical linear series",
+   "results": "8 hits: WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Projective.nonsingularLift_iff, WeierstrassCurve.Projective.nonsingularLift_some, WeierstrassCurve.Projective.Point.nonsingular, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, WeierstrassCurve.minimal, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-22",
+   "verdict": "no match: these smoothness, flatness and Weierstrass declarations do not construct a stable genus-at-least-two smoothing or extend its pluricanonical frame"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformations of proper curves with ordinary double points are smoothable and a basis of pluricanonical sections extends across a local trait",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: these smoothness, flatness and Weierstrass declarations do not construct a stable genus-at-least-two smoothing or extend its pluricanonical frame"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. Re-split of lem-sfb-gieseker-ten-canonical-hilbert-stability: old steps 7--8, smoothing and extension of the prescribed projective frame",
+   "via": [
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stable-curve-framed-trait-smoothing",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused existing nodal lci and isolated projective smoothing nodes, verified finite singular support, used stable-genus openness on the local trait, and extended the prescribed frame by a constant invertible matrix after trivializing the locally free section module. No new nodes. Returned-delivery repair: reapplied the split-owned fields onto the current live unsplit node, re-read all 14 cited nodes, and verified that all 15 retained full-statement quotes still agree verbatim. Made the algebraically closed geometric-fibre check explicit in step 1 and corrected the Tag 0E8X source label in step 8. Current repair retry: reconstructed again from the live unsplit JSON, preserved all non-split fields, and made explicit both the local-ring unit test used for the open loci and the coefficient-inclusion/residue identity used to extend the exact frame. Repair on 2026-10-23: rebuilt from the current live unsplit record after dry-run 74b4220ef72; all fourteen cited statements and fifteen full-statement quotes remain unchanged. Steps 4 and 5 now spell out the identity-factorization application of the stable-open universal property and the dualizing identification along the chosen special-fibre isomorphism.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. Re-split of lem-sfb-gieseker-ten-canonical-hilbert-stability: old steps 7--8, smoothing and extension of the prescribed projective frame; steps 1--4 realize smoothing; steps 5--8 realize extension of the prescribed frame and the resulting Hilbert point. Ancestor command returns null as in the current imported chain; whole-blueprint searches found no matching statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic properness of a projective-bundle morphism, used only to check the smoothing hypothesis for C; no node of this unit gives this general comparison."
+   },
+   {
+    "node": "lem-trf-nodal-curve-lci-criterion",
+    "why": "Generic field-curve nodal/lci recognition, used to verify the input of the existing smoothing theorem; no unit route is replaced."
+   },
+   {
+    "node": "lem-trf-nodal-family-fitting-singular",
+    "why": "Identifies the first-Fitting support with the nonsmooth locus; this generic local geometry tool is needed to verify finite singular support."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-over-field-discrete",
+    "why": "Only discreteness of an unramified field-scheme is used; compactness then gives finite support. This is a generic topological tool, absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "why": "Only the open locus of fibre dimension at most one is used before applying the curve-family stable open; no finiteness or alteration unit route is replaced."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic properness of a finite-projective-space projective morphism, used in step 4 for the smoothing family; no node of this unit gives it (accepted as a tool in lem-sfb-common-nodal-model)."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Local fibre dimension is invariant under base change of a finite-type morphism; used in step 4 to pass from scheme fibres to geometric fibres for the stable-open input; generic tool (accepted in lem-sfb-finite-normal-relative-curve-model)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-weil-pbc-unramified-over-field-discrete",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "lem-kun-projective-implies-proper",
+  "lem-sc-fibre-dimension-after-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-6bbaec0ac",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-6bbaec0ac (reviewer sub-agent of L); spot-checked: Fourth delivery of this one-level split (no new nodes, no unit change), rebuilt from the live unsplit JSON. Again it lost the step-4 fix from my earlier FIXes (a94d2f9e, fa7a9ba0, 40d14073). The statement, stmt_deps, source and ancestry are unchanged. I diffed this head against the 40d1 head and fix. There are two new sentences, both correct. In step 4: because the stable open equals S, the identity factors through it, and the open's universal property then makes f stable. In step 5: the dualizing identification is taken along the chosen isomorphism Y_k≅C, which the Gorenstein node's stated compatibility with isomorphisms of families justifies. I re-read all 15 cited statements in this snapshot, and in the source 0E7Y (examples-defos l.3112), 0E76 (l.2462) and 02FY (morphisms l.5425). Steps 1-3 and 5-8 are sound. 0C4E gives lci and unramified Sing. 0C59 and 02G7 plus quasi-compactness give finitely many singular points. 0E7Y gives a flat projective finitely presented family over the specified k[[t]] with smooth generic fibre. An open of Spec k[[t]] containing the closed point is everything. V is free over the local ring. A constant GL_r(k) lift gives exactly tau, with r>=19. The n=10 pluricanonical node gives dimension 19(g-1) and degree 20(g-1). Edge cases checked: smooth C, g=2, reducible C, characteristic p including 2. Fault C1 (repeated): step 4 bounds only scheme-theoretic fibres (0D4I), but lem-sfb-stable-and-smooth-family-open-loci requires geometric fibres of dimension <=1. The fix file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stable-curve-framed-trait-smoothing.json, built from this head. In step 4 it adds the passage to geometric fibres via [lem-sc-fibre-dimension-after-base-change] (02FY(1)) and adds 02FY to the source place, keeping the worker's new sentence; the step is 1293 characters. It sets proof_deps to the union of the step uses and appends two generic tool_uses (lem-kun-projective-implies-proper, lem-sc-fibre-dimension-after-base-change). Batch-5 flags: isolated-lci-curve-smoothing (reaches only the pure-algebra lci pointwise criterion), stable-and-smooth-family-open-loci (reaches only def-trf-algebraic-space, a definition), nodal-curve-lci-criterion (0C4E), nodal-family-fitting-singular (0C59) and projective-bundle-proper (01WC) are all generic geometry, neither statements nor proof steps of the trace formula or Poincare duality, so I accept them. There is no SGA citation and Morrison is still WANTED (the proof is marked agent synthesis). Maintainer note: this FIX has been lost on three re-deliveries in a row. Promote the item from this fixes/ file. Do not rebuild it from the live unsplit JSON.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableCurveFramedTraitSmoothing",
+  "declaration": "AlgebraicGeometry.stable_curve_framed_trait_smoothing",
+  "declarations": [
+   "AlgebraicGeometry.StableCurveFramedTrait.base",
+   "AlgebraicGeometry.StableCurveFramedTrait.special",
+   "AlgebraicGeometry.StableCurveFramedTrait.generic",
+   "AlgebraicGeometry.stable_curve_framed_trait_smoothing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StableCurveFramedTraitSmoothing.lean",
+  "statement": "theorem stable_curve_framed_trait_smoothing (k : Type u) [Field k] [IsAlgClosed k] (g : ℕ) (P : TenCanonicalHilbert.Presentation k g) (C : StablePointedModuli (Spec (.of k)) g 0) (c : Over.mk (𝟙 (Spec (.of k))) ≅ C.base) (tau : TenCanonicalHilbert.Frame (P.series C) c.hom.left) : ∃ (X : StablePointedModuli (Spec (.of k)) g 0) (a : StableCurveFramedTrait.base k ≅ X.base) (phi : TenCanonicalHilbert.Frame (P.series X) a.hom.left) (e : pullback (pullback.snd X.projection a.hom.left) (StableCurveFramedTrait.special k).left ≅ pullback C.projection c.hom.left) (alpha : StableCurveFramedTrait.base k ⟶ P.J) (beta : Over.mk (𝟙 (Spec (.of k))) ⟶ P.J), IsHProjective (pullback.snd X.projection a.hom.left) ∧ Flat (pullback.snd X.projection a.hom.left) ∧ LocallyOfFinitePresentation (pullback.snd X.projection a.hom.left) ∧ QuasiCompact (pullback.snd X.projection a.hom.left) ∧ QuasiSeparated (pullback.snd X.projection a.hom.left) ∧ e.hom ≫ pullback.snd C.projection c.hom.left = pullback.snd (pullback.snd X.projection a.hom.left) (StableCurveFramedTrait.special k).left ∧ pullback.fst (pullback.snd X.projection a.hom.left) (StableCurveFramedTrait.special k).left ≫ TenCanonicalHilbert.baseEmbedding (P.series X) a.hom.left ≫ phi.hom.left = e.hom ≫ TenCanonicalHilbert.baseEmbedding (P.series C) c.hom.left ≫ tau.hom.left ≫ ProjectiveSpace.map (TenCanonicalHilbert.Coordinates g) (StableCurveFramedTrait.special k).left ∧ Smooth (pullback.snd (pullback.snd X.projection a.hom.left) (StableCurveFramedTrait.generic k)) ∧ P.hilbert.Classifies P.inclusion (P.series X) a.hom phi alpha ∧ P.hilbert.Classifies P.inclusion (P.series C) c.hom tau beta ∧ StableCurveFramedTrait.special k ≫ alpha = beta ∧ (pullback.snd (pullback.snd X.projection a.hom.left) (StableCurveFramedTrait.generic k)).degree ((Scheme.Modules.tensorPullback (pullback.fst (pullback.snd X.projection a.hom.left) (StableCurveFramedTrait.generic k) ≫ TenCanonicalHilbert.baseEmbedding (P.series X) a.hom.left ≫ phi.hom.left)).obj (ProjectiveSpace.twist (TenCanonicalHilbert.Coordinates g) (StableCurveFramedTrait.base k).left 1)) = 20 * ((g : ℤ) - 1) ∧ (pullback.snd (pullback.snd X.projection a.hom.left) (StableCurveFramedTrait.generic k)).genus = g",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Base isomorphisms rigidify the recorded stable-family objects over Spec k and the specified trait. The actual smoothing is their indicated pullback. Equality of complete evaluation embeddings records the exact special-frame restriction; Classifies records the resulting Hilbert maps. The added existing dependencies supply the generic Hilbert degree and smooth-curve genus."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43f15d47b",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Item node equals live except the lean record and two landed stmt_deps (def-sc-hilbert-degree, def-sc-genus, each with a lean record). lean.statement is verbatim. Clause check: k IsAlgClosed; C : StablePointedModuli (Spec k) g 0 with base iso c (g≥2 from genus_at_least_two); tau is an actual Frame (iso of quotient bundles); trait base/special/generic are real ring maps (PowerSeries.C, constantCoeff, LaurentSeries algebraMap); the family is pullback.snd X.projection a.hom.left, which is IsHProjective/Flat/LFP/QC/QS; e is an iso over k; the frame restriction is equality of complete embeddings through e (equivalent to frame equality since the connected curve is nondegenerate, and satisfiable); Smooth generic fibre; alpha and beta are pinned by Classifies + represents with special≫alpha=beta; Scheme.Hom.degree over k((t)) of O(1) pulled back along the framed embedding = 20(g-1); Scheme.Hom.genus = g. Edge cases: g=2, char 2, smooth C, reducible C; single universe u. Docstrings have the source and blueprint tag and follow all 8 steps; only sorry; all imports exist. No compile (no change). Advisory: the added stmt_deps are not bracket-cited."
+ }
+}

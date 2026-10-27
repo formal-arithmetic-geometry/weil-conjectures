@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-adequate-integral-comparison-finite",
+ "kind": "statement",
+ "title": "Finiteness over an integral map of adequate moduli spaces",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal U,\\mathcal V$ be algebraic stacks of finite type over $k$ (finite type tested on smooth scheme charts), and let $p:\\mathcal U\\to P$ and $q:\\mathcal V\\to Q$ be adequate moduli spaces [def-sfb-adequate-moduli-space]. Let $f:\\mathcal U\\to\\mathcal V$ and $g:P\\to Q$ be $k$-morphisms with a specified 2-isomorphism $qf\\simeq gp$. Assume that $f$ is representable by algebraic spaces, quasi-finite and separated, that $g$ is integral, and that $|f|$ sends every closed point of $|\\mathcal U|$ to a closed point of $|\\mathcal V|$. Then $f$ is finite. Here representable means that every pullback by a scheme is an algebraic space [def-trf-algebraic-space]; quasi-finite and separated mean finite type with finite geometric fibres and closed relative diagonal on these algebraic-space tests. Finite type uses [def-weil-finite-type-morphism]. Finite and integral for representable maps mean that every scheme base change is a scheme with the respective property [def-weil-finite-integral-morphism]. The point space of a stack is the set of field-valued objects up to isomorphism after common field extension, with the topology detected by a smooth scheme atlas; a closed point means a closed singleton in this topology. As in the source's Section 2 conventions, assume also that the diagonals of $\\mathcal U$ and $\\mathcal V$ are quasi-compact and separated (tested after scheme charts, with quasi-compactness as in [def-sfb-stack-qcqs-morphism]).",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Lemma 8.3.1, hypotheses (a)--(c), printed p.39. Primary PDF read online at https://arxiv.org/pdf/1005.2398v3; local PDF WANTED.",
+  "url": "https://arxiv.org/pdf/1005.2398v3"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-stack-quasifinite-relative-normalization] to $f$. Its representability, quasi-finiteness, separatedness and diagonal assumptions are exactly those stated here. Obtain $f=hj$ with $j:\\mathcal U\\hookrightarrow\\mathcal N=\\underline{\\operatorname{Spec}}_{\\mathcal V}\\mathcal A$ open and $h$ integral, where $\\mathcal A\\subseteq f_*\\mathcal O_{\\mathcal U}$ is the integral-closure algebra. Retain this actual algebra: replacing it by an arbitrary finite Zariski-main envelope would not justify the section comparison below.",
+   "uses": [
+    "lem-sfb-stack-quasifinite-relative-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 8.3.1, printed p.39; integral-relative-normalization expansion of the factorization and Lemma 5.2.11 step."
+   }
+  },
+  {
+   "text": "The section formula of [def-sfb-stack-quasi-coherent-algebra] and the specified $qf\\simeq gp$ identify $(qf)_*\\mathcal O_{\\mathcal U}=g_*p_*\\mathcal O_{\\mathcal U}=g_*\\mathcal O_P$, using the structure-sheaf isomorphism of [def-sfb-adequate-moduli-space]. Thus $q_*\\mathcal A$ is a subalgebra of $g_*\\mathcal O_P$. Conversely take an affine etale test $T=\\operatorname{Spec}R\\to Q$. Since $g$ is integral, $P_T=\\operatorname{Spec}B$ with every $b\\in B$ satisfying a monic polynomial over $R$. The corresponding section on $\\mathcal U_T$ satisfies the same polynomial after restriction to each smooth affine chart $S\\to\\mathcal V_T$. Its coefficients now lie in $\\Gamma(S,\\mathcal O_S)$, so the section belongs to the integral-closure algebra $\\mathcal A|_S$ of step 1. These restrictions agree because they are restrictions of the same section; hence they glue as a section of $\\mathcal A$ on $\\mathcal V_T$. Therefore $q_*\\mathcal A=g_*\\mathcal O_P$ on every affine etale test, with the same restriction maps.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "def-sfb-adequate-moduli-space",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-stack-quasifinite-relative-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 8.3.1, printed p.39; integral-relative-normalization expansion of the factorization and Lemma 5.2.11 step."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-adequate-relative-spectrum] to $q$ and $\\mathcal A$. The resulting adequate moduli space is $\\bar p:\\mathcal N\\to\\underline{\\operatorname{Spec}}_Q(q_*\\mathcal A)$. Step 2 identifies its target with $\\underline{\\operatorname{Spec}}_Q(g_*\\mathcal O_P)=P$: on each affine etale $T\\to Q$ this is the identity $\\operatorname{Spec}B=P_T$, since $g$ is integral and hence affine on scheme tests. The evaluation maps give $\\bar p j\\simeq p$; on every such test their maps of functions both send $b$ to its pullback on $\\mathcal U_T$. Thus the original moduli morphism and the one on the normalization have the same target, without assuming arbitrary base change preserves adequate moduli spaces.",
+   "uses": [
+    "lem-sfb-adequate-relative-spectrum",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 8.3.1, printed p.39; integral-relative-normalization expansion of the factorization and Lemma 5.2.11 step."
+   }
+  },
+  {
+   "text": "By [lem-sfb-integral-stack-closed-point-topology], $h$ is closed and every point over a closed point of $\\mathcal V$ is closed in $\\mathcal N$. If $C\\subseteq|\\mathcal N|$ is nonempty closed, then $h(C)$ is nonempty closed in $|\\mathcal V|$. By [lem-sfb-finite-type-stack-closed-specialization] it contains a closed point $v$; any $x\\in C$ over $v$ is closed in $\\mathcal N$. Hence every nonempty closed subset of $|\\mathcal N|$ has a closed point, although $\\mathcal N$ was not assumed Noetherian. Moreover, if $u$ is closed in $\\mathcal U$, then $f(u)$ is closed by the hypothesis on $f$, and $h(j(u))=f(u)$ shows that $j(u)$ is closed in $\\mathcal N$.",
+   "uses": [
+    "lem-sfb-integral-stack-closed-point-topology",
+    "lem-sfb-finite-type-stack-closed-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 8.3.1, printed p.39; integral-relative-normalization expansion of the factorization and Lemma 5.2.11 step."
+   }
+  },
+  {
+   "text": "If the complement of the open $j(\\mathcal U)$ is nonempty, step 4 supplies a point $x$ in that complement closed in $\\mathcal N$. By [lem-sfb-adequate-moduli-topological-images] applied to $\\bar p$, its image $y=\\bar p(x)$ is closed: the singleton $\\{x\\}$ is a reduced closed substack by [lem-sfb-smooth-presentation-closed-subsets], and adequate moduli morphisms have closed images. The same adequate-moduli theorem applied to $p$ makes $p^{-1}(y)$ nonempty; it is closed by continuity. By [lem-sfb-finite-type-stack-closed-specialization] choose a point $u$ of this fibre closed in $\\mathcal U$. Then $j(u)$ is closed in $\\mathcal N$ by step 4. Apply the intersection-of-closed-images clause to the reduced singleton substacks $\\{x\\}$ and $\\{j(u)\\}$ of $\\mathcal N$. Both images are $\\{y\\}$, so their intersection has nonempty image. Their underlying singleton subsets must intersect, giving $x=j(u)$, a contradiction.",
+   "uses": [
+    "lem-sfb-adequate-moduli-topological-images",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-finite-type-stack-closed-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 8.3.1, printed p.39; integral-relative-normalization expansion of the factorization and Lemma 5.2.11 step."
+   }
+  },
+  {
+   "text": "Therefore $j$ is a surjective open immersion, hence an isomorphism: on each scheme test its open subscheme has the whole underlying space and thus is the entire scheme. Consequently $f$ is integral, since it is identified with $h$ from step 1. For every scheme $T\\to\\mathcal V$, integrality makes $\\mathcal U\\times_{\\mathcal V}T$ a scheme integral over $T$; the finite-type assumption in quasi-finiteness makes this map locally of finite type. Apply [pqf-lem-integral-lft-finite] to this scheme morphism. Every such test is finite, which is exactly the stated finiteness of $f$.",
+   "uses": [
+    "pqf-lem-integral-lft-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 8.3.1, printed p.39; integral-relative-normalization expansion of the factorization and Lemma 5.2.11 step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-quasifinite-relative-normalization",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-adequate-moduli-space",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-adequate-relative-spectrum",
+  "lem-sfb-integral-stack-closed-point-topology",
+  "lem-sfb-finite-type-stack-closed-specialization",
+  "lem-sfb-adequate-moduli-topological-images",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "pqf-lem-integral-lft-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper Lemma 8.3.1, printed p.39, expanded using relative normalization, Lemma 5.2.11 and Theorem 5.3.1(1),(2),(4). Local literature PDF WANTED; primary PDF read online. Agent supplies the section-algebra comparison in place of the terse base-replacement sentence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A representable quasi finite separated morphism between algebraic stacks with adequate moduli spaces is finite if the map of moduli spaces is integral and closed points map to closed points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or ordinary category theory; none states the adequate-moduli or algebraic-stack assertion, nor specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness criterion for a quasi finite map of stacks over an integral map of adequate quotients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or ordinary category theory; none states the adequate-moduli or algebraic-stack assertion, nor specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.ContainsIdentities @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `X ⟶ Y` is finite if\\nthe preimage of any affine open subset of `Y` is affine and the induced ring\\nhom is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsAffineHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or ordinary category theory; none states the adequate-moduli or algebraic-stack assertion, nor specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|adequatelyAffine|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or ordinary category theory; none states the adequate-moduli or algebraic-stack assertion, nor specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli spaces integral comparison quasi finite separated map preserving closed points is finite",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [IsFinite (f ≫ g)] [IsSeparated g] : IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or ordinary category theory; none states the adequate-moduli or algebraic-stack assertion, nor specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"adequate\"",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"adequate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "adequate|AlgebraicStack|ZariskisMain|toNormalization",
+   "results": "{\"t\": \"2026-10-23T10:48:33Z\", \"tool\": \"grep\", \"query\": \"adequate|AlgebraicStack|ZariskisMain|toNormalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"acf18d26c137ab38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski main theorem for a representable quasi finite separated morphism of algebraic stacks via integral closure",
+   "results": "{\"t\": \"2026-10-23T11:25:59Z\", \"tool\": \"leansearch\", \"query\": \"Zariski main theorem for a representable quasi finite separated morphism of algebraic stacks via integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.ZariskisMainProperty\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"Algebra.zariskisMainProperty_iff'\", \"Algebra.zariskisMainProperty_iff\", \"integralClosure\", \"Algebra.ZariskisMainProperty.restrictScalars\", \"Algebra.ZariskisMainProperty.trans\"], \"digest\": \"a6c1f3d1a56d773f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi finite separated map of algebraic stacks preserving closed points is finite over an integral map of adequate moduli spaces",
+   "results": "{\"t\": \"2026-10-23T11:49:53Z\", \"tool\": \"leansearch\", \"query\": \"A quasi finite separated map of algebraic stacks preserving closed points is finite over an integral map of adequate moduli spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsFinite.of_comp\", \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\"], \"digest\": \"d6dcccb2a2566906\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned IsFinite, IsIntegralHom, LocallyQuasiFinite and composition declarations; all concern schemes, not adequate moduli spaces or algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-23T11:49:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"d8d1e1ba79c5fa21\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned IsFinite, IsIntegralHom, LocallyQuasiFinite and composition declarations; all concern schemes, not adequate moduli spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite separated representable morphism between finite type algebraic stacks with quasi compact separated diagonals is finite if it preserves closed points and induces an integral map of adequate moduli spaces",
+   "results": "{\"t\": \"2026-10-23T11:49:56Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi finite separated representable morphism between finite type algebraic stacks with quasi compact separated diagonals is finite if it preserves closed points and induces an integral map of adequate moduli spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"961d4655ea7990ae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned IsFinite, IsIntegralHom, LocallyQuasiFinite and composition declarations; all concern schemes, not adequate moduli spaces or algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-quasifinite-diagonal-finite",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit",
+   "via": [
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-integral-comparison-finite",
+  "worker": "stage1",
+  "summary": "Q149: expanded Alper Lemma 8.3.1 into the relative-normalization algebra comparison, the adequate relative-Spec theorem, and a closed-singleton intersection contradiction. Restored the source Section 2 diagonal conventions explicitly. Four genuine supporting nodes, no Mathlib leaves; existing topological adequate-moduli statements reused.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Six steps realize the integral-comparison prerequisite; newest blueprint direct-images proof paragraph (3) is the route ancestor named by this inherited place. blueprint_refs.py ancestor returns None, retained honestly.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-integral-lft-finite",
+    "why": "Generic scheme-test finiteness criterion, integral plus locally finite type; no adequate-moduli input or replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-integral-lft-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-192160fdf",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-192160fdf (reviewer sub-agent of L); spot-checked: I read Alper arXiv:1005.2398v3 §2 (p.7), Lemma 5.2.11 (p.28), Thm 5.3.1 (pp.29-30) and Lemma 8.3.1 with its proof (p.39). The item matches (a)-(c). The added qc-separated-diagonal clause is Alper's §2 convention and is named in the report. Its only citer, lem-sfb-adequate-quasifinite-diagonal-finite step 4, satisfies the clause (Δ_X is quasi-finite and separated; Δ_{X×X}=Δ_X×Δ_X) but does not say so; maintainer note: add one sentence there. Steps: (1) the relative-normalization node gives f=hj with the specific integral-closure A. (2) q_*A=g_*O_P is elementary: the inclusion comes from the O_P≅p_*O_U and section formulas, the reverse from a monic polynomial over R restricted to smooth charts. (3) Lemma 5.2.11 makes N→Spec_Q(g_*O_P)=P adequate with p̄j≃p; this avoids base change of adequate moduli spaces. (4) h is closed, points over closed points are closed, so every nonempty closed set of N has a closed point, and j(u) is closed. (5) The closed images and surjectivity from 5.3.1(1),(2) and the intersection clause (4) on reduced singleton substacks force x=j(u), a contradiction. (6) j is an isomorphism; pqf-lem-integral-lft-finite (01WJ, a generic tool) then gives finiteness. New nodes are true and not duplicates: the normalization node (082J/082F read; the space-level lem-sfb-space-quasifinite-integral-compactification differs); the relative-spectrum node (Alper 5.2.11; closed-substack-affinization is only the special case); the closed-specialization node (06R6/0DQI/0DQQ read; existing nodes cover spaces only); the integral closed-point node (0H22/0H27/02NT; I checked the fibre-orbit argument independently). Batch-5 flags are all general definitions or generic stack-topology lemmas reaching sec-trace-formula only through def-trf-algebraic-space / def-trf-space-quasi-coherent-module, outside both assumptions; accepted. No SGA anywhere. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateIntegralComparisonFinite",
+  "declaration": "CategoryTheory.adequate_integral_comparison_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateIntegralComparisonFinite.lean",
+  "statement": "theorem adequate_integral_comparison_finite (k : Type u) [Field k] (U : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (V : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))) (hU : IsAlgebraicModuliStack U) (hV : IsAlgebraicModuliStack V) (hUft : ∃ (T : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj T)) U), IsSmoothModuliAtlas U T a ∧ LocallyOfFiniteType T.hom ∧ QuasiCompact T.hom) (hVft : ∃ (T : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj T)) V), IsSmoothModuliAtlas V T a ∧ LocallyOfFiniteType T.hom ∧ QuasiCompact T.hom) (P Q : AlgebraicSpace (Spec (.of k))) (p : BasedFunctor U (discreteModuli P.obj.obj)) (q : BasedFunctor V (discreteModuli Q.obj.obj)) (hp : IsAdequateModuliSpace U hU P p) (hq : IsAdequateModuliSpace V hV Q q) (f : BasedFunctor U V) (g : P ⟶ Q) (square : ModuliTwoIso (f.comp q) (p.comp (discreteModuliMap g.hom.hom))) (hf : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) V), ∃ (Z : AlgebraicSpace (Spec (.of k))) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T t Z a ∧ AlgebraicSpace.MapIsQuasiCompact a ∧ AlgebraicSpace.MapToSchemeIsLocally (fun _ _ b ↦ LocallyOfFiniteType b ∧ LocallyQuasiFinite b) Z T a ∧ AlgebraicSpace.MapToSchemeIsSeparated Z T a) (hg : AlgebraicSpace.IsRepresentableWith (fun _ _ a ↦ IsIntegralHom a.left) g.hom.hom) (hclosed : ∀ x : ModuliPoints U, IsClosed ({x} : Set (ModuliPoints U)) → IsClosed ({moduliPointMap f x} : Set (ModuliPoints V))) (hUdiag : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct (moduliBaseStructure U) (moduliBaseStructure U))), ∃ (Z : AlgebraicSpace (Spec (.of k))) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliRelativeDiagonal (moduliBaseStructure U)) T t Z a ∧ AlgebraicSpace.MapIsQuasiCompact a ∧ AlgebraicSpace.MapToSchemeIsSeparated Z T a) (hVdiag : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct (moduliBaseStructure V) (moduliBaseStructure V))), ∃ (Z : AlgebraicSpace (Spec (.of k))) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliRelativeDiagonal (moduliBaseStructure V)) T t Z a ∧ AlgebraicSpace.MapIsQuasiCompact a ∧ AlgebraicSpace.MapToSchemeIsSeparated Z T a) : IsRepresentableFiniteModuliMap f",
+  "branch": "sheaf-dag",
+  "by": "Q94",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "General algebraic stacks, smooth finite-type atlases, specified 2-commutative square, scheme-test integrality, actual algebraic-space representability/quasi-finiteness/separatedness tests, smooth-atlas closed points and qc separated diagonals. The closed-point hypothesis uses the existing moduliPointTopologicalSpace instance owned by def-sfb-stack-point-topological-space; the smooth-presentation theorem remains only a proof dependency. Reuses landed definitions without adding any construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cadc5faa4",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Re-delivery after the 66aecc7a43f2 RETURN. The requested fix is made exactly: stmt_deps lem-sfb-smooth-presentation-closed-subsets -> def-sfb-stack-point-topological-space (theorem kept in proof_deps); public import StackPointTopologyFlatLfpOpen, plain import of the proof-dep module; hclosed uses the instance moduliPointTopologicalSpace (sup of coinduced topologies over smooth surjective atlases, existing:true Q139 record). moduliSmoothPointTopology is a def, not an instance, so there is no instance clash. lean.statement matches the file verbatim. Snapshot vs the prior head and side-live: only the item node (lean, stmt_deps), the module and the report differ; dep records are unchanged. All other clauses (smooth finite-type atlases, adequate p/q, ModuliTwoIso square as data, hf representable/qc/LFT+LQF/separated, integral g, qc separated diagonals, IsRepresentableFiniteModuliMap conclusion, universes, docstrings with source and blueprint, sorry-only proof) re-checked and correct. No compile needed (no file changed)."
+ }
+}

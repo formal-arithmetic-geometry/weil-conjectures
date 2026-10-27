@@ -1,0 +1,404 @@
+{
+ "id": "lem-sfb-euclidean-fixed-support-rellich",
+ "kind": "statement",
+ "title": "Euclidean Rellich compactness with a fixed compact support",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $m\\geq1$ and $r\\geq0$ be integers and let $K\\subset\\mathbf R^m$ be compact. Let $(f_n)_{n\\geq1}$ be Lebesgue-measurable functions $\\mathbf R^m\\to\\mathbf R^r$ modulo almost-everywhere equality, vanishing almost everywhere outside $K$. Assume that their first distributional derivatives belong to $L^2$ and $\\sup_n(\\|f_n\\|_2^2+\\sum_{j=1}^m\\|\\partial_j f_n\\|_2^2)<\\infty$, where $\\|f\\|_2^2=\\int_{\\mathbf R^m}|f|^2$ and $\\langle\\partial_j f,\\varphi\\rangle=-\\int f\\partial_j\\varphi$ for compactly supported smooth test functions $\\varphi$. There exist a strictly increasing sequence of indices $(n_k)$ and $f\\in L^2(\\mathbf R^m,\\mathbf R^r)$, vanishing almost everywhere outside $K$, such that $\\|f_{n_k}-f\\|_2\\to0$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §2 Rellich lemma (2.2), printed p.289; supporting fixed-support Euclidean compactness. Supplemental online Demailly course Differential and pseudodifferential operators on manifolds, §2, Lemma 2.7 proof, pp.5–6 (t=1, s=0); its Euclidean derivative-norm form is stated here. WANTED locally; supplemental source read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $r=0$, every term is zero and the identity subsequence works. For $r>0$, choose $M>0$ bounding the displayed energy. Fix a coordinate $a$ and put $u_n=(f_n)_a$, viewed also as a complex function with zero imaginary part. Its scalar energy is at most $M$: the coordinate square is at most the vector norm square for the function and each derivative. The weak derivative identity passes to coordinates and to complex test functions by real and imaginary parts. We prove that $(u_n)$ has an L2 Cauchy subsequence; at the end we extract successively for the finitely many coordinates.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2 Lemma 2.7, pp.5–6, t=1 and s=0; agent-written specialization and explicit details."
+   }
+  },
+  {
+   "text": "Let $h_n(\\xi)=\\int e^{-2\\pi i x\\cdot\\xi}u_n(x)\\,dx$. The fixed-support estimate gives continuous representatives with common bound $B=\\operatorname{vol}(K)^{1/2}\\sqrt M$ and Lipschitz constant $L=2\\pi(\\int_K|x|^2)^{1/2}\\sqrt M$. The L1/L2 realization identifies these integrals with $\\mathcal F_2u_n$ and gives $\\|h_n-h_l\\|_2=\\|u_n-u_l\\|_2$. Apply the existing weak-derivative Fourier identity with $\\alpha=e_j$ and $v=\\partial_j u_n$: its compact-test hypothesis is exactly ours, and all these functions are L2. Thus $\\mathcal F_2(\\partial_j u_n)=2\\pi i\\xi_j h_n$ almost everywhere. Taking squared L2 norms and using the realization's isometry gives $4\\pi^2\\int\\xi_j^2|h_n|^2=\\|\\partial_j u_n\\|_2^2$. Sum over $j$ and add $\\int|h_n|^2=\\|u_n\\|_2^2$ to obtain $\\int(1+4\\pi^2|\\xi|^2)|h_n|^2\\leq M$.",
+   "uses": [
+    "lem-sfb-l1-l2-fourier-realization",
+    "lem-sfb-fixed-support-fourier-lipschitz",
+    "lem-sfb-l2-weak-derivative-fourier-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2 Lemma 2.7, pp.5–6, t=1 and s=0; agent-written specialization and explicit details."
+   }
+  },
+  {
+   "text": "For each positive integer $j$, let $D_j=\\{\\xi:|\\xi|\\leq j\\}$. The properness result over the usual locally compact field $\\mathbf R$ makes $D_j$ compact, and over $\\mathbf C$ makes the closed disk $Q=\\{z:|z|\\leq B\\}$ compact. Restrict $h_n$ to $D_j$. These are bounded continuous maps with values in $Q$. The common Lipschitz constant gives equicontinuity directly: choose radius $\\epsilon/(1+L)$ when $L$ is that constant. Ascoli therefore makes their closure compact in the uniform metric; the compact-metric subsequence theorem gives a subsequence converging in that metric on $D_j$. The same conclusion applies to any previously selected subsequence, since both bounds persist.",
+   "uses": [
+    "lem-sfb-finite-dimensional-normed-proper",
+    "lem-sfb-ascoli-compact-closure",
+    "lem-sfb-compact-metric-subsequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2 Lemma 2.7, pp.5–6, t=1 and s=0; agent-written specialization and explicit details."
+   }
+  },
+  {
+   "text": "Here is the simultaneous extraction. Start with the increasing index map $p_0(n)=n$. Recursively use the preceding compact-subsequence conclusion on $D_j$ to choose a strictly increasing $q_j$ such that $h_{p_{j-1}(q_j(n))}$ converges uniformly there, and set $p_j=p_{j-1}\\circ q_j$. Define $n_k=p_k(k)$ for $k\\geq1$. Since an increasing map on natural numbers has $q_{k+1}(k+1)\\geq k+1$, we have $n_{k+1}\\geq p_k(k+1)>p_k(k)=n_k$. For fixed $j$ and $k\\geq j$, $p_k=p_j\\circ t_{j,k}$ with $t_{j,k}$ a composition of increasing maps and $t_{j,k}(k)\\geq k$. Thus the tail of $(h_{n_k}|_{D_j})$ samples the uniformly convergent sequence selected at stage $j$ at indices tending to infinity. It converges uniformly, and in particular is uniformly Cauchy, on $D_j$.",
+   "uses": [
+    "lem-sfb-compact-metric-subsequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2 Lemma 2.7, pp.5–6, t=1 and s=0; agent-written specialization and explicit details."
+   }
+  },
+  {
+   "text": "Put $w(\\xi)=1+4\\pi^2|\\xi|^2$. For two extracted terms and $R>0$, positivity and $|z-z^{\\prime}|^2\\leq2|z|^2+2|z^{\\prime}|^2$ give $$\\int_{|\\xi|>R}|h_{n_k}-h_{n_l}|^2\\leq\\frac{4M}{1+4\\pi^2R^2}.$$ Choose an integer $R\\geq1$ making this less than $\\epsilon^2/2$. On $D_R$, the same integral is at most $\\operatorname{vol}(D_R)\\sup_{D_R}|h_{n_k}-h_{n_l}|^2$. This is less than $\\epsilon^2/2$ for sufficiently large $k,l$, since the volume of this bounded Euclidean ball is finite and step 4 gives uniform Cauchyness. Splitting the integral into the ball and its complement proves $\\|h_{n_k}-h_{n_l}\\|_2<\\epsilon$. Plancherel then proves that $(u_{n_k})$ is L2 Cauchy.",
+   "uses": [
+    "lem-sfb-l1-l2-fourier-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2 Lemma 2.7, pp.5–6, t=1 and s=0; agent-written specialization and explicit details."
+   }
+  },
+  {
+   "text": "Apply the scalar construction first to coordinate 1, then to coordinate 2 along the chosen subsequence, and so on through coordinate $r$. Previously obtained Cauchyness persists under subsequences. The final index map is a finite composition of strictly increasing maps. The identity $\\|f_{n_k}-f_{n_l}\\|_2^2=\\sum_{a=1}^r\\|(f_{n_k})_a-(f_{n_l})_a\\|_2^2$ shows vector L2 Cauchyness, by choosing the scalar errors less than $\\epsilon/\\sqrt r$. The Euclidean Sobolev graph result at $s=0$ says $W^{0,2}=L^2(\\mathbf R^m,\\mathbf R^r)$ is Hilbert, hence complete; let $f$ be this sequence's L2 limit. Finally $$\\int_{\\mathbf R^m\\setminus K}|f|^2=\\int_{\\mathbf R^m\\setminus K}|f-f_{n_k}|^2\\leq\\|f-f_{n_k}\\|_2^2\\longrightarrow0.$$ Thus $f=0$ almost everywhere off $K$, as required.",
+   "uses": [
+    "lem-sfb-euclidean-sobolev-graph-mollification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2 Lemma 2.7, pp.5–6, t=1 and s=0; agent-written specialization and explicit details."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-l1-l2-fourier-realization",
+  "lem-sfb-fixed-support-fourier-lipschitz",
+  "lem-sfb-l2-weak-derivative-fourier-identity",
+  "lem-sfb-finite-dimensional-normed-proper",
+  "lem-sfb-ascoli-compact-closure",
+  "lem-sfb-compact-metric-subsequence",
+  "lem-sfb-euclidean-sobolev-graph-mollification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "WANTED locally; Demailly course, §2 (2.1) and Lemma 2.7 proof, pp.3,5–6; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Explicit scalar-coordinate and support-limit details by Q143."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded H1 functions on Euclidean space with common compact support are precompact in L2 Rellich Kondrachov",
+   "results": {
+    "t": "2026-10-24T03:03:59Z",
+    "tool": "leansearch",
+    "query": "Bounded H1 functions on Euclidean space with common compact support are precompact in L2 Rellich Kondrachov",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le",
+     "MeasureTheory.MemLp.exist_eLpNorm_sub_le",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le",
+     "ofCompactSupport",
+     "HasCompactSupport.exists_bound_of_continuous",
+     "Continuous.memLp_of_hasCompactSupport",
+     "HasCompactSupport"
+    ],
+    "digest": "8570e4c50816fd09"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp density and Sobolev inequalities do not give sequential L2 compactness for a bounded weak W12 family with common compact support."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rellich\"",
+   "results": {
+    "t": "2026-10-24T03:04:00Z",
+    "tool": "loogle",
+    "query": "\"Rellich\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp density and Sobolev inequalities do not give sequential L2 compactness for a bounded weak W12 family with common compact support."
+  },
+  {
+   "tool": "grep",
+   "query": "Rellich|Kondrach|kolmogorov.*riesz|riesz.*kolmogorov",
+   "results": {
+    "t": "2026-10-24T03:04:00Z",
+    "tool": "grep",
+    "query": "Rellich|Kondrach|kolmogorov.*riesz|riesz.*kolmogorov",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp density and Sobolev inequalities do not give sequential L2 compactness for a bounded weak W12 family with common compact support."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rellich compactness Euclidean functions supported in a fixed compact set with uniformly bounded L2 norm and first weak derivatives have an L2 convergent subsequence",
+   "results": {
+    "t": "2026-10-24T03:04:00Z",
+    "tool": "leanfinder",
+    "query": "Rellich compactness Euclidean functions supported in a fixed compact set with uniformly bounded L2 norm and first weak derivatives have an L2 convergent subsequence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.MemLp.exist_eLpNorm_sub_le",
+     "HasCompactSupport.exist_eLpNorm_sub_le_of_continuous",
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_one",
+     "ContinuousMap.toLp_denseRange"
+    ],
+    "digest": "d136dd81d5ce052a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp density and Sobolev inequalities do not give sequential L2 compactness for a bounded weak W12 family with common compact support."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit ball of compactly supported W12 functions in a fixed bounded Euclidean region is relatively compact in L2",
+   "results": {
+    "t": "2026-10-24T03:05:37Z",
+    "tool": "leanfinder",
+    "query": "The unit ball of compactly supported W12 functions in a fixed bounded Euclidean region is relatively compact in L2",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "ExistsContDiffBumpBase.w_compact_support",
+     "MeasureTheory.MemLp.exist_eLpNorm_sub_le",
+     "ExistsContDiffBumpBase.u_compact_support",
+     "HasCompactSupport.exist_eLpNorm_sub_le_of_continuous",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le",
+     "Continuous.memLp_of_hasCompactSupport"
+    ],
+    "digest": "5ca9622a9eb83afc"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp density and Sobolev inequalities do not give sequential L2 compactness for a bounded weak W12 family with common compact support."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded sequence of functions with compact support and square integrable weak first derivatives has an L2 convergent subsequence",
+   "results": {
+    "t": "2026-10-24T03:29:25Z",
+    "tool": "leanfinder",
+    "query": "A bounded sequence of functions with compact support and square integrable weak first derivatives has an L2 convergent subsequence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.MemLp.exist_eLpNorm_sub_le",
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le",
+     "HasCompactSupport.exist_eLpNorm_sub_le_of_continuous",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le",
+     "MeasureTheory.Lp.boundedContinuousFunction_dense",
+     "MeasureTheory.MemLp.exists_boundedContinuous_eLpNorm_sub_le",
+     "SchwartzMap.denseRange_toLpCLM"
+    ],
+    "digest": "19e85d8b73557d15"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth Lp density and Sobolev norm inequalities, not compactness for a weak W12 sequence; Rellich and Kondrachov name searches returned no theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact embedding of H1 functions vanishing outside one bounded set into square integrable functions",
+   "results": {
+    "t": "2026-10-24T03:30:56Z",
+    "tool": "leanfinder",
+    "query": "Compact embedding of H1 functions vanishing outside one bounded set into square integrable functions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.toLp",
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le",
+     "MeasureTheory.MemLp.exist_eLpNorm_sub_le",
+     "ContinuousMap.toLp_denseRange",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le",
+     "SchwartzMap.denseRange_toLpCLM",
+     "ContinuousMap.range_toLp"
+    ],
+    "digest": "be37110c9033adc6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth Lp density and Sobolev norm inequalities, not compactness for a weak W12 sequence; Rellich and Kondrachov name searches returned no theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rellich\"",
+   "results": {
+    "t": "2026-10-24T03:29:46Z",
+    "tool": "loogle",
+    "query": "\"Rellich\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth Lp density and Sobolev norm inequalities, not compactness for a weak W12 sequence; Rellich and Kondrachov name searches returned no theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Rellich|Kondrach|kolmogorov.*riesz|riesz.*kolmogorov",
+   "results": {
+    "t": "2026-10-24T03:29:46Z",
+    "tool": "grep",
+    "query": "Rellich|Kondrach|kolmogorov.*riesz|riesz.*kolmogorov",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth Lp density and Sobolev norm inequalities, not compactness for a weak W12 sequence; Rellich and Kondrachov name searches returned no theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rellich compactness of the embedding from W1,2 with fixed compact support into L2",
+   "results": {
+    "t": "2026-10-24T03:30:07Z",
+    "tool": "leansearch",
+    "query": "Rellich compactness of the embedding from W1,2 with fixed compact support into L2",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq",
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "HasCompactSupport",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le",
+     "TestFunction.hasCompactSupport'",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le",
+     "TestFunctionClass.map_hasCompactSupport",
+     "TestFunction.ofSupportedInCLM"
+    ],
+    "digest": "fb79a0fbb68b6969"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth Lp density and Sobolev norm inequalities, not compactness for a weak W12 sequence; Rellich and Kondrachov name searches returned no theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bundle-sobolev-rellich",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting local analytic lemma: Euclidean Rellich compactness with a fixed compact support.",
+   "via": [
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-euclidean-fixed-support-rellich",
+  "worker": "stage1",
+  "summary": "Kept the exact statement. Followed the fixed-support Fourier proof of Rellich, reusing the existing arbitrary-order L2 weak-derivative Fourier identity. New analytic inputs isolate L1/L2 Fourier realization and fixed-support Lipschitz estimates; Mathlib Ascoli and compact sequential compactness are leaves. Wrote diagonal and frequency-tail arguments, finite-coordinate extraction and supported L2 limit explicitly; reused Euclidean Sobolev completeness and finite-dimensional properness.",
+  "blueprint": "The inherited analytic prerequisite under det-thm-sf-ctf-stability-direct-images proof (3): the Euclidean fixed-support ingredient of bundle Rellich. No blueprint node states the present analytic result; the recorded ancestor is null and its existing via chain is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-6cc131b8f",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-6cc131b8f (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes and every cited statement (l2-weak-derivative-fourier-identity, finite-dimensional-normed-proper, euclidean-sobolev-graph-mollification, def-kun-subspace-topology, def-kun-open-neighbourhood). Read Demailly's pseudodiff notes from the public PDF at the node's URL (not in literature/): §2 p.3 Fourier convention and (2.1); Lemma 2.7 proof pp.5-6 (Fourier transforms equicontinuous on balls, Ascoli, uniform convergence on every ball, ball/tail split). The item follows this route at t=1, s=0 with the details written out. Hand checks: B=vol(K)^{1/2}√M; L=2πb√M; α=e_j weak identity with sign (-1)^1 gives ∫(1+4π²|ξ|²)|h_n|²≤M via the isometry; diagonal n_{k+1}≥p_k(k+1)>n_k; tail bound 4M/(1+4π²R²); a.e. support of the limit. Small cases: r=0, K of measure zero, empty X for Ascoli. Mathlib leaves verified: arzela_ascoli at ArzelaAscoli.lean:109-112 (CompactSpace at line 27; the node's equicontinuity hypothesis is Mathlib's pointwise Equicontinuous); IsCompact.tendsto_subseq at Sequences.lean:298-300. The L1∩L2 realization is absent from Mathlib (LpSpace.lean read) and duplicates no DAG node (compared with fourier-moment-representative, l2-inverse-fourier-test-duality, l1-bilinear-fourier-duality, weak-sobolev-fourier-moments). Statement-regex duplicate searches over the snapshot and side-live found nothing else. All cited statements are in the item's unit; no tool_uses, no cycle, no SGA; side-live item still unsplit, no repair note. Maintainer note: blueprint.from.node=null is inherited from the created-node chain."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.EuclideanFixedSupportRellich",
+  "declaration": "MeasureTheory.euclidean_fixed_support_rellich",
+  "file": "lean/Sheaf/Analysis/EuclideanFixedSupportRellich.lean",
+  "statement": "theorem euclidean_fixed_support_rellich (m r : ℕ) (hm : 1 ≤ m) (K : Set (EuclideanSpace ℝ (Fin m))) (hK : IsCompact K) (f : ℕ → Lp (EuclideanSpace ℝ (Fin r)) 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))) (d : ℕ → Fin m → Lp (EuclideanSpace ℝ (Fin r)) 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))) (hsupport : ∀ n : ℕ, ∀ᵐ x ∂(volume : Measure (EuclideanSpace ℝ (Fin m))), x ∉ K → f n x = 0) (hweak : ∀ (n : ℕ) (j : Fin m) (φ : EuclideanSpace ℝ (Fin m) → ℝ), ContDiff ℝ ∞ φ → HasCompactSupport φ → (∫ x, φ x • d n j x) = -(∫ x, (fderiv ℝ φ x (EuclideanSpace.single j 1)) • f n x)) (hbounded : ∃ M : ℝ, ∀ n : ℕ, ‖f n‖ ^ 2 + ∑ j : Fin m, ‖d n j‖ ^ 2 ≤ M) : ∃ (a : ℕ → ℕ) (g : Lp (EuclideanSpace ℝ (Fin r)) 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))), StrictMono a ∧ (∀ᵐ x ∂(volume : Measure (EuclideanSpace ℝ (Fin m))), x ∉ K → g x = 0) ∧ Tendsto (fun k : ℕ => ‖f (a k) - g‖) atTop (𝓝 0)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c226425c0",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read node, def-weil-field, the module, report and the live proof-dep records. Node is unchanged apart from lean; lean.statement is verbatim in the file; sorry only, no defs or new nodes. Clause by clause: m>=1, r>=0, compact K, Lp 2 volume on EuclideanSpace (Lebesgue), a.e. support off K, explicit weak-derivative data d with an integral identity over all smooth compactly supported tests (fderiv on single j 1 = partial_j, minus sign correct, integrands integrable so not vacuous), common energy bound M, StrictMono subsequence, Lp limit vanishing a.e. off K, norm convergence. Edge cases r=0, K empty or null, M=0, m=1 OK; m=0 excluded as in the node. No universes or extra assumptions. Duplicates: no Rellich, weak-derivative or Sobolev declaration in the project; Mathlib TemperedDistribution.MemSobolev is a different complex Fourier notion and this delivery defines nothing (advisory only). Imports follow brief rule 7; lines <=100; docstrings carry source, blueprint tag and all 6 steps. Not recompiled (no change)."
+ }
+}

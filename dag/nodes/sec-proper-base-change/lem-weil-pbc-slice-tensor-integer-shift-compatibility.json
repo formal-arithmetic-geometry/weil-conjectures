@@ -22,16 +22,16 @@
  ],
  "proof": [
   {
-   "text": "The resolving class is closed under all the shifts in the statement, without a boundedness assumption. Indeed, if $A$ is K-flat and $E$ is acyclic, the second-variable chain isomorphism gives $T(E,A[n])\\cong T(E,A)[n]$. The right side is acyclic by K-flatness of $A$: shifting just reindexes kernels and images, and multiplying a differential by $(-1)^n$ changes neither. Thus $A[n]$ is K-flat by definition. Its terms are flat because they are the terms $A^{p+n}$ of $A$. The identical argument applies to $B$ and over $\\mathcal O_W$.",
+   "text": "Use Mathlib BifunctorShift for the curried tensor on sheaves: its first-variable shift is unsigned and its second-variable shift has coefficient (n*p).negOnePow on the (p,q) summand. Package their naturality as the specified uncurried bifunctor comparisons and apply the summand identities to pure section tensors. The proved fixed-tensor shift_kFlat helper gives K-flat stability; flat terms are simply reindexed.",
    "uses": [
-    "def-pc-kflat-complex",
     "lem-weil-pbc-total-tensor-integer-shifts",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FNH, item-shift-tensor in section-sign-rules; agent-written calculation for the normalized slice map."
+    "place": "Tag 0FNH, item-shift-tensor; Mathlib Algebra.Homology.BifunctorShift."
    }
   },
   {
@@ -103,14 +103,15 @@
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
   "lem-weil-pbc-total-tensor-integer-shifts",
-  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-ringed-slice-evaluation-transpose",
   "def-pur-localized-ringed-site",
   "lem-sfb-localized-site-tensor-restriction",
+  "def-weil-abstract-derived-category",
   "lem-weil-pbc-derived-tensor-shift-descent",
   "def-weil-pbc-ringed-derived-restriction",
   "lem-weil-pbc-exact-functor-derived-factorization"
@@ -118,7 +119,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0FNH, item-shift-tensor, combined with the K-flat representative construction of sites-cohomology.tex Tags 06YS, 06YU and 07A4. The normalized slice squares and descent argument are written by the worker."
+  "place": "Tag 0FNH with sites-cohomology.tex Tags 06YS, 06YU and 07A4. G4 proves shifted resolving-class admissibility and canonical total shifts using Mathlib BifunctorShift and the proved fixed-tensor K-flat shift helper. The original plan remains for the two unproved compatibility theorems."
  },
  "mathlib_searches": [
   {
@@ -272,5 +273,27 @@
   "group": "Q35",
   "result": "pass",
   "note": "Read node, 11 stmt_deps, Stacks 0FNH, and the dependency declarations coefficientTotalTensor, coefficientTensorGenerator, RingedSliceTensorModel, RingedSliceEvaluationComparisons, ringedDerivedRestrictionGeneral (= overFunctor.mapDerivedCategory) and ringedSlice_evaluation_transpose. Shift maps s are pinned on generators: unsigned first variable, (n*p).negOnePow second, recomputed from the differentials and equal to Mathlib's ι_mapBifunctorShift₂Iso_hom_f. Comparisons m, m1, m2 are pinned verbatim by the RingedSliceTensorModel clause, so they are unique. Derived shifts t, tU are pinned on flat-term K-flat pairs via T.iso and Q.commShiftIso, with existence asserted. Both derived squares rho_Z ≫ s_Psi = s_Phi ≫ rho[n] (i=1,2) are present and quantified over all S, T, SU, TU, d, t, M, N. Slice HasSheafify binders are Prop and mirror the dependency; universes are independent; no boundedness. Edge cases n=0, odd and negative n,p, unbounded complexes, empty site all hold. H1/H2/H5/H6/H8/H9 pass. Advisories: Mathlib mapBifunctorShift isos characterized rather than cited; BifunctorShift import unreferenced; lem-sfb-kflat-homotopy-triangulated stmt_dep unused; second reading is an author reread. No compile run, since no file was changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261024T185808-L-3676870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

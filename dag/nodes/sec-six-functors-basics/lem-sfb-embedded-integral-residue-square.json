@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-embedded-integral-residue-square",
+ "kind": "lemma",
+ "title": "Constant integer and first-residue squares of a continuous coefficient isomorphism",
+ "statement": "Let ell be prime and E a finite intermediate field in PadicAlgCl ell, with finite-dimensional ULift E. Let pi generate the maximal ideal of the embedded integers. Every isomorphism e from the continuous embedded integral ring object to the spectral integral ring object induces an isomorphism d between their ordinary constant integer ring objects and an isomorphism r between their first constant residue ring objects. The constant-to-continuous scalar square commutes with e and d, and the first-quotient square commutes with d and r. The embedded and spectral data are those of [def-sfb-embedded-integral-model-coefficients] and [def-sfb-integral-models-stacks-data]. No scheme or derived object occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+  "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "def-sfb-integral-models-stacks-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the monoidal sheaf-to-presheaf functor to e and evaluate at the one-point profinite set. The explicit unit and multiplication formulas for a sheaf of rings identify this with a unital ring isomorphism between the two integer rings. Naturality for the unique map from any profinite set to the point shows that constant functions commute with this isomorphism. Sheafification of the constant ring map therefore commutes with the specified scalarPointMaps.",
+   "uses": [
+    "def-sfb-embedded-integral-model-coefficients",
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A ring isomorphism carries the unique maximal ideal of a local ring to the unique maximal ideal. Identify the embedded first ideal with that maximal ideal using hpi and pow_one. The spectral DVR theorem says that the chosen spectral uniformizer generates its maximal ideal; thus its first coefficient ideal is also the maximal ideal. Apply Ideal.quotientEquiv to obtain the first residue ring isomorphism. Ideal.quotientEquiv_mk makes the quotient square commute. Applying constant sheafification, forgetting to abelian sheaves, and the induced ring-object construction yields r and the required square.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "def-sfb-integral-models-stacks-data",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+  "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constantSheafAdj_counit_w|map_ringEquiv_maximalIdeal|quotientEquiv_mk",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/LocalRing/RingHom/Basic.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "Supporting algebraic and constant-sheaf APIs; no complete comparison of these two coefficient presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientEquiv",
+   "results": "Ideal.quotientEquiv, Ideal.quotientEquiv_mk, Ideal.quotientEquiv_symm_mk, Ideal.quotientEquiv_apply, Ideal.quotientEquiv_symm_apply, PowerBasis.quotientEquivQuotientMinpolyMap_apply, PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply",
+   "date": "2026-10-25",
+   "verdict": "Supporting algebraic and constant-sheaf APIs; no complete comparison of these two coefficient presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoid-object isomorphism of condensed rings induces an isomorphism of their rings of global sections commuting with constant sheaf maps and quotients by maximal ideals",
+   "results": "CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁",
+   "date": "2026-10-25",
+   "verdict": "Supporting algebraic and constant-sheaf APIs; no complete comparison of these two coefficient presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EmbeddedIntegralResidueTransport",
+  "date": "2026-10-25",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "Ordinary coefficient square in first-residue transport.",
+   "via": [
+    "lem-sfb-embedded-integral-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EmbeddedIntegralResidueSquare",
+  "file": "lean/Sheaf/Paper/EmbeddedIntegralResidueSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.embeddedIntegralResidueSquare",
+  "statement": "theorem embeddedIntegralResidueSquare\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)]\n    (π : PadicAlgCl.integers ℓ E.1)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))\n    (e : Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ E.val) ≅\n      sfbCondensedIntegers ℓ (ULift.{u} E.val)) :\n    ∃ d : Mon.mk (IntegralModelsEmbedded.discreteObj.{u} (PadicAlgCl.integers ℓ E.1)) ≅\n        Mon.mk (IntegralModelsStacks.discreteObj\n          (Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val))),\n      ∃ r : Mon.mk (IntegralModelsEmbedded.discreteObj.{u} (completedResidue ℓ E π 0)) ≅\n          Mon.mk (IntegralModelsStacks.discreteObj\n            (Padic.coefficientExtensionRing ℓ (ULift.{u} E.val) 1)),\n        d.hom.hom ≫ IntegralModelsStacks.scalarPointMap ℓ (ULift.{u} E.val) =\n          IntegralModelsEmbedded.scalarPointMap ℓ E ≫ e.hom.hom ∧\n        d.hom.hom ≫ IntegralModelsStacks.discreteMap\n            (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal ℓ (ULift.{u} E.val) 1)) =\n          IntegralModelsEmbedded.discreteMap\n            (Ideal.Quotient.mk ((Ideal.span {π}) ^ (0 + 1))) ≫ r.hom.hom",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T143603-L-1059226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261025T204716-L-2997200",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.embeddedIntegralResidueSquare"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "id": "lem-sf-adic-module-slice-hom-comparison",
+ "kind": "statement",
+ "title": "Native adic modules, slice Hom and evaluation",
+ "statement": "Let $\\ell$ be a prime, $K=\\overline{\\mathbf Q}_\\ell$ (Lean `PadicAlgCl ℓ`), and $Y$ any scheme. Use a small representative of $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $R_Y$ be the sheaf of commutative $K$-algebras whose sections on $U$ are continuous functions $|U|\\to K$ whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-subspace, with pointwise operations and restriction by precomposition. Let $\\mathcal A_Y$ be the native category of internal $R_Y$-modules in sheaves of $K$-vector spaces: an object is a sheaf $M$ with an associative unital action $R_Y\\otimes_K M\\to M$, where $\\otimes_K$ is sheafified sectionwise tensor; a morphism commutes with this action. Let $\\operatorname{Mod}(R_Y)$ denote the sectionwise module-sheaf category [def-weil-sheaf-of-modules-category]. The native tensor $M\\otimes_{R_Y}N$ is the coequalizer imposing equality of the two $R_Y$-actions, and $[M,N]_{\\mathcal A_Y}$ is its right internal Hom (the right adjoint to tensor with $M$).\n\nThere is an equivalence $E_Y:\\mathcal A_Y\\simeq\\operatorname{Mod}(R_Y)$ leaving underlying sheaves, sections and morphisms unchanged and sending the action to its sectionwise action. It carries the regular module to $R_Y$ and the native relative tensor to the sheaf tensor representing $R_Y$-balanced bilinear maps. It has natural isomorphisms\n$$E_Y([M,N]_{\\mathcal A_Y})\\cong\\mathcal Hom_{R_Y}(E_YM,E_YN),$$\nwhere the right side is the slice-Hom sheaf [def-pur-sheaf-hom]. Under these isomorphisms native evaluation is the slice map $(x,\\lambda)\\mapsto\\lambda(x)$, and native bidual evaluation into the regular module is $x\\mapsto(\\lambda\\mapsto\\lambda(x))$.\n\nFor every site object $j:U\\to Y$, identify $U_{\\mathrm{proet}}$ with $Y_{\\mathrm{proet}}/U$. Then $R_U=R_Y|_U$ through the identity on functions on each further object $V\\to U$. The native adic module pullback $j^*:\\mathcal A_Y\\to\\mathcal A_U$ is the inverse image $j^{-1}$ of the underlying sheaf of $K$-vector spaces along the morphism of small pro-etale sites induced by $j$, made a $j^{-1}R_Y$-module through the monoidal structure of $j^{-1}$, followed by extension of scalars $R_U\\otimes_{j^{-1}R_Y}(-)$ along the map $j^{-1}R_Y\\to R_U$ given by pullback of functions. Under $E_Y,E_U$ and the identification above, $j^{-1}R_Y\\to R_U$ is the identity and $j^*$ corresponds to literal restriction to this slice, and the displayed tensor, internal-Hom and evaluation comparisons commute with this restriction. In particular native local finite-free trivializations correspond exactly to slice trivializations over $R_Y|_U$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor (2), and Tag 0E8H, lemma-internal-hom-restriction; agent comparison for the native Qbar-linear module-object presentation in lean/WeilConjectures/SixFunctors/ProEtale/Adic/Module.lean:51-55, Hom.lean:64-67, InternalHom.lean:40-42 and InternalHomEvaluation.lean:36-58, including objectwise pro-etale localization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized comparison at each base from the explicit section-module equivalence and its unit and coordinate maps, with the fixed-functor tensor/Hom comparison.",
+   "uses": [
+    "lem-sf-adic-module-section-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply restriction compatibility to this family of base comparisons. The native coefficient identity follows by evaluating the actual coefficient localization theorem on each section.",
+   "uses": [
+    "lem-sf-adic-module-slice-compatibility",
+    "lem-sf-adic-coefficient-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivalence functor is fully faithful, so its map on isomorphisms is a bijection. Conjugate by the inverse of the slice comparison and by the fixed free-module comparison. Composition gives the stated trivialization bijection, its inverse, and the required formula on homomorphisms, including rank zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-module-section-comparison",
+  "lem-sf-adic-module-slice-compatibility",
+  "lem-sf-adic-coefficient-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Native/sectionwise module comparison, Stacks 03CV, 03EK, 03EO and 0E8H; formal assembly follows the section normalizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihomIsoIhom|moduleSheafEquiv|sheafOfModulesEquiv|eval.*naturality",
+   "results": "none; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define section modules, free sheaves, or other coefficient categories; none compares native adic internal Hom and evaluation with slice-Hom together with native localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between module objects in sheaves of vector spaces over a ring sheaf and sheaves of modules over that ring, compatible with internal Hom evaluation",
+   "results": "AlgebraicGeometry.Scheme.Modules; SheafOfModules.mk; SheafOfModules.noConfusionType; SheafOfModules; SheafOfModules.sections; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv; PresheafOfModules.unitHomEquiv; SheafOfModules.hom_ext",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define section modules, free sheaves, or other coefficient categories; none compares native adic internal Hom and evaluation with slice-Hom together with native localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Mod",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define section modules, free sheaves, or other coefficient categories; none compares native adic internal Hom and evaluation with slice-Hom together with native localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module objects over a commutative ring sheaf agree with sectionwise module sheaves and their internal Hom adjunction preserves evaluation on every slice",
+   "results": "ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.evaluation; SheafOfModules.unitHomEquiv; SheafOfModules.unit_val; SheafOfModules.over; ModuleCat.tilde; SheafOfModules.unit",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define section modules, free sheaves, or other coefficient categories; none compares native adic internal Hom and evaluation with slice-Hom together with native localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the internal Hom of adic module objects in sheaves of Q l bar vector spaces with Hom of modules on localized pro etale sites preserving evaluation and restriction",
+   "results": "LightCondensed.ihomPoints; LightCondensed.ihom_map_val_app; ModuleCat.Tilde.toOpen; LightCondensed.ihomPoints_apply; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.sheafifyHomEquiv; SheafOfModules.unitHomEquiv_comp_apply; PresheafOfModules.sheafificationHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define section modules, free sheaves, or other coefficient categories; none compares native adic internal Hom and evaluation with slice-Hom together with native localization."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleSheafEquiv|sheafOfModulesEquiv|Mod.*Sheaf|Sheaf.*Mod",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise module categories, presheaf monoids or module-level/condensed evaluation do not give the native adic/slice comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules over a ring sheaf in sheaves of vector spaces agree with sectionwise module sheaves",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules, SheafOfModules.mk, SheafOfModules, SheafOfModules.IsQuasicoherent, SheafOfModules.sections, AlgebraicGeometry.Scheme.PresheafOfModules, SheafOfModules.noConfusionType, AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise module categories, presheaf monoids or module-level/condensed evaluation do not give the native adic/slice comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Mod",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise module categories, presheaf monoids or module-level/condensed evaluation do not give the native adic/slice comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules internal to sheaves of vector spaces over a sheaf of algebras are equivalent to sheaves of modules with the same tensor and internal Hom",
+   "results": "Hits: SheafOfModules.forgetToSheafModuleCat, SheafOfModules.instCategory, ModuleCat.tilde, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.over, SheafOfModules.toSheaf_obj_val, SheafOfModules.unitHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise module categories, presheaf monoids or module-level/condensed evaluation do not give the native adic/slice comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify relative tensor and internal Hom evaluation for module objects in sheaves with their sectionwise module sheaf constructions on slice sites",
+   "results": "Hits: SheafOfModules.unitHomEquiv_comp_apply, PresheafOfModules.Monoidal.tensorObjMap, LightCondensed.ihomPoints, SheafOfModules.unitHomEquiv_symm_comp, ModuleCat.ihom_ev_app, SheafOfModules.unitHomEquiv, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise module categories, presheaf monoids or module-level/condensed evaluation do not give the native adic/slice comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-lisse-biduality",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Recorded blueprint ancestor lem-a1-local-boundary-duality: its use of lisse biduality; lem-sf-hom-finite-projective.proof.md finite-free/locality sentences, made precise by returned step 1 and localization part of step 3. The computed ancestor is null because the maintainer-created parent has created.item=null.",
+   "via": [
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-module-slice-hom-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the K-linear native/sectionwise module equivalence using sheafification; compared balanced tensor universal properties, then counit-normalized right adjoints. Identified every site-object pullback through the slice and checked functions, evaluations, bidual evaluations and finite-free coordinates explicitly. Reused existing generic nodes; no new nodes.",
+  "blueprint": "lem-sf-hom-finite-projective.proof.md: finite-free coordinate description, bidual map, and locality/restriction sentences; ancillary comparison for the lisse biduality used by lem-a1-local-boundary-duality. The ancestor command reports null for this maintainer-created ancestry, as already recorded in blueprint.from.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic strong monoidality of K-vector-space sheafification; the unit does not provide this construction."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor--slice-Hom adjunction on a small ringed site, required to identify the right adjoint, not a replacement for any geometric route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "The generic equivalence of a site-object pro-etale site with its slice, including covering compatibility."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Identifies the actual scheme inverse image with slice restriction, including its initial-index-object normalization."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic ringed-site tensor restriction with its prescribed pure-tensor map, used for constant K and for R_Y."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-094f3cef0",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-094f3cef0 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to the base and there are no new nodes. Steps 1, 2, 3, 5, 6, 7 and 8 are correct against the cited statements and against Stacks 03EO (sites-modules l.3949, whose proof is omitted as the analogue of Algebra lemma-hom-from-tensor-product) and 0E8H (l.3775). Step 5 correctly uses the initial index object (V→U→Y,(str,id)) of lem-sfb-proetale-object-inverse-image-restriction(1), so j^{-1}R_Y→R_U is the identity. One fault (C3/C4): step 4 took the slice counit m⊗λ↦λ_V(m) 'under currying' from lem-pc-sheaf-modules-tensor-closed. That node's statement only asserts some natural bijection; its formula appears only in its proof. So the native evaluation and bidual formulas, which the citer lem-sf-weil-lisse-biduality needs, were not derived from cited statements, and no existing site-level node pins this counit. FIX: step 4 now proves directly that slice evaluation is a universal arrow, via the pairing↔φ_b bijection φ_b(g)_W(m)=b(m,g|_W), citing def-pur-sheaf-tensor-product and def-weil-presheaf-modules-sheafification. Step 3 also now cites def-weil-presheaf-modules-sheafification for the R-module sheafification universal property, and proof_deps were recomputed. Duplicate candidates checked and rejected: the Ab/⊗_Z internal-module equivalence and tensor comparison, lem-sf-weil-native-closed-forgetful, lem-sf-locally-free-sheaf-evaluation-biduality. The declared generic tool uses are accepted. No SGA source is cited, and the corrected file is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.AdicModuleSliceHomComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.adicModuleSliceHomComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AdicModuleSliceHomComparison",
+   "AlgebraicGeometry.ProEtale.adicModuleSliceHomComparison"
+  ],
+  "file": "lean/Sheaf/SixFunctors/AdicModuleSliceHomComparison.lean",
+  "statement": "theorem adicModuleSliceHomComparison (l : ℕ) [Fact l.Prime] :\n    Nonempty (AdicModuleSliceHomComparison.{u} l)",
+  "branch": "newtargets-dag",
+  "by": "E2",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The two records package the exact comparison conclusions, with identity-on-sections coefficients and equivalence, pure-tensor normalization, slice-Hom counit normalization, native bidual transpose, actual inverse-image and coefficient normalization, restriction coherence, and coordinate-preserving finite-free trivializations. Helpers are actual composites of existing canonical maps; the sole postponed theorem is this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1120d06d",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps, native AdicSheaf/ConstantSheaf/Ring/InternalHom/InternalHomEvaluation and SiteTensorFunctoriality sources. All clauses match the node: R pinned via HEq identity + naturality; E identity on sections/maps/action; unit, pure-tensor and evaluation pins determine tensorIso/homIso; bidual pinned as braided transpose with slice formula; existing adicUpperStar with nativeCoefficient_identity = canonical localization comparison; sliceIso, nativeTensorSlice, tensorSlice, hom/evaluation/bidual slice and trivializations all pinned. Edge cases (empty, n=0, l=2, non-open site objects, universes) covered. Single sorry; no hollow defs; docstrings/source/blueprint OK; plain imports = proof_dep modules; node changed only in lean, statement verbatim. Advisory: def-pur-sheaf-tensor-product decls used but the node statement does not cite it (stage-1 citation gap); second reading is an author self-check backed by a detailed worker report. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9c0de",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261024T224912-L-1826302",
+  "kind": "interface",
+  "note": "independent cc review: item structure/theorem vs clone (byte-identical); moved AdicModuleSectionComparison data vs old item text (verbatim, change record); two split sorry statements vs original fields (base family fully pinned by section normalizations, so universal quantification is not stronger); node lean records vs Lean signatures; item proof_deps vs proof as written"
+ }
+}

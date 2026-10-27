@@ -1,0 +1,55 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-finite-algebra-hom-scalar-extension.json`: item, now split into five steps. Statement unchanged; the existing finite-dimensional-vector-space definition was added to `stmt_deps`. No exact project declaration or Mathlib match for the whole statement was found.
+- `citations.json`: seven step/node entries with quotations checked verbatim against the live node statements.
+- `report.md`: this report. The required search command maintains `searches.jsonl` alongside it.
+
+New nodes: none. New Mathlib leaves: none. All facts needed below the item already have nodes. In particular, no auxiliary node restates the intertwiner comparison or either of its clauses.
+
+## Attachments
+
+None. I searched the live `lean/WeilConjectures/` tree for the item's blueprint tag, finite algebra Hom, scalar-extension Hom and intertwining comparisons. The nearby scheme finite-algebra Hom exactness declaration concerns a different statement. Ordinary scalar-extension comparisons are also insufficient for this item's extra, possibly noncommutative, algebra action. No Lean was written or compiled.
+
+## WANTED
+
+None for this proof. The existing parent's request for Serre, *Linear Representations of Finite Groups*, concerns the field-splitting/representation-lifting context, not a missing input used here.
+
+## Findings and proof route
+
+The imported item correctly warns that Stacks 087R is the commutative-ring analogue, not a theorem about an extra noncommutative acting algebra. I read `more-algebra.tex`, `lemma-pseudo-coherence-and-base-change-ext` (1), including its proof and hypotheses. Taking its coefficient ring to be A would be invalid in the present generality. I retained the statement and wrote the actual coefficient argument, with `proof_origin.by = agent`.
+
+I read the current blueprint `latest/.../lem-per-artin-gabber-affine-curve.proof.md`, especially Step 3, the chapter and unit records, the live parent `lem-per-semisimple-scalar-extension-kzero-criterion` and Q56's report. The precise immediate use is the parent's step 5: extending End_A(S_i) to the algebraic closure. I also read ILO Expose X Proposition 1.2, printed page 138 (PDF page 144): its passage preceding (5) invokes Serre to lift V_0 to a projective coefficient module. It does not state this auxiliary Hom theorem. The provenance therefore remains the inherited Step-3 branch through that representation-lifting input, without claiming the blueprint or ILO contains the coefficient proof written here.
+
+For the tensor constructions I read Stacks algebra.tex Tag 00CV, `section-tensor-product`, `lemma-tensor-product` and its proof: pure tensors generate and the universal property gives the indicated maps. For the other cited statements I read their actual DAG files and the corresponding Mathlib sources: `Basis/VectorSpace.lean` (basis extension), `TensorProduct/Basis.lean` (basis base change, including the factor flip), and `LinearIndependent/BaseChange.lean:43` (independence of finite-coordinate vectors under an injective coefficient extension). This gives the direct coefficient proof described below; it does not use a hidden Hom base-change theorem.
+
+All new searches ran through msearch.py. Their actual log records were appended to the item's prior search records. Both semantic phrasings and the additional representation/intertwiner phrasing were read. Loogle returns ordinary `LinearMap.baseChangeHom` and `Module.FinitePresentation.isBaseChange_map`; the source of `IsBaseChange.linearMapLeftRight` likewise concerns maps over the commutative coefficient ring. Those do not enforce the A-action. The additional independence search confirms an already existing DAG leaf used in step 4. The tensor-basis search suggested an arbitrary-basis coordinate lemma, but that node was unnecessary: the proof only expands the finitely many matrix entries in a basis of L itself.
+
+## Not duplicates
+
+No new nodes were created. I searched the entire DAG by scalar-extension/Hom, baseChangeHom, tensor-basis and independence names, and searched all imported blueprint nodes using `blueprint_refs.py search` for Hom scalar extension, tensor Hom, basis tensor, linear map base change, finite algebra and intertwiner. No blueprint node states this item in another form; `same_as` remains empty.
+
+`lem-per-finite-algebra-hom-scalar-extension` vs `lem-weil-pbc-flat-base-change-hom-finitely-presented`: the latter changes a commutative scalar ring and compares Hom over that ring; the item simultaneously extends a possibly noncommutative acting algebra and its modules. The statement cannot be obtained by specializing the scalar ring to A. The existing basis and linear-independence leaves were reused instead of creating their special cases.
+
+## Review by Q42
+
+I checked the unchanged statement against its intended use in the parent's step 5, and against the warning in its source record. It assumes arbitrary fields with a unital map, finite-dimensional V and W, and compatible unital A-actions with K central in A. It requires neither an algebraic, separable nor finite extension, and neither semisimplicity nor commutativity of A. The proof below uses exactly these hypotheses. Finite dimension of A is harmless and is retained, although the coefficient argument actually works without it.
+
+Step 1 cites `def-weil-pbc-module-tensor-product` for its stated universal property and generation by pure tensors. I checked the node actually states both, rather than merely naming TensorProduct. The proof writes out why an additive A-map is K-linear (using c times the algebra identity), why the displayed formula is balanced, and why it commutes with every generating element z tensor a of A_L. Centrality and module compatibility supply all K-linearity used here. Extending the pure-tensor multiplication and module action respects the balancing relations; associativity, units and module associativity are checked on pure tensors directly from the corresponding laws for L and A. No flatness or exactness assertion is taken from a definition. The short construction is elementary.
+
+Step 2 uses three cited statements, each opened and checked: `def-weil-finite-dimensional-subspace` gives finite spanning lists; removing dependent vectors from those lists gives finite bases without assuming a stronger definition of finite dimension. `def-weil-vector-space-scalar-extension` explicitly states its basis clause, not just the tensor definition; flipping factors gives the required bases of L tensor V and L tensor W. `lem-weil-pbc-vector-space-basis-through-vector` asserts existence of a basis for every vector space, so it applies to L as a K-vector space even for an infinite extension. The unital field homomorphism is proved injective before identifying K with its image. Each of the finitely many entries has finite basis support, so their union S is finite. No finite dimension of L was assumed. Constructing a linear map from its values on the finite basis of V is the elementary coordinate construction, not another theorem.
+
+Step 3 uses the coordinates established in step 2, with no further black-box input. For every a in A, its action matrices have K entries by the actual compatibility hypothesis. The A_L-intertwiner equation at 1 tensor a gives the displayed equality. After expanding each entry in the independent K-basis elements b_s, each coefficient is zero. This is K-linear independence in L; it would be wrong to assume those b_s were L-linearly independent. The resulting equation is evaluated on each basis vector of V and then extended linearly, proving every f_s is A-linear for all a, not just a chosen algebra generator. The finite tensor sum therefore lies in the original source and maps to the original F. This is the core coefficient calculation in the item's own proof, not relocated into an auxiliary lemma.
+
+Step 4 cites the tensor-product definition for a finite pure-tensor expression and its bilinearity. Finite elimination on the given list g_i gives independent A-maps h_j spanning that list, and the actual rewritten tensor is displayed. Zero array means zero map because the chosen v_i span V, so the arrays H_j are K-linearly independent. `lem-weil-linear-independence-field-extension` states exactly that finite vectors in K^N stay independent in L^N; I opened it and applied it to the flattened m-by-n arrays with N=mn and k equal to the number of h_j. Its field-extension hypothesis holds by injectivity already proved in step 2; all coordinate index sets are finite. This is the only independence in this proof taken over L. The kernel equation forces the coefficients lambda_j to vanish. The finite elimination and coordinate flattening are elementary, while the cited preservation of independence is marked non-elementary.
+
+Step 5 cites the tensor-product node's explicit generation statement to extend the evaluated pure-tensor identity by additivity. I checked the order of composition: the product is f composed with g, and the image sends y tensor v to xzy tensor f(g(v)). Thus there is no accidental opposite endomorphism algebra. The identity is checked separately, including its action on pure tensors. L-linearity from step 1 and bijectivity from steps 3 and 4 give the claimed unital L-algebra isomorphism.
+
+Small cases were checked in this argument. If V=0 or W=0, the arrays have an empty row or column set, all maps vanish and the finite tensor arguments still work; the independent surviving list in step 4 is empty. If the zero algebra is allowed, its unital modules are zero, hence this same case applies; the zero endomorphism algebra has identity equal to zero. If L=K, Phi is the tensor-unit identification. An infinite or inseparable field extension is covered by the unrestricted basis of L and finite support, and a noncommutative example A=M_2(K) uses the same action-matrix equation for every a with no commutativity assumption. Neither a characteristic-zero hypothesis nor the parent's algebraic-closure hypothesis has entered the proof.
+
+Against delivery-errors B--E: there are no new statement-only nodes to audit; all notions newly needed to state finite dimension now point to the existing definition. I checked all seven step/node citations verbatim, and each cited statement supplies precisely the stated input. Steps 1, 3 and 5 are explicit universal-property or finite coefficient calculations; steps 2 and 4 mark the genuine linear-algebra input as non-elementary and cite it. There is no off-unit non-leaf tool use: every cited node is already a Mathlib leaf. Every step is below 2000 characters. No statement dispute or correction was needed. What I corrected in the imported material was the absence of a proof and of the finite-dimensional notion dependency; I did not replace the noncommutative issue by the commutative Stacks analogue.
+
+## Unfinished work
+
+None for this one-level split. The existing dependencies are reused; no new queue items are introduced. Required server dry run and direct delivery follow this review.

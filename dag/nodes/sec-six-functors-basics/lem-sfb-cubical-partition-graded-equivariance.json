@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-cubical-partition-graded-equivariance",
+ "kind": "statement",
+ "title": "Graded cubical partition map and diagonal translation",
+ "statement": "Let $r\\geq0$, $D=\\mathbf Z^r$, and $u_1,\\ldots,u_r$ be its ordered standard basis. Let $C_a$ be the free abelian group on $[v,I]$ for $v\\in D$ and $I\\subseteq\\{1,\\ldots,r\\}$ of cardinality $a$, zero outside $0\\leq a\\leq r$ [def-weil-pbc-free-module]. Equip it with the differential and augmentation of [lem-sfb-integral-lattice-cubical-contraction], explicitly\n$$d[v,I]=\\sum_{i\\in I}(-1)^{\\#\\{j\\in I:j<i\\}}([v+u_i,I\\setminus\\{i\\}]-[v,I\\setminus\\{i\\}]),\\quad d|_{C_0}=0,\\quad e[v,\\varnothing]=1.$$\nPut $T_n=\\bigoplus_{a+b=n}C_a\\otimes_{\\mathbf Z}C_b$ and define on homogeneous pure tensors\n$$d_T(x\\otimes y)=dx\\otimes y+(-1)^a x\\otimes dy\\quad(x\\in C_a).$$\nThis formula is well defined, $d_T^2=0$, and $T$ is a chain complex, with the tensor and chain-complex notions of [def-weil-pbc-module-tensor-product] and [def-weil-pbc-module-chain-complex-homology]. Let $u_A=\\sum_{i\\in A}u_i$ and $\\epsilon(A,B)=(-1)^{\\#\\{(a,b)\\in A\\times B:b<a\\}}$. There is a unique family of homomorphisms $P_n:C_n\\to T_n$ specified on the free basis by\n$$P_{|I|}[v,I]=\\sum_{A\\sqcup B=I}\\epsilon(A,B)[v,A]\\otimes[v+u_A,B].$$\nFor each $I$ the sum has $2^{|I|}$ terms, each in total degree $|I|$. The components $P_n$ are zero whenever $C_n=0$. For every $w\\in D$, define $\\tau_w[v,I]=[v+w,I]$ and use diagonal translation on $T$. Then\n$$P_n\\tau_w=(\\tau_w\\otimes\\tau_w)P_n\\quad\\text{for every integer }n.$$\nIn particular this is equivariance of a degree-preserving homomorphism of graded abelian groups; it does not assert that $P$ commutes with the differentials.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Integral cubical chain diagonal, original proof steps 1 and 4: signed tensor differential, finite free extension, and diagonal translation equivariance. Agent-written algebraic expansion below paragraph (3); exact external reference WANTED. See the retained original proof in the delivery report."
+ },
+ "stmt_deps": [
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Fix $a,b$ with $a+b=n$. The function $(x,y)\\mapsto dx\\otimes y+(-1)^a x\\otimes dy$ is $\\mathbf Z$-bilinear, because $d$ is additive and tensoring is bilinear. The universal property in [def-weil-pbc-module-tensor-product] therefore gives a unique homomorphism $C_a\\otimes C_b\\to T_{n-1}$, using the summand inclusions of bidegrees $(a-1,b)$ and $(a,b-1)$. Define $d_T$ on a direct-sum element by summing these homomorphisms over its finitely many nonzero components. This is additive, has degree $-1$, and gives precisely the stated formula; terms with a zero factor are zero.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CW (definition-bilinear), Tag 00CX (lemma-tensor-product), and the tensor-product definition and construction immediately following; direct sums here are finite-support families."
+   }
+  },
+  {
+   "text": "By [lem-sfb-integral-lattice-cubical-contraction], $d^2=0$ on $C$. For $x\\in C_a$, $y\\in C_b$, expansion of step 1 gives\n$$d_T^2(x\\otimes y)=d^2x\\otimes y+\\bigl((-1)^{a-1}+(-1)^a\\bigr)dx\\otimes dy+(-1)^{2a}x\\otimes d^2y=0.$$\nThe middle coefficients cancel. If $a=0$, the terms involving $dx$ are already zero, so the same calculation applies. The pure tensors generate each summand by [def-weil-pbc-module-tensor-product], and direct-sum elements have finite support, so $d_T^2=0$ everywhere. This is the chain-complex condition of [def-weil-pbc-module-chain-complex-homology], including zero degrees.",
+   "uses": [
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image, algebraic expansion below the tame-boundary route; the cubical formula and the following calculations are agent-written, not asserted by that paragraph."
+   }
+  },
+  {
+   "text": "The ordered partitions $A\\sqcup B=I$ are in bijection with subsets $A\\subseteq I$, by $A\\mapsto(A,I\\setminus A)$. Each of the $|I|$ elements has two choices of part, independently, so there are $2^{|I|}$ terms. Each summand $\\epsilon(A,B)[v,A]\\otimes[v+u_A,B]$ lies in $C_{|A|}\\otimes C_{|B|}\\subseteq T_{|I|}$ since $|A|+|B|=|I|$. Thus the displayed finite sum defines an element $p(v,I)\\in T_{|I|}$, also for $I=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image, algebraic expansion below the tame-boundary route; the cubical formula and the following calculations are agent-written, not asserted by that paragraph."
+   }
+  },
+  {
+   "text": "Using the unique finite basis expansions of [def-weil-pbc-free-module], define\n$$P_n\\left(\\sum_{v,I:\\,|I|=n}m_{v,I}[v,I]\\right)=\\sum_{v,I:\\,|I|=n}m_{v,I}p(v,I).$$\nThe sum is finite and unambiguous. Coefficientwise addition of expansions proves additivity. Every homomorphism having the prescribed generator values must have this value on each expansion, proving uniqueness. For $n<0$ or $n>r$, the source is zero and its unique homomorphism is zero. This constructs the unique degree-preserving family for every integer $n$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image, algebraic expansion below the tame-boundary route; the cubical formula and the following calculations are agent-written, not asserted by that paragraph."
+   }
+  },
+  {
+   "text": "The same finite-expansion construction from [def-weil-pbc-free-module] defines $\\tau_w$ on $C_a$ by the prescribed generator values; it preserves degree. For each $(a,b)$ the function $(x,y)\\mapsto\\tau_wx\\otimes\\tau_wy$ is bilinear, hence [def-weil-pbc-module-tensor-product] gives the homomorphism $\\tau_w\\otimes\\tau_w$ on that tensor summand. Sum it componentwise to obtain diagonal translation on $T_n$. On generators, $\\tau_0=1$ and $\\tau_w\\tau_z=\\tau_{w+z}$; finite expansions, bilinearity and finite-support sums give these identities on $C$ and $T$ as well. Thus these really are translation actions.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image, algebraic expansion below the tame-boundary route; the cubical formula and the following calculations are agent-written, not asserted by that paragraph."
+   }
+  },
+  {
+   "text": "For each generator, applying the diagonal translation of step 5 to the formula of steps 3 and 4 gives\n$$(\\tau_w\\otimes\\tau_w)P_{|I|}[v,I]=\\sum_{A\\sqcup B=I}\\epsilon(A,B)[v+w,A]\\otimes[v+u_A+w,B]=P_{|I|}[v+w,I].$$\nThe last equality uses $v+u_A+w=v+w+u_A$ in $\\mathbf Z^r$; the partitions and their signs do not depend on $v$. By the unique finite expansions of [def-weil-pbc-free-module], equality on these generators gives $P_n\\tau_w=(\\tau_w\\otimes\\tau_w)P_n$ on all of $C_n$. For a zero source both sides are zero. This proves precisely the required graded equivariance.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image, algebraic expansion below the tame-boundary route; the cubical formula and the following calculations are agent-written, not asserted by that paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image, algebraic expansion below the tame-boundary route; the cubical formula and the following calculations are agent-written, not asserted by that paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The finite signed subset partition formula on cubical lattice chains extends to a degree preserving homomorphism equivariant for simultaneous translation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OrderedFinpartition.applyOrderedFinpartition\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {F : Type u_3} →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace 𝕜 F] →\\n                {n : ℕ} →\\n    \", \"doc\": \"For an ordered finite partition $c$ of $n$, this function takes a family $p$ of continuous multilinear maps $p_m : E^{k_m} \\\\to F$ (where $k_m = \\\\text{partSize} \\\\, m$) and a vector $v : \\\\text{Fin} \\\\, n\"}\n  {\"name\": \"OrderedFinpartition.applyOrderedFinpartition_apply\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ}\\n  (c : OrderedFinpartition n) (p : (i : Fin c.length) → ContinuousMultilinearMap 𝕜 (fun i \", \"doc\": \"For an ordered finite partition $c$ of $n$, the application of a family $p$ of continuous multilinear maps $p_m : E^{k_m} \\\\to F$ (where $k_m = \\\\text{partSize}\\\\, m$) to a vector $v : \\\\text{Fin}\\\\, n \\\\to\"}\n  {\"name\": \"OrderedFinpartition.compAlongOrderedFinpartitionₗ\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {F : Type u_3} →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace 𝕜 F] →\\n                {G : Type u_4}\", \"doc\": \"Given an ordered finite partition $ c $ of $ n $, this constructs a linear map from $ F $ to $ G $ that transforms into a multilinear map over a field $ \\\\mathbb{K} $. Specifically, for each partition \"}\n  {\"name\": \"BoxIntegral.BoxAdditiveMap.sum_partition_boxes'\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Additive\", \"type\": \"∀ {ι : Type u_3} {M : Type u_4} [inst : AddCommMonoid M] {I : WithTop (BoxIntegral.Box ι)}\\n  (self : BoxIntegral.BoxAdditiveMap ι M I) (J : BoxIntegral.Box ι),\\n  ↑J ≤ I → ∀ (π : BoxIntegral.Prepartition J), π.IsPartition → ∑ Ji ∈ π.boxes, self.toFun Ji = self.toFun J\", \"doc\": \"For any additive box map $ f $ defined on an extended box $ I $, and for any box $ J $ contained in $ I $, if $ \\\\pi $ is a partition of $ J $ (i.e., every point in $ J $ lies in at least one subbox of\"}\n  {\"name\": \"OrderedFinpartition.compAlongOrderFinpartition_apply\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {G : Type u_4}\\n  [inst_5 : NormedAddCommGroup G] [inst_6 : NormedSpace 𝕜 G] {n : ℕ} (c : OrderedFi\", \"doc\": \"For a nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$, $F$, and $G$, an ordered finite partition $c$ of $n$, a continuous multilinear map $f : F^{k} \\\\to G$, and a family $p$ of contin\"}\n  {\"name\": \"BoxIntegral.BoxAdditiveMap.upperSubLower\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Additive\", \"type\": \"{n : ℕ} →\\n  {G : Type u} →\\n    [inst : AddCommGroup G] →\\n      (I₀ : BoxIntegral.Box (Fin (n + 1))) →\\n        (i : Fin (n + 1)) →\\n          (f : ℝ → BoxIntegral.Box (Fin n) → G) →\\n            (fb : ↑(Set.Icc (I₀.lower i) (I₀.upper i)) → BoxIntegral.BoxAdditiveMap (Fin n) G ↑(I₀.face i)) →\\n          \", \"doc\": \"Given an additive commutative group $ G $, a box $ I_0 $ in $ (n+1) $-dimensional space, a coordinate index $ i $, and functions $ f : \\\\mathbb{R} \\\\to \\\\text{Box}(\\\\Fin(n)) \\\\to G $ and $ fb : [I_0.lower(\"}\n  {\"name\": \"BoxIntegral.BoxAdditiveMap.sum_partition_boxes\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Additive\", \"type\": \"∀ {ι : Type u_1} {M : Type u_2} [inst : AddCommMonoid M] {I₀ : WithTop (BoxIntegral.Box ι)} {I : BoxIntegral.Box ι}\\n  (f : BoxIntegral.BoxAdditiveMap ι M I₀),\\n  ↑I ≤ I₀ → ∀ {π : BoxIntegral.Prepartition I}, π.IsPartition → ∑ J ∈ π.boxes, f J = f I\", \"doc\": \"For an additive box map $ f $ defined on a box $ I_0 $, if $ I $ is a subbox of $ I_0 $ and $ \\\\pi $ is a partition of $ I $, then the sum of $ f $ evaluated on each subbox $ J $ in $ \\\\pi $ equals $ f \"}\n  {\"name\": \"OrderedFinpartition.embSigma\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"(n : ℕ) → OrderedFinpartition n → (l : Fin (n + 1)) × (p : Fin ↑l → Fin (n + 1)) × ((i : Fin ↑l) → Fin ↑(p i) → Fin n)\", \"doc\": \"For a natural number $ n $ and an ordered finite partition $ c $ of $ n $, this function returns a triple consisting of: (1) the length $ l $ of the partition (as an element of $ \\\\Fin(n+1) $), (2) a f\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: diagonal representations, box partitions and abstract tensor complexes do not give this signed lattice partition formula and its translation equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the free integral graded chains of an integer lattice the tensor differential squares to zero and the front back face partition map is a translation equivariant graded map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.tensor_unit_d₂\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive]\\n  [inst_5 : ∀ (X₁ : C), ((Cat\", \"doc\": \"In a monoidal category, for any homological complex $ K $ and indices $ i_1, i_2, j $, the differential component $ d_2 $ of the total complex obtained by tensoring $ K $ with the tensor unit complex \"}\n  {\"name\": \"HomologicalComplex.unit_tensor_d₁\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive]\\n  [inst_5 : ∀ (X₁ : C), ((Cat\", \"doc\": \"For any indices $i_1, i_2, j$ in the additive monoid $I$, the first differential $d_1$ of the total complex obtained by tensoring the tensor unit homological complex with another complex $K$ via the c\"}\n  {\"name\": \"Rep.standardComplex.d_comp_ε\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Monoid G],\\n  CategoryTheory.CategoryStruct.comp ((Rep.standardComplex k G).d 1 0) (Rep.standardComplex.ε k G) = 0\", \"doc\": \"In the standard chain complex of representations of a monoid $ G $ over a commutative ring $ k $, the composition of the differential $ d_{1,0} $ from the first term to the zeroth term followed by the\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₂_obj_X_d\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorN\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (P : CategoryTheory.Idempotents.Karoubi (CategoryTheory.SimplicialObject C)) (i j : ℕ),\\n  (AlgebraicTopology.DoldKan.N₂.obj P).X.d i j =\\n    if h : i = j + 1 then CategoryTheory.CategoryStruct.co\", \"doc\": \"For the normalized chain complex functor $ N_2 $ extended to the Karoubi envelope of simplicial objects in a preadditive category $ \\\\mathcal{C} $, the differential $ d_{i,j} $ between degrees $ i $ an\"}\n  {\"name\": \"HomologicalComplex₂.totalAux.ιMapObj_D₁\", \"module\": \"Mathlib/Algebra/Homology/TotalComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] {I₁ : Type u_2}\\n  {I₂ : Type u_3} {I₁₂ : Type u_4} {c₁ : ComplexShape I₁} {c₂ : ComplexShape I₂} (K : HomologicalComplex₂ C c₁ c₂)\\n  (c₁₂ : ComplexShape I₁₂) [inst_2 : TotalComplexShape c₁ c₂ c₁₂] \", \"doc\": \"For a bicomplex $ K $ with complex shapes $ c_1, c_2, c_{12} $, the composition of the graded object's inclusion morphism $ \\\\iota $ with the total complex's first differential $ D_1 $ equals the bicom\"}\n  {\"name\": \"Rep.standardComplex.d_of\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} {n : ℕ} (c : Fin (n + 1) → G),\\n  (Rep.standardComplex.d k G n) (Finsupp.single c 1) = ∑ p, Finsupp.single (c ∘ p.succAbove) ((-1) ^ ↑p)\", \"doc\": \"For any function $ c : \\\\text{Fin}(n+1) \\\\to G $, the differential $ d_n $ applied to the basis element corresponding to $ c $ is the sum over all $ p \\\\in \\\\text{Fin}(n+1) $ of $ (-1)^p $ multiplied by t\"}\n  {\"name\": \"Rep.barComplex.d_def\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] {n : ℕ} [inst_1 : Group G],\\n  (Rep.barComplex k G).d (n + 1) n = Rep.barComplex.d k G n\", \"doc\": \"For a commutative ring $k$, a group $G$, and a natural number $n$, the differential $d_{n+1,n}$ in the bar complex of the group representation is defined as the morphism $d_k(G, n)$, which maps the fr\"}\n  {\"name\": \"Rep.standardComplex.d_eq\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Monoid G] (n : ℕ),\\n  ((Rep.standardComplex k G).d (n + 1) n).hom = ModuleCat.ofHom (Rep.standardComplex.d k G (n + 1))\", \"doc\": \"For any natural number $n$, the differential morphism $d_{n+1,n}$ in the standard chain complex of representations of a monoid $G$ over a commutative ring $k$ is equal to the $k$-linear map obtained b\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: diagonal representations, box partitions and abstract tensor complexes do not give this signed lattice partition formula and its translation equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cubical lattice diagonal formula extends by the free basis to a homogeneous translation equivariant homomorphism into the tensor chain complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.diagonalSuccIsoFree\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] → [inst_1 : Group G] → (n : ℕ) → Rep.diagonal k G (n + 1) ≅ Rep.free k G (Fin n → G)\", \"doc\": \"For a commutative ring $ k $, group $ G $, and natural number $ n $, there exists a canonical isomorphism in the category $ \\\\text{Rep}(k,G) $ between the diagonal representation $ \\\\text{Rep.diagonal}(\"}\n  {\"name\": \"ContinuousCohomology.homogeneousCochains\", \"module\": \"Mathlib.Algebra.Category.ContinuousCohomology.Basic\", \"type\": \": Action (TopModuleCat R) G ⥤ CochainComplex (TopModuleCat R) ℕ\", \"doc\": \"The functor constructs cochain complexes in the category of topological $ R $-modules by first forming the $ G $-equivariant cochain complex $ \\\\text{MultiInd.complex} $, then applying the invariants f\"}\n  {\"name\": \"lTensorHomEquivHomLTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": P ⊗[R] (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] P ⊗[R] Q\", \"doc\": \"Let $R$ be a commutative semiring, and let $P, Q$ be $R$-modules and $M$ be a free $R$-module. There is a canonical $R$-linear isomorphism: $$ P \\\\otimes_R \\\\text{Hom}_R(M, Q) \\\\cong \\\\text{Hom}_R(M, P \\\\o\"}\n  {\"name\": \"Rep.diagonalHomEquiv_apply\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"(f : Rep.diagonal k G (n + 1) ⟶ A) (x : Fin n → G) :\\n  diagonalHomEquiv n A f x = f.hom (Finsupp.single (Fin.partialProd x) 1)\", \"doc\": \"For a commutative ring $ k $, group $ G $, natural number $ n $, and representation $ A $ of $ G $ over $ k $, there is a $ k $-linear equivalence between the set of $ G $-equivariant $ k $-linear map\"}\n  {\"name\": \"CochainComplex.ofHom\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \"(f : ∀ i : α, X i ⟶ Y i) (comm : ∀ i : α, f i ≫ d_Y i = d_X i ≫ f (i + 1)) : of X d_X sq_X ⟶ of Y d_Y sq_Y\", \"doc\": \"Given two cochain complexes $X$ and $Y$ over a category $\\\\mathcal{V}$ with zero morphisms, indexed by a right-cancellative additive semigroup $\\\\alpha$ with multiplicative identity, this constructor de\"}\n  {\"name\": \"Rep.diagonalHomEquiv\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → (n : ℕ) → (A : Rep k G) → (Rep.diagonal k G (n + 1) ⟶ A) ≃ₗ[k] (Fin n → G) → ↑A.V\", \"doc\": \"For a commutative ring $ k $, group $ G $, natural number $ n $, and representation $ A $ of $ G $ over $ k $, there is a $ k $-linear equivalence between the set of $ G $-equivariant $ k $-linear map\"}\n  {\"name\": \"HomologicalComplex.Hom.mk\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \"{ι : Type u_1} →\\n  {V : Type u} →\\n    [inst : CategoryTheory.Category.{v, u} V] →\\n      [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V] →\\n        {c : ComplexShape ι} →\\n          {A B : HomologicalComplex V c} →\\n            (f : (i : ι) → A.X i ⟶ B.X i) →\\n              autoParam\\n                \", \"doc\": \"Given an index type $\\\\iota$, a category $V$ with zero morphisms, and two homological complexes $A$ and $B$ of shape $c$, this constructor builds a homomorphism (chain map) from $A$ to $B$ by specifyin\"}\n  {\"name\": \"groupHomology.inhomogeneousChainsIso\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.Basic\", \"type\": \"[DecidableEq G] : inhomogeneousChains A ≅ (barComplex k G).coinvariantsTensorObj A\", \"doc\": \"For a commutative ring $ k $, group $ G $, and $ k $-representation $ A $ with decidable group equality, this establishes an isomorphism between the inhomogeneous chain complex computing group homolog\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: diagonal representations, box partitions and abstract tensor complexes do not give this signed lattice partition formula and its translation equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ChainComplex\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: diagonal representations, box partitions and abstract tensor complexes do not give this signed lattice partition formula and its translation equation."
+  },
+  {
+   "tool": "grep",
+   "query": "(cubical|partition|powerset).*(equivarian|translat|diagonal)|(equivarian|translat).*(cubical|partition)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/Perm/Cycle/Basic.lean\", \"line\": \"913\", \"text\": \"/-- We can partition the square `s ×ˢ s` into shifted diagonals as such:\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/Combination.lean\", \"line\": \"36\", \"text\": \"  The obvious map from `α` to `powersetCard α 1`, as an equivariant map.\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean\", \"line\": \"155\", \"text\": \"private theorem sum_filter_pairs_eq_sum_powersetCard_mem_filter_antidiagonal_sum (k : ℕ) (a : ℕ × ℕ)\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean\", \"line\": \"211\", \"text\": \"  rw [mem_powersetCard_univ.mp hs, ← mem_antidiagonal.mp ha, add_sub_self_left]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: diagonal representations, box partitions and abstract tensor complexes do not give this signed lattice partition formula and its translation equation."
+  },
+  {
+   "tool": "grep",
+   "query": "(cubical|partition).*(equivarian|translat|diagonal)|(equivarian|translat).*(cubical|partition)",
+   "results": "1 hits; Mathlib/GroupTheory/Perm/Cycle/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern box integrals, bar/simplex chains, signs in abstract tensor complexes, or diagonal representations; none states the cubical subset formula with its lattice translation identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cubical lattice diagonal is the sum over ordered complementary subsets with the shuffle sign and is equivariant under simultaneous translation",
+   "results": "8 hits; Representation.diagonal, Finset.sum_diag, Combinatorics.Line.diagonal_apply, Rep.diagonalSuccIsoFree, CategoryTheory.SimplicialObject.diagonal, Rep.diagonal, Matrix.diag_multiset_sum, Set.diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern box integrals, bar/simplex chains, signs in abstract tensor complexes, or diagonal representations; none states the cubical subset formula with its lattice translation identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cubical\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern box integrals, bar/simplex chains, signs in abstract tensor complexes, or diagonal representations; none states the cubical subset formula with its lattice translation identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed subset partition formula on cubical chains of an integer lattice defines a translation equivariant degree preserving homomorphism",
+   "results": "8 hits; Profinite.NobelingProof.Linear_CC', BoxIntegral.BoxAdditiveMap.upperSubLower, ComplexShape.TensorSigns.ε', BoxIntegral.BoxAdditiveMap, BoxIntegral.BoxAdditiveMap.upperSubLower_apply, BoxIntegral.BoxAdditiveMap.ofMapSplitAdd, BoxIntegral.BoxAdditiveMap.map, AlgebraicTopology.DoldKan.hσ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern box integrals, bar/simplex chains, signs in abstract tensor complexes, or diagonal representations; none states the cubical subset formula with its lattice translation identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For free abelian groups on lattice cubes the front back subset diagonal extends linearly and intertwines translations, with the usual signed tensor chain differential",
+   "results": "8 hits; BoxIntegral.BoxAdditiveMap.upperSubLower, Rep.standardComplex.d, Rep.standardComplex.d_of, groupHomology.inhomogeneousChains.d, Profinite.NobelingProof.Linear_CC', BoxIntegral.BoxAdditiveMap.upperSubLower_apply, Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq, Rep.standardComplex.d_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern box integrals, bar/simplex chains, signs in abstract tensor complexes, or diagonal representations; none states the cubical subset formula with its lattice translation identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-cubical-chain-diagonal",
+  "date": "2026-10-22",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images, ordinary open direct image: algebraic input to the existing tame-boundary route. This item realizes the signed tensor differential, finite free extension and diagonal translation calculation of the integral cubical diagonal expansion; the blueprint paragraph itself contains no cubical formula. Ancestor lookup is None, as inherited.",
+   "via": [
+    "lem-sfb-integral-cubical-chain-diagonal",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cubical-partition-graded-equivariance",
+  "worker": "Q142",
+  "summary": "Supplied six explicit elementary steps for the signed tensor differential, its square zero, partition count and degrees, unique free extension, construction of diagonal translation, and the generatorwise equivariance identity. Read all four cited dependency statements and current blueprint. Statement unchanged; no new nodes; existing searches retained and new logged searches appended.",
+  "blueprint": "Realizes original cubical-diagonal expansion steps 1 and 4 below paragraph (3) of det-thm-sf-ctf-stability-direct-images; this is agent-written algebra, not a claim that the current blueprint contains that formula."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-59958b6e0",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-59958b6e0 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to the live and side-live copies, which are still unsplit, and stmt_deps are unchanged. The item has no repair note, so it is not under the re-split order, and having no new nodes is acceptable. Steps 1-6 carry everything in the old parent steps 1 and 4 (the original text is quoted in the Q87 5a56 report): bilinear well-definedness of d_T, the cross-term cancellation for d_T^2=0 including a=0, the 2^|I| count and the degree, unique free extension including zero source degrees, construction of τ_w⊗τ_w, and generatorwise equivariance via v+u_A+w=v+w+u_A. Citations: d^2=0 is the stated conclusion of lem-sfb-integral-lattice-cubical-contraction (same unit, not circular). The free-module, tensor and chain-complex definition nodes say exactly what is used. proof_deps equals the union of uses. I checked these small cases myself: r=0, I=∅, r=1, r=2 with I={1,2} (signs +1 and -1), and d_T^2 on C_1⊗C_1. Duplicate search: the boundary-expansion and counit siblings are distinct clauses, def-sc-module-cup-aw-components is simplicial, not cubical, and there is no equivalent node. There is no SGA citation. Advisory only: proof_origin and the step sources use the moving literature/blueprint/latest symlink, whose file is currently identical to main-20261015, and blueprint.from.node is an inherited null."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CubicalPartitionGradedEquivariance",
+  "declaration": "IntegralLatticeCubical.partitionGradedEquivariance",
+  "declarations": [
+   "IntegralLatticeCubical.partitionTensorComplex",
+   "IntegralLatticeCubical.partitionTensorInclusion",
+   "IntegralLatticeCubical.gradedPartitionComponent",
+   "IntegralLatticeCubical.partitionTensorTranslate",
+   "IntegralLatticeCubical.partitionGradedEquivariance"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CubicalPartitionGradedEquivariance.lean",
+  "statement": "theorem partitionGradedEquivariance (r : ℕ) : (∀ (a b : ℤ) (x : Chains r a) (y : Chains r b), (partitionTensorComplex r).d (a + b) (a + b - 1) (partitionTensorInclusion r a b (a + b) (x ⊗ₜ[ℤ] y)) = partitionTensorInclusion r (a - 1) b (a + b - 1) (boundary r a x ⊗ₜ[ℤ] y) + (a.negOnePow : ℤ) • partitionTensorInclusion r a (b - 1) (a + b - 1) (x ⊗ₜ[ℤ] boundary r b y)) ∧ (∀ n : ℤ, (partitionTensorComplex r).d n (n - 1) ≫ (partitionTensorComplex r).d (n - 1) (n - 1 - 1) = 0) ∧ (∀ (n : ℤ) (v : Fin r → ℤ) (I : Directions r n), gradedPartitionComponent r n (cell r n v I.val) = ∑ A ∈ I.val.powerset, partitionSign r A (I.val \\ A) • partitionTensorInclusion r (A.card : ℤ) ((I.val \\ A).card : ℤ) n (cell r (A.card : ℤ) v A ⊗ₜ[ℤ] cell r ((I.val \\ A).card : ℤ) (v + directionSum r A) (I.val \\ A))) ∧ (∀ P : (n : ℤ) → Chains r n →ₗ[ℤ] (partitionTensorComplex r).X n, (∀ (n : ℤ) (v : Fin r → ℤ) (I : Directions r n), P n (cell r n v I.val) = gradedPartitionComponent r n (cell r n v I.val)) → P = gradedPartitionComponent r) ∧ (∀ I : Finset (Fin r), I.powerset.card = 2 ^ I.card ∧ ∀ A ∈ I.powerset, (A.card : ℤ) + ((I \\ A).card : ℤ) = (I.card : ℤ)) ∧ (∀ n : ℤ, n < 0 ∨ (r : ℤ) < n → gradedPartitionComponent r n = 0) ∧ (∀ (n : ℤ) (w : Fin r → ℤ), (gradedPartitionComponent r n).comp (translate r n w) = (partitionTensorTranslate r n w).comp (gradedPartitionComponent r n))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ed754dba",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; 4 dep records byte-identical; statement verbatim, 5 decls listed, lines<=90. Clauses checked: tensor differential via Mathlib tensorObj extended by zero to Z (sign (-1)^a on second factor) with canonical summand inclusions; d^2=0; generator formula with partitionSign (b<a in AxB) and directionSum=u_A; uniqueness by generator extensionality, existence by the real def gradedPartitionComponent (transport of diagonalComponent); 2^|I| count and degree; zero for n<0 or n>r; equivariance with translate and extendMap(tensorHom translationMap translationMap) in every integer degree, no chain-map claim. Edge cases r=0, I=empty, negative factors, a=0, total degree 0, negative coordinates; r=2 signs checked by hand; no universes. No duplicates, no hollow defs, sorry only, docstrings and 6-step plan present. Maintainer note N1, as for the PASSed sibling lem-sfb-cubical-partition-boundary-expansion: plain helpers (chainComplex/translationMap/directionSum/partitionSign/diagonalComponent) are imported from the downstream parent theorem module IntegralCubicalChainDiagonal; move them, same names, to an existing:true def-node module cited by the parent and its 3 split children to avoid a stage-3 import cycle. No compile (no file changed)."
+ }
+}

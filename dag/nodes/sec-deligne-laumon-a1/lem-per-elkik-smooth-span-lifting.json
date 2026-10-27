@@ -1,0 +1,255 @@
+{
+ "id": "lem-per-elkik-smooth-span-lifting",
+ "kind": "statement",
+ "title": "Uniform smooth-span lifting on principal singularity fibres",
+ "statement": "Let $k$ be a characteristic-zero field. A principal singularity pair $(X,I)$ means an affine finite-type $k$-scheme $X=\\operatorname{Spec}A$ [def-weil-finite-type-morphism], an ideal $I=(\\pi)$ with $\\pi$ a non-zero-divisor, and $X_{\\mathrm{sing}}\\subseteq V(I)$ [def-weil-regular-scheme]. Write $X_m=\\operatorname{Spec}(A/I^m)$ and $I_m=I\\mathcal O_{X_m}$. Maps of pairs preserve the distinguished ideals by extension. There exists an integer $r\\geq0$ depending only on $(X,I)$ with the following uniform property. Let $u:(X',I')\\to(X,I)$ be any smooth $k$-morphism [def-sbc-smooth-morphisms] with $(X',I')$ another principal singularity pair (the identity is allowed). Let $(Y,J)$ be any principal singularity pair over $k$, let $m>r$, and let $a:(Y_{m+r},J_{m+r})\\to(X'_{m+r},I'_{m+r})$ be smooth over $k$. There are a finite-type $k$-scheme $Z$, an ideal $K=J\\mathcal O_Z$, an etale map $g:Z\\to Y$ [def-weil-etale-morphism] inducing isomorphisms $Z_t\\simeq Y_t$ for every $t\\geq1$, and a smooth map $f:Z\\to X'$ preserving the distinguished ideals, such that $a|_m=f_m\\circ g_m^{-1}$. The bound $r$ is independent of $u$, $Y$, $m$, and $a$.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Corollary 3.3.2, Proposition 3.3.1, Remark 3.2.2(i)--(ii) and definition of conductor in 3.2.5; uniform version for smooth targets; printed pp.20--22; read online 2026-10-24, archival copy WANTED. No Stacks tag states this specialized assertion."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-regular-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a generator $\\pi$ of $I$. Apply [lem-per-principal-parameter-conductor-bound] to obtain $q(0)\\ne0$ and $r\\ge1$. Write $A_*=A[1/q(\\pi)]$. For every smooth $u$, its base change $X'_*\\to\\operatorname{Spec}A_*$ is smooth: an affine first-order lifting problem over $X'_*$ is the same problem over $X'$ together with the fixed base map, so the definition supplies a lift. Hence [lem-per-gabber-ramero-ideal-calculus] gives $\\pi^r\\in H_{A'_*/k[t]}$, where $A'_*=\\mathcal O(X')[1/q(u^*\\pi)]$. This fixes $r$ before $u,Y,m,a$ are chosen. The open contains the whole distinguished fibre.",
+   "uses": [
+    "lem-per-principal-parameter-conductor-bound",
+    "lem-per-gabber-ramero-ideal-calculus",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§3.3.1 and Remark 3.2.2(ii)"
+   }
+  },
+  {
+   "text": "Put $Y=\\operatorname{Spec}B$, $J=(s)$ and $N=m+r$. The image of $u^*\\pi$ under $a^*$ generates $J/J^N$; lift it to $\\rho=sv\\in J$. Then $(s)=(sv)+(s^N)$ gives $1=vw+s^{N-1}c$ by cancelling the non-zero-divisor $s$. Thus $v$ is a unit on a neighbourhood of $V(J)$. Replace $Y$ by $D(v)$, which contains every $Y_t$; now $J=(\\rho)$ and $\\rho$ is a non-zero-divisor. Also $q(\\rho)$ is a unit modulo every $J^t$, since its constant term is nonzero. Consequently $a$ factors through $X'_{*,N}$. Give $B$ the $k[t]$-structure $t\\mapsto\\rho$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof, choice of the lifted parameter"
+   }
+  },
+  {
+   "text": "Form $H=B^h$ for $(B,J)$ by [lem-weil-pbc-pair-henselization]. It is henselian, Noetherian, flat over $B$, and has the same quotients modulo $J^t$ by [lem-weil-pbc-henselization-noetherian-completion] and [lem-weil-pbc-henselization-flat-quotients]. Thus $\\rho$ is a non-zero-divisor on $H$ by the defining tensor test for flatness. The finite-type algebras $A'_*,B$ are Noetherian and finitely presented over their Noetherian bases by [lem-weil-pbc-finite-type-algebra-noetherian] and [lem-weil-pbc-finite-type-noetherian-finite-presentation]. The smooth map $A_*\\to A'_*$ is flat by [lem-weil-pbc-smooth-ring-map-flat]; $A_*$ is flat over $k[t]$ by Step 1. Flat transitivity and base change give $C=A'_*\\otimes_{k[t]}H$ flat over $H$, using [lem-pc-module-flat-transitive] and [lem-weil-pbc-flat-module-base-change]. In particular $\\rho$ is a non-zero-divisor on $C$. By [lem-per-gabber-ramero-ideal-calculus], $\\rho^r\\in H_{C/H}$. The map $a$ defines the $H$-algebra retraction $C/\\rho^NC\\to H/\\rho^NH$, $x\\otimes h\\mapsto a^*(x)h$. Apply [lem-per-gabber-ramero-henselian-section-lifting] with $n=m>r$ to obtain $C\\to H$ agreeing modulo $\\rho^m$, hence a $k[t]$-algebra map $A'_*\\to H$.",
+   "uses": [
+    "lem-per-gabber-ramero-ideal-calculus",
+    "lem-per-gabber-ramero-henselian-section-lifting",
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-henselization-flat-quotients",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Theorem 3.2.3 and Proposition 3.3.1 proof, henselian base change"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-pair-henselization], $H$ is the filtered colimit of etale $B$-algebras $D$ with $B/J\\simeq D/JD$. Give each the $k[t]$-structure $t\\mapsto\\rho$. The finitely presented $k[t]$-algebra $A'_*$ and its map to $H$ therefore descend to a map $A'_*\\to D$ by [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit]. Put $Z^0=\\operatorname{Spec}D$. The map $D\\to H$ and $B\\to D$ have canonically isomorphic quotients modulo $J^t$: the latter by etale flatness [lem-weil-pbc-etale-algebra-flat] and [lem-weil-pbc-flat-iso-mod-ideal-powers], and the former by comparison with $B\\to H$. Thus the descended map agrees with $a$ modulo $J^m$ and preserves $J$ exactly, since it sends $u^*\\pi$ to $\\rho$. The scheme $Z^0$ is finite type over $k$. Since $D$ is finite type over the Noetherian ring $B$, it is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. It is finite type over $A'_*$ via this map (a finite list of $k$-algebra generators suffices), hence finitely presented over it by [lem-weil-pbc-finite-type-noetherian-finite-presentation].",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-iso-mod-ideal-powers",
+    "lem-weil-pbc-henselization-flat-quotients",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof, finite-presentation descent; Stacks Tags 0A02 and 0AGU"
+   }
+  },
+  {
+   "text": "The special-fibre map $Z^0_1\\to X'_{*,1}$ is the base change of $a|_m$, hence smooth. Base change follows directly from the first-order lifting definition: an affine lifting problem for the pullback is one for $a$ with its prescribed base coordinate. At any $z\\in Z^0_1$, put $x=f^0(z)$ and localize $A'_*\\to D$ at $x,z$. These are Noetherian local rings; $u^*\\pi$ and its image $\\rho$ are non-zero-divisors, the latter because $B\\to D$ is etale and flat. The quotient local map is flat by [lem-weil-pbc-smooth-ring-map-flat]. Apply [lem-weil-pbc-flat-local-criterion-nonzerodivisor] with module equal to $D_z$, finite over itself, to obtain flatness of the local map. Its fibre at $x$ is the fibre of the smooth special-fibre map, so [lem-trf-smooth-at-point-fibre-criterion] makes $f^0$ smooth near $z$. Take the union $Z$ of these smooth neighbourhoods. It contains the entire $Z^0_1$, so it contains every infinitesimal fibre $Z^0_t$, whose underlying set is $Z^0_1$. Since $Z^0$ is Noetherian this open is quasi-compact and finite type over $k$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-flat-local-criterion-nonzerodivisor",
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof, Cartier local flatness and shrinking; Stacks 00ML and 01V9"
+   }
+  },
+  {
+   "text": "Restricting the etale map $Z^0\\to Y$ to $Z$ and composing with the open immersion $D(v)\\hookrightarrow Y$ gives the required etale $g$: at every point of $Z$, source and target can be restricted to the same affine neighbourhoods as for $Z^0\\to D(v)$, since the intervening immersions are open. The local affine etale condition is therefore the identical one. Put $K=J\\mathcal O_Z$. Both shrinkings contain the whole distinguished fibre, so $g_t$ is still an isomorphism for every $t\\ge1$. The descended map $f:Z\\to X'_*\\hookrightarrow X'$ is smooth by the same open-target local test and satisfies $f^*I'=K$ and $f_m=a|_m\\circ g_m$, whence the asserted identity. If $V(J)$ is empty, take $Z=\\varnothing$ from the start. If $V(I)$ is empty then $I'=\\mathcal O_{X'}$ and existence of the map of pairs $a$ forces $J/J^N=\\mathcal O_{Y_N}$; a nilpotent unit ideal forces $Y_N=\\varnothing$, so this is the same empty case. The integer $r$ was fixed in Step 1.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Corollary 3.3.2; explicit all-thickenings and uniformity conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-principal-parameter-conductor-bound",
+  "lem-per-gabber-ramero-ideal-calculus",
+  "def-sbc-smooth-morphisms",
+  "lem-per-gabber-ramero-henselian-section-lifting",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-henselization-flat-quotients",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-iso-mod-ideal-powers",
+  "lem-weil-pbc-flat-local-criterion-nonzerodivisor",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Proposition 3.3.1 proof and Corollary 3.3.2 with Remark 3.2.2; source read online, archival copy WANTED; explicit uniformity and generator adjustments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Elkik approximation bound for smooth targets over one fixed characteristic zero Cartier pair gives etale neighborhood smooth-span lift of maps of thick fibres",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.lift, StandardEtalePair.hasMap_X, StandardEtalePair.lift_X, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, StandardEtalePair.HasMap.map, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.exists_lift",
+   "results": "1 hits: Algebra.FormallySmooth.exists_lift",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|Gabber.Ramero|henseli[sz].*smooth|smooth.*henseli[sz]",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphisms between infinitesimal fibres of singular algebraic schemes lift after loss of a bounded number of powers of a Cartier ideal",
+   "results": "8 hits: Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AlgebraicGeometry.IsSmooth.casesOn, Algebra.FormallySmooth.iff_comp_surjective, AlgebraicGeometry.Scheme.Hom.liftQuotient, Algebra.Smooth.formallySmooth, AlgebraicGeometry.IsSmooth.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform bounded approximation of smooth maps between Cartier thickenings by smooth maps on etale neighborhoods of a singular scheme",
+   "results": "{\"t\": \"2026-10-24T05:02:48Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform bounded approximation of smooth maps between Cartier thickenings by smooth maps on etale neighborhoods of a singular scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmooth\", \"Continuous.exists_contMDiff_approx_and_eqOn\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"49109b46d94fa26e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smooth nilpotent lifts and standard-smooth charts do not supply a uniform singular-pair approximation bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.exists_lift",
+   "results": "{\"t\": \"2026-10-24T05:03:15Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallySmooth.exists_lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\"], \"digest\": \"9ebfc6342559b3f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smooth nilpotent lifts and standard-smooth charts do not supply a uniform singular-pair approximation bound"
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|Gabber.Ramero|conductor.*smooth|smooth.*conductor",
+   "results": "{\"t\": \"2026-10-24T05:03:15Z\", \"tool\": \"grep\", \"query\": \"Elkik|Gabber.Ramero|conductor.*smooth|smooth.*conductor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smooth nilpotent lifts and standard-smooth charts do not supply a uniform singular-pair approximation bound",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphisms of thick Cartier fibres lift with bounded loss of precision to an etale neighbourhood",
+   "results": "{\"t\": \"2026-10-24T05:03:15Z\", \"tool\": \"leansearch\", \"query\": \"Smooth morphisms of thick Cartier fibres lift with bounded loss of precision to an etale neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.FormallySmooth.exists_lift\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"7e645b693b6aead5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smooth nilpotent lifts and standard-smooth charts do not supply a uniform singular-pair approximation bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-formal-resolution-intrinsic",
+  "date": "2026-10-24",
+  "group": "Q156"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Temkin Proposition 3.3.5 and Lemma 3.3.3, printed pp.23--25: sufficiently thick fibres determine the desingularization, and Proposition 3.3.5 proves compatibility with regular morphisms; Corollary 3.3.2, Proposition 3.3.1, Remark 3.2.2(i)--(ii) and definition of conductor in 3.2.5; uniform version for smooth targets; printed pp.20--22",
+   "via": [
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-elkik-smooth-span-lifting",
+  "worker": "stage1",
+  "summary": "Uniform conductor choice, henselian bounded section lifting, finite-presentation descent and Cartier fibre smoothness. Statement preserved; four new supporting nodes (one definition and three statements).",
+  "blueprint": "Inherited formal-resolution branch of ancestor lem-per-artin-gabber-affine-curve Step 3 through the existing creation chain. The latest ancestor no longer has a formal-resolution sentence; this provenance mismatch is reported, not silently rewritten.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselization-noetherian-completion",
+    "why": "Noetherianity of the pair henselization, used as a generic algebra tool; this unit has no replacement."
+   },
+   {
+    "node": "lem-trf-smooth-at-point-fibre-criterion",
+    "why": "Flat local map plus smooth fibre implies smoothness near the point, a generic geometric criterion; no unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-trf-smooth-at-point-fibre-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-c7f0fc5dc",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-c7f0fc5dc (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes, every cited statement, and Temkin §3.2.2–3.3.2, Prop 3.3.1 (with proof), Cor 3.3.2 and Lemma 3.3.4, from the online PDF; the copy is not in literature/, so the WANTED line and proof_origin=agent are right. The item statement is unchanged and equals Cor 3.3.2 in the uniform form Lemma 3.3.4 uses. def-per-gabber-ramero-obstruction-ideal (H_P: b·id_M factors through δ) equals Temkin/GR's H_{B/A}: Ext^1(L,N)=coker(Hom(F,N)→Hom(M,N)), so it does not depend on the presentation. Example k[x]/(x^3) gives H=(x^2). ideal-calculus matches GR 5.4.2 and Temkin 3.2.1(i),(ii), checked directly. conductor-bound is true: generic smoothness over G_m minus finitely many points, flatness is torsion-freeness over k[t], and q(0)≠0. henselian-section-lifting is Temkin Thm 3.2.3 = GR 5.4.13 with the same precision bookkeeping (n>r, input mod t^{n+r}, output mod t^n); I checked it by Newton's method for one-variable C. Steps 1–6 check out: uniform r before u,Y,m,a; generator correction 1=vw+s^{N-1}c; C=A'_*⊗H is flat and ρ^r∈H_{C/H} by base change; finite-presentation descent through the étale colimit; local flatness 00ML plus fibre criterion 01V9 give smoothness along Z^0_1; empty cases handled. No duplicates found (adic-homomorphism-lift, jacobian-algebraization, popescu-lift, singular-ideal and trf conductor all differ). All lem-weil-pbc-* citations are on route, since unit sk-thm-p1 is in the uses closure. Accepted tool use: lem-trf-smooth-at-point-fibre-criterion (Stacks 01V9). Batch-5 flag for that node: its 434-node closure has only 3 generic trf commutative-algebra/scheme lemmas and no trace-formula or Poincaré-duality proof node; neither assumption gives it, so it is outside them and needs no RETURN. Blueprint provenance mismatch is inherited and openly flagged. No fixes."
+ }
+}

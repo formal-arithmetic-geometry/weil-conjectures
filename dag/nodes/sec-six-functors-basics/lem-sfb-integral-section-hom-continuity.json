@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-integral-section-hom-continuity",
+ "kind": "statement",
+ "title": "Integral constructible Hom continuity in section modules",
+ "statement": "Let $\\ell$ be prime, let $E\\subset\\overline{\\mathbf Q}_\\ell$ be finite over $\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and let $X$ be quasi-compact and locally Noetherian [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Pull the actual condensed ring of integers $\\underline{\\mathcal O_E}$ back to $X_{\\mathrm{proet}}$ [sk-def-sfb-condensed-ring]. Use its reconstructed commutative section-ring sheaf $R$ and the exact equivalence between internal modules and section modules [lem-sfb-module-object-ringed-site-derived-comparison]. Let $K\\in D(R)$ [def-weil-abstract-derived-category] have bounded general-ring-object constructible cohomology after the inverse equivalence [sk-def-sfb-bounded-constructible]. Then $K$ satisfies $\\mathrm{HasLocalizationHomContinuity}$ [def-sfb-localization-hom-comparison-data]: for every sequential diagram $N$ of complexes with one common termwise lower bound, the canonical map $Q(\\operatorname{colimit.post}(N,\\Gamma_K))$ is invertible, where $\\Gamma_K$ is the fixed functorial K-injective internal-Hom model. No constructibility or completeness condition is required of $N$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Lemma 6.8.12 and Proposition 6.8.14(2); agent extraction of the coefficient and exact-equivalence transport."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-abstract-derived-category",
+  "def-sfb-localization-hom-comparison-data",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-l-adic-coefficient-extension",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sfb-module-object-ringed-site-derived-comparison"
+ ],
+ "proof": [
+  {
+   "text": "General-lfp and finite constant-model constructibility agree for the actual integral coefficient ring. The integral coefficient comparison identifies it with the continuous ring defined using the spectral extension absolute value on ULift E. Restriction along the inverse coefficient isomorphism transports boundedness and all cohomology local models.",
+   "uses": [
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "lem-integral-coefficient-ext-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply bounded finite-model generation and the proved closed-support and open-immersion continuity lemmas, the integral case of constructible internal-Hom continuity, for the spectral extension coefficient. The exact section-module equivalence transports the cohomology cocones.",
+   "uses": [
+    "lem-sfb-constructible-internal-hom-continuity",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient-isomorphism scalar-Hom adjunction identifies Hom after restriction, and equivalence invariance transfers continuity to the actual section coefficient. A lifted sequential index fits the module universe; the cofinality comparison and cohomology criterion give the stated canonical quasi-isomorphism.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-internal-hom-localization-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-integral-coefficient-ext-comparison",
+  "lem-sfb-constructible-internal-hom-continuity",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-internal-hom-localization-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Normalized telescope proof and coefficient transport, pp. 58–62."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "colimit.*post.*pre|colimit.*pre.*post|mapDerivedCategory.*colimit",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Limits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"post\", \"pre\"",
+   "results": "CategoryTheory.Limits.colimit.pre_post; CategoryTheory.preservesColimit_of_isIso_post; CategoryTheory.Limits.PreservesColimitsOfSize.underPost; CategoryTheory.Limits.PreservesFiniteColimits.underPost; CategoryTheory.Limits.PreservesColimitsOfShape.underPost",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on derived categories which preserves bounded below sequential colimits commutes with scalar localization telescopes",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralGeneralLfpHomInversion",
+  "date": "2026-10-25",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md in literature/blueprint/latest: the finite-extension field case follows by inverting ell. This lemma supplies the sequential continuity of general-lfp constructible first inputs in the actual section coefficients. blueprint_refs.py ancestor reports no imported ancestor for the parent.",
+   "via": [
+    "lem-sfb-integral-general-lfp-hom-inversion",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSectionHomContinuity",
+  "file": "lean/Sheaf/Paper/IntegralSectionHomContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralSectionHomContinuity",
+  "statement": "theorem integralSectionHomContinuity\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u})\n    [CompactSpace X] [IsLocallyNoetherian X]\n    [(Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]\n    (K : DerivedCategory (scalarModules.{u + 1, u, u + 1} (Scheme.ProEt.topology X)\n      (ModuleObjectRingedComparison.ring (Profinite.padicIntegersRingObj l E.1) X)))\n    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj l E.1) X)\n      (((ModuleObjectRingedComparison.equivalence\n        (Profinite.padicIntegersRingObj l E.1) X).inverse.mapDerivedCategory).obj K)) :\n    HasLocalizationHomContinuity.{u + 1, u, u, u + 1} (Scheme.ProEt.topology X)\n      (ModuleObjectRingedComparison.ring (Profinite.padicIntegersRingObj l E.1) X) K",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralSectionContinuityDerived",
+   "AlgebraicGeometry.ProEtale.integralSectionHomContinuity"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-04f4f",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T001230-L-4177136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261026T130254-L-3445138",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
+ }
+}

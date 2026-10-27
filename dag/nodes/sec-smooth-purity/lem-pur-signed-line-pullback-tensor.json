@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-signed-line-pullback-tensor",
+ "kind": "statement",
+ "title": "Signed line PullbackTensor",
+ "statement": "Let U preserve finite limits and coverings, let the adjunct of a:R→U_*S be invertible, and fix an isomorphism t:F(L)≅N of module sheaves. There exists a natural isomorphism gamma:(- tensor L)⋙F≅F⋙(- tensor N). On every source pure section x tensor y inserted by the pullback unit, gamma is the pure tensor of the inserted x and t applied to the inserted y. No flatness or rank assumption on L is needed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-signed-line-derived-action-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "Use the finite-limit theorem to obtain the unit-compatible ring and module-set presentations. Construct AlgebraicInverseImage with exactly the specified module pullback and its given comparison. The inverse-image tensor comparison then gives a binary comparison whose unit formula is proved by testing a Cartesian graph.",
+   "uses": [
+    "lem-pur-identified-ring-pullback-finite-limits",
+    "lem-pur-signed-line-algebraic-pullback",
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate by the ordinary/site tensor comparison and tensor the second factor with t. Its pure-section formula follows from the two comparison formulas and pullback-unit naturality. Prove naturality in the first module by the pullback adjunction and tensor generation, and assemble the component isomorphisms.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-identified-ring-pullback-finite-limits",
+  "lem-pur-signed-line-algebraic-pullback",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-sp-scalar-extension-binary-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedLinePullbackTensor",
+  "file": "lean/Sheaf/Algebra/Homology/SignedLinePullbackTensor.lean",
+  "declaration": "SheafOfModules.SignedLineDerivedBaseChange.identified_ring_pullback_tensor",
+  "declarations": [
+   "SheafOfModules.SignedLineDerivedBaseChange.identified_ring_pullback_tensor"
+  ],
+  "statement": "theorem identified_ring_pullback_tensor\n    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]\n    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶\n      (U.sheafPushforwardContinuous RingCat J K).obj\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))\n    (hcover : CoverPreserving J K U)\n    (rInv : Sheaf J RingCat.{max u v w} ⥤ Sheaf K RingCat.{max u v w})\n    (rAdj : rInv ⊣ U.sheafPushforwardContinuous RingCat J K)\n    (ha : IsIso ((rAdj.homEquiv _ _).symm a))\n    (L : KFlatFixedTensor.Modules R) (N : KFlatFixedTensor.Modules S)\n    (t : (pull a).obj L ≅ N) :\n    ∃ γ : siteSheafTensorRight L ⋙ pull a ≅ pull a ⋙ siteSheafTensorRight N,\n      ∀ (M : KFlatFixedTensor.Modules R) (V : C) (x : M.val.obj (op V))\n        (y : L.val.obj (op V)),\n        (γ.hom.app M).val.app (op (U.obj V))\n          (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)\n            ((siteSheafTensorRight L).obj M) V (siteSheafTensorTmul M L (op V) x y)) =\n          siteSheafTensorTmul ((pull a).obj M) N (op (U.obj V))\n            (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)\n              M V x)\n            (t.hom.val.app (op (U.obj V))\n              (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)\n                L V y))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

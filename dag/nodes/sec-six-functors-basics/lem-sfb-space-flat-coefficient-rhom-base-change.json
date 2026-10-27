@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-space-flat-coefficient-rhom-base-change",
+ "kind": "statement",
+ "title": "Perfect-source derived Hom with a relatively flat coefficient commutes with arbitrary base change",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and unbounded module derived categories [def-weil-abstract-derived-category]. Quasi-coherent modules are as in [def-trf-space-quasi-coherent-module], and ordinary tensor pullback and direct image are [def-trf-space-etale-module-functors]. Derived pullback uses K-flat resolutions with flat terms and derived direct image uses K-injective resolutions. A perfect object is etale locally isomorphic to a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $f:X\\to Y$ be quasi-compact and quasi-separated: every affine scheme base change of $f$ has quasi-compact source, and its relative diagonal is quasi-compact. A space is quasi-compact when it admits a surjective etale atlas from a quasi-compact scheme. Let $P\\in D(\\mathcal O_X)$ be perfect, and let $M$ be a quasi-coherent $\\mathcal O_X$-module flat over $Y$, meaning stalkwise flat over the base local rings on compatible etale scheme charts [def-pc-scheme-module-flat-over]. Regard $M$ as a complex in degree zero. For any morphism $g:Y'\\to Y$ of algebraic spaces, put $X'=X\\times_Y Y'$ with projections $h:X'\\to X$ and $f':X'\\to Y'$ [lem-trf-space-fibre-products-etale-covers]. With derived internal Hom [def-pur-derived-internal-hom], the canonical base-change comparison is an isomorphism in $D(\\mathcal O_{Y'})$:\n$$Lg^*Rf_*R\\mathcal Hom_{\\mathcal O_X}(P,M)\\xrightarrow{\\sim}Rf'_*R\\mathcal Hom_{\\mathcal O_{X'}}(Lh^*P,h^*M).$$\nThe coefficient on the right is ordinary tensor pullback, not derived pullback. The comparison is the canonical derived direct-image base-change map followed by the internal-Hom pullback comparison and the map induced by $Lh^*M\\to h^*M$. It is natural in $P,M$ and in base change. No properness, Noetherian, coherence or finiteness hypothesis on $M$ or $g$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08JQ (lemma-base-change-RHom), case (1), with the relatively flat complex concentrated in degree zero; canonical map in the first paragraph of its proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-scheme-module-flat-over",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Put $M'=h^*M$ and $\\phi:Lh^*(M[0])\\to M'[0]$, the canonical derived-to-ordinary tensor pullback comparison. Ordinary tensor pullback preserves quasi-coherence by the cited module theorem. Thus $K=M[0]$ and $K'=M'[0]$ belong to their respective quasi-coherent derived subcategories; their only possible cohomology is in degree zero.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "08JQ proof: coefficient pair; 0A1K proof: derived-to-ordinary comparison."
+   }
+  },
+  {
+   "text": "Check the stalk condition for $\\phi$ using the etale-chart criterion. On any of its scheme squares $U'=U\\times_V V'$, write $N$ for the Zariski quasi-coherent module with $\\epsilon_U^*N=M|_U$. The derived etale-Zariski equivalence and its pullback comparison $\\epsilon_{U'}^*Lh_U^*\\simeq Lh_{U,\\mathrm{et}}^*\\epsilon_U^*$, together with the pullback composition comparison for $U'\\to X'\\to X$ equal to $U'\\to U\\to X$, identify the transported coefficient map $\\phi_U$ with the Zariski derived-to-ordinary comparison $Lh_U^*N\\to h_U^*N$: both are the canonical map to $H^0$ of the same derived pullback, ordinary pullback being right exact. Fix $z\\in U'$ with images $x\\in U$, $v'\\in V'$, $v\\in V$. Set $R=\\mathcal O_{V,v}$, $A=\\mathcal O_{U,x}$, $B=\\mathcal O_{V',v'}$, $C=\\mathcal O_{U',z}$. The hypothesis on $M$ and the relative-flat stalk theorem give $N_x$ flat over $R$. The bounded-flat K-flat theorem applied to $N_x[0]$ makes $N_x\\otimes_R^{\\mathbf L}B$ represented by $(N_x\\otimes_R B)[0]$. The module pullback-stalk theorem identifies $(h_U^*N)_z$ with $N_x\\otimes_A C$, with the unit sending $n$ to $n\\otimes1$. For $i\\ne0$ both sides of the chart comparison are zero. For $i=0$ that comparison is\n$$(N_x\\otimes_R B)\\otimes_{A\\otimes_R B}C\\longrightarrow N_x\\otimes_A C,\\quad(n\\otimes b)\\otimes c\\longmapsto n\\otimes bc.$$\nIts inverse is $n\\otimes c\\mapsto(n\\otimes1)\\otimes c$; balancing verifies both composites are identities. These are the canonical maps, since $\\phi$ is the derived-to-ordinary comparison and the stalk unit has the specified formula. The chart criterion now gives the geometric stalk condition for $\\phi$ everywhere. No flatness of $A$ or $B$ over $R$ was used.",
+   "uses": [
+    "lem-sfb-space-stalk-condition-etale-charts",
+    "lem-pc-relative-flat-module-stalk",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "08JQ final sentence, referring to the stalk computation in 0A1K; 0DKG chart equivalence."
+   }
+  },
+  {
+   "text": "Apply perfect-source internal-Hom inheritance to $K=M[0]$, $K'=M'[0]$, $\\phi$ and the given perfect $P$. Steps 1 and 2 check its quasi-coherence and stalk hypotheses. It gives quasi-coherent $J=R\\mathcal Hom(P,M)$ and $J'=R\\mathcal Hom(Lh^*P,M')$, and proves the stalk condition for\n$$\\psi:Lh^*J\\longrightarrow R\\mathcal Hom(Lh^*P,Lh^*M)\\longrightarrow J'.$$\nThe first arrow is the evaluation transpose and the second is induced by $\\phi$. This inheritance theorem imposes no boundedness on $K,K'$ and no flatness of the square.",
+   "uses": [
+    "lem-sfb-space-single-complex-rhom-inheritance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "08JQ proof: apply 0DKI(2) to the coefficient comparison."
+   }
+  },
+  {
+   "text": "Apply the single-complex base-change theorem to $J,J',\\psi$. Their quasi-coherence and all their stalk comparisons were verified in step 3; $f$ is quasi-compact and quasi-separated by hypothesis. It follows that $Lg^*Rf_*J\\to Rf'_*Lh^*J\\xrightarrow{Rf'_*(\\psi)}Rf'_*J'$ is an isomorphism. Its first arrow is the theorem's pulled-counit adjunction mate. The formula for $\\psi$ in step 3 is exactly internal-Hom pullback followed by the map induced by $Lh^*M\\to h^*M$. Therefore this is the comparison in the statement, with ordinary coefficient pullback on the right.",
+   "uses": [
+    "lem-sfb-space-single-complex-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "08JQ proof: application of 0DKH."
+   }
+  },
+  {
+   "text": "For naturality in $P$ and $M$, use naturality of the evaluation-transpose comparison and of $\\phi$; the pulled-counit exchange is a natural transformation, so composing these squares gives the asserted square after $Rf'_*$. For a further base morphism $t:Y''\\to Y'$, transpose the two composites under the pullback/direct-image adjunctions. The cited monoidal comparisons give the pullback composition comparisons $c$, their compatibility with the tensor comparisons, and the counit of a composite adjunction as the composite of the pulled counits. Hence the exchange of the pasted square is the pasting of the two exchanges, the evaluation transposes compose, and both transposes are the pullback of the same counit, followed by the same evaluation and the ordinary coefficient map, after $c$ identifies their sources. The adjunction bijection makes the composites equal. Identity base change gives the unit triangle identity. This verifies naturality of the specified comparison, without requiring that $Lh^*M\\to h^*M$ itself be an isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-perfect-internal-hom-pullback",
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "08JQ canonical-map paragraph; 0DKI proof, the two-arrow evaluation comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-stalk-condition-etale-charts",
+  "lem-pc-relative-flat-module-stalk",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-space-single-complex-rhom-inheritance",
+  "lem-sfb-space-single-complex-base-change",
+  "lem-sfb-ringed-perfect-internal-hom-pullback",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08JQ, proof in case (1), specialized to G=M[0]: 0A1K stalk calculation, 0DKI(2), 0DKH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of internal Hom from a perfect complex into a relatively flat quasi-coherent module on a quasi-compact quasi-separated algebraic space commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary adjunctions or flat morphism stability, not arbitrary derived Hom direct-image base change for relatively flat coefficients on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"baseChange\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"LieAlgebra.derivedSeries_baseChange\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \" {R : Type u} {L : Type v} [CommRing R] [LieRing L] [LieAlgebra R L] {A : Type u_1} [CommRing A] [Algebra R A] (k : ℕ) : LieAlgebra.derivedSeries A (TensorProduct R A L) k = LieSubmodule.baseChange A (LieAlgebra.derivedSeries R L k)\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.derivedSeriesOfIdeal_baseChange\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \" {R : Type u} {L : Type v} [CommRing R] [LieRing L] [LieAlgebra R L] (I : LieIdeal R L) {A : Type u_1} [CommRing A] [Algebra R A] (k : ℕ) : LieAlgebra.derivedSeriesOfIdeal A (TensorProduct R A L) k (LieSubmodule.baseChange A I) = LieSubmodule.baseChange A (LieAlgebra.derivedSeriesOfIdeal R L k I)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary adjunctions or flat morphism stability, not arbitrary derived Hom direct-image base change for relatively flat coefficients on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "base.change.*[Rr][Hh]om|[Rr][Hh]om.*base.change|derivedInternalHom",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary adjunctions or flat morphism stability, not arbitrary derived Hom direct-image base change for relatively flat coefficients on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complex relative flat coefficient derived Hom direct image arbitrary base change algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": IsStableUnderBaseChange FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \":\\n  cotangentComplexBaseChange R S P.Ring A =\\n    AlgebraTensorModule.cancelBaseChange P.Ring S A A Ω[P.Ring⁄R] ∘ₗ\\n      P.cotangentComplex.baseChange A ∘ₗ\\n        ((AlgebraTensorModule.cancelBaseChange P.Ring S A A P.ker).symm ≪≫ₗ P.cotangentEquiv.baseChange (A := A))\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \":\\n  P.cotangentComplex.baseChange A =\\n    (AlgebraTensorModule.cancelBaseChange P.Ring S A A Ω[P.Ring⁄R]).symm ∘ₗ\\n      cotangentComplexBaseChange R S P.Ring A ∘ₗ\\n        ((AlgebraTensorModule.cancelBaseChange P.Ring S A A P.ker).symm ≪≫ₗ P.cotangentEquiv.baseChange (A := A)).symm\", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary adjunctions or flat morphism stability, not arbitrary derived Hom direct-image base change for relatively flat coefficients on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology and base change for internal Hom with perfect source and flat coefficient without properness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"LightCondensed.ihom_map_val_app\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B P : LightCondMod R) (S : LightProfinite) (e : A ⟶ B)\\n  (x : ↑((P ⟹ A).val.obj (Opposite.op S))),\\n  (CategoryTheory.ConcreteCategory.hom (((CategoryTheory.ihom P).map e).val.app (Opposite.op S))) x =\\n    (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryT\", \"doc\": \"For any light condensed $ R $-modules $ A $, $ B $, $ P $, a light profinite space $ S $, a morphism $ e: A \\to B $, and an element $ x $ in the hom-set $ [P, A](S) $, the application of the internal h\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A B : LightCondMod R) →\\n      (S : LightProfinite) →\\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary adjunctions or flat morphism stability, not arbitrary derived Hom direct-image base change for relatively flat coefficients on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-module-hom",
+  "date": "2026-10-24",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom. Supporting input: Tag 08JY (quot-lemma-noetherian-hom), the Noetherian finite-type-module case used in the last paragraph of Tag 08K6. In the proof of Tag 08JY: the comparison for every T -> B following the Leray identification.",
+   "via": [
+    "lem-sfb-noetherian-module-hom",
+    "lem-sfb-space-module-hom-affine",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-flat-coefficient-rhom-base-change",
+  "worker": "stage1",
+  "summary": "Realized 08JQ by the actual coefficient stalk calculation on etale scheme charts, perfect-source Hom inheritance and the existing single-complex theorem. One new statement-only 0DKI(2) node; reused the chart criterion, flat-stalk and K-flat results, and canonical pullback-stalk formula. Retained the hypotheses, ordinary coefficient pullback and naturality. Corrected prime typography only.",
+  "blueprint": "The existing ancestry (null blueprint ancestor, as printed by blueprint_refs.py) reaches the 08JY comparison supporting the noetherian-module-Hom input to the direct-image route. This split supplies precisely its 08JQ prerequisite, by 0A1K, 0DKI(2) and 0DKH; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-relative-flat-module-stalk",
+    "why": "Generic scheme-chart flatness-to-stalk tool for 08JQ; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic homological algebra to compute the base-derived tensor of a flat module in degree zero."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic canonical ordinary module pullback-stalk formula on the scheme charts of 0DKG."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos coherence: pullback composition comparisons, their tensor compatibility and composite-adjunction counit, used for chart transport (step 2) and base-change naturality (step 5); already in the closure of lem-sfb-ringed-perfect-internal-hom-pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-relative-flat-module-stalk",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-fc29ee3cc",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-fc29ee3cc (reviewer sub-agent of L); spot-checked: I read Stacks spaces-perfect 08JQ case (1), 0DKG, 0DKH, 0DKI(2) with its two-arrow map, 0A1K and 0A8A(2). Item statement: it is 08JQ(1) with G=M[0], unchanged from base apart from prime typography. The hypotheses (qcqs f, perfect P, quasi-coherent M flat over Y, any g), the map (Ex, then the internal-Hom pullback comparison, then Lh^*M→h^*M with ordinary coefficient pullback) and the étale O_X-module category all match. Steps 1, 3 and 4 check out. In step 2 the chart calculation (N⊗_R B)⊗_{A⊗B}C ≅ N⊗_A C is correct and Tor vanishes for i≠0. FIX 1 (C1/C3, step 2): the step equated the transported chart map φ_U with the Zariski map Lh_U^*N→h_U^*N without citing the transport. It now cites lem-sfb-derived-etale-zariski-equivalence and lem-sfb-ringed-derived-monoidal-comparisons. FIX 2 (C2, step 5): naturality in a further base change was marked elementary but needs the pullback composition comparisons, their tensor compatibility and the composite-adjunction counit. It now cites lem-sfb-ringed-derived-monoidal-comparisons, with elementary=false and a tool_use declared. proof_deps was recomputed. Both added nodes were already in the closure of nodes the delivery cites, so there is no cycle and the batch-5 closure is unchanged. New node lem-sfb-space-single-complex-rhom-inheritance: it states exactly 0DKI(2), on a general base, which 0DKG's étale locality justifies, plus 0A8A quasi-coherence. I re-derived its truth: P_x̄ is a finite-projective bounded complex Q and C is flat over A⊗_R B, so H^i(Q^∨⊗W)⊗C ≅ H^i(Q^∨_C⊗K'). Small cases P=O_X, shifts, retracts and 0 hold. It is strictly smaller than the item and is no duplicate: only tensor clause (1) exists on spaces and schemes. B1-B9 are met. Batch-5: the listed citations reach sec-trace-formula only through def-trf-algebraic-space, generic definitions, or the foundational fibre-product lemma, and reach sec-poincare-duality only through the Mathlib leaf lem-pod-closed-uncurry-laws by generic dual-pair category theory. None is a step of the trace formula or of Poincaré duality, so all are accepted. Declared generic tool_uses are accepted. No SGA is cited and there is no re-split note.; 1 file(s) fixed by the reviewer"
+ }
+}

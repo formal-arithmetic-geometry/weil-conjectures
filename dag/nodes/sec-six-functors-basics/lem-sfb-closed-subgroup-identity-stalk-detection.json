@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-closed-subgroup-identity-stalk-detection",
+ "kind": "statement",
+ "title": "A closed subgroup of a connected affine group is detected by its identity stalk",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-weil-connected-scheme, def-weil-finite-type-morphism], where affine means isomorphic to the spectrum of a commutative ring [def-weil-affine-spectrum]. Let $j:K\\hookrightarrow G$ be a closed subgroup scheme [def-sc-group-scheme-subgroup, def-weil-closed-immersion]. Write $e_G$ and $e_K$ for their identity $k$-points, and $\\mathcal O_{G,e_G}$ and $\\mathcal O_{K,e_K}$ for the stalks of their structure sheaves at these points. If the homomorphism of local $k$-algebras $j^\\sharp_{e_K}:\\mathcal O_{G,e_G}\\to\\mathcal O_{K,e_K}$ induced by $j$ is an isomorphism, then $j$ is an isomorphism of $k$-group schemes. Neither $G$ nor $K$ is assumed reduced or smooth; the characteristic of $k$ is arbitrary.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated identity-stalk consequence of the translation argument in 1.8 (printed p.9), with finite-type rational closed points used as in the homogeneity discussion of Chapter 1. This precise scheme-theoretic criterion is not asserted to be a numbered theorem of Milne; its full intended proof is in report.md. No single Stacks tag supplies the criterion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose $G=\\operatorname{Spec}A$. Apply the affine-pair criterion [lem-weil-pbc-lft-affine-pairs] to the structure morphism and the pair $(G,\\operatorname{Spec}k)$: $A$ is a finitely generated $k$-algebra. Thus $A$ is Noetherian by [lem-wf-affine-noetherian-components]. The affine description in [def-weil-closed-immersion] writes $K=\\operatorname{Spec}(A/I)$ and $j$ as the quotient map. By [def-weil-pbc-noetherian-ring], choose a finite list of ideal generators $a_1,\\ldots,a_r$ for $I$ (the list may be empty).",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-wf-affine-noetherian-components",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 01T2 (lemma-locally-finite-type-characterize), 01QO (lemma-closed-immersion); Noetherian algebra input as in lem-wf-affine-noetherian-components; Tag 00FM (section-Noetherian)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m$ be the prime of $e_G$. Each $a_i$ maps to zero on $K$, so its germ at $e_G$ maps to zero under $j^\\sharp_{e_K}$; this is restriction compatibility in [def-weil-locally-ringed-space-morphism]. The assumed injectivity makes that germ zero. Apply [lem-weil-pbc-affine-open-stalk-localization](c) with the affine open $G$: there is $s_i\\in A\\setminus\\mathfrak m$ with $s_i a_i=0$. Put $s=\\prod_i s_i$, with empty product $1$. Then $s\\notin\\mathfrak m$ and $sI=0$, since $s$ kills every generator. In particular $I A_s=0$. This uses vanishing in local rings, not vanishing in residue fields.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), local-ring description; finite denominator argument applied to the finite list from step 1."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-section-vanishing-prime], $U=D(s)$ is an affine open containing $e_G$, with coordinate ring $A_s$. Its inverse image in $K$ is $D(\\bar s)$ with coordinate ring $(A/I)_{\\bar s}$. By [lem-weil-pbc-localization-quotient-commute], this is $A_s/I A_s=A_s$, and the induced homomorphism is the quotient homomorphism with zero kernel. Thus $j^{-1}(U)\\to U$ is an isomorphism, using the contravariant affine description [def-weil-affine-spectrum]. Let $t:U\\to K$ be its inverse followed by $j^{-1}(U)\\hookrightarrow K$; then $jt$ is the inclusion $U\\hookrightarrow G$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-localization-quotient-commute",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 01HV (lemma-spec-sheaves), 01I3 (lemma-standard-open-affine), 00CT (proposition-localize-quotient)."
+   }
+  },
+  {
+   "text": "For $h\\in K(k)$, write $g=j(h)$. Use the translations of [def-sc-group-scheme-translate] and their inverses in [lem-sc-translation-automorphism], for both $G$ and $K$. Because $j$ is a group homomorphism, $jL_h^K=L_g^G j$. Consequently $L_h^K t(L_{g^{-1}}^G|_{gU}):gU\\to K$ is a section of $j$ over the open $gU=L_g^G(U)$. It is the inverse to $j^{-1}(gU)\\to gU$: the reverse composite is the identity because $j$ is injective on functor-of-points sets by [def-sc-group-scheme-subgroup]. Equivalently the two translations identify this restriction with the restriction over $U$ in step 3. In particular $gU\\subseteq |K|$, as a subset of $|G|$. Define the open subset $V=\\bigcup_{h\\in K(k)}j(h)U\\subseteq |G|$. We have $V\\subseteq |K|$ and $j$ is an isomorphism over every member of this union.",
+   "uses": [
+    "def-sc-group-scheme-translate",
+    "lem-sc-translation-automorphism",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "1.8, printed p.9: translation isomorphisms; apply the group-homomorphism identity to the restriction in step 3."
+   }
+  },
+  {
+   "text": "The subset $|K|\\setminus V$ is closed in $G$, since $|K|$ is closed and $V$ is open. If nonempty, it contains a point $x$ closed in $G$ by [lem-sc-lft-over-field-jacobson-space], applied to this closed subset of the finite-type scheme $G$. By [lem-weil-pbc-closed-point-residue-field-base], $\\kappa(x)=k$ over $k$. The evaluation $A\\to k$ therefore defines $g\\in G(k)$ with underlying point $x$. Since $x\\in |K|=V(I)$, this evaluation kills $I$ and factors through $A/I$, giving $h\\in K(k)$ with $j(h)=g$. But $e_G\\in U$ implies $x=g e_G\\in gU\\subseteq V$, a contradiction. Thus $V=|K|$. This subset is both open and closed, and contains $e_G$. Connectedness in [def-weil-connected-scheme] now gives $V=|G|$. Hence the opens $j(h)U$ from step 4 cover all of $G$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/topology.tex",
+    "place": "Tags 0478 (lemma-locally-finite-type-Jacobson), 01TB (lemma-jacobson-finite-type-points), 004S (definition-connected-components)."
+   }
+  },
+  {
+   "text": "For $a\\in I$, the section of $\\mathcal O_G$ represented by $a$ pulls back to zero on $K$. On every open $j(h)U$ in the cover of step 5 the restriction of $j$ is an isomorphism by step 4, so $a|_{j(h)U}=0$. The uniqueness part of the sheaf axiom gives $a=0$ globally: the structure sheaf and restriction-compatible homomorphisms are those of [def-weil-locally-ringed-space-morphism]. Thus $I=0$ and the quotient $A\\to A/I$ is an isomorphism. By [def-weil-affine-spectrum], $j$ is an isomorphism of $k$-schemes. Its inverse preserves multiplication, identity and inverse: apply $j$ to each proposed compatibility equation and use the corresponding compatibility of the group homomorphism $j$, then cancel $j$ using its inverse. This proves the isomorphism of $k$-group schemes required by [def-sc-group-scheme].",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "1.8, printed p.9, with the sheaf uniqueness axiom applied to the translated open cover. Agent assembly; no reducedness assumption."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-wf-affine-noetherian-components",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-localization-quotient-commute",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme-translate",
+  "lem-sc-translation-automorphism",
+  "def-sc-group-scheme-subgroup",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "1.8, printed p.9 (translations); scheme-theoretic local-ring and Jacobson arguments assembled from the cited Stacks nodes. Milne uses the maximal-spectrum convention, so the all-prime spectrum argument is written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Oo]pen[Ss]ubgroup|[Ss]ubgroup.*[Nn]hds|[Ii]s[Ii]so.*[Ss]talk",
+   "results": "21 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean. Searched AlgebraicGeometry; logged digest 0215a9e6ece3e24b. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the topology results concern abstract topological groups, and the scheme open-immersion criterion requires all stalk maps and an open embedding. Neither supplies the identity-stalk criterion for a possibly nonreduced group scheme. OpenImmersion.lean:490-493 and OpenSubgroup.lean:268-275 were read."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onnected.*[Ss]ubgroup|[Ss]ubgroup.*[Cc]onnected|[Oo]pen.*[Cc]losed",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean. Searched AlgebraicGeometry/Group; logged digest 9e28c6501caeeeef. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the topology results concern abstract topological groups, and the scheme open-immersion criterion requires all stalk maps and an open embedding. Neither supplies the identity-stalk criterion for a possibly nonreduced group scheme. OpenImmersion.lean:490-493 and OpenSubgroup.lean:268-275 were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subgroup of a connected algebraic group containing a scheme theoretic open neighbourhood of the identity is the whole group",
+   "results": "8 hits: Subgroup.isOpen_of_one_mem_interior, Subgroup.isOpen_of_mem_nhds, OpenSubgroup.mem_nhds_one, IsTopologicalGroup.exist_openSubgroup_sub_clopen_nhds_of_one, ClosedSubgroup, IsTopologicalGroup.exist_openNormalSubgroup_sub_clopen_nhds_of_one, ClosedSubgroup.ctorIdx, AddSubgroup.isOpen_of_mem_nhds. Searched service index; logged digest a1dadead6a9f0116. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the topology results concern abstract topological groups, and the scheme open-immersion criterion requires all stalk maps and an open embedding. Neither supplies the identity-stalk criterion for a possibly nonreduced group scheme. OpenImmersion.lean:490-493 and OpenSubgroup.lean:268-275 were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsClosedImmersion\"",
+   "results": "0 hits: . Searched service index; logged digest 4f53cda18c2baa0c. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the topology results concern abstract topological groups, and the scheme open-immersion criterion requires all stalk maps and an open embedding. Neither supplies the identity-stalk criterion for a possibly nonreduced group scheme. OpenImmersion.lean:490-493 and OpenSubgroup.lean:268-275 were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of a connected finite type algebraic group which induces an isomorphism of local rings at the identity equals the whole group",
+   "results": "8 hits: Subgroup.connectedComponentOfOne, OpenNormalSubgroup.instIsClosedCoePathComponentOne, Subgroup.pathComponentOne, OpenSubgroup.toSubgroup_top, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, Subgroup.coe_pathComponentOne, OpenSubgroup.toOpens_top, OpenSubgroup.coe_top. Searched service index; logged digest c92f5dfbf8580d71. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the topology results concern abstract topological groups, and the scheme open-immersion criterion requires all stalk maps and an open embedding. Neither supplies the identity-stalk criterion for a possibly nonreduced group scheme. OpenImmersion.lean:490-493 and OpenSubgroup.lean:268-275 were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme containing an open identity neighbourhood is an open and closed subgroup without any smoothness or reducedness assumption",
+   "results": "8 hits: Subgroup.isClosed_of_isOpen, OpenSubgroup.isClosed, ClosedSubgroup, OpenSubgroup.isClopen, OpenSubgroup, OpenNormalSubgroup, OpenSubgroup.instInhabited, Subgroup.isOpen_of_one_mem_interior. Searched service index; logged digest 06040c1214e4ed8c. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the topology results concern abstract topological groups, and the scheme open-immersion criterion requires all stalk maps and an open embedding. Neither supplies the identity-stalk criterion for a possibly nonreduced group scheme. OpenImmersion.lean:490-493 and OpenSubgroup.lean:268-275 were read."
+  },
+  {
+   "tool": "grep",
+   "query": "subgroup.*stalk|stalk.*subgroup|isIso.*identity|identity.*isIso",
+   "results": "0 hits: . Log digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no exact match: group topology hits require a topological group, and closed-immersion hits either assume reducedness or require a global kernel condition. The item concerns the identity stalk of a possibly nonreduced group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion subgroup scheme locally equal to a connected group near the identity is an isomorphism",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, AlgebraicGeometry.IsClosedImmersion.respectsIso, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion. Log digest bf4776aed20238b1. ",
+   "date": "2026-10-24",
+   "verdict": "no exact match: group topology hits require a topological group, and closed-immersion hits either assume reducedness or require a global kernel condition. The item concerns the identity stalk of a possibly nonreduced group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedSubgroupScheme\", \"stalkMap\"",
+   "results": "0 hits: . Log digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no exact match: group topology hits require a topological group, and closed-immersion hits either assume reducedness or require a global kernel condition. The item concerns the identity stalk of a possibly nonreduced group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of a connected affine group of finite type is the whole group if the local ring map at the identity is an isomorphism",
+   "results": "8 hits: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, Subgroup.connectedComponentOfOne, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.instIsAffineTerminalScheme, AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.ker_toSpecΓ, AlgebraicGeometry.isClosedImmersion_of_comp_eq_id. Log digest 56fca53c0b0599ef. ",
+   "date": "2026-10-24",
+   "verdict": "no exact match: group topology hits require a topological group, and closed-immersion hits either assume reducedness or require a global kernel condition. The item concerns the identity stalk of a possibly nonreduced group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "subgroup.*(open|stalk|connected)|stalk.*subgroup",
+   "results": "0 hits: . Log digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no exact match: group topology hits require a topological group, and closed-immersion hits either assume reducedness or require a global kernel condition. The item concerns the identity stalk of a possibly nonreduced group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subgroup scheme containing a scheme theoretic open neighbourhood of the unit is open and closed and hence equals any connected ambient algebraic group",
+   "results": "8 hits: Subgroup.connectedComponentOfOne, Subgroup.pathComponentOne, Subgroup.coe_pathComponentOne, Subgroup.isOpen_of_one_mem_interior, OpenSubgroup.toOpens_top, Subgroup.isClosed_of_isOpen, IsTopologicalGroup.exist_openSubgroup_sub_clopen_nhds_of_one, OpenSubgroup.toSubgroup_top. Log digest 491e2ab86a8d9872. ",
+   "date": "2026-10-24",
+   "verdict": "no exact match: group topology hits require a topological group, and closed-immersion hits either assume reducedness or require a global kernel condition. The item concerns the identity stalk of a possibly nonreduced group scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-action-connected-group-lie-rigidity",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input to lem-sfb-adjoint-action-kernel-is-centre: Conrad Proposition 3.3.8 proof, printed p.102; Torus automorphism actions on connected groups are detected on tangent spaces. The item supports the root-coordinate prerequisite to the existing geometric-reductivity/alteration branch of det-thm-sf-ctf-stability-direct-images, proof (3). Local-to-global step: after the torus-fixed ideal vanishes at the identity, a closed subgroup that agrees locally with the ambient connected group is the entire group scheme.",
+   "via": [
+    "lem-sfb-torus-action-connected-group-lie-rigidity",
+    "lem-sfb-adjoint-action-kernel-is-centre"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-subgroup-identity-stalk-detection",
+  "worker": "stage1",
+  "summary": "Preserved the full nonreduced arbitrary-characteristic statement. Gave a six-step proof through finite ideal generators, an actual scheme-theoretic identity neighbourhood, translation isomorphisms, Jacobson rational closed-point detection, connectedness and the sheaf uniqueness axiom. Reused existing DAG nodes throughout; no new nodes. Exact project/Mathlib searches found no attachment or leaf.",
+  "blueprint": "The existing rootless provenance is retained. This item realizes the local-to-global sentence recorded in blueprint.from.place, serving lem-sfb-torus-action-connected-group-lie-rigidity and lem-sfb-adjoint-action-kernel-is-centre on the root-coordinate prerequisite branch of det-thm-sf-ctf-stability-direct-images, proof (3). The latest blueprint translation lemma and the unit route were read; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Finite-type affine coordinate rings are Noetherian; generic commutative algebra input, not supplied by the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "The precise zero-germ denominator test at the identity, needed without reducedness."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Affine principal opens and their localization section rings give the actual identity neighbourhood."
+   },
+   {
+    "node": "lem-weil-pbc-localization-quotient-commute",
+    "why": "The quotient-localization comparison identifies the restricted closed subscheme scheme-theoretically."
+   },
+   {
+    "node": "lem-sc-translation-automorphism",
+    "why": "Translation isomorphisms for arbitrary group schemes transport the identity neighbourhood."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Closed points of a finite-type scheme over an algebraically closed field are rational."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-sc-translation-automorphism",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-10a00d2ce",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-10a00d2ce (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to the unsplit base, and the statement is true. I tested it on K=G, the trivial group, mu_p in mu_{p^2} (the hypothesis fails as it should), Z/2 with K={e} (shows why connectedness is needed) and mu_n in G_m. Milne iAG 1.8 (printed p.9) was checked for the translation isomorphisms l_a. All 6 steps check against the cited statements: (1) the lft affine-pairs leaf, Noetherian components and the 01QO affine clause give K=Spec(A/I) with finitely many generators of I. (2) Restriction compatibility, injectivity of the stalk map and clause (c) of affine-open-stalk-localization give s outside m with sI=0. (3) The D(s) localization and quotient-localization commuting make j over D(s) an isomorphism. (4) jL_h=L_g j conjugates this isomorphism over the open gU, and the transport is written out. (5) Jacobson density and closed point residue field = k give a K(k)-point in |K|\\V, a contradiction; connectedness then gives V=|G|. (6) The sheaf axiom gives I=0. All hypotheses (lft over a field, k algebraically closed, affineness) were checked. No new nodes and no duplicates (rg -L over identity stalk / local ring at the identity / open subgroup). The tool_uses are accepted, including lem-sc-translation-automorphism. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ClosedSubgroupIdentityStalk",
+  "declaration": "AlgebraicGeometry.isIso_of_isIso_stalkMap_onePoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ClosedSubgroupIdentityStalk.lean",
+  "statement": "theorem isIso_of_isIso_stalkMap_onePoint {k : Type u} [Field k] [IsAlgClosed k] (G K : Over (Spec (.of k))) [GrpObj G] [GrpObj K] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (j : K ⟶ G) [IsClosedSubgroupScheme j] (hj : IsIso (j.left.stalkMap (GrpObj.onePoint K))) : IsIso j",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a17273185",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Clause-by-clause match of node and signature: Field+IsAlgClosed, Over (Spec k) GrpObj G K, ConnectedSpace/IsAffine/LocallyOfFiniteType+QuasiCompact on G, IsClosedSubgroupScheme j (IsMonHom + R-point injectivity + closed immersion), IsIso of the stalk map at onePoint K (its domain is the stalk at e_G by the unit law), conclusion IsIso j in Over. No extra assumptions; statement true (translation, Jacobson and connectedness argument); edge cases K=G, trivial group, mu_p in mu_p^2, {e} in Z/2 checked. Node unchanged except lean; statement verbatim in file; no duplicate in live tree; docstrings carry source and blueprint; sorry only; universe explicit; report sections present. Compiled nothing (no file changed)."
+ }
+}

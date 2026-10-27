@@ -1,0 +1,146 @@
+{
+ "id": "lem-pe-coefficient-comparison-fixed-pullback",
+ "kind": "lemma",
+ "title": "Constant scalars and comparison commute with scheme inverse image",
+ "statement": "For schemes X and Y and a morphism f : Y → X, and any commutative ring A in the independent coefficient universe, the canonical intrinsic-module comparison inverse image on X followed by constant-scalar restriction and pro-etale inverse image along f is naturally isomorphic to constant-scalar restriction on X followed by etale inverse image along f and fixed-scalar comparison inverse image on Y. All sites and functors are the recorded coefficient-sized models [lem-pe-coefficient-comparison-data], [def-pe-etale-constructible-module], and [def-sfb-affine-locally-constructible-proetale-modules]. No constructibility or Noetherianity hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AK, lemma-compare-constructible, first paragraph: inverse image commutes with pullback to strata; Modules on Sites Tags 03CY and 03D2; comparison inclusion Tag 099R"
+ },
+ "stmt_deps": [
+  "lem-pe-coefficient-comparison-data",
+  "def-pe-etale-constructible-module",
+  "def-sfb-affine-locally-constructible-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "The constant-ring unit is locally bijective. Scalar restriction is fully faithful by the Mathlib locally-surjective scalar-restriction Hom equivalence. To construct an antecedent of a fixed-scalar sheaf, apply module sheafification to the identity of its underlying abelian sheaf. The sheafification unit extends the scalar action; identity maps give its inverse isomorphism. Thus the literal coefficientModelFixedScalars functor is an equivalence.",
+   "uses": [
+    "def-pe-etale-constructible-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ring-map adjunction equation states that constructibleComparisonRingMap sends each constant scalar to the same constant scalar. This identifies module direct image followed by scalar restriction with scalar restriction followed by fixed-scalar comparison direct image, by identity linear maps on sections. Conjugate through the two scalar equivalences and use uniqueness of left adjoints to identify the two comparison inverse images.",
+   "uses": [
+    "lem-pe-coefficient-comparison-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On site objects comparison and scheme base change commute: both are the same fibre product. Whisker the original site natural isomorphism by AsSmall.down and AsSmall.up. Its isomorphism on continuous direct images identifies the right adjoints of the two inverse-image composites. Uniqueness of left adjoints gives their inverse-image isomorphism. Whisker and compose it with the scalar comparison of the preceding step.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-pe-etale-constructible-module",
+    "def-sfb-affine-locally-constructible-proetale-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pe-etale-constructible-module",
+  "lem-pe-coefficient-comparison-data",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-affine-locally-constructible-proetale-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AK, lemma-compare-constructible, first paragraph: inverse image commutes with pullback to strata; Modules on Sites Tags 03CY and 03D2; comparison inclusion Tag 099R; M4 restores the absent Lean module against the current source, with the complete scalar-equivalence and adjoint-uniqueness proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale module is locally constant with finite module models if and only if its pro etale inverse image is locally constant with finitely presented module models over a Noetherian ring",
+   "results": "8 hits: RingHom.Etale.propertyIsLocal, Algebra.Etale.finitePresentation, Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, RingHom.Etale.ofLocalizationSpan. Receipt ef0654fccba7f7fc.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "constructib.*[Cc]omparison|[Cc]omparison.*constructib",
+   "results": "0 hits: . Receipt 4f53cda18c2baa0c.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"IsLocallyConstant\"",
+   "results": "0 hits: . Receipt 4f53cda18c2baa0c.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale module sheaf is locally constant with finite type models if its pro etale inverse image is locally constant with finitely presented models",
+   "results": "8 hits: SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.isFinitePresentation, Algebra.Etale.finitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFiniteType.mk, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation. Receipt 8456bc71c037b291.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant coefficient ring module sheaf inverse image is naturally isomorphic to inverse image of fixed coefficient module valued sheaves",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.instIsLeftAdjointPullback, CondensedMod.LocallyConstant.functorIsoDiscrete. Receipt fdfa36d70ac6040f.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to constant scalars commutes with inverse image of sheaves of modules along the etale to proetale comparison and scheme base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc. Receipt 294ceb13f96d7543.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientComparisonConstructibilityTest",
+  "date": "2026-10-26",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "First sentence: the preceding proposition handles a single stratum; Stacks Tag 09AK first proof paragraph, comparison commutes with pullback to strata.",
+   "via": [
+    "lem-pe-coefficient-comparison-constructibility-test"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonFixedPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonFixedPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComparison_fixedPullback",
+  "statement": "theorem coefficientComparison_fixedPullback {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (A : Type (max v (u + 1))) [CommRing A] :\n    Nonempty\n      (constructibleComparisonPullback.{u, v} X A ⋙\n          coefficientModelFixedScalars (Scheme.coefficientProEtaleModelTopology.{u, v} X) A ⋙\n          Scheme.coefficientProEtaleFixedModulePullback.{u, v} f A ≅\n        coefficientModelFixedScalars (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A ⋙\n          Scheme.coefficientEtaleFixedPullback.{u, v} f A ⋙\n          Functor.sheafPullbackConstruction.sheafPullback\n            (Scheme.smallModelComparisonInclusion.{u, v} Y) (ModuleCat.{max v (u + 1)} A)\n            (Scheme.smallModelComparisonEtaleTopology.{u, v} Y)\n            (Scheme.coefficientProEtaleModelTopology.{u, v} Y))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T201652-L-2597621",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T002008-L-48249",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,9 +12,61 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), dense-lattice input: agent-formulated formal restriction and cup-product infrastructure. Bhatt-Scholze section 4.3 and the Stacks right-derived construction provide context, not this entire internal-ring statement; exact reference WANTED."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For scalarTensorExist reuse the explicit balanced restriction lax structure proved in the module of lem-sfb-internal-extension-monoidal. Its tensor projection equation, evaluated on the sheaf inclusion of a pure tensor, gives ScalarTensorModel. For uniqueness, forget the module structure, cancel the relative tensor projection, use the sheaf tensor adjunction and induction on ordinary tensor sections. The given generalized pure-tensor equation then fixes the two tensorators; the unit is fixed by the ring map, and proof fields are irrelevant.",
+   "uses": [
+    "lem-sfb-internal-extension-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For scalarSmallColimits specialize the already proved colimit preservation of internal scalar restriction and shrink the indexing universes to zero.",
+   "uses": [
+    "lem-sfb-modobj-restriction-preserves-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For scalarComplexTensorExist construct each degree component by the coproduct descent from the ordinary lax tensorators followed by the images of the tensor summand inclusions. The signed differential formula and left and right lax naturality show the chain-map equation on each summand. The coproduct inclusions jointly determine a degree map, so the displayed normalization also proves uniqueness. The private helper carries out this calculation for arbitrary additive lax monoidal functors between abelian monoidal closed categories.",
+   "uses": [
+    "def-sfb-condensed-derived-cup"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The proof of derivedScalarTensorExist remains the named proof hole in the Lean module. Use K-flat complexes over the target ring to descend the ordinary comparison with the displayed localization and unit equations, as described in its existing docstring. No restricted complex is asserted to be K-flat over the source ring.",
+   "uses": [
+    "def-sfb-condensed-derived-cup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For regularScalarExist construct the module morphism with underlying map a.hom.hom. Its module-linearity equation is exactly the multiplicative law of the ring map, rewritten using the ambient tensor factorization. Module morphisms are determined by their underlying maps, giving uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For regularScalarEquivariant apply injectivity of the section map induced by the specified underlying scalar-action isomorphism. Its action compatibility reduces the target action to the trivial action on the original regular target module; the source action is trivial as well.",
+   "uses": [
+    "def-sfb-condensed-derived-invariants",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-extension-monoidal",
+  "lem-sfb-modobj-restriction-preserves-colimits",
+  "def-sfb-condensed-derived-cup",
+  "def-sfb-condensed-derived-invariants",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "M5 stage-3 proof: existing normalized ordinary scalar tensor, coproduct descent on complexes, and the ring-map and scalar-action calculations. The derived lax existence proof remains open, with its original K-flat argument."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -228,10 +280,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -280,5 +336,15 @@
   "group": "NI",
   "result": "fix",
   "note": "Read the item, 11 stmt_deps, 5 new def nodes and all 6 modules against the node. Every clause is rendered faithfully: exact forget/inflation/restriction/scalar, Grothendieck structure, b_u = rightDerivedPullback of the unique invariant inclusion with unit normalization, CommShift, degree zero, identity case, c_J via a unique unit-normalized scalarComparison (no flatness), coefficientSquare, the unital cup algebra as the mate of the K-flat-pinned strong trivial tensor, the unique UnipotentAction on R⊞R, and the class/product formulas for restriction and coefficient change. Mathlib's cone differential makes singleδ = +snake δ, so [a] has cocycle +a as required. All choices are pinned; no hollow defs; records match; item statement unchanged; stmt_deps only gained new def nodes. Only fault, H8: 5 of 6 modules had no module docstring. FIX adds docstrings only (the item's includes the 12-step proof outline) plus an item lean-record override keeping the statement verbatim. nt_compile --json twice timed out at 60 s on the unchanged sibling CondensedDerivedInvariants at load 153-162; changes are comment-only; the worker compiled all six clean (46.0 s). Notes: overlap with Q02's profinite-only def-sfb-condensed-derived-inflation-arrows (not a duplicate); the new cup def node cites theorem lem-derived-right-exact-tensor-comparison for a plain Prop predicate (advisory); proof-dep imports are not in the item module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261026T092033-L-3396324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

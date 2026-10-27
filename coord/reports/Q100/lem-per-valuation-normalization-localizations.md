@@ -1,0 +1,50 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-valuation-normalization-localizations.json`: split by reuse of an existing independently reviewed theorem; one proof step, no new nodes and no new Mathlib leaves. The converse now explicitly requires fraction field L.
+- `citations.json`: one entry, quoting the entire statement of the one cited theorem verbatim.
+
+Attachments: none. Searches under `lean/WeilConjectures/` for the item tag, normalization/valuation/prolongation phrases, and valuation declarations in the FieldTheory and RingTheory directories found no project declaration proving every clause under these hypotheses. Discrete valuation results do not qualify. No Lean was written or compiled.
+
+WANTED: Bourbaki, Commutative Algebra VI, §8.6, Proposition 6 and corollaries, for the normalization/prolongation background of this item. This inherited textbook request remains; the delivery instead reuses the available, independently reconstructed theorem below and does not claim to have read Bourbaki.
+
+The released stage-1 repair note and `coord/changes/20261024-Q112-strict-completion-inputs.md` were read. They re-admit this exact normalization interface and its ILO XX 4.4 context; they do not certify its proof. The current item had no proof and the sandbox no previous attempt. The old perverse-route proof was not revived. Source, statement dependencies, earlier searches and blueprint provenance are retained. Only the converse's ambient-field meaning is made explicit, as required by the brief's statement-dispute rule.
+
+Nothing needed for this one-level split remains unfinished. The dependency is an existing stage-1 split, not a claimed Lean attachment. Its eventual Lean proof remains ordinary downstream work.
+
+## Existing theorem and duplicate searches
+
+The current repository already contains `lem-trf-valuation-normalization-localizations`, status split, reviewed pass by L/Q65 on 2026-10-24. Its statement was byte-for-byte equal to the imported item before the explicit fraction-field clarification. I read its entire statement and all nine proof steps, rather than relying on its title or review. A read-only traversal of its statement/proof dependencies found 22 nodes and no path to this item. Consequently using it creates no cycle and does not reconstruct a forbidden historical mutual dependency.
+
+Whole-DAG statement searches for prolongations, normalization/integral closure of valuation rings, and Prüfer terminology found this exact theorem and discrete/henselian special cases. `tools/blueprint_refs.py search` was run for valuation, prolongation, integral closure and normalization/valuation phrases across all blueprint nodes; none states the general prolongation classification. `ancestor` identifies `lem-per-artin-gabber-affine-curve`. I read the current latest ancestor statement/proof, latest unit and chapter, together with their DAG records. The inherited Step 3 provenance remains the valuative background of the authorized completion subroute; this algebra theorem does not change the unit's geometric argument.
+
+The one cross-unit citation is declared in `split_report.tool_uses` for the maintainer's judgement. It is the same general algebra theorem, usable independently of either geometric application, not a replacement of a Fourier/perverse unit step by a trace-formula argument. No top-level maintainer `tool_uses` field was written. There is no reason to create new nodes for any of its clauses or copy its already reviewed nine-step proof into another node.
+
+## Not duplicates
+
+No new nodes were created. The item itself duplicates the pre-existing `lem-trf-valuation-normalization-localizations`, and the delivery explicitly reuses that theorem. Both identifiers and their provenance are left for the maintainer; this worker does not modify or merge another node.
+
+## Mathlib searches
+
+I read the inherited query results, then ran the required official msearch command for this item using LeanFinder, Loogle, grep and LeanSearch. A second LeanFinder phrasing asked for a Prüfer normalization/prolongation correspondence and a second whole-Mathlib grep searched Prüfer and valuation/integral-closure combinations. All six commands succeeded and are copied exactly from `searches.jsonl` into appended `mathlib_searches`; earlier entries remain intact.
+
+I read the actual candidate sources: `Valuation/Integral.lean` lines 35–85, `AlgebraInstances.lean` lines 31–91 and `LocalSubring.lean` lines 198–227. Integral closedness, the equivalence with another integral-closure model, injectivity of the integral-closure map, and `iInf_valuationSubring_superset` do not provide the localizations/prolongation classification. The latter is a useful smaller result already represented by `lem-trf-integral-closure-valuation-intersection`; no duplicate leaf was made. The second semantic search returned Dedekind/discrete valuation cases, which cannot cover arbitrary-rank V. Therefore the item is not declared a Mathlib leaf.
+
+## Statement corrected
+
+STATEMENT-DISPUTED: if “every valuation ring W contained in L” means an arbitrary abstract valuation ring embedded in L, its converse is false. Take K = Q, L = Q(i), V = Z localized at (3), and W = V inside L. Then W is an abstract valuation ring and W ∩ K = V, but its fraction field is Q, whereas every C_n in the conclusion has fraction field Q(i). It cannot equal any C_n.
+
+The correction inserts “with fraction field L” after W ⊆ L. This makes explicit the source's intended valuation rings **of L**, or prolongations, and the convention explicitly recorded by L in the existing theorem's review. It is not a hypothesis invented to bypass a hard case: the background theorem classifies valuation subrings of the extension field, not abstract valuation rings of arbitrary smaller fields embedded in it. The existing theorem is applied precisely to these valuation subrings, so every corrected clause follows from its literal quoted clause under the intended ambient-field convention. No other hypothesis, conclusion or source field changes.
+
+## Review by Q100
+
+I read ILO XX 4.4 at printed pp.373–374 from the local PDF. It passes from henselian I-valuative rings to their fraction fields and invokes dense henselian valued fields and Krasner. It does not state this full normalization theorem; the item's source already says so. I also read Stacks algebra.tex, `definition-valuation-ring` (00I9), `lemma-dominate` (00IA), `lemma-valuation-ring-normal` (00IC) and `lemma-valuation-ring-x-or-x-inverse` (00IB). These supply the stated background, not a fictitious direct reference for the entire theorem. No prohibited source route was used. Bourbaki remains WANTED, with no quotation attributed to an unread text.
+
+For proof step 1 I opened `lem-trf-valuation-normalization-localizations` and checked all hypotheses and clauses individually. Its K ⊆ L is the same finite algebraic extension; its V has fraction field K and the same valuation dichotomy. Its C is literally the same monic-polynomial integral closure, so no comparison theorem is hidden. Its first clause supplies the nonzero domain, integrality and fraction field L. Its next sentence supplies nonempty maximal spectrum. Its localization clause quantifies over every maximal ideal and gives both the valuation property and intersection with K. Its converse gives existence and uniqueness for every prolongation W. Its last sentence explicitly excludes all six extra conditions excluded by our item. The one full-statement citation in `citations.json` contains each of those sentences verbatim. Step 1 is marked non-elementary, since it applies that theorem; the identity of the two displayed C's is only definitional. No property was taken from the cited node's proof rather than its statement.
+
+As an additional check of the existing theorem's availability, I read its nine-step argument: normalization/lying-over; domination of C_n; division by a coefficient minimal for valuation divisibility; the tail identities for c_i and xc_i, tested in every valuation overring; the unit dichotomy c_(k-1) − x c_k = 1; maximality under domination; restriction; and the converse/uniqueness. In particular, its proof does not assume henselianity, rank one, separability or module-finiteness. It does not cite the newly released per-item, and its current reviewed proof is distinct from its historical rejected citation of this item. Those observations justify reuse, not additional unquoted facts inside our step.
+
+I checked delivery-errors B–E with the item and citation open. B: no new node, hollow definition, unbound object, doubled TeX or unsupported source reference is introduced. C1/C3/C4: all substantive content of the sole step is exactly in its cited statement; the explicit ambient fraction field also prevents applying normality to an element outside W's fraction field. C5/C6: searches found the existing duplicate and its closure omits this item. C7/C8: the generic algebra tool and its cross-unit use are disclosed, rather than treating the trace-formula unit as a geometric route. D1/D2: no new clause or whole-item proxy was created; the theorem existed and passed an independent review before this delivery. D3–D5: there is no invented proof from a reference or hidden induction. E: all field and localization objects agree literally; no finite-generation, excellence or separability assumption was added.
+
+Small cases were checked: L = K gives C = V and the unique maximal localization V; V = K gives C = L and maximal ideal (0); a purely inseparable finite extension remains allowed; higher-rank V is unrestricted. The literal smaller-fraction-field counterexample above was the one issue corrected. The definition nodes in stmt_deps were opened: they define precisely field extensions, valuation rings, monic-polynomial integral closure and prime localization. The step is 980 characters, so no step crosses the 2000-character long-step threshold. No second worker was used, as required by the direct-delivery brief.

@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-smooth-group-orbit-geometry",
+ "kind": "statement",
+ "title": "Orbit dimensions and boundaries for smooth connected algebraic groups",
+ "statement": "Let $k$ be an algebraically closed field (every nonconstant polynomial in $k[t]$ has a root) [def-weil-field]. Let $G$ be a smooth connected affine group scheme of finite type over $k$ [sk-def-av-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and let $G$ act on a separated finite-type $k$-scheme $X$ [def-pc-scheme, def-weil-proper-morphism]. Here affine means represented by $\\operatorname{Spec}$ of a commutative $k$-algebra [def-weil-affine-spectrum]. An action is a morphism $a:G\\times_kX\\to X$ satisfying the unit and multiplication identities. For $x\\in X(k)$ let $G_x$ be the closed subgroup scheme with $G_x(T)=\\{g\\in G(T):g x_T=x_T\\}$, and let $O_x$ be the image of the orbit map $g\\mapsto gx$, equipped with its reduced subscheme structure. Then $O_x$ is a smooth locally closed subscheme of $X$, the map $G\\to O_x$ is faithfully flat, and $\\dim O_x=\\dim G-\\dim G_x$. The closure $\\overline{O_x}$ and its boundary $\\overline{O_x}\\setminus O_x$ are invariant; every orbit $O_y$ in that boundary satisfies $\\dim O_y<\\dim O_x$. Dimensions are those of [def-kun-topological-krull-dimension]. No reducedness of $X$ or of the stabilizers is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups-2022.pdf",
+  "place": "Milne, Algebraic Groups (2022 corrected text), Proposition 1.65 and Corollary 1.66 (orbit lemma), Propositions 7.4--7.6, printed pp.139--140 (smooth orbit, invariant closure and smaller-dimensional boundary), and Proposition 5.23, printed p.104 (quotient dimension), applied via Propositions 7.11--7.12. Local PDF WANTED; primary PDF read online.",
+  "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "sk-def-av-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:G\\to X$, $q(g)=gx$, and $S=q(|G|)$. The schemes $G,X$ are of finite type over $k$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field is Noetherian). Any map between them with separated target is finite type by [lemma-nagata-finite-type-to-separated-target]; affine coordinate maps are finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation]. Thus Chevalley and generic flatness below have their finiteness hypotheses. Smoothness makes $G$ regular by [lem-weil-pbc-smooth-scheme-over-field-regular]; its identity makes it nonempty, so connectedness and [lem-sc-regular-connected-integral] make $G$ integral. In particular $G$ is reduced and $Z=\\overline S$ is irreducible. Every nonempty locally closed subset of a finite-type $k$-scheme contains a closed point by [lem-sc-lft-over-field-jacobson-space], and these points are $k$-rational by [lem-weil-pbc-closed-point-residue-field-base]. We use these two statements to detect equality of locally closed subsets and to show that an open containing every closed point is the whole scheme. Reduced closed subschemes of these schemes are finite type since a closed immersion is proper, hence finite type, by [lem-weil-pbc-proper-fp-permanence]. Their open subschemes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], hence their open immersions are quasi-compact and finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Composition preserves finite type by [lem-sfb-finite-type-composition-base-change]. This justifies the same finiteness assertions for $Z,O,B$ when constructed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(b), pp.26--27; Appendix A.14; Stacks 01T6, 01T8, 00FP, 056S, 0478, 00FV."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-chevalley-constructible-image], $S$ is constructible. Choose an affine open $A$ meeting $Z$. The subset $S\\cap A$ is nonempty and constructible in $A$; [lem-wf-affine-constructible-open](2) gives a nonempty relatively open subset $U$ of $Z\\cap A$ contained in $S$. This is open in $Z$. For $g\\in G(k)$, the map $t_g(z)=gz$ is an automorphism with inverse $t_{g^{-1}}$; equivariance $t_gq=qL_g$ gives $t_gS=S$ and $t_gZ=Z$. Put $V=\\bigcup_{g\\in G(k)}t_gU$. It is open in $Z$ and contained in $S$. Fix a closed $u\\in U$. Every closed point of $G$ is $k$-rational, and the equality $q(h)=(hg_0^{-1})u$, where $q(g_0)=u$, shows that $q^{-1}(V)$ contains all of them. Here $g_0$ exists because the nonempty fibre over $u$ is finite type over $k$ by base change [lem-sfb-finite-type-composition-base-change], so it has a closed $k$-point. Thus $q^{-1}(V)=G$ by the closed-point detection in step 1, and $S=V$. This proves local closedness, without identifying the scheme's whole point set with its closed points.",
+   "uses": [
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-wf-affine-constructible-open",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(b), p.27; Appendix A.15; Stacks 054J and 0478."
+   }
+  },
+  {
+   "text": "Give $Z$ its reduced closed structure using [lem-weil-pbc-reduced-induced-closed-subscheme], and give the open $S\\subset Z$ its induced structure $O$. Since $G$ is reduced, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factors $q$ through $Z$; its image lies in the open $O$, giving $q:G\\to O$. This map is surjective by the definition of $S$. Its image is irreducible, so the nonempty reduced $O$ is integral. Each $t_g$ restricts to an automorphism of $O$: reduced closed structures are unique, and open restriction preserves them. The locally closed subscheme $O$ of the separated $X$ is separated (its diagonal is the restriction of the closed diagonal of $X$). Thus $q:G\\to O$ is finite type by [lemma-nagata-finite-type-to-separated-target]. Choose a nonempty open $W\\subset O$ on which $q$ is flat by [lem-sbc-generic-flatness]. The translates $t_gW$ cover $O$: choose $w\\in W(k)$ and lifts $g_w,g_y\\in G(k)$ of $w$ and each $y\\in O(k)$, as in step 2; then $y=t_{g_yg_w^{-1}}w$. The union is open and contains every closed point, so step 1 makes it all of $O$. In the square $qL_g=t_gq$, both horizontal maps are isomorphisms. On stalks the maps for $q$ over $t_gW$ are therefore isomorphic to the flat stalk maps over $W$. Hence $q$ is flat everywhere and, being surjective, faithfully flat. This uses only flatness, not smoothness of $q$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-sbc-generic-flatness",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lemma-nagata-finite-type-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(a),(c), p.27; Proposition 7.4(b), pp.139--140; Stacks 01J3 and 052A."
+   }
+  },
+  {
+   "text": "An algebraically closed field is perfect: in positive characteristic every $a$ has a root of $T^p-a$. Thus the reduced finite-type $O$ is geometrically reduced by [lem-kun-geometric-reduced-perfect]. Its smooth locus is a dense open by [lem-pur-geometrically-reduced-dense-smooth-open]. Every $t_g$ is a $k$-isomorphism, so it preserves this locus. A nonempty smooth open has a closed $k$-point; transitivity carries it to every closed point of $O$. Its complement is closed and has no closed points, so is empty by [lem-sc-lft-over-field-jacobson-space]. Consequently $O$ is smooth over $k$.",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.4(b), p.140; Appendix A.55; Stacks 056V."
+   }
+  },
+  {
+   "text": "The identity stalk of $G$ has finite dimension by [lem-kun-finite-type-local-dimension], so [lem-ag-group-identity-local-dimension] makes $\\dim G$ finite. Applied to the original composite $G\\to O\\hookrightarrow X$, whose image closure in $X$ is $Z$, [lem-zl-irreducible-fibre-dimension-lower-bound] gives $\\dim G=\\dim Z+r$ with $r\\in\\mathbb N$. Thus $\\dim Z$ is finite. Its dense open $O$ has the same dimension by [lem-weil-pbc-dense-open-dimension-comparison] and subspace monotonicity. The fibre $q^{-1}(x)$ is $G_x$: on each test scheme $T$ its points are exactly the $g\\in G(T)$ with $gx_T=x_T$. The action identities restrict multiplication, inverse and identity to it. The section $x:\\operatorname{Spec}k\\to X$ of a separated morphism is a closed immersion (base change of the diagonal); its pullback makes $G_x$ a closed finite-type subgroup of $G$, using [lem-weil-pbc-proper-fp-permanence]. Now [lem-sbc-flat-composite-fibre-dimension-at-point] applied to $G\\xrightarrow q O\\to\\operatorname{Spec}k$ at $e\\mapsto x$ gives $\\dim_eG=\\dim_eG_x+\\dim_xO$, since $q$ is flat. For $G,G_x$, [lem-ag-group-identity-local-dimension] and [lem-ag-rational-point-stalk-topological-local-dimension] identify these identity local dimensions with their global dimensions, without reducedness assumptions. The irreducible $O$ has its unique component of finite dimension; [lem-sbc-equidimensional-open-local-dimension] gives $\\dim_xO=\\dim O$. Consequently $\\dim G=\\dim G_x+\\dim O$, equivalently $\\dim O=\\dim G-\\dim G_x$.",
+   "uses": [
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-ag-group-identity-local-dimension",
+    "lem-ag-rational-point-stalk-topological-local-dimension",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-kun-finite-type-local-dimension",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "lem-weil-pbc-dense-open-dimension-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.23, p.104; Appendix A.72; stabilizer definition, p.140; Stacks 02JS, 0A21, 00OU and 00P1."
+   }
+  },
+  {
+   "text": "Put $B=(Z\\setminus O)_{\\mathrm{red}}$. Each $t_g$ preserves $O$, its closure $Z$, and its complement $B$ as sets. This gives scheme invariance as follows. For $T=Z$ or $B$, [sbc-lem-smooth-geometrically-reduced] and [lem-pc-smooth-flat] make $G\\to\\operatorname{Spec}k$ flat with geometrically reduced fibres. Hence $G\\times_kT$ is reduced by [lem-sfb-flat-geometrically-reduced-pullback]. This product is finite type over $k$ by base change and composition [lem-sfb-finite-type-composition-base-change]. Its closed points are $k$-rational, and their images under the action lie in $T$, by the preceding set invariance. Density of closed points implies that the whole action image is contained in the closed subset underlying $T$. The reduced-source factorization theorem [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] now factors $G\\times_kT\\to X$ through the reduced closed subscheme $T\\subset X$. The restricted multiplication and identity laws follow by composing with the immersion into $X$. This proves invariance even as reduced subschemes, despite possible nilpotents in $X$.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-pc-smooth-flat",
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.5(a),(b), p.140; Appendix A.43; Stacks 056T and 01J3."
+   }
+  },
+  {
+   "text": "The dense open $O\\subset Z$ has $\\dim Z=\\dim O$ by [lem-weil-pbc-dense-open-dimension-comparison] and subspace monotonicity. This is finite by step 5. Since $Z$ is irreducible and $B$ is a proper closed subset, any strict chain of irreducible closed subsets in $B$ can be extended by appending $Z$. Thus, if $B$ is nonempty, $\\dim B+1\\le\\dim Z$. If $B$ is empty there are no boundary orbits. For $y\\in B(k)$, invariance factors the orbit map through $B$, so its image $O_y$ is contained in $B$ and $\\dim O_y\\le\\dim B<\\dim O$. To see the subspace inequality directly, close each irreducible closed set of a chain in the ambient space; intersecting back with the subspace recovers the original chain, so strict inclusions remain strict. All constructions and arguments applied to $x$ apply to any such $y$, establishing the asserted boundary orbit statement.",
+   "uses": [
+    "lem-weil-pbc-dense-open-dimension-comparison",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Orbit lemma 1.66, pp.27--28; Proposition 7.6, p.140; Stacks 0A21; elementary chain argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-wf-affine-constructible-open",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sbc-generic-flatness",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-ag-group-identity-local-dimension",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-kun-finite-type-local-dimension",
+  "lem-zl-irreducible-fibre-dimension-lower-bound",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-smooth-flat",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.65(a)--(c), Proposition 1.66, Proposition 7.4(b), Proposition 7.5; Proposition 5.23 and Appendix A.72. Expanded using the cited Stacks and existing DAG inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine algebraic group acting on a finite type scheme the orbit is locally closed of dimension dimension group minus dimension stabilizer and boundary orbits have smaller dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : SMul Γ T] [ProperlyDiscontinuousSMul Γ T] (x : T),\\n  {γ | γ • x = x}.Finite\", \"doc\": \"If a discrete group $\\\\Gamma$ acts properly discontinuously on a topological space $T$, then for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is finite\"}\n  {\"name\": \"smul_closure_orbit_subset\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : Monoid M] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α] (c : M) (x : α), c • closure (MulAction.orbit M x) ⊆ closure (MulAction.orbit M x)\", \"doc\": \"For any element $c$ in a monoid $M$ and any $x$ in a topological space $\\\\alpha$, the scalar multiplication of $c$ on the closure of the orbit of $x$ under $M$ is contained within the closure of the or\"}\n  {\"name\": \"exists_smul_notMem_of_subset_orbit_closure\", \"module\": \"Mathlib/GroupTheory/Perm/ClosureSwap\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : Group G] [inst_1 : MulAction G α] (S : Set G) (T : Set α) {a : α},\\n  (∀ g ∈ S, g⁻¹ ∈ S) → T ⊆ MulAction.orbit (↥(Subgroup.closure S)) a → a ∉ T → T.Nonempty → ∃ σ ∈ S, ∃ a ∈ T, σ • a ∉ T\", \"doc\": \"Let $ G $ be a group acting on a set $ \\\\alpha $, let $ S \\\\subseteq G $ be a subset closed under inverses, and let $ T \\\\subseteq \\\\alpha $ be a non-empty subset contained in the orbit of the subgroup ge\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.exists_nhds_image_smul_eq_self\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : SMul Γ T] [ProperlyDiscontinuousSMul Γ T]\\n  [T2Space T] [LocallyCompactSpace T] [ContinuousConstSMul Γ T] (x : T),\\n  ∃ U ∈ nhds x, ∀ (γ : Γ), ((fun x => γ • x) '' U ∩ U).Nonempty → γ • x = x\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, every point $x \\\\in T$ has a neighborhood $U$ such that if the image of $U$ under $\\\\gamma$ intersects $U$, t\"}\n  {\"name\": \"isOpenMap_smul_of_sigmaCompact\", \"module\": \"Mathlib/Topology/Algebra/Group/OpenMapping\", \"type\": \"∀ {G : Type u_1} {X : Type u_2} [inst : TopologicalSpace G] [inst_1 : TopologicalSpace X] [inst_2 : Group G]\\n  [IsTopologicalGroup G] [inst_4 : MulAction G X] [SigmaCompactSpace G] [BaireSpace X] [T2Space X] [ContinuousSMul G X]\\n  [MulAction.IsPretransitive G X] (x : X), IsOpenMap fun g => g • x\", \"doc\": \"Let $G$ be a $\\\\sigma$-compact, Hausdorff topological group, and let $X$ be a Baire topological space. If $G$ acts on $X$ continuously and transitively, then for any $x \\\\in X$, the orbit map $g \\\\mapsto\"}\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer'\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : VAdd Γ T] [ProperlyDiscontinuousVAdd Γ T] (x : T),\\n  {γ | γ +ᵥ x = x}.Finite\", \"doc\": \"For any properly discontinuous additive action of a group $\\\\Gamma$ on a topological space $T$, and for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is\"}\n  {\"name\": \"MulAction.IsPretransitive.t1Space_iff\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {α : Type u_2} (G : Type u_4) [inst : TopologicalSpace α] [inst_1 : Group G] [inst_2 : MulAction G α]\\n  [ContinuousConstSMul G α] (x : α) [MulAction.IsPretransitive G α], T1Space α ↔ IsClosed {x}\", \"doc\": \"A topological space $\\\\alpha$ with a pretransitive group action is a T1 space if and only if the singleton set $\\\\{x\\\\}$ is closed for some point $x \\\\in \\\\alpha$.\"}\n  {\"name\": \"ProperlyDiscontinuousSMul\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"(Γ : Type u_4) → (T : Type u_5) → [TopologicalSpace T] → [SMul Γ T] → Prop\", \"doc\": \"A group action of a discrete group $\\\\Gamma$ on a topological space $T$ is properly discontinuous if for every point $x \\\\in T$, there exists an open neighborhood $U$ of $x$ such that for all $\\\\gamma \\\\i\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: set-theoretic orbit cardinalities, topological proper actions and smooth algebra relative dimensions do not give scheme orbit dimensions or scheme-theoretic stabilizers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric orbit schemes commute with extensions of algebraically closed fields and the dimension of a group scheme is its local dimension at the identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [Algebra.IsStandardSmooth R S] → ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"FixedPoints.rank_le_card\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u) [inst : Group G] (F : Type v) [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [inst_3 : Fintype G],\\n  Module.rank (↥(FixedPoints.subfield G F)) F ≤ ↑(Fintype.card G)\", \"doc\": \"The rank of the subfield of elements in $ F $ fixed by every element of the finite monoid $ G $, considered as an $ F $-module, is less than or equal to the cardinality of $ G $. That is, $ \\\\mathrm{ra\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] [IsAlgClosed k] (V W : FDRep k G) [CategoryTheory.Simple V]\\n  [CategoryTheory.Simple W], Module.finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"FixedPoints.finrank_le_card\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u) [inst : Group G] (F : Type v) [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [inst_3 : Fintype G],\\n  Module.finrank (↥(FixedPoints.subfield G F)) F ≤ Fintype.card G\", \"doc\": \"For a finite group $G$ acting on a field $F$, the finite rank of the subfield of elements fixed by all elements of $G$ is less than or equal to the cardinality of $G$.\"}\n  {\"name\": \"FixedPoints.finrank_eq_card\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u_1) (F : Type u_2) [inst : Group G] [inst_1 : Field F] [inst_2 : MulSemiringAction G F]\\n  [inst_3 : Fintype G] [FaithfulSMul G F], Module.finrank (↥(FixedPoints.subfield G F)) F = Fintype.card G\", \"doc\": \"For a finite group $ G $ acting faithfully on a field $ F $, the finite rank of the fixed subfield of $ F $ under the action of $ G $ is equal to the cardinality of $ G $.\"}\n  {\"name\": \"AddAction.sum_card_fixedBy_eq_card_orbits_mul_card_addGroup\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ (α : Type u) (β : Type v) [inst : AddGroup α] [inst_1 : AddAction α β] [inst_2 : Fintype α]\\n  [inst_3 : (a : α) → Fintype ↑(AddAction.fixedBy β a)] [inst_4 : Fintype (Quotient (AddAction.orbitRel α β))],\\n  ∑ a, Fintype.card ↑(AddAction.fixedBy β a) = Fintype.card (Quotient (AddAction.orbitRel α β)\", \"doc\": \"For a finite additive group $ G $ acting on a finite set $ \\\\beta $, the sum of the number of fixed points of each group element $ g \\\\in G $ is equal to the number of orbits under the action multiplied\"}\n  {\"name\": \"AlgEquiv.card_le\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ {F : Type u_1} {K : Type u_2} [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K]\\n  [inst_3 : FiniteDimensional F K], Fintype.card Gal(K/F) ≤ Module.finrank F K\", \"doc\": \"For a finite-dimensional field extension $ K $ of $ F $, the cardinality of the Galois group $ \\\\mathrm{Gal}(K/F) $ of $ K $-automorphisms fixing $ F $ is less than or equal to the degree $ [K : F] $ o\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: set-theoretic orbit cardinalities, topological proper actions and smooth algebra relative dimensions do not give scheme orbit dimensions or scheme-theoretic stabilizers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"orbit\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: set-theoretic orbit cardinalities, topological proper actions and smooth algebra relative dimensions do not give scheme orbit dimensions or scheme-theoretic stabilizers."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*dimension|dimension.*stabilizer|orbit.*locally.closed|orbitMap",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"33\", \"text\": \"When `L` is one-dimensional this is an abelian subgroup of the stabilizer of `L` in `SL`. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ProperAction/Basic.lean\", \"line\": \"291\", \"text\": \"lemma MulAction.properSMul_of_proper_orbitMap\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/ProperAction.lean\", \"line\": \"123\", \"text\": \"  MulAction.properSMul_of_proper_orbitMap isProperMap_smul_I\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: set-theoretic orbit cardinalities, topological proper actions and smooth algebra relative dimensions do not give scheme orbit dimensions or scheme-theoretic stabilizers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group orbit dimension formula and strict dimension decrease in orbit closure boundary",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulAction.card_eq_sum_card_group_div_card_stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.CardCommute\", \"type\": \"[Fintype α] [Fintype β] [Fintype Ω] [∀ b : β, Fintype <| stabilizer α b] :\\n  Fintype.card β = ∑ ω : Ω, Fintype.card α / Fintype.card (stabilizer α ω.out)\", \"doc\": \"For a finite group $\\\\alpha$ acting on a finite set $\\\\beta$, with $\\\\Omega$ denoting the set of orbits under this action, the cardinality of $\\\\beta$ equals the sum over each orbit $\\\\omega \\\\in \\\\Omega$ of\"}\n  {\"name\": \"vadd_closure_orbit_subset\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : AddMonoid M] [inst_2 : AddAction M α]\\n  [ContinuousConstVAdd M α] (c : M) (x : α), c +ᵥ closure (AddAction.orbit M x) ⊆ closure (AddAction.orbit M x)\", \"doc\": \"For any additive monoid $ M $ acting continuously on a topological space $ \\\\alpha $, and for any $ c \\\\in M $ and $ x \\\\in \\\\alpha $, the additive action of $ c $ on the closure of the orbit of $ x $ und\"}\n  {\"name\": \"MulAction.mem_orbit_of_mem_orbit_subgroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"{H : Subgroup G} {a b : α} (h : a ∈ orbit H b) : a ∈ orbit G b\", \"doc\": \"If an element $ a $ is in the orbit of $ b $ under a subgroup $ H $ of a group $ G $, then $ a $ is also in the orbit of $ b $ under the group $ G $.\"}\n  {\"name\": \"AddAction.stabilizer_orbit_eq\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {X : Type u_2} [inst_1 : AddAction G X] {a : X} {H : AddSubgroup G},\\n  AddAction.stabilizer G a ≤ H → AddAction.stabilizer G (AddAction.orbit (↥H) a) = H\", \"doc\": \"For an additive group $G$ acting on a type $X$, if the stabilizer subgroup $\\\\text{Stab}(a)$ of an element $a \\\\in X$ is contained in a subgroup $H \\\\leq G$, then the stabilizer of the orbit $H \\\\cdot a$ \"}\n  {\"name\": \"MulAction.index_stabilizer\", \"module\": \"Mathlib.GroupTheory.Index\", \"type\": \": (stabilizer G x).index = (orbit G x).ncard\", \"doc\": \"For a group $ G $ acting on a set $ \\\\alpha $ and an element $ x \\\\in \\\\alpha $, the index of the stabilizer subgroup $ G_x $ in $ G $ is equal to the cardinality of the orbit $ G \\\\cdot x $, i.e., $[G : \"}\n  {\"name\": \"AddAction.card_eq_sum_card_addGroup_sub_card_stabilizer'\", \"module\": \"Mathlib.GroupTheory.GroupAction.CardCommute\", \"type\": \"∀ (α : Type u_1) (β : Type u_2) [inst : AddGroup α] [inst_1 : AddAction α β] [inst_2 : Fintype α] [inst_3 : Fintype β]\\n  [inst_4 : Fintype (Quotient (AddAction.orbitRel α β))] [inst_5 : (b : β) → Fintype ↥(AddAction.stabilizer α b)]\\n  {φ : Quotient (AddAction.orbitRel α β) → β},\\n  Function.LeftInver\", \"doc\": \"For an additive group $\\\\alpha$ acting on a type $\\\\beta$, with $\\\\alpha$, $\\\\beta$, and the quotient of $\\\\beta$ by the orbit equivalence relation all finite, the cardinality of $\\\\beta$ equals the sum ove\"}\n  {\"name\": \"MulAction.orbit_smul\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(g : G) (a : α) : orbit G (g • a) = orbit G a\", \"doc\": \"For any group element $ g $ and any element $ a $ in the set $ \\\\alpha $, the orbit of $ g \\\\cdot a $ under the group action is equal to the orbit of $ a $, i.e., $ \\\\mathrm{Orbit}(G, g \\\\cdot a) = \\\\mathr\"}\n  {\"name\": \"MulAction.IsFixedBlock.orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"(a : X) : IsFixedBlock G (orbit G a)\", \"doc\": \"For any element $ a \\\\in X $, the orbit $ \\\\text{orbit}_G(a) $ is a fixed block under the group action of $ G $.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: set-theoretic orbit cardinalities, topological proper actions and smooth algebra relative dimensions do not give scheme orbit dimensions or scheme-theoretic stabilizers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group acting on a scheme has locally closed smooth orbits and orbit dimension equals group dimension minus stabilizer dimension",
+   "results": "msearch: 8 hits; SeparationQuotient.instIsPretransitiveVAdd; SeparationQuotient.instIsPretransitiveSMul; ProperlyDiscontinuousSMul; CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected; MulAction.instIsPretransitiveElemOrbit; ProperlyDiscontinuousVAdd.finite_stabilizer'; ProperlyDiscontinuousSMul.finite_stabilizer'; Topology.IsQuotientMap.isCoveringMapOn_of_vadd_disjoint",
+   "date": "2026-10-22",
+   "verdict": "No match: abstract set actions and topological actions do not give smooth scheme orbits, flat orbit morphisms, or dimensions of scheme stabilizers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"orbit\"",
+   "results": "msearch: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: abstract set actions and topological actions do not give smooth scheme orbits, flat orbit morphisms, or dimensions of scheme stabilizers."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*dimension|dimension.*stabilizer|orbit.*locally.closed|orbitMap",
+   "results": "msearch: 3 hits; Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean; Mathlib/Topology/Algebra/ProperAction/Basic.lean; Mathlib/Analysis/Complex/UpperHalfPlane/ProperAction.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: abstract set actions and topological actions do not give smooth scheme orbits, flat orbit morphisms, or dimensions of scheme stabilizers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group orbits locally closed smooth and boundary orbits of strictly smaller dimension",
+   "results": "msearch: 8 hits; MeasureTheory.addFundamentalFrontier; MulAction.mem_orbit_of_mem_orbit_subgroup; MulAction.IsFixedBlock.orbit; MulAction.orbit.pairwiseDisjoint; AddAction.IsBlock.orbit; AddAction.orbitRel_apply; MulAction.IsBlock.orbit; MulAction.orbitRel.Quotient.mapsTo_smul_orbit",
+   "date": "2026-10-22",
+   "verdict": "No match: abstract set actions and topological actions do not give smooth scheme orbits, flat orbit morphisms, or dimensions of scheme stabilizers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a group scheme acting on an algebraic scheme the reduced image of the orbit morphism is smooth and the orbit morphism is faithfully flat",
+   "results": "msearch: 8 hits; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; AlgebraicGeometry.IsSmooth; Algebra.Smooth.flat; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine; AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-22",
+   "verdict": "No match: abstract set actions and topological actions do not give smooth scheme orbits, flat orbit morphisms, or dimensions of scheme stabilizers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-plucker-pgl-linearization",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The arbitrary-characteristic meaning of geometric stability in the Hilbert-linearization prerequisite: algebraic orbit dimensions and boundary orbits, independent of projective GIT.",
+   "via": [
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-group-orbit-geometry",
+  "worker": "stage1",
+  "summary": "Q69: read the locally available Milne 2017 text, proving local closedness by constructibility and translation, flatness by generic flatness and translation, smoothness by perfect-field generic smoothness, and dimensions by flat fibre additivity. Reused existing nodes throughout; no new nodes or Lean edits. Preserved the statement. Repair after the side-completion promotion refusal: rebased the retained split onto the current DAG and re-read all 29 current cited statements; none changed its quoted statement. Clarified the ambient target in the dimension argument and made finite-type base-change citations explicit for rational lifts and action products. Retry of the retained repair on 2026-10-23: reconstructed the item over the current live unsplit node, verified all 29 dependency statements against retained citations, and made separatedness and finite type of the corestricted orbit map, together with the rational-lift translate covering, explicit in step 3.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The arbitrary-characteristic meaning of geometric stability in the Hilbert-linearization prerequisite: algebraic orbit dimensions and boundary orbits, independent of projective GIT.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "General geometry tool: A scheme smooth over a field is regular; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-wf-affine-constructible-open",
+    "why": "General geometry tool: Chevalley constructibility and open pieces of constructible sets; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "General geometry tool: A map from a reduced scheme factors through a closed subscheme exactly set-theoretically; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-sbc-generic-flatness",
+    "why": "General geometry tool: Generic flatness for a finite type morphism to an integral scheme; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "General geometry tool: Geometric reducedness over a perfect field; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "General geometry tool: Pointwise fibre dimension is additive for a flat first morphism; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "General geometry tool: Local dimension at a group identity equals global dimension; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-ag-rational-point-stalk-topological-local-dimension",
+    "why": "General geometry tool: At a rational closed point of a locally finite type scheme over a field, stalk dimension equals topological local dimension.; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "General geometry tool: Local dimension of a pure-dimensional locally algebraic open; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-kun-finite-type-local-dimension",
+    "why": "General geometry tool: Finite local dimension for finite type schemes over a field; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "why": "General geometry tool: Lower bound for fibres of an irreducible finite-type scheme; used exactly as its statement says in the proof. The unit has no replacement for this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-wf-affine-constructible-open",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sbc-generic-flatness",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-ag-group-identity-local-dimension",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-kun-finite-type-local-dimension",
+  "lem-zl-irreducible-fibre-dimension-lower-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-ce577af3d",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-ce577af3d (reviewer sub-agent of L); spot-checked: I read all 7 steps and all 29 cited statements in full. Context: no new nodes; statement and stmt_deps unchanged; item still unsplit with an empty proof on clones/live and clones/side-live; no repair note, so the re-split rule does not apply. This is the third delivery after L's promotion return. Against the 76896175 snapshot, only step 3 and the split_report summary changed. Step 3 now proves O is separated (as a locally closed subscheme of the separated X), cites Nagata (b) for G->O being of finite type, and writes out the translate cover y = t_{g_y g_w^{-1}} w; all of this is correct. Source: the local Milne iAG2017 (pdftotext), Prop 1.65(a)-(c), the orbit lemma 1.66, Prop 7.4(b) and 7.5, and the isotropy definition on p.140. The steps follow this route; Prop 5.23 is replaced by flat fibre-dimension additivity at e, which is valid. No SGA is cited. Step checks: (1) Noetherian, finite type to a separated target, regular+connected+nonempty gives integral, Jacobson closed points are rational. (2) Chevalley plus lem-wf-affine-constructible-open(2) on an affine A; S is irreducible so the closure of S∩A is Z∩A; q^{-1}(V) contains all closed points, so S=V. (3) O is integral, generic flatness hypotheses hold, translates cover O, faithful flatness follows without smoothness of q. (4) k perfect gives geometrically reduced, a dense smooth locus, then homogeneity. (5) dim G is finite via the identity stalk; the zl lower bound makes dim Z finite; the fibre of G->O over x is G_x (monomorphism); flat additivity at e; identity-dimension needs no reducedness of G_x; def-kun-dimension's dim_x is the same as topological-dimension-at-point. (6) G×T is reduced (smooth implies flat with geometrically reduced fibres, flat-reduced pullback) before the factorization is applied. (7) Appending Z to chains in B gives the strict drop; the empty boundary is handled. Edge cases: fixed point; G_m on A^1; SL2 on A^2 (2=3-1); char p with x+a^p (G_x=α_p, q flat but not smooth); nonreduced X. I accept the 11 generic tool_uses. Maintainer note: Q15 lem-sfb-git-orbit-closure-dimension overlaps with this item and could cite it; it was not created by this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SmoothGroupOrbitGeometry",
+  "declaration": "AlgebraicGeometry.exists_smooth_group_orbit_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SmoothGroupOrbitGeometry.lean",
+  "statement": "theorem exists_smooth_group_orbit_geometry {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [Smooth G.hom] [ConnectedSpace G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (X : Over (Spec (.of k))) [ModObj G X] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (x : 𝟙_ (Over (Spec (.of k))) ⟶ X) : ∃ (K : Grp (Over (Spec (.of k)))) (i : K.X ⟶ G), IsClosedSubgroupScheme i ∧ (∀ (T : Over (Spec (.of k))) (g : T ⟶ G), (∃ h : T ⟶ K.X, h ≫ i = g) ↔ g • (toUnit T ≫ x) = toUnit T ≫ x) ∧ ∃ (O : Over (Spec (.of k))) (j : O ⟶ X) (q : G ⟶ O), IsReduced O.left ∧ IsImmersion j.left ∧ Smooth O.hom ∧ Set.range j.left = Set.range (lift (𝟙 G) (toUnit G ≫ x) ≫ γ[G, X]).left ∧ q ≫ j = lift (𝟙 G) (toUnit G ≫ x) ≫ γ[G, X] ∧ Flat q.left ∧ Surjective q.left ∧ topologicalKrullDim G.left = topologicalKrullDim K.X.left + topologicalKrullDim O.left ∧ ∃ (Z B : Over (Spec (.of k))) (z : Z ⟶ X) (b : B ⟶ X), IsReduced Z.left ∧ IsClosedImmersion z.left ∧ Set.range z.left = closure (Set.range j.left) ∧ IsReduced B.left ∧ IsClosedImmersion b.left ∧ Set.range b.left = closure (Set.range j.left) \\ Set.range j.left ∧ (∃ aZ : G ⊗ Z ⟶ Z, aZ ≫ z = (𝟙 G ⊗ₘ z) ≫ γ[G, X]) ∧ (∃ aB : G ⊗ B ⟶ B, aB ≫ b = (𝟙 G ⊗ₘ b) ≫ γ[G, X]) ∧ ∀ y : 𝟙_ (Over (Spec (.of k))) ⟶ X, y.left (IsLocalRing.closedPoint k) ∈ Set.range b.left → topologicalKrullDim (Set.range (lift (𝟙 G) (toUnit G ≫ y) ≫ γ[G, X]).left) < topologicalKrullDim O.left",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50fd02f46",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Clause-by-clause match of the item node with exists_smooth_group_orbit_geometry: alg. closed field; G smooth, connected, affine, finite type GrpObj over Spec k; X separated, finite type, ModObj action; stabilizer K via IsClosedSubgroupScheme (IsMonHom + closed immersion) with the full T-point criterion g•x_T=x_T; reduced immersion orbit O with the orbit-map range, smooth; q unique with q≫j=orbit map, Flat ∧ Surjective; dim G = dim K + dim O (all finite, equivalent to the subtraction); reduced closure and boundary with scheme-level action factorizations; boundary rational orbits have strictly smaller Krull dim. No extra hypotheses; universes bound; edge cases (empty X, fixed point/empty boundary, char-p μ_p stabilizer, nonreduced X) covered. Only the lean field changed; statement verbatim; docstrings carry source, blueprint and 7 steps; proof sorry only; imports = proof_dep modules; no duplicate orbit/stabilizer notion. Advisory: IsClosedSubgroupScheme is owned by def-sc-group-scheme-subgroup, not in stmt_deps (TeX cites sk-def-av-group-scheme, which has no lean record); not fixable in S2. No compile run (no changes)."
+ }
+}

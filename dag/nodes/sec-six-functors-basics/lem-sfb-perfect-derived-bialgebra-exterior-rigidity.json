@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-perfect-derived-bialgebra-exterior-rigidity",
+ "kind": "statement",
+ "title": "Rigidity of perfect derived bialgebras with exterior residue cohomology",
+ "statement": "Let $(R,\\mathfrak m,k)$ be a commutative Noetherian local ring: every ideal is finitely generated, $\\mathfrak m$ is its unique maximal ideal, and $k=R/\\mathfrak m$. In the cochain derived category $D(R)$ [def-weil-abstract-derived-category], with the signed total derived tensor product $\\otimes_R^{\\mathbf L}$, let $K$ be perfect [def-pc-perfect-ring-complex]. Suppose there are morphisms $u:R[0]\\to K$, $\\mu:K\\otimes_R^{\\mathbf L}K\\to K$, $\\varepsilon:K\\to R[0]$ and $\\Delta:K\\to K\\otimes_R^{\\mathbf L}K$. They make $K$ a commutative bialgebra object: $\\mu$ is associative, unital with unit $u$, and invariant under tensor symmetry; $\\Delta$ is coassociative with counit $\\varepsilon$; $\\Delta$ and $\\varepsilon$ preserve multiplication and units. All these equalities are in $D(R)$ under its canonical tensor associativity, unit and symmetry isomorphisms. Let $\\overline K=k\\otimes_R^{\\mathbf L}K$. Assume $H^*(\\overline K)$ with the induced product is the exterior algebra on the finite-dimensional vector space $H^1(\\overline K)$, with its generators in degree one, and $H^0(\\overline K)=k$ via $u$. Put $g=\\dim_kH^1(\\overline K)$. Then $K$ is isomorphic in $D(R)$ to a bounded complex of finite free $R$-modules with zero differentials, zero outside degrees $0,\\ldots,g$. The map $H^0(u)$ identifies $H^0(K)$ with $R$, and $H^1(K)$ is free of rank $g$. Every $x\\in H^1(K)$ has $x^2=0$, and multiplication induces an isomorphism of graded $R$-algebras $\\bigwedge_R^*H^1(K)\\xrightarrow{\\sim}H^*(K)$ [def-weil-pbc-exterior-algebra].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent-stated bialgebra rigidity lemma; minimal-model input is Tag 0BCC (lemma-lift-pseudo-coherent-from-residue-field); separatedness of the maximal-ideal filtration is algebra.tex Tag 00IP (lemma-intersect-powers-ideal-module-zero). Neither tag alone states the rigidity conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-exterior-algebra",
+  "def-sfb-derived-exterior-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded cochain complex of finitely generated projective $R$-modules representing $K$, using [def-pc-perfect-ring-complex]. Apply [lem-weil-pbc-finite-projective-prime-local-free] to each of its finitely many nonzero terms $M$ at the prime $\\mathfrak m$: there is $f\\notin\\mathfrak m$ with $M_f\\cong R_f^{\\oplus r}$. Since $R$ is local, $f$ is a unit, so $R\\to R_f$ and $M\\to M_f$ are isomorphisms and $M\\cong R^{\\oplus r}$ is finite free. Thus this is a bounded finite-free representative, in particular a bounded-above one, so $K$ is pseudo-coherent by [def-pc-ring-pseudo-coherent-complex].",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective (finite projective modules are locally free); apply at the maximal ideal of the local ring to the terms of the perfect representative."
+   }
+  },
+  {
+   "text": "Put $d_i=\\dim_k H^i(\\overline K)$. The exterior-basis statement [lem-weil-pbc-exterior-power-free-basis] gives $d_i=\\binom gi$ for $0\\leq i\\leq g$ and zero otherwise. Apply [lem-sc-perfect-local-pseudocoherent-free-model]: there is a representative $P$ of $K$ with $P^i=R^{d_i}$ in every degree. It is therefore bounded and supported in $[0,g]$. It is minimal: for the residue complex $E=k\\otimes_R P$, the equality $\\dim_k E^i=\\dim_k H^i(E)=d_i$ and the formula $\\dim H^i(E)=\\dim E^i-\\operatorname{rank}(\\overline d^{i-1})-\\operatorname{rank}(\\overline d^i)$ force all residue differentials to vanish. Hence $d(P)\\subseteq\\mathfrak mP$.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field; exterior dimensions from algebra.tex Tag 00DM."
+   }
+  },
+  {
+   "text": "The bounded free complexes $R[0]$, $P$ and all finite tensor powers of $P$ are K-flat by [lem-pc-module-bounded-flat-kflat]; freeness makes tensoring termwise a finite direct sum, hence exact. By [lem-pc-derived-tensor-second-factor-functor] their ordinary signed total tensors compute the derived tensors. Use [lem-pc-ring-derived-map-representative] to represent $u,\\mu,\\varepsilon,\\Delta$ by chain maps on these complexes. The same bijectivity says that each bialgebra identity holds up to chain homotopy, since its source is bounded projective. On reducing modulo $\\mathfrak m$, all terms $dh+hd$ vanish. Thus $E$ is a strict graded bialgebra with underlying graded algebra $H^*(\\overline K)$ and with the given exterior product.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K, lemma-derived-tor-quasi-isomorphism; morphism representatives are derived.tex Tag 064B, lemma-morphisms-from-projective-complex."
+   }
+  },
+  {
+   "text": "The residue of $u^0:R\\to P^0$ is an isomorphism by the hypothesis on $H^0(\\overline K)$. Apply [lem-pc-finite-free-map-residue-localization] at $\\mathfrak m$. Its $f\\notin\\mathfrak m$ is a unit, so $u^0$ itself is an isomorphism. Identify $P^0$ with $R$ by this map. The chain-map equation $d^0u^0=0$ gives $d^0=0$. In particular the unit is an actual cycle, and its leading differential in every maximal-ideal order is zero.",
+   "uses": [
+    "lem-pc-finite-free-map-residue-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, lemma-cokernel-flat (3); the local-ring specialization uses that every element outside the maximal ideal is a unit."
+   }
+  },
+  {
+   "text": "Write $V=E^1$. Since $E$ has no negative degrees, $E^0=k$ via the unit, and the counit is zero in positive degrees, its two counit equations imply $\\overline\\Delta(v)=v\\otimes1+1\\otimes v$ for $v\\in V$. Multiplicativity of $\\overline\\Delta$, with the signed tensor product, gives the $(1,1)$-component $c(vw)=v\\otimes w-w\\otimes v$. Choose a basis $e_1,\\ldots,e_g$ of $V$. By [lem-weil-pbc-exterior-power-free-basis], the $e_ie_j$ with $i<j$ form a basis of $E^2$. Define $\\rho:V\\otimes_kV\\to E^2$ by $\\rho(e_i\\otimes e_j)=e_ie_j$ for $i<j$ and zero for $i\\geq j$. Then $\\rho c=1$. Consequently $c$ is split injective and every primitive element of $E^2$ is zero. This includes characteristic two, and $E^2=0$ when $g<2$.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coordinate calculation from the exterior basis in Tag 00DM, section-tensor-algebra; no assertion about primitive elements is attributed to Stacks."
+   }
+  },
+  {
+   "text": "We prove by induction on $n\\geq1$ that every entry of $d$ lies in $\\mathfrak m^n$; step 2 is the base case. Suppose this holds for $n$, and put $I_n=\\mathfrak m^n/\\mathfrak m^{n+1}$. The differential induces a degree-one $k$-linear map $\\delta:E^i\\to I_n\\otimes_k E^{i+1}$: for $a\\in P^i$, take $da$ in $\\mathfrak m^nP^{i+1}/\\mathfrak m^{n+1}P^{i+1}$ and use the identification with $I_n\\otimes_k E^{i+1}$ given by a free basis of $P^{i+1}$. Changing $a$ by an element of $\\mathfrak mP^i$ changes $da$ by an element of $\\mathfrak m^{n+1}P^{i+1}$, proving independence of the lift. Step 4 gives $\\delta(1)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent maximal-ideal filtration calculation on the finite-free model from Tag 0BCC; this calculation is not the statement of a Stacks lemma."
+   }
+  },
+  {
+   "text": "The chain-map equations for the chosen representatives are $d\\mu=\\mu(d\\otimes1+(-1)^{\\deg}1\\otimes d)$ and $\\Delta d=(d\\otimes1+(-1)^{\\deg}1\\otimes d)\\Delta$. Take their coefficients in $\\mathfrak m^n/\\mathfrak m^{n+1}$. Every occurrence of $d$ contributes its leading coefficient $\\delta$; every adjacent coefficient of $\\mu$ or $\\Delta$ can be reduced modulo $\\mathfrak m$, since its error times $\\mathfrak m^n$ lies in $\\mathfrak m^{n+1}$. We obtain $\\delta(ab)=\\delta(a)b+(-1)^{\\deg a}a\\delta(b)$ and $\\overline\\Delta\\delta=(\\delta\\otimes1+(-1)^{\\deg}1\\otimes\\delta)\\overline\\Delta$, with the coefficient factor $I_n$ placed first on both sides. These are identities of $k$-linear maps with values in $I_n$ tensored with the indicated graded modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent coefficient calculation using the chain-map equations on the Tag 0BCC model; only the equations, not strictification of all bialgebra laws, are used."
+   }
+  },
+  {
+   "text": "For $v\\in E^1$, substitute $\\overline\\Delta(v)=v\\otimes1+1\\otimes v$ and $\\delta(1)=0$ into the second equation of step 7. It says $\\overline\\Delta(\\delta v)=\\delta v\\otimes1+1\\otimes\\delta v$. Its $(1,1)$-component is $(1_{I_n}\\otimes c)(\\delta v)=0$. Tensor the explicit retraction $\\rho$ of step 5 with $I_n$ to conclude $\\delta v=0$; no flatness of $I_n$ is needed. The first equation of step 7 now gives $\\delta(v_1\\cdots v_r)=0$ by induction on $r$, since $E$ is generated by $E^1$ and the unit. Thus $\\delta=0$, so every entry of $d$ lies in $\\mathfrak m^{n+1}$. This completes the induction for all $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent derivation and reduced-coproduct calculation, extending the minimal-model input Tag 0BCC; the split retraction was explicitly constructed in step 5."
+   }
+  },
+  {
+   "text": "Every matrix entry of $d$ belongs to $N=\\bigcap_{n\\geq0}\\mathfrak m^nR$. Apply [lem-weil-pbc-krull-intersection-localization] with the Noetherian ring $R$, ideal $\\mathfrak m$, finite module $R$, and prime $\\mathfrak m$. It gives $f\\notin\\mathfrak m$ with $N_f=0$. Because $f$ is a unit, this says $N=0$ already over $R$. Therefore $d=0$. We have proved the asserted derived isomorphism to a bounded finite-free zero-differential complex supported in $[0,g]$, without completing $R$.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ, lemma-intersection-powers-ideal-module (1), specialized to the maximal ideal of a local ring; compare Tag 00IP, lemma-intersect-powers-ideal-module-zero."
+   }
+  },
+  {
+   "text": "Put $A^i=P^i=H^i(K)$. All tensor powers of $P$ now have zero differential. Consequently every chain homotopy between their maps has boundary $dh+hd=0$, so the bialgebra laws from step 3 hold as exact graded-module identities on $A$. By step 4, $A^0=R$ via $H^0(u)$; by step 2, $A^1$ is free of rank $g$. The counit equations, degree by degree, imply $\\Delta(x)=x\\otimes1+1\\otimes x$ for every $x\\in A^1$, just as in step 5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent passage from the zero-differential finite-free model to its cohomology; the homotopy representatives were justified by derived.tex Tag 064B in step 3."
+   }
+  },
+  {
+   "text": "Let $c_R:A^2\\to A^1\\otimes_R A^1$ be the $(1,1)$-component of $\\Delta$. Its residue is the split injection $c$ of step 5. Both source and target are finite free, so [lem-pc-finite-free-map-residue-localization] and the fact that $R$ is local make $c_R$ injective. For $x\\in A^1$, multiplicativity and the signed tensor product give $\\Delta(x^2)=(x\\otimes1+1\\otimes x)^2=x^2\\otimes1+x\\otimes x-x\\otimes x+1\\otimes x^2$. Hence $c_R(x^2)=0$, so $x^2=0$. This is the required square-zero assertion, even when $2$ is not a unit.",
+   "uses": [
+    "lem-pc-finite-free-map-residue-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, lemma-cokernel-flat (1); the signed square calculation is elementary and uses no division by 2."
+   }
+  },
+  {
+   "text": "Associativity, signed commutativity and step 11 make $(x_1,\\ldots,x_r)\\mapsto x_1\\cdots x_r$ multilinear and alternating: move two equal factors next to one another using the signs, then their square is zero. By [lem-trf-exterior-power-universal-property] it induces $\\phi_r:\\bigwedge_R^r A^1\\to A^r$ with the stated value on pure wedges. The source is finite free by [lem-weil-pbc-exterior-power-free-basis]; the target is finite free by step 2. Its residue is the exterior-product isomorphism in the hypothesis: exterior basis vectors reduce to the corresponding exterior basis vectors over $k$, and the product maps reduce to the given product. Apply [lem-pc-finite-free-map-residue-localization] at $\\mathfrak m$ to obtain that each $\\phi_r$ is an isomorphism. Both sides vanish for $r>g$ (and negative degrees); for $r=0$ the map is $H^0(u)$. On pure wedges concatenation and associativity give $\\phi_{r+s}(\\alpha\\wedge\\beta)=\\phi_r(\\alpha)\\phi_s(\\beta)$, so the direct sum of the $\\phi_r$ is the required graded-algebra isomorphism.",
+   "uses": [
+    "lem-trf-exterior-power-universal-property",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-pc-finite-free-map-residue-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM, section-tensor-algebra (alternating quotient and exterior basis); Tag 00O0, lemma-cokernel-flat (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pc-finite-free-map-residue-localization",
+  "lem-weil-pbc-krull-intersection-localization",
+  "lem-trf-exterior-power-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent proof: Tag 0BCC supplies the minimal model; explicit maximal-ideal leading differential and signed coproduct calculations supply rigidity; algebra.tex Tags 00IP/00IQ supply separatedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A perfect augmented bialgebra object in the derived category over a Noetherian local ring with exterior residue cohomology has free exterior cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Module.Projective A Ω[A⁄R]\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a commutative $ R $-algebra. If $ A $ is formally smooth over $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module.\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-complex smoothness criteria and single-complex differential identities do not concern a perfect bialgebra object, minimal models or exterior residue cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialgebra\", \"DerivedCategory\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-complex smoothness criteria and single-complex differential identities do not concern a perfect bialgebra object, minimal models or exterior residue cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "bialgebra.*(perfect|derived)|Hopf.*(perfect|derived)|exterior.*(rigidity|deformation)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-complex smoothness criteria and single-complex differential identities do not concern a perfect bialgebra object, minimal models or exterior residue cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal perfect complex carrying a counital multiplicative coproduct and exterior cohomology modulo maximal ideal has zero differential",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.cochainComplex_d_succ_succ_zero\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"(C : CochainComplex V ℕ) (i : ℕ) : C.d 0 (i + 2) = 0\", \"doc\": \"For any cochain complex $ C $ in a category with zero morphisms indexed by natural numbers, and for every natural number $ i $, the differential from degree $ 0 $ to degree $ i + 2 $ is the zero morph\"}\n  {\"name\": \"CochainComplex.singleFunctor_obj_d\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors\", \"type\": \"(X : C) (n p q : ℤ) : ((singleFunctor C n).obj X).d p q = 0\", \"doc\": \"In the single-term cochain complex concentrated at index $ n $, all differential maps between any indices $ p $ and $ q $ are zero, i.e., $ d^{p,q} = 0 $.\"}\n  {\"name\": \"CochainComplex.cm5b.I\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.CM5b\", \"type\": \": CochainComplex C ℤ\", \"doc\": \"A cochain complex in an abelian category $\\\\mathcal{C}$ with enough injectives, where each object $X^n$ is the injective replacement of $K.X^n$ and all differential morphisms between objects are zero m\"}\n  {\"name\": \"HomologicalComplex.extend_single_d\", \"module\": \"Mathlib.Algebra.Homology.Embedding.Extend\", \"type\": \"(i : ι) (j' k' : ι') : (((single C c i).obj X).extend e).d j' k' = 0\", \"doc\": \"For a single-term homological complex concentrated at index $i$ and extended via a shape embedding $e$, all differential maps $d_{j',k'}$ in the extended complex are zero morphisms in the category $C$\"}\n  {\"name\": \"HomologicalComplex.extend.d_none_eq_zero\", \"module\": \"Mathlib.Algebra.Homology.Embedding.Extend\", \"type\": \"(i j : Option ι) (hi : i = none) : d K i j = 0\", \"doc\": \"If either index is the zero object (corresponding to `none`), then the differential of the extended homological complex is the zero morphism, i.e., $d_{i,j} = 0$ whenever $i = \\\\text{none}$ or $j = \\\\te\"}\n  {\"name\": \"HomologicalComplex.single_obj_d\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \"(j : ι) (A : V) (k l : ι) : ((single V c j).obj A).d k l = 0\", \"doc\": \"For a single-term homological complex constructed by placing an object $A$ at index $j$ and zero objects elsewhere in a category $V$ with zero morphisms, all differential maps $d_{k,l}$ between indice\"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.δ_eq_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"{n : ℤ} (z : Cocycle F G n) (m : ℤ) : δ n m (z : Cochain F G n) = 0\", \"doc\": \"For any integer $n$ and any cocycle $z$ in degree $n$ of the homomorphism complex $\\\\text{Hom}(F, G)$ between cochain complexes $F$ and $G$ in a preadditive category, the differential $\\\\delta$ applied \"}\n  {\"name\": \"CochainComplex.HomComplex.δ_δ\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(n₀ n₁ n₂ : ℤ) (z : Cochain F G n₀) : δ n₁ n₂ (δ n₀ n₁ z) = 0\", \"doc\": \"For any integers $ n_0, n_1, n_2 $ and any cochain $ z $ of degree $ n_0 $ in the homomorphism complex $ \\\\text{Hom}(F, G) $ of cochain complexes $ F $ and $ G $ in a preadditive category, the composit\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-complex smoothness criteria and single-complex differential identities do not concern a perfect bialgebra object, minimal models or exterior residue cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal rigidity of perfect derived Hopf algebras with primitive exterior generators in cohomological degree one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.Extension.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Subsingleton P.H1Cotangent ↔ Function.Injective ⇑P.cotangentComplex\", \"doc\": \"For an $ R $-algebra extension $ S $, the first cohomology group $ H^1 $ of the cotangent complex is trivial (i.e., all elements are equal) if and only if the canonical cotangent complex map $ \\\\ker(\\\\p\"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-complex smoothness criteria and single-complex differential identities do not concern a perfect bialgebra object, minimal models or exterior residue cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "bialgebra.*(perfect|derived)|exterior.*(rigidity|deformation)|coderivation",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned cotangent-complex, ordinary exterior-algebra or single-complex statements do not assert derived bialgebra rigidity or the filtered biderivation calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect augmented bialgebra in the derived category of a Noetherian local ring with exterior residue cohomology has zero minimal differential and free exterior cohomology",
+   "results": "8 hits: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.formallySmooth_iff, Algebra.formallyEtale_iff, Algebra.FormallySmooth.iff_subsingleton_and_projective, Algebra.FormallyEtale",
+   "date": "2026-10-24",
+   "verdict": "no match: returned cotangent-complex, ordinary exterior-algebra or single-complex statements do not assert derived bialgebra rigidity or the filtered biderivation calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A minimal finite free complex with exterior algebra residue cohomology and a multiplicative coproduct is formal over a local ring",
+   "results": "8 hits: Module.free_of_flat_of_isLocalRing, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.instFormallyUnramifiedResidueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.instFiniteResidueFieldOfFormallyUnramified, ExteriorAlgebra, Algebra.FormallySmooth.mk, IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing",
+   "date": "2026-10-24",
+   "verdict": "no match: returned cotangent-complex, ordinary exterior-algebra or single-complex statements do not assert derived bialgebra rigidity or the filtered biderivation calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal differential on the residue of a minimal free cochain complex is a derivation and coderivation for multiplication and comultiplication chain maps",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δ_eq_δAux, CochainComplex.cm5b.I_d, CategoryTheory.ProjectiveResolution.cochainComplex_d, Algebra.H1Cotangent.δ, Algebra.Presentation.differentials.comm₁₂, CategoryTheory.ProjectiveResolution.cochainComplex_d_assoc, Algebra.Generators.H1Cotangent.δAux, CochainComplex.ConnectData.d_sub_one_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: returned cotangent-complex, ordinary exterior-algebra or single-complex statements do not assert derived bialgebra rigidity or the filtered biderivation calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-coherent-exterior-base-change",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Auxiliary: The algebraic obstruction calculation that kills the minimal differential over nilpotent bases, before sheafification and universal base change.",
+   "via": [
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-derived-bialgebra-exterior-rigidity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved using existing local minimal-model, K-flat tensor, derived-map, exterior-basis, local finite-free-map and Krull-intersection nodes. The leading differential is killed order by order using explicit derivation/coderivation equations and a split-injective degree-two reduced coproduct, including characteristic two. No new nodes: the remaining calculations are elementary steps from the cited statements.",
+  "blueprint": "Auxiliary algebraic obstruction argument serving det-thm-sf-ctf-stability-direct-images proof (3), through the existing abelian-coherent-exterior-base-change chain. The newest blueprint direct-images proof (3) does not itself state this auxiliary lemma. Retained the inherited null nearest blueprint ancestor returned by tools/blueprint_refs.py ancestor; no ancestor was invented.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Frees the finitely generated projective terms of a perfect model over a local ring (localization at the maximal ideal by a unit); generic module algebra, not a replacement for a unit step. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-sc-perfect-local-pseudocoherent-free-model",
+    "why": "Supplies the finite-free minimal model with residue Betti ranks (0BCC); generic local derived algebra. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Makes bounded free tensor models K-flat; generic derived tensor infrastructure. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Computes the specified derived tensors on K-flat representatives over the one-point ringed site. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-pc-finite-free-map-residue-localization",
+    "why": "Lifts residue injections and isomorphisms of finite-free maps; a generic local linear algebra tool. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-localization",
+    "why": "Kills differential entries in every maximal-ideal power over the original Noetherian local ring; generic commutative algebra. No node of this unit supplies this general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-finite-free-map-residue-localization",
+  "lem-weil-pbc-krull-intersection-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-1a1a9cd0a",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-1a1a9cd0a (reviewer sub-agent of L); spot-checked: I read the whole item, all 12 steps and every cited statement. There are no new nodes and the statement and stmt_deps are unchanged. Steps 2-12 are correct. Step 2: the 0BCC minimal model (checked at more-algebra.tex l.19548), with d_i = C(g,i) from the exterior basis, so P is bounded on [0,g]; rank-nullity forces d̄ = 0. Step 3: chain representatives from K-flat models (pc-module-bounded-flat-kflat, derived-tensor-second-factor (2), and homotopy-class = D(R) bijectivity); the homotopies vanish mod m, so E is a strict bialgebra. Step 4: the unit u^0 is an isomorphism by the residue-localization node, since f ∉ m is a unit; then d^0 = 0. Steps 5-8: I checked the signed c(vw) = v⊗w − w⊗v and the retraction ρ with ρc = 1, valid in characteristic 2. δ is well defined and k-linear, is a derivation and coderivation, and δv is primitive in I_n⊗E^2, so δ = 0. The induction n → n+1 has its base at step 2. Step 9: Krull intersection with M = R and I = p = m; f is a unit, so d = 0. Steps 10-12: the laws hold strictly; I recomputed Δ(x²) = x²⊗1 + x⊗x − x⊗x + 1⊗x², and the injectivity clause gives x² = 0 without dividing by 2. φ_r comes from the alternating universal property, and the residue isomorphism plus the localization node make it an isomorphism. Edge cases tested: g=0, g=1, a field, Artinian non-reduced, characteristic 2, non-complete R. No duplicate among the existing bialgebra nodes (bounded-bialgebra-top-degree-exterior, graded-primitive-product, abelian-h2-reduced-coproduct-injective). No SGA. Batch-5 flags: (1) lem-trf-exterior-power-universal-property is a Mathlib leaf (alternatingMapLinearEquiv) whose closure is two definitions; it is a generic universal property, not part of the trace-formula or Poincaré-duality proofs, so I accept it. (2) lem-trf-projective-over-local-free is arbitrary-rank Kaplansky; its closure brings about 25 trf transfinite and countable-decomposition nodes for a step that only needs the finitely generated case. FIX: step 1 now cites lem-weil-pbc-finite-projective-prime-local-free (Stacks 00NX, sk-thm-p1, reviewed, no trf/pd/trace nodes in its closure) at the prime m, where f is a unit so M ≅ M_f is finite free. I updated the step-1 text and source, proof_deps and the split_report.tool_uses entry. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-perfect-derived-bialgebra-exterior-rigidity.json. The other declared tool uses (sc/pc local derived algebra, pbc Krull) are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectDerivedBialgebraExteriorRigidity",
+  "declaration": "DerivedCategory.ExteriorCohomology.perfect_derived_bialgebra_exterior_rigidity",
+  "declarations": [
+   "DerivedCategory.ExteriorCohomology.perfect_derived_bialgebra_exterior_rigidity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectDerivedBialgebraExteriorRigidity.lean",
+  "statement": "theorem perfect_derived_bialgebra_exterior_rigidity [∀ A : CommRingCat.{u}, HasDerivedCategory.{w} (ModuleCat.{u} A)] (R : CommRingCat.{u}) [IsNoetherianRing R] [IsLocalRing R] (K : PerfectScalar.D.{u, w} R) (hK : IsPerfectRingComplex K) (hB : @CategoryTheory.BimonObj (DerivedCategory (ModuleCat.{u} R)) _ _ (DerivedMonoidal.braidedCategory' (Qh (C := ModuleCat.{u} R)) (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))) K) (hC : @CategoryTheory.IsCommMonObj (DerivedCategory (ModuleCat.{u} R)) _ _ (DerivedMonoidal.braidedCategory' (Qh (C := ModuleCat.{u} R)) (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))) K hB.toMonObj) (hFinite : Module.Finite (IsLocalRing.ResidueField R) ((homologyFunctor.{w} (ModuleCat.{u} (CommRingCat.of (IsLocalRing.ResidueField R))) 1).obj ((PerfectScalar.B.{u, w} (CommRingCat.ofHom (algebraMap R (IsLocalRing.ResidueField R)))).obj K))) (hResidue : IsExterior (scalarUnit.{u, w} (CommRingCat.ofHom (algebraMap R (IsLocalRing.ResidueField R))) (@CategoryTheory.MonObj.one (DerivedCategory (ModuleCat.{u} R)) _ _ K hB.toMonObj)) (scalarMul.{u, w} (CommRingCat.ofHom (algebraMap R (IsLocalRing.ResidueField R))) hK (@CategoryTheory.MonObj.mul (DerivedCategory (ModuleCat.{u} R)) _ _ K hB.toMonObj))) : ∃ P : CochainComplex (ModuleCat.{u} R) ℤ, (∀ i : ℤ, i < 0 ∨ ((Module.finrank (IsLocalRing.ResidueField R) ((homologyFunctor.{w} (ModuleCat.{u} (CommRingCat.of (IsLocalRing.ResidueField R))) 1).obj ((PerfectScalar.B.{u, w} (CommRingCat.ofHom (algebraMap R (IsLocalRing.ResidueField R)))).obj K))) : ℤ) < i → IsZero (P.X i)) ∧ (∀ i : ℤ, P.d i (i + 1) = 0) ∧ (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i)) ∧ Nonempty (K ≅ DerivedCategory.Q.obj P) ∧ IsIso ((homologyFunctor.{w} (ModuleCat.{u} R) 0).map (@CategoryTheory.MonObj.one (DerivedCategory (ModuleCat.{u} R)) _ _ K hB.toMonObj)) ∧ Nonempty ((homologyFunctor.{w} (ModuleCat.{u} R) 1).obj K ≅ ModuleCat.of R (Fin (Module.finrank (IsLocalRing.ResidueField R) ((homologyFunctor.{w} (ModuleCat.{u} (CommRingCat.of (IsLocalRing.ResidueField R))) 1).obj ((PerfectScalar.B.{u, w} (CommRingCat.ofHom (algebraMap R (IsLocalRing.ResidueField R)))).obj K))) → R)) ∧ (∀ x : (homologyFunctor.{w} (ModuleCat.{u} R) 1).obj K, cup (@CategoryTheory.MonObj.mul (DerivedCategory (ModuleCat.{u} R)) _ _ K hB.toMonObj) 1 1 x x = 0) ∧ IsExterior (@CategoryTheory.MonObj.one (DerivedCategory (ModuleCat.{u} R)) _ _ K hB.toMonObj) (@CategoryTheory.MonObj.mul (DerivedCategory (ModuleCat.{u} R)) _ _ K hB.toMonObj)",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3aafe0542",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Read item node, the 3 unchanged stmt_dep nodes, new def-sfb-derived-exterior-cohomology, both modules, report (Worker report / New nodes / Second reading by Q44), and upstream PerfectScalarTensorCoherence, HomSingleProjective, DerivedCategory monoidal/braided instances. Item changed only lean + stmt_deps (+new def node). Every clause matches: Noetherian local R, residue map algebraMap; IsPerfectRingComplex K; BimonObj+IsCommMonObj with braiding pinned to DerivedMonoidal.braidedCategory' (Koszul derived symmetry); residue K̄ = PerfectScalar.B with scalarUnit/scalarMul via ∃!-pinned coherenceData; hFinite; IsExterior hypothesis (n=0 gives H^0=k via u; normalized pure-wedge isos = graded-algebra iso given associativity); conclusion: ∃ P finite free, zero d, supported [0,g], K ≅ Q P in D(R), IsIso H^0(u), H^1 ≅ R^g with exact g, cup x x = 0, IsExterior over R. Def module canonical (representative = inverse of homSingleEquivOfProjective, singleDiagonal from unitor/shiftTensorShiftIso; sign convention cannot affect the predicates), no duplicate notion found, fields/searches/docstrings/verbatim statements OK, sorry-only, lines ≤100. Edge cases g=0, g=1, char 2, field, non-reduced/non-complete OK. No compile (no file changed). Advisories only: possibly unused import Sheaf DerivedBaseChange (and FlatModel) in ExteriorCohomology; item uses PerfectScalar.B/D owned by theorem node lem-sf-perfect-scalar-tensor-coherence, reached via the new def node's stmt_dep (B = .choose of lem-pc-derived-tensor-second-factor-functor), suggest a future def node owning D/E/B."
+ }
+}

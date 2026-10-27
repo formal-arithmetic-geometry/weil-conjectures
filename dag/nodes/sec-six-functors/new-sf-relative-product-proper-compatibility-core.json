@@ -1,0 +1,92 @@
+{
+ "id": "new-sf-relative-product-proper-compatibility-core",
+ "kind": "statement",
+ "title": "Proper compatibility for relative-product factors",
+ "statement": "Fix the data of the coefficient-factor theorem, compactifications cg and ch, and proper-coordinate structures J and J'. For every pair J,J', the proper projection and exchange normalizations and the coefficient comparison normalization hold, and the six proper-normalized factor squares satisfy A.ProperFactorSquares J J' cg ch.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Insert the specified proper identifications recursively at every support occurrence. Naturality identifies the conjugated projection and exchange maps with the direct-image normalization, while the proper identity coefficient square gives ProperComparisonNormalization. Conjugating the six coefficient squares by the recursively inserted identifications and cancelling inverse pairs gives ProperFactorSquares."
+ },
+ "stmt_deps": [
+  "def-sf-relative-product-factors"
+ ],
+ "proof": [
+  {
+   "text": "Insert the specified proper identifications recursively at every support occurrence. Naturality identifies the conjugated projection and exchange maps with the direct-image normalization, while the proper identity coefficient square gives ProperComparisonNormalization. Conjugating the six coefficient squares by the recursively inserted identifications and cancelling inverse pairs gives ProperFactorSquares.",
+   "uses": [
+    "def-sf-relative-product-factors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-relative-product-factors"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Insert the specified proper identifications recursively at every support occurrence. Naturality identifies the conjugated projection and exchange maps with the direct-image normalization, while the proper identity coefficient square gives ProperComparisonNormalization. Conjugating the six coefficient squares by the recursively inserted identifications and cancelling inverse pairs gives ProperFactorSquares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relative product coefficient factor squares",
+   "results": "No existing declaration states this subclaim.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeProductCoefficientFactorSquares",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-relative-product-coefficient-factor-squares",
+   "place": "The corresponding strict subclaim in the six-factor proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.Paper.RelativeProductProperCompatibilityCore",
+  "declaration": "WeilConjectures.relative_product_proper_compatibility_core",
+  "declarations": [
+   "WeilConjectures.relative_product_proper_compatibility_core"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeProductProperCompatibilityCore.lean",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26",
+  "existing": false,
+  "statement": "theorem relative_product_proper_compatibility_core {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E E' : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] [Field E'] [Algebra (Padic C.l) E'] [FiniteDimensional (Padic C.l) E'] {n n' : ℕ} {hn : 1 ≤ n} {hn' : 1 ≤ n'} {S : SixFunctorDatum D C E n hn} {S' : SixFunctorDatum D C E' n' hn'} {s s' : PodCoefficientStage} {Q : SixFunctorCompactifiedSquare D} [IsSeparated Q.g.hom.left] [IsSeparated Q.g'.hom.left] [IsSeparated Q.f'.hom.left] {R : RelativeProductPresentation S s Q} {R' : RelativeProductPresentation S' s' Q} (A : RelativeProductCoefficientData R R') (cg : Compactification Q.g.hom.left) (ch : Compactification (Q.f' ≫ Q.g).hom.left) : ∀ (J : RelativeProductProperCoordinates R.coordinates) (J' : RelativeProductProperCoordinates R'.coordinates), R.ProperNormalization J ∧ R'.ProperNormalization J' ∧ A.ProperComparisonNormalization J J' ∧ A.ProperFactorSquares J J' cg ch",
+  "note": "New split-off intermediate theorem; the proof is intentionally postponed as a named DAG item."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T210502-L-3538219",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T210502-L-3538219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

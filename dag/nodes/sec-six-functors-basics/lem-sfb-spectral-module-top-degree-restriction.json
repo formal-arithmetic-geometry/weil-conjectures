@@ -1,0 +1,531 @@
+{
+ "id": "lem-sfb-spectral-module-top-degree-restriction",
+ "kind": "statement",
+ "title": "Top-degree module cohomology on a spectral ringed space restricts surjectively",
+ "statement": "Let $T$ be a spectral topological space [def-weil-spectral-space], let $\\mathcal O$ be a sheaf of commutative rings on $T$, and let $F$ be a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Let $d\\geq0$ be an integer with $\\dim T\\leq d$ for topological Krull dimension [def-kun-topological-krull-dimension], with $\\dim\\varnothing=-\\infty$. For every quasi-compact open subset $W\\subseteq T$, the canonical restriction map is surjective: $$H^d(T,F)\\longrightarrow H^d(W,F|_W).$$ Here $F|_W$ and $\\mathcal O|_W$ are ordinary restrictions to the open subspace, and cohomology is the right-derived global sections in all structure-sheaf modules, computed by injective resolutions [def-sc-ringed-space-module-cohomology]. The restriction map is induced by restriction of sections on resolutions. No Noetherian, scheme, quasi-coherence, or coherence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A3G (proposition-cohomological-dimension-spectral), part (2), with dimension bounded above by d; module form via Tag 01F1 (lemma-modules-abelian), part (1), whose common resolution identifies the restriction maps."
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-kun-topological-krull-dimension",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "If $T=\\varnothing$ or $W=\\varnothing$, the target section complex is zero, so surjectivity holds. Suppose $T\\ne\\varnothing$ and $d=0$. If $x$ specializes to $y\\ne x$, sobriety makes $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x\\}}$ a chain of nonempty irreducible closed subsets of length one, contradicting $\\dim T\\leq0$. Thus every point is closed. The set $T^c$ of closed points is therefore $T$, hence closed; clause (1) of [det-pe-wlocal-components] makes $T$ profinite, in particular Hausdorff. The quasi-compact open $W$ is closed, since a compact subset of a Hausdorff space is closed. For $s\\in H^0(W,F|_W)=F(W)$, glue $s$ and the zero section on the disjoint open complement $T\\setminus W$. The result lies in $F(T)=H^0(T,F)$ and restricts to $s$. This proves degree zero without any assumption on the ring sheaf.",
+   "uses": [
+    "def-weil-spectral-space",
+    "def-kun-topological-krull-dimension",
+    "det-pe-wlocal-components",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, base case of (2); Topology Tag 0905 (lemma-characterize-profinite-spectral), via det-pe-wlocal-components clause (1)."
+   }
+  },
+  {
+   "text": "Write $A=F_{ab}$. On the site of opens of $T$ (a set of objects and arrows, taken in a common coefficient universe), apply [lem-sfb-ringed-sections-forget-abelian] with $B=\\mathcal O$ and $K=F[0]$. It gives a derived isomorphism for every open $V$, natural for the actual restriction arrows. To read its source in the convention of the item, choose an injective module resolution $F\\to I^\\bullet$ using [lem-sc-ringed-space-module-sheaves-enough-injectives]. It is bounded below and therefore K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. For each open $V$, its restriction is an injective resolution by [lem-sc-ringed-space-restrict-injective-resolution], so the source is represented by $\\Gamma(V,I^\\bullet)$. The comparison's target is derived abelian evaluation, equivalently global sections on the open subspace $V$. Applying degree-$d$ cohomology consequently gives additive bijections $c_V:H^d(V,F|_V)\\to H^d(V,A|_V)$ in the ordinary injective-resolution conventions [def-sc-ringed-space-module-cohomology, def-sc-topological-abelian-cohomology]. For $V'\\subseteq V$, naturality gives $c_{V'}\\operatorname{res}^{F}_{V,V'}=\\operatorname{res}^{A}_{V,V'}c_V$. This is an application of the cited derived isomorphism, not a claim that forgetting preserves injectivity.",
+   "uses": [
+    "lem-sfb-ringed-sections-forget-abelian",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "def-sc-ringed-space-module-cohomology",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F1, lemma-modules-abelian (1), common-resolution comparison; Tag 01E1, lemma-cohomology-of-open. The existing derived-form comparison is sites-cohomology.tex Tag 0D6J, lemma-modules-abelian-unbounded (2), including restriction naturality."
+   }
+  },
+  {
+   "text": "Assume $d\\geq1$ and let $\\xi\\in H^d(W,F|_W)$. Put $Z=T\\setminus W$, $P=\\{t\\in T:\\overline{\\{t\\}}\\cap Z\\ne\\varnothing\\}$ and $S=P\\setminus Z$. The subset $Z$ is closed and its open complement is the given quasi-compact $W$. Apply [lem-sfb-punctured-spectral-neighborhood-dimension] with $n=d$: it gives that $S$ is spectral and $\\dim S\\leq d-1$, including the possibility that $S$ is empty. Apply [lem-sfb-spectral-space-cohomology-dimension] to the abelian sheaf $A|_S$ with dimension bound $d-1$ and cohomological degree $d>d-1$. Thus $H^d(S,A|_S)=0$. Here restriction to the possibly non-open $S$ means the inverse image along its subspace inclusion, as in the two cited statements. This uses only the vanishing statement of the dimension theorem, not its proof's top-degree surjectivity assertion.",
+   "uses": [
+    "lem-sfb-punctured-spectral-neighborhood-dimension",
+    "lem-sfb-spectral-space-cohomology-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, induction step proving (2), punctured generalization neighborhood and lower-dimensional vanishing; Topology Tag 0AP0, lemma-make-spectral-space-minus."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-punctured-neighborhood-cohomology-colimit] to $T,Z,A$ and $p=d$. All hypotheses hold by step 3: $Z$ is closed with quasi-compact open complement. Its small directed index is the set of quasi-compact open neighborhoods $N$ of $Z$, ordered by reverse inclusion; it contains $T$, and binary intersections give common later indices. The class $c_W(\\xi)$ is at the stage $N=T$, since $T\\setminus Z=W$. The canonical colimit comparison identifies its image with a class in $H^d(S,A|_S)=0$. By [lem-sc-filtered-colimit-map-zero] there is a quasi-compact open $N\\supseteq Z$ such that $\\operatorname{res}^{A}_{W,N\\cap W}(c_W(\\xi))=0$. Step 2 identifies this with $c_{N\\cap W}(\\operatorname{res}^{F}_{W,N\\cap W}(\\xi))$. Since $c_{N\\cap W}$ is injective, $\\xi$ restricts to zero in $H^d(N\\cap W,F|_{N\\cap W})$.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-sc-filtered-colimit-map-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3D, lemma-cohomology-of-neighbourhoods-of-closed (2); Tag 0A3G, proof of (2), passage from the zero colimit class to a quasi-compact neighborhood."
+   }
+  },
+  {
+   "text": "Since $N\\supseteq Z=T\\setminus W$, the opens $W,N$ cover $T$. Apply [lem-sc-mayer-vietoris-ringed-space] to $(T,\\mathcal O)$, $F$ and this cover. Its exact sequence contains $$H^d(T,F)\\longrightarrow H^d(W,F|_W)\\oplus H^d(N,F|_N)\\xrightarrow{\\operatorname{res}_{W,W\\cap N}-\\operatorname{res}_{N,W\\cap N}}H^d(W\\cap N,F|_{W\\cap N}).$$ By step 4 the pair $(\\xi,0)$ belongs to the kernel of the displayed difference map. Exactness supplies $\\widetilde\\xi\\in H^d(T,F)$ mapping to $(\\xi,0)$, whose restriction to $W$ is therefore $\\xi$. Since $\\xi$ was arbitrary, the restriction in the statement is surjective. The maps here are exactly the section-resolution restrictions specified in the item, by the restriction and difference-map clause of the cited Mayer–Vietoris statement.",
+   "uses": [
+    "lem-sc-mayer-vietoris-ringed-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EB, lemma-mayer-vietoris; Tag 0A3G, final Mayer–Vietoris sentence proving (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "def-kun-topological-krull-dimension",
+  "det-pe-wlocal-components",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sfb-ringed-sections-forget-abelian",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sfb-punctured-spectral-neighborhood-dimension",
+  "lem-sfb-spectral-space-cohomology-dimension",
+  "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+  "lem-sc-filtered-colimit-map-zero",
+  "lem-sc-mayer-vietoris-ringed-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, base case and proof of (2), using existing lower-dimensional vanishing; Tag 01F1 and sites-cohomology.tex Tag 0D6J supply module/abelian comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomolog.*surject|surject.*cohomolog|cohomologicalDimension",
+   "results": {
+    "t": "2026-10-23T19:49:05Z",
+    "tool": "grep",
+    "query": "cohomolog.*surject|surject.*cohomolog|cohomologicalDimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+     "Mathlib/CategoryTheory/Abelian/Projective/Ext.lean"
+    ],
+    "digest": "3ae58da96307b903"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern degree-zero sections, locally surjective sheaf maps, quasicoherent presentations, or representatives of Hom-complex cohomology; none gives top-degree restriction for arbitrary modules on spectral ringed spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top degree sheaf cohomology restricts surjectively to a compact open subset of a spectral space",
+   "results": {
+    "t": "2026-10-23T19:49:05Z",
+    "tool": "leansearch",
+    "query": "Top degree sheaf cohomology restricts surjectively to a compact open subset of a spectral space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.PresheafedSpace.restrict_top_presheaf",
+     "PrespectralSpace.isBasis_opens",
+     "Topology.IsOpenEmbedding.spectralSpace",
+     "IsCompactOpenCovered.of_finite_of_isSpectralMap",
+     "AlgebraicGeometry.LocallyRingedSpace.restrictTopIso",
+     "IsCompact.preimage_of_isOpen",
+     "IsSpectralMap.isCompact_preimage_of_isOpen",
+     "SpectralSpace.toCompactSpace"
+    ],
+    "digest": "5bf88a5d66e57509"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern degree-zero sections, locally surjective sheaf maps, quasicoherent presentations, or representatives of Hom-complex cohomology; none gives top-degree restriction for arbitrary modules on spectral ringed spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"surjective\"",
+   "results": {
+    "t": "2026-10-23T19:49:05Z",
+    "tool": "loogle",
+    "query": "\"cohomology\", \"surjective\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.CohomologyClass.mk_surjective"
+    ],
+    "digest": "354146211f286d18"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern degree-zero sections, locally surjective sheaf maps, quasicoherent presentations, or representatives of Hom-complex cohomology; none gives top-degree restriction for arbitrary modules on spectral ringed spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a spectral topological space of dimension at most d restriction of degree d abelian sheaf cohomology to a quasi compact open is surjective",
+   "results": {
+    "t": "2026-10-23T19:49:06Z",
+    "tool": "leanfinder",
+    "query": "For a spectral topological space of dimension at most d restriction of degree d abelian sheaf cohomology to a quasi compact open is surjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.coherentTopology.isLocallySurjective_iff",
+     "CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map",
+     "Condensed.epi_iff_locallySurjective_on_compHaus",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective",
+     "TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective",
+     "LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite",
+     "AlgebraicGeometry.pointsPi_surjective",
+     "TopCat.Presheaf.isLocallySurjective_iff"
+    ],
+    "digest": "758fb8f5d66fb630"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern degree-zero sections, locally surjective sheaf maps, quasicoherent presentations, or representatives of Hom-complex cohomology; none gives top-degree restriction for arbitrary modules on spectral ringed spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheiderer theorem spectral space Krull dimension d any abelian sheaf top cohomology classes extend from quasi compact open subsets",
+   "results": {
+    "t": "2026-10-23T19:49:26Z",
+    "tool": "leanfinder",
+    "query": "Scheiderer theorem spectral space Krull dimension d any abelian sheaf top cohomology classes extend from quasi compact open subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "PrimeSpectrum.instPrespectralSpace",
+     "SpectralSpace.toPrespectralSpace",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "instPrespectralSpaceOfNoetherianSpace",
+     "SpectralSpace.toQuasiSeparatedSpace"
+    ],
+    "digest": "0aa110a899183980"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern degree-zero sections, locally surjective sheaf maps, quasicoherent presentations, or representatives of Hom-complex cohomology; none gives top-degree restriction for arbitrary modules on spectral ringed spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of modules on a spectral ringed space in top dimension restricts surjectively to quasi compact opens",
+   "results": {
+    "t": "2026-10-23T19:51:19Z",
+    "tool": "leansearch",
+    "query": "Cohomology of modules on a spectral ringed space in top dimension restricts surjectively to quasi compact opens",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.StructureSheaf.to_basicOpen_epi",
+     "ModuleCat.Tilde.toOpen",
+     "CochainComplex.HomComplex.CohomologyClass.mk_surjective",
+     "AlgebraicGeometry.compactSpace_iff_exists",
+     "SheafOfModules.IsQuasicoherent.casesOn",
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "PresheafOfModules.instIsLocallySurjectiveToSheafify"
+    ],
+    "digest": "c04654f08cc0a905"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern degree-zero sections, locally surjective sheaf maps, quasicoherent presentations, or representatives of Hom-complex cohomology; none gives top-degree restriction for arbitrary modules on spectral ringed spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections right derived functor on sheaves of modules restriction in top dimension is onto for spectral ringed spaces and compact opens",
+   "results": {
+    "t": "2026-10-23T19:51:22Z",
+    "tool": "leanfinder",
+    "query": "Global sections right derived functor on sheaves of modules restriction in top dimension is onto for spectral ringed spaces and compact opens",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app",
+     "AlgebraicGeometry.StructureSheaf.to_basicOpen_epi",
+     "ModuleCat.Tilde.exists_const"
+    ],
+    "digest": "bdfcf4494b70b38a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern degree-zero sections, locally surjective sheaf maps, quasicoherent presentations, or representatives of Hom-complex cohomology; none gives top-degree restriction for arbitrary modules on spectral ringed spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed space with spectral underlying topological space of Krull dimension at most d every sheaf of modules has surjective degree d cohomology restriction to a quasi compact open subset",
+   "results": {
+    "t": "2026-10-23T19:51:24Z",
+    "tool": "leanfinder",
+    "query": "On a ringed space with spectral underlying topological space of Krull dimension at most d every sheaf of modules has surjective degree d cohomology restriction to a quasi compact open subset",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective",
+     "CategoryTheory.coherentTopology.isLocallySurjective_iff",
+     "SheafOfModules.QuasicoherentData.coversTop",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated"
+    ],
+    "digest": "a01960ac20d5697b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern degree-zero sections, locally surjective sheaf maps, quasicoherent presentations, or representatives of Hom-complex cohomology; none gives top-degree restriction for arbitrary modules on spectral ringed spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomolog.*surject|surject.*cohomolog|cohomologicalDimension",
+   "results": {
+    "t": "2026-10-23T21:11:43Z",
+    "tool": "grep",
+    "query": "cohomolog.*surject|surject.*cohomolog|cohomologicalDimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+     "Mathlib/CategoryTheory/Abelian/Projective/Ext.lean"
+    ],
+    "digest": "3ae58da96307b903"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned definitions of cohomology, degree-zero structure-sheaf results, condensed sheaf constructions, or Hom-complex class representatives; no spectral top-degree restriction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every top degree sheaf cohomology class on a quasi compact open of a finite dimensional spectral ringed space extends to the whole space",
+   "results": {
+    "t": "2026-10-23T21:11:44Z",
+    "tool": "leansearch",
+    "query": "Every top degree sheaf cohomology class on a quasi compact open of a finite dimensional spectral ringed space extends to the whole space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.H",
+     "AlgebraicGeometry.LocallyRingedSpace.𝒪",
+     "AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf",
+     "AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf'",
+     "AlgebraicGeometry.Scheme.toOpen_eq",
+     "AlgebraicGeometry.Scheme.Modules",
+     "AlgebraicGeometry.Spec.locallyRingedSpaceObj_presheaf",
+     "AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen"
+    ],
+    "digest": "e3d9aa224cd43b02"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned definitions of cohomology, degree-zero structure-sheaf results, condensed sheaf constructions, or Hom-complex class representatives; no spectral top-degree restriction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"surjective\"",
+   "results": {
+    "t": "2026-10-23T21:11:44Z",
+    "tool": "loogle",
+    "query": "\"cohomology\", \"surjective\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.CohomologyClass.mk_surjective"
+    ],
+    "digest": "354146211f286d18"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned definitions of cohomology, degree-zero structure-sheaf results, condensed sheaf constructions, or Hom-complex class representatives; no spectral top-degree restriction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a spectral ringed space of Krull dimension at most d, degree d module sheaf cohomology restricts surjectively to every quasi compact open",
+   "results": {
+    "t": "2026-10-23T21:11:45Z",
+    "tool": "leanfinder",
+    "query": "For a spectral ringed space of Krull dimension at most d, degree d module sheaf cohomology restricts surjectively to every quasi compact open",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective",
+     "AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective",
+     "AlgebraicGeometry.pointsPi_surjective",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact"
+    ],
+    "digest": "41769343967466f1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned definitions of cohomology, degree-zero structure-sheaf results, condensed sheaf constructions, or Hom-complex class representatives; no spectral top-degree restriction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheiderer theorem finite dimensional spectral space abelian sheaf cohomology top degree classes extend from compact open subsets",
+   "results": {
+    "t": "2026-10-23T21:12:07Z",
+    "tool": "leanfinder",
+    "query": "Scheiderer theorem finite dimensional spectral space abelian sheaf cohomology top degree classes extend from compact open subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.H",
+     "CompHausLike.LocallyConstant.presheaf_ext",
+     "CondensedMod.ofSheafCompHaus",
+     "CompHausLike.LocallyConstantModule.functor",
+     "CondensedMod.ofSheafStonean",
+     "LightCondAb.ofSheafLightProfinite",
+     "TopCat.toSheafCompHausLike",
+     "topCatToSheafCompHausLike"
+    ],
+    "digest": "eeb97aca23afe740"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned definitions of cohomology, degree-zero structure-sheaf results, condensed sheaf constructions, or Hom-complex class representatives; no spectral top-degree restriction theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qcoh-vanishing-above-dimension",
+  "date": "2026-10-24",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces. Supporting input in the proof of Tag 0A4T: cohomology of each infinitesimal fibre vanishes above its unchanged dimension (Tag 0A4R(1)). Supporting scheme-chart induction input: top-degree restriction to a quasi-compact open in the spectral cohomology theorem used by Tag 0A4R(1).",
+   "via": [
+    "lem-sfb-space-qcoh-vanishing-above-dimension",
+    "lem-sfb-noetherian-space-fibre-cohomology-bound",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-spectral-module-top-degree-restriction",
+  "worker": "stage1",
+  "summary": "Read Stacks 0A3G and 01F1 and the derived restriction-compatible form 0D6J. Kept the full non-Noetherian spectral ringed-space statement and the dimension-upper-bound convention. Reused existing punctured-neighborhood geometry, abelian vanishing, cohomology continuity, filtered-colimit zero criterion and ringed-space Mayer–Vietoris; no new node is needed. Degree zero is clopen gluing; positive degrees follow the source neighborhood argument. Checked every cited statement, restriction map and edge case.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the existing space cohomological-dimension prerequisite in the item provenance; realizes the spectral top-degree restriction input in Stacks 0A4R(1). The live blueprint_refs ancestor command returns None for this inherited chain; retained its existing provenance fields. No identical blueprint statement found.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wlocal-components",
+    "why": "Generic topological or homological tool used in the Stacks 0A3G neighborhood argument; does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sc-ringed-space-restrict-injective-resolution",
+    "why": "Generic topological or homological tool used in the Stacks 0A3G neighborhood argument; does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-punctured-spectral-neighborhood-dimension",
+    "why": "Generic topological or homological tool used in the Stacks 0A3G neighborhood argument; does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-spectral-space-cohomology-dimension",
+    "why": "Generic topological or homological tool used in the Stacks 0A3G neighborhood argument; does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "why": "Generic topological or homological tool used in the Stacks 0A3G neighborhood argument; does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sc-filtered-colimit-map-zero",
+    "why": "Generic topological or homological tool used in the Stacks 0A3G neighborhood argument; does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sc-mayer-vietoris-ringed-space",
+    "why": "Generic topological or homological tool used in the Stacks 0A3G neighborhood argument; does not replace the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-wlocal-components",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sfb-punctured-spectral-neighborhood-dimension",
+  "lem-sfb-spectral-space-cohomology-dimension",
+  "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+  "lem-sc-filtered-colimit-map-zero",
+  "lem-sc-mayer-vietoris-ringed-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-d9a455c3a",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-d9a455c3a (reviewer sub-agent of L); spot-checked: PASS, no fixes. Delivery: one commit, item JSON plus report; no new nodes; no repair note, so this is not a 2026-10-21 re-split. Statement, stmt_deps, chapter and unit are unchanged, proof_deps equals the union of the step uses, and no SGA is used. The statement is true: it is Stacks 0A3G(2) for O-modules via 01F1(1), with dim<=d, which is no stronger than Stacks because a space of dimension below d has zero H^d on every quasi-compact open. Tested on T or W empty, W=T, and Spec of a rank-one valuation ring with d=1. Step 1: sobriety and dim<=0 make every point closed; det-pe-wlocal-components (1) makes T profinite, so W is clopen and sections glue with zero (the 0A3G base case). Step 2: lem-sfb-ringed-sections-forget-abelian on the site of opens with B=O, K=F[0] is natural in restriction arrows; enough injectives, bounded-below-injective-is-K-injective and restriction of injective resolutions give bijections c_V that commute with restriction. Step 3: lem-sfb-punctured-spectral-neighborhood-dimension (n=d>=1, Z=T\\W closed with qc complement) and the vanishing statement of lem-sfb-spectral-space-cohomology-dimension (bound d-1) give H^d(S,A|_S)=0. Step 4: lem-weil-pbc-punctured-neighborhood-cohomology-colimit (matches 0A3D(2)) and lem-sc-filtered-colimit-map-zero give N with c_W(xi) zero on N cap W; naturality and injectivity of c pull this back to F. Step 5: lem-sc-mayer-vietoris-ringed-space on T=W cup N lifts (xi,0). No cycle: the dependency closure of 676 nodes does not contain the item. No duplicate: the pbc top-degree nodes assume Noetherian spaces or schemes, and the dimension node states only vanishing. Accepted tool_uses: det-pe-wlocal-components and lem-sc-filtered-colimit-map-zero, both generic; the other cited nodes are in the unit's route. Inherited null blueprint.from.node is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralModuleTopDegreeRestriction",
+  "declaration": "AlgebraicGeometry.RingedSpace.surjective_openModuleCohomologyRestriction_of_spectralSpace",
+  "file": "lean/Sheaf/Topology/SpectralModuleTopDegreeRestriction.lean",
+  "statement": "theorem surjective_openModuleCohomologyRestriction_of_spectralSpace (X : RingedSpace.{u}) [SpectralSpace X] (F : ringedSiteModules.{u} (moduleRings X)) (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (W : Opens X) (hW : IsCompact (W : Set X)) : Function.Surjective ((openModuleCohomologyRestriction X d (homOfLE (le_top : W ≤ ⊤))).app F)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e33541ed4",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Item module states surjectivity of the canonical derived section restriction (openModuleCohomologyRestriction X d (homOfLE le_top)).app F for X : RingedSpace.{u} with [SpectralSpace X], any sheaf of modules F, d : ℕ with topologicalKrullDim X ≤ d (⊥ for the empty space), and any open W with IsCompact. This matches the node and Stacks 0A3G(2)/01F1(1) clause by clause, with no extra hypotheses. The empty space, empty W, W = top, d = 0 and dim < d cases are all covered and true. The only record changes are the lean field and the stmt_dep def-sc-open-module-cohomology, which is already landed (snapshot record identical to live), owns the restriction map and adds no cycle. Proof is sorry only, no definitions; docstrings carry the source and blueprint id and all five proof steps; lean.statement matches the file by eye; the report has both required sections. Nothing changed, so no compile; no findings."
+ }
+}

@@ -1,0 +1,91 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent auxiliary: returned comparison Steps 3-4; Stacks Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map), 0940 (section-derived-limits); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor).",
+  "note": "New statement-only task extracted under the human re-split decision of 2026-10-21; no numbered source is claimed to state the entire auxiliary. Full original argument and its source/node citations are preserved verbatim in report.md."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Original 8-step plan, with existing stage-3 refinements retained. C1: canonical evaluation data relocated unchanged for an acyclic Step-7 split; final conjunction assembled from factor isomorphisms, the Step-7 equation, and transition naturality. F8 proves the existing pulledBasis_existsUnique obligation by finite-product transport and the canonical ordinary restriction/pullback mate; the two proper-coordinate obligations remain unchanged."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarMate",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-strict-scalar-mate",
+   "place": "Step 4 finite-free proper mate column calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-finite-free-scalar-extension",
+  "def-pur-finite-scalar-coordinate-data"
+ ],
+ "proof_deps": [
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-finite-free-scalar-extension",
+  "def-pur-finite-scalar-coordinate-data"
+ ],
+ "mathlib_searches": [],
+ "tool_uses": [],
+ "proof": [
+  {
+   "text": "Choose a finite basis and transpose each basis column under the proper geometric adjunction. The counit and the normalized derived coordinate map identify the resulting column with the corresponding projection of the target coordinate isomorphism. This is proved in the derived category, before any evaluation.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-pur-finite-free-scalar-extension",
+    "def-pur-finite-scalar-coordinate-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tag 0944, lemma-projection-formula"
+   }
+  }
+ ],
+ "id": "lem-pur-compact-support-strict-scalar-mate-strict-coordinate",
+ "kind": "statement",
+ "title": "strictProper_biproduct_coordinate",
+ "statement": "For a finite constant-tower coefficient basis at W and a transported basis at Z, every projection of the strict proper scalar mate followed by the normalized tower direct-image and coordinate maps equals the corresponding projection of the target strict-tower coordinate isomorphism.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictProperBiproductCoordinate",
+  "file": "lean/Sheaf/Paper/StrictProperBiproductCoordinate.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.strictProper_biproduct_coordinate",
+  "statement": "theorem strictProper_biproduct_coordinate {Z W : Scheme.{u}} (g : Z ⟶ W) (d : ℕ)\n    (bW : (∏ᶜ fun _ : Fin d ↦\n        SheafOfModules.unit ((adicLisseForget W).obj ((constants l E).ring W))) ≅\n      (pbcRestrict (constantMap l E F i W)).obj\n        (SheafOfModules.unit ((adicLisseForget W).obj ((constants l F).ring W))))\n    (bZ : (∏ᶜ fun _ : Fin d ↦\n        SheafOfModules.unit ((adicLisseForget Z).obj ((constants l E).ring Z))) ≅\n      (pbcRestrict (constantMap l E F i Z)).obj\n        (SheafOfModules.unit ((adicLisseForget Z).obj ((constants l F).ring Z))))\n    (N : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) Z)\n    (j : Fin d) :\n    (U l E F i W).map ((proper l E F i g).app N) ≫\n        (properRestriction l E F i g).hom.app ((T l E F i Z).obj N) ≫\n        (R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g).map\n          ((derivedTowerCoordinates Z (constantMap l E F i Z) d bZ).hom.app N) ≫\n        piComparison (R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g)\n          (fun _ : Fin d ↦ N) ≫\n        Pi.π (fun _ : Fin d ↦\n          (R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g).obj N) j =\n      (derivedTowerCoordinates W (constantMap l E F i W) d bW).hom.app\n        ((R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g).obj N) ≫\n        Pi.π (fun _ : Fin d ↦\n          (R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g).obj N) j",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T201255-L-3371792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T201255-L-3371792",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,200 @@
+{
+ "id": "lem-sf-semilinear-scalar-adjunctions",
+ "kind": "statement",
+ "title": "Scalar restriction preserves geometric and open adjunctions",
+ "statement": "Let $R_n,c_n,B,\\psi_n$ be commutative coefficient data satisfying $c_n\\psi_{n+1}=\\psi_n$, and let $C$ be any exact additive levelwise restriction with identity section and transition identifications as in [lem-sf-semilinear-scalar-restriction]. For the actual varying-ring operations [def-sp-varying-ring-operations] and constant tower operations [lem-cbc-strict-tower-proper-open-calculus], there are inverse- and direct-image comparison isomorphisms $b_f,d_f$ for every scheme map $f$. The map $d_f$ is identity on the prescribed fibre-product sections. The comparisons preserve the specified unit and counit, and $d_f$ is the mate of $b_f^{-1}$. For every open immersion $j$, there is an extension-by-zero comparison $a_j$ preserving the specified open unit. No coefficient flatness is assumed. The direct-image section normalization is pointwise: for every input section x, its image under d_f is heterogeneously equal to x.",
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-sf-semilinear-scalar-restriction",
+  "def-sf-semilinear-scalar-ordinary-interface"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); agent-written assembly for varying rings, compatible constant-B actions and localized opens"
+ },
+ "proof": [
+  {
+   "text": "At each index n, compose the prescribed level isomorphism for C on Y, the section-normalized moduleEvalP for varying-ring direct image, the existing one-ring scalar/direct-image isomorphism, and the inverse level isomorphism on X. Its section map becomes identity after the prescribed level identifications. The transition equation of C and the product base-change map show that these isomorphisms commute with successor transitions; NatTrans.ofOpSequence assembles them to the natural direct-image isomorphism d. Its pointwise heterogeneous section identity follows from the level-section identities. Use the proved native-carrier evaluation normalization in its separate module, so that continuous-module carrier normalization is not repeated during the assembly. The proved component-transition lemma isolates the successor argument and is applied to this explicitly constructed family.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sf-semilinear-scalar-restriction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sf-scalar-evaluation-direct-sections",
+    "lem-sf-scalar-direct-transition-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1, 03D7 and 03DI; existing normalized coefficient-change and evaluation adjunction APIs"
+   }
+  },
+  {
+   "text": "Define b inverse as the inverse adjunction mate of d. The unit normalization of moduleEvalG says that its inverse mates to moduleEvalP. Paste this evaluation square with the proved, invertible, single-ring scalar/pullback square. The mate-of-pasting and mate-of-whiskering identities identify its mate with the evaluated component of d. By the unit characterization of adjoint transposes, the n-th component of b inverse is therefore the composite of the level identifications, the single-ring scalar/pullback isomorphism, and moduleEvalG inverse. All components are invertible, hence so is b inverse. The mate equivalence gives the specified mate equation; the existing scalarMateUnit and scalarMateCounit calculations give unit and counit compatibility.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sf-semilinear-scalar-restriction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1, 03D7 and 03DI; existing normalized coefficient-change and evaluation adjunction APIs"
+   }
+  },
+  {
+   "text": "For an open j and an input system M, evaluation identifies the varying-ring extension with the chosen extension at R_n. Combine this isomorphism with C.level. The single-sheaf open-support lemma then shows that the B-open counit at every level of rho_X(extension M) is invertible. Naturality of the counit transports invertibility through these level isomorphisms; termwise evaluation detects invertibility on the strict tower.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sf-semilinear-scalar-restriction",
+    "def-cbc-strict-tower-open-extension",
+    "lem-sf-scalar-restriction-open-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1, 03D7 and 03DI; existing normalized coefficient-change and evaluation adjunction APIs"
+   }
+  },
+  {
+   "text": "Take the inverse open mate of b.hom. At M its formula is the B-open extension of rho_U applied to the varying-ring open unit, followed by the B-open extension of b.hom, followed by the B-open counit at rho_X(extension M). The varying-ring open unit is invertible, b is invertible, and the last counit is invertible by the previous step. Thus this mate is invertible and its inverse defines a. The inverse-mate identity and scalarMateUnit give exactly the prescribed open_unit equation. Assemble b,d,a and the section and mate laws into OrdinaryScalarAdjunctions.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-cbc-strict-tower-open-extension",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1, 03D7 and 03DI; existing normalized coefficient-change and evaluation adjunction APIs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-tower-open-extension",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-scalar-restriction-open-support",
+  "lem-sf-semilinear-scalar-restriction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sf-scalar-evaluation-direct-sections",
+  "lem-sf-scalar-direct-transition-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Assembly by B4 from the existing underived coefficient-change adjunction API; open extension reduced to preservation of single-sheaf open support (03DI)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction from semilinear sheaf systems to constant towers preserves geometric adjunctions and proper open base change",
+   "results": "8 hits: scheme module restrictAdjunction; sheafPullbackConstruction.sheafAdjunctionContinuous; module pullback adjunction ingredients. No semilinear tower package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val, restrictScalars_map_val.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Iso|exact|pull|push)",
+   "results": "25 hits: fixed-module restrictScalars exactness and restriction-composition APIs; no matching semilinear tower or normalized proper/open package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction from semilinear sheaf systems to constant towers preserves geometric adjunctions and proper open base change",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, Scheme.Modules.restrictAdjunction, constantSheafΓAdj, PullbackConstruction.adjunction, constantSheafAdj, stalkSkyscraperSheafAdjunction, sheafAdjunctionContinuous, sheafAdjunctionCocontinuous. No matching system/tower theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SemilinearScalarOrdinaryComparison",
+  "date": "2026-10-23",
+  "group": "G8"
+ },
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof, sentence on adjunction units and counits and their coefficient comparisons: Ordinary scalar restriction with section-normalized comparisons",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SemilinearScalarAdjunctions",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearScalarAdjunctions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryScalarAdjunctions",
+  "statement": "theorem ordinaryScalarAdjunctions (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n)\n    (C : OrdinaryScalarRestriction R φ B ψ) :\n    Nonempty (OrdinaryScalarAdjunctions R φ B ψ C)",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-23",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryScalarAdjunctions",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryScalarAdjunctions",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryScalarAdjunctions.unit",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryScalarAdjunctions.counit"
+  ],
+  "note": "The data record retains only the mate equation, since the public proved unit and counit theorems derive the two normalized equations from it."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-de71f",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261024T185841-L-3727009",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T194319-L-2318044",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "S6 stage 3 returned-delivery repair",
+  "old_statement": "Let $R_n,c_n,B,\\psi_n$ be commutative coefficient data satisfying $c_n\\psi_{n+1}=\\psi_n$, and let $C$ be any exact additive levelwise restriction with identity section and transition identifications as in [lem-sf-semilinear-scalar-restriction]. For the actual varying-ring operations [def-sp-varying-ring-operations] and constant tower operations [lem-cbc-strict-tower-proper-open-calculus], there are inverse- and direct-image comparison isomorphisms $b_f,d_f$ for every scheme map $f$. The map $d_f$ is identity on the prescribed fibre-product sections. The comparisons preserve the specified unit and counit, and $d_f$ is the mate of $b_f^{-1}$. For every open immersion $j$, there is an extension-by-zero comparison $a_j$ preserving the specified open unit. No coefficient flatness is assumed.",
+  "what": "Reapply the returned pointwise section-normalization repair after G8 moved the interface and decomposed the ordinary construction. The direct-image section normalization is pointwise: for every input section x, its image under d_f is heterogeneously equal to x. This changes the formal package interface and needs independent statement review; no coefficient hypothesis is added.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); agent-written assembly for varying rings, compatible constant-B actions and localized opens"
+  },
+  "citers": [
+   {
+    "id": "lem-sf-semilinear-scalar-ordinary-comparison",
+    "holds": true,
+    "note": "Uses the same identity-on-sections normalization; the pointwise formulation supplies that documented property. The existing comparison assembly copies the repaired component fields."
+   },
+   {
+    "id": "lem-sf-semilinear-scalar-proper-open",
+    "holds": true,
+    "note": "Uses the same identity-on-sections normalization; the pointwise formulation supplies that documented property. The existing comparison assembly copies the repaired component fields."
+   }
+  ]
+ }
+}

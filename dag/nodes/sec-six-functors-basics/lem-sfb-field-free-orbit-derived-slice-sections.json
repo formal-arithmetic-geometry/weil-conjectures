@@ -1,0 +1,465 @@
+{
+ "id": "lem-sfb-field-free-orbit-derived-slice-sections",
+ "kind": "statement",
+ "title": "Derived geometric sections from the free-orbit slice",
+ "statement": "Let $k$ be a field, $k^s/k$ a separable closure, $s=\\operatorname{Spec}k$, $\\bar s=\\operatorname{Spec}k^s$, and $G=\\operatorname{Aut}_k(k^s)$ with its Krull topology. Work on sites small in compatible coefficient universes [def-weil-size-convention, def-weil-pbc-proetale-site]. Put $\\underline G(P)=C(P,G)$ for profinite $P$, and $T[P]=\\varprojlim_i\\coprod_{P_i}T$ over finite quotients [lem-weil-pbc-profinite-test-object-functor]. For a commutative condensed ring $R$ put $R_T=p_T^*R$, use internal module categories and ordinary unbounded derived categories, and write $\\mathcal A_G(R)$ for internal $R$-modules with $\\underline G$-action [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-categories, def-sfb-condensed-action-module].\n\nLet $X$ be a qcqs $k$-scheme with structure map $a:X\\to s$, put $X^s=X\\times_k k^s$, and write $u:X^s\\to X$, $v:\\bar s\\to s$, $a_s:X^s\\to\\bar s$. Suppose given a ringed-topos equivalence over the condensed topos with normalized field module equivalence $E_R$ as in [def-sfb-field-action-transport-data]. Let $K_R^0$ be the equivariant geometric section functor and $\\mathcal K_R=RK_R^0$ as defined in [lem-sfb-condensed-galois-global-descent]. For every $M\\in D(R_X)$ there are the ordinary and derived geometric comparisons specified in [def-sfb-field-action-geometric-transport-data], with the following explicit normalizations.\n\nThe isomorphism $X\\times_s\\bar s[P]\\cong X^s[P]$ identifies the compatible maps to finite disjoint copies on both sides, and commutes with every test map $P'\\to P$ and every geometric fibre map. It gives an ordinary natural isomorphism $E_Ra_*\\cong K_R^0$ by the identity on sections and restrictions. Its derived comparison is a canonical isomorphism of unbounded derived objects\n$$D(E_R)Ra_*M\\xrightarrow{\\sim}\\mathcal K_R(M),$$\nrepresented on a K-injective $I$ for $M$ by the same complex $E_Ra_*I$ on both sides [sk-def-sfb-module-derived-pushpull].\n\nSlice restriction at the sheaf $h_{\\bar s}$ corresponds to forgetting the action: a free object over $G$ with structure map $(g,p)\\mapsto gb(p)$ is isomorphic over $G$ to the projection by $(g,p)\\mapsto(gb(p),p)$, and arrows between projections are just maps of profinite $P$. Thus $UE_R$ is $v^*$ followed by the field presentation for the separably closed field $k^s$, whose group is trivial. Restricted coefficients are the actual $R_{\\bar s}$ and $R_{X^s}$ under the canonical coefficient-pullback identifications.\n\nThe ringed sheaf-slice comparison gives $v^*Ra_*M\\cong Ra_{s*}u^*M$. Composing with the condensed presentation of $\\bar s$ and the normalized direct-image composition for $p_{X^s}=p_{\\bar s}a_s$ gives\n$$U\\mathcal K_R(M)\\xrightarrow{\\sim}Rp_{X^s*}u^*M.$$\nThis is an identification in the derived category, not only on cohomology. It is normalized by actual restriction of a K-injective representative (which remains K-injective on the slice) and by the derived composition comparison. The slice comparison preserves the geometric counit and the canonical K-flat scalar-tensor comparison. No flatness of a subsequent coefficient map and no bound on $M$ is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10; Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; extracted returned field-action proof steps 7, 8, 9. Agent formulation; complete inherited argument and citation mapping retained in report.md. Stacks Tag 04IF, sites-modules.tex, lemma-localize-morphism-ringed-topoi, for the ordinary ringed slice square; derived normalization is an agent argument."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-action-module",
+  "def-sfb-field-action-transport-data",
+  "def-sfb-field-action-geometric-transport-data",
+  "lem-sfb-condensed-galois-global-descent",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "For every finite quotient $P_i$ the canonical base-change map identifies $X\\times_s\\coprod_{P_i}\\bar s$ with $\\coprod_{P_i}X^s$. For any $X$-scheme $Z$, a map to $X\\times_s\\bar s[P]$ is a compatible family of maps $Z\\to\\coprod_{P_i}\\bar s$ over $s$, together with its fixed map to $X$. This is exactly a compatible family $Z\\to\\coprod_{P_i}X^s$ over $X$. The inverse-limit universal property of the test schemes therefore gives $X\\times_s\\bar s[P]\\cong X^s[P]$. Both maps are determined by the same finite projections. Hence they commute with precomposition in $Z$, with every continuous test map $P\\to Q$, and with arbitrary geometric base change; on a geometric fibre they identify the same compatible finite labels. This also treats the empty test.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.9, pp. 27–28; universal-property argument for its base change"
+   }
+  },
+  {
+   "text": "For an $R_X$-module $N$, pushforward has underlying sections $(a_*N)(V)=N(X\\times_sV)$; its coefficient action is the restriction of the action on $N$. The assumed normalized $E_R$ evaluates at $\\bar s[P]$. Step 1 thus identifies $(E_Ra_*N)(P)$ with $N(X^s[P])$, which is precisely $K_R^0(N)(P)$. Restrictions agree because step 1 commutes with every test map; the Galois actions agree because both are induced by the same automorphisms of $\\bar s$ and their base changes to $X^s$. The coefficient actions agree because the field equivalence is over the condensed topos with the specified coefficient identification. This constructs the ordinary natural $R$-linear equivariant isomorphism, with the identity section maps, rather than assuming the existence predicate GeometricTransport.",
+   "uses": [
+    "def-sfb-finite-lower-star",
+    "def-sfb-module-lower-star",
+    "def-sfb-field-action-transport-data",
+    "lem-sfb-condensed-galois-global-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10; inherited field-action proof step 7, module normalization written out"
+   }
+  },
+  {
+   "text": "Choose a K-injective representative $I$ of $M$. By the resolution definition, $Ra_*M$ is represented by $a_*I$ and $RK_R^0(M)$ by $K_R^0(I)$. An additive equivalence of abelian categories preserves kernels and cokernels by their universal properties, so $E_R$ is exact. Its derived functor is therefore termwise application, by the exact-functor factorization theorem. Applying step 2 degreewise identifies both representatives with the same complex $E_Ra_*I$. Its class gives $D(E_R)Ra_*M\\xrightarrow{\\sim}\\mathcal K_R(M)$. The comparison on complexes is natural and is already the ordinary comparison on every resolution map; it consequently satisfies the total-right-derived-unit normalization and descends naturally to the unbounded derived categories.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10; inherited proof step 7, agent unbounded resolution refinement"
+   }
+  },
+  {
+   "text": "The field-site presentation takes $\\bar s[P]$ over $s$ to $G\\times P$, and $\\bar s$ to the left regular $G$-set. An equivariant map $G\\times P\\to G$ is $q_b(g,p)=gb(p)$, where $b(p)=q_b(1,p)$. The map $(g,p)\\mapsto(gb(p),p)$ is continuous and equivariant, has inverse $(h,p)\\mapsto(hb(p)^{-1},p)$, and identifies $q_b$ over $G$ with the first projection. An equivariant map between first projections is $(g,p)\\mapsto(g,f(p))$: its second coordinate at $(1,p)$ determines it, and equivariance makes that coordinate independent of $g$. Covers become the finite jointly surjective families of $f$. The slice is therefore the profinite presentation for $k^s$, whose absolute Galois group is trivial. Pro-etale localization identifies the scheme slices at $\\bar s$ and $X^s$ with their respective pro-etale topoi. Thus $UE_R$ is restriction $v^*$ followed by the $k^s$ presentation. The Cartesian coefficient isomorphisms for $v$ and $u$ identify the restricted rings with the actual $R_{\\bar s}$ and $R_{X^s}$, including their actions, for arbitrary condensed $R$.",
+   "uses": [
+    "lem-sfb-field-profinite-galois-site",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10 and Lemma 4.2.7, pp. 28–29; inherited proof step 8, free-slice calculation"
+   }
+  },
+  {
+   "text": "Apply the ringed sheaf-slice derived comparison to $f=a$ and $A=h_{\\bar s}$. Its inverse-image sheaf is $h_{X^s}$: base change represents inverse image here, as in the ordinary pushforward description. By step 4 its two ringed slices are exactly $(X^s,R_{X^s})$ and $(\\bar s,R_{\\bar s})$, and $f_A=a_s$. The theorem supplies $\\beta_M:v^*Ra_*M\\xrightarrow{\\sim}Ra_{s*}u^*M$ on unbounded derived objects. On $I$ it is the ordinary identity $v^*a_*I\\cong a_{s*}u^*I$, and the theorem asserts that $u^*I$ remains K-injective. Its explicit counit equation $u^*(\\varepsilon_M)\\circ\\theta_{Ra_*M}=\\varepsilon^A_{u^*M}\\circ La_s^*(\\beta_M)$ fixes preservation of the geometric counit. The sites are small by the standing universe convention, and the theorem imposes neither boundedness nor flatness of a structural ring map.",
+   "uses": [
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "def-sfb-finite-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; inherited proof step 9 and the cited unbounded mate theorem"
+   }
+  },
+  {
+   "text": "The same slice theorem says that restriction preserves flat K-flat representatives. The ordinary tensor restriction map sends a section tensor $x\\otimes y$ to that identical tensor on every slice object. Apply this map to K-flat representatives of both factors: the derived tensor-pullback theorem identifies its localization with the canonical comparison for restriction. In particular it applies with one factor an arbitrary coefficient algebra $R\\to R\\prime$, resolved as an $R$-module; no exactness of this scalar extension is needed. These are the coefficient and tensor identifications in the slice square, because their maps on the chosen representatives are exactly the same restriction maps. Together with the counit equation of step 5 this proves the asserted preservation of the canonical K-flat scalar-tensor comparison.",
+   "uses": [
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; tensor restriction refinement using K-flat representatives"
+   }
+  },
+  {
+   "text": "For the separably closed field, the presentation of step 4 identifies $p_{\\bar s*}$ with evaluation at $\\bar s[P]$. Apply [lem-sfb-geometric-sections-adjunction] to $k^s$ itself, whose Galois group is trivial (a case that node includes): its $E_R$ for $k^s$ has sections $\\Gamma(\\bar s[P],N|_{\\bar s[P]})$, so it is $p_{\\bar s*}$ on $R_{\\bar s}$-modules [def-sfb-module-lower-star], and it is an exact additive equivalence onto internal $R$-modules. Hence $p_{\\bar s*}$ is exact and $D(p_{\\bar s*})$ is termwise. The point-pullback composition comparison gives $p_{X^s}=p_{\\bar s}a_s$ with its canonical coefficient identifications. Combine step 3, step 4, and step 5 to obtain $U\\mathcal K_R(M)\\cong D(p_{\\bar s*})Ra_{s*}u^*M$, and then apply the inverse of the canonical derived direct-image composition isomorphism to obtain $Rp_{X^s*}u^*M$. This is the specified isomorphism in the derived category itself. The exactness of geometric coefficient pullback and the equivalence $p_{\\bar s}$ allow the adjunction-normalized composition theorem to apply: its comparison is represented on a K-injective by the ordinary composite, and its counit is precisely the composite counit. Hence the composition used here retains the normalization from steps 5–6. Every comparison is natural, with no truncation of $M$ or flatness restriction on a later coefficient map.",
+   "uses": [
+    "lem-sfb-geometric-sections-adjunction",
+    "def-sfb-module-lower-star",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "det-prop-sfb-module-pullback-exact-main"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; inherited proof step 9, adjunction normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-test-object-functor",
+  "def-sfb-finite-lower-star",
+  "def-sfb-module-lower-star",
+  "def-sfb-field-action-transport-data",
+  "lem-sfb-condensed-galois-global-descent",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-field-profinite-galois-site",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-alpha-iso",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-geometric-sections-adjunction",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "det-prop-sfb-module-pullback-exact-main"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Examples 4.1.9–4.1.10 and Lemma 4.2.7; Stacks Tags 04IF and 0D6E; inherited field-action proof steps 7–9, normalized unbounded refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Free orbit evaluation of field pro etale modules identifies the unbounded derived geometric section object with slice direct image",
+   "results": {
+    "t": "2026-10-22T06:05:50Z",
+    "tool": "leanfinder",
+    "query": "Free orbit evaluation of field pro etale modules identifies the unbounded derived geometric section object with slice direct image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "Algebra.etaleLocus_eq_compl_support",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj",
+     "SheafOfModules.Presentation.map_π_eq",
+     "PresheafOfModules.HasDifferentials.exists_universal_derivation",
+     "localCohomology.diagram"
+    ],
+    "digest": "dd27175e3615b25f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Etale, presheaf pushforward and light condensed forgetful formulas do not identify these unbounded geometric derived objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting condensed Galois action on derived sections equals derived pushforward after separable base change to a field",
+   "results": {
+    "t": "2026-10-22T06:06:05Z",
+    "tool": "leanfinder",
+    "query": "Forgetting condensed Galois action on derived sections equals derived pushforward after separable base change to a field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.forget_obj_val_map",
+     "LightCondensed.forget_map_val_app",
+     "TopCat.Sheaf.pushforward_forget",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "CompHausLike.LocallyConstantModule.functor_map_val",
+     "PresheafOfModules.pushforward₀CompToPresheaf",
+     "SheafOfModules.pushforwardSections_coe",
+     "SheafOfModules.pushforwardSections_unitHomEquiv"
+    ],
+    "digest": "0f02dd6894ab4e96"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Etale, presheaf pushforward and light condensed forgetful formulas do not identify these unbounded geometric derived objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proetale\", \"derived\"",
+   "results": {
+    "t": "2026-10-22T06:06:05Z",
+    "tool": "loogle",
+    "query": "\"Proetale\", \"derived\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Etale, presheaf pushforward and light condensed forgetful formulas do not identify these unbounded geometric derived objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived geometric sections of pro etale modules and Galois action forgetful functor",
+   "results": {
+    "t": "2026-10-22T06:06:05Z",
+    "tool": "leansearch",
+    "query": "Unbounded derived geometric sections of pro etale modules and Galois action forgetful functor",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(Proetale|Condensed).*(slice|Slice|Galois)|(slice|Slice).*Galois",
+   "results": {
+    "t": "2026-10-22T06:06:06Z",
+    "tool": "grep",
+    "query": "(Proetale|Condensed).*(slice|Slice|Galois)|(slice|Slice).*Galois",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Etale, presheaf pushforward and light condensed forgetful formulas do not identify these unbounded geometric derived objects."
+  },
+  {
+   "tool": "grep",
+   "query": "(Proetale|Condensed).*(slice|Slice|Galois)|(slice|Slice).*Galois",
+   "results": {
+    "t": "2026-10-23T04:23:11Z",
+    "tool": "grep",
+    "query": "(Proetale|Condensed).*(slice|Slice|Galois)|(slice|Slice).*Galois",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern free condensed modules or Zariski sheaf restriction, not the normalized field-action/slice derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to the geometric point slice of a field commutes with unbounded derived direct image of condensed coefficient modules",
+   "results": {
+    "t": "2026-10-23T04:23:11Z",
+    "tool": "leansearch",
+    "query": "Restriction to the geometric point slice of a field commutes with unbounded derived direct image of condensed coefficient modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "ModuleCat.Tilde.toOpen_res",
+     "AlgebraicGeometry.Scheme.Modules.restrict_map",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+     "ModuleCat.Tilde.res_apply",
+     "CategoryTheory.Sheaf.ΓRes"
+    ],
+    "digest": "ca7e4d625a2dcfc5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern free condensed modules or Zariski sheaf restriction, not the normalized field-action/slice derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proetale\", \"derived\"",
+   "results": {
+    "t": "2026-10-23T04:23:11Z",
+    "tool": "loogle",
+    "query": "\"Proetale\", \"derived\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern free condensed modules or Zariski sheaf restriction, not the normalized field-action/slice derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free orbit slice of a field pro etale topos identifies forgetting condensed Galois action with unbounded derived geometric sections",
+   "results": {
+    "t": "2026-10-23T04:23:12Z",
+    "tool": "leanfinder",
+    "query": "Free orbit slice of a field pro etale topos identifies forgetting condensed Galois action with unbounded derived geometric sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteFree",
+     "Condensed.profiniteSolidCounit",
+     "Condensed.ofSheafForgetProfinite",
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteSolidification",
+     "Condensed.lanSheafProfinite",
+     "LightCondensed.ofSheafForgetLightProfinite_val",
+     "CondensedMod.ofSheafProfinite"
+    ],
+    "digest": "af2aaebebabbc31a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern free condensed modules or Zariski sheaf restriction, not the normalized field-action/slice derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting an internal condensed group action equals sheaf localization at the regular torsor; derived pushforward is geometric base change",
+   "results": {
+    "t": "2026-10-23T04:24:17Z",
+    "tool": "leanfinder",
+    "query": "Forgetting an internal condensed group action equals sheaf localization at the regular torsor; derived pushforward is geometric base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.forget_obj_val_map",
+     "Condensed.forget",
+     "LightCondensed.forget",
+     "LightCondensed.forget_map_val_app",
+     "LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "CondensedMod.ofSheafCompHaus",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "TopCat.Sheaf.pushforward_forget"
+    ],
+    "digest": "95eac4fa7294876c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern free condensed modules or Zariski sheaf restriction, not the normalized field-action/slice derived comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-action-derived-section-transport",
+  "date": "2026-10-22",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; extracted returned field-action proof steps 7, 8, 9.",
+   "via": [
+    "lem-sfb-field-action-derived-section-transport",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-free-orbit-derived-slice-sections",
+  "worker": "stage1",
+  "summary": "Q104 retained the statement and gave the inverse-limit, free-slice, K-injective and K-flat calculations explicitly. Reused all general slice, coefficient and composition results; no new nodes. No complete upstream declaration found.",
+  "blueprint": "Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; realizes the inherited field-action proof steps 7–9. The ancestor tool returns None; the existing null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-test-object-functor",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic site, coefficient, exact-functor or derived-comparison tool applied to the field free-orbit presentation; does not replace the constructible-stability unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-alpha-iso",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "det-prop-sfb-module-pullback-exact-main"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-a81bc09f6",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-a81bc09f6 (reviewer sub-agent of L); spot-checked: FIX for one missing citation in step 7 (C1/C4); the other six steps are correct as delivered. Shape: one commit, no new nodes, statement and stmt_deps unchanged. This is not a 2026-10-21 re-split: no repair note, and the item was created by Q81. No cycle; walked the snapshot DAG, including the node added by the fix. Sources read: BS Examples 4.1.9 and 4.1.10 and Lemma 4.2.7; Stacks 04IF (lemma-localize-morphism-ringed-topoi) and 0D6E. All cited statements read. Step 1, X×_s s̄[P]=X^s[P]: limits commute with the base change, and P=∅ works. Step 2, E_R a_* = K_R^0 by identity section maps, is correct. Advisory: lem-sfb-geometric-sections-adjunction already states this, and the step's short elementary reproof is acceptable. Step 3: E_R is an exact equivalence, so it applies termwise on K-injectives. Step 4: q_b(g,p)=g b(p), the inverse (h,p)↦(h b(p)^{-1},p) and maps between projections given by maps of P are all valid for noncommutative G; restricted rings come from alpha-iso and localization. Step 5: a^{-1}h_{s̄}=h_{X^s} by Yoneda, and the slice theorem's beta, its K-injectivity clause and its counit equation all apply with no boundedness or flatness. Step 6, through K-flat representatives and the pure-tensor formula, is acceptable. Step 7: U𝒦_R(M) is represented by p_{s̄*}a_{s*}u^*I = p_{X^s*}u^*I with u^*I K-injective, so the result holds in D. The fault: the step used p_{s̄*} as an exact equivalence and wrote D(p_{s̄*}) without a node saying so; lem-sfb-field-profinite-galois-site gives only a dense subsite, which would need the uncited comparison lemma. Fixed by citing lem-sfb-geometric-sections-adjunction (split, same unit, includes trivial G) applied to k^s, plus def-sfb-module-lower-star; proof_deps updated. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-field-free-orbit-derived-slice-sections.json. Edge cases: P empty or a point, G trivial, noncommutative G, X empty, R=0, unbounded M, non-flat R→R/I. The 11 declared tool_uses are generic black-box tools: accepted. No SGA source.; 1 file(s) fixed by the reviewer"
+ }
+}

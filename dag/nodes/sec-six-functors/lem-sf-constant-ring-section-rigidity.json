@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-constant-ring-section-rigidity",
+ "kind": "lemma",
+ "title": "Rigidity of natural sections of constant commutative ring sheaves",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(C,J)$ be a small site in universe $u$ and $U$ an object of $C$. For each commutative ring $A$ in universe $u$, let $\\underline A$ be its constant ring sheaf [def-weil-pbc-constant-sheaf], and let $\\eta_A:A\\to\\underline A(U)$ be the component of the constant-presheaf sheafification unit. Suppose that ring homomorphisms $\\alpha_A:A\\to\\underline A(U)$ are natural in every commutative ring: for each ring homomorphism $f:A\\to B$, one has $\\alpha_B\\circ f=\\underline f(U)\\circ\\alpha_A$. Then $\\alpha_A=\\eta_A$ for every $A$.",
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition functoriality-algebraic-structures-topoi (Tag 00YV), supplemented by the universal-polynomial normalization argument written in Step 2 of lem-sf-constant-inverse-image-scalar-normalization."
+ },
+ "proof": [
+  {
+   "text": "Take Z=ULift of the integers and P=Z[X]. The Z component is the canonical unit by initiality. Use local surjectivity of the sheafification unit to represent alpha_P(X), on a covering sieve of U, by polynomials p.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each such p not equal to X, Polynomial.funext gives an integer n with p(n) not n. Naturality for evaluation at n gives equality of those two distinct constant integer sections. Local injectivity of sheafification gives an empty covering sieve on this piece, so separatedness of any sheaf identifies all its sections there. Thus alpha_P(X) equals the constant X on every piece; separatedness gives the equality over U.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any a in A, apply naturality to the polynomial ring map P to A sending X to a. The equality already proved for X and naturality of the sheafification unit imply alpha_A(a)=eta_A(a). Extensionality proves equality of ring homomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition functoriality-algebraic-structures-topoi (Tag 00YV), supplemented by the universal-polynomial normalization argument written in Step 2 of lem-sf-constant-inverse-image-scalar-normalization.",
+  "note": "Complete Lean proof by Q4; the universal-polynomial argument is the one already specified in the parent node."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "natural family of ring homomorphisms to constant ring sheaf sections is canonical",
+   "results": "Eight hits about locally constant functions, structure sheaves, and Gamma-Spec; no rigidity statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "natural transformation of constant commutative ring sheaf functor is identity",
+   "results": "Eight hits about constant structure-sheaf maps, module units, and sheaf-to-presheaf monoidal structure; no rigidity theorem.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(hom_ext|ext|naturality)",
+   "results": "Five GlobalSections.lean hits concerning adjunction naturality; none proves rigidity.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ConstantInverseImageScalarNormalization",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "The specified trace and coefficient identifications require constant-coefficient inverse-image maps to preserve the given constant sections; this is the polynomial rigidity step of that normalization.",
+   "via": [
+    "lem-sf-constant-inverse-image-scalar-normalization",
+    "lem-sf-constant-open-restriction-model-comparison",
+    "lem-sf-constant-semilinear-generator-comparison",
+    "lem-sf-integral-compactification-comparison-bridge",
+    "lem-sf-identification-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantRingSectionRigidity",
+  "file": "lean/Sheaf/CategoryTheory/ConstantRingSectionRigidity.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.constantRingSectionRigidity",
+  "statement": "theorem constantRingSectionRigidity {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (U : Cᵒᵖ)\n    (α : ∀ A : CommRingCat.{u},\n      A ⟶ ((constantSheaf J CommRingCat.{u}).obj A).obj.obj U)\n    (hα : ∀ {A B : CommRingCat.{u}} (f : A ⟶ B),\n      f ≫ α B = α A ≫ ((constantSheaf J CommRingCat).map f).hom.app U)\n    (A : CommRingCat.{u}) :\n    α A = (toSheafify J ((Functor.const Cᵒᵖ).obj A)).app U",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T092325-L-3423296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T092325-L-3423296",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

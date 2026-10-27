@@ -44,6 +44,47 @@ theorem exists_annihilator_eq_of_localization_atPrime
       IsLocalRing.maximalIdeal (Localization.AtPrime p) =
         (⊥ : Submodule (Localization.AtPrime p) (LocalizedModule.AtPrime p M)).colon {z}) :
     ∃ m : M, p = (⊥ : Submodule R M).colon {m} := by
-  sorry
+  classical
+  let f := LocalizedModule.mkLinearMap p.primeCompl M
+  obtain ⟨z, hz⟩ := h
+  obtain ⟨T, hT⟩ := hp
+  obtain ⟨⟨m, s⟩, rfl⟩ := IsLocalizedModule.mk'_surjective p.primeCompl f z
+  simp only [Function.uncurry_apply_pair] at hz
+  have hcontract :
+      (IsLocalRing.maximalIdeal (Localization.AtPrime p)).comap
+        (algebraMap R (Localization.AtPrime p)) = p :=
+    Localization.AtPrime.under_maximalIdeal (I := p)
+  have mem (a : T) :
+      algebraMap R (Localization.AtPrime p) a ∈
+        IsLocalRing.maximalIdeal (Localization.AtPrime p) := by
+    rw [← Ideal.mem_comap, hcontract]
+    rw [← hT]
+    exact Ideal.subset_span a.2
+  simp only [hz, Submodule.mem_colon_singleton, Submodule.mem_bot,
+    algebraMap_smul, ← IsLocalizedModule.mk'_smul,
+    IsLocalizedModule.mk'_eq_zero' f] at mem
+  choose g hg using mem
+  refine ⟨(∏ a, g a).1 • m, le_antisymm ?_ ?_⟩
+  · apply hT ▸ Ideal.span_le.mpr
+    intro a ha
+    simp only [SetLike.mem_coe, Submodule.mem_colon_singleton, Submodule.mem_bot]
+    obtain ⟨u, hu⟩ : g ⟨a, ha⟩ ∣ (∏ a, g a) :=
+      Finset.dvd_prod_of_mem g (Finset.mem_univ (⟨a, ha⟩ : T))
+    rw [hu, Submonoid.coe_mul, smul_smul, ← mul_assoc, mul_comm,
+      ← smul_smul, mul_comm, ← smul_smul]
+    exact smul_eq_zero_of_right u.1 (hg ⟨a, ha⟩)
+  · intro r hr
+    simp only [Submodule.mem_colon_singleton, Submodule.mem_bot, smul_smul] at hr
+    have hru : r * (∏ a, g a).1 ∈ p := by
+      have hmem : algebraMap R (Localization.AtPrime p) (r * (∏ a, g a).1) ∈
+          IsLocalRing.maximalIdeal (Localization.AtPrime p) := by
+        rw [hz, Submodule.mem_colon_singleton, algebraMap_smul,
+          ← IsLocalizedModule.mk'_smul, hr, IsLocalizedModule.mk'_zero]
+        exact Submodule.zero_mem _
+      change r * (∏ a, g a).1 ∈
+        (IsLocalRing.maximalIdeal (Localization.AtPrime p)).comap
+          (algebraMap R (Localization.AtPrime p)) at hmem
+      exact (le_of_eq hcontract) hmem
+    exact (‹p.IsPrime›.mul_mem_iff_mem_or_mem.mp hru).resolve_right (∏ a, g a).2
 
 end Module

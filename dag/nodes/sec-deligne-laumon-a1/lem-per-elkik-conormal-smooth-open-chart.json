@@ -1,0 +1,383 @@
+{
+ "id": "lem-per-elkik-conormal-smooth-open-chart",
+ "kind": "statement",
+ "title": "Conormal stabilization gives equations on principal smooth opens",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $B$ a finitely presented commutative $R$-algebra [def-weil-pbc-finitely-presented-algebra], and $W\\subseteq\\operatorname{Spec}B$ an open subscheme smooth over $\\operatorname{Spec}R$ [def-weil-affine-spectrum, def-sbc-smooth-morphisms]. There exist a finitely presented commutative $R$-algebra $D$, $R$-algebra maps $i:B\\to D$ and $r:D\\to B$ with $ri=\\mathrm{id}_B$, integers $N\\geq c\\geq0$, and a surjection $p:P=R[x_1,\\ldots,x_N]\\twoheadrightarrow D$ [def-weil-pbc-mv-polynomial-ring], with kernel $J$, having the following property. Put $W_D=(\\operatorname{Spec}i)^{-1}(W)$. For every $h\\in P$ such that $D_D(p(h))\\subseteq W_D$, there exist $s\\in P$ and $f_1,\\ldots,f_c\\in J$ such that $D_D(p(s))=D_D(p(h))$, $sJ\\subseteq(f_1,\\ldots,f_c)$ in $P$, and the images of the $c\\times c$ minors of $(\\partial f_j/\\partial x_k)_{1\\leq j\\leq c,1\\leq k\\leq N}$ generate the unit ideal of $D[1/p(s)]$ [def-weil-pbc-polynomial-partial-derivative, def-weil-pbc-matrix-determinant]. Here $D_D(a)=\\{\\mathfrak p\\in\\operatorname{Spec}D:a\\notin\\mathfrak p\\}$ and $D[1/a]$ inverts the powers of $a$. For $c=0$ the sole minor is $1$.",
+ "source": {
+  "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+  "place": "Elkik II, Lemma 3, printed pp.562–564, and the ambient-neighbourhood equations reduction in the proof of Lemma 4, pp.564–565; read online 2026-10-24, archival copy WANTED. No exact Stacks tag for this assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Choose a presentation $B=P_0/I$, $P_0=R[z_1,\\ldots,z_n]$, $I=(g_1,\\ldots,g_m)$, and put $M=I/I^2$. Set $D=\\operatorname{Sym}_B(M)$, $N=n+m$, $c=m$. The symmetric algebra universal property gives the structure map $i:B\\to D$ and the augmentation $r:D\\to B$ induced by $M\\to B$, $u\\mapsto0$; $ri=1$. The classes of $g_j$ generate $M$, so the symmetric-algebra generation theorem gives the surjection $p:P=P_0[y_1,\\ldots,y_m]\\twoheadrightarrow D$ with $p(y_j)=\\iota([g_j])$. The finite-type-over-Noetherian theorem makes $P_0$ and $P$ Noetherian; $D$, being finite type over $R$, is finitely presented over $R$ by the Noetherian finite-presentation theorem. This single $p$ and $c\\leq N$ are fixed before any principal open is chosen.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-symmetric-algebra-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07CE (lemma-improve-presentation), proof, lines 357–437; Elkik II Lemma 3, pp.562–564, and Lemma 4 proof p.565 (online scan; archival copy WANTED)."
+   }
+  },
+  {
+   "text": "The presentation-improvement theorem applies to this same $D=\\operatorname{Sym}_B(I/I^2)$: for each $a\\in B$ with $B_a$ smooth over $R$, $D_{i(a)}$ is smooth over $R$. Since $W$ is smooth, for a principal open $D_B(a)\\subseteq W$ the open-immersion theorem identifies $\\operatorname{Spec}B_a\\to\\operatorname{Spec}B$ with the inclusion of $D_B(a)$, restriction to opens and invariance under isomorphism make $\\operatorname{Spec}B_a\\to\\operatorname{Spec}R$ smooth, and the affine smooth-morphism/smooth-ring-map comparison makes $B_a$ a smooth $R$-algebra. Conversely each $D_{i(a)}$ given by the presentation-improvement theorem is a smooth ring map, so $\\operatorname{Spec}D_{i(a)}\\to\\operatorname{Spec}R$ is smooth by the same comparison, and $D_D(i(a))\\to\\operatorname{Spec}R$ is smooth by the open-immersion theorem and restriction (b),(c). They cover $W$. Their inverse images cover $W_D$, so smoothness local on the source shows that $W_D\\to\\operatorname{Spec}R$ is smooth. Moreover on each such $B_a$, the split conormal differential sequence exhibits $M_a$ as a summand of $B_a^{\\oplus n}$. It is finite projective; the finite-projective local-freeness theorem makes $M_{\\mathfrak p}$ finite free for every $\\mathfrak p\\in W$.",
+   "uses": [
+    "lem-weil-pbc-improve-presentation",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-local-on-source",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-localization-conormal-split",
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07CE (lemma-improve-presentation), proof, lines 357–437; Elkik II Lemma 3, pp.562–564, and Lemma 4 proof p.565 (online scan; archival copy WANTED)."
+   }
+  },
+  {
+   "text": "Fix $h\\in P$ and put $a=p(h)$ and $T=D[1/a]$, assuming $D_D(a)\\subseteq W_D$. Every prime of $T$ contracts to a point of $W$ in $\\operatorname{Spec}B$, so Step 2 verifies exactly the free-locus hypothesis of the symmetric-conormal exact-sequence lemma (applied with base ring $P_0$, ideal $I$, and symmetric-algebra element $a$). Its two split sequences give\n$$(J/J^2)\\otimes_D T\\cong(M\\otimes_B T)\\oplus(K\\otimes_B T)\\cong T^{\\oplus m}.$$\nIf $T=0$, take $s=0$ and all $f_j=0$: the open is empty, $sJ=0$, and every ideal in the zero localization is the unit ideal. Henceforth $T\\ne0$. Choose a basis of this localized conormal. Each basis element is a fraction represented by an element of $J$ with denominator a power of $h$. Clear denominators separately; this rescales basis vectors by units of $T$ and gives $f_1,\\ldots,f_c\\in J$ whose conormal classes are a $T$-basis.",
+   "uses": [
+    "lem-per-symmetric-conormal-free-locus-exact-sequence",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07CE (lemma-improve-presentation), proof, lines 357–437; Elkik II Lemma 3, pp.562–564, and Lemma 4 proof p.565 (online scan; archival copy WANTED)."
+   }
+  },
+  {
+   "text": "Write $F=(f_1,\\ldots,f_c)\\subseteq P$ and $A'=P[1/h]$. The basis spans the localized conormal, so $J A'=F A'+(J A')^2$: for any $j/h^v$, express its class as a linear combination of the $f_j$ modulo $(J A')^2$ and lift those coefficients from $T=A'/J A'$ to $A'$. Thus the finite $A'$-module $E=J A'/F A'$ satisfies $(J A')E=E$. The one-plus-ideal form of Nakayama gives $e\\in1+J A'$ with $eE=0$. Write $e=u/h^b$ with $u\\in P$, $b\\geq0$. Then $uJ A'\\subseteq F A'$ and the image of $u/h^b$ in $T$ is $1$. Consequently $p(u)$ is a unit on $D_D(a)$ and $D_D(p(hu))=D_D(a)$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07CE (lemma-improve-presentation), proof, lines 357–437; Elkik II Lemma 3, pp.562–564, and Lemma 4 proof p.565 (online scan; archival copy WANTED)."
+   }
+  },
+  {
+   "text": "The ideal $J$ is finitely generated because $P$ is Noetherian. Choose generators $v_1,\\ldots,v_t$. From $uv_l/1\\in F P[1/h]$, the defining equality of fractions gives some $b_l\\geq0$ with $h^{b_l}uv_l\\in F$. Choose $b\\geq b_l$ for all $l$ (take $b=0$ if $t=0$), and then $k\\geq\\max(1,b)$. Set $s=(hu)^k$. For every generator $v_l$, $sv_l=h^{k-b}u^{k-1}(h^buv_l)\\in F$, proving $sJ\\subseteq F$. An element is outside a prime exactly when each positive-power factor is, so $D_D(p(s))=D_D(p(hu))=D_D(a)$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07CE (lemma-improve-presentation), proof, lines 357–437; Elkik II Lemma 3, pp.562–564, and Lemma 4 proof p.565 (online scan; archival copy WANTED)."
+   }
+  },
+  {
+   "text": "The open $D_D(a)\\subseteq W_D$, identified with $\\operatorname{Spec}T$ by the open-immersion theorem, is smooth over $R$ by Step 2 and restriction to opens; the affine smooth-morphism/smooth-ring-map comparison makes $T$ a smooth $R$-algebra, as the split conormal theorem requires. Apply the split conormal differential theorem to the fixed polynomial presentation $p$ localized at $a$. In the basis $[f_1],\\ldots,[f_c]$ of Step 3, its injection into $T^{\\oplus N}$ is the Jacobian matrix with entries $\\overline{\\partial f_j/\\partial x_k}$. A left inverse therefore supplies matrices $A$ of size $c\\times N$ (this Jacobian) and $L$ of size $N\\times c$ with $AL=1_c$. Cauchy–Binet gives $1=\\det(AL)=\\sum_{|S|=c}\\det(A^S)\\det(L_S)$, so the $c\\times c$ Jacobian minors generate the unit ideal of $T$. Since $D_D(p(s))=D_D(a)$, each of $p(s)$ and $a$ is a unit after inverting the other; the universal properties identify $D[1/p(s)]$ with $T$. The same minor identity holds there. For $c=0$ it is the empty determinant identity $1=1$.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-localization-conormal-split",
+    "lem-weil-pbc-cauchy-binet",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07CE (lemma-improve-presentation), proof, lines 357–437; Elkik II Lemma 3, pp.562–564, and Lemma 4 proof p.565 (online scan; archival copy WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-finite-presentation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-improve-presentation",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-per-symmetric-conormal-free-locus-exact-sequence",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-cauchy-binet"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CE proof, with coefficient-reduction calculation on an arbitrary affine open over the conormal free locus; explicit Nakayama and denominator-clearing version of Elkik II Lemma 4 p.565. Elkik scan read online; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "symmetric.*conormal|conormal.*symmetric|stabili.*conormal",
+   "results": "{\"t\": \"2026-10-24T08:37:11Z\", \"tool\": \"grep\", \"query\": \"symmetric.*conormal|conormal.*symmetric|stabili.*conormal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth charts and free-cotangent presentations do not provide a single retraction and fixed presentation working over every principal subset of an arbitrary smooth open; the globally projective conormal hypothesis is absent here.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T08:37:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"SymmetricAlgebra\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth charts and free-cotangent presentations do not provide a single retraction and fixed presentation working over every principal subset of an arbitrary smooth open; the globally projective conormal hypothesis is absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elkik conormal symmetric algebra stabilization finite presentation free conormal smooth open ambient equations maximal Jacobian minors",
+   "results": "{\"t\": \"2026-10-24T08:37:12Z\", \"tool\": \"leanfinder\", \"query\": \"Elkik conormal symmetric algebra stabilization finite presentation free conormal smooth open ambient equations maximal Jacobian minors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.IsStandardSmooth.out\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.Smooth.finitePresentation\", \"Algebra.isOpen_smoothLocus\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"7418ee2bf104b788\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth charts and free-cotangent presentations do not provide a single retraction and fixed presentation working over every principal subset of an arbitrary smooth open; the globally projective conormal hypothesis is absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite presentation can be replaced by the symmetric algebra of its conormal to give a retraction with free conormal over a smooth open",
+   "results": "{\"t\": \"2026-10-24T08:37:13Z\", \"tool\": \"leansearch\", \"query\": \"A finite presentation can be replaced by the symmetric algebra of its conormal to give a retraction with free conormal over a smooth open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SymmetricAlgebra\", \"Algebra.Presentation.ofFinitePresentation\", \"Algebra.Smooth.finitePresentation\", \"Algebra.FinitePresentation.of_finitePresentation\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FinitePresentation.mk\", \"Algebra.Generators.exists_presentation_of_free_cotangent\"], \"digest\": \"488dd3597281824f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth charts and free-cotangent presentations do not provide a single retraction and fixed presentation working over every principal subset of an arbitrary smooth open; the globally projective conormal hypothesis is absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric|conormal|Cotangent",
+   "results": "{\"t\": \"2026-10-24T08:38:09Z\", \"tool\": \"grep\", \"query\": \"symmetric|conormal|Cotangent\", \"sub\": \"RingTheory/Smooth/StandardSmoothOfFree.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"8\", \"9\", \"51\", \"59\", \"60\"], \"digest\": \"56984a8ff2f32ae6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth charts and free-cotangent presentations do not provide a single retraction and fixed presentation working over every principal subset of an arbitrary smooth open; the globally projective conormal hypothesis is absent here.",
+   "subdirectory": "RingTheory/Smooth/StandardSmoothOfFree.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a smooth open of an affine finite presentation replace it by a retract whose conormal module is globally free on every affine subset of that open",
+   "results": "{\"t\": \"2026-10-24T08:38:11Z\", \"tool\": \"leanfinder\", \"query\": \"Given a smooth open of an affine finite presentation replace it by a retract whose conormal module is globally free on every affine subset of that open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"233a3e68552ba138\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth charts and free-cotangent presentations do not provide a single retraction and fixed presentation working over every principal subset of an arbitrary smooth open; the globally projective conormal hypothesis is absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric algebra presentation of a conormal module has free kernel modulo its square on any open where the original conormal module is locally projective",
+   "results": "{\"t\": \"2026-10-24T09:05:54Z\", \"tool\": \"leanfinder\", \"query\": \"A symmetric algebra presentation of a conormal module has free kernel modulo its square on any open where the original conormal module is locally projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.SubmersivePresentation.free_cotangent\", \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"Algebra.instFreeCotangentToExtensionUnitLocalizationAway\", \"Algebra.formallySmooth_iff\", \"SheafOfModules.relationsOfIsCokernelFree\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\"], \"digest\": \"bab0555e57938367\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*conormal|conormal.*symmetric|SymmetricAlgebra",
+   "results": "{\"t\": \"2026-10-24T09:06:27Z\", \"tool\": \"grep\", \"query\": \"symmetric.*conormal|conormal.*symmetric|SymmetricAlgebra\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus.",
+   "subdirectory": "RingTheory/Smooth"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conormal module of the presentation of the symmetric algebra of a conormal module is free wherever that module is locally projective",
+   "results": "{\"t\": \"2026-10-24T09:06:27Z\", \"tool\": \"leansearch\", \"query\": \"The conormal module of the presentation of the symmetric algebra of a conormal module is free wherever that module is locally projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.freeLocus\", \"SymmetricAlgebra\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"Module.basicOpen_subset_freeLocus_iff\", \"Module.projective_of_localization_maximal\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.Flat.projective_of_finitePresentation\", \"Algebra.Generators.exists_presentation_of_free_cotangent\"], \"digest\": \"fc2aa97367b5771d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"SymmetricAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T09:06:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cotangent\\\", \\\"SymmetricAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra.*Cotangent|Cotangent.*SymmetricAlgebra|conormal.*symmetric|symmetric.*conormal",
+   "results": "{\"t\": \"2026-10-24T09:09:22Z\", \"tool\": \"grep\", \"query\": \"SymmetricAlgebra.*Cotangent|Cotangent.*SymmetricAlgebra|conormal.*symmetric|symmetric.*conormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elkik stabilization gives one retract presentation whose localized defining equations have maximal Jacobian minors generating one on each principal smooth open",
+   "results": "{\"t\": \"2026-10-24T09:09:22Z\", \"tool\": \"leansearch\", \"query\": \"Elkik stabilization gives one retract presentation whose localized defining equations have maximal Jacobian minors generating one on each principal smooth open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.localizationAway_jacobian\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"Algebra.PreSubmersivePresentation.localizationAway_jacobiMatrix\", \"Algebra.SubmersivePresentation.localizationAway\", \"Algebra.SubmersivePresentation.mk.congr_simp\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.recOn\"], \"digest\": \"7a9341c25f892e66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"Cotangent\"",
+   "results": "{\"t\": \"2026-10-24T09:09:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"SymmetricAlgebra\\\", \\\"Cotangent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated ideal I of a ring P, the canonical presentation P[y] to Sym_(P/I)(I/I squared) has free conormal after localization above the locally free locus of I/I squared",
+   "results": "{\"t\": \"2026-10-24T09:09:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated ideal I of a ring P, the canonical presentation P[y] to Sym_(P/I)(I/I squared) has free conormal after localization above the locally free locus of I/I squared\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.free_cotangent\", \"Algebra.instFreeCotangentToExtensionUnitLocalizationAway\", \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.instFreeCotangentSpaceToExtension\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\"], \"digest\": \"63959b0c0f7ba03a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elkik-principal-section-approximation",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "via": [
+    "lem-per-elkik-principal-section-approximation",
+    "lem-per-elkik-generic-smooth-section-approximation",
+    "lem-per-gabber-ramero-henselian-section-lifting",
+    "lem-per-elkik-smooth-span-lifting",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ],
+   "place": "Inherited auxiliary formal-resolution branch of ancestor Step 3 via the recorded creation chain; the latest ancestor proof no longer contains this branch. This lemma serves the bounded-section-lifting argument: Lemma 5.4.12, printed p.151, special case U=Spec(B) minus V(IB); cited there as Elkik, Chapter II, Theorem 2 bis; Elkik II Theorem 2 bis, induction base with a principal ideal, carried by Lemma 4 (pp.564–566). Auxiliary input: Elkik II, Lemma 3, printed pp.562–564, and the ambient-neighbourhood equations reduction in the proof of Lemma 4, pp.564–565"
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-elkik-conormal-smooth-open-chart",
+  "worker": "stage1",
+  "summary": "Statement unchanged. One smaller algebraic input isolates the canonical conormal exact sequence on the free locus. The item constructs a single symmetric retract and fixed presentation, verifies its hypothesis locally, lifts a basis, writes the one-plus-ideal Nakayama argument and denominator exponents explicitly, and derives the Jacobian unit ideal from a split injection and Cauchy–Binet.",
+  "blueprint": "Inherited auxiliary formal-resolution branch of lem-per-artin-gabber-affine-curve Step 3 via the recorded creation chain; the latest ancestor proof no longer has this branch. This refines Elkik II Lemma 3 and the p.565 reduction already required by the assigned parent; chapter and unit route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-universal-property",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: The symmetric algebra of a module and its universal property. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-finite-presentation",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: The symmetric algebra of a finitely presented module is a finitely presented algebra, generated by generators of the module. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Finitely generated algebras over Noetherian rings are Noetherian. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Finite type over a Noetherian ring is finite presentation. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-improve-presentation",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Improving a presentation: an algebra with retraction and free differentials on the smooth locus. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Smoothness under restriction to open subschemes, composition with an open immersion, and isomorphism. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Smoothness is local on an open cover of the source. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Smooth morphisms. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-localization-conormal-split",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Smooth principal localization: the localized conormal sequence of a presentation is split exact. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: A finite projective module is free after localizing away from each prime. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "def-weil-pbc-module-localization-away",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Localization of a module at one element, and the canonical maps M_f -> M_{fg}. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Nakayama: a finite module with IM=M is killed by an element of 1+I. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "def-weil-pbc-noetherian-ring",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: Noetherian ring. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Generic commutative-algebra or smooth-open tool in the assigned Elkik auxiliary branch: The Cauchy–Binet formula. The Fourier-perverse unit has no replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic algebra/scheme bridge in the assigned Elkik auxiliary branch: Spec of a ring map is a smooth morphism iff the ring map is smooth; Steps 2 and 6 pass between the smooth open W_D and the smooth-ring-map hypotheses of the presentation-improvement and conormal-splitting theorems. The Fourier-perverse unit has no replacement. (Added by the maintainer reader.)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-finite-presentation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-improve-presentation",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-cauchy-binet",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-15a97919c",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-15a97919c (reviewer sub-agent of L); spot-checked: Read the item, the new node and the statement of every cited node; read Stacks 07CE (smoothing.tex 342-437) for the symmetric-presentation sequence; did not read the Elkik scan (online only, WANTED). The item statement is unchanged. Steps 1, 3, 4 and 5 are correct: I checked the Nakayama e=u/h^b argument, the exponents in s v_l = h^{k-b}u^{k-1}(h^b u v_l), and the separate T=0 case. Step 6 is correct (left inverse plus Cauchy-Binet with c<=N). The new node lem-per-symmetric-conormal-free-locus-exact-sequence is true: 07CE's right-exact sequence plus a local split change of variables where M_p is free, glued over Spec T; K_T and M_T are finitely presented and locally free, hence projective. Tested on m=0, I=0 (J/J^2=A^m=K), T=0, and the 07EV counterexample, which the free-locus hypothesis excludes. It is not a duplicate: the projective-symmetric-* nodes assume M projective over all of A. It is smaller than the item and statement-only. One fault, C1/C4, repaired: steps 2 and 6 passed between smooth morphism and smooth ring map, and identified D(f) with Spec A_f, citing only def-sbc-smooth-morphisms. The fix adds lem-weil-pbc-smooth-ring-map-iff-smooth-affine and lem-weil-pbc-principal-localization-open-immersion to both steps and to proof_deps, rewrites the two sentences, and declares the iff node in split_report.tool_uses. Corrected item JSON in fixes/dag/nodes/sec-deligne-laumon-a1/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ElkikConormalSmoothOpenChart",
+  "declaration": "AlgebraicGeometry.exists_elkik_conormal_smooth_open_chart",
+  "file": "lean/Sheaf/AlgebraicGeometry/ElkikConormalSmoothOpenChart.lean",
+  "statement": "theorem exists_elkik_conormal_smooth_open_chart (R B : Type u) [CommRing R] [IsNoetherianRing R] [CommRing B] [Algebra R B] [Algebra.FinitePresentation R B] (W : (Spec (CommRingCat.of B)).Opens) (hW : Smooth (W.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap R B)))) : ∃ (D : Type u) (_ : CommRing D) (_ : Algebra R D), Algebra.FinitePresentation R D ∧ ∃ (i : B →ₐ[R] D) (r : D →ₐ[R] B), r.comp i = AlgHom.id R B ∧ ∃ (N c : ℕ), c ≤ N ∧ ∃ p : MvPolynomial (Fin N) R →ₐ[R] D, Function.Surjective p ∧ ∀ h : MvPolynomial (Fin N) R, (∀ q : PrimeSpectrum D, p h ∉ q.asIdeal → Spec.map (CommRingCat.ofHom i.toRingHom) q ∈ W) → ∃ (s : MvPolynomial (Fin N) R) (f : Fin c → MvPolynomial (Fin N) R), (∀ j : Fin c, f j ∈ RingHom.ker p.toRingHom) ∧ PrimeSpectrum.basicOpen (p s) = PrimeSpectrum.basicOpen (p h) ∧ (∀ g ∈ RingHom.ker p.toRingHom, s * g ∈ Ideal.span (Set.range f)) ∧ Ideal.span (Set.range (fun S : {S : Finset (Fin N) // S.card = c} ↦ algebraMap D (Localization.Away (p s)) (p (Matrix.det (fun j k : Fin c ↦ MvPolynomial.pderiv (S.val.orderEmbOfFin S.property k) (f j)))))) = ⊤",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbe3139cc",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: Noetherian R, finitely presented B, open W of Spec B smooth over Spec R via W.ι ≫ Spec.map algebraMap; D, i, r (r.comp i = id), N ≥ c and surjective R-algebra map p all chosen before ∀ h; the condition on h pulls back along Spec.map i; the conclusion gives basicOpen(p s) = basicOpen(p h), s·J ⊆ span f in P, and all c×c Jacobian minors (columns in increasing order via orderEmbOfFin) mapped to Localization.Away (p s) span ⊤. Edge cases covered: nilpotent p h or empty W (s=0, f=0, zero localization), c=0 (empty determinant 1), c=N, N=0. Universe u is forced by Spec; no extra assumptions. The node's only change vs side-live is the added lean field; lean.statement is verbatim the file signature (script check). One sorry theorem, no definitions, docstrings give source place, blueprint id and six proof steps; no duplicate found in the project or Mathlib. Not recompiled since no file was changed. Note: the second reading is a self-pass by the worker, and the report says so."
+ }
+}

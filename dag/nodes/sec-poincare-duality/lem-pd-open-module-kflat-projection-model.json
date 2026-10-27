@@ -1,0 +1,358 @@
+{
+ "id": "lem-pd-open-module-kflat-projection-model",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "kind": "statement",
+ "title": "Canonical K-flat chain model of the internal open projection",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$, and separated finite-type $k$-schemes as in [sk-def-sfb-dc-setting]. Let $j:U\\hookrightarrow Z$ be an open immersion, and $\\Lambda$ a commutative condensed ring [sk-def-sfb-condensed-ring]. On small representatives of the pro-étale sites in the module universe [def-weil-pbc-proetale-site], set $\\Lambda_T=p_T^*\\Lambda$ for $T=U,Z$ [sk-def-sfb-pulled-back-coefficients]. Write $\\mathcal M_T=\\operatorname{Mod}_{\\Lambda_T}$ for internal module objects [sk-def-sfb-module-objects], with relative tensor $\\otimes_{\\Lambda_T}$ [def-sfb-modobj-relative-tensor]. Let $E=j_!:\\mathcal M_U\\to\\mathcal M_Z$ be the coefficient-linear extension by zero [def-sfb-module-open-lower-shriek] and $R=j^*:\\mathcal M_Z\\to\\mathcal M_U$ the module pullback [def-sfb-module-upper-star], with their specified adjunction $E\\dashv R$ [def-sfb-module-open-lower-shriek-adjunction], unit $u$ and counit $v$. Use the actual relative tensor comparison $\\nu_{A,B}:RA\\otimes_{\\Lambda_U}RB\\to R(A\\otimes_{\\Lambda_Z}B)$ of module pullback, induced by its abelian pullback structure and scalar extension along $\\alpha_j$: it is the inverse of the ordinary comparison $t_{A,B}$ of [def-sfb-condensed-pullback-tensor-comparison] for $f=j$, under that node's identification of its inverse image with $R$.\nLet $e=D(E)$ and $r=Lj^*\\cong D(R)$ on ordinary unbounded derived categories, with the adjunction obtained by deriving this specified module adjunction [sk-def-sfb-module-derived-pushpull, sk-def-sfb-module-lower-shriek]; write $\\eta,\\varepsilon$ for its unit and counit. Use the relative K-flat derived tensors [sk-def-sfb-derived-tensor-hom]. Let $\\mu$ be the actual lax tensorator of $r$, inverse to its actual oplax map induced by module pullback and localization. Write $Q_T$ for localization of complexes of $\\mathcal M_T$, and $\\theta$ for the underived maps in [lem-pd-open-module-balanced-projection]. Flat means that relative tensor with the module is exact; K-flat means that direct-sum total tensor with any acyclic complex is acyclic [pur713-def-kflat-module].\nFor arbitrary unbounded complexes $P$ in $\\mathcal M_U$ and $Q$ in $\\mathcal M_Z$, the maps $\\theta_{P^p,Q^q}$, followed by the coproduct insertions, induce a natural chain isomorphism\n$$\\Phi_{P,Q}:E\\operatorname{Tot}(P\\otimes_{\\Lambda_U}RQ)\\xrightarrow{\\sim}\\operatorname{Tot}(EP\\otimes_{\\Lambda_Z}Q).$$\nThe total terms are direct sums over $p+q=n$ and the differential on that summand is $d_P\\otimes1+(-1)^p1\\otimes d_Q$. Its chain inverse has the inverse bidegree maps. Extension $E$ preserves flat modules and K-flat complexes, and $R$ preserves complexes that are K-flat with flat terms.\nIf $P,Q$ are K-flat with flat terms, put $K=Q_UP$ and $L=Q_ZQ$. Under the canonical termwise exact-functor identifications and the K-flat derived tensor identifications, both the source and target of $Q_Z(\\Phi_{P,Q})$ identify respectively with $e(K\\otimes^{\\mathbf L}_{\\Lambda_U}rL)$ and $eK\\otimes^{\\mathbf L}_{\\Lambda_Z}L$, and there is the equality of morphisms\n$$Q_Z(\\Phi_{P,Q})=\\varepsilon_{eK\\otimes L}\\circ e(\\mu_{eK,L})\\circ e(\\eta_K\\otimes1_{rL}).$$\nThis equality uses the specified $\\eta,\\varepsilon,\\mu$, with the fixed internal-to-section-module comparisons of [lem-pd-module-ringed-topos-derived-comparison]. On bidegree $(p,q)$ its representative is $v_{E(P^p)\\otimes Q^q}\\circ E(\\nu_{E(P^p),Q^q})\\circ E(u_{P^p}\\otimes1)$, hence exactly the indicated $\\theta_{P^p,Q^q}$. No boundedness, finite Tor dimension, or constructibility is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "Derived version: termwise double-complex formulas and K-flat representatives; returned proof Steps 3-5, signed direct-sum totalization, flat/K-flat preservation and identification of the actual derived mate"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "def-sfb-condensed-pullback-tensor-comparison",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-derived-tensor-hom",
+  "pur713-def-kflat-module",
+  "lem-pd-open-module-balanced-projection",
+  "lem-pd-module-ringed-topos-derived-comparison"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pd-open-module-balanced-projection], $E,R$ are additive and exact and $u:1\\to RE$ is a natural isomorphism. The specified adjunction and [lem-weil-pbc-left-adjoint-preserves-colimits] show that $E$ preserves the degreewise coproducts indexed by $\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$. These are small in the chosen module universe. The coproduct comparison used below is the unique one commuting with every insertion. By [lem-weil-pbc-exact-functor-complex-cohomology], termwise $E$ and $R$ preserve acyclic complexes. Termwise $u$ is a chain isomorphism: its chain equation is precisely naturality of $u$ with respect to each differential.",
+   "uses": [
+    "lem-pd-open-module-balanced-projection",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version; the small-coproduct and exactness inputs to termwise totalization"
+   }
+  },
+  {
+   "text": "Using that coproduct comparison, define $\\Phi^n$ by $\\Phi^n E(\\iota_{p,q})=\\iota'_{p,q}\\theta_{P^p,Q^q}$ for $p+q=n$. Naturality in the first and second variables of [lem-pd-open-module-balanced-projection] gives respectively\n$$\\theta_{P^{p+1},Q^q}E(d_P^p\\otimes1)=(E d_P^p\\otimes1)\\theta_{P^p,Q^q},\\qquad\n\\theta_{P^p,Q^{q+1}}E(1\\otimes R d_Q^q)=(1\\otimes d_Q^q)\\theta_{P^p,Q^q}.$$\nSince $E$ is additive, it preserves the scalar $(-1)^p$. Adding the two identities proves the chain equation on each insertion for the differential of [pur713-def-kflat-module], hence on the whole sum. The same equations for $\\theta^{-1}$ define a chain inverse. The two composites are identities on every insertion, so are identities. Naturality for any pair of chain maps follows from the same two-variable naturality. This proves the claimed chain isomorphism for arbitrary unbounded $P,Q$.",
+   "uses": [
+    "lem-pd-open-module-balanced-projection",
+    "pur713-def-kflat-module",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version, sentence “Applying the sheaf formulas termwise to the double complexes”; explicit signed sum and inverse"
+   }
+  },
+  {
+   "text": "If $M$ is flat on $U$, apply exact $R$ to a short exact sequence on $Z$, tensor with $M$, and apply exact $E$. The natural isomorphisms $\\theta_{M,-}$ identify the result with tensoring the original sequence with $EM$. Thus $EM$ is flat. If $N$ is flat on $Z$, apply exact $E$ to a short exact sequence on $U$, tensor with $N$, and use $\\theta_{-,N}^{-1}$; this is the $E$-image of the sequence tensored with $RN$. Applying exact $R$ and conjugating by $u^{-1}:RE\\cong1$ makes that tensor sequence short exact. Thus $R$ preserves flat modules as well. All identifications are natural in the arrows of the sequences, as asserted in [lem-pd-open-module-balanced-projection].",
+   "uses": [
+    "lem-pd-open-module-balanced-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version, flatness needed for flat-term representatives; explicit short-exact-sequence test"
+   }
+  },
+  {
+   "text": "Let $P$ be K-flat on $U$ and let $A$ be any acyclic complex on $Z$. Step 1 makes $RA$ acyclic. By the K-flat test of [pur713-def-kflat-module], $\\operatorname{Tot}(P\\otimes RA)$ is acyclic; exact $E$ preserves this by [lem-weil-pbc-exact-functor-complex-cohomology]. The isomorphism $\\Phi_{P,A}$ of Step 2 identifies its $E$-image with $\\operatorname{Tot}(EP\\otimes A)$. This is the defining test for $EP$ to be K-flat. There is no restriction on the terms of $P$.",
+   "uses": [
+    "pur713-def-kflat-module",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version, extension by zero and the acyclic tensor test"
+   }
+  },
+  {
+   "text": "Let $Q$ be K-flat on $Z$ and $C$ acyclic on $U$. Exact $E$ makes $EC$ acyclic. The signed symmetry sends the $(p,q)$ summand of $EC\\otimes Q$ to the $(q,p)$ summand of $Q\\otimes EC$ by $(-1)^{pq}$ times the module tensor flip; the two differential components commute with this map because $(-1)^{(p+1)q}=(-1)^{pq+q}$ and $(-1)^p(-1)^{p(q+1)}=(-1)^{pq}$, and its square is the identity. Thus $\\operatorname{Tot}(EC\\otimes Q)$ is acyclic by K-flatness of $Q$. Applying $R$ to $\\Phi_{C,Q}$ of Step 2 and precomposing with $u_{\\operatorname{Tot}(C\\otimes RQ)}$ gives a chain isomorphism\n$$\\operatorname{Tot}(C\\otimes RQ)\\cong R\\operatorname{Tot}(EC\\otimes Q).$$\nThe right side is acyclic by exactness. The same signed symmetry converts this into the K-flat test for $RQ$. Step 3 also gives flat terms when $Q$ has flat terms. The flip is the symmetry of relative module tensor [def-sfb-modobj-symmetric-tensor], which the exact symmetric monoidal comparison [lem-pd-module-ringed-topos-derived-comparison] carries to the section-module one; no commutation of $R$ with an infinite sum has been presumed.",
+   "uses": [
+    "lem-pd-open-module-balanced-projection",
+    "pur713-def-kflat-module",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "def-sfb-modobj-symmetric-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version, open inverse-image K-flatness argument; signed tensor flip written explicitly"
+   }
+  },
+  {
+   "text": "Now suppose $P,Q$ are K-flat with flat terms. Steps 3–5 imply that $EP,RQ$ (and $REP$) have these same properties. By the relative K-flat model of [sk-def-sfb-derived-tensor-hom], $Q_U\\operatorname{Tot}(P\\otimes RQ)$ represents $K\\otimes^{\\mathbf L}rL$, and $Q_Z\\operatorname{Tot}(EP\\otimes Q)$ represents $eK\\otimes^{\\mathbf L}L$. Here exact-functor factorization [lem-weil-pbc-exact-functor-derived-factorization] supplies the identifications $Q_Z EP\\cong eK$ and $Q_U RQ\\cong rL$. Applying the same exact factorization to $E\\operatorname{Tot}(P\\otimes RQ)$ identifies its localization with $e(K\\otimes^{\\mathbf L}rL)$. These are the fixed model comparisons: [lem-pd-module-ringed-topos-derived-comparison] identifies their internal and section-module versions, preserving flatness, K-flatness and total tensor.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version, the K-flat model identifications of source and target"
+   }
+  },
+  {
+   "text": "The cochain adjunction $E\\dashv R$ has unit $u_{P^p}$ and counit $v_{Q^q}$ in each degree: its Hom bijection is applied degreewise, and its naturality says exactly that transposes of chain maps are chain maps. Apply [lem-sfb-adjunction-localization] to this adjunction and to the quasi-isomorphism localizations. Both functors descend by exact-functor factorization [lem-weil-pbc-exact-functor-derived-factorization]. Its displayed unit and counit formulas identify $\\eta$ with $Q(u)$ and $\\varepsilon$ with $Q(v)$ under those factors. This is the specified derived adjunction in the statement; [lem-pd-module-ringed-topos-derived-comparison] identifies precisely these units and counits with the independently specified section-module ones.",
+   "uses": [
+    "lem-sfb-adjunction-localization",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version, localization of the specified adjunction rather than a new choice of adjunction"
+   }
+  },
+  {
+   "text": "Let $T=\\operatorname{Tot}(EP\\otimes Q)$ and let $N_{EP,Q}:\\operatorname{Tot}(REP\\otimes RQ)\\to RT$ have bidegree components $\\nu_{E(P^p),Q^q}$ and the canonical coproduct comparisons. Its inverse is the total map of $t$ in [def-sfb-condensed-pullback-tensor-comparison]; the chain equations are the naturality equations of Step 2 with $R$ in place of $E$. The representative normalization in that definition, restricted to the K-flat pair $EP,Q$, identifies $Q_U(N_{EP,Q})$ with the inverse of its normalized derived oplax comparison. It is the actual $\\mu_{eK,L}$: [lem-pd-module-ringed-topos-derived-comparison] identifies the actual oplax map with the canonical ringed tensor comparison, and identifies its inverse with the actual lax map. The ordinary comparison used here is exactly $t$, whose inverse is the $\\nu$ fixed in the item. Thus this step concerns these specified maps, with the exact factors and K-flat tensor comparisons of Step 6.",
+   "uses": [
+    "def-sfb-condensed-pullback-tensor-comparison",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version; normalized actual lax tensorator on K-flat representatives"
+   }
+  },
+  {
+   "text": "By Steps 6–8, the displayed derived composite is represented by the chain composite\n$$E\\operatorname{Tot}(P\\otimes RQ)\\xrightarrow{E\\operatorname{Tot}(u_P\\otimes1)}E\\operatorname{Tot}(REP\\otimes RQ)\\xrightarrow{E(N_{EP,Q})}ERT\\xrightarrow{v_T}T.$$\nOn the insertion indexed by $(p,q)$, naturality of $v$ with respect to $E(P^p)\\otimes Q^q\\to T^{p+q}$ and the defining coproduct comparisons make this composite\n$$\\iota'_{p,q}\\,v_{E(P^p)\\otimes Q^q}\\,E(\\nu_{E(P^p),Q^q})\\,E(u_{P^p}\\otimes1)=\\iota'_{p,q}\\theta_{P^p,Q^q}.$$\nThe last equality is the formula in [lem-pd-open-module-balanced-projection]. The equality on all insertions proves equality of degree maps and hence chain maps with $\\Phi_{P,Q}$ of Step 2. Localization preserves this equality and composition, giving exactly the asserted equality with $\\varepsilon\\circ e(\\mu)\\circ e(\\eta\\otimes1)$ under the fixed comparisons. No finite-sum, boundedness, constructibility or Tor-dimension argument occurs.",
+   "uses": [
+    "lem-pd-open-module-balanced-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version, equality of the localized chain map with the specified adjoint-of-unit projection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-open-module-balanced-projection",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "pur713-def-kflat-module",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-adjunction-localization",
+  "def-sfb-condensed-pullback-tensor-comparison",
+  "def-sfb-modobj-symmetric-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "Derived version; signed totalization, acyclic tensor tests, and localization normalization expanded by Q29 from the existing cited statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|k[Ff]lat|openImmersion.*[Uu]nit",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a ringed topos open immersion extension by zero preserves flat modules and K flat complexes and its derived adjunction unit is an isomorphism",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"flat\"",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact open extension by zero and restriction of condensed module objects preserve flat term K flat complexes and the derived open adjunction unit is invertible",
+   "results": "{\"n_hits\": 8, \"top\": [\"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"CondensedMod.LocallyConstant.adjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"Condensed.freeForgetAdjunction\", \"CondensedMod.IsSolid\"], \"note\": \"\", \"digest\": \"353bb86a3f3c546e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]lat|unit",
+   "results": "{\"n_hits\": 25, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"note\": \"\", \"digest\": \"272acc9bffb3e7c7\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion restriction and extension by zero take flat sheaves to flat sheaves and K-flat complexes to K-flat complexes and the localized unit is the degreewise unit",
+   "results": "{\"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Module.flat_of_isLocalized_span\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\"], \"note\": \"\", \"digest\": \"92d3565759408a7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|projectionFormula|KFlat|kflat",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Adjunction.toEquivalence\", \"CategoryTheory.Adjunction.toEquivalence_functor\", \"CategoryTheory.Adjunction.toEquivalence_inverse\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app\", \"CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app\", \"CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app\", \"CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit\"], \"note\": \"\", \"digest\": \"d8bcc4f09265b2a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The actual derived open projection mate of module objects is the localization of the signed total tensor comparison on flat term K flat representatives, compatibly with its specified unit and tensorator",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"CategoryTheory.Localization.Monoidal.triangle_aux₂\", \"CategoryTheory.Localization.Monoidal.μ\", \"CategoryTheory.Localization.Monoidal.ε'\", \"CategoryTheory.Localization.Monoidal.triangle_aux₃\", \"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"CategoryTheory.Localization.Monoidal.triangle_aux₁\", \"CategoryTheory.Localization.Monoidal.isInvertedBy₂\"], \"note\": \"\", \"digest\": \"5733da9ceab1e731\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorBifunctorIso|def μ|W.IsMonoidal",
+   "results": "{\"n_hits\": 5, \"top\": [\"17\", \"48\", \"52\", \"56\", \"82\"], \"note\": \"\", \"digest\": \"d0c0d79be3f83420\", \"sub\": \"CategoryTheory/Localization/Monoidal/Basic.lean\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, geometric flat morphisms, discrete condensed adjunctions or generic monoidal localization; none identifies the specified unbounded internal open projection on K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kflat|projectionMap",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete internal-module chain-model statement; localization adjunction hits are already represented by lem-sfb-adjunction-localization; total tensor and shape-extension hits omit the specified open map and K-flat preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for internal modules preserves K flat complexes and the canonical derived open projection is represented by the degreewise underived projection map",
+   "results": "{\"n_hits\": 8, \"top\": [\"HomologicalComplex.extend.d\", \"HomologicalComplex.extendMap_zero\", \"HomologicalComplex.extend\", \"HomologicalComplex.d_pOpcycles_assoc\", \"HomologicalComplex.extend.d_none_eq_zero'\", \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"HomologicalComplex.extend.isZero_X\", \"HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff'\"], \"note\": \"\", \"digest\": \"505d57c8438a63b5\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete internal-module chain-model statement; localization adjunction hits are already represented by lem-sfb-adjunction-localization; total tensor and shape-extension hits omit the specified open map and K-flat preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete internal-module chain-model statement; localization adjunction hits are already represented by lem-sfb-adjunction-localization; total tensor and shape-extension hits omit the specified open map and K-flat preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of ringed topoi the natural projection isomorphism extends to signed direct sum total tensor complexes and computes the specified derived projection mate on K flat representatives",
+   "results": "{\"n_hits\": 8, \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.rightUnitor'_inv\", \"HomologicalComplex.leftUnitor'_inv\", \"HomologicalComplex.rightUnitor'_inv_comm\", \"HomologicalComplex.leftUnitor'_inv_comm\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.leftUnitor'_inv_comm_assoc\"], \"note\": \"\", \"digest\": \"38c27c2d78f1a7fc\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete internal-module chain-model statement; localization adjunction hits are already represented by lem-sfb-adjunction-localization; total tensor and shape-extension hits omit the specified open map and K-flat preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization",
+   "results": "{\"n_hits\": 3, \"top\": [\"CategoryTheory.Adjunction.localization\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Adjunction.localization_unit_app\"], \"note\": \"\", \"digest\": \"c645ede334c6616c\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete internal-module chain-model statement; localization adjunction hits are already represented by lem-sfb-adjunction-localization; total tensor and shape-extension hits omit the specified open map and K-flat preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kflat|projectionMap|projectionFormula",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete internal-module chain-model statement; localization adjunction hits are already represented by lem-sfb-adjunction-localization; total tensor and shape-extension hits omit the specified open map and K-flat preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive adjunction with fully faithful extension by zero and a natural tensor projection formula induces an isomorphism of unbounded total complexes and preserves tensor acyclicity",
+   "results": "{\"n_hits\": 8, \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.monoidalCategory\"], \"note\": \"\", \"digest\": \"cd34c5d3e9667627\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete internal-module chain-model statement; localization adjunction hits are already represented by lem-sfb-adjunction-localization; total tensor and shape-extension hits omit the specified open map and K-flat preservation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-condensed-open-exceptional-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Derived version: termwise double-complex formulas and K-flat representatives; returned proof Steps 3-5, signed direct-sum totalization, flat/K-flat preservation and identification of the actual derived mate; serves seeded target nt-target-poincare-isiso Step 2 (created.item chain has no imported blueprint ancestor)",
+   "via": [
+    "lem-pd-condensed-open-exceptional-projection-formula",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pd-open-module-kflat-projection-model",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and its coefficient/module conventions unchanged. Nine explicit steps construct the signed direct-sum chain isomorphism and inverse, prove flat and K-flat preservation directly, and identify localization with the actual unit/tensorator/counit mate. Reused existing balanced projection, exact-functor, localization and internal/section normalization nodes; no new node is needed. Checked identity and empty immersions, zero coefficients, two-degree signs and infinite degree sums; no attachment covers all clauses.",
+  "blueprint": "The latest det-lem-int-tensor-projection.proof.md, Derived version: inverse-image K-flatness and termwise double-complex formulas. Steps 1–5 expand the signed sums and flat/K-flat tests; Steps 6–9 supply the representative and specified-mate normalization omitted there. The item comes through the seeded nt-target-poincare-isiso chain, whose blueprint ancestor is null; retained its recorded from.node and from.place.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-derived-tensor-hom",
+    "why": "Uses its fixed relative K-flat model to identify the two localized total tensors with the derived tensors; this is a generic tensor-construction tool, not a replacement of the Verdier exchange route."
+   },
+   {
+    "node": "def-sfb-condensed-pullback-tensor-comparison",
+    "why": "Uses its specified ordinary and derived representative normalization to identify the actual lax tensorator; the Verdier unit supplies no such normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-condensed-pullback-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-334c964f2",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-334c964f2 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 steps, every cited statement (the balanced-projection node, the ringed-topos comparison, the sk-def-sfb-derived-tensor-hom K-flat model, the def-sfb-condensed-pullback-tensor-comparison representative normalization (checked left to right), and the colimit, cohomology, exact-factorization and Adjunction.localization leaves) and the main-20261015 det-lem-int-tensor-projection 'Derived version'. Live and side-live still have the item unsplit, so the delivery is not superseded. Statement, stmt_deps, blueprint and source are unchanged from side-live, and there are 0 new nodes. proof_deps equals the union of uses, there is no cycle (closure checked), and no SGA is cited. Mathematics checked: (1) Step 2 chain equation from the two naturality squares of theta plus the sign (-1)^p; the inverse is checked on insertions. (2) Step 3 flatness both ways through exact E and R, theta and u^{-1}. (3) Step 4: EP K-flat with EP on the left, matching the definition. (4) Step 5 sign identities re-derived ((p+1)q and p(q+1) cases, square = 1); no use of R commuting with sums. (5) Steps 6-8: K-flat representatives; the normalization forces t^D to be represented by Q(total t), so Q(N) represents mu. (6) Step 9: the insertion computation equals theta by naturality of v. Edge cases checked: j = id, U empty, unbounded complexes. C4 FIX: Step 5 credited the module tensor flip to lem-pd-module-ringed-topos-derived-comparison, which only presupposes the symmetry; corrected the item JSON to cite def-sfb-modobj-symmetric-tensor (definition node, no route issue, no cycle) in Step 5 uses and proof_deps. The two declared tool_uses are definition nodes, which is harmless. Advisory: proof_origin.document points to blueprint/latest while source points to main-20261015; both files exist.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.PoincareDuality.OpenModuleKFlatProjectionModel",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openModuleKFlatProjectionModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleProjectionSource",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleProjectionTarget",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleProjectionSourceComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleProjectionTargetComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleKFlatProjectionModel"
+  ],
+  "file": "lean/Sheaf/PoincareDuality/OpenModuleKFlatProjectionModel.lean",
+  "statement": "theorem openModuleKFlatProjectionModel (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {U Z : Scheme.{u}} [U.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] (j : U ⟶ Z) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] : (∀ M : supportModules Λ U, ObjectProperty.flat M → ObjectProperty.flat ((openImmersionLowerShriek Λ j).obj M)) ∧ (∀ P : CochainComplex (supportModules Λ U) ℤ, IsKFlatModuleObject U (CommMon.mk (condensedRingObj Λ U)) P → IsKFlatModuleObject Z (CommMon.mk (condensedRingObj Λ Z)) (((openImmersionLowerShriek Λ j).mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ Q : CochainComplex (supportModules Λ Z) ℤ, IsKFlatModuleObject Z (CommMon.mk (condensedRingObj Λ Z)) Q → (∀ n : ℤ, ObjectProperty.flat (Q.X n)) → IsKFlatModuleObject U (CommMon.mk (condensedRingObj Λ U)) (((upperStar Λ j).mapHomologicalComplex (.up ℤ)).obj Q) ∧ ∀ n : ℤ, ObjectProperty.flat ((((upperStar Λ j).mapHomologicalComplex (.up ℤ)).obj Q).X n)) ∧ ∃ Φ : ∀ (P : CochainComplex (supportModules Λ U) ℤ) (Q : CochainComplex (supportModules Λ Z) ℤ), openModuleProjectionSource Λ j P Q ≅ openModuleProjectionTarget Λ j P Q, (∀ (P : CochainComplex (supportModules Λ U) ℤ) (Q : CochainComplex (supportModules Λ Z) ℤ) (p q n : ℤ) (h : p + q = n), ∃ b : (openImmersionLowerShriek Λ j).obj (P.X p ⊗ (upperStar Λ j).obj (Q.X q)) ≅ (openImmersionLowerShriek Λ j).obj (P.X p) ⊗ Q.X q, b.hom = openModuleBalancedProjectionMap Λ j (P.X p) (Q.X q) ∧ (openImmersionLowerShriek Λ j).map (HomologicalComplex.ιTensorObj P (((upperStar Λ j).mapHomologicalComplex (.up ℤ)).obj Q) p q n h) ≫ (Φ P Q).hom.f n = b.hom ≫ HomologicalComplex.ιTensorObj (((openImmersionLowerShriek Λ j).mapHomologicalComplex (.up ℤ)).obj P) Q p q n h ∧ HomologicalComplex.ιTensorObj (((openImmersionLowerShriek Λ j).mapHomologicalComplex (.up ℤ)).obj P) Q p q n h ≫ (Φ P Q).inv.f n = b.inv ≫ (openImmersionLowerShriek Λ j).map (HomologicalComplex.ιTensorObj P (((upperStar Λ j).mapHomologicalComplex (.up ℤ)).obj Q) p q n h)) ∧ (∀ (P P' : CochainComplex (supportModules Λ U) ℤ) (Q Q' : CochainComplex (supportModules Λ Z) ℤ) (a : P ⟶ P') (b : Q ⟶ Q'), ((openImmersionLowerShriek Λ j).mapHomologicalComplex (.up ℤ)).map (HomologicalComplex.tensorHom a (((upperStar Λ j).mapHomologicalComplex (.up ℤ)).map b)) ≫ (Φ P' Q').hom = (Φ P Q).hom ≫ HomologicalComplex.tensorHom (((openImmersionLowerShriek Λ j).mapHomologicalComplex (.up ℤ)).map a) b) ∧ ∀ (P : CochainComplex (supportModules Λ U) ℤ) (Q : CochainComplex (supportModules Λ Z) ℤ), IsKFlatModuleObject U (CommMon.mk (condensedRingObj Λ U)) P → (∀ n : ℤ, ObjectProperty.flat (P.X n)) → IsKFlatModuleObject Z (CommMon.mk (condensedRingObj Λ Z)) Q → (∀ n : ℤ, ObjectProperty.flat (Q.X n)) → IsIso (openModuleProjectionSourceComparison Λ j P Q) ∧ IsIso (openModuleProjectionTargetComparison Λ j P Q) ∧ openModuleProjectionSourceComparison Λ j P Q ≫ DerivedCategory.Q.map (Φ P Q).hom = (openImmersionLowerShriek Λ j).mapDerivedCategory.map ((ModuleRingedComparison.internalOpenAdjunction Λ j).unit.app (DerivedCategory.Q.obj P) ▷ (moduleObjectDerivedPullback Λ j).obj (DerivedCategory.Q.obj Q)) ≫ (openImmersionLowerShriek Λ j).mapDerivedCategory.map (inv (((upperStar Λ j).leftDerivedTensorComparison.app ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj (DerivedCategory.Q.obj P))).app (DerivedCategory.Q.obj Q))) ≫ (ModuleRingedComparison.internalOpenAdjunction Λ j).counit.app ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj (DerivedCategory.Q.obj P) ⊗ DerivedCategory.Q.obj Q) ≫ openModuleProjectionTargetComparison Λ j P Q",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The four helper definitions name the existing total-tensor endpoints and construct their canonical localization comparisons from exact-functor factorization, the actual left-derived-to-exact pullback comparison, and the specified lax localization tensorator. The single theorem states flat/K-flat preservation, an unbounded natural chain-isomorphism family with forward and inverse summand equations, and invertibility of those comparisons plus the commuting square equating the localized chain map to the specified derived unit/lax-tensor/counit composite. No statement or dependency correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c22d7443a",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Every clause matches the node. Setting binders as in the project convention; arbitrary commutative condensed Λ on the real pro-étale site; no added hypothesis or universe restriction. E preserves flat modules and K-flat complexes; R preserves complexes that are K-flat with flat terms. The ∃ Φ is pinned by the insertion equations to θ and θ⁻¹ (E is a left adjoint, so it preserves the coproducts and Φ is unique); naturality in both variables is stated. For K-flat P, Q with flat terms, the source and target comparisons are stated as isomorphisms (true, one factor K-flat in each case), and the square equates Q(Φ) with e(η▷1)≫e(inv δ)≫ε, the same formula as internalMu/internalOpenProjection of lem-pd-module-ringed-topos-derived-comparison. The representative on each bidegree is θ by definition, with ν = t⁻¹ and supportTensorComparison_eq_δ. Edge cases checked: empty U, j = id, Λ = 0, P or Q zero, all integer degrees, infinite p+q=n sums. Records: only the lean field changed against side-live; statement verbatim in the file; helpers are real definitions; only the theorem is sorry; docstrings carry the source place and all nine steps; both report sections present. Not compiled (no file changed; worker reports a clean compile). Advisory: internalOpenAdjunction is owned by def-pd-section-derived-realization, outside stmt_deps but a stmt_dep of the cited ringed-topos comparison node; maintainer note only, as in the balanced-projection review."
+ }
+}

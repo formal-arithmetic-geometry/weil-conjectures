@@ -1,0 +1,295 @@
+{
+ "id": "lem-coef-closed-transpose-cocycles",
+ "kind": "statement",
+ "title": "Closed exceptional transposes and both composition cocycles",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ and a prime $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber]. Let $E,L/\\mathbf Q_\\ell$ be finite extensions, $m,n\\ge1$, $A=\\mathcal O_E/\\varpi_E^m$, $B=\\mathcal O_L/\\varpi_L^n$, and $\\varphi:A\\to B$ any unital map [def-weil-l-adic-coefficient-extension]. On each scheme $T$ use constant module sheaves on its small pro-etale site [def-weil-pbc-proetale-site], and write $S_T^{A,B}K=K_B=K\\otimes_A^LB$ for uncompleted derived scalar extension [lem-pur-derived-change-of-rings]. The notation $D^b_{ctf}$ means bounded constructible with finite Tor amplitude [def-weil-finite-tor-amplitude]. All schemes below are separated and finite type over $k$; all scheme maps are $k$-maps [def-weil-scheme-morphism-properties]. Use the constructible exceptional functors and their adjunctions on bounded constructible inputs of etale origin [def-weil-exceptional-inverse-image], and ordinary derived direct images [def-weil-derived-direct-image]. For each closed immersion $i:Z\\hookrightarrow X$, suppose the relevant finite-Tor bounded constructible domains are closed under scalar extension and $Ri_R^!$ at every finite coefficient stage $R$ under consideration, and use $i_{*,R}\\dashv Ri_R^!$ with counit $\\epsilon_{i,R}$. Let $c_i^{A,B}:S_X^{A,B}i_{*,A}\\xrightarrow{\\sim}i_{*,B}S_Z^{A,B}$ be exactly the ordinary coefficient comparison of [lem-coef-finite-direct-image]. Define $b_i^{A,B}$ as the right mate of $(c_i^{A,B})^{-1}$ [def-weil-pbc-adjunction-mate]. Thus, with $N=Ri_A^!M$,\n$$\\epsilon_{i,B,S_XM}\\,i_{*,B}(b_{i,M}^{A,B})=S_X(\\epsilon_{i,A,M})(c_{i,N}^{A,B})^{-1}.$$\nThe maps $b_i$ are natural in $M$. For closed immersions $W\\xrightarrow{t}Z\\xrightarrow{i}X$, identify $(it)_*$ with $i_*t_*$ by [lem-weil-derived-direct-image-composition] and $R(it)^!$ with $Rt^!Ri^!$ by the chained Hom adjunction [def-weil-pbc-composite-adjunction], whose counit is $\\epsilon_i\\circ i_*\\epsilon_t$. Then\n$$b_{it,M}^{A,B}=Rt_B^!(b_{i,M}^{A,B})\\circ b_{t,Ri_A^!M}^{A,B}.$$\nFor a third finite coefficient stage $C=\\mathcal O_F/\\varpi_F^s$ with $F/\\mathbf Q_\\ell$ finite, $s\\ge1$, and a unital map $B\\to C$, the balancing maps $((x\\otimes b)\\otimes c)\\mapsto x\\otimes bc$ on flat-term K-flat representatives induce canonical natural identifications $S_T^{B,C}S_T^{A,B}\\cong S_T^{A,C}$. Under them,\n$$b_{i,M}^{A,C}=b_{i,S_X^{A,B}M}^{B,C}\\circ S_Z^{B,C}(b_{i,M}^{A,B}).$$\nFor identity coefficient change the comparison is the identity. These formulas assert coherence of the specified maps, without assuming that $b_i$ is invertible; they apply whenever all the displayed domains are defined.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+  "place": "Proof paragraph 3, transpose to exceptional counits; returned steps 6–8, including the balancing maps for iterated derived scalar extension"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-direct-image",
+  "lem-coef-finite-direct-image",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-pbc-composite-adjunction",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing scalarComp, scalarUnit and pushComp constructions without rebuilding K-flat models. scalarComp is the restriction of pbcFixedScalarExtensionComp, hence exactly the canonical balancing identification already used by finiteCoefficientDirectImageMap_coefficientChain. For identity scalars, prove restrictionComp_identity by the sectionwise identity and functorial coherence of mapDerivedCategoryCompIso and mapDerivedCategoryNatIso. Adjunction.leftAdjointCompIso_comp_id then proves scalarComp_identity: the identity scalar compositor is the scalar unit at the scalar-extended object.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3, transpose to exceptional counits; returned steps 6–8, including the balancing maps for iterated derived scalar extension"
+   }
+  },
+  {
+   "text": "The specified comparison is the full-subcategory restriction of finiteCoefficientChangeDirectImageMap. Apply finiteCoefficientDirectImageMap_comp and finiteCoefficientDirectImageMap_coefficientChain from lem-coef-finite-direct-image, using precisely pushComp and scalarComp. Full-subcategory inclusions are faithful, so these ambient equations give the corresponding restricted equations. Inverting the isomorphism given by the ordinary scalar chain law yields its inverse chain law without any extra geometric or flatness hypotheses.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3, transpose to exceptional counits; returned steps 6–8, including the balancing maps for iterated derived scalar extension"
+   }
+  },
+  {
+   "text": "For closedTranspose_counit_naturality, apply CategoryTheory.mateEquiv_counit to the specified inverse ordinary comparison and the given closed adjunctions. The naturality equation is exactly the naturality field of that same natural transformation. Thus no different exceptional map is introduced.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3, transpose to exceptional counits; returned steps 6–8, including the balancing maps for iterated derived scalar extension"
+   }
+  },
+  {
+   "text": "For closedTranspose_geometric, apply the existing generic theorem Adjunction.mateEquiv_inv_comp_rightAdjointUniq to the t, i and composite closed adjunctions at both coefficient rings. Its right-adjoint identifications are definitionally rightComp. Its ExchangeCompCompatible hypothesis follows by full-subcategory extensionality from finiteCoefficientDirectImageMap_comp after cancelling the direct-image compositor inverse against its hom. This proves the geometric cocycle with no invertibility assumption on an exceptional mate.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-derived-direct-image-composition",
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3, transpose to exceptional counits; returned steps 6–8, including the balancing maps for iterated derived scalar extension"
+   }
+  },
+  {
+   "text": "For closedTranspose_coefficient, prove a private generic mate_chain lemma by injectivity of the C closed-adjunction transpose. Move the final right-adjoint map through its counit, substitute mateEquiv_counit for the B-to-C mate, use naturality of the inverse ordinary comparison at the A-to-B mate, substitute its mateEquiv_counit equation, and finally use naturality of the scalar compositor. Instantiate this lemma with the inverse ordinary comparisons and scalarComp. The required inverse ordinary chain equation is obtained by taking Iso.inv of the ordinary coefficientChain isomorphism equation from step 2.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3, transpose to exceptional counits; returned steps 6–8, including the balancing maps for iterated derived scalar extension"
+   }
+  },
+  {
+   "text": "For closedTranspose_identity, first specialize the ordinary coefficient chain law to two identity ring maps. By scalarComp_identity its compositors are the canonical scalar units. For an invertible comparison c:F T -> S F with units s:S ~= Id and t:T ~= Id, this equation reads c_K=t^{-1}_{TFK} T(c_K) c_{SK} F(s_{SK}). Multiply by t_{TFK}, use its naturality and cancel the invertible T(c_K); this gives c_{SK}F(s_{SK})=t_{FSK}. Naturality of c at s_K, naturality of s, and cancellation of T(F(s_K)) give c_K F(s_K)=t_{FK}. Apply this generic proved calculation to the actual comparison. Now transpose the proposed exceptional unit equation under the given closed adjunction, use counit naturality and mateEquiv_counit, move the scalar unit by naturality, and cancel c against c inverse using the ordinary unit equation just proved. Both transposes agree.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3, transpose to exceptional counits; returned steps 6–8, including the balancing maps for iterated derived scalar extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-direct-image",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+  "place": "Proof paragraph 3; implemented with the existing canonical scalar/direct-image compositors and generic mate identities. Identity follows from the ordinary coefficient-chain law and its canonical scalar unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For closed immersions the exceptional comparison defined by transposing a scalar extended counit is natural and respects composite closed immersions and successive derived finite coefficient changes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For composed exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the whiskered composition of the pushforward functors' hom transformation with the pullback along $f \\\\ci\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let `C` be a category with chosen pullbacks. Let `f: I → J` and `g: J → K` be composable morphisms such that `f`, `g`, and their composition `g ∘ f` are all exponentiable. Let `(g ∘ f)^*` and `(g ∘ f)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) {U : X.Opens} [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst_1 : AlgebraicGeometry.IsOpenImmersion g] (M : Z.Modules),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictFunctorComp f g).hom.app M) \", \"doc\": \"For schemes $X, Y, Z$ and open immersions $f: X \\\\to Y$, $g: Y \\\\to Z$, the composition of the functors induced by $g$ on open subsets of $Y$ and by $f$ on open subsets of $X$ (via opposite category ope\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction, conjugate and mate formulas do not state both normalized closed-exceptional scalar cocycles with derived balancing identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit transposes for a family of closed exceptional adjunctions satisfy both geometric composition and coefficient composition cocycles without assuming they are isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Triple\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  {H : CategoryTheory.Functor C D} (t : CategoryTheory.Adjunction.Triple F G H) [inst_2 : G.Full] [inst_3 \", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, the composition of the counit $\\\\epsilon_1$ of the adjunction $F \\\\dashv G$ evaluated at $H(X)$ with the component $\\\\eta_X$ of the natural transformation $H\"}\n  {\"name\": \"CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Triple\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  {H : CategoryTheory.Functor C D} (t : CategoryTheory.Adjunction.Triple F G H) [inst_2 : F.Full] [inst_3 \", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, the composition of $F$ applied to the counit of the $G \\\\dashv H$ adjunction at $X$ with the component of the canonical natural transformation $F \\\\Rightarr\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_counit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\\n  (α : L₂ ⟶ L₁) (d : D),\\n  CategoryTheory.CategoryStruct.comp (L₂.map \", \"doc\": \"For adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and any natural transformation $ α: L₂ → L₁ $, the conjugate equivalence satisfies the equation $ L₂(β_d) ∘ ε₂_d = α_d ∘ ε₁_d $, where $ β $ is the corresp\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_counit_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\\n  (α : R₁ ⟶ R₂) (d : D),\\n  CategoryTheory.CategoryStruct.comp (L₂.map \", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, for any natural transformation $ α : R₁ ⟶ R₂ $ and object $ d $ in $ D $, the composition $ L₂(α) ∘ \\\\epsilon₂^d $ equals the composition $ \\\\text{conjugat\"}\n  {\"name\": \"CategoryTheory.Adjunction.Triple.leftToRight_app_obj\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Triple\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  {H : CategoryTheory.Functor C D} (t : CategoryTheory.Adjunction.Triple F G H) [inst_2 : F.Full] [inst_3 \", \"doc\": \"For any object $ X $ in category $ \\\\mathcal{D} $, the component of the natural transformation $ \\\\text{leftToRight} $ at $ G(X) $ is equal to the composition of the counit $ \\\\epsilon_{X} $ of the adjun\"}\n  {\"name\": \"CategoryTheory.Adjunction.Triple.map_rightToLeft_app\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Triple\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  {H : CategoryTheory.Functor C D} (t : CategoryTheory.Adjunction.Triple F G H) [inst_2 : G.Full] [inst_3 \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a triple of functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and $H: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ forming adjunctions \"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_counit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {E : Type u₃}\\n  [ℰ : CategoryTheory.Category.{v₃, u₃} E] {H : CategoryTheory.Functor D E} {I : CategoryTheory.Fu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $H \\\\dashv I$ between $\\\\mathcal{D}$ and $\\\\mathcal{E}$, the counit of the c\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, for any object $ d $ in category $ D $, the composition of $ L₂ $ applied to th\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction, conjugate and mate formulas do not state both normalized closed-exceptional scalar cocycles with derived balancing identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"conjugate\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.conjugateIsoEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) : (L₂ ≅ L₁) ≃ (R₁ ≅ R₂)\", \"doc\": \"Thus conjugation defines an equivalence between natural isomorphisms.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) : (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂)\", \"doc\": \"Given two adjunctions `L₁ ⊣ R₁` and `L₂ ⊣ R₂` both between categories `C`, `D`, there is a\\nbijection between natural transformations `L₂ ⟶ L₁` and natural transformations `R₁ ⟶ R₂`. This is\\ndefined as\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ : CategoryTheory.Functor C D} {R₁ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) : (CategoryTheory.conjugateEquiv adj₁ adj₁) (CategoryTheory.CategoryStruct.id L₁) = CategoryTheory.CategoryStruc\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ⟶ L₁) [CategoryTheory.IsIso α] : CategoryTheory.IsIso ((CategoryTheory.conjugateE\", \"doc\": \"If `α` is an isomorphism between left adjoints, then its conjugate transformation is an\\nisomorphism. The converse is given in `conjugateEquiv_of_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_of_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ⟶ L₁) [CategoryTheory.IsIso ((CategoryTheory.conjugateEquiv adj₁ adj₂) α)] : Cate\", \"doc\": \"If `α` is a natural transformation between left adjoints whose conjugate natural transformation\\nis an isomorphism, then `α` is an isomorphism. The converse is given in `conjugateEquiv_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ : CategoryTheory.Functor C D} {R₁ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) : (CategoryTheory.conjugateEquiv adj₁ adj₁).symm (CategoryTheory.CategoryStruct.id R₁) = CategoryTheory.Category\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : R₁ ⟶ R₂) [CategoryTheory.IsIso α] : CategoryTheory.IsIso ((CategoryTheory.conjugateE\", \"doc\": \"If `α` is an isomorphism between right adjoints, then its conjugate transformation is an\\nisomorphism. The converse is given in `conjugateEquiv_symm_of_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_of_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : R₁ ⟶ R₂) [CategoryTheory.IsIso ((CategoryTheory.conjugateEquiv adj₁ adj₂).symm α)] :\", \"doc\": \"If `α` is a natural transformation between right adjoints whose conjugate natural transformation is\\nan isomorphism, then `α` is an isomorphism. The converse is given in `conjugateEquiv_symm_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_adjunction_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {L R : CategoryTheory.Functor C C} (adj : L ⊣ R) (α : CategoryTheory.Functor.id C ⟶ L) (c : C) : ((CategoryTheory.conjugateEquiv adj CategoryTheory.Adjunction.id) α).app c = CategoryTheory.CategoryStruct.comp (α.app (R.obj c)) (adj.counit.app c)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_adjunction_id_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {L R : CategoryTheory.Functor C C} (adj : L ⊣ R) (α : R ⟶ CategoryTheory.Functor.id C) (c : C) : ((CategoryTheory.conjugateEquiv adj CategoryTheory.Adjunction.id).symm α).app c = CategoryTheory.CategoryStruct.comp (adj.unit.app c) (α.app (L.obj c))\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_leftUnitor_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R) : (CategoryTheory.conjugateEquiv adj (CategoryTheory.Adjunction.id.comp adj)) L.leftUnitor.hom = R.rightUnitor.inv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_rightUnitor_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R) : (CategoryTheory.conjugateEquiv adj (adj.comp CategoryTheory.Adjunction.id)) L.rightUnitor.hom = R.leftUnitor.inv\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction, conjugate and mate formulas do not state both normalized closed-exceptional scalar cocycles with derived balancing identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*(comp|paste)|conjugate.*(comp|counit)|tensor.*(baseChange|assoc)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"line\": \"65\", \"text\": \"  · cases LiesOver.embedding_comp_eq_or_conjugate_embedding_comp_eq w v with\"}\n  {\"file\": \"Mathlib/Tactic/Attr/Register.lean\", \"line\": \"125\", \"text\": \"-MonoidalCategory.tensor_comp, -MonoidalCategory.tensor_comp_assoc,\"}\n  {\"file\": \"Mathlib/Tactic/Attr/Register.lean\", \"line\": \"157\", \"text\": \"The general algorithm it follows is to push the associators `TensorProduct.assoc` and\"}\n  {\"file\": \"Mathlib/Tactic/Attr/Register.lean\", \"line\": \"162\", \"text\": \"* It regards `TensorProduct.map`, `TensorProduct.assoc`, `TensorProduct.comm` as the primitive\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"279\", \"text\": \"  simp [ComplexEmbedding.conjugate_coe_eq, ← hr, Complex.conj_ofReal]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"374\", \"text\": \"theorem liesOver_conjugate_extensionEmbedding [ContinuousSMul v.Completion w.Completion]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"line\": \"191\", \"text\": \"/-- The conjugate of a complex embedding as a complex embedding. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"line\": \"195\", \"text\": \"theorem conjugate_comp (φ : K →+* ℂ) (σ : k →+* K) :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"line\": \"196\", \"text\": \"    (conjugate φ).comp σ = conjugate (φ.comp σ) :=\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"line\": \"259\", \"text\": \"def IsConj : Prop := conjugate φ = φ.comp σ\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"line\": \"273\", \"text\": \"  simp only [conjugate_coe_eq, RingHom.coe_comp, Function.comp_apply, ← h.eq,\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"108\", \"text\": \"theorem mk_conjugate_eq (φ : K →+* ℂ) : mk (ComplexEmbedding.conjugate φ) = mk φ := by\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"110\", \"text\": \"  rw [apply, apply, ComplexEmbedding.conjugate_coe_eq, Complex.norm_conj]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"485\", \"text\": \"to its conjugate has signature `(-1) ^ nrComplexPlaces K`.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"488\", \"text\": \"    (ComplexEmbedding.involutive_conjugate K).toPerm.sign = (-1) ^ nrComplexPlaces K := by\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"266\", \"text\": \"    (w.comap (algebraMap k K)).embedding = (conjugate w.embedding).comp (algebraMap k K) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"268\", \"text\": \"  simp [conjugate_comp, comap_embedding_of_isReal _ ((isRamified_iff.1 h).2)]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"299\", \"text\": \"  simp_rw [conjugate_comp, IsSelfAdjoint.star_iff, ← isReal_mk_iff, ← comap_mk, mk_embedding] at hw\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"616\", \"text\": \"theorem embedding_comp_eq_or_conjugate_embedding_comp_eq :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"618\", \"text\": \"      (conjugate w.embedding).comp (algebraMap K L) = v.embedding := by\"}\n  {\"file\": \"Mathlib/Tactic/Widget/StringDiagram.lean\", \"line\": \"41\", \"text\": \"associated with the objects. The tensor product `X ⊗ Y` corresponds to putting strings associated\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"line\": \"56\", \"text\": \"open scoped ComplexConjugate ComplexOrder in\"}\n  {\"file\": \"Mathlib/Algebra/Azumaya/Defs.lean\", \"line\": \"56\", \"text\": \"  simp [TensorProduct.Algebra.moduleAux, ← mul_assoc]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"line\": \"936\", \"text\": \"lemma LieSubmodule.lowerCentralSeries_tensor_eq_baseChange (k : ℕ) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Kronecker.lean\", \"line\": \"517\", \"text\": \"        (((A ⊗ₖₜ[R] B) ⊗ₖₜ[R] C).map (TensorProduct.assoc R α β γ)) =\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction, conjugate and mate formulas do not state both normalized closed-exceptional scalar cocycles with derived balancing identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For closed immersions the exceptional comparison defined by transposing a scalar extended counit is natural and respects composite closed immersions and successive derived finite coefficient changes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [IsClosedImmersion f] [IsClosedImmersion g] : IsClosedImmersion (f ≫ g)\", \"doc\": \"The composition of two closed immersions of schemes is again a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsClosedImmersion g] : IsClosedImmersion (f ≫ g) ↔ IsClosedImmersion f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If $ g $ is a closed immersion, then the composition $ f \\\\circ g $ is a closed immersion if and only if $ f $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsPreimmersion f] (hf : IsClosed (Set.range f)) : IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsClosedImmersion (f ≫ g)] [IsSeparated g] : IsClosedImmersion f\", \"doc\": \"If the composition $ f \\\\circ g $ is a closed immersion and $ g $ is a separated morphism of schemes, then $ f $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsClosedImmersion f → Sort u} →\\n      (t : AlgebraicGeometry.IsClosedImmersion f) →\\n        ([toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f] →\\n            (isClosedEmbedding : Topology.IsClosedEmbeddin\", \"doc\": \"Given a property $ P $ of closed immersions $ f: X \\to Y $, if $ P $ holds for any closed immersion constructed from a closed embedding of topological spaces and surjective maps on stalks, then $ P $ h\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction, conjugate and mate formulas do not state both normalized closed-exceptional scalar cocycles with derived balancing identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right mates of scalar extension and closed direct image comparisons are natural and satisfy geometric and coefficient composition cocycles",
+   "results": "OK 8 hits: ModuleCat.homEquiv_extendScalarsComp, LightCondensed.ihom_map_val_app, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.ihomPoints_symm_comp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.ExponentiableMorphism.coev_naturality",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: generic mate identities or underived module scalar maps do not include the specified finite pro-etale derived scalar identifications and ordinary direct-image normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(vcomp|hcomp|counit)|conjugateEquiv_comp",
+   "results": "OK 7 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: generic mate identities or underived module scalar maps do not include the specified finite pro-etale derived scalar identifications and ordinary direct-image normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, \"comp\"",
+   "results": "OK 4 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: generic mate identities or underived module scalar maps do not include the specified finite pro-etale derived scalar identifications and ordinary direct-image normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion exceptional inverse image coefficient change counit mate compatible with composition and derived scalar extension",
+   "results": "OK 8 hits: AlgebraicGeometry.IsClosedImmersion.comp, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.RestrictionCoextensionAdj.counit', AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.IsClosedImmersion.comp_iff, ModuleCat.ExtendRestrictScalarsAdj.counit, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: generic mate identities or underived module scalar maps do not include the specified finite pro-etale derived scalar identifications and ordinary direct-image normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mates of natural transformations commute with vertical and horizontal composition of squares between adjunctions",
+   "results": "OK 8 hits: CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_apply, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_square, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.Bicategory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: generic mate identities or underived module scalar maps do not include the specified finite pro-etale derived scalar identifications and ordinary direct-image normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-closed-shriek",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-closed-shriek",
+   "place": "Proof paragraph 3, transpose to exceptional counits; returned steps 6–8, including the balancing maps for iterated derived scalar extension",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-closed-transpose-cocycles",
+  "worker": "stage1",
+  "summary": "Kept the conditional finite-Tor domains and the specified ordinary coefficient map unchanged. Constructed balanced derived scalar identifications from existing K-flat nodes, then expanded both cocycles as equalities of exceptional-counit transposes. No new nodes; no claim that an invertible left square has an invertible mate.",
+  "blueprint": "lem-coef-finite-closed-shriek, final proof paragraph: transpose both composites to the same composite of exceptional counits; steps 1 and 5 expand successive scalar changes, steps 3 and 4 expand exceptional transposition and closed composition, step 6 supplies the identity.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolution existence for ordinary scalar reassociation; the unit has no resolution-existence node."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic preservation of flat-term K-flat complexes by arbitrary ring change, needed for computing successive derived scalar extensions; no exceptional-functor assertion is taken."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic computation and resolution independence of ordinary derived change of rings, used to descend the balanced chain maps."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "The canonical ordinary direct-image composition identification already specified by the item; used only at finite coefficient stages."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic descent of natural transformations from flat-term K-flat representatives to the derived category, used to descend the balancing maps (the citation of the parent's returned step 8)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-b0864928a",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-b0864928a (reviewer sub-agent of L); spot-checked: The mathematics is correct and complete; one citation dropped from the parent's old proof is restored. Context: the item is one of the six new nodes of Q14's merged re-split of lem-coef-finite-closed-shriek. Its statement and stmt_deps are identical to the Q14 copy, it has 0 new nodes, it has no repair note, and it is not superseded. Source: master lem-coef-finite-closed-shriek.md, proof paragraph 3, and the parent's returned steps 6-8 in the Q14 report. These map onto the new proof as 6→step 3, 7→step 4 and 8→steps 1, 2, 5 and 6, all written out in more detail. Checks: b is the mate (def-weil-pbc-adjunction-mate) of d=c^{-1} with L1=I_A, R1=J_A, L2=I_B, R2=J_B, G=S_Z, H=S_X, which gives the displayed counit equation. Inverting the geometric clause of lem-coef-finite-direct-image (f=t, g=i) gives d_it=d_iT_A∘I_Bd_t, and inverting its scalar clause gives d^{A,C}=V_X d^{A,B}∘d^{B,C}S_Z. Its pro-etale clause covers inputs of etale origin; B and C are finite rings by def-weil-l-adic-coefficient-extension(4); c^{B,C} on J_BS_XM is the same node at base (L,n). I recomputed every line of the transposes in steps 3, 4 and 5 (naturality of eps_t at b_i, the counit equations with P=U_AN, naturality of d_i at eps_t, the composite counit eps_i∘I eps_t, naturality of d^{B,C} at b^{A,B}). Identity: the transpose of c is the plain counit, so b=1. Edge cases Z/l^2→F_l (no flatness used), identity coefficients and the empty scheme all hold. The duplicate search found nothing that states these cocycles: supported-triangle-mate-identification, finite-free-extension, locally-closed-scalar-pasting and constructible-exceptional-adjunction-coefficients all differ. No SGA. FIX: step 1 descended the balancing maps to D(A) by saying 'on roofs between them' and dropped old step 8's citation of lem-weil-pbc-site-derived-tensor-descent, whose equivalence W^{-1}P→D(A) is what that descent needs. I restored that node in step 1's text and uses, in proof_deps and in tool_uses; there is no cycle. Accepted tool_uses: lem-pc-kflat-resolution, lem-pur-kflat-change-of-rings, lem-pur-derived-change-of-rings, lem-weil-derived-direct-image-composition and lem-weil-pbc-site-derived-tensor-descent, all generic black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedCoefficientTransposeCocycles",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedCoefficient.closedTranspose_counit_naturality",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.C",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.restrict",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.PushClosed",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.push",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.ScalarClosed",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.scalar",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.comparison",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.transpose",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.RightClosed",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.right",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.ClosedAdjunction",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.scalarComp",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.pushComp",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.restrictionUnit",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.scalarUnit",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.ring",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.closedTranspose",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.rightComp",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.closedTranspose_counit_naturality",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.closedTranspose_geometric",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.closedTranspose_coefficient",
+   "AlgebraicGeometry.ProEtale.ClosedCoefficient.closedTranspose_identity"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedCoefficientTransposeCocycles.lean",
+  "statement": "theorem closedTranspose_counit_naturality (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E L : WeilConjectures.ConstructibleExceptionalCoefficients.FieldStage.{u} l) (m n : ℕ) (X Z : Over (Spec (.of D.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] (i : Z ⟶ X) [IsClosedImmersion i.left] (a : ClosedAdjunction (ring l E m) i.left) (b : ClosedAdjunction (ring l L n) i.left) (φ : ULift.{u + 1, u} (ring l E m) →+* ULift.{u + 1, u} (ring l L n)) (hZ : ScalarClosed φ Z.left) (hX : ScalarClosed φ X.left) [IsIso (comparison φ i.left a.pushClosed b.pushClosed hZ hX)] : (∀ M : C (ULift.{u + 1, u} (ring l E m)) X.left, (push (ULift.{u + 1, u} (ring l L n)) i.left b.pushClosed).map ((closedTranspose φ i.left a b hZ hX).app M) ≫ b.adjunction.counit.app ((scalar φ X.left hX).obj M) = (asIso (comparison φ i.left a.pushClosed b.pushClosed hZ hX)).inv.app ((right (ring l E m) i.left a.rightClosed).obj M) ≫ (scalar φ X.left hX).map (a.adjunction.counit.app M)) ∧ (∀ (M N : C (ULift.{u + 1, u} (ring l E m)) X.left) (f : M ⟶ N), (scalar φ Z.left hZ).map ((right (ring l E m) i.left a.rightClosed).map f) ≫ (closedTranspose φ i.left a b hZ hX).app N = (closedTranspose φ i.left a b hZ hX).app M ≫ (right (ring l L n) i.left b.rightClosed).map ((scalar φ X.left hX).map f))",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Four statements give the specified counit and naturality, geometric cocycle, coefficient cocycle, and identity law. Helpers restrict the actual published finite-Tor predicate, ordinary comparison, exceptional functor, scalar compositors and chained adjunction; no exceptional invertibility is assumed. Positive levels m,n,s denote exponents m+1,n+1,s+1. The standard ULift coefficient coordinates retain the small-site object universe u+1 and morphism universe u."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23f089c10",
+  "group": "N9",
+  "result": "pass",
+  "note": "Clause-by-clause match to the node. c = dep finiteCoefficientChangeDirectImageMap (restricted to constructibleFiniteTor, which includes étale origin); b = mateEquiv of (asIso c).inv; Ri^! = sfFiniteExceptionalFixed with ofIsProper (= node's ν^* f^× Rν_*, same as parent and RingSystem.finiteRight); S and balancing = pbcFixedScalarExtension/Comp, exactly those used by the dep's _comp/_coefficientChain; rightComp = rightAdjointUniq of the chained adjunction; geometric, coefficient and identity clauses typed and oriented correctly; no IsIso on b. Adjunction as data (like dep Operation.adjunction): all clauses hold for any adjunction given the dep's c-cocycles, so the statement is stronger, not hollow; the parent instantiates its canonical counit. IsIso(c) premises dischargeable from the stmt_dep etaleOrigin_isIso (advisory). Universes u/u+1 kept; m,n,s ≥ 1 via +1; statement verbatim; 22 declarations present; sorry-only theorems; source/blueprint/proof docstrings present; node unchanged except lean. Advisory: unused public imports; pbcFixedScalarExtension owner not in stmt_deps (inherited via lem-coef-finite-direct-image); second reading by the same worker. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261025T180855-L-4046264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

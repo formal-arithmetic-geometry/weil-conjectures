@@ -16,9 +16,13 @@
  ],
  "proof": [
   {
-   "text": "Put (X=operatorname{Spec}(B)), (S=operatorname{Spec}(A)), let\n(f:X\to S) be induced by (A\to B), let\n(mathcal F=\\widetilde N), and let (x) be the point (mathfrak q), with\n(s=f(x)) corresponding to (mathfrak p=mathfrak qcap A).  The finite\npresentation of (B) over (A) makes (f) locally of finite presentation,\nand finiteness of (N) makes (mathcal F) of finite type.  Moreover\n(mathcal F_x=N_{mathfrak q}) and (mathcal O_{S,s}=A_{mathfrak p});\nthe assumed (A)-flatness localizes to (A_{mathfrak p})-flatness.  Apply\nthe etale-neighborhood proposition (Tag 05I6) to obtain an etale\nneighborhood ((S',s')\\to(S,s)) and an open (V) around the induced point\n(x') in (X\\times_S\\operatorname{Spec}(mathcal O_{S',s'})) on which the\npulled-back module is finitely presented and flat over\n(mathcal O_{S',s'}).",
+   "text": "Pass to a common universe by ULift, transporting finite generation, finite presentation of the algebra, and the localized module. For X = Spec B, S = Spec A, and F = tilde N, use the affine finite-type criterion and the localization description of the affine stalk. Flatness over A passes to the base local ring by Module.flat_iff_of_isLocalization. Apply the finite-type flat etale-neighborhood theorem (Tag 05I6).",
    "uses": [
-    "lem-trf-finite-type-flat-etale-neighborhood"
+    "lem-trf-finite-type-flat-etale-neighborhood",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-localization-flat"
    ],
    "elementary": false,
    "source": {
@@ -27,13 +31,16 @@
    }
   },
   {
-   "text": "The local-ring map $\\mathcal O_{X,x}\\to\\mathcal O_{X\\times_S\\operatorname{Spec}(\\mathcal O_{S',s'}),x'}$ is flat and local: the etale map is flat by the definition of etale morphism, and passage to the indicated local rings is a localization, hence flat by Tag 00HT. Therefore it is faithfully flat by the flat-local-faithfully-flat lemma. By the definition of stalk and affine pullback, the stalk of the pulled-back sheaf at $x'$ identifies with $\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{X\\times_S\\operatorname{Spec}(\\mathcal O_{S',s'}),x'}$, and this module is finitely presented over the latter local ring by Step 1.",
+   "text": "Let j be the composite of the neighborhood open immersion with its projection to X. It is flat: the canonical spectrum-of-stalk map is flat, the etale map is flat, and flatness is stable under composition and base change. Its stalk map is local, so flat-local faithful flatness applies. A finite presentation of the restricted sheaf gives a finite free presentation of its stalk by exists_finitePresentation_source_stalk. Identify open restriction with pullback using uniqueness of left adjoints, use the tensor-pullback composition isomorphism, and identify the resulting stalk with base change along j using exists_tensorPullback_stalk_iso.",
    "uses": [
     "def-weil-etale-morphism",
-    "lem-weil-pbc-localization-flat",
+    "lem-sbc-canonical-stalk-spectrum-flat",
     "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-finite-presentation-source-stalk",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-stalk-pullback",
     "def-pc-fibre-product",
+    "def-weil-pbc-module-stalk",
     "def-weil-pbc-module-tensor-product",
     "def-weil-pbc-module-finite-type-presentation"
    ],
@@ -44,7 +51,7 @@
    }
   },
   {
-   "text": "Apply faithful-flat descent of finite presentation for modules (Tag 03C4(2)) to the map in Step 2 and the module $\\mathcal F_x$. Since its tensor product with the faithfully flat target is the finitely presented stalk from Step 2, $\\mathcal F_x$ is finitely presented over $\\mathcal O_{X,x}$, which is the asserted conclusion.",
+   "text": "Apply faithfully flat descent of finite presentation to the stalk module. Transport the conclusion back along the canonical equivalence of localization models and the equivalence of their localized coefficient rings. Finally descend the common-universe ULift module using ULift.moduleEquiv. All these transports preserve the stated scalar actions by their algebra-map compatibility.",
    "uses": [
     "lem-trf-finite-presentation-module-descent-flat-local"
    ],
@@ -61,15 +68,24 @@
   "def-weil-pbc-module-finite-type-presentation",
   "def-weil-pbc-module-stalk",
   "def-weil-pbc-module-tensor-product",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sbc-canonical-stalk-spectrum-flat",
   "lem-trf-finite-presentation-module-descent-flat-local",
   "lem-trf-finite-type-flat-etale-neighborhood",
+  "lem-weil-pbc-finite-presentation-source-stalk",
   "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-localization-flat"
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "P8",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 05I7 (lemma-finite-type-flat-at-point-local), specialized to affine schemes."
+  "place": "Tag 05I7, affine translation; implemented using the stated Tag 05I6 neighborhood and faithful-flat descent, with affine-stalk and universe-transport glue proved privately."
  },
  "mathlib_searches": [
   {
@@ -180,5 +196,26 @@
    "def-weil-pbc-localization-at-prime"
   ]
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015527-L-2413714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

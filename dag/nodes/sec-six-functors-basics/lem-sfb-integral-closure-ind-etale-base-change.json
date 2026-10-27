@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Choose a filtered presentation of $S$ by finitely presented etale $R$-algebras using [def-weil-pbc-ind-etale-algebra]. By [lem-weil-pbc-filtered-category-directed-cofinal], reindex it by a nonempty directed set $I$, retaining $S$ and its coprojections $a_i:S_i\\to S$ as the colimit in commutative $R$-algebras. Choose a common ambient universe for the diagram and its algebra carriers. Put $D_i=S_i\\otimes_R B$, $E_i=S_i\\otimes_R C$, $D=S\\otimes_R B$, and $E=S\\otimes_R C$. For every transition $u:i\\le j$ use $a_u\\otimes1$ on these tensor products. By [lem-sfb-integral-closure-etale-base-change], $q_i:E_i\\to\\overline{S_i}^{\\,D_i}$ is an isomorphism, with $q_i(s\\otimes c)=s\\otimes c$. Denote its composite with the subring inclusion by $f_i:E_i\\to D_i$; in particular $f_i$ is injective. All the rings $R,B,S_i$ satisfy that leaf's hypotheses, without hypotheses on the transition maps.",
+   "text": "Choose a filtered etale presentation of $S$ using [def-weil-pbc-ind-etale-algebra], and reindex by a nonempty directed set $I$ using [lem-weil-pbc-filtered-category-directed-cofinal]. Use a common universe for its index and ring carriers. Write $a_i:S_i\\to S$, $E_i=S_i\\otimes_R C$, $D_i=S_i\\otimes_R B$, $E=S\\otimes_R C$, $D=S\\otimes_R B$. Each stage is etale in the geometric sense used by [lem-sfb-integral-closure-etale-base-change]; applying that node, the stage comparison $q_i:E_i\\to\\overline{S_i}^{\\,D_i}$ is an isomorphism with formula $s\\otimes c\\mapsto s\\otimes c$. Its composite $f_i:E_i\\to D_i$ is therefore injective with image exactly that integral closure.",
    "uses": [
     "def-weil-pbc-ind-etale-algebra",
     "lem-weil-pbc-filtered-category-directed-cofinal",
@@ -27,11 +27,9 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise], applied with $N=C$ and $N=B$, every element of $E$ or $D$ lifts to a stage; an element at a stage mapping to zero is zero after a later transition. The stage-to-limit and transition maps are ring maps. The tensor map $f:E\\to D$ induced by $C\\subseteq B$ commutes with them: on $s\\otimes c$ both composites give $a_i(s)\\otimes c$, and pure tensors generate [def-weil-pbc-module-tensor-product]. For $t\\in E$, lift it to $t_i\\in E_i$. The element $f_i(t_i)$ is integral over $S_i$ by step 1. Map its monic annihilating polynomial coefficientwise along $a_i$; the resulting monic polynomial over $S$ annihilates $f(t)$ because ring maps preserve sums and products [def-weil-pbc-integral-closure]. Thus $f$ lands in $C_S$ and defines the required $S$-algebra map $q:E\\to C_S$. Its pure-tensor formula is the one in the statement.",
+   "text": "Apply [lem-sfb-directed-tensor-integral-embedding] to the inclusion $v:C\\hookrightarrow B$. Step 1 verifies its two stagewise assumptions. It gives the injective comparison $q:E\\to C_S$ with the required pure-tensor formula, and compatibility of the underlying tensor maps with every transition and coprojection.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-integral-closure"
+    "lem-sfb-directed-tensor-integral-embedding"
    ],
    "elementary": false,
    "source": {
@@ -40,21 +38,10 @@
    }
   },
   {
-   "text": "If $q(t)=0$, lift $t$ to $t_i\\in E_i$. Then $f_i(t_i)$ maps to zero in $D$. The eventual-zero clause of [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] for $N=B$ gives $u:i\\le j$ with $(a_u\\otimes1)f_i(t_i)=0$. By the pure-tensor compatibility this is $f_j((a_u\\otimes1)t_i)=0$. The injectivity of $f_j$ from step 1 gives $(a_u\\otimes1)t_i=0$; its image in $E$ is $t$, so $t=0$. Applying this to a difference proves that $q$ is injective.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; finite-stage case Tag 03GE, lemma-integral-closure-commutes-etale."
-   }
-  },
-  {
-   "text": "Let $x\\in C_S$ and lift its underlying element to $x_i\\in D_i$ using [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] with $N=B$. For any $S_i$-algebra $T$ obtained from $S_j$ ($j\\ge i$) or $S$, the maps $T\\otimes_{S_i}(S_i\\otimes_R B)\\to T\\otimes_R B$, $t\\otimes(s\\otimes b)\\mapsto ts\\otimes b$, and $t\\otimes b\\mapsto t\\otimes(1\\otimes b)$ are mutually inverse: balancing moves $s$ to the first factor, and the formulas preserve multiplication and units. Likewise $T\\otimes_{S_i}S_i\\cong T$ via $t\\otimes s\\mapsto ts$ [def-weil-pbc-module-tensor-product]. Under these identifications $1\\otimes x_i$ over $S$ is $x$. Restrict the directed system to indices $j\\ge i$; it still has colimit $S$, since every index has a common upper bound with $i$, and any compatible cocone on the tail extends uniquely by those upper bounds. The colimit is also one in commutative rings: a cocone of commutative rings $(T,(b_j)_{j\\ge i})$ on the tail becomes a cocone of commutative $R$-algebras when $T$ is given the structure map $b_j\\circ(R\\to S_j)$, which is independent of $j$ because the transition maps are $R$-algebra maps and any two indices have a common upper bound; the induced $R$-algebra map $S\\to T$ is the unique ring map compatible with the $b_j$, since such a map is automatically $R$-linear for this structure. Apply [lem-weil-pbc-integral-tensor-generators-colimit-descent] with initial index $i$, $B_0=S_i$, $C_0=D_i$, the structure map $S_i\\to D_i$, and the singleton $\\{x_i\\}$. Its integrality hypothesis is exactly $x\\in C_S$. It gives $j\\ge i$ for which the image $x_j$ of $x_i$ in $D_j$ is integral over $S_j$.",
+   "text": "For $x\\in C_S$, lift its underlying element to $x_i\\in D_i$ by [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] with $N=B$. Apply [lem-sfb-directed-algebra-tail-base-change] at $i$. The tail $J_i=\\{j\\mid i\\le j\\}$ is nonempty and directed with initial index $i$, and its ring colimit is $S$. Put $\\varphi_i(s)=s\\otimes1$. The specified $\\lambda_T,\\theta_T$ identify $1\\otimes\\varphi_i$ with the scalar structure map and $1\\otimes x_i$ over $S$ with $x$. Thus [lem-weil-pbc-integral-tensor-generators-colimit-descent] applies on $J_i$ with $B_0=S_i$, $C_0=D_i$, $\\varphi_0=\\varphi_i$, and the finite singleton $\\{x_i\\}$; it requires no finite-type assumption on $D_i$. It yields $j\\ge i$ where $1\\otimes x_i$ is integral over $S_j\\otimes_{S_i}S_i$. Under the same $\\lambda_{S_j},\\theta_{S_j}$, this says exactly that $x_j=(a_{ij}\\otimes1)x_i$ in $D_j$ is integral over $S_j$.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
-    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-directed-algebra-tail-base-change",
     "lem-weil-pbc-integral-tensor-generators-colimit-descent"
    ],
    "elementary": false,
@@ -64,7 +51,7 @@
    }
   },
   {
-   "text": "By the finite-stage isomorphism $q_j$ in step 1, there exists $t_j\\in E_j$ with $f_j(t_j)=x_j$. Its image $t$ in $E$ satisfies $q(t)=x$: their underlying elements in $D$ agree by the compatibility checked in step 2, and the inclusion $C_S\\subseteq D$ is injective. This proves surjectivity. Together with step 3, $q$ is a bijective $S$-algebra homomorphism, hence an isomorphism (its inverse preserves operations by applying the injective map $q$). Zero rings cause no exception, and the nonempty index used above comes from filteredness, not from a hypothesis that a ring is nonzero.",
+   "text": "By step 1 choose $t_j\\in E_j$ with $f_j(t_j)=x_j$. Its image $t\\in E$ satisfies $q(t)=x$: step 2 gives $f(t)=(a_j\\otimes1_B)f_j(t_j)=(a_j\\otimes1_B)x_j=(a_i\\otimes1_B)x_i=x$ in $D$, using $a_j a_{ij}=a_i$; the subring inclusion $C_S\\hookrightarrow D$ detects this equality. Hence $q$ is surjective and injective. The inverse of this bijective $S$-algebra map preserves operations by applying the injective map $q$, so $q$ is the claimed isomorphism. Zero rings and noninjective transitions require no exception.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -75,8 +62,8 @@
  ],
  "proof_deps": [
   "def-weil-pbc-ind-etale-algebra",
-  "def-weil-pbc-integral-closure",
-  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-directed-algebra-tail-base-change",
+  "lem-sfb-directed-tensor-integral-embedding",
   "lem-sfb-integral-closure-etale-base-change",
   "lem-weil-pbc-filtered-category-directed-cofinal",
   "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
@@ -198,8 +185,8 @@
   "date": "2026-10-22",
   "item": "lem-sfb-integral-closure-ind-etale-base-change",
   "worker": "stage1",
-  "summary": "Expanded Stacks 0CBF using directed reindexing, tensor element lifting and eventual zero, and singleton integral-element descent. Added one Mathlib leaf for the finite etale stage; statement retained. No new unsplit lemma, Lean edit, or build.",
-  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof, paragraph (3), open direct image: finite tame root extension input; comparison of the concrete finite normalization with its strict-local pullback. The split realizes precisely the integral-closure base-change input in the finite tame normalization strict-local comparison.",
+  "summary": "Repair of the human-mandated re-split: retain the statement and full original argument; extract two comparable statement-only lemmas, for the stagewise integral tensor embedding and for upper-tail ring-colimit/tensor compatibility. The item is now a short assembly with the existing finite-stage comparison and singleton integrality descent. All prior metadata and searches retained; no Lean edits or builds. Rebased retained work against the current shared DAG after return 33b7c5946db: re-read all cited statements, retain the reviewed geometric-etale finite-stage interface, and distinguish the two newly landed 0CBF normalization nodes. Latest return 6ee65f6dca6 (2026-10-22 10:18 UTC): rechecked all current cited statements and retained both independent new jobs; explicitly identify the nonempty directed upper tail and its initial index, the structure map and both tensor identifications in singleton descent, and the subring inclusion used in the final equality. Current-base dry run passed before these clarifications; final checks are rerun after them. Resumed repair of returned head 11a79b7e227 (2026-10-22 14:05 UTC): the current base still differs only in the retained proof fields; all current cited statements and seven quotation checks were read again. Step 4 now displays the coprojection equation identifying the chosen stage preimage with the original limit element.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof, paragraph (3), open direct image: finite tame root extension input; comparison of the concrete finite normalization with its strict-local pullback. The split realizes precisely the integral-closure base-change input in the finite tame normalization strict-local comparison. Former steps 2-3 are assigned to lem-sfb-directed-tensor-integral-embedding; the upper-tail and tensor-comparison arguments of former step 4 to lem-sfb-directed-algebra-tail-base-change; reindexing, the finite-stage theorem, singleton descent, and final surjectivity remain explicit assembly steps.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-filtered-category-directed-cofinal",
@@ -221,12 +208,12 @@
   "lem-weil-pbc-integral-tensor-generators-colimit-descent"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q35-a224aeacf",
-  "group": "Q35",
+  "reviewer": "NT-cc-Q86-dbbefd149",
+  "group": "Q86",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-a224aeacf (reviewer sub-agent of L); spot-checked: The item matches Stacks 0CBF (algebra.tex l.40749) specialized to ind-étale, with no hypothesis added. The new leaf matches 03GE (l.40631) and specializes Mathlib TensorProduct.toIntegralClosure_bijective_of_smooth (Smooth/IntegralClosure.lean:380, map at :39-48). Steps 1-3 and 5 are correct: f_i injective from the stage isomorphisms; the monic equation pushed along a_i⊗1; eventual zero for N=B then injectivity of f_j; preimage under q_j. Edge cases S=0, B=0, R→B non-injective and non-injective transitions all hold. Two repairable faults, both fixed in fixes/. (1) C4/B3, step 1: the leaf defined étale inline as finite presentation plus unique square-zero lifting, but the S_i are étale in the DAG's sense (def-weil-pbc-scheme-conventions → def-weil-etale-morphism: lfp, flat, unramified). Identifying the two is Stacks 08WD and no node carries it. The leaf now states étale as Spec T→Spec R étale [def-weil-etale-morphism, def-weil-affine-spectrum], and its how names Spec_iff (RingHomProperties.lean:360) with the HasRingHomProperty instance (Morphisms/Etale.lean:56), RingHom.etale_algebraMap (RingHom/Etale.lean:37) and Etale→Smooth (Etale/Basic.lean:223). (2) E1-type gap, step 4: lem-weil-pbc-integral-tensor-generators-colimit-descent (Lean: F : I ⥤ CommRingCat) needs a colimit in commutative rings, while S is the colimit in R-algebras. I added the elementary connected-diagram argument. The descent application is checked: B_0=S_i, C_0=D_i, φ_0 the structure map, s={x_i}; the hypothesis is x∈C_S under the tensor-cancellation identifications. No duplicates among the 03GE/03GG/0CBF/integral-closure hits: trait normalization charts, weakly-étale Noetherian normalization, localization, integral base change. The three tool_uses are generic algebra and accepted. No SGA source is cited.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-dbbefd149 (reviewer sub-agent of L); spot-checked: Fourth delivery of the 2026-10-21 human re-split (released note: keep_plan, at least 2 new nodes, assembly of at most 3000 characters). Heads 33b7, 6ee6 and 11a7 were PASSed, and their landings were refused only because the side completion still had to be promoted. live and side-live still hold the old 5-step proof and neither new node, so this delivery is not superseded. Compared with 11a7, both new nodes are byte-identical; only item step 4 changed, now spelling out f(t)=(a_j⊗1)f_j(t_j)=(a_j⊗1)x_j=(a_i⊗1)x_i=x, plus the split_report summary. I re-read everything. Source: Stacks 0CBF (algebra.tex l.40749) allows arbitrary R→S and R→B; the étale finite stage is 03GE, through the Mathlib leaf lem-sfb-integral-closure-etale-base-change. The statement is unchanged and no SGA is cited. Step 1: the ind-étale definition (Spec sense) plus directed-cofinal reindexing plus the leaf make f_i injective with image the integral closure of S_i. Step 2: the embedding node with v=C⊂B gives q injective into C_S, with its formula and both commuting squares. Step 3: the elementwise node gives x_i; the tail node gives the ring colimit on J_i and identifies θ_S(1⊗φ_i)λ_S^{-1} with t↦t⊗1 and θ_S(1⊗x_i) with x; singleton descent (B_0=S_i, C_0=D_i, no finiteness) then gives x_j integral over S_j. Step 4 is an elementary assembly and is correct. Both new nodes are true and I recomputed them. Embedding: lift, push the monic equation along a_i, injectivity by eventual zero and injective f_j. Tail: cofinal tail; the R-structure from b_j is independent of j by common upper bounds, so every ring map is R-linear; θ/λ are standard cancellations whose formulas and naturality check. Edge cases checked: zero rings, constant system, noninjective transitions. The nodes do not restate the item (no étaleness or surjectivity; no integrality), are of comparable size (1315/1718 characters) and cite only definitions. All old arguments are kept: old steps 2-3 go to the embedding node, old step 4 to the tail node plus item step 3. No duplicates found (checked lem-a1-directed-ring-cocone-recognition, nagata finite-data, the 0CBF normalization nodes and the pbc descent nodes). Searches: three kinds, with LeanSearch recorded unavailable for the embedding node. The three generic tool_uses are accepted. The unit route is unchanged."
  },
  "lean": {
   "module": "Sheaf.RingTheory.IntegralClosureIndEtaleBaseChange",
@@ -245,5 +232,17 @@
   "group": "NR",
   "result": "pass",
   "note": "Statement matches node and Stacks 0CBF (algebra.tex l.40748), specialised from smooth to etale stages. Independent universes u v w; only hypothesis is the recorded RingHom.IndEtaleAcrossUniverses (ULift transport of RingHom.IndEtale/Algebra.IndEtale); conclusion is Function.Bijective of Mathlib's canonical TensorProduct.toIntegralClosure R S B (s⊗c↦s⊗c, codRestrict of Algebra.TensorProduct.map), equivalent to the isomorphism via AlgEquiv.ofBijective. No extra hypotheses; zero rings, non-injective maps, R=S all covered. Node copy differs from live only in lean; lean.statement verbatim. Mathlib has only smooth/localization/tower/mvPolynomial versions, so the new module is correct. Docstrings carry source, blueprint id and proof steps 1-5; no definitions, only sorry. Report has Worker report and Second reading by NR sections. Advisory: three proof-dependency imports (recorded modules, present in side-live) unused while the proof is sorry. No compile run (no file changed); worker reports clean server compile and deliver2 --no-push OK."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

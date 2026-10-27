@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-regular-single-reduction",
+ "kind": "statement",
+ "title": "Reduction preserves a regular single module in degree zero",
+ "statement": "For an adic principal datum d on a domain A with nonzero generator π, let H be a completed-coefficient module sheaf with injective π action on sections. Every completed finite reduction of H[0] has zero cohomology in every degree other than zero.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429, sufficient uniformizer-injectivity criterion; normalized principal quotient triangle (Stacks Tag 06YU)."
+ },
+ "proof": [
+  {
+   "text": "The single-object homology comparison identifies degree-zero cohomology with H, carrying the injective scalar action across a linear isomorphism. All other cohomology objects are zero and have subsingleton sections, so their scalar action is injective as well. Apply the canonical cohomology comparison for principal reduction in every degree. Outside degree zero its source is extension of a zero object and is therefore zero. No finiteness or flatness assumption on H is used.",
+   "uses": [
+    "lem-weil-pbc-uniformizer-reduction-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-uniformizer-reduction-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429, sufficient uniformizer-injectivity criterion; normalized principal quotient triangle (Stacks Tag 06YU). Complete G1 proof restored by E1 from returned repair packet 48160399e7852af6."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LevelwiseAdicTruncations",
+  "date": "2026-10-22",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-levelwise-truncations",
+   "place": "Sufficient condition in (1): comparison of cohomology with ordinary reduction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RegularSingleReduction",
+  "file": "lean/Sheaf/Paper/RegularSingleReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.principalReduction_single_isConcentrated",
+  "statement": "theorem principalReduction_single_isConcentrated\n    (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsDomain A]\n    (d : AdicCoefficientDatum A) (π : A) (hI : d.ideal = Ideal.span {π})\n    (hπ : π ≠ 0) (H : pbcModules T (pbcAdicCompletion T d))\n    (hinj : ∀ U : T.ProEtᵒᵖ, Function.Injective (fun x : H.val.obj U ↦\n      (CompletedConstantReduction.base T d.ideal ≫\n        CompletedConstantReduction.completedComparison T d.ideal d.quotientFinite).hom.app U\n          ((adicLisseConstantUnit T A).app U π) • x)) (n : ℕ) :\n    ∀ q : ℤ, q ≠ 0 → IsZero ((DerivedCategory.homologyFunctor _ q).obj\n      ((pbcDerivedExtend (pbcAdicProjection T d n)).obj\n        ((DerivedCategory.singleFunctor _ 0).obj H)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "rg",
+   "query": "singleFunctorCompHomologyFunctorIso|HomologySequence|nonempty_iso_singleFunctor_obj_homologyFunctor_obj",
+   "results": "The existing single-object homology and concentrated-complex theorems apply. The project normalized reduction triangle supplies the needed coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "Use these declarations; no new spectral sequence or periodic-resolution computation is needed for this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of derived tensor with a regular principal quotient and periodic resolution of powers of a nonzero divisor",
+   "date": "2026-10-22",
+   "results": "Found cyclic-group resolutions and generic projective Tor vanishing, but no module-sheaf quotient result.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.Exact, CategoryTheory.End, pow",
+   "date": "2026-10-22",
+   "results": "The unqualified query returned no match; the project exactness declarations and Mathlib refinements provide the usable API.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*resolution|periodic.*Tor|principal.*quotient",
+   "date": "2026-10-22",
+   "results": "Found principal quotient ring results, but no periodic derived module-sheaf computation.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of a module with injective multiplication by a regular element has no nonzero degree cohomology",
+   "results": "IsRegular.smul_right_injective (Mathlib.Algebra.Module.Torsion.Free); IsSMulRegular (Mathlib.Algebra.Regular.SMul); Module.Flat.isSMulRegular_of_nonZeroDivisors (Mathlib.RingTheory.Flat.TorsionFree); Module.IsTorsionFree.isSMulRegular (Mathlib.Algebra.Module.Torsion.Free); groupCohomology (Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic); IsSMulRegular.smulShortComplex_shortExact (Mathlib.RingTheory.Regular.Category); Module.IsTorsionFree.mk (Mathlib.Algebra.Module.Torsion.Free); isSMulRegular_iff_torsionBy_eq_bot (Mathlib.Algebra.Module.Torsion.Basic)",
+   "date": "2026-10-22",
+   "verdict": "No exact match: injectivity and ordinary regular-module sequences do not state derived scalar concentration for the completed coefficient sheaf."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T040155-L-2822089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T040155-L-2822089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

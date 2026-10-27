@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-fundamental-ray-regular-power",
+ "kind": "statement",
+ "title": "A positive multiple of a fundamental character extends from the big cell",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type, with no nontrivial smooth connected normal unipotent subgroup. Unipotent means unipotent matrices in a faithful representation at geometric points. Fix a split maximal torus $T_H$, a Borel subgroup $B_H$, unipotent radical $U_H$, projection $p_H:B_H\\to T_H$, and roots and coroots as in [lem-sfb-reductive-borel-pair-structure]. Assume moreover that $H$ is semisimple and simply connected, meaning that it has no nontrivial smooth connected solvable normal subgroup and every surjective homomorphism to $H$ from a semisimple group with finite central kernel is an isomorphism. Solvable means that successive commutator subgroup schemes become trivial; finite means finite-dimensional coordinate algebra and central means commuting after every scalar extension. Let $\\omega_1,\\ldots,\\omega_r$ be its fundamental characters, characterized by $\\langle\\omega_i,\\alpha_j^\\vee\\rangle=\\delta_{ij}$ as in [lem-sfb-simply-connected-character-lattice]. Write $w_0$ for the Weyl group element reversing the positive roots, choose a representative $n_0\\in N_H(T_H)(F)$, and put $C=U_Hn_0B_H$. Here $N_H(T_H)$ is the subgroup normalizing $T_H$, the Weyl group is $N_H(T_H)(F)/T_H(F)$, and $(w\\chi)(t)=\\chi(n^{-1}tn)$. For every $1\\le i\\le r$ there exist an integer $d_i>0$ and $h_i\\in F[H]$ whose restriction to $C$ is\n$$h_i(u n_0 b)=\\bigl((w_0\\omega_i)(p_H(b))\\bigr)^{-d_i}.$$\nThe formula is an identity of regular functions, equivalently it holds after every commutative $F$-algebra extension. No characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 22.24 and proof, printed p.469, followed by the first three sentences of the proof of Lemma 22.25 (the regular function for a positive multiple). Definition 22.21 and Proposition 22.22 fix the normalization on U n_0 B."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-simply-connected-character-lattice"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i$; if $r=0$ there is nothing to prove. The parabolic input supplies $B_H\\subseteq P_i\\ne H$. Chevalley's theorem gives a finite-dimensional rational representation $V$ and a line $L=Fv$ whose stabilizer on every $F$-algebra is exactly $P_i$. The action on $L$ is a group-scheme character of $P_i$. Its restriction to $U_H$ is trivial by the unipotent-to-multiplicative input. Thus, writing $\\lambda$ for its restriction to $T_H$, the identity $B_H=U_H\\rtimes T_H$ gives $bv=\\lambda(p_H(b))v$ after every scalar extension. Replace $V$ by the smallest rational submodule $M$ containing $v$. Such a submodule exists by intersecting the submodules containing $v$; tensoring vector spaces over $F$ preserves these intersections inside the finite-dimensional $V$. The line has the same stabilizer in $M$ as in $V$, since $M\\otimes_F A\\hookrightarrow V\\otimes_F A$ for every $A$.",
+   "uses": [
+    "lem-sfb-maximal-parabolic-reflections",
+    "lem-sfb-chevalley-scheme-line-stabilizer",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.24, p.469; Theorem 4.27 and Remark 4.30, pp.94--96; Borel decomposition 21.68(b)."
+   }
+  },
+  {
+   "text": "Choose $T_H\\simeq\\mathbf G_m^s$. Repeatedly apply the multiplicative-group weight-basis theorem to the coordinate factors. The factors commute, so each preserves all weight spaces already obtained. This yields $M=\\bigoplus_\\nu M_\\nu$, a finite direct sum for actual characters $\\nu\\in X^*(T_H)$, valid after every scalar extension. Put $Q_+=\\sum_{\\alpha\\in\\Delta}\\mathbf Z_{\\geq0}\\alpha$, and write $\\eta\\leq\\xi$ if $\\xi-\\eta\\in Q_+$. The cyclic-weight bound says $M_\\lambda=Fv$ and every weight $\\nu$ satisfies $\\nu\\leq\\lambda$. For any representative $n$ of $w\\in W$, the identity $t(nx)=n(n^{-1}tn)x=(w\\nu)(t)nx$ for $x\\in M_\\nu$ shows that $n:M_\\nu\\xrightarrow{\\sim}M_{w\\nu}$. In particular the finite set of weights is Weyl invariant.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis",
+    "lem-sfb-primitive-cyclic-weight-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12, pp.234--235; Proposition 22.17 and Lemma 22.15, pp.466--467."
+   }
+  },
+  {
+   "text": "Write $\\lambda=\\sum_j d_j\\omega_j$, with $d_j\\in\\mathbf Z$, using the simply connected character lattice. For $j\\ne i$, the rank-one reflection input gives an element of $W$ acting by $x\\mapsto x-\\langle x,\\alpha_j^\\vee\\rangle\\alpha_j$ and permuting $\\Phi$; it agrees with $s_j$ on $X\\otimes\\mathbf Q$, which the simple roots span: the composite of the two reflections permutes the finite spanning set $\\Phi$, so has finite order, and is unipotent, fixing $\\alpha_j$ and acting trivially modulo $\\mathbf Q\\alpha_j$. Choose a representative $n_j\\in N_H(T_H)(F)$. It belongs to $P_i(F)$, so preserves $Fv$; it need not fix $v$ pointwise. By the preceding weight calculation its nonzero image of $v$ has weight both $\\lambda$ and $s_j\\lambda$. Hence $s_j\\lambda=\\lambda$. The reflection formula then gives $d_j\\alpha_j=0$, so $d_j=0$ since the simple roots form a rational basis. Thus $\\lambda=d\\omega_i$ for an integer $d$. The weight $s_i\\lambda$ occurs and is at most $\\lambda$, so $d\\alpha_i=\\lambda-s_i\\lambda\\in Q_+$. Linear independence of the simple roots implies $d\\geq0$.",
+   "uses": [
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-maximal-parabolic-reflections",
+    "lem-sfb-primitive-cyclic-weight-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.24, p.469; dominance argument in Proposition 22.17, p.467; reflection convention in Section 21c. Simple reflections in W: Theorem 21.11, pp.428--430."
+   }
+  },
+  {
+   "text": "In fact $d>0$. If $d=0$, all weights $\\nu$ satisfy $\\nu\\in-Q_+$. Weyl invariance also gives $w_0\\nu\\in-Q_+$. Since $w_0^2=1$ and $w_0$ takes positive roots to negative roots, applying $w_0$ to this second inclusion gives $\\nu\\in Q_+$. The simple-root basis makes $Q_+\\cap(-Q_+)=\\{0\\}$, so the only weight is zero. The decomposition and the cyclic bound $M_0=Fv$ then imply $M=Fv$. Every element of $H(A)$ preserves $L_A$ for every $A$, contradicting that its scheme-theoretic stabilizer is $P_i\\ne H$. Set $d_i=d$.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-primitive-cyclic-weight-bound",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.24, last sentence, p.469, with its nontriviality inference expanded; Definition 21.72, p.446."
+   }
+  },
+  {
+   "text": "Put $\\mu=w_0\\lambda$. This is the least weight of $M$: for any weight $\\nu$, the weight $w_0\\nu$ satisfies $\\lambda-w_0\\nu\\in Q_+$, and applying $w_0$ gives $\\nu-\\mu\\in Q_+$. Here $w_0(Q_+)=-Q_+$ because $w_0^2=1$ and $w_0\\Phi^+=-\\Phi^+$. The vector $z=n_0^{-1}v$ has weight $w_0^{-1}\\lambda=\\mu$. Normalizer conjugation identifies its weight space with $M_\\lambda=Fv$, so $M_\\mu=Fz$. Define the linear functional $\\ell:M\\to F$ by $\\ell(z)=1$ and by zero on every other weight space. In particular, for every $A$ and $t\\in T_H(A)$, $\\ell_A(ty)=\\mu(t)\\ell_A(y)$.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-primitive-cyclic-weight-bound",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.15, p.466, and the matrix-coefficient passage in the proof of Lemma 22.25, p.469; lowest-weight calculation expanded."
+   }
+  },
+  {
+   "text": "We check explicitly that $\\ell$ is $U_H$-invariant. For a positive root $\\alpha$, choose the cited parametrization $u_\\alpha:\\mathbf G_a\\xrightarrow{\\sim}U_\\alpha$. If $y\\in M_\\nu$, regularity gives a finite polynomial $u_\\alpha(a)y=\\sum_{m\\geq0}a^m y_m$ with $y_0=y$. Compare coefficients of the universal variable $a$ in $t u_\\alpha(a)y=u_\\alpha(\\alpha(t)a)ty$, using the conjugation identity of the parametrization. It gives $t y_m=\\nu(t)\\alpha(t)^m y_m$, so $y_m\\in M_{\\nu+m\\alpha}$. Every weight $\\nu$ is at least $\\mu$. Consequently a term with $m>0$ cannot have weight $\\mu$, since $\\alpha\\in Q_+\\setminus\\{0\\}$ and the simple roots are independent. Applying $\\ell$ therefore gives $\\ell_A(u_\\alpha(a)y)=\\ell_A(y)$ for all $A$, first on each weight space and then by linearity. The positive-root product isomorphism expresses every $u\\in U_H(A)$ as a product of these root elements. Thus $\\ell_A(uy)=\\ell_A(y)$ for every $A,u,y$. This polynomial coefficient argument uses torus characters throughout, including in positive characteristic.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.14 and its coefficient comparison, p.466; Theorem 21.68(a), p.445; the matrix coefficient in Lemma 22.25, p.469, made explicit."
+   }
+  },
+  {
+   "text": "Since $B_H=U_H\\rtimes T_H$, the preceding identities imply $\\ell_A(by)=\\mu(p_H(b))\\ell_A(y)$ for all $A,b,y$. Define $h_i(g)=\\ell(g^{-1}v)$. This is in $F[H]$: inversion and the representation are morphisms, and $\\ell$ is linear. For $u\\in U_H(A)$ and $b\\in B_H(A)$, the Borel eigenvector identity gives $u^{-1}v=v$, and hence\n$$h_i(u n_0 b)=\\ell_A(b^{-1}n_0^{-1}u^{-1}v)=\\mu(p_H(b))^{-1}\\ell_A(z)=\\bigl((w_0\\omega_i)(p_H(b))\\bigr)^{-d_i}.$$\nThese calculations hold on every commutative $F$-algebra, so they give equality of regular functions on $U_H\\times_F B_H$. By the open-immersion chart this is precisely the required restriction to $C$. The normalization $\\ell(z)=1$ accommodates the prescribed representative $n_0$; there is no extraction of a $d_i$-th root and no division by $d_i$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 22.21 and Proposition 22.22, pp.468--469; first three sentences of Lemma 22.25 proof, p.469, expanded as a normalized matrix coefficient."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-maximal-parabolic-reflections",
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-primitive-cyclic-weight-bound",
+  "lem-sfb-simply-connected-character-lattice",
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-reductive-rank-one-reflections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 22.24 and the regular-function passage in Lemma 22.25, p.469; Chevalley 4.27, torus decomposition 12.12, root action 22.14, cyclic weight bound 22.17 and proper parabolic 21.88. The matrix coefficient and nontriviality inference are expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a simply connected semisimple algebraic group a positive multiple of each fundamental weight gives a regular semi invariant function on the big Bruhat cell",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.exists_isRegular\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [inst_5 : AddCommGroup M] [inst_6 : Module R M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule R L M] [inst_9 : Module.Finit\", \"doc\": \"If $ R $ is an infinite commutative ring, then there exists an element $ x $ in the Lie algebra $ L $ over $ R $ such that $ x $ is a regular element in the Lie module $ M $. Here, a regular element $\"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieAlgebra.exists_isRegular\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [IsDomain R] [Infinite R], ∃ x, LieAlgebra.IsRegular R x\", \"doc\": \"For any infinite commutative ring $ R $, there exists a regular element $ x $ in the Lie algebra $ L $ over $ R $. An element $ x $ is regular if its adjoint action $ \\\\text{ad}_x $ has a non-vanishing\"}\n  {\"name\": \"LieModule.exists_isRegular_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [inst_5 : AddCommGroup M] [inst_6 : Module R M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule R L M] [inst_9 : Module.Finit\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ a finitely generated $ R $-module. If the finite rank of $ M $ satisfies $ \\\\operatorname{finrank}_R(M) \\\\leq |R| $, then there exists an element $ x \\\\in L \"}\n  {\"name\": \"LieModule.genWeightSpace_nsmul_add_ne_bot_of_le\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a commutative ring that is a domain and torsion-free, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free, Noetherian Lie module over $ L $. For any non-zero linear functio\"}\n  {\"name\": \"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a commutative ring that is a domain and torsion-free, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free, Noetherian Lie module over $ L $. For any non-zero linear functio\"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_6 : H.IsCartanSubalgebra]\\n  [LieModule.IsTriangularizable K (↥H) L] (α β : LieModule.Weigh\", \"doc\": \"For a non-zero root $\\\\alpha$ and weight $\\\\beta$ in a Lie algebra, the root space associated to the weight $n\\\\alpha + \\\\beta$ is non-trivial (not the zero subspace) if and only if the integer $n$ satisf\"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_6 : H.IsCartanSubalgebra]\\n  [LieModule.IsTriangularizable K (↥H) L] (α β : LieModule.Weigh\", \"doc\": \"For a non-zero weight $\\\\alpha$ and weight $\\\\beta$, the root space corresponding to the root $n\\\\alpha + \\\\beta$ is non-trivial (not the zero subspace) if and only if the integer $n$ lies in the closed i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal parabolic subgroup is the stabilizer of a line in a rational representation and gives a positive multiple of a fundamental weight",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MulAction.IwasawaStructure.T\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"{M : Type u_1} →\\n  [inst : Group M] → {α : Type u_2} → [inst_1 : MulAction M α] → MulAction.IwasawaStructure M α → α → Subgroup M\", \"doc\": \"Given a group $M$ acting on a type $\\\\alpha$, the function $T$ maps each element $a \\\\in \\\\alpha$ to a subgroup of $M$ defined by the Iwasawa structure on the group action. Specifically, for each $a$, $T\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]\\n  (a : ↑(NumberField.mixedEmbedding.fundamentalCone.integerSet K)),\\n  MulAction.stabilizer (↥(NumberField.Units.torsion K)) a = ⊥\", \"doc\": \"For any element $ a $ in the intersection of the fundamental cone and the integer lattice in the mixed embedding space of a number field $ K $, the stabilizer subgroup of the action of the torsion uni\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"Subgroup.IsRegularAtInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"{R : Type u_1} → [inst : Ring R] → Subgroup (GL (Fin 2) R) → Prop\", \"doc\": \"A subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ is regular at infinity if its strict periods subgroup equals its periods subgroup, i.e., when $\\\\mathcal{G}.\\\\text{strictPeriods} = \\\\mathcal{G}.\\\\text{\"}\n  {\"name\": \"RootPairing.span_orbit_eq_top\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [NeZero 2]\\n  [P.IsIrreducible] (i : ι), Submodule.span R (MulAction.orbit (↥P.weylGroup) (P.ro\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, and for any index $ i $, the span of the orbit of the root $ P.\\\\text{root}(i) $ under the Weyl group of $ P $ is equal to the entire module $ \"}\n  {\"name\": \"MulAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [Nontrivial X] [MulAction.IsPreprimitive G X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a)\", \"doc\": \"Let $G$ be a group acting on a non-trivial set $X$. If the action is preprimitive, then for any element $a \\\\in X$, the stabilizer subgroup of $a$ is a maximal subgroup of $G$.\"}\n  {\"name\": \"Subgroup.widthInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"Subgroup (GL (Fin 2) ℝ) → ℝ\", \"doc\": \"The width at infinity of a subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ is defined as the strict width at infinity of the subgroup generated by adjoining additive inverses to $\\\\mathcal{G\"}\n  {\"name\": \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] {𝒢 : Subgroup (GL (Fin 2) K)}\\n  [𝒢.HasDetPlusMinusOne] {g : GL (Fin 2) K},\\n  g ∈ 𝒢 →\\n    ↑g 1 0 = 0 →\\n      (g.IsParabolic ↔\\n        (∃ x, x ≠ 0 ∧ g = Matrix.GeneralLinearGroup.upperRightHom x) ∨\\n          ∃ x, x ≠ 0 \", \"doc\": \"For a matrix $ g $ in the subgroup of $ \\\\mathrm{GL}(2, R) $ with determinant $ \\\\pm 1 $ and $ g_{1,0} = 0 $, $ g $ is parabolic if and only if there exists a non-zero $ x \\\\in R $ such that $ g $ equals\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fundamentalWeight\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "fundamentalWeight|fundamental.weight|Bruhat|parabolic.*stabilizer",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/Lattice.lean\", \"line\": \"23\", \"text\": \"`ι → K` by the homothety relation, one obtains the vertices of what is called the Bruhat-Tits tree\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A multiple of a fundamental weight gives a regular function on a semisimple algebraic group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.Weight.coe_weight_mk\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) (h) : (↑(⟨χ, h⟩ : Weight R L M) : L → R) = χ\", \"doc\": \"For a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and a weight function $ \\\\chi : \\\\mathfrak{g} \\\\to R $ with non-trivial genera\"}\n  {\"name\": \"LieModule.mem_weightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) (m : M) : m ∈ weightSpace M χ ↔ ∀ x, ⁅x, m⁆ = χ x • m\", \"doc\": \"An element $ m $ of a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ belongs to the weight space corresponding to a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\t\"}\n  {\"name\": \"LieModule.Weight.toFun\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{R : Type u_2} →\\n  {L : Type u_3} →\\n    {M : Type u_4} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"The function associated to a weight in a Lie module over a nilpotent Lie ring, mapping elements of the Lie algebra $ L $ to the commutative ring $ R $. This constructs the canonical linear map corresp\"}\n  {\"name\": \"LieModule.LinearWeights.map_smul\", \"module\": \"Mathlib.Algebra.Lie.Weights.Linear\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  {inst_3 : AddCommGroup M} {inst_4 : Module R M} {inst_5 : LieRingModule L M} {inst_6 : LieModule R L M}\\n  {inst_7 : LieRing.IsNilpotent L} [self : LieModule.LinearWeights R L M] (χ : L\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, if the generalized weight space associated with a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$ is non-\"}\n  {\"name\": \"LieModule.genWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated to $\\\\chi$ \"}\n  {\"name\": \"LieModule.Weight.instFunLike\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \": FunLike (Weight R L M) L R\", \"doc\": \"The type of weights in a Lie module over a nilpotent Lie ring is equipped with a canonical function-like structure, mapping elements of the Lie algebra $ L $ to the commutative ring $ R $. This struct\"}\n  {\"name\": \"LieModule.Weight.noConfusionType\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"Sort u →\\n  {R : Type u_2} →\\n    {L : Type u_3} →\\n      {M : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : LieRing L] →\\n            [inst_2 : LieAlgebra R L] →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : Module R M] →\\n                  [inst_5 : LieRingModule L\", \"doc\": \"For a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and a weight function $ \\\\chi : \\\\mathfrak{g} \\\\to R $, this case analysis fun\"}\n  {\"name\": \"LieAlgebra.IsKilling.coroot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"(α : Weight K H L) : H\", \"doc\": \"For a weight $\\\\alpha$ in the dual of the Cartan subalgebra $H$, the coroot is defined as $2 \\\\cdot \\\\left(\\\\alpha(\\\\chi^{-1}(\\\\alpha))\\\\right)^{-1} \\\\cdot \\\\chi^{-1}(\\\\alpha)$, where $\\\\chi: H \\\\to H^*$ is the i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dominant-character-highest-line",
+  "date": "2026-10-23",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Nonvanishing of rho section modules by a highest-weight matrix coefficient in the Steinberg endomorphism detection input. Milne 22.20 proof: Lemma 22.24 and proof, printed p.469, followed by the first three sentences of the proof of Lemma 22.25 (the regular function for a positive multiple). Definition 22.21 and Proposition 22.22 fix the normalization on U n_0 B.",
+   "via": [
+    "lem-sfb-dominant-character-highest-line",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fundamental-ray-regular-power",
+  "worker": "stage1",
+  "summary": "Followed Milne 22.24/22.25 with one proper-parabolic input. Reused the live Chevalley scheme-line stabilizer, cyclic weight bound, multiplicative-group decomposition, root coordinates and Bruhat charts. Gave the reflection calculation, strict positivity and a normalized inverse matrix coefficient on all algebras; no highest-weight existence theorem is used. Fixed doubled TeX backslashes without changing the mathematical statement.",
+  "blueprint": "Read the latest sk-thm-sf-ctf-stability unit and direct-images proof (3). This item is a supporting input along its inherited alteration/GIT/Haboush branch, at Milne 22.24/22.25 in dominant-character-highest-line. blueprint_refs.py ancestor returns null, retained with the inherited via chain. Steps 1--4 realize the positive fundamental-ray weight; steps 5--7 realize its regular-function extension. Whole-blueprint searches for parabolic, line stabilizer, primitive, fundamental weight and highest weight found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-cc2c7fb56",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-cc2c7fb56 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new node lem-sfb-maximal-parabolic-reflections and every cited statement in full, and checked them against Milne iAG2017 21.88 (p.452) and 22.24/22.25 (p.469). The mathematics is correct. Milne says the representative 'fixes v'; the proof correctly uses only that it preserves Fv. The suppressed d_i>0 inference is expanded correctly (step 4: Q+∩−Q+=0 gives M=Fv, so the stabilizer would be all of H, contradicting P_i≠H). Steps 5-7 build an explicit lowest-weight coefficient ℓ(g^{-1}v), U-invariant by polynomial coefficient comparison on every A, and its value on u n0 b has the right sign and inverse. The new node is exactly Milne 21.88 and is true: rank 0 is vacuous, rank 1 gives P=B, and I also checked SL3 and SL2×SL2. It is a statement only (B1), self-contained and not a restated clause of the item. It is not a duplicate: regular-cocharacter-borel-description covers only regular cocharacters, and rank-one-reflections, Bruhat-cells and rho-orbit give no intermediate subgroups. FIX (C1/C4): step 3 used a representative n_j of s_j∈W, but no cited node puts s_j in W. Borel-pair gives only the automorphism of X, Bruhat-charts gives representatives only for elements already in W, and the new node is vacuous without that. I added lem-sfb-reductive-rank-one-reflections to step 3 and proof_deps, with a three-line identification of its reflection with the borel-pair s_j on X_Q, the span of Δ (the composite is unipotent and of finite order, so it is the identity). I also added borel-pair-structure to the uses of steps 4 and 5, for Φ+⊆Q+. Batch 5: the flagged citations (primitive-cyclic-weight-bound, root-subgroup-parametrizations, borel-pair-structure in the new node, and my added rank-one-reflections, which has the same closure) reach only the generic trf fppf-covering base change and fpqc smooth descent, through the structure theory of reductive groups. Neither is a statement or proof step of the trace formula or Poincaré duality, so this is accepted. Only Milne is used, no SGA. All proof_deps are in this unit, so there are no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
+}

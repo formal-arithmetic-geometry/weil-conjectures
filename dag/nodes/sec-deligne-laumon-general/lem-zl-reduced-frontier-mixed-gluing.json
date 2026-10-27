@@ -19,121 +19,91 @@
  ],
  "proof": [
   {
-   "text": "All functors below act on geometric base changes to $k$, with the given $k_0$-structures retained for Frobenius. The schemes in the chain are separated and of finite type: on an affine chart a closed subscheme has ring $A/I$, which is generated over $k_0$ by the images of generators of $A$. Finite type over a field implies Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; every open subscheme is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so its local finite-type presentations give a finite affine cover. Separatedness is inherited by these subschemes. [lem-pod-separated-finite-type-base-change] supplies the same hypotheses over $k$. By [lem-zl-immersion-weil-local-behavior], restrictions are exact heart functors. For every closed inclusion $i$, [lem-weil-pbc-closed-immersion-finite] and [lem-zl-finite-adic-direct-image] make $Ri_*$ an exact functor of constructible hearts. Its Weil lift is [prop-weil-operations]. Exactness is also valid on Weil sheaves: the underlying heart is abelian [def-weil-constructible-heart], and exact Frobenius pullback takes a kernel or cokernel diagram to a kernel or cokernel diagram. The commuting Weil square therefore induces invertible Weil maps on its kernel and cokernel; their universal properties are the same among commuting morphisms. This uses [lem-a1-constructible-pullback-t-exact] and the definition of Weil morphism [def-weil-weil-sheaf-complex]. Thus forming these subobjects and quotients stays in the stated Weil heart.",
+   "text": "Apply immersion/reduction filtration transport to each closed inclusion and to the reduction. Package its canonical derived carrier, adjunction and normalized unit as ZlFrontierClosedImage. Its exact image functors preserve each pure quotient with its assigned real weight. Compare its open left adjoint to the prescribed open shriek by uniqueness of adjoints; preservation transports through that natural isomorphism.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-zl-immersion-weil-local-behavior",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-zl-finite-adic-direct-image",
-    "prop-weil-operations",
-    "def-weil-constructible-heart",
-    "lem-a1-constructible-pullback-t-exact",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Final paragraph: exactness of restrictions and closed direct image; all schemes and inclusions in the preceding two paragraphs."
-   }
-  },
-  {
-   "text": "For an open inclusion $j$, [lem-zl-extension-by-zero-punctual] states exactness on constructible Weil sheaves and preservation of punctual purity of each real weight. For a closed inclusion $i$, its finiteness from [lem-weil-pbc-closed-immersion-finite] allows [lem-zl-finite-pushforward-punctual] to be applied: $i_*$ preserves punctual purity of the same weight. Together with Step 1, these facts prove preservation of a particular finite filtration. Namely, if $0=G_0\\subset\\cdots\\subset G_n=G$, applying either exact functor $T$ gives monomorphisms $TG_s\\to TG_{s+1}$ and short exact sequences $0\\to TG_{s-1}\\to TG_s\\to T(G_s/G_{s-1})\\to0$. Thus the new quotients are the images of the old quotients, pure of exactly the same assigned weights. All arrows have their induced Weil structures. This proves the component extension-by-zero assertion, as well as preservation of mixedness and every specified upper bound in [def-weil-punctual-weights].",
-   "uses": [
-    "lem-zl-extension-by-zero-punctual",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-zl-finite-pushforward-punctual",
+    "lem-zl-immersion-filtered-reduction-transport",
     "def-weil-punctual-weights"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Final paragraph: “Both $j_!$ and $i_*$ are exact and preserve purity of a sheaf already pure on its support”."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final three paragraphs: finite clopen reconstruction, open-closed localization, backward gluing and reduction."
    }
   },
   {
-   "text": "For any of the complementary pairs $j:U_0\\hookrightarrow S_0$, $i:C_0\\hookrightarrow S_0$ in the argument, apply [prop-sf-open-closed-triangle-all-stages] at $\\Lambda=\\Qlb$ to a constructible Weil sheaf $H$. It gives the triangle $j_!j^*H\\to H\\to i_*i^*H\\to j_!j^*H[1]$, with the actual counit and unit as its first two arrows. Steps 1 and 2 put its three vertices in the ordinary constructible heart. Clause 4 of [lem-weil-heart-short-exact-triangles] then gives $0\\to j_!j^*H\\to H\\to i_*i^*H\\to0$ in that heart. The triangle's first two arrows are Weil-equivariant because both immersions descend to $k_0$. The kernel and cokernel description of Step 1 therefore makes this a short exact sequence of Weil sheaves. Taking $S_0=Z_a$, $C_0=Z_{a+1}$ gives precisely every short exact sequence required in the statement.",
+   "text": "Apply Weil-heart localization to each complementary pair. Compare the two open left adjoints and the two closed right adjoints by adjoint uniqueness. Their counit and unit equations give an isomorphism of short complexes; thus the actual prescribed open counit and chosen normalized closed unit give the asserted short exact sequence. The same localization lemma makes every sheaf on the final empty closed member zero.",
    "uses": [
-    "prop-sf-open-closed-triangle-all-stages",
-    "lem-weil-heart-short-exact-triangles"
+    "lem-zl-weil-heart-localization-exact"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Final paragraph, displayed open–closed sequence and sentence “All inclusions are defined over the chosen finite field”."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final three paragraphs: finite clopen reconstruction, open-closed localization, backward gluing and reduction."
    }
   },
   {
-   "text": "The splicing operation used below is clause 2 of [lem-a1-mixed-direct-summand], with its hypotheses checked in Step 3. Explicitly, for $0\\to A\\to B\\xrightarrow{\\pi}C\\to0$ and filtrations $A_r,C_s$, first use the subobjects $A_r\\subset B$, then the inverse-image subobjects $\\pi^{-1}(C_s)\\subset B$. The latter start at $\\pi^{-1}(0)=A$ and end at $B$. Their successive quotients are $C_s/C_{s-1}$: the quotient map onto $C_s$ is surjective with kernel $A$, and then quotienting by the inverse image of $C_{s-1}$ has kernel exactly $\\pi^{-1}(C_{s-1})$. The initial successive quotients are $A_r/A_{r-1}$. Kernels, images and these inverse images are constructible Weil subobjects by Step 1. Hence this finite filtration keeps the assigned pure weights of both input filtrations, even when their order is arbitrary, and keeps a common upper bound. No splitting of the short exact sequence is assumed.",
+   "text": "The common-stage compositor is Frobenius-equivariant by the normalized-compositor lemma. The already proved IsoAlgebra.mapOfNatIsoCompIsoOfIso lifts it to Weil pairs; full-subcategory restriction gives the Weil-heart composition isomorphism. Use it to identify all iterated restrictions in the given frontier, respecting ambient_next.",
    "uses": [
-    "lem-a1-mixed-direct-summand"
+    "lem-zl-weil-pull-compositor-equivariance"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Final paragraph: “Splice the resulting finite filtrations using inverse images under the quotient map”."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final three paragraphs: finite clopen reconstruction, open-closed localization, backward gluing and reduction."
    }
   },
   {
-   "text": "For each $a$, apply finite induction on the number $N_a$ of clopen components of $U_a$. For $N_a=0$, $U_a=\\varnothing$ and its only sheaf is zero, with the empty filtration: the empty covering forces a sheaf of modules on the empty site to have only its zero section, and all coefficient constructions preserve this zero object. For $N_a>0$, choose one component $V=U_{a,b}$ and let $C$ be the union of the remaining components. These are an open subscheme and its complementary closed subscheme of $U_a$, both defined over $k_0$. Put $H=\\mathcal F|_{U_a}$. Inverse images compose: for the immersions $V\\hookrightarrow U_a\\hookrightarrow X_0$ the composition isomorphism $H|_V\\cong\\mathcal F|_{V}$ is a Weil isomorphism by [prop-weil-operations], and likewise for the components of $C$. Taking images of a filtration under a Weil isomorphism keeps its quotients up to isomorphism. So the given filtration supplies $H|_V$, and the induction hypothesis, applied to $C$ with its $N_a-1$ components, supplies $H|_C$. Step 2 extends their filtrations by $V\\hookrightarrow U_a$ and $C\\hookrightarrow U_a$, and Steps 3 and 4 splice them to a filtration of $H$. This proves that $\\mathcal F|_{U_a}$ is mixed. Its filtration has the same list of pure weights as the component filtrations, concatenated in the chosen induction order, so a common bound $w$ is preserved.",
+   "text": "For any common bound w choose finite mono-chain presentations of the mixed restrictions on the clopen pieces, and choose the pure quotient weights appearing in these presentations. Apply the prescribed clopen filtration theorem to each open difference. Its common-bound clause proves that the open restriction is mixed of weights at most w, including an empty component set.",
    "uses": [
-    "prop-weil-operations"
+    "lem-zl-clopen-prescribed-weil-filtration",
+    "def-weil-punctual-weights"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Penultimate paragraph: “On a finite disjoint union, extend the filtrations of its components by zero and concatenate them”."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final three paragraphs: finite clopen reconstruction, open-closed localization, backward gluing and reduction."
    }
   },
   {
-   "text": "Set $\\mathcal F_a=\\mathcal F|_{Z_a}$. The backward induction assertion is that $\\mathcal F_a$ has a finite Weil filtration whose pure quotient weights belong to the concatenated lists of the prescribed component filtrations for indices $c\\ge a$. Its base is $a=t$: $Z_t=\\varnothing$ gives the zero sheaf and the empty filtration. Given the assertion for $a+1$, Step 5 supplies the open-stratum filtration at $a$. By the Weil composition isomorphisms of inverse images [prop-weil-operations], $j_a^*\\mathcal F_a\\cong\\mathcal F|_{U_a}$ and $i_a^*\\mathcal F_a\\cong\\mathcal F_{a+1}$, so these filtrations are filtrations of the two outer restrictions in Step 3. Apply Step 2 to extend it by $j_{a!}$, and to push the induction filtration forward by $i_{a*}$. The short exact sequence of Step 3 and the explicit splicing of Step 4 prove the induction assertion for $a$. There are only $t$ stages, so this proves the assertion for $a=0$, on $(X_0)_{\\mathrm{red}}$. In particular the number of filtration steps is finite and every original upper bound is retained. If no upper bound was prescribed, the finitely many input weights have a common real upper bound (use $0$ if the list is empty), so this also proves unbounded mixedness in the stated sense.",
+   "text": "Induct backwards through the finite closed chain from the empty last member. At each stage the preceding open restriction is mixed and the next closed restriction is mixed by induction. Exact open extension and closed image preserve their bounds. Apply the proved extension clause SfIsMixedOfWeightsAtMost.of_mono_cokernel to the localization mono; its cokernel is isomorphic to the third term by the cokernel universal property. This proves mixedness at that closed stage.",
    "uses": [
-    "def-weil-punctual-weights",
-    "prop-weil-operations"
+    "sk-d-dl-general-weights",
+    "lem-zl-immersion-filtered-reduction-transport",
+    "lem-zl-weil-heart-localization-exact"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Final paragraph: “starting at the last nonempty member of the chain” and “The finite induction gives a global finite Weil filtration”."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final three paragraphs: finite clopen reconstruction, open-closed localization, backward gluing and reduction."
    }
   },
   {
-   "text": "By [lem-weil-pbc-reduction-universal-homeomorphism], $r:(X_0)_{\\mathrm{red}}\\hookrightarrow X_0$ is a surjective closed immersion. Its complementary open is therefore empty. Apply the construction of Step 3 with $i=r$ and $H=\\mathcal F$: the open term is zero, so the resulting heart sequence is $0\\to0\\to\\mathcal F\\xrightarrow{\\eta}r_*r^*\\mathcal F\\to0$. Thus the actual reduction unit $\\eta$ is an isomorphism. It is Weil-equivariant by the Weil clause of [prop-sf-open-closed-triangle-all-stages]; its inverse is equivariant as well, by multiplying its commuting square by the inverse on both sides. Apply Step 2 to $r_*$ and the filtration of $r^*\\mathcal F=\\mathcal F_0$ from Step 6, and take inverse images along $\\eta$. This yields the required filtration of $\\mathcal F$ with the same quotient weights and upper bounds. This also treats nonreduced schemes without comparing coefficient models. If $t=0$, the reduction is empty and this isomorphism says $\\mathcal F=0$; zero sheaves and empty components were already included in the two inductions. None of these steps uses reality.",
+   "text": "The first closed ambient inclusion is surjective: its composite description is an isomorphism followed by the nilradical immersion, which is surjective by reduction universal homeomorphism. Immersion/reduction filtration transport makes its actual unit invertible. Push the bounded mixed filtration on the first closed stage forward and transport it along the inverse unit to F. Finally choose the initially unspecified bounds on the finitely many pieces and bound their finite range in the real numbers. Enlarging a bound preserves the same finite filtration, giving the existential mixedness assertion as well as every specified common bound.",
    "uses": [
     "lem-weil-pbc-reduction-universal-homeomorphism",
-    "prop-sf-open-closed-triangle-all-stages"
+    "lem-zl-immersion-filtered-reduction-transport",
+    "def-weil-punctual-weights"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph beginning “For a general constructible sheaf, pass … to the reduction”, and final paragraph, open–closed sequence and final finite filtration."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final three paragraphs: finite clopen reconstruction, open-closed localization, backward gluing and reduction."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-constructible-heart",
   "def-weil-punctual-weights",
-  "def-weil-weil-sheaf-complex",
-  "lem-a1-constructible-pullback-t-exact",
-  "lem-a1-mixed-direct-summand",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-heart-short-exact-triangles",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-reduction-universal-homeomorphism",
-  "lem-zl-extension-by-zero-punctual",
-  "lem-zl-finite-adic-direct-image",
-  "lem-zl-finite-pushforward-punctual",
-  "lem-zl-immersion-weil-local-behavior",
-  "prop-sf-open-closed-triangle-all-stages",
-  "prop-weil-operations"
+  "lem-zl-clopen-prescribed-weil-filtration",
+  "lem-zl-immersion-filtered-reduction-transport",
+  "lem-zl-weil-heart-localization-exact",
+  "lem-zl-weil-pull-compositor-equivariance",
+  "sk-d-dl-general-weights"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-  "place": "Final three paragraphs: componentwise filtration concatenation and backward open–closed gluing; reduction recovered by the same open–closed sequence with empty complement."
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Final three paragraphs: finite clopen reconstruction, open-closed localization, backward gluing and reduction."
  },
  "mathlib_searches": [
   {
@@ -227,73 +197,28 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-zl-reduced-frontier-mixed-gluing",
   "worker": "stage1",
-  "summary": "Split the frontier gluing argument using existing rational/common-stage exactness, punctual purity and Weil localization nodes. Wrote finite clopen induction, inverse-image filtration splicing, backward induction and reduction via the empty complementary open. No new nodes and no statement change.",
-  "blueprint": "thm-zl-real-mixed-by-curves.proof.md: paragraphs beginning “For a general constructible sheaf”, “All these finitely many subschemes” (componentwise concatenation), and “Mixed filtrations glue” (localization, exactness, splicing, backward induction).",
+  "summary": "Repair of the released 2026-10-22 re-split: unchanged statement and statement dependencies, four statement-only subarguments of comparable scope, and a short assembly. Old steps 1+3 become Weil-heart localization; 2+7 become immersion/reduction filtration transport; 5 becomes clopen assembly; 4+6 become finite exact-functor tower splicing. The report retains every original argument verbatim and explains the transfer.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md, paragraphs 6–9: reduction, componentwise concatenation, exact open–closed localization, inverse-image splicing and finite backward induction. The new nodes realize these subarguments without changing unit sk-i-dl-general-real step 4 (and its reduction input in step 1).",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Noetherianity of the schemes on which the localization operations are applied. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Quasi-compactness of their open subschemes; a generic geometric tool. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
-    "node": "lem-pod-separated-finite-type-base-change",
-    "why": "Preservation of the geometric separated finite-type setting under extension to k. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
-    "node": "lem-zl-immersion-weil-local-behavior",
-    "why": "Exact heart restriction along immersions, with its existing Weil lift. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-finite",
-    "why": "Finiteness of each closed inclusion, to apply finite direct-image results. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
-    "node": "lem-zl-finite-adic-direct-image",
-    "why": "Exactness of the actual rational/common-stage finite direct image. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
     "node": "prop-weil-operations",
-    "why": "Induced Weil lift of the actual closed direct image. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
-    "node": "lem-a1-constructible-pullback-t-exact",
-    "why": "Exact Frobenius pullback, so kernels and cokernels have induced invertible Weil structures. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
-    "node": "lem-weil-heart-short-exact-triangles",
-    "why": "Converting the existing geometric heart localization triangle into a short exact sequence. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
-   },
-   {
-    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
-    "why": "Surjectivity of the closed reduction immersion, so its open complement is empty. No statement of this unit supplies this generic input; its open–closed gluing route is retained."
+    "why": "Weil-equivariant composition comparisons identify successive and component restrictions. This generic six-functor coherence input already belongs to the accepted route; no local node supplies those comparisons."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-zl-immersion-weil-local-behavior",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-zl-finite-adic-direct-image",
-  "prop-weil-operations",
-  "lem-a1-constructible-pullback-t-exact",
-  "lem-weil-heart-short-exact-triangles",
   "lem-weil-pbc-reduction-universal-homeomorphism"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q113-6d8fc3a5d",
-  "group": "Q113",
+  "reviewer": "NT-cc-Q58-378db8424",
+  "group": "Q58",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-6d8fc3a5d (reviewer sub-agent of L); spot-checked: I read the whole item: 7 steps, no new nodes, and the statement and stmt_deps are identical to the Q124-FIXed version. The source is the main-20261015 thm-zl-real-mixed-by-curves proof, read in full; the item realizes the paragraphs on reduction, componentwise concatenation and open-closed splicing, which is unit sk-i-dl-general-real step 4 (step 1 for nilpotents). Everything is at Q̄_ℓ in the common-stage heart, and every cited exactness and purity node is stated for the same categories. Step checks: (1) closed and open subschemes stay separated finite type (pbc Noetherian lemmas, pod base change); zl-immersion-weil-local-behavior(1) gives exact restriction; closed immersions are finite, so zl-finite-adic-direct-image gives t-exact i_*; prop-weil-operations gives the Weil lift. lem-a1-constructible-pullback-t-exact is used for the semilinear g_Y exactly as def-weil-punctual-weights uses it (precedent, noted). (2) zl-extension-by-zero-punctual and zl-finite-pushforward-punctual give exactness and preservation of each pure weight; the image-filtration computation is correct. (3) prop-sf-open-closed-triangle-all-stages at Q̄_ℓ, including its Weil clause, plus clause 4 of weil-heart-short-exact-triangles gives the heart short exact sequence without treating the pair category as triangulated. (4) a1-mixed-direct-summand(2) plus the inverse-image splicing π^{-1}(C_s)/π^{-1}(C_{s-1}) ≅ C_s/C_{s-1} is checked. (5)/(6) The clopen induction and the backward chain induction are fully stated, including bases and bounds. (7) reduction-universal-homeomorphism makes the complement empty, so the triangle gives the Weil isomorphism η: F ≅ r_*r^*F. This proves nilpotent invariance through a unit the route already uses rather than replacing a step, and I accept it. Small cases tested: F_q[ε]/ε², ∅ (t=0), two points of weights 0 and 1, an empty stratum, a non-split Jordan block. No false clause, no cycle (BFS checked), uses equal proof_deps, no SGA. FIX (C1, one point): Steps 5 and 6 silently used the composition-of-restriction identifications H|_V ≅ F|_{U_{a,b}}, j_a^*F_a ≅ F|_{U_a} and i_a^*F_a ≅ F_{a+1} as Weil isomorphisms and were marked elementary. They now cite prop-weil-operations (Weil composition isomorphisms, already in proof_deps); text, uses and elementary flags are updated, proof_deps are unchanged. Batch-5: the new closure reaches no thm- or nt- node of sec-trace-formula or sec-poincare-duality. def-weil-local-frobenius-trace is a general definition and is already reached through the stmt_dep def-weil-punctual-weights. prop-weil-operations (sk-lem-finite) gives the Weil lifts of operations, which neither assumption states; it is cited by 29 nodes, including batch-5 DL nodes. The extra pod/trf closure nodes are coefficient foundations. All six listed citations are accepted. All declared tool_uses are accepted. Maintainer note: the Q108 and Q114 run directories for this same item exist (parallel deliveries are queued), so check later ones for supersession.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-378db8424 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This re-split follows the released note (stage 1, keep_plan, batch 5). The live node still carries the old 7-step proof, so the delivery is not superseded. The statement and stmt_deps are identical to the base. I checked by script that all 7 old steps appear verbatim in the report, and each is now stated by a new node. Old steps 1 and 3 go to lem-zl-weil-heart-localization-exact: subschemes stay separated finite type and Noetherian, the Weil heart is abelian with kernels and cokernels created by the forgetful functor, restriction and i_* are exact, and the actual counit/unit give a short exact sequence, including the empty cases. Old steps 2 and 7 go to lem-zl-immersion-filtered-reduction-transport: j_! and i_* carry a filtration to its image filtration with the same weights, and for a surjective closed immersion the unit is a Weil isomorphism and η^{-1}(e_*G) is the filtration. Old step 5 goes to lem-zl-clopen-prescribed-weil-filtration, and old steps 4 and 6 go to lem-zl-exact-functor-tower-filtration-splicing in abstract abelian form, with weight classes that T_a preserves. The four statements are comparable in size (1988, 2311, 1863 and 1961 characters), and the assembly is 2090 characters in 4 cited steps. Mathematical checks: all four statements are true. The clopen node holds because H ≅ ⊕ h_{b!}h_b^*H. The tower node follows by induction using π^{-1}(TL_s)/π^{-1}(TL_{s-1}) ≅ T(L_s/L_{s-1}). For the transport node, a surjective closed immersion is a nilimmersion, so the unit is an isomorphism. I tested empty pieces, N=0, t=0, the zero functor, a non-split Jordan extension, two points with different weights, F_q[ε]/ε², and V_0=∅. Assembly: step 1 uses the composition isomorphisms that prop-weil-operations states as Weil morphisms. Step 3 applies the tower node with H_t=0 because Z_t=∅, and the transport node gives preservation of purity. Step 4 is exactly the mixedness definition in def-weil-punctual-weights. Checked against the source: main-20261015 thm-zl-real-mixed-by-curves.proof.md, paragraphs 6–9. The reduction goes through empty-complement localization at common-stage Q̄_ℓ, as on the base, not through i-topology (sec-trace-formula). The whole-DAG duplicate search (lem-zl-open-closed-weight, def-weil-open-closed-recollement, prop-sf-open-closed-triangle-all-stages, lem-sf-open-closed-weil-mate-structures, lemma-constructible-universal-homeomorphism-invariance, i-topology, lem-a1-mixed-direct-summand) found no duplicate. Form checks pass: statement-only nodes, defined notions, correct created/blueprint fields with via=[item], five searches each, no SGA. Batch-5 finding: the 3 new citations of def-weil-punctual-weights are accepted. It is the general definition of punctual weights and mixedness, it reaches def-weil-local-frobenius-trace only as a definition, and it is not a step of the trace-formula or Poincaré-duality proofs; it was already a base stmt_dep of the item. The tool_use prop-weil-operations (generic composition isomorphisms as Weil morphisms) is unchanged from the base and accepted."
  },
  "lean": {
   "module": "Sheaf.Paper.ReducedFrontierMixedGluing",
@@ -320,5 +245,27 @@
   "group": "Q21",
   "result": "pass",
   "note": "Item node differs from live only in lean; statement verbatim; sorry only in the main theorem. All node clauses rendered: the reduced chain from nilradical.subscheme to empty (open differences as complement ranges, finite clopen pieces, all over k0); mixed hypothesis on composite restrictions; conclusions are mixedness of F, the common bound w kept, ZlFrontierFiltrationPreservation for open shrieks of pieces and strata (exact, same pure weights, bounds), ShortExact of actual open counit and closed unit, and IsIso of the reduction unit in the Weil heart. The existential ZlFrontierClosedImage is pinned by functor-equality carrier and HEq unit normalization to sfModelWeilDerivedPush/Adjunction (HEq typable), so it is canonical. Edge cases t=0, empty strata, nonreduced X and independent universes are covered. Imports match proof_dep records; docstrings carry 7 steps; no hollow defs. No compile (no FIX). Advisories: zlWeilPull, zlOpenWeilShriek (plain def in a theorem module) and sfModelWeilDerivedPush/Adjunction have owners not in S1 stmt_deps (S2 cannot add them); H11 direct-delivery disclaimer; SES third term i_*i^*F_a is the source's own display."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cefba",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T043406-L-1724229",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-zl-reduced-frontier-mixed-gluing and unit sk-i-dl-general-real realized steps; removed MixedWeightsStability (lem-a1-mixed-direct-summand: WeilSheaf/FrobeniusModule clauses, unused) vs the common-stage of_mono_cokernel (sk-d-dl-general-weights) actually used; new hole zlWeilPullCompositorEquivariance vs zlFrobeniusSquare/sfModelPullComposition definitions (associativity of ∃!-pinned zlPullComp); #print axioms in scratch sandbox"
  }
 }

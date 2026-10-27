@@ -1,0 +1,268 @@
+{
+ "id": "lem-trf-initial-henselian-colimit-comparison",
+ "kind": "statement",
+ "title": "Compare an initial henselian local algebra with an ind-etale local model and transfer presentations",
+ "statement": "Let $(R,\\mathfrak m,k)$ be a commutative local ring, where $k=R/\\mathfrak m$. Let $C,H$ be henselian local rings [def-weil-pbc-henselian-terminology] with local structural maps $\\eta_C:R\\to C$ and $\\eta_H:R\\to H$; a map of local rings is local when the inverse image of the target maximal ideal is the source maximal ideal. Suppose that $R\\to C$ is ind-etale [def-weil-pbc-ind-etale-algebra] and that its structural residue map $e_C:k\\to k_C=C/\\mathfrak m_C$ is an isomorphism. Assume only the following universal property for $H$: for every henselian local ring $T$ and local map $a:R\\to T$, there is exactly one local map $b:H\\to T$ with $b\\eta_H=a$. Then there are unique local $R$-algebra maps $f:C\\to H$ and $g:H\\to C$, with $gf=\\mathrm{id}_C$ and $fg=\\mathrm{id}_H$. In particular $f$ is an isomorphism over the specified maps from $R$; no residue-field identification or etale-colimit presentation of $H$ is assumed. Moreover, for any commutative ring $P$ with a ring map $P\\to R$, any small filtered diagram $(D_i)$ of commutative $P$-algebras, and any colimit cocone $(C,(\\lambda_i:D_i\\to C))$ of its underlying rings inducing the specified composite $P\\to R\\to C$ [def-weil-pbc-category-colimit], the maps $f\\lambda_i:D_i\\to H$ make $H$ a colimit of the same diagram both in rings and in commutative $P$-algebras, for the composite $P\\to R\\to H$. If all $D_i$ are etale [def-weil-etale-morphism] and finitely presented over $P$ [def-weil-pbc-finitely-presented-algebra], this gives an ind-etale presentation of that specified map $P\\to H$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 08HR (lemma-map-into-henselian-colimit), existence and prescribed-residue uniqueness, combined with the initial local-map universal property; categories.tex Tag 002F (definition-colimit), transfer of the full cocone. Agent formulation extracted from former item steps 4-6, whose full argument is preserved in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-category-colimit",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $a:R\\to T$ be any local map with $T$ henselian local, and write $k_T=T/\\mathfrak m_T$, $e_T:k\\to k_T$ for its residue map. Set $\\tau=e_Te_C^{-1}:k_C\\to k_T$. Locality gives $\\eta_C^{-1}(\\mathfrak m_C)=a^{-1}(\\mathfrak m_T)=\\mathfrak m$, and $\\tau e_C=e_T$. By [def-weil-pbc-ind-etale-algebra], $C$ is a filtered colimit of etale $R$-algebras. Apply [lem-weil-pbc-map-into-henselian-colimit] with $S=T$, $A=C$, $\\mathfrak q=\\mathfrak m_C$ and $\\mathfrak p=\\mathfrak m$, identifying residue fields at maximal ideals with local-ring quotients. It gives a unique local $R$-map $C\\to T$ inducing $\\tau$. Every local $R$-map $h:C\\to T$ induces $\\bar h$ with $\\bar h e_C=e_T$, hence $\\bar h=\\tau$. Thus uniqueness holds among all local $R$-maps, with no residue condition imposed separately.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit), applied at maximal ideals; agent specialization to a local algebra with unchanged residue field."
+   }
+  },
+  {
+   "text": "Take $T=H$ and $a=\\eta_H$ in Step 1 to obtain the unique local $R$-map $f:C\\to H$. The assumed initial property of $H$ gives the unique local $R$-map $g:H\\to C$. Composites are local since inverse images of maximal ideals compose. Both $gf$ and $\\mathrm{id}_C$ are local $R$-maps $C\\to C$, so Step 1 with $T=C$ gives $gf=\\mathrm{id}_C$. Both $fg$ and $\\mathrm{id}_H$ extend $\\eta_H$ as local maps $H\\to H$, so the initial property of $H$ gives $fg=\\mathrm{id}_H$. These identities and $f\\eta_C=\\eta_H$, $g\\eta_H=\\eta_C$ give the required unique inverse isomorphisms over $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit), applied at maximal ideals; agent specialization to a local algebra with unchanged residue field."
+   }
+  },
+  {
+   "text": "For the specified diagram, put $\\mu_i=f\\lambda_i$. For a transition $d_{ij}$, $\\mu_jd_{ij}=f\\lambda_jd_{ij}=f\\lambda_i=\\mu_i$, so this is a ring cocone. Given any compatible ring maps $t_i:D_i\\to B$, [def-weil-pbc-category-colimit] gives a unique ring map $u:C\\to B$ with $u\\lambda_i=t_i$. Set $v=ug:H\\to B$; then $v\\mu_i=ugf\\lambda_i=t_i$. If $w:H\\to B$ also satisfies these equations, $(wf)\\lambda_i=t_i$ for all $i$, hence $wf=u$ by the same universal property, and $w=wfg=ug=v$. This proves the full ring-colimit assertion.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), explicit verification of the cocone universal property."
+   }
+  },
+  {
+   "text": "Write $s_i:P\\to D_i$, $\\rho_C:P\\to C$, $\\rho_H:P\\to H$ for the specified structures. By hypothesis $\\lambda_is_i=\\rho_C$, and $R$-linearity gives $f\\rho_C=\\rho_H$, $g\\rho_H=\\rho_C$. Hence $\\mu_is_i=\\rho_H$. If the $t_i$ of Step 3 are $P$-algebra maps to $(B,\\rho_B)$, choose one index $i$; filteredness includes nonemptiness by [def-weil-pbc-category-colimit]. Then $u\\rho_C=u\\lambda_is_i=t_is_i=\\rho_B$, so $v\\rho_H=ug\\rho_H=u\\rho_C=\\rho_B$. Thus the unique ring mediator is a $P$-algebra map. Its ring uniqueness implies $P$-algebra uniqueness, proving the second colimit assertion.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), explicit verification of the cocone universal property."
+   }
+  },
+  {
+   "text": "If every $D_i$ is etale and finitely presented over $P$, the small filtered colimit presentation of Step 4 is exactly an ind-etale presentation by [def-weil-pbc-ind-etale-algebra]. Its structural map is $\\rho_H=P\\to R\\xrightarrow{\\eta_H}H$ by the cocone equations above, so it proves the final assertion for the specified map.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097I (definition-ind-etale), definition applied to the explicitly transported cocone."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 08HR (lemma-map-into-henselian-colimit); elementary initial-object comparison and explicit cocone transport from categories.tex Tag 002F (definition-colimit)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselization|henselisation|henselian.*[Ee]quiv|[Ee]quiv.*henselian|[Ee]tale.*[Rr]esidue",
+   "results": "{\"t\": \"2026-10-22T06:01:25Z\", \"tool\": \"grep\", \"query\": \"henselization|henselisation|henselian.*[Ee]quiv|[Ee]quiv.*henselian|[Ee]tale.*[Rr]esidue\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\"], \"digest\": \"d371dd2d1e5b8fdf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale homEquiv describes a single standard-etale presentation; HenselianLocalRing.TFAE is only a root-lifting characterization, neither supplies comparison with an initial object or transfer of its cocones",
+   "digest": "d371dd2d1e5b8fdf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare an initial henselian local algebra with a henselian filtered colimit of etale algebras inducing a residue field isomorphism without assuming the initial algebra already has that residue field",
+   "results": "{\"t\": \"2026-10-22T06:01:26Z\", \"tool\": \"leansearch\", \"query\": \"Compare an initial henselian local algebra with a henselian filtered colimit of etale algebras inducing a residue field isomorphism without assuming the initial algebra already has that residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.casesOn\", \"HenselianLocalRing\", \"HenselianLocalRing.recOn\", \"HenselianLocalRing.toIsLocalRing\", \"Algebra.Etale.formallyEtale\", \"HenselianLocalRing.mk\"], \"digest\": \"e1989e0c3a6c17bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale homEquiv describes a single standard-etale presentation; HenselianLocalRing.TFAE is only a root-lifting characterization, neither supplies comparison with an initial object or transfer of its cocones",
+   "digest": "e1989e0c3a6c17bb"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing",
+   "results": "{\"t\": \"2026-10-22T06:01:26Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"Field.henselian\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.mk\", \"HenselianLocalRing.TFAE\"], \"digest\": \"08de0cec484cd4fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale homEquiv describes a single standard-etale presentation; HenselianLocalRing.TFAE is only a root-lifting characterization, neither supplies comparison with an initial object or transfer of its cocones",
+   "digest": "08de0cec484cd4fc"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ind etale henselian local R algebra with the same residue field as R is uniquely isomorphic to an initial henselian local R algebra and its filtered colimit cocones transfer along this isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"leanfinder\", \"query\": \"An ind etale henselian local R algebra with the same residue field as R is uniquely isomorphic to an initial henselian local R algebra and its filtered colimit cocones transfer along this isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation.mk.inj\", \"StandardEtalePair.hom_ext_iff\", \"StandardEtalePair.hom_ext\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.homEquiv_apply_coe\"], \"digest\": \"3ec5cc6dcfa79a4f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale homEquiv describes a single standard-etale presentation; HenselianLocalRing.TFAE is only a root-lifting characterization, neither supplies comparison with an initial object or transfer of its cocones",
+   "digest": "3ec5cc6dcfa79a4f"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique isomorphism from an etale colimit henselian local algebra with unchanged residue field to a henselization defined only by the universal property of local maps",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"leanfinder\", \"query\": \"Unique isomorphism from an etale colimit henselian local algebra with unchanged residue field to a henselization defined only by the universal property of local maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.instFormallyEtaleRing\", \"HenselianLocalRing.TFAE\", \"StandardEtalePair.hom_ext_iff\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.hom_ext\"], \"digest\": \"05edf5b74b3658cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale homEquiv describes a single standard-etale presentation; HenselianLocalRing.TFAE is only a root-lifting characterization, neither supplies comparison with an initial object or transfer of its cocones",
+   "digest": "05edf5b74b3658cb"
+  },
+  {
+   "tool": "grep",
+   "query": "TFAE|class HenselianLocalRing|instHenselianRingMaximalIdeal",
+   "results": "{\"t\": \"2026-10-22T06:02:32Z\", \"tool\": \"grep\", \"query\": \"TFAE|class HenselianLocalRing|instHenselianRingMaximalIdeal\", \"sub\": \"RingTheory/Henselian.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"36\", \"108\", \"119\", \"120\", \"127\"], \"digest\": \"c95eea23a2fad75a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale homEquiv describes a single standard-etale presentation; HenselianLocalRing.TFAE is only a root-lifting characterization, neither supplies comparison with an initial object or transfer of its cocones",
+   "digest": "c95eea23a2fad75a"
+  },
+  {
+   "tool": "grep",
+   "query": "henselization|henselisation|henselian.*[Ee]quiv|[Ee]quiv.*henselian",
+   "results": "{\"t\": \"2026-10-22T07:04:29Z\", \"tool\": \"grep\", \"query\": \"henselization|henselisation|henselian.*[Ee]quiv|[Ee]quiv.*henselian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\"], \"digest\": \"e1685429b72e88d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern root lifting or standard-etale presentations, not initial henselian local algebras and all their colimit cocones",
+   "digest": "e1685429b72e88d9"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselization is the initial henselian local algebra and is isomorphic to any ind etale henselian local algebra with the same residue field",
+   "results": "{\"t\": \"2026-10-22T07:04:29Z\", \"tool\": \"leansearch\", \"query\": \"Henselization is the initial henselian local algebra and is isomorphic to any ind etale henselian local algebra with the same residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing.is_henselian\", \"HenselianRing.recOn\", \"HenselianLocalRing\", \"HenselianRing.casesOn\", \"instHenselianRingMaximalIdeal\"], \"digest\": \"ecb3ab6e4663c5c4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern root lifting or standard-etale presentations, not initial henselian local algebras and all their colimit cocones",
+   "digest": "ecb3ab6e4663c5c4"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing",
+   "results": "{\"t\": \"2026-10-22T07:04:29Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"Field.henselian\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.mk\", \"HenselianLocalRing.TFAE\"], \"digest\": \"08de0cec484cd4fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern root lifting or standard-etale presentations, not initial henselian local algebras and all their colimit cocones",
+   "digest": "08de0cec484cd4fc"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ind etale henselian local algebra with unchanged residue field is uniquely isomorphic to an initial henselian local algebra over the base ring",
+   "results": "{\"t\": \"2026-10-22T07:04:39Z\", \"tool\": \"leanfinder\", \"query\": \"An ind etale henselian local algebra with unchanged residue field is uniquely isomorphic to an initial henselian local algebra over the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.toIsLocalRing\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"instHenselianRingMaximalIdeal\", \"Field.henselian\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\"], \"digest\": \"71be1fc46b8a8f8c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern root lifting or standard-etale presentations, not initial henselian local algebras and all their colimit cocones",
+   "digest": "71be1fc46b8a8f8c"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|hom_ext|Henselian",
+   "results": "{\"t\": \"2026-10-22T07:05:04Z\", \"tool\": \"grep\", \"query\": \"homEquiv|hom_ext|Henselian\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\"], \"digest\": \"1f9ac0b7315fbb18\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern root lifting or standard-etale presentations, not initial henselian local algebras and all their colimit cocones",
+   "digest": "1f9ac0b7315fbb18"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian local filtered colimit of etale R algebras inducing an isomorphism on residue fields has the universal property of henselization",
+   "results": "{\"t\": \"2026-10-22T07:05:15Z\", \"tool\": \"leanfinder\", \"query\": \"A henselian local filtered colimit of etale R algebras inducing an isomorphism on residue fields has the universal property of henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianLocalRing\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"StandardEtalePair.instFormallyEtaleRing\", \"Field.henselian\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"Algebra.IsEtaleAt\"], \"digest\": \"2edffdfa102ce729\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern root lifting or standard-etale presentations, not initial henselian local algebras and all their colimit cocones",
+   "digest": "2edffdfa102ce729"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-henselization-prime-ind-etale",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical auxiliary chain below lem-trf-local-term-locality, comparison of the ordinary henselization at a prime: former steps 4-6 of lem-trf-henselization-prime-ind-etale, including both inverse identities and all transported colimit maps.",
+   "via": [
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-trf-normal-tensor-component-join-model",
+    "lem-trf-artin-join-theorem-6-3",
+    "lem-trf-artin-henselian-tensor-residue-dichotomy",
+    "lem-trf-artin-tensor-etale-acyclic",
+    "lem-trf-gabber-nearby-cycle-dimension-bound",
+    "lem-trf-gabber-strict-local-torsion-bound",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-initial-henselian-colimit-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. The existing Tag 08HR lifting node proves that C has the initial local-map property, without assuming any residue identification or presentation for H. Initial uniqueness proves both inverse identities. The transported cocone and its mediators are written out in rings and P-algebras, including the nonempty-index check for P-linearity. No new nodes are needed; Mathlib searches were rerun and logged for this item.",
+  "blueprint": "Historical auxiliary chain below lem-trf-local-term-locality: former steps 4-6 of lem-trf-henselization-prime-ind-etale, as recorded in blueprint.from.place, realized by Steps 1-2 (comparison) and 3-5 (all colimit maps). The current main-20261015 ancestor uses contracting correspondences; this split changes no ancestor, unit, or route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic Tag 08HR prescribed-residue lifting into henselian local rings, used for the historical henselization comparison; sk-i-curve-zero has no replacement for this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-eeb7c1fd4",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-eeb7c1fd4 (reviewer sub-agent of L); spot-checked: Ordinary split: 0 new nodes, 5 steps, statement byte-identical, no repair note on the item, still unsplit in side-live, not in route-pivot-dropped, no SGA. Source check: Stacks algebra.tex Tag 08HR (label lemma-map-into-henselian-colimit, line 42881) matches lem-weil-pbc-map-into-henselian-colimit. Tag 08HS assumes H ind-etale, so it does not duplicate the item. Tag 002F matches def-weil-pbc-category-colimit, whose filtered clause includes nonempty. Step 1 applies 08HR with S=T, A=C, q=m_C, p=a^{-1}(m_T)=m (using locality of a and eta_C), kappa(m_C)=C/m_C and tau=e_T e_C^{-1}, a k-algebra map. Since e_C is bijective, every local R-map has residue map tau, so uniqueness holds among all local R-maps. Step 2: gf=id_C by Step-1 uniqueness with T=C; fg=id_H by H's own uniqueness with T=H. No residue field or presentation of H is used. Step 3: the ring-cocone transfer is written out (v=ug; wf=u gives w=ug). Step 4: lambda_i s_i=rho_C and f rho_C=rho_H; P-linearity uses one index, which exists because filtered categories are nonempty; ring uniqueness gives P-algebra uniqueness. Step 5 is exactly the ind-etale definition over P. The citer lem-trf-henselization-prime-ind-etale supplies exactly the item's H hypothesis via def-weil-pbc-henselization-at-prime. Proof_deps closure has no cycle. Small cases checked: fields, R=C henselian, one-object diagram, a map P->R with kernel. Accepted tool_use: lem-weil-pbc-map-into-henselian-colimit (sk-thm-p1), a generic 08HR lifting lemma for which sk-i-curve-zero has no replacement."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InitialHenselianColimitComparison",
+  "declaration": "Algebra.initial_henselian_colimit_comparison",
+  "file": "lean/Sheaf/RingTheory/InitialHenselianColimitComparison.lean",
+  "statement": "theorem initial_henselian_colimit_comparison (R C H : Type u) [CommRing R] [IsLocalRing R] [CommRing C] [HenselianLocalRing C] [Algebra R C] [CommRing H] [HenselianLocalRing H] [Algebra R H] [IsLocalHom (algebraMap R C)] [IsLocalHom (algebraMap R H)] (hC : RingHom.IndEtaleAcrossUniverses (algebraMap R C)) (hres : Function.Bijective (IsLocalRing.ResidueField.map (algebraMap R C))) (hH : ∀ (T : Type u) [CommRing T] [HenselianLocalRing T] (a : R →+* T), IsLocalHom a → ∃! b : H →+* T, IsLocalHom b ∧ b.comp (algebraMap R H) = a) : ∃ (f : C →ₐ[R] H) (g : H →ₐ[R] C), IsLocalHom f.toRingHom ∧ IsLocalHom g.toRingHom ∧ (∀ f' : C →ₐ[R] H, IsLocalHom f'.toRingHom → f' = f) ∧ (∀ g' : H →ₐ[R] C, IsLocalHom g'.toRingHom → g' = g) ∧ g.comp f = AlgHom.id R C ∧ f.comp g = AlgHom.id R H ∧ ∀ (P : Type u) [CommRing P] [Algebra P R] [Algebra P C] [Algebra P H] [IsScalarTower P R C] [IsScalarTower P R H] (I : Type u) [SmallCategory I] [IsFiltered I] (D : I ⥤ CommAlgCat.{u} P) (legs : D ⟶ (Functor.const I).obj (CommAlgCat.of P C)), IsColimit ((forget₂ (CommAlgCat.{u} P) CommRingCat.{u}).mapCocone (Cocone.mk (CommAlgCat.of P C) legs)) → Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} P) CommRingCat.{u}).mapCocone ((Cocone.mk (CommAlgCat.of P C) legs).extend (CommAlgCat.ofHom (f.restrictScalars P))))) ∧ Nonempty (IsColimit ((Cocone.mk (CommAlgCat.of P C) legs).extend (CommAlgCat.ofHom (f.restrictScalars P)))) ∧ ((∀ i : I, Algebra.Etale P (D.obj i) ∧ Algebra.FinitePresentation P (D.obj i)) → RingHom.IndEtaleAcrossUniverses (algebraMap P H))",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03a32a111",
+  "group": "NV",
+  "result": "pass",
+  "note": "First S2 Lean record for the stage-1-reviewed split node (Q82 eeb7c1fd PASS). The node is otherwise byte-identical to side-live, which still has no Lean record for it, so nothing supersedes it. Clause match: local R; HenselianLocalRing C and H; IsLocalHom on both structural maps; hC is the recorded IndEtaleAcrossUniverses; hres is bijectivity of ResidueField.map (algebraMap R C); hH is the initial local-map property only, with no residue or presentation assumption on H; f and g are each unique among local R-algebra maps; gf=id and fg=id; P has scalar towers through R; I is small and filtered (nonempty); the ring-colimit hypothesis on the P-algebra legs gives the same extended cocone as a colimit in CommRingCat and in CommAlgCat P; etale+FP stages give IndEtaleAcrossUniverses (algebraMap P H). All objects are in one universe u, matching the only citer henselization_prime_indEtale; restricting T to Type u only weakens a hypothesis. The recorded statement is verbatim. Docstrings carry the source places, the blueprint tag and all 5 proof steps. No definitions, sorry only, the MapIntoHenselianColimit proof import matches the 08HR signature, and no duplicate found. Advisory: Algebra.Etale is used for the scheme-level def-weil-etale-morphism record (accepted convention). Not recompiled, per the human's 2026-10-21 rule; nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261025T050844-L-3852273",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Algebra.initial_henselian_colimit_comparison"
+  ],
+  "sorry_after": []
+ }
+}

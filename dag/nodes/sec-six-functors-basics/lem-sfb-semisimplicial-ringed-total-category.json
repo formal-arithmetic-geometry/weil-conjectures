@@ -1,0 +1,388 @@
+{
+ "id": "lem-sfb-semisimplicial-ringed-total-category",
+ "kind": "statement",
+ "title": "Ringed total category for a semisimplicial diagram",
+ "statement": "Let $\\Delta_{\\mathrm{inj}}$ have the finite nonempty ordinals $[n]=\\{0,\\ldots,n\\}$ and the injective order-preserving maps. Use small sites, sheaves and the size convention [def-weil-pbc-sites-and-cohomology], [def-weil-size-convention], module sheaves and their unbounded derived categories [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category]. Let $(\\mathcal C_n)$ be a coherent diagram of sites indexed by $\\Delta_{\\mathrm{inj}}^{\\mathrm{op}}$, with base-change functors and total site as in [lem-trf-slice-site-total-pseudofunctor], [lem-trf-slice-site-total-systems]. An injection $\\alpha:[m]\\hookrightarrow[n]$ induces $f_\\alpha:\\operatorname{Sh}(\\mathcal C_n)\\to\\operatorname{Sh}(\\mathcal C_m)$. Give sheaves of commutative rings $\\mathcal O_n$ and coherent ring maps $f_\\alpha^{-1}\\mathcal O_m\\to\\mathcal O_n$. These determine a ring sheaf $\\mathcal O$ on the total site. Its module category $\\mathscr M$ is the category of systems $F_n\\in\\operatorname{Mod}(\\mathcal O_n)$ with semilinear transitions, equivalently maps $f_\\alpha^*F_m\\to F_n$, compatible with identity and composition, where $f_\\alpha^*F=\\mathcal O_n\\otimes_{f_\\alpha^{-1}\\mathcal O_m}f_\\alpha^{-1}F$.\nThe evaluations $e_n:\\mathscr M\\to\\operatorname{Mod}(\\mathcal O_n)$ are exact and jointly conservative; their derived functors are termwise evaluation. Every $B\\in D(\\mathscr M)$ therefore has a compatible system $(B_n,Lf_\\alpha^*B_m\\to B_n)$. Call $B$ cartesian if all these derived transitions are isomorphisms. If every $f_\\alpha^*$ is exact, being cartesian is equivalent to every cohomology system $H^q(B)$ having invertible underived transitions. For any coherent augmentation $a_n:(\\operatorname{Sh}(\\mathcal C_n),\\mathcal O_n)\\to(\\operatorname{Sh}(\\mathcal D),R)$ there is a ringed total augmentation $a$; module pullback has components $a_n^*$, and $(La^*E)_n\\simeq La_n^*E$ with the canonical composition comparisons.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 09WC (lemma-simplicial-site-site), 09WF (lemma-describe-sheaves-simplicial-site-site), 0D72 (lemma-restriction-module-to-components-site) and 0D70 (lemma-augmentation-site): ringed, injective-order-map versions of the total construction; the semisimplicial adaptation is agent-supplied."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-trf-slice-site-total-pseudofunctor",
+  "lem-trf-slice-site-total-systems",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-slice-site-total-pseudofunctor] and [lem-trf-slice-site-total-systems] to $I=\\Delta_{\\mathrm{inj}}^{\\mathrm{op}}$. This is small: its objects are natural numbers and each Hom set is finite. The assumed morphisms of sites supply the extra geometric-morphism hypothesis of the systems equivalence. The equivalence preserves finite products: limits of set sheaves are sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], and finite products of systems are componentwise because every $f_\\alpha^{-1}$ preserves finite products. Consequently the given ring operations and structural ring maps assemble to a ring object $\\mathcal O$. A module structure is an abelian-group structure and an action $\\mathcal O\\times F\\to F$ satisfying equations. Under the equivalence these are precisely component module structures with semilinear transitions: compatibility of the action is $t_\\alpha(rx)=c_\\alpha(r)t_\\alpha(x)$. By [def-pur-sheaf-tensor-product], a semilinear map extends uniquely to an $\\mathcal O_n$-linear map $\\mathcal O_n\\otimes_{f_\\alpha^{-1}\\mathcal O_m}f_\\alpha^{-1}F_m\\to F_n$, by $r\\otimes x\\mapsto r t_\\alpha(x)$; the inverse sends $x$ to the image of $1\\otimes x$. Thus this gives the asserted module equivalence, including morphisms, identities and composition.",
+   "uses": [
+    "lem-trf-slice-site-total-pseudofunctor",
+    "lem-trf-slice-site-total-systems",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 09WC, 09WF and 0D72, lemma-simplicial-site-site, lemma-describe-sheaves-simplicial-site-site and lemma-restriction-module-to-components-site; face-only adaptation"
+   }
+  },
+  {
+   "text": "For the fibre inclusion $j_n:\\mathcal C_n\\to\\mathcal C_{\\mathrm{tot}}$, a vertical covering and its pullbacks inside the fibre are the same covering and pullbacks in the total site. Indeed an endomorphism of $[n]$ in $\\Delta_{\\mathrm{inj}}$ is the identity, so the fibre products of vertical maps computed in the fibre have the total universal property as well, by the arrow formula in [lem-trf-slice-site-total-pseudofunctor]. All generating covers of an object $(n,U)$ are vertical, which also gives cocontinuity. Thus [lem-weil-pbc-continuous-cocontinuous-ringed-restriction] constructs a ringed-topos map $g_n$ with $g_n^{-1}\\mathcal O=\\mathcal O_n$ and identity structural map; its module inverse image is restriction $e_n$. Kernels restrict sectionwise. Cokernels are sheafified sectionwise cokernels [def-weil-sheaf-of-modules-category]; restriction commutes with this sheafification by [lem-pur-native-ringed-restriction-sheafification]. Hence $e_n$ preserves kernels and cokernels, and is exact by [lem-sfb-kernel-cokernel-finite-exactness]. If a module map has invertible components, their inverses commute with each transition by multiplying its commutative square by the component inverses; they therefore form its inverse. The $e_n$ are jointly conservative. No exactness of the semilinear pullback $f_\\alpha^*$ has been used. The additive module sheafification used here exists by [def-weil-presheaf-modules-sheafification] and is exact by [lem-weil-pbc-ringed-site-module-sheafification-exact]; on these small sites its underlying set sheafification is identified by [lem-pc-sites-sheafification-underlying-sets]. Apply [lem-cbc-set-presheaf-sheafification-local-bijection] to the sheafification unit: its associated-sheaf map is invertible by the universal property, so it is locally bijective. This supplies the restriction lemma’s criterion.",
+   "uses": [
+    "lem-trf-slice-site-total-pseudofunctor",
+    "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pur-native-ringed-restriction-sheafification",
+    "lem-sfb-kernel-cokernel-finite-exactness",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WG, lemma-restriction-to-components-site, proof of (1); Tag 0D72, lemma-restriction-module-to-components-site; continuous/cocontinuous restriction"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor], exact $e_n$ induces a functor on the unbounded derived categories, computed termwise on every complex, which is both its left and its right derived functor. Moreover [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^q(e_nK)=e_nH^q(K)$, naturally and compatibly with cycles and their quotient maps. These facts hold for unbounded complexes and require neither injectivity of evaluated resolutions nor exactness of $f_\\alpha^*$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; homology.tex Tag 010N, lemma-exact-functor"
+   }
+  },
+  {
+   "text": "Represent $B$ by a complex $K$ of total modules. Choose a quasi-isomorphism $P\\to K$ with $P$ K-flat with flat terms using [lem-pc-kflat-resolution] on the small ringed total site. Each $P_n=g_n^*P$ is K-flat with flat terms by [lem-weil-pbc-ringed-pullback-preserves-kflat], applied to the ringed morphism $g_n$ constructed in step 2. Exact evaluation gives $P_n\\simeq B_n$. Therefore [lem-weil-pbc-ringed-topoi-derived-pullback] identifies $Lf_\\alpha^*B_m$ with $f_\\alpha^*P_m$. Localize the actual transition chain map $f_\\alpha^*P_m\\to P_n$ to obtain the asserted derived transition. Naturality of the resolution comparisons in the cited derived-pullback node makes this construction natural in $B$ and independent of the resolution. For composable $[l]\\xrightarrow{\\beta}[m]\\xrightarrow{\\alpha}[n]$, pullback preserves flat-term K-flat complexes, so both iterated derived pullback and composite derived pullback are computed on $P_l$. The canonical comparison $L(f_\\beta f_\\alpha)^*\\cong Lf_\\alpha^*Lf_\\beta^*$ is the one of [lem-sfb-ringed-derived-monoidal-comparisons], transported along the coherent geometric isomorphism $f_{\\alpha\\beta}\\cong f_\\beta f_\\alpha$, which commutes with the structural ring maps; by that node it is computed on flat-term K-flat complexes by ordinary module pullback composition, here the tensor reassociation and inverse-image compositor $r\\otimes(s\\otimes x)\\mapsto r c_\\alpha(s)\\otimes x$. The two transition composites agree by the chain-level system cocycle. Identities follow from $1\\otimes x\\mapsto x$, and for three arrows both reassociations multiply the three scalar factors in the same order. This establishes the canonical composition comparisons and all required coherence; it does not assert that arbitrary compatible derived systems lift to total complexes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-trf-slice-site-total-systems",
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 06YY and 0D6D: lemma-K-flat-resolution, lemma-pullback-K-flat, lemma-derived-base-change and lemma-derived-pullback-composition; representative proof"
+   }
+  },
+  {
+   "text": "Define cartesianness by invertibility of the transitions just constructed. Suppose every $f_\\alpha^*$ is exact. By [lem-weil-pbc-exact-functor-derived-functor], $Lf_\\alpha^*$ is then computed on every complex, so the derived transition is the localization of $f_\\alpha^*K_m\\to K_n$. By [lem-weil-pbc-exact-functor-complex-cohomology] its $q$-th cohomology map identifies with the transition $f_\\alpha^*H^q(K_m)\\to H^q(K_n)$ of $H^q(K)$; compatibility with cycles and quotients in that node fixes this identification on maps as well as objects. If all these maps are isomorphisms, the chain transition is a quasi-isomorphism and hence becomes invertible in the localization. Conversely an invertible derived transition induces invertible maps under every cohomology functor. This proves both directions, in all integer degrees, using the definition of quasi-isomorphism and localization in [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F and definition-derived-category, Tag 05RU; exact-pullback cohomology criterion"
+   }
+  },
+  {
+   "text": "For an augmentation define $A^{-1}G=(a_n^{-1}G)_n$, with transition $f_\\alpha^{-1}a_m^{-1}G\\cong a_n^{-1}G$. The specified augmentation coherence supplies the system cocycle. This functor preserves finite limits componentwise. It has a right adjoint: for a system $F$, take the equalizer of the two maps $\\prod_n a_{n,*}F_n\\rightrightarrows\\prod_{\\alpha:[m]\\hookrightarrow[n]}a_{n,*}F_n$, where the first uses projection to $n$ and the second uses projection to $m$ followed by $a_{m,*}F_m\\to a_{m,*}f_{\\alpha,*}F_n\\cong a_{n,*}F_n$. The latter arrow is the transpose of $f_\\alpha^{-1}F_m\\to F_n$. These products and the equalizer exist by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], since the objects and arrows of the index are small. A map from $G$ into this equalizer is precisely a family $G\\to a_{n,*}F_n$ whose adjoint family $a_n^{-1}G\\to F_n$ commutes with transitions; [lem-trf-slice-site-total-systems] identifies it with a map $A^{-1}G\\to F$. Thus $A^{-1}$ is the inverse image of a geometric morphism $a$. The compatible ring maps $a_n^{-1}R\\to\\mathcal O_n$ assemble, by step 1, into $a^{-1}R\\to\\mathcal O$, giving a ringed total augmentation.",
+   "uses": [
+    "lem-trf-slice-site-total-systems",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70, lemma-augmentation-site, compatible-family inverse image construction; use all-arrow equalizer for the face-only index"
+   }
+  },
+  {
+   "text": "Module pullback for this ringed morphism is $a^*E=\\mathcal O\\otimes_{a^{-1}R}a^{-1}E$. Restriction commutes with the sectionwise presheaf tensor, since it just selects the objects of a fibre; it commutes with its sheafification by [lem-pur-native-ringed-restriction-sheafification]. Thus [def-pur-sheaf-tensor-product] gives $e_na^*E=\\mathcal O_n\\otimes_{a_n^{-1}R}a_n^{-1}E=a_n^*E$, naturally in $E$. Under this identification the transition for $\\alpha$ is the ordinary composition isomorphism $f_\\alpha^*a_m^*E\\cong a_n^*E$: on tensors it sends $r\\otimes(s\\otimes x)$ to $r c_\\alpha(s)\\otimes x$, using the coherent identification $f_\\alpha^{-1}a_m^{-1}\\cong a_n^{-1}$. Its inverse inserts $1$ in the middle factor. Balancing and the coherent structural ring maps make the two maps inverse. The identity and threefold composition equations follow from unit and associative multiplication, with the given inverse-image compositors inserted.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-native-ringed-restriction-sheafification",
+    "lem-trf-slice-site-total-systems"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70, lemma-augmentation-site, and Tag 0D72, lemma-restriction-module-to-components-site; ringed scalar extension"
+   }
+  },
+  {
+   "text": "For $E\\in D(R)$ choose a flat-term K-flat resolution $Q$ using [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-topoi-derived-pullback], $a^*Q$ represents $La^*E$, and $a_n^*Q$ represents $La_n^*E$. Since evaluation is termwise, step 7 gives $(La^*E)_n\\simeq a_n^*Q\\simeq La_n^*E$. The complex $a^*Q$ and each $a_n^*Q$ are K-flat with flat terms by [lem-weil-pbc-ringed-pullback-preserves-kflat]. Hence the derived transition out of the $m$-th component is represented on these very complexes by $f_\\alpha^*a_m^*Q\\to a_n^*Q$ of step 7. By [lem-sfb-ringed-derived-monoidal-comparisons], the canonical comparison $La_n^*\\cong L(a_mf_\\alpha)^*\\cong Lf_\\alpha^*La_m^*$, transported along the coherent isomorphism $a_mf_\\alpha\\cong a_n$ (which commutes with the structural ring maps), is represented on the flat-term K-flat complex $Q$ by ordinary module pullback composition; hence the displayed scalar formula is exactly that canonical composition comparison on these K-flat representatives; its identity and composition equations were verified there. Naturality and resolution independence follow from the resolution comparisons in the cited derived-pullback node. This proves the augmentation assertion with its specified comparisons, without assuming that $a_n^*$ or $f_\\alpha^*$ is exact.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YY, 0G7E and 0D6D, K-flat representative computation for composite pullbacks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-pur-native-ringed-restriction-sheafification",
+  "lem-sfb-kernel-cokernel-finite-exactness",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-trf-slice-site-total-pseudofunctor",
+  "lem-trf-slice-site-total-systems",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 09WC, 09WF, 09WG, 0D70, 0D72 with the injective-order-map index; sites-cohomology.tex Tags 06YS, 06YY, 0G7E, 0D6D for unbounded derived pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The total site of a semisimplicial diagram of ringed topoi has module sheaves given by component modules and coherent transition maps and exact evaluation functors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat}\\n  (F : CategoryTheory.Functor D (SheafOfModules R))\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n   \", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, the sections of the composed functor $F \\\\circ \\\\text{forget} \\\\circ \\\\text{evaluation}_X \\\\circ \\\\text{forget}$ form a small type in u\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"CondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [Ring R] → Type (u + 2)\", \"doc\": \"The category of condensed modules over a ring $ R $, defined as the category of sheaves on the site of compact Hausdorff spaces equipped with the coherent Grothendieck topology, taking values in the c\"}\n  {\"name\": \"SheafOfModules.Presentation.map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, this function constructs a prese\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern individual module sheaves or Grothendieck topologies, not varying-ring semisimplicial total module categories and their exact evaluations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct the Grothendieck total site of ringed sites indexed by injective order preserving maps of finite ordinals",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pretopology.toGrothendieck\", \"module\": \"Mathlib.CategoryTheory.Sites.Pretopology\", \"type\": \"(K : Pretopology C) : GrothendieckTopology C\", \"doc\": \"Given a category $\\\\mathcal{C}$ with pullbacks and a Grothendieck pretopology $K$, this function constructs the Grothendieck topology on $\\\\mathcal{C}$ by defining a sieve $S$ on an object $X$ to be cov\"}\n  {\"name\": \"Opens.grothendieckTopology\", \"module\": \"Mathlib.CategoryTheory.Sites.Spaces\", \"type\": \": GrothendieckTopology (Opens T)\", \"doc\": \"The Grothendieck topology on the category $\\\\mathrm{Opens}(T)$ of open subsets of a topological space $T$, where a sieve on an open set $X$ is covering if and only if for every point $x \\\\in X$, there e\"}\n  {\"name\": \"CategoryTheory.typesGrothendieckTopology\", \"module\": \"Mathlib.CategoryTheory.Sites.Types\", \"type\": \": GrothendieckTopology (Type u)\", \"doc\": \"The Grothendieck topology on the category of types $ \\\\mathrm{Type}\\\\, u $ where a sieve on a type $ X $ is covering if and only if it contains the identity morphism for every element of $ X $. This top\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology\", \"module\": \"Mathlib.CategoryTheory.Sites.Grothendieck\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u v)\", \"doc\": \"An inductive definition of a Grothendieck topology on a category $\\\\mathcal{C}$, specifying that a collection of sieves satisfies the axioms of being closed under pullbacks, composition, and containing\"}\n  {\"name\": \"CategoryTheory.Coverage.toGrothendieck\", \"module\": \"Mathlib.CategoryTheory.Sites.Coverage\", \"type\": \"(K : Coverage C) : GrothendieckTopology C\", \"doc\": \"Given a coverage $K$ on a category $\\\\mathcal{C}$, this function constructs the Grothendieck topology on $\\\\mathcal{C}$ by saturating $K$. The resulting topology includes all sieves that satisfy the sat\"}\n  {\"name\": \"CategoryTheory.Coverage.toGrothendieck_eq_sInf\", \"module\": \"Mathlib.CategoryTheory.Sites.Coverage\", \"type\": \"(K : Coverage C) : toGrothendieck K = sInf {J | K ≤ J.toCoverage}\", \"doc\": \"For any coverage $ K $ on a category $ \\\\mathcal{C} $, the Grothendieck topology generated by $ K $ is equal to the infimum (greatest lower bound) of all Grothendieck topologies $ J $ on $ \\\\mathcal{C} \"}\n  {\"name\": \"CategoryTheory.Sheaf.canonicalTopology\", \"module\": \"Mathlib.CategoryTheory.Sites.Canonical\", \"type\": \"(C : Type u) [Category.{v} C] : GrothendieckTopology C\", \"doc\": \"The canonical Grothendieck topology on a category $\\\\mathcal{C}$ is defined as the finest topology such that all representable presheaves (those in the image of the Yoneda embedding $\\\\mathcal{C} \\\\to [\\\\\"}\n  {\"name\": \"CategoryTheory.extensiveTopology\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Basic\", \"type\": \"[FinitaryPreExtensive C] : GrothendieckTopology C\", \"doc\": \"The Grothendieck topology on a finitary pre-extensive category $\\\\mathcal{C}$ generated by the extensive coverage, constructed by saturating the coverage of finite families of morphisms whose coproduct\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern individual module sheaves or Grothendieck topologies, not varying-ring semisimplicial total module categories and their exact evaluations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Simplicial\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern individual module sheaves or Grothendieck topologies, not varying-ring semisimplicial total module categories and their exact evaluations"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emi[Ss]implicial|semisimplicial|simplicial.*[Ss]ite|[Tt]otal.*[Ss]ite",
+   "results": "[grep] OK 0 hit(s)\n\nDirectory: Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern individual module sheaves or Grothendieck topologies, not varying-ring semisimplicial total module categories and their exact evaluations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Simplicial\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: individual sheaf/module and presheaf pullback results do not state varying-ring semisimplicial total categories, their derived transitions and augmentation evaluation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on a Grothendieck construction of ringed topoi are coherent systems and derived inverse images commute with evaluation",
+   "results": "8 hits; SheafOfModules.over, SheafOfModules, SheafOfModules.IsQuasicoherent.mk, AlgebraicGeometry.Scheme.Modules, SheafOfModules.mk, SheafOfModules.sections, SheafOfModules.unit, SheafOfModules.IsFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: individual sheaf/module and presheaf pullback results do not state varying-ring semisimplicial total categories, their derived transitions and augmentation evaluation"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|simplicial.*site|total.*site",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: individual sheaf/module and presheaf pullback results do not state varying-ring semisimplicial total categories, their derived transitions and augmentation evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimplicial ringed total site has modules given by semilinear systems with exact conservative evaluations and derived augmentation pullback evaluated componentwise",
+   "results": "8 hits; instAbelianCondensedMod, classifyingSpaceUniversalCover.compForgetAugmented.toModule, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, CondensedMod.ofSheafProfinite, PresheafOfModules.HasDifferentials, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, SheafOfModules.Presentation.map",
+   "date": "2026-10-23",
+   "verdict": "no match: individual sheaf/module and presheaf pullback results do not state varying-ring semisimplicial total categories, their derived transitions and augmentation evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules over a ring object in the topos of sections of a diagram of topoi form semilinear systems; derived pullback along an augmentation restricts to the derived pullback on each fibre",
+   "results": "8 hits; instModulePullback, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullbackComp, PresheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-23",
+   "verdict": "no match: individual sheaf/module and presheaf pullback results do not state varying-ring semisimplicial total categories, their derived transitions and augmentation evaluation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-negative-ext-hyperdescent",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Ringed total category for a semisimplicial diagram.",
+   "via": [
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimplicial-ringed-total-category",
+  "worker": "stage1",
+  "summary": "Constructed the ring and module equivalence, exact conservative evaluation and derived transitions using existing total-site and general ringed-topos lemmas; constructed the augmentation with an all-arrow equalizer and computed its derived pullback on one K-flat resolution. No new nodes, no changed assertion.",
+  "blueprint": "Supporting input for the face-only repair in lem-sfb-space-negative-ext-hyperdescent, inherited alteration/duality prerequisite chain from det-thm-sf-ctf-stability-direct-images proof (3). The item is not itself a blueprint import; the imported from.node is null. Steps 1-3 supply the total category/evaluation, 4-5 the derived cartesian criterion, and 6-8 the augmentation comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General site/module/derived-category construction used with its stated hypotheses on the small ringed total site; the unit has no alternative general result, and its alteration/duality route is unchanged."
+   },
+   {
+    "node": "lem-pur-native-ringed-restriction-sheafification",
+    "why": "General site/module/derived-category construction used with its stated hypotheses on the small ringed total site; the unit has no alternative general result, and its alteration/duality route is unchanged."
+   },
+   {
+    "node": "lem-trf-slice-site-total-pseudofunctor",
+    "why": "General site/module/derived-category construction used with its stated hypotheses on the small ringed total site; the unit has no alternative general result, and its alteration/duality route is unchanged."
+   },
+   {
+    "node": "lem-trf-slice-site-total-systems",
+    "why": "General site/module/derived-category construction used with its stated hypotheses on the small ringed total site; the unit has no alternative general result, and its alteration/duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "why": "General site/module/derived-category construction used with its stated hypotheses on the small ringed total site; the unit has no alternative general result, and its alteration/duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "General site/module/derived-category construction used with its stated hypotheses on the small ringed total site; the unit has no alternative general result, and its alteration/duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "General site/module/derived-category construction used with its stated hypotheses on the small ringed total site; the unit has no alternative general result, and its alteration/duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "General site/module/derived-category construction used with its stated hypotheses on the small ringed total site; the unit has no alternative general result, and its alteration/duality route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General ringed-topos derived pullback compositor c_{f,g}, its flat-term K-flat representative by ordinary module pullback composition and its transport along ring-compatible geometric 2-isomorphisms; used in steps 4 and 8 to identify the constructed transitions with the canonical composition comparisons. No node of the unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-native-ringed-restriction-sheafification",
+  "lem-trf-slice-site-total-pseudofunctor",
+  "lem-trf-slice-site-total-systems",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-4e965ac6e",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-4e965ac6e (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps, all 20 cited statements, Stacks 0D70 and the tag/label map for 09WC/09WF/09WG/0D70/0D72/06YS/0G7E/06YY/0D6D/015F/010N/05RU. The statement is byte-identical to live, which is still unsplit and not superseded. The 2 added stmt_deps (def-pur-sheaf-tensor-product, def-weil-pbc-ringed-topos-morphism) are used by the statement. There are no new nodes and no SGA. The coefficient category is ordinary Mod(O_n) with unbounded D throughout. Checks by step: (1) the systems equivalence carries ring and module objects to component data with semilinear transitions, and the tensor universal property gives the linearization. (2) Fibres are full because Δ_inj has only identity endomorphisms. Continuity follows from the generating-cover pullback formula and cocontinuity from the vertical generating families. The continuous-cocontinuous restriction gives g_n^*=e_n. The hypotheses of the restriction-sheafification lemma are discharged by module sheafification, its exactness, the underlying-set identification and the local-bijection criterion. Kernel/cokernel exactness follows; conservativity is elementary. (3) The exact-functor nodes are unbounded. (4) The flat-term K-flat resolution is preserved by g_n^* and f_α^* with no flatness of the ring map. (5) In the exact case, uniqueness of the derived functor and the cycle/quotient compatibility give both directions. (6) The all-arrow equalizer adjoint is correct for the face-only index. (7) The tensor transition and its insert-1 inverse are correct. (8) The same Q works for a and every a_n. Small cases tested: point sites, Z→Z/2 faces (correctly conditional), R→A_n augmentation. Fault (C1/C4): steps 4 and 8 call the chain-level reassociation 'the canonical composition comparison' (L(f_β f_α)^*≅Lf_α^*Lf_β^*, La_n^*≅Lf_α^*La_m^*) but cite no node defining it. Fix: cite the existing reviewed lem-sfb-ringed-derived-monoidal-comparisons. It gives c_{f,g}, computed on flat-term K-flat complexes by ordinary module pullback composition, and its transport along ring-compatible geometric 2-isomorphisms (f_{αβ}≅f_β f_α, a_m f_α≅a_n). I checked that citing it creates no cycle. The node is added to the uses of steps 4 and 8, to proof_deps and as a declared tool use. All 8 declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SemisimplicialRingedTotalCategory",
+  "declaration": "CategoryTheory.SemisimplicialRingedTotal.semisimplicial_ringed_total_category",
+  "declarations": [
+   "CategoryTheory.SemisimplicialRingedTotal.Site",
+   "CategoryTheory.SemisimplicialRingedTotal.Site.rings",
+   "CategoryTheory.SemisimplicialRingedTotal.Site.modules",
+   "CategoryTheory.SemisimplicialRingedTotal.Site.hasDerived",
+   "CategoryTheory.SemisimplicialRingedTotal.Site.D",
+   "CategoryTheory.SemisimplicialRingedTotal.Site.sets",
+   "CategoryTheory.SemisimplicialRingedTotal.Site.flat",
+   "CategoryTheory.SemisimplicialRingedTotal.Pullback",
+   "CategoryTheory.SemisimplicialRingedTotal.Pullback.alpha",
+   "CategoryTheory.SemisimplicialRingedTotal.Composition",
+   "CategoryTheory.SemisimplicialRingedTotal.RingDiagram",
+   "CategoryTheory.SemisimplicialRingedTotal.RingDiagram.fibre",
+   "CategoryTheory.SemisimplicialRingedTotal.RingDiagram.systemProperty",
+   "CategoryTheory.SemisimplicialRingedTotal.RingDiagram.Systems",
+   "CategoryTheory.SemisimplicialRingedTotal.RingDiagram.systemEvaluation",
+   "CategoryTheory.SemisimplicialRingedTotal.Augmentation",
+   "CategoryTheory.SemisimplicialRingedTotal.RingDiagram.total",
+   "CategoryTheory.SemisimplicialRingedTotal.Evaluation",
+   "CategoryTheory.SemisimplicialRingedTotal.Evaluation.derived",
+   "CategoryTheory.SemisimplicialRingedTotal.Identity",
+   "CategoryTheory.SemisimplicialRingedTotal.Presentation",
+   "CategoryTheory.SemisimplicialRingedTotal.Presentation.IsCartesian",
+   "CategoryTheory.SemisimplicialRingedTotal.AugmentationPresentation",
+   "CategoryTheory.SemisimplicialRingedTotal.semisimplicial_ringed_total_category",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceDiagram",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceIdentity",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceComposition",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceAugmentation",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceFaceModuleSystem",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceFaceModuleHom",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceModuleCategory",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceEvaluation",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceVertex",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceEqualizerArrow",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceFaceAugmentationModel",
+   "AlgebraicGeometry.AlgebraicSpace.space_face_total_augmentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SemisimplicialRingedTotalCategory.lean",
+  "statement": "theorem semisimplicial_ringed_total_category {F : LocallyDiscrete (SemiSimplexCategoryᵒᵖ)ᵒᵖ ⥤ᵖ Cat.{u, u}} (D : CoherentSitePseudofunctor SemiSimplexCategoryᵒᵖ F) (geometric : ∀ (i j : SemiSimplexCategoryᵒᵖ) (a : i ⟶ j), PreservesFiniteLimits (D.inverseImage a)) (R : RingDiagram D) : ∃ (h : Presheaf.IsSheaf D.totalTopology R.presheaf) (P : Presentation R h), ∀ (S : Site.{u}) (A : Augmentation R S P.face P.faceId P.faceComp), Nonempty (AugmentationPresentation P S A)",
+  "branch": "sheaf-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coherent ring diagram and semilinear systems are their actual total presheaves with fibre sheaf conditions. The conclusion supplies the total sheaf condition, the module equivalence over the presheaf forgetful functor, exact conservative termwise evaluations, normalized ordinary/derived transitions, cartesian cohomology criterion, and arbitrary coherent ringed-topos augmentations. All data definitions are explicit; the sole postponed theorem is this node. Reviewer FIX: the fibre ringed morphism's module inverse image is identified with evaluation by the canonical isomorphism fibreEvaluation (pinned by 1 tensor m mapped to m), not by a functor equality with the sheafified scalar extension. NP repair of returned head a4f3d66573fb: the module, main declaration, main signature and every other original field are preserved. Specialized ordinary algebraic-space face-system helpers and space_face_total_augmentation are appended to this same module and listed in declarations under this DAG owner. These supply the ordinary augmentation in the original module-coefficient universe through the existing normalized scheme-restriction equivalence; the equalizer and degree-zero hom-equivalence pin its direct image and adjunction.",
+  "fixed_by": "NT-stage2-cc-b75fd1953"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29dfb8865",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN (a4f3d66573fb). Dependency record lem-sfb-semisimplicial-ringed-total-category vs side-live: only lean.declarations (superset: 11 spaceFace*/SpaceFace* helpers + space_face_total_augmentation added, nothing removed) and lean.note (live note kept as exact prefix, NP repair sentence appended) differ; module/file/declaration/statement/reviewed_lean unchanged. Dependency module SemisimplicialRingedTotalCategory.lean is a pure superset of live: 3 public imports plus a helper block appended after the generic namespace; only one live importer, so no import cycle. Helpers are identical to the previously accepted SpaceFaceModuleSystems block; that module is removed; the item module changed only its import. Re-checked composition/augmentation/equalizer typing and the canonical pinning (component+transition, direct = equalizer, adjunction_zero); the normalizing isos are Classical.choose of ∃! normalized statements, so the existence claim is sound. Item statement clause by clause correct (IsSpaceFppfHypercover incl. degree 0, injective-only diagram, heart = QCoh components + iso transitions, unit/counit IsIso on P.adjunction, equivalence identified with restricted pullback/direct); no extra hypotheses or universe restriction. The added stmt_dep def-sfb-space-fppf-hypercover is used directly. No face-total duplicate in live. Sorry only; docstrings carry source and blueprint. Nothing compiled (no file changed)."
+ }
+}

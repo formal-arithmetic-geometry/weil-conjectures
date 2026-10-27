@@ -31,6 +31,7 @@ open CategoryTheory
 
 namespace ModuleCat
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Tor is additive in the coefficient maps.
 Source: Stacks Project, Algebra, Tags 00LY and 00M7.
 Proof: choose one projective resolution of `M`. Tensoring its terms with a sum of
@@ -41,7 +42,30 @@ This proves additivity in every degree, including zero.
 theorem torCoefficientFunctor_additive (R : Type u) [CommRing R]
     (M : ModuleCat.{u} R) (n : ℕ) :
     ((Tor' (ModuleCat.{u} R) n).obj M).Additive := by
-  sorry
+  constructor
+  intro X Y f g
+  change (NatTrans.leftDerived
+      ((MonoidalCategory.tensoringRight (ModuleCat R)).map (f + g)) n).app M =
+    (NatTrans.leftDerived
+      ((MonoidalCategory.tensoringRight (ModuleCat R)).map f) n).app M +
+    (NatTrans.leftDerived
+      ((MonoidalCategory.tensoringRight (ModuleCat R)).map g) n).app M
+  simp only [Functor.map_add]
+  let P := projectiveResolution M
+  rw [P.leftDerived_app_eq _ n, P.leftDerived_app_eq _ n, P.leftDerived_app_eq _ n]
+  have h : (NatTrans.mapHomologicalComplex
+      ((MonoidalCategory.tensoringRight (ModuleCat R)).map f +
+        (MonoidalCategory.tensoringRight (ModuleCat R)).map g)
+      (ComplexShape.down ℕ)).app P.complex =
+      (NatTrans.mapHomologicalComplex
+        ((MonoidalCategory.tensoringRight (ModuleCat R)).map f)
+        (ComplexShape.down ℕ)).app P.complex +
+      (NatTrans.mapHomologicalComplex
+        ((MonoidalCategory.tensoringRight (ModuleCat R)).map g)
+        (ComplexShape.down ℕ)).app P.complex := by
+    ext i
+    rfl
+  rw [h, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 attribute [instance] torCoefficientFunctor_additive
 
@@ -87,7 +111,20 @@ theorem torCoefficientLinearMap_smul (R A : Type u) [CommRing R] [CommRing A]
       a • @id (torCoefficientModule R A M C n)
         ((((Tor' (ModuleCat.{u} R) n).obj M).map
           (ModuleCat.ofHom (f.restrictScalars R).toLinearMap)).hom t) := by
-  sorry
+  let F := (Tor' (ModuleCat.{u} R) n).obj M
+  let mB : ModuleCat.of R B ⟶ ModuleCat.of R B :=
+    ModuleCat.ofHom (Module.toModuleEnd R B a)
+  let mC : ModuleCat.of R C ⟶ ModuleCat.of R C :=
+    ModuleCat.ofHom (Module.toModuleEnd R C a)
+  let fR : ModuleCat.of R B ⟶ ModuleCat.of R C :=
+    ModuleCat.ofHom (f.restrictScalars R).toLinearMap
+  have h : mB ≫ fR = fR ≫ mC := by
+    ext b
+    exact f.toLinearMap.map_smul a b
+  change (F.map fR).hom ((F.map mB).hom t) =
+    (F.map mC).hom ((F.map fR).hom t)
+  have hf := congrArg (fun k ↦ (F.map k).hom t) h
+  simpa only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] using hf
 
 /-- The canonical map on coefficient Tor is literally the map of `Tor'` induced
 by the algebra homomorphism, equipped with its coefficient linearity.

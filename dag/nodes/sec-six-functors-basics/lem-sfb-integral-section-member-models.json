@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-integral-section-member-models",
+ "kind": "statement",
+ "title": "Integral local models on one pro-etale member",
+ "statement": "For a scheme morphism g : S ⟶ X, an integral module M on X and a pro-etale object U over S, the point-model predicate for the pullback to U is equivalent to the existence of a finitely presented PbcIntegralRing module whose normalized integral section realization, pulled back along g and restricted to U, is isomorphic to the corresponding constant realization. This is one member and has no cover, stratification or Noetherian hypotheses.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), one-member coefficient comparison in step 7."
+ },
+ "stmt_deps": [
+  "lem-sfb-integral-section-scalar-models",
+  "lem-sfb-integral-section-local-isomorphisms"
+ ],
+ "proof": [
+  {
+   "text": "Use continuousScalarFinitePresentation to express the finitely presented point module as continuous scalar extension of an ordinary finitely presented valuation-ring module. Restrict scalars across ULift.down to obtain a PbcIntegralRing module. Finite presentation transfers across a ring equivalence: its algebra linear map is a linear equivalence, so the scalar ring is a finitely presented module of rank one over the target ring; transitivity of finite presentation along the scalar tower then applies to the module.",
+   "uses": [
+    "lem-sfb-continuous-scalar-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The point-pullback compositor identifies the pullback of the global point model with the point model over U.left. Compose the given point-model isomorphism with the scalar classification isomorphism and the inverse compositor. Transport this local isomorphism by integralSectionLocalIsomorphisms, then apply inverse image and slice restriction to the scalar-model comparison integralSectionScalarModels at the finitely presented scalar module. This gives the required completed constant realization on U.",
+   "uses": [
+    "lem-sfb-integral-section-local-isomorphisms",
+    "lem-sfb-integral-section-scalar-models",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely transport the given PbcIntegralRing module across the inverse ULift ring equivalence. Transfer finite presentation as above. Compose the local constant-model isomorphism with the scalar equivalence counit and the inverse scalar-model comparison. Reflect this local isomorphism using integralSectionLocalIsomorphisms, and compose with the point-pullback compositor. The continuous scalar extension is finitely presented by the reverse implication of continuousScalarFinitePresentation. These constructions include empty presentations, torsion modules and empty schemes.",
+   "uses": [
+    "lem-sfb-integral-section-local-isomorphisms",
+    "lem-sfb-integral-section-scalar-models",
+    "lem-sfb-continuous-scalar-finite-presentation",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-scalar-finite-presentation",
+  "lem-sfb-integral-section-local-isomorphisms",
+  "lem-sfb-integral-section-scalar-models",
+  "sk-def-sfb-pullback-from-point-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3); use the already proved continuous scalar finite-presentation classification and assemble the scalar-realization and localized-isomorphism comparisons. T6: genuine decomposition of the coefficient comparison; the original theorem has a complete Lean proof from these parts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralSectionMemberModels normalized section local model",
+   "results": "No existing declaration.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "point model normalized section localized PbcIntegralRing",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite scalar matrix cokernel section equivalence proetale localization",
+   "results": "No exact match.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSectionLocalModels",
+  "date": "2026-10-26",
+  "group": "H9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-section-local-models",
+   "place": "Step 2, comparison on one pro-etale member.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSectionMemberModels",
+  "file": "lean/Sheaf/Paper/IntegralSectionMemberModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralSectionMemberModels",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-26",
+  "statement": "theorem integralSectionMemberModels (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X S : Scheme.{u}} (g : S ⟶ X) (U : S.ProEt)\n    (M : AdicCompletion.Modules l E X) :\n    sectionPointModelAlong (DerivedNakayama.integerRing l E) g M U.hom ↔\n      integralSectionMemberModel l E g U M"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T001817-L-32651",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261026T071127-L-3851275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "id": "lem-pur-strict-scalar-mate-shift",
+ "kind": "statement",
+ "title": "Shift compatibility of strict diagram scalar mates",
+ "statement": "Fix a prime l, finite extensions E⊆F of Q_l with embedding i, schemes X,Y, a compactification c of X→Y, and whole-system coefficient reduction calculi S,S' over E,F on X. Let e≥1 and assume Ramification(l,E,F,i,e). Use the strict constant-coefficient towers and actual maps of [lem-pur-compact-support-strict-scalar-mate], with the canonical integer shifts of [def-pur-compact-support-scalar-shift-structures]. The proper scalar mate proper(l,E,F,i,c.g), openTensor(l,E,F,i,c.i), inverse strictScalarPull(l,E,F,i,c.g), and counit of the E tower pullback/direct-image adjunction commute with every integer shift. Their prescribed full support composite arrow(l,E,F,i,c,S,S',e,he,hepos) also commutes with these shifts in the derived category of whole strict towers. Underlying definitions are those of [lem-pur-compact-support-strict-scalar-mate], [def-pur-compact-support-scalar-shift-structures].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 05SU, 06YU, 07A6, 0B56, 0941, 099I, 099L; retained canonical scalar-shift argument of lem-pur-compact-support-scalar-shift-normalization."
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-strict-scalar-mate",
+  "def-pur-compact-support-scalar-shift-structures"
+ ],
+ "proof": [
+  {
+   "text": "The pullback/scalar identification $\\lambda:p_B^*C_Y\\xrightarrow{\\sim}C_{\\overline X}p_A^*$ in the proper transpose is the canonical balanced identification on resolving representatives. Use [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for its K-flat computation and preservation of K-flat representatives. On those representatives both routes in its shift square send the tensor of a degree-$i$ module section with degree-zero coefficient sections to the same balanced tensor. The first-variable shift in [lem-pur-derived-tensor-additive-constraints] is $t_{r,0}$, whose factor $(-1)^{0i}$ is $1$; unsigned reassociation introduces no additional factor. Hence the shift square is an equality of chain maps, and the resolving-localization full faithfulness in that statement makes it the equality of the actual derived natural comparisons. In particular this assertion is about the specified balanced $\\lambda$, not about some isomorphism between its source and target. The same calculation applies on a small ringed diagram site.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-tensor-additive-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 06YU, definition-derived-tor; degree-zero coefficient specialization of normalized tensor constraints"
+   }
+  },
+  {
+   "text": "Write $L_A=p_A^*$, $R_A=Rp_{*,A}$ and similarly for $B$. By [lem-weil-pbc-derived-adjunction-shift], the canonical counit has, after inserting the comparisons, $\\varepsilon_{N[r]}=\\varepsilon_N[r]$; this holds for all $r$, not only $1$. The defining transpose of $a_N$ in [lem-pur-compact-support-strict-scalar-mate] is $h_N=C(\\varepsilon_N)\\lambda_{R_AN}$. Step 2 and the scalar comparison of Step 1 therefore identify $h_{N[r]}$ with $h_N[r]$. Under the $L_B\\dashv R_B$ Hom-bijection, the shifted candidate for $a_N$ has transpose $h_N[r]$ by that same counit equation. Injectivity gives the shift square for $a$. Apply this reasoning directly on the diagram sites supplied by [lem-weil-pbc-diagram-site-realization], with index category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$. It proves equality in the derived category of strict towers using the diagram adjunction itself; no conclusion is inferred merely from equal evaluated maps.",
+   "uses": [
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; Tag 0B56, equation-projection-formula-map; derived.tex Tag 0A8D, lemma-adjoint-is-exact"
+   }
+  },
+  {
+   "text": "For the open constituent $b$ of [lem-pur-compact-support-strict-scalar-mate], extension by zero is exact by [lem-pur-site-restriction-module-adjunction-exact], so its shift comparison is termwise. In the extension-by-zero presheaf, a generator is a section $x$ in the summand indexed by an arrow $V\\to X$ over $\\overline X$. Both routes in the scalar/shift square send its tensor with a coefficient $b$ to the same indexed generator $x\\otimes b$. These generators span the presheaf, so the maps agree before sheafification and still agree after sheafification. Both differentials on degree-shifted generators are multiplied by $(-1)^r$. The coefficient algebra is finite free and in degree zero, so the prescribed derived scalar/open maps are computed by these termwise maps. The calculation respects every diagram arrow and quotient transition, hence proves the strict diagram shift equation, rather than just its evaluations.",
+   "uses": [
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ, lemma-extension-by-zero-exact; Tag 0E8I, lemma-j-shriek-and-tensor; the balanced map is the specified constituent of q"
+   }
+  },
+  {
+   "text": "By [lem-pur-compact-support-strict-scalar-mate], $q_\\bullet^c$ is exactly the ordered proper/open composite on the ringed diagram sites. Whisker the open square of Step 4 by the properly derived direct image, and compose with the proper square of Step 3. The composite-shift formula and preservation under whiskering in [lem-weil-pbc-commshift-nattrans-comp-whisker] give $s_Vq_\\bullet^c(M[r])=q_\\bullet^c(M)[r]s_{TU}$, with $U=\\mathcal T_E^c$ and $V=(\\mathcal T_F^c C_X)^{(e)}$. The source and target comparisons here are exactly those of the exact tower lifts of [lem-weil-compact-support-reduction-tower-functor] and of scalar extension, normalized in Step 1. Reindexing a strict complex only selects its terms and composes transitions; it does not change its differential or shift comparison. Thus this is an equality of natural transformations in the ordinary derived strict-tower category.",
+   "uses": [
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-compact-support-reduction-tower-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0B56, ordered proper/open transpose; derived.tex Tag 014Y, lemma-composition-exact; tower lift as specified in its cited statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expanded retained comparison Steps 12--13; detailed proof in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of derived scalar extension commute with shifts, uniquely normalized by the localization counit",
+   "results": "Functor.commShiftOfLocalization; mapDerivedCategoryFactors CommShift; useful for the proved tensor uniqueness clause.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a flat completion map is fully faithful on derived complete modules",
+   "results": "ModuleCat.instFaithfulRestrictScalars and ordinary sheaf restriction; does not apply directly to derived morphisms.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"unique\"",
+   "results": "Adjunction.CommShift.compatibilityUnit_unique_left/right; no combined proper/open or Roos constraint lemma.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCommShift_existsUnique|scalarLimitArrow|originalScalarMateShift|completeScalarRestrictionFaithful",
+   "results": "Existing scalarCommShift_existsUnique is reused; original-site and diagram-site factor equations and complete Hom injectivity are not separately stated. Blueprint scalar shift and complete restriction searches found no exact match.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarShiftNormalization",
+  "date": "2026-10-25",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Canonical shifts of scalar proper/open mates and scalar limit maps (returned comparison Steps 12, 13); substep: Shift compatibility of strict diagram scalar mates",
+   "via": [
+    "lem-pur-compact-support-scalar-shift-normalization",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictScalarMateShift",
+  "file": "lean/Sheaf/Paper/StrictScalarMateShift.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.strictScalarMateShift",
+  "statement": "theorem strictScalarMateShift {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X) (S' : CoefficientDerivedSystemCalculus.{u, u} l F X) (e : ℕ) (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) : NatTrans.CommShift (proper l E F i c.g) ℤ ∧ NatTrans.CommShift (openTensor l E F i c.i) ℤ ∧ NatTrans.CommShift (strictScalarPull l E F i c.g).inv ℤ ∧ NatTrans.CommShift (adj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) c.g).counit ℤ ∧ NatTrans.CommShift (arrow l E F i c S S' e he hepos) ℤ",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb474",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261025T164128-L-956705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb474",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261025T164128-L-956705",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs published (identical); moved instance block vs clone (identical but one docstring line); split lemmas vs item conjuncts; witness clauses vs strictScalarMateShift/scalarLimitConstraintShift conclusions; attachment nodes vs scalarCommShift_existsUnique/integralTriangulated"
+ }
+}

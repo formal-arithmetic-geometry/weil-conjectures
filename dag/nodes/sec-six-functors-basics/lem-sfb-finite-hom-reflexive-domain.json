@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-finite-hom-reflexive-domain",
+ "kind": "statement",
+ "title": "Hom into a finite reflexive module over a Noetherian domain is reflexive",
+ "statement": "Let $R$ be a commutative Noetherian integral domain [def-weil-pbc-noetherian-ring], and let $M,N$ be finitely generated $R$-modules [def-weil-finitely-generated-module]. For an $R$-module $T$, put $T^*=\\operatorname{Hom}_R(T,R)$ and call $T$ reflexive if the evaluation map $e_T:T\\to T^{**}$, $t\\mapsto(\\lambda\\mapsto\\lambda(t))$, is an isomorphism. If $N$ is reflexive, then the $R$-module $\\operatorname{Hom}_R(M,N)$ is reflexive. Its module structure is pointwise addition and scalar multiplication.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AV3 (more-algebra-lemma-dual-reflexive)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-noetherian-finite-module-finite-presentation], $M$ is finitely presented. Unpack [def-sc-finitely-presented-module] to choose an exact sequence $R^m\\xrightarrow{a}R^n\\xrightarrow{b}M\\to0$. Write $a(e_k)=\\sum_j a_{jk}e_j$ in the standard bases. Put $H=\\operatorname{Hom}_R(M,N)$, $P=N^n$ and $Q=N^m$. Define $i:H\\to P$ by $i(f)_j=f(b(e_j))$, and $d:P\\to Q$ by $d(y)_k=\\sum_j a_{jk}y_j$. Both maps are $R$-linear by their formulas.",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV3 (more-algebra-lemma-dual-reflexive), first sentence of proof: choose a finite presentation."
+   }
+  },
+  {
+   "text": "For each finite $r$, put $B=N^r$, with coordinate inclusions $\\iota_j:N\\to B$ and projections $\\pi_j:B\\to N$. Every $\\varphi\\in B^*$ has the unique expression $\\varphi=\\sum_j(\\varphi\\iota_j)\\pi_j$. For $x\\in B^{**}$ define $x_j\\in N^{**}$ by $x_j(\\lambda)=x(\\lambda\\pi_j)$. Since $e_N$ is bijective, choose the unique $y_j$ with $e_N(y_j)=x_j$. Then $x(\\varphi)=\\sum_j x_j(\\varphi\\iota_j)=\\sum_j\\varphi(\\iota_j(y_j))=\\varphi((y_j)_j)$, so $e_B$ is surjective. If $e_B(y)=0$, testing on $\\lambda\\pi_j$ gives $e_N(y_j)=0$, hence $y=0$. Thus $P$ and $Q$ are reflexive. The same formulas apply for $r=0$, when all modules are zero. Placing a fixed finite generating set of $N$ separately in each coordinate generates $B$, so $P,Q$ are finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV3 (more-algebra-lemma-dual-reflexive), middle term N^n; coordinate expansion of finite-sum reflexivity."
+   }
+  },
+  {
+   "text": "The map $i$ is injective because the $b(e_j)$ generate $M$. Also $di=0$ since $ba=0$. If $d(y)=0$, the linear map $g:R^n\\to N$, $g((r_j))=\\sum_jr_jy_j$, vanishes on every $a(e_k)$ and thus on $\\operatorname{im}a=\\ker b$. Define $f:M\\to N$ by $f(b(v))=g(v)$: surjectivity of $b$ gives existence of a lift $v$, and two lifts differ by $\\ker b$, proving independence. Lifts of sums and scalar multiples show $f$ is linear, and $i(f)=y$. Therefore $\\operatorname{im}i=\\ker d$. By [lem-weil-pbc-noetherian-submodule-finite], $\\ker d\\subseteq P$ is finite, since $R$ is Noetherian and $P$ is finite. Lifting its finite generators along $i$ shows that $H$ is finite.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV3 (more-algebra-lemma-dual-reflexive), the displayed exact sequence; Algebra Tag 00IK (algebra-lemma-Noetherian-basic) for finiteness."
+   }
+  },
+  {
+   "text": "For any linear map $u:A\\to B$, write $u^{**}(x)(\\lambda)=x(\\lambda u)$. Apply [lem-per-finite-injection-bidual-injective] to $i:H\\to P$: the ring is a Noetherian domain, both modules are finite by steps 2 and 3, and $i$ is injective. Hence $i^{**}$ is injective. For $x\\in H^{**}$ choose $p\\in P$ with $e_P(p)=i^{**}(x)$, using step 2. For every $\\lambda\\in Q^*$, one has $e_Q(d(p))(\\lambda)=\\lambda(d(p))=e_P(p)(\\lambda d)=x(\\lambda di)=0$. Since $e_Q$ is injective, $d(p)=0$. Step 3 gives $h\\in H$ with $i(h)=p$. For every $\\mu\\in P^*$, $i^{**}(e_H(h))(\\mu)=\\mu(i(h))=e_P(p)(\\mu)=i^{**}(x)(\\mu)$; injectivity of $i^{**}$ yields $e_H(h)=x$. Thus $e_H$ is surjective. If $e_H(h)=0$, the same identity gives $e_P(i(h))=0$, and injectivity of $e_P$ and $i$ implies $h=0$. Therefore $e_H$ is bijective. Its inverse is linear because $e_H$ is linear and bijective, so it is the required module isomorphism.",
+   "uses": [
+    "lem-per-finite-injection-bidual-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV3 (more-algebra-lemma-dual-reflexive), concluding application of Tag 0EB8 (more-algebra-lemma-sequence-reflexive), with its diagram chase expanded for P=N^n and Q=N^m."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "def-sc-finitely-presented-module",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-per-finite-injection-bidual-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AV3 (more-algebra-lemma-dual-reflexive), entire proof, expanding the concluding diagram chase of Tag 0EB8 using the existing double-dual-injection node. Since Q=N^m itself is reflexive, its evaluation is injective without a separate torsion-free criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive",
+   "results": "Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean Search directory: Mathlib/LinearAlgebra/Dual.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, LinearMap",
+   "results": "Module.IsReflexive.of_split; Module.evalEquiv_toLinearMap; Module.bijective_dual_eval; Module.IsReflexive.bijective_dual_eval'; Module.IsReflexive.mk; Module.dualMap_dualMap_eq_iff; Module.dualMap_dualMap_eq_iff_of_injective; Module.evalEquiv_apply Read the local dual-reflexivity and finite-free results in Mathlib/LinearAlgebra/Dual/Defs.lean:210-268 and Lemmas.lean:251-267: dual-reflexivity assumes the input module is already reflexive; finite-free/projective reflexivity does not cover arbitrary finite M. None states reflexivity of Hom(M,N) from reflexivity of N over a Noetherian domain, or the coherent-sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian integral domain R the R module Hom(M,N) is reflexive whenever M is finitely generated and N is finite reflexive",
+   "results": "Module.IsReflexive.of_finite_of_free; Module.instIsReflexiveOfFiniteOfProjective; Module.IsReflexive; Module.Dual.instIsReflecive; Module.IsReflexive.of_isPerfPair; FGModuleCat.rightRigidCategory; FGModuleCat.rightDual; Module.instFiniteDimensionalOfIsReflexive Read the local dual-reflexivity and finite-free results in Mathlib/LinearAlgebra/Dual/Defs.lean:210-268 and Lemmas.lean:251-267: dual-reflexivity assumes the input module is already reflexive; finite-free/projective reflexivity does not cover arbitrary finite M. None states reflexivity of Hom(M,N) from reflexivity of N over a Noetherian domain, or the coherent-sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive",
+   "results": "Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/Valuation/Basic.lean Search directory: Mathlib/RingTheory.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For finite modules over a Noetherian domain, Hom into a reflexive module is reflexive",
+   "results": "Module.IsReflexive; LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive; Module.IsReflexive.of_isPerfPair; Module.Dual.instIsReflecive; Module.instFiniteDimensionalOfIsReflexive; Module.instIsReflexiveOfFiniteOfProjective; MulOpposite.instModuleIsReflexive; Module.IsReflexive.of_finite_of_free Read the local dual-reflexivity and finite-free results in Mathlib/LinearAlgebra/Dual/Defs.lean:210-268 and Lemmas.lean:251-267: dual-reflexivity assumes the input module is already reflexive; finite-free/projective reflexivity does not cover arbitrary finite M. None states reflexivity of Hom(M,N) from reflexivity of N over a Noetherian domain, or the coherent-sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R is a commutative Noetherian domain and N is reflexive then the module of linear maps from a finitely presented module M to N is reflexive",
+   "results": "Module.Dual.instIsReflecive; Module.IsReflexive.of_isPerfPair; Module.instIsReflexiveOfFiniteOfProjective; Module.IsReflexive.of_finite_of_free; Module.IsReflexive; Module.IsReflexive.of_split; LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive; Module.evalEquiv Read the local dual-reflexivity and finite-free results in Mathlib/LinearAlgebra/Dual/Defs.lean:210-268 and Lemmas.lean:251-267: dual-reflexivity assumes the input module is already reflexive; finite-free/projective reflexivity does not cover arbitrary finite M. None states reflexivity of Hom(M,N) from reflexivity of N over a Noetherian domain, or the coherent-sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a finitely generated module into a finite reflexive module over a Noetherian domain is reflexive",
+   "results": "{\"t\": \"2026-10-24T07:22:14Z\", \"tool\": \"leanfinder\", \"query\": \"Hom from a finitely generated module into a finite reflexive module over a Noetherian domain is reflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive.of_finite_of_free\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"FGModuleCat.instFiniteHomModuleCatObjIsFG\", \"FGModuleCat.instFiniteHom\", \"FGModuleCat.rightRigidCategory\", \"Module.IsReflexive\", \"Module.IsReflexive.of_split\", \"FGModuleCat.rightDual\"], \"digest\": \"41c8de2257ea68a5\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive",
+   "results": "{\"t\": \"2026-10-24T07:22:51Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|reflexive\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"c98b727e4fdd64bf\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, LinearMap",
+   "results": "{\"t\": \"2026-10-24T07:22:52Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive, LinearMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.IsReflexive.of_split\", \"Module.evalEquiv_toLinearMap\", \"Module.bijective_dual_eval\", \"Module.IsReflexive.bijective_dual_eval'\", \"Module.IsReflexive.mk\", \"Module.dualMap_dualMap_eq_iff\", \"Module.dualMap_dualMap_eq_iff_of_injective\", \"Module.evalEquiv_apply\"], \"digest\": \"992c22faac21d512\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a linear map from a finite reflexive module to a finite torsion free module over a Noetherian integral domain is reflexive",
+   "results": "{\"t\": \"2026-10-24T07:23:29Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of a linear map from a finite reflexive module to a finite torsion free module over a Noetherian integral domain is reflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive.of_isPerfPair\", \"Module.IsReflexive.of_finite_of_free\", \"LinearMap.IsRefl.ker_flip_eq_bot\", \"Module.IsReflexive.of_split\", \"LinearMap.IsRefl.ker_eq_bot_iff_ker_flip_eq_bot\", \"Submodule.disjoint_ker_of_finrank_le\", \"Module.IsReflexive\", \"Module.IsReflexive.to_isTorsionFree\"], \"digest\": \"f54e8523d87fe5b9\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom of a finite module into a reflexive module over a Noetherian integral domain is reflexive",
+   "results": "{\"t\": \"2026-10-24T07:23:29Z\", \"tool\": \"leansearch\", \"query\": \"Hom of a finite module into a reflexive module over a Noetherian integral domain is reflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive\", \"Module.Dual.instIsReflecive\", \"Module.IsReflexive.of_isPerfPair\", \"Module.IsReflexive.mk\", \"Module.IsReflexive.of_finite_of_free\", \"Module.IsReflexive.bijective_dual_eval'\", \"MulOpposite.instModuleIsReflexive\"], \"digest\": \"5937db37fd247c21\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|IsReflexive",
+   "results": "{\"t\": \"2026-10-24T07:24:30Z\", \"tool\": \"grep\", \"query\": \"reflexive|IsReflexive\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/Valuation/Basic.lean\"], \"digest\": \"cf35c596682805ff\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a map from a reflexive module to a torsion free module over a Noetherian domain is reflexive",
+   "results": "{\"t\": \"2026-10-24T07:24:31Z\", \"tool\": \"leansearch\", \"query\": \"The kernel of a map from a reflexive module to a torsion free module over a Noetherian domain is reflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.ker\", \"Module.IsReflexive.to_isTorsionFree\", \"ModuleCat.kernelIsLimit\", \"Module.Dual.instIsReflecive\", \"Module.IsReflexive\", \"Module.Finite.kerRepr\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive.of_split\"], \"digest\": \"b8359da84d9d8ff5\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence of finite modules over a Noetherian domain with reflexive middle module and torsion free last module has reflexive first module",
+   "results": "{\"t\": \"2026-10-24T07:24:32Z\", \"tool\": \"leanfinder\", \"query\": \"An exact sequence of finite modules over a Noetherian domain with reflexive middle module and torsion free last module has reflexive first module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.of_exact\", \"RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive.to_isTorsionFree\", \"Module.IsReflexive.of_split\", \"Module.free_of_lTensor_residueField_injective\", \"Module.finitePresentation_of_split_exact\", \"QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last\"], \"digest\": \"972ace932db2a884\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The module of linear maps from a finitely presented module to a reflexive module over a Noetherian domain has bijective evaluation into its double dual",
+   "results": "{\"t\": \"2026-10-24T07:26:24Z\", \"tool\": \"leanfinder\", \"query\": \"The module of linear maps from a finitely presented module to a reflexive module over a Noetherian domain has bijective evaluation into its double dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.bijective_dual_eval\", \"Module.IsReflexive.bijective_dual_eval'\", \"Module.evalEquiv\", \"FGModuleCat.exactPairing\", \"exists_bijective_map_powers\", \"Module.IsReflexive.of_finite_of_free\", \"FGModuleCat.FGModuleCatEvaluation_apply'\", \"Module.IsReflexive\"], \"digest\": \"1dde6bd3696f36b5\"}; Read Dual/Defs.lean:205-272 and Dual/Lemmas.lean:251-278. The dual instance assumes reflexivity of its input; split summands and finite projectives do not cover arbitrary finite M. The kernel searches found no reflexive-kernel theorem; FGModuleCat duality is over a field.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coherent-reflexive-hull",
+  "date": "2026-10-24",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0EBJ converse, replacing a coherent extension by its reflexive hull: the algebraic Hom-into-reflexive lemma used by Tag 0AY4 to prove the double dual reflexive.",
+   "via": [
+    "lem-sfb-coherent-reflexive-hull",
+    "lem-sfb-normal-reflexive-open-equivalence",
+    "lem-sfb-punctured-picard-local-extension-criterion",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-hom-reflexive-domain",
+  "worker": "stage1",
+  "summary": "Followed Tag 0AV3 through a finite presentation, explicit coordinate reflexivity, the Hom kernel and the Tag 0EB8 bidual diagram chase. Reused finite-presentation, finite-submodule and finite-injection-bidual nodes; created no nodes. No statement correction.",
+  "blueprint": "The inherited from.node is null, as confirmed by blueprint_refs.py ancestor. This is the algebraic Hom input to Tag 0AY4 in lem-sfb-coherent-reflexive-hull, serving Tag 0EBJ converse through the inherited via chain. All four steps realize its Tag 0AV3 proof; the unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-per-finite-injection-bidual-injective",
+    "why": "Generic finite-module double-dual injection theorem of Tag 0EB8, needed in the concluding diagram chase of Tag 0AV3. The item unit has no corresponding commutative-algebra statement; no perverse-sheaf argument or unit step is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-finite-injection-bidual-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-a29dbf617",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-a29dbf617 (reviewer sub-agent of L); spot-checked: I read the item and all four steps in full; there are no new nodes and no changes. The statement matches Stacks 0AV3 (more-algebra.tex:5351-5364) exactly. Step 1: lem-sc-noetherian-finite-module-finite-presentation plus def-sc-finitely-presented-module give the presentation; i and d are linear. Step 2: I checked the coordinate proof that N^r is reflexive (x(φ)=Σx_j(φι_j)), including r=0. Step 3: i is injective, di=0 since (dif)_k=f(b a e_k)=0, and the lift shows ker d=im i; 00IK node gives finiteness. Step 4: the hypotheses of lem-per-finite-injection-bidual-injective (finite H,P, injective i, Noetherian domain) hold. The chase e_Q(dp)(λ)=x(λdi)=0, then i**(e_H h)=i**(x), checks out, and injectivity of e_Q on all of N^m correctly replaces the source's torsion-free N'. Small cases M=0, N=0, Z/2 over Z and M=R are consistent. No duplicate exists: rg for 0AV3 finds only the item and its consumers. I accept the tool_use of lem-per-finite-injection-bidual-injective (generic 0EB8 algebra, statement only). Batch-5 flag: the path reaches lem-trf-vector-subspace-complement, a Mathlib leaf (Submodule.exists_isCompl: subspaces of a vector space have complements). That is general linear algebra filed in sec-trace-formula by location only, not given by or part of the proofs of the trace-formula or Poincaré-duality assumptions, so it is not a reason to RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteHomReflexiveDomain",
+  "declaration": "Module.isReflexive_linearMap_of_finite_of_isNoetherianRing",
+  "file": "lean/Sheaf/RingTheory/FiniteHomReflexiveDomain.lean",
+  "statement": "theorem isReflexive_linearMap_of_finite_of_isNoetherianRing {R : Type u} [CommRing R] [IsNoetherianRing R] [IsDomain R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Finite R M] {N : Type w} [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.IsReflexive R N] : Module.IsReflexive R (M →ₗ[R] N)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a89ec0305",
+  "group": "Q136",
+  "result": "pass",
+  "note": "The statement matches Stacks 0AV3 (more-algebra.tex:5350) and the node clause by clause: CommRing + IsNoetherianRing + IsDomain, Module.Finite M and N, IsReflexive N ⊢ IsReflexive (M →ₗ[R] N). Module.IsReflexive is bijectivity of Dual.eval, matching the node. No extra assumptions; universes u, v, w independent. Only the item's lean field changed against live; the lean.statement field occurs verbatim in the file. No Mathlib or project duplicate (Mathlib's IsReflexive instances cover only free/projective/Prod/ULift/Dual/MulOpposite). The docstring carries all 4 proof steps; the step-4 dep dualMap_dualMap_injective_of_injective_of_finite exists in live and its hypotheses hold. Report sections present. Edge cases M=0, N=0, M=R, ℤ/2→ℤ and n=m=0 checked. No file changed, so no compile."
+ }
+}

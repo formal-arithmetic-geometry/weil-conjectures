@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-finite-centre-proper-pinching",
+ "kind": "statement",
+ "title": "Proper finite-centre pinching of a projective scheme",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and $X\\to S$ a projective morphism [def-kun-projective]. Let $Z,T$ be finite $S$-schemes [def-weil-finite-integral-morphism], let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and let $j:Z\\to T$ be a finite surjective $S$-morphism [def-weil-surjective-morphism]. Assume that the underlying set $|Z|$ is finite; its points need not be closed in $X$. Then $X/S$ is proper [def-weil-proper-morphism] and carries an ample invertible sheaf $L$ [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]; an affine open $U\\subseteq X$ contains $i(Z)$. The pushout $P=X\\amalg_ZT$ exists in all schemes [def-weil-pbc-category-colimit]. With its maps $a:X\\to P$ and $b:T\\to P$, the morphism $P\\to S$ is proper and finitely presented [def-sbc-locally-finite-presentation], $a$ is finite and surjective, $b$ is a closed immersion, the square is cartesian [def-pc-fibre-product], and $X\\setminus i(Z)\\to P\\setminus b(T)$ is an isomorphism. The sheaf and simultaneous affine-chart descriptions of the Ferrand square hold: $\\mathcal O_P=a_*\\mathcal O_X\\times_{c_*\\mathcal O_Z}b_*\\mathcal O_T$, where $c=ai=bj$; on a cover by affine opens $W\\subseteq P$, their inverse images in $X,T,Z$ are $\\operatorname{Spec}A,\\operatorname{Spec}E,\\operatorname{Spec}D$ with $A\\twoheadrightarrow D$, and $W=\\operatorname{Spec}(A\\times_D E)$, where $A\\times_D E=\\{(u,v):u|_D=j^*v\\}$ has coordinatewise operations. Every open restriction is again a pushout. Empty $Z,T$ and empty $X$ are allowed whenever the hypotheses hold. No flatness, smoothness, fibre-dimension, or degree-two assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Agent extraction of old steps 1--3: Tags 0E25 (proposition-pushout-along-closed-immersion-and-integral), 0E26 (lemma-pushout-separated), 0E27 (lemma-pushout-finite-type); more-algebra.tex Tag 00IT (lemma-fibre-product-finite-type), generator argument; properties.tex Tag 01ZY (lemma-ample-finite-set-in-affine)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-surjective-morphism",
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-category-colimit",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite projective-space embedding supplied by [def-kun-projective]. By [lem-kun-projective-implies-proper], $X/S$ is proper. Apply [lem-weil-pbc-projective-ample-invertible] to that embedding over the affine base $S=\\operatorname{Spec}R$: its restricted twisting sheaf $L$ is an ample invertible sheaf on $X$.",
+   "uses": [
+    "def-kun-projective",
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-projective-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC (lemma-locally-projective-proper); properties.tex Tags 01PU (lemma-ample-on-closed), 01PS (definition-ample); constructions.tex Tag 01MW (lemma-ample-on-proj)."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-ample-finite-set-affine] to the finite subset $i(|Z|)$ of $X$ to obtain an affine open $U$ containing it; the lemma does not require its points to be closed. The finite map $j$ is integral by [pqf-lem-finite-integral-lft]. Thus every set $i(j^{-1}(\\{t\\}))$ lies in this same affine open $U$.",
+   "uses": [
+    "lem-sc-ample-finite-set-affine",
+    "pqf-lem-finite-integral-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY (lemma-ample-finite-set-in-affine); morphisms.tex Tag 01WJ (lemma-finite-integral)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ferrand-scheme-pushout] to $i,j$ using Step 2. It gives the scheme pushout $P$, its induced structure map to $S$, the integral affine map $a$, the closed immersion $b$, the cartesian square, the displayed structure-sheaf fibre product, the simultaneous affine charts with coordinatewise fibre-product rings, and the pushout property after every open restriction. These are the corresponding clauses of the assertion, with the names $A,E,D$ used there.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), statement and affine-chart/open-restriction construction in its proof."
+   }
+  },
+  {
+   "text": "The quotient-space description in [lem-sfb-ferrand-scheme-pushout] makes $|a(X)|\\cup|b(T)|=|P|$. For each $t\\in T$, surjectivity of $j$ gives $z\\in Z$ with $j(z)=t$, whence $b(t)=a(i(z))$. Therefore $a$ is surjective and $c(Z)=b(T)$ as sets. In the complement isomorphism of that same node, $T\\setminus j(Z)$ is empty; it becomes precisely $X\\setminus i(Z)\\simeq P\\setminus b(T)$.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), quotient-space and complement paragraphs."
+   }
+  },
+  {
+   "text": "To check finiteness of $a$, take any affine open $W\\subseteq P$. Its inverse image in $X$ is affine since $a$ is integral. Its inverse image in $T$ is affine since the closed immersion $b$ is affine by [lem-weil-pbc-closed-immersion-integral-separated-uc]; its inverse image in $Z$ is then affine since $j$ is finite. The open-restriction and affine-case assertions of [lem-sfb-ferrand-scheme-pushout] identify these rings as $A,E,D$ and $W=\\operatorname{Spec}B$, $B=A\\times_D E$, with $\\alpha:A\\twoheadrightarrow D$. By the definition of finite morphism, $D$ is a finite $E$-module.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), affine case and open restriction; morphisms.tex Tag 01WH (definition-integral)."
+   }
+  },
+  {
+   "text": "Choose $E$-module generators $d_1,\\ldots,d_n$ of $D$ and lifts $x_k\\in A$ with $\\alpha(x_k)=d_k$. For $x\\in A$, write $\\alpha(x)=\\sum_k\\beta(e_k)d_k$, where $\\beta:E\\to D$ is the other structure map, and choose $r_k\\in A$ with $\\alpha(r_k)=\\beta(e_k)$. Then $(r_k,e_k)\\in B$ and $h=x-\\sum_k r_kx_k\\in\\ker\\alpha$, so $(h,0)\\in B$. Hence $x=(h,0)\\cdot1+\\sum_k(r_k,e_k)\\cdot x_k$ for the $B$-action on $A$. Thus $1,x_1,\\ldots,x_n$ generate $A$ over $B$. As Step 5 treats every affine $W$, [def-weil-finite-integral-morphism] gives finiteness of $a$. The argument includes $D=0$ by taking no $d_k$.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 00IT (lemma-fibre-product-finite-type), explicit module-generator argument in its proof; only the generator argument, not its Artin--Tate conclusion, is needed here."
+   }
+  },
+  {
+   "text": "The one-element affine cover $S=\\operatorname{Spec}R$ with $R$ Noetherian shows that $S$ is locally Noetherian by [pqf-def-locnoeth]. The finite morphisms $T/S$ and $Z/S$ are proper by [lem-weil-pbc-finite-proper]. Consequently $X,T$ are separated over $S$ and $X,T,Z$ are locally of finite type over $S$, by [def-weil-proper-morphism]. The separatedness and locally-finite-type clauses of [lem-sfb-ferrand-scheme-pushout] now apply to $P/S$. Since $X/S$ is universally closed and $a$ is surjective, [lem-weil-pbc-image-universally-closed] says that $P/S$ is proper.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-ferrand-scheme-pushout",
+    "lem-weil-pbc-image-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0E26 (lemma-pushout-separated), 0E27 (lemma-pushout-finite-type); morphisms.tex Tags 01WN (lemma-finite-proper), 03GN (lemma-image-proper-is-proper)."
+   }
+  },
+  {
+   "text": "By [pqf-lem-lft-fp-locnoeth], the locally finite type morphism $P/S$ is locally of finite presentation. Properness gives quasi-compactness by [def-weil-proper-morphism], and separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. These three conditions are exactly finite presentation in [def-sbc-locally-finite-presentation]. The empty cases require no exception: if $Z$ is empty then surjectivity forces $T$ empty, the pushout is $X$, and the zero affine ring is allowed in the chart calculation. If $X$ is empty, so are $Z,T$, and $P$ is empty as well.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TX (lemma-noetherian-finite-type-finite-presentation); schemes.tex Section 01KH after Definition 01KK (definition-separated); morphisms.tex definition-finite-presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-sc-ample-finite-set-affine",
+  "pqf-lem-finite-integral-lft",
+  "lem-sfb-ferrand-scheme-pushout",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-image-universally-closed",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-pc-separated-quasi-separated",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0E25, 0E26, 0E27, with the explicit finite-module generator argument in more-algebra.tex Tag 00IT and proper-image lemma morphisms.tex Tag 03GN; ample finite-set input properties.tex Tag 01ZY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pinching a projective scheme over a discrete valuation ring along a finite surjective morphism between finite schemes has a proper finitely presented quotient and a finite quotient map",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"leanfinder\", \"query\": \"Pinching a projective scheme over a discrete valuation ring along a finite surjective morphism between finite schemes has a proper finitely presented quotient and a finite quotient map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"51a4910d307927a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and finite-morphism instances do not construct a closed pinching or prove the finiteness of its quotient map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite closed pinching of a proper scheme over a noetherian affine base is proper of finite presentation",
+   "results": "{\"t\": \"2026-10-22T06:14:49Z\", \"tool\": \"leansearch\", \"query\": \"A finite closed pinching of a proper scheme over a noetherian affine base is proper of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"6d0d31a8cd8fafe0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and finite-morphism instances do not construct a closed pinching or prove the finiteness of its quotient map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-22T06:14:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsLocallyDirectedWidePushoutShapeCompForgetOfIsOpenImmersionMap\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPushout_appTop_of_isPullback\", \"AlgebraicGeometry.pushoutSection\", \"AlgebraicGeometry.isIso_pushoutSection_of_isAffineOpen\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\"], \"digest\": \"30f267eaf9553171\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and finite-morphism instances do not construct a closed pinching or prove the finiteness of its quotient map."
+  },
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinch|IsPushout",
+   "results": "{\"t\": \"2026-10-22T06:14:28Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinch|IsPushout\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\"], \"digest\": \"1224469a34a255c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and finite-morphism instances do not construct a closed pinching or prove the finiteness of its quotient map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite pinching of a projective scheme along a closed subscheme exists as a proper finitely presented scheme with finite surjective quotient map",
+   "results": "{\"t\": \"2026-10-23T09:29:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite pinching of a projective scheme along a closed subscheme exists as a proper finitely presented scheme with finite surjective quotient map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj\"], \"digest\": \"a23e1c4edca09c19\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj properness, integral base change, or affine scheme pullbacks; none constructs the closed-immersion pinching pushout with all the asserted properties."
+  },
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinching|IsPushout",
+   "results": "{\"t\": \"2026-10-23T09:30:50Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinching|IsPushout\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\"], \"digest\": \"1ce13565a51c4569\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj properness, integral base change, or affine scheme pullbacks; none constructs the closed-immersion pinching pushout with all the asserted properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-23T09:30:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsLocallyDirectedWidePushoutShapeCompForgetOfIsOpenImmersionMap\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPushout_appTop_of_isPullback\", \"AlgebraicGeometry.pushoutSection\", \"AlgebraicGeometry.isIso_pushoutSection_of_isAffineOpen\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\"], \"digest\": \"30f267eaf9553171\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj properness, integral base change, or affine scheme pullbacks; none constructs the closed-immersion pinching pushout with all the asserted properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schemes admit pushouts of a closed immersion and a finite map and the quotient of a proper scheme is proper",
+   "results": "{\"t\": \"2026-10-23T09:31:35Z\", \"tool\": \"leansearch\", \"query\": \"Schemes admit pushouts of a closed immersion and a finite map and the quotient of a proper scheme is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.instSndScheme\"], \"digest\": \"aae47139e9bcffde\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj properness, integral base change, or affine scheme pullbacks; none constructs the closed-immersion pinching pushout with all the asserted properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ferrand pushout of schemes along integral morphism and closed immersion, affine local fiber product of rings",
+   "results": "{\"t\": \"2026-10-23T09:31:46Z\", \"tool\": \"leanfinder\", \"query\": \"Ferrand pushout of schemes along integral morphism and closed immersion, affine local fiber product of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"AlgebraicGeometry.IsIntegralHom.instSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback\"], \"digest\": \"c1c781af30cf5591\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj properness, integral base change, or affine scheme pullbacks; none constructs the closed-immersion pinching pushout with all the asserted properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-etale-branch-pinching",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Projective nodal pinching along finite etale double branches; old proof steps 1--3 (affine neighbourhood, finite quotient, properness and finite presentation)",
+   "via": [
+    "lem-sfb-trait-etale-branch-pinching",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-centre-proper-pinching",
+  "worker": "stage1",
+  "summary": "No project Lean attachment found. Split using the existing general Ferrand theorem, projective/ample inputs, proper-image theorem and Noetherian finite-presentation results. The finite quotient map is proved explicitly by generators on every affine open. All citations checked clause by clause, including arbitrary finite nonclosed centres and empty schemes. No new nodes and no statement change.",
+  "blueprint": "Realizes the finite-centre scheme-pushout prerequisite extracted from old steps 1--3 of lem-sfb-trait-etale-branch-pinching, along the existing ancestry recorded in blueprint.from.place. The current latest blueprint direct-image proof clause (3) is preserved; this is a generic geometric input below that route. Whole-DAG and blueprint searches for pinching, 0E25 and proper pinching found no blueprint node restating the item; same_as remains [].",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic properness theorem for projective morphisms, used only to verify the proper-image input; this unit has no projective properness statement."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Generic ample restricted twisting sheaf for a finite projective embedding over an affine base; it verifies the finite-set affine-neighbourhood input without changing the alteration route."
+   },
+   {
+    "node": "lem-sc-ample-finite-set-affine",
+    "why": "Generic finite-set affine-neighbourhood theorem, valid also for nonclosed points; the unit has no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-sc-ample-finite-set-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-71ae28119",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-71ae28119 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged from base/live, 8 steps, no new nodes. Live still has the item unsplit, so no other group has done it. The repair note under coord/repair-notes is for the parent trait-etale-branch-pinching, so this is an ordinary first split and the re-split rule does not apply. Checks per step. S1: def-kun-projective uses P({0..N};S), the same projective space as lem-weil-pbc-projective-ample-invertible over affine Spec R, which gives an ample L; projective-implies-proper gives properness. S2: 01ZY has no closedness hypothesis, so U contains i(Z), which contains every i(j^{-1}(t)); finite implies integral. S3: every clause taken from lem-sfb-ferrand-scheme-pushout is in its statement (0E25 situation checked). S4: the quotient topology plus surjectivity of j give a surjective, c(Z)=b(T), and T minus j(Z) empty, hence the complement isomorphism. S5: for any affine W, the preimages under a and b are affine because a and b are affine, and c^{-1}W=j^{-1}(b^{-1}W) is affine because j is finite; the open-restriction and affine-case clauses give W=Spec(A x_D E). S6: the 00IT generator argument is written out and correct (alpha(h)=0, so (h,0) and (r_k,e_k) lie in B, and x=h+sum r_k x_k), D=0 included; it applies to every affine W, so def-finite applies directly. S7: Z and T finite hence proper; the Ferrand separatedness clause (0E26) and lft clause (0E27) apply; the image of a universally closed map under surjective a (03GN node) gives P/S proper. S8: lft over a Noetherian base gives lfp; quasi-compact and quasi-separated then give finite presentation. Advisory: S8's quasi-compactness comes from def-weil-finite-type-morphism through def-proper; not cited directly, cosmetic. Edge cases checked: Z or X empty, j an isomorphism, i an isomorphism, nonclosed centre. Duplicate check: affine-closed-pinching, integral-pinching-compatible-affines, trf relative-nodal-point-pinching, proper-chain-pinching and finite-branch-ample-descent do not restate the item. No SGA source. Accepted tool_uses: kun projective-implies-proper, pbc projective-ample-invertible and sc ample-finite-set-affine, all generic. from.node null is inherited from the created-node ancestry. Review: review.md in the run directory."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCentreProperPinching",
+  "declaration": "AlgebraicGeometry.exists_finiteCentre_proper_pinching",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCentreProperPinching.lean",
+  "statement": "theorem exists_finiteCentre_proper_pinching (R : Type u) [CommRing R] [IsNoetherianRing R] (Z X T : Over (Spec (CommRingCat.of R))) (i : Z ⟶ X) (j : Z ⟶ T) [IsHProjective X.hom] [IsFinite Z.hom] [IsFinite T.hom] [IsClosedImmersion i.left] [IsFinite j.left] [Surjective j.left] [Finite Z.left] : IsProper X.hom ∧ (∃ (L : X.left.Modules) (hL : L.IsInvertible), @Scheme.Modules.IsAmple X.left L hL) ∧ (∃ U : X.left.Opens, IsAffineOpen U ∧ Set.range i.left ⊆ (U : Set X.left)) ∧ ∃ (P : Over (Spec (CommRingCat.of R))) (a : X ⟶ P) (b : T ⟶ P), ∃ hs : IsPushout i.left j.left a.left b.left, IsProper P.hom ∧ LocallyOfFinitePresentation P.hom ∧ QuasiCompact P.hom ∧ QuasiSeparated P.hom ∧ IsFinite a.left ∧ Surjective a.left ∧ IsClosedImmersion b.left ∧ IsPullback i.left j.left a.left b.left ∧ (∀ W : P.left.Opens, IsPullback (a.left.app W) (b.left.app W) (i.left.app (a.left ⁻¹ᵁ W)) (j.left.appLE (b.left ⁻¹ᵁ W) ((i.left ≫ a.left) ⁻¹ᵁ W) (le_of_eq (congrArg (fun f : Z.left ⟶ P.left ↦ f ⁻¹ᵁ W) hs.w)))) ∧ (∃ (ι : Type u) (W : ι → P.left.Opens), iSup W = ⊤ ∧ ∀ k : ι, IsAffineOpen (W k) ∧ IsAffineOpen (a.left ⁻¹ᵁ W k) ∧ IsAffineOpen (b.left ⁻¹ᵁ W k) ∧ IsAffineOpen ((i.left ≫ a.left) ⁻¹ᵁ W k) ∧ Function.Surjective (i.left.app (a.left ⁻¹ᵁ W k)) ∧ ∃ e : (W k).toScheme ≅ Spec (pullback (i.left.app (a.left ⁻¹ᵁ W k)) (j.left.appLE (b.left ⁻¹ᵁ W k) ((i.left ≫ a.left) ⁻¹ᵁ W k) (le_of_eq (congrArg (fun f : Z.left ⟶ P.left ↦ f ⁻¹ᵁ W k) hs.w)))), morphismRestrict a.left (W k) ≫ e.hom = (a.left ⁻¹ᵁ W k).toSpecΓ ≫ Spec.map (pullback.fst _ _) ∧ morphismRestrict b.left (W k) ≫ e.hom = (b.left ⁻¹ᵁ W k).toSpecΓ ≫ Spec.map (pullback.snd _ _)) ∧ (∃ (U : X.left.Opens) (V : P.left.Opens) (e : U.toScheme ≅ V.toScheme), (U : Set X.left) = (Set.range i.left)ᶜ ∧ (V : Set P.left) = (Set.range b.left)ᶜ ∧ e.hom ≫ V.ι = U.ι ≫ a.left) ∧ (∀ V : P.left.Opens, IsPushout ((Over.pullback V.ι).map (Over.homMk i.left rfl : Over.mk (i.left ≫ a.left) ⟶ Over.mk a.left)).left ((Over.pullback V.ι).map (Over.homMk j.left hs.w.symm : Over.mk (i.left ≫ a.left) ⟶ Over.mk b.left)).left (pullback.snd a.left V.ι) (pullback.snd b.left V.ι))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67c68bcc0",
+  "group": "N9",
+  "result": "pass",
+  "note": "Only the item lean field changed; lean.statement is verbatim in the file. Hypotheses match the node with nothing stronger: Noetherian R, Spec R, IsHProjective X.hom (def-kun-projective), finite Z/S and T/S, closed immersion i, finite surjective j over S, Finite Z.left with no closedness. Conclusions match clause by clause: IsProper X, absolute IsAmple (01PS) invertible L, affine U containing range i, IsPushout in Scheme with P,a,b over S, proper + LFP + QC + QS (the def-sbc comparison clause), a finite and surjective, b closed immersion, cartesian square, sectionwise CommRingCat pullback for every open, affine cover with W ≅ Spec(pullback) pinned by the a/b equations, complement iso pinned by e≫V.ι = U.ι≫a, and the open-restriction pushout; these interfaces are identical to the landed exists_ferrand_scheme_pushout. Edge cases covered: empty Z/T/X, R=0, nonclosed centre, D=0. Universes all u. No duplicate found by rg in side-live Sheaf/WeilConjectures or by Mathlib grep. Docstrings carry source places, blueprint tag and all 8 proof steps; proof is sorry only; no definitions; imports exist live; report has Worker report and Second reading by N9. Not recompiled (no change); worker compile clean. Minor: QC/QS redundant given IsProper, harmless."
+ }
+}

@@ -1,0 +1,320 @@
+{
+ "id": "lem-trf-cotangent-zero-relative-square",
+ "kind": "statement",
+ "title": "Canonical cotangent comparison for squares with zero relative complexes",
+ "statement": "Let $A\\to B$, $A'\\to B'$, $a:A\\to A'$ and $b:B\\to B'$ be a commutative square of homomorphisms of commutative rings. Use the standard cotangent complexes and their standard square maps [lem-trf-cotangent-resolution-coherence], in the derived categories of ordinary modules [def-weil-abstract-derived-category]. Assume $L_{A'/A}=0$ in $D(A')$ and $L_{B'/B}=0$ in $D(B')$. Then the canonical morphism\n$$\\beta_{a,b}:L_{B/A}\\otimes_B^{\\mathbf L}B'\\longrightarrow L_{B'/A'}$$\nis an isomorphism in $D(B')$. Here $\\beta_{a,b}$ is the composite of the first functoriality arrow for the triple $A\\to B\\to B'$ and the second functoriality arrow for $A\\to A'\\to B'$; equivalently it is the derived scalar-extension adjoint of the standard square map. This specifies the morphism, not just the existence of an isomorphism. For two successive squares satisfying these vanishing hypotheses, the composite of their comparison morphisms, after derived extension of scalars and the derived tensor associator, equals the comparison for the composite square. Identity squares give identity comparisons.\nIf in addition $B'$ is flat over $B$ [def-weil-pbc-flat-ring-map], then $B'[0]$ is K-flat [def-pc-module-kflat-complex], and for every complex $K$ of $B$-modules the derived-to-ordinary tensor comparison identifies $K\\otimes_B^{\\mathbf L}B'$ with the termwise complex $K\\otimes_B B'$ [def-weil-pbc-module-tensor-product]. Under this identification, $\\beta_{a,b}$ is represented by the canonical chain map $L^{\\mathrm{std}}_{B/A}\\otimes_B B'\\to L^{\\mathrm{std}}_{B'/A'}$ and that map is a quasi-isomorphism. For successive squares with flat maps on the upper rings, their ordinary chain comparisons compose under $(x\\otimes c)\\otimes d\\mapsto x\\otimes b'(c)d$, where $b':B'\\to B''$ is the second upper-ring map; this is the same equality as for their derived comparisons. No tensor-pushout hypothesis on the square is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QS (equation-triangle), 08R3 (lemma-localize-on-top), and 08SF (lemma-localize); the two-triangle argument with zero relative terms, generalized from localizations to arbitrary zero-relative squares; standard-square composition fixes the comparison maps."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-module-kflat-complex",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-cotangent-square-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Write $C=L^{\\mathrm{std}}_{B/A}$ and $C'=L^{\\mathrm{std}}_{B'/A'}$. Their standard square map is a $B$-linear chain map $\\gamma:C\\to\\operatorname{Res}_b C'$ by [lem-trf-cotangent-resolution-coherence]. Each term of $C$ is free over $B$: apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] to the polynomial term of the standard resolution, then tensor its differential basis with $B$. Such a free module is flat directly, since tensoring with it is a direct sum of copies of the original map, and direct sums preserve exactness componentwise. Since $C^i=0$ for $i>0$, [lem-pc-module-bounded-flat-kflat] makes $C$ K-flat. The same holds for the standard complexes of every ring map used below. Transport [lem-pur-sheaf-ring-derived-coefficient-adjunction] through [lem-trf-one-point-derived-ring-identification]. If $c_C:L_{B/A}\\otimes_B^{\\mathbf L}B'\\xrightarrow{\\sim}Q(C\\otimes_B B')$ is its canonical computation isomorphism, the adjunct of $Q\\gamma$ is $Q(m)c_C$, where $m(x\\otimes c)=c\\gamma(x)$. This defines $\\beta_{a,b}$ with the required normalization, for arbitrary ring squares.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-one-point-derived-ring-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality); algebra.tex Tag 00RX (lemma-differentials-polynomial-ring); more-algebra.tex Tag 064K (lemma-derived-tor-quasi-isomorphism); sites-cohomology.tex Tag 07A6 (lemma-adjoint), normalized on standard representatives."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cotangent-transitivity-triangle] to $A\\to B\\to B'$. It gives the distinguished triangle $L_{B/A}\\otimes_B^{\\mathbf L}B'\\xrightarrow{f}L_{B'/A}\\to L_{B'/B}\\to(L_{B/A}\\otimes_B^{\\mathbf L}B')[1]$. Its third object is zero by hypothesis, so [lem-kun-distinguished-cone-zero] makes $f$ invertible. The cited triangle specifies $f$ as the first standard functoriality arrow, rather than an arbitrarily chosen isomorphism.",
+   "uses": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QX (proposition-triangle), 08QS (equation-triangle), and 08R3 (lemma-localize-on-top); derived.tex Tag 05QR (lemma-third-object-zero)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cotangent-transitivity-triangle] to $A\\to A'\\to B'$. The first term $L_{A'/A}\\otimes_{A'}^{\\mathbf L}B'$ is zero: derived change of rings is an exact additive functor by [lem-pur-derived-change-of-rings], specialized to modules by [lem-trf-one-point-derived-ring-identification], and therefore preserves zero objects. Rotate this triangle to put its second arrow $g:L_{B'/A}\\to L_{B'/A'}$ first; its third term is the shift of a zero object. Rotation and shift are those of [def-weil-abstract-derived-category], so [lem-kun-distinguished-cone-zero] makes $g$ invertible. The original square is the composite of the squares $(A\\to B)\\to(A\\to B')$ and $(A\\to B')\\to(A'\\to B')$. Standard square maps compose by [lem-trf-cotangent-resolution-coherence]. Naturality of the adjunction in [lem-pur-sheaf-ring-derived-coefficient-adjunction] says that postcomposing the adjunct $f$ with $g$ is the adjunct of their composite square map. Thus $\\beta_{a,b}=gf$, which is invertible. Neither triangle required a tensor pushout.",
+   "uses": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-pur-derived-change-of-rings",
+    "lem-trf-one-point-derived-ring-identification",
+    "def-weil-abstract-derived-category",
+    "lem-kun-distinguished-cone-zero",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QX (proposition-triangle), 08QS (equation-triangle), 08QL (section-functoriality); the same two-triangle argument as Tag 08SF (lemma-localize); sites-cohomology.tex Tags 06YY (lemma-derived-base-change), 07A6 (lemma-adjoint)."
+   }
+  },
+  {
+   "text": "For successive squares write $F_b=-\\otimes_B^{\\mathbf L}B'$, $R_b=\\operatorname{Res}_b$, and similarly for $b':B'\\to B''$, with units $\\eta_b$. Let their standard square maps in derived categories be $\\gamma,\\gamma'$. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], $R_b(\\beta)\\eta_b=\\gamma$ and $R_{b'}(\\beta')\\eta_{b'}=\\gamma'$, using the one-point identification [lem-trf-one-point-derived-ring-identification]. The associator $F_{b'}F_b\\cong F_{b'b}$ identifies its unit with the composite units by [lem-sfb-successive-derived-quotient-normalization]. Writing $C=L_{B/A}$ and $C'=L_{B'/A'}$, naturality gives $R_{b'}F_{b'}(\\beta)\\eta_{b',F_bC}=\\eta_{b',C'}\\beta$. Together with the composite-unit formula, this makes the adjunct of $\\beta'F_{b'}(\\beta)$ equal to $R_b(\\gamma')\\gamma$. By [lem-trf-cotangent-resolution-coherence] this is the square map for the composite. Bijectivity of adjunction proves the asserted equality of comparisons. For the identity square the square map is the identity; its adjunct is the scalar-unit identification, hence the identity after $F_{1_B}\\cong\\mathrm{id}$. Also the composite squares satisfy the vanishing hypotheses: apply [lem-trf-cotangent-transitivity-triangle] to $A\\to A'\\to A''$ and $B\\to B'\\to B''$; their outer terms are zero by the assumed vanishings and preservation of zero by derived change of rings, so their middle terms vanish by [lem-kun-distinguished-cone-zero].",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-pur-derived-change-of-rings",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality); sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 0D6D (lemma-derived-pullback-composition), with normalized scalar-extension units; cotangent.tex Tag 08QX (proposition-triangle)."
+   }
+  },
+  {
+   "text": "Now suppose $B'$ is flat over $B$. By [lem-weil-pbc-flat-tensor-exact], tensor with $B'$ preserves short exact sequences. For an acyclic $F$, tensor the sequences $0\\to Z^iF\\to F^i\\to Z^{i+1}F\\to0$: the images and kernels of the tensored differentials agree. Thus $F\\otimes_B B'$ is acyclic, which says exactly that $B'[0]$ is K-flat by [def-pc-module-kflat-complex]. More generally, put $D^iK=\\operatorname{im}d^{i-1}$. Tensor the exact sequences $0\\to Z^iK\\to K^i\\to D^{i+1}K\\to0$ and $0\\to D^iK\\to Z^iK\\to H^iK\\to0$. Their kernels and quotients give $H^i(K\\otimes_B B')=H^i(K)\\otimes_B B'$, naturally in chain maps, so tensor preserves quasi-isomorphisms. Choose a flat-term K-flat resolution $q:P\\to K$ by [lem-pc-source-module-kflat-resolution]. Use the derived-change-of-rings pair and natural derived-to-ordinary counit $\\varepsilon$ of [lem-pur-derived-change-of-rings, lem-trf-one-point-derived-ring-identification]. Its computation map $c_P=\\varepsilon_P$ is invertible. Naturality gives $\\varepsilon_K=Q(q\\otimes1)c_P(F_b(Qq))^{-1}$. Each factor is invertible, including $Q(q\\otimes1)$ by the preceding exactness calculation. This is precisely the canonical identification $F_b(QK)\\cong Q(K\\otimes_B B')$, for every unbounded $K$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pc-module-kflat-complex",
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-trf-one-point-derived-ring-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06XZ (definition-K-flat), 06Y4 (lemma-K-flat-resolution), and 06Y6 (lemma-derived-base-change), together with algebra.tex Tag 00HD (lemma-flat); explicit natural-counit calculation for a flat coefficient module."
+   }
+  },
+  {
+   "text": "For $K=C$, the counit $\\varepsilon_C$ of Step 5 is the same canonical computation map $c_C$ used in Step 1: [lem-trf-one-point-derived-ring-identification] transports the derived pair and its counit, and [lem-pur-sheaf-ring-derived-coefficient-adjunction] uses that computation map on flat-term K-flat representatives. Its normalized adjunct formula therefore gives $\\beta_{a,b}=Q(m)\\varepsilon_C$ for the canonical chain map $m:C\\otimes_B B'\\to C'$, $x\\otimes c\\mapsto c\\gamma(x)$. Since $\\beta$ and $\\varepsilon_C$ are invertible, $Q(m)$ is invertible. Each cohomology functor factors through $Q$ by [def-weil-abstract-derived-category]; hence $H^i(m)$ is invertible for every $i$, so $m$ is a quasi-isomorphism. This proves the claim for the specified map, not merely for an isomorphic pair of objects.",
+   "uses": [
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality) and Tag 08SF (lemma-localize); sites-cohomology.tex Tag 07A6 (lemma-adjoint), representative normalization; derived-category cohomology factorization."
+   }
+  },
+  {
+   "text": "For two successive flat upper-ring maps, let $m,m'$ be these chain comparisons, and $\\gamma,\\gamma'$ the standard semilinear maps. On a pure tensor $((x\\otimes c)\\otimes d)$ their composite is $d\\,\\gamma'(c\\gamma(x))=b'(c)d\\,(\\gamma'\\gamma)(x)$. By [lem-trf-cotangent-resolution-coherence], $\\gamma'\\gamma$ is exactly the composite-square map. This is the value of its chain comparison on $x\\otimes b'(c)d$, so the chain maps agree under the stated associator, since pure tensors generate. The associator represents the derived associator by [lem-sfb-successive-derived-quotient-normalization], and its units and the normalized adjuncts agree with those of [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Consequently the chain equality localizes to exactly the equality in Step 4.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit tensor-generator composition; sites-cohomology.tex Tags 0D6D (lemma-derived-pullback-composition) and 07A6 (lemma-adjoint)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-kun-distinguished-cone-zero",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-cotangent-transitivity-triangle",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QL (section-functoriality), 08QX (proposition-triangle), 08R3 (lemma-localize-on-top), and 08SF (lemma-localize), with the explicit normalized derived scalar adjunction and tensor calculations in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cotangent complex base change along commutative ring square with both relative cotangent complexes zero",
+   "results": "8 hits: KaehlerDifferential.cotangentComplexBaseChange, Algebra.Generators.Cotangent.exact, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Generators.CotangentSpace.exact, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale. Search digest 2a8da5a19f20ca80. Hits concern the presentation map I/I^2 to differentials, H1Cotangent, ordinary Kahler differentials or Kan extensions, not the full derived cotangent complex. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and Mathlib/RingTheory/Etale/Kaehler.lean:279-284.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(transitiv|baseChange|BaseChange)|CotangentComplex|cotangentComplex [sub=RingTheory]",
+   "results": "25 hits: Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean. Search digest 54ad95f0e4557ab7. Hits concern the presentation map I/I^2 to differentials, H1Cotangent, ordinary Kahler differentials or Kan extensions, not the full derived cotangent complex. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and Mathlib/RingTheory/Etale/Kaehler.lean:279-284.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, IsLocalization",
+   "results": "3 hits: Algebra.H1Cotangent.isLocalizedModule, Algebra.tensorH1CotangentOfIsLocalization, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap. Search digest 5da133ed852d08e2. Hits concern the presentation map I/I^2 to differentials, H1Cotangent, ordinary Kahler differentials or Kan extensions, not the full derived cotangent complex. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and Mathlib/RingTheory/Etale/Kaehler.lean:279-284.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived cotangent transitivity triangle gives base change isomorphism when two relative cotangent complexes vanish",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.cotangentComplexBaseChange, KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.mapBaseChange, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, CategoryTheory.TwoSquare.isIso_lanBaseChange_app. Search digest 79c8f3ef1c172d01. Hits concern the presentation map I/I^2 to differentials, H1Cotangent, ordinary Kahler differentials or Kan extensions, not the full derived cotangent complex. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and Mathlib/RingTheory/Etale/Kaehler.lean:279-284.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing relative derived differentials on the horizontal maps of a ring square implies natural isomorphism of cotangent complexes after derived scalar extension",
+   "results": "8 hits: Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.tensorH1Cotangent, Algebra.Extension.CotangentSpace.map_comp_cotangentComplex, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.CotangentSpace.map_cotangentComplex, Algebra.Generators.H1Cotangent.δ_comp_equiv, Algebra.Generators.H1Cotangent.δ_eq_δ. Search digest 0c220a0bdd586462. Hits concern the presentation map I/I^2 to differentials, H1Cotangent, ordinary Kahler differentials or Kan extensions, not the full derived cotangent complex. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and Mathlib/RingTheory/Etale/Kaehler.lean:279-284.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(transitiv|baseChange|BaseChange)|CotangentComplex|cotangentComplex [sub=RingTheory]",
+   "results": "25 hits: Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean. Digest 0cf25e0e93f0b8b2. Read Extension/Cotangent/Basic.lean:54–64 and Etale/Kaehler.lean:279–284: presentation differential maps and H1 localization only, not the full derived cotangent complex or this arbitrary square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived cotangent complex functoriality maps compose under derived scalar extension and transitivity",
+   "results": "8 hits: Algebra.Extension.H1Cotangent.map_comp, Algebra.Extension.CotangentSpace.map_comp_apply, Algebra.Extension.CotangentSpace.map_comp, Algebra.Extension.CotangentSpace.map_comp_cotangentComplex, Algebra.Extension.CotangentSpace.map_cotangentComplex, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.Extension.Cotangent.map_comp, ModuleCat.ExtendScalars.map'_comp. Digest 20d352806cb9589d. Read Extension/Cotangent/Basic.lean:54–64 and Etale/Kaehler.lean:279–284: presentation differential maps and H1 localization only, not the full derived cotangent complex or this arbitrary square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, IsLocalization",
+   "results": "3 hits: Algebra.H1Cotangent.isLocalizedModule, Algebra.tensorH1CotangentOfIsLocalization, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap. Digest 5da133ed852d08e2. Read Extension/Cotangent/Basic.lean:54–64 and Etale/Kaehler.lean:279–284: presentation differential maps and H1 localization only, not the full derived cotangent complex or this arbitrary square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cotangent complex of a commutative square is an isomorphism after derived extension of scalars if the two vertical relative cotangent complexes vanish",
+   "results": "8 hits: Algebra.Generators.Cotangent.exact, Algebra.Generators.CotangentSpace.exact, Algebra.Extension.tensorH1Cotangent, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.SubmersivePresentation.cotangentEquiv_apply. Digest 738c0919e3ca9687. Read Extension/Cotangent/Basic.lean:54–64 and Etale/Kaehler.lean:279–284: presentation differential maps and H1 localization only, not the full derived cotangent complex or this arbitrary square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing relative derived differentials on both sides of a ring square identifies its full cotangent complexes without a tensor pushout assumption",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δ_eq, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.Extension.tensorH1Cotangent, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, KaehlerDifferential.endEquivAuxEquiv. Digest a054c1156ec8ea87. Read Extension/Cotangent/Basic.lean:54–64 and Etale/Kaehler.lean:279–284: presentation differential maps and H1 localization only, not the full derived cotangent complex or this arbitrary square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-cotangent-comparison",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Sheaf cotangent stalks, section maps and ring localization. Re-split of the supporting comparison: Old proof steps 6--9: flat coefficient tensor computation, both transitivity triangles, identification of their composite with the standard square map, and successive-comparison compatibility.",
+   "via": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-zero-relative-square",
+  "worker": "stage1",
+  "summary": "Repair of the return at 0a0e261d5f2: rebased the retained seven-step split onto the current unsplit DAG record, reread all cited current statements and verified all 32 stored quotations. Made the naturality equation in the successive-square mate calculation explicit. Preserved the exact statement, statement dependencies, blueprint route, source data and logged Mathlib searches. No new nodes or Mathlib leaves.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Sheaf cotangent stalks, section maps and ring localization. Re-split of the supporting comparison: Old proof steps 6--9: flat coefficient tensor computation, both transitivity triangles, identification of their composite with the standard square map, and successive-comparison compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary module bounded-above flat complexes are K-flat; used only to compute the standard cotangent adjunct, with no unit-specific replacement."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic normalized derived scalar extension/restriction adjunction; applied on the one-object site to specify the actual comparison morphisms."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic scalar-composition associator and its unit normalization for arbitrary ring maps, explicitly including ordinary rings; needed to compare successive squares."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic exact derived scalar extension, computation on K-flat resolutions, and its canonical derived pair; needed for vanishing and flat-coefficient computations."
+   },
+   {
+    "node": "lem-pc-source-module-kflat-resolution",
+    "why": "Generic flat-term K-flat resolutions for arbitrary unbounded ordinary module complexes, used only in the optional flat-coefficient clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-source-module-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-cb081b36f",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-cb081b36f (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full. This is a re-delivery after the landing return of 0a0e261d5f2, which an earlier reader PASSed. Against that run's snapshot, the only change is Step 4: the naturality equation R_{b'}F_{b'}(β)η_{b',F_bC}=η_{b',C'}β is now written out, plus a new split_report summary. There are no new nodes, and the statement, stmt_deps, source and blueprint are unchanged. There is no repair note for this item and no SGA. Source: Stacks cotangent.tex 08R3 lemma-localize-on-top (line 1649), 08SF lemma-localize, and the henselization lemma, which uses exactly the item's two-triangle pattern. Generalizing to arbitrary squares with zero relative complexes is valid because those proofs use only the vanishing. Step 1: every term is free over B by the any-variables Kähler basis node, so the complex is bounded-above flat and hence K-flat; pur adjunction normalization (2), via the one-point node, gives β=Q(m)c_C with no flatness of b. Step 2: the triangle for A→B→B' has third term 0, so the cone-zero node makes the standard arrow f invertible. Step 3: the first term of the triangle for A→A'→B' is 0 because derived change of rings is exact; rotating makes g invertible, and adjunction naturality plus strict composition of square maps give β=gf. Step 4: I recomputed adj(β'F_{b'}β)=R_b(γ')γ from the sfb composite-unit formula; identity squares give identity comparisons, and the composite squares satisfy the vanishing hypotheses because both outer terms of their triangles are 0. Step 5: flat-tensor exactness on the cycle/boundary sequences gives K-flatness of B'[0] and H^i(K⊗B')=H^i(K)⊗B', and counit naturality along a flat-term K-flat resolution works for unbounded K. Step 6: H^i factors through Q, so m is a quasi-isomorphism. Step 7 is a genuine pure-tensor check that matches the sfb associator. Edge cases checked: identity squares, zero rings, and the non-pushout square k→k×k with b=pr_1. No duplicates: cotangent-flat-base-change assumes a Tor-independent pushout, and the tor-independent, localization-vanishing and retract-vanishing nodes state different things. I accept the five generic ordinary-module tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentZeroRelativeSquare",
+  "declaration": "Algebra.CotangentResolution.zeroRelativeSquareComparison",
+  "declarations": [
+   "Algebra.CotangentResolution.zeroRelativeTensorFunctor",
+   "Algebra.CotangentResolution.zeroRelativeChainMap",
+   "Algebra.CotangentResolution.zeroRelativeTensorComparison",
+   "Algebra.CotangentResolution.zeroRelativeDerivedAssoc",
+   "Algebra.CotangentResolution.zeroRelativeDerivedId",
+   "Algebra.CotangentResolution.zeroRelativeOrdinaryAssoc",
+   "Algebra.CotangentResolution.zeroRelativeTransitivityComposite",
+   "Algebra.CotangentResolution.ZeroRelativeSquareComparisons",
+   "Algebra.CotangentResolution.zeroRelativeSquareComparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentZeroRelativeSquare.lean",
+  "statement": "theorem zeroRelativeSquareComparison (C : Coherence.{u}) : ZeroRelativeSquareComparisons C",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair of 68d4cf2e01ea: the plain standard-complex, transitivity-arrow and normalized scalar-extension constructions are registered by def-trf-cotangent-square-constructions and used through its reducible SquareData aliases; the two theorem nodes are not added as statement dependencies. All mathematical clauses are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b0ba0e38",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after H2 return 68d4: two theorem stmt_deps replaced by new def node def-trf-cotangent-square-constructions (nine reducible SquareData abbrevs, each exactly the original construction from CotangentTransitivityTriangle/CotangentFlatBaseChange; cites def-trf-cotangent-resolution-data which owns cotangentComplex/cotangentMap), same re-export-owner pattern as NB 7c76 PASS. Item structure checked clause by clause: invertible needs only L_{A'/A}=0 and L_{B'/B}=0 and concludes IsIso of the actual normalized adjunct cotangentBaseChange; representative (tau then Q(m) = adjunct of cotangentMap, verified by adjunction calculus), transitivity (first arrow, eqToHom q.w, second arrow), composition with four vanishings via leftAdjointUniq associator, identity via the canonical F_id iso, flat_kFlat for B'[0], flat_computation for every unbounded K, flat_quasiIso of the specified tensor adjunct, flat_composition with extendScalarsComp.symm, flat_associator (true in general since Mathlib extendScalarsComp is the conjugate of restrictScalarsComp). No pushout or extra assumptions; universes as the recorded Coherence.{u} interface; statement fields verbatim; only lean/stmt_deps differ from live; one sorry; docstrings have source places and blueprint ids; no duplicate found. Edge cases: identity, zero rings, non-pushout square, infinite variables, non-flat maps. No compile run (no file changed)."
+ }
+}

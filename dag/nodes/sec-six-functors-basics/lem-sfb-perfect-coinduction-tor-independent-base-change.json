@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-perfect-coinduction-tor-independent-base-change",
+ "kind": "statement",
+ "title": "Tor-independent base change for perfect derived coinduction",
+ "statement": "Let $A\\to B$ and $A\\to A'$ be maps of commutative rings, set $B'=B\\otimes_AA'$, assume $B[0]$ is a perfect $A$-complex [def-pc-perfect-ring-complex], and assume $\\operatorname{Tor}_i^A(B,A')=0$ for every $i>0$. Use ordinary unbounded module derived categories [def-weil-abstract-derived-category], derived scalar extension [lem-pur-derived-change-of-rings], and derived coinduction $C_B^A$ [def-trf-derived-coinduction]. For every $N\\in D(A)$ the evaluation-counit mate is an isomorphism in $D(B')$:\n$$C_B^A(N)\\otimes_B^{\\mathbf L}B'\\xrightarrow{\\sim}C_{B'}^{A'}(N\\otimes_A^{\\mathbf L}A').$$\nIts underlying $A'$-map is the perfect derived-Hom base-change map [def-pur-derived-internal-hom], using $B\\otimes_A^{\\mathbf L}A'\\simeq B'$. The comparisons preserve evaluation counits, are natural in $N$, and commute with identity and successive Tor-independent scalar extensions. In particular they commute with polynomial Koszul evaluation maps and their ordered tensor signs whenever those maps are scalar-extended. No Noetherianity or flatness of $A\\to A'$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A6A (lemma-base-change-RHom), case (1), 0661 (lemma-base-change-comparison), and 07VI (lemma-dual-perfect-complex); B-action and counit enhancement by dualizing.tex Tags 0A70 and 0A71."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-trf-derived-coinduction",
+  "def-pur-derived-internal-hom",
+  "def-sfb-perfect-coinduction-exchange-data",
+  "def-weil-pbc-tor-modules",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a free resolution $F^\\bullet\\to B[0]$, in nonpositive cochain degrees. Its terms are flat, so [lem-pc-module-bounded-flat-kflat] makes it K-flat. By the resolution definition [def-weil-pbc-tor-modules], $H^{-i}(F\\otimes_A A')=\\operatorname{Tor}_i^A(B,A')$ for $i\\geq0$. Positive cohomology is zero and $H^0=B'$. Thus the augmentation $F\\otimes_A A'\\to B'[0]$ is a quasi-isomorphism. This gives the canonical identification $B\\otimes_A^{\\mathbf L}A'\\simeq B'[0]$, exactly the Tor-independence hypothesis in the exchange node.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661 (lemma-base-change-comparison), resolution argument; bounded-flat input Tag 064K."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-perfect-coinduction-tor-independent-exchange] with its $(P,A,T,A_T)=(A,B,A',B')$ and $M=N$. The previous step verifies its derived Tor-independence hypothesis, and perfectness is precisely the present assumption on $B[0]$. Write $U,U'$ for the two restriction functors. The exchange node supplies $\\theta_X:U'(X\\otimes_B^{\\mathbf L}B')\\simeq UX\\otimes_A^{\\mathbf L}A'$ and an isomorphism $\\gamma_N$ in $D(B')$. Its defining adjunct is $(\\epsilon_N\\otimes1)\\theta_{C_B^A(N)}$, so it is the evaluation-counit mate required here, with its actual $B'$-action, rather than merely an isomorphism of underlying objects. In particular $\\epsilon'_{N\\otimes_A^{\\mathbf L}A'}U'(\\gamma_N)=(\\epsilon_N\\otimes1)\\theta_{C_B^A(N)}$ by the adjunction [lem-trf-derived-coinduction-adjunction].",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661 (lemma-base-change-comparison); dualizing.tex Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext)."
+   }
+  },
+  {
+   "text": "Identify the underlying map, including its normalization. The coinduction adjunction [lem-trf-derived-coinduction-adjunction] sends a map $g:UX\\to N$ to the map with value $x\\mapsto(b\\mapsto g(bx))$; its inverse evaluates at $1$. Consequently the scalar-extended counit of step 2, evaluated at $b\\otimes t\\in B'$, gives the Hom comparison $h\\otimes a'\\mapsto(b\\otimes t\\mapsto a't(h(b)\\otimes1))$. This is exactly the scalar-extension formula defining the canonical Hom base-change map [def-pc-perfect-rhom-base-change-map]. To interpret the formula on arbitrary derived $N$, use that definition's bounded finite-projective representative $P$ of $B[0]$, K-flat representative $Q$ of $N$, and canonical K-injective comparison: in every Hom coordinate the same formula is $(h\\otimes a')(x\\otimes t)=a't(h(x)\\otimes1)$. Both constructions insert these comparison maps, so they give the same localized morphism, not just the same cohomology maps. Tensor symmetry changes between the left-scalar convention of that definition and our right-scalar convention; scalars have degree zero. Thus, under $\\theta$ and step 1, $U'(\\gamma_N)$ is the canonical perfect derived-Hom base-change isomorphism of [lem-pc-base-change-rhom-perfect], applied to $(E,K)=(B[0],N)$.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "def-pc-perfect-rhom-base-change-map",
+    "lem-pc-base-change-rhom-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A (lemma-base-change-RHom), equation-base-change-RHom and case (1); dualizing.tex Tags 0A70 and 0A71."
+   }
+  },
+  {
+   "text": "Naturality and the equality of direct and successive comparisons are supplied by [lem-sfb-perfect-coinduction-tor-independent-exchange]. The counit equation in step 2 specifies their counit compatibility. For the identity extension, $\\theta$ is the unit identification and the defining adjunct is $\\epsilon_N$; the adjunction bijection [lem-trf-derived-coinduction-adjunction] therefore makes $\\gamma_N$ the identity. For a tower $A\\to A'\\to A''$, apply the exchange node when the indicated squares are Tor independent; after the canonical associators its direct and successive maps agree. There is no additional choice of an automorphism of coinduction, since each comparison was specified as a counit mate.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661 (lemma-base-change-comparison), canonical comparisons; dualizing.tex Tag 0A70 (lemma-right-adjoint); agent adjunction-bijection calculation."
+   }
+  },
+  {
+   "text": "Finally consider any polynomial Koszul evaluation map that is scalar-extended as in the statement. A finite Koszul complex has terms finite exterior powers of a finite free module, hence is a bounded finite-free complex. Apply the dual comparison of [lem-pod-perfect-dual-scalar-calculus] to that complex. For homogeneous $x,\\phi$ of degrees $p,j$, signed evaluation after extension has value $(-1)^{pj}\\iota(\\phi(x))ab$ on $(x\\otimes b)\\otimes(\\phi\\otimes a)$, exactly its asserted scalar-extended evaluation. For an ordered tensor of such factors the interchange sign is the product of the corresponding $(-1)^{pj}$; a ring map preserves each sign and the chosen order. Step 3 identifies this Hom scalar map with our comparison; thus the scalar-extended Koszul evaluations commute with it, with precisely these signs. This uses only the scalar extension of the specified maps, and imposes no assertion that a nonregular Koszul complex resolves its quotient.",
+   "uses": [
+    "lem-pod-perfect-dual-scalar-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI (lemma-dual-perfect-complex) and section-sign-rules; agent specialization of the explicit scalar-dual evaluation formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "def-weil-pbc-tor-modules",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-trf-derived-coinduction-adjunction",
+  "def-pc-perfect-rhom-base-change-map",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-pod-perfect-dual-scalar-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly of existing counit exchange with Tags 0661, 0A6A, 07VI; dualizing.tex Tags 0A70 and 0A71. Explicit Hom normalization, identity and ordered-sign checks by Q114."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction from a perfect algebra commutes with scalar extension in a Tor independent square of commutative rings compatibly with evaluation counits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentInvFun\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  {P : Algebra.E\", \"doc\": \"A linear map from the cotangent module $\\\\ker(\\\\phi_Q)/\\\\ker(\\\\phi_Q)^2$ of an algebra extension $Q$ to the tensor product $T \\\\otimes_S \\\\ker(\\\\phi_P)/\\\\ker(\\\\phi_P)^2$ over a semiring $S$, constructed using \"}\n  {\"name\": \"Algebra.Extension.tensorCotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  {P : Algebra.E\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures, and algebra extensions $ P $ and $ Q $, if the linear map induced by the kernel of $ Q $'s algebra map is bijective,\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux_ofComp\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $x$ in the composed algebra $(Q \\\\circ P).\\\\text{Ring}$, the auxiliary differential map $\\\\delta_{\\\\text{Aux}}^{R,Q}$ applied to the algebra homomorphism $(Q.\\\\text{ofComp} \\\\, P).\\\\text{toAl\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"Given commutative semirings R, S, A, B with compatible algebra structures and a pushout algebra B, the tensor product S ⊗_R Ω_{A/R} admits a scalar tower structure where the actions of S and B on the \"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For algebra extensions $ P $ and $ Q $, the composition of the base-changed cotangent complex map with the lifted base change of the cotangent space homomorphism induced by $ Q \\\\circ P $ equals the co\"}\n  {\"name\": \"comonadicExtendScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"{A B : Type u} →\\n  [inst : CommRing A] →\\n    [inst_1 : CommRing B] →\\n      {f : A →+* B} → f.FaithfullyFlat → CategoryTheory.ComonadicLeftAdjoint (ModuleCat.extendScalars f)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a faithfully flat ring homomorphism $ f : R → S $, the extension of scalars functor from the category of $ R $-modules to $ S $-modules is comonadic. This me\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, flat scalar extension or unrelated representation coinduction; none states derived B-linear Tor-independent coinduction base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex derived Hom base change non flat ring extension derived coinduction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"DerivedCategory.instLinearCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C],\\n  CategoryTheory.Functor.Linear R DerivedCategory.Q\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category preserves the $ R $-linear structure, meaning that for any two objects, the induced map on hom\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.FaithfullyFlat → (ModuleCat.extendScalars f).ReflectsIsomorphisms\", \"doc\": \"Let $ R $ and $ S $ be commutative rings, and let $ f : R \\to S $ be a faithfully flat ring homomorphism. The scalar extension functor $ \\text{ModuleCat.extendScalars}(f) $ from the category of $ R $-mo\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib/RingTheory/Flat/Stability\", \"type\": \"∀ (R : Type u) (S : Type v) (M : Type w) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S]\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [Module.Flat R M] (N : Type t) [inst_6 : AddCommMonoid N]\\n  [inst_7 : Module R N] [inst_8 : Module S N] [inst_9 : IsScalarTower R S N] \", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"DerivedCategory.instLinear\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"(R : Type t) →\\n  [inst : Ring R] →\\n    (C : Type u) →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] → [inst_4 : HasDerivedCategory C] → CategoryTheory.Linear R (DerivedCategory C)\", \"doc\": \"For any abelian category $\\\\mathcal{C}$ and semiring $R$, its derived category inherits a canonical $R$-linear structure. This means that for any two objects in the derived category, the set of morphis\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, flat scalar extension or unrelated representation coinduction; none states derived B-linear Tor-independent coinduction base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Hom\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, flat scalar extension or unrelated representation coinduction; none states derived B-linear Tor-independent coinduction base change"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduction|derivedHom.*baseChange|baseChange.*derivedHom|perfect.*baseChange",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/Data/Subtype.lean\", \"line\": \"131\", \"text\": \"/-- Defining a map into a subtype, this can be seen as a \\\"coinduction principle\\\" of `Subtype` -/\"}\n  {\"file\": \"Mathlib/Data/Seq/Basic.lean\", \"line\": \"281\", \"text\": \"  apply coinduction2; intro s\"}\n  {\"file\": \"Mathlib/Data/Seq/Basic.lean\", \"line\": \"292\", \"text\": \"  apply coinduction2 s; intro s\"}\n  {\"file\": \"Mathlib/Data/Seq/Basic.lean\", \"line\": \"1013\", \"text\": \"  apply coinduction2 s; intro s; cases s <;> simp [ret]\"}\n  {\"file\": \"Mathlib/Data/Seq/Defs.lean\", \"line\": \"425\", \"text\": \"theorem coinduction :\"}\n  {\"file\": \"Mathlib/Data/Seq/Defs.lean\", \"line\": \"430\", \"text\": \"    Subtype.ext (Stream'.coinduction hh fun β fr => ht β fun s => fr s.1)\"}\n  {\"file\": \"Mathlib/Data/Seq/Defs.lean\", \"line\": \"432\", \"text\": \"theorem coinduction2 (s) (f g : Seq α → Seq β)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinduced.lean\", \"line\": \"30\", \"text\": \"coinduction functor and hence that the coinduction functor preserves limits.\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinduced.lean\", \"line\": \"34\", \"text\": \"* `Representation.coind φ ρ` : the coinduction of `ρ` along `φ` defined as the `k`-submodule of\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinduced.lean\", \"line\": \"37\", \"text\": \"* `Representation.coind' φ A` : the coinduction of `A` along `φ` defined as the set of\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinduced.lean\", \"line\": \"41\", \"text\": \"  between the restriction functor `Rep k H ⥤ Rep k G` along `φ` and the coinduction functor\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinduced.lean\", \"line\": \"58\", \"text\": \"functions `H → A` underlying the coinduction of `ρ` along `φ`, i.e., the functions `f : H → A`\"}\n  {\"file\": \"Mathlib/Data/Stream/Init.lean\", \"line\": \"289\", \"text\": \"theorem coinduction {s₁ s₂ : Stream' α} :\"}\n  {\"file\": \"Mathlib/Data/Stream/Init.lean\", \"line\": \"310\", \"text\": \"  coinduction rfl fun β fr ch => by rw [tail_iterate, tail_const]; exact ch\"}\n  {\"file\": \"Mathlib/Data/Stream/Init.lean\", \"line\": \"623\", \"text\": \"  coinduction rfl fun β fr ch => by rwa [cycle_eq, const_eq]\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Continuous/TopRep.lean\", \"line\": \"19\", \"text\": \"coinduction functor `TopRep.coind₁Functor`, the restriction functor `TopRep.resFunctor` along a\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Continuous/Basic.lean\", \"line\": \"561\", \"text\": \"This new representation of `G` is isomorphic to the continuous coinduction\"}\n  {\"file\": \"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Defs.lean\", \"line\": \"739\", \"text\": \"/-- Coinduction principle for proving `Sorted`. Given a predicate `motive` on multiseries,\"}\n  {\"file\": \"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Corecursion.lean\", \"line\": \"46\", \"text\": \"  `FriendlyOperation.coind_comp_friend_right`: coinduction principles for proving that an operation\"}\n  {\"file\": \"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Corecursion.lean\", \"line\": \"374\", \"text\": \"characterization of `FriendlyOperation`. For the coinduction principle, see\"}\n  {\"file\": \"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Corecursion.lean\", \"line\": \"421\", \"text\": \"/-- Coinduction principle for proving that an operation is friendly. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, flat scalar extension or unrelated representation coinduction; none states derived B-linear Tor-independent coinduction base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom perfect module arbitrary Tor independent base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"IsBaseChange.tensorEquiv\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) (P : Type*) [AddCommGroup P] [Module R P] [Module S P] [IsScalarTower R S P] :\\n  P ⊗[S] N ≃ₗ[S] P ⊗[R] M\", \"doc\": \"Given an $ R $-linear map $ f : M → N $ that satisfies the base change condition with respect to a ring homomorphism $ R → S $, and an $ S $-module $ P $ equipped with compatible $ R $-module and scal\"}\n  {\"name\": \"Module.Dual.baseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A (A ⊗[R] V)\", \"doc\": \"The linear map from the dual module $\\\\text{Hom}_R(V, R)$ to $\\\\text{Hom}_A(A \\\\otimes_R V, A)$ induced by base change from $R$ to an $R$-algebra $A$, constructed by composing the base change homomorphis\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"IsBaseChange.linearMapLeftRight\", \"module\": \"Mathlib.RingTheory.TensorProduct.IsBaseChangeHom\", \"type\": \"{α : M →ₗ[R] P} (j : IsBaseChange S α) {β : N →ₗ[R] Q} (k : IsBaseChange S β) :\\n  IsBaseChange S (linearMapLeftRightHom j β)\", \"doc\": \"Given a ring homomorphism $\\\\sigma: R \\\\to S$ and $R$-linear maps $\\\\alpha: M \\\\to P$ and $\\\\beta: N \\\\to Q$ that satisfy base change properties, the induced $R$-linear map from $\\\\text{Hom}_R(M,N)$ to $\\\\tex\"}\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": IsBaseChange A (ibc.toDual)\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"RingHom.finite_isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Finite\", \"type\": \": IsStableUnderBaseChange @Finite\", \"doc\": \"For commutative rings $A, B, A', B'$ with compatible algebra structures, if $B$ is finitely generated as an $A$-module via a ring homomorphism $A \\\\to B$, then the base change $B' = A' \\\\otimes_A B$ is \"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \"(h₁ : RespectsIso @P)\\n  (h₂ :\\n    ∀ ⦃R S T⦄ [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T],\\n      P (algebraMap R T) → P (algebraMap S (S ⊗[R] T))) :\\n  IsStableUnderBaseChange @P\", \"doc\": \"If a property $ P $ of ring homomorphisms between commutative rings is invariant under ring isomorphisms and satisfies the condition that $ P $ holds for the canonical map $ S \\\\to S \\\\otimes_R T $ when\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, flat scalar extension or unrelated representation coinduction; none states derived B-linear Tor-independent coinduction base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor base change for modules in a Tor independent square of rings",
+   "results": "{\"t\": \"2026-10-23T12:56:47Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor base change for modules in a Tor independent square of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"LinearEquiv.baseChange\", \"IsLocalization.algebraTensorEquiv\", \"TensorProduct.isBaseChange\", \"TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange\", \"IsBaseChange.tensorEquiv\", \"IsBaseChange.iff_lift_unique\"], \"digest\": \"682e8d7b7977bdc5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module base change/coextension and generic derived categories do not state this Tor-independent perfect derived-coinduction comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex derived Hom commutes with arbitrary derived extension of scalars for unbounded complexes",
+   "results": "{\"t\": \"2026-10-23T12:56:48Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect complex derived Hom commutes with arbitrary derived extension of scalars for unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"DerivedCategory.instLinear\", \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"Ext\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"52895a1b727a709e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module base change/coextension and generic derived categories do not state this Tor-independent perfect derived-coinduction comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduct|base.change.*[Rr]?[Hh]om|[Rr]?[Hh]om.*base.change",
+   "results": "{\"t\": \"2026-10-23T13:02:20Z\", \"tool\": \"grep\", \"query\": \"coinduct|base.change.*[Rr]?[Hh]om|[Rr]?[Hh]om.*base.change\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\"], \"digest\": \"570425de44a8c831\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module base change/coextension and generic derived categories do not state this Tor-independent perfect derived-coinduction comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T13:02:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module base change/coextension and generic derived categories do not state this Tor-independent perfect derived-coinduction comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint restriction of scalars derived Hom perfect algebra base change evaluation counit Tor independent",
+   "results": "{\"t\": \"2026-10-23T13:03:00Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint restriction of scalars derived Hom perfect algebra base change evaluation counit Tor independent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\"], \"digest\": \"4e077cf71594068a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module base change/coextension and generic derived categories do not state this Tor-independent perfect derived-coinduction comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complex derived Hom base change arbitrary ring homomorphism unbounded derived categories",
+   "results": "{\"t\": \"2026-10-23T13:03:00Z\", \"tool\": \"leansearch\", \"query\": \"Perfect complex derived Hom base change arbitrary ring homomorphism unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"DerivedCategory\", \"RingHom.Flat.isStableUnderBaseChange\", \"IsBaseChange.linearMapLeftRight\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"RingHom.finite_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\"], \"digest\": \"e8af981047f93c88\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module base change/coextension and generic derived categories do not state this Tor-independent perfect derived-coinduction comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Tor-independent base change for perfect derived coinduction.",
+   "via": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-perfect-coinduction-tor-independent-base-change",
+  "worker": "stage1",
+  "summary": "Reused the existing Tor-independent coinduction exchange instead of creating a duplicate. Verified the Tor hypothesis by a free resolution; identified the underlying normalized Hom map; checked counits, identity, towers and scalar-extended ordered Koszul signs. Statement unchanged; no new nodes.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the inherited proper-flat duality/polynomial-model branch recorded in blueprint.from.place. Read the current latest direct-images proof and unit. No separate blueprint node states this auxiliary algebraic fact (searches: coinduction, 0661, 0A6A, base.change.*Hom). The recorded nearest blueprint ancestor is null, retained as tools/blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic module/derived algebra tool used for the Tor calculation, normalized Hom comparison, adjunction or signed evaluation; this unit contains no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-trf-derived-coinduction-adjunction",
+    "why": "Generic module/derived algebra tool used for the Tor calculation, normalized Hom comparison, adjunction or signed evaluation; this unit contains no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-pc-base-change-rhom-perfect",
+    "why": "Generic module/derived algebra tool used for the Tor calculation, normalized Hom comparison, adjunction or signed evaluation; this unit contains no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-pod-perfect-dual-scalar-calculus",
+    "why": "Generic module/derived algebra tool used for the Tor calculation, normalized Hom comparison, adjunction or signed evaluation; this unit contains no replacement for this algebraic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-pod-perfect-dual-scalar-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-bcc5cdbe4",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-bcc5cdbe4 (reviewer sub-agent of L); spot-checked: I read the item and all 5 steps against each cited statement and against Stacks 0661 (more-algebra.tex:14955) and 0A6A case (1) (:28820). There are no new nodes, and the statement is unchanged from the base. On the same day Q42 created an unsplit node in the same unit, lem-sfb-perfect-coinduction-tor-independent-exchange, which states the general P→A/P→T counit mate. The split reuses it rather than creating a duplicate (C5); this is not a relabelling, because the item adds more. Step 1: a free resolution is K-flat (lem-pc-module-bounded-flat-kflat), and Tor vanishing gives B⊗^L A'≃B'[0], which is exactly the exchange node's hypothesis. Step 2: the exchange node with (P,A,T)=(A,B,A'), perfect B, arbitrary N, gives γ as the adjunct of (ε⊗1)θ. Step 3: I recomputed γ(h⊗a')(b⊗t)=h(b)⊗a't. This is χ of def-pc-perfect-rhom-base-change-map on the representatives Hom(P,Q)⊗A'; Hom(P,Q) is K-flat because P is bounded finite projective. lem-pc-base-change-rhom-perfect then gives the claim for arbitrary N, which goes beyond the exchange node's degree-0 L formula. Step 4: naturality and towers come from the exchange node. Tor independence of the successive square follows automatically from B⊗^L_A A''≃B'', and the identity case follows from the adjunct being ε. Step 5 is correctly marked elementary: β of lem-pod-perfect-dual-scalar-calculus is χ with target R[0], which matches how the citer proper-flat-dualizing-polynomial-model uses it with (P_0,B_0,P). Edge cases checked: B=A; ℤ[x]/(x²) over ℤ with A'=𝔽₂ (not flat); ℤ×ℤ; the Stacks k[t] counterexample. No cycle; proof_deps equal the union of the steps' uses. Batch-5: lem-trf-derived-coinduction-adjunction is the generic restriction⊣coinduction adjunction. def-trf-derived-coinduction is already in the base stmt_deps and the exchange node's stmt_deps already cite the adjunction, so it is outside both assumptions. lem-pod-perfect-dual-scalar-calculus and lem-pod-projective-hom-evaluation-model are generic module-algebra tools, not steps of the Poincaré duality proof. Both accepted. Advisory only: the statement cites def-pur-derived-internal-hom rather than def-pc-perfect-rhom-base-change-map for the base-change map, inherited from the base; and the worker wrote split_report.tool_uses itself (C8). I accept those generic tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectCoinductionTorIndependentBaseChange",
+  "declaration": "ModuleCat.perfectCoinductionTorIndependentBaseChange",
+  "declarations": [
+   "ModuleCat.ordinaryCoinductionScalarPair",
+   "ModuleCat.CoinductionIdentityScalarNormalized",
+   "ModuleCat.CoinductionPerfectHomFormula",
+   "ModuleCat.perfectCoinductionTorIndependentBaseChange"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectCoinductionTorIndependentBaseChange.lean",
+  "statement": "theorem perfectCoinductionTorIndependentBaseChange : (∀ {A B T D : Type u} [CommRing A] [CommRing B] [CommRing T] [CommRing D] (f : A →+* B) (g : A →+* T) (b : B →+* D) (q : T →+* D), IsPushout (CommRingCat.ofHom f) (CommRingCat.ofHom g) (CommRingCat.ofHom b) (CommRingCat.ofHom q) → DerivedCategory.IsPerfectRingComplex ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj ((restrictScalars f).obj (of B B))) → (∀ i : ℕ, 0 < i → IsZero (((Tor' (ModuleCat.{u} A) i).obj ((restrictScalars f).obj (of B B))).obj ((restrictScalars g).obj (of T T)))) → ∃ θ : (ordinaryCoinductionScalarPair b).F ⋙ (restrictScalars q).mapDerivedCategory ≅ (restrictScalars f).mapDerivedCategory ⋙ (ordinaryCoinductionScalarPair g).F, CoinductionTensorNormalized f g b q (ordinaryCoinductionScalarPair g) (ordinaryCoinductionScalarPair b) θ ∧ (∀ N : DerivedCategory (ModuleCat.{u} A), IsIso (coinductionScalarExchange f q (ordinaryCoinductionScalarPair g) (ordinaryCoinductionScalarPair b) θ N)) ∧ (∀ N : DerivedCategory (ModuleCat.{u} A), (restrictScalars q).mapDerivedCategory.map (coinductionScalarExchange f q (ordinaryCoinductionScalarPair g) (ordinaryCoinductionScalarPair b) θ N) ≫ (derivedCoinductionAdjunction q).counit.app ((ordinaryDerivedExtendScalars g).obj N) = θ.hom.app ((derivedCoinduction f).obj N) ≫ (ordinaryDerivedExtendScalars g).map ((derivedCoinductionAdjunction f).counit.app N)) ∧ (∀ (N M : DerivedCategory (ModuleCat.{u} A)) (v : N ⟶ M), (ordinaryDerivedExtendScalars b).map ((derivedCoinduction f).map v) ≫ coinductionScalarExchange f q (ordinaryCoinductionScalarPair g) (ordinaryCoinductionScalarPair b) θ M = coinductionScalarExchange f q (ordinaryCoinductionScalarPair g) (ordinaryCoinductionScalarPair b) θ N ≫ (derivedCoinduction q).map ((ordinaryDerivedExtendScalars g).map v)) ∧ CoinductionPerfectHomFormula f g b q θ ∧ CoinductionExchangeTower f g b q (ordinaryCoinductionScalarPair g) (ordinaryCoinductionScalarPair b) θ) ∧ (∀ {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B), DerivedCategory.IsPerfectRingComplex ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj ((restrictScalars f).obj (of B B))) → ∃ (eA : ordinaryDerivedExtendScalars (RingHom.id A) ≅ 𝟭 _) (eB : ordinaryDerivedExtendScalars (RingHom.id B) ≅ 𝟭 _) (θ : (ordinaryCoinductionScalarPair (RingHom.id B)).F ⋙ (restrictScalars f).mapDerivedCategory ≅ (restrictScalars f).mapDerivedCategory ⋙ (ordinaryCoinductionScalarPair (RingHom.id A)).F), CoinductionIdentityScalarNormalized eA ∧ CoinductionIdentityScalarNormalized eB ∧ CoinductionTensorNormalized f (RingHom.id A) (RingHom.id B) f (ordinaryCoinductionScalarPair (RingHom.id A)) (ordinaryCoinductionScalarPair (RingHom.id B)) θ ∧ ∀ N : DerivedCategory (ModuleCat.{u} A), coinductionScalarExchange f f (ordinaryCoinductionScalarPair (RingHom.id A)) (ordinaryCoinductionScalarPair (RingHom.id B)) θ N ≫ (derivedCoinduction f).map (eA.hom.app N) = eB.hom.app ((derivedCoinduction f).obj N))",
+  "branch": "sheaf-dag",
+  "by": "Q154",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The published exchange interface is specialized to the fixed ordinary derived scalar extensions. Pushout data encodes the ordinary tensor algebra, positive Tor vanishing is stated using the existing first-factor Tor functor, and perfectness uses the recorded ordinary perfect predicate. The actual counit mate retains the B-prime action. The underlying Hom comparison is normalized on every bounded finite-projective resolution and every unbounded K-flat target, including its signed evaluation formula. Existing normalized tower compatibility and explicit identity multiplication compatibility are retained. The exchange helper definitions are owned by def-sfb-perfect-coinduction-exchange-data, recorded existing:true on the unchanged published module. The first-factor Tor and module-valued total Hom owners are also statement dependencies; the exchange theorem remains a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce325b54f",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 35da431f (H2+H3). Lean byte-identical (sha 95f2d25b), whose clause-by-clause reading found the maths faithful. Item delta: only stmt_deps and lean.note changed. Theorem stmt_dep lem-sfb-perfect-coinduction-tor-independent-exchange replaced by new def-sfb-perfect-coinduction-exchange-data, existing:true on the unchanged side-live PerfectCoinductionTorIndependentExchange with 7 plain decls (ScalarPair, TensorNormalized, coinductionScalarExchange, HomModel, HomScalarFormula, ScalarCompNormalized, ExchangeTower); bodies read, TeX faithful, covers every helper the item uses, no other owner, no cycle. def-sc-module-total-hom-complex added for moduleHomComplex. check_existing, check_record, check_new_node and check_lean_text all clean; statement verbatim; source labels exist; sorry only. Advisory: conceptual theorem cite lem-pc-derived-tensor-second-factor-functor in the new node; kFlat/ordinaryDerivedChangeOfRings owners; redundant sign clause; unused OrdinaryModuleDerivedInternalHom import. No file changed, no compile."
+ }
+}

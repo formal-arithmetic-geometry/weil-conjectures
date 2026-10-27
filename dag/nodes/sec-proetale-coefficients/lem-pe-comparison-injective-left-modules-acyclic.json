@@ -28,70 +28,48 @@
  ],
  "proof": [
   {
-   "text": "Both module categories are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck] and have enough injectives by [lem-sp-grothendieck-enough-injectives]. These statements allow arbitrary associative ring sheaves on the small sites in the chosen universe. Put $F=I_{ab}$ and $M=\\nu_X^*I$. The action construction in the statement gives $M_{ab}=\\nu_X^{-1}F$.",
+   "text": "Choose an injective resolution R of nu_X^* I in A-valued pro-etale sheaves. For each q, R.isoRightDerivedObj identifies the positive comparison direct image with homology of nu_X,* R. Restrict its degree-(q+1) short complex along AffineEtale.Spec X. This restriction is faithful and exact because the affine etale site is a dense subsite. It therefore suffices to show exactness after this restriction.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-sheafification",
     "lem-sp-grothendieck-enough-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079Q (remark-existence-D), ringed-site module categories."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $q>0$ and an étale object $W\\to X$. Evaluation is additive and preserves kernels sectionwise [def-weil-sheaf-of-modules-category]. Since $I$ is module-injective, [lem-weil-pbc-derived-functor-injective-vanishing] gives $R^q\\Gamma_{\\mathrm{ét},W}(I)=0$. Apply [lem-pe-ringed-site-derived-evaluation-slice] to the constant ring sheaf on $X_{\\mathrm{ét}}$. Its slice is $W_{\\mathrm{ét}}$ by [lem-pe-comparison-etale-slice-abelian-pullback], so $H^q(W_{\\mathrm{ét}},F|_W)=0$.",
+   "text": "For W in X.AffineEtale, let T be its pro-etale image. Its structure morphism is etale and its source affine. Etale.injective_upperStar_obj_of_etale′ sends I to an injective on T.left_et. Apply stage3-affine-comparison-injective-derived-vanishing to this injective. The canonical adjunction conjugate comparisonUpperStarUpperStarIso identifies the resulting sheaf with the pro-etale pullback of nu_X^* I. Restriction to the localization T.left_proet is exact and preserves injectives. Evaluation of that restriction at the identity of T.left is naturally evaluation at T, via Over.isoMk (Iso.refl _). Transport this natural isomorphism through rightDerived and apply Functor.rightDerivedCompIsoOfExact. The result is vanishing of positive derived evaluation at T on X_proet. This entire localization calculation is the proved private helper affine_etale_sections_vanishing.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-derived-functor-injective-vanishing",
-    "lem-pe-ringed-site-derived-evaluation-slice",
-    "lem-pe-comparison-etale-slice-abelian-pullback"
+    "stage3-affine-comparison-injective-derived-vanishing",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-weil-pbc-site-comparison-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 03FD (lemma-cohomology-modules-abelian-agree) and 03F3 (lemma-cohomology-of-open); derived.tex Tag 015B (lemma-higher-derived-functors)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-cbc-abelian-etale-proetale-cohomology-comparison] to the scheme $W$ and the abelian sheaf $F|_W$. By [lem-pe-comparison-etale-slice-abelian-pullback], $\\nu_W^{-1}(F|_W)\\cong M_{ab}|_W$, hence step 2 gives $H^q(W_{\\mathrm{proét}},M_{ab}|_W)=0$. Apply [lem-pe-ringed-site-derived-evaluation-slice] to the constant ring sheaf on $X_{\\mathrm{proét}}$; the slice identification in the same pullback lemma now gives $R^q\\Gamma_{\\mathrm{proét},W}(M)=0$. This works for every étale $W$, with no affineness assumption.",
+   "text": "R.isoRightDerivedObj for evaluation turns step 2 into exactness of the evaluated short complex at every affine etale object. These are definitionally the evaluations of the underlying presheaf of the restriction in step 1. ShortComplex.exact_iff_evaluation gives presheaf exactness. Exact sheafification preserves it; ShortComplex.mapNatIso with sheafificationNatIso identifies the sheafified complex with the restricted sheaf complex. Finally faithful exact restriction reflects exactness, so the original homology is zero for each q. No assertion identifies sections of a higher direct-image sheaf with derived sections.",
    "uses": [
-    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-    "lem-pe-comparison-etale-slice-abelian-pullback",
-    "lem-pe-ringed-site-derived-evaluation-slice"
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099W (lemma-compare-cohomology), part (1); sites-cohomology.tex Tags 03FD and 03F3."
-   }
-  },
-  {
-   "text": "The objectwise vanishings of step 3 satisfy [lem-pe-left-module-comparison-vanishing-criterion] for this $M$ and $q$. Therefore $R^q\\nu_{X,*}(M)=0$. Substitute $M=\\nu_X^*I$; since $q>0$ was arbitrary, this is the assertion.",
-   "uses": [
-    "lem-pe-left-module-comparison-vanishing-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099V (lemma-relative-comparison), first proof paragraph, direct-image vanishing."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-sheafification",
   "lem-sp-grothendieck-enough-injectives",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-derived-functor-injective-vanishing",
-  "lem-pe-ringed-site-derived-evaluation-slice",
-  "lem-pe-comparison-etale-slice-abelian-pullback",
-  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-  "lem-pe-left-module-comparison-vanishing-criterion"
+  "stage3-affine-comparison-injective-derived-vanishing",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-proetale-restriction-injectives"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "B9",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099V (lemma-relative-comparison), first paragraph, arbitrary-left-module extension using independent abelian comparison Tag 099W and sites-cohomology.tex Tags 03FD and 03F3"
+  "place": "Tag 099V, lemma-relative-comparison, first proof paragraph, using affine vanishing 099U. Lean proof: affine_etale_sections_vanishing and rightAcyclic_comparisonUpperStar_obj_of_injective in LowerStarAcyclic. General Grothendieck abelian coefficient argument, then specialize to abelian groups or arbitrary left modules."
  },
  "mathlib_searches": [
   {
@@ -189,7 +167,32 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sf-comparison",
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic",
+     "lines": [
+      98,
+      110
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-pe-comparison-injective-left-modules-acyclic",
@@ -216,16 +219,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sp-grothendieck-enough-injectives",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-weil-pbc-cohomology-over-object-localization",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-  "lem-weil-pbc-derived-functor-injective-vanishing"
+  "lem-weil-pbc-proetale-restriction-injectives"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -252,5 +248,15 @@
   "date": "2026-10-16",
   "existing": true,
   "note": "Existing generic coefficient theorem, read in the source and in current server source via scompile.py --source. Specialize its ambient A to ModuleCat.{u + 1} Λ with Λ : Type (u + 1) and [Ring Λ]. Mathlib.Algebra.Category.ModuleCat.AB supplies IsGrothendieckAbelian.{u + 1} with no commutativity or finiteness assumption; all required instances and the exact specialization were checked with scompile.py. Sheaf-valued left modules are the first, fixed-scalar encoding explicitly allowed in the node. The upstream comparison functors are restriction and canonical left Kan extension followed by sheafification, the same constructions as the recorded geometric comparison. Functor.rightAcyclic unfolds to every positive rightDerived degree. The stored signature is verbatim; A and its categorical instances are the surrounding variables in that source module. No duplicate module is delivered."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261023T230508-L-3434670",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

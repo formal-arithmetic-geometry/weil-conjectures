@@ -29,214 +29,26 @@
  ],
  "proof": [
   {
-   "text": "Work with $A=A_{E,n}$ on the ordinary etale site, as the current statement requires. The base and the bundle have the Noetherian and constant-rank meaning of [def-asd-vector-bundle-zero-section]; $\\ell$ is invertible by [def-pur-conventions]. The construction [def-amb-vector-integration] supplies a compactification, the ordinary Tate sheaf, and the actual trace $t_\\pi:R\\pi_!A_E(r)[2r]\\to A_B$. Let $W=A_E(r)[2r]$. The theorem [thm-amb-vector-bundle-purity] states that the canonical projection is invertible and that the transpose of\n$$c_{\\pi,K}=(1_K\\otimes t_\\pi)\\circ P_{\\pi;K,W}^{-1}:R\\pi_!(\\pi^*K\\otimes W)\\to K$$\nis an isomorphism $\\gamma_{\\pi,K}:\\pi^*K\\otimes W\\to\\pi^\\times K$, for every ordinary etale complex $K$. Restrict to the bounded constructible finite-Tor category and set $\\alpha_{\\pi,K}=\\gamma_{\\pi,K}^{-1}$. Tensor symmetry identifies the displayed source with the statement's ordered convention. This is exactly the integration-normalized family of [def-pur-vector-purity-normalization], including its coefficient-unit component; no pro-etale witness or higher coefficient passage is needed in this finite ordinary-etale assertion.",
+   "text": "Prove that the coefficient quotient characteristic divides a positive power of ell, and that ell is invertible on the base by distinct residue characteristic. Therefore the coefficient characteristic is invertible. Apply the independently normalized bundle-family theorem at this characteristic. Supply its three separately stated compatibility laws, using finite coefficient reduction at each lower positive level. Assemble the unchanged public conclusion.",
    "uses": [
-    "def-pur-conventions",
-    "def-asd-vector-bundle-zero-section",
-    "def-amb-vector-integration",
-    "thm-amb-vector-bundle-purity",
-    "def-pur-vector-purity-normalization"
+    "lem-pur-normalized-vector-purity-bundle",
+    "lem-pur-normalized-vector-purity-base-change",
+    "lem-pur-normalized-vector-purity-direct-sum",
+    "lem-pur-normalized-vector-purity-scalar-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 1: finite ordinary-etale integration and its transpose"
-   }
-  },
-  {
-   "text": "The normalization gives $\\varepsilon_K R\\pi_!(\\gamma_{\\pi,K})=c_{\\pi,K}$, by the transpose formula [def-weil-pbc-adjunction-mate]. A different natural family with this same equation has equal components because the adjunction Hom map is injective. Write $G_0K=\\pi^*K(r)[2r]$. The adjunction carried through $\\gamma:G_0\\cong\\pi^\\times$ has counit $\\varepsilon_0=\\varepsilon\\circ R\\pi_!\\gamma$ and unit $\\eta_{0,M}=\\gamma_{R\\pi_!M}^{-1}\\circ\\eta_M$. Substitution in each triangle identity, followed by naturality of $\\gamma$ and cancellation of $\\gamma^{-1}\\gamma$, gives the identity. Thus the identification preserves the specified units and counits and proves compatibility with adjunctions, rather than asserting only an isomorphism of objects.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 1: compatibility with the actual adjunction and counit"
-   }
-  },
-  {
-   "text": "For the base-change square of [def-pur-vector-purity-base-change], let $C:g^*R\\pi_!\\cong R\\pi'_!g'^*$ be compact-support exchange. It exists with its proper/open normalization by [lem-amb-unbounded-compact-support-comparisons]. On every trivializing open and its pullback, the trace of [def-amb-vector-integration] is the affine-space counit and [lem-amb-affine-space-top-trace] gives $t_{\\pi'} C_W=g^*t_\\pi$. Both source and target have cohomology only in degree zero, since the source is locally isomorphic to the constant sheaf by that affine-space trace. The gluing and equality assertion [lem-pur-degree-zero-derived-map-gluing] therefore makes this equality global. Frame changes give the same trace by the actual equality $t_{p_r}\\rho_G=t_{p_r}$ of [lem-amb-linear-trace-invariance]. This applies on Noetherian overlaps, without requiring overlaps to be affine. Pullback bases are Noetherian as required by the stated base-change predicate.",
-   "uses": [
-    "def-pur-vector-purity-base-change",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "def-amb-vector-integration",
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-degree-zero-derived-map-gluing",
-    "lem-amb-linear-trace-invariance"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: base change and descent of the integration trace"
-   }
-  },
-  {
-   "text": "Apply [lem-asd-compact-projection-exchange] to $\\pi$, its pulled-back compactification, $K$ and $W$. It says precisely that compact-support projection commutes with this arbitrary base change. Its inverse square and the trace equality of Step 3 identify the base-changed $c_{\\pi,K}$ with $c_{\\pi',g^*K}$. Define $e:g'^*\\pi^\\times K\\to\\pi'^\\times g^*K$ by its transpose\n$$R\\pi'_!g'^*\\pi^\\times K\\xrightarrow{C^{-1}}g^*R\\pi_!\\pi^\\times K\\xrightarrow{g^*\\varepsilon_K}g^*K.$$\nThis is exactly the exceptional mate convention [def-weil-pbc-adjunction-mate]. Naturality of $C$ and the equation $\\varepsilon R\\pi_!\\gamma=c$ give equal transposes for $e_K g'^*\\gamma_{\\pi,K}$ and $\\gamma_{\\pi',g^*K}a_K$. Injectivity of transposition gives their equality. The source comparison $a_K$ is the canonical tensor/pullback comparison with the ordinary Tate identifications of [lem-asd-etale-finite-twist-pullback]. Since $a_K$ and both gamma maps are invertible, $e_K=\\gamma_{\\pi',g^*K}a_K(g'^*\\gamma_{\\pi,K})^{-1}$ is invertible. This proves the exact predicate of [def-pur-vector-purity-base-change] and its inverse-alpha square.",
-   "uses": [
-    "lem-asd-compact-projection-exchange",
-    "def-weil-pbc-adjunction-mate",
-    "lem-asd-etale-finite-twist-pullback",
-    "def-pur-vector-purity-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: transpose of the base-change trace equation"
-   }
-  },
-  {
-   "text": "Let $F,G$ have ranks $r,s$, and use $q:E(F\\oplus G)\\to E(G)$, $p:E(G)\\to B$, $h=pq$ and $j$ as in [def-pur-vector-purity-direct-sum]. The relative symmetric-algebra description in [def-asd-vector-bundle-zero-section] identifies the sum bundle with $E(F)\\times_BE(G)$: an algebra map from $\\operatorname{Sym}(F\\oplus G)$ is a pair of maps from its summands, so the relative spectra have this product universal property. Hence $q$ is the pulled-back rank-$r$ bundle. Use the composition comparison $\\alpha:R p_!R q_!\\cong Rh_!$ of [lem-amb-unbounded-compact-support-comparisons], formed through the compactification triangle in that statement. The ordered composite trace is $t_p\\circ Rp_!(t_q)$ with projection and twist associators inserted. On simultaneous trivializations this is exactly the coordinate-tower counit of [lem-amb-affine-space-top-trace] and [def-weil-pbc-composite-adjunction]. Both it and $t_h$ have degree-zero source and target, so [lem-pur-degree-zero-derived-map-gluing] makes their local equality global. Reordering blocks preserves the trace by [lem-amb-linear-trace-invariance].",
-   "uses": [
-    "def-pur-vector-purity-direct-sum",
-    "def-asd-vector-bundle-zero-section",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-amb-affine-space-top-trace",
-    "def-weil-pbc-composite-adjunction",
-    "lem-pur-degree-zero-derived-map-gluing",
-    "lem-amb-linear-trace-invariance"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: ordered traces of direct sums and descent"
-   }
-  },
-  {
-   "text": "The exact projection/composition identity [lem-amb-shriek-tensor-composition], with invertible projection maps from Step 1, permits tensoring the trace equality of Step 5 by $K$. Define $c:Rh^!\\cong Rq^!Rp^!$ by the composite Hom bijection of [def-weil-pbc-composite-adjunction] under $\\alpha$. Its counit is $\\varepsilon_p\\circ Rp_!(\\varepsilon_q)\\circ Rp_!Rq_!(c)$, inserting $\\alpha^{-1}$ at the source. Transposing the tensored trace equality gives\n$$\\gamma_{h,K}=c_K^{-1}\\circ\\gamma_{q,Rp^!K}\\circ(1\\otimes q^*\\gamma_{p,K})\\circ a_{r,s,K}.$$\nThe Tate-power reassociation and shift comparison in $a_{r,s}$ are the ordinary tensor powers of [lem-asd-etale-finite-twist-pullback]; swapping shifts gives $(-1)^{(2r)(2s)}=1$. To identify the stipulated $\\gamma_q$, let $\\theta_{q,L}$ be the dualizing tensor map, the transpose of inverse projection followed by $1\\otimes\\varepsilon_{q,A}$. Naturality of projection in its source and $\\varepsilon_{q,A}Rq_!\\gamma_{q,A}=t_q$ show that $\\theta_{q,L}(1\\otimes\\gamma_{q,A})$ has transpose $c_{q,L}$, hence equals $\\gamma_{q,L}$ by [def-weil-pbc-adjunction-mate]. Step 4 at the unit identifies $\\gamma_{q,A}$ with the pulled-back unit orientation of $F$. Thus the displayed formula is exactly [def-pur-vector-purity-direct-sum], for every compactification triangle, not a choice of unrelated comparison. Step 1 supplies these maps even on ambient inputs $Rp^!K$, so no additional finite-Tor preservation theorem is being assumed here.",
-   "uses": [
-    "lem-amb-shriek-tensor-composition",
-    "def-weil-pbc-composite-adjunction",
-    "lem-asd-etale-finite-twist-pullback",
-    "def-weil-pbc-adjunction-mate",
-    "def-pur-vector-purity-direct-sum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: tensor-projected composite counits and their exceptional transposes"
-   }
-  },
-  {
-   "text": "Fix $1\\le m\\le n$, put $A'=A_{E,m}$, and let $Q_T=(-)\\otimes_A^LA'$ [lem-pur-derived-change-of-rings]. Choose one $N=\\ell^a$ killing both rings. Their ordinary Tate lines are $\\mu_N\\otimes_{\\mathbf Z/N}A$ and $\\mu_N\\otimes_{\\mathbf Z/N}A'$ and are flat rank-one sheaves [lem-asd-finite-etale-twist-line]. The balancing map $(a\\otimes z)\\otimes b\\mapsto\\phi(a)b\\otimes z$, and its tensor powers, identify their scalar extensions, including power zero. For a flat degree-zero sheaf $M$, [lem-pur-derived-change-of-rings] computes $Q(M[0])$ by $M\\otimes_AA'$ in degree zero. Use the actual normalized scalar adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction]. The unit roof in [lem-weil-pbc-scalar-extension-unit-triangles] is then $x\\mapsto x\\otimes1$. Transposing this roof under the fixed scalar adjunction shows that the comparison $q_M$ of [def-pur-vector-purity-scalar-single] is exactly the same balancing map: its composite with the unit sends $x$ to $x\\otimes1$, which determines its transpose. For $M=A$ this is multiplication $A\\otimes_AA'\\to A'$. Thus the scalar/single comparison at the unit and at rank zero is the stipulated one. With the K-flat tensorator [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and shift and pullback identifications, these give precisely the invertible source arrow $a_{\\rm scalar}$ of [def-pur-vector-purity-finite-reduction]. No flatness of $A'$ over $A$ is used.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-asd-finite-etale-twist-line",
-    "lem-weil-pbc-scalar-extension-unit-triangles",
-    "def-pur-vector-purity-scalar-single",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pur-vector-purity-finite-reduction",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: canonical ordinary Tate scalar comparison, including rank zero"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-etale-compact-scalar-coherence] on the chosen compactification of $\\pi$. It gives the actual isomorphism $q_{\\pi,M}:Q_BR\\pi_{!,A}M\\to R\\pi_{!,A'}Q_EM$, constructed from the proper scalar counit mate followed by the open scalar comparison; this is exactly $q_{\\rm scalar}$ in [def-pur-vector-purity-finite-reduction]. In particular it is invertible at $M=R\\pi_A^!K$, including $K=A_B$, without invoking a general smooth-purity theorem. Define $b_K$ to be the transpose of\n$$R\\pi_{!,A'}Q_ER\\pi_A^!K\\xrightarrow{q_{\\pi,R\\pi_A^!K}^{-1}}Q_BR\\pi_{!,A}R\\pi_A^!K\\xrightarrow{Q_B\\varepsilon_{A,K}}Q_BK.$$\nThe convention [def-weil-pbc-adjunction-mate] makes this the published exceptional scalar mate. Its invertibility will follow from the normalized-gamma square, rather than from the false general principle that an invertible square always has invertible mate.",
-   "uses": [
-    "lem-pur-etale-compact-scalar-coherence",
-    "def-pur-vector-purity-finite-reduction",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: construct the actual compact-support and exceptional scalar comparisons"
-   }
-  },
-  {
-   "text": "First check scalar compatibility of the projective-line trace. By [lem-asd-ordinary-supported-kummer], its supported hyperplane class and its ordinary Chern class are derived scalar extensions of the same $\\mathbf Z/N$ class; associativity of the K-flat scalar tensor [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives $Q(h_A)=h_{A'}$ under the proper counit-mate comparison [lem-asd-proper-finite-coefficient-extension]. The unit component is preserved as well: by the defining transpose of that proper comparison, its composite with the scalar extension of the old inverse-image/direct-image unit has transpose the identity, hence is the new unit (apply the adjunction triangle identity). Therefore $q\\,Q(b_A)=b_{A'}$ for the two-component decomposition of [lem-asd-ordinary-finite-p1-adjunction], under Step 7's scalar source identifications. By [def-amb-p1-trace], $t_A=\\operatorname{pr}_2b_A^{-1}$ and $t_{A'}=\\operatorname{pr}_2b_{A'}^{-1}$. Functoriality preserves inverses and the finite direct-sum projection, so $t_{A'}q=Q(t_A)$. This proof uses the derived scalar extension of the Kummer class, not an assertion that a nonflat quotient commutes with individual cohomology groups.",
-   "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-asd-proper-finite-coefficient-extension",
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "def-amb-p1-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: explicit projective-line trace and Kummer class under coefficient reduction"
-   }
-  },
-  {
-   "text": "For the affine line, the trace is $t_q$ after the open-extension counit into the projective-line compactification [lem-amb-affine-space-top-trace]. The open scalar comparison preserves this counit: on the open it is the same scalar tensor map and counit identity, while the source is zero off the open; the open adjunction uniquely determines the map. Step 9 therefore proves scalar compatibility for that trace. The composition identity of [lem-pur-etale-compact-scalar-coherence] and the ordered composite-counit formula [def-weil-pbc-composite-adjunction] propagate the equality through each coordinate of [lem-amb-affine-space-top-trace]; rank zero starts with the identity. For a bundle, [def-amb-vector-integration] gives these coordinate traces on every trivializing open. Under $q$ and Step 7's line comparison, both scalar traces have source isomorphic to $Q(A_B[0])=A'_B[0]$, because the original trace is an isomorphism. Both targets are $A'_B[0]$. Thus [lem-pur-degree-zero-derived-map-gluing] applies to the resulting global derived maps and yields\n$$t_{\\pi,A'}\\circ\\widetilde q_{\\pi,W}=u_B\\circ Q_B(t_{\\pi,A}),$$\nwhere $l:Q_EW\\cong W'$ is Step 7's scalar line map, $\\widetilde q_{\\pi,W}=R\\pi_{!,A'}(l)\\circ q_{\\pi,W}$ and $u_B:Q_B(A_B[0])\\cong A'_B[0]$ is the normalized scalar unit. The open-restriction clause of [lem-pur-etale-compact-scalar-coherence] identifies $q$ restricted to each $U_i$ with the comparison for $E|_{U_i}\\to U_i$ and its restricted compactification, and its refinement clause passes to the coordinate-tower compactification. So the local equations compare the actual maps.",
-   "uses": [
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-etale-compact-scalar-coherence",
-    "def-weil-pbc-composite-adjunction",
-    "def-amb-vector-integration",
-    "lem-pur-degree-zero-derived-map-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: ordered affine-space traces and sheaf gluing under finite reduction"
-   }
-  },
-  {
-   "text": "The projection square of [lem-pur-etale-compact-scalar-coherence], Step 10's trace equality, and the source identification of Step 7 give the exact equation\n$$Q_B(c_{\\pi,A,K})\\,q_{\\pi,G_{0,A}K}^{-1}=c_{\\pi,A',Q_BK}\\,R\\pi_{!,A'}(a_{{\\rm scalar},K}).$$\nBoth sides have source $R\\pi_{!,A'}Q_EG_{0,A}K$ and target $Q_BK$. By naturality of $q$ and Step 8's defining counit formula for $b$, the transpose of $b_K Q_E(\\gamma_{\\pi,A,K})$ is the left side. The transpose of $\\gamma_{\\pi,A',Q_BK}a_{{\\rm scalar},K}$ is the right side, by [def-weil-pbc-adjunction-mate]. Consequently\n$$b_K Q_E(\\gamma_{\\pi,A,K})=\\gamma_{\\pi,A',Q_BK}a_{{\\rm scalar},K}.$$\nThe scalar functor preserves isomorphisms, Step 1 makes both gamma maps invertible, and Step 7 makes $a_{\\rm scalar}$ invertible. Solving this equation gives invertibility of $b_K$. This applies to every stated $K$ and to the coefficient-unit OBJECT, where all scalar/single identifications were checked in Step 7. It proves exactly [def-pur-vector-purity-finite-reduction]; taking inverses gives the compatibility for $\\alpha$. No exceptional coefficient comparison restricted to prime-power scalar rings or to separated bases has been applied to ramified $A_{E,n}$.",
-   "uses": [
-    "lem-pur-etale-compact-scalar-coherence",
-    "def-weil-pbc-adjunction-mate",
-    "def-pur-vector-purity-finite-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "paragraph 2: transpose the scalar-compatible integration and projection; deduce mate invertibility"
-   }
-  },
-  {
-   "text": "Set $K=A_B$ in Step 1. Exact coefficient pullback preserves the unit, so the inverse of $\\gamma_{\\pi,A_B}$ is $\\omega_\\pi\\cong A_E(r)[2r]$, with the reduction square already supplied by Step 11 at that object. At rank zero the relative symmetric algebra of the zero module is $\\mathcal O_B$, so [def-asd-vector-bundle-zero-section] identifies $E\\cong B$; the coordinate trace is the identity by [lem-amb-affine-space-top-trace]. Its transpose, all composition comparisons and the rank-zero scalar line map above are the identity comparisons. An empty base has only zero sheaves and hence only the unique maps in these formulas; the degree-zero gluing statement includes the empty cover. The current statement explicitly reserves integral, rational and algebraically closed coefficients for the separate transport section, so no limit construction is asserted here.",
-   "uses": [
-    "def-asd-vector-bundle-zero-section",
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-degree-zero-derived-map-gluing"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-    "place": "coefficient-unit specialization and rank-zero/empty cases"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-amb-p1-trace",
-  "def-amb-vector-integration",
-  "def-asd-vector-bundle-zero-section",
-  "def-pur-conventions",
-  "def-pur-vector-purity-base-change",
-  "def-pur-vector-purity-direct-sum",
-  "def-pur-vector-purity-finite-reduction",
-  "def-pur-vector-purity-normalization",
-  "def-pur-vector-purity-scalar-single",
-  "def-weil-pbc-adjunction-mate",
-  "def-weil-pbc-composite-adjunction",
-  "lem-amb-affine-space-top-trace",
-  "lem-amb-linear-trace-invariance",
-  "lem-amb-shriek-tensor-composition",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-asd-compact-projection-exchange",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-asd-finite-etale-twist-line",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-asd-ordinary-supported-kummer",
-  "lem-asd-proper-finite-coefficient-extension",
-  "lem-pur-degree-zero-derived-map-gluing",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-etale-compact-scalar-coherence",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-scalar-extension-unit-triangles",
-  "thm-amb-vector-bundle-purity"
+  "lem-pur-normalized-vector-purity-bundle",
+  "lem-pur-normalized-vector-purity-base-change",
+  "lem-pur-normalized-vector-purity-direct-sum",
+  "lem-pur-normalized-vector-purity-scalar-reduction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-  "place": "paragraphs 1--2; finite ordinary-etale version, with normalized compatibility arguments extracted to existing nodes and one generic scalar-coherence lemma"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "integration normalization and the three independent compatibility laws, with the arithmetic invertibility proved directly"
  },
  "mathlib_searches": [
   {
@@ -361,59 +173,30 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "cor-pur-vector-bundle-purity",
   "worker": "stage1",
-  "summary": "Repaired the stale eight-step proof against the current finite ordinary-etale statement. Kept the integration-and-adjoint route, reused the existing arbitrary-base-change projection square, tensor-composition identity and degree-zero gluing, and extracted the remaining nonflat scalar/projection/composition comparison to one statement-only generic lemma. Proved scalar mate invertibility from its actual normalized gamma equation. No item statement or Lean field changed; higher-coefficient transports are outside the current statement. All steps are below 2000 characters.",
-  "blueprint": "main-20261015 cor-pur-vector-bundle-purity.proof.md paragraphs 1--2: Steps 1--2 give the actual integration-normalized isomorphism and adjunction; Steps 3--6 give base change and direct sums by degree-zero traces and composition; Steps 7--11 give finite coefficient reduction through the Kummer-normalized projective-line trace; Step 12 gives the unit and edge cases.",
+  "summary": "Repair of human re-split return: six independent statement-only tasks extract geometric trace descent, base-change transpose/adjunction transport, composite transpose/dualizing tensor, finite Tate scalar-source normalization, Kummer-to-bundle scalar trace descent, and scalar exceptional-mate calculus. The statement and Lean records are unchanged. The report preserves all twelve old arguments verbatim and allocates every step.",
+  "blueprint": "main-20261015 paragraphs 1--2: integration and adjunction (assembly 1--2), geometric trace descent and its transposes (3--4), scalar line/Kummer/descent/mate (5), unit and degenerate cases (6).",
   "tool_uses": [
    {
-    "node": "lem-asd-compact-projection-exchange",
-    "why": "Generic Compact-support projection maps commute with etale exchange used only for its stated comparison/gluing/adjunction, in steps 4. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
     "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Generic Finite Tate lines on the small etale site and their pullback used only for its stated comparison/gluing/adjunction, in steps 4,6. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-asd-finite-etale-twist-line",
-    "why": "Generic Finite torsion Tate twists are etale locally free lines used only for its stated comparison/gluing/adjunction, in steps 7. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-asd-ordinary-finite-p1-adjunction",
-    "why": "Generic Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients used only for its stated comparison/gluing/adjunction, in steps 9. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-asd-ordinary-supported-kummer",
-    "why": "Generic Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients used only for its stated comparison/gluing/adjunction, in steps 9. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-asd-proper-finite-coefficient-extension",
-    "why": "Generic Canonical unbounded proper direct-image comparison for finite coefficient extension used only for its stated comparison/gluing/adjunction, in steps 9. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-pur-degree-zero-derived-map-gluing",
-    "why": "Generic Unique gluing of derived maps locally in degree zero used only for its stated comparison/gluing/adjunction, in steps 3,5,10,12. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used only for its stated comparison/gluing/adjunction, in steps 7. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used only for its stated comparison/gluing/adjunction, in steps 7,9. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-scalar-extension-unit-triangles",
-    "why": "Generic Scalar-extension maps form morphisms of distinguished triangles used only for its stated comparison/gluing/adjunction, in steps 7. It supplies ordinary derived categorical infrastructure; the unit integration route is unchanged."
-   },
-   {
-    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "why": "The normalized actual scalar adjunction with unit x mapped to x tensor 1, used in Step 7 to verify the scalar/single comparison; the witness-compatibility predicate is not an adjunction construction."
+    "why": "Ordinary-etale Tate pullback source comparison; the integration route in sk-prop-an is unchanged."
    }
   ]
  },
@@ -454,12 +237,12 @@
   "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NB-9660bf985",
-  "group": "NB",
+  "reviewer": "NT-cc-Q106-08b90caf4",
+  "group": "Q106",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-9660bf985 (reviewer sub-agent of L); spot-checked: Read the full item (12 steps), the new node, all 40 cited statements, blueprint main-20261015 cor-pur-vector-bundle-purity.proof.md (both paragraphs) and Stacks 0GL6 remark-Rf-lower-shriek-change-of-rings (more-etale.tex l.3739). Its second diagram says compact support commutes with derived scalar extension for any map of torsion rings, unbounded, which confirms the new node's isomorphism clause. This is a re-split ordered by the human on 2026-10-17 (steps 4-8 too long); the statement, stmt_deps, lean and lean_audit are unchanged from the base. Step checks: Step 1 is thm-amb-vector-bundle-purity, which gives γ for every K with ℓ invertible. Step 4 transposes: g^*c·C^{-1} equals c'·Rπ'_!(a) by lem-asd-compact-projection-exchange (same exchange as C) and Step 3. Step 6 types check, the order Rq^!Rp^! is correct, the sign is +1, and γ_q is identified with the stipulated one. Step 7: the scalar/single comparison is the balancing map; no flatness of A' over A is used. Steps 8 and 11: b is the transpose of Q_Bε∘q^{-1}, and the equation b·Q(γ_A)=γ_{A'}·a_scalar proves b invertible for ramified A_{E,n}. Step 9: β∘Q(h_A)=h_{A'} and β∘Q(unit)=unit. New node lem-pur-etale-compact-scalar-coherence: B1-B9 hold; it is true; it passed small cases (identity map, identity ring map, empty X, proper f, open f, nonflat Z/4→Z/2, where the D^+ hypothesis is a real restriction); it is not a duplicate of lem-sf-compact-coefficient-composition, lem-fix-compact-support-coefficient-change, lem-pur-finite-free-projection-exchange, lem-sp-proper-open-coefficient-mate, lem-sf-proper-open-coefficient-refinement or lem-pur-exceptional-coefficient-comparison; it does not restate the item. The item's closure is acyclic and no SGA source is used. Accepted tool_uses: the 11 entries declared in split_report.tool_uses. Batch-5 check: lem-amb-shriek-tensor-composition, whose path reaches only lem-pod-lisse-module-sheaves-as-module-objects, and lem-asd-ordinary-supported-kummer, whose path reaches only lem-pod-etale-stalk-tensor-scalar. Both pod nodes are generic sheaf facts in unit sk-lem-finite, the finiteness/perfectness unit. Neither assumption gives these results and they are not steps of the PD or trace-formula proofs, so both citations are outside the assumptions and acceptable. FIX (E5): Step 10 asserted, uncited, that q commutes with restriction to the trivializing opens U_i. I added an open-restriction clause to the new node, C_{A'}∘v^*q_f = q_{f_V}∘Q(C_A), using the exchange of lem-amb-unbounded-compact-support-comparisons; the clause is true. Step 10 now cites that clause and the refinement clause; it is 1611 characters. Maintainer notes: def-pur-vector-purity-direct-sum writes Rp^!Rq^! (typo); the finite-reduction and scalar-single definitions cite def-weil-pbc-witness-compatibility and the Z/ℓ^r-only lem-pur-exceptional-coefficient-comparison. The steps avoid both.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-08b90caf4 (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 done correctly. Item: only proof, proof_deps, proof_origin and split_report differ from the side-live base (diffed); statement and lean unchanged; parent proof ~2.3k chars in 6 assembly steps. All 12 base steps appear verbatim in the report and each goes to one of 6 comparable statement-only nodes: geometric descent (old 3,5,12), transpose base-change (2,4), transpose composition (6), finite Tate scalar source (7), vector trace scalar descent (9,10), transpose scalar mate (8,11). None restates the item: the transpose nodes are general calculus for any compactifiable f, W and traces, and the trace nodes state trace identities, not purity. Statements checked by transposition. Base-change: both sides transpose to g^*c∘C^{-1} = c'F'(a). Composition: γ_h formula, θ(1⊗γ_A)=γ_L, sign (−1)^{4rs}=1, order R_h≅R_qR_p. Scalar mate: b∘Q(γ)=γ'∘a, b invertible. Node 4's conclusion is exactly node 5's trace hypothesis; node 6's trace equation is exactly node 1's hypothesis with l = Tate pullback. These match the base-change, direct-sum and finite-reduction definition nodes. Edge cases: rank 0, empty base, g = id, φ = id, nonflat Z/4→Z/2. Route follows the main-20261015 proof (integration adjoint, P1 Kummer scalar compatibility, affine composition, degree-zero descent, transposition), with no SGA. Accepted tool use: lem-asd-etale-finite-twist-pullback. No duplicates among the candidates read (lem-sp-p1/affine-counit-scalar are field-base ctf only; vector-integration-local-trace/mate; etale-affine-projection-coefficient-mate). FIX for B3 citations: three nodes cite def-amb-etale-compact-support and thm-amb-etale-exceptional-adjoint in their text but not in stmt_deps; projection map P uncited in base-change, composition and geometric nodes. Added stmt_deps and citations (lem-amb-proper-coproducts-projection, lem-pur-etale-open-derived-tensor, def-kun-derived-tensor, prop-weil-pbc-inverse-image-modules-exact) and lean_audit none in fixes/dag/nodes/sec-smooth-purity/ for 4 nodes; no mathematical content changed.; 4 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -580,5 +363,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Repair: independently integration-normalized gamma, actual pullback bundle and Tate associator; ordered symmetric-algebra sum projections and compactification compositor mate; actual derived quotient scalar tensor and counit mate, with the coefficient-unit object. Current source finite-part coefficient scope is explicit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261025T210755-L-3589124",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

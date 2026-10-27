@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-affine-dg-coefficient-module-comparison",
+ "kind": "statement",
+ "title": "Affine dg coefficient module comparison and perfectness",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S$ a finite type commutative $D$-algebra [def-weil-pbc-finite-type-algebra], and $A$ a commutative $D$-algebra. Put $Y=\\operatorname{Spec}S$ [def-weil-affine-spectrum, def-pc-scheme]. Use the standard coefficient resolutions $R_E$, the sheaf dg module categories, locally perfect objects, $U$, $\\Phi_E$, $\\widehat K$, and the normalized arrows $\\nu_E$ of [def-sfb-dg-coefficient-realization].\n\nFor every commutative $D$-algebra $E$, put $C_E=S\\otimes_D R_E$, a nonpositive dg algebra, and $T_E=S\\otimes_D E$, with augmentation $C_E\\to T_E$. When $E\\to A$ is specified, put $Y_E=\\operatorname{Spec}T_E$, $Y_A=\\operatorname{Spec}T_A$ and let $\\pi_E:Y_A\\to Y_E$ be the projection [def-pc-fibre-product]. Let $D(C_E)$ denote the localization of left dg $C_E$-modules at underlying quasi-isomorphisms, using the signed shifts and cones of [def-sfb-sheaf-dg-module-localization] for modules on a point. Termwise associated sheaf on $Y$ induces an exact equivalence\n$$D(C_E)\\simeq D_{\\mathrm{QCoh}}(\\mathcal O_Y\\otimes_D R_E).$$\nIt identifies cohomology with associated sheaves of module cohomology. Under this equivalence every locally perfect sheaf dg object is a retract of a finite-cell $C_E$-module: a dg module with a finite filtration whose quotients are finite sums of shifts of $C_E$. In particular its underlying cohomology vanishes above some integer. The ordinary affine equivalence [lem-pc-affine-qcoh-derived-equivalence] on $\\operatorname{Spec}T_E$ identifies extension of scalars $T_E\\otimes_{C_E}^{\\mathbf L}-$ with ordinary scheme-derived objects, and restriction back to $C_E$ keeps the underlying complex. This ordinary extension takes perfect dg objects to perfect ordinary complexes [def-pc-perfect-complex] on $\\operatorname{Spec}T_E$. For a specified $E\\to A$, extension along $C_E\\to C_A$ is identified with $R_A\\otimes_{R_E}^{\\mathbf L}-$ on sheaves. For an ordinary $T_E$-complex $G$ this is $\\Phi_E(\\widetilde G)$; for an ordinary $T_A$-complex $K$ restriction is $\\widehat{\\widetilde K}$, and the ordinary affine equivalence on $\\operatorname{Spec}T_E$ carries $\\operatorname{Res}_{T_E}^{T_A}K$ to $R\\pi_{E*}\\widetilde K$ [def-pc-derived-direct-image], so ordinary arrows $G\\to\\operatorname{Res}_{T_E}^{T_A}K$ are the ordinary arrows $\\widetilde G\\to R\\pi_{E*}\\widetilde K$. These identifications commute with the extension--restriction adjunction units and action counits, so the counit attached to an ordinary arrow $G\\to\\operatorname{Res}_{T_E}^{T_A}K$ is precisely $\\nu_E$ of that arrow. No flatness of $S$ or $E$ over $D$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Agent affine dg refinement of Tag 06Z0 (perfect.tex, lemma-affine-compare-bounded), Tag 09R3 (dga.tex, proposition-compact), and Tag 0FTR (sdga.tex, lemma-derived-adjoint-push-pull). These sources give the ordinary affine equivalence, finite-cell characterization, and dg adjunction; the combined sheaf-dg comparison is an independent obligation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sfb-dg-coefficient-realization",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $C=C_E$ and $\\mathcal C=\\mathcal O_Y\\otimes_DR_E=\\widetilde C$. The coefficient definition gives $R_E^j=0$ for $j>0$ and flat $D$-modules $R_E^j$. Thus $C^j=S\\otimes_DR_E^j$ is flat over $S$: tensoring an exact sequence of $S$-modules with it is tensoring the same underlying $D$-sequence with $R_E^j$. The bounded-above flat-complex lemma makes $C$ K-flat over $S$. At $y\\in Y$, $\\mathcal C_y=S_y\\otimes_SC$ is again nonpositive with flat terms, so the same lemma and the K-flat stalk criterion make $\\mathcal C$ K-flat over $\\mathcal O_Y$. Associated sheaf is exact by exact module localization, checked on the localizations at primes; its tensor comparison sends $(m/s)\\otimes(n/t)$ to $(m\\otimes n)/(st)$. Consequently termwise tilde carries dg actions, signed shifts and cones to the indicated sheaf dg ones. This argument works equally for any nonpositive dg $S$-algebra with flat terms.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-kflat-stalk-criterion",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0 (lemma-affine-compare-bounded), exact termwise tilde; coefficient flatness checked from the definition"
+   }
+  },
+  {
+   "text": "Apply the flat ringed dg push-pull lemma to $f:(Y,\\mathcal O_Y)\\to(*,S)$, $\\mathcal C$ on the point equal to $C$, and $f^*C=\\widetilde C$. Its exact pullback is termwise tilde; its right adjoint is dg derived global sections. After forgetting actions its unit and counit are the ordinary tilde/$R\\Gamma$ unit and counit. The ordinary affine derived equivalence makes these isomorphisms when the sheaf object has quasi-coherent underlying cohomology. Forgetting detects isomorphisms, since the underlying acyclic cone is zero in the defining dg localization. Hence the restricted dg adjunction is an equivalence. Exactness and the formula $H^q(\\widetilde M)=\\widetilde{H^q(M)}$ follow from exact tilde. The same proof applies with $S_f,C_f$ for each principal open, and the fraction formula in step 1 identifies restriction there with $M\\mapsto M_f$. No Noetherianity or finite type was used in this equivalence argument.",
+   "uses": [
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0 (lemma-affine-compare-bounded), unit and counit proof; sdga Tag 0FTR, via the flat dg push-pull tool"
+   }
+  },
+  {
+   "text": "Let $M$ correspond to a locally perfect sheaf dg object. Refine its perfectness cover by finitely many principal opens $D(f_i)$ covering $\\operatorname{Spec}S$; an open complementary to $V(I)$ is $\\bigcup_{f\\in I}D(f)$, so principal refinement follows directly from the Zariski topology, and the cited spectrum lemma gives quasi-compactness. The cited unit-ideal criterion says the resulting finite family generates the unit ideal, as required for dg-Hom descent. For the empty spectrum take the singleton family $f_1=0=1$ in the zero ring, so the descent tool still has $r\\geq1$. On each such open, step 2 identifies $M_{f_i}$ with an object in the thick closure of $C_{f_i}$. The regular module is finite-cell, hence compact by the finite-cell compactness lemma (use the graded opposite algebra for left modules, with $a*_{\\mathrm{op}}b=(-1)^{|a||b|}ba$ and $x\\cdot a=(-1)^{|a||x|}ax$). Compact objects are thick, so every $M_{f_i}$ is compact, and the same holds on every intersection, since restriction carries the local finite constructions to finite constructions from $C_{f_J}$. For any family $(N_a)$ apply finite principal-cover derived-Hom descent to $N=\\bigoplus_aN_a$ and to each $N_a$. On every nonempty intersection the canonical sum-to-Hom comparison is an isomorphism in every cohomological degree by this compactness. Finite sums and finite totalizations commute with the sum over $a$, and sums of module complexes are exact. The descent isomorphism therefore gives the global comparison as an isomorphism in $D(S)$. Taking $H^0$ proves $M$ compact. This is a descent argument, not a presumption that local thick generation is global thick generation.",
+   "uses": [
+    "lem-sfb-dg-finite-principal-hom-descent",
+    "lem-sfb-dg-finite-cell-compact",
+    "lem-sc-compact-objects-thick",
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sfb-dg-derived-admissible-triangles",
+    "lem-sfb-dg-sequential-colimit-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D2 finite Cech descent, with dga Tag 09R3 compactness of the regular module"
+   }
+  },
+  {
+   "text": "Apply the compact-to-finite-cell lemma to this compact $M$, obtaining $M\\xrightarrow iP\\xrightarrow pM$ with $pi=1$ and $P$ finite-cell. If a cell quotient is a sum of $C[k]$, it has no terms above the largest $-k$ occurring. Choose the maximum $b$ of these finitely many upper bounds (take any $b$ for the zero filtration). Each filtration sequence is exact degreewise, so induction gives $P^j=0$ for $j>b$. The retraction makes $H^j(M)$ a retract of $H^j(P)$, hence zero there as well. Step 2 gives the identical vanishing for underlying sheaf cohomology.",
+   "uses": [
+    "lem-sfb-dg-compact-finite-cell-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3 (proposition-compact), (1) to (2); upper bound from the finite filtration"
+   }
+  },
+  {
+   "text": "For the augmentation $C_E\\to T_E$, use the dg scalar adjunction on a point: $L=T_E\\otimes_{C_E}^{\\mathbf L}-$ is exact and left adjoint to restriction. Restriction keeps the underlying complex and commutes with direct sums, so for compact $M$ the identities $\\operatorname{Hom}(LM,\\bigoplus N_a)=\\operatorname{Hom}(M,\\operatorname{Res}\\bigoplus N_a)=\\bigoplus\\operatorname{Hom}(M,\\operatorname{Res}N_a)$ show $LM$ compact in $D(T_E)$. The ring-derived compact-to-perfect theorem gives a bounded finite-projective $T_E$-complex representing $LM$. Its associated sheaf on $Y_E$ is strictly perfect by definition, and ordinary affine derived equivalence places it in the claimed scheme-derived category. This establishes perfectness of ordinary extension without making any assertion that $C_E\\to T_E$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-ring-derived-compact-perfect",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTR for scalar adjunction on a point; more-algebra Tag 07LT compact implies perfect"
+   }
+  },
+  {
+   "text": "For $E\\to A$, apply relative flat bar extension with $\\mathcal S=S$ on a point and with $\\mathcal S=\\mathcal O_Y$ on $Y$, $P=R_E$, $Q=R_A$. The coefficient definition supplies the required $D$-K-flatness. Termwise tilde commutes with the bar direct sums and tensor products by the localization formula of step 1, and carries all faces and degeneracies to the same multiplication and action maps. It therefore identifies the module bar extension along $C_E\\to C_A$ with the sheaf extension $R_A\\otimes_{R_E}^{\\mathbf L}-$. Its comparison to ordinary extension, zero on positive bar lengths, and its action counit are the comparisons specified by the bar lemma on both sides. The extension units agree as well: the underived extension--restriction Hom bijection is the same tensor/action bijection after tilde, and its derived transpose is characterized by that comparison. Thus this comparison preserves the actual adjunction, not merely the resulting isomorphism classes.",
+   "uses": [
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "def-sfb-dg-coefficient-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FTF and 0FTR, with the explicit relative bar representative and counit of the cited node"
+   }
+  },
+  {
+   "text": "For any ring map $T_E\\to T_A$, apply the affine pushforward resolution lemma to the complex $\\widetilde K$ on $Y_A$ and a K-injective replacement. It identifies $R\\pi_{E*}\\widetilde K$ with termwise $\\pi_{E*}\\widetilde K$. The latter is canonically $\\widetilde{\\operatorname{Res}_{T_E}^{T_A}K}$: on $D(t)\\subseteq Y_E$ both sides are the localization of $K$ at the image of $t$, and their restrictions agree. The same calculation for $p_E:Y_E\\to Y$ and $p_A:Y_A\\to Y$ retains the $E$- and $A$-actions respectively. Hence the coefficient definition identifies an ordinary $T_E$-complex $G$ with $Rp_{E*}\\widetilde G$ before restriction along $C_E\\to T_E$, and a $T_A$-complex $K$ with $\\widehat{\\widetilde K}$ after restriction along $C_A\\to T_A$. Combining with step 6 gives the asserted $\\Phi_E(\\widetilde G)$ identification. Ordinary affine derived equivalence is fully faithful, so ordinary arrows have exactly the claimed scheme-derived interpretation.",
+   "uses": [
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-sfb-dg-coefficient-realization",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW (lemma-affine-morphism-equivalence) and Tag 06Z0; affine pushforward normalized via a K-injective replacement"
+   }
+  },
+  {
+   "text": "Let $\\gamma:G\\to\\operatorname{Res}_{T_E}^{T_A}K$. Its dg adjoint is extension of the restricted $\\gamma$, followed by the $C_A$-action counit. In the bar model the last map sends $r\\otimes k$ to $rk$ on length zero and is zero on higher lengths. Steps 6 and 7 carry this to extension of $Rp_{E*}\\widetilde\\gamma$ followed by precisely that same sheaf action map. The composition identification $Rp_{E*}R\\pi_{E*}\\widetilde K\\simeq Rp_{A*}\\widetilde K$ is the coefficient-linear one explicitly fixed in the coefficient definition; it is the canonical comparison of right derived functors, normalized on K-injective complexes by the ringed-topoi composition lemma: for a K-injective resolution $\\widetilde K\\to I$ on $Y_A$ and a K-injective resolution $j:\\pi_{E*}I\\to J$ on $Y_E$, its class is $p_{E*}\\pi_{E*}I\\xrightarrow{p_{E*}j}p_{E*}J$. The affine pushforward resolution lemma, applied as in step 7 to $\\pi_E$, to $p_E$ (with the termwise quasi-coherent complex $\\pi_{E*}\\widetilde K\\to\\pi_{E*}I\\to J$) and to $p_A=p_E\\pi_E$, makes $p_{E*}\\pi_{E*}\\widetilde K\\to p_{E*}\\pi_{E*}I\\to p_{E*}J$ and $p_{A*}\\widetilde K=p_{E*}\\pi_{E*}\\widetilde K\\to p_{A*}I$ quasi-isomorphisms. Hence on the affine representatives just used the composition identification is the identity of $p_{E*}\\pi_{E*}\\widetilde K=p_{A*}\\widetilde K$, i.e. iterated restriction of the same complex with the same scalar action. By that definition this composite is $\\nu_E(\\widetilde\\gamma)$. All units and counits used above are fixed by their adjunction/comparison, and restriction never changes the underlying complex. The arguments used only flat terms of $R_E,R_A$, and therefore require neither $S$ nor $E$ to be flat over $D$.",
+   "uses": [
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "def-sfb-dg-coefficient-realization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pc-affine-pushforward-resolution-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTR and the specified coefficient-linear action-arrow definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-dg-coefficient-realization",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-sfb-flat-ringed-dg-pushpull",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-dg-finite-principal-hom-descent",
+  "lem-sfb-dg-finite-cell-compact",
+  "lem-sc-compact-objects-thick",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-sfb-dg-derived-admissible-triangles",
+  "lem-sfb-dg-sequential-colimit-triangle",
+  "lem-sfb-dg-compact-finite-cell-retract",
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "lem-sfb-ring-derived-compact-perfect",
+  "def-pc-perfect-complex",
+  "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Agent assembly of Tags 0FT0/0FTR, perfect Tags 06Z0/08D2/0AVW, dga Tag 09R3 and more-algebra Tag 07LT; sources do not state the combined coefficient comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine quasi-coherent sheaf dg modules over a connective quasi-coherent dg algebra correspond to dg modules over its global sections, and locally perfect objects are compact",
+   "results": "{\"t\": \"2026-10-24T04:48:19Z\", \"tool\": \"leanfinder\", \"query\": \"Affine quasi-coherent sheaf dg modules over a connective quasi-coherent dg algebra correspond to dg modules over its global sections, and locally perfect objects are compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData\"], \"digest\": \"ca8b718a6bf48f68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme abelian/module categories, ordinary sheafification adjunctions and finite-presentation predicates do not identify affine sheaf dg localizations, local perfectness, and normalized coefficient adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SheafOfModules\"",
+   "results": "{\"t\": \"2026-10-24T04:48:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"SheafOfModules\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme abelian/module categories, ordinary sheafification adjunctions and finite-presentation predicates do not identify affine sheaf dg localizations, local perfectness, and normalized coefficient adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "dg.*sheaf|differential.*graded|compact.*derived",
+   "results": "{\"t\": \"2026-10-24T04:48:20Z\", \"tool\": \"grep\", \"query\": \"dg.*sheaf|differential.*graded|compact.*derived\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme abelian/module categories, ordinary sheafification adjunctions and finite-presentation predicates do not identify affine sheaf dg localizations, local perfectness, and normalized coefficient adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine quasi-coherent sheaf dg modules over a connective quasi-coherent dg algebra correspond to dg modules over its global sections, and locally perfect objects are compact",
+   "results": "{\"t\": \"2026-10-24T04:48:21Z\", \"tool\": \"leansearch\", \"query\": \"Affine quasi-coherent sheaf dg modules over a connective quasi-coherent dg algebra correspond to dg modules over its global sections, and locally perfect objects are compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"AlgebraicGeometry.AffineScheme.Γ\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.rec\", \"SheafOfModules.QuasicoherentData.presentation\"], \"digest\": \"ade1188742891581\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme abelian/module categories, ordinary sheafification adjunctions and finite-presentation predicates do not identify affine sheaf dg localizations, local perfectness, and normalized coefficient adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine dg sheafification identifies locally perfect modules with compact dg modules and commutes with coefficient bar extension",
+   "results": "{\"t\": \"2026-10-24T04:48:24Z\", \"tool\": \"leanfinder\", \"query\": \"Affine dg sheafification identifies locally perfect modules with compact dg modules and commutes with coefficient bar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\"], \"digest\": \"218e57690cb3e401\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme abelian/module categories, ordinary sheafification adjunctions and finite-presentation predicates do not identify affine sheaf dg localizations, local perfectness, and normalized coefficient adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine quasi-coherent differential graded sheaf modules equivalent to differential graded modules over global sections with perfect objects finite cell retracts",
+   "results": "{\"t\": \"2026-10-24T06:55:47Z\", \"tool\": \"leanfinder\", \"query\": \"Affine quasi-coherent differential graded sheaf modules equivalent to differential graded modules over global sections with perfect objects finite cell retracts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData\"], \"digest\": \"56d7cd82a909328f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|DGModule|DgModule",
+   "results": "{\"t\": \"2026-10-24T06:59:41Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|DGModule|DgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SheafOfModules\"",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"SheafOfModules\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine differential graded modules sheafification derived adjunction perfect finite cell modules",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"leansearch\", \"query\": \"Affine differential graded modules sheafification derived adjunction perfect finite cell modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.sheafificationAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafify\"], \"digest\": \"32996c2332cec720\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a dg algebra on an affine scheme and derived global sections give an equivalence of dg module categories",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of a dg algebra on an affine scheme and derived global sections give an equivalence of dg module categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafifyHomEquiv'\"], \"digest\": \"cb3e4a21ca2c48d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine quasi-coherent differential graded sheaf modules equivalent to differential graded modules over global sections with perfect objects finite cell retracts",
+   "results": "{\"t\": \"2026-10-24T06:55:47Z\", \"tool\": \"leanfinder\", \"query\": \"Affine quasi-coherent differential graded sheaf modules equivalent to differential graded modules over global sections with perfect objects finite cell retracts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData\"], \"digest\": \"56d7cd82a909328f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|DGModule|DgModule",
+   "results": "{\"t\": \"2026-10-24T06:59:41Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|DGModule|DgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SheafOfModules\"",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"SheafOfModules\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine differential graded modules sheafification derived adjunction perfect finite cell modules",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"leansearch\", \"query\": \"Affine differential graded modules sheafification derived adjunction perfect finite cell modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.sheafificationAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafify\"], \"digest\": \"32996c2332cec720\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a dg algebra on an affine scheme and derived global sections give an equivalence of dg module categories",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of a dg algebra on an affine scheme and derived global sections give an equivalence of dg module categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafifyHomEquiv'\"], \"digest\": \"cb3e4a21ca2c48d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine quasi-coherent differential graded sheaf modules equivalent to differential graded modules over global sections with perfect objects finite cell retracts",
+   "results": "{\"t\": \"2026-10-24T06:55:47Z\", \"tool\": \"leanfinder\", \"query\": \"Affine quasi-coherent differential graded sheaf modules equivalent to differential graded modules over global sections with perfect objects finite cell retracts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData\"], \"digest\": \"56d7cd82a909328f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|DGModule|DgModule",
+   "results": "{\"t\": \"2026-10-24T06:59:41Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|DGModule|DgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SheafOfModules\"",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"SheafOfModules\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine differential graded modules sheafification derived adjunction perfect finite cell modules",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"leansearch\", \"query\": \"Affine differential graded modules sheafification derived adjunction perfect finite cell modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.sheafificationAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafify\"], \"digest\": \"32996c2332cec720\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a dg algebra on an affine scheme and derived global sections give an equivalence of dg module categories",
+   "results": "{\"t\": \"2026-10-24T06:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of a dg algebra on an affine scheme and derived global sections give an equivalence of dg module categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafifyHomEquiv'\"], \"digest\": \"cb3e4a21ca2c48d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheafification adjunctions, the affine-scheme/ring equivalence and quasicoherent presentations do not give the dg derived affine equivalence, local perfectness theorem or coefficient counit comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-perfect-arrow-coherent-factorization",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons.",
+   "via": [
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-dg-coefficient-module-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and all statement dependencies. Proved the dg affine equivalence by a forgetful-compatible adjunction, proved compactness by finite principal-cover descent before using the finite-cell characterization, and compared coefficient extension and normalized arrows on the explicit relative bar model. Three smaller independent tools are new statement-only nodes. No assumption that the augmentation C_E to T_E is a quasi-isomorphism, and no flatness of S or E over D. No Lean writing or compilation.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability, det-thm-sf-ctf-stability-direct-images proof (3): inherited coefficient-descente prerequisite, specifically the affine passage to dg modules, perfectness and actual coefficient adjunctions. Read the current unit, detailed statement and proof; their route is unchanged. blueprint_refs ancestor returns None; retained the inherited null ancestor and via list, adding this item to new-node via lists. Whole-blueprint dg pushforward, dg Cech, dg compact and dg modules searches found no matching blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic affine algebra/derived-category tool for the explicitly stated argument; it does not replace any geometric step of the unit route."
+   },
+   {
+    "node": "lem-pc-kflat-stalk-criterion",
+    "why": "Generic affine algebra/derived-category tool for the explicitly stated argument; it does not replace any geometric step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic affine algebra/derived-category tool for the explicitly stated argument; it does not replace any geometric step of the unit route."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine algebra/derived-category tool for the explicitly stated argument; it does not replace any geometric step of the unit route."
+   },
+   {
+    "node": "lem-sc-compact-objects-thick",
+    "why": "Generic affine algebra/derived-category tool for the explicitly stated argument; it does not replace any geometric step of the unit route."
+   },
+   {
+    "node": "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "why": "Generic affine algebra/derived-category tool for the explicitly stated argument; it does not replace any geometric step of the unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic affine-topology or injective-resolution existence input; used with exactly its stated hypotheses, without replacing a geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic normalization of the composition isomorphism of derived direct images on K-injective representatives (reviewer FIX, step 8); no geometric step of the unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-compact-objects-thick",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-a6297c17e",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-a6297c17e (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item (a first split; its live version is unsplit, with the same statement and stmt_deps), all 8 steps, and the three new statement-only nodes. Source checks: Stacks 06Z0 (perfect lemma-affine-compare-bounded), sdga 0FT0, 0FRU, 0FTR and lemma-pushforward-agrees, dga 09R3 (proposition-compact) and perfect 08D2. Steps 1-7 check out: every hypothesis of the cited nodes holds. In particular, nonpositive terms that are flat over D give K-flatness over S and over O_Y. The pushforward to the point is exact (it is tilde). Compactness is proved by finite principal-cover dg-Hom descent with column-wise quasi-isomorphisms, and the finite totalization commutes with the sums. The finite-cell upper bound, perfectness via 07LT and the bar identification under tilde are also correct. The new nodes are true and are not duplicates. The flat ringed dg push-pull node: UI is K-injective because B is K-flat. The principal Hom-descent node: localization is exact and the finite Cech complex of N is a quasi-isomorphism. The compact-to-finite-cell node is exactly 09R3 (1)=>(2) for left modules. None restates a clause of the item. Batch 5: all four flagged citations reach the trace-formula chapter only through lem-trf-triangulated-subcategory-cone-system. That node is the generic Verdier multiplicative-system lemma (Stacks 05RG), outside the trace formula and Poincare duality, so no RETURN. FIX (C4/E5): step 8 claimed the coefficient definition's canonical composition isomorphism is iterated restriction on affine representatives. The cited composition statement gives no normalization. Step 8 now cites lem-weil-pbc-ringed-topoi-derived-pushforward-composition (normalization on K-injective complexes) and lem-pc-affine-pushforward-resolution-quasi-iso, and writes out the quasi-isomorphisms. Both are added to proof_deps, and the first also to tool_uses; its closure contains no trace-formula or Poincare-duality nodes. No node dropped.; 1 file(s) fixed by the reviewer"
+ }
+}

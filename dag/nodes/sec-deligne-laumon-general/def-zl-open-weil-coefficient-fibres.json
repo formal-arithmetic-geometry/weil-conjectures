@@ -1,0 +1,130 @@
+{
+ "id": "def-zl-open-weil-coefficient-fibres",
+ "kind": "definition",
+ "title": "Finite coefficient inclusions and fibres for the open Weil heart",
+ "statement": "Fix the finite-field datum D, a prime l different from its characteristic, an algebraic closure Qbar of Q_l in an independent universe, and an open immersion j0:U0 -> X0 of separated finite-type schemes. The finite coefficient Weil inclusion, its natural Frobenius square, the underlying carrier functors, closed coefficient fibres and punctual upper bound are the literal constructions inherited from lem-zl-extension-by-zero-punctual; only their location changes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), open extension by zero"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-punctual-weights",
+  "def-weil-local-frobenius-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-point-transport",
+  "def-weil-coefficient-cohomology-modules"
+ ],
+ "proof": [
+  {
+   "text": "Move the existing constructions verbatim: the natural finite Frobenius square gives the fixed-pair inclusion, its included carrier satisfies both standard degree-zero classes, and restricting the literal H0 derived point fibre gives the closed coefficient fibre. No definition or arrow formula changes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), open extension by zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient inclusion of constructible Weil sheaves and natural Frobenius square",
+   "results": "8 hits: CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits, SheafOfModules.IsFiniteType.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.Presentation.IsFinite, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra.mapOfNatIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*extension|extension.*Weil|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient inclusion of constructible Weil sheaves as invertible Frobenius pairs",
+   "results": "8 hits: PrimeSpectrum.BasicConstructibleSetData.g, WittVector.StandardOneDimIsocrystal, SheafOfModules.LocalGeneratorsData.IsFiniteType, WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.isocrystal_classification, WittVector.Isocrystal, WittVector.instIsocrystalStandardOneDimIsocrystal, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem for the recorded constructible Weil coefficient categories; hits are generic topology, scalar algebra or unrelated Frobenius constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtensionByZeroPunctual",
+  "date": "2026-10-25",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-quasi-finite",
+   "place": "proof (1) and (2), open extension by zero",
+   "via": [
+    "lem-zl-extension-by-zero-punctual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenWeilCoefficientFibres",
+  "file": "lean/Sheaf/Paper/OpenWeilCoefficientFibres.lean",
+  "declaration": "WeilConjectures.zlWeilHeartStage",
+  "statement": "def zlWeilHeartStage (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (L : Padic.FiniteCoefficientFields l Qbar) : sfWeilSheaf D l hl Y₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) ⥤ sfCommonStageWeilSheaf D l hl Y₀ Qbar",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.zlOpen_quasiCompact",
+   "WeilConjectures.zlOpenFiber_isOpenImmersion",
+   "WeilConjectures.zlWeilHeartCarrier",
+   "WeilConjectures.zlFiniteWeilHeartCarrier",
+   "WeilConjectures.zlWeilStageSquare_naturality",
+   "WeilConjectures.zlWeilStageSquare",
+   "WeilConjectures.zlWeilHeartStage_mem",
+   "WeilConjectures.zlWeilHeartStage",
+   "WeilConjectures.zlClosedCoefficientFiber",
+   "WeilConjectures.ZlPunctualUpperBound"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "independent cc review: item extensionByZero_punctual and its 4 new sorried lemmas against the base item conjuncts, SfPunctualEigenvalue and the owning nodes of the declarations used; moved declarations diffed against the clone; importer ReducedFrontierMixedGluing compiled with the 6 delivered modules"
+ }
+}

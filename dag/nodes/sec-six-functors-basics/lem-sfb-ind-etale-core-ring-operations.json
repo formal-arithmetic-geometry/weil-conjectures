@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-ind-etale-core-ring-operations",
+ "kind": "statement",
+ "title": "Ring operations for the maximal ind-etale subalgebra over a field",
+ "statement": "Let $k$ be a field [def-weil-field]. For any commutative unital $k$-algebra $R$, including $R=0$, let $B_k(R)\\subseteq R$ be the union of its finite etale unital $k$-subalgebras, as in [lem-sfb-finite-etale-subalgebra-directed-union]. Then $B_k(R)$ is reduced, meaning it has no nonzero nilpotent elements. Every unital $k$-algebra homomorphism $f:R\\to S$ restricts to $B_k(R)\\to B_k(S)$. If $R\\subseteq S$ is a unital $k$-subalgebra, then $B_k(R)=R\\cap B_k(S)$ inside $S$. Writing $R_{\\mathrm{red}}=R/N_R$, where $N_R=\\{r\\in R:\\exists n\\geq1,\\ r^n=0\\}$ is the nilradical, the quotient map induces an isomorphism $B_k(R)\\xrightarrow{\\sim}B_k(R_{\\mathrm{red}})$. For every finite family of commutative unital $k$-algebras $(R_i)_{i\\in I}$, the projections identify $B_k(\\prod_{i\\in I}R_i)$ with $\\prod_{i\\in I}B_k(R_i)$, including the empty product, which is the zero ring. If $R\\ne0$ and its only idempotents (elements satisfying $e^2=e$) are $0$ and $1$, then $B_k(R)$ is a field and is a separable algebraic extension of $k$ [def-weil-pbc-separable-algebraic-extension].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CKT, label lemma-properties-of-max-weakly-etale-subalgebra, parts (1), (2), (4), (5), (6); Tag 0CKR, label lemma-class-weakly-etale-over-field, parts (1), (3), identifies the finite-subalgebra union and gives reducedness. In part (6) explicitly require R nonzero; the zero algebra is otherwise a counterexample."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-sfb-finite-etale-subalgebra-directed-union",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "For $x\\in B_k(R)$ with $x^n=0$, choose a finite etale subalgebra $D\\subseteq R$ containing $x$, using the union description. By the etale-over-a-field classification, $D$ is a finite product of finite separable fields. Each coordinate of $x$ has zero $n$th power in a field and hence is zero. Thus $x=0$. The empty product is already the zero ring, so this also covers $R=0$.",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKR (1), (3), label lemma-class-weakly-etale-over-field; Tag 00U3, label lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "Let $f:R\\to S$ be a unital $k$-algebra map. For $x\\in B_k(R)$ choose a finite etale subalgebra $D\\subseteq R$ containing it. The image clause of the directed-union lemma applied to $f|_D$ says that $f(D)$ is a finite etale subalgebra of $S$. Hence $f(x)\\in B_k(S)$. Corestriction of $f$ gives the required algebra map.",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKT (1), label lemma-properties-of-max-weakly-etale-subalgebra"
+   }
+  },
+  {
+   "text": "Assume $R\\subseteq S$. Step 2 applied to the inclusion gives $B_k(R)\\subseteq R\\cap B_k(S)$. Conversely take $x\\in R\\cap B_k(S)$, and choose a finite etale $D\\subseteq S$ containing $x$. The etale comparison theorem, clauses (1) and (4), makes $D/k$ weakly etale as a ring algebra. The weakly-etale-field lemma applied to the singly generated subalgebra $k[x]\\subseteq D$ says that $k[x]$ is finite etale. The subalgebra $k[x]$ is contained in $R$ because $x\\in R$ and the structural $k$-maps agree. Thus $x\\in B_k(R)$ by the union description, proving equality.",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union",
+    "det-pe-morphisms-etale-comparison",
+    "lem-weil-pbc-weak-etale-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKT (2) and Tag 0CKR (3), (5), labels lemma-properties-of-max-weakly-etale-subalgebra and lemma-class-weakly-etale-over-field"
+   }
+  },
+  {
+   "text": "Write $q:R\\to R/N_R$. Step 2 gives $\\bar q:B_k(R)\\to B_k(R/N_R)$. If $x\\in\\ker\\bar q$, then $x\\in N_R$, so $x$ is nilpotent; Step 1 gives $x=0$. For surjectivity take $y\\in B_k(R/N_R)$ in a finite etale subalgebra $D$ of $R/N_R$. Apply the etale nil-ideal lifting lemma to the base $A=k$, source algebra $C=D$, target algebra $T=R$, ideal $J=N_R$, and $g:D\\hookrightarrow R/N_R$. Every element of $N_R$ is nilpotent by its definition, even when no power of this ideal vanishes. Obtain $h:D\\to R$ with $qh=g$. The image clause of the directed-union lemma places $h(D)$ in $B_k(R)$, and $y=qh(y)$ is in the image of $\\bar q$. This proves the claimed algebra isomorphism, in the quotient-induced direction.",
+   "uses": [
+    "lem-sfb-etale-nil-ideal-map-lift",
+    "lem-sfb-finite-etale-subalgebra-directed-union"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKT (4), label lemma-properties-of-max-weakly-etale-subalgebra, with Tag 07K4, label lemma-smooth-strong-lift; correct the reversed arrows in the printed proof"
+   }
+  },
+  {
+   "text": "Put $P=\\prod_{i\\in I}R_i$. Step 2 for each projection gives $B_k(P)\\subseteq\\prod_i B_k(R_i)$. Conversely let $(x_i)\\in\\prod_i B_k(R_i)$, and for each of the finitely many indices choose a finite etale subalgebra $D_i\\subseteq R_i$ containing $x_i$. Then $D=\\prod_iD_i\\subseteq P$ is a unital $k$-subalgebra and is etale by the finite-product lemma. It is finite over $k$: take finite $k$-module generating sets in the $D_i$ and insert each generator in its coordinate with zeros elsewhere; this finite set generates $D$. The definition of a finite affine morphism therefore makes $D$ finite etale. It contains $(x_i)$, proving the reverse inclusion. If $I$ is empty, both $P$ and its core are the zero ring; the same product lemma includes this case. The maps are exactly the restrictions of the projections, so this is the asserted identification of algebras.",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union",
+    "lem-weil-pbc-etale-algebra-finite-product",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKT (5), label lemma-properties-of-max-weakly-etale-subalgebra (proof omitted there); explicit finite-subalgebra argument using Tag 00U2 (11), label lemma-etale"
+   }
+  },
+  {
+   "text": "Finally suppose $R\\ne0$ and $R$ has only idempotents $0,1$. For any $x\\in B_k(R)$ choose finite etale $D\\subseteq R$ containing $x$ and classify $D\\cong\\prod_{j\\in F}L_j$. This product is nonzero because the subalgebra is unital in nonzero $R$, so $F$ is nonempty. If $F$ had two or more indices, a coordinate idempotent would be different from $0$ and $1$ in $D$, hence in $R$, a contradiction. Thus $D$ is a single finite separable field extension of $k$. For every nonzero $x$, its inverse in this $D$ belongs to $B_k(R)$; hence the nonzero ring $B_k(R)$ is a field. Every element lies in one of these finite separable fields. A polynomial over $k$ vanishes on $x$ in that field if and only if it vanishes in $B_k(R)$, since the inclusion is injective. Thus the monic minimal polynomial is the same, and is separable. This proves that $B_k(R)/k$ is separable algebraic.",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKT (6), Tag 0CKR (4), labels lemma-properties-of-max-weakly-etale-subalgebra and lemma-class-weakly-etale-over-field; require R nonzero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-etale-subalgebra-directed-union",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "det-pe-morphisms-etale-comparison",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-sfb-etale-nil-ideal-map-lift",
+  "lem-weil-pbc-etale-algebra-finite-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0CKR and 0CKT; expand the omitted finite-product proof and keep the quotient-induced reduction map in the correct direction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "max.*[Ee]tale|[Ee]tale.*(reduc|[Ss]ubalgebra)|[Ss]ubalgebra.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-24T01:12:43Z\", \"tool\": \"grep\", \"query\": \"max.*[Ee]tale|[Ee]tale.*(reduc|[Ss]ubalgebra)|[Ss]ubalgebra.*[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Etale/Field.lean\"], \"digest\": \"46cdd6c088a83a2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; product classifications of a given finite etale algebra, descent of an etale algebra to a finite coefficient subalgebra, and relative separable closures of FIELD extensions do not give the core of an arbitrary algebra or its invariance under reduction/intersection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal separable subalgebra of an arbitrary commutative algebra is unchanged by quotienting by nilpotents",
+   "results": "{\"t\": \"2026-10-24T01:12:44Z\", \"tool\": \"leansearch\", \"query\": \"The maximal separable subalgebra of an arbitrary commutative algebra is unchanged by quotienting by nilpotents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsSeparableQuotientIdealOfResidueField\", \"instIsSeparableResidueFieldOfQuotientIdeal\", \"Algebra.isSeparable_residueField_iff\", \"Algebra.IsSeparable.isSeparable'\", \"Ideal.Quotient.finite_of_isInvariant\", \"Algebra.IsSeparable.isAlgebraic\", \"Algebra.FormallyEtale.of_isSeparable\", \"Subalgebra.isSeparable_iff\"], \"digest\": \"3d5fc9cf4f714ebf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; product classifications of a given finite etale algebra, descent of an etale algebra to a finite coefficient subalgebra, and relative separable closures of FIELD extensions do not give the core of an arbitrary algebra or its invariance under reduction/intersection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T01:12:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instIsSeparableQuotientIdealOfEssFiniteTypeOfIsPrime\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.equivPolynomialQuotient\", \"StandardEtalePair.equivAwayQuotient\", \"StandardEtalePair.equivMvPolynomialQuotient\", \"StandardEtalePair.equivMvPolynomialQuotient_symm_apply\"], \"digest\": \"6419652b63fdf109\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; product classifications of a given finite etale algebra, descent of an etale algebra to a finite coefficient subalgebra, and relative separable closures of FIELD extensions do not give the core of an arbitrary algebra or its invariance under reduction/intersection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebra over a field the union of finite etale subalgebras commutes with reduction, finite products and intersections with subalgebras",
+   "results": "{\"t\": \"2026-10-24T01:12:45Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebra over a field the union of finite etale subalgebras commutes with reduction, finite products and intersections with subalgebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.comp\", \"Algebra.etaleLocus\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"95d2f492fe70660b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; product classifications of a given finite etale algebra, descent of an etale algebra to a finite coefficient subalgebra, and relative separable closures of FIELD extensions do not give the core of an arbitrary algebra or its invariance under reduction/intersection."
+  },
+  {
+   "tool": "grep",
+   "query": "separableClosure|[Ss]eparable.*[Ss]ubalgebra|[Ss]ubalgebra.*[Ss]eparable",
+   "results": "{\"t\": \"2026-10-24T01:13:25Z\", \"tool\": \"grep\", \"query\": \"separableClosure|[Ss]eparable.*[Ss]ubalgebra|[Ss]ubalgebra.*[Ss]eparable\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/IsSepClosed.lean\"], \"digest\": \"34e2ed617bffd5e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; product classifications of a given finite etale algebra, descent of an etale algebra to a finite coefficient subalgebra, and relative separable closures of FIELD extensions do not give the core of an arbitrary algebra or its invariance under reduction/intersection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest subalgebra that is a filtered union of finite separable field products is functorial, respects intersections and finite products, and is invariant under killing the nilradical",
+   "results": "{\"t\": \"2026-10-24T01:13:26Z\", \"tool\": \"leanfinder\", \"query\": \"The largest subalgebra that is a filtered union of finite separable field products is functorial, respects intersections and finite products, and is invariant under killing the nilradical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"JacobsonNoether.exists_separable_and_not_isCentral'\"], \"digest\": \"4305e11a3a7693fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; product classifications of a given finite etale algebra, descent of an etale algebra to a finite coefficient subalgebra, and relative separable closures of FIELD extensions do not give the core of an arbitrary algebra or its invariance under reduction/intersection."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_exists_algEquiv_prod|equivPiOfIsSepClosed|isReduced_of_field",
+   "results": "{\"t\": \"2026-10-24T01:14:35Z\", \"tool\": \"grep\", \"query\": \"iff_exists_algEquiv_prod|equivPiOfIsSepClosed|isReduced_of_field\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\"], \"digest\": \"1a9a0106b3a0200e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; product classifications of a given finite etale algebra, descent of an etale algebra to a finite coefficient subalgebra, and relative separable closures of FIELD extensions do not give the core of an arbitrary algebra or its invariance under reduction/intersection."
+  },
+  {
+   "tool": "grep",
+   "query": "max.*[Ee]tale|[Ee]tale.*[Ss]ubalgebra|indEtale",
+   "results": "{\"t\": \"2026-10-24T01:38:11Z\", \"tool\": \"grep\", \"query\": \"max.*[Ee]tale|[Ee]tale.*[Ss]ubalgebra|indEtale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Etale/Field.lean\"], \"digest\": \"158cc2ae4875496d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-product classifications, coefficient descent, separable closures for field extensions, or square-zero/nilpotent-ideal lifting; none states all core operations for an arbitrary algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal ind etale subalgebra is invariant under quotient by the nilradical",
+   "results": "{\"t\": \"2026-10-24T01:38:11Z\", \"tool\": \"leansearch\", \"query\": \"The maximal ind etale subalgebra is invariant under quotient by the nilradical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.nilradical\", \"Ring.KrullDimLE.nilradical_eq_maximalIdeal\", \"Algebra.Etale.formallyEtale\", \"Algebra.etaleLocus\", \"IsLocalRing.of_isMaximal_nilradical\", \"Algebra.Etale\", \"Algebra.FormallyUnramified.quotient\", \"RingHom.Etale.toAlgebra\"], \"digest\": \"faaa7066b0f5ae03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-product classifications, coefficient descent, separable closures for field extensions, or square-zero/nilpotent-ideal lifting; none states all core operations for an arbitrary algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Subalgebra\"",
+   "results": "{\"t\": \"2026-10-24T01:38:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"Subalgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"8b99654ad077c351\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-product classifications, coefficient descent, separable closures for field extensions, or square-zero/nilpotent-ideal lifting; none states all core operations for an arbitrary algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The union of finite etale subalgebras of an algebra over a field commutes with reduction, intersections and finite products",
+   "results": "{\"t\": \"2026-10-24T01:38:14Z\", \"tool\": \"leanfinder\", \"query\": \"The union of finite etale subalgebras of an algebra over a field commutes with reduction, intersections and finite products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.comp\", \"Algebra.etaleLocus\"], \"digest\": \"1120541e269a769a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-product classifications, coefficient descent, separable closures for field extensions, or square-zero/nilpotent-ideal lifting; none states all core operations for an arbitrary algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest separable algebraic subalgebra of an arbitrary commutative algebra is functorial and commutes with killing nilpotents",
+   "results": "{\"t\": \"2026-10-24T01:38:55Z\", \"tool\": \"leanfinder\", \"query\": \"The largest separable algebraic subalgebra of an arbitrary commutative algebra is functorial and commutes with killing nilpotents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.lift_def\", \"IsAlgClosed.lift\", \"IsSepClosed.lift_def\", \"IsSepClosed.lift\", \"separableClosure.map_eq_of_separableClosure_eq_bot\", \"separableClosure.adjoin_eq_of_isAlgebraic\", \"Algebra.Extension.self\", \"Subalgebra.isSeparable_iff\"], \"digest\": \"22042d9fa33ac2a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-product classifications, coefficient descent, separable closures for field extensions, or square-zero/nilpotent-ideal lifting; none states all core operations for an arbitrary algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-maximal-ind-etale-field-base-change",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 5, splitting the finite cyclic factors into their identity components and finite etale reduced subgroups over the given perfect field. Supporting general scheme-theoretic input: the universal finite etale scheme of connected components, before transporting the group operations. Supporting algebra for Milne Proposition 1.29 and the field-extension argument of Proposition 1.30(a): Maximal ind-etale subalgebra commutes with arbitrary field extension. Supporting ring operations in the reductions of Stacks Tag 0CKU: intersections, nilpotent reduction, finite products and connected factors.",
+   "via": [
+    "lem-sfb-maximal-ind-etale-field-base-change",
+    "lem-sfb-algebraic-scheme-etale-components",
+    "lem-sfb-perfect-finite-commutative-reduced-splitting",
+    "lem-sfb-additive-subgroup-perfect-decomposition",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ind-etale-core-ring-operations",
+  "worker": "stage1",
+  "summary": "Q79 preserves the statement and writes six proof steps for reducedness, functoriality, intersections, reduction, finite products and the connected nonzero case. Reuses existing field classification and weak-etale subalgebra lemmas; adds one general etale map-lifting input for locally nilpotent ideals. Corrects the direction error in the source proof, expands its omitted product proof, and checks all zero-ring cases.",
+  "blueprint": "Supports the inherited component-algebra prerequisite of det-thm-sf-ctf-stability-direct-images (3), via Milne Proposition 1.29 and Stacks 0CKU. Current latest blueprint has no core-operations theorem; preserve the inherited null ancestor and full provenance. Steps realize the supporting Stacks 0CKT ring reductions.",
+  "tool_uses": [
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Generic etale-to-weakly-etale affine comparison, needed to apply the existing finite-subalgebra theorem; this unit has no such comparison."
+   },
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Generic theorem that a finitely generated subalgebra of a weakly etale algebra over a field is finite etale; used only for k[x] in a finite etale algebra, and no statement in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-morphisms-etale-comparison",
+  "lem-weil-pbc-weak-etale-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-b7d72c7a0",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-b7d72c7a0 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-etale-nil-ideal-map-lift and every cited statement in full. Sources: Stacks Tags 0CKR, 0CKS and 0CKT (more-algebra.tex 30845-30977) and 07K4 (algebra.tex 38291-38342). The item statement is unchanged from base, and its R≠0 hypothesis is needed because B_max(0)=0. The item is still unsplit in live and side-live. I confirm the source error: the proof of 0CKT(4) writes the canonical map backwards, and the statement is unaffected. Steps 1-6: (1) reducedness, coordinatewise in a product of separable fields. (2) functoriality, via the image clause of directed-union with C=D. (3) intersections, via det-pe-morphisms-etale-comparison (1)+(4) and lem-weil-pbc-weak-etale-field applied to k[x]⊆R; I accept both tool_uses as generic black boxes. (4) reduction: the kernel is nilpotent so zero by step 1; surjectivity applies the new node with A=k, C=D, T=R, J=N_R, and all its hypotheses hold. (5) finite products: product etale leaf plus explicit finite generators; the empty case is the zero ring. (6) the connected nonzero case gives a single field factor; inverses and minimal polynomials are preserved under the injective inclusion. The new node is 07K4 specialized to etale maps and is true. It is self-contained, statement-only, with all three search kinds recorded. It is not a Mathlib leaf, since FormallySmooth.exists_lift needs an IsNilpotent ideal and the nil ideal (ε_i) in k[ε_1,ε_2,…]/(ε_i²) is not nilpotent. Edge cases checked: J=0, C=0 forcing T=0, C=A. DAG searches for 07K4 and etale nil-lifting statements found no duplicate; henselian-pair-radical-etale-section, field-char-p-nilpotent-lifting and lift-idempotents-locally-nilpotent are different statements. The node restates no clause of the item. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IndEtaleCoreRingOperations",
+  "declaration": "Algebra.finiteEtaleSubalgebra_ring_operations",
+  "file": "lean/Sheaf/RingTheory/IndEtaleCoreRingOperations.lean",
+  "statement": "theorem finiteEtaleSubalgebra_ring_operations (k : Type u) (R : Type v) [Field k] [CommRing R] [Algebra k R] : IsReduced (finiteEtaleSubalgebraUnion k R) ∧ (∀ (S : Type w) [CommRing S] [Algebra k S] (f : R →ₐ[k] S), ∃ g : finiteEtaleSubalgebraUnion k R →ₐ[k] finiteEtaleSubalgebraUnion k S, (finiteEtaleSubalgebraUnion k S).val.comp g = f.comp (finiteEtaleSubalgebraUnion k R).val) ∧ (∀ D : Subalgebra k R, (finiteEtaleSubalgebraUnion k D).map D.val = D ⊓ finiteEtaleSubalgebraUnion k R) ∧ (∃ e : finiteEtaleSubalgebraUnion k R ≃ₐ[k] finiteEtaleSubalgebraUnion k (R ⧸ nilradical R), ∀ x : finiteEtaleSubalgebraUnion k R, (e x).val = Ideal.Quotient.mkₐ k (nilradical R) x.val) ∧ (∀ (I : Type t) [Finite I] (A : I → Type w) [∀ i, CommRing (A i)] [∀ i, Algebra k (A i)], ∃ e : finiteEtaleSubalgebraUnion k (Π i, A i) ≃ₐ[k] (Π i, finiteEtaleSubalgebraUnion k (A i)), ∀ (x : finiteEtaleSubalgebraUnion k (Π i, A i)) (i : I), (e x i).val = x.val i) ∧ (Nontrivial R → (∀ e : R, e ^ 2 = e → e = 0 ∨ e = 1) → IsField (finiteEtaleSubalgebraUnion k R) ∧ Algebra.IsSeparable k (finiteEtaleSubalgebraUnion k R))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-887ba08d4",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Lean exact vs node and Stacks 0CKT(1,2,4,5,6)/0CKR: IsReduced core; restriction ∃g pinned by val∘g=f∘val; (B D).map D.val = D ⊓ B R; ∃e : B R ≃ₐ B(R⧸nilradical R) pinned to mkₐ (quotient-induced direction); finite products [Finite I] incl. empty, e pinned per coordinate; Nontrivial R + trivial idempotents → IsField ∧ Algebra.IsSeparable (recorded def-weil-pbc-separable-algebraic-extension, implies algebraic). B_k = dependency's landed finiteEtaleSubalgebraUnion (real sSup; node defines B_k 'as in' that lemma, no mechanical theorem-stmt_dep finding). Universes u,v,w,t independent; edge cases R=0, k[ε]/ε², empty/zero products, map to 0 and inseparable k OK. Node record = side-live apart from lean; statement verbatim once; docstrings, six steps, single sorry, no defs, no clash. Sole fault H11: 'Second reading by Q25' is the dispatcher single-worker self-check → FIX fixes/lem-sfb-ind-etale-core-ring-operations.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean change, so no compile."
+ }
+}

@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateProjectionData
-public import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.EtaleInjectiveSectionsComparison
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceTransition
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceRestriction

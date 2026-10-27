@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-padic-resultant-rigidity",
+ "kind": "statement",
+ "title": "Root-product valuations determine a monic polynomial",
+ "statement": "Let $\\ell$ be a prime and let $K=\\mathbf Q_\\ell$ with its normalized absolute value [def-weil-l-adic-numbers]. Let $P,Q\\in K[X]$ be monic polynomials of the same degree $d\\geq0$ [def-weil-polynomial-ring]. Choose an algebraic closure $\\overline K$ [def-weil-algebraic-closure] with the extension of this absolute value, and write $a_1,\\ldots,a_d$ and $b_1,\\ldots,b_d$ for the roots of $P$ and $Q$, counted with multiplicity. If for every $F\\in\\mathbf Z[T]$ one has\n$$\\left|\\prod_{i=1}^dF(a_i)\\right|_\\ell=\\left|\\prod_{i=1}^dF(b_i)\\right|_\\ell,$$\nthen $P=Q$. Products and absolute values are computed in $\\overline K$; the empty product is $1$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 10.21 and its proof, printed p.51."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-polynomial-ring",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "If $d=0$, monicity gives $P=Q=1$. Henceforth $d>0$. First extend the test identity to $F\\in\\mathbf Q[T]$. Choose an integer $N>0$ clearing the finitely many coefficient denominators, so $NF\\in\\mathbf Z[T]$. Each side of the identity for $NF$ is $|N|_\\ell^d$ times the corresponding side for $F$. Since $|N|_\\ell>0$, cancellation proves the identity for $F$.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.21 and proof, printed p.51."
+   }
+  },
+  {
+   "text": "Extend next to $F=\\sum_{j=0}^s u_jT^j\\in K[T]$. By the rational-density clause of [lem-sfb-padic-minpoly-normed-separation], choose rational coefficients $u_{j,n}$ with $|u_{j,n}-u_j|_\\ell<1/n$ for $n\\geq1$, and put $F_n=\\sum_{j=0}^s u_{j,n}T^j$. The given absolute value in the closure is nonarchimedean by [lem-sfb-ultrametric-criterion-natural-norms]: every natural number is in $K$ and has absolute value at most $1$ by [def-weil-l-adic-numbers]. Thus for each listed root $c$,\n$$|F_n(c)-F(c)|\\leq n^{-1}\\max(1,|c|)^s.$$\nConsequently $F_n(c)\\to F(c)$. Products converge too: expand $\\prod x_i-\\prod y_i$ as the sum of terms $(x_i-y_i)\\prod_{j<i}x_j\\prod_{j>i}y_j$; the other factors are bounded. Finally $\\big||u|-|v|\\big|\\leq|u-v|$ shows convergence of the product absolute values. Taking real limits in the identity for $F_n$ proves the identity for $F$.",
+   "uses": [
+    "lem-sfb-padic-minpoly-normed-separation",
+    "lem-sfb-ultrametric-criterion-natural-norms",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.21 and proof, printed p.51."
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\in\\overline K$ and let $f\\in K[T]$ be its minimal polynomial. The minimal-polynomial clause of [lem-sfb-padic-minpoly-normed-separation] gives $m=\\deg f\\geq1$. Apply step 2 to $f$ and apply [lem-sfb-padic-minpoly-root-product] separately to $H=P$ and $H=Q$. It gives $|P(\\alpha)|^m=|Q(\\alpha)|^m$. Nonnegative real $m$th powers are injective for $m>0$ (if $0\\leq u<v$, multiplying the strict inequality, or dividing by $v>0$, gives $u^m<v^m$). Hence $|P(\\alpha)|=|Q(\\alpha)|$ for every $\\alpha$.",
+   "uses": [
+    "lem-sfb-padic-minpoly-normed-separation",
+    "lem-sfb-padic-minpoly-root-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.21 and proof, printed p.51."
+   }
+  },
+  {
+   "text": "Let $x$ occur in either root list and let $e,f$ be its numbers of occurrences in the lists for $P,Q$. By [lem-weil-alg-closed-linear-factorization] and monicity, these lists factor $P,Q$ as products of $X-c$ with their stated multiplicities. Let $C_P=\\prod_{a_i\\ne x}|x-a_i|$ and $C_Q=\\prod_{b_i\\ne x}|x-b_i|$; both are positive, including empty products. Take $r>0$ smaller than every nonzero distance from $x$ to a listed root, using $r=1$ if there are none. For all sufficiently large integers $n$, put $\\alpha_n=x+\\ell^n$, so $0<|\\alpha_n-x|=\\ell^{-n}<r$. For $c\\ne x$, the strong triangle inequality gives $|\\alpha_n-c|\\leq|x-c|$, and the reverse inequality follows from $x-c=(x-\\alpha_n)+(\\alpha_n-c)$: a strict decrease would contradict $|x-c|\\leq\\max(\\ell^{-n},|\\alpha_n-c|)$. Thus\n$$|P(\\alpha_n)|=C_P\\ell^{-ne},\\qquad |Q(\\alpha_n)|=C_Q\\ell^{-nf}.$$\nApply step 3 for two successive large integers $n,n+1$ and divide the positive equalities. This yields $\\ell^{-e}=\\ell^{-f}$, whence $e=f$, since $\\ell\\geq2$. Therefore every root in the union of the two finite lists has equal multiplicity. Reorder the lists and use their monic factorizations to obtain $P=Q$ in $\\overline K[X]$, hence in $K[X]$ since its inclusion into the closure is injective.",
+   "uses": [
+    "lem-weil-alg-closed-linear-factorization",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.21 and proof, printed p.51."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-l-adic-numbers",
+  "lem-sfb-padic-minpoly-normed-separation",
+  "lem-sfb-ultrametric-criterion-natural-norms",
+  "lem-sfb-padic-minpoly-root-product",
+  "lem-weil-alg-closed-linear-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 10.21 and proof, printed p.51."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two monic polynomials over the p adic numbers are equal if the absolute values of their resultants against every integer polynomial agree",
+   "results": "8 hits; top: PadicInt.ext_of_toZModPow, padic_polynomial_dist, hensels_lemma, PadicInt.ext, Padic.mk_eq, WittVector.poly_eq_of_wittPolynomial_bind_eq', Padic.const_equiv, WittVector.poly_eq_of_wittPolynomial_bind_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: congruence extensionality, Hensel estimates and minimum-polynomial uniqueness do not determine root multiplicities from all test-polynomial norms"
+  },
+  {
+   "tool": "grep",
+   "query": "resultant|valuation.*polynomial|polynomial.*valuation",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: congruence extensionality, Hensel estimates and minimum-polynomial uniqueness do not determine root multiplicities from all test-polynomial norms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic polynomial over p adic numbers is determined by the valuations of resultants with every integer polynomial",
+   "results": "8 hits; top: Polynomial.Monic, AlgebraicClosure.Monics, Padic.mulValuation_toFun, Padic.valuation, Padic.valuation_intCast, Polynomial.isUnit_resultant_iff_isCoprime, Padic.mulValuation, Polynomial.IsMonicOfDegree.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: congruence extensionality, Hensel estimates and minimum-polynomial uniqueness do not determine root multiplicities from all test-polynomial norms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Padic\", \"Polynomial\"",
+   "results": "1 hits; top: padic_polynomial_dist",
+   "date": "2026-10-23",
+   "verdict": "no match: congruence extensionality, Hensel estimates and minimum-polynomial uniqueness do not determine root multiplicities from all test-polynomial norms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monic polynomials over Q ell whose products of polynomial evaluations at roots have the same norm for all integer test polynomials are equal",
+   "results": "8 hits; top: IsIntegrallyClosed.minpoly.unique, minpoly.unique, Polynomial.norm_leadingCoeff_eq_one_of_mahlerMeasure_eq_one, Polynomial.abs_leadingCoeff_eq_one_of_mahlerMeasure_eq_one, Polynomial.isIntegral_of_mahlerMeasure_eq_one, minpoly.IsIntegrallyClosed.unique_of_degree_le_degree_minpoly, AlgebraicClosure.subProdXSubC, Polynomial.mahlerMeasure_eq_leadingCoeff_mul_prod_roots",
+   "date": "2026-10-23",
+   "verdict": "no match: congruence extensionality, Hensel estimates and minimum-polynomial uniqueness do not determine root multiplicities from all test-polynomial norms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monic polynomials over Q p are equal if all products of integer polynomial evaluations at their roots have equal p adic norm",
+   "results": {
+    "t": "2026-10-23T13:05:27Z",
+    "tool": "leanfinder",
+    "query": "Monic polynomials over Q p are equal if all products of integer polynomial evaluations at their roots have equal p adic norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "padic_polynomial_dist",
+     "IsAdjoinRootMonic.ext_elem",
+     "IsAdjoinRootMonic.ext_elem_iff",
+     "Polynomial.isPrimitive_iff_forall_gaussNorm_eq_one",
+     "RingOfIntegers.monicFactorsMod",
+     "hensels_lemma",
+     "PadicInt.ext",
+     "Polynomial.funext"
+    ],
+    "digest": "fa5996d958e8f22a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: funext needs equal evaluations, not their norms; Hensel estimates and resultant unit criteria do not recover all root multiplicities."
+  },
+  {
+   "tool": "grep",
+   "query": "resultant.*(norm|abs)|norm.*resultant|root.*product",
+   "results": {
+    "t": "2026-10-23T13:08:10Z",
+    "tool": "grep",
+    "query": "resultant.*(norm|abs)|norm.*resultant|root.*product",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: funext needs equal evaluations, not their norms; Hensel estimates and resultant unit criteria do not recover all root multiplicities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic polynomial over a p adic field is determined by absolute values of resultants against integer polynomials",
+   "results": {
+    "t": "2026-10-23T13:08:11Z",
+    "tool": "leansearch",
+    "query": "A monic polynomial over a p adic field is determined by absolute values of resultants against integer polynomials",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicClosure.Monics",
+     "Polynomial.Monic",
+     "PadicInt.isFractionRing",
+     "Polynomial.isUnit_resultant_iff_isCoprime",
+     "Polynomial.int_monic_iff",
+     "Polynomial.IsMonicOfDegree",
+     "Polynomial.MonicDegreeEq",
+     "isInteger_of_is_root_of_monic"
+    ],
+    "digest": "aabf7ea0356655d4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: funext needs equal evaluations, not their norms; Hensel estimates and resultant unit criteria do not recover all root multiplicities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Padic\", \"Polynomial\"",
+   "results": {
+    "t": "2026-10-23T13:08:11Z",
+    "tool": "loogle",
+    "query": "\"Padic\", \"Polynomial\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "padic_polynomial_dist"
+    ],
+    "digest": "905161d4a4670a17"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: funext needs equal evaluations, not their norms; Hensel estimates and resultant unit criteria do not recover all root multiplicities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial equality from equality of valuations of all polynomial resultants over a nonarchimedean local field",
+   "results": {
+    "t": "2026-10-23T13:09:07Z",
+    "tool": "leanfinder",
+    "query": "Polynomial equality from equality of valuations of all polynomial resultants over a nonarchimedean local field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Poly.ext_iff",
+     "Poly.ext",
+     "Polynomial.funext",
+     "WittVector.poly_eq_of_wittPolynomial_bind_eq",
+     "WittVector.poly_eq_of_wittPolynomial_bind_eq'",
+     "MvPolynomial.funext",
+     "Polynomial.ext",
+     "MvPolynomial.funext_iff"
+    ],
+    "digest": "2e67f34eb4bf7487"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: funext needs equal evaluations, not their norms; Hensel estimates and resultant unit criteria do not recover all root multiplicities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-tate-charpoly",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I, Lemma 10.21 and its proof, printed p.51.",
+   "via": [
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-padic-resultant-rigidity",
+  "worker": "stage1",
+  "summary": "Q111 follows Milne I Lemma 10.21: clear rational denominators, approximate p-adic coefficients explicitly, apply the new minimal-polynomial root-product identity, and compare at x+ell^n to recover multiplicities. Reused existing rational-density, norm-extension, and linear-factorization nodes. Statement unchanged. One new unsplit statement-only node; no new Mathlib leaves.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), through the inherited alteration/abelian-level branch. Milne I Lemma 10.21 is the local arithmetic input; the ancestor command returns None, matching the inherited blueprint.from.node. New node isolates the two minimal-polynomial product identities; item steps realize the density and multiplicity paragraphs."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-d866c4f58",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-d866c4f58 (reviewer sub-agent of L); spot-checked: Read Milne AV I Lemma 10.21 and its proof (printed p.51). The item statement matches the source and the live unsplit item, and the live tree has no competing split. Step 1: denominators cancel by |N|^d>0; d=0 gives P=Q=1. Step 2: the rational-density clause of lem-sfb-padic-minpoly-normed-separation, plus lem-sfb-ultrametric-criterion-natural-norms applied to the given extension, gives an explicit coefficient bound and finite-product convergence. Step 3: the new node for H=P and H=Q, with m=deg f>=1, gives |P(α)|=|Q(α)|. Step 4: α_n=x+ℓ^n gives |P(α_n)|=C_P ℓ^{-ne}; comparing n and n+1 gives e=f; checked x a root of only one list, x=0, d=1, and roots with |c|>1. New node lem-sfb-padic-minpoly-root-product is true: conjugates permute the roots and preserve the unique extended absolute value. Tested on r=0, α in K, α a root of H, and H=(X-1)^2 with α=√ℓ. It is statement-only, self-contained and not a clause of the item; no duplicate found in rg -L searches (Krasner, roots-coefficient-proximity and multiplicative-polynomial-norm differ). No SGA, no cycle, no tool_uses needed (other-unit citations are Mathlib leaves). Batch-5 flag: the path normed-separation -> lem-trf-spectral-norm-algebraic-extension reaches a Mathlib leaf for the spectral norm on algebraic extensions of complete nonarchimedean fields. That is general valuation theory, not part of the trace formula or Poincaré duality, so it is accepted. blueprint.from.node null is inherited from the item. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.RootProductRigidity",
+  "declaration": "Polynomial.eq_of_padic_root_product_abs_eq",
+  "file": "lean/Sheaf/NumberTheory/Padics/RootProductRigidity.lean",
+  "statement": "theorem eq_of_padic_root_product_abs_eq (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (v : AbsoluteValue Ω ℝ) (hv : ∀ x : ℚ_[ell], v (algebraMap ℚ_[ell] Ω x) = ‖x‖) (d : ℕ) (P Q : Polynomial ℚ_[ell]) (hP : P.Monic) (hQ : Q.Monic) (hdegP : P.natDegree = d) (hdegQ : Q.natDegree = d) (a b : Fin d → Ω) (ha : (↑(List.ofFn a) : Multiset Ω) = (P.map (algebraMap ℚ_[ell] Ω)).roots) (hb : (↑(List.ofFn b) : Multiset Ω) = (Q.map (algebraMap ℚ_[ell] Ω)).roots) (h : ∀ F : Polynomial ℤ, v (∏ i : Fin d, F.eval₂ (Int.castRingHom Ω) (a i)) = v (∏ i : Fin d, F.eval₂ (Int.castRingHom Ω) (b i))) : P = Q",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ec688b1d",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Statement Polynomial.eq_of_padic_root_product_abs_eq matches node and Milne AV I Lemma 10.21 (p.51) clause by clause: ell with Fact Prime, ℚ_[ell], any IsAlgClosure Ω in universe u, v : AbsoluteValue Ω ℝ extending ‖·‖, P and Q monic with natDegree = d (d = 0 allowed), root lists as Fin d → Ω with multiset = roots of mapped polynomial (multiplicity kept), ∀ F : ℤ[X] with v of product in Ω, conclusion P = Q. Edge cases checked: d = 0, repeated/zero roots, P=X vs Q=X−1 fails at F=T (hypothesis not hollow), no extra assumptions. lean.statement verbatim; only lean field changed vs live node; stmt_dep records Padic/Polynomial/IsAlgClosure fit; no name clash; no defs; sorry only; docstrings carry source, blueprint tag and 4-step plan; report has Worker report and Second reading by Q29. No files changed, so not recompiled."
+ }
+}

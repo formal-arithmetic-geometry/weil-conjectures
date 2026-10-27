@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-weil-native-row-hom-data",
+ "kind": "statement",
+ "title": "Transport standard Hom data to native row-sign representatives",
+ "statement": "the representative transport yields a native closed Hom model with the same native and ordinary Hom bifunctors as the supplied model and a compatible derived comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison, naturality of evaluation, and transposition paragraph; native refinement of lem-sf-weil-native-closed-forgetful."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "lem-sf-ringed-forget-two-injective-hom"
+ ],
+ "proof": [
+  {
+   "text": "For each StandardModel construct the degreewise inverse product maps multiplying projection p in degree n by (n*p).negOnePow. Joint monicity of the product projections proves the two inverse identities. Its standard differential formula and the native row formula give a chain isomorphism; (n+1)*p=n*p+p and n*(p+1)=n*p+n give the two signs. The map_projection field proves simultaneous naturality. These are the private rowDegreeIso, rowIso and rowIso_naturality constructions.",
+   "uses": [
+    "lem-sf-ringed-forget-two-injective-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose each supplied representative isomorphism with Q of this sign isomorphism. The supplied naturality and rowIso_naturality prove NativeHomRepresentatives. To identify the ordinary source slice with bifunctorRHom, restrict to the full homotopy category of K-injectives: use the target kInjectiveRepIso, the representative model, and quotientCompQhIso. Every homotopy arrow has a chain representative, so representative naturality and quotientCompQhIso naturality give a natural isomorphism there. Transport along the equivalence HomotopyCategory.KInjectives.Qh. This gives the private sliceModel, without a new existence assumption.",
+   "uses": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "def-sf-native-weil-closed-models",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep m.hom, m.underlyingHom and m.native; use the preceding row representatives and sliceModel to construct rowClosedModel explicitly. Keep the comparison m.derived. For every two-K-injective pair conjugate m.chain by the inverse source sign map and the target sign map. The two signs cancel on each projection because forgetting is additive and the native sheaf-Hom comparison is the identity on underlying maps. Preservation of K-injectives is forgetKInjective. For the localized square use the supplied derived_representative square and naturality of mapDerivedCategoryFactors with the source sign isomorphism; its image cancels the inverse source sign. This is rowCompatibility.",
+   "uses": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "def-sf-native-weil-closed-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use rowClosedModel and m.derived as the two existential witnesses. The functor equalities are HEq.rfl and the final conjunct is rowCompatibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-forget-two-injective-hom",
+  "def-sf-native-weil-closed-models",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison paragraph; explicit standard-to-row sign conjugation and localization naturality, formalized by D2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed symmetric monoidal structure with a specified internal Hom bifunctor evaluation and tensor comparison",
+   "results": "MonoidalClosed, exp.ev, MonoidalClosed.closed and internalHom provide abstract closedness, but not the specified native representative models or derived forgetful comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Convert the row signed internal Hom complex to the standard cohomological differential using sign (-1)^(n*p)",
+   "results": "HomComplex differential formulas and ordinary sheaf tensor maps were returned, but none gives the native comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"Iso\"",
+   "results": "Componentwise complex isomorphism APIs only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHomObj|sign.*HomComplex|homComplex.*sign",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRowHomComparison",
+  "date": "2026-10-27",
+  "group": "B6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The ancestor command returns None for the native obligation. This is the stated native refinement of the internal-Hom/evaluation/transposition paragraph in cor-coef-verdier-weil-equivariance.",
+   "via": [
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilRowHomComparison",
+  "file": "lean/Sheaf/Paper/NativeWeilRowHomComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_row_hom_data",
+  "statement": "theorem native_row_hom_data (m : TwoInjectiveHomModel (k₀ := k₀) (l := l) (X := X)) : ∃ M : NativeClosedHomModels k₀ l X, ∃ η : M.weilHom ⋙ nativeForget k₀ l X ≅ (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ M.ordinaryHom, HEq M.weilHom m.hom ∧ HEq M.ordinaryHom m.underlyingHom ∧ NativeHomRepresentativeCompatibility (ihomBifunctor k₀ l X) (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) M.weilHom M.ordinaryHom M.weilRepresentatives M.ordinaryRepresentatives (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) η",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T180846-L-3412566",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c4bf4",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T194521-L-2384465",
+  "kind": "interface",
+  "note": "independent cc review: delivered NativeWeilRowHomComparison.lean (both public statements unchanged, proofs sorry-free, axioms clean) and the three node files against NativeWeilClosedModels definitions; disputed eta_eq counterexample (negate weilRepresentatives.model and η) checked; importer NativeWeilClosedForgetful compiled against the delivered item"
+ }
+}

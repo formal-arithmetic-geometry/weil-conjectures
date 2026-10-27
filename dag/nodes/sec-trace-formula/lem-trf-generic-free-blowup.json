@@ -23,160 +23,68 @@
  ],
  "proof": [
   {
-   "text": "We may make finitely many successive $U$-admissible blowups and at the end regard their composite as one: [lem-trf-module-admissible-blowup-calculus] (1) identifies both the composite blowup and the successive module strict transforms. Its (2) preserves quasi-coherence, finite type and qcqs of the base. The hypotheses over $U$ are unchanged, since the transform agrees with the original module there. The base-changed family is still affine (on affine charts its ring is a tensor product), flat by [lem-weil-pbc-flat-morphism-base-change], and of finite presentation by [lem-weil-pbc-finite-presentation-base-change-composition] (1). A new fibre is an extension of the corresponding old fibre by a residue-field extension, so is geometrically integral by the stated every-field-extension hypothesis.",
+   "text": "Apply [lem-trf-generic-rank-admissible-invariance] to the given family and module. We obtain finitely many quasi-compact clopen generic-rank strata $U_i$ of $U$, and freeness of the stalks at all fibre generic points over each $U_i$ with its fixed rank $r_i$.",
    "uses": [
-    "lem-trf-module-admissible-blowup-calculus",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-finite-presentation-base-change-composition"
+    "lem-trf-generic-rank-admissible-invariance"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tags 0811, first paragraph, and 080Y, remark-successive-blowups."
+    "place": "Tag 0811, lemma-flatten-module-pre, proof paragraph defining the locally constant generic rank."
    }
   },
   {
-   "text": "For $u\\in U$ let $\\xi_u$ be the unique generic point of the integral fibre and set $r(u)=\\dim_{\\kappa(\\xi_u)}(\\mathcal F_{\\xi_u}\\otimes\\kappa(\\xi_u))$. At this point the fibre local ring is a field: on a domain affine chart it is the localization at the zero prime, its fraction field. Thus the fibre stalk is flat. The assumed relative flatness and finite presentation on $X_U$ allow [lem-trf-flat-fibre-free-neighbourhood] to give a neighbourhood $W\\subset X_U$ of $\\xi_u$ where $\\mathcal F$ is free of rank $r(u)$. By [lem-weil-pbc-flat-lfp-open], $f(W)$ is open. For $v\\in f(W)$ the nonempty open $W_v$ contains the generic point of the irreducible fibre $X_v$, so $r(v)=r(u)$. Hence $r$ is locally constant. Quasi-compactness of $U$ gives finitely many values and a finite partition into quasi-compact clopen rank strata $U_i$.",
+   "text": "Apply [lem-trf-rank-partition-cartier-charts] to this partition. It gives a $U$-admissible blowup $b:S_1\\to S$ and finitely many affine opens $W_j=\\operatorname{Spec}R_j$ covering $S_1$, with $U_1\\cap W_j=D(h_j)$ for a nonzerodivisor $h_j$ and with $W_j$ meeting only one rank stratum $U_{i(j)}$. Here $U_1=b^{-1}(U)$ is quasi-compact, since admissibility identifies it with $U$. By [lem-trf-generic-rank-admissible-invariance], the family $X_1=X\\times_SS_1$ and strict transform $\\mathcal F_1$ retain all the affine, flat, finite presentation, geometric integrality and finite-type hypotheses; over $U_1$ the original finitely presented module and generic free stalks are unchanged.",
    "uses": [
-    "lem-trf-flat-fibre-free-neighbourhood",
-    "lem-weil-pbc-flat-lfp-open",
-    "def-pc-integral-scheme"
+    "lem-trf-rank-partition-cartier-charts",
+    "lem-trf-generic-rank-admissible-invariance"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0811, second paragraph; Tag 080Q, lemma-flat-and-free-at-point-fibre."
+    "place": "Tags 0811 (lemma-flatten-module-pre, rank separation) and 080Y (remark-successive-blowups, Cartier-boundary reduction)."
    }
   },
   {
-   "text": "Choose a finite-type quasi-coherent ideal with zero set $S\\setminus U$ using [lemma-nagata-qc-open-complement-ideal-exists], and blow it up. By [det-nagata-boundary-divisor-cartier] its exceptional ideal is invertible, its zero set is exactly the complement of $U$, and $U$ is scheme-theoretically dense. We retain the names $S,U,X,\\mathcal F$ for the transformed data. The divisor and its invertibility persist under further admissible blowups by that same statement. This preliminary reduction is made before separating ranks, so that the existing separation-of-closures result suffices.",
+   "text": "On each $W_j$, the hypotheses of [lem-trf-affine-free-blowup-realization] hold for $(R_j,h_j,X_1|_{W_j},\\mathcal F_1|_{X_1|_{W_j}},r_{i(j)})$. Indeed finite presentation on $D(h_j)$ and the constant free rank at its fibre generic points were supplied in the preceding steps. Thus we obtain a $(U_1\\cap W_j)$-admissible blowup $T_j\\to W_j$ and a fibrewise surjective open $V_j$ on which the corresponding strict transform is finite locally free of rank $r_{i(j)}$.",
    "uses": [
-    "lemma-nagata-qc-open-complement-ideal-exists",
-    "det-nagata-boundary-divisor-cartier"
+    "lem-trf-affine-free-blowup-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 080Y, third paragraph, applied in Tag 0811, last paragraph."
+    "place": "Tag 0811, lemma-flatten-module-pre, final proof paragraph, applying Tag 0810 (lemma-helper-blowup-affine-space)."
    }
   },
   {
-   "text": "For one stratum $U_i$ and the union of the other strata, apply the construction [def-nagata-separate-constructible-closed] and its theorem [lemma-nagata-separate-constructible-closed], with open $U$. These subsets are disjoint, closed and constructible in $U$: each is clopen and quasi-compact, with quasi-compact complement. Their inverse-image closures in the new base are disjoint. By [lemma-nagata-admissible-blowup-preserves-density], their union is the whole base, since it is a finite closed union containing the dense open $U$. Thus each closure is open as well as closed. Repeat globally for each remaining stratum against the union of the others; preimages preserve the earlier clopen separations. There are only finitely many strata. We obtain a finite disjoint decomposition of the base into qcqs open-and-closed pieces, each meeting $U$ in a single rank stratum. If $U$ is empty, its scheme-theoretic density makes the base empty and the conclusion already holds.",
+   "text": "Use [lem-trf-admissible-local-free-gluing] for the finite affine cover $(W_j)$ of the qcqs base $S_1$, its quasi-compact open $U_1$, the flat family $X_1\\to S_1$, the finite-type quasi-coherent module $\\mathcal F_1$, and the witnesses $(T_j,V_j)$. It gives a $U_1$-admissible blowup $c:T\\to S_1$ with comparison maps $c_j:T\\times_{S_1}W_j\\to T_j$. Define $V$ as the union of the inverse images of $V_j$ under the induced maps on the base-changed family. The cited statement identifies the successive strict transform on each inverse image with the pullback of the finite locally free module on $V_j$, and states that this union is surjective over $T$. Hence that transform is finite locally free on $V$, viewed in $X\\times_ST$ through the canonical fibre-product identification.",
    "uses": [
-    "def-nagata-separate-constructible-closed",
-    "lemma-nagata-separate-constructible-closed",
-    "lemma-nagata-admissible-blowup-preserves-density"
+    "lem-trf-admissible-local-free-gluing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0811, rank separation paragraph, using the existing separation-of-closures theorem and the density reduction of Tag 080Y."
+    "place": "Tag 080Y, remark-successive-blowups, final paragraph: locality on the base and domination of local blowups."
    }
   },
   {
-   "text": "Cover these pieces by finitely many affine opens $W_j=\\operatorname{Spec}R_j$ on which the invertible boundary ideal has a generator $h_j$ which is a nonzerodivisor. This follows from [lemma-nagata-invertible-ideal-is-effective-cartier] and [def-nagata-effective-cartier-ideal]; finite choice of charts uses quasi-compactness. Then $U\\cap W_j=D(h_j)$ and the generic rank there is a fixed integer $r_j$. Write $X_{W_j}=\\operatorname{Spec}B_j$ since $f$ is affine, and $\\mathcal F|_{X_{W_j}}=\\widetilde N_j$. The ring map $R_j\\to B_j$ is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation], and flat: [def-weil-flat-morphism] makes the structure-module stalks relatively flat, and the affine-section equivalence in [def-pc-scheme-module-flat-over] gives flatness of $B_j$ over $R_j$. By [lem-weil-pbc-quasi-coherent-finite-type-affine], $N_j$ is finite and $(N_j)_{h_j}$ is finitely presented. Step 2 gives freeness of rank $r_j$ at every generic point over $D(h_j)$. These are precisely all the hypotheses of the affine helper.",
+   "text": "By [lem-trf-module-admissible-blowup-calculus] (1), the composite $b\\circ c$ is the blowup of a finite-type ideal with zero set $Z\\cup b(Z_1)$, where $Z,Z_1$ are the two centres. Both terms miss $U$, since $Z$ misses $U$ and $Z_1$ misses $b^{-1}(U)$; thus this blowup is $U$-admissible. The same clause identifies its module strict transform with the successive transform. Take $S^b=T$ and the same $V$. If the Cartier reduction gives an empty base, the empty open is surjective onto it.",
    "uses": [
-    "lemma-nagata-invertible-ideal-is-effective-cartier",
-    "def-nagata-effective-cartier-ideal",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "def-weil-flat-morphism",
-    "def-pc-scheme-module-flat-over"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0811, last paragraph; Tag 01WS, lemma-characterize-effective-Cartier-divisor."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-affine-generic-rank-blowup] to $(R_j,B_j,N_j,h_j,r_j)$ and obtain the finite ideal $I_j$ with $V(I_j)=V(h_j)$. Its blowup $T_j\\to W_j$ is admissible by [def-nagata-admissible-blowup]. The charts $\\operatorname{Spec}R_j[I_j/a]$ for a finite set of generators $a$ cover it by [prop-nagata-affine-blowup-chart-cover]. On each such chart the strict-transform module is $(N_j\\otimes_{R_j}R_j[I_j/a])/a$-power torsion: by [def-trf-module-strict-transform] its kernel is sections vanishing off the exceptional set, which on this chart is $D(a)$; by the fraction equality in [def-weil-pbc-module-localization], those are exactly sections killed by some power of $a$. For every prime of the chart base the helper supplies a principal open $D(g)$, meeting that fibre, on which the module is free of rank $r_j$. The union of all these opens is an open $V_j\\subset X_{T_j}$ mapping onto $T_j$, and the strict transform is finite locally free on $V_j$.",
-   "uses": [
-    "lem-trf-affine-generic-rank-blowup",
-    "def-nagata-admissible-blowup",
-    "prop-nagata-affine-blowup-chart-cover",
-    "def-trf-module-strict-transform",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tags 0810 and 0811, affine conclusion; Tag 080D, definition-strict-transform, and its affine description."
-   }
-  },
-  {
-   "text": "For each $j$, extend $T_j\\to W_j$ to a $U$-admissible blowup $E_j\\to S$ using [def-nagata-extended-admissible-blowup] and [lemma-nagata-extend-admissible-blowup]. The opens $W_j$ are quasi-compact, and $U\\cap W_j$ is quasi-compact because $S$ is quasi-separated and both opens are quasi-compact. The theorem identifies $E_j|_{W_j}$ with $T_j$. Restriction of the strict-transform quotient to an open is the quotient defined on that open, so $E_j$ has the good locus $V_j$ over $W_j$.",
-   "uses": [
-    "def-nagata-extended-admissible-blowup",
-    "lemma-nagata-extend-admissible-blowup",
-    "def-trf-module-strict-transform"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 080Y, final paragraph; Tag 080M, lemma-extend-admissible-blowups."
-   }
-  },
-  {
-   "text": "Here is the finite common-refinement argument rather than a new lemma. For two admissible centres $J,K$, [def-nagata-blowup-product-comparison] defines the iterated blowup as first blowing up $J$, then the extended ideal $K\\mathcal O_{\\operatorname{Bl}_J S}$. By [thm-nagata-blowup-product-ideal] this iterated blowup is the blowup of $JK$. The second centre is finite type (pull back its finitely many local generators) and is the unit ideal over $U$, so the map to $\\operatorname{Bl}_J S$ is itself admissible by [def-nagata-admissible-blowup]. Interchanging $J,K$ gives the same assertion for the other map. Iterate this binary construction over the finite family $E_j$: at each stage use the product of the centres already treated with the next centre. It gives one $U$-admissible blowup $T\\to S$ and maps $T\\to E_j$ which are composites of admissible blowups; [lem-trf-module-admissible-blowup-calculus] (1) makes each composite an admissible blowup and identifies the successive module transforms.",
-   "uses": [
-    "def-nagata-blowup-product-comparison",
-    "thm-nagata-blowup-product-ideal",
-    "def-nagata-admissible-blowup",
     "lem-trf-module-admissible-blowup-calculus"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 080Y, final paragraph; expansion of Tag 080N, lemma-dominate-admissible-blowups."
-   }
-  },
-  {
-   "text": "Restrictions of the comparison blowups to the relevant opens are still admissible blowups: [def-nagata-blowup-flat-base-change-map] and [thm-nagata-blowup-flat-base-change] identify them with blowups in the restricted ideals. Open immersions are flat because their local ring maps are isomorphisms. Pull $V_j$ back along $T|_{W_j}\\to T_j=E_j|_{W_j}$. On $V_j$, its finite locally free module is flat over $T_j$: locally its module is $B^{\\oplus r_j}$ with $B$ flat over the base ring, so tensoring an injection gives a direct sum of injections. Flatness of the base-changed family is supplied by [lem-weil-pbc-flat-morphism-base-change]. Apply [lem-trf-module-admissible-blowup-calculus] (2) to this restricted module: its next strict transform is its ordinary pullback, which is still free in the pulled-back trivializations. Its (1) identifies this module with the final strict transform of $\\mathcal F$. The pulled-back open still surjects onto $T|_{W_j}$ by [lem-weil-pbc-surjective-base-change]. Their union $V$ is open, its image is all of $T$ because the $W_j$ cover $S$, and the final transform is finite locally free on it. Finally calculus (1) combines $T\\to S$ with all preliminary blowups into the required single blowup of the original base.",
-   "uses": [
-    "def-nagata-blowup-flat-base-change-map",
-    "thm-nagata-blowup-flat-base-change",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-trf-module-admissible-blowup-calculus",
-    "lem-weil-pbc-surjective-base-change"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0811, last paragraph, with the local-to-global argument of Tag 080Y."
+    "place": "Tag 080Y, remark-successive-blowups, paragraph on composition of finite-type blowups and their module strict transforms."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-module-admissible-blowup-calculus",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "lem-trf-flat-fibre-free-neighbourhood",
-  "lem-weil-pbc-flat-lfp-open",
-  "def-pc-integral-scheme",
-  "lemma-nagata-qc-open-complement-ideal-exists",
-  "det-nagata-boundary-divisor-cartier",
-  "def-nagata-separate-constructible-closed",
-  "lemma-nagata-separate-constructible-closed",
-  "lemma-nagata-admissible-blowup-preserves-density",
-  "lemma-nagata-invertible-ideal-is-effective-cartier",
-  "def-nagata-effective-cartier-ideal",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "def-weil-flat-morphism",
-  "def-pc-scheme-module-flat-over",
-  "lem-trf-affine-generic-rank-blowup",
-  "def-nagata-admissible-blowup",
-  "prop-nagata-affine-blowup-chart-cover",
-  "def-trf-module-strict-transform",
-  "def-weil-pbc-module-localization",
-  "def-nagata-extended-admissible-blowup",
-  "lemma-nagata-extend-admissible-blowup",
-  "def-nagata-blowup-product-comparison",
-  "thm-nagata-blowup-product-ideal",
-  "def-nagata-blowup-flat-base-change-map",
-  "thm-nagata-blowup-flat-base-change",
-  "lem-weil-pbc-surjective-base-change"
+  "lem-trf-generic-rank-admissible-invariance",
+  "lem-trf-rank-partition-cartier-charts",
+  "lem-trf-affine-free-blowup-realization",
+  "lem-trf-admissible-local-free-gluing",
+  "lem-trf-module-admissible-blowup-calculus"
  ],
  "proof_origin": {
   "by": "document",
@@ -355,28 +263,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-generic-free-blowup",
   "worker": "stage1",
-  "summary": "Expanded Stacks 0811 into nine steps, with two statement-only inputs (080Q fibre criterion and 0810 affine helper). Reused the existing separation-of-closures theorem after principalizing the boundary and wrote the common refinement induction from the existing product-blowup isomorphism. Checked every citation and all hypotheses; statement unchanged.",
+  "summary": "Repair of the 7941-character returned split: extracted four independent statement-only nodes, assigning old steps 1-2, 3-4 and the chart choice of 5, the affine algebra translation of 5 and 6, and 7-9 respectively. Original statement unchanged; complete old argument retained verbatim with the task map in report.md. Parent now only assembles the four interfaces and the existing strict-transform composition calculus. All new nodes searched with two semantic phrasings, Loogle, grep and LeanSearch. Rebased after the landing return onto the current live DAG, preserving current maintainer fields. All six citation quotations rechecked against current statements; composition step now spells out why the composite centre misses U, and each assembly step has its precise source paragraph. On resumed delivery, spelled out the final open as the union of inverse images along the stated comparison maps, using precisely the gluing statement and its transform identifications. Revalidated against the 2026-10-23 read-clone DAG after the renewed landing return; adjudicated the newly present 080F-tag node lem-sfb-flat-generic-closure-equivariance as distinct, and made quasi-compactness of the preserved open explicit before applying gluing.",
   "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: apply lemma-flatten-module-pre before subtracting a free module. This split realizes the preliminary generic-free blowup used in Stacks 0815, expanding Stacks 0811 along its rank/decomposition/affine-helper route.",
-  "tool_uses": [
-   {
-    "node": "det-nagata-boundary-divisor-cartier",
-    "why": "Generic scheme or module tool used in the Stacks 0811 reductions; no node of this unit states this input, and it does not replace the unit route."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "det-nagata-boundary-divisor-cartier"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q68-a6d37aaf8",
-  "group": "Q68",
+  "reviewer": "NT-cc-Q65-48c9cb945",
+  "group": "Q65",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-a6d37aaf8 (reviewer sub-agent of L); spot-checked: I read all of it. The item's statement matches Stacks 0811 (flat.tex lemma-flatten-module-pre) hypothesis by hypothesis and is not weakened. New lem-trf-flat-fibre-free-neighbourhood is exactly 080Q (more-morphisms.tex lemma-flat-and-free-at-point-fibre). New lem-trf-affine-generic-rank-blowup is exactly 0810 (lemma-helper-blowup-affine-space). Its rewordings are equivalent to the source: q_p as the preimage of the zero prime of B⊗κ(p) equals pB, and 'g nonzero in the fibre ring' equals g∉p'S', both because B/pB is flat over R/p. I tested 0810 on R=k with N=B/(x); on R=k[t] with N=B/(tx) and I=(t); and on nilpotent h. I tested 080Q on r=0 and on a dual-numbers counterexample without relative flatness. rg over dag/nodes finds no existing node for 080Q, 0810 or the same statements. Both children are strictly smaller than the item and do not restate any of its clauses. Steps 1-9 match the cited statements: rank strata via 080Q and flat-lfp-open; the boundary made Cartier before the existing separation-of-closures theorem, with density preserved so the closures are clopen; the affine hypotheses (finite presentation, flatness via def-pc-scheme-module-flat-over, finiteness via the qc-affine lemma); 0810 on the charts, where the strict transform is the a-power torsion quotient; the extension lemma (also valid under its blueprint_update); the product-ideal common refinement (elementary, acceptable); flat base change of the blowups and calculus (1)/(2) for gluing. One implicit point in step 6: D(g) meets the fibre because the fibre ring is a domain. It is elementary, so I made no change. The dependency graph is acyclic. Everything is on the route except det-nagata-boundary-divisor-cartier, a declared tool use that I accept. No SGA, no fixes, no dropped nodes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-48c9cb945 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the sources; no fixes are needed. Sources: flat.tex 080Y (all three paragraphs), 0810 and 0811 (statements and proofs); divisors.tex 080F, 080M, 080N and lemma-separate-disjoint-opens-by-blowing-up. The re-split note, released 2026-10-22 in live and side-live, asks for at least 2 new nodes and an assembly of at most 3000 characters. Live and side-live still hold the old 9-step proof and none of the four new ids, so the delivery is not superseded. This is the fourth push of this split. The four new nodes are byte-identical to 846c8830. In the item only step 2 changed: it adds that U_1=b^{-1}U is quasi-compact, which is true because the blowup is an isomorphism away from its centre; the summary gained one sentence. The item statement is unchanged and matches 0811 hypothesis by hypothesis. The 9 old steps are quoted verbatim in the report and each has a home. Steps 1-2 go to rank-invariance; steps 3-4 and the chart choice of step 5 go to partition-charts; the rest of step 5 and step 6 go to affine-realization; steps 7-9 go to gluing; the composition part of step 1 goes to item step 5 via calculus (1). The four statements (1220-1940 characters) are separate arguments and none restates the item. The item proof is a 2670-character assembly. Every step meets the hypotheses of the node it cites. The strata are qc and clopen. W_j lies in T_{i(j)}, so D(h_j) is in one stratum. h_j is a nonzerodivisor, the transformed family keeps its properties, and the module is finitely presented with free generic stalks over D(h_j). V(I_j)=V(h_j) makes T_j admissible. The gluing node supplies the c_j, the transform identification and a surjective V. The composite centre Z∪b(Z_1) misses U. I derived all four new statements myself and they are true: 080Q applies at a field generic stalk; Cartier boundary and density make the separated closures clopen; pB is the generic-fibre prime and a-power torsion is the chart strict transform; and 080M/080N give the refinement, flat implies pullback, and surjectivity is stable under base change. Edge cases tested: U=∅, U=S, rank 0, Spec(k×k), non-Noetherian bases. rg -L over the snapshot for the source tags and key words finds only lower-level child nodes and older nodes, none a duplicate. No SGA is cited, all citations stay in the unit, tool_uses is empty, and the statement-only form is correct. Maintainer notes: this is a landing loop of a never-promoted side completion. lem-trf-affine-generic-rank-blowup and lem-trf-flat-fibre-free-neighbourhood stay uncited until the new nodes are split. The item's top-level tool_uses entry det-nagata-boundary-divisor-cartier is stale but unchanged from base."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -396,5 +299,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

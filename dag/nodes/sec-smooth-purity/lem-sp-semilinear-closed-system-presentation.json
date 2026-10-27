@@ -1,0 +1,146 @@
+{
+ "id": "lem-sp-semilinear-closed-system-presentation",
+ "kind": "statement",
+ "title": "Exact closed operations and normalized evaluation for strict systems",
+ "statement": "Let i:Z↪T be a closed immersion of schemes, and U an object of T_proet whose structure map is the complementary quasi-compact open immersion [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism, def-weil-pbc-proetale-site]. For every inverse sequence B of commutative ring sheaves, ClosedData(i,B) [def-sp-semilinear-open-closed-data] is inhabited. Thus this assertion concerns only exact closed pull/push and their normalized ordinary level comparisons: it contains no open operation, localization exact sequence, complexes or coefficient-change comparison.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A5, 03D6 and 09BM; parent steps 1, 2, 4 and the exactness part of step 5"
+ },
+ "stmt_deps": [
+  "def-sp-semilinear-open-closed-data",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "At each n, direct image is restriction to base-change objects with the ring unit action. Comparing both constructions gives identity additive section maps. Naturality of the ring unit identifies their module actions and horizontal restrictions, yielding pushEvaluation with its section normalization.",
+   "uses": [
+    "def-sp-semilinear-open-closed-data",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The sheafification defining inverse image uses only vertical covers at a fixed index. Transpose the preceding section comparison along the actual module adjunctions; the result is an invertible pullEvaluation comparison and its defining mate equation is unitEvaluation. Uniqueness of left adjoints compares the level pullback with the small-model inverse image.",
+   "uses": [
+    "def-sp-semilinear-open-closed-data",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-ringed-site-module-pullback-exists-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Kernels and cokernels of systems are computed at every index: exact scalar restriction induces their transitions, and uniqueness of kernel/cokernel factorizations proves the system laws and universal properties. Finite biproducts are componentwise. Apply immersion inverse-image exactness and closed direct-image exactness at each level (the complement is quasi-compact), and transport with the normalized comparisons. This proves additivity and both finite preservation claims.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-pe-proetale-ring-restrict-scalars",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pe-proetale-ring-restrict-scalars",
+  "def-sp-semilinear-open-closed-data",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), final sentence: Tags 09A5, 03D6 and 09BM; parent steps 1, 2, 4 and the exactness part of step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion direct image and inverse image for semilinear inverse systems of sheaves of modules are exact and commute with evaluation, preserving the adjunction unit",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction, exactness and scalar-restriction APIs; no strict varying-coefficient localization assembly. Used with the project interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a map of varying ring sheaf towers commutes with open extension and closed inverse image preserving their counit and unit",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_res, SheafOfModules.restrictScalars, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, SheafOfModules.restrictScalars_map_val, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, PresheafOfModules.restrictScalarsCompToPresheaf, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.restrictScalars_obj_val",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction, exactness and scalar-restriction APIs; no strict varying-coefficient localization assembly. Used with the project interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*pushforward|preservesFiniteLimits_of|exact_of_degreewise",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic pushforward, exactness and restriction APIs. No varying-ring strict-system localization comparison; use these APIs in the assembly argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearOpenClosedComplexSequence",
+  "date": "2026-10-25",
+  "group": "H3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2), localization sentence: Tags 09A5, 03D6 and 09BM; parent steps 1, 2, 4 and the exactness part of step 5",
+   "via": [
+    "lem-sp-semilinear-open-closed-complex-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearClosedSystemPresentation",
+  "file": "lean/Sheaf/Paper/SemilinearClosedSystemPresentation.lean",
+  "declaration": "WeilConjectures.SemilinearSections.OpenClosed.semilinearClosedSystemPresentation",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.OpenClosed.semilinearClosedSystemPresentation"
+  ],
+  "statement": "theorem semilinearClosedSystemPresentation\n    {T Z : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]\n    (U : T.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ)\n    (B : ℕ → Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})\n    (τ : ∀ n : ℕ, B (n + 1) ⟶ B n) : Nonempty (ClosedData i B τ)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-571bf",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261025T123050-L-1828684",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-571bf",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261025T123050-L-1828684",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged); extracted SemilinearOpenClosedData vs old item prefix (verbatim + ClosedData copy of SequenceData closed fields); 3 new sorried statements vs their nodes and the SequenceOpenOrdinary/RingedToposMorphismOfUniverses pinning (true); item node proof fields vs Lean proof"
+ }
+}

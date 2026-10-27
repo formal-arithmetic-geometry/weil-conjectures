@@ -1,0 +1,353 @@
+{
+ "id": "lem-sf-pf-reduction-witnessed-flat-domains",
+ "kind": "statement",
+ "title": "Witnessed flat models and compactification domains for finite reduction",
+ "statement": "Fix the finite-field and coefficient datum of [def-sf-datum]: $k=\\overline{\\mathbf F}_q$ has characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A=\\mathcal O_E/\\varpi_E^n$, $B=\\mathcal O_E/\\varpi_E^m$ for $1\\le m\\le n$. Let $f:X\\to Y$ be a separated finite-type morphism of separated finite-type $k$-schemes. Use ordinary constant-ring module derived categories on the small etale and pro-etale sites [def-weil-pbc-proetale-modules, def-weil-pbc-derived-categories], their exact comparison inverse images $\\nu_T^*$ [def-sf-comparison-derived-pullback], and bounded constructibility and Tor amplitude [def-weil-finite-tor-amplitude]. Let $K\\in D^b_{ctf}(X_{\\mathrm{proet}},A)$ and $L\\in D^b_{ctf}(Y_{\\mathrm{proet}},A)$ have Tor amplitudes $[a,b]$ and $[c,d]$.\n\nThere exist bounded flat constructible etale complexes $P$ on $X$ and $Q$ on $Y$, zero outside $[a,b]$ and $[c,d]$, together with isomorphisms $\\nu_X^*P\\simeq K$ and $\\nu_Y^*Q\\simeq L$. Here flat means tensoring module sheaves with the term is exact, and constructible means locally constant with finite module values on a finite locally closed constructible stratification. Write $P_A=P$, $Q_A=Q$, $P_B=P\\otimes_A B$, and $Q_B=Q\\otimes_A B$ termwise. For $R=A,B$, these are bounded flat constructible $R$-complexes with the same respective degree bounds, representing etale origins of $K_R,L_R$, where $K_A=K$, $L_A=L$ and $K_B=K\\otimes_A^LB$, $L_B=L\\otimes_A^LB$ with their $B$-actions. The signed total tensor $\\operatorname{Tot}(P_R\\otimes_R f^{-1}Q_R)$ represents an etale origin of $H_R=K_R\\otimes_R^L Lf_R^*L_R$ and is flat constructible, zero outside $[a+c,b+d]$. In particular $K_R,L_R,H_R$ lie in their bounded constructible finite-Tor categories with those bounds, and these comparison isomorphisms are etale-origin witnesses.\n\nThe morphism $f$ admits a compactification [def-weil-compactifications-refinements]. For every compactification $X\\xrightarrow{j}\\bar X\\xrightarrow{r}Y$, $rj=f$, with $j$ open and $r$ proper, and for either coefficient ring, $j_{!,R}K_R$ and $j_{!,R}H_R$ have bounded constructible etale origins and the respective Tor bounds $[a,b]$ and $[a+c,b+d]$. Under the canonical open tensor isomorphism [lem-cbc-extension-zero-projection-formula], $j_{!,R}H_R\\simeq j_{!,R}K_R\\otimes_R^L Lr_R^*L_R$. Thus both proper-factor inputs have the required witnessed finite-Tor domains.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/prop-sf-pf-reduction.proof.md",
+  "place": "Proof paragraph: finite-reduction pullback/tensor comparisons on their domains; preparation of the compactification inputs in the unit's counit-tensor calculation (returned proof steps 1 and 3)"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-compactifications-refinements",
+  "lem-cbc-extension-zero-projection-formula"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient rings and quotient map are the existing Coeff, finiteCoeff and quotient constructions. Apply the Mathlib finite-type-over-Noetherian instances to the structure maps of X and Y, obtaining IsNoetherian on both schemes. Nagata supplies a compactification of f. No ambient compactification scheme needs a Noetherian or finite-type hypothesis in the fixed-module open-extension argument below.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-thm-nagata-sketch-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The native fixed-ModuleCat constructibleFiniteTor hypothesis is, by definition, bounded etale origin together with finite Tor amplitude. Unpack its bounded etale origin and isomorphism. The source fixed-module Tor comparison torAmplitudeIn_mapDerivedCategory_iff reflects the prescribed interval along that isomorphism. Convert source constructibility to finite constant-value constructibility using isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf, and express boundedness by the interval [min a b,max a b] of its t-structure bounds. Apply hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel in the prescribed interval. Composing its localized model isomorphism with the origin isomorphism constructs P and Q. Thus no intrinsic-realization equivalence or new choice of inverse functor is needed.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "lem-exc-comparison-tor-interval",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-etale-flat-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any flat constructible model P, use boundedFlatCoefficientSiteSquare to obtain flatness and the same support interval for its termwise coefficient reduction. constructibleCoefficientSiteSquare gives finite-value constructibility of the same reduced terms, including its proved empty-scheme normalization. Construct the reduced origin isomorphism explicitly as N_B[P_B] -> [N_B P_B] -> [(N_A P)_B] -> T_B[N_A P] -> T_B K. The first and last comparisons are exact localization factors; the middle chain comparison is the square theorem’s B-linear chainComparison; the third arrow is the inverse of the scalarExtensionRepresentative whose invertibility is supplied by boundedFlatCoefficientSiteSquare. This retains the B-action and uses no flatness of B over A.",
+   "uses": [
+    "lem-sp-bounded-flat-coefficient-site-square",
+    "lem-sp-constructible-coefficient-site-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any finite coefficient ring R and model Q on Y, apply the source etale upperStarPreservesFlat instance termwise; categorical flatness is equivalent here to exact tensorRight via braiding. Source constructible pullback and the finite-value/source constructibility comparison give constructibility of each pullback term. Exact inverse image preserves zero terms, giving the same support interval. The exact-functor localization factor and mapDerivedCategoryComparisonUpperStarCompUpperStarIso identify this pulled-back model’s comparison image with G.mapDerivedCategory(L). The canonical leftDerivedFunctorIsoMapDerivedCategory for exact constant-coefficient pro-etale inverse image identifies this with Lf^*L. These are the fixed-module specializations of the comparison and exactness lemmas, without the unnecessary line tensor and shift. The etale flat-pullback instance is proved by the geometric-fiber flatness criterion; the fixed-scalar pro-etale flat-pullback instance provides the recorded derived-pullback API.",
+   "uses": [
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-sfb-etale-flat-geometric-fibers",
+    "lem-sfb-proetale-fixed-scalar-pullback-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteFlatConstructible_totalTensor to P and the termwise pullback of Q, with T equal to the actual signed mapBifunctor defining total. Its first three conclusions give the required model in [a+c,b+d]. Map its localized total-to-derived-tensor isomorphism through exact comparison, then use the source derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso, the fixed-module specialization of the ringed-topos tensor comparison. Substitute the two origin isomorphisms and the pullback isomorphism of the previous step. This gives exactly origin(total) isomorphic to tensorInput. A bounded flat constructible model gives source bounded constructibility and the full universal Tor test by constructibleFiniteTor_Q_obj and torAmplitudeIn_Q_obj_of_flat. Exact comparison preserves both, and transport along the model isomorphism gives the three constructibleFiniteTor and exact-interval clauses. Unpacking bounded etale origin and converting constructibility gives each explicitly witnessedDomain.",
+   "uses": [
+    "lem-sfb-finite-flat-constructible-total-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each compactification, its open immersion is quasi-compact because its source X is Noetherian. For any witnessed input, unpack a bounded etale origin O. Reflect its exact Tor interval through the source fixed-module Tor comparison. The source theorem boundedConstructible_and_torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek preserves bounded constructibility and precisely that interval, using the cohomological bound implied by the Tor bound. The canonical mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso followed by extension of the original origin isomorphism identifies comparison(j_! O) with j_! K. Transport bounded constructibility and the universal Tor test through this isomorphism; its etale origin supplies the required witness. Apply this argument to K and tensorInput at both coefficient levels. No property of the ambient scheme beyond being the target of this quasi-compact open immersion is needed.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "lem-exc-comparison-tor-interval",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing real-data definition openTensorIso is retained verbatim. It first maps the canonical congruence and derived pullback composition isomorphisms through tensor by K and open extension, and then applies derivedOpenImmersionLowerShriekProjectionIso. It therefore identifies the second witnessed proper-factor input with j_!K tensor Lr^*L for the same chosen compactification, exactly as required. Finally apply the uniform stage_of_models argument to P,Q and to their same chosen termwise coefficient reductions, and pair these two stages with Nagata compactification existence.",
+   "uses": [
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-thm-nagata-sketch-noetherian",
+  "def-weil-finite-tor-amplitude",
+  "lem-exc-comparison-tor-interval",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-etale-flat-constructible",
+  "lem-sp-bounded-flat-coefficient-site-square",
+  "lem-sp-constructible-coefficient-site-square",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-sfb-proetale-fixed-scalar-pullback-flat",
+  "lem-sfb-finite-flat-constructible-total-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-trf-open-ctf",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/prop-sf-pf-reduction.proof.md",
+  "place": "S7 Lean proof, 2026-10-25: witnessed-domain preparation. Uses the existing fixed-ModuleCat etale-origin definition and source specializations of comparison, exact pullback, total tensor and quasi-compact open-extension results. Flat models and extension follow Stacks etale-cohomology.tex lemma-when-ctf, lemma-pullback-ctf and lemma-restrict-and-shriek-from-etale-ctf; canonical open tensor is sites-cohomology.tex lemma-j-shriek-and-tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes of finite Tor amplitude on etale and proetale sites admit bounded flat constructible models compatible with finite coefficient reduction, inverse image, tensor product and extension by zero.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\nAssessment: Ordinary flat-module base change and flat scheme morphisms do not provide constructible sheaf complexes, site witnesses or the simultaneous compactification input models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\nAssessment: Ordinary flat-module base change and flat scheme morphisms do not provide constructible sheaf complexes, site witnesses or the simultaneous compactification input models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ff]lat|[Ff]lat.*constructible|[Tt]or[Aa]mplitude",
+   "results": "[grep] OK 0 hit(s)\nAssessment: Ordinary flat-module base change and flat scheme morphisms do not provide constructible sheaf complexes, site witnesses or the simultaneous compactification input models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite quotient extension of scalars preserves flat constructible models and Tor amplitude of derived sheaves on schemes.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Unramified.Finite\", \"type\": \"[Module.Flat R M] : Module.Flat S M\", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits (extendScalars.{_, _, u} f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"instFinitePresentationTensorProduct\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"{A} [CommRing A] [Algebra R A] [Module.FinitePresentation R M] : Module.FinitePresentation A (A ⊗[R] M)\", \"doc\": \"Let $R$ be a commutative semiring and let $A$ be a commutative ring that is also an $R$-algebra. If $M$ is a finitely presented $R$-module, then the tensor product $A \\\\otimes_R M$, viewed as an $A$-mo\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\nAssessment: Ordinary flat-module base change and flat scheme morphisms do not provide constructible sheaf complexes, site witnesses or the simultaneous compactification input models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of rings for sheaves: a bounded complex of flat constructible sheaves stays flat and constructible over a quotient ring; tensor and compactification extension by zero have etale-origin witnesses.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\nAssessment: Ordinary flat-module base change and flat scheme morphisms do not provide constructible sheaf complexes, site witnesses or the simultaneous compactification input models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTor|torAmplitude|constructible.*tensor|tensor.*constructible",
+   "results": "[grep] OK 0 hit(s)\nAssessment: Ordinary flat-module base change and flat scheme morphisms do not provide constructible sheaf complexes, site witnesses or the simultaneous compactification input models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Flat\"",
+   "results": "Read 0 hits: . Ordinary ring/module or scheme etaleness results; none states this constructible derived-site and compactification assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*constructible|constructible.*flat|TorAmplitude",
+   "results": "Read 0 hits: . Ordinary ring/module or scheme etaleness results; none states this constructible derived-site and compactification assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes of flat constructible etale sheaves model finite Tor amplitude and preserve it under scalar extension and open extension by zero.",
+   "results": "Read 8 hits: ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.lTensor_shortComplex_exact, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.rTensor_shortComplex_exact, instFinitePresentationTensorProduct, AlgebraicGeometry.Flat.instMorphismRestrict, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.FaithfullyFlat.instTensorProduct. Ordinary ring/module or scheme etaleness results; none states this constructible derived-site and compactification assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Tor amplitude constructible proetale complex admits a bounded flat constructible etale model, compatible with quotient coefficients, pullback, tensor and extension by zero.",
+   "results": "Read 8 hits: Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.comp, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.instTensorProduct. Ordinary ring/module or scheme etaleness results; none states this constructible derived-site and compactification assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a noetherian scheme finite Tor dimension constructible sheaves have strictly perfect stratified etale resolutions with prescribed degree bounds.",
+   "results": "Read 8 hits: AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.exists_subalgebra_fg, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.isOpen_etaleLocus, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.FormallyEtale.instForallOfFinite, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat. Ordinary ring/module or scheme etaleness results; none states this constructible derived-site and compactification assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-pf-reduction",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-reduction",
+   "place": "Proof paragraph: finite-reduction pullback/tensor comparisons on their domains; preparation of the compactification inputs in the unit's counit-tensor calculation (returned proof steps 1 and 3)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-pf-reduction-witnessed-flat-domains",
+  "worker": "stage1",
+  "summary": "Eight-step domain verification using existing DAG statements only. Chosen etale origins are given prescribed-interval flat constructible models; the coefficient/site squares retain B-actions, flatness, constructibility and Tor windows. Pullback and signed total tensor produce the tensor input; arbitrary compactifications and open extension give witnessed proper-factor domains. No new nodes, no statement change, no Lean writes or compilation. Repair of returned head 47975f8005b: revalidated all current cited statements and incorporated the constructible coefficient/site square’s empty-stratum normalization in Step 3; refreshed its verbatim citation. Repair of returned head 66846cb4b44: revalidated every cited statement on the current DAG and made the bounded-flat scalar/site comparison direction explicit as the inverse of its scalar-adjunction mate. Revalidation after the landing refusal: Step 3 now writes the complete reduced-origin composite through localization and the B-linear chain comparison, with the scalar-mate inverse direction explicit; all 24 citations agree with the current DAG.",
+  "blueprint": "Realizes the first paragraph of the current prop-sf-pf-reduction.proof.md: supplies the finite-Tor domains for pullback/tensor and the compactification inputs for the counit-tensor computation. It does not replace that computation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric tool establishing Noetherian hypotheses for flat models and compactification. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic finite-ring etale/pro-etale descent tool that supplies actual origin isomorphisms. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Generic site-comparison tool preserving and reflecting the specified full Tor tests. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Generic bounded flat constructible model theorem with exact interval; not a replacement for any counit calculation in this unit. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-sp-bounded-flat-coefficient-site-square",
+    "why": "Generic flat-complex calculation of the scalar/site square, with target-ring actions and the original interval. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-sp-constructible-coefficient-site-square",
+    "why": "Generic constructibility tool for the same scalar/site square. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-sp-etale-pullback-line-flat-model",
+    "why": "Generic etale pullback model tool, specialized to the trivial line and zero shift. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic compatibility of etale origin with scheme inverse image. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exactness tool identifying derived constant-coefficient pullback with termwise inverse image. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-sfb-finite-flat-constructible-total-tensor",
+    "why": "Generic total tensor model theorem giving constructibility and the sum interval. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic strong monoidal derived pullback tool for the comparison morphism. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "sk-thm-nagata-sketch-noetherian",
+    "why": "Generic compactification existence tool for the separated finite-type map over the Noetherian target. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type composition tool checking the open-extension target hypotheses. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Generic finite-coefficient extension-by-zero stability tool with the supplied interval. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "The canonical open tensor identification already named in the item; prepares the proper-factor input. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic derived pullback composition tool for r composed with j. No statement of this unit supplies this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-exc-comparison-tor-interval",
+  "lem-sf-etale-flat-constructible",
+  "lem-sp-bounded-flat-coefficient-site-square",
+  "lem-sp-constructible-coefficient-site-square",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-sfb-finite-flat-constructible-total-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-nagata-sketch-noetherian",
+  "lem-trf-open-ctf",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-6b0b0f6ae",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-6b0b0f6ae (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, no new nodes, statement, stmt_deps and unit unchanged. The only delta from the PASSed head 66846 is the explicit Step 3 B-witness composite. I checked it against the current lem-sp-bounded-flat-coefficient-site-square (statement_change 2026-10-22). The composite is: N_B[P_B]≃[N_B P_B] by exactness of N_B, then the B-linear chain isomorphism to [(N_A P)_B], then the displayed isomorphism to N_A Q(P)⊗^L B, then the reduction of the Step 2 witness. The inverse-mate direction matches the square, and no flatness of B over A is used. Steps 1-8 are correct: origin lemma and Tor reflection, exact-window flat models, constructible square with its empty-scheme clause, pullback-line model with E=R_X and shift 0, total tensor in [a+c,b+d] with monoidal ν^*, Nagata with X̄ finite type over k and Noetherian, lem-trf-open-ctf keeping intervals, open projection formula with Lj^*Lr^*≅Lf^*. Edge cases hold: m=n, n=m=1, K=0 or L=0, X empty, singleton intervals, identity or empty-source j, and Z/4→F_2 with (A-2->A). Batch 5: lem-sp-bounded-flat-coefficient-site-square reaches lem-pod-derived-exact-square-composition. That node is a purely formal pasting identity for derived comparisons of exact functors (localization universal property), neither Poincaré duality nor a step of its proof, so it is outside the assumptions and accepted. No SGA source, no repair note, no duplicates; the generic tool_uses are accepted. FIX: the earlier 47975 Step 1 fix was lost. def-weil-finite-tor-amplitude defines D^b_ctf only on schemes where ℓ is invertible, and no step checks this for X, Y or X̄. I re-applied the sentence: char k=p≠ℓ, so ℓ is a unit on every k-scheme. Only the Step 1 text changes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionReductionWitnessedFlatDomains",
+  "declaration": "WeilConjectures.ProjectionReduction.exists_witnessedFlatDomains",
+  "declarations": [
+   "WeilConjectures.ProjectionReduction.Coeff",
+   "WeilConjectures.ProjectionReduction.finiteCoeff",
+   "WeilConjectures.ProjectionReduction.quotient",
+   "WeilConjectures.ProjectionReduction.EtaleComplex",
+   "WeilConjectures.ProjectionReduction.ProDerived",
+   "WeilConjectures.ProjectionReduction.origin",
+   "WeilConjectures.ProjectionReduction.model",
+   "WeilConjectures.ProjectionReduction.reduceComplex",
+   "WeilConjectures.ProjectionReduction.total",
+   "WeilConjectures.ProjectionReduction.tensorInput",
+   "WeilConjectures.ProjectionReduction.extend",
+   "WeilConjectures.ProjectionReduction.openTensorIso",
+   "WeilConjectures.ProjectionReduction.witnessedDomain",
+   "WeilConjectures.ProjectionReduction.stage",
+   "WeilConjectures.ProjectionReduction.exists_witnessedFlatDomains"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionReductionWitnessedFlatDomains.lean",
+  "statement": "theorem exists_witnessedFlatDomains (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (m n : ℕ) [Fact (1 ≤ m)] [Fact (1 ≤ n)] (hmn : m ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (a b c d : ℤ) (_hab : a ≤ b) (_hcd : c ≤ d) (K : ProDerived (Coeff C.l E n) X) (L : ProDerived (Coeff C.l E n) Y) (_hK : ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Coeff C.l E n)) X K) (_hL : ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Coeff C.l E n)) Y L) (_hKTor : ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (Coeff C.l E n)) X a b K) (_hLTor : ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (Coeff C.l E n)) Y c d L) : Nonempty (Compactification f) ∧ ∃ (P : EtaleComplex (Coeff C.l E n) X) (Q : EtaleComplex (Coeff C.l E n) Y), stage (Coeff C.l E n) f a b c d P Q K L ∧ stage (Coeff C.l E m) f a b c d (reduceComplex (quotient C.l E hmn) X P) (reduceComplex (quotient C.l E hmn) Y Q) ((ProEtale.SupportedEtaleTensorOrigin.proFixedScalar (quotient C.l E hmn) X).obj K) ((ProEtale.SupportedEtaleTensorOrigin.proFixedScalar (quotient C.l E hmn) Y).obj L)",
+  "branch": "sheaf-dag",
+  "by": "Q114",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Same-node helper abbreviations package the actual quotient rings, termwise models and witnessed-domain clauses. openTensorIso is the specified canonical open projection isomorphism composed with the recorded pullback-composition isomorphism. The sole postponed theorem states both coefficient stages simultaneously on the same original P,Q; all constructions have real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4c01840f",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Clause-by-clause check of exists_witnessedFlatDomains against the node: datum and ℓ≠p; A=𝒪_E/ϖ^n and B with the canonical quotient factor map; separated finite-type X, Y, f; constructibleFiniteTor plus full torAmplitudeIn hypotheses; one ∃P,Q for both stages with flat (exact tensorRight), constructible, interval-supported models and ν^* origin isos; P_B termwise etaleSheafExtendScalars and K_B = proFixedScalar (left adjoint of derived restriction, B-action kept); signed total mapBifunctor model in [a+c,b+d] with origin ≅ K⊗^L Lf^*L; three witnessedDomain clauses; Nonempty Compactification and ∀ comp witnessed j_!K, j_!H domains; openTensorIso is a real canonical composite of congr/leftDerivedUpperStarComp and the recorded derivedOpenImmersionLowerShriekProjectionIso. a≤b follows the def-weil-finite-tor-amplitude convention. Edge cases covered (m=n, empty schemes, K=0, identity f or j, non-flat A→B); universes follow def-sf-datum. Only the item lean record changed (deps identical to side-live); statement verbatim; one sorry; docstrings and proof plan present; no line >100. No compile run (no change). Advisories: upperStarPreservesFlat_moduleCat instance from theorem node lem-sfb-proetale-fixed-scalar-pullback-flat is outside stmt_deps/proof_deps; unbounded comparisonUpperStar used instead of the recorded D^+ abbrev; proFixedScalar, IsConstructibleEtaleModuleSheaf, isBoundedConstructible and leftDerivedUpperStarComp/Congr come from non-stmt_dep owners."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T101359-L-3688145",
+  "kind": "proof",
+  "note": "re-landed after the over-wide take-out of batch 20261025T070805 (2026-10-25)"
+ }
+}

@@ -15,71 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathcal O_{S,s}$, $A=\\mathcal O_{T,t}$, $P=T\\times_S T$ with projections $p_1,p_2$, and let $\\delta:T\\to P$ be the diagonal, so $p_i\\delta=\\operatorname{id}_T$ [def-pc-fibre-product]. Set $z=\\delta(t)$ and $C=\\mathcal O_{P,z}$. By [def-weil-etale-morphism] and [def-weil-unramified-morphism], $\\delta$ is an open immersion. By [def-weil-open-immersion], it identifies the structure sheaf with its restriction to an open neighbourhood; taking germs gives an isomorphism $d=\\delta_t^\\sharp:C\\to A$. Write $a_i=p_{i,z}^\\sharp:A\\to C$. Stalk-map composition [def-weil-locally-ringed-space-morphism] gives $d a_i=\\operatorname{id}_A$. Since $d$ is invertible, $a_1=a_2=d^{-1}$. Thus both projections have exactly the same scalar action at this diagonal point.",
+   "text": "Put R = O_{S,e(t)} and A = O_{T,t}. Give A the R-algebra structure of the stalk map, and M the restricted R-module structure in the statement. IsScalarTower.of_compHom supplies compatibility. Since A is a ring, Module.addCommMonoidToAddCommGroup A supplies additive inverses on M without changing its given additive monoid or module structure. The etale hypothesis [def-weil-etale-morphism] gives LocallyOfFiniteType e and FormallyUnramified e. Apply Mathlib LocallyOfFiniteType.stalkMap and FormallyUnramified.stalkMap, and translate the ring-hom properties to Algebra.EssFiniteType R A and Algebra.FormallyUnramified R A using RingHom.essFiniteType_algebraMap and RingHom.formallyUnramified_algebraMap.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism",
-    "def-weil-open-immersion",
-    "def-weil-locally-ringed-space-morphism"
+    "def-weil-etale-morphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05B9, open-diagonal argument, with X=T and its map to T the identity; applied directly to stalks for Tag 05BA."
-   }
+   "elementary": true
   },
   {
-   "text": "Suppose $M$ is flat over $R$ through $e_t^\\sharp$. Apply [lem-pc-pullback-stalk-relative-flat-extension] with both scheme morphisms equal to $e:T\\to S$, first-factor point $t$, second-factor point $t$, and fibre-product point $z=\\delta(t)$. Its hypothesis is precisely this $R$-flatness of the arbitrary $A$-module $M$; both projection images equal $t$ by Step 1. It yields flatness over the second copy of $A$ of $N=C\\otimes_{A,a_1}M$, with the $A$-action on $N$ through $a_2$. This input assumes neither quasi-coherence nor finiteness and applies to our given module itself.",
+   "text": "If M is flat over R, apply [lem-sc-unramified-flat-of-base-flat], namely Algebra.FormallyUnramified.flat_of_restrictScalars R A M, with the essentially finite type and formally unramified algebra instances from Step 1. This proves A-flatness of the given arbitrary module M; the Mathlib result permits independent universes for the rings and module.",
    "uses": [
-    "lem-pc-pullback-stalk-relative-flat-extension"
+    "lem-sc-unramified-flat-of-base-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05B9, preservation of relative flatness under base change; its stalk-module form supplied by the existing relative-flat-extension node."
-   }
+   "elementary": false
   },
   {
-   "text": "Define $\\phi:N\\to M$ by $\\phi(c\\otimes m)=d(c)m$ and $\\psi:M\\to N$ by $\\psi(m)=1\\otimes m$. Balancing for $\\phi$ follows from $d(a_1(b)c)m=b\\,d(c)m$ for $b\\in A$. Both maps are $A$-linear for the second-factor action: $d a_2=\\operatorname{id}_A$, and $a_2(b)\\otimes m=a_1(b)\\otimes m=1\\otimes bm$. We have $\\phi\\psi=\\operatorname{id}_M$, and $\\psi\\phi(c\\otimes m)=1\\otimes d(c)m=a_1(d(c))\\otimes m=c\\otimes m$, since $a_1d=\\operatorname{id}_C$. Hence $N\\cong M$ as $A$-modules. For any injective map of $A$-modules, tensoring this isomorphism and its inverse identifies the tensor maps for $N$ and $M$. The map for $N$ is injective by Step 2; therefore the map for $M$ is injective. This proves $A$-flatness using [def-weil-pbc-flat-ring-map].",
-   "uses": [
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05B9, restriction to the diagonal open subscheme: explicit tensor and scalar identifications at z, giving the forward implication of Tag 05BA."
-   }
-  },
-  {
-   "text": "Conversely suppose $M$ is flat over $A$. The morphism $e$ is flat by [def-weil-etale-morphism]; hence $A$ is flat over $R$ via $e_t^\\sharp$ by [def-weil-flat-morphism]. Apply [lem-pc-module-flat-transitive] to $R\\to A$ and $M$. It gives flatness of $M$ over $R$ with exactly the scalar restriction in the item. Together with Steps 2-3 this proves the equivalence, for every module $M$ without a finiteness assumption.",
+   "text": "Conversely, the etale hypothesis [def-weil-etale-morphism] implies e is flat [def-weil-flat-morphism]. Mathlib Flat.stalkMap e t and RingHom.flat_algebraMap_iff give Module.Flat R A. If M is flat over A, apply [lem-pc-module-flat-transitive], namely Module.Flat.trans R A M. The resulting R-action is precisely Module.compHom M (e.stalkMap t).hom. The two implications give the required equivalence without finiteness assumptions on M.",
    "uses": [
     "def-weil-etale-morphism",
     "def-weil-flat-morphism",
     "lem-pc-module-flat-transitive"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05B9, first paragraph (etale implies flat and flatness is transitive); reverse implication of Tag 05BA."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-weil-etale-morphism",
-  "def-weil-unramified-morphism",
-  "def-weil-open-immersion",
-  "def-weil-locally-ringed-space-morphism",
-  "lem-pc-pullback-stalk-relative-flat-extension",
-  "def-weil-pbc-flat-ring-map",
+  "lem-sc-unramified-flat-of-base-flat",
   "def-weil-flat-morphism",
   "lem-pc-module-flat-transitive"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 05BA, proved by applying the open-diagonal/base-change argument of Tag 05B9 directly to modules over stalks."
+  "document": "Mathlib/RingTheory/Unramified/Finite.lean; literature/stacks-project/flat.tex",
+  "place": "Algebra.FormallyUnramified.flat_of_restrictScalars (Iversen I.2.7), combined with Mathlib LocallyOfFiniteType.stalkMap, FormallyUnramified.stalkMap, Flat.stalkMap, and Module.Flat.trans. This algebraic proof specializes directly to the stalk-module equivalence of Stacks Tag 05BA (lemma-etale-flat-up-down-local-ring)."
  },
  "mathlib_searches": [
   {
@@ -161,9 +129,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-pullback-stalk-relative-flat-extension"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -190,5 +156,26 @@
   "result": "pass",
   "note": "Single commit adds only the lean record to the item node, the module Sheaf/TraceFormula/EtaleLocalRingFlatness.lean and the report (real Worker report and Second reading by Q93). Statement matches node and Stacks 05BA clause by clause: Etale e on Scheme.{u}, t : T, arbitrary M : Type v module over T.presheaf.stalk t with no finiteness, flatness over S.presheaf.stalk (e t) through explicit Module.compHom along (e.stalkMap t).hom iff Module.Flat over the T stalk. No extra assumptions or universe restriction; edge cases (empty T, zero module, identity) covered. lean.statement verbatim. Own Mathlib and project searches find no existing equivalence (only one-way FormallyUnramified.flat_of_restrictScalars and Flat.stalkMap). Theorem only, proof sorry; module and declaration docstrings carry source place, blueprint id and the four proof steps; lines under 100; autoImplicit false. nt_compile --json clean (6.0 s, no error or warning; a control error run confirms diagnostics are shown). Minor non-blocking notes: the private ModuleStalkFunctor import is unused by the statement (kept as the dependency marker); the module universe is more general than the ModuleCat.{u} interface of the step-2 dependency (stage-3 concern)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261023T102546-L-2924798",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

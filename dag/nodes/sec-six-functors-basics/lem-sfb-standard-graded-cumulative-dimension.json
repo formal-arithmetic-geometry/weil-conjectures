@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-standard-graded-cumulative-dimension",
+ "kind": "statement",
+ "title": "Dimension from a cumulative Hilbert polynomial of a standard graded algebra",
+ "statement": "Let $k$ be a field [def-weil-field] and let $S=\\bigoplus_{j\\ge0}S_j$ be a standard graded $k$-algebra [def-pc-standard-graded-algebra], so $S_0=k$ and finitely many elements of $S_1$ generate $S$. Each $S_j$ is finite-dimensional over $k$ [def-weil-vector-space-dimension]. Suppose that $Q\\in\\mathbf Q[X]$ is a nonzero polynomial [def-weil-polynomial-ring] and $N\\ge1$ is an integer such that, for every integer $n\\ge N$, $$Q(n)=\\sum_{j=0}^{n-1}\\dim_k S_j.$$ Then the Krull dimension [def-weil-pbc-krull-dimension-ring] of $S$ is finite and equals $\\deg Q$. The case $S_j=0$ for all sufficiently large $j$ is allowed; in that case $Q$ is a positive constant and $\\dim S=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P6, lemma-dimension-graded, part (3), in cumulative form. Its degree-piece Hilbert polynomial P has dim S=deg(P)+1, with deg(0)=-1; the cumulative polynomial Q has degree deg(P)+1 when P is nonzero, and degree zero when P is zero."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-standard-graded-algebra",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak m=S_+$ and $R=S_{\\mathfrak m}$. By [lem-sfb-standard-graded-vertex-dimension], $\\mathfrak m$ is maximal and $\\dim S=\\dim R$. The constant-component map identifies $S/\\mathfrak m=k$; its localization identifies the residue field of $R$ with $k$ and its maximal ideal with $\\mathfrak n=\\mathfrak mR$ [def-weil-pbc-localization-at-prime]. In particular $R\\ne0$.",
+   "uses": [
+    "lem-sfb-standard-graded-vertex-dimension",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, lemma-dimension-graded, proof: localization at the irrelevant ideal and equality of Hilbert functions; Tag 00KQ, proposition-dimension."
+   }
+  },
+  {
+   "text": "A field is Noetherian because its only ideals are $(0)$ and $(1)$. The finite algebra generators of $S$ give a presentation as a quotient of a polynomial ring in finitely many variables. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $S$ Noetherian; [lem-weil-pbc-localization-noetherian] makes $R$ Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, lemma-dimension-graded, proof: localization at the irrelevant ideal and equality of Hilbert functions; Tag 00KQ, proposition-dimension."
+   }
+  },
+  {
+   "text": "By [def-pc-standard-graded-algebra], homogeneous degree-$d$ elements are $k$-linear combinations of length-$d$ monomials in degree-one generators: decompose a polynomial expression by total degree. Consequently $\\mathfrak m^j=\\bigoplus_{d\\ge j}S_d$ for all $j\\ge0$: one inclusion follows from degrees, and every monomial of degree at least $j$ has $j$ degree-one factors. Hence $\\mathfrak m^j/\\mathfrak m^{j+1}=S_j$.",
+   "uses": [
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, lemma-dimension-graded, proof: localization at the irrelevant ideal and equality of Hilbert functions; Tag 00KQ, proposition-dimension."
+   }
+  },
+  {
+   "text": "The map $S_j\\to\\mathfrak n^j/\\mathfrak n^{j+1}$ sending $a$ to $a/1$ is a $k$-linear isomorphism. Indeed, write a fraction in $\\mathfrak n^j$ as $b/u$ with $b\\in\\mathfrak m^j$ and $u\\notin\\mathfrak m$. Its class equals $b_j/u_0$, since $u_0\\in k^\\times$, $u-u_0\\in\\mathfrak m$, and $b-b_j\\in\\mathfrak m^{j+1}$. If $a/1\\in\\mathfrak n^{j+1}$, clearing a denominator gives $va\\in\\mathfrak m^{j+1}$ for some $v\\notin\\mathfrak m$; its degree-$j$ component is $v_0a=0$, so $a=0$. This works also for $j=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, lemma-dimension-graded, proof: localization at the irrelevant ideal and equality of Hilbert functions; Tag 00KQ, proposition-dimension."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-maximal-adic-graded-length-bridge] to the nonzero Noetherian local ring $R$. The preceding isomorphisms give, for every $n\\ge1$, $$\\operatorname{length}_R(R/\\mathfrak n^n)=\\sum_{j=0}^{n-1}\\dim_k S_j.$$ By [lem-trf-hilbert-samuel-growth-dimension] the left side eventually equals a nonzero rational polynomial $Q_R$ of degree $\\dim R$ with positive leading coefficient.",
+   "uses": [
+    "lem-trf-maximal-adic-graded-length-bridge",
+    "lem-trf-hilbert-samuel-growth-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, lemma-dimension-graded, proof: localization at the irrelevant ideal and equality of Hilbert functions; Tag 00KQ, proposition-dimension."
+   }
+  },
+  {
+   "text": "For every sufficiently large integer $n$, the hypothesis now gives $Q(n)=Q_R(n)$. The rational numbers represented by these integers form an infinite set, so [lem-trf-polynomial-infinite-evaluation-identity] gives $Q=Q_R$. Therefore $\\dim S=\\dim R=\\deg Q$ is finite. If $S_j=0$ for $j\\ge D$, the cumulative sum is eventually the constant $c=\\sum_{j<D}\\dim_k S_j\\ge\\dim_k S_0=1$; applying the same polynomial identity lemma to $Q$ and $c$ gives $Q=c$ and $\\dim S=0$.",
+   "uses": [
+    "lem-trf-polynomial-infinite-evaluation-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, lemma-dimension-graded, proof: localization at the irrelevant ideal and equality of Hilbert functions; Tag 00KQ, proposition-dimension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sfb-standard-graded-vertex-dimension",
+  "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-trf-polynomial-infinite-evaluation-identity",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P6, lemma-dimension-graded, proof, using Tag 00KQ (proposition-dimension); explicit degree-component verification of the localization comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Krull dimension of a standard graded algebra over a field equals the degree of its cumulative Hilbert polynomial",
+   "results": "8 hits: MvPolynomial.ringKrullDim_of_isNoetherianRing (Mathlib/RingTheory/KrullDimension/Polynomial); ringKrullDim_succ_le_ringKrullDim_polynomial; Polynomial.ringKrullDim_le; Module.supportDim_self_eq_ringKrullDim; ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial; Ring.KrullDimLE; ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial; ringKrullDim. These describe polynomial-ring dimensions, support dimension, or the dimension definition, not the Hilbert growth of arbitrary standard graded quotients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Hilbert\"",
+   "results": "[loogle] OK 0 hit(s).",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hilbert.*(dimension|krull)|krull.*hilbert|dimension.*hilbert",
+   "results": "[grep] OK 0 hit(s), searching Mathlib/RingTheory/.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If S is a graded algebra over a field generated by finitely many elements of degree one and S zero is the field, the degree of the eventual polynomial sum of dimensions of S i is the Krull dimension of S",
+   "results": "8 hits: ringKrullDim (Mathlib.RingTheory.KrullDimension.Basic); Polynomial.ringKrullDim_of_isNoetherianRing; MvPolynomial.ringKrullDim_of_isNoetherianRing; ringKrullDim_eq_zero_of_isField; ringKrullDim_eq_zero_of_field; ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial; ringKrullDim_le_ringKrullDim_add_card; ringKrullDim_succ_le_ringKrullDim_polynomial. None relates the cumulative Hilbert polynomial of a standard graded algebra to its dimension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hilbert.*(dimension|krull)|krull.*hilbert|dimension.*hilbert",
+   "results": "0 hits: none. No result connects the cumulative Hilbert polynomial of an arbitrary standard graded algebra with its Krull dimension. Polynomial-ring dimension formulas do not suffice for arbitrary quotients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of the polynomial eventually equal to the sum of dimensions of the graded pieces of a standard graded algebra is its Krull dimension",
+   "results": "8 hits: ringKrullDim, Ideal.sup_height_eq_ringKrullDim, Polynomial.ringKrullDim_of_isNoetherianRing, Ring.KrullDimLE, Order.height_le_krullDim, Polynomial.ringKrullDim_le, Order.KrullDimLE, Order.krullDim_eq_iSup_length. No result connects the cumulative Hilbert polynomial of an arbitrary standard graded algebra with its Krull dimension. Polynomial-ring dimension formulas do not suffice for arbitrary quotients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Hilbert\"",
+   "results": "0 hits: none. No result connects the cumulative Hilbert polynomial of an arbitrary standard graded algebra with its Krull dimension. Polynomial-ring dimension formulas do not suffice for arbitrary quotients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension equals degree of cumulative Hilbert polynomial of a finitely generated algebra generated in degree one",
+   "results": "8 hits: Polynomial.ringKrullDim_le, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_succ_le_ringKrullDim_polynomial, ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial, Polynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_le_ringKrullDim_add_card. No result connects the cumulative Hilbert polynomial of an arbitrary standard graded algebra with its Krull dimension. Polynomial-ring dimension formulas do not suffice for arbitrary quotients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-point-tangent-cone-dimension",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne I.3.6, printed p.18, tangent-cone dimension argument: the standard-graded Hilbert dimension input behind dim C_P(Z)=dim O_{Z,P}. Historical direct-images proof (3), alteration/Picard auxiliary branch recorded in the ancestor item.",
+   "via": [
+    "lem-sfb-point-tangent-cone-dimension",
+    "lem-sfb-smooth-pointed-curves-dense",
+    "lem-sfb-abelian-product-axis-rigidity",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-standard-graded-cumulative-dimension",
+  "worker": "stage1",
+  "summary": "Followed the actual local Hilbert-function proof of Stacks 00P6. One new statement-only vertex-dimension lemma; existing Hilbert–Samuel dimension and graded-length bridge reused. Wrote the degreewise localization comparison and eventual polynomial identity, retaining dimension zero and arbitrary fields. No Lean attachment or statement change.",
+  "blueprint": "The historical direct-image auxiliary branch in blueprint.from.place, via the point-tangent-cone dimension item: steps 1–4 give its standard-graded vertex and local Hilbert comparison; steps 5–6 establish the cumulative dimension equality, including zero-dimensional cones. The ancestor command returns None (historical imported ancestor removed), so its null root and exact existing via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-maximal-adic-graded-length-bridge",
+    "why": "Generic local-algebra length identity, independent of the trace-formula application; no statement in this unit gives this identity."
+   },
+   {
+    "node": "lem-trf-hilbert-samuel-growth-dimension",
+    "why": "Generic Hilbert–Samuel dimension theorem is precisely the local theorem invoked in Stacks 00P6; this unit has no other node stating it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-trf-hilbert-samuel-growth-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-fb1d11b07",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-fb1d11b07 (reviewer sub-agent of L); spot-checked: PASS: I read Stacks 00P6 (lemma-dimension-graded), both the statement and the proof. The item's cumulative form equals part (3): deg Q = deg P + 1 when P is nonzero, and Q is a positive constant when P = 0. I tested it on k, k[t], k[x,y], k[t]/(t^r) and k[x,y]/(xy). Step 1 uses the new vertex node and the localization definition: R is local with residue field k. Step 2 is correct: finite type over a field gives Noetherian, and so does localization. Step 3 is correct: m^j is the sum of the S_d with d>=j, including j=0. I re-derived step 4: surjectivity from b/u - b_j/u_0 lying in n^{j+1}, injectivity from the degree-j part v_0 a. Step 5 applies the length bridge and the Hilbert-Samuel node, and their statements say what the step takes from them. Step 6 uses the Mathlib polynomial identity over Q and never takes the degree of 0. The new node lem-sfb-standard-graded-vertex-dimension (dim S_m = dim S) is true. Its argument is the first equality of the 00P6 proof: minimal primes are homogeneous and lie in S_+ (00JU), then 00OT. I tested it on k[x,y,z]/(xz,yz). The node is statement-only, self-contained and strictly smaller than the item. Duplicate search: I grepped for 00P6, 00JU, 00OT, 00KQ, irrelevant+dim and standard graded+dim, and read dimension-at-point-components, closed-point-dimension-local-ring, trf-standard-graded-hilbert-function, homogeneous-quotient-cumulative-growth and others; none states this. Batch-5 flags: I computed the dependency closure of each cited node. Hilbert-Samuel growth (33 nodes), length bridge (12 nodes) and the Mathlib polynomial-identity leaf are generic commutative algebra (00K8/00KQ), not trace-formula or Poincare steps, so I accept them; the parent tangent-cone node already cites the first two. I also accept the split_report.tool_uses for the two sk-i-curve-zero nodes, for the maintainer to record: they are the source's own 00KQ route, and this unit has no node stating them. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StandardGradedCumulativeDimension",
+  "declaration": "GradedAlgebra.IsStandard.ringKrullDim_eq_natDegree_cumulative",
+  "file": "lean/Sheaf/RingTheory/StandardGradedCumulativeDimension.lean",
+  "statement": "theorem ringKrullDim_eq_natDegree_cumulative {k : Type u} {S : Type v} [Field k] [CommRing S] [Nontrivial S] [Algebra k S] (𝒜 : ℕ → Submodule k S) [GradedAlgebra 𝒜] [IsStandard 𝒜] (Q : Polynomial ℚ) (hQ : Q ≠ 0) (N : ℕ) (hN : 1 ≤ N) (hpoly : ∀ n : ℕ, N ≤ n → Q.eval (n : ℚ) = ∑ j ∈ Finset.range n, (Module.finrank k (𝒜 j) : ℚ)) : ringKrullDim S = (Q.natDegree : WithBot ℕ∞) ∧ ((∃ D : ℕ, ∀ j : ℕ, D ≤ j → 𝒜 j = ⊥) → ∃ c : ℚ, 0 < c ∧ Q = Polynomial.C c ∧ ringKrullDim S = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f770adad",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Read node, Stacks 00P6(3), IsStandard (side-live Standard.lean:86: fg_one, adjoin_one; grade_zero_eq_one, finite_grade), delivered module and report. Node diff vs side-live: only lean field added; lean.statement verbatim in file. Clauses match: Field k, CommRing/Algebra S with independent universes u v, GradedAlgebra 𝒜 + IsStandard, Nontrivial S renders S0=k (excludes zero ring, implied by node), finrank justified by finite_grade, Q≠0, 1≤N, ∀n≥N Q(n)=Σ_{j<n} finrank in ℚ, conclusion ringKrullDim S = natDegree Q (finite) ∧ (eventually zero pieces → ∃ c>0, Q=C c ∧ dim 0). Edge cases k, k[t], k[x,y], k[t]/t^r, k[x,y]/(xy), char p fine; consistent with exists_hilbertSamuel_polynomial conventions. No defs, sorry-only proof, source/blueprint docstrings and six-step proof plan present, no pro-etale content, no duplicate in Mathlib/Sheaf/WeilConjectures. Report has Worker report and Second reading by Q04 (author self-reading, noted). No compile needed (no file changed)."
+ }
+}

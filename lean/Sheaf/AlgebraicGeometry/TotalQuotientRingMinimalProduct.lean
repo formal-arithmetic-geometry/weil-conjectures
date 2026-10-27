@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
-import Sheaf.RingTheory.WeakAssZeroDivisors
+import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-! # Total quotient ring as a product over minimal primes
 
@@ -63,6 +63,79 @@ theorem totalQuotientRing_isProduct_minimalPrimes
         p ∈ minimalPrimes A) :
     Nonempty (Localization (nonZeroDivisors A) ≃ₐ[A]
       (∀ i : Fin t, Localization.AtPrime (q i).val.asIdeal)) := by
-  sorry
+  classical
+  let S := nonZeroDivisors A
+  let Q := Localization S
+  let s : Finset (Ideal A) := Finset.univ.image (fun i : Fin t ↦ (q i).val.asIdeal)
+  have hs (p : Ideal A) : p ∈ s ↔ p ∈ minimalPrimes A := by
+    constructor
+    · intro hp
+      obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp hp
+      exact (q i).property
+    · intro hp
+      obtain ⟨i, hi⟩ := q.surjective ⟨⟨p, hp.isPrime⟩, hp⟩
+      exact Finset.mem_image.mpr ⟨i, Finset.mem_univ _,
+        congrArg (fun r ↦ r.val.asIdeal) hi⟩
+  -- A zero-divisor lies in a prime minimal over a nonzero element's annihilator.
+  have hminimal (p : Ideal A) [p.IsPrime]
+      (hd : Disjoint (S : Set A) (p : Set A)) : p ∈ minimalPrimes A := by
+    have hsub : (p : Set A) ⊆ ⋃ r ∈ (↑s : Set (Ideal A)), (r : Set A) := by
+      intro x hx
+      have hn : x ∉ nonZeroDivisors A := fun h ↦ Set.disjoint_left.mp hd h hx
+      obtain ⟨y, hxy, hy⟩ := notMem_nonZeroDivisors_iff_left.mp hn
+      have hproper : (⊥ : Submodule A A).colon {y} ≠ ⊤ := by
+        intro htop
+        have hmem : (1 : A) ∈ (⊥ : Submodule A A).colon {y} := by rw [htop]; trivial
+        have hz : y = 0 := by simpa [Submodule.mem_colon_singleton] using hmem
+        exact hy hz
+      obtain ⟨⟨r, hr⟩⟩ := Ideal.nonempty_minimalPrimes hproper
+      have hxann : x ∈ (⊥ : Submodule A A).colon {y} := by
+        simpa [Submodule.mem_colon_singleton, mul_comm] using hxy
+      exact Set.mem_iUnion₂.mpr ⟨r, (hs r).mpr (hweak y r hr), hr.le hxann⟩
+    obtain ⟨r, hr, hpr⟩ :=
+      (Ideal.subset_union_prime (s := s) (f := fun r ↦ r) (I := p) ⊥ ⊥
+        (fun r hr _ _ ↦ ((hs r).mp hr).isPrime)).mp hsub
+    have hm := (hs r).mp hr
+    have heq : p = r := hpr.antisymm (hm.2 ⟨inferInstance, bot_le⟩ hpr)
+    exact heq ▸ hm
+  -- Prime avoidance makes the localization spectrum exactly the minimal primes.
+  let E : PrimeSpectrum Q ≃
+      {p : PrimeSpectrum A // p.asIdeal ∈ minimalPrimes A} :=
+    (IsLocalization.primeSpectrumOrderIso S Q).toEquiv.trans
+      { toFun := fun p ↦ ⟨p.val, hminimal _ p.property⟩
+        invFun := fun p ↦
+          ⟨p.val, (Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes p.property).symm⟩
+        left_inv := fun _ ↦ rfl
+        right_inv := fun _ ↦ rfl }
+  let e : Fin t ≃ PrimeSpectrum Q := q.trans E.symm
+  have hcomap (i : Fin t) :
+      (e i).asIdeal.comap (algebraMap A Q) = (q i).val.asIdeal := by
+    exact congrArg (fun p ↦ p.val.asIdeal) (E.apply_symm_apply (q i))
+  have hfinite : Finite (PrimeSpectrum Q) := Finite.of_equiv (Fin t) e
+  -- Inclusions between these contracted minimal primes must be equalities.
+  have hdim : Ring.KrullDimLE 0 Q := by
+    apply Ring.KrullDimLE.mk₀
+    intro p hp
+    obtain ⟨m, hm, hpm⟩ := p.exists_le_maximal hp.ne_top
+    have hpmin := (E ⟨p, hp⟩).property
+    have hmmin := (E ⟨m, hm.isPrime⟩).property
+    have hle := Ideal.comap_mono (f := algebraMap A Q) hpm
+    have heq : p = m := (IsLocalization.orderEmbedding S Q).injective
+      (hle.antisymm (hmmin.2 ⟨hpmin.isPrime, bot_le⟩ hle))
+    exact heq ▸ hm
+  let : DiscreteTopology (PrimeSpectrum Q) :=
+    PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero.mpr ⟨hfinite, hdim⟩
+  -- Identify the factors before reindexing the canonical product equivalence.
+  have hloc (i : Fin t) :
+      IsLocalization.AtPrime (Localization.AtPrime (e i).asIdeal) (q i).val.asIdeal := by
+    simpa only [hcomap i] using
+      (IsLocalization.prime_localRing_residueField_iso A Q S (e i).asIdeal).2.2.2.2.2.1
+  let F (i : Fin t) : Localization.AtPrime (e i).asIdeal ≃ₐ[A]
+      Localization.AtPrime (q i).val.asIdeal := by
+    let := hloc i
+    exact IsLocalization.algEquiv (q i).val.asIdeal.primeCompl _ _
+  exact ⟨((PrimeSpectrum.toPiLocalizationEquiv Q).restrictScalars A).trans
+    (((AlgEquiv.piCongrLeft A (fun p : PrimeSpectrum Q ↦ Localization.AtPrime p.asIdeal)
+      e).symm).trans (AlgEquiv.piCongrRight F))⟩
 
 end Algebra

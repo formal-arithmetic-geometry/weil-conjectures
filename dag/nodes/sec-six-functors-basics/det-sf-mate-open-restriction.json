@@ -64,20 +64,19 @@
    }
   },
   {
-   "text": "The target-open theorem remains sorry. Its retained plan is to use Brown adjoints on the base-changed compactification and the rational/nonrational lower-shriek compositors, identify u* f! with f_V! v*, and check the displayed normalization by the ordinary open proper restriction mate, the open extension compositor and the inverse open unit. The precise target mate normalization and its invertibility still require proof.",
+   "text": "Finite type over k makes X and Y Noetherian and the opens quasi-compact. Use the normalized open adjunctions from clause (1), and Brown representability on the actual base-changed compactification (exists_localizingExceptionalAdjoint) to obtain its lower-shriek preservation and a right adjoint. Apply mateOpenCompactSupportExchange to obtain the normalized isomorphism between the two composite left adjoints. Lift it to the full localizing subcategories and conjugate under the composite adjunctions. The conjugation Hom formula and its open-unit normalization give the exact stated target-mate equation. Invertibility of the specified target lower-shriek mate allows cancellation; injectivity of the right-adjoint Hom equivalence then proves uniqueness.",
    "uses": [
-    "det-sf-existence-brown",
-    "sk-lem-brown-hypotheses",
-    "lem-sfb-localizing-lower-shriek-composition",
-    "lem-sfb-nonrational-localizing-lower-shriek-composition",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-sfb-finite-type-composition-base-change",
-    "sk-def-sfb-module-derived-pushpull"
+    "sk-prop-sf-existence",
+    "lem-sfb-mate-open-compact-support-exchange",
+    "def-sfb-mate-open-restriction-maps",
+    "def-sf-comp-refinement-data",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-    "place": "Proof (2), both comparison chains."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+    "place": "Proof (2), target-open comparison by transposing the normalized proper/open compact-support comparison"
    }
   },
   {
@@ -94,12 +93,10 @@
   }
  ],
  "proof_deps": [
+  "def-sf-comp-refinement-data",
+  "def-sfb-mate-open-restriction-maps",
   "det-proper-image-localizing-open",
-  "det-sf-existence-brown",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-sfb-localizing-lower-shriek-composition",
-  "lem-sfb-nonrational-localizing-lower-shriek-composition",
+  "lem-sfb-mate-open-compact-support-exchange",
   "lem-sfb-open-pullback-generators",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-qc-open-immersion-finite-type",
@@ -109,13 +106,13 @@
   "sk-def-sfb-module-derived-lower-shriek",
   "sk-def-sfb-module-derived-pushpull",
   "sk-def-sfb-module-lower-shriek",
-  "sk-lem-brown-hypotheses"
+  "sk-prop-sf-existence"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "D7",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
-  "place": "Three original holes proved from exact adjunctions, full-subcategory restriction, the source compositor and cover conservativity; generator preservation is proved in the new helper; the original target-open hole remains."
+  "group": "F3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+  "place": "Retain the three D7 proofs; finish target-open restriction by normalized proper/open compact-support exchange and conjugation of adjunctions."
  },
  "mathlib_searches": [
   {
@@ -351,13 +348,8 @@
  },
  "tool_uses": [
   "det-proper-image-localizing-open",
-  "lem-sfb-localizing-lower-shriek-composition",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "sk-lem-brown-hypotheses",
-  "lem-pod-separated-finite-type-base-change",
   "det-sf-existence-brown",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-sfb-nonrational-localizing-lower-shriek-composition",
   "lem-weil-pbc-qc-open-immersion-finite-type",
   "sk-def-localizing-closure",
   "sk-def-nagata-sketch-data",
@@ -373,19 +365,22 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-4f495f783 (reviewer sub-agent of L); spot-checked: I read the item statement and all 12 proof steps in full. I checked them against the main-20261015 det-sf-mate-open-restriction statement and proof (1)-(3), the unit proof sk-lem-sf-mate (1)-(4), Stacks 09T5/015F/05PU in the .tex files, and the statements of all 34 cited nodes plus sk-def-sfb-module-derived-pushpull. The statement is unchanged and not weakened: all six coefficients, the ordinary unbounded Loc(Dctf) in D(Mod_{Lambda_T}) and all three clauses are kept. The standing setting is required by the domain of det-sf-existence-brown. The delivery adds no new nodes. proof_deps equals the union of the step uses. There is no cycle and no SGA citation. Checks done by hand: the identity-index ind/pro data meet def-pc-essentially-constant-ind/pro-diagram (naturality uses 2-of-3 for t), and lem-pc-derived-adjoint-functors gives D(j_!)⊣D(j^*). The Brown clause (3) is applied with the trivial compactification. The composition step covers A, Z_l and O_E through lem-sfb-nonrational-localizing-lower-shriek-composition, and E, Qlbar and Q_l through lem-sfb-localizing-lower-shriek-composition. The geometric hypotheses in step 6 hold. In step 10 the fpqc refinement is finite only over each affine W, which is correct, and the pullback-as-restriction input def-sfb-finite-extension-by-zero-adjunction remains cited. Edge cases hold: empty and identity opens and covers, the zero ring, E=Q_l, and unbounded complexes. Two faults repaired in fixes/: (1) C4/C1 in step 4. It identified R(id_X)_* with the identity by the 09T5 existence argument of step 1 and cited neither sk-def-sfb-module-derived-pushpull nor lem-weil-pbc-exact-functor-derived-functor. Step 4 now cites both and writes out the argument: the underived functor is the identity, D(id) is a right derived functor of it, and Kan extensions are unique. proof_deps is updated. (2) The tool_uses reason given for lem-sfb-localizing-lower-shriek-composition was stale (it spoke of a gap 'stated in this delivery'); it is corrected, and the pushpull definition entry is added. All declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.MateOpenRestriction",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenImmersion",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenPullback",
-   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenExtension",
-   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenExtensionComp",
-   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenSourceLowerShriek",
-   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenProperRestriction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenSquareExtension",
-   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenTargetLowerShriek",
-   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenTrivialLowerShriek",
    "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenImmersion",
    "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenSourceRestriction",
    "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenTargetRestriction",
@@ -397,7 +392,7 @@
   "by": "NA",
   "date": "2026-10-18",
   "existing": false,
-  "note": "All three clauses are stated by mateOpenImmersion, mateOpenSourceRestriction, mateOpenTargetRestriction and mateOpenCover_isIso. The eight helper definitions construct the actual restricted functors and canonical mates. Open comparison is normalized by the trivial-compactification derived identity and counits; source and target comparisons are uniquely specified by the existing adjunctions and actual open/compactification maps. Brown adjoints range over all choices supplied by the recorded dependency, on precisely its full localizing categories. No additional geometric assumption or ambient exceptional functor is introduced."
+  "note": "The four original theorem signatures remain unchanged. The eight original canonical definitions are publicly reexported from Sheaf.Paper.MateOpenRestrictionMaps, attached to def-sfb-mate-open-restriction-maps. Their names, signatures and defining terms are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -408,13 +403,13 @@
   "note": "All three clauses match the node with only the standing hypotheses. Clause 1: the restricted adjunction j_! ⊣ j^* has its Hom bijection equal to the existing ambient open adjunction; for every Brown right adjoint at the trivial compactification (j,id) there is a unique counit-compatible iso to j^* through the canonical R(id)_* ≅ id. Clause 2 target side: an arbitrary Cartesian open square with upstream c.ofIsPullback sq; existence of the Brown adjoint J is a conclusion; the pinning equation was checked by hand to hold for the base-change mate, and since the comparison map is invertible it fixes e uniquely. Clause 2 source side: c.precomp j, normalized by the leftAdjointUniq open-extension compositor, with unique counit-compatible comparison. Clause 3: arbitrary covers I : Type w with iSup U = ⊤, including empty and infinite ones; the displayed locality formulas are instances of the clause-2 theorems. Every Compactification is allowed, which is a correct generalization. Only the item's lean field changed, and the statement is verbatim. det-sf-existence-brown is a genuine stmt_dep (localizingLowerShriek is owned by the landed def node def-sf-localizing-lower-shriek, which H2 does not let the item add). The 8 helper defs have real canonical data and are not duplicates; the 4 theorems are sorry-only. Docstrings, line widths and imports conform; non-public imports are proof dependencies. nt_compile --json: 7.9 s, rc 0, clean. Edge cases checked: empty opens and empty cover, identity opens, zero ring, unbounded objects, universes u/u+1/w."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D7",
-  "result": "pass",
-  "landing": "20261019T002526-L-2147973",
+  "reviewer": "C-54569",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261025T050731-L-3836593",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 8 moved defs diffed vs clone (identical but blueprint tag); mateOpenTargetRestriction signature diffed (identical); new nodes' lean.statement vs Lean signatures; proof_deps vs Lean declarations used; 9 direct importers + delivery compiled in sandbox (all OK); axioms probe"
  }
 }

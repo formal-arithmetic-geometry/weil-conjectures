@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-single-tensor-augmentation-coherence",
+ "kind": "statement",
+ "title": "Canonical derived-to-ordinary tensor comparison of module sheaves",
+ "statement": "Let $X$ be any scheme [def-pc-scheme] and use all $\\mathcal O_X$-module sheaves [def-weil-sheaf-of-modules-category], their symmetric monoidal tensor [lem-pc-sheaf-modules-tensor-closed], and the K-flat derived tensor on $D(\\mathcal O_X)$ [def-pc-scheme-derived-tensor-structure]. Write $sF=F[0]$ for the degree-zero embedding. There is a canonical natural morphism\n$$m_{F,G}:sF\\otimes^{\\mathbf L}sG\\longrightarrow s(F\\otimes G).$$\nIts normalization is the augmentation of flat resolutions: for any nonpositive termwise-flat K-flat resolutions $P\\to F[0]$ and $Q\\to G[0]$, the representative of $m_{F,G}$ on $\\operatorname{Tot}(P\\otimes Q)$ is the tensor of the two augmentations followed by the unsigned identification $\\operatorname{Tot}(F[0]\\otimes G[0])=(F\\otimes G)[0]$. The degree-zero unit comparison is the identity $\\mathbf1_{D(\\mathcal O_X)}=s\\mathcal O_X$. These specified maps, rather than arbitrary maps with these endpoints, make $s$ a lax symmetric monoidal functor. Explicitly, with $\\alpha^D,\\sigma^D,\\lambda^D,\\rho^D$ the derived constraints and $\\alpha,\\tau,\\lambda,\\rho$ the ordinary constraints,\n$$s(\\alpha)\\circ m_{F\\otimes G,L}\\circ(m_{F,G}\\otimes^{\\mathbf L}1)=m_{F,G\\otimes L}\\circ(1\\otimes^{\\mathbf L}m_{G,L})\\circ\\alpha^D,$$\n$$s(\\tau)\\circ m_{F,G}=m_{G,F}\\circ\\sigma^D,$$\n$$s(\\lambda_F)\\circ m_{\\mathcal O_X,F}=\\lambda^D_{sF},\\qquad s(\\rho_F)\\circ m_{F,\\mathcal O_X}=\\rho^D_{sF}.$$\nNo flatness of $F,G,L$, quasi-coherence, or finiteness hypothesis is imposed; $m_{F,G}$ is a morphism and is not asserted to be invertible.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06YH (definition-derived-tor and its flat-resolution construction); Tag 0FPB (lemma-symmetric-monoidal-derived). Agent-formulated canonical augmentation refinement of these constructions; no claim that the displayed lax-single diagrams are verbatim in the tags."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Work on the small Zariski site of $X$, in a universe containing its opens and module sheaves. Abelian sheafification exists and is exact by [lem-weil-pbc-sheafification-exact], and a map of abelian presheaves becomes invertible after sheafification exactly when it is locally injective and locally surjective by [lem-weil-pbc-site-sheafification-iso-locally-bijective]. So the additive sheafification hypotheses of [lem-sf-ringed-derived-native-tensor] and of [lem-sf-ringed-tensor-complex-constraints] hold. Apply that result to $R=\\mathcal O_X$. Write $Q$ for localization of complexes and $\\mu_{A,B}:QA\\otimes^{\\mathbf L}QB\\to Q(A\\otimes B)$ for its canonical lax tensorator. This is natural, obeys the lax associativity and unit laws, and preserves the Koszul braiding. When either factor is K-flat, $\\mu$ is the inverse of the normalized total-tensor comparison. The fixed structure of [def-pc-scheme-derived-tensor-structure] is this K-flat construction, with unit $Q(\\mathcal O_X[0])$. Use its normalized unit identification throughout: the localization unit comparison is the identity under that identification, rather than an additional scalar automorphism.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YH (definition-derived-tor), 0FP8 (lemma-symmetric-monoidal-cat-complexes), 0FPB (lemma-symmetric-monoidal-derived); explicit agent expansion of the augmentation coherence"
+   }
+  },
+  {
+   "text": "Let $tF=F[0]$ in complexes, and $s=Qt$. The direct-sum formula of [def-pc-tensor-complex-sheaves] gives a natural unsigned isomorphism $e_{F,G}:tF\\otimes tG\\xrightarrow{\\sim}t(F\\otimes G)$: only the $(0,0)$ summand is nonzero and all differentials vanish. These isomorphisms carry the native complex associator, braiding and unitors (those of [lem-sf-ringed-derived-native-tensor]) to the ordinary constraints of [lem-pc-sheaf-modules-tensor-closed]. Indeed [lem-sf-ringed-tensor-complex-constraints] gives the native complex constraints on pure generators: the associator sends $(x\\otimes y)\\otimes z$ to $x\\otimes(y\\otimes z)$, the braiding is $(-1)^{pq}$ times the swap on the $(p,q)$ summand, and the unitors send $a\\otimes x$ and $x\\otimes a$ to $ax$. The only nonzero triple summand is $(0,0,0)$, where the first formula is the ordinary associator; the braiding sign is $(-1)^{0\\cdot0}=1$; the unit formulas on the only nonzero summand are the ordinary unitors. Pure generators detect maps out of these sheafified summands, so the equations hold as maps. Thus these checks are just identities on the indicated summands, with no resolution or flatness assertion.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sf-ringed-tensor-complex-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YH (definition-derived-tor), 0FP8 (lemma-symmetric-monoidal-cat-complexes), 0FPB (lemma-symmetric-monoidal-derived); explicit agent expansion of the augmentation coherence"
+   }
+  },
+  {
+   "text": "Define $m_{F,G}=Q(e_{F,G})\\circ\\mu_{tF,tG}$. Naturality of $e$ and of the tensorator makes $m$ natural in both sheaves. For any resolutions $a:P\\to tF$ and $b:T\\to tG$ as in the statement, naturality gives\n$$m_{F,G}\\circ(Qa\\otimes^{\\mathbf L}Qb)=Q\\bigl(e_{F,G}\\circ(a\\otimes b)\\bigr)\\circ\\mu_{P,T}.$$\nHere $Qa,Qb$ are isomorphisms by localization, and $\\mu_{P,T}$ is an isomorphism by [lem-sf-ringed-derived-native-tensor]. Hence this equation is precisely the required representative on $\\operatorname{Tot}(P\\otimes T)$, under the normalized K-flat model comparison. It holds for every such pair, so also proves independence of the chosen pair. Neither $a\\otimes b$ nor $m$ is claimed to be an isomorphism; nonflat $F,G$ are allowed.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YH (definition-derived-tor), 0FP8 (lemma-symmetric-monoidal-cat-complexes), 0FPB (lemma-symmetric-monoidal-derived); explicit agent expansion of the augmentation coherence"
+   }
+  },
+  {
+   "text": "For associativity, put $A=tF,B=tG,C=tL$. Expand the left side of the required equation using the definition of $m$. Move $Q(e_{F,G})$ through the next tensorator by its naturality. The resulting composite is\n$$Q\\bigl(t(\\alpha)\\circ e_{F\\otimes G,L}\\circ(e_{F,G}\\otimes1)\\bigr)\\circ\\mu_{A\\otimes B,C}\\circ(\\mu_{A,B}\\otimes^{\\mathbf L}1).$$\nUse the lax associativity law of [lem-sf-ringed-derived-native-tensor] to replace the last two tensorators by $\\mu_{A,B\\otimes C}\\circ(1\\otimes^{\\mathbf L}\\mu_{B,C})\\circ\\alpha^D$, together with $Q$ of the complex associator on the other side of the equality. Step 2 identifies the remaining complex composite with $e_{F,G\\otimes L}\\circ(1\\otimes e_{G,L})$ after that associator. Naturality moves $Q(e_{G,L})$ back through $\\mu$. The result is exactly $m_{F,G\\otimes L}\\circ(1\\otimes^{\\mathbf L}m_{G,L})\\circ\\alpha^D$. This uses the lax law on all complexes, and does not assume the intermediate sheaf $F\\otimes G$ is flat.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YH (definition-derived-tor), 0FP8 (lemma-symmetric-monoidal-cat-complexes), 0FPB (lemma-symmetric-monoidal-derived); explicit agent expansion of the augmentation coherence"
+   }
+  },
+  {
+   "text": "For symmetry, step 2 gives $t(\\tau)\\circ e_{F,G}=e_{G,F}\\circ\\sigma^{\\mathrm{complex}}_{tF,tG}$. To use braiding compatibility even when $tF,tG$ are not K-flat, choose termwise-flat K-flat replacements $P\\to tF$, $T\\to tG$ by [lem-pc-kflat-resolution]. On $(P,T)$, compatibility of the normalized comparison with the complex braiding, supplied by [lem-sf-ringed-derived-native-tensor], gives the braided equation for $\\mu_{P,T}$ after inverting that comparison. Naturality of $\\mu$, and of both braidings, identifies the equation for $(tF,tG)$ precomposed with $QP\\otimes^{\\mathbf L}QT\\xrightarrow{\\sim}sF\\otimes^{\\mathbf L}sG$ with this equation. Cancel that isomorphism. Thus\n$$s(\\tau)\\circ m_{F,G}=Q(e_{G,F})\\circ Q(\\sigma^{\\mathrm{complex}})\\circ\\mu_{tF,tG}=m_{G,F}\\circ\\sigma^D.$$\nFor the left unit, let $I=t\\mathcal O_X$. Step 2 identifies $t(\\lambda_F)\\circ e_{\\mathcal O_X,F}$ with the complex left unitor. The lax left-unit law therefore identifies $s(\\lambda_F)\\circ m_{\\mathcal O_X,F}$ with $\\lambda^D_{sF}$, since its extra unit-comparison factor is the identity in the normalization of step 1 and [def-pc-scheme-derived-tensor-structure]. The same calculation using the complex right unitor and the lax right-unit law gives $s(\\rho_F)\\circ m_{F,\\mathcal O_X}=\\rho^D_{sF}$. These are exactly the asserted symmetric lax monoidal equations for the maps normalized in step 3.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YH (definition-derived-tor), 0FP8 (lemma-symmetric-monoidal-cat-complexes), 0FPB (lemma-symmetric-monoidal-derived); explicit agent expansion of the augmentation coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-sf-ringed-tensor-complex-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YH (definition-derived-tor), 0FP8 (lemma-symmetric-monoidal-cat-complexes), 0FPB (lemma-symmetric-monoidal-derived); explicit agent expansion of the augmentation coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero single complex functor from an abelian monoidal category to its derived category is lax symmetric monoidal with canonical derived tensor to ordinary tensor comparison",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctors, HomologicalComplex.Monoidal.inducingFunctorData, DerivedCategory.singleFunctor, HomologicalComplex.monoidalCategory, HomologicalComplex.monoidalCategoryStruct, CategoryTheory.Tor', CategoryTheory.Tor",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category localization lax monoidal functor tensor comparison associativity braiding and unit single complex",
+   "results": "8 hits: CategoryTheory.Localization.Monoidal.tensor_comp_assoc, CategoryTheory.MonoidalCategory.tensorμ_comp_μ_tensorHom_μ_comp_μ_assoc, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ_assoc, CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal, CategoryTheory.Localization.Monoidal.whiskerLeft_comp_assoc, CategoryTheory.Localization.Monoidal.braidingNatIso_hom_app, CategoryTheory.LocalizedMonoidal, CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"laxMonoidal\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "laxMonoidalQ|singleFunctor.*[Ll]ax|[Ll]ax.*singleFunctor|[Ll]ax.*[Bb]raided",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "laxMonoidalQ|laxBraidedQ|singleFunctor.*[Mm]onoidal",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical morphism from derived tensor of two module sheaves to their ordinary tensor is natural associative symmetric and compatible with tensor unit",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.Monoidal.tensorHom, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.monoidalCategory, PresheafOfModules.Monoidal.tensorObj_map_tmul, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor.*[Ll]ax|[Ll]ax.*singleFunctor|single.*[Bb]raided|[Ll]ax.*[Ss]ymmetric",
+   "results": "2 hits: Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, Tor or ordinary monoidal localization declarations do not give the normalized sheaf derived-to-ordinary comparison and all its diagrams"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"Monoidal\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, Tor or ordinary monoidal localization declarations do not give the normalized sheaf derived-to-ordinary comparison and all its diagrams"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero embedding of module sheaves into their derived category is lax symmetric monoidal and its tensor comparison is tensor of flat resolution augmentations",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Tor', CategoryTheory.Tor, HomologicalComplex.Monoidal.inducingFunctorData, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, Tor or ordinary monoidal localization declarations do not give the normalized sheaf derived-to-ordinary comparison and all its diagrams"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical natural comparison from derived tensor to ordinary tensor of sheaves is associative unital and symmetric",
+   "results": "8 hits: PresheafOfModules.monoidalCategory, CategoryTheory.Sheaf.cartesianMonoidalCategory, CategoryTheory.Sheaf.monoidalCategory, TensorProduct.assoc, TensorProduct.leftComm, TensorProduct.assoc_tensor'', Algebra.TensorProduct.assoc, TensorProduct.tensorTensorTensorAssoc_symm_tmul",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, Tor or ordinary monoidal localization declarations do not give the normalized sheaf derived-to-ordinary comparison and all its diagrams"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of a strong monoidal degree zero single complex functor and a lax braided derived localization functor is lax symmetric monoidal",
+   "results": "8 hits: CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp, CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal, CategoryTheory.Localization.Monoidal.instBraidedLocalizedMonoidalToMonoidalCategory, CategoryTheory.Localization.Monoidal.instBraidedCategoryLocalizedMonoidal, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom, CategoryTheory.Localization.Monoidal.μ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, Tor or ordinary monoidal localization declarations do not give the normalized sheaf derived-to-ordinary comparison and all its diagrams"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Mm]onoidal|[Mm]onoidal.*single|laxMonoidalQ|QObjTensorQObjIsoOfKFlat",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, Tor or ordinary monoidal localization declarations do not give the normalized sheaf derived-to-ordinary comparison and all its diagrams"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-module-cup-associativity-symmetry-unit",
+  "date": "2026-10-23",
+  "group": "Q107"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: The coherent cohomology bialgebra of a proper group. Supporting tensor-coefficient identities used in the external-product calculations: associativity, signed symmetry, and both units before the group-law construction. Auxiliary for the tensor-coefficient identities: coherence of the normalized derived-to-ordinary coefficient augmentation, before taking cohomology.",
+   "via": [
+    "lem-sfb-module-cup-associativity-symmetry-unit",
+    "lem-sfb-coherent-group-bialgebra",
+    "lem-sfb-abelian-structure-h1-dimension",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-single-tensor-augmentation-coherence",
+  "worker": "stage1",
+  "summary": "Q152: retained the statement and all inherited fields. Defined the maps by the canonical lax localization tensorator; proved their arbitrary flat-resolution normalization by naturality, and expanded associativity, symmetry and both unit diagrams. Reused the general native ringed-site localization theorem; no new nodes or Mathlib leaves. Checked small Zariski-site hypotheses, all node statements, and the absence of a dependency cycle.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: The coherent cohomology bialgebra of a proper group. Supporting tensor-coefficient identities used in the external-product calculations: associativity, signed symmetry, and both units before the group-law construction. Auxiliary for the tensor-coefficient identities: coherence of the normalized derived-to-ordinary coefficient augmentation, before taking cohomology.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Generic exactness of abelian sheafification verifies the native ringed-site localization hypotheses on the small Zariski site; this coefficient augmentation item supplies no alternative sheafification construction."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic symmetric K-flat derived localization with canonical lax tensorator and normalized representative comparisons. Used as ambient categorical structure for the coefficient augmentation diagrams; it does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ordinary symmetric tensor on all module sheaves provides the constraints on degree-zero summands. No finite coefficient or quasi-coherent restriction is used."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat replacements on the small Zariski site reduce the braiding equation to the normalized K-flat comparison; the local coefficient augmentation unit provides no separate resolution construction."
+   },
+   {
+    "node": "lem-sf-ringed-tensor-complex-constraints",
+    "why": "Generic pure-generator formulas for the native complex associator, braiding and unitors; step 2 uses them to identify these constraints on the degree-zero summands with the ordinary module constraints (added by the Q152 maintainer reader)."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Generic locally bijective criterion for abelian sheafification on the small Zariski site, a hypothesis of the native ringed-site tensor results (added by the Q152 maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-exact",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-d4cf3c276",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-d4cf3c276 (reviewer sub-agent of L); spot-checked: S1 first split (no re-split note). There are 0 new nodes. The item statement is unchanged from the live tree, where the item is still unsplit, so no parallel group has superseded it. Sources read: Stacks cohomology.tex 06YH (definition-derived-tor, l.6145), 0FP8 (l.12774) and 0FPB (l.13015); no SGA is used. Small cases: m is not invertible for Z/2 with Z/2 (Tor_1 lies in degree -1); F=O_X is consistent with unit comparison = identity; X empty is trivial. Step 3: m = Q(e)∘μ, and naturality gives the K-flat-resolution representative. Step 4: the associativity expansion via the lax law of lem-sf-ringed-derived-native-tensor is correct. Step 5: symmetry follows correctly by K-flat replacement and cancellation; the unit laws use ε = id, pinned by def-pc-scheme-derived-tensor-structure (unit O_X[0], unitors descended from the module ones). FIX (C1/C4): step 2 was marked elementary and attributed the identification of the native complex associator, braiding and unitors on degree-zero summands to def-pc-tensor-complex-sheaves and lem-pc-sheaf-modules-tensor-closed, which do not define these constraints. Step 2 now cites the existing lem-sf-ringed-tensor-complex-constraints with its pure-generator formulas and is elementary=false. Step 1 now also discharges the locally bijective sheafification hypothesis via lem-weil-pbc-site-sheafification-iso-locally-bijective. Both nodes were added to proof_deps and tool_uses. No cycle and no duplicate node was found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingleTensorAugmentationCoherence",
+  "declaration": "AlgebraicGeometry.scheme_single_tensor_augmentation_coherence",
+  "declarations": [
+   "AlgebraicGeometry.SchemeSingleTensorAugmentationCoherence",
+   "AlgebraicGeometry.scheme_single_tensor_augmentation_coherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleTensorAugmentationCoherence.lean",
+  "statement": "theorem scheme_single_tensor_augmentation_coherence (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : SchemeSingleTensorAugmentationCoherence.{u, w} X",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The fully defined proposition bundles the canonical tensorator, its normalized unit, all lax symmetric coherence laws and its formula on every pair of nonpositive termwise-flat K-flat resolutions. Canonical sheaf tensor instances are bound only inside this proposition definition; the theorem signature has no local notation or local-instance dependence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f741f0d91",
+  "group": "O1",
+  "result": "pass",
+  "note": "Item Lean statement matches the node clause by clause: m pinned as mu_Q(tF,tG) then Q(moduleCup_singleTensorIso), unit pinned to eps Q (the native normalized identification; the complex unit is (single 0).obj O_X); associativity, braided and both unitality fields are exactly the displayed equations; resolution clause over all nonpositive termwise-flat K-flat pairs gives the representative mu_Q(P,T) then Q((a tensor b) then e). The derived tensor is schemeDerivedTensorMonoidal (laxMonoidalQ unfolds to the same DerivedMonoidal Qh), the braiding is the Koszul derivedSymmetric, the sheaf tensor/symmetry are the recorded ones. No extra hypotheses, universes u,w independent, edge cases covered (empty scheme, Tor≠0, char 2, non-flat F⊗G). Only the item lean field changed; statement verbatim; docstrings/H8/H9 ok; no existing statement found (H4). Not compiled (no file changed). Advisories: derivedSymmetric and moduleCup_singleTensorIso come from theorem nodes outside stmt_deps; the Sheaf.Paper twin of moduleCup_singleTensorIso is a possible import clash for citers; IsIso(eps Q) is a redundant clause."
+ }
+}

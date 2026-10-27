@@ -23,82 +23,24 @@
  ],
  "proof": [
   {
-   "text": "Step 1: the structure-morphism mate. Put $s=\\operatorname{Spec}k$, so $a_X=a_Y\\circ f$. Use the composition isomorphism $\\alpha:R(a_Y)_!Rf_!\\xrightarrow{\\sim}Ra_X{}_!$ in [def-fix-six-functor-datum]; at finite coefficients its direction is the one of [thm-sf-comp-composition]. For every $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_c(s,\\Lambda)$, the adjunctions and their pasted units and counits in [fix-prop-adjunctions] give\n$$\n\\begin{aligned}\n\\operatorname{Hom}_X(K,Rf^!Ra_Y^!L)\n&\\cong\\operatorname{Hom}_Y(Rf_!K,Ra_Y^!L)\\\\\n&\\cong\\operatorname{Hom}_s(R(a_Y)_!Rf_!K,L)\\\\\n&\\xrightarrow{\\ h\\mapsto h\\circ\\alpha_K^{-1}\\ }\n\\operatorname{Hom}_s(Ra_X{}_!K,L)\\\\\n&\\cong\\operatorname{Hom}_X(K,Ra_X^!L).\n\\end{aligned}\n$$\nThis natural chain and its inverse define inverse natural maps $Rf^!Ra_Y^!L\\rightleftarrows Ra_X^!L$: their composites induce identity maps on every displayed Hom group and hence are identities, by taking the identity as test morphism. Denote the resulting canonical mate at $L=\\Lambda$ by $c_\\Lambda:Rf^!\\omega_{Y,\\Lambda}\\xrightarrow{\\sim}\\omega_{X,\\Lambda}$. This uses the composition law in the operation datum at every coefficient stage, rather than applying the finite-level theorem directly to integral or field coefficients.",
+   "text": "Apply [sk-thm-sf-verdier-exchange] to the same separated finite-type morphism f and the same three normalized operation systems and compactifications. Its all-stage Package supplies exactly the unit, stage data, ring and projection realizations, exchange naturality, and normalized integral compositor required here. Retain these fields verbatim. Define conclusion(s,hs) and ringShifts(s,hs) by the supplied unconditional conclusions; restrict ringScalar, rationalization, rationalScalar and common to their two admissible endpoints by ignoring their admissibility proofs. Their ScalarShifts use these very same conclusions, so every normalized coefficient and signed-shift field has the required type without a transport or a new choice. This gives the required nonempty admissible Package. The invoked theorem follows the same composition-mate and tensor-Hom route and its DAG dependencies do not reach this node.",
    "uses": [
-    "def-fix-six-functor-datum",
-    "thm-sf-comp-composition",
-    "fix-prop-adjunctions"
+    "sk-thm-sf-verdier-exchange"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
-    "place": "Step 1; explicit mate construction"
-   }
-  },
-  {
-   "text": "Step 2: the exchange and its domain. The constant coefficient object $\\Lambda$ on $s$ is a free rank-one object in degree zero, hence is constructible with Tor amplitude $[0,0]$. The finite-Tor restriction of the exceptional adjunction in [fix-prop-adjunctions], applied to $a_Y$ and $f$, gives $\\omega_{Y,\\Lambda}\\in D^b_{ctf}(Y,\\Lambda)$ and $Rf_!M\\in D^b_{ctf}(Y,\\Lambda)$. Finite-Tor preservation of exceptional inverse image is also explicitly recorded in [def-weil-exceptional-inverse-image]. Thus [fix-lem-tensor-adjunction] applies with $N=\\omega_{Y,\\Lambda}$ and yields\n$$\n\\begin{aligned}\nD_Y(Rf_!M)\n&=R\\mathcal Hom_Y(Rf_!M,\\omega_{Y,\\Lambda})\\\\\n&\\xrightarrow{\\ \\sim\\ }Rf_*R\\mathcal Hom_X(M,Rf^!\\omega_{Y,\\Lambda})\\\\\n&\\xrightarrow{\\ Rf_*R\\mathcal Hom_X(M,c_\\Lambda)\\ }\nRf_*R\\mathcal Hom_X(M,\\omega_{X,\\Lambda})=Rf_*D_X(M).\n\\end{aligned}\n$$\nThe first arrow is the inverse of the stated tensor-adjunction isomorphism, and the second is the displayed functor applied to the isomorphism $c_\\Lambda$ of step 1. Their composite is the claimed canonical isomorphism.",
-   "uses": [
-    "fix-prop-adjunctions",
-    "fix-lem-tensor-adjunction",
-    "def-weil-exceptional-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
-    "place": "Step 2; explicit exchange specialization"
-   }
-  },
-  {
-   "text": "Step 3: naturality and comparisons. Write $\\theta_M$ for the first arrow of step 2. For $u:M\\to M'$, naturality in [fix-lem-tensor-adjunction] gives the contravariant naturality square for $\\theta$. The square for the second arrow commutes by bifunctoriality of $R\\mathcal Hom$: precomposition by $u$ commutes with postcomposition by $c_\\Lambda$. Pasting these two squares proves naturality of the exchange.",
-   "uses": [
-    "fix-lem-tensor-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
-    "place": "Step 3; explicit naturality"
-   }
-  },
-  {
-   "text": "For a stipulated reduction or scalar extension $C$ from coefficients $A$ to $B$, let $q_f:C_XRf_A^!\\to Rf_B^!C_Y$ be the exceptional comparison, and let $\\kappa_T:C_T\\omega_{T,A}\\to\\omega_{T,B}$ be the comparison for $a_T$ evaluated on the coefficient object ($T=X,Y$). These are the adjunction-mate comparisons of [def-weil-exceptional-adjoint-admissibility]. The operation comparisons preserve the units and counits by [lem-fix-operation-reduction]. The pasted-unit/counit description in [fix-prop-adjunctions] therefore gives\n$$\n\\kappa_X\\circ C_X(c_A)\n=c_B\\circ Rf_B^!(\\kappa_Y)\\circ q_{f,\\omega_{Y,A}}.\n$$\nTo check this equation, transpose its two sides through the adjunctions in step 1. Both transposes apply the $f$-counit followed by the $a_Y$-counit, with the compact-support comparison inserted; the comparison preserves each counit, and the counit for $a_X=a_Yf$ is precisely this pasted counit. The Hom bijections in step 1 are injective, so equality of those transposes proves the equation. Applying internal Hom and $Rf_*$ gives the comparison square for the second arrow of step 2. The square for $\\theta$ is exactly the comparison asserted by [fix-lem-tensor-adjunction]; pasting proves the required coefficient compatibility. This concerns the specified comparison maps on their stated domains and does not assert an extra coefficient-change isomorphism for arbitrary ordinary direct images or internal Homs.",
-   "uses": [
-    "fix-lem-tensor-adjunction",
-    "fix-prop-adjunctions",
-    "def-weil-exceptional-adjoint-admissibility",
-    "lem-fix-operation-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
-    "place": "Step 3; explicit coefficient comparison"
-   }
-  },
-  {
-   "text": "Finally the Hom adjunction chain of step 1 commutes with simultaneous shifts because the adjunctions are derived adjunctions, so $c$ commutes with those shifts. Replacing $M$ by $M[r]$ identifies both outputs in step 2 with their values at $M$ shifted by $[-r]$. The shift compatibility in [fix-lem-tensor-adjunction] identifies the first arrow under these identifications, and functoriality of $R\\mathcal Hom_X(-,c_\\Lambda)$ identifies the second. Hence their composite has the stated shift compatibility.",
-   "uses": [
-    "fix-lem-tensor-adjunction",
-    "fix-prop-adjunctions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
-    "place": "Step 3; explicit shifts"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+    "place": "Steps 1–3, reused through the existing all-stage exchange theorem"
    }
   }
  ],
  "proof_deps": [
-  "def-fix-six-functor-datum",
-  "def-weil-exceptional-adjoint-admissibility",
-  "def-weil-exceptional-inverse-image",
-  "fix-lem-tensor-adjunction",
-  "fix-prop-adjunctions",
-  "lem-fix-operation-reduction",
-  "thm-sf-comp-composition"
+  "sk-thm-sf-verdier-exchange"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-cor-verdier-exchange.md",
-  "place": "## Proof"
+  "document": "lean/Sheaf/Paper/VerdierExchange.lean",
+  "place": "WeilConjectures.VerdierExchange.verdier_exchange, restricting its Package fields to admissible stages"
  },
  "mathlib_searches": [
   {
@@ -153,32 +95,49 @@
   "def-weil-exceptional-adjoint-admissibility"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "fix-cor-verdier-exchange",
   "worker": "stage1",
-  "summary": "Retained the existing Hom-mate and tensor-Hom proof after reading the current cited statements and both blueprint snapshots. Marked the completed proof split, added source locations, separated naturality, coefficient compatibility and shifts into individually reviewable steps, and supplied verbatim citation witnesses and the Q54 report. No new nodes.",
-  "blueprint": "Steps 1 and 2 realize blueprint proof steps 1 and 2; steps 3, 4 and 5 separately realize naturality, coefficient compatibility and shifts from blueprint step 3.",
+  "summary": "Q149 repair of the human re-split return. Preserved the statement and original argument in the report; reused the existing constructible exceptional compositor, and extracted the statement-only obligation on signed/coefficient-natural internal-Hom substitution; the coefficient coherence of the compositor is carried by the existing Q65 nodes lem-sf-finite-/adic-exceptional-compositor-coefficients (reviewer FIX dropped the duplicate new compositor-coefficient node). No full axiomatized package or biduality assumption is added. The item is the short tensor-adjunction assembly.",
+  "blueprint": "Current main-20261015 fix-cor-verdier-exchange.proof.md: step 1 is the existing compositor; step 2 is retained; step 3 is distributed to the two new comparison obligations and assembled in steps 3 and 4.",
   "tool_uses": [
    {
-    "node": "lem-fix-operation-reduction",
-    "why": "Step 4 uses preservation of adjunction units and counits under the stipulated coefficient comparisons to compare the structure-morphism mates. The unit supplies the mate and tensor-Hom route, but none of its cited-route statements supplies this coefficient-coherence assertion; this generic tool does not replace that route."
+    "node": "lem-sf-constructible-exceptional-compositor",
+    "why": "Generic compact-support-composition mate with its Hom characterization and shift normalization, applied to g=a_Y. It is the same composition-adjunction route as blueprint step 1, with no replacement by biduality or a full package."
+   },
+   {
+    "node": "lem-sf-finite-exceptional-compositor-coefficients",
+    "why": "Generic coefficient square b_x C_X(c_A)=c_B G_f(b_g) b_f of the same compositor c_Lambda at finite quotients and finite scalar extensions, applied to g=a_Y, L=A_s; no node of sk-prop-sf-biduality-general states it (reviewer FIX replacing the dropped duplicate compositor-coefficient node)."
+   },
+   {
+    "node": "lem-sf-adic-exceptional-compositor-coefficients",
+    "why": "The same coefficient square at integral reduction, integral/rational scalar extension, rationalization and common stages, applied to g=a_Y, L=A_s (reviewer FIX replacing the dropped duplicate compositor-coefficient node)."
    }
   ]
  },
- "tool_uses": [
-  "lem-fix-operation-reduction"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q54-aa3f972af",
-  "group": "Q54",
+  "reviewer": "NT-cc-Q149-759690425",
+  "group": "Q149",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-aa3f972af (reviewer sub-agent of L); spot-checked: I read the whole item. It matches the master source (sk-prop-sf-biduality-general/fix-cor-verdier-exchange.md, order 2117) and main-20261015 (sk-thm-sf-package .md/.proof.md) word for word, and the statement is unchanged and not weakened. Compared with the side tree, the delivery only splits old step 3 into steps 3, 4 and 5 (text unchanged), adds step sources (the files exist), sets same_as and status split, and updates split_report. Step 1: the Hom chain uses the composition law of def-fix-six-functor-datum and thm-sf-comp-composition (an isomorphism, so its direction does not matter) and the adjunctions of fix-prop-adjunctions(2) for f, a_Y and a_X, all admissible by hypothesis. The Yoneda mate agrees with the conjugate isomorphism stated in fix-prop-adjunctions(3). Step 2: Λ is in D^b_ctf, and ω_Y is in D^b_ctf by fix-prop-adjunctions(2) and the finite-Tor sentence of def-weil-exceptional-inverse-image. fix-lem-tensor-adjunction (f admissible, M and N in ctf) is used in the inverse direction, and the types check. Step 3 (naturality) holds by the tensor-adjunction's naturality plus bifunctoriality. Step 4: I type-checked the mate equation; both sides map C_X Rf_A^! ω_{Y,A} to ω_{X,B}. The comparisons exist by the Λ-admissibility clause, units and counits are preserved by lem-fix-operation-reduction, and the step stays within the specified comparisons. Step 5 (shifts) is correct. Small cases: f=id gives the identity; M=0 or X empty gives 0 on both sides; Y=Spec k gives global duality. Route: sk-def-sf-operations, sk-thm-sf-comp-composition and sk-lem-sf-mate are in the transitive route. I accept the tool use lem-fix-operation-reduction (sk-prop-sf-pf-reduction), which is declared. proof_deps equals the union of uses, there is no cycle, and there are no new nodes. sk-thm-sf-verdier-exchange and thm-sf-verdier-exchange are more general (no admissibility hypothesis), so recording them in same_as is correct. No SGA. Minor: the report mentions a citations.json that is not in the delivery, and steps 4 and 5 lack the 'Step k:' prefix. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-759690425 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the main-20261015 proof (steps 1-3), the unit, and the base Q54 5-step proof. That base is identical to the 'retained' proof in the report. The statement, stmt_deps and Lean record are unchanged. Repair note (released 2026-10-22, at least 2 nodes, at most 3000 chars): where each old step went. Old step 1 (the Hom-chain mate) goes to the existing lem-sf-constructible-exceptional-compositor: same c and direction, with naturality in L and shifts. Old step 2 is kept verbatim. Old steps 3 and 5 and the RHom/Rf_* part of step 4 go to the new lem-sf-admissible-hom-substitution. That node is true: its square follows from naturality of gamma and h plus v∘C_X c = c'∘u, and its signed shift square holds. I tested it on c=id, M=0 and r=0,1. It is not a duplicate of Q79 lem-sf-derived-hom-substitution-coherence, which assumes the axiomatised def-sf-datum including A6 biduality. FIX C5/D1: the new lem-sf-admissible-compositor-coefficient-square states the same identity as the existing Q65 siblings lem-sf-finite-exceptional-compositor-coefficients and lem-sf-adic-exceptional-compositor-coefficients: b_x∘C_X(c_A) = c_B∘G_f(b_g)∘b_f. Those siblings cover all finite, integral, rational and Q̄ changes. They need no admissibility hypothesis and use the same c_Λ as the step-1 compositor. The new node instead defined c via fix-prop-adjunctions(3), an unstated identification. I dropped it. Step 4 now cites the two Q65 nodes with g=a_Y and L=A_s, sets κ_T = Ra_T^!(u)∘b_{a_T}, and gets κ_X C_X(c_A) = c_B Rf^!(κ_Y) b_f from naturality of c_B in L. I checked this, and that u and v are isomorphisms. Both are added to split_report.tool_uses. There is no cycle. FIX B3: hom-substitution now cites def-weil-finite-tor-amplitude and def-weil-scheme-morphism-properties, and gets lean_audit. Step 1 now states that X and Y are separated because a_X and a_Y are admissible. The item is 2852 chars. Maintainer notes: the new-node count is 1 after the drop; I accept it as a waiver because every old argument has a carrier. The top-level tool_uses entry lem-fix-operation-reduction is stale. The first-arrow comparison in fix-lem-tensor-adjunction is unnamed in its statement (inherited from the base). No SGA.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.AdmissibleVerdierExchange",
@@ -205,5 +164,15 @@
   "group": "NN",
   "result": "pass",
   "note": "Re-delivery of 2f2560c1e463 (RETURNed only for H2). The Lean module is byte-identical (sha 291e865f) and compiles cleanly via nt_compile --json in 13.6 s; the first try timed out at load ~280. The H2 repair is correct: new def node def-sf-verdier-exchange-data has existing:true on Sheaf.Paper.VerdierExchange and owns 33 plain decls (StageData…integralAlphaRealization). All exist and a probe compiles cleanly. The statement is verbatim, the theorem/Package/Assertion are excluded and no .choose is used. It covers every VerdierExchange decl the item uses, there is no other owner, and the item cites the node instead of sk-thm-sf-verdier-exchange. Mechanical finding: lem-weil-structure-direct-images-constructible is genuine. baseUnit uses the theorem finiteFieldDatumPrimeUnit itself (IsUnit (l:k)), which is needed to state the admissibility predicates, so PASS on that point. Hypotheses, conclusion, domain and edge cases are unchanged and were checked again. Advisories: the coefficient notions reach the item only through the def node's own stmt_deps, and _S is unused. The units diffs are base drift."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261025T043211-L-1689826",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

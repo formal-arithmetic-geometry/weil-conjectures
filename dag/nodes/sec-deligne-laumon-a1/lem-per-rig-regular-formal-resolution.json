@@ -1,0 +1,260 @@
+{
+ "id": "lem-per-rig-regular-formal-resolution",
+ "kind": "statement",
+ "title": "Strong regular-functorial resolution of rig-regular formal varieties",
+ "statement": "A Noetherian scheme means one with a finite affine cover by spectra of Noetherian rings. A Noetherian adic formal scheme is a ringed space admitting a finite open cover by spaces of the form $\\operatorname{Spf}B$, the space of open prime ideals of a Noetherian ring $B$ complete and separated for powers of a finitely generated ideal, with its completed structure sheaf. Such a formal scheme is reduced when its affine chart rings are reduced. Quasi-excellence means quasi-excellence of its affine chart rings [def-exc-excellent-ring]. Regularity of a formal scheme means regularity of the rings on its formal affine charts [def-weil-regular-scheme]. Its singular locus is defined on $\\operatorname{Spf}B$ by the radical ideal of the nonregular locus of $\\operatorname{Spec}B$. A formal blowup along a coherent ideal is obtained on each chart $\\operatorname{Spf}B$ by taking the ordinary blowup of $\\operatorname{Spec}B$ in the center ideal and then completing along the extended original ideal of definition [def-nagata-global-blowup, pqf-def-coherent]. A tower retains its ordered center ideals, including centers whose blowups happen to be isomorphisms. Consider all pairs $(\\mathfrak X,\\mathfrak I)$ over $\\mathbf Q$ where $\\mathfrak X$ is a reduced Noetherian quasi-excellent adic formal scheme, $\\mathfrak I$ is an invertible ideal of definition, and $\\mathfrak X$ is a finite disjoint union of formal varieties (its reduced closed fibres are of finite type over fields of characteristic zero [def-weil-finite-type-morphism]). Suppose it is rig-regular: the ideal $\\mathfrak S$ defining its singular locus contains a power of $\\mathfrak I$. A morphism $h:(\\mathfrak Y,\\mathfrak J)\\to(\\mathfrak X,\\mathfrak I)$ satisfies $\\mathfrak J=\\mathfrak I\\mathcal O_{\\mathfrak Y}$ and is regular, meaning that on formal affine charts the induced homomorphisms are regular ring maps [def-weil-pbc-g-ring]: flat, with every fibre ring Noetherian and regular after every finite extension of the residue field. There exists a single rule $\\widehat F$ assigning to every such pair a finite tower of formal blowups with coherent open center ideals, nonempty regular centers lying over $\\mathfrak X_{\\mathrm{sing}}$, and regular final formal scheme. For every such $h$, the tower $\\widehat F(\\mathfrak Y,\\mathfrak J)$ is the formal pullback of $\\widehat F(\\mathfrak X,\\mathfrak I)$ with precisely the empty centers removed, preserving every retained extended ideal and its order. The rule takes the empty formal scheme to the length-zero tower. Here open means containing a power of the extended ideal of definition at that level. No compatibility with changes of the distinguished ideal of definition is asserted.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Theorem 3.1.5 (printed p.18), with proof §3.4.1 (printed p.25); choose a strong variety functor using Theorem 2.3.5 (printed p.14), then the strong clause of Theorem 3.1.5. Formal definitions §§2.4 and 3.1.4. No Stacks tag states this formal resolution theorem. Read online 2026-10-24; archival copy WANTED. The clause that the centers lie over the singular locus is the strengthening of ILO VIII Remark 2.3.11 (literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf), choosing the variety algorithm whose centers lie in the singular locus."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-regular-scheme",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-g-ring",
+  "def-per-rig-regular-formal-pair-geometry",
+  "def-per-formal-resolution-rule",
+  "def-per-adic-formal-completion",
+  "def-per-formal-completion-geometry",
+  "def-per-adic-formal-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Fix the single rule $F_{\\mathrm{Var}}$ from [lem-per-rig-variety-strong-resolution] on generically reduced varieties and finite disjoint unions. It is strong, compatible with ALL regular morphisms across arbitrary characteristic-zero fields, and its centers lie over the singular locus of the original input.",
+   "uses": [
+    "lem-per-rig-variety-strong-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0904.1592v2",
+    "place": "Theorem 2.3.5; definitions §§2.3.1–2.3.4"
+   }
+  },
+  {
+   "text": "On a principal affine pair $(\\mathfrak X,\\mathfrak I)$ apply [lem-per-rig-principal-formal-algebraization] to obtain a reduced Elkik pair $(X,I)$ with this completion and $X_{\\mathrm{sing}}\\subseteq V(I)$. Reduced implies generically reduced, so Step 1 applies. For a finite disjoint union of principal affines choose one such algebraization for each component and apply $F_{\\mathrm{Var}}$ to their entire disjoint union, thereby fixing one common stage order.",
+   "uses": [
+    "lem-per-rig-principal-formal-algebraization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0904.1592v2",
+    "place": "§3.4.1 first sentence, with Remark 3.1.4(iii)"
+   }
+  },
+  {
+   "text": "Complete this algebraic tower, retaining its center ideals; this is the formal blowup tower supplied by [lem-per-rig-principal-formal-algebraization]. The centers lie over $X_{\\mathrm{sing}}\\subseteq V(I)$ by [lem-per-rig-variety-strong-resolution]. On each Noetherian chart, set-theoretic support in $V(I)$ implies that a power of the principal ideal $I$ belongs to the center ideal. Thus the formal centers are open, and completing a center does not change it: its quotients by powers of $I$ are eventually constant. They remain regular and nonempty. To check singular support on the formal base, its algebraization rings are excellent by [lem-exc-fields-excellent] and [lem-exc-finite-type-localization-excellent], hence G-rings by [def-exc-excellent-ring]. Their completion maps are regular by [lem-weil-pbc-g-ring-completion-regular]. At a point of a completed center, a regular local ring on the completed base would force the corresponding algebraic local ring to be regular by the flat local descent statement [lem-weil-pbc-flat-under-regular], contradicting its membership in the original singular locus. Thus every completed center lies over $\\mathfrak X_{\\mathrm{sing}}$.",
+   "uses": [
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-flat-under-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0904.1592v2",
+    "place": "§3.4.1 completion construction; §2.4.5 and §2.3.1; completion regularity also Stacks 0AH2 and descent 00OF"
+   }
+  },
+  {
+   "text": "The final algebraic level is a regular variety by Step 1. On each finite-type affine chart $\\operatorname{Spec}A$ of that level, $A$ is excellent by [lem-exc-fields-excellent] and [lem-exc-finite-type-localization-excellent], so is a G-ring by [def-exc-excellent-ring]. Its completion $\\widehat A_I$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian], and $A\\to\\widehat A_I$ is flat with geometrically regular fibres by [lem-weil-pbc-g-ring-completion-regular]. Apply [lem-weil-pbc-regular-map-ascent] to this regular source ring and Noetherian target: every fibre is regular, as required by that statement. Hence every resulting complete chart ring is regular, which is precisely regularity of the final formal level.",
+   "uses": [
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-regular-map-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QW (proposition-ubiquity-excellent), 07QU (lemma-finite-type-over-excellent), 0316 (lemma-completion-Noetherian-Noetherian), 0AH2 (lemma-map-G-ring-to-completion-regular), 031E (lemma-flat-over-regular-with-regular-fibre)"
+   }
+  },
+  {
+   "text": "Apply [lem-per-rig-formal-resolution-intrinsic] to $F_{\\mathrm{Var}}$, whose all-regular-morphisms hypothesis was fixed in Step 1. If two choices algebraize the same principal affine formal pair, the identity of their fixed completions identifies their completed ordered towers. For any regular morphism between principal affine completed pairs, use the node's completed-pair compatibility clause, which is deduced from its regular thick-fibre comparison with the loss of thickness $r$ and sufficiently large $n$. No map between the algebraizations or their fields is required. This yields a well-defined compatible rule on finite disjoint unions of principal affines, with exactly empty centers deleted and every retained ideal in order.",
+   "uses": [
+    "lem-per-rig-formal-resolution-intrinsic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0904.1592v2",
+    "place": "Proposition 3.3.5 and §3.4.1 intrinsic-dependence and regular-functoriality paragraphs"
+   }
+  },
+  {
+   "text": "Every object has a finite principal affine open cover: refine its finite formal affine cover by opens on which the invertible ideal is generated by one non-zero-divisor. Steps 2–5 define the input rule on finite disjoint unions of these charts, with their common stage order. Apply [lem-per-rig-formal-resolution-gluing] to obtain $\\widehat F$ on all the stated pairs. The node glues the coherent open ideals and towers with their synchronization and preserves regularity, original-singular-locus support, and pullback compatibility. In particular any stated $h$ is a regular ideal-preserving formal morphism, so its source tower is the formal pullback target tower with exactly empty centers removed, retaining every other extended ideal in its order. The empty tower has length zero.",
+   "uses": [
+    "lem-per-rig-formal-resolution-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0904.1592v2",
+    "place": "§3.4.1 final paragraph; Lemmas 2.3.1 and 2.3.3 and Remark 2.3.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-rig-formal-resolution-gluing",
+  "lem-per-rig-formal-resolution-intrinsic",
+  "lem-per-rig-principal-formal-algebraization",
+  "lem-per-rig-variety-strong-resolution",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-regular-map-ascent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Theorem 3.1.5 (printed p.18), proof §3.4.1 (printed p.25), with Theorem 2.3.5 and Proposition 3.3.5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-rig-regular-formal-resolution: Strong desingularization functor for rig regular locally principal formal varieties of characteristic zero compatible with regular morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|rig.regular|formal.variet",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-rig-regular-formal-resolution: Strong desingularization functor for rig regular locally principal formal varieties of characteristic zero compatible with regular morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"RingHom.FormallySmooth.toAlgebra\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} (hf : FormallySmooth f) : @Algebra.FormallySmooth R S _ _ f.toAlgebra\", \"doc\": \"If $ f : R \\\\to S $ is a formally smooth ring homomorphism between commutative semirings, then the algebra structure on $ S $ over $ R $ induced by $ f $ satisfies the formal smoothness lifting propert\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_of_functorial_resolutions\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.OfFunctorialResolutions\", \"type\": \": Φ.IsRightDerivabilityStructure\", \"doc\": \"A localizer morphism $\\\\Phi$ is a right derivability structure if it admits functorial resolutions, ensuring compatibility with localization or derived functors.\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": PreservesLocalization _ ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap)\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"Algebra.FormallySmooth.localization_base\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R Sₘ] : FormallySmooth Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally smooth $ R $-algebra, then the localization $ S_m $ is a formally smooth $ R_m $-algebra, where $ R_m $ and $ S_m $ denote the localizations of $ R $ and $ S $ at a multiplicati\"}\n  {\"name\": \"RingHom.FormallySmooth.localizationPreserves\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": LocalizationPreserves @FormallySmooth\", \"doc\": \"If $ f : R \\\\to S $ is a formally smooth ring homomorphism between commutative semirings, then for any submonoid $ M \\\\subseteq R $, the induced homomorphism between localizations $ R_M \\\\to S_{f(M)} $ i\"}\n  {\"name\": \"Algebra.FormallySmooth.casesOn\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.FormallySmooth R A → Sort u_1} →\\n            (t : Algebra.FormallySmooth R A) →\\n              ((projective_kaehlerDifferential : Module.Projective A Ω[\", \"doc\": \"Given a property $ P $ of formally smooth $ R $-algebras, if $ P $ holds for any algebra $ A $ where the Kähler differentials $ \\\\Omega_{A/R} $ are projective as an $ A $-module and the first cohomolog\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-rig-regular-formal-resolution: Canonical resolution of formal singularities by regular centers via algebraization independent of coefficient field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-small-singular-locus-resolution",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Theorem 3.1.5: existence and uniqueness of a desingularization functor on rig-regular locally principal formal varieties, with the proof in §3.4.1 using strong FVar, algebraization, intrinsic thick-fibre comparison, and gluing.",
+   "via": [
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-rig-regular-formal-resolution",
+  "worker": "stage1",
+  "summary": "Repair all five returned faults: generically reduced FVar with original-singular-locus support; intrinsic comparison for all regular thick-fibre and completed-pair maps across fields; gluing from finite unions of principal affines; self-contained definitions; explicit G-ring completion regularity and regular ascent. Item statement unchanged. Six assembly steps retain the algebraization/thick-fibre/gluing route.",
+  "blueprint": "Realizes Theorem 3.1.5 and every paragraph of its §3.4.1 proof: strong FVar input, principal algebraization, intrinsic independence and regular functoriality, and final gluing.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "The generic commutative-algebra fact that a field is excellent supplies the G-ring hypothesis on algebraization charts; this unit has no field-excellence lemma."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "The generic finite-type/localization permanence of excellence supplies the G-ring hypothesis on all algebraic tower charts; no unit-local lemma states it."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "The generic G-ring completion theorem gives regular completion maps, needed for support and terminal regularity; no unit-local node states it."
+   },
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "Generic flat local descent of regularity transfers original-singular-locus support to the completed base; no unit-local node states this descent."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherianity of an adic completion checks the target hypothesis of regular ascent; no unit-local node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-map-ascent",
+    "why": "Generic regularity ascent along a flat map with regular fibres makes the terminal completed chart regular; no unit-local node states this ascent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-regular-map-ascent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-80f44fb6c",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-80f44fb6c (reviewer sub-agent of L); spot-checked: Re-delivery of 6046, which was returned for five faults; all five are repaired. Item statement and stmt_deps are byte-identical to live (still unsplit) and to 6046, and there is no re-split note. Checked against Temkin arXiv:0904.1592v2: §2.1, §2.3.1-2.3.5, Thm 2.3.5, §3.1.3-3.1.5, §3.2.3-3.2.4, §3.3.1, §3.3.4-3.3.8 and §3.4.1. (1) The variety node now has generically reduced objects (Var^{p=0,reg}, §2.1), all regular morphisms across fields, and centers over X_sing of the original X (§2.3.1-2.3.3). (2) The intrinsic node assumes compatibility with all regular morphisms and gives the full Prop 3.3.5: r depends only on (X,I), n is large for both pairs, h is any regular map Y_{n^2+r}->X_{n^2+r} with no lift and no field compatibility (§3.2.4), and levels are n(n-i) with ghost blow-ups (§3.3.5-3.3.6). It also gives the completed-pair consequence of §3.4.1. Elkik pair is defined, and Elkik pairs are reduced, so F applies. (3) The gluing node takes as input finite unions of principal affines, which form a basis closed under unions; it states cover/refinement independence and allows non-affine overlaps (Lemma 2.3.3, Rem 2.3.4(i)). (4) The B2 notions are defined inline. (5) Step 4 now cites excellence of fields and of finite-type algebras, G-ring, completion Noetherian, completion regular, and regular ascent; Step 3 gets support over the formal singular locus from flat local descent. I read every cited statement and the hypotheses hold. stmt_deps equal the bracketed ids in each node, and proof_deps equal the union of step uses. Edge cases checked: regular disc, empty object, two fields, a non-algebraizable formal map, non-reduced input excluded, locally principal ideal. No duplicates: the Jacobian/Elkik algebraization nodes are tools, and lem-per-qe-ordinary-regular-resolution would create a cycle. No SGA. Batch-5 flags: lem-exc-fields-excellent and lem-exc-finite-type-localization-excellent are generic commutative algebra; their closure reaches only generic trf commutative algebra (universally catenary, dimension formula), not part of the trace formula or Poincaré duality, so I accept both. I accept the six generic tool_uses. Advisory: blueprint.from.place lost the 'Ancestor proof Step 3' locator; a local Temkin copy is WANTED."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RigRegularFormalResolution",
+  "declaration": "AlgebraicGeometry.exists_rigRegularFormalResolutionRule",
+  "declarations": [
+   "AlgebraicGeometry.exists_rigRegularFormalResolutionRule"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RigRegularFormalResolution.lean",
+  "statement": "theorem exists_rigRegularFormalResolutionRule : Nonempty RigRegularFormalResolutionRule.{u}",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-226897267",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Read item, 11 stmt_dep records, the 3 delivered modules (RigRegularFormalGeometry, FormalResolutionRule, RigRegularFormalResolution), the landed Q13 AdicFormalCompletion/FormalCompletionGeometry and Q47 AdicFormalGeometry, and Temkin Thm 3.1.5/§3.4.1/§§2.4, 3.1.4. Every clause matches: QE/reduced/Q/invertible/finite union of char-0 formal varieties (fields may vary)/rig-regular (I^n ≤ absoluteSingularIdeal); regular map = ideal equality + local + RingHom.IsRegular on formal affines; formal blowup = completed ordinary blowup with a cartesian chart square; strong towers (coherent, open, regular, nonempty centers over the original X_sing, regular last level); comparison with exact empty-center deletion, order embedding, actual retained ideals; empty → length 0; no ideal-change clause. Edge cases OK; universe u unrestricted; no hollow defs; only the item sorry; docstrings and verbatim statement OK; no recompile (no changes). Advisory: Q51 landed a system-based formal blowup/tower representation at 12:33, after this base; the citer lem-per-small-singular-locus-resolution step 2 needs a bridge lemma at stage 3. Q13/Q47 Spf mix is isomorphic; CoherentFiniteType import unused; second reading was by the same worker."
+ }
+}

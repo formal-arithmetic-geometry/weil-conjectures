@@ -14,6 +14,12 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.Algebra.Homology.RingedInternalHomCovariantExact
+import Sheaf.Algebra.Homology.RingedInternalHomContravariantExact
+import Sheaf.Algebra.Homology.RingedHomRestrictionOrdinary
+import Sheaf.Algebra.Homology.RingedHomRestrictionComposition
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.CategoryTheory.SiteRelocalizationKInjective
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
@@ -374,6 +380,9 @@ theorem ringedInternalHom_tensor_adjunction
   exact (e.hom.naturality (show (op K, op L, M) ⟶ (op K', op L', M') from
     (a.op, b.op, c))).symm
 
+attribute [local irreducible] derivedInternalHom homComplexFunctor
+
+set_option linter.style.haveILetI false in
 /-- Derived internal Hom commutes naturally with slice restriction, compatibly
 with successive restrictions. The comparison for V to U, followed by transport
 along the canonical derived overFunctorMap, equals direct restriction to V.
@@ -440,7 +449,68 @@ theorem ringedInternalHom_restriction
     (SheafOfModules.overFunctorMap ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
     f))).hom.app ((derivedInternalHom.{u, w} J R).obj (op L, M)) ≫
     (e V).hom.app (op L, M) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+    classical
+    let F (U : C) : RingedHomRestriction.Modules R ⥤
+        RingedHomRestriction.Modules (R.over U) :=
+      SheafOfModules.overFunctor.{u} (RingedHomRestriction.Rings R) U
+    let G (U V : C) (f : V ⟶ U) : RingedHomRestriction.Modules (R.over U) ⥤
+        RingedHomRestriction.Modules (R.over V) :=
+      SheafOfModules.overMap.{u} (RingedHomRestriction.Rings R) f
+    letI (U : C) : HasDerivedCategory.{w} (RingedHomRestriction.Modules (R.over U)) := hDCU U
+    letI (U : C) : (F U).Additive :=
+      ringedSite_overFunctor_additive J R U
+    letI (U V : C) (f : V ⟶ U) :
+        (G U V f).Additive :=
+      ringedSite_overMap_additive J R f
+    letI (U : C) : PreservesFiniteLimits
+        (F U) :=
+      ringedSite_overFunctor_limits J R U
+    letI (U : C) : PreservesFiniteColimits
+        (F U) :=
+      ringedSite_overFunctor_colimits J R U
+    letI (U V : C) (f : V ⟶ U) : PreservesFiniteLimits
+        (G U V f) :=
+      ringedSite_overMap_limits J R f
+    letI (U V : C) (f : V ⟶ U) : PreservesFiniteColimits
+        (G U V f) :=
+      ringedSite_overMap_colimits J R f
+    obtain ⟨a, b, hab⟩ := RingedHomRestriction.ordinary_comparisons J R
+    have hk (U : C) (I : RingedHomRestriction.Complex R) (hI : I.IsKInjective) :
+        CochainComplex.IsKInjective
+          ((Functor.mapHomologicalComplex
+            (F U) (.up ℤ)).obj I) := by
+      exact isKInjective_restrict_localized (RingedHomRestriction.Rings R) U inferInstance I
+    have hs (U V : C) (f : V ⟶ U)
+        (I : RingedHomRestriction.Complex (R.over U)) (hI : I.IsKInjective) :
+        CochainComplex.IsKInjective
+          ((Functor.mapHomologicalComplex
+            (G U V f) (.up ℤ)).obj I) := by
+      letI : (G U V f).PreservesKInjectiveComplexes :=
+        SheafOfModules.overMap_preservesKInjectiveComplexes_ofUniverses.{u, u, u}
+          (RingedHomRestriction.Rings R) f
+      exact Functor.PreservesKInjectiveComplexes.isKInjective_map I
+    have he (U : C) := RingedHomRestriction.comparison_exists R (R.over U)
+      (F U) (hk U) (a U)
+    choose e he using he
+    have hs' (U V : C) (f : V ⟶ U) :=
+      RingedHomRestriction.comparison_exists (R.over U) (R.over V)
+        (G U V f) (hs U V f) (b U V f)
+    choose s hs' using hs'
+    refine ⟨e, s, ?_⟩
+    intro U V f
+    let c : F U ⋙ G U V f ≅ F V :=
+      SheafOfModules.overFunctorMap (RingedHomRestriction.Rings R) f
+    have hn := RingedHomRestriction.composite_normalized R (R.over U) (R.over V)
+      (F U) (G U V f) (F V) c (hk U) (a U) (b U V f) (e U) (s U V f) (he U) (hs' U V f)
+    have hc : RingedHomRestriction.composite
+        (Functor.mapHomologicalComplexCompIso c (.up ℤ)) (a U) (b U V f) = a V :=
+      (RingedHomRestriction.compatible_iff _ _ _ _ _ _ _ _ _ _).mp (hab U V f)
+    rw [hc] at hn
+    have h := RingedHomRestriction.comparison_unique R (R.over V) (F V) (a V)
+      _ (e V) hn (he V)
+    exact (RingedHomRestriction.compatible_iff _ _ _ _ _ _ _ _ _ _).mpr h
+
 
 /-- Internal derived Hom preserves distinguished triangles in each variable
 and commutes with shifts. The first variable is a functor from the opposite
@@ -475,6 +545,6 @@ theorem ringedInternalHom_exact
     RingCat.{u})).obj R))), ∃ _ : ((Functor.curry.obj (derivedInternalHom.{u, w} J R)).flip.obj
     M).CommShift ℤ,
     ((Functor.curry.obj (derivedInternalHom.{u, w} J R)).flip.obj M).IsTriangulated) := by
-  sorry
+  exact ⟨ringedInternalHom_covariant_exact J R, ringedInternalHom_contravariant_exact J R⟩
 
 end CategoryTheory

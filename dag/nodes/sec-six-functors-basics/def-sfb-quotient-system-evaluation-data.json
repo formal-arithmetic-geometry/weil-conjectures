@@ -1,0 +1,109 @@
+{
+ "id": "def-sfb-quotient-system-evaluation-data",
+ "kind": "definition",
+ "title": "Normalized evaluation adjunction for coefficient systems",
+ "status": "split",
+ "statement": "Let $Q_Y$ be an algebra tower of modules on a small ringed site and let $Q_X=f^*Q_Y$ for exact ringed pullback $f^*$, with canonical tensor comparison $k$. Use the strict coefficient-system categories, scalar models and projection presentation of [def-sfb-quotient-system-projection-data]. For each positive level $n$, an ordinary evaluation pullback presentation consists of an exact additive functor $F_n:\\operatorname{Mod}_{Q_{Y,n}}\\to\\operatorname{Mod}_{Q_{X,n}}$, an isomorphism $f^*\\circ U_{Y,n}\\cong U_{X,n}\\circ F_n$, a free-module comparison whose underlying map after that isomorphism is exactly $k_{Q_{Y,n},M}$, and an evaluation square $F_n\\circ\\operatorname{ev}_{Y,n}\\cong\\operatorname{ev}_{X,n}\\circ f_Q^*$ whose underlying map is the inverse restriction comparison. Its derived evaluation square is obtained by exact localization and the canonical derived composition isomorphisms. An evaluation adjunction presentation consists of such ordinary data, a right adjoint $G_n$ to $D(F_n)$, and an isomorphism $\\gamma:\\operatorname{ev}_{Y,n}\\circ G_Q\\cong G_n\\circ\\operatorname{ev}_{X,n}$ normalized by the counit equation: evaluation of the coefficient-system counit equals the inverse evaluation square followed by $D(F_n)(\\gamma)$ and the level counit. The evaluated scalar counit is the scalar-model counit followed by the exact evaluation localization isomorphism. This defines data and normalization, asserting no existence.",
+ "stmt_deps": [
+  "def-sfb-quotient-system-projection-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D and 0D6E; evaluation of pullback and composite-adjunction counit on the small diagram site"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An evaluation square between pullback functors on module systems, and a right adjoint comparison normalized by the adjunction counits",
+   "results": "8 hits: generic adjunction commutative squares, exponentiable counit naturality, categorical pullback squares, ordinary sheaf pullbackPushforwardAdjunction and pullbackComparison.",
+   "date": "2026-10-22",
+   "verdict": "None packages the normalized strict algebra-tower evaluation presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient-linear evaluation adjunction for semilinear algebra towers, with the pullback evaluation square and right-adjoint comparison normalized by counits",
+   "results": "8 ordinary ModuleCat extension/restriction/coextension and free-module adjunction hits; no strict-tower normalized evaluation presentation.",
+   "date": "2026-10-22",
+   "verdict": "No exact match; reuse mapMod and exact derived composition."
+  },
+  {
+   "tool": "grep",
+   "query": "EvaluationPullbackData|EvaluationLift|coefficient.*evaluation.*adjunction in dag/nodes, Mathlib-facing upstream and Sheaf; blueprint_refs search coefficient evaluation",
+   "results": "CoefficientEvaluationDerivedCore is for the special O/ell^n coefficient system and its evaluation/extension adjunction, not arbitrary algebra towers and ringed pullback. Blueprint search returned two duality nodes, neither this definition. Mathlib monoidal search found only generic Mon APIs; upstream module-object search found MapMod, ChangeOfScalarsSquare and ProjectionFormula APIs, whose components are reused.",
+   "date": "2026-10-22",
+   "verdict": "The normalized evaluation/pullback/right-adjoint data are missing."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quotient-system-projection-lift",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Coefficient-system projection: coefficient-linear evaluated transpose and its counit normalization",
+   "via": [
+    "lem-sfb-quotient-system-projection-lift",
+    "lem-sfb-integral-ambient-tower-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "module": "Sheaf.SixFunctors.QuotientSystemEvaluationData",
+  "declaration": "CategoryTheory.QuotientProjection.EvaluationLift",
+  "file": "lean/Sheaf/SixFunctors/QuotientSystemEvaluationData.lean",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-22",
+  "existing": false,
+  "statement": "abbrev EvaluationLift (L : Lift Q f k MY MX P) (n : ℕᵒᵖ) [HasDerivedCategory.{wLY} (Level Q n)] [HasDerivedCategory.{wLX} (Level ((termwise f.L).obj Q) n)]",
+  "declarations": [
+   "CategoryTheory.QuotientProjection.EvaluationAdjunctionData",
+   "CategoryTheory.QuotientProjection.evaluationMonoidal",
+   "CategoryTheory.QuotientProjection.levelAlgebra",
+   "CategoryTheory.QuotientProjection.Level",
+   "CategoryTheory.QuotientProjection.coefficientEvaluation",
+   "CategoryTheory.QuotientProjection.coefficientEvaluationAdditive",
+   "CategoryTheory.QuotientProjection.coefficientEvaluationLimits",
+   "CategoryTheory.QuotientProjection.coefficientEvaluationColimits",
+   "CategoryTheory.QuotientProjection.EvaluationPullbackData",
+   "CategoryTheory.QuotientProjection.evaluationPullback",
+   "CategoryTheory.QuotientProjection.EvaluationLift",
+   "CategoryTheory.QuotientProjection.evaluationCounit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f706d6d3",
+  "group": "Q127",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f706d6d3",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read item node, 3 new def nodes, all 4 modules, deps AugmentedProjectionDirectImage/augmentedDiagramProjectionMate (identical signature f,k,Q,MY,MX,tau,htau,P), Comparison/moduleUnit, CochainComparisonMonoidalEquations (CoreMonoidal mk' with k.mu.symm exists, so the ∃ m conjunct is true), StrictRingSystem. Every clause is rendered: beta = unit≫G(tauQ)≫G(B ε) with its transpose equation; restrictedBeta = augmentedDiagramProjection before evaluation; evaluated Q_n-linear adjunct via EvaluationLift plus IsLeftDerivedFunctor clauses; augmentation identity; iso conditional. Lift data is pinned up to unique compatible iso: ScalarModel by universal property and representative pin, ordinaryTau = k.mu, tau on flat K-flat reps, d by counit transpose, EvaluationPullbackData via underlying/free pin, gamma by counit, so ∀ normalized L → assertions is sound. No extra assumptions; universes independent and bound; statements verbatim; docstrings with source and blueprint; only sorry is the theorem; no hollow defs. Advisory: Mod(ℕᵒᵖ⥤Modules R) Q used instead of StrictRingSystem (stage 3 needs the equivalence); d pinned by counit rather than via diagramRingRestrictionPushforward (different model); evaluated-restriction clause follows from the strict equality; probably unused plain imports. No compile run (no file changed)."
+ }
+}

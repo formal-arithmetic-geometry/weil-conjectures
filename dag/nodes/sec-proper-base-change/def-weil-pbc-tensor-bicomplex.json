@@ -118,5 +118,47 @@
   "kind": "interface",
   "note": "independent cc review: withdrawn Sheaf TensorBicomplex (0 importers, no chainTensorMap users) against upstream TensorBicomplexExtension abbrevs (byte-identical) and ChainComplex.tensorMap (same signature and body); node changes limited to lean/proof/proof_origin; delivery and axiom probe compile"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "ChainComplex.tensorMap"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "ChainComplex.tensorMap",
+     "module": "WeilConjectures.Algebra.Homology.TensorBicomplex",
+     "lines": [
+      35,
+      45
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative ring and $P,Q$ chain complexes of $R$-modules indexed by $\\mathbf N$. The *tensor bicomplex* $A(P,Q)$ has terms $A(p,q)=P_p\\otimes_RQ_q$, horizontal differential $d_P\\otimes1$ and vertical differential $1\\otimes d_Q$ (no signs). The differentials square to zero and commute. For chain maps $a:P\\to P'$ and $b:Q\\to Q'$, the map $A(a,b):A(P,Q)\\to A(P',Q')$ is defined termwise by $a_p\\otimes b_q$.",
+  "proof": [
+   {
+    "text": "The tensor bicomplex is the image of $(P,Q)$ under the functor induced on chain complexes by the bifunctor $-\\otimes_R-$ on $R$-modules. The differentials $d_P\\otimes1$ and $1\\otimes d_Q$ square to zero because $d_P^2=0$ and $d_Q^2=0$ and the tensor product is functorial in each variable, and they commute since $(d_P\\otimes1)(1\\otimes d_Q)=d_P\\otimes d_Q=(1\\otimes d_Q)(d_P\\otimes1)$. For chain maps $a,b$ the termwise maps $a_p\\otimes b_q$ commute with both differentials by functoriality of $\\otimes$, so they form a morphism of bicomplexes.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

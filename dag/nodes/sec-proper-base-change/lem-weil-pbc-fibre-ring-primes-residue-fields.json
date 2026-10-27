@@ -124,7 +124,18 @@
   "item": "lem-weil-pbc-henselization-finite-separable-fibres",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -168,5 +179,42 @@
   "landing": "20261012T085230-L-10908",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings, $\\mathfrak p\\subset A$ a prime ideal with residue field $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$, $C=B\\otimes_A\\kappa(\\mathfrak p)$ the fibre ring and $j:B\\to C$, $b\\mapsto b\\otimes1$. For a prime $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$ let $\\kappa(\\mathfrak q)=B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}$ and let $\\psi_{\\mathfrak q}:C\\to\\kappa(\\mathfrak q)$ be the ring map $b\\otimes\\lambda\\mapsto\\bar b\\,\\bar\\lambda$, where $\\bar b$ is the image of $b$ and $\\bar\\lambda$ the image of $\\lambda$ under the map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ induced by $\\varphi$. Then (1) the map $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ is a bijection from the set of prime ideals of $C$ onto the set of prime ideals $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, with inverse $\\mathfrak q\\mapsto\\ker\\psi_{\\mathfrak q}$, and it preserves and reflects inclusions; (2) for each such $\\mathfrak q$, with $\\mathfrak Q=\\ker\\psi_{\\mathfrak q}$, the map $\\psi_{\\mathfrak q}$ induces an isomorphism of fields $\\kappa(\\mathfrak Q)=C_{\\mathfrak Q}/\\mathfrak QC_{\\mathfrak Q}\\xrightarrow{\\sim}\\kappa(\\mathfrak q)$; in other words $\\psi_{\\mathfrak q}$ is the composite of $C\\to\\kappa(\\mathfrak Q)$ with this isomorphism.",
+  "proof": [
+   {
+    "text": "Part (1). Since $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$, the fibre ring is $C\\cong B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$, where $B_{\\mathfrak p}$ is the localization of $B$ at $\\varphi(A\\setminus\\mathfrak p)$, and $j$ corresponds to $B\\to B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$. Primes of a localization correspond to the primes of $B$ disjoint from $\\varphi(A\\setminus\\mathfrak p)$, and primes of its quotient by $\\mathfrak pB_{\\mathfrak p}$ to those containing $\\varphi(\\mathfrak p)$; so $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ is an inclusion-preserving and inclusion-reflecting bijection from the primes of $C$ onto the primes $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$. For such $\\mathfrak q$, the kernel of $\\psi_{\\mathfrak q}:C\\to\\kappa(\\mathfrak q)$ is a prime ideal (a ring map to a field has prime kernel), and $j^{-1}(\\ker\\psi_{\\mathfrak q})$ is the kernel of $B\\to\\kappa(\\mathfrak q)$, which is $\\mathfrak q$. Hence the inverse bijection is $\\mathfrak q\\mapsto\\ker\\psi_{\\mathfrak q}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Part (2), the residue-field isomorphism. Fix $\\mathfrak q$ and put $\\mathfrak Q=\\ker\\psi_{\\mathfrak q}$, so that $j^{-1}(\\mathfrak Q)=\\mathfrak q$. Then $j$ induces a homomorphism of residue fields $\\iota:\\kappa(\\mathfrak q)\\to\\kappa(\\mathfrak Q)$. The map $A\\to\\kappa(\\mathfrak p)$ is surjective on stalks ($A_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$ is surjective), this property is stable under base change, and $j$ is the base change of $A\\to\\kappa(\\mathfrak p)$ along $A\\to B$; hence the induced map of residue fields $\\iota$ is surjective. Being a homomorphism of fields it is injective, so it is an isomorphism; let $\\theta:\\kappa(\\mathfrak Q)\\to\\kappa(\\mathfrak q)$ be its inverse.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "On the factor $B$. For $b\\in B$, $\\iota(\\bar b)$ is the image of $j(b)$ in $\\kappa(\\mathfrak Q)$, so $\\theta$ sends the image of $j(b)$ to $\\bar b=\\psi_{\\mathfrak q}(j(b))$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "On the factor $\\kappa(\\mathfrak p)$. Two ring maps out of $\\kappa(\\mathfrak p)$ agree once they agree on the image of $A$, since $\\kappa(\\mathfrak p)$ is the fraction field of $A/\\mathfrak p$. For $a\\in A$, tensor balancing gives $1\\otimes\\bar a=\\varphi(a)\\otimes1=j(\\varphi(a))$ in $C$, so by the previous step $\\theta\\circ(C\\to\\kappa(\\mathfrak Q))$ and $\\psi_{\\mathfrak q}$ agree on $1\\otimes\\bar a$. Hence they agree on $1\\otimes\\kappa(\\mathfrak p)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Two ring maps out of the tensor product $C=B\\otimes_A\\kappa(\\mathfrak p)$ that agree on $B\\otimes1$ and on $1\\otimes\\kappa(\\mathfrak p)$ are equal. By the last two steps, $\\psi_{\\mathfrak q}$ equals the composite of $C\\to\\kappa(\\mathfrak Q)$ with the isomorphism $\\theta:\\kappa(\\mathfrak Q)\\xrightarrow{\\sim}\\kappa(\\mathfrak q)$, which is the induced isomorphism of (2).",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -56,11 +56,22 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-cor-affine-space-rational",
  "lean": {
-  "module": "Sheaf.Targets.AffineSpaceRationalLine",
+  "module": "Sheaf.Paper.RationalLocalizingTwist",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalTwistFunctor",
   "declarations": [
    "AlgebraicGeometry.ProEtale.CondensedRing.rationalLocalizingCategory",
@@ -68,11 +79,12 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.rationalTwistFunctor"
   ],
   "statement": "def rationalTwistFunctor\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})\n    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X)) :\n    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X)) ⥤\n      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj Λ X))",
-  "branch": "newtargets-dag",
-  "by": "ND",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "The independent return on head 536f0d188ae7 requests a definition node owning these three already landed helpers. They are two literal abbreviations for localizingClosure(constantModelBoundedConstructible) and its inclusion, and a def fixing the second derivedTensor argument to singleFunctor at zero. They neither choose data from nor use the conclusion of det_cor_affine_space_rational_line. Reuse the existing declarations in their published module to avoid redeclaration collisions; no new Lean file."
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The three existing declarations are moved verbatim to their definition module and publicly re-exported by AffineSpaceRationalLine. This removes the import cycle from the projective-line proof back to the affine-line theorem; all names, signatures, attributes and bodies are preserved.",
+  "file": "lean/Sheaf/Paper/RationalLocalizingTwist.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -89,5 +101,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Re-delivery after RETURN on 536f0d188ae7 (theorem stmt_dep cited only for plain defs). Lean module byte-identical; item stmt_deps now cite new def node def-sfb-rational-localizing-twist (existing:true on the published plain defs rationalLocalizingCategory, rationalLocalizingInclusion, rationalTwistFunctor in Sheaf.Targets.AffineSpaceRationalLine); det-cor-affine-space-rational-line kept in proof_deps. New node: prose matches the three decls; stmt_deps (pulled-back coefficients, constructible, localizing closure, derived tensor) exist live; lean.statement verbatim; no cycle; blueprint.from is the item. Item H3 re-checked: ℓ prime, char k = p > 0 with p ≠ ℓ, V separated finite type, all finite E and Q̄ℓ, 𝔸(ULift (Fin d); V) with d = 0 included, Nagata compactificationOverField lower shriek, existential F ⊣ P with ambient comparisons and right-adjoint uniqueness, spSignedTwist degree-d line from spRationalTwist/spQbarTwist, shift [2d], Dbc preservation for every ambient K. No hollow defs, sorry only in the theorem, docstrings ok, universes bound. nt_compile --json rc 0, item 7.9 s, clean. Maintainer note: the three decls are listed in both the line node's and the new def node's records (the accepted existing:true shape)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d1c3b",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T002443-L-88663",
+  "kind": "interface",
+  "note": "independent cc review: rationalP1_adjunction_assembly vs rationalP1_triangle adjunction clause (same push/exceptional, diagonal data available from exists_diagonalTowerSystem/diagonalTower_limit/diagonalTower_coefficients); moved defs byte-identical; sandbox build of 4 delivered + 7 visibility-losing modules (Tate importers, KernelContractions, Integral*) + 3 item importers all compile"
  }
 }

@@ -1,0 +1,114 @@
+{
+ "id": "def-weil-boundary-composition-mate",
+ "kind": "definition",
+ "title": "Canonical boundary composition mate and its dualizing specializations",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a finite commutative ring and let $X\\xrightarrow{f}Y\\xrightarrow{g}S$ be morphisms of schemes. Work in the ordinary constant-$A$ module derived categories on the small etale sites [def-weil-pbc-derived-categories] and their bounded-below full subcategories [def-weil-pbc-bounded-derived-subcategories]. Assume compactifications of $f$, $g$ and $f;g$ [def-nagata-compactification], quasi-compactness of $f;g$, and quasi-compactness of $Y$ and $S$. Use the compactification-independent compact-support functors $F_h=Rh_!$ [def-amb-etale-compact-support] and their ordinary ambient etale right adjoints $G_h=h^\\times$ [thm-amb-etale-exceptional-adjoint]. Write $G_h^+$ for the restriction of this actual right adjoint to $D^+$ and $b_h:F_h^+\\dashv G_h^+$ for the restriction of its actual ambient adjunction along the fully faithful $D^+$ inclusions. Define\n$$\\theta_{f,g}:G_{f;g}^+\\xrightarrow{\\sim}G_g^+;G_f^+$$\nto be the conjugate mate of the canonical bounded-below compact-support composition $F_f^+;F_g^+\\xrightarrow{\\sim}F_{f;g}^+$ under $b_{f;g}$ and the composite adjunction $b_f;b_g$.\n\nLet $C_W=\\nu_W^*$ be the exact derived site-comparison inverse image [def-sf-comparison-derived-pullback], with derived adjunction unit $\\eta_W:1\\to R\\nu_{W,*}C_W$ for the comparison geometric morphism [def-weil-pbc-site-comparison-morphism], and let $P_h=C_XG_hR\\nu_{Y,*}$ be the specified pro-etale exceptional inverse image [def-weil-exceptional-inverse-image]. For $H\\in D^+(Y_e,A)$ define $\\rho_{h,H}:C_XG_hH\\xrightarrow{\\sim}P_hC_YH$ as $C_XG_h(\\eta_{Y,H})$. Let $A_S^+$ be the degree-zero constant coefficient object in $D^+(S_e,A)$, and put $\\omega_{W,e}=G_{a_W}A$ and $\\omega_{W,p}=P_{a_W}A$ for a compactifiable structure map $a_W:W\\to S$. Define $\\lambda_W:C_W\\omega_{W,e}\\xrightarrow{\\sim}\\omega_{W,p}$ as $\\rho_{a_W,A}$ followed by the canonical comparison identification of the coefficient units.\n\nFor a bounded-below etale $H$, define the pro-etale composition $P_fP_gC_SH\\xrightarrow{\\sim}P_{f;g}C_SH$ by the ordered composite $P_f(\\rho_{g,H}^{-1})$, then $\\rho_{f,G_gH}^{-1}$, then $C_X(\\theta_{f,g,H}^{-1})$, then $\\rho_{f;g,H}$. Define the etale dualizing identification $\\kappa_e:G_f\\omega_{Y,e}\\xrightarrow{\\sim}\\omega_{X,e}$ as the value of $\\theta_{f,g}^{-1}$ at $A_S^+$, included into the ambient category. Define the pro-etale dualizing identification $\\kappa_p:P_f\\omega_{Y,p}\\xrightarrow{\\sim}\\omega_{X,p}$ by the ordered composite $P_f(\\lambda_Y^{-1})$, $\\rho_{f,\\omega_{Y,e}}^{-1}$, $C_X\\kappa_e$, and $\\lambda_X$. For $f=i$ closed and $g=a_T$ these are the specified boundary dualizing identifications.\n\nFinally define the composition-compatibility predicate to be the conjunction of (i) the equation saying that the counit for $F_{f;g}^+\\dashv G_{f;g}^+$, preceded by compact-support composition, equals the pasted counits after applying $\\theta_{f,g}$, and (ii) naturality of the displayed pro-etale composition in every morphism of bounded-below etale inputs. This defines the predicate and the canonical comparison data; it does not assert that the compatibility predicate holds.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-nagata-compactification",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "First proof paragraph: independent costalk comparison and exceptional restriction of dualizing complexes; canonical mate and comparison transport as constructed in lem-weil-boundary-dualizing-composition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical composition mate for exceptional inverse image and dualizing complexes on etale and proetale sites",
+   "results": "8 hits: SheafOfModules.pullbackComp; CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app; CategoryTheory.mateEquiv_square; CategoryTheory.comp_rightAdjointMate; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; AlgebraicGeometry.Scheme.Modules.pullbackComp; CategoryTheory.mateEquiv_vcomp.",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match: generic underived pullback composition and adjunction-mate calculus do not define these boundary dualizing specializations. Use the existing project constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateIsoEquiv",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'conjugateIsoEquiv'",
+   "date": "2026-10-24",
+   "verdict": "No result from the service. The local source explicitly uses conjugateIsoEquiv to construct boundaryCompositionIso."
+  },
+  {
+   "tool": "grep",
+   "query": "boundaryCompositionIso|boundaryDualizingEtaleIso|boundaryDualizingProIso|BoundaryCompositionCompatibility",
+   "results": "[grep] OK 0 hit(s). Project search: no occurrence in lean/WeilConjectures; definitions at lean/Sheaf/Paper/BoundaryDualizingComposition.lean:76,133,165,184. DAG search for boundaryCompositionIso|boundaryProCompositionIsoApp|boundaryDualizingProIso|BoundaryCompositionCompatibility finds only lem-weil-boundary-dualizing-composition, a theorem node; no definition node. tools/blueprint_refs.py search \"boundary composition\": 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing project definitions; record them existing:true instead of duplicating any construction. The new definition node provides the required statement-dependency attachment."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-finite-tor-domains",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "First proof paragraph: the dualizing-composition identifications used in the finite-Tor boundary domains; definition attachment requested on the returned stage-2 delivery.",
+   "via": [
+    "lem-weil-boundary-finite-tor-domains"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryDualizingComposition",
+  "declaration": "AlgebraicGeometry.Etale.boundaryCompositionIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.boundaryUpperShriekPlus",
+   "AlgebraicGeometry.Etale.boundaryAdjunctionPlus",
+   "AlgebraicGeometry.Etale.boundaryCompositionIso",
+   "AlgebraicGeometry.Etale.boundaryOriginIso",
+   "AlgebraicGeometry.Etale.boundaryProCompositionIsoApp",
+   "AlgebraicGeometry.Etale.boundaryCoefficientPlus",
+   "AlgebraicGeometry.Etale.boundaryDualizingEtaleIso",
+   "AlgebraicGeometry.Etale.boundaryDualizingProIso",
+   "AlgebraicGeometry.Etale.boundaryDualizingComparisonIso",
+   "AlgebraicGeometry.Etale.BoundaryCompositionCompatibility"
+  ],
+  "statement": "noncomputable def boundaryCompositionIso {X Y S : Scheme.{u}}\n    (f : X ⟶ Y) (g : Y ⟶ S) [HasCompactification f] [HasCompactification g]\n    [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] [CompactSpace Y] [CompactSpace S] :\n    boundaryUpperShriekPlus Λ (f ≫ g) ≅\n      boundaryUpperShriekPlus Λ g ⋙ boundaryUpperShriekPlus Λ f",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only attachment of the existing canonical mate, restricted ambient adjunction, comparison-origin transport, coefficient object, dualizing specializations and compatibility predicate. These declarations were previously attached only to the theorem node lem-weil-boundary-dualizing-composition. No declaration is copied or redefined, and that theorem remains only a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bf8ed30f",
+  "group": "Q54",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bf8ed30f",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Re-delivery of e1e279c9a230 (RETURN H2). New def node def-weil-boundary-composition-mate (existing:true, Sheaf.Paper.BoundaryDualizingComposition) re-exports the 10 requested declarations and is the only addition to the item's stmt_deps; the theorem node stays a proof_dep. Node text checked against the Lean: theta = conjugateIsoEquiv mate of compact-support composition, rho from the comparison unit, lambda, pro-etale composite order, kappa_e/kappa_p, compatibility predicate = pasted counit + naturality, not asserted. Signature verbatim; the new node's stmt_deps exist on main; no duplicate or race. Item Lean changed only in docstrings, signature identical to the compiled e1e2 file; statement, proof and proof_deps unchanged. Earlier clause-by-clause check stands; no hollow defs, sorry only, docstrings and report sections present. No compile because no file was changed."
+ }
+}

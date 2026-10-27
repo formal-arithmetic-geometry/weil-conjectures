@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-rational-point-local-jets",
+ "kind": "definition",
+ "title": "Rational-point local rings, jets and coordinate evaluation",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $B$ be a commutative $k$-algebra, and let $x:B\\to k$ be a $k$-algebra homomorphism [def-weil-pbc-algebra-hom-quotient]. Define the point prime $\\mathfrak p_x=\\ker(x)$ in $\\operatorname{Spec}B$ [def-weil-affine-spectrum] and the rational-point local ring $A_x=B_{\\mathfrak p_x}$ [def-weil-pbc-localization-at-prime]. For every integer $N\\geq0$, define the jet algebra $\\operatorname{Jet}(x,N)=A_x/\\mathfrak m_x^N$, where $\\mathfrak m_x$ is the maximal ideal of $A_x$, and its canonical quotient map $\\operatorname{jetMap}_{x,N}:A_x\\to\\operatorname{Jet}(x,N)$. Define $\\operatorname{JetIdeal}(x,N)$ as the image of $\\mathfrak m_x$ under this quotient map, regarded as a $k$-linear subspace; when $N\\geq1$ it is $\\mathfrak m_x/\\mathfrak m_x^N$. For an ideal $K\\subseteq B$ and $y:B/K\\to k$, define $\\operatorname{quotientPoint}(K,y)=y\\circ(B\\to B/K)$. Finally, for commutative $k$-algebras $C,E,D$ and $k$-algebra maps $c:E\\to E\\otimes_k C$, $q:E\\to D$ and $t:C\\to D$, define $\\operatorname{evaluate}(c,q,t)=(q\\otimes t)\\circ c$, with the map $E\\otimes_k C\\to D$ sending $e\\otimes h$ to $q(e)t(h)$ [def-weil-pbc-module-tensor-product] [lem-weil-pbc-algebra-tensor-pushout-universal-property]. No finite-type, smoothness, action, or reducedness assumption is part of these definitions.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 13.4, printed p.255 (rational-point local ring); proof of Lemma 13.6, printed p.256 (local jets and maximal-ideal quotients); affine action construction, Section 4(d), printed pp.86--87 (tensor evaluation). Definitions reuse the unchanged general helper declarations in Sheaf/AlgebraicGeometry/TorusFixedLocalIdealJets.lean:42-95."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local ring and finite jet algebra at a rational point of an affine scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : IsLocalRing <| Localizations R P\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ forms a local ring. This localization inverts all elemen\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Field (X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(x : X) : IsLocalRing (X.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$ and any point $x$ in $X$, the stalk of the structure sheaf (a presheaf of commutative rings) at $x$ is a local ring. This asserts the defining property of a locally ri\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"∀ (self : AlgebraicGeometry.LocallyRingedSpace) (x : ↑↑self.toPresheafedSpace), IsLocalRing ↑(self.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$, the stalk of its structure sheaf $\\\\mathcal{O}_X$ at every point $x \\\\in X$ is a local ring, i.e., a commutative ring with a unique maximal ideal.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.Spec.locallyRingedSpaceObj\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"(R : CommRingCat.{u}) : LocallyRingedSpace\", \"doc\": \"For a commutative ring $ R $, this constructs the locally ringed space $ \\\\operatorname{Spec}(R) $ by equipping the prime spectrum with the Zariski topology and the structure sheaf $ \\\\mathcal{O}_{\\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : X.presheaf.obj (op ⊤) ⟶ X.residueField x\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing general local-jet constructions are in Sheaf.AlgebraicGeometry.TorusFixedLocalIdealJets; record them with existing:true. Mathlib supplies localization and quotient primitives, not this named helper interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rational point kernel prime localization quotient maximal ideal power jet algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"A linear map on the cotangent module of a localized algebra extension, constructed using the basis generated by the Jacobian equivalence for the localization at an element $ r $. This map sends each b\"}\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (r : R) → [inst_3 : IsLocalization.Away r S] → (Algebra.Generators.localizationAway S r).toExtension.Cotangent\", \"doc\": \"The element in the cotangent module of the algebra extension obtained by localizing at $ r $, represented by the polynomial $ C(r)X - 1 $ where $ C(r) $ is the constant polynomial embedding of $ r $ a\"}\n  {\"name\": \"Algebra.Extension.ker_infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), P.infinitesimal.ker = P.ker.cotangentIdeal\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the kernel of the infinitesimal extension $ P_{\\text{infinitesimal}} $ coincides with the cotangent ideal of the\"}\n  {\"name\": \"Algebra.Generators.ker_localizationAway\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S],\\n  (Algebra.Generators.localizationAway S r).ker = Ideal.span {MvPolynomial.C r * MvPolynomial.X () - 1}\", \"doc\": \"The kernel of the algebra map generating the localization of a commutative ring $ R $ at an element $ r $ is the ideal generated by the polynomial $ rX - 1 $.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing general local-jet constructions are in Sheaf.AlgebraicGeometry.TorusFixedLocalIdealJets; record them with existing:true. Mathlib supplies localization and quotient primitives, not this named helper interface."
+  },
+  {
+   "tool": "grep",
+   "query": "pointPrime|quotientPoint|JetIdeal|def jetMap",
+   "results": "[grep] OK 0 hit(s)\nDirect rg in lean/WeilConjectures and lean/Sheaf found the seven general definitions in Sheaf/AlgebraicGeometry/TorusFixedLocalIdealJets.lean:42-95; no counterparts in WeilConjectures. Exact declaration-name and rational-point-local-jets searches among definition DAG nodes returned no owner. tools/blueprint_refs.py search 'local jets' returned 0 blueprint matches.",
+   "date": "2026-10-24",
+   "verdict": "Existing general local-jet constructions are in Sheaf.AlgebraicGeometry.TorusFixedLocalIdealJets; record them with existing:true. Mathlib supplies localization and quotient primitives, not this named helper interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dense-fixed-local-ideal-jets",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Corollary 13.8, printed p.257, smoothness assertion, specialized to a smooth connected acting affine group and a smooth affine scheme. Supporting input: Lemma 13.6 and Theorem 13.7, printed p.256, specialized to an algebraically closed field, an affine smooth scheme and a dense abstract subgroup. The local proof does not require connectedness or irreducibility of X. Supporting input: Milne Lemma 13.6, first paragraph, and Lemma 13.4: the fixed-point local ring and rational finite-jet representations, before complete reducibility is applied. Definition ownership for the rational-point local ring and finite jets used in the dense-subgroup statement, and affine coordinate evaluation.",
+   "via": [
+    "lem-sfb-dense-fixed-local-ideal-jets",
+    "lem-sfb-linearly-reductive-dense-fixed-smooth",
+    "lem-sfb-semisimple-fixed-subscheme-smooth",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusFixedLocalIdealJets",
+  "declaration": "AlgebraicGeometry.TorusFixedJets.pointPrime",
+  "declarations": [
+   "AlgebraicGeometry.TorusFixedJets.pointPrime",
+   "AlgebraicGeometry.TorusFixedJets.LocalRing",
+   "AlgebraicGeometry.TorusFixedJets.evaluate",
+   "AlgebraicGeometry.TorusFixedJets.Jet",
+   "AlgebraicGeometry.TorusFixedJets.jetMap",
+   "AlgebraicGeometry.TorusFixedJets.JetIdeal",
+   "AlgebraicGeometry.TorusFixedJets.quotientPoint"
+  ],
+  "statement": "def pointPrime {k B : Type u} [Field k] [CommRing B] [Algebra k B]\n    (x : B →ₐ[k] k) : PrimeSpectrum B",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-node ownership of the seven unchanged real-data def/abbrev declarations requested in H2 for returned immutable head e96708733b53. All are general in their algebra arguments, despite the TorusFixedJets namespace. Their bodies are kernel prime, Localization.AtPrime, tensor productMap composition, ideal quotient, quotient map, image ideal with restrictScalars, and quotient-map composition, respectively. No torus theorem, choice, or postponed proof is used. No new Lean module or duplicate declaration is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46446f0dd",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46446f0dd",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery of the H2 return of e96708733b53. Lean file byte-identical (sha256 d7312ef6…b683), so the earlier clause-by-clause acceptance stands; re-read signature (hfixed on all D, G-fixedness for all g:G(D), pinned tau/residue/J/A/J≃O_F,x, jet coactions pinned at dense H, d/d2/p pinned, surjective, intertwining). Item differs from live only in lean and stmt_deps: theorem deps removed; added new def-sfb-rational-point-local-jets plus existing owners def-sfb-coordinate-hopf-algebra and def-sfb-hopf-action-module-data. New def node existing:true on the unchanged TorusFixedLocalIdealJets: the seven plain defs (pointPrime, LocalRing, evaluate, Jet, jetMap, JetIdeal, quotientPoint) match the TeX clauses, are general and have no choice or sorry; lean.statement verbatim in the live file; source Milne 13.4/13.6/§4(d); searches recorded; no parallel owner in side-live. Edge cases n=1, X=Spec k, nonreduced X, disconnected G, mu_p excluded by Smooth. No compile needed (no file changed). Minor: the owned declarations' docstrings still name the torus blueprint id (landed module, acceptable)."
+ }
+}

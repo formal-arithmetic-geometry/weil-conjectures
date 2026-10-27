@@ -1,0 +1,227 @@
+{
+ "id": "lem-per-varying-site-evaluation-adjoints",
+ "kind": "statement",
+ "title": "Free and cofree evaluation for varying-site abelian sheaf systems",
+ "statement": "Let $I$ be a small category in the universes of [def-weil-size-convention]. For each $i$ let $\\mathcal C_i$ be a small site [def-weil-pbc-sites-and-cohomology]. For each $a:j\\to i$ let $f_a:\\mathcal C_j\\to\\mathcal C_i$ be a morphism of sites, with its additive adjunction $f_a^{-1}\\dashv f_{a,*}$ and specified canonical identity and composition identifications satisfying the coherence laws. Let $\\mathscr S$ be the category whose objects are families $F_i\\in\\operatorname{Ab}(\\mathcal C_i)$ and maps $\\phi_a:f_a^{-1}F_i\\to F_j$ satisfying the identity and cocycle laws; morphisms $h:F\\to G$ are families with $h_j\\phi_a=\\psi_a f_a^{-1}h_i$. For each $i$, evaluation $\\operatorname{ev}_i(F)=F_i$ has additive adjoints $L_i\\dashv\\operatorname{ev}_i\\dashv R_i$, with natural component identifications\n$$ (L_iA)_j=\\bigoplus_{a:j\\to i}f_a^{-1}A,\\qquad (R_iA)_j=\\prod_{a:i\\to j}f_{a,*}A.$$\nProducts and coproducts are in abelian sheaves, with empty ones equal to zero. For $c:k\\to j$, the transition of $L_iA$ sends the $a:j\\to i$ summand of $f_c^{-1}(L_iA)_j$, through the composition comparison, to the $a\\circ c$ summand of $(L_iA)_k$. The transition of $R_iA$ is specified by its $b:i\\to k$ projection: it is $f_c^{-1}$ of the $c\\circ b$ projection, followed by the composition comparison and the counit $f_c^{-1}f_{c,*}f_{b,*}A\\to f_{b,*}A$. The adjunction $\\operatorname{Hom}(L_iA,F)\\cong\\operatorname{Hom}(A,F_i)$ is restriction to the identity summand; its inverse sends $h:A\\to F_i$ to the family with $a$-summand $\\phi_a f_a^{-1}h$. The adjunction $\\operatorname{Hom}(F,R_iA)\\cong\\operatorname{Hom}(F_i,A)$ is projection to the identity factor; its inverse sends $h:F_i\\to A$ to the family whose $a:i\\to j$ factor is the adjunct of $h\\phi_a:f_a^{-1}F_j\\to A$. These formulas insert the supplied identity identifications and are natural in both arguments.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EXZ, lemma-colim-sites-injective, arrow-indexed product construction; spaces-simplicial.tex Tag 09WG, lemma-restriction-to-components-site (5)-(7), free evaluation construction. Agent generalization to arbitrary small coherent diagrams, with no total-site or cofilteredness hypothesis."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit",
+  "def-per-varying-site-abelian-systems",
+  "def-per-coherent-site-diagram",
+  "def-per-coherent-site-sheaf-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual free sums and cofree products and their explicit transitions in the two supporting modules. Their named coherence theorems supply the system identity and cocycle laws and normalized generator/factor equations; the cofree theorem also gives compatibility of its explicit extension family.",
+   "uses": [
+    "lem-per-varying-site-free-evaluation-coherence",
+    "lem-per-varying-site-cofree-evaluation-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the free functor on arrows by Sigma.map. Test compatibility on the preserved coprojections and use naturality of the inverse-image compositor. The same test, now using the cocycle of X, shows that the family with a-summand Q_a(h) followed by X.transition a is compatible.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to the identity summand and the explicit free extension are inverse. One identity follows from the system identity law and naturality of the inverse-image unitor. For the other, compatibility with a together with the normalized generator equation recovers every a-summand. These maps are natural by component composition and functoriality, giving the free adjunction.",
+   "uses": [
+    "lem-per-varying-site-free-evaluation-coherence",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the explicit cofree extension as the forward Hom map and the identity-factor restriction as its inverse. The first inverse identity is the identity-arrow adjunct normalization. For the second, the compatibility of h with a, adjunct naturality, and the normalized identity-factor equation give equality at every a-projection.",
+   "uses": [
+    "lem-per-varying-site-cofree-evaluation-coherence",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the cofree map on a coefficient morphism h by extending identity-factor restriction followed by h. Adjunct naturality and the normalized factor equation show its j-component is Pi.map(P_a.map h). Projections prove functoriality and both naturality laws of its Hom equivalence. Apply mkOfHomEquiv to obtain the right adjunction.",
+   "uses": [
+    "lem-per-varying-site-cofree-evaluation-coherence",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both adjoints are additive because evaluation is additive and one adjoint in an adjunction is additive if the other is. The component isomorphisms are identities. The coprojection and projection equations of the explicit transitions and the two constructed Hom equivalences verify every normalization in AbelianEvaluationAdjoints.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-per-varying-site-free-evaluation-coherence",
+  "lem-per-varying-site-cofree-evaluation-coherence",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0EXZ and 09WG: explicit arrow-indexed sums/products; M1 formal proof of both universal properties and adjunctions from the isolated transition-coherence lemmas, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on compatible systems over a small diagram of varying sheaf categories has left and right adjoints given by arrow indexed coproducts and products",
+   "results": "{\"t\": \"2026-10-24T11:23:10Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation on compatible systems over a small diagram of varying sheaf categories has left and right adjoints given by arrow indexed coproducts and products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"CategoryTheory.Sheaf.adjunction\", \"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.evaluationAdjunctionLeft\", \"CategoryTheory.evaluationIsLeftAdjoint\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.instIsRightAdjointSheafΓ\"], \"digest\": \"0a4763c5fb04e7f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Evaluation.lean:38-67 and 88-115 give fixed-category functor evaluations only; the site-dependent inverse images, direct images and coherence comparisons are absent. Not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationAdjunction|evaluation.*[Aa]djoint|[Ss]ection.*[Aa]djoint",
+   "results": "{\"t\": \"2026-10-24T11:23:49Z\", \"tool\": \"grep\", \"query\": \"evaluationAdjunction|evaluation.*[Aa]djoint|[Ss]ection.*[Aa]djoint\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\"], \"digest\": \"6fc8db73cd70a40c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Evaluation.lean:38-67 and 88-115 give fixed-category functor evaluations only; the site-dependent inverse images, direct images and coherence comparisons are absent. Not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation from sections of a diagram of categories of sheaves admits a free left adjoint and a cofree right adjoint indexed by arrows",
+   "results": "{\"t\": \"2026-10-24T11:23:49Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation from sections of a diagram of categories of sheaves admits a free left adjoint and a cofree right adjoint indexed by arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.evaluationIsLeftAdjoint\", \"CategoryTheory.evaluationAdjunctionLeft\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.evaluationIsRightAdjoint\", \"TopCat.Sheaf.instIsLeftAdjointPullback\"], \"digest\": \"a5c9ff3380725c38\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Evaluation.lean:38-67 and 88-115 give fixed-category functor evaluations only; the site-dependent inverse images, direct images and coherence comparisons are absent. Not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-24T11:23:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction\", \"CategoryTheory.Adjunction.isLeftAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\", \"CategoryTheory.Adjunction.mk'\", \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"CategoryTheory.Adjunction.ofIsRightAdjoint\"], \"digest\": \"d2183a4d275d6f7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Evaluation.lean:38-67 and 88-115 give fixed-category functor evaluations only; the site-dependent inverse images, direct images and coherence comparisons are absent. Not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free and cofree sections of a contravariant pseudofunctor of abelian categories with adjoint transition functors, with component coproduct and product formulas for adjoints to evaluation",
+   "results": "{\"t\": \"2026-10-24T11:24:21Z\", \"tool\": \"leanfinder\", \"query\": \"Free and cofree sections of a contravariant pseudofunctor of abelian categories with adjoint transition functors, with component coproduct and product formulas for adjoints to evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.freeAdjunction\", \"CategoryTheory.evaluationLeftAdjoint_obj_obj\", \"Condensed.setAbAdjunction\", \"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeAdjunctionUnit_app\", \"PresheafOfModules.freeAdjunction_unit_app\", \"PresheafOfModules.free_hom_ext\", \"PresheafOfModules.freeAdjunction_homEquiv\"], \"digest\": \"90b04b1711a12f57\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Evaluation.lean:38-67 and 88-115 give fixed-category functor evaluations only; the site-dependent inverse images, direct images and coherence comparisons are absent. Not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationAdjunction|evaluationLeftAdjoint|evaluationRightAdjoint|cofree",
+   "results": "{\"t\": \"2026-10-24T11:45:53Z\", \"tool\": \"grep\", \"query\": \"evaluationAdjunction|evaluationLeftAdjoint|evaluationRightAdjoint|cofree\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Equalizer.lean\"], \"digest\": \"e0eb69d18b2a3d73\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the evaluation adjunctions in Mathlib/CategoryTheory/Adjunction/Evaluation.lean:38-67,90-117 concern functors to a single fixed category. Scheme.Modules.pseudofunctor concerns module pullback/pushforward, not evaluation on arbitrary varying-site systems; neither gives this item by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left and right adjoints to evaluation on compatible systems of sheaves over varying sites",
+   "results": "{\"t\": \"2026-10-24T11:45:53Z\", \"tool\": \"leansearch\", \"query\": \"Left and right adjoints to evaluation on compatible systems of sheaves over varying sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj\", \"CategoryTheory.evaluationIsRightAdjoint\", \"CategoryTheory.evaluationIsLeftAdjoint\", \"CategoryTheory.evaluationAdjunctionLeft\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\"], \"digest\": \"582862465d4cc5fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the evaluation adjunctions in Mathlib/CategoryTheory/Adjunction/Evaluation.lean:38-67,90-117 concern functors to a single fixed category. Scheme.Modules.pseudofunctor concerns module pullback/pushforward, not evaluation on arbitrary varying-site systems; neither gives this item by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.evaluationLeftAdjoint, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-24T11:45:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.evaluationLeftAdjoint, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationAdjunctionRight\"], \"digest\": \"263250f7eb6d7b2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the evaluation adjunctions in Mathlib/CategoryTheory/Adjunction/Evaluation.lean:38-67,90-117 concern functors to a single fixed category. Scheme.Modules.pseudofunctor concerns module pullback/pushforward, not evaluation on arbitrary varying-site systems; neither gives this item by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on sections of a pseudofunctor of abelian sheaf categories has free and cofree adjoints given by sums of inverse images and products of direct images",
+   "results": "{\"t\": \"2026-10-24T11:45:55Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation on sections of a pseudofunctor of abelian sheaf categories has free and cofree adjoints given by sums of inverse images and products of direct images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"Condensed.setAbAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"SheafOfModules.PullbackConstruction.adjunction\", \"Condensed.freeForgetAdjunction\", \"LightCondensed.freeForgetAdjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"SheafOfModules.pullbackObjFreeIso\"], \"digest\": \"74be48597f34ef8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the evaluation adjunctions in Mathlib/CategoryTheory/Adjunction/Evaluation.lean:38-67,90-117 concern functors to a single fixed category. Scheme.Modules.pseudofunctor concerns module pullback/pushforward, not evaluation on arbitrary varying-site systems; neither gives this item by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a diagram of categories with adjoint transition functors, construct left and right adjoints to evaluation of lax sections using arrow indexed coproducts and products",
+   "results": "{\"t\": \"2026-10-24T11:46:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a diagram of categories with adjoint transition functors, construct left and right adjoints to evaluation of lax sections using arrow indexed coproducts and products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationLeftAdjoint\", \"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.evaluationLeftAdjoint_obj_obj\", \"CategoryTheory.evaluationRightAdjoint\", \"CategoryTheory.evaluationIsRightAdjoint\", \"CategoryTheory.evaluationLeftAdjoint_obj_map\", \"CategoryTheory.evaluationRightAdjoint_obj_obj\", \"CategoryTheory.evaluationAdjunctionLeft\"], \"digest\": \"39d52f4ee418bf8b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the evaluation adjunctions in Mathlib/CategoryTheory/Adjunction/Evaluation.lean:38-67,90-117 concern functors to a single fixed category. Scheme.Modules.pseudofunctor concerns module pullback/pushforward, not evaluation on arbitrary varying-site systems; neither gives this item by one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-varying-site-system-injective-resolutions",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3 of lem-per-artin-gabber-affine-curve: 'That assertion is proved by the argument of Step 2 with f_! replaced by f_*'. In the inherited refinement through the punctual/completion and derived-sections continuity tools, this is the free/cofree evaluation input for compatible varying-site resolutions.",
+   "via": [
+    "lem-per-varying-site-system-injective-resolutions",
+    "lem-per-finite-cover-derived-sections-continuity",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-varying-site-evaluation-adjoints",
+  "worker": "stage1",
+  "summary": "Gave explicit free and cofree systems, verified identities and cocycles on summands/projections, constructed both natural Hom bijections and checked both inverse identities. Reused all required general sheaf and adjunction tools already in the DAG, so no new nodes were needed. Kept the statement and its hypotheses unchanged; no inverse-image/product interchange or total-site/cofilteredness assumption is used.",
+  "blueprint": "Refines the inherited compatible-resolution input below the ancestor proof Step 3 (the f_* support argument); the newest blueprint does not state these adjoints separately. Steps 3-4 realize the free construction of Stacks 09WG; Steps 5-10 realize and verify the arrow-product construction of 0EXZ in this generality."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-a0d785f83",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-a0d785f83 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement is byte-identical to the base; the only additions are a proof and two stmt_deps (product and colimit definitions). I checked the variances: f_a goes C_j→C_i, the left adjoint has the sum over arrows j→i, the right adjoint has the product over arrows i→j, and the right adjoint's transition is the counit after the c∘b projection. They agree with Stacks 09WG (spaces-simplicial.tex, lemma-restriction-to-components-site (5),(6)) and Stacks 0EXZ (sites-cohomology.tex, lemma-colim-sites-injective, product proof). I re-derived Steps 2-11: the composite-adjunct formula, the coproduct cocycle with both sides equal to ι_{acd}, the inverse identities for the left adjunction, the uniqueness of the product map t_c, and the cocycle t_{cd}=P_c(t_d)t_c, whose c∘d∘e index bookkeeping I checked. I also checked θ_{cb}=P_c(θ_b)θ_c in Step 9, and the recovery in Step 10 via P_aρ_1. I opened each cited statement and each says what its step takes (sheafification-exact (1), presheaf-colimits-sectionwise, the sheafification universal property, adjoint preservation of limits and colimits for any small I, adjunction-of-natural-bijection, composite-adjunction, site-morphism-composition (3) for adjunction-compatible comparisons). Inverse image is never applied to an infinite product. Small cases tested: empty and discrete I, one object with an endomorphism monoid, and the walking arrow. Duplicate search over the arrow-product pbc nodes, trf total-site component restriction, the sfb semisimplicial free adjoint and the coef free-arrow adjunction: none states the item. Route: the out-of-unit nodes are Mathlib leaves or Lean-closed (site-morphism-composition is closed on slopmaster2). There is no SGA source, and the blueprint from.place sentence is verified at Step 3 of lem-per-artin-gabber-affine-curve. Minor, no action: the report mentions citations.json, which is not in the commit, and the new stmt_deps have no inline citation in the statement."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.VaryingSiteEvaluationAdjoints",
+  "declaration": "CategoryTheory.CoherentSitePseudofunctor.varyingSite_evaluation_adjoints",
+  "declarations": [
+   "CategoryTheory.CoherentSitePseudofunctor.AbelianEvaluationAdjoints",
+   "CategoryTheory.CoherentSitePseudofunctor.varyingSite_evaluation_adjoints"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/VaryingSiteEvaluationAdjoints.lean",
+  "statement": "theorem varyingSite_evaluation_adjoints {I : Type u} [Category.{v} I] {F : LocallyDiscrete Iᵒᵖ ⥤ᵖ Cat.{w, w}} (D : CoherentSitePseudofunctor I F) [∀ (i j : I) (a : i ⟶ j), (D.abelianInverse a).Additive] [∀ (i j : I) (a : i ⟶ j), (D.abelianDirect a).Additive] (siteMorphism : ∀ {i j : I} (a : i ⟶ j), PreservesFiniteLimits (D.inverseImage a)) (i : I) : Nonempty (D.AbelianEvaluationAdjoints i)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-304cf3978",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Re-delivery after 40e6 RETURN H2. Lean files byte-identical to 40e6, which was read in full and found correct; item differs from side-live only in lean+stmt_deps; statement and proof verbatim. H2 repaired: theorem stmt_deps replaced by new existing:true def nodes def-per-coherent-site-diagram (CoherentSitePseudofunctor, TotalSitePseudofunctor.lean:34-35, 09WC Case A) and def-per-coherent-site-sheaf-adjunction (fibreSheaves/directImage/inverseImage/imageAdjunction, TotalSiteSheafSystems.lean:55-56, 00WX); lean.statements verbatim; node texts match the fields and constructions; no prior def owner in side-live; abelian-systems node cites only the structure owner (its module does not use the set-valued inverse image). Re-checked independently: variances (sum over j⟶i, product over i⟶j), left transition via abelianInverseComp c a to the c≫a summand, right transition via the b≫c projection, abelianDirectComp.inv and counit, the four Hom formulas (inverseId⁻¹, right homEquiv.symm, directId), additivity, AddCommGrpCat.{max v w} universes, edge cases (empty/discrete I, monoid, walking arrow, A=0). Q30 cf7b superseded, not landed, so no rebind. No compile (no Lean file changed). Sole finding H11: the Second reading section is an explicit self-read → fixes/lem-per-varying-site-evaluation-adjoints.report.md replaces that section with an independent clause-by-clause reading; all else verbatim."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T092003-L-3391722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

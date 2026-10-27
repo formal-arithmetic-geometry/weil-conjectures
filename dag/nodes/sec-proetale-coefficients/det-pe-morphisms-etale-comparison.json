@@ -167,7 +167,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-e962cabc9 (reviewer sub-agent of L); spot-checked: Read all seven steps, the new node, cited statements, blueprint route, and source locations. Mathematics and edge cases pass; no duplicate or circular split found. Corrected step 7’s lemma label for Tag 02GV to lemma-flat-unramified-etale. Whole corrected JSON and detailed review.md written. Accepted tool use: lem-weil-pbc-ind-etale-stability.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
@@ -195,5 +206,38 @@
   "landing": "20261019T002459-L-2139685",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $u\\colon U\\to X$ be a morphism of schemes.\n\n1. If $u$ is étale, then $u$ is weakly étale [def-weil-weakly-etale-morphism].\n2. If $X=\\operatorname{Spec}R$ and $u$ is affine pro-étale, i.e. $U=\\operatorname{Spec}B$\n   with $R\\to B$ ind-étale [def-weil-pbc-ind-etale-algebra], then $u$ is weakly étale.\n3. If $u$ is weakly étale and locally of finite presentation, then $u$ is étale.\n4. $u$ is weakly étale if and only if, for all affine opens $\\operatorname{Spec}R\\subset X$\n   and $\\operatorname{Spec}B\\subset u^{-1}(\\operatorname{Spec}R)$, the ring map $R\\to B$ and\n   the multiplication $B\\otimes_RB\\to B$ are flat.",
+  "proof": [
+   {
+    "text": "*4.* Flatness is local on source and target. The diagonal $\\Delta_u$ maps the affine open\n$\\operatorname{Spec}B$ into the affine open\n$\\operatorname{Spec}B\\times_{\\operatorname{Spec}R}\\operatorname{Spec}B=\\operatorname{Spec}(B\\otimes_RB)$,\nwhere it is the closed immersion given by multiplication $B\\otimes_RB\\to B$; such opens\ncover the source of $\\Delta_u$ and their images lie in opens of this form covering a\nneighbourhood of $\\Delta_u(U)$. Hence $u$ and $\\Delta_u$ are flat if and only if all the\nchart maps $R\\to B$ and $B\\otimes_RB\\to B$ are flat.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*1.* An étale morphism is flat. It is also unramified and locally of finite presentation,\nso its diagonal is an open immersion (Stacks Project, Morphisms, unramified morphisms), and open immersions are flat.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*2.* An ind-étale ring map is weakly étale by [lem-weil-pbc-ind-etale-stability]: $B$ is\nflat over $R$ as a filtered colimit of flat algebras, and $B\\otimes_RB\\to B$ is\nind-Zariski, hence flat. Apply 4.",
+    "uses": [
+     "lem-weil-pbc-ind-etale-stability"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*3.* Let $u$ be weakly étale and locally of finite presentation. The diagonal of a\nmorphism locally of finite presentation is locally of finite presentation (Stacks Project, Morphisms, morphisms locally of finite presentation). The diagonal is a monomorphism, and it is flat by assumption. A flat monomorphism\nlocally of finite presentation is an open immersion (Stacks Project, Étale morphisms of schemes). So $\\Delta_u$ is\nan open immersion, i.e. $u$ is unramified (Stacks Project, Morphisms, unramified morphisms). A flat, unramified morphism\nlocally of finite presentation is étale.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

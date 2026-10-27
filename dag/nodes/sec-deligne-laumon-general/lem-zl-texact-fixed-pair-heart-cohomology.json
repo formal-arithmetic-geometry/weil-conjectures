@@ -1,0 +1,375 @@
+{
+ "id": "lem-zl-texact-fixed-pair-heart-cohomology",
+ "kind": "statement",
+ "title": "Exact hearts and cohomology for a t-exact functor on fixed pairs",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be triangulated categories with bounded $t$-structures [def-weil-triangulated-category, def-weil-t-structure], with abelian hearts $\\mathcal A,\\mathcal B$. Let $P:\\mathcal C\\to\\mathcal C$ and $Q:\\mathcal D\\to\\mathcal D$ be exact autoequivalences, with $P,P^{-1},Q,Q^{-1}$ preserving both halves of the respective $t$-structures. Let $F:\\mathcal C\\to\\mathcal D$ be an exact triangulated functor preserving both halves, with its shift comparison, and let $\\alpha:QF\\xrightarrow{\\sim}FP$ be a natural isomorphism compatible with these shift comparisons. Use the fixed-pair categories of [def-weil-endofunctor-fixed-pair-category], so an arrow $u:(K,\\theta)\\to(K',\\theta')$ satisfies $u\\theta=\\theta'P(u)$.\n\nThe rule $\\widetilde F(K,\\theta)=(FK,F(\\theta)\\alpha_K)$, $\\widetilde F(u)=F(u)$ defines a functor $\\mathcal C^P\\to\\mathcal D^Q$. The canonical truncation and cohomology comparisons for $P,Q,F$ induce functors on fixed pairs and natural isomorphisms\n$$\\mathcal H^a(\\widetilde F(K,\\theta))\\xrightarrow{\\sim}\\widetilde F(\\mathcal H^a(K,\\theta))\\qquad(a\\in\\mathbf Z).$$\nThe carrier of this isomorphism is exactly the canonical comparison $\\mathcal H^a(FK)\\simeq F\\mathcal H^a(K)$ characterized by the truncation maps. It intertwines the structures induced by $\\alpha$ and $\\theta$, is natural in equivariant arrows, and is compatible with composition of such functors and with shift-compatible natural isomorphisms between them.\n\nThe full subcategories $\\mathcal A^P\\subset\\mathcal C^P$ and $\\mathcal B^Q\\subset\\mathcal D^Q$ on objects whose carriers lie in the hearts are abelian. Their forgetful functors create kernels and cokernels: for an equivariant $u:A\\to B$, the structure on $\\ker u$ is the unique isomorphism $P(\\ker u)\\to\\ker u$ whose composite with $\\ker u\\to A$ is $P(\\ker u)\\to PA\\xrightarrow{\\theta_A}A$, and the cokernel structure is defined by its analogous projection equation. The inverses are induced from $\\theta_A^{-1},\\theta_B^{-1}$ under the kernel and cokernel preservation comparisons for $P$. The restriction $\\widetilde F:\\mathcal A^P\\to\\mathcal B^Q$ preserves these kernel and cokernel maps and is exact. No triangulated structure on either fixed-pair category is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-sp-abelian",
+  "lem-weil-heart-short-exact-triangles",
+  "def-zl-fixed-pair-truncation-cohomology-functors",
+  "def-per-truncation-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use IsoAlgebra.mapOfNatIso for the transported functor. Its existing object-structure and arrow lemmas give the first two clauses exactly. Naturality of alpha supplies the algebra square, and its carrier maps are F.map.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "For upper and lower truncations use the corresponding two squares of truncationCohomologyComparison_square, instantiated with U=P, V=Q and F'=F. The private liftComparison construction turns each square into a natural isomorphism of transported fixed-pair functors. On the forward component use the canonical comparison e_F, prove equivariance by the square and naturality of e_F at theta, and then take the inverse. This gives precisely the inverse canonical truncation carrier asserted.",
+   "uses": [
+    "lem-a1-cohomology-comparison-pasting",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "Identify the composite fixedPairCohomology with transport by truncationCohomologyComparison using an isomorphism with identity carriers. Expand the three transport structure maps and the specified comparison: functoriality gives the same shifted double-truncation structure map. Apply liftComparison to the cohomology square from truncationCohomologyComparison_square and whisker by the two identity-carrier identifications. The resulting carrier is exactly the inverse canonical cohomology comparison.",
+   "uses": [
+    "lem-a1-cohomology-comparison-pasting",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "For every a the object truncGELE a a K has both bounds a; the shift by a puts it in the heart. This is the heart clause already proved by cohomology_comparison_pasting. The carrier of lifted cohomology is definitionally that shifted double truncation, giving both final clauses.",
+   "uses": [
+    "lem-a1-cohomology-comparison-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "Restrict each t-exact functor R to the full ordinary hearts by heartMap, whose objects and arrows are R on carriers. The two t-exactness fields prove preservation of heart objects, and additivity follows from R.map_add. A short exact sequence in the heart extends to a distinguished triangle by shortExact_iff_exists_distTriang. Apply R to that triangle and its specified shift comparison, then apply the same characterization in the target heart. Thus the restriction preserves short exact sequences. Functor.exact_tfae gives preservation of finite limits and finite colimits, without completeness assumptions.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-triangulated-category",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "Construct explicitly the equivalence from fixedPairHeart t P to IsoAlgebra of the ordinary-heart restriction of P. An object is sent to the same carrier in the heart with its same structure isomorphism, and a map is sent to its same carrier intertwiner. The inverse forgets the heart wrappers; unit and counit have identity carriers. Their naturality and the triangle identity follow on carriers. IsoAlgebra.abelian applies to the exact additive ordinary-heart restriction from the previous step, and abelianOfEquivalence transfers this abelian structure back to the given fixedPairHeart category.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "Under the explicit equivalence the given fixedPairHeartForget is definitionally the algebra forgetful functor composed with the equivalence. The exact forgetful instances in the adopted EndoFunctor library therefore give its preservation of finite limits and finite colimits. It reflects isomorphisms because its composite with the ordinary-heart inclusion is the faithful full-subcategory inclusion followed by IsoAlgebra.forget. The finite-limit and finite-colimit reflection lemmas apply since the fixed-pair hearts now have those limits.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "For a given kernel fork c in the ordinary heart, apply the exact restriction of P to obtain a limiting kernel fork of P(u). The structure isomorphisms of A and B define a natural isomorphism of parallel-pair diagrams. IsLimit.conePointsIsoOfNatIso gives the structure kappa on the kernel. Its hom and inverse projection equations give exactly the two equations in the statement. Any competing kappa has the same composite with the kernel inclusion, so Fork.IsLimit.hom_ext proves uniqueness in the ordinary heart and hence on carriers.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "Dually apply P to a given cokernel cofork and use the same diagram isomorphism. IsColimit.coconePointsIsoOfNatIso gives its structure gamma; its coprojection equations give both the asserted hom and inverse equations. Cofork.IsColimit.hom_ext applied to the mapped cofork proves uniqueness. These constructions work for an arbitrary universal fork or cofork, not merely the chosen kernel or cokernel.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "The abelian fixed-pair hearts have kernels and cokernels. Since the forgetful functor preserves these limits and colimits and reflects isomorphisms, createsLimitOfReflectsIsomorphismsOfPreserves and its colimit analogue give creation of every parallel pair (u,0) required in the statement. No infinite limit or colimit is assumed.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "The composite of fixedPairHeartMap with target forgetting is definitionally source forgetting followed by heartMap of F. Both factors are exact by the preceding steps. Target forgetting reflects finite limits and finite colimits, so preservesFiniteLimits_of_reflects_of_preserves and its colimit analogue prove both required preservation statements for fixedPairHeartMap.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  },
+  {
+   "text": "Retain the existing complete composition and natural-isomorphism coherence proofs. Identity carriers identify the two composite transport functors; eta components identify compatible transports. The canonical carrier equations use truncationCohomologyComparison_comp, truncationCohomologyComparison_id and truncationCohomologyComparison_naturality. Faithful forgetting checks naturality and the algebra squares.",
+   "uses": [
+    "lem-a1-cohomology-comparison-pasting",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction cohomology and Part 2 exactness; returned item Steps 3 and 11; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-a1-cohomology-comparison-pasting",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-triangulated-category",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Proposition 1.3.3, paragraphs 1.3.4–1.3.5, Theorem 1.3.6 and Proposition 1.3.17, printed pp. 29–31, 36–37; agent-written fixed-pair calculations below. The fixed-pair equivariance and universal-property assembly is written here by Q120; it is not a verbatim theorem of BBD. Z6, 2026-10-25: the two coherence theorems are now proved in Lean using the already proved canonical cohomology-comparison pasting API and direct algebra isomorphisms. The main heart/cohomology theorem remains an unchanged named hole; its original proof plan and dependencies are retained. E4, 2026-10-25: the remaining main theorem follows the explicit comparison-square lifts and the equivalence with invertible algebras in the ordinary heart, using the existing proved abelian and exact-forgetting API without any completeness assumptions. Kernel and cokernel structure equations come from universal cone comparison isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact t-exact triangulated functor commuting with exact t-exact automorphisms induces an exact functor on their fixed-pair hearts and equivariant cohomology comparisons",
+   "results": "CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.IsHomological",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general homological functors or kernel preservation, not the fixed-pair heart and shift-compatible equivariant cohomology package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernels and cokernels of objects with an invertible endomorphism are created by forgetting and an equivariant t-exact functor commutes with cohomology",
+   "results": "CategoryTheory.Functor.mem_homologicalKernel_iff, Rep.coinvariantsMk, CategoryTheory.ComposableArrows.Exact.cokerIsoKer', CategoryTheory.Functor.homologicalKernel, CategoryTheory.Limits.PreservesKernel.iso_inv_ι, CategoryTheory.Abelian.isColimitMapCoconeOfCokernelCoforkOfπ, CategoryTheory.ComposableArrows.Exact.cokerIsoKer'_hom_inv_id, CategoryTheory.ComposableArrows.Exact.cokerIsoKer'_hom_inv_id_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general homological functors or kernel preservation, not the fixed-pair heart and shift-compatible equivariant cohomology package"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "algEquivIsoAlgebraIso, algEquivIsoAlgebraIso_hom, algEquivIsoAlgebraIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general homological functors or kernel preservation, not the fixed-pair heart and shift-compatible equivariant cohomology package"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|TExact.*homology|homology.*TExact",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/CategoryTheory/Abelian/ShortExact.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean, Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean, Mathlib/Algebra/Homology/HomologySequence.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general homological functors or kernel preservation, not the fixed-pair heart and shift-compatible equivariant cohomology package"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"Functor\"",
+   "results": "CategoryTheory.Triangulated.TStructure.instIsIsoFunctorTruncGELTToLTGE, CategoryTheory.Triangulated.TStructure.instAdditiveObjEIntFunctorETruncGE, CategoryTheory.Triangulated.TStructure.instAdditiveObjEIntFunctorETruncLT, CategoryTheory.Triangulated.TStructure.instIsGEObjEIntFunctorETruncGE, CategoryTheory.Triangulated.TStructure.instIsLEObjEIntFunctorETruncLT, CategoryTheory.Triangulated.TStructure.instIsIsoFunctorETruncGEπBotEInt, CategoryTheory.Triangulated.TStructure.instIsIsoFunctorETruncLTιTopEInt, CategoryTheory.Triangulated.TStructure.instIsGEObjEIntFunctorETruncLT",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact functors and truncation isomorphisms do not state the fixed-pair heart and equivariant cohomology package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of invertible algebras for an exact automorphism of an abelian category is abelian and an exact intertwining functor preserves kernels and cokernels",
+   "results": "CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.exact_tfae, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Abelian.isoModSerre_kernel_eq_inverseImage_isomorphisms, CategoryTheory.abelianOfEquivalence, CategoryTheory.Functor.preservesFiniteLimits_tfae",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact functors and truncation isomorphisms do not state the fixed-pair heart and equivariant cohomology package"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|TExact|IsTExact",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact functors and truncation isomorphisms do not state the fixed-pair heart and equivariant cohomology package"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|IsTExact|TExact",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean, Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean, Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean, Mathlib/CategoryTheory/Preadditive/Indization.lean, Mathlib/CategoryTheory/Preadditive/Indization.lean, Mathlib/CategoryTheory/Preadditive/Indization.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact/homological functors and individual truncations do not state the full equivariant t-exact heart-cohomology package"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"Functor\"",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure.instIsIsoFunctorTruncGELTToLTGE, CategoryTheory.Triangulated.TStructure.instAdditiveObjEIntFunctorETruncGE, CategoryTheory.Triangulated.TStructure.instAdditiveObjEIntFunctorETruncLT, CategoryTheory.Triangulated.TStructure.instIsGEObjEIntFunctorETruncGE, CategoryTheory.Triangulated.TStructure.instIsLEObjEIntFunctorETruncLT, CategoryTheory.Triangulated.TStructure.instIsIsoFunctorETruncGEπBotEInt, CategoryTheory.Triangulated.TStructure.instIsIsoFunctorETruncLTιTopEInt, CategoryTheory.Triangulated.TStructure.instIsGEObjEIntFunctorETruncLT",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact/homological functors and individual truncations do not state the full equivariant t-exact heart-cohomology package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact t-exact functor commutes with heart cohomology naturally in intertwining natural isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.preservesHomology_of_map_exact, CategoryTheory.exactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.ExactFunctor.of, CategoryTheory.ShortComplex.opcyclesFunctorIso, CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp, CategoryTheory.Functor.mapExtAddHom_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact/homological functors and individual truncations do not state the full equivariant t-exact heart-cohomology package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t-exact triangulated functor intertwining two exact autoequivalences induces an exact functor on fixed-pair hearts and commutes equivariantly with cohomology",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two, CategoryTheory.Functor.IsTriangulated.map_distinguished",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact/homological functors and individual truncations do not state the full equivariant t-exact heart-cohomology package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categories of objects with an isomorphism from an exact endofunctor are abelian with kernels and cokernels created by forgetting",
+   "results": "8 hits: CategoryTheory.Functor.exact_tfae, CategoryTheory.ExactFunctor.forget, CategoryTheory.AbelianOfAdjunction.hasKernels, CategoryTheory.ExactFunctor.forget_obj_of, CategoryTheory.LeftExactFunctor.ofExact_obj, CategoryTheory.abelianOfAdjunction, CategoryTheory.ExactFunctor.forget_obj, CategoryTheory.ShortComplex.exact_iff_of_hasForget",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact/homological functors and individual truncations do not state the full equivariant t-exact heart-cohomology package"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|IsTExact|isTExact|\\bTExact\\b",
+   "results": "0 hits: ; subdirectory CategoryTheory/Triangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact/homological functors and individual truncations do not state the full equivariant t-exact heart-cohomology package"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra",
+   "results": "0 hits: ; subdirectory CategoryTheory/Endofunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact/homological functors and individual truncations do not state the full equivariant t-exact heart-cohomology package"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-immersion-weil-local-behavior",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Restriction paragraph, “Applied to cohomology sheaves”; Part 2 sheaf form, “the pullbacks ... are exact, so taking cohomology”; generic equivariant heart and cohomology justification.",
+   "via": [
+    "lem-zl-immersion-weil-local-behavior"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-texact-fixed-pair-heart-cohomology",
+  "worker": "stage1",
+  "summary": "Kept the statement; proved transport and the full normalized equivariance/coherence equations, proved exactness on hearts via triangles, and constructed kernels, cokernels and normal monos/epis directly. Reused generic comparison and fixed-pair Postnikov nodes; no new nodes or Mathlib leaves. No completeness hypothesis on the hearts, and no triangulated structure on fixed pairs.",
+  "blueprint": "Restriction applied to cohomology sheaves and Part 2 sheaf form of lem-zl-morphism-open-closed-reduction.proof.md; supports the existing unit route without replacing it.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Generic normalized truncation comparisons and their naturality/composition; this unit has no such abstract t-structure result."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic heart/cohomology and short-exact-triangle characterization, needed to derive exactness of the restrictions."
+   },
+   {
+    "node": "lem-pod-fixed-pair-postnikov-identifications",
+    "why": "Generic lifted truncation and shifted cohomology structure formula, independently of any geometry."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic preservation of kernels and cokernels by an exact abelian functor; applied after Step 7 proves exactness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-heart-short-exact-triangles",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-f64adda96",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-f64adda96 (reviewer sub-agent of L); spot-checked: Read the item and all twelve steps in full, every cited statement, the main-20261015 lem-zl-morphism-open-closed-reduction proof (the 'Applied to cohomology sheaves' paragraph and the Part 2 sheaf form) and BBD 1.3.16-1.3.17. There are no new nodes, the statement is unchanged and no SGA is cited. I recomputed the equivariance chain in Step 5: e_F F(rho) alpha = H(F theta) e_{F,PK} F(e_P) alpha = H(F theta alpha) e_{Q,FK} Q(e_F), which is the arrow equation, and its inverse gives the stated direction. In Step 4, the composition of e needs the naturality of c^+_S at c^-_R, which the cited naturality clause supplies; the shift-compatibility of eta is used where needed. Step 7 proves heart exactness through triangles (heart node clause (4)), and only then is lem-sp-exact (a) applied. I checked the kernel and cokernel creation (existence of kappa/lambda and gamma/delta, the inverse equations, equivariance of the factors), the biproduct structure and its inverse, normality using mono k and epi Pu, and the identification of F(kappa)alpha with the created Q-kernel structure. Small cases checked: identity P, u=0 and u=1, F=0, nonzero a, and an incomplete heart (D^b of finite-dimensional vector spaces), which is why lem-sf-fixed-pair-created-abelian-structure cannot be used. No duplicate among the roughly 150 fixed-pair nodes; the nearest are a1 truncation-orthogonality, the geometric pod truncation-cohomology node, the zl boundary comparison and the pur transport nodes. Batch-5 check: the closure of lem-pod-texact-truncation-comparison is two definitions; the closure of lem-pod-fixed-pair-postnikov-identifications is 17 nodes, all definitions, Mathlib leaves or generic t-structure, heart and fixed-pair lemmas. Neither reaches a Poincare-duality or trace-formula theorem or a batch-4 target, and neither assumption gives these facts, so both citations stand. Accepted tool_uses: lem-pod-texact-truncation-comparison, lem-weil-heart-short-exact-triangles, lem-pod-fixed-pair-postnikov-identifications, lem-sp-exact-functor-preserves-homology. Advisory: the Step 2 identification with the canonical comparison is definitional, through H^0(K[a]) and the shifted double truncation."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.TExactFixedPairHeartCohomology",
+  "declaration": "CategoryTheory.Triangulated.TStructure.texact_fixedPair_heart_cohomology",
+  "declarations": [
+   "CategoryTheory.Triangulated.TStructure.fixedPairHeart",
+   "CategoryTheory.Triangulated.TStructure.fixedPairHeartForget",
+   "CategoryTheory.Triangulated.TStructure.fixedPairHeartMap",
+   "CategoryTheory.Triangulated.TStructure.fixedPairCohomologyCarrierComparison",
+   "CategoryTheory.Triangulated.TStructure.fixedPairCompositeIntertwiner",
+   "CategoryTheory.Triangulated.TStructure.fixedPairCompositeCohomologyComparison",
+   "CategoryTheory.Triangulated.TStructure.fixedPairIdentityCohomologyComparison",
+   "CategoryTheory.Triangulated.TStructure.texact_fixedPair_heart_cohomology",
+   "CategoryTheory.Triangulated.TStructure.texact_fixedPair_cohomology_composition",
+   "CategoryTheory.Triangulated.TStructure.texact_fixedPair_cohomology_natIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/TExactFixedPairHeartCohomology.lean",
+  "statement": "theorem texact_fixedPair_heart_cohomology (tC : TStructure C) (tD : TStructure D) (_hC : tC.bounded = ⊤) (_hD : tD.bounded = ⊤) (P : C ≌ C) (Q : D ≌ D) [P.functor.CommShift ℤ] [P.functor.IsTriangulated] [P.functor.IsTExact tC tC] [P.inverse.IsTExact tC tC] [Q.functor.CommShift ℤ] [Q.functor.IsTriangulated] [Q.functor.IsTExact tD tD] [Q.inverse.IsTExact tD tD] (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [F.IsTExact tC tD] (α : F ⋙ Q.functor ≅ P.functor ⋙ F) [α.hom.CommShift ℤ] : (∀ K : IsoAlgebra P.functor, ((IsoAlgebra.mapOfNatIso α).obj K).str = α.app K.carrier ≪≫ F.mapIso K.str) ∧ (∀ (K L : IsoAlgebra P.functor) (u : K ⟶ L), ((IsoAlgebra.mapOfNatIso α).map u).hom.f = F.map u.hom.f) ∧ (∀ m : ℤ, ∃ e : IsoAlgebra.mapOfNatIso α ⋙ fixedPairTruncLE tD Q.functor m ≅ fixedPairTruncLE tC P.functor m ⋙ IsoAlgebra.mapOfNatIso α, ∀ K : IsoAlgebra P.functor, (e.hom.app K).hom.f = (F.eTruncLTIso tC tD (m + 1 : ℤ)).inv.app K.carrier) ∧ (∀ m : ℤ, ∃ e : IsoAlgebra.mapOfNatIso α ⋙ fixedPairTruncGE tD Q.functor m ≅ fixedPairTruncGE tC P.functor m ⋙ IsoAlgebra.mapOfNatIso α, ∀ K : IsoAlgebra P.functor, (e.hom.app K).hom.f = (F.eTruncGEIso tC tD m).inv.app K.carrier) ∧ (∀ a : ℤ, ∃ e : IsoAlgebra.mapOfNatIso α ⋙ fixedPairCohomology tD Q.functor a ≅ fixedPairCohomology tC P.functor a ⋙ IsoAlgebra.mapOfNatIso α, ∀ K : IsoAlgebra P.functor, (e.hom.app K).hom.f = (fixedPairCohomologyCarrierComparison tC tD F a K.carrier).inv) ∧ Nonempty (Abelian (fixedPairHeart tC P.functor)) ∧ Nonempty (Abelian (fixedPairHeart tD Q.functor)) ∧ PreservesFiniteLimits (fixedPairHeartMap tC tD P.functor Q.functor F α) ∧ PreservesFiniteColimits (fixedPairHeartMap tC tD P.functor Q.functor F α) ∧ (∀ (A B : fixedPairHeart tC P.functor) (u : A ⟶ B), Nonempty (CreatesLimit (parallelPair u 0) (fixedPairHeartForget tC P.functor)) ∧ Nonempty (CreatesColimit (parallelPair u 0) (fixedPairHeartForget tC P.functor))) ∧ (∀ (A B : fixedPairHeart tD Q.functor) (u : A ⟶ B), Nonempty (CreatesLimit (parallelPair u 0) (fixedPairHeartForget tD Q.functor)) ∧ Nonempty (CreatesColimit (parallelPair u 0) (fixedPairHeartForget tD Q.functor))) ∧ (∀ (A B : fixedPairHeart tC P.functor) (u : A ⟶ B) (c : KernelFork ((fixedPairHeartForget tC P.functor).map u)) (_hc : IsLimit c), ∃! κ : P.functor.obj c.pt.obj ≅ c.pt.obj, κ.hom ≫ c.ι.hom = P.functor.map c.ι.hom ≫ A.obj.str.hom ∧ κ.inv ≫ P.functor.map c.ι.hom = c.ι.hom ≫ A.obj.str.inv) ∧ (∀ (A B : fixedPairHeart tC P.functor) (u : A ⟶ B) (c : CokernelCofork ((fixedPairHeartForget tC P.functor).map u)) (_hc : IsColimit c), ∃! γ : P.functor.obj c.pt.obj ≅ c.pt.obj, P.functor.map c.π.hom ≫ γ.hom = B.obj.str.hom ≫ c.π.hom ∧ c.π.hom ≫ γ.inv = B.obj.str.inv ≫ P.functor.map c.π.hom) ∧ (∀ (A B : fixedPairHeart tD Q.functor) (u : A ⟶ B) (c : KernelFork ((fixedPairHeartForget tD Q.functor).map u)) (_hc : IsLimit c), ∃! κ : Q.functor.obj c.pt.obj ≅ c.pt.obj, κ.hom ≫ c.ι.hom = Q.functor.map c.ι.hom ≫ A.obj.str.hom ∧ κ.inv ≫ Q.functor.map c.ι.hom = c.ι.hom ≫ A.obj.str.inv) ∧ (∀ (A B : fixedPairHeart tD Q.functor) (u : A ⟶ B) (c : CokernelCofork ((fixedPairHeartForget tD Q.functor).map u)) (_hc : IsColimit c), ∃! γ : Q.functor.obj c.pt.obj ≅ c.pt.obj, Q.functor.map c.π.hom ≫ γ.hom = B.obj.str.hom ≫ c.π.hom ∧ c.π.hom ≫ γ.inv = B.obj.str.inv ≫ Q.functor.map c.π.hom) ∧ (∀ (a : ℤ) (K : IsoAlgebra P.functor), tC.heart (((fixedPairCohomology tC P.functor a).obj K).carrier)) ∧ (∀ (a : ℤ) (K : IsoAlgebra Q.functor), tD.heart (((fixedPairCohomology tD Q.functor a).obj K).carrier))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccc308715",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Re-delivery after return 47a288ca4b66 makes exactly the two requested corrections. (1) proof_deps restored to the 7 base entries in base order (H7). (2) fixedPairCohomologyCarrierComparison is now abbrev (truncationCohomologyComparison tC tD F a).app K, with def-per-truncation-cohomology-comparison in stmt_deps and CohomologyComparisonPasting publicly imported (H4). Node differs from base only in lean and stmt_deps (+def-zl-fixed-pair-truncation-cohomology-functors, +def-per-truncation-cohomology-comparison), both owners on base. Module diff vs 47a2 is only the import and the helper body; all three theorem signatures byte-identical and lean.statement matches the file. Owner type at CohomologyComparisonPasting.lean:85 matches the helper's F(H^aK)≅H^a(FK) with the same instance assumptions. Composite and identity comparisons evaluate the owner at F⋙G and 𝟭, so the coherence clauses are non-trivial. Statement clauses re-read against the node: no mismatch. Gates OK: only whole-theorem sorrys, source/blueprint docstrings, autoImplicit false, lines ≤100, no pro-etale, report has Worker report and Second reading sections. Advisories: Nonempty Abelian does not fix the additive structure (harmless given the creation clauses); the report's first section about Postnikov compile copies is out of date. No compile run since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T143122-L-947359",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

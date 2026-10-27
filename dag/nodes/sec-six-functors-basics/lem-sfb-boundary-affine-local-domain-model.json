@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-boundary-affine-local-domain-model",
+ "kind": "statement",
+ "title": "Affine local domain model of a missing image point",
+ "statement": "Let $g:U\\to Y$ be a finite-type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], with $Y$ locally Noetherian [pqf-def-locnoeth], and let $y\\in\\overline{g(|U|)}\\setminus g(|U|)$, where closure is in the Zariski topology. There exist $x\\in U$, affine open neighbourhoods $V=\\operatorname{Spec}B\\subseteq Y$ of $y$ and $W=\\operatorname{Spec}C\\subseteq g^{-1}V$ of $x$ [def-weil-affine-spectrum], and a finite-type ring homomorphism $\\varphi:B\\to C$ inducing $g|_W$, with $B$ Noetherian [def-weil-pbc-noetherian-ring], such that the following hold. The point $z=g(x)\\in V$ specializes to $y$ and is distinct from $y$. If $\\mathfrak p\\subset B$ represents $y$, $\\mathfrak r\\subset C$ represents $x$, and $\\mathfrak q=\\varphi^{-1}(\\mathfrak r)$ represents $z$, then $\\mathfrak q\\subsetneqq\\mathfrak p$. Put $L=\\kappa(\\mathfrak r)$, $h:B\\xrightarrow{\\varphi}C\\to L$, and $R=(B/\\mathfrak q)_{\\mathfrak p/\\mathfrak q}$ [def-weil-pbc-localization-at-prime]. One has $\\ker h=\\mathfrak q$, and the formula $\\iota((b+\\mathfrak q)/(s+\\mathfrak q))=h(b)/h(s)$, for $b\\in B$ and $s\\notin\\mathfrak p$, defines an embedding $R\\hookrightarrow L$ factoring $h$. The ring $R$ is a nonzero Noetherian local integral domain which is not a field, with unique maximal ideal $\\mathfrak m_R=(\\mathfrak p/\\mathfrak q)R$, whose inverse image in $B$ is $\\mathfrak p$. The subfield of $L$ consisting of quotients of elements of $R$ identifies canonically, compatibly with $h$, with $\\operatorname{Frac}(B/\\mathfrak q)=\\kappa(\\mathfrak q)$; hence it is $\\operatorname{Frac}(R)$. Here an integral domain is a nonzero commutative ring without zero divisors, and $\\kappa(\\mathfrak a)=D_{\\mathfrak a}/\\mathfrak aD_{\\mathfrak a}$ for a prime $\\mathfrak a$ of a ring $D$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CM2, limits-lemma-reach-point-closure-Noetherian, proof through the image of the local ring in the source residue field; explicit affine-coordinate expansion, returned steps 1-3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Finite type includes quasi-compactness by [def-weil-finite-type-morphism]. Apply [lem-sc-picard-closure-specialization] to $g$ and the given closure point to obtain $x\\in U$ with $z=g(x)$ specializing to $y$. Since $y$ is outside the image, $z\\ne y$. Choose $V=\\operatorname{Spec}B$ containing $y$ from the Noetherian affine covering in [pqf-def-locnoeth], so $B$ is Noetherian. Every open containing a specialization contains its generalization: otherwise its closed complement would contain the generalization and its closure. Thus $z\\in V$. The affine covering in the definition [def-weil-finite-type-morphism] supplies $W=\\operatorname{Spec}C\\subseteq g^{-1}V$ containing $x$, with finite-type coordinate map $\\varphi:B\\to C$ inducing $g|_W$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sc-picard-closure-specialization",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM2, limits-lemma-reach-point-closure-Noetherian, first paragraph of proof; specialization from Tag 02JQ, morphisms-lemma-reach-points-scheme-theoretic-image; affine coverings from the definitions."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p,\\mathfrak r$ represent $y,x$ in these charts. Clause (1) of [lem-weil-pbc-spec-map-residue-field-naturality] identifies the prime of $z$ with $\\mathfrak q=\\varphi^{-1}(\\mathfrak r)$. In a spectrum the closure of $\\{\\mathfrak q\\}$ is $V(\\mathfrak q)$: a closed set $V(I)$ contains $\\mathfrak q$ exactly when $I\\subseteq\\mathfrak q$. Consequently specialization to $\\mathfrak p$ gives $\\mathfrak q\\subseteq\\mathfrak p$; equality would give $z=y$. Hence $\\mathfrak q\\subsetneqq\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-spec-map-residue-field-naturality",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HY, schemes-lemma-morphism-into-affine-where-point-goes; Zariski closed sets as in Algebra Tag 00E0, algebra-lemma-Zariski-topology."
+   }
+  },
+  {
+   "text": "For $L=\\kappa(\\mathfrak r)$ and $h:B\\to C\\to L$, clause (a) of [lem-weil-pbc-prime-residue-field-algebra], applied to $C,\\mathfrak r$, gives $h(b)=0$ exactly when $\\varphi(b)\\in\\mathfrak r$, that is, $b\\in\\mathfrak q$. Thus $h$ induces an injective map $\\bar h:A=B/\\mathfrak q\\hookrightarrow L$. In particular $A$ is a nonzero domain. The ideal $P=\\mathfrak p/\\mathfrak q$ is proper and prime: products of classes lie in $P$ exactly when the corresponding product in $B$ lies in $\\mathfrak p$, so one factor lies there. It is nonzero by the strict inclusion. Set $R=A_P$.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BH, algebra-section-local, residue-field paragraphs; Tag 00CT, algebra-proposition-localize-quotient."
+   }
+  },
+  {
+   "text": "If $s\\notin\\mathfrak p$ then $s\\notin\\mathfrak q$, so $h(s)\\ne0$. Define $\\iota:R\\to L$ on fractions by $\\iota((b+\\mathfrak q)/(s+\\mathfrak q))=h(b)/h(s)$. In the fraction equivalence of [def-weil-pbc-localization-at-prime], equality is witnessed by $u\\notin P$ with $u(at-bs)=0$ in $A$; since $A$ is a domain this implies $at=bs$, and hence the displayed values agree. The fraction addition and multiplication formulas show that $\\iota$ is a unital ring map and its composite with $B\\to R$ is $h$. If its value at $a/s$ is zero, injectivity of $\\bar h$ forces $a=0$, so $a/s=0$; thus $\\iota$ is injective. Therefore $R$ is a nonzero domain.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, algebra-definition-localization, fraction formulas; explicit expansion of the image ring in Tag 0CM2."
+   }
+  },
+  {
+   "text": "Write $M=PR$. Every fraction with numerator outside $P$ is a unit, since the reversed fraction is its inverse. Every fraction with numerator in $P$ lies in $M$. Such a fraction cannot be a unit: an equation $(a/s)(b/t)=1$ would give $ab=st$ in the domain $A$, impossible when $a\\in P$ and $s,t\\notin P$. Also $M$ consists exactly of fractions with numerator in $P$: sums of such fractions still have numerator in $P$, and multiplication preserves this condition. Thus $M$ is proper and consists of all nonunits; every proper ideal is contained in $M$, and any larger ideal contains a unit. Hence $M$ is the unique maximal ideal. Its inverse image under $B\\to R$ is $\\mathfrak p$ by the numerator criterion. Choose $a\\in P\\setminus\\{0\\}$; its image $a/1$ is nonzero by step 4 and is a nonunit. So $R$ is not a field.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BH, algebra-section-local, paragraph on the maximal ideal of a prime localization; explicit fraction verification."
+   }
+  },
+  {
+   "text": "Noetherianity can be checked directly from [def-weil-pbc-noetherian-ring]. For an ideal $J\\subseteq A=B/\\mathfrak q$, its inverse image in $B$ has finite generators $b_1,\\ldots,b_n$; their classes generate $J$, since every element of $J$ lifts to that inverse image. Hence $A$ is Noetherian. For an ideal $H\\subseteq R$, put $I=\\{a\\in A:a/1\\in H\\}$. Choose finite generators $a_1,\\ldots,a_m$ of $I$. If $a/s\\in H$ then $a/1=(s/1)(a/s)\\in H$, so $a\\in I$; expanding $a$ in those generators shows that $a/s$ is generated in $R$ by $a_i/1$. Conversely these generators belong to $H$. Therefore every ideal of $R$ is finitely generated.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, algebra-lemma-Noetherian-permanence, first two sentences of proof (quotients and localizations)."
+   }
+  },
+  {
+   "text": "Use the embeddings $A\\subseteq R\\subseteq L$ just constructed. The quotients of elements of $R$ in $L$ form a subfield: the usual common-denominator formulas give closure under addition and multiplication, and a nonzero quotient $r/t$ has inverse $t/r$. Since every element of $R$ has the form $a/s$ with $a,s\\in A$ and $s\\ne0$, a quotient of two elements of $R$ is $(a/s)/(b/t)=at/(sb)$ with nonzero denominator. Conversely every quotient $a/b$ of elements of $A$ is also a quotient of elements of $R$. Hence this subfield is exactly the field of fractions of $A$ and of $R$. Clause (b) of [lem-weil-pbc-prime-residue-field-algebra], applied to $B,\\mathfrak q$, identifies it canonically with $\\kappa(\\mathfrak q)=\\operatorname{Frac}(B/\\mathfrak q)$: send the fraction of $a,b\\in A$ to $\\bar h(a)/\\bar h(b)$. Cross multiplication makes this independent of representatives; every such fraction occurs. On $B$ the map is $h$, proving the requested compatibility.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BH, algebra-section-local, identification of the residue field with fractions of the prime quotient; explicit calculation for the intermediate localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sc-picard-closure-specialization",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-map-residue-field-naturality",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CM2, limits-lemma-reach-point-closure-Noetherian, first paragraph; affine-coordinate expansion with direct fraction and ideal-generator arguments from algebra.tex Tags 00CO, 00FN and 07BH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AtPrime.*[Qq]uotient|[Qq]uotient.*AtPrime|isField.*AtPrime",
+   "results": "{\"t\": \"2026-10-22T06:01:28Z\", \"tool\": \"grep\", \"query\": \"AtPrime.*[Qq]uotient|[Qq]uotient.*AtPrime|isField.*AtPrime\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\"], \"digest\": \"1d862f7a5661deac\"}; No complete match. instIsFractionRingQuotientIdealResidueField and IsLocalization.AtPrime.not_isField cover individual clauses, not the compatible embedding and fraction-field/local-image package. Read LocalRing/ResidueField/Ideal.lean and Localization/AtPrime/Basic.lean; DedekindDomain/Dvr.lean gives only the nonfield clause.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a prime quotient at a larger prime is a Noetherian local domain inside a residue field",
+   "results": "{\"t\": \"2026-10-22T06:01:29Z\", \"tool\": \"leansearch\", \"query\": \"Localization of a prime quotient at a larger prime is a Noetherian local domain inside a residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.isPrincipalIdealRing_localization_over_prime\", \"IsLocalization.AtPrime.isLocalRing\", \"AlgebraicGeometry.StructureSheaf.Localizations\", \"IsLocalization.isDomain_of_atPrime\", \"IsLocalization.AtPrime.isDedekindDomain\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"IsLocalization.AtPrime.equivQuotMaximalIdeal.congr_simp\", \"Localization.AtPrime.isDedekindDomain\"], \"digest\": \"b5109dc0b1b35140\"}; No complete match. instIsFractionRingQuotientIdealResidueField and IsLocalization.AtPrime.not_isField cover individual clauses, not the compatible embedding and fraction-field/local-image package. Read LocalRing/ResidueField/Ideal.lean and Localization/AtPrime/Basic.lean; DedekindDomain/Dvr.lean gives only the nonfield clause.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization.AtPrime\", \"Ideal.Quotient\"",
+   "results": "{\"t\": \"2026-10-22T06:01:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization.AtPrime\\\", \\\"Ideal.Quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No complete match. instIsFractionRingQuotientIdealResidueField and IsLocalization.AtPrime.not_isField cover individual clauses, not the compatible embedding and fraction-field/local-image package. Read LocalRing/ResidueField/Ideal.lean and Localization/AtPrime/Basic.lean; DedekindDomain/Dvr.lean gives only the nonfield clause.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of the local ring at a specialization in a field is a Noetherian local domain with fraction field the residue field of the generalization",
+   "results": "{\"t\": \"2026-10-22T06:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"The image of the local ring at a specialization in a field is a Noetherian local domain with fraction field the residue field of the generalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"IsNoetherianRing.of_isLocalization_maximal\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"instIsFractionRingQuotientIdealResidueField\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsDiscreteValuationRing.TFAE\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\"], \"digest\": \"5ee25b8c8acfdbc9\"}; No complete match. instIsFractionRingQuotientIdealResidueField and IsLocalization.AtPrime.not_isField cover individual clauses, not the compatible embedding and fraction-field/local-image package. Read LocalRing/ResidueField/Ideal.lean and Localization/AtPrime/Basic.lean; DedekindDomain/Dvr.lean gives only the nonfield clause.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian ring B and prime ideals q strictly contained in p, the localization of B quotient q at p quotient q embeds in every field receiving B with kernel q, is a nonfield Noetherian local domain, and has fraction field the residue field at q",
+   "results": "{\"t\": \"2026-10-22T06:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a Noetherian ring B and prime ideals q strictly contained in p, the localization of B quotient q at p quotient q embeds in every field receiving B with kernel q, is a nonfield Noetherian local domain, and has fraction field the residue field at q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsFractionRingQuotientIdealResidueField\", \"IsLocalization.AtPrime.not_isField\", \"Algebra.QuasiFinite.instResidueField\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"IsLocalization.AtPrime.exists_algebraMap_quot_eq_of_mem_quot\", \"IsLocalRing.ResidueField.finite_of_finite\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Ideal.ResidueField\"], \"digest\": \"a4e432d5465757de\"}; No complete match. instIsFractionRingQuotientIdealResidueField and IsLocalization.AtPrime.not_isField cover individual clauses, not the compatible embedding and fraction-field/local-image package. Read LocalRing/ResidueField/Ideal.lean and Localization/AtPrime/Basic.lean; DedekindDomain/Dvr.lean gives only the nonfield clause.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closure.*range|range.*closure|exists.*specializ",
+   "results": "{\"t\": \"2026-10-22T06:05:03Z\", \"tool\": \"grep\", \"query\": \"closure.*range|range.*closure|exists.*specializ\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"6a188d14da27bd73\"}; No complete match. Scheme support-of-kernel and residue evaluation naturality do not construct the local-domain data or the prescribed-field DVR square. Read IdealSheaf/Basic.lean:845-846 and ResidueField.lean:158-164; the ValuativeCommSq results only project supplied data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyNoetherian\", \"residueField\"",
+   "results": "{\"t\": \"2026-10-22T06:05:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyNoetherian\\\", \\\"residueField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No complete match. Scheme support-of-kernel and residue evaluation naturality do not construct the local-domain data or the prescribed-field DVR square. Read IdealSheaf/Basic.lean:845-846 and ResidueField.lean:158-164; the ValuativeCommSq results only project supplied data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism to a locally Noetherian scheme, a point outside the image in its closure admits affine source and target charts and a nonfield Noetherian localized prime quotient embedded in the source residue field with prescribed centre",
+   "results": "{\"t\": \"2026-10-22T06:05:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type morphism to a locally Noetherian scheme, a point outside the image in its closure admits affine source and target charts and a nonfield Noetherian localized prime quotient embedded in the source residue field with prescribed centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\"], \"digest\": \"3dfddadef650ebec\"}; No complete match. Scheme support-of-kernel and residue evaluation naturality do not construct the local-domain data or the prescribed-field DVR square. Read IdealSheaf/Basic.lean:845-846 and ResidueField.lean:158-164; the ValuativeCommSq results only project supplied data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundary.*local|local.*domain.*model|closure.*range",
+   "results": "{\"t\": \"2026-10-23T09:36:39Z\", \"tool\": \"grep\", \"query\": \"boundary.*local|local.*domain.*model|closure.*range\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"fa2d08c72cb3f3f1\"}; Read the actual hits: Scheme.SpecToEquivOfField and range_fromSpecResidueField describe field-valued points; Hom.support_ker identifies closure of an image; the prime residue-field fraction instance is already represented by lem-weil-pbc-prime-residue-field-algebra. None states the full boundary affine-chart and local-domain package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given prime ideals q strictly contained in p in a Noetherian ring B the ring (B/q) localized at p/q embeds in any field with kernel q and has fraction field kappa(q)",
+   "results": "{\"t\": \"2026-10-23T09:36:39Z\", \"tool\": \"leansearch\", \"query\": \"Given prime ideals q strictly contained in p in a Noetherian ring B the ring (B/q) localized at p/q embeds in any field with kernel q and has fraction field kappa(q)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ResidueField\", \"Ideal.isPrime_map_of_isLocalizationAtPrime\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"instIsFractionRingAtPrimeFractionRing\", \"instIsFractionRingQuotientIdealResidueField\", \"IsLocalization.instIsScalarTowerAtPrimeFractionRing\", \"instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing\", \"LocalSubring.ofPrimeEquiv\"], \"digest\": \"60913b1ecb0d0842\"}; Read the actual hits: Scheme.SpecToEquivOfField and range_fromSpecResidueField describe field-valued points; Hom.support_ker identifies closure of an image; the prime residue-field fraction instance is already represented by lem-weil-pbc-prime-residue-field-algebra. None states the full boundary affine-chart and local-domain package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization.AtPrime\", \"Ideal.ResidueField\"",
+   "results": "{\"t\": \"2026-10-23T09:36:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization.AtPrime\\\", \\\"Ideal.ResidueField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the actual hits: Scheme.SpecToEquivOfField and range_fromSpecResidueField describe field-valued points; Hom.support_ker identifies closure of an image; the prime residue-field fraction instance is already represented by lem-weil-pbc-prime-residue-field-algebra. None states the full boundary affine-chart and local-domain package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism to a locally Noetherian scheme and a boundary image point admit affine charts and a nonfield local domain embedded in a source residue field",
+   "results": "{\"t\": \"2026-10-23T09:36:48Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism to a locally Noetherian scheme and a boundary image point admit affine charts and a nonfield local domain embedded in a source residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.descResidueField\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\"], \"digest\": \"261f0198b52aaef1\"}; Read the actual hits: Scheme.SpecToEquivOfField and range_fromSpecResidueField describe field-valued points; Hom.support_ker identifies closure of an image; the prime residue-field fraction instance is already represented by lem-weil-pbc-prime-residue-field-algebra. None states the full boundary affine-chart and local-domain package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a Noetherian local ring in a residue field at a strict generalization is a nonfield local domain whose fraction field is the residue field of the generalization",
+   "results": "{\"t\": \"2026-10-23T09:36:49Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a Noetherian local ring in a residue field at a strict generalization is a nonfield local domain whose fraction field is the residue field of the generalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.residueFieldMap\", \"instIsFractionRingQuotientIdealResidueField\", \"IsLocalRing.PrimeSpectrum.comap_residue\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"IsLocalRing.instIsLocalHomResidueFieldRingHomResidue\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"IsLocalRing.instFiniteResidueField\", \"Algebra.QuasiFinite.instResidueField\"], \"digest\": \"4f2032dc6cf2d1d8\"}; Read the actual hits: Scheme.SpecToEquivOfField and range_fromSpecResidueField describe field-valued points; Hom.support_ker identifies closure of an image; the prime residue-field fraction instance is already represented by lem-weil-pbc-prime-residue-field-algebra. None states the full boundary affine-chart and local-domain package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-image-boundary-dvr",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; proof of the Noetherian DVR test: reach a missing point of the diagonal image and of the Chow immersion image by a DVR (Stacks 0CM2, restricted to boundary points). the image of the local ring in the source residue field; returned steps 2-3, including kernel, localization, maximal-ideal contraction, fraction-field identification and nonfield verification. Includes the specialization choice and affine charts of returned step 1.",
+   "via": [
+    "lem-sfb-noetherian-image-boundary-dvr",
+    "lem-sfb-noetherian-dvr-properness",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-boundary-affine-local-domain-model",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused the closed quasi-compact specialization lemma and existing affine-point and residue-field nodes. Wrote all localized embedding, maximal ideal, nonfield, Noetherianity and fraction field calculations directly; no new nodes.",
+  "blueprint": "The inherited from.place describes the det-thm-sf-ctf-stability-direct-images clause (3) alteration/rigidity prerequisite. This split realizes the missing-image-point local-domain construction underneath that prerequisite, through Stacks 0CM2, without changing the unit route. Current latest blueprint direct-images proof (3) is read as context; no blueprint node states this affine algebra package.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-map-residue-field-naturality",
+    "why": "Only clause (1), the contravariant map on affine prime points, is used as a generic scheme-coordinate tool; the unit has no substitute for this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-map-residue-field-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-caf89cbb4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-caf89cbb4 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited statement, and Stacks 0CM2 (limits.tex l.3741-3781) and 02JQ (morphisms.tex l.899). Shape: one commit with the item and the report. Diffed against side-live: the statement, stmt_deps, blueprint and unit are unchanged. Both live and side-live still have the item unsplit, so no other group has superseded it, and there is no repair note. No new nodes and no SGA. Steps: (1) The specialization comes from closed lem-sc-picard-closure-specialization; finite type includes quasi-compactness. V is chosen from the Noetherian cover in pqf-def-locnoeth, and the generalization of a specialization lies in every open containing the specialization. W comes from the finite-type cover, and def-weil-affine-spectrum gives g|_W = Spec φ. (2) Clause (1) of spec-map-residue-field-naturality gives q = φ^{-1}(r); closure of {q} is V(q), so q ⊆ p, and q = p would give z = y. The specialization is in Y and is used in the open V; this is elementary. (3) Clause (a) of prime-residue-field-algebra gives ker h = q, so A = B/q embeds in the field L and is a domain; P = p/q is prime and nonzero. (4) ι is well-defined via u(at-bs) = 0 and the domain property, and it is injective. (5) Whether the numerator lies in P does not depend on the representative; PR is the set of nonunits, so R is local; its contraction to B is p; a nonzero a in P gives a/1, a nonzero nonunit, so R is not a field. (6) Quotient and localization are Noetherian, with both inclusions checked. (7) The quotients of R in L equal the quotients of A, and clause (b) of prime-residue-field-algebra identifies them with κ(q), compatibly with h. Tests: U empty (vacuous); Z→Z[1/2] at (2) gives Z_(2) inside Q; B = k[e,t]/(e²) gives k[t]_(t); q = p would allow R to be a field, and the missing-image hypothesis excludes it. Parent noetherian-image-boundary-dvr steps 1-2 use every clause. The 0CM2 nodes found by rg -L are this parent chain, and none duplicates the item. Accepted tool use: spec-map-residue-field-naturality clause (1), Lean-closed in slopmaster2. Maintainer note: blueprint.from.node = null is inherited from the base node and is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundaryAffineLocalDomainModel",
+  "declaration": "AlgebraicGeometry.exists_boundary_affine_local_domain_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryAffineLocalDomainModel.lean",
+  "statement": "theorem exists_boundary_affine_local_domain_model {U Y : Scheme.{u}} (g : U ⟶ Y) [LocallyOfFiniteType g] [QuasiCompact g] [IsLocallyNoetherian Y] (y : Y) (hy : y ∈ closure (Set.range g) \\ Set.range g) : ∃ (x : U) (V : Y.Opens) (W : U.Opens) (B C : CommRingCat.{u}) (v : Spec B ≅ V.toScheme) (w : Spec C ≅ W.toScheme) (φ : B →+* C), y ∈ V ∧ x ∈ W ∧ W ≤ g ⁻¹ᵁ V ∧ w.hom ≫ W.ι ≫ g = Spec.map (CommRingCat.ofHom φ) ≫ v.hom ≫ V.ι ∧ φ.FiniteType ∧ IsNoetherianRing B ∧ g x ⤳ y ∧ g x ≠ y ∧ ∃ (p q : PrimeSpectrum B) (r : PrimeSpectrum C), V.ι (v.hom p) = y ∧ W.ι (w.hom r) = x ∧ V.ι (v.hom q) = g x ∧ q.asIdeal = r.asIdeal.comap φ ∧ q.asIdeal < p.asIdeal ∧ ∃ (P : PrimeSpectrum (B ⧸ q.asIdeal)), P.asIdeal = p.asIdeal.map (Ideal.Quotient.mk q.asIdeal) ∧ RingHom.ker ((algebraMap C r.asIdeal.ResidueField).comp φ) = q.asIdeal ∧ ∃ (R : CommRingCat.{u}) (e : R ≃+* Localization.AtPrime P.asIdeal) (a : B →+* R) (hbar : (B ⧸ q.asIdeal) →+* r.asIdeal.ResidueField) (ι : R →+* r.asIdeal.ResidueField) (hlocal : IsLocalRing R), e.toRingHom.comp a = (algebraMap (B ⧸ q.asIdeal) (Localization.AtPrime P.asIdeal)).comp (Ideal.Quotient.mk q.asIdeal) ∧ hbar.comp (Ideal.Quotient.mk q.asIdeal) = (algebraMap C r.asIdeal.ResidueField).comp φ ∧ Function.Injective ι ∧ ι.comp a = (algebraMap C r.asIdeal.ResidueField).comp φ ∧ (∀ (b : B ⧸ q.asIdeal) (s : P.asIdeal.primeCompl), ι (e.symm (IsLocalization.mk' (Localization.AtPrime P.asIdeal) b s)) = hbar b / hbar s) ∧ IsNoetherianRing R ∧ IsDomain R ∧ ¬ IsField R ∧ @IsLocalRing.maximalIdeal R _ hlocal = (P.asIdeal.map (algebraMap (B ⧸ q.asIdeal) (Localization.AtPrime P.asIdeal))).map e.symm.toRingHom ∧ Ideal.comap a (@IsLocalRing.maximalIdeal R _ hlocal) = p.asIdeal ∧ ∃ (K : Subfield r.asIdeal.ResidueField), (∀ t : r.asIdeal.ResidueField, t ∈ K ↔ ∃ b c : R, c ≠ 0 ∧ t = ι b / ι c) ∧ (∃ eA : FractionRing (B ⧸ q.asIdeal) ≃+* K, ∀ b : B, (eA (algebraMap (B ⧸ q.asIdeal) (FractionRing (B ⧸ q.asIdeal)) (Ideal.Quotient.mk q.asIdeal b)) : r.asIdeal.ResidueField) = algebraMap C r.asIdeal.ResidueField (φ b)) ∧ (∃ eκ : q.asIdeal.ResidueField ≃+* K, ∀ b : B, (eκ (algebraMap B q.asIdeal.ResidueField b) : r.asIdeal.ResidueField) = algebraMap C r.asIdeal.ResidueField (φ b)) ∧ (∃ eR : FractionRing R ≃+* K, ∀ b : R, (eR (algebraMap R (FractionRing R) b) : r.asIdeal.ResidueField) = ι b)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7f1db19c",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Lean statement and records correct: every hypothesis/clause of the node is rendered (finite type = LocallyOfFiniteType+QuasiCompact, IsLocallyNoetherian Y, closure\\range; charts with commuting square, φ.FiniteType, B Noetherian, g x ⤳ y, g x ≠ y, q = comap φ r, q < p, ker h = q, R ≃ (B/q)_P with a/hbar/ι pinned by compatibility and the fraction formula, ι injective, Noetherian local domain not a field, m_R = (p/q)R, contraction p, subfield K with canonical eA/eκ/eR fixed by compatibility). No extra hypotheses or universe restriction; U empty vacuous; q=p excluded. statement field verbatim; plain imports = proof_dep modules (required); no defs, sorry only; docstrings OK; no line >100; no pro-étale; no duplicate (parent NoetherianImageBoundaryDvr states only the DVR existence). Sole fault H11: the 'Second reading by Q41' was a self-check → FIX fixes/lem-sfb-boundary-affine-local-domain-model.report.md (worker report verbatim + clause-by-clause second reading). No Lean change, so no compile."
+ }
+}

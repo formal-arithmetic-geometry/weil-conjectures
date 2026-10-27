@@ -22,8 +22,46 @@ canonical ambient maps whose restrictions to D+ are those comparisons.
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
+namespace CategoryTheory.Functor
+
+/-- The restriction square transported through two specified geometric comparisons.
+Source: Stacks 07A4 (blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons). -/
+def exactDerivedComparisonSquare
+    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
+    [Abelian A] [Abelian B] [Abelian D] [Abelian E]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory D] [HasDerivedCategory E]
+    (F₁ : B ⥤ A) (F₂ : A ⥤ E) (G₁ : B ⥤ D) (G₂ : D ⥤ E)
+    [F₁.Additive] [F₂.Additive] [G₁.Additive] [G₂.Additive]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+    [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+    (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
+    (L : DerivedCategory A ⥤ DerivedCategory E)
+    (M : DerivedCategory B ⥤ DerivedCategory D)
+    (ε : L ≅ F₂.mapDerivedCategory) (δ : M ≅ G₁.mapDerivedCategory) :
+    F₁.mapDerivedCategory ⋙ L ≅ M ⋙ G₂.mapDerivedCategory :=
+  Functor.isoWhiskerLeft F₁.mapDerivedCategory ε ≪≫
+    Functor.mapDerivedCategorySquareIso e ≪≫
+    Functor.isoWhiskerRight δ.symm G₂.mapDerivedCategory
+
+/-- An exact geometric representative in the specified derived comparison.
+Source: Stacks 07A4 (blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons). -/
+def exactDerivedRepresentative
+    {A E : Type*} [Category A] [Category E] [Abelian A] [Abelian E]
+    [HasDerivedCategory A] [HasDerivedCategory E]
+    (F : A ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (L : DerivedCategory A ⥤ DerivedCategory E) (ε : L ≅ F.mapDerivedCategory)
+    (P : CochainComplex A ℤ) :
+    L.obj (DerivedCategory.Q.obj P) ⟶ DerivedCategory.Q.obj
+      ((F.mapHomologicalComplex (.up ℤ)).obj P) :=
+  ε.hom.app (DerivedCategory.Q.obj P) ≫ F.mapDerivedCategoryFactors.hom.app P
+
+end CategoryTheory.Functor
+
 namespace AlgebraicGeometry.Etale
 
 /-- Exact inverse-image/restriction comparison on the ambient derived categories.

@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-space-closed-structure-finite-presentation",
+ "kind": "statement",
+ "title": "Finite presentation of a closed subspace and its structure quotient",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Closed immersions are representable and become closed immersions of schemes on every scheme test [def-weil-closed-immersion]. Modules are on the small etale ringed sites, with quasi-coherence [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. Let $i:Z\\hookrightarrow X$ be a closed immersion and put $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$. A module is of finite type if etale locally finitely generated, and of finite presentation if etale locally it admits an exact presentation $\\mathcal O^m\\to\\mathcal O^n\\to M\\to0$ with $m,n$ finite. A morphism is locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]; it is of finite presentation when additionally quasi-compact and quasi-separated (quasi-compact diagonal). The following are equivalent: $i$ is locally of finite presentation; $i$ is of finite presentation; $\\mathcal I$ is of finite type; $i_*\\mathcal O_Z$ is of finite presentation as an $\\mathcal O_X$-module. No Noetherian hypothesis, nor quasi-compactness or separation hypothesis on $X$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 084Q, lemma-closed-immersion-finite-presentation, with automatic quasi-compactness and quasi-separatedness of a closed immersion; module quotient criterion from spaces-descent.tex Tag 0610, lemma-finite-finitely-presented-module (forward), and sites-modules.tex Tag 082T, lemma-kernel-surjection-finite-onto-finite-presentation (converse)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Every closed immersion of algebraic spaces is proper by lem-sfb-space-closed-subspace-proper. In particular $i$ is quasi-compact and separated. Separatedness says that $\\Delta_i$ is a closed immersion; applying the same lemma to $\\Delta_i$ makes it quasi-compact. Thus $i$ is quasi-separated. By the finite-presentation convention in the statement, $i$ is therefore of finite presentation if and only if it is locally of finite presentation. This uses no quasi-compactness of $X$.",
+   "uses": [
+    "lem-sfb-space-closed-subspace-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XZ, lemma-closed-immersion-proper; Tag 084Q, lemma-closed-immersion-finite-presentation, automatic finiteness conditions."
+   }
+  },
+  {
+   "text": "Put $M=i_*\\mathcal O_Z$. By lem-sfb-space-closed-immersion-quasi-coherent-modules, $M$ and $\\mathcal I$ are quasi-coherent and $\\mathcal O_X\\to M$ is surjective with kernel $\\mathcal I$. For any affine etale chart $u:U=\\operatorname{Spec}R\\to X$, representability and def-weil-closed-immersion give $Z_U=Z\\times_XU=\\operatorname{Spec}(R/J)$ for an ideal $J\\subset R$. The quotient and pullback identifications of lem-sfb-space-closed-ideal-correspondence identify $M|_U$ with the structure quotient of this closed subscheme. The affine chart calculus computes its quotient map, kernel and cokernel on sections. Consequently $M(U)=R/J$ and $\\mathcal I(U)=J$, with the map $R\\to M(U)$ the quotient map, not a map to the conormal module $J/J^2$.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-closed-ideal-correspondence",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, lemma-closed-immersion-ideals, statement and proof; Tag 084Q, proof, restriction to scheme charts."
+   }
+  },
+  {
+   "text": "For this affine closed immersion $i_U$, local finite presentation is equivalent to finite generation of $J$. Indeed, if $i_U$ is locally of finite presentation, lem-weil-pbc-lfp-affine-opens-finite-presentation on its whole affine source and target makes $R\\to R/J$ finitely presented. Apply lem-weil-pbc-finite-presentation-surjection-kernel-fg to the quotient surjection with zero polynomial variables: its kernel $J$ is finitely generated. Conversely, if $J=(a_1,\\ldots,a_m)$, then $R/J=R[x_1,\\ldots,x_0]/(a_1,\\ldots,a_m)$ is a finite algebra presentation. The affine pair $(Z_U,U)$ witnesses local finite presentation at every point by def-sbc-locally-finite-presentation. Ideal generation and module generation of $J$ both mean $J=\\sum_{j=1}^m Ra_j$.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 084Q, proof reducing to schemes; morphisms.tex Tag 01TV, lemma-closed-immersion-finite-presentation; algebra.tex Tag 00R2, lemma-finite-presentation-independent."
+   }
+  },
+  {
+   "text": "By lem-sfb-space-qcoh-affine-chart-calculus, the quasi-coherent ideal $\\mathcal I$ (step 2) is of finite type if and only if $\\mathcal I(U)=J$ is a finitely generated $R$-module for every affine etale chart $U=\\operatorname{Spec}R\\to X$. Suppose $i$ is locally of finite presentation and let $U\\to X$ be such a chart. Choose any surjective etale scheme atlas $V_0\\to X$ and put $V=U\\sqcup V_0$, again a surjective etale scheme atlas. By lem-sfb-space-local-properties-chart-test, with property locally of finite presentation and the identity chart of the scheme $Z\\times_XV$ (a scheme by representability), $Z\\times_XV\\to V$ is locally of finite presentation. Its affine open $Z_U=\\operatorname{Spec}(R/J)$ maps into the affine open $U\\subseteq V$, so lem-weil-pbc-lfp-affine-opens-finite-presentation makes $R\\to R/J$ finitely presented, and lem-weil-pbc-finite-presentation-surjection-kernel-fg with zero variables makes $J$ finitely generated, as in step 3. Hence $\\mathcal I$ is of finite type. Conversely, suppose $\\mathcal I$ is of finite type. Choose a surjective etale scheme atlas $V_0\\to X$ and an affine open cover $V_0=\\bigcup_kW_k$; then $V=\\bigsqcup_kW_k\\to X$ is a surjective etale atlas by a scheme whose components $W_k=\\operatorname{Spec}R_k$ are affine etale charts. Each $J_k=\\mathcal I(W_k)$ is finitely generated, so by step 3 the pair $(Z_{W_k},W_k)$ of affine opens witnesses finite presentation of $Z\\times_XV\\to V$ at every point of $Z_{W_k}$ in the sense of def-sbc-locally-finite-presentation. Since the $Z_{W_k}$ cover $Z\\times_XV$, this morphism is locally of finite presentation, and lem-sfb-space-local-properties-chart-test gives that $i$ is. This proves equivalence of local finite presentation of $i$ and finite type of $\\mathcal I$.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 084Q, lemma-closed-immersion-finite-presentation, proof; Tag 0410, lemma-finite-presentation-local; spaces-properties.tex section-properties-modules."
+   }
+  },
+  {
+   "text": "It remains to compare the two module conditions. On each affine etale chart, $M(U)=R/J$ by step 2. If $J$ is generated by $a_1,\\ldots,a_m$, the sequence $R^m\\to R\\to R/J\\to0$, with first map $(b_j)\\mapsto\\sum b_ja_j$, is exact, so $R/J$ is a finitely presented $R$-module. Conversely, if $R/J$ is a finitely presented $R$-module, apply lem-trf-finite-presentation-surjective-module-kernel to $R\\twoheadrightarrow R/J$; its source is generated by $1$, and its kernel is $J$. Thus $J$ is finitely generated. By lem-sfb-space-qcoh-affine-chart-calculus, applied to the quasi-coherent modules $\\mathcal I$ and $M$ from step 2, these chartwise equivalences give $\\mathcal I$ of finite type if and only if $M$ is of finite presentation. Combining steps 1 and 4 gives all four equivalent conditions.",
+   "uses": [
+    "lem-trf-finite-presentation-surjective-module-kernel",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 082T, sites-modules.tex lemma-kernel-surjection-finite-onto-finite-presentation, affine specialization; algebra.tex Tag 0519, lemma-extension (4)-(5); spaces-properties.tex section-properties-modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-closed-ideal-correspondence",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-trf-finite-presentation-surjective-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 084Q, lemma-closed-immersion-finite-presentation, proof; quotient-module equivalence expanded on affine etale charts using sites-modules.tex Tag 082T and algebra.tex Tag 0519."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of algebraic spaces is locally of finite presentation if and only if its ideal sheaf is of finite type if and only if its pushforward structure sheaf is finitely presented",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any immersion of schemes is a morphism that is locally of finite type. Specifically, for a morphism $ f: X \\to Y $ between schemes that is an immersion, every point in $ Y $ has an open neighborhood su\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphisms locally of finite presentation, finite algebras and ring quotients, not this algebraic-space closed-immersion/module equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed algebraic subspace finite presentation is equivalent to finite presentation of the quotient of the ambient structure sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes that is locally of finite presentation, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"Algebra.FinitePresentation.iff\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ {R : Type w₁} {A : Type w₂} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FinitePresentation R A ↔ ∃ n I x, I.FG\", \"doc\": \"An algebra $ A $ over a commutative semiring $ R $ is finitely presented if and only if there exists a natural number $ n $, a finitely generated ideal $ I $ in the polynomial ring $ R[x_1, \\\\dots, x_n\"}\n  {\"name\": \"Algebra.FinitePresentation.of_span_eq_top_target\", \"module\": \"Mathlib/RingTheory/RingHom/FinitePresentation\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : Set S),\\n  Ideal.span s = ⊤ → (∀ i ∈ s, Algebra.FinitePresentation R (Localization.Away i)) → Algebra.FinitePresentation R S\", \"doc\": \"If the ideal generated by a set $ s $ in $ S $ equals the entire ring $ S $, and for every element $ i $ in $ s $, the localization of $ S $ away from $ i $ is finitely presented over $ R $, then $ S \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"Algebra.FinitePresentation.of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Module.FinitePresentation R S], Algebra.FinitePresentation R S\", \"doc\": \"If a module $ S $ over a commutative semiring $ R $ is finitely presented, then the $ R $-algebra structure on $ S $ is also finitely presented. This instance asserts that the finite presentation of t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphisms locally of finite presentation, finite algebras and ring quotients, not this algebraic-space closed-immersion/module equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"FinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphisms locally of finite presentation, finite algebras and ring quotients, not this algebraic-space closed-immersion/module equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.*FinitePresentation|finitePresentation.*[Ii]deal|finitePresentation.*quotient",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"line\": \"105\", \"text\": \"theorem Module.FinitePresentation.equiv_quotient [Module.FinitePresentation R M] [Small.{v} R] :\"}\n  {\"file\": \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"line\": \"511\", \"text\": \"    [Module.FinitePresentation R N] (f : M →ₗ[R] N) (p : Ideal R) [p.IsPrime] {Mₚ Nₚ : Type*}\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"line\": \"26\", \"text\": \"theorem Module.FinitePresentation.of_localizationSpan' (hs : Ideal.span s = ⊤)\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"line\": \"48\", \"text\": \"theorem Module.FinitePresentation.of_localizationSpan (hs : Ideal.span s = ⊤)\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\", \"line\": \"110\", \"text\": \"    apply Algebra.FinitePresentation.quotient\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"104\", \"text\": \"theorem IsSmoothAt.exists_notMem_isStandardSmooth [FinitePresentation R S] (p : Ideal S) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/FinitePresentation.lean\", \"line\": \"42\", \"text\": \"/-- An algebra over a commutative semiring is `Algebra.FinitePresentation` if it is the quotient of\"}\n  {\"file\": \"Mathlib/RingTheory/FinitePresentation.lean\", \"line\": \"125\", \"text\": \"  letI : FinitePresentation R (A ⧸ RingHom.ker f) := FinitePresentation.quotient hker\"}\n  {\"file\": \"Mathlib/RingTheory/FinitePresentation.lean\", \"line\": \"135\", \"text\": \"    let := (FinitePresentation.mvPolynomial_aux R _).quotient hfg\"}\n  {\"file\": \"Mathlib/RingTheory/FinitePresentation.lean\", \"line\": \"186\", \"text\": \"    (mvPolynomial_of_finitePresentation _).quotient hfg\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"150\", \"text\": \"lemma IsSmoothAt.exists_notMem_smooth [FinitePresentation R A] (p : Ideal A) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"195\", \"text\": \"    [Algebra.FinitePresentation R S] (p : Ideal R) (q : Ideal S)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"254\", \"text\": \"    [Algebra.FinitePresentation R S] (q : Ideal S) [q.IsPrime] [IsUnramifiedAt R q] :\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"192\", \"text\": \"  finitePresentation := .quotient (Submodule.fg_span (by simp))\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"line\": \"115\", \"text\": \"instance [Finite σ] [Finite ι] : FinitePresentation R P.Quotient :=\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"line\": \"116\", \"text\": \"  FinitePresentation.quotient P.fg_ker\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"line\": \"120\", \"text\": \"  FinitePresentation.equiv (P.quotientEquiv.restrictScalars R)\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphisms locally of finite presentation, finite algebras and ring quotients, not this algebraic-space closed-immersion/module equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion of algebraic spaces finite presentation equivalent to finitely generated defining ideal and finitely presented structure sheaf quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{f : X ⟶ Y} : IsClosedImmersion f ↔ IsAffineHom f ∧ ∀ U : Y.Opens, IsAffineOpen U → Function.Surjective (f.app U)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is a closed immersion if and only if it is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism on sections $\\\\mathcal{O}_Y(U\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsPreimmersion f] (hf : IsClosed (Set.range f)) : IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphisms locally of finite presentation, finite algebras and ring quotients, not this algebraic-space closed-immersion/module equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.*FinitePresentation|finitePresentation.*ideal|finitePresentation.*quotient",
+   "results": "{\"t\": \"2026-10-23T13:23:23Z\", \"tool\": \"grep\", \"query\": \"IsClosedImmersion.*FinitePresentation|finitePresentation.*ideal|finitePresentation.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/Locus.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"3b11fa11698a9633\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, finite ring/module presentations, or the definition of finitely presented module sheaves, not the algebraic-space four-way equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of a closed algebraic subspace is equivalent to finite presentation of its structure sheaf as an ambient module",
+   "results": "{\"t\": \"2026-10-23T13:23:23Z\", \"tool\": \"leansearch\", \"query\": \"Finite presentation of a closed algebraic subspace is equivalent to finite presentation of its structure sheaf as an ambient module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.of_finite_of_finitePresentation\", \"Algebra.FinitePresentation.of_finitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.IsFinitePresentation\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"d52ec0a6798071f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, finite ring/module presentations, or the definition of finitely presented module sheaves, not the algebraic-space four-way equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T13:23:23Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of algebraic spaces is finitely presented exactly when its defining ideal is finitely generated and its structure sheaf quotient is a finitely presented module",
+   "results": "{\"t\": \"2026-10-23T13:23:24Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion of algebraic spaces is finitely presented exactly when its defining ideal is finitely generated and its structure sheaf quotient is a finitely presented module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"bd6c2b1a60d48c89\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, finite ring/module presentations, or the definition of finitely presented module sheaves, not the algebraic-space four-way equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quotient ring A divided by an ideal I, finite presentation of the closed algebraic subspace, finite generation of I, and finite presentation of the quotient sheaf are equivalent",
+   "results": "{\"t\": \"2026-10-23T13:25:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a quotient ring A divided by an ideal I, finite presentation of the closed algebraic subspace, finite generation of I, and finite presentation of the quotient sheaf are equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.quotient\", \"Algebra.FinitePresentation.iff\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"Algebra.Generators.fg_ker_of_finitePresentation\", \"Algebra.Presentation.instFinitePresentationQuotientOfFinite\", \"Module.FinitePresentation.of_finite_of_finitePresentation\"], \"digest\": \"d103674539132e7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, finite ring/module presentations, or the definition of finitely presented module sheaves, not the algebraic-space four-way equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hilbert-is-quot",
+  "date": "2026-10-23",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 0D00, quot-lemma-hilb-is-quot, including naturality of the displayed mutually inverse constructions. Supporting input for both finite-presentation checks in Tag 0D00.",
+   "via": [
+    "lem-sfb-space-hilbert-is-quot",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-closed-structure-finite-presentation",
+  "worker": "stage1",
+  "summary": "Followed Stacks 084Q through affine etale charts and expanded the structure-quotient clause explicitly. Reused the existing closed-space quotient, properness, chart-locality and affine QCoh calculus nodes, and existing Mathlib leaves for algebra and module kernels. No new node, attachment or statement correction. Verified cited statements, hypotheses, edge cases, absence of cycles, current blueprint and logged search hits.",
+  "blueprint": "Realizes the finite-presentation checks in Stacks 0D00 (Hilbert as Quot), as specified in the inherited blueprint.from.place and created.item chain. The latest sk-thm-sf-ctf-stability/_section.md was read; this algebraic-space criterion is a supporting prerequisite below its detail route, not a replacement for a unit step. No latest blueprint node states this criterion; ancestor tool returns None, so the inherited null from.node is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-cfe54d773",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-cfe54d773 (reviewer sub-agent of L); spot-checked: First split of a previously unsplit item: no new nodes, and the statement, stmt_deps and source are unchanged from live. I read all 11 cited statements and Stacks 084Q (spaces-morphisms 5666-5683). Steps 1, 2, 3 and 5 are correct. Step 1: a closed immersion is proper, so qc and separated; applying the same lemma to the diagonal gives quasi-separated, hence fp ⇔ lfp. Step 2: on an affine etale chart, M(U)=R/J and I(U)=J via the closed-ideal correspondence and etale restriction. Step 3: R→R/J is f.p. iff J is fg, by 01TQ plus the kernel-fg lemma with n=0 (allowed). Step 5: R/J is a finitely presented module iff J is fg, by an explicit presentation and the module-kernel lemma (P=R, Q=R/J), globalised by the chart calculus. FIX in step 4: the text claimed lfp is local on affine target opens 'by its defining condition' (that needs 01TQ, which the step did not cite). It also tested finite type on Zariski affine opens of V, which the chart calculus does not state. I rewrote step 4. Forward: atlas U⊔V_0, chart test, 01TQ on the pair (Z_U,U), kernel-fg. Converse: atlas ⊔W_k of affine opens, witness pairs, chart test. All uses are already in proof_deps. Edge cases checked: Z empty, Z=X, the zero ring, non-fg J in k[x_1,x_2,...], non-quasi-compact X. Duplicates: lem-trf-closed-immersion-finite-presentation-ideal is the scheme special case, not a duplicate. Batch-5: the four sfb cites reach sec-trace-formula only through the general definition def-trf-algebraic-space, and lem-trf-finite-presentation-surjective-module-kernel is the commutative-algebra fact 0519(5); none is a step of the trace-formula or Poincaré duality proofs, so all are accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceClosedStructureFinitePresentation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closedImmersion_structure_finitePresentation_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceClosedStructureFinitePresentation.lean",
+  "statement": "theorem closedImmersion_structure_finitePresentation_iff {S : Scheme.{u}} {Z X : AlgebraicSpace S} (i : Z ⟶ X) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) : (MapIsLocallyOfFinitePresentation i ↔ (MapIsLocallyOfFinitePresentation i ∧ MapIsQuasiCompact i.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal i.hom.hom))) ∧ (MapIsLocallyOfFinitePresentation i ↔ SheafOfModules.IsFiniteType (kernel (moduleStructureMap i))) ∧ (SheafOfModules.IsFiniteType (kernel (moduleStructureMap i)) ↔ SheafOfModules.IsFinitePresentation ((moduleDirectImage i).obj (SheafOfModules.unit Z.structureSheaf)))",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa0410f73",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Every clause of the Lean matches the node and Stacks 084Q: representable closed immersion hi; MapIsLocallyOfFinitePresentation; fp = lfp ∧ MapIsQuasiCompact i ∧ MapIsQuasiCompact(diagonal); SheafOfModules.IsFiniteType(kernel moduleStructureMap i); IsFinitePresentation(i_* O_Z); (A↔B)∧(A↔C)∧(C↔D) connects all four; no extra hypotheses. New node def-sfb-space-module-structure-map is justified (moduleDirectImage is a chart-limit model with no ring-sheaf pushforward; no DAG/Lean i^♯ exists) and not hollow (∃! pinned by every chart projection = a^♯ s, true by the limit property). H12 fields ok. Item changed only in lean + stmt_deps (new node + landed def-sfb-space-morphism-properties); dep files identical to live; statements verbatim. Probe compile: both modules clean, single universe u, finite-type/finite-presentation covering index in the canonical object universe u+1. Edge cases Z=∅, Z=X, non-qc X, non-fg ideal ok. Advisories: MapIsQuasiCompact owner def-sfb-proper-curve-moduli not in stmt_deps; two proof-only plain imports; second reading by the same worker."
+ }
+}

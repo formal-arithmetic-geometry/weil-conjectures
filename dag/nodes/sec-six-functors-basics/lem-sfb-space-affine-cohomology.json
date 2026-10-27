@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-space-affine-cohomology",
+ "kind": "statement",
+ "title": "Quasi-coherent cohomology comparison along affine maps of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space]. Let $f:Y\\to X$ be affine, meaning representable with affine scheme base changes, and let $F$ be a quasi-coherent $\\mathcal O_Y$-module. Modules and quasi-coherence are on the small etale ringed site [def-trf-space-quasi-coherent-module]. Write $H^q(X,M)=R^q\\Gamma(X_{\\mathrm{et}},M)$ for cohomology of the underlying additive sheaf [def-weil-pbc-sites-and-cohomology]. Then, for every $q\\ge0$, the canonical cohomology edge map $$H^q(X,f_*F)\\longrightarrow H^q(Y,F)$$ is an isomorphism. Direct image is for the induced morphism of ringed small etale topoi.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0D2U, lemma-relative-affine-cohomology."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-space-representable-cohomology-edge"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-affine-higher-direct-image-vanishing] to the given affine map $f:Y\\to X$ and quasi-coherent module $F$. For the underlying additive sheaf $A=F_{\\mathrm{ab}}$ it gives $R^bf_*A=0$ for every $b>0$. Its hypotheses are precisely affineness and quasi-coherence already assumed here; neither Noetherianity nor separation of the spaces is needed.",
+   "uses": [
+    "lem-sfb-space-affine-higher-direct-image-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0D2U, lemma-relative-affine-cohomology, proof, citing Tag 073H."
+   }
+  },
+  {
+   "text": "Use the abelian-sheaf Leray specialization of [det-thm-groth-ss] for the induced morphism of small etale topoi, forgetting the structure rings. It gives the first-quadrant sequence $E_2^{a,b}=H^a(X,R^bf_*A)\\Rightarrow H^{a+b}(Y,A)$. The direct image of the underlying additive sheaf of $F$ is the underlying additive sheaf of $f_*F$: both assign to an etale test scheme $U\\to X$ the additive group of $F(U\\times_XY)$; the module direct image only equips this group with its scalar action. Thus the bottom row is exactly the cohomology of $f_*F$ meant in the statement. This uses global sections of the topoi; it does not assume that $X$ or $Y$ is a scheme or is a terminal object of its scheme-valued small etale site.",
+   "uses": [
+    "det-thm-groth-ss"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0732, lemma-Leray, and Tag 0733, lemma-apply-Leray (1), as invoked in Tag 0D2U."
+   }
+  },
+  {
+   "text": "The positive rows of this spectral sequence are zero by step 1, since cohomology of the zero sheaf is zero. Apply [lem-weil-pbc-first-quadrant-row-collapse] to conclude that the bottom edge $H^q(X,f_*F)=E_2^{q,0}\\to H^q(Y,F)$ is an isomorphism for every $q\\ge0$. This is the canonical Leray edge, hence the edge map in the statement. In degree zero it is the defining identification $\\Gamma(X,f_*F)=\\Gamma(Y,F)$; in positive degrees the cited row-collapse result identifies that same edge with the inclusion of the sole nonzero associated-graded piece of the finite abutment filtration.",
+   "uses": [
+    "lem-weil-pbc-first-quadrant-row-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0733, lemma-apply-Leray (1); applied in spaces-cohomology.tex Tag 0D2U."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-affine-higher-direct-image-vanishing",
+  "det-thm-groth-ss",
+  "lem-weil-pbc-first-quadrant-row-collapse"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0D2U, lemma-relative-affine-cohomology, proof; Tag 073H and sites-cohomology.tex Tags 0732 and 0733."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism of algebraic spaces identifies the cohomology of a quasi coherent module with the cohomology of its pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : Type u_1} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} A] →\\n      [∀ (U : X.Opensᵒᵖ),\\n            CategoryTheory.Limits.HasLimitsOfShape\\n              (CategoryTheory.StructuredArrow U (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op) A] →\\n\", \"doc\": \"For a scheme $X$ and a category $\\\\mathcal{A}$, this establishes an equivalence between the category of sheaves on the affine Zariski site of $X$ (equipped with the Grothendieck topology induced by the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardCongr\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f g : X ⟶ Y} →\\n    f = g → (AlgebraicGeometry.Scheme.Modules.pushforward f ≅ AlgebraicGeometry.Scheme.Modules.pushforward g)\", \"doc\": \"Given equal morphisms $ f, g : X \\to Y $ of schemes, this constructs a natural isomorphism between the pushforward functors $ f_* $ and $ g_* $ for sheaves of modules. The isomorphism arises from compo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given continuous functors between sites with Grothendieck topologies and equal natural transformations $\\\\phi, \\\\psi : S \\\\to F_*R$ between sheaves of rings, this constructs a natural isomorphism between\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*cohomology|cohomology.*affine|affine.*higherDirectImage",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine morphism of algebraic spaces identifies the cohomology of a quasi coherent module with the cohomology of its pushforward",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves have no higher direct images under affine maps of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (F : CategoryTheory.Functor X.AffineZariskiSiteᵒᵖ CommRingCat)\\n  (α : (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op.comp X.presheaf ⟶ F),\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization F α →\\n    ((F.rightOp.comp AlgebraicGeometr\", \"doc\": \"Given a scheme $X$, a functor $F : (X_{\\\\text{aff}})^{\\\\text{op}} \\\\to \\\\text{CommRing}$ equipped with a natural transformation $\\\\alpha : \\\\mathcal{O}_X \\\\Rightarrow F$ that preserves localization, the comp\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : Type u_1} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} A] →\\n      [∀ (U : X.Opensᵒᵖ),\\n            CategoryTheory.Limits.HasLimitsOfShape\\n              (CategoryTheory.StructuredArrow U (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op) A] →\\n\", \"doc\": \"For a scheme $X$ and a category $\\\\mathcal{A}$, this establishes an equivalence between the category of sheaves on the affine Zariski site of $X$ (equipped with the Grothendieck topology induced by the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*higherDirectImage|higherDirectImage.*affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"pushforward\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on algebraic spaces are acyclic for direct image along affine morphisms",
+   "results": "[leansearch] OK 8 hit(s)\nSheafOfModules.IsQuasicoherent.mk\nSheafOfModules.isQuasicoherent\nSheafOfModules.IsQuasicoherent\nSheafOfModules.QuasicoherentData.I\nSheafOfModules.QuasicoherentData\nSheafOfModules.IsQuasicoherent.casesOn\nSheafOfModules.IsQuasicoherent.recOn\nSheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism of algebraic spaces has zero positive higher direct images of the underlying additive sheaf of any quasi coherent module",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\nAlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\nAlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\nAlgebraicGeometry.affineAnd_apply\nAlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\nAlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\nAlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the direct image under an affine morphism of algebraic spaces equals the cohomology of a quasi coherent sheaf upstairs",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.exists_app_map_eq_map_of_isLimit\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\nAlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\nAlgebraicGeometry.AffineSpace.functor_obj_map\nAlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\nAlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\nAlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom\nAlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of a quasi coherent module vanishes in positive degree for affine algebraic space maps",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\nAlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\nDerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\nAlgebraicGeometry.Scheme.Modules.instAbelian\nDerivedCategory.isZero_of_isGE\nDerivedCategory.isZero_of_isLE\nDerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-space-finite-affine-descent",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent cohomology comparison along affine maps of algebraic spaces.",
+   "via": [
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-cohomology",
+  "worker": "stage1",
+  "summary": "Read Tags 0D2U and 073H and the ringed-topos Leray proof; extracted the genuine affine higher-image vanishing input, reused the existing global Leray specialization and row-collapse statement, and kept all spaces, coefficients and edge directions unchanged. No scheme-only Lean theorem states this item.",
+  "blueprint": "Supporting Tag 07VP input on the existing created-item chain from det-thm-sf-ctf-stability-direct-images, proof (3); the current blueprint direct-image stability proof is read in literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. This split supplies the affine cohomology comparison via Tag 0D2U without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "det-thm-groth-ss",
+    "why": "Its global abelian-sheaf Leray specialization is a generic tool for the Tag 0D2U argument; the constructible finite-Tor unit does not itself state this spectral sequence."
+   },
+   {
+    "node": "lem-weil-pbc-first-quadrant-row-collapse",
+    "why": "Generic first-quadrant row degeneration identifies the actual edge as an isomorphism; the unit has no such spectral-sequence lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-thm-groth-ss",
+  "lem-weil-pbc-first-quadrant-row-collapse"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-46c4050ae",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-46c4050ae (reviewer sub-agent of L); spot-checked: Read Stacks spaces-cohomology Tag 0D2U (lemma-relative-affine-cohomology, l.1319; its proof is 073H plus Leray via sites-cohomology apply-Leray) and Tag 073H (l.1305). The item statement is unchanged and matches 0D2U hypothesis by hypothesis. Step 1 cites the new node lem-sfb-space-affine-higher-direct-image-vanishing for R^b f_*(F_ab)=0, b>0. That node is true: it is 073H on underlying additive sheaves, and the additive and module derived functors agree because injective modules are limp. It holds for f=id, F=0 and empty Y. It is self-contained and statement-only (B1-B5 checked; 073H is in the tag table). It is not a restatement of the item and not a duplicate: the scheme versions lem-pc-affine-morphism-hi and lem-weil-pbc-affine-morphism-cohomology-edge exist, but no node states it for algebraic spaces (grep for 073H/0733/01XC/apply-Leray over the snapshot DAG). Step 2 cites det-thm-groth-ss: the global Leray sequence for the small etale sites, with (f_*F)_ab=f_*(F_ab) elementary. The worker was right not to use lem-weil-pbc-site-leray-degenerate, which is stated over an object of the site, and X is not an object of X_et. Step 3 cites lem-weil-pbc-first-quadrant-row-collapse: positive rows are zero, so the bottom edge H^q(X,f_*F)->H^q(Y,F) is an isomorphism. Batch-5 flags: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, already stmt_deps of the item and not part of the trace-formula or Poincare-duality proofs, so I accept them. I accept tool_uses det-thm-groth-ss and the row-collapse node as generic spectral-sequence tools. Advisory: the phrase 'representable with affine scheme base changes' is inherited from the item and reads as Stacks' definition (base changes along affine schemes are affine); the item's global H^q(X,-) is a statement-level matter outside stage 1. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineCohomology",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_cohomology_edge_isIso",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affine_cohomology_edge_isIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceAffineCohomology.lean",
+  "statement": "theorem affine_cohomology_edge_isIso {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : Y ⟶ X) (hf : MapIsAffine f) (F : Y.Modules) (hF : F.IsQuasicoherent) (q : ℕ) : IsIso (AddCommGrpCat.ofHom (representableCohomologyEdge f (affine_relativelyRepresentable f hf) F q))",
+  "branch": "sheaf-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ba47e592",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Item clauses match node/Stacks 0D2U: S arbitrary, X Y AlgebraicSpace S, f : Y ⟶ X with MapIsAffine (representability derived via affine_relativelyRepresentable, not assumed), F : Y.Modules quasi-coherent, every q : ℕ, conclusion IsIso of the canonical edge. New def node def-sfb-space-representable-cohomology-edge is a real construction: edge = H.map of the ∃!-pinned module/additive direct-image comparison (fixed on every section by the terminal chart projection) then H.mapFunctor along sheafPullback with the transpose of the sheafified constant unit then H.map of the counit, i.e. the standard Leray bottom edge. Postponed Prop theorems (HasExt.{u+1}, affine⇒representable, additive/exact, constant comparison iso, ∃! comparison) are true and stated in the node TeX. No hollow def, no arbitrary choice. The u+1 ULift is forced by the landed representableAbelianDirectImage and is not a restriction. Item record changed only lean plus the new node in stmt_deps; transitive owners via the new node; statements verbatim; H12 fields and searches OK; no duplicate in side-live lean/Sheaf or WeilConjectures, no parallel delivery. Notes: per-degree canonical-edge IsIso judged outside the derived-form rule (scheme analogue identical); the small-model Ab.{u} space cohomology convention coexists and needs a stage-3 bridge. No compile run (no file changed)."
+ }
+}

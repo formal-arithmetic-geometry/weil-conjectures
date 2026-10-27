@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+ "kind": "statement",
+ "title": "Perfect direct image of a bounded coherent relative finite-Tor complex on spaces",
+ "statement": "Work with a scheme $S$ [def-pc-scheme], algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use module derived categories [def-weil-abstract-derived-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], and the canonical module functors [def-trf-space-etale-module-functors]. Derived pullback and tensor are computed with K-flat resolutions with flat terms, and derived direct image with K-injective resolutions. Perfect means etale locally isomorphic in the derived category to a bounded complex of direct summands of finite free structure modules. Finite presentation of a morphism means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. A module is finitely presented when it locally has a presentation $\\mathcal O^m\\to\\mathcal O^n\\to M\\to0$ with $m,n$ finite. Flatness over a base is flatness of geometric stalks over its corresponding geometric local rings. Proper means separated, of finite type and universally closed; the scheme theoretic support of a finitely presented module is the closed subspace cut out by its annihilator. Let $Y$ be a Noetherian algebraic space, meaning quasi-compact, quasi-separated and locally Noetherian on etale scheme charts. Let $f:X\\to Y$ be locally of finite type and quasi-separated; no properness or quasi-compactness of $f$ is assumed. Let $H\\in D(\\mathcal O_X)$ have coherent cohomology sheaves, meaning quasi-coherent and finitely generated on Noetherian affine etale charts, and suppose $H^i(H)=0$ outside a single finite interval of integers. Suppose the closed geometric-stalk support of each $H^i(H)$ is proper over $Y$, meaning that its reduced induced closed subspace, the closed subspace of $X$ with that point set whose etale scheme charts are reduced, is proper over $Y$. Assume the scalar restriction of $H$ along $f^{-1}\\mathcal O_Y\\to\\mathcal O_X$ has finite Tor dimension: there are integers $a\\le b$ such that for every sheaf $F$ of $f^{-1}\\mathcal O_Y$-modules, $H\\otimes^{\\mathbf L}_{f^{-1}\\mathcal O_Y}F[0]$ has cohomology zero outside $[a,b]$. Then $Rf_*H$ is perfect in $D(\\mathcal O_Y)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IS (lemma-perfect-direct-image), statement; proper closed support is Tag 0CZC (lemma-closed-proper-over-base) and definition-proper-over-base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-module-support",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-space-finite-tor-dimension-over"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=Rf_*H$. Apply [lem-sfb-space-proper-support-bounded-coherent-image] to the given locally finite-type $f$, Noetherian $Y$, bounded coherent $H$ and proper cohomological supports. Thus $K$ has bounded coherent cohomology; choose $c\\in\\mathbf Z$ with $H^i(K)=0$ for $i>c$. By [lem-sfb-space-noetherian-pseudocoherent-criterion], $K$ is pseudo-coherent. No properness or quasi-compactness of $f$ has been introduced.",
+   "uses": [
+    "lem-sfb-space-proper-support-bounded-coherent-image",
+    "lem-sfb-space-noetherian-pseudocoherent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS (lemma-perfect-direct-image), proof; Tag 08GK and Tag 08IK."
+   }
+  },
+  {
+   "text": "Fix a quasi-coherent $\\mathcal O_Y$-module $F$. Apply [lem-sfb-space-proper-support-derived-projection-formula] under the same hypotheses and the given quasi-separatedness. It identifies $K\\otimes^{\\mathbf L}_{\\mathcal O_Y}F[0]$ with $Rf_*J_F$, where $J_F=H\\otimes^{\\mathbf L}_{f^{-1}\\mathcal O_Y}(f^{-1}F)[0]$, with its structure-module action through $H$. The given relative Tor interval $[a,b]$ applies to the module sheaf $f^{-1}F$, hence $H^q(J_F)=0$ outside $[a,b]$.",
+   "uses": [
+    "lem-sfb-space-proper-support-derived-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS (lemma-perfect-direct-image), proof; proper-support tensor identification."
+   }
+  },
+  {
+   "text": "The module categories of the chosen small ringed sites are Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian]. The canonical $f_*$ is a right adjoint by [def-trf-space-etale-module-functors], hence additive left exact. Apply [thm-sp-truncation-e2] to a good lower truncation representing $J_F$. Its spectral sequence $R^pf_*H^q(J_F)\\Rightarrow H^{p+q}(Rf_*J_F)$ has $p\\ge0$ and $q\\ge a$. For $n<a$ there are no terms of total degree $n$, so its finite exhaustive separated abutment filtration gives $H^n(Rf_*J_F)=0$. This lower bound is the same for every $F$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-trf-space-etale-module-functors",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS (lemma-perfect-direct-image), proof; final sentence, expanded via the bounded-below hypercohomology spectral sequence."
+   }
+  },
+  {
+   "text": "Set $A=\\min(a,c)$. The preceding comparison and vanishing show $H^i(K\\otimes^{\\mathbf L}F[0])=0$ for every quasi-coherent $F$ and every $i<A$. Since $Y$ is quasi-separated by its Noetherian hypothesis, $K$ has quasi-coherent cohomology and upper bound $c$, and $A\\le c$, [lem-sfb-space-quasicoherent-tor-amplitude-test] gives Tor amplitude $[A,c]$ against all module sheaves.",
+   "uses": [
+    "lem-sfb-space-quasicoherent-tor-amplitude-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS (lemma-perfect-direct-image), proof; Tag 08IL, quasi-coherent tensor tests."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-site-perfect-criterion] to the small etale ringed model of $Y$. Step 1 gives precisely its pseudo-coherence condition, and step 4 gives finite Tor dimension, hence also locally finite Tor dimension. The criterion therefore makes $K$ locally isomorphic in the derived category to a bounded complex of direct summands of finite free structure modules. This is the perfectness asserted.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS (lemma-perfect-direct-image), proof; sites-cohomology.tex Tag 08G8 (lemma-perfect)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-support-bounded-coherent-image",
+  "lem-sfb-space-noetherian-pseudocoherent-criterion",
+  "lem-sfb-space-proper-support-derived-projection-formula",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-trf-space-etale-module-functors",
+  "thm-sp-truncation-e2",
+  "lem-sfb-space-quasicoherent-tor-amplitude-test",
+  "lem-sfb-ringed-site-perfect-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IS (lemma-perfect-direct-image), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|perfect.*(directImage|pushforward)|properSupport.*perfect",
+   "results": "Read 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme module pushforward adjunctions and derived-category truncation bounds do not assert perfect direct image for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect tensor a bounded coherent relatively flat complex of proper support has perfect pushforward over a Noetherian algebraic space",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom, Module.Flat.rTensor_shortComplex_exact. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme module pushforward adjunctions and derived-category truncation bounds do not assert perfect direct image for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"perfect\"",
+   "results": "Read 2 hits: AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField, AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme module pushforward adjunctions and derived-category truncation bounds do not assert perfect direct image for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On algebraic spaces a bounded coherent complex with proper cohomology supports and finite Tor dimension over a Noetherian base has perfect derived pushforward",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward_assoc, SheafOfModules.pushforward. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme module pushforward adjunctions and derived-category truncation bounds do not assert perfect direct image for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived proper support direct image preserves perfectness for relatively finite Tor dimension and bounded coherent cohomology on algebraic spaces",
+   "results": "Read 8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme or abstract derived-category results do not give this algebraic-space statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded coherent complex with proper cohomology support has perfect derived pushforward if it has finite Tor dimension over a Noetherian algebraic space",
+   "results": "{\"t\": \"2026-10-23T15:32:00Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded coherent complex with proper cohomology support has perfect derived pushforward if it has finite Tor dimension over a Noetherian algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"eef0e2b2c0674246\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned ordinary scheme functors, properness and abstract derived bounds do not state perfect direct image for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect direct image of bounded coherent complexes with proper supports and relative finite Tor dimension on algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"leansearch\", \"query\": \"Perfect direct image of bounded coherent complexes with proper supports and relative finite Tor dimension on algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.recOn\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\"], \"digest\": \"95281e84c856c050\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned ordinary scheme functors, properness and abstract derived bounds do not state perfect direct image for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"perfect\"",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"perfect\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField\", \"AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField\"], \"digest\": \"62a7d5601c1b5c2e\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned ordinary scheme functors, properness and abstract derived bounds do not state perfect direct image for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|PseudoCoherent|finiteTorDimension|properSupport.*perfect",
+   "results": "{\"t\": \"2026-10-23T15:31:58Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|PseudoCoherent|finiteTorDimension|properSupport.*perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned ordinary scheme functors, properness and abstract derived bounds do not state perfect direct image for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-noetherian-tensor-perfect",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image). Supporting input: Tag 08IS, applied to the tensor object only after verifying all three hypotheses.",
+   "via": [
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+  "worker": "stage1",
+  "summary": "Read Stacks 08IS and its named inputs; kept the statement unchanged, separated four strictly weaker supporting results, reused the ringed-site perfectness criterion and the general truncation spectral sequence, and verified the actual algebraic-space rather than scheme hypotheses. All four new nodes are statement-only after logged Mathlib searches.",
+  "blueprint": "The item is a new-target statement with no imported blueprint ancestor (blueprint.from.node is null). Steps realize the Stacks Tag 08IS proof: bounded coherent pushforward, Noetherian pseudo-coherence, proper-support projection formula, lower Tor bound, and the perfectness criterion.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic bounded-below hypercohomology spectral sequence used to establish the lower bound of right derived direct image; no statement in this unit supplies the general spectral sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-truncation-e2"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-7419c579a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-7419c579a (reviewer sub-agent of L); spot-checked: Read Stacks spaces-perfect.tex at 08IS (statement and proof), 08GK, 08IK, 08IL and 08IN. The item statement is unchanged and matches 08IS hypothesis by hypothesis: Y Noetherian, f locally of finite type and quasi-separated, bounded coherent E, proper supports, finite Tor dimension over f^{-1}O_Y, conclusion Rf_*E perfect. Steps 1-5 match the 08IS proof and each cited statement says what the step uses. Step 1 uses the 08GK node and then 08IK pseudo-coherence. Step 2 uses the projection formula with the Tor interval applied to f^{-1}F. Step 3 uses thm-sp-truncation-e2: its quadrant clause 3 and finite filtration clause 5 give H^n=0 for n<a, on Grothendieck abelian module categories with f_* a right adjoint. Step 4 applies the 08IL-variant node with A=min(a,c)<=c and Y quasi-separated. Step 5 uses lem-sfb-ringed-site-perfect-criterion, whose pseudo-coherence and Tor-amplitude definitions agree word for word with those in the new nodes. The four new statement-only nodes are true, are space-level versions of scheme-only DAG nodes, and do not restate the item. Checks: the 08GK node on a non-quasi-compact disjoint union and on E=0; the 08IK node on k[eps]/(eps^2) with module k; the 08IL variant on K=Z/n with a=0 (fails) and a=-1 (holds), its upper bound following from right t-exactness; the projection formula without quasi-compactness of f, via a quasi-compact open X' containing the proper support (both sides vanish off T) and then 08IN plus 08I6, also checked on Spec k into Spec k[eps]. No duplicate found: the only space-level projection formula in the DAG is the affine flat lem-sfb-space-affine-derived-projection-formula. Batch-5 finding: the criterion's closure reaches lem-trf-site-functorial-flat-resolution, a generic flat-resolution construction on ringed sites; def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-space-etale-module-functors are general definitions the item's base statement already cites. None is a trace-formula or Poincare-duality step, so all are accepted. Accepted tool use: thm-sp-truncation-e2 as a generic spectral sequence. No SGA source is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceBoundedCoherentFiniteTorImagePerfect",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isPerfect_derivedDirectImage_of_bounded_coherent_finiteTor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceBoundedCoherentFiniteTorImagePerfect.lean",
+  "statement": "theorem isPerfect_derivedDirectImage_of_bounded_coherent_finiteTor {S : Scheme.{u}} {X Y : AlgebraicSpace S} [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] (f : X ⟶ Y) (_hYqc : CompactSpace (Point Y.obj.obj)) (_hYqs : IsAbsolutelyQuasiSeparated Y) (_hYln : ∀ T : Y.EtaleSite, IsLocallyNoetherian (Y.etaleForget.obj T)) (_hft : MapIsLocally (@LocallyOfFiniteType) f) (_hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (H : X.DerivedModules) (_hqc : X.derivedQCohProperty H) (_hcoherent : ∀ (n : ℤ) (T : X.EtaleSite), IsAffine (X.etaleForget.obj T) → Module.Finite (Γ(X.etaleForget.obj T, ⊤)) (((X.schemeRestriction T).obj (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules n).obj H))).val.obj (op ⊤))) (_hbounded : ∃ a b : ℤ, a ≤ b ∧ ∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor X.SmallModules n).obj H)) (_hsupport : ∀ n : ℤ, ∃ (Z : AlgebraicSpace S) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ (∀ T : Z.EtaleSite, IsReduced (Z.etaleForget.obj T)) ∧ Set.range (mapPoint i.hom.hom) = moduleSupport (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules n).obj H)) ∧ MapIsProper (i ≫ f)) (_hTor : HasFiniteTorDimensionOver f H) : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} Y.smallStructureSheaf ((derivedDirectImage f).obj H)",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73f0aec88",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Read item, new def node, both modules, report and the used declarations (geometric stalk models, derived modules, small ringed model, strict-perfect package, module support, mapPoint/MapIsQuasiCompact, MapIsLocally/MapIsProper) against Stacks 08IS/0CZC (and 08FZ/08G1/0DJJ for the new node). Every hypothesis matches the node: Y quasi-compact, absolutely quasi-separated, locally Noetherian on charts; f locally finite type, quasi-separated by diagonal; qcoh plus f.g. on affine charts (charts locally Noetherian); bounded; reduced closed support subspace proper over Y; uniform relative Tor; conclusion IsPerfectOnRingedSiteOfUniverses of the K-injective derived direct image; w free. New node HasFiniteTorDimensionOver: uniform [a,b] flat representatives of geometric stalk complexes restricted along the canonical stalkMap, equal to Tor amplitude over the inverse-image ring sheaf by 0DJJ+08G1. No duplicate (scheme-only, absolute ringed-site and relative-perfect predicates differ); §5 fields ok; real data. lean.statement verbatim for both nodes; proof sorry; docstrings ok; item statement unchanged; stmt_deps gained only landed nodes plus the new one. Edge cases H=0, empty X, a=b, non-quasi-compact X, k[eps] residue field ok. Minor note: schemeRestriction/mapPoint/SmallModules owner nodes not in stmt_deps (reached through imports). No compile run (no fix)."
+ }
+}

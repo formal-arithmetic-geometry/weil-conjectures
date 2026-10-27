@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-space-inverse-module-affine-base-change",
+ "kind": "statement",
+ "title": "Etale-chart derived base change for the infinitesimal module limit",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Separated, finite type and proper morphisms use [def-sfb-space-morphism-properties]. Finite presentation means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it has a presentation $\\mathcal O^r\\to\\mathcal O^s\\to F\\to0$ with $r,s$ finite. Base-flatness means flatness of stalks on etale scheme charts over the corresponding local rings of the base [def-pc-scheme-module-flat-over]. Proper support means there exist a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $G$ on $Z$ such that $i_*G\\simeq F$ [def-sfb-space-proper-quot-functor]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels are locally nilpotent, meaning every element of each kernel is nilpotent, and set $A=\\varprojlim_n A_n$. Let $X\\to\\operatorname{Spec}A$ be separated and finitely presented, put $X_n=X\\times_A\\operatorname{Spec}A_n$. For every $n\\geq1$ let $M_n$ be a finitely presented quasi-coherent $\\mathcal O_{X_n}$-module, flat over $A_n$, with support proper over $A_n$, with specified isomorphisms $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$ for $n\\geq2$. Use unbounded derived categories of module sheaves [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology. Regard $M_n$ as a module on $X$ by direct image along $X_n\\hookrightarrow X$; the given transition isomorphisms followed by quotient maps define its inverse-system maps. The symbol $R\\varprojlim_{D_{\\mathrm{QCoh}}}M_n$ denotes the homotopy inverse limit in this full derived subcategory: it fits into the product triangle $K\\to\\prod_{n\\geq1}M_n\\xrightarrow{1-\\mathrm{shift}}\\prod_{n\\geq1}M_n\\to K[1]$, with products taken in $D_{\\mathrm{QCoh}}$ and projections $q_n:K\\to M_n$ induced by the first arrow. Here the shift has $n$th component equal to the transition map composed with the $(n+1)$st projection. Let $K$ be this homotopy inverse limit [lem-sfb-space-inverse-module-derived-limit]. For every quasi-compact quasi-separated etale scheme chart $U\\to X$ and every $n\\geq1$, put $U_n=U\\times_X X_n$. The morphism induced by the projection $q_n$ and scalar extension is an isomorphism in $D(A_n)$: $$R\\Gamma(U,K)\\otimes_A^{\\mathbf L}A_n\\xrightarrow{\\sim}R\\Gamma(U_n,M_n|_{U_n}).$$ These are the projection-induced morphisms, not arbitrary isomorphisms. They commute with restriction of etale charts and with the transition isomorphisms $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-space-inverse-module-derived-limit",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-zl-ring-derived-scalar-extension",
+  "def-sfb-space-qcoh-derived-triangulation",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Fix $u:U\\to X$ and $n$. The derived-limit statement gives $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and $q_{n-1}=t_nq_n$. The closed-immersion module statement gives $i_{n,*}M_n\\in\\operatorname{QCoh}(X)$. Put $L_n=i_{n,*}M_n$. It retains its commuting $A_n$-action. Apply the perfect-telescope statement to $u$, and write $T_m(L)=R\\Gamma(X,E_m\\otimes^{\\mathbf L}L)$ and $S(L)=R\\Gamma(U,u^*L)$. Its actual cocone maps give $\\operatorname{hocolim}_mT_m(K)\\simeq S(K)$ in $D(A)$ and $\\operatorname{hocolim}_mT_m(L_n)\\simeq S(L_n)$ in $D(A_n)$. The same $E_m$ work for both coefficients.",
+   "uses": [
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-etale-sections-perfect-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX8 (lemma-compute-over-affine), first and second paragraphs, using 0CX5 and 0CRW."
+   }
+  },
+  {
+   "text": "Let $F_n=-\\otimes_A^{\\mathbf L}A_n$. The derived change-of-rings statement makes $F_n$ exact; the normalized coefficient adjunction, on the one-object ringed site, makes it left adjoint to scalar restriction. Thus the left-adjoint colimit theorem gives preservation of countable coproducts. Apply the exact-functor telescope lemma: the scalar-extension comparison $\\operatorname{hocolim}_m F_nT_m(K)\\to F_nS(K)$ is an isomorphism. We use the telescope map induced on complex representatives, so its legs are $F_n(\\theta_{m,K})$; no uniqueness of cone fillers is asserted.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-kun-functor-preserves-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX8 (lemma-compute-over-affine), final sentence: derived tensor commutes with homotopy colimits."
+   }
+  },
+  {
+   "text": "For each $m$, apply the perfect-test statement to $E_m$, using the symmetry of tensor. It says that the scalar adjunct $F_nT_m(K)\\to T_m(L_n)$ of $T_m(q_n)$ is an isomorphism in $D(A_n)$. Naturality in $E_m$ makes these a morphism of sequential diagrams. Applying the homotopy-colimit functor to this diagram isomorphism therefore gives an isomorphism $\\operatorname{hocolim}_mF_nT_m(K)\\to\\operatorname{hocolim}_mT_m(L_n)$. Together with the two preceding steps this proves an isomorphism $F_nS(K)\\to S(L_n)$.",
+   "uses": [
+    "lem-sfb-space-inverse-module-perfect-test-reduction",
+    "lem-sfb-space-etale-sections-perfect-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX8 (lemma-compute-over-affine), last paragraph, applying 0CX6 to E_m."
+   }
+  },
+  {
+   "text": "This isomorphism is the desired scalar adjunct, not a choice of an unrelated isomorphism. Indeed, write $\\eta$ for the scalar-extension unit and $\\beta_m$ for the maps of step 3. Their defining equations are $\\operatorname{Res}(\\beta_m)\\eta=T_m(q_n)$. Naturality of the actual telescope cocones gives $S(q_n)\\theta_{m,K}=\\theta_{m,L_n}T_m(q_n)$. Apply scalar adjunction to this equality. Its left side transposes to the scalar adjunct of $S(q_n)$ composed with $F_n\\theta_{m,K}$; its right side transposes to $\\theta_{m,L_n}\\beta_m$. The functorial telescope construction on complex representatives respects this equality and its transition maps, so the isomorphism of step 3 is exactly the scalar adjunct of $S(q_n)$. This uses naturality for the full diagram, not an inference that maps out of an arbitrary cone are determined by its individual legs.",
+   "uses": [
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-perfect-test-reduction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX8 (lemma-compute-over-affine), functorial use of 0CRW and canonical maps of 0CX6."
+   }
+  },
+  {
+   "text": "Identify the target. A representable closed immersion is affine on each scheme test. Affine higher-image vanishing gives $Ri_{n,*}M_n=i_{n,*}M_n$, with the canonical degree-zero comparison. The derived etale-chart comparison gives $u^*Ri_{n,*}M_n\\simeq Rj_{n,*}(M_n|_{U_n})$, where $j_n:U_n\\hookrightarrow U$. Apply the unbounded ringed-site Leray statement to $j_n$ and the terminal object of the small etale site of $U$. It identifies the underlying additive derived sections of $S(L_n)$ with those of $R\\Gamma(U_n,M_n|_{U_n})$. Its comparison on representatives is the identity on sections and therefore respects the existing $A_n$-actions. Hence this is the canonical comparison in $D(A_n)$: restriction of scalars detects quasi-isomorphisms. Every map here is the restriction or derived-composition comparison, so the adjunct identified in step 4 is precisely the projection-induced map in the statement.",
+   "uses": [
+    "lem-sfb-space-affine-module-higher-image-vanishing",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-weil-closed-immersion",
+    "lem-sfb-ringed-site-unbounded-leray-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX8 (lemma-compute-over-affine), displayed first equality; sites-cohomology.tex Tags 0D6G and 0D6E. Also Tag 0D6H (lemma-Leray-unbounded)."
+   }
+  },
+  {
+   "text": "For a map of etale charts $V\\to U$ over $X$, the restriction square for $q_n$ commutes because $q_n$ is one fixed morphism on $X$. Taking its scalar adjunct preserves that square by naturality of the adjunction. Thus the maps just proved invertible commute with chart restriction, independently of which perfect telescope was used. Similarly $q_{n-1}=t_nq_n$ gives the transition square: after identifying $(C\\otimes_A^{\\mathbf L}A_n)\\otimes_{A_n}^{\\mathbf L}A_{n-1}$ with $C\\otimes_A^{\\mathbf L}A_{n-1}$, both composite adjuncts are the adjunct of $t_nq_n$. The target's scalar-extension transition is the one induced by $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$; its derived version agrees since $M_n$ is flat over $A_n$. The perfect-test statement already supplies this same transition compatibility before taking telescopes. Consequently the computed projection-induced isomorphisms have both required compatibilities.",
+   "uses": [
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-sfb-space-inverse-module-perfect-test-reduction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tags 0CX6 and 0CX8, canonical projections and functoriality; the chart comparisons are normalized as in sites-cohomology.tex 0D6G/0D6E."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-inverse-module-derived-limit",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-sfb-space-etale-sections-perfect-telescope",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-sfb-space-inverse-module-perfect-test-reduction",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-weil-closed-immersion",
+  "lem-sfb-ringed-site-unbounded-leray-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX8 (lemma-compute-over-affine), using 0CRW and 0CX6; explicit scalar-adjunction identification of its canonical morphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections of the quasi coherent derived inverse limit of flat proper support modules commute with reduction to each nilpotent quotient of the base ring on every quasi compact quasi separated etale chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor products commuting with direct limits, etale stability under base change, and scheme inverse limits do not give derived reduction of this quasi-coherent homotopy limit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change on affine etale charts for the derived limit of a compatible infinitesimal system of flat coherent modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor products commuting with direct limits, etale stability under base change, and scheme inverse limits do not give derived reduction of this quasi-coherent homotopy limit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a nilpotent quotient commutes with sections on an etale chart of the inverse limit of flat coherent sheaves with proper support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.directLimitRight\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \": M ⊗[R] DirectLimit G f ≃ₗ[R] DirectLimit (M ⊗[R] G ·) (M ◁ f)\", \"doc\": \"The canonical $ R $-linear equivalence between the tensor product of an $ R $-module $ M $ with the direct limit $ \\\\varinjlim G_i $ and the direct limit of the tensor products $ M \\\\otimes_R G_i $, est\"}\n  {\"name\": \"Submodule.FG.rTensor.directLimit\", \"module\": \"Mathlib.RingTheory.TensorProduct.DirectLimitFG\", \"type\": \"[DecidableEq { P : Submodule R M // P.FG }] :\\n  Module.DirectLimit (R := R) (ι := { P : Submodule R M // P.FG }) (fun P ↦ P.val ⊗[R] N)\\n      (fun ⦃P Q⦄ (h : P ≤ Q) ↦ (Submodule.inclusion h).rTensor N) ≃ₗ[R]\\n    M ⊗[R] N\", \"doc\": \"Let $R$ be a commutative semiring, and let $M$ and $N$ be $R$-modules. This defines the canonical linear isomorphism between the direct limit of the modules $P \\\\otimes_R N$ over the directed system of\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"Submodule.FG.lTensor.directLimit_apply\", \"module\": \"Mathlib.RingTheory.TensorProduct.DirectLimitFG\", \"type\": \"[DecidableEq { P : Submodule R N // P.FG }] (Q : { Q : Submodule R N // Q.FG }) (u : M ⊗[R] Q.val) :\\n  (Submodule.FG.lTensor.directLimit R M N)\\n      ((Module.DirectLimit.of R { Q : Submodule R N // Q.FG } (fun Q ↦ M ⊗[R] Q.val)\\n          (fun _ _ hPQ ↦ (inclusion hPQ).lTensor M) Q)\\n        u) =\\n   \", \"doc\": \"For a module $ M $ over a commutative semiring $ R $ and a direct system of finitely generated submodules $ \\\\{Q\\\\} $ of another $ R $-module $ N $, the direct limit of the tensor products $ M \\\\otimes_R\"}\n  {\"name\": \"TensorProduct.fromDirectLimit\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \": DirectLimit (G · ⊗[R] M) (f ▷ M) →ₗ[R] DirectLimit G f ⊗[R] M\", \"doc\": \"Given a commutative semiring $ R $, a direct system of $ R $-modules $ \\\\{G_i\\\\} $ indexed by a preorder $ \\\\iota $, and an $ R $-module $ M $, this is the unique $ R $-linear map from the direct limit $\"}\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Module.Flat R M] : PreservesFiniteLimits <| tensorLeft M\", \"doc\": \"For any commutative ring $ R $ and flat $ R $-module $ M $, the functor given by tensoring with $ M $ preserves finite limits in the category of $ R $-modules. This means that for any finite diagram i\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesLimitsOfShape WalkingParallelPair (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor between the under categories of commutative rings preserves limits of diagrams shaped like the walking parallel pair.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor products commuting with direct limits, etale stability under base change, and scheme inverse limits do not give derived reduction of this quasi-coherent homotopy limit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"limit\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"CategoryTheory.Precoverage.instIsStableUnderBaseChangeComapOfPreservesLimitsOfShapeWalkingCospan\", \"module\": \"Mathlib.CategoryTheory.Sites.Precoverage\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {F : CategoryTheory.Functor C D} {J : CategoryTheory.Precoverage D} [CategoryTheory.Limits.PreservesLimitsOfShape CategoryTheory.Limits.WalkingCospan F] [J.IsStableUnderBaseChange] : (CategoryTheor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.Under.instCreatesColimitsOfShapeTopUnderWalkingSpanForgetOfHasPushoutsOfIsStableUnderCompositionOfIsStableUnderCobaseChangeOfHasOfPrecompProperty\", \"module\": \"Mathlib.CategoryTheory.Limits.MorphismProperty\", \"type\": \" {T : Type u_1} [CategoryTheory.Category.{v_1, u_1} T] (P : CategoryTheory.MorphismProperty T) (X : T) [CategoryTheory.Limits.HasPushouts T] [P.IsStableUnderComposition] [P.IsStableUnderCobaseChange] [P.HasOfPrecompProperty P] : CategoryTheory.CreatesColimitsOfShape CategoryTheory.Limits.WalkingSpan\", \"doc\": \"If `P` is stable under composition, cobase change and satisfies pre-cancellation,\\n`Under.forget P ⊤ X` creates pushouts.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor products commuting with direct limits, etale stability under base change, and scheme inverse limits do not give derived reduction of this quasi-coherent homotopy limit."
+  },
+  {
+   "tool": "grep",
+   "query": "inverse.*limit|derived.*limit|baseChange",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"199\", \"text\": \"instance stableUnderBaseChange : ValuativeCriterion.Existence.IsStableUnderBaseChange := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"224\", \"text\": \"    · rwa [MorphismProperty.IsStableUnderBaseChange.universally_eq]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"499\", \"text\": \"  .mk_of_isStableUnderBaseChange fun {X Y} f (𝒰 : Y.OpenCover) (H : ∀ i, IsIso _) ↦\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"line\": \"131\", \"text\": \"variable [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] [P.IsMultiplicative]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"49\", \"text\": \"    RingHom.isIntegral_isStableUnderBaseChange.localizationPreserves.away\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"57\", \"text\": \"instance : IsStableUnderBaseChange @IsIntegralHom :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"58\", \"text\": \"  HasAffineProperty.affineAnd_isStableUnderBaseChange (Q := RingHom.IsIntegral) hasAffineProperty\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"59\", \"text\": \"    RingHom.isIntegral_respectsIso RingHom.isIntegral_isStableUnderBaseChange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"115\", \"text\": \"  rw [universallyClosed_eq, ← IsStableUnderBaseChange.universally_eq (P := @IsIntegralHom)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"99\", \"text\": \"def intersectionOfLocallyDirected [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"150\", \"text\": \"section BaseChange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"152\", \"text\": \"variable [P.IsStableUnderBaseChange] (𝒰 : X.Cover (precoverage P))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"195\", \"text\": \"end BaseChange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"161\", \"text\": \"instance isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @IsImmersion where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"line\": \"46\", \"text\": \"protected class Cover.Over {P : MorphismProperty Scheme.{u}} [P.IsStableUnderBaseChange]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"line\": \"55\", \"text\": \"variable [P.IsStableUnderBaseChange] [IsJointlySurjectivePreserving P]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"line\": \"124\", \"text\": \"  [Q.IsStableUnderBaseChange] [Q.IsStableUnderComposition]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"109\", \"text\": \"lemma affineAnd_isStableUnderBaseChange (hQi : RingHom.RespectsIso Q)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"110\", \"text\": \"    (hQb : RingHom.IsStableUnderBaseChange Q) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"111\", \"text\": \"    (affineAnd Q).IsStableUnderBaseChange := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"113\", \"text\": \"  apply AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"212\", \"text\": \"lemma HasAffineProperty.affineAnd_isStableUnderBaseChange {P : MorphismProperty Scheme.{u}}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"82\", \"text\": \"instance isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @IsSeparated := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"line\": \"178\", \"text\": \"def Cover.pullbackHom [P.IsStableUnderBaseChange] [IsJointlySurjectivePreserving P]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"line\": \"184\", \"text\": \"lemma Cover.pullbackHom_map [P.IsStableUnderBaseChange] [IsJointlySurjectivePreserving P]\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor products commuting with direct limits, etale stability under base change, and scheme inverse limits do not give derived reduction of this quasi-coherent homotopy limit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change on etale charts for homotopy inverse limits of flat finitely presented quasi coherent modules with proper support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of infinitesimal coherent sheaf systems commute with derived reduction of the quasi coherent inverse limit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_inv\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a point $x$ in a manifold with corners $M$, the composition of the colimit inclusion morphism associated to open neighborhoods of $x$ with the inverse of the forgetful functor isomorphism (which f\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (s : ↑(c.pt.presheaf.obj (O\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limit of flat coherent sheaves commutes with base change to nilpotent ring quotients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Module.Flat R M] : PreservesFiniteLimits <| tensorLeft M\", \"doc\": \"For any commutative ring $ R $ and flat $ R $-module $ M $, the functor given by tensoring with $ M $ preserves finite limits in the category of $ R $-modules. This means that for any finite diagram i\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"InverseSystem.isNatEquiv_piEquivLim\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"[InverseSystem f] (H : ∀ x l, (equivLim x).1 l = f l.2.le x) : IsNatEquiv f (piEquivLim nat equivLim hi)\", \"doc\": \"For a linearly ordered index set $\\\\iota$ and an inverse system $F$ with transition maps satisfying a naturality condition, if $i \\\\in \\\\iota$ is a prelimit element (having no immediate predecessor), the\"}\n  {\"name\": \"Ring.DirectLimit.congr_symm_apply_of\", \"module\": \"Mathlib.Algebra.Colimit.Ring\", \"type\": \"(e : (i : ι) → G i ≃+* G' i) (he : ∀ i j h, (e j).toRingHom.comp (f i j h) = (f' i j h).comp (e i)) {i : ι}\\n  (g : G' i) : (congr e he).symm (of G' _ i g) = of G (fun _ _ h ↦ f _ _ h) i ((e i).symm g)\", \"doc\": \"Given a preorder $\\\\iota$ and two directed systems of commutative rings $(G(i))$ and $(G'(i))$ with compatible ring equivalences $e_i: G(i) \\\\simeq G'(i)$, the inverse of the induced ring equivalence be\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"limit\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"CategoryTheory.Precoverage.instIsStableUnderBaseChangeComapOfPreservesLimitsOfShapeWalkingCospan\", \"module\": \"Mathlib.CategoryTheory.Sites.Precoverage\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {F : CategoryTheory.Functor C D} {J : CategoryTheory.Precoverage D} [CategoryTheory.Limits.PreservesLimitsOfShape CategoryTheory.Limits.WalkingCospan F] [J.IsStableUnderBaseChange] : (CategoryTheor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.Under.instCreatesColimitsOfShapeTopUnderWalkingSpanForgetOfHasPushoutsOfIsStableUnderCompositionOfIsStableUnderCobaseChangeOfHasOfPrecompProperty\", \"module\": \"Mathlib.CategoryTheory.Limits.MorphismProperty\", \"type\": \" {T : Type u_1} [CategoryTheory.Category.{v_1, u_1} T] (P : CategoryTheory.MorphismProperty T) (X : T) [CategoryTheory.Limits.HasPushouts T] [P.IsStableUnderComposition] [P.IsStableUnderCobaseChange] [P.HasOfPrecompProperty P] : CategoryTheory.CreatesColimitsOfShape CategoryTheory.Limits.WalkingSpan\", \"doc\": \"If `P` is stable under composition, cobase change and satisfies pre-cancellation,\\n`Under.forget P ⊤ X` creates pushouts.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*limit|homotopy.*limit|inverse.*limit",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"19\", \"text\": \"# Inverse limits of schemes with affine transition maps\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"21\", \"text\": \"In this file, we develop API for inverse limits of schemes with affine transition maps,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"34\", \"text\": \"-- We refrain from considering diagrams in the over category since inverse limits in the over\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-modules-near-special-fibre",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect).",
+   "via": [
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-inverse-module-affine-base-change",
+  "worker": "stage1",
+  "summary": "Follow 0CX8 through the general perfect telescope 0CRW and global perfect tests 0CX6, both extracted as statement-only nodes after whole-DAG, blueprint, project and Mathlib searches. Reuse normalized scalar adjunction, exact-telescope calculus, affine module vanishing and derived chart comparisons. Identify the actual projection-induced map by transposing the natural full telescope diagram; prove restriction and transition compatibility without comparing independently chosen telescopes. Statement unchanged.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General exact unbounded scalar-extension functor, not a geometric base-change theorem."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "General scalar-adjunction normalization identifies the actual projection-induced maps."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "General categorical preservation theorem used only for countable coproducts."
+   },
+   {
+    "node": "lem-kun-functor-preserves-hocolim",
+    "why": "General exact telescope calculus, not a replacement of the unit route."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Its affine local characterization verifies the hypothesis of affine vanishing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-kun-functor-preserves-hocolim",
+  "def-weil-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-f16674dd1",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-f16674dd1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Stacks sources in full (spaces-flat 0CX4/0CX5/0CX6/0CX8 with their proofs, spaces-perfect 0CRW with its proof and 08IN). This delivery repairs c667be70: it renames the old perfect-tests copy to lem-sfb-space-inverse-module-perfect-test-reduction with the same statement, and only the cited id changes in item steps 3, 4 and 6. There is no repair note, the live item is still unsplit, its statement and stmt_deps are unchanged, and neither new id exists live. Step 1: the telescope node applies because u is étale, U is a qcqs scheme and so finitely presented over A, and X is separated. Its B-linear clause gives the D(A_n) version for L_n = i_{n*}M_n. Step 2: scalar extension is exact and a left adjoint, so it preserves coproducts, and the exact-telescope node applies without claiming a unique comparison. Step 3: the reduction node gives the adjunct isomorphisms for each E_m, natural in E. Step 4: the composite is pinned to the adjunct of S(q_n) by transposing at the diagram level. Step 5: a closed immersion is affine (01QO), and affine vanishing, chart calculus and 0D6H Leray identify the target; the D(Ab) to D(A_n) upgrade via identity on representatives is acceptable. Step 6: chart restriction and transitions follow from q_{n-1}=t_n q_n and A_n-flatness. The telescope node is 0CRW(2) and true under the stated hypotheses. The reduction node is 0CX6(1) with all 0CX4 hypotheses, and its normalization matches the Rlim-perfect-gives-perfect map. Small cases: empty chart; X=Spec Z_p with A_n=Z/p^n and M_n=A_n. Q39's live perfect-tests node states only perfection, so the new node strictly strengthens it rather than duplicating it; maintainer note: Q39's node could later be proved from or merged into it. rg -L found no other duplicate. Batch 5: every def-trf citation and lem-trf-space-fibre-products-etale-covers is a general definition or foundation, and the sfb citations reach sec-trace-formula only through def-trf-algebraic-space. None is a step of the trace formula or Poincaré duality proof, so all are accepted. The five declared tool_uses are generic and accepted. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInverseModuleAffineBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.inverseModuleAffineBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSpecArrow",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSections",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartArrow",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLocalSections",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleAffineRingMap",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSectionsComposition",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSectionsPull",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleScalarRestrictionId",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLocalRestriction_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLocalRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSingleDerivedImage",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleProjectionAdjunct",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartFibre",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartSquare",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartBaseSquare",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartProjection",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleDerivedReduction",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLocalPull",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleFibreBaseSquare",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLevelBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLevelProjection",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartRestriction_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartArrow_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSourceRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTargetRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleRingCone_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleRestrictionComposition",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartTransition",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartTransition_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTargetTransition",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLimitProjections",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleAffineBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInverseModuleAffineBaseChange.lean",
+  "statement": "theorem inverseModuleAffineBaseChange (A : ℕ → CommRingCat.{u}) (r : ∀ n : ℕ, A (n + 1) ⟶ A n) (hsurj : ∀ n : ℕ, Function.Surjective (r n)) (hnil : ∀ (n : ℕ) (a : A (n + 1)), (r n) a = 0 → IsNilpotent a) (c : Cone (Functor.ofOpSequence r)) (hc : IsLimit c) (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace (inverseModuleSpec c.pt)) (hsep : MapIsSeparated f) (hfp : ProperQuotFinitePresentation f) (M : ∀ n : ℕ, (properQuotFibre f (inverseModuleTest c n)).Modules) (hqc : ∀ n : ℕ, (M n).IsQuasicoherent) (hfin : ∀ n : ℕ, (M n).IsFinitePresentation) (hflat : ∀ (n : ℕ) (U : (properQuotFibre f (inverseModuleTest c n)).EtaleSite), ((schemeRestriction _ U).obj (M n)).IsFlatOver (yoneda.preimage (U.obj.hom ≫ (properQuotSnd f (inverseModuleTest c n)).hom.hom)).left) (hsupp : ∀ n : ℕ, ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : Z ⟶ properQuotFibre f (inverseModuleTest c n)), IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) i.hom.hom ∧ MapIsProper (i ≫ properQuotSnd f (inverseModuleTest c n)) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ M n)) (e : ∀ n : ℕ, (moduleTensorPullback (properQuotFibreMap f (inverseModuleTestMap c n))).obj (M (n + 1)) ≅ M n) (hq : ∀ n : ℕ, X.derivedQCohProperty (inverseModuleDerivedTerm f (inverseModuleTest c n) (M n))) [HasProduct (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))] (K : X.DerivedQCoh) (p : K ⟶ ∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) (δ : (∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) ⟶ K⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle (fun n : ℕ ↦ inverseModuleDerivedTransition f (inverseModuleTestMap c n) (M n) (M (n + 1)) (e n) (hq n) (hq (n + 1))) K p δ) : (∀ (n : ℕ) (U : X.EtaleSite), CompactSpace U.obj.left.left → QuasiSeparatedSpace U.obj.left.left → IsIso (inverseModuleLevelBaseChange c f M K.obj (inverseModuleLimitProjections c f M hq K p) n U)) ∧ (∀ (n : ℕ) (U V : X.EtaleSite) (a : V ⟶ U), CompactSpace U.obj.left.left → QuasiSeparatedSpace U.obj.left.left → CompactSpace V.obj.left.left → QuasiSeparatedSpace V.obj.left.left → (RingDerivedScalarExtension.moduleDerivedExtension (c.π.app (op n)).hom).map (inverseModuleSourceRestriction f a K.obj) ≫ inverseModuleLevelBaseChange c f M K.obj (inverseModuleLimitProjections c f M hq K p) n V = inverseModuleLevelBaseChange c f M K.obj (inverseModuleLimitProjections c f M hq K p) n U ≫ inverseModuleTargetRestriction (properQuotSnd f (inverseModuleTest c n)) (properQuotFst f (inverseModuleTest c n)) (M n) a) ∧ (∀ (n : ℕ) (U : X.EtaleSite), CompactSpace U.obj.left.left → QuasiSeparatedSpace U.obj.left.left → inverseModuleLevelProjection c f M K.obj (inverseModuleLimitProjections c f M hq K p) (n + 1) U ≫ (RingDerivedScalarExtension.moduleDerivedRestriction (c.π.app (op (n + 1))).hom).map (inverseModuleTargetTransition c f M e n U) ≫ (inverseModuleRestrictionComposition c n).hom.app _ = inverseModuleLevelProjection c f M K.obj (inverseModuleLimitProjections c f M hq K p) n U)",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical projection-induced morphisms are explicit composites of the existing geometric derived unit/counit, normalized section compositor and scalar adjunction. The theorem asserts invertibility for every qcqs etale chart and every specified D_QCoh product triangle, chart-restriction naturality, and the level-transition square before scalar adjunction (equivalently its tensor square with canonical associator). Natural index n is paper level n+1. Helpers have real data; supporting proof obligations carry source/proof docstrings. Existing canonical section, derived pullback/category, scalar extension and triangle definition nodes added as statement dependencies. Returned-head H2 repair: both pullback-square comparisons are inlined using spaceDerivedPullbackComp; the derived-etale-chart-calculus theorem is not a statement dependency and its module is not imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06ba4bc98",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 80304df (H2). Repair is exactly correction (b): lem-sfb-space-derived-etale-chart-calculus removed from stmt_deps and import replaced by SpaceDerivedPullback (def-sfb-space-derived-pullback, definition, owns spaceDerivedPullbackComp); both spaceDerivedChartPullbackSquare uses (inverseModuleChartProjection, inverseModuleLocalPull) inlined as (Comp f h).symm ≪≫ eqToIso(congrArg spaceDerivedPullback sq) ≪≫ Comp g f', matching live SpaceDerivedEtaleChartCalculus.lean:158 argument by argument, so definitionally unchanged. Snapshot diff vs 80304df: only item node (stmt_deps minus that theorem, lean.note), Lean file (import plus 2 inlines), report, blueprint index. Statement, proof, proof_deps and lean.statement unchanged; lean.statement verbatim once in file. Full re-read against node and Stacks 0CX8/0CX6: hsurj, elementwise hnil, limit cone, hsep/hfp, X_n fibres, hqc/hfin/chartwise hflat/hsupp, e_n direction, K/p/δ/IsDerivedLimitTriangle; hq and HasProduct are typing premises; three conclusions (iso on qcqs charts via canonical adjunct, chart-restriction square, transition square before adjunction). Edge cases (empty chart, n=0 = level 1, universes u/w) fine. No hollow defs; sorry only in 10 docstringed theorems; both report sections present. Advisory: inverseModuleSpec/Test/TestMap/DerivedTerm/QCohTerm/DerivedTransition come from the module of theorem lem-sfb-space-inverse-module-derived-limit, which is in the base stmt_deps and cited by the node text for K; not flagged by the mechanical check. Rebind to def-sfb-space-inverse-module-tower-tests when it lands. No compile (no file changed)."
+ }
+}

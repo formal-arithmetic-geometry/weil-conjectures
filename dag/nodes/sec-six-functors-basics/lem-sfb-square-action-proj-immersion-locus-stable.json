@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-square-action-proj-immersion-locus-stable",
+ "kind": "statement",
+ "title": "The target-open immersion locus of the section-ring map is stable under a square-condition action",
+ "statement": "Let $S$ be an affine scheme [def-pc-scheme] and $H\\to S$ a smooth separated morphism of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with an $S$-group scheme structure and connected fibres $H_s=H\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-fibre-product, def-weil-residue-field, def-weil-connected-scheme]. An $S$-group scheme means a scheme $H$ with $S$-morphisms $m:H\\times_SH\\to H$, $i:H\\to H$, $e:S\\to H$ satisfying associativity, identity and inverse identities; separated means its diagonal is a closed immersion. Let $X\\to S$ be a separated morphism of finite presentation, equipped with an action $a:H\\times_SX\\to X$, meaning that $a(e,x)=x$ and $a(g,a(h,x))=a(gh,x)$ as morphism identities. Let $M$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For any $S$-scheme $B$, put $X_B=X\\times_SB$, with structure map $q_B:X_B\\to B$, and let $M_B$ be the tensor pullback of $M$ [def-pc-module-pullback]. For $g\\in H(B)=\\operatorname{Hom}_S(B,H)$ let $\\tau_g:X_B\\to X_B$ be the action $x\\mapsto gx$. Say that $M$ satisfies the square condition for this action if, for every such $B$ and every $g,h\\in H(B)$, there is an invertible $\\mathcal O_B$-module $N$ and an isomorphism $$\\tau_{gh}^*M_B\\otimes M_B\\cong\\tau_g^*M_B\\otimes\\tau_h^*M_B\\otimes q_B^*N.$$ All tensors are module sheaf tensors [def-pur-sheaf-tensor-product]. This is equality of the translation differences in the group of invertible-module classes modulo modules pulled back from $B$; no coherence or chosen isomorphisms are part of the condition. Assume that $M$ satisfies this square condition. Assume that the opens $X_s$, over all positive integers $n$ and sections $s\\in\\Gamma(X,M^{\\otimes n})$, cover $X$. Let $$A=\\Gamma_*(X,M)=\\bigoplus_{n\\geq0}\\Gamma(X,M^{\\otimes n})$$ be the graded section ring [def-sc-invertible-section-ring], let $P=\\operatorname{Proj}(A)$ [def-pc-proj], and let $r:X\\to P$ be the canonical morphism of [lem-sc-ample-proj-canonical-map]. Let $P_0\\subseteq P$ be the union of all open subschemes $V\\subseteq P$ for which $r^{-1}(V)\\to V$ is an open immersion [def-weil-open-immersion], and put $W=r^{-1}(P_0)$. Then the image on underlying points of $H\\times_SW\\to X$ equals $W$. Moreover, for every quasi-compact open subscheme $T\\subseteq W$ [def-weil-pbc-quasi-compact-scheme], the restriction $M|_T$ is ample in the absolute sense [def-weil-pbc-ample-invertible-module].",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Guo, section 6.1 and Proposition 6.2(iii), printed pp.14--15 (affine-base, smooth separated finite-presentation specialization); March 31, 2026 version, read online; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-connected-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-pc-proj",
+  "lem-sc-ample-proj-canonical-map",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For a smooth affine test scheme $B\\to S$ put $p:P_B\\to P$, and let $Q_B$ be the union of target opens on which $r_B$ is an open immersion. The projection $p$ is smooth by the smooth clause of [lem-pc-proper-base-change]; its restrictions to source and target opens are smooth by [lem-weil-pbc-smooth-restrict-open-subschemes], hence flat and locally of finite presentation by [lem-pc-smooth-flat], and open by [lem-weil-pbc-flat-lfp-open]. Pulling back an isomorphism onto an open subscheme gives an isomorphism onto the inverse-image open: this follows immediately from [def-pc-fibre-product] and [def-weil-open-immersion]. Thus $p^{-1}(P_0)\\subseteq Q_B$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB, 01V6, 01V7 and 01UA; schemes, Tag 01JY for the elementary open-subscheme base change"
+   }
+  },
+  {
+   "text": "Conversely, take an open $V\\subseteq P_B$ for which $r_B^{-1}(V)\\to V$ is an open immersion. Its image $I=p(V)$ is open. The smooth surjection $V\\to I$ is an fpqc covering in the precise sense of [def-weil-pbc-fpqc-covering]: for each affine $J\\subseteq I$, choose affine neighborhoods in $V\\times_I J$; their images are open and cover $J$, so finitely many suffice by compactness of the affine space $J$. These neighborhoods are affine opens in $V$ and their images have union exactly $J$. Its flatness was established in step 1. The pullback of $r^{-1}(I)\\to I$ along this cover is exactly $r_B^{-1}(V)\\to V$. Apply [lem-galois-fpqc-descend-open-immersion] to conclude that $I\\subseteq P_0$. Hence $V\\subseteq p^{-1}(P_0)$. Taking the union gives $Q_B=p^{-1}(P_0)$ and $r_B^{-1}(Q_B)=W\\times_S B$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-galois-fpqc-descend-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L3, applied with the covering of Topologies Tag 022B; smooth maps are open by the cited step-1 tools"
+   }
+  },
+  {
+   "text": "Fix such a $B$ and $g\\in H(B)$. Apply [lem-sfb-square-action-proj-translation-extension], whose group, square-condition, and generation hypotheses are precisely those of the item, to obtain $\\sigma_g:U_g\\simeq U^{\\prime}_g$ with $\\sigma_g r_B=r_B\\tau_g$. If $V\\subseteq P_B$ is an admissible open in the definition of $Q_B$, replace it by $V\\cap U_g$, which has the same inverse image under $r_B$. For $V\\prime=\\sigma_g(V\\cap U_g)$ we have $r_B^{-1}(V\\prime)=\\tau_g(r_B^{-1}(V))$: use the displayed identity and its inverse, and that both $U_g$ and $U^{\\prime}_g$ contain $r_B(X_B)$. The induced map on these inverse images is conjugate by the isomorphisms $\\tau_g$ and $\\sigma_g$ to the given open immersion. By the definition of open immersion it is an open immersion. Thus $\\tau_g(r_B^{-1}(Q_B))\\subseteq r_B^{-1}(Q_B)$. Repeating for $g^{-1}$ gives equality.",
+   "uses": [
+    "lem-sfb-square-action-proj-translation-extension",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.2, first assertion and implication to (iii); transport of target opens written out"
+   }
+  },
+  {
+   "text": "Cover $H$ by affine opens $B$. Each $B\\to S$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. Take $g\\in H(B)$ to be the inclusion $B\\to H$, the universal element over this chart. Steps 2--3 say that its translation preserves $W\\times_S B$. The action on $B\\times_S W$ therefore has image in $W$. These charts cover $H\\times_S W$, proving that the entire action has image in $W$. The unit map $w\\mapsto(e(q(w)),w)$ maps back to $w$, proving the reverse inclusion. Consequently $H\\cdot W=W$ on points. This argument uses universal sections on smooth test bases, so it does not assume that rational points over residue fields exhaust an orbit.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.2(iii), saturation; universal-element argument on affine opens of H"
+   }
+  },
+  {
+   "text": "The restrictions $r^{-1}(V)\\to V$ for the opens defining $P_0$ identify their sources with open subschemes. These identifications agree on overlaps because they are restrictions of the same map $r$; equivalently their local inverses agree wherever both are defined. They glue to identify $W$ with an open subscheme of $P_0$, hence of $P$. For a quasi-compact open $T\\subseteq W$, its image $U=r(T)$ is therefore a quasi-compact open of $P$ and $r_T:T\\xrightarrow{\\sim}U$. Quasi-compactness here is preserved by this homeomorphism. This is just the open-subscheme characterization in [def-weil-open-immersion].",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HE and 01IO; gluing inverse maps on target-open charts"
+   }
+  },
+  {
+   "text": "Restrict sections to $T$ to obtain the graded map $\\psi:A\\to\\Gamma_*(T,M|_T)$. The original nonvanishing opens still cover $T$. The inverse images of $D_+(s)$ and fraction maps for $r|_T$ are the restrictions of those in [lem-sc-ample-proj-canonical-map], so this is exactly the canonical map for $\\psi$. Since $T$ is quasi-compact, [lem-trf-proj-canonical-map-twist-comparison] gives $d\\geq1$ and, for every $k\\geq1$, $(r|_T)^*\\mathcal O_P(dk)\\simeq(M|_T)^{\\otimes dk}$. Since $U$ is quasi-compact, [lem-trf-proj-qc-open-twist-ample] gives $e\\geq1$ such that every $\\mathcal O_U(ek)$ is invertible and ample. Choose the common multiple $m=de$ to obtain both the comparison in degree $m$ and ampleness of $\\mathcal O_U(m)$.",
+   "uses": [
+    "lem-sc-ample-proj-canonical-map",
+    "lem-trf-proj-canonical-map-twist-comparison",
+    "lem-trf-proj-qc-open-twist-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK and 01N8 (canonical graded comparison); Tag 01MW (ample positive twists on a quasi-compact Proj open)"
+   }
+  },
+  {
+   "text": "Transporting the affine nonvanishing neighborhoods in the definition of ampleness along the scheme isomorphism $r_T:T\\simeq U$ shows that $r_T^*\\mathcal O_U(m)$ is ample: sections and their nonvanishing opens correspond, and affineness is invariant under an isomorphism. The degree-$m$ comparison and [lem-sc-ample-iso] imply that $(M|_T)^{\\otimes m}$ is ample. For each $t\\in T$, its affine nonvanishing neighborhood supplied by this ampleness is cut out by a section of $((M|_T)^{\\otimes m})^{\\otimes n}=(M|_T)^{\\otimes mn}$ with $n\\geq1$. The same section, now viewed in degree $mn\\geq1$, therefore verifies condition (2) of [def-weil-pbc-ample-invertible-module] for $M|_T$ itself; condition (1) is the assumed quasi-compactness of $T$. This proves absolute ampleness, including when $T$ is empty.",
+   "uses": [
+    "lem-sc-ample-iso",
+    "def-weil-pbc-ample-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Definition 01PS: transport through an isomorphism and positive-root implication directly from the definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-descend-open-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-square-action-proj-translation-extension",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-trf-proj-canonical-map-twist-comparison",
+  "lem-trf-proj-qc-open-twist-ample",
+  "lem-sc-ample-iso",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Assembly of Guo Proposition 6.2 first assertion into (iii), with smooth-test-base descent and the existing generic Stacks Proj tools; Guo read online, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Picard admissible line bundle has an invariant open immersion locus for its canonical map to Proj and is ample on that locus",
+   "results": "{\"t\": \"2026-10-24T03:16:10Z\", \"tool\": \"leansearch\", \"query\": \"A Picard admissible line bundle has an invariant open immersion locus for its canonical map to Proj and is ample on that locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"AlgebraicGeometry.Proj.opensRange_awayι\", \"AlgebraicGeometry.Proj.awayι_preimage_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\"], \"digest\": \"9b214f37aa89b201\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|openImmersionLocus|isOpenImmersionLocus",
+   "results": "{\"t\": \"2026-10-24T03:16:11Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|openImmersionLocus|isOpenImmersionLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest open subscheme of the section ring Proj over which the canonical morphism is an open immersion has group stable preimage for a Picard admissible line bundle",
+   "results": "{\"t\": \"2026-10-24T03:16:11Z\", \"tool\": \"leanfinder\", \"query\": \"The largest open subscheme of the section ring Proj over which the canonical morphism is an open immersion has group stable preimage for a Picard admissible line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\"], \"digest\": \"87422d35bf768939\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T03:16:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\"], \"digest\": \"027ebdb1533d5365\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Theorem of the square equivariance of the canonical section algebra Proj morphism and ampleness on its open immersion locus",
+   "results": "{\"t\": \"2026-10-24T03:16:12Z\", \"tool\": \"leanfinder\", \"query\": \"Theorem of the square equivariance of the canonical section algebra Proj morphism and ampleness on its open immersion locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc\"], \"digest\": \"743cceb60dc3e8b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the largest open locus where the canonical morphism from a section ring to Proj is an open immersion is invariant under a connected smooth group action satisfying the square condition",
+   "results": "{\"t\": \"2026-10-24T03:35:02Z\", \"tool\": \"leanfinder\", \"query\": \"the largest open locus where the canonical morphism from a section ring to Proj is an open immersion is invariant under a connected smooth group action satisfying the square condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.opensRange_awayι\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\"], \"digest\": \"46bf1d61acd0bd68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "grep",
+   "query": "open immersion.*locus|isOpenImmersion.*Proj|ample.*Proj",
+   "results": "{\"t\": \"2026-10-24T03:35:03Z\", \"tool\": \"grep\", \"query\": \"open immersion.*locus|isOpenImmersion.*Proj|ample.*Proj\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"391def9cc41582f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group action preserving the theorem of the square on a line bundle extends translations to neighborhoods of the image in the section ring Proj",
+   "results": "{\"t\": \"2026-10-24T03:46:14Z\", \"tool\": \"leansearch\", \"query\": \"A group action preserving the theorem of the square on a line bundle extends translations to neighborhoods of the image in the section ring Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.smul_def\", \"Projectivization.smul_mk\", \"Projectivization.instMulAction.congr_simp\", \"Projectivization.instMulAction\", \"Rep.coe_linearization_obj_ρ\", \"AlgebraicGeometry.Proj.mul_apply\", \"MulSemiringAction.toRingAut\", \"IsLocalRing.ResidueField.residue_smul\"], \"digest\": \"59637363fc262607\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard admissible line bundle translations extend to isomorphisms of open neighborhoods in the section ring projective spectrum",
+   "results": "{\"t\": \"2026-10-24T03:46:16Z\", \"tool\": \"leanfinder\", \"query\": \"Picard admissible line bundle translations extend to isomorphisms of open neighborhoods in the section ring projective spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.awayι\"], \"digest\": \"dc0f5c838e0da677\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-24T03:49:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\"], \"digest\": \"188fcc15769692ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|squareCondition|translation.*Proj|Proj.*translation",
+   "results": "{\"t\": \"2026-10-24T03:49:32Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|squareCondition|translation.*Proj|Proj.*translation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A translation by a section of a connected smooth group extends to an isomorphism of open neighborhoods containing the image in Proj of the section ring of a square-condition line bundle",
+   "results": "{\"t\": \"2026-10-24T03:51:14Z\", \"tool\": \"leanfinder\", \"query\": \"A translation by a section of a connected smooth group extends to an isomorphism of open neighborhoods containing the image in Proj of the section ring of a square-condition line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\"], \"digest\": \"5e8c166f88dfda51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T03:51:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\"], \"digest\": \"027ebdb1533d5365\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-action-affine-orbit-criterion",
+  "date": "2026-10-24",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Guo, Proposition 5.9, final assertion, printed pp.13--14, and Corollary 6.6(ii), printed p.16 (Raynaud VI, Theorem 2.1), applied to the left translation action of G on itself. Some positive tensor power satisfies the theorem of the square; the section criterion then detects ampleness.; auxiliary to lem-sfb-symmetric-line-power-prolongation, proof step 3 (local ample line on H_W). Supporting input: Guo, Corollary 6.5, sufficient direction, affine-locus specialization; square condition is Picard-admissibility of section 5.6; Guo, section 6.1 and Proposition 6.2(iii), printed pp.14--15 (affine-base, smooth separated finite-presentation specialization)",
+   "via": [
+    "lem-sfb-square-action-affine-orbit-criterion",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-square-action-proj-immersion-locus-stable",
+  "worker": "stage1",
+  "summary": "Kept the statement; isolated the genuine translation-extension input, transported the maximal target-open immersion locus through smooth base change by an explicit fpqc covering and descent, used universal group elements to prove saturation, and proved the ampleness clause using existing canonical twist comparison and ample Proj twist nodes. No new elementary or duplicate node.",
+  "blueprint": "Auxiliary to the inherited Guo square-action ampleness chain under sk-thm-sf-ctf-stability; from.node remains the inherited null. Realizes Guo Proposition 6.2(iii), needed in the parent affine-orbit criterion. Whole-blueprint translation search found no equivalent imported assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-open-immersion",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-sc-ample-proj-canonical-map",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-trf-proj-canonical-map-twist-comparison",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-trf-proj-qc-open-twist-ample",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-sc-ample-iso",
+    "why": "Generic scheme/Proj tool used exactly as its cited statement in the proof; supplies smooth base change, open-image descent, or twisting-sheaf ampleness, with no replacement of the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-galois-fpqc-descend-open-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-trf-proj-canonical-map-twist-comparison",
+  "lem-trf-proj-qc-open-twist-ample",
+  "lem-sc-ample-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-4b1c0276d",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-4b1c0276d (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, the new node lem-sfb-square-action-proj-translation-extension and every cited statement in full. There is no local copy of Guo, so I fetched the March 31, 2026 PDF from the node's URL into /tmp and read §5.6, §6.1 and Prop 6.2 (pp.14-15). Statement: the item is unchanged from base and matches Prop 6.2(iii) specialized to an affine base and smooth separated finitely presented H. Smooth gives universally open and flat finitely presented; the square condition is equivalent to Picard-admissibility by Lemma 5.7; over affine S, S-ample means absolute ample. New node: it is Guo's first assertion (translations extend to opens U_g, U'_g containing r(X), with τ_g r = r t_g) applied over a smooth affine B, with g replaced by g^{-1} for Guo's t_g convention. The base change is legitimate: generation commutes with flat base change, Proj(A⊗O(B)) = P×_S B, and fibres stay connected. It is a genuine input, not a clause of the item. Steps: (1) p is smooth, open and flat, and open immersions pull back, so p^{-1}P0 ⊆ Q_B. (2) {V→I} is an fpqc covering in the literal sense of def-weil-pbc-fpqc-covering (flat, open images, J quasi-compact); 02L3 descent gives Q_B = p^{-1}P0. (3) I rechecked the inverse-image identity under σ_g and the conjugated open immersion. (4) Universal points on affine charts of H give saturation; the unit gives the reverse inclusion. (5) Open immersion is local on the target. (6) The twist comparison (T qc) and qc-open twist ampleness (U qc) apply with m = de. (7) Isomorphism transport, then lem-sc-ample-iso, then the root step from the definition. Small cases (trivial M, G_a on A^1, G_m on P^1 with O(1), P^1×P^1 with O(1,0), T = ∅) are consistent. Batch-5: both flagged trf nodes are generic Proj algebra (Stacks 01NK/01N8, 01MW/01Q2). Their closures contain no trace-formula, Poincaré-duality or target nodes, only generic trf-proj chart nodes, so I accept both. I accept the ten generic tool_uses. There is no duplicate (rg -L search on translation extension, Raynaud ch. V, Picard-admissibility, Prop 6.2), no cycle, no SGA, no doubled backslashes, and uses equal proof_deps. Live is unsplit and there is no repair note. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SquareActionProjImmersionLocusStable",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.squareAction_proj_immersion_locus_stable",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.squareActionTranslation",
+   "AlgebraicGeometry.Scheme.Modules.squareAction_proj_immersion_locus_stable"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareActionProjImmersionLocusStable.lean",
+  "statement": "theorem squareAction_proj_immersion_locus_stable (S : Scheme.{u}) [IsAffine S] (H X : Over S) [GrpObj H] [ModObj H X] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFinitePresentation H.hom] [QuasiCompact H.hom] (hconnected : ∀ s : S, ConnectedSpace (H.hom.fiber s)) [IsSeparated X.hom] [LocallyOfFinitePresentation X.hom] [QuasiCompact X.hom] (M : X.left.Modules) [M.IsInvertible] (hsquare : ∀ (B : Over S) (g h : B ⟶ H), ∃ N : B.left.Modules, N.IsInvertible ∧ Nonempty (((tensorPullback (squareActionTranslation H X B (g * h))).obj ((tensorPullback (snd B X).left).obj M)) ⊗ ((tensorPullback (snd B X).left).obj M) ≅ (((tensorPullback (squareActionTranslation H X B g)).obj ((tensorPullback (snd B X).left).obj M)) ⊗ ((tensorPullback (squareActionTranslation H X B h)).obj ((tensorPullback (snd B X).left).obj M))) ⊗ ((tensorPullback (fst B X).left).obj N))) (hcover : ∀ x : X.left, ∃ (d : ℕ) (s : sectionRingGrade M d), 0 < d ∧ x ∈ nonvanishingLocus (M.tensorPow d) (s.val d)) (r : X.left ⟶ Proj (sectionRingGrade M)) (hr : ∀ (d : ℕ) (_hd : 0 < d) (s : sectionRingGrade M d), (r ⁻¹ᵁ Proj.basicOpen (sectionRingGrade M) s.val : Set X.left) = nonvanishingLocus (M.tensorPow d) (s.val d) ∧ ∀ (n : ℕ) (ξ : sectionRingGrade M (n • d)), (r.app (Proj.basicOpen (sectionRingGrade M) s.val) (Proj.awayToSection (sectionRingGrade M) s.val (HomogeneousLocalization.Away.mk (sectionRingGrade M) s.property n ξ.val ξ.property))) • (M.tensorPow (n • d)).presheaf.map (homOfLE (le_top : r ⁻¹ᵁ Proj.basicOpen (sectionRingGrade M) s.val ≤ ⊤)).op ((s.val ^ n) (n • d)) = (M.tensorPow (n • d)).presheaf.map (homOfLE (le_top : r ⁻¹ᵁ Proj.basicOpen (sectionRingGrade M) s.val ≤ ⊤)).op (ξ.val (n • d))) (P₀ : (Proj (sectionRingGrade M)).Opens) (hP₀ : P₀ = sSup {V | IsOpenImmersion (r ∣_ V)}) : (γ[H, X]).left '' ((snd H X).left ⁻¹' (r ⁻¹ᵁ P₀ : Set X.left)) = (r ⁻¹ᵁ P₀ : Set X.left) ∧ ∀ (T : X.left.Opens), T ≤ r ⁻¹ᵁ P₀ → CompactSpace T.toScheme → @IsAmple T.toScheme (M.restrict T.ι) (IsInvertible.of_iso ((restrictFunctorIsoPullback T.ι).app M).symm)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The square condition is written inline using the actual tensor pullback, group objects, and module-object action. The canonical map is characterized by the exact chart conditions of exists_sectionRing_proj_morphism. P₀ is the supremum of target opens with open-immersion restriction; saturation uses all points of H ×_S X lying over its inverse image. The helper squareActionTranslation is the concrete base-change translation, not an arbitrary endomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad91b262a",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion of the node matches the Lean: affine S; H smooth, separated, of finite presentation (Smooth, IsSeparated, LocallyOfFinitePresentation, QuasiCompact) with GrpObj and connected fibres via Hom.fiber; X separated and of finite presentation with ModObj action; M invertible. Translation τ_g = (b,x)↦(b,g(b)·x) is a concrete construction. Square condition matches the node: ∃ invertible N and a Nonempty iso τ_gh^*M_B⊗M_B ≅ (τ_g^*M_B⊗τ_h^*M_B)⊗q_B^*N, no coherence data. hcover and hr are verbatim from exists_sectionRing_proj_morphism, so r is the canonical map. P₀ = sSup of opens V with r∣_V an open immersion. Conclusions: action image of H×_S W equals W on all points; M restricted to any compact open T ≤ W is IsAmple (the instance argument is a Prop proof). Tensor is SheafOfModules.monoidalCategory, the def-pur tensor; tensorPullback has the right direction; one universe throughout. Empty X/S/T/W/P₀, trivial group and trivial M are covered. Node differs from live only in lean; statement verbatim; one sorry; docstrings carry source, blueprint tag and 7-step plan; imports match the proof_dep modules; no duplicate declaration; report has both sections. Not recompiled (no file changed); relies on the worker's clean compile."
+ }
+}

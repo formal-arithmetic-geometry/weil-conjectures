@@ -19,98 +19,44 @@
  ],
  "proof": [
   {
-   "text": "Write $a:X\\to\\operatorname{Spec}k$ and $b:Z\\to\\operatorname{Spec}k$ for the structure morphisms, so $bq=a$. A field is Noetherian since its only ideals are $(0)$ and $(1)$, and $\\operatorname{Spec}k$ has its one affine Noetherian chart. The finite-type-over-Noetherian theorem therefore makes $X$ Noetherian. Also $X$ is quasi-compact by finite type. To see that $Z$ is quasi-compact, pull any open cover back along $q$, choose a finite subcover of $X$, and use surjectivity to see that the corresponding opens cover $Z$. Choose a finite affine open cover $Z=\\bigcup_j V_j$. This includes the empty cover when $X=Z=\\varnothing$.",
+   "text": "Write $a:X\\to\\operatorname{Spec}k$ and $b:Z\\to\\operatorname{Spec}k$, with $bq=a$. The invariant-section hypothesis makes each affine section map injective, so apply the affine-chart lemma to $q$. Thus $X$ is locally Noetherian, and $Z$ has a finite affine cover $V_j=\\operatorname{Spec}A_j$ with $q^{-1}V_j=\\operatorname{Spec}B_j$, where each $A_j$ is Noetherian and finite type over $k$. By the definition of finite type this finite cover makes $b$ finite type and proves the required Noetherian conclusion. Invariance of $q$ makes each inverse image $H$-stable. Inverse pullback gives a left $H$-action on $B_j$ by $k$-algebra automorphisms; the section hypothesis identifies the actual map $A_j\\to B_j$ with $B_j^H\\subset B_j$, as $k$-algebras since $bq=a$.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-finite-type-morphism",
-    "def-weil-surjective-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6 (lemma-finite-type-noetherian); the cover argument is elementary."
-   }
-  },
-  {
-   "text": "For each $V_j=\\operatorname{Spec}A_j$, finiteness of $q$ gives $U_j=q^{-1}(V_j)=\\operatorname{Spec}B_j$ with $B_j$ finite as an $A_j$-module. The affine-pair characterization of local finite type, applied to $a$ and the affine open $U_j\\subset X$, makes $B_j$ a finite-type $k$-algebra. Since $q$ is invariant, $U_j$ is $H$-stable; inverse pullback on sections defines a left action by $k$-algebra automorphisms on $B_j$. The assumed equality of structure sheaves identifies $A_j$ with $B_j^H\\subset B_j$, as a $k$-subalgebra (the structure maps agree because $bq=a$). Artin--Tate, with Noetherian base $k$, now makes $A_j$ a finite-type $k$-algebra; the finite-type-algebra Noetherian theorem makes it Noetherian. The finite affine cover from step 1 proves that $b$ is of finite type, by its definition, and that $Z$ has a finite affine cover by Noetherian rings.",
-   "uses": [
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-lft-affine-pairs",
-    "lem-sfb-artin-tate-subalgebra-finite-type",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-finite-injective-section-affine-charts",
     "def-weil-finite-type-morphism"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01WH (definition-integral), finite clause; Tag 01T2 (lemma-locally-finite-type-characterize); algebra.tex Tags 00IS (lemma-Artin-Tate) and 00FN (lemma-Noetherian-permanence)."
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IS, lemma-Artin-Tate; agent-formulated affine-chart assembly of the retained item proof steps 1--2. The scheme and Noetherian inputs are the affine-pair finite-type characterization and finite-type-over-Noetherian results, detailed with their tags in report.md."
    }
   },
   {
-   "text": "Fix a chart from step 2 and abbreviate its rings to $A=B^H$. The scheme $X$ is locally Noetherian by step 1 and all its stalks are integrally closed domains by hypothesis. The affine open $U=q^{-1}(V)$ is quasi-compact. Apply the normal-section-ring decomposition to this $X$ and $U$ to obtain a ring isomorphism $B\\cong\\prod_{i\\in I}B_i$, with $I$ finite and every $B_i$ an integrally closed domain. Transport the $H$-action to this product. For $U=\\varnothing$ the lemma gives $I=\\varnothing$ and $B=0$.",
+   "text": "Fix a chart and put $A=B^H$. Apply the normal-section decomposition to the quasi-compact affine inverse image in the locally Noetherian normal $X$. It gives $B\\cong\\prod_{i\\in I}B_i$ with $I$ finite and $B_i$ integrally closed domains. Transport the action through this isomorphism. The domain-product action lemma supplies the factor action and the ring isomorphism $A\\cong\\prod_{i\\in R}C_i$, where $R$ represents the factor orbits and $C_i=B_i^{H_i}$ for the factor stabilizer $H_i$.",
    "uses": [
-    "lem-sbc-normal-sections-finite-product"
+    "lem-sbc-normal-sections-finite-product",
+    "lem-sfb-domain-product-action-fixed-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Tags 033N (lemma-normal-locally-Noetherian) and 0358 (lemma-normal-integral-sections); the cited DAG node supplies the full finite-product conclusion, including the empty open."
+    "place": "Tags 033N (lemma-normal-locally-Noetherian) and 0358 (lemma-normal-integral-sections); ILO X 2.3 Step 3, component/stabilizer reduction."
    }
   },
   {
-   "text": "For each $i\\in I$, let $e_i$ be the product idempotent equal to $1$ at $i$ and $0$ elsewhere. In a domain an idempotent $e$ satisfies $e(e-1)=0$, hence is $0$ or $1$. Thus the nonzero idempotents in $B$ which cannot be split into two nonzero orthogonal idempotents are exactly the $e_i$. Every ring automorphism preserves this description, so $H$ permutes the $e_i$, giving an action on $I$. Multiplication by $e_i$ identifies the factor $B_i$ with the ideal $e_iB$, with unit $e_i$. Restriction of $h$ therefore gives a ring isomorphism $h_i:B_i\\to B_{hi}$. These satisfy $(gh)_i=g_{hi}h_i$ because they are restrictions of the original action.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Elementary product-ring calculation; cf. Tag 00EE (lemma-disjoint-decomposition). This step proves the needed idempotent permutation directly."
-   }
-  },
-  {
-   "text": "Choose one representative $i$ of each orbit in the finite set $I$, and put $H_i=\\{h:hi=i\\}$ and $C_i=B_i^{H_i}$. Projection to the representative coordinates gives a ring isomorphism $B^H\\cong\\prod_{i\\in I/H}C_i$. Indeed a fixed tuple must satisfy $x_{hi}=h_i(x_i)$, so the representative coordinates determine it and lie in $C_i$. Conversely, for $c_i\\in C_i$, prescribe $x_{hi}=h_i(c_i)$ on that orbit. If $hi=h'i$, then $h^{-1}h'\\in H_i$, so the prescription is independent of the choice of $h$. The identity $(gh)_i=g_{hi}h_i$ proves that this tuple is fixed by every $g$. These two constructions are inverse and preserve addition, multiplication and units coordinatewise. For $I=\\varnothing$ they are the unique isomorphism of zero rings.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic orbit calculation, expanding the component/stabilizer reduction in Expose X 2.3 Step 3, printed pp.151--152; the full inverse formula and its well-definedness are written here."
-   }
-  },
-  {
-   "text": "Each $C_i\\subset B_i$ is an integrally closed domain. It is a domain as a unital subring of a domain. To prove integral closedness, take $y=c/d\\in\\operatorname{Frac}(C_i)$ with $d\\ne0$, satisfying a monic equation over $C_i$. Embed this fraction field into $\\operatorname{Frac}(B_i)$. The same equation makes $y$ integral over $B_i$, so $y\\in B_i$ by its integral closedness. For $h\\in H_i$, apply $h_i$ to $dy=c$ in $B_i$; since $c,d$ are fixed, $d h_i(y)=c=dy$. Cancellation of $d\\ne0$ gives $h_i(y)=y$. Thus $y\\in C_i$, as required. This uses neither faithfulness nor division by $|H_i|$.",
+   "text": "The fixed-subring lemma makes every $C_i$ a normal ring. Finite-product normality makes $\\prod_i C_i$ normal. The isomorphism from step 2 transports prime ideals, their localizations and monic equations, so $A$ is normal. Affine-open stalk localization identifies each $\\mathcal O_{Z,z}$ on this chart with the corresponding prime localization of $A$; it is therefore an integrally closed domain. The charts cover $Z$, proving normality. Empty opens give empty products; the zero ring has no prime ideals.",
    "uses": [
-    "def-weil-pbc-normal-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0309 (definition-domain-normal); elementary monic-equation and cancellation argument, written by the worker for the stabilizer fixed subrings."
-   }
-  },
-  {
-   "text": "Each $C_i$ is also a normal ring in the prime-localization sense. For a prime $\\mathfrak p\\subset C_i$, the localization $(C_i)_{\\mathfrak p}$ is a domain inside $\\operatorname{Frac}(C_i)$. If $y$ in that field satisfies $y^d+\\sum_{r<d}a_r y^r=0$ with $a_r\\in(C_i)_{\\mathfrak p}$ and $d\\ge1$, choose a common denominator $s\\in C_i\\setminus\\mathfrak p$ so that every $sa_r\\in C_i$. Then $sy$ satisfies the monic equation $T^d+\\sum_{r<d}s^{d-r}a_rT^r=0$ over $C_i$. Step 6 gives $sy\\in C_i$, hence $y\\in(C_i)_{\\mathfrak p}$. This proves integral closedness at every prime, exactly the definition of a normal ring.",
-   "uses": [
-    "def-weil-pbc-normal-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00GY (lemma-localize-normal-domain), its explicit common-denominator proof; no localization-normality theorem is being used without proof."
-   }
-  },
-  {
-   "text": "The finite-product normality theorem applied to the normal rings $C_i$ proves that $\\prod_i C_i$ is a normal ring. By the ring isomorphism of step 5, $A$ is normal: a ring isomorphism transports prime ideals, fractions and monic equations, so its prime localizations are integrally closed domains. The affine-open stalk-localization theorem identifies $\\mathcal O_{Z,z}$ with $(A_j)_{\\mathfrak p_z}$ for every $z\\in V_j$. Consequently every local ring of $Z$ is an integrally closed domain, proving normality. The zero ring has no primes, so the empty case is included.",
-   "uses": [
+    "lem-sfb-fixed-subring-normal-localizations",
     "lem-weil-pbc-finite-product-normal",
     "lem-weil-pbc-affine-open-stalk-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0CYA (lemma-finite-product-normal); schemes.tex Tag 01HV (lemma-spec-sheaves), together with the open-subspace stalk identification of Example 01HF, as fully stated by the cited affine-open node."
+    "place": "Tags 00GY (lemma-localize-normal-domain), 0CYA (lemma-finite-product-normal); schemes.tex Tag 01HV (lemma-spec-sheaves) and Example 01HF for affine-open stalks."
    }
   },
   {
-   "text": "Finally, $q$ is proper because it is finite, and in particular is universally closed. It is surjective by hypothesis. Since $a$ is proper it is separated and universally closed. Apply separatedness descent along the surjective universally closed $q$, over $\\operatorname{Spec}k$, to obtain separatedness of $b$. Apply universally-closed-image descent to $bq=a$ to obtain universal closedness of $b$. Together with the finite type already proved in step 2, these properties make $b$ proper. Step 2 also supplies precisely the asserted Noetherian conclusion. All descent hypotheses hold for the empty schemes too. The given geometric-orbit and categorical properties are compatible additional hypotheses; this argument only needs the finite surjection and the invariant-section equality.",
+   "text": "Finally, $q$ is proper because it is finite, and in particular is universally closed. It is surjective by hypothesis. Since $a$ is proper it is separated and universally closed. Apply separatedness descent along the surjective universally closed $q$, over $\\operatorname{Spec}k$, to obtain separatedness of $b$. Apply universally-closed-image descent to $bq=a$ to obtain universal closedness of $b$. Together with the finite type already proved in step 1, these properties make $b$ proper. Step 1 also supplies precisely the asserted Noetherian conclusion. All descent hypotheses hold for the empty schemes too. The given geometric-orbit and categorical properties are compatible additional hypotheses; this argument only needs the finite surjection and the invariant-section equality.",
    "uses": [
     "lem-weil-pbc-finite-proper",
     "def-weil-proper-morphism",
@@ -125,15 +71,11 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-injective-section-affine-charts",
   "def-weil-finite-type-morphism",
-  "def-weil-surjective-morphism",
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-lft-affine-pairs",
-  "lem-sfb-artin-tate-subalgebra-finite-type",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-sbc-normal-sections-finite-product",
-  "def-weil-pbc-normal-ring",
+  "lem-sfb-domain-product-action-fixed-ring",
+  "lem-sfb-fixed-subring-normal-localizations",
   "lem-weil-pbc-finite-product-normal",
   "lem-weil-pbc-affine-open-stalk-localization",
   "lem-weil-pbc-finite-proper",
@@ -309,11 +251,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "item": "lem-sfb-finite-quotient-normal-proper",
   "worker": "stage1",
-  "summary": "Nine steps prove finite type and Noetherianity by finite affine charts and the existing Artin--Tate leaf, normality by the existing normal-section decomposition plus explicit orbit, fixed-domain and localization calculations, and properness by the existing finite-proper and descent nodes. No new nodes, statement changes, Lean writing or compilation. All proof citations were read and quoted.",
-  "blueprint": "Auxiliary algebraic-geometric input for det-thm-sf-ctf-stability-direct-images clause (3), through lem-sfb-admissible-direct-image and the existing alteration/Sylow quotient chain: ILO X 2.3 Step 2 diagram (2.c), and Step 3 component/stabilizer reduction. The inherited created.item ancestry computes from.node=null; its existing precise place and via chain are retained.",
+  "summary": "Repair of the current landing refusal (side completion not promoted), 2026-10-23: continued the retained three-node extraction and compared the current parent with retained-node.json (identical). Reread every cited statement; all eleven quotations still match and no cited node is merged. The required initial dry run found two new same-tag nodes, lem-a1-affine-split-morphism-positive-rank-pieces and lem-sfb-equivariant-component-affine-germs; read both complete statements and documented their distinct rank-stratum and geometric-germ scope in report.md. Preserved all retained arguments and 18 logged searches, the unchanged statement and metadata, three statement-only work items, and the 2535-character four-step assembly. Fresh delivery preflight rebases onto the fetched current DAG for L to promote.",
+  "blueprint": "Preserves the existing ILO X 2.3 Steps 2--3 prerequisite and the det-thm-sf-ctf-stability-direct-images clause (3) ancestry. Original steps 1--2 map to finite-injective-section-affine-charts plus parent step 1; steps 4--5 map to domain-product-action-fixed-ring; steps 6--7 map to fixed-subring-normal-localizations. Original steps 3, 8 and 9 remain the assembly in parent steps 2, 3 and 4. from.node=null is retained from the computed ancestor.",
   "tool_uses": [
    {
     "node": "lem-sbc-normal-sections-finite-product",
@@ -335,12 +277,12 @@
   "lem-weil-pbc-surjective-universally-closed-separated"
  ],
  "reviewed": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NN-b7aa9f309",
-  "group": "NN",
+  "reviewer": "NT-cc-Q43-cb7fc5dcb",
+  "group": "Q43",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-b7aa9f309 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 steps, every cited statement, ILO X 2.3 printed pp.151-152, and Stacks 00IS. MECHANICAL FINDING: correct. Step 2 cites lem-per-artin-tate-subalgebra-finite-type, which is in the 2026-10-19 artin-gabber drop section (line 1427; created by Q134 for the dropped admissible-quotient-generic-degree). The item itself is not dropped. Its only citer, lem-sfb-semilinear-sylow-good-components, is live and split and uses exactly the item's conclusions, and the via chain is not dropped. The item is still unsplit in side-live. The use is generic Stacks 00IS (B_j^H inside B_j over k) and involves none of the excluded Qbar/Gabber/alteration machinery. No live Artin-Tate node exists: rg for 00IS/Artin-Tate/fg_of_fg_of_fg finds only dropped nodes. FIX: new reviewer leaf lem-sfb-artin-tate-subalgebra-finite-type (sec-six-functors-basics, unit sk-thm-sf-ctf-stability, created.item=this item). Its statement is verbatim 00IS (algebra.tex 12297), its stmt_deps are live, and its Mathlib candidate is fg_of_fg_of_fg (Adjoin/Tower.lean:145). Step 2 uses and proof_deps are re-cited to it; the text is unchanged. MATHS: Step 1: 01T6 over Spec k; Z quasi-compact via the surjection. Step 2: 01T2 for B_j finite type over k, A_j=B_j^H a k-subalgebra, Artin-Tate, then 00FN. Step 3: normal-sections finite product (hypotheses checked, empty case included). Steps 4-5: idempotent permutation and orbit/stabilizer fixed-ring isomorphism; well-definedness checked, also on swap and trivial actions. Step 6: fixed ring is a normal domain, with no averaging, so char dividing |H| is fine. Step 7: localization trick with s^(d-r)a_r. Step 8: 0CYA plus the stalk-localization lemma (c). Step 9: finite implies proper, then 09MQ(4) gives b separated and 03GN gives b universally closed, plus finite type, so b is proper. All correct. Edge cases: empty X, nonfaithful action, disconnected X. No statement change, no weakening, no SGA. Accepted tool_uses: sbc normal-sections, pbc finite-product-normal, pbc separatedness descent (all generic).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-cb7fc5dcb (reviewer sub-agent of L); spot-checked: This is the 4th push of the same three-node re-split. Pushes 390d, 7cc6 and 6f0c all passed review and were then refused at landing because the side completion was not promoted. Diffed against the 6f0cd37c snapshot: the three new nodes, the item statement, the proof and proof_deps are byte-identical; only split_report.date and summary changed. Live and side-live still hold the old 9-step proof and none of the new nodes, so no other group has superseded this. The report keeps the old 9 steps verbatim and maps each one: old 1-2 to the chart node, 3 to parent step 2, 4-5 to the product-action node, 6-7 to the fixed-subring node, 8-9 to parent steps 3-4. The parent is a 2535-character, 4-step assembly. I reread all four steps against the full cited statements. Step 1: the invariant-section equality makes each section map injective, so the chart lemma applies and def-weil-finite-type-morphism gives finite type. Step 2: lem-sbc-normal-sections-finite-product applies (locally Noetherian, normal stalks, quasi-compact U, empty open included). Step 3: the fixed-subring node, then finite-product-normal (same prime-local sense), then affine-open-stalk-localization (c). Step 4: finite-proper, separatedness descent over Spec k, image-universally-closed with bq=a, plus finite type from step 1. All three new statements are true. Chart node: Noetherian X, quasi-compact Z by surjectivity, affine inverse images, B finite type by 01T2, Artin-Tate 00IS (reread algebra.tex 12297). Product-action node: primitive idempotents are the e_i, h_i is well defined because α_h(x)e_{hi}=α_h(xe_i), and the inverse is well defined via h⁻¹h' ∈ H_i. Tested I=∅, a trivial action, a swap and an in-factor action. Fixed-subring node: y=c/d ∈ D, then cancel d; 00GY localization reread at algebra.tex 8048; tested a trivial group, a nonfaithful action and characteristic dividing |G|. Advisory: the new Q42 node lem-sfb-transitive-domain-product-invariants is the transitive, given-ρ, finite-H special case of lem-sfb-domain-product-action-fixed-ring. The Q43 node additionally recovers the index action intrinsically and handles several orbits and any group H, so it is not a duplicate; Lean may reuse the Q42 node. No SGA source is cited, tool_uses are unchanged and accepted, and no changes were made."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FiniteQuotientNormalProper",
@@ -359,5 +301,17 @@
   "group": "NN",
   "result": "pass",
   "note": "Lean-only delivery; the node differs from live only in lean. Every node clause is matched in Lean: normal stalks; IsProper a covers finite type; H →* Aut X over k; q finite, surjective and invariant; geometric orbits over Ω : Type u alg closed are equivalent to the node; hsections over all opens (the appLE ∀e is never vacuous); hcategorical gives ∃! k-morphism. Conclusions: normal stalks, IsProper b, LocallyOfFiniteType b ∧ QuasiCompact b, IsNoetherian Z. Edge cases checked: empty X, disconnected X, nonfaithful action, char | |H|, universes. The item and its citer are not dropped; the Artin–Tate re-cite is kept. Statement verbatim, name unique, lines ≤ 89, sorry only, docstrings with source, blueprint and 9 steps. Proof-dep imports follow rule 7; 3 plain Mathlib imports are redundant (advisory). No compile, as instructed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,195 @@
+{
+ "id": "lem-sfb-finite-model-kernel-generation",
+ "kind": "statement",
+ "title": "Kernel generation on the source before support extension",
+ "statement": "Fix a prime $\\ell$ and a commutative condensed ring $\\Lambda$. Assume $\\Lambda$ is isomorphic as a commutative condensed ring to one of $P\\mapsto C(P,A)$ for a finite discrete commutative ring A killed by a power of ell, $P\\mapsto C(P,\\mathbf Z_\\ell)$, $P\\mapsto C(P,\\mathcal O_E)$, $P\\mapsto C(P,\\mathbf Q_\\ell)$, or $P\\mapsto C(P,E)$, where $E/\\mathbf Q_\\ell$ is a finite subextension of the fixed algebraic closure, with its ell-adic topology and its ring of integers with the induced topology [sk-def-localizing-closure]. These are all continuous functions. Let S be a qcqs scheme. Let L and M be modules over $\\Lambda_S=p_S^*\\Lambda$ on its small pro-etale site, with ordinary uncompleted derived categories. Each is a finite scalar local model: on its own pro-etale cover it is pulled back from a finitely presented module over the condensed point [sk-def-sfb-constructible]. For every actual module morphism $f:L\\to M$, the actual abelian kernel in degree zero belongs to the explicit supported image-generation hull $\\mathcal G_S$ [def-sfb-supported-image-generation-hull]. There is no support extension in this assertion. Morphisms may have arbitrary continuous entries; no finite local model for the kernel is claimed. Zero maps, identity maps, zero rings and empty schemes are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Steps 1--5 of lem-sfb-supported-image-bounded-derived-generation: weakly contractible component reduction and supported-hull descent, before support extension. HRS Section 4.1 gives the component setting; exact hull reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "def-sfb-supported-image-generation-hull"
+ ],
+ "proof": [
+  {
+   "text": "Let S be the given qcqs source and K = ker(u:L -> M). Refine the two finite scalar model covers to a common cover and then by weakly contractible affines, using sk-thm-pe-weakly-contractible-basis. On each resulting chart b_i:W_i -> S the restrictions of L and M are scalar models for fixed finitely presented scalar modules B_i,C_i.",
+   "uses": [
+    "sk-thm-pe-weakly-contractible-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly for the descendant image-generation obligation; HRS Section 4.1 for component pullback. No attribution of the new hull inputs to HRS."
+   }
+  },
+  {
+   "text": "Fix one such $W$ and put $P=\\pi_0(W)$. Use the component morphism $\\pi_W$ and its exact fully faithful derived inverse image $F_W$. The two scalar models on $W$ are $F_W(B_R),F_W(C_R)$: present $B,C$ by finite scalar matrices; exact inverse image takes their cokernels to the cokernels of the same matrices over $\\Lambda_W$. Full faithfulness gives a unique map $v:B_R\\to C_R$ pulling back to $u|_W$. Degree-zero maps in a module-derived category are the module maps, so $v$ is an actual module morphism. Exactness gives $b^*K\\cong F_W\\ker v$. In particular we have not replaced the continuous entries of $u$ by constant entries.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-sfb-wcontractible-component-derived-hom",
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "det-prop-sfb-module-pullback-exact-main"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly for the descendant image-generation obligation; HRS Section 4.1 for component pullback. No attribution of the new hull inputs to HRS."
+   }
+  },
+  {
+   "text": "The functor $F_W$ preserves sheaf products: at a weakly contractible affine $U\\to W$, its evaluation formula is $F_WM(U)=M(\\pi_0U)$, and all sheaf limits are sectionwise, so the product comparison is a bijection there. The conservative basis test makes it an isomorphism. For complexes $T_j$ on $\\operatorname{Prof}/P$, therefore, $F_WQ(\\prod_jT_j)=Q(\\prod_jF_WT_j)$. The termwise-product theorem on $W$ identifies the latter with $\\prod_jF_WQT_j$ in the target derived category. Full faithfulness of $F_W$ now gives, for every source object $A$, $\\operatorname{Hom}(A,Q\\prod_jT_j)=\\prod_j\\operatorname{Hom}(A,QT_j)$. Thus $Q\\prod_jT_j$ is the source derived product and $F_W$ carries it to the target derived product. Also $F_W$ preserves termwise filtered colimits, as an inverse-image left adjoint; it is exact and hence sends a strict diagram with common termwise lower bound to one with that same bound. Exactness preserves shifts and triangles, and any functor preserves retract diagrams.",
+   "uses": [
+    "lem-sfb-component-pullback-unbounded-evaluation",
+    "lem-sfb-wcontractible-component-derived-hom",
+    "det-pe-sections-conservative",
+    "det-pe-products-derived",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly for the descendant image-generation obligation; HRS Section 4.1 for component pullback. No attribution of the new hull inputs to HRS."
+   }
+  },
+  {
+   "text": "Every generator of $\\mathcal H_P$ pulls back to a finite scalar local model on $W$: the component site functor carries its covering to a pro-étale covering, and the scalar cokernel calculation of step 2 applies on its members. Consequently $\\{T:F_WT\\in\\mathcal G_W\\}$ is one of the full replete classes intersected to define $\\mathcal H_P$, by step 3 and by the identity-chain generators of $\\mathcal G_W$. It contains $\\mathcal H_P$. The profinite relation-kernel lemma applies to $v$ and yields $(\\ker v)[0]\\in\\mathcal H_P$. Thus $(b^*K)[0]\\in\\mathcal G_W$ for every chart $W$.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-sfb-profinite-constant-model-relation-hull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly for the descendant image-generation obligation; HRS Section 4.1 for component pullback. No attribution of the new hull inputs to HRS."
+   }
+  },
+  {
+   "text": "Apply supported-hull pro-étale descent to the module $K$ on the qcqs scheme $S$ and the cover chosen in step 1. The hypothesis of that lemma was proved in step 4, so $K[0]\\in\\mathcal G_S$. This is descent of membership in the specified hull; it is not inferred merely from conservativity of restriction or descent of lisse sheaves.",
+   "uses": [
+    "lem-sfb-supported-hull-proetale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly for the descendant image-generation obligation; HRS Section 4.1 for component pullback. No attribution of the new hull inputs to HRS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-weakly-contractible-basis",
+  "lem-zl-component-relative-profinite-site",
+  "lem-sfb-wcontractible-component-derived-hom",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-component-pullback-unbounded-evaluation",
+  "det-pe-sections-conservative",
+  "det-pe-products-derived",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sfb-profinite-constant-model-relation-hull",
+  "lem-sfb-supported-hull-proetale-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Steps 1--5 of lem-sfb-supported-image-bounded-derived-generation: weakly contractible component reduction and supported-hull descent, before support extension. HRS Section 4.1 gives the component setting; exact hull reference WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a map between finite scalar local model sheaves lies in the triangulated hull closed under products and filtered colimits",
+   "results": "8 hits, including Functor.instIsTriangulatedHomologicalKernel, LinearMap.ker and Limits.kernel. None gives this finite-model hull statement.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; generic abelian kernel and triangulated closure APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension by zero or closed direct image preserves the derived hull generated by supported finite constant sheaves",
+   "results": "8 hits: DerivedCategory.IsGE, exists_iso_Q_obj_of_isGE, HomologicalComplex.isSupported_iff and related support bounds.",
+   "date": "2026-10-25",
+   "verdict": "No supported finite-model hull preservation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty\", \"IsTriangulated\"",
+   "results": "12 hits, including IsTriangulated and IsTriangulatedClosed classes and finite-product instances.",
+   "date": "2026-10-25",
+   "verdict": "Generic closure tools, no identification of either geometric hull."
+  },
+  {
+   "tool": "grep",
+   "query": "supportedImageGenerationHull|supported.*hull|finite.*model.*kernel",
+   "results": "0 Mathlib hits via msearch; repository rg found the item and its consumers, SupportedModelHull and SupportedModelHullProetaleDescent.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate kernel-generation or path-extension statement; existing descent is retained as a dependency."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageBoundedDerivedGeneration",
+  "date": "2026-10-25",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Steps 1--5 of lem-sfb-supported-image-bounded-derived-generation: weakly contractible component reduction and supported-hull descent, before support extension. HRS Section 4.1 gives the component setting; exact hull reference WANTED.",
+   "via": [
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedModelKernelGeneration",
+  "file": "lean/Sheaf/Paper/SupportedModelKernelGeneration.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finite_model_kernel_mem_supported_generation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.finite_model_kernel_mem_supported_generation"
+  ],
+  "statement": "theorem finite_model_kernel_mem_supported_generation (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (S : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S] (L M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)) (hL : HasFiniteConstantLocalModel Λ S L) (hM : HasFiniteConstantLocalModel Λ S M) (f : L ⟶ M) : supportedImageGenerationHull Λ S ((DerivedCategory.singleFunctor _ 0).obj (kernel f))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e944c",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261025T162509-L-464154",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e944c",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261025T162509-L-464154",
+  "kind": "interface",
+  "note": "independent cc review: item proof (kernel lemma + path extension + SES single triangle) against node plan steps 1-7; moved hull defs verbatim against clone; importers WeakSerreSupportedDerivedGeneration and SupportedImageRigidityFromModelComparisons compiled against delivered modules"
+ }
+}

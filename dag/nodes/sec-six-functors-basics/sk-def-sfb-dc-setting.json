@@ -281,7 +281,112 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-setting",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.HasCompactification.of_isOver",
+    "AlgebraicGeometry.ProEtale.CondensedRing.compactificationOverField",
+    "AlgebraicGeometry.ProEtale.BoundedConstructible",
+    "AlgebraicGeometry.ProEtale.boundedConstructible",
+    "AlgebraicGeometry.HasCompactification.of_over",
+    "AlgebraicGeometry.Compactification.overObj",
+    "AlgebraicGeometry.Compactification.overI",
+    "AlgebraicGeometry.Compactification.overG",
+    "AlgebraicGeometry.Compactification.overI_overG"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.HasCompactification.of_isOver",
+     "module": "WeilConjectures.Compactification.NagataCompactification",
+     "lines": [
+      250,
+      268
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.BoundedConstructible",
+     "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+     "lines": [
+      86,
+      88
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.boundedConstructible",
+     "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+     "lines": [
+      59,
+      65
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.HasCompactification.of_over",
+     "module": "WeilConjectures.Compactification.NagataCompactification",
+     "lines": [
+      270,
+      283
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Compactification.overObj",
+     "module": "WeilConjectures.Compactification.Over",
+     "lines": [
+      107,
+      110
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Compactification.overI",
+     "module": "WeilConjectures.Compactification.Over",
+     "lines": [
+      112,
+      117
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Compactification.overG",
+     "module": "WeilConjectures.Compactification.Over",
+     "lines": [
+      119,
+      122
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Compactification.overI_overG",
+     "module": "WeilConjectures.Compactification.Over",
+     "lines": [
+      132,
+      134
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.compactificationOverField"
+   ],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -310,21 +415,36 @@
   "note": "Missing prerequisite supplied by an exact published existing interface, under the human bottom-up repair authorization. BoundedConstructible is the full ambient subcategory on bounded constructible internal modules over condensedRingObj. compactificationOverField is exactly the Nagata choice used by boundedConstructibleLowerShriek and UpperShriek. HasCompactification.of_over supplies existence, and overObj/overI/overG put the factorization over the same base with separated finite-type middle scheme. The setting is rendered by explicit target binders, not a new predicate."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "A4",
+  "reviewer": "C-46b2a",
+  "group": "J7",
   "result": "pass",
-  "landing": "20261021T013334-L-2287154",
+  "landing": "20261025T101203-L-3669421",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "note": "independent cc review: boundedConstructible_rightDerivedLowerStar_obj proof (devissage + triangulated inverse image) against lem-sfb-dc-lower-star-preserves node and the two new single-sheaf nodes/modules; removed plain imports against unit sk-prop-open-coefficients (realized empty) and 4 direct importers compiled with the delivered modules",
   "sorry_before": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
-   "AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible"
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj"
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
-   "AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible"
-  ]
+  "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\neq\\ell$. In this\nsetting all schemes are separated and of finite type over $k$, and all morphisms are\nmorphisms of $k$-schemes. No further hypothesis is imposed. For a commutative condensed\nring $\\Lambda$ ([det-def-sfb-condensed-ring]) and a scheme $X$ of the setting, write\n\n$$\nD_{\\mathrm{cons}}(X,\\Lambda):=D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\Lambda_X)\\subseteq D(\\Mod_{\\Lambda_X})\n$$\n\nfor the bounded constructible derived category ([det-def-sfb-bounded-constructible]) of\nmodule objects over $\\Lambda_X=p_X^*\\Lambda$ ([det-def-sfb-pulled-back-coefficients]).\n\nEvery morphism $f\\colon X\\to Y$ of the setting has a compactification\n$c=(X\\xrightarrow{\\ i\\ }Z\\xrightarrow{\\ p\\ }Y)$ in the sense of [sk-def-nagata-sketch-data]:\n$f=p\\circ i$ with $i$ an open immersion and $p$ proper. The scheme $Z$ is again separated and of\nfinite type over $k$, and $i$, $p$ are $k$-morphisms, so $c$ stays inside the setting. For every\n$f$ we fix one such compactification\n\n$$\nc_f=(X\\xrightarrow{\\ i_f\\ }Z_f\\xrightarrow{\\ p_f\\ }Y),\n$$\n\nthe *chosen compactification* of $f$. It is the compactification used to define $Rf_!$ and\n$Rf^!$ on $D_{\\mathrm{cons}}$.",
+  "proof": [
+   {
+    "text": "The scheme $\\operatorname{Spec}k$ is affine, hence quasi-compact and quasi-separated. So\n[lem-sfb-compactification-over-base] with $S=\\operatorname{Spec}k$ shows that every morphism\nof the setting has a compactification, and $c_f$ is the choice of\n[def-sfb-compactification-over-field]. For a compactification $c=(i,p)$ of $f\\colon X\\to Y$, the\nstructure morphism $Z\\to\\operatorname{Spec}k$ is the composite of the proper morphism $p$ with\n$Y\\to\\operatorname{Spec}k$. Both factors are separated and of finite type, hence so is the\ncomposite. The morphisms $p$ and $i$ are over $k$ because $p$ is, by construction, and\n$p\\circ i=f$ is.",
+    "uses": [
+     "lem-sfb-compactification-over-base",
+     "def-sfb-compactification-over-field"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

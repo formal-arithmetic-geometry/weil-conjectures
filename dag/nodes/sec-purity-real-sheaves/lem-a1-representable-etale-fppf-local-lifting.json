@@ -1,0 +1,230 @@
+{
+ "id": "lem-a1-representable-etale-fppf-local-lifting",
+ "kind": "statement",
+ "title": "Representable surjective etale scheme maps give fppf local lifts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $F$ be a sheaf of sets on its big fppf site [def-pc-fppf-site]. For an $S$-scheme $W$, write $h_W(T)=\\operatorname{Mor}_S(T,W)$. Let $U$ be an $S$-scheme and $p:h_U\\to F$ a representable surjective etale morphism in the scheme-test sense of [def-trf-algebraic-space]. For every $S$-scheme $T$ and every $\\xi\\in F(T)$, the sheaf pullback $h_T\\times_{\\xi,F,p}h_U$ is represented by an $S$-scheme $V$ with projections $v:V\\to T$ and $a:V\\to U$ satisfying $p_V(a)=F(v)(\\xi)$. The morphism $v$ is surjective etale [def-weil-etale-morphism], and the singleton $\\{v:V\\to T\\}$ is an fppf covering. Thus $p$ is locally surjective as a map of sheaves of sets: each section of $F$ has a lift to $h_U$ on a covering. Consequently $p$ is an epimorphism in the category of fppf sheaves of sets. No algebraic-space hypothesis on $F$ or global lift of $\\xi$ to $U(T)$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0262 (lemma-space-presentation), proof of (3), construction V = T times_F U; Topologies Tag 021M (definition-fppf-covering) in topologies.tex; Sites Tags 00WM (definition-sheaves-injective-surjective) and 00WN (lemma-mono-epi-sheaves) in sites.tex. The construction does not use a representable diagonal of F."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix an $S$-scheme $T$ and $\\xi\\in F(T)$. Define $\\widehat\\xi:h_T\\to F$ on $b:W\\to T$ by $\\widehat\\xi_W(b)=F(b)(\\xi)$; functoriality of $F$ gives naturality. Apply the scheme-test definition in [def-trf-algebraic-space] to $p$ and $\\widehat\\xi$. It supplies a representing scheme $V$ for $h_T\\times_F h_U$, and the projection $v:V\\to T$ is surjective etale by the assumed scheme-test properties of $p$. More explicitly, the representing isomorphism sends $\\mathrm{id}_V$ to a pair $(v,a)$, where $a:V\\to U$ is an $S$-morphism and $p_V(a)=\\widehat\\xi_V(v)=F(v)(\\xi)$ by the defining equality of the fibre product. Naturality shows that $b:W\\to V$ is sent to $(v\\circ b,a\\circ b)$, so these are precisely its two projections.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0262, lemma-space-presentation, proof of (3): form V = T times_{xi,F,f} U; scheme-test representability supplies V and its surjective etale projection."
+   }
+  },
+  {
+   "text": "By [def-weil-etale-morphism], the etale morphism $v$ is flat and locally of finite presentation. Its surjectivity says $T=v(V)$, including when $T$ is empty. Thus the singleton family $\\{v:V\\to T\\}$ meets every covering condition of [def-pc-fppf-site] and is an fppf covering. Only local finite presentation is required; no quasi-compactness or global finite presentation is used.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021M, definition-fppf-covering: flat, locally of finite presentation and jointly surjective; applied to the surjective etale projection of Tag 0262."
+   }
+  },
+  {
+   "text": "The equality $p_V(a)=F(v)(\\xi)$ from step 1 says exactly that the restriction of $\\xi$ to $V$ lifts to the section $a\\in h_U(V)$. Step 2 gives a covering on which this lift exists. Since $T$ and $\\xi$ were arbitrary, every section of $F$ locally lies in the image of $p$: this is local surjectivity in the covering-family sense.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WM, definition-sheaves-injective-surjective, part (2); the covering and lift constructed in Tag 0262, proof of (3)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] to the big fppf site and the morphism of sheaves of sets $p:h_U\\to F$. Step 3 verifies exactly its covering-family local-surjectivity condition. Hence $p$ is an epimorphism of fppf sheaves of sets. All constructions used only the scheme-test properties of $p$; no representability of the diagonal of $F$ was invoked.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WN, lemma-mono-epi-sheaves: surjective maps of sheaves of sets are epimorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0262, lemma-space-presentation, first paragraph of proof of (3), with Topologies Tag 021M and Sites Tags 00WM/00WN. The paragraph uses only representability and the scheme-test surjective etale hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "etale.*locallySurjective|etale.*isLocallySurjective|isLocallySurjective.*etale|IsRepresentableWith",
+   "results": "{\"t\": \"2026-10-22T07:57:06Z\", \"tool\": \"grep\", \"query\": \"etale.*locallySurjective|etale.*isLocallySurjective|isLocallySurjective.*etale|IsRepresentableWith\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-surjectivity/epi equivalence is already an existing DAG Mathlib leaf; its hypothesis still needs the explicit scheme pullback fppf cover. Zariski gluing representability and general relativelyRepresentable.lift do not establish this covering."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T07:57:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallySurjective\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-surjectivity/epi equivalence is already an existing DAG Mathlib leaf; its hypothesis still needs the explicit scheme pullback fppf cover. Zariski gluing representability and general relativelyRepresentable.lift do not establish this covering."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable surjective etale map from a scheme to an fppf sheaf has local lifts of every section on the singleton fppf covering given by its scheme pullback",
+   "results": "{\"t\": \"2026-10-22T07:57:06Z\", \"tool\": \"leansearch\", \"query\": \"A representable surjective etale map from a scheme to an fppf sheaf has local lifts of every section on the singleton fppf covering given by its scheme pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.exists_lift_trans_eq\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"CategoryTheory.Functor.relativelyRepresentable.lift'\", \"AlgebraicGeometry.Scheme.Etale\", \"CategoryTheory.Functor.relativelyRepresentable.lift\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\"], \"digest\": \"e984620af186edd1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-surjectivity/epi equivalence is already an existing DAG Mathlib leaf; its hypothesis still needs the explicit scheme pullback fppf cover. Zariski gluing representability and general relativelyRepresentable.lift do not establish this covering."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective etale representable morphism of fppf sheaves is locally surjective on sections and an epimorphism of sheaves",
+   "results": "{\"t\": \"2026-10-22T07:57:17Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective etale representable morphism of fppf sheaves is locally surjective on sections and an epimorphism of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono\", \"CategoryTheory.Sheaf.locallySurjective\", \"CategoryTheory.Sheaf.IsLocallySurjective\", \"CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\"], \"digest\": \"d99658eb8e1e9d59\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-surjectivity/epi equivalence is already an existing DAG Mathlib leaf; its hypothesis still needs the explicit scheme pullback fppf cover. Zariski gluing representability and general relativelyRepresentable.lift do not establish this covering."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a sheaf F on the big fppf site and a scheme U with a representable etale surjective map to F, every section xi on T lifts on V equal T times F U and V to T is an fppf cover",
+   "results": "{\"t\": \"2026-10-22T07:57:50Z\", \"tool\": \"leanfinder\", \"query\": \"Given a sheaf F on the big fppf site and a scheme U with a representable etale surjective map to F, every section xi on T lifts on V equal T times F U and V to T is an fppf cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X\", \"AlgebraicGeometry.Scheme.Cover.exists_lift_trans_eq\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"AlgebraicGeometry.Scheme.Cover.ulift_f\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.Hom.cover_f\"], \"digest\": \"ad34933687b9f432\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-surjectivity/epi equivalence is already an existing DAG Mathlib leaf; its hypothesis still needs the explicit scheme pullback fppf cover. Zariski gluing representability and general relativelyRepresentable.lift do not establish this covering."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*locallySurjective|etale.*isLocallySurjective|isLocallySurjective.*etale|IsRepresentableWith",
+   "results": "{\"t\": \"2026-10-23T04:09:35Z\", \"tool\": \"grep\", \"query\": \"etale.*locallySurjective|etale.*isLocallySurjective|isLocallySurjective.*etale|IsRepresentableWith\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: general representability lifts, scheme covers and the existing sheaf epi/local-surjectivity leaf cover only ingredients, not the asserted scheme-test fppf construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T04:09:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallySurjective\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: general representability lifts, scheme covers and the existing sheaf epi/local-surjectivity leaf cover only ingredients, not the asserted scheme-test fppf construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable surjective etale map of fppf sheaves has local lifts on the singleton fppf cover formed by its scheme pullback",
+   "results": "{\"t\": \"2026-10-23T04:09:36Z\", \"tool\": \"leansearch\", \"query\": \"Representable surjective etale map of fppf sheaves has local lifts on the singleton fppf cover formed by its scheme pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.relativelyRepresentable.lift'\", \"AlgebraicGeometry.Scheme.Cover.exists_lift_trans_eq\", \"CategoryTheory.Functor.relativelyRepresentable.lift\", \"AlgebraicGeometry.Scheme.Hom.cover_f\", \"AlgebraicGeometry.Scheme.singleton_mem_precoverage_iff\", \"AlgebraicGeometry.Scheme.Hom.cover\", \"TopCat.Presheaf.IsLocallySurjective\", \"CategoryTheory.Sheaf.locallySurjective\"], \"digest\": \"98db7c1b238fda98\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: general representability lifts, scheme covers and the existing sheaf epi/local-surjectivity leaf cover only ingredients, not the asserted scheme-test fppf construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable surjective etale morphism from a scheme to an fppf sheaf gives local lifts of sections and is an epimorphism",
+   "results": "{\"t\": \"2026-10-23T04:09:42Z\", \"tool\": \"leanfinder\", \"query\": \"A representable surjective etale morphism from a scheme to an fppf sheaf gives local lifts of sections and is an epimorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"AlgebraicGeometry.Scheme.Cover.instEpiTopCatBaseCommRingCatFromGlued\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\"], \"digest\": \"f345ae5a3544715d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: general representability lifts, scheme covers and the existing sheaf epi/local-surjectivity leaf cover only ingredients, not the asserted scheme-test fppf construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a section xi of F over T the scheme representing h_T times_F h_U gives a surjective etale cover of T on which xi lifts to U",
+   "results": "{\"t\": \"2026-10-23T04:10:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a section xi of F over T the scheme representing h_T times_F h_U gives a surjective etale cover of T on which xi lifts to U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\"], \"digest\": \"93fda1164bad33a3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: general representability lifts, scheme covers and the existing sheaf epi/local-surjectivity leaf cover only ingredients, not the asserted scheme-test fppf construction."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isLocallySurjective_iff_epi|theorem epi_of_isLocallySurjective|def lift|def lift\\x27|singleton_mem_precoverage_iff",
+   "results": "{\"t\": \"2026-10-23T04:10:36Z\", \"tool\": \"grep\", \"query\": \"theorem isLocallySurjective_iff_epi|theorem epi_of_isLocallySurjective|def lift|def lift\\\\x27|singleton_mem_precoverage_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/Algebra/Lie/TensorProduct.lean\", \"Mathlib/Algebra/Lie/TensorProduct.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/UniversalEnveloping.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\"], \"digest\": \"e98ebed6f2912b8d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: general representability lifts, scheme covers and the existing sheaf epi/local-surjectivity leaf cover only ingredients, not the asserted scheme-test fppf construction."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallySurjective_iff_epi|epi_of_isLocallySurjective",
+   "results": "{\"t\": \"2026-10-23T04:11:44Z\", \"tool\": \"grep\", \"query\": \"isLocallySurjective_iff_epi|epi_of_isLocallySurjective\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\"], \"digest\": \"03b9c747a041b641\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: general representability lifts, scheme covers and the existing sheaf epi/local-surjectivity leaf cover only ingredients, not the asserted scheme-test fppf construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-etale-atlas-presentation",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Old presentation step 3: V=T times_X U supplies the singleton fppf cover, local lift and sheaf epimorphism; auxiliary U/R presentation in the 03BZ/03XW branch of lem-a1-affine-hc0.",
+   "via": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-representable-etale-fppf-local-lifting",
+  "worker": "stage1",
+  "summary": "Followed the scheme pullback paragraph of Stacks 0262 and wrote the universal pair, singleton fppf cover and local lift explicitly. Used the existing general sheaf-sets epi/local-surjectivity Mathlib leaf for the final inference. No new nodes and no statement change.",
+  "blueprint": "Realizes the auxiliary U/R presentation branch below lem-a1-affine-hc0, specifically the old presentation step 3 recorded in blueprint.from.place: V=T times_F U supplies a singleton fppf cover, local lift and sheaf epimorphism. The current main-20261015 ancestor text states H_c^0 vanishing and has no separate atlas proof; the existing branch is the inherited auxiliary route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-5e3bb5cf8",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-5e3bb5cf8 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The delivery adds no new nodes and leaves the statement and stmt_deps unchanged; it is one commit with the item and the report. Source check: Stacks spaces.tex Tag 0262 (lemma-space-presentation), first paragraph of the proof of (3). That paragraph forms V=T x_{xi,F,f} U, says V->T is surjective etale and so {V->T} is an fppf cover, and says xi|_V factors through U. It uses only scheme-test representability, not the representable diagonal of F. So the item's generalisation from an algebraic space F to an arbitrary fppf sheaf F is sound. Step 1 (cites def-trf-algebraic-space): that definition defines representable, etale and surjective maps G->F for any sheaf F by scheme tests h_T->F. The Yoneda map xi^ gives V and the universal pair (v,a) with p_V(a)=F(v)(xi); naturality gives the projections. Correct. Step 2 (cites def-weil-etale-morphism and def-pc-fppf-site): etale includes flat and locally of finite presentation by definition, and surjective gives T=v(V). The singleton {v} is therefore an fppf covering; no quasi-compactness is needed, consistent with Tag 021M. Step 3: the equation p_V(a)=F(v)(xi) is exactly the covering-family surjectivity condition of 00WM. Step 4 cites the Mathlib leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective (Sheaf.isLocallySurjective_iff_epi) on any site, so p is an epimorphism. Edge cases checked: T empty (empty cover is valid), U empty, p the identity of h_X, and a nonsplit separable field extension (lift exists only on the cover, never globally, as the statement says). Duplicate search: rg over the DAG for 0262 and surjective-etale/epimorphism wording finds only the citer lem-a1-etale-atlas-presentation and unrelated lem-a1 nodes. lem-trf-space-fibre-products-etale-covers needs F to be an algebraic space, so it is not a duplicate. No SGA is cited; the blueprint from/place and split_report.blueprint are present. Delivery-errors A-E: no fault found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableEtaleFppfLocalLifting",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.representable_etale_fppf_local_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableEtaleFppfLocalLifting.lean",
+  "statement": "theorem representable_etale_fppf_local_lifting {S : Scheme.{u}} (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (U : Over S) (p : (Scheme.fppfTopology.over S).yoneda.obj U ⟶ F) (hp : IsEtale p.hom) (hs : IsSurjective p.hom) : (∀ (T : Over S) (ξ : F.obj.obj (op T)), ∃ (V : Over S) (v : V ⟶ T) (a : V ⟶ U), IsPullback (yoneda.map a) (yoneda.map v) p.hom (yonedaEquiv.symm ξ) ∧ p.hom.app (op V) a = F.obj.map v.op ξ ∧ Etale v.left ∧ Surjective v.left ∧ Sieve.generate (Presieve.singleton v) ∈ (Scheme.fppfTopology.over S) T) ∧ Sheaf.IsLocallySurjective p ∧ Epi p",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-444ccb265",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Only lean field added to item node + new module; statement verbatim. Source Stacks 0262 proof of (3) uses only scheme-test hypotheses, so arbitrary fppf sheaf F is sound. hp/hs = IsRepresentableWith (Etale/Surjective) from live AlgebraicSpace.lean:43-64, no extra hypotheses; single universe u matches dep. Conclusion: IsPullback (yoneda.map a) (yoneda.map v) p.hom (yonedaEquiv.symm ξ) in dep orientation, lift eq p_V(a)=F(v)(ξ) contravariant correct, Etale/Surjective on same v (pullback uniqueness up to iso), singleton sieve ∈ fppfTopology.over S (mem_over_iff rfl; étale⇒flat+lfp), Sheaf.IsLocallySurjective, Epi in Sheaf. Edge cases empty T/U, identity, nonsplit covers, non-qc v OK. No duplicate in live (etale_atlas_presentation is a citer). No defs, sorry only, docstrings with source+blueprint+steps, report sections present. Advisories: redundant Mathlib.AlgebraicGeometry.Scheme import; self second reading. No compile (no fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T092017-L-3394357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.representable_etale_fppf_local_lifting"
+  ],
+  "sorry_after": []
+ }
+}

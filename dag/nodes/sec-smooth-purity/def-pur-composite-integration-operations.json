@@ -1,0 +1,145 @@
+{
+ "id": "def-pur-composite-integration-operations",
+ "kind": "definition",
+ "title": "Typed native integration operations and composite counits",
+ "statement": "Use the native finite-coefficient Etale and ProEtale derived operations. IntegrationOperations records the pushforward F, pullback P, actual projection components, and pullback tensor/unit comparisons. CompositeOperations records f,g,fg and their actual compositor and pullback comparison. On closed full domains, IntegrationAdjunction records F adjoint to P(-) tensor L. CompositeIntegrationData supplies both adjunctions, the three projection invertibility and action laws, composition compatibility, and the two coefficient counit formulas. Define the composite twist Lf tensor Pf Lg, the four-arrow trace, the transported composite adjunction counit, and the three-clause CounitFormula. The native wrappers fix every operation and comparison by equality to the existing published construction; their existence and uniqueness proofs are complete. This is a verbatim relocation of the existing typed presentation, without changing any data or statement.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
+ },
+ "stmt_deps": [
+  "def-amb-etale-compact-support",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-kun-derived-tensor",
+  "def-pur-conventions",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-morphism-properties",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "thm-sf-comp-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace; explicit typed native calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientCounit|tensorAction_trace_contraction|projectionMap_rightUnitality",
+   "results": "Existing tensorAction_trace_contraction is proved; Etale.projectionMap_rightUnitality is available; no native precompositor contraction or both-site inverse projection package found.",
+   "date": "2026-10-25",
+   "verdict": "Existing lemmas cover constituent steps, not the native source-identification or both-site projection package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive twisted pullback counits contract two traces through inverse projection formula before compositor cancellation",
+   "results": "8 hits, including ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_counit_app and ExponentiableMorphism.pushforwardComp_hom_counit_assoc; no match.",
+   "date": "2026-10-25",
+   "verdict": "Pullback counits in Cartesian categories do not supply the twisted tensor-action formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"comp\"",
+   "results": "12 hits, including Adjunction.comp_counit_app and monoidal adjunction counit lemmas.",
+   "date": "2026-10-25",
+   "verdict": "comp_counit_app is a constituent step; none gives the native contraction or projection package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of twisted pullback adjunction counits factors through inverse projection formula and composite trace",
+   "results": "8 hits: chosen-pullback composition counits, exponentiable pushforward counits and scheme module pullback composition.",
+   "date": "2026-10-25",
+   "verdict": "No match for either remaining native-map identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompositeIntegrationCounit",
+  "date": "2026-10-25",
+  "group": "A8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Expanded Step 6, final canonical reassociations; native typed operation presentation and component calculations.",
+   "via": [
+    "lem-pur-composite-integration-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompositeIntegrationOperations",
+  "file": "lean/Sheaf/Paper/CompositeIntegrationOperations.lean",
+  "declaration": "WeilConjectures.PurityIntegration.IntegrationOperations",
+  "declarations": [
+   "WeilConjectures.PurityIntegration.coefficientFinite",
+   "WeilConjectures.PurityIntegration.IntegrationOperations",
+   "WeilConjectures.PurityIntegration.CompositeOperations",
+   "WeilConjectures.PurityIntegration.restrict",
+   "WeilConjectures.PurityIntegration.IntegrationAdjunction",
+   "WeilConjectures.PurityIntegration.epsilon",
+   "WeilConjectures.PurityIntegration.twistUnit",
+   "WeilConjectures.PurityIntegration.trace",
+   "WeilConjectures.PurityIntegration.q",
+   "WeilConjectures.PurityIntegration.coefficientCounit",
+   "WeilConjectures.PurityIntegration.TensorAction",
+   "WeilConjectures.PurityIntegration.compositeTwist",
+   "WeilConjectures.PurityIntegration.compositeTwistIso",
+   "WeilConjectures.PurityIntegration.CompositeIntegrationData",
+   "WeilConjectures.PurityIntegration.CompositeIntegrationData.compositeTrace",
+   "WeilConjectures.PurityIntegration.CompositeIntegrationData.compositeCounit",
+   "WeilConjectures.PurityIntegration.CompositeIntegrationData.CounitFormula",
+   "WeilConjectures.PurityIntegration.etaleMorphOperations_existsUnique",
+   "WeilConjectures.PurityIntegration.etaleMorphOperations",
+   "WeilConjectures.PurityIntegration.proEtaleMorphOperations_existsUnique",
+   "WeilConjectures.PurityIntegration.proEtaleMorphOperations",
+   "WeilConjectures.PurityIntegration.etaleCompositeOperations_existsUnique",
+   "WeilConjectures.PurityIntegration.etaleCompositeOperations",
+   "WeilConjectures.PurityIntegration.proEtaleCompositeOperations_existsUnique",
+   "WeilConjectures.PurityIntegration.proEtaleCompositeOperations",
+   "WeilConjectures.PurityIntegration.nativeBraiding_existsUnique",
+   "WeilConjectures.PurityIntegration.nativeBraiding",
+   "WeilConjectures.PurityIntegration.etaleOperations",
+   "WeilConjectures.PurityIntegration.proEtaleOperations",
+   "WeilConjectures.PurityIntegration.formulaFor",
+   "WeilConjectures.PurityIntegration.integrationCounitAssertion"
+  ],
+  "statement": "structure IntegrationOperations (C E : Type w) [Category.{v} C] [Category.{v} E] [MonoidalCategory C] [MonoidalCategory E]",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d996e",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T122503-L-1776253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d996e",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T122503-L-1776253",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositeIntegrationOperations vs clone's CompositeIntegrationCounit (verbatim relocation, diff), item proof vs node steps, new sorry statements IntegrationProjectionLaws/PrecompositorContraction vs native projection/compositor laws and Etale.projectionMap_rightUnitality; importers ProjectionPurityAgreement and AffineOrderedIntegrationTransposes compiled against delivered modules (exit 0)"
+ }
+}

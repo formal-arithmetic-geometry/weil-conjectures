@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-koszul-equal-length-generators",
+ "kind": "statement",
+ "title": "Koszul regularity under an equal-length change of ideal generators",
+ "statement": "Let $A$ be a commutative ring, $r\\geq0$, and $a_1,\\ldots,a_r,b_1,\\ldots,b_r\\in A$ with $(a_1,\\ldots,a_r)=(b_1,\\ldots,b_r)$. If $a_1,\\ldots,a_r$ is Koszul-regular [def-weil-pbc-koszul-regular-sequence], then $b_1,\\ldots,b_r$ is Koszul-regular. Equivalently their Koszul complexes have the same positive-degree vanishing condition. No proper-ideal, local, or Noetherian hypothesis is imposed; the empty tuple and zero ring are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066A (lemma-independence-of-generators), part (3); used twice in the proof of Tag 07CZ (lemma-koszul-independence-presentation)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=(a_1,\\ldots,a_r)=(b_1,\\ldots,b_r)$ and $B=A/I$. By [lem-sc-koszul-conormal-basis], the classes of the $a_i$ form a $B$-basis of $I/I^2$, since the $a_i$ are Koszul-regular and generate $I$. Write $\\theta:B^{\\oplus r}\\xrightarrow{\\sim}I/I^2$ for this basis isomorphism.",
+   "uses": [
+    "lem-sc-koszul-conormal-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066A (lemma-independence-of-generators), proof, first two paragraphs and final sentence of part (3); conormal basis from Tag 062I (lemma-H1-regular-quasi-regular), first paragraph."
+   }
+  },
+  {
+   "text": "Because every $b_j$ belongs to $(a_1,\\ldots,a_r)$, choose $c_{ij}\\in A$ with $b_j=\\sum_i c_{ij}a_i$. Set $C=(c_{ij})$ and $t(e_j)=\\sum_i c_{ij}e_i$. The functionals $\\alpha(e_i)=a_i$ and $\\beta(e_i)=b_i$ satisfy $\\alpha\\circ t=\\beta$ by evaluation on each $e_j$. If $\\overline C$ denotes reduction modulo $I$, then $\\theta\\overline C$ sends $e_j$ to the class of $b_j$ in $I/I^2$. These classes generate: every $x\\in I$ is a linear combination of the $b_j$, and reducing its coefficients modulo $I$ gives the required expression modulo $I^2$. Thus $\\overline C:B^{\\oplus r}\\to B^{\\oplus r}$ is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066A (lemma-independence-of-generators), proof, first two paragraphs and final sentence of part (3); conormal basis from Tag 062I (lemma-H1-regular-quasi-regular), first paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-module-surjective-endomorphism-bijective] over the commutative ring $B$ to the finite free module $B^{\\oplus r}$ and its surjective endomorphism $\\overline C$. It is invertible. If $N$ is the matrix of its inverse, then $N\\overline C=1$, hence $\\det(N)\\det(\\overline C)=1$. Therefore $\\delta=\\det(C)$ has unit image in $B$ (determinants commute with reduction). This also covers the zero quotient ring and the $0\\times0$ determinant, which is $1$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066A (lemma-independence-of-generators), proof, first two paragraphs and final sentence of part (3); conormal basis from Tag 062I (lemma-H1-regular-quasi-regular), first paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-koszul-substitution-unit-mod-ideal] to $a,b,t$: the ideals agree, $\\alpha t=\\beta$, and $\\det(t)$ is a unit modulo $I$, as just proved. The exterior-power comparison $K_\\bullet(b)\\to K_\\bullet(a)$ is a quasi-isomorphism. By the definition of quasi-isomorphism [def-weil-abstract-derived-category], it preserves vanishing of homology in every degree. The positive-degree homology of $K_\\bullet(a)$ vanishes by the hypothesis and [def-weil-pbc-koszul-regular-sequence]; hence that of $K_\\bullet(b)$ vanishes, giving the required regularity. Applying the same implication with the tuples exchanged gives the stated equivalence.",
+   "uses": [
+    "lem-sfb-koszul-substitution-unit-mod-ideal",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066A (lemma-independence-of-generators), proof, first two paragraphs and final sentence of part (3); conormal basis from Tag 062I (lemma-H1-regular-quasi-regular), first paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-conormal-basis",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective",
+  "lem-sfb-koszul-substitution-unit-mod-ideal",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066A (lemma-independence-of-generators), proof, first two paragraphs and final sentence of part (3); conormal basis from Tag 062I (lemma-H1-regular-quasi-regular), first paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ideal generated by a Koszul regular sequence of length r has every generating tuple of length r Koszul regular",
+   "results": "Read search results: 8 hits; RingTheory.Sequence.IsRegular.toIsWeaklyRegular, RingTheory.Sequence.IsRegular.ndrecIterModByRegularWithRing, RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.isRegular_iff, RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsRegular.recIterModByRegular, RingTheory.Sequence.IsRegular.ndrecIterModByRegular, RingTheory.Sequence.isWeaklyRegular_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two finite generating sequences of the same ideal and same cardinality are simultaneously Koszul regular",
+   "results": "Read search results: 8 hits; IsLocalRing.isRegular_of_perm, RingTheory.Sequence.isWeaklyRegular_iff_Fin, RingTheory.Sequence.IsRegular, RingTheory.Sequence.isRegular_iff, IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, RingTheory.Sequence.IsRegular.ndrecIterModByRegularWithRing, RingTheory.Sequence.IsRegular.of_perm_of_subset_jacobson_annihilator, RingTheory.Sequence.isWeaklyRegular_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing generators of an ideal to another tuple of the same length preserves Koszul regularity",
+   "results": "Read search results: 8 hits; IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, IsLocalRing.isRegular_of_perm, RingTheory.Sequence.IsWeaklyRegular.prototype_perm, LinearEquiv.isRegular_congr', ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, Polynomial.idealSpan_range_update_divByMonic, Ideal.span_pair_add_mul_right",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"span\"",
+   "results": "Read search results: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul.*(generat|span)|independence.of.generators|[Kk]oszul.*(append|concat)|append.*[Kk]oszul",
+   "results": "Read search results: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul|[Kk]oszul[Rr]egular",
+   "results": "Read search results: 3 hits; Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul|[Kk]oszulRegular",
+   "results": "Read 1 hits in Mathlib/RingTheory: Mathlib/RingTheory/Regular/RegularSequence.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular-sequence, representation-resolution, and general quasi-isomorphism results do not give the Koszul substitution criterion; grep finds Koszul regularity only as TODO (RegularSequence.lean:21), with no Koszul complex implementation in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing an ideal generating tuple to another tuple of the same length preserves Koszul regularity",
+   "results": "Read 8 hits: AddEquiv.isRegular_congr, IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, IsLocalRing.isRegular_of_perm, RingTheory.Sequence.IsWeaklyRegular.prototype_perm, LinearEquiv.isRegular_congr', RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, RingTheory.Sequence.isWeaklyRegular_iff, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular-sequence, representation-resolution, and general quasi-isomorphism results do not give the Koszul substitution criterion; grep finds Koszul regularity only as TODO (RegularSequence.lean:21), with no Koszul complex implementation in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"regular\"",
+   "results": "Read 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular-sequence, representation-resolution, and general quasi-isomorphism results do not give the Koszul substitution criterion; grep finds Koszul regularity only as TODO (RegularSequence.lean:21), with no Koszul complex implementation in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complexes of two generating tuples of the same ideal and equal length have equivalent vanishing of positive homology",
+   "results": "Read 8 hits: Algebra.Generators.H1Cotangent.δ_eq_δ, localCohomology.isoOfSameRadical, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.supportDim_add_length_eq_supportDim_of_isRegular, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.FormallySmooth.iff_subsingleton_and_projective.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular-sequence, representation-resolution, and general quasi-isomorphism results do not give the Koszul substitution criterion; grep finds Koszul regularity only as TODO (RegularSequence.lean:21), with no Koszul complex implementation in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two lists of generators for an ideal with the same cardinality are simultaneously Koszul regular over an arbitrary commutative ring",
+   "results": "Read 8 hits: IsLocalRing.isRegular_of_perm, RingTheory.Sequence.IsWeaklyRegular.prototype_perm, RingTheory.Sequence.IsRegular.of_perm_of_subset_jacobson_annihilator, RingTheory.Sequence.IsRegular, LinearEquiv.isRegular_congr, IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, RingTheory.Sequence.IsRegular.toIsWeaklyRegular, RingTheory.Sequence.isWeaklyRegular_iff_Fin.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular-sequence, representation-resolution, and general quasi-isomorphism results do not give the Koszul substitution criterion; grep finds Koszul regularity only as TODO (RegularSequence.lean:21), with no Koszul complex implementation in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-koszul-polynomial-presentation-independence",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, second half, the zero on the left of Jacobi-Zariski for A to B to its strict henselization. Component for the ind-etale left-injectivity argument: Syntomic polynomial presentation kernels are locally Koszul-regular. The some-presentation to arbitrary-presentation passage in Definition 07D0 used by Tag 07D3. In Tag 07CZ: Tag 066A (lemma-independence-of-generators), part (3); used twice in the proof of Tag 07CZ (lemma-koszul-independence-presentation).",
+   "via": [
+    "lem-sfb-koszul-polynomial-presentation-independence",
+    "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+    "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+    "lem-sfb-strict-henselization-naive-cotangent",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-koszul-equal-length-generators",
+  "worker": "stage1",
+  "summary": "Q90: split Tag 066A(3) using the existing Koszul conormal basis and finite-module surjective-endomorphism lemma. The chosen coefficient matrix is surjective modulo the ideal in the conormal basis, so its determinant is a unit modulo the ideal. One new statement-only lemma isolates the determinant-localization Koszul comparison without any regularity assumption; no tuple is assumed proper or local. The imported statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, second half, the zero on the left of Jacobi-Zariski for A to B to its strict henselization. Component for the ind-etale left-injectivity argument: Syntomic polynomial presentation kernels are locally Koszul-regular. The some-presentation to arbitrary-presentation passage in Definition 07D0 used by Tag 07D3. In Tag 07CZ: Tag 066A (lemma-independence-of-generators), part (3); used twice in the proof of Tag 07CZ (lemma-koszul-independence-presentation). Steps 1-3 supply the equal-length determinant argument and step 4 applies its matrix comparison, in the local algebra supporting Tag 07CZ. The ancestor tool returns null; the recorded inherited via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-koszul-conormal-basis",
+    "why": "Generic commutative algebra fact giving the conormal basis of a Koszul-regular tuple; no node of this unit supplies this basis. The supporting Tag 066A route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-koszul-conormal-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-7af9e1b69",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-7af9e1b69 (reviewer sub-agent of L); spot-checked: I read the delivery in full against Stacks more-algebra.tex Tag 066A (lemma-independence-of-generators): statement (3) and all three proof paragraphs. The item statement is unchanged and matches 066A(3) with no added hypothesis. The only citer, lem-sfb-koszul-polynomial-presentation-independence step 6, uses it in exactly this form. Step 1 cites lem-sc-koszul-conormal-basis (the 0CEM+062I conormal basis); its hypotheses match exactly, and it is accepted as an off-unit generic tool. Step 2 is elementary and checks out: with t(e_j)=sum_i c_ij e_i we get alpha t = beta, theta C-bar sends e_j to the class of b_j, and C-bar is surjective. Step 3 cites the Mathlib leaf 05G8 over B=A/I; the determinant of C-bar is a unit, and B=0 and r=0 are covered. Step 4 uses the new node, the quasi-isomorphism definition in def-weil-abstract-derived-category and 062E(3); the hypotheses are symmetric, so the equivalence holds. New node lem-sfb-koszul-substitution-unit-mod-ideal: its source is the second paragraph of the 066A proof (0624, 0663). Its direction K(b)->K(a) is correct for the DAG's derivation convention; Stacks writes the map the other way. I checked that it is true without regularity: I kills both homologies by the null-homotopies, delta acts invertibly on homology mod I, wedge t is an isomorphism after inverting delta, and localization is exact. I tested r=0, A=0, I=A with t=diag(1,2), a=b=(0,0) over a field (non-regular, so the node is not a clause of the item), and k[x,y] with delta=1-y. It is stated in derived form, is statement-only and self-contained, cites its definition nodes, and records three kinds of search. It is not a duplicate: new-q2-koszul-generator-chain-map gives only a chain map, and lem-k3-koszul-generator-homotopy is an ingredient. No SGA is cited and there is no cycle. One minor gap: the new node lacks a lean_audit field; this is cosmetic and I made no fix."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulEqualLengthGenerators",
+  "declaration": "RingTheory.Sequence.isKoszulRegular_iff_of_span_eq",
+  "file": "lean/Sheaf/RingTheory/KoszulEqualLengthGenerators.lean",
+  "statement": "theorem isKoszulRegular_iff_of_span_eq {A : Type u} [CommRing A] {r : ℕ} (a b : Fin r → A) (hspan : Ideal.span (Set.range a) = Ideal.span (Set.range b)) : IsKoszulRegular a ↔ IsKoszulRegular b",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1e112901",
+  "group": "NF",
+  "result": "pass",
+  "note": "isKoszulRegular_iff_of_span_eq matches Stacks 066A(3) and the node: arbitrary CommRing in universe u, Fin r tuples (r=0 allowed), Ideal.span (Set.range) equality, iff covers the forward implication and the 'equivalently' clause; IsKoszulRegular is the landed def (∀ i≠0, homology of koszulComplex is zero), imported publicly; no extra hypotheses; lean.statement verbatim; node unchanged apart from the new lean record (live has none), no rebind; module path new; project-Lean grep (and Mathlib, which has no Koszul complex) finds no duplicate; docstrings carry source, blueprint tag and proof steps 1-4; proof is sorry; edge cases r=0, A=0, unit ideal and zero tuple checked; report has Worker report and Second reading sections; no findings"
+ }
+}

@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-fibre-product-algebra-etale",
+ "kind": "statement",
+ "title": "Etaleness of a patched algebra over a ring fibre product",
+ "statement": "Let $A',A,B$ be commutative rings with identity, let $q:A'\\twoheadrightarrow A$ be a surjective ring map, and let $r:B\\to A$ be a ring map. Put $I=\\ker q$ and $R=B\\times_A A'=\\{(b,a'):r(b)=q(a')\\}$, with coordinatewise ring operations. Let $D$ be a commutative $B$-algebra and $C'$ a commutative $A'$-algebra, and let $\\varphi:D\\otimes_B A\\xrightarrow{\\sim}C'/IC'$ be an $A$-algebra isomorphism [def-weil-pbc-module-tensor-product]. Write $C=C'/IC'$ and $E=D\\times_C C'=\\{(d,c'): \\varphi(d\\otimes1)=c'\\bmod IC'\\}$, with coordinatewise ring operations and the $R$-algebra structure induced by those on $D,C'$. A ring map is etale when its induced affine spectrum morphism is etale [def-weil-affine-spectrum, def-weil-etale-morphism, lem-weil-pbc-etale-ring-map-iff-etale-affine]. If $B\\to D$ and $A'\\to C'$ are etale, then $R\\to E$ is etale. No nilpotence, Noetherian, or finiteness hypothesis on $I$ is imposed, and zero rings are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 08KQ, lemma-properties-algebras-over-fibre-product, implication (5) from the two component algebras to the patched algebra, in Situation 08KH (situation-module-over-fibre-product)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-sfb-fibre-product-algebra-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "The two given etale maps are flat by [lem-weil-pbc-etale-algebra-flat]. They are finitely presented: [def-weil-etale-morphism] gives local finite presentation of their affine spectrum morphisms, and [lem-weil-pbc-lfp-affine-opens-finite-presentation], applied to the whole source and target, gives finite presentation of $D/B$ and $C'/A'$. Apply [lem-sfb-fibre-product-algebra-flat-presentation] to this same $q,r,\\varphi$. Thus $E$ is flat and finitely presented over $R$. For $f:\\operatorname{Spec}E\\to\\operatorname{Spec}R$, [lem-weil-pbc-flat-ring-map-iff-flat-affine] gives flatness, and [def-sbc-locally-finite-presentation] gives local finite presentation by taking the whole affine source and target at every point.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sfb-fibre-product-algebra-flat-presentation",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, Ad (3)--(5): flat finite presentation before testing fibres; etale flatness: Algebra Tag 00U2, lemma-etale (6); affine finite presentation: Morphisms Tag 01TQ."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-patched-module-base-change] to the underlying modules of $D$ and $C'$. The maps $E\\otimes_R B\\to D$, $(d,c')\\otimes b\\mapsto bd$, and $E\\otimes_R A'\\to C'$, $(d,c')\\otimes a'\\mapsto a'c'$, are bijective. They preserve products and units on pure tensors, hence are algebra isomorphisms for the actual structural maps. Also $R\\to B$ is onto: lift $r(b)$ along $q$ for any $b\\in B$. Its kernel is $J=\\{(0,i):i\\in I\\}$, so $R/J\\cong B$.",
+   "uses": [
+    "lem-sfb-patched-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, opening paragraph; Tag 07RU, lemma-module-over-fibre-product, base-change recovery."
+   }
+  },
+  {
+   "text": "Fix any unital map $u:R\\to k$ to a field. If $u(J)=0$, it induces $\\bar u:B=R/J\\to k$. The previous step gives $E\\otimes_R k\\cong D\\otimes_B k$ as $k$-algebras. Explicitly reassociation sends $((e\\otimes b)\\otimes t)$ to $e\\otimes \\bar u(b)t$ and its inverse sends $e\\otimes t$ to $(e\\otimes1)\\otimes t$; the balancing relations prove that these maps are well-defined and inverse. Since $D/B$ is etale, [lem-weil-pbc-etale-ring-base-change] says the spectrum of this fibre algebra is etale over $k$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, Ad (4), case where the image of J in k is zero, and Ad (5); Algebra Tag 00U2, lemma-etale (3)."
+   }
+  },
+  {
+   "text": "If $u(J)\\ne0$, choose $h=(0,i)\\in J$ with $u(h)\\ne0$. It is a unit in $k$, so $u$ extends to $R_h\\to k$. Apply the localization clause of [lem-sfb-ring-fibre-product-spectrum] to $R=B\\times_A A'$ at $h$. It gives $R_h\\cong B_0\\times_{A_0}A'_i\\cong A'_i$, because inverting zero makes a ring zero. The resulting map $A'\\to A'_i\\to k$ restricts to $u$ on $R$. Consequently $E\\otimes_R k\\cong(E\\otimes_R A')\\otimes_{A'}k\\cong C'\\otimes_{A'}k$. The reassociation maps are the maps of step 3 with $A'$ replacing $B$; their inverse identities follow from balancing. The base-change isomorphism from step 2 respects multiplication and the structure maps, so these are $k$-algebra isomorphisms. By [lem-weil-pbc-etale-ring-base-change], this fibre is etale over $k$.",
+   "uses": [
+    "lem-sfb-ring-fibre-product-spectrum",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, Ad (4), nonzero-image case, and Ad (5); Tag 01Z8, lemma-diagram-localize."
+   }
+  },
+  {
+   "text": "For every prime $y$ of $R$, take $k=\\kappa(y)$ and $u$ the canonical residue-field map. By [lem-weil-pbc-fibre-product-affine-spectra], the scheme-theoretic fibre $f_y$ is the spectrum of $E\\otimes_R\\kappa(y)$ over $\\kappa(y)$. Steps 3 and 4 show that it is etale. The morphism $f$ is flat and locally of finite presentation by step 1, exactly the hypotheses of [lem-sbc-flat-fibre-etale-neighbourhoods]. For each $x\\in\\operatorname{Spec}E$, apply that statement at $y=f(x)$ to obtain an open neighbourhood $V_x$ with $f|_{V_x}$ etale. These opens cover the source; [lem-weil-pbc-etale-local-on-source] proves $f$ etale, which is the asserted etaleness of $R\\to E$. The empty source is covered by the empty family, so the argument includes zero algebras and requires no nonzero fibre.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, Ad (5), omitted fibre details completed using Morphisms Tag 02GM, lemma-etale-flat-etale-fibres; source locality: Tag 02GJ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-algebra-flat",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-sfb-fibre-product-algebra-flat-presentation",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-patched-module-base-change",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-sfb-ring-fibre-product-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 08KQ, lemma-properties-algebras-over-fibre-product, Ad (3)--(5), with the two fibre identifications of Ad (4) written out; Morphisms Tag 02GM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given surjective Aprime to A and B to A, the fibre product of compatible etale B and Aprime algebras is etale over B times A Aprime",
+   "results": "8 hits: RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.IsEtaleAt.comp, Algebra.IsStandardEtale.of_surjective, RingHom.Etale.stableUnderComposition, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: base change, composition, standard-etale quotients and finite products do not assert patching over a ring fibre product"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, RingHom.Etale",
+   "results": "2 hits: RingHom.etale_algebraMap, RingHom.Etale.toAlgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: base change, composition, standard-etale quotients and finite products do not assert patching over a ring fibre product"
+  },
+  {
+   "tool": "grep",
+   "query": "(Etale|[Ee]tale).*(fibre|fiber|[Pp]ullback)|(fibre|fiber|[Pp]ullback).*(Etale|[Ee]tale)",
+   "results": "6 hits: Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/Finite.lean, Mathlib/RingTheory/Etale/Finite.lean, Mathlib/RingTheory/Etale/Finite.lean, Mathlib/RingTheory/Etale/Finite.lean, Mathlib/RingTheory/Etale/Finite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: base change, composition, standard-etale quotients and finite products do not assert patching over a ring fibre product"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If two compatible algebras over a cartesian square of commutative rings with one surjective map are etale then their fibre product algebra is etale",
+   "results": "8 hits: Algebra.Etale.baseChange, Algebra.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale, Algebra.FormallyEtale.comp, RingHom.Etale, Algebra.Etale.comp, Algebra.FormallyEtale.instTensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: base change, composition, standard-etale quotients and finite products do not assert patching over a ring fibre product"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale algebras glue over a Milnor square of rings along a surjective homomorphism",
+   "results": "8 hits: Algebra.IsStandardEtale.of_surjective, Algebra.Etale.comp, Algebra.FormallyEtale.instForallOfFinite, RingHom.Etale.stableUnderComposition, RingHom.Etale.toAlgebra, StandardEtalePresentation, Algebra.IsEtaleAt.comp, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-23",
+   "verdict": "no match: base change, composition, standard-etale quotients and finite products do not assert patching over a ring fibre product"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale algebras patch over a fiber product of commutative rings with one surjective map",
+   "results": "8 hits: Algebra.Etale.comp, Algebra.IsStandardEtale.of_surjective, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, Algebra.IsEtaleAt.comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.ofLocalizationSpan, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-23",
+   "verdict": "no match: none states etale patching over a ring pullback; the fibre-criterion search found general etale and standard-smooth results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, RingHom.Etale",
+   "results": "2 hits: RingHom.etale_algebraMap, RingHom.Etale.toAlgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: none states etale patching over a ring pullback; the fibre-criterion search found general etale and standard-smooth results only"
+  },
+  {
+   "tool": "grep",
+   "query": "(Etale|[Ee]tale).*(fibre|fiber|[Pp]ullback)|(fibre|fiber|[Pp]ullback).*(Etale|[Ee]tale)",
+   "results": "19 hits: Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: none states etale patching over a ring pullback; the fibre-criterion search found general etale and standard-smooth results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible etale algebras glue across a cartesian square of rings along a surjection",
+   "results": "8 hits: Algebra.Etale.baseChange, Algebra.Etale.comp, Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective, Algebra.Etale, RingHom.Etale, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.instTensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: none states etale patching over a ring pullback; the fibre-criterion search found general etale and standard-smooth results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented flat algebra whose residue field fibers are etale is etale",
+   "results": "8 hits: Algebra.etaleLocus_eq_univ_iff_etale, Algebra.Etale, Algebra.instEtaleOfIsStandardEtale, StandardEtalePair.instEtaleRing, Algebra.Etale.finitePresentation, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, RingHom.Etale.toAlgebra, RingHom.etale_algebraMap",
+   "date": "2026-10-23",
+   "verdict": "no match: none states etale patching over a ring pullback; the fibre-criterion search found general etale and standard-smooth results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale algebras descend by Milnor patching over a pullback of rings",
+   "results": "8 hits: Algebra.Etale.comp, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.localization_map, RingHom.Etale.toAlgebra, Algebra.IsEtaleAt.comp, StandardEtalePair.instEtaleRing, Algebra.FormallyEtale.localization_base",
+   "date": "2026-10-23",
+   "verdict": "no match: none states etale patching over a ring pullback; the fibre-criterion search found general etale and standard-smooth results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-infinitesimal-etale-patching",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Geometric pushout construction and the two canonical recovery maps preceding the flatness argument in Stacks Tag 07W3. Supporting input: Tag 07VX: etaleness of the pushed-out relation projections; Tag 07SY: compatible etale covers lift. Supporting input: the affine ring calculation in Tag 07RX, using Tag 08KQ(5).",
+   "via": [
+    "lem-sfb-scheme-infinitesimal-etale-patching",
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fibre-product-algebra-etale",
+  "worker": "stage1",
+  "summary": "Retained the unrestricted-surjection statement. Reused flat finite-presentation patching and base-change recovery, then explicitly computed both field-fibre cases and applied the existing flat-lfp etale-fibre criterion. No new nodes.",
+  "blueprint": "Inherited supporting ring calculation for det-thm-sf-ctf-stability-direct-images proof (3), through Tag 07RX and Tag 08KQ(5); the inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "why": "Generic flat locally finitely presented etale-fibre criterion (02GM), used after the fibre-product algebra calculation; the current unit contains no replacement for this scheme criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-flat-fibre-etale-neighbourhoods"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-1d9105832",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-1d9105832 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and all 15 cited node statements, plus Stacks more-algebra 08KH, 08KQ (statement and proof Ad (1)-(5)) and 01Z8. The statement matches 08KQ(5) '⇐' hypothesis by hypothesis and is unchanged. The delivery creates no new nodes. The route differs from the source: instead of going through smoothness and fibre dimension, Ad (3) gives flat + finite presentation (via lem-sfb-fibre-product-algebra-flat-presentation). Both field-fibre cases of Ad (4) are written out: in case u(J)=0 the map factors through B and étale base change applies; in case u(J)≠0 lem-sfb-ring-fibre-product-spectrum at h=(0,i) gives R_h≅A'_i. These steps fill the 'details omitted' of Ad (5). The flat-lfp étale-fibre criterion 02GM (lem-sbc-flat-fibre-etale-neighbourhoods) and étale-local-on-source then finish. Each cited statement says what its step takes from it. Step 4 writes the fibre product's factors in the opposite order from the cited node, which is harmless. Edge cases checked: I=0, B=A, A=0, R=0, and k[t]→k with t↦0. The proof needs no Noetherian or finite-generation hypothesis anywhere. There is no cycle (the dependency closure has 134 nodes and does not contain the item), and no SGA source is used. I accept the tool_use on lem-sbc-flat-fibre-etale-neighbourhoods as a generic scheme criterion. Batch-5 flag: lem-trf-finite-presentation-surjective-module-kernel is a Mathlib-status leaf for Stacks 0519(5), which is general commutative algebra. It is neither a step of the trace formula nor of Poincaré duality, so it is outside the assumed statements and not a reason to return. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreProductAlgebraEtale",
+  "declaration": "CommRingCat.FibreProductAlgebra.etale_of_components",
+  "file": "lean/Sheaf/RingTheory/FibreProductAlgebraEtale.lean",
+  "statement": "theorem etale_of_components {A A' B D C' : CommRingCat.{u}} (b : B ⟶ A) (q : A' ⟶ A) (hq : Function.Surjective q) (d : B ⟶ D) (c : A' ⟶ C') (φ : pushout b d ≅ pushout q c) (hφ : pushout.inl b d ≫ φ.hom = pushout.inl q c) (hd : AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map d)) (hc : AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map c)) : AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (structureMap b q d c φ hφ))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing canonical structureMap recorded by def-sfb-fibre-product-algebra-structure-map. Categorical pushouts represent the tensor product and quotient C prime / I C prime, and pullbacks represent the coordinatewise fibre products. The compatibility equation is precisely A-algebra compatibility of the gluing isomorphism. The flat-presentation theorem remains a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f35264c8",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery fixing the earlier H2 RETURN (acccaed8): theorem stmt_dep lem-sfb-fibre-product-algebra-flat-presentation replaced by new existing:true def node def-sfb-fibre-product-algebra-structure-map; no other def node in live owns structureMap; signature verbatim vs live FibreProductAlgebraFlatPresentation.lean:46; real pullback.map body; node statement matches definition; only stmt_dep is the tensor-product node. Item node otherwise identical to live; Lean file byte-identical to previously accepted statement, rechecked vs Stacks 08KH/08KQ(5) (surjective q, A-algebra iso via hφ, Etale via Spec.map, no extra hypotheses, zero rings allowed). Report sections present. No fixes, no compile needed."
+ }
+}

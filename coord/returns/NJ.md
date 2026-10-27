@@ -45,3 +45,7 @@ F1/route-pivot. I confirmed the mechanical finding: Step 5 cites lem-per-snc-bou
 
 (the landing tools, head 1df3eea78) the delivery did not land: (merge queue) your landing 20261020T121954-NJ-450639-0 was taken out of the candidate: the global build of be2d44de55 failed in Sheaf.Algebra.Homology.DerivedEvaluationCanonicalMap Sheaf.Algebra.Homology.HomTensorTotal Sheaf.Algebra.Homology.KFlatConeTrianglePresentation job job computation; this change is a possible cause
 
+## lem-sfb-reduced-qc-inertia-dense-open-gerbe (2026-10-24 17:33 UTC, branch head c4bbbc31045)
+
+L: independent stage-2 immutable head c4bbbc310453: the new node def-sfb-gerbe-moduli-map exists on sheaf-dag now (another delivery created it): return the delivery
+

@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-scheme-etale-ringed-presentation",
+ "kind": "definition",
+ "title": "Small affine presentation of a scheme ringed etale topos and normalized induced morphisms",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For a scheme $X$ [def-pc-scheme] with small etale site [def-weil-pbc-etale-site], let $C_X$ be Mathlib SmallModel of its affine etale basis, $i_X:C_X\\to X_{\\mathrm{et}}$ the inclusion through that basis, and $J_X$ its induced topology. Restriction is the comparison equivalence on sheaves of sets. Let $R_X$ be the sheaf of rings $T\\mapsto\\Gamma(i_XT,\\mathcal O)$ with the actual pullback restrictions. Use ringed-topos morphisms [def-weil-pbc-ringed-topos-morphism] between these small presentations. For $a:U\\to V$ and such a morphism $g$, say that $g$ induces $a$ if there is a natural isomorphism $e_T:g^{-1}h_T\\cong h_{T\\times_VU}$ for every etale $T\\to V$, where the representable sheaves are restricted along the inclusions, and for every $s\\in\\Gamma(T,\\mathcal O_T)$ the equality $e_T;\\operatorname{ev}_{\\operatorname{pr}_T^*s}=g^{-1}(\\operatorname{ev}_s);g^\\sharp$ holds. Here $\\operatorname{ev}_s$ sends a map to its pullback of $s$. A ringed two-isomorphism from $g$ to $h$ is a natural isomorphism $t:g^{-1}\\cong h^{-1}$ with $t_{R_V};h^\\sharp=g^\\sharp$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HZ (lemma-etale-site-locally-ringed), 04I5 (lemma-morphism-locally-ringed), 04LW (lemma-faithful); sites.tex Tag 03A0 (lemma-equivalence), comparison with a dense affine basis; topologies.tex Tag 0218 (lemma-etale-affine); sites-modules.tex Tag 04IC (definition-2-morphism-ringed-topoi)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "small affine etale site structure sheaf schemes morphism ringed topos canonical direct image",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyRingedSpace.𝒪; AlgebraicGeometry.Scheme.Hom.appTop; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.toOpen_eq; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.AffineZariskiSite.grothendieckTopology; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom",
+   "date": "2026-10-24",
+   "verdict": "No exact specialized presentation with function-normalized ringed morphisms; generic components reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "small skeleton affine etale site structure sheaf normalized ringed topos morphism by functions",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+   "date": "2026-10-24",
+   "verdict": "No exact specialized presentation with function-normalized ringed morphisms; generic components reused."
+  },
+  {
+   "tool": "grep",
+   "query": "SmallModel.*AffineEtale|schemeEtaleRinged|SchemeRingedEtale",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No exact specialized presentation with function-normalized ringed morphisms; generic components reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-ringed-etale-reconstruction",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, reconstruct the scheme morphism attached to each (U,V,s); Tags 04M6 and 04KK, scheme uniqueness and rigidity input. Small affine presentation and function-normalized canonical morphism for the scheme reconstruction input.",
+   "via": [
+    "lem-sfb-scheme-ringed-etale-reconstruction",
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeEtaleRingedPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.EtaleRinged.Induces",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.EtaleRinged.Site",
+   "AlgebraicGeometry.Scheme.EtaleRinged.inclusion",
+   "AlgebraicGeometry.Scheme.EtaleRinged.topology",
+   "AlgebraicGeometry.Scheme.EtaleRinged.restrict",
+   "AlgebraicGeometry.Scheme.EtaleRinged.setEquivalence",
+   "AlgebraicGeometry.Scheme.EtaleRinged.commRing",
+   "AlgebraicGeometry.Scheme.EtaleRinged.ring",
+   "AlgebraicGeometry.Scheme.EtaleRinged.representables",
+   "AlgebraicGeometry.Scheme.EtaleRinged.evaluation",
+   "AlgebraicGeometry.Scheme.EtaleRinged.Morphism",
+   "AlgebraicGeometry.Scheme.EtaleRinged.Induces",
+   "AlgebraicGeometry.Scheme.EtaleRinged.TwoIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeEtaleRingedPresentation.lean",
+  "statement": "def Induces {U V : Scheme.{u}} (g : Morphism U V) (a : U ⟶ V) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ded2986d",
+  "group": "Q14",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ded2986d",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read item node (statement unchanged; only lean + stmt_deps def-sfb-locally-ringed-topos, def-sfb-scheme-etale-ringed-presentation added), all stmt_dep Lean (RingedToposMorphism, LocallyRingedTopos defs, smallEtaleTopology), both modules, report, etaleStructurePresheaf/Hom.Etale/AffineEtale. Clauses match 04HZ/04I5/04LW/04IJ/04I7: IsLocallyRingedTopos ∀X; ∃h Induces∧IsLocal; IsLocal g → ∃! a ∃h Induces h a ∧ Nonempty TwoIso; ring-compatible endo = 𝟙; Subsingleton TwoIso. Induces pins h up to ring-compatible 2-iso (representables generate; evaluations jointly epi fix ringMap; Galois-twist excluded by function equations). Small affine SmallModel presentation forced by SmallCategory in RingedToposMorphism, real setEquivalence, actual Γ ring sheaf; no hollow defs, no extra hypotheses, universe u throughout, empty scheme covered. lean.statement verbatim for both records; docstrings with tags/blueprint and nine-step proof; only sorry. No duplicate presentation found in Sheaf/WeilConjectures/Mathlib. No compile (no change)."
+ }
+}

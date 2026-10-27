@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-integral-adjunction-raw-localization-core",
+ "kind": "statement",
+ "title": "lem-sf-integral-adjunction-raw-localization-core",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.2"
+ },
+ "proof": [
+  {
+   "text": "The predicate equality gives an equivalence between the full integral constructible category and its finite-Tor subcategory: both functors keep the underlying object and arrow. The unit and counit have identity components. Compose the adjunction of this equivalence on X, the supplied integral adjunction, and the inverse equivalence on Y. This yields an adjunction between the two fullIntegralFunctor functors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each inclusion, use Functor.CommShift.ofComp with its identity comparison to the ambient full-subcategory inclusion. Register ofComp_compatibility. The fully faithful target inclusion reflects triangulated functors, so the two proof-changing inclusions are exact. Their composite with the given exact left adjoint is exact.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The raw rational functor agrees with the integral functor followed by localization on objects and pure tensors by reflexivity. Apply the proved private sfRationalizedExact from SfRationalLocalizationOrthogonality, which descends its shift and exactness through the scalar localization. Apply the proved private sfLocalizedAdjunction from the same module to the two literal factorization equalities; this invokes Mathlib Adjunction.localization on the already proved scalar-localization instances.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the right-adjoint shift by Adjunction.rightAdjointCommShift. Adjunction.commShift_of_leftAdjoint provides unit and counit compatibility. Adjunction.isTriangulated_rightAdjoint then proves exactness of the right adjoint. Package these witnesses in RawLocalizedAdjunction. This construction makes no claim of normalization for an arbitrary RawLocalizedAdjunction.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.2; P4 reuses the proved sfRationalizedExact and sfLocalizedAdjunction helpers, with Mathlib adjunction and fully faithful exactness APIs."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localized adjunction exact functor",
+   "results": "generic localization adjunction",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization",
+   "results": "Adjunction.localization",
+   "verdict": "generic match",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization adjunction",
+   "results": "localization APIs inspected",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalIntegralAdjunctionLocalization",
+  "date": "2026-10-27",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Integral localization"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "theorem exists_raw_localized_adjunction_core (A : Operation.{u, v} l Ω X Y (.integral E)) [A.F.Additive] [A.G.Additive] [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) : ∃ (R : RawLocalizedAdjunction l Ω E X Y A hX hY), True",
+ "stmt_deps": [],
+ "proof_deps": [
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalIntegralAdjunctionLocalization",
+  "file": "lean/Sheaf/Paper/ExceptionalIntegralAdjunctionLocalization.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_raw_localized_adjunction_core",
+  "statement": "theorem exists_raw_localized_adjunction_core (A : Operation.{u, v} l Ω X Y (.integral E)) [A.F.Additive] [A.G.Additive] [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) : ∃ (R : RawLocalizedAdjunction l Ω E X Y A hX hY), True",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T103427-L-1073785",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T112416-L-1581168",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

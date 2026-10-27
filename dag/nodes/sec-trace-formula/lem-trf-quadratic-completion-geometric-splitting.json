@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-quadratic-completion-geometric-splitting",
+ "kind": "statement",
+ "title": "A separable quadratic completion splits geometrically",
+ "statement": "Let $k$ be a field, $S$ a finitely generated $k$-algebra [def-weil-pbc-finite-type-algebra], $\\mathfrak p\\subset S$ a maximal ideal, $A=S_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], and $F=S/\\mathfrak p$ finite separable over $k$ [def-weil-pbc-separable-algebraic-extension]. Write $\\widehat A$ for the maximal-ideal-adic completion [def-weil-pbc-adic-completion]. Suppose there are a $k$-algebra section $\\sigma:F\\to\\widehat A$ of the residue map and a continuous complete local $F$-algebra isomorphism $\\widehat A\\cong F[[u,v]]/(Q)$ inducing the identity on $F$, where $F$ acts through $\\sigma$, $Q=au^2+buv+cv^2$, $a,b,c\\in F$, and $b^2-4ac\\ne0$ [def-weil-pbc-multivariate-power-series]. For every algebraic closure $\\Omega/k$ [def-weil-algebraic-closure] and every $k$-embedding $\\iota:F\\hookrightarrow\\Omega$, let $\\mathfrak q$ be the kernel of $S\\otimes_k\\Omega\\to\\Omega$, $s\\otimes\\lambda\\mapsto\\iota(\\bar s)\\lambda$, and $B=(S\\otimes_k\\Omega)_{\\mathfrak q}$ [def-weil-pbc-module-tensor-product]. Then $\\mathfrak q$ lies over $\\mathfrak p$, $B/\\mathfrak m_B=\\Omega$, and there is an isomorphism of complete local $\\Omega$-algebras $\\widehat B\\cong\\Omega[[u,v]]/(uv)$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C49 (lemma-nodal-algebraic) and 0C4D (lemma-nodal), the algebraically closed quadratic coordinate change; Varieties Tag 0C54 (lemma-base-change-complete-local-ring) for scalar extension of the chosen presentation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-separable-evaluation-local-base-change] with $K=\\Omega$ and the specified $\\iota$. Its evaluation map is exactly the map defining $\\mathfrak q$ here; hence $\\mathfrak q$ is maximal, contracts to $\\mathfrak p$, and $B/\\mathfrak qB\\cong\\Omega$ via evaluation. In particular $\\mathfrak m_B=\\mathfrak qB$, proving the first two assertions. The hypotheses are precisely finite generation of $S/k$, maximality of $\\mathfrak p$, finite separability of $F/k$, and the chosen embedding.",
+   "uses": [
+    "lem-trf-separable-evaluation-local-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C4Y (lemma-change-fields-flat) and 0C50 (lemma-change-fields-algebraic-unramified), at the evaluation point."
+   }
+  },
+  {
+   "text": "Invert the given continuous complete local $F$-algebra isomorphism to obtain the presentation $F[[u,v]]\\twoheadrightarrow\\widehat A$ with kernel $(Q)$. Its coefficients act through the given $k$-algebra section $\\sigma$, and $Q\\in(u,v)$ since it is homogeneous of degree two. Apply [lem-trf-field-extension-completion-presentation] with $K=\\Omega$, $n=2$, and the single relation $Q$. It gives $\\widehat B\\cong\\Omega[[u,v]]/(a_0u^2+b_0uv+c_0v^2)$ as complete local $\\Omega$-algebras, where $a_0=\\iota(a)$, $b_0=\\iota(b)$ and $c_0=\\iota(c)$. Since $\\iota$ is injective, $\\Delta_0=b_0^2-4a_0c_0=\\iota(b^2-4ac)\\ne0$.",
+   "uses": [
+    "lem-trf-field-extension-completion-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54, lemma-base-change-complete-local-ring, chosen presentation after scalar extension."
+   }
+  },
+  {
+   "text": "Put $Q_0=a_0u^2+b_0uv+c_0v^2$. If $a_0=0$, then $b_0\\ne0$; take $L_1=v$ and $L_2=b_0u+c_0v$. Then $L_1L_2=Q_0$ and the matrix with rows the coefficients of $L_1,L_2$ has determinant $-b_0\\ne0$. If $a_0\\ne0$, algebraic closedness [def-weil-algebraic-closure] supplies a root $r$ of $a_0T^2+b_0T+c_0$. Set $s=-b_0/a_0-r$. The root equation gives $a_0rs=c_0$, so $Q_0=a_0(u-rv)(u-sv)$. Moreover $a_0^2(r-s)^2=b_0^2-4a_0c_0\\ne0$, hence $r\\ne s$. Take $L_1=u-rv$, $L_2=a_0(u-sv)$; their coefficient matrix has determinant $a_0(r-s)\\ne0$. Thus in either case $Q_0=L_1L_2$ with invertible coefficient matrix $M$. These identities do not divide by $2$ and remain valid in characteristic $2$.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D, lemma-nodal, first proof paragraph: nondegenerate binary quadric is xy up to coordinates; explicit factorization."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-power-series-field-cohen-regular-complete] in its field case, $\\Omega[[u,v]]$ and $\\Omega[[U,V]]$ are complete for their variable maximal ideals. Since the $L_i$ lie in $(u,v)$, [lem-weil-pbc-power-series-universal-property-complete] gives an $\\Omega$-algebra map $\\phi:\\Omega[[U,V]]\\to\\Omega[[u,v]]$ sending $(U,V)^{\\mathsf T}$ to $M(u,v)^{\\mathsf T}$. Apply the same universal property to the two linear forms $M^{-1}(U,V)^{\\mathsf T}$ to obtain $\\psi$ in the other direction. Both composites fix constants and each variable, since $M^{-1}M=MM^{-1}=1$; uniqueness in that universal property makes both composites the identity. These maps send every power of the variable ideal into the corresponding power, and so are continuous inverse local maps.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D, lemma-nodal, first proof paragraph, linear coordinate change; power-series maps use more-algebra.tex Tag 07NL (lemma-power-series-ring-over-Cohen-fs), universal-property passage, and algebra.tex Tag 032C."
+   }
+  },
+  {
+   "text": "Since $\\phi(UV)=L_1L_2=Q_0$ and $\\psi(Q_0)=UV$, the maps $\\phi,\\psi$ descend to mutually inverse $\\Omega$-algebra maps $\\Omega[[U,V]]/(UV)\\cong\\Omega[[u,v]]/(Q_0)$. Indeed multiples of the displayed generator map to multiples of the other generator, and the composites on quotient classes are the identity. They identify the variable maximal ideals, hence their powers, so this is an isomorphism of complete local $\\Omega$-algebras. Compose its inverse with the isomorphism from step 2 and rename $U,V$ to $u,v$ to obtain the asserted $\\widehat B\\cong\\Omega[[u,v]]/(uv)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D, lemma-nodal, first proof paragraph, quotient by the transformed quadratic equation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-separable-evaluation-local-base-change",
+  "lem-trf-field-extension-completion-presentation",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D (lemma-nodal), first proof paragraph, binary quadratic coordinate change, together with varieties.tex Tag 0C54 (lemma-base-change-complete-local-ring). The omitted coordinate calculation is written explicitly, including characteristic 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nondegenerate binary quadratic completed local ring over a separable residue field becomes K[[u,v]] modulo uv over an algebraic closure",
+   "results": "{\"t\": \"2026-10-22T06:11:01Z\", \"tool\": \"leanfinder\", \"query\": \"A nondegenerate binary quadratic completed local ring over a separable residue field becomes K[[u,v]] modulo uv over an algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Field.henselian\", \"PowerSeries.exists_isWeierstrassFactorization\", \"HenselianLocalRing.TFAE\", \"PowerSeries.exists_isWeierstrassDivision\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\"], \"digest\": \"40e9814a4c0bc307\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsAlgClosed",
+   "results": "{\"t\": \"2026-10-22T06:10:45Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, IsAlgClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quadratic.*(split|factor)|nodal|nondegenerate.*quadratic",
+   "results": "{\"t\": \"2026-10-22T06:10:44Z\", \"tool\": \"grep\", \"query\": \"quadratic.*(split|factor)|nodal|nondegenerate.*quadratic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change a completed binary quadratic hypersurface to an algebraic closure and split into two independent linear factors",
+   "results": "{\"t\": \"2026-10-22T06:10:45Z\", \"tool\": \"leansearch\", \"query\": \"Base change a completed binary quadratic hypersurface to an algebraic closure and split into two independent linear factors\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A binary quadratic with nonzero discriminant splits over an algebraically closed field and gives a split ordinary double point after completed base change",
+   "results": "{\"t\": \"2026-10-22T06:11:01Z\", \"tool\": \"leanfinder\", \"query\": \"A binary quadratic with nonzero discriminant splits over an algebraically closed field and gives a split ordinary double point after completed base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Affine.Point.baseChange\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.Affine.Point.map\", \"WeierstrassCurve.isIntegral_iff\"], \"digest\": \"4d0b52d0d74c406c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quadratic.*(split|factor)|nodal|nondegenerate.*quadratic",
+   "results": "{\"t\": \"2026-10-23T04:15:29Z\", \"tool\": \"grep\", \"query\": \"quadratic.*(split|factor)|nodal|nondegenerate.*quadratic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial splitting is only an ingredient; the hits do not give the completed local scalar extension and split-node isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change a completed binary quadratic hypersurface to an algebraic closure and split into two independent linear factors",
+   "results": "{\"t\": \"2026-10-23T04:15:30Z\", \"tool\": \"leansearch\", \"query\": \"Base change a completed binary quadratic hypersurface to an algebraic closure and split into two independent linear factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.splits\", \"Polynomial.splits_of_degree_eq_two\", \"Polynomial.Splits.of_degree_eq_two\", \"Polynomial.splits_of_natDegree_eq_two\", \"IsSepClosed.splits_domain\", \"IsSepClosed.factors_of_separable\", \"QuadraticForm.baseChange\", \"Polynomial.Splits.of_natDegree_eq_two\"], \"digest\": \"d3e461945c8147a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial splitting is only an ingredient; the hits do not give the completed local scalar extension and split-node isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsAlgClosed",
+   "results": "{\"t\": \"2026-10-23T04:15:30Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, IsAlgClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial splitting is only an ingredient; the hits do not give the completed local scalar extension and split-node isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A binary quadratic with nonzero discriminant splits over an algebraically closed field and gives a split ordinary double point after completed base change",
+   "results": "{\"t\": \"2026-10-23T04:15:36Z\", \"tool\": \"leanfinder\", \"query\": \"A binary quadratic with nonzero discriminant splits over an algebraically closed field and gives a split ordinary double point after completed base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.isIntegral_iff\", \"WeierstrassCurve.Affine.Point.baseChange\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"WeierstrassCurve.Affine.baseChange_slope\"], \"digest\": \"045acfb888301795\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial splitting is only an ingredient; the hits do not give the completed local scalar extension and split-node isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nondegenerate binary quadratic completed local ring over a separable residue field becomes K[[u,v]] modulo uv over an algebraic closure",
+   "results": "{\"t\": \"2026-10-23T04:15:37Z\", \"tool\": \"leanfinder\", \"query\": \"A nondegenerate binary quadratic completed local ring over a separable residue field becomes K[[u,v]] modulo uv over an algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.exists_isWeierstrassFactorization\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"HenselianLocalRing.TFAE\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\"], \"digest\": \"51f67f36b4d1ffdf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial splitting is only an ingredient; the hits do not give the completed local scalar extension and split-node isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-point-local-criterion",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Pointwise nodal characterization used in the proof of the nodal lci criterion (Stacks Tags 0C4D and 0C4E). Re-split of the pointwise proof: old steps (9,); A separable quadratic completion splits geometrically.",
+   "via": [
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-quadratic-completion-geometric-splitting",
+  "worker": "stage1",
+  "summary": "Kept the full statement and coefficient-section hypotheses. Reused the evaluation-local-base-change and chosen completion-presentation nodes; wrote the binary factorization in all characteristics and inverse continuous linear substitutions explicitly. No new nodes. Searched current project Lean and all blueprint nodes; no exact attachment or duplicate.",
+  "blueprint": "Realizes the geometric quadratic-splitting subargument in the pointwise nodal criterion, old step 9, in the ancestor lem-trf-local-term-locality branch; keeps the inherited blueprint.from chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Uses only completeness and the variable maximal ideal for a power-series ring over a field, a generic commutative-algebra tool needed to construct the coordinate maps."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Uses existence and uniqueness of power-series substitution into a complete ring to extend an invertible linear variable change; the curve unit supplies no such general algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-a0d141619",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-a0d141619 (reviewer sub-agent of L); spot-checked: PASS: I read the item and all its steps in full; the delivery creates no new nodes. Statement: it matches the hypotheses produced by lem-trf-depth-fitting-quadratic-lci and its use in lem-trf-nodal-point-local-criterion step 5. It is true in every characteristic (in char 2, b^2-4ac≠0 means b≠0). It is the coordinate change that Stacks curves.tex Tag 0C4D, proof lines 4194-4198, omits; no SGA is used. Edge cases tested: a=0, a nonsplit form over F2 that splits over Omega, and degenerate Δ=0 forms, which are excluded. Step 1: the statement of lem-trf-separable-evaluation-local-base-change gives q maximal over p and B/qB ≅ Omega. Step 2: lem-trf-field-extension-completion-presentation with n=2 and relation Q gives B^ ≅ Omega[[u,v]]/(ι(Q)); its hypotheses (σ, F acting through σ, ι, q) match exactly. Step 3: I checked the factorization identities (a0rs=c0, a0^2(r-s)^2=Δ0, determinants a0(r-s) and -b0); no division by 2 occurs. Step 4: completeness plus existence and uniqueness of substitution give inverse linear maps φ and ψ, continuous because powers of the variable ideal map into the corresponding powers. Step 5: φ(UV)=Q0 and ψ(Q0)=UV, so the maps descend to the quotients; the orientation is correct. Duplicate search: lem-trf-quadratic-completion-separable-splitting assumes S is an F-algebra and allows a K/F extension of degree ≤2, so it does not apply and is not a duplicate; other nodal and quadratic nodes state different things. Accepted tool_uses: two generic power-series lemmas from sk-thm-p1 (lem-weil-pbc-power-series-field-cohen-regular-complete, lem-weil-pbc-power-series-universal-property-complete). proof_deps equals the union of uses, and the blueprint fields are present. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuadraticCompletionGeometricSplitting",
+  "declaration": "Algebra.quadratic_completion_geometric_splitting",
+  "file": "lean/Sheaf/RingTheory/QuadraticCompletionGeometricSplitting.lean",
+  "statement": "theorem quadratic_completion_geometric_splitting {k : Type u} {S : Type v} [Field k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S] (p : Ideal S) [p.IsMaximal] [FiniteDimensional k p.ResidueField] [Algebra.IsSeparable k p.ResidueField] (σ : p.ResidueField →ₐ[k] AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)) (hσ : ∀ d : p.ResidueField, AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (σ d) = d) (a b c : p.ResidueField) (hΔ : b ^ 2 - 4 * a * c ≠ 0) (e₀ : (MvPowerSeries (Fin 2) p.ResidueField ⧸ Ideal.span {MvPowerSeries.C a * MvPowerSeries.X 0 ^ 2 + MvPowerSeries.C b * MvPowerSeries.X 0 * MvPowerSeries.X 1 + MvPowerSeries.C c * MvPowerSeries.X 1 ^ 2}) ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)) (he₀ : ∀ d : p.ResidueField, e₀ (Ideal.Quotient.mk _ (MvPowerSeries.C d)) = σ d) (Ω : Type w) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (ι : p.ResidueField →ₐ[k] Ω) (q : Ideal (S ⊗[k] Ω)) [q.IsPrime] (hq : q = RingHom.ker (Algebra.TensorProduct.lift (ι.comp (IsScalarTower.toAlgHom k S p.ResidueField)) (AlgHom.id k Ω) (fun _ _ ↦ Commute.all _ _)).toRingHom) : q.comap (Algebra.TensorProduct.includeLeft : S →ₐ[k] S ⊗[k] Ω).toRingHom = p ∧ (∃ ρ : q.ResidueField ≃+* Ω, ∀ d : Ω, ρ (algebraMap (S ⊗[k] Ω) q.ResidueField ((1 : S) ⊗ₜ[k] d)) = d) ∧ ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1}), (∀ d : Ω, e (algebraMap (Localization.AtPrime q) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q)) (algebraMap (S ⊗[k] Ω) (Localization.AtPrime q) ((1 : S) ⊗ₜ[k] d))) = Ideal.Quotient.mk _ (MvPowerSeries.C d)) ∧ ∃ (_ : IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q))) (_ : IsLocalRing (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1})), IsLocalHom e.toRingHom ∧ IsAdicComplete (IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q))) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q)) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1})) (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1})",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-147d2910d",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. F = p.ResidueField, canonically S/p, the same encoding as the proof dependency field_extension_completion_presentation. e₀ in inverse orientation with he₀ gives F-linearity through σ; with hσ it induces the identity on F. Continuity is automatic for a ring equivalence of local rings. q is the kernel of lift(ι∘res, id); [q.IsPrime] follows from hq. The three conclusions are: contraction = p; ρ: κ(q) ≃ Ω normalized on 1⊗d; e: B̂ ≃ Ω[[u,v]]/(uv), Ω-linear, local, both sides adic-complete. Step 2's dependency hypotheses can be derived from the item's hypotheses. Edge cases checked: a=0, char 2, nonsplit over F, Δ=0 excluded, universes u v w independent. The node changes only in lean; lean.statement is verbatim. No new nodes, no duplicate (the separable-splitting node is a different statement). No defs, sorry only, docstrings carry source and blueprint, report sections present. Worker compile clean; no fixes."
+ }
+}

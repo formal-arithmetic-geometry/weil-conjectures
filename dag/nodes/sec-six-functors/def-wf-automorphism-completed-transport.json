@@ -1,137 +1,285 @@
 {
-  "id": "def-wf-automorphism-completed-transport",
-  "kind": "definition",
-  "title": "Canonical automorphism transport of completed coefficients",
-  "status": "split",
-  "statement": "Let A be a commutative ring with adic coefficient datum d [def-weil-pbc-adic-coefficient-datum]. For an isomorphism f:X→Y of schemes, use the equivalence of small pro-etale sites [lem-weil-proetale-isomorphism-inverse-image]. Use the completed coefficient map of [def-weil-pbc-completed-pullback], namely f⁻¹ R_Y→R_X given by the unique map whose composite with every finite quotient projection is the pulled-back projection followed by the canonical constant-ring comparison. It is an isomorphism. Define module transport as the ringed inverse image [def-weil-pbc-proetale-operations] followed by this coefficient identification, and its derived transport as the exact induced functor on complexes localized at quasi-isomorphisms. Restrict it to the completed bounded constructible integral category [def-weil-pbc-bounded-constructible-complete], transporting intrinsic completion, the reduction tower, strata, bounds and compatible etale-origin witnesses. Now fix a prime ℓ, an algebraic closure Ω of Q_ℓ, a noetherian finite-dimensional scheme T on which ℓ is invertible, an automorphism e of T and a finite intermediate extension E of Q_ℓ in Ω [def-weil-finite-subextension-directed-set]. Use its actual valuation-ring coefficient datum [def-weil-l-adic-coefficient-extension], transported by the canonical small field equivalence of [def-weil-pbc-finite-completed-coefficient-map]. Define P_E on the raw rational coefficient category [def-weil-pbc-rational-category] by scalar localization of this additive coefficient-linear integral transport. For E⊆F, use the concrete tensor extension of [def-weil-pbc-finite-stage-pair-category]. Define the ordinary tensor/transport comparison as the left adjoint mate of the identity-on-sections comparison between scalar restriction followed by e-direct image and e-direct image followed by scalar restriction. Define its derived comparison by compatibility on complexes with the specified derived tensor counits and the exact-transport localization comparisons. Restrict along the faithful integral inclusions, and rationalize using the integral localization comparisons. This defines the specified canonical isomorphism P_F T_{F/E}≅T_{F/E} P_E. Inverse transport is transport along the inverse scheme isomorphism.",
-  "stmt_deps": [
-    "def-weil-pbc-adic-coefficient-datum",
+ "id": "def-wf-automorphism-completed-transport",
+ "kind": "definition",
+ "title": "Canonical automorphism transport of completed coefficients",
+ "status": "split",
+ "statement": "Let A be a commutative ring with adic coefficient datum d [def-weil-pbc-adic-coefficient-datum]. For an isomorphism f:X→Y of schemes, use the equivalence of small pro-etale sites [lem-weil-proetale-isomorphism-inverse-image]. Use the completed coefficient map of [def-weil-pbc-completed-pullback], namely f⁻¹ R_Y→R_X given by the unique map whose composite with every finite quotient projection is the pulled-back projection followed by the canonical constant-ring comparison. It is an isomorphism. Define module transport as the ringed inverse image [def-weil-pbc-proetale-operations] followed by this coefficient identification, and its derived transport as the exact induced functor on complexes localized at quasi-isomorphisms. Restrict it to the completed bounded constructible integral category [def-weil-pbc-bounded-constructible-complete], transporting intrinsic completion, the reduction tower, strata, bounds and compatible etale-origin witnesses. Now fix a prime ℓ, an algebraic closure Ω of Q_ℓ, a noetherian finite-dimensional scheme T on which ℓ is invertible, an automorphism e of T and a finite intermediate extension E of Q_ℓ in Ω [def-weil-finite-subextension-directed-set]. Use its actual valuation-ring coefficient datum [def-weil-l-adic-coefficient-extension], transported by the canonical small field equivalence of [def-weil-pbc-finite-completed-coefficient-map]. Define P_E on the raw rational coefficient category [def-weil-pbc-rational-category] by scalar localization of this additive coefficient-linear integral transport. For E⊆F, use the concrete tensor extension of [def-weil-pbc-finite-stage-pair-category]. Define the ordinary tensor/transport comparison as the left adjoint mate of the identity-on-sections comparison between scalar restriction followed by e-direct image and e-direct image followed by scalar restriction. Define its derived comparison by compatibility on complexes with the specified derived tensor counits and the exact-transport localization comparisons. Restrict along the faithful integral inclusions, and rationalize using the integral localization comparisons. This defines the specified canonical isomorphism P_F T_{F/E}≅T_{F/E} P_E. Inverse transport is transport along the inverse scheme isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-finite-completed-coefficient-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-weil-category.md",
+  "place": "order 2106, the pullback in the Weil-complex definition and finite-stage colimit; explicit realization in the parent DAG statement"
+ },
+ "proof": [
+  {
+   "text": "Coefficient-map invertibility: use completedCoefficientMap_eq_integralRingIso from the completed-pullback construction. Its projection equations identify the map with the hom of the existing integralRingIso, so IsIso follows. Implemented by pbcIsoCoefficientMap_isIso.",
+   "uses": [
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Ordinary module-functor equality: completedModulePullback_eq_exact identifies the tensor construction with ringed module transport using integralRingIso. Equality of the two coefficient isomorphisms follows from equality of their homs, and congruence gives pbcIsoModulePullback_eq_completed.",
+   "uses": [
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Ordinary derived comparison: exactDerivedCounitComparison for the completed-pullback construction gives the unique isomorphism to the termwise exact derived functor. Transport along the equality of ordinary module functors; after equality elimination the complex comparison is the identity. This proves pbcIsoOrdinaryDerivedComparison_exists with its full counit normalization.",
+   "uses": [
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Module equivalence: postcomposition by the scheme isomorphism is a site equivalence. Its right adjoint base change is therefore an equivalence too. The sheaf adjunction unit and completed coefficient map are invertible, so their adjoint ring structure map is invertible. Lift the site equivalence to module sheaves using pushforwardPushforwardEquivalence, with its inverse ring map constructed from the adjunction unit and inverse coefficient map. The module inverse image is the left adjoint of this equivalent direct image, hence an equivalence. Implemented by pbcIsoModulePullback_isEquivalence and a proved private generic helper.",
+   "uses": [
     "lem-weil-proetale-isomorphism-inverse-image",
     "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-rational-category",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Coefficient linearity: the constant-section direct-image identity from the scalar-extension module proves sectionwise A-linearity of module direct image. The module adjunction transfers linearity to inverse image. Exact derived transport inherits linearity, and restriction to the full integral subcategory preserves it by hom extensionality. Additivity is inherited from exact module transport. Implemented by pbcIsoIntegralPullback_linear.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Right scalar comparison: rewrite the transported finite-stage scalar map as the actual finite-field coefficient map. pbcScalarCoefficientStructureSquare gives the commuting square with the two completed coefficient direct-image maps. The inverse pushforwardCongr comparison is identity on sections. Extensionality of natural module morphisms proves uniqueness. Implemented by pbcIsoScalarRightComparison_exists and a proved private generic helper.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
     "def-weil-pbc-finite-stage-pair-category",
-    "def-weil-finite-subextension-directed-set",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-completed-pullback",
     "def-weil-pbc-finite-completed-coefficient-map"
-  ],
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-weil-category.md",
-    "place": "order 2106, the pullback in the Weil-complex definition and finite-stage colimit; explicit realization in the parent DAG statement"
+   ],
+   "elementary": true
   },
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_match": null,
-  "mathlib_searches": [
-    {
-      "tool": "LeanSearch",
-      "query": "completed coefficient transport scheme automorphism scalar extension comparison",
-      "results": "Service unavailable: Internal Server Error; no results supplied.",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "LeanFinder",
-      "query": "Canonical transport of completed coefficient sheaves along a scheme automorphism, compatible with finite scalar extension",
-      "results": "8 results: scheme module isomorphism sections, ordinary structure-sheaf module pullback and affine-space morphism equations. None constructs completed PBC coefficient transport or its normalized scalar comparison.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "pbcIsoCoefficient|pbcIsoRationalScalar|WeilD|completed.*transport (Mathlib/CategoryTheory); pbcIsoCoefficient|pbcIsoRationalScalar|automorphism.*completed|completed.*automorphism (WeilConjectures, lean/Sheaf and dag/nodes); blueprint_refs.py search automorphism.*coefficient|coefficient.*transport",
-      "results": "0 Mathlib hits; no source declaration gives the completed automorphism transport. DAG hits are the parent definition and its applications; blueprint search found 0 matching blueprint nodes. The general completed pullback and scalar-extension proposition do not define this site-equivalence coefficient-transport realization.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Completed coefficient transport along a scheme isomorphism compatible with finite scalar extension",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, Equiv.smul, Module.Basis.coe_mapCoeffs, IsBaseChange.transvection, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsIsoSchemeMapOfCommRingCat, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Extension.tensorCotangentSpace.",
-      "date": "2026-10-16",
-      "verdict": "no exact match: ordinary algebraic completion or scheme ring transport does not give the specified completed PBC coefficient construction"
-    },
-    {
-      "tool": "grep",
-      "query": "pbcCompletedScalarMap|pbcRationalIsoPullback|completed.*coefficient.*transport (Mathlib/CategoryTheory); rg of upstream WeilConjectures and lean/Sheaf; DAG ids and titles; blueprint_refs.py search completed.*coefficient.*map|automorphism.*transport",
-      "results": "Mathlib: 0 hits. Upstream and Sheaf: 0 exact declaration hits. No existing DAG id or title; blueprint search: 0 blueprint nodes match.",
-      "date": "2026-10-16",
-      "verdict": "no exact existing notion"
-    }
-  ],
-  "created": {
-    "by": "worker",
-    "item": "def-wf-tensor-product",
-    "date": "2026-10-16",
-    "group": "NJ"
+  {
+   "text": "Ambient scalar comparison: transport the left-derived counit through the ordinary scalar comparison and the exact transport equivalences. The generic right-Kan-extension square helper `isoTransportCochainSquare` constructs the unique derived isomorphism and proves its counit equation on every complex; specialize it to the finite completed scalar map and `pbcIsoOrdinaryComplexComparison`.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-pbc-finite-completed-coefficient-map"
+   ],
+   "elementary": true
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-wf-tensor-product",
-      "place": "The coefficient transport defining P_E and the scalar/Frobenius comparison defining finite Weil transitions",
-      "via": []
-    },
-    "same_as": []
+  {
+   "text": "Preservation is decomposed into three strict component statements: intrinsic completeness, uniform constructible reductions, and compatible etale-origin witnesses. The parent combines these components after transporting along the normalized ordinary-derived comparison.",
+   "uses": [
+    "lem-wf-pbc-automorphism-transport-intrinsic",
+    "lem-wf-pbc-automorphism-transport-reductions",
+    "lem-wf-pbc-automorphism-transport-origins"
+   ],
+   "elementary": false
   },
-  "lean_audit": {},
-  "chapter": "sec-six-functors",
-  "unit": "sk-rem-sf-pf-done",
-  "lean": {
-    "module": "Sheaf.Paper.PbcAutomorphismTransport",
-    "declaration": "AlgebraicGeometry.Scheme.pbcRationalIsoPullback",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.pbcIsoCoefficientMap_isIso",
-      "AlgebraicGeometry.Scheme.pbcIsoModulePullback",
-      "AlgebraicGeometry.Scheme.pbcIsoModulePullback_isEquivalence",
-      "AlgebraicGeometry.Scheme.pbcIsoAmbientPullback",
-      "AlgebraicGeometry.Scheme.pbcIsoModulePullback_eq_completed",
-      "AlgebraicGeometry.Scheme.pbcIsoOrdinaryDerivedComparison_exists",
-      "AlgebraicGeometry.Scheme.pbcIsoOrdinaryDerivedComparison",
-      "AlgebraicGeometry.Scheme.pbcIsoCompletedComparison_isIso",
-      "AlgebraicGeometry.Scheme.pbcIsoCompletedPullback_identification",
-      "AlgebraicGeometry.Scheme.pbcIsoAmbientPullback_preserves",
-      "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback",
-      "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback_isEquivalence",
-      "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback_linear",
-      "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback_additive",
-      "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback_isLinear",
-      "AlgebraicGeometry.Scheme.pbcRationalIsoPullback",
-      "AlgebraicGeometry.Scheme.pbcIsoScalarRightComparison_exists",
-      "AlgebraicGeometry.Scheme.pbcIsoScalarRightComparison",
-      "AlgebraicGeometry.Scheme.pbcIsoOrdinaryScalarComparison",
-      "AlgebraicGeometry.Scheme.pbcIsoOrdinaryComplexComparison",
-      "AlgebraicGeometry.Scheme.pbcIsoAmbientScalarComparison_exists",
-      "AlgebraicGeometry.Scheme.pbcIsoAmbientScalarComparison",
-      "AlgebraicGeometry.Scheme.pbcIsoIntegralScalarComparison_exists",
-      "AlgebraicGeometry.Scheme.pbcIsoIntegralScalarComparison",
-      "AlgebraicGeometry.Scheme.pbcIsoRationalization",
-      "AlgebraicGeometry.Scheme.pbcIsoRationalScalarComparison_exists",
-      "AlgebraicGeometry.Scheme.pbcIsoRationalScalarComparison"
-    ],
-    "file": "lean/Sheaf/Paper/PbcAutomorphismTransport.lean",
-    "statement": "abbrev pbcRationalIsoPullback {T : Scheme.{u}} (e : Aut T) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (p : A) : PbcRationalCategory T d p ⥤ PbcRationalCategory T d p",
-    "branch": "newtargets-dag",
-    "by": "NJ",
-    "date": "2026-10-16",
-    "existing": false
+  {
+   "text": "Completed comparison: apply pbcIsoAmbientPullback_preserves_intrinsic directly to ordinary pullback with the identity comparison. No uniform-reduction or etale-origin preservation statement is used here. sfConstructibleCanonicalCompleteness makes the intrinsic completion unit invertible for any generating tuple and representative. completedPullback_isCompletion identifies the specified completedPullbackComparison followed by an isomorphism with that unit, so cancel the isomorphism. Implemented by pbcIsoCompletedComparison_isIso.",
+   "uses": [
+    "lem-wf-pbc-automorphism-transport-intrinsic",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-bounded-constructible-complete",
+    "lem-sf-constructible-canonical-completeness"
+   ],
+   "elementary": true
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-884995e9b",
-    "group": "NJ",
-    "result": "pass",
-    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+  {
+   "text": "Integral equivalence: ambient exact transport is an equivalence by the already proved module equivalence. Fullness and faithfulness pass to its lift through full subcategories. For essential surjectivity transport the target object along the inverse scheme map, using pbcIsoAmbientPullback_preserves for its integral membership. Compare the composite ambient pullbacks to identity using pbcIsoOrdinaryDerivedComparison, pbcActualDerivedPullCompIso, f composed with its inverse equals identity, and pbcActualDerivedPullIdIso. Lift its component through the full-subcategory inclusion. Implemented by pbcIsoIntegralPullback_isEquivalence.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": true
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-884995e9b",
-    "group": "NJ",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical constructions, universes, edge cases, and report gates. All five modules reproduced cleanly through scompile.py. No fixes needed; branch head unchanged."
+  {
+   "text": "Integral scalar comparison: lift every ambient component and its inverse through the full-subcategory inclusion. Ambient naturality gives integral naturality by hom extensionality. The inclusion-square equation holds by definition. Evaluating that equation on each object proves uniqueness. Implemented by pbcIsoIntegralScalarComparison_exists, using the existing ambient comparison theorem in the same module.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rationalization square: both composites have the same object function. On a localized integral arrow, LinearMap.baseChange_tmul sends 1 tensor a to 1 tensor the integral transport of a. Functor extensionality proves pbcIsoRationalization.",
+   "uses": [
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rational scalar comparison: form the comparison after source rationalization by composing pbcScalarIntegralComparison, the target pbcIsoRationalization square, localization of pbcIsoIntegralScalarComparison, inverse pbcScalarIntegralComparison, and inverse source pbcIsoRationalization square, with the functor associators. The existing finite-stage rationalization is a localization, so Localization.fullyFaithfulWhiskeringLeft supplies a fully faithful precomposition functor. Its preimageIso descends the isomorphism, and map_preimage computes exactly the required five-factor component equation. Every rational object is an original integral object, so that equation proves uniqueness. Implemented by pbcIsoRationalScalarComparison_exists.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-finite-completed-coefficient-map",
+  "lem-wf-pbc-automorphism-transport-intrinsic",
+  "lem-wf-pbc-automorphism-transport-reductions",
+  "lem-wf-pbc-automorphism-transport-origins",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-sf-constructible-canonical-completeness",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof_origin": {
+  "by": "worker T7",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Retains the existing proof route; the completed comparison uses intrinsic preservation directly, with the inverse-isomorphism direct-image argument of Tag 099N, clauses (1) and (3)."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "completed coefficient transport scheme automorphism scalar extension comparison",
+   "results": "Service unavailable: Internal Server Error; no results supplied.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Canonical transport of completed coefficient sheaves along a scheme automorphism, compatible with finite scalar extension",
+   "results": "8 results: scheme module isomorphism sections, ordinary structure-sheaf module pullback and affine-space morphism equations. None constructs completed PBC coefficient transport or its normalized scalar comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pbcIsoCoefficient|pbcIsoRationalScalar|WeilD|completed.*transport (Mathlib/CategoryTheory); pbcIsoCoefficient|pbcIsoRationalScalar|automorphism.*completed|completed.*automorphism (WeilConjectures, lean/Sheaf and dag/nodes); blueprint_refs.py search automorphism.*coefficient|coefficient.*transport",
+   "results": "0 Mathlib hits; no source declaration gives the completed automorphism transport. DAG hits are the parent definition and its applications; blueprint search found 0 matching blueprint nodes. The general completed pullback and scalar-extension proposition do not define this site-equivalence coefficient-transport realization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed coefficient transport along a scheme isomorphism compatible with finite scalar extension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, Equiv.smul, Module.Basis.coe_mapCoeffs, IsBaseChange.transvection, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsIsoSchemeMapOfCommRingCat, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Extension.tensorCotangentSpace.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: ordinary algebraic completion or scheme ring transport does not give the specified completed PBC coefficient construction"
+  },
+  {
+   "tool": "grep",
+   "query": "pbcCompletedScalarMap|pbcRationalIsoPullback|completed.*coefficient.*transport (Mathlib/CategoryTheory); rg of upstream WeilConjectures and lean/Sheaf; DAG ids and titles; blueprint_refs.py search completed.*coefficient.*map|automorphism.*transport",
+   "results": "Mathlib: 0 hits. Upstream and Sheaf: 0 exact declaration hits. No existing DAG id or title; blueprint search: 0 blueprint nodes match.",
+   "date": "2026-10-16",
+   "verdict": "no exact existing notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-wf-tensor-product",
+  "date": "2026-10-16",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-tensor-product",
+   "place": "The coefficient transport defining P_E and the scalar/Frobenius comparison defining finite Weil transitions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "module": "Sheaf.Paper.PbcAutomorphismTransport",
+  "declaration": "AlgebraicGeometry.Scheme.pbcRationalIsoPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcIsoCoefficientMap_isIso",
+   "AlgebraicGeometry.Scheme.pbcIsoModulePullback",
+   "AlgebraicGeometry.Scheme.pbcIsoModulePullback_isEquivalence",
+   "AlgebraicGeometry.Scheme.pbcIsoAmbientPullback",
+   "AlgebraicGeometry.Scheme.pbcIsoModulePullback_eq_completed",
+   "AlgebraicGeometry.Scheme.pbcIsoOrdinaryDerivedComparison_exists",
+   "AlgebraicGeometry.Scheme.pbcIsoOrdinaryDerivedComparison",
+   "AlgebraicGeometry.Scheme.pbcIsoCompletedComparison_isIso",
+   "AlgebraicGeometry.Scheme.pbcIsoCompletedPullback_identification",
+   "AlgebraicGeometry.Scheme.pbcIsoAmbientPullback_preserves",
+   "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback",
+   "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback_isEquivalence",
+   "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback_linear",
+   "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback_additive",
+   "AlgebraicGeometry.Scheme.pbcIsoIntegralPullback_isLinear",
+   "AlgebraicGeometry.Scheme.pbcRationalIsoPullback",
+   "AlgebraicGeometry.Scheme.pbcIsoScalarRightComparison_exists",
+   "AlgebraicGeometry.Scheme.pbcIsoScalarRightComparison",
+   "AlgebraicGeometry.Scheme.pbcIsoOrdinaryScalarComparison",
+   "AlgebraicGeometry.Scheme.pbcIsoOrdinaryComplexComparison",
+   "AlgebraicGeometry.Scheme.pbcIsoAmbientScalarComparison_exists",
+   "AlgebraicGeometry.Scheme.pbcIsoAmbientScalarComparison",
+   "AlgebraicGeometry.Scheme.pbcIsoIntegralScalarComparison_exists",
+   "AlgebraicGeometry.Scheme.pbcIsoIntegralScalarComparison",
+   "AlgebraicGeometry.Scheme.pbcIsoRationalization",
+   "AlgebraicGeometry.Scheme.pbcIsoRationalScalarComparison_exists",
+   "AlgebraicGeometry.Scheme.pbcIsoRationalScalarComparison"
+  ],
+  "file": "lean/Sheaf/Paper/PbcAutomorphismTransport.lean",
+  "statement": "abbrev pbcRationalIsoPullback {T : Scheme.{u}} (e : Aut T) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (p : A) : PbcRationalCategory T d p ⥤ PbcRationalCategory T d p",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-884995e9b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-884995e9b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical constructions, universes, edge cases, and report gates. All five modules reproduced cleanly through scompile.py. No fixes needed; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261026T202127-L-3437584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

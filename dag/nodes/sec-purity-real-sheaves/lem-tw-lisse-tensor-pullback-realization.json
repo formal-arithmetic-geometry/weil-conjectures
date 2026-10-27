@@ -1,0 +1,250 @@
+{
+ "id": "lem-tw-lisse-tensor-pullback-realization",
+ "kind": "statement",
+ "title": "Normalized completed tensor and pullback under rational realization",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ in $\\overline{\\mathbf Q}_\\ell$, its valuation ring $R$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a finite-type $k$-scheme, without separatedness [def-weil-scheme-morphism-properties]. On $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] set $B_X=\\varprojlim_{n\\ge1}(R/t^n)_X$ [def-weil-completed-integral-coefficients] and $A_X=B_X[1/t]$, the sheafification of sectionwise localization. Use ordinary module sheaves and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $\\mathcal C_X=D^b_c(X,R)$ for the integral constructible category [def-weil-derived-complete-integral-detailed], $Q_X:\\mathcal C_X\\to\\mathcal R_X=D^b_c(X,E)$ for raw rationalization [def-weil-rationalization-karoubi], and $F_X:D(B_X)\\to D(A_X)$ for $K\\mapsto A_X\\otimes^L_{B_X}K$. Write $J_X(Q_XK)=F_XK$, $J_X(u\\otimes a)=aF_X(u)$ for the induced functor. A lisse rational object means an object of the standard heart [def-weil-constructible-heart] pro-etale locally isomorphic to a finite sum of coefficient units [def-real-rational-lisse-heart]. A finite locally free module sheaf means one pro-etale locally isomorphic to $A_X^{\\oplus r}$, allowing rank zero and varying finite ranks.\n\nUse the completed tensor and completed pullback and their raw rationalizations [def-weil-derived-pullback-tensor-hom]. For integral $M,N\\in\\mathcal C_X$ there is a natural isomorphism in $D(A_X)$\n$$F_X(M\\widehat\\otimes_R^LN)\\xrightarrow{\\sim}F_XM\\otimes^L_{A_X}F_XN.$$\nIt is obtained from the inverse of the specified completion map $\\chi_{M,N}:M\\otimes^L_{B_X}N\\to M\\widehat\\otimes_R^LN$ [lem-fix-constructible-tensor-completion] and ordinary derived scalar associators. The unit comparison is the multiplication isomorphism and sends $1\\otimes1$ to $1$. The rational scalar comparison sends $c\\otimes(m\\otimes n)$ to $(1\\otimes m)\\otimes(c\\otimes n)$. On lisse rational inputs the displayed tensor is concentrated in degree zero and is ordinary sheaf tensor; its degree-zero map is normalized on every good integral representative as in [def-real-lisse-tensor-normalization].\n\nLet $f:X'\\to X$ be any scheme morphism between finite-type $k$-schemes, without a separatedness or $k$-linearity assumption. There is a natural isomorphism in $D(A_{X'})$\n$$J_{X'}(Lf_E^*K)\\xrightarrow{\\sim}A_{X'}\\otimes^L_{f^{-1}A_X}f^{-1}(J_XK)\\qquad(K\\in\\mathcal R_X).$$\nOn integral representatives it is localization of the inverse of the specified $\\eta_{f,K}:B_{X'}\\otimes^L_{f^{-1}B_X}f^{-1}K\\to\\widehat P_fK$ [lem-tw-ordinary-completed-integral-pullback], followed by the ordinary derived scalar-square comparison. That square carries the integral adjunction unit to the rational adjunction unit with scalar one. For lisse $K$ the right side is ordinary module inverse image in degree zero, the map sends a pulled-back basis vector to the same vector, and its degree-zero identification induces the identity on $\\mathcal H^0$, as prescribed in [def-real-lisse-pullback-normalization].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, tensor and ordinary module pullback; agent specification of completion-map normalization"
+ },
+ "stmt_deps": [
+  "def-real-lisse-pullback-normalization",
+  "def-real-lisse-tensor-normalization",
+  "def-real-rational-lisse-heart",
+  "def-real-tensor-pullback-comparison-data",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-sheaf-of-modules-category",
+  "lem-fix-constructible-tensor-completion",
+  "lem-tw-ordinary-completed-integral-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For each X choose the derived tensor calculation. Apply heart specialization to this very calculation, obtaining t and its normalization together with equality on H0 of d.raw. Assemble RealizationTensorComparison by the structure constructor, taking its derived, good-model, raw, integral and unit fields from d and its heart fields from this specialization.",
+   "uses": [
+    "lem-real-derived-tensor-calculation",
+    "lem-real-tensor-heart-specialization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f:X to Y obtain the normalized comparison n with its integral naturality. NatIso.ofComponents produces an isomorphism after precomposition with Q. Apply unique raw-localization descent to extend it to F isomorphic to G on all rational arrows. Its component equation is exactly the integral field of RealizationPullComparison. Assemble that structure with b, n and the descended natural isomorphism.",
+   "uses": [
+    "lem-real-integral-pullback-normalization",
+    "lem-real-raw-localization-natural-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-real-derived-tensor-calculation",
+  "lem-real-integral-pullback-normalization",
+  "lem-real-raw-localization-natural-iso",
+  "lem-real-tensor-heart-specialization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; original tensor and pullback argument decomposed into derived calculation, heart specialization and integral pullback normalization; raw pullback descent proved by localization universal property"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Realization by localization identifies completed derived tensor and pullback with ordinary tensor and inverse image for lisse sheaves with pure tensor normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of rings commutes with tensor products and pullback on locally free module sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"Given commutative semirings R, S, A, B with compatible algebra structures and a pushout algebra B, the tensor product S ⊗_R Ω_{A/R} admits a scalar tower structure where the actions of S and B on the \"}\n  {\"name\": \"KaehlerDifferential.moduleBaseChange'\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Given commutative semirings R, S, A, B with compatible algebra structures and a pushout algebra B, the tensor product S ⊗_R Ω_{A/R} is equipped with a B-module structure. This construction utilizes th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.pullbackId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (S : CategoryTheory.Sheaf J RingCat) : SheafOfModules.pullback (CategoryTheory.CategoryStruct.id S) ≅ CategoryTheory.Functor.id (SheafOfModules S)\", \"doc\": \"The pullback by the identity morphism identifies to the identity functor of the\\ncategory of sheaves of modules.\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"The pullback functor `SheafOfModules S ⥤ SheafOfModules R` induced by\\na morphism of sheaves of rings `S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`,\\ndefined as the left adjoint functor to \"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.She\", \"doc\": \"The composition of two pullback functors on sheaves of modules identifies\\nto the pullback for the composition.\"}\n  {\"name\": \"SheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"The pullback functor on sheaves of modules can be described as a composition\\nof the forget functor to presheaves, the pullback on presheaves of modules, and\\nthe sheafification functor.\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"The pullback of (pre)sheaves of modules commutes with the sheafification.\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (S : CategoryTheory.Sheaf J RingCat) : (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id (SheafOfModules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id S))) (SheafOfModules.pull\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.She\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*(tensor|pullback)|lisse|pullback.*tensor",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Topology/MetricSpace/MetricSeparated.lean\", \"line\": \"47\", \"text\": \"lemma isSeparated_iff_setRelIsSeparated :\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"103\", \"text\": \"  .of_maximal_isSeparated <| by simpa [isSeparated_iff_setRelIsSeparated] using hN\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"85\", \"text\": \"lemma isPullback_SpecMap_tensor (T : Triplet f g) : CategoryTheory.IsPullback\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"142\", \"text\": \"  pullback.lift (Spec.map T.tensorInl ≫ X.fromSpecResidueField T.x)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"149\", \"text\": \"    pullback.fst f g (T.SpecTensorTo p) = T.x := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"157\", \"text\": \"    pullback.snd f g (T.SpecTensorTo p) = T.y := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"164\", \"text\": \"    T.SpecTensorTo ≫ pullback.fst f g = Spec.map T.tensorInl ≫ X.fromSpecResidueField T.x :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"line\": \"326\", \"text\": \"  haveI : IsPullback ((isTerminalTensorUnit.ofIso (powZero i).symm).from _) (𝟙 _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"line\": \"330\", \"text\": \"    (pullback.hom_ext ((isTerminalTensorUnit.ofIso (powZero i).symm).hom_ext ..) (by simp)))\"}\n  {\"file\": \"Mathlib/Data/Rel/Separated.lean\", \"line\": \"45\", \"text\": \"alias _root_.Set.Subsingleton.relIsSeparated := IsSeparated.of_subsingleton\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realization by localization identifies completed derived tensor and pullback with ordinary tensor and inverse image for lisse sheaves with pure tensor normalization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"(N N') [AddCommMonoid N] [Module R N] [AddCommMonoid N'] [Module R N'] (g : N →ₗ[R] N') [IsLocalizedModule S f]\\n  [IsLocalizedModule S g] : IsLocalizedModule S (TensorProduct.map f g)\", \"doc\": \"Let $R$ be a commutative semiring, $S$ a submonoid of $R$, and $M, N$ be $R$-modules. This statement asserts that localization of modules at $S$ commutes with the tensor product. Specifically, if $f: \"}\n  {\"name\": \"IsLocalizedModule.rTensor\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"(g : M →ₗ[A] M') [h : IsLocalizedModule S g] : IsLocalizedModule S (AlgebraTensorModule.rTensor R N g)\", \"doc\": \"If $ M' $ is the localization of $ M $ at a submonoid $ S $ via an $ A $-linear map $ g $, then the tensor product of $ g $ with the identity map on an $ R $-module $ N $ results in a localization of \"}\n  {\"name\": \"IsLocalization.tensorProduct_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \": IsLocalizedModule S (TensorProduct.mk R A M 1)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-module $ M $, and a submonoid $ S $ of $ R $, the tensor product of the localization of $ R $ at $ S $ with $ M $ over $ R $ is the localization of $ M $ at \"}\n  {\"name\": \"IsLocalizedModule.map_lTensor\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"(g : M →ₗ[A] M') [h : IsLocalizedModule S g] :\\n  IsLocalizedModule.map S (AlgebraTensorModule.rTensor R N g) (AlgebraTensorModule.rTensor R P g)\\n      (AlgebraTensorModule.lTensor A M f) =\\n    AlgebraTensorModule.lTensor A M' f\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, an $ A $-module $ M $ with scalar tower compatibility $ \\\\mathrm{IsScalarTower}(R, A, M) $, a localization map $ g: M \\\\to M' $ at a submonoid\"}\n  {\"name\": \"IsLocalization.tensor\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"(M : Submonoid R) [IsLocalization M A] : IsLocalization (Algebra.algebraMapSubmonoid S M) (S ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative semiring and $S$ be a commutative $R$-algebra. Let $M$ be a submonoid of $R$. If $A$ is the localization of $R$ at $M$, then the tensor product $S \\\\otimes_R A$ is the localiza\"}\n  {\"name\": \"IsLocalization.tensorRight\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"(M : Submonoid R) [IsLocalization M A] : IsLocalization (Algebra.algebraMapSubmonoid S M) (A ⊗[R] S)\", \"doc\": \"Let `R` and `S` be commutative semirings, and let `S` be an `R`-algebra. Let `M` be a submonoid of `R`, and let `A` be the localization of `R` with respect to `M`. Then the tensor product `A \\\\otimes_R\"}\n  {\"name\": \"IsLocalization.mk'_tmul\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"(M : Submonoid R) [IsLocalization M A] (s : S) (x : R) (y : M) :\\n  IsLocalization.mk' A x y ⊗ₜ s =\\n    IsLocalization.mk' (A ⊗[R] S) (algebraMap R S x * s) ⟨algebraMap R S y.1, Algebra.mem_algebraMapSubmonoid_of_mem _⟩\", \"doc\": \"For a commutative semiring $ R $ localized at a submonoid $ M $ to form $ A $, and an $ R $-algebra $ S $, the tensor product of the localization element $ \\\\frac{x}{y} \\\\in A $ (for $ x \\\\in R $, $ y \\\\i\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.rightUnitor_hom_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Monoidal.Basic\", \"type\": \"(X : C) : (ρ_ ((L').obj X)).hom = (L').obj X ◁ (ε' L W ε).inv ≫ (μ _ _ _ _ _).hom ≫ (L').map (ρ_ X).hom\", \"doc\": \"For objects $X$ and $Y$ in a monoidal category $\\\\mathcal{C}$ localized to $\\\\mathcal{D}$ via a functor $L$ inverting $W$-morphisms, the natural isomorphism $\\\\mu_{X,Y}$ establishes an equivalence betwee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "grep",
+   "query": "completedTensor|completedPullback|rational.*realization|pullbackObjFreeIso",
+   "results": "5 hits; inspected returned results: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary sheaf pullbacks, module localizations and algebraic etale base changes do not state the normalized completed constructible comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar localization of constructible sheaves compares completed tensor and pullback with ordinary ringed topos derived operations",
+   "results": "8 hits; inspected returned results: SheafOfModules.pullback, IsLocalization.tensorProduct_isLocalizedModule, AlgebraicGeometry.LocallyRingedSpace.𝒪, IsLocalization.instIsLocalizedModuleTensorProductMap, ModuleCat.Tilde.instIsScalarTowerAtPrimeAsIdealValCarrierTopMemOpensUnopLocalizations, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.Tilde.stalkIso, IsLocalization.tensor",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary sheaf pullbacks, module localizations and algebraic etale base changes do not state the normalized completed constructible comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization realization identifies completed tensor and completed pullback of constructible pro-etale complexes with ordinary derived module tensor and pullback",
+   "results": "8 hits; inspected returned results: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, Algebra.FormallyEtale.instLocalization, Algebra.Etale.baseChange, KaehlerDifferential.isLocalizedModule_map",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary sheaf pullbacks, module localizations and algebraic etale base changes do not state the normalized completed constructible comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is symmetric monoidal and commutes with inverse image of sheaves; finite locally free sheaves have no higher tensor or pullback Tor",
+   "results": "8 hits; inspected returned results: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.monoidalCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary sheaf pullbacks, module localizations and algebraic etale base changes do not state the normalized completed constructible comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-lisse-rational-realization",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "First dual-stalk identification underlying weight negation; realization infrastructure for Normalized completed tensor and pullback under rational realization. Returned realization proof steps 5,6.",
+   "via": [
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-tw-lisse-tensor-pullback-realization",
+  "worker": "stage1",
+  "summary": "Kept the complete statement unchanged. Assembled its normalized tensor and arbitrary-morphism pullback comparisons from existing completion, lisse localization, and ordinary ringed-topos lemmas; wrote balanced scalar and unit formulas and the fraction naturality argument. No new nodes were needed. Checked every cited statement, the nonseparated finite-type hypotheses, charts of unrestricted type, and rank-zero and torsion-representative cases.",
+  "blueprint": "First dual-stalk identification in lem-tw-dual-negation, through lem-tw-dual-stalk-frobenius and lem-tw-lisse-rational-realization; realizes the tensor and pullback infrastructure (returned realization steps 5,6) without changing the dual-weight route.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic noetherianity of finite-type affine algebras verifies the existing completion theorems without a separatedness assumption."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme-theoretic quasi-separatedness verifies the qcqs hypothesis of the tensor completion theorem."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finiteness of scheme dimension verifies the integral pullback comparison hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ordinary derived monoidality for the coefficient morphism on the identity topos; no unit-specific result supplies it."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ordinary monoidal and adjunction-compatible composition comparisons normalize the tensor unit and integral/rational scalar square."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "The specified ordinary-to-completed constructible tensor comparison is needed for the realization tensor constraint."
+   },
+   {
+    "node": "lem-tw-ordinary-completed-integral-pullback",
+    "why": "The specified ordinary-to-completed constructible pullback comparison is needed before coefficient localization."
+   },
+   {
+    "node": "lem-weil-pbc-localization-inverse-image-coherence",
+    "why": "Generic compatibility of sheaf localization with inverse image identifies the rational scalar-square ring maps."
+   },
+   {
+    "node": "lem-fd-ringed-flat-single-tensor-cohomology",
+    "why": "Generic K-flat and cohomology calculation for tensor with a flat sheaf proves the lisse degree-zero specialization."
+   },
+   {
+    "node": "lem-amb-derived-degree-zero-normalization",
+    "why": "Generic uniqueness of the identity-on-H0 single-object comparison gives the required normalization."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic good-complex computation counit identifies derived pullback of a finite locally free sheaf with ordinary pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-fix-constructible-tensor-completion",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-amb-derived-degree-zero-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-04a1ce1fe",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-04a1ce1fe (reviewer sub-agent of L); spot-checked: Statement, stmt_deps, source and blueprint are identical to the live unsplit node; only the proof, proof_deps, proof_origin, split_report and searches change. There are no new nodes and no re-split note, and live and side-live still show the item unsplit. I read all 16 cited statements. Step 1: finite affine cover, then noetherian (lem-wf-affine-noetherian-components), quasi-separated (lem-weil-pbc-locally-noetherian-quasi-separated) and finite-dimensional (lem-kun-dimension-finite-type). With ell invertible this gives the hypotheses of lem-fix-constructible-tensor-completion (qcqs) and lem-tw-ordinary-completed-integral-pullback (noetherian, finite-dimensional), and neither needs separatedness or k-linearity. Step 2: F_X is the derived pullback of B_X->A_X over the identity topos; the tensor comparison is F(chi^{-1}) followed by t, matching the statement's direction, and chi is the specified natural isomorphism. Step 3 is elementary: I checked the balanced inverse scalar maps, degree-0 scalars, 1⊗1->1, and that chi's quotient coordinates and zero shifted coordinate match def-real-lisse-tensor-normalization. Step 4: finite locally free implies flat; lem-fd-ringed-flat-single-tensor-cohomology and lem-amb-derived-degree-zero-normalization put the tensor in degree 0. Steps 5-6: the two composite ringed-topos morphisms (X',A')->(X,B) have the same underlying f and the same ring map (localization of c_f); the composition and 2-isomorphism clauses of lem-sfb-ringed-derived-monoidal-comparisons identify the two sides, with unit coefficient 1 and no flat base change used. Step 7: the rational-level formulas of def-weil-derived-pullback-tensor-hom with the raw Hom⊗E of def-weil-rationalization-karoubi give naturality. Step 8: L[0] is K-flat, the counit gives the ordinary pullback, eta's explicit quotient formula sends basis to basis, and the H^0-identity requirement of def-real-lisse-pullback-normalization holds. Edge cases checked: empty schemes, rank 0, varying ranks, non-k-linear f, non-finite-type charts, torsion representatives. Batch-5 flag: lem-weil-pbc-localization-inverse-image-coherence reaches lem-trf-geometric-inverse-image-exact. Both are generic facts about any geometric morphism (inverse image is exact and commutes with localization), not part of the trace formula or Poincaré duality, so I accept the citation. I accept the tool_uses as generic ringed-topos and finite-type tools. No SGA is used and no cycle is closed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseTensorPullbackRealization",
+  "declaration": "WeilConjectures.LisseRealization.lisse_tensor_pullback_realization",
+  "declarations": [
+   "WeilConjectures.LisseRealization.lisse_tensor_pullback_realization"
+  ],
+  "file": "lean/Sheaf/Paper/LisseTensorPullbackRealization.lean",
+  "statement": "theorem lisse_tensor_pullback_realization (a : ∀ X : Base D l hl, At D l hl E X) : (∀ X : Base D l hl, Nonempty (RealizationTensorComparison D l hl E X (a X))) ∧ (∀ (X Y : Base D l hl) (f : X.scheme ⟶ Y.scheme), Nonempty (RealizationPullComparison D l hl E f (a X) (a Y)))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded normalized realization, tensor and pullback interfaces. The conclusion retains natural isomorphisms on all integral tensor pairs and all raw rational pullback inputs, normalized on every good representative by chi inverse, scalar counits and balanced tensor formulas. The published site tensor uses its existing standard derived localization universe u+2."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25362378b",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Only the item lean field changed vs side-live; statement verbatim; no lines >100 chars, no unbound variables. Tensor: natural iso on all integral pairs, pinned on every good K-flat/flat-term representative pair to F(completed.inv)≫counit≫scalar≫representativeIso≫⊗(left,right), with chi (quotients/shifted), completed, scalar (c⊗(m⊗n)↦(1⊗m)⊗(c⊗n)) and left/right counits all pinned; unit pinned as multiplication (sections + derived); raw iso = a.integral conjugate; lisse degree-zero tied to the same raw iso and TensorNormalized. Pullback: natural iso on all raw inputs for arbitrary f, equal on integrals to PullNormalized.comparison (eta⁻¹, scalar-one unit square, derived counits, heart H0 identity). a : ∀ X, At is the recorded realization interface (def-real-lisse-realization-data, reached through both normalization stmt_deps), forced and holding for every a. Edge cases (empty, rank 0, varying ranks, non-separated/non-k-linear f, torsion representatives, universes) covered. Docstrings with source/blueprint and all 8 steps; proof sorry; private imports = proof_dep modules. No compile run (no file changed). Second reading done by the same worker, accepted. Advisory: At/TensorAt/Along used from a transitively reached node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ec16d",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T122527-L-1780869",
+  "kind": "interface",
+  "note": "independent cc review: item theorem lisse_tensor_pullback_realization (signature unchanged) against node lem-tw-lisse-tensor-pullback-realization; 3 new sorried split statements + proved naturalIso_of_integral against their new nodes; moved data block byte-identical to old item; importer LissePointSectionsRealization compiled against delivered modules (exit 0); axioms checked"
+ }
+}

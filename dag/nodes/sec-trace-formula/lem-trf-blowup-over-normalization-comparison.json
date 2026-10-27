@@ -1,0 +1,281 @@
+{
+ "id": "lem-trf-blowup-over-normalization-comparison",
+ "kind": "statement",
+ "title": "Blowing up over the normalization and then normalizing",
+ "statement": "Let $S$ be a reduced scheme of finite type over $\\mathbf Q$ [def-pc-reduced-scheme, def-weil-finite-type-morphism], let $\\nu:S^\\nu\\to S$ be its componentwise normalization [def-weil-pbc-reduced-normalization], and let $J\\subseteq\\mathcal O_S$ be a coherent quasi-coherent ideal [pqf-def-coherent] whose zero set is nowhere dense. Write $X=(\\operatorname{Bl}_J S)^\\nu$ with structural map $p:X\\to S$, and $Y=(\\operatorname{Bl}_{J\\mathcal O_{S^\\nu}}S^\\nu)^\\nu$, where $J\\mathcal O_{S^\\nu}$ is the extended ideal [def-nagata-extended-ideal], with map $q:Y\\to S^\\nu$ [def-trf-normalized-blowup]. There is a unique morphism $n:X\\to S^\\nu$ with $\\nu\\circ n=p$. There is a unique isomorphism $e:X\\xrightarrow{\\sim}Y$ with $q\\circ e=n$. Its inverse is the unique morphism $r:Y\\to X$ over $S$; hence $r\\circ e=1_X$ and $e\\circ r=1_Y$. The ideal $J\\mathcal O_{S^\\nu}$ has nowhere dense zero set. The assertion includes reducible and empty $S$ and the unit ideal.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose VIII Proposition 2.2.4(ii), printed p.90, using the two universal properties in 2.2.2 and 2.2.4(i); comparison-over-normalization input of lem-trf-local-term-locality proof (1)--(2)."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-weil-pbc-reduced-normalization",
+  "def-trf-normalized-blowup",
+  "def-nagata-extended-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-normalization-affine-stalk-closure] to $S$. Thus $S$ and $S^\\nu$ are Noetherian with finitely many components, and $\\nu$ is finite. The generic-point bijection and normality of $S^\\nu$ follow from [lem-sfb-componentwise-normalization-generic-properties]. In particular $S^\\nu$ is reduced: a domain has no nonzero nilpotents. The finite map $\\nu$ is of finite type directly from the definitions: over an affine $\\operatorname{Spec}A$ its inverse image is $\\operatorname{Spec}B$ with $B$ a finite $A$-module, whose module generators also generate it as an $A$-algebra. Quasi-compactness is part of finiteness. Composition with $S\\to\\operatorname{Spec}\\mathbf Q$ is of finite type by [lem-sfb-finite-type-composition-base-change]. Finally, since $S$ is Noetherian with finitely many irreducible components, each component $Z$ contains the nonempty open subset of $S$ obtained by removing the other components from $Z$. The zero set $V(J)$ is closed with empty interior, so it contains no such open set and hence no generic point of $S$. Thus $S\\setminus V(J)$ is an open set containing every generic point, so it is dense in every irreducible component, and $J$ is the unit ideal at each generic point.",
+   "uses": [
+    "lem-trf-normalization-affine-stalk-closure",
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "def-pc-reduced-scheme",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.1; Stacks 0BXR (varieties.tex, lemma-normalization-locally-algebraic), 035Q (morphisms.tex, lemma-normalization-normal)"
+   }
+  },
+  {
+   "text": "Put $J^\\nu=J\\mathcal O_{S^\\nu}$. On affine charts $\\operatorname{Spec}B\\to\\operatorname{Spec}A\\subseteq S$, with $J|_{\\operatorname{Spec}A}=\\widetilde I$, this is $\\widetilde{IB}$: the closed inverse image has ring $B\\otimes_A(A/I)=B/IB$, so its defining kernel is $IB$, as in [def-nagata-extended-ideal]. Finite local generators of $I$ generate $IB$; these descriptions localize and glue. Hence $J^\\nu$ is quasi-coherent of finite type, and is coherent by [pqf-lem-coherent-ft-locnoeth], since $S^\\nu$ is locally Noetherian by Step 1. Its zero set avoids every generic point: $\\nu$ takes such a point to a generic point of $S$, where $J$ is the unit ideal by Step 1. Thus its complement is open containing the generic point of each component, so is dense in every component. This proves the nowhere dense assertion. The same affine computation for $A\\to B\\to C$ gives $(IB)C=IC$, which identifies iterated extended ideals throughout the proof.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.4(ii), inverse-image centre; Stacks 01XZ (coherent.tex, lemma-coherent-Noetherian)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-normalized-blowup-finality] to $(S,J)$; its hypotheses hold since $S$ is reduced of finite type over $\\mathbf Q$, $J$ is coherent, and $S\\setminus V(J)$ is dense in every irreducible component by Step 1. It gives that $X$ is normal, $p$ sends generic points to generic points, and $J\\mathcal O_X$ is an invertible ideal. Each component of $X$ therefore dominates a component of $S$: the closure of the image of its generic point is that component. The target $S$ has finitely many components by Step 1. Apply [lem-sfb-component-dominant-normalization-lift] to $p$ to obtain the unique $n:X\\to S^\\nu$ with $\\nu n=p$.",
+   "uses": [
+    "lem-trf-normalized-blowup-finality",
+    "lem-sfb-component-dominant-normalization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.2 and 2.2.4(i); Stacks 035Q(4), morphisms.tex, lemma-normalization-normal"
+   }
+  },
+  {
+   "text": "The map $n$ takes generic points to generic points. Indeed if $\\xi\\in X$ is generic, then $p(\\xi)$ is generic in $S$; the fibre of $\\nu$ over that point is the spectrum of its residue field by [lem-sfb-componentwise-normalization-generic-properties], and its single point is the corresponding generic point of $S^\\nu$. Thus $n(\\xi)$ is that point. Also $J^\\nu\\mathcal O_X=J\\mathcal O_X$ by the affine ideal computation in Step 2, so it is invertible. Apply [lem-trf-normalized-blowup-finality] to $(S^\\nu,J^\\nu)$, which satisfies every hypothesis by Steps 1 and 2. Its mapping property gives a unique morphism $e:X\\to Y$ over $S^\\nu$, thus $qe=n$.",
+   "uses": [
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "lem-trf-normalized-blowup-finality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.4(ii), applying (i) over the normalization"
+   }
+  },
+  {
+   "text": "The same mapping property for $(S^\\nu,J^\\nu)$ says that $Y$ is normal, $q$ takes generic points to generic points and $J^\\nu\\mathcal O_Y$ is invertible. Since $\\nu$ takes generic points to generic points, so does $\\nu q:Y\\to S$; and $J\\mathcal O_Y=J^\\nu\\mathcal O_Y$ by Step 2. The mapping property for $(S,J)$ therefore gives a unique morphism $r:Y\\to X$ over $S$. Both $nr$ and $q$ factor $\\nu q$ through $S^\\nu$. The uniqueness assertion of [lem-sfb-component-dominant-normalization-lift], applied to the normal source $Y$ and the component-dominating map $\\nu q$, gives $nr=q$.",
+   "uses": [
+    "lem-trf-normalized-blowup-finality",
+    "lem-sfb-component-dominant-normalization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.2 and 2.2.4(i)--(ii), reverse comparison"
+   }
+  },
+  {
+   "text": "Now $re$ and $1_X$ are $S$-morphisms from $X$ to the final object $X$ of [lem-trf-normalized-blowup-finality], so $re=1_X$. Likewise $er$ and $1_Y$ are $S^\\nu$-morphisms from $Y$ to the final object $Y$, since $qer=nr=q$; thus $er=1_Y$. Consequently $e$ is an isomorphism with inverse $r$. Its uniqueness as an $S^\\nu$-morphism from Step 4 implies uniqueness as an isomorphism, and Step 5 already proves uniqueness of $r$ among all $S$-morphisms. Every construction applies componentwise and also to the empty scheme. For $J=\\mathcal O_S$, all extended ideals remain unit ideals, so no case is excluded. No step assumes $S$ integral or nonempty.",
+   "uses": [
+    "lem-trf-normalized-blowup-finality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.4(ii), uniqueness of the two final-object comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-extended-ideal",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-component-dominant-normalization-lift",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-normalization-affine-stalk-closure",
+  "lem-trf-normalized-blowup-finality",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 2.2.1--2.2.4, printed p.90: proof of Proposition 2.2.4(ii) by the universal properties, with hypotheses and inverse identities expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-blowup-over-normalization-comparison: Blowing up an ideal then normalizing equals normalizing the base then blowing up the extended ideal and normalizing again",
+   "results": "0 hits; ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"blow\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: relative morphism normalization and general scheme-property results do not state this absolute normalized-blowup assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "blow.*normali[sz]|normali[sz].*blow",
+   "results": "1 hits; Mathlib/Tactic/ITauto.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: relative morphism normalization and general scheme-property results do not state this absolute normalized-blowup assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-blowup-over-normalization-comparison: Normalized blowup over a reduced scheme agrees canonically with the normalized blowup of the pullback ideal over its normalization",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: relative morphism normalization and general scheme-property results do not state this absolute normalized-blowup assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-blowup-over-normalization-comparison: Universal properties identify the absolute normalization of Bl_I(X) with the absolute normalization of Bl_(I O_Xnu)(Xnu) over Xnu",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: relative morphism normalization and general scheme-property results do not state this absolute normalized-blowup assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal scheme mapping generic points to generic points of a reduced locally Noetherian scheme factors uniquely through its componentwise normalization",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.fromNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern relative normalization of a morphism, not the componentwise absolute normalized-blowup comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "blow.*normali[sz]|normali[sz].*blow",
+   "results": "1 hits; Mathlib/Tactic/ITauto.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern relative normalization of a morphism, not the componentwise absolute normalized-blowup comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of the blowup of a reduced scheme is canonically the normalized blowup over its normalization",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern relative normalization of a morphism, not the componentwise absolute normalized-blowup comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"blowup\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern relative normalization of a morphism, not the componentwise absolute normalized-blowup comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized blowup over a reduced scheme agrees with normalized blowup of the extended ideal over the componentwise normalization",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern relative normalization of a morphism, not the componentwise absolute normalized-blowup comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal properties of normalization and blowups identify normalized blowups before and after normalizing the base",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern relative normalization of a morphism, not the componentwise absolute normalized-blowup comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalized-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO Expose VIII Proposition 2.2.4(ii), printed p.90, using the two universal properties in 2.2.2 and 2.2.4(i); comparison-over-normalization input of lem-trf-local-term-locality proof (1)--(2).",
+   "via": [
+    "lem-trf-normalized-blowup-calculus",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-blowup-over-normalization-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the ILO VIII Proposition 2.2.4(ii) universal-property proof, reusing all existing DAG tools and creating no nodes. Verified finite type of the normalized base, coherence and density of the extended centre, generic-point conditions, both comparison maps and both inverse identities. The statement is unchanged. No matching project proof or Mathlib leaf was found.",
+  "blueprint": "Historical modification/normalized-resolution branch of lem-trf-local-term-locality proof (1)--(2), via lem-trf-normalized-blowup-calculus: the normalization comparison in ILO VIII Proposition 2.2.4(ii). Read the latest blueprint, which retains the contracting-correspondence route; this geometric auxiliary does not replace it.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-componentwise-normalization-generic-properties",
+    "why": "Normality and the generic-point bijection and one-point generic fibres of componentwise normalization, a general algebraic tool used to verify maximal dominance."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic permanence of finite-type morphisms under composition, used only to check that the normalized base remains finite type over Q."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion on locally Noetherian schemes, used to verify coherence of the extended centre; this unit has no separate general coherence criterion."
+   },
+   {
+    "node": "lem-sfb-component-dominant-normalization-lift",
+    "why": "Generic normalization universal property for component-dominating normal sources; used for the factorization n and for the equality nr=q, exactly ILO VIII 2.2.2, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sfb-finite-type-composition-base-change",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sfb-component-dominant-normalization-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-144ac48b5",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-144ac48b5 (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, no new nodes. The statement is identical to the Q15 e200 FIX version, which adds def-nagata-extended-ideal; it is unchanged and not weakened. Read every cited statement: normalization-affine-stalk-closure (k=Q), sfb componentwise-normalization-generic-properties, finite-type composition, pqf coherent⇔qc finite type on locally Noetherian schemes, trf normalized-blowup-finality, sfb component-dominant-normalization-lift, and the normalized-blowup, reduced-normalization and extended-ideal definitions. Checked ILO VIII 2.2.2–2.2.4, printed p.90: (ii) is an immediate corollary of the universal property (i), and V×_X X^nor is the extended ideal. The proof expands this correctly. Step 2's affine computation B/IB gives coherence, (IB)C=IC and density of the complement of V(J^ν). Step 3 gets n from the lift node. Step 4 shows n is generic-to-generic via the one-point generic fibre and gets e from finality over (S^ν,J^ν). Step 5 gets r, and lift uniqueness gives nr=q. Step 6: pre=p and qer=q, so both inverse identities follow from the finality uniqueness clauses. No cycle (closure of 304 nodes), no duplicate in a search of the DAG for Bl plus normalization, no SGA. Accepted the 4 generic tool_uses. One fault, a missing hypothesis check: Step 3 applied finality to (S,J) without checking that S∖V(J) is dense in every component; the item only assumes V(J) is nowhere dense. Step 2 also used 'J is the unit ideal at generic points' without proof. FIX: Step 1 now proves it (S is Noetherian with finitely many components, so each component contains the nonempty open set left after removing the others; a closed set with empty interior then contains no generic point). Steps 2 and 3 now cite Step 1. Uses, deps and statement are unchanged. Edge cases checked: empty S, unit J, crossing lines, cusp.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlowupOverNormalizationComparison",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.normalizedBlowup_over_normalization_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupOverNormalizationComparison.lean",
+  "statement": "theorem normalizedBlowup_over_normalization_comparison (S : Scheme.{u}) (a : S ⟶ Spec (.of (ULift.{u} ℚ))) [IsReduced S] [LocallyOfFiniteType a] [QuasiCompact a] (J : S.IdealSheafData) (hJ : ∀ U : S.affineOpens, (J.ideal U).FG) (hcentre : Dense (J.support.compl : Set S)) : Dense ((J.comap S.fromReducedNormalization).support.compl : Set S.reducedNormalization) ∧ (∃! n : J.normalizedBlowup ⟶ S.reducedNormalization, n ≫ S.fromReducedNormalization = J.normalizedBlowupMap) ∧ (∀ n : J.normalizedBlowup ⟶ S.reducedNormalization, n ≫ S.fromReducedNormalization = J.normalizedBlowupMap → (∃! e : J.normalizedBlowup ≅ (J.comap S.fromReducedNormalization).normalizedBlowup, e.hom ≫ (J.comap S.fromReducedNormalization).normalizedBlowupMap = n) ∧ (∀ e : J.normalizedBlowup ≅ (J.comap S.fromReducedNormalization).normalizedBlowup, e.hom ≫ (J.comap S.fromReducedNormalization).normalizedBlowupMap = n → e.inv ≫ J.normalizedBlowupMap = (J.comap S.fromReducedNormalization).normalizedBlowupMap ≫ S.fromReducedNormalization ∧ (∀ r : (J.comap S.fromReducedNormalization).normalizedBlowup ⟶ J.normalizedBlowup, r ≫ J.normalizedBlowupMap = (J.comap S.fromReducedNormalization).normalizedBlowupMap ≫ S.fromReducedNormalization → r = e.inv) ∧ e.hom ≫ e.inv = 𝟙 J.normalizedBlowup ∧ e.inv ≫ e.hom = 𝟙 (J.comap S.fromReducedNormalization).normalizedBlowup))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d48e58cd4",
+  "group": "NO",
+  "result": "pass",
+  "note": "Node change is lean-only; one module whose single theorem is sorry. Hypotheses (IsReduced; LocallyOfFiniteType+QuasiCompact to Spec ULift ℚ; IdealSheafData with affine FG; Dense J.support.compl) match the node and the landed normalizedBlowup_finality interface, with no stronger assumption and arbitrary u. Conclusions: ∃! n with n≫ν=p; for each such n, ∃! iso e with e.hom≫q=n; e.inv over S, unique among all S-morphisms r; both inverse identities (consequences the node states with 'hence'); density of the comap ν extended centre. All true via finality over (S,J) and (S^ν,J^ν) plus the normalization lift. Edge cases: empty S, unit ideal, zero ideal excluded, reducible S. The parent NormalizedBlowupCalculus private normalization_comparison and public calculus are weaker or different, so no duplicate. Docstrings carry the source and blueprint tag and the proof steps; statement verbatim; plain imports are proof-dep modules. Advisory: coherence rendered as affine FG rather than via IsQuasiCoherentFiniteType, consistent with finality. Not compiled (no change)."
+ }
+}

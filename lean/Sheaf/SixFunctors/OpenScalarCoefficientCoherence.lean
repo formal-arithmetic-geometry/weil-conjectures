@@ -7,7 +7,7 @@ module
 
 public import Sheaf.SixFunctors.OpenScalarTensorData
 
-/-! # Coefficient coherence of scalar/open comparison 
+/-! # Coefficient coherence of scalar/pullback comparison 
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 07A6, 0D6D and 0GL1;
 sites-modules.tex, Tag 0E8I
@@ -31,7 +31,7 @@ Source: Stacks 07A6 and 0D6D
 structure ScalarPullbackCoefficientCoherence (m : Models.{u}) where
   composition : ∀ {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     [Finite A] [Finite B] [Finite C] (φ : A →+* B) (ψ : B →+* C)
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    {U X : Scheme.{u}} (j : U ⟶ X)
     (Q : proEtaleDerivedCategory X A),
     (scalar m ψ U).map ((lambda m φ j).inv.app Q) ≫
       (lambda m ψ j).inv.app ((scalar m φ X).obj Q) ≫
@@ -39,13 +39,14 @@ structure ScalarPullbackCoefficientCoherence (m : Models.{u}) where
     (scalarComp m φ ψ U).hom.app ((constantPullback (A := A) j).obj Q) ≫
       (lambda m (ψ.comp φ) j).inv.app Q
   identity : ∀ (A : Type u) [CommRing A] [Finite A]
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    {U X : Scheme.{u}} (j : U ⟶ X)
     (Q : proEtaleDerivedCategory X A),
     (lambda m (RingHom.id A) j).inv.app Q ≫
       (constantPullback (A := A) j).map ((scalarId m A X).hom.app Q) =
     (scalarId m A U).hom.app ((constantPullback (A := A) j).obj Q)
 
 /-- Scalar pullback commutes with coefficient composition and identities.
+The geometric morphism is arbitrary; no open immersion assumption is needed.
 This result involves no extension-by-zero functor or beta comparison.
 Source: Stacks, sites-cohomology.tex, Tags 07A6 and 0D6D.
 (blueprint: lem-sp-open-scalar-coefficient-coherence).

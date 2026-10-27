@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-ringed-topos-slice-functoriality",
+ "kind": "statement",
+ "title": "Functorial local ringed relocalization along a sheaf map",
+ "statement": "Work with sites small in [def-weil-size-convention]. Let $g:(\\mathcal E,R)\\to(\\mathcal F,S)$ be a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism], with $\\mathcal E,\\mathcal F$ categories of sheaves of sets. For a sheaf $A\\in\\mathcal E$, the slice $\\mathcal E/A$ consists of arrows to $A$, with ring $R_A=(R\\times A\\to A)$; define $S_B$ similarly. Given $B\\in\\mathcal F$ and $s:A\\to g^{-1}B$, there is a ringed-topos morphism $g_s:(\\mathcal E/A,R_A)\\to(\\mathcal F/B,S_B)$ with inverse image $$(H\\to B)\\longmapsto(g^{-1}H\\times_{g^{-1}B,s}A\\to A).$$ Its structural map is the restriction of $g^\\sharp:g^{-1}S\\to R$, and its composites with the slice projections agree with $g$ followed by the source slice projection, up to the canonical ring-compatible isomorphism. A locally ringed topos here means a ringed topos whose ring sheaf has locally $a$ or $1-a$ invertible for every section $a$, and whose equalizer of $0,1$ is the initial sheaf. A local morphism means that its square of ring sheaves and unit subsheaves is cartesian. If $g$ is local between locally ringed topoi, both ringed slices are locally ringed and $g_s$ is local. If $a:A\\prime\\to A$, $b:B\\prime\\to B$, and $s\\prime:A\\prime\\to g^{-1}B\\prime$ satisfy $g^{-1}(b)s\\prime=sa$, the square formed by $g_s,g_{s\\prime}$ and the two slice restriction morphisms commutes up to the canonical ring-compatible isomorphism. These comparisons respect identities and successive restrictions. For a ring-compatible natural isomorphism $t:g^{-1}\\xrightarrow{\\sim}k^{-1}$ and $s_k=t_Bs$, the component maps $t_H$ and $\\mathrm{id}_A$ induce a ring-compatible isomorphism $g_s\\cong k_{s_k}$ on slices. These slice comparisons are natural on every sheaf and compatible with the structure-ring maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J8 (lemma-relocalize-morphism-ringed-topoi), Tag 04IH (lemma-localize-morphism-locally-ringed-topoi), with sites.tex Tag 04IV (lemma-relocalize-morphism-topoi) and its fibre-product formula. The two-isomorphism comparison is the explicit fibre-product map also used in spaces-properties.tex Tag 04M6 (lemma-faithful)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sfb-locally-ringed-topos",
+  "def-sfb-element-site-localization",
+  "def-sfb-element-site-slice-constructions",
+  "def-sfb-ringed-sheaf-slice-adjunction-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $L=g^{-1}$. The sheaf categories have finite limits by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. By [lem-sfb-left-exact-left-adjoint-slices], the arrowwise functor $L_B:\\mathcal F/B\\to\\mathcal E/LB$, $(H\\to B)\\mapsto(LH\\to LB)$, is left exact and has a right adjoint: the hypotheses hold because $L\\dashv g_*$ and $L$ is left exact by [def-weil-pbc-ringed-topos-morphism]. The slices are sheaf topoi on the small element sites supplied by [lem-weil-pbc-ringed-sheaf-slice-adjunction]. For this purely set-theoretic assertion one may apply that lemma with the terminal, one-element commutative ring sheaf, independently of the given $R,S$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-sfb-left-exact-left-adjoint-slices",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0791 (lemma-localize-topos-site) and 04H1 (lemma-localize-morphism-topoi); arrowwise left exact adjunction on slices."
+   }
+  },
+  {
+   "text": "Regard $s:A\\to LB$ as an object of $\\mathcal E/LB$. Its localization is $\\mathcal E/A$ by the iterated-slice clause of [lem-weil-pbc-ringed-sheaf-slice-adjunction]; denote its left exact inverse image by $s^*$. It sends $Z\\to LB$ to $Z\\times_{LB}A\\to A$: in the iterated slice, product with the object $s$ is precisely this fibre product. One can check the formula in the element-site equivalence by taking the fibre over each section of $A$. Thus $P_s=s^*L_B$ has right adjoint the composite of the two right adjoints and preserves finite limits. It defines a geometric morphism $g_s$ with exactly the asserted inverse-image formula. The same localization construction gives all slice projection and slice restriction morphisms used below.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04GZ (lemma-localize-topos), 04IR (lemma-relocalize-topos) and 04IV (lemma-relocalize-morphism-topoi), factorization and fibre-product formula."
+   }
+  },
+  {
+   "text": "The element-site equivalence in [lem-weil-pbc-ringed-sheaf-slice-adjunction], applied with the one-element ring, sends $R\\times A\\to A$ to $(U,a)\\mapsto R(U)$: its fibre consists exactly of pairs $(r,a)$, and all ring operations act on $r$. This works for arbitrary ring sheaves, without a commutativity assumption. Finite-product preservation identifies $P_s(S_B)$ with $g^{-1}S\\times A\\to A$. Define $g_s^\\sharp=g^\\sharp\\times1_A:g^{-1}S\\times A\\to R\\times A$. It preserves the ring operations because $g^\\sharp$ does, so [def-weil-pbc-ringed-topos-morphism] makes $g_s$ a ringed morphism. If $j_A,j_B$ denote the projections, the same product calculation gives $P_sj_B^{-1}H\\cong j_A^{-1}g^{-1}H$ by $(x,a)\\mapsto(x,a)$. On $H=S$ this identification carries the structural map to $g^\\sharp\\times1_A$; the projection structural maps are identities on the restricted rings. Hence $j_Bg_s\\cong gj_A$ as ringed morphisms, naturally on every sheaf.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IF (lemma-localize-morphism-ringed-topoi) and 04J8 (lemma-relocalize-morphism-ringed-topoi), restricted structural map and projection square."
+   }
+  },
+  {
+   "text": "Suppose now that $R,S$ satisfy the two local-ring conditions in the statement. On the element site for $A$ supplied by [lem-weil-pbc-ringed-sheaf-slice-adjunction], the fibre calculation of step 3 identifies $R_A(U,a)$ with $R(U)$, with covers those of $U$. A cover on which $r$ or $1-r$ is a unit lifts to the cover $(U_i,a|_{U_i})$; its inverses are the same sections. Thus the first local-ring condition holds for $R_A$. The equalizer of $0,1$ in $R_A$ is $j_A^{-1}$ of the equalizer in $R$, since this inverse image preserves finite limits. It is initial, since a left adjoint preserves the initial object (its Hom set into any object is a singleton by adjunction). The identical argument for $S,B$ proves that both slices are locally ringed, including empty slices.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IH (lemma-localize-morphism-locally-ringed-topoi), part (5) and final alternative direct proof; Tag 04H8 (definition-locally-ringed-topos)."
+   }
+  },
+  {
+   "text": "For any ring sheaf $T$, the subsheaf $T^\\times$ is identified with the sheaf of pairs $(x,y)$ satisfying $xy=yx=1$, by first projection: a two-sided inverse is unique, since $y=y(xz)=(yx)z=z$. It is therefore specified by finite limits, so every left exact inverse image preserves this description of units. In particular $P_s(S_B^\\times)\\cong j_A^{-1}g^{-1}(S^\\times)$ and $R_A^\\times\\cong j_A^{-1}(R^\\times)$. Under these identifications and step 3, the unit square of $g_s^\\sharp$ is $j_A^{-1}$ of the unit square of $g^\\sharp$. When $g$ is local the latter is cartesian; finite-limit preservation of $j_A^{-1}$ makes the former cartesian. This proves locality, without any hypothesis on points or on a site functor inducing $g$.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04HA (definition-morphism-locally-ringed-topoi); Tag 04IH, parts (7)-(8), and proof of lemma-locally-ringed-intrinsic-morphism immediately preceding it."
+   }
+  },
+  {
+   "text": "Let $p:H\\to B$ and $g^{-1}(b)s'=sa$. The inverse images along the two paths in the restriction square are naturally identified by\n$$(g^{-1}H\\times_{g^{-1}B}A)\\times_AA'\\ \\cong\\ g^{-1}(H\\times_BB')\\times_{g^{-1}B'}A'.$$\nExplicitly both have coordinates $(x,a')$ with $g^{-1}(p)(x)=s(a(a'))$: on the right the extra $B'$ coordinate is forced to be $s'(a')$. Finite-limit preservation of $g^{-1}$ gives the displayed identification. These maps are natural in $H$, since a sheaf map acts on the $x$ coordinate, and are inverse by the fibre-product universal property. On $S_B$ they are the identity on the $g^{-1}S$ and $A'$ coordinates, so both structural maps are $g^\\sharp\\times1_{A'}$. This is the required ring-compatible square. For identities the comparison fixes both coordinates; for successive restrictions, either composite sends $(x,a'')$ to the same pair. Equality of the projections into each fibre product proves coherence, also with the projection comparisons of step 3.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04IV, final fibre-product identity in the proof; sites-modules.tex Tag 04J8, functoriality square."
+   }
+  },
+  {
+   "text": "Let $t:g^{-1}\\xrightarrow{\\sim}k^{-1}$ be ring-compatible, so $k^\\sharp t_S=g^\\sharp$, and put $s_k=t_Bs$. Naturality $k^{-1}(p)t_H=t_Bg^{-1}(p)$ gives a map of pullbacks\n$$g^{-1}H\\times_{g^{-1}B,s}A\\longrightarrow k^{-1}H\\times_{k^{-1}B,s_k}A,\\qquad(x,a)\\longmapsto(t_H(x),a).$$\nIts inverse uses $t_H^{-1}$; naturality in $H$ follows from that of $t$. At the restricted structure ring this is $t_S\\times1_A$, and ring compatibility is exactly $(k^\\sharp\\times1_A)(t_S\\times1_A)=g^\\sharp\\times1_A$. It therefore gives the asserted ring-compatible isomorphism on slices. The maps of step 6 only retain or substitute the $A$ coordinate, while this map acts only on $x$; consequently their composites agree on both projections. This also gives compatibility under further restrictions, and identities or composites of $t$ act by the corresponding identities or composites on $x$.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04M6 (lemma-faithful), middle two-isomorphism on relocalized inverse images; explicit formula and ring compatibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-sfb-left-exact-left-adjoint-slices",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04J8 and 04IH, using sites.tex Tags 0791, 04H1 and 04IV; the two-isomorphism calculation is spaces-properties.tex Tag 04M6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of ringed topoi induces a morphism between slice topoi along a map A to inverse image B and preserves locality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"{X Y : AlgebraicGeometry.LocallyRingedSpace} → X.Hom Y → (X.toSheafedSpace ⟶ Y.toSheafedSpace)\", \"doc\": \"Given two locally ringed spaces $X$ and $Y$, this function maps a morphism from $X$ to $Y$ (consisting of a continuous map and a sheaf morphism inducing local ring homomorphisms on stalks) to a morphi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instCategory\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"CategoryTheory.Category.{u, u + 1} AlgebraicGeometry.LocallyRingedSpace\", \"doc\": \"The collection of locally ringed spaces forms a category, where morphisms are continuous maps between the underlying topological spaces equipped with compatible morphisms of structure sheaves that ind\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.comp_c\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.CategoryStruct.comp f g).c =\\n    CategoryTheory.CategoryStruct.comp g.c ((TopCat.Presheaf.pushforward CommRingCat g.base).map f.c)\", \"doc\": \"For morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ in the category of locally ringed spaces, the presheaf component of their composite $g \\\\circ f$ equals the composition of $g$'s presheaf component with the \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.forgetToTop_map\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyRingedSpace.forgetToTop.map f =\\n    (AlgebraicGeometry.SheafedSpace.forget CommRingCat).map (CategoryTheory.InducedCategory.homMk f.toHom)\", \"doc\": \"The forgetful functor from locally ringed spaces to topological spaces acts on a morphism $ f $ by mapping it to its underlying continuous map, which coincides with first applying the forgetful functo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace_map\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace.map f = CategoryTheory.InducedCategory.homMk f.toHom\", \"doc\": \"For any morphism $ f $ between locally ringed spaces $ X $ and $ Y $, the forgetful functor maps $ f $ to a morphism in the category of sheafed spaces over commutative rings by applying the induced ca\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullback\", \"module\": \"Mathlib/CategoryTheory/Sites/Over\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u') →\\n        [inst_1 : CategoryTheory.Category.{v', u'} A] →\\n          {X Y : C} →\\n            (X ⟶ Y) → CategoryTheory.Functor (CategoryTheory.Sheaf (J.over Y) A) (Categor\", \"doc\": \"Given a morphism $ f : X \\to Y $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, this defines the pullback functor between the categories of sheaves on the over categories $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Presheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    Y.ringCatSheaf ⟶\\n      ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous RingCat (Opens.grothendieckTopology ↥Y)\\n            (Opens.grothendieckTopology ↥X)).obj\\n        X.ringCatSheaf\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this function constructs the induced morphism between the ring sheaf of $ Y $ and the pushforward of the ring sheaf of $ X $ along the continuous base map $\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relocalization of geometric morphisms of locally ringed topoi at arbitrary sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme.{u}) [IsAffine X] (r : Γ(X, ⊤)) : IsLocalization.Away r Γ(X.basicOpen r, ⊤)\", \"doc\": \"For any affine scheme $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$, the ring of sections over the basic open set $X_{r}$ is canonically isomorphic to the localizati\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": Sheaf CommRingCat X.toTopCat\", \"doc\": \"The sheaf $\\\\mathcal{O}_X$ of commutative rings on the underlying topological space of a locally ringed space $X$, where every stalk is a local ring. This is the canonical sheaf associated to the local\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \"(f : (structureSheaf <| Γ.obj <| op X).val.obj (op <| basicOpen r) ⟶ X.presheaf.obj (op <| X.toΓSpecMapBasicOpen r)) :\\n  toOpen _ (basicOpen r) ≫ f = X.toToΓSpecMapBasicOpen r ↔ f = X.toΓSpecCApp r\", \"doc\": \"For a locally ringed space $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X)$, a morphism $f$ from the localization $\\\\Gamma(X)_r$ to the sections over the basic open subset $X_{D(r)}$ s\"}\n  {\"name\": \"TopCat.Presheaf.epi_toLocalizationPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \": Epi G.toLocalizationPresheaf\", \"doc\": \"In the category of presheaves of commutative rings on a topological space, the canonical morphism from a presheaf to its localization with respect to a submonoid presheaf is an epimorphism.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum R) : IsIso (localizationToStalk R x)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the canonical ring homomorphism from the localization $ R_{\\\\mathfrak{p}} $ (at the prime ideal $ \\\\mathf\"}\n  {\"name\": \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"{R S : CommRingCat.{u}} (f : R ⟶ S) : Spec.locallyRingedSpaceObj S ⟶ Spec.locallyRingedSpaceObj R\", \"doc\": \"Given commutative rings $ R $ and $ S $ and a ring homomorphism $ f : R → S $, this constructs the morphism of locally ringed spaces from $ \\\\operatorname{Spec}(S) $ to $ \\\\operatorname{Spec}(R) $. It c\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.is_sheafedSpace_iso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) [IsIso f] : IsIso f.toShHom\", \"doc\": \"The collection of locally ringed spaces forms a category, where morphisms are continuous maps between the underlying topological spaces equipped with compatible morphisms of structure sheaves that ind\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\\n  {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat X.toΓSpecSheafedSpace.hom.base).obj X.presheaf).obj\\n        (Opposite.op (PrimeSpectrum.basicOpen r)) ⟶\\n      Z),\\n\", \"doc\": \"For any locally ringed space $X$ and element $r$ in its global sections $\\\\Gamma(X)$, the composition of the canonical localization morphism $\\\\Gamma(X)_r \\\\to \\\\mathcal{O}_X(D(r))$ with the pushforward s\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Topos\", \"Over\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "relocaliz|localiz.*ringed|ringed.*localiz",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/Localization.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.OreLocalization.Ring\"}\n  {\"file\": \"Mathlib/Probability/Process/LocalProperty.lean\", \"line\": \"17\", \"text\": \"* `IsPreLocalizingSequence`: A pre-localizing sequence is a sequence of stopping\"}\n  {\"file\": \"Mathlib/Probability/Process/LocalProperty.lean\", \"line\": \"31\", \"text\": \"* `IsPreLocalizingSequence.isLocalizingSequence_biInf`: Given a\"}\n  {\"file\": \"Mathlib/Probability/Process/LocalProperty.lean\", \"line\": \"33\", \"text\": \"* `IsStable.locally_of_isPreLocalizingSequence`: If a property `p` is stable, then\"}\n  {\"file\": \"Mathlib/Probability/Process/LocalProperty.lean\", \"line\": \"56\", \"text\": \"structure IsPreLocalizingSequence [Preorder ι] [TopologicalSpace ι] [OrderTopology ι]\"}\n  {\"file\": \"Mathlib/Probability/Process/LocalProperty.lean\", \"line\": \"66\", \"text\": \"    (P : Measure Ω := by volume_tac) extends IsPreLocalizingSequence 𝓕 τ P where\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/OreSet.lean\", \"line\": \"26\", \"text\": \"namespace AddOreLocalization\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/OreSet.lean\", \"line\": \"42\", \"text\": \"end AddOreLocalization\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/OreSet.lean\", \"line\": \"44\", \"text\": \"namespace OreLocalization\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/OreSet.lean\", \"line\": \"51\", \"text\": \"@[to_additive AddOreLocalization.AddOreSet]\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/OreSet.lean\", \"line\": \"64\", \"text\": \"-- run_cmd to_additive.map_namespace `OreLocalization `AddOreLocalization\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.GroupTheory.OreLocalization.OreSet\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Basic.lean\", \"line\": \"55\", \"text\": \"open OreLocalization\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Basic.lean\", \"line\": \"57\", \"text\": \"namespace OreLocalization\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Basic.lean\", \"line\": \"62\", \"text\": \"@[to_additive (attr := instance_reducible) AddOreLocalization.oreEqv\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Basic.lean\", \"line\": \"86\", \"text\": \"end OreLocalization\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Cardinality.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.GroupTheory.OreLocalization.Basic\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Cardinality.lean\", \"line\": \"20\", \"text\": \"- Prove or disprove `OreLocalization.cardinalMk_le_lift_cardinalMk_of_commute`\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Cardinality.lean\", \"line\": \"31\", \"text\": \"namespace OreLocalization\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Cardinality.lean\", \"line\": \"33\", \"text\": \"variable {R : Type u} [Monoid R] (S : Submonoid R) [OreLocalization.OreSet S]\"}\n  {\"file\": \"Mathlib/GroupTheory/OreLocalization/Cardinality.lean\", \"line\": \"38\", \"text\": \"    Surjective (fun x ↦ x /ₒ (1 : ↥S) : X → OreLocalization S X) := by\"}\n  {\"file\": \"Mathlib/GroupTheory/MonoidLocalization/MonoidWithZero.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.OreLocalization.Basic\"}\n  {\"file\": \"Mathlib/GroupTheory/MonoidLocalization/MonoidWithZero.lean\", \"line\": \"64\", \"text\": \"theorem mk_zero (x : S) : mk 0 (x : S) = 0 := OreLocalization.zero_oreDiv' _\"}\n  {\"file\": \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.GroupTheory.OreLocalization.Basic\"}\n  {\"file\": \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"line\": \"195\", \"text\": \"theorem r_iff_oreEqv_r {x y : M × S} : r S x y ↔ (OreLocalization.oreEqv S M).r x y := by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of inverse image on slice categories using fiber products with a chosen section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Over.iteratedSliceBackward\", \"module\": \"Mathlib/CategoryTheory/Comma/Over/Basic\", \"type\": \"{T : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} T] →\\n    {X : T} → (f : CategoryTheory.Over X) → CategoryTheory.Functor (CategoryTheory.Over f.left) (CategoryTheory.Over f)\", \"doc\": \"The functor from the over category $\\\\mathcal{T}/f.\\\\text{left}$ to $\\\\mathcal{T}/f$ that maps an object $g: Y \\\\to f.\\\\text{left}$ to the object $g \\\\circ f.\\\\text{hom}: Y \\\\to f$ in $\\\\mathcal{T}/f$, and map\"}\n  {\"name\": \"CategoryTheory.Over.pullback\", \"module\": \"Mathlib/CategoryTheory/Comma/Over/Pullback\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : C} →\\n      (f : X ⟶ Y) →\\n        [CategoryTheory.Limits.HasPullbacksAlong f] →\\n          CategoryTheory.Functor (CategoryTheory.Over Y) (CategoryTheory.Over X)\", \"doc\": \"Given a morphism $ f : X \\to Y $ in a category $\\\\mathcal{C}$ and the assumption that pullbacks along $f$ exist, this defines a functor from the over category $\\\\mathcal{C}/Y$ to the over category $\\\\math\"}\n  {\"name\": \"CategoryTheory.Over.iteratedSliceForward\", \"module\": \"Mathlib/CategoryTheory/Comma/Over/Basic\", \"type\": \"{T : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} T] →\\n    {X : T} → (f : CategoryTheory.Over X) → CategoryTheory.Functor (CategoryTheory.Over f) (CategoryTheory.Over f.left)\", \"doc\": \"The functor from the over category $\\\\mathcal{T}/f$ to the over category $\\\\mathcal{T}/(f.\\\\text{left})$, which maps an object $\\\\alpha$ in $\\\\mathcal{T}/f$ (represented by a morphism $\\\\alpha.\\\\text{hom}: \\\\\"}\n  {\"name\": \"CategoryTheory.Over.iteratedSliceBackward_map\", \"module\": \"Mathlib/CategoryTheory/Comma/Over/Basic\", \"type\": \"∀ {T : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} T] {X : T} (f : CategoryTheory.Over X)\\n  {X_1 Y : CategoryTheory.Over f.left} (α : X_1 ⟶ Y),\\n  f.iteratedSliceBackward.map α = CategoryTheory.Over.homMk (CategoryTheory.Over.homMk α.left ⋯) ⋯\", \"doc\": \"The iterated slice backward functor $ \\\\mathcal{T}/f.\\\\text{left} \\\\to \\\\mathcal{T}/f $ maps a morphism $ \\\\alpha: X_1 \\\\to Y $ in the over category $ \\\\mathcal{T}/f.\\\\text{left} $ to a morphism in $ \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.over_eq_inverseImage\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Comma\", \"type\": \"∀ {T : Type u_3} [inst : CategoryTheory.Category.{v_3, u_3} T] (W : CategoryTheory.MorphismProperty T) (X : T),\\n  W.over = W.inverseImage (CategoryTheory.Over.forget X)\", \"doc\": \"For any morphism property $ W $ in a category $ \\\\mathcal{T} $ and object $ X \\\\in \\\\mathcal{T} $, the morphism property $ W.\\\\text{over} $ in the over category $ \\\\mathcal{T}/X $ coincides with the invers\"}\n  {\"name\": \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_inv_app_left\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.ChosenPullbacks C] {X Y : C}\\n  (f : Y ⟶ X) (X_1 : CategoryTheory.Over X),\\n  ((CategoryTheory.toOverIteratedSliceForwardIsoPullback f).inv.app X_1).left =\\n    CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory\", \"doc\": \"For a category $\\\\mathcal{C}$ with chosen pullbacks, an object $X$, and a morphism $f : Y \\\\to X$, the left component of the inverse natural isomorphism between the composition of the $\\\\text{toOver}$ fu\"}\n  {\"name\": \"CategoryTheory.Over.iteratedSliceEquiv_inverse\", \"module\": \"Mathlib/CategoryTheory/Comma/Over/Basic\", \"type\": \"∀ {T : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} T] {X : T} (f : CategoryTheory.Over X),\\n  f.iteratedSliceEquiv.inverse = f.iteratedSliceBackward\", \"doc\": \"The inverse of the categorical equivalence between the iterated slice categories $\\\\mathcal{T}/f$ and $\\\\mathcal{T}/f.left$ is given by the backward functor, which maps objects $g: Y \\\\to f.left$ to $g \\\\\"}\n  {\"name\": \"CategoryTheory.toOverIteratedSliceForwardIsoPullback\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.ChosenPullbacks C] →\\n      {X Y : C} →\\n        (f : Y ⟶ X) →\\n          (CategoryTheory.toOver (CategoryTheory.Over.mk f)).comp (CategoryTheory.Over.mk f).iteratedSliceForward ≅\\n            CategoryTheory.Cho\", \"doc\": \"For a category $\\\\mathcal{C}$ with chosen pullbacks, an object $X$, and a morphism $f : Y \\\\to X$, the composition of the functor $\\\\text{toOver}(\\\\text{Over.mk}\\\\, f)$ with the iterated slice forward func\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedTopos|GeometricMorphism|relocalize",
+   "results": "{\"t\": \"2026-10-23T13:48:46Z\", \"tool\": \"grep\", \"query\": \"RingedTopos|GeometricMorphism|relocalize\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: ordinary slice adjunctions and site-induced module pullbacks do not state general ringed-topos relocalization, locality and coherence. The relevant arrowwise adjunction is already the Mathlib leaf lem-sfb-left-exact-left-adjoint-slices."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a locally ringed topos at a sheaf is locally ringed and ringed geometric morphisms restrict functorially to slices",
+   "results": "{\"t\": \"2026-10-23T13:48:47Z\", \"tool\": \"leansearch\", \"query\": \"Localization of a locally ringed topos at a sheaf is locally ringed and ringed geometric morphisms restrict functorially to slices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.mk\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.LocallyRingedSpace.instCategory\", \"AlgebraicGeometry.LocallyRingedSpace.casesOn\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf\", \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"AlgebraicGeometry.LocallyRingedSpace.toSheafedSpace\"], \"digest\": \"9230dcc7d375bfae\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: ordinary slice adjunctions and site-induced module pullbacks do not state general ringed-topos relocalization, locality and coherence. The relevant arrowwise adjunction is already the Mathlib leaf lem-sfb-left-exact-left-adjoint-slices."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Over\", \"post\", \"Adjoint\"",
+   "results": "{\"t\": \"2026-10-23T13:48:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Over\\\", \\\"post\\\", \\\"Adjoint\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Over.isRightAdjoint_post\", \"CategoryTheory.Over.isLeftAdjoint_post\"], \"digest\": \"4daeacd44ebaae66\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: ordinary slice adjunctions and site-induced module pullbacks do not state general ringed-topos relocalization, locality and coherence. The relevant arrowwise adjunction is already the Mathlib leaf lem-sfb-left-exact-left-adjoint-slices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism of ringed topoi induces a local morphism on slice topoi by pullback along A to inverse image B, coherently under restrictions and natural isomorphisms",
+   "results": "{\"t\": \"2026-10-23T13:48:48Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric morphism of ringed topoi induces a local morphism on slice topoi by pullback along A to inverse image B, coherently under restrictions and natural isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"CategoryTheory.GrothendieckTopology.overMapPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"fa8d760cf7661c1e\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: ordinary slice adjunctions and site-induced module pullbacks do not state general ringed-topos relocalization, locality and coherence. The relevant arrowwise adjunction is already the Mathlib leaf lem-sfb-left-exact-left-adjoint-slices."
+  },
+  {
+   "tool": "grep",
+   "query": "isLeftAdjoint_post|def pullback|def post|preservesFiniteLimits|overPost",
+   "results": "{\"t\": \"2026-10-23T13:53:45Z\", \"tool\": \"grep\", \"query\": \"isLeftAdjoint_post|def pullback|def post|preservesFiniteLimits|overPost\", \"sub\": \"CategoryTheory/Comma/Over\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Pullback.lean\", \"Mathlib/CategoryTheory/Comma/Over/Pullback.lean\", \"Mathlib/CategoryTheory/Comma/Over/Pullback.lean\"], \"digest\": \"83430e2682f8bd55\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: ordinary slice adjunctions and site-induced module pullbacks do not state general ringed-topos relocalization, locality and coherence. The relevant arrowwise adjunction is already the Mathlib leaf lem-sfb-left-exact-left-adjoint-slices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact left adjoint on categories of sheaves induces an inverse image on over categories, followed by base change along a morphism of sheaves",
+   "results": "{\"t\": \"2026-10-23T13:53:47Z\", \"tool\": \"leanfinder\", \"query\": \"A left exact left adjoint on categories of sheaves induces an inverse image on over categories, followed by base change along a morphism of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\"], \"digest\": \"6d732fcf27e169ef\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: ordinary slice adjunctions and site-induced module pullbacks do not state general ringed-topos relocalization, locality and coherence. The relevant arrowwise adjunction is already the Mathlib leaf lem-sfb-left-exact-left-adjoint-slices."
+  },
+  {
+   "tool": "grep",
+   "query": "overPost|PreservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-23T13:54:39Z\", \"tool\": \"grep\", \"query\": \"overPost|PreservesFiniteLimits\", \"sub\": \"CategoryTheory/Limits/Preserves/Shapes/Over.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"41\", \"48\", \"49\", \"50\", \"52\"], \"digest\": \"e10e769823cae5e8\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: ordinary slice adjunctions and site-induced module pullbacks do not state general ringed-topos relocalization, locality and coherence. The relevant arrowwise adjunction is already the Mathlib leaf lem-sfb-left-exact-left-adjoint-slices."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+  "date": "2026-10-23",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, first paragraph and functoriality square; Tag 04M6, middle two-isomorphism between relocalized inverse images.",
+   "via": [
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-topos-slice-functoriality",
+  "worker": "stage1",
+  "group": "NN",
+  "summary": "Constructed relocalization as the arrowwise slice inverse image followed by localization at s; reused the existing arbitrary-sheaf slice theorem and the Mathlib left-exact-left-adjoint-on-slices leaf. Wrote the structural map, locally ringed and local-morphism checks, restriction coherence and ring-compatible two-isomorphism formula explicitly. Statement unchanged; no new nodes needed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, first paragraph and functoriality square; Tag 04M6, middle two-isomorphism between relocalized inverse images. The seven steps supply exactly the generic slice construction used by the reconstruction prerequisite; ancestor search returns None, so there is no imported blueprint node to identify.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic arbitrary-sheaf slice localization and its small element-site model, used twice to build the geometric inverse image and to test the local-ring conditions; the alteration unit has no competing slice construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-efef9e8a3",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-efef9e8a3 (reviewer sub-agent of L); spot-checked: I read the 0-new-node split in full; it checks out against Stacks sites.tex 04IV (l.7706: (f_s)^{-1} fibre-product rule and restriction square), sites-modules 04J8 (l.2808, ringed square and factorisation) and 04IH parts (5)-(8). Shape: one commit; statement and stmt_deps byte-identical to live; the item is still unsplit in live and side-live; no repair note; acyclic. Step 1: the slice leaf (Over.post) hypotheses come from the def (L ⊣ g_*, L left exact) and the sectionwise-limits leaf. The worker uses lem-weil-pbc-ringed-sheaf-slice-adjunction with the one-element commutative ring only for set-level clauses, so its commutativity hypothesis is met. Step 2: the iterated-slice clause (A:=LB, map s) gives E/A. P_s(H)=LH×_{LB,s}A, a composite of left exact left adjoints. Step 3: P_s(S_B)=g^{-1}S×A and g^♯×1_A is the structural map. The projection comparison g^{-1}H×A=j_A^{-1}g^{-1}H is ring-compatible. Step 4: the fibre of R_A is R(U) and unit covers lift. Eq(0,1)=j_A^{-1}(∅) is initial because j_A^{-1} is a left adjoint; empty slices are fine. Step 5: units form a finite limit, so the unit square of g_s^♯ is j_A^{-1} of a cartesian square. Step 6: both paths give {(x,a'): g^{-1}p(x)=s a(a')}, with the B' coordinate forced to s'(a'); the coherences hold coordinatewise. Step 7: (x,a)↦(t_H x,a) is well defined by naturality of t, and ring-compatible by k^♯t_S=g^♯. Small cases g=id, s=id (04IF f'), A=∅ and identity t all check. Duplicate search: the lem-sbc-ringed-sheaf-slice-ordinary-* nodes cover only s=id with commutative rings, and lem-tw-representable-slice-localized-ringed-morphism covers only site-induced maps over representables, so neither is a duplicate. I accept the tool_uses entry for the generic slice-localization lemma. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedToposSliceFunctoriality",
+  "declaration": "CategoryTheory.ringedTopos_slice_functoriality",
+  "declarations": [
+   "CategoryTheory.ringedSliceInverse",
+   "CategoryTheory.ringedSliceFirst",
+   "CategoryTheory.ringedSliceProjection",
+   "CategoryTheory.RingedSlicePresentation",
+   "CategoryTheory.RingedSliceMorphismData",
+   "CategoryTheory.RingedSliceRestrictionComparison",
+   "CategoryTheory.ringedSliceRestrictionComposite",
+   "CategoryTheory.RingedSliceTwoIso",
+   "CategoryTheory.RingedToposSliceFunctorialityData",
+   "CategoryTheory.ringedTopos_slice_functoriality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedToposSliceFunctoriality.lean",
+  "statement": "theorem ringedTopos_slice_functoriality {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} {R : Sheaf J RingCat.{u}} {S : Sheaf K RingCat.{u}} (g : RingedToposMorphism R S) : Nonempty (RingedToposSliceFunctorialityData g)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e175eed3",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed cc92af91 (H2). Lean files byte-identical (sha256 f9bcb528/bf49343e); item statement/source/proof identical to live, only lean+stmt_deps changed. stmt_deps now all definitions: size-convention, ringed-topos-morphism, def-sfb-locally-ringed-topos, def-sfb-element-site-localization (live NK record unmodified), and new existing:true def-sfb-element-site-slice-constructions (elementObj/ObjMap/FibrePresheaf/FibrePresheafFunctor/SheafPullback/DirectSumMap/DirectSumPresheaf, all present in live RingedSheafSliceConstruction, statement verbatim) and def-sfb-ringed-sheaf-slice-adjunction-data (RingedSheafSliceAdjunctionData, statement follows every field, no existence claim). Every declaration used by the statement is owned by a cited def node; theorems only in proof_deps. Mathematics re-read: Over.post⋙Over.pullback inverse image, ringMap_eq, locality clauses, restriction/twoIso comparisons pinned by first + Over structure, id/comp coherence, single universe u. No new same-id/owner nodes landed in live. Advisories: possibly unused private Preserves.Shapes.Over import; redundant ring fields. No compile (no file changed)."
+ }
+}

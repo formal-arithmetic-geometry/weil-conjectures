@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-graded-normalization-fraction-map",
+ "kind": "statement",
+ "title": "Intrinsic homogeneous fraction map and its change of denominator",
+ "statement": "Let $(A,\\mathfrak m,F)$ be a local commutative ring with residue field $F=A/\\mathfrak m$. Let $A\\hookrightarrow B$ be an injective ring homomorphism [def-weil-pbc-algebra-hom-quotient]. Put $E=B/\\mathfrak mB$, $G=\\operatorname{gr}_{\\mathfrak m}A$ [def-weil-pbc-associated-graded-ring], and let $f\\in\\mathfrak m$ satisfy $\\mathfrak mB=fB$ and injectivity of multiplication by $f$ on $B$. For $d\\in\\mathfrak m^n$, let $d/f^n$ denote the unique element $b\\in B$ with $f^nb=d$, and write $\\ell=\\operatorname{in}_1(f)\\in G_1$. There is a unique $F$-algebra homomorphism\n$$\\theta_f:G[\\ell^{-1}]_0\\longrightarrow E,\\qquad \\operatorname{in}_n(d)/\\ell^n\\longmapsto[d/f^n],$$\nwhere degree-zero homogeneous localization and the chart $D_+(\\ell)$ use [def-nagata-homogeneous-localization-degree-zero, def-nagata-affine-proj]. The formula is independent of lifts modulo $\\mathfrak m^{n+1}$ and of all localization representatives, including equalities obtained only after multiplication by a further power of $\\ell$.\nLet $g\\in\\mathfrak m$ satisfy the same two conditions and put $\\ell_g=\\operatorname{in}_1(g)$. The resulting scheme maps $\\operatorname{Spec}E\\to D_+(\\ell)$ and $\\operatorname{Spec}E\\to D_+(\\ell_g)$, composed with the chart inclusions into $\\operatorname{Proj}G$, agree. More precisely $g/f\\in B^\\times$ with inverse $f/g$, and on their overlap the comparison carries\n$$\\frac{\\operatorname{in}_n(d)}{\\ell_g^n}=\\frac{\\operatorname{in}_n(d)}{\\ell^n}\\left(\\frac{\\ell_g}{\\ell}\\right)^{-n}$$\nto $[d/f^n][g/f]^{-n}=[d/g^n]$ in $E$. Spectra use [def-weil-affine-spectrum].\nThese maps are natural for local-ring isomorphisms with compatible algebra isomorphisms: if $\\alpha:A\\cong A'$ carries $\\mathfrak m$ to $\\mathfrak m'$ and $\\beta:B\\cong B'$ restricts to $\\alpha$, then the induced residue and graded-localization maps intertwine $\\theta_f$ and $\\theta_{\\alpha(f)}$. In particular when $A$ is reduced and $B$ is its integral closure in its total ring of fractions [def-weil-pbc-integral-closure], every local-ring isomorphism induces the required $\\beta$ by its action on fractions. No injectivity or surjectivity of $\\theta_f$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence of constructions (2) and (3): intrinsic fraction formula, changes of representatives and denominators, and local-ring functoriality."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-integral-closure",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-affine-proj",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Identify $A$ with its image in $B$. By the definition of ideal multiplication, $\\mathfrak m^nB=(\\mathfrak mB)^n=f^nB$: expand generators of either side as finite sums of products of $n$ elements of $\\mathfrak m$ with coefficients in $B$; for $n=0$ both sides are $B$. Hence every $d\\in\\mathfrak m^n$ is $f^nb$ for some $b\\in B$. Multiplication by $f^n$ is injective, by $n$ successive applications of injectivity for $f$ (for $n=0$ it is the identity). Thus $b$ is unique; denote it $b_n(d)$. The quotient $E=B/\\mathfrak mB=B/fB$ has its $F=A/\\mathfrak m$-algebra structure since the composite $A\\to B\\to E$ kills $\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence of constructions (2) and (3); explicit agent-written fraction calculation."
+   }
+  },
+  {
+   "text": "If $d,d'\\in\\mathfrak m^n$ have the same class in $G_n$, then $d-d'\\in\\mathfrak m^{n+1}\\subset f^{n+1}B$. Write $d-d'=f^{n+1}c$. Cancelling the injective multiplier $f^n$ in $f^n(b_n(d)-b_n(d'))=f^{n+1}c$ gives $b_n(d)-b_n(d')=fc$. Consequently $\\psi_n(\\operatorname{in}_n(d))=[b_n(d)]\\in E$ is well defined. It is additive because $f^n(b_n(d)+b_n(e))=d+e$, and is $F$-linear because $f^n a b_n(d)=ad$ for $a\\in A$, with scalar classes independent of $a$ modulo $\\mathfrak m$. These assertions use only the quotient and graded-piece definitions.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence of constructions (2) and (3); explicit agent-written fraction calculation."
+   }
+  },
+  {
+   "text": "Every element of $G[\\ell^{-1}]_0$ is $\\operatorname{in}_n(d)/\\ell^n$ for some $n\\ge0$ and $d\\in\\mathfrak m^n$. Suppose $\\operatorname{in}_n(d)/\\ell^n=\\operatorname{in}_m(e)/\\ell^m$. The ordinary localization relation gives $k\\ge0$ with $\\ell^k(\\ell^m\\operatorname{in}_n(d)-\\ell^n\\operatorname{in}_m(e))=0$. By the associated-graded multiplication formula, this says $f^{k+m}d-f^{k+n}e\\in\\mathfrak m^{k+n+m+1}\\subset f^{k+n+m+1}B$. Substituting $d=f^nb_n(d)$ and $e=f^mb_m(e)$ and cancelling $f^{k+n+m}$ gives $b_n(d)-b_m(e)\\in fB$. The candidate values therefore agree in $E$. This treats arbitrary localization equalities, including those requiring a nonzero extra exponent $k$; no cancellation of $\\ell$ in $G$ is made.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence of constructions (2) and (3); explicit agent-written fraction calculation."
+   }
+  },
+  {
+   "text": "Define $\\theta_f(\\operatorname{in}_n(d)/\\ell^n)=[b_n(d)]$ using steps 2–3. For $d\\in\\mathfrak m^n$ and $e\\in\\mathfrak m^m$, the sum has numerator $f^md+f^ne$ in degree $n+m$ and denominator $\\ell^{n+m}$; its division coefficient is $b_n(d)+b_m(e)$. The product has numerator $de$ in degree $n+m$ and division coefficient $b_n(d)b_m(e)$. These follow by multiplying both coefficients by $f^{n+m}$ and using uniqueness from step 1. Also $b_0(1)=1$, $b_n(0)=0$, and $b_0(a)=a$ for $a\\in A$. The localization formulas and the associated-graded multiplication thus show that $\\theta_f$ is a unital ring map restricting to the structural map $F\\to E$. Every element has the displayed representative, so its values determine it uniquely as an $F$-algebra homomorphism.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-associated-graded-ring-structure",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence of constructions (2) and (3); explicit agent-written fraction calculation."
+   }
+  },
+  {
+   "text": "Apply step 1 to $g$ too. Put $u=b_1(g)=g/f$ and let $v=f/g\\in B$ be the unique division coefficient supplied by the $g$-version of step 1. Thus $g=fu$ and $f=gv$; substitution gives $f=fuv$, and injectivity of multiplication by $f$ gives $uv=1$. Hence $u$ is a unit with inverse $v$. For $d\\in\\mathfrak m^n$, $g^n(b_n(d)u^{-n})=f^nb_n(d)=d$, so the unique $g$-division coefficient is $d/g^n=b_n(d)u^{-n}$. Reducing gives $[d/g^n]=[d/f^n][g/f]^{-n}$ in $E$, including $n=0$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence of constructions (2) and (3); explicit agent-written fraction calculation."
+   }
+  },
+  {
+   "text": "Put $L_f=G[\\ell^{-1}]_0$, $L_g=G[\\ell_g^{-1}]_0$, $t=\\ell_g/\\ell\\in L_f$ and $s=\\ell/\\ell_g\\in L_g$. The basic-open intersection theorem identifies the overlap with $D(t)$ in the first chart and $D(s)$ in the second. Apply the ring case $M=S=G$ of the graded restriction theorem, extending the grading by zero in negative degrees, first to $h=\\ell\\ell_g=\\ell_g\\ell$, then with the factors exchanged. Clause (iii) gives the canonical ring identifications $(L_f)_t\\cong G[h^{-1}]_0\\cong(L_g)_s$: its localizing element is $h/\\ell^2=t$ (respectively $h/\\ell_g^2=s$). Clause (i) gives the restriction formulas as the same fractions in the ordinary localization; these are the scheme restriction maps because the Proj structure sheaf is locally represented by those fractions. There $s=t^{-1}$ and $\\operatorname{in}_n(d)/\\ell_g^n=(\\operatorname{in}_n(d)/\\ell^n)t^{-n}$. Since $\\theta_f(t)=[u]$ and $\\theta_g(s)=[v]$ are inverse units, the localization universal property extends both maps to these overlap rings. The formula of step 5 shows their values agree on every fraction from $L_g$; the inverse of $s$ is forced as well, so uniqueness gives equality on $(L_g)_s$. By the affine-spectrum correspondence the two maps $\\operatorname{Spec}E\\to\\operatorname{Proj}G$ are therefore the same: both factor through the common overlap via this one ring map. This also proves exactly the requested overlap formula.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-graded-module-away-restriction",
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-affine-spectrum",
+    "def-nagata-affine-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4 (lemma-standard-open), (1)(c)–(h), applied to the two degree-one factors and their product; the division calculation is step 5."
+   }
+  },
+  {
+   "text": "For $(\\alpha,\\beta)$ as in the statement, $\\alpha(\\mathfrak m^n)=\\mathfrak m'^n$ follows by expanding ideal products; the inverse isomorphism proves equality rather than just inclusion. Thus $\\operatorname{in}_n(d)\\mapsto\\operatorname{in}_n(\\alpha(d))$ defines the graded-ring isomorphism, as it preserves addition and products of representatives. It induces the localization isomorphism $T:L_f\\to L'_{\\alpha(f)}$ by applying $\\alpha$ to numerator and denominator: the localization relation of step 3 is preserved in both directions. Likewise $\\beta(\\mathfrak mB)=\\mathfrak m'B'$ gives the residue isomorphism $\\bar\\beta:E\\to E'$. Applying $\\beta$ to $f^nb_n(d)=d$ gives $\\alpha(f)^n\\beta(b_n(d))=\\alpha(d)$, so uniqueness of division in $B'$ gives $\\beta(b_n(d))=b'_n(\\alpha(d))$. On every fraction this proves $\\bar\\beta\\theta_f=\\theta_{\\alpha(f)}T$, with scalar maps induced by $\\alpha:A/\\mathfrak m\\cong A'/\\mathfrak m'$.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence of constructions (2) and (3); explicit agent-written fraction calculation."
+   }
+  },
+  {
+   "text": "Finally suppose $A$ is reduced and $B$ is its integral closure in $Q(A)$. Write $Q(A)=S^{-1}A$ where $S$ consists of elements $r$ with $rx=0\\Rightarrow x=0$. A ring isomorphism $\\alpha:A\\cong A'$ carries $S$ bijectively to $S'$: transport $rx=0$ by $\\alpha$ and use $\\alpha^{-1}$. The fraction formula $a/r\\mapsto\\alpha(a)/\\alpha(r)$ preserves the localization relation $w(ra'-r'a)=0$ and the sum and product formulas, and the analogous formula for $\\alpha^{-1}$ is its inverse. Hence it defines an isomorphism $Q(A)\\cong Q(A')$. If $z$ satisfies a monic polynomial over $A$, its image satisfies the monic polynomial obtained by applying $\\alpha$ to the coefficients. The inverse implication follows from $\\alpha^{-1}$. Therefore this isomorphism restricts to $\\beta:B\\cong B'$ compatible with $\\alpha$. Step 7 applies and gives the asserted normalization naturality. This uses no Noetherian, domain, or finiteness assumption.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence of constructions (2) and (3); explicit agent-written fraction calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-associated-graded-ring",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-graded-module-away-restriction",
+  "lem-weil-pbc-localization-away-universal-property",
+  "def-weil-affine-spectrum",
+  "def-nagata-affine-proj",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBT (remark-quadratic-extension), omitted comparison (2)–(3); direct fraction proof, with overlap tools from constructions.tex Tag 01M4 (lemma-standard-open)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A regular element generating an extended maximal ideal defines a homomorphism from the degree zero homogeneous localization of the associated graded ring to the normalization residue quotient by dividing representatives",
+   "results": "{\"t\": \"2026-10-23T09:34:57Z\", \"tool\": \"leanfinder\", \"query\": \"A regular element generating an extended maximal ideal defines a homomorphism from the degree zero homogeneous localization of the associated graded ring to the normalization residue quotient by dividing representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ResidueField.lift\", \"IsLocalization.AtPrime.exists_algebraMap_quot_eq_of_mem_quot\", \"HomogeneousLocalization.val_awayMap\", \"HomogeneousLocalization.val_awayMap_mk\", \"HomogeneousLocalization.val_awayMap_eq_aux\", \"HomogeneousLocalization.awayMap\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"HomogeneousLocalization.awayMapAux_mk\"], \"digest\": \"85ee14580aae966d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous-localization functoriality does not construct the division-and-residue map from an associated graded ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map from tangent cone chart fractions to a residue algebra is independent of the choice of principal ideal generator and natural under local ring isomorphisms",
+   "results": "{\"t\": \"2026-10-23T09:36:42Z\", \"tool\": \"leanfinder\", \"query\": \"The map from tangent cone chart fractions to a residue algebra is independent of the choice of principal ideal generator and natural under local ring isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.residueFieldMapCAlgEquiv\", \"IsLocalRing.ResidueField.algebraMap_residue\", \"algebraMap_mk\", \"IsLocalRing.ResidueField.algebraMap_eq\", \"Polynomial.residueFieldMapCAlgEquiv_symm_C\", \"Polynomial.residueFieldMapCAlgEquiv_algebraMap\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Ideal.ResidueField.lift\"], \"digest\": \"ec77adf08dcc51fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous-localization functoriality does not construct the division-and-residue map from an associated graded ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousLocalization\", \"map\"",
+   "results": "{\"t\": \"2026-10-23T09:36:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomogeneousLocalization\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomogeneousLocalization.awayMap\", \"HomogeneousLocalization.mapId\", \"HomogeneousLocalization.map_id\", \"HomogeneousLocalization.awayMapₐ\", \"HomogeneousLocalization.algebraMap_apply\", \"HomogeneousLocalization.NumDenSameDeg.map\", \"HomogeneousLocalization.NumDenSameDeg.map_deg\", \"HomogeneousLocalization.algebraMap_eq\"], \"digest\": \"cb2b7a9bde75725f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous-localization functoriality does not construct the division-and-residue map from an associated graded ring"
+  },
+  {
+   "tool": "grep",
+   "query": "associated[Gg]raded.*[Nn]ormali|[Nn]ormali.*associated[Gg]raded|fraction.*residue",
+   "results": "{\"t\": \"2026-10-23T09:36:43Z\", \"tool\": \"grep\", \"query\": \"associated[Gg]raded.*[Nn]ormali|[Nn]ormali.*associated[Gg]raded|fraction.*residue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean\"], \"digest\": \"8a73e93cc894f37f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous-localization functoriality does not construct the division-and-residue map from an associated graded ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical fraction map from associated graded Proj chart to normalization fibre",
+   "results": "{\"t\": \"2026-10-23T09:36:44Z\", \"tool\": \"leansearch\", \"query\": \"Canonical fraction map from associated graded Proj chart to normalization fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.awayι_toSpecZero\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_hom_apply_asIdeal\"], \"digest\": \"d4460c0ebb92732f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous-localization functoriality does not construct the division-and-residue map from an associated graded ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a map from degree zero localization of associated graded ring by dividing by a regular generator of the extended ideal and reducing modulo that ideal",
+   "results": "{\"t\": \"2026-10-23T10:47:34Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a map from degree zero localization of associated graded ring by dividing by a regular generator of the extended ideal and reducing modulo that ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.map\", \"HomogeneousLocalization.awayMap\", \"HomogeneousLocalization.awayMapₐ\", \"HomogeneousLocalization.fromZeroRingHom\", \"HomogeneousLocalization.awayMapAux_mk\", \"HomogeneousLocalization.awayMap_fromZeroRingHom\", \"HomogeneousLocalization.val_awayMap\", \"HomogeneousLocalization.awayMap_mk\"], \"digest\": \"bd586f1dcb781845\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homogeneous-localization, residue and chart maps do not state the division-and-residue construction with denominator independence and normalization naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "associated[Gg]raded.*fraction|fraction.*associated[Gg]raded|graded.*normalization|normalization.*graded",
+   "results": "{\"t\": \"2026-10-23T10:50:01Z\", \"tool\": \"grep\", \"query\": \"associated[Gg]raded.*fraction|fraction.*associated[Gg]raded|graded.*normalization|normalization.*graded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homogeneous-localization, residue and chart maps do not state the division-and-residue construction with denominator independence and normalization naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphism from degree zero localization of associated graded ring to quotient of an algebra by dividing by a regular element",
+   "results": "{\"t\": \"2026-10-23T10:50:02Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphism from degree zero localization of associated graded ring to quotient of an algebra by dividing by a regular element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.fromZeroRingHom\", \"HomogeneousLocalization.awayMap_fromZeroRingHom\", \"HomogeneousLocalization.awayMapₐ\", \"Algebra.Generators.compLocalizationAwayAlgHom\", \"HomogeneousLocalization.awayMap_mk\", \"HomogeneousLocalization.Away.isLocalization_mul\", \"HomogeneousLocalization.map\", \"HomogeneousLocalization.awayMap\"], \"digest\": \"819ad1cb6255f021\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homogeneous-localization, residue and chart maps do not state the division-and-residue construction with denominator independence and normalization naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousLocalization\", \"map\"",
+   "results": "{\"t\": \"2026-10-23T10:50:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomogeneousLocalization\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomogeneousLocalization.awayMap\", \"HomogeneousLocalization.mapId\", \"HomogeneousLocalization.map_id\", \"HomogeneousLocalization.awayMapₐ\", \"HomogeneousLocalization.algebraMap_apply\", \"HomogeneousLocalization.NumDenSameDeg.map\", \"HomogeneousLocalization.NumDenSameDeg.map_deg\", \"HomogeneousLocalization.algebraMap_eq\"], \"digest\": \"cb2b7a9bde75725f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homogeneous-localization, residue and chart maps do not state the division-and-residue construction with denominator independence and normalization naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from tangent cone charts to residue algebras are invariant under changing a regular principal generator and under isomorphisms of the local ring",
+   "results": "{\"t\": \"2026-10-23T10:50:02Z\", \"tool\": \"leanfinder\", \"query\": \"Maps from tangent cone charts to residue algebras are invariant under changing a regular principal generator and under isomorphisms of the local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.algebraMap_residue\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"IsLocalRing.ResidueField.mapEquiv_apply\", \"AlgebraicGeometry.Scheme.fromSpecResidueField.hcongr_2\", \"AlgebraicGeometry.Scheme.residueFieldCongr_trans\", \"AlgebraicGeometry.Scheme.residue_residueFieldCongr\", \"AlgebraicGeometry.Scheme.residueFieldCongr_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc\"], \"digest\": \"441b3f1212c21a75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homogeneous-localization, residue and chart maps do not state the division-and-residue construction with denominator independence and normalization naturality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-local-tangent-normalization",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Re-split of returned local tangent proof, steps 6 and 8: Intrinsic homogeneous fraction map and its change of denominator.",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-graded-normalization-fraction-map",
+  "worker": "stage1",
+  "summary": "NX supplied the complete fraction argument without new nodes: division and lift independence, cancellation of arbitrary extra localization powers, algebra laws, change of regular denominator, cited Proj-overlap comparisons, and explicit local-ring and total-fraction naturality. Statement unchanged. Reused the associated-graded structure, graded restriction, localization universal property and Proj basic-open intersection nodes; all eight steps are under 2000 characters. Added the existing module-localization notion for total fractions.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Re-split of returned local tangent proof, steps 6 and 8: Intrinsic homogeneous fraction map and its change of denominator.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-associated-graded-ring-structure",
+    "why": "Generic associated-graded multiplication formula needed to translate a localization equality into ideal membership; no nodal or six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-graded-module-away-restriction",
+    "why": "Generic ring case of homogeneous localization restriction, used only to identify the common Proj overlap and its fraction maps; the local division construction is proved here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "lem-weil-pbc-graded-module-away-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-029c655fb",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-029c655fb (reviewer sub-agent of L); spot-checked: Read all 8 steps, every cited statement and Stacks curves.tex 0CBT (remark-quadratic-extension, which omits the equivalence (2)-(3)). The delivery adds no new nodes. The statement is byte-identical to live and side-live, where the item is still unsplit (not superseded, no repair note). The only stmt_dep added is def-weil-pbc-module-localization for Q(A), the DAG's usual convention. proof_deps equals the union of the step uses. Checked the steps: step 1 m^nB=f^nB and cancellation of f^n; step 2 lift independence; step 3 extra-power relation recomputed: f^{k+m}d-f^{k+n}e in m^{k+n+m+1}, cancel f^{k+n+m}, no cancellation of ell in G; step 4 sum/product numerators f^m d+f^n e and de; step 5 uv=1 by regularity and d/g^n=b_n(d)u^{-n}; step 6 graded-away-restriction hypotheses checked (h=ell*ell_g, e=1, a=ell_g, clause-(iii) element h/ell^2=ell_g/ell), plus basic-open intersection with d=e=1, the localization universal property and the affine-spectrum correspondence; steps 7-8 naturality and total-fraction/integral-closure transport. Own tests: k[[x,y]]/(xy) with f=x+y gives G_(ell)=k x k mapping isomorphically to E; f in m^2 forces fb=1, so E=0, consistent with ell=0. Sibling lem-sfb-nodal-completed-residue-denominators is a completion-coordinate statement, not a duplicate. Accepted tool_uses: associated-graded-ring-structure and graded-module-away-restriction, both generic. Advisory, no fix: no inline citation for 'total ring of fractions' in the inherited statement; step 7 leaves implicit that alpha(f) satisfies the two conditions (one line)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedNormalizationFractionMap",
+  "declaration": "GradedNormalization.existsUnique_fractionMap",
+  "declarations": [
+   "Ideal.associatedGradedGrading",
+   "Ideal.associatedGradedGrading_monoid",
+   "Ideal.associatedGradedGrading_isInternal",
+   "Ideal.associatedGradedGradingRing",
+   "Ideal.associatedGradedClass",
+   "Ideal.associatedGradedClassHomogeneous",
+   "GradedNormalization.residueIdeal",
+   "GradedNormalization.linearForm",
+   "GradedNormalization.Chart",
+   "GradedNormalization.fraction",
+   "GradedNormalization.overlapCoordinate",
+   "GradedNormalization.FractionFormula",
+   "GradedNormalization.existsUnique_fractionMap",
+   "GradedNormalization.fractionMap",
+   "GradedNormalization.fractionMap_changeDenominator_formula",
+   "GradedNormalization.fractionMap_changeDenominator",
+   "GradedNormalization.fractionMap_overlap",
+   "GradedNormalization.fractionMap_natural",
+   "GradedNormalization.normalization_extension"
+  ],
+  "file": "lean/Sheaf/RingTheory/GradedNormalizationFractionMap.lean",
+  "statement": "theorem existsUnique_fractionMap {A : Type u} {B : Type v} [CommRing A] [IsLocalRing A] [CommRing B] (φ : A →+* B) (hφ : Function.Injective φ) (f : IsLocalRing.maximalIdeal A) (hgen : residueIdeal φ = Ideal.span {φ f.val}) (hreg : Function.Injective (fun b : B ↦ φ f.val * b)) : (∀ (n : ℕ) (d : ↥((IsLocalRing.maximalIdeal A) ^ n)), ∃! b : B, φ f.val ^ n * b = φ d.val) ∧ ∃! θ : Chart f →+* B ⧸ residueIdeal φ, FractionFormula φ f θ",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a17ba3605",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Earlier return fixed: H13 (helpers moved into the item module; def-weil-pbc-associated-graded-ring record byte-identical to live), A1 (naturality now (∃! p, formulas) ∧ ∀ p, formulas → square), A2 (unit/fraction formulas over independent universes u,v; only the Spec/Proj equality uses a common universe), A3 (unused import removed). Every hypothesis and clause matches the node: unique θ : HomogeneousLocalization.Away → B/mB by the fraction formula, change of denominator with w : Bˣ, Proj.awayι equality, overlap formula, naturality concluding f', hφ', hgen', hreg', κ, U and the unique (chart, residue) pair, normalization β via IsFractionRing.ringEquivOfRingEquiv. Edge cases n=0, f=0, f∈m², nilpotent ℓ, g=f covered; no added hypotheses. Node differs from live only in lean; statement verbatim; 19 declarations present; nothing hollow; all proofs sorry; report sections present. No file changed, so no compile; worker reports clean compile and dry run. Advisories: overlap ∃! ρ, P ∧ ∃ψ shape is harmless; one public import looks redundant; parent nodal-local-tangent-normalization keeps duplicate tangentGrading/initialForm and should reuse these helpers on re-delivery."
+ }
+}

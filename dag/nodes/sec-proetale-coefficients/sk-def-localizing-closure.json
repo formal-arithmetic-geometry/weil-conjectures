@@ -135,7 +135,18 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-localizing-closure",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.LocalizingAdmissibleCoefficients",
   "declaration": "AlgebraicGeometry.ProEtale.IsLocalizingAdmissibleCoefficient",
@@ -150,7 +161,7 @@
    "CategoryTheory.IsLocalizingSubcategoryOfSize",
    "CategoryTheory.localizingClosureOfSize"
   ],
-  "note": "A4 stage-3 repair: add the missing finite-subextension-valued Profinite.padicAlgClRingObj coefficient required by rational localizing composition. Retain all original clauses, including continuousMapRingObj (PadicAlgCl ell), as a distinct compatibility case for existing continuous-coefficient interfaces. These two rings are not identified. The localizing-closure definitions, generators, universe indexing and predicate signature are unchanged. The rationalExceptional_preserves_constructibleFiniteTor signature is unchanged; its continuous-coefficient proof only gains the extra Or.inl constructor.",
+  "note": "2026-10-25 (decision of the human, L maintenance): the clause continuousMapRingObj (PadicAlgCl ell), the ring of all continuous maps to the algebraic closure, was removed from IsLocalizingAdmissibleCoefficient. The predicate now has the six cases of this node's statement: finite A, Z_ell, Q_ell, finite E, O_E, and Qbar_ell as the finite-subextension-valued padicAlgClRingObj (sk-def-sfb-qlbar-condensed). Earlier record: A4 stage-3 repair: add the missing finite-subextension-valued Profinite.padicAlgClRingObj coefficient required by rational localizing composition. Retain all original clauses, including continuousMapRingObj (PadicAlgCl ell), as a distinct compatibility case for existing continuous-coefficient interfaces. These two rings are not identified. The localizing-closure definitions, generators, universe indexing and predicate signature are unchanged. The rationalExceptional_preserves_constructibleFiniteTor signature is unchanged; its continuous-coefficient proof only gains the extra Or.inl constructor.",
   "fixed_by": "NT-stage2-cc-e11afae0a"
  },
  "reviewed_lean": {
@@ -170,5 +181,15 @@
   "landing": "20261019T154003-L-3023734",
   "kind": "interface",
   "note": "independent cc review: item exists_localizingLowerShriekComposition (unchanged signature, now proved via proved model lemma + cocycle transport) against node lem-sfb-localizing-lower-shriek-composition; IsLocalizingAdmissibleCoefficient disjunct addition against change record A4-localizing-admissible-qbar and sk-def-sfb-qlbar-condensed; 51 importers/users compiled clean against the delivered set"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For admissible $\\Lambda$ (that is, $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\cO_E,\\mathbf Q_\\ell,E,\\Qlb\\}$\nwith $A$ a finite commutative ring killed by a power of $\\ell$ and $E/\\mathbf Q_\\ell$ finite),\nlet $\\Loc(\\Dctf(X,\\Lambda))$ be the smallest full triangulated subcategory of\n$D(X_{\\mathrm{proét}},\\Lambda)$ containing $\\Dctf(X,\\Lambda)$ ([sk-def-sfb-constructible])\nand closed under arbitrary direct sums. For integral and rational coefficients this is also\n$\\Loc(\\Dbc(X,\\Lambda))$, since for $\\Lambda=\\mathbf Z_\\ell,\\cO_E,\\mathbf Q_\\ell,E,\\Qlb$ one has\n$\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$ ([lem-integral-ctf-equals-bc]).\n\nBrown representability needs a category with arbitrary direct sums, so it is applied to\n$\\Loc(\\Dctf(-,\\Lambda))$. It needs two facts: that the objects of $\\Dctf(-,\\Lambda)$ are\ncompact generators of $\\Loc(\\Dctf(-,\\Lambda))$ and that proper direct image preserves direct\nsums there. For $\\cO_E$ the generators are derived complete, but their localizing closure\nalso contains objects which are not.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

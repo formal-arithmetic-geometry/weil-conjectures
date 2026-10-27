@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-stack-closed-immersion-calculus",
+ "kind": "statement",
+ "title": "Closed immersions of algebraic stacks: stability and topology",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let all stacks below be algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack]. A morphism $i:\\mathcal Z\\to\\mathcal X$ is a closed immersion if every scheme base change $T\\times_{\\mathcal X}\\mathcal Z\\to T$ is represented by a closed immersion of schemes [def-weil-closed-immersion]; products mean 2-fibre products [def-sfb-stable-pointed-moduli-groupoids]. Closed immersions are preserved by arbitrary algebraic-stack base change and by composition. For every closed immersion $i$, the point-space map $|i|$ is a homeomorphism onto a closed subset and sends closed subsets to closed subsets, using [lem-sfb-stack-point-topology-flat-lfp-open]. If $S=\\operatorname{Spec}k$ for a field $k$ [def-weil-field, def-weil-affine-spectrum] and $\\mathcal X$ is locally of finite type over $k$, then $\\mathcal Z$ is locally of finite type over $k$ as well, where local finite type is tested on smooth scheme charts by [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 04YL (definition-immersion), 0501 (lemma-base-change-immersion), 0502 (lemma-composition-immersion), and 0H20 (lemma-subspace-induced-topology); stacks-morphisms.tex Tags 06FV (lemma-immersion-locally-finite-type) and 06FT (lemma-composition-finite-type)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-closed-immersion",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $a:\\mathcal X\\to\\mathcal Y$ be arbitrary and $i:\\mathcal Z\\to\\mathcal Y$ a closed immersion. For any scheme $T\\to\\mathcal X$, the definition of the 2-fibre product [def-sfb-stable-pointed-moduli-groupoids] identifies $T\\times_{\\mathcal X}(\\mathcal X\\times_{\\mathcal Y}\\mathcal Z)$ with $T\\times_{\\mathcal Y}\\mathcal Z$ over $T$: on objects one forgets the redundant $\\mathcal X$-object and composes its specified isomorphism with the other one; the inverse inserts the image of the $T$-object. The latter is a scheme closed in $T$ by the hypothesis on $i$. By [lem-sfb-algebraic-stack-fibre-products] the 2-fibre product $\\mathcal X\\times_{\\mathcal Y}\\mathcal Z$ is an algebraic stack, so the projection to $\\mathcal X$ is a morphism of algebraic stacks; the identification above is exactly the defining scheme test for it to be a closed immersion.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04YL (definition-immersion), 0501 (lemma-base-change-immersion); scheme-test argument"
+   }
+  },
+  {
+   "text": "For closed immersions $i:\\mathcal Z\\to\\mathcal X$ and $j:\\mathcal X\\to\\mathcal Y$, fix a scheme $T\\to\\mathcal Y$. Put $V=T\\times_{\\mathcal Y}\\mathcal X$, a scheme closed in $T$, and $W=V\\times_{\\mathcal X}\\mathcal Z$, a scheme closed in $V$. The object-and-isomorphism definition [def-sfb-stable-pointed-moduli-groupoids] identifies $W$ with $T\\times_{\\mathcal Y}\\mathcal Z$ over $T$ by composing the specified isomorphisms. By [lem-weil-pbc-closed-immersion-comp], $W\\to V\\to T$ is a scheme closed immersion. This proves the scheme test for $j\\circ i$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0502 (lemma-composition-immersion), reduced to scheme composition"
+   }
+  },
+  {
+   "text": "Fix a closed immersion $i:\\mathcal Z\\to\\mathcal X$. To show $|i|$ injective, suppose two field-valued objects $z_1,z_2$ have the same image class. By [lem-sfb-stack-point-topology], after a common field extension $L$ their images are isomorphic. Choose $x=i(z_1|_L)$ and that isomorphism. Both objects, with their isomorphisms to $x$, give $L$-points of the scheme $F=\\operatorname{Spec}L\\times_{\\mathcal X}\\mathcal Z$ [def-sfb-stable-pointed-moduli-groupoids]. By the scheme test $F$ is closed in $\\operatorname{Spec}L$, so by the affine quotient description [def-weil-closed-immersion] it is $\\operatorname{Spec}(L/I)$. Its existing $L$-point forces $I=0$; thus it has just one $L$-point. The corresponding objects of its discrete groupoid are isomorphic, and projecting gives $z_1|_L\\simeq z_2|_L$. Hence $z_1,z_2$ define the same point of $|\\mathcal Z|$.",
+   "uses": [
+    "lem-sfb-stack-point-topology",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0H20 (lemma-subspace-induced-topology), omitted injectivity argument supplied using Tag 04XG (definition-points)"
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $p:U\\to\\mathcal X$ [def-sfb-algebraic-moduli-stack] and put $V=U\\times_{\\mathcal X}\\mathcal Z$, with projections $r:V\\to\\mathcal Z$ and $h:V\\to U$. The scheme test makes $h$ a scheme closed immersion. The map $r$ is a smooth surjective scheme atlas by base change and surjectivity in [lem-sfb-stack-chartwise-smooth-etale-calculus]. For any closed $D\\subseteq|\\mathcal Z|$, continuity in [lem-sfb-stack-point-topology] makes $|r|^{-1}(D)$ closed in $|V|$; the closed embedding in [def-weil-closed-immersion] makes its image under $|h|$ closed in $|U|$. We have $|p|^{-1}(|i|(D))=|h|(|r|^{-1}(D))$: the forward inclusion follows by representing a point $u$ and a point $z\\in D$ over a common extension where $p(u)\\simeq i(z)$, yielding an object $(u,z,\\phi)$ of the 2-fibre product [def-sfb-stable-pointed-moduli-groupoids]; the reverse inclusion follows from its specified isomorphism $ph\\simeq ir$. The closed-subset atlas criterion [lem-sfb-stack-point-topology] now makes $|i|(D)$ closed. Taking $D=|\\mathcal Z|$ gives closed image. Since $|i|$ is continuous by that same node and injective by step 3, its closedness makes its inverse on the image continuous. It is therefore a homeomorphism onto a closed subset.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-point-topology",
+    "def-weil-closed-immersion",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0H20 (lemma-subspace-induced-topology), omitted closed-map argument supplied using Tag 04XL (lemma-topology-points) and the field-point 2-fibre-product definition"
+   }
+  },
+  {
+   "text": "Now let $S=\\operatorname{Spec}k$ and assume $\\mathcal X$ locally of finite type over $k$. By the smooth-chart meaning in the statement, choose the atlas $U\\to\\mathcal X$ with $U$ locally of finite type over $k$. Again $V=U\\times_{\\mathcal X}\\mathcal Z$ is a scheme closed in $U$, and $V\\to\\mathcal Z$ is smooth and surjective by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Cover $U$ by affines $\\operatorname{Spec}A$ with $A$ a finitely generated $k$-algebra [def-weil-finite-type-morphism]. Over each, $V$ is $\\operatorname{Spec}(A/I)$ by [def-weil-closed-immersion]. The images of any finite algebra-generating set of $A$ generate $A/I$ over $k$. These affines cover $V$, so $V$ is locally of finite type over $k$. This smooth surjective scheme chart of $\\mathcal Z$ proves the last assertion with exactly the same chart convention; neither finite generation of $I$ nor finite presentation of $i$ is needed.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "stacks-morphisms.tex Tags 06FV (lemma-immersion-locally-finite-type) and 06FT (lemma-composition-finite-type), direct affine-chart specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-point-topology",
+  "lem-weil-pbc-closed-immersion-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 0501, 0502 and 0H20; expands the omitted topology proof by smooth atlases and field objects; final affine-chart argument follows stacks-morphisms.tex Tags 06FV, 06FT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions of algebraic stacks are stable under base change and composition and induce closed embeddings of underlying point spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is multiplicative: the composition of two closed immersions $ f: X \\to Y $ and $ g: Y \\to Z $ is also a closed immersion. This follows because the com\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.base_closed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsClosedImmersion f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the underlying continuous map between the topological spaces is a closed embedding, meaning it induces a homeomorphism of $ X $ onto a closed subset \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsClosedImmersion f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\to Y $ is a closed immersion of schemes, then the underlying continuous map $ f: X \\to Y $ is a closed embedding in the topological sense, meaning it induces a homeomorphism of $ X $ onto a c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedEmbedding\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsClosedImmersion f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\to Y $ is a closed immersion of schemes, then the underlying continuous map $ f_{\\\\text{base}} $ is a closed embedding of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion f]\\n  [AlgebraicGeometry.IsClosedImmersion g], AlgebraicGeometry.IsClosedImmersion (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two closed immersions of schemes is again a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed substack of an algebraic stack locally of finite type over a field is locally of finite type; products of closed immersions of stacks are closed immersions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of being a morphism locally of finite type is multiplicative: if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are morphisms of schemes that are locally of finite type, then their composition $ g \\\\\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any immersion of schemes is a morphism that is locally of finite type. Specifically, for a morphism $ f: X \\to Y $ between schemes that is an immersion, every point in $ Y $ has an open neighborhood su\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"For schemes $X$, $Y$, and $Z$, if $f : X \\\\to Y$ and $g : Y \\\\to Z$ are finite morphisms, then their composition $g \\\\circ f : X \\\\to Z$ is also a finite morphism. This asserts that the property of being \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ f \\\\circ g $ is locally of finite type, then the morphism $ f $ is locally of finite type. A morphism is locally of f\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFiniteType f]\\n  [hg : AlgebraicGeometry.LocallyOfFiniteType g],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite type is again locally of finite type.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"comp\"",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion f] [AlgebraicGeometry.IsClosedImmersion g] : AlgebraicGeometry.IsClosedImmersion (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Composition of closed immersions is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion g] [AlgebraicGeometry.IsClosedImmersion (CategoryTheory.CategoryStruct.comp f g)] : AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If `f ≫ g` and `g` are closed immersions, then `f` is a closed immersion.\\nAlso see `IsClosedImmersion.of_comp` for the general version\\nwhere `g` is only required to be separated.\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_of_comp_eq_id\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [Subsingleton ↥Y] (f : X ⟶ Y) (g : Y ⟶ X) (hg : CategoryTheory.CategoryStruct.comp g f = CategoryTheory.CategoryStruct.id Y) : AlgebraicGeometry.IsClosedImmersion g\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsClosedImmersion @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g] : AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsClosedImmersion g] : AlgebraicGeometry.IsClosedImmersion (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionIrreducibleComponentι\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.IrreducibleComponent\", \"type\": \" (X : AlgebraicGeometry.Scheme) (Z : Set ↥X) (hZ : Z ∈ irreducibleComponents ↥X) [AlgebraicGeometry.IsNoetherian X] : AlgebraicGeometry.IsClosedImmersion (X.irreducibleComponentι Z hZ)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|closedImmersion.*[Ss]tack|[Ss]tack.*closedImmersion",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersions of algebraic stacks are locally of finite type and stable under composition and base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [h : IsClosedImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [IsClosedImmersion f] [IsClosedImmersion g] : IsClosedImmersion (f ≫ g)\", \"doc\": \"The composition of two closed immersions of schemes is again a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsImmersion\", \"doc\": \"The property of being an immersion of schemes is stable under base change, meaning that if a morphism of schemes is an immersion, then any base change (pullback) of this morphism is also an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Any immersion of schemes is a morphism that is locally of finite type. Specifically, for a morphism $ f: X \\to Y $ between schemes that is an immersion, every point in $ Y $ has an open neighborhood su\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed substack of an algebraic stack locally of finite type over a field is locally of finite type",
+   "results": "AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFiniteType.casesOn, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not algebraic stacks; no one-line specialization proves the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions of algebraic stacks induce closed embeddings on point spaces and are stable under composition and base change",
+   "results": "AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.base_closed, AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.isClosedEmbedding, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not algebraic stacks; no one-line specialization proves the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-diagonal-closed-points",
+  "date": "2026-10-23",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; The reduced closed singleton and its square remain closed substacks; passing a closed point through their product immersion",
+   "via": [
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-closed-immersion-calculus",
+  "worker": "stage1",
+  "summary": "Proved base change directly from the scheme test, composition by existing scheme composition, topology by explicit field-point injectivity and an atlas image equality, and local finite type by affine quotient charts. No new nodes: every input is an existing statement or definition. No statement change.",
+  "blueprint": "Realizes the closed-substack prerequisite recorded in the inherited from.place for det-thm-sf-ctf-stability-direct-images proof (3), through the existing stable-moduli/alteration branch. The latest blueprint does not itself state this stack-calculus lemma. The inherited created.item chain currently has no imported ancestor (blueprint_refs ancestor prints None), so its existing null ancestor and via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Scheme closed-immersion composition is used after two scheme tests; it is a generic scheme tool, not a replacement of the constructibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-8d36468cd",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-8d36468cd (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full; there are no new nodes and the statement is unchanged. Sources checked: stacks-properties 04YL (l.1573), 0501 (l.1604), 0502 (l.1618) and 0H20 (l.1663, proof omitted; steps 3-4 supply it); stacks-morphisms 06FV (l.3301). One fault, C1/E1 in step 1: the statement says closed immersions are preserved by algebraic-stack base change, but step 1 only checks the scheme test and never shows that X x_Y Z is an algebraic stack. Stacks 0501 relies on 04T2/04TF for this. Repaired by citing the existing same-unit node lem-sfb-algebraic-stack-fibre-products (04T2; its closure does not contain the item, so no cycle); step 1 is now non-elementary and proof_deps is updated. The citer lem-sfb-stack-diagonal-closed-points step 2 needs exactly this. Step 2 (scheme composition after pasting) is correct. Step 3 (injectivity of |i|) is correct: Spec L x_X Z is closed in Spec L and has an L-point, so it is Spec L, and the discrete fibre makes the two objects isomorphic. Step 4: the image equality |p|^{-1}(|i|(D)) = |h|(|r|^{-1}(D)) holds in both directions, and the closed atlas criterion makes |i| closed, so |i| is a homeomorphism onto a closed subset. Step 5: under the existential chart convention, which the statement and its citers share, the chart V is closed in an atlas of locally finite type, and A/I is finitely generated. Accepted tool_use: lem-weil-pbc-closed-immersion-comp (generic scheme fact, mathlib leaf). Batch-5 flags: lem-sfb-stack-chartwise-smooth-etale-calculus and lem-sfb-stack-point-topology reach def-trf-algebraic-space only through the general definition of algebraic spaces and its foundations; this is not part of the trace-formula or Poincaré-duality statements or proofs, and the item's stmt_dep def-sfb-stable-pointed-moduli-groupoids already reaches it. Accepted. No SGA used. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-closed-immersion-calculus.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackClosedImmersionCalculus",
+  "declaration": "CategoryTheory.stack_closedImmersion_baseChange",
+  "declarations": [
+   "CategoryTheory.stack_closedImmersion_baseChange",
+   "CategoryTheory.stack_closedImmersion_comp",
+   "CategoryTheory.stack_closedImmersion_topology",
+   "CategoryTheory.stack_closedImmersion_locallyFiniteType"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackClosedImmersionCalculus.lean",
+  "statement": "theorem stack_closedImmersion_baseChange {S : Scheme.{u}} {Z : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} {X : BasedCategory.{v₃, w₃} (Over S)} (hZ : IsAlgebraicModuliStack Z) (hY : IsAlgebraicModuliStack Y) (hX : IsAlgebraicModuliStack X) (i : BasedFunctor Z Y) (a : BasedFunctor X Y) (hi : ModuliSchemeTest @IsClosedImmersion i) : IsAlgebraicModuliStack (moduliTwoFiberProduct a i) ∧ ModuliSchemeTest @IsClosedImmersion (moduliTwoFiberFst a i)",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four theorem statements give the base-change, composition, point-topology and field-base local-finite-type clauses. Closed immersion uses the existing ModuliSchemeTest specialized to IsClosedImmersion; local finite type is rendered directly by the smooth scheme atlas condition in the node. No new definitions or changes of statement.",
+  "fixed_by": "NT-stage2-cc-769c1df39"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-769c1df39",
+  "group": "Q67",
+  "result": "fix",
+  "note": "H3: stack_closedImmersion_baseChange stated only ModuliSchemeTest @IsClosedImmersion (moduliTwoFiberFst a i). The node (all stacks algebraic; stage-1 step 1 cites lem-sfb-algebraic-stack-fibre-products) also requires X ×_Y Z to be algebraic. FIX adds the conjunct IsAlgebraicModuliStack (moduliTwoFiberProduct a i) (owner def-sfb-algebraic-moduli-stack, already a stmt_dep) and updates the docstring. fixes/StackClosedImmersionCalculus.lean plus lean-record.json, statement verbatim; nt_compile --json clean in 10.3 s. Other clauses OK: comp via i.comp j; topology IsClosedEmbedding ∧ IsClosedMap of moduliPointMap in moduliPointTopologicalSpace (0H20); lft over Spec k via smooth-atlas existential convention; no extra DM/finite-presentation/qc hypotheses; independent universes; all proofs sorry; ModuliSchemeTest reused, no H4 copy. Advisory: ModuliSchemeTest/moduliPointMap owner def-sfb-dm-stack-morphism-properties is not a direct stmt_dep (reached via flat-lfp-open)."
+ }
+}

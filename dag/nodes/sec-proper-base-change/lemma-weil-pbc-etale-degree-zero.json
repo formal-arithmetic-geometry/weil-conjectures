@@ -132,7 +132,42 @@
    ]
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero",
+     "lines": [
+      210,
+      233
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.bijective_pullSection_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSections",
+     "lines": [
+      673,
+      684
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "tool_uses": [
@@ -175,60 +210,38 @@
   "note": "independent Codex review: Delivered files compile cleanly; target statement and existing interfaces are unchanged; proof, node metadata, report, imports, and named remaining sorry satisfy stage-3 requirements."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $(A,I)$ be henselian [def-weil-pbc-henselian-terminology] and let\n$Y\\to\\operatorname{Spec}A$ be proper\n[def-weil-pbc-scheme-conventions]. For every etale abelian sheaf $F$ on $Y$,\n\n$$\n  \\Gamma(Y,F)\\xrightarrow{\\sim}\\Gamma(Y_0,F|_{Y_0}).\n$$\n\nThe isomorphism is natural in $F$, in finite pullback, and in morphisms of\nhenselian pairs.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], let\n$p:Y\\to\\operatorname{Spec}A$ be proper [def-weil-pbc-scheme-conventions], and\nlet $i:Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)\\to Y$ be the\nclosed fibre. Let $\\Lambda$ be a commutative ring. For every etale sheaf $F$ of\n$\\Lambda$-modules on the small etale site [def-weil-pbc-etale-site] of $Y$\n[def-weil-pbc-etale-sheaves], in particular for every\netale abelian sheaf, the pullback of global sections\n[def-weil-pbc-finite-section-pullback] along $i$, i.e. restriction to the closed\nfibre,\n\n$$\n  i^\\sharp:\\Gamma(Y,F)\\xrightarrow{\\sim}\\Gamma(Y_0,i^{-1}F),\n$$\n\nis an isomorphism. It is natural in $F$.",
   "proof": [
    {
-    "text": "Put $S=\\operatorname{Spec}A$, $S_0=\\operatorname{Spec}(A/I)$, and\n$Y_0=Y\\times_SS_0$. Two preliminary remarks. *(i)* The underlying space of\n$Y$ is spectral [def-weil-pbc-scheme-conventions]: $Y\\to S$ is proper, hence\nseparated and of finite type, hence quasi-compact and quasi-separated, and\nthe underlying space of any scheme is sober with a basis of quasi-compact\n(affine) opens. *(ii)* $Y_0\\subseteq Y$ is closed: $S_0\\hookrightarrow S$ is\na closed immersion, and closed immersions are stable under base change\n([lem-weil-pbc-closed-immersion-products]). The proof has two stages.",
-    "uses": [
-     "def-weil-pbc-scheme-conventions",
-     "lem-weil-pbc-closed-immersion-products"
-    ],
-    "elementary": false
-   },
-   {
-    "text": "*Stage 1: the Zariski comparison, on $Y$ and on all its finite covers* (this\nis Stacks Project, Tag [0A0B](https://stacks.math.columbia.edu/tag/0A0B),\nLemma 59.91.1). First apply [lemma-weil-pbc-stein-connectedness] to the\nhenselian pair [def-weil-pbc-henselian-terminology] and the proper morphism\n$Y\\to S$; both hypotheses are exactly the hypotheses of that theorem. Its\nconclusion gives: every irreducible closed subset $C\\subseteq Y$ meets $Y_0$\nin a nonempty connected subset. Together with (i) and (ii) this is precisely\nthe hypothesis of [lemma-weil-pbc-spectral-restriction] for the pair\n$(Y,Y_0)$, so that lemma applies and yields, for every locally constant\n[def-weil-pbc-etale-sheaves] sheaf $G$ on the Zariski space $Y$,\n\n$$\n \\Gamma(Y,G)\\xrightarrow{\\sim}\\Gamma(Y_0,G|_{Y_0}).\n$$",
-    "uses": [
-     "lemma-weil-pbc-stein-connectedness",
-     "def-weil-pbc-henselian-terminology",
-     "lemma-weil-pbc-spectral-restriction",
-     "def-weil-pbc-etale-sheaves"
-    ],
-    "elementary": false
-   },
-   {
-    "text": "For a general abelian sheaf $G$ this identification is *not* available: the\nstatement of that lemma is false without local constancy, as its own\nstatement records, and the sheaf to which Stage 1 is applied below is a\nconstructible sheaf of etale cohomology, for which local constancy is not\nknown. The passage from the locally constant case to the general case is\nexactly what the status note to [lemma-weil-pbc-stein-connectedness] records as\nopen. The same argument applies verbatim to every finite morphism $h:Y'\\to\nY$: the composite $Y'\\to S$ is proper as the composite of the proper morphism\n$h$ (finite morphisms are proper, [lem-weil-pbc-finite-proper]) and the\nproper morphism $Y\\to S$, so $Y'$ is spectral, its closed member\n$Y'_0=Y'\\times_ST_0\\subset Y'$ is closed, and the connectedness conclusion\nfor $Y'$ follows from the same application of\n[lemma-weil-pbc-stein-connectedness]. Hence for every $h:Y'\\to Y$ finite and\nevery abelian sheaf $G'$ on the Zariski space $Y'$,\n\n$$\n \\Gamma(Y',G')\\xrightarrow{\\sim}\\Gamma(Y'_0,G'|_{Y'_0}).\n$$",
-    "uses": [
-     "lemma-weil-pbc-stein-connectedness",
-     "lem-weil-pbc-finite-proper"
-    ],
-    "elementary": false
-   },
-   {
-    "text": "These comparisons are compatible with $h$. For $a\\in\\Gamma(Y,G)$, its finite\npullback $h^\\sharp a$ of [def-weil-pbc-finite-section-pullback]\nrestricts over $Y'_0$ to the finite pullback of $a|_{Y_0}$ by the\nclosed-fibre equation of [lem-weil-pbc-finite-pullback-identities];\nconsequently the comparison isomorphisms for $Y$ and for $Y'$ form a\ncommutative square with the two restriction maps. This is the compatibility\nwith finite pullback recorded in the statement.",
+    "text": "Naturality in $F$ holds because $i^\\sharp$ is the unit $F\\to i_*i^{-1}F$\nevaluated on $Y$ [def-weil-pbc-finite-section-pullback]. Whether $i^\\sharp$ is\nbijective only depends on the underlying abelian sheaves, so we may assume that\n$F$ is an abelian sheaf. Put $S=\\operatorname{Spec}A$. Two facts are used\nthroughout. *(a)* For every finite $h:Y'\\to Y$ the composite $Y'\\to S$ is proper\n(finite morphisms are proper, [lem-weil-pbc-finite-proper]), so by\n[lemma-weil-pbc-stein-connectedness] the space $Y'$ is spectral, its closed fibre\n$Y'_0=Y'\\times_SS_0$ is closed, and every irreducible closed subset of $Y'$ meets\n$Y'_0$ in a nonempty connected subset. *(b)* In particular every nonempty closed\nsubset of $Y'$ meets $Y'_0$, since the image in $S$ of a nonempty closed subset\nis closed, hence contains a maximal ideal, which contains $I$ because $I$ lies in\nthe Jacobson radical.",
     "uses": [
      "def-weil-pbc-finite-section-pullback",
-     "lem-weil-pbc-finite-pullback-identities"
+     "lem-weil-pbc-finite-proper",
+     "lemma-weil-pbc-stein-connectedness"
     ],
     "elementary": false
    },
    {
-    "text": "*Stage 2: from Zariski sheaves to etale sheaves* (this is the upgrade of\nStacks Project, Tag [09ZF](https://stacks.math.columbia.edu/tag/09ZF), Lemma\n59.82.2, whose finite-refinement input is Lemma 37.45.7, Tag\n[09Z0](https://stacks.math.columbia.edu/tag/09Z0) (Section 37.45,\nApplications of Zariski's Main Theorem, II), and whose final descent step is\nRemark 59.55.6, Tag [09Z3](https://stacks.math.columbia.edu/tag/09Z3)\n(Section 59.55, Vanishing of finite higher direct images, stated there for\nsheaves of sets, the abelian form being Lemma 59.55.5, Tag\n[09Z2](https://stacks.math.columbia.edu/tag/09Z2))). Let $F$ be an etale\nabelian sheaf on $Y$. Every open immersion is etale, so the etale sheaf $F$\nrestricts to a Zariski sheaf on $Y$ with the same global sections, and\nlikewise its inverse image to $Y_0$. The etale comparison is obtained from\nthe Zariski comparison by finite-refinement descent, in which the finite\nrefinement of [lemma-weil-pbc-finite-refinement-etale-cover] is the only\nadditional input. Concretely: a section of $F|_{Y_0}$ is represented by an\netale neighbourhood $U\\to Y$ of $Y_0$; gluing $U$ with the open complement\n$Y\\setminus Y_0$ turns it into a surjective etale morphism $U_1\\to Y$, to\nwhich [lemma-weil-pbc-finite-refinement-etale-cover] applies, giving a finite\nsurjective [def-weil-pbc-scheme-conventions] $r:Y'\\to Y$ and a finite Zariski\nopen covering $Y'=\\bigcup_aW_a$ with $Y$-maps $\\phi_a:W_a\\to U_1$. The\nsection pulls back along the $\\phi_a$ to sections of $r^{-1}F$ over the open\nsubschemes $W_a$, and each of these lies on the proper $Y$-scheme\n$\\overline{W_a}$, the closure of $W_a$ in $Y'$, where the Zariski comparison\nof Stage 1 (applied with the direct image of the restriction of $r^{-1}F$ to\n$W_a$) transports it to the closed fibre of $\\overline{W_a}$; these pieces\nrestrict to a Zariski open cover of $Y'_0$ and glue, because they all come\nfrom one section of $F|_{Y_0}$ and $r_0:Y'_0\\to Y_0$ is surjective. The\nresulting section over $Y'_0$ is then matched back, along the finite\npullbacks of [lem-weil-pbc-finite-pullback-identities], with a section of $F$\nover $Y$, and the uniqueness of the matchings gives injectivity of the same\ncomparison. Naturality in $F$ is clear from the construction (each step is\nfunctorial in $F$), compatibility with finite pullback follows from the\nsquare of Stage 1 and the functoriality of the refinements, and compatibility\nwith morphisms of henselian pairs results from transporting the whole\nsituation along such a morphism.",
+    "text": "*Injectivity.* Let $s\\in\\Gamma(Y',F')$, for $Y'$ finite over $Y$ and $F'$ an\nabelian sheaf on $Y'$, with $i'^\\sharp s=0$ on $Y'_0$. By the definition of\ninverse image and sheafification, every point of $Y'_0$ has an etale\nneighbourhood in $Y'$ on which $s$ restricts to zero; the images of these etale\nneighbourhoods form an open subset $V\\supseteq Y'_0$ of $Y'$ on which the germs\nof $s$ vanish. The complement of $V$ is closed and does not meet $Y'_0$, hence is\nempty by (b). So $s=0$ by the sheaf property. This applies in particular to $Y$\nitself and to the finite $Y$-schemes used below.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Surjectivity.* Let $t\\in\\Gamma(Y_0,i^{-1}F)$. Every point of $Y_0$ has an etale\n$U_k\\to Y$ whose image contains it, with a section $g_k\\in F(U_k)$ whose\nrestriction to $U_k\\times_YY_0$ is the restriction of $t$; as $Y_0$ is\nquasi-compact, finitely many $U_k$ suffice. The morphism\n$\\coprod_kU_k\\amalg(Y\\setminus Y_0)\\to Y$ is etale and surjective, and $Y$ is\nquasi-compact and quasi-separated, so\n[lemma-weil-pbc-finite-refinement-etale-cover] gives a finite surjective\n$r:Y'\\to Y$ and a finite open covering $Y'=\\bigcup_aW_a$ with $Y$-maps from\n$W_a$ to the members of this cover. The opens $W_a$ mapping to some $U_k$ carry\nthe pulled-back sections $r^{-1}g_k$, and their restrictions to $W_a\\cap Y'_0$\nare the pullback $r_0^\\sharp t$ of $t$ along $r_0:Y'_0\\to Y_0$, by the\ncomposition law of pullbacks [lemma-weil-pbc-finite-pullback-composition]; the\nopens mapping to $Y\\setminus Y_0$ do not meet $Y'_0$. Two of these local sections\ntherefore agree on an open subset of the overlap containing its trace on\n$Y'_0$. By (a), the shrinking argument of the proof of\n[lemma-weil-pbc-spectral-restriction] applies to the spectral space $Y'$ and the\nclosed subset $Y'_0$: the opens $W_a$ can be shrunk to opens which still cover\n$Y'$, still contain $W_a\\cap Y'_0$, and on whose overlaps the local sections\nagree. The shrunk sections glue to $\\sigma'\\in\\Gamma(Y',r^{-1}F)$ with\n$\\sigma'|_{Y'_0}=r_0^\\sharp t$.\n\nThe two pullbacks of $\\sigma'$ to $Y''=Y'\\times_YY'$ have the same restriction\nto the closed fibre $Y''_0$, namely the pullback of $t$; as $Y''\\to Y$ is finite,\ninjectivity shows that they are equal. Since $r$ is finite and surjective,\n$\\sigma'$ descends: there is $s\\in\\Gamma(Y,F)$ with $r^\\sharp s=\\sigma'$ (descent\nof sections along a finite surjective morphism, Stacks Project, Tag 09Z3).\nFinally the pullback of $i^\\sharp s-t$ along $r_0$ vanishes. Since $r_0$ is\nsurjective and the stalk of $r_0^{-1}G$ at a geometric point of $Y'_0$ is the\nstalk of $G$ at its image in $Y_0$, every geometric stalk of $i^\\sharp s-t$\nvanishes, so $i^\\sharp s=t$.",
     "uses": [
      "lemma-weil-pbc-finite-refinement-etale-cover",
-     "def-weil-pbc-scheme-conventions",
-     "lem-weil-pbc-finite-pullback-identities"
-    ],
-    "elementary": false
-   },
-   {
-    "text": "The canonical map from the etale to Zariski restriction is injective on\nstalks because a geometric point has a strictly local etale neighbourhood.\nFor surjectivity, lift a fibre section etale-locally; quasi-compactness of\n$X_0$ gives finitely many local lifts, and Lemma\n[lemma-weil-pbc-finite-refinement-etale-cover] gives a finite surjective\nrefinement on which all lifts exist.\nThe two lifts agree on the finite overlap after restriction to $X_0$ by the\nZariski result, and the equalizer sheaf descends the lift to $X$. Uniqueness\nis stalkwise injectivity. The finite-pullback compatibility required in\nStacks Tag `09ZF` is recorded as four explicit equalities:\nidentity pullback preserves the lift, composition of finite pullbacks preserves\nthe lift, restriction to $X_0$ recovers the given section, and the descended\nsection pulls back to each local lift; these are the four preceding lemmas.\nThe finite refinement lemma proves existence and finite-presentation stage,\nand its stalkwise equalizer argument proves equality of the local lifts on\nthe self-intersection. Thus the four finite-pullback compatibilities\ncomplete the descent.",
-    "uses": [
-     "lemma-weil-pbc-finite-refinement-etale-cover"
+     "lemma-weil-pbc-finite-pullback-composition",
+     "lemma-weil-pbc-spectral-restriction"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

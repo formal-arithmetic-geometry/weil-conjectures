@@ -1,0 +1,74 @@
+{
+ "id": "lem-pur-fully-faithful-composite-shift",
+ "kind": "statement",
+ "title": "Lift coherent shifts through a fully faithful composite",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal A$ be triangulated categories with their integer shifts [def-weil-triangulated-category]. Let $F:\\mathcal C\\to\\mathcal D$, $I:\\mathcal D\\to\\mathcal A$, $H:\\mathcal C\\to\\mathcal A$ be functors. Assume that $I$ is fully faithful, meaning that each map on morphism sets is bijective. Give $I$ and $H$ specified coherent integer-shift isomorphisms $a_{n,Z}:I(Z[n])\\xrightarrow{\\sim}I(Z)[n]$ and $b_{n,X}:H(X[n])\\xrightarrow{\\sim}H(X)[n]$, natural in the objects and satisfying the unit and addition equations for the shifts. Let $e:I\\circ F\\xrightarrow{\\sim}H$ be a natural isomorphism. Then $F$ admits coherent natural isomorphisms $c_{n,X}:F(X[n])\\xrightarrow{\\sim}F(X)[n]$, for every integer $n$, satisfying the unit and addition equations, whose components obey\n$$\n I(c_{n,X})=e_{X[n]};b_{n,X};(e_X^{-1})[n];a_{n,F(X)}^{-1}.\n$$\nHere $u;v$ means first $u$, then $v$, and $f[n]$ is the image of a morphism under the ambient shift. The specified structures on $I$ and $H$ are retained.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Clauses (2) and (4), finite coefficient scalar transitions; retained integral normalization in lean/Sheaf/Paper/SfAlgebraicallyClosedCoefficients.lean:108-147. Auxiliary categorical source: Mathlib/CategoryTheory/Shift/CommShift.lean:520-588, Functor.CommShift.ofComp and OfComp.map_iso_hom_app."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lift a shift commutation structure through a fully faithful functor with a prescribed composite comparison",
+   "results": "Hits: CategoryTheory.Functor.CommShift.ofComp.congr_simp, CategoryTheory.Functor.map_shiftFunctorComm_hom_app, CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful, CategoryTheory.Functor.CommShift.ofComp, CategoryTheory.Functor.map_shiftFunctorComm, CategoryTheory.Quotient.LiftCommShift.iso, CategoryTheory.Functor.CommShift₂.commShift_map, CategoryTheory.Functor.shiftFunctorIso_ofHasShiftOfFullyFaithful",
+   "date": "2026-10-27",
+   "verdict": "match: CategoryTheory.Functor.CommShift.ofComp supplies the coherent structure; OfComp.map_iso_hom_app supplies the component equation, inspected at lines 520-588 of the pinned source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor inherits a coherent integer shift comparison from its composite with a fully faithful shift compatible functor and a natural isomorphism",
+   "results": "Hits: CategoryTheory.Functor.CommShift.ofComp_compatibility, CategoryTheory.Functor.CommShift.ofComp, CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful, CategoryTheory.Functor.shiftFunctorIso_ofHasShiftOfFullyFaithful, CategoryTheory.shiftFunctor_of_induced, CategoryTheory.Functor.CommShift.OfComp.iso, CategoryTheory.Functor.FullyFaithful.hasShift, CategoryTheory.Functor.CommShift.OfComp.map_iso_hom_app",
+   "date": "2026-10-27",
+   "verdict": "match: CategoryTheory.Functor.CommShift.ofComp supplies the coherent structure; OfComp.map_iso_hom_app supplies the component equation, inspected at lines 520-588 of the pinned source"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def ofComp|lemma map_iso_hom_app|lemma ofComp_compatibility",
+   "results": "Hits: Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "date": "2026-10-27",
+   "verdict": "match: CategoryTheory.Functor.CommShift.ofComp supplies the coherent structure; OfComp.map_iso_hom_app supplies the component equation, inspected at lines 520-588 of the pinned source",
+   "subdirectory": "CategoryTheory/Shift"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "Hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-27",
+   "verdict": "related results: qualified query finds the CommShift family, including ofIso and comp; the exact composite-lifting match was found by LeanFinder/LeanSearch and verified in the pinned source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.CommShift.ofComp",
+  "file": "Mathlib/CategoryTheory/Shift/CommShift.lean",
+  "how": "specializes in one line per clause: take A = ℤ and the given HasShift structures. CategoryTheory.Functor.CommShift.ofComp at line 563 constructs the coherent comparison under [Full I] [Faithful I] [I.CommShift ℤ] [H.CommShift ℤ] (hypotheses lines 520-525); its commShiftIso is CategoryTheory.Functor.CommShift.OfComp.iso, line 532. CategoryTheory.Functor.CommShift.OfComp.map_iso_hom_app, line 539, is exactly the displayed component equation. Coherence is the two fields at lines 565-578. The triangulated-category hypotheses only supply the shifts; no preservation-of-triangles hypothesis is used.",
+  "line": 563
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-integral-transition-comm-shift-exists-unique",
+  "date": "2026-10-27",
+  "group": "NB"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "via": [
+    "lem-route-integral-transition-comm-shift-exists-unique",
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "place": "Finite-stage scalar-transition shift in the retained algebraically closed coefficient construction: lift the ordinary shift through the full integral inclusion (SfAlgebraicallyClosedCoefficients.lean, integralTransitionCommShift_existsUnique docstring). The computed blueprint ancestor is null because the parent stage node was created for a Lean module, not a DAG node."
+  },
+  "same_as": [],
+  "is": null
+ }
+}

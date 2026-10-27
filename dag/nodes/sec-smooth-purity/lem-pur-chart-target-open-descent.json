@@ -1,0 +1,400 @@
+{
+ "id": "lem-pur-chart-target-open-descent",
+ "kind": "statement",
+ "title": "Restriction and equality detection for diagonal and coordinate maps",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, $n\\geq1$ and $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, at $E=\\mathbf Q_\\ell$ in [def-pur-conventions]. Let $X,Y$ be finite-type $k$-schemes, $f:X\\to Y$ smooth, separated, of finite type and pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Let $j:U\\hookrightarrow X$ be open [def-weil-open-immersion], and $e:U\\to A=\\mathbf A^d_Y$ etale over $Y$ [def-weil-etale-morphism, def-sbc-affine-space]. Put $p:A\\to Y$ and $h=fj=pe$. Use the constructible exceptional inverse images [def-weil-exceptional-inverse-image], derived pullbacks [def-weil-derived-pullback-tensor-hom], and $\\omega_g=Rg^!\\Lambda_{\\operatorname{target}(g)}$. For any smooth separated finite-type $g$ with closed section $s$, put $C(g,s)=Ls^*\\omega_g$ [def-pur-section-invariant]. Let $\\vartheta_f:\\omega_f\\xrightarrow{\\sim}\\Lambda_X(d)[2d]$ be the specified diagonal orientation [thm-pur-diagonal-dualizing-object], and set $D=Lj^*\\omega_f$, $L=\\Lambda_U(d)[2d]$ [def-coefficient-twists-detailed]. Define $T=Lj^*\\vartheta_f:D\\to L$. Let $Q:D\\to L$ be the composition of the canonical open-restriction $D\\cong\\omega_h$, exceptional composition and $Re^!=Le^*$ giving $\\omega_h\\cong Le^*\\omega_p$, and $Le^*(\\Gamma_{p,\\Lambda_Y}^{-1})$. Here, also when $Y$ is not separated, define $\\Gamma_{p,\\Lambda_Y}:\\Lambda_A(d)[2d]\\xrightarrow{\\sim}\\omega_p$ to be the exceptional transpose of the actual vector-bundle integration trace of [def-amb-vector-integration], transported with its adjunction by [lem-pur-vector-integration-site-comparison]. Its invertibility is [cor-pur-vector-bundle-purity]. On separated target opens this is the ordered coordinate-adjunction comparison of [lem-pur-projection-purity-agreement], by [lem-pur-affine-ordered-integration-transposes]. Thus this formula specifies the extension of that comparison to the present, possibly nonseparated, base; it does not posit a new choice of orientation.\n\nFor every affine target open $v:V\\hookrightarrow Y$, put $U_V=U\\cap f^{-1}V$ and restrict $h,p,e$ to $V$. Under the canonical source, exceptional-composition and Tate restriction identifications, the restrictions of $T$ and $Q$ to $U_V$ are respectively the diagonal composite $\\beta_{h_V}\\delta_{h_V}\\alpha_{h_V}^{-1}$ and $Le_V^*(\\Gamma_{p_V,\\Lambda_V}^{-1})c_{e_V}$. The factors here are precisely diagonal base change [lem-pur-diagonal-base-change], normalized DNC [thm-pur-dnc-invariance], zero-section vector-bundle purity [cor-pur-vector-bundle-purity], and canonical etale exceptional composition [thm-pur-cohomological-smoothness]. The coordinate comparison is the restriction of the actual integration transpose: its traces satisfy $t_{p_V}C_{d,v}=v^*t_p$ [lem-amb-affine-space-top-trace], transported with their adjunctions by [lem-pur-vector-integration-site-comparison].\n\nThe following implication holds for these two morphisms:\n$$\\bigl(\\forall V\\text{ in an affine open cover of }Y,\\ T|_{U_V}=Q|_{U_V}\\bigr)\\ \\Longrightarrow\\ T=Q.$$\nMore precisely, composition with $T^{-1}$ followed by shift $[-2d]$ identifies this equality test with equality of ordinary endomorphisms of the sheaf $\\Lambda_U(d)$, via [lem-weil-pbc-derived-single-fully-faithful]; their restrictions are restrictions of module sheaves on the localized pro-etale sites [lem-weil-proetale-weakly-etale-localization], and are uniquely detected on this cover [lem-pur-sheaf-hom-cover-gluing]. The assertion makes no absolute separatedness assumption on $Y$ and includes $U=\\varnothing$ and $d=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "End of Step 4: open restriction of the three factors and of the coordinate adjunction; inherited proof Step 9"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-open-immersion",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-section-invariant",
+  "thm-pur-diagonal-dualizing-object",
+  "def-coefficient-twists-detailed",
+  "lem-pur-projection-purity-agreement",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "thm-pur-cohomological-smoothness",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-amb-vector-integration",
+  "lem-pur-affine-ordered-integration-transposes",
+  "def-pur-chart-diagonal-assembly-data",
+  "def-amb-affine-trace-tower",
+  "def-amb-affine-trace-construction",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-data",
+  "def-amb-vector-integration-charts",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-sp-etale-compact-support-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-chart-cartesian-domain] to the given chart. In particular all schemes are Noetherian, $e,h$ are separated finite type, and for affine $V$ the schemes $U_V$, $A_V$ and their relative self-products are separated finite type over $k$. Thus the diagonal section over $U_V$ lies in the domain of normalized DNC. Every affine source open $W\\subset U_V$ is allowed in [lem-pur-diagonal-dnc-chart-normalization]. Neither applying DNC directly over a nonseparated $U$ nor assuming that intersections of affine target opens are affine is necessary.",
+   "uses": [
+    "lem-pur-chart-cartesian-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 3 and end of Step 4: domains for target restriction"
+   }
+  },
+  {
+   "text": "First establish the equality test independently of either restriction formula. For any $a:D\\to L$ put $b_a=a\\circ T^{-1}:L\\to L$. Since $T$ is an isomorphism, $a=a'$ if and only if $b_a=b_{a'}$. Apply the inverse shift $[-2d]$, an equivalence by [def-weil-triangulated-category], to get endomorphisms of $F[0]$, where $F=\\Lambda_U(d)$. By [lem-weil-pbc-derived-single-fully-faithful] they are uniquely $S(\\phi_a)$ and $S(\\phi_{a'})$ for ordinary module-sheaf endomorphisms of $F$. Under [lem-weil-proetale-weakly-etale-localization], restriction to any open is restriction on the localized ringed site. It is exact by [lem-pur-site-restriction-module-adjunction-exact]; its derived functor commutes with single complexes and shifts by [lem-sf-exact-functor-derived-triangulated]. Consequently the restricted sheaf map is precisely $\\phi_a|_W$: both constructions apply the same exact restriction to its single-complex representative. Pullback preserves composition and inverses, so this assertion applies to $b_a$ as well.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Equality detection: inverse orientation, inverse shift and degree-zero embedding"
+   }
+  },
+  {
+   "text": "If $a|_{W_i}=a'|_{W_i}$ on an open cover of $U$, Step 2 gives $\\phi_a|_{W_i}=\\phi_{a'}|_{W_i}$. The uniqueness clause of [lem-pur-sheaf-hom-cover-gluing], on the localized pro-etale sites identified in Step 2, gives $\\phi_a=\\phi_{a'}$. The degree-zero embedding and inverse shift then give $a=a'$. This proves the required implication for the cover $W_i=U_{V_i}$, which covers $U$ since $\\{V_i\\}$ covers $Y$. The same argument works on each $U_V$ and on every open subspace with the restricted orientation. For the empty scheme all sheaf maps here are the unique maps of zero sheaves, and the uniqueness assertion includes the empty cover.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Equality detection: unique sheaf-map gluing; Stacks Tags 03EM and 04TQ"
+   }
+  },
+  {
+   "text": "Fix affine $V$. Write $R_V=\\beta_{h_V}\\delta_{h_V}\\alpha_{h_V}^{-1}$ on $U_V$. Cover $U_V$ by affine source opens $W$. By [lem-pur-diagonal-dnc-chart-normalization], $T|_W$ is exactly the analogous three-factor composite for $h_V|_W$, using the specified open comparison. The restriction of $R_V$ gives that same composite: the diagonal source factor is made from smooth exchange and pullback along the diagonal, and these expressions commute with source-open restriction and section pullback by [lem-pur-dualizing-sigma-cocycle-locality]. The comparison of the section pairs is Cartesian near the diagonal: first base-change $U_V\\times_VU_V\\to U_V$ along $W\\hookrightarrow U_V$, then restrict its total space from $W\\times_VU_V$ to the open $W\\times_VW$ containing the section. Normalized DNC commutes with the first operation by its base-change clause and with the second by its etale-localization clause [thm-pur-dnc-invariance]. The normal bundle restricts to the normal bundle of this diagonal; on the open the ideals and each quotient $I^r/I^{r+1}$ have identical restricted sections. The zero-section purity factor restricts by the base-change clause of [cor-pur-vector-bundle-purity], with its actual finite-site realization [lem-pur-vector-integration-site-comparison]. Thus $R_V|_W=T|_W$ for every $W$. Apply Step 3 on $U_V$, using its restricted $T$, to obtain $T|_{U_V}=R_V$.",
+   "uses": [
+    "lem-pur-diagonal-dnc-chart-normalization",
+    "lem-pur-dualizing-sigma-cocycle-locality",
+    "thm-pur-dnc-invariance",
+    "def-pur-normal-bundle",
+    "cor-pur-vector-bundle-purity",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 3–4: restriction of diagonal source, normalized DNC and zero-section factors"
+   }
+  },
+  {
+   "text": "For $p:A\\to Y$, set $P_p=\\Gamma_{p,\\Lambda_Y}$ using the explicit integration-transpose extension in the statement. It exists also for nonseparated $Y$ by [lem-pur-vector-integration-site-comparison] and is invertible by [cor-pur-vector-bundle-purity]. The ordinary-etale trace equality for the target open $v$ is exactly $t_{p_V}C_{d,v}=v^*t_p$ from [lem-amb-affine-space-top-trace]; all its Noetherian and invertible-exponent hypotheses hold by Step 1 and $\\ell\\ne\\operatorname{char}(k)$. The same site-comparison node identifies the actual traces and their exceptional transposes, not just their source and target objects. On $V$, [lem-pur-affine-ordered-integration-transposes] identifies $P_{p_V}$ with the ordered $\\Gamma_{p_V,\\Lambda_V}$ at the unit input. The base-change equation of [cor-pur-vector-bundle-purity], applied to this trivial bundle and $v$, says that the exceptional exchange composed with the restriction of $P_p$ is $P_{p_V}$ after Tate restriction. Inverting this equation gives that the restriction of $P_p^{-1}$ is $\\Gamma_{p_V,\\Lambda_V}^{-1}$ under exactly those identifications. This verifies restriction of the actual integration transpose without invoking diagonal purity agreement.",
+   "uses": [
+    "lem-pur-vector-integration-site-comparison",
+    "cor-pur-vector-bundle-purity",
+    "lem-amb-affine-space-top-trace",
+    "lem-pur-affine-ordered-integration-transposes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "End of Step 4: restriction of the actual ordered integration transpose"
+   }
+  },
+  {
+   "text": "The other factor of $Q$ is $c_e=\\rho_{e,\\omega_p}c_{p,e}$, preceded by the source-open comparison $D\\cong\\omega_h$. The counit-normalized etale isomorphism and its compatibility with composition, base change and open restriction are [lem-pur-finite-etale-dualizing-normalization]. The compatibility with the open base change $v$ and with the preceding source-open comparison is exactly the open-locality assertion of [lem-pur-dualizing-sigma-cocycle-locality], including $E_{e',h'}\\beta_{he,v}=Le'^*\\beta_{h,v}\\circ Lu_1^*E_{e,h}$. Apply this with $h=p$ and $e:U\\to A$, then with the source open $j$. Therefore $c_e$ restricts to $c_{e_V}$ under the canonical source identifications. Combining this with Step 5 and functoriality of pullback gives $Q|_{U_V}=Le_V^*(\\Gamma_{p_V,\\Lambda_V}^{-1})c_{e_V}$. Step 4 gives the stated formula for $T$. Finally apply Step 3 to $a=T,a'=Q$ on the target inverse-image cover. For $d=0$ the shift is zero, the ordered coordinate comparison has zero factors and is the identity, and the DNC and vector-bundle comparisons retain their identity normalizations; the same argument applies.",
+   "uses": [
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-dualizing-sigma-cocycle-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "End of Step 4 and inherited Step 9: restriction of exceptional composition and conclusion"
+   }
+  },
+  {
+   "text": "For chartTargetAffineMate_isIso, induct through the ordered affine adjunction using affineTraceAdjunctionTower_counit_isIso and affineTraceLineCounit_isIso. Apply the existing private affine_unit_adjunct_isIso from VectorIntegrationMate to the compact-support comparison inverse followed by this counit. Its source is the right adjoint applied to the unit, with the identity source isomorphism. The coefficient-descent inverse is an isomorphism, so its composite with that adjunct is invertible. This works on every Noetherian finite-type base without absolute separatedness.",
+   "uses": [
+    "def-amb-affine-trace-construction",
+    "lem-amb-affine-trace-line-counit-iso",
+    "lem-amb-vector-integration-mate",
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For chartTargetGeometry, give U its Noetherian structure and equip U to Y with smooth relative dimension 0+d=d. Apply affineTargetDiagonalDnc to this composite and its composite structure map to the field. Finite type on the affine target gives the appTop finite-type certificate. Forget the extra conclusion and retain the supplied AffineDiagonalGeometry dictionary.",
+   "uses": [
+    "lem-pur-affine-target-diagonal-dnc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For chartTargetRestrictedChart, use affineTraceMap_isPullback for the target-open immersion. Lift the open-restricted projection together with the original coordinate map through this pullback. The outer square is isPullback_morphismRestrict after rewriting the chart equation. Pullback cancellation (IsPullback.of_bot') makes the chart square Cartesian, and stability under base change gives Etale. The lift projection equation gives the required equality. Identity tower and empty opens are included by the same universal property.",
+   "uses": [
+    "def-amb-affine-linear-trace-action",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-chart-cartesian-domain",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "lem-pur-dualizing-sigma-cocycle-locality",
+  "thm-pur-dnc-invariance",
+  "def-pur-normal-bundle",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-affine-ordered-integration-transposes",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "def-amb-affine-trace-construction",
+  "lem-amb-affine-trace-line-counit-iso",
+  "lem-amb-vector-integration-mate",
+  "def-amb-affine-linear-trace-action",
+  "lem-pur-affine-target-diagonal-dnc",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "X3 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Partial Lean proof: integration-mate invertibility from the existing affine adjunction helper; affine-target geometry from affineTargetDiagonalDnc; restricted chart by the Cartesian universal property. The original six-step proof of chartTargetOpenDescent remains pending and unchanged in Steps 1–6; completed preliminary proofs are recorded in Steps 7–9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal dualizing orientations and coordinate adjunction orientations restrict to affine target opens and their equality is detected there by degree zero sheaf endomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) (V : X.Opens) (h : U ≤ V),\\n  AlgebraicGeometry.Scheme.Hom.app hU.fromSpec V =\\n    CategoryTheory.CategoryStruct.comp (X.presheaf.map (CategoryTheory.homOfLE h).op)\\n      (CategoryTheory.CategoryStruct.comp (Algebr\", \"doc\": \"For an affine open subset $U$ of a scheme $X$ and an open subset $V$ containing $U$, the component of the morphism $\\\\operatorname{Spec}(\\\\Gamma(U)) \\\\to X$ at $V$ equals the composition of three maps: (\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appLE_map'\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U : Y.Opens} {V V' : X.Opens}\\n  (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U) (i : V = V'),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.appLE f U V' ⋯)\\n      (X.presheaf.map (CategoryTheory.eqToHom i).op) =\\n    AlgebraicGeo\", \"doc\": \"For a morphism $ f $ of schemes, given open subsets $ V $ and $ V' $ of the domain scheme with an equality $ V = V' $, the induced map on the presheaf associated to $ f $ satisfies $ f_{U,V'}(e) \\\\circ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.app_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U V : Y.Opens} (e : U = V),\\n  AlgebraicGeometry.Scheme.Hom.app f U =\\n    CategoryTheory.CategoryStruct.comp (Y.presheaf.map (CategoryTheory.eqToHom ⋯).op)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app f V)\\n        (X.presh\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. For any open subset $U \\\\subseteq Y$, let $f^\\\\sharp_U: \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U))$ be the induced ring homomorphism on sections of the stru\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appLE_congr\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U U' : Y.Opens} {V V' : X.Opens}\\n  (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U) (e₁ : U = U') (e₂ : V = V')\\n  (P : {R S : CommRingCat} → (R ⟶ S) → Prop),\\n  P (AlgebraicGeometry.Scheme.Hom.appLE f U V e) ↔ P (AlgebraicGeometry.Scheme.Hom.appLE f \", \"doc\": \"For a morphism $f$ between schemes, if $U = U'$ and $V = V'$ are equal open subsets, then a property $P$ of the morphism $f$ applied to the inclusion $V \\\\subseteq f^{-1}(U)$ is equivalent to the same \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U V : Y.Opens} (e : U = V),\\n  AlgebraicGeometry.Scheme.Hom.app f U =\\n    CategoryTheory.CategoryStruct.comp (Y.presheaf.map (CategoryTheory.eqToHom ⋯).op)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app f V)\\n        (X.presh\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, if $ U $ and $ V $ are open subsets of $ Y $ with $ U = V $, then the component of the induced sheaf morphism at $ U $ equals the composition of the identity \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (f g : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) f =\\n        (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.\", \"doc\": \"Let $X$ be a scheme, $U$ an open subset of $X$, and $\\\\mathcal{U}$ an open cover of $X$. For any two sections $f, g$ of the structure sheaf over $U$, if the induced morphisms $\\\\mathcal{U}.f(i)$ agree o\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of derived maps to a shifted Tate sheaf can be tested on an open cover after trivializing the source by a fixed orientation and shifting to degree zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (f g : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) f =\\n        (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.\", \"doc\": \"Let $X$ be a scheme, $U$ an open subset of $X$, and $\\\\mathcal{U}$ an open cover of $X$. For any two sections $f, g$ of the structure sheaf over $U$, if the induced morphisms $\\\\mathcal{U}.f(i)$ agree o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.hom_ext_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {f g : M ⟶ N},\\n  f = g ↔ ∀ (U : X.Opens), AlgebraicGeometry.Scheme.Modules.Hom.app f U = AlgebraicGeometry.Scheme.Modules.Hom.app g U\", \"doc\": \"Let $X$ be a scheme, and let $\\\\mathcal{M}$ and $\\\\mathcal{N}$ be two sheaves of $\\\\mathcal{O}_X$-modules. Two morphisms of sheaves of modules $f, g: \\\\mathcal{M} \\\\to \\\\mathcal{N}$ are equal if and only if\"}\n  {\"name\": \"TopCat.Sheaf.hom_ext\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/Sites\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : TopCat} {ι : Type u_1} {B : ι → TopologicalSpace.Opens ↑X}\\n  (F : TopCat.Presheaf C X) (F' : TopCat.Sheaf C X),\\n  TopologicalSpace.Opens.IsBasis (Set.range B) →\\n    ∀ {α β : F ⟶ F'.val}, (∀ (i : ι), α.app (Opposite.op (B i)) = β.app (Oppo\", \"doc\": \"For a topological space $X$ with a basis $\\\\mathcal{B}$, if two morphisms $\\\\alpha$ and $\\\\beta$ between sheaves $F$ and $F'$ satisfy $\\\\alpha_U = \\\\beta_U$ for all $U \\\\in \\\\mathcal{B}$, then $\\\\alpha = \\\\bet\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] {S : J.MayerVietorisSquare}\\n  {P : CategoryTheory.Functor Cᵒᵖ (Type v')},\\n  S.SheafCondition P →\\n    ∀ {x y : P.obj (Opposite.op S.X₄)},\\n      P\", \"doc\": \"For a presheaf $ P $ satisfying the Mayer-Vietoris sheaf condition with respect to a square $ S $, if two sections $ x, y $ over $ X_4 $ (in the opposite category) have equal images under the morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} (f g : M ⟶ N),\\n  (∀ (U : X.Opens), AlgebraicGeometry.Scheme.Modules.Hom.app f U = AlgebraicGeometry.Scheme.Modules.Hom.app g U) → f = g\", \"doc\": \"Two sheaf homomorphisms between modules over a scheme's structure sheaf are equal if their components agree on all open subsets of the scheme, i.e., for all open sets $U$, the induced morphisms on sec\"}\n  {\"name\": \"TopCat.Sheaf.existsUnique_gluing'\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {FC : C → C → Type u_2} {CC : C → Type u_3}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.HasLimitsOfSize.{x, x, v_1, u_1} C] [CategoryTheory.HasForget.fo\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ on a topological space $X$, given an open set $V$ covered by the union of open sets $\\\\{U_i\\\\}_{i \\\\in \\\\iota}$ and compatible sections $s_i \\\\in \\\\mathcal{F}(U_i)$ (i.e., sections\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.CoversTop.sections_ext\", \"module\": \"Mathlib/CategoryTheory/Sites/CoversTop\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {I : Type u_1}\\n  {Y : I → C},\\n  J.CoversTop Y →\\n    ∀ (F : CategoryTheory.Sheaf J (Type u_2)) {x y : ↑F.val.sections},\\n      (∀ (i : I), ↑x (Opposite.op (Y i)) = ↑y (Opposite.op (Y i))) → x = y\", \"doc\": \"For a sheaf $ F $ on a category $ \\\\mathcal{C} $ with a Grothendieck topology $ J $, if two sections $ x $ and $ y $ of $ F $ agree on each object of a covering family $ \\\\{Y_i\\\\} $, then $ x = y $. This\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory.singleFunctor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.DerivedCategory.singleFunctor'",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "FullyFaithful|fullyFaithful|sheaf",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"83\", \"text\": \"    ((HomotopyCategory.Plus.fullyFaithfulι C).map_bijective _ _)] at this\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"84\", \"text\": \"  rwa [← Function.Bijective.of_comp_iff' (t.plus.fullyFaithfulι.map_bijective _ _)]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"121\", \"text\": \"    (HomotopyCategory.subcategoryAcyclic C)).isLocalization_of_isLocalizedFullyFaithful\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"line\": \"29\", \"text\": \"category. However, the category `Sheaf X.Etale AddCommGrpCat.{u}`\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"line\": \"32\", \"text\": \"morphisms in `Sheaf X.Etale AddCommGrpCat.{u}` shall be\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"line\": \"34\", \"text\": \"Then, for `C := Sheaf X.etale AddCommGrpCat.{u}`, we will have\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"line\": \"72\", \"text\": \"      exact (Functor.FullyFaithful.ofFullyFaithful\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonal dualizing orientations and coordinate adjunction orientations restrict to affine target opens and their equality is detected there by degree zero sheaf endomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P : AffineTargetMorphismProperty) : AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y : Scheme.{u}} (f : X ⟶ Y) (𝒰 : Scheme.OpenCover.{v} Y) [∀ i, IsAffine (𝒰.X i)]\\n  (𝒰' : ∀ i, Scheme.OpenCover.{w} (pullback f (𝒰.f i))) [∀ i j, IsAffine ((𝒰' i).X j)]\\n  (h𝒰' : ∀ i j k, Q (pullback.mapDesc ((𝒰' i).f j) ((𝒰' i).f k) (𝒰.pullbackHom f i))) : P.diagona\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"{Q : AffineTargetMorphismProperty} [Q.IsLocal] {X Y : Scheme.{u}} (f : X ⟶ Y) (𝒰 : Scheme.OpenCover.{v} X)\\n  [∀ i, IsAffine (𝒰.X i)] [IsAffine Y] (h𝒰 : ∀ i j, Q (pullback.mapDesc (𝒰.f i) (𝒰.f j) f)) : Q.diagonal f\", \"doc\": \"Given a local property $ Q $ of morphisms with affine targets, if $ Y $ is an affine scheme, $ X $ admits an affine open cover $ \\\\mathcal{U} $, and for all indices $ i,j $ the pullbacks of $ \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y : Scheme.{u}} (f : X ⟶ Y) (𝒰 : Scheme.OpenCover Y) [∀ i, IsAffine (𝒰.X i)]\\n  (h𝒰 : ∀ i, Q.diagonal (𝒰.pullbackHom f i)) : P.diagonal f\", \"doc\": \"Let $ f : X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ by affine schemes. If for each $ i $, the pullback of $ f $ to $ \\\\mathcal{U}_i $ satisfies the diagonal p\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y : Scheme.{u}} {f : X ⟶ Y} [IsAffine Y] : Q.diagonal f ↔ P.diagonal f\", \"doc\": \"Given properties $P$ and $Q$ satisfying the affine-target relation, for any morphism $f: X \\to Y$ with affine target $Y$, the diagonal property of $Q$ holds for $f$ if and only if the diagonal property\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] : HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"{Q : AffineTargetMorphismProperty} [Q.IsLocal] : Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.affineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \": MorphismProperty Scheme.{u}\", \"doc\": \"A morphism property $ P $ holds locally on affine opens of both the source and target if, for every morphism $ f : X \\\\to Y $, every affine open subset $ U \\\\subseteq Y $, and every affine open subset $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal smooth purity orientation and integration adjunction comparisons restrict to open subschemes of the target; equality is detected by sheaf morphisms",
+   "results": "Search executed; 8 hits.  Returned: AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq, AlgebraicGeometry.Scheme.Hom.appLE_congr, AlgebraicGeometry.Scheme.Hom.appLE_map', AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Hom.map_appLE', AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the diagonal/DNC and actual integration restriction clauses together"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation|integration.*trace|trace.*integration",
+   "results": "Search executed; 0 hits.  Returned: ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the diagonal/DNC and actual integration restriction clauses together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of maps between shifted degree zero sheaves in a derived category can be tested on an open covering after identifying the source with a shifted sheaf",
+   "results": "Search executed; 8 hits.  Returned: AlgebraicGeometry.SheafedSpace.congr_hom_app, SheafOfModules.Hom.ext_iff, CategoryTheory.Precoverage.ZeroHypercover.glueMorphisms.congr_simp, CategoryTheory.Sheaf.Hom.ext_iff, AlgebraicGeometry.SheafedSpace.congr_app, PresheafOfModules.sheafifyMap.congr_simp, CategoryTheory.Functor.IsCoverDense.Types.sheafIso_hom_val, PresheafOfModules.toSheafify_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the diagonal/DNC and actual integration restriction clauses together"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"single\"",
+   "results": "Search executed; 12 hits.  Returned: DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.Q_obj_single_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the diagonal/DNC and actual integration restriction clauses together"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulSingleFunctor|fullyFaithful.*single|instance.*Faithful",
+   "results": "Search executed; 2 hits.  Returned: Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the diagonal/DNC and actual integration restriction clauses together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth exceptional inverse image and Tate orientation from deformation of the diagonal are compatible with restriction to target opens",
+   "results": "Search executed; 8 hits.  Returned: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the diagonal/DNC and actual integration restriction clauses together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-orientation-charts",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-orientation-charts",
+   "place": "End of Step 4: open restriction of the three factors and of the coordinate adjunction; inherited proof Step 9",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-chart-target-open-descent",
+  "worker": "stage1",
+  "summary": "Proved target-open restriction and equality detection using existing affine-source diagonal normalization, actual integration base change, exceptional coherence, degree-zero full faithfulness and unique sheaf-map gluing. Made the nonseparated-base integration-transpose extension explicit; no hypotheses or conclusion weakened, no new nodes.",
+  "blueprint": "det-sp-orientation-charts proof Steps 3–4: locality of the three diagonal factors and of the integration-normalized coordinate comparison; inherited equality-descent argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Existing generic compatibility or finite-site comparison used as a black box; no alternative route replaces the diagonal/DNC construction."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact localized-site restriction needed to identify restrictions of degree-zero sheaf maps."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic unique module-sheaf Hom gluing supplies equality detection; this is not general derived-morphism descent."
+   },
+   {
+    "node": "lem-pur-diagonal-dnc-chart-normalization",
+    "why": "Use only its first open-restriction formula on affine source opens, not its later coordinate-equality clause; a local normalization tool already present in the DAG."
+   },
+   {
+    "node": "lem-pur-dualizing-sigma-cocycle-locality",
+    "why": "Generic orientation-free coherence tool for exceptional base change, composition and etale source restriction, including pullback along sections."
+   },
+   {
+    "node": "thm-pur-dnc-invariance",
+    "why": "Existing generic compatibility or finite-site comparison used as a black box; no alternative route replaces the diagonal/DNC construction."
+   },
+   {
+    "node": "cor-pur-vector-bundle-purity",
+    "why": "Existing generic compatibility or finite-site comparison used as a black box; no alternative route replaces the diagonal/DNC construction."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Existing generic compatibility or finite-site comparison used as a black box; no alternative route replaces the diagonal/DNC construction."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Existing generic compatibility or finite-site comparison used as a black box; no alternative route replaces the diagonal/DNC construction."
+   },
+   {
+    "node": "lem-pur-affine-ordered-integration-transposes",
+    "why": "Identifies the actual integration transpose with the ordered coordinate comparison over separated target opens."
+   },
+   {
+    "node": "lem-pur-finite-etale-dualizing-normalization",
+    "why": "Generic counit-normalized etale exceptional comparison and open-locality tool; it chooses no smooth orientation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "lem-pur-dualizing-sigma-cocycle-locality",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-affine-ordered-integration-transposes",
+  "lem-pur-finite-etale-dualizing-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-428975f05",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-428975f05 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery creates no new nodes. Statement: compared with the Q127 snapshot, only the meaning of Gamma_{p,Lambda_Y} changed. lem-pur-projection-purity-agreement assumes Y separated, while the item and its parent allow nonseparated Y, for example the line with doubled origin. Gamma is now the exceptional transpose of the actual vector-integration trace (def-amb-vector-integration). It lives on the pro-etale site by lem-pur-vector-integration-site-comparison, which assumes no separatedness, and it is invertible by cor-pur-vector-bundle-purity, which defines gamma as the adjoint of that same trace. On separated V it equals the ordered comparison by lem-pur-affine-ordered-integration-transposes (P=Gamma). Hypotheses and conclusions are unchanged and nothing is weakened. The change is reported under Source error. Steps: (1) lem-pur-chart-cartesian-domain gives the separated finite-type domains over affine V. (2,3) Equality detection: compose with T^{-1}, shift by [-2d], use degree-zero full faithfulness, exact restriction to the localized site, and the uniqueness clause of lem-pur-sheaf-hom-cover-gluing. Covers U empty. (4) T|_W on affine W is the beta-delta-alpha^{-1} composite by the first clause of lem-pur-diagonal-dnc-chart-normalization. R_V restricts: alpha by the sigma-cocycle locality clause on pullback along sections, delta by the base-change and etale-localization clauses of DNC (all schemes separated finite type), beta by vector-bundle base change. Step 3 on U_V then gives T|_{U_V}=R_V. (5) Restricting P_p gives P_{p_V} by the base-change equation of cor-pur-vector-bundle-purity. Its exchange e at the unit is the same mate as beta_{p,v}. (6) The square formula E_{e',h'}beta_{he,v}=Le'^*beta_{h,v}Lu_1^*E_{e,h} restricts c_e. All arguments of the inherited old Step 9 are kept. There is no cycle, proof_deps equals the union of uses, and no SGA is cited. Cases d=0, U empty and nonseparated Y were checked. Batch 5: the four flagged citations are smooth-purity coherence and normalization nodes, not steps of the trace formula or Poincare duality. Their endpoints are generic (constant-ring-sheaf composition c_{kh}, injectivity of the uniformizer on completed coefficients, stalks of tensor products), so all four are accepted. All 11 declared tool uses are accepted. Advisory: Step 2 relies on the termwise representation in the stmt_dep def-weil-derived-pullback-tensor-hom without listing it in its uses. Maintainer note: the parent det-sp-orientation-charts writes theta^aff over nonseparated Y with the same typing problem; this item's integration-transpose definition is the reading the parent's Step 5 needs."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartTargetOpenDescent",
+  "declaration": "WeilConjectures.PurityFiniteSetting.chartTargetOpenDescent",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.chartTargetAffineMate_isIso",
+   "WeilConjectures.PurityFiniteSetting.chartTargetGamma",
+   "WeilConjectures.PurityFiniteSetting.chartTargetTate",
+   "WeilConjectures.PurityFiniteSetting.chartTargetT",
+   "WeilConjectures.PurityFiniteSetting.chartTargetQ",
+   "WeilConjectures.PurityFiniteSetting.chartTargetSource",
+   "WeilConjectures.PurityFiniteSetting.chartTargetBase",
+   "WeilConjectures.PurityFiniteSetting.chartTargetGeometry",
+   "WeilConjectures.PurityFiniteSetting.ChartTargetDiagonalRestriction",
+   "WeilConjectures.PurityFiniteSetting.chartTargetCoordinate",
+   "WeilConjectures.PurityFiniteSetting.chartTargetRestrictedChart",
+   "WeilConjectures.PurityFiniteSetting.ChartTargetCoordinateRestriction",
+   "WeilConjectures.PurityFiniteSetting.ChartTargetEqualityTest",
+   "WeilConjectures.PurityFiniteSetting.chartTargetSheaf",
+   "WeilConjectures.PurityFiniteSetting.ChartTargetSheafTest",
+   "WeilConjectures.PurityFiniteSetting.ChartTargetTraceRestriction",
+   "WeilConjectures.PurityFiniteSetting.chartTargetOpenDescent"
+  ],
+  "file": "lean/Sheaf/Paper/ChartTargetOpenDescent.lean",
+  "statement": "theorem chartTargetOpenDescent (P : PurityFiniteSetting.{u}) (_hE : P.extension = ⊥) {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [SmoothOfRelativeDimension d f] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (U : X.Opens) (e : U.toScheme ⟶ affineTraceTower Y d) [Etale e] (w : e ≫ affineTraceProjection Y d = U.ι ≫ f) (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates) (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))), Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates t T hT) (N : Etale.EtaleCompactSupportNormalization P.Coefficient) : P.ChartTargetDiagonalRestriction d f aY U t N ∧ P.ChartTargetCoordinateRestriction d f aY U e w t D N ∧ P.ChartTargetTraceRestriction Y aY d t D ∧ P.ChartTargetSheafTest.{u, v} d f aY U t ∧ P.ChartTargetEqualityTest.{u, v} d f aY U e w t D N",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d33ae993",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Re-delivery after the 9625 RETURN for H2. Both Lean modules and the new node def-pur-chart-diagonal-assembly-data are byte-identical to 9625. The item node changes only in stmt_deps, which adds exactly the 8 requested landed definition owners (affine-trace-tower, affine-trace-construction, asd-ordinary-finite-p1-arrows/-kummer-class/-data, amb-vector-integration-charts, asd-finite-etale-tate-sheaf, sp-etale-compact-support-normalization). All 8 are on the base with lean records, and none creates a cycle. The mathematics is unchanged from the earlier passing reviews (Q36 4289; Q55/9625 Lean checks): Gamma is the integration transpose over a nonseparated Y, T and Q are real definitions, and the equality test covers arbitrary and empty covers. Proofs are sorry-only, every declaration has its blueprint docstring, and the report has both required sections. No file was changed, so nothing was compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261025T181309-L-4146556",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

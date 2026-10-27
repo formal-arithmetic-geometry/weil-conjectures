@@ -1,0 +1,154 @@
+{
+ "id": "lem-trf-ordinary-resolution-level-map-rigidity",
+ "kind": "statement",
+ "title": "Rigidity of maps into a smooth pullback resolution level",
+ "statement": "Let L be a linear order, S and T rational resolution inputs, h:T->S smooth, A and B labeled ordinary resolution towers, and c:Comparison h A B as in [def-trf-labeled-ordinary-resolution-descent-data, def-trf-ordinary-resolution-rule]. For every original level i, every morphism f:B_{c.count(i)}->A_i whose composite with A_i->S equals B_{c.count(i)}->T->S equals c.levelMap(i).",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+ },
+ "stmt_deps": [
+  "def-trf-labeled-ordinary-resolution-descent-data",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Induct over transitions of the ordinary tower. At an identity transition there is nothing to prove. At a successor factor through the specified blowup isomorphism and blowup map; an invertible ideal remains invertible by [lemma-nagata-cartier-total-transform-blowup] and by flat pullback along the isomorphism [lem-pc-flat-pullback-effective-cartier-ideal].",
+   "uses": [
+    "def-trf-ordinary-resolution-rule",
+    "lemma-nagata-cartier-total-transform-blowup",
+    "lem-pc-flat-pullback-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "The center I_k becomes invertible on its own blowup by [thm-nagata-blowup-principalizes-center]. The first step propagates it to every level j with k+1 <= j, and flat pullback preserves it. For a flat map p:P->A_j, prove by induction on i<=j that any f:P->A_i over the same base map equals p followed by the transition j->i. At i=0 cancel the initial isomorphism. At i=k+1 apply the induction hypothesis to the two maps to A_k, and apply uniqueness in [thm-nagata-blowup-universal-property] to their lifts, since the pullback center ideal just proved invertible is the same for both.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "lem-pc-flat-pullback-effective-cartier-ideal",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "The specified comparison square makes c.levelMap i the base change of the smooth base map. It is flat by smoothness and stability of flatness under base change. Apply the preceding uniqueness lemma with p=c.levelMap i and j=i, and simplify the identity transition.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-ordinary-resolution-rule",
+  "lem-pc-flat-pullback-effective-cartier-ideal",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lemma-nagata-cartier-total-transform-blowup",
+  "sbc-lem-smooth-criterion",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92; W2 expansion using the proved ordinary blowup universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Maps from a smooth pullback into a blowup tower over the base are unique by schematic density and separatedness",
+   "results": "AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.IsSeparated.valuativeCriterion, LocallyRingedSpace.IsOpenImmersion.lift_uniq. Read the separatedness extension lemma; it needs a dense subspace and does not state uniqueness for towers. Source-library search found hom_ext_of_isInvertible_comap, IsInvertible.comap_blowupMap and isInvertible_comap_blowupMap; these prove the result by induction.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; use the existing proved blowup universal-property API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two morphisms from the smooth pullback of a resolution tower level into the old level over the base are equal",
+   "results": "CategoryTheory.ChosenPullbacksAlong.hom_ext, ChosenPullbacksAlong.hom_ext_iff, Scheme.Pullback.t'_fst_snd, Scheme.Pullback.t'_fst_fst_snd and related pullback projection equations. None is blowup-tower rigidity.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; pullback extensionality needs both projections and does not replace this result."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*(tower|unique|rigid)|contracted.*tower (msearch grep, Mathlib); hom_ext_of_isInvertible_comap and comap_blowupMap (source library)",
+   "results": "No Mathlib hits. WeilConjectures.Blowup.BlowupUniversal contains hom_ext_of_isInvertible_comap and IsInvertible.comap_blowupMap; WeilConjectures.Blowup.Principalization contains isInvertible_comap_blowupMap. These are read and used in the Lean proof.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate for the finite-tower statement; the existing one-step lemmas supply the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DescendedResolutionSmoothComparisons",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Original descended-comparison proof Steps 1--6 (single-map gluing) and Steps 7--8 (identity/composition), ILO VIII 2.1.9 and 2.3.4--2.3.5. This node isolates the uniqueness of level maps used for coherence and overlap agreement.",
+   "via": [
+    "lem-trf-descended-resolution-smooth-comparisons",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryResolutionLevelMapRigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryResolutionLevelMapRigidity.lean",
+  "declaration": "AlgebraicGeometry.OrdinaryResolutionDescent.smoothComparison_levelMap_unique",
+  "statement": "theorem smoothComparison_levelMap_unique\n    {L : Type w} [LinearOrder L] (S T : RationalResolutionInput.{u})\n    (h : T.scheme ⟶ S.scheme) [Smooth h]\n    (A : LabeledTower L S.scheme) (B : LabeledTower L T.scheme)\n    (c : Comparison h A B) (i : Fin (A.tower.length + 1))\n    (f : B.tower.level (c.count i) ⟶ A.tower.level i)\n    (hf : f ≫ A.tower.toBase i = B.tower.toBase (c.count i) ≫ h) :\n    f = c.levelMap i",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T083350-L-2334502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T083350-L-2334502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

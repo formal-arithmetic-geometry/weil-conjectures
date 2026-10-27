@@ -1,0 +1,102 @@
+{
+ "id": "def-fd-integral-scalar-lift-property",
+ "kind": "definition",
+ "title": "Good-representative normalization predicate for an integral scalar comparison",
+ "statement": "Fix a prime l, an algebraic closure Ω of Q_l and a noetherian finite-dimensional scheme T on which l is invertible. Fix stage identity comparisons I, ordinary transports o, and integral comparison isomorphisms b as in [def-fd-coefficient-comparison-datum, lem-fd-raw-localization-scalar-coherence]. Define fdIntegralScalarLiftProperty(o,b) to mean that for every coefficient inclusion and every good representative V with constructible derived image, the ambient b component, followed by the target integral_identity cast, scalar representative comparison, and coefficient-transport factor, is heterogeneously equal to ambient ordinary extension of the source transport factor followed by the actual completed-scalar counit and derived image of o.completion. The defining equation is exactly the representative-lift clause of lem-fd-integral-scalar-descent-inputs, copied verbatim in Lean. It is a proposition about the supplied maps; it constructs no maps and makes no existence claim.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "stmt_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "lem-fd-raw-localization-scalar-coherence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A predicate that a derived scalar comparison agrees with the normalized completion map on good K-flat representatives",
+   "results": "8 hits: unrelated flat ring maps, abstract completion and valuation completion comparisons. No project-specific derived scalar lift predicate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HEq\", \"eqToHom\"",
+   "results": "10 hits: comp_eqToHom_heq, eqToHom_comp_heq, and conjugation characterization of heterogeneous equality. Generic tools only.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_eqToHom_heq|conj_eqToHom_iff_heq",
+   "results": "11 hits in EqToHom and category-theory consumers. Generic equality-transport helpers; no normalized scalar lift property.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdIntegralScalarDescentInputs",
+  "date": "2026-10-27",
+  "group": "X7"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Retained integral comparison step: naming its displayed good-representative lift equation to avoid elaborating the same long dependent proposition in every consumer.",
+   "via": [
+    "lem-fd-integral-scalar-descent-inputs",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdIntegralScalarLiftProperty",
+  "file": "lean/Sheaf/Paper/FdIntegralScalarLiftProperty.lean",
+  "declaration": "WeilConjectures.fdIntegralScalarLiftProperty",
+  "statement": "def fdIntegralScalarLiftProperty\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (T : Scheme.{u}) [IsNoetherian T]\n    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)\n    (ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n      FdOrdinaryScalarTransport l Ω T h)\n    (b : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n      I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L)\n : Prop",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T103526-L-1100696",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T103526-L-1100696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

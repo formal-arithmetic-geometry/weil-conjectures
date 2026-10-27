@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-componentwise-normalization-smooth-pullback",
+ "kind": "statement",
+ "title": "Componentwise normalization under smooth pullback",
+ "statement": "Let $f:X\\to Y$ be a smooth morphism of locally Noetherian schemes [def-sbc-smooth-morphisms, pqf-def-locnoeth]. Write $\\nu_X:X^\\nu\\to X$ and $\\nu_Y:Y^\\nu\\to Y$ for their componentwise normalizations [def-weil-pbc-reduced-normalization]. There is a unique isomorphism of $X$-schemes\n$$X^\\nu\\ \\xrightarrow{\\sim}\\ X\\times_Y Y^\\nu,$$\nwhere the right side has its first projection to $X$ [def-pc-fibre-product]. In particular, this holds for an etale morphism $f$ [def-weil-etale-morphism]. Neither finite normalization nor excellence is assumed; nonreduced and empty schemes are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07TD, lemma-normalization-and-smooth; locally Noetherian specialization of its finite-irreducible-components hypothesis."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-reduced-normalization",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=X\\times_Y Y^\\nu$ with projections $p:P\\to X$ and $q:P\\to Y^\\nu$. By lem-sfb-componentwise-normalization-generic-properties, $Y^\\nu$ is normal and $\\nu_Y$ is integral. Base changing this integral morphism along $f$ shows that $p$ is integral. We also retain from that same statement the generic-point bijection for $\\nu_Y$ and the canonical isomorphism $Y^\\nu\\times_Y\\operatorname{Spec}\\kappa(\\eta)\\simeq\\operatorname{Spec}\\kappa(\\eta)$ for each generic point $\\eta$ of $Y$. Its hypothesis is satisfied because $Y$ is locally Noetherian.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "lem-sbc-integral-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07TD, lemma-normalization-and-smooth, proof; generic-point argument expanded without first passing to reductions."
+   }
+  },
+  {
+   "text": "The projection $q$ is smooth by smooth base change, applied to $f$ along $\\nu_Y$. Since $Y^\\nu$ is normal, lem-sfb-smooth-normal-ascent makes $P$ normal. Moreover $f$ and $q$ are flat by lem-pc-smooth-flat. The smooth base change and normal-ascent statements apply to arbitrary schemes: no local Noetherianity of $Y^\\nu$ or $P$ has been asserted or used.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07TD, lemma-normalization-and-smooth, proof; generic-point argument expanded without first passing to reductions."
+   }
+  },
+  {
+   "text": "For either flat morphism $f$ or $q$, a generic point of the source maps to a generic point of the target. Indeed, at such a source point the source local ring has only one prime. The corresponding map of local rings is flat by def-weil-flat-morphism. If its target point were not generic, a prime strictly below the maximal ideal of the target local ring would, by lem-sc-flat-going-down, lift below the unique prime of the source local ring. Its contraction would then be both the smaller prime and the maximal ideal, a contradiction. Thus generic points of $X$ lie over generic points of $Y$, while generic points of $P$ map under $q$ to generic points of $Y^\\nu$ and hence under $f p=\\nu_Y q$ to generic points of $Y$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-sc-flat-going-down",
+    "lem-sfb-componentwise-normalization-generic-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07TD, lemma-normalization-and-smooth, proof; generic-point argument expanded without first passing to reductions."
+   }
+  },
+  {
+   "text": "For a generic point $\\eta$ of $Y$, base change of the isomorphism in step 1 gives $P_\\eta\\simeq X_\\eta$ over $X_\\eta$. Let $\\xi$ be generic in $X$; step 3 gives $f(\\xi)=\\eta$ generic in $Y$. A further base change gives $P\\times_X\\operatorname{Spec}\\kappa(\\xi)\\simeq\\operatorname{Spec}\\kappa(\\xi)$, so there is exactly one point $z$ over $\\xi$ and its residue field is $\\kappa(\\xi)$. This $z$ is generic: any generalization maps to a generalization of the generic point $\\xi$, hence to $\\xi$ itself, and the fibre has only one point. Conversely, let $z$ be generic in $P$. By step 3 its image in $Y$ is some generic $\\eta$. In the isomorphic fibres $P_\\eta\\simeq X_\\eta$, the image $\\xi=p(z)$ has no strict generalization. Every generalization of $\\xi$ in $X$ still lies over $\\eta$ because $\\eta$ has no strict generalization, hence $\\xi$ is generic in $X$. These assertions about generalizations in a generic fibre are the affine localization description: for a minimal prime $\\mathfrak p\\subset A$, the primes of $B\\otimes_A\\kappa(\\mathfrak p)$ correspond to primes of $B$ contracting to $\\mathfrak p$, and strict inclusions among them are preserved. Thus $p$ gives a bijection on generic points and an isomorphism on their residue fields.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-residue-field",
+    "lem-sfb-componentwise-normalization-generic-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07TD, lemma-normalization-and-smooth, proof; generic-point argument expanded without first passing to reductions."
+   }
+  },
+  {
+   "text": "Apply lem-sfb-integral-normal-generic-recognition to $a=p:P\\to X$. The base $X$ is locally Noetherian by hypothesis, $p$ is integral by step 1, $P$ is normal by step 2, and the generic-point bijection and residue-field isomorphisms are step 4. It supplies a unique isomorphism $P\\simeq X^\\nu$ over $X$. Taking inverses gives exactly the unique isomorphism $X^\\nu\\simeq X\\times_Y Y^\\nu$ in the statement; inversion is a bijection between isomorphisms in the two directions. No finiteness of normalization is required. If $X$ is empty, both sides are empty and the same argument has vacuous generic-point conditions. Nonreduced schemes were retained throughout by using residue fields at generic points. All uses of lem-sfb-componentwise-normalization-generic-properties concern $Y$, not the possibly non-Noetherian $P$.",
+   "uses": [
+    "lem-sfb-integral-normal-generic-recognition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07TD, lemma-normalization-and-smooth, proof; generic-point argument expanded without first passing to reductions."
+   }
+  },
+  {
+   "text": "An etale morphism [def-weil-etale-morphism] is smooth of relative dimension zero in the sense of def-sbc-smooth-morphisms by lem-weil-pbc-etale-smooth-zero-dimensional-fibres; in particular it is smooth, so the result just proved applies to the etale case as well.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07TD, lemma-normalization-and-smooth, proof; generic-point argument expanded without first passing to reductions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-pc-proper-base-change",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-pc-smooth-flat",
+  "def-weil-flat-morphism",
+  "lem-sc-flat-going-down",
+  "def-weil-residue-field",
+  "lem-sfb-integral-normal-generic-recognition",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07TD, lemma-normalization-and-smooth, proof; generic-point argument expanded without first passing to reductions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Absolute componentwise normalization of a locally noetherian scheme commutes with smooth base change",
+   "results": "{\"t\": \"2026-10-22T04:46:16Z\", \"tool\": \"leanfinder\", \"query\": \"Absolute componentwise normalization of a locally noetherian scheme commutes with smooth base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\"], \"digest\": \"dc42719074485abe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Normalization.lean:588-611 gives relative normalization of a supplied morphism; identifying absolute componentwise normalization with that construction is an additional theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizationPullback\"",
+   "results": "{\"t\": \"2026-10-22T04:46:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalizationPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc\"], \"digest\": \"81bddea5529a0466\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Normalization.lean:588-611 gives relative normalization of a supplied morphism; identifying absolute componentwise normalization with that construction is an additional theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*smooth|normalization.*etale|reducedNormalization.*pullback|fromReducedNormalization",
+   "results": "{\"t\": \"2026-10-22T04:46:17Z\", \"tool\": \"grep\", \"query\": \"normalization.*smooth|normalization.*etale|reducedNormalization.*pullback|fromReducedNormalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"4a81930aa9b27ea7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Normalization.lean:588-611 gives relative normalization of a supplied morphism; identifying absolute componentwise normalization with that construction is an additional theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a scheme pulls back to the normalization of an etale scheme over it",
+   "results": "{\"t\": \"2026-10-22T04:46:17Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of a scheme pulls back to the normalization of an etale scheme over it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\"], \"digest\": \"d77a07ac421c2d7f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Normalization.lean:588-611 gives relative normalization of a supplied morphism; identifying absolute componentwise normalization with that construction is an additional theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth map X to Y of locally noetherian schemes the componentwise normalization of X is X times the normalization of Y",
+   "results": "{\"t\": \"2026-10-22T04:46:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth map X to Y of locally noetherian schemes the componentwise normalization of X is X times the normalization of Y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"10c66109c3cb1bd8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Normalization.lean:588-611 gives relative normalization of a supplied morphism; identifying absolute componentwise normalization with that construction is an additional theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "reducedNormalization|fromReducedNormalization|normalization.*[Ee]tale|normalization.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-22T04:46:56Z\", \"tool\": \"grep\", \"query\": \"reducedNormalization|fromReducedNormalization|normalization.*[Ee]tale|normalization.*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"4a81930aa9b27ea7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Normalization.lean:588-611 gives relative normalization of a supplied morphism; identifying absolute componentwise normalization with that construction is an additional theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Componentwise normalization of a locally noetherian scheme commutes with smooth pullback",
+   "results": "{\"t\": \"2026-10-22T05:16:46Z\", \"tool\": \"leanfinder\", \"query\": \"Componentwise normalization of a locally noetherian scheme commutes with smooth pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\"], \"digest\": \"e0cea42d46a0b1eb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib AlgebraicGeometry/Normalization.lean:588-611 is relative normalization of a supplied qcqs morphism, not this absolute componentwise normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizationPullback\"",
+   "results": "{\"t\": \"2026-10-22T05:16:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalizationPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc\"], \"digest\": \"81bddea5529a0466\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib AlgebraicGeometry/Normalization.lean:588-611 is relative normalization of a supplied qcqs morphism, not this absolute componentwise normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute normalization commutes with etale and smooth base change",
+   "results": "{\"t\": \"2026-10-22T05:16:43Z\", \"tool\": \"leansearch\", \"query\": \"Absolute normalization commutes with etale and smooth base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.Smooth.baseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.instFormallySmooth\"], \"digest\": \"dc6296926646b43f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib AlgebraicGeometry/Normalization.lean:588-611 is relative normalization of a supplied qcqs morphism, not this absolute componentwise normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|reducedNormalization|fromReducedNormalization",
+   "results": "{\"t\": \"2026-10-22T05:16:43Z\", \"tool\": \"grep\", \"query\": \"normalizationPullback|reducedNormalization|fromReducedNormalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"027b3c381bdc00c4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib AlgebraicGeometry/Normalization.lean:588-611 is relative normalization of a supplied qcqs morphism, not this absolute componentwise normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-persistent-node-normalization",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts.",
+   "via": [
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-componentwise-normalization-smooth-pullback",
+  "worker": "stage1",
+  "summary": "Followed Stacks 07TD using integral base change, normality under smooth pullback, going down and generic fibres. Retained the statement including nonreduced, empty and nonfinite normalizations. Added a statement-only componentwise-normalization properties node in place of the dropped lem-per one; reused flat-going-down and base-change nodes; also added smooth normal ascent and absolute normalization recognition without a Noetherian source.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. The six steps supply its inherited absolute-normalization compatibility on etale charts, using the more general smooth statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic flatness of smooth morphisms, needed for going down; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic fact that an etale morphism in the flat-unramified sense of def-weil-etale-morphism is smooth of relative dimension zero; used only for the etale special case in step 6."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-10d59b8d0",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-10d59b8d0 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Stacks sources (07TD more-morphisms l.5410; 035Q(1)-(4), 0H7D, 0CDV, 035P, 0BXC in morphisms.tex; 034F descent / 033C algebra). No SGA is used. The statement is unchanged and the item id is not dropped. Mechanical finding: confirmed. lem-per-componentwise-normalization-properties is dropped (route-pivot-dropped.txt l.1477, 2026-10-19 section), and steps 1, 3 and 4 cited it, as did proof_deps and tool_uses. Only its clause (1) was used: normality and integrality of nu_Y, the generic-point bijection and the generic fibres. No live node provides this; lem-sc-normalization-properties covers only finite type over a field. I added a new statement-only unsplit node, lem-sfb-componentwise-normalization-generic-properties (035Q(1)(2)/0CDV/0BXC; checked on affine charts, including the generic fibre computation, nonreduced, nodal and empty cases), and re-cited it, so no reachable node cites the dropped id. Second fault: step 6 used the 'etale = smooth of relative dimension 0' convention of def-sbc-smooth-morphisms, but the statement's etale is def-weil-etale-morphism (lfp + flat + unramified). I re-cited it to the live lem-weil-pbc-etale-smooth-zero-dimensional-fibres and declared that as a tool_use. Steps 1-5 are correct. Integral base change and smooth base change hold for arbitrary bases. Flat going-down sends generic points to generic points. The generic-fibre bijection with residue-field isomorphisms is argued in both directions, and injectivity holds because the fibre over xi is a single point. Recognition is applied with all four hypotheses checked. New node lem-sfb-smooth-normal-ascent (034F/033C) is true with no Noetherian hypothesis. New node lem-sfb-integral-normal-generic-recognition is true: the components of Z are locally finite through the bijection, and over an affine open Z is a product of normal domains integral over A/p_i with the same fraction field; uniqueness also holds. Neither new node duplicates an existing node (the lem-sbc ones need an integral base and geometrically connected fibres) or restates the parent. Fixes are the item JSON and the new node JSON under fixes/dag/nodes/sec-six-functors-basics/. Two faults, both repaired.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentwiseNormalizationSmoothPullback",
+  "declaration": "AlgebraicGeometry.Scheme.reducedNormalization_smooth_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.reducedNormalization_smooth_pullback",
+   "AlgebraicGeometry.Scheme.reducedNormalization_etale_pullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentwiseNormalizationSmoothPullback.lean",
+  "statement": "theorem reducedNormalization_smooth_pullback {X Y : Scheme.{u}} (f : X ⟶ Y) [IsLocallyNoetherian X] [IsLocallyNoetherian Y] [Smooth f] : ∃! e : X.reducedNormalization ≅ pullback f Y.fromReducedNormalization, e.hom ≫ pullback.fst f Y.fromReducedNormalization = X.fromReducedNormalization",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a43029c52",
+  "group": "N9",
+  "result": "pass",
+  "note": "Checked every clause of reducedNormalization_smooth_pullback against the node: IsLocallyNoetherian on X and Y, Smooth f, the live reducedNormalization/fromReducedNormalization construction (a real coproduct of component normalizations), pullback f ν_Y with pullback.fst, ∃! isomorphism over X (Iso.ext makes it the unique X-isomorphism). Étale case is a separate theorem with [Etale f] and the same conclusion. No extra hypotheses or universe restriction; empty and nonreduced cases covered. Item node diff vs live: only the lean record added; statement field matches the file signature word for word. No duplicate in Mathlib (normalizationPullback is relative normalization) or in live Sheaf/WeilConjectures. Docstrings give Stacks 07TD, the blueprint id and proof steps 1-6; proofs are sorry only; report has Worker report and Second reading by N9. Advisory only: plain imports Integral/Proper/Flat/ResidueField/GoingDown/EtaleSmoothZeroDimensionalFibres serve the proofs, not the statement; all exist. No file changed, so no compile."
+ }
+}

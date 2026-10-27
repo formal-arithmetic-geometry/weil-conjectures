@@ -270,9 +270,17 @@ def public_project_names(text: str, wanted: set[str], read_module=None) -> set[s
 
 
 def check_lean_text(text: str, rec: dict, item: str, check_statement: bool = True,
-                    *, read_module=None) -> tuple[list[tuple[str, str]], dict | None]:
-    """Check (c) on the text of the module. Returns (failures, the declaration found or None)."""
+                    *, read_module=None, base_text: str | None = None) -> tuple[list[tuple[str, str]], dict | None]:
+    """Check (c) on the text of the module. Returns (failures, the declaration found or None).
+    2026-10-23: a theorem whose signature and proof are unchanged from the base (`base_text`) is a published proof of
+    the module, not part of what the delivery states; the sorry-only rule applies to new or changed theorems only
+    (repairs of modules with published proofs were refused for their unchanged proofs, 9 items x many sessions)."""
     fails = []
+    published = set()
+    if base_text:
+        for b in declarations(base_text):
+            if b["name"] and b["kw"] in THEOREM_KW:
+                published.add((b["name"], b["statement"], b["body"].strip()))
     f = lambda s: fails.append(("c", s))  # noqa: E731
     for imp in imports(text):
         if not imp.startswith(IMPORT_OK):
@@ -290,7 +298,9 @@ def check_lean_text(text: str, rec: dict, item: str, check_statement: bool = Tru
         if re.search(r"\bsorry\b", masked[d["kw_pos"]:d["sig_end"]]):
             f(f"{where}: `sorry` inside the signature")
         if d["kw"] in THEOREM_KW:
-            if not re.fullmatch(r":=\s*(?:by\s+)?sorry", d["body"].strip()):
+            if (d["name"], d["statement"], d["body"].strip()) in published:
+                pass
+            elif not re.fullmatch(r":=\s*(?:by\s+)?sorry", d["body"].strip()):
                 f(f"{where}: the proof is not `sorry` (stage 2 states; every theorem and lemma ends with `:= by sorry` or `:= sorry`)")
         elif re.search(r"\bsorry\b", d["body"]):
             f(f"{where}: `sorry` in the body of a {d['kw']}: a hollow definition (AGENTS.md §5); state the proof it needs as a theorem of its own")
@@ -387,6 +397,45 @@ def existing_file(module: str) -> pathlib.Path | None:
     return next((p for p in candidates if p.is_file()), None)
 
 
+def _sorry_count(text: str | None) -> int:
+    return len(re.findall(r"(?<![\w.'])sorry(?![\w'])", mask(text or "")))
+
+
+def _axioms(text: str | None) -> set[str]:
+    return set(re.findall(r"(?m)^[ \t]*(?:@\[[^\]\n]*\][ \t\n]*)*(?:(?:private|protected|public|noncomputable)[ \t]+)*"
+                          r"axiom[ \t]+([^\s:({\[]+)", mask(text or "")))
+
+
+def consumer_honesty(path: str, old: str | None, new: str) -> list[tuple[str, str]]:
+    """2026-10-25 (deliverfix): the honesty check of a consumer module (a module no node of the delivery owns): it
+    gains no `sorry` and no axiom. Enforced (ENFORCED: 'hidden `sorry`', 'an axiom')."""
+    out = []
+    a, b = _sorry_count(old), _sorry_count(new)
+    if b > a:
+        out.append(("c", f"{path}: the consumer module gains {b - a} hidden `sorry` ({a} on the base, {b} delivered)"))
+    extra = sorted(_axioms(new) - _axioms(old))
+    if extra:
+        out.append(("c", f"{path}: the consumer module declares an axiom: {', '.join(extra)}"))
+    return out
+
+
+def consumer_notes(path: str, old: str | None, new: str, owner: str) -> list[str]:
+    """Notes for the reviewer: which declarations of a consumer module changed their statement or disappeared."""
+    try:
+        before = {d["name"]: normalize(d["statement"] or "") for d in declarations(old or "") if d["name"]}
+        after = {d["name"]: normalize(d["statement"] or "") for d in declarations(new) if d["name"]}
+    except Exception:   # noqa: BLE001
+        return [f"{path}: consumer module (owner {owner}); its declarations were not compared"]
+    changed = sorted(n for n in before if n in after and before[n] != after[n])
+    gone = sorted(n for n in before if n not in after)
+    notes = [f"{path}: consumer module changed by the delivery (owner {owner}; {'new file' if old is None else 'existing file'})"]
+    if changed:
+        notes.append(f"{path}: REVIEW statements changed in the consumer module: {', '.join(changed[:12])}")
+    if gone:
+        notes.append(f"{path}: REVIEW declarations removed from the consumer module: {', '.join(gone[:12])}")
+    return notes
+
+
 def check_existing(rec: dict, git: "Git | None" = None, base: str | None = None) -> tuple[list[tuple[str, str]], list[str]]:
     """Check (d). Returns (failures, notes). A declaration of this project (module Sheaf.*, branch sheaf-dag: another
     node already states the statement or defines the notion) is read from lean/Sheaf/<path>.lean on `base` (default
@@ -453,8 +502,41 @@ class Git:
         return subprocess.run(["git", *a], cwd=self.root, capture_output=True).returncode == 0
 
     def show(self, ref, path):
+        # 2026-10-24 (cpu): a blob is read through one `git cat-file --batch` process kept by this object (the stage-2
+        # dependency closure called `git show` once per node, thousands of processes per delivery); its bytes are decoded
+        # as subprocess decodes `git show`'s output (locale encoding, universal newlines). Anything that is not a blob
+        # (a tree, a missing or ambiguous name) and any failure of the batch process takes the `git show` below.
+        b = self._blob(f"{ref}:{path}")
+        if b is not None:
+            import io
+            enc = io.TextIOWrapper(io.BytesIO()).encoding
+            return b.decode(enc).replace("\r\n", "\n").replace("\r", "\n")
         r = subprocess.run(["git", "show", f"{ref}:{path}"], cwd=self.root, capture_output=True, text=True)
         return r.stdout if r.returncode == 0 else None
+
+    def _blob(self, spec):
+        """the content of the blob `spec`, or None (not a blob, or the batch process failed)"""
+        if "\n" in spec or "\r" in spec:
+            return None
+        import threading
+        lock = self.__dict__.setdefault("_batch_lock", threading.Lock())
+        with lock:
+            try:
+                p = self.__dict__.get("_batch")
+                if p is None or p.poll() is not None:
+                    p = self._batch = subprocess.Popen(["git", "cat-file", "--batch"], cwd=self.root, stdin=subprocess.PIPE,
+                                                       stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+                p.stdin.write(spec.encode() + b"\n"); p.stdin.flush()
+                head = p.stdout.readline().split()
+                if len(head) == 3 and head[2].isdigit():
+                    data = p.stdout.read(int(head[2]) + 1)[:-1]
+                    return data if head[1] == b"blob" else None
+                if len(head) >= 2 and head[-1] in (b"missing", b"ambiguous"):
+                    return None
+            except Exception:  # noqa: BLE001
+                pass
+            self._batch = None     # out of step: a new process next time
+            return None
 
     def node_path(self, ref, item):
         out = self.run("ls-tree", "-r", "--name-only", ref, "--", "dag/nodes", check=False)
@@ -512,7 +594,7 @@ def check_record(rec, group, where: str = "lean") -> list[tuple[str, str]]:
 # The fields of a new definition node (STAGE 2 EXTRA NODES, decision of the human, 2026-10-11 05:55 UTC).
 NEW_NODE_KEYS = ("id", "kind", "title", "statement", "source", "stmt_deps", "proof", "proof_deps", "proof_origin",
                  "mathlib_searches", "mathlib_match", "status", "created", "blueprint", "lean_audit", "chapter", "unit",
-                 "lean")
+                 "lean", "import_flags")   # 2026-10-23: import_flags (validated by check_dag.py) was refused
 SEARCH_KEYS = ("tool", "query", "results", "date", "verdict")
 CITE = re.compile(r"\[([a-z][a-z0-9]*(?:-[a-z][a-z0-9]*)+)\]")
 
@@ -686,6 +768,33 @@ def check_invalidated_binding(git: Git, base: str, nid: str, rec: dict) -> list[
     return []
 
 
+# 2026-10-23 (the human: "预检做减法"): the preflight enforces only what keeps the library honest and the merge
+# mechanical: (1) it compiles (letter f); (2) no cheating: no axiom, no `sorry` in a signature or a definition body,
+# new or changed theorems are statements (`sorry`), the recorded statement is the one in the file; (3) the DAG stays
+# consistent: dependencies are nodes, cited nodes are dependencies, no cycle, the delivery's files are well-formed.
+# Every other rule (which fields a delivery may change, new-node field rules, scope of repairs, formats) is reported as
+# an ADVISORY note for the reviewer, who judges whether a change was needed; it no longer refuses the delivery.
+ENFORCED = re.compile("|".join([
+    r"an axiom", r"`sorry` inside the signature", r"the proof is not `sorry`", r"hollow definition",
+    r"is not declared in", r"lean\.statement differs", r"which the file does not declare",
+    r"a module imports only", r"absent from .* published sources", r"lean\.module \S+: no file",
+    r"lean has no ", r"the module \S+ is the file", r"is not Sheaf\.<Topic>\.<Name>",
+    r"which is no node", r"neither nodes on the base", r"neither new nodes", r"is no node on the base",
+    r"not in stmt_deps", r"not in the item's stmt_deps", r"cycle",
+    r"not valid JSON", r"not a JSON object", r"the file name says", r"missing key\(s\)", r"no node file for",
+    r"does not exist on", r"the node file is unchanged",
+    r"no file \S+ in ", r"a module of the library is under lean/Sheaf/", r"imports the dropped/reverted",
+    r"no node of the delivery has it as lean\.file", r"is the lean\.file of several nodes", r"is declared in .* and in ",
+    r"but lean\.file is not set", r"lean\.existing is true but", r"--drop-|--revert-",
+    r"hidden `sorry`",
+]))
+
+
+def enforced(failure) -> bool:
+    letter, text = failure
+    return letter in ("a", "f") or bool(ENFORCED.search(str(text)))
+
+
 def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_commits: int = 1,
                   overrides: dict | None = None, drop=(), revert=(), drop_files=(), revert_statement: bool = False) -> dict:
     """Checks (a), (b), (c) without the compile, (d), (e) of the delivery `ref` against `base`.
@@ -764,8 +873,12 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             continue
         if p.startswith("dag/nodes/") and p.endswith(".json"):
             node_files.append((code, p)); continue
-        if p.startswith("lean/Sheaf/") and p.endswith(".lean"):
+        if (p.startswith("lean/Sheaf/") or p.startswith("lean/WeilConjectures/")) and p.endswith(".lean"):
             lean_files.append(p)
+            if p.startswith("lean/WeilConjectures/"):
+                # 2026-10-25 (deliverfix; the human: only compile, honesty and DAG validity refuse): an upstream module
+                # the delivery must change (a repair, a split) is delivered; local upstream changes go to the PR agent
+                D["notes"].append(f"{p}: an upstream module changed by the delivery (delivered as a consumer module)")
             if code.startswith("A"):
                 added_files.add(p)
             if not code.startswith("A"):
@@ -885,7 +998,7 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
                 f("b", f"{p}: the node {nid} exists on the base and is not in the item's statement/proof prerequisite "
                        "closure on the base or as delivered: a delivery changes only the item, new definition nodes "
                        "and dependency nodes of the item")
-                continue
+                # 2026-10-25 (deliverfix): advisory only; the change is delivered and the DAG check validates it
             bd = json.loads(git.show(base, p) or "{}")
             D["deps"][nid] = {"path": p, "node": nd, "base_node": bd}
         else:
@@ -996,6 +1109,9 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         if gone:
             f("b", f"the item's stmt_deps lost {', '.join(gone)}: a delivery only adds the new definition nodes to it "
                    "(or corrects the statement, with statement_change)")
+            # 2026-10-25 (deliverfix; the human: a lean-only dependency removal must not block): advisory; landed as
+            # delivered, the DAG check (cited nodes, blueprint references) decides
+            D["removed_deps"] = list(gone)
         # STMT_DEPS MAY GAIN LANDED NODES (launcher 2026-10-11 07:55 +08): a node that exists on the base with a
         # `lean` record (landed by another group meanwhile) may be added to the item's stmt_deps without a correction.
         landed = []
@@ -1056,7 +1172,14 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
                                   f"used by any node of the chapter {node.get('chapter')} on the base")
     for nid, x in D["deps"].items():
         nd, bd = x["node"], x["base_node"]
-        ch = changed_fields_except(bd, nd, STAGE2_OWNS)
+        # 2026-10-25 (deliverfix; the human: only compile, honesty and DAG validity refuse): a dependency node's
+        # stmt_deps / proof_deps changed by the delivery are delivered (x["dep_fields"]) and checked as DAG edges
+        x["dep_fields"] = {k: nd.get(k) for k in ("stmt_deps", "proof_deps")
+                           if isinstance(nd.get(k), list) and nd.get(k) != bd.get(k)}
+        if x["dep_fields"]:
+            D["notes"].append(f"dependency node {nid}: {', '.join(x['dep_fields'])} changed by the delivery (delivered; "
+                              "the DAG check validates the edges)")
+        ch = changed_fields_except(bd, nd, STAGE2_OWNS + ("stmt_deps", "proof_deps"))
         if ch:
             f("b", f"dependency node {nid}: changed in field(s) {', '.join(ch)}; a dependency node changes only in `lean` "
                    "(its mathlib_match stays)")
@@ -1125,7 +1248,8 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         if lf not in lean_files and lf not in over:
             f("c", f"{who}: {lf} is not changed by the commit (the module is part of the delivery)")
         cf, decl = check_lean_text(
-            text, r, nid, read_module=lambda module: show("lean/" + module.replace(".", "/") + ".lean"))
+            text, r, nid, read_module=lambda module: show("lean/" + module.replace(".", "/") + ".lean"),
+            base_text=git.show(base, lf))
         fails.extend((L, x if role == "item" else f"{lf} ({nid}): {x}") for L, x in cf)
         mods.append({"file": lf, "node": nid, "role": role, "rec": r, "text": text, "decl": decl,
                      "module": r.get("module")})
@@ -1158,11 +1282,33 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         if bad:
             f("c", f"{m['file']} ({m['node']}): imports the dropped/reverted module(s) {', '.join(bad)} (fix it to "
                    "import the landed declaration's module)")
+    base_owner = {}
     for lf in lean_files:
         o = owners.get(lf, [])
         if not o:
-            f("c", f"{lf}: no node of the delivery has it as lean.file (every module is the module of the item, of a new "
-                   "definition node or of a dependency node)")
+            # 2026-10-25 (deliverfix; the human: ownership of a refactor and edits to consumer modules never block): a
+            # module the delivery changes that no node of the delivery owns is delivered as a CONSUMER module. Only the
+            # honesty check refuses (no new `sorry`, no new axiom); changed statements are listed for the reviewer.
+            text = show(lf)
+            if text is None:
+                f("c", f"no file {lf} in {ref}"); continue
+            old = git.show(base, lf)
+            fails.extend(consumer_honesty(lf, old, text))
+            if not base_owner:
+                base_owner[""] = ""
+                try:
+                    for n_, d_ in nodes_at(git, base).items():
+                        r_ = d_.get("lean") if isinstance(d_, dict) else None
+                        if isinstance(r_, dict) and r_.get("file"):
+                            base_owner.setdefault(r_["file"], n_)
+                except Exception:   # noqa: BLE001  (the owner only names the module in notes)
+                    pass
+            owner = base_owner.get(lf) or f"{item}--consumer-{pathlib.PurePosixPath(lf).stem}"
+            D["notes"].extend(consumer_notes(lf, old, text, owner))
+            D["roles"].append(f"consumer module {lf}" + (f" (owned by {owner} on the base)" if lf in base_owner else
+                                                         " (no node owns it on the base)"))
+            mods.append({"file": lf, "node": owner, "role": "consumer", "rec": {}, "text": text, "decl": None,
+                         "module": lf[len("lean/"):-len(".lean")].replace("/", ".")})
     for lf, o in owners.items():
         if len(o) > 1:
             f("c", f"{lf} is the lean.file of several nodes ({', '.join(o)}): one module per node")
@@ -1223,6 +1369,10 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     rt = show(report)
     D["report"] = rt
     fails.extend(check_report(rt, group, report, list(D["new"]), list(D["deps"]), D["corrected"], D["citers"]))
+    advisory = [x for x in fails if not enforced(x)]
+    fails[:] = [x for x in fails if enforced(x)]
+    D["advisory"] = advisory
+    D["notes"].extend(f"ADVISORY (not enforced; for the reviewer) ({L}) {x}" for L, x in advisory)
     return D
 
 
@@ -1480,6 +1630,8 @@ def _tree_cached_nodes_at(git: Git, ref: str):
         mine = cdir / f"{tree}.pickle"
         if mine.is_file():
             nodes = pickle.loads(mine.read_bytes())
+            while len(_NODE_CACHE) >= 2:
+                _NODE_CACHE.pop(next(iter(_NODE_CACHE)))
             _NODE_CACHE[key] = nodes
             return nodes
         older = sorted(cdir.glob("*.pickle"), key=lambda q: q.stat().st_mtime)
@@ -1517,6 +1669,10 @@ def _tree_cached_nodes_at(git: Git, ref: str):
                 nodes = None
         if nodes is None:
             nodes = _uncached_nodes_at(git, ref)
+        # 2026-10-24: at most 2 trees kept in memory. Each is the whole DAG (~20k nodes); review_class.py list classifies
+        # dozens of deliveries on different bases in one process, and the cache kept them all (15-20 GB per process)
+        while len(_NODE_CACHE) >= 2:
+            _NODE_CACHE.pop(next(iter(_NODE_CACHE)))
         _NODE_CACHE[key] = nodes
         fd, tmp = tempfile.mkstemp(prefix=".nodes-", dir=cdir)
         with os.fdopen(fd, "wb") as f:

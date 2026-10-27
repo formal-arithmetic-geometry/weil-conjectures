@@ -1,0 +1,224 @@
+{
+ "id": "def-pur-finite-geometric-purity-coordinates",
+ "kind": "definition",
+ "title": "Fixed-scalar coordinates and normalized source and counit mate",
+ "statement": "Fix a purity finite setting P, separated finite-type k0-models X0,Y0, and a separated finite-type morphism f0. Let X,Y,f,gX,gY be their geometric base changes and geometric Frobenius maps [def-pur-scheme-geometric-frobenius]. In the derived categories of fixed-scalar pro-etale P.Coefficient-module sheaves define H_d(M)=f* M(d)[2d], F=compact support at the standing compactification, G=the existing transported exceptional functor, and epsilon=its standing counit on bounded-below inputs [def-pur-smooth-purity-map, def-weil-exceptional-inverse-image]. Define Gamma by conjugating the recorded purity map by the realization units, and B by the actual proper/open compact-support exchange and its canonical compactification refinement [def-exchange-projection]. Define b:QH_d(M)~H_d(RM) by its expression in every primitive-root chart, with target root gamma(zeta), and e:QG(M)->G(RM) by the unique equation B_(GM) F(e) epsilon_(RM)=R(epsilon_M). The geometric fibers and maps have the inherited finite-type and separated properties. Retagging preserves the underlying compactification, diagonal orientation, tensor transpose and counit. For bounded constructible finite-Tor M, Gamma is invertible, RM stays in that class, B is invertible on bounded etale-origin inputs, and the counit equation has a unique solution. These are the existing constructions and support theorems extracted verbatim in public interface from the parent module, excluding its final purity-exchange assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "Fixed-scalar coordinates and normalized source and counit mate"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pur-scheme-geometric-frobenius",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-smooth-purity-map",
+  "def-exchange-projection",
+  "def-weil-frobenius-coefficient-twists",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-composition-comparisons",
+  "lem-weil-frobenius-square-cartesian",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Use the recorded fixed-scalar inverse image, tensor, diagonal purity and exceptional inverse image. The realization units conjugate the existing purity arrow; compactification is the standing compactification and B is the published proper/open exchange with its canonical refinement. Thus none of these definitions selects an independent orientation or exchange.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "def-exchange-projection",
+    "def-pur-composition-comparisons",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Definitions of the coordinate maps"
+   }
+  },
+  {
+   "text": "Lean geometric prerequisites: apply MorphismProperty.baseChange_obj to the model structure maps and MorphismProperty.overPullbackMap to f0 for locally finite type, quasi-compactness and separatedness. Spec gamma is the image of the ring-equivalence isomorphism, so composing the geometric structure map with it retains those properties. The second galoisMap projection is exactly the retagged structure-map equation. In the fixed presentation the retained compactification, diagonal dualizing object, tensor map in a presentation and exceptional counit are definitionally unchanged under retagging. Prove this once in four private structural-map independence lemmas before specializing, so no specialized proof unfolds the full Frobenius schemes; the Cartesian assertion is the previously proved Frobenius square. These prove geometricPurityFiberProperties, geometricPurityMapProperties, geometricPurityRetagProperties and geometricPurityRetagging without additional geometric lemmas.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Existing support proof: 1"
+   }
+  },
+  {
+   "text": "Lean support-exchange and mate construction: lem-weil-pbc-finite-ring-constructible-derived-origin supplies a bounded etale representative of any intrinsic bounded constructible input. Undo canonical realization to obtain a fixed-scalar plusEtaleOrigin witness. Pullback preserves such witnesses by the exact etale pullback and the canonical comparison-upper-star composition isomorphism. The published isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app makes the middle factor of B invertible, while all coordinate and compactification comparison factors are isomorphisms; the origin witness selects the nonzero branch in the definition of B. For GK, bounded-below preservation by rightDerivedUpperShriek gives the required origin directly, so no additional finite-Tor assertion for GK is needed for this construction. The published rightDerivedUpperShriekHomEquiv at QGK and PK has inverse F(-) followed by the canonical counit. Apply it to inv(B) followed by P(epsilon). The inverse-equivalence law and cancellation of B prove the counit equation; injectivity proves uniqueness. This proves geometricPurityBIsIso and existsUnique_geometricPurityMate without an ambient pro-etale adjunction.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-exceptional-inverse-image",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Existing support proof: 2"
+   }
+  },
+  {
+   "text": "Lean fixed-coordinate purity and input domain: realize the composite of twist reassociation and the uniquely specified tensor purity arrow. It is smoothPurityMap, invertible by thm-pur-finite-coefficient-smooth-purity. Reflect its invertibility through sfIntrinsicDerivedEquivalence and cancel the invertible reassociation; conjugation by the realization units then proves geometricPurityMapIsIso. For geometricPurityInput, apply lem-sf-pullback-tor-amplitude to geometricPurityRetagFrobenius, an isomorphism from the retagged geometric fiber to the original fiber. The unit-preserving constant-ring/fixed-scalar pullback comparison and exact derived composition compare its result with the stated fixed-scalar pullback. Transport bounded constructibility and the same Tor interval through this isomorphism. Isomorphism closure of intrinsic bounded constructibility is the first clause of lem-weil-proetale-dbc-triangulated; the tensor-test definition transports the Tor interval through the same isomorphism.",
+   "uses": [
+    "thm-pur-finite-coefficient-smooth-purity",
+    "lem-sf-pullback-tor-amplitude",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Existing support proof: 3"
+   }
+  },
+  {
+   "text": "Lean root-chart independence: obtain a primitive diagonalExponent-th root using its invertibility in the algebraically closed base field. For any other primitive root eta, write zeta = eta^c by IsPrimitiveRoot.eq_pow_of_pow_eq_one. The field automorphism preserves this power relation. Apply lem-pur-finite-root-line-power-transition to both root-line charts and induct through the ordered tensor recursion: in degree d the fixed-scalar chart at eta is c^d times the chart at zeta. Exact comparison inverse image, tensor with the arbitrary input, and the root-independent reassociation and unit factors preserve this equality. The same exponent c works for gamma(zeta) and gamma(eta). Postcompose the two proposed source comparisons with the target chart at gamma(eta), cancel its inverse, then move c^d through the pullback and the middle shift/pullback-square maps by additivity and bilinearity of composition. The remaining target chart cancels its inverse, proving the proposed comparisons equal. Choose one chart and use this equality for existence in existsUnique_geometricPuritySource; evaluating the normalization at that chosen primitive root proves uniqueness. The argument uses no cancellation of the scalar itself, so it also treats d=0, zero objects and empty schemes.",
+   "uses": [
+    "lem-pur-finite-root-line-power-transition",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Existing support proof: 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "def-exchange-projection",
+  "def-pur-composition-comparisons",
+  "def-pur-finite-reduction-root-charts",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-weil-exceptional-inverse-image",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "lem-sf-pullback-tor-amplitude",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-pur-finite-root-line-power-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "The two factors (1)--(2), in the fixed-scalar Frobenius coordinates of the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change of the normalized diagonal orientation on finite coefficient sheaves with a roots of unity twist",
+   "results": "IsBaseChange.finsuppPow and MorphismProperty.IsStableUnderBaseChange.diagonal; neither states purity of finite coefficient sheaves.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor counit transpose commutes with compact support base change, exceptional adjunction mate",
+   "results": "CategoryTheory.coev_expComparison and ExponentiableMorphism.pushforwardComp_hom_counit; general mate tools, no normalized finite geometric purity identity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurityTheta|diagonalDualizing|tensorCounit",
+   "results": "No hits. These constructions belong to this project.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteGeometricPurityMate",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Steps 1--2: finite purity square and compact-support counit mate; Fixed-scalar coordinates and normalized source and counit mate",
+   "via": [
+    "lem-pur-finite-geometric-purity-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteGeometricPurityCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteGeometricPurityCoordinates.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.geometricPurityMate",
+  "statement": "def geometricPurityMate\n    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology (P.frobeniusFiber Y₀).left)\n      (ModuleCat.{u + 1} P.Coefficient)))\n    (hM : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos\n      (P.frobeniusFiber Y₀).left\n      ((Scheme.sfIntrinsicDerivedEquivalence (P.frobeniusFiber Y₀).left P.Ring).functor.obj M))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.geometricPurityPullbackCommShift",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityGamma",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRetag",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityCompactification",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityF",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityCounit",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityMap",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityPullbackSquare",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityB",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityFiberProperties",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityMapProperties",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityFiberLft",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityFiberQc",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityFiberSeparated",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityExplicitLft",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityExplicitQc",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityExplicitSeparated",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRelativeSeparated",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRelativeLft",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRelativeQc",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityMapIsIso",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityIso",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRetagProperties",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRetagLft",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRetagQc",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRetagMap",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRetagFrobenius",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRetagging",
+   "WeilConjectures.PurityFiniteSetting.geometricPuritySourceInChart",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_geometricPuritySource",
+   "WeilConjectures.PurityFiniteSetting.geometricPuritySource",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityInput",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityBIsIso",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_geometricPurityMate",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityMate",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityOrigin",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityPullbackOrigin",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityBIsIsoOfOrigin"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (byte-identical); FiniteGeometricPurityCoordinates vs clone FiniteGeometricPurityMate (verbatim extraction + 4 rfl private lemmas + 3 helpers made public); 4 new node lean.statements vs Lean text; two sorry statements read for truth against the parent equation and the published base-change map definitions"
+ }
+}

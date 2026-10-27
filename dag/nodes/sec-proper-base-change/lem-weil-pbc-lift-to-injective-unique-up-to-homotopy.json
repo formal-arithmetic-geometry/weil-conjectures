@@ -137,7 +137,32 @@
   "item": "def-weil-pbc-module-cohomology-fmap",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CochainComplex.homotopy_of_comp_quasiIso_of_injective"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CochainComplex.homotopy_of_comp_quasiIso_of_injective",
+     "module": "WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy",
+     "lines": [
+      29,
+      68
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "mathlib_candidate": {
@@ -179,5 +204,38 @@
   "landing": "20261012T070555-L-3478925",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $K^\\bullet$, $L^\\bullet$, $I^\\bullet$ be cochain complexes of $\\mathcal A$ [def-weil-abstract-derived-category], where $I^\\bullet$ is bounded below ($I^n=0$ for $n\\ll0$) and every $I^n$ is an injective object [def-sp-injective-resolutions]. Let $\\alpha:K^\\bullet\\to L^\\bullet$ be a quasi-isomorphism and $\\beta_1,\\beta_2:L^\\bullet\\to I^\\bullet$ morphisms of complexes such that $\\beta_1\\circ\\alpha$ and $\\beta_2\\circ\\alpha$ are chain-homotopic (for instance equal). Then $\\beta_1$ and $\\beta_2$ are chain-homotopic: there are morphisms $k^n:L^n\\to I^{n-1}$ with $\\beta_1^n-\\beta_2^n=d_I^{n-1}k^n+k^{n+1}d_L^n$ for all $n$.",
+  "proof": [
+   {
+    "text": "Since $I^\\bullet$ is bounded below with injective terms, it is K-injective: every morphism from an acyclic complex to $I^\\bullet$ is null-homotopic. ([def-sp-injective-resolutions]).",
+    "uses": [
+     "def-sp-injective-resolutions"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Chain-homotopic maps become equal in the derived category, so $\\beta_1\\circ\\alpha$ and $\\beta_2\\circ\\alpha$ have the same image there. Since $\\alpha$ is a quasi-isomorphism, its image in the derived category is an isomorphism; cancelling it shows that the images of $\\beta_1$ and $\\beta_2$ in the derived category agree. ([def-sp-abelian], [def-weil-abstract-derived-category]).",
+    "uses": [
+     "def-sp-abelian",
+     "def-weil-abstract-derived-category"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For a K-injective target $I^\\bullet$, the localization map from morphisms $L^\\bullet\\to I^\\bullet$ in the homotopy category to morphisms in the derived category is bijective. Hence $\\beta_1$ and $\\beta_2$ are already equal in the homotopy category, i.e. they are chain-homotopic, which gives the required maps $k^n$. ([def-weil-abstract-derived-category]).",
+    "uses": [
+     "def-weil-abstract-derived-category"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

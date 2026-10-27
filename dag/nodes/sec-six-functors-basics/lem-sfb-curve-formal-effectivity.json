@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-curve-formal-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of formal systems of proper flat curves",
+ "statement": "On schemes over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-affine-spectrum], let $\\mathcal C(T)$ be the groupoid of flat proper finitely presented morphisms $X\\to T$ of algebraic spaces whose geometric fibres have dimension at most one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Arrows in $\\mathcal C(T)$ are $T$-isomorphisms and pullback is cartesian base change; arrows over $T'\\to T$ are isomorphisms $X'\\cong X\\times_TT'$ [def-pc-fibre-product]. Algebraic spaces are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. Flatness and local finite presentation for their morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed: separated means its diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying spaces after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). Let $(A,\\mathfrak m)$ be a complete Noetherian local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion]. Let $X_n\\to\\operatorname{Spec}(A/\\mathfrak m^n)$, $n\\geq1$, be objects of $\\mathcal C(A/\\mathfrak m^n)$, equipped with compatible isomorphisms $X_{n+1}\\times_{A/\\mathfrak m^{n+1}}A/\\mathfrak m^n\\cong X_n$. There is an object $X\\to\\operatorname{Spec}A$ of $\\mathcal C(A)$ and isomorphisms $X\\times_AA/\\mathfrak m^n\\cong X_n$ compatible with all specified transition isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D58 (lemma-curves-existence)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=A/\\mathfrak m$. The special fibre $X_1$ is proper and of finite type over $k$, hence separated. Its geometric fibre has dimension at most one by hypothesis. The field-extension dimension theorem gives $\\dim|X_1|\\leq1$. The schematicity theorem for separated algebraic spaces of dimension at most one therefore represents $X_1$ by a $k$-scheme. Its properness is the given properness, now for a scheme.",
+   "uses": [
+    "lem-sfb-space-field-extension-dimension",
+    "lem-sfb-separated-space-dimension-one-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E7R, proof, opening paragraph; geometric-to-ordinary dimension uses spaces-morphisms.tex Tag 04NS."
+   }
+  },
+  {
+   "text": "Write the specified transition as $\\tau_n:X_{n+1}\\times_{S_{n+1}}S_n\\xrightarrow{\\sim}X_n$, where $S_n=\\operatorname{Spec}(A/\\mathfrak m^n)$. Define $i_n:X_n\\to X_{n+1}$ as the base-change projection composed with $\\tau_n^{-1}$. On every scheme chart of the target the quotient-base-change theorem identifies these maps with closed immersions defined by the extended quotient ideals. Thus they are representable closed immersions, and their composites identify $X_1$ with the closed subspace of $X_n$ defined by $\\mathfrak m\\mathcal O_{X_n}$. This ideal is nilpotent, since $\\mathfrak m^n=0$ on $X_n$. Thus $|X_1|\\to|X_n|$ is a homeomorphism (on a scheme chart every prime contains a nilpotent ideal). The thickening theorem represents every $X_n$ by a scheme. Each remains proper and finitely presented over $A/\\mathfrak m^n$. The scheme $X_1$, being finite type over a field, is Noetherian by the finite-type Noetherian theorem; therefore every $|X_n|$ is Noetherian and has dimension at most one.",
+   "uses": [
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E7R, proof, paragraph beginning with the lifting of L_1 and its observation that all X_n are schemes."
+   }
+  },
+  {
+   "text": "The proper scheme $X_1$ of dimension at most one is projective over $k$. Choose a closed immersion $X_1\\hookrightarrow\\mathbf P^N_k$ supplied by that theorem. Pulling back $\\mathcal O(1)$ along it gives an ample invertible module $\\mathcal L_1$ on $X_1$, including when $X_1$ is empty.",
+   "uses": [
+    "lem-sc-proper-dim-one-projective",
+    "lem-weil-pbc-projective-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A26 (lemma-dim-1-proper-projective), as used in Tag 0E7R; properties.tex Tags 01PS and 01PU for the ample module."
+   }
+  },
+  {
+   "text": "Inductively suppose $\\mathcal L_n$ has been chosen. Since $X_{n+1}$ has Noetherian underlying space of dimension at most one, the Picard lifting theorem applied to the closed immersion $i_n$ supplies an invertible $\\mathcal L_{n+1}$ and an isomorphism $\\varphi_n:i_n^*\\mathcal L_{n+1}\\xrightarrow{\\sim}\\mathcal L_n$. Begin with the ample $\\mathcal L_1$ of step 3 and choose such a pair at each integer stage. For $a<b$ put $i_{a,b}=i_{b-1}\\circ\\cdots\\circ i_a$. Set $i_{a,a}=\\mathrm{id}$ and $\\varphi_{a,a}=\\mathrm{id}$, and recursively define $\\varphi_{a,b+1}=\\varphi_{a,b}\\circ i_{a,b}^*\\varphi_b:i_{a,b+1}^*\\mathcal L_{b+1}\\xrightarrow{\\sim}\\mathcal L_a$, using the canonical identification of iterated pullbacks. Associativity of composition gives $\\varphi_{a,c}=\\varphi_{a,b}\\circ i_{a,b}^*\\varphi_{b,c}$ for $a\\leq b\\leq c$, by induction on $c-b$. Thus these choices give a compatible system, including all nonadjacent restrictions. The cited algebraization theorem requires ampleness only of $\\mathcal L_1$; no ampleness claim at higher stages is used.",
+   "uses": [
+    "lem-sc-pic-lift-closed-immersion-dim-le-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NY (lemma-lift-line-bundle-from-reduction-dimension-1); this carries the obstruction-vanishing argument in Tag 0E7R."
+   }
+  },
+  {
+   "text": "Apply polarized formal algebraization with $I=\\mathfrak m$ to the cartesian scheme system and $(\\mathcal L_n,\\varphi_n)$. The ring $A$ is Noetherian and complete, $X_1$ is proper, and $\\mathcal L_1$ is ample. It gives a proper scheme $f:X\\to\\operatorname{Spec}A$ and base-linear isomorphisms $a_n:X_n\\xrightarrow{\\sim}Y_n$, where $Y_n=X\\times_A A/\\mathfrak m^n$. If $j_n:Y_n\\to Y_{n+1}$ is the quotient inclusion, the cited statement gives $a_{n+1}\\circ i_n=j_n\\circ a_n$. Set $\\alpha_n=a_n^{-1}$. Multiplying this equality by the inverses gives $i_n\\circ\\alpha_n=\\alpha_{n+1}\\circ j_n$. Let $\\beta_n:Y_n\\xrightarrow{\\sim}Y_{n+1}\\times_{S_{n+1}}S_n$ be the canonical base-change isomorphism. By the fibre-product universal property the preceding equality says exactly $\\tau_n\\circ(\\alpha_{n+1}\\times_{S_{n+1}}S_n)\\circ\\beta_n=\\alpha_n$: the projections agree because $i_n$ was defined through $\\tau_n^{-1}$. Composing these identities verifies compatibility between any two stages. Thus the reductions are identified as the given formal system, not just individually. Properness gives finite type, quasi-compactness and separatedness. The locally finite-type morphism $f$ over the locally Noetherian base is locally of finite presentation by the cited theorem. Separatedness gives quasi-separatedness by the cited lemma; these three clauses give finite presentation by its definition.",
+   "uses": [
+    "lem-sfb-polarized-formal-algebraization",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-weil-proper-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 089A (theorem-algebraization); finite presentation: morphisms.tex Tag 01TX (lemma-noetherian-finite-type-finite-presentation)."
+   }
+  },
+  {
+   "text": "Work on an affine chart $V=\\operatorname{Spec}B\\subset X$ with $B$ a finite-type $A$-algebra. The Noetherian permanence theorem makes $B$ Noetherian. By the quotient-base-change theorem its reduction $V_n=\\operatorname{Spec}(B/\\mathfrak m^nB)$ is an affine open of $X\\times_AA/\\mathfrak m^n$, hence of $X_n$ via $\\alpha_n$. The given flatness of $X_n$ and the affine flatness criterion show that $B/\\mathfrak m^nB$ is flat over $A/\\mathfrak m^n$ for every $n\\geq1$. Apply the flat-module-powers theorem with $(R,S,I,M)=(A,B,\\mathfrak m,B)$; $B$ is generated by $1$ as a $B$-module. It follows that $B_{\\mathfrak q}$ is $A$-flat for every prime $\\mathfrak q$ containing $\\mathfrak mB$; by the affine-open stalk theorem $B_{\\mathfrak q}$ is the local ring of $X$ at the corresponding point. Since $A$ is local, these points are precisely the points of $V$ over its closed point. Thus all stalks on the closed fibre are flat over $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-module-powers",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4G (lemma-check-flatness-on-infinitesimal-nbhds), its affine translation via algebra.tex Tag 0523."
+   }
+  },
+  {
+   "text": "Let $U\\subseteq X$ be the set where the stalk is flat as an $A$-module; on an affine chart $\\operatorname{Spec}B$ the stalk at $\\mathfrak q$ is $B_{\\mathfrak q}$ by the affine-open stalk theorem. On each finite-type affine chart $\\operatorname{Spec}B$, the Noetherian flat-neighborhood theorem with $M=B$ makes this set open. The equivalence of flatness over $A$ and over its localization at the image prime identifies $U$ with the flat locus of $f$. It contains the whole closed fibre by the preceding step. Its complement $C$ is closed; since $f$ is a closed map by properness, $f(C)$ is closed in $\\operatorname{Spec}A$ and misses $\\mathfrak m$. A nonempty closed set $V(J)$ in a local spectrum contains $\\mathfrak m$, since every proper ideal $J$ lies in $\\mathfrak m$. Hence $f(C)=\\varnothing$, so $C=\\varnothing$ and $f$ is flat everywhere.",
+   "uses": [
+    "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+    "lem-weil-pbc-flat-over-localization",
+    "def-weil-flat-morphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D58 proof, globalization of the flatness assertion after Tag 0D4G; openness from algebra.tex Tag 00RC, Noetherian case."
+   }
+  },
+  {
+   "text": "For the proper scheme morphism $f$, the set $W=\\{s:\\dim X_s\\leq1\\}$ is open by upper semicontinuity of proper fibre dimension. It contains the closed point because its fibre is $X_1$. Every open neighbourhood of $\\mathfrak m$ in $\\operatorname{Spec}A$ is the whole spectrum: it contains some $D(a)$ with $a\\notin\\mathfrak m$, and such $a$ is a unit. Consequently every ordinary fibre has dimension at most one. Each fibre is proper by the proper-base-change theorem, hence a separated finite-type scheme over its residue field, so the field-extension dimension theorem shows the same bound for every geometric fibre. Thus $X$ is an object of $\\mathcal C(A)$. The already constructed $\\alpha_n$ supply all requested compatible identifications.",
+   "uses": [
+    "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "lem-sfb-space-field-extension-dimension",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4I (lemma-dimension-fibres-proper), a slightly stronger tool than the proper-flat locally constant dimension statement Tag 0D4J cited by 0D58; geometric fibres: spaces-morphisms.tex Tag 04NS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-field-extension-dimension",
+  "lem-sfb-separated-space-dimension-one-scheme",
+  "lem-sfb-thickening-of-scheme-space",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-sc-proper-dim-one-projective",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-sc-pic-lift-closed-immersion-dim-le-one",
+  "lem-sfb-polarized-formal-algebraization",
+  "pqf-lem-lft-fp-locnoeth",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-module-powers",
+  "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+  "lem-weil-pbc-flat-over-localization",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D58, with its algebraization input Tag 0E7R expanded using Tags 05ZR, 0A26, 09NY and 089A; the global flatness argument is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every compatible formal family of proper flat curves over quotients of a complete noetherian local ring algebraizes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal effectiveness of the moduli stack of curves via algebraization over a complete local ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] : IsProperMap ⇑f\", \"doc\": \"[Stacks Tag 04XU](https://stacks.math.columbia.edu/tag/04XU)\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is proper if it is separated, universally closed and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "formalEffectiv|formal.*algebraiz|algebrais.*curve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every compatible formal family of proper flat curves over quotients of a complete noetherian local ring algebraizes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) [Module.Flat R S] [IsNoetherianRing S] [FormallySmooth R A] :\\n  Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every formal system of proper flat algebraic space curves over a complete Noetherian local ring is effective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness, flatness and formally smooth ring lifting do not prove effectivity of formal algebraic-space curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of compatible proper flat curves over powers of the maximal ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] (n : ℕ) [Algebra.IsStandardSmoothOfRelativeDimension n A B],\\n  ∃ A₀ B₀ x x_1,\\n    A₀.FG ∧ Algebra.IsStandardSmoothOfRelativeDimension n (↥A₀) B\", \"doc\": \"For any commutative ring $ A $ and an $ A $-algebra $ B $ that is standard smooth of relative dimension $ n $, there exist a finitely generated subalgebra $ A_0 $ of $ A $ over $ R $, a commutative ri\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness, flatness and formally smooth ring lifting do not prove effectivity of formal algebraic-space curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] : IsProperMap ⇑f\", \"doc\": \"[Stacks Tag 04XU](https://stacks.math.columbia.edu/tag/04XU)\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is proper if it is separated, universally closed and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness, flatness and formally smooth ring lifting do not prove effectivity of formal algebraic-space curves"
+  },
+  {
+   "tool": "grep",
+   "query": "formalEffectiv|formal.*algebraiz|algebraization|algebraisation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness, flatness and formally smooth ring lifting do not prove effectivity of formal algebraic-space curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every formal system of proper flat algebraic space curves over a complete Noetherian local ring is effective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) [Module.Flat R S] [IsNoetherianRing S] [FormallySmooth R A] :\\n  Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness, flatness and formally smooth ring lifting do not prove effectivity of formal algebraic-space curves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence).",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-formal-effectivity",
+  "worker": "stage1",
+  "summary": "Expanded the 0D58 algebraization input by lifting an ample special-fibre line bundle and applying the existing polarized algebraization node. Reused low-dimensional schematicity, Picard lifting, ring-theoretic flatness, and proper-fibre dimension nodes; added only thickening schematicity and algebraic-space field-extension dimension. Proved global flatness via the closed image of the nonflat locus. For the landing return at a6d6439d456, rebased onto the current unsplit item, preserving its maintainer metadata, reread all current statement and proof dependencies, and expanded step 5 to invert the landed algebraization isomorphisms and explicitly verify compatibility with the originally specified transitions. The item statement and proof route are unchanged. On the renewed promotion-return repair, reapplied the split fields to the current unsplit record and made the specified transitions tau_n and the fibre-product compatibility equation explicit in steps 2 and 5; all cited statements were reread and all 24 quotes verified again. For the current live-DAG promotion return, reconstructed the delivery from the current unsplit record, rechecked all cited statements and 24 quotes, and replaced step 4's implicit higher restriction compatibility by the recursive formula for phi_(a,b) and its cocycle identity. The route, statement and two helper statements remain unchanged.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/plurinodal route through its moduli-of-curves formal-effectivity prerequisite; expands Tag 0D58 and the proof of its 0E7R input, without changing the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "Generic input to the Stacks 0D58/0E7R proof: A proper scheme of dimension at most one over a field is projective. No same-unit node supplies this full statement."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Generic input to the Stacks 0D58/0E7R proof: A closed immersion into projective space supplies an ample invertible sheaf. No same-unit node supplies this full statement."
+   },
+   {
+    "node": "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "why": "Generic input to the Stacks 0D58/0E7R proof: Invertible modules lift along a closed immersion into a Noetherian space of dimension at most one. No same-unit node supplies this full statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-powers",
+    "why": "Generic input to the Stacks 0D58/0E7R proof: Flatness modulo all powers of an ideal implies flatness (Noetherian case). No same-unit node supplies this full statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+    "why": "Generic input to the Stacks 0D58/0E7R proof: A flat point of a finite module over a Noetherian base has a flat basic neighborhood. No same-unit node supplies this full statement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "why": "Generic input to the Stacks 0D58/0E7R proof: Upper semicontinuity of proper fibre dimension. No same-unit node supplies this full statement."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "why": "Generic scheme input to the 0D58/0E7R construction: X x_{Spec A} Spec(A/K) -> X is the closed immersion cut out by K O_X. This supplies an explicit property of quotient base changes or separated morphisms; no same-unit statement replaces it."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Properness of each ordinary fibre is preserved by base change to its residue field; this supplies separatedness and finite type for the dimension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-proper-dim-one-projective",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-sc-pic-lift-closed-immersion-dim-le-one",
+  "lem-weil-pbc-flat-module-powers",
+  "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-7ee6de10c",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-7ee6de10c (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks 0D58 and the 0E7R proof, and re-read every cited statement in this snapshot. This head re-delivers 1b89d610. In live and side-live the item is still unsplit with an empty proof, and there is no repair note. The item statement and stmt_deps are unchanged. The only change in substance is step 4. It now defines phi_{a,b+1} = phi_{a,b} o i_{a,b}^* phi_b. The types check, because i_{a,b+1} = i_b o i_{a,b}. The cocycle identity follows by induction on c-b. The algebraization node uses only the adjacent phi_n and the ampleness of L_1, so this step is correct. The a6d6 FIX (first re-applied at 9837, then 1b89) is missing for the third time, so I re-applied it. B3: [def-a1-space-point-topology] goes back into the statement text and stmt_deps of lem-sfb-thickening-of-scheme-space and lem-sfb-space-field-extension-dimension. C1: lem-weil-pbc-affine-open-stalk-localization goes back into the uses of steps 6-7 and into proof_deps, for the identification of the stalk with B_q. The other steps are unchanged and sound. Step 1: the field-extension dimension node and the 0ADD-type schematicity node make X_1 a scheme. Step 2: quotient base change gives a nilpotent ideal, and 05ZR makes every X_n a scheme. Step 3: 0A26 and the projective-ample node give an ample L_1. Step 5: 089A gives the algebraization, I checked the tau_n/alpha_n compatibility by comparing projections, and finite presentation comes from 01TX plus quasi-separatedness. Steps 6-7: 0523 and 00RC give flatness on the closed fibre, and the closed image of the nonflat locus over a local base is empty. Step 8: 0D4I on a local base and proper base change bound the geometric fibres. Both new nodes are true and are neither duplicates nor restatements of the item. Batch-5 flags: def-trf-algebraic-space is a general definition already in the item's base stmt_deps. lem-sfb-separated-space-dimension-one-scheme reaches sec-trace-formula only through that definition. Neither is part of the trace formula or Poincare duality, so I accept both. No SGA source is cited. The fix files keep the delivered head and change only the fields above.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveFormalEffectivity",
+  "declaration": "AlgebraicGeometry.ProperCurveFamily.formal_effectivity",
+  "declarations": [
+   "AlgebraicGeometry.ProperCurveFamily.effectivityBase",
+   "AlgebraicGeometry.ProperCurveFamily.effectivityBaseStep",
+   "AlgebraicGeometry.ProperCurveFamily.effectivityBaseι",
+   "AlgebraicGeometry.ProperCurveFamily.formal_effectivity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveFormalEffectivity.lean",
+  "statement": "theorem formal_effectivity (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (X : ∀ n : ℕ, ProperCurveFamily (effectivityBase A n)) (i : ∀ n : ℕ, (X n).space.obj.obj ⟶ (X (n + 1)).space.obj.obj) (hcart : ∀ n : ℕ, IsPullback (i n) (X n).projection (X (n + 1)).projection (yoneda.map (effectivityBaseStep A n))) : ∃ Y : ProperCurveFamily (Over.mk (𝟙 (Spec (.of A)))), ∃ e : ∀ n : ℕ, pullback Y.projection (yoneda.map (effectivityBaseι A n)) ≅ (X n).space.obj.obj, (∀ n : ℕ, (e n).hom ≫ (X n).projection = pullback.snd Y.projection (yoneda.map (effectivityBaseι A n))) ∧ (∀ n : ℕ, (e n).inv ≫ pullback.fst Y.projection (yoneda.map (effectivityBaseι A n)) = i n ≫ (e (n + 1)).inv ≫ pullback.fst Y.projection (yoneda.map (effectivityBaseι A (n + 1))))",
+  "branch": "sheaf-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed def-sfb-proper-curve-moduli (added to stmt_deps). The helpers construct the actual maximal-ideal quotient bases and their canonical arrows. Cartesian squares encode the specified adjacent isomorphisms; the conclusion gives base-linear reduction isomorphisms and their compatibility with these exact transitions. Viewing all objects over Spec A simply remembers their forced composite structure map. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d302c307c",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Node diff vs live: only lean + stmt_deps gaining the landed def-sfb-proper-curve-moduli (allowed); lean.statement verbatim in file; imports exist; no duplicate. Hypotheses exact (IsLocalRing/IsNoetherianRing/IsAdicComplete m; residue field unrestricted); n indexes order n+1; X n : ProperCurveFamily over Spec(A/m^(n+1)) gives flat/proper/fp/geometric dim<=1 on algebraic spaces; transitions = cartesian squares over Spec of Ideal.Quotient.factor (direction checked), equivalent to given tau_n. Conclusion: Y over Spec A, base-linear e_n, and fst-compatibility, which with base-linearity is equivalent to e_n.inv ≫ j_n = i_n ≫ e_{n+1}.inv, i.e. compatibility with tau_n. Edge cases (empty, m=0, Artinian, any char, n=0) covered; single universe u as in the landed family notion. Helpers carry real data, only the theorem is sorry, docstrings with source/blueprint and the 8-step proof. No findings."
+ }
+}

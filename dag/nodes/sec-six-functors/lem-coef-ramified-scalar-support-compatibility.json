@@ -1,0 +1,160 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Isomorphism and composition paragraphs, expanded using the exceptional proof definition/formal-properties paragraph and parent realization steps 1--6."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Isomorphism and composition paragraphs, expanded using the exceptional proof definition/formal-properties paragraph and parent realization steps 1--6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal derived limits of ramified scalar extension systems commute with exceptional inverse image and compact support",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; localCohomology.diagramComp",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|isoWhiskerRight|rightAdjointUniq",
+   "results": "Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/Tactic/Translate/ToDual.lean; Mathlib/Tactic/Translate/ToDual.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Initial, CategoryTheory.Limits.limit",
+   "results": "CategoryTheory.Functor.Initial.limitIso; CategoryTheory.Functor.Initial.limit_pre_isIso; CategoryTheory.Functor.Initial.limitIso_inv; CategoryTheory.Functor.Initial.limitIso_hom",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural normalized cofinal scalar extension and compact support comparison for derived coefficient sheaf systems",
+   "results": "ContDiffMapSupportedIn.coe_smul; ContDiffMapSupportedIn.instSMul; instSeminormedAddCommGroupRestrictScalars; CompactlySupportedContinuousMap.instSMulOfContinuousConstSMul; Function.locallyFinsuppWithin.coe_nsmul; TestFunction.coe_ofSupportedIn; comonadicExtendScalars; Module.RestrictScalars.normedSpaceOrig",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RamifiedScalarExceptionalLimit",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "id": "lem-coef-ramified-scalar-support-compatibility",
+ "title": "Normalized ramified proper/open support comparison",
+ "statement": "Fix a prime l, a finite-field datum D of characteristic p≠l, finite extensions E⊂L of Q_l, ramification e≥1, and a separated finite-type morphism f:X→Y of separated finite-type D.k-schemes with compactification c. Let a be Context data for the actual strict coefficient-system operations, integral compact support and exceptional adjunctions [def-coef-finite-scalar-mate-data], and P the normalized preparation of [lem-coef-ramified-scalar-preparation]. Define supportSource and supportTarget by the explicit compositions in that preparation: cofinal restriction, inverse exceptional reduction comparison, inverse scalar-reduction comparison followed by upper support realization on one side; cofinal restriction, inverse exceptional and support reduction comparisons, then scalar-model inverse on the other. For every integral constructible M on Y, retainedLimit maps a.alpha at a.r.G(a.RY M), followed by P.supportSource at M, equals P.supportTarget at M followed by the prescribed integralAlphaComponent at a.GR M. This is only the proper/open support square; it asserts no existence of a Context, preparation, exceptional limit realization, or exceptional coefficient transpose.",
+ "stmt_deps": [
+  "def-coef-finite-scalar-mate-data",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-integral-scalar-extension",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-size-convention",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-ramified-scalar-preparation",
+  "lem-coef-ramified-scalar-system-transpose",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-coef-integral-exceptional-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Expand the defined support identifications. Naturality of cofinal restriction moves the actual system comparison through the retained-limit map; naturality of the proper/open scalar arrow moves the inverse exceptional-reduction comparison to the input. This reduces the calculation to the coherent reduction of the integral object a.GR M.",
+   "uses": [
+    "lem-coef-ramified-scalar-preparation",
+    "lem-coef-ramified-scalar-system-transpose",
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under steps 3 and 5, the total limit of $\\alpha^{\\rm sys}$ is the limit of its specified proper coefficient projection followed by the open coefficient identification, evaluated on the actual reduction system of $P=G_RM$. This is precisely the ordered strict-tower composite defining $c_{S/R,P}$ in the integral compact-support coefficient-comparison theorem. The system-transpose theorem specifies $\\alpha^{\\rm sys}$ by that same simultaneous construction and finite-free normalization; its quotient compatibility is an identity before limit. Thus the maps agree before applying total limit, after the stated system isomorphisms. The integral comparison theorem uses $\\chi$ to pass to strict scalar extension, giving exactly $\\alpha_{G_RM}$. Naturality follows by composing the functorial counits, scalar reassociations, $\\chi$, arithmetic restriction and the specified system functors. Projection identities and their scalar adjoints follow from the counit description and $p_n\\rho_e=p_{en}$. No equality of system maps has been inferred solely from equality of their evaluations.",
+   "uses": [
+    "lem-coef-ramified-scalar-system-transpose",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+    "place": "Finite scalar extension paragraph: finite free tensor and the derived limit defining integral compact support; expanded using actual reduction/limit counits."
+   }
+  },
+  {
+   "text": "Apply the fixed scalar-model and support normalizations. The inverse completion at the output and forward completion at the input are exactly the two completion conjugations in integralAlphaComponent. The reduction/limit triangle identities cancel the remaining units, giving the claimed equality of the two explicitly composed morphisms.",
+   "uses": [
+    "lem-coef-ramified-scalar-preparation",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-ramified-scalar-preparation",
+  "lem-coef-ramified-scalar-system-transpose",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-sp-strict-tower-arithmetic-restriction"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Parent realization step 6: the ordered proper/open scalar comparison after total limit",
+   "via": [
+    "lem-coef-ramified-scalar-exceptional-limit",
+    "lem-coef-finite-scalar-mate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RamifiedScalarSupportCompatibility",
+  "file": "lean/Sheaf/SixFunctors/RamifiedScalarSupportCompatibility.lean",
+  "declaration": "WeilConjectures.RamifiedScalarSupportCompatibility.supportComparison",
+  "statement": "theorem supportComparison (e : ℕ)\n    (he : PurCompactSupport.Ramification l E L i e) (hp : 1 ≤ e)\n    (a : Context l E L i D hl f c)\n    (P : RamifiedScalarPreparation.Preparation a e he hp)\n    (M : sfIntegralConstructibleCategory l E Y) :\n    (retainedLimit l L Y e).map ((a.alpha.app (a.r.G.obj (a.RY.obj M))).hom) ≫\n        P.supportSource.hom.app M =\n      P.supportTarget.hom.app M ≫ a.integralAlphaComponent (a.GR.obj M)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T204409-L-2951256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T204409-L-2951256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

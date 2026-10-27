@@ -1,0 +1,198 @@
+{
+ "id": "lem-sfb-groupoid-subset-saturation-invariant",
+ "kind": "statement",
+ "title": "Saturation of a subset under a scheme groupoid is invariant",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme]. For every subset $A\\subseteq|U|$, define $\\sigma(A)=t(s^{-1}(A))\\subseteq|U|$ using the underlying maps of points. Then $s^{-1}(\\sigma(A))=t^{-1}(\\sigma(A))$ as subsets of $|R|$. No openness, finiteness, flatness or separation assumption on the source and target morphisms is required.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03LO (lemma-constructing-invariant-opens), part (1), together with the subset-invariance equivalence following Tag 03BC (definition-invariant-open)."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=t(s^{-1}(A))$. Fix $r\\in|R|$ with $s(r)\\in B$, and choose $a\\in|R|$ with $s(a)\\in A$ and $t(a)=s(r)$. Let $P=R\\times_{s,U,t}R$ with projections $p_0,p_1$. Apply [lem-weil-pbc-base-change-image] with $f=s$, $g=t$ and $C=\\{r\\}$: $p_1(p_0^{-1}(\\{r\\}))=t^{-1}(s(\\{r\\}))$. The equality $t(a)=s(r)$ puts $a$ in the right hand side. Thus there is $z\\in|P|$ with $p_0(z)=r$ and $p_1(z)=a$. This uses an image identity for scheme fibre products, without identifying their underlying spaces with topological fibre products.",
+   "uses": [
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LO (lemma-constructing-invariant-opens), proof of (1), expanding Tags 022Q (lemma-pre-equivalence-equivalence-relation-points) and 0232 (lemma-groupoid-pre-equivalence)."
+   }
+  },
+  {
+   "text": "The groupoid laws in [def-a1-groupoid-scheme] give $s\\circ c=s\\circ p_1$ and $t\\circ c=t\\circ p_0$. Evaluating at the point $z$ from step 1 gives $s(c(z))=s(a)\\in A$ and $t(c(z))=t(r)$. Hence $t(r)\\in t(s^{-1}(A))=B$. We have proved $s^{-1}(B)\\subseteq t^{-1}(B)$.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LO (lemma-constructing-invariant-opens), proof of (1), expanding Tags 022Q (lemma-pre-equivalence-equivalence-relation-points) and 0232 (lemma-groupoid-pre-equivalence)."
+   }
+  },
+  {
+   "text": "For the reverse inclusion, take $r\\in|R|$ with $t(r)\\in B$. By the inverse laws $s\\circ i=t$ and $t\\circ i=s$ of [def-a1-groupoid-scheme], one has $s(i(r))=t(r)\\in B$. The implication proved in steps 1 and 2, applied to $i(r)$, gives $t(i(r))\\in B$, so $s(r)\\in B$. Thus $t^{-1}(B)\\subseteq s^{-1}(B)$, proving equality. The only input beyond set membership and groupoid identities was the scheme fibre-product image identity, so no openness, finiteness, flatness or separation hypothesis is used.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LO (lemma-constructing-invariant-opens), part (1); equivalence of the two subset-invariance formulations immediately after Tag 03BC (definition-invariant-open)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-base-change-image",
+  "def-a1-groupoid-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03LO (lemma-constructing-invariant-opens), proof of (1), expanding Tags 022Q (lemma-pre-equivalence-equivalence-relation-points) and 0232 (lemma-groupoid-pre-equivalence)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a scheme groupoid every subset has invariant orbit saturation t(s inverse A)",
+   "results": "{\"t\": \"2026-10-23T09:32:46Z\", \"tool\": \"leansearch\", \"query\": \"For a scheme groupoid every subset has invariant orbit saturation t(s inverse A)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IsInvariantBlock\", \"MulAction.orbit_smul\", \"Representation.le_comap_invariants\", \"AddAction.orbit_addSubmonoid_subset\", \"Finset.subset_smul_finset_iff\", \"MulAction.set_mem_fixedBy_iff\", \"MulAction.smul_subset_of_set_mem_fixedBy\", \"orbit_subgroup_eq_self_of_mem\"], \"digest\": \"5b691764be24440a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group-action orbits, ordinary subgroupoid generation and manifold structure groupoids do not establish saturation invariance for underlying points of internal groupoids in schemes; no Loogle scheme-groupoid hit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T09:32:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group-action orbits, ordinary subgroupoid generation and manifold structure groupoids do not establish saturation invariance for underlying points of internal groupoids in schemes; no Loogle scheme-groupoid hit."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(orbit|invariant)|saturat.*groupoid",
+   "results": "{\"t\": \"2026-10-23T09:33:58Z\", \"tool\": \"grep\", \"query\": \"groupoid.*(orbit|invariant)|saturat.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\"], \"digest\": \"b282dd2653bc853f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group-action orbits, ordinary subgroupoid generation and manifold structure groupoids do not establish saturation invariance for underlying points of internal groupoids in schemes; no Loogle scheme-groupoid hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The saturation of any subset under the source and target maps of an internal groupoid in schemes is invariant",
+   "results": "{\"t\": \"2026-10-23T09:34:08Z\", \"tool\": \"leanfinder\", \"query\": \"The saturation of any subset under the source and target maps of an internal groupoid in schemes is invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.restrict_X\", \"closedUnderRestriction_iff_id_le\", \"CategoryTheory.Subgroupoid.subset_generated\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V_self\", \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_X\", \"CategoryTheory.Subgroupoid.generated_le_generatedNormal\", \"CategoryTheory.Precoverage.mem_toGrothendieck_iff\", \"CategoryTheory.Subgroupoid.generated\"], \"digest\": \"2deb4951247dbca6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group-action orbits, ordinary subgroupoid generation and manifold structure groupoids do not establish saturation invariance for underlying points of internal groupoids in schemes; no Loogle scheme-groupoid hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an internal groupoid in schemes the saturation of any subset by source and target is invariant",
+   "results": "{\"t\": \"2026-10-23T11:52:35Z\", \"tool\": \"leanfinder\", \"query\": \"For an internal groupoid in schemes the saturation of any subset by source and target is invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Coverage.saturate_iff_saturate_toPrecoverage\", \"CategoryTheory.Subgroupoid.subset_generated\", \"CategoryTheory.Subgroupoid.generatedNormal_isNormal\", \"CategoryTheory.Subgroupoid.generated_le_generatedNormal\", \"CategoryTheory.Subgroupoid.disconnect_le\", \"CategoryTheory.Coverage.mem_toGrothendieck\", \"CategoryTheory.Subgroupoid.generated\", \"CategoryTheory.Coverage.Saturate\"], \"digest\": \"ea7e9e7ac5c087d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary subgroupoids, manifold structure groupoids, coverage saturation or scheme gluing/restriction; none proves invariance for arbitrary internal scheme groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T11:52:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary subgroupoids, manifold structure groupoids, coverage saturation or scheme gluing/restriction; none proves invariance for arbitrary internal scheme groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(orbit|invariant)|saturat.*groupoid",
+   "results": "{\"t\": \"2026-10-23T11:52:36Z\", \"tool\": \"grep\", \"query\": \"groupoid.*(orbit|invariant)|saturat.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\"], \"digest\": \"b282dd2653bc853f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary subgroupoids, manifold structure groupoids, coverage saturation or scheme gluing/restriction; none proves invariance for arbitrary internal scheme groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGroupoidScheme|GroupoidScheme|exists_preimage_pullback|image_preimage_eq_of_isPullback",
+   "results": "{\"t\": \"2026-10-23T11:52:54Z\", \"tool\": \"grep\", \"query\": \"IsGroupoidScheme|GroupoidScheme|exists_preimage_pullback|image_preimage_eq_of_isPullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\"], \"digest\": \"1fbe542da88e38e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item; scheme fibre-product point-lifting and image identities are relevant proof tools, already represented by lem-weil-pbc-base-change-image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Saturation of an arbitrary set by an internal scheme groupoid is closed under arrows and inverse arrows",
+   "results": "{\"t\": \"2026-10-23T11:52:54Z\", \"tool\": \"leansearch\", \"query\": \"Saturation of an arbitrary set by an internal scheme groupoid is closed under arrows and inverse arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StructureGroupoid.symm'\", \"CategoryTheory.Subgroupoid.inv\", \"CategoryTheory.Coverage.Saturate.below.transitive\", \"CategoryTheory.GrothendieckTopology.close_apply\", \"CategoryTheory.Coverage.Saturate.below\", \"StructureGroupoid.symm\", \"CategoryTheory.Precoverage.Saturate.below.transitive\", \"CategoryTheory.Subgroupoid.inv_mem_iff\"], \"digest\": \"249ad6a50866655a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary subgroupoids, manifold structure groupoids, coverage saturation or scheme gluing/restriction; none proves invariance for arbitrary internal scheme groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relation on topological points of a scheme groupoid is transitive and symmetric so the image of a subset by target source is invariant",
+   "results": "{\"t\": \"2026-10-23T11:52:55Z\", \"tool\": \"leanfinder\", \"query\": \"The relation on topological points of a scheme groupoid is transitive and symmetric so the image of a subset by target source is invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.preimage_toBase_eq_range_ι\", \"AlgebraicGeometry.Scheme.ι_image_homOfLE_le_ι_image\", \"AlgebraicGeometry.Scheme.Opens.range_ι\", \"AlgebraicGeometry.Scheme.Opens.opensRange_ι\", \"AlgebraicGeometry.Scheme.Opens.ι_image_le\", \"AlgebraicGeometry.Scheme.Opens.mem_ι_image_iff\"], \"digest\": \"374d3fa0847ee0e7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary subgroupoids, manifold structure groupoids, coverage saturation or scheme gluing/restriction; none proves invariance for arbitrary internal scheme groupoids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-almost-dense-flat-locus",
+  "date": "2026-10-23",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-finite-flat-over-almost-dense-subscheme. Supporting Tag 0ABA, induction: invariance of the saturated closures removed at each stage, using Tag 03LO(1).",
+   "via": [
+    "lem-sfb-finite-groupoid-almost-dense-flat-locus",
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-subset-saturation-invariant",
+  "worker": "stage1",
+  "summary": "Q94: statement unchanged. Expanded Stacks 03LO(1) and the following equivalence of invariant-subset formulations into point lifting, composition and inversion. Reused the existing Mathlib leaf lem-weil-pbc-base-change-image for the non-elementary scheme-point lifting input, obtained by its singleton specialization; no new nodes. Checked the prescribed composition orientation and unrestricted hypotheses, searched project Lean and the whole blueprint, and recorded actual Mathlib searches.",
+  "blueprint": "The item is a created supporting node with blueprint.from.node null, as confirmed by blueprint_refs.py ancestor. Its recorded chain serves det-thm-sf-ctf-stability-direct-images, proof (3), through the invariant-removal step of Tag 0ABA in the alteration input. The current latest blueprint proof (3) is the direct-image assembly; this local groupoid lemma supplies the existing chain without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-3e7b52fd4",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-3e7b52fd4 (reviewer sub-agent of L); spot-checked: The statement is unchanged and matches Stacks groupoids 03LO(1) together with the equivalence s^{-1}W=t^{-1}W stated after 03BC. It needs no extra hypotheses, just as Stacks part (1) needs none. The delivery adds no new nodes. Step 1 specializes lem-weil-pbc-base-change-image (Mathlib image_preimage_eq_of_isPullback) to f=s, g=t, C={r}, which lifts the pair (r,a) to a point z of R×_{s,U,t}R. The p_0/p_1 orientation agrees with def-a1-groupoid-scheme (sc=s·pr_1, tc=t·pr_0). Step 2 evaluates c at z, so t(r)∈B. Step 3 uses si=t and ti=s for the reverse inclusion. All three steps are correct. Small cases checked: empty A, A=|U| and the trivial groupoid. No SGA source is used. The DAG greps for 03LO, 03BC and saturation found no duplicate: the only other 03LO hits are the parent node and an unrelated flat-descent lemma. The item is still unsplit on base, live and side-live, so no other group has superseded it. Unit route unchanged; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidSubsetSaturationInvariant",
+  "declaration": "AlgebraicGeometry.IsGroupoidScheme.subset_saturation_invariant",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidSubsetSaturationInvariant.lean",
+  "statement": "theorem IsGroupoidScheme.subset_saturation_invariant {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (_hG : IsGroupoidScheme s t e i c) (A : Set U) : s ⁻¹' (t '' (s ⁻¹' A)) = t ⁻¹' (t '' (s ⁻¹' A))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97620871a",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 03LO(1)+03BC equivalence clause by clause: U R : Scheme.{u}, s t e i, c : pullback s t ⟶ R, IsGroupoidScheme hypothesis (orientation c≫s = snd≫s, c≫t = fst≫t checked against the landed structure), arbitrary A : Set U, conclusion s⁻¹'(t''(s⁻¹'A)) = t⁻¹'(t''(s⁻¹'A)); no extra assumptions or universe restriction. Proof plan via Scheme.image_preimage_eq_of_isPullback sound. Edge cases empty A, A=|U|, empty U, trivial groupoid ok. Node diff vs side-live only adds lean; statement verbatim in file; stmt_deps exact; docstrings with source place and blueprint id; sorry only; report has Worker report and Second reading sections. No duplicate (FpqcInvariantIntersectionNeighbourhoods is a descent-datum result). No file changed, so no compile."
+ }
+}

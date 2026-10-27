@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-kummer-boundary-arbitrary-pullback",
+ "kind": "statement",
+ "title": "The Kummer boundary commutes with arbitrary scheme pullback",
+ "statement": "Let f:X→Y be any morphism of schemes [def-pc-scheme], and let N be invertible on both X and Y. For any c∈H¹(Y,G_m), pulling back δ_N(c) to H²(X,μ_N) gives δ_N of the pulled-back c. The pullback maps are inverse image on etale sheaf cohomology followed by the canonical coefficient maps f⁻¹G_m→G_m and f⁻¹μ_N→μ_N [def-weil-pbc-cohomology-pullback], [def-sc-kummer-sequence].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Proof: Both defining components commute with base change, so the isomorphism does too; the Kummer description by the class of O(1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-cohomology-pullback",
+  "def-sc-kummer-sequence"
+ ],
+ "proof": [
+  {
+   "text": "The canonical G_m pullback comparison commutes with multiplication by N. Its restriction to kernels is the canonical μ_N comparison, so these three arrows form a morphism from the pulled-back Kummer short exact sequence to the Kummer sequence on X.",
+   "uses": [
+    "def-sc-kummer-sequence",
+    "lem-sc-kummer-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the connecting homomorphism, first under the exact inverse image functor and then under this morphism of short exact sequences, gives the asserted equality in degree two. This is precisely the complete existing proof of Scheme.rootsOfUnityCohomologyMap_kummerδ₁.",
+   "uses": [
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-kummer-sequence",
+  "lem-sc-kummer-exact",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+   "place": "Proof: Both defining components commute with base change, so the isomorphism does too; the Kummer description by the class of O(1)."
+  },
+  "why": "Record the general, already proved source theorem used by the shorter Chern base-change proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kummer|gmCohomologyMap|pullbackMapTwistIso",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. Reuse the already proved source-library declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first Chern class from the Kummer boundary is natural under pullback of line bundles",
+   "results": "8 hits: VectorBundle.pullback, exteriorPower.oneEquiv_naturality, ModuleCat.exteriorPower.iso₁_hom_naturality",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. Reuse the already proved source-library declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Picard H1 Gm identification under arbitrary scheme morphism and pullback of projective twisting sheaf",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. Reuse the already proved source-library declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ChernMapBaseChange",
+  "date": "2026-10-26",
+  "group": "X7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Finite projective-line classes used by the levelwise diagonal check; base change of the positive Kummer Chern component.",
+   "via": [
+    "lem-sp-finite-p1-chern-map-base-change",
+    "lem-sp-finite-p1-chern-adjunct-base-change",
+    "lem-sp-finite-p1-kummer-naturality",
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityPullback",
+  "declaration": "AlgebraicGeometry.Scheme.rootsOfUnityCohomologyMap_kummerδ₁",
+  "statement": "lemma rootsOfUnityCohomologyMap_kummerδ₁ (hY : IsUnit (n : Γ(Y, ⊤))) (hX : IsUnit (n : Γ(X, ⊤)))\n    (c : Y.CohomologicalPicardGroup) :\n    rootsOfUnityCohomologyMap g n 2 (Y.kummerδ₁ n hY c) =\n      X.kummerδ₁ n hX (gmCohomologyMap g 1 c)",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-26",
+  "note": "Already proved in the adopted source library; no new Lean declaration, no new sorry. The scheme morphism and (for Kummer) N are section variables in the source file."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2cc84",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T142458-L-330646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2cc84",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T142458-L-330646",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 9 adapted unclaimed modules vs published clone, DAG nodes, change record; 10 delivered files + 43 direct importers compiled in sandbox (all OK, max 50.8 s), axioms clean"
+ }
+}

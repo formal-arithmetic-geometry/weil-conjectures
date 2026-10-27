@@ -1,0 +1,301 @@
+{
+ "id": "lem-tw-lisse-lattice-heart-lift",
+ "kind": "statement",
+ "title": "Constructible lattices lift to locally free rational-heart objects",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ in $\\overline{\\mathbf Q}_\\ell$, its valuation ring $R$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a finite-type $k$-scheme, without separatedness [def-weil-scheme-morphism-properties]. On $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] set $B_X=\\varprojlim_{n\\ge1}(R/t^n)_X$ [def-weil-completed-integral-coefficients] and $A_X=B_X[1/t]$, the sheafification of sectionwise localization. Use ordinary module sheaves and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $\\mathcal C_X=D^b_c(X,R)$ for the integral constructible category [def-weil-derived-complete-integral-detailed], $Q_X:\\mathcal C_X\\to\\mathcal R_X=D^b_c(X,E)$ for raw rationalization [def-weil-rationalization-karoubi], and $F_X:D(B_X)\\to D(A_X)$ for $K\\mapsto A_X\\otimes^L_{B_X}K$. Write $J_X(Q_XK)=F_XK$, $J_X(u\\otimes a)=aF_X(u)$ for the induced functor. A lisse rational object means an object of the standard heart [def-weil-constructible-heart] pro-etale locally isomorphic to a finite sum of coefficient units [def-real-rational-lisse-heart]. A finite locally free module sheaf means one pro-etale locally isomorphic to $A_X^{\\oplus r}$, allowing rank zero and varying finite ranks.\n\nLet $L$ be a finite locally free $A_X$-module sheaf. There exist a constructible $B_X$-module sheaf $N$, an isomorphism $\\alpha:A_X\\otimes_{B_X}N\\xrightarrow{\\sim}L$, a covering family of quasi-compact etale charts $u_i:Y_i\\to X$, finite locally free $B_{Y_i}$-module sheaves $M_i$, and isomorphisms $\\beta_i:A_{Y_i}\\otimes_{B_{Y_i}}M_i\\xrightarrow{\\sim}L|_{Y_i}$. Here constructible for $N$ means that on each stratum of a finite locally closed stratification it is pro-etale locally $B\\otimes_R V$ with $V$ a finitely presented $R$-module. Both $N[0]$ and $M_i[0]$ belong to the appropriate integral constructible categories, and $Q_X(N[0])$ lies in the standard heart.\n\nFor every choice of such $N,\\alpha,(Y_i,M_i,\\beta_i)$, the specified sheaf isomorphism $\\beta_i^{-1}\\alpha|_{Y_i}$ lifts uniquely to an isomorphism\n$$Q_{Y_i}(N|_{Y_i}[0])\\xrightarrow{\\sim}Q_{Y_i}(M_i[0])$$\nwhose image under $J_{Y_i}$ is that sheaf isomorphism in degree zero. The inverse has the corresponding inverse image under $J_{Y_i}$. Consequently $Q_X(N[0])$ is rationally lisse. This assertion imposes no globally locally free integral lattice on $L$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, Proposition 6.8.4(6), Proposition 6.8.11(3); rationalized lattice lifting in Proposition 6.8.14(2)"
+ },
+ "stmt_deps": [
+  "def-real-rational-lisse-heart",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-sheaf-of-modules-category",
+  "def-per-continuous-rational-realization-data",
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-real-lisse-realization-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-ringed-section-localization"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-tw-lisse-lattice-normalized-realizations] to obtain normalized realizations, and [lem-tw-lisse-lattice-choice-existence] to obtain global constructible and quasi-compact etale-local free lattice choices for each L.",
+   "uses": [
+    "lem-tw-lisse-lattice-normalized-realizations",
+    "lem-tw-lisse-lattice-choice-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any chosen c, apply [lem-tw-lisse-lattice-single-comparisons] to get integral membership of all three kinds of single complexes and invertibility of their specified comparison maps.",
+   "uses": [
+    "lem-tw-lisse-lattice-single-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A single complex has no cohomology outside degree zero. Choose that same integral object and the identity isomorphism in both rational standard classes; this proves the rational heart property directly.",
+   "uses": [
+    "def-weil-constructible-heart"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each quasi-compact etale chart is finite type over the same field. Apply [lem-tw-lisse-lattice-realization-faithful] there. Conjugate the specified degree-zero isomorphism by the two singleComparison isomorphisms and use Functor.preimageIso. Its forward and inverse equations follow from map_preimage and cancellation. Any other lift has the same forward image after cancellation, hence the same hom by faithfulness, and is equal by Iso.ext.",
+   "uses": [
+    "lem-tw-lisse-lattice-realization-faithful",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget only the specified image equations of these actual local raw isomorphisms. Apply [lem-tw-lisse-lattice-lisse-descent] to obtain the required pro-etale completed-pullback finite-free witnesses. Assemble all conclusions into Choice.Assertions.",
+   "uses": [
+    "lem-tw-lisse-lattice-lisse-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-etale-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-tw-lisse-lattice-choice-existence",
+  "lem-tw-lisse-lattice-lisse-descent",
+  "lem-tw-lisse-lattice-normalized-realizations",
+  "lem-tw-lisse-lattice-realization-faithful",
+  "lem-tw-lisse-lattice-single-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lean assembly of the five strict substeps of the original nine-step plan. Degree-zero heart and categorical specified-isomorphism lifting, including inverse and uniqueness, are proved directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free continuous E module sheaf has a constructible integral lattice whose rationalization is locally a finite sum of units in the standard heart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat}\\n  {ins\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, there exists local ge\"}\n  {\"name\": \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [inst_2 : ∀ (X : C), (J.over X).WEqualsLoca\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, this function const\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {M : SheafOfModules R}\\n  {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBiject\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules equipped with local generators data\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"A predicate asserting that, given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, the generating sections of $M$ \"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat}\\n  {inst_2 : J.WEqualsLocallyBijective AddCommGrpCat}\\n  {inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$ with finitely generated sections $\\\\sigma$, the index set $\\\\s\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale locally integral lattices lift isomorphisms through fully faithful rational scalar extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"galLift\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"{A : Type u_1} →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (L₂ : Type u_4) →\\n        {B : Type u_6} →\\n          {B₂ : Type u_7} →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given commutative rings $A$, $B$, and $B_2$, fields $K$, $L$, and $L_2$ with $K$ as the fraction field of $A$, and $L$, $L_2$ as algebraic extensions of $K$, if $B$ and $B_2$ are the integral closures\"}\n  {\"name\": \"galLiftEquiv_apply\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} (K : Type u_2) (L : Type u_3) (L₂ : Type u_4) {B : Type u_6} {B₂ : Type u_7} [inst : CommRing A]\\n  [inst_1 : CommRing B] [inst_2 : CommRing B₂] [inst_3 : Algebra A B] [inst_4 : Algebra A B₂] [inst_5 : Field K]\\n  [inst_6 : Field L] [inst_7 : Field L₂] [inst_8 : Algebra A K] [inst_9 :\", \"doc\": \"Given a commutative ring $ A $ with fraction field $ K $, and algebraic extensions $ L $, $ L_2 $ of $ K $, if $ B $, $ B_2 $ are the integral closures of $ A $ in $ L $, $ L_2 $ respectively under sc\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {s : Set S},\\n  Ideal.span s = ⊤ →\\n    ∀ (Sᵣ : ↑s → Type u_4) [inst_5 : (r : ↑s) → CommRing (Sᵣ r)] [inst_6 : (r : ↑s) → Algebra S (Sᵣ r)]\\n   \", \"doc\": \"Let $R$ and $S$ be commutative rings, with $S$ being an $R$-algebra, and let $B$ be another $R$-algebra. For a ring $A$ and an $A$-algebra $C$, let $\\\\overline{C}^A$ denote the integral closure of $A$ \"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (M : Submonoid R) [IsLocalization M S],\\n  Function.Bijective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at a submonoid $ M $, then the canonical map from the tensor product of the integral closure of $ R $ in $ B $ with $ S $ over $ R $ to the\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {T : Type u_4} [inst_5 : CommRing T] [inst_6 : Algebra R T]\\n  [inst_7 : Algebra S T] [IsScalarTower R S T],\\n  Function.Bijective ⇑(TensorProd\", \"doc\": \"Given a scalar tower $ R \\to S \\to T $ of commutative rings with compatible algebra structures, if the integral closure maps $ \\\\text{IntegralClosure}(R,S,B) $ and $ \\\\text{IntegralClosure}(S,T,S \\\\otimes_\"}\n  {\"name\": \"galRestrict'_galLift\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} (K : Type u_2) (L : Type u_3) (L₂ : Type u_4) {B : Type u_6} {B₂ : Type u_7} [inst : CommRing A]\\n  [inst_1 : CommRing B] [inst_2 : CommRing B₂] [inst_3 : Algebra A B] [inst_4 : Algebra A B₂] [inst_5 : Field K]\\n  [inst_6 : Field L] [inst_7 : Field L₂] [inst_8 : Algebra A K] [inst_9 :\", \"doc\": \"For any $A$-algebra homomorphism $\\\\sigma: B \\\\to B_2$ between the integral closures $B$ of $A$ in $L$ and $B_2$ of $A$ in $L_2$, applying the $K$-algebra homomorphism lifting (galLift) followed by rest\"}\n  {\"name\": \"galLift_galRestrict'\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} (K : Type u_2) (L : Type u_3) (L₂ : Type u_4) {B : Type u_6} {B₂ : Type u_7} [inst : CommRing A]\\n  [inst_1 : CommRing B] [inst_2 : CommRing B₂] [inst_3 : Algebra A B] [inst_4 : Algebra A B₂] [inst_5 : Field K]\\n  [inst_6 : Field L] [inst_7 : Field L₂] [inst_8 : Algebra A K] [inst_9 :\", \"doc\": \"For any $K$-algebra homomorphism $\\\\sigma: L \\\\to L_2$, the composition of the lifting construction $\\\\text{galLift}$ applied to the restriction $\\\\text{galRestrict}'(\\\\sigma)$ recovers $\\\\sigma$ itself. Th\"}\n  {\"name\": \"RingHom.etale_algebraMap\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (algebraMap R S).Etale ↔ Algebra.Etale R S\", \"doc\": \"The canonical algebra map from a commutative ring $ R $ to an $ R $-algebra $ S $ is étale if and only if $ S $ is an étale algebra over $ R $. This equivalence holds because both conditions require $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] (I : Type u) : SheafOfModules R\", \"doc\": \"The free sheaf of modules on a certain type `I`.\"}\n  {\"name\": \"SheafOfModules.freeSection\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {I : Type u} (i : I) : (SheafOfModules.free I).sections\", \"doc\": \"The tautological section of `free I : SheafOfModules R` corresponding to `i : I`.\"}\n  {\"name\": \"SheafOfModules.freeFunctor_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] (X : Type u) : SheafOfModules.freeFunctor.obj X = SheafOfModules.free X\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.ιFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {I : Type u} (i : I) : SheafOfModules.unit R ⟶ SheafOfModules.free I\", \"doc\": \"The inclusions `unit R ⟶ free I`.\"}\n  {\"name\": \"SheafOfModules.freeMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {I J✝ : Type u} (f : I → J✝) : SheafOfModules.free I ⟶ SheafOfModules.free J\", \"doc\": \"The morphism of presheaves of `R`-modules `free I ⟶ free J` induced by\\na map `f : I → J`.\"}\n  {\"name\": \"SheafOfModules.freeHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) {I : Type u} : (SheafOfModules.free I ⟶ M) ≃ (I → M.s\", \"doc\": \"The data of a morphism `free I ⟶ M` from a free sheaf of modules is\\nequivalent to the data of a family `I → M.sections` of sections of `M`.\"}\n  {\"name\": \"SheafOfModules.sectionMap_freeMap_freeSection\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {I J✝ : Type u} (f : I → J✝) (i : I) : SheafOfModules.sectionsMap (SheafOfMo\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.freeFunctor_map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {X Y : Type u} (f : X ⟶ Y) : SheafOfModules.freeFunctor.map f = SheafOfModul\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.ιFree_freeMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {I J✝ : Type u} (f : I → J✝) (i : I) : CategoryTheory.CategoryStruct.comp (S\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.freeSumIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] (I J✝ : Type u) : SheafOfModules.free I ⨿ SheafOfModules.free J✝ ≅ SheafOfMo\", \"doc\": \"A binary coproduct of free sheaves of modules is the free sheaf\\nof modules on the sum type.\"}\n  {\"name\": \"SheafOfModules.ιFree_freeMap_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {I J✝ : Type u} (f : I → J✝) (i : I) {Z : SheafOfModules R} (h : SheafOfModu\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.ιFree_freeMap_map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {I J✝ : Type u} (f : I → J✝) (i : I) {D : Type u_1} [_instD : CategoryTheory\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|integral.*lattice|rationalization",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"173\", \"text\": \"  have : f (integralBasis K i) = ((latticeBasis K).restrictScalars ℚ) i := by\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"296\", \"text\": \"    exact ⟨integralBasis K i, (canonicalEmbedding.latticeBasis_apply K i).symm⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"710\", \"text\": \"  have : f (integralBasis K i) = ((latticeBasis K).restrictScalars ℚ) i := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean\", \"line\": \"16\", \"text\": \"integral lattice with an arbitrary reflexive module equipped with a bilinear form.\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/MetricSeparated.lean\", \"line\": \"47\", \"text\": \"lemma isSeparated_iff_setRelIsSeparated :\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"103\", \"text\": \"  .of_maximal_isSeparated <| by simpa [isSeparated_iff_setRelIsSeparated] using hN\"}\n  {\"file\": \"Mathlib/Data/Rel/Separated.lean\", \"line\": \"45\", \"text\": \"alias _root_.Set.Subsingleton.relIsSeparated := IsSeparated.of_subsingleton\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/L1Space/HasFiniteIntegral.lean\", \"line\": \"118\", \"text\": \"theorem HasFiniteIntegral.mono_nonneg [Lattice β] [HasSolidNorm β] [AddLeftMono β] {f g : α → β}\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free continuous E module sheaf has a constructible integral lattice whose rationalization is locally a finite sum of units in the standard heart",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFiniteType.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat]\\n  [inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat]\\n  [ins\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, if there exists local generators d\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {M : SheafOfModules R}\\n  [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat]\\n  [inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBiject\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules with local generators data $p$, if \"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"SheafOfModules.ιFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"{I : Type u} (i : I) : unit R ⟶ free I\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFiniteType] : M.LocalGeneratorsData\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, this function const\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsFiniteType\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*lattice|lattice.*constructible|rationalization|rationalisation",
+   "results": "0 hits; . None states the continuous l-adic constructible integral lattice and rational-heart lifting assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor.FullyFaithful",
+   "results": "loogle: unknown identifier 'Functor.FullyFaithful'",
+   "date": "2026-10-22",
+   "verdict": "invalid query; corrected by subsequent SheafOfModules query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse l-adic sheaf has a constructible integral lattice and the rationalized constructible derived category is fully faithful in sheaves of field modules",
+   "results": "8 hits; LightCondSet.LocallyConstant.functorFullyFaithful, CondensedSet.LocallyConstant.functorFullyFaithful, SheafOfModules.fullyFaithfulForget, CondensedMod.LocallyConstant.fullyFaithfulFunctor, SheafOfModules.instAbelian, LightCondMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.instFullModuleCatLightCondensedDiscrete, AlgebraicGeometry.Scheme.Modules.instAbelian. None states the continuous l-adic constructible integral lattice and rational-heart lifting assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free sheaf over continuous l-adic field coefficients admits a constructible integral lattice and rationalized heart isomorphisms lift uniquely",
+   "results": "8 hits; Condensed.finFree, Condensed.profiniteFree, LightCondMod.ofSheafLightProfinite, CondensedMod, Condensed.profiniteSolid, LightCondAb.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.IsSolid. None states the continuous l-adic constructible integral lattice and rational-heart lifting assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "12 hits; SheafOfModules, SheafOfModules.unit, SheafOfModules.instCategory, SheafOfModules.sections, SheafOfModules.Hom, SheafOfModules.instPreadditive, SheafOfModules.sectionsFunctor, SheafOfModules.sectionsFunctor_obj. None states the continuous l-adic constructible integral lattice and rational-heart lifting assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An l-adic local system has a stratified finitely presented integral model; morphisms between integral constructible complexes after inverting a uniformizer are ambient derived morphisms",
+   "results": "8 hits; BDeRham, BDeRhamPlus, AlgebraicGeometry.LocallyOfFinitePresentation, Condensed.profiniteSolid, localCohomology.diagram, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, Condensed.profiniteFree, localCohomology.ofDiagram. None states the continuous l-adic constructible integral lattice and rational-heart lifting assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|constructible.*lattice|integral.*lattice",
+   "results": "0 hits; . None states the continuous l-adic constructible integral lattice and rational-heart lifting assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-lisse-rational-realization",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof of lem-tw-dual-negation, first sentence: identifying the dual stalk and its Frobenius; lattice-to-rational-heart essential-surjectivity infrastructure in step 2 of lem-tw-lisse-rational-realization.",
+   "via": [
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-tw-lisse-lattice-heart-lift",
+  "worker": "stage1",
+  "summary": "Reused both existing lattice existence statements, the intrinsic stratified-perfect characterization, exact scalar localization, slice restriction, completed pullback preservation and actual rational Hom comparison. Verified all coefficient and scheme hypotheses, refined the etale cover to quasi-compact charts, and lifted both directions of every specified isomorphism to establish inverse and uniqueness. No statement change and no new node. Repair of the refused landing: rebased the retained split onto the current DAG, re-read all cited statements, and revalidated the changed slice-restriction statement. Steps 3 and 6 now record compatibility of finite residue projections, localization units and the actual tensor/fraction maps. Updated both stale verbatim quotations; the statement and proof route are retained. Reviewer FIX (re-applied after the refused landing; the earlier FIX of 81f226c2 was lost): steps 3 and 6 cite slice-normalization for inverse image along an etale chart = slice restriction; step 9 computes the definition's derived pullback Lg_E^* to pro-etale charts.",
+  "blueprint": "Realizes the lattice and rational-heart input used in step 2 of lem-tw-lisse-rational-realization, below the first dual-stalk identification of lem-tw-dual-negation. The fixed unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Verifies finite dimension of finite-type schemes; the weights unit supplies no scheme dimension theorem."
+   },
+   {
+    "node": "lem-per-constructible-rational-hom-comparison",
+    "why": "Lifts the specified two inverse sheaf maps by the actual fully faithful scalar-extension functor."
+   },
+   {
+    "node": "lem-per-rational-continuous-coefficient-derived-localization",
+    "why": "Actual scalar localization is exact and agrees with degree-zero ordinary localization, without a flatness hypothesis on the lattice."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Identifies the completed/localized coefficient sheaves with continuous-function coefficient sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+    "why": "Refines the supplied cover to quasi-compact charts where the Hom comparison applies."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the intrinsic completed integral category with the category used in the lattice and Hom tools."
+   },
+   {
+    "node": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "why": "Constructible integral lattice existence for an ordinary lisse continuous-coefficient sheaf; does not replace the weight-duality route."
+   },
+   {
+    "node": "lem-weil-pbc-lisse-lattice-etale-local",
+    "why": "Etale-local finite locally free integral lattices, used separately from global constructible lattice existence."
+   },
+   {
+    "node": "lem-weil-pbc-local-derived-restriction-comparisons",
+    "why": "Exact ringed-site restriction identifies restricted degree-zero objects."
+   },
+   {
+    "node": "lem-per-continuous-coefficient-slice-normalization",
+    "why": "Pro-etale inverse image along a site object is slice restriction, identically on continuous coefficients, with no noetherian hypothesis on the chart."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Composite charts of the etale and pro-etale covers are objects of the pro-etale site of X."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Composition of the integral pullbacks used by the rational-lisse definition."
+   },
+   {
+    "node": "lem-a1-completed-perfect-scalar-pullback",
+    "why": "Derived limit of the constant finite free tower on a non-noetherian chart is the free completed module."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "The pulled-back free object lies in the integral constructible category of the chart."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "The derived pullback named in the rational-lisse definition."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-aeaa74542",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-aeaa74542 (reviewer sub-agent of L); spot-checked: I read in full the item, all nine steps, the statement of every cited node and Bhatt–Scholze 6.8.12–6.8.14 (pp. 61–62). The statement is unchanged and matches the source: a global constructible lattice (6.8.13), étale-local free lattices (6.8.4(6)), and the specified iso β_i⁻¹α lifted through the fully faithful J (6.8.14(2)). No new nodes, no cycle, no SGA. This head is the worker's rebase after the refused landing (lem-tw-lisse-localization-restriction changed). The rebase lost the earlier FIX of 81f226c2: steps 3, 6 and 9 still carry both faults. Fault 1 (C4, steps 3 and 6): the current localization-restriction covers slice restriction for any pro-étale U. It never says that inverse image along an étale scheme map is slice restriction. Step 3 needs that for u⁻¹L and for the continuous rings of a possibly non-quasi-compact original chart. Step 6 needs it to identify P_f(N[0]) with N|[0] (c_f built from f⁻¹). The FIX cites lem-per-continuous-coefficient-slice-normalization in both steps and keeps the worker's new wording. Fault 2 (C2/E5, step 9): the step is marked elementary but treats the derived pullback Lg_E^* of def-real-rational-lisse-heart (strict-tower completed pullback to non-noetherian pro-étale charts) as plain restriction. The FIX re-applies the earlier step-9 text, checked against current statements: W→Y_i→X lies in X_proet (weakly-etale-localization); Lg^*≅Lw^*Lu_i^* (lem-pod-integral-pullback-composition); Lu_i^*N[0]≅N|[0] via η of the ordinary-completed pullback node; Lw^*M_i[0]≅B_W^r[0] (lem-a1-completed-perfect-scalar-pullback, with slice-normalization and localization-restriction); this lies in D^b_c by preserve-constructible(1). Step 9 is now non-elementary, 1934 chars; proof_deps = union of uses; six tool_uses added. Batch-5: I traced the closures of both flagged citations. lem-per-constructible-rational-hom-comparison reaches only generic category theory (trf localization essentially surjective, ff+ess-surj equivalence, right fractions, homotopy category triangulated, cofiltered sections, pod derived exact squares). lem-tw-ordinary-completed-integral-pullback reaches generic sheaf algebra (pd scalar-tensor formulas, trf scalar-tensor distributivity, geometric-morphism defs, ϖ-regularity). Neither is the trace formula, Poincaré duality, or a step of their proofs, so I accepted both. The re-added lem-pod-integral-pullback-composition is generic pullback functoriality, also accepted. Steps 1, 2, 4, 5, 7 and 8 are correct. Hypotheses checked: noetherian, finite-dimensional, ℓ invertible, no separatedness. Raw Hom⊗E rationalization; characterization (iii) for N[0] and M_i[0]; heart via N[0]. Advisory: step 4 tacitly uses 01T2. Edge cases: empty X, rank 0, varying ranks, torsion N, non-separated X, arbitrary α/β.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseLatticeHeartLift",
+  "declaration": "WeilConjectures.LisseLattice.lisse_lattice_heart_lift",
+  "declarations": [
+   "WeilConjectures.LisseLattice.lisse_lattice_heart_lift"
+  ],
+  "file": "lean/Sheaf/Paper/LisseLatticeHeartLift.lean",
+  "statement": "theorem lisse_lattice_heart_lift (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) : Nonempty (Realizations l E) ∧ ∀ (a : Realizations l E) (X : LisseRealization.Base D l hl) (L : RationalModules l E X.scheme), L.IsFiniteLocallyFree → Nonempty (Choice l E a X.scheme L) ∧ ∀ c : Choice l E a X.scheme L, c.Assertions l E",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem signature is unchanged. Its helper data declarations have been moved verbatim to Sheaf.Paper.LisseLatticeHeartLiftData, publicly reexported here to permit acyclic imports of five strict proof substeps. The two private helpers prove the single-complex heart and unique specified categorical lift."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-732ecd650",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Re-delivery of the ef8b RETURN (H2). Node diff: only stmt_deps and lean changed; the statement, proof and lean.statement are word for word the same. Fixes: (1) def-per-continuous-rational-realization-data replaces the derived-realization theorem (owns modulePull/moduleUnit; publicly imported). (2) def-weil-pbc-integral-stratified-perfect-models replaces the characterization theorem (its module holds IsIntegralStratifiedFinitelyPresented). (3) lem-a1-smooth-lisse-integral-lattice and its import are dropped; the item defines its own uniformizerSection/rationalRing/coefficientMap, compared line by line with smoothLattice* in side-live SmoothLisseIntegralLattice.lean 117-148 and term-identical at v=u+1, citing def-weil-pbc-ringed-section-localization and def-weil-completed-integral-coefficients. These have real data and docstrings with BS 6.8.2 and the blueprint. All owner nodes are on the base. The rest of the module is unchanged, so the earlier clause-by-clause acceptance of the mathematics and the package-pinning argument stand. One sorry; no stronger assumption; no pro-etale substitute. No file changed, so nothing compiled; the worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a7b4e",
+  "group": "U9",
+  "result": "fix",
+  "landing": "20261025T124041-L-1929649",
+  "kind": "interface",
+  "note": "independent cc review: delivered LisseLatticeHeartLiftData vs clone item helpers (verbatim, blueprint tags only); item theorem signature vs clone and node lean.statement; 5 new sorry statements vs BS 6.8.2-6.8.15 and their nodes; sandbox compile of all 7 modules + #print axioms"
+ }
+}

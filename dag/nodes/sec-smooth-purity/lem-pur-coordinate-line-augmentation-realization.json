@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-coordinate-line-augmentation-realization",
+ "kind": "statement",
+ "title": "Realization of the coordinate-line augmentation",
+ "statement": "Fix a finite purity datum P, a separated finite-type P.field.k-scheme T, an annihilating exponent r+1, a bounded-below pro-etale complex K and a constructible finite-Tor ordinary representative Ke with comparison isomorphism eK. In the source coordinates of [def-pur-affine-line-purity-source] and [def-pur-coordinate-line-adjunction-maps], the inverse fixed compact-support site comparison followed by compact-support image of sourceComparison.hom and the integration augmentation is the site comparison of the actual ordinary composite counit, preceded by compact-support image of sourceCoordinates.hom, followed by eK.hom. The retained ordinary source is bounded below by etaleSource_plus; every comparison is at the standard affine-line compactification.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "First two sentences and final comparison paragraph, expanded coordinate-line calculation"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-coordinate-line-adjunction-maps",
+  "def-pur-affine-line-purity-source",
+  "def-pur-affine-line-purity-comparison",
+  "def-sf-specified-exceptional-hom-chain"
+ ],
+ "proof": [
+  {
+   "text": "Expand the actual standard compactification comparison as exact open comparison and the specified proper direct-image counit mate. The compared open counit and the projective trace square identify the restricted integration trace. The fixed comparison agrees with this composite by expansion of its inclusion comparisons.",
+   "uses": [
+    "lem-pur-vector-integration-site-comparison",
+    "def-sf-compact-support-site-comparison-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordinary affine-line composite adjunction and its final site-comparison paragraph"
+   }
+  },
+  {
+   "text": "Use projectionComparison_etaleOrigin (or its proved compact_projection_square component) to paste the proper tensor/exchange mate square with the open projection square and pullback-composition coherence. This identifies the two actual compact-support projections in the retained sourceComparison coordinates. Both projections are invertible on the constructible finite-Tor input. Invert the square and tensor the trace square; siteTensorUnitEvaluation gives the coefficient-unit evaluation compatibility; tensor symmetry and the canonical tensorators identify the final right unitors.",
+   "uses": [
+    "lem-pur-vector-integration-site-comparison",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-pur-projection-comparison-etale-origin",
+    "lem-pur-site-tensor-unit-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordinary affine-line composite adjunction and its final site-comparison paragraph"
+   }
+  },
+  {
+   "text": "The ordinary inverse-projection trace composite is the actual composite counit by the coordinate-line counit tensor lemma. Transport its source by sourceCoordinates and its representative by eK. Naturality yields the asserted augmentation equality. The argument retains the chosen bounded ordinary source throughout.",
+   "uses": [
+    "lem-pur-coordinate-line-counit-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordinary affine-line composite adjunction and its final site-comparison paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-vector-integration-site-comparison",
+  "def-sf-compact-support-site-comparison-construction",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-pur-coordinate-line-counit-tensor",
+  "lem-pur-projection-comparison-etale-origin",
+  "lem-pur-site-tensor-unit-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Coordinate-line adjunction and normalized integration argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The change from the etale site to the proetale site preserves compact support projection formula and the normalized trace of the projective line",
+   "results": "Algebra.normalizedTrace_trans and related field trace equations; Scheme.smallEtaleTopology. None states this equality of specified derived site maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The change from the etale site to the proetale site preserves compact support projection formula and the normalized trace of the projective line",
+   "results": "Scheme.Hom.normalizationDiagram, affine transition-limit section lemmas, Condensed.profiniteSolidCounit; no derived site trace equation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*comparison|proetale.*trace",
+   "results": "Mathlib source has no equation for these project-defined derived etale/pro-etale maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoordinateLineAdjunction",
+  "date": "2026-10-25",
+  "group": "G9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "First ordinary affine-line adjunction sentence and final paragraph identifying gamma as its transpose",
+   "via": [
+    "lem-pur-coordinate-line-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateLineAugmentationRealization",
+  "file": "lean/Sheaf/Paper/CoordinateLineAugmentationRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoordinateLine.coordinate_line_augmentation_realization",
+  "statement": "theorem coordinate_line_augmentation_realization\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u})\n    (aT : T ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT] [IsNoetherian T]\n    (r : ℕ) (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : Ring P) = 0)\n    (K : DerivedCategory.Plus\n      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (Ring P))))\n    (Ke : Etale.DerivedCategoryModule (Ring P) T)\n    (hKe : Etale.DerivedCategory.constructibleFiniteTor\n      (ModuleCat.{u + 1} (Ring P)) T Ke)\n    (eK : (VectorIntegrationSite.comparison (Ring P) T).obj Ke ≅ K.obj) :\n    (fixedCompactSupportComparisonIso (Ring P)\n        (affineTraceLineCompactification T)).inv.app\n      ⟨etaleSource P.coefficients.l P.extension (P.level - 1) T r hA Ke,\n        etaleSource_plus P.coefficients.l P.extension (P.level - 1) T r hA Ke hKe⟩ ≫\n    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Ring P))\n      (affineTraceLineCompactification T)).map\n        (sourceComparison P.coefficients.l P.extension (P.level - 1) T r hA\n          K.obj Ke eK).hom ≫\n    augmentation P.coefficients.l P.extension (P.level - 1) T r hA\n      (primeUnit P T aT) P.field.k aT K.obj Ke hKe eK =\n    (VectorIntegrationSite.comparison (Ring P) T).map\n      ((Etale.affineTraceLineLeft (Ring P) T).map (sourceCoordinates P T r hA Ke).hom ≫\n        (adjunction (Ring P) (P.coefficients.l ^ (r + 1)) hA T\n          (pow_pos (Fact.out : P.coefficients.l.Prime).pos _)\n          (by simpa only [Nat.cast_pow] using (primeUnit P T aT).pow (r + 1))).counit.app Ke) ≫\n      eK.hom",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T023240-L-534017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T023240-L-534017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

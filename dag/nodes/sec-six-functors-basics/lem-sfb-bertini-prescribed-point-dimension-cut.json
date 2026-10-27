@@ -1,0 +1,429 @@
+{
+ "id": "lem-sfb-bertini-prescribed-point-dimension-cut",
+ "kind": "statement",
+ "title": "Bertini dimension cut through prescribed closed points in an integral variety",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $X$ be an integral scheme [def-pc-scheme, def-pc-integral-scheme], separated and of finite type over $k$ [def-weil-proper-morphism, def-weil-finite-type-morphism]. Suppose $\\dim X=m$ for an integer $m\\geq2$, where dimension is topological Krull dimension [def-kun-topological-krull-dimension]. Let $F\\subseteq |X|$ be a finite set of closed points (each singleton is closed). There exist an integral separated finite-type $k$-scheme $Y$ of dimension $m-1$ and a closed immersion $i:Y\\hookrightarrow X$ [def-weil-closed-immersion] such that $F\\subseteq i(|Y|)$. No smoothness, properness, or quasi-projectivity assumption on $X$ is imposed; $F$ may be empty.",
+ "source": {
+  "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+  "place": "Theorem 1.8, printed p.4, specialized to algebraically closed k, with Y given its reduced induced structure. Its proof handles arbitrary separated finite-type varieties using Nagata and Chow, before the projective Bertini step. This is the codimension-one theorem, not Corollary 1.9 with y=1."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Use the integral Chow envelope over $\\operatorname{Spec}k$: write $\\pi:P\\to X$ for its proper surjection, $P\\subset Z\\subset\\mathbf P^N_k$ for its dense open projective closure, and $U\\subset X$ for the nonempty open over which $\\pi$ is an isomorphism. The cited envelope gives integral $P,Z$ and proper $Z$. Both are finite type: $Z$ is a closed subscheme of projective space, and $P$ is an open in this Noetherian scheme. The dimension-of-opens lemma, on $X,P,Z$ and the isomorphic opens $U,\\pi^{-1}U$, gives $\\dim Z=\\dim P=\\dim X=m$.",
+   "uses": [
+    "lem-sfb-integral-chow-envelope-compactification",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Theorem 1.8, Chow paragraph and projective reduction; use the projective closure of the Chow envelope (as in Stacks 0208) to perform the open restriction before taking its proper image."
+   }
+  },
+  {
+   "text": "For each $x\\in F$, the nonempty closed subset $\\pi^{-1}\\{x\\}$ of $P$ contains a closed point $p_x$ by the Jacobson lemma. Its residue field is $k$ by the closed-point residue lemma. It is also closed in $Z$: the same residue field has transcendence degree zero over $k$, so the closed-point criterion applies in $Z$. Choose, in addition, a closed point $p_0$ of $Z$ in its nonempty open $\\pi^{-1}U\\subset P\\subset Z$, using density of closed points. Set $S=\\{p_x:x\\in F\\}\\cup\\{p_0\\}$. This is a finite nonempty closed set in $Z$, contained in $P$, and $\\pi(S)$ contains $F$. This works also for $F=\\varnothing$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Theorem 1.8, choose F prime above F and enlarge F by a point in the birational isomorphism open."
+   }
+  },
+  {
+   "text": "Give $S$ its reduced induced closed structure. For $L=\\mathcal O_Z(1)$ the projective embedding makes $L$ ample. Choose $n>0$ sufficiently large for the section-generation lemma, and put $M=L^{\\otimes n}$ and $V=\\ker(\\Gamma(Z,M)\\to\\Gamma(S,M|_S))$. Proper coherent finiteness at $q=0$ makes $\\Gamma(Z,M)$, hence $V$, finite-dimensional (an invertible module is locally free of rank one). Every section in $V$ vanishes on $S$, while the cited generation theorem says that $V$ generates $M$ on $Z\\setminus S$ and defines an immersion there. Apply the new immersive-system lemma to obtain precisely the codimension-two witness and base-locus bound required for irreducible Bertini.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-pc-very-ample-ample",
+    "lem-fin-proper-coherent-finite-dimensional",
+    "lem-zl-bertini-sections",
+    "lem-sfb-immersive-finite-base-bertini-conditions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Theorem 1.8, infinite-field projective step; Stacks 0FD5 and 0G4F hypotheses (3),(4)."
+   }
+  },
+  {
+   "text": "The field $k$ is algebraically closed in the function field $k(Z)$: an algebraic element has a minimal polynomial split over $k$, so in a field it equals one of its roots in $k$. The field-extension lemma and generic-point criterion therefore make $Z$ geometrically irreducible. Irreducible Bertini applied to $(Z,M,V)$ gives a nonempty coefficient open $O$ with geometrically irreducible zero schemes. The inclusion $V\\hookrightarrow\\Gamma(Z,M)$ is nonzero, since its sections generate off the finite set $S$ in dimension $m\\ge2$. Intersect $O$ with the nonempty open of coefficients giving nonzero sections. This intersection is nonempty: affine coefficient space is irreducible, as its polynomial coordinate ring is a domain. By the Jacobson and residue lemmas it has a $k$-point. Choose its section $s\\ne0$ and write $H=Z(s)$; then $H$ is geometrically irreducible and contains $S$.",
+   "uses": [
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-zl-generic-point-geometric-irreducibility",
+    "lem-zl-bertini-irreducible-member",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Theorem 1.8, classical irreducible Bertini over infinite k; Stacks 037P, 054Q and 0G4F."
+   }
+  },
+  {
+   "text": "On each nonempty affine trivializing open in integral $Z$, the nonzero section $s$ is a nonzero element of a domain: restriction to the generic point is injective, and a section zero there is zero on every trivializing affine, hence globally. Thus the zero ideal of $s$ is locally generated by a non-zero-divisor. The local description of zero schemes makes $H$ an effective Cartier divisor. The integral scheme $Z$ has pure dimension $m$ (its only irreducible component is itself), so Cartier purity gives dimension $m-1$ to every component of $H$. There is just one, by the preceding step. Endow $|H|$ with its reduced induced closed subscheme structure $D\\subset Z$. It is integral and has dimension $m-1$, since reduction leaves the underlying space unchanged. It contains $S$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-nagata-effective-cartier-ideal",
+    "lem-pc-zero-scheme-properties",
+    "def-weil-pure-dimension",
+    "lem-zl-effective-cartier-pure-dimension",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Theorem 1.8, dimension m minus one of a hypersurface section, followed by reduced induced structure."
+   }
+  },
+  {
+   "text": "Form $E=D\\times_Z P=D\\cap P$, a closed subscheme of $P$ and a nonempty open subscheme of integral $D$, since it contains $S$. Hence $E$ is integral and $\\dim E=m-1$ by the dimension-of-opens lemma. Its closed immersion into $P$ is proper, so the composite $f:E\\to P\\xrightarrow{\\pi}X$ is proper. Consequently $T=f(|E|)$ is closed in $X$. It is irreducible and nonempty: inverse images of two closed subsets covering $T$ cover the irreducible space $E$, so one already contains its whole image. Give $T$ its reduced induced structure $Y\\hookrightarrow X$. Then $Y$ is integral and contains $F$, since $S\\subset E$ and $\\pi(S)\\supset F$.",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Theorem 1.8, open restriction and proper image paragraphs, in the reverse order provided by the Chow envelope."
+   }
+  },
+  {
+   "text": "The nonempty open $E\\cap\\pi^{-1}U$ contains $p_0$. Under $\\pi^{-1}U\\simeq U$ its underlying subset is exactly $T\\cap U$: a point of $T\\cap U$ has all its preimages over $U$. The reduced induced structures agree there. Indeed, on each affine open of $U$ both are the quotient by the unique radical ideal vanishing on that subset; the uniqueness clause of the reduced-induced-structure theorem supplies the isomorphism. Thus $E\\cap\\pi^{-1}U\\simeq Y\\cap U$. Applying dimension-of-opens on integral $E,Y$ yields $\\dim Y=\\dim E=m-1$. Finally $Y$ is separated and finite type over $k$: on affine opens of the finite-type Noetherian $X$ it is a quotient by an ideal, so is finite type, and its diagonal is the restriction of the closed diagonal of $X$. This gives all the required clauses without assuming $X$ proper, smooth, or quasi-projective.",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Theorem 1.8, dimension of the image because the chosen subvariety meets the isomorphism open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-chow-envelope-compactification",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pc-very-ample-ample",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-zl-bertini-sections",
+  "lem-sfb-immersive-finite-base-bertini-conditions",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-zl-bertini-irreducible-member",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "lem-pc-zero-scheme-properties",
+  "def-weil-pure-dimension",
+  "lem-zl-effective-cartier-pure-dimension",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-closed-image",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+  "place": "Theorem 1.8, printed p.4; Chow envelope followed by its projective closure combines the Nagata/Chow reductions, and the infinite-field Bertini step is expanded with Stacks 0FD5, 0G4F. All assembly arguments are written above."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bertini irreducibility: an integral separated variety of dimension m at least two over an algebraically closed field has an integral closed subvariety of dimension m minus one through any finite set of closed points",
+   "results": "{\"t\": \"2026-10-24T08:32:55Z\", \"tool\": \"leanfinder\", \"query\": \"Bertini irreducibility: an integral separated variety of dimension m at least two over an algebraically closed field has an integral closed subvariety of dimension m minus one through any finite set of closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.IsIntegral\", \"ax_grothendieck_zeroLocus\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\"], \"digest\": \"4d64e1542e332368\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometrically irreducible variety contains a codimension one irreducible subvariety through finitely many specified closed points",
+   "results": "{\"t\": \"2026-10-24T08:32:56Z\", \"tool\": \"leansearch\", \"query\": \"A geometrically irreducible variety contains a codimension one irreducible subvariety through finitely many specified closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isIrreducible_iff_sUnion_isClosed\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"IsIrreducible.of_subtype\", \"IsGenericPoint.isIrreducible\", \"exists_mem_irreducibleComponents_subset_of_isIrreducible\", \"irreducibleComponents\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\"], \"digest\": \"94c0a21febf4059a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite set of closed points of an integral algebraic variety is contained in an irreducible hypersurface section",
+   "results": "{\"t\": \"2026-10-24T08:32:57Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite set of closed points of an integral algebraic variety is contained in an irreducible hypersurface section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"ax_grothendieck_zeroLocus\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\"], \"digest\": \"6753a3851592200e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-24T08:32:58Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "grep",
+   "query": "Bertini|bertini|hypersurface",
+   "results": "{\"t\": \"2026-10-24T08:32:58Z\", \"tool\": \"grep\", \"query\": \"Bertini|bertini|hypersurface\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral separated finite type scheme over an algebraically closed field has an integral codimension one closed subvariety through any finite set of closed points",
+   "results": "{\"t\": \"2026-10-24T09:05:35Z\", \"tool\": \"leanfinder\", \"query\": \"An integral separated finite type scheme over an algebraically closed field has an integral codimension one closed subvariety through any finite set of closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\"], \"digest\": \"4c31e324d5f77249\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-24T09:05:36Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "Bertini|bertini|hypersurface",
+   "results": "{\"t\": \"2026-10-24T09:05:36Z\", \"tool\": \"grep\", \"query\": \"Bertini|bertini|hypersurface\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite set of closed points on an integral variety is contained in an irreducible divisor",
+   "results": "{\"t\": \"2026-10-24T09:05:37Z\", \"tool\": \"leansearch\", \"query\": \"A finite set of closed points on an integral variety is contained in an irreducible divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"closedPoints\", \"IsLocalRing.closedPoint\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"exists_mem_irreducibleComponents_subset_of_isIrreducible\", \"IsGenericPoint.isIrreducible\", \"isIrreducible_iff_sUnion_isClosed\"], \"digest\": \"2c6f529cd6ade78f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bertini irreducibility with a finite base locus on a projective variety of dimension at least two",
+   "results": "{\"t\": \"2026-10-24T09:05:38Z\", \"tool\": \"leanfinder\", \"query\": \"Bertini irreducibility with a finite base locus on a projective variety of dimension at least two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\"], \"digest\": \"99a8877927eee4e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-variety-smooth-curve-interpolation",
+  "date": "2026-10-24",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical direct-images proof (3), parameter-curve input via lem-sfb-line-family-projective-curve-interpolation: Charles–Poonen dimension-cutting step used repeatedly to obtain a curve through the marked parameter points. Current latest direct-images proof (3) gives context, not the auxiliary Picard formula.",
+   "via": [
+    "lem-sfb-integral-variety-smooth-curve-interpolation",
+    "lem-sfb-line-family-projective-curve-interpolation",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bertini-prescribed-point-dimension-cut",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven-step Chow/projective-closure, section-system, irreducible Bertini, reduced-divisor and proper-image proof. One statement-only geometric Bertini-hypothesis lemma; all other results reused after reading their statements. Empty F is handled by an extra marked point in the isomorphism open. No Lean or compiler work.",
+  "blueprint": "Historical direct-images proof (3), parameter-curve input via lem-sfb-line-family-projective-curve-interpolation: Charles–Poonen dimension-cutting step used repeatedly to obtain a curve through the marked parameter points. Current latest direct-images proof (3) gives context, not the auxiliary Picard formula. Latest direct-images proof (3) remains context only; this auxiliary geometric proof is below that unit. Whole-blueprint searches for Bertini, prescribed, 0G4F, codimension two, linear system and projective closure found no exact duplicate. The chain has no surviving imported blueprint ancestor; ancestor command returns None, retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-pc-very-ample-ample",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-fin-proper-coherent-finite-dimensional",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-zl-bertini-sections",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-zl-field-extension-algebraically-closed-geometric",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-zl-generic-point-geometric-irreducibility",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-zl-bertini-irreducible-member",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "def-pc-integral-scheme",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "def-nagata-effective-cartier-ideal",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "def-weil-pure-dimension",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-zl-effective-cartier-pure-dimension",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-closed-image",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic geometric/algebraic tool used for the Chow and projective Bertini argument; no node of this six-functor unit supplies this statement. Used only for its stated conclusion in the indicated proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pc-very-ample-ample",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-zl-bertini-sections",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-zl-bertini-irreducible-member",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "lem-pc-zero-scheme-properties",
+  "def-weil-pure-dimension",
+  "lem-zl-effective-cartier-pure-dimension",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-closed-image",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-d158a5706",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-d158a5706 (reviewer sub-agent of L); spot-checked: I read Charles–Poonen Theorem 1.8 (p.4) and its proof, and Stacks 0G4F and 0FD5 in the source. The item is the theorem for algebraically closed k with every hypothesis kept, and the route matches the source: the integral Chow envelope does the Nagata+Chow work, with p_0 over the isomorphism open U, and the infinite-field Bertini step goes through 0FD5 and 0G4F. All 7 steps check against what the cited nodes state. Step 2 makes the lifted points closed in Z through the closed-point/trdeg node. Step 3 meets 0FD5's hypotheses with Z proper and S reduced, and H^0 is finite-dimensional. Step 4 gets geometric irreducibility from 037P and 054Q, and V≠0. Step 5 uses Cartier purity with m≥2. Steps 6–7 are the proper image and the dimension through the uniqueness of the reduced structure over U. The new node lem-sfb-immersive-finite-base-bertini-conditions is statement-only, self-contained, and true. For (b), the base locus lies in S, and a closed point has codim d≥2. For (a), take a smooth point off S: two ratios recentred at it are regular parameters, which gives one codim-2 component through it that is not in H_{v1}. I tested it on d=2 with a singular cone and on S=∅. It does not duplicate the zl finite-cover nodes, which assume a smooth affine base, and it does not restate a clause of the item. Batch-5 flags: the recomputed closure reaches only def-trf-schematically-dense-open (a definition), lem-trf-local-fibre-ring-dimension-inequality (00OM), lem-trf-affine-open-limit-descent and lem-pod-separated-finite-type-base-change (both Mathlib leaves). None of these is trace-formula or Poincaré-duality content, so I accept all four flagged citations. I accept the worker's generic tool_uses. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BertiniPrescribedPointDimensionCut",
+  "declaration": "AlgebraicGeometry.exists_integral_closedSubscheme_dimension_cut_through_finite_closedPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniPrescribedPointDimensionCut.lean",
+  "statement": "theorem exists_integral_closedSubscheme_dimension_cut_through_finite_closedPoints (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsIntegral X] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (m : ℕ) (hm : 2 ≤ m) (hX : topologicalKrullDim X = (m : WithBot ℕ∞)) (F : Set X) (hF : F.Finite) (hclosed : ∀ x ∈ F, IsClosed ({x} : Set X)) : ∃ (Y : Scheme.{u}) (i : Y ⟶ X), IsIntegral Y ∧ IsSeparated (i ≫ (X ↘ Spec (.of k))) ∧ LocallyOfFiniteType (i ≫ (X ↘ Spec (.of k))) ∧ QuasiCompact (i ≫ (X ↘ Spec (.of k))) ∧ topologicalKrullDim Y = ((m - 1 : ℕ) : WithBot ℕ∞) ∧ IsClosedImmersion i ∧ F ⊆ Set.range i",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-250dc9a79",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement matches node and Charles–Poonen Thm 1.8 (p.4, alg. closed k, reduced closed Y) clause by clause: k IsAlgClosed; X.Over Spec k, IsIntegral, IsSeparated/LFT/QC of X↘Spec k; m:ℕ, 2≤m, topologicalKrullDim X = m; F finite with closed singletons; ∃ Y i, IsIntegral Y, sep/LFT/QC of i≫X↘Spec k, dim Y = (m-1:ℕ), IsClosedImmersion i, F ⊆ range i. No extra hypotheses; F=∅, m=2 and empty X are handled as in the node; shared universe u is standard. All 8 stmt_dep records match the declarations used; lean.statement is verbatim; node changed only in lean; no defs, sorry-only proof, source/blueprint docstrings with 7 steps; imports exist and none is downstream; no H4 duplicate. The Second reading section is a self-reread, accepted as substantive. No compile (no FIX). Note: Q02 43467a00 delivered the same item (PASS WIN, unlanded) in the same file with an equivalent statement under decl exists_integral_closed_subscheme_dimension_cut; only one should land, and if Q02 lands first this delivery must not rebind the node's record."
+ }
+}

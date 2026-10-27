@@ -1,0 +1,239 @@
+{
+ "id": "lem-per-regular-scheme-stalk-criterion",
+ "kind": "statement",
+ "title": "Regular scheme morphisms are detected on stalk homomorphisms",
+ "statement": "Let $f:X\\to Y$ be a morphism of locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth]. For $x\\in X$, let $f_x^\\sharp:\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$ be the induced local homomorphism [def-weil-locally-ringed-space-morphism]. Then $f$ is a regular scheme morphism [def-per-regular-scheme-morphism] if and only if $f_x^\\sharp$ is a regular ring map [def-weil-pbc-g-ring] for every $x\\in X$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07R8 (lemma-regular, equivalence of (2) and (3)), with More on Algebra Tag 07C0 (lemma-regular-local in more-algebra.tex). The two equivalences identify affine-chart regularity with regularity of all induced local ring maps."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-locally-ringed-space-morphism",
+  "def-per-regular-scheme-morphism",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "For affine opens $U\\subseteq X$, $V\\subseteq Y$ with $f(U)\\subseteq V$, write $B=\\mathcal O_X(U)$, $A=\\mathcal O_Y(V)$ and $\\varphi:A\\to B$ for the section map. For $x\\in U$, put $y=f(x)$ and let $\\mathfrak q\\subset B$, $\\mathfrak p\\subset A$ correspond to $x,y$. The affine-open stalk lemma identifies $B_{\\mathfrak q}\\cong\\mathcal O_{X,x}$ and $A_{\\mathfrak p}\\cong\\mathcal O_{Y,y}$ by fractions of germs. The definition of the sheaf map gives $f_x^\\sharp(a_y)=\\varphi(a)_x$. Its locality gives $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, since a local homomorphism pulls the maximal ideal back to the maximal ideal. Thus it sends $a_y/s_y$ to $\\varphi(a)_x/\\varphi(s)_x$; under these isomorphisms it is exactly $\\varphi_{\\mathfrak q}:A_{\\mathfrak p}\\to B_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves (6), and Tag 01HB, definition-locally-ringed-space; compatibility of section maps and germs."
+   }
+  },
+  {
+   "text": "Suppose $f$ is regular. Fix $x\\in X$. Choose an affine neighborhood $V$ of $f(x)$ and an affine neighborhood $U$ of $x$ contained in the open set $f^{-1}(V)$; both exist because the affine opens of a scheme form a basis of its topology. The affine criterion gives that $\\varphi:A\\to B$ is regular. The ring $B$ is Noetherian by the affine-open locally-Noetherian lemma, so the implication (1) to (2) of the regular-local-maximal lemma applies: $\\varphi_{\\mathfrak q}$ is regular. Step 1 identifies its source, target and fraction formula with the stalk map. Applying invariance of regular ring maps under these commuting ring isomorphisms shows that $f_x^\\sharp$ is regular.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-per-regular-morphism-affine-criterion",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-regular-local-maximal",
+    "lem-weil-pbc-regular-ring-map-ring-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07C0, lemma-regular-local, (1) implies (2); affine criterion is More on Morphisms Tag 07R8. Affine neighborhoods inside an open: Schemes Tag 01IT, lemma-basis-affine-opens."
+   }
+  },
+  {
+   "text": "Conversely suppose every $f_x^\\sharp$ is regular. Take any affine opens $U,V$ as in Step 1. For every prime $\\mathfrak q\\subset B$, let $x\\in U$ be its point. Step 1 and invariance under the inverse commuting ring isomorphisms give that $\\varphi_{\\mathfrak q}:A_{\\varphi^{-1}(\\mathfrak q)}\\to B_{\\mathfrak q}$ is regular. Since $B$ is Noetherian by the affine-open locally-Noetherian lemma, implication (2) to (1) of the regular-local-maximal lemma gives that $\\varphi$ is regular. This holds for every such pair $U,V$, so the affine criterion gives that $f$ is regular. If $X$ is empty, the same proof uses the empty family of primes and all pointwise conditions are vacuous.",
+   "uses": [
+    "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-regular-local-maximal",
+    "lem-per-regular-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07C0, lemma-regular-local, (2) implies (1); More on Morphisms Tag 07R8, (3) implies (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-per-regular-morphism-affine-criterion",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-regular-ring-map-ring-equiv"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07R8, lemma-regular, combined with More on Algebra Tag 07C0, lemma-regular-local; section-to-stalk compatibility from Schemes Tag 01HV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(regular.*stalk|stalk.*regular|class IsRegular|def IsRegular)",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: flat stalk maps and affine smoothness do not compare regular scheme morphisms with regular ring maps",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular morphism of locally Noetherian schemes induces regular homomorphisms on all local rings",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.LocallyRingedSpace.Hom.prop, AlgebraicGeometry.Spec.locallyRingedSpaceMap, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, IsLocalRing.ResidueField.map, AlgebraicGeometry.LocallyRingedSpace.residueFieldMap",
+   "date": "2026-10-24",
+   "verdict": "no match: flat stalk maps and affine smoothness do not compare regular scheme morphisms with regular ring maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsRegular",
+   "results": "0 hits: . loogle: unknown identifier 'RingHom.IsRegular'",
+   "date": "2026-10-24",
+   "verdict": "no match: flat stalk maps and affine smoothness do not compare regular scheme morphisms with regular ring maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of locally Noetherian schemes, being regular is equivalent to every induced homomorphism of local rings being regular",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: flat stalk maps and affine smoothness do not compare regular scheme morphisms with regular ring maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat scheme morphism with geometrically regular fibres is regular on stalk maps",
+   "results": "8 hits: AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: flat stalk maps and affine smoothness do not compare regular scheme morphisms with regular ring maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between locally Noetherian schemes is regular if and only if all its maps on local rings are regular",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.HasRingHomProperty.of_stalkMap, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*stalk|stalk.*regular|[Gg]eometrically[Rr]egular",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of locally Noetherian schemes is regular exactly when its homomorphisms of local rings are regular",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.Spec.locallyRingedSpaceMap, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsRegular",
+   "results": "0 hits: . loogle: unknown identifier 'RingHom.IsRegular'",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat morphisms with geometrically regular fibres are detected by localization at primes of affine chart rings",
+   "results": "8 hits: AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, RingHom.Flat.ofLocalizationPrime, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, RingHom.Flat.propertyIsLocal, RingHom.Smooth.propertyIsLocal, AlgebraicGeometry.Flat, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-precomposition-smooth-image",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Supporting regular-morphism descent in Temkin Proposition 3.3.5, printed p.25: the sentence invoking Lemma 2.1.4 to obtain a smooth neighborhood of the image; Regular scheme morphisms are detected on stalk homomorphisms.",
+   "via": [
+    "lem-per-regular-precomposition-smooth-image",
+    "lem-per-elkik-rational-smooth-models",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-scheme-stalk-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Corrected the source description: 07R8 does not list a stalk criterion. Reused 07C0, affine stalk localizations, Noetherian affine sections and regular-map invariance under isomorphisms. Added only the statement-only 07R8 affine comparison. Wrote the commuting germ/fraction formula explicitly and proved both directions. Searched the live Lean, whole DAG, imported blueprint and Mathlib; no exact attachment or leaf.",
+  "blueprint": "Retains the recorded Temkin smooth-image support branch of lem-per-artin-gabber-affine-curve. Read its latest proof; it does not explicitly state this lower-level algebraic comparison. The split supplies the regular scheme/stalk step used in lem-per-regular-precomposition-smooth-image without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine structure-sheaf localization, needed to compare the actual stalk map with the prime-localized coordinate map; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-maximal",
+    "why": "Generic Noetherian commutative algebra, Stacks 07C0, used in each direction after taking affine charts; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "why": "Generic invariance of regular ring maps under commuting ring isomorphisms, needed to pass between chart localizations and ambient stalks."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-regular-ring-map-ring-equiv"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-e20847171",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-e20847171 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-regular-morphism-affine-criterion and every cited statement in full. Checked them against Stacks 07R8 lemma-regular (statement and proof), 07C0 lemma-regular-local, 038V lemma-geometrically-regular and 01IT. The item statement is unchanged; the correction of its source description (07R8 has no stalk clause) is right. The new node is exactly 07R8 (2)<=>(3). It assumes X and Y locally Noetherian, which implies Stacks' hypothesis of locally Noetherian fibres. By 038V (2)/(3), testing finite extensions in def-per-regular-scheme-morphism matches testing finite purely inseparable extensions in def-weil-pbc-g-ring. The node is statement-only and self-contained, and it is neither a clause of the item nor a duplicate: the DAG search covered 07R8, the 17 citers of def-per-regular-scheme-morphism, and statements about regular, stalk, affine-open and regular ring maps. Small cases checked: identity and open immersion of affines, Spec k -> Spec k[eps], a purely inseparable extension, empty X. Step 1 is genuinely elementary: the germ/fraction square comes from stalk-localization (c), and p = phi^{-1}(q) follows from locality. Steps 2 and 3 use 07C0 with B Noetherian (pqf-lem-affine-open-locnoeth) and the ring-equiv invariance, in both directions. The empty case is handled. FIX (C1): step 2 needs an affine U contained in f^{-1}(V) but cited only def-pc-scheme. Added the existing mathlib node lem-weil-pbc-affine-opens-basis (Stacks 01IT) to the step text, its uses, proof_deps and source. Accepted the tool_uses: stalk-localization, 07C0 and the ring-equiv lemma are generic algebra or scheme tools. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularSchemeStalkCriterion",
+  "declaration": "AlgebraicGeometry.isRegularSchemeMorphism_iff_stalkMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSchemeStalkCriterion.lean",
+  "statement": "theorem isRegularSchemeMorphism_iff_stalkMap {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (f : X ⟶ Y) : IsRegularSchemeMorphism f ↔ ∀ x : X, (f.stalkMap x).hom.IsRegular",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b939cba02",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Item statement matches the node clause by clause: arbitrary f : X ⟶ Y in Scheme.{u}; [IsLocallyNoetherian X] [IsLocallyNoetherian Y] with nothing stronger; canonical (f.stalkMap x).hom; IsRegularSchemeMorphism f ↔ ∀ x, RingHom.IsRegular. lean.statement verbatim. Live dep defs read (RegularSchemeMorphism.lean, GRing.lean; universes consistent). Stacks 07R8 (more-morphisms.tex 5682ff) + 07C0 checked; source-description correction accurate. Item record identical to live except lean; all 5 dep records byte-equal to live. Edge cases: empty X, isomorphisms/open immersions, non-flat, purely inseparable char p, non-qc. No duplicate in Mathlib/project (RegularPullbackUnresolvedStrata only has one direction with extra hypotheses). Single sorry, source/blueprint docstrings with the 3 proof steps, non-public proof imports exist, both report sections present. No findings; no compile needed."
+ }
+}

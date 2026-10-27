@@ -1,0 +1,306 @@
+{
+ "id": "lem-per-localized-ordinary-pullback-normalization",
+ "kind": "statement",
+ "title": "Finite-quotient coefficient and localized ordinary pullback normalization",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $A=\\mathcal O_E$, and $\\varpi$ a uniformizer [def-weil-l-adic-coefficient-extension]. Let $X''\\xrightarrow hX'\\xrightarrow gX$ be morphisms of noetherian finite-dimensional schemes on which $\\ell$ is invertible. Use their small pro-etale sites and canonical inverse images [def-weil-pbc-proetale-site, def-weil-proetale-inverse-image]. For $W=X,X',X''$, put $B_W=\\varprojlim_{n\\geq1}(A/\\varpi^n)_W$, with projections $\\pi_{W,n}$ [def-weil-pbc-adic-coefficient-datum], and $E_W=B_W[1/\\varpi]$ [def-weil-pbc-ringed-section-localization]. Use module sheaves, sheaf tensor products and ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category]. For a morphism $u:V\\to W$, let $d_{u,n}:u^{-1}(A/\\varpi^n)_W\\to(A/\\varpi^n)_V$ be the canonical constant-section map and $c_u:u^{-1}B_W\\to B_V$ the map with components $d_{u,n}u^{-1}\\pi_{W,n}$ [def-weil-pbc-completed-pullback]. Set $P_u=B_V\\otimes^L_{u^{-1}B_W}u^{-1}(-)$, with canonical ordinary composition $a:P_hP_g\\xrightarrow\\sim P_{g\\circ h}$ and identity $e:P_{\\mathrm{id}}\\xrightarrow\\sim\\mathrm{id}$ [lem-sfb-ringed-derived-monoidal-comparisons]. Set $F_W=E_W\\otimes^L_{B_W}(-)$ and $G_u=E_V\\otimes^L_{u^{-1}E_W}u^{-1}(-)$. In defining these functors use the canonical localization-unit comparison $u^{-1}E_W\\cong(u^{-1}B_W)[1/\\varpi]$ [lem-weil-pbc-localization-inverse-image-coherence]. Let $\\delta_u:F_VP_u\\xrightarrow\\sim G_uF_W$ be the balanced comparison through $E_V\\otimes^L_{u^{-1}B_W}u^{-1}(-)$, whose inverse inserts the coefficient unit; let $b:G_hG_g\\xrightarrow\\sim G_{g\\circ h}$ and $e_E:G_{\\mathrm{id}}\\xrightarrow\\sim\\mathrm{id}$ be the ordinary rational comparisons.\nThen $d_{g\\circ h,n}=d_{h,n}h^{-1}(d_{g,n})$ and $c_{g\\circ h}=c_hh^{-1}(c_g)$ under the canonical inverse-image composition isomorphism $(g\\circ h)^{-1}\\cong h^{-1}g^{-1}$ [lem-weil-pbc-site-morphism-composition]. In particular\n$$\\pi_{X'',n}c_hh^{-1}c_g=d_{h,n}h^{-1}d_{g,n}h^{-1}g^{-1}\\pi_{X,n}=\\pi_{X'',n}c_{g\\circ h}.$$\nThese equalities respect quotient transitions; the identity maps are the canonical identities and all maps fix the constant scalar $\\varpi$.\nFor every $K\\in D(B_X)$ one has the equality of specified natural transformations\n$$\\delta_{g\\circ h,K}F_{X''}(a_K)=b_{F_XK}\\,G_h(\\delta_{g,K})\\,\\delta_{h,P_gK},\\qquad e_E\\delta_{\\mathrm{id}}=F(e).$$\nOn flat-term K-flat representatives [def-pc-kflat-complex] the two composition maps, after the canonical tensor identifications, both send $e''\\otimes b'\\otimes k$ to $e''\\iota_{X''}(c_h(b'))\\otimes k$, where $\\iota_W:B_W\\to E_W$ is localization. The underlying balanced maps commute with restrictions and differentials and give this equality in the derived category, naturally for every derived $K$. The rational compositor $b$ sends $e''\\otimes e'\\otimes k$ to $e''d_h^E(e')\\otimes k$, where $d_h^E:h^{-1}E_{X'}\\to E_{X''}$ is the localized coefficient map; its inverse inserts $1$. The identity comparison multiplies the scalar into the module. No structural coefficient map is assumed invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); finite coefficient composition: sites.tex Tag 03CB (lemma-composition-morphisms-sites); Bhatt–Scholze Remark 6.8.15, p. 62; explicit coefficient/localization normalization supplied by agent"
+ },
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-per-localized-ordinary-pullback-data",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-site-morphism-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved coefficient coherence theorem, obtained by transporting the existing constant-sheaf comparisons and checking the actual completed limit projections.",
+   "uses": [
+    "lem-per-localized-ordinary-coefficient-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the single-edge construction to g, h, h ≫ g and the identity of X. These give four normalized edges, without changing any of their functors or unit equations.",
+   "uses": [
+    "lem-per-localized-ordinary-edge"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized composition theorem to the three supplied edges and the coefficient coherence. Apply the identity theorem to the fourth edge and the completed identity field of coefficient coherence. Package the witnesses and the coefficient proposition.",
+   "uses": [
+    "lem-per-localized-ordinary-composition",
+    "lem-per-localized-ordinary-identity"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-per-localized-ordinary-coefficient-coherence",
+  "lem-per-localized-ordinary-composition",
+  "lem-per-localized-ordinary-edge",
+  "lem-per-localized-ordinary-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "E8: constant-sheaf transport and actual-limit proof of coefficient coherence; original Steps 3–7 isolated as single-edge construction, composition and identity lemmas. Original theorem assembled from their witnesses in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pseudofunctor_associativity",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean.  Read the relevant source and signatures; ordinary sheaf pullback/abstract mates or scalar localization do not state old proof Steps 1–2 and the ordinary identity calculation of Step 7.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars followed by localization has a natural comparison with pullback of localized modules satisfying composition and identity",
+   "results": "8 hits: IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ, LinearMap.extendScalarsOfIsLocalization_apply, LinearEquiv.extendScalarsOfIsLocalization, LinearMap.extendScalarsOfIsLocalization_apply', Algebra.Extension.localization, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, IsLocalizedModule.mapExtendScalars_apply_apply, LinearMap.extendScalarsOfIsLocalizationEquiv.  Read the relevant source and signatures; ordinary sheaf pullback/abstract mates or scalar localization do not state old proof Steps 1–2 and the ordinary identity calculation of Step 7.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "12 hits: CategoryTheory.Limits.pullbackComparison, CategoryTheory.Limits.pullbackComparison_comp_fst, CategoryTheory.Limits.pullbackComparison_comp_snd, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Limits.pullbackComparison_comp_snd_assoc, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.map_lift_pullbackComparison_assoc, CategoryTheory.Limits.pullbackComparison_comp.  Read the relevant source and signatures; ordinary sheaf pullback/abstract mates or scalar localization do not state old proof Steps 1–2 and the ordinary identity calculation of Step 7.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of ringed topoi with completed adic coefficient rings, scalar localization commutes coherently with ordinary derived pullback by balanced tensor flattening",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackComp, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul.  Read the relevant source and signatures; ordinary sheaf pullback/abstract mates or scalar localization do not state old proof Steps 1–2 and the ordinary identity calculation of Step 7.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of module sheaves commutes with localization of coefficient rings compatibly with composition and identity",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullback_assoc",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pullback_id_comp",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality"
+    ],
+    "note": " Read Sheaf/PullbackContinuous.lean:167–215 and ChangeOfRings.lean:984–1018. These are ordinary sheaf or module comparisons, not the full adic-coefficient/localized derived statement."
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|extendScalarsComp|mapExtendScalars",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Algebra/Module/FinitePresentation.lean",
+     "Mathlib/Algebra/Module/FinitePresentation.lean",
+     "Mathlib/Algebra/Module/FinitePresentation.lean",
+     "Mathlib/Algebra/Module/FinitePresentation.lean",
+     "Mathlib/Algebra/Module/FinitePresentation.lean",
+     "Mathlib/Algebra/Module/LocalizedModule/Submodule.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Localization.lean"
+    ],
+    "note": " Read Sheaf/PullbackContinuous.lean:167–215 and ChangeOfRings.lean:984–1018. These are ordinary sheaf or module comparisons, not the full adic-coefficient/localized derived statement."
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of coefficient sheaves commutes with derived tensor pullback and the comparison respects composition",
+   "results": {
+    "hits": 8,
+    "top": [
+     "IsLocalization.instIsLocalizedModuleTensorProductMap",
+     "IsLocalization.tensor",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+     "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+     "SheafOfModules.pullbackComp",
+     "IsLocalization.Away.tensorEquiv",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac"
+    ],
+    "note": " Read Sheaf/PullbackContinuous.lean:167–215 and ChangeOfRings.lean:984–1018. These are ordinary sheaf or module comparisons, not the full adic-coefficient/localized derived statement."
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Limits.pullbackComparison",
+     "CategoryTheory.Limits.pullbackComparison_comp_fst",
+     "CategoryTheory.Limits.pullbackComparison_comp_snd",
+     "CategoryTheory.Limits.pullbackComparison_comp_fst_assoc",
+     "CategoryTheory.Limits.pullbackComparison_comp_snd_assoc",
+     "CategoryTheory.Limits.map_lift_pullbackComparison",
+     "CategoryTheory.Limits.map_lift_pullbackComparison_assoc",
+     "CategoryTheory.Limits.pullbackComparison_comp"
+    ],
+    "note": " Read Sheaf/PullbackContinuous.lean:167–215 and ChangeOfRings.lean:984–1018. These are ordinary sheaf or module comparisons, not the full adic-coefficient/localized derived statement."
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars followed by localization commutes with iterated pullback by associativity of tensor products of module sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullback_assoc",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullbackObjFreeIso"
+    ],
+    "note": " Read Sheaf/PullbackContinuous.lean:167–215 and ChangeOfRings.lean:984–1018. These are ordinary sheaf or module comparisons, not the full adic-coefficient/localized derived statement."
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rational-pullback-composition-coherence",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Scheme composition coherence of normalized rational pullback. Retained item proof steps 14. Re-split: old proof Steps 1–2 and the ordinary identity calculation of Step 7.",
+   "via": [
+    "lem-per-rational-pullback-composition-coherence",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-localized-ordinary-pullback-normalization",
+  "worker": "stage1",
+  "summary": "Q75 supplies a seven-step proof using existing DAG nodes only. Finite constant-section adjunctions and joint monicity of actual limit projections give structural-map composition. Localization-unit coherence and explicit balanced tensor calculations prove the two normalized equations on common flat-term K-flat representatives, then resolving-class localization gives naturality for all unbounded complexes. Statement and statement dependencies unchanged; no coefficient map is assumed invertible.",
+  "blueprint": "main-20261015 lem-per-smooth-pullback-t-exact, first proof paragraph identifying cohomology of pullback; this is the ordinary coefficient/localization normalization isolated from old Steps 1–2 and the ordinary identity part of Step 7 of lem-per-rational-pullback-composition-coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic site inverse-image composition compatible with adjunctions, used to compare the finite constant-section maps."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic finite coefficient identification with constant sheaves preserving constant sections; no perverse or Fourier assertion is imported."
+   },
+   {
+    "node": "lem-weil-pbc-localization-inverse-image-coherence",
+    "why": "Generic ring/module localization-unit comparison with composition and identity; identifies the exact comparison specified in the item."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions on small ringed sites for arbitrary unbounded complexes."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic preservation of flat-term K-flat representatives under arbitrary ringed pullback, including coefficient extension."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Normalization of ordinary derived composition and identity on those representatives; no corresponding general comparison is provided by the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Inversion of quasi-isomorphisms on the chosen resolving class and canonical representative comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Equivalence of the localization of flat-term K-flat representatives with the unbounded derived category, used for descent and all derived morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-morphism-composition",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-65b6bd688",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-65b6bd688 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and every cited statement in full. The delivery creates no new nodes and leaves the statement and stmt_deps unchanged. The item had no proof on base and was created 2026-10-22 out of lem-per-rational-pullback-composition-coherence. Sources: Stacks 03CB, 0D6D (the proof's common flat-term K-flat representative), 0G7E, 07A4, 06YS and 0G7D, with tag-to-label pairs checked, and Bhatt–Scholze Rem. 6.8.15 p.62 (f* = naive pullback ⊗ Λ_Y). These match P_u = B_V⊗^L_{u^{-1}B_W}u^{-1} on D(B_X), with c_u not assumed invertible. Statement tested on identity maps, X''=∅, K=0, ϖ-torsion K and a geometric point. I recomputed the generator formulas myself: both paths give e''ι''(c_h b')⊗q (equal by Step 3), and both identity sides give eι(b)⊗q. Steps 1–2 are correct: the finite levels are identified with constant sheaves through prop-weil-pbc-proetale-constant-ring-map, the composite-adjunction transposes agree on constants, and the limit projections are jointly monic. Steps 3, 4 and 7 match exactly what their cited statements give. One fault, C3/C4: Steps 5–6 read u^{-1}(E_W⊗_{B_W}Q) and h^{-1}((P_gQ)[1/ϖ]) in fraction coordinates without citing the module comparison β of lem-weil-pbc-localization-inverse-image-coherence. FIX adds that citation and one sentence or clause to each step (fixes/dag/nodes/sec-deligne-laumon-a1/…json); proof_deps already contained it. No cycle and no SGA. I accept the 8 declared generic ringed-topos tool uses as declared. Maintainer note: Steps 1–2 re-derive the coefficient composition already stated in lem-tw-completed-coefficient-ringed-coherence (2026-10-22) and could cite it; lem-weil-pbc-realization-pull-ordinary-system is a k-scheme, continuous-E variant, not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalizedOrdinaryPullbackNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.LocalizedOrdinary.localizedOrdinaryPullbackNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.LocalizedOrdinary.localizedOrdinaryPullbackNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/LocalizedOrdinaryPullbackNormalization.lean",
+  "statement": "theorem localizedOrdinaryPullbackNormalization (_hϖ : Ideal.span ({ϖ} : Set (PbcIntegralRing l E)) = (pbcIntegralDatum l E).ideal) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)] [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)] [Fact (∃ n : ℕ, topologicalKrullDim Z ≤ n)] [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))] [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))] : Coefficients l E g h ∧ ∃ (ag : Edge l E ϖ g) (ah : Edge l E ϖ h) (ac : Edge l E ϖ (h ≫ g)) (ai : Edge l E ϖ (𝟙 X)), Nonempty (Composition l E ϖ g h ag ah ac) ∧ Nonempty (Identity l E ϖ X ai)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the actual completed coefficient sheaves and arbitrary chosen uniformizer generating the recorded maximal ideal (so the finite powers are exactly the stated uniformizer powers). The Edge, Composition, Identity and Coefficients structures only bundle this item’s canonical maps and all their specified normalization equations. Their existence is the single theorem, with no additional functor/map or constructibility assumptions. The small pro-etale site retains object universe u+1 and morphism universe u. E8: auxiliary data moved verbatim to LocalizedOrdinaryPullbackData and publicly re-exported; their attachment is def-per-localized-ordinary-pullback-data. The theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-342942fa9",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read the item, all 13 stmt_deps, the module and the source declarations (PbcActualRingedExchange, CompletedTowerPullback, BoundedConstructibleTower/Complete). Only the item's lean field changed; statement verbatim; no lines over 100 chars; only the main theorem sorry; docstrings OK. Hypotheses exact: noetherian, finite-dim, l invertible, arbitrary uniformizer with span = maximal ideal. B, π, d, c are the actual maps; E = recorded localization; d^E fixed by its unit square; a/e = K-flat-normalized canonical comparisons. All conclusion clauses present; tensor formulas for δ, b, identity and the composition-square orientation recomputed; derived square for every K in the full unbounded D(B_X). The ∃ Edge/Composition/Identity are uniquely pinned (unit square, generator values, invertible counits on flat-term K-flat complexes) and inhabited by the canonical maps, so not hollow. Edge cases: empty schemes, K=0, ϖ-torsion, unbounded, identity maps, non-invertible c. Advisories only: a/e and extension helpers owned by nodes outside stmt_deps; unused stmt_dep imports; transitions/scalar generalized to every f and constant; self-review second reading. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cafe1",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261027T012824-L-2336455",
+  "kind": "interface",
+  "note": "independent cc review: extracted Data module vs clone item module (verbatim except blueprint tags); item theorem signature vs clone; 3 sorry statements vs their nodes; direct importer RationalScalarMixedUnitCancellation compiled against delivered modules; #print axioms on coherence + item"
+ }
+}

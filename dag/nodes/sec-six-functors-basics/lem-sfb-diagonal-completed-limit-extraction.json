@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-diagonal-completed-limit-extraction",
+ "kind": "lemma",
+ "title": "Extract the normalized completed diagonal arrow from the limit specification",
+ "status": "split",
+ "statement": "For a prime ell, a scheme Y, and a proof that ell is a unit in its global sections, fix the derived-category localizations of the integral, constant, sequence and completed coefficient categories on the diagonal surface. Let D be the derived diagonal reduction. If its full finite and completed limit specification of [det-prop-diagonal-tower-limit] holds, there is a completed diagonal arrow delta satisfying the full normalized characterization IsDiagonalLimit of [def-sfb-diagonal-trace-limit-characterization]. No field, finite-type or noetherian assumption is required for this logical extraction.",
+ "stmt_deps": [
+  "det-prop-diagonal-tower-limit",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "def-sfb-diagonal-limit-assembly",
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-system-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+  "place": "Proof (3), supplying the normalized completed arrow from diagonal-limit clause 3 before applying the rational projective-line triangle theorem."
+ },
+ "proof": [
+  {
+   "text": "Eliminate the five outer existential witnesses in DiagonalCompletedLimitSpec. Its last clause supplies the derived-limit data, quotient comparison, normalized source and target isomorphisms, and DiagonalArrowCompatibility. The latter contains a unique completed arrow satisfying the limit equation. Apply ExistsUnique.exists, retain the finite-cycle normalization and all completed compatibility data, and reorder the existential witnesses to obtain an arrow followed by IsDiagonalLimit. Prove this rearrangement for arbitrary abelian categories and exact restriction functors, then specialize with the original specification arguments, including its cached instance proofs. The Lean kernel checks the resulting application. The category instances are explicit, so no unused field, geometry or localization-record assumptions are introduced.",
+   "uses": [
+    "det-prop-diagonal-tower-limit",
+    "def-sfb-diagonal-trace-limit-characterization",
+    "def-sfb-diagonal-limit-assembly",
+    "def-sfb-diagonal-limit-interface",
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-diagonal-tower-limit",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "def-sfb-diagonal-limit-assembly",
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-system-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+  "place": "Proof (3), supplying the normalized completed arrow from diagonal-limit clause 3 before applying the rational projective-line triangle theorem.",
+  "note": "C1 extracts the already proved logical bridge into its own module after the assembly remained over 60 seconds despite generic abstraction, cached input arguments, and unbundled native instances."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A unique existence supplies an arrow, preserving dependent existential witnesses and conjunctions",
+   "results": "8 hits, including ExistsUnique.exists, ExistsUnique.exists₂ and ExistsUnique.elim.",
+   "date": "2026-10-27",
+   "verdict": "Use the elementary unique-existence API inside the generic dependent witness rearrangement."
+  },
+  {
+   "tool": "loogle",
+   "query": "ExistsUnique.exists",
+   "results": "1 exact hit: ExistsUnique.exists : (∃! x, p x) → ∃ x, p x.",
+   "date": "2026-10-27",
+   "verdict": "This extracts the uniquely normalized arrow from compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalCompleteDataAssertion|IsDiagonalLimit",
+   "results": "0 Mathlib hits. The project defines both predicates in the existing diagonal tower interfaces.",
+   "date": "2026-10-27",
+   "verdict": "The bridge is project-specific logical assembly; no additional geometric theorem is needed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1UnitCounit",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-adjunction-assembly",
+   "place": "Proof step 3, retain the normalized completed arrow and all finite and completed data.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1CompletedLimitBridge",
+  "file": "lean/Sheaf/Paper/RationalP1CompletedLimitBridge.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.completedLimit_exists",
+  "statement": "theorem completedLimit_exists\n    (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})\n    (hY : IsUnit (ℓ : Γ(Y, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ (diagonalSurface Y))]\n    [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))\n    (data : DiagonalCompletedLimitSpec ℓ Y hY D) :\n    ∃ δ : diagonalCompletedDomain ℓ Y ⟶ diagonalCompletedCodomain ℓ Y,\n      DiagonalTrace.IsDiagonalLimit ℓ Y hY D δ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "independent cc review: UnitInversionCondition/CounitInversionCondition bodies vs the old unitInversions/counitInversion conclusions (verbatim); Assembly signature vs the clone (identical); new node stmt_deps vs the owners of the declarations their statements use; unit realized (empty) vs the dropped CartesianCoefficients import"
+ }
+}

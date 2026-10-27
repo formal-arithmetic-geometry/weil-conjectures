@@ -6,16 +6,10 @@ public import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
-import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
-import Sheaf.CategoryTheory.Sites.OrientedClosedBaseLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.CategoryTheory.ExactAdjointClassicalCounitComparison
 
 /-! # Closed finite exceptional inverse image and its counit
 
@@ -240,6 +234,57 @@ theorem closedFiniteAdjointCounitTransport (P : PurityFiniteSetting.{u})
               ((Adjunction.ofIsLeftAdjoint
                 ((Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient)
                   i).rightDerivedFunctor)).counit.app B.obj))) := by
-  sorry
+  let F := (Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctor
+  let G := (Etale.rightDerivedLowerShriekOfCompactification
+    (ModuleCat.{u + 1} P.Coefficient) (Compactification.ofIsProper i)).rightAdjoint
+  let J := F.rightAdjoint
+  let SZ := (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategory
+  let SX := (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory
+  let UX := (comparisonLowerStar (ModuleCat.{u + 1} P.Coefficient) X).rightDerivedFunctor
+  let adjG : F ⊣ G := (Adjunction.ofIsLeftAdjoint
+    (Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} P.Coefficient) (Compactification.ofIsProper i))).ofNatIsoLeft
+        (compactSupportIso P.Coefficient i)
+  let adjJ := Adjunction.ofIsLeftAdjoint F
+  have hFle (m : ℤ) (H : DerivedCategory
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (hH : H.IsLE m) :
+      (F.obj H).IsLE m := by
+    have := (Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).isLE_mapDerivedCategory_obj
+      H m
+    exact DerivedCategory.TStructure.t.isLE_of_iso
+      ((termwiseIso P.Coefficient i).app H).symm m
+  have hFge (m : ℤ) (H : DerivedCategory
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (hH : H.IsGE m) :
+      (F.obj H).IsGE m := by
+    have := (Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).isGE_mapDerivedCategory_obj
+      H m
+    exact DerivedCategory.TStructure.t.isGE_of_iso
+      ((termwiseIso P.Coefficient i).app H).symm m
+  have hSZ (a : ℤ) (H : DerivedCategory
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (hH : H.IsGE a) :
+      (SZ.obj H).IsGE a :=
+    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).isGE_mapDerivedCategory_obj H a
+  have hSX (a : ℤ) (H : DerivedCategory
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (hH : H.IsGE a) :
+      (SX.obj H).IsGE a :=
+    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).isGE_mapDerivedCategory_obj H a
+  obtain ⟨_, hD, hE, r, beta, alpha, t, hr, hb, ha, ht, ht'⟩ :=
+    DerivedCategory.exactAdjoint_classicalCounitComparison F G J adjG adjJ hFle hFge SZ SX
+      hSZ hSX UX (derivedComparisonAdjunction (ModuleCat.{u + 1} P.Coefficient) X)
+      (fun B ↦ isIso_derivedComparisonAdjunction_unit_app
+        (ModuleCat.{u + 1} P.Coefficient) X B.obj B.property)
+      (proTermwise P.Coefficient i j hij)
+      (Functor.isoWhiskerLeft DerivedCategory.Plus.ι (closedComparison P.Coefficient i j hij))
+  refine ⟨?_, hD, alpha, ?_, ?_⟩
+  · intro B
+    exact adjG.rightAdjointUniq_hom_app_counit adjJ B
+  · intro B
+    have hrB : r.hom.app B = (comparisonUnitIso P.Coefficient X B).inv := by
+      have h : r.inv.app B = (comparisonUnitIso P.Coefficient X B).hom := hr B
+      exact (Iso.hom_eq_inv (r.app B) (comparisonUnitIso P.Coefficient X B)).2 h.symm
+    rw [ha B, hb B, hrB]
+    rfl
+  · intro B
+    exact (ht B).symm.trans (ht' B)
 
 end AlgebraicGeometry.ProEtale.ClosedFiniteTransport

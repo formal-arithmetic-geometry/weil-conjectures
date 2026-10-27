@@ -1,0 +1,363 @@
+{
+ "id": "lem-sfb-qlbar-bounded-tensor-colimit",
+ "kind": "statement",
+ "title": "Finite-subextension tensor models with a common lower bound",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, a finite intermediate field $E/\\mathbf Q_\\ell$, and a morphism of schemes $f:X\\to Y$ [def-weil-pbc-scheme-conventions]. Use small pro-etale sites and a coefficient universe containing the set $I_E$ of finite intermediate fields $E\\subseteq F\\subseteq\\Omega$ [def-weil-size-convention, def-weil-pbc-proetale-site]. Put $R_Z=p_Z^*\\underline E$, $P_{F,Z}=p_Z^*\\underline F$, and $B_Z=p_Z^*\\underline\\Omega$ for $Z=X,Y$, using the finite-subextension-valued condensed convention [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-qlbar-condensed]. View these as section-ring module sheaves [def-weil-pbc-internal-abelian-sheaf-module-equivalence], with actual inclusion maps $q_{F,Z}:P_{F,Z}\\to B_Z$ and transition maps induced by field inclusions [sk-def-sfb-coefficient-change]. Use ordinary unbounded derived categories, their standard t-structure, and sheaf tensor [sk-def-sfb-derived-categories, def-sbc-standard-tstructure-derived-category, def-pur-sheaf-tensor-product].\n\nThe poset $I_E$ is small, nonempty and filtered. The maps $q_{F,Z}$ exhibit $B_Z=\\varinjlim_F P_{F,Z}$ in $R_Z$-module sheaves. Each $P_{F,Z}$ is finite free over $R_Z$, and $P_{F,Z}$ and $B_Z$ are flat (tensoring with them is exact). The canonical coefficient identifications make $L=f_R^*$ exact, identify $LP_{F,Y}=P_{F,X}$ and $LB_Y=B_X$, and carry $Lq_{F,Y}$ to $q_{F,X}$.\n\nFor every integer $a$ and $C\\in D(R_X)^{\\ge a}$ there exists a representative $K^\\bullet$ with $K^r=0$ for $r<a$. The actual diagram $M_F^\\bullet=P_{F,X}\\otimes_{R_X}K^\\bullet$ represents $P_{F,X}\\otimes^L_{R_X}C$, vanishes below the same $a$, and has termwise colimit $B_X\\otimes_{R_X}K^\\bullet$, representing $B_X\\otimes^L_{R_X}C$, with legs $q_{F,X}\\otimes1$. For every $A\\in D(R_Y)$ and every representative $J^\\bullet$ of $A$, the termwise colimit of $P_{F,Y}\\otimes_{R_Y}J^\\bullet$ is $B_Y\\otimes_{R_Y}J^\\bullet$ and represents $B_Y\\otimes^L_{R_Y}A$. For every $q\\in\\mathbf Z$ the map induced by the specified legs is an isomorphism\n$$\\varinjlim_F H^q(P_{F,Y}\\otimes^L_{R_Y}A)\\xrightarrow{\\sim}H^q(B_Y\\otimes^L_{R_Y}A).$$",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), proof preceding (5.4), and paragraph preceding Lemma 5.6; coefficient-tail and exact-tensor realization extracted from returned proof steps 2-3"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-size-convention",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-internal-section-total-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-qlbar-coefficient-module-cocone"
+ ],
+ "proof": [
+  {
+   "text": "Use the already-stated fieldDiagram and coefficientModules normalization clauses of [lem-sfb-qlbar-internal-hom-coefficient-comparison]. The first supplies filteredness, cofinality of the finite tail, and finite freeness. The second identifies the prescribed complex-defined modules with the regular field modules, retaining every transition and closure leg on sections. Whisker the actual full coefficient cocone by the cofinal tail. The stage and vertex normalizations give an isomorphism to its underlying abelian-sheaf cocone. The faithful module forgetful functor reflects isomorphisms and hence reflects this colimit. Thus the prescribed module cocone itself is a colimit. Apply on X and Y.",
+   "uses": [
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Paragraph preceding Lemma 5.6 (coefficient colimit), with the existing tail-presentation lemma"
+   }
+  },
+  {
+   "text": "A finite free internal module is a finite biproduct of the regular module, which is the tensor unit. The existing source theorem isDualizable_biproduct_unit shows that this finite biproduct is dualizable, including rank zero. The source theorem ObjectProperty.flat_of_isDualizable makes it flat: tensoring with a dualizable object has a right adjoint as well as a left adjoint. Transfer this assertion to the section-ring tensor via [lem-c2-internal-section-module-flatness] and along the finite-free isomorphisms of step 1.",
+   "uses": [
+    "lem-c2-internal-section-module-flatness",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU, lemma-colimits-flat; finite-free case, written out using Tag 03EP"
+   }
+  },
+  {
+   "text": "Prove closure flatness directly for the filtered category AsSmall (Under E). Filtered colimits of module sheaves are exact, transferred through the faithful exact forgetful functor to abelian sheaves. Tensor preserves the coefficient colimit in each variable. Consequently tensorLeft of its vertex is naturally isomorphic to the composite of the functor sending a module to its diagram of stage tensors and the filtered colimit functor. Both preserve finite limits: the former pointwise by stage flatness, the latter by exactness. Symmetry gives the right tensor assertion, and tensor preserves finite colimits as a left adjoint. Transport through siteSheafTensorRightIso to obtain precisely IsFlatOnSite.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU, lemma-colimits-flat (2)"
+   }
+  },
+  {
+   "text": "Use [sk-prop-sfb-cartesian-coefficients] and the actual coefficient-change naturality square. In internal module objects, inverse image of the regular F module restricted along E to F identifies with the regular F module on X restricted along the corresponding inclusion. The underlying isomorphism is alpha_F. Its linearity is the coefficient square and multiplicativity of alpha_F. Naturality of these isomorphisms follows from that same square for F to G. Transfer the resulting natural isomorphism through the fixed section equivalences, using the normalization equations in coefficientModules. Pullback preserves the coefficient colimit, so uniqueness of colimit vertices gives the closure isomorphism with the required equality of every cocone leg. Exactness of pullback and the asserted alpha squares are the existing Cartesian instances.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-coefficient-change",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/_section.md",
+    "place": "Untwisted assertion (1), exact module pullback; coefficient-change naturality square"
+   }
+  },
+  {
+   "text": "Apply Mathlib DerivedCategory.exists_iso_Q_obj_of_isGE, which extracts a strictly bounded-below representative from the standard t-structure witness. Reverse its isomorphism to obtain QK isomorphic to C.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Canonical good lower truncation; equivalence defining the standard lower bound"
+   }
+  },
+  {
+   "text": "For an arbitrary representative K of A, choose one flat-term K-flat resolution p:V to K using [lem-pc-kflat-resolution]. Apply the right-fixed comparison of [lem-weil-pbc-kflat-fixed-tensor-triangulated] to V. It is natural in every first complex, and its value on P[0] compares the total tensor of P[0] and V with derivedTensor(P[0],QV). The canonical single-factor totalization isomorphism identifies that total tensor with the degreewise tensor P tensor V. This single-factor isomorphism is also natural in P; check the inverse on the degree-(0,n) total summand. For flat P, the exact functor P tensor - preserves the quasi-isomorphism p. Invert its image under Q and compose with the fixed comparison and QV isomorphic to A. Naturality in P follows from the natural square P tensor p and the fixed comparison. Apply to all finite stages and the flat closure vertex, obtaining the specified transition and cocone equations simultaneously, for every possibly unbounded K.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding K-flat construction; flat degree-zero specialization"
+   }
+  },
+  {
+   "text": "For a fixed term $T^r$, [lem-weil-pbc-independent-sheaf-tensor-colimits], and the symmetry $s\\otimes t\\mapsto t\\otimes s$ of the sheafified tensor, carry the module colimit in step 1 to the colimit with vertex $B_Z\\otimes_{R_Z}T^r$ and legs $q_{F,Z}\\otimes1_{T^r}$. The transition maps are $a_{F,G}\\otimes1_{T^r}$. They commute with the differential: $(a_{F,G}\\otimes1)(1\\otimes d_T)=(1\\otimes d_T)(a_{F,G}\\otimes1)$, both sending $s\\otimes t$ to $a_{F,G}(s)\\otimes d_T(t)$, and the identical calculation holds with $q_F$. Hence the termwise colimit complex is exactly $(B_Z\\otimes T^r,1\\otimes d_T^r)_r$, with the asserted legs. Take $T=K$ on $X$ and $T=J$ on $Y$. Since tensor with the zero sheaf is zero, every $P_{F,X}\\otimes K$ and their colimit vanish in all degrees $r<a$, with the same $a$ independently of $F$. Step 6 identifies these actual diagrams with the derived scalar-extension diagrams.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EP, lemma-tensor-commute-colimits (2), applied in each cochain degree"
+   }
+  },
+  {
+   "text": "The degreewise cocone of step 7 is a colimit of complexes, since evaluation functors jointly detect colimits. Filtered colimits of module sheaves are exact by transfer through the exact faithful colimit-preserving forgetful functor to abelian sheaves. The already-proved source result [src-weil-homology-preserves-exact-colimits] therefore shows that ordinary complex homology preserves this cocone colimit. Transport this IsColimit witness along DerivedCategory.homologyFunctorFactors, the natural isomorphism Q followed by derived homology with ordinary complex homology. This transport retains the specified legs, so it proves the exact homology-cocone assertion for each q and every unbounded representative.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits (forgetful functor commutes with colimits; filtered colimits of module sheaves are exact), applied to cohomology via exactness; Hemo–Richarz–Scholbach Lemma 5.3, proof before (5.4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-c2-internal-section-module-flatness",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "sk-def-sfb-coefficient-change",
+  "sk-prop-sfb-cartesian-coefficients",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "HRS Lemma 5.3 and paragraph before Lemma 5.6; existing coefficient normalization and a right-fixed K-flat comparison make all coefficient transitions natural without resolving each coefficient separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "filtered.*(tensor|flat)|tensor.*filtered",
+   "results": "0 hits; ; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered scalar extensions of a bounded below complex of sheaves of modules have a common lower bound and tensor commutes with their cohomology colimit",
+   "results": "8 hits; ModuleCat.preservesColimit_restrictScalars; ModuleCat.FilteredColimits.colimitSMulAux; HomologicalComplex.instHasFilteredColimitsOfSize; ModuleCat.FilteredColimits.colimit_smul_mk_eq; ModuleCat.FilteredColimits.colimit; SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat; CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup; CategoryTheory.Limits.Concrete.colimit_no_zero_smul_divisor",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits; PresheafOfModulesOfCommRing.Monoidal.tensorObj; PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj; PresheafOfModulesOfCommRing.tensorObj_obj; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight; PresheafOfModulesOfCommRing.Monoidal.tensorHom; PresheafOfModulesOfCommRing.Monoidal.tensorObjMap; PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat coefficient modules tensor complexes of sheaves degreewise and filtered colimits compute the cohomology of algebraic closure scalar extension",
+   "results": "8 hits; Algebra.Extension.tensorH1Cotangent; Rep.torIso; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.H; Algebra.tensorH1CotangentOfIsLocalization_toLinearMap; groupCohomologyIsoExt; Rep.barResolution.extIso; CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of finite coefficient field extensions tensor a bounded below complex of sheaves with a common lower bound and cohomology commutes with this colimit",
+   "results": "8 hits; Rep.torIso; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.isColimitLocallyConstantPresheaf; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE",
+   "results": "4 hits; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "grep",
+   "query": "instHasColimitsOfShape|preservesColimit",
+   "results": "0 hits; ; Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "grep",
+   "query": "instPreservesColimitsOfSizeTensorLeft|instPreservesColimitsOfSizeTensorRight",
+   "results": "0 hits; ; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules, filtered finite field scalar extensions of a bounded below complex admit a degreewise tensor diagram with a common lower bound and cohomology commutes with its colimit",
+   "results": "8 hits; localCohomology.diagram; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; Condensed.instAB4StarCondensedMod; Condensed.instAB4CondensedMod; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; Condensed.instAB5CondensedMod; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover general tensor, colimit, exactness or derived-category infrastructure, not the entire finite-subextension coefficient diagram and its normalized legs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits; PresheafOfModulesOfCommRing.Monoidal.tensorObj; PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj; PresheafOfModulesOfCommRing.tensorObj_obj; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight; PresheafOfModulesOfCommRing.Monoidal.tensorHom; PresheafOfModulesOfCommRing.Monoidal.tensorObjMap; PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover general tensor, colimit, exactness or derived-category infrastructure, not the entire finite-subextension coefficient diagram and its normalized legs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of finite coefficient field extensions tensor a bounded below complex of sheaves with a common lower bound and cohomology commutes with this colimit",
+   "results": "8 hits; CategoryTheory.Limits.colimitLimitIso; CategoryTheory.Limits.colimitLimitIso.congr_simp; HomologicalComplex.instHasFilteredColimitsOfSize; CommMonCat.FilteredColimits.colimitCocone; ModuleCat.FilteredColimits.colimitCoconeIsColimit; SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat; CategoryTheory.Sheaf.hasFilteredColimitsOfSize; ModuleCat.FilteredColimits.ι_colimitDesc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover general tensor, colimit, exactness or derived-category infrastructure, not the entire finite-subextension coefficient diagram and its normalized legs"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(tensor|flat)|tensor.*filtered",
+   "results": "0 hits; ; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover general tensor, colimit, exactness or derived-category infrastructure, not the entire finite-subextension coefficient diagram and its normalized legs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat sheaf tensor functors are exact and compute derived tensor on every representative, including unbounded complexes",
+   "results": "8 hits; CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover general tensor, colimit, exactness or derived-category infrastructure, not the entire finite-subextension coefficient diagram and its normalized legs"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE|preservesHomologyOfExact",
+   "results": "5 hits; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover general tensor, colimit, exactness or derived-category infrastructure, not the entire finite-subextension coefficient diagram and its normalized legs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-direct-image-comparison",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Last paragraph: finite E and algebraic-closure extension; common-bound tensor diagram in rational-coefficient step 3 of the unit",
+   "via": [
+    "lem-sfb-qlbar-direct-image-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qlbar-bounded-tensor-colimit",
+  "worker": "stage1",
+  "summary": "Q13 preserves the statement and splits it into the existing tail presentation, finite-free and filtered-colimit flatness, the actual coefficient pullback square, good lower truncation, natural K-flat computation on arbitrary representatives, termwise tensor colimit with its legs, and exact-colimit cohomology. No new nodes are needed. All cited statements were opened, the canonical legs and coefficient actions were checked, and no restricted/constructible or continuous-map coefficient category was substituted.",
+  "blueprint": "Nearest ancestor lem-sfb-dc-lower-star-preserves, final paragraph on finite E and closure extension; the bounded-below coefficient diagram realizes rational-coefficient step 3 of sk-prop-open-coefficients. This item is not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-fd-ringed-flat-single-tensor-cohomology",
+    "why": "Generic assertion that a flat module in degree zero is K-flat, for the actual flat coefficient sheaves."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolutions on a ringed site, needed solely to verify the arbitrary-representative computation."
+   },
+   {
+    "node": "lem-sfb-filtered-colimit-flat-module-sheaves",
+    "why": "Generic flatness of a directed module-sheaf colimit, used for the closure coefficient; no such flatness theorem is stated in this unit."
+   },
+   {
+    "node": "lem-sfb-qlbar-tail-finite-free-algebra-presentation",
+    "why": "Provides the actual tail module cocone, filtered index, and finite freeness; the open-image unit does not construct coefficient presentations."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic sheaf tensor preserves the small colimits in the chosen coefficient universe; used degreewise, not for direct-image continuity."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic: the forgetful functor from module sheaves to abelian sheaves is faithful, exact and commutes with colimits; used only to transfer exactness of filtered colimits to R_Y-module sheaves in step 8."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Canonical natural tensor-model comparison for two flat-term K-flat complexes, used with the coefficient in degree zero and a fixed resolution."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Untwisted Cartesian coefficient identification and exact module pullback, infrastructure required to compare the specified coefficient legs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-6f322a5da",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-6f322a5da (reviewer sub-agent of L); spot-checked: Read the item, all 14 cited statements, HRS Lemma 5.3/(5.4)/before 5.6 and Stacks 03DB. No new nodes, no repair note, statement unchanged. Steps 1-7 hold. Step 1: the tail lemma has the same coefficient conventions and maps, and the universe containing I_E contains Omega. Step 2: finite free gives P tensor N = N^d, exact. Step 3: the flat-colimit hypotheses (small site, directed nonempty I_E, flat stages) are met. Step 4: E, F and Qbar are admissible, f^* is exact, and the coefficient-change squares make alpha_F R_X-linear and carry q_{F,Y} to q_{F,X}, with no ell-invertibility needed. Step 5: the standard t-structure gives the lower representative. Step 6: a flat-term K-flat resolution plus descent gives Q Tot(S[0] tensor V) = S tensor^L QV (sign (-1)^0), S tensor e is a quasi-isomorphism by exactness, and naturality holds. Step 7: termwise tensor colimit with legs q tensor 1 and a common bound. Fault C3/C4 in step 8: lem-sfb-rhom-colimit-cohomology-ladder states only 'a natural isomorphism' H^q(colim) = colim H^q, not that its composites with the coprojections are H^q(q_F tensor 1), which the item's 'map induced by the specified legs' requires. FIX rewrites step 8 via exactness of the filtered colimit functor on Fun(I_E, Mod(R_Y)), using lem-weil-pbc-module-sheaves-colimits-forgetful and lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact (Stacks 03DB), and lem-sp-exact-functor-preserves-homology (a)-(c), identifying the composites with the legs. proof_deps updated, the rhom-ladder tool_use replaced by the forgetful node (generic). The other declared tool_uses are accepted as generic. Duplicate candidates (lem-pc-filtered-colimit-derived-tensor, lem-sbc-filtered-colimit-cochain-homology, lem-pc-module-filtered-colimits-tensor-preserves, lem-weil-pbc-filtered-colimit-flat-modules) concern rings or fixed complexes, not this item. Edge cases checked: F=E, zero objects, empty scheme, negative a and q, unbounded J.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QlbarBoundedTensorColimit",
+  "declaration": "AlgebraicGeometry.ProEtale.QlbarBoundedTensor.bounded_tensor_colimit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QlbarBoundedTensor.tensorComplex",
+   "AlgebraicGeometry.ProEtale.QlbarBoundedTensor.derivedTensor",
+   "AlgebraicGeometry.ProEtale.QlbarBoundedTensor.tensorCocone",
+   "AlgebraicGeometry.ProEtale.QlbarBoundedTensor.Represents",
+   "AlgebraicGeometry.ProEtale.QlbarBoundedTensor.CoefficientFacts",
+   "AlgebraicGeometry.ProEtale.QlbarBoundedTensor.pullback",
+   "AlgebraicGeometry.ProEtale.QlbarBoundedTensor.bounded_tensor_colimit"
+  ],
+  "file": "lean/Sheaf/Paper/QlbarBoundedTensorColimit.lean",
+  "statement": "theorem bounded_tensor_colimit (E : FiniteIntermediateField ℓ) {Y : Scheme.{u}} (f : X ⟶ Y) : Nonempty (AsSmall.{u + 1} (Under E)) ∧ IsFiltered (AsSmall.{u + 1} (Under E)) ∧ CoefficientFacts X ℓ E ∧ CoefficientFacts Y ℓ E ∧ exactFunctor _ _ (pullback X ℓ E f) ∧ IsIso (condensedPullbackHom (Profinite.continuousMapRingObj E) f) ∧ IsIso (condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f) ∧ (∀ (F : FiniteIntermediateField ℓ) (_ : E ≤ F), IsIso (condensedPullbackHom (Profinite.continuousMapRingObj F) f) ∧ (AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl Y ℓ F) ≫ condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f = condensedPullbackHom (Profinite.continuousMapRingObj F) f ≫ padicSubfieldRingObjToPadicAlgCl X ℓ F) ∧ (∃ (p : QlbarInternalHom.coefficients Y ℓ E ⋙ pullback X ℓ E f ≅ QlbarInternalHom.coefficients X ℓ E) (b : (pullback X ℓ E f).obj (QlbarInternalHom.coefficientCocone Y ℓ E).pt ≅ (QlbarInternalHom.coefficientCocone X ℓ E).pt), ∀ i : AsSmall.{u + 1} (Under E), (pullback X ℓ E f).map ((QlbarInternalHom.coefficientCocone Y ℓ E).ι.app i) ≫ b.hom = p.hom.app i ≫ (QlbarInternalHom.coefficientCocone X ℓ E).ι.app i) ∧ (∀ (a : ℤ) (C : DerivedCategory (Modules (Profinite.continuousMapRingObj E) X)), C.IsGE a → ∃ K : CochainComplex (Modules (Profinite.continuousMapRingObj E) X) ℤ, Nonempty (DerivedCategory.Q.obj K ≅ C) ∧ K.IsStrictlyGE a ∧ Represents X ℓ E C K ∧ (∀ i : AsSmall.{u + 1} (Under E), ((tensorComplex X ℓ E K).obj ((QlbarInternalHom.coefficients X ℓ E).obj i)).IsStrictlyGE a) ∧ (tensorCocone X ℓ E K).pt.IsStrictlyGE a) ∧ (∀ (A : DerivedCategory (Modules (Profinite.continuousMapRingObj E) Y)) (J : CochainComplex (Modules (Profinite.continuousMapRingObj E) Y) ℤ), Nonempty (DerivedCategory.Q.obj J ≅ A) → Represents Y ℓ E A J ∧ ∀ q : ℤ, Nonempty (IsColimit ((DerivedCategory.Q ⋙ DerivedCategory.homologyFunctor _ q).mapCocone (tensorCocone Y ℓ E J))))",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The finite-field diagram and its actual inclusion cocone are the existing QlbarInternalHom fields/coefficients/coefficientCocone constructions, owned by def-sfb-qlbar-coefficient-module-cocone. No internal-Hom comparison theorem or tail-module colimit theorem is used in the signature. IsColimit of the homology cocone expresses invertibility of the comparison induced by its specified legs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eddf8afee",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of the cb44c158f32b return. Lean module byte-identical to cb44, whose full clause audit still holds. stmt_deps now: removed lem-sfb-qlbar-internal-hom-coefficient-comparison and lem-sfb-qlbar-tail-module-colimit, added def-sfb-qlbar-coefficient-module-cocone, as the return required. New def node: existing:true owner of the live plain defs QlbarInternalHom.fields/coefficients/coefficientCocone (live l.172-205); statement verbatim live signature; NL text matches the bodies (coefficientComplexDiagram/Cocone of degree-zero regular module, complexForward, eval 0); no other owner in live or runs. Item lean.statement verbatim. Mechanical finding: lem-weil-pbc-site-derived-tensor-descent genuine, since derivedTensor = siteDerivedTensorIndependentCoefficients = .choose of the theorem's construction -> PASS on this point. No hollow defs, sorry only, docstrings with source/blueprint and proof steps, no pro-etale substitute. No compile (no file changed). Advisory: owned defs' docstrings still name the internal-Hom node; padicSubfieldRingObj owner only transitive."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261024T190418-L-4047790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

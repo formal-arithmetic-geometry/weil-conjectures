@@ -1,0 +1,112 @@
+{
+ "id": "lem-pd-section-cochain-monoidal-data",
+ "kind": "statement",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "title": "Strong monoidal cochain section equivalence with its fixed comparison",
+ "statement": "Let Λ be a commutative condensed ring and assume HasDerivedCategory for section modules over every scheme. For every scheme T, the functor of the cochain equivalence induced termwise by equivalence Λ T admits a strong monoidal structure for the canonical signed cochain tensors. Its oplax tensorator on P,Q is exactly (cochainTensorComparison Λ T P Q).hom, for all unbounded internal cochain complexes P,Q.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 07A4 and 0FPT; signed-total extension of the ordinary section tensor comparison"
+ },
+ "stmt_deps": [
+  "def-pd-section-cochain-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved canonical ordinary section monoidal data. Its oplax tensorator agrees with ordinaryTensorComparison by the fixed pure-tensor normalization. Apply the standard strong monoidal extension of an additive monoidal equivalence to cochain complexes. The extension tensorator is mapBifunctorComparison of the ordinary oplax natural transformation. Equality of its ordinary components with the canonical curried comparison gives equality of the two natural transformations. sectionTotalComparison_eq identifies this signed total comparison with cochainTensorComparison. No boundedness or nonzero hypothesis is used.",
+   "uses": [
+    "lem-sfb-internal-section-tensor-localization",
+    "def-pd-proetale-section-module-functors",
+    "def-pd-section-derived-tensor-data",
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-section-tensor-localization",
+  "def-pd-proetale-section-module-functors",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-cochain-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 07A4 and 0FPT; ordinary-to-cochain monoidal extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive strong monoidal equivalence induces a strong monoidal functor on unbounded cochain complexes whose oplax tensorator is the signed total comparison",
+   "results": "Eight Mathlib hits concerned HomologicalComplex.monoidalCategory, HasTensor, inducingFunctorData and related tensor availability, rather than the fixed section comparison. The adopted source supplies mapCochainComplexMonoidal and mapCochainComplex_δ; these provide the general construction and are reused.",
+   "date": "2026-10-27",
+   "verdict": "general construction reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapCochainComplex_δ",
+   "results": "No hit: the server index does not contain this adopted-source declaration. The declaration was read directly in WeilConjectures/Algebra/Homology/Monoidal/MapHomologicalComplex.lean and used.",
+   "date": "2026-10-27",
+   "verdict": "source-library API reused"
+  },
+  {
+   "tool": "grep",
+   "query": "section_cochain_monoidal_data|cochain_monoidal_data",
+   "results": "No existing section-specific monoidal-data theorem. The proved private ordinary section_monoidal_data and the generic mapCochainComplexMonoidal supply the construction.",
+   "date": "2026-10-27",
+   "verdict": "no existing exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolvingOplaxEdgeIdentifications",
+  "date": "2026-10-27",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-section-localization-associativity",
+   "place": "The first proof step: the fixed cochain section equivalence is strong monoidal",
+   "via": [
+    "lem-pd-section-localization-associativity",
+    "lem-pd-section-resolving-oplax-edge-identifications"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionCochainMonoidalData",
+  "file": "lean/Sheaf/Paper/SectionCochainMonoidalData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_cochain_monoidal_data",
+  "statement": "theorem section_cochain_monoidal_data (T : Scheme.{u}) :\n    ∃ m : ((equivalence Λ T).mapHomologicalComplex (.up ℤ)).functor.Monoidal,\n      letI := m\n      ∀ P Q : CochainComplex (internalModules Λ T) ℤ,\n        Functor.OplaxMonoidal.δ\n            ((equivalence Λ T).mapHomologicalComplex (.up ℤ)).functor P Q =\n          (cochainTensorComparison Λ T P Q).hom",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T034716-L-3677670",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T034716-L-3677670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

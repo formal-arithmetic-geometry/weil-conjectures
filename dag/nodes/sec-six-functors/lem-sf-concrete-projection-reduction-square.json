@@ -1,0 +1,267 @@
+{
+ "id": "lem-sf-concrete-projection-reduction-square",
+ "kind": "statement",
+ "title": "Concrete finite-reduction square for the compactification projection mate",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$; put $A_n=R/(t^n)$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Use the operation datum [def-fix-six-functor-datum], not a datum assuming projection invertibility. Schemes are finite type over $k$ and their structure morphisms need not be separated. Use the small pro-etale coefficient categories and the specified compactification projection map [def-exchange-projection], with compact-support functors [def-weil-integral-rational-qbar-compact-support]. Let $f:X\\to Y$ be separated of finite type, $1\\le m\\le n$, $K\\in D^b_{ctf}(X,A_n)$ and $L\\in D^b_{ctf}(Y,A_n)$, where finite Tor amplitude is [def-weil-finite-tor-amplitude]. Put $\\rho_W(M)=M\\otimes^L_{A_n}A_m$, $K_m=\\rho_XK$, $L_m=\\rho_YL$. Write $S_n=Rf_{!,n}K\\otimes^L L$ and $T_n=Rf_{!,n}(K\\otimes^LLf_n^*L)$, and similarly $S_m,T_m$. The pullback and tensor input $K\\otimes^LLf_n^*L$ is bounded constructible of finite Tor amplitude: if the input Tor intervals are $[a,b]$ and $[c,d]$, its interval is $[a+c,b+d]$. The canonical tensor and compact-support comparisons give isomorphisms $u:\\rho_YS_n\\xrightarrow{\\sim}S_m$ and $v:\\rho_YT_n\\xrightarrow{\\sim}T_m$ with\n$$v\\,\\rho_Y(\\operatorname{PF}_{f,K,L})=\\operatorname{PF}_{f,K_m,L_m}\\,u.$$\nHere $u$ first uses tensor comparison, then compact-support comparison; $v$ first uses compact-support comparison, then tensor and pullback comparisons. This identifies the actual proper counit/open tensor composite for every chosen compactification, naturally in both inputs and compatibly with successive reductions; it asserts no invertibility of PF.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete repair of fix-prop-projection-formula, former proof step(s) 1, 3; Proof, repaired concrete step 3"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-fix-six-functor-datum",
+  "def-exchange-projection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-finite-tor-amplitude",
+  "def-sp-open-scalar-tensor-data",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Pullback preserves the finite Tor interval by lem-sf-pullback-tor-amplitude. Apply lem-sf-tensor-ctf on flat K-flat resolutions and transport along the selected tensor-model representative isomorphism. This proves finite Tor constructibility of the actual input functor and the sum interval.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The concrete support quotient comparison is invertible on K and on the tensor/pullback input by lem-sf-concrete-support-scalar-isomorphism. Tensor and pullback comparisons are isomorphisms by their definitions, so u and v are isomorphisms. No projection is inverted.",
+   "uses": [
+    "lem-sf-concrete-support-scalar-isomorphism",
+    "def-sf-concrete-projection-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the specified projection using its unique proper/open projection data. Its proper factor is the counit-defined properProjection; the open factor is openFactor including the geometric pullback compositor. The support comparison factors as properScalar followed by the proper image of openScalar, by the canonical mate factorization, with the intermediate scalar presentation isomorphisms cancelling.",
+   "uses": [
+    "def-sf-concrete-projection-factors",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of properScalar at the open projection moves scalar change across the open map. Substitute lem-sf-concrete-open-scalar-tensor-square and lem-sf-concrete-proper-scalar-tensor-square. Naturality of the B proper projection at openScalar K moves the last factor to the source, where tensor functoriality combines it with properScalar. The result is exactly scalar(projection_A);v = u;projection_B.",
+   "uses": [
+    "lem-sf-concrete-open-scalar-tensor-square",
+    "lem-sf-concrete-proper-scalar-tensor-square",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the source, input and target comparison natural transformations from whiskering and products. Their naturality gives naturality in both inputs. Uncurry the specified projection natural transformation to obtain projection naturality.",
+   "uses": [
+    "def-sf-concrete-projection-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the tensor, support and input comparison composition and identity equations of lem-sf-concrete-projection-coefficient-coherence. Naturality and tensor/support functoriality combine the component equations into the two endpoint cocycles and identity equations. These are exactly Composition and Identity for each finite quotient, with no hypothesis on the separatedness of structure maps.",
+   "uses": [
+    "lem-sf-concrete-projection-coefficient-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-concrete-support-scalar-isomorphism",
+  "def-sf-concrete-projection-reduction-data",
+  "def-sf-concrete-projection-factors",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-sf-concrete-open-scalar-tensor-square",
+  "lem-sf-concrete-proper-scalar-tensor-square",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-concrete-projection-coefficient-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete coefficient square, preserving the six-step proper/open route; D7 explicit finite-Tor transport, factorization, naturality and coefficient-cocycle assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compact support projection mate commutes with finite quotient coefficient reduction for constructible finite Tor complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b]\\n  [Y.IsStrictlyGE a] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X',\\n    ∃ (_ : X\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Monoid G],\\n  QuasiIso\\n    (((CategoryTheory.forget₂ (Rep k G) (ModuleCat k)).mapHomologicalComplex (ComplexShape.down ℕ)).map\\n      (Rep.standardComplex.εToSingle₀ k G))\", \"doc\": \"The morphism from the standard chain complex in the category of representations of a monoid $ G $ over a commutative ring $ k $ to the single-term chain complex at degree 0 with the trivial representa\"}\n  {\"name\": \"Profinite.NobelingProof.CC_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n      {f : LocallyConstant ↑C ℤ},\\n      (Profinite.NobelingProof.Linea\", \"doc\": \"In Nobeling's profinite construction, for any locally constant $\\\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\\\text{Linear}_{C\\\\to C'}(f) = 0$ (where $\\\\text{Linear}_{C\\\\to C'}$ denotes the $\\\\mathbb\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n  Profinite.NobelingProof.GoodProducts.SumEval C ho ∘ Sum.inl =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (ModuleCat.ofHom (Profinite.NobelingProof.\", \"doc\": \"The composition of the evaluation map for good products with the left injection into the disjoint union of good and maximal products equals the composition of the module homomorphism induced by the No\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [X.IsStrictlyLE n],\\n  ∃ X',\\n    ∃ (_ : X'.IsStrictlyLE n),\\n      ∃ s,\\n        ∃ \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor reduction identifies the counit-defined proper and open compactification projection maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.counit_def\", \"module\": \"Mathlib.RingTheory.Coalgebra.TensorProduct\", \"type\": \": Coalgebra.counit (R := S) (A := A ⊗[R] B) = AlgebraTensorModule.rid R S S ∘ₗ AlgebraTensorModule.map counit counit\", \"doc\": \"The counit of the coalgebra $ A \\\\otimes_R B $ over $ S $ is given by the composition of the right identity map on $ S $ with the tensor product of the counits of $ A $ and $ B $, i.e., $ \\\\varepsilon_{\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"Bialgebra.TensorProduct.counitAlgHom_def\", \"module\": \"Mathlib.RingTheory.Bialgebra.TensorProduct\", \"type\": \":\\n  counitAlgHom (R := S) (A := A ⊗[R] B) =\\n    (Algebra.TensorProduct.rid _ _ _).toAlgHom.comp\\n      (Algebra.TensorProduct.map (Bialgebra.counitAlgHom S A) (Bialgebra.counitAlgHom R B))\", \"doc\": \"The counit algebra homomorphism for the tensor product bialgebra $ A \\\\otimes_R B $ is given by the composition of the tensor product of the individual counit homomorphisms $ \\\\epsilon_A: A \\\\to R $ and \"}\n  {\"name\": \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \": L ⋙ F.totalLeftDerived L W ⟶ F\", \"doc\": \"The natural transformation from the composition of the localization functor $ L $ with the total left derived functor of $ F $ to $ F $ itself, defined as the counit of the right Kan extension constru\"}\n  {\"name\": \"Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap\", \"module\": \"Mathlib.RingTheory.Bialgebra.TensorProduct\", \"type\": \":\\n  Coalgebra.counit (R := S) (A := A ⊗[R] B) =\\n    ((Algebra.TensorProduct.rid _ _ _).toAlgHom.comp\\n        (Algebra.TensorProduct.map (Bialgebra.counitAlgHom S A) (Bialgebra.counitAlgHom R B))).toLinearMap\", \"doc\": \"The counit of the tensor product bialgebra $ A \\\\otimes_R B $ is equal to the composition of the algebra homomorphisms from $ A $ and $ B $ to $ R $, tensored together, followed by the isomorphism $ A \"}\n  {\"name\": \"CompHausLike.LocallyConstant.counit\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] :\\n  haveI := CompHausLike.preregular hs\\n  (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩ ⋙ functor.{u, w} P hs ⟶\\n    𝟭 (Sheaf (coherentTopology (CompHausLike.{u} P)) (Type (max u w)))\", \"doc\": \"A natural transformation from the composition of the sheaf sections functor (evaluated at the terminal object PUnit) with a finite-product-preserving functor to the identity functor on sheaves over co\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"Pi.counit_comp_single\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"(i : n) : counit ∘ₗ .single R A i = counit\", \"doc\": \"For any index $i$ in $n$, the composition of the counit map $\\\\epsilon: A \\\\to R$ with the linear map embedding an element of $A$ into the product module $\\\\prod_{j \\\\in n} A$ at position $i$ is equal to \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"projection\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(reduc|coefficient)|reduc.*projection",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/Lean/Expr/Basic.lean\", \"line\": \"490\", \"text\": \"/-- If `e` is a projection of the structure constructor, reduce the projection.\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/FindPremises.lean\", \"line\": \"217\", \"text\": \"We do not reduce projections so that e.g. `Fin.val_mk : ⟨m, h⟩.val = m` can be indexed properly.\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/FindPremises.lean\", \"line\": \"219\", \"text\": \"TODO?: projections should be reduced inside implicit arguments,\"}\n  {\"file\": \"Mathlib/Tactic/Translate/Core.lean\", \"line\": \"850\", \"text\": \"    (the additive instance projections don't reduce at instance transparency).\"}\n  {\"file\": \"Mathlib/Tactic/Simps/Basic.lean\", \"line\": \"20\", \"text\": \"reducing a definition when projections are applied to it.\"}\n  {\"file\": \"Mathlib/Tactic/Simps/Basic.lean\", \"line\": \"1190\", \"text\": \"  /- We stop if no further projection is specified or if we just reduced an eta-expansion and we\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/Alternating/Basic.lean\", \"line\": \"94\", \"text\": \"-- not a `simp` lemma because this projection is a reducible call to `mk`, so `simp` can prove\"}\n  {\"file\": \"Mathlib/Topology/Sets/Closeds.lean\", \"line\": \"417\", \"text\": \"initialize_simps_projections IrreducibleCloseds (carrier → coe, as_prefix coe)\"}\n  {\"file\": \"Mathlib/Topology/ContinuousMap/ContinuousMapZero.lean\", \"line\": \"34\", \"text\": \"not the structure projection. Of course, the two are definitionally equal, but not reducibly so. -/\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(coefficient|scalar)|(coefficient|scalar).*projection",
+   "results": "OK 1 hits: Mathlib/Analysis/CStarAlgebra/Projection.lean. Read returned types: ordinary scalar adjunctions, condensed or unrelated projection facts; no derived pro-etale compactification reduction square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars commutes with the compactification projection morphism",
+   "results": "OK 8 hits: AlgHom.extendScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, PolynomialLaw.comp_toFun', AlgEquiv.extendScalarsOfSurjective, ModuleCat.extendRestrictScalarsAdj, LinearEquiv.extendScalarsOfIsLocalizationEquiv, AlgHom.extendScalarsOfSurjective. Read returned types: ordinary scalar adjunctions, condensed or unrelated projection facts; no derived pro-etale compactification reduction square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"projection\"",
+   "results": "OK 0 hits: . Read returned types: ordinary scalar adjunctions, condensed or unrelated projection facts; no derived pro-etale compactification reduction square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient extension is compatible with the counit projection formula for proper direct image and extension by zero on pro-etale sheaves",
+   "results": "OK 8 hits: Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, CompHausLike.LocallyConstant.counit_app_val, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit. Read returned types: ordinary scalar adjunctions, condensed or unrelated projection facts; no derived pro-etale compactification reduction square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof: Proof, repaired concrete step 3; extracted former concrete step(s) 1, 3",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-concrete-projection-reduction-square",
+  "worker": "stage1",
+  "summary": "Reused existing general ringed-topos tensor/exchange, scalar-mate and open normalization lemmas. Proved the Tor-domain assertion, constructed the specified comparisons and pasted proper/open equalities. Kept nonseparated scheme bases, B-linear reduction and the actual counit-defined maps; checked coefficient cocycles. No new nodes or statement change.",
+  "blueprint": "fix-prop-projection-formula.proof.md, sentence 2 on compatibility of the specified maps under successive coefficient reductions; concrete finite-reduction component extracted as this item.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Finite pullback preserves the exact input Tor interval; the interface-discharge unit has no preservation proof."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Finite tensor adds the two Tor intervals and preserves constructibility; no duality conclusion is used."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Provides invertibility of the canonical finite compact-support scalar comparison on K and H, without assuming projection invertibility."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Provides the unbounded strong monoidal scalar/pullback comparison for identity underlying topoi."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Identifies scalar/pullback comparisons and their geometric composition without coefficient flatness."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ringed-topos projection/exchange identity, applied to the coefficient square."
+   },
+   {
+    "node": "lem-fix-proetale-scalar-mate-normalization",
+    "why": "Identifies the specified B-linear proper scalar comparison by its actual counit equation, with naturality."
+   },
+   {
+    "node": "lem-fix-open-scalar-tensor-normalization",
+    "why": "Generic scalar/open tensor square and coefficient composition, valid on arbitrary pro-etale opens."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Identifies the composite proper/open restriction comparison appearing in the defining scalar-adjunction bijection."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Balanced associativity with normalized scalar units for successive quotient maps."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Generic coefficient-cocycle identity for the counit-defined proper mate; used without invertibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-0892ca116",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-0892ca116 (reviewer sub-agent of L); spot-checked: Read the whole item, its 6 steps, all 13 cited statements, the blueprint proof sentence 2 of fix-prop-projection-formula (main-20261015), and Stacks 0E48, 0GL1, 0GL6 (more-etale), 07A4, 0D6D; checked their tags against tags/tags. No new nodes. The statement is unchanged and not weakened; the coefficients are the constant-ring pro-etale categories with reduction -⊗^L A_m, as in def-exchange-projection and lem-fix-compact-support-coefficient-change. Not a duplicate: prop-sf-pf-reduction uses def-sf-datum and adds the invertibility equivalence; lem-sf-pf-reduction-proper-open-identities states the same factor identities but only for separated X,Y with étale-origin witnesses. No cycle (transitive walk). No SGA. Step 1: hypotheses checked; f is separated, Tor intervals [c,d] and then [a+c,b+d]. Step 2: s and t come from the identity-topos ringed pullback and the scalar normalization, with no flatness. Step 3: exchange-tensor coherence specialised to the coefficient square; its Ex is literally the χ of the scalar-mate node (mate of λ_p). Step 4: open route (i)=(ii) with Q=Lp*L. c_V=Rp_*(d)χ follows from uniqueness in def-coef-compact-support-tensor-comparison, and lem-fix-compact-support-coefficient-change uses the same q_f, so invertibility holds for every compactification. Step 5: recomputed the whole composite by naturality of χ and π_B; it is correct. FIX to step 6: the delivered text asserted, without any citation saying so, that the tensor comparison s and the scalar/pullback comparison t compose with balanced associativity in the coefficient direction; lem-sfb-kflat gives composition only in the geometric direction (C3/C4 gap, elementary). Added the explicit check on flat-term K-flat representatives, citing lem-weil-pbc-ringed-topoi-derived-tensor-pullback, the coequalizer formula of lem-sfb-kflat and the τ formula of lem-sfb-successive; also added lem-weil-pbc-ringed-topoi-derived-tensor-pullback to the step's uses (it was already in proof_deps). Edge cases checked: m=n, zero or empty input, non-flat A_2→A_1, non-separated bases. The 11 declared tool_uses are accepted as generic tools. Cosmetic, not changed: step 4's source.document is sites-cohomology although Tag 0GL6 is in more-etale.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConcreteProjectionReductionSquare",
+  "declaration": "WeilConjectures.ConcreteProjectionReduction.concreteProjectionReductionSquare",
+  "declarations": [
+   "WeilConjectures.ConcreteProjectionReduction.concreteProjectionReductionSquare"
+  ],
+  "file": "lean/Sheaf/Paper/ConcreteProjectionReductionSquare.lean",
+  "statement": "theorem concreteProjectionReductionSquare\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E]\n    (n : ℕ) (hn : 1 ≤ n) (_operations : SixFunctorOperationDatum D C E n hn) :\n    ∀ (m₀ : Models.{u}) (choices₀ : Choices m₀)\n      (X Y : Over (Spec (CommRingCat.of D.k)))\n      [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n      [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n      (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left]\n      (cpt : Compactification f.left)\n      (K : proEtaleDerivedCategory X.left (Padic.coefficientExtensionRing C.l E n))\n      (L : proEtaleDerivedCategory Y.left (Padic.coefficientExtensionRing C.l E n)),\n      finiteTorConstructible C.l E n hn X.left K →\n      finiteTorConstructible C.l E n hn Y.left L →\n      (∀ a b c d : ℤ,\n        HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing C.l E n) K a b →\n        HasProEtaleTorAmplitude Y.left (Padic.coefficientExtensionRing C.l E n) L c d →\n        finiteTorConstructible C.l E n hn X.left\n          (input m₀ (Padic.coefficientExtensionRing C.l E n) f.left K L) ∧\n        HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing C.l E n)\n          (input m₀ (Padic.coefficientExtensionRing C.l E n) f.left K L) (a + c) (b + d)) ∧\n      (∀ (m : ℕ) (_hm : 1 ≤ m) (hmn : m ≤ n),\n        Square m₀ choices₀ (quotient C.l E hmn) cpt K L ∧\n        Naturality m₀ choices₀ (quotient C.l E hmn) cpt ∧\n        ∀ (r : ℕ) (_hr : 1 ≤ r) (hrm : r ≤ m),\n          Composition m₀ choices₀ (quotient C.l E hmn) (quotient C.l E hrm) cpt K L) ∧\n      Identity m₀ choices₀ (Padic.coefficientExtensionRing C.l E n) cpt K L",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Definitions are re-exported verbatim from Sheaf.Paper.ConcreteProjectionReductionData. The theorem retains its full original signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-814c4009b",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Read item node, all 8 stmt_deps, the module and the dependency Lean (OpenScalarTensorData, ScalarInternalHomData, IntegralCompactSupportCoefficientData). Every clause matches: Tor interval [a+c,b+d]; u = tensor then compact-support comparison; v = compact-support comparison then tensor/pullback comparison; ρ(PF_A)≫v = u≫PF_B; naturality, successive-reduction cocycle (ψ.comp φ = quotient n→r) and identity unitors; no IsIso on PF; non-separated structure maps allowed; f separated of finite type; every compactification. Models/Choices comparisons are pinned (K-flat and pure-tensor normalization, leftAdjointUniq, open_normalization); supportComparison is the canonical mate of PurCompactSupport.restriction; PF is projectionMap = compactificationProjectionFromData. Node diff vs base: lean record plus 2 landed definition stmt_deps only; proof_deps unchanged; statement field verbatim; docstrings and 6-step proof plan present; only sorry. Advisory: coefficients/coefficientChange copy the SupportedScalarTorInterval theorem-module helpers and match the data of PurCompactSupport.finite (fixed level only); _operations unused, consistent with the node. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-concrete-projection-reduction-square + 6 new/2 changed nodes vs delivered Lean (compiled set + 8 copied OpenScalarTensorData importers in sandbox, axioms printed); change records vs Lean diffs; claims lock of IntegralCompactSupportCoefficientComparison (F8)"
+ }
+}

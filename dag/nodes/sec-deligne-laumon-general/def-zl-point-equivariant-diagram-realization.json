@@ -1,0 +1,126 @@
+{
+ "id": "def-zl-point-equivariant-diagram-realization",
+ "kind": "definition",
+ "title": "Point diagram realization data",
+ "statement": "For finite-field datum D with geometric point s = Spec k, prime l different from its characteristic, a finite extension E of Q_l, and an algebraic closure Omega of Q_l, define omega_E = H^0 of the specified rational point fibre, T_E the actual geometric-Frobenius pullback and t_E = H^0 of its specified point transport. A diagram realization consists of a heart-valued diagram G with natural isomorphisms theta: G T_E ≅ G and eta: G omega_E ≅ V and isomorphisms t_i: omega_E G_i ≅ omega_E T_E G_i. Exact realization means reflection of parallel-arrow equations, monomorphisms, short exact sequences and cokernel universal properties. Point realization additionally specifies the forward and inverse Weil-map fibre formulas and the conjugated local Frobenius equality. Finite scalar realization extends G along the recorded scalar extension using exactly the normalized pullback/scalar and fibre/H^0 comparisons, including its transport square. Common-stage realization includes the diagram at its original finite stage using the recorded Shrink and tensor-tower comparisons and requires the analogous exactness, transport and Frobenius equations. All constructions and predicates are the unchanged definitions extracted from lem-zl-point-equivariant-diagram-lift.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-diagram lifting argument of lem-zl-point-equivariant-diagram-lift."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-point-transport",
+  "def-weil-local-frobenius-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-coefficient-cohomology-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-diagram lifting argument of lem-zl-point-equivariant-diagram-lift."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lift a finite diagram of vector spaces with automorphisms through an exact point heart equivalence, and extend it compatibly to finite and algebraically closed coefficients",
+   "results": "createsLimitsOfShapeOfEquiv, abelianOfEquivalence, FGModuleCat.ulift; no normalized point Weil diagram or scalar realization theorem.",
+   "date": "2026-10-25",
+   "verdict": "The results are generic transfer tools, not this point-heart and specified transport comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "Functor.FullyFaithful.preimageIso and its hom/inv equations lift individual isomorphisms.",
+   "date": "2026-10-25",
+   "verdict": "Useful for lifting a supplied fibre isomorphism, but not for point-heart equivalence, prescribed-object diagrams or normalized coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a diagram through a fully faithful functor with chosen object preimages and isomorphisms, preserving one prescribed object",
+   "results": "Functor.essImage.liftFunctor and its obj/map lemmas; relativelyRepresentable.lift.",
+   "date": "2026-10-25",
+   "verdict": "Generic diagram lifting exists, but does not supply the original point-heart objects, specified point transport, or coefficient extension compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|lift.*[Dd]iagram|map.*[Ss]hortExact",
+   "results": "Mathlib Functor.FullyFaithful and EssentialImage; ShortComplex.shortExact_of_iso. Repository search finds the assigned module only for the Zl diagram predicates. Blueprint search for equivariant diagram and scalar diagram returns zero matches.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the specialized point-diagram steps or their definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointEquivariantDiagramLift",
+  "date": "2026-10-25",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-diagram lifting argument of lem-zl-point-equivariant-diagram-lift.",
+   "via": [
+    "lem-zl-point-equivariant-diagram-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointEquivariantDiagramData",
+  "file": "lean/Sheaf/Paper/PointEquivariantDiagramData.lean",
+  "declaration": "WeilConjectures.zlDiagramFiber",
+  "statement": "def zlDiagramFiber : sfRationalConstructibleCategory l E (Spec (.of D.k)) ⥤ ModuleCat.{u} E",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.zlDiagramFiber",
+   "WeilConjectures.zlDiagramPullback",
+   "WeilConjectures.zlDiagramTransport",
+   "WeilConjectures.zlDiagramWeilObject",
+   "WeilConjectures.zlDiagramWeilFunctor",
+   "WeilConjectures.zlDiagramHeart",
+   "WeilConjectures.ZlDiagramExactRealization",
+   "WeilConjectures.ZlPointDiagramRealization",
+   "WeilConjectures.zlDiagramScalarFiber",
+   "WeilConjectures.zlDiagramScalarPullback",
+   "WeilConjectures.zlDiagramQbarFiber",
+   "WeilConjectures.zlDiagramQbarPullback",
+   "WeilConjectures.zlDiagramQbarTransport",
+   "WeilConjectures.zlDiagramStagePullback",
+   "WeilConjectures.zlDiagramStageFiber",
+   "WeilConjectures.ZlFiniteScalarDiagram",
+   "WeilConjectures.ZlCommonStageDiagram"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ac0df",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261025T123650-L-1887771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ac0df",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261025T123650-L-1887771",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature byte-identical to clone; 17 defs verbatim in new PointEquivariantDiagramData (public re-export); three new sorry statements checked against item and nodes; node fields vs Lean proof; no importers"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-zl-common-stage-pullback-comp-naturality",
+ "kind": "statement",
+ "title": "Naturality of normalized common-stage pullback composition components",
+ "statement": "For a prime $\\ell$ and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, let $f:X\\to Y$ and $g:Y\\to Z$ be scheme maps on schemes whose residue fields invert $\\ell$. The explicitly constructed isomorphism between pullback by $fg$ and successive pullback at each common-stage pair is natural in every morphism of that pair category. The component is exactly the specified integral compositor [lem-pod-integral-pullback-composition], rationalized and included at the pair’s coefficient stage, conjugated by the recorded literal object equalities of [def-weil-derived-pullback-tensor-hom]. No choice of a common-stage natural isomorphism is used in its construction.",
+ "stmt_deps": [
+  "lem-pod-integral-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "First paragraph, Frobenius-compatible composition, together with common-stage pullback convention; residue-compatible pullback proof Step 10, coefficient compatibility."
+ },
+ "proof": [
+  {
+   "text": "Represent a common-stage morphism at one coefficient stage L. The pullback specification conjugates rational pullback of its representative by the scalar comparisons. The normalized integral scalar/composition square is checked by fully faithful finite reduction, where it is tensor reassociation and multiplication. Rationalize it on pure tensors and extend naturality by tensor induction. Transport both endpoint components to L using that scalar square. Cancel the invertible comparison factors and apply rational naturality. The explicit equality transports cancel by proof irrelevance. All component isomorphisms are actual constructions from the specified integral comparison.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "lem-pod-pullback-identities-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-pullback-identities-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "First paragraph, Frobenius-compatible composition, together with common-stage pullback convention; residue-compatible pullback proof Step 10, coefficient compatibility."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of integral pullback composition after rationalization and descent to a common coefficient stage",
+   "results": "8 hits, including ordinary Over.pullbackComp and SheafOfModules.pullbackComp. None gives naturality of the project’s explicitly normalized rational/common-stage components.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "Generic natural-isomorphism constructor takes naturality as a hypothesis.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStagePullbackComp|integralPullbackComposition",
+   "results": "No hits in Mathlib; direct project search found the existing normalized integral compositor, whose chosen components are used here.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilIndSheafCategory",
+  "date": "2026-10-25",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "First proof paragraph: natural Weil action on pullback of the sheaf, using normalized composition comparisons; naturality of those explicitly constructed comparisons.",
+   "via": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackCompNaturality",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackCompNaturality.lean",
+  "declaration": "WeilConjectures.commonStagePullbackCompComponent_naturality",
+  "statement": "theorem commonStagePullbackCompComponent_naturality {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (g : Y ⟶ Z)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    {P Q : generalAlgebraicallyClosedConstructibleCategory l Ω Z} (a : P ⟶ Q) :\n    (commonStageDerivedPullback l Ω (f ≫ g)).map a ≫\n        (commonStagePullbackCompComponent l Ω f g Q).hom =\n      (commonStagePullbackCompComponent l Ω f g P).hom ≫\n        (commonStageDerivedPullback l Ω f).map ((commonStageDerivedPullback l Ω g).map a)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.commonStagePullbackIntegralObject",
+   "WeilConjectures.commonStagePullbackCompComponent",
+   "WeilConjectures.commonStagePullbackCompComponent_heq",
+   "WeilConjectures.commonStagePullbackCompComponent_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261025T180506-L-3995116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261025T180506-L-3995116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

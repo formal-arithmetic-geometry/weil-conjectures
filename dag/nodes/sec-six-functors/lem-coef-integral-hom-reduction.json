@@ -153,7 +153,18 @@
   "def-weil-derived-pullback-tensor-hom"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -268,5 +279,44 @@
   "landing": "20261020T230810-L-613944",
   "kind": "interface",
   "note": "independent cc review: files identical to PASSed head 1e5bfa41a6 (landing failed on a missing file outside the delivery); re-verified vs live: 7 modules + importer PointDerivedHomEvaluation compile, integralHomReduction statement byte-identical to live, homModelMap old=new by rfl, axioms clean (sorryAx only via models_exist, comparison_isIso, reductionTower_components)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $E/\\Ql$ be finite with uniformizer $\\pi=\\pi_E$, let\n$R_X=\\mathcal O_{E,X}=p_X^*\\underline{\\mathcal O}_E$ and\n$A_n=(\\mathcal O_E/\\pi^n)_X$ be the pulled-back coefficient sheaves\n([det-def-sfb-pulled-back-coefficients]), and write\n$K_n=K\\otimes^L_RA_n$. For arbitrary complexes $K,L$ in\n$D(X_{\\mathrm{proét}},\\mathcal O_E)$,\nthe canonical evaluation-defined comparison is an isomorphism\n\n$$\nR\\mathcal Hom_R(K,L)\\otimes_R^L A_n\n\\xrightarrow{\\sim}R\\mathcal Hom_{A_n}(K_n,L_n).\n$$\n\nIt preserves evaluation and its transposes. If $L$ is derived\ncomplete ([def-pe-derived-complete]), then $R\\mathcal Hom_R(K,L)$ is\nderived complete.\nNo site-perfectness assumption on $K$ is imposed.",
+  "proof": [
+   {
+    "text": "The complex $[R_X\\xrightarrow{\\pi^n}R_X]$ is a finite-free\nresolution of $A_n$. Applying the exact $R$-linear functor\n$R\\mathcal Hom_R(K,-)$ to this two-term coefficient construction\ngives\n\n$$\nR\\mathcal Hom_R(K,L)\\otimes_R^L A_n\n\\cong R\\mathcal Hom_R(K,L\\otimes_R^L A_n).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The extension–restriction adjunction along $R_X\\to A_n$\n([det-def-sfb-pulled-back-coefficients]) identifies the latter\nwith\n$\\operatorname{Res}_nR\\mathcal Hom_{A_n}(K_n,L_n)$.\nIndeed, testing on a complex on each slice of the site reduces this\nidentity to the derived tensor–Hom adjunction of\n[det-def-sfb-derived-tensor-hom]. The resulting map is\n$A_n$-linear and is precisely the canonical comparison in the\nstatement. The finite-free construction and this adjunction use the\nactual evaluation maps, which proves their compatibility as well.",
+    "uses": [
+     "det-def-sfb-pulled-back-coefficients",
+     "det-def-sfb-derived-tensor-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If $L$ is complete, then $L\\cong R\\varprojlim_n\\operatorname{Res}_nL_n$ by\n[def-pe-derived-complete].\nInternal Hom preserves derived limits in its second variable, since\nit is right adjoint to derived tensor. Consequently\n\n$$\nR\\mathcal Hom_R(K,L)\n\\cong R\\varprojlim_n\\operatorname{Res}_n\nR\\mathcal Hom_{A_n}(K_n,L_n).\n$$",
+    "uses": [
+     "def-pe-derived-complete"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The preceding comparison identifies this with\n$R\\varprojlim_n(R\\mathcal Hom_R(K,L)\\otimes^L_RA_n)$, so $R\\mathcal Hom_R(K,L)$\nis derived complete in the sense of [def-pe-derived-complete].\nThis proof uses perfectness of $A_n$ over $R$, not\nperfectness of $A_n$ over a larger finite quotient ring.",
+    "uses": [
+     "def-pe-derived-complete"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

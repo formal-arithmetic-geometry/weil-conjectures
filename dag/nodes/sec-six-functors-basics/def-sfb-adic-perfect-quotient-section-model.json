@@ -1,0 +1,149 @@
+{
+ "id": "def-sfb-adic-perfect-quotient-section-model",
+ "kind": "definition",
+ "title": "A proved ordinary quotient adjunction tower with abstract fields",
+ "statement": "For X, A, J and U and the functors F_n and fixed balancing theta_n of [def-sfb-adic-perfect-module-functors], define SectionModel to consist of right adjoints R_n, adjunctions F_n left adjoint R_n, natural successor maps kappa_n:R_(n+1) to C_n R_n, and the identity eta_n(M)=eta_(n+1)(M) followed by kappa_n(F_(n+1)M) and R_n(theta_n(M)). Construct a SectionModel using the concrete terminal sections adjoints of [def-sfb-adic-perfect-quotient-section-realization] and the unit/counit mates of inverse balancing from [def-sfb-adic-perfect-slice-sections]. Select sectionModel from this completely proved Nonempty theorem and expose its R, a and kappa fields as rightAdjoint, adjunction and step. The selected right adjoints are canonically isomorphic, by adjunction uniqueness, to the concrete sections functors. The selected successor maps satisfy the stored unit identity and hence are the mates of inverse fixed balancing. No unproved theorem is used to choose this data.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-module-functors",
+  "def-sfb-adic-perfect-quotient-section-realization",
+  "def-sfb-adic-perfect-slice-sections"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma lemma-sheafification-presheaf-modules, Tag 03CY; section-tensor-product, Tag 03EK; together with proetale.tex, lemma-connected-adic-lisse, Tag 09C6, ordinary constant quotient calculation before total Hom."
+ },
+ "proof": [
+  {
+   "text": "Use the concrete quotient sections adjunction rawAdjunction, constructed by completion cancellation and transport from the tensor and constant-presheaf adjunctions.",
+   "uses": [
+    "def-sfb-adic-perfect-quotient-section-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct SectionModel.ofAdjunctions for arbitrary R_n and adjunctions a_n:F_n left adjoint R_n. Its successor field is balancingMate(a_n,a_(n+1),theta_n), and balancingMate_unit supplies its unit_eq field. The functors and adjunctions remain parameters throughout this proof; no concrete scalar implementation is unfolded.",
+   "uses": [
+    "def-sfb-adic-perfect-slice-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply SectionModel.ofAdjunctions to rawRightAdjoint and rawAdjunction. This completely proves sectionModel_exists. Select sectionModel from that proved theorem and expose its fields; step_unit is the unit_eq field. The structure interface prevents consumers from normalizing the scalar-extension implementations. The right adjoints of any two models are related by their unique right-adjoint isomorphisms; the unit identity determines each successor map by naturality at the upper counit and the right triangle identity.",
+   "uses": [
+    "def-sfb-adic-perfect-quotient-section-realization",
+    "def-sfb-adic-perfect-slice-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adic-perfect-quotient-section-realization",
+  "def-sfb-adic-perfect-slice-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "The constant-generator adjunction and completion cancellation in steps 1 and 2, and the unit-identity part of step 4, of lem-sfb-adic-perfect-quotient-section-adjunction. Tags 03CY and 03EK; Stacks proetale.tex Tag 09C6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant module sheaf extension of scalars quotient sections adjunction",
+   "results": "constantSheafΓAdj, extendRestrictScalarsAdj and PullbackConstruction.adjunction are constituent adjunctions. None supplies the actual completed realization and its fixed balancing map.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "No hits. LeanFinder on constant sheaf of modules scalar extension adjoint global sections found unitHomEquiv, tensor adjunction and extendScalars, not the completed quotient comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*[Aa]dj|[Aa]dj.*overFunctor|constantModuleHom.*[Aa]dj; quotient.*sections; quotTensorEquivQuotSMul; unit_mateEquiv",
+   "results": "No packaged slice adjunction match. Mathlib has module sheafification and unit_mateEquiv. AdicPerfectModelCompleteReduction has proved private presentation, scalar adjunction and changeOverIso helpers. ConstantRealizationDerivedScalarExtension proves moduleComparison_tensor. The algebraic tensor quotient equivalence does not supply the natural section comparison with successor coherence.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the constituent proofs; no duplicate of the bundled construction or remaining comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectQuotientSectionAdjunction",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The constant-generator adjunction and completion cancellation in steps 1 and 2, and the unit-identity part of step 4, of lem-sfb-adic-perfect-quotient-section-adjunction.",
+   "via": [
+    "lem-sfb-adic-perfect-quotient-section-adjunction",
+    "lem-sfb-adic-perfect-unit-hom",
+    "lem-sfb-adic-perfect-module-hom",
+    "lem-sfb-adic-perfect-hom-cochains",
+    "lem-sfb-adic-perfect-model-hom-cohomology",
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectQuotientSectionModel",
+  "file": "lean/Sheaf/Paper/AdicPerfectQuotientSectionModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicQuotientSections.SectionModel",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.SectionModel",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.SectionModel.ofAdjunctions",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.sectionModel_exists",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.sectionModel",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.rightAdjoint",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.adjunction",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.step",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.step_unit"
+  ],
+  "statement": "structure SectionModel",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T130650-L-3489467",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T130650-L-3489467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

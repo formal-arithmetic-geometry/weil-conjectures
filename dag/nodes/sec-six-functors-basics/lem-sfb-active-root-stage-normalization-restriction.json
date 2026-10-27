@@ -1,0 +1,180 @@
+{
+ "id": "lem-sfb-active-root-stage-normalization-restriction",
+ "kind": "statement",
+ "title": "A fixed-stage splitting restricts to the actual normalization",
+ "statement": "Let $B,A$ be commutative rings with $A$ a $B$-algebra such that $B\\to A$ is ind-etale, meaning a filtered colimit of etale $B$-algebras [def-weil-pbc-ind-etale-algebra]. Let $r,s\\geq0$, $t:\\operatorname{Fin}(r)\\to B$, $\\alpha:\\operatorname{Fin}(s)\\to\\operatorname{Fin}(r)$, $p\\in\\mathbf N$, and $m>0$ coprime to $p$. Write $f=\\prod_i t_i$, $C_m=B[x_i]/(x_i^m-t_i)$, $T_m=A[z_j]/(z_j^m-t_{\\alpha(j)})$, $Q_m=T_m[1/f]$, $S_m=A\\otimes_B C_m$, and $U_m=S_m[1/f]$, using the actual pushout presentations [def-sfb-active-root-normalization-pushout-data]. Assume the structural map $\\iota:S_m\\to U_m$ is injective and its image is exactly the elements integral over $S_m$. For any $B[1/f]$-algebra $D$, put $D_m=D\\otimes_{B[1/f]}C_m[1/f]$ and $E_m=\\operatorname{IntCl}_{C_m}(D_m)$. Let $d\\geq0$ and let $\\theta_m:D\\otimes_{B[1/f]}Q_m\\simeq Q_m^d$ be a specified $Q_m$-algebra isomorphism. There is a $B[1/f]$-algebra map $k:Q_m\\to U_m$ sending $a\\in A$ to $\\iota(a\\otimes1)$ and $z_j$ to $\\iota(1\\otimes x_{\\alpha(j)})$. There is an $S_m$-algebra isomorphism $\\Theta:D_m\\otimes_{C_m}S_m\\simeq U_m^d$ whose value on every $x\\in D$ in coordinate $j$ is $k(\\theta_m(x\\otimes1)_j)$. There is an $S_m$-algebra isomorphism $\\epsilon:E_m\\otimes_{C_m}S_m\\simeq S_m^d$ such that the actual closure inclusion followed by $\\Theta$ equals $\\epsilon$ followed by the coordinatewise structural localization $S_m^d\\to U_m^d$. There is no infinite splitting, geometric-point, normality or finiteness hypothesis on $D$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, and parent steps 7--8 (coordinatewise monic equations); ILO IX Proposition 2.1 pp.133--134."
+ },
+ "stmt_deps": [
+  "def-sfb-active-root-normalization-pushout-data",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Polynomial evaluation sending active roots to the corresponding full roots respects the monic equations. Its coefficient map is A -> S_m. Descend it to T_m -> S_m, and extend through the localization pushouts to k:Q_m -> U_m. These constructions give the stated equations on A and the root generators.",
+   "uses": [
+    "def-sfb-active-root-normalization-pushout-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  },
+  {
+   "text": "Extend the specified theta_m along k. Tensor pushout associativity identifies its source with D_m tensor_(C_m) S_m. Finite products commute with scalar extension by the coordinate idempotents, giving Theta with the specified equation on D.",
+   "uses": [
+    "def-sfb-active-root-normalization-pushout-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  },
+  {
+   "text": "Apply the same integral-closure base-change theorem a second time, now with $R=C_m$, ambient algebra $D_m$, integral closure $E_m$, and base algebra $S_m$. It gives the canonical identification $S_m\\otimes_{C_m}E_m\\simeq\\operatorname{IntCl}_{S_m}(S_m\\otimes_{C_m}D_m)$. The left hand side is $E_m\\otimes_B A$ by tensor reassociation. ",
+   "uses": [
+    "lem-sfb-integral-closure-ind-etale-base-change",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  },
+  {
+   "text": "An algebra isomorphism preserves integrality: applying it, or its inverse, to a monic annihilating equation leaves its coefficients in the base ring. Therefore $\\Theta$ identifies the closure in the base-change comparison with the integral closure of the diagonal $S_m$ in $S_m[1/f]^d$. If a tuple is integral, each coordinate is integral by applying its projection to the same monic equation; the assumed integral-closedness characterization puts every coordinate in $S_m$. Conversely a tuple $(s_1,\\ldots,s_d)$ of elements of $S_m$ is annihilated by $\\prod_{j=1}^d(X-s_j)$, evaluated diagonally: in coordinate $j$ its $j$-th factor vanishes. For $d=0$ the ambient ring is zero, the closure and $S_m^0$ are both zero, and the positive-degree monic polynomial $X$ annihilates its sole element. Thus this closure is exactly $S_m^d$. Restricting $\\Theta$ now gives the asserted $S_m$-algebra isomorphism $E_m\\otimes_B A\\simeq S_m^d$.",
+   "uses": [
+    "def-sfb-active-root-normalization-pushout-data",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-active-root-normalization-pushout-data",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-integral-closure",
+  "lem-sfb-integral-closure-ind-etale-base-change",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/limits.tex",
+  "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, and parent steps 7--8 (coordinatewise monic equations); ILO IX Proposition 2.1 pp.133--134."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*(unit|Unit)|integralClosure.*prod|exists.*[Ii]so.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-26T06:36:35Z\", \"tool\": \"grep\", \"query\": \"strictHenselization.*(unit|Unit)|integralClosure.*prod|exists.*[Ii]so.*[Cc]olimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"2c2c8f21ff1c3075\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-26T06:36:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified isomorphism between finitely presented algebras over a filtered colimit descends to a finite stage",
+   "results": "{\"t\": \"2026-10-26T06:36:41Z\", \"tool\": \"leanfinder\", \"query\": \"A specified isomorphism between finitely presented algebras over a filtered colimit descends to a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.Limits.ColimitPresentation.bind_diag_obj\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"isFinitelyPresentable\", \"CommRingCat.preservesColimit_coyoneda_of_finitePresentation\"], \"digest\": \"a81e3ccd0d3f2ecd\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ii]nd[Ee]tale|[Nn]ormal|[Pp]ushout).*(integralClosure|simultaneousRoot)|integralClosure.*([Pp]roduct|[Pp]i|[Ii]nd[Ee]tale)",
+   "results": "{\"t\": \"2026-10-26T06:45:22Z\", \"tool\": \"grep\", \"query\": \"([Ii]nd[Ee]tale|[Nn]ormal|[Pp]ushout).*(integralClosure|simultaneousRoot)|integralClosure.*([Pp]roduct|[Pp]i|[Ii]nd[Ee]tale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Normal/Closure.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/RingTheory/NormalClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\"], \"digest\": \"00cab19e711f8559\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A specified splitting of a finitely presented algebra over a directed root colimit descends and restricts to integral closure after ind etale base change",
+   "results": "{\"t\": \"2026-10-26T06:45:22Z\", \"tool\": \"leansearch\", \"query\": \"A specified splitting of a finitely presented algebra over a directed root colimit descends and restricts to integral closure after ind etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure\", \"completeIntegralClosure\", \"Ring.NormalClosure\", \"algebraMap_galRestrict'_apply\", \"galRestrict'\", \"galRestrict'_id\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"d1fbdd958a5b1e1c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closedness in a localization after ind etale base change and restriction of a finite product splitting to integral closures",
+   "results": "{\"t\": \"2026-10-26T06:45:23Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closedness in a localization after ind etale base change and restriction of a finite product splitting to integral closures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.integralClosure\", \"IsLocalization.integralClosure\", \"IsIntegralClosure.of_isIntegralClosure_of_isIntegrallyClosedIn\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"IsIntegralClosure.isLocalization_of_isSeparable\", \"RingHom.isIntegral_isStableUnderBaseChange\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"d78ed96211f31a46\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ActiveRootTowerNormalizationSplitting",
+  "date": "2026-10-26",
+  "group": "C1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Current blueprint det-thm-sf-ctf-stability-direct-images clause (3), inherited active-root normalization argument: Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, and parent steps 7--8 (coordinatewise monic equations); ILO IX Proposition 2.1 pp.133--134.",
+   "via": [
+    "lem-sfb-active-root-tower-normalization-splitting",
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ActiveRootStageNormalizationRestriction",
+  "file": "lean/Sheaf/RingTheory/ActiveRootStageNormalizationRestriction.lean",
+  "declaration": "Algebra.ActiveRootNormalization.activeRootStage_normalization_restriction",
+  "statement": "theorem activeRootStage_normalization_restriction {B A : Type u} [CommRing B] [CommRing A] [Algebra B A] {r s : ℕ} (t : Fin r → B) (active : Fin s → Fin r) (p : ℕ) (m : RootTowerIndex {n : ℕ+ | Nat.Coprime (n : ℕ) p}) (hA : (algebraMap B A).IndEtale) (hinj : Function.Injective (strictPuncture (A := A) t m.1).hom) (hclosure : ∀ x : asAlgebra (strictPuncture (A := A) t m.1), IsIntegral (strictStage (A := A) t m.1).right x ↔ ∃ a : (strictStage (A := A) t m.1).right, (strictPuncture (A := A) t m.1).hom a = x) (D : Under (CommRingCat.of (Localization.Away (∏ i, t i)))) (d : ℕ) (theta_m : extend D ((activeDiagram (A := A) t active p).obj m) ≅ diagonal ((activeDiagram (A := A) t active p).obj m).right d) : ∃ k : (activeDiagram (A := A) t active p).obj m ⟶ strictPunctureOverBase (A := A) t m.1, (∀ a : A, k.right (activeInclusion (A := A) t active p m (algebraMap A _ a)) = (strictPuncture (A := A) t m.1).hom ((strictStage (A := A) t m.1).hom a)) ∧ (∀ i : Fin s, k.right (activeInclusion (A := A) t active p m (simultaneousRoot (fun i ↦ algebraMap B A (t (active i))) m.1 i)) = (strictPuncture (A := A) t m.1).hom (strictStageMap (A := A) t m.1 (simultaneousRoot t m.1 (active i)))) ∧ ∃ Theta : strictAmbient (A := A) t m.1 D ≅ (Under.map (strictPuncture (A := A) t m.1).hom).obj (diagonal (strictPuncture (A := A) t m.1).right d), (∀ (x : D.right) (j : Fin d), Theta.hom.right (strictAmbientInclusion (A := A) t m.1 D x) j = k.right (theta_m.hom.right (extendInclusion D _ x) j)) ∧ ∃ epsilon : strictClosure (A := A) t m.1 D ≅ diagonal (strictStage (A := A) t m.1).right d, ((Under.pushout (strictStageMap (A := A) t m.1)).map (closureInclusion (ambient t m.1 D))).right ≫ Theta.hom.right = epsilon.hom.right ≫ diagonalLocalization (strictPuncture (A := A) t m.1) d",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-878fc",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T081159-L-1853738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-878fc",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T081159-L-1853738",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (identical); 22 relocated defs vs original (verbatim); 3 new sorry statements vs their nodes and Stacks 05N9/034M/0CBF; item node proof_deps vs Lean proof"
+ }
+}

@@ -89,7 +89,50 @@
   "def-wf-fundamental-representation",
   "def-wf-weil-category"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.det",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Functoriality",
+     "lines": [
+      244,
+      247
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Matrix.GeneralLinearGroup.detGL",
+     "module": "WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Regular",
+     "lines": [
+      84,
+      86
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_detGL",
+     "module": "WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Regular",
+     "lines": [
+      99,
+      105
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-i-restriction",
  "split_report": {
@@ -106,5 +149,15 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-76b128a4f (reviewer sub-agent of L); spot-checked: Definition split with no new nodes. It keeps all three clauses of the main-20261015 text (order 2863, identical to master): the top exterior power with the induced wedge action, the scalar det(rho(g)), and the rank-one Weil sheaf (wedge^r F, wedge^r phi). I read every stmt_dep statement. The fundamental representation supplies the setting and the geometric-Frobenius convention. The def-pod lisse systems give a lisse wedge^r F_n, because exterior powers commute with reduction mod varpi^n, rationalization and scalar extension. The exterior-algebra, free-basis C(r,r)=1 and determinant leaves give the line and its scalar. Reindexing pullback makes Phi^*(wedge^r F) = wedge^r(Phi^*F) on sections, so the Weil structure points the correct way. Edge cases checked: r=0 gives the trivial line, r=1 gives V itself, diagonal, swap and unipotent matrices behave correctly, Frobenius is not inverted, and continuity holds because det is polynomial. Dropping def-wf-weil-category (pro-etale D^b_c) is correct, since the input category is the lisse adic one; no coefficient swap. No cycle, no duplicate, citers unchanged in meaning, item not dropped, no repair note, not superseded on live. Batch-5 flags: def-pod-lisse-l-adic-sheaves and def-wf-lisse-adic-automorphism-pullback are general coefficient and pullback definitions, not Poincare duality or the trace formula or their proofs. Both were already direct stmt_deps of the base dep def-wf-fundamental-representation, so the batch-5 closure gains nothing; accepted. No changes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\rho:W\\to\\operatorname{GL}(V)$ be a Weil representation of rank $r$\nof a degree datum ([d-monodromy]). Its *determinant line* is the\nrank-one Weil representation\n\n$$\n\\det(V):=\\bigwedge\\nolimits^r V,\n\\qquad\n\\det(\\rho)(g)=\\det(\\rho(g)).\n$$\n\nWith the same degree datum it is again a represented degree datum. The\ndeterminant $\\det:\\operatorname{GL}_r\\to\\operatorname{GL}_1$ is a\nhomomorphism of algebraic groups, given by a polynomial in the matrix\nentries, and $\\det(\\rho)$ is the composite of $\\rho$ with it.",
+  "proof": [],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

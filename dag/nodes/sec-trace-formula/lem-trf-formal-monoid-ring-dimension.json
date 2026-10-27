@@ -17,23 +17,13 @@
  ],
  "proof": [
   {
-   "text": "Put $d=\\dim D$ and $r=\\operatorname{rank}_{\\mathbf Z}T^{\\rm gp}$. The singleton $F=\\{0\\}$ is a face of $T$: if $u+v=0$, both terms are units and hence zero. Apply [lem-trf-fs-face-sharpening] with $Q=T$, $F=\\{0\\}$. Its localization and quotient are just $T$, so $G=T^{\\rm gp}$ is free abelian of finite rank $r$. Since $T$ is sharp, $T\\cap(-T)=\\{0\\}$ inside $G$. Apply [lem-trf-sharp-monoid-positive-grading] to choose $w:G\\to\\mathbf Z$ positive on every nonzero element of $T$. Choose nonzero generators $g_1,\\ldots,g_s$ of $T$ (the list is empty for $T=\\{0\\}$).",
+   "text": "Put $d=\\dim D$, $G=T^{\\rm gp}$ and $r=\\operatorname{rank}_{\\mathbf Z}G$. Fineness makes $T$ finitely generated. If $u+v=0$, both terms are units, hence zero by sharpness; thus $\\{0\\}$ is a face. For this face, [lem-trf-fs-face-sharpening] has $Q_F=R=T$ and gives $T\\hookrightarrow G\\cong\\mathbf Z^r$. Inside $G$, $t,-t\\in T$ makes $t$ a unit, hence $T\\cap(-T)=\\{0\\}$. Apply [lem-trf-sharp-monoid-positive-grading] to obtain a positive weight $w$. Choose nonzero generators $g_1,\\ldots,g_s$ of $T$, allowing $s=0$. The map $D[X_1,\\ldots,X_s]\\to D[T]$, $X_i\\mapsto[g_i]$, is surjective since each basis monomial is a product of generators. Thus [lem-weil-pbc-finite-type-algebra-noetherian] and [lem-weil-pbc-adic-completion-noetherian] make $H$ Noetherian. By [lem-sc-regular-local-domain], $D$ is a domain.",
    "uses": [
     "lem-trf-fs-face-sharpening",
-    "lem-trf-sharp-monoid-positive-grading"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.6 sharp fs monoid; VIII 3.1.1 and 3.1.10; positive-weight refinement."
-   }
-  },
-  {
-   "text": "The map $D[X_1,\\ldots,X_s]\\to D[T]$, $X_i\\mapsto[g_i]$, is surjective: every basis monomial is a product of the chosen generators. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $D[T]$ Noetherian, and [lem-weil-pbc-adic-completion-noetherian] makes $H$ Noetherian. Apply [lem-trf-monoid-completion-coefficients] with $A=D$, $P=T$ and the weight of step 1. We may now write every element of $H$ uniquely as a family $\\sum_t a_t[t]$, with the convolution rule, and use its exact formula for $\\mathfrak a^nH$. In particular $D$ embeds as the constant families. All the coefficient lemma hypotheses hold: $D$ is complete separated Noetherian local, $T$ is finitely generated and embeds in the finite free group just obtained.",
-   "uses": [
+    "lem-trf-sharp-monoid-positive-grading",
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-adic-completion-noetherian",
-    "lem-trf-monoid-completion-coefficients"
+    "lem-sc-regular-local-domain"
    ],
    "elementary": false,
    "source": {
@@ -42,58 +32,22 @@
    }
   },
   {
-   "text": "Constant coefficient $c:H\\to D$ is a surjective ring map: sharpness implies $u+v=0$ only for $u=v=0$. Its kernel is $L$. Indeed, partition $T\\setminus\\{0\\}$ into $s$ subsets by choosing, for each $t$, one generator $g_i$ with $t-g_i\\in T$. For a family with $a_0=0$, assign $a_t[t-g_i]$ to the corresponding family $f_i$. The coefficient description gives $f_i\\in H$ and $f=\\sum_i[g_i]f_i$; conversely every such sum has zero constant coefficient. Hence $H/L\\cong D$. A family with unit constant coefficient is a unit: after factoring that coefficient, write it as $1+h$ with $h\\in L$, and $\\sum_{j\\ge0}(-h)^j$ converges since $h^j\\in\\mathfrak a^jH$; multiplication of partial sums gives its inverse. A unit must have unit constant coefficient by applying $c$. Thus the nonunits form $\\mathfrak n=c^{-1}(\\mathfrak m)$. The coefficient formula for $n=1$ identifies $\\mathfrak n=\\mathfrak aH$, so $H$ is local with residue field $D/\\mathfrak m$. This argument includes $s=0$, when $H=D$ and $L=0$.",
+   "text": "Apply [lem-trf-formal-monoid-residue-domain] to $A=D$, $P=T$ and $w$. Its hypotheses hold by completeness of $D$ and step 1. It gives a constant-coefficient map $c:H\\to D$ with kernel $L$, the canonical isomorphism $H/L\\cong D$, maximal ideal $\\mathfrak n=\\mathfrak aH=c^{-1}(\\mathfrak m)$, and the domain property of $H$.",
    "uses": [
-    "lem-trf-monoid-completion-coefficients"
+    "lem-trf-formal-monoid-residue-domain"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.6: direct constant-coefficient and geometric-series computation in the formal models."
+    "place": "VI 1.6(i)--(ii), printed p. 70, agent-supplied coefficient-algebra refinement: constant-coefficient kernel, geometric-series locality, and least-monomial domain argument (old proof steps 3--4 of lem-trf-formal-monoid-ring-dimension)."
    }
   },
   {
-   "text": "By [lem-sc-regular-local-domain], $D$ is an integral domain. Choose coordinates $G\\cong\\mathbf Z^r$ and order $G$ lexicographically by $(w(t),t_1,\\ldots,t_r)$; this is an addition-invariant total order. Each set $\\{t\\in T:w(t)\\le B\\}$ is finite: a generator expression has at most $B$ terms because every $w(g_i)\\ge1$. Hence every nonempty subset of $T$ has a least element in this order. If $f,g\\in H$ are nonzero, let $u,v$ be their least exponents with nonzero coefficient. In the convolution coefficient at $u+v$, any nonzero term has exponents $u'\\ge u$ and $v'\\ge v$; if either inequality is strict, addition invariance gives $u'+v'>u+v$. Consequently the coefficient there is exactly $a_ub_v\\ne0$. Thus $fg\\ne0$, proving that $H$ is a nonzero integral domain.",
+   "text": "Since $\\mathfrak n=\\mathfrak aH$, its powers are $\\mathfrak n^n=\\mathfrak a^nH$. By [lem-trf-formal-monoid-length-filtration], all coefficient quotient lengths $\\lambda(k)=\\mathrm{length}_D(D/\\mathfrak m^k)$ are finite, and $\\mathrm{length}_H(H/\\mathfrak n^n)=\\sum_{\\nu(t)<n}\\lambda(n-\\nu(t))$. Regard these finite lengths as nonnegative real numbers. The function $\\lambda$ is nondecreasing: a submodule chain lifts along each quotient surjection. By [lem-trf-hilbert-samuel-growth-dimension] for $D$, its eventual polynomial has degree $d$ and positive leading coefficient, so $\\lambda(k)$ lies between positive multiples of $k^d$ for large $k$. The subgroup generated by $T$ is $G$; apply [lem-trf-positive-monoid-length-growth] to bound the displayed sum between positive multiples of $n^{d+r}$. Apply the same Hilbert--Samuel node to the nonzero Noetherian local ring $H$. A polynomial of degree $e$ with positive leading coefficient grows between positive multiples of $n^e$; comparison forces $e=d+r$. Hence $\\dim H=d+r$. The growth node includes $r=0$, with $T=\\{0\\}$ and the sum equal to $\\lambda(n)$.",
    "uses": [
-    "lem-sc-regular-local-domain",
-    "lem-trf-monoid-completion-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "VI 1.6: least-monomial argument; regular-domain input Stacks Tag 00NP, lemma-regular-domain."
-   }
-  },
-  {
-   "text": "Write $\\nu(t)$ for the order in [lem-trf-monoid-completion-coefficients] and $\\ell_D(k)=\\mathrm{length}_D(D/\\mathfrak m^k)$ for $k\\ge1$. For fixed $n$, the set $S_n=\\{t:\\nu(t)<n\\}$ is finite, and the coefficient lemma gives the quotient coefficients $D/\\mathfrak m^{n-\\nu(t)}$. Order $S_n$ by the addition-invariant order in step 4. The submodules of $H/\\mathfrak n^n$ supported on successive final segments give a finite filtration: multiplication by any nonzero monomial strictly raises the exponent, and coefficients outside $S_n$ vanish. The factor for $t$ is $D/\\mathfrak m^{n-\\nu(t)}$, with $H$ acting by constant coefficient. Its $H$-submodules are exactly its $D$-submodules, since $D\\subset H$ acts by all scalars and every $h$ acts by $c(h)$. Therefore repeated length additivity [lem-weil-pbc-length-additive-short-exact] gives\n$$\\mathrm{length}_H(H/\\mathfrak n^n)=\\sum_{\\nu(t)<n}\\ell_D(n-\\nu(t)).$$\nEach summand is finite: [lem-trf-hilbert-samuel-growth-dimension] gives finiteness for large powers, and smaller quotients are surjective images of those (a submodule chain lifts under a surjection).",
-   "uses": [
-    "lem-trf-monoid-completion-coefficients",
-    "lem-weil-pbc-length-additive-short-exact",
-    "lem-trf-hilbert-samuel-growth-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00IV, lemma-length-additive; Tag 00K8, proposition-hilbert-function-polynomial; VI 1.6 monomial filtration computation."
-   }
-  },
-  {
-   "text": "First suppose $r>0$. Put $M=\\max_i w(g_i)\\ge1$. For every $t$, each decomposition into nonzero terms has length at most $w(t)$, whereas any expression in the generators has length at least $w(t)/M$. Hence\n$$w(t)/M\\le\\nu(t)\\le w(t).$$\nIn fixed lattice coordinates let $C\\ge1$ bound all $|(g_i)_j|$. If $\\nu(t)<n$, a generator expression has fewer than $n$ terms, so every coordinate of $t$ has absolute value at most $Cn$. The injective lattice coordinates bound $|S_n|\\le(2Cn+1)^r$. All summands in step 5 are at most $\\ell_D(n)$ because reduction from $D/\\mathfrak m^n$ is surjective. The Hilbert--Samuel theorem applied to $D$ gives positive constants $b,B$ with $b k^d\\le\\ell_D(k)\\le B k^d$ for all sufficiently large $k$. Thus step 5 is bounded above by a constant times $n^{d+r}$.",
-   "uses": [
-    "lem-trf-monoid-completion-coefficients",
-    "lem-trf-hilbert-samuel-growth-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00KQ, proposition-dimension, with Tag 00K8; elementary upper bound on monomial counts."
-   }
-  },
-  {
-   "text": "The generators span $G\\otimes\\mathbf Q$, so select $r$ linearly independent ones $v_1,\\ldots,v_r$ by finite-dimensional elimination. Put $W=\\max_j w(v_j)$. The elements $t=\\sum_j b_jv_j$ for $0\\le b_j\\le\\lfloor n/(4rW)\\rfloor$ are distinct, and satisfy $\\nu(t)\\le w(t)\\le n/4$. There are $(\\lfloor n/(4rW)\\rfloor+1)^r$ of them, bounded below by a positive constant times $n^r$. Each contributes at least $\\ell_D(\\lfloor n/2\\rfloor)$ to step 5. The lower Hilbert--Samuel bound of step 6 therefore gives a positive constant times $n^{d+r}$. Apply [lem-trf-hilbert-samuel-growth-dimension] also to the nonzero Noetherian local ring $H$. Its length polynomial has positive leading coefficient; the two bounds force its degree to be exactly $d+r$ (a polynomial of degree $e$ grows between positive multiples of $n^e$). Its degree is $\\dim H$, so $\\dim H=d+r$. For $r=0$, the injection $T\\hookrightarrow G=0$ gives $T=\\{0\\}$ and step 3 gives $H=D$, proving the same equality without choosing $M,W$ or dividing by $r$.",
-   "uses": [
+    "lem-trf-formal-monoid-length-filtration",
     "lem-trf-hilbert-samuel-growth-dimension",
-    "lem-trf-monoid-completion-coefficients"
+    "lem-trf-positive-monoid-length-growth"
    ],
    "elementary": false,
    "source": {
@@ -102,11 +56,10 @@
    }
   },
   {
-   "text": "Let $\\eta$ be as in the statement and put $f=c(\\eta)\\in\\mathfrak m\\setminus\\mathfrak m^2$. Then $f\\ne0$, hence $\\eta\\ne0$, and the domain result of step 4 makes multiplication by $\\eta$ injective. Since $\\mathfrak n=c^{-1}(\\mathfrak m)$, $\\eta\\in\\mathfrak n$. Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] to $(H,\\mathfrak n)$ and $\\eta$ to obtain $\\dim(H/(\\eta))+1=\\dim H=d+r$. Apply [lem-weil-pbc-regular-local-hypersurface-criterion] to $(D,\\mathfrak m)$ and $f$ to obtain that $D/(f)$ is regular local. Finally $D$ is a domain by [lem-sc-regular-local-domain], so its nonzero element $f$ is a nonzerodivisor; the same dimension-drop node applied to $D$ gives $\\dim(D/(f))+1=d$. These are the two claimed formulas. If $d=0$, $D$ is a field and $\\mathfrak m\\setminus\\mathfrak m^2$ is empty, so this universal assertion has no instances; no negative dimension of a nonzero ring is asserted.",
+   "text": "Put $f=c(\\eta)\\in\\mathfrak m\\setminus\\mathfrak m^2$. Then $f\\ne0$, so $\\eta\\ne0$; the domain property makes multiplication by $\\eta$ injective. Also $\\eta\\in c^{-1}(\\mathfrak m)=\\mathfrak n$. Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] to $H,\\eta$ to get $\\dim(H/(\\eta))+1=d+r$, and to the domain $D$ and its nonzero element $f$ to get $\\dim(D/(f))+1=d$. By [lem-weil-pbc-regular-local-hypersurface-criterion], $D/(f)$ is regular local. These give the assertions; when $d=0$, $\\mathfrak m\\setminus\\mathfrak m^2$ is empty.",
    "uses": [
     "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-    "lem-weil-pbc-regular-local-hypersurface-criterion",
-    "lem-sc-regular-local-domain"
+    "lem-weil-pbc-regular-local-hypersurface-criterion"
    ],
    "elementary": false,
    "source": {
@@ -120,10 +73,11 @@
   "lem-trf-sharp-monoid-positive-grading",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-adic-completion-noetherian",
-  "lem-trf-monoid-completion-coefficients",
   "lem-sc-regular-local-domain",
-  "lem-weil-pbc-length-additive-short-exact",
+  "lem-trf-formal-monoid-residue-domain",
+  "lem-trf-formal-monoid-length-filtration",
   "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-trf-positive-monoid-length-growth",
   "lem-weil-pbc-dimension-quotient-nonzerodivisor",
   "lem-weil-pbc-regular-local-hypersurface-criterion"
  ],
@@ -232,11 +186,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-formal-monoid-ring-dimension",
   "worker": "stage1",
-  "summary": "Kept the full statement, including rank zero and arbitrary eta with parameter constant coefficient. Proved Noetherianity from finite generation, the stratum quotient and locality by coefficient calculations, the domain property by least monomials, and dimension by upper/lower monomial counts and Hilbert--Samuel growth. Reused existing parameter quotient and dimension-drop nodes. Three strictly more general statement-only inputs; no Mathlib leaf or Lean attachment found.",
-  "blueprint": "Historical nearby-duality/alteration algebra under lem-trf-local-term-locality proof (1)--(2), through lem-trf-log-smooth-log-regular: ILO VI 1.6(i)--(ii) formal chart models; this input expands the formal-monoid dimension argument.",
+  "summary": "Repair of the 2026-10-22 re-split return: extracted three independently provable, statement-only unsplit nodes carrying the constant-coefficient/domain argument, monomial finite-length filtration, and pure lattice weighted-growth estimates. Parent retains its exact statement and the Noetherianity, Hilbert--Samuel degree comparison, and parameter assembly. The complete prior eight-step proof is preserved verbatim with its responsibility map in report.md. Rebased repair onto the current DAG: re-read all cited statements against retained quotations, explicitly recorded the monoid embedding and maximal-ideal-power identification, and retained the unchanged target statement. The latest landing return (head d1b6f69dd74) is addressed by refreshing against the current delivery base and explicitly checking finiteness and pointedness before applying positive grading; all retained citation statements still agree verbatim. Repaired the current landing return dc97c69511c against the current DAG: all current citation statements were reread and match the retained quotations; step 3 explicitly turns finite composition lengths into the nonnegative real sequence required by the ring-free growth statement. Current non-owned fields are preserved, and the three independently searchable unsplit support nodes and their arguments are retained.",
+  "blueprint": "Historical nearby-duality/alteration algebra under lem-trf-local-term-locality proof (1)--(2), through lem-trf-log-smooth-log-regular: ILO VI 1.6(i)--(ii) formal chart models; this input expands the formal-monoid dimension argument. Re-split only below this existing algebra input; no change of unit or chapter route.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-adic-completion-noetherian",
@@ -258,12 +212,12 @@
   "lem-weil-pbc-regular-local-hypersurface-criterion"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NI-740017213",
-  "group": "NI",
+  "reviewer": "NT-cc-Q158-d2d9cfbee",
+  "group": "Q158",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-740017213 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements, unit/chapter route, ILO VI 1.6, and exact Stacks tags 05GG, 00FN, 0316, 00IV, 00K8, 00KA, 00KQ, 00NP, 00NQ, 00KW. Checked all eight proof steps, hypotheses, edge cases, coefficient filtration, domain and dimension arguments, duplicate candidates, searches, blueprint ancestry, route restrictions, and no long-step violations. Wrote review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-d2d9cfbee (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full, plus the statement of every cited node. Delta vs the prior head dc97c69511c9: only one sentence in item step 3 changed (casting the finite lengths to reals, which the growth node needs since its λ maps to R>=0); the three new nodes are byte-identical. Re-split check: old steps 1-2 are in new step 1; old 3-4 went to residue-domain (constant-coefficient kernel by generator partition, geometric-series units, n=c^-1(m)=bB, least-term domain argument in the (w,lex) order); old 5 went to length-filtration (F_j is a B-submodule since nu(p-q)<=nu(p)-1 and p-q<p; factors A/m^{n-nu} with B acting through c; length additivity); old 6-7 went to length-growth (w/M<=nu<=w, the (2Cn+1)^r box, the independent-generator lower box with lambda(floor(n/2)), r=0 explicit), with the Hilbert-Samuel degree comparison kept in step 3; old 8 is step 4 (both dimension drops, the hypersurface criterion, d=0 vacuous). Nothing was dropped or summarised; the nodes are of comparable size, independent of each other and of the item, and none restates a clause of the item. Hypotheses checked: face-sharpening with F={0} gives T embedded in a finite free group; positive-grading's pointed finitely generated hypothesis holds; Hilbert-Samuel applies to D and to H (nonzero Noetherian local); both dimension drops use a nonzerodivisor in the maximal ideal. Small cases tested on the new statements: P={0}, n=1, P=N, a non-free sharp monoid, coefficients with zero divisors, d=0. Duplicate search over the snapshot DAG with rg -L; the close candidates (positive-monoid-convolution-length, finite-pattern-factorization, monoid-completion-coefficients, supported-formal-division, per formal-monoid evaluation) are not duplicates. Advisory, no change: residue-domain and length-filtration assert the coefficient identification B=A^P from lem-trf-monoid-completion-coefficients without citing that node. No SGA; the unit route is unchanged; the inherited generic commutative-algebra tool_uses are accepted. No fixes written."
  },
  "lean": {
   "module": "Sheaf.RingTheory.FormalMonoidRingDimension",
@@ -283,5 +237,16 @@
   "result": "fix",
   "note": "Mathematics, hypotheses, conclusions, universes, dependencies, sources and verbatim signature checked; per-file scompile passed without diagnostics. Repaired H1/H11 placeholder second reading with complete replacement report in fixes/lem-trf-formal-monoid-ring-dimension.report.md. Full findings recorded in review.md; Lean and node unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

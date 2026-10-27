@@ -1,0 +1,389 @@
+{
+ "id": "lem-sfb-dense-subfield-algebraic-root-approximation",
+ "kind": "statement",
+ "title": "Algebraic nearby roots over a dense subfield with explicit tolerance",
+ "statement": "Let $D\\subseteq K\\subseteq L$ be field inclusions [def-pc-field-extension]. Equip $K,L$ with real-valued norms satisfying $\\|z\\|\\geq0$, $\\|z\\|=0\\Leftrightarrow z=0$, $\\|1\\|=1$, $\\|zw\\|=\\|z\\|\\|w\\|$ and $\\|z+w\\|\\leq\\|z\\|+\\|w\\|$, with the norm on $L$ restricting to that on $K$ and distance $d(z,w)=\\|z-w\\|$. Assume $L$ is algebraically closed [def-weil-algebraic-closure] and $D$ is dense in $K$, meaning that for every $z\\in K$ and $s>0$ there is $u\\in D$ with $\\|z-u\\|<s$. Let $f\\in K[T]$ [def-weil-polynomial-ring] be monic of degree $n\\geq1$, let $x\\in L$ satisfy $f(x)=0$ [def-weil-polynomial-root], and fix a real $r>0$. Set $M=\\max\\{\\|x\\|,1\\}$ and $\\varepsilon=(r/M)^n/(n+1)$. There exist a monic $g\\in D[T]$ of degree $n$ and $b\\in L$ such that, writing $h\\in K[T]$ for the coefficientwise image of $g$, the polynomial $h$ is monic of degree $n$ and splits into linear factors in $L[T]$, $\\|h_i-f_i\\|<\\varepsilon$ for all $i\\geq0$, and\n$$h(b)=g(b)=0,\\qquad \\|x-b\\|<\\big((n+1)\\varepsilon\\big)^{1/n}M=r.$$\nHere evaluation of $g$ in $L$ uses the composite inclusion $D\\to K\\to L$. In particular $b$ is algebraic over $D$ [def-weil-algebraic-element]. No completeness, separability, characteristic-zero or norm on $D$ is assumed.",
+ "source": {
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, first bullet, p. 3, countability input. Agent-supplied subargument of project WeilConjectures/NumberTheory/Padics/Extension.lean:82–127; Returned proof steps 4–6: tolerance, monic coefficient approximation, splitting in the closure, nearby root estimate, and agreement of evaluations giving algebraicity (Extension.lean:110–126). Quantitative inputs: Mathlib/Analysis/Normed/Field/Approximation.lean:114–124, 132–138."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-root",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [
+  {
+   "text": "Put $t=r/M$. Since $M=\\max\\{\\|x\\|,1\\}\\geq1$ and $r>0$, we have $t>0$ and $\\varepsilon=t^n/(n+1)>0$. As $n\\geq1$, taking the positive real $n$th root gives $((n+1)\\varepsilon)^{1/n}=(t^n)^{1/n}=t$, and hence $((n+1)\\varepsilon)^{1/n}M=r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3, countability input; agent expansion of project WeilConjectures/NumberTheory/Padics/Extension.lean:110–126, using Mathlib/Analysis/Normed/Field/Approximation.lean:114–124, 132–138."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-monic-dense-approximation] to $D\\subseteq K$, the given monic $f$ and the positive $\\varepsilon$ from step 1. Density is exactly its hypothesis; no norm on $D$ is needed. Obtain a monic $g\\in D[T]$ of degree $n$ with $\\|h_i-f_i\\|<\\varepsilon$ for every $i\\geq0$, where $h$ is its coefficientwise image in $K[T]$.",
+   "uses": [
+    "lem-sfb-monic-dense-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3, countability input; agent expansion of project WeilConjectures/NumberTheory/Padics/Extension.lean:110–126, using Mathlib/Analysis/Normed/Field/Approximation.lean:114–124, 132–138."
+   }
+  },
+  {
+   "text": "By the coefficient description in [def-weil-polynomial-ring], $g_n=1$ and $g_i=0$ for $i>n$. Each inclusion sends these coefficients to $1$ and $0$. Thus $h$, and its coefficientwise image $q\\in L[T]$, are nonzero monic polynomials of degree $n$. Apply [lem-weil-alg-closed-linear-factorization] to $q$: its leading coefficient is $1$, so $q=\\prod_{j=1}^{m}(T-\\gamma_j)$. Multiplying these monic linear factors gives coefficient $1$ at $T^m$ and zero above $m$, so comparison with $\\deg q=n$ gives $m=n$. Thus $h$ splits into $n$ linear factors over $L$.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "lem-weil-alg-closed-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3, countability input; agent expansion of project WeilConjectures/NumberTheory/Padics/Extension.lean:110–126, using Mathlib/Analysis/Normed/Field/Approximation.lean:114–124, 132–138."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-roots-coefficient-proximity] to the normed extension $L/K$, polynomials $f,h$, root $x$ and tolerance $\\varepsilon$. The norms restrict as required; $f,h$ are monic of the same positive degree $n$, all coefficient inequalities hold by step 2, and $h$ splits by step 3. It gives $b\\in L$ with $h(b)=0$ and $\\|x-b\\|<((n+1)\\varepsilon)^{1/n}M=r$ by step 1.",
+   "uses": [
+    "lem-sfb-roots-coefficient-proximity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3, countability input; agent expansion of project WeilConjectures/NumberTheory/Padics/Extension.lean:110–126, using Mathlib/Analysis/Normed/Field/Approximation.lean:114–124, 132–138."
+   }
+  },
+  {
+   "text": "Write the inclusions as $\\iota:D\\to K$ and $\\jmath:K\\to L$. The evaluation formula of [def-weil-polynomial-root] gives $h(b)=\\sum_{i=0}^{n}\\jmath(\\iota(g_i))b^i=\\sum_{i=0}^{n}(\\jmath\\circ\\iota)(g_i)b^i=g(b)$. Hence $g(b)=0$ for the specified composite inclusion. Since $g_n=1\\ne0$, the polynomial $g$ is nonzero, and [def-weil-algebraic-element] says precisely that this makes $b$ algebraic over $D$. Together with steps 2–4 this gives every asserted clause.",
+   "uses": [
+    "def-weil-polynomial-root",
+    "def-weil-algebraic-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3, countability input; agent expansion of project WeilConjectures/NumberTheory/Padics/Extension.lean:110–126, using Mathlib/Analysis/Normed/Field/Approximation.lean:114–124, 132–138."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-monic-dense-approximation",
+  "def-weil-polynomial-ring",
+  "lem-weil-alg-closed-linear-factorization",
+  "lem-sfb-roots-coefficient-proximity",
+  "def-weil-polynomial-root",
+  "def-weil-algebraic-element"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, first bullet, p. 3, countability input; agent expansion of project WeilConjectures/NumberTheory/Padics/Extension.lean:110–126, using Mathlib/Analysis/Normed/Field/Approximation.lean:114–124, 132–138. L19 supplies the countability motivation, not the quantitative approximation proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_aroots_norm_sub_lt|exists_monic_and_natDegree|of_denseRange",
+   "results": {
+    "t": "2026-10-22T06:05:57Z",
+    "tool": "grep",
+    "query": "exists_aroots_norm_sub_lt|exists_monic_and_natDegree|of_denseRange",
+    "sub": "Analysis/Normed/Field",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean"
+    ],
+    "digest": "fc2adc4ed1f76cbb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the arbitrary-radius algebraic-root approximation statement. Polynomial.exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt and Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt are separate inputs with an intervening tolerance/splitting argument. IsAlgClosed.of_denseRange has an algebraically closed dense base and a different conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elements algebraic over a dense subfield are dense in an algebraically closed normed extension, approximating roots by roots of same degree monic polynomials",
+   "results": {
+    "t": "2026-10-22T06:05:57Z",
+    "tool": "leansearch",
+    "query": "Elements algebraic over a dense subfield are dense in an algebraically closed normed extension, approximating roots by roots of same degree monic polynomials",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "DenseRange, IsAlgebraic",
+   "results": {
+    "t": "2026-10-22T06:05:58Z",
+    "tool": "loogle",
+    "query": "DenseRange, IsAlgebraic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the arbitrary-radius algebraic-root approximation statement. Polynomial.exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt and Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt are separate inputs with an intervening tolerance/splitting argument. IsAlgClosed.of_denseRange has an algebraically closed dense base and a different conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If D is a dense subfield of a normed field K and L is an algebraically closed normed extension of K then every root of a monic polynomial over K can be approximated arbitrarily closely by a root of a monic polynomial over D of the same degree",
+   "results": {
+    "t": "2026-10-22T06:06:14Z",
+    "tool": "leanfinder",
+    "query": "If D is a dense subfield of a normed field K and L is an algebraically closed normed extension of K then every root of a monic polynomial over K can be approximated arbitrarily closely by a root of a monic polynomial over D of the same degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FirstOrder.Field.realize_genericMonicPolyHasRoot",
+     "IsAlgClosed.exists_eval₂_eq_zero",
+     "IsAlgClosed.exists_aeval_eq_zero",
+     "AlgebraicClosure.Monics.map_eq_prod",
+     "NormedAlgebra.Real.exists_isMonicOfDegree_two_and_aeval_eq_zero",
+     "IsAlgClosed.exists_aeval_eq_zero_of_injective",
+     "IsAlgClosed.exists_root",
+     "IsAlgClosure.of_exist_roots"
+    ],
+    "digest": "6a5983c04104855e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the arbitrary-radius algebraic-root approximation statement. Polynomial.exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt and Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt are separate inputs with an intervening tolerance/splitting argument. IsAlgClosed.of_denseRange has an algebraically closed dense base and a different conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a dense field inclusion D into K, a monic polynomial f over K with root x in an algebraically closed normed extension and radius r positive, find a monic polynomial g over D of equal degree and a root b with norm x minus b less than r",
+   "results": {
+    "t": "2026-10-22T06:06:32Z",
+    "tool": "leanfinder",
+    "query": "Given a dense field inclusion D into K, a monic polynomial f over K with root x in an algebraically closed normed extension and radius r positive, find a monic polynomial g over D of equal degree and a root b with norm x minus b less than r",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NormedAlgebra.Real.exists_isMonicOfDegree_two_and_aeval_eq_zero",
+     "FirstOrder.Field.realize_genericMonicPolyHasRoot",
+     "IsAlgClosed.exists_eval₂_eq_zero",
+     "Polynomial.coeff_le_of_roots_le",
+     "Polynomial.coeff_bdd_of_roots_le",
+     "Polynomial.exists_forall_norm_le",
+     "Polynomial.IsRoot.norm_lt_cauchyBound",
+     "AlgebraicClosure.Monics.map_eq_prod"
+    ],
+    "digest": "54a0ead66586bfaa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the arbitrary-radius algebraic-root approximation statement. Polynomial.exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt and Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt are separate inputs with an intervening tolerance/splitting argument. IsAlgClosed.of_denseRange has an algebraically closed dense base and a different conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_aroots_norm_sub_lt|exists_monic_and_natDegree|of_denseRange",
+   "results": {
+    "t": "2026-10-22T11:11:05Z",
+    "tool": "grep",
+    "query": "exists_aroots_norm_sub_lt|exists_monic_and_natDegree|of_denseRange",
+    "sub": "Analysis/Normed/Field",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean"
+    ],
+    "digest": "fc2adc4ed1f76cbb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full arbitrary-radius statement: coefficient approximation is the existing leaf lem-sfb-monic-dense-approximation; nearby roots require the separate existing leaf lem-sfb-roots-coefficient-proximity and splitting plus tolerance arithmetic. Other hits concern existence of roots, coefficient bounds, or algebraically closed dense base fields and do not supply all clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Approximate a root over a normed field by algebraic elements over a dense subfield using monic polynomial coefficient approximation",
+   "results": {
+    "t": "2026-10-22T11:11:05Z",
+    "tool": "leansearch",
+    "query": "Approximate a root over a normed field by algebraic elements over a dense subfield using monic polynomial coefficient approximation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.coeff_le_of_roots_le",
+     "norm_root_le_spectralValue",
+     "exists_integer_of_is_root_of_monic",
+     "IsAdjoinRootMonic.toIsAdjoinRoot",
+     "isAlgebraic_of_mem_rootSet",
+     "Liouville.exists_pos_real_of_irrational_root",
+     "IsAdjoinRootMonic.mk",
+     "NormedAlgebra.Real.exists_isMonicOfDegree_two_and_aeval_eq_zero"
+    ],
+    "digest": "cad073295e0fbe3b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full arbitrary-radius statement: coefficient approximation is the existing leaf lem-sfb-monic-dense-approximation; nearby roots require the separate existing leaf lem-sfb-roots-coefficient-proximity and splitting plus tolerance arithmetic. Other hits concern existence of roots, coefficient bounds, or algebraically closed dense base fields and do not supply all clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, DenseRange",
+   "results": {
+    "t": "2026-10-22T11:11:06Z",
+    "tool": "loogle",
+    "query": "Polynomial.Monic, DenseRange",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Polynomial.exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt"
+    ],
+    "digest": "8a6adbb255344776"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full arbitrary-radius statement: coefficient approximation is the existing leaf lem-sfb-monic-dense-approximation; nearby roots require the separate existing leaf lem-sfb-roots-coefficient-proximity and splitting plus tolerance arithmetic. Other hits concern existence of roots, coefficient bounds, or algebraically closed dense base fields and do not supply all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A root of a monic polynomial over a normed field K is approximated arbitrarily closely by a root of a same degree monic polynomial over a dense subfield D in an algebraically closed normed extension L",
+   "results": {
+    "t": "2026-10-22T11:11:06Z",
+    "tool": "leanfinder",
+    "query": "A root of a monic polynomial over a normed field K is approximated arbitrarily closely by a root of a same degree monic polynomial over a dense subfield D in an algebraically closed normed extension L",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FirstOrder.Field.genericMonicPolyHasRoot",
+     "FirstOrder.Field.realize_genericMonicPolyHasRoot",
+     "norm_root_le_spectralValue",
+     "NormedAlgebra.Real.exists_isMonicOfDegree_two_and_aeval_eq_zero",
+     "IsAlgClosed.exists_root",
+     "Polynomial.coeff_bdd_of_roots_le",
+     "IsAlgClosed.exists_eval₂_eq_zero",
+     "Polynomial.coeff_le_of_roots_le"
+    ],
+    "digest": "b0f23f419e5cfed0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full arbitrary-radius statement: coefficient approximation is the existing leaf lem-sfb-monic-dense-approximation; nearby roots require the separate existing leaf lem-sfb-roots-coefficient-proximity and splitting plus tolerance arithmetic. Other hits concern existence of roots, coefficient bounds, or algebraically closed dense base fields and do not supply all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elements algebraic over a dense subfield approximate each algebraic element over the larger normed field with an explicit arbitrary radius and polynomial coefficient bound",
+   "results": {
+    "t": "2026-10-22T11:12:02Z",
+    "tool": "leanfinder",
+    "query": "Elements algebraic over a dense subfield approximate each algebraic element over the larger normed field with an explicit arbitrary radius and polynomial coefficient bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NumberField.Embeddings.coeff_bdd_of_norm_le",
+     "ClassGroup.exists_mem_finset_approx'",
+     "DenselyNormedField.lt_norm_lt",
+     "NumberField.InfinitePlace.denseRange_algebraMap_pi",
+     "ClassGroup.exists_mem_finsetApprox",
+     "exists_rat_near",
+     "Liouville.exists_pos_real_of_irrational_root",
+     "LindemannWeierstrass.exp_polynomial_approx"
+    ],
+    "digest": "d3d4518c712c145b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full arbitrary-radius statement: coefficient approximation is the existing leaf lem-sfb-monic-dense-approximation; nearby roots require the separate existing leaf lem-sfb-roots-coefficient-proximity and splitting plus tolerance arithmetic. Other hits concern existence of roots, coefficient bounds, or algebraically closed dense base fields and do not supply all clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-padic-rational-algebraic-generator",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md: arithmetic coefficient-topology input to the continuous algebraic-closure comparison; Rational-algebraic simple overfield for a p-adic algebraic element. Returned proof steps 4–6: tolerance, monic coefficient approximation, splitting in the closure, nearby root estimate, and agreement of evaluations giving algebraicity (Extension.lean:110–126). Quantitative inputs: Mathlib/Analysis/Normed/Field/Approximation.lean:114–124, 132–138.",
+   "via": [
+    "lem-sfb-padic-rational-algebraic-generator",
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-dense-subfield-algebraic-root-approximation",
+  "worker": "stage1",
+  "summary": "Q121 checked the quantitative dense-subfield approximation against Extension.lean:110–126 and the two existing Mathlib approximation leaves. Reused the existing algebraically closed linear-factorization leaf, wrote out positive tolerance, preservation of monicity/degree and composite evaluation, and kept all statement hypotheses and clauses unchanged. No new nodes.",
+  "blueprint": "Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, arithmetic coefficient-topology input below the continuous algebraic-closure comparison; source expansion is Extension.lean:110–126. blueprint_refs ancestor is null; inherited from.place and via retained. Whole-blueprint searches for root approximation, monic, dense subfield and linear factorization found no equivalent blueprint item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-bf6d51b63",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-bf6d51b63 (reviewer sub-agent of L); spot-checked: One-level split of lem-sfb-dense-subfield-algebraic-root-approximation, with no new nodes. The statement, stmt_deps, source and blueprint are byte-identical to the item in the Q95 snapshots. Only proof, proof_deps, proof_origin, searches, split_report and status changed. There is no repair note, and live/side-live still show the item as unsplit. The five steps match the route of project Extension.lean:110–126 and Mathlib Approximation.lean (exists_monic_and_natDegree_eq_… at about line 132 and exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt at about line 114). Step 1: ε>0 and ((n+1)ε)^{1/n}M=r, elementary. Step 2: the statement of lem-sfb-monic-dense-approximation gives a monic g of degree n with all coefficients within ε, and no norm on D is needed. Step 3: lem-weil-alg-closed-linear-factorization, a Mathlib leaf so the route exemption applies, gives q=∏(T−γ_j). The step proves m=n correctly by comparing top coefficients. Step 4: I checked every hypothesis of lem-sfb-roots-coefficient-proximity (norm extension, monic of equal degree n≥1, f(x)=0, n-factor splitting, coefficient bounds), and its bound equals r by step 1. Step 5: the composite evaluation gives h(b)=g(b), and g≠0 makes b algebraic by the definition. Edge cases n=1, x=0, D=K, trivial norm and positive characteristic all work. The duplicate search (nearby root, continuity of roots, aroots, monic approximation) finds only the cited leaves, the parent and citer, and the different trf separable-approximation and henselian simple-root nodes. No SGA source is used, and tool_uses=[] is correct."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.DenseSubfieldAlgebraicRootApproximation",
+  "declaration": "Polynomial.exists_algebraic_root_approximation_of_denseRange",
+  "file": "lean/Sheaf/FieldTheory/DenseSubfieldAlgebraicRootApproximation.lean",
+  "statement": "theorem exists_algebraic_root_approximation_of_denseRange (D : Type u) (K : Type v) (L : Type w) [Field D] [NormedField K] [NormedField L] [Algebra D K] [NormedAlgebra K L] [IsAlgClosed L] (hd : DenseRange (algebraMap D K)) (f : Polynomial K) (hf : f.Monic) (n : ℕ) (hn : 1 ≤ n) (hdegree : f.natDegree = n) (x : L) (hx : f.eval₂ (algebraMap K L) x = 0) (r : ℝ) (hr : 0 < r) : ∃ (g : Polynomial D) (b : L), g.Monic ∧ g.natDegree = n ∧ (g.map (algebraMap D K)).Monic ∧ (g.map (algebraMap D K)).natDegree = n ∧ ((g.map (algebraMap D K)).map (algebraMap K L)).Splits ∧ (∀ i : ℕ, ‖(g.map (algebraMap D K)).coeff i - f.coeff i‖ < (r / max ‖x‖ 1) ^ n / (n + 1 : ℝ)) ∧ (g.map (algebraMap D K)).eval₂ (algebraMap K L) b = 0 ∧ g.eval₂ ((algebraMap K L).comp (algebraMap D K)) b = 0 ∧ ‖x - b‖ < ((n + 1 : ℝ) * ((r / max ‖x‖ 1) ^ n / (n + 1 : ℝ))) ^ (n : ℝ)⁻¹ * max ‖x‖ 1 ∧ ((n + 1 : ℝ) * ((r / max ‖x‖ 1) ^ n / (n + 1 : ℝ))) ^ (n : ℝ)⁻¹ * max ‖x‖ 1 = r ∧ @IsAlgebraic D L _ _ ((algebraMap K L).comp (algebraMap D K)).toAlgebra b",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7740a7522",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause, with nothing stronger or weaker. NormedField = the node's norm axioms; NormedAlgebra K L = norm restriction (equivalent over a normed field L); DenseRange = density, no norm on D; n with 1≤n and natDegree=n; all conclusions present: g and h monic of degree n, h splits over L, all coefficients of h within ε for every i, h(b)=g(b)=0 via the composite D→K→L, strict bound ((n+1)ε)^(1/n)·M plus a separate equality to r, IsAlgebraic over D via the composite toAlgebra (same convention as citer lem-sfb-padic-rational-algebraic-generator). Provable from Mathlib exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt and exists_monic_and_natDegree_eq_and_norm_map_algebraMap_coeff_sub_lt, matching Extension.lean:82-127. lean.statement verbatim; node otherwise identical to side-live; stmt_deps are Mathlib leaves; no duplicate or name clash; docstrings carry source place, blueprint id and 5 proof steps; report has Worker report and Second reading by NZ sections; no helpers or defs; edge cases n=1, x=0, D=K, trivial norm, char p OK; universes independent. No compile run (no file changed)."
+ }
+}

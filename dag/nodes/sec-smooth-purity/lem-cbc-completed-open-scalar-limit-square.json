@@ -1,0 +1,133 @@
+{
+ "id": "lem-cbc-completed-open-scalar-limit-square",
+ "kind": "statement",
+ "title": "Scalar restriction and open extension commute with their constant-diagram limit mates",
+ "statement": "For a Noetherian adic datum [def-weil-pbc-adic-coefficient-datum], a quasi-compact open j:U→T, and any derived strict tower X of completed-ring modules on U, the square formed by the specified scalar/open comparison and the four constant-diagram adjunction mates commutes. Explicitly, restriction of the completed-ring open/limit mate, followed by scalar/limit at JX and the derived limit of tower scalar/open, equals derived scalar/open at Rlim X, followed by constant-ring open extension of scalar/limit at X and the constant-ring open/limit comparison. No completeness is assumed and equality is before any evaluation.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 05S7 and 07A7, exact localization and adjunction transposition; agent refinement for the constant-diagram square."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-completed-open-scalar-quotient-interface",
+  "def-cbc-completed-scalar-pullback-interface",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-cbc-exact-product-functor-strict-limit"
+ ],
+ "proof": [
+  {
+   "text": "The exact scalar/open isomorphism gives a cube with constant-diagram comparisons on four edges. Its ordinary component equation is naturality of that isomorphism. Localization preserves the cube, by the exact-cube theorem used in UnboundedExactAdjunctionSquare.constant_cube. Invert its three-factor path equality to orient the four constants for taking mates.",
+   "uses": [
+    "lem-sbc-unbounded-exact-adjunction-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 05S7 and 07A7, exact localization and adjunction transposition; agent refinement for the constant-diagram square."
+   }
+  },
+  {
+   "text": "Apply exchangeMate_cube to the four constant-diagram/derived-limit adjunctions. Its four mate edges are precisely the four cbcRealizationLimitMap maps. Specialize to open extension, ambient scalar restriction, open scalar restriction, and constant-ring open extension. The derived ordinary and tower square comparisons agree with the published scalar/open definitions by their exact localization formulas.",
+   "uses": [
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 05S7 and 07A7, exact localization and adjunction transposition; agent refinement for the constant-diagram square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-unbounded-exact-adjunction-square",
+  "lem-weil-pbc-exchange-mate-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 05S7 and 07A7, exact localization and adjunction transposition; agent refinement for the constant-diagram square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Commuting squares of exact functors commute with derived inverse limit by taking mates of constant diagram functors",
+   "results": "CategoryTheory.Limits.constLimAdj (Mathlib.CategoryTheory.Limits.HasLimits), CategoryTheory.CatCommSq.iso (Mathlib.CategoryTheory.CatCommSq), CategoryTheory.exactFunctor (Mathlib.CategoryTheory.Limits.ExactFunctor). These give basic ingredients, not the specified derived cube.",
+   "date": "2026-10-25",
+   "verdict": "no exact match; reuse constLimAdj"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of exact functor composites induces a commuting square of constant diagram limit adjunction mates",
+   "results": "CategoryTheory.mateEquiv_square (Mathlib.CategoryTheory.Adjunction.Mates) and GuitartExact vertical composition lemmas. mateEquiv_square treats pasted two-squares; the library exchangeMate_cube provides the required cube formulation.",
+   "date": "2026-10-25",
+   "verdict": "use existing library cube theorem; no exact scalar/open specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|whisker)|constant.*cube|constLimAdj in Mathlib/CategoryTheory/Adjunction/Mates.lean and Limits/HasLimits.lean",
+   "results": "Read constLimAdj, mateEquiv_vcomp, mateEquiv_hcomp, mateEquiv_square and the conjugate/whisker identities. The library UnboundedExactAdjunctionSquare.constant_cube supplies exact localization; ExchangeMateCube.exchangeMate_cube supplies the mate cube.",
+   "date": "2026-10-25",
+   "verdict": "reuse generic library results; concrete comparison still requires specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedOpenStrictMateIdentification",
+  "date": "2026-10-25",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, first sentence: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms' (identification of that two-factor composite with Rlim of a strict-tower map, used for coherence); Tag 03DI (lemma-extension-by-zero), explicit unit transpose; finite scalar/tower refinement and ordered completed limit in old item Steps 4, 7; compare current blueprint def-cbc-completed-exchange-map, final open factor.",
+   "via": [
+    "lem-cbc-completed-open-strict-mate-identification",
+    "lem-cbc-complete-proetale-strict-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedOpenScalarLimitSquare",
+  "file": "lean/Sheaf/Paper/CompletedOpenScalarLimitSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedOpenScalarLimitSquare",
+  "statement": "theorem completedOpenScalarLimitSquare {U T : Scheme.{t}} (j : U ⟶ T)\n    [IsOpenImmersion j] [QuasiCompact j]\n    (X : DerivedCategory (exchangeTowers U (d.completedRing U))) :\n    (cbcRealizationRes d T).mapDerivedCategory.map\n        ((cbcRealizationLimitMap (cbcOpenShriek d j inferInstance)).app X) ≫\n      (cbcRealizationResLimit d T).hom.app ((cbcRealizationJ d j).obj X) ≫\n      (completedRlim T (exchangeConstantRing T A)).map\n        ((cbcRealizationTowerScalarOpen d j).hom.app X) =\n    (cbcRealizationDerivedScalarOpen d j).hom.app\n        ((completedRlim U (d.completedRing U)).obj X) ≫\n      (ProEtale.StrictTower.moduleJ A j).mapDerivedCategory.map\n        ((cbcRealizationResLimit d U).hom.app X) ≫\n      (cbcRealizationOpenLimit d j).hom.app ((exchangeTowerRes d U).obj X)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T201858-L-2634090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T201858-L-2634090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

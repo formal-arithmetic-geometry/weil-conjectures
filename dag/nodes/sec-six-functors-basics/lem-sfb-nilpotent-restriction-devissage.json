@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-nilpotent-restriction-devissage",
+ "kind": "statement",
+ "title": "Nilpotent finite-stage devissage of the cyclic restriction comparison",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E$, and $F=E$ or $F=\\Omega$. On the coherent profinite site in the compatible universes of [def-weil-size-convention], put $A(S)=C(S,F)$, with all continuous maps [def-sfb-continuous-map-condensed-ring]. Put $H=\\mathbf Z_\\ell$ with its inverse-limit topology, $u:\\mathbf Z_{\\mathrm{disc}}\\to H$, $u(k)=k$, and $\\tau=u(1)=1$. Use ordinary internal $A$-modules [sk-def-sfb-module-objects] with condensed $H$-actions [def-sfb-condensed-action-module], their ordinary derived category [def-weil-abstract-derived-category], and $H$-invariants taken in the full action category. Write\n$$c_N=(\\lambda_N^1)^{-1}\\beta_N^1:R\\Gamma_H(N[0])\\longrightarrow Q[N\\xrightarrow{\\tau-1}N]$$\nfor the invariant-normalized cyclic restriction comparison of [lem-sfb-relative-cyclic-restriction-model], with residual group trivial and cyclic degrees $0,1$.\n\nAssume that $c_A$ for the trivial $H$-module $A$ is an isomorphism. For every finite-dimensional norm-topological $E$-vector space $W$, every integer $e\\geq1$, and every $E$-linear $D_W:W\\to W$ with $D_W^e=0$, give $W$ the action $t\\cdot w=\\sum_{j=0}^{e-1}t^jD_W^jw/j!$ and put $M(W)(S)=C(S,F\\otimes_E W)$ with its finite-dimensional product norm topology and induced action. Then $c_{M(W)}$ is an isomorphism.\n\nMore precisely, with $W_0=\\ker D_W$ and $\\overline W=W/W_0$ carrying the induced nilpotent operator, inclusion and quotient induce a short exact sequence of internal $H$-modules\n$$0\\longrightarrow M(W_0)\\longrightarrow M(W)\\longrightarrow M(\\overline W)\\longrightarrow0.$$\nIts underlying sequence of section modules has a splitting natural in every profinite parameter $S$, induced by a continuous $E$-linear complement of $W_0$; no equivariant splitting is claimed. The action on $W_0$ is trivial; if $W\\ne0$ then $W_0\\ne0$ and $\\dim_E\\overline W<\\dim_E W$.\n\nLet $D_F=1\\otimes D_W$ and $U_e(X)=\\sum_{j=1}^{e}X^{j-1}/j!$. As endomorphisms of $F\\otimes_E W$ one has $\\exp(D_F)-1=D_FU_e(D_F)$, and $U_e(D_F)$ is invertible and commutes with $D_F$. As subobjects with their common inclusion into $M(W)$,\n$$M(W)^H=\\ker(\\tau-1)=\\ker C(-,D_F).$$\nFixed sections here mean fixed after every profinite base change and by every continuously varying $t$. This includes $W=0$ and $D_W=0$ and imposes no bound uniform over different choices of $W,D_W,e$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, nilpotent extension devissage below the polynomial translation input; extracted from returned ind-unipotent proof steps 5-6 and the finite-stage polynomial-kernel argument in step 10. Agent-formulated auxiliary obligation; exact external reference WANTED."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-relative-cyclic-restriction-model",
+  "def-sfb-continuous-map-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $P_D(t)=\\sum_{j<e}t^jD_W^j/j!$. For $r<e$, the coefficient of $D_W^r$ in $P_D(s)P_D(t)$ is $\\sum_{i+j=r}s^it^j/(i!j!)=(s+t)^r/r!$; terms of degree at least $e$ vanish. Hence $P_D(s)P_D(t)=P_D(s+t)$, $P_D(0)=1$ and $P_D(-t)=P_D(t)^{-1}$. In coordinates the action is a finite polynomial in $t$ and the vector coordinates, so is jointly continuous; the map $\\mathbf Z_\\ell\\to E$ is continuous. The same coordinate argument works over the possibly noncomplete field $F$. Apply the continuous-section realization to obtain the specified internal action on $M(W)$; all formulas commute with precomposition in the profinite parameter.",
+   "uses": [
+    "def-sfb-continuous-representation-condensation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct images; agent-written finite-stage nilpotent extension argument below the analytic comparison. This auxiliary statement is not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Set $W_0=\\ker D_W$. Each polynomial $P_D(t)$ restricts to the identity on $W_0$ and induces $P_{\\overline D}(t)$ on $\\overline W=W/W_0$, where $\\overline D^e=0$. Apply the continuous-section exact-triangle statement with $\\Pi=H$, $V=W$ and $U=W_0$. Its hypotheses hold by step 1 and this stability. It gives exactly the asserted short exact sequence, a splitting natural in every profinite $S$ after forgetting the action, and the distinguished triangle of its degree-zero complexes. Concretely, choose lifts of a basis of $\\overline W$ and their span $L$; $W=W_0\\oplus L$. The resulting continuous $E$-linear section extends to an $F$-linear matrix on finite products of $F$ and then acts on sections by postcomposition. This is the claimed complement splitting, without any equivariance assertion.",
+   "uses": [
+    "lem-sfb-continuous-section-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct images; agent-written finite-stage nilpotent extension argument below the analytic comparison. This auxiliary statement is not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "If $W\\ne0$, take $w\\ne0$ and the least $r\\ge1$ for which $D_W^rw=0$; it exists since $D_W^e=0$. Then $D_W^{r-1}w$ is a nonzero vector of $W_0$. Extend a basis of $W_0$ to a basis of $W$; the added basis vectors project to a basis of $\\overline W$. Thus $\\dim_E\\overline W=\\dim_EW-\\dim_EW_0<\\dim_EW$. This also verifies termination of the induction below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct images; agent-written finite-stage nilpotent extension argument below the analytic comparison. This auxiliary statement is not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Put $D=D_F$. Expanding the finite sums gives $DU_e(D)=\\sum_{j=1}^eD^j/j!=\\exp(D)-1$, since $D^e=0$. Write $B=U_e(D)-1=DV(D)$ for a polynomial $V$ (with $V=0$ if $e=1$). Polynomial expressions in $D$ commute, and $B^e=D^eV(D)^e=0$. Consequently $U_e(D)^{-1}=\\sum_{k=0}^{e-1}(-B)^k$: multiplying on either side leaves $1-(-B)^e=1$. Both $U_e(D)$ and this inverse commute with $D$. Therefore $(\\tau-1)x=DU_e(D)x=U_e(D)Dx=0$ if and only if $Dx=0$. These identities hold on every section module by pointwise application.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct images; agent-written finite-stage nilpotent extension argument below the analytic comparison. This auxiliary statement is not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "By the definition of fixed sections, an $H$-fixed section is fixed by the constant parameter $\\tau=1$, hence belongs to $\\ker(\\tau-1)$ and, by step 4, to $\\ker C(-,D_F)$. Conversely, if $D_Fm=0$ on a profinite $S$, then after any $f:T\\to S$ we still have $D_F(f^*m)=0$. For any continuous $t:T\\to H$, every positive-degree term of $P_D(t)(f^*m)$ vanishes pointwise, so $t\\cdot f^*m=f^*m$. This is the full internal fixed-section condition, including varying parameters. All three subobjects thus have the same sections and the same inclusion into $M(W)$, proving the stated equality of subobjects.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct images; agent-written finite-stage nilpotent extension argument below the analytic comparison. This auxiliary statement is not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "For a trivial $H$-representation $W$ of dimension $d$, choose a basis. It gives $M(W)\\cong A^{\\oplus d}$ as action modules, by the coordinate homeomorphism $F\\otimes_EW\\cong F^d$: by the continuous-section realization this equivariant linear homeomorphism acts by postcomposition, and $C(S,F^d)=C(S,F)^d$ is the section module of the biproduct. The derived invariants functor is additive, and the cyclic comparison is natural between triangulated, hence additive, functors. Under the finite biproduct identifications, naturality for each summand injection and projection identifies $c_{A^{\\oplus d}}$ with the diagonal matrix having $d$ entries $c_A$: off-diagonal entries are zero and diagonal entries equal $c_A$. Its inverse is the diagonal matrix of inverses. For $d=0$ this is the unique map between zero objects. Thus the assumption on $c_A$ proves the comparison for every trivial finite-dimensional representation, including $W_0$.",
+   "uses": [
+    "def-sfb-continuous-representation-condensation",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-relative-cyclic-restriction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct images; agent-written finite-stage nilpotent extension argument below the analytic comparison. This auxiliary statement is not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Prove the comparison assertion by strong induction on $n=\\dim_EW$, simultaneously for every $e\\ge1$ and every $D_W$ with $D_W^e=0$. The case $n=0$ is step 6. If $n>0$, step 3 makes the quotient smaller, so the induction hypothesis gives $c_{M(\\overline W)}$ invertible; step 6 gives $c_{M(W_0)}$ invertible. Since $\\lambda^1$ is a natural isomorphism, $c_N=(\\lambda_N^1)^{-1}\\beta_N^1$ is invertible if and only if $\\beta_N^1$ is; no shift compatibility of $\\lambda^1$ is used. With $G=1$ the relative cyclic model identifies $\\beta^1$ with the canonical derived restriction $b_u$ along $u:\\mathbf Z_{\\mathrm{disc}}\\to H$. The continuous-section exact-triangle statement, applied with $\\Pi=H$, this $u$ and the triangle $M(W_0)[0]\\to M(W)[0]\\to M(\\overline W)[0]\\to M(W_0)[1]$ of step 2, gives a morphism from the distinguished $R\\Gamma_H$-image to the distinguished $R\\Gamma_{\\mathbf Z}D(\\operatorname{Res}_u)$-image with components $b_u(M(W_0)),b_u(M(W)),b_u(M(\\overline W))$, including the square on the connecting arrow. The outer components are invertible, so the triangle two-out-of-three lemma makes $b_u(M(W))=\\beta^1_{M(W)}$, hence $c_{M(W)}$, invertible. This completes the induction. Only the current finite $e$ was used, so no uniform nilpotence bound is introduced.",
+   "uses": [
+    "lem-sfb-relative-cyclic-restriction-model",
+    "lem-sfb-continuous-section-exact-triangles",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct images; agent-written finite-stage nilpotent extension argument below the analytic comparison. This auxiliary statement is not asserted in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-continuous-representation-condensation",
+  "lem-sfb-continuous-section-exact-triangles",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-relative-cyclic-restriction-model",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct images; explicit auxiliary nilpotent argument, using the already stated section-exactness and cyclic triangulated comparison and Stacks Tag 014A (derived.tex, lemma-third-isomorphism-triangle)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(nilpotent|unipotent).*(cohomolog|invariant|devissage)|(cohomolog|invariant|devissage).*(nilpotent|unipotent)",
+   "results": "{\"t\": \"2026-10-22T06:10:42Z\", \"tool\": \"grep\", \"query\": \"(nilpotent|unipotent).*(cohomolog|invariant|devissage)|(cohomolog|invariant|devissage).*(nilpotent|unipotent)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nilpotent exponential algebra and finite cyclic abstract cohomology do not give the conditional internal condensed derived devissage, its continuously split kernel quotient sequence and fixed-submodule identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"ker\"",
+   "results": "{\"t\": \"2026-10-22T06:10:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNilpotent\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CompleteOrthogonalIdempotents.of_ker_isNilpotent_of_isMulCentral\", \"exists_isIdempotentElem_eq_of_ker_isNilpotent\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker\", \"CompleteOrthogonalIdempotents.of_ker_isNilpotent\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"existsUnique_isIdempotentElem_eq_of_ker_isNilpotent\"], \"digest\": \"e0613b57b4ba2caf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nilpotent exponential algebra and finite cyclic abstract cohomology do not give the conditional internal condensed derived devissage, its continuously split kernel quotient sequence and fixed-submodule identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional nilpotent exponential representation filtration by the kernel of the nilpotent operator gives devissage of the derived invariants comparison",
+   "results": "{\"t\": \"2026-10-22T06:10:42Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional nilpotent exponential representation filtration by the kernel of the nilpotent operator gives devissage of the derived invariants comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNilpotent.exp\", \"LieDerivation.exp\", \"IsNilpotent.exp_smul_eq_sum\", \"Module.End.exp_mul_of_derivation\", \"IsNilpotent.exp_eq_sum\", \"IsNilpotent.isNilpotent_exp_sub_one\", \"IsNilpotent.exp_neg_mul_exp_self\", \"LieDerivation.exp_map_apply\"], \"digest\": \"937f424b69419f30\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nilpotent exponential algebra and finite cyclic abstract cohomology do not give the conditional internal condensed derived devissage, its continuously split kernel quotient sequence and fixed-submodule identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nilpotent linear operator the kernel of exp D minus identity equals the kernel of D and extensions of trivial representations preserve a natural derived comparison isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:10:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a nilpotent linear operator the kernel of exp D minus identity equals the kernel of D and extensions of trivial representations preserve a natural derived comparison isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp_apply\", \"LieDerivation.exp\", \"LieDerivation.exp_map_apply\", \"LieModule.coe_genWeightSpaceOf_zero\", \"LieAlgebra.IsExtension.kerEquivRange\", \"LieModule.exists_forall_pow_toEnd_eq_zero\", \"LieModule.isNilpotent_toEnd_sub_algebraMap\", \"LieAlgebra.Extension.toKer\"], \"digest\": \"e5a6586295a91782\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nilpotent exponential algebra and finite cyclic abstract cohomology do not give the conditional internal condensed derived devissage, its continuously split kernel quotient sequence and fixed-submodule identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated cyclic restriction comparison that is invertible on trivial scalar coefficients is invertible on finite dimensional nilpotent exponential representations by kernel quotient induction",
+   "results": "{\"t\": \"2026-10-22T06:10:59Z\", \"tool\": \"leanfinder\", \"query\": \"A triangulated cyclic restriction comparison that is invertible on trivial scalar coefficients is invertible on finite dimensional nilpotent exponential representations by kernel quotient induction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.homResolutionIso\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Rep.FiniteCyclicGroup.homResolutionIso_inv_f_hom_apply_hom_hom_apply\", \"Rep.FiniteCyclicGroup.homResolutionIso_hom_f_hom_apply\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\", \"AlgebraicTopology.DoldKan.Γ₀NondegComplexIso\"], \"digest\": \"6ca3d0b2447b6879\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nilpotent exponential algebra and finite cyclic abstract cohomology do not give the conditional internal condensed derived devissage, its continuously split kernel quotient sequence and fixed-submodule identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural morphism of derived invariants and the cyclic two term complex is invertible for finite dimensional nilpotent exponential representations by induction on dimension",
+   "results": "{\"t\": \"2026-10-23T10:38:55Z\", \"tool\": \"leanfinder\", \"query\": \"A natural morphism of derived invariants and the cyclic two term complex is invertible for finite dimensional nilpotent exponential representations by induction on dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"Rep.FiniteCyclicGroup.homResolutionIso_inv_f_hom_apply_hom_hom_apply\", \"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv\"], \"digest\": \"6386e7cc9799b551\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary representation resolutions, nilpotent exponentials, or unrelated discrete condensed modules; none states this conditional comparison for internal all-continuous coefficients with its exact-sequence and varying-parameter fixed-subobject clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent.exp, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-23T10:38:56Z\", \"tool\": \"loogle\", \"query\": \"IsNilpotent.exp, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary representation resolutions, nilpotent exponentials, or unrelated discrete condensed modules; none states this conditional comparison for internal all-continuous coefficients with its exact-sequence and varying-parameter fixed-subobject clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "(nilpotent|unipotent).*(cohomolog|invariant|devissage)|(cohomolog|invariant|devissage).*(nilpotent|unipotent)",
+   "results": "{\"t\": \"2026-10-23T10:38:56Z\", \"tool\": \"grep\", \"query\": \"(nilpotent|unipotent).*(cohomolog|invariant|devissage)|(cohomolog|invariant|devissage).*(nilpotent|unipotent)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary representation resolutions, nilpotent exponentials, or unrelated discrete condensed modules; none states this conditional comparison for internal all-continuous coefficients with its exact-sequence and varying-parameter fixed-subobject clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of exp of a nilpotent operator minus identity equals the kernel of the operator",
+   "results": "{\"t\": \"2026-10-23T10:38:56Z\", \"tool\": \"leansearch\", \"query\": \"The kernel of exp of a nilpotent operator minus identity equals the kernel of the operator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.ker\", \"LieDerivation.exp\", \"IsNilpotent.exp\", \"LinearMap.iterateKer_coe\", \"LinearMap.IsIdempotentElem.range_eq_ker_one_sub\", \"LinearMap.IsIdempotentElem.range_eq_ker\", \"IsIdempotentElem.ker_toSpanSingleton_one_sub_eq_span\", \"IsNilpotent.isNilpotent_exp_sub_one\"], \"digest\": \"a2179229bd7753e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary representation resolutions, nilpotent exponentials, or unrelated discrete condensed modules; none states this conditional comparison for internal all-continuous coefficients with its exact-sequence and varying-parameter fixed-subobject clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional unipotent continuous representations of the l adic integers are successive extensions of trivial representations and a triangulated comparison is an isomorphism on them",
+   "results": "{\"t\": \"2026-10-23T10:40:01Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional unipotent continuous representations of the l adic integers are successive extensions of trivial representations and a triangulated comparison is an isomorphism on them\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₁\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₂\", \"Rep.FiniteCyclicGroup.homResolutionIso\"], \"digest\": \"2fd3d1f1d4ed7862\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary representation resolutions, nilpotent exponentials, or unrelated discrete condensed modules; none states this conditional comparison for internal all-continuous coefficients with its exact-sequence and varying-parameter fixed-subobject clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ind-unipotent-procyclic-difference",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, nilpotent extension devissage below the polynomial translation input; extracted from returned ind-unipotent proof steps 5-6 and the finite-stage polynomial-kernel argument in step 10. Agent-formulated auxiliary obligation; exact external reference WANTED.",
+   "via": [
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nilpotent-restriction-devissage",
+  "worker": "stage1",
+  "summary": "Statement unchanged. No attachment in WeilConjectures and no whole-item Mathlib match. Reused the existing continuous-section exact triangle, relative cyclic model and triangle two-out-of-three lemma; wrote the polynomial group law, kernel-quotient dimension drop, geometric inverse, full varying-parameter invariants equality, finite-biproduct base case and strong induction explicitly. No new nodes.",
+  "blueprint": "Latest blueprint direct-images proof paragraph (3), open-image analytic coefficient input. The item is an agent-created auxiliary obligation, not a literal blueprint assertion; ancestor search returns null and the inherited via chain is retained. Whole-blueprint searches nilpotent, cyclic, exponential, nilpotent restriction and continuous section yield no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-466a04bb5",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-466a04bb5 (reviewer sub-agent of L); spot-checked: I read the item in full; it has 7 steps and the delivery adds 0 new nodes. Statement and stmt_deps are byte-identical to the base. Live and side-live still have the item unsplit, and I found no repair note, so this is neither a superseded delivery nor a re-split order. Source: main-20261015 direct-images proof paragraph (3), identical in latest. The item is an agent auxiliary obligation, so proof_origin agent plus WANTED is correct; no SGA is cited. Steps 1-5 check out: P_D(s)P_D(t)=P_D(s+t) by binomial coefficients; the hypotheses of the section-exact-triangles lemma hold (Π=Z_ℓ, W_0 stable, explicit complement); the kernel-dimension drop; exp(D)-1=DU_e(D) with U_e inverted by a geometric series, so ker(τ-1)=ker D; fully fixed sections equal ker D. Edge cases tested: W=0, D=0, e=1, non-minimal e, and the 2x2 Jordan block. Two repairs. Step 7 (C4): it applied two-out-of-three to c=λ^{-1}β as a shift-compatible transformation, but the relative-cyclic node calls λ only a natural isomorphism. I reran the argument on β^1=b_u (G=1), whose morphism of distinguished triangles, including the connecting square, is stated by lem-sfb-continuous-section-exact-triangles, and transferred the result through the iso λ_N. Step 6: added the def-sfb-continuous-representation-condensation citation for M(W)≅A^d by postcomposition. Batch-5: def-pod-l-adic-representations is a general definition and lem-pod-derived-exact-square-composition is a generic derived pasting lemma; neither is part of the trace formula or Poincaré duality, so both are accepted. No tool_uses. The fixed item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ }
+}

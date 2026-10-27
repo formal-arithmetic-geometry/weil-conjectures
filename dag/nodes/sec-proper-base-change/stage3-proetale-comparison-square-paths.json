@@ -93,13 +93,14 @@
  "unit": "sk-thm-properbasechange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquarePaths",
-  "file": "lean/Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonSquarePaths.lean",
+  "module": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquarePathsCore",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonSquarePathsCore.lean",
   "declaration": "AlgebraicGeometry.ProEtale.comparisonSquareEtalePath",
   "statement": "def comparisonSquareEtalePath (cs : ChosenCartesianSquare g' f' f g) :\n    (Etale.upperStar (ModuleCat.{u + 1} Λ) g ⋙\n        Etale.upperStar (ModuleCat.{u + 1} Λ) f') ⋙ ν^*(X')[ModuleCat.{u + 1} Λ] ≅\n      ν^*(Y)[ModuleCat.{u + 1} Λ] ⋙\n        (upperStar (ModuleCat.{u + 1} Λ) f ⋙ upperStar (ModuleCat.{u + 1} Λ) g')",
   "branch": "sheaf-dag",
   "by": "A3",
-  "date": "2026-10-17"
+  "date": "2026-10-17",
+  "note": "Declarations relocated verbatim below the upstream smooth-base-change module to avoid the import cycle introduced by the 2026-10-20 comparison-definition sync. ComparisonSquarePaths preserves its public imports and re-exports this core."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -112,14 +113,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
-  "result": "pass",
-  "landing": "20261016T221553-L-1610887",
+  "reviewer": "C-d6751",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261024T204623-L-3807184",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proof + 5 Core copies + verbatim PathsCore relocation vs published ComparisonSquarePaths/helper modules, node lean records vs Core signatures, lambda expansions vs item defs; sandbox compile of delivery + both direct importers of ComparisonSquarePaths + downstream originals all OK; axioms only inherited sorryAx from rightDerivedLowerStarComparisonIso'"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

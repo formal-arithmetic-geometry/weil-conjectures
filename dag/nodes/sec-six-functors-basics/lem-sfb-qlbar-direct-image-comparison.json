@@ -18,117 +18,40 @@
  ],
  "proof": [
   {
-   "text": "Use small representatives of the pro-etale sites and a coefficient universe containing the set of finite intermediate fields. We may calculate with section-ring module sheaves. Indeed the internal-to-sectionwise equivalence is exact and identifies relative tensors, total tensor complexes, flatness and K-flatness. The operations-transport theorem identifies the underived pullback/direct-image adjunction, including its unit and counit. Applying these comparisons to resolutions gives the same derived functors: equivalences preserve injectives and exact sequences; for a K-injective complex the defining null-homotopy test is preserved because the equivalence identifies complexes, acyclic complexes and homotopies. Thus the comparison also preserves the derived adjunction and its counit, and the K-flat tensor comparison is the localization of the same pure-tensor map. This uses no finite-type assumption on the schemes. In the following write $R_Z=E_Z$, $B_Z=\\overline{\\mathbf Q}_{\\ell,Z}$, $L=Lf_E^*$ and $R_f=Rf_{*,E}$.",
+   "text": "Choose a common scalar basis of the regular algebraic-closure coefficient module over E, using the finite-subextension-valued condensed convention. The derived scalar-basis theorem supplies central endomorphisms tau on every scheme, identifies each extension/restriction unit copower with an isomorphism on every unbounded derived input, and identifies the scalar actions before and after the actual derived pushforward. No direct-image continuity is assumed in this step.",
    "uses": [
-    "def-weil-size-convention",
-    "lem-pe-internal-section-tensor-comparison",
-    "lem-sfb-internal-module-operations-transport",
-    "lem-weil-pbc-equivalence-injective-resolutions",
-    "sk-def-sfb-derived-categories"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EK (section-tensor-product), 0GMW (lemma-sheafification-tensor), 03D6 (definition-pushforward), 03D7 (lemma-adjoint-pullback-pushforward-modules); resolution transport is the agent argument"
-   }
-  },
-  {
-   "text": "Let $I_E$ be the poset of finite fields $E\\subseteq F\\subseteq\\overline{\\mathbf Q}_\\ell$. The tail module-colimit theorem says precisely that this is nonempty and directed and that the inclusion maps $q_{F,Z}:F_Z\\to B_Z$ exhibit $B_Z=\\varinjlim_{I_E}F_Z$ in $R_Z$-module sheaves, for $Z=X,Y$. The universe in step 1 makes this a small diagram. Cartesian coefficients identify $f^{-1}R_Y$ with $R_X$, $f^{-1}F_Y$ with $F_X$, and $f^{-1}B_Y$ with $B_X$; they make $L$ exact. Compatibility of coefficient maps with inverse image identifies $Lq_{F,Y}$ with $q_{F,X}$. Each $F_Z$ is finite free over $R_Z$, hence its tensor functor is exact; the algebraic-closure flatness theorem gives the same exactness for $B_Z$.",
-   "uses": [
-    "lem-sfb-qlbar-tail-module-colimit",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-coefficient-change",
-    "lem-sfb-subfield-flat",
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis",
     "lem-sfb-qlbar-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.6 and the paragraph preceding it; coefficient maps pulled back from the point"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose an integer $a$ and a representative $K^\\bullet$ for $C$ with $K^r=0$ for $r<a$. This is possible by the standard t-structure characterization of $D^{\\ge a}$. Exact scalar extension is its own derived functor, so $M_F=F_X\\otimes_{R_X}K^\\bullet$ represents $F_X\\otimes^L_{R_X}C$ and has the same lower bound $a$. Tensor preserves the coefficient colimit, term by term, so $\\varinjlim_F M_F=B_X\\otimes_{R_X}K^\\bullet$, with the actual maps $q_{F,X}\\otimes1$; it represents $B_X\\otimes^L_{R_X}C$. The same calculation on any representative $J^\\bullet$ of $A=R_fC$ gives $\\varinjlim_F(F_Y\\otimes_{R_Y}J^\\bullet)=B_Y\\otimes_{R_Y}J^\\bullet$. Filtered colimits in module sheaves are exact: the forgetful functor preserves them and is exact, and filtered colimits of abelian sheaves are exact. Exact functors commute with cohomology, so for each $q$ this last identification gives\n$$H^q(B_Y\\otimes^L_{R_Y}A)=\\varinjlim_F H^q(F_Y\\otimes^L_{R_Y}A).$$",
+   "text": "Extract N with C in D^{ge N}. Apply bounded copower continuity for the qcqs morphism f to copies of C indexed by that same basis. Its result is precisely invertibility of Sigma.desc of Rf_* applied to the coprojections. This argument uses finite partial sums of one strictly bounded-below representative and qcqs filtered continuity; it imposes neither properness nor an upper bound on C.",
    "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "sk-def-sfb-derived-categories",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "lem-weil-pbc-condensed-subfield-bounded-copowers"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(1), proof: common lower bound and t-exactness of filtered colimits"
-   }
+   "elementary": false
   },
   {
-   "text": "For an $R_Y$-module $P$ in degree zero let\n$$\\delta_P:P\\otimes^L_{R_Y}R_fC\\longrightarrow R_f(LP\\otimes^L_{R_X}C)$$\nbe the projection map with the factors interchanged by symmetry. Its adjunct is the canonical pullback/tensor comparison followed by $1\\otimes\\varepsilon_C$. The ringed projection-mate theorem makes this natural in $P$ and says that $\\delta_{R_Y}=1$. For $P=F_Y$, choose a finite free identification $F_Y\\cong R_Y^{\\oplus d}$ and pull it back to $F_X\\cong R_X^{\\oplus d}$. Additivity identifies the source and target with $A^{\\oplus d}$ and $R_f(C^{\\oplus d})$. On each coprojection, naturality of $\\delta$ identifies its map with the corresponding coprojection followed by $\\delta_{R_Y}=1$. Thus $\\delta_{F_Y}$ is the finite-biproduct comparison for the additive functor $R_f$, and is invertible. No infinite-sum assertion about $R_f$ is used in this calculation.",
+   "text": "Restriction of internal modules reflects isomorphisms by the forgetful module functor. Exactness and the natural homology comparison transfer this reflection to the derived restriction functor. The mate of the specified derivedPushHom is the inverse of derivedComapLowerStarIso, so it is invertible. The I-indexed copowers exist in both derived categories because a Grothendieck abelian module category has coproducts and its derived category inherits them. Apply the coefficient-push copower criterion to the two derived scalar adjunctions and the central basis endomorphisms. Their naturality and pushforward scalar compatibility verify the criterion's commuting-square hypothesis; the two unit copower maps are the isomorphisms of step 1 and the remaining copower comparison is invertible by step 2. Hence the actual derivedPushHom component at C is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "sk-prop-sfb-cartesian-coefficients"
+    "lem-grothendieck-derived-has-coproducts",
+    "lem-weil-pbc-coefficient-push-copower-criterion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map); finite free case of the following projection-formula proof"
-   }
-  },
-  {
-   "text": "Apply the pro-étale bounded-below direct-image continuity theorem of the route (unit of bounded continuity) to the sheaf of rings $R_X$ (the section-ring sheaf of step 1) and to the actual diagram $(M_F)_{F\\in I_E}$ of step 3. Its hypotheses hold: $f$ is quasi-compact and quasi-separated, $I_E$ is small and filtered, every $M_F$ is a complex of $R_X$-modules vanishing in degrees below the common bound $a$, and its termwise colimit is $B_X\\otimes_{R_X}K^\\bullet$ with the maps $q_{F,X}\\otimes1$. The theorem gives that the canonical map $\\varinjlim_FR^qf_*M_F\\to R^qf_*(B_X\\otimes_{R_X}K^\\bullet)$ is an isomorphism of sheaves on $Y_{\\mathrm{pro\\acute et}}$. Here $f_*$ lands in $f_*R_X$-modules; $R_f$ is the derived functor of restriction along $R_Y\\to f_*R_X$ composed with $f_*$, computed on the same K-injective resolutions, and restriction is exact and leaves underlying sheaves unchanged. So the comparison is the underlying map of the $R_Y$-linear map\n$$\\varinjlim_F H^q(R_f(F_X\\otimes^L_{R_X}C))\\longrightarrow H^q(R_f(B_X\\otimes^L_{R_X}C)),$$\nwhich is therefore an isomorphism for every $q$. Naturality of the projection map in $q_{F,Y}$ gives the actual cocone equation\n$$\\delta_{B_Y}\\circ(q_{F,Y}\\otimes1)=R_f(q_{F,X}\\otimes1)\\circ\\delta_{F_Y}.$$\nConsequently, under the cohomology-colimit identification of step 3, $H^q(\\delta_{B_Y})$ is the composite of the colimit of the isomorphisms $H^q(\\delta_{F_Y})$ from step 4 and the displayed continuity isomorphism. It is an isomorphism for every $q$, so $\\delta_{B_Y}$ is an isomorphism in $D(\\operatorname{Mod}(R_Y))$.",
-   "uses": [
-    "det-pe-bounded-continuity-direct-image",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(1), including the natural comparison (5.4); blueprint sk-prop-open-coefficients step 3 via sk-cor-pe-bounded-continuity"
-   }
-  },
-  {
-   "text": "It remains to identify the specified map, rather than an unspecified isomorphism between its endpoints. Write $U_Z$ for restriction from $B_Z$ to $R_Z$, $T_Z=B_Z\\otimes^L_{R_Z}-$, and $\\gamma_C:T_YA\\to Rf_{*,B}T_XC$ for the map in the statement. The ring-sheaf change-adjunction theorem gives the conservative $U_Y$ and an adjunction-compatible comparison $d:U_YRf_{*,B}\\cong R_fU_X$. By its adjunct formula, $d\\circ U_Y\\gamma_C$ has $L\\dashv R_f$ adjunct obtained by restricting the defining $B$-coefficient adjunct of $\\gamma_C$. Under the pullback/tensor identification, that adjunct is exactly\n$$L(B_Y\\otimes^L_{R_Y}A)\\ \\cong\\ B_X\\otimes^L_{R_X}LA\\ \\xrightarrow{\\,1\\otimes\\varepsilon_C\\,}\\ B_X\\otimes^L_{R_X}C.$$\nThe coefficient-change square commutes, so its $B_X$ factor is the same pulled-back inclusion used in step 2. This is also the defining adjunct of $\\delta_{B_Y}$ in step 4. The adjunction bijection therefore gives $d\\circ U_Y\\gamma_C=\\delta_{B_Y}$. By step 5 this is invertible, and $U_Y$ reflects isomorphisms; hence $\\gamma_C$ is invertible. Step 1 transports this conclusion, with this exact map, back to the ambient internal-module derived category of the item.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "sk-def-sfb-coefficient-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0B56 (equation-projection-formula-map)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-size-convention",
-  "det-pe-bounded-continuity-direct-image",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-sfb-internal-module-operations-transport",
+  "lem-grothendieck-derived-has-coproducts",
   "lem-sfb-qlbar-flat",
-  "lem-sfb-qlbar-tail-module-colimit",
-  "lem-sfb-subfield-flat",
-  "lem-weil-pbc-equivalence-injective-resolutions",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "sk-def-sfb-coefficient-change",
-  "sk-def-sfb-derived-categories",
-  "sk-prop-sfb-cartesian-coefficients"
+  "lem-weil-pbc-coefficient-push-copower-criterion",
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis",
+  "lem-weil-pbc-condensed-subfield-bounded-copowers"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Lemma 5.3(1) and Lemma 5.6; finite-free projection and canonical coefficient-adjunction calculation supplied explicitly"
+  "place": "Lemmas 5.3(1) and 5.6; F5 reuses the proved scalar-basis and bounded-copower route already assembled for proper maps in Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility, observing that its only geometric input condensedSubfield_bounded_copower_comparison assumes qcqs, not properness."
  },
  "mathlib_searches": [
   {
@@ -222,71 +145,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-qlbar-direct-image-comparison",
   "worker": "stage1",
-  "summary": "Proved the unchanged ambient bounded-below coefficient/direct-image comparison using the existing finite-subfield module colimit, finite-free projection maps, and qcqs bounded-below continuity. Checked the canonical map by restriction and equality of adjuncts; retained the common lower bound and avoided properness, constructibility and unbounded continuity. No new nodes were needed.",
-  "blueprint": "Realizes the algebraic-closure coefficient-extension argument in the last paragraph of lem-sfb-dc-lower-star-preserves.proof.md and rational-coefficient step 3 of sk-prop-open-coefficients: filtered finite extensions with one common lower bound.",
+  "summary": "Repair of the 6327-character proof: extracted three self-contained statement-only nodes for old steps 2-3, 4-5, and 1+6. The unchanged item is now a short assembly. All original arguments are retained verbatim in the report for the parallel workers; no mathematical argument was dropped.",
+  "blueprint": "Realizes the last paragraph of lem-sfb-dc-lower-star-preserves and rational-coefficient step 3 of sk-prop-open-coefficients using the common-lower-bound finite-extension route.",
   "tool_uses": [
    {
-    "node": "lem-pe-internal-section-tensor-comparison",
-    "why": "Identifies the existing internal tensor with sheaf-module tensor without changing coefficients or hypotheses."
-   },
-   {
-    "node": "lem-sfb-internal-module-operations-transport",
-    "why": "Identifies the actual underived module operations and their adjunctions on arbitrary schemes."
-   },
-   {
     "node": "lem-sfb-qlbar-flat",
-    "why": "Generic exactness or coefficient input used with its stated arbitrary-scheme hypotheses; no step of the unit route is replaced."
-   },
-   {
-    "node": "lem-sfb-qlbar-tail-module-colimit",
-    "why": "Generic exactness or coefficient input used with its stated arbitrary-scheme hypotheses; no step of the unit route is replaced."
-   },
-   {
-    "node": "lem-sfb-subfield-flat",
-    "why": "Generic exactness or coefficient input used with its stated arbitrary-scheme hypotheses; no step of the unit route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-equivalence-injective-resolutions",
-    "why": "Transports resolutions through the exact module-category equivalence."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
-    "why": "Identifies cohomology after exact filtered colimit with the colimit of cohomology."
-   },
-   {
-    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "why": "Supplies termwise continuity of ordinary module-sheaf tensor."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "Computes filtered module colimits on the underlying abelian sheaves."
-   },
-   {
-    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "why": "Supplies conservative coefficient restriction and its precise adjunct-compatible direct-image comparison."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Supplies the natural projection transformation, its adjunct and its tensor-unit value."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Identifies the canonical pullback/tensor map used to define the item."
-   },
-   {
-    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "why": "Supplies exactness of filtered colimits on arbitrary small sites."
-   },
-   {
-    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "why": "Detects invertibility by cohomology, without any constructibility or finite-dimensionality condition."
-   },
-   {
-    "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Supplies exact pullback and finite freeness of finite coefficient extensions for arbitrary schemes."
+    "why": "Supplies exact extension to the algebraic closure on every scheme, needed by the scalar-mate normalization; no properness or constructibility route is substituted."
    }
   ]
  },
@@ -308,14 +175,25 @@
   "sk-prop-sfb-cartesian-coefficients"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q72-764572f36",
-  "group": "Q72",
+  "reviewer": "NT-cc-NP-f25e0720f",
+  "group": "NP",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-764572f36 (reviewer sub-agent of L); spot-checked: Read the full item: unchanged statement, 6 steps, no new nodes. Also read every cited statement, unit sk-prop-open-coefficients step 3, the parent's step 4, and HRS 2305.18131 Lemma 5.3(1)/(5.4), Remark 5.4 and Lemma 5.6. The mathematics is correct. Step 1: exact transport from internal to section-ring modules, with K-injectivity handled explicitly. Step 2: tail colimit with the actual legs q_F, cartesian coefficients including Q̄ℓ, finite freeness, flatness. Step 3: a degreewise bounded-below representative, and tensor plus exact filtered colimits give H^q(B⊗A)=colim H^q(F⊗A). Step 4: elementary, using naturality of α, α_{R_Y}=1 and biproducts. Step 5: the cocone equation, then 2-out-of-3 on colimits. Step 6: the hypotheses of ring-sheaf-change-adjunction hold through the coefficient-change square, the direction of d matches, and the adjunct formula gives d∘rγ=δ_B. Edge cases checked: F=E, C=0, X empty, f=id, C unbounded above; the common lower bound is kept (Remark 5.4). One fault, C7, repaired: step 5 used lem-weil-pbc-condensed-qcqs-pushforward-continuity (unit sk-thm-properbasechange) as a declared tool, although the unit's route names sk-cor-pe-bounded-continuity at that point. The route node det-pe-bounded-continuity-direct-image (reviewed PASS) states exactly the needed continuity for qcqs f, any ring sheaf and a common bound a. It also avoids an unstated identification of the off-route node's π^{-1}a^* coefficients with p_X^*. The fix file repoints step 5 and adds a sentence on restriction to R_Y-modules, recomputes proof_deps and removes that tool_uses entry. Cycle check is clean. Accepted the remaining generic tool uses. Advisory: step 6 reads the statement's 'canonical pullback/tensor identification' as μ_{B_Y,A} composed with LB_Y≅B_X after restriction; stage 2 should pin the same convention.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-f25e0720f (reviewer sub-agent of L); spot-checked: Re-split (human note of 2026-10-21, released 2026-10-22) answered in full. The item statement is byte-identical to the live node, and only proof, proof_deps, proof_origin and split_report changed. All six live step texts appear verbatim in the report as takeover material. Coverage: old 1+6 → lem-sfb-internal-scalar-projection-mate, old 2-3 → lem-sfb-qlbar-bounded-tensor-colimit, old 4-5 → lem-sfb-filtered-finite-free-projection. The three statement-only nodes are comparable in size (2156/2313/2539 characters); the parent's three assembly steps total 1773 characters. Checks on the item: step 2 checks every hypothesis of the projection node (cartesian R_X, finite free P_F, colimit legs q_F, B_Y and LB_Y=B_X flat, qcqs f, C in D^+). In step 3 the composite d∘U_Y(γ_C) has the same domain and codomain as δ_{S_Y,C}, and γ_C's S-adjunct is the item's stated map. qlbar-flat gives the mate node's exact-extension hypothesis, and conservativity finishes the argument. All three new statements hold. Tensor node: I_E filtered, the tail-module-colimit, F_Z finite free by cartesian coefficients (2), flat coefficients make ⊗^L termwise, and filtered colimits are exact. Projection node: δ_{R_Y}=1 and naturality give the finite biproduct, then det-pe-bounded-continuity (HRS 5.3(1)/(5.4), read at pdftotext l.814) and H^q detection. Mate node: the internal/section equivalences and the adjunct formula of ring-sheaf-change-adjunction. Edge cases F=E, C=0, X empty, C unbounded above, d=0 and singleton I all behave. Bracketed refs equal stmt_deps, all nodes exist and none is merged; no doubled backslashes; four kinds of search recorded; blueprint.from points to lem-sfb-dc-lower-star-preserves with via [item]. Not duplicates: coefficient-push-filtered-legs (finite-type setting, assumes δ_i iso), fix-proetale-scalar-mate-normalization (finite constant rings), perfect projection formula, qcqs D_QCoh projection mate. The tool use lem-sfb-qlbar-flat is accepted. Advisory only: the tensor node's ¶3 overlaps facts the generic projection node must prove itself; the item's maintainer-owned tool_uses field still lists the old tools. Review written to review.md; no fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.QlbarDirectImageComparison",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_padicAlgCl_of_boundedBelow",
@@ -333,5 +211,15 @@
   "group": "N7",
   "result": "pass",
   "note": "Clause-by-clause match: Fact ℓ.Prime; E : PadicAlgCl.FiniteIntermediateField ℓ; f qcqs with no other geometric hypothesis; E_X = condensedRingObj (continuousMapRingObj E) X; Q̄_ℓ,Z = condensedRingObj padicAlgClRingObj (finite-subextension-valued convention); C : DerivedCategory.Plus of the ambient module category; conclusion IsIso ((derivedPushHom (padicSubfieldRingObjToPadicAlgCl ℓ E) f).app C.obj). derivedPushHom is the canonical mate of derivedComapLowerStarIso (DAG node def-sfb-derived-push-hom); its adjunct equals derivedPullIso⁻¹ followed by T^X(counit), matching the node's description, and the docstring pins this convention. Upstream qlbar comparisons all assume IsProper, so this is not a duplicate. Proof is sorry only, no hollow definitions, docstrings carry the source place and blueprint id with all six proof steps, lean.statement is verbatim the file signature, all imported modules exist, universes follow the Scheme.{u}/Ab.{u+1} convention, and the report has both required sections. Advisory: derivedPushHom and the subfield coefficient declarations are owned by nodes outside stmt_deps; stage 2 cannot change stmt_deps and these are the exact canonical objects. Nothing was compiled because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f06c9",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261024T185237-L-3489095",
+  "kind": "interface",
+  "note": "independent cc review: delivered QlbarDirectImageComparison proof and node lem-sfb-qlbar-direct-image-comparison against live node/unit sk-prop-open-coefficients (realized empty), used declarations' signatures/axioms, and importer GeometricCondensedFiniteScalarModel compiled with the delivered module"
  }
 }

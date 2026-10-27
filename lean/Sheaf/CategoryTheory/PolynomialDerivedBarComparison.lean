@@ -19,6 +19,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Analysis.Normed.Module.Basic
 public import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 import Sheaf.CategoryTheory.CondensedDerivedInvariantBar
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Polynomial evaluation into the derived internal lattice bar
 

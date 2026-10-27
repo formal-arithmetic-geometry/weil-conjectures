@@ -1,0 +1,519 @@
+{
+ "id": "lem-sfb-profinite-action-yoneda-free-evaluation",
+ "kind": "statement",
+ "title": "Equivariant Yoneda equation and evaluation on free profinite action spaces",
+ "statement": "Work in compatible universes and small skeletons [def-weil-size-convention]. Let $J$ be a compact Hausdorff totally disconnected topological group, let $P$ be the profinite site with finite jointly surjective covers [sk-def-sfb-condensed-ring], and let $P_J$ have profinite continuous left $J$-spaces, continuous equivariant maps and finite jointly surjective covers [def-weil-pbc-sites-and-cohomology]. Write $H(S)=J\\times S$ with left translation on $J$, and $tS=S$ with trivial action [def-sfb-profinite-action-parameters]. Put $\\mathscr E=\\operatorname{Sh}(P)$ and let $\\mathscr E^{\\underline J}$ be the category of internal actions: a sheaf $X$ with a natural unital associative action $C(S,J)\\times X(S)\\to X(S)$ [lem-sfb-action-topos-geometric-restriction]. Write $h_T(S)=C(S,T)$, with the induced action when $T\\in P_J$. For every $X\\in\\mathscr E^{\\underline J}$ the presheaf\n$$\\Phi(X)(T)=\\operatorname{Hom}_{\\mathscr E^{\\underline J}}(h_T,X)$$\nis a sheaf on $P_J$. Put $\\alpha_T:J\\times T\\to T$, $(j,t)\\mapsto jt$, $\\pi_T:J\\times T\\to T$, and $\\gamma:J\\times T\\to J$, the projections. Evaluation at the identity of $T$ identifies $\\Phi(X)(T)$ with\n$$Q_X(T)=\\{x\\in X(T):X(\\alpha_T)x=\\gamma\\cdot X(\\pi_T)x\\text{ in }X(J\\times T)\\}.$$\nThis is an equality of sections on the whole profinite parameter $J\\times T$, not merely an equality on ordinary points. On an equivariant map $u:T\\to T'$ the restriction is $X(u)$ on these subsets; on an equivariant sheaf map $v:X\\to Y$ it is $v_T$. Thus $\\Phi$ is a functor to $\\operatorname{Sh}(P_J)$. There is a natural bijection\n$$e_{X,S}:\\Phi(X)(H(S))\\xrightarrow{\\sim}X(S),\\qquad b\\longmapsto b_S(1,\\operatorname{id}_S).$$\nIts inverse sends $x\\in X(S)$ to the sheaf map whose component on a profinite $V$ sends $(a:V\\to J,b:V\\to S)$ to $a\\cdot b^*x$. Both bijections are natural in equivariant maps $X\\to Y$ and in continuous parameter maps; under $e$, postcomposition by $v$ is $v_S$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated profinite-action infrastructure; extracted from the returned presentation proof steps 5,6. Exact external non-SGA source WANTED; this is an agent-formulated auxiliary lemma, not a theorem asserted by the blueprint paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-profinite-action-parameters",
+  "lem-sfb-action-topos-geometric-restriction"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-profinite-action-finite-cover-site], every $h_T:V\\mapsto C(V,T)$ is a sheaf on $P$, including $h_J$. Pointwise multiplication makes $h_J=\\underline J$ a group sheaf, and $(a,f)\\mapsto(v\\mapsto a(v)f(v))$ makes $h_T$ an internal action: naturality, identity and associativity hold componentwise. Apply [lem-galois-yoneda-hom-bijection] on the category $P$ to the underlying presheaf of $X$. Since sheaf morphisms are precisely natural transformations [def-weil-pbc-sites-and-cohomology], evaluation identifies all underlying maps $b:h_T\\to X$ with $x=b_T(\\operatorname{id}_T)\\in X(T)$. Its inverse is $b^x_V(f)=f^*x$: naturality gives $b_V(f)=X(f)b_T(\\operatorname{id}_T)$, so these are inverse. Internal equivariance means $b_V(af)=a\\cdot b_V(f)$ for every profinite $V$, $a:V\\to J$ and $f:V\\to T$ [lem-sfb-action-topos-geometric-restriction].",
+   "uses": [
+    "lem-sfb-profinite-action-finite-cover-site",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument; representables and ordinary Yoneda, Stacks categories.tex Tag 001P (lemma-yoneda)."
+   }
+  },
+  {
+   "text": "For the map $b^x$ of step 1, equivariance implies the displayed equation by taking $V=J\\times T$, $a=\\gamma$ and $f=\\pi_T$: their pointwise action is $\\alpha_T$, hence $\\alpha_T^*x=\\gamma\\cdot\\pi_T^*x$. Conversely pull that equality back along the continuous map $(a,f):V\\to J\\times T$. Naturality of the internal action gives $(af)^*x=a\\cdot f^*x$ for every $V,a,f$, which is exactly equivariance of $b^x$. Thus the Yoneda bijection restricts to $\\Phi(X)(T)\\cong Q_X(T)$; the test is an equality of sections on $J\\times T$ itself.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument; universal-parameter equivariance test."
+   }
+  },
+  {
+   "text": "For an equivariant continuous $u:T\\to T'$, precomposition by $h_u:h_T\\to h_{T'}$ gives restriction on $\\Phi$. The two identities $u\\alpha_T=\\alpha_{T'}(\\operatorname{id}_J\\times u)$ and $u\\pi_T=\\pi_{T'}(\\operatorname{id}_J\\times u)$ show, by pulling back the equation for $x'\\in Q_X(T')$, that $u^*x'\\in Q_X(T)$. Step 1 identifies this restriction with $X(u)$. For an equivariant sheaf map $v:X\\to Y$, naturality with $\\alpha_T,\\pi_T$ and equivariance with $\\gamma$ send the equation for $x$ to that for $v_Tx$. This is postcomposition on $\\Phi$. Restrictions compose by the presheaf law; postcompositions compose by composition of sheaf maps and commute with restrictions. Hence $X\\mapsto\\Phi(X)$ is a functor to presheaves on $P_J$.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument; functoriality and the two Yoneda naturalities."
+   }
+  },
+  {
+   "text": "Let $\\{p_i:T_i\\to T\\}$ be a finite jointly surjective equivariant cover and let $x_i\\in Q_X(T_i)$ agree on $T_i\\times_TT_j$. The underlying cover and overlaps are those of $P$ by [lem-sfb-profinite-action-finite-cover-site]. The sheaf axiom [def-weil-pbc-sites-and-cohomology] for $X$ gives a unique $x\\in X(T)$ with $p_i^*x=x_i$. The maps $\\operatorname{id}_J\\times p_i:J\\times T_i\\to J\\times T$ are a finite jointly surjective cover of $P$ (a lift of $t$ lifts $(j,t)$ with the same $j$). Pulling $\\alpha_T^*x$ and $\\gamma\\cdot\\pi_T^*x$ back along these maps gives $\\alpha_{T_i}^*x_i$ and $\\gamma_i\\cdot\\pi_{T_i}^*x_i$, respectively, since each $p_i$ is equivariant. Explicitly, for $r_i=\\operatorname{id}_J\\times p_i$, one has $\\alpha_T r_i=p_i\\alpha_{T_i}$, $\\pi_T r_i=p_i\\pi_{T_i}$ and $\\gamma r_i=\\gamma_i$. Thus $r_i^*(\\alpha_T^*x)=\\alpha_{T_i}^*x_i=\\gamma_i\\cdot\\pi_{T_i}^*x_i=r_i^*(\\gamma\\cdot\\pi_T^*x)$. Injectivity of the sheaf equalizer map for the cover $\\{r_i\\}$ makes the original sections equal. Thus $x\\in Q_X(T)$, and uniqueness in $X(T)$ gives uniqueness in $Q_X(T)$. For an empty cover $T=\\varnothing$, both $X(T)$ and $X(J\\times T)$ are singletons, so the same argument applies. This proves the sheaf condition for $\\Phi(X)$, and step 3 now defines the required sheaf-valued functor.",
+   "uses": [
+    "lem-sfb-profinite-action-finite-cover-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument; explicit descent of the equation, using Stacks sites.tex Tag 00VM (definition-sheaf-sets)."
+   }
+  },
+  {
+   "text": "For $S\\in P$, use $H(S)=J\\times S$ with left translation [def-sfb-profinite-action-parameters]. Given $x\\in X(S)$, define $B^x_V(a,b)=a\\cdot b^*x$. For $r:W\\to V$, naturality of the action gives $r^*B^x_V(a,b)=(a\\circ r)\\cdot(b\\circ r)^*x=B^x_W(a\\circ r,b\\circ r)$, so this is a sheaf map $h_{H(S)}\\to X$. For every $c:V\\to J$, $B^x_V(ca,b)=(ca)\\cdot b^*x=c\\cdot(a\\cdot b^*x)=c\\cdot B^x_V(a,b)$, by associativity. It is therefore equivariant. Evaluating on $(1,\\operatorname{id}_S)$ gives $1\\cdot x=x$, by the identity axiom.",
+   "uses": [
+    "def-sfb-profinite-action-parameters",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument; construction of the inverse to free-parameter evaluation."
+   }
+  },
+  {
+   "text": "Conversely, let $B:h_{H(S)}\\to X$ be equivariant and put $x=B_S(1,\\operatorname{id}_S)$. For any $V$, $a:V\\to J$ and $b:V\\to S$, naturality along $b$ gives $B_V(1,b)=b^*x$. Since $(a,b)=a\\cdot(1,b)$ in $h_{H(S)}(V)$, equivariance gives $B_V(a,b)=a\\cdot b^*x$. Thus $B=B^x$, proving that $e_{X,S}$ and the construction of step 5 are inverse. If $v:X\\to Y$ is equivariant, then $v_V(a\\cdot b^*x)=a\\cdot b^*v_S(x)$ and evaluation of $vB$ is $v_S(x)$. If $f:S'\\to S$, precomposition by $h_{H(f)}$ sends $B^x_V(a,b)$ to $a\\cdot(fb)^*x=B^{f^*x}_V(a,b)$. Hence the free bijection is natural in both variables with the stated action on morphisms. The general $Q$ bijection has the same two naturalities by step 3.",
+   "uses": [
+    "def-sfb-profinite-action-parameters",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument; both inverse identities and explicit naturality formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-profinite-action-finite-cover-site",
+  "lem-galois-yoneda-hom-bijection",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-action-topos-geometric-restriction",
+  "def-sfb-profinite-action-parameters"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary profinite-action infrastructure; explicit Yoneda, descent and free-action calculations. External exact non-SGA reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivariant|free.*action|action.*free",
+   "results": {
+    "t": "2026-10-22T06:03:22Z",
+    "tool": "grep",
+    "query": "equivariant|free.*action|action.*free",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Cyclotomic/Basic.lean",
+     "Mathlib/NumberTheory/Cyclotomic/Basic.lean",
+     "Mathlib/Algebra/Algebra/NonUnitalHom.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean",
+     "Mathlib/Algebra/Lie/TensorProduct.lean"
+    ],
+    "digest": "091017acfcc5fe6e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Yoneda, free representations and light condensed internal Hom do not state the universal equivariance equation or the free profinite-action evaluation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant maps from the free group object times a profinite parameter to a condensed action are its parameter sections",
+   "results": {
+    "t": "2026-10-22T06:03:22Z",
+    "tool": "leansearch",
+    "query": "Equivariant maps from the free group object times a profinite parameter to a condensed action are its parameter sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MulActionHom.prodMap",
+     "LightCondensed.ihomPoints",
+     "Action.HomSubtype",
+     "AddActionHom.ofEq",
+     "SheafOfModules.freeHomEquiv",
+     "profiniteToCondensed",
+     "LightCondensed.ihomPoints_symm_comp",
+     "Rep.freeLiftLEquiv"
+    ],
+    "digest": "1794147bf88c8428"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Yoneda, free representations and light condensed internal Hom do not state the universal equivariance equation or the free profinite-action evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Action, yoneda",
+   "results": {
+    "t": "2026-10-22T06:03:23Z",
+    "tool": "loogle",
+    "query": "Action, yoneda",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'yoneda'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: loogle: unknown identifier 'yoneda'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant Yoneda sections of a condensed group action form a sheaf on profinite group spaces and free translation objects evaluate to underlying sections",
+   "results": {
+    "t": "2026-10-22T06:03:23Z",
+    "tool": "leansearch",
+    "query": "Equivariant Yoneda sections of a condensed group action form a sheaf on profinite group spaces and free translation objects evaluate to underlying sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.freeYoneda",
+     "CategoryTheory.Limits.compYonedaSectionsEquiv",
+     "CategoryTheory.GrothendieckTopology.yonedaEquiv_apply",
+     "CategoryTheory.Sheaf.ΓObjEquivSections",
+     "Condensed.lanSheafProfinite",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+     "PresheafOfModules.freeYonedaEquiv",
+     "CategoryTheory.typeEquiv"
+    ],
+    "digest": "2e532a91b1e3033c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Yoneda, free representations and light condensed internal Hom do not state the universal equivariance equation or the free profinite-action evaluation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant Yoneda sections of a condensed group action form a sheaf on profinite group spaces and free translation objects evaluate to underlying sections",
+   "results": {
+    "t": "2026-10-22T06:03:33Z",
+    "tool": "leanfinder",
+    "query": "Equivariant Yoneda sections of a condensed group action form a sheaf on profinite group spaces and free translation objects evaluate to underlying sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.underlying_obj",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.underlying_map",
+     "Condensed.freeAb",
+     "Condensed.locallyConstantIsoFinYoneda_hom_app",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondAb.ofSheafLightProfinite"
+    ],
+    "digest": "ae3fc456c615699d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Yoneda, free representations and light condensed internal Hom do not state the universal equivariance equation or the free profinite-action evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]ction|equivariant",
+   "results": {
+    "t": "2026-10-22T06:04:52Z",
+    "tool": "grep",
+    "query": "[Aa]ction|equivariant",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/Sequence.lean"
+    ],
+    "digest": "6ced45b36b6544c7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Yoneda, free representations and light condensed internal Hom do not state the universal equivariance equation or the free profinite-action evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Action\"",
+   "results": {
+    "t": "2026-10-22T06:04:53Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Action\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Yoneda, free representations and light condensed internal Hom do not state the universal equivariance equation or the free profinite-action evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Action\"",
+   "results": {
+    "t": "2026-10-22T06:04:53Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Action\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Yoneda, free representations and light condensed internal Hom do not state the universal equivariance equation or the free profinite-action evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda|equivariant|freeAction",
+   "results": {
+    "t": "2026-10-22T13:43:01Z",
+    "tool": "grep",
+    "query": "yoneda|equivariant|freeAction",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean"
+    ],
+    "digest": "6e2b138d41b4b3c8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide ordinary Yoneda, light condensed module internal Hom, free modules or global sections; none states universal internal-action equivariance, sheaf descent on P_J and free profinite-action evaluation together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda for sheaves with a profinite internal group action: equivariance is equality over the whole group times parameter, and free action evaluation",
+   "results": {
+    "t": "2026-10-22T13:43:01Z",
+    "tool": "leansearch",
+    "query": "Yoneda for sheaves with a profinite internal group action: equivariance is equality over the whole group times parameter, and free action evaluation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.IsCoverDense.sheafYonedaHom",
+     "CategoryTheory.GrothendieckTopology.yonedaEquiv",
+     "CategoryTheory.GrothendieckTopology.map_yonedaEquiv",
+     "CategoryTheory.GrothendieckTopology.yonedaEquiv_apply",
+     "CategoryTheory.GrothendieckTopology.yonedaEquiv_naturality'",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+     "CategoryTheory.Sheaf.freeYoneda",
+     "CategoryTheory.GrothendieckTopology.yonedaEquiv_symm_map"
+    ],
+    "digest": "94a14846c223736a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide ordinary Yoneda, light condensed module internal Hom, free modules or global sections; none states universal internal-action equivariance, sheaf descent on P_J and free profinite-action evaluation together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Action\", \"yoneda\"",
+   "results": {
+    "t": "2026-10-22T13:43:01Z",
+    "tool": "loogle",
+    "query": "\"Action\", \"yoneda\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide ordinary Yoneda, light condensed module internal Hom, free modules or global sections; none states universal internal-action equivariance, sheaf descent on P_J and free profinite-action evaluation together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"free\"",
+   "results": {
+    "t": "2026-10-22T13:43:02Z",
+    "tool": "loogle",
+    "query": "\"Mod\", \"free\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Module.IsTorsionFree",
+     "Module.isTorsionFree_nat_iff_hasUniqueDiv",
+     "Module.isTorsionFree_nat_iff_isAddTorsionFree",
+     "Subsingleton.to_moduleIsTorsionFree",
+     "Module.isTorsionFree_int_iff_hasUniqueDiv",
+     "Module.isTorsionFree_int_iff_isAddTorsionFree",
+     "Module.IsTorsionFree.isSMulRegular",
+     "Module.IsTorsionFree.mk"
+    ],
+    "digest": "024fd22cb7f05553"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide ordinary Yoneda, light condensed module internal Hom, free modules or global sections; none states universal internal-action equivariance, sheaf descent on P_J and free profinite-action evaluation together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant maps from a representable profinite group action to an internal condensed action are sections satisfying the action equation, and maps out of the free action evaluate to sections",
+   "results": {
+    "t": "2026-10-22T13:43:04Z",
+    "tool": "leanfinder",
+    "query": "Equivariant maps from a representable profinite group action to an internal condensed action are sections satisfying the action equation, and maps out of the free action evaluate to sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "Condensed.profiniteFree",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihomPoints_symm_comp",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul",
+     "CategoryTheory.Functor.mapContActionCongr",
+     "LightCondensed.ihom_map_val_app"
+    ],
+    "digest": "699dfeb3be6a6cd0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide ordinary Yoneda, light condensed module internal Hom, free modules or global sections; none states universal internal-action equivariance, sheaf descent on P_J and free profinite-action evaluation together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from G times a representable sheaf into a G object in a sheaf topos correspond naturally to sections of the underlying sheaf",
+   "results": {
+    "t": "2026-10-22T13:43:05Z",
+    "tool": "leanfinder",
+    "query": "Morphisms from G times a representable sheaf into a G object in a sheaf topos correspond naturally to sections of the underlying sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.sheafHomSectionsEquiv",
+     "CategoryTheory.Sheaf.ΓObjEquivHom",
+     "CategoryTheory.Sheaf.ΓHomEquiv",
+     "SheafOfModules.unitHomEquiv",
+     "CategoryTheory.Sheaf.ΓObjEquivSections",
+     "CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm",
+     "CategoryTheory.Sheaf.ΓObjEquivSections_naturality",
+     "CategoryTheory.Sheaf.ΓObjEquivHom_naturality"
+    ],
+    "digest": "df147586d425070e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide ordinary Yoneda, light condensed module internal Hom, free modules or global sections; none states universal internal-action equivariance, sheaf descent on P_J and free profinite-action evaluation together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-coherent-presentation",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), quasi-compact open direct image: coherent action-space presentation needed for filtered passage in the internal derived-invariant input. Re-split of the auxiliary presentation: returned proof steps 5,6.",
+   "via": [
+    "lem-sfb-profinite-action-coherent-presentation",
+    "lem-sfb-profinite-invariants-filtered-continuity",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-action-yoneda-free-evaluation",
+  "worker": "stage1",
+  "summary": "Repair of returned head c83278cbbf4 after side-completion promotion failure: compared the retained split with the current unsplit DAG node, reread every current statement and proof dependency, and expanded step 4 with all three pullback identities and the resulting equality on the covering parameters. Retained all six arguments, exact statement, citations and recorded searches; no new nodes. Delivery is rebuilt on current origin/sheaf-dag by deliver.py.",
+  "blueprint": "Paragraph (3) of current direct-images proof: action-space infrastructure extracted from coherent-presentation steps 5,6. The ancestor command returns None, retained as inherited; same_as searched globally and empty.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-action-topos-geometric-restriction",
+    "why": "Only the statement defining internal actions and equivariant sheaf maps is used; no geometric-restriction theorem or alternative unit route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-action-topos-geometric-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-ad83859fc",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-ad83859fc (reviewer sub-agent of L); spot-checked: I read the whole item. This is a re-push of head c83278cbbf44, which passed review but could not be promoted at landing. The commit changes only the item JSON and the report: 0 new nodes, 0 new leaves, and the statement and stmt_deps are unchanged. Live and side-live still show the item as unsplit, and there is no repair note, so no other group has taken it over. Compared with the prior head, only step 4 and split_report changed. Steps 1-3, 5 and 6, the uses and proof_deps are identical. The step-4 change is real, not an identical re-push, and I checked it: with r_i = id_J×p_i, α_T r_i = p_i α_{T_i} follows from p_i being equivariant, and π_T r_i = p_i π_{T_i} and γ r_i = γ_i hold trivially. Naturality of the action then gives r_i^*α_T^*x = α_{T_i}^*x_i = γ_i·π_{T_i}^*x_i = r_i^*(γ·π_T^*x). Separatedness of X on the finite jointly surjective cover {r_i} of J×T in P proves the equation, and the empty cover works because X(∅) is a single point. I re-read all five cited statements. finite-cover-site gives continuous-map sheafiness on P, so h_T and h_J are sheaves (J is profinite). The Yoneda leaf has both naturalities. pbc-sites gives the sheaf axiom and that sheaf maps are natural transformations. Only the K-object definition paragraph of action-topos is used, which is the declared tool_use and is accepted. The parameters node gives H(S)=J×S with left translation and H(f)=id×f. Steps 2, 3, 5 and 6 are correct: the universal-parameter equation and its pull-back along (a,f), the functoriality identities, and B=B^x via (a,b)=a·(1,b) with both naturalities. I checked the cases J=1, empty S or T, X=h_U and non-abelian J. There is no cycle and no duplicate, no SGA reference, and the proof is agent-origin with the blueprint direct-images paragraph (3) as the recorded source. Maintainer note: this is the second push of a PASSed split, after a side-completion promotion failure."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteActionYonedaFreeEvaluation",
+  "declaration": "Profinite.CondensedAction.YonedaFreeEvaluation.profiniteAction_yoneda_free_evaluation",
+  "declarations": [
+   "Profinite.CondensedAction.YonedaFreeEvaluation.base",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.productParameter",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.actionMap",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.secondProjection",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.groupProjection",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.IsEquivariantSection",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.phiPresheaves",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.phi",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.component",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.identityEvaluation",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.unitParameter",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.freeEvaluation",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.pairedParameter",
+   "Profinite.CondensedAction.YonedaFreeEvaluation.profiniteAction_yoneda_free_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteActionYonedaFreeEvaluation.lean",
+  "statement": "theorem profiniteAction_yoneda_free_evaluation : ∃ (h : Space J ⥤ Actions J) (hs : ∀ T : Space J, (h.obj T).X.obj ≅ yoneda.obj (base J T)), (∀ (T V : Space J) (f : T ⟶ V), (h.map f).hom.hom ≫ (hs V).hom = (hs T).hom ≫ yoneda.map (AsSmall.up.map ((underlying J).map f))) ∧ (∀ (T : Space J) (S : Base.{u}ᵒᵖ) (a : (groupPresheaf J).obj S) (x : (h.obj T).X.obj.obj S) (s : parameter S.unop), ((hs T).hom.app S (InternalActionSite.setAction _ _ _ (h.obj T) S a x)).down s = ((AsSmall.down.obj T).obj.ρ (a.down s)).hom.hom (((hs T).hom.app S x).down s)) ∧ (∀ X : Actions J, Presheaf.IsSheaf (coverage J).toGrothendieck ((phiPresheaves J h).obj X)) ∧ (∃ q : ∀ (X : Actions J) (T : Space J), (h.obj T ⟶ X) ≃ {x : X.X.obj.obj (op (base J T)) // IsEquivariantSection J X T x}, (∀ (X : Actions J) (T : Space J) (b : h.obj T ⟶ X), (q X T b).val = identityEvaluation h hs X T b) ∧ (∀ (X : Actions J) (T V : Space J) (f : T ⟶ V) (b : h.obj V ⟶ X), (q X T (h.map f ≫ b)).val = X.X.obj.map (AsSmall.up.map ((underlying J).map f)).op (q X V b).val) ∧ (∀ (X Y : Actions J) (v : X ⟶ Y) (T : Space J) (b : h.obj T ⟶ X), (q Y T (b ≫ v)).val = v.hom.hom.app (op (base J T)) (q X T b).val)) ∧ (∃ e : ∀ (X : Actions J) (S : Base.{u}), (h.obj ((freeParameter J).obj S) ⟶ X) ≃ X.X.obj.obj (op S), (∀ (X : Actions J) (S : Base.{u}) (b : h.obj ((freeParameter J).obj S) ⟶ X), e X S b = freeEvaluation h hs X S b) ∧ (∀ (X : Actions J) (S V : Base.{u}) (x : X.X.obj.obj (op S)) (a : (groupPresheaf J).obj (op V)) (b : V ⟶ S), component h hs ((freeParameter J).obj S) X ((e X S).symm x) V (pairedParameter S V a b) = InternalActionSite.setAction _ _ _ X (op V) a (X.X.obj.map b.op x)) ∧ (∀ (X Y : Actions J) (v : X ⟶ Y) (S : Base.{u}) (b : h.obj ((freeParameter J).obj S) ⟶ X), e Y S (b ≫ v) = v.hom.hom.app (op S) (e X S b)) ∧ (∀ (X : Actions J) (S V : Base.{u}) (f : S ⟶ V) (b : h.obj ((freeParameter J).obj V) ⟶ X), e X S (h.map ((freeParameter J).map f) ≫ b) = X.X.obj.map f.op (e X V b)))",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already published small profinite-site models and internal-action definitions; does not use the coherent-presentation equivalence or its existence theorem. Specifies the represented action functor by its underlying Yoneda presheaves, actual induced actions and maps. States descent, identity evaluation onto the universal-parameter equation, both naturalities and the explicit inverse to free evaluation. The helper phi constructs the actual sheaf-valued functor from the asserted descent proof, without any choice."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0a1255ab",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses are exactly the six the node gives; no universe restriction. h is existential but its sections, maps and pointwise action are fixed; the only freedom is a central-element relabelling that moves every clause with it. The section equation is over the whole of J×T. q is fixed to evaluation at the identity, with restriction X(u) and postcomposition v_T. e is fixed to evaluation at (1,id_S); the inverse a·b*x holds on every profinite V; both naturalities are stated. Φ(X) is a sheaf for every X, and phi is a real lift. Edge cases checked: trivial J, empty S or T, empty cover, non-abelian J. The node changes only lean, the statement is verbatim, dependency nodes are unchanged, the only sorry is in the theorem with a 6-step docstring, docstrings give source and blueprint, no duplicate in Mathlib or the project. Advisory for the maintainer: Base/Actions/groupPresheaf are owned by def-sfb-profinite-action-base-coefficients, which is not cited; Space/underlying/coverage/freeParameter are owned only by the parent theorem lem-sfb-profinite-action-coherent-presentation, whose proof uses this item, so citing it is a cycle. The delivery adds no dependencies, so this is advisory as in Q85: extend the def node and cite it. The parent's proof cannot import this module (stage-3 import cycle); the worker listed this as the rules require. No change made, no compile run."
+ }
+}

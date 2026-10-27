@@ -1,0 +1,230 @@
+{
+ "id": "lem-weil-boundary-iterated-counit-normal-form",
+ "kind": "statement",
+ "title": "Two normalized relative counits have an explicit iterated normal form",
+ "statement": "Let $\\mathcal C_X,\\mathcal C_Y,\\mathcal C_B,\\mathcal D_X,\\mathcal D_Y,\\mathcal D_B$ be categories [def-nagata-category]. Composition is functional, $VU=V\\circ U$. Functors preserve identities and composition; natural transformations are families of morphisms with commuting naturality squares, and natural isomorphisms have invertible components. Fix functors $F_f:\\mathcal C_X\\to\\mathcal C_Y$, $R_f:\\mathcal C_Y\\to\\mathcal C_X$, $F_g:\\mathcal C_Y\\to\\mathcal C_B$, $R_g:\\mathcal C_B\\to\\mathcal C_Y$, $P_f:\\mathcal D_X\\to\\mathcal D_Y$, $Q_f:\\mathcal D_Y\\to\\mathcal D_X$, $P_g:\\mathcal D_Y\\to\\mathcal D_B$, $Q_g:\\mathcal D_B\\to\\mathcal D_Y$, and $S_i:\\mathcal C_i\\to\\mathcal D_i$. Let $B_f:S_YF_f\\xrightarrow{\\sim}P_fS_X$ and $B_g:S_BF_g\\xrightarrow{\\sim}P_gS_Y$ be natural isomorphisms. Fix $H\\in\\mathcal C_B$, $K\\in\\mathcal C_X$, put $L=R_fR_gH$, and choose morphisms\n$$t:K\\to L,\\quad e_f:F_fL\\to R_gH,\\quad e_g:F_gR_gH\\to H,$$\n$$r:S_YR_gH\\to Q_gS_BH,\\quad b:S_XL\\to Q_fS_YR_gH,$$\n$$m_g:P_gQ_gS_BH\\to S_BH,\\quad m_0:P_fQ_fS_YR_gH\\to S_YR_gH,\\quad m_1:P_fQ_fQ_gS_BH\\to Q_gS_BH.$$\nAssume exactly the three equations\n$$m_g\\circ P_g(r)\\circ B_{g,R_gH}=S_B(e_g),\\qquad m_0\\circ P_f(b)\\circ B_{f,L}=S_Y(e_f),$$\n$$m_1\\circ P_fQ_f(r)=r\\circ m_0.$$\nThen the following equality holds as maps $P_gP_fS_XK\\to S_BH$:\n$$m_g\\circ P_g(m_1)\\circ P_gP_f\\bigl(Q_f(r)\\circ b\\circ S_X(t)\\bigr)=S_B\\bigl(e_g\\circ F_g(e_f)\\circ F_gF_f(t)\\bigr)\\circ B_{g,F_fK}^{-1}\\circ P_g(B_{f,K}^{-1}).$$\nThere is no invertibility assumption on $t,r,b$, no adjunction assumption on $P_h,Q_h$, and no naturality assumption on the chosen $m$ beyond the displayed square. Canonical functor associators are understood.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent-formulated categorical calculation supporting Corollary 5.1.6; lem-weil-boundary-comparison-composition-transport, returned proof steps 5–7. The corollary supplies the geometric comparison unit, not this formal identity."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $A$ for the left-hand composite. Expand the image of the three factors using functoriality. Inside $P_g$ the first two consecutive maps are $m_1\\circ P_fQ_f(r)$; the third assumed equation replaces these by $r\\circ m_0$. Associativity [def-nagata-category] therefore gives\n$$A=m_g\\circ P_g(r)\\circ P_g(m_0)\\circ P_gP_f(b)\\circ P_gP_fS_X(t).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tags 0014 (definition-category), 001B (definition-functor), 001I (definition-transformation-functors): agent-written component calculation from the three assumed squares, functoriality and naturality."
+   }
+  },
+  {
+   "text": "Precompose both sides of the second assumed equation by $B_{f,L}^{-1}$ and cancel $B_{f,L}\\circ B_{f,L}^{-1}=\\mathrm{id}$, using the category laws [def-nagata-category]. Thus $m_0\\circ P_f(b)=S_Y(e_f)\\circ B_{f,L}^{-1}$. Apply $P_g$ and substitute into step 1:\n$$A=m_g\\circ P_g(r)\\circ P_gS_Y(e_f)\\circ P_g(B_{f,L}^{-1})\\circ P_gP_fS_X(t).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tags 0014 (definition-category), 001B (definition-functor), 001I (definition-transformation-functors): agent-written component calculation from the three assumed squares, functoriality and naturality."
+   }
+  },
+  {
+   "text": "Precompose both sides of the first assumed equation by $B_{g,R_gH}^{-1}$ and cancel its inverse pair [def-nagata-category]. This gives $m_g\\circ P_g(r)=S_B(e_g)\\circ B_{g,R_gH}^{-1}$, so\n$$A=S_B(e_g)\\circ B_{g,R_gH}^{-1}\\circ P_gS_Y(e_f)\\circ P_g(B_{f,L}^{-1})\\circ P_gP_fS_X(t).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tags 0014 (definition-category), 001B (definition-functor), 001I (definition-transformation-functors): agent-written component calculation from the three assumed squares, functoriality and naturality."
+   }
+  },
+  {
+   "text": "Naturality of $B_g$ at $e_f:F_fL\\to R_gH$ says $P_gS_Y(e_f)\\circ B_{g,F_fL}=B_{g,R_gH}\\circ S_BF_g(e_f)$. Multiply by the indicated component inverses on the left and right and cancel [def-nagata-category]. Hence $B_{g,R_gH}^{-1}\\circ P_gS_Y(e_f)=S_BF_g(e_f)\\circ B_{g,F_fL}^{-1}$. Substitute and combine the first two $S_B$ images:\n$$A=S_B(e_g\\circ F_g(e_f))\\circ B_{g,F_fL}^{-1}\\circ P_g(B_{f,L}^{-1})\\circ P_gP_fS_X(t).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tags 0014 (definition-category), 001B (definition-functor), 001I (definition-transformation-functors): agent-written component calculation from the three assumed squares, functoriality and naturality."
+   }
+  },
+  {
+   "text": "Naturality of $B_f$ at $t:K\\to L$ gives $P_fS_X(t)\\circ B_{f,K}=B_{f,L}\\circ S_YF_f(t)$. Multiply by $B_{f,L}^{-1}$ on the left and $B_{f,K}^{-1}$ on the right and cancel [def-nagata-category]. Apply $P_g$ to the resulting equality $B_{f,L}^{-1}\\circ P_fS_X(t)=S_YF_f(t)\\circ B_{f,K}^{-1}$ and substitute:\n$$A=S_B(e_g\\circ F_g(e_f))\\circ B_{g,F_fL}^{-1}\\circ P_gS_YF_f(t)\\circ P_g(B_{f,K}^{-1}).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tags 0014 (definition-category), 001B (definition-functor), 001I (definition-transformation-functors): agent-written component calculation from the three assumed squares, functoriality and naturality."
+   }
+  },
+  {
+   "text": "Naturality of $B_g$ at $F_f(t):F_fK\\to F_fL$ says $P_gS_YF_f(t)\\circ B_{g,F_fK}=B_{g,F_fL}\\circ S_BF_gF_f(t)$. Compose on the left with $B_{g,F_fL}^{-1}$ and on the right with $B_{g,F_fK}^{-1}$, and cancel the inverse pairs [def-nagata-category]:\n$$B_{g,F_fL}^{-1}\\circ P_gS_YF_f(t)=S_BF_gF_f(t)\\circ B_{g,F_fK}^{-1}.$$\nSubstitute into step 5 and combine $S_B$ images by functoriality. This gives exactly\n$$A=S_B(e_g\\circ F_g(e_f)\\circ F_gF_f(t))\\circ B_{g,F_fK}^{-1}\\circ P_g(B_{f,K}^{-1}).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tags 0014 (definition-category), 001B (definition-functor), 001I (definition-transformation-functors): agent-written component calculation from the three assumed squares, functoriality and naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Stacks Tags 0014 (definition-category), 001B (definition-functor), 001I (definition-transformation-functors): agent-written component calculation from the three assumed squares, functoriality and naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comp_counit|counit_naturality|conjugateEquiv_counit",
+   "results": "Mathlib/Condensed/Discrete/Module.lean:128:       ← (discreteUnderlyingAdj (ModuleCat R)).counit_naturality]; Mathlib/Condensed/Discrete/Module.lean:245:       ← (discreteUnderlyingAdj (ModuleCat R)).counit_naturality]; Mathlib/CategoryTheory/Shift/Adjunction.lean:269:     rw [comp_counit]; Mathlib/CategoryTheory/Shift/Adjunction.lean:353:     comp_counit_app, Equivalence.toAdjunction_counit, Equivalence.Equivalence_mk'_counit,; Mathlib/CategoryTheory/Shift/Adjunction.lean:370:   simp only [comp_id, homEquiv_counit, Functor.map_comp, assoc, counit_naturality,; Mathlib/CategoryTheory/Shift/Adjunction.lean:371:     counit_naturality_assoc, left_triangle_components_assoc]; Mathlib/AlgebraicGeometry/ColimitsOver.lean:137:       Adjunction.counit_naturality, cocone_ι_transitionMap]; Mathlib/CategoryTheory/Triangulated/Adjunction.lean:73:         homEquiv_unit, counit_naturality, counit_naturality_assoc, left_triangle_components_assoc,; Mathlib/CategoryTheory/Triangulated/Adjunction.lean:126:         counit_naturality, left_triangle_components_assoc, h₁, id_comp]; Mathlib/CategoryTheory/Limits/VanKampen.lean:289:     simp only [Category.comp_id, Adjunction.counit_naturality_assoc, Category.id_comp,; Mathlib/CategoryTheory/Limits/VanKampen.lean:290:       Adjunction.counit_naturality, Category.assoc, Functor.map_comp]; Mathlib/CategoryTheory/Limits/VanKampen.lean:309:         rw [adj.counit_naturality, ← Category.assoc, Gr.map_comp_assoc]; Mathlib/CategoryTheory/Limits/VanKampen.lean:323:         simp only [IsIso.comp_inv_eq, adj.counit_naturality, Category.comp_id]; Mathlib/CategoryTheory/Limits/VanKampen.lean:379:     simp only [Category.comp_id, Adjunction.counit_naturality_assoc, Category.id_comp,; Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean:210:     rw [Category.assoc, ← Adjunction.counit_naturality, ← Category.assoc, ← F.map_comp, hf']; Mathlib/CategoryTheory/Adjunction/Unique.lean:67:   rw [← adj1.counit_naturality, ← Category.assoc, ← F.map_comp]; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean:83:     IsColimit (Cofork.ofπ (adj₁.counit.app X) (adj₁.counit_naturality _)) :=; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean:88:       rw [← adj₁.counit_naturality_assoc (h X).left]; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean:91:         F.map_comp_assoc, s.condition, ← adj₁.counit_naturality_assoc (h X).right]; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean:149:         otherMap, assoc, adj₂.homEquiv_naturality_left, ← adj₂.counit_naturality,; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean:153:       rw [← adj₁.counit_naturality]; Mathlib/CategoryTheory/Adjunction/Triple.lean:219:   refine Eq.trans ?_ (t.adj₁.counit_naturality <| (whiskerRight t.adj₁.unit H).app X); Mathlib/CategoryTheory/Adjunction/Triple.lean:221:       (t.adj₂.counit_naturality (t.adj₁.unit.app X)),; Mathlib/CategoryTheory/Adjunction/Basic.lean:580: lemma comp_counit_app (X : E) : dsimp%; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean:87:   id := by simp [← h.counit_naturality (R.preimage (h.unit.app (R.obj X)))]",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary composite-adjunction counits and single naturality squares do not state the three-square relative-counit normal form with two comparison isomorphisms and arbitrary t,r,b; it requires the separate calculation preserved in the report."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Push a morphism through two normalized counit comparison squares using naturality of the comparison and of the relative counit",
+   "results": "CategoryTheory.Adjunction.counit_naturality (Mathlib/CategoryTheory/Adjunction/Basic); CategoryTheory.Adjunction.counit_naturality_assoc (Mathlib/CategoryTheory/Adjunction/Basic); CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app (Mathlib/CategoryTheory/Adjunction/Triple); CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app (Mathlib/CategoryTheory/Adjunction/Triple); CategoryTheory.Adjunction.comp_counit_app (Mathlib/CategoryTheory/Adjunction/Basic); CategoryTheory.Equivalence.counit_naturality_assoc (Mathlib/CategoryTheory/Equivalence); CategoryTheory.ParametrizedAdjunction.whiskerLeft_map_counit (Mathlib/CategoryTheory/Adjunction/Parametrized); CategoryTheory.Adjunction.comp_counit (Mathlib/CategoryTheory/Adjunction/Basic)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary composite-adjunction counits and single naturality squares do not state the three-square relative-counit normal form with two comparison isomorphisms and arbitrary t,r,b; it requires the separate calculation preserved in the report."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An iterated relative counit transported by two natural comparison isomorphisms equals the image of the composite counit after inverse comparison factors",
+   "results": "AlgebraicTopology.DoldKan.Compatibility.τ₀_hom_app (Mathlib/AlgebraicTopology/DoldKan/Compatibility); CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app (Mathlib/CategoryTheory/Adjunction/Triple); CategoryTheory.Equivalence.congrRight_counitIso_hom_app (Mathlib/CategoryTheory/Equivalence); CategoryTheory.Adjunction.counitAsIsoOfIso (Mathlib/CategoryTheory/Monad/Adjunction); CategoryTheory.Adjunction.comp_counit (Mathlib/CategoryTheory/Adjunction/Basic); CategoryTheory.Adjunction.comp_counit_app (Mathlib/CategoryTheory/Adjunction/Basic); CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app (Mathlib/CategoryTheory/Adjunction/Triple); CategoryTheory.Equivalence.trans_counitIso (Mathlib/CategoryTheory/Equivalence)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary composite-adjunction counits and single naturality squares do not state the three-square relative-counit normal form with two comparison isomorphisms and arbitrary t,r,b; it requires the separate calculation preserved in the report."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of two comparison isomorphisms and relative counits rewrites a double counit evaluated on an arbitrary morphism into the original composite counit",
+   "results": "CategoryTheory.Adjunction.counit_naturality_assoc (Mathlib.CategoryTheory.Adjunction.Basic); CategoryTheory.Adjunction.counit_naturality (Mathlib.CategoryTheory.Adjunction.Basic); CategoryTheory.Adjunction.rightAdjointUniq_hom_counit (Mathlib.CategoryTheory.Adjunction.Unique); CategoryTheory.Equivalence.counit_naturality_assoc (Mathlib.CategoryTheory.Equivalence); CategoryTheory.Equivalence.counit_naturality (Mathlib.CategoryTheory.Equivalence); CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc (Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism); CategoryTheory.Comonad.comparisonForget (Mathlib.CategoryTheory.Monad.Adjunction); CategoryTheory.Equivalence.counitInv_naturality_assoc (Mathlib.CategoryTheory.Equivalence)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary composite-adjunction counits and single naturality squares do not state the three-square relative-counit normal form with two comparison isomorphisms and arbitrary t,r,b; it requires the separate calculation preserved in the report."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"comp\"",
+   "results": "CategoryTheory.Equivalence.counitInv_functor_comp (Mathlib.CategoryTheory.Equivalence); CategoryTheory.Equivalence.inverse_counitInv_comp (Mathlib.CategoryTheory.Equivalence); CategoryTheory.Equivalence.counitInv_functor_comp_assoc (Mathlib.CategoryTheory.Equivalence); CategoryTheory.Equivalence.inverse_counitInv_comp_assoc (Mathlib.CategoryTheory.Equivalence); CategoryTheory.Adjunction.comp_counit_app (Mathlib.CategoryTheory.Adjunction.Basic); CategoryTheory.Adjunction.comp_counit_app_assoc (Mathlib.CategoryTheory.Adjunction.Basic); CategoryTheory.Adjunction.comp_counit (Mathlib.CategoryTheory.Adjunction.Basic); CategoryTheory.Limits.Cone.postcomposeEquivalence_counitIso (Mathlib.CategoryTheory.Limits.Cones); CategoryTheory.Limits.Cocone.precomposeEquivalence_counitIso (Mathlib.CategoryTheory.Limits.Cones); CategoryTheory.Adjunction.map_ε_comp_counit_app_unit (Mathlib.CategoryTheory.Monoidal.Functor); CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc (Mathlib.CategoryTheory.Monoidal.Functor); CategoryTheory.Equivalence.functor_map_ε_inverse_comp_counit_app (Mathlib.CategoryTheory.Monoidal.Functor)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary composite-adjunction counits and single naturality squares do not state the three-square relative-counit normal form with two comparison isomorphisms and arbitrary t,r,b; it requires the separate calculation preserved in the report."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit|counit_naturality|naturality.*inv",
+   "results": "Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; 25 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: composite-adjunction counit formulas require adjunctions; CatCommSq formulas describe pasted comparison isomorphisms, not arbitrary relative-square morphisms. Naturality and functoriality provide individual rewrites, not this whole identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasting two counit comparison squares using naturality of invertible functor comparisons yields the transported composite counit",
+   "results": "CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Comonad.transport; CategoryTheory.Equivalence.counit_naturality_assoc; CategoryTheory.Equivalence.counit_naturality; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Adjunction.CoreUnitCounit.counit; CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit; 8 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: composite-adjunction counit formulas require adjunctions; CatCommSq formulas describe pasted comparison isomorphisms, not arbitrary relative-square morphisms. Naturality and functoriality provide individual rewrites, not this whole identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.map_comp",
+   "results": "No hits; 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: composite-adjunction counit formulas require adjunctions; CatCommSq formulas describe pasted comparison isomorphisms, not arbitrary relative-square morphisms. Naturality and functoriality provide individual rewrites, not this whole identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two normalized relative counits and natural comparison isomorphisms give the image of a composite counit on an arbitrary morphism",
+   "results": "CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app; CategoryTheory.Adjunction.Triple.rightToLeft_eq_counits; CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit; CategoryTheory.conjugateEquiv_counit; CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app; 8 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: composite-adjunction counit formulas require adjunctions; CatCommSq formulas describe pasted comparison isomorphisms, not arbitrary relative-square morphisms. Naturality and functoriality provide individual rewrites, not this whole identity."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit|counit_naturality",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; 14 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: composite-adjunction counit formulas require adjunctions; CatCommSq formulas describe pasted comparison isomorphisms, not arbitrary relative-square morphisms. Naturality and functoriality provide individual rewrites, not this whole identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comp_counit\"",
+   "results": "CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc; CategoryTheory.Equivalence.functor_map_ε_inverse_comp_counit_app; CategoryTheory.Equivalence.functor_map_ε_inverse_comp_counitIso_hom_app; CategoryTheory.Equivalence.functor_map_ε_inverse_comp_counit_app_assoc; 12 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: composite-adjunction counit formulas require adjunctions; CatCommSq formulas describe pasted comparison isomorphisms, not arbitrary relative-square morphisms. Naturality and functoriality provide individual rewrites, not this whole identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram chase with two invertible natural transformations and three commuting squares rewrites a composite of functor images",
+   "results": "CategoryTheory.CatCommSq.iso; CategoryTheory.CatCommSq.vComp_iso_inv_app; CategoryTheory.CatCommSq.hComp_iso_hom_app; CategoryTheory.CatCommSq.vComp_iso_hom_app; CategoryTheory.CatCommSq.hComp_iso_inv_app; CategoryTheory.CatCommSq.hInv; CategoryTheory.CatCommSq.vInv; CategoryTheory.CatCommSq.iso_inv_naturality_assoc; 8 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: composite-adjunction counit formulas require adjunctions; CatCommSq formulas describe pasted comparison isomorphisms, not arbitrary relative-square morphisms. Naturality and functoriality provide individual rewrites, not this whole identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-comparison-composition-transport",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "First proof paragraph of cor-weil-boundary-duality-discharge: the independently formal costalk comparison, with the structure-map dualizing-object identification made precise by lem-weil-boundary-dualizing-composition, steps 6–7 (site-comparison transport of the composition mate and counits). Extracted argument: returned steps 5–7, relative-counit square and three inverse-naturality substitutions.",
+   "via": [
+    "lem-weil-boundary-comparison-composition-transport",
+    "lem-weil-boundary-dualizing-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-boundary-iterated-counit-normal-form",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Return repair compared the retained split with returned head 86a63722c74 and the current DAG; the sole cited category node is unchanged and was re-read. Six elementary rewrites use only the three assumed equations, functoriality, component inverses and naturality. Corrected precomposition terminology in steps 2–3 and wrote the last naturality square before cancellation in step 6. No new nodes; no adjunction or invertibility of t,r,b is used.",
+  "blueprint": "First paragraph of cor-weil-boundary-duality-discharge, independently formal costalk comparison, via lem-weil-boundary-dualizing-composition and lem-weil-boundary-comparison-composition-transport: completes the latter returned steps 5–7 by the relative-counit square and the three inverse-naturality substitutions."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-d29f3ab9d",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-d29f3ab9d (reviewer sub-agent of L); spot-checked: Second delivery. The first head, 86a63722, passed review, but the landing refused it as 'side completion never promoted; L promotes it' (side-live returns/Q08.md:47). That refusal is about L-owned promotion, not about the mathematics. The item is still unsplit in live and side-live. It has no repair note and is not a re-split item. Delta against 86a6: only proof steps 2, 3 and 6 and split_report changed. Statement, stmt_deps, proof_deps, source, blueprint and searches are byte-identical. Steps 2 and 3 now say 'precompose' (X∘B⁻¹), which is correct. Step 6 writes out the naturality square of B_g at F_f(t) before cancelling. I typed every map by hand: square 1, square 2, square 3 (m_1∘P_fQ_f(r) and r∘m_0 are both maps P_fQ_fS_YR_gH→Q_gS_BH), and both sides of the conclusion, P_gP_fS_XK→S_BH. Step 1 is functoriality plus square 3. Steps 2 and 3 cancel B_{f,L} and B_{g,R_gH}. Steps 4–6 use naturality of B_g at e_f, of B_f at t and of B_g at F_f(t), each in the correct direction, and arrive exactly at the RHS. Only the B components are inverted; nothing is assumed invertible about t, r, b or the m's. Small cases: with identity functors and B=id, both sides equal m_g r b t, including for zero or non-invertible maps. With scalar B_f=μ and B_g=λ in Vect, the factor λ⁻¹μ⁻¹ agrees on both sides. Step 4 of the parent lem-weil-boundary-comparison-composition-transport instantiates the item with r=ρ_{g,H} and b=ρ_{f,R_gH}; the types match, its step-2 normalizations give squares 1 and 2, and naturality of μ_f at r gives square 3. def-nagata-category was read in full: identities and associativity, a Mathlib leaf (CategoryTheory.Category). The Stacks labels in categories.tex are definition-category at line 38 (0014), definition-functor at line 163 (001B) and definition-transformation-functors at line 291 (001I), each matching tags/tags. No SGA is cited. Duplicate search with rg -L: the sibling conjugated-comparison normal form is a different identity, and lem-coef-site-closed-counit-transport concerns a single closed immersion. No new nodes, no tool_uses, no fixes. Maintainer note: this delivery needs L's side-completion promotion, not another rewrite."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IteratedCounitNormalForm",
+  "declaration": "CategoryTheory.iteratedCounitNormalForm",
+  "file": "lean/Sheaf/CategoryTheory/IteratedCounitNormalForm.lean",
+  "statement": "theorem iteratedCounitNormalForm (CX : Type u₁) [Category.{v₁} CX] (CY : Type u₂) [Category.{v₂} CY] (CB : Type u₃) [Category.{v₃} CB] (DX : Type u₄) [Category.{v₄} DX] (DY : Type u₅) [Category.{v₅} DY] (DB : Type u₆) [Category.{v₆} DB] (Ff : CX ⥤ CY) (Rf : CY ⥤ CX) (Fg : CY ⥤ CB) (Rg : CB ⥤ CY) (Pf : DX ⥤ DY) (Qf : DY ⥤ DX) (Pg : DY ⥤ DB) (Qg : DB ⥤ DY) (SX : CX ⥤ DX) (SY : CY ⥤ DY) (SB : CB ⥤ DB) (Bf : Ff ⋙ SY ≅ SX ⋙ Pf) (Bg : Fg ⋙ SB ≅ SY ⋙ Pg) (H : CB) (K : CX) (t : K ⟶ Rf.obj (Rg.obj H)) (ef : Ff.obj (Rf.obj (Rg.obj H)) ⟶ Rg.obj H) (eg : Fg.obj (Rg.obj H) ⟶ H) (r : SY.obj (Rg.obj H) ⟶ Qg.obj (SB.obj H)) (b : SX.obj (Rf.obj (Rg.obj H)) ⟶ Qf.obj (SY.obj (Rg.obj H))) (mg : Pg.obj (Qg.obj (SB.obj H)) ⟶ SB.obj H) (m₀ : Pf.obj (Qf.obj (SY.obj (Rg.obj H))) ⟶ SY.obj (Rg.obj H)) (m₁ : Pf.obj (Qf.obj (Qg.obj (SB.obj H))) ⟶ Qg.obj (SB.obj H)) (hg : Bg.hom.app (Rg.obj H) ≫ Pg.map r ≫ mg = SB.map eg) (hf : Bf.hom.app (Rf.obj (Rg.obj H)) ≫ Pf.map b ≫ m₀ = SY.map ef) (hm : Pf.map (Qf.map r) ≫ m₁ = m₀ ≫ r) : Pg.map (Pf.map (SX.map t ≫ b ≫ Qf.map r)) ≫ Pg.map m₁ ≫ mg = Pg.map (Bf.inv.app K) ≫ Bg.inv.app (Ff.obj K) ≫ SB.map (Fg.map (Ff.map t) ≫ Fg.map ef ≫ eg)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-666f89b07",
+  "group": "NY",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: six categories with independent universes; Bf: Ff⋙SY≅SX⋙Pf and Bg typed correctly; hg/hf/hm are the three squares with correct types; LHS m_g∘P_g(m1)∘P_gP_f(Q_f r∘b∘S_X t) and RHS S_B(e_g F_g e_f F_gF_f t)∘B_{g,F_fK}^{-1}∘P_g(B_{f,K}^{-1}) are exact; no extra assumptions. Identity is true by hand check of all 6 steps; edge cases (identity functors, scalar B's, empty categories, non-invertible t,r,b) OK. Node differs from live and side-live only in lean; lean.statement is verbatim in the file; docstrings have source place, blueprint tag and all 6 proof steps; module mode; sorry only; no definitions. Report has real Worker report and Second reading by NY. No duplicate in Sheaf/WeilConjectures/Mathlib; sibling conjugated-comparison node is a different identity. No compile run (none needed, no files changed); missing copyright header is common in the repo and not a fault."
+ }
+}

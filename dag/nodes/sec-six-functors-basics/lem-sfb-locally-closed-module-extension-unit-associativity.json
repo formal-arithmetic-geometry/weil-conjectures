@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-locally-closed-module-extension-unit-associativity",
+ "kind": "statement",
+ "title": "Units and associativity from normalized binary extension comparisons",
+ "statement": "For every coefficient immersion $a:S\\hookrightarrow X$ [def-sfb-locally-closed-module-extension-data], let $F_a:\\operatorname{Mod}(S)\\to\\operatorname{Mod}(X)$ be the fixed fully faithful extension with restriction $r_a:a^*F_a\\cong1$ [def-sfb-locally-closed-module-extension-model]. Suppose natural isomorphisms $\\gamma_{a,b}:F_a\\circ F_b\\cong F_{ab}$ are supplied for all composable pairs, satisfying the normalization of [lem-sfb-locally-closed-module-extension-binary]: $(ab)^*(\\gamma_{a,b,M});r_{ab,M}=\\chi_{a,b,F_aF_bM};b^*(r_{a,F_bM});r_{b,M}$, where $\\chi:(ab)^*\\cong b^*a^*$ is the specified inverse-image compositor and a semicolon means first the left arrow, then the right. There exist natural identity comparisons $e_X:F_{1_X}\\cong1_{\\operatorname{Mod}(X)}$ such that, after transport along the canonical coefficient-immersion equalities $a1_S=a$ and $1_Xa=a$ and the functor unitors, $\\gamma_{a,1_S}=F_a e_S$ and $\\gamma_{1_X,a}=e_X F_a$. For all $d:W\\hookrightarrow T$, $b:T\\hookrightarrow S$ and $a:S\\hookrightarrow X$, the supplied comparisons obey $(F_a\\gamma_{b,d});\\gamma_{a,bd}=(\\gamma_{a,b}F_d);\\gamma_{ab,d}$, after the functor associator and transport along $(ab)d=a(bd)$. This conditional assertion constructs no binary geometric comparison and asserts no open or closed boundary normalization.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Step 9 of the assigned node: normalized Hom uniqueness and canonical fibre-product/site-composition associativity; schemes.tex Tag 02V0 (lemma-composition-immersion)."
+ },
+ "stmt_deps": [
+  "def-sfb-locally-closed-module-extension-data",
+  "def-sfb-locally-closed-module-extension-model",
+  "lem-sfb-locally-closed-module-extension-binary"
+ ],
+ "proof": [
+  {
+   "text": "Use the open boundary comparison for the identity immersion and its actual inverse-image identity comparison to construct the normalized identity isomorphism. Canonical inverse-image unit coherence makes each unit path and gamma have the same restriction; full faithfulness of the fixed model makes them equal.",
+   "uses": [
+    "def-sfb-locally-closed-module-extension-model",
+    "lem-sfb-locally-closed-module-extension-boundary",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two canonical fibre-product associativity maps have the same projections, hence are equal. Conjugation through the actual module adjunctions yields both coefficient-immersion associativity and pullComp associativity. Apply the supplied binary normalization twice along each extension path and use naturality to move the intermediate restriction maps. The inverse-image associativity equation identifies the two restrictions. The source is isomorphic to a value of the triple-composite extension by two gamma maps. Full faithfulness and modelRestriction cancel restriction and identify the two paths.",
+   "uses": [
+    "def-sfb-locally-closed-module-extension-model",
+    "lem-sfb-locally-closed-module-extension-binary",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-locally-closed-module-extension-model",
+  "lem-sfb-locally-closed-module-extension-boundary",
+  "lem-weil-pbc-site-morphism-composition",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-locally-closed-module-extension-binary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E5",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Step 9 of the assigned node: normalized Hom uniqueness and canonical fibre-product/site-composition associativity; schemes.tex Tag 02V0 (lemma-composition-immersion)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "locally closed immersion extension by zero normalized composition of sheaves of modules",
+   "date": "2026-10-26",
+   "results": "8 hits; AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Modules.restrict, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, ModuleCat.Tilde.res_apply",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "9cd61669a58cdb12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extensionByZero\"",
+   "date": "2026-10-26",
+   "results": "0 hits; ",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosed.*extension|extensionByZero.*[Cc]omp",
+   "date": "2026-10-26",
+   "results": "0 hits; ",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact fully faithful extension by zero for a locally closed immersion and normalized composition",
+   "date": "2026-10-26",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsClosedImmersion.comp_iff, AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion, AlgebraicGeometry.IsImmersion.comp, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.IsClosedImmersion.comp, AlgebraicGeometry.IsOpenImmersion.comp",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "c4398a3a8b83e4bd"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction normalized natural isomorphism fully faithful functor associativity unit laws",
+   "date": "2026-10-26",
+   "results": "8 hits; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Functor.FullyFaithful.homNatIso, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.restrictFullyFaithful",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "2ecad34d2bbd804a"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|unit_conjugateEquiv_symm|fullyFaithfulROfIsIsoCounit",
+   "date": "2026-10-26",
+   "results": "21 hits; Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "b5a0ffa458083a8a"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyClosedModuleExtensionCoherence",
+  "group": "E5",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "Step 9 of the assigned node: normalized Hom uniqueness and canonical fibre-product/site-composition associativity; schemes.tex Tag 02V0 (lemma-composition-immersion).",
+   "via": [
+    "lem-sfb-locally-closed-module-extension-coherence",
+    "lem-sfb-locally-closed-extension-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocallyClosedModuleExtensionUnitAssociativity",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyClosedModuleExtensionUnitAssociativity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.locallyClosedModel_unit_associativity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.locallyClosedModel_unit_associativity"
+  ],
+  "statement": "theorem locallyClosedModel_unit_associativity (G : LocallyClosedModelComposition.{u}) : ∃ identity : ∀ X : LocallyClosedCoefficients.{u}, (LocallyClosedCoefficientImmersion.identity X).modelExtension ≅ 𝟭 (proEtaleRingModules X.scheme X.ring), (∀ {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X), ∃ h : a.comp (.identity S) = a, G.gamma a (.identity S) ≪≫ eqToIso (congrArg LocallyClosedCoefficientImmersion.modelExtension h) = Functor.isoWhiskerRight (identity S) a.modelExtension ≪≫ Functor.leftUnitor a.modelExtension) ∧ (∀ {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X), ∃ h : (LocallyClosedCoefficientImmersion.identity X).comp a = a, G.gamma (.identity X) a ≪≫ eqToIso (congrArg LocallyClosedCoefficientImmersion.modelExtension h) = Functor.isoWhiskerLeft a.modelExtension (identity X) ≪≫ Functor.rightUnitor a.modelExtension) ∧ (∀ {S X T W : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S) (d : LocallyClosedCoefficientImmersion W T), ∃ h : (a.comp b).comp d = a.comp (b.comp d), Functor.isoWhiskerRight (G.gamma b d) a.modelExtension ≪≫ G.gamma a (b.comp d) = Functor.associator d.modelExtension b.modelExtension a.modelExtension ≪≫ Functor.isoWhiskerLeft d.modelExtension (G.gamma a b) ≪≫ G.gamma (a.comp b) d ≪≫ eqToIso (congrArg LocallyClosedCoefficientImmersion.modelExtension h))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-884ed",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T065537-L-3071508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-884ed",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T065537-L-3071508",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules + item node/new nodes/change record vs clone sheaf-dag; old vs new normalization fields (definitionally equal formulas); 3 direct importers compiled against the delivery (all OK); #print axioms (sorryAx only on item via the 3 new obligations; model sorry-free)"
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "id": "def-sp-ordinary-finite-coefficient-records",
+ "kind": "definition",
+ "title": "Records and equations for the unchanged ordinary finite adjunction",
+ "statement": "Record the existing canonical finite-module derived adjunction [def-asd-ordinary-finite-p1-arrows, def-weil-pbc-inverse-image], without changing the published pullback, pushforward, unit comparison or projective-line components. Proved equations identify the published components with those of the recorded adjunction. Direct image is additive. Normalized arrow pullback is the inverse constant comparison followed by inverse image of the arrow and the specified target comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-weil-pbc-inverse-image"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "Record the canonical finite-module derived adjunction directly, preserving the published functors. Derived direct image is additive by the existing additive-right-derived-functor instance. Define normalized arrow pullback by its explicit three-arrow composite. Expanding the new adjunction record proves the two equations for the unchanged published projective-line components.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "F1",
+  "document": "Lean definitions and canonical adjunction equations",
+  "place": "C-240da repair: separate construction records from published definitions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of derived adjunction constant sheaf units along composable scheme morphisms",
+   "results": "Eight hits: Scheme.Hom.comp_appTop_assoc, Scheme.comp_appTop_assoc, Scheme.Modules.conjugateEquiv_pullbackComp_inv, sheafComposeNatTrans_fac, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, sheafComposeNatTrans, sheafComposeNatIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit.",
+   "date": "2026-10-26",
+   "verdict": "No constant-object derived-unit pasting theorem for these unbounded etale functors. Reuse the existing project derived comparison and underived constant-comparison equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.rightDerivedLowerStarComp",
+   "results": "Zero hits; unknown identifier in the Mathlib search index. This comparison belongs to the adopted source library.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing source-library comparison and its mate equation."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSingleUnit.*comp|upperStarConstantSheafIso_comp",
+   "results": "Zero hits in Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "The relevant comparison equations are project/adopted-source declarations, not a missing Mathlib dependency."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1DiagonalKummerComponentFormula",
+  "date": "2026-10-26",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-p1-diagonal-kummer-component-formula",
+   "place": "Coefficient construction interfaces for the diagonal calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteCoefficientRecords.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteAdjunction",
+   "AlgebraicGeometry.Etale.ordinaryFinitePushforward_additive",
+   "AlgebraicGeometry.Etale.ordinaryFiniteArrowPullback",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1Unit_eq",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1ChernPushforward_eq"
+  ],
+  "statement": "def ordinaryFiniteAdjunction (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ordinaryFinitePullback A f ⊣ ordinaryFinitePushforward A f",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-efdbd",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261026T222636-L-676965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-efdbd",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261026T222636-L-676965",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules + 4 adapted modules against published clone, DAG nodes and 6 change records; delivered set built in sandbox and 7 direct importers + 4 exposed transitive users (SfP1IntegralTransport, SfP1ChartExchange, SfP1ChartMapComposition, TowerP1KernelScalarData) compiled against it, all OK; #print axioms"
+ }
+}

@@ -22,6 +22,8 @@ public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.CategoryTheory.Adjunction.Limits
+import all Sheaf.Paper.IntegralOperationsWellDefined
+import all Sheaf.Paper.FiniteFreeCompletedScalarComparison
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 
 /-! # Completed scalar extension and compatible coefficient lines
@@ -44,6 +46,16 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
+attribute [-instance] WeilConjectures.PrincipalKoszulStrictReplacement.abSheafify
+attribute [-instance] WeilConjectures.PrincipalKoszulStrictReplacement.abLocallyBijective
+attribute [-instance] WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall
+attribute [-instance] WeilConjectures.integralOperationsAbSheafify
+attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
+attribute [-instance] WeilConjectures.integralOperationsSiteSmall
+attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
+attribute [local irreducible] HasDerivedCategory.standard
+attribute [local instance 5000] WeilConjectures.integralTowerHasDerivedCategory
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite TensorProduct
 namespace WeilConjectures
@@ -53,6 +65,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   completedIntegralCommRingSheafUnrestricted completedCoefficientMap
   completedOrdinaryScalarExtension completedDerivedScalarExtension
   completedScalarCounit completedScalarTensorSection integralScalarExtensionOfUniverses
+  completedScalarChangeData completedOrdinaryScalarComplex
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
@@ -150,8 +163,7 @@ theorem exact (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (
       CategoryTheory.Equivalence.mk T S e.symm f
     let : T.IsEquivalence := equiv.isEquivalence_functor
     refine ⟨?_, inferInstance, inferInstance⟩
-    exact (CategoryTheory.rightExactFunctor_le_additiveFunctor _ _) _
-      (inferInstanceAs (PreservesFiniteColimits T))
+    exact Functor.additive_of_preserves_binary_products T
 
 /-- Additivity of signed line tensor. Source: blueprint Proof (3)
 (blueprint: lem-pur-completed-line-tensor-coherence). -/
@@ -182,7 +194,6 @@ def tensor (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m :
       DerivedCategory (integralTowerModules l E X) :=
   (sheaf l E X L m).mapDerivedCategory
 
-
 /-- The evaluation on the unbounded derived category, with the canonical localization units.
 Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
 def epsilon (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
@@ -206,7 +217,6 @@ theorem complete (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1
     IsDerivedCompleteUnrestricted l E X ((tensor l E X L m).obj K) := by
   sorry
 
-
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] F)
 
@@ -225,6 +235,8 @@ def factors (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m 
     DerivedCategory.Q ⋙ tensor l E X L m ≅ complex l E X L m ⋙ DerivedCategory.Q :=
   (sheaf l E X L m).mapDerivedCategoryFactors
 
+attribute [local irreducible] sheaf
+
 /-- The ordinary sheaf comparison applied termwise, without derived choices.
 Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
 def comparisonComplex (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
@@ -233,7 +245,9 @@ def comparisonComplex (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfR
       completedOrdinaryScalarExtension l E F ι X ⋙ sheaf l F X N m) :
     complex l E X L m ⋙ completedOrdinaryScalarComplex l E F ι X ≅
       completedOrdinaryScalarComplex l E F ι X ⋙ complex l F X N m :=
-  NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)
+  by
+    unfold complex completedOrdinaryScalarComplex
+    exact NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)
 
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
   (j : F →ₐ[ℚ_[l]] G)
@@ -246,14 +260,15 @@ def scalarAssociatorComplex
         completedOrdinaryScalarExtension l E G (j.comp ι) X) :
     completedOrdinaryScalarComplex l E F ι X ⋙ completedOrdinaryScalarComplex l F G j X ≅
       completedOrdinaryScalarComplex l E G (j.comp ι) X :=
-  NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)
+  by
+    unfold completedOrdinaryScalarComplex
+    exact Functor.mapHomologicalComplexCompIso e (ComplexShape.up ℤ)
 
-attribute [local irreducible] binary epsilon sheaf tensor complex pairing
+attribute [local irreducible] binary epsilon tensor complex pairing
   factors comparisonComplex scalarAssociatorComplex smul tmul
   SheafOfModules.ScalarExtensionTensorCore.power SheafOfModules.scalarExtensionSection
   completedScalarIdentityMultiplication completedScalarIdentityUnit
-  completedOrdinaryScalarComplex
-  completedScalarChangeData completedScalarChainComparison completedScalarComparison
+  completedScalarChainComparison completedScalarComparison
 
 /-- Signed-power scalar maps and their specified ordinary derived tensor comparisons.
 All normalization equations are on actual sheafified tensors and the universal counits.
@@ -397,7 +412,6 @@ def beta (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
   (chi l E X F ι _ (complete l E X L m K hK)).symm ≪≫
     ((pairData l E X F ι L N b).ordinary m).app K ≪≫
       (tensor l F X N m).mapIso (chi l E X F ι K hK)
-
 
 attribute [local irreducible] beta chi pairData power evaluation
 
@@ -552,6 +566,78 @@ theorem beta_natural_evaluation (L : integralTowerModules l E X)
       (integralScalarExtensionOfUniverses l E F ι X).map ((epsilon l E X L m).hom.app K)) := by
   sorry
 
+section DerivedUnitProof
+
+attribute [local irreducible] integralOperationsGoodComplex
+attribute [local semireducible] completedDerivedScalarExtension
+  completedOrdinaryScalarComplex completedOrdinaryScalarExtension
+
+private theorem line_model_functor :
+    (WeilConjectures.completedScalarCochainModel l E E (AlgHom.id ℚ_[l] E) X).T =
+      completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X := by
+  rfl
+
+private theorem line_model_complex :
+    let M := WeilConjectures.completedScalarCochainModel l E E (AlgHom.id ℚ_[l] E) X
+    M.E.mapHomologicalComplex (.up ℤ) =
+      completedOrdinaryScalarComplex l E E (AlgHom.id ℚ_[l] E) X := by
+  rfl
+
+private theorem line_model_counit (P : CochainComplex (integralTowerModules l E X) ℤ) :
+    HEq ((WeilConjectures.completedScalarCochainModel l E E (AlgHom.id ℚ_[l] E) X).ε.app P)
+      (completedScalarCounit l E E (AlgHom.id ℚ_[l] E) X P) := by
+  exact heq_of_eq (completedScalarCochainModel_counit l E E (AlgHom.id ℚ_[l] E) X P)
+
+attribute [local irreducible] WeilConjectures.completedScalarCochainModel
+
+private theorem line_derived_unit
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    (F : CochainComplex A ℤ ⥤ CochainComplex A ℤ)
+    (D : DerivedCategory A ⥤ DerivedCategory A)
+    (ε : DerivedCategory.Q ⋙ D ⟶ F ⋙ DerivedCategory.Q)
+    (hd : D.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso A (.up ℤ)))
+    (μ : F ≅ 𝟭 (CochainComplex A ℤ)) :
+    ∃ e : D ≅ 𝟭 (DerivedCategory A), ∀ P : CochainComplex A ℤ,
+      e.hom.app (DerivedCategory.Q.obj P) =
+        ε.app P ≫ DerivedCategory.Q.map (μ.hom.app P) := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+    let Q := DerivedCategory.Q (C := A)
+    let j : F ⋙ Q ≅ Q := Functor.isoWhiskerRight μ Q ≪≫ Functor.leftUnitor Q
+    have hi : (HomologicalComplex.quasiIso A (.up ℤ)).IsInvertedBy (F ⋙ Q) :=
+      (MorphismProperty.IsInvertedBy.iff_of_iso _ j).2 (Localization.inverts _ _)
+    let := hd
+    let := Functor.isIso_of_isLeftDerivedFunctor_of_inverts D ε hi
+    let k : Q ⋙ D ≅ Q ⋙ 𝟭 _ := asIso ε ≪≫ j ≪≫ (Functor.rightUnitor Q).symm
+    let ff := Localization.fullyFaithfulWhiskeringLeft Q
+      (HomologicalComplex.quasiIso A (.up ℤ)) (DerivedCategory A)
+    refine ⟨ff.preimageIso k, ?_⟩
+    intro P
+    have he := NatTrans.congr_app (ff.map_preimage k.hom) P
+    change (ff.preimage k.hom).app (Q.obj P) = k.hom.app P at he
+    change (ff.preimage k.hom).app (Q.obj P) = _
+    rw [he]
+    simp [k, j, Q]
+
+private theorem line_unit_from_model
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    (F F' : CochainComplex A ℤ ⥤ CochainComplex A ℤ)
+    (D D' : DerivedCategory A ⥤ DerivedCategory A)
+    (ε : DerivedCategory.Q ⋙ D ⟶ F ⋙ DerivedCategory.Q)
+    (hd : D.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso A (.up ℤ)))
+    (hF : F = F') (hD : D = D') (μ : F' ≅ 𝟭 (CochainComplex A ℤ))
+    (c : ∀ P : CochainComplex A ℤ,
+      D'.obj (DerivedCategory.Q.obj P) ⟶ DerivedCategory.Q.obj (F'.obj P))
+    (hc : ∀ P, HEq (ε.app P) (c P)) :
+    ∃ e : D' ≅ 𝟭 (DerivedCategory A), ∀ P : CochainComplex A ℤ,
+      e.hom.app (DerivedCategory.Q.obj P) = c P ≫ DerivedCategory.Q.map (μ.hom.app P) := by
+  subst F'
+  subst D'
+  obtain ⟨e, he⟩ := line_derived_unit F D ε hd μ
+  refine ⟨e, ?_⟩
+  intro P
+  rw [he, eq_of_heq (hc P)]
+
 /-- The ordinary derived multiplication unitor, fixed by the recorded chain unitor.
 Source: Stacks 06YY; blueprint Proof (3)
 (blueprint: lem-pur-completed-line-tensor-coherence).
@@ -565,7 +651,29 @@ theorem ordinaryUnit_existsUnique :
           completedScalarCounit l E E (AlgHom.id ℚ_[l] E) X P.obj ≫
             DerivedCategory.Q.map ((completedScalarIdentityMultiplication l E X).hom.app P.obj) :=
               by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+    let M := WeilConjectures.completedScalarCochainModel l E E (AlgHom.id ℚ_[l] E) X
+    obtain ⟨e, he⟩ := line_unit_from_model
+      (M.E.mapHomologicalComplex (.up ℤ))
+      (completedOrdinaryScalarComplex l E E (AlgHom.id ℚ_[l] E) X)
+      M.T (completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X)
+      M.ε M.universal (line_model_complex l E X) (line_model_functor l E X)
+      (completedScalarIdentityMultiplication l E X)
+      (completedScalarCounit l E E (AlgHom.id ℚ_[l] E) X) (line_model_counit l E X)
+    refine ⟨e, fun P ↦ he P.obj, ?_⟩
+    intro e' he'
+    let Q := integralOperationsGoodLocalization l E X
+    let W := (HomologicalComplex.quasiIso (integralTowerModules l E X) (.up ℤ)).inverseImage
+      (integralOperationsGoodComplex l E X).ι
+    have : Q.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E X
+    apply Iso.ext
+    apply (Localization.fullyFaithfulWhiskeringLeft Q W _).map_injective
+    apply NatTrans.ext
+    funext P
+    exact (he' P).trans (he P.obj).symm
+
+end DerivedUnitProof
 
 /-- The ordinary multiplication unitor with its prescribed representative.
 Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
@@ -722,7 +830,6 @@ theorem tower (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
       (beta l E X G (j.comp ι) L P b20 m K hK).hom := by
   sorry
 
-
 /-- Repeated coefficient fields retain the prescribed line identification. After
 transporting the signed line along this ordinary b-induced map the component is identity.
 Source: blueprint Proof (3), tensor inverses with scalar conventions
@@ -830,7 +937,6 @@ private theorem line_localizedIso
     funext K
     exact eq_of_heq ((ha' K).trans (hc K).symm)
 
-
 private theorem line_app_heq {C D : Type*} [Category C] [Category D]
     {F G : C ⥤ D} (α : F ⟶ G) {X X' : C} (h : X = X') :
     HEq (α.app X) (α.app X') := by
@@ -859,6 +965,11 @@ private theorem line_comp_heq {C : Type*} [Category C]
 
 section Rational
 
+attribute [local irreducible] sfIntegralConstructible
+  integralCoefficientLinear integralScalarConstant
+  sfIntegralCoefficientLinear
+  sfIntegralConstructibleLinear
+
 variable (Y : AlgebraicGeometry.Scheme.{u})
 
 /-- Precisely the conditional constructible-preservation hypothesis in the node.
@@ -876,6 +987,8 @@ def integralTwist (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 
   (sfIntegralConstructible l E Y).lift
     ((sfIntegralConstructible l E Y).ι ⋙ tensor l E Y L m)
     (fun K ↦ hL m K.obj K.property)
+
+attribute [local irreducible] integralTwist
 
 /-- The restriction is additive and linear for the recorded constant-section scalar action.
 Source: Stacks 03EL; blueprint Proof (3)
@@ -903,6 +1016,8 @@ instance integralTwistLinear (L : integralTowerModules l E Y)
     (integralTwist l E Y L hL m).Linear (Padic.coefficientExtensionIntegers l E) :=
   (integralTwist_linear l E Y L hL m).2
 
+attribute [local instance 5000] integralTwistAdditive integralTwistLinear
+
 /-- The actual raw scalar-localized line tensor, with unchanged objects and tensor Hom maps.
 Source: blueprint Proof (3); rationalization definition
 (blueprint: lem-pur-completed-line-tensor-coherence). -/
@@ -915,8 +1030,13 @@ def rationalTwist (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 
 
 private instance rationalTwist_additive (L : integralTowerModules l E Y)
     [L.IsFiniteLocallyFreeOfRank 1] (hL : PreservesConstructible l E Y L) (m : ℤ) :
-    (rationalTwist l E Y L hL m).Additive :=
-  inferInstanceAs (ScalarLocalization.map _ _ _ (integralTwist l E Y L hL m)).Additive
+    (rationalTwist l E Y L hL m).Additive := by
+  unfold rationalTwist
+  infer_instance
+
+attribute [local semireducible] sfIntegralConstructible
+
+attribute [local semireducible] integralTwist
 
 /-- Intrinsic integral objects satisfy the recorded augmented quotient-tower completeness.
 Source: Bhatt--Scholze, Definition 3.5.2
@@ -1024,7 +1144,6 @@ def rationalEpsilon (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRan
     (hL : PreservesConstructible l E Y L) (m : ℤ) :
     rationalTwist l E Y L hL m ⋙ rationalTwist l E Y L hL (-m) ≅ 𝟭 _ :=
   (rationalEpsilon_existsUnique l E Y L hL m).exists.choose
-
 
 variable (p : ℕ) (hl : l ≠ p)
 
@@ -1280,7 +1399,6 @@ theorem rational_evaluation (L : integralTowerModules l E Y) [L.IsFiniteLocallyF
       simpa only [Functor.map_comp, Functor.mapIso_inv, Iso.app_inv,
         Functor.mapLinearMap] using congrArg Q.map hi)).trans
         (hright.trans hmap).symm))
-
 
 /-- The rationalized tower square uses the recorded canonical scalar associator.
 Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).

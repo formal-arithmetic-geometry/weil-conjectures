@@ -125,7 +125,32 @@
   "def-weil-weil-sheaf-complex"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed",
+     "lines": [
+      46,
+      62
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-zeta-weil",
  "unit": "sk-input-weights",
  "lean": {
@@ -174,5 +199,25 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-e8b7cbee4 (reviewer sub-agent of L); spot-checked: PASS, no changes. The statement is verbatim (main-20261015 and master), there are no new nodes, and the item is neither dropped nor under a repair note. The blueprint proof inferred the local stalk identity from the global geometric Frobenius (def-weil-global-geometric-frobenius), which does not support it; the delivery correctly replaces that with the explicit local statement of an existing lemma. Step 1: lem-zl-constant-weil-datum supplies the normalized constant datum, with its hypotheses (separated finite type, l != p) checked. The first assertion of lem-zl-constant-sheaf-lseries states that F_y of def-weil-local-frobenius-trace for the canonical (E_Y, theta_E), E = Ql, is the identity on the degree-0 stalk E, including point transport and the return g_Y^r y = y g_s^r. Step 2: def-weil-constant-weil-structure clause 5 represents the canonical Qlbar structure at stage Ql by that same object. def-weil-punctual-weights takes the stalk H^0(C_E) tensor Qlbar with the scalar-extended composite, so the Qlbar operator is the identity. Step 3: an eigenvalue needs a nonzero eigenvector, so alpha = 1 and |iota(1)| = 1 = q_y^0. Tested Spec F_{q^2} over F_q (degree-2 point, swapped copies), empty and disconnected schemes, and a scalar-twisted non-canonical structure; the last is excluded because the canonical structure is now a stmt_dep, as is def-weil-punctual-weights. proof_deps is the union of the steps' uses. No duplicate, no cycle, no SGA. The two tool uses are accepted: lseries and datum are sk-thm-rationality lemmas used as a black-box version of the local computation in unit sk-input-weights step (1), and they also give P = 1 - T^{d_y}. Batch 5: the flagged path via def-weil-local-frobenius-trace is a general definition and was already in the item's statement closure through def-weil-punctual-weights. The batch-5 closure, recomputed from the targets without descending into the assumed nodes, already contains both cited lemmas through sk-thm-rationality; the new edges add 0 nodes, and no assumed node is reached from either lemma. So the citation is genuinely outside the assumed statements. The existing lean and reviewed_lean records are unchanged, and the worker's choice not to attach the upstream WeilSheaf theorem across encodings is left to the maintainer."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "On every separated finite-type $k_0$-scheme $X_0$, with $X=X_0\\times_{k_0}k$,\nthe constant Weil sheaf $\\QbarX=p_X^*\\Qlb$\n([det-def-sfb-pulled-back-coefficients]) with its canonical Weil structure\n([sk-def-sf-weil-complexes]) is punctually $\\iota$-pure of weight zero.",
+  "proof": [
+   {
+    "text": "At a degree-$n$ closed point, the local Frobenius operator of\n[def-weil-local-frobenius-trace] acts on the constant stalk by\nidentity (the $n$-fold iterate of the geometric Frobenius of\n[def-weil-global-geometric-frobenius] fixes the constant section\n$1$), whose complex absolute value is $1=q^{n\\cdot0/2}=q_y^{0/2}$\nas required by [def-weil-punctual-weights].",
+    "uses": [
+     "def-weil-local-frobenius-trace",
+     "def-weil-global-geometric-frobenius",
+     "def-weil-punctual-weights"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,505 @@
+{
+ "id": "lem-sfb-trait-component-minimal-envelope",
+ "kind": "statement",
+ "title": "Canonical minimal opens associated with a special-fibre component",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $S=\\operatorname{Spec}R$, $\\eta=\\operatorname{Spec}\\operatorname{Frac}R$ and $s=\\operatorname{Spec}(R/\\mathfrak m_R)$ [def-weil-affine-spectrum]. Let $F$ be an fpqc sheaf of groups, meaning a contravariant functor on $S$-schemes to groups satisfying the covering equalizer condition of [def-weil-pbc-fpqc-covering]. Suppose an fpqc morphism $p:T\\to S$ represents $F_T$ by a separated flat group scheme locally of finite presentation [def-pc-representable-functor, def-weil-flat-morphism, def-sbc-locally-finite-presentation]; separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Then $F_s$ and $F_\\eta$ are represented by group schemes locally of finite type over their fields [def-weil-finite-type-morphism]. Every connected component of these group schemes is an open and closed finite-type subscheme; connected component means a maximal nonempty connected subset [def-weil-connected-scheme]. The identity component $Z_0\\subset F_s$ is geometrically connected and is a subgroup, and $Z_0\\times_s Z_0$ is the identity component of $(F\\times_SF)_s$ [def-pc-fibre-product]. For each connected component $Z\\subset F_s$ there is a smallest open subfunctor $E_F(Z)\\subset F$ among those whose special fibre is $Z$ and whose generic fibre is a union of connected components of $F_\\eta$. Here open means represented by an open subscheme on every scheme test [def-weil-open-immersion, def-pc-subfunctor]. Its generic fibre is a finite union of connected components of $F_\\eta$, and $E_F(Z)_T$ is separated flat and of finite presentation over $T$. The identity section of $F$ factors through $E_F(Z_0)$. These envelopes respect isomorphisms over $S$. The following product assertion requires the additional hypothesis that $R$ is strictly henselian [def-weil-pbc-henselian-terminology], meaning henselian with separably closed residue field. If $F'$ satisfies the same hypotheses over this strictly henselian $R$ and $Z'_0$ is its special identity component, then $E_{F\\times_SF'}(Z_0\\times_sZ'_0)=E_F(Z_0)\\times_SE_{F'}(Z'_0)$. No product assertion is made over a nonhenselian DVR or for arbitrary components. If $f:F\\to F'$ is represented after an fpqc base change by a flat locally finitely presented morphism and $f_s$ maps $Z$ onto $Z'$, then $f$ maps $E_F(Z)$ into $E_{F'}(Z')$. No commutativity or smoothness is assumed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "4.1 field reduction, printed pp.54-55; Lemma 4.2.4, printed pp.59-60, for existence, component-saturated minimality and finite presentation. Agent correction of the following formal product/subgroup argument on pp.60-61: neutral-product compatibility is restricted to a strictly henselian trait, using the unique extension of its valuation to an algebraic closure and simultaneous specialization of geometric components. The unrestricted product assertion is false (report E2). Local archive WANTED; primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-subfunctor",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Base change the given fpqc cover to $s$ and $\\eta$. The covering remains fpqc. Apply the field-effectivity lemma to the two restricted group sheaves; the representing group schemes on the covering are separated and locally finitely presented by base change. This represents $F_s$ and $F_\\eta$ by separated locally finite type group schemes. In what follows the argument works for either field fibre $G/k$.",
+   "uses": [
+    "lem-sfb-field-fpqc-group-form-effectivity",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "The field group $G$ is locally Noetherian. Its irreducible components are locally finite, and are pairwise disjoint: at a point lying on two components the two distinct minimal primes would contradict the group-local-minimal-prime lemma. Hence each is open (locally remove the finitely many other closed components), as well as closed. They cover $G$, so they are exactly its connected components. Choose an algebraic closure $\\bar k$. For a component $C$, the field-extension component theorem gives an irreducible component $D$ of $G_{\\bar k}$ mapping onto $C$. The same disjointness argument makes $D$ a connected component. In a nonempty affine open of $D$, a maximal ideal has residue field $\\bar k$ by Zariski's lemma. Its point $g$ translates $(G_{\\bar k})^0$ isomorphically onto $D$: translation is an automorphism and carries the component of $1$ to the component of $g$. The neutral-component theorem makes $D$ finite type and thus quasi-compact. A continuous image of a quasi-compact space is quasi-compact (pull back an open cover), so $C$ is quasi-compact; being an open subscheme of $G$, it is locally finite type and therefore finite type.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sc-locnoeth-components-locally-finite",
+    "lem-sfb-group-local-minimal-prime",
+    "lem-sc-irreducible-components-cover",
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-sfb-field-extension-irreducible-components",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-sfb-lft-field-group-neutral-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "Apply the neutral-component theorem to $F_s$: $Z_0$ is an open and closed geometrically irreducible subgroup of finite type, hence geometrically connected. The component-bijection theorem for products with a geometrically connected scheme shows that $Z_0\\times_s Z_0$ is connected. It is open and closed in $F_s\\times_sF_s$ and contains the identity, so it is precisely that product group's identity component. The same argument applies to $Z_0\\times_sZ'_0$ when a second group is given.",
+   "uses": [
+    "lem-sfb-lft-field-group-neutral-component",
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "Fix $Z$. Let $J$ be any union of generic connected components. Define $V_J\\subset F$ by the following condition on a section over an $S$-scheme $A$: its special restriction factors through $Z$ and its generic restriction factors through $J$. This is a subfunctor and an fpqc subsheaf, since both factorizations can be checked on a covering. On a representing cover $P=F_T$, its pointwise inverse image is $Z_T\\cup J_T$. Whenever this subset is open in $P$, it gives an open subfunctor of $F$: for any test $A\\to F$, pull back this open to $A\\times_ST$; the two pullbacks to $A\\times_ST\\times_ST$ agree by the displayed fibre condition, and the open-descent lemma gives a unique open of $A$. Factorization through an open is equivalent to every point landing in it. In particular any open subfunctor with those two fibres equals $V_J$.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "Construct one such $V_J$ with $J$ finite. By the definition of an fpqc cover of the affine $S$, choose finitely many affine opens $T_i\\subset T$ whose images cover $S$, and work on their finite disjoint union $T^*$. Write $P_i=F_{T_i}$. The inverse image of $Z$ in $(P_i)_s=F_s\\times_s(T_i)_s$ is quasi-compact, by quasi-compact base change and the affineness of $(T_i)_s$. Its complement in $(P_i)_s$ is closed there, hence closed in $P_i$; remove it to obtain an open $O_i$ having special fibre $Z_{T_i}$. Cover $Z_{T_i}$ by finitely many affine opens of $P_i$ contained in $O_i$, and let their union be $W_i$. Each generic restriction of these affine opens is principal open (invert a uniformizer), hence affine and quasi-compact. Its image in $F_\\eta$ therefore meets only finitely many components, because the components form a disjoint open cover. Let $J$ be the union of these finitely many components, for all $i$. Then $Z_{T_i}\\cup J_{T_i}=W_i\\cup J_{T_i}$ is open. Step 4 descends it to the candidate $V_J$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "Let $J_*$ be the finite component set just obtained. For every component $C$ of $J_*$ which is omitted by some candidate open, choose one such candidate $V_C$. Intersect $V_{J_*}$ with these finitely many $V_C$; call the resulting open $E$. Its special fibre is $Z$, and its generic fibre is a union of the remaining components of $J_*$. If $V$ is any candidate and $C$ survives in $E_\\eta$, then $C\\subset V_\\eta$: otherwise $C$ would have been removed by the chosen $V_C$. Thus $E\\subset V$ on both fibres, and consequently on all tests by Step 4's pointwise criterion. This proves existence and smallestness, not merely minimality. It also proves that $E_\\eta$ is a finite union. We write $E=E_F(Z)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "For an affine open $T_0\\subset T$, the inverse-image open $E_{T_0}\\subset P_{T_0}$ is separated and flat by restriction of the diagonal and of the flat local-ring maps. It is locally finitely presented: restrict affine presentations around each point inside this open. Its special fibre is $Z\\times_s(T_0)_s$, quasi-compact by base change. Its generic fibre is the base change of the finite-type $E_\\eta$ to $(T_0)_\\eta$, hence quasi-compact; $(T_0)_\\eta=D(\\pi)$ is itself affine. The total space is the union of these two quasi-compact subspaces, so is quasi-compact. The diagonal is quasi-compact because it is a closed immersion, so this separated locally finitely presented map is of finite presentation by the stated definition. This proves the assertion locally on the original $T$, and hence over $T$.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "The inverse image of $E_F(Z_0)$ under the identity section is an open of the local scheme $S$ containing its closed point. Such an open is all of $S$: a basic open containing the maximal ideal is defined by a unit. Thus the identity factors through it. An isomorphism $a:F\\simeq F'$ carries each candidate for $Z$ to a candidate for $a_s(Z)$ and its inverse reverses this correspondence; smallestness gives $a(E_F(Z))=E_{F'}(a_s(Z))$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "For the stated $f$, pull back the open $E_{F'}(Z')$ to $F$ and intersect it with $E_F(Z)$. The special fibre of this intersection is $Z$, since $f_s(Z)\\subseteq Z'$. Its generic fibre is a union of whole connected components: the image of a connected component of $F_\\eta$ under the continuous map $f_\\eta$ is connected, hence lies in a single connected component of $F'_\\eta$. Thus the intersection is a candidate for $Z$. Smallestness forces it to contain $E_F(Z)$, proving $f(E_F(Z))\\subseteq E_{F'}(Z')$. In fact this argument uses only the given special-fibre containment; the stronger flatness and surjectivity hypotheses of the statement are therefore satisfied without further input.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "Now assume $R$ strictly henselian and put $H=E_F(Z_0)$ and $H'=E_{F'}(Z'_0)$. First, $F\\times_SF'$ satisfies the hypotheses of the item, so its envelopes exist: it is an fpqc sheaf of groups, since products of sheaves are computed objectwise; if $T'\\to S$ is the fpqc chart of $F'$ with representing group scheme $P'$, then $W=T\\times_ST'\\to S$ is an fpqc covering (base change of $T\\to S$ to $T'$, then composition with $T'\\to S$), and $(F\\times_SF')_W=P_W\\times_WP'_W$, where $P_W=P\\times_TW$ and $P'_W=P'\\times_{T'}W$ are flat, separated and locally of finite presentation over $W$ by base change. Their fibre product over $W$ is the base change of $P_W\\to W$ along $P'_W\\to W$ followed by $P'_W\\to W$, so it is flat and locally of finite presentation by base change and composition; it is separated because the diagonal of a composite $a\\circ b$ is the diagonal of $b$ followed by the base change of the diagonal of $a$, both closed immersions here. The product $H\\times_SH'$ is open, has special fibre $Z_0\\times_sZ'_0$, and has component-saturated generic fibre: any generic connected component projects into one component in each factor. Consequently $Q=E_{F\\times_SF'}(Z_0\\times_sZ'_0)\\subseteq H\\times_SH'$ by smallestness. Each component of $H_\\eta$ is unavoidable in $H$ in the precise sense of the valuation-section lemma: an open of $H$ with all its special fibre and component-saturated generic fibre is an open of $F$ and a candidate for $Z_0$, so must equal $H$. The same holds for $H'$. Step 7 gives finite presentation, flatness and separatedness on an fpqc scheme cover for both, and both their field fibres are finite type. All hypotheses of that lemma hold, since strictly henselian implies henselian.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-compose",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  },
+  {
+   "text": "Fix an algebraic closure $\\Omega/K$ and let $B$ be its integral closure over $R$. Let $D$ be a geometric connected component of $(H_\\eta\\times_KH'_\\eta)_\\Omega$. Over the algebraically closed field, each connected component is geometrically connected; the product component-bijection theorem therefore writes $D=D_1\\times_\\Omega D_2$ for components of the two geometric generic factors. Each $D_i$ lies over a component of its original generic fibre. Apply the valuation-section lemma to these unavoidable components to find sections $x\\in H(B)$, $x'\\in H'(B)$ with generic values in $D_1,D_2$. Their pair has closed value in $Z_0\\times_sZ'_0=Q_s$. Its inverse image of $Q$ is an open of the local scheme $\\operatorname{Spec}B$ containing the closed point, hence the whole scheme. Thus $Q_\\Omega$ meets $D$. Since $Q_\\eta$ is component-saturated, its pullback contains the entire $D$. Every geometric component is obtained this way; field-extension surjectivity then gives $Q_\\eta=H_\\eta\\times_KH'_\\eta$. The special fibres already agree. The pointwise criterion of Step 4 gives $Q=H\\times_SH'$.",
+   "uses": [
+    "lem-sfb-henselian-unavoidable-component-valuation-section",
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-separably-closed-geometrically-connected",
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "lem-pc-field-extension-fpqc-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1 field case and 4.2 Step 5, Lemma 4.2.4, printed pp.59-60; agent finite-neighbourhood/minimal-intersection construction, and corrected strict-local product argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-fpqc-group-form-effectivity",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-base-change",
+  "pqf-lem-locnoeth-lft",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sfb-group-local-minimal-prime",
+  "lem-sc-irreducible-components-cover",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-sfb-field-extension-irreducible-components",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-sfb-lft-field-group-neutral-component",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-open-immersion",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-henselian-unavoidable-component-valuation-section",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-pc-field-extension-fpqc-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Agent finite affine-neighbourhood and finite-intersection proof of the envelope assertion of 4.2.4, followed by the corrected strict-local product argument using absolute valuation sections. The field reduction follows 4.1; primary scan read online, local archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GroupScheme|almost.homogeneous|component.*envelope|coset.*sheaf",
+   "results": "{\"t\": \"2026-10-24T12:37:06Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|almost.homogeneous|component.*envelope|coset.*sheaf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: connected-component quotients of topological spaces, affine-limit section descent and generalizing maps do not supply the canonical component envelope of a group sheaf over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented group sheaf over a trait there is a smallest open with prescribed connected component of the special fibre and finitely many generic components",
+   "results": "{\"t\": \"2026-10-24T12:44:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat locally finitely presented group sheaf over a trait there is a smallest open with prescribed connected component of the special fibre and finitely many generic components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.component_nontrivial\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\"], \"digest\": \"ba37c0acbfc86bea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: connected-component quotients of topological spaces, affine-limit section descent and generalizing maps do not supply the canonical component envelope of a group sheaf over a trait"
+  },
+  {
+   "tool": "grep",
+   "query": "component.*envelope|minimal.*component.*open|special.*fibre.*group",
+   "results": "{\"t\": \"2026-10-24T12:53:41Z\", \"tool\": \"grep\", \"query\": \"component.*envelope|minimal.*component.*open|special.*fibre.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: connected-component quotients of topological spaces, affine-limit section descent and generalizing maps do not supply the canonical component envelope of a group sheaf over a trait"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal connected component envelope over a trait for a flat fpqc locally representable group sheaf",
+   "results": "{\"t\": \"2026-10-24T12:53:41Z\", \"tool\": \"leansearch\", \"query\": \"Minimal connected component envelope over a trait for a flat fpqc locally representable group sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConnectedComponents.mk\", \"ConnectedComponents\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AddSubgroup.connectedComponentOfZero\", \"Subgroup.connectedComponentOfOne\", \"ClosedAddSubgroup.instInfClosedAddSubgroup\", \"CategoryTheory.RepresentablyFlat.casesOn\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\"], \"digest\": \"8203ea80c70ffb07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: connected-component quotients of topological spaces, affine-limit section descent and generalizing maps do not supply the canonical component envelope of a group sheaf over a trait"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Specializes\"",
+   "results": "{\"t\": \"2026-10-24T12:53:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Specializes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: connected-component quotients of topological spaces, affine-limit section descent and generalizing maps do not supply the canonical component envelope of a group sheaf over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A minimal open subfunctor with prescribed closed fibre component of a flat group sheaf over a discrete valuation ring has finitely many generic components and is compatible with products",
+   "results": "{\"t\": \"2026-10-24T12:53:45Z\", \"tool\": \"leanfinder\", \"query\": \"A minimal open subfunctor with prescribed closed fibre component of a flat group sheaf over a discrete valuation ring has finitely many generic components and is compatible with products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\"], \"digest\": \"3a03fc491320e540\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: connected-component quotients of topological spaces, affine-limit section descent and generalizing maps do not supply the canonical component envelope of a group sheaf over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a strictly henselian discrete valuation ring the minimal open envelope of the special identity component of a flat group sheaf is compatible with taking products",
+   "results": "{\"t\": \"2026-10-24T13:36:02Z\", \"tool\": \"leanfinder\", \"query\": \"Over a strictly henselian discrete valuation ring the minimal open envelope of the special identity component of a flat group sheaf is compatible with taking products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.const_mul_cancel\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\"], \"digest\": \"c1adeff05ac10ada\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected component envelopes of flat locally finitely presented group schemes over a strictly henselian trait preserve products",
+   "results": "{\"t\": \"2026-10-24T13:36:02Z\", \"tool\": \"leansearch\", \"query\": \"Connected component envelopes of flat locally finitely presented group schemes over a strictly henselian trait preserve products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier\", \"AlgebraicGeometry.Flat.comp\", \"Condensed.instPreservesFiniteProductsOppositeProfiniteVal\", \"AlgebraicGeometry.Flat.instDescScheme\"], \"digest\": \"7cfe63a6855bd618\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStrictHenselian\", \"ConnectedComponent\"",
+   "results": "{\"t\": \"2026-10-24T13:36:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStrictHenselian\\\", \\\"ConnectedComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*component|component.*henselian|IsStrictHenselian",
+   "results": "{\"t\": \"2026-10-24T13:36:03Z\", \"tool\": \"grep\", \"query\": \"henselian.*component|component.*henselian|IsStrictHenselian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a henselian valuation ring every generic connected component of the product of two finite presentation special component envelopes specializes to their product special fibre",
+   "results": "{\"t\": \"2026-10-24T13:37:25Z\", \"tool\": \"leanfinder\", \"query\": \"Over a henselian valuation ring every generic connected component of the product of two finite presentation special component envelopes specializes to their product special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"HenselianLocalRing\", \"HenselianRing\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.TFAE\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"47fa382d6b118f26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal open subfunctor of a flat group scheme over a discrete valuation ring with prescribed special fibre connected component",
+   "results": "{\"t\": \"2026-10-24T14:20:43Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal open subfunctor of a flat group scheme over a discrete valuation ring with prescribed special fibre connected component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\"], \"digest\": \"05d9567204bee0fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"connectedComponent\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T14:20:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"connectedComponent\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph\", \"AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply\"], \"digest\": \"7c6684093f1fd260\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "component.*envelope|minimal.*open.*group|fpqc.*group",
+   "results": "{\"t\": \"2026-10-24T14:20:44Z\", \"tool\": \"grep\", \"query\": \"component.*envelope|minimal.*open.*group|fpqc.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat locally finitely presented group sheaf on a trait has a smallest component saturated open neighborhood of a special fibre component",
+   "results": "{\"t\": \"2026-10-24T14:23:37Z\", \"tool\": \"leansearch\", \"query\": \"A flat locally finitely presented group sheaf on a trait has a smallest component saturated open neighborhood of a special fibre component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.casesOn\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"8bcfe1659ed5ee8d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected component saturation of open neighborhoods in flat group schemes over valuation rings",
+   "results": "{\"t\": \"2026-10-24T14:23:38Z\", \"tool\": \"leanfinder\", \"query\": \"Connected component saturation of open neighborhoods in flat group schemes over valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.loc_const\", \"connectedComponentIn_mem_nhds\", \"IsValuativeTopology.mem_nhds_iff\", \"Valued.isOpen_integer\", \"ValuativeTopology.mem_nhds_iff\", \"AlgebraicGeometry.Flat.generalizingMap\", \"ValuativeTopology.mem_nhds\", \"IsValuativeTopology.mem_nhds_iff'\"], \"digest\": \"08dbfc6101325089\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-trait-group-finite-component-opens",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Trait descent prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), Anantharaman 4.2 Step 5, Lemma 4.2.4: the finite component-saturated open G_(Z), before subgroup/action descent; corrected neutral-product compatibility only over a strictly henselian trait.",
+   "via": [
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-component-minimal-envelope",
+  "worker": "stage1",
+  "summary": "Preserved the corrected statement. Constructed a finite generic-component candidate from finitely many affine neighbourhoods of the quasi-compact special component on an fpqc cover, then took a finite intersection to obtain the smallest envelope. Proved finite presentation, identity and isomorphism/flat-map functoriality directly. Extracted field fpqc group effectivity and henselian valuation sections through unavoidable components as two independent statement-only geometric inputs.",
+  "blueprint": "Inherited null ancestor: the nearest blueprint references resolve to no extant imported node. Realizes the trait descent prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), specifically Anantharaman 4.2 Step 5 before subgroup/action descent, with the already-corrected strict-local neutral-product clause. Current latest blueprint unit read; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-connected-product-components",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-weil-separably-closed-geometrically-connected",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "General scheme-theoretic base-change, field-component or fpqc-open-descent tool, used with the hypotheses written in the proof; no six-functor theorem or alternate unit route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-base-change",
+  "pqf-lem-locnoeth-lft",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sc-irreducible-components-cover",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-pc-field-extension-fpqc-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-4ce162e4f",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-4ce162e4f (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the 0B8F/0ADV Stacks sources. Anantharaman MSMF 33 is not in the local literature (WANTED), so the mathematics was checked directly. Shape: one commit, live item still unsplit (no A7), statement and stmt_deps identical to live, no doubled backslashes, uses equal proof_deps, no merged or missing ids, no SGA. Steps 1-9 and 11 are correct as written: finite affine pieces of the fpqc chart with quasi-compact Z_{T_i} give a finite J; one witness per omitted component gives a smallest (not merely minimal) envelope; the pointwise criterion holds through open descent; fp follows from qc fibres over D(pi); the product equality uses B-sections and local Spec B plus clopen pullbacks of components. Field effectivity lemma: true (fpqc-local lfp makes G limit-preserving, giving an fppf chart and an algebraic space; 0B8F then gives a scheme) and not a duplicate of the space-based nodes or of the ancestor trait node. Valuation-section lemma: true (unavoidable implies the closure meets X_s; a 05GU quasi-section maps into B; Galois acts transitively on pi_0(C_Omega)); it is strictly smaller than the item. Off-unit generic tools accepted. FIX in step 10: it lacked the argument that F x_S F' satisfies the item's hypotheses, which the existence of E_{F x F'} needs. Added a common chart W = T x_S T' with fpqc axioms, flat base change and composition, lfp composition, and separatedness via base change plus the diagonal of a composite. Step 10 is now non-elementary and proof_deps is updated; every added node is an existing Mathlib leaf. No statement change, no dropped nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitComponentMinimalEnvelope",
+  "declaration": "AlgebraicGeometry.TraitComponentEnvelope.minimal_envelope",
+  "declarations": [
+   "AlgebraicGeometry.TraitComponentEnvelope.specialMap",
+   "AlgebraicGeometry.TraitComponentEnvelope.genericMap",
+   "AlgebraicGeometry.TraitComponentEnvelope.FibreModel",
+   "AlgebraicGeometry.TraitComponentEnvelope.IsForm",
+   "AlgebraicGeometry.TraitComponentEnvelope.modelMap",
+   "AlgebraicGeometry.TraitComponentEnvelope.HasFibre",
+   "AlgebraicGeometry.TraitComponentEnvelope.IsComponentUnion",
+   "AlgebraicGeometry.TraitComponentEnvelope.IsFiniteComponentUnion",
+   "AlgebraicGeometry.TraitComponentEnvelope.IsCandidate",
+   "AlgebraicGeometry.TraitComponentEnvelope.envelope",
+   "AlgebraicGeometry.TraitComponentEnvelope.neutral",
+   "AlgebraicGeometry.TraitComponentEnvelope.FieldComponents",
+   "AlgebraicGeometry.TraitComponentEnvelope.NeutralProperties",
+   "AlgebraicGeometry.TraitComponentEnvelope.FiniteOnCharts",
+   "AlgebraicGeometry.TraitComponentEnvelope.IsLocallyFlatLfp",
+   "AlgebraicGeometry.TraitComponentEnvelope.IsoCompatibility",
+   "AlgebraicGeometry.TraitComponentEnvelope.ProductCompatibility",
+   "AlgebraicGeometry.TraitComponentEnvelope.MapCompatibility",
+   "AlgebraicGeometry.TraitComponentEnvelope.minimal_envelope"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitComponentMinimalEnvelope.lean",
+  "statement": "theorem minimal_envelope (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (F : (Over (Spec (.of R)))ᵒᵖ ⥤ GrpCat.{u}) (hF : IsForm F) : ∃ (Ms : FibreModel F (specialMap R)) (Mg : FibreModel F (genericMap R)), FieldComponents Ms ∧ FieldComponents Mg ∧ NeutralProperties Ms ∧ (∀ x : Ms.X.left, IsLeast {E | IsCandidate Ms Mg (connectedComponent x) E} (envelope Ms Mg (connectedComponent x)) ∧ IsFiniteComponentUnion (envelope Ms Mg (connectedComponent x)) Mg ∧ FiniteOnCharts (envelope Ms Mg (connectedComponent x))) ∧ (∀ V : Over (Spec (.of R)), (1 : F.obj (op V)) ∈ (envelope Ms Mg (neutral Ms)).obj (op V)) ∧ IsoCompatibility Ms Mg ∧ (IsStrictlyHenselianLocalRing R → ProductCompatibility Ms Mg) ∧ MapCompatibility Ms Mg",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ad0e2ebc",
+  "group": "NY",
+  "result": "pass",
+  "note": "The only change to the item node is its lean record; lean.statement matches the theorem signature exactly. All node clauses are rendered: canonical special and generic points of the DVR; fpqc sheaf of groups via the fpqcTopology of the def-weil-pbc-fpqc-covering record, with a separated flat lfp chart model; fibre models exist and are lft, with clopen finite-type components (FieldComponents); identity component geometrically connected, a subgroup on all tests, and equal to the identity component of (F×F)_s as an intersection of preimages; envelope = sInf of candidates with IsLeast (smallest, not just minimal), where candidates may have any, possibly infinite, union of generic components; finite generic union and finite presentation on every fpqc chart as conclusions; identity in the neutral envelope; isomorphism compatibility (also gives independence of the chosen models); product equality only under IsStrictlyHenselianLocalRing and only for neutral components; map compatibility with the node's locally-flat-lfp and onto hypotheses. Single universe u, no extra assumptions. The neutral set is not a duplicate of GrpObj.identityComponent, which needs a quasi-compact group; no DAG node for geometrically connected; three stmt_deps are Mathlib leaves. Docstrings carry the source place, blueprint tag and 11 proof steps; definitions have real data; only sorry. Not recompiled (rule of 2026-10-21, no changes made). Cosmetic: the IsForm docstring cites '4.A'."
+ }
+}

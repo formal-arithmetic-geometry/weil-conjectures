@@ -1,0 +1,401 @@
+{
+ "id": "lem-sfb-weighted-composition-derivative-bound",
+ "kind": "statement",
+ "title": "Compact derivative estimate for smooth matrix-weighted composition",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $d,m,q,r\\geq0$, let $O\\subseteq\\mathbf R^d$ and $P\\subseteq\\mathbf R^m$ be open, and let $g:O\\to P$ and $A:O\\to\\operatorname{Mat}_{r\\times q}(\\mathbf R)$ be smooth (each coordinate has continuous derivatives of every finite order). For any smooth $f:P\\to\\mathbf R^q$, put $T_{A,g}f(z)=A(z)f(g(z))$. This function is smooth on $O$. Given a compact $S\\subseteq O$ and an integer $k\\geq0$, there is a constant $C>0$, depending on $A,g,S,k$ but not on $f$, such that\n$$\\max_{|\\alpha|\\leq k}\\sup_{z\\in S}\\|\\partial^\\alpha(T_{A,g}f)(z)\\|\\leq C\\max_{|\\beta|\\leq k}\\sup_{w\\in g(S)}\\|\\partial^\\beta f(w)\\|.$$\nHere a multi-index is a tuple of nonnegative integers, its order is the sum of its entries, $\\partial^\\alpha$ is the corresponding repeated coordinate derivative, and the norms are Euclidean. Supremum over the empty compact set and the norm in a zero-dimensional target are $0$.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.A–3.B, inherited pp.11–13 not independently verified. Agent-stated Euclidean auxiliary estimate for the test-density topology; no claim that the unavailable document states this formula."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-bundle-sobolev-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $H=T_{A,g}f$. Its $a$-th scalar component is $H_a=\\sum_{b=1}^q A_{ab}(f_b\\circ g)$. The cited smooth sum, product and composition rules show that every $H_a$ is smooth, hence $H$ is smooth by the coordinate definition. This also covers an empty sum or zero-dimensional target. For any smooth scalar $h$, $\\partial_i h(z)=Dh(z)[e_i]$ is smooth: the differential is smooth and evaluation on a fixed basis vector is a continuous linear map. Repetition gives smoothness of every coordinate derivative of $A,g,f$ and $H$. All these are local assertions on the given open domains; no extension across their boundaries is asserted.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Calculus/FDeriv/Comp.lean",
+    "place": "Agent application of smooth calculus; ContDiff/Comp.lean:223,724; ContDiff/Operations.lean:184,450, and the corresponding clauses of lem-sfb-real-smooth-differentiation."
+   }
+  },
+  {
+   "text": "Applied to a smooth scalar $h$ and coordinate vectors, second-differential symmetry gives $\\partial_i\\partial_j h=\\partial_j\\partial_i h$. Indeed evaluation on a fixed vector is linear, so differentiating $Dh[e_j]$ gives $D(Dh)[e_i][e_j]$. Apply this to every smooth derivative of $h$ from step 1. Swapping adjacent coordinate derivatives therefore sorts any finite derivative word without changing its value. Thus, for the multi-index convention in the statement, $\\partial_i(\\partial^\\beta h)=\\partial^{\\beta+e_i}h$. The assertion is vacuous when there are no coordinate directions.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-real-second-derivative-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Calculus/FDeriv/Symmetric.lean",
+    "place": "Agent adjacent-swap argument from ContDiffAt.isSymmSndFDerivAt:533–534 and IsSymmSndFDerivAt.eq:98–101; smooth derivatives from step 1."
+   }
+  },
+  {
+   "text": "Induct on $|\\alpha|$, simultaneously for every $a,b$, to construct smooth scalar coefficients $c_{\\alpha\\beta ab}$ on $O$, independent of $f$, such that\n$$\\partial^\\alpha H_a=\\sum_{b=1}^q\\sum_{|\\beta|\\leq|\\alpha|}c_{\\alpha\\beta ab}(\\partial^\\beta f_b)\\circ g.$$\nAt order zero set $c_{0,0,ab}=A_{ab}$. For each nonzero $\\alpha$, choose once and for all $i$ with $\\alpha_i>0$ and put $\\gamma=\\alpha-e_i$. Differentiate the already constructed formula for $\\gamma$. The product and chain rules, evaluated on $e_i$, replace a term $c(\\partial^\\beta f_b)\\circ g$ by\n$$(\\partial_i c)(\\partial^\\beta f_b)\\circ g+\\sum_{j=1}^m c\\,\\partial_i g_j\\,(\\partial^{\\beta+e_j}f_b)\\circ g.$$\nHere the chain formula follows by expanding $Dg[e_i]=\\sum_j(\\partial_i g_j)e_j$ and using linearity of the outer differential; step 2 sorts its derivatives. Collect equal indices, explicitly setting\n$$c_{\\alpha\\beta ab}=\\partial_i c_{\\gamma\\beta ab}+\\sum_{j:\\beta_j>0}c_{\\gamma,\\beta-e_j,ab}\\,\\partial_i g_j,$$\nwhere coefficients outside $|\\beta|\\leq|\\gamma|$ are zero. This proves the inductive identity and smoothness using step 1. Every coefficient depends only on $A,g,\\alpha,\\beta,a,b$. If $d=0$, only $\\alpha=0$ occurs; if $m=0$, the chain sum is empty.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Calculus/FDeriv/Comp.lean",
+    "place": "Agent induction from HasFDerivAt.comp:105–107 and FDeriv/Mul.lean HasFDerivAt.mul:205–209; no higher chain-rule formula is assumed."
+   }
+  },
+  {
+   "text": "If $S=\\varnothing$, take $C=1$ and the estimate is $0\\leq0$. Assume henceforth $S\\ne\\varnothing$. Put $B=\\{\\beta\\in\\mathbf N^m:|\\beta|\\leq k\\}$ and $N=|B|\\geq1$; it is finite since each entry lies between $0$ and $k$. There are also finitely many $\\alpha\\in\\mathbf N^d$ with $|\\alpha|\\leq k$. For each coefficient in step 3 at these orders, extend it by zero outside $O$. This extension is continuous on $S$: near each point of $S\\subset O$ it equals the smooth coefficient. Apply the cited compact norm bound (with scalar target identified with $\\mathbf R^1$). Taking the maximum of $1$ and the finitely many resulting real bounds gives $M\\geq1$ with $|c_{\\alpha\\beta ab}(z)|\\leq M$ on $S$. Extend missing coefficients by zero. Crucially $M$ is chosen solely from $A,g,S,k$, before choosing $f$. If $q=0$ or $r=0$ there are no such coefficients and take $M=1$.",
+   "uses": [
+    "lem-sfb-compact-continuous-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Group/Bounded.lean",
+    "place": "Agent finite-maximum argument using IsCompact.exists_bound_of_continuousOn, additive declaration generated at lines 96–100."
+   }
+  },
+  {
+   "text": "For each $\\beta\\in B$, the map $z\\mapsto(\\partial^\\beta f)(g(z))$ is smooth on $O$ by step 1. Its zero extension is continuous on $S$ for the same local reason as in step 4. The compact norm bound therefore bounds its norm on $S$, equivalently the norm of $\\partial^\\beta f$ on $g(S)$. Thus\n$$P_f=\\max_{\\beta\\in B}\\sup_{w\\in g(S)}\\|\\partial^\\beta f(w)\\|$$\nis finite and nonnegative. The image $g(S)$ is indeed compact: pull any open cover back along continuous $g$, use a finite subcover of $S$, and then map it forward. No openness or unique-differentiability property of $g(S)$ is needed. Every scalar component satisfies $|\\partial^\\beta f_b(g(z))|\\leq\\|\\partial^\\beta f(g(z))\\|\\leq P_f$ by the Euclidean norm formula and the supremum definition.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-compact-continuous-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Group/Bounded.lean",
+    "place": "Agent application of IsCompact.exists_bound_of_continuousOn:96–100 to derivative compositions; smoothness supplied by lem-sfb-real-smooth-differentiation."
+   }
+  },
+  {
+   "text": "The expansion and scalar triangle inequality give $|\\partial^\\alpha H_a(z)|\\leq qNMP_f$ for every $|\\alpha|\\leq k$ and $z\\in S$. For $v\\in\\mathbf R^r$, writing $v=\\sum_a v_a e_a$ and using $\\|e_a\\|=1$ gives $\\|v\\|\\leq\\sum_a|v_a|$. Hence $\\|\\partial^\\alpha H(z)\\|\\leq rqNMP_f$. Take $C=1+rqNM>0$, independent of $f$, and then take the supremum over $S$ and the finite maximum over $\\alpha$. This is exactly the claimed inequality. For $q=0$ or $r=0$, $H$ is zero and this formula gives $C=1$; for $m=0$, $B=\\{0\\}$ and $N=1$. The order-zero case uses the same expansion without differentiation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Calculus/FDeriv/Comp.lean",
+    "place": "Agent finite-sum Euclidean norm calculation from the identities and bounds in steps 3–5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-real-smooth-differentiation",
+  "lem-sfb-real-second-derivative-symmetry",
+  "lem-sfb-compact-continuous-norm-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Calculus/FDeriv/Comp.lean",
+  "place": "Explicit coordinate-derivative induction and compactness estimate, assembled from the three existing Mathlib leaves. The inherited Demailly source remains WANTED locally and has not been read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth matrix A and smooth change of variables g on Euclidean open sets, derivatives up to order k of A times f composed with g on a compact set are bounded by a constant times derivatives up to order k of f",
+   "results": "8 hits; norm_iteratedFDeriv_comp_le'; norm_iteratedFDerivWithin_smul_le; norm_iteratedFDerivWithin_comp_le_aux; norm_iteratedFDerivWithin_comp_le; norm_iteratedFDeriv_comp_le; norm_iteratedFDeriv_clm_apply; norm_iteratedFDeriv_smul_le; ContinuousLinearMap.norm_iteratedFDerivWithin_le_of_bilinear_aux",
+   "date": "2026-10-24",
+   "verdict": "no match: Bounds.lean:500–519 and 524–544 bound pointwise iterated Frechet derivatives of composition and operator application separately. Combining them, extracting compact constants, and comparing coordinate derivatives are additional arguments; none is the stated compact matrix-weighted composition estimate in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContDiff.comp, ContDiff.clm_apply",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Bounds.lean:500–519 and 524–544 bound pointwise iterated Frechet derivatives of composition and operator application separately. Combining them, extracting compact constants, and comparing coordinate derivatives are additional arguments; none is the stated compact matrix-weighted composition estimate in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_iteratedFDeriv.*comp|norm_iteratedFDeriv.*mul|norm_iteratedFDeriv.*smul|norm_fderiv.*comp",
+   "results": "10 hits; Mathlib/Analysis/Calculus/ContDiff/Basic.lean; Mathlib/Analysis/Calculus/ContDiff/Basic.lean; Mathlib/Analysis/Calculus/ContDiff/Basic.lean; Mathlib/Analysis/Calculus/ContDiff/Basic.lean; Mathlib/Analysis/Calculus/ContDiff/Basic.lean; Mathlib/Analysis/Calculus/ContDiff/Bounds.lean; Mathlib/Analysis/Calculus/ContDiff/Bounds.lean; Mathlib/Analysis/Calculus/ContDiff/Bounds.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Bounds.lean:500–519 and 524–544 bound pointwise iterated Frechet derivatives of composition and operator application separately. Combining them, extracting compact constants, and comparing coordinate derivatives are additional arguments; none is the stated compact matrix-weighted composition estimate in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite order compact Ck seminorm estimate for smooth weighted composition operator A(x) f(g(x))",
+   "results": "8 hits; ContDiffMapSupportedIn.seminorm; ContDiffMapSupportedIn.supSeminorm; norm_iteratedFDeriv_comp_le; norm_iteratedFDeriv_comp_le'; ContDiffMapSupportedIn.seminorm_postcompLM_le; ContDiffMapSupportedIn.norm_toBoundedContinuousFunction; SeminormFamily.finset_sup_comp; ContDiffMapSupportedIn.seminorm_le_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: Bounds.lean:500–519 and 524–544 bound pointwise iterated Frechet derivatives of composition and operator application separately. Combining them, extracting compact constants, and comparing coordinate derivatives are additional arguments; none is the stated compact matrix-weighted composition estimate in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth pullback with a smooth matrix coefficient is a bounded linear operator for each compact finite derivative seminorm on Euclidean smooth functions",
+   "results": "8 hits; ContDiffMapSupportedIn.structureMapLM; ContDiffMapSupportedIn.seminorm_postcompLM_le; ContDiffMapSupportedIn.structureMapCLM; ContDiffMapSupportedIn.structureMapLM_eq; ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM; ContDiffMapSupportedIn.bounded_iteratedFDeriv; ContDiffMapSupportedIn.seminorm_apply; ContDiffMapSupportedIn.postcompCLM",
+   "date": "2026-10-24",
+   "verdict": "no match: Bounds.lean:500–519 and 524–544 bound pointwise iterated Frechet derivatives of composition and operator application separately. Combining them, extracting compact constants, and comparing coordinate derivatives are additional arguments; none is the stated compact matrix-weighted composition estimate in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "norm_iteratedFDeriv_clm_apply",
+   "results": "1 hits; norm_iteratedFDeriv_clm_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: Bounds.lean:500–519 and 524–544 bound pointwise iterated Frechet derivatives of composition and operator application separately. Combining them, extracting compact constants, and comparing coordinate derivatives are additional arguments; none is the stated compact matrix-weighted composition estimate in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_iteratedFDeriv_comp_le|norm_iteratedFDeriv_clm_apply|norm_iteratedFDerivWithin_smul_le",
+   "results": "7 hits; Mathlib/Analysis/Calculus/ContDiff/Basic.lean; Mathlib/Analysis/Calculus/ContDiff/Basic.lean; Mathlib/Analysis/Calculus/ContDiff/Bounds.lean; Mathlib/Analysis/Calculus/ContDiff/Bounds.lean; Mathlib/Analysis/Calculus/ContDiff/Bounds.lean; Mathlib/Analysis/Calculus/ContDiff/Bounds.lean; Mathlib/Analysis/Calculus/ContDiff/Bounds.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Bounds.lean:500–519 and 524–544 bound pointwise iterated Frechet derivatives of composition and operator application separately. Combining them, extracting compact constants, and comparing coordinate derivatives are additional arguments; none is the stated compact matrix-weighted composition estimate in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth functions on real Euclidean open sets coordinate partial derivative product and chain rule and smoothness of derivatives",
+   "results": "{\"t\": \"2026-10-24T06:57:16Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth functions on real Euclidean open sets coordinate partial derivative product and chain rule and smoothness of derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExistsContDiffBumpBase.y_smooth\", \"ContDiffBumpBase.smooth\", \"ExistsContDiffBumpBase.u_smooth\", \"OpenPartialHomeomorph.contDiff_univBall\", \"contDiff_stereoInvFunAux\", \"contDiffOn_euclidean\", \"hasFDerivWithinAt_euclidean\", \"OpenPartialHomeomorph.contDiff_unitBallBall\"], \"digest\": \"add744c3ea67d944\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "HasFDerivAt.comp",
+   "results": "{\"t\": \"2026-10-24T06:57:17Z\", \"tool\": \"loogle\", \"query\": \"HasFDerivAt.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HasFDerivAt.comp\"], \"digest\": \"ad1db5dc3232bec6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*(comp|mul|sum)|contDiffOn_fderiv",
+   "results": "{\"t\": \"2026-10-24T06:57:17Z\", \"tool\": \"grep\", \"query\": \"theorem.*(comp|mul|sum)|contDiffOn_fderiv\", \"sub\": \"Analysis/Calculus/ContDiff\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\", \"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\", \"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\"], \"digest\": \"96da5cbb021cf07e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem HasFDerivAt.comp|theorem HasFDerivAt.mul|ContDiffOn.fderiv|ContDiffOn.comp|ContDiffOn.mul",
+   "results": "{\"t\": \"2026-10-24T06:58:41Z\", \"tool\": \"grep\", \"query\": \"theorem HasFDerivAt.comp|theorem HasFDerivAt.mul|ContDiffOn.fderiv|ContDiffOn.comp|ContDiffOn.mul\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Basic.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Basic.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Basic.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Basic.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Comp.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Comp.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Comp.lean\"], \"digest\": \"56152ce4953edfce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact Ck seminorm bound weighted composition smooth matrix function pullback",
+   "results": "{\"t\": \"2026-10-24T06:58:41Z\", \"tool\": \"leansearch\", \"query\": \"Compact Ck seminorm bound weighted composition smooth matrix function pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Seminorm.pullback\", \"Seminorm.pullback_apply\", \"ContDiffMapSupportedIn.seminorm_le_iff\", \"ContDiffMapSupportedIn.seminorm\", \"ContDiffMapSupportedIn.supSeminorm\", \"ContDiffMapSupportedIn.seminorm_le_iff_withOrder\", \"LinearMap.toSeminorm_comp\", \"Seminorm.comp\"], \"digest\": \"322785bc5281faf8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frechet derivative chain rule derivative of composition of differentiable maps at a point",
+   "results": "{\"t\": \"2026-10-24T06:58:43Z\", \"tool\": \"leanfinder\", \"query\": \"Frechet derivative chain rule derivative of composition of differentiable maps at a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fderiv_clm_comp\", \"fderiv_comp'\", \"fderiv_comp\", \"HasFDerivAt.comp\", \"fderiv_comp_deriv\", \"fderiv_comp_deriv_of_eq\", \"HasFDerivAt.clm_comp\", \"HasDerivAt.comp_hasFDerivAt\"], \"digest\": \"ea025cacfe2bc648\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For smooth g and smooth matrix A the compact seminorm of derivatives through order k of A(x) f(g(x)) is bounded by C times the derivatives through order k of f on g(S)",
+   "results": "{\"t\": \"2026-10-24T06:58:45Z\", \"tool\": \"leanfinder\", \"query\": \"For smooth g and smooth matrix A the compact seminorm of derivatives through order k of A(x) f(g(x)) is bounded by C times the derivatives through order k of f on g(S)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"norm_iteratedFDeriv_comp_le'\", \"norm_iteratedFDerivWithin_comp_le_aux\", \"norm_iteratedFDeriv_comp_le\", \"norm_iteratedFDeriv_clm_apply\", \"norm_iteratedFDerivWithin_comp_le\", \"ContinuousLinearMap.norm_iteratedFDerivWithin_le_of_bilinear_of_le_one\", \"norm_iteratedFDerivWithin_clm_apply\", \"ContinuousLinearMap.norm_iteratedFDeriv_le_of_bilinear_of_le_one\"], \"digest\": \"2b6cde6bd7914217\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "grep",
+   "query": "isSymmSndFDerivAt|fderiv_fderiv.*(symm|comm)|iteratedFDeriv.*(symm|perm)",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"grep\", \"query\": \"isSymmSndFDerivAt|fderiv_fderiv.*(symm|comm)|iteratedFDeriv.*(symm|perm)\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\", \"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\", \"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\", \"Mathlib/Analysis/Calculus/ContDiff/RestrictScalars.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Basic.lean\", \"Mathlib/Analysis/Calculus/VectorField.lean\", \"Mathlib/Analysis/Calculus/VectorField.lean\", \"Mathlib/Analysis/Calculus/VectorField.lean\"], \"digest\": \"a209f6c628861efc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_bound_of_continuousOn",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"grep\", \"query\": \"exists_bound_of_continuousOn\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContDiffOn.fderiv_of_isOpen",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"loogle\", \"query\": \"ContDiffOn.fderiv_of_isOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ContDiffOn.fderiv_of_isOpen\"], \"digest\": \"d6828dc4071958c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContDiffAt.isSymmSndFDerivAt",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"loogle\", \"query\": \"ContDiffAt.isSymmSndFDerivAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ContDiffAt.isSymmSndFDerivAt\"], \"digest\": \"dd2cfd362d75c738\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "HasFDerivAt.mul",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"loogle\", \"query\": \"HasFDerivAt.mul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HasFDerivAt.mul\"], \"digest\": \"e166aed21ab62d41\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "ContDiffOn finite sum multiplication composition derivative on open set smooth",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"leansearch\", \"query\": \"ContDiffOn finite sum multiplication composition derivative on open set smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"contDiffOn_prod'\", \"ContDiffOn.sum\", \"ContMDiffAt.sum\", \"contMDiffOn_finsum\", \"ContDiff.comp_contMDiff\", \"ContDiffWithinAt.sum\", \"contDiffOn_prod\", \"contMDiff_finset_prod\"], \"digest\": \"5fc38f57ee19bf2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact.exists_bound_of_continuousOn",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"loogle\", \"query\": \"IsCompact.exists_bound_of_continuousOn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsCompact.exists_bound_of_continuousOn\"], \"digest\": \"dd759d827709328f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "HasFDerivAt multiplication product derivative",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"leansearch\", \"query\": \"HasFDerivAt multiplication product derivative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFDerivAt.mul'\", \"HasFDerivAt.fun_mul'\", \"HasFDerivAt.mul\", \"HasFDerivAt.fun_mul\", \"HasFDerivAt.multiset_prod\", \"HasFDerivAt.prodMk\", \"fderiv_fun_mul'\", \"HasFDerivAt.list_prod'\"], \"digest\": \"a1748a44d362eb65\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frechet derivative chain rule HasFDerivAt comp",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"leansearch\", \"query\": \"Frechet derivative chain rule HasFDerivAt comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFDerivAt.comp\", \"HasDerivAt.comp_hasFDerivAt_of_eq\", \"fderiv_clm_comp\", \"HasFDerivWithinAt.comp_hasFDerivAt_of_eq\", \"HasDerivAt.comp_hasFDerivAt\", \"HasFDerivAt.comp_hasDerivAt_of_eq\", \"fderiv_comp\", \"HasFDerivAt.comp_hasDerivAt\"], \"digest\": \"09ed96b5b8ccf5f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsCompact norm bound continuousOn compact set",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"leansearch\", \"query\": \"IsCompact norm bound continuousOn compact set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCompact.exists_bound_of_continuousOn'\", \"IsCompact.exists_bound_of_continuousOn\", \"ContinuousMap.norm_le\", \"ContinuousOn.isBigO_principal\", \"HasCompactSupport.exists_bound_of_continuous\", \"ContinuousMap.apply_le_norm\", \"Continuous.bounded_above_of_compact_support\", \"ContinuousOn.isBigOWith_principal\"], \"digest\": \"36c456b5c3374a4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth functions on open sets mixed directional derivatives commute",
+   "results": "{\"t\": \"2026-10-24T06:59:05Z\", \"tool\": \"leansearch\", \"query\": \"Smooth functions on open sets mixed directional derivatives commute\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffAt.iteratedFDeriv_comp_perm\", \"VectorField.fderivWithin_apply_lieBracket\", \"ContDiffAt.domDomCongr_iteratedFDeriv\", \"ContDiff.iterate_deriv\", \"contMDiffOn_union_iff_of_isOpen\", \"contDiffOn_infty_iff_deriv_of_isOpen\", \"contDiffOn_infty_iff_fderiv_of_isOpen\", \"ContDiffOn.deriv_of_isOpen\"], \"digest\": \"496cb5770ff930a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frechet derivative of product of scalar valued differentiable functions is product rule",
+   "results": "{\"t\": \"2026-10-24T06:59:06Z\", \"tool\": \"leanfinder\", \"query\": \"Frechet derivative of product of scalar valued differentiable functions is product rule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fderiv_fun_mul\", \"fderiv_mul\", \"fderiv_fun_mul'\", \"fderiv_mul'\", \"HasFDerivAt.mul\", \"HasFDerivAt.fun_mul\", \"HasFDerivAt.fun_mul'\", \"fderiv_fun_smul\"], \"digest\": \"7e9fff63acc83345\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth map on an open set has smooth Frechet derivative; smooth maps are closed under finite sums products and composition",
+   "results": "{\"t\": \"2026-10-24T06:59:07Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth map on an open set has smooth Frechet derivative; smooth maps are closed under finite sums products and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffOn.fderiv_of_isOpen\", \"contDiffOn_infty_iff_fderiv_of_isOpen\", \"ContMDiffWithinAt.mfderivWithin\", \"ContMDiffAt.mfderiv\", \"ContDiffOn.deriv_of_isOpen\", \"ContDiffOn.continuousOn_fderiv_of_isOpen\", \"ContMDiffWithinAt.mfderivWithin_apply\", \"ContMDiffAt.mfderiv_apply\"], \"digest\": \"1b8a52c3153cc63e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Second Frechet derivative of a twice continuously differentiable function is symmetric",
+   "results": "{\"t\": \"2026-10-24T06:59:08Z\", \"tool\": \"leanfinder\", \"query\": \"Second Frechet derivative of a twice continuously differentiable function is symmetric\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffAt.isSymmSndFDerivAt\", \"ContDiffAt.isSymmSndFDerivAt_of_omega\", \"ContDiffWithinAt.isSymmSndFDerivWithinAt\", \"second_derivative_symmetric\", \"ContDiffWithinAt.isSymmSndFDerivWithinAt_of_omega\", \"IsSymmSndFDerivAt.eq\", \"IsSymmSndFDerivAt\", \"IsSymmSndFDerivAt.iteratedFDeriv_cons\"], \"digest\": \"33c4755d57adc5f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function on a compact set has norm bounded above by a nonnegative real constant",
+   "results": "{\"t\": \"2026-10-24T06:59:09Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous function on a compact set has norm bounded above by a nonnegative real constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCompact.exists_bound_of_continuousOn'\", \"IsCompact.exists_bound_of_continuousOn\", \"ContinuousMap.norm_le_of_nonempty\", \"ContinuousMap.norm_le\", \"ContinuousMap.apply_le_norm\", \"BoundedContinuousFunction.norm_lt_iff_of_compact\", \"ContinuousMap.nnnorm_lt_iff_of_nonempty\", \"BoundedContinuousFunction.norm_lt_iff_of_nonempty_compact\"], \"digest\": \"0116ed83c0b8df10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of linear pullback with a smooth matrix coefficient between compact finite coordinate derivative seminorms of smooth Euclidean functions",
+   "results": "{\"t\": \"2026-10-24T07:01:27Z\", \"tool\": \"leanfinder\", \"query\": \"Continuity of linear pullback with a smooth matrix coefficient between compact finite coordinate derivative seminorms of smooth Euclidean functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffMapSupportedIn.structureMapCLM\", \"ContinuousOn.clm_bundle_apply₂\", \"ContinuousLineDeriv.continuous_lineDerivOp\", \"ContinuousOn.clm_bundle_apply\", \"ContDiffMapSupportedIn.continuous_iff_comp_withOrder\", \"ContinuousWithinAt.clm_bundle_apply₂\", \"ContinuousAt.clm_bundle_apply₂\", \"ExistsContDiffBumpBase.u_continuous\"], \"digest\": \"3ce378052cdfd224\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_iteratedFDeriv_comp_le|norm_iteratedFDeriv_clm_apply",
+   "results": "{\"t\": \"2026-10-24T07:01:27Z\", \"tool\": \"grep\", \"query\": \"norm_iteratedFDeriv_comp_le|norm_iteratedFDeriv_clm_apply\", \"sub\": \"Analysis/Calculus/ContDiff/Bounds.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"500\", \"513\", \"519\", \"537\"], \"digest\": \"70d8588be6e3a1a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: hits concern component calculus rules or pointwise iterated-Frechet bounds; none specializes in one line to the compact coordinate-seminorm estimate. Existing component nodes are cited instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-test-operations-continuous",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Symbol classes and real bundle pseudodifferential operators. Underlying notion: distributional bundle sections and their test-density pairing, used before local symbol quantization. Supporting input: test continuity needed for multiplication and for taking local coefficient distributions; auxiliary input to the bundle-test continuity proof: Compact derivative estimate for smooth matrix-weighted composition",
+   "via": [
+    "lem-sfb-test-operations-continuous",
+    "def-sfb-smooth-bundle-test-distributions",
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weighted-composition-derivative-bound",
+  "worker": "stage1",
+  "summary": "Q14: proved the unchanged smooth weighted-composition estimate by an explicit coefficient recurrence and finite compact bounds. Reused the existing smooth-calculus, second-derivative-symmetry and compact-norm-bound Mathlib leaves; no new nodes. Checked every cited statement and zero-dimensional/empty-set cases. The inherited Demailly source is unavailable; proof is agent-written.",
+  "blueprint": "Retains the inherited supporting chain for det-thm-sf-ctf-stability-direct-images proof (3), through analytic test-density continuity in lem-sfb-test-operations-continuous steps 2–4. The latest direct-images blueprint does not state this analytic estimate. blueprint_refs.py ancestor prints None for this existing chain, so from.node and via are retained; this split realizes the final supporting place by steps 1–6."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-e52111eb9",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-e52111eb9 (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes. I read the statements of the three cited Mathlib leaves (real-smooth-differentiation, real-second-derivative-symmetry, compact-continuous-norm-bound; all in unit sk-thm-sf-ctf-stability) and the item's only user, lem-sfb-test-operations-continuous: step 2 uses g=id and A=hI; steps 3-4 use g=x∘y⁻¹ and the transition matrix A. The statement is unchanged, true, and exactly what that user needs. Steps checked: step 1 gets smoothness from the sum/product/composition clauses and ∂_i h = ev_{e_i}∘Dh. Step 2 gets ∂_i∂_j = ∂_j∂_i from C² symmetry and sorts derivative words by adjacent swaps. Step 3 is a real induction (base c_00=A); I re-derived the recurrence c_{αβ}=∂_i c_{γβ}+Σ_{β_j>0} c_{γ,β−e_j}∂_i g_j. Step 3 also uses step 2 to read ∂_i∂^γ as ∂^α; step 2 states this in that form, so no citation is missing. Step 4: the zero extension is continuous on S ⊂ O, which is the compact-bound leaf's hypothesis, so M depends only on A, g, S, k. Step 5: P_f is finite because sup over g(S) equals sup over S of the composition. Step 6 is correctly elementary, with C=1+rqNM. Edge cases checked: S empty, d=0, m=0, q or r=0, k=0, and the 1-D first-order case. Duplicate search (rg -L over the snapshot DAG for weighted composition, Faà di Bruno, chain rule, ∂^α): the Sobolev chart-overlap and mollification nodes are different L² statements. Mathlib's norm_iteratedFDeriv_comp_le needs global bounds and has no weight, so the item is not a leaf. Demailly is absent from literature/ and correctly recorded as WANTED, with proof_origin agent. No SGA, no off-unit uses, no tool_uses. The inherited null blueprint.from.node is retained. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Calculus.WeightedCompositionDerivativeBound",
+  "declaration": "EuclideanSpace.matrixWeightedComposition_compact_derivative_bound",
+  "declarations": [
+   "EuclideanSpace.matrixWeightedComposition",
+   "EuclideanSpace.compactCoordinateDerivativeSup",
+   "EuclideanSpace.matrixWeightedComposition_compact_derivative_bound"
+  ],
+  "file": "lean/Sheaf/Analysis/Calculus/WeightedCompositionDerivativeBound.lean",
+  "statement": "theorem matrixWeightedComposition_compact_derivative_bound {d m q r : ℕ} (O : Set (EuclideanSpace ℝ (Fin d))) (P : Set (EuclideanSpace ℝ (Fin m))) (hO : IsOpen O) (hP : IsOpen P) (g : EuclideanSpace ℝ (Fin d) → EuclideanSpace ℝ (Fin m)) (A : EuclideanSpace ℝ (Fin d) → Matrix (Fin r) (Fin q) ℝ) (hgP : Set.MapsTo g O P) (hg : ContDiffOn ℝ ∞ g O) (hA : ∀ (a : Fin r) (b : Fin q), ContDiffOn ℝ ∞ (fun z ↦ A z a b) O) : (∀ f : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℝ (Fin q), ContDiffOn ℝ ∞ f P → ContDiffOn ℝ ∞ (matrixWeightedComposition A g f) O) ∧ ∀ S : Set (EuclideanSpace ℝ (Fin d)), IsCompact S → S ⊆ O → ∀ k : ℕ, ∃ C : ℝ, 0 < C ∧ ∀ f : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℝ (Fin q), ContDiffOn ℝ ∞ f P → compactCoordinateDerivativeSup S k (matrixWeightedComposition A g f) ≤ C * compactCoordinateDerivativeSup (g '' S) k f",
+  "branch": "sheaf-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed BundleSobolev.multiPartial componentwise; its owning definition node is added to stmt_deps. The two helper definitions only expand the weighted-composition and compact-maximum expressions of this item. Open-domain functions are represented by arbitrary ambient extensions, with smoothness required only on their open domains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-821b9e81d",
+  "group": "Q55",
+  "result": "fix",
+  "note": "Lean statement matches node clause by clause: d,m,q,r:ℕ Euclidean norms; O,P open; g MapsTo + ContDiffOn ∞ on O; A entrywise smooth on O; first conjunct T f smooth on O; ∀ S compact ⊆ O ∀ k ∃ C>0 before ∀ f; bound via compactCoordinateDerivativeSup (sSup over |α|≤k, z∈S of Euclidean norm of componentwise landed BundleSobolev.multiPartial; ambient fderiv correct at points of open O/P; sets bounded so sSup = max of suprema; sSup ∅ = 0, Fin 0 norm 0) on g '' S. Edge cases S/O/P empty, k=0, d=0, m=0, q=0, r=0 covered. Node text unchanged; added stmt_dep def-sfb-bundle-sobolev-space landed+reviewed, acyclic; lean.statement verbatim; helpers real with source/blueprint docstrings; theorem sorry with six-step plan; no duplicate in project lean trees. Sole fault H11: 'Second reading by Q55' is a worker self-check → FIX fixes/lem-sfb-weighted-composition-derivative-bound.report.md (worker report verbatim + independent second reading). No Lean change, no compile."
+ }
+}

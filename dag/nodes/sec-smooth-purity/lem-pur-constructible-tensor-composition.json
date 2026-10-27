@@ -1,0 +1,228 @@
+{
+ "id": "lem-pur-constructible-tensor-composition",
+ "kind": "statement",
+ "title": "Constructible exceptional composition and its canonical tensor mate",
+ "statement": "Fix the finite coefficient setting [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\ge1$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$. All schemes are finite-type $k$-schemes, without absolute separatedness; all arrows are $k$-morphisms. Use $D^b_{ctf}$, the bounded constructible finite-Tor subcategory [def-weil-finite-tor-amplitude], on small pro-etale sites, and the derived pullback and tensor [def-weil-derived-pullback-tensor-hom]. For a separated finite-type arrow $u:T\\to U$, write $F_u=Ru_!$, $G_u=Ru^!$ for compact supports and its transported constructible exceptional right adjoint [def-weil-exceptional-inverse-image], $\\varepsilon_u:F_uG_u\\to1$ for its counit, and $\\omega_u=G_u\\Lambda_U$. Use the specified canonical tensor map $\\theta_{u,P}:Lu^*P\\otimes^L\\omega_u\\to G_uP$ and dualizing base-change map $\\beta_{u,v}$ of [def-pur-co-smoothness]; these maps are defined without assuming cohomological smoothness. All unit, symmetry and reassociation maps are the canonical derived ones.\n\nLet $f:X\\to Y$ and $g:Y\\to Z$ be separated of finite type and put $h=gf$, again separated of finite type. Let $c:G_h\\to G_fG_g$ be the specified adjunction conjugate of compact-support composition $F_gF_f\\cong F_h$ [pur9-def-upper-shriek-composition]; it is a natural isomorphism on constructible finite-Tor inputs. With $c$ and compact-support composition inserted its counit normalization is\n$$\\varepsilon_{h,K}=\\varepsilon_{g,K}\\circ F_g(\\varepsilon_{f,G_gK})\\circ F_gF_f(c_K).$$\nHere the source of the right side is identified with $F_hG_hK$.\nSuppose $\\theta_{f,P}$ is invertible for every $P\\in D^b_{ctf}(Y,\\Lambda)$ and $\\theta_{g,K}$ is invertible for every $K\\in D^b_{ctf}(Z,\\Lambda)$. Put $W=\\omega_f\\otimes^LLf^*\\omega_g$. Let $r_K$ be the canonical pullback/tensor reassociation\n$$Lh^*K\\otimes^LW\\xrightarrow{\\sim}Lf^*(Lg^*K\\otimes^L\\omega_g)\\otimes^L\\omega_f.$$\nDefine\n$$\\Phi_K=c_K^{-1}\\circ G_f(\\theta_{g,K})\\circ\\theta_{f,Lg^*K\\otimes^L\\omega_g}\\circ r_K,$$\nand let $a=\\Phi_{\\Lambda_Z}:W\\xrightarrow{\\sim}\\omega_h$, with units inserted. These maps are isomorphisms in the derived category and satisfy the canonical-map identity\n$$\\Phi_K=\\theta_{h,K}\\circ(1_{Lh^*K}\\otimes a).$$\nNo invertibility of $\\omega_f,\\omega_g$ and no dualizing base-change hypothesis is imposed. The compositor and equation use only the transported etale adjunctions on constructible inputs, not an unrestricted exceptional adjoint on the pro-etale category.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+  "place": "Opening composition rule and displayed two-tensor-formula calculation; returned Steps 1–2, including counit and canonical-map normalization"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-co-smoothness",
+  "pur9-def-upper-shriek-composition",
+  "def-pur-compact-support-transpose-constructions"
+ ],
+ "proof": [
+  {
+   "text": "The construction [def-weil-exceptional-inverse-image] preserves bounded constructibility and finite Tor amplitude without absolute separatedness. Thus $\\omega_f,\\omega_g$ are in $D^b_{ctf}$, by applying it to the constant free rank-one coefficient units. The same statement supplies Noetherianity of our finite-type schemes. They are therefore quasi-compact and quasi-separated; [thm-nagata-compactification] supplies compactifications of $f,g,h$. Their proper ambient schemes are finite type over $k$ (proper is finite type and finite-type maps compose), so [lem-kun-dimension-finite-type] supplies finite dimensions. Choose nonnegative integer upper bounds, using zero for an empty ambient scheme. These are exactly the extra choices required by [lem-pur-compact-support-composite-transpose-domains]. Its other hypotheses are the finite coefficient datum and the assumed tensor isomorphisms for $f,g$. Consequently all displayed objects and successive Hom bijections are on its bounded constructible etale-origin domains, and the inverse projections satisfy its unit, coefficient-associativity and composite-projection equations. The specified adjunction conjugate $c$ is invertible, with counit $\\varepsilon_g\\circ F_g(\\varepsilon_fG_g)$ through compact-support composition, which gives precisely the stated counit normalization.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "thm-nagata-compactification",
+    "lem-kun-dimension-finite-type",
+    "lem-pur-compact-support-composite-transpose-domains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Opening composition rule and displayed two-tensor-formula calculation; returned Steps 1–2, including counit and canonical-map normalization"
+   }
+  },
+  {
+   "text": "At the coefficient unit, the defining transpose of $\\theta_{g,\\Lambda_Z}$ in [def-pur-co-smoothness] is $\\varepsilon_{g,\\Lambda_Z}$: the coefficient-unit inverse projection cancels the tensor unitors by the unit equation supplied in Step 1. The adjunction Hom bijection therefore identifies $\\theta_{g,\\Lambda_Z}$ with $1_{\\omega_g}$. Consequently, if $s:W\\xrightarrow{\\sim}Lf^*\\omega_g\\otimes^L\\omega_f$ is symmetry, the given definition yields $a=c_{\\Lambda_Z}^{-1}\\theta_{f,\\omega_g}s$. This is the map called $q$ in the domain lemma, precomposed with $s$.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-pur-compact-support-composite-transpose-domains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Last paragraph: the two tensor transformations agree by transposing the projection formula and the two counits in adjunction order; Stacks Tag 0037, categories.tex, definition-adjoint"
+   }
+  },
+  {
+   "text": "Apply the restricted-domain assertion of [lem-pur-composite-tensor-transpose] with $S_u=Lu^*$, $P_u=F_u$, $G_u=Ru^!$, and $V=\\omega_g$, $W_f=\\omega_f$. Step 1 verifies every domain and projection-coherence hypothesis. Under compact-support composition and $c$, its $\\tau^c_K$ is $c_K\\theta_{h,K}$: both are transposes of the same inverse composite projection followed by the composite counit at the unit. Its $q=\\theta_{f,\\omega_g}$ corresponds to $c_{\\Lambda_Z}a$ after symmetry, by Step 2. The lemma gives equal inverse transposes of $\\theta_{f,G_gK}(Lf^*\\theta_{g,K}\\otimes1)$ and $c_K\\theta_{h,K}(1\\otimes a)$, after the specified pullback, tensor and symmetry identifications. Explicitly the common word on $N=Lf^*(Lg^*K\\otimes^L\\omega_g)\\otimes^L\\omega_f$ is\n$$F_gF_fN\\xrightarrow{F_g\\pi^f_{Lg^*K\\otimes\\omega_g,\\omega_f}}F_g((Lg^*K\\otimes\\omega_g)\\otimes F_f\\omega_f)\\xrightarrow{F_g(1\\otimes\\varepsilon_{f,\\Lambda_Y})}F_g(Lg^*K\\otimes\\omega_g)\\xrightarrow{\\pi^g_{K,\\omega_g}}K\\otimes F_g\\omega_g\\xrightarrow{1\\otimes\\varepsilon_{g,\\Lambda_Z}}K.$$\nUnitors are inserted. Injectivity of the composite Hom bijection gives equality of the original arrows. Naturality of $\\theta_f$ gives $\\theta_{f,G_gK}(Lf^*\\theta_{g,K}\\otimes1)=G_f(\\theta_{g,K})\\theta_{f,Lg^*K\\otimes\\omega_g}$. Precompose with $r_K$ and postcompose with $c_K^{-1}$. The result is exactly $\\Phi_K=\\theta_{h,K}(1\\otimes a)$.",
+   "uses": [
+    "lem-pur-composite-tensor-transpose",
+    "lem-pur-compact-support-composite-transpose-domains",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Last paragraph: the two tensor transformations agree by transposing the projection formula and the two counits in adjunction order; Stacks Tag 0037, categories.tex, definition-adjoint"
+   }
+  },
+  {
+   "text": "Every intermediate coefficient $Lg^*K\\otimes^L\\omega_g$ lies in $D^b_{ctf}$ by Step 1. Thus the assumed tensor isomorphisms apply to both factors in $\\Phi_K$; functors preserve their inverses, and $c_K,r_K$ are isomorphisms. Hence $\\Phi_K$ is an isomorphism. Its value at the coefficient unit is $a$, so $a$ is an isomorphism as well. No tensor inverse of a dualizing object or dualizing base-change map has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Opening composition rule and displayed two-tensor-formula calculation; returned Steps 1–2, including counit and canonical-map normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-exceptional-inverse-image",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-compact-support-composite-transpose-domains",
+  "def-pur-co-smoothness",
+  "lem-pur-composite-tensor-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+  "place": "Last paragraph: the two tensor transformations agree by transposing the projection formula and the two counits in adjunction order; Stacks Tag 0037, categories.tex, definition-adjoint"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition of constructible exceptional inverse images on pro etale sites preserves counits and the projection formula tensor mate",
+   "results": "LightCondensed.ihomPoints_symm_comp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; Condensed.profiniteSolidCounit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.RanIsSheafOfIsCocontinuous.fac'; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint to compactly supported pushforward has a counit normalized compositor compatible with the relative dualizing tensor transformation",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible exceptional inverse image composition preserves counits and canonical relative dualizing tensor maps",
+   "results": "CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves_inv_fac_app; CategoryTheory.Functor.pointwiseRightKanExtensionCompIsoOfPreserves_inv_fac; lTensor.inverse_comp_lTensor; CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves_inv_fac; CategoryTheory.Functor.pointwiseRightKanExtensionCompIsoOfPreserves_inv_fac_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.PreservesImage.inv_comp_image_ι_map_assoc; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv_symm_apply_hom; CategoryTheory.conjugateIsoEquiv_symm_apply_inv; CategoryTheory.Bicategory.conjugateIsoEquiv; CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom; CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|lowerShriek|exceptional.*inverse",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|lowerShriek|exceptional.*inverse",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction calculus or ordinary tensor facts do not state the constructible exceptional canonical-map identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv_symm_apply_hom; CategoryTheory.conjugateIsoEquiv_symm_apply_inv; CategoryTheory.Bicategory.conjugateIsoEquiv; CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom; CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction calculus or ordinary tensor facts do not state the constructible exceptional canonical-map identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical dualizing tensor transformation for a composite of constructible exceptional inverse images",
+   "results": "BotHom.symm_dual_comp; PiTensorProduct.dualDistribEquivOfBasis_symm_apply; map_dualTensorHom; CharacterModule.dual_comp; TensorProduct.dualDistribEquivOfBasis_symm_apply; PiTensorProduct.dualDistribInvOfBasis.congr_simp; PiTensorProduct.dualDistrib_dualDistribInvOfBasis_left_inverse; dualTensorHomEquivOfBasis_symm_cancel_left",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction calculus or ordinary tensor facts do not state the constructible exceptional canonical-map identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transpose of two projection formula tensor maps equals the tensor map for the composite compactly supported pushforward",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.ExponentiableMorphism.pushforwardComp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; LightCondensed.ihomPoints_symm_comp; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction calculus or ordinary tensor facts do not state the constructible exceptional canonical-map identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of constructible exceptional inverse images is compatible with canonical dualizing tensor maps without invertibility of the dualizing objects",
+   "results": "LightCondensed.ihomPoints_symm_comp; CategoryTheory.tensorRightHomEquiv_tensor; CategoryTheory.tensorLeftHomEquiv_tensor; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.tensorRightHomEquiv_symm_naturality; CategoryTheory.tensorLeftHomEquiv_symm_naturality; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction calculus or ordinary tensor facts do not state the constructible exceptional canonical-map identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-co-smooth-composition",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-co-smooth-composition",
+   "place": "Opening composition rule and displayed two-tensor-formula calculation; returned Steps 1–2, including counit and canonical-map normalization",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-constructible-tensor-composition",
+  "worker": "stage1",
+  "summary": "Preserved the statement and used the existing restricted-domain verification and formal double-transpose lemma. Verified all domain hypotheses, normalized the coefficient-unit component, and obtained the specified canonical-map identity by equality of inverse transposes. No new nodes.",
+  "blueprint": "Opening composition rule and displayed two-tensor-formula calculation of lem-pur-co-smooth-composition; canonical-map normalization expanded by the last paragraph of thm-pur-cohomological-smoothness.proof.md.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Supplies choices of compactifications required by the restricted-domain verification; it is a generic existence tool, without replacing the tensor-composition route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies integer dimension bounds for the chosen proper ambient schemes; the unit supplies no dimension lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-30281d09d",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-30281d09d (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and the blueprint sources in full; there are no new nodes and no fixes. Shape: one commit holding the item and the report. The statement and stmt_deps are identical to live and side-live, where the node is unsplit. There is no repair note, so the re-split rule does not apply. The node has no SGA citation, and Stacks 0037 is categories-definition-adjoint. Source: the item follows lem-pur-co-smooth-composition.proof.md (main-20261015) and the last paragraph of thm-pur-cohomological-smoothness.proof.md, which says to transpose the projection formula and the two counits in adjunction order. Step 1: every hypothesis of lem-pur-compact-support-composite-transpose-domains is supplied by a cited statement. These are ctf of omega and Noetherianity from def-weil-exceptional-inverse-image, then Nagata (qcqs targets) and the finite dimension of the finite-type ambient schemes, with bound 0 when empty; def-kun-dimension is the same Krull dimension as the domain lemma's. I checked that c from pur9 (the transpose of eps_gf∘alpha) is the same map as the conjugate of alpha, and that the counit normalization matches. Step 2 is elementary: by the unit law, theta_{g,Λ} is the unitor, so a = c^{-1}θ_{f,ω_g}∘sym = q∘s. Step 3: I recomputed that τ^c_K(1⊗c_Λ) = c_Kθ_{h,K}; both transposes equal ρ(1⊗ε_{h,1})π^hα. I also checked the π = sym∘PF^{-1}∘P(sym) convention against θ's definition. The restricted-domain proviso of lem-pur-composite-tensor-transpose holds; injectivity plus naturality of θ_f then give Φ_K = θ_{h,K}(1⊗a), and the orientation and types check. Step 4 (invertibility) is correct. Edge cases: identity f or g, K=0, K=Λ, empty X and non-separated Y and Z are all fine. Duplicates: lem-pur-composition-tensor-mate (Q91, unsplit) is only the smooth, pure-dimension special case, so it could later cite or merge into this item (maintainer note). lem-pur-system-tensor-transpose-composition is in strict-system categories, and lem-pur-dualizing-unit-composite gives only the unit fact. I accept the tool_uses thm-nagata-compactification and lem-kun-dimension-finite-type as generic inputs; there is no cycle. Minor: the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleTensorComposition",
+  "declaration": "AlgebraicGeometry.ProEtale.ConstructibleTensorComposition.constructible_tensor_composition",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ConstructibleTensorComposition.dualizingCTF",
+   "AlgebraicGeometry.ProEtale.ConstructibleTensorComposition.reassociate",
+   "AlgebraicGeometry.ProEtale.ConstructibleTensorComposition.phi",
+   "AlgebraicGeometry.ProEtale.ConstructibleTensorComposition.unitComponent",
+   "AlgebraicGeometry.ProEtale.ConstructibleTensorComposition.constructible_tensor_composition"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleTensorComposition.lean",
+  "statement": "theorem constructible_tensor_composition (hf : ∀ (B : D P Y) (hB : CTF P Y B), IsIso (theta P e (dualizingCTF P e) B hB)) (hg : ∀ (K : D P Z) (hK : CTF P Z K), IsIso (theta P d (dualizingCTF P d) K hK)) : (∀ (K : D P Z) (hK : CTF P Z K), IsIso (conjugate P e d c n hn K hK.plus) ∧ conjugate P e d c n hn K hK.plus ≫ conjugateInv P e d c n hn K hK.plus = 𝟙 _ ∧ conjugateInv P e d c n hn K hK.plus ≫ conjugate P e d c n hn K hK.plus = 𝟙 _ ∧ (image P d).map ((image P e).map (conjugate P e d c n hn K hK.plus)) ≫ (image P d).map (counit P e _ (exceptionalOriginProperty P d K hK.plus).plus) ≫ counit P d K hK.plus = (alpha P e d c _ (exceptionalOriginProperty P (compositeEdge P e d c n hn) K hK.plus)).hom ≫ counit P (compositeEdge P e d c n hn) K hK.plus) ∧ (∀ (K L : D P Z) (hK : CTF P Z K) (hL : CTF P Z L) (b : K ⟶ L), (G P (compositeEdge P e d c n hn)).map b ≫ conjugate P e d c n hn L hL.plus = conjugate P e d c n hn K hK.plus ≫ (G P e).map ((G P d).map b)) ∧ IsIso (unitComponent P e d c n hn) ∧ (∀ (K : D P Z) (hK : CTF P Z K), IsIso (reassociate P e d K) ∧ IsIso (phi P e d c n hn K hK) ∧ phi P e d c n hn K hK = (S P (compositeEdge P e d c n hn)).obj K ◁ unitComponent P e d c n hn ≫ theta P (compositeEdge P e d c n hn) (dualizingCTF P (compositeEdge P e d c n hn)) K hK)",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published CompactSupportTranspose canonical maps at arbitrary retained compactifications. Added the already-landed domain node to stmt_deps to expose those constructions; no statement correction, new notion, ambient exceptional adjoint, absolute separatedness, dualizing invertibility or base-change premise."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a3ea9871",
+  "group": "Q45",
+  "result": "fix",
+  "note": "Re-delivery of 7b1c H2 RETURN: Lean byte-identical (previously judged correct); item differs from live only by stmt_deps (theorem replaced by new def node) and lean. New existing:true def-pur-compact-support-transpose-constructions on unchanged CompactSupportCompositeTransposeDomains: TeX matches theta/forwardProjection/pi/conjugate/conjugateInv/alpha, no choice from the domain theorem, check_existing/check_new_node clean, statement verbatim. FIX: added the missing body owners thm-sf-ambient-adjoint-class (specifiedExceptionalHomEquiv), thm-sf-comp-composition (originComposition) and def-kun-topological-krull-dimension (topologicalKrullDim) to the new node's stmt_deps, with a TeX citation each; no cycle; checks clean. Advisories: item's leftDerivedUpperStarComp/TensorIso owners are theorem nodes not in stmt_deps; StandingExceptionalComposition import redundant. No compile (no Lean change)."
+ }
+}

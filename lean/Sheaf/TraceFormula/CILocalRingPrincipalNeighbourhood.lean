@@ -65,6 +65,84 @@ theorem ciLocalRingPrincipalNeighbourhood
     (hmaximal : ∀ x ∈ a, x ∈ IsLocalRing.maximalIdeal A)
     (e : Localization.AtPrime Q ≃ₐ[k] (A ⧸ Ideal.ofList a)) :
     ∃ h : F, h ∉ Q ∧ Algebra.IsGlobalCompleteIntersection k (Localization.Away h) := by
-  sorry
+  classical
+  have : Algebra.FiniteType k F := RingHom.finiteType_algebraMap.mp hfinite
+  obtain ⟨n, φ, hφ⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.mp
+    (inferInstance : Algebra.FiniteType k F)
+  let P := MvPolynomial (Fin n) k
+  let I := RingHom.ker φ.toRingHom
+  let B := P ⧸ I
+  let E : B ≃ₐ[k] F := Ideal.quotientKerAlgEquivOfSurjective hφ
+  let q := Q.comap E.toRingHom
+  let p := q.comap (Ideal.Quotient.mk I)
+  let L := Localization.AtPrime p
+  let J : Ideal L := I.map (algebraMap P L)
+  have hM : Algebra.algebraMapSubmonoid B p.primeCompl = q.primeCompl :=
+    Ideal.map_primeCompl_comap_of_surjective (Ideal.Quotient.mk I)
+      Ideal.Quotient.mk_surjective q
+  have : IsLocalization q.primeCompl (L ⧸ J) := by
+    rw [← hM]
+    exact inferInstance
+  have : IsScalarTower k B (L ⧸ J) := by
+    apply IsScalarTower.of_algebraMap_eq'
+    ext r
+    rfl
+  let EJ : (L ⧸ J) ≃ₐ[k] Localization.AtPrime q :=
+    (IsLocalization.algEquiv q.primeCompl (L ⧸ J) (Localization.AtPrime q)).restrictScalars k
+  let EQ : Localization.AtPrime q ≃ₐ[k] Localization.AtPrime Q :=
+    Localization.localAlgEquiv q Q E rfl
+  let f : L →ₐ[k] Localization.AtPrime q :=
+    EJ.toAlgHom.comp (Ideal.Quotient.mkₐ k J)
+  let g : A →ₐ[k] Localization.AtPrime q :=
+    EQ.symm.toAlgHom.comp (e.symm.toAlgHom.comp (Ideal.Quotient.mkₐ k (Ideal.ofList a)))
+  have hf : Function.Surjective f := EJ.surjective.comp Ideal.Quotient.mk_surjective
+  have hg : Function.Surjective g :=
+    EQ.symm.surjective.comp (e.symm.surjective.comp Ideal.Quotient.mk_surjective)
+  have : IsLocalHom f.toRingHom := IsLocalHom.of_surjective _ hf
+  have : IsLocalHom g.toRingHom := IsLocalHom.of_surjective _ hg
+  have hkerf : RingHom.ker f.toRingHom = J := by
+    ext x
+    change EJ (Ideal.Quotient.mk J x) = 0 ↔ x ∈ J
+    constructor
+    · intro hx
+      apply Ideal.Quotient.eq_zero_iff_mem.mp
+      apply EJ.injective
+      simpa only [map_zero] using hx
+    · intro hx
+      rw [Ideal.Quotient.eq_zero_iff_mem.mpr hx, map_zero]
+  have hkerg : RingHom.ker g.toRingHom = Ideal.ofList a := by
+    ext x
+    change EQ.symm (e.symm (Ideal.Quotient.mk (Ideal.ofList a) x)) = 0 ↔ _
+    constructor
+    · intro hx
+      apply Ideal.Quotient.eq_zero_iff_mem.mp
+      apply e.symm.injective
+      apply EQ.symm.injective
+      simpa only [map_zero] using hx
+    · intro hx
+      rw [Ideal.Quotient.eq_zero_iff_mem.mpr hx, map_zero, map_zero]
+  have : IsRegularLocalRing L := inferInstance
+  obtain ⟨xs, hxs, hgen, _⟩ :=
+    (essentiallyFiniteTypeCIKernelInvariance k (Localization.AtPrime q) L A f g hf hg).mpr
+      ⟨a, hregular, hkerg.symm, hmaximal⟩
+  obtain ⟨h, hh, hci⟩ := Algebra.exists_globalCompleteIntersection_of_regularSequence
+    k n I q inferInstance xs.length xs.get
+    (by simpa only [List.ofFn_get] using hxs)
+    (by
+      rw [hkerf] at hgen
+      change J = Ideal.span (Set.range xs.get)
+      rw [← hgen]
+      ext x
+      simp)
+  refine ⟨E h, hh, ?_⟩
+  let EH : Localization.Away h ≃ₐ[k] Localization.Away (E h) :=
+    IsLocalization.algEquivOfAlgEquiv
+      (M := .powers h) (T := .powers (E h))
+      (Localization.Away h) (Localization.Away (E h)) E (Submonoid.map_powers E h)
+  rcases hci with hz | ⟨r, c, b, hcr, ⟨eb⟩, hdim⟩
+  · exact Or.inl (EH.toEquiv.subsingleton_congr.mp hz)
+  · refine Or.inr ⟨r, c, b, hcr, ⟨eb.trans EH⟩, ?_⟩
+    rw [← (PrimeSpectrum.homeomorphOfRingEquiv EH.toRingEquiv).isHomeomorph.topologicalKrullDim_eq]
+    exact hdim
 
 end TraceFormula

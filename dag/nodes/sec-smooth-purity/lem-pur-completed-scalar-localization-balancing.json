@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-completed-scalar-localization-balancing",
+ "kind": "statement",
+ "title": "Counit-normalized localization of ordinary completed scalar balancing",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,F$ of $\\mathbf Q_\\ell$, an embedding $i:E\\to F$, and a scheme $W$. Use the completed integral coefficient sheaves and constant integral coefficient sheaves of [def-weil-completed-integral-coefficients, def-weil-l-adic-coefficient-extension]. Let $H$ and $U$ be restriction from completed $E$ and $F$ coefficients to constant coefficients, with their exact additive structures [def-pur-native-constant-support-model]. Let $T$ be ordinary constant scalar extension, and $G$ ordinary completed scalar extension, with the specified universal derived counit [def-pur-strict-scalar-mate-evaluation-data, def-weil-pbc-bounded-constructible-tower]. For every ordinary natural isomorphism $\\beta:T\\circ H\\simeq U\\circ G$, there is a unique natural isomorphism $\\chi:D(T)\\circ D(H)\\simeq D(U)\\circ LG$ such that, for every complex $P$ of completed $E$ modules [lem-weil-derived-scalar-extension-restriction-adjunction], the composite of $\\chi_{QP}$, the image under $D(U)$ of the complex counit of $LG$, and the exact-functor factorization of $U$, equals the exact-functor factorization of $H$, then that of $T$, then the localization of the termwise map $\\beta_P$. The equation is exactly the one displayed in the attached Lean statement. The ordinary comparison $\\beta$ is retained, rather than replaced by an unrelated isomorphism.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-native-constant-support-model",
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent auxiliary for Step 3 of lem-pur-compact-support-scalar-limit-reduction. Stacks Tag 06YY supplies the localization construction of left-derived pullback; Tag 099L supplies the completed/constant coefficient context in proetale-cohomology.tex. Neither tag is claimed to state this whole counit-normalized auxiliary.",
+  "note": "Primary sources checked: https://stacks.math.columbia.edu/tag/06YY and https://stacks.math.columbia.edu/tag/099L. The complete normalization argument is given in the proof steps and the Lean proof."
+ },
+ "proof": [
+  {
+   "text": "The finite-free constant extension is exact by baseTensor_exact in [def-pur-strict-scalar-mate-evaluation-data]. Restriction U reflects isomorphisms because its underlying abelian sheaf is unchanged. Since U is exact, it reflects finite limits and colimits. Transfer preservation along beta to G composed with U, and reflect it along U. Thus G is exact. This works for identity field extensions and the zero complex as well.",
+   "uses": [
+    "def-pur-strict-scalar-mate-evaluation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent auxiliary for Step 3 of lem-pur-compact-support-scalar-limit-reduction. Stacks Tag 06YY supplies the localization construction of left-derived pullback; Tag 099L supplies the completed/constant coefficient context in proetale-cohomology.tex. Neither tag is claimed to state this whole counit-normalized auxiliary.",
+    "note": "Primary sources checked: https://stacks.math.columbia.edu/tag/06YY and https://stacks.math.columbia.edu/tag/099L. The complete normalization argument is given in the proof steps and the Lean proof."
+   }
+  },
+  {
+   "text": "The universal left-derived counit of an exact functor is invertible on every complex. Apply the proved exactScalarCochainIso helper of [def-pur-finite-scalar-coordinate-data] to G and its specified left-derived functor. Expanding that isomorphism on a complex gives precisely the specified complex counit, including the quotient-to-homotopy and homotopy-to-derived factorizations.",
+   "uses": [
+    "def-pur-finite-scalar-coordinate-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent auxiliary for Step 3 of lem-pur-compact-support-scalar-limit-reduction. Stacks Tag 06YY supplies the localization construction of left-derived pullback; Tag 099L supplies the completed/constant coefficient context in proetale-cohomology.tex. Neither tag is claimed to state this whole counit-normalized auxiliary.",
+    "note": "Primary sources checked: https://stacks.math.columbia.edu/tag/06YY and https://stacks.math.columbia.edu/tag/099L. The complete normalization argument is given in the proof steps and the Lean proof."
+   }
+  },
+  {
+   "text": "Apply the proved localizedBalancing helper of [def-pur-strict-scalar-mate-evaluation-data] to H, T, G, U, the counit isomorphism, and beta. Localization of the ordinary square constructs chi. The exact-factorization isomorphisms and derived counits give the displayed equation. Uniqueness follows by localization extensionality after cancelling those invertible factors. Substitute the complex-counit equation from the previous step pointwise to obtain the stated normalization.",
+   "uses": [
+    "def-pur-strict-scalar-mate-evaluation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent auxiliary for Step 3 of lem-pur-compact-support-scalar-limit-reduction. Stacks Tag 06YY supplies the localization construction of left-derived pullback; Tag 099L supplies the completed/constant coefficient context in proetale-cohomology.tex. Neither tag is claimed to state this whole counit-normalized auxiliary.",
+    "note": "Primary sources checked: https://stacks.math.columbia.edu/tag/06YY and https://stacks.math.columbia.edu/tag/099L. The complete normalization argument is given in the proof steps and the Lean proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "def-pur-finite-scalar-coordinate-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stage 3 F5, 2026-10-27: complete proof extracted from the scalar-completion step of the parent module to satisfy the per-file compilation limit. No new sorry statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary balancing isomorphism of exact scalar extension and conservative restriction has a unique derived localization compatible with complex counits",
+   "results": "{\"t\": \"2026-10-26T17:31:28Z\", \"tool\": \"leanfinder\", \"query\": \"An ordinary balancing isomorphism of exact scalar extension and conservative restriction has a unique derived localization compatible with complex counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\"], \"digest\": \"aef409c948d22f3c\"}",
+   "date": "2026-10-27",
+   "verdict": "The general exact-functor localization and finite-limit reflection APIs apply. The normalized completed-coefficient comparison is assembled from them using existing proved project helpers; no single Mathlib statement supplies this normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "{\"t\": \"2026-10-26T17:31:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapDerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId\"], \"digest\": \"3c19c5efb5a73fc2\"}",
+   "date": "2026-10-27",
+   "verdict": "The general exact-functor localization and finite-limit reflection APIs apply. The normalized completed-coefficient comparison is assembled from them using existing proved project helpers; no single Mathlib statement supplies this normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|preservesFiniteLimits_of_reflects_of_preserves",
+   "results": "{\"t\": \"2026-10-26T17:31:26Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryFactors|preservesFiniteLimits_of_reflects_of_preserves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Finite.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\"], \"digest\": \"cdf4cafe6ff58764\"}",
+   "date": "2026-10-27",
+   "verdict": "The general exact-functor localization and finite-limit reflection APIs apply. The normalized completed-coefficient comparison is assembled from them using existing proved project helpers; no single Mathlib statement supplies this normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "date": "2026-10-27",
+  "group": "F5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-scalar-limit-reduction",
+   "place": "Proof Step 3: localization of the fixed ordinary/completed balancing.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarLocalizationBalancing",
+  "file": "lean/Sheaf/Paper/CompletedScalarLocalizationBalancing.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.completedScalarBalancing_existsUnique",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.completedScalarBalancing_existsUnique"
+  ],
+  "statement": "theorem completedScalarBalancing_existsUnique (W : Scheme.{u})\n    [hHA : (constantRestriction l E W).Additive]\n    [hHL : PreservesFiniteLimits (constantRestriction l E W)]\n    [hHC : PreservesFiniteColimits (constantRestriction l E W)]\n    [hUA : (constantRestriction l F W).Additive]\n    [hUL : PreservesFiniteLimits (constantRestriction l F W)]\n    [hUC : PreservesFiniteColimits (constantRestriction l F W)]\n    [(pbcExtend (completedCoefficientMap l E F i W) ⋙\n      constantRestriction l F W).Additive]\n    (β : constantRestriction l E W ⋙ pbcExtend (constantMap l E F i W) ≅\n      pbcExtend (completedCoefficientMap l E F i W) ⋙ constantRestriction l F W) :\n    ∃! χ : (constantRestriction l E W).mapDerivedCategory ⋙ baseTensor l E F i W ≅\n        pbcDerivedExtend (completedCoefficientMap l E F i W) ⋙\n          (constantRestriction l F W).mapDerivedCategory,\n      ∀ P : CochainComplex (scalarReductionSource l E W) ℤ,\n        χ.hom.app (DerivedCategory.Q.obj P) ≫\n            (constantRestriction l F W).mapDerivedCategory.map\n              (pbcComplexCounit (completedCoefficientMap l E F i W) P) ≫\n            (constantRestriction l F W).mapDerivedCategoryFactors.hom.app\n              (((pbcExtend (completedCoefficientMap l E F i W)).mapHomologicalComplex\n                (.up ℤ)).obj P) =\n          (baseTensor l E F i W).map\n              ((constantRestriction l E W).mapDerivedCategoryFactors.hom.app P) ≫\n            baseTensorCounit l E F i W\n              (((constantRestriction l E W).mapHomologicalComplex (.up ℤ)).obj P) ≫\n            DerivedCategory.Q.map ((NatIso.mapHomologicalComplex β (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-85387",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261026T222643-L-678895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-85387",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261026T222643-L-678895",
+  "kind": "interface",
+  "note": "independent cc review: foundations+item concatenation vs published item (verbatim move; only proof of scalarCompletion_existsUnique, local attrs/options differ); new helper statement vs node lem-pur-completed-scalar-localization-balancing; node diffs vs clone; 10 direct importers compiled in sandbox against delivered modules"
+ }
+}

@@ -1,0 +1,448 @@
+{
+ "id": "lem-sfb-alternating-sheafification-universal-property",
+ "kind": "statement",
+ "title": "Alternating maps extend uniquely through module sheafification",
+ "statement": "Let $\\mathcal C$ be a site small relative to the coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], let $A$ be a presheaf of commutative rings, and let $P$ be a presheaf of $A$-modules: each $P(V)$ is an $A(V)$-module and restrictions are semilinear over restrictions of $A$. Let $A^\\#$ and $P^\\#$ be their sheafifications [def-weil-pbc-sheafification], with the induced $A^\\#$-module structure on $P^\\#$. For $n\\geq0$ define $\\bigwedge^n_{A^\\#}P^\\#$ as the sheafification of $V\\mapsto\\bigwedge^n_{A^\\#(V)}P^\\#(V)$, using [def-weil-pbc-exterior-algebra, def-pur-sheaf-tensor-product]. Let $F$ be any sheaf of $A^\\#$-modules [def-weil-sheaf-of-modules-category]. Evaluation on wedges of images of sections of $P$ induces a bijection\n$$\\operatorname{Hom}_{A^\\#}\\left(\\bigwedge^n_{A^\\#}P^\\#,F\\right)\\cong\\left\\{(b_V)_V: b_V:P(V)^n\\to F(V)\\text{ is }A(V)\\text{-multilinear and alternating, and commutes with every restriction}\\right\\}.$$\nHere $F(V)$ is viewed as an $A(V)$-module through $A(V)\\to A^\\#(V)$, alternating means zero whenever two entries are equal, and for $n=0$ the right side means a restriction-compatible family of elements of $F(V)$. The bijection sends $h$ to $b_V(x_1,\\ldots,x_n)=h_V(\\eta x_1\\wedge\\cdots\\wedge\\eta x_n)$, where $\\eta:P\\to P^\\#$ is the sheafification map. It is natural in $F$ and in morphisms of $A$-module presheaves $P$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY (lemma-sheafification-presheaf-modules): finite-variable alternating extension of the module sheafification universal property, extracted as a separate statement; the single-variable assertion alone is not being used as this theorem."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-exterior-algebra",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-site-exterior-sheaf",
+  "def-sfb-site-alternating-family"
+ ],
+ "proof": [
+  {
+   "text": "Write $B=A^\\#$, $Q=P^\\#$, and let $u:A\\to B$ and $\\eta:P\\to Q$ be the units. The module-sheafification interface gives the $B$-action on $Q$, compatible with the $A$-action on $P$, and identifies the underlying abelian sheaf with abelian sheafification. Forgetting abelian groups and commutative rings to sets therefore identifies $|\\eta|$ and $|u|$ with set-sheafification units. Since set-sheafification preserves finite limits, for every finite $k$ the map $|P|^k\\to |Q|^k$ is a set-sheafification unit. The same holds for $|A|\\times |P|^k\\to |B|\\times |Q|^k$. For $k=0$ this includes the final presheaf and final sheaf. Consequently maps from any of these sheafified products to $|F|$ are determined uniquely by their composites with the indicated units.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WJ (lemma-sheafification-exact), 00WH (proposition-sheafification-adjoint), and section-sheaves-algebraic-structures; module action: 03CY in sites-modules.tex"
+   }
+  },
+  {
+   "text": "A family $b$ on the right side of the statement is a morphism of presheaves of sets $|P|^n\\to |F|$. Apply the product sheafification of step 1 and the sheafification universal property to obtain a unique morphism of sheaves of sets $c:|Q|^n\\to |F|$ with $c\\eta^n=b$. In particular $c$ commutes with restriction along every site morphism. This assertion for $n=0$ extends the given map from the final presheaf to $|F|$ to the final sheaf.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH (proposition-sheafification-adjoint), applied to the finite products furnished by Tag 00WJ"
+   }
+  },
+  {
+   "text": "For each slot $i$, compare the maps $|Q|^{n+1}\\to |F|$ given by $c(\\ldots,x_i+y_i,\\ldots)$ and $c(\\ldots,x_i,\\ldots)+c(\\ldots,y_i,\\ldots)$. Their composites with $|P|^{n+1}$ agree by additivity of $b$, so step 1 makes them equal. Compare likewise the maps $|B|\\times |Q|^n\\to |F|$ given by $c(\\ldots,a x_i,\\ldots)$ and $a\\,c(\\ldots,x_i,\\ldots)$: on $|A|\\times |P|^n$ they agree by $A$-linearity of $b$ and compatibility of the units with actions, hence agree everywhere. Finally, for $i\\ne j$, insert the same variable in slots $i,j$ to compare $c\\circ\\delta_{ij}:|Q|^{n-1}\\to |F|$ with zero. On $|P|^{n-1}$ both are zero by alternation of $b$; step 1 again proves equality. Thus $c_V$ is $B(V)$-multilinear and alternating. The first two comparisons require $n\\geq1$ and the last requires $n\\geq2$; for $n=0$ all conditions are vacuous.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WH and 00WJ: equality by the universal property on finite products; action compatibility from sites-modules.tex, Tag 03CY"
+   }
+  },
+  {
+   "text": "Let $W(V)=\\bigwedge^n_{B(V)}Q(V)$, with the semilinear restrictions induced by those of $B$ and $Q$. The ordinary exterior-power universal property gives a unique $B(V)$-linear map $t_V:W(V)\\to F(V)$ satisfying $t_V(q_1\\wedge\\cdots\\wedge q_n)=c_V(q_1,\\ldots,q_n)$. These maps commute with restrictions: for an arrow $f:V'\\to V$, the two composites $W(V)\\to F(V')$ are $B(V)$-linear when the target action is restricted along $B(f)$. On every wedge they have values $F(f)c_V(q_1,\\ldots,q_n)$ and $c_{V'}(Q(f)q_1,\\ldots,Q(f)q_n)$, equal because $c$ is a sheaf map. They therefore agree by the uniqueness part of that same universal property. Hence $t:W\\to F$ is a morphism of presheaves of $B$-modules.",
+   "uses": [
+    "lem-trf-exterior-power-universal-property",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM (section-tensor-algebra), alternating quotient and wedge generators; exact universal property in the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Apply module sheafification with coefficient presheaf already the sheaf $B$. The presheaf map $t$ factors uniquely as $W\\to W^\\#\\xrightarrow{h}F$, with $h$ a $B$-module-sheaf morphism. By the definition in the statement $W^\\#=\\bigwedge_B^n Q$, and its formula on wedges of images from $P$ is precisely $h_V(\\eta x_1\\wedge\\cdots\\wedge\\eta x_n)=b_V(x_1,\\ldots,x_n)$. Conversely every $h$ yields such a family by composing its underlying map with the wedge map and $\\eta^n$, which are restriction-compatible and alternating multilinear. If two $h$ give the same family, their wedge evaluations $|Q|^n\\to |F|$ agree by step 1. Their induced linear maps $W(V)\\to F(V)$ then agree by exterior-power uniqueness, and the two sheaf maps agree by module-sheafification uniqueness. This proves that the constructions are inverse bijections.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-trf-exterior-power-universal-property",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules) with the coefficient presheaf already a sheaf; exterior universal property: algebra.tex, Tag 00DM"
+   }
+  },
+  {
+   "text": "For a module-sheaf morphism $v:F\\to F'$, wedge evaluation of $v\\circ h$ is $(v_V\\circ b_V)_V$. For a morphism of $A$-module presheaves $g:P'\\to P$, its sheafification satisfies $g^\\#\\eta'=\\eta g$; hence evaluation of $h\\circ\\bigwedge^n g^\\#$ at $(x_i)$ is $b_V(g_Vx_1,\\ldots,g_Vx_n)$. The exterior map here sends a pure wedge to the wedge of its images, as follows directly from the alternating quotient defining the exterior algebra. Uniqueness already proved makes these the naturality squares. For $n=0$, $W(V)=B(V)$ and $t_V(a)=a\\,c_V(*)$; the empty wedge is $1$, and evaluation gives the original compatible family of elements of $F(V)$. No choice of sections or local lifts enters these formulas.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM (section-tensor-algebra), degree-zero unit and functoriality of the alternating quotient; functorial module sheafification: sites-modules.tex, Tag 03CY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-sheafification",
+  "lem-trf-exterior-power-universal-property",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-product extension of Tag 03CY, using Sites Tags 00WH and 00WJ, the underlying-set comparison in section-sheaves-algebraic-structures, and the exterior universal property of algebra.tex Tag 00DM. The finite-variable argument is written out here; 03CY itself states only linear extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exteriorPower|ExteriorPower",
+   "results": {
+    "t": "2026-10-23T22:33:15Z",
+    "tool": "grep",
+    "query": "exteriorPower|ExteriorPower",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give linear module sheafification adjunctions, ordinary module exterior powers, or general colimits; none states finite-variable alternating extension through sheafification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of exterior powers of a module presheaf is exterior power of its sheafification",
+   "results": {
+    "t": "2026-10-23T22:33:16Z",
+    "tool": "leansearch",
+    "query": "Sheafification of exterior powers of a module presheaf is exterior power of its sheafification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.isColimitSheafifyCocone",
+     "PresheafOfModules.sheafify",
+     "ModuleCat.exteriorPower",
+     "TopCat.Presheaf.sheafify",
+     "PresheafOfModules.sheafifyMap",
+     "PresheafOfModules.sheafification",
+     "PresheafOfModules.toSheafify",
+     "CategoryTheory.plusPlusAdjunction"
+    ],
+    "digest": "a5071951f4166af8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give linear module sheafification adjunctions, ordinary module exterior powers, or general colimits; none states finite-variable alternating extension through sheafification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"sheafification\"",
+   "results": {
+    "t": "2026-10-23T22:33:16Z",
+    "tool": "loogle",
+    "query": "\"exteriorPower\", \"sheafification\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give linear module sheafification adjunctions, ordinary module exterior powers, or general colimits; none states finite-variable alternating extension through sheafification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification commutes with exterior powers of presheaves of modules over a sheaf of commutative rings",
+   "results": {
+    "t": "2026-10-23T22:33:17Z",
+    "tool": "leanfinder",
+    "query": "Sheafification commutes with exterior powers of presheaves of modules over a sheaf of commutative rings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "PresheafOfModules.Sheafify.mul_smul",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+     "PresheafOfModules.sheafificationCompToSheaf",
+     "PresheafOfModules.toPresheaf_map_toSheafify",
+     "PresheafOfModules.Sheafify.module"
+    ],
+    "digest": "fcb6c602370b7e05"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give linear module sheafification adjunctions, ordinary module exterior powers, or general colimits; none states finite-variable alternating extension through sheafification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating multilinear morphisms from a module presheaf to a module sheaf extend uniquely to its sheafification",
+   "results": {
+    "t": "2026-10-23T22:33:54Z",
+    "tool": "leanfinder",
+    "query": "Alternating multilinear morphisms from a module presheaf to a module sheaf extend uniquely to its sheafification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+     "PresheafOfModules.toSheafify_app_apply",
+     "PresheafOfModules.toSheafify",
+     "PresheafOfModules.toPresheaf_map_toSheafify",
+     "PresheafOfModules.toSheafify_app_apply'",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+     "PresheafOfModules.sheafifyMap_val",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm"
+    ],
+    "digest": "d7a5b712712f33e7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give linear module sheafification adjunctions, ordinary module exterior powers, or general colimits; none states finite-variable alternating extension through sheafification"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating|exteriorPower|ExteriorPower",
+   "results": {
+    "t": "2026-10-23T22:54:47Z",
+    "tool": "grep",
+    "query": "alternating|exteriorPower|ExteriorPower",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean"
+    ],
+    "digest": "0ce80d5a92e43a93"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary exterior-power universal properties and single-variable module-sheafification adjunctions are inputs, but none states the displayed finite-variable alternating sheafification bijection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"alternating\"",
+   "results": {
+    "t": "2026-10-23T22:54:48Z",
+    "tool": "loogle",
+    "query": "\"sheafification\", \"alternating\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary exterior-power universal properties and single-variable module-sheafification adjunctions are inputs, but none states the displayed finite-variable alternating sheafification bijection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A restriction compatible alternating multilinear map from a presheaf of modules to a module sheaf extends uniquely to the sheafification",
+   "results": {
+    "t": "2026-10-23T22:54:48Z",
+    "tool": "leansearch",
+    "query": "A restriction compatible alternating multilinear map from a presheaf of modules to a module sheaf extends uniquely to the sheafification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.sheafifyMap",
+     "PresheafOfModules.sheafification",
+     "PresheafOfModules.sheafification_map",
+     "PresheafOfModules.sheafify",
+     "PresheafOfModules.toSheafify_app_apply'",
+     "ModuleCat.Tilde.toOpen",
+     "PresheafOfModules.sheafifyMap.congr_simp",
+     "PresheafOfModules.sheafifyMap_val"
+    ],
+    "digest": "260d8c8f50d59ab9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary exterior-power universal properties and single-variable module-sheafification adjunctions are inputs, but none states the displayed finite-variable alternating sheafification bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating multilinear maps on a module presheaf extend uniquely to sheafification and are represented by the sheafified exterior power",
+   "results": {
+    "t": "2026-10-23T22:54:50Z",
+    "tool": "leanfinder",
+    "query": "Alternating multilinear maps on a module presheaf extend uniquely to sheafification and are represented by the sheafified exterior power",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.exteriorPower.desc_mk",
+     "ExteriorAlgebra.liftAlternatingEquiv_apply",
+     "ModuleCat.exteriorPower.desc",
+     "exteriorPower.linearMap_ext",
+     "ExteriorAlgebra.liftAlternating_apply_ιMulti",
+     "PresheafOfModules.sheafificationHomEquiv",
+     "PresheafOfModules.toSheafify",
+     "exteriorPower.linearMap_ext_iff"
+    ],
+    "digest": "406fbce15e9eb645"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary exterior-power universal properties and single-variable module-sheafification adjunctions are inputs, but none states the displayed finite-variable alternating sheafification bijection"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingMapLinearEquiv|sheafificationAdjunction|sheafifyComposeIso",
+   "results": {
+    "t": "2026-10-23T22:55:27Z",
+    "tool": "grep",
+    "query": "alternatingMapLinearEquiv|sheafificationAdjunction|sheafifyComposeIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean"
+    ],
+    "digest": "6543e54060358f3f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary exterior-power universal properties and single-variable module-sheafification adjunctions are inputs, but none states the displayed finite-variable alternating sheafification bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification preserves finite products so a natural multilinear alternating operation extends to associated module sheaves",
+   "results": {
+    "t": "2026-10-23T22:55:29Z",
+    "tool": "leanfinder",
+    "query": "Sheafification preserves finite products so a natural multilinear alternating operation extends to associated module sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.Sheafify.mul_smul",
+     "PresheafOfModules.Sheafify.add_smul",
+     "PresheafOfModules.Sheafify.module",
+     "PresheafOfModules.Sheafify.SMulCandidate.mk'",
+     "PresheafOfModules.Sheafify.smul_add",
+     "PresheafOfModules.Sheafify.instNonemptySMulCandidate",
+     "PresheafOfModules.Sheafify.smulCandidate",
+     "PresheafOfModules.Sheafify.SMulCandidate.x"
+    ],
+    "digest": "1d5bc1cf614d6c45"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary exterior-power universal properties and single-variable module-sheafification adjunctions are inputs, but none states the displayed finite-variable alternating sheafification bijection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-configuration-exterior-hom",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module. Supporting input: Tag 072C proof, displayed E_1 page supplied by Tag 0728, using the unordered distinct-tuple quotients and sign line of Tag 0727. Supporting input: Tag 0726, lemma-compute, including its open-and-closed distinct-locus assertion and its functorial Hom identification. Supporting algebraic input for 0726: extend sectionwise alternating maps through sheafification, before identifying the sign quotient.",
+   "via": [
+    "lem-sfb-etale-configuration-exterior-hom",
+    "lem-sfb-space-alternating-sign-cohomology-spectral",
+    "lem-sfb-space-qcoh-cohomology-finite-bound",
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-alternating-sheafification-universal-property",
+  "worker": "stage1",
+  "summary": "Proved the finite-variable extension using set-sheafification of finite products, then transferred additivity, scalar linearity and alternation by uniqueness. Applied the existing ordinary exterior universal property and module sheafification adjunction. Explicitly checked semilinear restrictions, naturality and degree zero. All inputs are existing Mathlib leaves; no new nodes.",
+  "blueprint": "Supports the ancestor place already recorded in blueprint.from.place: algebraic prerequisite of Stacks Tag 0726 in the quasi-compact-open cohomology-bound route, below latest sk-thm-sf-ctf-stability-direct-images.proof.md (3). The ancestor command reports from.node = null; preserved that existing provenance and its via list. No blueprint node states this finite-variable assertion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-523761acf",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-523761acf (reviewer sub-agent of L); spot-checked: Read in full: the item, its 6 proof steps, every cited statement (03CY module-sheafification interface leaf, underlying-sets leaf, finite-limit set-sheafification leaf, def-weil-pbc-sheafification, lem-trf-exterior-power-universal-property leaf, def-weil-pbc-exterior-algebra), the stmt_deps, the parent lem-sfb-etale-configuration-exterior-hom (its steps 2, 4 and 5 use exactly this statement with A = constant Z) and Stacks 03CY (sites-modules.tex:815), 00WH and 00WJ (sites.tex:2134) and 00DM. The statement is true and is not a restatement of a clause of the parent. My own proof: Hom(W#,F) = Hom_B-presheaf(W,F), which equals the alternating multilinear set-sheaf maps |Q|^n->|F|, which by density along |P|^n->|Q|^n equals the family b. Step 1 gives finite-product sheafification units, using that A is commutative and the site small. Step 3 transfers additivity, scalars via u(a)eta(x)=eta(ax), and alternation (vanishing on the diagonal, valid with 2-torsion) by uniqueness. Step 4: naturality as B(V)-linear maps into the restricted F(V'), correct. Step 5: injectivity goes through step 1, then exterior uniqueness, then sheafification uniqueness, never assuming surjectivity of the unit. Small cases n=0, n=1, n=2 with 2F=0, P=0 and the zero ring all check out. No new nodes; proof_deps equals the union of uses; no SGA. The rg -L duplicate search over alternating, multilinear/bilinear+sheafif and wedge+sheafif found nothing that states this: trilinear-universal is tensor-only, the sc-exterior-sheaf family is Zariski-only, multimap-universal is about inverse image. Route: every citation is a Mathlib leaf or definition, so no tool_uses are needed. Batch-5 flag lem-trf-exterior-power-universal-property: a Mathlib leaf of pure commutative algebra (exteriorPower.alternatingMapLinearEquiv) with no proof_deps, not part of the trace formula or Poincare duality or their proofs, so accepted. blueprint.from.node is the inherited null; same_as = []."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.AlternatingSheafificationUniversalProperty",
+  "declaration": "PresheafOfModules.alternating_sheafification_universal_property",
+  "declarations": [
+   "PresheafOfModules.alternating_sheafification_universal_property"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/AlternatingSheafificationUniversalProperty.lean",
+  "statement": "theorem alternating_sheafification_universal_property {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasWeakSheafify J AddCommGrpCat.{max u v w}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}] (A : Cᵒᵖ ⥤ CommRingCat.{max u v w}) (B : Sheaf J CommRingCat.{max u v w}) (α : (A ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w}) ⟶ ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj B).obj) [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] (n : ℕ) : ∃ e : ∀ (P : PresheafOfModules.{max u v w} (A ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w})) (F : ringedSiteModules.{max u v w} ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj B)), (SheafOfModules.siteExteriorPower (B := B) ((sheafification.{max u v w} α).obj P) n ⟶ F) ≃ SiteAlternatingFamily (A := A) P ((restrictScalars α).obj F.val) n, (∀ (P : PresheafOfModules.{max u v w} (A ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w})) (F : ringedSiteModules.{max u v w} ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj B)) (h : SheafOfModules.siteExteriorPower (B := B) ((sheafification.{max u v w} α).obj P) n ⟶ F) (U : Cᵒᵖ) (x : Fin n → P.obj U), (e P F h).val U x = h.val.app U (SheafOfModules.siteExteriorWedge (B := B) ((sheafification.{max u v w} α).obj P) n U (fun i ↦ ((sheafificationAdjunction.{max u v w} α).unit.app P).app U (x i)))) ∧ (∀ (P : PresheafOfModules.{max u v w} (A ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w})) (F G : ringedSiteModules.{max u v w} ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj B)) (v : F ⟶ G) (h : SheafOfModules.siteExteriorPower (B := B) ((sheafification.{max u v w} α).obj P) n ⟶ F) (U : Cᵒᵖ) (x : Fin n → P.obj U), (e P G (h ≫ v)).val U x = v.val.app U ((e P F h).val U x)) ∧ (∀ (P' P : PresheafOfModules.{max u v w} (A ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w})) (g : P' ⟶ P) (F : ringedSiteModules.{max u v w} ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj B)) (h : SheafOfModules.siteExteriorPower (B := B) ((sheafification.{max u v w} α).obj P) n ⟶ F) (U : Cᵒᵖ) (x : Fin n → P'.obj U), (e P' F (SheafOfModules.siteExteriorHom (B := B) ((sheafification.{max u v w} α).map g) n ≫ h)).val U x = (e P F h).val U (fun i ↦ g.app U (x i)))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7caba3df",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read the item node, both new def nodes, all stmt_dep records, the 3 modules and the report (Worker report + Second reading by NQ present). Every clause of the node matches. A^# is Mathlib's sheafification presentation (B with a locally injective and locally surjective α). siteExteriorPower = sheafification of the upstream PresheafOfModules.exteriorPower. SiteAlternatingFamily = sectionwise AlternatingMap over A(U) into restrictScalars α F, compatible with every restriction. The conclusion is an Equiv per P,F, pinned by the wedge-of-unit formula, with naturality in F and contravariant naturality in P via siteExteriorHom of the real exteriorPower.map. Edge cases n=0, n=2 in char 2, zero module/ring and empty site are covered; universes are general (coefficients max u v w). New nodes: real data; naturality is a named sorry theorem with a proof docstring (allowed); no general-site duplicate (exteriorSheaf is scheme-only). Records match the files verbatim, docstrings and imports OK, sorry only in the 2 theorems, lines ≤100. No fixes, so no compile; relied on the worker's reported deliver2 dry-run OK."
+ }
+}

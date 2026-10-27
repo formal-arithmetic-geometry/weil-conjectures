@@ -1,0 +1,169 @@
+{
+ "id": "lem-sfb-section-tensor-normalization-transport",
+ "kind": "statement",
+ "title": "Transport of normalized scalar tensor comparisons to section modules",
+ "statement": "Let a be a morphism of commutative condensed rings and T a scheme. Given a SectionScalarComparison s satisfying SectionScalarNormalized and a TensorNormalization t satisfying TensorNormalized, the same s and t satisfy SectionTensorNormalized a T s t. These are the exact predicates of [def-sfb-internal-section-scalar-pullback-comparison-data], [def-sfb-section-scalar-tensor-normalization-data] and [def-sfb-internal-derived-scalar-comparisons]. No flatness of a or cohomological bound is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (1), reduction comparison in the specified coefficient category; extracted old step 2. Stacks sites-cohomology.tex Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-section-scalar-pullback-comparison-data",
+  "def-sfb-section-scalar-tensor-normalization-data",
+  "def-sfb-internal-derived-scalar-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the ordinary internal tensor normalization by s.ordinary, s.restriction and the section tensor equivalence. Cancel precomposition by the exact section equivalence using Mathlib Equivalence.congrLeft. The coequalizer generator calculation and symmetry give x tensor z on every internal image, and ordinary naturality transports it to any section module.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-pd-proetale-section-module-functors",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the supplied derived tensor normalization by s.derived, sectionScalarRestriction and tensorComparison. The same equivalence cancellation constructs the derived section isomorphism. Cancellation of the inverse factors proves the final conjugation equation directly, without resolutions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the conjugated K-flat computation theorem to the constructed ordinary and derived isomorphisms and their proved generator and conjugation equations. These witnesses give SectionTensorNormalized.",
+   "uses": [
+    "lem-sfb-section-tensor-conjugate-computation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-proetale-section-module-functors",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-section-tensor-conjugate-computation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (1), scalar/tensor comparison. Explicit ordinary and derived equivalence conjugation, with only the K-flat computation equation split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension as tensor with the restricted regular module and compatibility with geometric pullback normalized by universal derived counits",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, KaehlerDifferential.moduleBaseChange', ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.tensorKaehlerEquivBase",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-functor API supplies the categorical tools; no direct match for the specified internal and section normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedFunctor",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.leftDerivedFunctor'",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-functor API supplies the categorical tools; no direct match for the specified internal and section normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalized|extendForgetTensorObjIso|leftDerivedFunctorCompIso",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-functor API supplies the categorical tools; no direct match for the specified internal and section normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted derived extension of scalars is tensor with the restricted regular module and commutes with geometric pullback with computation counit normalization",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-functor API supplies the categorical tools; no direct match for the specified internal and section normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUnique\"",
+   "results": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-functor API supplies the categorical tools; no direct match for the specified internal and section normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "residueDerivedTensorIso|derivedPullIso",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-functor API supplies the categorical tools; no direct match for the specified internal and section normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison of universal left derived functors compatible with their counits on cochain and homotopy categories",
+   "results": "CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.NatTrans.leftDerived, CategoryTheory.Functor.totalLeftDerivedCounit",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-functor API supplies the categorical tools; no direct match for the specified internal and section normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison of universal left derived functors compatible with their counits on cochain and homotopy categories",
+   "results": "CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.NatTrans.leftDerived, CategoryTheory.Functor.totalLeftDerivedCounit",
+   "date": "2026-10-24",
+   "verdict": "Universal derived-functor results supply the categorical API; no exact internal/section normalization match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarPullbackNormalization",
+  "date": "2026-10-24",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Proof steps 1--8, separated comparison constructions",
+   "via": [
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionTensorNormalizationTransport",
+  "file": "lean/Sheaf/Paper/SectionTensorNormalizationTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.section_tensor_normalized_of_normalized",
+  "statement": "theorem section_tensor_normalized_of_normalized (a : Λ ⟶ Λ') [IsMonHom a]\n    (T : Scheme.{u}) (s : SectionScalarComparison a T)\n    (hs : SectionScalarNormalized a T s) (t : TensorNormalization a T)\n    (ht : TensorNormalized a T t) : SectionTensorNormalized a T s t",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "blueprint": "Integral proper-base-change proof paragraph (1), the scalar-refined reduction comparison; original internal normalization proof steps 1--8. Blueprint searches scalar normalization, scalar pullback and restricted regular returned no matching blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-80d0c",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T033928-L-171853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T210243-L-3501642",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

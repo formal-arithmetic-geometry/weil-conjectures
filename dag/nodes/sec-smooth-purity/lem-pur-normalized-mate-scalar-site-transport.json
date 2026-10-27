@@ -1,0 +1,235 @@
+{
+ "id": "lem-pur-normalized-mate-scalar-site-transport",
+ "kind": "statement",
+ "title": "Normalized right mates commute with a scalar square and counit-preserving equivalences",
+ "statement": "Let $\\mathcal C_i,\\mathcal D_i$ for $i=A,B$ be categories [def-nagata-category], with functors $F_i:\\mathcal C_i\\to\\mathcal D_i$, $G_i,H_i:\\mathcal D_i\\to\\mathcal C_i$, specified adjunctions $F_i\\dashv G_i$ with counits $\\epsilon_i$, and natural isomorphisms $\\gamma_i:H_i\\xrightarrow{\\sim}G_i$. Put $z_{i,K}=\\epsilon_{i,K}\\circ F_i(\\gamma_{i,K})$. Let $S:\\mathcal C_A\\to\\mathcal C_B$ and $T:\\mathcal D_A\\to\\mathcal D_B$ be functors with natural isomorphisms $q:TF_A\\xrightarrow{\\sim}F_BS$ and $a:SH_A\\xrightarrow{\\sim}H_BT$. Assume, for every $K\\in\\mathcal D_A$,\n$$z_{B,TK}\\circ F_B(a_K)\\circ q_{H_AK}=T(z_{A,K}).$$\nLet $b_K:SG_AK\\to G_BTK$ be the $F_B\\dashv G_B$ transpose [def-weil-pbc-adjunction-mate] of $T(\\epsilon_{A,K})\\circ q_{G_AK}^{-1}$. Then\n$$b_K=\\gamma_{B,TK}\\circ a_K\\circ S(\\gamma_{A,K}^{-1}),$$\nso $b$ is a natural isomorphism.\n\nIn addition, let $\\mathcal C'_i,\\mathcal D'_i$ be categories, $F'_i:\\mathcal C'_i\\rightleftarrows\\mathcal D'_i:G'_i$ specified adjunctions with counits $\\epsilon'_i$, and $U_i:\\mathcal C_i\\to\\mathcal C'_i$, $V_i:\\mathcal D_i\\to\\mathcal D'_i$ equivalences (functors with quasi-inverses and natural isomorphisms from their two composites to the identity). Suppose given natural isomorphisms $c_i:V_iF_i\\xrightarrow{\\sim}F'_iU_i$ and $\\rho_i:U_iG_i\\xrightarrow{\\sim}G'_iV_i$ satisfying the actual counit equation\n$$\\epsilon'_{i,V_iK}\\circ F'_i(\\rho_{i,K})\\circ c_{i,G_iK}=V_i(\\epsilon_{i,K}).$$\nLet $S':\\mathcal C'_A\\to\\mathcal C'_B$, $T':\\mathcal D'_A\\to\\mathcal D'_B$ be functors and let $\\delta_X:S'U_A\\xrightarrow{\\sim}U_BS$, $\\delta_Y:T'V_A\\xrightarrow{\\sim}V_BT$, $q':T'F'_A\\xrightarrow{\\sim}F'_BS'$ be specified natural isomorphisms. Assume for every $M\\in\\mathcal C_A$ the specified square commutes:\n$$F'_B(\\delta_{X,M})\\circ q'_{U_AM}\\circ T'(c_{A,M})\n=c_{B,SM}\\circ V_B(q_M)\\circ\\delta_{Y,F_AM}.$$\nDefine the transported arrow with its endpoints explicitly by\n$$\\bar b_K=G'_B(\\delta_{Y,K}^{-1})\\circ\\rho_{B,TK}\\circ U_B(b_K)\\circ\\delta_{X,G_AK}\\circ S'(\\rho_{A,K}^{-1}).$$\nThen the transported arrow is the specified right mate for $q'$:\n$$\\epsilon'_{B,T'V_AK}\\circ F'_B(\\bar b_K)\n=T'(\\epsilon'_{A,V_AK})\\circ(q'_{G'_AV_AK})^{-1}.$$\nAll these equalities are natural in $K$ and $\\bar b_K$ is invertible. They remain valid after replacing $V_AK$ by an isomorphic object, and hence identify the right mate on all of $\\mathcal D'_A$. There is no additivity, tensor, sheaf, geometric or coefficient-ring hypothesis on this lemma beyond the explicitly stated functors and equations.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts and uniqueness of transposes: conjugate the normalized right-adjoint model, then substitute the site counit and the site/coefficient square; returned parent proof Steps 4–5, isolated as an abstract lemma."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Put $u_K=\\gamma_{B,TK}\\circ a_K\\circ S(\\gamma_{A,K}^{-1})$. The inverse Hom bijection of [lem-weil-pbc-adjunction-of-natural-bijection] sends $v$ to $\\epsilon_{B,TK}\\circ F_B(v)$, and is injective. Compute\n$$\\begin{aligned}\n\\epsilon_{B,TK}F_B(u_K)\n&=z_{B,TK}F_B(a_K)F_BS(\\gamma_{A,K}^{-1})\\\\\n&=T(z_{A,K})q_{H_AK}^{-1}F_BS(\\gamma_{A,K}^{-1})\\\\\n&=T(z_{A,K})TF_A(\\gamma_{A,K}^{-1})q_{G_AK}^{-1}\n=T(\\epsilon_{A,K})q_{G_AK}^{-1}.\n\\end{aligned}$$\nThe first equality expands $z_B$, the second is the assumed normalization, the third is naturality of $q$ on $\\gamma_{A,K}^{-1}$, and the last cancels $\\gamma_A$ with its inverse. This is precisely the inverse transpose of $b_K$ by its definition, so injectivity gives $b_K=u_K$. Juxtaposition in all calculations means functional composition, rightmost map first.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts and uniqueness of transposes: conjugate the normalized right-adjoint model, then substitute the site counit and the site/coefficient square; returned parent proof Steps 4–5, isolated as an abstract lemma."
+   }
+  },
+  {
+   "text": "The expression $u=\\gamma_B T\\circ a\\circ S\\gamma_A^{-1}$ is a composite of whiskered natural isomorphisms. Its inverse has components $S(\\gamma_{A,K})\\circ a_K^{-1}\\circ\\gamma_{B,TK}^{-1}$: composing in either order cancels three adjacent inverse pairs. Naturality follows by applying the given naturality equations to these composites (inverse naturality follows by multiplying the original equation by the inverses). Thus $b$ is a natural isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts and uniqueness of transposes: conjugate the normalized right-adjoint model, then substitute the site counit and the site/coefficient square; returned parent proof Steps 4–5, isolated as an abstract lemma."
+   }
+  },
+  {
+   "text": "For the second assertion fix $K$ and abbreviate $M=G_AK$, $r=\\rho_{A,K}$, $d=\\delta_{Y,K}$, $e=\\epsilon_{A,K}$, $C=c_{A,M}$, $p=q'_{U_AM}$, and $E=\\epsilon'_{B,T'V_AK}\\circ F'_B(\\bar b_K)$. Expanding $\\bar b$ and cancelling $S'(r^{-1})S'(r)$ gives\n$$\\begin{aligned}\nE F'_BS'(r)\n&=d^{-1}\\epsilon'_{B,V_BTK}F'_B(\\rho_{B,TK})F'_BU_B(b_K)F'_B(\\delta_{X,M})\\\\\n&=d^{-1}V_B(\\epsilon_{B,TK})c_{B,G_BTK}^{-1}F'_BU_B(b_K)F'_B(\\delta_{X,M})\\\\\n&=d^{-1}V_B(\\epsilon_{B,TK}F_B(b_K))c_{B,SM}^{-1}F'_B(\\delta_{X,M})\\\\\n&=d^{-1}V_BT(e)V_B(q_M^{-1})c_{B,SM}^{-1}F'_B(\\delta_{X,M}).\n\\end{aligned}$$\nThese four equalities use, respectively, naturality of $\\epsilon'_B$ on $d^{-1}$, the assumed $B$ counit equation, naturality of $c_B$ on the actual arrow $b_K:SM\\to G_BTK$, and the defining transpose identity proved in Step 1. Every term has source $F'_BS'U_AM$ and target $T'V_AK$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts and uniqueness of transposes: conjugate the normalized right-adjoint model, then substitute the site counit and the site/coefficient square; returned parent proof Steps 4–5, isolated as an abstract lemma."
+   }
+  },
+  {
+   "text": "The assumed square at $M$, solved by multiplying by its specified inverses, reads\n$$V_B(q_M^{-1})c_{B,SM}^{-1}F'_B(\\delta_{X,M})=\\delta_{Y,F_AM}\\,T'(C^{-1})p^{-1}.$$\nSubstitute this in Step 3. Naturality of $\\delta_Y:T'V_A\\to V_BT$ on $e:F_AM\\to K$ gives\n$$d^{-1}V_BT(e)\\delta_{Y,F_AM}=T'V_A(e).$$\nConsequently\n$$E F'_BS'(r)=T'(V_A(e)C^{-1})p^{-1}.$$\nThis uses only the displayed square and naturality, with no identification of a chosen comparison with an identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts and uniqueness of transposes: conjugate the normalized right-adjoint model, then substitute the site counit and the site/coefficient square; returned parent proof Steps 4–5, isolated as an abstract lemma."
+   }
+  },
+  {
+   "text": "The $A$ counit equation gives $V_A(e)C^{-1}=\\epsilon'_{A,V_AK}F'_A(r)$. Naturality of $q'$ on $r:U_AM\\to G'_AV_AK$ gives\n$$T'F'_A(r)p^{-1}=(q'_{G'_AV_AK})^{-1}F'_BS'(r).$$\nThus\n$$E F'_BS'(r)=T'(\\epsilon'_{A,V_AK})(q'_{G'_AV_AK})^{-1}F'_BS'(r).$$\nSince $r$ is an isomorphism, cancel the rightmost factor. This proves exactly the asserted counit identity for $\\bar b_K$. The Hom bijection of [lem-weil-pbc-adjunction-of-natural-bijection], with $F'_B\\dashv G'_B$, makes that identity characterize the transpose uniquely; hence $\\bar b_K$ is the specified right mate of $q'$, as defined in [def-weil-pbc-adjunction-mate].",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts and uniqueness of transposes: conjugate the normalized right-adjoint model, then substitute the site counit and the site/coefficient square; returned parent proof Steps 4–5, isolated as an abstract lemma."
+   }
+  },
+  {
+   "text": "All factors in the definition of $\\bar b$ are whiskerings of natural isomorphisms, including $U_Bb$ by Step 2; therefore $\\bar b$ is natural and invertible, its inverse being obtained by reversing the factors and inverting each. The mate of $(q')^{-1}$ is a natural transformation on all of $\\mathcal D'_A$ by [def-weil-pbc-adjunction-mate], and Step 5 identifies its restriction along $V_A$ with $\\bar b$. For any isomorphism $j:V_AK\\xrightarrow{\\sim}K'$, its component at $K'$ is explicitly\n$$G'_BT'(j)\\circ\\bar b_K\\circ S'G'_A(j^{-1}),$$\nby that naturality. This is invertible and independent of the presentation because it equals the already specified mate component. A quasi-inverse $W_A$ of $V_A$ supplies such a $j:V_AW_AK'\\cong K'$ for every $K'$. This proves the final replacement and exhaustivity claims without any extra geometric or coefficient hypothesis.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts and uniqueness of transposes: conjugate the normalized right-adjoint model, then substitute the site counit and the site/coefficient square; returned parent proof Steps 4–5, isolated as an abstract lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Explicit categorical expansion of the uniqueness-of-transposes argument in Existence, uniqueness, naturality and Charts; site-equivalence calculation written by NP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Equivalence",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_counit characterizes one mate; iterated_mateEquiv_conjugateEquiv concerns four adjunctions. Neither gives both model conjugation and the eight-category scalar/site transport with independently specified comparison isomorphisms in this statement by a one-line specialization. Read Mates.lean lines 123-132, 464-480 and 493-515."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(equivalence|conjug|counit)|conjug.*mateEquiv|mate.*counit",
+   "results": "14 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_counit characterizes one mate; iterated_mateEquiv_conjugateEquiv concerns four adjunctions. Neither gives both model conjugation and the eight-category scalar/site transport with independently specified comparison isomorphisms in this statement by a one-line specialization. Read Mates.lean lines 123-132, 464-480 and 493-515."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A counit compatible comparison between two right adjoint models identifies the coefficient mate and is preserved by a commutative square of equivalences",
+   "results": "8 hits: CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux, CategoryTheory.mateEquiv_counit, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit, CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison, CategoryTheory.CommSq.right_adjoint, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_counit characterizes one mate; iterated_mateEquiv_conjugateEquiv concerns four adjunctions. Neither gives both model conjugation and the eight-category scalar/site transport with independently specified comparison isomorphisms in this statement by a one-line specialization. Read Mates.lean lines 123-132, 464-480 and 493-515."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two adjunctions with counit normalized right adjoint models and a scalar comparison square have a conjugated right mate, and equivalences of categories preserving counits transport that same mate across a second scalar square",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv_counit_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_counit characterizes one mate; iterated_mateEquiv_conjugateEquiv concerns four adjunctions. Neither gives both model conjugation and the eight-category scalar/site transport with independently specified comparison isomorphisms in this statement by a one-line specialization. Read Mates.lean lines 123-132, 464-480 and 493-515."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating a right adjoint coefficient mate by isomorphisms of right adjoint models and transporting it through four category equivalences preserves its defining transpose equation",
+   "results": "8 hits: CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.mateEquiv, CategoryTheory.Bicategory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_counit characterizes one mate; iterated_mateEquiv_conjugateEquiv concerns four adjunctions. Neither gives both model conjugation and the eight-category scalar/site transport with independently specified comparison isomorphisms in this statement by a one-line specialization. Read Mates.lean lines 123-132, 464-480 and 493-515."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|homEquiv.*counit|iterated_mateEquiv_conjugateEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: counit and mate bijections are the existing leaves used here; iterated mates require adjunctions on different edges and do not directly give the full two-part normalized-model and independently specified equivalence-square statement. Read Mates.lean 123–132, 450–480 and Basic.lean 158–182."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right mate is the unique natural transformation satisfying the counit equation and commutes with transport through equivalences of adjunctions",
+   "results": "8 hits: CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit, CategoryTheory.Functor.rightKanExtension_hom_ext, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc, CategoryTheory.Functor.ranCounit, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, CategoryTheory.Functor.rightKanExtensionCounit",
+   "date": "2026-10-22",
+   "verdict": "no match: counit and mate bijections are the existing leaves used here; iterated mates require adjunctions on different edges and do not directly give the full two-part normalized-model and independently specified equivalence-square statement. Read Mates.lean 123–132, 450–480 and Basic.lean 158–182."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: counit and mate bijections are the existing leaves used here; iterated mates require adjunctions on different edges and do not directly give the full two-part normalized-model and independently specified equivalence-square statement. Read Mates.lean 123–132, 450–480 and Basic.lean 158–182."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A counit normalized right adjoint model identifies a right mate with a conjugated isomorphism and transport along equivalences preserving counits preserves its defining equation",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit, CategoryTheory.Bicategory.conjugateEquiv_apply, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: counit and mate bijections are the existing leaves used here; iterated mates require adjunctions on different edges and do not directly give the full two-part normalized-model and independently specified equivalence-square statement. Read Mates.lean 123–132, 450–480 and Basic.lean 158–182."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square of equivalences compatible with adjunction counits conjugates right adjoint mates via two comparison isomorphisms",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_counit, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_square",
+   "date": "2026-10-22",
+   "verdict": "no match: counit and mate bijections are the existing leaves used here; iterated mates require adjunctions on different edges and do not directly give the full two-part normalized-model and independently specified equivalence-square statement. Read Mates.lean 123–132, 450–480 and Basic.lean 158–182."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-affine-projection-coefficient-mate",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Finite-stage prerequisite of thm-pur-rational-and-qbar-purity, proof Steps 1–2 (launcher-created seed has no created.item blueprint ancestor). Ancestor finite-stage adjoint prerequisite, returned Step 8: identify the ordinary-etale affine projection mate with the current-blueprint counit-normalized smooth mate. Charts and uniqueness of transposes: conjugate the normalized right-adjoint model, then substitute the site counit and the site/coefficient square; returned parent proof Steps 4–5, isolated as an abstract lemma.",
+   "via": [
+    "lem-pur-etale-affine-projection-coefficient-mate",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-normalized-mate-scalar-site-transport",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement and existing ancestry. Gave six explicit steps: normalized conjugation, inverse/naturality, the B counit expansion, substitution of the square, the A counit and transpose uniqueness, and extension along an isomorphic essential-image presentation. Reused two existing Mathlib leaves; no new nodes.",
+  "blueprint": "Current blueprint exceptional-reduction proof, Existence, uniqueness, naturality and Charts: expands the counit-normalized transpose identification and the site/coefficient conjugation required by the parent Steps 4–5. The seed has no imported blueprint ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NP-3c2f98d62",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-3c2f98d62 (reviewer sub-agent of L); spot-checked: I read the whole item and recomputed each step. The statement, unchanged from live (where it is still unsplit, not on the dropped list, with no repair note), is well-typed. b_K is the mate of q^{-1}, and b̄_K: S'G'_AV_AK→G'_BT'V_AK is the mate component of (q')^{-1}. Step 1: expanding z_B, then the normalization rearranged by q^{-1}, then naturality of q^{-1} on γ_A^{-1}, then cancelling γ_A. Injectivity comes from the Ψ^{-1}(v)=ε∘F(v) clause of lem-weil-pbc-adjunction-of-natural-bijection, so the citation is correct. Step 3: naturality of ε'_B at δ_Y^{-1}, the B counit equation, naturality of c_B^{-1} on b_K, and the Step-1 transpose identity; all endpoints check. Step 4: I re-derived the solved square, and δ_Y naturality on ε_A is right. Step 5: the A counit equation, (q')^{-1} naturality on ρ_A, cancelling the iso F'_BS'(ρ_A), and the transpose characterization via the Hom-bijection node and the def-weil-pbc-adjunction-mate transpose clause. Step 6: naturality of the mate along j:V_AK≅K' plus essential surjectivity from the quasi-inverse. Small cases: the identity data gives b=id, and a nontrivial automorphism γ shows the normalization is actually used. The only hypothesis stronger than needed is the full equivalence of U, V; that is harmless and no target is weakened. Source: the main-20261015 sk-lem-sp-reduction-exceptional proof, read in full (uniqueness of transposes / Charts). No SGA. No new nodes. Duplicate candidates: lem-sfb-equivalence-square-inverse-mate-coherence(3) runs in the converse direction; lem-amb-mate-unit-counit is the single-mate identity only. The citer lem-pur-etale-affine-projection-coefficient-mate, Steps 2–3, applies both parts as stated. Searches cover all three kinds, and proof_deps equals the union of uses. Only cosmetic remark: the report mentions a citations.json that is not committed. No tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormalizedMateScalarSiteTransport",
+  "declaration": "CategoryTheory.normalizedMateScalarSiteTransport",
+  "declarations": [
+   "CategoryTheory.normalizedMateTransport",
+   "CategoryTheory.normalizedRightMate",
+   "CategoryTheory.normalizedMateScalarSiteTransport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NormalizedMateScalarSiteTransport.lean",
+  "statement": "theorem normalizedMateScalarSiteTransport {CA : Type u₁} {DA : Type u₂} {CB : Type u₃} {DB : Type u₄} [Category.{v₁} CA] [Category.{v₂} DA] [Category.{v₃} CB] [Category.{v₄} DB] (FA : CA ⥤ DA) (GA HA : DA ⥤ CA) (FB : CB ⥤ DB) (GB HB : DB ⥤ CB) (adjA : FA ⊣ GA) (adjB : FB ⊣ GB) (γA : HA ≅ GA) (γB : HB ≅ GB) (S : CA ⥤ CB) (T : DA ⥤ DB) (q : FA ⋙ T ≅ S ⋙ FB) (a : HA ⋙ S ≅ T ⋙ HB) (hnorm : ∀ K : DA, q.hom.app (HA.obj K) ≫ FB.map (a.hom.app K) ≫ FB.map (γB.hom.app (T.obj K)) ≫ adjB.counit.app (T.obj K) = T.map (FA.map (γA.hom.app K) ≫ adjA.counit.app K)) {CA' : Type u₅} {DA' : Type u₆} {CB' : Type u₇} {DB' : Type u₈} [Category.{v₅} CA'] [Category.{v₆} DA'] [Category.{v₇} CB'] [Category.{v₈} DB'] (FA' : CA' ⥤ DA') (GA' : DA' ⥤ CA') (FB' : CB' ⥤ DB') (GB' : DB' ⥤ CB') (adjA' : FA' ⊣ GA') (adjB' : FB' ⊣ GB') (UA : CA ≌ CA') (VA : DA ≌ DA') (UB : CB ≌ CB') (VB : DB ≌ DB') (cA : FA ⋙ VA.functor ≅ UA.functor ⋙ FA') (cB : FB ⋙ VB.functor ≅ UB.functor ⋙ FB') (ρA : GA ⋙ UA.functor ≅ VA.functor ⋙ GA') (ρB : GB ⋙ UB.functor ≅ VB.functor ⋙ GB') (hcA : ∀ K : DA, cA.hom.app (GA.obj K) ≫ FA'.map (ρA.hom.app K) ≫ adjA'.counit.app (VA.functor.obj K) = VA.functor.map (adjA.counit.app K)) (hcB : ∀ K : DB, cB.hom.app (GB.obj K) ≫ FB'.map (ρB.hom.app K) ≫ adjB'.counit.app (VB.functor.obj K) = VB.functor.map (adjB.counit.app K)) (S' : CA' ⥤ CB') (T' : DA' ⥤ DB') (δX : UA.functor ⋙ S' ≅ S ⋙ UB.functor) (δY : VA.functor ⋙ T' ≅ T ⋙ VB.functor) (q' : FA' ⋙ T' ≅ S' ⋙ FB') (hsquare : ∀ M : CA, T'.map (cA.hom.app M) ≫ q'.hom.app (UA.functor.obj M) ≫ FB'.map (δX.hom.app M) = δY.hom.app (FA.obj M) ≫ VB.functor.map (q.hom.app M) ≫ cB.hom.app (S.obj M)) : (∀ K : DA, FB'.map ((normalizedMateTransport ρA ρB δX δY (mateEquiv adjA adjB q.inv).natTrans).app K) ≫ adjB'.counit.app (T'.obj (VA.functor.obj K)) = q'.inv.app (GA'.obj (VA.functor.obj K)) ≫ T'.map (adjA'.counit.app (VA.functor.obj K))) ∧ normalizedMateTransport ρA ρB δX δY (mateEquiv adjA adjB q.inv).natTrans = whiskerLeft VA.functor (mateEquiv adjA' adjB' q'.inv).natTrans ∧ IsIso (normalizedMateTransport ρA ρB δX δY (mateEquiv adjA adjB q.inv).natTrans) ∧ IsIso (mateEquiv adjA' adjB' q'.inv).natTrans ∧ (∀ (K : DA) (K' : DA') (j : VA.functor.obj K ≅ K'), (mateEquiv adjA' adjB' q'.inv).app K' = S'.map (GA'.map j.inv) ≫ (normalizedMateTransport ρA ρB δX δY (mateEquiv adjA adjB q.inv).natTrans).app K ≫ GB'.map (T'.map j.hom))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c54b10536",
+  "group": "NH",
+  "result": "pass",
+  "note": "Clause-by-clause check of both parts against the node: mateEquiv adjA adjB q.inv is b (TwoSquare directions and mateEquiv_counit match T(eps_A)∘q^{-1}); hnorm, hcA/hcB and hsquare are the node's equations with every endpoint checked; normalizedMateTransport is the five-factor b̄ in the stated order, built from given data with no choice; the conclusions are the counit identity, b̄ = whiskerLeft VA (mate of q'^{-1}), IsIso of b̄ and of the mate, and the isomorphic-replacement formula (Step 6); all true. Mathlib ≌ is not a stronger hypothesis because only .functor is used. 16 independent universes. Statement field verbatim in the file; only the lean field changed versus side-live. No duplicate in side-live or Mathlib (private normalizedMate_* in SectionDerivedPushpullNormalization is unrelated). Docstrings carry source place, blueprint tag and proof steps; proofs are sorry only; def has real data; report sections present. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261023T102434-L-2899040",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.normalizedMateScalarSiteTransport",
+   "CategoryTheory.normalizedRightMate"
+  ],
+  "sorry_after": []
+ }
+}

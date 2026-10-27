@@ -1,0 +1,378 @@
+{
+ "id": "lem-sf-finite-free-comparison-transitivity",
+ "kind": "statement",
+ "title": "Transitivity of finite-free counit and evaluation coefficient comparisons",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ and a prime $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber]. Let $X,V,Z$ be separated finite-type $k$-schemes, $f:V\\to X$ separated of finite type, and $i:Z\\hookrightarrow X$ a closed immersion [def-weil-scheme-morphism-properties]. On ordinary small etale derived categories use $Rf_{*,R}$, $G_R=Ri_R^!$ right adjoint to $i_{*,R}$, and $\\omega_R=a_{X,R}^{\\times}R$, where $a_X:X\\to\\operatorname{Spec}k$ and $a_{X,R}^{\\times}$ is right adjoint to the compact-support functor defined by a fixed compactification [def-weil-pbc-derived-categories, lem-exc-closed-ambient, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Write $H_R(K,M)=R\\mathcal Hom_R(K,M)$ and $D_RK=H_R(K,\\omega_R)$ [def-pur-derived-internal-hom, lem-weil-duality-pairing].\n\nLet $A\\to B\\to C$ be homomorphisms of finite commutative rings annihilated by powers of $\\ell$, with $B$ finite free over $A$ and $C$ finite free over $B$. For a coefficient map $a:R\\to S$ put $T_a=-\\otimes_R^LS$. Let $c_a:T_aRf_{*,R}\\to Rf_{*,S}T_a$ be the extended inverse-image counit transpose; let $b_a:T_aG_R\\to G_ST_a$ be the extended exceptional counit transpose using the inverse closed-direct-image comparison; and let $u_a:T_a\\omega_R\\to\\omega_S$ be the extended structure-morphism compact-support counit transpose. The compact-support comparison is the proper projection comparison composed with open extension by zero. Let $v_a:T_aH_R(K,M)\\to H_S(T_aK,T_aM)$ be the transpose of extended evaluation. Set $\\beta_a=H_S(1,u_a)\\circ v_{a;K,\\omega_R}$ for Verdier duality. All these are the specified morphisms, with balanced tensor associators understood.\n\nFor each of $c,b,u,v,\\beta$, comparison for $A\\to C$ equals comparison for $A\\to B$ followed by extension to $C$ and comparison for $B\\to C$, under $T_{B,C}T_{A,B}\\cong T_{A,C}$. For example\n$$b_{A,C;M}=b_{B,C;T_{A,B}M}\\circ T_{B,C}(b_{A,B;M}),$$\n$$v_{A,C;K,M}=v_{B,C;T_{A,B}K,T_{A,B}M}\\circ T_{B,C}(v_{A,B;K,M}).$$\nThese equalities hold for arbitrary unbounded inputs for which the displayed functors are formed, without a constructibility or perfectness assumption. They include the identity-extension equations. They identify the actual transposes: for direct image the common transpose is $T_{A,C}$ of the inverse-image counit; for $b$ it is $T_{A,C}\\varepsilon_A\\circ c_{A,C}^{-1}$ with $c$ the closed-direct-image comparison; for $u$ it is the analogous compact-support counit; for $v$ it is $T_{A,C}$ of evaluation. Thus all five composition laws are independent of the temporary bases.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof paragraph 3: two field extensions, tensor reassociation and equality of counit/evaluation transposes; returned proof step 10"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-derived-categories",
+  "lem-exc-closed-ambient",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-finite-free-image-comparison",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "def-pur-etale-scalar-mate",
+  "lem-coef-etale-tensor-model-comparison",
+  "def-pur-exceptional-coefficient-normalizations"
+ ],
+ "proof": [
+  {
+   "text": "Write $T_a=T_{A,B}$, $T_b=T_{B,C}$, $T_{ba}=T_{A,C}$. If $(b_i)$ is an $A$-basis of $B$ and $(c_j)$ a $B$-basis of $C$, then $(b_i c_j)_{i,j}$ is an $A$-basis of $C$: expansion first in the $c_j$ and then in the $b_i$ proves spanning and uniqueness. By the finite-free scalar-coordinate theorem, the underlying complex of each scalar extension is a finite direct sum of the original complex. Thus it preserves exact sequences and quasi-isomorphisms, even for unbounded complexes (cycles and boundaries are coordinatewise). The derived change-of-rings theorem computes $T_a$ on a K-flat resolution $P\\to K$; since termwise scalar extension preserves this quasi-isomorphism, its canonical comparison identifies $T_aK$ with the termwise scalar extension of $K$, compatibly with the resolution maps. The exact scalar-tower theorem supplies the natural associators $\\alpha:T_bT_a\\cong T_{ba}$ on the unbounded derived categories, represented by $(m\\otimes b')\\otimes c\\mapsto m\\otimes b(b')c$, with inverse $m\\otimes c\\mapsto(m\\otimes1)\\otimes c$, and their unit identifications. Below all equations are transported by these associators; composition is right to left.",
+   "uses": [
+    "lem-pur-finite-free-scalar-extension",
+    "lem-sfb-flat-scalar-tower-coherence",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Paragraph 3, transposition of the two composite coefficient comparisons; explicit counit/evaluation calculation."
+   }
+  },
+  {
+   "text": "Apply the current topos scalar-mate theorem with $h=f$, $R=A,S=B,T=C$ on ordinary small etale topoi, with constant rings and their inverse images. Its adjunctions are explicitly the canonical unbounded derived geometric adjunctions, so its $\\gamma$ is the present $c$, with the same extended inverse-image counit. Its scalar associator $\\beta_W$ is specified on K-flat representatives by $t\\otimes(s\\otimes p)\\mapsto t b(s)\\otimes p$. Under the degree-zero commutative ring-factor symmetry, this is exactly Step 1's $\\alpha_W$; the resolution identifications established there are canonical. Thus the stated equality specializes to\n$$c_{ba;K}\\alpha_{X,Rf_{*,A}K}=Rf_{*,C}(\\alpha_{V,K})c_{b;T_aK}T_b(c_{a;K}).$$\nThis gives $c_{ba}=c_bT_b(c_a)$ with the stipulated associators, not a choice of unrelated scalar isomorphisms. The theorem also intertwines the pullback balancing maps; therefore the common transpose, under those identifications, is $T_{ba}(\\varepsilon_{f,A})$. Its statement allows all unbounded inputs and does not require invertibility. The finite-free image-comparison theorem supplies invertibility for these $c$, including $f=i$ and the proper morphism in the fixed compactification. No geometric base-change isomorphism is substituted for this coefficient-change mate.",
+   "uses": [
+    "lem-sfb-topos-scalar-mate-transitivity",
+    "lem-sf-finite-free-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Paragraph 3, transposition of the two composite coefficient comparisons; explicit counit/evaluation calculation."
+   }
+  },
+  {
+   "text": "For the fixed structure-morphism compactification write $F_R=Rp_{*,R}j_{!,R}$ and let $s_a:T_aF_A\\to F_BT_a$ be its specified comparison. Write $e_a:T_aj_{!,A}\\cong j_{!,B}T_a$. The image-comparison theorem identifies $e_a$ with the termwise extension-by-zero coefficient map: on the open it sends $m\\otimes b'$ to itself, and off the open it is zero. The two composites for $a,b$ therefore agree already as maps of sheaves and of complexes, by the balanced formula in Step 1; localization preserves their equality. Thus $e_{ba}=e_b\\,T_b(e_a)$ under $\\alpha$. By the compact-support definition and the stipulated normalization, $s_a=Rp_{*,B}(e_a)\\,c_{p,a;j_{!,A}}$. In $s_bT_b(s_a)$ use naturality of $c_{p,b}$ at $e_a$ to move $T_bRp_{*,B}(e_a)$ past $c_{p,b}$. The remaining two factors are $c_{p,b}T_b(c_{p,a})=c_{p,ba}$ by Step 2; the two open factors are $e_bT_b(e_a)=e_{ba}$. Hence $s_{ba}=s_bT_b(s_a)$. Its inverse is $T_b(s_a^{-1})s_b^{-1}$, with the same associators.",
+   "uses": [
+    "lem-sf-finite-free-image-comparison",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Paragraph 3, transposition of the two composite coefficient comparisons; explicit counit/evaluation calculation."
+   }
+  },
+  {
+   "text": "For $i$ abbreviate $F_R=i_{*,R}$ and $G_R=Ri_R^!$, and put $d_a=c_{i,a}^{-1}$. By the definition of adjunction mate, the stipulated counit transpose satisfies $\\varepsilon_BF_B(b_a)=T_a(\\varepsilon_A)d_a$, naturally in the input. Step 2 gives $d_{ba}=T_b(d_a)d_b$. Transpose $h=b_{b;T_aM}\\,T_b(b_{a;M})$ under $F_C\\dashv G_C$. With object subscripts suppressed, its transpose is\n$$\\begin{aligned}\n\\varepsilon_CF_C(h)&=T_b(\\varepsilon_B)d_bF_C(T_b b_a)\\\\\n&=T_b(\\varepsilon_B)T_b(F_Bb_a)d_b\\\\\n&=T_b(T_a(\\varepsilon_A)d_a)d_b\n =T_{ba}(\\varepsilon_A)d_{ba}.\n\\end{aligned}$$\nThe first and third equalities are the two specified counit equations; the second is naturality of $d_b$ at $b_a$. The last equality includes naturality of $\\alpha$ at $\\varepsilon_A$. This is the defining transpose of $b_{ba;M}$, so injectivity of the adjunction bijection proves their equality. Equivalently this is pasting along coefficient functors in the mate-pasting theorem. It identifies the actual transpose, without an argument from equality after forgetting coefficients.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Paragraph 3, transposition of the two composite coefficient comparisons; explicit counit/evaluation calculation."
+   }
+  },
+  {
+   "text": "For the structure morphism instead put $F_R=Ra_{X,!,R}^c$, $G_R=a_{X,R}^{\\times}$, and $d_a=s_a^{-1}$. Step 3 provides the inverse tower identity. Use the mate definition for these specified adjunctions; its transpose formula needs no scalar-linearity hypothesis or invertibility of the right-adjoint comparison. At an arbitrary coefficient object $N$, denote its right-adjoint mate by $\\widetilde u_{a;N}:T_aG_AN\\to G_BT_aN$. Transposing $\\widetilde u_{b;T_aN}T_b(\\widetilde u_{a;N})$ gives, in order,\n$$T_b(\\varepsilon_B)d_bF_C(T_b\\widetilde u_a)\n=T_b(\\varepsilon_B)T_b(F_B\\widetilde u_a)d_b\n=T_bT_a(\\varepsilon_A)T_b(d_a)d_b\n=T_{ba}(\\varepsilon_A)d_{ba}.$$\nThese are the same counit and naturality substitutions as in Step 4, now with the specified compact-support functor. At $N=A$, compose with $G_B(T_aA\\cong B)$ to obtain $u_a$; do likewise for $b$ and $ba$. Naturality of $\\widetilde u_b$ with respect to $T_aA\\cong B$ identifies the two routes. The coefficient-unit identifications compose since $(a'\\otimes b')\\otimes c\\mapsto b(a(a')b')c$ is also their composite multiplication. Thus $u_{ba}=u_bT_b(u_a)$ and its common transpose is exactly the extended compact-support counit, precomposed with $s_{ba}^{-1}$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Paragraph 3, transposition of the two composite coefficient comparisons; explicit counit/evaluation calculation."
+   }
+  },
+  {
+   "text": "Use the normalized derived scalar tensor comparisons of the tensor-data theorem on the constant ring sheaves. The tensor-coherence theorem supplies their tensor-tower and identity equations for the unit-normalized scalar associators of Step 1. These are precisely the hypotheses of the scalar Hom comparison tower theorem. That theorem applies on each ordinary small etale site with $R=A,S=B,V=C$, and its $c^a$ is the present $v_a$: its defining pairing is $T_a(\\operatorname{ev})\\mu_a^{-1}$, with evaluation in the convention $P\\otimes H(P,Q)\\to Q$. Consequently\n$$H_C(\\alpha_K^{-1},\\alpha_M)\\,v_{b;T_aK,T_aM}\\,T_b(v_{a;K,M})=v_{ba;K,M}\\,\\alpha_{H_A(K,M)}.$$\nThis is the required equation including all variance and associator factors. The theorem proves equality of the actual evaluation transposes and their identity equations, for arbitrary unbounded inputs; it makes no perfectness assumption.",
+   "uses": [
+    "lem-sf-ringed-finite-free-tensor-data",
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "lem-pur-scalar-hom-comparison-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Paragraph 3, transposition of the two composite coefficient comparisons; explicit counit/evaluation calculation."
+   }
+  },
+  {
+   "text": "Set $H_R=R\\mathcal Hom_R$ and suppress only the associators already fixed. Naturality of the evaluation comparison in its second argument, supplied by the scalar Hom tower theorem, gives\n$$v_{b;T_aK,\\omega_B}\\,T_b(H_B(1,u_a))\n=H_C(1,T_bu_a)\\,v_{b;T_aK,T_a\\omega_A}.$$\nSubstitute this in the composite of the specified Verdier comparisons:\n$$\\begin{aligned}\n\\beta_{b;T_aK}T_b(\\beta_{a;K})\n&=H_C(1,u_b)\\,v_{b;T_aK,\\omega_B}\\,T_b(H_B(1,u_a))\\,T_b(v_{a;K,\\omega_A})\\\\\n&=H_C(1,u_bT_bu_a)\\,v_{b;T_aK,T_a\\omega_A}\\,T_b(v_{a;K,\\omega_A})\\\\\n&=H_C(1,u_{ba})\\,v_{ba;K,\\omega_A}=\\beta_{ba;K}.\n\\end{aligned}$$\nHere Step 5 gives the dualizing coefficient factor and Step 6 gives the Hom factor. Thus this law is for the defined $\\beta$, rather than an arbitrarily chosen duality isomorphism.",
+   "uses": [
+    "lem-pur-scalar-hom-comparison-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Paragraph 3, transposition of the two composite coefficient comparisons; explicit counit/evaluation calculation."
+   }
+  },
+  {
+   "text": "For an identity coefficient map, scalar multiplication identifies $T_{\\mathrm{id}}$ with the identity. Its pullback square is the identity square, so the mate identity law gives the identity $c$. The open coefficient map in Step 3 is the identity termwise, hence $s$ is the identity too. The defining transposes in Steps 4 and 5 reduce to $\\varepsilon_A$, whose adjunct is $1$; hence $b$ and $u$ are identities. Step 6 supplies $v_{\\mathrm{id}}=1$, and the definition of $\\beta$ then gives $\\beta_{\\mathrm{id}}=1$. All equations were proved by equality under specified adjunction bijections, tensor normalization, or equality of termwise open maps. The bases in Step 1 only verified exactness and availability of the finite-free comparisons; they do not enter these morphisms or equations. Every cited comparison and tensor theorem allows unbounded inputs. This proves the stated independence and domain assertions, including zero objects, empty schemes, and rank-zero coefficient extensions.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-scalar-hom-comparison-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Paragraph 3, transposition of the two composite coefficient comparisons; explicit counit/evaluation calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-free-scalar-extension",
+  "lem-sfb-flat-scalar-tower-coherence",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-topos-scalar-mate-transitivity",
+  "lem-sf-finite-free-image-comparison",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-ringed-finite-free-tensor-data",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-pur-scalar-hom-comparison-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Paragraph 3, expanded using Stacks sites-cohomology.tex Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), and mate pasting. The five-operation tower assertion is not claimed to be a verbatim Stacks lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite free coefficient comparison maps for pushforward exceptional pullback dualizing object and internal Hom compose under a tower of rings",
+   "results": "8 hits. CategoryTheory.ExponentiableMorphism.coev_ev; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "12 hits. CategoryTheory.conjugateEquiv; CategoryTheory.conjugateEquiv_id; CategoryTheory.conjugateEquiv_iso; CategoryTheory.conjugateEquiv_of_iso; CategoryTheory.conjugateEquiv_symm_id; CategoryTheory.conjugateEquiv_symm_iso; CategoryTheory.conjugateEquiv_symm_of_iso; CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]ate.*[Pp]ast|conjugateEquiv|finiteFree.*[Cc]oher",
+   "results": "25 hits. Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Equivalence/Symmetry.lean; Mathlib/CategoryTheory/Equivalence/Symmetry.lean; Mathlib/CategoryTheory/Equivalence/Symmetry.lean; Mathlib/CategoryTheory/Equivalence/Symmetry.lean; Mathlib/CategoryTheory/Equivalence/Symmetry.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite free coefficient comparison maps for pushforward exceptional pullback dualizing object and internal Hom compose under a tower of rings",
+   "results": "8 hits. SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso; PresheafOfModules.pushforward₀; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardComp",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of scalar extension composite projection and evaluation mates under tensor reassociation for derived sheaves",
+   "results": "8 hits. LightCondensed.ihomPoints_symm_comp; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.unitHomEquiv_symm_comp; CategoryTheory.ExponentiableMorphism.coev_ev; LightCondensed.ihom_map_val_app; ModuleCat.homEquiv_extendScalarsComp; CategoryTheory.ExponentiableMorphism.ev_naturality; CategoryTheory.ExponentiableMorphism.coev_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free coefficient extension comparisons for derived direct image exceptional pullback internal Hom and duality compose along a tower of commutative rings",
+   "results": {
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "CategoryTheory.ExponentiableMorphism.coev_ev",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "CategoryTheory.ExponentiableMorphism.coev_ev_assoc",
+     "CategoryTheory.ExponentiableMorphism.ev_coev",
+     "CategoryTheory.ExponentiableMorphism.coev_naturality_assoc"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, underived scalar extension or rigid-object evaluation only; none states the five normalized unbounded etale comparison laws"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|extendScalarsComp|finiteFree.*comparison",
+   "results": {
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean"
+    ],
+    "n_hits": 17,
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, underived scalar extension or rigid-object evaluation only; none states the five normalized unbounded etale comparison laws"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_vcomp\"",
+   "results": {
+    "top": [
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp",
+     "CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.Bicategory.mateEquiv_vcomp"
+    ],
+    "n_hits": 4,
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, underived scalar extension or rigid-object evaluation only; none states the five normalized unbounded etale comparison laws"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free coefficient extension comparisons for derived direct image exceptional pullback internal Hom and duality compose along a tower of commutative rings",
+   "results": {
+    "top": [
+     "SheafOfModules.pullbackObjFreeIso.congr_simp",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullbackObjFreeIso",
+     "Module.dual_free",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "CategoryTheory.Free.ext"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, underived scalar extension or rigid-object evaluation only; none states the five normalized unbounded etale comparison laws"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity of strong monoidal functor internal Hom evaluation comparison and right adjoint mates under composition",
+   "results": {
+    "top": [
+     "CategoryTheory.frobeniusMorphism_mate",
+     "CategoryTheory.rightAdjointMate_comp_evaluation",
+     "CategoryTheory.leftAdjointMate_comp_evaluation",
+     "CategoryTheory.coev_expComparison",
+     "CategoryTheory.rightAdjointMate_comp_evaluation_assoc",
+     "CategoryTheory.mateEquiv_apply",
+     "CategoryTheory.rightAdjointMate_comp",
+     "CategoryTheory.coevaluation_comp_rightAdjointMate"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, underived scalar extension or rigid-object evaluation only; none states the five normalized unbounded etale comparison laws"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-free-extension",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Proof paragraph 3: two field extensions, tensor reassociation and equality of counit/evaluation transposes; returned proof step 10",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-finite-free-comparison-transitivity",
+  "worker": "stage1",
+  "summary": "Repair of the exceptional-mate changed-statement landing refusal: re-read the strengthened live statement and all current cited statements. Steps 4 and 5 now use the general adjunction-mate definition and mate pasting directly, with the full counit calculations retained. Their argument needs neither the new coefficient-linearity hypothesis nor the exceptional-mate theorem’s invertibility conclusion. Replaced the corresponding statement dependency with the mate definition; the item statement and earlier scalar-mate repair are unchanged; no new nodes.",
+  "blueprint": "lem-coef-finite-free-extension.proof.md paragraph 3, first two sentences: transpose both proposed composites under the same adjunction, then tensor reassociation followed by the same evaluation or counit. Steps 1-3 supply normalized tensor/image ingredients, Steps 4-7 perform the comparison calculations, Step 8 proves identities and independence.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-free-scalar-extension",
+    "why": "Finite-free scalar coordinates verify exactness for all unbounded complexes; no coefficient-stage restriction is imposed."
+   },
+   {
+    "node": "lem-sfb-flat-scalar-tower-coherence",
+    "why": "Canonical balanced associators for exact coefficient extensions, used as a general algebraic tool."
+   },
+   {
+    "node": "lem-sfb-topos-scalar-mate-transitivity",
+    "why": "The general ringed-topos coefficient-tower counit identity specializes to ordinary small etale direct image; it supplies the actual normalized morphism."
+   },
+   {
+    "node": "lem-sfb-scalar-hom-tensor-coherence",
+    "why": "The tensor-tower equation for normalized derived scalar models is the hypothesis of the existing Hom tower theorem."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-tensor-data",
+    "why": "Normalized chain and derived tensor comparisons for the actual scalar functors; this supplies tensor models, not any of the five desired composition laws."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "The general mate definition supplies the exact counit-transpose formula in Steps 4 and 5, which prove their own tower equations without the scalar-linearity and invertibility assertions of the specialized exceptional-mate theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-free-scalar-extension",
+  "lem-sfb-flat-scalar-tower-coherence",
+  "lem-sfb-topos-scalar-mate-transitivity",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-sf-ringed-finite-free-tensor-data",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-41944b74f",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-41944b74f (reviewer sub-agent of L); spot-checked: This is a re-delivery of Q32's item; earlier heads c810 and 4efde were PASSed. The landing was refused because lem-sf-finite-free-exceptional-mate gained a hypothesis: G_B must preserve coefficient multiplication. Against 4efde, the statement, source, blueprint, unit and chapter are unchanged. Only Steps 4-5, proof_deps, split_report and one stmt_dep changed: exceptional-mate was replaced by def-weil-pbc-adjunction-mate. This is a legitimate stage-1 change, because the statement defines b_a as a counit transpose, and the mate definition is what supplies that. The item never claims b or u is invertible, so the theorem's invertibility conclusion and its new hypothesis are not needed. I redid the mate bookkeeping for Step 4. With L1=F_A=i_*, L2=F_B, G=H=T_a and alpha=d_a=c_{i,a}^{-1}, the definition's transpose clause gives eps_B F_B(b_a)=T_a(eps_A)d_a. I also redid the composite chain: the counit equation, naturality of d_b, the counit equation inside T_b, then d_ba=T_b(d_a)d_b from Step 2 (correct order) and naturality of the associator. Injectivity of the adjunction bijection then gives b_ba=b_bT_b(b_a); mate-pasting clause 1 is the same fact in abstract form. Step 5 is the same chain for Rp_*j_! adjoint to a^x with d=s^{-1}, followed by evaluation at N=A; the unit identifications compose correctly. I re-read the current statements cited in the unchanged Steps 1-3 and 6-8 (topos scalar mate, image comparison, Hom tower with the coherence and tensor-data nodes, mate identity clause); they still give what is used. Source check: main-20261015 lem-coef-finite-free-extension.proof.md paragraph 3, 'transpose both proposed composite comparisons ... tensor reassociation followed by the same evaluation or counit'. Edge cases checked: A=B=C, Z empty, rank 0 or zero ring, B=AxA with C=BxB, unbounded inputs. There is no cycle, no repair note and no SGA source. Batch-5 flag: lem-sfb-topos-scalar-mate-transitivity reaches lem-trf-ringed-kflat-word-comparison-descent, which is generic K-flat finite-word descent (Stacks 06YS/0G7E/06YY/0D6D). The other trf/pod nodes in the closure are generic topos and localization lemmas (geometric morphism, inverse image exact, localization essentially surjective, derived exact square). None is the trace formula, Poincare duality or a step specific to their proofs, so the flag is accepted. The six declared generic tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteFreeComparisonTransitivity",
+  "declaration": "AlgebraicGeometry.Etale.finiteFreeComparisonTransitivity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.restrictionId",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.scalarId",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.imageInverse",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.closedMap",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.compactInverse",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.compactRightMap",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.dualizingMap",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.homMap",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.verdierMap",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.TowerLaws",
+   "AlgebraicGeometry.Etale.FiniteFreeComparison.IdentityLaws",
+   "AlgebraicGeometry.Etale.finiteFreeComparisonTransitivity"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteFreeComparisonTransitivity.lean",
+  "statement": "theorem finiteFreeComparisonTransitivity (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) {X V Z : Scheme.{u}} (aX : X ⟶ Spec (CommRingCat.of D.k)) (aV : V ⟶ Spec (CommRingCat.of D.k)) (aZ : Z ⟶ Spec (CommRingCat.of D.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aV] [LocallyOfFiniteType aV] [QuasiCompact aV] [IsSeparated aZ] [LocallyOfFiniteType aZ] [QuasiCompact aZ] (f : V ⟶ X) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (i : Z ⟶ X) [IsClosedImmersion i] (c : Compactification aX) {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C] [Finite A] [Finite B] [Finite C] [Algebra A B] [Algebra B C] (_hA : ∃ n : ℕ, ((l ^ n : ℕ) : A) = 0) (_hB : ∃ n : ℕ, ((l ^ n : ℕ) : B) = 0) (_hC : ∃ n : ℕ, ((l ^ n : ℕ) : C) = 0) (_hAB : ∃ r : ℕ, Nonempty (Module.Basis (Fin r) A B)) (_hBC : ∃ r : ℕ, Nonempty (Module.Basis (Fin r) B C)) {GA : DerivedCategoryModule A X ⥤ DerivedCategoryModule A Z} {GB : DerivedCategoryModule B X ⥤ DerivedCategoryModule B Z} {GC : DerivedCategoryModule C X ⥤ DerivedCategoryModule C Z} (adA : R(lowerStar (ModuleCat.{u + 1} A) i) ⊣ GA) (adB : R(lowerStar (ModuleCat.{u + 1} B) i) ⊣ GB) (adC : R(lowerStar (ModuleCat.{u + 1} C) i) ⊣ GC) {WA : DerivedCategoryModule A (Spec (CommRingCat.of D.k)) ⥤ DerivedCategoryModule A X} {WB : DerivedCategoryModule B (Spec (CommRingCat.of D.k)) ⥤ DerivedCategoryModule B X} {WC : DerivedCategoryModule C (Spec (CommRingCat.of D.k)) ⥤ DerivedCategoryModule C X} (awA : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ WA) (awB : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c ⊣ WB) (awC : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c ⊣ WC) : FiniteFreeComparison.TowerLaws (algebraMap A B) (algebraMap B C) f i c adA adB adC awA awB awC ∧ FiniteFreeComparison.IdentityLaws A f i c adA awA ∧ FiniteFreeComparison.IdentityLaws B f i c adB awB ∧ FiniteFreeComparison.IdentityLaws C f i c adC awC",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The component helpers implement the specified counit/evaluation maps for the fixed compactification and arbitrary presentations of the ordinary ambient right adjoints. TowerLaws and IdentityLaws display the five laws and the actual composite transposes. Bases occur only in the finite-free hypotheses; no construction selects a basis. The three added already-landed statement dependencies own scalarMate and the normalized tensor and coefficient-unit comparisons used literally."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f88ca3f90",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Clause-by-clause match. c is scalarMate, b and u are counit transposes of the finite-free inverse comparisons (finiteFreeImageComparisons gives IsIso, so dite inverse branch only), u ends with unitIso, v is the evaluation transpose via etaleHomTensorComparison, beta = v then H(1,u). All five tower laws are typed with associator and variance transports; identity laws for A, B, C. Mechanical theorem stmt_dep lem-coef-etale-tensor-model-comparison: etaleHomTensorComparison = .choose of its ExistsUnique, a genuine dependency, PASS. Advisories: pbcFixedScalarExtensionComp owner def-weil-pbc-witness-compatibility not cited; three transpose clauses are definitional. No cycle, only the item node and module changed, no compile (no fix)."
+ }
+}

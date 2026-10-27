@@ -1,0 +1,159 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "def-weil-pbc-direct-image-section-unit",
+ "kind": "definition",
+ "title": "The natural cochain section unit for a direct image",
+ "statement": "Let f:X→S be a morphism of schemes, with the fixed derived categories of module sheaves [def-pc-scheme, def-weil-sheaf-of-modules-category]. For an integer q, define a natural transformation from H^q of the presheaf of sections of termwise f_* to localHypercohomologyPresheaf(S,q) after the standard Rf_* and Q. First use the inverse-open derived unit [lem-trf-unbounded-direct-image-section-presheaf], transported from homotopy classes to cochains and then to homology. Follow it by local Leray and the unique natural isomorphism from sectionDerivedDirectImage(f) to the standard derivedModuleDirectImage(f) that preserves the units. On each K-injective representative this isomorphism equals topEdgeDirectImageComparison [def-weil-pbc-truncated-counit-edge]. Evaluation at V is precomposed by the exact evaluation/homology comparison, giving directImageSectionUnitAt. The evaluated transformation is natural for every cochain map, without injectivity assumptions.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079V, 0D5W and 0D5X; lemma-derived-pushforward-composition and lemma-Leray-unbounded; the unit-preserving comparisons of the recorded derived functors"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "def-weil-pbc-truncated-counit-edge",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the standard right-derived universal property and uniqueness for the arbitrary-quasi-isomorphism construction to choose the unique natural isomorphism preserving the two units. On a K-injective complex, expand both model comparisons as inverse units and use naturality to identify them. Transport along the fixed K-injective representative to identify its component with topEdgeDirectImageComparison.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-pbc-truncated-counit-edge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose localHypercohomologyComparison with homology of the natural direct-image comparison. The stated hom equation of unboundedDirectImage_sectionPresheaf and the component equality just proved identify this natural transformation with the inverse of topEdgeLocalLeray.",
+   "uses": [
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "def-weil-pbc-truncated-counit-edge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the inverse-open unit through quotientCompQhIso, apply derived homology, and precompose with the inverse homology factorization. Compose with the natural comparison of the preceding step. Exact evaluation supplies directImageSectionUnitAt. Its naturality is the composite of the naturality of this transformation and the exact evaluation/homology isomorphism. Expanding the model comparison at the identity of a K-injective gives the asserted model formula.",
+   "uses": [
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-truncated-counit-edge",
+  "lem-trf-unbounded-direct-image-section-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079V, 0D5W and 0D5X; lemma-derived-pushforward-composition and lemma-Leray-unbounded; the unit-preserving comparisons of the recorded derived functors; explicit universal-unit and categorical calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The natural cochain unit of the right derived functor is the inverse of its comparison on a K-injective resolution, compatible with exact evaluation and local Leray",
+   "results": "8 hits. CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality No exact project normalization in Mathlib. The project API definitions were read.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "0 hits. No hits. No exact project normalization in Mathlib. The project API definitions were read.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorOfQuasiIsoResolutions|topEdgeLocalLeray|squareSectionUnit",
+   "results": "0 hits. No hits. No exact project normalization in Mathlib. The project API definitions were read.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical local cohomology section unit is compatible with the normalized right-adjoint comparison for a commuting square of derived direct images",
+   "results": "The service was unavailable. No mathematical absence conclusion was drawn from it; the recorded LeanFinder, Loogle and Mathlib-source grep searches were used instead.",
+   "date": "2026-10-26",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareInjectiveRoofAction",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison. Local hypercohomology of a normalized coefficient square; The normalized derived square on an injective roof; The natural cochain section unit for a direct image",
+   "via": [
+    "lem-weil-pbc-square-injective-roof-action",
+    "lem-weil-pbc-square-local-hypercohomology",
+    "lem-weil-pbc-derived-square-local-classes",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectImageSectionUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageSectionUnit.lean",
+  "declaration": "AlgebraicGeometry.directImageSectionUnit",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.standardRightDerived_universal",
+   "AlgebraicGeometry.RingedSpace.sectionStandardDirectImageIso",
+   "AlgebraicGeometry.RingedSpace.sectionStandardDirectImageIso_fac",
+   "AlgebraicGeometry.RingedSpace.topEdgeDirectImageComparison_eq",
+   "AlgebraicGeometry.RingedSpace.directImageSectionComparison",
+   "AlgebraicGeometry.RingedSpace.directImageSectionComparison_eq",
+   "AlgebraicGeometry.RingedSpace.inverseOpenUnitQ",
+   "AlgebraicGeometry.RingedSpace.inverseOpenUnitQ_model",
+   "AlgebraicGeometry.directImageSectionUnit",
+   "AlgebraicGeometry.directImageSectionUnitAt",
+   "AlgebraicGeometry.directImageSectionUnitAt_naturality"
+  ],
+  "statement": "def directImageSectionUnit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ) :\n    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙\n        RingedSpace.localAbelianSections S.toRingedSpace).mapHomologicalComplex (.up ℤ) ⋙\n        HomologicalComplex.homologyFunctor _ (.up ℤ) q ⟶\n      DerivedCategory.Q ⋙ schemeDerivedDirectImage f ⋙\n        RingedSpace.localHypercohomologyPresheaf S.toRingedSpace q",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T130421-L-3456959",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T130421-L-3456959",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "def-pur-module-pure-tensor",
+ "kind": "definition",
+ "title": "Canonical local pure tensor in the cochain module-sheaf tensor",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a site essentially small relative to the coefficient universe, let $R$ be a sheaf of commutative rings, and use its module-sheaf category [def-weil-sheaf-of-modules-category] and the sheaf tensor product [def-pur-sheaf-tensor-product]. For module sheaves $M,N$, an object $U$ of $\\mathcal C$, and local sections $x\\in M(U)$ and $y\\in N(U)$, define $\\operatorname{moduleTmul}(M,N,U,x,y)\\in(M\\otimes_R N)(U)$ as follows: take $x\\otimes_{R(U)}y$ in the sectionwise presheaf tensor, apply the unit of module-presheaf sheafification [def-weil-presheaf-modules-sheafification], and then apply the inverse of the canonical identification $M\\otimes_R N\\cong(M\\otimes_{p,R}N)^\\#$. This definition introduces only the canonical pure-tensor section, with no choice of tensor comparison and no claim that all tensor sections are globally pure.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product: sectionwise presheaf tensor followed by sheafification."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "moduleTmul|tensorObjIsoSheafification",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "Reuse CategoryTheory.CochainPullback.moduleTmul, the existing sheafification-unit constructor; no new Lean definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical pure tensor of two local sections of sheaves of modules is the image of their presheaf tensor under sheafification",
+   "results": "8 hits: PresheafOfModules.sheafify, PresheafOfModules.sheafifyMap, TopCat.Presheaf.sheafify, TopCat.Presheaf.toSheafify, CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.sheafification, PresheafOfModules.toSheafify",
+   "date": "2026-10-23",
+   "verdict": "Reuse CategoryTheory.CochainPullback.moduleTmul, the existing sheafification-unit constructor; no new Lean definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pure tensor in a sheaf tensor product constructed using the sheafification adjunction unit",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.sheafToPresheaf_μ, CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.sheafToPresheaf_δ, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, PresheafOfModules.Monoidal.tensorObj_obj",
+   "date": "2026-10-23",
+   "verdict": "Reuse CategoryTheory.CochainPullback.moduleTmul, the existing sheafification-unit constructor; no new Lean definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n moduleTmul|tensorObjIsoSheafification lean/WeilConjectures/Algebra/Category/ModuleCat/Sheaf lean/Sheaf/SecSmoothPurity/ModuleTensorGenerators.lean; rg -l moduleTmul|pure tensor in the sheaf|pure-tensor section dag/nodes",
+   "results": "ModuleTensorGenerators.lean:84 defines moduleTmul, via tensorObjIsoSheafification.inv and the sheafification unit. Upstream modules use the same formula but do not define moduleTmul. No definition node records this declaration; the theorem lem-pur-module-tensor-generator-calculus lists it as a helper. def-sfb-sheaf-tensor-pure-section owns ScalarHomOrdinary.pure, a different presentation requiring additional sheafification instances; retain the cochain interface requested by the return.",
+   "date": "2026-10-23",
+   "verdict": "Add the requested existing:true ownership record, preserving all Lean code."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "pure tensor",
+   "results": "5 blueprint matches: def-nagata-strict-chart-to-extended-blowup-chart, def-weil-derived-pullback-tensor-hom, def-weil-pbc-etale-contraction, def-weil-pbc-four-corners, def-wf-tensor-product. None records this pure-section constructor.",
+   "date": "2026-10-23",
+   "verdict": "No exact blueprint owner. The ancestor command returns lem-weil-finite-duality-site-comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ringed-hom-complex-pullback-shift",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, second paragraph: the evaluation normalization on local pure tensors in the ordinary Hom-complex pullback comparison underlying its compatibility with first-variable triangles.",
+   "via": [
+    "lem-sf-ringed-hom-complex-pullback-shift",
+    "lem-sf-site-hom-comparison-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ModuleTensorGenerators",
+  "declaration": "CategoryTheory.CochainPullback.moduleTmul",
+  "statement": "def moduleTmul (M N : Modules R) (U : Cᵒᵖ)\n    (x : M.val.obj U) (y : N.val.obj U) : (M ⊗ N).val.obj U",
+  "branch": "sheaf-dag",
+  "by": "Q125",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Ownership repair requested by independent review of immutable head 5ef90f58e742 (H2). This is the real canonical sheafification-unit definition already in the live module, not a choice of data from the tensor-generator theorem. Its Lean source is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf70ad4ca",
+  "group": "Q125",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf70ad4ca",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Re-delivery of 5ef90f58e742 H2 RETURN: stmt_dep lem-pur-module-tensor-generator-calculus replaced by new existing:true definition node def-pur-module-pure-tensor owning CochainPullback.moduleTmul (ModuleTensorGenerators.lean:84, real sheafification-unit data, Stacks 03EK = sites-modules-section-tensor-product verified; record fields/stmt_deps valid; no duplicate). Lean module byte-identical to reviewed head; item statement/proof/proof_deps unchanged vs side-live. Re-checked all clauses: RingedPullback + PreservesFiniteLimits = exact pullback; canonical Comparison θ; IsEvaluation pins ev on moduleTmul pure tensors; c chain map with transpose equation; two-variable naturality with correct variance; IsSignedSourceShift (-1)^{mn} f^{p-m}; shift square via commShiftIso; signs recomputed. Mechanical finding: homComplexπ = Classical.choose homComplex_projections_exists, a theorem-constructed object → PASS on that point. Gates OK (sorry only on theorem, docstrings, no extra hypotheses). No compile (no file changed)."
+ }
+}

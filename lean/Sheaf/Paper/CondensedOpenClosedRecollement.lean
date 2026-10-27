@@ -5,7 +5,6 @@ Authors: SHEAF group NE
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
@@ -15,6 +14,97 @@ import Sheaf.Paper.ProfinitePointPullback
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
 import WeilConjectures.CategoryTheory.Triangulated.Recollement
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.CategoryTheory.Adjunction.Triple
+public import Mathlib.CategoryTheory.EffectiveEpi.Comp
+public import Mathlib.CategoryTheory.Extensive
+public import Mathlib.CategoryTheory.GradedObject.Bifunctor
+public import Mathlib.CategoryTheory.GradedObject.Monoidal
+public import Mathlib.CategoryTheory.GradedObject.Trifunctor
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Preserves.Filtered
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
+public import Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
+public import Mathlib.CategoryTheory.Monad.Adjunction
+public import Mathlib.CategoryTheory.Monoidal.Action.Basic
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Monoidal.CommMon_
+public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.CategoryTheory.Monoidal.Mon
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.Coherent.Basic
+public import Mathlib.CategoryTheory.Sites.Coherent.Comparison
+public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
+public import Mathlib.CategoryTheory.Sites.Grothendieck
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
+public import Mathlib.Geometry.RingedSpace.PresheafedSpace
+public import Mathlib.Geometry.RingedSpace.SheafedSpace
+public import Mathlib.Topology.Category.CompHausLike.Basic
+public import Mathlib.Topology.Category.CompHausLike.Limits
+public import Mathlib.Topology.Category.Profinite.Basic
+public import Mathlib.Topology.Category.Profinite.EffectiveEpi
+public import Mathlib.Topology.Category.Profinite.Limits
+public import Mathlib.Topology.Category.TopCat.Basic
+public import Mathlib.Topology.Connected.TotallyDisconnected
+public import Mathlib.Topology.ContinuousMap.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
+public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
+public import WeilConjectures.CategoryTheory.RingObjects.Ab
+public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
 /-!
 # Recollement with arbitrary condensed coefficients

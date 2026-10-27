@@ -1,0 +1,159 @@
+{
+ "id": "lem-sfb-internal-pullback-roos-unit",
+ "kind": "statement",
+ "title": "Ordinary pullback identifies the augmented internal quotient Roos complex",
+ "statement": "For a prime l, a finite extension E/Q_l, any scheme morphism g:X→Y and any cochain complex P of internal modules over the continuous integral coefficient on Y, let T be the pulled quotient tower of [def-sfb-integral-pullback-comparison-data], indexed by n with exponent n+1. There is a chain isomorphism from Roos(T) to the explicit completion Roos complex of the ordinary inverse image of P from [sk-def-pe-derived-completion]. Its composite with the pulled quotient augmentation is exactly the completion augmentation. No K-flatness, boundedness or completeness is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: commuting inverse image with reduction and identifying c_K with the completion map",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tags 099I, 099M, 099N(5), 08TC"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sfb-integral-pullback-comparison-data",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "Use the point-pullback composition isomorphism for the actual continuous integral coefficient. Its value on each quotient module identifies g* A_(n+1),Y with A_(n+1),X. Compose with the inverse strong monoidal tensorator to identify each complex g*(P tensor A_(n+1),Y) with g*P tensor A_(n+1),X. Naturality in the quotient module identifies the transitions. Unit coherence and naturality of the quotient unit identify the augmentations p↦p tensor 1.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-pe-derived-completion",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the product of the level isomorphisms. Check against every product projection that it intertwines one minus transition shift and carries the product of augmentation legs to the completion product unit. Apply the mapping-cone functor to this square and shift by -1. In coordinates the canonical cocone-to-completion isomorphism is (x,y)↦(x,-y). It yields the explicit differential (dx,(1-shift)x-dy). The zero shifted component of both augmentations is preserved, while their first components are the equal product units, proving the chain equality. This coordinate argument also applies to zero complexes and empty schemes.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-sfb-integral-pullback-comparison-data",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-derived-limit",
+  "def-sfb-integral-pullback-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: commuting inverse image with reduction and identifying c_K with the completion map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image preserves bounded complexes and constructible cohomology of sheaves",
+   "results": "Condensed.hasExactLimitsOfShape; Condensed.hasExactColimitsOfShape; CategoryTheory.Functor.exact_tfae; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf; DerivedCategory.isGE_Q_obj_iff; CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; no internal augmented Roos comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"homology\"",
+   "results": "No hits",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; no internal augmented Roos comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_constructible|bounded.*mapDerivedCategory",
+   "results": "No hits",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; no internal augmented Roos comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\"",
+   "results": "CochainComplex.mappingCocone.inl; CochainComplex.mappingCocone.inr; CochainComplex.mappingCocone.snd; CochainComplex.mappingCocone; CochainComplex.mappingCocone.triangle; CochainComplex.mappingCocone.triangle_obj₂; CochainComplex.mappingCocone.triangle_obj₃; CochainComplex.mappingCocone.descCochain",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; no internal augmented Roos comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|completion.*pullback",
+   "results": "No hits",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; no internal augmented Roos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback identifies the augmented quotient Roos complex with completion of the pulled complex; restriction of scalars preserves quotient towers and their units",
+   "results": "IsAdicComplete.of_comp_lift; IsAdicComplete.of_lift; AdicCompletion.eval_comp_of; IsAdicComplete.StrictMono.of_lift; IsAdicComplete.StrictMono.of_comp_lift; AdicCompletion.congr; AdicCompletion.ofLinearEquiv_apply; AdicCompletion.congr_apply",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; no internal augmented Roos comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact inverse image identifies the augmented finite quotient Roos tower with adic completion, and scalar restriction preserves its unit",
+   "results": "AdicCompletion; AdicCompletion.module; AdicCompletion.mkₐ; AdicCompletion.congr_symm_apply; AdicCompletion.submodule; AdicCompletion.ofAlgEquiv_symm_of; IsAdicComplete.StrictMono.of_comp_lift; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; no internal augmented Roos comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTensorPullback",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "First paragraph: commuting inverse image with reduction and identifying c_K with the completion map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackInternalRoosUnit",
+  "file": "lean/Sheaf/Paper/IntegralPullbackInternalRoosUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralTensorPullback.ordinary_roos_unit",
+  "statement": "theorem ordinary_roos_unit {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :\n    ∃ e : WeilConjectures.integralOperationsRoos (pulledTower l E g P) ≅\n        AdicCompletion.roos l E X\n          (((CondensedRing.upperStar (DerivedNakayama.integerRing l E) g).mapHomologicalComplex\n            (.up ℤ)).obj P),\n      comparison l E g P ≫ e.hom =\n        AdicCompletion.augmentation l E X\n          (((CondensedRing.upperStar (DerivedNakayama.integerRing l E) g).mapHomologicalComplex\n            (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-internal-pullback-roos-unit",
+  "worker": "A2",
+  "summary": "Ordinary pullback identifies the augmented internal quotient Roos complex",
+  "blueprint": "First paragraph: commuting inverse image with reduction and identifying c_K with the completion map"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7d2b",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261025T201230-L-2345691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7d2b",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261025T201230-L-2345691",
+  "kind": "interface",
+  "note": "independent cc review: delivered IntegralTensorPullbackData vs clone IntegralTensorPullback (verbatim move), item signature vs clone (identical), 2 new sorry statements vs AdicCompletion.roos/integralOperationsRoos definitions (true), det node fields vs live; 3 direct importers compiled against delivered modules"
+ }
+}

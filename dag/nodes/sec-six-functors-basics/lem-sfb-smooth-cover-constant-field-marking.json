@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-smooth-cover-constant-field-marking",
+ "kind": "statement",
+ "title": "Canonical constants and etale markings of finite smooth projective curve covers",
+ "statement": "Let $K$ be a field, $C$ a smooth projective geometrically integral $K$-curve, $Y$ a smooth projective integral $K$-curve, and $\\nu:Y\\to C$ a finite surjective $K$-morphism. Put $F=K(C)$ and $L=K(Y)$, with $F\\hookrightarrow L$ the inclusion induced by $\\nu$. Let $U\\subseteq C$ be an open subscheme such that $\\nu^{-1}(U)\\to U$ is etale, and let $M\\subset C$ be a reduced finite etale closed $K$-subscheme contained in $U$. Put\n$$E=\\{z\\in L:z\\text{ is algebraic over }K\\}.$$\nThen evaluation at the generic point identifies $\\Gamma(Y,\\mathcal O_Y)$ with the specified subfield $E\\subseteq L$, and $E/K$ is finite separable. There is a canonical factorization $Y\\xrightarrow{q_E}\\operatorname{Spec}E\\to\\operatorname{Spec}K$, with $q_E$ induced by evaluation of global sections; its composite with $\\operatorname{Spec}L\\to Y$ is the morphism induced by the inclusion $E\\hookrightarrow L$. With this structure $Y$ is smooth projective and geometrically integral over $E$, with function field $L$. The fibre product $P=Y\\times_C M$ is reduced, hence equals the reduced inverse image of $M$, and its structural morphism $P\\to Y\\xrightarrow{q_E}\\operatorname{Spec}E$ is finite etale. Also $K$ is algebraically closed in $F$, and $E\\cap F=K$ inside $L$. Finite separable means finite-dimensional with separable minimal polynomials. The marking $M$ and the open $U$ may be empty.\n\nNotions: [def-weil-field], [def-pc-smooth-projective-curve], [def-pc-integral-scheme], [def-pc-geometrically-irreducible], [def-sc-function-field], [def-pc-field-extension], [def-weil-relative-algebraic-closure], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-etale-morphism], [def-weil-closed-immersion], [def-pc-reduced-scheme], [def-pc-fibre-product], [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 03H0, theorem-stein-factorization-Noetherian; varieties.tex Tag 0BUG, lemma-proper-geometrically-reduced-global-sections; more-morphisms.tex Tag 0G80, lemma-smooth-etale-permanence; morphisms.tex Tag 0C4Q, lemma-projective-permanence. Returned item proof steps 7--10: canonical algebraic constants, geometric integrality, etale marking, and constants intersection."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-smooth-projective-curve",
+  "def-pc-integral-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-relative-algebraic-closure",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-sfb-dominant-function-field-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $R=\\Gamma(Y,\\mathcal O_Y)$. By [lem-pc-projective-proper], $Y/K$ is proper. It is an integral separated finite-type $K$-scheme, so clause (1) of [lem-pc-h0-proper-variety] makes $R$ a finite field extension of $K$. By [lem-trf-smooth-geometrically-normal] applied to $Y/K$ and the identity extension, all local rings of $Y$ are integrally closed domains. By [lem-sc-integral-scheme-stalks-in-function-field], evaluation at its generic point is an injection $R\\hookrightarrow L$ compatible with $K\\hookrightarrow L$. We use this injection throughout.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-pc-h0-proper-variety",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, lemma-proper-geometrically-reduced-global-sections (1),(3); Tag 056T, lemma-smooth-geometrically-normal; properties.tex Tags 01ON and 01RV for generic evaluation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-stein-constant-field] to $Y\\to\\operatorname{Spec}K$, taking its ground field to be $K$ (the function-field letters of that node are renamed here to avoid confusing them with our constant field $E$). The source is normal by step 1, proper and integral of finite type; the target is integral of finite type, and the map is dominant since $Y$ is nonempty. The specified affine construction gives $B_0=\\operatorname{Spec}R$ and the map $Y\\to B_0$ induced by evaluation of global sections, with geometrically connected fibres. Since $R$ is a field, $k(B_0)=R$ under its generic evaluation embedding. The function-field conclusion of that node therefore identifies $R$ with precisely $E=\\{z\\in L:z\\text{ is algebraic over }K\\}$, inside $L$. Thus the Stein map is the required $q_E$ and $E/K$ is finite.",
+   "uses": [
+    "lem-sfb-normal-stein-constant-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H0, theorem-stein-factorization-Noetherian (1),(4),(5), specialized to a field; normal Stein constants identification"
+   }
+  },
+  {
+   "text": "The inverse of the evaluation isomorphism $R\\simeq E$ is the ring map $E\\to\\Gamma(Y,\\mathcal O_Y)$ defining $q_E$. By [lem-weil-pbc-morphism-into-affine-scheme] this specifies a unique morphism to $\\operatorname{Spec}E$. Its map on sections followed by the generic germ sends every $e\\in E$ to the same element $e\\in L$. Its composite with $\\operatorname{Spec}L\\to Y$ is therefore the spectrum morphism of the inclusion $E\\hookrightarrow L$. Restriction to $K$ is the original structure map, giving the asserted canonical factorization. Apply [lem-pc-global-sections-separable] to the original smooth projective curve $Y/K$ and its field of global sections from step 1: $E/K$ is separable. Together with its finite dimension this is finite separability as stated in the item.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-pc-global-sections-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, lemma-proper-geometrically-reduced-global-sections (4); schemes.tex Tag 01I1, lemma-morphism-into-affine"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-separable-base-refinement] to $K\\subseteq E$ and $q_E$. Its composite to $\\operatorname{Spec}K$ is the original smooth projective morphism, so $q_E$ is smooth and projective. Its fibres are geometrically connected by step 2. Now [lem-trf-smooth-connected-fibre-normal-integrality], with $v=q_E$ and $B=\\operatorname{Spec}E$, says that $Y\\times_E T$ is integral for every field extension $T/E$: the unique residue field of this base is $E$, and its fibre is $Y$. Here $T/E$ is arbitrary, including inseparable extensions; this is geometric integrality over $E$. The underlying scheme, generic point and generic local ring have not changed. Hence its dimension is still one and its function field is still the specified $L$, with the $E$-inclusion computed in step 3.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-base-refinement",
+    "lem-trf-smooth-connected-fibre-normal-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G80, lemma-smooth-etale-permanence; morphisms.tex Tag 0C4Q, lemma-projective-permanence; varieties.tex Tag 056T and properties.tex Tag 033M for smooth connected geometric fibres"
+   }
+  },
+  {
+   "text": "Because $M\\subseteq U$, the defining fibre product is also $P=\\nu^{-1}(U)\\times_U M$. The projection $P\\to M$ is etale by [lem-weil-pbc-etale-scheme-base-change], applied to the stipulated etale map $\\nu^{-1}(U)\\to U$. It is finite by [lem-weil-pbc-finite-morphism-permanence](a), applied directly to $\\nu:Y\\to C$ and $M\\to C$. Since $M$ is reduced, [etale-proposition-etale-reduced] makes $P$ reduced. The reduction of a reduced scheme is itself, so $P$ equals the reduced inverse image of $M$. Composition with the finite etale $M\\to\\operatorname{Spec}K$ makes $P\\to\\operatorname{Spec}K$ finite by [lem-weil-pbc-finite-composition] and etale by [lem-weil-pbc-etale-composition-cancellation](2).",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "etale-proposition-etale-reduced",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO, lemma-base-change-etale; 01WL, lemma-base-change-finite; 01WK, lemma-composition-finite; 02GN, lemma-composition-etale; etale.tex Tag 025O, proposition-etale-reduced"
+   }
+  },
+  {
+   "text": "Let $a:\\operatorname{Spec}E\\to\\operatorname{Spec}K$ and $b:P\\to Y\\xrightarrow{q_E}\\operatorname{Spec}E$. The equality $a\\circ b=P\\to\\operatorname{Spec}K$ follows from step 3. The map $a$ is etale by [lem-weil-pbc-finite-separable-extension-etale]. Thus [lem-weil-pbc-etale-composition-cancellation](3), applied to $b,a$, makes $b$ etale using step 5. Also $a$ is separated by [lem-weil-pbc-affine-source-morphism-separated], since its source is affine. As $a\\circ b$ is finite, [lem-weil-pbc-finite-permanence-over-separated] makes $b$ finite. These arguments do not require $P$ or $M$ to be nonempty. If $U$ is empty, $M$ and $P$ are empty and the same base-change and composition statements apply.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-finite-permanence-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GL, lemma-etale-over-field; 02GW, lemma-etale-permanence; 035D, lemma-finite-permanence (1); schemes.tex Tags 01KN and 01KV for separatedness"
+   }
+  },
+  {
+   "text": "For $C$, [lem-pc-projective-proper] gives properness and clause (2) of [lem-pc-h0-proper-variety] identifies $\\Gamma(C,\\mathcal O_C)=K$ through the structure map, since $C/K$ is geometrically integral. Its local rings are integrally closed domains by [lem-trf-smooth-geometrically-normal]. Apply [lem-sfb-normal-sections-algebraic-constants] with $A=K$, $X=C$ and $R=K$. Its finiteness hypothesis holds with the single generator $1$, and dominance holds because $C$ is nonempty. Its conclusion identifies the elements of $F=K(C)$ algebraic over $K$ with $\\operatorname{Frac}K=K$. Finally, if $x\\in E\\cap F$ inside $L$, its membership in $E$ says that it satisfies a nonzero polynomial over $K$. As $F\\hookrightarrow L$ is injective, the same polynomial vanishes already in $F$, so $x\\in K$. Conversely both embedded fields contain $K$. Therefore $E\\cap F=K$.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-pc-h0-proper-variety",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sfb-normal-sections-algebraic-constants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0358, lemma-normal-integral-sections, algebraic constants consequence; varieties.tex Tag 0BUG (8) and Tag 056T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "etale-proposition-etale-reduced",
+  "lem-pc-global-sections-separable",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-projective-proper",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sfb-normal-sections-algebraic-constants",
+  "lem-sfb-normal-stein-constant-field",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "lem-weil-pbc-finite-separable-base-refinement",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 03H0 (Stein factorization over a field), combined with varieties.tex Tag 0BUG, Tag 056T, and morphisms.tex Tags 02GW and 035D; specialization and assembly as detailed in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective integral curve over a field becomes geometrically integral over its finite separable field of constants and finite etale markings remain etale over that field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsIntegral R W ↔ ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve $ W $ over $ K $, the curve $ W $ is integral (i.e., its coordinate ring is an integral do\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}\n  {\"name\": \"WeierstrassCurve.integralModel\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {K : Type u_2} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra R K] → (W : WeierstrassCurve K) → [hW : WeierstrassCurve.IsIntegral R W] → WeierstrassCurve R\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and an integral Weierstrass curve $ W $ over $ K $, this constructs the integral model of $ W $ as a Weierstrass\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → {K : Type u_2} → [inst_1 : Field K] → [Algebra R K] → WeierstrassCurve K → Prop\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve over $ K $, this proposition asserts that the curve is integral (i.e., its coordinate ri\"}\n  {\"name\": \"WeierstrassCurve.baseChange_integralModel_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W], (WeierstrassCurve.integralModel R W).baseChange K = W\", \"doc\": \"For an integral Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, the base change of its integral model over $ R $ to $ K $ recovers the original curve $ W $, i.e., \"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [WeierstrassCurve.IsMinimal R W], WeierstrassCurve.IsIntegral R W\", \"doc\": \"Every minimal Weierstrass curve over the fraction field of a discrete valuation ring is integral, meaning its coordinate ring forms an integral domain.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization of a smooth proper curve gives the relative algebraic closure of the ground field with geometrically integral fibre and canonical finite etale marking",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.IsProper",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Group.Abelian\", \"type\": \" {K : Type u} [Field K] (G : CategoryTheory.Over (AlgebraicGeometry.Spec ↧K)) [AlgebraicGeometry.IsProper G.hom] [AlgebraicGeometry.GeometricallyIntegral G.hom] [CategoryTheory.GrpObj G] : CategoryTheory.IsCommMonObj G\", \"doc\": \"A proper geometrically integral group scheme over a field is commutative.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tein|constant[Ff]ield|[Cc]onstant.[Ff]ield|algebraicClosure.*[Gg]eometrically",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/TsumDivisorsAntidiagonal.lean\", \"line\": \"20\", \"text\": \"which are used for Eisenstein series and their q-expansions. This is also a special case of\"}\n  {\"file\": \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"line\": \"12\", \"text\": \"# Lemmas of Gauss and Eisenstein\"}\n  {\"file\": \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"line\": \"14\", \"text\": \"This file contains the Lemmas of Gauss and Eisenstein on the Legendre symbol.\"}\n  {\"file\": \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"line\": \"15\", \"text\": \"The main results are `ZMod.gauss_lemma` and `ZMod.eisenstein_lemma`.\"}\n  {\"file\": \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"line\": \"25\", \"text\": \"section GaussEisenstein\"}\n  {\"file\": \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"line\": \"105\", \"text\": \"private theorem eisenstein_lemma_aux₁ (p : ℕ) [Fact p.Prime] [hp2 : Fact (p % 2 = 1)] {a : ℕ}\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"34\", \"text\": \"  CuspFormClass MatrixGroups OnePoint Filter EisensteinSeries Asymptotics\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"26\", \"text\": \"open UpperHalfPlane ModularForm ModularFormClass MatrixGroups EisensteinSeries\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Summable\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"line\": \"24\", \"text\": \"  derivative and show that it is a multiple of the Eisenstein series `E2`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"line\": \"168\", \"text\": \"open EisensteinSeries in\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.QExpansion\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.MDifferentiable\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Transform\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"129\", \"text\": \"  D F z - k * 12⁻¹ * EisensteinSeries.E2 z * F z\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"133\", \"text\": \"    serreDerivative k F z = D F z - k * 12⁻¹ * EisensteinSeries.E2 z * F z := rfl\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"137\", \"text\": \"    serreDerivative k F = fun z ↦ D F z - k * 12⁻¹ * EisensteinSeries.E2 z * F z := rfl\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Transform\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"line\": \"74\", \"text\": \"open EisensteinSeries in\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.Defs\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.Summable\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"14\", \"text\": \"# Boundedness of Eisenstein series\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"16\", \"text\": \"We show that Eisenstein series of weight `k` and level `Γ(N)` with congruence condition\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"21\", \"text\": \"We need to bound the value of the Eisenstein series (acted on by `A : SL(2,ℤ)`)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Delta.lean\", \"line\": \"6\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Transform\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]eometrically[Cc]onnected|[Gg]eometrically[Ii]ntegral",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"15\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"19\", \"text\": \"- `GeometricallyIntegral.iff_geometricallyIntegral_fiber`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"22\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"25\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"40\", \"text\": \"class GeometricallyIntegral (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"22\", \"text\": \"- `AlgebraicGeometry.GeometricallyConnected`: A morphism `f : X ⟶ Y` is geometrically connected if\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"24\", \"text\": \"- `GeometricallyConnected.iff_geometricallyConnected_fiber`: A scheme is geometrically connected\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"40\", \"text\": \"class GeometricallyConnected (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"43\", \"text\": \"lemma GeometricallyConnected.eq_geometrically :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"44\", \"text\": \"    @GeometricallyConnected = geometrically (ConnectedSpace ·) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"17\", \"text\": \"- `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"133\", \"text\": \"theorem isCommMonObj_of_isProper_of_geometricallyIntegral\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"134\", \"text\": \"    (G : Over (Spec (.of K))) [IsProper G.hom] [GeometricallyIntegral G.hom] [GrpObj G] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"435\", \"text\": \"instance : GeometricallyIntegral (𝔸(n; S) ↘ S) :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth projective integral curve is smooth geometrically integral over its algebraic constant field and finite etale subschemes remain finite etale over that field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth proper integral curve has finite separable global constants and becomes geometrically integral over that field of constants",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsIntegral\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.isIntegral_iff\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.integralModel\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"WeierstrassCurve.isIntegral_of_exists_lift\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\"], \"digest\": \"39426073fd6866f5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide global-section field finiteness or unrelated field/rational-map results, not canonical constants, geometric integrality and finite etale marking together"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.IsProper",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral\"], \"digest\": \"6b7045ffdf4b7721\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide global-section field finiteness or unrelated field/rational-map results, not canonical constants, geometric integrality and finite etale marking together"
+  },
+  {
+   "tool": "grep",
+   "query": "constant[Ff]ield|[Ss]tein[Ff]actor|algebraicClosure.*[Gg]eometrically",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide global-section field finiteness or unrelated field/rational-map results, not canonical constants, geometric integrality and finite etale marking together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical field of constants of a smooth proper curve is finite separable and the curve is geometrically integral over it",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"separableClosure\", \"IsSeparable\", \"IsSeparable.isIntegral\", \"isSeparable_iff_finInsepDegree_eq_one\", \"Algebra.IsSeparable.of_integral\", \"separableClosure.isSeparable\", \"separableClosure.isAlgebraic\", \"Field.finInsepDegree\"], \"digest\": \"3c82d3a23029b110\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide global-section field finiteness or unrelated field/rational-map results, not canonical constants, geometric integrality and finite etale marking together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization and geometrically connected fibres over the finite separable algebraic closure of the base field in a function field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"16d3628968b17c73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide global-section field finiteness or unrelated field/rational-map results, not canonical constants, geometric integrality and finite etale marking together"
+  },
+  {
+   "tool": "grep",
+   "query": "isField_of_universallyClosed|finite_appTop_of_universallyClosed|GeometricallyIntegral",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"19\", \"21\", \"150\", \"161\", \"169\"], \"digest\": \"272f00e12453a3d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide global-section field finiteness or unrelated field/rational-map results, not canonical constants, geometric integrality and finite etale marking together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-radical-curve-normalization",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Re-split of lem-sfb-tame-radical-curve-normalization, returned proof steps 7--10: Canonical constants and etale markings of finite smooth projective curve covers.",
+   "via": [
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-cover-constant-field-marking",
+  "worker": "stage1",
+  "summary": "Repair of the 2026-10-23 landing refusal: revalidated the retained seven-step split against the current live unsplit item, reread every cited statement and checked all 22 verbatim quotations. The current normal-sections constants input now has its Q149 review and unchanged statement; the normal Stein construction still specifies the same evaluation embedding. Clarified the renamed function-field letters and the arbitrary, possibly inseparable extension in step 4. Statement, provenance and route unchanged; no new nodes.",
+  "blueprint": "Realizes the recorded proof-(3) alteration prerequisite, specifically the constant-field extraction and etale generic marking in de Jong §3.5 isolated by parent lem-sfb-tame-radical-curve-normalization, returned steps 7--10. The inherited blueprint ancestor is null; its exact from.place and via chain are retained. Whole-blueprint searches for global sections, constant field, smooth etale, projective permanence and Stein found no node stating this full result.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-global-sections-separable",
+    "why": "Generic algebraic-geometry tool used with exactly the hypotheses checked in the proof; it supplies Separability of global sections. The current unit has no duplicate of this general tool, and its alteration route is retained."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Generic algebraic-geometry tool used with exactly the hypotheses checked in the proof; it supplies Normal integral geometry of all field extensions of smooth connected fibres. The current unit has no duplicate of this general tool, and its alteration route is retained."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic algebraic-geometry tool used with exactly the hypotheses checked in the proof; it supplies Smooth schemes over fields are geometrically normal. The current unit has no duplicate of this general tool, and its alteration route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-base-refinement",
+    "why": "Generic algebraic-geometry tool used with exactly the hypotheses checked in the proof; it supplies Finite separable base refinement. The current unit has no duplicate of this general tool, and its alteration route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-global-sections-separable",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-finite-separable-base-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-2ae75c71d",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-2ae75c71d (reviewer sub-agent of L); spot-checked: This head re-delivers eed163e08f80 (stage-1 PASS) after a landing/promotion refusal. Live and side-live clones still show the item unsplit, so no other group has superseded it. The item diff against eed163 adds two clarifying clauses (renamed letters in step 2; T/E arbitrary, including inseparable, in step 4) and a new summary. Statement, stmt_deps, proof_deps, uses, source, blueprint and tool_uses are unchanged. All 18 cited statements and the parent's are identical to the earlier snapshot. I re-read all seven steps against them. (1) lem-pc-h0-proper-variety(1) gives a finite field R, smoothness gives normal local rings, and the generic germ embeds R in L. (2) Normal Stein with T=Y, B=Spec K gives B0=Spec R and k(B0)=R={z in L algebraic over K}=E, with geometrically connected fibres. (3) 01I1 gives the factorization; 0BUG(4) gives separability. (4) Finite-separable base refinement makes q_E smooth and projective; smooth-connected-fibre integrality over Spec E makes Y geometrically integral over E. (5) P->M is etale by base change over U and finite by permanence(a); P is reduced by 025O. (6) 02GW cancellation and 035D over the separated Spec E->Spec K give P finite etale over E. (7) Gamma(C,O)=K and normal-sections constants with A=R=K give K algebraically closed in F, hence E cap F=K. Edge cases hold: Y=C, Y=C x_K E, inseparable constants excluded by smoothness, U and M empty. Batch-5 flags: the pc H0 and separability nodes reach only the definition def-trf-schematically-dense-open; normal-sections and normal-stein reach only the Mathlib leaf lem-trf-finite-domain-fraction-degree; the two trf smooth nodes are generic Stacks 056T/057J facts. None is part of the proof of the trace formula or of Poincare duality, so all are accepted as generic. No duplicates found, no SGA cited, no new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.SmoothCoverConstantFieldMarking",
+  "declaration": "AlgebraicGeometry.smooth_cover_constant_field_marking",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SmoothCoverConstantFieldMarking.lean",
+  "statement": "theorem smooth_cover_constant_field_marking (K : Type u) [Field K] (C Y : Scheme.{u}) (c : C ⟶ Spec (CommRingCat.of K)) (y : Y ⟶ Spec (CommRingCat.of K)) [IsSmoothProjectiveCurve c] [GeometricallyIntegral c] [IsSmoothProjectiveCurve y] [Algebra K C.functionField] [Algebra K Y.functionField] (hK_C : algebraMap K C.functionField = (C.germToFunctionField ⊤ (h := ⟨⟨genericPoint C, trivial⟩⟩)).hom.comp (c.appTop.hom.comp (Scheme.ΓSpecIso (CommRingCat.of K)).inv.hom)) (hK_Y : algebraMap K Y.functionField = (Y.germToFunctionField ⊤ (h := ⟨⟨genericPoint Y, trivial⟩⟩)).hom.comp (y.appTop.hom.comp (Scheme.ΓSpecIso (CommRingCat.of K)).inv.hom)) (ν : Y ⟶ C) [IsFinite ν] [Surjective ν] (hν : ν ≫ c = y) (U : C.Opens) [Etale (ν ∣_ U)] (M : Scheme.{u}) (iM : M ⟶ C) [IsClosedImmersion iM] [IsReduced M] [IsFinite (iM ≫ c)] [Etale (iM ≫ c)] (hM : Set.range iM ⊆ (U : Set C)) (E : IntermediateField K Y.functionField) (hE : E = algebraicClosure K Y.functionField) : FiniteDimensional K E ∧ Algebra.IsSeparable K E ∧ algebraicClosure K C.functionField = ⊥ ∧ (∀ z : C.functionField, @algebraMap C.functionField Y.functionField _ _ (ν.dominantFunctionFieldAlgebra) z ∈ E ↔ z ∈ Set.range (algebraMap K C.functionField)) ∧ ∃ e : Γ(Y, ⊤) ≃+* E, (∀ s : Γ(Y, ⊤), (e s : Y.functionField) = Y.germToFunctionField ⊤ (h := ⟨⟨genericPoint Y, trivial⟩⟩) s) ∧ ∃ qE : Y ⟶ Spec (CommRingCat.of E), qE = Y.toSpecΓ ≫ Spec.map (CommRingCat.ofHom e.symm.toRingHom) ∧ qE ≫ Spec.map (CommRingCat.ofHom (algebraMap K E)) = y ∧ Y.fromSpecFunctionField ≫ qE = Spec.map (CommRingCat.ofHom (algebraMap E Y.functionField)) ∧ IsSmoothProjectiveCurve qE ∧ GeometricallyIntegral qE ∧ IsReduced (pullback ν iM) ∧ IsFinite (pullback.fst ν iM ≫ qE) ∧ Etale (pullback.fst ν iM ≫ qE)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1528e2b23",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the node matches the Lean statement, none weaker or stronger: field K, curves C/Y through IsSmoothProjectiveCurve, GeometricallyIntegral c, finite surjective ν with ν≫c=y, Etale (ν ∣_ U), reduced closed finite-étale M inside U, E = algebraicClosure K L under the pinned K-structures. Conclusions: E/K finite separable; K algebraically closed in F; E∩F=K via the canonical dominantFunctionFieldAlgebra map; Γ(Y)≃E by generic evaluation; qE = toSpecΓ ≫ Spec(e⁻¹) with the K-factorization and generic-composite identities; qE smooth projective geometrically integral; pullback ν iM reduced; P→Spec E finite étale. Node differs from side-live only in the lean record and one added landed def-node stmt_dep. Statement verbatim, imports exist, no cycle. No definitions, only sorry; source places, blueprint tag and 7-step docstring present. Edge cases (empty U/M, identity cover, imperfect K, universe u) covered. No duplicate found. Note only: the second-reading section was written by the same worker, but it is accurate."
+ }
+}

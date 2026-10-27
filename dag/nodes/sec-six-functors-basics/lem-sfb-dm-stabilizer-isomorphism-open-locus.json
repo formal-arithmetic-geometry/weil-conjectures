@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-dm-stabilizer-isomorphism-open-locus",
+ "kind": "statement",
+ "title": "Open stabilizer-isomorphism locus for representable etale maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks in groupoids, Deligne--Mumford stacks, representability by algebraic spaces, and 2-fibre products have the meanings in [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. For a stack $\\mathcal A$, its inertia $I_{\\mathcal A}(T)$ has objects $(a,\\alpha)$ with $a\\in\\mathcal A(T)$ and $\\alpha\\in\\operatorname{Aut}(a)$, and arrows $v:(a,\\alpha)\\to(b,\\beta)$ with $v\\alpha=\\beta v$. The projection forgets $\\alpha$. Finite inertia means that every scheme base change of this projection is a scheme finite over its base [def-weil-finite-integral-morphism]. The point space $|\\mathcal A|$ consists of field-valued objects modulo isomorphism after common field extension, with topology detected by a scheme atlas. A geometric stabilizer at a point is the automorphism group algebraic space of a representative over an algebraically closed field; comparison means comparison after a common algebraically closed field extension. Let $f:\\mathcal A\\to\\mathcal B$ be a representable-by-algebraic-spaces etale map between Deligne--Mumford stacks over $S$, and assume $\\mathcal B$ has finite inertia. The subset $W\\subseteq|\\mathcal A|$ where $f$ induces an isomorphism of geometric stabilizer group algebraic spaces is open. There is a strictly full open substack $\\mathcal A^\\circ\\subseteq\\mathcal A$ with point space $W$, and the canonical map $I_{\\mathcal A^\\circ}\\longrightarrow\\mathcal A^\\circ\\times_{\\mathcal B}I_{\\mathcal B}$ is an isomorphism. An open substack is a full substack stable under pullback whose base change by any scheme is an open subscheme. Etale means [def-weil-etale-morphism] on scheme charts. In particular, every point where the stabilizers are isomorphic belongs to this open substack.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DUA (lemma-stabilizer-preserving-unramified), specialized to representable etale maps and finite target inertia (finite is proper)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-moduli-inertia"
+ ],
+ "proof": [
+  {
+   "text": "Fix any $S$-scheme $T$ and $a\\in\\mathcal A(T)$. Write $H=\\operatorname{Aut}_T(fa)$ and $G=\\operatorname{Aut}_T(a)$ as sheaves on $T$-schemes. By the finite-inertia hypothesis $H$ is a scheme finite over $T$. Put $X=\\mathcal A\\times_{\\mathcal B,fa}T$. Representability and etaleness of $f$ say exactly that $X$ is an algebraic space etale over $T$. On a test $T'\\to T$, an object of $X$ is $(b,\\lambda:fb\\xrightarrow{\\sim}fa|_{T'})$; an arrow $v:(b,\\lambda)\\to(b',\\lambda')$ satisfies $\\lambda' f(v)=\\lambda$. The identity gives a section $s:T\\to X$. Over $H$, its universal automorphism $\\alpha$ gives the section $t_\\alpha=(a,\\alpha^{-1})$. Thus the pullback of $\\Delta_{X/T}$ by $(s,t_\\alpha):H\\to X\\times_T X$ is $G\\to H$: an isomorphism $s\\to t_\\alpha$ is precisely a $v\\in\\operatorname{Aut}(a)$ with $f(v)=\\alpha$. This computation is natural in $T'$; uniqueness holds because $X$ is an algebraic space, hence its groupoids have no nonidentity automorphisms.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, lemma-stabilizer-preserving-unramified, proof; direct diagonal description of its inertia comparison as in remark-get-property-auts-from-diagonal."
+   }
+  },
+  {
+   "text": "The etale algebraic-space morphism $X\\to T$ is unramified by [lem-sfb-space-unramified-permanence]. Apply [lem-sfb-unramified-space-open-diagonal] to this map and to the scheme test $H\\to X\\times_T X$ constructed in step 1. It says that $j_T:G\\to H$ is represented by an open subscheme of $H$. In particular the stabilizer comparison is an open immersion, for every scheme $T\\to\\mathcal A$, and the same description applies after every further scheme base change. No separatedness of $f$ or flatness of either inertia projection is used.",
+   "uses": [
+    "lem-sfb-space-unramified-permanence",
+    "lem-sfb-unramified-space-open-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, lemma-stabilizer-preserving-unramified, proof; direct diagonal description of its inertia comparison as in remark-get-property-auts-from-diagonal."
+   }
+  },
+  {
+   "text": "Choose an etale surjective scheme atlas $p:U\\to\\mathcal A$. Apply steps 1--2 with its object $a$ to obtain an open subscheme $G\\subset H$ and a finite scheme map $q:H\\to U$. Set $C=|H|\\setminus|G|$. The finite-map theorem [lem-weil-pbc-finite-closed-map-finite-fibres] makes $q(C)$ closed. The inverse image of $W$ in $U$ is exactly $U\\setminus q(C)$. Indeed the comparison over a geometric point $\\bar u$ is the base change $G_{\\bar u}\\subset H_{\\bar u}$. It is an isomorphism exactly when that open subscheme is the whole fibre [def-weil-open-immersion]. If $C$ has a point over $u$, take an algebraic closure of its residue field [def-weil-algebraic-closure]; the resulting geometric point of $H$ is still outside $G$, so the geometric comparison fails. Conversely, a missing geometric point of the open fibre maps to a point of $C$ over $u$. This also proves independence of the chosen geometric representative: a nonempty complement remains nonempty after extension to a common algebraically closed field, whereas an isomorphism remains an isomorphism. Thus $p^{-1}(W)$ is open.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-open-immersion",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, lemma-stabilizer-preserving-unramified, proof; direct diagonal description of its inertia comparison as in remark-get-property-auts-from-diagonal."
+   }
+  },
+  {
+   "text": "By [lem-sfb-stack-topology-open-substacks], openness is detected on the etale surjective atlas $U\\to\\mathcal A$. Step 3 therefore proves that $W$ is open in $|\\mathcal A|$. The same node's open-substack/open-subset bijection supplies a strictly full open substack $\\mathcal A^\\circ\\subseteq\\mathcal A$ with point space $W$. Its pullback clause says that every geometric point of a scheme $T\\to\\mathcal A^\\circ$ maps into $W$.",
+   "uses": [
+    "lem-sfb-stack-topology-open-substacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, lemma-stabilizer-preserving-unramified, proof; direct diagonal description of its inertia comparison as in remark-get-property-auts-from-diagonal."
+   }
+  },
+  {
+   "text": "For any scheme $T\\to\\mathcal A^\\circ$ with object $a$, step 2 identifies $j_T:\\operatorname{Aut}_T(a)\\to\\operatorname{Aut}_T(fa)$ with an open subscheme of the finite $T$-scheme $H$. Its complement is empty: a point of that complement would, after passage to an algebraic closure of its residue field [def-weil-algebraic-closure], give a geometric point of $T$ at which the stabilizer map is not an isomorphism, contradicting step 4. Hence $j_T$ is an isomorphism by the definition of open immersion [def-weil-open-immersion]. Strict fullness identifies automorphisms of $a$ in $\\mathcal A^\\circ$ and $\\mathcal A$. Consequently every object $(a,\\alpha)$ of $\\mathcal A^\\circ\\times_{\\mathcal B}I_{\\mathcal B}$ has a unique lift $(a,\\beta)$ with $f\\beta=\\alpha$. The lift commutes with pullback by uniqueness. If $v:a\\to b$ conjugates $\\alpha$ to $\\alpha'$, then $v\\beta v^{-1}$ and $\\beta'$ have the same image under the injective stabilizer map at $b$, so they are equal. Thus the lift also respects all arrows and gives an inverse to the canonical inertia map. This proves its asserted isomorphism. Finally every stabilizer-isomorphism point belongs to $\\mathcal A^\\circ$ because its point space is exactly $W$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-open-immersion",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, lemma-stabilizer-preserving-unramified, proof; direct diagonal description of its inertia comparison as in remark-get-property-auts-from-diagonal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-unramified-permanence",
+  "lem-sfb-unramified-space-open-diagonal",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-weil-open-immersion",
+  "def-weil-algebraic-closure",
+  "lem-sfb-stack-topology-open-substacks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DUA, lemma-stabilizer-preserving-unramified, proof; direct diagonal description of its inertia comparison as in remark-get-property-auts-from-diagonal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a representable etale morphism of Deligne Mumford stacks with proper target inertia the locus where stabilizers are isomorphic is open and inertia agrees on this open substack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_stalk_iso\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasLimits C]\\n  [inst_2 : CategoryTheory.Limits.HasColimits C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_3 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [(Category\", \"doc\": \"For sheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, a morphism $f: X \\\\to Y$ is an open immersion if its underlying continuous map is an open embedding and for every point $x \\\\in X$, the indu\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stabilizer preserving locus of an unramified algebraic stack morphism is open when target inertia is proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is an open map is Zariski-local at the source. That is, for any scheme morphism, if there exists a Zariski-open cover of its \"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that the image of $V$ under $f$ is contained in $U$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertia\", \"IsOpen\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.*open|inertia.*proper|automorphism.*locus",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/KrullTopology.lean\", \"line\": \"44\", \"text\": \"- `stabilizer_isOpen_of_isIntegral`: For an integral field extension `L/K`, the stabilizer\"}\n  {\"file\": \"Mathlib/FieldTheory/KrullTopology.lean\", \"line\": \"260\", \"text\": \"theorem stabilizer_isOpen_of_isIntegral [Algebra.IsIntegral K L] (x : L) :\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"54\", \"text\": \"    (stabilizer_isOpen G x) (one_mem _)\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"91\", \"text\": \"    (stabilizer_isOpen G x) (one_mem _)\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"192\", \"text\": \"      (stabilizer_isOpen G x) (one_mem _)\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"205\", \"text\": \"      (stabilizer_isOpen G x) (one_mem _)\"}\n  {\"file\": \"Mathlib/Topology/Algebra/MulAction.lean\", \"line\": \"276\", \"text\": \"/-- The stabilizer of a continuous group action on a discrete space is an open subgroup. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/MulAction.lean\", \"line\": \"277\", \"text\": \"lemma stabilizer_isOpen [DiscreteTopology X] (x : X) : IsOpen (MulAction.stabilizer M x : Set M) :=\"}\n  {\"file\": \"Mathlib/Topology/Algebra/MulAction.lean\", \"line\": \"287\", \"text\": \"each stabilizer is an open subgroup. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/MulAction.lean\", \"line\": \"288\", \"text\": \"theorem continuousSMul_iff_stabilizer_isOpen [DiscreteTopology X] :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/MulAction.lean\", \"line\": \"290\", \"text\": \"  refine ⟨fun _ _ ↦ stabilizer_isOpen .., fun h ↦ ⟨?_⟩⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Topology.lean\", \"line\": \"224\", \"text\": \"      exact ⟨MulAction.stabilizer (Aut F) X.pt, h, stabilizer_isOpen (Aut F) X.pt,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/EssSurj.lean\", \"line\": \"67\", \"text\": \"  fintypeQuotient ⟨MulAction.stabilizer (G) x, stabilizer_isOpen (G) x⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/EssSurj.lean\", \"line\": \"98\", \"text\": \"    let U : OpenSubgroup (G) := ⟨MulAction.stabilizer (G) x, stabilizer_isOpen (G) x⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/EssSurj.lean\", \"line\": \"234\", \"text\": \"  let U : OpenSubgroup (Aut F) := ⟨MulAction.stabilizer (Aut F) a, stabilizer_isOpen (Aut F) a⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"line\": \"131\", \"text\": \"    stabilizer_isOpen G X.pt, one_mem _⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"line\": \"191\", \"text\": \"      exact Subgroup.isClosed_of_isOpen _ (stabilizer_isOpen G X.pt)\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus where an unramified representable morphism of algebraic stacks preserves stabilizers is open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"The basic open set $ D(f) $ in the prime spectrum of $ A $ is contained within the unramified locus of the $ R $-algebra $ A $ if and only if the localization $ A_f $ (localization of $ A $ at the sub\"}\n  {\"name\": \"NumberField.InfinitePlace.isUnramified_iff_stabilizer_eq_bot\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"[IsGalois k K] : IsUnramified k w ↔ Stab w = ⊥\", \"doc\": \"For a Galois extension $ K/k $, an infinite place $ w $ of $ K $ is unramified over $ k $ if and only if the stabilizer subgroup $ \\\\text{Stab}(w) $ in the Galois group $ \\\\text{Gal}(K/k) $ is trivial, \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that the image of $V$ under $f$ is contained in $U$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.*open|inertia.*proper|automorphism.*locus",
+   "results": "{\"t\": \"2026-10-23T11:43:59Z\", \"tool\": \"grep\", \"query\": \"stabilizer.*open|inertia.*proper|automorphism.*locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/MulAction.lean\", \"Mathlib/Topology/Algebra/MulAction.lean\", \"Mathlib/Topology/Algebra/MulAction.lean\", \"Mathlib/Topology/Algebra/MulAction.lean\", \"Mathlib/Topology/Algebra/MulAction.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\"], \"digest\": \"d5ea1da8c4b487b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, sheafed spaces, ordinary group actions or ring inertia, not stabilizer comparisons for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable unramified map of algebraic stacks with proper target inertia preserves stabilizers on an open substack",
+   "results": "{\"t\": \"2026-10-23T11:43:59Z\", \"tool\": \"leansearch\", \"query\": \"A representable unramified map of algebraic stacks with proper target inertia preserves stabilizers on an open substack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified\"], \"digest\": \"46ed578099ca918c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, sheafed spaces, ordinary group actions or ring inertia, not stabilizer comparisons for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertia\", \"IsOpen\"",
+   "results": "{\"t\": \"2026-10-23T11:43:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"inertia\\\", \\\"IsOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, sheafed spaces, ordinary group actions or ring inertia, not stabilizer comparisons for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable etale morphism of Deligne Mumford stacks with finite inertia has an open stabilizer isomorphism locus",
+   "results": "{\"t\": \"2026-10-23T11:44:01Z\", \"tool\": \"leanfinder\", \"query\": \"Representable etale morphism of Deligne Mumford stacks with finite inertia has an open stabilizer isomorphism locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_stalk_iso\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso_stalkMap\"], \"digest\": \"1ca39e6f4ac1eced\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, sheafed spaces, ordinary group actions or ring inertia, not stabilizer comparisons for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of the stabilizer preserving locus is the closed image of the complement of an open immersion of inertia schemes",
+   "results": "{\"t\": \"2026-10-23T11:44:02Z\", \"tool\": \"leanfinder\", \"query\": \"The complement of the stabilizer preserving locus is the closed image of the complement of an open immersion of inertia schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"stabilizer_compl\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"stabilizer_isOpen\", \"Ideal.Quotient.map_ker_stabilizer_subtype\", \"Ideal.inertia_le_stabilizer\", \"SubMulAction.ofStabilizer_carrier\", \"Ideal.Quotient.ker_stabilizerHom\"], \"digest\": \"1e602580e9a20914\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, sheafed spaces, ordinary group actions or ring inertia, not stabilizer comparisons for algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-local-affine-covers",
+  "date": "2026-10-23",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Open stabilizer-isomorphism locus for representable etale maps.",
+   "via": [
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dm-stabilizer-isomorphism-open-locus",
+  "worker": "stage1",
+  "summary": "Proved the finite-inertia etale case of 0DUA using the explicit diagonal pullback on every scheme test, the existing unramified diagonal theorem, the closed image of the finite inertia complement, and the existing open-substack correspondence. No new nodes; statement unchanged. Verified the inertia isomorphism on all schemes, including nonreduced schemes, by unique lifting and conjugation.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), inherited alteration/moduli prerequisite: the stabilizer-preserving open restriction inside finite-inertia local affine covers. Ancestor tool returns None because the inherited creation chain has no imported blueprint ancestor; retained the explicit inherited place and via list, and searched the whole blueprint for stabilizer/inertia/open-substack matches."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-6c51db183",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-6c51db183 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full against Stacks stacks-morphisms 0DUA (lemma-stabilizer-preserving-unramified), remark-get-property-auts-from-diagonal, lemma-aut-iso-unramified and spaces-morphisms 05W1. Statement, stmt_deps and source are byte-identical to side-live; live is still unsplit; no repair note; no new nodes; proof_deps equals the union of the uses; no SGA. Step 1 (elementary): the 2-fibre product X=A×_{B,fa}T is an etale algebraic space by the definitions, and (s,t_α)^{-1}Δ_{X/T}=G→H via f(v)=α. I checked this computation; it is the remark's cartesian square written out. Step 2: lem-sfb-space-unramified-permanence says etale implies unramified, and lem-sfb-unramified-space-open-diagonal, applied with the scheme test H, makes G an open subscheme of H. All hypotheses hold over arbitrary S. Step 3: finite q makes q(|H|\\|G|) closed, so p^{-1}(W)=U\\q(C). The geometric-fibre criterion and independence of the representative are argued via algebraic closures; this is 0DUA with finite in place of proper. Step 4: lem-sfb-stack-topology-open-substacks gives the atlas test, the open-substack bijection and pullback compatibility, all in its statement. Step 5: the empty complement gives G=H on every T→A°; I checked the unique lift, the conjugation compatibility via injectivity and full faithfulness of the inertia map (this replaces lemma-aut-iso-unramified). Hypotheses (finite inertia of B, representable etale f, A DM) are each used where needed, and no field or separatedness hypothesis is added. Tested the empty stack, the identity, an open substack, and BH→BG for H<G (the locus is empty iff H≠G). Duplicates: lem-sfb-proper-inertia-stabilizer-preserving-open is over a field only, so it is not a duplicate (advisory). Batch-5: the three flagged citations reach only the general definitions def-trf-algebraic-space and def-trf-projective-bundle-morphism (the latter via def-sfb-stable-pointed-moduli-groupoids, already a base stmt_dep). Neither is the trace formula or Poincaré duality, nor a step of their proofs, so all three are accepted. No tool_uses are needed, since the cited lemmas are same-unit or definitions/Mathlib leaf."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmStabilizerIsomorphismOpenLocus",
+  "declaration": "CategoryTheory.dm_stabilizer_isomorphism_open_locus",
+  "declarations": [
+   "CategoryTheory.moduliInertiaMap",
+   "CategoryTheory.moduliInertiaComparison",
+   "CategoryTheory.moduliFiberPoint",
+   "CategoryTheory.moduliStabilizerIsomorphismLocus",
+   "CategoryTheory.dm_stabilizer_isomorphism_open_locus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DmStabilizerIsomorphismOpenLocus.lean",
+  "statement": "theorem dm_stabilizer_isomorphism_open_locus {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (f : BasedFunctor F G) (hF : IsDeligneMumfordModuliStack F) (hG : IsDeligneMumfordModuliStack G) (hf : IsRepresentableByAlgebraicSpaces f) (het : IsEtaleModuliMap f) (hfinite : IsRepresentableFiniteModuliMap (moduliInertiaProjection G)) : ModuliPointIsClosed F (moduliStabilizerIsomorphismLocus f)ᶜ ∧ ∃ U : OpenModuliSubstack F, Set.range (moduliPointMap (fullModuliInclusion F U.property)) = moduliStabilizerIsomorphismLocus f ∧ Functor.IsEquivalence (moduliInertiaComparison ((fullModuliInclusion F U.property).comp f)).toFunctor",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed def-sfb-moduli-inertia API from Sheaf.AlgebraicGeometry.ModuliInertia, with obj and vertical map equality; the canonical inertia map and comparison are explicit constructions. Finite inertia is tested on moduliInertiaProjection. Openness, points and open substacks use existing interfaces. The natural-language node statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cd988ad0",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Re-delivery after the H4/H9 RETURN of c2600a2d makes exactly the requested changes: imports the landed ModuliInertia, drops the 5 duplicate inertia declarations, adds stmt_dep def-sfb-moduli-inertia (on the base: index 13:09 UTC > landing 12:41 UTC), restates moduliInertiaMap/Comparison on the obj/vertical API with target moduliTwoFiberProduct f (moduliInertiaProjection G), and puts hfinite on the landed projection. Node diff is only lean+stmt_deps; statement, proof and proof_deps are unchanged and equal side-live; lean.statement is verbatim; the only sorry is on the main theorem. Dependency signatures read (TwoFiberProduct, FiberMap, ModuliPoints/PointIsClosed, OpenModuliSubstack, IsRepresentableFiniteModuliMap, IsEtaleModuliMap). Clauses, locus semantics and edge cases checked again. No name collisions in side-live or live. Not recompiled per instruction; worker compiles clean. Advisory: IsEtaleModuliMap is only imported transitively."
+ }
+}

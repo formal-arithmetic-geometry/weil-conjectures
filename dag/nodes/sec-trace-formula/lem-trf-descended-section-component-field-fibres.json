@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-descended-section-component-field-fibres",
+ "kind": "statement",
+ "title": "Field-fibre comparison for a descended section component",
+ "statement": "Let $f:X\\to B$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], let $p:T\\to B$ be surjective [def-weil-surjective-morphism], and let $\\sigma:T\\to X$ satisfy $f\\circ\\sigma=p$. Put $Y=X\\times_B T$, with its section $s=(\\sigma,\\mathrm{id}_T)$ over $T$ [def-pc-base-change]. Let $C\\subseteq Y$ be open and suppose its fibre at each $t\\in T$ is exactly the connected component containing $s(t)$ [def-weil-open-immersion, def-weil-connected-scheme, def-pc-scheme-fibre]. Let $U\\subseteq X$ be an open whose inverse image in $Y$ is $C$. For every $t\\in T$, put $b=p(t)$ and $K=\\kappa(t)$, viewed as an extension of $\\kappa(b)$ [def-weil-residue-field, def-pc-field-extension]. The canonical isomorphism $Y_t\\simeq X_b\\times_{\\kappa(b)}\\operatorname{Spec}K$ identifies the open $U_b\\times_{\\kappa(b)}\\operatorname{Spec}K$ with the connected component of the $K$-rational point induced by $s$ in $Y_t$. In particular this open is geometrically connected over $K$ [def-pc-geometrically-irreducible]. If $X_b$ is geometrically connected over $\\kappa(b)$, the same identification gives $U_b\\times_{\\kappa(b)}\\operatorname{Spec}K=X_b\\times_{\\kappa(b)}\\operatorname{Spec}K$ and $U_b=X_b$ as open subschemes. No flatness or geometric reducedness hypothesis on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057I, lemma-descent-connected-fibres, final assertion that the descended open has the desired fibres; field-fibre identification and rational-section component argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-base-change",
+  "def-weil-open-immersion",
+  "def-weil-connected-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t\\in T$, $b=p(t)$ and $K=\\kappa(t)$. Apply [lem-weil-pbc-fibre-of-base-change] to $f$ and $p$ to identify $Y_t$ with $X_b\\times_{\\kappa(b)}\\operatorname{Spec}K$, compatibly with both projections. Since $C$ is the inverse-image open of $U$, restricting this identification gives $C_t=U_b\\times_{\\kappa(b)}\\operatorname{Spec}K$: on both sides a morphism to $Y_t$ factors through the open precisely when its composite to $X$ factors through $U$ [def-weil-open-immersion]. By the hypothesis on $C$, this is the connected component containing the point induced by $s$.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V3, lemma-set-points-where-fibres-lci, proof: fibres of the base change are the base changes of the fibres; restriction to an open by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "Base change the section $s$ along $\\operatorname{Spec}K\\to T$ to obtain $q:\\operatorname{Spec}K\\to Y_t$ with structural composite the identity. Its unique point lands in $C_t$ by the component hypothesis, so $q$ factors through that open [def-weil-open-immersion]. Thus the connected scheme $C_t$ has a $K$-rational point, still a section of its structure morphism. Apply [lem-sbc-connected-rational-point-geometrically-connected] over $K$: every field extension of $K$ leaves $C_t$ connected. This is geometric connectedness of the open identified in Step 1.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KV, lemma-geometrically-connected-if-connected-and-point, final assertion (connected scheme with a rational point)."
+   }
+  },
+  {
+   "text": "Now assume $X_b$ geometrically connected. By [def-pc-geometrically-irreducible], $X_b\\times_{\\kappa(b)}\\operatorname{Spec}K$, hence $Y_t$, is connected. In a connected space the maximal connected subset containing any given point is the whole space. The component description in Step 1 therefore gives $C_t=Y_t$, and hence $U_b\\times_{\\kappa(b)}\\operatorname{Spec}K=X_b\\times_{\\kappa(b)}\\operatorname{Spec}K$ as open subschemes [def-weil-open-immersion].",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I, lemma-descent-connected-fibres, proof: components over the distinguished fibre agree, being equal to the whole fibre."
+   }
+  },
+  {
+   "text": "The map $\\operatorname{Spec}K\\to\\operatorname{Spec}\\kappa(b)$ is surjective by [lem-pc-field-extension-surjective]. Its base change $\\pi:X_b\\times_{\\kappa(b)}\\operatorname{Spec}K\\to X_b$ is surjective by [lem-weil-pbc-surjective-base-change]. Step 3 says $\\pi^{-1}(U_b)$ is the whole source. For each $x\\in X_b$, choose a point above it; it belongs to this inverse image, so $x\\in U_b$. Thus $U_b$ has the whole underlying open of $X_b$, and the definition of an open subscheme [def-weil-open-immersion] gives $U_b=X_b$ as open subschemes.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1, lemma-base-change-surjective; applied to the field-extension projection in the final fibre assertion of Tag 057I."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-weil-open-immersion",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "def-pc-geometrically-irreducible",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057I, lemma-descent-connected-fibres, final fibre assertion, with Tag 04KV (varieties.tex) for its rational-section component argument and Tag 01S1 for descent of equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme whose pullback along a surjective scheme base change is the connected component containing a section has geometrically connected fibres and contains every originally geometrically connected fibre",
+   "results": "{\"t\": \"2026-10-22T06:47:17Z\", \"tool\": \"leanfinder\", \"query\": \"An open subscheme whose pullback along a surjective scheme base change is the connected component containing a section has geometrically connected fibres and contains every originally geometrically connected fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"AlgebraicGeometry.mem_range_iff_of_surjective\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.Hom.range_fiberι\"], \"digest\": \"9d5a36e98dc70d45\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: surjectivity from geometric connectedness, fibre definitions and topological component-image lemmas do not identify the descended open with a rational section component over a residue-field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric connectedness of a descended fibre can be checked after extension to the residue field of a point of a surjective cover where it has a rational point in a connected component",
+   "results": "{\"t\": \"2026-10-22T06:47:26Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric connectedness of a descended fibre can be checked after extension to the residue field of a point of a surjective cover where it has a rational point in a connected component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residue_surjective\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.fiber\"], \"digest\": \"0c8b41608767884d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: surjectivity from geometric connectedness, fibre definitions and topological component-image lemmas do not identify the descended open with a rational section component over a residue-field extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyConnected\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-22T06:47:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyConnected\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instSurjectiveOfGeometricallyConnected\"], \"digest\": \"2fa31227dfd0e25f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: surjectivity from geometric connectedness, fibre definitions and topological component-image lemmas do not identify the descended open with a rational section component over a residue-field extension"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]eometrically[Cc]onnected.*(section|surject|descen)|[Cc]onnected.*(section|surject).*fibe",
+   "results": "{\"t\": \"2026-10-22T06:47:16Z\", \"tool\": \"grep\", \"query\": \"[Gg]eometrically[Cc]onnected.*(section|surject|descen)|[Cc]onnected.*(section|surject).*fibe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"7d766c53a8661d60\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: surjectivity from geometric connectedness, fibre definitions and topological component-image lemmas do not identify the descended open with a rational section component over a residue-field extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A descended relative section component has geometrically connected fibres and equals the whole fibre whenever the original fibre is geometrically connected",
+   "results": "{\"t\": \"2026-10-22T06:47:16Z\", \"tool\": \"leansearch\", \"query\": \"A descended relative section component has geometrically connected fibres and equals the whole fibre whenever the original fibre is geometrically connected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"Topology.IsQuotientMap.image_connectedComponent\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"Topology.IsQuotientMap.preimage_connectedComponent\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"preimage_connectedComponent_connected\"], \"digest\": \"8f57e5f4f59921ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: surjectivity from geometric connectedness, fibre definitions and topological component-image lemmas do not identify the descended open with a rational section component over a residue-field extension"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected|fiber.*[Ii]so",
+   "results": "{\"t\": \"2026-10-23T21:15:53Z\", \"tool\": \"grep\", \"query\": \"GeometricallyConnected|fiber.*[Ii]so\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\"], \"digest\": \"d0b06ca236e67d44\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fibre definitions, residue-field points and geometric-connectedness consequences do not prove the descended-open component comparison or the rational-point criterion; the latter exists in the project library and is cited as an existing node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected scheme over a field with a rational point is geometrically connected",
+   "results": "{\"t\": \"2026-10-23T21:15:53Z\", \"tool\": \"leansearch\", \"query\": \"A connected scheme over a field with a rational point is geometrically connected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"Algebra.IsGeometricallyReduced.casesOn\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"Algebra.IsGeometricallyReduced.mk\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Scheme.fromSpecResidueField\"], \"digest\": \"8a4fcd7e97ce28b9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fibre definitions, residue-field points and geometric-connectedness consequences do not prove the descended-open component comparison or the rational-point criterion; the latter exists in the project library and is cited as an existing node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyConnected\", \"ConnectedSpace\"",
+   "results": "{\"t\": \"2026-10-23T21:15:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyConnected\\\", \\\"ConnectedSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace\", \"AlgebraicGeometry.instConnectedSpaceCarrierCarrierCommRingCatFiberOfGeometricallyConnected\", \"AlgebraicGeometry.GeometricallyConnected.connectedSpace_of_subsingleton\", \"AlgebraicGeometry.instConnectedSpaceCarrierCarrierCommRingCatPullbackSchemeOfGeometricallyConnectedOfUniversallyOpen\", \"AlgebraicGeometry.instConnectedSpaceCarrierCarrierCommRingCatPullbackSchemeOfGeometricallyConnectedOfUniversallyOpen_1\", \"AlgebraicGeometry.GeometricallyConnected.connectedSpace\"], \"digest\": \"5543e34ce9f2a985\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fibre definitions, residue-field points and geometric-connectedness consequences do not prove the descended-open component comparison or the rational-point criterion; the latter exists in the project library and is cited as an existing node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme pulled back from the base has fibre the connected component containing a rational section point, hence is geometrically connected",
+   "results": "{\"t\": \"2026-10-23T21:15:55Z\", \"tool\": \"leanfinder\", \"query\": \"An open subscheme pulled back from the base has fibre the connected component containing a rational section point, hence is geometrically connected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.Scheme.Hom.asFiber\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.IsDominant\"], \"digest\": \"eb6ba4ae5fb35283\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fibre definitions, residue-field points and geometric-connectedness consequences do not prove the descended-open component comparison or the rational-point criterion; the latter exists in the project library and is cited as an existing node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme over a field with a rational point, its connected component is geometrically connected and remains the section component after extending scalars",
+   "results": "{\"t\": \"2026-10-23T21:16:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a scheme over a field with a rational point, its connected component is geometrically connected and remains the section component after extending scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Scheme.fromSpecResidueField_apply\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsIntegral.nonempty\"], \"digest\": \"a7437d71d7080291\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fibre definitions, residue-field points and geometric-connectedness consequences do not prove the descended-open component comparison or the rational-point criterion; the latter exists in the project library and is cited as an existing node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-locally-free-multisection-connected-open",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 057I, lemma-descent-connected-fibres, final assertion that the descended open has the desired fibres; field-fibre identification and rational-section component argument.",
+   "via": [
+    "lem-trf-finite-locally-free-multisection-connected-open",
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-descended-section-component-field-fibres",
+  "worker": "stage1",
+  "summary": "Kept the statement and all original metadata. Proved the field-fibre comparison by the existing cartesian fibre node and explicit restriction to opens; applied the existing connected-rational-point criterion, then proved whole-fibre equality and descended it along the surjective field-extension projection. No new nodes: all non-elementary inputs already exist. Repeated logged Mathlib searches in two phrasings and checked the returned source: no exact Mathlib match for the item.",
+  "blueprint": "The inherited lem-trf-local-term-locality ancestry passes through the finite locally free multisection ingredient. This split supplies the final desired-fibres assertion of Stacks 057I in that ingredient, without changing the contracting-correspondence route of the latest blueprint or its unit.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic Tag 04KV criterion for a connected field-scheme equipped with a rational section; used only on C_t. It imposes no smoothness, flatness or reducedness. The same-unit connected-point criterion is more general, and this existing exact specialization avoids repeating the residue-field argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-fb7df56a6",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-fb7df56a6 (reviewer sub-agent of L); spot-checked: S1 delivery, 0 new nodes; the base item was statement-only and there is no re-split note. The statement is unchanged and isolates the final fibre assertion of Stacks 057I (more-morphisms.tex l.13088, final paragraph) with the open given; hypotheses are not weakened. Step 1: lem-weil-pbc-fibre-of-base-change (S=B, S'=T, X'=Y) gives the cartesian square over K; since iota∘h = g'∘iota', h^{-1}(U_b×K) = iota'^{-1}(C) = C_t. Step 2: the base-changed section q lands in C_t, which is connected and nonempty; Tag 04KV node lem-sbc-connected-rational-point-geometrically-connected (checked against varieties.tex l.1082) gives geometric connectedness over K. It is an off-unit generic tool declared in tool_uses and accepted; its closure does not contain the item, so there is no cycle. Step 3: elementary, connected Y_t makes the component the whole fibre. Step 4: Spec K -> Spec kappa(b) is surjective, its base change is surjective, so U_b = X_b as open subschemes. proof_deps equals the union of the uses. Matches parent step-3 usage ((b) at z, reflected along kappa(z)/kappa(b); (c) at b_0). Edge cases checked: K = kappa(b), disconnected fibre, inseparable extension, non-reduced fibre, nonemptiness. rg -L for 057I and 04KV found no duplicate. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendedSectionComponentFieldFibres",
+  "declaration": "AlgebraicGeometry.descended_section_component_field_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendedSectionComponentFieldFibres.lean",
+  "statement": "theorem descended_section_component_field_fibres {X B T : Scheme.{u}} (f : X ⟶ B) [LocallyOfFiniteType f] (p : T ⟶ B) [Surjective p] (σ : T ⟶ X) (hσ : σ ≫ f = p) (C : (pullback f p).Opens) (hC : ∀ t : T, (C : Set ↥(pullback f p)) ∩ (pullback.snd f p) ⁻¹' {t} = connectedComponentIn ((pullback.snd f p) ⁻¹' {t}) ((pullback.lift σ (𝟙 T) (hσ.trans (Category.id_comp p).symm)) t)) (U : X.Opens) (hU : (pullback.fst f p) ⁻¹ᵁ U = C) (t : T) : ∃ (e : (pullback.snd f p).fiber t ≅ pullback (f.fiberToSpecResidueField (p t)) (Spec.map (p.residueFieldMap t))) (q : Spec (T.residueField t) ⟶ (pullback.snd f p).fiber t), e.hom ≫ pullback.fst _ _ ≫ f.fiberι (p t) = (pullback.snd f p).fiberι t ≫ pullback.fst f p ∧ e.hom ≫ pullback.snd _ _ = (pullback.snd f p).fiberToSpecResidueField t ∧ q ≫ (pullback.snd f p).fiberι t = T.fromSpecResidueField t ≫ pullback.lift σ (𝟙 T) (hσ.trans (Category.id_comp p).symm) ∧ q ≫ (pullback.snd f p).fiberToSpecResidueField t = 𝟙 _ ∧ e.hom ⁻¹ᵁ ((pullback.fst (f.fiberToSpecResidueField (p t)) (Spec.map (p.residueFieldMap t))) ⁻¹ᵁ ((f.fiberι (p t)) ⁻¹ᵁ U)) = ((pullback.snd f p).fiberι t) ⁻¹ᵁ C ∧ ((((pullback.snd f p).fiberι t) ⁻¹ᵁ C) : Set ↥((pullback.snd f p).fiber t)) = connectedComponent (q default) ∧ GeometricallyConnected (((pullback.fst (f.fiberToSpecResidueField (p t)) (Spec.map (p.residueFieldMap t))) ⁻¹ᵁ ((f.fiberι (p t)) ⁻¹ᵁ U)).ι ≫ pullback.snd (f.fiberToSpecResidueField (p t)) (Spec.map (p.residueFieldMap t))) ∧ (GeometricallyConnected (f.fiberToSpecResidueField (p t)) → (pullback.fst (f.fiberToSpecResidueField (p t)) (Spec.map (p.residueFieldMap t))) ⁻¹ᵁ ((f.fiberι (p t)) ⁻¹ᵁ U) = ⊤ ∧ (f.fiberι (p t)) ⁻¹ᵁ U = ⊤)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a40e9f076",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Statement verbatim; node unchanged except lean; 10 stmt_dep records identical to side-live. All hypotheses (LocallyOfFiniteType, Surjective p, hσ, section pullback.lift σ 𝟙, hC via connectedComponentIn on topological fibre, hU) and conclusions (e pinned by two projection eqs — fiberι mono — exists via isPullback_fiberToSpecResidueField_of_isPullback; q pinned base-changed section; open identification + component set equality; GeometricallyConnected over Spec K; GC(X_b) → both opens ⊤) match node; no extra assumptions; universe u arbitrary; edge cases (T empty, K=κ(b), inseparable, nonreduced, disconnected fibre) fine. No definitions; sorry only; docstrings carry source, 4 proof steps, blueprint id. No duplicate found. Report has Worker report + same-worker Second reading (noted). No compile needed (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261026T093106-L-3522271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.descended_section_component_field_fibres"
+  ],
+  "sorry_after": []
+ }
+}

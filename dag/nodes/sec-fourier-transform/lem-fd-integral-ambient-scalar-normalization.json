@@ -1,0 +1,128 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "id": "lem-fd-integral-ambient-scalar-normalization",
+ "kind": "statement",
+ "title": "Ambient scalar normalization in the datum-free presentation",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, an algebraic closure Ω of Q_l, and a noetherian finite-dimensional scheme T with l invertible in every stalk. For every inclusion E≤L of finite coefficient fields in Ω, there exist a generator-normalized FdOrdinaryScalarTransport ordinary and an ambient comparison from the intrinsic integral inclusion followed by detailed coefficient transport and PBC ambient scalar extension to the canonical datum-free integralTransition followed by the target intrinsic inclusion and detailed transport [def-fd-coefficient-comparison-datum, def-weil-algebraically-closed-coefficients]. On each good complex P whose derived image is constructible, the comparison component followed by the scalar representative comparison and target coefficient factor is heterogeneously equal to ambient scalar extension of the source coefficient factor, followed by the actual completed-scalar counit and the derived image of ordinary.completion. The exact factors and their order are recorded in the attached Lean statement.",
+ "proof": [
+  {
+   "text": "use fdCoefficientScalarLift_normalization. The redundant characteristic\nparameter in the constructibility preservation proof changes neither the objects\nnor the morphisms of the restricted completed extension: unfold its restriction\nand discard the proof field by proof irrelevance. Thus its comparison has exactly\nthe canonical integralTransition target, and retains the same representative\nnormalization without changing any map.",
+   "uses": [
+    "lem-fd-coefficient-scalar-lift-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-coefficient-scalar-lift-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Changing a proof parameter of a full subcategory restriction leaves the functor and normalized natural comparison unchanged",
+   "results": "8 hits: CategoryTheory.ObjectProperty.fullSubcategoryCongr_functor, CategoryTheory.ObjectProperty.fullSubcategoryCongr_counitIso, CategoryTheory.ObjectProperty.fullSubcategoryCongr_unitIso, CategoryTheory.ObjectProperty.fullSubcategoryCongr, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.src, CategoryTheory.ObjectProperty.FullSubcategory.mk.hcongr_5, CategoryTheory.Equivalence.congrFullSubcategory_functor, CategoryTheory.ObjectProperty.fullSubcategoryCongr_inverse",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; the proved argument supplies the presentation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty.lift\"",
+   "results": "5 hits: CategoryTheory.ObjectProperty.lift, CategoryTheory.ObjectProperty.lift_obj_obj, CategoryTheory.ObjectProperty.liftCompιIso, CategoryTheory.ObjectProperty.liftCompιOfLEIso, CategoryTheory.ObjectProperty.lift_map",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; the proved argument supplies the presentation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "fdCoefficientScalarLift_normalization|sfConstructibleIntegralScalarExtension",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; the proved argument supplies the presentation normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full subcategory restriction functor does not depend on its object membership proof",
+   "results": "8 hits: CategoryTheory.ObjectProperty.FullSubcategory.mk.noConfusion, CategoryTheory.ObjectProperty.FullSubcategory.noConfusionType, CategoryTheory.ObjectProperty.FullSubcategory.noConfusion, CategoryTheory.ObjectProperty.FullSubcategory.ctorIdx, CategoryTheory.FullSubcategory.hasForget, CategoryTheory.ObjectProperty.ι, CategoryTheory.ObjectProperty.ιOfLE_obj_obj, CategoryTheory.ObjectProperty.FullSubcategory.obj",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no coefficient-specific theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdIntegralScalarDescentInputs",
+  "date": "2026-10-27",
+  "group": "X7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Ambient scalar normalization in the datum-free presentation; retained integral scalar descent construction.",
+   "via": [
+    "lem-fd-integral-scalar-descent-inputs",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdIntegralAmbientScalarNormalization",
+  "file": "lean/Sheaf/Paper/FdIntegralAmbientScalarNormalization.lean",
+  "declaration": "WeilConjectures.fdIntegralAmbientScalarNormalization",
+  "statement": "theorem fdIntegralAmbientScalarNormalization\n    (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (T : Scheme.{u}) [IsNoetherian T]\n    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :\n    ∃ (ordinary : FdOrdinaryScalarTransport l Ω T h)\n      (comparison :\n      (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T).ι ⋙\n          integralDetailedTransport T l (pbcFiniteField.{u} l Ω E) ⋙\n            pbcAmbientScalarExtension l Ω T h ≅\n        GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω T E L h ⋙\n          (sfIntegralConstructible l (pbcFiniteField.{u} l Ω L) T).ι ⋙\n            integralDetailedTransport T l (pbcFiniteField.{u} l Ω L)),\n    (∀ (P : (integralOperationsGoodComplex l (pbcFiniteField.{u} l Ω E) T).FullSubcategory)\n    (hP : sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T\n      (DerivedCategory.Q.obj P.obj)),\n    HEq (comparison.hom.app ⟨DerivedCategory.Q.obj P.obj, hP⟩ ≫\n      (integralDetailedTransport T l (pbcFiniteField.{u} l Ω L)).map\n        ((integralScalarExtensionComparison l (pbcFiniteField.{u} l Ω E)\n          (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).hom.app P) ≫\n      (fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω L) T).hom.app\n        ((integralScalarComplexFunctor l (pbcFiniteField.{u} l Ω E)\n          (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).obj P.obj))\n      ((pbcAmbientScalarExtension l Ω T h).map\n        ((fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω E) T).hom.app P.obj) ≫\n      pbcComplexCounit (pbcCompletedScalarMap l Ω T h)\n        (((fdCoefficientTransport l (pbcFiniteField.{u} l Ω E) T).mapHomologicalComplex\n          (.up ℤ)).obj P.obj) ≫\n      DerivedCategory.Q.map (ordinary.completion l Ω P.obj)))",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T103526-L-1100696",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T103526-L-1100696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

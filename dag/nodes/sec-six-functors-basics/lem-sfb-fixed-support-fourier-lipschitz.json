@@ -1,0 +1,390 @@
+{
+ "id": "lem-sfb-fixed-support-fourier-lipschitz",
+ "kind": "statement",
+ "title": "Uniform bounds and Lipschitz control for fixed-support Fourier integrals",
+ "statement": "Over $\\mathbf R,\\mathbf C$ [def-weil-field], let $m\\geq1$, let $K\\subset\\mathbf R^m$ be compact, and let $u:\\mathbf R^m\\to\\mathbf C$ be Lebesgue measurable, zero almost everywhere off $K$, with $\\|u\\|_2^2=\\int|u|^2<\\infty$. Write $v=\\operatorname{vol}(K)$ and $b=(\\int_K|x|^2\\,dx)^{1/2}$; both are finite. Then $u\\in L^1$, and its absolutely convergent Fourier integral $h(\\xi)=\\int e^{-2\\pi i x\\cdot\\xi}u(x)\\,dx$ satisfies $$|h(\\xi)|\\leq v^{1/2}\\|u\\|_2,\\qquad |h(\\xi)-h(\\eta)|\\leq2\\pi b\\|u\\|_2|\\xi-\\eta|$$ for all $\\xi,\\eta\\in\\mathbf R^m$. In particular $h$ is continuous, and bounded L2 families supported almost everywhere in this same $K$ have a common bound and a common Lipschitz constant for their Fourier integrals.",
+ "source": {
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "§2, Lemma 2.7 proof, pp.5–6, compact-support Fourier equicontinuity; agent specialization for t=1, using the first spatial moment instead of the general distribution estimate. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply compact-continuous integrability to $1$ and $|x|^2$ on $K$, embedded as complex-valued functions. Thus $v=\\int_K1$ and $b^2=\\int_K|x|^2$ are finite. Set $a=1_K$ and $c=1_K|u|$, real measurable functions on $\\mathbf R^m$. Their squared integrals are $v$ and at most $\\|u\\|_2^2$, so scalar $L^2$ Cauchy–Schwarz gives $\\int_K|u|=\\int|ac|\\leq\\sqrt v\\|u\\|_2$. Since $u=0$ almost everywhere off $K$, its norm has the same integral as $c$; consequently $u\\in L^1$. No pointwise support hypothesis is used.",
+   "uses": [
+    "lem-sfb-continuous-on-compact-integrable",
+    "lem-sfb-real-l2-hilbert-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2, Lemma 2.7 proof, pp.5–6, compact-support Fourier equicontinuity; agent specialization for t=1."
+   }
+  },
+  {
+   "text": "The phase identities give $|e^{-2\\pi i x\\cdot\\xi}|=1$. Its dependence on $x$ is continuous: factoring the difference of phases and using the scalar phase estimate bounds it by $2\\pi|\\xi||x-y|$. Here $|a\\cdot b|\\leq|a||b|$ follows directly, when $b\\ne0$, from $0\\leq|a-((a\\cdot b)/|b|^2)b|^2=|a|^2-(a\\cdot b)^2/|b|^2$; $b=0$ is immediate. Thus the product with measurable $u$ is strongly measurable, since $\\mathbf C$ is separable. Its norm is $|u|$. The cited majorant theorem gives absolute convergence and $|h(\\xi)|\\leq\\int|u|\\leq\\sqrt v\\|u\\|_2$.",
+   "uses": [
+    "lem-sfb-integrable-majorant-estimate",
+    "lem-sfb-complex-phase-exponential-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2, Lemma 2.7 proof, pp.5–6, compact-support Fourier equicontinuity; agent specialization for t=1."
+   }
+  },
+  {
+   "text": "First apply scalar $L^2$ Cauchy–Schwarz to the real functions $1_K|x|$ and $1_K|u|$, whose squared integrals are $b^2$ and at most $\\|u\\|_2^2$. It gives integrability of their product and $\\int_K|x||u|\\leq b\\|u\\|_2$. For $A=-2\\pi x\\cdot\\xi$ and $B=-2\\pi x\\cdot\\eta$, the phase identities yield $e^{iA}-e^{iB}=e^{iB}(e^{i(A-B)}-1)$, hence $|e^{iA}-e^{iB}|\\leq|A-B|\\leq2\\pi|x||\\xi-\\eta|$, by the dot-product calculation in step 2. Both Fourier integrands are integrable by step 2. Integral subtraction therefore identifies $h(\\xi)-h(\\eta)$ with the integral of their difference. That difference has integrable norm majorant $2\\pi|\\xi-\\eta|1_K|x||u|$ almost everywhere. The majorant estimate now gives $|h(\\xi)-h(\\eta)|\\leq2\\pi|\\xi-\\eta|\\int_K|x||u|\\leq2\\pi b\\|u\\|_2|\\xi-\\eta|$.",
+   "uses": [
+    "lem-sfb-complex-phase-exponential-bound",
+    "lem-sfb-integrable-majorant-estimate",
+    "lem-sfb-real-l2-hilbert-pairing",
+    "lem-sfb-bochner-integral-subtraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2, Lemma 2.7 proof, pp.5–6, compact-support Fourier equicontinuity; agent specialization for t=1."
+   }
+  },
+  {
+   "text": "The displayed global Lipschitz estimate implies continuity of h. If a family has a common L² bound and all members vanish almost everywhere off the same K, the two displayed constants depend only on that bound, v and b, so they are common to the whole family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "§2, Lemma 2.7 proof, pp.5–6, compact-support Fourier equicontinuity; agent specialization for t=1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-on-compact-integrable",
+  "lem-sfb-real-l2-hilbert-pairing",
+  "lem-sfb-integrable-majorant-estimate",
+  "lem-sfb-complex-phase-exponential-bound",
+  "lem-sfb-bochner-integral-subtraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "Section 2, Lemma 2.7 proof, printed pp.5–6, read online; agent first-moment specialization, without the general distributional derivative estimate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fourier transform of an L2 function supported in a bounded set is bounded and Lipschitz with constants controlled by its L2 norm and the measure and radius of the support",
+   "results": {
+    "t": "2026-10-24T03:30:59Z",
+    "tool": "leanfinder",
+    "query": "Fourier transform of an L2 function supported in a bounded set is bounded and Lipschitz with constants controlled by its L2 norm and the measure and radius of the support",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.Lp.instFourierTransform",
+     "MeasureTheory.Lp.instContinuousFourier",
+     "VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le",
+     "Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le",
+     "Real.pow_mul_norm_iteratedFDeriv_fourier_le",
+     "VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le",
+     "SchwartzMap.toLp_fourierTransform_eq",
+     "SchwartzMap.norm_fourierTransformCLM_toL2_eq"
+    ],
+    "digest": "93207c224a7341f2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Real.norm_fourier_le_integral_norm bounds by L1; Real.differentiable_fourier (Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:690) assumes integrable first spatial moment. The compact-support L2-to-L1 and moment estimates and the uniform Lipschitz constant are additional arguments. General smooth Fourier derivative estimates assume different hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported square integrable functions have a Fourier integral bounded by measure of support to one half times L2 norm and Lipschitz constant bounded by their first spatial moment",
+   "results": {
+    "t": "2026-10-24T03:32:09Z",
+    "tool": "leanfinder",
+    "query": "Compactly supported square integrable functions have a Fourier integral bounded by measure of support to one half times L2 norm and Lipschitz constant bounded by their first spatial moment",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le",
+     "Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le",
+     "VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le",
+     "VectorFourier.norm_fourierIntegral_le_integral_norm",
+     "Real.pow_mul_norm_iteratedFDeriv_fourier_le",
+     "MeasureTheory.eLpNormLESNormFDerivOfLeConst",
+     "Fourier.norm_fourierIntegral_le_integral_norm",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_one"
+    ],
+    "digest": "ed8a170f2f47387d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Real.norm_fourier_le_integral_norm bounds by L1; Real.differentiable_fourier (Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:690) assumes integrable first spatial moment. The compact-support L2-to-L1 and moment estimates and the uniform Lipschitz constant are additional arguments. General smooth Fourier derivative estimates assume different hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"Lipschitz\"",
+   "results": {
+    "t": "2026-10-24T03:30:54Z",
+    "tool": "loogle",
+    "query": "\"fourier\", \"Lipschitz\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Real.norm_fourier_le_integral_norm bounds by L1; Real.differentiable_fourier (Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:690) assumes integrable first spatial moment. The compact-support L2-to-L1 and moment estimates and the uniform Lipschitz constant are additional arguments. General smooth Fourier derivative estimates assume different hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "Lipschitz|integrable.*norm|norm_fourier_le",
+   "results": {
+    "t": "2026-10-24T03:30:54Z",
+    "tool": "grep",
+    "query": "Lipschitz|integrable.*norm|norm_fourier_le",
+    "sub": "Analysis/Fourier/FourierTransform.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "143"
+    ],
+    "digest": "44253954b81a26be"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Real.norm_fourier_le_integral_norm bounds by L1; Real.differentiable_fourier (Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:690) assumes integrable first spatial moment. The compact-support L2-to-L1 and moment estimates and the uniform Lipschitz constant are additional arguments. General smooth Fourier derivative estimates assume different hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier transform of a compactly supported L2 function is globally Lipschitz",
+   "results": {
+    "t": "2026-10-24T03:30:54Z",
+    "tool": "leansearch",
+    "query": "Fourier transform of a compactly supported L2 function is globally Lipschitz",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.Lp.instContinuousFourier",
+     "MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq",
+     "SchwartzMap.fourierTransformCLM",
+     "SchwartzMap.inner_fourier_toL2_eq",
+     "Real.differentiable_fourier",
+     "Real.differentiable_fourierIntegral",
+     "MeasureTheory.Lp.instContinuousFourierInv",
+     "SchwartzMap.instFourierTransform"
+    ],
+    "digest": "a95086c760121743"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Real.norm_fourier_le_integral_norm bounds by L1; Real.differentiable_fourier (Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:690) assumes integrable first spatial moment. The compact-support L2-to-L1 and moment estimates and the uniform Lipschitz constant are additional arguments. General smooth Fourier derivative estimates assume different hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "Lipschitz|norm_fourier_le_integral_norm|differentiable_fourier",
+   "results": {
+    "t": "2026-10-24T03:36:11Z",
+    "tool": "grep",
+    "query": "Lipschitz|norm_fourier_le_integral_norm|differentiable_fourier",
+    "sub": "Analysis/Fourier",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean"
+    ],
+    "digest": "32539ff7976aa0fb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Real.norm_fourier_le_integral_norm bounds by L1; Real.differentiable_fourier (Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:690) assumes integrable first spatial moment. The compact-support L2-to-L1 and moment estimates and the uniform Lipschitz constant are additional arguments. General smooth Fourier derivative estimates assume different hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_fourier_le_integral_norm|integral_mul_le_Lp|Lipschitz",
+   "results": {
+    "t": "2026-10-24T03:57:29Z",
+    "tool": "grep",
+    "query": "norm_fourier_le_integral_norm|integral_mul_le_Lp|Lipschitz",
+    "sub": "Analysis/",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/SpecialFunctions/Exp.lean",
+     "Mathlib/Analysis/SpecialFunctions/Exp.lean",
+     "Mathlib/Analysis/SpecialFunctions/Exp.lean",
+     "Mathlib/Analysis/SpecialFunctions/Exp.lean",
+     "Mathlib/Analysis/SpecialFunctions/Exp.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/ReImTopology.lean"
+    ],
+    "digest": "73cbd270791b5025"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz functions, abstract L2 Fourier continuity/isometry, or generic Lipschitz results do not give these fixed-support L2-to-pointwise bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support Fourier L2 Lipschitz",
+   "results": {
+    "t": "2026-10-24T03:57:30Z",
+    "tool": "leansearch",
+    "query": "compact support Fourier L2 Lipschitz",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContDiff.lipschitzWith_of_hasCompactSupport",
+     "TestFunctionClass.map_hasCompactSupport",
+     "SchwartzMap.toLp_fourier_eq",
+     "SchwartzMap.toLp_fourierTransform_eq",
+     "SchwartzMap.norm_fourier_toL2_eq",
+     "MeasureTheory.Lp.fourier_toTemperedDistribution_eq",
+     "SmoothBumpFunction.hasCompactSupport",
+     "MeasureTheory.Lp.norm_fourier_eq"
+    ],
+    "digest": "039e5024096d1d89"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz functions, abstract L2 Fourier continuity/isometry, or generic Lipschitz results do not give these fixed-support L2-to-pointwise bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "integral_mul_le_Lp, norm_fourier_le_integral_norm",
+   "results": {
+    "t": "2026-10-24T03:57:30Z",
+    "tool": "loogle",
+    "query": "integral_mul_le_Lp, norm_fourier_le_integral_norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'integral_mul_le_Lp'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no usable match: Loogle unknown identifier integral_mul_le_Lp"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier transform of compactly supported L2 function bounded and Lipschitz",
+   "results": {
+    "t": "2026-10-24T03:57:36Z",
+    "tool": "leanfinder",
+    "query": "Fourier transform of compactly supported L2 function bounded and Lipschitz",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SchwartzMap.fourierTransformCLM",
+     "MeasureTheory.Lp.instContinuousFourier",
+     "MeasureTheory.Lp.instFourierTransform",
+     "SchwartzMap.toLp_fourier_eq",
+     "SchwartzMap.toLp_fourierTransform_eq",
+     "SchwartzMap.norm_fourierTransformCLM_toL2_eq",
+     "Real.pow_mul_norm_iteratedFDeriv_fourier_le",
+     "SchwartzMap.toLp_fourierInv_eq"
+    ],
+    "digest": "c9767082e6057e2d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz functions, abstract L2 Fourier continuity/isometry, or generic Lipschitz results do not give these fixed-support L2-to-pointwise bounds"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-euclidean-fixed-support-rellich",
+  "date": "2026-10-24",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting local analytic lemma: Euclidean Rellich compactness with a fixed compact support. Supporting Euclidean Fourier proof: §2, Lemma 2.7 proof, pp.5–6, compact-support Fourier equicontinuity; agent specialization for t=1, using the first spatial moment instead of the general distribution estimate.",
+   "via": [
+    "lem-sfb-euclidean-fixed-support-rellich",
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fixed-support-fourier-lipschitz",
+  "worker": "stage1",
+  "summary": "Retained the imported fixed-support Fourier statement and supplied a four-step proof. Compactness and the existing compact-integrability and L² Cauchy–Schwarz statements give the L¹ and moment estimates; the integrable-majorant statement gives absolute convergence and integral bounds; a Mathlib phase estimate supplies the Lipschitz integrand bound. No existing project declaration or blueprint node states this item. Integral subtraction is a second exact Mathlib leaf; the Euclidean dot-product estimate is written out as a square-norm calculation.",
+  "blueprint": "The steps realize the supporting Euclidean Fourier proof named under det-thm-sf-ctf-stability-direct-images proof (3): Demailly §2, Lemma 2.7 proof, compact-support Fourier equicontinuity, specialized to first moment t=1."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NB-bac1d9153",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-bac1d9153 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full, plus the cited statements continuous-on-compact-integrable, real-l2-hilbert-pairing, integrable-majorant-estimate and def-weil-field. The item statement is unchanged from live, so nothing was weakened, and it gives the parent Rellich step 2 the bound v^{1/2}√M, the Lipschitz constant 2πb√M and continuity. Re-derived both estimates: |h| ≤ ∫1_K|u| ≤ √v‖u‖₂, and |e^{iA}-e^{iB}| = |e^{i(A-B)}-1| ≤ 2π|x||ξ-η|, which gives the 2πb‖u‖₂ constant. Edge cases checked: K empty or a singleton (u=0 a.e., h≡0) and ξ=η. Step 1 applies scalar L² Cauchy–Schwarz to 1_K and 1_K|u|; passing from |u|=1_K|u| a.e. to u∈L¹ is elementary null-set invariance. Step 2: the phase is Lipschitz in x (the dot-product Cauchy–Schwarz is written out), so the integrand is a.e. strongly measurable and the majorant node gives integrability and the bound. Step 3: integral_sub applies because both integrands are integrable from step 2; the majorant holds on K and a.e. off K, which is exactly the node's a.e. hypothesis. Step 4 is elementary. Mathlib lines read: Real.norm_exp_I_mul_ofReal_sub_one_le at Trigonometric/Bounds.lean:260, Complex.norm_exp_I_mul_ofReal at Complex/Trigonometric.lean:954-955, Complex.exp_add at Complex/Exponential.lean:111, integral_sub at Bochner/Basic.lean:261-264 and integral_congr_ae at :299, all exact matches. Duplicate search over the snapshot DAG: lem-sfb-euclidean-bochner-integral-calculus covers only R^r-valued integrals and would need an unstated transfer through C≅R², so the C-valued subtraction leaf is accepted; the existing C-valued majorant leaf sets the precedent. lem-sfb-bilinear-fourier-moment-regularity gives continuity only, and lem-sfb-l2-product-integral-bound is an alternative Cauchy–Schwarz. Neither new node restates an item clause. No SGA citation, no re-split note, no cycle, and no tool_uses (all cited nodes are in unit sk-thm-sf-ctf-stability). The item is still unsplit on live and side-live, so it is not superseded. The Demailly source is not in the literature tree (WANTED); the proof is an agent argument that I checked directly. Minor: the a.e.-congruence clause of the subtraction node is not needed but is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.FixedSupportFourierLipschitz",
+  "declaration": "MeasureTheory.fixed_support_fourier_bounds_lipschitz",
+  "file": "lean/Sheaf/Analysis/FixedSupportFourierLipschitz.lean",
+  "statement": "theorem fixed_support_fourier_bounds_lipschitz (m : ℕ) (hm : 1 ≤ m) (K : Set (EuclideanSpace ℝ (Fin m))) (hK : IsCompact K) (u : EuclideanSpace ℝ (Fin m) → ℂ) (hu : MemLp u 2 volume) (hsupport : ∀ᵐ x ∂volume, x ∉ K → u x = 0) : volume K ≠ ⊤ ∧ IntegrableOn (fun x : EuclideanSpace ℝ (Fin m) ↦ ‖x‖ ^ 2) K volume ∧ Integrable u volume ∧ (∀ ξ : EuclideanSpace ℝ (Fin m), Integrable (fun x : EuclideanSpace ℝ (Fin m) ↦ Complex.exp ((↑(-2 * Real.pi * ⟪x, ξ⟫) : ℂ) * Complex.I) * u x) volume) ∧ (∀ ξ : EuclideanSpace ℝ (Fin m), ‖𝓕 u ξ‖ ≤ Real.sqrt (volume K).toReal * Real.sqrt (∫ x, ‖u x‖ ^ 2)) ∧ (∀ ξ η : EuclideanSpace ℝ (Fin m), ‖𝓕 u ξ - 𝓕 u η‖ ≤ 2 * Real.pi * Real.sqrt (∫ x in K, ‖x‖ ^ 2) * Real.sqrt (∫ x, ‖u x‖ ^ 2) * ‖ξ - η‖) ∧ Continuous (𝓕 u) ∧ (∀ (I : Type w) (f : I → EuclideanSpace ℝ (Fin m) → ℂ) (M : NNReal), (∀ i : I, MemLp (f i) 2 volume) → (∀ i : I, ∀ᵐ x ∂volume, x ∉ K → f i x = 0) → (∀ i : I, Real.sqrt (∫ x, ‖f i x‖ ^ 2) ≤ M) → (∀ (i : I) (ξ : EuclideanSpace ℝ (Fin m)), ‖𝓕 (f i) ξ‖ ≤ Real.sqrt (volume K).toReal * M) ∧ (∀ (i : I) (ξ η : EuclideanSpace ℝ (Fin m)), ‖𝓕 (f i) ξ - 𝓕 (f i) η‖ ≤ 2 * Real.pi * Real.sqrt (∫ x in K, ‖x‖ ^ 2) * M * ‖ξ - η‖))",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c79f5ea54",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Only the item node's lean field changed, and lean.statement matches the file signature verbatim. Each hypothesis and conclusion matches the node: m≥1 on EuclideanSpace ℝ (Fin m), K compact, MemLp u 2 (measurable with finite L² norm), zero a.e. off K. The conclusions give finite vol K and second moment, u integrable, the Fourier integrand integrable for every ξ, the bounds √v‖u‖₂ and 2πb‖u‖₂|ξ−η|, continuity, and an explicit uniform-constant clause for families with I in an explicit universe w. Mathlib's 𝓕 has kernel e^{−2πi x·ξ} by Real.fourier_eq' (FourierTransform.lean:438), the same convention as the sibling modules L1L2FourierRealization and EuclideanFixedSupportRellich. Both estimates re-derived (Cauchy–Schwarz, and |e^{iA}−e^{iB}|≤|A−B|). Edge cases covered: K empty or null, M=0, ξ=η, m=1. No name clash and no Mathlib match. Docstrings give the source place, blueprint id and proof steps. Proof is sorry only, with no definitions. Report has both required sections. No file changed, so no compile."
+ }
+}

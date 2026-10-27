@@ -1,0 +1,393 @@
+{
+ "id": "lem-sf-weil-verdier-dual-triangulated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilComplex.exists_commShift_isTriangulated_verdierDual (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: $D_{X,\\overline{\\mathbf Q}_\\ell}$ is an exact $\\overline{\\mathbf Q}_\\ell$-linear anti-equivalence (thm-coef-qbar-verdier)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The Verdier dual of Weil complexes is a triangulated functor",
+ "statement": "Let $k_0$ be a finite field, $k$ an algebraic closure, $\\ell\\ne\\operatorname{char}(k_0)$ a prime and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $X$ be a separated finite-type $k_0$-scheme, with structure map $a_X:X\\to s_0=\\operatorname{Spec}k_0$. Use the locally finite continuous coefficient-ring sheaf $B_X$, the abelian category $\\mathcal W_X$ of pro-etale Weil module sheaves, and the bounded constructible full derived subcategory $\\mathrm{WC}^{\\mathrm{der}}(X)\\subset D(\\mathcal W_X)$ of [def-sf-native-weil-derived-framework], with its inherited triangulation. In particular, morphisms are derived morphisms of Weil sheaves, not morphisms between fixed pairs in a nonequivariant derived category. Use the actual compact-support functor $Ra_{X,0!}$, formed by equivariant extension by zero followed by derived proper pushforward along the chosen compactification, and the native derived internal Hom $R\\mathcal Hom_X$ of [def-sf-derived-weil-category-and-operations]. Assume that $Ra_{X,0!}:\\mathrm{WC}^{\\mathrm{der}}(X)\\to\\mathrm{WC}^{\\mathrm{der}}(s_0)$ has a right adjoint $Ra_X^!$ on these same categories. Put $\\omega_X=Ra_X^!\\mathbf1_0$, where $\\mathbf1_0$ is the rank-one coefficient Weil sheaf in degree zero, as in that definition. Let $D_X$ be the restriction of $R\\mathcal Hom_X(-,\\omega_X)$ to $\\mathrm{WC}^{\\mathrm{der}}(X)^{\\mathrm{op}}\\to\\mathrm{WC}^{\\mathrm{der}}(X)$, whose existence is supplied by [lem-sf-weil-verdier-dual-preserves-weil-complexes]. These are exactly the live `WeilComplex.dualizingComplex` and `WeilComplex.verdierDual`, with the chosen K-injective representatives specified by the definition. Then $D_X$ admits coherent commutation with all integer shifts making it triangulated: it carries distinguished triangles in $\\mathrm{WC}^{\\mathrm{der}}(X)^{\\mathrm{op}}$, with its opposite triangulated structure, to distinguished triangles in $\\mathrm{WC}^{\\mathrm{der}}(X)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
+  "place": "thm-coef-qbar-verdier: $D_{X,\\overline{\\mathbf Q}_\\ell}$ is an exact $\\overline{\\mathbf Q}_\\ell$-linear anti-equivalence; Lean: upstream file lean/WeilConjectures/WeilSheaf/VerdierDual.lean, declaration AlgebraicGeometry.WeilComplex.exists_commShift_isTriangulated_verdierDual (module WeilConjectures.WeilSheaf.VerdierDual, lines 149-151, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+ ],
+ "proof": [
+  {
+   "text": "Use $\\mathcal W_X$, $B_X$ and the conjugation internal-Hom bifunctor $H$ of [def-sf-native-weil-derived-framework] and [def-sf-derived-weil-category-and-operations]. By [lem-sf-native-weil-constructible-abelian], $\\mathcal W_X$ is Grothendieck abelian. Hence it has countable products by [lem-sfb-grothendieck-filtered-finite-limits], and every unbounded complex has a K-injective resolution by [lem-sfb-grothendieck-k-injective]. The bifunctor $H$ is additive in both variables: locally $(f+g)u=fu+gu$ and $u(f+g)=uf+ug$ for module maps, and these equalities commute with conjugation by the two Weil isomorphisms. They therefore hold for Weil internal-Hom maps. Choose the same representative $J=J_{\\omega_X}$ and source replacement $R_X=\\iota q^{-1}$ as in the definition, not a new resolution functor.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-sf-derived-weil-category-and-operations",
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sfb-grothendieck-filtered-finite-limits",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/DerivedHom.lean",
+    "place": "ihomBifunctor and its two additivity instances, lines 67-101; native Grothendieck structure Category.lean:147-148; injectives.tex Tag 079P, theorem-K-injective-embedding-grothendieck"
+   }
+  },
+  {
+   "text": "The constructible heart in $\\mathcal W_X$ contains zero and is invariant under isomorphisms, kernels, cokernels and extensions by [lem-sf-native-weil-constructible-abelian]. Thus [lem-sbc-cohomology-in-weak-serre-subcategory] applies to this heart: its bounded-cohomology derived subcategory is full triangulated with the inherited shifts and distinguished triangles. That subcategory is exactly $\\mathrm{WC}^{\\mathrm{der}}(X)$ of [def-sf-native-weil-derived-framework]. The inclusion $j:\\mathrm{WC}^{\\mathrm{der}}(X)\\to D(\\mathcal W_X)$, and its opposite, use those inherited structures. This checks the full-triangulated-subcategory hypotheses needed at the final restriction.",
+   "uses": [
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/Category.lean",
+    "place": "WeilComplex.objectProperty and its IsTriangulated instance, lines 154-160,214-246"
+   }
+  },
+  {
+   "text": "For an abstract abelian category with countable products and K-injective resolutions, take E to be the equivalence attached to the existing KInjectives.Qh. Apply [lem-sf-kinjective-replacement-triangulated] to E.inverse with E.unitIso and E.counitIso. The result supplies coherent shifts and exactness of this chosen replacement followed by inclusion, and of its opposite. In particular, it applies to precisely the quasi-inverse used by the unchanged DerivedCategory.bifunctorRHom definition.",
+   "uses": [
+    "lem-sf-kinjective-replacement-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/_section.md",
+    "place": "Contravariant exactness of internal Hom into the dualizing complex; realized directly in the native signed product-Hom model."
+   }
+  },
+  {
+   "text": "Fix I = DerivedCategory.kInjectiveRep(omega_X.obj). The theorem [lem-sf-bifunctor-homotopy-exact] supplies coherent shifts and triangulatedness of the leftOp of bifunctorHomHomotopyFunctor H I. Compose it with the opposite replacement from step 3, using [lem-weil-pbc-triangulated-functor-composite]. The composite is definitionally the signed bifunctorRHom H omega_X.obj actually used by ProEtaleWeilSheaf.derivedHom. No conversion to a second, standard-differential Hom complex is needed.",
+   "uses": [
+    "lem-sf-bifunctor-homotopy-exact",
+    "lem-weil-pbc-triangulated-functor-composite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/_section.md",
+    "place": "Contravariant exactness of internal Hom into the dualizing complex; realized directly in the native signed product-Hom model."
+   }
+  },
+  {
+   "text": "Specialize the abstract calculation to the native Weil sheaf category and its ihomBifunctor. Give the actual derivedHom functor the resulting shift structure. Its composite with the opposite inclusion of WeilComplex is exact. Membership is supplied by [lem-sf-weil-verdier-dual-preserves-weil-complexes], exactly the witness in the unchanged verdierDual definition. Apply [lem-weil-pbc-triangulated-functor-restriction], namely ObjectProperty.isTriangulated_lift, to obtain coherent shifts and exactness of this full-subcategory lift.",
+   "uses": [
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+    "lem-weil-pbc-triangulated-functor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/_section.md",
+    "place": "Contravariant exactness of internal Hom into the dualizing complex; realized directly in the native signed product-Hom model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-native-weil-constructible-abelian",
+  "lem-sfb-grothendieck-filtered-finite-limits",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sf-kinjective-replacement-triangulated",
+  "lem-sf-bifunctor-homotopy-exact",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+  "lem-weil-pbc-triangulated-functor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/_section.md",
+  "place": "Contravariant exactness of internal Hom into the dualizing complex; realized directly in the native signed product-Hom model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality dualizing complex exceptional inverse image right adjoint of compactly supported direct image etale",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.instIsRightAdjointPushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf), Equivalence.isRightAdjoint_inverse, Functor.IsLeftAdjoint.op: generic adjunctions only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\" and \"dualizingComplex\" (name substrings)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'verdier|dualizingComplex|dualizing complex ; upperShriek|lowerShriek|LowerShriek|exceptional inverse' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only CategoryTheory/Triangulated/* (Verdier's triangulated categories, not Verdier duality); no exceptional functors",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated.*(iff|comp|lift)|mem_distTriang_iff|def.*distTriang",
+   "results": "19 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean; Mathlib/CategoryTheory/Triangulated/WeakKernels.lean; Mathlib/CategoryTheory/Triangulated/WeakKernels.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive bifunctor Hom complex is triangulated contravariantly on homotopy categories",
+   "results": "8 hits: HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.instPretriangulatedIntUp; HomotopyCategory.instAdditiveHomologicalComplexQuotient; CategoryTheory.Functor.instAdditiveOfIsHomological; CategoryTheory.Functor.mapHomotopyCategory; CategoryTheory.Functor.map₂HomologicalComplex; HomologicalComplex.opFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"fullyFaithful\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The hom complex of an additive bifunctor sends mapping cone triangles contravariantly to distinguished triangles in the homotopy category",
+   "results": "8 hits: CochainComplex.mappingCone.triangleh; CochainComplex.mappingConeCompTriangleh; CochainComplex.mappingCone.mapTrianglehIso; HomotopyCategory.mappingCone_triangleh_distinguished; HomotopyCategory.mappingConeCompTriangleh_distinguished; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CochainComplex.mappingCone.mapTriangleIso; HomotopyCategory.Pretriangulated.distinguished_cocone_triangle",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorRHom|bifunctorHomHomotopy|HomComplex.*[Tt]riang|[Tt]riang.*HomComplex",
+   "results": "1 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"triangle\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a fixed cochain complex contravariant exact functor on homotopy categories with countable products",
+   "results": "8 hits: HomotopyCategory.singleFunctors; DerivedCategory.instLinearCochainComplexIntQ; CochainComplex.IsKProjective; HomotopyCategory.instLinearIntUpSingleFunctor; DerivedCategory.instLinearHomotopyCategoryIntUpQh; CochainComplex.IsKProjective.leftOrthogonal; CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁; Ext",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The lift of a triangulated functor into a full triangulated subcategory is triangulated",
+   "results": "8 hits: CategoryTheory.ObjectProperty.lift; CategoryTheory.Functor.IsTriangulated.mk; CategoryTheory.Functor.IsTriangulated; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.ObjectProperty.instFullFullSubcategoryLift; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor; CategoryTheory.Localization.lift",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.isTriangulated_lift",
+   "results": "1 hits: CategoryTheory.ObjectProperty.isTriangulated_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a triangulated functor to full triangulated subcategories is triangulated ObjectProperty lift",
+   "results": "8 hits: CategoryTheory.Triangulated.Subcategory; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂; CategoryTheory.Triangulated.Subcategory.W; CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulatedClosed₂; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁; CategoryTheory.Triangulated.Subcategory.W.mk'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift_lift|isTriangulated_lift|instance.*ι.IsTriangulated",
+   "results": "3 hits: Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between K injective homotopy category and unbounded derived category is triangulated",
+   "results": "8 hits: DerivedCategory.instIsTriangulated; CategoryTheory.Equivalence.IsTriangulated.symm; CategoryTheory.Equivalence.IsTriangulated.mk'; CategoryTheory.Equivalence.IsTriangulated; CochainComplex.isKInjective_iff_rightOrthogonal; CategoryTheory.Equivalence.IsTriangulated.mk''; CochainComplex.IsKInjective.rightOrthogonal; HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "namespace KInjectives|KInjectives.*Qh|isKInjective_iff_rightOrthogonal",
+   "results": "3 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleWeilSheaf|WeilComplex|IsoAlgebra.*[Gg]rothendieck",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of Frobenius equivariant pro etale sheaves is Grothendieck abelian and its bounded constructible derived category is triangulated",
+   "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.sheafIsAbelian; CategoryTheory.IsGrothendieckAbelian.ab4OfSize; DerivedCategory.instIsTriangulated; SheafOfModules.instAbelian; AlgebraicGeometry.Scheme.Modules.instAbelian; CategoryTheory.presheafToSheaf_additive",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KInjectives\", \"IsEquivalence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective resolution equivalence unbounded derived category homotopy category exact triangulated replacement",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; CategoryTheory.InjectiveResolution.iso; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CochainComplex.IsKInjective.Qh_map_bijective; CategoryTheory.injectiveResolutions; CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq; HasDerivedCategory.standard; DerivedCategory.Qh",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale Weil sheaves are Grothendieck abelian and bounded constructible derived Weil complexes form a full triangulated subcategory",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.TStructure.t; DerivedCategory.IsGE; HasDerivedCategory; DerivedCategory.IsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dual of Weil complexes triangulated contravariant functor",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_op_exact; CategoryTheory.Functor.isTriangulated_of_op; CategoryTheory.Pretriangulated.Opposite.functor_isTriangulated_op; CategoryTheory.Functor.op_isTriangulated_iff; DerivedCategory.TStructure.t; DerivedCategory.instIsTriangulated; CategoryTheory.Pretriangulated.instIsHomologicalAddCommGrpCatObjOppositeFunctorPreadditiveCoyoneda; DerivedCategory.instPretriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible algebras of an exact autoequivalence of a Grothendieck abelian category and bounded homology Serre subcategory",
+   "results": "8 hits: CategoryTheory.ObjectProperty.isoModSerre_isInvertedBy_iff; CategoryTheory.IsGrothendieckAbelian.hasExt; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; CategoryTheory.ObjectProperty.le_kernel_of_isoModSerre_isInvertedBy; DerivedCategory.exists_iso_Q_obj_of_isLE; CategoryTheory.ObjectProperty.isoModSerre; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi inverse to localization on K injective complexes preserves shifts and distinguished triangles",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso; CategoryTheory.Triangulated.Localization.isTriangulated; HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso; HomologicalComplexUpToQuasiIso.Q; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Localization.isTriangulated_functor",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "HasKInjectiveResolutions|IsGrothendieckAbelian.*Has|IsTriangulated.*rightOrthogonal",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.exists_commShift_isTriangulated_verdierDual"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.exists_commShift_isTriangulated_verdierDual",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      146,
+      151
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.VerdierDual",
+  "file": "lean/WeilConjectures/WeilSheaf/VerdierDual.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.exists_commShift_isTriangulated_verdierDual",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.exists_commShift_isTriangulated_verdierDual"
+  ],
+  "statement": "theorem exists_commShift_isTriangulated_verdierDual :\n    ∃ _ : (verdierDual k₀ l X).CommShift ℤ, (verdierDual k₀ l X).IsTriangulated :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-verdier-dual-triangulated",
+  "worker": "stage1",
+  "summary": "Repair of all four returned faults: reuse the native definition nodes for the category, compact support, exceptional adjoint and RHom; restore the preservation theorem in statement and proof; drop the redundant ambient-structure node and cite existing Grothendieck, K-injective and weak-Serre closure statements; explicitly compute the (-1)^{pn} chain isomorphism and conjugate the coherent shift and triangle structures along it. Retained the two sound general homological input nodes and their executed searches. STATEMENT-DISPUTED correction of the original fixed-pair reference remains explicit.",
+  "blueprint": "lem-a1-local-boundary-duality uses exact Verdier duality; this realizes the exactness assertion in thm-coef-qbar-verdier, proof paragraph 1, for the actual upstream realization. The argument uses generic resolution/cone infrastructure, not another geometric duality or purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-native-weil-constructible-abelian",
+    "why": "Supplies the existing native Grothendieck abelian structure and kernel, cokernel and extension closure; no replacement of geometric duality."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic unbounded K-injective existence applied to the native Grothendieck category."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic derived weak-Serre closure theorem applied to the native constructible heart to verify the full triangulated restriction hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-native-weil-constructible-abelian",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sbc-cohomology-in-weak-serre-subcategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-6fbc75ca7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-6fbc75ca7 (reviewer sub-agent of L); spot-checked: Read the item (7 steps), both new nodes, every cited statement and the prior e507c7e6 RETURN; this re-delivery repairs all four of its points. (1) The statement now rests on def-sf-native-weil-derived-framework and def-sf-derived-weil-category-and-operations. Hypotheses match the Lean declaration: finite field, l different from the characteristic, X separated of finite type, right adjoint of the restricted Ra_{X,0!}. The conclusion (exists CommShift Z, IsTriangulated) is unchanged and nothing is weakened. (2) lem-sf-weil-verdier-dual-preserves-weil-complexes is back in stmt_deps, and step 7 uses it before isTriangulated_lift. (3) The ambient node is dropped. Step 1 cites constructible-abelian (Grothendieck), the Grothendieck limits leaf (countable products) and grothendieck-k-injective. Step 2 cites the weak-Serre theorem, whose hypotheses are exactly those in constructible-abelian, and its D^b clause equals WC^der. (4) I recomputed the sign map s(f)_p=(-1)^{pn}f_p: the coefficient of d_J f_p is (-1)^{p(n+1)} on both sides, and that of f_{p+1}d_K is -(-1)^{p(n+1)+n} on both sides. s is natural and commutes with conjugation. The CommShift conjugation in step 6 is correct, with the third triangle square equal to the defining equation of c^S. New nodes: kinjective-replacement-triangulated is Stacks 070K/070Y and bifunctor-homotopy-exact is Stacks 08JC for a general bifunctor (termwise-split cones; I checked that the (-1)^p differential squares to zero). Both are true and neither restates the item. Duplicate search with rg -L found only advisory overlaps: lem-weil-pbc-bilinear-hom-complex constructs the complex but states no exactness, and lem-weil-native-internal-hom-contravariant-exact goes through the closed-structure route. Batch-5 flag on def-sf-derived-weil-category-and-operations reaching lem-trf-proper-finite-fibre-finite-near: this is the generic fact that a proper map is finite near a finite fibre, used for the finiteness of compact-support images (H^i_c finiteness, outside both assumptions). The closure diff of base vs delivered deps adds 0 trace-formula/Poincare nodes (826 in both). Accepted tool_uses: constructible-abelian, grothendieck-k-injective, weak-Serre. No SGA source. Maintainer note: blueprint.from.node is null on the new nodes because the maintainer-created item has created.item null. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T103442-L-1081015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso",
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso"
+  ]
+ }
+}

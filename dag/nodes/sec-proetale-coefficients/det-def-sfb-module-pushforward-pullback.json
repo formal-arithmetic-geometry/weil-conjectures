@@ -1,0 +1,235 @@
+{
+ "id": "det-def-sfb-module-pushforward-pullback",
+ "kind": "definition",
+ "title": "Pushforward and pullback of module objects",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring ([det-def-sfb-condensed-ring]),\nwith pulled-back coefficient rings $\\Lambda_X=p_X^*\\Lambda$\n([det-def-sfb-pulled-back-coefficients]), categories of module objects\n$\\Mod_{\\Lambda_X}$ ([det-def-sfb-module-objects]) and coefficient morphisms\n$\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$, $\\eta_f\\colon\\Lambda_Y\\to f^{\\Ab}_*\\Lambda_X$\n([det-def-sfb-coefficient-morphisms]) for morphisms of schemes $f\\colon X\\to Y$.\nEverything below is stated for a general\n$\\Lambda$; the $\\ell$-adic rings, including $\\underline{\\Qlb}$, are instances.\nWrite $f^{\\Ab}_*$ and $f^*_{\\Ab}$ for the pushforward and pullback of sheaves of\nabelian groups ([def-sfb-finite-lower-star], [def-sfb-finite-upper-star] with\n$\\mathcal A=\\Ab$); $f^{\\Ab}_*$ is lax monoidal ([def-sfb-finite-lower-star-lax-monoidal])\nand $f^*_{\\Ab}$ is strong monoidal ([def-sfb-finite-upper-star-monoidal]), so both transport\nmodule objects ([det-def-sfb-transport]); applied to ring objects such as\n$\\Lambda_Y$, the symbols $f^*$ and $f_*$ always mean these functors of abelian\nsheaves. Every functor on module objects is \"transport\nthe $\\Ab$-valued functor, then change scalars along $\\eta_f$ or $\\alpha_f$\"\n([det-def-sfb-change-of-scalars]). For a morphism of schemes $f\\colon X\\to Y$:\n\n- the *pushforward*\n  $$\n  f_*:=\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(f^{\\Ab}_*)\\colon\n  \\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y};\n  $$\n  the underlying sheaf of $f_*M$ is $f^{\\Ab}_*M$, with $\\Lambda_Y$ acting through\n  $\\eta_f$, and $f_*$ is additive and left exact;\n- the *pullback*\n  $$\n  f^*:=\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^*_{\\Ab})\\colon\n  \\Mod_{\\Lambda_Y}\\to\\Mod_{\\Lambda_X},\n  \\qquad f^*M=\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M,\n  $$\n  the ringed-topos pullback. The extension of scalars along $\\alpha_f$ is kept\n  although $\\alpha_f$ is invertible, so that the definition is the standard one and\n  does not depend on a choice of inverse;\n- the *adjunction* $f^*\\dashv f_*$: the lift of the monoidal adjunction\n  $f^*_{\\Ab}\\dashv f^{\\Ab}_*$ ([lem-sfb-finite-monoidal-adjunction]) to module objects, composed with\n  $\\operatorname{Ext}_{\\alpha_f}\\dashv\\operatorname{Res}_{\\alpha_f}$, using that\n  $\\eta_f$ is the mate of $\\alpha_f$;\n- for $g\\colon Y\\to Z$, the *composition isomorphisms*\n  $$\n  g_*\\circ f_*\\cong(g\\circ f)_*,\\qquad (g\\circ f)^*\\cong f^*\\circ g^*,\n  $$\n  the first lifting the composition isomorphism of pushforwards of abelian sheaves\n  ([def-sfb-finite-lower-star-comp]),\n  the second deduced from the first by uniqueness of left adjoints.\n\nThe constructions use only $\\alpha_f$, $\\eta_f$ and the mate relation between\nthem; that $\\alpha_f$ is invertible enters proofs about these functors (exactness,\nthe adjunction $j_!\\dashv j^*$), not their definitions.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-pushforward-pullback.md",
+  "place": "node det-def-sfb-module-pushforward-pullback, order 1192"
+ },
+ "stmt_deps": [
+  "det-def-sfb-condensed-ring",
+  "det-def-sfb-pulled-back-coefficients",
+  "det-def-sfb-module-objects",
+  "det-def-sfb-coefficient-morphisms",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "def-sfb-finite-upper-star-monoidal",
+  "det-def-sfb-transport",
+  "det-def-sfb-change-of-scalars",
+  "lem-sfb-finite-monoidal-adjunction",
+  "def-sfb-finite-lower-star-comp"
+ ],
+ "proof": [
+  {
+   "text": "For any commutative condensed ring $\\Lambda$ and any scheme morphism $f$, take the functor $f_*$ of [def-sfb-module-lower-star]. Its statement supplies precisely $\\operatorname{Res}_{\\eta_f}\\operatorname{mapMod}(f_*^{\\Ab})$, the underlying abelian sheaf, the action through $\\eta_f$, additivity and left exactness. Take $f^*$ of [def-sfb-module-upper-star]; its defining formula is $\\operatorname{Ext}_{\\alpha_f}\\operatorname{mapMod}(f^*_{\\Ab})=\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}(-)$. Thus both functors use the forward coefficient morphisms and the stated module-object categories.",
+   "uses": [
+    "def-sfb-module-lower-star",
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261026/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "first sentence: the two functors"
+   }
+  },
+  {
+   "text": "Apply [def-sfb-module-upper-lower-adjunction] to the same $\\Lambda$ and $f$. It gives the composite of the lifted monoidal adjunction and extension/restriction adjunction, identifying its right adjoint with step 1. The mate relation needed for that identification is exactly $\\eta_f=f_*^{\\Ab}(\\alpha_f)u_{\\Lambda_Y}$ in [det-def-sfb-coefficient-morphisms]. The resulting natural bijection identifies $\\Lambda_X$-linear maps $\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M\\to N$ with $\\Lambda_Y$-linear maps $M\\to f_*N$, giving $f^*\\dashv f_*$.",
+   "uses": [
+    "def-sfb-module-upper-lower-adjunction",
+    "det-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261026/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "first sentence: adjunction"
+   }
+  },
+  {
+   "text": "For composable $f:X\\to Y$ and $g:Y\\to Z$, [def-sfb-module-lower-star-comp] gives the natural module isomorphism $g_*f_*\\cong(gf)_*$ with precisely the underlying abelian-sheaf composition comparison $c$. Its compatibility inputs are available with these same morphisms: [lem-sfb-pushforward-comp-monoidal] applies with $\\mathcal A=\\Ab$ and says that $c$ is monoidal, while [lem-sfb-eta-comp] says $\\eta_{gf}=c_{\\Lambda_X}g_*^{\\Ab}(\\eta_f)\\eta_g$. The latter uses the canonical pullback-composition comparisons and coefficient mates, as in the coefficient morphisms of the statement; it imposes no geometric or coefficient restriction beyond the ones here. These are exactly the comparison and scalar maps in the cited module-composition definition.",
+   "uses": [
+    "def-sfb-module-lower-star-comp",
+    "lem-sfb-pushforward-comp-monoidal",
+    "lem-sfb-eta-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261026/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "second and third sentences: pushforward composition and its compatibility inputs"
+   }
+  },
+  {
+   "text": "With the adjunctions of step 2 and the pushforward comparison of step 3, [def-sfb-module-upper-star-comp] gives the unique natural isomorphism $(gf)^*\\cong f^*g^*$ whose forward map is the mate of $c:g_*f_*\\to(gf)_*$. Its inverse is the mate of $c^{-1}$, so the directions agree with the displayed comparison in this item. This is the required uniqueness-of-left-adjoints construction.",
+   "uses": [
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261026/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "final sentence: pullback composition"
+   }
+  },
+  {
+   "text": "The coefficient morphism $\\alpha_f$ is an isomorphism by [det-def-sfb-coefficient-morphisms]. Nevertheless the formula in step 1 extends scalars along the forward map $\\alpha_f$: the defining coequalizer in clause 2 of [det-def-sfb-change-of-scalars] uses only that map, and the adjunction in step 2 uses its mate. Hence none of these constructions requires choosing an inverse to $\\alpha_f$.",
+   "uses": [
+    "det-def-sfb-coefficient-morphisms",
+    "det-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261026/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-pushforward-pullback.md",
+    "place": "statement, final paragraph: forward scalar extension retained"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-lower-star",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-upper-lower-adjunction",
+  "det-def-sfb-coefficient-morphisms",
+  "def-sfb-module-lower-star-comp",
+  "lem-sfb-pushforward-comp-monoidal",
+  "lem-sfb-eta-comp",
+  "def-sfb-module-upper-star-comp",
+  "det-def-sfb-change-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261026/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-pushforward-pullback.proof.md",
+  "place": "entire proof paragraph, realized by the existing module-object definitions and composition lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapMod|pullbackPushforwardAdjunction|def pushforwardComp|def pullbackComp",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-26",
+   "verdict": "no exact match: the grep hits construct SheafOfModules functors, a sectionwise module-sheaf presentation. Read PushforwardContinuous.lean:32-49,139-145 and PullbackContinuous.lean:43-61,77-109; they do not identify the stated internal mapMod/Ext functors with this presentation.",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward and pullback of internal modules over a commutative condensed ring on the pro etale site, with adjunction and composition isomorphisms",
+   "results": "SheafOfModules.pushforwardPushforwardAdj; PresheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-26",
+   "verdict": "no exact match: hits are SheafOfModules or PresheafOfModules adjunctions and Zariski Scheme.Modules adjunctions, not the specified condensed-coefficient internal module functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward and pullback of internal modules over a condensed coefficient ring on a scheme pro etale site",
+   "results": "SheafOfModules.pushforward; SheafOfModules.pullback; PresheafOfModules.pushforward₀; SheafOfModules.pushforward_map_val; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.pushforward₀_obj; SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-26",
+   "verdict": "no exact match: SheafOfModules pushforward/pullback and PullbackConstruction.adjunction use sectionwise modules and sheafification. An equivalence and compatibility comparison with internal module objects would be needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-26",
+   "verdict": "no exact match: SheafOfModules.conjugateEquiv_pullbackComp_inv concerns composition in another module-sheaf presentation; it does not establish the functors and their specified internal-module definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|mapModule|namespace Module|Monoidal.*Adjunction|Adjunction.*Monoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Internal/Module.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean; Mathlib/CategoryTheory/Monoidal/Closed/Transport.lean; Mathlib/CategoryTheory/Monoidal/Closed/Cartesian.lean; Mathlib/CategoryTheory/Monoidal/Arrow.lean",
+   "date": "2026-10-26",
+   "verdict": "no exact match: Mon.lean:856 explicitly leaves mapMod as TODO; Internal/Module.lean:14-20,37-40 concerns internal monoids in ordinary ModuleCat and their algebra equivalence, not transport of module objects on pro-etale sheaves.",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal adjunction lifts to categories of internal module objects, composed with extension restriction of scalars along a monoid morphism",
+   "results": "ModuleCat.RestrictionCoextensionAdj.unit'; Rep.instIsLeftAdjointActionModuleCatRes; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.RestrictionCoextensionAdj.unit'_app; Rep.resCoindAdjunction; Rep.instIsRightAdjointActionModuleCatRes; ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+   "date": "2026-10-26",
+   "verdict": "no exact match: hits concern ordinary rings and modules (ModuleCat scalar adjunctions) or monoid representations (Rep), not internal modules over ring objects in abelian sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1192,
+ "blueprint_uses": [
+  "det-def-sfb-transport",
+  "det-def-sfb-condensed-ring",
+  "det-def-sfb-pulled-back-coefficients",
+  "det-def-sfb-module-objects",
+  "det-def-sfb-coefficient-morphisms",
+  "det-def-sfb-change-of-scalars",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-sfb-finite-monoidal-adjunction",
+  "def-sfb-finite-lower-star-comp",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-module-lower-star-comp",
+  "lem-sfb-pushforward-comp-monoidal",
+  "lem-sfb-eta-comp",
+  "def-sfb-module-upper-star-comp"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_lowerStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.upperStarLowerStarAdjunction",
+  "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp",
+  "AlgebraicGeometry.ProEtale.CondensedRing.lowerStarComp",
+  "AlgebraicGeometry.ProEtale.CondensedRing.upperStarComp"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_lowerStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.upperStarLowerStarAdjunction",
+  "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp",
+  "AlgebraicGeometry.ProEtale.CondensedRing.lowerStarComp",
+  "AlgebraicGeometry.ProEtale.CondensedRing.upperStarComp"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-def-sfb-module-pushforward-pullback",
+  "from": null,
+  "same_as": [
+   "sk-def-sfb-module-pushforward-pullback"
+  ]
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "det-def-sfb-module-pushforward-pullback",
+  "worker": "stage1",
+  "summary": "Checked the latest blueprint statement and proof and every cited live node. Statement and statement dependencies unchanged. All construction and compatibility clauses are provided by existing nodes; no new node is needed. Expanded the imported paragraph into five explicit applications, fixed the proof-source path, recorded the existing same-content blueprint unit and genuine Mathlib searches. No matching finished project declaration in the supplied Lean source; the prior attachment is not repeated.",
+  "blueprint": "Latest det-def-sfb-module-pushforward-pullback.proof.md: first sentence -> steps 1 and 2; pushforward-composition sentences -> step 3; final sentence -> step 4. Statement final paragraph -> step 5. The det node is filed under the current pro-etale open-closed unit and provides its foundational module functors; the older unit record in dag/units is not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-pushforward-comp-monoidal",
+    "why": "Generic monoidal compatibility of the abelian-sheaf composition comparison; the current blueprint explicitly requires it for the module pushforward comparison, and the open-closed unit supplies no replacement."
+   },
+   {
+    "node": "lem-sfb-eta-comp",
+    "why": "Generic coefficient-mate composition identity, explicitly required by the current blueprint; applies to the canonical coefficient construction before open-closed specialization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-pushforward-comp-monoidal",
+  "lem-sfb-eta-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NG-b3bc00cc1",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-b3bc00cc1 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement against the blueprint statement and proof in main-20261026. That statement file is identical to the main-20261023-1620 copy, and the item's statement and stmt_deps are unchanged. Step 1: def-sfb-module-lower-star and def-sfb-module-upper-star give exactly Res_eta∘mapMod(f_*) (additive and left exact) and Ext_alpha∘mapMod(f^*) = Lambda_X⊗_{f^*Lambda_Y}f^*M, for a general commutative condensed Lambda. Step 2: def-sfb-module-upper-lower-adjunction gives the composite adjunction and the Hom bijection, and the mate relation eta_f = f_*(alpha_f)u is literally a clause of det-def-sfb-coefficient-morphisms. Step 3: def-sfb-module-lower-star-comp gives the pushforward comparison. lem-sfb-pushforward-comp-monoidal applies with A=Ab, and lem-sfb-eta-comp's convention (m conjugate to c^{-1}) matches det alpha_f, which is defined as the inverse of def-sfb-finite-upper-star-comp, the conjugate of c. Step 4: def-sfb-module-upper-star-comp is an existing Mathlib leaf (leftAdjointCompIso); its conjugate of c is in the stated direction. Step 5 is a genuine read-off of clause 2 of det-def-sfb-change-of-scalars; its hypotheses (braided, coequalizers, colimit-preserving tensor, commutative f^*Lambda_Y) hold. proof_deps equals the union of the uses, all cited ids exist and are unmerged, and there is no cycle. I compared the det and sk coefficient notions: they are textually identical up to citations, and both tensor references and both pullbacks are the same constructions, so no different coefficient categories are identified. I accept the declared tool_uses lem-sfb-pushforward-comp-monoidal and lem-sfb-eta-comp; both are named in the blueprint proof, and eta-comp is already accepted on the sk twin. There are no new nodes. The Lean tree has only the WeilCoefficients specialization, so no attachment is possible. Advisories: the item duplicates the reviewed sk-def-sfb-module-pushforward-pullback; it is recorded in same_as, as for the det siblings, and a merge is for the maintainer to decide. The unit record sk-prop-sf-open-closed-triangle is stale."
+ }
+}

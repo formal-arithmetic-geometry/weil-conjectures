@@ -1,0 +1,225 @@
+{
+ "id": "lem-trf-quotient-lift-finite-prime-avoidance",
+ "kind": "statement",
+ "title": "Lifting a residue class while avoiding finitely many prime ideals",
+ "statement": "Let $A$ be a commutative ring with identity, $I\\subseteq A$ an ideal, and $\\mathfrak p_1,\\ldots,\\mathfrak p_r$ prime ideals of $A$ (equivalently, points of $\\operatorname{Spec}A$ [def-weil-affine-spectrum]), where $r\\geq0$. Here an ideal is an additive subgroup stable under multiplication by elements of $A$, and a prime ideal is a proper ideal $\\mathfrak p$ such that $ab\\in\\mathfrak p$ implies $a\\in\\mathfrak p$ or $b\\in\\mathfrak p$. Suppose $I\\not\\subseteq\\mathfrak p_i$ for every $1\\leq i\\leq r$. For every residue class $\\bar f\\in A/I$ (a coset for the additive subgroup $I$) there exists $f\\in A$ such that $f+I=\\bar f$ and $f\\notin\\mathfrak p_i$ for every $i$. Repeated or comparable primes, the empty family, and the zero ring are allowed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NK, label lemma-extra-silly, statement and proof."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Discard repeated primes and primes strictly contained in another listed prime. Every discarded prime is contained in a retained one: repeatedly move to a strictly larger listed prime, which must terminate in the finite set. Thus avoiding all retained primes avoids every original prime. Relabel the retained primes $\\mathfrak p_1,\\ldots,\\mathfrak p_t$; they are pairwise incomparable and still satisfy $I\\not\\subseteq\\mathfrak p_i$. Choose a representative $a\\in A$ of the coset $\\bar f$. If $t=0$, take $f=a$. This also covers the zero ring, which has no proper prime ideal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NK, lemma-extra-silly, proof (lines 9069–9080)."
+   }
+  },
+  {
+   "text": "Put $S=\\{s\\in\\{1,\\ldots,t\\}:a\\in\\mathfrak p_s\\}$ and $T=\\{1,\\ldots,t\\}\\setminus S$. If $S=\\varnothing$, take $f=a$. Otherwise let $J=I\\cap\\bigcap_{i\\in T}\\mathfrak p_i$, with the empty intersection understood as $A$. It is an ideal, since each factor contains $0$ and is closed under subtraction and multiplication by any element of $A$. This intersection can replace the product ideal used in Tag 09NK: the following explicit witnesses establish precisely the noncontainment needed there.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NK, lemma-extra-silly, proof (lines 9069–9080)."
+   }
+  },
+  {
+   "text": "For each $s\\in S$, choose $u_s\\in I\\setminus\\mathfrak p_s$ using the hypothesis on $I$. For every $i\\in T$ choose $v_{i,s}\\in\\mathfrak p_i\\setminus\\mathfrak p_s$, using incomparability. Then $z_s=u_s\\prod_{i\\in T}v_{i,s}$ belongs to $J$: it is a multiple of $u_s\\in I$ and, for each $i\\in T$, a multiple of $v_{i,s}\\in\\mathfrak p_i$. It is outside $\\mathfrak p_s$, since repeated use of the defining prime implication would otherwise put one of its factors in $\\mathfrak p_s$. For $T=\\varnothing$ the product is $1$ and $z_s=u_s$. Therefore $J\\not\\subseteq\\mathfrak p_s$ for every $s\\in S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NK, lemma-extra-silly, proof (lines 9069–9080)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-prime-avoidance] to the ideal $J$ in $A$ and the nonempty finite family $(\\mathfrak p_s)_{s\\in S}$. Its noncontainment hypothesis is Step 3; every member of the family is prime, so in particular all but at most two are prime. Obtain $g\\in J$ with $g\\notin\\mathfrak p_s$ for every $s\\in S$.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NK, lemma-extra-silly, proof (lines 9069–9080)."
+   }
+  },
+  {
+   "text": "Take $f=a+g$. Because $g\\in J\\subseteq I$, its coset is $f+I=a+I=\\bar f$. If $s\\in S$ and $f\\in\\mathfrak p_s$, then $g=f-a\\in\\mathfrak p_s$, contrary to Step 4. If $i\\in T$ and $f\\in\\mathfrak p_i$, then $a=f-g\\in\\mathfrak p_i$, since $g\\in J\\subseteq\\mathfrak p_i$, contrary to the definition of $T$. Thus $f$ avoids the retained primes, and Step 1 gives avoidance of the entire original family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NK, lemma-extra-silly, proof (lines 9069–9080)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NK, lemma-extra-silly, proof (lines 9069–9080)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(avoid|[Ll]ift|coset).*(prime|Prime)|(prime|Prime).*(avoid|[Ll]ift|coset)",
+   "results": "{\"t\": \"2026-10-23T04:34:47Z\", \"tool\": \"grep\", \"query\": \"(avoid|[Ll]ift|coset).*(prime|Prime)|(prime|Prime).*(avoid|[Ll]ift|coset)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/LocalRing/LocalSubring.lean\", \"Mathlib/RingTheory/LocalRing/LocalSubring.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\"], \"digest\": \"7a367211e47eda77\"}; Read the hits. Ordinary Ideal.subset_union_prime(_finite) avoids primes inside an ideal, not inside an arbitrary coset. IsDedekindDomain.exists_representative_mod_finset assumes a Dedekind domain; Ideal.pi_quotient_surjective and Ideal.exists_forall_sub_mem_ideal require pairwise coprimality; Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver assumes an essentially finite type quasi-finite algebra. Quotient map lemmas and smooth lifting do not state this finite-prime coset avoidance assertion. Source read: Ideal/Operations.lean:1159-1229, DedekindDomain/Ideal/Lemmas.lean:963-979, QuasiFinite/Basic.lean:519-524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An element of A modulo an ideal I can be lifted avoiding finitely many prime ideals none of which contains I",
+   "results": "{\"t\": \"2026-10-23T04:34:48Z\", \"tool\": \"leansearch\", \"query\": \"An element of A modulo an ideal I can be lifted avoiding finitely many prime ideals none of which contains I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"Ideal.Quotient.liftₐ\", \"Ideal.Quotient.lift_mk\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.mk_lift\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\"], \"digest\": \"8f511460e6222d39\"}; Read the hits. Ordinary Ideal.subset_union_prime(_finite) avoids primes inside an ideal, not inside an arbitrary coset. IsDedekindDomain.exists_representative_mod_finset assumes a Dedekind domain; Ideal.pi_quotient_surjective and Ideal.exists_forall_sub_mem_ideal require pairwise coprimality; Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver assumes an essentially finite type quasi-finite algebra. Quotient map lemmas and smooth lifting do not state this finite-prime coset avoidance assertion. Source read: Ideal/Operations.lean:1159-1229, DedekindDomain/Ideal/Lemmas.lean:963-979, QuasiFinite/Basic.lean:519-524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.mk, Ideal.IsPrime",
+   "results": "{\"t\": \"2026-10-23T04:34:48Z\", \"tool\": \"loogle\", \"query\": \"Ideal.Quotient.mk, Ideal.IsPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Ideal.isPrime_map_quotientMk_of_isPrime\", \"Ideal.Quotient.instIsPrimeQuotientMapRingHomAlgebraMapMkOfLiesOver\", \"Ideal.mem_minimalPrimes_sup\", \"Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes\", \"Ideal.comap_lt_comap_of_root_mem_sdiff\", \"Ideal.exists_coeff_mem_comap_sdiff_comap_of_root_mem_sdiff\", \"Ideal.algebraMap_quotient_residueField_mk\", \"Polynomial.fiberEquivQuotient_tmul\"], \"digest\": \"b5370f055fd5365f\"}; Read the hits. Ordinary Ideal.subset_union_prime(_finite) avoids primes inside an ideal, not inside an arbitrary coset. IsDedekindDomain.exists_representative_mod_finset assumes a Dedekind domain; Ideal.pi_quotient_surjective and Ideal.exists_forall_sub_mem_ideal require pairwise coprimality; Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver assumes an essentially finite type quasi-finite algebra. Quotient map lemmas and smooth lifting do not state this finite-prime coset avoidance assertion. Source read: Ideal/Operations.lean:1159-1229, DedekindDomain/Ideal/Lemmas.lean:963-979, QuasiFinite/Basic.lean:519-524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an ideal I and finitely many prime ideals not containing I, any element of the quotient ring A/I lifts to an element outside all these prime ideals",
+   "results": "{\"t\": \"2026-10-23T04:34:49Z\", \"tool\": \"leanfinder\", \"query\": \"Given an ideal I and finitely many prime ideals not containing I, any element of the quotient ring A/I lifts to an element outside all these prime ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.exists_representative_mod_finset\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"IsDedekindDomain.exists_forall_sub_mem_ideal\", \"PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain\", \"Ideal.pi_quotient_surjective\", \"PrimeSpectrum.exists_primeSpectrum_prod_le\", \"exists_multiset_prod_cons_le_and_prod_not_le\"], \"digest\": \"679dc77c6eccb91e\"}; Read the hits. Ordinary Ideal.subset_union_prime(_finite) avoids primes inside an ideal, not inside an arbitrary coset. IsDedekindDomain.exists_representative_mod_finset assumes a Dedekind domain; Ideal.pi_quotient_surjective and Ideal.exists_forall_sub_mem_ideal require pairwise coprimality; Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver assumes an essentially finite type quasi-finite algebra. Quotient map lemmas and smooth lifting do not state this finite-prime coset avoidance assertion. Source read: Ideal/Operations.lean:1159-1229, DedekindDomain/Ideal/Lemmas.lean:963-979, QuasiFinite/Basic.lean:519-524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "avoid|exists.*(notMem|not_mem)|coset",
+   "results": "{\"t\": \"2026-10-23T04:35:19Z\", \"tool\": \"grep\", \"query\": \"avoid|exists.*(notMem|not_mem)|coset\", \"sub\": \"RingTheory/Ideal/Operations.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"1080\", \"1159\", \"1216\"], \"digest\": \"83428b8aec465976\"}; Read the hits. Ordinary Ideal.subset_union_prime(_finite) avoids primes inside an ideal, not inside an arbitrary coset. IsDedekindDomain.exists_representative_mod_finset assumes a Dedekind domain; Ideal.pi_quotient_surjective and Ideal.exists_forall_sub_mem_ideal require pairwise coprimality; Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver assumes an essentially finite type quasi-finite algebra. Quotient map lemmas and smooth lifting do not state this finite-prime coset avoidance assertion. Source read: Ideal/Operations.lean:1159-1229, DedekindDomain/Ideal/Lemmas.lean:963-979, QuasiFinite/Basic.lean:519-524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime avoidance in a coset: if I is not contained in any of finitely many prime ideals p then for every a there is b congruent to a modulo I with b outside all p",
+   "results": "{\"t\": \"2026-10-23T04:35:22Z\", \"tool\": \"leanfinder\", \"query\": \"Prime avoidance in a coset: if I is not contained in any of finitely many prime ideals p then for every a there is b congruent to a modulo I with b outside all p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.subset_union_prime_finite\", \"IsDedekindDomain.exists_representative_mod_finset\", \"IsDedekindDomain.exists_forall_sub_mem_ideal\", \"Ideal.subset_union_prime\", \"Ideal.exists_forall_sub_mem_ideal\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"Ideal.exist_integer_multiples_notMem\", \"Ideal.exists_le_prime_disjoint\"], \"digest\": \"3c282f87bf2508e4\"}; Read the hits. Ordinary Ideal.subset_union_prime(_finite) avoids primes inside an ideal, not inside an arbitrary coset. IsDedekindDomain.exists_representative_mod_finset assumes a Dedekind domain; Ideal.pi_quotient_surjective and Ideal.exists_forall_sub_mem_ideal require pairwise coprimality; Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver assumes an essentially finite type quasi-finite algebra. Quotient map lemmas and smooth lifting do not state this finite-prime coset avoidance assertion. Source read: Ideal/Operations.lean:1159-1229, DedekindDomain/Ideal/Lemmas.lean:963-979, QuasiFinite/Basic.lean:519-524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(avoid|[Ll]ift|coset).*(prime|Prime)|(prime|Prime).*(avoid|[Ll]ift|coset)",
+   "results": "{\"t\": \"2026-10-23T09:45:59Z\", \"tool\": \"grep\", \"query\": \"(avoid|[Ll]ift|coset).*(prime|Prime)|(prime|Prime).*(avoid|[Ll]ift|coset)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Defs.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Topology.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\"], \"digest\": \"638395fc70ecaa78\"} Ordinary Ideal.subset_union_prime(_finite) chooses inside an ideal, not inside a prescribed coset. The Dedekind representative lemmas impose IsDedekindDomain; the CRT lemmas impose pairwise coprimality; the quasi-finite lemma imposes algebra hypotheses. None matches the item in one specialization. Read Operations.lean:1159–1229, DedekindDomain/Ideal/Lemmas.lean:963–979, Ideal/Quotient/Operations.lean:255–272, QuasiFinite/Basic.lean:519–524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every coset of an ideal not contained in any of a finite family of prime ideals contains an element outside all of those primes",
+   "results": "{\"t\": \"2026-10-23T09:46:00Z\", \"tool\": \"leansearch\", \"query\": \"Every coset of an ideal not contained in any of a finite family of prime ideals contains an element outside all of those primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.subset_union_prime_finite\", \"Ideal.subset_union_prime'\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"Ideal.subset_union_prime\", \"Ideal.IsPrime.inf_le'\", \"Ideal.exists_le_prime_notMem_of_isIdempotentElem\", \"Ideal.IsPrime.prod_le\", \"Ideal.IsPrime.prod_mem_iff_exists_mem\"], \"digest\": \"cf127d224b18f785\"} Ordinary Ideal.subset_union_prime(_finite) chooses inside an ideal, not inside a prescribed coset. The Dedekind representative lemmas impose IsDedekindDomain; the CRT lemmas impose pairwise coprimality; the quasi-finite lemma imposes algebra hypotheses. None matches the item in one specialization. Read Operations.lean:1159–1229, DedekindDomain/Ideal/Lemmas.lean:963–979, Ideal/Quotient/Operations.lean:255–272, QuasiFinite/Basic.lean:519–524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.mk, Ideal.IsPrime",
+   "results": "{\"t\": \"2026-10-23T09:46:00Z\", \"tool\": \"loogle\", \"query\": \"Ideal.Quotient.mk, Ideal.IsPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Ideal.isPrime_map_quotientMk_of_isPrime\", \"Ideal.Quotient.instIsPrimeQuotientMapRingHomAlgebraMapMkOfLiesOver\", \"Ideal.mem_minimalPrimes_sup\", \"Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes\", \"Ideal.comap_lt_comap_of_root_mem_sdiff\", \"Ideal.exists_coeff_mem_comap_sdiff_comap_of_root_mem_sdiff\", \"Ideal.algebraMap_quotient_residueField_mk\", \"Polynomial.fiberEquivQuotient_tmul\"], \"digest\": \"b5370f055fd5365f\"} Ordinary Ideal.subset_union_prime(_finite) chooses inside an ideal, not inside a prescribed coset. The Dedekind representative lemmas impose IsDedekindDomain; the CRT lemmas impose pairwise coprimality; the quasi-finite lemma imposes algebra hypotheses. None matches the item in one specialization. Read Operations.lean:1159–1229, DedekindDomain/Ideal/Lemmas.lean:963–979, Ideal/Quotient/Operations.lean:255–272, QuasiFinite/Basic.lean:519–524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a residue class modulo an ideal to an element outside finitely many prime ideals none of which contains that ideal",
+   "results": "{\"t\": \"2026-10-23T09:46:09Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a residue class modulo an ideal to an element outside finitely many prime ideals none of which contains that ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.exists_representative_mod_finset\", \"IsDedekindDomain.exists_forall_sub_mem_ideal\", \"Ideal.exist_integer_multiples_notMem\", \"Ideal.exists_forall_sub_mem_ideal\", \"Ideal.pi_quotient_surjective\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"Ideal.quotientInfToPiQuotient_surj\", \"Ideal.quotientToQuotientRangePowQuotSucc_surjective\"], \"digest\": \"191d078b07894320\"} Ordinary Ideal.subset_union_prime(_finite) chooses inside an ideal, not inside a prescribed coset. The Dedekind representative lemmas impose IsDedekindDomain; the CRT lemmas impose pairwise coprimality; the quasi-finite lemma imposes algebra hypotheses. None matches the item in one specialization. Read Operations.lean:1159–1229, DedekindDomain/Ideal/Lemmas.lean:963–979, Ideal/Quotient/Operations.lean:255–272, QuasiFinite/Basic.lean:519–524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coset|avoid|exists.*(notMem|not_mem)",
+   "results": "{\"t\": \"2026-10-23T09:49:45Z\", \"tool\": \"grep\", \"query\": \"coset|avoid|exists.*(notMem|not_mem)\", \"sub\": \"RingTheory/Ideal/Operations.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"1080\", \"1159\", \"1216\"], \"digest\": \"83428b8aec465976\"} Ordinary Ideal.subset_union_prime(_finite) chooses inside an ideal, not inside a prescribed coset. The Dedekind representative lemmas impose IsDedekindDomain; the CRT lemmas impose pairwise coprimality; the quasi-finite lemma imposes algebra hypotheses. None matches the item in one specialization. Read Operations.lean:1159–1229, DedekindDomain/Ideal/Lemmas.lean:963–979, Ideal/Quotient/Operations.lean:255–272, QuasiFinite/Basic.lean:519–524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime avoidance for a translate x plus I: choose y in I such that x plus y belongs to none of finitely many prime ideals",
+   "results": "{\"t\": \"2026-10-23T09:49:47Z\", \"tool\": \"leanfinder\", \"query\": \"Prime avoidance for a translate x plus I: choose y in I such that x plus y belongs to none of finitely many prime ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.exists_forall_sub_mem_ideal\", \"Ideal.subset_union_prime_finite\", \"Ideal.subset_union_prime'\", \"Ideal.exists_forall_sub_mem_ideal\", \"Ideal.subset_union_prime\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain\", \"Ideal.exists_mul_mem_of_mem_minimalPrimes\"], \"digest\": \"f757a64afe758d84\"} Ordinary Ideal.subset_union_prime(_finite) chooses inside an ideal, not inside a prescribed coset. The Dedekind representative lemmas impose IsDedekindDomain; the CRT lemmas impose pairwise coprimality; the quasi-finite lemma imposes algebra hypotheses. None matches the item in one specialization. Read Operations.lean:1159–1229, DedekindDomain/Ideal/Lemmas.lean:963–979, Ideal/Quotient/Operations.lean:255–272, QuasiFinite/Basic.lean:519–524.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-componentwise-finite-set-affine-neighbourhood",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 09NM proof, penultimate paragraph: apply Varieties Lemma 09NK (lemma-extra-silly) to lift h from the closed overlap to U without vanishing at the prescribed points outside that overlap; this supplies the componentwise affine-neighbourhood reduction below the ancestor contraction/pinching branch.",
+   "via": [
+    "lem-trf-componentwise-finite-set-affine-neighbourhood",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-quotient-lift-finite-prime-avoidance",
+  "worker": "stage1",
+  "summary": "Checked Tag 09NK and the existing 00DS Mathlib leaf. Wrote the finite maximal-prime reduction, the explicit product witnesses for noncontainment of an intersection ideal, one application of existing prime avoidance, and the two subtraction checks. No new nodes; no change to the statement or statement dependencies. Read and retained all inherited searches, and appended the fresh logged searches.",
+  "blueprint": "Realizes the finite-prime quotient-lifting input to Tag 09NM in the componentwise affine-neighbourhood branch below lem-trf-local-term-locality, at the precise place recorded in blueprint.from. The latest ancestor blueprint was read; its contracting-local-term route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-11b334061",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-11b334061 (reviewer sub-agent of L); spot-checked: Read Stacks varieties.tex Tag 09NK (lemma-extra-silly, lines 9060-9081); the item statement matches it, with r>=0 added. The delivery is one commit with the item and its report. It creates no new nodes and leaves the statement and stmt_deps unchanged. proof_deps=[lem-weil-pbc-prime-avoidance] is exactly the union of the step uses. Step by step: (1) removing smaller and repeated primes terminates because the family is finite, and avoidance passes down to smaller primes; the zero ring has r=0. (2) J=I∩⋂_T p_i replaces the source's product; the case S=∅ is handled first, so 00DS is never applied to an empty family. (3) For s in S and i in T, i≠s because a lies in p_s but not in p_i; incomparability gives v_{i,s} and the hypothesis on I gives u_s, so the product z_s lies in J and outside p_s by primality. (4) The cited node's full statement needs r>=1 and all but at most two members prime, and both hold here. That node is a Mathlib leaf for Ideal.subset_union_prime, confirmed at Operations.lean:1160 with the stacks 00DS tag; citing it from another unit is allowed. (5) f=a+g is checked correctly for both S and T. Tested cases: the empty family, the zero ring, I=A, I=0, Z with (0)⊂(2), Z with I=(5) and primes (2),(3), and k[x,y] with (x),(y) and I=(x+y). Searching the DAG with rg -L for 09NK, extra-silly and coset or residue lifts with avoidance found only the item and its parent, so there is no duplicate. The blueprint from field and the split_report blueprint entry are present. No SGA source is used, and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuotientLiftFinitePrimeAvoidance",
+  "declaration": "Ideal.exists_quotient_representative_notMem_primes",
+  "file": "lean/Sheaf/RingTheory/QuotientLiftFinitePrimeAvoidance.lean",
+  "statement": "theorem exists_quotient_representative_notMem_primes {A : Type u} [CommRing A] (I : Ideal A) {r : ℕ} (p : Fin r → AlgebraicGeometry.Spec (CommRingCat.of A)) (hI : ∀ i : Fin r, ¬ I ≤ (p i).asIdeal) (fbar : A ⧸ I) : ∃ f : A, Ideal.Quotient.mk I f = fbar ∧ ∀ i : Fin r, f ∉ (p i).asIdeal",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37112f732",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Read node, stmt_dep def-weil-affine-spectrum (Mathlib AlgebraicGeometry.Spec), Stacks varieties.tex:9060-9081 (09NK lemma-extra-silly), module and report. Clause-by-clause match: CommRing A at universe u without Nontrivial; I : Ideal A; p : Fin r → Spec (CommRingCat.of A) with (p i).asIdeal (r=0, repeats and comparables allowed); hI ¬ I ≤ p_i in the correct direction; ∀ fbar, ∃ f, mk I f = fbar ∧ ∀ i, f ∉ p_i. Edge cases r=0, zero ring, I=⊤, I=⊥ and comparable primes checked. Proof is sorry only; docstrings give the source, blueprint id and five proof steps; lean.statement is verbatim; public imports minimal; node differs from live only in the lean field; no new nodes, dependency changes or parallel landed record; Worker report and Second reading sections present. Not recompiled per instructions. No findings."
+ }
+}

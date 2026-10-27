@@ -1,0 +1,144 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-sf-finite-tor-ordinary-pull-complete",
+ "kind": "statement",
+ "title": "Completeness of ordinary pullback on the primitive integral domain",
+ "statement": "For a separated locally finite-type quasi-compact morphism f:X -> Y, ordinary completed-coefficient pullback of a finite-Tor constructible integral complex, or the scalar tensor unit, is derived complete. This concerns the ordinary object and no completion or adjunction-unit morphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, Lemmas 6.5.5 and 6.5.9; Stacks proetale.tex Tag 099N, ordinary-operation completeness step"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "For the finite-Tor input, apply finiteTorAffineProjectiveCharts to K and K on each affine open of Y. Project its two-input conclusion to the first input. For the unit input retain its defining equality. Apply projective-chart pullback transport to obtain explicit bounded finite-free-retract models for ordinary ringed pullback on every leaf cover over every affine open of X. No preservation of infinite products by inverse image is asserted.",
+   "uses": [
+    "lem-sf-finite-tor-affine-projective-charts",
+    "lem-sf-finite-tor-pullback-affine-projective-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every displayed model is complete by boundedProjectiveComplex_complete. The canonical completion-unit criterion and naturality transport invertibility of the completion unit through its specified model isomorphism. Cancelling the completion of that isomorphism gives completeness on the chart.",
+   "uses": [
+    "lem-sf-bounded-projective-complex-complete-unrestricted",
+    "lem-fix-qcqs-completion-unit-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affineTreeCompleteDetection to those chartwise completeness proofs. It descends along the finite constructible tree and then along all affine opens, with empty leaves included.",
+   "uses": [
+    "lem-sf-affine-tree-complete-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-tor-affine-projective-charts",
+  "lem-sf-finite-tor-pullback-affine-projective-charts",
+  "lem-sf-bounded-projective-complex-complete-unrestricted",
+  "lem-fix-qcqs-completion-unit-criterion",
+  "lem-sf-affine-tree-complete-detection"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "H8: restore finite-projective model argument of Lemmas 6.5.5--6.5.8; remove the unsupported general-completeness route. Assembly is explicit Lean from local model construction, bounded-projective completeness, and affine-tree detection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completeness is preserved by ordinary tensor and ordinary pullback for constructible finite Tor complexes",
+   "results": "Eight generic tensor-complex, Tor and flat-module matches; no sheaf quotient-completeness statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion unit is an isomorphism for derived complete complexes and tensor products of constructible finite Tor complexes",
+   "results": "Eight Tor and module adic-completion matches. No ordinary completed-coefficient sheaf tensor/pullback completeness result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans.app",
+   "results": "Naturality and natural-isomorphism component lemmas supply the elementary comparison composition, not operation completeness.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorConstructibleIntegral; completionUnit; ordinaryIntegralDerivedPull; tensorUnit_complete; ordinary tensor complete / ordinary pullback complete",
+   "results": "The source library and Mathlib have no matching ordinary-operation completeness theorem. Project ConstructibleTensorCompletion has additional qcqs and coefficient-invertibility hypotheses; OrdinaryCompletedIntegralPullback requires Noetherian hypotheses. OpenReconstructionEffectivity proves scalar tensor-unit completeness. Blueprint phrase searches find no duplicate node.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PrimitiveCompletionEffectivity",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Completeness of ordinary pullback on the primitive integral domain in the primitive completion argument",
+   "via": [
+    "lem-sf-primitive-completion-effectivity",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteTorOrdinaryPullComplete",
+  "file": "lean/Sheaf/SixFunctors/FiniteTorOrdinaryPullComplete.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.finiteTorOrdinaryPullComplete",
+  "statement": "theorem finiteTorOrdinaryPullComplete {X Y : Scheme.{u}} (f : X ⟶ Y)    (hs : IsSeparated f) (ht : LocallyOfFiniteType f) (hq : QuasiCompact f)    (K : DerivedCategory (scalarReductionSource l E Y))    (hK : finiteTorConstructibleIntegral l E Y K ∨      K = (IntegralSystemRealization.calculus l E Y).integralClosed.monoidal.tensorUnit) :    IntegralOnSlice.IsComplete l E X none      ((IntegralSystemRealization.ringedPull l E f).obj K)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T204538-L-2973394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6c446",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T050609-L-242600",
+  "kind": "interface",
+  "note": "independent cc review: parent finiteTorOrdinaryPullComplete new proof vs sibling FiniteTorOrdinaryTensorComplete route and lemma statements; withdrawn nodes vs DAG/unit/Lean references; new chart lemma vs its node and the finiteTorAffineProjectiveCharts sibling; RationalSmoothPurityCanonical published vs delivered compiled at the same time"
+ }
+}

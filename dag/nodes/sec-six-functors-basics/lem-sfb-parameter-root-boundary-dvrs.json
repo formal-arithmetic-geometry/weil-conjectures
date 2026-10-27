@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-parameter-root-boundary-dvrs",
+ "kind": "statement",
+ "title": "Boundary primes and DVR localizations of a simultaneous parameter-root algebra",
+ "statement": "Let $(R,\\mathfrak m)$ be a henselian Noetherian regular local ring of dimension $d$, let $t_1,\\ldots,t_d$ be a regular system of parameters, let $0\\leq r\\leq d$, and let $n\\geq1$ [def-weil-pbc-henselian-terminology, def-weil-regular-scheme, def-weil-pbc-regular-system-of-parameters]. Put\n$$B=R[x_1,\\ldots,x_r]/(x_1^n-t_1,\\ldots,x_r^n-t_r),\\quad f=\\prod_{i=1}^r t_i,$$\nusing [def-weil-pbc-mv-polynomial-ring]. For every $1\\leq i\\leq r$, the rings $R/(t_i)$ and $B/(x_i)$ are regular local domains, $t_i$ and $x_i$ are nonzerodivisors, and the canonical presentation\n$$B/(x_i)\\cong (R/(t_i))[x_j:j\\ne i]/(x_j^n-\\bar t_j:j\\ne i)$$\nmakes $B/(x_i)$ finite free over $R/(t_i)$ with the monomial basis containing $1$. In particular $\\mathfrak p_i=(t_i)$ and $\\mathfrak q_i=(x_i)$ are prime and $\\mathfrak q_i\\cap R=\\mathfrak p_i$. Write $K=\\operatorname{Frac}(R)$ and $E=\\operatorname{Frac}(B)$ [def-pc-field-extension]. The rings $V_i=R_{\\mathfrak p_i}$ and $A_i=B_{\\mathfrak q_i}$ [def-weil-pbc-localization-at-prime] are discrete valuation rings with uniformizers $t_i,x_i$ [def-sc-discrete-valuation-ring], and the canonical map gives an isomorphism of $V_i$-algebras\n$$B\\otimes_R V_i\\cong A_i.$$\nThus $V_i\\to A_i$ is finite and injective, induces $K\\to E$ on fraction fields, and satisfies $\\mathfrak m_{V_i}A_i=(t_i)=(x_i^n)=\\mathfrak m_{A_i}^{n}$. Each $\\mathfrak q_i$ has height one, meaning there is no prime strictly between $(0)$ and $\\mathfrak q_i$, and these are all the height-one primes of $B$ containing $f$. For $r=0$ this list is empty and $f=1$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1(i), proof, printed pp.133-134: parameter-root algebra at each boundary divisor; returned steps 5-6. Stacks algebra.tex Tags 00NQ (lemma-regular-ring-CM), 00NP (lemma-regular-domain), 04GG (monic quotient calculation), 00PD (lemma-characterize-dvr), 00GK (lemma-finite-is-integral), 00OI (lemma-going-up-maximal-on-top)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "def-sfb-parameter-root-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-henselian-parameter-root-regularity] to $R,t_1,\\ldots,t_d,r,n$. It gives a Noetherian regular local domain $B$, the injective finite free map $R\\to B$, its monomial basis, and the regular system of parameters $x_1,\\ldots,x_r,t_{r+1},\\ldots,t_d$ of $B$. In particular $R$ is a domain, since it injects into the nonzero domain $B$. These conclusions allow both fraction fields in the statement to be formed. All the lemma's hypotheses are present: henselianity, Noetherian regular locality, a full parameter system, $r\\leq d$, and $n>0$.",
+   "uses": [
+    "lem-sfb-henselian-parameter-root-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1(i), proof, printed p.133, simultaneous parameter-root presentation; its regular-local algebra is recorded in the cited node."
+   }
+  },
+  {
+   "text": "Fix $1\\leq i\\leq r$. Permute each of the parameter systems of $R$ and $B$ to put $t_i$ and $x_i$ first. By [lem-weil-pbc-regular-local-generators-regular-sequence], each first element is a nonzerodivisor, and $R/(t_i)$ and $B/(x_i)$ are regular local rings of dimension $d-1$. By [lem-sc-regular-local-domain], both quotients are nonzero domains. Consequently $\\mathfrak p_i=(t_i)$ and $\\mathfrak q_i=(x_i)$ are proper prime ideals. The same regular-sequence assertion implies $t_i\\ne0$ and $x_i\\ne0$, since these rings are nonzero.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NQ (lemma-regular-ring-CM), allowing a permutation of minimal generators, and 00NP (lemma-regular-domain)."
+   }
+  },
+  {
+   "text": "The presentation of $B/(x_i)$ follows directly from its generators and relations. In the quotient $x_i=0$ and $x_i^n=t_i$ force $t_i=0$, because $n>0$. Send coefficients to their classes in $R/(t_i)$, send $x_i$ to zero, and keep the other variables. In the reverse direction send coefficients and surviving variables to their classes in $B/(x_i)$. Each map respects every displayed root relation, and their composites fix all generators. This proves the claimed isomorphism, including its compatibility with $R/(t_i)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Explicit generators-and-relations calculation for the root presentation in IX Proposition 2.1(i), printed p.133."
+   }
+  },
+  {
+   "text": "The quotient R/(t_i) is henselian by [lem-weil-pbc-quotient-henselian-pair]. Permuting the full parameter list to put t_i first and applying the regular-sequence quotient theorem shows that the surviving parameters followed by the image of the tail form a full regular system. Apply [lem-sfb-henselian-parameter-root-regularity] over R/(t_i) to those surviving parameters. Transport its basis through the explicit presentation of step 3 and the equivalence between Fin(r-1) and the indices other than i. This gives exactly the displayed surviving-root monomials, including when r=1 and the index type is empty. The resulting nonempty finite basis implies faithfulness and finiteness of the coefficient algebra, and hence injectivity and finiteness of its ring homomorphism. Injectivity identifies its kernel with (t_i), giving contraction.",
+   "uses": [
+    "lem-weil-pbc-quotient-henselian-pair",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-sfb-henselian-parameter-root-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "ILO IX Proposition 2.1(i), printed p.133: simultaneous parameter-root monomial basis applied over the henselian parameter quotient; henselian quotient descent is Stacks Tag 09XI."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-regular-principal-prime-localization-dvr] first with $H=R$, $g=t_i$, and $B=V_i$, and then with $H=B$, $g=x_i$, and localization $A_i$. The Noetherian, nonzerodivisor and principal-prime hypotheses were verified in steps 1-2. Both localizations are DVR domains. By [def-weil-pbc-localization-at-prime] their maximal ideals are $\\mathfrak p_iV_i=(t_i)$ and $\\mathfrak q_iA_i=(x_i)$, respectively. Hence these images are uniformizers by [def-sc-discrete-valuation-ring]. The fraction descriptions show that the two localization maps are injective: all denominators are nonzero in their source domains.",
+   "uses": [
+    "lem-sbc-regular-principal-prime-localization-dvr",
+    "def-weil-pbc-localization-at-prime",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), principal nonzero maximal-ideal criterion, and Tag 00CO (definition-localization)."
+   }
+  },
+  {
+   "text": "Every prime Q of B contracting to (t_i) contains x_i, since x_i^n=t_i and n>0. Thus (x_i) is contained in Q. The finite R-algebra B is integral by [lem-weil-pbc-finite-algebra-is-integral]. Integral incomparability [lem-weil-pbc-integral-incomparability] excludes strict containment of these primes with equal contraction, so Q=(x_i). Apply [lem-trf-unique-prime-localization] to identify the localization of B away from (t_i) with B_(x_i). The tensor-localization equivalence [lem-weil-pbc-localization-base-change] gives B tensor_R R_(t_i) isomorphic to B_(x_i). Its maps agree with the canonical maps on B, and extensionality on R proves agreement on R_(t_i). Finite base change and tensor symmetry prove finiteness of R_(t_i) to B_(x_i); localization of the injective domain map proves injectivity.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-incomparability",
+    "lem-trf-unique-prime-localization",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "ILO IX Proposition 2.1(i), printed pp.133-134, boundary localization comparison; Stacks Tags 00GT (integral incomparability), 00EA (unique-prime localization), 00DK (tensor localization)."
+   }
+  },
+  {
+   "text": "Localizing a domain at nonzero denominators leaves its fraction field unchanged: a fraction of localized elements $(a/s)/(b/u)$ equals $au/(sb)$, and every original fraction is still a quotient of elements of the localized ring. Consequently $\\operatorname{Frac}(V_i)=K$ and $\\operatorname{Frac}(A_i)=E$. The canonical maps used above restrict to $R\\to B$, so their induced field map is the canonical injection $K\\to E$, $a/b\\mapsto a/b$. The maximal ideals from step 5 give\n$$\\mathfrak m_{V_i}A_i=(t_i)A_i=(x_i^n)A_i=((x_i)A_i)^n=\\mathfrak m_{A_i}^{n},$$\nwhere the middle equalities use the defining root relation and multiplication of principal ideals.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Fraction calculations from Tag 00CO (definition-localization); the defining equation of the parameter-root presentation in IX Proposition 2.1(i), printed p.133."
+   }
+  },
+  {
+   "text": "A nonzero nonunit generating a prime principal ideal in a Noetherian domain has height one, by Mathlib Ideal.height_span_singleton_eq_one_of_mem_nonZeroDivisors (KrullsHeightTheorem). Apply this to each x_i, which is regular by step 2. Conversely, if a height-one prime Q contains the boundary product, primality and the root relation give some x_i in Q, hence (x_i) is contained in Q. The equal heights force equality, by Ideal.eq_of_le_of_height_le. For r=0 the product is 1 and no prime contains it.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), equivalence (1) and (3); Tag 00E3 (lemma-spec-localization)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-henselian-parameter-root-regularity",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-trf-unique-prime-localization",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1(i), printed pp.133-134. E2 proof: explicit quotient-presentation maps; surviving-root basis from root regularity over the henselian parameter quotient; unique-prime localization via root relation and integral incomparability; direct Mathlib principal-ideal height theorem. No generic Kummer-cover result is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a simultaneous parameter root algebra B over a henselian regular local ring R the localization B tensor R_(ti) equals B_(xi), both boundary localizations are discrete valuation rings and ti=xi^n has ramification index n",
+   "results": "{\"t\": \"2026-10-22T05:58:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a simultaneous parameter root algebra B over a henselian regular local ring R the localization B tensor R_(ti) equals B_(xi), both boundary localizations are discrete valuation rings and ti=xi^n has ramification index n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.ramificationIdx_map_eq_ramificationIdx\", \"IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq\", \"IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.ramificationIdx_algebra_tower\", \"Algebra.IsUnramifiedAt\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\"], \"digest\": \"5124b0adf0e94053\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ramification indices under localization and height-one spectra do not give the unique boundary primes, quotient calculation or the finite identification B tensor R_(ti)=B_(xi)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ramificationIdx\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-22T05:58:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"ramificationIdx\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ramification indices under localization and height-one spectra do not give the unique boundary primes, quotient calculation or the finite identification B tensor R_(ti)=B_(xi)."
+  },
+  {
+   "tool": "grep",
+   "query": "(AdjoinRoot|MvPolynomial).*(ramificationIdx|DiscreteValuationRing|localization)|(ramificationIdx|DiscreteValuationRing).*(AdjoinRoot|MvPolynomial)",
+   "results": "{\"t\": \"2026-10-22T05:58:26Z\", \"tool\": \"grep\", \"query\": \"(AdjoinRoot|MvPolynomial).*(ramificationIdx|DiscreteValuationRing|localization)|(ramificationIdx|DiscreteValuationRing).*(AdjoinRoot|MvPolynomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Algebra.lean\", \"Mathlib/RingTheory/Localization/Away/AdjoinRoot.lean\", \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Localization.lean\", \"Mathlib/RingTheory/MvPolynomial/Localization.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\"], \"digest\": \"8cc8c8cb0eebea8c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ramification indices under localization and height-one spectra do not give the unique boundary primes, quotient calculation or the finite identification B tensor R_(ti)=B_(xi)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Height one boundary primes in R[xi]/(xi^n-ti) are exactly (xi) and localization at the parameter prime is finite with maximal ideal power n",
+   "results": "{\"t\": \"2026-10-22T05:58:27Z\", \"tool\": \"leansearch\", \"query\": \"Height one boundary primes in R[xi]/(xi^n-ti) are exactly (xi) and localization at the parameter prime is finite with maximal ideal power n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.isPrime\", \"IsDedekindDomain.HeightOneSpectrum.prime\", \"IsDedekindDomain.HeightOneSpectrum.asIdeal\", \"Polynomial.height_eq_height_add_one\", \"IsDedekindDomain.HeightOneSpectrum\", \"Localization.AtPrime.isLocalRing\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"IsLocalRing.primesOver_eq\"], \"digest\": \"79c132c2a97711e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ramification indices under localization and height-one spectra do not give the unique boundary primes, quotient calculation or the finite identification B tensor R_(ti)=B_(xi)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Height one boundary primes in R[xi]/(xi^n-ti) are exactly (xi) and localization at the parameter prime is finite with maximal ideal power n",
+   "results": "{\"t\": \"2026-10-22T05:59:36Z\", \"tool\": \"leanfinder\", \"query\": \"Height one boundary primes in R[xi]/(xi^n-ti) are exactly (xi) and localization at the parameter prime is finite with maximal ideal power n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.idealX\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_one_iff\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"Polynomial.not_quasiFiniteAt\"], \"digest\": \"62e7dc31492ed2df\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ramification indices under localization and height-one spectra do not give the unique boundary primes, quotient calculation or the finite identification B tensor R_(ti)=B_(xi)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Boundary localizations of a henselian regular local ring adjoining nth roots of parameters are discrete valuation rings finite over the base parameter localization",
+   "results": "{\"t\": \"2026-10-22T06:54:19Z\", \"tool\": \"leanfinder\", \"query\": \"Boundary localizations of a henselian regular local ring adjoining nth roots of parameters are discrete valuation rings finite over the base parameter localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing\", \"HenselianLocalRing.TFAE\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"Field.henselian\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\"], \"digest\": \"f541a7e781831119\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern individual local/DVR or finite-dimensional field criteria, not the simultaneous parameter-root boundary presentation and finite localization identification of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T06:54:39Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern individual local/DVR or finite-dimensional field criteria, not the simultaneous parameter-root boundary presentation and finite localization identification of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx|isLocalization.*AtPrime|IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T06:54:39Z\", \"tool\": \"grep\", \"query\": \"ramificationIdx|isLocalization.*AtPrime|IsDiscreteValuationRing\", \"sub\": \"RingTheory/RegularLocalRing\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\"], \"digest\": \"47995847911e299d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern individual local/DVR or finite-dimensional field criteria, not the simultaneous parameter-root boundary presentation and finite localization identification of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining roots of a regular system of parameters, prime ideals at the boundary, finite localization discrete valuation rings",
+   "results": "{\"t\": \"2026-10-22T06:55:12Z\", \"tool\": \"leansearch\", \"query\": \"Adjoining roots of a regular system of parameters, prime ideals at the boundary, finite localization discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.mk\", \"of_isDiscreteValuationRing\", \"IsDedekindDomainDvr.mk\", \"IsDiscreteValuationRing.iff_pid_with_one_nonzero_prime\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\"], \"digest\": \"fbd6372dbcc3d00a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern individual local/DVR or finite-dimensional field criteria, not the simultaneous parameter-root boundary presentation and finite localization identification of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite algebra over a local domain, if the reduced closed fiber is a field, the algebra is local and localization at its unique maximal ideal changes nothing",
+   "results": "{\"t\": \"2026-10-22T06:55:23Z\", \"tool\": \"leanfinder\", \"query\": \"In a finite algebra over a local domain, if the reduced closed fiber is a field, the algebra is local and localization at its unique maximal ideal changes nothing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isLocalRing\", \"Localization.AtPrime.isLocalRing\", \"IsLocalization.AtPrime.not_isField\", \"instIsFractionRingQuotientIdealResidueField\", \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"isReduced_ofLocalizationMaximal\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\"], \"digest\": \"36cb5ddbf0636250\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern individual local/DVR or finite-dimensional field criteria, not the simultaneous parameter-root boundary presentation and finite localization identification of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; finite-cover geometric input: prime-to-p Galois torsors on a strict-local boundary puncture are split at a finite simultaneous parameter-root level. Re-split subargument: returned proof steps 5-6, Boundary primes and DVR localizations of a simultaneous parameter-root algebra.",
+   "via": [
+    "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+    "lem-sfb-lisse-lattice-potential-kummer-tameness",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-parameter-root-boundary-dvrs",
+  "worker": "stage1",
+  "group": "N8",
+  "summary": "Kept the statement; reused the existing parameter-root regularity, parameter-quotient, DVR and finite-algebra tools. Wrote the quotient maps, checked contraction using the monomial basis, proved the localized boundary quotient is a field, identified the unique maximal ideal and constructed the inverse localization maps. No new nodes. Checked n=1, noninvertible n, r=0, r=1 and d=0.",
+  "blueprint": "Realizes the boundary-prime/DVR subargument (returned steps 5-6) below lem-sfb-strict-local-prime-to-p-kummer-splitting, serving det-thm-sf-ctf-stability-direct-images proof (3), non-finite-coefficient open direct images. The item has no imported blueprint ancestor; its existing from.node=null and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic local algebra: quotient by a parameter is regular and the parameter is a nonzerodivisor, applied to both R and B; the unit has no replacement for this algebraic fact."
+   },
+   {
+    "node": "lem-sbc-regular-principal-prime-localization-dvr",
+    "why": "Generic principal-prime localization criterion, applied after proving its Noetherian/nonzerodivisor/prime hypotheses; it replaces no geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sbc-regular-principal-prime-localization-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N8-5b57ef9fb",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-5b57ef9fb (reviewer sub-agent of L); spot-checked: I read all 11 steps of the item, every cited statement, and ILO IX Prop. 2.1(i) at printed pp.133–134; there are no new nodes, no fixes and no SGA. The statement is retained and covers what the parent's step uses. Small cases check out: r=0, d=1 with r=1, n=1, and p dividing n (k[[x]] over k[[t]] with t=x^p). Steps 1–2 take regularity, the regular system of parameters, nonzerodivisors and the domain quotients from henselian-parameter-root-regularity, regular-local-generators-regular-sequence and regular-local-domain. Steps 3–4 build the presentation and its monomial basis, which contains 1, so q_i ∩ R = p_i. Step 5 checks the hypotheses of the principal-prime DVR node (Noetherian, nonzerodivisor, prime) for both R and B. Steps 6–9 identify C=S^{-1}B, then C/(x_i)=S^{-1}B_i, a finite domain over k_i and so a field; integrality and contraction of maximal ideals make C local; the two universal-property maps give B⊗V_i ≅ A_i. Steps 10–11 give the fraction fields and m_V A = m_A^n, and height one through dvr-dimension-one and primes-of-localization. No unstated normality, invertibility of n or finiteness of prime localizations is used. Nearby nodes (per-snc-root-algebra-structure, snc-finite-root-*) all require n to be a unit, so neither the item nor any step duplicates them. I accept the regular-sequence and principal-prime DVR nodes as generic algebra tool uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ParameterRootBoundaryDvrs",
+  "declaration": "Algebra.parameter_root_boundary_dvrs",
+  "declarations": [
+   "Algebra.parameterRootBoundaryCoordinate",
+   "Algebra.parameterBaseBoundaryIdeal",
+   "Algebra.parameterRootBoundaryIdeal",
+   "Algebra.parameterRootBoundaryPresentation",
+   "Algebra.parameterRootBoundaryCoefficient",
+   "Algebra.parameter_root_boundary_quotients",
+   "Algebra.parameter_root_boundary_dvrs"
+  ],
+  "file": "lean/Sheaf/RingTheory/ParameterRootBoundaryDvrs.lean",
+  "statement": "theorem parameter_root_boundary_dvrs {R : Type u} [CommRing R] [IsRegularLocalRing R] [HenselianLocalRing R] {r : ℕ} (t : Fin r → R) (tail : List R) (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t ++ tail)) (n : ℕ) (hn : 0 < n) : ∃ (_ : IsDomain (pthRootAlgebra n r R t)), ∃ hRB : Function.Injective (algebraMap R (pthRootAlgebra n r R t)), (∀ Q : Ideal (pthRootAlgebra n r R t), Q.IsPrime → (Q.height = 1 ∧ algebraMap R (pthRootAlgebra n r R t) (∏ j, t j) ∈ Q ↔ ∃ i : Fin r, Q = parameterRootBoundaryIdeal t n i)) ∧ ∀ i : Fin r, ∃ (_ : (parameterBaseBoundaryIdeal t i).IsPrime), ∃ (_ : (parameterRootBoundaryIdeal t n i).IsPrime), ∃ hc : parameterBaseBoundaryIdeal t i = (parameterRootBoundaryIdeal t n i).comap (algebraMap R (pthRootAlgebra n r R t)), ∃ (_ : IsDiscreteValuationRing (Localization.AtPrime (parameterBaseBoundaryIdeal t i))), ∃ (_ : IsDiscreteValuationRing (Localization.AtPrime (parameterRootBoundaryIdeal t n i))), (parameterRootBoundaryIdeal t n i).height = 1 ∧ IsLocalRing.maximalIdeal (Localization.AtPrime (parameterBaseBoundaryIdeal t i)) = Ideal.span {algebraMap R (Localization.AtPrime (parameterBaseBoundaryIdeal t i)) (t i)} ∧ IsLocalRing.maximalIdeal (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) = Ideal.span {algebraMap (pthRootAlgebra n r R t) (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) (parameterRootBoundaryCoordinate t n i)} ∧ (∃ e : (pthRootAlgebra n r R t ⊗[R] Localization.AtPrime (parameterBaseBoundaryIdeal t i)) ≃+* Localization.AtPrime (parameterRootBoundaryIdeal t n i), (∀ b : pthRootAlgebra n r R t, e (b ⊗ₜ[R] (1 : Localization.AtPrime (parameterBaseBoundaryIdeal t i))) = algebraMap (pthRootAlgebra n r R t) _ b) ∧ ∀ v : Localization.AtPrime (parameterBaseBoundaryIdeal t i), e ((1 : pthRootAlgebra n r R t) ⊗ₜ[R] v) = Localization.localRingHom (parameterBaseBoundaryIdeal t i) (parameterRootBoundaryIdeal t n i) (algebraMap R (pthRootAlgebra n r R t)) hc v) ∧ ∃ hj : Function.Injective (Localization.localRingHom (parameterBaseBoundaryIdeal t i) (parameterRootBoundaryIdeal t n i) (algebraMap R (pthRootAlgebra n r R t)) hc), (Localization.localRingHom (parameterBaseBoundaryIdeal t i) (parameterRootBoundaryIdeal t n i) (algebraMap R (pthRootAlgebra n r R t)) hc).Finite ∧ (∃ (ev : FractionRing (Localization.AtPrime (parameterBaseBoundaryIdeal t i)) ≃+* FractionRing R) (ea : FractionRing (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) ≃+* FractionRing (pthRootAlgebra n r R t)), (∀ a : R, ev (algebraMap (Localization.AtPrime (parameterBaseBoundaryIdeal t i)) _ (algebraMap R _ a)) = algebraMap R (FractionRing R) a) ∧ (∀ b : pthRootAlgebra n r R t, ea (algebraMap (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) _ (algebraMap (pthRootAlgebra n r R t) _ b)) = algebraMap (pthRootAlgebra n r R t) (FractionRing (pthRootAlgebra n r R t)) b) ∧ ea.toRingHom.comp (IsFractionRing.map hj) = (IsFractionRing.map (K := FractionRing R) (L := FractionRing (pthRootAlgebra n r R t)) hRB).comp ev.toRingHom) ∧ Ideal.map (Localization.localRingHom (parameterBaseBoundaryIdeal t i) (parameterRootBoundaryIdeal t n i) (algebraMap R (pthRootAlgebra n r R t)) hc) (IsLocalRing.maximalIdeal (Localization.AtPrime (parameterBaseBoundaryIdeal t i))) = Ideal.span {algebraMap R (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) (t i)} ∧ Ideal.span {algebraMap R (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) (t i)} = Ideal.span {(algebraMap (pthRootAlgebra n r R t) (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) (parameterRootBoundaryCoordinate t n i)) ^ n} ∧ Ideal.span {(algebraMap (pthRootAlgebra n r R t) (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) (parameterRootBoundaryCoordinate t n i)) ^ n} = IsLocalRing.maximalIdeal (Localization.AtPrime (parameterRootBoundaryIdeal t n i)) ^ n",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The companion parameter_root_boundary_quotients states the quotient regularity, canonical presentation, injective finite coefficient map and exact monomial basis. The main declaration states primes, contraction, canonical DVR localization and fraction-field maps, maximal-ideal powers and all height-one boundary primes. Reuses the unrestricted quotient definition Algebra.pthRootAlgebra; its characteristic-specific locality theorem is not assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a63be9c18",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Re-delivery after the landing return of 8ac97f85d605: the stale def-sfb-parameter-root-algebra copy is removed; the snapshot's def node is identical to the landed live Q65 record (existing:true, Algebra.pthRootAlgebra, unrestricted MvPolynomial quotient, abbrev unchanged at live line 30). The Lean module is byte-identical (sha256 673ad966) to the reviewed heads 33bd/8ac9. The item differs from live only in lean and the added landed def stmt_dep; statement/proof/proof_deps unchanged. Live item is split with no lean, and no other group has delivered or landed it. lean.statement is verbatim in the file. Clause table re-checked independently: regular-local quotient domains, NZDs, pinned presentation and monomial basis with 1, primes and contraction, DVR uniformizers, B⊗V≅A pinned on both factors, finite and injective with fraction-field square, m_V A=(t)=(x^n)=m_A^n, height-one exhaustion parsed (A∧B)↔C, r=0/r=1/d=0/n=1/p|n. No hollow defs, sorry only, docstrings with source and blueprint tag. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261023T131532-L-2118477",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

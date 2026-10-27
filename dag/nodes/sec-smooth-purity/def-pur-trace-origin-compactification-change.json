@@ -1,0 +1,111 @@
+{
+ "id": "def-pur-trace-origin-compactification-change",
+ "kind": "definition",
+ "title": "Canonical etale-origin change of compactification for trace coordinates",
+ "statement": "Let A be a finite commutative coefficient ring, g:Z→S quasi-compact, c and d compactifications of g [def-weil-compactifications-refinements], W an object of the pro-etale derived category [def-weil-derived-pullback-tensor-hom], and hW a bounded-below etale-origin certificate [def-weil-finite-tor-amplitude]. Define originChange(A,c,d,W,hW) by taking a bounded-below ordinary representative L and comparison isomorphism e provided by hW, composing Rc!(e)^(-1), the canonical rightDerivedLowerShriekOfCompactificationOriginIso(c,d) at L, and Rd!(e). The middle is the existing compactification comparison from [thm-sf-comp-composition], not an arbitrarily chosen isomorphism. Naturality makes the result independent of the representative. This only defines that actual comparison; it asserts no trace equality.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration on affine space, ordered trace recursion and projection formula"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "thm-sf-comp-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional transpose of ordered affine space purity comparison equals the tensor product of normalized affine line integration under relative compact support Kunneth",
+   "results": "BoxIntegral.IntegrationParams.isoProd, MeasureTheory.GridLines.T, SSet.prodStdSimplex.nonDegenerate_iff_strictMono_objEquiv, exteriorPower.pairingDual_apply_apply_eq_one, NumberField.mixedEmbedding.fundamentalCone.setLIntegral_expMapBasis_image, MeasureTheory.GridLines.T_univ, NumberField.mixedEmbedding.volume_eq_two_pi_pow_mul_integral, NumberField.mixedEmbedding.volume_eq_two_pow_mul_two_pi_pow_mul_integral",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.NatTrans.naturality\"",
+   "results": "CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.NatTrans.naturality_map, CategoryTheory.NatTrans.naturality_map_assoc, CategoryTheory.NatTrans.naturality_inv, CategoryTheory.NatTrans.naturality_inv_assoc, CategoryTheory.NatTrans.naturality_app, CategoryTheory.NatTrans.naturality_app_assoc",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*factorization|integration.*succ|integration.*kunneth",
+   "results": "No matching declarations.",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the counit transpose for affine line purity under composition and base change",
+   "results": "CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Comonad.counit_naturality, CategoryTheory.Comonad.counit_naturality_assoc, CategoryTheory.Equivalence.counit_naturality_assoc, CategoryTheory.Equivalence.counit_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.OverPresheafAux.counitForward_naturality₁",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support Kunneth product composed with a line trace equals contraction of the last affine line",
+   "results": "GenLoop.cCompInsert, curveIntegralFun_segment, curveIntegral_segment, GenLoop.fromLoop_apply, GenLoop.toLoop_apply_coe, GenLoop.toLoop_apply, GenLoop.fromLoop_coe, GenLoop.homotopyTo_apply",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpaceTraceFactorization",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4, Integration paragraph: ordered trace and binary product",
+   "via": [
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.BaseChangedLineTraceEvaluation",
+  "file": "lean/Sheaf/Paper/BaseChangedLineTraceEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.originChange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.originChange"
+  ],
+  "statement": "def originChange {Z S : Scheme.{u}} {g : Z ⟶ S} [QuasiCompact g]\n    (c d : Compactification g) (W : D A Z)\n    (hW : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) Z W) :\n    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj W ≅\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).obj W",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26",
+  "note": "Register the existing constructed data only; the theorem assertions in the same module are not used to define them."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-63e77",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261025T204458-L-2960906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-63e77",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261025T204458-L-2960906",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 3 new modules + 7 node files vs live composite_transpose/standingEvaluation, originChange/TraceCompatible, affineSpace_lastFactor_product, OrderedAffineTranspose.integration/tateSourceIso and the base item node"
+ }
+}

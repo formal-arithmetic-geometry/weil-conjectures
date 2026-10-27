@@ -1,0 +1,142 @@
+{
+ "id": "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs: ordinary realization normalization, steps 1 of lem-sp-varying-ring-ordinary-clopen-evaluation.",
+   "via": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Explicit ordinary realization and comparison constructions",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "The ordinary realization is the functor uniquely specified to equal evaluation at n followed by the constant strict-tower embedding and the degree-zero embedding. Keep the original square-comparison predicate and the specified ordinary pullback/open comparison isomorphisms: whisker moduleEvalG and the recovered ordinary open comparison with the constant/single embeddings, retaining exactly the realization equality transports and associators of their original constructions.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE for open adjunctions, 0F7B for the intrinsic clopen construction. This normalization is an agent-formulated consequence."
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "The explicit composite functor witnesses the uniquely specified realization. Its proved equality determines the chosen functor exactly. Whiskering with moduleEvalG and the exact single-functor comparison constructs the inverse-image comparison. Recover the ordinary open comparison from the given derived comparison by fully faithful degree-zero embedding, then whisker in the same manner. All constructions and proofs are the original ones extracted without modification.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-coef-semilinear-derived-sections",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE for open adjunctions, 0F7B for the intrinsic clopen construction. This normalization is an agent-formulated consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Component evaluation constant tower degree zero embedding preserves normalized adjunction mates and open base change clopen projection",
+   "results": "msearch.py returned generic constantPresheafAdj, constantSheafAdj and evaluation preserves zero morphisms; none concerns the normalized varying-ring ordinary realization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"; \"mapDerivedCategorySingleFunctor\"",
+   "results": "Generic mateEquiv_hcomp and exact-single functor coherence. Inspected Mathlib CategoryTheory/Adjunction/Mates and the adopted source LeftDerivedFunctor/SingleFunctor. None states the scheme/coefficient realization normalization.",
+   "date": "2026-10-27",
+   "verdict": "generic tools, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSingle.*comp|ordinary.*[Cc]artesian|ordinary.*[Ss]ectionEvaluation|single.*mate",
+   "results": "msearch.py found no Mathlib matches. Local rg found VaryingRingOpenBaseChangeEvaluation and VaryingRingClopenSectionEvaluation, whose conclusions concern derived coefficient evaluation to a single module category. They do not state the present ordinary-system to derived-constant-tower comparisons. The former imports the original item only for its already proved ordinaryModuleEvalG_comp.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate ordinary realization normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryEvaluationComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOrdinaryEvaluationComparisons.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRealization_existsUnique",
+  "statement": "theorem ordinaryRealization_existsUnique (n : ℕ) (X : Scheme.{u}) :\n    ∃! E : Modules R φ X ⥤ StrictTower.Derived (R n) X,\n      E = eval R φ X n ⋙ Functor.const ℕᵒᵖ ⋙\n        DerivedCategory.singleFunctor (StrictTower.Towers (R n) X) 0",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRealization_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRealization",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRealization_eq",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinarySquareComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryPullComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryOpenComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryPullComposition",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryOpenComposition",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryClopenComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryConstantSingleComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryPullComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRecoverSingleIso",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryOpenEvaluation",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryOpenComparison"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-77a07",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T054600-L-966087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-77a07",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T054600-L-966087",
+  "kind": "interface",
+  "note": "independent cc review: item module + 6 new modules vs clone item (verbatim extraction diff), node JSONs vs Lean, 2 direct importers compiled against delivered modules"
+ }
+}

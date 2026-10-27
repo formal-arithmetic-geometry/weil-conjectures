@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-product-open-support-normalization",
+ "kind": "statement",
+ "title": "Supported product-open tensor restriction and counit comparison",
+ "statement": "For a finite commutative ring A, arbitrary maps a:Xbar to B, b:Zbar to B, opens j:X to Xbar and k:Z to Zbar, M in D(X_proet,A) and N in D(Z_proet,A), use the maps of [def-pur-product-open-tensor-projection-data]. Then w=(chi tensor identity) followed by e; the source m tensor P_tJ of w is isomorphic to u_!D; and restrictW inverse followed by P_u(w) is the open unit at D. No proper projection or compactification exchange map occurs in this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection."
+ },
+ "stmt_deps": [
+  "def-pur-product-open-tensor-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply open tensor normalization to j_q and i. The open unit at N identifies P_iP_tJ with P_vN; the two tensor maps and the open compositor identify the source with u_!D. Restriction of the composite is precisely the tensor-pullback and open-unit comparison restrictW, followed by the unit at D. Restriction of chi is beta inverse by the adjunction triangle; further restriction uses beta unit normalization. The normalized two-stage comparison e therefore gives the same restriction as w. Both source and target lie in the fully faithful image of u_!, so the two maps agree. This never inverts chi.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-extension-zero-composition",
+    "lem-pur-finite-open-product-swap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-normalization",
+  "lem-cbc-extension-zero-composition",
+  "lem-pur-finite-open-product-swap"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor of an open adjunction counit with an object extended by zero is an isomorphism and restricts to the identity.",
+   "results": "Adjunction.counitAsIsoOfIso and isIso_counit_of_iso (Mathlib.CategoryTheory.Monad.Adjunction) concern an equivalence, not tensor-supported objects. Scheme.Modules.restrictFunctorId concerns ordinary scheme modules. None states the finite pro-etale derived comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open tensor product comparison on two product open immersions agrees with tensoring the open counit and restricts to the open unit.",
+   "results": "Scheme.Modules.restrictFunctorComp and restrictFunctorComp_hom_app_app concern ordinary scheme module restriction. Scheme.Pullback.tensorCongr_SpecTensorTo concerns affine scheme products, not derived open extension. No matching map identity.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg counit.*tensor|tensor.*counit Mathlib/CategoryTheory/Adjunction Mathlib/CategoryTheory/Monoidal; rg projectionMap lean/WeilConjectures/CategoryTheory/Adjunction; rg gamma.*natur|rho.*natur lean/Sheaf/Paper lean/WeilConjectures/SixFunctors; blueprint_refs.py search open counit tensor / supported product",
+   "results": "Mathlib Monoidal/Functor map_mu_comp_counit_app_tensor needs monoidal structures on the named functors. Existing source ProjectionMap supplies adjunct and invertibility APIs; ProperOpenProjectionMate supplies the derived-coordinate equation. The exact-pullback transport and the supported product restriction identities are not already stated. The only blueprint supported-product hit is the relative Kunneth unit, whose symmetry paragraph is the source here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProductOpenTensorProjection",
+  "date": "2026-10-26",
+  "group": "H5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Supported product-open tensor restriction and counit comparison in the product compactification proper-reduction calculation.",
+   "via": [
+    "lem-pur-product-open-tensor-projection",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProductOpenSupportNormalization",
+  "file": "lean/Sheaf/Paper/ProductOpenSupportNormalization.lean",
+  "declaration": "WeilConjectures.ProductOpenTensorProjection.productOpenSupportNormalization",
+  "statement": "theorem productOpenSupportNormalization (A : Type (u + 1)) [CommRing A] [Finite A] {Xb Zb B X Z : Scheme.{u}} (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb) [IsOpenImmersion j] [IsOpenImmersion k] (M : FiniteD A X) (N : FiniteD A Z) : w A a b j k M N = tensorMap A (product a b) (chi A a b j k M) (𝟙 ((pull A (second a b)).obj (J A k N))) ≫ e A a b j k M N ∧ Nonempty (tensor A (product a b) (m A a b j k M) ((pull A (second a b)).obj (J A k N)) ≅ (finiteShriek A (productOpen a b j k)).obj (D A a b j k M N)) ∧ (restrictW A a b j k M N).inv ≫ (pull A (productOpen a b j k)).map (w A a b j k M N) = (openUnit A (productOpen a b j k) (D A a b j k M N)).hom",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-pur-product-open-support-normalization",
+  "worker": "stage3",
+  "summary": "Independent step of the original product-open tensor argument; the original item proves the assembly by naturality.",
+  "blueprint": "Symmetry paragraph of lem-sf-kunneth-coherence, in the existing proper-reduction route; no model-purity unit step bypassed.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "The generic open normalization, open compositor, or proper/open tensor mate is used unchanged for this step of the fixed product-compactification argument."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "The generic open normalization, open compositor, or proper/open tensor mate is used unchanged for this step of the fixed product-compactification argument."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0ebe",
+  "group": "H5",
+  "result": "fix",
+  "landing": "20261025T204650-L-2991923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0ebe",
+  "group": "H5",
+  "result": "fix",
+  "landing": "20261025T204650-L-2991923",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/3 split modules vs published ProductOpenTensorProjection.lean (verbatim def move, unchanged Assertion+theorem) and upstream properOpenProjectionMate/FiniteOpenProductSwap defs; nodes vs proof"
+ }
+}

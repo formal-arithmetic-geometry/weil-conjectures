@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-locally-closed-coefficient-extension",
+ "kind": "definition",
+ "title": "Locally closed extension of internal coefficient modules",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $X$ a topologically Noetherian scheme. Let $a:S\\hookrightarrow X$ be a locally closed immersion, in the sense of [def-weil-closed-immersion]. Factor $a=i\\circ j$ through its canonical scheme-theoretic image, where $j=a.\\mathrm{toImage}$ is an open immersion [def-weil-open-immersion] and $i=a.\\mathrm{image\\iota}$ is a closed immersion [def-weil-closed-immersion]. The locally closed coefficient extension is the functor $a_!:=i_*\\circ j_!:\\operatorname{Mod}_{\\Lambda_S}\\to\\operatorname{Mod}_{\\Lambda_X}$, using the coefficient-module open extension by zero of [def-sfb-module-open-lower-shriek] followed by the coefficient-module direct image of [def-sfb-module-lower-star]. Here $\\Lambda_Y=p_Y^*\\Lambda$ and these are internal modules in abelian sheaves on the small pro-etale site, as in the cited module-functor definitions. The construction uses the actual canonical factorization and these actual functors, with no choice of support functor. Empty schemes and the zero module are included.",
+ "stmt_deps": [
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), the supported generator a_!L_0, with a_! = i_*j_! through its closure; existing implementation documented in Sheaf/Paper/CoefficientHeartFiltration.lean, definition coefficientHeartLocallyClosedExtension."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientHeartLocallyClosedExtension|locallyClosed.*(Extension|LowerShriek)",
+   "results": "{\"t\": \"2026-10-22T05:02:06Z\", \"tool\": \"grep\", \"query\": \"coefficientHeartLocallyClosedExtension|locallyClosed.*(Extension|LowerShriek)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match for locally closed extension of internal condensed coefficient modules; use the existing project declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of internal coefficient module sheaves along a locally closed immersion is open extension into the closure followed by closed direct image",
+   "results": "{\"t\": \"2026-10-22T05:02:07Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero of internal coefficient module sheaves along a locally closed immersion is open extension into the closure followed by closed direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"ContinuousLinearMap.extend_zero\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.RingedSpace.res_zero\"], \"digest\": \"8caf5b91c6f6fe04\"}",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match for locally closed extension of internal condensed coefficient modules; use the existing project declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally closed immersion extension by zero internal module objects open immersion lower shriek closed immersion direct image",
+   "results": "{\"t\": \"2026-10-22T05:02:09Z\", \"tool\": \"leanfinder\", \"query\": \"Locally closed immersion extension by zero internal module objects open immersion lower shriek closed immersion direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\"], \"digest\": \"3d90bdd7b240ee2d\"}",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match for locally closed extension of internal condensed coefficient modules; use the existing project declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'coefficientHeartLocallyClosedExtension|locally closed coefficient extension' dag/nodes; python3 tools/blueprint_refs.py search 'locally closed coefficient extension'; rg -n 'coefficientHeartLocallyClosedExtension|locallyClosed.*(Extension|LowerShriek)' lean/WeilConjectures lean/Sheaf lean/.lake/packages/mathlib/Mathlib",
+   "results": "DAG references are statement nodes lem-sfb-supported-finite-stage-topology-defect, det-lem-coefficient-heart-filtration, det-cor-coefficient-heart-ii-generation, det-proper-heart-bound-reduction, lem-sfb-coefficient-heart-sheaf-cone-witness and lem-sfb-coefficient-heart-lisse-extension-constructible. No definition node owns the functor. Blueprint search: 0 blueprint nodes match. No matches in Mathlib or WeilConjectures. Sheaf/Paper/CoefficientHeartFiltration.lean:78 defines coefficientHeartLocallyClosedExtension as openImmersionLowerShriek Λ a.toImage followed by lowerStar Λ a.imageι; other Sheaf matches use it or concern distinct constant-coefficient derived comparison functors.",
+   "date": "2026-10-22",
+   "verdict": "Attach the exact existing declaration to a new definition node; no duplicate Lean definition or new module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-lattice-norm-projection",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), support extension of the integral lisse lattice before rationalization and passage to degree zero.",
+   "via": [
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartFiltration",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeartLocallyClosedExtension",
+  "statement": "def coefficientHeartLocallyClosedExtension {S X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]\n    (a : S ⟶ X) (ha : IsImmersion a) :\n    Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S) ⥤\n      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Owns the existing plain definition only, not coefficientHeart_filtration. Its body is the actual open extension followed by closed direct image, with no theorem choice; no second definition is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4426453f2",
+  "group": "Q42",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4426453f2",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after the H3 RETURN of 83060bea. Diffed against the prior snapshot: the Lean differs only by 2 public imports, the CanonicalPointScalar module and node are identical, and the item stmt_deps replace det-lem-coefficient-heart-filtration with the new definition node def-sfb-locally-closed-coefficient-extension (existing:true, verbatim CoefficientHeartFiltration.lean:78-81, body openImmersionLowerShriek a.toImage ⋙ lowerStar a.imageι, stmt_deps are four definition nodes, no live id collision). The delivery also cites def-sfb-field-action-(geometric-)transport-data directly (prior advisory). Independent clause check passes: primes/char, IsSepClosed, normed IsAlgClosure Ω without completeness, finite IntermediateField E, all-continuous O/A/B with the actual inclusions, finite-type separated T, constructible immersion, lisse L0 of any rank, Q = extend(a_!L0)[0], IsIso of the counit-adjoint pointProjection with canonical data, which are pinned (PointAdjunctionData by unit/counit; PointScalar restriction by normalization, extension by transpose). Edge cases S=T=∅ and L0=0 are covered. Proofs are sorry only, and the report sections are present. Advisories: the def node cites def-weil-closed-immersion for 'locally closed immersion', and the existing docstring keeps the old blueprint tag. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261023T230625-L-3452737",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.coefficientHeart_filtration"
+  ],
+  "sorry_after": []
+ }
+}

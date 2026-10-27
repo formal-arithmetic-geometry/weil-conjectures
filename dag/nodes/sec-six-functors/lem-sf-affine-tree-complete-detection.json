@@ -1,0 +1,158 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-sf-affine-tree-complete-detection",
+ "kind": "statement",
+ "title": "Detection of completeness on affine finite-tree covers",
+ "statement": "For any scheme X and any ambient completed-coefficient derived object H, suppose each affine open admits a finite qcqs open-closed tree and each nonempty leaf has a finite jointly point-surjective pro-etale family with qcqs domains. If the ordinary restriction of H to every such domain is complete, then H is complete on X. There is no constructibility, boundedness or tensor hypothesis on H.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 099M, 09BL, 09BM"
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-sfb-qcqs-open-closed-tree"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical completion-unit criterion on X and on each covering domain. Prove privately the arbitrary-target version of ordinary restriction exactness: the immersion inverse images preserve small limits without qcqs hypotheses; weakly etale inverse image is slice restriction. Compare finite coefficient maps and their inverse limit, then forget modules to abelian sheaves. Assemble the normalized finite quotient comparisons and both Roos coordinates, descend on good representatives, and obtain the unit-isomorphism criterion for a weakly etale map followed by an immersion into arbitrary X. Exact derived composition compares successive restrictions with the pullback along their composite.",
+   "uses": [
+    "lem-fix-qcqs-completion-unit-criterion",
+    "lem-fix-proetale-immersion-algebraic-limits-universes",
+    "lem-fix-proetale-ringed-pullback-underlying-universes",
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "lem-fix-ordinary-quotient-module-comparison",
+    "lem-fix-qcqs-ordinary-quotient-restriction",
+    "lem-fix-qcqs-ordinary-restriction-models",
+    "lem-fix-qcqs-completion-unit-restriction",
+    "lem-fix-qcqs-completion-comparison-unit",
+    "lem-fix-ordinary-completed-pull-coherence",
+    "lem-fix-qcqs-ordinary-local-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix an affine open U and the image of the global unit under ordinary derived restriction to U. Prove conservativity by structural induction on its actual QcqsOpenClosedTree, retaining an arbitrary immersion from the current root into U. At a nonempty leaf the finite point-surjective family is a pro-etale cover: qcqs domains give quasi-compact chart maps and the finite spectral-map covering criterion supplies its quasi-compact-cover condition. Apply ordinary cover detection. At an empty leaf all module sheaves and all their derived cohomology are zero. At a split, apply open-closed joint conservativity and the two induction hypotheses, with branch paths giving the composite maps. Canonical-unit restriction and exact derived composition turn the supplied completeness assumptions into the leaf tests.",
+   "uses": [
+    "def-sfb-qcqs-open-closed-tree",
+    "lem-fix-qcqs-ordinary-local-detection",
+    "lem-fix-qcqs-completion-unit-tree",
+    "lem-fix-qcqs-completion-unit-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pro-etale objects associated to all affine open immersions cover the terminal object: their Zariski cover is a pro-etale cover. Ordinary ring inverse image along each chart preserves small limits, so the actual completed coefficient adjunct is invertible. Apply the general ringed-pullback underlying-sheaf comparison using the slice-restriction adjunction as the abelian inverse image. Thus forgetting ordinary module pullback gives sectionwise abelian-sheaf restriction, with no qcqs-base or nonempty-base hypotheses. The covering family covers the top of the site, hence detects isomorphisms of underlying abelian sheaves and then modules. All chart pullbacks are exact; joint reflection passes to the unbounded derived categories. Consequently the global canonical unit is invertible. Apply the canonical-unit criterion. Empty schemes and height-zero trees are included.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "lem-fix-proetale-ringed-pullback-underlying-universes",
+    "lem-fix-qcqs-ordinary-local-detection",
+    "lem-fix-qcqs-completion-unit-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-qcqs-completion-unit-criterion",
+  "lem-fix-proetale-immersion-algebraic-limits-universes",
+  "lem-fix-proetale-ringed-pullback-underlying-universes",
+  "lem-fix-qcqs-ordinary-restriction-exact",
+  "lem-fix-ordinary-quotient-module-comparison",
+  "lem-fix-qcqs-ordinary-quotient-restriction",
+  "lem-fix-qcqs-ordinary-restriction-models",
+  "lem-fix-qcqs-completion-unit-restriction",
+  "lem-fix-qcqs-completion-comparison-unit",
+  "lem-fix-ordinary-completed-pull-coherence",
+  "lem-fix-qcqs-ordinary-local-detection",
+  "def-sfb-qcqs-open-closed-tree",
+  "lem-fix-qcqs-completion-unit-tree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (lemma-naive-completion), Tags 09BL and 09BM for immersion restriction; Bhatt--Scholze Lemma 6.5.8 and Remark 6.5.10. Private unrestricted-base assembly of the existing models, structural tree induction, and affine-cover reflection via the general underlying-sheaf comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completeness of a complex of sheaves is local on finite open closed stratifications and affine open covers",
+   "results": "Eight sheaf locality and derived category matches; none concerns the canonical completed-coefficient quotient unit.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product of bounded constructible derived complete integral complexes of finite Tor amplitude is derived complete",
+   "results": "Eight generic tensor, Tor and module adic-completion matches; no completed-coefficient sheaf-complex chart or locality theorem. A separate common-chart query returned eight affine transition-limit matches.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.IsZero\", \"CategoryTheory.Functor\"; \"IsIso\", \"tensor\"",
+   "results": "The zero-functor query returned no matches. Five generic tensor-isomorphism results do not supply any sheaf quotient-tower or chart assertion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|DerivedComplete|locallyComplete|[Cc]omplete.*[Tt]ensor|[Tt]ensor.*[Cc]omplete in Mathlib Algebra/Homology, module sheaves and algebraic geometry sites",
+   "results": "No matches in those Mathlib directories. Project comparison of the planned three modules finds extra invertibility hypotheses. Blueprint searches for finite projective complete, completion locality, and tensor pullback return no exact blueprint node.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteTorOrdinaryTensorComplete",
+  "date": "2026-10-27",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof of fix-prop-coherence, completeness of the ordinary tensor: Detection of completeness on affine finite-tree covers",
+   "via": [
+    "lem-sf-finite-tor-ordinary-tensor-complete",
+    "lem-sf-primitive-completion-effectivity",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AffineTreeCompleteDetection",
+  "file": "lean/Sheaf/SixFunctors/AffineTreeCompleteDetection.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.affineTreeCompleteDetection",
+  "statement": "theorem affineTreeCompleteDetection (X : Scheme.{t})\n    (H : IntegralOnSlice.D.{t, u} l E X none)\n    (h : ∀ (U : X.Opens), IsAffine U.toScheme →\n      ∃ tree : QcqsOpenClosedTree U.toScheme,\n        ∀ (S : Scheme.{t}) (p : tree.Path S), p.IsLeaf → Nonempty S →\n          ∃ (c : ℕ) (A : Fin c → S.ProEt),\n            (∀ i, CompactSpace (A i).left) ∧\n            (∀ i, QuasiSeparatedSpace (A i).left) ∧\n            (∀ x : S, ∃ i, x ∈ Set.range (A i).hom.base) ∧\n            ∀ i : Fin c, IntegralOnSlice.IsComplete.{t, u} l E (A i).left none\n              ((IntegralOnSlice.ordinaryDerivedPull.{t, u} l E\n                ((A i).hom ≫ p.toRoot ≫ U.ι)).obj H)) :\n    IntegralOnSlice.IsComplete.{t, u} l E X none H",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261026T235909-L-1466849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T034616-L-3665723",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

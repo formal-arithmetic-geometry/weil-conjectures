@@ -1,0 +1,134 @@
+{
+ "id": "def-pur-finite-ring-site-tensor-transport-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose; Shared canonical data for finite-ring site tensor transport",
+   "via": [
+    "lem-pur-finite-ring-site-tensor-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Shared canonical data for finite-ring site tensor transport",
+ "statement": "The canonical site pullback, tensor, unit and pullback-square identifications, compact-support functors and projection components, restrictions to object properties, and the full transport proposition, with exactly the definitions of the original finite-ring transport interface. The site data use ordinary unbounded derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules] and canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. No mathematical definition or signature is altered.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "sk-prop-sf-existence",
+  "det-ctf-finite-comparison-localizing",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-amb-proper-coproducts-projection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose; factored into the precise categorical or canonical-map step recorded below."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image commutes with the tensor unit and the signed braiding and with compact support projection maps",
+   "results": "8 hits: braiding_inv_tensorUnit_right, braiding_inv_tensorUnit_left_assoc, braiding_inv_tensorUnit_right_assoc, braiding_inv_tensorUnit_left, HomologicalComplex.rightUnitor_inv, Comon.monoidal_tensorUnit_comon_comul, MonoidalCategory.tensor_ε, leftUnitor_inv_braiding.",
+   "date": "2026-10-25",
+   "verdict": "General monoidal identities only; no equality for the named site comparisons or compact-support projection maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived inverse image tensor comparison preserves the tensor unit and braiding; compact support projection formula comparison between sites",
+   "results": "8 hits including SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, GrothendieckTopology.W.transport_isMonoidal, and ordinary sheaf pushforward isomorphisms.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary sheaf results do not state the named unbounded-derived identities; generic categorical results are used in the proved transport helper."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comparison|comparison.*projection",
+   "results": "0 hits in the Mathlib search service. Local source search finds the named canonical maps in the project; none proves the two new site identities.",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib theorem; use project canonical comparisons and split only their required equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingSiteTensorTranspose",
+  "date": "2026-10-25",
+  "group": "S3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingSiteTensorTransposeData",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingSiteTensorTransposeData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteRingSitePull",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteRingSitePull",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensor",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteUnit",
+   "AlgebraicGeometry.ProEtale.finiteRingSitePullback",
+   "AlgebraicGeometry.ProEtale.finiteRingEtaleShriek",
+   "AlgebraicGeometry.ProEtale.finiteRingProShriek",
+   "AlgebraicGeometry.ProEtale.finiteRingEtalePF",
+   "AlgebraicGeometry.ProEtale.finiteRingProPF",
+   "AlgebraicGeometry.ProEtale.finiteRingRestriction",
+   "AlgebraicGeometry.ProEtale.finiteRingImageLift",
+   "AlgebraicGeometry.ProEtale.finiteRingTensorPullbackComparison",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeStatement",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeSiteFunctors",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeCanonicalTensor",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeCanonicalSymmetry",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeWithCoefficients"
+  ],
+  "statement": "abbrev finiteRingSitePull (B : Type) [CommRing B] [Finite B] (T : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pur-finite-ring-site-tensor-transpose",
+  "worker": "S3",
+  "summary": "Shared canonical data for finite-ring site tensor transport",
+  "blueprint": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1067",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T123735-L-1895222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1067",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T123735-L-1895222",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved defs, Data module vs clone item module, verbatim; theorem signature byte-identical; FiniteGeneralRing importer compiled against the delivered modules (37 s ok); #print axioms: main theorem sorryAx only via the two split-off statements, helpers clean; projection square = the item's own Statement conjunct"
+ }
+}

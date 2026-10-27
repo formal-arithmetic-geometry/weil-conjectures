@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-pseudodifferential-residual-kernel",
+ "kind": "statement",
+ "title": "Residual pseudodifferential operators have smooth distributional kernels",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $N$ be a compact oriented smooth manifold without boundary of dimension $m\\geq1$, with a smooth Riemannian metric and its positive volume form $dV$. Let $E,F,G$ be smooth finite-rank real vector bundles. Use the distribution spaces, symbol classes $S^r$ and operator classes $\\Psi^r$ of [def-sfb-symbol-pseudodifferential-operators]. Let $T:\\mathcal D\\prime(E)\\to\\mathcal D\\prime(F)$ be a continuous real-linear map. If $T\\in\\Psi^{-L}(E,F)$ for every integer $L\\geq1$, then there exists a real smooth section $$K\\in\\Gamma^\\infty\\bigl(N\\times N,\\operatorname{Hom}_{\\mathbf R}(\\operatorname{pr}_2^*E,\\operatorname{pr}_1^*F)\\bigr)$$ such that $T=R_K$ as maps on all of $\\mathcal D\\prime(E)$. Here $R_K$ is defined using $dV$ and distributional duality as in [def-sfb-symbol-pseudodifferential-operators]; on smooth sections, $$Tu(x)=\\int_NK(x,y)u(y)\\,dV(y).$$",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Demailly, Part I §3.B, printed pp.12–14 (PDF pages 24–26); WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf; paragraph following Proposition 3.6, printed p.13: regular operators and smooth integral kernels; residual-order formulation with equality of distributional actions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Fix $k\\geq0$ and take $L=m+k+1$. The hypothesis and [def-sfb-symbol-pseudodifferential-operators] give a finite representation $T=\\sum_i\\chi_i\\operatorname{Re}\\operatorname{Op}(a_i)\\psi_i+R_{S_k}$ with each $a_i$ of order $-L<-m-k$ and $S_k$ smooth. Apply [lem-sfb-negative-symbol-finite-kernel] in each chart. Write $dV=\\gamma_i(y)\\,dy$ there, with $\\gamma_i>0$. The real local matrix kernel $\\operatorname{Re}H_i(x,y)/\\gamma_i(y)$ defines a bundle homomorphism $E_y\\to F_x$ in the chosen frames. Extend it by zero; its support lies in $\\operatorname{supp}\\chi_i\\times\\operatorname{supp}\\psi_i$, a compact subset of the chart product, so this is a global $C^k$ section of the required Hom bundle. The finite sum with $S_k$ is a real $C^k$ kernel $K_k$. The local integral identity and the factor $\\gamma_i^{-1}$ show, for every smooth section $u$, that $$Tu=\\int_N K_k(\\mathord\\cdot,y)u(y)\\,dV(y)$$ as distributions, with a continuous (indeed $C^k$) representative. This construction allows a different representation of $T$ for each $k$; it does not assume one symbol belongs to every negative order.",
+   "uses": [
+    "lem-sfb-negative-symbol-finite-kernel",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3, (3.3)–(3.5), Schwartz kernel (3.8)–(3.9), pp.6–8, and regularizing operators (3.12), pp.9–10. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Finite differentiability version of the Fourier-kernel argument, with the 1/(2π)^m convention of def-sfb-symbol-pseudodifferential-operators."
+   }
+  },
+  {
+   "text": "We will use the following consequence of the three cited scalar statements: a continuous bundle section representing the zero distribution is zero pointwise. In a chart and frame, test one coefficient against $g\\,|dx|$ with arbitrary smooth real $g$ compactly supported in that chart. That coefficient, viewed as complex-valued and extended by zero off the chart, is locally integrable by [lem-sfb-continuous-local-integrability]. Its test integrals vanish, so [lem-sfb-smooth-test-ae-separation] makes it zero almost everywhere on the chart. By [lem-sfb-continuous-ae-pointwise] it is zero at every point of the chart. Apply this to every coefficient and every chart. The test-density and smooth-section embeddings used here are precisely [def-sfb-smooth-bundle-test-distributions]; no fibre metric or trivialization of the bundle globally is needed.",
+   "uses": [
+    "lem-sfb-continuous-local-integrability",
+    "lem-sfb-smooth-test-ae-separation",
+    "lem-sfb-continuous-ae-pointwise",
+    "def-sfb-smooth-bundle-test-distributions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3, (3.3)–(3.5), Schwartz kernel (3.8)–(3.9), pp.6–8, and regularizing operators (3.12), pp.9–10. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Finite differentiability version of the Fourier-kernel argument, with the 1/(2π)^m convention of def-sfb-symbol-pseudodifferential-operators."
+   }
+  },
+  {
+   "text": "For every smooth $u$, the continuous sections obtained in step 1 for $k$ and $0$ represent the same distribution $Tu$. Step 2 therefore gives $$\\int_N (K_k-K_0)(x,y)u(y)\\,dV(y)=0\\quad\\text{for every }x.$$ Fix $x$ and one coordinate functional on $F_x$. In any input chart and frame, take $u$ with one coefficient an arbitrary compactly supported smooth real function $g$ and all other coefficients zero, and extend it by zero. Each resulting scalar coefficient $h(y)$ of $(K_k-K_0)(x,y)$ is continuous. The displayed identity says $\\int g(y)h(y)\\gamma(y)\\,dy=0$. By [lem-sfb-continuous-local-integrability], $h\\gamma$ is locally integrable; [lem-sfb-smooth-test-ae-separation] and [lem-sfb-continuous-ae-pointwise] give $h\\gamma=0$ pointwise. Since $\\gamma>0$, $h=0$. All input coefficients and output coordinate functionals vanish in this way, hence $K_k=K_0$ pointwise on $N\\times N$.",
+   "uses": [
+    "lem-sfb-continuous-local-integrability",
+    "lem-sfb-smooth-test-ae-separation",
+    "lem-sfb-continuous-ae-pointwise",
+    "def-sfb-smooth-bundle-test-distributions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3, (3.3)–(3.5), Schwartz kernel (3.8)–(3.9), pp.6–8, and regularizing operators (3.12), pp.9–10. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Finite differentiability version of the Fourier-kernel argument, with the 1/(2π)^m convention of def-sfb-symbol-pseudodifferential-operators."
+   }
+  },
+  {
+   "text": "Set $K=K_0$. For every finite $k$, step 3 identifies this very section with the $C^k$ section $K_k$. Thus every local matrix coefficient is $C^k$ for all $k$, which is the definition of smoothness. The kernel is real, has the required bundle type, and its integral agrees with $Tu$ on all smooth $u$ by step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3, (3.3)–(3.5), Schwartz kernel (3.8)–(3.9), pp.6–8, and regularizing operators (3.12), pp.9–10. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Finite differentiability version of the Fourier-kernel argument, with the 1/(2π)^m convention of def-sfb-symbol-pseudodifferential-operators."
+   }
+  },
+  {
+   "text": "Use one finite representation of $T$, for example the one with $L=m+1$. By the transposition convention of [def-sfb-symbol-pseudodifferential-operators], it has a test-density transpose $B$ with $(Tu)(\\phi)=u(B\\phi)$ for every distribution $u$. Both spatial cutoffs are included in each local transpose. The same definition gives the transpose $C_K$ of the smooth-kernel action, with $(R_Ku)(\\phi)=u(C_K\\phi)$. Explicitly, if $\\phi(x)=\\ell(x)dV(x)$, then $$(C_K\\phi)(y)=\\left(\\int_N\\ell(x)\\circ K(x,y)\\,dV(x)\\right)dV(y).$$ For every smooth $u$, step 4 gives $u(B\\phi-C_K\\phi)=((T-R_K)u)(\\phi)=0$. The difference is a smooth dual-density section. Test its coefficients using arbitrary smooth $u$ supported in one chart. The scalar local-integrability, test-separation and continuous-almost-everywhere statements, exactly as in step 2, imply $B\\phi-C_K\\phi=0$ pointwise. Consequently $(Tu)(\\phi)=u(B\\phi)=u(C_K\\phi)=(R_Ku)(\\phi)$ for every $u\\in\\mathcal D'(E)$ and every test $\\phi$. Equality of functionals proves $T=R_K$ on all distributions. No approximation of $u$ or Sobolev assumption is used.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "def-sfb-smooth-bundle-test-distributions",
+    "lem-sfb-continuous-local-integrability",
+    "lem-sfb-smooth-test-ae-separation",
+    "lem-sfb-continuous-ae-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3, (3.3)–(3.5), Schwartz kernel (3.8)–(3.9), pp.6–8, and regularizing operators (3.12), pp.9–10. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Finite differentiability version of the Fourier-kernel argument, with the 1/(2π)^m convention of def-sfb-symbol-pseudodifferential-operators."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-negative-symbol-finite-kernel",
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-continuous-local-integrability",
+  "lem-sfb-smooth-test-ae-separation",
+  "lem-sfb-continuous-ae-pointwise",
+  "def-sfb-smooth-bundle-test-distributions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "Online Demailly §3, (3.8)–(3.13); Q95 expands the finite-order kernel construction, uniqueness across different representations, and transpose identification on all distributions. Local document WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pseudodifferential operator of every negative order on a compact manifold has a smooth Schwartz kernel on distributions",
+   "results": "{\"t\": \"2026-10-24T03:28:42Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudodifferential operator of every negative order on a compact manifold has a smooth Schwartz kernel on distributions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.toSchwartzMap\", \"SchwartzMap.mkLM\", \"SchwartzMap.smooth\", \"SchwartzMap.smooth'\", \"HasCompactSupport.toSchwartzMap_toFun\", \"ContDiffMapSupportedInClass\", \"SchwartzMap\", \"ContDiffMapSupportedIn\"], \"digest\": \"eda2bfe1971f15df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth Schwartz functions and Fourier integrals, not smooth kernels of residual operators; the grep hit at Distribution.lean:75 is a future-work comment, not a declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schwartz\", \"kernel\"",
+   "results": "{\"t\": \"2026-10-24T03:28:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Schwartz\\\", \\\"kernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth Schwartz functions and Fourier integrals, not smooth kernels of residual operators; the grep hit at Distribution.lean:75 is a future-work comment, not a declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothingOperator|smoothing_kernel|smoothKernel|schwartzKernel|Schwartz.*kernel|kernel.*Schwartz",
+   "results": "{\"t\": \"2026-10-24T03:28:41Z\", \"tool\": \"grep\", \"query\": \"smoothingOperator|smoothing_kernel|smoothKernel|schwartzKernel|Schwartz.*kernel|kernel.*Schwartz\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/Distribution.lean\"], \"digest\": \"6e7b1151dc0d912b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth Schwartz functions and Fourier integrals, not smooth kernels of residual operators; the grep hit at Distribution.lean:75 is a future-work comment, not a declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitely smoothing pseudodifferential operators are integral operators with smooth kernels",
+   "results": "{\"t\": \"2026-10-24T03:28:41Z\", \"tool\": \"leansearch\", \"query\": \"Infinitely smoothing pseudodifferential operators are integral operators with smooth kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.integralCLM\", \"Real.fourierIntegralInv\", \"SchwartzMap.smooth\", \"SchwartzMap.fourierTransformCLM\", \"contDiffOn_infty_iff_fderivWithin\", \"contMDiff_infty\", \"SchwartzMap.smooth'\", \"SchwartzMap.instFourierPair\"], \"digest\": \"c7d1169d43e3b0c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth Schwartz functions and Fourier integrals, not smooth kernels of residual operators; the grep hit at Distribution.lean:75 is a future-work comment, not a declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection of all pseudodifferential order classes equals the operators with infinitely differentiable integral kernels",
+   "results": "{\"t\": \"2026-10-24T03:28:45Z\", \"tool\": \"leanfinder\", \"query\": \"Intersection of all pseudodifferential order classes equals the operators with infinitely differentiable integral kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"le_minSmoothness\", \"minSmoothness\", \"SchwartzMap.smooth\", \"minSmoothness_eq_infty\", \"minSmoothness_def\", \"SchwartzMap.smooth'\", \"SchwartzMap\", \"TestFunctionClass\"], \"digest\": \"4e86dc13ae531547\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth Schwartz functions and Fourier integrals, not smooth kernels of residual operators; the grep hit at Distribution.lean:75 is a future-work comment, not a declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudodifferential operator of arbitrarily negative order has a smooth integral kernel",
+   "results": "{\"t\": \"2026-10-24T04:13:53Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudodifferential operator of arbitrarily negative order has a smooth integral kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.integralCLM\", \"SchwartzMap.integrable_pow_mul_iteratedFDeriv\", \"ExistsContDiffBumpBase.u_smooth\", \"SchwartzMap.integralCLM_apply\", \"Function.HasTemperateGrowth.toTemperedDistribution\", \"ExistsContDiffBumpBase.y\", \"SchwartzMap.integrable\", \"Function.HasTemperateGrowth.toTemperedDistribution_apply\"], \"digest\": \"b9e7fbcd26b973a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map integration, convolution regularity and Fourier transform definitions do not state the residual pseudodifferential kernel theorem on bundles; no project attachment or Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kernel\", \"ContDiff\"",
+   "results": "{\"t\": \"2026-10-24T04:13:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"kernel\\\", \\\"ContDiff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map integration, convolution regularity and Fourier transform definitions do not state the residual pseudodifferential kernel theorem on bundles; no project attachment or Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|smoothKernel|smoothingOperator|schwartzKernel",
+   "results": "{\"t\": \"2026-10-24T04:13:54Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|smoothKernel|smoothingOperator|schwartzKernel\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map integration, convolution regularity and Fourier transform definitions do not state the residual pseudodifferential kernel theorem on bundles; no project attachment or Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrarily smoothing pseudodifferential operator is given by a smooth kernel",
+   "results": "{\"t\": \"2026-10-24T04:15:32Z\", \"tool\": \"leansearch\", \"query\": \"An arbitrarily smoothing pseudodifferential operator is given by a smooth kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.contDiffOn_convolution_right_with_param_comp\", \"SchwartzMap.fourierTransformCLM\", \"SchwartzMap.smooth\", \"SchwartzMap.instFourierPair\", \"SchwartzMap.instFourierTransform\", \"SchwartzMap.instFourierTransform.congr_simp\", \"SchwartzMap.smooth'\", \"SchwartzMap.mkCLM\"], \"digest\": \"036dfbf734b489a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map integration, convolution regularity and Fourier transform definitions do not state the residual pseudodifferential kernel theorem on bundles; no project attachment or Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-distribution-parametrix",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: paragraph following Proposition 3.6, printed p.13: regular operators and smooth integral kernels; residual-order formulation with equality of distributional actions.",
+   "via": [
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pseudodifferential-residual-kernel",
+  "worker": "stage1",
+  "summary": "Q95 proves the unchanged residual-operator statement by constructing C^k kernels from order -(m+k+1) representations, proving their uniqueness using existing scalar test-separation leaves, and comparing test-density transposes to get equality on every distribution. One new unsplit Euclidean finite-order Fourier-kernel statement; no redundant scalar separation nodes. The proof never infers one rapidly decreasing symbol from unrelated order representations and does not invoke a Schwartz kernel theorem or strong-dual density.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited analytic prerequisite below det-thm-sf-ctf-stability-direct-images. Realizes the parent parametrix proof step 4. blueprint_refs ancestor returns None for the existing ancestry; preserve from.node=null and inherited via/place. Whole-blueprint searches smooth kernel, distribution, pseudodifferential, Fourier, test function, symbol, quantization, negative symbol, finite kernel and compactly supported kernel find no analytic duplicate. No unit-level route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-94993e9bd",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-94993e9bd (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-negative-symbol-finite-kernel and every cited statement in full: def-sfb-symbol-pseudodifferential-operators, def-sfb-smooth-bundle-test-distributions and the three scalar leaves (local integrability, smooth-test a.e. separation, continuous a.e.-to-pointwise). The source is Demailly (Hodge-AMS §3.B and the pseudodifferential course §3, (3.8)-(3.13)). Neither is in literature/ and both are marked WANTED, so I checked the mathematics directly, not against the source. New node: on supp χ, a mixed derivative of order ≤k of the integrand is bounded by C(1+|ξ|)^{r+k}, which is integrable because r<-m-k. Dominated convergence then gives C^k regularity, the derivative formulas and uniform convergence of the ρ(ξ/R) truncations. Fubini gives the action identity, and Re(Hf)=(Re H)f gives the real clause for real f. Support in supp χ × supp ψ, compact in U×U, makes the extension by zero C^k. The strict inequality is needed: at r=-m-k the integral diverges logarithmically. For m=1, k=0, r=-2 the kernel is continuous but not C^1, which fits the threshold. The node is a statement only, self-contained, strictly smaller than the item and not one of its clauses. It duplicates no existing node (compact-symbol-frequency-kernel and fourier-moment-representative differ), and its searches are logged. Step 1: L=m+k+1 gives order -L<-m-k. Dividing by γ_i converts dy to dV, the kernel has the direction E_y→F_x, and extension by zero gives a global C^k K_k. A different representation is allowed for each k. Steps 2-3: the three scalar leaves are applied with their hypotheses met. Continuous representatives agree pointwise, and testing against single-coefficient chart-supported u gives hγ=0, hence K_k=K_0 since γ>0. No Schwartz kernel theorem is used. Step 4 (elementary): K_0 is C^k for every k, so it is smooth. Step 5: the transposes of the definition give (Tu)(φ)=u(Bφ). Bφ-C_Kφ is a smooth dual density that every smooth u annihilates, so it is zero, and T=R_K on all distributions with no density or Sobolev argument. This matches how the citer, lem-sfb-elliptic-distribution-parametrix, uses the item in its step 4. No repair note applies, there is no SGA citation, the blueprint fields are consistent with the inherited null ancestor, there are no tool_uses and I made no changes."
+ }
+}

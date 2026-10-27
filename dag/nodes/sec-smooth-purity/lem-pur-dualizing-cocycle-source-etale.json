@@ -1,0 +1,181 @@
+{
+ "id": "lem-pur-dualizing-cocycle-source-etale",
+ "kind": "statement",
+ "title": "Canonical dualizing tensor cocycle and its etale source consequence",
+ "statement": "Fix the finite coefficient datum and the specified counit-normalized maps of [def-pur-conventions], [lem-pur-finite-etale-dualizing-normalization] and [def-pur-finite-exceptional-composition]. For every composable smooth triple of separated finite-type morphisms of pure nonnegative relative dimensions between finite-type k-schemes, sigma satisfies the threefold cocycle, with the canonical associator, pullback-composition and tensor-pullback comparisons inserted. For the same triple with etale first arrow f, postcomposition of sigma_(fg),h with the associativity congruence and E_f,gh equals the tensor of E_f,g with the pullback compositor, followed by inverse tensor-pullback comparison and f^*sigma_g,h. No base-change, general open-locality, or finite-expression assertion is part of this lemma.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+ },
+ "stmt_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-finite-exceptional-composition",
+  "def-pur-co-smoothness",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-etale-morphism",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "First fix the comparison maps, including their domains. For every smooth pair, [lem-pur-composition-tensor-mate] gives that the composite is smooth of the summed pure dimension, that the required exceptional images and dualizing objects lie in $D^b_{ctf}$, and that $c$, $\\theta$ and $\\sigma$ on these inputs are isomorphisms. It also supplies etale-origin witnesses for the compact-support adjunctions. The site/counit transport in [lem-pur-finite-site-counit-projection-transport] identifies the specified finite exceptional compositor with the conjugate of the compact-support compositor used there, so these are the maps of the statement. Write $G_a=Ra^!$. Associativity of compact supports [thm-sf-comp-composition], conjugation [def-weil-pbc-adjunction-conjugate], and pasting along composite adjunctions [lem-weil-pbc-mate-pasting] give\n$$C:=(G_u c_{w,v,\\Lambda})c_{wv,u,\\Lambda}=c_{v,u,\\omega_w}c_{w,vu,\\Lambda}:\\omega_{wvu}\\xrightarrow{\\sim}G_uG_v\\omega_w.$$\nIndeed these two conjugates are the two sides of compact-support associativity, so their equality follows by the conjugation bijection and the pasting law. We henceforth insert the tensor, symmetry and threefold pullback comparisons of [lem-pur-smooth-exceptional-tensor-pasting]; its final clause ensures that these reassociations are the same in either order.",
+   "uses": [
+    "lem-pur-composition-tensor-mate",
+    "lem-pur-finite-site-counit-projection-transport",
+    "thm-sf-comp-composition",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-smooth-exceptional-tensor-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1, coherence of composition and tensor reassociation, and etale localization of the remaining constituents (old item steps 6-7); agent-written refinement of the blueprint argument"
+   }
+  },
+  {
+   "text": "Put $K=\\omega_w$ in $(*)$ of [lem-pur-composition-tensor-mate], with $f=u$, $g=v$. This is an allowed finite-Tor input by the same lemma applied to a pair ending in $w$. Let\n$$D=\\omega_u\\otimes Lu^*\\omega_v\\otimes Lu^*Lv^*\\omega_w,$$\nand let $s:D\\xrightarrow{\\sim}Lu^*(Lv^*\\omega_w\\otimes\\omega_v)\\otimes\\omega_u$ be the canonical permutation and reassociation. After postcomposition with $C$ from Step 1, the left side of the desired cocycle becomes\n$$c_{v,u,K}\\theta_{vu,K}\\mathrm{sym}(\\sigma_{u,v}\\otimes1)=\\theta_{u,G_vK}(Lu^*\\theta_{v,K}\\otimes1)s,$$\nexactly $(*)$ after moving $L(vu)^*K$ to the first factor. For the right side, use naturality of the specified tensor transpose [def-pur-co-smoothness] with the arrow $c_{w,v,\\Lambda}:\\omega_{wv}\\to G_vK$. Its postcomposition with $C$ is\n$$G_u(c_{w,v,\\Lambda})\\theta_{u,\\omega_{wv}}\\mathrm{sym}(1\\otimes Lu^*\\sigma_{v,w})\n=\\theta_{u,G_vK}(Lu^*(c_{w,v,\\Lambda}\\sigma_{v,w})\\otimes1)\\mathrm{sym}\n=\\theta_{u,G_vK}(Lu^*\\theta_{v,K}\\otimes1)s.$$\nHere $c_{w,v,\\Lambda}\\sigma_{v,w}=\\theta_{v,K}\\mathrm{sym}$ is the defining formula for $\\sigma$. Both arrows from $D$ therefore agree after the isomorphism $C$; cancellation proves the cocycle.",
+   "uses": [
+    "lem-pur-composition-tensor-mate",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1, coherence of composition and tensor reassociation, and etale localization of the remaining constituents (old item steps 6-7); agent-written refinement of the blueprint argument"
+   }
+  },
+  {
+   "text": "Suppose now that $u$ is etale. From clause (3) of [lem-pur-finite-etale-dualizing-normalization],\n$$E_{u,h}\\sigma_{u,h}=\\eta_u\\otimes1$$\nwith the unitor inserted, for $h=v,wv$. Postcompose the cocycle of Step 2 with $E_{u,wv}$ and use these two equalities. The resulting equality is\n$$E_{u,wv}\\sigma_{vu,w}(\\sigma_{u,v}\\otimes1)=Lu^*\\sigma_{v,w}((E_{u,v}\\sigma_{u,v})\\otimes1).$$\nCancel the isomorphism $\\sigma_{u,v}\\otimes1$. This gives precisely the asserted etale source identity, with its domain $\\omega_{vu}\\otimes L(vu)^*\\omega_w$ and codomain $Lu^*\\omega_{wv}$. The only removal of a dualizing factor here is by the prescribed $\\eta_u$.",
+   "uses": [
+    "lem-pur-finite-etale-dualizing-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1, coherence of composition and tensor reassociation, and etale localization of the remaining constituents (old item steps 6-7); agent-written refinement of the blueprint argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-composition-tensor-mate",
+  "lem-pur-finite-site-counit-projection-transport",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-smooth-exceptional-tensor-pasting",
+  "def-pur-co-smoothness",
+  "lem-pur-finite-etale-dualizing-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dualizing tensor cocycle and normalized open restriction of exceptional pullback",
+   "results": "Scheme.Modules.restrictFunctorIsoPullback (Mathlib.AlgebraicGeometry.Modules.Sheaf); Subspace.dualRestrict_leftInverse; CochainComplex.HomComplex.Cocycle. These concern ordinary restrictions or Hom-complex cocycles, not the specified exceptional maps.",
+   "date": "2026-10-25",
+   "verdict": "no match: none supplies the canonical dualizing maps or their coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the canonical dualizing tensor composition is associative and compatible with normalized etale source restriction",
+   "results": "Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Scheme.Hom.toNormalization_normalizationDesc_assoc and other normalization identities. No exceptional dualizing comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_comp",
+   "results": "CategoryTheory.conjugateEquiv_comp in Mathlib.CategoryTheory.Adjunction.Mates gives abstract conjugation functoriality. Read also CompositionIso.lean:60-87; the abstract laws do not give the geometric tensor or open-restriction identities by specialization.",
+   "date": "2026-10-25",
+   "verdict": "no match: a tool for the proof, not the whole statement"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing.*cocycle|sigma.*cocycle|OpenSigma|sourceEtale in Mathlib/CategoryTheory, Mathlib/AlgebraicGeometry, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search dualizing tensor cocycle and normalized open restriction",
+   "results": "No Mathlib match. The Sheaf parent states the full assertion, and FiniteEtaleDualizingNormalization and SmoothExceptionalTensorPasting supply its primitive normalizations and Cartesian identities. No independent statement of either remaining step. Zero blueprint-node matches for both phrases.",
+   "date": "2026-10-25",
+   "verdict": "no match: these are strictly partial steps of the existing parent argument"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DualizingSigmaCocycleLocality",
+  "date": "2026-10-25",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1: coherence of the composition isomorphisms and compatible etale localization",
+   "via": [
+    "lem-pur-dualizing-sigma-cocycle-locality",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DualizingCocycleSourceEtale",
+  "file": "lean/Sheaf/Paper/DualizingCocycleSourceEtale.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DualizingLocality.dualizing_cocycle_source_etale",
+  "statement": "theorem dualizing_cocycle_source_etale (P : WeilConjectures.PurityFiniteSetting.{u}) : (∀ {S X Y Z : Scheme.{u}} [S.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))] [QuasiCompact (S ↘ Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] (f : S ⟶ X) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (df : ℕ) [SmoothOfRelativeDimension df f] (g : X ⟶ Y) [g.IsOver (Spec (.of P.field.k))] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (dg : ℕ) [SmoothOfRelativeDimension dg g] (h : Y ⟶ Z) [h.IsOver (Spec (.of P.field.k))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (dh : ℕ) [SmoothOfRelativeDimension dh h], Etale.derivedTensorHom (ModuleCat.{u + 1} P.Coefficient) ((FiniteEtaleNormalization.sigma (ModuleCat.{u + 1} P.Coefficient) f g (cf := compactification P f) (cg := compactification P g) (cfg := compactification P (f ≫ g)) (comp P f g))) (𝟙 ((pull P (f ≫ g)).obj (omega P h))) ≫ (FiniteEtaleNormalization.sigma (ModuleCat.{u + 1} P.Coefficient) (f ≫ g) h (cf := compactification P (f ≫ g)) (cg := compactification P h) (cfg := compactification P ((f ≫ g) ≫ h)) (comp P (f ≫ g) h)) ≫ (FiniteEtaleNormalization.congr P ((f ≫ g) ≫ h) (f ≫ g ≫ h) (Category.assoc f g h)).hom.app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) Z) = (Etale.derivedTensorAssociator (ModuleCat.{u + 1} P.Coefficient) S (omega P f) ((pull P f).obj (omega P g)) ((pull P (f ≫ g)).obj (omega P h))).hom ≫ ((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) S).obj (omega P f)).map (Etale.derivedTensorHom (ModuleCat.{u + 1} P.Coefficient) (𝟙 _) ((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) f g).hom.app (omega P h)) ≫ (Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} P.Coefficient) f (omega P g) ((pull P g).obj (omega P h))).inv ≫ (pull P f).map ((FiniteEtaleNormalization.sigma (ModuleCat.{u + 1} P.Coefficient) g h (cf := compactification P g) (cg := compactification P h) (cfg := compactification P (g ≫ h)) (comp P g h)))) ≫ (FiniteEtaleNormalization.sigma (ModuleCat.{u + 1} P.Coefficient) f (g ≫ h) (cf := compactification P f) (cg := compactification P (g ≫ h)) (cfg := compactification P (f ≫ (g ≫ h))) (comp P f (g ≫ h)))) ∧ (∀ {S X Y Z : Scheme.{u}} [S.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))] [QuasiCompact (S ↘ Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] (f : S ⟶ X) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (df : ℕ) [SmoothOfRelativeDimension df f] (g : X ⟶ Y) [g.IsOver (Spec (.of P.field.k))] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (dg : ℕ) [SmoothOfRelativeDimension dg g] (h : Y ⟶ Z) [h.IsOver (Spec (.of P.field.k))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (dh : ℕ) [SmoothOfRelativeDimension dh h] [Etale f], (FiniteEtaleNormalization.sigma (ModuleCat.{u + 1} P.Coefficient) (f ≫ g) h (cf := compactification P (f ≫ g)) (cg := compactification P h) (cfg := compactification P ((f ≫ g) ≫ h)) (comp P (f ≫ g) h)) ≫ (FiniteEtaleNormalization.congr P ((f ≫ g) ≫ h) (f ≫ g ≫ h) (Category.assoc f g h)).hom.app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) Z) ≫ (sourceEtale P f (g ≫ h)).hom = Etale.derivedTensorHom (ModuleCat.{u + 1} P.Coefficient) (sourceEtale P f g).hom ((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) f g).hom.app (omega P h)) ≫ (Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} P.Coefficient) f (omega P g) ((pull P g).obj (omega P h))).inv ≫ (pull P f).map ((FiniteEtaleNormalization.sigma (ModuleCat.{u + 1} P.Coefficient) g h (cf := compactification P g) (cg := compactification P h) (cfg := compactification P (g ≫ h)) (comp P g h))))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.DualizingSigmaCocycleLocality",
+  "worker": "D4 stage3",
+  "summary": "Extract exactly the smooth-triple coherence and etale-source cancellation from the parent Steps 1--3; no claim to prove the remaining primitive open-locality or finite-expression induction.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1, coherence of composition and tensor reassociation.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Use the same generic associative compact-support compositor previously approved for the parent, to identify the two threefold exceptional adjunction conjugates."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Use the same generic Mathlib adjunction pasting equations previously approved for the parent; this transfers compositor coherence and does not replace a unit step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T122714-L-1798478",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T122714-L-1798478",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

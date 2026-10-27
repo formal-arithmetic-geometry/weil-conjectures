@@ -1,0 +1,436 @@
+{
+ "id": "lem-sfb-universal-norm-generation-open",
+ "kind": "statement",
+ "title": "Universal polynomial norm sections and their open generation locus",
+ "statement": "Let $F$ be a field [def-weil-field] and $C$ a smooth projective geometrically integral finite-type $F$-scheme of dimension one [def-sbc-smooth-morphisms, def-kun-projective, def-pc-geometrically-irreducible, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Let $G$ be a finite group acting on $C$ by $F$-automorphisms. Let $L$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Using module pullback and tensor product [def-pc-module-pullback, def-pur-sheaf-tensor-product], put $B=\\bigotimes_{g\\in G}g^*L$ and, for $a\\in\\Gamma(C,L^{\\otimes n})$, $\\mathcal N_G(a)=\\bigotimes_{g\\in G}g^*a\\in\\Gamma(C,B^{\\otimes n})$, with the tensor-power comparison of [def-sfb-pencil-orbit-bundle-norm]. Fix an integer $n\\geq1$ and put $M=B^{\\otimes n}$, $V=\\Gamma(C,L^{\\otimes n})$ and $J=\\Gamma(C,M)$. Both vector spaces are finite-dimensional, and for every extension field $E/F$ the canonical scalar-extension maps $V\\otimes_FE\\to\\Gamma(C_E,L_E^{\\otimes n})$ and $J\\otimes_FE\\to\\Gamma(C_E,M_E)$ are isomorphisms [def-pc-base-change]. Choose any basis of $V$ and regard $P=V\\times V$ as an affine $F$-space. There are universal sections $s_P,t_P$ of the pullback of $M$ to $C\\times_FP$ whose specialization at each $v=(a,b)\\in P(E)$ is $(\\mathcal N_G(a),\\mathcal N_G(b))$ for the base-changed action. Their coordinates in any basis of $J$ are homogeneous polynomials of degree $|G|$ in the respective section coordinates. If $p:C\\times_FP\\to P$ is the projection and $Z\\subseteq C\\times_FP$ is their common zero scheme (locally cut out by their two coefficients), then $p(|Z|)$ is closed and $U=P\\setminus p(|Z|)$ is open. For every extension field $E/F$ and every $v\\in P(E)$, one has $v\\in U(E)$ if and only if the specialized pair generates $M_E$ [def-weil-pbc-generating-sections]. This equivalence also applies when the image of $v$ is a nonclosed point of $P$. For each $k\\in G$, the canonical permutation $g\\mapsto gk$ of tensor factors identifies $k^*B_E^{\\otimes n}$ with $B_E^{\\otimes n}$ and carries both pulled-back specialized norm sections to their original sections. Consequently the morphism to $\\mathbf P^1_E$ attached to any generating specialized pair is $G$-invariant [def-weil-pbc-morphism-to-projective-space-by-sections]. Here the canonical specialized coordinate sections and orbit-bundle base-change identifications are those of [def-sfb-norm-pencil-base-change-sections]; the canonical scalar-extension map is that of [def-pc-flat-cohomology-comparison] in degree zero. Pullback tensor and power comparisons are those of [def-sc-tensor-pullback-power-comparison], powers of their isomorphisms are those of [def-sfb-tensor-power-pullback-comparisons], and a local frame means a free generator as in [def-sc-local-free-generator].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero, and Tag 02O5, lemma-proper-pushforward-coherent. Proper closed image is morphisms.tex Tag 01W0. Agent universal tensor-product expansion and generation-locus construction in returned lem-sfb-separating-pair-open steps 9–10. The equivariant reindexing of the same universal norm pair also carries returned step 17; constructions.tex Tag 01NE, lemma-projective-space."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-pencil-orbit-bundle-norm",
+  "def-pc-base-change",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-sfb-norm-pencil-base-change-sections",
+  "def-pc-flat-cohomology-comparison",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sfb-tensor-power-pullback-comparisons",
+  "def-sc-local-free-generator"
+ ],
+ "proof": [
+  {
+   "text": "Pullback preserves invertibility, and the tensor product of two invertible modules is invertible. Apply these statements to each $g^*L$ and induct over the finite ordered tensor product and the $n$ tensor factors. Thus $L^{\\otimes n}$, $B$, $M$ and their pullbacks to $C\\times_FP$ and $C_E$ are invertible. Locally each is $\\mathcal O$ with one basis vector, so it is quasi-coherent and finitely presented: the local presentation has one generator and no relations.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "lem-pc-tensor-dual-invertible",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 0B8L (lemma-pullback-invertible), 0B8M (lemma-invertible-is-locally-free-rank-1), and 01CT (lemma-constructions-invertible)."
+   }
+  },
+  {
+   "text": "The structure morphism of $C$ is proper because it is projective. Apply proper coherent finiteness in degree $0$ to the two quasi-coherent finitely presented modules $L^{\\otimes n}$ and $M$ from step 1. Degree-zero cohomology is global sections, so $V$ and $J$ are finite-dimensional $F$-vector spaces.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-fin-proper-coherent-finite-dimensional",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02O5, proposition-proper-pushforward-coherent, degree zero; properness from morphisms.tex Tag 01WC, lemma-locally-projective-proper."
+   }
+  },
+  {
+   "text": "For every extension field $E/F$, the map $\\operatorname{Spec}E\\to\\operatorname{Spec}F$ is flat. The scheme $C$ is quasi-compact (its structure morphism is of finite type over the affine $\\operatorname{Spec}F$) and separated over $F$ (proper by step 2). Hence the specific comparison $\\beta^0:E\\otimes_F\\Gamma(C,\\mathcal F)\\to\\Gamma(C_E,\\mathcal F_E)$, $c\\otimes x\\mapsto c\\cdot p^*x$, is bijective for each of $\\mathcal F=L^{\\otimes n}$ and $\\mathcal F=M$; degree-zero cohomology is global sections. These are the two asserted canonical scalar-extension isomorphisms (the proper-scheme flat base change lemma gives the same dimension count). The tensor definition of pullback identifies the pullback of $L^{\\otimes n}$ with $L_E^{\\otimes n}$: locally both send $a_1\\otimes\\cdots\\otimes a_n$ to $(1\\otimes a_1)\\otimes\\cdots\\otimes(1\\otimes a_n)$. The same observation identifies pullbacks of $B$ and $M$ with their base-changed orbit-bundle expressions. Explicitly, if $q_E:C_E\\to C$ is the projection, base change of each $g$ gives $q_E\\circ g_E=g\\circ q_E$. The pullback composition isomorphisms therefore identify $g_E^*q_E^*L$ with $q_E^*g^*L$, and on sections both maps send $g^*s$ to its normalized pullback $1\\otimes g^*s$.",
+   "uses": [
+    "lem-pc-field-extension-flat",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "def-pc-flat-cohomology-comparison",
+    "lem-pc-flat-cohomology-separated",
+    "pqf-def-cohomology",
+    "lem-sc-flat-base-change-coherent",
+    "def-pc-module-pullback",
+    "def-sfb-pencil-orbit-bundle-norm",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, (2), i=0; tensor-pullback formula in modules.tex Tag 01CD."
+   }
+  },
+  {
+   "text": "Choose an $F$-basis $(e_i)_{i\\in I}$ of $V$, and write $P=\\operatorname{Spec}F[x_i,y_i\\mid i\\in I]$, with $q:C\\times_FP\\to C$. For every function $\\alpha:G\\to I$, let $w_\\alpha\\in J$ be the image of $\\bigotimes_{g\\in G}g^*e_{\\alpha(g)}$ under the comparison defining the norm. Define actual global sections by the finite sums\n$$s_P=\\sum_{\\alpha:G\\to I}\\left(\\prod_{g\\in G}x_{\\alpha(g)}\\right)q^*w_\\alpha,\\qquad t_P=\\sum_{\\alpha:G\\to I}\\left(\\prod_{g\\in G}y_{\\alpha(g)}\\right)q^*w_\\alpha.$$\nThe coefficients are functions pulled back from $P$. In any basis $(j_r)$ of $J$, write $w_\\alpha=\\sum_r c_{r,\\alpha}j_r$. The displayed coefficients of $q^*j_r$ are then $\\sum_\\alpha c_{r,\\alpha}\\prod_g x_{\\alpha(g)}$ and its $y$ analogue, homogeneous of degree $|G|$. This is just finite distributivity of the tensor product; no norm-linearity assertion is used.",
+   "uses": [
+    "def-sfb-pencil-orbit-bundle-norm",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CA, section-tensor-product; agent finite multilinear expansion of the norm defined by def-sfb-pencil-orbit-bundle-norm."
+   }
+  },
+  {
+   "text": "For $v=(a,b)\\in P(E)$, step 3 writes $a=\\sum_i a_i(e_i)_E$ and $b=\\sum_i b_i(e_i)_E$. Each $g_E$ is over $E$, hence $g_E^*a=\\sum_i a_i g_E^*(e_i)_E$. Distributing the tensor product over all $g$ yields $\\mathcal N_G(a)=\\sum_\\alpha(\\prod_g a_{\\alpha(g)})(w_\\alpha)_E$, exactly the restriction of $s_P$ along $1_C\\times v$. The identical formula with $b_i$ gives $t_P|_v=\\mathcal N_G(b)$. Pullback and the comparison commute here because each sends a local pure tensor to the same tensor with coefficients mapped to $E$. Thus these sections have the asserted specialization for arbitrary $E/F$.",
+   "uses": [
+    "def-sfb-pencil-orbit-bundle-norm",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CA and 01CD; agent specialization of the finite expansion in step 4, using the normalized section pullback 1 tensor s."
+   }
+  },
+  {
+   "text": "Put $X=C\\times_FP$. Form $Z=Z(s_P)\\times_X Z(t_P)$ from the two zero schemes of the invertible module $q^*M$. Their local form and the ideal formula for base change of a closed subscheme show that, on a trivializing affine $\\operatorname{Spec}A\\subset X$ where $s_P=f e$ and $t_P=h e$, this fibre product is $\\operatorname{Spec}(A/(f,h))$. In particular it is a closed subscheme of $X$. The same base-change ideal formula, which holds for arbitrary morphisms, shows that $Z_v=Z\\times_P\\operatorname{Spec}E$ is cut out by the images of $f,h$ on the pulled-back affine charts. By step 5 it is precisely the common zero scheme of $\\mathcal N_G(a),\\mathcal N_G(b)$ on $C_E$. No flatness of $v$ is required.",
+   "uses": [
+    "def-pc-zero-scheme",
+    "lem-pc-zero-scheme-properties",
+    "lem-pc-closed-subscheme-base-change-ideal-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JU, lemma-fibre-product-immersion (1), closed-immersion base change and image ideal; zero-scheme definition from def-pc-zero-scheme."
+   }
+  },
+  {
+   "text": "Properness of $C\\to\\operatorname{Spec}F$ from step 2 includes universal closedness. Its base change $p:C\\times_FP\\to P$ is therefore a closed map by the definition of universal closedness. Since $|Z|$ is closed in $C\\times_FP$ by step 6, $p(|Z|)$ is closed in $P$, and its complement $U$ is open.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1, definition-proper, and the definition of universal closedness; Tag 01W0 is the containing section, not the lemma."
+   }
+  },
+  {
+   "text": "Let $v:\\operatorname{Spec}E\\to P$ have image $u$. If $Z_v$ has a point, its image is a point of $Z$ over $u$, so $u\\in p(|Z|)$. Conversely, if $z\\in Z$ maps to $u$, then $\\kappa(z)$ and $E$ are extensions of $\\kappa(u)$. The common-extension-field lemma gives a field $\\Omega$ containing both over $\\kappa(u)$. The resulting maps $\\operatorname{Spec}\\Omega\\to Z$ through $z$ and $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}E$ agree over $P$, hence define a point of $Z_v$. The map $v$ factors through the open subscheme $U$ exactly when its unique image point $u$ belongs to $U$. Thus $v\\in U(E)$ if and only if $Z_v$ is empty. This argument uses the actual residue field $\\kappa(u)$ and never assumes that $u$ is closed.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0H7K, lemma-common-extension-field, applied over kappa(u); fibre-product universal property."
+   }
+  },
+  {
+   "text": "By the generating-sections fibre criterion, the two specialized sections generate $M_E$ exactly when at every point of $C_E$ at least one is nonzero in its one-dimensional residue-field fibre. On a trivializing chart their images are the coefficients $f,h$, so their simultaneous vanishing is exactly the support of the scheme with ideal $(f,h)$ from step 6. Consequently generation is equivalent to $Z_v$ being empty, and step 8 proves the asserted equivalence with $v\\in U(E)$.",
+   "uses": [
+    "lem-weil-pbc-invertible-generating-sections-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AM, definition-globally-generated, and Tag 01CY, lemma-s-open, as stated in lem-weil-pbc-invertible-generating-sections-fibre."
+   }
+  },
+  {
+   "text": "Fix $k\\in G$ over $E$. Contravariant pullback gives $k^*g^*L_E\\simeq(gk)^*L_E$. Tensor these identifications and reindex by the bijection $g\\mapsto gk$ to obtain $\\lambda_k:k^*B_E\\simeq B_E$ and its $n$th tensor power. On $\\bigotimes_g k^*g^*a$ this reindexing gives $\\bigotimes_g(gk)^*a=\\bigotimes_hh^*a$. The norm comparison commutes with this operation: on local pure tensors both orders of operation place the same $n$ tensor factors for each $h$ in the same blocks. More explicitly, numbering the power factors by $j=1,\\ldots,n$, both composites send the factor indexed by $(g,j)$ to the factor indexed by $(gk,j)$; the recursive comparison groups these same factors in the prescribed order. Pure tensors locally generate the tensor products, so the maps agree. Hence $\\lambda_k^{\\otimes n}(k^*\\mathcal N_G(a))=\\mathcal N_G(a)$, and the same single isomorphism carries $k^*\\mathcal N_G(b)$ to $\\mathcal N_G(b)$. Only permutation and tensor functoriality enter; faithfulness and division by $|G|$ are unnecessary.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-sfb-pencil-orbit-bundle-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CA and 01CD; agent reindexing calculation for the finite tensor norm with the recursive tensor-power comparison of def-sfb-pencil-orbit-bundle-norm."
+   }
+  },
+  {
+   "text": "For a generating specialized pair let $h:C_E\\to\\mathbf P^1_E$ be its associated morphism. Compatibility with pullback in the projective-space functor-of-points lemma says that $h\\circ k$ corresponds to the pulled-back invertible module and pair. Step 10 gives an isomorphism of this pair with the original one, and equivalent pairs give the same morphism to $\\mathbf P^1_{\\mathbf Z}$. Both $h\\circ k$ and $h$ have the same structure map to $\\operatorname{Spec}E$, since $k$ is an $E$-automorphism. Uniqueness in the fibre-product definition of $\\mathbf P^1_E$ therefore gives $h\\circ k=h$. This proves $G$-invariance for every such pair.",
+   "uses": [
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space, equivalence of generating pairs and pullback; Tag 01NF, definition-projective-space, and the following paragraph on morphisms over S."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-pc-tensor-dual-invertible",
+  "def-sc-invertible-module",
+  "lem-pc-projective-proper",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "pqf-def-cohomology",
+  "lem-pc-field-extension-flat",
+  "lem-sc-flat-base-change-coherent",
+  "def-pc-module-pullback",
+  "def-sfb-pencil-orbit-bundle-norm",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-zero-scheme",
+  "lem-pc-zero-scheme-properties",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "def-weil-proper-morphism",
+  "lem-weil-common-extension-fields",
+  "def-pc-base-change",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-pc-flat-cohomology-comparison",
+  "def-weil-finite-type-morphism",
+  "lem-pc-flat-cohomology-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 02KH and 02O5 for sections; agent universal multilinear expansion, common-zero fibre test, and equivariant reindexing, with Stacks Tags 01W1, 01JU, 0H7K and 01NE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The pairs of sections whose finite group orbit norms generate a line bundle on a proper curve form a Zariski open in the affine parameter space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Polynomial.isOpen_imageOfDf\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/IsOpenComapC\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {f : Polynomial R}, IsOpen (AlgebraicGeometry.Polynomial.imageOfDf f)\", \"doc\": \"For any polynomial $ f $ over a commutative semiring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ such that at least one coefficient of $ f $ is not contained in $ \\\\mathf\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (g : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ f', X.basicOpen f' = X.basicOpen g\", \"doc\": \"For any affine scheme $X$ and basic open subset $X_{f}$ defined by a section $f$ of the structure sheaf, the open subset $X_{f}$ is itself an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"ProjectiveSpectrum.isOpen_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubmonoidClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {a : A}, IsOpen ↑(ProjectiveSpectrum.basicOpen 𝒜 a)\", \"doc\": \"For any homogeneous element $ a $ in a graded ring $ A $, the basic open set $ D(a) $ in the projective spectrum $ \\\\text{Proj}(A) $—defined as the set of all homogeneous prime ideals not containing $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal pair of polynomial sections on a proper scheme has an open locus of parameters with no common zero, compatible with field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : Set X\", \"doc\": \"For an open subset $U$ of a scheme $X$ and a set $s$ of sections of the structure sheaf over $U$, this function returns the set of points in $X$ where all sections in $s$ vanish. It is defined by appl\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} : X.zeroLocus (U := U) Set.univ = (↑U)ᶜ\", \"doc\": \"For any open subset $U$ of a scheme $X$, the zero locus of the universal set of sections over $U$ is equal to the complement of $U$ in the underlying topological space of $X$. Formally, $X.\\text{zeroLo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : Set X\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ and a set $ s $ of sections over $ U $, the zero locus $ \\\\text{ZeroLocus}(U, s) $ is the set of all points $ x \\\\in U $ such that the germ of every \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : X.zeroLocus s = ⋂ f ∈ s, (X.basicOpen f).carrierᶜ\", \"doc\": \"For a scheme $X$, an open subset $U$ of $X$, and a set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ is defined as the intersection of the complements of the basic open sets a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} {s t : Set Γ(X, U)} (h : s ⊆ t) : X.zeroLocus t ⊆ X.zeroLocus s\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any two sets $s$ and $t$ of sections of the structure sheaf over $U$, if $s \\\\subseteq t$, then the zero locus of $t$ is contained within the zero locus of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_iInf\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} {U : X.Opens} {ι : Type*} (I : ι → Ideal Γ(X, U)) [Finite ι] :\\n  X.zeroLocus (U := U) ↑(⨅ i, I i) = (⋃ i, X.zeroLocus (U := U) (I i)) ∪ (↑U)ᶜ\", \"doc\": \"For a scheme $X$, an open subset $U$ of $X$, and a finite family of ideals $I_i$ in the ring of sections $\\\\Gamma(X, U)$, the zero locus of the intersection $\\\\bigcap_i I_i$ is equal to the union of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : Codisjoint (X.zeroLocus s) U\", \"doc\": \"For any open subset $ U $ of a scheme $ X $ and any set $ s $ of sections of the structure sheaf over $ U $, the zero locus of $ s $ (the set of points in $ X $ where all sections in $ s $ vanish) and\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, IsOpen",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "generat.*[Ll]ocus|[Ll]ocus.*generat|normPencil|universalSection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper closed image of the common zero scheme defines an open parameter set of basepoint free pencils, norms depend polynomially on section coordinates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_6} [inst : CommRing R] (M : Submodule ℤ R),\\n  1 ∈ M →\\n    ∀ (S : PrimeSpectrum.ConstructibleSetData (Polynomial R)),\\n      (∀ C ∈ S, ∀ (j : Fin C.n) (k : ℕ), (C.g j).coeff k ∈ M) →\\n        ∃ T,\\n          PrimeSpectrum.comap Polynomial.C '' S.toSet = T.toSet ∧\\n            ∀ C ∈ T, C.n ≤\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"ChevalleyThm.chevalley_mvPolynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {n : ℕ} {M : Submodule ℤ R},\\n  1 ∈ M →\\n    ∀ (k : ℕ) (d : Multiset (Fin n)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin n) R)),\\n      (∀ C ∈ S, C.n ≤ k) →\\n        (∀ C ∈ S,\\n            ∀ (j : Fin C.n),\\n              C.g j ∈\\n                MvPolyno\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, $ k $ a natural number, $ d $ a multiset of indices $\\\\{1, ..., n\\\\}$, and $ S $ a constructible set in the mul\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"chevalley_mvPolynomial_mvPolynomial\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {m n : ℕ} (f : MvPolynomial (Fin n) R →ₐ[R] MvPolynomial (Fin m) R) (k : ℕ)\\n  (d : Multiset (Fin m)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin m) R)),\\n  (∀ C ∈ S, C.n ≤ k) →\\n    (∀ C ∈ S, ∀ (j : Fin C.n), (C.g j).degrees ≤ d) →\\n      (∀ (i : Fin \", \"doc\": \"Given natural numbers $m, n, k$ and a multiset $d$ of indices in $\\\\{0, 1, ..., m-1\\\\}$, let $f: R[x_1, ..., x_n] \\\\to R[y_1, ..., y_m]$ be an $R$-algebra homomorphism between multivariate polynomial rin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [inst_2 : CategoryTheory.IsCofiltered I]\\n  \", \"doc\": \"The image of the morphism $ g $ is contained within the diagonal open subsets of the pullback of $ f $ with itself, specifically within the diagonal cover's diagonal range constructed from the open co\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal pair of group orbit norm sections is fixed by canonical permutation of tensor factors, and defines an invariant projective morphism on its generating locus",
+   "results": "Representation.Coinvariants.mk_tmul_inv, Representation.Coinvariants.mk_inv_tmul, MulAction.automorphize_smul_left, MulAction.automorphize, QuotientGroup.automorphize_smul_left, Rep.norm_comm, Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply, Representation.ofCoinvariantsTprodLeftRegular; representation coinvariants and additive norm maps, not tensor norms of line-bundle sections",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normPencil|universalNorm|generat.*[Ll]ocus|[Ll]ocus.*generat",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj maps, structure-sheaf zero loci or algebra norms, not the orbit tensor norm family and all of its conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The parameter locus where two polynomial sections of an invertible sheaf on a proper scheme generate is open, including nonclosed field valued points",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.Scheme.zeroLocus_def, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk, AlgebraicGeometry.Scheme.codisjoint_zeroLocus, AlgebraicGeometry.Scheme.zeroLocus_univ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj maps, structure-sheaf zero loci or algebra norms, not the orbit tensor norm family and all of its conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, IsOpen",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj maps, structure-sheaf zero loci or algebra norms, not the orbit tensor norm family and all of its conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group acting on a projective curve, orbit tensor norms of sections define homogeneous polynomial sections and an open locus where two norms generate a line bundle",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.Proj.fromOfGlobalSections, WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, WeierstrassCurve.Affine.CoordinateRing.norm_smul_basis, AlgebraicGeometry.mem_basicOpen_den",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj maps, structure-sheaf zero loci or algebra norms, not the orbit tensor norm family and all of its conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite tensor product of translates of a section is a homogeneous polynomial law, and a pair of such sections defines an invariant morphism to projective one space on the basepoint free locus",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Proj maps, structure-sheaf zero loci or algebra norms, not the orbit tensor norm family and all of its conclusions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separating-pair-open",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Universal-generation input in lem-sfb-separating-pair-open proof step 4 (returned steps 9–10): finite-dimensional sections, polynomial norm family and open generation locus; its proof step 7 (returned step 17): reindexing invariance. No imported blueprint ancestor exists along this created-item chain (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-separating-pair-open",
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-universal-norm-generation-open",
+  "worker": "stage1",
+  "summary": "Proved the universal norm family by its explicit finite multilinear expansion, reused existing proper coherent finiteness and flat-base-change nodes, constructed the common zero scheme with arbitrary-base-change image ideals, treated nonclosed parameter images with a common residue-field extension, and proved equivariant reindexing and projective invariance. No new nodes and no statement change. Corrected source label 02O5 to proposition-proper-pushforward-coherent and specified proper definition 01W1 within section 01W0. Repair of returned head 3a3060891e7: compared the retained split with the current unsplit live node, re-read all twenty cited node statements, retained every valid citation and logged search, and made the Cartesian pullback comparison (step 3) and factor-index reindexing (step 10) explicit before repackaging on the current DAG. Current retry: revalidated all citations on the current DAG, explicitly related U(E) to factorization through the open subscheme in step 8, and expanded the step-6 quotation to include the arbitrary-base-change ideal formula.",
+  "blueprint": "No imported blueprint ancestor (ancestor command returns None). Realizes the parent separating-pair-open steps 4 and 7, corresponding to its returned steps 9–10 and 17, without changing the inherited unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-proper-coherent-finite-dimensional",
+    "why": "Used only its stated general scheme/module result as a black box for the universal norm construction; no statement in the inherited constructible-stability unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Used only its stated general scheme/module result as a black box for the universal norm construction; no statement in the inherited constructible-stability unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Used only its stated general scheme/module result as a black box for the universal norm construction; no statement in the inherited constructible-stability unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Used only its stated general scheme/module result as a black box for the universal norm construction; no statement in the inherited constructible-stability unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Used only its stated general scheme/module result as a black box for the universal norm construction; no statement in the inherited constructible-stability unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-pc-flat-cohomology-separated",
+    "why": "Used only its stated general result (the specific flat comparison map is bijective for a quasi-compact separated scheme) as a black box in step 3; no statement in the inherited constructible-stability unit supplies this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-pc-flat-cohomology-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-cad506bcd",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-cad506bcd (reviewer sub-agent of L); spot-checked: I read the item (11 steps, no new nodes), every cited statement, and Stacks coherent.tex 02KH (l.948) and 02O5 (proposition-proper-pushforward-coherent, l.5108), morphisms.tex definition-proper (l.9854) and fields.tex 0H7K (l.395). There is no SGA. The statement and stmt_deps are unchanged. This re-delivery after a landing failure lost both repairs of the earlier FIX (run 3a3060891e74). Fault C4: the statement says the canonical maps V⊗E→Γ(C_E,·) are isomorphisms, and step 5 uses that map, but step 3 cites only lem-sc-flat-base-change-coherent, which gives an abstract ≅. I re-applied the repair on the new head: step 3 now cites def-pc-flat-cohomology-comparison and lem-pc-flat-cohomology-separated (β^0: c⊗x↦c·p^*x is bijective because C is quasi-compact, being of finite type over Spec F, and separated, being proper, and E/F is flat), together with def-weil-finite-type-morphism, def-weil-proper-morphism and pqf-def-cohomology. I kept the delivery's new q_E∘g_E paragraph. proof_deps (now equal to the union of step uses) and tool_uses are updated. B5: source.place again said lemma-proper-pushforward-coherent although the report claims it was corrected; I set it to proposition-proper-pushforward-coherent and annotated 01W1. All other steps are correct: invertibility closure; proper finiteness; the explicit degree-|G| multilinear expansion; the zero scheme via the arbitrary-base-change ideal image without flatness; universal closedness; common extension fields over κ(u) for nonclosed u, with the new factorization sentence correct; the fibre criterion; reindexing (g,j)↦(gk,j); and functor-of-points uniqueness. Edge cases hold: trivial G, V=0 (U empty), finite F, char dividing |G|, nonfaithful actions. Batch-5 check: lem-fin-proper-coherent-finite-dimensional is generic finiteness of coherent cohomology, not a step of the trace formula or of Poincaré duality; its closure reaches def-trf-schematically-dense-open only through a general definition, so I accept it. No duplicate. Maintainer note: lem-sfb-effective-action-norm-pencil (O2) overlaps only the invariance clause (steps 10–11).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalNormGenerationOpen",
+  "declaration": "AlgebraicGeometry.universal_norm_generation_open",
+  "declarations": [
+   "AlgebraicGeometry.universalNormPullSection",
+   "AlgebraicGeometry.universalNormRemoveFactor",
+   "AlgebraicGeometry.universalNormReorder",
+   "AlgebraicGeometry.universalNormTranslateIso",
+   "AlgebraicGeometry.universalNormPermutation",
+   "AlgebraicGeometry.universalNormAction",
+   "AlgebraicGeometry.universalNormBaseChangeIso",
+   "AlgebraicGeometry.universalNormPair",
+   "AlgebraicGeometry.universalNormSpecialize",
+   "AlgebraicGeometry.universalNormFiberMap",
+   "AlgebraicGeometry.universalNormPolynomial",
+   "AlgebraicGeometry.UniversalNormInvariantPair",
+   "AlgebraicGeometry.UniversalNormGenerationFamily",
+   "AlgebraicGeometry.universal_norm_generation_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalNormGenerationOpen.lean",
+  "statement": "theorem universal_norm_generation_open {F : Type u} [Field F] (C : Scheme.{u}) [C.Over (Spec (.of F))] [Smooth (C ↘ Spec (.of F))] [IsHProjective (C ↘ Spec (.of F))] [LocallyOfFiniteType (C ↘ Spec (.of F))] [QuasiCompact (C ↘ Spec (.of F))] [GeometricallyIntegral (C ↘ Spec (.of F))] [IsIntegral C] (hdim : topologicalKrullDim C = 1) (G : Type v) [Group G] [Fintype G] (ρ : G →* Aut (Over.mk (C ↘ Spec (.of F)))) (L : C.Modules) [L.IsInvertible] (n : ℕ) (hn : 1 ≤ n) : FiniteDimensional F ((L.tensorPow n).H 0) ∧ FiniteDimensional F (HOver (C ↘ Spec (.of F)) ((pencilOrbitBundle (fun g ↦ (Over.forget _).mapIso (ρ g)) L).tensorPow n) 0) ∧ (∀ (E : Type u) [Field E] [Algebra F E], Function.Bijective (H.baseChange (S := E) (C ↘ Spec (.of F)) (L.tensorPow n) 0) ∧ Function.Bijective (H.baseChange (S := E) (C ↘ Spec (.of F)) ((pencilOrbitBundle (fun g ↦ (Over.forget _).mapIso (ρ g)) L).tensorPow n) 0)) ∧ ∀ (I : Type u) [Fintype I] (b : Module.Basis I F ((L.tensorPow n).H 0)), UniversalNormGenerationFamily ρ L n b",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two transparent family predicates spell out every conclusion. H^0 and HOver in degree zero encode global sections via H.zeroLinearEquiv; H.baseChange is the canonical scalar-extension map. All helper definitions have real data; the sole postponed proof is this theorem. Repair F1: the three existing SeparatingPairOpen helpers receive independent definition-node ownership through def-sfb-norm-pencil-base-change-sections, bound existing:true to their original declarations. Repair of 1dda2b915bb2: the duplicate module is deleted and this module imports the original container, with no renamed copies. That container has no reverse import; future reverse proof imports are excluded by the stage-2 import-cycle exception. Repair F2: the projective morphism is directly ProjectiveSpace.homOfGeneratingSections with an explicit section lambda, without pencilSectionPair or pencilCoordinateMorphism. The four requested independent dependencies and all five citations remain recorded."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a4a832da",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Re-delivery after the 1dda landing refusal (duplicate names): new definition node def-sfb-norm-pencil-base-change-sections binds the three original SeparatingPairOpen helpers with existing:true (no copy); its text matches the bodies (real canonical data, no extra hypotheses, basic-definition stmt_deps only). Item statement_change only appends citations for the five added stmt_deps; old statement and old_stmt_deps equal side-live; proof unchanged; sole citer separating-pair-open holds. Lean matches the node clause by clause: hypotheses no stronger; canonical H.baseChange bijective; degree-|G| homogeneous polynomials in every basis of J; zero scheme by local ideal (a,d); closed image with U its complement; E-point specialization equals normPencilSections; range z ⊆ U iff Epi, covering nonclosed images; g→gk invariance and P1-map invariance. Edge cases V=0, trivial G, char dividing |G|, finite F, non-faithful action OK. lean.statement verbatim; declarations list equals the file; sole sorry is the main theorem. No files changed, no compile. Advisory: maintainer should move the three helpers out of SeparatingPairOpen into their own module before the separating-pair stage-3 proof, since the reverse import is omitted under the import-cycle rule of stages/2-statements.md §3(7).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q41 stage 2",
+  "old_statement": "Let $F$ be a field [def-weil-field] and $C$ a smooth projective geometrically integral finite-type $F$-scheme of dimension one [def-sbc-smooth-morphisms, def-kun-projective, def-pc-geometrically-irreducible, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Let $G$ be a finite group acting on $C$ by $F$-automorphisms. Let $L$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Using module pullback and tensor product [def-pc-module-pullback, def-pur-sheaf-tensor-product], put $B=\\bigotimes_{g\\in G}g^*L$ and, for $a\\in\\Gamma(C,L^{\\otimes n})$, $\\mathcal N_G(a)=\\bigotimes_{g\\in G}g^*a\\in\\Gamma(C,B^{\\otimes n})$, with the tensor-power comparison of [def-sfb-pencil-orbit-bundle-norm]. Fix an integer $n\\geq1$ and put $M=B^{\\otimes n}$, $V=\\Gamma(C,L^{\\otimes n})$ and $J=\\Gamma(C,M)$. Both vector spaces are finite-dimensional, and for every extension field $E/F$ the canonical scalar-extension maps $V\\otimes_FE\\to\\Gamma(C_E,L_E^{\\otimes n})$ and $J\\otimes_FE\\to\\Gamma(C_E,M_E)$ are isomorphisms [def-pc-base-change]. Choose any basis of $V$ and regard $P=V\\times V$ as an affine $F$-space. There are universal sections $s_P,t_P$ of the pullback of $M$ to $C\\times_FP$ whose specialization at each $v=(a,b)\\in P(E)$ is $(\\mathcal N_G(a),\\mathcal N_G(b))$ for the base-changed action. Their coordinates in any basis of $J$ are homogeneous polynomials of degree $|G|$ in the respective section coordinates. If $p:C\\times_FP\\to P$ is the projection and $Z\\subseteq C\\times_FP$ is their common zero scheme (locally cut out by their two coefficients), then $p(|Z|)$ is closed and $U=P\\setminus p(|Z|)$ is open. For every extension field $E/F$ and every $v\\in P(E)$, one has $v\\in U(E)$ if and only if the specialized pair generates $M_E$ [def-weil-pbc-generating-sections]. This equivalence also applies when the image of $v$ is a nonclosed point of $P$. For each $k\\in G$, the canonical permutation $g\\mapsto gk$ of tensor factors identifies $k^*B_E^{\\otimes n}$ with $B_E^{\\otimes n}$ and carries both pulled-back specialized norm sections to their original sections. Consequently the morphism to $\\mathbf P^1_E$ attached to any generating specialized pair is $G$-invariant [def-weil-pbc-morphism-to-projective-space-by-sections].",
+  "what": "Return F1/F2 requires explicit definition ownership and citations for the canonical base-change coordinate sections, cohomology comparison, tensor power comparisons and local frames already used in the Lean statement. Added only those definition citations and clarifying identifications, with no mathematical change to hypotheses or conclusion.",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero, and Tag 02O5, lemma-proper-pushforward-coherent. Proper closed image is morphisms.tex Tag 01W0. Agent universal tensor-product expansion and generation-locus construction in returned lem-sfb-separating-pair-open steps 9–10. The equivariant reindexing of the same universal norm pair also carries returned step 17; constructions.tex Tag 01NE, lemma-projective-space."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-separating-pair-open",
+    "holds": true,
+    "note": "Only explicit definition ownership and citations are added; the universal-family, open-generation and invariance assertions are unchanged, so the separating-pair assembly still applies."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-field",
+   "def-sbc-smooth-morphisms",
+   "def-kun-projective",
+   "def-pc-geometrically-irreducible",
+   "def-pc-integral-scheme",
+   "def-weil-finite-type-morphism",
+   "def-kun-topological-krull-dimension",
+   "def-sc-invertible-module",
+   "def-pc-module-pullback",
+   "def-pur-sheaf-tensor-product",
+   "def-sfb-pencil-orbit-bundle-norm",
+   "def-pc-base-change",
+   "def-weil-pbc-generating-sections",
+   "def-weil-pbc-morphism-to-projective-space-by-sections"
+  ]
+ }
+}

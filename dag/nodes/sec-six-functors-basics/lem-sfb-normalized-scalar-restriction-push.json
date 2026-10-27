@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-normalized-scalar-restriction-push",
+ "kind": "statement",
+ "title": "Normalized restriction/direct-image comparison is the canonical geometric mate",
+ "statement": "Let Λ → Λ′ be a morphism of condensed commutative rings, f:X→Y any scheme morphism, and b:D_Y L_{Λ′,f} ≅ L_{Λ,f} D_X a scalar/pullback comparison, in the interfaces of [def-sfb-internal-derived-scalar-comparisons]. Assume PullNormalized: b is normalized by the universal computation counits and the ordinary conjugate balancing map. Then the hom of restrictPush(a,f,b), defined by uniqueness of composite right adjoints, equals scalarRestrictionPush(a,f), the geometric mate of the inverse canonical restriction/pullback comparison of [lem-sfb-internal-scalar-mate-projection]. No flatness of a is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3): adjunction normalization of the coefficient and direct-image comparisons. Stacks sites-cohomology.tex, Tags 0D6D, 0D6E, 07A6."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-sfb-internal-scalar-mate-projection"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the proved generic ordinaryScalarUnit calculation from IntegralResiduePullOrdinaryUnit, now for arbitrary a. Apply it degreewise and descend to homotopy categories. It identifies the scalar-adjunction unit square for the ordinary pullIso and comapUpperStarIso.",
+   "uses": [
+    "new-integral-residue-pull-ordinary-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved generic mixedDerivedUnitFac, exactLeftSquareFac and mateModel calculations from IntegralResiduePullFlatModelMateNormalized. They compute the scalar mate of scalarRestrictionPull inverse against the derived computation counits, with the ordinary identity of step 1 as input.",
+   "uses": [
+    "new-integral-residue-pull-flat-model-comparison-mate-normalized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functor D_Y followed by exact geometric pullback is a left derived functor of the ordinary composite: its pasted counit is an isomorphism on K-flat complexes. PullNormalized and cancellation of the ordinary pullIso identify the inverse of b with the scalar mate just computed, by the universal property of this left derived functor.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib iterated_mateEquiv_conjugateEquiv. Its iterated mate is scalarRestrictionPush by definition; its composite conjugate is restrictPush.hom. Expanding rightAdjointUniq transported along b proves the latter identification.",
+   "uses": [
+    "lem-sfb-internal-scalar-mate-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-pull-ordinary-unit",
+  "new-integral-residue-pull-flat-model-comparison-mate-normalized",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-sfb-internal-scalar-mate-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3): adjunction normalization of the coefficient and direct-image comparisons. Stacks sites-cohomology.tex, Tags 0D6D, 0D6E, 07A6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint comparison conjugate to normalized derived scalar extension and geometric pullback is the geometric mate of the canonical restriction of scalars pullback comparison",
+   "results": "8 hits, including PresheafOfModules.pullbackComp and Scheme.Modules.conjugateEquiv_pullbackComp_inv; no match for internal module objects and the specified total-derived normalization.",
+   "date": "2026-10-23",
+   "verdict": "No direct result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\", \"mateEquiv\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictPush.*scalarRestrictionPush|scalarRestrictionPush.*restrictPush",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No existing bridge."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralQuotientDirectImageComparison",
+  "date": "2026-10-23",
+  "group": "J9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-quotient-direct-image-comparison",
+   "place": "Step 3, identification of the two actual restriction/direct-image normalizations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedScalarRestrictionPush",
+  "file": "lean/Sheaf/Paper/NormalizedScalarRestrictionPush.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.normalized_scalar_restriction_push",
+  "statement": "theorem normalized_scalar_restriction_push\n    (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)\n    (hb : PullNormalized a f b) :\n    (restrictPush a f b).hom = scalarRestrictionPush a f",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261024T015119-L-2325702",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261024T015119-L-2325702",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

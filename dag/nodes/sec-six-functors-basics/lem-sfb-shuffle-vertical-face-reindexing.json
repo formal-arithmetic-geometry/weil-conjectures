@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-shuffle-vertical-face-reindexing",
+ "kind": "statement",
+ "title": "Vertical deleted-vertex reindexing of shuffle words with Koszul signs",
+ "statement": "For any set $S$, let $\\mathbf Z[S]$ be the free $\\mathbf Z$-module with basis $S$ [def-weil-pbc-free-module]; evaluated strings below can equivalently be read as basis symbols in the free module on strings of their length. Let $a,b\\geq0$, $n=a+b$, and let $W_{a,b}$ be the finite set of words $w_0\\cdots w_{n-1}$ with $a$ letters $H$ and $b$ letters $V$. Put $A_k(w)=\\#\\{r<k:w_r=H\\}$ and $B_k(w)=\\#\\{r<k:w_r=V\\}$ for $0\\leq k\\leq n$. Let $I(w)=\\#\\{(r,s):r<s,\\ w_r=V,\\ w_s=H\\}$ and $s(w)=(-1)^{I(w)}\\in\\mathbf Z$. For any sets $X,Y$ and sequences $u=(u_0,\\ldots,u_a)$ in $X$, $v=(v_0,\\ldots,v_b)$ in $Y$, write $z_{u,v}(w)=((u_{A_k(w)},v_{B_k(w)}))_{k=0}^n$ and let $d_k$ denote deletion of entry $k$ of a sequence. No distinctness of sequence entries is assumed.\n\nAssume $b>0$. Let $V_{a,b}$ consist of the labeled pairs $(w,k)$ with $w\\in W_{a,b}$ and either $k=0,w_0=V$, or $k=n,w_{n-1}=V$, or $0<k<n,w_{k-1}=w_k=V$. There is a bijection\n$$\\Phi_V:V_{a,b}\\xrightarrow{\\sim}\\{0,\\ldots,b\\}\\times W_{a,b-1}.$$\nAt an interior pair it is $(w,k)\\mapsto(j,\\bar w)$, where $j=B_k(w)$ and $\\bar w$ replaces the two neighboring $V$ letters by one; here $1\\leq j<b$. At $k=0$ it removes the initial $V$ and sets $j=0$; at $k=n$ it removes the terminal $V$ and sets $j=b$. Its inverse for $0<j<b$ splits the $j$-th $V$ of $\\bar w$ (counted from one) into two $V$ letters and marks the intervening vertex; for $j=0,b$ it prepends or appends $V$ and marks that endpoint, respectively. If $\\Phi_V(w,k)=(j,\\bar w)$, then\n$$d_kz_{u,v}(w)=z_{u,d_j v}(\\bar w),\\qquad s(w)(-1)^k=(-1)^{a+j}s(\\bar w).$$\nMore precisely, at an interior pair, $i=A_k(w)$ satisfies $k=i+j$ and $I(w)=I(\\bar w)+a-i$; at the initial endpoint $I(w)=I(\\bar w)+a$; at the terminal endpoint $I(w)=I(\\bar w)$ and $k=a+b$. These assertions include $b=1$ (only endpoint faces) and $a=0$. If $b=0$, the same labeled vertical set is empty.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated combinatorial input, returned proof steps 6–7: interior vertical collapse and both vertical endpoints. Blueprint gives the application, not this combinatorial lemma. WANTED: Weibel, An Introduction to Homological Algebra, §8.5 (not available locally)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-sfb-shuffle-word-combinatorics"
+ ],
+ "proof": [
+  {
+   "text": "Suppose $b>0$, so $n>0$. At an interior vertical pair put $i=A_k(w)$ and $j=B_k(w)$. Every one of the first $k$ letters is either $H$ or $V$, so $k=i+j$. The letter at $k-1$ is $V$, hence $j\\geq1$; the letter at $k$ is another $V$, hence $j\\leq b-1$. Delete the letter at position $k$ to obtain $\\bar w$. This is exactly the prescribed collapse, and its letter counts are $(a,b-1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "For $k=0$ remove the initial $V$ and put $j=0$; for $k=n$ remove the terminal $V$ and put $j=b$. Again the remaining counts are $(a,b-1)$. Thus all three rules define a map into $\\{0,\\ldots,b\\}\\times W_{a,b-1}$, and their $j$ ranges are disjoint.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "For a target $(j,\\bar w)$ with $0<j<b$, the word $\\bar w$ has at least $j$ letters $V$. Let $p$ be the position of its $j$-th $V$ (counted from one). Replace that letter by $VV$ and mark $k=p+1$. Then $0<k<n$, both adjacent letters are $V$, and $B_k(w)=j$. Collapsing deletes the second of these two letters and recovers $\\bar w$. Conversely, an interior input has its $j$-th $V$ at position $k-1$; its collapse leaves that occurrence there, so splitting it recovers both $w$ and the mark $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "For $j=0$, prepend $V$ and mark $k=0$; for $j=b$, append $V$ and mark $k=n$. Removing the added letter recovers the target, and adding it back recovers every endpoint input. Together with the disjoint ranges and the two inverse identities in the preceding step, this proves the claimed bijection on labeled pairs, even when several marks collapse to the same word.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "Write $v^{(j)}=d_jv$, so $v^{(j)}_r=v_r$ for $r<j$ and $v^{(j)}_r=v_{r+1}$ for $r\\geq j$. In an interior case and for $0\\leq t\\leq n-1$, if $t<k$ then $A_t(\\bar w)=A_t(w)$, $B_t(\\bar w)=B_t(w)<j$. If $t\\geq k$ then $A_t(\\bar w)=A_{t+1}(w)$, $B_t(\\bar w)=B_{t+1}(w)-1\\geq j$. These follow by counting prefixes after deleting the second $V$. Substitution into the formula for $v^{(j)}$ shows that the $t$-th evaluated pair is the original pair at $t$ in the first case and at $t+1$ in the second. This is exactly $d_kz_{u,v}(w)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "At $k=0$, prefix counting gives $A_t(\\bar w)=A_{t+1}(w)$ and $B_t(\\bar w)=B_{t+1}(w)-1$ for every $0\\leq t<n$. Since $(d_0v)_r=v_{r+1}$, the evaluated pair is the old pair at $t+1$. At $k=n$, prefixes through $t<n$ are unchanged and have $B_t(w)\\leq b-1$, so $(d_bv)_{B_t(w)}=v_{B_t(w)}$; the evaluated pair is the old pair at $t$. This proves both endpoint string identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "For an interior collapse, identify all retained letter occurrences in their original order. An inversion involving two retained letters is unchanged. The deleted occurrence is $V$, so its inversions are precisely its pairs with later letters $H$. There are $a-i$ such letters, since the first $k$ letters contain $i$ letters $H$ and the deleted letter itself is $V$. Consequently $I(w)=I(\\bar w)+a-i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "Deleting the initial $V$ removes precisely its inversions with all $a$ letters $H$, giving $I(w)=I(\\bar w)+a$. Deleting the terminal $V$ removes no inversion, giving $I(w)=I(\\bar w)$. At the terminal endpoint $k=n=a+b$ by definition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "In the interior, $I(w)+k=I(\\bar w)+(a-i)+(i+j)=I(\\bar w)+a+j$. At the initial endpoint the same equality holds with $k=j=0$; at the terminal endpoint it holds with $k=a+b$, $j=b$. Raising $-1$ to these equal exponents yields $s(w)(-1)^k=(-1)^{a+j}s(\\bar w)$ in each case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  },
+  {
+   "text": "If $b=1$, an interior pair would require two occurrences of $V$, so only the endpoints remain; the inverse uses only $j=0,1$. If $a=0$, no inversion occurs and $k=B_k(w)=j$ at every mark, consistent with all formulas. If $b=0$, there is no $V$ occurrence and hence no vertical labeled pair (also for the empty word). All string comparisons used indices only, with no distinctness assumption on $u$ or $v$. Equal strings give the same basis symbol in the free module of [def-weil-pbc-free-module], so the displayed equalities also hold under that interpretation.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written word calculation supplying the vertical part of the universal shuffle boundary formula; the blueprint supplies the application only. Weibel §8.5 is WANTED, not a consulted source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Vertical faces of shuffle lattice paths biject with a vertical input face and a shorter shuffle, with sign minus one to the horizontal degree plus the vertical face index",
+   "results": "{\"t\": \"2026-10-22T06:09:16Z\", \"tool\": \"leanfinder\", \"query\": \"Vertical faces of shuffle lattice paths biject with a vertical input face and a shorter shuffle, with sign minus one to the horizontal degree plus the vertical face index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.standardσ_simplicialInsert\", \"FreeSimplexQuiver.homRel.σ_comp_σ\", \"SimplexCategoryGenRel.exists_normal_form_P_σ\", \"SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible\", \"SSet.Path.arrow_interval\", \"SimplexCategoryGenRel.standardσ_cons\", \"FreeSimplexQuiver.homRel.δ_comp_σ_of_le\", \"SimplexCategory.diag_subinterval_eq\"], \"digest\": \"d94a59158329fdd8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: degeneracy normal forms, alternating-face square-zero, and total-complex signs do not state the vertical labeled-pair bijection, its endpoints, or its inversion and evaluated-string formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shuffle\", \"sign\"",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"shuffle\\\", \\\"sign\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: degeneracy normal forms, alternating-face square-zero, and total-complex signs do not state the vertical labeled-pair bijection, its endpoints, or its inversion and evaluated-string formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle.*(face|bound)|vertical.*(face|inversion)",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"grep\", \"query\": \"shuffle.*(face|bound)|vertical.*(face|inversion)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: degeneracy normal forms, alternating-face square-zero, and total-complex signs do not state the vertical labeled-pair bijection, its endpoints, or its inversion and evaluated-string formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Collapsing two vertical moves in a signed shuffle or removing a vertical endpoint gives the Koszul signed vertical boundary",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"leansearch\", \"query\": \"Collapsing two vertical moves in a signed shuffle or removing a vertical endpoint gives the Koszul signed vertical boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.δ_v\", \"AlgebraicTopology.AlternatingFaceMapComplex.d_squared\", \"FreeAddGroup.Red.Step\", \"CochainComplex.HomComplex.Cochain.leftUnshift_v\", \"AlgebraicTopology.DoldKan.hσ'.congr_simp\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.hσ\", \"FreeSimplexQuiver.homRel.δ_comp_σ_of_gt\"], \"digest\": \"fe2f06a3baf7eaaf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: degeneracy normal forms, alternating-face square-zero, and total-complex signs do not state the vertical labeled-pair bijection, its endpoints, or its inversion and evaluated-string formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bijection between labeled vertical deleted vertices of shuffle words and pairs of vertical face indices with shorter shuffle words; inversion signs",
+   "results": "{\"t\": \"2026-10-23T09:53:34Z\", \"tool\": \"leanfinder\", \"query\": \"Bijection between labeled vertical deleted vertices of shuffle words and pairs of vertical face indices with shorter shuffle words; inversion signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Equiv.Perm.signBijAux_mem\", \"compositionAsSetEquiv\", \"FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_snd_snd_coe\", \"FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_fst\", \"FormalMultilinearSeries.changeOriginIndexEquiv_apply_fst\", \"SimplexCategoryGenRel.simplicialEvalσ\", \"SimplexCategoryGenRel.simplicialInsert\", \"SimplexCategoryGenRel.standardσ_simplicialInsert\"], \"digest\": \"a60c3e8ec0c20148\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned permutation pair maps, finite-set reindexings, simplex degeneracy insertion, Coxeter inversion sequences and balanced Dyck words do not assert the unrestricted binary-word vertical-face bijection with both endpoint, string and sign formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|Shuffle",
+   "results": "{\"t\": \"2026-10-23T09:54:24Z\", \"tool\": \"grep\", \"query\": \"shuffle|Shuffle\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicTopology has no shuffle hits; Combinatorics hits concern quiver path orientation and incidence-algebra Möbius inversion, not shuffle inversions or faces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Removing a vertical vertex from a lattice path shuffle corresponds to deleting the vertical input vertex and contributes the Koszul sign",
+   "results": "{\"t\": \"2026-10-23T09:54:24Z\", \"tool\": \"leansearch\", \"query\": \"Removing a vertical vertex from a lattice path shuffle corresponds to deleting the vertical input vertex and contributes the Koszul sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Path.map_vertex\", \"CochainComplex.HomComplex.Cochain.leftUnshift_v\", \"SimpleGraph.Subgraph.deleteVerts_anti\", \"CochainComplex.HomComplex.Cochain.leftShift_v\", \"CochainComplex.HomComplex.Cochain.leftShift_rightShift_eq_negOnePow_rightShift_leftShift\", \"Quiver.Path.ctorElimType\", \"Equiv.Perm.OnCycleFactors.sign_kerParam_apply_apply\", \"FreeAddGroup.Red.Step.not\"], \"digest\": \"907438cdb5be8199\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: path-map vertices, complex shifts, graph vertex deletion, permutation centralizers and free-group cancellation do not state this labeled-word bijection or its formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shuffle\", \"sign\"",
+   "results": "{\"t\": \"2026-10-23T09:54:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"shuffle\\\", \\\"sign\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no hits for both shuffle and sign."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inversion count of a binary word after deleting a letter is the number of opposite letters on one side; signed shuffle boundary reindexing",
+   "results": "{\"t\": \"2026-10-23T09:54:27Z\", \"tool\": \"leanfinder\", \"query\": \"Inversion count of a binary word after deleting a letter is the number of opposite letters on one side; signed shuffle boundary reindexing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.getD_leftInvSeq_mul_wordProd\", \"CoxeterSystem.rightInvSeq_drop\", \"DyckWord.drop\", \"CoxeterSystem.wordProd_mul_getD_rightInvSeq\", \"DyckWord.count_D_le_count_U\", \"DyckWord.count_take_firstReturn_add_one\", \"DyckWord.outsidePart\", \"DyckWord.insidePart\"], \"digest\": \"ac06bbf3884bf21c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned permutation pair maps, finite-set reindexings, simplex degeneracy insertion, Coxeter inversion sequences and balanced Dyck words do not assert the unrestricted binary-word vertical-face bijection with both endpoint, string and sign formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "inversion|inversions|shuffle|Shuffle",
+   "results": "{\"t\": \"2026-10-23T09:56:38Z\", \"tool\": \"grep\", \"query\": \"inversion|inversions|shuffle|Shuffle\", \"sub\": \"Combinatorics\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Quiver/Path.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\"], \"digest\": \"208f658b19f94f8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicTopology has no shuffle hits; Combinatorics hits concern quiver path orientation and incidence-algebra Möbius inversion, not shuffle inversions or faces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simplex-lattice-shuffle-boundary",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), universal shuffle input: returned proof steps 6–7: interior vertical collapse and both vertical endpoints. Nearest imported ancestor is null, inherited from the assigned item.",
+   "via": [
+    "lem-sfb-simplex-lattice-shuffle-boundary",
+    "lem-sfb-bicosimplicial-shuffle-totalization",
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-shuffle-vertical-face-reindexing",
+  "worker": "stage1",
+  "group": "Q159",
+  "summary": "Proved the word-level construction directly: three disjoint cases, explicit two-sided inverse preserving the mark, prefix-count evaluation including both endpoints, exact inversion losses, signs and zero-degree cases. All steps are elementary finite-word or exponent computations; no new nodes or literature theorem is needed. The item statement is unchanged. Recorded fresh searches in two semantic phrasings and all required tools; no Mathlib match.",
+  "blueprint": "Latest blueprint direct-images proof paragraph (3) motivates the comparison but contains no word lemma. This proof supplies only its inherited universal-shuffle vertical input. The ancestor command returns None, as already recorded in blueprint.from.node; inherited via and place retained. Whole-blueprint searches for shuffle, deleted vertex and inversion give no same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-ddadf7d1c",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-ddadf7d1c (reviewer sub-agent of L); spot-checked: I read the item's statement and all 10 steps in full and found no faults. The delivery is one commit with the item node and the report; there are no new nodes, and statement and stmt_deps are unchanged. No re-split repair note applies. I re-derived each step: step 1 gives k=i+j and 1<=j<=b-1; steps 2-4 give disjoint j ranges and a two-sided inverse that splits the j-th V of the shorter word at k=p+1, with no distinctness needed; steps 5-6 check the prefix counts against d_j v, including both endpoints and d_0, d_b; steps 7-9 give the inversion losses a-i, a and 0 and an exact equality of exponents; step 10 covers b=1, a=0 and b=0. Only step 10 cites def-weil-pbc-free-module, and that node's statement supports reading strings as basis symbols. The sign convention I(w) matches the parent lem-sfb-simplex-lattice-shuffle-boundary (epsilon(mu,nu) and the (-1)^a sigma(u⊗∂v) term), and the parent's vertical step uses exactly this statement; there is no cycle. My own brute-force script (/tmp/q159chk/c.py, 0<=a<=5, 1<=b<=5) checked 2441 labeled pairs with 0 failures; I also checked a=0,b=1 and a=1,b=1 by hand. The source, main-20261015 direct-images proof paragraph (3), contains only the application, so proof_origin=agent is correct. There is no SGA citation and no tool_uses. The horizontal sibling and the mixed-corner node are not duplicates. Advisory only: proof_origin.document goes through the latest symlink, but that file is byte-identical to the main-20261015 one."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ShuffleVerticalFaceReindexing",
+  "declaration": "AlgebraicTopology.ShuffleVerticalFace.vertical_face_reindexing",
+  "declarations": [
+   "AlgebraicTopology.ShuffleVerticalFace.VerticalFace",
+   "AlgebraicTopology.ShuffleVerticalFace.vertical_face_reindexing"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ShuffleVerticalFaceReindexing.lean",
+  "statement": "theorem vertical_face_reindexing (a b : ℕ) : IsEmpty (VerticalFace a 0) ∧ ∃ Φ : VerticalFace a (b + 1) ≃ Fin (b + 2) × Word a b, (∀ p : VerticalFace a (b + 1), (Φ p).1.val = verticalCount p.val.1 p.val.2 ∧ (Φ p).2.val = p.val.1.val.eraseIdx (min p.val.2 (a + (b + 1) - 1)) ∧ (0 < p.val.2 ∧ p.val.2 < a + (b + 1) → 1 ≤ (Φ p).1.val ∧ (Φ p).1.val < b + 1 ∧ p.val.2 = horizontalCount p.val.1 p.val.2 + (Φ p).1.val ∧ inversions p.val.1 = inversions (Φ p).2 + (a - horizontalCount p.val.1 p.val.2)) ∧ (p.val.2 = 0 → (Φ p).1.val = 0 ∧ inversions p.val.1 = inversions (Φ p).2 + a) ∧ (p.val.2 = a + (b + 1) → (Φ p).1.val = b + 1 ∧ inversions p.val.1 = inversions (Φ p).2) ∧ sign p.val.1 * (-1 : ℤ) ^ p.val.2 = (-1 : ℤ) ^ (a + (Φ p).1.val) * sign (Φ p).2) ∧ (∀ q : Fin (b + 2) × Word a b, (q.1.val = 0 → (Φ.symm q).val.1.val = true :: q.2.val ∧ (Φ.symm q).val.2 = 0) ∧ (q.1.val = b + 1 → (Φ.symm q).val.1.val = q.2.val ++ [true] ∧ (Φ.symm q).val.2 = a + (b + 1)) ∧ (0 < q.1.val ∧ q.1.val < b + 1 → ∃ P Q : List Bool, q.2.val = P ++ true :: Q ∧ P.count true + 1 = q.1.val ∧ (Φ.symm q).val.1.val = P ++ true :: true :: Q ∧ (Φ.symm q).val.2 = P.length + 1)) ∧ (∀ (X : Type u) (Y : Type v) (x : Fin (a + 1) → X) (y : Fin (b + 1 + 1) → Y) (p : VerticalFace a (b + 1)), (evaluate p.val.1 x y).eraseIdx p.val.2 = evaluate (Φ p).2 x (Fin.removeNth (Φ p).1 y) ∧ Finsupp.single ((evaluate p.val.1 x y).eraseIdx p.val.2) (1 : ℤ) = Finsupp.single (evaluate (Φ p).2 x (Fin.removeNth (Φ p).1 y)) (1 : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses Word, horizontalCount, verticalCount, inversions, sign and evaluate owned by the landed def-sfb-shuffle-word-combinatorics; no duplicate definition and no reliance on the horizontal-face theorem. The theorem parameter b is the shorter vertical degree; b+1 ranges over every positive degree. VerticalFace is the literal labeled set introduced by this item. Includes zero-degree emptiness, full forward and inverse word rules, interior and endpoint inversion counts, Koszul signs and arbitrary evaluated-string/free-basis equality."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79f83d87f",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read item node, the def-sfb-shuffle-word-combinatorics owner declarations (Word/horizontalCount/verticalCount/inversions/sign/evaluate in ShuffleHorizontalFaceReindexing) and def-weil-pbc-free-module (Module.Free; Finsupp.single basis). The delivery is the node lean record plus added def stmt_dep, the new module and the report (both sections present). Clause by clause with node B=b+1: IsEmpty(VerticalFace a 0) covers B=0 including the empty word; VerticalFace = V_{a,B} exactly; Equiv to Fin(b+2)×Word a b with forward label B_k and word eraseIdx(min k (n-1)) pins Φ; interior 1≤j<B, k=A_k+j, I=I(w̄)+(a−A_k); endpoints j=0/I+a and j=B/I; sign s(w)(-1)^k=(-1)^(a+j)s(w̄); inverse prepend/append/split j-th V (P.count true+1=j, mark |P|+1); evaluate eraseIdx k = evaluate w̄ x (removeNth j y) for arbitrary X:Type u, Y:Type v, plus Finsupp.single equality. No extra hypotheses, universes bound, VerticalFace real data, only sorry is the theorem proof, source/blueprint docstrings and steps 1–10 present, lean.statement verbatim. No duplicate definitions. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "id": "lem-z8-section-conjugate-comparison",
+ "kind": "statement",
+ "title": "Section Conjugate Comparison",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem conjugate_section_comparison\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    {F : C ⥤ D} {R : D ⥤ C} (a : F ⊣ R)\n    {G₁ G₂ : D ⥤ E} {P₁ P₂ : E ⥤ D} (b₁ : G₁ ⊣ P₁) (b₂ : G₂ ⊣ P₂)\n    {H : E ⥤ D} {S : D ⥤ E} (e : H ⊣ S)\n    (l₁ : G₁ ⋙ H ≅ 𝟭 D) (l₂ : G₂ ⋙ H ≅ 𝟭 D)\n    (c : F ⋙ G₁ ⟶ F ⋙ G₂)\n    (hc : Functor.whiskerRight c H ≫ Functor.whiskerLeft F l₂.hom =\n      Functor.whiskerLeft F l₁.hom) :\n    Functor.whiskerRight (conjugateIsoEquiv Adjunction.id (b₂.comp e) l₂).hom R ≫\n        Functor.whiskerLeft S (conjugateEquiv (a.comp b₂) (a.comp b₁) c) =\n      Functor.whiskerRight (conjugateIsoEquiv Adjunction.id (b₁.comp e) l₁).hom R",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-z8-section-projection-unit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the conjugate-equivalence composition law to the two section isomorphisms and the square comparison. The assumed equality after restriction makes the two transposes identical. The conjugate equivalence is injective, giving the direct-image comparison equation.",
+   "uses": [
+    "lem-z8-section-projection-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-section-projection-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SectionConjugateComparison",
+  "file": "lean/Sheaf/CategoryTheory/SectionConjugateComparison.lean",
+  "declaration": "CategoryTheory.Adjunction.conjugate_section_comparison",
+  "declarations": [
+   "CategoryTheory.Adjunction.conjugate_section_comparison"
+  ],
+  "statement": "theorem conjugate_section_comparison\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    {F : C ⥤ D} {R : D ⥤ C} (a : F ⊣ R)\n    {G₁ G₂ : D ⥤ E} {P₁ P₂ : E ⥤ D} (b₁ : G₁ ⊣ P₁) (b₂ : G₂ ⊣ P₂)\n    {H : E ⥤ D} {S : D ⥤ E} (e : H ⊣ S)\n    (l₁ : G₁ ⋙ H ≅ 𝟭 D) (l₂ : G₂ ⋙ H ≅ 𝟭 D)\n    (c : F ⋙ G₁ ⟶ F ⋙ G₂)\n    (hc : Functor.whiskerRight c H ≫ Functor.whiskerLeft F l₂.hom =\n      Functor.whiskerLeft F l₁.hom) :\n    Functor.whiskerRight (conjugateIsoEquiv Adjunction.id (b₂.comp e) l₂).hom R ≫\n        Functor.whiskerLeft S (conjugateEquiv (a.comp b₂) (a.comp b₁) c) =\n      Functor.whiskerRight (conjugateIsoEquiv Adjunction.id (b₁.comp e) l₁).hom R",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

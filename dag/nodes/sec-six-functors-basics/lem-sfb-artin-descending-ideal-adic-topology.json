@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-artin-descending-ideal-adic-topology",
+ "kind": "statement",
+ "title": "Descending ideals induce the quotient adic topology",
+ "statement": "Let $(S,\\mathfrak m)$ be a commutative Noetherian complete local ring [def-weil-pbc-noetherian-ring], [def-weil-pbc-adic-completion], where local means having a unique maximal ideal and complete means $S\\cong\\varprojlim_nS/\\mathfrak m^n$. Let $J_1\\supseteq J_2\\supseteq\\cdots$ be ideals with $\\mathfrak m^n\\subseteq J_n$ for all $n\\geq1$, and put $J=\\bigcap_nJ_n$. Then for every $r\\geq1$ there exists $N\\geq1$ such that $J_N\\subseteq J+\\mathfrak m^r$. Consequently, if $J$ is proper, the ideals $J_n/J$ are cofinal with the powers of $\\mathfrak m/J$ in $S/J$: each contains a power of $\\mathfrak m/J$ and each power contains some $J_n/J$.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SE (lemma-m-adic-topology)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "For each $r\\geq1$, apply [lem-weil-pbc-noetherian-local-quotient-artinian-local] with $C=S$, $K=\\mathfrak m^r$, $N=r$; here $\\mathfrak m^r\\subseteq\\mathfrak m$. Thus $A_r=S/\\mathfrak m^r$ is Artinian. Its descending chain of ideals $(J_n+\\mathfrak m^r)/\\mathfrak m^r$ stabilizes: choose $N_r\\geq1$ and write $E_r=(J_n+\\mathfrak m^r)/\\mathfrak m^r$ for every $n\\geq N_r$. Regard $E_r$ as an $S$-submodule of $A_r$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SE (lemma-m-adic-topology), proof."
+   }
+  },
+  {
+   "text": "The quotient reduction $A_{r+1}\\to A_r$ restricts to a surjective $S$-linear map $E_{r+1}\\to E_r$. Indeed choose $n\\geq N_r,N_{r+1}$. Both stable ideals are the images of this same $J_n$ in the two quotients. Reducing its image modulo $\\mathfrak m^{r+1}$ gives exactly its image modulo $\\mathfrak m^r$. These restrictions therefore form a tower with the usual quotient transition maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SE (lemma-m-adic-topology), proof."
+   }
+  },
+  {
+   "text": "By clause (a) of [lem-weil-pbc-tower-limit-exact-surjective-kernels], every projection $\\varprojlim_t E_t\\to E_r$ is surjective; the base ring is $S$ and the modules are the $E_t$ of step 2. A compatible family $(e_t)$ in these submodules is a compatible family in $S/\\mathfrak m^t$. Completeness, in [def-weil-pbc-adic-completion], gives a unique $f\\in S$ with $f\\bmod\\mathfrak m^t=e_t$ for every $t$.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SE (lemma-m-adic-topology), proof."
+   }
+  },
+  {
+   "text": "Every such $f$ belongs to $J$. For each $k\\geq1$, choose $n\\geq N_k,k$. Then $E_k$ is the image of $J_n\\subseteq J_k$, so $f\\in J_k+\\mathfrak m^k=J_k$, using the hypothesis $\\mathfrak m^k\\subseteq J_k$. Thus $f\\in\\bigcap_kJ_k=J$. Now fix $r$ and $x\\in J_{N_r}$. Its residue lies in $E_r$. Lift that residue to a compatible family by step 3, then to $f\\in J$ as just proved. Consequently $x-f\\in\\mathfrak m^r$, proving $J_{N_r}\\subseteq J+\\mathfrak m^r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SE (lemma-m-adic-topology), proof."
+   }
+  },
+  {
+   "text": "If $J$ is proper, it is contained in the unique maximal ideal $\\mathfrak m$. By [lem-weil-pbc-quotient-local-structure], $S/J$ is local with maximal ideal $\\mathfrak m/J$. For the quotient map $q:S\\to S/J$, products of images give $q(\\mathfrak m)^r=q(\\mathfrak m^r)$: both ideals consist of sums of images of products of $r$ elements of $\\mathfrak m$. Applying $q$ to $\\mathfrak m^n\\subseteq J_n$ gives $(\\mathfrak m/J)^n\\subseteq J_n/J$. Applying it to step 4 gives $J_{N_r}/J\\subseteq(\\mathfrak m/J)^r$. These are the two required cofinality inclusions.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SE (lemma-m-adic-topology), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SE (lemma-m-adic-topology), stabilized ideals and inverse limit proof; its Krull-intersection sentence simplifies to J_k + m^k = J_k under the stated hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Decreasing ideals in complete Noetherian local ring induce maximal ideal adic topology after quotient by intersection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instIsHausdorffMaximalIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsNoetherianRing R]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R], IsHausdorff (IsLocalRing.maximalIdeal R) M\", \"doc\": \"The maximal ideal of a local Noetherian ring is equipped with a Hausdorff topology, ensuring that the intersection of all powers of the ideal is trivial.\"}\n  {\"name\": \"IsHausdorff.of_isLocalRing\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M] [IsLocalRing R], I ≠ ⊤ → IsHausdorff I M\", \"doc\": \"If $ R $ is a local ring and $ I $ is a proper ideal of $ R $, then the $ I $-adic topology on the module $ M $ is Hausdorff, meaning the intersection of all powers of $ I $ in $ M $ is trivial.\"}\n  {\"name\": \"Ideal.adicTopology\", \"module\": \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → TopologicalSpace R\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ I $, the adic topology on $ R $ is the topology generated by the powers $ I^n $ of $ I $ as a basis for neighborhoods of zero. This topology is non-archim\"}\n  {\"name\": \"IsAdic\", \"module\": \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → [H : TopologicalSpace R] → Ideal R → Prop\", \"doc\": \"The proposition that a given topology $ H $ on a commutative ring $ R $ is equal to the adic topology induced by the ideal $ J $.\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.le_jacobson_bot\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], I ≤ ⊥.jacobson\", \"doc\": \"If a commutative ring $ R $ is $ I $-adic complete with respect to an ideal $ I $, then $ I $ is contained in the Jacobson radical of $ R $, which is the intersection of all maximal ideals of $ R $. T\"}\n  {\"name\": \"AdicCompletion.instIsHausdorff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsHausdorff I (AdicCompletion I M)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull intersection and powers inside a single Artinian-quotient ideal do not prove cofinality of an arbitrary descending chain modulo its intersection; Chevalley image theorems are unrelated"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley theorem descending sequence ideals complete local noetherian ring cofinal powers maximal ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.iInf_pow_eq_bot_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"[IsNoetherianRing R] [IsLocalRing R] (h : I ≠ ⊤) : ⨅ i : ℕ, I ^ i = ⊥\", \"doc\": \"In a Noetherian local ring $ R $, for any proper ideal $ I \\\\neq R $, the intersection of all powers $ I^n $ for $ n \\\\in \\\\mathbb{N} $ equals the zero ideal, i.e., $ \\\\bigcap_{n=1}^\\\\infty I^n = \\\\{0\\\\} $.\"}\n  {\"name\": \"IsLocalRing.isOpen_maximalIdeal_pow\", \"module\": \"Mathlib.Topology.Algebra.Ring.Compact\", \"type\": \"(n : ℕ) : IsOpen (X := R) ↑(maximalIdeal R ^ n)\", \"doc\": \"In a local ring $ R $ equipped with a topology, for every natural number $ n $, the $ n $-th power of the maximal ideal (the set of all non-units of $ R $) is an open subset of $ R $. This follows fro\"}\n  {\"name\": \"IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient\", \"module\": \"Mathlib.RingTheory.LocalRing.Quotient\", \"type\": \"(I : Ideal R) [IsArtinianRing (R ⧸ I)] : ∃ n, maximalIdeal R ^ n ≤ I\", \"doc\": \"In a local ring $ R $, if the quotient ring $ R/I $ is Artinian for some ideal $ I $, then there exists a natural number $ n $ such that the $ n $-th power of the maximal ideal of $ R $ is contained w\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"[hR : IsNoetherian R R] : Functor.Initial (idealPowersToSelfLERadical J)\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"Ideal.iInf_pow_smul_eq_bot_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"[IsNoetherianRing R] [IsLocalRing R] [Module.Finite R M] (h : I ≠ ⊤) : (⨅ i : ℕ, I ^ i • ⊤ : Submodule R M) = ⊥\", \"doc\": \"In a Noetherian local ring $ R $ with maximal ideal $ I $ and a finitely generated $ R $-module $ M $, the intersection of the submodules $ I^i M $ over all natural numbers $ i $ is trivial, i.e., $\\\\b\"}\n  {\"name\": \"exists_maximalIdeal_pow_eq_of_principal\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.TFAE\", \"type\": \"[IsNoetherianRing R] [IsLocalRing R] [IsDomain R] (h' : (maximalIdeal R).IsPrincipal) (I : Ideal R) (hI : I ≠ ⊥) :\\n  ∃ n : ℕ, I = maximalIdeal R ^ n\", \"doc\": \"Let $ R $ be a Noetherian local domain with principal maximal ideal $ \\\\mathfrak{m} $. Then every non-zero ideal $ I $ of $ R $ satisfies $ I = \\\\mathfrak{m}^n $ for some natural number $ n $.\"}\n  {\"name\": \"IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient\", \"module\": \"Mathlib.RingTheory.LocalRing.Quotient\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] (I : Ideal R) [IsArtinianRing (R ⧸ I)],\\n  ∃ n, IsLocalRing.maximalIdeal R ^ n ≤ I\", \"doc\": \"In a local ring $ R $ with maximal ideal $ \\\\mathfrak{m} $, if the quotient ring $ R/I $ is Artinian, then there exists a natural number $ n $ such that $ \\\\mathfrak{m}^n \\\\subseteq I $.\"}\n  {\"name\": \"isArtinianRing_iff_isNilpotent_maximalIdeal\", \"module\": \"Mathlib.RingTheory.HopkinsLevitzki\", \"type\": \"(R : Type*) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] :\\n  IsArtinianRing R ↔ IsNilpotent (IsLocalRing.maximalIdeal R)\", \"doc\": \"For a commutative Noetherian local ring $ R $, the ring $ R $ is Artinian if and only if its unique maximal ideal is nilpotent, i.e., there exists a natural number $ n $ such that the $ n $-th power o\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull intersection and powers inside a single Artinian-quotient ideal do not prove cofinality of an arbitrary descending chain modulo its intersection; Chevalley image theorems are unrelated"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Ideal",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Prop\", \"doc\": \"A module `M` is `I`-adically complete if it is Hausdorff and precomplete.\"}\n  {\"name\": \"IsAdicComplete.of_subsingleton\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [Subsingleton M] : IsAdicComplete I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.toIsHausdorff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} {inst✝ : CommRing R} {I : Ideal R} {M : Type u_4} {inst✝¹ : AddCommGroup M} {inst✝² : Module R M} [self : IsAdicComplete I M] : IsHausdorff I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.toIsPrecomplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} {inst✝ : CommRing R} {I : Ideal R} {M : Type u_4} {inst✝¹ : AddCommGroup M} {inst✝² : Module R M} [self : IsAdicComplete I M] : IsPrecomplete I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.mk\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_4} [AddCommGroup M] [Module R M] [toIsHausdorff : IsHausdorff I M] [toIsPrecomplete : IsPrecomplete I M] : IsAdicComplete I M\", \"doc\": \"\"}\n  {\"name\": \"isAdicComplete_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : IsAdicComplete I M ↔ IsHausdorff I M ∧ IsPrecomplete I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.bot\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (M : Type u_4) [AddCommGroup M] [Module R M] : IsAdicComplete ⊥ M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.subsingleton\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (M : Type u_4) [AddCommGroup M] [Module R M] (h : IsAdicComplete ⊤ M) : Subsingleton M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.le_jacobson_bot\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) [IsAdicComplete I R] : I ≤ ⊥.jacobson\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.ofLinearEquiv\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [IsAdicComplete I M] : M ≃ₗ[R] AdicCompletion I M\", \"doc\": \"When `M` is `I`-adic complete, the canonical map from `M` to its `I`-adic completion is a linear\\nequivalence.\"}\n  {\"name\": \"IsAdicComplete.map_algebraMap_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [CommRing S] [Module S M] [Algebra R S] [IsScalarTower R S M] : IsAdicComplete (Ideal.map (algebraMap R S) I) M ↔ IsAdicComplete I M\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.of_bijective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [IsAdicComplete I M] : Function.Bijective ⇑(AdicCompletion.of I M)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull intersection and powers inside a single Artinian-quotient ideal do not prove cofinality of an arbitrary descending chain modulo its intersection; Chevalley image theorems are unrelated"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|[Dd]escending.*[Ii]deal|[Ii]deal.*[Cc]ofinal",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"17\", \"text\": \"as Hensel's lemma and the Jordan-Chevalley decomposition.\"}\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"28\", \"text\": \"  Jordan-Chevalley decomposition of linear endomorphisms.\"}\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"105\", \"text\": \"This can be used to prove the Jordan-Chevalley decomposition of linear endomorphisms. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"461\", \"text\": \"isomorphism if and only if the original transformation is. This explains why some Beck-Chevalley\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.Chevalley\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.Chevalley\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"117\", \"text\": \"/-- **Chevalley's Theorem**: The image of a locally constructible set under a\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"162\", \"text\": \"/-- **Chevalley's Theorem**: The image of a constructible set under a\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"239\", \"text\": \"developing the theory of Beck-Chevalley transformations.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"15\", \"text\": \"# Chevalley's theorem with complexity bound\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"17\", \"text\": \"⚠ For general usage, see `Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"19\", \"text\": \"Chevalley's theorem states that if `f : R → S` is a finitely presented ring hom between commutative\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"31\", \"text\": \"This file proves a complexity-aware version of Chevalley's theorem, namely that a constructible set\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"42\", \"text\": \"used to describe `(C₁ ∪ ... ∪ Cₖ)`. See the (private) lemma `chevalley_polynomialC`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"line\": \"103\", \"text\": \"/-- The degree bound on a constructible set for Chevalley's theorem for the inclusion `R ↪ R[X]`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"13\", \"text\": \"# Chevalley's theorem\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"15\", \"text\": \"In this file we provide the usual (algebraic) version of Chevalley's theorem.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"16\", \"text\": \"For the proof see `Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"32\", \"text\": \"  obtain ⟨T, hT, -⟩ := ChevalleyThm.chevalley_polynomialC _ Submodule.mem_top S (by simp)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"13\", \"text\": \"# Jordan-Chevalley-Dunford decomposition\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"15\", \"text\": \"Given a finite-dimensional linear endomorphism `f`, the Jordan-Chevalley-Dunford theorem provides a\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"31\", \"text\": \"* `Module.End.isNilpotent_isSemisimple_unique`: the Jordan-Chevalley-Dunford decomposition is\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"72\", \"text\": \"/-- **Jordan-Chevalley-Dunford decomposition**: an endomorphism of a finite-dimensional vector space\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"82\", \"text\": \"/-- **Uniqueness of Jordan-Chevalley-Dunford decomposition**: if `n₁ + s₁ = n₂ + s₂` with `nᵢ`\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull intersection and powers inside a single Artinian-quotient ideal do not prove cofinality of an arbitrary descending chain modulo its intersection; Chevalley image theorems are unrelated"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|descending.*ideal|ideal.*cofinal",
+   "results": "OK 11 hits; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean. Directory: Mathlib/RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Krull intersection, Artin-Rees, adic completeness or constructible images, not cofinality for arbitrary descending ideals modulo their intersection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley lemma decreasing ideals complete noetherian local ring cofinal powers maximal ideal modulo intersection",
+   "results": "OK 8 hits; Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.iInf_pow_eq_bot_of_isLocalRing, Ideal.exists_pow_inf_eq_pow_smul, Ideal.Filtration.mono, Ideal.iInf_pow_eq_bot_of_isDomain, localCohomology.ideal_powers_initial, IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient, IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Krull intersection, Artin-Rees, adic completeness or constructible images, not cofinality for arbitrary descending ideals modulo their intersection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A descending sequence of ideals in a complete Noetherian local ring induces the maximal ideal adic topology modulo its intersection",
+   "results": "OK 8 hits; instIsHausdorffMaximalIdeal, Ideal.adicTopology, IsHausdorff.of_isLocalRing, IsAdic, IsAdicComplete, AdicCompletion.instIsHausdorff, Ideal.hasBasis_nhds_zero_adic, IsAdicComplete.toIsHausdorff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Krull intersection, Artin-Rees, adic completeness or constructible images, not cofinality for arbitrary descending ideals modulo their intersection"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Ideal",
+   "results": "OK 12 hits; IsAdicComplete, IsAdicComplete.of_subsingleton, IsAdicComplete.toIsHausdorff, IsAdicComplete.toIsPrecomplete, IsAdicComplete.mk, isAdicComplete_iff, IsAdicComplete.bot, IsAdicComplete.subsingleton",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Krull intersection, Artin-Rees, adic completeness or constructible images, not cofinality for arbitrary descending ideals modulo their intersection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley lemma decreasing submodules in an adically complete noetherian module eventually contained in any power plus their intersection",
+   "results": "OK 8 hits; Ideal.exists_pow_inf_eq_pow_smul, Ideal.adic_module_basis, AdicCompletion.submodule, Ideal.adic_basis, AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.AdicCauchySequence.submodule, IsAdicComplete, AdicCompletion.IsAdicCauchy",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Krull intersection, Artin-Rees, adic completeness or constructible images, not cofinality for arbitrary descending ideals modulo their intersection"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|descending|antitone",
+   "results": "OK 0 hits; . Directory: Mathlib/RingTheory/AdicCompletion",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Krull intersection, Artin-Rees, adic completeness or constructible images, not cofinality for arbitrary descending ideals modulo their intersection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-rs-versal-formal-object",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06SE (lemma-m-adic-topology).",
+   "via": [
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-descending-ideal-adic-topology",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded Stacks 06SE through stabilized Artinian quotient ideals, surjective transition maps, projection-surjectivity for the module tower, and completeness. The existing power containment makes membership in every J_k elementary, avoiding an unnecessary extra Krull lemma. Reused three existing tool/Mathlib nodes and the completion definition; created no nodes. Searched project Lean and Mathlib; no exact attachment or Mathlib match.",
+  "blueprint": "The inherited provenance traces to det-thm-sf-ctf-stability-direct-images, proof (3), via the Artin versal-object construction in Tag 07XY. This split supplies its Tag 06SE topology comparison; the inherited from.node is null, as confirmed by blueprint_refs.py ancestor. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "why": "Clause (a), projection-surjectivity for a countable tower of S-modules with surjective transitions, is the generic inverse-limit tool used in the proof of Tag 06SE; this unit has no different algebraic inverse-limit input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-7c0e604c2",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-7c0e604c2 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 5 steps and every cited statement, against Stacks formal-defos.tex Tag 06SE (lemma-m-adic-topology, lines 1034-1058), including the full proof. The statement is byte-identical to the Q15 08eb21b5 base, and its only change from the source is dropping the unused Λ-structure. Step 1: the lemma noetherian-local-quotient-artinian-local applies with K=m^r, N=r (m^r ⊆ m^r ⊆ m) and states that descending chains stabilize. Step 2: E_{r+1}→E_r is surjective because both are images of one J_n with n ≥ N_r, N_{r+1}; this is correctly marked elementary. Step 3: clause (a) of the tower lemma gives surjective projections with no finiteness hypotheses, and the bijectivity in def-weil-pbc-adic-completion gives a unique f. Step 4: for n ≥ N_k, k we get f ∈ J_k + m^k = J_k. This replaces Stacks' Krull-intersection argument by the stated hypothesis m^k ⊆ J_k, which is valid. Step 5: quotient-local-structure applies with J ⊆ m, and q(m)^r = q(m^r) gives both cofinality inclusions. proof_deps equals the union of uses. There are no new nodes, and an rg search over the DAG found no duplicate. I accept the declared tool use of lem-weil-pbc-tower-limit-exact-surjective-kernels (sk-thm-p1) as a generic inverse-limit tool. There is no SGA citation. Checked cases: a field; J_n = S; J_n = m^n; k[[x,y]] with J_n = (x) + m^n. Minor: the report mentions citations.json, which is not in the commit; I did not count this as a fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DescendingIdealAdicTopology",
+  "declaration": "Ideal.descending_ideals_quotient_adic",
+  "file": "lean/Sheaf/RingTheory/DescendingIdealAdicTopology.lean",
+  "statement": "theorem descending_ideals_quotient_adic (S : Type u) [CommRing S] [IsNoetherianRing S] [IsLocalRing S] [IsAdicComplete (IsLocalRing.maximalIdeal S) S] (Js : ℕ+ → Ideal S) (hdescending : Antitone Js) (hpowers : ∀ n : ℕ+, IsLocalRing.maximalIdeal S ^ (n : ℕ) ≤ Js n) (J : Ideal S) (hJ : J = ⨅ n : ℕ+, Js n) : (∀ r : ℕ+, ∃ N : ℕ+, Js N ≤ J ⊔ IsLocalRing.maximalIdeal S ^ (r : ℕ)) ∧ (J ≠ ⊤ → (∀ n : ℕ+, ∃ r : ℕ+, (IsLocalRing.maximalIdeal S).map (Ideal.Quotient.mk J) ^ (r : ℕ) ≤ (Js n).map (Ideal.Quotient.mk J)) ∧ (∀ r : ℕ+, ∃ n : ℕ+, (Js n).map (Ideal.Quotient.mk J) ≤ (IsLocalRing.maximalIdeal S).map (Ideal.Quotient.mk J) ^ (r : ℕ)))",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d86cbf22c",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Node matches Stacks 06SE (formal-defos.tex 1033-1058); Lean renders each clause exactly: ℕ+-indexed antitone Js, m^n ≤ Js n, J = ⨅ Js, conclusion (∀r ∃N, Js N ≤ J ⊔ m^r) ∧ (J ≠ ⊤ → two-way cofinality of images under Quotient.mk J, where image of m = m_{S/J} since J ⊆ m). IsAdicComplete/IsNoetherianRing match the stmt_dep records. lean.statement verbatim; node differs from side-live only by the lean field; stmt_deps unchanged; no new nodes or definitions; proof is sorry; docstrings carry source, blueprint id and 5 steps; report has Worker report and Second reading by Q139. Edge cases (field, J=⊤, Js=m^n, Artinian, zero ring) fine. No duplicate found in Mathlib or the project's Lean. No file changed, so no compile."
+ }
+}

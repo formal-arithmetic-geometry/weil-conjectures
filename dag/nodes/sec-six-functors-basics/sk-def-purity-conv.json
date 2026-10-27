@@ -53,9 +53,78 @@
   "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-site-derived-tensor-descent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For rootRestriction_existsUnique, restriction of sheaves along the comparison morphism is an additive right adjoint, so it preserves the kernel of the pro-etale units power map. The etale root inclusion, followed by the identity on the underlying units presheaf, is killed by that mapped power. The preserved-kernel universal property gives its unique factorization. This works for every exponent, including zero.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For coefficientPower_isUnit, the existing diagonalExponent_isUnit gives that ell^n is a unit on every k-scheme. The level n is positive; isUnit_pow_iff gives invertibility of ell itself. Taking its r+1 power gives the requested unit.",
+   "uses": [
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For defaultAnnihilator, use diagonalExponent_annihilates from the existing fixed finite coefficient twist. Positivity of the level gives (n-1)+1=n, so it has exactly the required exponent.",
+   "uses": [
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For kummer_torsor, apply coefficient functoriality of the torsor H1 classification to the root lifting torsor and the insertion at 1. Its class is the Kummer boundary by classH1_lifts, independently of the chosen terminal object. Apply the coefficient comparison and etale/pro-etale cohomology comparison to this equality.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "lem-sc-etale-torsor-h1-functoriality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For rootTorsor_represented, sections of the lifting torsor are units with the prescribed power. The existing unitsPowEqEquiv identifies these with ring roots, since the exponent is positive; kummerCoverHomEquiv identifies ring roots with morphisms to the published Kummer cover. Precomposition under the Gamma-Spec adjunction evaluates the same universal polynomial root after applying the global-sections ring map, proving naturality for every etale arrow.",
+   "uses": [
+    "def-pur-affine-line-datum",
+    "lem-amb-kummer-any-base",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For finiteLineTransition_existsUnique, invertibility of ell^(r+1) on global sections implies invertibility of ell in every residue field. Apply the finite coefficient clause of tateTwist_finite_locallyFree to A at r. Unital quotient maps from each ZMod are unique, so its source and target are the specified finite lines. Forget the module structure on the resulting isomorphism. For uniqueness among abelian-sheaf maps, the sheafification adjunction reduces equality to sectionwise tensor products, where additive tensor induction reduces it to the displayed formula on every pure tensor. This includes r=n, the zero coefficient ring, and the empty scheme.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The other five previously stated construction properties are retained as the named existing theorems with their original natural-language proofs; their Lean proof holes remain open. No convention, data construction, statement dependency or unit realization is withdrawn.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-roots-of-unity-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-coefficient-twists-detailed",
+  "lem-sc-torsor-h1",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "def-pur-affine-line-datum",
+  "lem-amb-kummer-any-base",
+  "det-def-sp-tate-twist-locally-free",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/_section.md",
+  "place": "Partial stage-3 proof: preserve the existing four proofs; identify root-torsor sections with the actual root cover naturally, and construct the uniquely normalized exponent transition from finite Tate local freeness and tensor generation. Five existing holes retained.",
+  "group": "E1",
+  "date": "2026-10-27"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -215,7 +284,79 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-f58339c2f (reviewer sub-agent of L); spot-checked: PASS: I read the whole item against the main-20261015 source, all 33 dependency statements and the cited Stacks places, and found nothing to repair. Shape: the delivery has no new nodes, the unit changes only its two realization fields, every cited id exists and none is merged, and no dependency path leads back to the item. Finite twist: ell is a unit times varpi^e, so ell^n lies in (varpi^n) and N=n is always admissible; freeness of rank ef is claimed only when e divides n, which is exactly the hypothesis of lem-pur-finite-kummer-level. Kummer class: the sequence is exact because ell is invertible (lem-amb-kummer-any-base); the coefficient insertion uses def-pur-kummer-module-coefficients; the cohomology comparison is 099W, valid for any abelian etale sheaf. I confirmed the source error: G_m is not a Z/ell^N-module, so the source's tensored Kummer sequence is ill-typed. The item's reading (boundary first, then insertion) is the typed form of the source's own torsor description. Etale/pro-etale identification of the root and twist sheaves: the inline argument is correct. It uses the etale trivializing cover of lem-pur-twist-sheaf-locally-free (1), the finite constant-ring comparison and the adjunction, and it follows the same pattern as the reviewed node def-pur-affine-line-datum. I found no existing node that states this identification, so no citation is missing. Torsor (03AJ): the map of short exact sequences [r]->r, a->t^a commutes, so delta_N(t) is exactly the class of the root torsor, with no sign; the level transitions are compatible. Normal cone: the regular-immersion condition matches Stacks definition-regular-ideal-sheaf and 063J; the rank-c bundle follows from 00LN via lem-pur-regular-sequence-graded-polynomial and lem-pur-conormal-graded-algebra; c=0 gives Z. Section invariant: the added separated finite-type domain is where sk-def-sf-operations(vi) defines Rg^!, and it agrees with def-pur-section-invariant. Deformation: the item follows def-pur-dnc-section-family verbatim; for g=s=id it gives A^1_B. Edge cases n=1 with e=2, an empty base, c=0 and the identity pair all check out. No SGA source is used, this is not a target node, and no tool_uses were needed. One item for maintenance: the unit record still names sec-smooth-purity and the master source path."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.sectionInvariant",
+    "AlgebraicGeometry.Etale.dualizingComplex",
+    "AlgebraicGeometry.Scheme.Hom.NormalConeData",
+    "AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.sectionInvariant",
+     "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions",
+     "lines": [
+      352,
+      362
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.dualizingComplex",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Dualizing",
+     "lines": [
+      87,
+      90
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.NormalConeData",
+     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion",
+     "lines": [
+      99,
+      131
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData",
+     "module": "WeilConjectures.AlgebraicGeometry.DeformationToNormalCone",
+     "lines": [
+      429,
+      542
+     ],
+     "kind": "structure",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity",
+     "lines": [
+      49,
+      64
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-grothendieck-cohomology-limit-vanishing"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.PurityConventions",
   "declaration": "WeilConjectures.PurityConventions.coordinateKummer",
@@ -262,5 +403,25 @@
   "group": "Q28",
   "result": "pass",
   "note": "Delta vs PASSed head 2729a3d: drops duplicate purityDncIntrinsicCompactifiable (uses landed identical-signature purityDncCompactifiable) and an unused import; this fixes L's return reason. All clauses match the node: general-N twist with N=n and no e|n; kappa = boundary, insertion at 1, comparison, then unique pure-tensor-normalized coefficient iso; base change, N-independence (power transition checked), root torsor; affine-local regularity with c=0; Ls*Rg!A_B with the node's exact hypotheses; extended-Rees DNC family with finiteTorConstructible Pic clause. No hollow defs; sorry only in theorems (11/3/4); docstrings present; statements verbatim; no cycle; universes kept. Mechanical finding: siteDerivedTensorIndependentCoefficients is .choose of site_derived_tensor_descent_independentCoefficients, so the statement genuinely depends on the theorem's constructed object: PASS on that point. nt_compile --json: SI 40.4 s and DNC 17.3 s rc 0; PurityConventions timed out once with the others at load ~130, then rc 0 at 59.0 s alone (25 s CPU; earlier heads 15.7/40.8 s): near the limit only because of load. Non-blocking: re-point Q21/Q31 citers (lem-pur-diagonal-base-change, thm-pur-dnc-invariance, def-pur-finite-section-comparison) in stage 3; def-pur-section-invariant lean.note slightly stale."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Finite coefficients $\\Lambda=A=A_{E,n}=\\mathcal O_E/\\pi_E^n$ for a finite\nextension $E/\\mathbf Q_\\ell$ with uniformizer $\\pi_E$, with $\\ell$ invertible on\nevery scheme in sight ($\\ell\\ne p$ in characteristic $p$); pro-étale sites,\n$D^b_{ctf}(T,\\Lambda)$ with twists $(-)(m)$, and the constructible exceptional\ninverse image $Rf^{!}$ of [det-def-sf-operations](vi), which exists for every\nseparated finite-type morphism (no admissibility hypothesis). For $Y$ separated finite type: $\\Aaf^1_Y$, zero section\n$s:Y\\hookrightarrow\\Aaf^1_Y$, open complement\n$j:\\mathbf G_{m,Y}\\hookrightarrow\\Aaf^1_Y$, global coordinate $t$; the\nfinite-level twist is $A(1)=\\mu_{\\ell^N}\\otimes_{\\Z/\\ell^N}A$, where\n$N\\ge1$ is an integer with $\\ell^NA=0$ (for $A=A_{E,n}$ one may take $N=n$,\nas $\\pi_E^n$ divides $\\ell^n$; the sheaf\n$\\mu_{\\ell^N}\\otimes_{\\Z/\\ell^N}A=\\Z_\\ell(1)\\otimes_{\\Z_\\ell}A$ does not depend\non the choice, and when $e=e(E/\\mathbf Q_\\ell)$ divides $n$ the choice\n$N=n/e$ makes $A=\\mathcal O_E/\\ell^N\\cong(\\Z/\\ell^N)^{ef}$ free over\n$\\Z/\\ell^N$), and the\n*Kummer class of $t$* is\n\n$$\n\\kappa(t)\\in H^1(\\mathbf G_{m,Y},A(1)),\n$$\n\nthe boundary of the $A$-coefficient Kummer sequence for $t$\n(equivalently the class of the $\\mu_{\\ell^N}$-torsor\n$\\mathcal T_t=\\Spec\\mathcal O[T_0]/(T_0^{\\ell^N}-t)$, tensored with $A$),\ncompatible with base change. For a closed immersion $i:Z\\hookrightarrow X$ with ideal sheaf\n$\\mathcal I_Z$ the normal cone is\n$N_{Z/X}=\\Spec_Z\\bigl(\\bigoplus_{r\\ge0}\\mathcal I_Z^{\\,r}/\\mathcal I_Z^{\\,r+1}\\bigr)$;\nwhen $i$ is regular of pure codimension $c$ the conormal sheaf\n$\\mathcal I_Z/\\mathcal I_Z^2$ is locally free of rank $c$ and $N_{Z/X}\\to Z$\nis a vector bundle of rank $c$ with zero section $z$. For a smooth\n$g:V\\to B$ with a closed section $s:B\\hookrightarrow V$, the *section\ninvariant* is\n\n$$\n\\mathcal C(g,s)=Ls^{*}\\omega_g=Ls^{*}Rg^{!}\\Lambda_B ,\n$$\n\nand the deformation to the normal cone *of the section* is\n\n$$\n\\mathcal D_sV=\\operatorname{Bl}_{s(B)\\times\\{0\\}}\n\\bigl(V\\times_B\\Aaf^1_B\\bigr)\\setminus\\widetilde{V\\times_B\\{0\\}},\n$$\n\nthe blow-up minus the strict transform of the closed fibre. It carries\n$\\widetilde g:\\mathcal D_sV\\to\\Aaf^1_B$ with a section\n$\\widetilde s:\\Aaf^1_B\\to\\mathcal D_sV$, and the *family object* is\n$\\mathcal F=L\\widetilde s^{*}\\omega_{\\widetilde g}$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T103418-L-1069462",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

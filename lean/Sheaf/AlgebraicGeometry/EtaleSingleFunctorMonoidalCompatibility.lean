@@ -7,6 +7,13 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import Sheaf.AlgebraicGeometry.EtaleFlatSingleTensorCompatibilityData
+import Sheaf.AlgebraicGeometry.EtaleSingleTensoratorNaturality
+import Sheaf.AlgebraicGeometry.EtaleSingleTensoratorAssociativity
+import Sheaf.AlgebraicGeometry.EtaleSingleTensoratorSymmetry
+import Sheaf.AlgebraicGeometry.EtaleSingleTensoratorPullback
+import Sheaf.CategoryTheory.FlatPairingAssociativityAssembly
+import Sheaf.CategoryTheory.FlatPairingPullbackAssembly
 
 /-! # Monoidal compatibility of degree-zero etale sheaves
 
@@ -33,89 +40,13 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
   {X X' : AlgebraicGeometry.Scheme.{u}}
 
-/-- The canonical degree-zero derived pairing computed on a flat left factor.
-Source: Stacks Tag 06YQ; (blueprint: lem-pur-etale-single-functor-monoidal-compatibility).
-This explicit result type uses the same derived tensor bifunctor as its consumers. -/
-@[irreducible]
-noncomputable def singleFunctorFlatPairing
+private theorem singleFunctorFlatPairing_eq
     (L M N : Sheaf X.smallEtaleTopology B) (hL : ObjectProperty.flat L)
     (f : L ⊗ M ⟶ N) :
-    ((derivedTensor B X).obj ((DerivedCategory.singleFunctor _ 0).obj L)).obj
-      ((DerivedCategory.singleFunctor _ 0).obj M) ⟶
-        (DerivedCategory.singleFunctor _ 0).obj N :=
-  (singleFunctorObjTensorIso (A := B) (X := X) L M hL).hom ≫
-    (DerivedCategory.singleFunctor _ 0).map f
-
-/-- Map a pair of arrows with the specified derived tensor bifunctor.
-Source: Stacks Tag 06YU;
-(blueprint: lem-pur-etale-single-functor-monoidal-compatibility).
-The coefficient category stays abstract when this composite is checked. -/
-noncomputable def derivedTensorPairMap (X : AlgebraicGeometry.Scheme.{u})
-    {K K' L L' : DerivedCategory (Sheaf X.smallEtaleTopology B)}
-    (f : K ⟶ K') (g : L ⟶ L') :
-    ((derivedTensor B X).obj K).obj L ⟶ ((derivedTensor B X).obj K').obj L' :=
-  ((derivedTensor B X).map f).app L ≫ ((derivedTensor B X).obj K').map g
-
-/-- Apply an ordinary pullback arrow after the canonical single/pullback comparison.
-Source: Stacks Tag 06YQ;
-(blueprint: lem-pur-etale-single-functor-monoidal-compatibility).
-No resolution or inverse-image comparison is chosen here. -/
-noncomputable def singleFunctorPullbackMap (v : X' ⟶ X)
-    {L : Sheaf X.smallEtaleTopology B} {L' : Sheaf X'.smallEtaleTopology B}
-    (f : (upperStar B v).obj L ⟶ L') :
-    (upperStar B v).leftDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj L) ⟶
-      (DerivedCategory.singleFunctor _ 0).obj L' :=
-  (singleFunctorCompLeftDerivedUpperStarIso B v).hom.app L ≫
-    (DerivedCategory.singleFunctor _ 0).map f
-
-/-- The equations expressing the tensor compatibility of flat degree-zero models.
-Source: Stacks Tags 06YQ and 06YU;
-(blueprint: lem-pur-etale-single-functor-monoidal-compatibility).
-The support sheaves and all ordinary multiplication or support maps are arbitrary inputs. -/
-structure EtaleFlatSingleTensorCompatibility (v : X' ⟶ X)
-    [(upperStar B v).PreservesFlat] : Prop where
-  associativity {L M N P Q R T : Sheaf X.smallEtaleTopology B}
-      (hL : ObjectProperty.flat L) (hM : ObjectProperty.flat M)
-      (hP : ObjectProperty.flat P)
-      (f : L ⊗ M ⟶ P) (g : P ⊗ N ⟶ R) (h : M ⊗ N ⟶ Q)
-      (k : L ⊗ Q ⟶ T) (a : R ⟶ T)
-      (w : f ▷ N ≫ g ≫ a = (α_ L M N).hom ≫ L ◁ h ≫ k) :
-      ((derivedTensor B X).map (singleFunctorFlatPairing L M P hL f)).app
-          ((DerivedCategory.singleFunctor _ 0).obj N) ≫
-        singleFunctorFlatPairing P N R hP g ≫ (DerivedCategory.singleFunctor _ 0).map a =
-      (derivedTensorAssociator B X _ _ _).hom ≫
-        ((derivedTensor B X).obj ((DerivedCategory.singleFunctor _ 0).obj L)).map
-          (singleFunctorFlatPairing M N Q hM h) ≫ singleFunctorFlatPairing L Q T hL k
-  symmetry {L M P Q : Sheaf X.smallEtaleTopology B}
-      (hL : ObjectProperty.flat L) (hM : ObjectProperty.flat M)
-      (f : L ⊗ M ⟶ P) (g : M ⊗ L ⟶ Q) (a : Q ⟶ P)
-      (w : (β_ L M).hom ≫ g ≫ a = f) :
-      (((derivedTensorSymmetry B X).hom.app
-          ((DerivedCategory.singleFunctor _ 0).obj L)).app
-          ((DerivedCategory.singleFunctor _ 0).obj M)) ≫
-        singleFunctorFlatPairing M L Q hM g ≫ (DerivedCategory.singleFunctor _ 0).map a =
-          singleFunctorFlatPairing L M P hL f
-  pullback {L M N : Sheaf X.smallEtaleTopology B}
-      {L' M' N' : Sheaf X'.smallEtaleTopology B}
-      (hL : ObjectProperty.flat L) (hL' : ObjectProperty.flat L')
-      (f : L ⊗ M ⟶ N) (g : L' ⊗ M' ⟶ N')
-      (b : (upperStar B v).obj L ⟶ L') (c : (upperStar B v).obj M ⟶ M')
-      (d : (upperStar B v).obj N ⟶ N')
-      (w : (upperStar B v).map f ≫ d =
-        Functor.OplaxMonoidal.δ (upperStar B v) L M ≫ (b ⊗ₘ c) ≫ g) :
-      (upperStar B v).leftDerivedFunctor.map (singleFunctorFlatPairing L M N hL f) ≫
-          (singleFunctorCompLeftDerivedUpperStarIso B v).hom.app N ≫
-            (DerivedCategory.singleFunctor _ 0).map d =
-        ((leftDerivedUpperStarTensorComparison B v).app
-            ((DerivedCategory.singleFunctor _ 0).obj L)).app
-            ((DerivedCategory.singleFunctor _ 0).obj M) ≫
-          ((derivedTensor B X').map
-            ((singleFunctorCompLeftDerivedUpperStarIso B v).hom.app L ≫
-              (DerivedCategory.singleFunctor _ 0).map b)).app _ ≫
-          ((derivedTensor B X').obj _).map
-            ((singleFunctorCompLeftDerivedUpperStarIso B v).hom.app M ≫
-              (DerivedCategory.singleFunctor _ 0).map c) ≫
-          singleFunctorFlatPairing L' M' N' hL' g
+    singleFunctorFlatPairing L M N hL f =
+      (singleFunctorObjTensorIso L M hL).hom ≫ (DerivedCategory.singleFunctor _ 0).map f := by
+  unfold singleFunctorFlatPairing
+  rfl
 
 /-- Canonical flat degree-zero pairings preserve associativity, symmetry and exact pullback.
 
@@ -148,6 +79,43 @@ theorem etaleSingleFunctor_monoidalCompatibility
     {X X' : AlgebraicGeometry.Scheme.{u}} (v : X' ⟶ X)
     [(upperStar B v).PreservesFlat] :
     EtaleFlatSingleTensorCompatibility (B := B) v := by
-  sorry
+  let S := DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology B) 0
+  refine ⟨?_, ?_, ?_⟩
+  · intro L M N P Q R T hL hM hP f g h k a w
+    simp only [singleFunctorFlatPairing_eq, derivedTensor_map_app,
+      derivedTensor_obj_map, Category.assoc]
+    simpa only [Category.assoc] using
+      (flatPairing_associativity_assembly S ObjectProperty.flat
+        (fun A C hA ↦ (singleFunctorObjTensorIso A C hA).hom)
+        (fun A C E ↦ (derivedTensorAssociator B X (S.obj A) (S.obj C) (S.obj E)).hom)
+        (fun {_ _} hA hC ↦ ObjectProperty.prop_tensor hA hC)
+        (fun {_ _ _ _} f g hA hA' ↦
+          singleFunctorObjTensorIso_hom_naturality f g hA hA')
+        (fun A C E hA hC ↦ singleFunctorObjTensorIso_associativity A C E hA hC)
+        hL hM hP f g h k a w)
+  · intro L M P Q hL hM f g a w
+    simp only [singleFunctorFlatPairing_eq]
+    rw [← Category.assoc, ← Category.assoc,
+      singleFunctorObjTensorIso_symmetry L M hL hM]
+    simp only [Category.assoc, ← Functor.map_comp]
+    rw [w]
+  · intro L M N L' M' N' hL hL' f g b c d w
+    let S' := DerivedCategory.singleFunctor (Sheaf X'.smallEtaleTopology B) 0
+    let U := upperStar B v
+    let D := U.leftDerivedFunctor
+    let γ := (singleFunctorCompLeftDerivedUpperStarIso B v).hom
+    simp only [singleFunctorFlatPairing_eq, derivedTensor_map_app,
+      derivedTensor_obj_map]
+    simpa only [Category.assoc] using
+      (flatPairing_pullback_assembly S S' U D γ ObjectProperty.flat ObjectProperty.flat
+        (fun A C hA ↦ (singleFunctorObjTensorIso A C hA).hom)
+        (fun A C hA ↦ (singleFunctorObjTensorIso A C hA).hom)
+        (fun A C ↦ Functor.OplaxMonoidal.δ U A C)
+        (fun A C ↦ ((leftDerivedUpperStarTensorComparison B v).app (S.obj A)).app (S.obj C))
+        (fun {_} hA ↦ Functor.PreservesFlat.flat_obj (F := U) hA)
+        (fun {_ _ _ _} b c hA hA' ↦
+          singleFunctorObjTensorIso_hom_naturality b c hA hA')
+        (fun A C hA ↦ singleFunctorObjTensorIso_pullback v A C hA)
+        hL hL' f g b c d w)
 
 end AlgebraicGeometry.Etale

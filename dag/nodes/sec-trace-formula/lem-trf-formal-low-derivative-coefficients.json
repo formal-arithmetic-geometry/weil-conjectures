@@ -1,0 +1,140 @@
+{
+ "id": "lem-trf-formal-low-derivative-coefficients",
+ "kind": "lemma",
+ "title": "Formal low derivatives equal transverse and coefficient derivatives",
+ "statement": "Let L be a characteristic-zero field and m,n,s natural numbers. For alpha_i in N^n, let every transverse variable occur with positive exponent in some alpha_i [def-trf-supported-homogeneous-division]. Let c_{i,gamma} be arbitrary series in L[[W]] and f_i in L[[W,Z]] with coefficient identity [W^delta Z^gamma]f_i=[W^delta]c_{i,gamma} [def-weil-pbc-multivariate-power-series]. For each degree d occurring among |alpha_i|, put E_d={j: some alpha_i with |alpha_i|<=d has alpha_i(j)>0}. Suppose there are indices i(j) and exponents beta_j with alpha_{i(j)}=beta_j+e_j, |alpha_{i(j)}|<=d and g_j=partial_Z^{beta_j} f_{i(j)} in (Z_j:j in E_d); suppose their E_d-Jacobian at zero has unit determinant. With the unnormalized iterated derivatives of [def-trf-formal-power-series-partial-derivative], the low derivative ideal of [lem-trf-formal-hilbert-stratum-minors] satisfies\nE=(partial^nu f_i:|nu|<|alpha_i|)=(Z_1,...,Z_n)+(rename(partial_W^delta c_{i,gamma}):|gamma|<|alpha_i|, |delta|<|alpha_i|-|gamma|).\nNo order, supported division, generating-ideal or scheme hypotheses are required. Empty vertex and variable lists and degree-zero vertices are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997 Theorem 7.14, Remarks 9.1 and 9.5, completion of Theorem 9.6, pp.265--268,275--277,282. Returned step 11. ILO VIII 2.3.11--2.3.13 is the route reference; BM is read online, absent locally. No single Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-trf-supported-homogeneous-division",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative",
+  "lem-trf-formal-hilbert-stratum-minors"
+ ],
+ "proof": [
+  {
+   "text": "If s=0 essentiality implies n=0, and both ideals vanish. If s>0 choose the maximum vertex degree d. Every Z variable belongs to its essential set. Each selected derivative has derivative degree |alpha_i|-1, hence belongs to E. Apply zero-graph factorization from [lem-trf-formal-transverse-shift-calculus], after reindexing its essential variables, to g_j in (Z). Its constant Jacobian is invertible, so (g_j)=(Z) and (Z) is contained in E. Equivalently allocate each monomial to its first Z factor, obtaining g=UZ, and invert U by the adjugate and its unit determinant.",
+   "uses": [
+    "lem-trf-formal-transverse-shift-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the quotient by (Z), compute partial_W^delta partial_Z^gamma f_i=gamma! partial_W^delta c_{i,gamma}. This follows by iterating the coefficient rule for a formal partial derivative: a Z monomial survives evaluation at zero exactly when its exponent is gamma. Split any mixed derivative exponent into its W and Z parts. Its degree is their sum, so the low-derivative bound gives exactly the two displayed strict bounds. Factorials are units in characteristic zero. Thus the images of the two ideals in the quotient agree. Both contain (Z), so pullback from that quotient proves equality. If n=0 the calculation alone suffices. Vertices of degree zero supply no generators on either side.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-formal-transverse-shift-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997 Theorem 7.14, Remarks 9.1 and 9.5, completion of Theorem 9.6, pp.265--268,275--277,282. Returned step 11. ILO VIII 2.3.11--2.3.13 is the route reference; BM is read online, absent locally. No single Stacks tag states this result. Explicit specialization and glue split in stage 3 by U9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ideals of low derivatives of multivariate formal power series equal the transverse variable ideal plus the derivatives of their coefficient series",
+   "results": "8 hits: PowerSeries.maximalIdeal_eq_span_X, PowerSeries.derivativeFun, HasFPowerSeriesAt.deriv, PowerSeries.derivative, PowerSeries.derivative.ext, PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem, PowerSeries.coeff_mul_mem_ideal_mul_ideal_of_coeff_mem_ideal, MvPowerSeries.LinearTopology.basis. None states the coefficient-ideal identity or the regular stratum/descent comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; univariate derivative and topology facts do not supply the three comparison steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat Taylor extension contracts equality of coherent ideals to one open neighbourhood and vanishing of coefficient derivatives detects local maximal ideal powers",
+   "results": "8 hits including Ideal.comap_map_eq_self_of_faithfullyFlat and Module.FaithfullyFlat.of_flat_of_isLocalHom. The ideal contraction lemma is relevant after constructing and identifying the stalk Taylor map; it does not provide that identification or the support comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the regular coefficient descent or its maximal-ideal-power support condition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal changes of coordinates preserve the determinantal ideals of truncated Taylor translation presentations and regular Hilbert Samuel strata",
+   "results": "8 submersive-presentation hits, including Algebra.PreSubmersivePresentation.jacobian_reindex, Algebra.SubmersivePresentation.aevalDifferentialEquiv and invJacobianOfHasCoeffs. None concerns rank minors of translated truncated power series.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.map",
+   "results": "5 hits: MvPowerSeries.coeff_mem_of_mem_map_C, ker_map_of_fg, mem_map_C_of_forall_coeff_mem, mem_map_C_iff_of_fg, ker_mapAlgHom_of_fg. These treat coefficientwise ideal extension, not differentiation, chart changes or regular supports.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "lowDerivativeIdeal|coefficient.*[Oo]rder.*[Hh]ilbert; killCompl.*ker|ker.*killCompl; coefficient derivative; Taylor minors",
+   "results": "msearch grep: 0 Mathlib hits for the coefficient-order/Hilbert query. Local rg finds lowDerivativeIdeal only in FormalHilbertStratumMinors and the assigned item. PowerSeriesQuotientVariables gives a proved killed-variable kernel computation, usable within the formal calculation. The project formal-minors, implicit-Taylor, etale-coordinate and normal-cone statements were read; their remaining specializations are not declared. blueprint_refs.py search returned 0 blueprint nodes for both coefficient derivative and Taylor minors.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate. Reuse the existing comparison theorems inside the new proof plans; the three stated conclusions are the missing glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientOrderHilbertEquality",
+  "date": "2026-10-26",
+  "group": "U9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Subargument of lem-trf-coefficient-order-hilbert-equality: Formal low derivatives equal transverse and coefficient derivatives. BM 1997 Remark 9.5 and completion of Theorem 9.6; ILO VIII 2.3.11--13 is the inherited route referral.",
+   "via": [
+    "lem-trf-coefficient-order-hilbert-equality",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalLowDerivativeCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalLowDerivativeCoefficients.lean",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.formal_lowDerivativeIdeal_eq_coefficients",
+  "statement": "theorem formal_lowDerivativeIdeal_eq_coefficients\n    {L : Type u} [Field L] [CharZero L] {m n s : ℕ}\n    (α : Fin s → Fin n →₀ ℕ)\n    (hessential : ∀ l : Fin n, ∃ v : Fin s, 0 < α v l)\n    (c : Fin s → (Fin n →₀ ℕ) → MvPowerSeries (Fin m) L)\n    (f : Fin s → MvPowerSeries (Fin m ⊕ Fin n) L)\n    (hexpansion : ∀ (l : Fin s) (d : (Fin m ⊕ Fin n) →₀ ℕ),\n      MvPowerSeries.coeff d (f l) =\n        MvPowerSeries.coeff (Finsupp.comapDomain.addMonoidHom Sum.inl_injective d)\n          (c l (Finsupp.comapDomain.addMonoidHom Sum.inr_injective d)))\n    (hblocks : ∀ d : ℕ, (∃ l : Fin s, (α l).degree = d) →\n      ∃ (pick : {l : Fin n // essential α d l} → Fin s)\n        (β : {l : Fin n // essential α d l} → Fin n →₀ ℕ),\n        (∀ l, α (pick l) = β l + Finsupp.single l.val 1 ∧\n          (α (pick l)).degree ≤ d ∧\n          iteratedPartial (fullVertex m (β l)) (f (pick l)) ∈ transverseIdeal α d) ∧\n        IsUnit (Matrix.det (fun l r : {l : Fin n // essential α d l} ↦\n          MvPowerSeries.constantCoeff (MvPowerSeries.pderiv L (Sum.inr r.val)\n            (iteratedPartial (fullVertex m (β l)) (f (pick l))))))) :\n    lowDerivativeIdeal α f =\n      Ideal.span (Set.range fun l : Fin n ↦\n        (MvPowerSeries.X (Sum.inr l) : MvPowerSeries (Fin m ⊕ Fin n) L)) ⊔\n      Ideal.span {g | ∃ (l : Fin s) (γ : Fin n →₀ ℕ) (δ : Fin m →₀ ℕ),\n        γ.degree < (α l).degree ∧ δ.degree < (α l).degree - γ.degree ∧\n          g = MvPowerSeries.rename Sum.inl (iteratedPartial δ (c l γ))}",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261026T092825-L-3470852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261026T092825-L-3470852",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

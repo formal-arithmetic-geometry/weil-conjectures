@@ -10,12 +10,8 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.FinitePresentation
 public import Sheaf.Topology.SpectralSpace.ConnectedComponentsProfinite
-import Sheaf.RingTheory.FiniteWContractible
-import Sheaf.Topology.WLocalComponents
-import Sheaf.Topology.FilteredSpectrumTopologicalLimit
-import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Sheaf.RingTheory.FiniteContractibleDiagramLocalizations
+import Sheaf.RingTheory.WLocalDirectedLimitTopology
 
 /-!
 # Ind-finite algebras over a w-contractible base
@@ -96,6 +92,35 @@ theorem indfiniteContractibleBase_wStrict
         ∀ (x : ConnectedComponents (PrimeSpectrum c.pt)) (d : D),
           (e x).val d = (PrimeSpectrum.continuous_comap
             (c.ι.app d).hom.toRingHom).connectedComponentsMap x) := by
-  sorry
+  let : IsDirected D (· ≤ ·) := ⟨hdir⟩
+  obtain ⟨hstages, _, htrans, hloc⟩ :=
+    CommRingCat.finiteContractibleDiagramLocalizations A D F hfinite hfp c hc
+  have hw : ∀ d : D, IsWLocalRing (F.obj d) := fun d ↦ by
+    have := hstages d
+    infer_instance
+  obtain ⟨_, hmax, _, hwlimit, hclosed, e, he⟩ :=
+    PrimeSpectrum.wLocal_directedLimit_topology D hdir
+      (F ⋙ forget₂ (CommAlgCat.{u} A) CommRingCat.{u}) hw
+      (fun i j hij m hm ↦ (htrans i j hij).2.2 m hm)
+      ((forget₂ (CommAlgCat.{u} A) CommRingCat.{u}).mapCocone c) hc
+  have hlocal : ∀ (m : Ideal c.pt) [m.IsMaximal],
+      IsStrictlyHenselianLocalRing (Localization.AtPrime m) := by
+    intro m hm
+    exact (hloc ⟨m, hm.isPrime⟩ ((hmax ⟨m, hm.isPrime⟩).mp hm)).1
+  have hstrict : IsWStrictlyLocalRing c.pt :=
+    { toIsWLocalRing := hwlimit
+      isStrictlyHenselianLocalRing_localization := hlocal }
+  refine ⟨hstrict, ?_, hclosed, e, ?_⟩
+  · intro x
+    apply mem_closedPoints_iff.mpr
+    apply (PrimeSpectrum.isClosed_singleton_iff_isMaximal _).mpr
+    have hm : x.val.asIdeal.IsMaximal :=
+      (PrimeSpectrum.isClosed_singleton_iff_isMaximal _).mp
+        (mem_closedPoints_iff.mp x.property)
+    exact (hloc x.val ((hmax x.val).mp hm)).2.1
+  · intro x d
+    obtain ⟨y, rfl⟩ := ConnectedComponents.surjective_coe x
+    rw [Continuous.connectedComponentsMap_mk]
+    exact he y d
 
 end

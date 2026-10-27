@@ -108,7 +108,32 @@
   "def-sc-curves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.finrankH_zero_eq"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.finrankH_zero_eq",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1460,
+      1471
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "split_report": {
@@ -136,5 +161,40 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field, $C$ a scheme which is smooth of relative dimension\n$1$ and proper over $k$ with $H^0(C,\\mathcal O_C)=k$, of genus\n$g=\\dim_kH^1(C,\\mathcal O_C)$, and $\\mathcal L$ a line bundle on $C$ of\ndegree $d=\\deg\\mathcal L\\ge2g-1$ ([def-sc-pic0]). Then\n$H^1(C,\\mathcal L)=0$ and\n\n$$\nh^0(\\mathcal L):=\\dim_kH^0(C,\\mathcal L)=d+1-g.\n$$",
+  "proof": [
+   {
+    "text": "By Serre duality ([thm-sc-serre-duality-curve]),\n\n$$\nH^1(C,\\mathcal L)^{\\vee}\\cong H^0\\bigl(C,\\mathcal L^{-1}\\otimes\\Omega^1_{C/k}\\bigr).\n$$",
+    "uses": [
+     "thm-sc-serre-duality-curve"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Here $\\deg\\Omega^1_{C/k}=2g-2$ ([lem-sc-canonical-degree]) and the degree\nis additive under tensor products, with $\\deg\\mathcal L^{-1}=-d$\n([lem-pc-degree-base-change](2)), so\n\n$$\n\\deg\\bigl(\\mathcal L^{-1}\\otimes\\Omega^1_{C/k}\\bigr)=(2g-2)-d\\le-1<0 .\n$$",
+    "uses": [
+     "lem-sc-canonical-degree",
+     "lem-pc-degree-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "A line bundle of negative degree has no nonzero global sections\n([lem-sc-negative-degree-no-sections]), so the right-hand side vanishes\nand $H^1(C,\\mathcal L)=0$. Since also $H^q(C,\\mathcal L)=0$ for $q\\ge2$\n(Grothendieck vanishing on the one-dimensional Noetherian scheme $C$),\nRiemann–Roch ([lem-sc-riemann-roch], part (1)) gives\n\n$$\n\\dim_kH^0(C,\\mathcal L)=\\chi(C,\\mathcal L)=d+1-g.\n$$",
+    "uses": [
+     "lem-sc-negative-degree-no-sections",
+     "lem-sc-riemann-roch"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

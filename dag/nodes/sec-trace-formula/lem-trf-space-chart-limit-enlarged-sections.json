@@ -1,0 +1,347 @@
+{
+ "id": "lem-trf-space-chart-limit-enlarged-sections",
+ "kind": "statement",
+ "title": "All-chart module limits are enlarged-etale sections",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use the enlarged etale ringed sites $\\mathcal C_Z$ and extension equivalences of [lem-trf-space-enlarged-etale-ringed-site-model]. Let $F$ be an $\\mathcal O_X$-module sheaf [def-weil-sheaf-of-modules-category], let $\\widetilde F$ be its extension, let $V\\to Y$ be an etale scheme, and put $W=X\\times_YV$ [lem-trf-space-fibre-products-etale-covers]. Write $\\mathcal A(f,V)$ for the chart category of [def-trf-space-etale-module-functors]. The maps $\\widetilde F(W)\\to F(T)$ obtained by restriction along the induced $T\\to W$, for $(T\\to X,a:T\\to V)$ in $\\mathcal A(f,V)$, form a limiting cone on its opposite chart diagram of $\\Gamma(V,\\mathcal O_V)$-modules. Its scalar action on $F(T)$ is through $a^\\sharp$. This is a limit with a small vertex in the prescribed module universe, even if the category of all charts lies in a larger universe. For every surjective etale scheme chart $T_0\\to W$, the same cone vertex is canonically $\\operatorname{Eq}(F(T_0)\\rightrightarrows F(T_0\\times_WT_0))$, and projection to any other chart is restriction from $\\widetilde F(W)$. These identifications commute with module morphisms in $F$ and with maps $V_1\\to V_2$ over $Y$, using the induced maps $X\\times_YV_1\\to X\\times_YV_2$ and postcomposition of chart triangles. Consequently the direct image $D_f$ specified by the chart limits has a unique natural isomorphism $\\alpha_f:D_f\\xrightarrow{\\sim}Q_f$, where $Q_f$ is enlarged-site ringed module direct image transported to the small etale sites, whose component on every chart projection is this restriction map. If $g:Y'\\to Y$ is etale, put $X'=X\\times_YY'$ with projections $h,f'$. Then $h$ is etale, and the identifications $\\mathcal C_{Y'}=\\mathcal C_Y/Y'$ and $\\mathcal C_{X'}=\\mathcal C_X/X'$ of the enlarged model identify $v_{f'}$ with the localization of $v_f$ at $Y'$. On $V\\to Y'$ the identification is $X\\times_YV\\simeq X'\\times_{Y'}V$, sending $(x,v)$ to $((x,g_V(v)),v)$, with inverse forgetting the $Y'$ coordinate, where $g_V:V\\to Y'$ is the structure map. This identification preserves the underlying chart schemes and their arrows, every projection of the limiting cone above, and the coefficient maps given by pullback of regular functions. No representability of $f$ or surjectivity of $g$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G1 (lemma-compare-etale-sites), 03H7 (remark-explain-equivalence), 03G8 (lemma-morphism-ringed-topoi); spaces-morphisms.tex Tag 03M8 (lemma-compute-pushforward), proof. All-chart limiting-cone and small-vertex formulation expands the atlas equalizer. Tag 03LX (lemma-pushforward-etale-base-change-modules) via the enlarged localization square in lemma-pushforward-etale-base-change; spaces-topologies.tex Tag 041F (lemma-etale), (3), on {g,id_Y}."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Identify the chart category with the scheme objects of $\\mathcal C_X/W$. A triangle $(T\\to X,a:T\\to V)$ gives the unique $q:T\\to W=X\\times_YV$ with these projections, and conversely a map over $W$ gives this triangle. Since $V\\to Y$ is etale, $W\\to X$ is etale by base change. Both $T$ and $W$ are etale over $X$, so the permanence statement makes $q$ etale; as its source is a scheme this is representable etale. Conversely a scheme etale over $W$ is etale over $X$ by composition. These two constructions are inverse on objects and arrows by the fibre-product universal property. In particular an atlas $T_0\\to W$ and its overlap $T_1=T_0\\times_WT_0$ are objects of the chart category. Such an atlas exists by the definition of algebraic space; its overlap is a scheme.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-algebraic-space",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03FU (lemma-base-change-etale), 03FV (lemma-etale-permanence), 03H7 (remark-explain-equivalence)."
+   }
+  },
+  {
+   "text": "Put $R=\\Gamma(V,\\mathcal O_V)$ and $E=\\widetilde F(W)$. The normalized ring map for the enlarged ringed morphism gives $R\\to\\widetilde{\\mathcal O}_X(W)$, hence an $R$-module structure on $E$. Its restriction to a chart $q:T\\to W$ is $a^\\sharp:R\\to\\Gamma(T,\\mathcal O_T)$: this is the normalization for scheme charts of the ringed morphism. Semilinearity of module restrictions therefore makes each $\\rho_T:E\\to F(T)$ $R$-linear for exactly the scalar action specified in the question. For a chart arrow $b:T'\\to T$, functoriality gives $F(b)\\rho_T=\\rho_{T'}$, so these maps are a cone on the opposite chart diagram.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "def-weil-sheaf-of-modules-category",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G8 (lemma-morphism-ringed-topoi), its structural-ring-map construction on scheme charts; Tag 03H7 (remark-explain-equivalence)."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme chart $p:T_0\\to W$. The enlarged-model equalizer identifies $E$ by its restrictions with $\\operatorname{Eq}(F(T_0)\\rightrightarrows F(T_1))$, where $T_1=T_0\\times_WT_0$. This is an equalizer of $R$-modules: both arrows are linear by Step 2, and the extension carries the same addition and scalar operations. The equalizer is a subset of the small section module $F(T_0)$, with its inherited operations, so has a small carrier in the prescribed universe. Thus $E$ has a small representative; no product indexed by all charts, and no assumption of smallness of that index in the module universe, is used.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03H7 (remark-explain-equivalence), 03G1 (lemma-compare-etale-sites); smallness is the project universe convention."
+   }
+  },
+  {
+   "text": "Let $M$ be an arbitrary $R$-module in the prescribed universe and let $(k_T:M\\to F(T))_T$ be any cone on the chart diagram. Its two compatibility equations for $T_1\\rightrightarrows T_0$ imply that $k_{T_0}(m)$ equalizes the overlap restrictions for every $m\\in M$. Step 3 therefore gives a unique map $k:M\\to E$ satisfying $\\rho_{T_0}k=k_{T_0}$. This map is $R$-linear: the two candidate values for $k(m+m')=k(m)+k(m')$ and $k(rm)=r k(m)$ have equal restrictions to $T_0$, and $E\\to F(T_0)$ is injective. The same argument gives preservation of zero. This constructs the factorization without forming a set of tuples over the possibly larger chart category.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H7 (remark-explain-equivalence), elementary use of its equalizer universal property."
+   }
+  },
+  {
+   "text": "Check the factorization on every chart $T\\to W$, not just on the chosen atlas. Put $P=T\\times_WT_0$. Base change makes $P\\to T$ a surjective etale scheme chart, and $P$ is a scheme. The arrows $P\\to T$ and $P\\to T_0$ belong to the chart category by Step 1. Cone compatibility and functoriality give\n$k_T(m)|_P=k_P(m)=k_{T_0}(m)|_P=(\\rho_T k(m))|_P$.\nThe equalizer formula for the extension evaluated on the scheme $T$, using its chart $P\\to T$, makes $F(T)\\to F(P)$ injective. Thus $k_T=\\rho_T k$. Any other factorization agrees with $k$ after projection to $T_0$, hence equals $k$ by the same injectivity at $W$. This proves the limit universal property for every cone. Repeating Step 3 with any other atlas yields its claimed canonical equalizer identification, always with the same projections $\\rho_T$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H7 (remark-explain-equivalence), applied also to $P\to T$; Tag 041F (lemma-etale), (3)."
+   }
+  },
+  {
+   "text": "For a module morphism $u:F\\to G$, naturality of the extension gives $u_T\\rho_T^F=\\rho_T^G\\widetilde u_W$ on every chart. Hence the limit comparison commutes with $u$ by uniqueness in Step 5. If $c:V_1\\to V_2$ is over $Y$, write $b:X\\times_YV_1\\to X\\times_YV_2$ for its induced map. A chart $(T,a)$ for $V_1$ becomes $(T,ca)$ for $V_2$, and functoriality says $\\rho_{T,a}^{V_1}\\widetilde F(b)=\\rho_{T,ca}^{V_2}$. This is precisely the required compatibility with postcomposition of triangles. It is semilinear over $c^\\sharp:\\Gamma(V_2,\\mathcal O_{V_2})\\to\\Gamma(V_1,\\mathcal O_{V_1})$ because all scalar maps are pullbacks of regular functions. These equations also show independence of the chosen atlas.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-weil-sheaf-of-modules-category",
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-enlarged-chart-ringed-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03H7 (remark-explain-equivalence), naturality, and 03G8 (lemma-morphism-ringed-topoi), scheme pullbacks of functions."
+   }
+  },
+  {
+   "text": "The enlarged chart ringed morphism has underlying direct image $H\\mapsto(V\\mapsto H(X\\times_YV))$. By the definition of ringed module direct image its scalar action is induced by the structural ring map. Consequently, after restriction back to scheme objects, $Q_f(F)(V)$ is the module $E$ of Step 2, with restrictions and module maps as in Step 6. Both $D_f(F)(V)$ and $E$ are limits of the same specified chart diagram, so the two universal properties give mutually inverse maps; their composites are identities since all chart projections agree. Define $\\alpha_f$ by these maps. Step 6 makes them a natural module-sheaf isomorphism, in both $F$ and $V$. Any other isomorphism preserving the chart projections equals this one by Step 5, proving the asserted uniqueness.",
+   "uses": [
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03G8 (lemma-morphism-ringed-topoi) and 03M8 (lemma-compute-pushforward), opening evaluation formula of its proof."
+   }
+  },
+  {
+   "text": "Now let $g:Y'\\to Y$ be etale. Its base change $h:X'=X\\times_YY'\\to X$ is etale by permanence. The enlarged model identifies $\\mathcal C_{Y'}$ and $\\mathcal C_{X'}$ with $\\mathcal C_Y/Y'$ and $\\mathcal C_X/X'$ respectively, including coverings and restricted structure sheaves. For an object $V\\to Y'$ (also allowing $V$ to be an algebraic space), the localization of $v_f$ sends it to $X\\times_YV\\to X\\times_YY'$. The canonical isomorphism to $v_{f'}(V)=X'\\times_{Y'}V$ sends $(x,v)$ to $((x,g_V(v)),v)$. Its inverse forgets the $Y'$ coordinate. These are inverse morphisms because the fibre-product equations force that coordinate to equal $g_V(v)$. Both maps commute with maps of $V$, by their displayed coordinates. They thus identify the localized functor with $v_{f'}$ on every enlarged-site object and arrow.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FU (lemma-base-change-etale); localization square in lemma-pushforward-etale-base-change, and Tag 03LX (lemma-pushforward-etale-base-change-modules)."
+   }
+  },
+  {
+   "text": "For a scheme $V\\to Y'$, the isomorphism of Step 8 sends a scheme chart with maps $(t_X,t_V)$ to the same scheme with maps $((t_X,g_Vt_V),t_V)$. Forgetting the middle coordinate is inverse, also on chart arrows. The resulting chart has the same map $a=t_V:T\\to V$, so its coefficient homomorphism $a^\\sharp$ and every diagram module are unchanged. Restriction to that chart on either side is restriction along these corresponding maps into the two isomorphic fibre products; contravariant functoriality identifies these projections. Since the site localizations also restrict the structure sheaves, the same equations hold for the structural ring maps, checked on scheme charts by their pullback-of-functions normalization. This proves preservation of the full limiting cones and coefficient maps, rather than merely an abstract isomorphism of their vertices. Neither the argument nor any cited statement requires $f$ representable or $g$ surjective.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "def-weil-sheaf-of-modules-category",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX (lemma-pushforward-etale-base-change-modules), via the enlarged localization square; Tag 03G8 (lemma-morphism-ringed-topoi), structural-ring normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03H7 and 03G8; atlas equalizer expanded to the universal property for every chart; localization square in lemma-pushforward-etale-base-change. Also spaces-morphisms.tex Tag 03M8, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary morphism of algebraic spaces the limit of module sections over all compatible etale scheme charts is canonically the sections on the fibre product in the enlarged etale site",
+   "results": "8 hits; inspected results: AlgebraicGeometry.Scheme.Modules.instHasLimits, PresheafOfModules.limitPresheafOfModules, SheafOfModules.Presentation.map_π_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic site or scheme declarations do not identify the specified algebraic-space chart projections and adjunction-unit tensors with the enlarged ringed-site model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize direct image of modules on algebraic spaces by the limit over all scheme charts, with projections identified with restrictions from the extended sheaf",
+   "results": "8 hits; inspected results: AlgebraicGeometry.Scheme.Modules.instHasLimits, Module.DirectLimit, SheafOfModules.hasLimit, SheafOfModules.hasLimitsOfShape, Module.DirectLimit.inhabited, AlgebraicGeometry.Scheme.Modules.restrict_obj, PresheafOfModules.limitPresheafOfModules, Module.DirectLimit.module",
+   "date": "2026-10-22",
+   "verdict": "no match: generic site or scheme declarations do not identify the specified algebraic-space chart projections and adjunction-unit tensors with the enlarged ringed-site model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforward\"",
+   "results": "12 hits; inspected results: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: generic site or scheme declarations do not identify the specified algebraic-space chart projections and adjunction-unit tensors with the enlarged ringed-site model"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|chart.*[Ll]imit|[Ll]imit.*chart|compatible.*sections",
+   "results": "0 hits; inspected results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic site or scheme declarations do not identify the specified algebraic-space chart projections and adjunction-unit tensors with the enlarged ringed-site model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare chart-limit module sections on algebraic spaces with enlarged etale sections compatibly with localization in an etale cartesian square and canonical fibre product chart and ring identifications",
+   "results": "8 hits: RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, StandardEtalePair.homEquiv_symm_apply, Algebra.FormallyEtale.localization_map, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.exists_lift_of_germInjective, Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, commutative ring etaleness, or abstract adjunctions; none supplies the specified all-chart algebraic-space realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For algebraic spaces identify localization of the enlarged etale base change functor with the functor of the cartesian square preserving all scheme chart limit projections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, Algebra.Etale.of_isLocalizationAway, Algebra.FormallyEtale.localization_map, Algebra.Etale.baseChange, Algebra.FormallyEtale.localization_base, Algebra.Etale.of_isLocalization_Away, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, Algebra.FormallyEtale.of_isLocalization",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, commutative ring etaleness, or abstract adjunctions; none supplies the specified all-chart algebraic-space realization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|enlarged.*etale|chart.*limit",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf, scheme or module-category constructions do not state the algebraic-space chart identification, small-vertex atlas comparison and normalized localization with all projections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image of modules on algebraic spaces is evaluation on fibre products in the enlarged etale site and a limit over scheme charts",
+   "results": "8 hits; PresheafOfModules.evaluation, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward, SheafOfModules.evaluation, SheafOfModules.evaluationPreservesLimit, PresheafOfModules.evaluationJointlyReflectsLimits, PresheafOfModules.isLimitLimitCone, PresheafOfModules.evaluation_preservesColimit",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf, scheme or module-category constructions do not state the algebraic-space chart identification, small-vertex atlas comparison and normalized localization with all projections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"limit\"",
+   "results": "12 hits; PresheafOfModules.Finite.hasFiniteColimits, PresheafOfModules.hasColimitsOfSize, PresheafOfModules.hasColimitsOfShape, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, PresheafOfModules.toPresheaf_preservesColimitsOfSize, PresheafOfModules.toPresheaf_preservesColimitsOfShape, PresheafOfModules.Finite.evaluation_preservesFiniteColimits, PresheafOfModules.evaluation_preservesColimitsOfSize",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf, scheme or module-category constructions do not state the algebraic-space chart identification, small-vertex atlas comparison and normalized localization with all projections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a module sheaf on an algebraic space are the limit over all compatible etale scheme charts with the restriction projections",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.isSheaf, SheafOfModules.sections, AlgebraicGeometry.LocallyRingedSpace.Γ_def, AlgebraicGeometry.SheafedSpace.Γ_obj, AlgebraicGeometry.Scheme.PresheafOfModules, AlgebraicGeometry.SheafedSpace.Γ_obj_op, SheafOfModules.sectionsFunctor_obj, AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf, scheme or module-category constructions do not state the algebraic-space chart identification, small-vertex atlas comparison and normalized localization with all projections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on an algebraic space evaluated on a fibre product is a small limit of its sections over all etale scheme charts via an atlas equalizer",
+   "results": "8 hits; AlgebraicGeometry.SheafedSpace.GlueData.vPullbackConeIsLimit, AlgebraicGeometry.LocallyRingedSpace.GlueData.vPullbackConeIsLimit, AlgebraicGeometry.PresheafedSpace.GlueData.vPullbackConeIsLimit, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, PresheafOfModules.isSheaf_of_isLimit, CategoryTheory.Sheaf.isLimitConeΓ, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.hasLimit_cospan_forget_of_left, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.hasLimit_cospan_forget_of_right",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf, scheme or module-category constructions do not state the algebraic-space chart identification, small-vertex atlas comparison and normalized localization with all projections"
+  },
+  {
+   "tool": "grep",
+   "query": "isLimitConeΓ|def sectionsFunctor|evaluationPreservesLimit",
+   "results": "6 hits; Mathlib/CategoryTheory/Types/Basic.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf, scheme or module-category constructions do not state the algebraic-space chart identification, small-vertex atlas comparison and normalized localization with all projections"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-etale-module-pushforward-restriction",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map input in the polarized ampleness descent specialization chain below lem-trf-local-term-locality; parent proof Steps 1 and 4: enlarged-space sections, all scheme-chart projections, and their natural module structure.",
+   "via": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-chart-limit-enlarged-sections",
+  "worker": "stage1",
+  "group": "Q67",
+  "summary": "Checked project attachment absence and existing Mathlib search logs; proved the limiting-cone property explicitly from the existing enlarged atlas equalizer, including factorization through every chart and smallness without a large product. Verified all scalar maps, naturality, transported module direct image, and the localized fibre-product functor. Reused existing DAG nodes; created no nodes. The statement is unchanged. Corrected the overlap base in the argument relative to the printed proof of Stacks 03M8 (see report).",
+  "blueprint": "lem-trf-local-term-locality: specialization-to-the-normal-cone argument, via the existing trace-specialization / polarized ampleness descent chain recorded in blueprint.from; this item supplies its section-algebra and module-localization infrastructure. No chapter or unit route was changed. Latest blueprint proof paragraphs (1) and (2), specialization to the normal cone."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-9b1b89bf4",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-9b1b89bf4 (reviewer sub-agent of L); spot-checked: I read the item and all nine steps in full, together with the statements of every cited node. Shape: one commit touching only the item and its report, with no new nodes. The statement and stmt_deps are identical to clones/live and side-live, where the item is still unsplit with no proof, so no other group has split it first and there is no re-split note. The proof graph has no cycle, and the item correctly does not cite the direct-image comparisons that depend on it. Sources: Stacks 03H7 gives the atlas equalizer the item uses. In the 03M8 proof the printed overlap (V×_YU)×_X(V×_YU)=V×_YR is a real source typo: with X=Y=U=Spec k and V two points the left side has 4 points and the right side 2. The correct base is V×_YX, which the item uses (T_0×_WT_0), and the typo was reported, not copied. Steps: (1) the chart category matches scheme objects over W, using base change, permanence for maps between spaces étale over a common base, and the scheme clause of the fibre-products node. (2) R-scalars come from the normalized α_f; for a non-surjective chart this follows elementarily by restricting from T⊔T_0. (3)-(4) The equalizer gives a small vertex and the factorization through the atlas, which is linear by injectivity. (5) The test P=T×_WT_0 together with sheaf injectivity gives factorization through every chart and uniqueness. (6) Naturality in F and in V_1→V_2 holds, semilinear over c^♯. (7) Q_f(F)(V) is F̃(W) with its R-action, so α_f is the unique projection-preserving isomorphism. (8)-(9) I checked the coordinates (x,v)↦((x,g_V v),v) and their inverse; charts, a^♯ and projections are preserved, and no surjectivity of g or representability of f is used. Edge cases also hold: W empty gives 0, f=id gives F(W), and g open or empty works. Batch-5 flag: chartwise-etale-permanence (03FT-03FV, 041F) and enlarged-chart-ringed-morphism (03G2/03G8) are general algebraic-space foundations, outside the trace formula and Poincaré duality and not steps of their proofs, so they are accepted as generic. All cited statements are in the item's unit, apart from definitions; no SGA is cited and no tool_uses are needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceChartLimitEnlargedSections",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_chart_limit_enlarged_sections",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.enlargedSmallModuleDirectImage",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleChartLift",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleChartRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleChartRestriction_linear",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleChartProjection",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleChartProjection_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleChartCone",
+   "AlgebraicGeometry.AlgebraicSpace.space_chart_limit_enlarged_sections",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleBaseChangeSnd",
+   "AlgebraicGeometry.AlgebraicSpace.space_chart_limit_enlarged_localization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceChartLimitEnlargedSections.lean",
+  "statement": "theorem space_chart_limit_enlarged_sections (f : X ⟶ Y) : (∀ (F : X.Modules) (V : Y.EtaleSite), Nonempty (IsLimit (enlargedModuleChartCone f F V))) ∧ (∀ (F : X.Modules) (V : Y.EtaleSite) (q₀ q₁ : ModuleChart f V) (p r : q₁ ⟶ q₀), IsEtale (enlargedModuleChartLift f V q₀).hom.left.hom.hom → IsSurjective (enlargedModuleChartLift f V q₀).hom.left.hom.hom → IsPullback ((enlargedSchemeInclusion X).map p.left) ((enlargedSchemeInclusion X).map r.left) (enlargedModuleChartLift f V q₀) (enlargedModuleChartLift f V q₀) → ∃ e : ((enlargedSmallModuleDirectImage f).obj F).val.obj (op V) ≃ₗ[ Y.structureSheaf.obj.obj (op V)] LinearMap.ker ((moduleChartMap f F V p).hom - (moduleChartMap f F V r).hom), ∀ s, (e s).val = enlargedModuleChartRestriction f F V q₀ s) ∧ (∀ (F G : X.Modules) (b : F ⟶ G) (V : Y.EtaleSite) (q : ModuleChart f V) s, enlargedModuleChartRestriction f G V q (((enlargedSmallModuleDirectImage f).map b).val.app (op V) s) = b.val.app (op q.left) (enlargedModuleChartRestriction f F V q s)) ∧ (∀ (F : X.Modules) (V₁ V₂ : Y.EtaleSite) (c : V₁ ⟶ V₂) (q : ModuleChart f V₁) s, enlargedModuleChartRestriction f F V₁ q (((enlargedSmallModuleDirectImage f).obj F).val.map c.op s) = enlargedModuleChartRestriction f F V₂ ((moduleChartPost f c).obj q) s) ∧ (∃! α : moduleDirectImage f ≅ enlargedSmallModuleDirectImage f, ∀ (F : X.Modules) (V : Y.EtaleSite) (q : ModuleChart f V) s, enlargedModuleChartRestriction f F V q ((α.hom.app F).val.app (op V) s) = ((moduleDirectImageModel f).projection F V).app (op q) s)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The declarations jointly state all clauses, including the enlarged localization comparison. Canonical helpers retain the actual fibre products, extension counit, structural ring map and chart restrictions; no arbitrary map or extra representability/surjectivity assumption is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b225117c",
+  "group": "NU",
+  "result": "pass",
+  "note": "Item and Lean match clause by clause. (1) Limiting cone: actual restrictions along enlargedChartLift plus extension counit, scalars through moduleChartScalar (a♯), vertex in ModuleCat.{u} while charts are in u+1. (2) Atlas equalizer: for every étale surjective chart and every pullback presentation of its overlap, a linear iso to ker(p^*−r^*) normalized by ρ_{q0}; non-vacuous via enlargedChartOverlap_exists. (3) Naturality in b : F ⟶ G and (4) in c : V1⟶V2 via moduleChartPost. (5) ∃! α : moduleDirectImage ≅ transported ringed pushforward along enlargedStructuralMap, preserving all chart projections. Localization: only IsChartwiseEtale g; e pinned by 4 coordinate equations (the middle coordinate is forced to g_V(v), so e lies over X′); chart equivalence keeps schemes, arrows, a♯ and projections. §1(B) repair SmallEnlargedEtaleModules is a universe-v copy of the same Mathlib pushforward, true for every v; the dependency record keeps all 47 declarations and adds 3; the original module is still sorried and the record is unchanged in live since Q132 2026-10-18, so no competing repair. Statements verbatim; stmt_deps cover every declaration used; docstrings with source and blueprint plus proof steps; sorry only; no hollow definitions; no compile needed (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T091206-L-3319378",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleChartProjection_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleChartRestriction_linear",
+   "AlgebraicGeometry.AlgebraicSpace.space_chart_limit_enlarged_localization",
+   "AlgebraicGeometry.AlgebraicSpace.space_chart_limit_enlarged_sections"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.AlgebraicSpace.space_chart_limit_enlarged_localization",
+   "AlgebraicGeometry.AlgebraicSpace.space_chart_limit_enlarged_sections"
+  ]
+ }
+}

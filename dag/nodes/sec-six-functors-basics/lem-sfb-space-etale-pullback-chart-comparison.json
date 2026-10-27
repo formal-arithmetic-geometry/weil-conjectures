@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-space-etale-pullback-chart-comparison",
+ "kind": "statement",
+ "title": "Etale pullback and ringed chart localization for algebraic spaces",
+ "statement": "Work in [def-weil-size-convention]. Let $X,Y$ be algebraic spaces over $\\operatorname{Spec}\\mathbf Z$ [def-trf-algebraic-space] and $h:X\\to Y$ a morphism. Use the small etale ringed topoi and their induced morphism $(h_{\\mathrm{et}},h^\\sharp)$ from [lem-trf-space-enlarged-etale-ringed-site-model], and set $\\mathcal E_X=\\operatorname{Sh}(X_{\\mathrm{et}})$. The small etale site is subcanonical: $h_T(W)=\\operatorname{Hom}_X(W,T)$ is a sheaf for each etale scheme $T\\to X$. For every etale algebraic space $T\\to Y$, write $h_T(W)=\\operatorname{Hom}_Y(W,T)$ on the scheme site. There are canonical isomorphisms $h_{\\mathrm{et}}^{-1}h_T\\cong h_{X\\times_YT}$ and $(h_{\\mathrm{et}}^{-1}F)_{\\bar x}\\cong F_{h\\bar x}$ for every sheaf of sets $F$ and geometric point $\\bar x$ (a map from the spectrum of an algebraically closed field). For each etale scheme $U\\to X$, there is a ringed equivalence $$(\\mathcal E_X/h_U,\\mathcal O_X\\times h_U\\to h_U)\\simeq(\\operatorname{Sh}(U_{\\mathrm{et}}),\\mathcal O_U),$$ identifying slice restriction with restriction of sheaves and of their structural rings. Given a commutative square $U\\xrightarrow{a}V$, $U\\to X$, $V\\to Y$, $X\\xrightarrow{h}Y$ with $U,V$ schemes and both vertical maps etale, let $s:h_U\\to h_{\\mathrm{et}}^{-1}h_V$ be the corresponding map. Under these ringed equivalences, the relocalization whose inverse image is $(H\\to h_V)\\mapsto(h_{\\mathrm{et}}^{-1}H\\times_{h_{\\mathrm{et}}^{-1}h_V,s}h_U\\to h_U)$ is canonically isomorphic to $(a_{\\mathrm{et}},a^\\sharp)$. These comparisons are natural under further chart restrictions and respect the structural ring maps.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 04K2 (lemma-stalk-pullback), Tag 04M5 (lemma-relocalize-morphism-at-schemes), using Tag 04M4 (lemma-relocalize-morphism); section-localize, equation-localize-at-scheme-ringed. Subcanonicality follows by restricting the fppf sheaves defining algebraic spaces."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-sfb-space-geometric-set-stalk",
+  "def-trf-enlarged-chart-normalized-ring-data"
+ ],
+ "proof": [
+  {
+   "text": "First check subcanonicality, also on the enlarged sites $\\mathcal C_A$ used below. A matching family of maps from scheme objects to a space $T$ glues uniquely because $T$ is an fppf sheaf by [def-trf-algebraic-space] (for a scheme $T$, its representable sheaf $h_T$ is an algebraic space by [def-trf-scheme-algebraic-space]), and etale scheme coverings are fppf coverings by [lem-sfb-space-fppf-covering-calculus]. The assertion that the glued map is over $A$ follows by the same uniqueness applied to $A$. For a covering by spaces, pull back to scheme charts and then take scheme charts of its members; these are covering refinements by [lem-trf-space-enlarged-site-scheme-density]. Glue the maps on these scheme charts as above. They agree on overlaps, so define a natural transformation into $T$ from the covered fppf sheaf: on each scheme test object the images glue uniquely in $T$. Thus the maps descend uniquely. This proves that $\\operatorname{Hom}_A(-,T)$ is a sheaf on $\\mathcal C_A$ and that its scheme restriction is the stated $h_T$. In particular the scheme site is subcanonical.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-trf-space-enlarged-site-scheme-density",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G0 (definition-spaces-etale-site), Tag 03G1 (lemma-compare-etale-sites); spaces-topologies.tex Tag 0DFC (lemma-zariski-etale-smooth-syntomic-fppf)."
+   }
+  },
+  {
+   "text": "On $\\mathcal C_Y,\\mathcal C_X$, [lem-trf-space-enlarged-site-scheme-density] supplies finite limits and [lem-trf-space-enlarged-chart-ringed-morphism] supplies the covering-preserving finite-limit functor $v_h:T\\mapsto X\\times_YT$ with its ringed geometric morphism. Step 1 verifies the subcanonical hypotheses. Apply [lem-pur-site-representable-algebraic-pullback] to $v_h$ and the object $T$. Its normalized comparison gives $h_{\\mathrm{et}}^{-1}h_T\\cong h_{X\\times_YT}$ after the restriction equivalences of [lem-trf-space-enlarged-etale-ringed-site-model]. The naturality in arrows in that comparison is the naturality required here, including when $T$ is not a scheme.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density",
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-pur-site-representable-algebraic-pullback",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04K2 (lemma-stalk-pullback), part (3), applying sites.tex Tag 04D3 (lemma-pullback-representable-sheaf)."
+   }
+  },
+  {
+   "text": "Write $L_{\\bar x}(T)=\\operatorname{Hom}_X(\\operatorname{Spec}\\Omega,T)$ on $\\mathcal C_X$. For a set $A$ put $P_{\\bar x}(A)(T)=\\operatorname{Map}(L_{\\bar x}(T),A)$. This is a sheaf: every lift to a covered $T$ lifts to a covering member. Indeed pull the cover back to $\\operatorname{Spec}\\Omega$, using [lem-trf-space-chartwise-etale-permanence], refine by schemes, taking surjective etale scheme charts of the pulled-back spaces [def-trf-algebraic-space] whose composites to $\\operatorname{Spec}\\Omega$ are etale by [lem-trf-space-chartwise-etale-permanence], as in the refinement clause of [lem-trf-space-enlarged-site-scheme-density], and apply [lem-weil-pbc-etale-cover-geometric-point-lift] to this scheme cover of $\\operatorname{Spec}\\Omega$. Matching functions therefore glue by choosing a lift; two choices give a lift to the fibre-product overlap, so matching makes the value independent of the choice. Fibre products exist by [lem-trf-space-fibre-products-etale-covers]. On the scheme site, there is an explicit natural bijection $\\operatorname{Hom}(G_{\\bar x},A)\\cong\\operatorname{Hom}(G,P_{\\bar x}(A))$: send $b$ to $\\alpha_W(t)(l)=b([W,l,t])$. Conversely send $\\alpha$ to $[W,l,t]\\mapsto\\alpha_W(t)(l)$; naturality is exactly invariance under every neighbourhood-colimit relation. Thus the stalk functor of [lem-sfb-space-etale-conservative-geometric-points] is left adjoint to the scheme restriction of $P_{\\bar x}$. The enlarged-site equivalence transfers this adjunction. The same construction applies to $Y$ and $\\bar y=h\\bar x$.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-site-scheme-density",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Y8 (lemma-point-pushforward-sheaf), 00YA (lemma-point-site-topos); spaces-properties.tex Tag 04K0 (lemma-stalk-gives-point). Explicit germ adjunction."
+   }
+  },
+  {
+   "text": "The direct-image formula in [lem-trf-space-enlarged-chart-ringed-morphism] gives $(h_*P_{\\bar x}(A))(V)=\\operatorname{Map}(L_{\\bar x}(X\\times_YV),A)$. The fibre-product universal property [lem-trf-space-fibre-products-etale-covers] identifies a lift to $X\\times_YV$ over the fixed $\\bar x$ with a lift to $V$ over $\\bar y$; this is natural in $V$ and $A$. Hence $h_*P_{\\bar x}(A)=P_{\\bar y}(A)$ up to this canonical natural isomorphism. The adjunctions of step 3 now give $\\operatorname{Hom}((h^{-1}F)_{\\bar x},A)\\cong\\operatorname{Hom}(h^{-1}F,P_{\\bar x}(A))\\cong\\operatorname{Hom}(F,h_*P_{\\bar x}(A))\\cong\\operatorname{Hom}(F_{\\bar y},A)$. Evaluating these natural bijections and their inverses at identity maps gives inverse maps $(h^{-1}F)_{\\bar x}\\cong F_{\\bar y}$, naturally in $F$. Transport to the small sites uses [lem-trf-space-enlarged-etale-ringed-site-model]. The germ formulas in step 3 identify this with the comparison sending a pulled-back germ at a pair of lifts to the original germ at its target lift. Naturality with projections and each algebraic operation makes it compatible with ring operations; applied to $h^\\sharp$ it gives the induced stalk-ring map. This proves the stalk clause without citing the node that depends on the present item.",
+   "uses": [
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04K2 (lemma-stalk-pullback), part (4); right-adjoint proof of the point-composition argument of sites.tex Tag 05V1 (lemma-point-morphism-sites)."
+   }
+  },
+  {
+   "text": "For an etale scheme $U\\to X$, postcomposition identifies $U_{\\mathrm{et}}$ with $X_{\\mathrm{et}}/U$: an object on the right is a scheme $W\\to X$ with a map $W\\to U$ over $X$; that map is etale by [lem-trf-space-chartwise-etale-permanence], and composition proves the converse. The arrows and covering families are identical. On $(W\\to U)$ both rings have value $\\Gamma(W,\\mathcal O_W)$ with the same restrictions, by [def-trf-algebraic-space]. Apply [lem-weil-pbc-ringed-sheaf-slice-adjunction] with $A=h_U$, a sheaf by step 1. Its fibre formula identifies $\\mathcal E_X/h_U$ with sheaves on this slice site and identifies the slice ring with $(W\\to U)\\mapsto\\Gamma(W,\\mathcal O_W)$. Restricting $(F\\times h_U\\to h_U)$ gives the fibre $F(W)$ over $W\\to U$. This proves the required ringed equivalence and the assertion about restriction.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04M1 (equation-localize-at-scheme-ringed); sites-modules.tex localization at a sheaf."
+   }
+  },
+  {
+   "text": "Set $P=X\\times_YV$ with projections $p:P\\to X$ and $b:P\\to V$, and $c=(U\\to X,a):U\\to P$. Since $P$ and $U$ are etale over $X$, [lem-trf-space-chartwise-etale-permanence] makes $c$ etale. Apply [lem-tw-representable-slice-localized-ringed-morphism] to $v_h$ on the enlarged sites and the object $V$; the hypotheses were checked in steps 1 and 2. On localized sites the base-change functor is $V'/V\\mapsto(X\\times_YV'\\to P)$. Under postcomposition identifications from [lem-trf-space-enlarged-ringed-composition-localization], this is the functor for $b$, since $P\\times_VV'\\cong X\\times_YV'$ by the projection-preserving fibre-product isomorphism. The cited slice comparison therefore identifies the sliced morphism with $b_{\\mathrm{et}}$, including its structural map: restrict first to a scheme object $W\\to V$, then to a surjective scheme chart $Z\\to P\\times_VW$. Both adjoint ring maps send $r\\in\\Gamma(W,\\mathcal O_W)$ to its pullback along $Z\\to W$. Scheme restriction is fully faithful by [lem-trf-space-enlarged-site-scheme-density], so these equalities determine the map on all objects of the localized enlarged site. Uniqueness of that normalization in [lem-trf-space-enlarged-chart-ringed-morphism] gives equality of the ring maps.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-tw-representable-slice-localized-ringed-morphism",
+    "lem-trf-space-enlarged-ringed-composition-localization",
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-trf-space-enlarged-site-scheme-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04M4 (lemma-relocalize-morphism), proof, case (2); sites-modules.tex Tag 04J0 (lemma-localize-morphism-ringed-sites)."
+   }
+  },
+  {
+   "text": "The map $s$ in the question is $h_c:h_U\\to h_P$ through the comparison of step 2. The relocalization formula of [lem-sfb-ringed-topos-slice-functoriality] factors it into the slice morphism over $h_V$ followed on the source by restriction along $h_c$. By [lem-trf-space-enlarged-etale-ringed-site-model], the ringed morphism for the etale map $c$ is precisely localization. Step 6 identifies the other factor with $b$. Composition, including the structural maps, is the comparison of [lem-trf-space-enlarged-ringed-composition-localization]. Since $bc=a$, this composite is $(a_{\\mathrm{et}},a^\\sharp)$. Transport through scheme restriction and step 5 yields exactly the inverse-image formula in the statement.",
+   "uses": [
+    "lem-sfb-ringed-topos-slice-functoriality",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-enlarged-ringed-composition-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 04M4 (lemma-relocalize-morphism), 04M5 (lemma-relocalize-morphism-at-schemes); sites-modules.tex Tag 04J8 (lemma-relocalize-morphism-ringed-topoi)."
+   }
+  },
+  {
+   "text": "For further chart restrictions $U'\\to U$, $V'\\to V$ forming a compatible square, both maps $U'\\to X\\times_YV$ have the same projections, hence agree. The naturality of the representable comparison of [lem-pur-site-representable-algebraic-pullback] makes this the commutative square of sheaf maps required by [lem-sfb-ringed-topos-slice-functoriality]. Its restriction square and successive-restriction clause give naturality of the relocalizations. In the chart equivalences of step 5 all restriction maps are literal restriction on the same scheme objects. Finally [lem-trf-space-enlarged-ringed-composition-localization] makes the composition comparisons coherent and ring-compatible. Thus the comparisons already constructed respect every further chart restriction and the structural ring maps, as asserted.",
+   "uses": [
+    "lem-pur-site-representable-algebraic-pullback",
+    "lem-sfb-ringed-topos-slice-functoriality",
+    "lem-trf-space-enlarged-ringed-composition-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04M5 (lemma-relocalize-morphism-at-schemes), and sites-modules.tex Tag 04J8 (lemma-relocalize-morphism-ringed-topoi), compatibility square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-trf-space-enlarged-site-scheme-density",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-pur-site-representable-algebraic-pullback",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-tw-representable-slice-localized-ringed-morphism",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "lem-sfb-ringed-topos-slice-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 04K2 (3),(4), 04M1, 04M4, 04M5; ring-map verification omitted in 04M4 is supplied using chart-normalization uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale ringed topos of an algebraic space localized at a scheme chart with inverse image of representable sheaves and geometric stalks",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, ring localizations and Zariski ringed spaces do not state the algebraic-space ringed-etale chart comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, ring localizations and Zariski ringed spaces do not state the algebraic-space ringed-etale chart comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|spacesEtale|relocalize",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, ring localizations and Zariski ringed spaces do not state the algebraic-space ringed-etale chart comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of the small etale ringed topos of an algebraic space at an etale scheme and compatibility with inverse images",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, RingHom.Etale.propertyIsLocal, Algebra.Etale.of_isLocalizationAway, Algebra.IsStandardEtale.of_isLocalizationAway, Algebra.Etale.of_isLocalization_Away, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec, RingHom.Etale.ofLocalizationSpanTarget, Algebra.FormallyEtale.localization_map",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, ring localizations and Zariski ringed spaces do not state the algebraic-space ringed-etale chart comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse images of representable sheaves under morphisms of ringed sites agree with localized slice geometric morphisms",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, PresheafOfModules.homEquivOfIsLocallyBijective, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_invApp, PresheafOfModules.homEquivOfIsLocallyBijective_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, ring localizations and Zariski ringed spaces do not state the algebraic-space ringed-etale chart comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+  "date": "2026-10-23",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, equation-localize-at-scheme-ringed and lemma-relocalize-morphism-at-schemes used freely; Tag 04M6, identification of pullbacks of h_V and chart morphisms.",
+   "via": [
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-etale-pullback-chart-comparison",
+  "worker": "stage1",
+  "summary": "Q143: retained statement; audited the resumed split and removed the cycle through geometric-points-conservative by proving the stalk clause using an explicit germ adjunction and the direct-image fibre-product formula. Eight proof steps, all existing dependencies, no new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, equation-localize-at-scheme-ringed and lemma-relocalize-morphism-at-schemes used freely; Tag 04M6, identification of pullbacks of h_V and chart morphisms.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-site-scheme-density",
+    "why": "Supplies finite limits, scheme covering refinements and faithful restriction to schemes for the enlarged etale sites; these are the site-presentation inputs to Stacks 04K2 and 04M4, not an alternate constructibility route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-chart-ringed-morphism",
+    "why": "Supplies the finite-limit base-change site functor and uniqueness of its ring map normalized by pullback of functions, needed to fill the omitted ring-map check in 04M4."
+   },
+   {
+    "node": "lem-pur-site-representable-algebraic-pullback",
+    "why": "General adjunction/Yoneda comparison for representable sheaves, exactly the sites input 04D3 cited by the proof of 04K2(3)."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Provides the small/enlarged ringed equivalences and identifies an etale space morphism with localization; needed to pass the general enlarged-site construction of 04M4 to 04M5."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Etale composition, base change and cancellation identify chart slices and make U to X times_Y V etale; these are the explicit permanence inputs of 04M4."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "General element-site description of a sheaf slice with its restricted ring; gives the topos interpretation of the site equality 04M1."
+   },
+   {
+    "node": "lem-tw-representable-slice-localized-ringed-morphism",
+    "why": "General comparison of ringed-site localization with slicing at the inverse image representable; supplies the ringed comparison used in the base-change case of 04M4."
+   },
+   {
+    "node": "lem-trf-space-enlarged-ringed-composition-localization",
+    "why": "Provides normalized ringed composition and localization coherence, needed to compose U to P to V and make further restrictions commute."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "Lifts a geometric point with its original algebraically closed field through a scheme etale cover, so the functions-on-lifts presheaf used in the stalk argument is a sheaf."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Provides the algebraic-space fibre-product universal property, used for overlaps of lifts and to identify the direct image of the geometric-point right adjoint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-pur-site-representable-algebraic-pullback",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-tw-representable-slice-localized-ringed-morphism",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-29c8740c3",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-29c8740c3 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with each cited statement, and checked them against Stacks spaces-properties.tex: 04K2 lemma-stalk-pullback (3),(4); 04M1 equation-localize-at-scheme-ringed; 04M4 lemma-relocalize-morphism (cases (1)/(2) and the ring-map check the source omits); 04M5. The statement is byte-identical to live. Live and side-live still have the item unsplit, and there is no re-split note. The delivery creates no new nodes. The closure (829 nodes) has no cycle: the earlier loop through lem-sfb-space-geometric-points-conservative is removed. The hypotheses match the source: h is arbitrary, only the two charts are étale, s corresponds to c:U→X×_YV, and the coefficients are sheaves of sets with the structure rings. Every step is correct. Step 3 builds the skyscraper right adjoint with the germ adjunction; step 4 gets h_*P_x=P_{hx} from the fibre-product universal property and chains the adjunctions; step 6 fills the omitted 04M4 ring check by the uniqueness clause of enlarged-chart-ringed-morphism; step 7 reads the relocalization off the slice-functoriality formula. Two citations needed repair (C1/C4). Step 1 needs that an étale scheme T is an fppf sheaf, which comes from def-trf-scheme-algebraic-space; I added that citation. Step 3 attributed the scheme refinement over Spec Ω to the density node, whose clause covers only scheme objects of C_X; it now cites scheme charts from def-trf-algebraic-space plus permanence. proof_deps is updated to the union of the uses; the statement and stmt_deps are unchanged. Batch 5: the closure contains no assumption leaf. Every flagged citation is either the definition of an algebraic space or a foundation of algebraic spaces and their étale sites (fibre products, chartwise étale permanence, enlarged sites, ringed composition/localization). None is a step of the trace formula or of Poincaré duality, so I accepted them. I accepted all 10 split_report tool_uses as generic site/space tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtalePullbackChartComparison",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceEtale_pullback_chart_comparison",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etaleSite_subcanonical",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedEtaleSite_subcanonical",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleInverse",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleRepresentables",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleRepresentablePullbackIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartFibre",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartFibre_isSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartFibreFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeRepresentableMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeRepresentableMap_isIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartSquareMap",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceEtaleStalkFormula",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleStalkIso_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartArrow_etale",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartSite",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartSite_properties",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartSite_continuous",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartEquivalences",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartEquivalence",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartProjection_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartProjection",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartProjection_isIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEnlargedRingSets",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRingSets",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleStructuralMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeFunctions_isSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeFunctions",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeRingSets",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeEtaleInverse",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeEtaleDirect",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeEtaleAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeDirectRingMap_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeDirectRingMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSchemeStructuralMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartLocalizedRingIso_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartRingIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartRelocalization",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartRelocalizationFirst",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartSliceRingMap_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartSliceRingMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartEvaluationIso",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceChartComparisonFormula",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtale_pullback_chart_comparison",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleRepresentablePullback_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartSquareMap_restriction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSliceRestrictionFirst",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartRelocalization_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtalePullbackChartComparison.lean",
+  "statement": "theorem spaceEtale_pullback_chart_comparison {X Y : AlgebraicSpace S} (f : X ⟶ Y) (U : X.EtaleSite) (V : Y.EtaleSite) (a : U.obj.left ⟶ V.obj.left) (ha : yoneda.map a ≫ V.obj.hom = U.obj.hom ≫ f.hom.hom) : ∃! e : (spaceChartEquivalence.{u, w} V).functor ⋙ spaceSchemeEtaleInverse a.left ≅ spaceChartRelocalization f U V a ha ⋙ (spaceChartEquivalence.{u, w} U).functor, SpaceChartComparisonFormula f U V a ha e ∧ (spaceSchemeEtaleInverse.{u, w} a.left).map (spaceChartRingIso V).hom ≫ spaceSchemeStructuralMap a.left = e.hom.app ((Over.star (Y.etaleTopology.uliftYoneda.{max (u + 1) w}.obj V)).obj (spaceRingSets Y)) ≫ (spaceChartEquivalence.{u, w} U).functor.map (spaceChartSliceRingMap f U V a ha) ≫ (spaceChartRingIso U).hom",
+  "branch": "sheaf-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations jointly state subcanonicality, normalized representable and stalk pullback, chart equivalences with their fibre and regular-function formulas, ringed relocalization, and chart-restriction naturality. All chosen data are fixed by formulas or universal properties. The unchanged statement is given for every base scheme S, hence in particular Spec Z."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-790b35e5d",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Both db1bdaef return points are repaired: (1) the set stalk/germ now live in new def node def-sfb-space-geometric-set-stalk as real colimit constructions over the landed PointedEtale/pointedEtaleForget; SetGeometricNeighbourhood is removed; the item cites the def node instead of the conservativity theorem; (2) the stmt_dep is now def-trf-enlarged-chart-normalized-ring-data (owns chartNormalizedLiftedRing/UnderlyingMap). Every clause was checked against Stacks 04K2(3),(4)/04M1/04M4/04M5: subcanonicality of both sites; h^{-1}h_T≅h_{X×_YT} with naturality; the ∃! stalk iso pinned by the germ formula at x≫f; ringed chart equivalence with fibre and structure-ring isos; relocalization = Over.post h^{-1} ⋙ Over.pullback s, uniquely iso to the scheme a^{-1} including the ring equation; chart-restriction naturality. No extra hypotheses (any base S ⊇ Spec Z, arbitrary f), universes u / max(u+1) w unforced, no hollow defs, sorry-only proofs with docstrings, lean.statement verbatim, report sections present; the conservative-points dependency record matches its node. No file changed, so no compile. MAINTAINER NOTE (H4 race): def-sfb-space-pointed-set-stalk (pointedSetStalk/pointedSetGerm, maintenance 6e7012a34c1, 20:45 CST) landed after this delivery (commit 20:19, base 20:17) with a body identical to etaleSetStalk/etaleSetGerm. A FIX cannot repoint (stmt_dep not on base; drop-nodes needs the same id), so after landing retire one of the two set-stalk nodes (e.g. make etaleSetStalk/etaleSetGerm abbrevs of pointedSetStalk/pointedSetGerm) and check NV's pending re-delivery of lem-sfb-space-etale-conservative-geometric-points against the record landed here."
+ }
+}

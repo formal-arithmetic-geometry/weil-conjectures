@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-isogeny-root-power-laws",
+ "kind": "statement",
+ "title": "Root-subgroup power laws and dual lattice maps for general isogenies",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a$ and $\\mathbf G_m$ for [def-sc-gm-ga]. Faithfully flat means that extension of scalars along the coordinate-algebra map is exact and detects zero modules. Let $A,D$ be reductive, meaning smooth and connected with no nontrivial smooth connected normal unipotent subgroup; unipotent means unipotent matrices in a faithful representation at geometric points. Let $T_A\\subseteq A$ and $T_D\\subseteq D$ be split maximal tori, and use their character lattices, cocharacter lattices, roots and coroots as in [lem-sfb-reductive-borel-pair-structure]. Use the root subgroups $U_\\alpha$ and their isomorphisms $u_\\alpha:\\mathbf G_a\\xrightarrow{\\sim}U_\\alpha$ as in [lem-sfb-reductive-root-subgroup-parametrizations]. Let $f:A\\to D$ be faithfully flat with finite scheme-theoretic kernel, where finite means finite-dimensional coordinate algebra, and suppose $f(T_A)\\subseteq T_D$. Set $f_T=f|_{T_A}$, $f^*(\\chi)=\\chi\\circ f_T$, and $f_*(\\nu)=f_T\\circ\\nu$. The map $f_T:T_A\\to T_D$ is faithfully flat with finite kernel, and $f^*$ is injective with finite cokernel. There is a bijection $\\alpha\\leftrightarrow\\beta$ from the roots of $A$ to the roots of $D$, numbers $e_\\alpha$ that are powers of the characteristic exponent of $F$ (the exponent is $1$ in characteristic zero), and $c_\\alpha\\in F^\\times$, such that $$f^*\\beta=e_\\alpha\\alpha,\\qquad f_*(\\alpha^\\vee)=e_\\alpha\\beta^\\vee,\\qquad f(u_\\alpha(a))=u_\\beta(c_\\alpha a^{e_\\alpha}).$$ The last identity holds for every commutative $F$-algebra and every element $a$ of that algebra, for any chosen root parametrizations with suitable $c_\\alpha$. In particular $f(U_\\alpha)=U_\\beta$ as subgroup schemes. The kernel of $f$ is central if and only if every $e_\\alpha=1$; central means commuting with all group elements after every scalar extension.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definitions 23.1--23.2, printed pp.483--484, and Proposition 23.5 with its proof, printed pp.485--486, especially formula (146) over every test algebra and the final centrality criterion. No Borel compatibility is asserted here."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-quotient-borel-torus-images], the scheme-theoretic image of $T_A$ is a maximal torus of $D$ and the map to it is faithfully flat. It is contained in $T_D$, hence equals $T_D$. The kernel of $f_T$ is the closed subgroup $T_A\\cap\\ker f$ of the finite scheme $\\ker f$, hence finite. Write $X_A=X^*(T_A)$ and $X_D=X^*(T_D)$. By [lem-sfb-multiplicative-character-antiduality] and [lem-sfb-split-torus-hom-matrices], these are finite free lattices and $f_T$ is the map of split diagonalizable groups induced by $h=f^*:X_D\\to X_A$. Faithful flatness makes the coordinate map $F[X_D]\\to F[X_A]$ injective, so $h$ is injective: a nonzero element of its kernel would identify two distinct group-algebra basis vectors. The coordinate ring of $\\ker f_T$ is $F[X_A]/(e_{h(x)}-1:x\\in X_D)=F[\\operatorname{coker}h]$. Its finite dimension says that $\\operatorname{coker}h$ is finite. In particular $h_{\\mathbf Q}$ is an isomorphism and the two torus ranks agree.",
+   "uses": [
+    "lem-sfb-quotient-borel-torus-images",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-split-torus-hom-matrices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, first two sentences of proof, p.485; Theorem 12.9, pp.233--234."
+   }
+  },
+  {
+   "text": "Fix a root $\\alpha$ of $A$ and a parametrization $u_\\alpha$. Factor $f\\circ u_\\alpha:\\mathbf G_a\\to D$ through its closed image $I$ using [lem-sfb-algebraic-group-homomorphism-factorization]. Its kernel $N_\\alpha$ is a finite closed subgroup of $\\mathbf G_a$, so it is proper. The quotient identification in [lem-sfb-additive-subgroup-polynomial-quotient] identifies $I$ with $\\mathbf G_a$ and the quotient map with a monic additive polynomial $P$ of positive degree $n$. Conjugation by $T_A$ preserves $N_\\alpha$, by normality of $\\ker f$ and the root conjugation formula in [lem-sfb-reductive-root-subgroup-parametrizations]. The equivariant clause of the polynomial-quotient node says that, in this coordinate on $I$, conjugation through $f_T(t)$ is multiplication by $\\alpha(t)^n$, on every test algebra. Since $f_T$ is faithfully flat, preservation of $I$ descends to $T_D$: after an fppf cover any $T_D$-point lifts to $T_A$, and the equality defining preservation is an equality of closed-subscheme ideals. Thus $\\operatorname{Lie}(I)$ is a $T_D$-stable line in $\\operatorname{Lie}(D)$. Its character $\\beta$ pulls back to $n\\alpha$. This is nonzero because $X_A$ is torsion-free and $n>0$, so $\\beta$ is a root of $D$. The uniqueness assertion of the root-subgroup node identifies $I=U_\\beta$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-additive-subgroup-polynomial-quotient",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, image of a root subgroup and formula (146), p.485; 14.58, p.298."
+   }
+  },
+  {
+   "text": "Write $P(Z)=\\sum_i b_iZ^i$, with $b_n=1$. The polynomial-quotient equivariance in step 2 gives $P(\\alpha(t)Z)=\\alpha(t)^nP(Z)$. Comparing coefficients over the universal torus gives $b_i\\ne0\\Rightarrow i\\alpha=n\\alpha$. Since $\\alpha\\ne0$ in the torsion-free lattice $X_A$, this forces $i=n$. Hence $P(Z)=Z^n$. Choose any prescribed parametrization $u_\\beta$. The isomorphism from the quotient coordinate $\\mathbf G_a$ to $U_\\beta$ differs from $u_\\beta$ by $Z\\mapsto c_\\alpha Z$, with $c_\\alpha\\ne0$: a polynomial automorphism of the affine line over a field has degree one, since its degree times the degree of its inverse is one, and a group automorphism fixes zero. Consequently $f(u_\\alpha(a))=u_\\beta(c_\\alpha a^n)$ over every commutative $F$-algebra, and $h(\\beta)=n\\alpha$. These are identities of morphisms obtained from polynomial identities, so require no reducedness of the test algebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, formulas (146)--(147), p.485; 14.59, p.298."
+   }
+  },
+  {
+   "text": "Additivity of $P(Z)=Z^n$ says $(X+Y)^n=X^n+Y^n$ in $F[X,Y]$. In characteristic zero, if $n>1$, the coefficient of $X^{n-1}Y$ would be the nonzero integer $n$, a contradiction; hence $n=1$. In characteristic $p>0$, write $n=p^r m$ with $p\\nmid m$. The binomial identity $(X+Y)^{p^r}=X^{p^r}+Y^{p^r}$, iterated from the binomial coefficients for the prime $p$, reduces additivity to $(U+V)^m=U^m+V^m$: substitution $U=X^{p^r},V=Y^{p^r}$ is injective on polynomial rings, as distinct monomials remain distinct. If $m>1$, comparison of $U^{m-1}V$ gives $m=0$ in $F$, contrary to $p\\nmid m$. Thus $m=1$. Set $e_\\alpha=n$; it is a power of the characteristic exponent, including $1$ in characteristic zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 14.40, pp.292--293, specialized to a monomial; Proposition 23.5, p.485."
+   }
+  },
+  {
+   "text": "The assignment $\\alpha\\mapsto\\beta$ is injective. Indeed, if $\\alpha,\\gamma$ have the same image root, then $e_\\alpha\\alpha=e_\\gamma\\gamma$; reducedness in [lem-sfb-reductive-rank-one-reflections] makes positive rationally proportional roots equal. To see surjectivity without assuming separability of $f$, apply [lem-sfb-smooth-group-orbit-geometry] to the action of $A$ on $D$ by $a\\cdot d=f(a)d$. Faithful flatness makes the orbit of $1$ all of $D$, and its stabilizer is the finite kernel, so $\\dim A=\\dim D$. For either group $G$, the charts in [lem-sfb-bruhat-longest-cell-charts], the product coordinates in [lem-sfb-borel-root-product-coordinates], and $B=U\\rtimes T$ in [lem-sfb-reductive-borel-pair-structure] give a dense open subscheme isomorphic to $\\mathbf A^{2N}\\times\\mathbf G_m^r$, where $2N=|\\Phi_G|$ and $r=\\operatorname{rank}X^*(T)$. This is also a dense open of $\\mathbf A^{2N+r}$. By [lem-weil-pbc-dense-open-dimension-comparison] and [lem-sf-noetherian-polynomial-dimension], $\\dim G=2N+r=r+|\\Phi_G|$. The ranks agree by step 1, so the two finite root sets have equal cardinality and the injection is a bijection. Injectivity of $h$ also gives $(-\\alpha)\\leftrightarrow(-\\beta)$ and $e_{-\\alpha}=e_\\alpha$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-weil-pbc-dense-open-dimension-comparison",
+    "lem-sf-noetherian-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, pp.485--486; Corollary 21.13, p.430; Theorems 21.68 and 21.73, pp.445--447."
+   }
+  },
+  {
+   "text": "For corresponding $\\alpha,\\beta$, take the largest subtori $T_\\alpha\\subseteq\\ker\\alpha$ and $T_\\beta\\subseteq\\ker\\beta$ from [lem-sfb-reductive-rank-one-reflections]. Since $h(\\beta)=e_\\alpha\\alpha$, $f_T(T_\\alpha)\\subseteq T_\\beta$. This image equals $T_\\beta$: the restriction has finite kernel, and the two subtori have equal rank $r-1$. These assertions can be checked in the character lattices using [lem-sfb-multiplicative-character-antiduality] and the torus matrices in step 1: taking the kernel of a nonzero character lowers the rational rank by one, and a finite-kernel map has image of the same rank. The image map is faithfully flat by [lem-sfb-algebraic-group-homomorphism-factorization]. Therefore $f(C_A(T_\\alpha))\\subseteq C_D(T_\\beta)$: commutation with $T_\\alpha$ implies commutation with all of $T_\\beta$ after faithfully flat local lifting. Choose a representative $n_\\alpha$ of the nontrivial rank-one Weyl element. Its image lies in $N_{D_\\beta}(T_D)(F)$. Conjugation by this image is nontrivial: otherwise $s_\\alpha h=h$, and $h_{\\mathbf Q}$ being onto would force $s_\\alpha=1$. The rank-one-reflections node says that there is exactly one nontrivial such Weyl element. Thus $f(n_\\alpha)$ represents $s_\\beta$ and $h s_\\beta=s_\\alpha h$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, rank-one normalizer paragraph, p.486; Theorem 21.11(a),(d),(e), pp.428--430."
+   }
+  },
+  {
+   "text": "For every $\\chi\\in X_D$, expand $h s_\\beta(\\chi)=s_\\alpha h(\\chi)$ using the reflection formulas of [lem-sfb-reductive-rank-one-reflections]. Cancellation gives $\\langle\\chi,\\beta^\\vee\\rangle h(\\beta)=\\langle h(\\chi),\\alpha^\\vee\\rangle\\alpha$. Substitute $h(\\beta)=e_\\alpha\\alpha$ and cancel the nonzero vector $\\alpha$ in the free lattice to get $\\langle h(\\chi),\\alpha^\\vee\\rangle=e_\\alpha\\langle\\chi,\\beta^\\vee\\rangle$. Composition of characters and cocharacters gives $\\langle h(\\chi),\\nu\\rangle=\\langle\\chi,f_*(\\nu)\\rangle$ directly from their definitions. The perfect lattice pairing in [lem-sfb-reductive-borel-pair-structure] now yields $f_*(\\alpha^\\vee)=e_\\alpha\\beta^\\vee$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, displayed pairing calculation, p.486."
+   }
+  },
+  {
+   "text": "Set $K=\\ker f$. By [lem-sfb-algebraic-group-homomorphism-factorization], it is normal. Every $x\\in K(F)$ is central in $A$ as a scheme-valued constant point. Indeed, apply [lem-sfb-smooth-group-orbit-geometry] to conjugation by $A$ on the finite scheme $K$. Its orbit is smooth and connected, being the image of connected $A$, and has dimension zero because $K$ is finite. Over the algebraically closed field it is a single reduced point; the faithfully flat orbit map therefore is the constant map with value $x$. This states that $x$ commutes with $A$ after every scalar extension. By [lem-sfb-reductive-torus-self-centralizer], $x\\in T_A(F)$. Every point of the finite $F$-scheme $K$ has residue field $F$: its residue field is a finite-dimensional field extension of the algebraically closed field. Thus the whole topological support of $K$ lies in $T_A$. This support assertion does not assert that $K$ is reduced or central.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, kernel argument after the pairing calculation, p.486; Theorem 21.84, p.451."
+   }
+  },
+  {
+   "text": "Choose a Borel $B_A$ containing $T_A$ by [lem-sfb-reductive-borel-pair-structure], and set $B_D=f(B_A)$ using [lem-sfb-quotient-borel-torus-images]. It contains $T_D$. For $\\alpha$ positive in $B_A$, the image root group $U_\\beta$ lies in $B_D$, hence its tangent weight $\\beta$ is positive there. The bijection and the correspondence of negatives in step 5 therefore identify the two positive systems. By [lem-sfb-bruhat-longest-cell-charts], opposite Borels are obtained by conjugating by a longest Weyl representative. Translating its longest open cell by the inverse representative yields an open immersion $U^-\\times T\\times U^+\\to G$, where $U^\\pm$ are the opposite Borel radicals; this follows by replacing $u n_0 b$ by $n_0^{-1}u n_0 b$ and using $B=U^+\\rtimes T$. This open cell contains $T$. By [lem-sfb-borel-root-product-coordinates], both $U^+$ and $U^-$ have ordered root coordinates. If every $e_\\alpha=1$, the map $f$ is an isomorphism on each of these radicals: order the corresponding roots identically and the coordinate map is $(a_\\alpha)\\mapsto(c_\\alpha a_\\alpha)$. All constants are invertible. Consequently on these open cells $f$ is the product of those two isomorphisms and $f_T$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-quotient-borel-torus-images",
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, final kernel argument, p.486; Theorem 21.84 and Summary 21.86, pp.451--452."
+   }
+  },
+  {
+   "text": "Assume every $e_\\alpha=1$. Step 8 shows that $K$ factors through the open cell of step 9, since its entire support lies in $T_A$; a morphism whose inverse image of an open is its whole source factors through that open. In the product coordinates its equation $f(u^-tu^+)=1$ says $f(u^-)=1$, $f_T(t)=1$, $f(u^+)=1$ by uniqueness of the target open-cell coordinates. The radical maps are isomorphisms, so $u^-=u^+=1$. Thus $K=\\ker f_T$ as subgroup schemes, including their nilpotents. For any test algebra and $t\\in K$, step 3 gives $\\alpha(t)=\\beta(f_T(t))=1$ for every root, since $e_\\alpha=1$. The scheme-theoretic centre description in [lem-sfb-reductive-centre-root-quotient] now implies $K\\subseteq Z(A)$. This proves centrality.",
+   "uses": [
+    "lem-sfb-reductive-centre-root-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, final centrality criterion, p.486; Theorem 21.84, p.451."
+   }
+  },
+  {
+   "text": "Conversely assume $K$ central. It centralizes $T_A$, so [lem-sfb-reductive-torus-self-centralizer] gives $K\\subseteq T_A$. For every root, $T_A\\cap U_\\alpha=1$ scheme-theoretically: for positive roots this follows from $B=U\\rtimes T_A$ in [lem-sfb-reductive-borel-pair-structure] and the inclusions in [lem-sfb-borel-root-product-coordinates]; for a negative root, conjugate this equality by a longest Weyl representative, which exchanges the two systems by [lem-sfb-bruhat-longest-cell-charts]. Thus $N_\\alpha=K\\cap U_\\alpha$ is trivial. In the polynomial coordinates of steps 2--4, its coordinate ring is $F[Z]/(Z^{e_\\alpha})$, of dimension $e_\\alpha$, with basis $1,Z,\\ldots,Z^{e_\\alpha-1}$. The trivial group has coordinate ring $F$, so $e_\\alpha=1$. This uses the full scheme kernel: in characteristic $p$, $Z^p$ has a nontrivial kernel even though its kernel has only one $F$-point. All clauses of the statement now follow; $f(U_\\alpha)=U_\\beta$ was a scheme-theoretic image equality already in step 2.",
+   "uses": [
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, final centrality criterion, p.486; Theorems 21.68 and 21.84, pp.445,451."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-borel-torus-images",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-split-torus-hom-matrices",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-additive-subgroup-polynomial-quotient",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-reductive-centre-root-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 23.5 and its proof, pp.485--486; expanded using the cited earlier results, especially 12.9, 14.40, 21.11, 21.68, 21.73, 21.84."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of reductive algebraic groups induces an isogeny of root data with root subgroup maps a to c times a to a characteristic power, central exactly when all exponents are one",
+   "results": "Search returned 8 hits: RootPairing.Hom.root_weightMap, RootPairing.Hom.indexEquiv, RootPairing.Equiv.toHom, RootPairing.map, RootPairing.Hom.root_weightMap_apply, RootPairing.Equiv.mk', RootPairing.Equiv.weightEquiv, SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of a root under an isogeny is a prime power multiple of a root and pushforward of its coroot has the same factor",
+   "results": "Search returned 8 hits: RootPairing.four_nsmul_coPolarization_compl_polarization_apply_root, RootPairing.smul_coroot_eq_of_root_eq_smul, RootPairing.coroot_eq_smul_coroot_iff, RootPairing.prod_rootFormIn_smul_coroot_mem_range_PolarizationIn, RootPairing.rootFormIn_self_smul_coroot, RootPairing.smul_coroot_eq_of_root_add_root_eq, RootPairing.polarizationEquiv_symm_apply_coroot, RootPairing.coroot_eq_polarizationEquiv_apply_root",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Hom, RootPairing",
+   "results": "Search returned 12 hits: RootPairing.Hom.id, RootPairing.Hom.instMonoid, RootPairing.Hom, RootPairing.Hom.indexEquiv, RootPairing.Equiv.toHom, RootPairing.Hom.coweightMap, RootPairing.Hom.weightMap, RootPairing.Hom.comp_id",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isogen.*root|root.*isogen|rootSubgroup|RootSubgroup",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isogeny of reductive algebraic groups maps root subgroups by characteristic power maps and induces a root datum isogeny",
+   "results": "Search returned 8 hits: RootDatum, IsPrimitiveRoot.autToPow.congr_simp, LieAlgebra.IsKilling.rootSystem_toLinearMap_apply, MulEquiv.mapSubgroup, RootPairing.Equiv.toEndUnit_val, RootPairing.algebraMap_coroot'In_apply, RootPairing.instIsRootSystemMap, RootPairing.Hom.mk.noConfusion",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism of the additive algebraic group to itself over a field is given by an additive polynomial, a sum of characteristic power monomials",
+   "results": "Hits: FiniteField.frobeniusAlgHom, minpoly_algHom_toLinearMap, NoetherNormalization.T1, LinearMap.polyCharpolyAux_map_aeval, Algebra.IsInvariant.charpoly_mem_lifts, Polynomial.aeval_endomorphism, LinearMap.polyCharpolyAux_map_eq_charpoly, MulSemiringAction.charpoly",
+   "date": "2026-10-23",
+   "verdict": "no match: root-pairing homomorphisms do not construct group-scheme isogenies; additive and quotient searches give ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nontrivial quotient of the additive algebraic group over a perfect field is isomorphic to the additive group, and a smooth algebraic group acts on the additive group through scalar multiplication",
+   "results": "Hits: AddCircle, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, QuotientAddGroup.automorphize_smul_left, PerfectClosure.instAddCommGroup, Field.absoluteGaloisGroupAbelianization, Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, InfiniteGalois.normalAutEquivQuotient_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: root-pairing homomorphisms do not construct group-scheme isogenies; additive and quotient searches give ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdditive|isAdditive|additivePolynomial|additive_polynomial|additive.*polynomial|polynomial.*additive",
+   "results": "Hits: Mathlib/RingTheory/WittVector/IsPoly.lean, Mathlib/Algebra/SkewPolynomial/Basic.lean, Mathlib/Algebra/SkewPolynomial/Basic.lean, Mathlib/RingTheory/MvPowerSeries/Evaluation.lean, Mathlib/Algebra/Polynomial/Basic.lean, Mathlib/Algebra/MonoidAlgebra/Defs.lean, Mathlib/Algebra/MonoidAlgebra/Division.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: root-pairing homomorphisms do not construct group-scheme isogenies; additive and quotient searches give ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomial X to the n is additive as a polynomial identity precisely when n is a power of the characteristic exponent of the field",
+   "results": "Hits: SkewPolynomial.monomial_add, Polynomial.monomial_add, add_pow_expChar_pow, Polynomial.addHom_ext, add_pow_char_pow, Polynomial.addHom_ext', AddChar.map_nsmul_eq_pow, Polynomial.addHom_ext'_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: root-pairing homomorphisms do not construct group-scheme isogenies; additive and quotient searches give ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, CharP",
+   "results": "Hits: Polynomial.charP, Polynomial.instCharP, Polynomial.expand_contract, Polynomial.separable_X_pow_sub_C', Polynomial.isUnit_or_eq_zero_of_separable_expand, Polynomial.exists_separable_of_irreducible, Polynomial.separable_or, Polynomial.separable_C_mul_X_pow_add_C_mul_X_add_C'",
+   "date": "2026-10-23",
+   "verdict": "no match: root-pairing homomorphisms do not construct group-scheme isogenies; additive and quotient searches give ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If (X + Y)^n equals X^n + Y^n as a polynomial over a field then n is a power of the characteristic, or n equals one in characteristic zero",
+   "results": "Hits: add_pow_expChar_pow, add_pow_char_pow, add_pow_expChar, add_pow_char, add_pow_eq_mul_pow_add_pow_div_expChar, sum_pow_char_pow, sum_pow_char, add_pow_eq_mul_pow_add_pow_div_char",
+   "date": "2026-10-23",
+   "verdict": "no match: root-pairing homomorphisms do not construct group-scheme isogenies; additive and quotient searches give ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isogeny of reductive group schemes induces an isogeny of root data with characteristic power factors and is central if and only if these factors are one",
+   "results": "Hits: RootDatum, RootPairing.restrictScalars_coe_root, Subgroup.centerCharacteristic, RootPairing.restrictScalars_coe_coroot, RootPairing.instIsAnisotropicOfIsCrystallographic, Subgroup.centerCongr, SpecialLinearGroup.centerEquivRootsOfUnity.congr_simp, AlgebraicGeometry.IsFinite.instOfIsIsoScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: root-pairing homomorphisms do not construct group-scheme isogenies; additive and quotient searches give ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat homomorphism with finite kernel between reductive algebraic groups induces characteristic power maps on root subgroups and the same factors on roots and coroots",
+   "results": "Hits: RootPairing.algebraMap_root'In_apply, RootPairing.algebraMap_coroot'In_apply, RootPairing.Hom.comp_weightMap_apply, RootPairing.Hom.comp_coweightMap_apply, RootPairing.Hom.root_weightMap, RootPairing.Hom.weightMap, RootPairing.algebraMap_pairingIn', RootPairing.Equiv.comp_weightMap_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: root-pairing homomorphisms do not construct group-scheme isogenies; additive and quotient searches give ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-isogeny-borel-root-compatibility",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Nonvanishing of rho section modules by a highest-weight matrix coefficient in the Steinberg endomorphism detection input. Milne 22.20 proof: Proof of Proposition 18.18 (inverse image Borel and quotient flag variety); Corollary 17.84 (centre in every maximal torus); Definitions 23.1--23.2 and Propositions 23.4--23.5 (central isogenies induce root data with q(alpha)=1). Product and Borel decompositions: 21.29--21.35, 21.60 and proof of 23.13. Supporting input: Definitions 23.1--23.2, printed pp.483--484, and Proposition 23.5 with its proof, printed pp.485--486, especially formula (146) over every test algebra and the final centrality criterion. No Borel compatibility is asserted here.",
+   "via": [
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-sfb-dominant-character-highest-line",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-isogeny-root-power-laws",
+  "worker": "stage1",
+  "summary": "Expanded Milne 23.5 using existing DAG prerequisites only. Quotient polynomials give the root-image character and power monomial; dimension and reducedness prove bijectivity; rank-one reflections give the coroot map; open-cell coordinates prove the full scheme-kernel centrality criterion. No statement changes, no new nodes.",
+  "blueprint": "Current latest sec-six-functors-basics/sk-thm-sf-ctf-stability, direct-images proof (3), inherited alteration/GIT/reductive-group prerequisite chain recorded in blueprint.from.place; precisely the Milne 23.5 supporting input of the parent central-isogeny Borel compatibility node. No blueprint node states this supporting theorem (whole-blueprint root and isogeny searches).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dense-open-dimension-comparison",
+    "why": "Generic dimension equality for a dense open in a finite-type scheme over a field, used to count roots from the existing Bruhat charts."
+   },
+   {
+    "node": "lem-sf-noetherian-polynomial-dimension",
+    "why": "Dimension of affine space over a field, used to count roots from the existing Bruhat charts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "lem-sf-noetherian-polynomial-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-620d8c0f4",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-620d8c0f4 (reviewer sub-agent of L); spot-checked: Read the whole item and all 15 cited statements, and checked them against Milne iAG 2017: Defs 23.1-23.2 (pp.483-484), Prop 23.5 with its proof (pp.485-486, formulas 144-147), Def 6.6 (isogeny), Def 18.1 (central isogeny), Ex 14.40 and Thm 21.84/Summary 21.86 (big cell). Shape: one commit, the item plus its report, no new nodes. This is the first delivery and there is no re-split note. The live node is still unsplit with the same statement and stmt_deps, so the statement is unchanged and no other group has superseded it. Step uses equal proof_deps exactly, there is no cycle, and the item has no SGA citation. Steps: (1) the image of T_A is T_D by the torus clause; h=f^* is injective because the coordinate map is injective; the kernel ring is F[coker h], so coker h is finite. (2) N_alpha is finite and proper; I=G_a/N_alpha comes from the factorization and polynomial-quotient nodes; the equivariance clause applies with eta=alpha; T_D normalizes I by fppf lifting; the weight beta satisfies beta∘f_T=n alpha≠0, and uniqueness in the root-subgroup node gives I=U_beta, without using a differential of f. (3)-(4) Coefficient comparison gives P=Z^n with n=p^r, and automorphisms of G_a are scalars; I checked both. (5) Injectivity uses reducedness of the root system. Surjectivity comes from a dimension count: dim A=dim D by the orbit lemma, and dim G=r+|Phi| from the big cell A^N x A^N x G_m^r. Milne omits this surjectivity; the delivery supplies it. (6)-(7) f(n_alpha) represents s_beta, because h_Q onto rules out a trivial action and the rank-one node gives uniqueness; the integral pairing then gives f_* alpha^vee=e beta^vee, which I verified, including in characteristic 2. (8) Points of K are central (orbit lemma) and lie in T_A (self-centralizer node). (9)-(10) The positive systems correspond; the open cell U^- x T x U^+ comes from opposite-Borel product coordinates; if every e=1 then K=ker f_T as schemes and lies in the intersection of the ker alpha, which is Z(A). (11) If K is central then K⊆T_A, T∩U_alpha=1, and F[Z]/(Z^e) has dimension e, so e=1. Edge cases checked: pure torus, Frobenius, SL_p→PGL_p, characteristic 0. Accepted tool uses: lem-weil-pbc-dense-open-dimension-comparison and the Mathlib leaf lem-sf-noetherian-polynomial-dimension. The worker wrote tool_uses into split_report itself, which is the maintainer's field (C8); the entries are accurate, so left as they are. Batch 5: all 7 flagged chains end in generic scheme or module lemmas: fppf covering base change, fppf⇒fpqc, fpqc descent of smoothness, composition of smooth morphisms, exterior/dual scalar extension. None is the trace formula, Poincaré duality, or a step of their proofs, so all are accepted. No duplicate: root-datum-isogeny-realization is the converse direction."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.IsogenyRootPowerLaws",
+  "declaration": "AlgebraicGeometry.isogeny_root_power_laws",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/IsogenyRootPowerLaws.lean",
+  "statement": "theorem isogeny_root_power_laws {F : Type u} [Field F] [IsAlgClosed F] (A D TA TD : Grp (Over (Spec (.of F)))) (hA : ReductiveTorusCentralizer.IsReductive A) (hD : ReductiveTorusCentralizer.IsReductive D) (iA : TA ⟶ A) (iD : TD ⟶ D) (hTA : ReductiveTorusCentralizer.IsMaximalTorus iA) (hTD : ReductiveTorusCentralizer.IsMaximalTorus iD) (hsplitA : ∃ r : ℕ, Nonempty (TA ≅ MultiplicativeType.splitTorus F r)) (hsplitD : ∃ r : ℕ, Nonempty (TD ≅ MultiplicativeType.splitTorus F r)) [IsCommMonObj TA.X] [IsCommMonObj TD.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aA : ModObj TA.X A.X) (aD : ModObj TD.X D.X) (hconjA : aA.smul = (iA.hom.hom ⊗ₘ 𝟙 A.X) ≫ GrpObj.conj A.X) (hconjD : aD.smul = (iD.hom.hom ⊗ₘ 𝟙 D.X) ≫ GrpObj.conj D.X) (ΦA : Finset (Additive (TA ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (ΦD : Finset (Additive (TD ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (PA : RootDatum ΦA (Additive (TA ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ TA))) (PD : RootDatum ΦD (Additive (TD ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ TD))) (hrootA : ∀ α : ΦA, PA.root α = α.val) (hrootD : ∀ β : ΦD, PD.root β = β.val) (hpairA : ∀ (χ : Additive (TA ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ TA)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (PA.toLinearMap χ ν)) (hpairD : ∀ (χ : Additive (TD ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ TD)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (PD.toLinearMap χ ν)) (hweightsA : ∀ χ : Additive (TA ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ ΦA ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ TA A aA χ.toMul ≠ ⊥) (hweightsD : ∀ χ : Additive (TD ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ ΦD ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ TD D aD χ.toMul ≠ ⊥) (hcorootA : ∀ α : ΦA, ∃ (n : 𝟙_ (Over (Spec (.of F))) ⟶ A.X) (s : TA ≅ TA), s.hom.hom.hom ≫ iA.hom.hom = (toUnit TA.X ≫ n)⁻¹ * iA.hom.hom * (toUnit TA.X ≫ n) ∧ ∀ χ : Additive (TA ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), s.hom.hom.hom ≫ χ.toMul.hom.hom = χ.toMul.hom.hom / (PA.root α).toMul.hom.hom ^ (PA.toLinearMap χ (PA.coroot α))) (hcorootD : ∀ β : ΦD, ∃ (n : 𝟙_ (Over (Spec (.of F))) ⟶ D.X) (s : TD ≅ TD), s.hom.hom.hom ≫ iD.hom.hom = (toUnit TD.X ≫ n)⁻¹ * iD.hom.hom * (toUnit TD.X ≫ n) ∧ ∀ χ : Additive (TD ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), s.hom.hom.hom ≫ χ.toMul.hom.hom = χ.toMul.hom.hom / (PD.root β).toMul.hom.hom ^ (PD.toLinearMap χ (PD.coroot β))) (UA : ΦA → Grp (Over (Spec (.of F)))) (UD : ΦD → Grp (Over (Spec (.of F)))) (jA : ∀ α : ΦA, UA α ⟶ A) (jD : ∀ β : ΦD, UD β ⟶ D) (hUA : ∀ α : ΦA, IsClosedSubgroupScheme (jA α).hom.hom ∧ @TorusCharacterTangent.IsStable F _ TA A aA _ (jA α) ∧ (GrpObj.differential (jA α).hom.hom).toLinearMap.range = @TorusCharacterTangent.weightSpace F _ TA A aA (PA.root α).toMul) (hUD : ∀ β : ΦD, IsClosedSubgroupScheme (jD β).hom.hom ∧ @TorusCharacterTangent.IsStable F _ TD D aD _ (jD β) ∧ (GrpObj.differential (jD β).hom.hom).toLinearMap.range = @TorusCharacterTangent.weightSpace F _ TD D aD (PD.root β).toMul) (uA : ∀ α : ΦA, Grp.mk (StandardGroupSchemes.additive F) ≅ UA α) (uD : ∀ β : ΦD, Grp.mk (StandardGroupSchemes.additive F) ≅ UD β) (f : A ⟶ D) (hff : f.hom.hom.left.appTop.hom.FaithfullyFlat) (hfinite : IsFinite (GrpObj.ker f.hom.hom).hom) (fT : TA ⟶ TD) (hfT : fT ≫ iD = iA ≫ f) : fT.hom.hom.left.appTop.hom.FaithfullyFlat ∧ IsFinite (GrpObj.ker fT.hom.hom).hom ∧ Function.Injective (fun χ : TD ⟶ Grp.mk (StandardGroupSchemes.multiplicative F) ↦ fT ≫ χ) ∧ Finite (Additive (TA ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) ⧸ Submodule.span ℤ (Set.range (fun χ : Additive (TD ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) ↦ Additive.ofMul (fT ≫ χ.toMul)))) ∧ ∃ (b : ΦA ≃ ΦD) (q : ΦA → ℕ) (c : ΦA → Fˣ), (∀ α : ΦA, ∃ m : ℕ, q α = ringExpChar F ^ m) ∧ (∀ α : ΦA, Additive.ofMul (fT ≫ (PD.root (b α)).toMul) = q α • PA.root α) ∧ (∀ α : ΦA, Additive.ofMul ((PA.coroot α).toMul ≫ fT) = q α • PD.coroot (b α)) ∧ (∀ (α : ΦA) (R : Type u) [CommRing R] [Algebra F R] (x : R), TorusCharacterTangent.additiveParameterPoint F x ≫ (uA α).hom.hom.hom ≫ (jA α).hom.hom ≫ f.hom.hom = TorusCharacterTangent.additiveParameterPoint F (algebraMap F R (c α : F) * x ^ q α) ≫ (uD (b α)).hom.hom.hom ≫ (jD (b α)).hom.hom) ∧ (∀ α : ΦA, ∃ g : UA α ⟶ UD (b α), g ≫ jD (b α) = jA α ≫ f ∧ g.hom.hom.left.appTop.hom.FaithfullyFlat) ∧ ((∀ (R : Type u) [CommRing R] [Algebra F R] (x : StandardGroupSchemes.affine F R ⟶ GrpObj.ker f.hom.hom) (g : StandardGroupSchemes.affine F R ⟶ A.X), (x ≫ GrpObj.kerι f.hom.hom) * g = g * (x ≫ GrpObj.kerι f.hom.hom)) ↔ ∀ α : ΦA, q α = 1)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual character and cocharacter Hom lattices with composition pairing, adjoint character weights, and geometrically normalized coroot reflections. All test algebras, including nonreduced ones, occur in the parameter and full scheme-kernel centrality clauses. The image clause is a faithfully flat factorization onto the corresponding closed root subgroup."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39a24ef22",
+  "group": "NN",
+  "result": "pass",
+  "note": "Only the lean field differs from live; lean.statement matches the file verbatim; one sorry theorem, no definitions, source/blueprint docstrings and all 11 proof steps present. Every node hypothesis and clause matches Milne Prop 23.5: actual Hom lattices; root datum pinned by root, composition pairing, conjugation action and weights (as in the Borel-pair record); hcoroot pins the geometric coroots, which the theorem needs (GL2 counterexample with coroot (2,0) otherwise) and which always hold, so not a stronger assumption; root subgroups pinned by uniqueness plus the Ga isomorphism; parameter law and kernel centrality over all commutative F-algebras of universe u; image clause as a faithfully flat factorization; ringExpChar powers; b, q, c all determined. Edge cases: no roots, char 0, Frobenius, SL_p->PGL_p, zero algebra. No duplicate found (rg Sheaf/WeilConjectures). No file changed, so no compile; relies on worker's compile and landing compile."
+ }
+}

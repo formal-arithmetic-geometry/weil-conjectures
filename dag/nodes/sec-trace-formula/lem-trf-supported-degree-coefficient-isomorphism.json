@@ -1,0 +1,222 @@
+{
+ "id": "lem-trf-supported-degree-coefficient-isomorphism",
+ "kind": "statement",
+ "title": "Indexing and coefficient isomorphism of a supported degree family",
+ "statement": "Let $n,s,t\\in\\mathbf N$, let $\\alpha_1,\\ldots,\\alpha_s\\in\\mathbf N^n$ be distinct coordinatewise incomparable vectors in any fixed order, and put $D=\\bigcup_i(\\alpha_i+\\mathbf N^n)$, $d_i=|\\alpha_i|$, $\\Delta_i=\\{\\beta:\\alpha_i+\\beta\\notin\\bigcup_{h<i}(\\alpha_h+\\mathbf N^n)\\}$. Here $|\\eta|=\\sum_j\\eta_j$. Let $A$ be a commutative ring and $H_i\\in A[Y_1,\\ldots,Y_n]$ be homogeneous of degrees $d_i$ [def-weil-pbc-mv-polynomial-ring], and write $V_t$ for the degree-$t$ homogeneous submodule. With the supported division conventions [def-trf-supported-homogeneous-division], set\n$$I_t=\\{(i,\\beta):\\beta\\in\\Delta_i,\\ |\\beta|+d_i=t\\}\\amalg\\{\\gamma\\notin D:|\\gamma|=t\\},\\quad E_t=\\{\\eta\\in\\mathbf N^n:|\\eta|=t\\}.$$\nThese are finite sets, and the map $\\theta_t:I_t\\to E_t$ sending $(i,\\beta)$ to $\\alpha_i+\\beta$ and a remainder index $\\gamma$ to $\\gamma$ is a bijection. Its inverse sends an exponent in $D$ to its first dividing vertex and the difference exponent. The monomials $(Y^\\eta)_{\\eta\\in E_t}$ form an $A$-basis of $V_t$ [def-weil-pbc-free-module]. Define $P_{(i,\\beta)}=Y^\\beta H_i$ and $P_\\gamma=Y^\\gamma$. Let $T_t:A^{E_t}\\to A^{E_t}$ be the linear map whose column at $\\eta$ is the monomial coefficient vector of $P_{\\theta_t^{-1}(\\eta)}$. Then the indexed family $(P_\\xi)_{\\xi\\in I_t}$ spans $V_t$ if and only if $T_t$ is surjective; whenever this holds $T_t$ is bijective and $(P_\\xi)$ is an $A$-basis of $V_t$. All assertions include $n=0$, $s=0$, and the zero ring.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13 for the inherited route; Bierstone--Milman, Invent. Math. 128 (1997), Sentence preceding Theorem 8.1, printed p.274: the supported degree family is a basis exactly when it spans; first-dividing-vertex coefficient matrix made explicit. General finite-module input: Stacks Tag 05G8, algebra.tex label lemma-fun. Journal PDF read online at https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf. No Stacks tag states this specialized result; BM paper absent from repository literature."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-supported-homogeneous-division",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "For $\\eta\\in E_t\\cap D$, choose the least $i$ such that $\\alpha_i\\le\\eta$ coordinatewise and put $\\beta=\\eta-\\alpha_i$. Then $\\alpha_i+\\beta=\\eta$, $|\\beta|+d_i=t$, and no earlier vertex divides $\\eta$, so $\\beta\\in\\Delta_i$. If $\\eta\\notin D$, choose its remainder index. Conversely, a pair $(i,\\beta)\\in I_t$ has $\\alpha_i+\\beta\\in D$ and $i$ as its least dividing vertex, while a remainder index has image outside $D$. Thus these recipes are inverse to $\\theta_t$. Each coordinate of an element of $E_t$ is at most $t$, so $E_t$ is a subset of the finite set $\\{0,\\ldots,t\\}^n$. Its bijection with $I_t$ proves finiteness of both.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient calculation from the polynomial and supported-family definitions; finite-module input: Tag 05G8, lemma-fun."
+   }
+  },
+  {
+   "text": "By the polynomial-ring definition a polynomial is a unique finite coefficient family on exponent vectors. A homogeneous degree-$t$ polynomial is exactly such a family vanishing outside $E_t$. Therefore the mutually inverse linear maps are $C:V_t\\to A^{E_t}$, $C(f)_\\eta=\\operatorname{coeff}_\\eta(f)$, and $B:A^{E_t}\\to V_t$, $B(c)=\\sum_{\\eta\\in E_t}c_\\eta Y^\\eta$. Indeed coefficient extraction gives $C(B(c))=c$, and the unique monomial expansion gives $B(C(f))=f$. This proves the claimed monomial basis by the definition of basis.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient calculation from the polynomial and supported-family definitions; finite-module input: Tag 05G8, lemma-fun."
+   }
+  },
+  {
+   "text": "Each $P_\\xi$ lies in $V_t$: for a pair index expand $H_i=\\sum_{|\\mu|=d_i}h_{i\\mu}Y^\\mu$. Multiplication by $Y^\\beta$ gives $\\sum_{|\\mu|=d_i}h_{i\\mu}Y^{\\beta+\\mu}$, and every exponent has degree $|\\beta|+d_i=t$. A remainder monomial already has degree $t$. Consequently $S:A^{I_t}\\to V_t$, $S(a)=\\sum_{\\xi\\in I_t}a_\\xi P_\\xi$, is a well-defined linear map. No leading-coefficient condition on $H_i$ is used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient calculation from the polynomial and supported-family definitions; finite-module input: Tag 05G8, lemma-fun."
+   }
+  },
+  {
+   "text": "Let $R_\\theta:A^{E_t}\\to A^{I_t}$ send $c$ to $(c_{\\theta_t(\\xi)})_\\xi$; its inverse sends $a$ to $(a_{\\theta_t^{-1}(\\eta)})_\\eta$. For every $c$ and $\\mu\\in E_t$, the column definition gives $(T_t c)_\\mu=\\sum_{\\eta\\in E_t}c_\\eta\\operatorname{coeff}_\\mu(P_{\\theta_t^{-1}(\\eta)})=(C S R_\\theta(c))_\\mu$. Thus $T_t=C S R_\\theta$. The image of $S$ consists precisely of the finite linear combinations of the indexed family, since $I_t$ is finite. By the supported-family definition, spanning $V_t$ is therefore equivalent to surjectivity of $S$, and hence of $T_t$, since $C$ and $R_\\theta$ are bijective.",
+   "uses": [
+    "def-trf-supported-homogeneous-division"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient calculation from the polynomial and supported-family definitions; finite-module input: Tag 05G8, lemma-fun."
+   }
+  },
+  {
+   "text": "Assume this spanning condition. The coordinate unit vectors $e_\\eta$ generate $A^{E_t}$: every $c$ equals $\\sum_{\\eta\\in E_t}c_\\eta e_\\eta$. Thus $A^{E_t}$ is a finitely generated module over the given commutative ring $A$, and $T_t$ is its surjective linear endomorphism. Apply [lem-weil-pbc-finite-module-surjective-endomorphism-bijective] (Stacks Tag 05G8, lemma-fun) to conclude that $T_t$ is an isomorphism, in particular bijective.",
+   "uses": [
+    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient calculation from the polynomial and supported-family definitions; finite-module input: Tag 05G8, lemma-fun."
+   }
+  },
+  {
+   "text": "The identity $T_t=C S R_\\theta$ now makes $S=C^{-1}T_tR_\\theta^{-1}$ bijective. Hence every $f\\in V_t$ has a unique coefficient family $a\\in A^{I_t}$ with $f=\\sum_\\xi a_\\xi P_\\xi$; finiteness of $I_t$ makes these precisely the finite coefficients in the definition of a basis. This proves that $(P_\\xi)$ is an $A$-basis. The argument also covers the boundary cases: when $s=0$ every index is a remainder; when $n=0$, $E_0$ is the singleton empty exponent and $E_t$ is empty for $t>0$; over the zero ring every coefficient module is the zero module and the same inverse formulas and finite-module lemma apply.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient calculation from the polynomial and supported-family definitions; finite-module input: Tag 05G8, lemma-fun."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-free-module",
+  "def-trf-supported-homogeneous-division",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit first-dividing-vertex and coefficient argument for the supported degree family; only non-elementary algebra input is Tag 05G8, lemma-fun. BM sentence before Theorem 8.1 not locally available; not used as a proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-degree-coefficient-isomorphism: first dividing vertex partitions degree t monomials and a spanning supported homogeneous polynomial family is an invertible square coefficient matrix",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {R : Type u_3} [inst : CommSemiring R] {N : ℕ} {φ : MvPolynomial (Fin (N + 1)) R} {n : ℕ},\\n  φ.IsHomogeneous n → ∀ (i j : ℕ), i + j = n → (((MvPolynomial.finSuccEquiv R N) φ).coeff i).IsHomogeneous j\", \"doc\": \"Given a homogeneous polynomial $\\\\varphi$ of degree $n$ in variables indexed by $\\\\text{Fin}(n+1)$, applying the algebra equivalence $\\\\text{finSuccEquiv}$ yields a polynomial where each coefficient of d\"}\n  {\"name\": \"Matrix.charpoly.optionEquivLeft_symm_univ_isHomogeneous\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/Univ\", \"type\": \"∀ (R : Type u_1) (n : Type u_3) [inst : CommRing R] [inst_1 : Fintype n] [inst_2 : DecidableEq n],\\n  ((MvPolynomial.optionEquivLeft R (n × n)).symm (Matrix.charpoly.univ R n)).IsHomogeneous (Fintype.card n)\", \"doc\": \"The inverse of the algebra equivalence between multivariate polynomials over $\\\\text{Option } \\\\sigma$ and polynomials in one variable with multivariate coefficients, when applied to the universal chara\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.coeff_isHomogeneous_of_optionEquivLeft_symm\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommSemiring R] {n : ℕ} [hσ : Finite σ] {p : Polynomial (MvPolynomial σ R)},\\n  ((MvPolynomial.optionEquivLeft R σ).symm p).IsHomogeneous n → ∀ (i j : ℕ), i + j = n → (p.coeff i).IsHomogeneous j\", \"doc\": \"Given a finite type $\\\\sigma$ and a commutative semiring $R$, if the inverse image of a polynomial $p \\\\in R[\\\\text{Option } \\\\sigma]$ under the algebra equivalence $\\\\text{optionEquivLeft}$ is a homogeneo\"}\n  {\"name\": \"FirstOrder.Ring.mvPolynomialSupportLEEquiv\", \"module\": \"Mathlib/RingTheory/MvPolynomial/FreeCommRing\", \"type\": \"{ι : Type u_1} →\\n  {κ : Type u_2} →\\n    {R : Type u_3} →\\n      [DecidableEq κ] →\\n        [inst : CommRing R] →\\n          [DecidableEq R] →\\n            (monoms : ι → Finset (κ →₀ ℕ)) → { p // ∀ (i : ι), (p i).support ⊆ monoms i } ≃ ((i : ι) × ↥(monoms i) → R)\", \"doc\": \"An equivalence between the type of families of multivariate polynomials whose supports are contained in specified finite sets of monomials and the type of functions on the union of these monomials. Th\"}\n  {\"name\": \"FirstOrder.Ring.MvPolynomialSupportLEEquiv_symm_apply_coeff\", \"module\": \"Mathlib/RingTheory/MvPolynomial/FreeCommRing\", \"type\": \"∀ {ι : Type u_1} {κ : Type u_2} {R : Type u_3} [inst : DecidableEq κ] [inst_1 : CommRing R] [inst_2 : DecidableEq R]\\n  (p : ι → MvPolynomial κ R),\\n  ((FirstOrder.Ring.mvPolynomialSupportLEEquiv fun i => (p i).support).symm fun i =>\\n      MvPolynomial.coeff (↑i.snd) (p i.fst)) =\\n    ⟨p, ⋯⟩\", \"doc\": \"The inverse of the equivalence between polynomials with supports contained in specified finite monomial sets and coefficient functions reconstructs the original polynomial by setting coefficients outs\"}\n  {\"name\": \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) →\\n                  (R\", \"doc\": \"In a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the inverse of the Jacobian unit $ \\\\operatorname{det}^{-1} $ is expressed as a multivariate polynomial over\"}\n  {\"name\": \"LinearMap.toMvPolynomial_isHomogeneous\", \"module\": \"Mathlib/Algebra/Module/LinearMap/Polynomial\", \"type\": \"∀ {R : Type u_1} {M₁ : Type u_2} {M₂ : Type u_3} {ι₁ : Type u_4} {ι₂ : Type u_5} [inst : CommRing R]\\n  [inst_1 : AddCommGroup M₁] [inst_2 : AddCommGroup M₂] [inst_3 : Module R M₁] [inst_4 : Module R M₂]\\n  [inst_5 : Fintype ι₁] [inst_6 : Finite ι₂] [inst_7 : DecidableEq ι₁] (b₁ : Module.Basis ι₁ R M₁\", \"doc\": \"The multivariate polynomial representation of the $i$-th row of a linear map $f : M_1 \\\\to_R M_2$, constructed with respect to bases $b_1$ and $b_2$, is homogeneous of degree 1. This means every monomi\"}\n  {\"name\": \"MvPolynomial.decomposition.decompose'_eq\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommSemiring R],\\n  DirectSum.Decomposition.decompose' = fun φ =>\\n    (DirectSum.mk (fun i => ↥(MvPolynomial.homogeneousSubmodule σ R i)) (Finset.image (⇑Finsupp.degree) φ.support))\\n      fun m => ⟨(MvPolynomial.homogeneousComponent ↑m) φ, ⋯⟩\", \"doc\": \"For any polynomial $\\\\phi$ in the multivariate polynomial ring $R[\\\\sigma]$, the decomposition map $\\\\text{decompose}'$ applied to $\\\\phi$ equals the direct sum $\\\\bigoplus_{i \\\\in \\\\mathbb{N}} \\\\text{homogen\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneousSubmodule_fg and coefficient decompositions give general component tools, not the first-dividing-vertex index bijection and its square division coefficient map. The general surjective finite-module theorem is already the existing 05G8 leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.homogeneousSubmodule",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"MvPolynomial.homogeneousSubmodule\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] (n : ℕ) : Submodule R (MvPolynomial σ R)\", \"doc\": \"The submodule of homogeneous `MvPolynomial`s of degree `n`.\"}\n  {\"name\": \"MvPolynomial.homogeneousSubmodule_fg\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] [Finite σ] (n : ℕ) : (MvPolynomial.homogeneousSubmodule σ R n).FG\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.gradedAlgebra\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] : GradedAlgebra (MvPolynomial.homogeneousSubmodule σ R)\", \"doc\": \"`MvPolynomial σ R` as a graded algebra, graded by the degree.\\nWe do not make this a global instance because one may want to consider a different\\ngraded algebra structure on `MvPolynomial σ R`, induced\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousSubmodule_one\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] (n : ℕ) : MvPolynomial.weightedHomogeneousSubmodule R 1 n = MvPolynomial.homogeneousSubmodule σ R n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.homogeneousSubmodule_one_eq_span_X\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] : MvPolynomial.homogeneousSubmodule σ R 1 = Submodule.span R (Set.range MvPolynomial.X)\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.HomogeneousSubmodule.gradedMonoid\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] : SetLike.GradedMonoid (MvPolynomial.homogeneousSubmodule σ R)\", \"doc\": \"The homogeneous submodules form a graded ring.\\nThis instance is used by `DirectSum.commSemiring` and `DirectSum.algebra`.\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.HomogeneousSubmodule.gcommSemiring\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] : SetLike.GradedMonoid (MvPolynomial.homogeneousSubmodule σ R)\", \"doc\": \"The homogeneous submodules form a graded ring. This instance is used by `DirectSum.commSemiring`\\nand `DirectSum.algebra`.\"}\n  {\"name\": \"MvPolynomial.decomposition\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] : DirectSum.Decomposition (MvPolynomial.homogeneousSubmodule σ R)\", \"doc\": \"The decomposition of `MvPolynomial σ R` into homogeneous submodules.\"}\n  {\"name\": \"MvPolynomial.mem_homogeneousSubmodule\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] (n : ℕ) (p : MvPolynomial σ R) : p ∈ MvPolynomial.homogeneousSubmodule σ R n ↔ p.IsHomogeneous n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.homogeneousSubmodule_zero\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) {R : Type u_3} [CommSemiring R] : MvPolynomial.homogeneousSubmodule σ R 0 = 1\", \"doc\": \"\"}\n  {\"name\": \"Ideal.span_eq_map_homogeneousSubmodule\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {ι : Type u_1} {R : Type u_2} [CommSemiring R] (x : ι → R) : Ideal.span (Set.range x) = Submodule.map (MvPolynomial.aeval x).toLinearMap (MvPolynomial.homogeneousSubmodule ι R 1)\", \"doc\": \"Try to use the universal property of the span (e.g., `Submodule.span_induction`) instead of\\nthis.\"}\n  {\"name\": \"MvPolynomial.homogeneousSubmodule_eq_finsupp_supported\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] (n : ℕ) : MvPolynomial.homogeneousSubmodule σ R n = AddMonoidAlgebra.supported R R {d | Finsupp.degree d = n}\", \"doc\": \"While equal, the former has a convenient definitional reduction.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneousSubmodule_fg and coefficient decompositions give general component tools, not the first-dividing-vertex index bijection and its square division coefficient map. The general surjective finite-module theorem is already the existing 05G8 leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*[Hh]omogeneous|[Hh]omogeneous.*basis|divisionFamily|quotientSupport",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneousSubmodule_fg and coefficient decompositions give general component tools, not the first-dividing-vertex index bijection and its square division coefficient map. The general surjective finite-module theorem is already the existing 05G8 leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-supported-degree-coefficient-isomorphism: homogeneous polynomial supported division indices biject with monomial exponents and spanning implies unique coefficients over a commutative ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.homogeneousComponent_apply\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \": homogeneousComponent n φ = ∑ d ∈ φ.support with d.degree = n, monomial d (coeff d φ)\", \"doc\": \"For a multivariate polynomial $\\\\phi$ and a natural number $n$, the homogeneous component of $\\\\phi$ of degree $n$ is given by the sum $\\\\sum_{\\\\substack{d \\\\in \\\\text{supp}(\\\\phi) \\\\\\\\ \\\\deg d = n}} \\\\text{coef\"}\n  {\"name\": \"MvPolynomial.support\", \"module\": \"Mathlib.Algebra.MvPolynomial.Basic\", \"type\": \"(p : MvPolynomial σ R) : Finset (σ →₀ ℕ)\", \"doc\": \"The support of a multivariate polynomial $ p $ is the finite set of monomials (represented as finite support functions from $ \\\\sigma $ to $ \\\\mathbb{N} $) where the coefficients of $ p $ are non-zero.\"}\n  {\"name\": \"Polynomial.support\", \"module\": \"Mathlib.Algebra.Polynomial.Basic\", \"type\": \": R[X] → Finset ℕ\", \"doc\": \"The function that maps a polynomial over a semiring $ R $ to the finite set of natural numbers corresponding to the exponents of its non-zero coefficients.\"}\n  {\"name\": \"MvPolynomial.homogeneousComponent_isHomogeneous\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \": (homogeneousComponent n φ).IsHomogeneous n\", \"doc\": \"For any multivariate polynomial $\\\\varphi$ and natural number $n$, the homogeneous component of $\\\\varphi$ of degree $n$ is a homogeneous polynomial of degree $n$.\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.funext_of_le_card\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \"(hF : F.IsHomogeneous n) (hG : G.IsHomogeneous n) (h : ∀ r : σ → R, eval r F = eval r G) (hnR : n ≤ #R) : F = G\", \"doc\": \"For any commutative semiring $ R $, index type $ \\\\sigma $, and natural number $ n $, if two homogeneous polynomials $ F $ and $ G $ of degree $ n $ in $ R[\\\\sigma] $ satisfy $ \\\\text{eval}_r(F) = \\\\text{\"}\n  {\"name\": \"MvPowerSeries.coeff_homogeneousComponent\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(p : ℕ) (d : σ →₀ ℕ) (f : MvPowerSeries σ R) :\\n  coeff d (homogeneousComponent p f) = if degree d = p then coeff d f else 0\", \"doc\": \"For a multivariate power series $ f $, the coefficient of a monomial $ d $ in its homogeneous component of degree $ p $ is equal to the coefficient of $ d $ in $ f $ if the total degree of $ d $ is $ \"}\n  {\"name\": \"MvPolynomial.coeff_homogeneousComponent\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \"(d : σ →₀ ℕ) : coeff d (homogeneousComponent n φ) = if d.degree = n then coeff d φ else 0\", \"doc\": \"For any multivariate polynomial $\\\\varphi$ over a commutative semiring $R$ and any monomial $d$ (represented by a finite support function $\\\\sigma \\\\to_0 \\\\mathbb{N}$), the coefficient of $d$ in the homog\"}\n  {\"name\": \"MvPolynomial.homogeneousComponent\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \"[CommSemiring R] (n : ℕ) : MvPolynomial σ R →ₗ[R] MvPolynomial σ R\", \"doc\": \"For a multivariate polynomial ring $ R[\\\\sigma] $, this is the $ R $-linear map that sends each polynomial to its homogeneous component of degree $ n $, consisting of all terms with total degree $ n $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneousSubmodule_fg and coefficient decompositions give general component tools, not the first-dividing-vertex index bijection and its square division coefficient map. The general surjective finite-module theorem is already the existing 05G8 leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-degree-coefficient-isomorphism: monomial diagram partition gives square matrix for supported homogeneous multiples with complement monomials",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LinearMap.toMvPolynomial_isHomogeneous\", \"module\": \"Mathlib/Algebra/Module/LinearMap/Polynomial\", \"type\": \"∀ {R : Type u_1} {M₁ : Type u_2} {M₂ : Type u_3} {ι₁ : Type u_4} {ι₂ : Type u_5} [inst : CommRing R]\\n  [inst_1 : AddCommGroup M₁] [inst_2 : AddCommGroup M₂] [inst_3 : Module R M₁] [inst_4 : Module R M₂]\\n  [inst_5 : Fintype ι₁] [inst_6 : Finite ι₂] [inst_7 : DecidableEq ι₁] (b₁ : Module.Basis ι₁ R M₁\", \"doc\": \"The multivariate polynomial representation of the $i$-th row of a linear map $f : M_1 \\\\to_R M_2$, constructed with respect to bases $b_1$ and $b_2$, is homogeneous of degree 1. This means every monomi\"}\n  {\"name\": \"MvPolynomial.decomposition.decompose'_eq\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommSemiring R],\\n  DirectSum.Decomposition.decompose' = fun φ =>\\n    (DirectSum.mk (fun i => ↥(MvPolynomial.homogeneousSubmodule σ R i)) (Finset.image (⇑Finsupp.degree) φ.support))\\n      fun m => ⟨(MvPolynomial.homogeneousComponent ↑m) φ, ⋯⟩\", \"doc\": \"For any polynomial $\\\\phi$ in the multivariate polynomial ring $R[\\\\sigma]$, the decomposition map $\\\\text{decompose}'$ applied to $\\\\phi$ equals the direct sum $\\\\bigoplus_{i \\\\in \\\\mathbb{N}} \\\\text{homogen\"}\n  {\"name\": \"Matrix.toMvPolynomial_isHomogeneous\", \"module\": \"Mathlib/Algebra/Module/LinearMap/Polynomial\", \"type\": \"∀ {m : Type u_1} {n : Type u_2} {R : Type u_4} [inst : Fintype n] [inst_1 : CommSemiring R] (M : Matrix m n R) (i : m),\\n  (M.toMvPolynomial i).IsHomogeneous 1\", \"doc\": \"For any matrix $M$ with entries in a commutative semiring $R$ and any row index $i$, the multivariate polynomial representing the $i$-th row of $M$ is homogeneous of degree 1. This means every monomia\"}\n  {\"name\": \"MvPolynomial.homogeneousComponent_of_mem\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommSemiring R] {m n : ℕ} {p : MvPolynomial σ R},\\n  p ∈ MvPolynomial.homogeneousSubmodule σ R n → (MvPolynomial.homogeneousComponent m) p = if m = n then p else 0\", \"doc\": \"For a multivariate polynomial $ p $ in $ R[\\\\sigma] $, if $ p $ belongs to the homogeneous submodule of degree $ n $, then the homogeneous component of $ p $ of degree $ m $ is equal to $ p $ when $ m \"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {R : Type u_3} [inst : CommSemiring R] {N : ℕ} {φ : MvPolynomial (Fin (N + 1)) R} {n : ℕ},\\n  φ.IsHomogeneous n → ∀ (i j : ℕ), i + j = n → (((MvPolynomial.finSuccEquiv R N) φ).coeff i).IsHomogeneous j\", \"doc\": \"Given a homogeneous polynomial $\\\\varphi$ of degree $n$ in variables indexed by $\\\\text{Fin}(n+1)$, applying the algebra equivalence $\\\\text{finSuccEquiv}$ yields a polynomial where each coefficient of d\"}\n  {\"name\": \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommSemiring R] (r : R) (s : σ →₀ ℕ),\\n  (MvPolynomial.monomial s) r ∈ MvPolynomial.homogeneousSubmodule σ R 1 ^ Finsupp.degree s\", \"doc\": \"For any commutative semiring $ R $, type $ \\\\sigma $, coefficient $ r \\\\in R $, and finite support function $ s : \\\\sigma \\\\to_0 \\\\mathbb{N} $, the monomial $ r \\\\cdot \\\\mathbf{X}^s $ belongs to the $ \\\\deg(s\"}\n  {\"name\": \"MvPolynomial.homogeneousComponent_apply\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommSemiring R] (n : ℕ) (φ : MvPolynomial σ R),\\n  (MvPolynomial.homogeneousComponent n) φ =\\n    ∑ d ∈ φ.support with Finsupp.degree d = n, (MvPolynomial.monomial d) (MvPolynomial.coeff d φ)\", \"doc\": \"For a multivariate polynomial $\\\\phi$ and a natural number $n$, the homogeneous component of $\\\\phi$ of degree $n$ is given by the sum $\\\\sum_{\\\\substack{d \\\\in \\\\text{supp}(\\\\phi) \\\\\\\\ \\\\deg d = n}} \\\\text{coef\"}\n  {\"name\": \"MvPolynomial.weightedDecomposition.decompose'_eq\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ (R : Type u_1) {M : Type u_2} [inst : CommSemiring R] {σ : Type u_3} (w : σ → M) [inst_1 : AddCommMonoid M]\\n  [inst_2 : DecidableEq M],\\n  DirectSum.Decomposition.decompose' = fun φ =>\\n    (DirectSum.mk (fun i => ↥(MvPolynomial.weightedHomogeneousSubmodule R w i))\\n        (Finset.image (⇑(Finsupp.w\", \"doc\": \"The decompose' function for the weighted decomposition of a multivariate polynomial ring $ R[\\\\sigma] $ is equal to the canonical map that constructs the direct sum of weighted homogeneous components. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneousSubmodule_fg and coefficient decompositions give general component tools, not the first-dividing-vertex index bijection and its square division coefficient map. The general surjective finite-module theorem is already the existing 05G8 leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first dividing vertex partition of monomial exponents gives a square supported homogeneous polynomial coefficient map, spanning implies it is invertible over a commutative ring",
+   "results": "{\"t\": \"2026-10-23T14:12:16Z\", \"tool\": \"leanfinder\", \"query\": \"first dividing vertex partition of monomial exponents gives a square supported homogeneous polynomial coefficient map, spanning implies it is invertible over a commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"MvPolynomial.IsHomogeneous.coeff_isHomogeneous_of_optionEquivLeft_symm\", \"MvPolynomial.weightedDecomposition\", \"MonomialOrder.div\", \"MonomialOrder.div_set\", \"Ideal.mem_span_iff_exists_isHomogeneous\", \"Polynomial.homogenize\"], \"digest\": \"d802db1abc7e95ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: homogeneous coefficient tools and general endomorphism results cover separate ingredients; the first-dividing-vertex bijection and supported family factorization still require the explicit argument. The endomorphism ingredient is reused from the existing 05G8 leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*[Hh]omogeneous|[Hh]omogeneous.*basis|divisionFamily|quotientSupport",
+   "results": "{\"t\": \"2026-10-23T14:12:49Z\", \"tool\": \"grep\", \"query\": \"basis.*[Hh]omogeneous|[Hh]omogeneous.*basis|divisionFamily|quotientSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/CartanExists.lean\"], \"digest\": \"ac85a12bb9f75937\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: homogeneous coefficient tools and general endomorphism results cover separate ingredients; the first-dividing-vertex bijection and supported family factorization still require the explicit argument. The endomorphism ingredient is reused from the existing 05G8 leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "homogeneous polynomial supported division first dividing vertex index bijection square coefficient matrix surjective implies bijective",
+   "results": "{\"t\": \"2026-10-23T14:12:49Z\", \"tool\": \"leansearch\", \"query\": \"homogeneous polynomial supported division first dividing vertex index bijection square coefficient matrix surjective implies bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize\", \"MvPolynomial.IsHomogeneous\", \"MvPolynomial.map_surjective_iff\", \"Polynomial.map_surjective_iff\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"MvPolynomial.homogeneousComponent_isHomogeneous\", \"MvPolynomial.IsHomogeneous.rename_isHomogeneous_iff\", \"FirstOrder.genericPolyMapSurjOnOfInjOn\"], \"digest\": \"bc4aa1df506f102f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: homogeneous coefficient tools and general endomorphism results cover separate ingredients; the first-dividing-vertex bijection and supported family factorization still require the explicit argument. The endomorphism ingredient is reused from the existing 05G8 leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.homogeneousSubmodule, Module.Basis",
+   "results": "{\"t\": \"2026-10-23T14:12:49Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.homogeneousSubmodule, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: homogeneous coefficient tools and general endomorphism results cover separate ingredients; the first-dividing-vertex bijection and supported family factorization still require the explicit argument. The endomorphism ingredient is reused from the existing 05G8 leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousSubmodule_eq_finsupp_supported|bijective_of_surjective_endomorphism|def IsHomogeneous",
+   "results": "{\"t\": \"2026-10-23T14:13:18Z\", \"tool\": \"grep\", \"query\": \"homogeneousSubmodule_eq_finsupp_supported|bijective_of_surjective_endomorphism|def IsHomogeneous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Noetherian/Orzech.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean\", \"Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\"], \"digest\": \"0a9f90b3d3b9089c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: homogeneous coefficient tools and general endomorphism results cover separate ingredients; the first-dividing-vertex bijection and supported family factorization still require the explicit argument. The endomorphism ingredient is reused from the existing 05G8 leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monomial coefficient coordinates on a fixed homogeneous polynomial degree identify a finite indexed spanning family with a surjective square linear map",
+   "results": "{\"t\": \"2026-10-23T14:13:20Z\", \"tool\": \"leanfinder\", \"query\": \"monomial coefficient coordinates on a fixed homogeneous polynomial degree identify a finite indexed spanning family with a surjective square linear map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"Ideal.span_eq_map_homogeneousSubmodule\", \"MvPolynomial.homogeneousSubmodule_one_eq_span_X\", \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\", \"MvPolynomial.homogeneousSubmodule_eq_finsupp_supported\", \"Ideal.span_pow_eq_map_homogeneousSubmodule\", \"LinearMap.toMvPolynomial_isHomogeneous\", \"MvPolynomial.coeffsIn_eq_span_monomial\"], \"digest\": \"17fad6598644bfbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: homogeneous coefficient tools and general endomorphism results cover separate ingredients; the first-dividing-vertex bijection and supported family factorization still require the explicit argument. The endomorphism ingredient is reused from the existing 05G8 leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-initial-diagram-stabilization",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical local-invariant branch of lem-trf-local-term-locality via ILO VIII 2.3.11--2.3.13 and the regular Hilbert--Samuel coefficient construction. Exact lower input: BM 1997 section 8, Theorem 8.1 and Lemma 8.5, printed pp.274--275, used in the finite testing paragraph concluding Theorem 9.6, p.282. Subargument: Sentence preceding Theorem 8.1, printed p.274: the supported degree family is a basis exactly when it spans; first-dividing-vertex coefficient matrix made explicit. General finite-module input: Stacks Tag 05G8, algebra.tex label lemma-fun.",
+   "via": [
+    "lem-trf-initial-diagram-stabilization",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-supported-degree-coefficient-isomorphism",
+  "worker": "stage1",
+  "summary": "Proved the first-dividing-vertex bijection, finite degree index sets, homogeneous monomial coordinates, exact coefficient factorization and basis conclusion explicitly. Reused the existing Tag 05G8 Mathlib leaf; no new nodes and no statement change. Checked empty variable/vertex sets and the zero ring.",
+  "blueprint": "Realizes the supported-degree coefficient argument in the historical local-invariant branch of lem-trf-local-term-locality, via lem-trf-initial-diagram-stabilization: the sentence before BM Theorem 8.1 (printed p.274). The current latest locality proof uses contracting correspondences; this lower algebra item retains its dispatched inherited route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-2e8959387",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-2e8959387 (reviewer sub-agent of L); spot-checked: PASS, no changes. First split (no repair note) of a statement-only item: one commit, item and report only, no new nodes; statement, source, blueprint and unit unchanged; proof_deps equals the union of step uses; no SGA. All six steps read in full and recomputed. Step 1: the first-dividing-vertex map θ_t is a bijection, because β∈Δ_i means i is the least vertex dividing α_i+β, pair images lie in D and remainder images do not; E_t is inside {0..t}^n, so finite. Steps 2-3: monomial coordinates C and B from the polynomial-ring and basis definitions; Y^βH_i lands in V_t with no leading-coefficient condition. Step 4: recomputed T_t = C S R_θ; spanning means S is surjective, which is equivalent to T_t surjective. Step 5: the cited leaf lem-weil-pbc-finite-module-surjective-endomorphism-bijective (Mathlib OrzechProperty.bijective_of_surjective_endomorphism) matches Stacks algebra.tex:2893 lemma-fun = Tag 05G8. Step 6: S is bijective, so the family is a basis. Small cases tested: 2Y² over ℤ vs ℚ, overlapping vertices (1,0),(0,1) at t=2, s=0, n=0, zero ring; the statement holds in all. No duplicate: searched the DAG for 05G8, first-dividing and supported-homogeneous terms; the sibling trf nodes state different facts. The citer lem-trf-initial-diagram-stabilization step 3 uses exactly what the statement gives. Advisory: the inherited statement cites def-weil-pbc-mv-polynomial-ring for 'homogeneous', which that node does not define; step 2 states the meaning. The BM 1997 paper is absent locally and the agent-written proof does not rely on it."
+ }
+}

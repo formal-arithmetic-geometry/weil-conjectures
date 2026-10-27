@@ -1,0 +1,124 @@
+{
+ "id": "lem-coef-restriction-sections-acyclic",
+ "kind": "statement",
+ "title": "Scalar restriction preserves the computation of sections on K-injective complexes",
+ "statement": "Let $C$ be a category essentially small in universe $w$, with a Grothendieck topology $J$ [def-weil-pbc-sites-and-cohomology]. Assume abelian sheafification, the locally bijective characterization of sheafification equivalences, and limits of shape $C^{op}$ in abelian groups of universe $w$. Let $f:R\\to S$ be a morphism of sheaves of commutative rings in universe $w$. Use module sheaves [def-weil-sheaf-of-modules-category] and scalar restriction [def-pc-sheaf-restrict-scalars]. For K-injective complexes $I$ of $S$-modules and $K$ of $R$-modules [def-pur-kinjective-complex], every quasi-isomorphism $j:\\operatorname{Res}_f I\\to K$ induces a quasi-isomorphism on the complexes obtained by taking limits of the underlying abelian presheaves in each degree.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, specialized to scalar restriction and global sections; transport along a small-model site equivalence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose an equivalence from C to its small model in universe w, and give the small model the induced topology. Pushforward along the inverse equivalence and the identity ring map is an exact equivalence on module sheaves. The inverse pushforward and the site unit and counit give its equivalence data. Thus it preserves K-injectivity and quasi-isomorphisms. Transport I, K and j along it. The scalar actions commute with this restriction on each section. Concretely Mathlib pushforwardPushforwardEquivalence supplies the module equivalence, with the site-equivalence unit and counit giving its two ring-map compatibility equations. Exact equivalences preserve K-injectivity by transporting the Hom criterion.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the small model apply the K-injective resolution clause of lem-coef-derived-sections-scalar-coherence: sections of the transported j form a quasi-isomorphism. The natural isomorphism from the global-sections right adjoint to the limit of the underlying presheaf replaces its sections functor by the limit presentation. Conjugating a complex map by components of a natural isomorphism preserves its being a quasi-isomorphism.",
+   "uses": [
+    "lem-coef-derived-sections-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse site equivalence is initial on opposite categories. Its limit comparison identifies limits of restricted abelian presheaves with the original limits, naturally on module morphisms. Apply the corresponding isomorphism of complex functors and conjugate the transported sections map to obtain sections of j. Hence the latter is a quasi-isomorphism as claimed. This is Mathlib Functor.Initial.limIso for the inverse opposite equivalence, followed by natural-isomorphism conjugation of complex maps.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-coef-derived-sections-scalar-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E and exact equivalence transport to a small-model site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar restriction of a K injective complex of module sheaves is acyclic for global sections",
+   "results": "Returned 8 hits: CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.I_X, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.IsKInjective.rightOrthogonal, CochainComplex.isKInjective_of_injective_aux, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective.",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the library scalar-coherence theorem supplies the small-site case; the new result transports its acyclicity conclusion to an essentially small site in the coefficient universe."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar restriction of module sheaves followed by global sections applied to K injective resolutions preserves quasi isomorphisms",
+   "results": "Returned 8 hits: SheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars, ModuleCat.preservesLimit_restrictScalars, SheafOfModules.instAdditiveRestrictScalars, PresheafOfModules.restrictScalars_obj, SheafOfModules.restrictScalars_obj_val, PresheafOfModules.instFaithfulRestrictScalars.",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the library scalar-coherence theorem supplies the small-site case; the new result transports its acyclicity conclusion to an essentially small site in the coefficient universe."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Qq]uasi|[Qq]uasi.*restrictScalars|[Ss]ections.*[Aa]cyclic",
+   "results": "Returned 3 hits: Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Weakly.lean.",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the library scalar-coherence theorem supplies the small-site case; the new result transports its acyclicity conclusion to an essentially small site in the coefficient universe."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CoefficientSequenceGlobalSections",
+  "date": "2026-10-23",
+  "group": "A5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived termwise global sections, scalar comparison between finite coefficient stages; the resolution-acyclicity clause needed by lem-coef-sequence-global-sections-evaluation.",
+   "via": [
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CoefficientRestrictionSectionsAcyclic",
+  "file": "lean/Sheaf/CategoryTheory/CoefficientRestrictionSectionsAcyclic.lean",
+  "declaration": "SheafOfModules.coefficientRestrictionSections_quasiIso",
+  "statement": "theorem coefficientRestrictionSections_quasiIso\n    {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]\n    {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n    [HasLimitsOfShape Cᵒᵖ AddCommGrpCat.{w}]\n    {R S : Sheaf J CommRingCat.{w}} (f : R ⟶ S)\n    (I : CochainComplex (SheafOfModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj S)) ℤ)\n    (K : CochainComplex (SheafOfModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)\n    (j : ((restrictScalars.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map f)).mapHomologicalComplex\n        (.up ℤ)).obj I ⟶ K)\n    [I.IsKInjective] [K.IsKInjective] [QuasiIso j] :\n    QuasiIso (((toSheaf _ ⋙ sheafToPresheaf J AddCommGrpCat.{w} ⋙ lim).mapHomologicalComplex\n      (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261024T184540-L-3066020",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261024T184540-L-3066020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

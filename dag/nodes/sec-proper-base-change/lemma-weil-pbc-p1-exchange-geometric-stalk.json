@@ -110,7 +110,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk",
+     "lines": [
+      94,
+      153
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -150,8 +175,12 @@
   "note": "independent Codex review: Matched the unchanged target signature, strict-local premise, new reduction theorem and node, proof dependencies, and unit route; both delivered modules compile without warnings, and axiom checks show only permitted axioms plus sorryAx from unproved dependencies."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $p:\\mathbf P^1_S\\to S$, let $g:T\\to S$, and let $\\bar t\\to T$ have image\n$\\bar s\\to S$. For a torsion sheaf $F$ and every $q$, the stalk of the\nexchange morphism [def-weil-pbc-derived-exchange] is the canonical restriction\n\n$$\n H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)\n \\longrightarrow\n H^q(\\mathbf P^1_{\\kappa(\\bar t)},F|),\n$$\n\nwhere both residue fields are separably closed.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $p:\\mathbf P^1_S\\to S$, let $g:T\\to S$, and let $\\bar t\\to T$ have image\n$\\bar s\\to S$, where $\\kappa(\\bar s)$ and $\\kappa(\\bar t)$ are separably\nclosed and algebraic over the residue fields of the image points. For a\ntorsion sheaf $F$ of $\\Lambda$-modules on $\\mathbf P^1_S$ ($\\Lambda$ a commutative ring) and every $q$, the stalk of the\nexchange morphism [def-weil-pbc-derived-exchange] is the canonical restriction\n\n$$\n H^q(\\mathbf P^1_{\\kappa(\\bar s)},F|)\n \\longrightarrow\n H^q(\\mathbf P^1_{\\kappa(\\bar t)},F|),\n$$\n\nup to the identifications of both stalks with these cohomology groups.",
   "proof": [
    {
     "text": "Let $\\bar t\\to T$ be represented by an algebraically closed field $\\Omega$,\nand let $\\bar s\\to S$ be its composite. Put\n$S^{\\mathrm{sh}}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ and\n$T^{\\mathrm{sh}}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{T,\\bar t}$.\nThe map $T\\to S$ induces a local map $T^{\\mathrm{sh}}\\to S^{\\mathrm{sh}}$\nand a separably closed residue-field extension\n$\\kappa(\\bar s)\\hookrightarrow\\kappa(\\bar t)$. For an injective\nresolution $F\\to I^\\bullet$, the strict-henselization construction gives\nthe following diagram in $D^+(\\mathbf{Ab})$:\n\n$$\n\\begin{CD}\n(g^{-1}Rp_*F)_{\\bar t}\n@>{(\\operatorname{Ex}_{\\square,F})_{\\bar t}}>>\n(Rp'_*g'^{-1}F)_{\\bar t}\\\\\n@V{\\Phi_S}V{\\sim}V @VV{\\Phi_T}V{\\sim}V\\\\\nR\\Gamma(\\mathbf P^1_{S^{\\mathrm{sh}}},I|)\n@>{\\lambda}>>\nR\\Gamma(\\mathbf P^1_{T^{\\mathrm{sh}}},I|)\\\\\n@V{\\rho_S}V{\\sim}V @VV{\\rho_T}V{\\sim}V\\\\\nR\\Gamma(\\mathbf P^1_{\\kappa(\\bar s)},I_{\\bar s})\n@>{\\kappa(\\bar s)\\subset\\kappa(\\bar t)}>>\nR\\Gamma(\\mathbf P^1_{\\kappa(\\bar t)},I_{\\bar t}).\n\\end{CD}\n$$\n\nThe maps $\\Phi_S$ and $\\Phi_T$ are the stalk-to-strict-local maps from the\nstrict-henselization formula. The maps $\\rho_S$ and $\\rho_T$ are the S4\nrestriction quasi-isomorphisms, applied after replacing $\\mathbf P^1$ by its\nbase change to the indicated strict local ring. The bottom arrow is induced\nby the residue-field map.",
@@ -173,6 +202,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

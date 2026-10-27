@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-flat-module-derived-lift-criterion",
+ "kind": "statement",
+ "title": "Flat module lifts and bounded-above derived lifts",
+ "statement": "Let $A'\\twoheadrightarrow A$ be a surjection of commutative rings with nilpotent kernel $I$, meaning $I^r=0$ for some integer $r\\ge1$. Let $A'\\to P'$ be a flat ring map [def-weil-pbc-flat-ring-map], set $P=P'\\otimes_{A'}A$, and let $M$ be a $P$-module flat over $A$. Use ordinary tensor products [def-weil-pbc-module-tensor-product], the module derived categories [def-weil-abstract-derived-category], and derived tensor computed by total tensor of K-flat resolutions [def-pc-module-kflat-complex]. Write $M[0]$ for the module in degree zero and $D^-(P')$ for the objects whose cohomology vanishes in sufficiently large degrees. The following are equivalent: (i) there is a $P'$-module $L$, flat over $A'$, with a $P$-linear isomorphism $L\\otimes_{A'}A\\cong M$; (ii) there is $C'\\in D^-(P')$ with an isomorphism $C'\\otimes_{P'}^{\\mathbf L}P\\cong M[0]$. Furthermore, if $I^2=0$ and $J=IP'\\subset P'$ (an ordinary $P$-module because $J^2=0$), flatness identifies $J\\cong I\\otimes_A P$ and the canonical derived-to-ordinary tensor map is an isomorphism in $D(P)$:\n$$M[0]\\otimes_P^{\\mathbf L}J[0]\\xrightarrow{\\sim}(M\\otimes_PJ)[0]\\cong(M\\otimes_A I)[0].$$\nNo finite generation or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZ1, lemma-lift-equivalence-module-derived, (1)⇔(2); Tag 0DZ2, lemma-lift-equivalence-module, square-zero proof and its explicit free-A-resolution footnote, for the derived-to-ordinary kernel-tensor isomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-mixed-total-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Assume (i) and put $C'=L[0]$. Apply flat-algebra derived tensor exchange with $(R,S,N,K)=(A',P',A,L[0])$. A free resolution $F^\\bullet\\to A[0]$ over $A'$ becomes, after tensoring with the $A'$-flat module $L$, an augmented complex exact away from degree zero, by flat tensor exactness. Its zeroth cohomology is $L\\otimes_{A'}A=M$. The augmentation compatibility of the exchange identifies the resulting isomorphism with the canonical map $L[0]\\otimes_{P'}^{\\mathbf L}P\\to(L\\otimes_{P'}P)[0]$. This is a $P$-linear isomorphism: forgetting to $P'$ does not change kernels, images or cohomology. The balancing maps $l\\otimes(p'\\otimes a)\\mapsto p'l\\otimes a$ and $l\\otimes a\\mapsto l\\otimes(1\\otimes a)$ identify the ordinary target with $M[0]$. Thus (ii) holds.",
+   "uses": [
+    "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-tor-modules",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ1, lemma-lift-equivalence-module-derived, proof; typed tensor directions and low-degree edge corrected as recorded in report.md."
+   }
+  },
+  {
+   "text": "Record the elementary top-degree calculation used below. If $B$ is a commutative ring, $E\\in D(B)^{\\le t}$ and $V$ is a $B$-module, tensor the successive-truncation triangle $U=\\tau_{\\le t-1}E\\to E\\to H^t(E)[-t]\\to U[1]$ with $V[0]$. Derived tensor is triangulated; the upper-bound lemma puts $U\\otimes_B^{\\mathbf L}V[0]$ in degrees at most $t-1$. Its cohomology in degrees $t,t+1$ is zero, so the cohomology exact sequence gives $H^t(E\\otimes_B^{\\mathbf L}V[0])\\cong H^t(E)\\otimes_B V$; the last identification is the degree-zero derived-module Tor comparison. The same upper-bound lemma gives $E\\otimes_B^{\\mathbf L}V[0]\\in D(B)^{\\le t}$. These conclusions use no finiteness or lower bound.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-weil-pbc-source-derived-tensor-upper-bound",
+    "lem-sf-derived-homology-long-exact",
+    "lem-kun-derived-module-tor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ1, lemma-lift-equivalence-module-derived, proof; typed tensor directions and low-degree edge corrected as recorded in report.md."
+   }
+  },
+  {
+   "text": "Now assume (ii). By tensor right exactness applied to $I\\to A'\\to A\\to0$, the map $P'\\to P$ is surjective with kernel $J=IP'$. Since $J^r=I^rP'=0$, any $P'$-module $T$ with $T\\otimes_{P'}P=0$ satisfies $T=JT=J^2T=\\cdots=J^rT=0$; no finite-generation version of Nakayama is being used. If $C'$ had nonzero positive cohomology, bounded-aboveness would give a largest such degree $t>0$. Step 2 gives $H^t(C')\\otimes_{P'}P=H^t(M[0])=0$, contrary to this nilpotent argument. Hence $C'\\in D(P')^{\\le0}$. This also covers $M=0$ without choosing a largest degree of a zero complex.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ1, lemma-lift-equivalence-module-derived, proof; typed tensor directions and low-degree edge corrected as recorded in report.md."
+   }
+  },
+  {
+   "text": "Set $L=H^0(C')$. Step 2 with $t=0$ gives $L\\otimes_{P'}P\\cong M$, hence also $L\\otimes_{A'}A\\cong M$ by the balancing maps of step 1. Tensor the triangle $U=\\tau_{\\le-1}C'\\to C'\\to L[0]\\to U[1]$ with $P$. Here $U\\otimes_{P'}^{\\mathbf L}P$ has cohomology only in degrees at most $-1$. Its degree-zero vanishing and the cohomology exact sequence give a SURJECTION\n$$H^{-1}(C'\\otimes_{P'}^{\\mathbf L}P)\\twoheadrightarrow H^{-1}(L[0]\\otimes_{P'}^{\\mathbf L}P)=\\operatorname{Tor}^{P'}_1(L,P).$$\nThe source is $H^{-1}(M[0])=0$, so this Tor module is zero. This is the required low-degree edge argument; it does not assume $C'$ is already a module, or infer anything about all its negative cohomology.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-weil-pbc-source-derived-tensor-upper-bound",
+    "lem-sf-derived-homology-long-exact",
+    "lem-kun-derived-module-tor-comparison",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ1, lemma-lift-equivalence-module-derived, proof; typed tensor directions and low-degree edge corrected as recorded in report.md."
+   }
+  },
+  {
+   "text": "Apply flat-algebra derived tensor exchange once more, now with $(R,S,N,K)=(A',P',A,L[0])$. Forgetting to $A'$ and taking degree $-1$ identifies the zero Tor module of step 4 with $\\operatorname{Tor}^{A'}_1(L,A)$; use the derived-module Tor comparison on both sides. Tor symmetry gives $\\operatorname{Tor}^{A'}_1(A,L)=0$. The first-variable Tor exact sequence for $0\\to I\\to A'\\to A\\to0$ therefore makes $I\\otimes_{A'}L\\to A'\\otimes_{A'}L=L$ injective. This is multiplication. Also $L/IL\\cong L\\otimes_{A'}A\\cong M$ (the quotient map and inverse send $l\\otimes\\bar a$ to $al\\bmod IL$ and $l\\bmod IL$ to $l\\otimes1$), so it is $A$-flat. The cited nilpotent-ideal module flatness theorem applies with $R=A'$, ideal $I$, exponent $r$, and module $L$, and gives $A'$-flatness. This proves (i).",
+   "uses": [
+    "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+    "lem-kun-derived-module-tor-comparison",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "lem-sfb-nilpotent-ideal-module-flatness",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ1, lemma-lift-equivalence-module-derived, proof; typed tensor directions and low-degree edge corrected as recorded in report.md."
+   }
+  },
+  {
+   "text": "For the last assertion suppose $I^2=0$. Tensor $0\\to I\\to A'\\to A\\to0$ with the $A'$-flat module $P'$. Flat tensor exactness gives $I\\otimes_{A'}P'\\cong J$. The elements of $I$ are annihilated by $I$ and those of $J$ by $J$. Balancing thus gives $I\\otimes_{A'}P'\\cong I\\otimes_A P$: send $i\\otimes p'$ to $i\\otimes\\bar p'$; a lift of $\\bar p'$ defines the inverse since changing the lift by $\\sum a_kp'_k$, $a_k\\in I$, changes the tensor by $\\sum a_ki\\otimes p'_k=0$. Moreover $P$ is $A$-flat: for an injection of $A$-modules $V\\to W$, the identification $V\\otimes_A P=V\\otimes_{A'}P'$ (and the same for $W$) reduces injectivity to $A'$-flatness of $P'$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ2, lemma-lift-equivalence-module, square-zero paragraph and explicit free-A-resolution footnote; Tag 0DZ1 for the preceding equivalence."
+   }
+  },
+  {
+   "text": "Apply the new tensor exchange with $(R,S,N,K)=(A,P,I,M[0])$, justified by step 6. It identifies $M[0]\\otimes_P^{\\mathbf L}(P\\otimes_A I)[0]$ in $D(P)$ with $Q_P(M\\otimes_A F^\\bullet)$ for a free $A$-resolution $F^\\bullet\\to I[0]$. Flat tensor exactness for the $A$-flat module $M$ says its augmentation to $(M\\otimes_A I)[0]$ is a quasi-isomorphism. By the augmentation clause of the exchange, this augmentation is precisely the canonical derived-to-ordinary comparison followed by balancing. Substitute the $P$-linear identification $J\\cong P\\otimes_A I$ of step 6. The balancing map $m\\otimes(p\\otimes i)\\mapsto pm\\otimes i$, with inverse $m\\otimes i\\mapsto m\\otimes(1\\otimes i)$, gives $M\\otimes_PJ\\cong M\\otimes_A I$. Thus the specified canonical comparison is an isomorphism in $D(P)$, not merely an equality of its cohomology groups.",
+   "uses": [
+    "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-tor-modules",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ2, lemma-lift-equivalence-module, square-zero paragraph and explicit free-A-resolution footnote; Tag 0DZ1 for the preceding equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-weil-pbc-source-derived-tensor-upper-bound",
+  "lem-sf-derived-homology-long-exact",
+  "lem-kun-derived-module-tor-comparison",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-sfb-nilpotent-ideal-module-flatness",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tags 0DZ1 and 0DZ2, with the low-degree Tor edge obtained from the truncation triangle rather than the mistyped display in 0DZ1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nilpotent|lift",
+   "results": "25 hits in Mathlib/RingTheory/Flat: Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: results give flatness tests for existing modules or lifts of algebra maps, not the equivalence between a derived deformation and existence of a flat module lift. Read Flat/Tensor.lean:90-98, Smooth/Flat.lean:39-65, and Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a flat module lifting a given flat module is equivalent to existence of a derived lift across a nilpotent quotient",
+   "results": "8 hits: Algebra.FormallySmooth.exists_lift, Module.Flat.of_flat_tensorProduct, Algebra.FormallySmooth.lift, Module.Flat.tfae_equational_criterion, Algebra.FormallySmooth.liftOfSurjective, Module.Flat.of_forall_exists_factorization, Algebra.FormallyUnramified.lift_unique, derivationToSquareZeroEquivLift",
+   "date": "2026-10-23",
+   "verdict": "no match: results give flatness tests for existing modules or lifts of algebra maps, not the equivalence between a derived deformation and existence of a flat module lift. Read Flat/Tensor.lean:90-98, Smooth/Flat.lean:39-65, and Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Tor\"",
+   "results": "12 hits: Vector.flatten, Vector.flatMap, Vector.flatMapM, Vector.flatMap_id, Vector.flatMap_id', Vector.flatten_replicate_replicate, Vector.flatMap_def, Vector.flatMap_replicate",
+   "date": "2026-10-23",
+   "verdict": "no match: results give flatness tests for existing modules or lifts of algebra maps, not the equivalence between a derived deformation and existence of a flat module lift. Read Flat/Tensor.lean:90-98, Smooth/Flat.lean:39-65, and Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module flat over a base quotient has a flat lift to a flat algebra over a nilpotent thickening if and only if it has a bounded above derived lift",
+   "results": "8 hits: Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.Smooth.flat, Module.Flat.of_ulift, Algebra.FormallySmooth.exists_lift, Module.flat_of_isLocalized_span, Module.Flat.iff_forall_exists_factorization, Module.Flat.of_forall_exists_factorization",
+   "date": "2026-10-23",
+   "verdict": "no match: results give flatness tests for existing modules or lifts of algebra maps, not the equivalence between a derived deformation and existence of a flat module lift. Read Flat/Tensor.lean:90-98, Smooth/Flat.lean:39-65, and Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*flat|flat.*nilpotent|Tor.*flat|flat.*Tor",
+   "results": "24 hits in Mathlib/RingTheory: Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: results give flatness tests for existing modules or lifts of algebra maps, not the equivalence between a derived deformation and existence of a flat module lift. Read Flat/Tensor.lean:90-98, Smooth/Flat.lean:39-65, and Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"lift\"",
+   "results": "11 hits: Module.Flat.of_ulift, Module.Flat.ulift, Module.Flat.ulift_left_iff, Module.Flat.ulift_right_iff, RingHom.Flat.ulift_iff, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat",
+   "date": "2026-10-23",
+   "verdict": "no match: results give flatness tests for existing modules or lifts of algebra maps, not the equivalence between a derived deformation and existence of a flat module lift. Read Flat/Tensor.lean:90-98, Smooth/Flat.lean:39-65, and Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nilpotent quotient and flat ambient algebra, a derived deformation of a base flat module gives an ordinary flat deformation by taking zeroth cohomology",
+   "results": "8 hits: derivationToSquareZeroOfLift, Algebra.FormallyUnramified.flat_of_restrictScalars, derivationToSquareZeroEquivLift, Algebra.Smooth.flat, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Extension.homInfinitesimal, Algebra.formallySmooth_iff, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: results give flatness tests for existing modules or lifts of algebra maps, not the equivalence between a derived deformation and existence of a flat module lift. Read Flat/Tensor.lean:90-98, Smooth/Flat.lean:39-65, and Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence|spectral.sequence|edgeMap|edge_map",
+   "results": "25 hits: Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, projective vanishing, and generic homology constructions do not state the deformation equivalence; low-degree triangle argument is written explicitly in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complex C of modules with no positive cohomology, tensoring derived with a module N gives H zero equal H zero C tensor N and an epimorphism from H minus one onto Tor one of H zero C and N",
+   "results": "8 hits: CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, Rep.torIso, Rep.isZero_Tor_succ_of_projective, groupCohomology.epi_δ_of_isZero, groupHomology.epi_δ_of_isZero, groupCohomology.isIso_δ_of_isZero, groupHomologyIsoTor",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, projective vanishing, and generic homology constructions do not state the deformation equivalence; low-degree triangle argument is written explicitly in the split."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"homology\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.leftHomologyFunctor, CategoryTheory.ShortComplex.leftHomologyFunctor_obj, CategoryTheory.ShortComplex.leftHomologyFunctor_map, CategoryTheory.ShortComplex.rightHomologyFunctor, CategoryTheory.ShortComplex.rightHomologyFunctor_obj, CategoryTheory.ShortComplex.rightHomologyFunctor_map, CategoryTheory.ShortComplex.leftHomologyFunctorOpNatIso, CategoryTheory.ShortComplex.rightHomologyFunctorOpNatIso",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, projective vanishing, and generic homology constructions do not state the deformation equivalence; low-degree triangle argument is written explicitly in the split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a connective complex K and a module N, there is a surjection H_1 of derived tensor to Tor_1 of H_0 K with N",
+   "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, groupHomology.instEpiModuleCatH1π, CategoryTheory.Tor_map, CategoryTheory.Tor', DerivedCategory.HomologySequence.exact₁, CategoryTheory.Tor'_obj_map, groupHomologyIso",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, projective vanishing, and generic homology constructions do not state the deformation equivalence; low-degree triangle argument is written explicitly in the split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-module-lift-formal-neighbourhood",
+  "date": "2026-10-23",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Existence-only comparison before the tangent action adjusts the chosen completed lift. Square-zero linear deformation comparison used in the polynomial-presentation proof of Stacks 0DZ3 (correct square-zero portion of 0DZ2). The translation between module liftability and derived liftability at the start of the square-zero argument of Stacks 0DZ2, including its kernel-tensor calculation.",
+   "via": [
+    "lem-sfb-flat-module-lift-formal-neighbourhood",
+    "lem-sfb-completion-reflects-flat-liftability",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-module-derived-lift-criterion",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0DZ1 and the 0DZ2 free-resolution footnote, retaining the unchanged statement and full nilpotent generality. Corrected the typed tensor directions and proved the needed low-degree surjection using existing truncation/tensor/Tor nodes. Added one general derived tensor exchange input; handled M=0 explicitly and retained the canonical comparison in the square-zero clause.",
+  "blueprint": "Ancestor from.node is null (as printed by blueprint_refs.py ancestor); follows the recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration/deformation prerequisite chain and the immediate parent flat-module formal-neighbourhood proof, step 1. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "General module/derived-category tool used for the Stacks 0DZ1 truncation and flatness argument; the unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "General module/derived-category tool used for the Stacks 0DZ1 truncation and flatness argument; the unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-source-derived-tensor-upper-bound",
+    "why": "General module/derived-category tool used for the Stacks 0DZ1 truncation and flatness argument; the unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-kun-derived-module-tor-comparison",
+    "why": "General module/derived-category tool used for the Stacks 0DZ1 truncation and flatness argument; the unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-tor-symmetry",
+    "why": "General module/derived-category tool used for the Stacks 0DZ1 truncation and flatness argument; the unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-tor-long-exact-first-variable",
+    "why": "General module/derived-category tool used for the Stacks 0DZ1 truncation and flatness argument; the unit has no replacement for this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-triangle",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-weil-pbc-source-derived-tensor-upper-bound",
+  "lem-kun-derived-module-tor-comparison",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-weil-pbc-tor-long-exact-first-variable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-8fcaa210f",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-8fcaa210f (reviewer sub-agent of L); spot-checked: I read the whole item, all 7 steps, and the new node lem-sfb-flat-algebra-derived-module-tensor-exchange, against Stacks examples-defos.tex 0DZ1 (lines 1948-1991), the 0DZ2 footnote, and more-algebra Tag 0661. Compared with clones/live, the item's statement, stmt_deps and source are unchanged. The worker's source errata are right: 0DZ1's tensor directions are mistyped, and the spectral-sequence 'injective map' must be a surjection H^-1(C'⊗^L P)->>Tor_1(L,P); step 4 proves that surjection from the truncation triangle, and I checked its direction and shift. Steps 2-3: the top-degree formula and nilpotent Nakayama (T=J^rT=0, no finite generation) are correct, and the case M=0 is covered. Step 5: the exchange, Tor symmetry and the first-variable long exact sequence give I⊗L->L injective; lem-sfb-nilpotent-ideal-module-flatness has exactly the needed hypotheses (I^n=0, L/IL flat over A, μ injective). Step 6: the square-zero balancing I⊗_{A'}P'≅I⊗_A P and the A-flatness of P are correct. Step 7: the exchange applied to (A,P,I,M[0]) with its augmentation clause gives the derived-to-ordinary isomorphism in D(P), which is the 0DZ2 footnote. The new node is true for unbounded K: S⊗F is a bounded-above free resolution, hence K-flat, and K⊗_S(S⊗F)=K⊗_R F. I tested it on Z/2⊗Z/2, N=R and N=0. Its B1-B5 checks hold and its 8 Mathlib searches are recorded. It is not a duplicate: the θ_N of lem-sfb-perfect-coinduction-tor-independent-exchange covers only ring coefficients, while step 7 needs the module coefficient I; I also read lem-trf-coinduction-flat-quotient-base-change, lem-pc-balanced-derived-tensor-model and lem-sfb-flat-families-tor-independent. It is not a restatement of the item. The generic derived and Tor tools from other units are listed only in split_report.tool_uses, and I accept them as black-box algebra. No SGA citations. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatModuleDerivedLiftCriterion",
+  "declaration": "ModuleCat.flat_module_lift_iff_boundedAbove_derived_lift",
+  "declarations": [
+   "ModuleCat.flat_module_lift_iff_boundedAbove_derived_lift",
+   "ModuleCat.flatLiftModuleTensorComparison",
+   "ModuleCat.squareZero_kernel_tensor_comparison_of_flat"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatModuleDerivedLiftCriterion.lean",
+  "statement": "theorem flat_module_lift_iff_boundedAbove_derived_lift {Ap A Pp P : Type u} [CommRing Ap] [CommRing A] [CommRing Pp] [CommRing P] (q : Ap →+* A) (f : Ap →+* Pp) (g : A →+* P) (p : Pp →+* P) (hq : Function.Surjective q) (hI : IsNilpotent (RingHom.ker q)) (hf : f.Flat) (hsquare : IsPushout (CommRingCat.ofHom q) (CommRingCat.ofHom f) (CommRingCat.ofHom g) (CommRingCat.ofHom p)) (M : ModuleCat.{u} P) (hM : Module.Flat A ((restrictScalars g).obj M)) : (∃ L : ModuleCat.{u} Pp, Module.Flat Ap ((restrictScalars f).obj L) ∧ Nonempty ((extendScalars p).obj L ≅ M)) ↔ (∃ Cp : DerivedCategory (ModuleCat.{u} Pp), (∃ b : ℤ, Cp.IsLE b) ∧ Nonempty ((ordinaryDerivedExtendScalars p).obj Cp ≅ DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} P) 0).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Equivalence plus square-zero canonical derived-to-ordinary tensor isomorphism. A commutative-ring pushout presents P = P′ tensor_{A′} A. Exact additive kernel presentations carry the forced quotient actions. The square-zero clause pins the kernel comparison on pure tensors and asserts IsIso of the actual derived comparison. Its ordinary balancing isomorphism has target mixedTensor, the published P-linear presentation of M tensor_A I. Reuses the landed ordinary derived change of rings and mixed total tensor nodes added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9492d220a",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Read item node, all 6 stmt_deps, module, report, Stacks 0DZ1/0DZ2. Snapshot vs live: only the item's lean record and two added landed stmt_deps (lem-pur-derived-change-of-rings, def-pc-mixed-total-tensor); dep records unchanged; lean.statement verbatim. Main theorem matches node: q surjective, IsNilpotent ker q, f.Flat, IsPushout presents P=P'⊗A, M A-flat; (i) A'-flat L with extendScalars p L ≅ M; (ii) C' in D(P') with ∃b IsLE b and ordinaryDerivedExtendScalars p C' ≅ Q(M[0]). Square-zero theorem: ker q^2=⊥, exact kernel/action presentations of I and J=IP', θ pinned on pure tensors, IsIso of the canonical comparison (lax μ of Q composed with canonical single-complex isos; real data), e pinned as M◁θ⁻¹ into mixedTensor g M I. True since P and M are A-flat. No extra hypotheses, all universes u, edge cases M=0, I=0, zero rings covered. Mechanical theorem-stmt_dep finding: ordinaryDerivedExtendScalars is Classical.choice of nonempty_ordinaryDerivedChangeOfRings, so the statement genuinely depends on the theorem's constructed object: PASS on that point. Docstrings and proof steps present, only theorems sorry, no pro-etale. Not compiled (no FIX). Advisory: second reading is a self-review."
+ }
+}

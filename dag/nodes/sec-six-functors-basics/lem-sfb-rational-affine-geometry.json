@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-rational-affine-geometry",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-affine-space-rational-induction",
+   "place": "Induction proof, steps 1--7, corresponding separate ambient calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coordinate splitting and the zero-dimensional affine projection",
+ "statement": "For any scheme V and natural d, relative affine (d+1)-space is isomorphic over V to the affine line over relative affine d-space. The projection of relative affine zero-space is an isomorphism. Use the existing relative affine spaces [def-sbc-affine-space], with coordinate types ULift (Fin d) and PUnit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+  "place": "First paragraph (composition and induction); second paragraph (preservation)."
+ },
+ "stmt_deps": [
+  "def-sbc-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "Reindex coordinates by Fin (d+1) = Fin d plus one coordinate, and compose with the affine-space sum-coordinate isomorphism. Its projection equation follows from the two existing projection equations.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+    "place": "Expanded induction proof, geometry, tensor compatibility or composition step."
+   }
+  },
+  {
+   "text": "The zero section is inverse to the zero-dimensional projection: their remaining composite is the identity by affine-space extensionality, as there are no coordinates.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+    "place": "Expanded induction proof, geometry, tensor compatibility or composition step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+  "place": "Separate part of the published affine-space induction argument, E1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor powers of a locally free rank one sheaf commute with inverse image and preserve bounded constructible derived objects",
+   "results": "8 hits, including SheafOfModules.freeFunctorCompPullbackIso and the sheaf inverse-image exactness instances.",
+   "date": "2026-10-24",
+   "verdict": "No direct match to the rational internal-module tensor calculus or restricted compact-support adjunction. Reuse the underlying categorical APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorRight, CategoryTheory.Adjunction",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "No packaged affine-space induction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorRight|Tate|constructible; AffineSpace.sumIso; leftDerivedUpperStarComp",
+   "results": "Mathlib affine-space sum/reindex isomorphisms; source derived pullback composition; Sheaf.SixFunctors.FieldTensor.tensorClosureRational and the internal/sectionwise tensor comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the affine-space coordinate and derived categorical APIs; no full induction theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpaceRationalInduction",
+  "date": "2026-10-24",
+  "group": "E1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-affine-space-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineSpaceRationalGeometry",
+  "file": "lean/Sheaf/Paper/AffineSpaceRationalGeometry.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalAffineSuccIso_over",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalAffineSuccIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalAffineZero_isIso"
+  ],
+  "statement": "theorem rationalAffineSuccIso_over (V : Scheme.{u}) (d : ℕ) : (rationalAffineSuccIso V d).hom ≫ (𝔸(PUnit.{u + 1}; 𝔸(ULift.{u} (Fin d); V)) ↘ 𝔸(ULift.{u} (Fin d); V)) ≫ (𝔸(ULift.{u} (Fin d); V) ↘ V) = (𝔸(ULift.{u} (Fin (d + 1)); V) ↘ V)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6802c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261024T214858-L-725923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6802c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261024T214858-L-725923",
+  "kind": "interface",
+  "note": "independent cc review: rationalAffineTensorCalculus (sorry) vs node lem-sfb-rational-affine-tensor-calculus and the RationalP1 line, constructibility and twist definitions; item induction vs det-cor-affine-space-rational-induction; importer RestrictionLocal compiled with the delivered modules (all compiled, exit 0)"
+ }
+}

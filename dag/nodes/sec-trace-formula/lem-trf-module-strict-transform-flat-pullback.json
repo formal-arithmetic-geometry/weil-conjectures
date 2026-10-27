@@ -20,83 +20,50 @@
  ],
  "proof": [
   {
-   "text": "Put $B=S^b$, $E=b^{-1}V(\\mathcal I)\\subseteq B$, $X_B=X\\times_SB$ with projections $p_X,q_X$, and $Y_B=Y\\times_TT^b$ with projections $p_Y:Y_B\\to Y$, $q_Y:Y_B\\to T^b$; let $E_T=b_T^{-1}V(\\mathcal I\\mathcal O_T)\\subseteq T^b$. Since $e$ is flat, the specified comparison $\\operatorname{bc}_e:T^b\\to T\\times_SB$ [def-nagata-blowup-flat-base-change-map] is an isomorphism over $T$ by [thm-nagata-blowup-flat-base-change]; let $\\beta:T^b\\to B$ be its composite with the second projection, so $b\\beta=e\\,b_T$. Then $j^b=(j\\circ p_Y,\\beta\\circ q_Y):Y_B\\to X_B$ is well defined because $f\\,j\\,p_Y=e\\,g\\,p_Y=e\\,b_T\\,q_Y=b\\,\\beta\\,q_Y$, and $p_Xj^b=jp_Y$. By the universal property and associativity of fibre products [def-pc-fibre-product], $Y_B\\cong Y\\times_T(T\\times_SB)\\cong Y\\times_SB\\cong Y\\times_X X_B$, and under these identifications $j^b$ is the projection $Y\\times_XX_B\\to X_B$, i.e. the base change of $j$ along $p_X:X_B\\to X$, with $p_Y$ the other projection. Exceptional loci: by [def-nagata-extended-ideal] the stalk of $\\mathcal I\\mathcal O_T$ at $t$ is $\\mathcal I_{e(t)}\\mathcal O_{T,t}$, which is proper exactly when $\\mathcal I_{e(t)}\\subseteq\\mathfrak m_{e(t)}$ (the map of local rings is local), so $V(\\mathcal I\\mathcal O_T)=e^{-1}V(\\mathcal I)$ as sets. Hence $D:=q_X^{-1}(E)$ is the set of points of $X_B$ lying over $V(\\mathcal I)$, $D_Y:=q_Y^{-1}(E_T)$ the set of points of $Y_B$ lying over $V(\\mathcal I)$ (via $e\\,g\\,p_Y=f\\,j\\,p_Y$), and therefore $D_Y=(j^b)^{-1}(D)$ and $Y_B\\setminus D_Y=(j^b)^{-1}(X_B\\setminus D)$.",
+   "text": "Apply [lem-trf-blowup-square-pullback-quotient-data] to the given square and $\\mathcal F$. Its $B,B_T,P,Q$ are the specified $S^b,T^b,X\\times_SS^b,Y\\times_TT^b$. Its $u$ has projections $jr$ and $\\beta s$, exactly those defining $j^b$; the uniqueness in [def-pc-fibre-product] therefore gives $u=j^b$. It supplies flatness of $u$, locally principal $D$, $D_Q=u^{-1}D$, quasi-coherent $H,K,H_Q,K_Q$, quotient maps $\\pi:H\\twoheadrightarrow\\mathcal F^b$ and $\\pi_Q:H_Q\\twoheadrightarrow(j^*\\mathcal F)^{T^b}$, and the canonical $\\gamma:u^*H\\cong H_Q$ from $pu=jr$.",
    "uses": [
-    "def-nagata-blowup-flat-base-change-map",
-    "thm-nagata-blowup-flat-base-change",
-    "def-pc-fibre-product",
-    "def-nagata-extended-ideal"
+    "lem-trf-blowup-square-pullback-quotient-data",
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0805, lemma-flat-base-change-blowing-up; Tag 080D, definition-strict-transform"
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; Tag 080D, definition-strict-transform (1); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor. Extracted geometric and quotient-presentation argument of the returned parent proof steps 1, 2 and 3(a)-(b)."
    }
   },
   {
-   "text": "Put $H=p_X^*\\mathcal F$ and let $K\\subseteq H$ be the subsheaf of local sections whose restriction to $X_B\\setminus D$ is zero; by [def-trf-module-strict-transform], $\\mathcal F^b=H/K$ with its quotient map $\\pi$. By [lem-trf-strict-transform-sheaf-kernel], $H$ and $K$ are quasi-coherent and $K=\\ker\\pi$. Likewise put $H_Y=p_Y^*(j^*\\mathcal F)$ and let $K_Y\\subseteq H_Y$ be the subsheaf of sections vanishing on $Y_B\\setminus D_Y$, so $(j^*\\mathcal F)^{T^b}=H_Y/K_Y$ with quotient map $\\pi_Y$, by the same definition applied to $Y\\to T$, the ideal $\\mathcal I\\mathcal O_T$ and $T^b$. From $p_Xj^b=jp_Y$ (Step 1) and the composition isomorphisms $(h\\circ g)^*\\cong g^*h^*$ of [def-pc-module-pullback] we get the canonical isomorphism $\\gamma:(j^b)^*H=(j^b)^*p_X^*\\mathcal F\\cong(p_Xj^b)^*\\mathcal F=(jp_Y)^*\\mathcal F\\cong p_Y^*j^*\\mathcal F=H_Y$ of $\\mathcal O_{Y_B}$-modules.",
+   "text": "Apply [lem-trf-supported-kernel-flat-pullback] to $u:Q\\to P$, $H$ and $D$ from Step 1; all its hypotheses are supplied there. It identifies $u^*(K\\hookrightarrow H)$ with the inclusion of the sections of $u^*H$ vanishing off $D_Q$. Since $\\gamma$ is an isomorphism of module sheaves, it commutes with restriction to every open, so carries that subsheaf exactly to $K_Q$. Thus $\\gamma\\circ u^*(K\\hookrightarrow H)$ is injective with image $K_Q$.",
    "uses": [
-    "def-trf-module-strict-transform",
-    "lem-trf-strict-transform-sheaf-kernel",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080D (1), definition-strict-transform, and Tag 080D (2), lemma-strict-transform"
-   }
-  },
-  {
-   "text": "Claim: $(j^b)^*(K\\hookrightarrow H)$ followed by $\\gamma$ is injective with image $K_Y$. (a) $j^b$ is flat: it is the base change of the flat $j$ along $p_X$ (Step 1), so [lem-weil-pbc-flat-morphism-base-change] applies; hence for affine opens $W\\subseteq Y_B$, $V\\subseteq X_B$ with $j^b(W)\\subseteq V$, $B'=\\mathcal O(W)$ is a flat $A'=\\mathcal O(V)$-module by [lem-weil-pbc-flat-morphism-affine-criterion]. (b) Charts. By [thm-nagata-blowup-principalizes-center] each point of $B$ has an affine neighbourhood $N$ on which $\\mathcal I\\mathcal O_B$ is generated by one section $c$, so $E\\cap N=V(c)$. For $y\\in Y_B$ choose such $N\\ni q_X(j^b(y))$, an affine open $V\\ni j^b(y)$ of $X_B$ inside $q_X^{-1}(N)$, and an affine open $W\\ni y$ of $Y_B$ inside $(j^b)^{-1}(V)$ [lem-weil-pbc-affine-opens-basis]. With $a\\in A'$ the image of $c$ we get $D\\cap V=V(a)$, $V\\setminus D=D(a)$, and by Step 1 $W\\setminus D_Y=D(a_W)$ with $a_W$ the image of $a$ in $B'$. Such $W$ (inside any given neighbourhood of $y$) form a basis of the topology of $Y_B$. (c) Torsion description. For a quasi-coherent module $G$ on an affine $U$ and $u\\in\\mathcal O(U)$, a section $m\\in G(U)$ vanishes on $D(u)$ iff $u^nm=0$ for some $n$: one direction is [lem-weil-pbc-affine-module-basic-open-localization](2), the other holds because $u$ is a unit on $D(u)$. Writing $\\Gamma_u(N)=\\ker(N\\to N_u)$ for the $u$-power torsion of a module $N$, this gives $K(V)=\\Gamma_a(M)$ with $M=H(V)$, and $K_Y(W)=\\Gamma_{a_W}(H_Y(W))$. (d) Sections of the pullbacks. As $H$ and $K$ are quasi-coherent (Step 2), [lem-weil-pbc-module-pullback-affine-sections-bijective] gives bijections $M\\otimes_{A'}B'\\cong((j^b)^*H)(W)$ and $K(V)\\otimes_{A'}B'\\cong((j^b)^*K)(W)$, both $s\\otimes t\\mapsto t\\,\\eta(s)|_W$; by naturality of the unit $\\eta$ they carry $\\iota\\otimes1$ to $(j^b)^*\\iota$ on $W$, $\\iota:K(V)\\hookrightarrow M$. Composing with $\\gamma$, identify $H_Y(W)$ with $M\\otimes_{A'}B'$; the action of $a_W$ is that of $a\\otimes1$. (e) Flatness. The sequence $0\\to\\Gamma_a(M)\\to M\\to M_a$ is exact, so by (a) and [lem-weil-pbc-flat-tensor-exact] so is $0\\to\\Gamma_a(M)\\otimes_{A'}B'\\to M\\otimes_{A'}B'\\to M_a\\otimes_{A'}B'$. Since $M_a\\otimes_{A'}B'\\cong A'_a\\otimes_{A'}M\\otimes_{A'}B'\\cong(M\\otimes_{A'}B')_{a\\otimes1}$ compatibly with the maps from $M\\otimes_{A'}B'$ (elementary), the kernel of the last map is $\\Gamma_{a_W}(M\\otimes_{A'}B')=K_Y(W)$ by (c). Thus on every such $W$ the map $((j^b)^*K)(W)\\to H_Y(W)$ is injective with image $K_Y(W)$. (f) Since these $W$ form a basis, the kernel of the sheaf map $\\gamma\\circ(j^b)^*\\iota$ has zero sections on a basis, hence is zero, and its image subsheaf and $K_Y$ are two subsheaves of $H_Y$ with the same sections on a basis, hence equal (sheaf axiom). This proves the claim.",
-   "uses": [
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "thm-nagata-blowup-principalizes-center",
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-affine-module-basic-open-localization",
-    "lem-weil-pbc-module-pullback-affine-sections-bijective",
-    "lem-weil-pbc-flat-tensor-exact",
-    "def-pc-module-pullback"
+    "lem-trf-supported-kernel-flat-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset (2) (supported sections are I^n-torsion on affines); flat tensor argument as in divisors.tex Tag 080F, lemma-strict-transform-flat, proof (a-power-torsion on the chart A[I/a])"
+    "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset (2)-(3); compare divisors.tex Tag 080F, lemma-strict-transform-flat, affine power-torsion calculation. The flat-pullback comparison is the agent argument of the returned parent proof step 3(c)-(f)."
    }
   },
   {
-   "text": "Pullback $(j^b)^*$ is a left adjoint [def-pc-module-pullback], so it preserves cokernels: applying it to the cokernel sequence $K\\to H\\xrightarrow{\\pi}\\mathcal F^b\\to0$ of Step 2 gives that $(j^b)^*\\pi$ is a cokernel of $(j^b)^*\\iota$. By Step 3, $\\gamma$ carries the image of $(j^b)^*\\iota$ onto $K_Y=\\ker\\pi_Y$; hence by the universal property of cokernels there is a unique morphism $\\theta:(j^b)^*(\\mathcal F^b)\\to H_Y/K_Y=(j^*\\mathcal F)^{T^b}$ with $\\theta\\circ(j^b)^*\\pi=\\pi_Y\\circ\\gamma$, and it is an isomorphism because both sides are cokernels of the same subobject transported by the isomorphism $\\gamma$. The identity $\\theta\\circ(j^b)^*\\pi=\\pi_Y\\circ\\gamma$ is exactly the compatibility with the quotient maps from the ordinary pullbacks $(j^b)^*p_X^*\\mathcal F\\cong p_Y^*j^*\\mathcal F$, and since $(j^b)^*\\pi$ is an epimorphism it determines $\\theta$ uniquely, which makes $\\theta$ canonical.",
+   "text": "By [def-pc-module-pullback], $u^*$ is left adjoint to $u_*$. Consequently $u^*\\pi$ is the cokernel of $u^*(K\\hookrightarrow H)$: a map out of $u^*H$ annihilates this inclusion exactly when its adjoint out of $H$ annihilates $K$, hence factors uniquely through $\\pi$; adjointing back gives the required unique factorization. By Step 2 the map $\\pi_Q\\gamma$ is another cokernel of the same arrow, since $\\pi_Q$ is the quotient by $K_Q$. Their universal properties give a unique isomorphism $\\theta:u^*\\mathcal F^b\\xrightarrow{\\sim}(j^*\\mathcal F)^{T^b}$ with $\\theta\\circ u^*\\pi=\\pi_Q\\circ\\gamma$: the factor maps in the two directions are inverse because their composites agree with the identity after the respective quotient epimorphisms. This equation is precisely compatibility with the ordinary-pullback quotient maps. The epimorphism $u^*\\pi$ also gives uniqueness, so the isomorphism is canonical.",
    "uses": [
-    "def-trf-module-strict-transform",
     "def-pc-module-pullback"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080D (2), lemma-strict-transform; quotient compatibility is the canonical cokernel argument"
+    "place": "Tag 080D, definition-strict-transform (1); elementary cokernel universal-property assembly."
    }
   }
  ],
  "proof_deps": [
-  "def-nagata-blowup-flat-base-change-map",
-  "thm-nagata-blowup-flat-base-change",
+  "lem-trf-blowup-square-pullback-quotient-data",
   "def-pc-fibre-product",
-  "def-nagata-extended-ideal",
-  "def-trf-module-strict-transform",
-  "lem-trf-strict-transform-sheaf-kernel",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-flat-morphism-affine-criterion",
-  "thm-nagata-blowup-principalizes-center",
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-affine-module-basic-open-localization",
-  "lem-weil-pbc-module-pullback-affine-sections-bijective",
-  "lem-weil-pbc-flat-tensor-exact"
+  "lem-trf-supported-kernel-flat-pullback",
+  "def-pc-module-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 080D, definition-strict-transform and lemma-strict-transform; Tag 0805, flat base change of blow-ups; Tag 0814, flat pullback compatibility"
+  "place": "Tags 0805/080D; assembly of extracted geometry and supported-kernel statements, retaining the returned proof route through Properties Tag 07ZP."
  },
  "mathlib_searches": [
   {
@@ -166,29 +133,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-module-strict-transform-flat-pullback",
   "worker": "stage1",
-  "summary": "Expanded the flat pullback compatibility into four steps: identify the flat blowup base change, express both strict transforms as supported-section quotients, use flatness and tensor exactness to pull the quotient kernel across, and induce the canonical quotient isomorphism. No statement change was made. Added two Mathlib leaves for tensor exactness and base-change stability of flat morphisms. Maintainer reader (Q74 review, 2026-10-18): the two new leaves duplicated existing Mathlib leaves and were replaced by lem-weil-pbc-flat-morphism-base-change and lem-weil-pbc-flat-tensor-exact; step 3 was rewritten as an explicit affine-chart a-power-torsion argument (the original applied exactness to the quotient sequence and asserted, without proof, that pullback commutes with restriction to the exceptional complement); steps 1, 2 and 4 were made precise (j^b as base change along X_B -> X, exceptional loci, the composition isomorphism from p_X j^b = j p_Y, right exactness of pullback).",
-  "blueprint": "Realizes the flat source/base pullback comparison in the ancestor lem-trf-local-term-locality proof, specifically the Stacks 080D/0805/0814 compatibility used before composing flattening blowups.",
-  "tool_uses": [
-   {
-    "node": "thm-nagata-blowup-flat-base-change",
-    "why": "Generic flat base change of blowups identifies T^b with T x_S S^b; the item's statement already names it and the trace-formula unit has no such result."
-   },
-   {
-    "node": "thm-nagata-blowup-principalizes-center",
-    "why": "Generic local principality of the exceptional ideal, used only to get charts on which the exceptional complement is a basic open D(a)."
-   },
-   {
-    "node": "lem-weil-pbc-affine-module-basic-open-localization",
-    "why": "Generic affine quasi-coherent fact: a section vanishing on D(a) is killed by a power of a; identifies supported sections with a-power torsion on charts."
-   },
-   {
-    "node": "lem-weil-pbc-module-pullback-affine-sections-bijective",
-    "why": "Generic affine formula for sections of a quasi-coherent pullback as M tensor B; no trace-formula node states it."
-   }
-  ]
+  "summary": "Q77 repair of the 6111-character proof: extracted two independently provable, statement-only unsplit nodes of comparable argument size. The first receives old steps 1, 2 and 3(a)-(b); the second receives old step 3(c)-(f). The item retains its exact statement and assembles the two using the explicit cokernel universal property (old step 4). Full original proof and detailed argument allocation retained in report.md. No Lean files changed. Repaired the subsequent landing refusal by reconciling the retained delivery with the current live DAG: statement and statement dependencies remain verbatim live, the released stage-1 repair still requires this assembly, both extracted nodes are absent from live, and the direct adjunction citation was reread. Delivery is rebuilt on current origin/sheaf-dag; the report records the return and reconciliation. Current-base retry: made the identification of the geometric child map u with the specified j^b explicit by their two projections and the universal property of def-pc-fibre-product, reread that live statement and added its verbatim citation. This removes an implicit map identification while retaining both extracted statements and every original argument. Current DAG repair 2026-10-23: the initial required dry run identified eight newer same-tag nodes; each statement was reread and the report now distinguishes all eight pairs explicitly. Current direct citations and statement dependencies were rechecked, the retained source and search records remain valid, and no statement or route change is required.",
+  "blueprint": "Realizes the flat source/base pullback comparison in the ancestor lem-trf-local-term-locality proof, specifically the Stacks 080D/0805/0814 compatibility used before composing flattening blowups. Re-split retains that route and makes its two arguments available as parallel items.",
+  "tool_uses": []
  },
  "tool_uses": [
   "thm-nagata-blowup-flat-base-change",
@@ -197,12 +147,12 @@
   "lem-weil-pbc-module-pullback-affine-sections-bijective"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q74-545dc215f",
-  "group": "Q74",
+  "reviewer": "NT-cc-Q77-c911d4a1c",
+  "group": "Q77",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-545dc215f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statements of every cited node, unit sk-i-curve-zero and the chapter, and the sources at the cited places: Stacks 080D/080E/080F (with the 080F proof), 0805 (with proof), 0814 proof paragraph 1, 07ZP, and the two Mathlib declarations. The statement is true and unchanged. I tested it on I=O_S, I=0, j=id and Z/p-torsion over Spec Z_(p). A non-flat j=Spec F_p->Spec Z gives F_p against 0, so flatness of j is needed. No DAG node duplicates the item. Repairs, three faults: (C5) both new Mathlib leaves duplicate existing ones: lem-trf-flat-morphism-base-change = lem-weil-pbc-flat-morphism-base-change (same declaration, line 81), and lem-trf-flat-pullback-exact is contained in lem-weil-pbc-flat-tensor-exact. Both are dropped and their citations repointed. (E5/C1) Step 3 applied flat exactness to 0->K->H->F^b->0, which only shows (j^b)^*K injects into H_Y. It then asserted without proof that pullback commutes with restriction to the exceptional complement (flat base change of the open-immersion pushforward). I rewrote it as the 080F/07ZP affine-chart a-power-torsion argument using existing nodes: lem-weil-pbc-flat-morphism-affine-criterion, thm-nagata-blowup-principalizes-center, lem-weil-pbc-affine-module-basic-open-localization(2), lem-weil-pbc-module-pullback-affine-sections-bijective, lem-weil-pbc-flat-tensor-exact and lem-weil-pbc-affine-opens-basis. I also made precise: j^b is the base change of j along X_B->X; D_Y=(j^b)^{-1}D via V(IO_T)=e^{-1}V(I); H_Y=p_Y^*j^*F with the composition isomorphism from p_X j^b = j p_Y; Step 4 uses right exactness of the left adjoint pullback (the unneeded cokernel-image lemma is removed). (C8) Off-unit tool uses were undeclared. I declared and accept thm-nagata-blowup-flat-base-change, thm-nagata-blowup-principalizes-center, lem-weil-pbc-affine-module-basic-open-localization and lem-weil-pbc-module-pullback-affine-sections-bijective, all generic tools. No cycle (checked), no SGA. The corrected item is in fixes/dag/nodes/sec-trace-formula/; details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-c911d4a1c (reviewer sub-agent of L); spot-checked: Fourth delivery of this re-split. It is identical to the 924babce head: both new nodes are byte-identical by field, and the item differs only in split_report. The earlier landings were refused only for side-completion promotion state, not for mathematics. I read the following: the item; both new nodes; def-trf-module-strict-transform, def-nagata-blowup-flat-base-change-map, thm-nagata-blowup-flat-base-change, def-nagata-extended-ideal (the current kernel definition), def-pc-module-pullback (adjunction and composition isomorphisms) and def-pc-fibre-product (uniqueness of the induced map); the live 4-step proof, which is archived verbatim in the report (checked by script); and the released re-split note. Sources read: Stacks 07ZP (1)-(3), 0805, 02OS(2), 080D(1) and 080F with its proof. Step 1: u and j^b have the same projections jr and βs, so u = j^b by fibre-product uniqueness. Step 2: the supported-kernel child applies (u flat, D locally principal, H quasi-coherent), and γ commutes with restriction, so it carries L onto K_Q. Step 3: the full cokernel/adjunction argument and uniqueness, which is old step 4. Child A is true: bβ = e b_T, so u exists; Q ≅ Y×_X P; u is flat by base change; V(IO_T) = e^{-1}V(I) gives D_Q = u^{-1}D; D is locally principal from the Cartier exceptional divisor; K and K_Q are quasi-coherent by 07ZP because the complement is retrocompact. Child B is true: K(V) = Γ_a(M), flat exactness, (M⊗C)_{a_C} = M_a⊗C, and equality on a basis. Small cases: Z/p⊕Z over Z[1/p] and over Z_p, k[x,y]/(xy) with a=x and C=A_y, a=1, a nilpotent. The example C=F_p, M=Z shows flatness is needed. Re-split rule: old steps 1, 2 and 3(a)-(b) became child A, old step 3(c)-(f) became child B, and old step 4 is the assembly. The children are of comparable size, nothing restates the item, there is no cycle, the assembly is 1907 characters, and no SGA is used. Duplicate scan (rg -L over 07ZP, 080F, 0805, power-torsion, flat): no duplicate. lem-per-local-cohomology-flat-base-change is a Noetherian ring-level partial overlap (advisory). The torsion flat-base-change nodes need R/I ≅ S/IS. FIX (B2/B3), re-applied: in lem-trf-supported-kernel-flat-pullback, the undefined 'canonical affine pullback identifications' is replaced by the explicit maps s⊗c ↦ c·η(s)|_W, with η the unit of u*⊣u_*. They are stated bijective, with Γ_a(M) = K(V), and the image goes onto L(W). This is the prior fixes/ file copied verbatim, after checking that it differs from this head's node only in statement. The node is not weakened. Advisory: the item's tool_uses are now cited only by the children's future proofs. Maintainer note: this FIX has been lost three times at promotion-state landing refusals and must be applied with this delivery.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ModuleStrictTransformFlatPullback",
@@ -227,5 +177,30 @@
   "result": "pass",
   "note": "Read the item, all 9 stmt_deps and their Lean (moduleStrictTransform*, tensorPullback/SectionComp, IdealSheafData.comap = I·O_T, blowupFlatBaseChange/Iso and _hom_snd in WeilConjectures/Blowup/FlatBaseChange, cited via closed slopmaster2 lean_audit as brief-stage2 allows). Every clause matches: one universe u; h : j≫f=g≫e; [Flat e][Flat j] only; [I.toModules.IsFiniteType]; [F.IsQuasicoherent]; jᵇ = pullback.lift(fst≫j, snd≫bc.hom≫fst), no free map; source iso from the normalized tensorPullbackSectionComp plus lift_fst; target cokernel = moduleStrictTransform g (I.comap e) (j^*F) by rfl (probed); ∃! iso with the quotient equation. Edge cases I=O_S, I=0, empty schemes, F=0 and identity maps are fine; flatness of j is needed. nt_compile --json: clean, 3.6 s, no warnings; probe clean. lean.statement verbatim; only the item's lean key changed; dependency nodes identical to live; one sorry (the theorem); docstrings complete; no duplicate in the side trees. Advisories: moduleStrictTransformπ is owned by theorem node lem-trf-strict-transform-sheaf-kernel, not in stmt_deps (plain cokernel.π abbreviation; stage 2 cannot add it); four plain proof-route imports are removable without breaking the compile; the two Nagata nodes have no lean record."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T091201-L-3318718",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Modules.existsUnique_moduleStrictTransform_flatPullback"
+  ],
+  "sorry_after": []
+ }
 }

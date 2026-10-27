@@ -1,0 +1,155 @@
+{
+ "id": "lem-trf-unit-leading-ring-polynomial-division",
+ "kind": "statement",
+ "title": "Multivariate polynomial division over a ring with unit leading coefficients",
+ "statement": "Let $R$ be a commutative ring, let $s,t\\ge0$, and put $P=R[X_1,\\ldots,X_s]$ [def-weil-pbc-mv-polynomial-ring]. Let $\\prec$ be a total well-order on $\\mathbf N^s$ with $0$ least, preserved by addition. For a nonzero polynomial $h$, let $\\operatorname{LM}(h)$ be the largest exponent in its finite support and $\\operatorname{LC}(h)$ its coefficient there. Suppose $h_1,\\ldots,h_t\\in P$ are nonzero and each $\\operatorname{LC}(h_i)$ is a unit of $R$ (has a multiplicative inverse in $R$). For every $p\\in P$ there are $a_1,\\ldots,a_t,z\\in P$ such that\n$$p=\\sum_{i=1}^t a_i h_i+z,$$\nand every exponent $\\nu$ with nonzero coefficient in $z$ satisfies $\\operatorname{LM}(h_i)\\nleq\\nu$ componentwise for every $i$. No field, domain or Gröbner-basis hypothesis is assumed. The empty list and $s=0$ are included.",
+ "source": {
+  "document": "lean/.lake/packages/mathlib/Mathlib/RingTheory/MvPolynomial/Groebner.lean",
+  "place": "MonomialOrder.div, lines 128–135; ambient commutative-ring hypotheses at line 56, read 2026-10-24."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a commutative ring multivariate polynomial division by a finite family with invertible leading coefficients for a monomial order gives a remainder with no monomial divisible by any leading monomial",
+   "results": {
+    "t": "2026-10-24T14:21:01Z",
+    "tool": "leanfinder",
+    "query": "Over a commutative ring multivariate polynomial division by a finite family with invertible leading coefficients for a monomial order gives a remainder with no monomial divisible by any leading monomial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MonomialOrder.div",
+     "MonomialOrder.div_set",
+     "MonomialOrder.div_single",
+     "MonomialOrder.reduce",
+     "MonomialOrder.sPolynomial_decomposition",
+     "MvPolynomial.modMonomial",
+     "MonomialOrder.degree_reduce_lt",
+     "MvPolynomial.divMonomial_add_modMonomial"
+    ],
+    "digest": "5e14497c58f525d6"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: MonomialOrder.div, Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–135, read; instantiate the variable type by Fin s and index type by Fin t, and discard the additional degree bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Division algorithm for multivariate polynomials over a ring with unit leading coefficients",
+   "results": {
+    "t": "2026-10-24T14:20:59Z",
+    "tool": "leansearch",
+    "query": "Division algorithm for multivariate polynomials over a ring with unit leading coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MonomialOrder.div_set",
+     "MonomialOrder.div",
+     "MonomialOrder.div_single",
+     "Polynomial.divModByMonicAux",
+     "Polynomial.divByMonic",
+     "MvPolynomial.modMonomial_add_divMonomial_single",
+     "Polynomial.modByMonic_add_div",
+     "Polynomial.IsMonicOfDegree.of_dvd_sub"
+    ],
+    "digest": "4ce2c2c81d664c45"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: MonomialOrder.div gives exactly the displayed decomposition and support restriction over an arbitrary commutative ring; the extra degree bound is unused."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonomialOrder.div",
+   "results": {
+    "t": "2026-10-24T14:20:59Z",
+    "tool": "loogle",
+    "query": "MonomialOrder.div",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "MonomialOrder.div"
+    ],
+    "digest": "b440bc15a50b3bcf"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: MonomialOrder.div at Groebner.lean:128–135, with CommRing R, no field or nonzero-ring assumption."
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem div|^theorem div_set|^theorem div_single",
+   "results": {
+    "t": "2026-10-24T14:20:58Z",
+    "tool": "grep",
+    "query": "^theorem div|^theorem div_set|^theorem div_single",
+    "sub": "RingTheory/MvPolynomial/Groebner.lean",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "128",
+     "232",
+     "243"
+    ],
+    "digest": "e4511fac02c09464"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: read Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–135 (the search output prints line 128 in its file slot because a single file was searched); this is the required declaration."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MonomialOrder.div",
+  "file": "Mathlib/RingTheory/MvPolynomial/Groebner.lean",
+  "line": 128,
+  "how": "specializes in one line: MonomialOrder.div, lines 128–135, with R the stated commutative ring, sigma=Fin s, iota=Fin t, b=h and hb the stated unit leading coefficients; identify finite-coordinate Finsupp exponents with N^s and discard its additional degree bound. For finite Fin t the finitely supported quotient family is just the displayed t-tuple. No positivity of s or t is assumed in the declaration."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-convergent-division",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Every Tate ideal admits best approximation for the Gauss norm. Auxiliary for best approximation: Bounded convergent division by finitely many Tate series. Polynomial part of the auxiliary division argument: divide monomials over the valuation ring using invertible leading coefficients.",
+   "via": [
+    "lem-trf-tate-convergent-division",
+    "lem-trf-tate-ideal-best-approximation",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

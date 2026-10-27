@@ -1,0 +1,119 @@
+{
+ "id": "def-sfb-scheme-groupoid-quotient-presentation",
+ "kind": "definition",
+ "title": "Presentation of the fppf quotient stack of a scheme groupoid",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $U,R$ be schemes over $S$ with $S$-maps $s,t:R\\to U$ and scheme maps $e:U\\to R$, $i:R\\to R$, $c:R\\times_{s,U,t}R\\to R$ satisfying [def-a1-scheme-groupoid-laws]. Let $F$ be a category over $\\mathit{Sch}/S$ and $a:h_U\\to F$ a functor over this base, using [def-sfb-stable-pointed-moduli-groupoids]. An fppf quotient presentation consists of the following data and properties. The category $F$ is an fppf stack in the sense of [def-sfb-fppf-stackification]: fibred in groupoids, with effective descent on every covering sieve for the big fppf topology [def-pc-fppf-site]. There is a vertical natural isomorphism $\\eta:a\\circ h_s\\Rightarrow a\\circ h_t$. For every test scheme $T/S$, $x,y\\in U(T)$, the arrow map induced by $\\eta$ is a bijection from $\\{r\\in R(T):s(r)=x,\\ t(r)=y\\}$ to the vertical arrows $a(x)\\to a(y)$ of $F$. For every object $z$ of $F$ above $T$, there is an fppf covering sieve $V$ of $T$ such that, for each $f:T'\\to T$ in $V$, there is $x\\in U(T')$ and an arrow $a(x)\\to z$ above $f$. Finally, if $r:x\\to y$ and $q:y\\to z$ are composable scheme-groupoid arrows, their images satisfy $\\eta(r)\\,;\\,\\eta(q)=\\eta(c(q,r))$, with endpoint equalities transported. The isomorphism $\\eta$ is part of the data; all naturality, original arrows and composition are retained. This is a presentation of $[U/R]$, the fppf stackification, up to equivalence over $\\mathit{Sch}/S$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-scheme-groupoid-laws",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-fppf-site",
+  "def-sfb-fppf-stackification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex; literature/stacks-project/stacks.tex",
+  "place": "Tags 044Q (definition-quotient-stack), 044R (lemma-quotient-stack-arrows), 044T (lemma-quotient-stack-cocycle), 02ZP (lemma-stackify-groupoids) and 0436 (lemma-stackify-groupoids-universal-property)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "fppf stack quotient scheme groupoid presentation preserving arrows and composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → F.IsPrestackFor R\", \"doc\": \"If a pseudofunctor $\\\\mathcal{F}$ satisfies the stack condition for a presieve $R$ on an object $S$ in a category $\\\\mathcal{C}$, then $\\\\mathcal{F}$ also satisfies the prestack condition for $R$.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsPrestack J] {S : C}, ∀ R ∈ J S, F.IsPrestackFor R.arrows\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, if a pseudofunctor $F$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C} (R : CategoryTheory.Presieve S),\\n  CategoryTheory.Sieve.generate R ∈ J S → F.IsSta\", \"doc\": \"A pseudofunctor $ \\\\mathcal{F} $ from the locally discrete opposite category of $ \\\\mathcal{C} $ to the category of small categories $ \\\\mathsf{Cat} $ satisfies the stack conditions with respect to a giv\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      {S : C} → CategoryTheory.Presieve S → Prop\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}$ from the locally discrete bicategory of $\\\\mathcal{C}^{\\\\text{op}}$ to $\\\\mathsf{Cat}$, an object $S$ in $\\\\mathcal{C}$, and a presieve $R$ on $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match: generic stack descent or ordinary groupoids do not give a scheme-groupoid quotient presentation with the original arrows and composition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "fppf stack quotient scheme groupoid presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Quotient.groupoid\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \": Groupoid (Quotient r)\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a binary relation $R$ on each hom-set $\\\\text{Hom}(X, Y)$, the quotient category $\\\\mathcal{C}/R$ forms a groupoid. This means every morphism $f: X \\\\to Y$ in $\\\\mathcal\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Presieve S), F.IsStackFor R ↔ (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, the pseudofunct\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \": F.IsStackFor (Presieve.ofArrows _ f) ↔ (F.toDescentData f).IsEquivalence\", \"doc\": \"A pseudofunctor $ F $ satisfies the stack condition for the presieve generated by a family of morphisms $ f_i: X_i \\to S $ if and only if the induced functor from $ F(\\text{op}(S)) $ to the category of \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, (F.toDescentData fun f => f.obj.hom).IsEquivalence → F.IsStackFor R\", \"doc\": \"If the descent data functor associated to $ F $ is an equivalence of categories, then $ F $ satisfies the stack condition for the presieve $ R $ on $ S $.\"}\n  {\"name\": \"CategoryTheory.Grpd\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Grpd.Basic\", \"type\": \"Type (max (u + 1) u (v + 1))\", \"doc\": \"The category whose objects are groupoids and morphisms are functors between them, constructed using the bundled structure for categories of mathematical objects.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [toIsPrestack : F.IsPrestack J],\\n  (∀ {S : C}, ∀ R ∈ J S, (F.toDescentData fun f => f.obj.hom).EssSurj) \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^\\\\text{op}) \\\\to \\\\mathsf{Cat}$ that is a prestack with respect to $J$. If for ever\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match: generic stack descent or ordinary groupoids do not give a scheme-groupoid quotient presentation with the original arrows and composition"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Pp]resentation|[Ff]ppf.*[Qq]uotient|IsGroupoid",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid.lean\", \"line\": \"119\", \"text\": \"class IsGroupoid (C : Type u) [Category.{v} C] : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid.lean\", \"line\": \"122\", \"text\": \"attribute [instance] IsGroupoid.all_isIso\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid.lean\", \"line\": \"124\", \"text\": \"noncomputable instance {C : Type u} [Groupoid.{v} C] : IsGroupoid C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid.lean\", \"line\": \"128\", \"text\": \"/-- Promote (noncomputably) an `IsGroupoid` to a `Groupoid` structure. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid.lean\", \"line\": \"130\", \"text\": \"noncomputable def Groupoid.ofIsGroupoid [IsGroupoid C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"491\", \"text\": \"lemma isGroupoid [L.IsLocalization ⊤] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"492\", \"text\": \"    IsGroupoid D := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"493\", \"text\": \"  rw [isGroupoid_iff_isomorphisms_eq_top]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"498\", \"text\": \"instance : IsGroupoid (⊤ : MorphismProperty C).Localization :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"499\", \"text\": \"  isGroupoid <| MorphismProperty.Q ⊤\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Discrete.lean\", \"line\": \"23\", \"text\": \"instance [Category* C] [IsDiscrete C] : IsGroupoid C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"291\", \"text\": \"lemma isGroupoid_of_isDetecting_bot (h : IsDetecting (⊥ : ObjectProperty C)) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"292\", \"text\": \"    IsGroupoid C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"295\", \"text\": \"lemma isDetecting_bot_of_isGroupoid [IsGroupoid C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"299\", \"text\": \"lemma isGroupoid_of_isCodetecting_bot (h : IsCodetecting (⊥ : ObjectProperty C)) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"300\", \"text\": \"    IsGroupoid C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/LocallyGroupoid.lean\", \"line\": \"16\", \"text\": \"`CategoryTheory.IsGroupoid` typeclass).\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/LocallyGroupoid.lean\", \"line\": \"40\", \"text\": \"abbrev IsLocallyGroupoid (B : Type u₁) [Bicategory.{w₁, v₁} B] := ∀ (b c : B), IsGroupoid (b ⟶ c)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"line\": \"107\", \"text\": \"instance {I : Type*} [Category* I] [IsGroupoid I] (F : C ⥤ D) [PreservesLimitsOfShape I F] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"line\": \"109\", \"text\": \"  letI : Groupoid I := Groupoid.ofIsGroupoid\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match: generic stack descent or ordinary groupoids do not give a scheme-groupoid quotient presentation with the original arrows and composition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-affine-groupoid-moduli",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The inherited ancestor query returns None. Explicit current-blueprint anchor: det-thm-sf-ctf-stability-direct-images, proof (3), alteration/moduli prerequisite. Presentation of the finite-flat affine groupoid quotient in the invariant-spectrum moduli step.",
+   "via": [
+    "lem-sfb-finite-flat-affine-groupoid-moduli",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeGroupoidQuotientPresentation",
+  "declaration": "CategoryTheory.SchemeGroupoidQuotientPresentation",
+  "declarations": [
+   "CategoryTheory.schemeGroupoidPresentationArrow",
+   "CategoryTheory.SchemeGroupoidQuotientPresentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeGroupoidQuotientPresentation.lean",
+  "statement": "structure SchemeGroupoidQuotientPresentation {S : Scheme.{u}} {U R : Over S} (s t : R ⟶ U) (e : U.left ⟶ R.left) (i : R.left ⟶ R.left) (c : pullback s.left t.left ⟶ R.left) (F : BasedCategory.{v, w} (Over S)) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-88c54d8bb"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88c54d8bb",
+  "group": "Q50",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88c54d8bb",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Item statement checked clause by clause against node and Stacks 0DUM/0DUP/0DUR/03BK/03BL; no missing or extra hypotheses or conclusions. Checked: groupoid laws and c orientation (snd first, as in IsGroupoid.source_comp), finite locally free s,t, algebraicity as a conclusion, canonical f, qcqs with the adequate-moduli universes, uniform categorical over flat space bases and all space targets, universal homeomorphism with the smooth-atlas topology, geometric-point skeleton bijection, O_M≅f_*O_Z, flat equalizer, global functions as unique structural pullbacks. Edge cases (empty, R=U, BG, mu_p, variable rank, D=0) are allowed. Dependency nodes are unchanged; the item is still unstated live. New node def-sfb-scheme-groupoid-quotient-presentation is mathematically right; there is no general groupoid prestack, so a presentation is appropriate. H4/H12 finding: its fibred+descent fields copied the body of the landed IsFppfModuliStack (def-sfb-fppf-stackification, Q27, 2026-10-23). FIX: fixes/SchemeGroupoidQuotientPresentation.lean uses `stack : IsFppfModuliStack F` and imports SiteStackification; the header and lean.statement are unchanged and the field is definitionally equal. fixes/def-sfb-scheme-groupoid-quotient-presentation.json cites def-sfb-fppf-stackification in its statement and stmt_deps. Compiled the fix with the unchanged item module via nt_compile --json: exit 0, clean. Advisory: the public import Mathlib.AlgebraicGeometry.Group.Affine looks unneeded."
+ }
+}

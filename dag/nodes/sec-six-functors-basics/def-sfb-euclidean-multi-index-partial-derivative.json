@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-euclidean-multi-index-partial-derivative",
+ "kind": "definition",
+ "title": "Coordinate multi-index partial derivative on real Euclidean space",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Use the fields $\\mathbf R,\\mathbf C$ [def-weil-field]. For $m\\geq0$, $\\alpha:\\{0,\\ldots,m-1\\}\\to\\mathbf N$ and any function $f:\\mathbf R^m\\to\\mathbf C$, define $\\partial^\\alpha f$ by applying $\\partial_j g(x)=D_{\\mathbf R}g(x)(e_j)$ exactly $\\alpha_j$ times in each standard coordinate, composing these operators in increasing coordinate order, with coordinate $0$ outermost. Here $D_{\\mathbf R}$ is the real Frechet derivative, taken as zero at a point where the function is not differentiable, as in Mathlib fderiv. More explicitly, concatenate the lists containing $\\alpha_j$ copies of $j$ for $j=0,\\ldots,m-1$, and right-fold $g\\mapsto(x\\mapsto D_{\\mathbf R}g(x)(e_j))$ over this list, starting from $f$. In particular $\\partial^0f=f$, including $m=0$. On a smooth function these are the usual commuting mixed coordinate partial derivatives.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Supplemental Demailly, Differential and pseudodifferential operators on manifolds, section 1 (1.1), p.1: coordinate multi-index derivative convention; existing implementation extracted from the Plancherel weak-derivative module at maintainer request."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Multi-index coordinate partial derivative on Euclidean space by repeated real Frechet derivatives",
+   "results": "{\"t\": \"2026-10-24T11:31:29Z\", \"tool\": \"leansearch\", \"query\": \"Multi-index coordinate partial derivative on Euclidean space by repeated real Frechet derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iteratedFDeriv\", \"SchwartzMap.iteratedPDeriv_eq_iteratedFDeriv\", \"iteratedDeriv\", \"iteratedFDerivWithin_apply_eq_iteratedDerivWithin_mul_prod\", \"ContinuousMultilinearMap.iteratedFDeriv_eq\", \"iteratedFDerivWithin\", \"HasFDerivWithinAt.multilinear_comp\", \"ContDiff.iteratedFDeriv_right\"], \"digest\": \"d6988bf9c2da1afd\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib coordinate multi-index construction. Reuse the existing EuclideanSpace.multiIndexPartialDeriv by moving its unchanged definition to its own module, as required by the maintainer return; no duplicate is introduced."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated coordinate partial derivatives of a complex valued function on real Euclidean space",
+   "results": "{\"t\": \"2026-10-24T11:31:31Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated coordinate partial derivatives of a complex valued function on real Euclidean space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InnerProductSpace.laplacian_eq_iteratedFDeriv_complexPlane\", \"InnerProductSpace.laplacianWithin_eq_iteratedFDerivWithin_complexPlane\", \"NumberField.mixedEmbedding.FDerivPolarCoordRealSymm\", \"HarmonicAt.differentiableAt_complex_partial\", \"jacobiTheta₂_term_fderiv\", \"hasFDerivWithinAt_euclidean\", \"iteratedFDeriv_eq_equiv_comp\", \"HasDerivAt.complexToReal_fderiv'\"], \"digest\": \"016aeee450148ea5\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib coordinate multi-index construction. Reuse the existing EuclideanSpace.multiIndexPartialDeriv by moving its unchanged definition to its own module, as required by the maintainer return; no duplicate is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "multiIndexPartialDeriv|multiIndex.*[Dd]eriv|multi_index.*[Dd]eriv",
+   "results": "{\"t\": \"2026-10-24T11:31:31Z\", \"tool\": \"grep\", \"query\": \"multiIndexPartialDeriv|multiIndex.*[Dd]eriv|multi_index.*[Dd]eriv\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib coordinate multi-index construction. Reuse the existing EuclideanSpace.multiIndexPartialDeriv by moving its unchanged definition to its own module, as required by the maintainer return; no duplicate is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "rg multiIndexPartialDeriv|multiIndex.*Deriv lean/Sheaf lean/WeilConjectures; definition-node search in dag/nodes; blueprint_refs.py search multi-index derivative",
+   "results": "Existing implementation is EuclideanSpace.multiIndexPartialDeriv in Sheaf.Analysis.L2WeakDerivativeFourierIdentity, owned only as a helper of a theorem node. No standalone definition node. Blueprint reference search returned 0 nodes. Other nodes use multi-index notation, including compact-smooth-section-topology, but do not define this scalar coordinate derivative interface.",
+   "date": "2026-10-24",
+   "verdict": "Extract the existing implementation, not a second definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-compact-submersion-phase-estimate",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coordinate derivative notation in p_N(u), before the compact-submersion phase estimate.",
+   "via": [
+    "lem-sfb-compact-submersion-phase-estimate",
+    "lem-sfb-oscillatory-linear-frequency-substitution",
+    "lem-sfb-local-quantization-coordinate-change",
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Analysis.MultiIndexPartialDeriv",
+  "declaration": "EuclideanSpace.multiIndexPartialDeriv",
+  "file": "lean/Sheaf/Analysis/MultiIndexPartialDeriv.lean",
+  "statement": "def multiIndexPartialDeriv {m : ℕ} (α : Fin m → ℕ)\n    (f : EuclideanSpace ℝ (Fin m) → ℂ) : EuclideanSpace ℝ (Fin m) → ℂ",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Ownership extraction explicitly requested in the return of 07fdadb874c0. The declaration signature and body are unchanged; the former owning theorem module imports/re-exports this module."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "maintenance-Q78-owner-extraction",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Maintenance ownership extraction for Q78 return 07fdadb874c0; compared the definition signature and complete body byte-for-byte with the reviewed Fourier module. No new construction, theorem, or proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "maintenance-Q78-owner-extraction",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Maintenance ownership extraction for Q78 return 07fdadb874c0; compared the definition signature and complete body byte-for-byte with the reviewed Fourier module. No new construction, theorem, or proof."
+ }
+}

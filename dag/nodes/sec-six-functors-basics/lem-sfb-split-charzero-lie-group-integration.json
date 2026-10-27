@@ -1,0 +1,378 @@
+{
+ "id": "lem-sfb-split-charzero-lie-group-integration",
+ "kind": "statement",
+ "title": "Integration of split semisimple rational Lie modules with their weight lattice",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra, def-wf-semisimple-lie-algebra], and let $\\mathfrak h$ be a maximal abelian subalgebra whose adjoint action is diagonalizable over $\\mathbf Q$. Let $\\Phi$ be the nonzero adjoint weights, and let $h_\\alpha\\in[\\mathfrak g_\\alpha,\\mathfrak g_{-\\alpha}]$ be normalized by $\\alpha(h_\\alpha)=2$. Put $P=\\{\\mu\\in\\mathfrak h^\\vee:\\mu(h_\\alpha)\\in\\mathbf Z\\text{ for all }\\alpha\\in\\Phi\\}$. There exist an affine $\\mathbf Q$-group scheme $G$ [def-sc-group-scheme], a split maximal torus $T\\subseteq G$, and a Lie isomorphism $j:\\mathfrak g\\simeq\\operatorname{Lie}(G)$ carrying $\\mathfrak h$ onto $\\operatorname{Lie}(T)$, with the following properties. Here $\\operatorname{Lie}(H)$ is the tangent space at the identity of $H$, equivalently the kernel of $H(\\mathbf Q[\\varepsilon]/(\\varepsilon^2))\\to H(\\mathbf Q)$ with its tangent-vector operations and commutator Lie bracket; differentials are induced by maps on these infinitesimal points.\n\nThe group $G$ is smooth, connected, semisimple and simply connected: after algebraic closure it has no nontrivial smooth connected solvable normal subgroup, and every surjective homomorphism from a connected semisimple group to $G$ with finite central kernel is an isomorphism. Solvable means that iterated commutator subgroups eventually vanish. The torus $T$ is isomorphic over $\\mathbf Q$ to a finite product of $\\mathbf G_m$, and is maximal after algebraic closure. Its character and cocharacter lattices are $X=\\operatorname{Hom}(T,\\mathbf G_m)$ and $Y=\\operatorname{Hom}(\\mathbf G_m,T)$, with the perfect integer pairing defined by $\\chi\\circ\\eta:t\\mapsto t^{\\langle\\chi,\\eta\\rangle}$. Differentiation $\\chi\\mapsto d\\chi\\circ j|_{\\mathfrak h}$ identifies $X$ with $P$. The roots of $(G,T)$, the nonzero $T$-weights of the adjoint action on $\\operatorname{Lie}(G)$, correspond exactly to $\\Phi$; for each $\\alpha\\in\\Phi$, $j$ carries $\\mathfrak g_\\alpha$ onto the $T$-weight space of $\\operatorname{Lie}(G)$ of the corresponding root. Their coroots differentiate to the $h_\\alpha$, and this identification preserves all root-coroot pairings. The lattices $X,Y$ are finite-rank free abelian, the roots and coroots span their rational spaces and form a finite reduced crystallographic root datum: each root pairs to $2$ with its coroot, the root and dual reflections permute the root-coroot pairs, and proportional roots differ only by sign. The reflection group is finite.\n\nEvery finite-dimensional Lie representation of $\\mathfrak g$ on a rational vector space $V$ integrates to a unique algebraic-group representation $G\\to\\operatorname{GL}(V)$ [def-wf-algebraic-representations] whose differential, pulled back by $j$, is the given action. For this action there is a finite direct sum decomposition $V=\\bigoplus_{\\chi\\in X}V_\\chi$, where $t$ acts on $V_\\chi$ by $\\chi(t)$ after every scalar extension; under $X=P$, the space $V_\\chi$ is exactly the simultaneous ordinary $\\mathfrak h$-eigenspace of weight $d\\chi\\circ j$. Empty root systems and the zero Lie algebra are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi))."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "def-sc-group-scheme",
+  "def-wf-algebraic-representations",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sfb-rho-section-module-data",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Apply the split root decomposition and the rational base-existence theorem to choose a base $\\Delta$. The rational highest-weight theorem supplies the fundamental weights $\\omega_i$, a basis $P=\\bigoplus_i\\mathbf Z\\omega_i$, and modules $L(\\lambda)$. In particular $P$ is a free lattice of full rank in $\\mathfrak h^\\vee$. Let $\\mathcal C$ be all finite-dimensional rational $\\mathfrak g$-modules with their forgetful functor. Kernels and cokernels are the invariant vector-space kernels and cokernels, tensor action is $x(v\\otimes w)=xv\\otimes w+v\\otimes xw$, and dual action is $(xf)(v)=-f(xv)$. These formulas verify the abelian, exact faithful symmetric tensor, and duality hypotheses of the tensor-envelope theorem. A skeleton is obtained by taking actions on $\\mathbf Q^n$ for $n\\geq0$, a set of matrices in each dimension.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-reduced-rational-root-pairing-base",
+    "lem-sfb-rational-highest-weight-modules",
+    "lem-sfb-neutral-tensor-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70, preceding construction, p.507; root system on pp.503--504."
+   }
+  },
+  {
+   "text": "The object $W=\\mathbf1\\oplus\\bigoplus_i L(\\omega_i)$ tensor-generates $\\mathcal C$. Indeed for $\\lambda=\\sum n_i\\omega_i$ dominant, the tensor product of $n_i$ highest vectors in the $L(\\omega_i)$ is nonzero, has weight $\\lambda$, and is killed by all positive root spaces. Complete reducibility decomposes the submodule it generates into simple summands. Any nonzero projection of the vector is a highest vector of weight $\\lambda$, so highest-weight uniqueness identifies the corresponding summand with $L(\\lambda)$. Every simple thus occurs in a tensor word in $W$, and every module is a finite sum of simples. The tensor-envelope theorem consequently gives an affine finite-type group $G=\\operatorname{Aut}^{\\otimes}(\\omega)$, a closed immersion $G\\hookrightarrow\\operatorname{GL}(W)$, and a fibre-preserving tensor equivalence $\\mathcal C\\simeq\\operatorname{Rep}(G)$. No finiteness conclusion is inferred just from the dimension of a Lie algebra.",
+   "uses": [
+    "lem-sfb-split-lie-module-classification",
+    "lem-sfb-neutral-tensor-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70 construction and proof (a),(b), p.507; Note 9.27, p.173."
+   }
+  },
+  {
+   "text": "Send $x\\in\\mathfrak g$ to the family $(\\rho_V(x))_V$. The tensor formulas make this a Lie map $j:\\mathfrak g\\to\\operatorname{Lie}(G)$ in the envelope's tangent-family description. It is injective, since its component on the adjoint module is $\\operatorname{ad}(x)$ and the centre of a semisimple Lie algebra is zero (the centre is an abelian ideal). The adjoint action is faithful, so the faithful trace-form theorem makes its trace form, the Killing form of $\\mathfrak g$, nondegenerate.",
+   "uses": [
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-faithful-semisimple-trace-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(a), p.507; Lie-family description in Lemma 23.69, p.506."
+   }
+  },
+  {
+   "text": "Let $D$ be a tangent family. Naturality for the bracket map $\\mathfrak g\\otimes\\mathfrak g\\to\\mathfrak g$ says that $D_{\\mathfrak g}$ is a Lie derivation. The inner-derivation leaf gives $x$ with $D_{\\mathfrak g}=\\operatorname{ad}(x)$. Subtract $j(x)$ to obtain $E$ with $E_{\\mathfrak g}=0$. Naturality for the action map $\\mathfrak g\\otimes V\\to V$ now says $E_V\\rho_V(y)=\\rho_V(y)E_V$. On each simple $V$, classification makes $E_V=c_V\\,1$. The Lie algebra is perfect: each simple coroot is $[e_i,f_i]$, these coroots span $\\mathfrak h$, and a root vector $z$ is $\\alpha(h)^{-1}[h,z]$ for some $h$ with $\\alpha(h)\\ne0$. Thus $\\operatorname{Tr}(\\rho_V(y))=0$, since traces of matrix commutators vanish. Choose a basis of the simple $V$ of dimension $n>0$ and let $a:V^{\\otimes n}\\to\\mathbf Q$ be the determinant multilinear form. In the sum $\\sum_i a(v_1,\\ldots,Av_i,\\ldots,v_n)$, off-diagonal entries of $A$ give repeated columns and vanish, while the diagonal entries sum to $\\operatorname{Tr}(A)a(v_1,\\ldots,v_n)$. Hence $a$ is a Lie-intertwiner to the trivial module. Tensor naturality gives $0=E_{\\mathbf Q}a=a E_{V^{\\otimes n}}=n c_V a$; as $a$ is nonzero, $c_V=0$ in $\\mathbf Q$. Naturality for inclusions of simple summands then gives $E=0$ on every module. Therefore $j$ is surjective and is a Lie isomorphism.",
+   "uses": [
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-killing-derivations-inner",
+    "lem-sfb-split-lie-module-classification",
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-pc-finite-dimensional-trace-cyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(a), p.507; expanded tangent-family argument using inner derivations and determinants."
+   }
+  },
+  {
+   "text": "Smoothness follows from Cartier's theorem for the finite-type $G$. Under the reconstructed tensor equivalence, its differentiation, pulled back by $j$, is exactly the original Lie action, because the component of $j(x)$ at $V$ is $\\rho_V(x)$. Hence every rational Lie action has an algebraic integration on its very same vector space. For uniqueness let $r$ be any algebraic representation on $V$ whose differential, pulled back by $j$, is $\\rho_V$. Essential surjectivity of the equivalence gives an object $V_1$ of $\\mathcal C$ and a $G$-isomorphism $\\varphi$ from $r$ to the tautological action on $V_1$. Differentiation is a functor, so $\\varphi$ intertwines $\\rho_V$ with $\\rho_{V_1}$; hence $\\varphi$ is a morphism $V\\to V_1$ of $\\mathcal C$, and the tautological functor makes $\\varphi$ a $G$-map from the tautological action on $V$. Therefore $r_A(g)=\\varphi^{-1}g_{V_1}\\varphi$ is the tautological action of $g$ on $A\\otimes V$, for every $A$ and $g\\in G(A)$. In particular every zero-differential representation of $G$ is trivial. The connectedness test shows that $G$ is geometrically connected, and the semisimple-Lie converse, applied to $j$, makes $G$ semisimple. Over the algebraic closure this semisimple group is reductive by the Borel-pair structure theorem.",
+   "uses": [
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-char-zero-affine-group-smooth",
+    "lem-sfb-charzero-connected-differential-test",
+    "lem-sfb-charzero-lie-semisimple-converse",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(a),(b), p.507; Cartier Theorem 3.23, p.71."
+   }
+  },
+  {
+   "text": "Set $T=D_{\\mathbf Q}(P)=\\operatorname{Spec}\\mathbf Q[P]$. The character antiduality identifies $X^*(T)$ with $P$; choosing the basis $\\omega_i$ identifies $T$ with $\\mathbf G_m^r$. The Lie-module classification decomposes every $V$ into ordinary $\\mathfrak h$-eigenspaces $V_\\mu$, $\\mu\\in P$. Give each $V_\\mu$ the $T$-action of character $\\mu$. Lie-intertwiners preserve these eigenspaces, tensor weights add and the unit has weight zero, so for every algebra $A$ a point $t\\in T(A)$ gives a tensor-natural automorphism on all $A\\otimes V$. The envelope's representing property yields $i:T\\to G$. Each $\\omega_i$ occurs as the highest weight in $L(\\omega_i)\\subset W$. In a weight basis of $W$ the composite $T\\to G\\to\\operatorname{GL}(W)$ is diagonal; its coordinate pullback contains $e^{\\omega_i}$ and $e^{-\\omega_i}$, since both a matrix and its inverse have regular entries on $\\operatorname{GL}(W)$. These generate $\\mathbf Q[P]$, so the composite coordinate map is surjective and so is $\\mathbf Q[G]\\to\\mathbf Q[P]$. Thus $i$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-split-lie-module-classification",
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-rational-highest-weight-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(d), pp.507--508; split torus and grading in 12.13, p.235."
+   }
+  },
+  {
+   "text": "A tangent point of $T$ sends $e^\\mu$ to $1+\\varepsilon\\mu(h)$, with $h\\in\\mathfrak h$: this follows by specifying the coefficients on the basis $\\omega_i$ and extending multiplicatively. Its action on $V_\\mu$ is $1+\\varepsilon\\mu(h)$, so $di$ identifies $\\operatorname{Lie}(T)$ with $j(\\mathfrak h)$. In these coordinates $d\\chi\\circ j|_{\\mathfrak h}=\\mu$ for $\\chi=\\chi_\\mu$, giving exactly $X=P$, with no scalar multiple. If a geometric torus $S$ contains $T$, then $\\operatorname{Lie}(S)$ centralizes $j(\\mathfrak h)$. The split root decomposition, extended to the algebraic closure, has zero-weight space exactly $\\mathfrak h$, so $\\operatorname{Lie}(S)=\\operatorname{Lie}(T)$. Apply smooth-subgroup tangent generation with ambient $S$ and the single subgroup $T$: it gives $S=T$. Thus $T$ is geometrically maximal.",
+   "uses": [
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(d), p.508; maximality expanded from the Cartan centralizer."
+   }
+  },
+  {
+   "text": "For the adjoint module, the same grading gives $\\operatorname{Lie}(G)=j(\\mathfrak h)\\oplus\\bigoplus_{\\alpha\\in\\Phi}j(\\mathfrak g_\\alpha)$ with torus characters $\\alpha$. It is the group adjoint representation: differentiation of $\\operatorname{Ad}$ pulled back by $j$ is $\\operatorname{ad}$, so uniqueness from step 5 identifies it with the reconstructed adjoint module. Thus its nonzero torus weights and weight spaces are exactly the stated roots and root spaces. Tangent calculus identifies $\\operatorname{Lie}(G_{\\overline{\\mathbf Q}})$ with $\\overline{\\mathbf Q}\\otimes\\operatorname{Lie}(G)$, so the same decomposition holds over the algebraic closure. There apply rank-one reflections to $(G,T)$. By tangent calculus the differential of $v_\\alpha:\\operatorname{SL}_2\\to G_\\alpha\\subseteq G$ preserves brackets and composites. For the standard $e,f,h$ of $\\mathfrak{sl}_2$ put $e'=dv_\\alpha(e)$, $f'=dv_\\alpha(f)$, $h'=dv_\\alpha(h)=d\\alpha^\\vee(1)$. Then $h'\\in\\operatorname{Lie}(T)=j(\\mathfrak h)$, $e'$ spans the root space $j(\\mathfrak g_\\alpha)$, $[e',f']=h'$, and $\\alpha(h')=\\langle\\alpha,\\alpha^\\vee\\rangle=2$, since $t\\mapsto t^n$ has differential $n$. Write $f'=f'_0+\\sum_\\beta f'_\\beta$ in the root decomposition (transported by $j$). Then $[e',f'_0]=-\\alpha(f'_0)e'$ lies in the $\\alpha$-space and $[e',f'_\\beta]$ in the $(\\alpha+\\beta)$-space; as $[e',f']=h'$ lies in $j(\\mathfrak h)$, all other components vanish and $h'=[e',f'_{-\\alpha}]\\in j([\\mathfrak g_\\alpha,\\mathfrak g_{-\\alpha}])$. The bracket line and the normalization $\\alpha(h')=2$ characterize $h_\\alpha$ uniquely, so $d\\alpha^\\vee(1)=j(h_\\alpha)$. The cocharacter is defined over $\\mathbf Q$: for a split torus its integer coordinates are $\\mu\\mapsto\\mu(h_\\alpha)$, so the geometric cocharacter is the one already given over $\\mathbf Q$ by these coordinates.",
+   "uses": [
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(d), p.508; rank-one coroot convention in Theorem 21.11, pp.428--430."
+   }
+  },
+  {
+   "text": "Identify $Y$ with $\\operatorname{Hom}_{\\mathbf Z}(P,\\mathbf Z)$ by character antiduality; its basis dual to the $\\omega_i$ gives the perfect integer pairing. Step 8 identifies the coroots with $h_\\alpha$. Both root and coroot families span the rational spaces by the split Lie root theorem. Its root-coroot evaluations, normalization, reducedness and reflection permutation formulas are therefore the same for $(X,\\Phi,Y,\\Phi^\\vee)$. The formulas preserve $P$: evaluation of $s_\\alpha(\\mu)$ on any $h_\\beta$ equals evaluation of $\\mu$ on the corresponding reflected coroot and is integral. They preserve the dual lattice too. The finite rational reflection group is consequently the lattice reflection group. This proves all asserted root-datum properties and pairings.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-rational-highest-weight-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(d), p.508; its diagram interpreted by the full weight lattice."
+   }
+  },
+  {
+   "text": "Work over an algebraic closure. The Borel-pair theorem gives some pair $(B_0,T_0)$. Torus conjugacy gives $gT_0g^{-1}=T$, so $gB_0g^{-1}$ is a Borel containing our specified $T$. Let $f:H\\to G$ be a surjection from a connected semisimple group with finite central kernel. The semisimple central-isogeny theorem makes it faithfully flat, and Borel/root compatibility gives a maximal torus $T_H=f^{-1}(T)$ containing the kernel and preserving root-coroot pairings. On torus characters $f^*:P\\hookrightarrow X^*(T_H)$ has finite cokernel, by diagonalizable character duality and finiteness of its kernel. Identify their rational spaces through $f^*$. Every $\\xi\\in X^*(T_H)$ has integral evaluation on all coroots, so $\\xi\\in P$; conversely $P$ is already included. Thus $f^*$ is an isomorphism. Character duality makes $T_H\\to T$ an isomorphism and its kernel trivial. Hence $\\ker f=1$. The affine faithfully flat map $f$ is an fpqc cover. The identity map on its source, viewed as a local inverse, agrees on the double overlap: two lifts of the same point differ by an element of the trivial kernel. Representable fpqc descent glues it to an inverse on $G$; the two composite identities hold after this cover and hence hold by the uniqueness clause of the same descent theorem. This proves geometric simply-connectedness; it also proves the stated assertion for isogenies defined over $\\mathbf Q$.",
+   "uses": [
+    "lem-sfb-semisimple-central-isogeny-multiplicative",
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(e), p.508, via Proposition 23.29, p.493; full lattice argument written explicitly."
+   }
+  },
+  {
+   "text": "For every integrated module, restriction to $T$ is precisely its original $P$-grading, by the construction of $i$ in step 6. The diagonalizable representation theorem gives a finite direct sum of actual character spaces, with the indicated character action after every scalar extension. Differentiating shows that the character space $V_\\mu$ is contained in its ordinary $\\mathfrak h$-eigenspace. Conversely if $v=\\sum v_\\nu$ is an eigenvector of weight $\\mu$, then $(\\nu(h)-\\mu(h))v_\\nu=0$ for every $h$; distinct rational linear forms are separated by some $h$, so only $v_\\mu$ can remain. This proves equality, not just containment. For $\\mathfrak g=0$ the root decomposition gives $\\mathfrak h=0$ and $P=0$; $\\mathcal C$ is vector spaces, its tensor automorphism group is $1$ (naturality for maps $\\mathbf Q\\to V$ fixes every vector), $T=1$, and all assertions reduce to the unique trivial action. The zero module is the empty direct sum.",
+   "uses": [
+    "lem-sfb-diagonalizable-representation-weight-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(d), pp.507--508; Theorem 12.12 and Remark 12.13, pp.234--235."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-semisimple-root-decomposition",
+  "lem-sfb-reduced-rational-root-pairing-base",
+  "lem-sfb-rational-highest-weight-modules",
+  "lem-sfb-neutral-tensor-envelope",
+  "lem-sfb-split-lie-module-classification",
+  "lem-sfb-faithful-semisimple-trace-form",
+  "lem-sfb-killing-derivations-inner",
+  "lem-pc-finite-dimensional-trace-cyclic",
+  "lem-sfb-char-zero-affine-group-smooth",
+  "lem-sfb-charzero-connected-differential-test",
+  "lem-sfb-charzero-lie-semisimple-converse",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-semisimple-central-isogeny-multiplicative",
+  "lem-sfb-central-isogeny-borel-root-compatibility",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-diagonalizable-representation-weight-grading"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.70, pp.506--508 and Proposition 23.29, p.493. Tannakian route retained; tangent surjectivity expanded using inner derivations, scalar endomorphisms and determinants in place of the printed summand argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integrate finite dimensional representations of a split semisimple Lie algebra in characteristic zero to its simply connected algebraic group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"For any non-empty type $\\\\iota$, the Lie module structure on the space of functions $b.\\\\text{support} \\\\oplus \\\\iota \\\\to K$ over the Geck-constructed Lie algebra $\\\\mathfrak{g}_b$ associated to the root p\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"module\": \"Mathlib/Algebra/Lie/Weights/IsSimple\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_5 : H.IsCartanSubalgebra]\\n  [inst_6 : LieAlgebra.IsKilling K L] [inst_7 : LieModule.IsTriangularizable K (↥H) L] [Lie\", \"doc\": \"For a simple Lie algebra $ L $ over a field $ K $, the root system associated with $ L $ via the non-degenerate Killing form is irreducible.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.booleanGenerators\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], IsCompactlyGenerated.BooleanGenerators {I | IsAtom I}\", \"doc\": \"The set of atomic Lie ideals in a semisimple Lie algebra forms a set of Boolean generators for the complete lattice of Lie submodules. This means the set is closed under finite meets, joins, and compl\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra, AlgebraicGeometry.GroupScheme",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.GroupScheme'\n",
+   "date": "2026-10-24",
+   "verdict": "unavailable: this Loogle query was rejected for an unknown identifier; a corrected query is separately recorded"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*simplyConnected|simplyConnected.*semisimple|integrat.*Lie|Lie.*integrat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of representations of a semisimple Lie algebra and a simply connected algebraic group in characteristic zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieEquiv.instLinearEquivClass\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \": LinearEquivClass (L₁ ≃ₗ⁅R⁆ L₂) R L₁ L₂\", \"doc\": \"The type of Lie algebra equivalences between two Lie algebras $ L₁ $ and $ L₂ $ over a commutative ring $ R $ is equipped with the structure of a linear equivalence. This means that a Lie algebra equi\"}\n  {\"name\": \"LieEquiv\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \"(R : Type u) →\\n  (L : Type v) →\\n    (L' : Type w) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] → [LieAlgebra R L] → [inst_3 : LieRing L'] → [LieAlgebra R L'] → Type (max v w)\", \"doc\": \"The type of Lie algebra equivalences (isomorphisms) between two Lie algebras $ L $ and $ L' $ over a commutative ring $ R $, consisting of a bijective linear map preserving the Lie bracket with an inv\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsSimple R L] : IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.mk\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  sSup {I | IsAtom I} = ⊤ →\\n    sSupIndep {I | IsAtom I} → (∀ (I : LieIdeal R L), IsAtom I → ¬IsLieAbelian ↥I) → LieAlgebra.IsSemisimple R L\", \"doc\": \"A Lie algebra $ L $ over a commutative ring $ R $ is semisimple if it is the sum of its simple ideals, these ideals are supremum-independent, and each simple ideal is non-abelian.\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n  {\"name\": \"LieEquiv.mk.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \"∀ {R : Type u} {L : Type v} {L' : Type w} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing L'] [inst_4 : LieAlgebra R L'] (toLieHom toLieHom_1 : L →ₗ⁅R⁆ L')\\n  (e_toLieHom : toLieHom = toLieHom_1) (invFun invFun_1 : L' → L) (e_invFun : invFun = invFun_1)\\n  (left_\", \"doc\": \"Given commutative ring $ R $ and Lie algebras $ L, L' $ over $ R $, if two Lie algebra equivalences between $ L $ and $ L' $ are constructed from the same Lie homomorphism, its inverse function, and p\"}\n  {\"name\": \"term_≃ₗ⁅_,_⁆_\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"The notation $\\\\simeq_\\\\mathfrak{g}$ denotes an isomorphism between Lie algebras that preserves the Lie bracket operation.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tannakian group of representations of a semisimple Lie algebra with character lattice the integral weight lattice",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.instLinearWeightsOfCharZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a commutative ring $ R $ with characteristic zero, a nilpotent Lie algebra $ L $ over $ R $, and an abelian group $ M $ equipped with compatible $ R $-module and Lie module structures over $ L $, \"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"For any non-empty type $\\\\iota$, the Lie module structure on the space of functions $b.\\\\text{support} \\\\oplus \\\\iota \\\\to K$ over the Geck-constructed Lie algebra $\\\\mathfrak{g}_b$ associated to the root p\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"LieSubalgebra.root\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} → [inst_4 : H.IsCartanSubalgebra] → Finset (LieModule.Weight K (↥H) L)\", \"doc\": \"The finite set of non-zero weights $\\\\alpha \\\\in \\\\text{Weight}(K, \\\\mathfrak{h}, \\\\mathfrak{g})$ associated with the Lie subalgebra $\\\\mathfrak{h}$, where each weight $\\\\alpha$ satisfies $\\\\alpha \\\\neq 0$ (i.\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form and a non-zero weight $\\\\alpha$, the $\\\\mathfrak{sl}_2$-submodule generated by the $\\\\mathfrak{sl}_2$-triple associated \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieAlgebra\", \"Rep\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integration of a finite-dimensional split semisimple rational Lie algebra to a unique simply connected split semisimple algebraic group with character lattice equal to the integral weight lattice",
+   "results": "8 hits: instSubsingletonLieAlgebraRat, LieAlgebra.IsSemisimple, LieAlgebra.IsSimple.instIsSemisimple, LieSubalgebra.root.congr_simp, LieAlgebra.IsKilling.instSemisimple, LieAlgebra.IsSemisimple.mk, LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot, LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple",
+   "date": "2026-10-24",
+   "verdict": "no match: only abstract Lie structure, roots, or finite-group Tannaka; no affine semisimple group integration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite-dimensional split semisimple rational Lie algebra integrates to a simply connected split semisimple algebraic group and all Lie representations integrate uniquely",
+   "results": "8 hits: LieAlgebra.IsKilling.instSemisimple, LieAlgebra.IsSemisimple, RootPairing.GeckConstruction.instHasTrivialRadical, LieAlgebra.IsKilling.instHasTrivialRadical, LieModule.instIsTriangularizableOfIsAlgClosed, LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple, LieAlgebra.IsSemisimple.booleanGenerators, LieAlgebra.IsSimple.instIsSemisimple",
+   "date": "2026-10-24",
+   "verdict": "no match: only abstract Lie structure, roots, or finite-group Tannaka; no affine semisimple group integration"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.IsSemisimple, TannakaDuality",
+   "results": "0 hits: ; loogle: unknown identifier 'TannakaDuality'",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "simplyConnected|simply_connected|Tannaka|LieAlgebra.IsSemisimple",
+   "results": "6 hits: Mathlib/Algebra/Lie/Killing.lean, Mathlib/Algebra/Lie/Semisimple/Basic.lean, Mathlib/Algebra/Lie/Semisimple/Basic.lean, Mathlib/Algebra/Lie/Semisimple/Defs.lean, Mathlib/Algebra/Lie/Semisimple/Defs.lean, Mathlib/Algebra/Lie/Semisimple/Defs.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: only abstract Lie structure, roots, or finite-group Tannaka; no affine semisimple group integration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-characteristic-zero-weyl-dimension",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)).",
+   "via": [
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-charzero-lie-group-integration",
+  "worker": "stage1",
+  "summary": "Constructed the neutral tensor envelope using an explicit finite tensor generator; proved its tangent map is an isomorphism by inner derivations and determinant naturality; constructed the split weight torus and checked canonical root-coroot normalization and simply-connectedness by the lattice sandwich. Statement unchanged. Five new statement nodes, one a Mathlib leaf; reused the existing root, highest-weight and diagonalizable module nodes.",
+  "blueprint": "Inherited blueprint.from.node is null, confirmed by blueprint_refs.py ancestor. Retained its exact place and via chain; these steps realize the split rational Lie/group prerequisite of characteristic-zero Weyl dimension below det-thm-sf-ctf-stability-direct-images proof (3). Whole-blueprint searches found no equivalent integration theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic descent of compatible scheme morphisms along an fpqc cover, used only to glue the inverse of an affine faithfully flat homomorphism with trivial kernel. No group-integration theorem is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-7dff84fca",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-7dff84fca (reviewer sub-agent of L); spot-checked: FIX of the Q34 split of lem-sfb-split-charzero-lie-group-integration at 7dff84fc: I repaired two compressed steps and one missing citation, and dropped no node. Source check: I read Milne iAG2017, Lemmas 23.68 and 23.69 and Theorem 23.70(a)-(e) with its proof, pp.506-508. The item follows Milne's Tannakian route with the same diagram (V,Phi,P), and its statement is unchanged. Two of Milne's arguments are replaced, correctly and without weakening any target: surjectivity in (a) now goes through inner derivations, scalar endomorphisms and the determinant form, giving n*c=0 in Q; finite type in (b) now comes from an explicit tensor generator W. Steps 1-4, 6, 7 and 9-11: I checked each against the statements of the nodes it cites, including the hypotheses of the conjugacy, isogeny and Borel/root compatibility nodes, the lattice sandwich X(T_H)=P, the gluing of the inverse by fpqc descent, and the case g=0. Repairs in fixes/: (1) E5, step 5: uniqueness of the integration is now written out (essential surjectivity, then differentiation as a functor makes phi a morphism of C, so r is the tautological action). (2) C1/C3, step 8: the claim that the opposite root vector lies in g_{-alpha} 'because the rank-one centralizer has only roots +-alpha' is not stated by rank-one-reflections. It is replaced by a root-component argument: [e',f']=h' lies in h, which forces h'=[e',f'_{-alpha}] in [g_alpha,g_{-alpha}], and alpha(h')=2 then gives j(h_alpha). (3) Step 8 now cites the existing lem-sfb-affine-group-lie-tangent-calculus, same unit, for bracket preservation of dv_alpha and for Lie(G_Qbar)=Qbar⊗Lie(G). It adds 2 nodes to the closure and no trace-formula or Poincare node. New nodes, all statement-only and self-contained, none restating a clause of the item: neutral-tensor-envelope (Milne 9.24-9.27, 23.69, 10.23; Deligne-Milne 2.20(b)), true over any field. split-lie-module-classification is standard split highest-weight theory; each clause was checked; it is stronger than the existing rational-highest-weight-modules and sl2 nodes. killing-derivations-inner is an exact match of LieDerivation.IsKilling.exists_eq_ad, Killing.lean:109, with Module.Finite at l.71 and IsKilling at l.80. charzero-connected-differential-test: both directions checked (Cartier for one, the regular representation of pi0 for the other). charzero-lie-semisimple-converse is Milne 23.68. None duplicates an existing node. No cycle: the only node citing the item is characteristic-zero-weyl-dimension. Batch-5 flags: all 7 cited nodes are algebraic-group steps whose closure reaches sec-trace-formula only through the generic scheme-theory nodes lem-trf-fppf-covering-base-change, -fppf-covering-is-fpqc and -smooth-fpqc-base-descent, def-trf-scheme-cover-descent-datum and lem-trf-projective-exterior-scalar-comparisons (unit sk-i-curve-zero). None is a step of the trace formula or Poincare duality, so I accept them. The split_report tool_uses entry for the Mathlib leaf lem-weil-pbc-fpqc-representable-descent is accepted; all off-unit citations are Mathlib leaves or definitions.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitCharZeroLieIntegration",
+  "declaration": "AlgebraicGeometry.exists_splitCharZero_lieGroup_integration",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitCharZeroLieIntegration.lean",
+  "statement": "theorem exists_splitCharZero_lieGroup_integration (g : Type u) [LieRing g] [LieAlgebra ℚ g] [FiniteDimensional ℚ g] [LieAlgebra.HasTrivialRadical ℚ g] (H : LieSubalgebra ℚ g) [IsLieAbelian H] (hmax : ∀ A : LieSubalgebra ℚ g, H ≤ A → IsLieAbelian A → A = H) (hsplit : ∀ h : H, (⨆ a : ℚ, (LieAlgebra.ad ℚ g (h : g)).eigenspace a) = ⊤) (R : Set (Module.Dual ℚ H)) (hR : ∀ α : Module.Dual ℚ H, α ∈ R ↔ α ≠ 0 ∧ LieModule.weightSpace g (α : H → ℚ) ≠ ⊥) (c : R → H) (hc : ∀ α : R, (c α : g) ∈ Submodule.span ℚ {z : g | ∃ x y : g, x ∈ LieModule.weightSpace g (α.1 : H → ℚ) ∧ y ∈ LieModule.weightSpace g ((-α.1) : H → ℚ) ∧ ⁅x, y⁆ = z} ∧ α.1 (c α) = 2) (P : Submodule ℤ (Module.Dual ℚ H)) (hP : ∀ mu : Module.Dual ℚ H, mu ∈ P ↔ ∀ α : R, ∃ n : ℤ, mu (c α) = (n : ℚ)) : R.Finite ∧ ∃ (G T : Grp (Over (Spec (.of ℚ)))) (i : T ⟶ G) (j : g ≃ₗ⁅ℚ⁆ GrpObj.Lie G.X), IsAffine G.X.left ∧ Smooth G.X.hom ∧ ConnectedSpace G.X.left ∧ IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure ℚ)).obj G).X ∧ (∀ (G' : Over (Spec (.of (AlgebraicClosure ℚ)))) [GrpObj G'], IsSemisimpleGroupScheme G' → ∀ (f : G' ⟶ ((MultiplicativeType.baseChange (K := AlgebraicClosure ℚ)).obj G).X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type) [CommRing A] [Algebra (AlgebraicClosure ℚ) A] (x : StandardGroupSchemes.affine (AlgebraicClosure ℚ) A ⟶ GrpObj.ker f) (y : StandardGroupSchemes.affine (AlgebraicClosure ℚ) A ⟶ G'), (x ≫ GrpObj.kerι f) * y = y * (x ≫ GrpObj.kerι f)) → IsIso f) ∧ IsClosedSubgroupScheme i.hom.hom ∧ (∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus ℚ r)) ∧ ReductiveTorusCentralizer.IsMaximalTorus ((MultiplicativeType.baseChange (K := AlgebraicClosure ℚ)).map i) ∧ ∃ (_ : IsCommMonObj T.X) (_ : IsCommMonObj (StandardGroupSchemes.multiplicative ℚ)) (aG : ModObj T.X G.X) (jH : H ≃ₗ[ℚ] GrpObj.Lie T.X) (e : GrpObj.Lie (StandardGroupSchemes.multiplicative ℚ) ≃ₗ[ℚ] ℚ) (d : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ)) ≃ₗ[ℤ] P) (D : RootDatum R (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative ℚ) ⟶ T))), aG.smul = (i.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X ∧ (∀ h : H, GrpObj.differential i.hom.hom (jH h) = j (h : g)) ∧ (∀ z : GrpObj.Lie (StandardGroupSchemes.multiplicative ℚ), e z = (RhoSection.characterValue (A := DualNumber ℚ) (GrpObj.tangentPoint z)).snd) ∧ (∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ))) (h : H), (d χ : Module.Dual ℚ H) h = e (GrpObj.differential χ.toMul.hom.hom (jH h))) ∧ Module.Finite ℤ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ))) ∧ Module.Free ℤ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ))) ∧ Module.Finite ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative ℚ) ⟶ T)) ∧ Module.Free ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative ℚ) ⟶ T)) ∧ (∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ))) (eta : Additive (Grp.mk (StandardGroupSchemes.multiplicative ℚ) ⟶ T)), eta.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative ℚ)) ^ (D.toLinearMap χ eta)) ∧ (∀ α : R, (d (D.root α) : Module.Dual ℚ H) = α.1) ∧ (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ)), (∃ α : R, D.root α = χ) ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace ℚ _ T G aG χ.toMul ≠ ⊥) ∧ (∀ α : R, Submodule.map j.toLinearEquiv.toLinearMap (LieModule.weightSpace g (α.1 : H → ℚ)).toSubmodule = @TorusCharacterTangent.weightSpace ℚ _ T G aG (D.root α).toMul) ∧ (∀ α : R, GrpObj.differential (D.coroot α).toMul.hom.hom (e.symm 1) = jH (c α)) ∧ (∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ))) (α : R), (D.toLinearMap χ (D.coroot α) : ℚ) = (d χ : Module.Dual ℚ H) (c α)) ∧ D.IsReduced ∧ Submodule.span ℚ (Set.range (fun α : R ↦ (1 : ℚ) ⊗ₜ[ℤ] D.root α)) = ⊤ ∧ Submodule.span ℚ (Set.range (fun α : R ↦ (1 : ℚ) ⊗ₜ[ℤ] D.coroot α)) = ⊤ ∧ Finite (Subgroup.closure (Set.range D.reflection)) ∧ ∀ (V : Type v) [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V] [LieRingModule g V] [LieModule ℚ g V] (n : ℕ) (b : Module.Basis (Fin n) ℚ V), ∃ (r : GeneralLinearGroup.RationalHom G.X (Fin n)) (_ : IsMonHom r), (∀ (x : g) (v : V), b.repr ⁅x, v⁆ = (r.differential (j x)).mulVec (b.repr v)) ∧ (∀ (s : GeneralLinearGroup.RationalHom G.X (Fin n)) [IsMonHom s], (∀ (x : g) (v : V), b.repr ⁅x, v⁆ = (s.differential (j x)).mulVec (b.repr v)) → s = r) ∧ ∃ W : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ)) → Submodule ℚ V, {χ | W χ ≠ ⊥}.Finite ∧ DirectSum.IsInternal W ∧ ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative ℚ)), W χ = (LieModule.weightSpace V ((d χ : Module.Dual ℚ H) : H → ℚ)).toSubmodule ∧ ∀ v : V, v ∈ W χ ↔ ∀ (A : Type) [CommRing A] [Algebra ℚ A] (t : points T.X A), ((r.points A (t ≫ i.hom.hom) : Matrix (Fin n) (Fin n) A).mulVec (fun k : Fin n ↦ algebraMap ℚ A (b.repr v k))) = RhoSection.characterValue (t ≫ χ.toMul.hom.hom) • (fun k : Fin n ↦ algebraMap ℚ A (b.repr v k))",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c0d318a0",
+  "group": "Q87",
+  "result": "pass",
+  "note": "lean.statement equals the file signature verbatim; the node changes only lean and stmt_deps, and the 6 added stmt_deps have all landed. Hypotheses match the node and are no stronger (HasTrivialRadical, maximal abelian H, ad diagonalizable over Q via sup of eigenspaces, R pinned to nonzero simultaneous weights, c pinned to bracket span with alpha(c)=2, P pinned by hP). Conclusions all present: affine, smooth, connected; IsSemisimpleGroupScheme after Qbar, which includes connectedness; simply-connected clause in the same form as the landed simplyConnected_character_lattice; split T maximal after Qbar; aG, jH, e and d pinned by equations; pairing pinned by eta≫chi=1^n; roots, root spaces, coroot differentials and pairings; reduced, spanning, finite reflection group; unique integration on every V and basis with a weight decomposition tested over all A. Edge cases g=0, R empty, V=0, A=0 or nonreduced are covered. No definitions; proof is sorry only; docstrings correct. Notes, no action: the roots clause inlines the body of RankOneRoots.roots; GrpObj.Lie is used without citing def-wf-lie-algebra-derivation, which is not reached through def-sfb-torus-character-tangent-weights (that node only cites sk-d-tangent) - accepted on the landed root-group precedent and because the node defines Lie(H) itself, though other reviewers have returned similar items for this H2 gap. No file changed, no compile."
+ }
+}

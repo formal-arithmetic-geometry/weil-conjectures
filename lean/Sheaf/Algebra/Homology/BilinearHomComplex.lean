@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group B4
+Authors: SHEAF groups B4 and E6
 -/
 module
 public import Mathlib.Algebra.Homology.HomologicalComplex
@@ -225,14 +225,55 @@ private noncomputable def homBifunctor :
     dsimp
     rw [homComplexMap_comp H]
     simp
+omit [Preadditive A] [Preadditive B] [HasProducts D]
+    [H.Additive] [∀ a, (H.obj a).Additive] in
+/-- The projection data of a product Hom complex, with each law stored separately.
+Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X.
+(blueprint: lem-weil-pbc-bilinear-hom-complex). -/
+structure ProductHomComplexData [HasZeroMorphisms A] [HasZeroMorphisms B]
+    (F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ) where
+  π : ∀ (L : CochainComplex A ℤ) (M : CochainComplex B ℤ) (n p q : ℤ), p + n = q →
+    (((F.obj (op L)).obj M).X n ⟶ (H.obj (op (L.X p))).obj (M.X q))
+  isLimit : ∀ (L : CochainComplex A ℤ) (M : CochainComplex B ℤ) (n : ℤ),
+    Nonempty (IsLimit (Fan.mk (((F.obj (op L)).obj M).X n)
+      (fun p : ℤ ↦ π L M n p (p + n) rfl)))
+  differential : ∀ (L : CochainComplex A ℤ) (M : CochainComplex B ℤ)
+    (n m p q q' p' : ℤ) (_hnm : n + 1 = m) (hpq : p + m = q)
+    (hq' : p + n = q') (hp' : p' + n = q),
+    ((F.obj (op L)).obj M).d n m ≫ π L M m p q hpq =
+      π L M n p q' hq' ≫ (Functor.uncurry.obj H).map
+        (X := (op (L.X p), M.X q')) (Y := (op (L.X p), M.X q))
+        ((𝟙 (L.X p)).op, M.d q' q) -
+      n.negOnePow • (π L M n p' q hp' ≫ (Functor.uncurry.obj H).map
+        (X := (op (L.X p'), M.X q)) (Y := (op (L.X p), M.X q))
+        ((L.d p p').op, 𝟙 (M.X q)))
+  naturality : ∀ (L L' : CochainComplex A ℤ) (M M' : CochainComplex B ℤ)
+    (f : L' ⟶ L) (g : M ⟶ M') (n p q : ℤ) (hpq : p + n = q),
+    (((F.map f.op).app M) ≫ (F.obj (op L')).map g).f n ≫ π L' M' n p q hpq =
+      π L M n p q hpq ≫ (Functor.uncurry.obj H).map
+        (X := (op (L.X p), M.X q)) (Y := (op (L'.X p), M'.X q))
+        ((f.f p).op, g.f q)
+
+omit [Preadditive A] [Preadditive B] [HasProducts D]
+    [H.Additive] [∀ a, (H.obj a).Additive] in
 /-- Product projections, differential, and functoriality specifying a product Hom complex.
 Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X
 (blueprint: lem-weil-pbc-bilinear-hom-complex).
 This proposition packages the full formulas so coefficient specializations can use the
 abstract preadditive hom structures without re-elaborating them after substitution. -/
-def ProductHomComplexSpecification
+def ProductHomComplexSpecification [HasZeroMorphisms A] [HasZeroMorphisms B]
     (F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ) : Prop :=
-      ∃ π : ∀ (L : CochainComplex A ℤ) (M : CochainComplex B ℤ) (n p q : ℤ), p + n = q →
+  Nonempty (ProductHomComplexData H F)
+
+omit [HasProducts D] [H.Additive] [∀ a, (H.obj a).Additive] in
+/-- The structured specification is exactly the previous existential specification.
+Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
+(blueprint: lem-weil-pbc-bilinear-hom-complex).
+Proof: pack or unpack the four fields; every equation and product condition is unchanged. -/
+theorem productHomComplexSpecification_iff
+    (F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ) :
+    ProductHomComplexSpecification H F ↔
+      (∃ π : ∀ (L : CochainComplex A ℤ) (M : CochainComplex B ℤ) (n p q : ℤ), p + n = q →
         (((F.obj (op L)).obj M).X n ⟶ (H.obj (op (L.X p))).obj (M.X q)),
         (∀ (L : CochainComplex A ℤ) (M : CochainComplex B ℤ) (n : ℤ),
           Nonempty (IsLimit (Fan.mk (((F.obj (op L)).obj M).X n)
@@ -253,7 +294,12 @@ def ProductHomComplexSpecification
           (((F.map f.op).app M) ≫ (F.obj (op L')).map g).f n ≫ π L' M' n p q hpq =
             π L M n p q hpq ≫ (Functor.uncurry.obj H).map
               (X := (op (L.X p), M.X q)) (Y := (op (L'.X p), M'.X q))
-              ((f.f p).op, g.f q))
+              ((f.f p).op, g.f q))) := by
+  constructor
+  · rintro ⟨⟨π, hπ, hd, hm⟩⟩
+    exact ⟨π, hπ, hd, hm⟩
+  · rintro ⟨π, hπ, hd, hm⟩
+    exact ⟨⟨π, hπ, hd, hm⟩⟩
 
 /-- Existence of the Hom-complex bifunctor with its product projections and exact sign.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I
@@ -272,7 +318,7 @@ for the projections and their formulas below. No extra boundedness is used. -/
 theorem exists_bilinearHomComplexFunctor :
     ∃ F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ,
       ProductHomComplexSpecification H F := by
-  refine ⟨homBifunctor H, homProj H, ?_, ?_, ?_⟩
+  refine ⟨homBifunctor H, ⟨⟨homProj H, ?_, ?_, ?_⟩⟩⟩
   · intro L M n
     exact ⟨productIsProduct _⟩
   · intro L M n m p q q' p' hnm hpq hq' hp'

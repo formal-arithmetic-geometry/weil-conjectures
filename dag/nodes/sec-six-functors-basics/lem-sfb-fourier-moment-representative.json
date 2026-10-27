@@ -1,0 +1,215 @@
+{
+ "id": "lem-sfb-fourier-moment-representative",
+ "kind": "statement",
+ "title": "Integrable Fourier moments give a representative of the specified L2 class",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and Lebesgue measure on $\\mathbf R^m$, $m\\geq1$. Let $u\\in L^2(\\mathbf R^m;\\mathbf C)$, the space of measurable square-integrable functions modulo almost-everywhere equality, and let $h$ be a measurable representative of its Plancherel Fourier transform, defined as the continuous $L^2$ extension of $f\\mapsto(\\xi\\mapsto\\int e^{-2\\pi i x\\cdot\\xi}f(x)\\,dx)$ on Schwartz functions (smooth functions with all derivatives rapidly decreasing). Let $r\\geq0$ be an integer. Suppose $\\int\\|\\xi\\|^j|h(\\xi)|\\,d\\xi<\\infty$ for every integer $0\\leq j\\leq r$. The absolutely convergent integral $$g(x)=\\int_{\\mathbf R^m}e^{2\\pi i x\\cdot\\xi}h(\\xi)\\,d\\xi$$ defines a $C^r$ complex-valued function on $\\mathbf R^m$, and $g=u$ almost everywhere, so the $L^2$ class of $g$ is the specified class $u$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; VI §2, Sobolev lemma (2.1), printed p.289. The inverse-Fourier moment argument for (2.1), including identification with the original almost-everywhere class. Agent-stated supporting lemma, not a separately numbered assertion of Demailly. Supporting code read: Mathlib/Analysis/Distribution/Sobolev.lean:212–275; Mathlib/Analysis/Fourier/LpSpace.lean:47–139; Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:498–524, 703–707. Online statement read in https://totomityann.github.io/pdf/lua_agbook.pdf, VI §2 (2.1), PDF page 152 (a recomposed excerpt, not the original pagination)."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "The moment assumption for $j=0$ says $h\\in L^1$. Since $|e^{2\\pi i x\\cdot\\xi}h(\\xi)|=|h(\\xi)|$, the integral defining $g$ converges absolutely for every $x$. Apply [lem-sfb-bilinear-fourier-moment-regularity] with $a=b=m$, $f=h$, and $L(\\xi,x)=-\\xi\\cdot x$. This is a continuous real bilinear form, and its negative-exponent Fourier integral is exactly $g$. All its moment hypotheses are the stated hypotheses, so $g$ is $C^r$, also when $r=0$.",
+   "uses": [
+    "lem-sfb-bilinear-fourier-moment-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+    "place": "507-514; specialization to the negative inner product."
+   }
+  },
+  {
+   "text": "Choose a measurable representative $u_0$ of the given $L^2$ class $u$. By [lem-sfb-lp-local-integrability] at $p=2$, $u_0$ is locally integrable. Step 1 gives continuity of $g$. Apply [lem-sfb-continuous-local-integrability] with $U=\\mathbf R^m$ and $f=g$ to see that $g$ is locally integrable as well. The whole Euclidean space is open; both functions are measurable.",
+   "uses": [
+    "lem-sfb-lp-local-integrability",
+    "lem-sfb-continuous-local-integrability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+    "place": "351-358 and 566-569; local integrability of L2 and continuous functions."
+   }
+  },
+  {
+   "text": "Let $\\psi:\\mathbf R^m\\to\\mathbf R$ be any smooth compactly supported test, and regard it as the complex function $q=\\psi+i0$. By [lem-sfb-schwartz-test-inclusion-integrability], $q$ is Schwartz and belongs to $L^1$. Apply [lem-sfb-l1-bilinear-fourier-duality] to $h,q$ and $L(\\xi,x)=-\\xi\\cdot x$. Its two $L^1$ hypotheses hold by step 1 and the preceding sentence. The transpose is the same negative inner-product phase, hence $J_{L^{\\mathrm t}}q=\\mathcal Gq$, and it gives $\\int g(x)q(x)\\,dx=\\int h(\\xi)(\\mathcal Gq)(\\xi)\\,d\\xi$. On the other hand, apply [lem-sfb-l2-inverse-fourier-test-duality] with $v=\\mathcal F_2u$, representative $v_0=h$, and test $q$. Its inverse law says $\\mathcal G_2v=u$, so $w_0=u_0$ is a permitted representative. It gives $\\int q(x)u_0(x)\\,dx=\\int(\\mathcal Gq)(\\xi)h(\\xi)\\,d\\xi$. Commutativity of complex multiplication now yields $\\int\\psi(x)g(x)\\,dx=\\int\\psi(x)u_0(x)\\,dx$. This proves the test identity for every real smooth compactly supported $\\psi$, with no pointwise Fourier inversion assumption on $u_0$.",
+   "uses": [
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-l1-bilinear-fourier-duality",
+    "lem-sfb-l2-inverse-fourier-test-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Fourier/FourierTransform.lean",
+    "place": "242-248, combined with LpSpace.lean:81-82,132-139 and SchwartzSpace/Basic.lean:555-567,1131-1133; agent assembly of the two test identities."
+   }
+  },
+  {
+   "text": "Put $f=g-u_0$. By step 2, $g$ and $u_0$ are measurable and every point has a neighborhood on which $|g|$ and $|u_0|$ are integrable, so the same holds for $|f|\\leq|g|+|u_0|$: $f$ is locally integrable on $U=\\mathbf R^m$. For a real smooth compactly supported $\\psi$, its support is covered by finitely many such neighborhoods and $|\\psi|$ is bounded, so $\\psi g$ and $\\psi u_0$ are integrable and step 3 gives $\\int\\psi(x)f(x)\\,dx=\\int\\psi g-\\int\\psi u_0=0$. Apply [lem-sfb-smooth-test-ae-separation] with $U=\\mathbf R^m$ (open, every compact support lies in it) and this $f$. Thus $f=0$, i.e. $g=u_0$, almost everywhere. In particular $g$ is square integrable and its $L^2$ equivalence class equals the originally specified $u$. Together with step 1 this is the full assertion.",
+   "uses": [
+    "lem-sfb-smooth-test-ae-separation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean",
+    "place": "205-213 (IsOpen.ae_eq_zero_of_integral_contDiff_smul_eq_zero, the source of the cited node), applied to the difference; equality of locally integrable functions from compact smooth tests."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bilinear-fourier-moment-regularity",
+  "lem-sfb-lp-local-integrability",
+  "lem-sfb-continuous-local-integrability",
+  "lem-sfb-schwartz-test-inclusion-integrability",
+  "lem-sfb-l1-bilinear-fourier-duality",
+  "lem-sfb-l2-inverse-fourier-test-duality",
+  "lem-sfb-smooth-test-ae-separation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Agent-written supporting Fourier proof for Demailly VI §2 (2.1), using the individually cited Mathlib theorems; not a proof printed in Demailly. Local Demailly PDF WANTED; online excerpt read at https://totomityann.github.io/pdf/lua_agbook.pdf, PDF page 152."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "contDiff_fourier|fourierInv_toTemperedDistribution_eq|fourierInv.*ae|ae.*fourierInv|fourierInv.*integrable",
+   "results": "{\"t\": \"2026-10-24T03:02:08Z\", \"tool\": \"grep\", \"query\": \"contDiff_fourier|fourierInv_toTemperedDistribution_eq|fourierInv.*ae|ae.*fourierInv|fourierInv.*integrable\", \"sub\": \"Analysis\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Fourier/LpSpace.lean\", \"Mathlib/Analysis/Fourier/FourierTransform.lean\", \"Mathlib/Analysis/Fourier/FourierTransform.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\"], \"digest\": \"3a558995ba044e14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: VectorFourier.contDiff_fourierIntegral at Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:507 gives regularity of the integral (with the negative inner-product form). Integrable.fourierInv_fourier_eq at Mathlib/Analysis/Fourier/Inversion.lean:165 requires continuity of the original function at the point. Lp.fourierInv_toTemperedDistribution_eq at Mathlib/Analysis/Fourier/LpSpace.lean:132 is equality in tempered distributions. Neither is the asserted almost-everywhere equality of the inverse integral and the given L2 class; identifying their locally integrable distributions needs a theorem. Read each cited statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integrable frequency function with integrable norm times x to power r has a continuously differentiable inverse Fourier transform and Fourier inversion agrees with the L2 class",
+   "results": "{\"t\": \"2026-10-24T03:02:09Z\", \"tool\": \"leansearch\", \"query\": \"An integrable frequency function with integrable norm times x to power r has a continuously differentiable inverse Fourier transform and Fourier inversion agrees with the L2 class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.Integrable.fourier_fourierInv_eq\", \"MeasureTheory.Integrable.fourier_inversion_inv\", \"MeasureTheory.Integrable.fourier_inversion\", \"Real.hasDerivAt_fourierIntegral\", \"Real.differentiable_fourier\", \"Continuous.fourier_inversion_inv\", \"Real.contDiff_fourier\", \"SchwartzMap.fourierInv_coe\"], \"digest\": \"5b0c4ac979ce584e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: VectorFourier.contDiff_fourierIntegral at Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:507 gives regularity of the integral (with the negative inner-product form). Integrable.fourierInv_fourier_eq at Mathlib/Analysis/Fourier/Inversion.lean:165 requires continuity of the original function at the point. Lp.fourierInv_toTemperedDistribution_eq at Mathlib/Analysis/Fourier/LpSpace.lean:132 is equality in tempered distributions. Neither is the asserted almost-everywhere equality of the inverse integral and the given L2 class; identifying their locally integrable distributions needs a theorem. Read each cited statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"contDiff\", \"fourier\"",
+   "results": "{\"t\": \"2026-10-24T03:02:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"contDiff\\\", \\\"fourier\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Real.contDiff_fourier\", \"ContDiff.fourierPowSMulRight\", \"VectorFourier.contDiff_fourierIntegral\"], \"digest\": \"69e64165521f6b5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: VectorFourier.contDiff_fourierIntegral at Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:507 gives regularity of the integral (with the negative inner-product form). Integrable.fourierInv_fourier_eq at Mathlib/Analysis/Fourier/Inversion.lean:165 requires continuity of the original function at the point. Lp.fourierInv_toTemperedDistribution_eq at Mathlib/Analysis/Fourier/LpSpace.lean:132 is equality in tempered distributions. Neither is the asserted almost-everywhere equality of the inverse integral and the given L2 class; identifying their locally integrable distributions needs a theorem. Read each cited statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse Fourier transform of an L2 function whose Fourier transform has integrable moments up to order r is a Cr function equal to the original function almost everywhere",
+   "results": "{\"t\": \"2026-10-24T03:02:10Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse Fourier transform of an L2 function whose Fourier transform has integrable moments up to order r is a Cr function equal to the original function almost everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.contDiff_fourierIntegral\", \"VectorFourier.contDiff_fourierIntegral\", \"Real.contDiff_fourier\", \"MeasureTheory.Integrable.fourierInv_fourier_eq\", \"MeasureTheory.Integrable.fourier_inversion\", \"MeasureTheory.Lp.instFourierTransformInv\", \"MeasureTheory.Integrable.fourier_inversion_inv\", \"SchwartzMap.toLp_fourierTransformInv_eq\"], \"digest\": \"30955eb2c14592bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: VectorFourier.contDiff_fourierIntegral at Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:507 gives regularity of the integral (with the negative inner-product form). Integrable.fourierInv_fourier_eq at Mathlib/Analysis/Fourier/Inversion.lean:165 requires continuity of the original function at the point. Lp.fourierInv_toTemperedDistribution_eq at Mathlib/Analysis/Fourier/LpSpace.lean:132 is equality in tempered distributions. Neither is the asserted almost-everywhere equality of the inverse integral and the given L2 class; identifying their locally integrable distributions needs a theorem. Read each cited statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ae_eq|inversion|fourierInv_fourier",
+   "results": "{\"t\": \"2026-10-24T03:02:31Z\", \"tool\": \"grep\", \"query\": \"ae_eq|inversion|fourierInv_fourier\", \"sub\": \"Analysis/Fourier/Inversion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"14\", \"16\", \"162\", \"165\"], \"digest\": \"2877e343d4ebb0a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: VectorFourier.contDiff_fourierIntegral at Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:507 gives regularity of the integral (with the negative inner-product form). Integrable.fourierInv_fourier_eq at Mathlib/Analysis/Fourier/Inversion.lean:165 requires continuity of the original function at the point. Lp.fourierInv_toTemperedDistribution_eq at Mathlib/Analysis/Fourier/LpSpace.lean:132 is equality in tempered distributions. Neither is the asserted almost-everywhere equality of the inverse integral and the given L2 class; identifying their locally integrable distributions needs a theorem. Read each cited statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An L2 Fourier transform that is also L1 has an inverse given by the absolutely convergent Fourier integral almost everywhere, and integrable polynomial moments make this integral Cr",
+   "results": "{\"t\": \"2026-10-24T03:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"An L2 Fourier transform that is also L1 has an inverse given by the absolutely convergent Fourier integral almost everywhere, and integrable polynomial moments make this integral Cr\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.Integrable.fourier_inversion\", \"MeasureTheory.Integrable.fourierInv_fourier_eq\", \"MeasureTheory.Lp.instFourierTransformInv\", \"MeasureTheory.Integrable.fourier_fourierInv_eq\", \"MeasureTheory.Integrable.fourier_inversion_inv\", \"MeasureTheory.Lp.instFourierPairInv\", \"MeasureTheory.Lp.instContinuousFourierInv\", \"Real.instFourierTransformInv\"], \"digest\": \"84443670d97dd9d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: VectorFourier.contDiff_fourierIntegral at Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:507 gives regularity of the integral (with the negative inner-product form). Integrable.fourierInv_fourier_eq at Mathlib/Analysis/Fourier/Inversion.lean:165 requires continuity of the original function at the point. Lp.fourierInv_toTemperedDistribution_eq at Mathlib/Analysis/Fourier/LpSpace.lean:132 is equality in tempered distributions. Neither is the asserted almost-everywhere equality of the inverse integral and the given L2 class; identifying their locally integrable distributions needs a theorem. Read each cited statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An L2 function whose Plancherel Fourier transform has integrable polynomial moments has a Cr inverse Fourier integral representative equal almost everywhere to the given L2 class",
+   "results": "{\"t\": \"2026-10-24T03:26:17Z\", \"tool\": \"leanfinder\", \"query\": \"An L2 function whose Plancherel Fourier transform has integrable polynomial moments has a Cr inverse Fourier integral representative equal almost everywhere to the given L2 class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.Lp.instFourierTransformInv\", \"SchwartzMap.toLp_fourierInv_eq\", \"MeasureTheory.Lp.instContinuousFourierInv\", \"MeasureTheory.Lp.instFourierPairInv\", \"SchwartzMap.toLp_fourierTransformInv_eq\", \"MeasureTheory.Lp.instFourierInvAdd\", \"MeasureTheory.Integrable.fourierInv_fourier_eq\", \"MeasureTheory.Lp.instFourierPair\"], \"digest\": \"f10bdadddce5d66b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete statement: the integral regularity theorem and L2 inverse-transform compatibility are separate results. Read VectorFourier.contDiff_fourierIntegral at FourierTransformDeriv.lean:507-514, Lp.fourierInv_toTemperedDistribution_eq at LpSpace.lean:132-139, and Integrable.fourierInv_fourier_eq at Inversion.lean:165. The last needs continuity of the original function at the point, which the item does not assume. A comparison via test integrals and ae uniqueness is required, as in the split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integrable Fourier moments give a smooth inverse Fourier integral equal almost everywhere to the original square integrable function",
+   "results": "{\"t\": \"2026-10-24T03:26:16Z\", \"tool\": \"leansearch\", \"query\": \"Integrable Fourier moments give a smooth inverse Fourier integral equal almost everywhere to the original square integrable function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.Integrable.fourier_fourierInv_eq\", \"Real.fourierIntegralInv\", \"MeasureTheory.Integrable.fourier_inversion_inv\", \"MeasureTheory.Integrable.fourier_inversion\", \"MeasureTheory.Integrable.fourierInv_fourier_eq\", \"SchwartzMap.fourier_inversion\", \"Continuous.fourier_fourierInv_eq\", \"Continuous.fourier_inversion_inv\"], \"digest\": \"e7cb77a36fa4aabd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete statement: the integral regularity theorem and L2 inverse-transform compatibility are separate results. Read VectorFourier.contDiff_fourierIntegral at FourierTransformDeriv.lean:507-514, Lp.fourierInv_toTemperedDistribution_eq at LpSpace.lean:132-139, and Integrable.fourierInv_fourier_eq at Inversion.lean:165. The last needs continuity of the original function at the point, which the item does not assume. A comparison via test integrals and ae uniqueness is required, as in the split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bundle-sobolev-embedding",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, Sobolev lemma (2.1), printed p.289 (PDF page 289), including the preceding weak-derivative definition of the Sobolev spaces. Supporting Fourier argument: The inverse-Fourier moment argument for (2.1), including identification with the original almost-everywhere class.",
+   "via": [
+    "lem-sfb-bundle-sobolev-embedding",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fourier-moment-representative",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved absolute convergence and Cr regularity by a general bilinear Fourier integral leaf, compared the inverse integral and the inverse Plancherel class on compact smooth tests, and used the existing smooth-test ae-separation node on the difference. Reused the existing continuous local-integrability and smooth-test ae-separation nodes; five new helpers are genuine Mathlib specializations, with sources and searches read. No project Lean attachment, no new unsplit obligation, and no Lean changes.",
+  "blueprint": "Realizes the existing supporting inverse-Fourier moment argument for Demailly VI §2 (2.1) in the alteration/Hodge analytic subchain of det-thm-sf-ctf-stability-direct-images. The helper is not itself in the current blueprint. tools/blueprint_refs.py ancestor reports None for the inherited broken ancestor chain, retained as such; no ancestor was invented. Latest unit proof read, without changing its route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N8-e98e19ba8",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-e98e19ba8 (reviewer sub-agent of L); spot-checked: The item is true. Since u∈L2 and the moment hypotheses with j=0 put h=F2u in L1∩L2, g=∫e^{2πix·ξ}h is C^r and g=u a.e. I read all four steps against Mathlib. Step 1: VectorFourier.contDiff_fourierIntegral, FourierTransformDeriv.lean:506-514, with L=−ξ·x; the sign checks. Step 2: MemLp.locallyIntegrable, LocallyIntegrable.lean:351, plus the existing continuous-local-integrability node. Step 3: integral_fourierIntegral_smul_eq_flip, FourierTransform.lean:242-248, gives the L1 transposition, and its flip gives the + exponent. The L2 test identity comes from Lp.fourierInv_toTemperedDistribution_eq (LpSpace.lean:132-139) and instFourierPair (LpSpace.lean:81) evaluated with fourierInv_apply and toTemperedDistribution_apply (TemperedDistribution.lean:506 and 169-177). The Schwartz leaves are toSchwartzMap (Basic.lean:555) and SchwartzMap.integrable (Basic.lean:1131). Every hypothesis holds, and no pointwise inversion is used. Five of the new nodes are correct one-line Mathlib leaves. I tested them on small cases (L=0, a or b=1, q=0, p=1) and found no duplicates. Fault, C5: the new node lem-sfb-smooth-test-ae-uniqueness is the two-function, U=R^m form of the existing base node lem-sfb-smooth-test-ae-separation (Q09, IsOpen.ae_eq_zero_of_integral_contDiff_smul_eq_zero). The report does not mention that node. FIX: I dropped the new node and rewrote step 4. It now applies the existing node to f=g−u0, with the two-line local-integrability and integrability argument written inline. I updated proof_deps and the split_report count; the union of uses equals proof_deps. No other file cites the dropped node. There is no SGA citation and there are no tool_uses. The single citer, lem-sfb-bundle-sobolev-embedding, uses exactly the item's statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.FourierMomentRepresentative",
+  "declaration": "MeasureTheory.Lp.fourier_moments_inverse_representative",
+  "file": "lean/Sheaf/Analysis/FourierMomentRepresentative.lean",
+  "statement": "theorem fourier_moments_inverse_representative (m : ℕ) (hm : 1 ≤ m) (u : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))) (h : EuclideanSpace ℝ (Fin m) → ℂ) (hh : Measurable h) (hrep : ∀ᵐ ξ ∂volume, h ξ = (𝓕 u : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))) ξ) (r : ℕ) (hmom : ∀ j : ℕ, j ≤ r → Integrable (fun ξ ↦ ‖ξ‖ ^ j * ‖h ξ‖) volume) : (∀ x : EuclideanSpace ℝ (Fin m), Integrable (fun ξ ↦ (Real.fourierChar (inner ℝ ξ x) : ℂ) * h ξ) volume) ∧ ContDiff ℝ r (𝓕⁻ h) ∧ (𝓕⁻ h =ᵐ[volume] (u : EuclideanSpace ℝ (Fin m) → ℂ))",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f118c3cd0",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Lean statement matches every clause of lem-sfb-fourier-moment-representative: u : Lp ℂ 2 volume on EuclideanSpace ℝ (Fin m), 1≤m; h measurable with h =ᵐ 𝓕u (L² Plancherel extension from Schwartz, sign e^{-2πi} checked in LpSpace.lean); moments ∀ j≤r Integrable(‖ξ‖^j‖h‖), not stronger; conclusions: pointwise integrable 𝐞⟪ξ,x⟫·h, ContDiff ℝ r (𝓕⁻ h) with 𝓕⁻ = ∫𝐞⟪v,w⟫•f (Real.fourierInv_eq), 𝓕⁻ h =ᵐ u. Edge cases r=0, u=0, null-set changes and m=1 hold. No universes, no autoImplicit, no definitions, proof sorry only. Docstrings carry the source, blueprint id and the 4 proof steps. Imports justified. Node changes only lean; module not live; no duplicate in Mathlib or live Sheaf/WeilConjectures. Not compiled, per instructions; worker reports clean compile and dry run. No findings."
+ }
+}

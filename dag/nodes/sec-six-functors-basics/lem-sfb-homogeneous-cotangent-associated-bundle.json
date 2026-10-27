@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-homogeneous-cotangent-associated-bundle",
+ "kind": "statement",
+ "title": "Cotangent bundles of smooth homogeneous quotients as associated bundles",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $G$ a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms], and $H\\subseteq G$ a smooth closed subgroup [def-sc-group-scheme-subgroup]. Suppose the fppf quotient is represented by a separated finite-type $F$-scheme $Q$, and $q:G\\to Q$ is a right $H$-torsor: it is faithfully flat and finitely presented and $(g,h)\\mapsto(g,gh)$ identifies $G\\times_FH$ with $G\\times_QG$. Write $o=q(e)$, $\\mathfrak g=T_eG$, $\\mathfrak h=T_eH$ for tangent spaces (vectors are lifts of the indicated point to $F[\\varepsilon]/(\\varepsilon^2)$), and $V=(\\mathfrak g/\\mathfrak h)^\\vee=\\operatorname{Hom}_F(\\mathfrak g/\\mathfrak h,F)$. Give $\\mathfrak g/\\mathfrak h$ the $H$-action induced by conjugation and $V$ its contragredient action: $(h\\lambda)(v)=\\lambda(\\operatorname{Ad}(h^{-1})v)$. All actions are group-scheme actions, hence identities after every commutative $F$-algebra extension. For a finite-dimensional rational $H$-module $W$, let $G\\times^H W$ denote the vector bundle obtained by faithfully flat descent of $G\\times W$ with $(g,w)\\cdot h=(gh,h^{-1}w)$; its sheaf is the descent of $\\mathcal O_G\\otimes_FW$. Then $Q$ is smooth, $q$ is smooth, and the differential of $q$ induces an $H$-equivariant exact sequence $0\\to\\mathfrak h\\to\\mathfrak g\\to T_oQ\\to0$. There is a $G$-equivariant isomorphism of vector bundles $$\\Omega^1_{Q/F}\\simeq G\\times^H V,$$ where the left side denotes the bundle whose sheaf of sections is the relative differential sheaf [def-sc-relative-differential-sheaf]. If $d=\\dim_F V$, the sheaf of sections of $G\\times^H\\bigwedge^d V$ is canonically isomorphic to $\\bigwedge^d\\Omega^1_{Q/F}$ [def-sc-sheaf-exterior-power]. In particular $\\Omega^1_{Q/F}$ is locally free of constant rank $d$ and $Q$ is of pure dimension $d$. These assertions include $d=0$ and hold in every characteristic.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 7.15, printed pp.142--143, for smooth quotient maps; Section 18c, printed pp.389--390, especially 18.11 and the proof of 18.14, for reconstruction from the stabilizer fibre. Vector-bundle and exterior-power extension written by Q79. Brion--Kumar Section 2.1, printed pp.63--64, associated rational B-modules, is supporting reference (WANTED locally; author PDF read online)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "def-sfb-associated-vector-bundle-frame",
+  "def-sc-scheme-tangent-space",
+  "def-a1-relative-differentials-pullback-map"
+ ],
+ "proof": [
+  {
+   "text": "The quotient sheaf has the left $G$-action induced by multiplication on $G$; multiplication commutes with the right $H$-action, so it acts on right cosets, and representability makes this a scheme action. The map $q$ is equivariant. The torsor isomorphism identifies the base change of $q$ along itself with $G\\times_F H\\to G$. This projection is smooth by smooth base change, since $H/F$ is smooth. Smoothness descends along the faithfully flat, quasi-compact surjection $q$, so $q$ is smooth. (A finitely presented map is quasi-compact.) Applying smooth source descent to $G\\xrightarrow{q}Q\\to\\operatorname{Spec}F$ now shows that $Q/F$ is smooth: the composite is the given smooth structure morphism of $G$, and $q$ is flat, surjective and locally finitely presented.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.15, printed pp.142--143, torsor cartesian square; Stacks descent.tex Tags 02VL and 05B5"
+   }
+  },
+  {
+   "text": "The fibre of $q$ over $o$ is $H$: pull back the torsor isomorphism along the identity in its first coordinate. Thus a dual-number tangent vector at $e$ maps to zero at $o$ exactly when it factors uniquely through $H$. This proves injectivity of $\\mathfrak h\\to\\mathfrak g$ and identifies its image with the kernel. Given a dual-number vector at $o$, formal smoothness of $q$ lifts the diagram with closed subscheme $\\operatorname{Spec}F$ mapping to $e$ across $\\operatorname{Spec}F\\subset\\operatorname{Spec}F[\\varepsilon]/(\\varepsilon^2)$. Therefore $dq_e$ is surjective. Tangent maps are linear by the tangent-space definition. Consequently $\\mathfrak g/\\mathfrak h\\simeq T_oQ$. The smooth differential sheaves are finite locally free; tangent--differential-fibre duality makes all three tangent spaces finite-dimensional and identifies $E_o:=o^*\\Omega^1_{Q/F}$ canonically with $(T_oQ)^\\vee$, hence with $V$, by the finite-dimensional double-dual evaluation map.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "def-sbc-smooth-morphisms",
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "lem-sfb-rational-tangent-differential-fibre-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2C, 0B2D, 0B2F; morphisms.tex Tag 02G1; more-morphisms.tex Tag 02H0 (lifting definition)"
+   }
+  },
+  {
+   "text": "The stabilizer of $o$ is $H$ as a group scheme, by the same fibre identification. For every $F$-algebra $A$, $h\\in H(A)$ and infinitesimal $x\\in G(A[\\varepsilon])$ at $e$, the equality of cosets gives $q(hxh^{-1})=h\\,q(x)$. Differentiation gives $dq_e\\operatorname{Ad}(h)=d(L_h)_o dq_e$. Conjugation preserves $H$, so it preserves $\\mathfrak h$. This proves the equivariance of the exact sequence for conjugation on its first two terms and the stabilizer differential on its last term. Under the duality of step 2, the forward cotangent action of $h$ on $E_o$ is the dual of $d(L_{h^{-1}})_o$, so $(h\\lambda)(v)=\\lambda(\\operatorname{Ad}(h^{-1})v)$. The calculations are valid over $A$: differential base change identifies the fibres there with scalar extensions of the fibres over $F$, and finite-dimensional duals commute with scalar extension, as is checked on a basis. Thus these are identities of representations, including nonreduced test algebras.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "lem-sfb-rational-tangent-differential-fibre-duality",
+    "lem-trf-relative-differential-sheaf-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UV and 01V0; varieties.tex Tag 0B2D; explicit conjugation identity written here"
+   }
+  },
+  {
+   "text": "Put $E=\\Omega^1_{Q/F}$. The automorphism $b:G\\times Q\\to G\\times Q$, $(g,z)\\mapsto(g,gz)$, over $G$ has inverse $(g,z)\\mapsto(g,g^{-1}z)$. Differential base change identifies $\\Omega^1_{(G\\times Q)/G}$ with $\\operatorname{pr}_Q^*E$. The differential map for $b$ and its inverse therefore give an isomorphism $a^*E\\simeq\\operatorname{pr}_Q^*E$, where $a(g,z)=gz$; on a fibre its inverse is the forward action $g\\cdot\\alpha=(dL_{g^{-1}})^*\\alpha$. Composition holds because on each generator $du$ both composite differential maps send $du$ to the differential of the composite pullback of $u$. Restrict the forward isomorphism along $g\\mapsto(g,o)$. It gives an isomorphism $\\theta:\\mathcal O_G\\otimes_F E_o\\xrightarrow{\\sim}q^*E$, $\\theta_g(v)=g\\cdot v$. This constructs the map as an algebraic bundle isomorphism over $G$, not just at field-valued points.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "def-a1-relative-differentials-pullback-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UV (unique map on differentials) and 01V0 (relative differential base change); explicit action automorphism argument"
+   }
+  },
+  {
+   "text": "For the $H$-representation $E_o=V$ of step 3, $\\theta_{gh}(h^{-1}v)=(gh)\\cdot(h^{-1}\\cdot v)=g\\cdot v=\\theta_g(v)$. This is an equality of maps over $G\\times H$, by the composition identity in step 4. On $G\\times_QG\\simeq G\\times H$ it says exactly that $\\theta$ respects the descent datum $(g,v)\\cdot h=(gh,h^{-1}v)$ and the canonical descent datum of $q^*E$. FPQC descent for quasi-coherent modules is fully faithful and effective, and reflects finite local freeness of a specified rank. Hence $\\theta$ and its inverse descend to the asserted isomorphism $G\\times^H V\\simeq E$. For $k\\in G(A)$ one has $\\theta_{kg}(v)=(kg)\\cdot v=k\\cdot\\theta_g(v)$; full faithfulness, applied after the base change $G\\times G\\to G\\times Q$ as well, descends this equality and proves $G$-equivariance. The same descent statement shows $E$ is locally free of constant rank $d=\\dim_FV$, since its pullback is $\\mathcal O_G\\otimes_F V$.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; Milne 18.11 and proof of 18.14, printed pp.389--390 (line-bundle model)"
+   }
+  },
+  {
+   "text": "For a finite locally free sheaf, exterior powers commute with module pullback: on an open where a basis $e_1,\\ldots,e_d$ is chosen, send $1\\otimes(e_{i_1}\\wedge\\cdots\\wedge e_{i_r})$ to $(1\\otimes e_{i_1})\\wedge\\cdots\\wedge(1\\otimes e_{i_r})$. Increasing-index wedges form bases on both sides; the inverse sends those basis wedges back. The maps agree under a change of basis by multilinearity and the alternating relations, so glue canonically. Apply this to $E$ and the isomorphism $\\theta$. The resulting isomorphism $\\mathcal O_G\\otimes_F\\bigwedge^d V\\simeq q^*\\bigwedge^d E$ intertwines descent: the identity in step 5, on a pure wedge, is the wedge of that identity on its $d$ entries. FPQC full faithfulness descends it and its inverse, proving the claimed canonical top-wedge isomorphism. For $d=0$ both constructions give $\\mathcal O_Q$ and the map sends $1$ to $1$.",
+   "uses": [
+    "def-sc-sheaf-exterior-power",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T; explicit finite-basis exterior-power computation from def-sc-sheaf-exterior-power"
+   }
+  },
+  {
+   "text": "At every point $x$ of the smooth $F$-scheme $Q$, the differential-rank/fibre-dimension theorem gives an affine neighbourhood on which the differential module is free of rank $\\dim_xQ$. Its rank is also $d$ by step 5; taking its fibre at $x$ shows $\\dim_xQ=d$. Thus $Q/F$ is smooth of relative dimension $d$, which by the smooth-relative-dimension convention means its nonempty fibre $Q$ is equidimensional of dimension $d$. This is the asserted pure dimension. The point $o$ ensures $Q$ is nonempty. No step divides by the characteristic or uses connectedness of $H$. In particular a finite smooth $H$, $H=1$, $H=G$, and $d=0$ are all included.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02G1 and 02G2, rank equals fibre dimension and smooth relative dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "def-sc-scheme-tangent-space",
+  "def-sbc-smooth-morphisms",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-sfb-rational-tangent-differential-fibre-duality",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "def-a1-relative-differentials-pullback-map",
+  "lem-pc-fpqc-descent",
+  "def-sc-sheaf-exterior-power",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 7.15 and Section 18c, 18.11--18.14; explicit vector-bundle, tangent and exterior-power extension using the cited Stacks results"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth homogeneous quotient G by a smooth subgroup H, the cotangent bundle is the associated bundle of the dual of Lie G modulo Lie H",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (a : P.toExtension.Cotangent)\\n  (a_1 : σ), P.cotangentEquiv a a_1 = P.cotangentComplexAux a a_1\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] → (P : Algebra.SubmersivePresentation R S ι σ) → P.toExtension.Cotangent ≃ₗ[S] σ → S\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"TangentBundle\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              ModelWithCorners 𝕜 E H →\\n                (M : Type u_4) → [in\", \"doc\": \"The tangent bundle of a manifold $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is the total space formed by taking the tangent space $ E $ at each point of $ M $. This co\"}\n  {\"name\": \"TangentSpace.fiberBundle\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Tangent\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_4} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {M : Type u_6}\", \"doc\": \"The tangent space at each point of a manifold $ M $ modeled on a normed vector space $ E $ forms a fiber bundle over $ M $, where each fiber is canonically isomorphic to $ E $. This structure is induc\"}\n  {\"name\": \"Ideal.toCotangent_to_quotient_square\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (x : ↥I),\\n  I.cotangentToQuotientSquare (I.toCotangent x) = (Submodule.mkQ (I ^ 2)) ↑x\", \"doc\": \"For any element $x$ in an ideal $I$ of a commutative ring $R$, the composition of the canonical quotient map from $I$ to its cotangent module $I/I^2$ followed by the inclusion of $I/I^2$ into $R/I^2$ \"}\n  {\"name\": \"Ideal.cotangentEquivIdeal_apply\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (x : I.Cotangent),\\n  ↑(I.cotangentEquivIdeal x) = I.cotangentToQuotientSquare x\", \"doc\": \"For any element $ x $ in the cotangent module $ I/I^2 $ of an ideal $ I $ in a commutative ring $ R $, the image of $ x $ under the canonical isomorphism $ I/I^2 \\to R/I^2 $ coincides with the image of\"}\n  {\"name\": \"instAddCommGroupTangentSpace\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $x$ on a manifold $M$ modeled on a normed vector space $E$ via a model with corners $I$ inherits the additive commutative group structure from the normed vector space $E$.\"}\n  {\"name\": \"Ideal.cotangentEquivIdeal\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"{R : Type u} → [inst : CommRing R] → (I : Ideal R) → I.Cotangent ≃ₗ[R] ↥I.cotangentIdeal\", \"doc\": \"The canonical $ R $-linear map from the cotangent module $ I/I^2 $ to the quotient ring $ R/I^2 $ is bijective, establishing an isomorphism between the cotangent module and the corresponding ideal in \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned commutative-algebra cotangent modules and differential-geometric manifolds do not state algebraic homogeneous cotangent descent; no exact or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant cotangent bundle on an algebraic homogeneous space is reconstructed from its stabilizer representation and this construction commutes with exterior powers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (a : P.toExtension.Cotangent)\\n  (a_1 : σ), P.cotangentEquiv a a_1 = P.cotangentComplexAux a a_1\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"Algebra.SubmersivePresentation.sectionCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) →\\n                  P.\", \"doc\": \"A linear map from the cotangent space of the algebra extension $ P.toExtension $ to its cotangent module, constructed as the composition of: (1) the inverse of the cotangent module isomorphism $ (\\\\ker\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] → (P : Algebra.SubmersivePresentation R S ι σ) → P.toExtension.Cotangent ≃ₗ[S] σ → S\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.Extension.contangentEquiv_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  (s : S) (x : ↥P.ker), P.cotangentEquiv (s ⊗ₜ[P.Ring] x) = s • Algebra.Extension.Cotangent.mk x\", \"doc\": \"The tensor product of the algebra $ S $ with the kernel ideal $ \\\\ker(\\\\phi) $ over the ring $ R $ is linearly equivalent to the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $, considered as an $ S $-modu\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.fst_compEquiv_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$ is equipped with an additive commutative group structure, inherited from its module structure over $S$. This group operation is\"}\n  {\"name\": \"Algebra.Generators.cotangentRestrict\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {ι : Type w} →\\n            (P : Algebra.Generators R S ι) →\\n              {σ : Type u_1} → {u : σ → ι} → Function.Injective u → P.toExtension.Cotangent →ₗ[S] σ →₀ S\", \"doc\": \"The linear map from the cotangent module of an algebra extension to finite support functions on $\\\\sigma$, constructed by composing the cotangent complex map, the basis representation of the cotangent \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned commutative-algebra cotangent modules and differential-geometric manifolds do not state algebraic homogeneous cotangent descent; no exact or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For algebraic groups smooth G and H the sheaf of differentials on G/H is associated to the dual of Lie(G)/Lie(H)",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[EssFiniteType R A] [FormallySmooth R A] : Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"mdifferentiable_mulInvariantVectorField\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"(v : GroupLieAlgebra I G) :\\n  MDifferentiable I I.tangent (fun (g : G) ↦ (mulInvariantVectorField v g : TangentBundle I G))\", \"doc\": \"For any element $ v $ in the Lie algebra $ \\\\mathfrak{g} = T_eG $ of a Lie group $ G $, the left-invariant vector field associated to $ v $, defined by $ g \\\\mapsto \\\\mathrm{d}(L_g)_e(v) \\\\in T_gG $, is d\"}\n  {\"name\": \"contMDiffAt_mulInvariantVectorField\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"(v : GroupLieAlgebra I G) {g : G} :\\n  ContMDiffAt I I.tangent (minSmoothness 𝕜 2) (fun (g : G) ↦ (mulInvariantVectorField v g : TangentBundle I G)) g\", \"doc\": \"For any element $ v $ in the Lie algebra $ \\\\mathfrak{g} $ of a Lie group $ G $ modeled on a normed vector space $ E $ with corners, the map $ g \\\\mapsto \\\\mathrm{d}(L_g)_e(v) $ (defining the left-invari\"}\n  {\"name\": \"contMDiff_mulInvariantVectorField\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"(v : GroupLieAlgebra I G) :\\n  ContMDiff I I.tangent (minSmoothness 𝕜 2) (fun (g : G) ↦ (mulInvariantVectorField v g : TangentBundle I G))\", \"doc\": \"For a Lie group $ G $ modeled on a normed vector space $ E $ via a model with corners $ I $, and for any element $ v $ in the Lie algebra $ \\\\mathfrak{g} = T_eG $, the map assigning to each $ g \\\\in G $\"}\n  {\"name\": \"GroupLieAlgebra\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \": Type _\", \"doc\": \"The Lie algebra of a group $ G $, defined as the tangent space at the identity element $ 1 $, modeled on the normed vector space $ E $ via the model with corners $ I $.\"}\n  {\"name\": \"smoothSheafCommGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf CommGrpCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf on a topological manifold $ M $, taking values in the category of commutative groups, where sections over open subsets are smooth maps to a commutative Lie group $ A $, forming commutative g\"}\n  {\"name\": \"smoothSheafGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf GrpCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf on a manifold $ M $ with corners, assigning to each open set $ U $ the group of smooth maps from $ U $ to a Lie group $ G $, constructed from the smooth group presheaf and proven to satisfy \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned commutative-algebra cotangent modules and differential-geometric manifolds do not state algebraic homogeneous cotangent descent; no exact or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"Torsor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned commutative-algebra cotangent modules and differential-geometric manifolds do not state algebraic homogeneous cotangent descent; no exact or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*cotangent|cotangent.*homogeneous|associatedBundle|associated_bundle",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned commutative-algebra cotangent modules and differential-geometric manifolds do not state algebraic homogeneous cotangent descent; no exact or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For smooth algebraic group G and smooth closed subgroup H the cotangent bundle on the fppf quotient G/H is associated to the dual of Lie(G)/Lie(H)",
+   "results": "8 hits: Algebra.H1Cotangent, Algebra.SubmersivePresentation.cotangentEquiv_apply, Algebra.SubmersivePresentation.cotangentEquiv, Algebra.Extension.H1Cotangent, Algebra.Extension.CotangentSpace, Algebra.Extension.h1Cotangentι, Ideal.toCotangent_to_quotient_square, Ideal.cotangentEquivIdeal_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic homogeneous quotient and stabilizer cotangent descent are not stated by the returned algebra cotangent modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The differentials on a homogeneous algebraic quotient are the associated bundle of its stabilizer cotangent representation",
+   "results": "8 hits: Algebra.Presentation.differentials.hom₁, Algebra.Extension.Cotangent, Algebra.Generators.repr_CotangentSpaceMap, Algebra.Extension.Hom.sub_tmul, Algebra.Presentation.differentials.comm₂₃', Algebra.Presentation.differentials.hom₁_single, Algebra.Extension.Hom.sub_one_tmul, instR",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic homogeneous quotient and stabilizer cotangent descent are not stated by the returned algebra cotangent modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant vector bundle on an algebraic homogeneous space is reconstructed by faithfully flat descent from its stabilizer fibre representation",
+   "results": "8 hits: hom_trivializationAt_baseSet, hom_trivializationAt, hom_trivializationAt_apply, VectorBundle.trivialization_linear', Trivialization.linearEquivAt, VectorBundleCore.moduleFiber, trivialization_linear, Trivialization.IsLinear",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic homogeneous quotient and stabilizer cotangent descent are not stated by the returned algebra cotangent modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-canonical-character",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero Kodaira argument: omega_Q=M_(-2rho). Supporting smooth homogeneous quotient cotangent representation, before taking its top wedge.",
+   "via": [
+    "lem-sfb-flag-canonical-character",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-homogeneous-cotangent-associated-bundle",
+  "worker": "stage1",
+  "summary": "NI checked the torsor square and stabilizer action, wrote the dual-number tangent exactness and the algebraic cotangent trivialization, and used existing FPQC descent and dimension nodes. No new nodes or statement changes.",
+  "blueprint": "Supports the inherited direct-image alteration route at its characteristic-zero Kodaira input, omega_Q=M_(-2rho): identifies the homogeneous cotangent representation before taking its determinant. Latest blueprint direct-images proof (3) read; item is a non-blueprint supporting node, ancestor tool returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic stability of smooth morphisms under base change, for the torsor projection."
+   },
+   {
+    "node": "lem-trf-smooth-fpqc-base-descent",
+    "why": "Generic fpqc locality of smoothness on the target, for q."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic descent of smoothness through an fppf source, for Q/F."
+   },
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic finite local freeness for smooth differentials, to identify finite-dimensional fibres."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic effective descent and full faithfulness for module bundles and isomorphisms."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic smooth differential rank equals dimension, to conclude pure dimension."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Generic canonical base change for differential sheaves, used for the action family over G and for scalar-extended fibres; the unit has no other input stating it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-trf-relative-differential-sheaf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-c236eb672",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-c236eb672 (reviewer sub-agent of L); spot-checked: I read all 7 steps and every cited statement; there are no new nodes and the statement is unchanged. Step 1 follows Milne 7.15 (printed pp.142-143): the torsor square makes the base change of q along q equal to G×H→G, which is smooth by lem-pc-proper-base-change(2). lem-trf-smooth-fpqc-base-descent then applies to q, since q is flat, surjective and quasi-compact (finite presentation gives quasi-compact). lem-sbc source descent applies to Q/F. Step 2: the fibre of q over o is H, which gives the kernel and injectivity; formal smoothness lifts e and gives surjectivity; finite dimension comes from lem-ag finite local freeness plus rational tangent-differential duality. Step 3: q(hxh^{-1})=hq(x), so the cotangent action is contragredient to Ad. It is checked over every F-algebra by differential base change. Step 4: the automorphism b over G, def-a1 and base change give θ: O_G⊗E_o≅q^*E. Step 5: θ_{gh}(h^{-1}v)=θ_g(v) is the descent datum, matching Milne's 18.13 convention (gb,χ(b^{-1})x); lem-pc-fpqc-descent (1) and (2) give descent of θ, G-equivariance and rank d. Step 6: the exterior-power pullback via a basis is elementary. Step 7: by the 02G1 node the rank is dim_xQ=d, so Q has pure dimension d. Tested on H=G, H=1, finite H, d=0 (forces H=G) and P^1=GL2/B (Ω=O(-2)). The citer flag-canonical-character's sign (2ρ)(b)^{-1} agrees. I found no duplicate in the DAG or the blueprint. Batch-5: lem-trf-smooth-fpqc-base-descent is a Mathlib leaf for Stacks 02VL with no deps. lem-trf-relative-differential-sheaf-base-change is Stacks 01V0; its 190-node closure has no trace-formula or Poincaré-duality node besides itself and no assume/target node. Both are generic facts outside the assumptions, so both are accepted. The worker's generic tool_uses are accepted. No SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.HomogeneousCotangentAssociatedBundle",
+  "declaration": "AlgebraicGeometry.HomogeneousCotangent.homogeneous_cotangent_associated_bundle",
+  "declarations": [
+   "AlgebraicGeometry.HomogeneousCotangent.residueScalar",
+   "AlgebraicGeometry.HomogeneousCotangent.tangentModule",
+   "AlgebraicGeometry.HomogeneousCotangent.lieImage",
+   "AlgebraicGeometry.HomogeneousCotangent.quotientLie",
+   "AlgebraicGeometry.HomogeneousCotangent.differentialMap",
+   "AlgebraicGeometry.HomogeneousCotangent.differentialAt",
+   "AlgebraicGeometry.HomogeneousCotangent.translation",
+   "AlgebraicGeometry.HomogeneousCotangent.matrixAt",
+   "AlgebraicGeometry.HomogeneousCotangent.IsEquivariantFrame",
+   "AlgebraicGeometry.HomogeneousCotangent.homogeneous_cotangent_associated_bundle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/HomogeneousCotangentAssociatedBundle.lean",
+  "statement": "theorem homogeneous_cotangent_associated_bundle (F : Type u) [Field F] [IsAlgClosed F] (G H : Grp (Over (Spec (.of F)))) (i : H ⟶ G) [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth H.X.hom] [IsClosedSubgroupScheme i.hom.hom] (Q : Over (Spec (.of F))) [IsSeparated Q.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] (q : G.X ⟶ Q) [Flat q.left] [Surjective q.left] [LocallyOfFinitePresentation q.left] [QuasiCompact q.left] [QuasiSeparated q.left] (htorsor : IsPullback (fst G.X H.X) ((𝟙 G.X ⊗ₘ i.hom.hom) ≫ μ[G.X]) q q) : Smooth Q.hom ∧ Smooth q.left ∧ Function.Injective (GrpObj.differential i.hom.hom) ∧ ∃ (a : ModObj G.X Q) (d : ℕ) (b : Module.Basis (ULift.{u} (Fin d)) F (quotientLie i)) (t : quotientLie i ≃ₗ[F] tangentModule Q (q.left (GrpObj.onePoint G.X))) (r rV : GeneralLinearGroup.RationalHom H.X (ULift.{u} (Fin d))) (_ : IsMonHom r) (_ : IsMonHom rV) (rTop : GeneralLinearGroup.RationalHom H.X (ULift.{u} (Fin 1))) (_ : IsMonHom rTop) (θ : (Scheme.Modules.pullback q.left).obj Q.hom.relativeDifferentials ≅ AssociatedVectorBundle.free G.X.left d) (θTop : (Scheme.Modules.pullback q.left).obj (Scheme.Modules.exteriorSheaf Q.hom.relativeDifferentials d) ≅ AssociatedVectorBundle.free G.X.left 1), (∀ (S : Over (Spec (.of F))) (g k : S ⟶ G.X), lift k (g ≫ q) ≫ a.smul = (k * g) ≫ q) ∧ (∀ v : GrpObj.Lie G.X, (t ((lieImage i).mkQ v)).val = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom (residueScalar Q (q.left (GrpObj.onePoint G.X))))) ≫ (GrpObj.tangentPoint v).left ≫ q.left) ∧ (∀ (h : 𝟙_ (Over (Spec (.of F))) ⟶ H.X) (v : GrpObj.Lie G.X), b.equivFun.symm ((matrixAt r h).mulVec (b.repr ((lieImage i).mkQ v))) = (lieImage i).mkQ (GrpObj.differential (GrpObj.conjBy G.X (h ≫ i.hom.hom)) v)) ∧ (∀ (h : 𝟙_ (Over (Spec (.of F))) ⟶ H.X) (w : quotientLie i), (t (b.equivFun.symm ((matrixAt r h).mulVec (b.repr w)))).val = (t w).val ≫ (translation G Q a (h ≫ i.hom.hom)).left) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (h : points H.X A), (rV.points A h : Matrix (ULift.{u} (Fin d)) (ULift.{u} (Fin d)) A) = (r.points A h⁻¹ : Matrix (ULift.{u} (Fin d)) (ULift.{u} (Fin d)) A).transpose) ∧ AssociatedVectorBundle.IsDescentFrame G H i q d rV Q.hom.relativeDifferentials θ ∧ IsEquivariantFrame G q a d θ ∧ (∀ (ell : Module.Dual F (quotientLie i)) (v : GrpObj.Lie G.X), v.app ⊤ ((differentialAt q (η[G.X]) (η[G.X] ≫ q) rfl).app ⊤ ((AssociatedVectorBundle.frameAt q Q.hom.relativeDifferentials d θ η[G.X]).inv.app ⊤ ((Scheme.Modules.freeSectionsEquiv (ULift.{u} (Fin d))).symm (fun j => (Scheme.ΓSpecIso (.of F)).inv ((b.dualBasis.repr ell) j))))) = (Scheme.ΓSpecIso (.of F)).inv (ell ((lieImage i).mkQ v))) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (h : points H.X A), (rTop.points A h : Matrix (ULift.{u} (Fin 1)) (ULift.{u} (Fin 1)) A) (ULift.up 0) (ULift.up 0) = (rV.points A h : Matrix (ULift.{u} (Fin d)) (ULift.{u} (Fin d)) A).det) ∧ AssociatedVectorBundle.IsDescentFrame G H i q 1 rTop (Scheme.Modules.exteriorSheaf Q.hom.relativeDifferentials d) θTop ∧ (∀ (U : Q.left.Opens) (s : Fin d → Γ(Q.hom.relativeDifferentials, U)), Scheme.Modules.freeSectionsEquivOpens (q.left ⁻¹ᵁ U) (ULift.{u} (Fin 1)) (θTop.hom.app (q.left ⁻¹ᵁ U) (Scheme.Modules.pullbackSection q.left (Scheme.Modules.exteriorSheafSection Q.hom.relativeDifferentials d U s))) (ULift.up 0) = Matrix.det (fun j k : ULift.{u} (Fin d) => Scheme.Modules.freeSectionsEquivOpens (q.left ⁻¹ᵁ U) (ULift.{u} (Fin d)) (θ.hom.app (q.left ⁻¹ᵁ U) (Scheme.Modules.pullbackSection q.left (s k.down))) j)) ∧ Q.hom.relativeDifferentials.IsFiniteLocallyFreeOfRank d ∧ SmoothOfRelativeDimension d Q.hom",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8046d1454",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_deps, both modules, the report and the upstream declarations used (GrpObj.Lie as a Hom from ω=η*cotangentSheaf, defeq to relativeDifferentials; differential, tangentPoint, conjBy, RationalHom.points, schemeTangentSpace, the pinned tensorPullback adjunction, exteriorSheafSection, freeSectionsEquivOpens). Every hypothesis matches the node (alg. closed F; G smooth/connected/affine/finite type; H smooth closed subgroup; Q separated finite type; q flat, surjective, finitely presented; torsor IsPullback (fst, (1⊗i)≫μ)) with nothing extra. Every conclusion is present: Q and q smooth; injective dH and t: 𝔤/𝔥 ≃ T_oQ pinned to dq on dual-number points; r pinned to Ad on rational h, t intertwining d(L_h), action a pinned on all test schemes; rV(h)=r(h⁻¹)ᵀ over all algebras (contragredient); θ an IsDescentFrame of the actual Ω ([g·i(h),v]=[g,rV(h)v] over all algebras, full because G×H is affine) plus equivariance plus the canonical pairing at η, which pins θ uniquely by density of G(F); checked that pairing, equivariance and conjugation give exactly the descent relation at e; θTop pinned by the determinant formula with rTop=det rV; IsFiniteLocallyFreeOfRank d; SmoothOfRelativeDimension d. Edge cases d=0, H=1, finite/disconnected H, any characteristic, universes are covered. New node def-sfb-associated-vector-bundle-frame: fields per H12, real data, no duplicate (the character-line-bundle node is rank one). H2 OK: stmt_deps gained the new node plus two landed nodes with records. Statements verbatim, declarations exist, only the main theorem sorried, docstrings with source/blueprint/7 steps, no line over 100 characters, report sections present. Not compiled (no FIX). Maintainer notes, not blocking: GrpObj.Lie / conjBy / RationalHom belong to def-wf-lie-algebra-derivation / def-sc-group-scheme-translate / def-wf-algebraic-representations, which are not in stmt_deps; LieIdentityTangentEquiv import not used directly."
+ }
+}

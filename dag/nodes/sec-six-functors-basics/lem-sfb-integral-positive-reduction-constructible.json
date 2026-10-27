@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-integral-positive-reduction-constructible",
+ "kind": "statement",
+ "title": "Positive integral reduction of bounded constructible complexes",
+ "statement": "Fix a prime l, a finite extension E of Q_l with continuous condensed integer ring O_E, and a Noetherian scheme X. Use finite constant-model constructibility [sk-def-sfb-constructible] and the actual derived quotient extension [sk-def-pe-derived-completion]. If K is a bounded integral complex with finite constant-model constructible cohomology, then for every n≥0 its derived reduction along O_E→O_E/(pi_E^(n+1)) is bounded with finite constant-model constructible cohomology over the quotient. No completeness, torsion-freeness, characteristic, or Tor-amplitude hypothesis is imposed. This includes n=0, zero complexes, and empty schemes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (1), finite reductions; constructibility is the finite-truncation extension of the scalar-model calculation"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "For a constructible sheaf in degree zero, use the finite scalar-model quotient theorem. Its scalar matrix calculation gives bounded constructible cohomology over the actual positive quotient, including torsion scalar models.",
+   "uses": [
+    "lem-sfb-finite-model-sheaf-quotient-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify quotient constant-model constructibility with fixed finite-module constructible cohomology by the normalized encoding. The fixed-module bounded constructible origin theorem identifies this with the triangulated etale-origin property. Exact homology comparison gives both directions.",
+   "uses": [
+    "lem-pe-finite-coefficient-model-comparison",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "det-prop-integral-criterion-reductions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse image of this triangulated property under derived coefficient reduction followed by the fixed-module derived encoding. Bounded truncation devissage reduces membership to the degree-zero sheaf case, then transfer the result back to the quotient constant-model predicate.",
+   "uses": [
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-model-sheaf-quotient-constructible",
+  "lem-pe-finite-coefficient-model-comparison",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "det-prop-integral-criterion-reductions",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (1), finite reductions; constructibility is the finite-truncation extension of the scalar-model calculation; Z7 makes this substep explicit without changing the unit route. The positive-reduction theorem is proved; it introduces no hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a bounded constructible integral sheaf complex modulo a positive uniformizer power remains bounded constructible and commutes with ordinary direct image",
+   "results": "8 unrelated hits: BDeRhamPlus, BDeRham, localCohomology.diagram, localCohomology, localCohomology.ofSelfLERadical, localCohomology.ofDiagram, AdicCompletion.transitionMap_comp_reduceModIdeal, localCohomology.ringModIdeals",
+   "date": "2026-10-25",
+   "verdict": "No matching sheaf or derived comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"rightDerivedFunctor\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No matching reduction and direct-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer.*construct|reduction.*directImage|projectionFormula",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib declaration provides the geometric argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperReductionModel",
+  "date": "2026-10-25",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-direct-sums",
+   "place": "Proof (1), finite reductions; constructibility is the finite-truncation extension of the scalar-model calculation",
+   "via": [
+    "lem-sfb-integral-proper-reduction-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPositiveReductionConstructible",
+  "file": "lean/Sheaf/Paper/IntegralPositiveReductionConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralReduction_constantModelBoundedConstructible",
+  "statement": "theorem integralReduction_constantModelBoundedConstructible\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X]\n    (K : DerivedCategory (AdicCompletion.Modules l E X))\n    (hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K)\n    (n : ℕ) :\n    constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) X\n      ((AdicCompletion.derivedReduction l E X n).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T102047-L-3771843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T102047-L-3771843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

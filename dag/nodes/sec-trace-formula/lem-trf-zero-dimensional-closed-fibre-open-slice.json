@@ -1,0 +1,305 @@
+{
+ "id": "lem-trf-zero-dimensional-closed-fibre-open-slice",
+ "kind": "statement",
+ "title": "An open singleton-fibre neighbourhood at a zero-dimensional closed fibre point",
+ "statement": "Let $g:Y\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation]. Let $s\\in S$, let $y$ be a closed point [def-weil-closed-points] of the scheme-theoretic fibre $Y_s$ [def-pc-scheme-fibre], and suppose $\\dim\\mathcal O_{Y_s,y}=0$ [def-weil-pbc-krull-dimension-ring]. There is an open subscheme $j:V\\hookrightarrow Y$ [def-weil-open-immersion] containing the image of $y$, such that the fibre $V_s$ has exactly one point $v$, the induced map $V_s\\to Y_s$ sends $v$ to $y$, and $g\\circ j$ is locally quasi-finite [pqf-def-quasifinite] and locally of finite presentation. If $g$ is flat [def-weil-flat-morphism], then $g\\circ j$ is flat as well.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0570, label lemma-slice-CM, proof, case d=0: the open quasi-finite singleton-fibre neighbourhood; use local-ring dimension via Tag 00OU, algebra-lemma-dimension-closed-point-finite-type-field."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-points",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Write $x$ for the image of $y$ in $Y$, so $g(x)=s$. First $g$ is locally of finite type. Indeed, for any affine open $T\\subseteq S$, cover $g^{-1}(T)$ by affine opens $H$ using the affine-open basis. The affine finite-presentation criterion gives a presentation of $\\mathcal O_Y(H)$ over $\\mathcal O_S(T)$ with finitely many generators and relations. Forgetting the relations shows that it is a finitely generated algebra. This affine cover is exactly the locally finite type condition.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2); Tag 01T1, definition-finite-type."
+   }
+  },
+  {
+   "text": "Choose affine neighbourhoods $W=\\operatorname{Spec}A\\subseteq Y$ of $x$ and $T=\\operatorname{Spec}R\\subseteq S$ of $s$, with $g(W)\\subseteq T$ and $A$ finitely presented over $R$, as allowed by local finite presentation. Let $\\mathfrak q\\subset A$ and $\\mathfrak p\\subset R$ represent $x$ and $s$, respectively, and put $k=\\kappa(\\mathfrak p)$ and $F=k\\otimes_R A$. The affine-fibre-point lemma gives an open immersion $\\operatorname{Spec}F\\to Y_s$ onto the inverse image of $W$, and identifies $y$ with a prime $\\mathfrak Q\\subset F$ contracting to $\\mathfrak q$. It also gives that $F$ is a finite type $k$-algebra. Its hypotheses require only the finite presentation just chosen, not flatness.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-trf-affine-fibre-point-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR, lemma-open-fibre-product, and 01JQ, lemma-fibre-product-affines, in the affine-fibre construction used for Tag 0570, lemma-slice-CM, d=0."
+   }
+  },
+  {
+   "text": "The point $\\mathfrak Q$ is closed in $\\operatorname{Spec}F$, since $y$ is closed in $Y_s$ and the chart is an open subspace. Thus $\\mathfrak Q$ is maximal: the closure of a prime $\\mathfrak Q$ in the Zariski topology is the set of primes containing it, so a proper ideal strictly containing $\\mathfrak Q$ would be contained in a maximal prime giving another point of that closure. The affine-open stalk-localization theorem applied to this chart identifies $F_{\\mathfrak Q}$ with $\\mathcal O_{Y_s,y}$. A ring isomorphism identifies prime ideals and their strict inclusions, hence preserves ring Krull dimension, so $\\dim F_{\\mathfrak Q}=0$. Apply the closed-point dimension theorem over the field $k$ to the finite type algebra $F$ and its maximal ideal $\\mathfrak Q$: it gives $\\dim_{\\mathfrak Q}\\operatorname{Spec}F=\\dim F_{\\mathfrak Q}=0$.",
+   "uses": [
+    "def-weil-closed-points",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-closed-point-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OU, lemma-dimension-closed-point-finite-type-field; stalk identification: schemes.tex Tag 01HV, lemma-spec-sheaves, and Tag 01HF, example-open-subspace."
+   }
+  },
+  {
+   "text": "Use the algebra tensor universal property to form the maps $F\\to F'=A\\otimes_Rk$, $\\lambda\\otimes a\\mapsto a\\otimes\\lambda$, and $F'\\to F$, $a\\otimes\\lambda\\mapsto\\lambda\\otimes a$. Both composites fix the two factor inclusions, so uniqueness in that property makes them identities. Contravariant functoriality of the affine spectrum sends these inverse ring maps to inverse scheme morphisms, hence to a homeomorphism of spectra. If $\\sigma:F\\to F'$ is the swap, the corresponding prime in $F'$ is $\\sigma(\\mathfrak Q)$; its inverse image under $A\\to F'$, $a\\mapsto a\\otimes1$, is $\\mathfrak q$, since $\\sigma^{-1}(a\\otimes1)=1\\otimes a$. It is therefore the unique fibre prime $\\overline{\\mathfrak q}$ over $\\mathfrak q$ in the ring criterion. Let $h:\\operatorname{Spec}F\\to\\operatorname{Spec}F'$ be the homeomorphism sending $\\mathfrak Q$ to $\\overline{\\mathfrak q}$. The mutually inverse operations $N\\mapsto h(N)$ and $N'\\mapsto h^{-1}(N')$ give a bijection between their open neighbourhoods. On each pair $N,h(N)$ the restricted homeomorphism gives $\\dim N=\\dim h(N)$ by homeomorphism invariance of Krull dimension. Thus the two sets of neighbourhood dimensions agree; their minima, defining point dimension, agree as well, giving $\\dim_{\\overline{\\mathfrak q}}\\operatorname{Spec}F'=0$. The ring quasi-finiteness/zero-fibre-dimension criterion applies to $R\\to A$, which is finite type by its finite presentation. It makes $R\\to A$ quasi-finite at $\\mathfrak q$. The pair $W,T$ is therefore a witness that $g$ is quasi-finite at $x$ by the scheme definition.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, affine specialization; Tag 01TD, definition-quasi-finite; tensor convention from schemes.tex Tag 01I4, lemma-fibre-product-affine-schemes."
+   }
+  },
+  {
+   "text": "The quasi-finite-points-open theorem gives an open $U\\subseteq Y$ containing $x$ with $g|_U$ locally quasi-finite. Since $g$ is locally of finite type (step 1) and quasi-finite at $x$ (step 4), the isolated-fibre-point theorem gives that $\\{y\\}$ is open in $Y_s$. By the fibre-topology statement the projection $Y_s\\to Y$ is a homeomorphism onto the subspace $g^{-1}(s)$. Thus $\\{x\\}$ is open in $g^{-1}(s)$. By the definition of subspace topology there is an open $O\\subseteq Y$ with $O\\cap g^{-1}(s)=\\{x\\}$. Set $V=O\\cap U$, as an open subscheme of $Y$. Since $x\\in O\\cap U$, it lies in $V$. Conversely, any $z\\in V\\cap g^{-1}(s)$ lies in $O\\cap g^{-1}(s)=\\{x\\}$, so $z=x$. Thus $V\\cap g^{-1}(s)=\\{x\\}$.",
+   "uses": [
+    "lem-sc-quasi-finite-points-open",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "def-pc-scheme-fibre",
+    "def-kun-subspace-topology",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0570, lemma-slice-CM, proof d=0; morphisms.tex Tags 01TI, lemma-quasi-finite-points-open, and 01TH, lemma-quasi-finite-at-point-characterize; schemes.tex Tag 01K1, lemma-fibre-topological."
+   }
+  },
+  {
+   "text": "Let $j:V\\hookrightarrow Y$ be the open inclusion. Apply restriction of a locally quasi-finite morphism to $g|_U$, with source open $V\\subseteq U$ and target open all of $S$; it gives that $g\\circ j$ is locally quasi-finite. The fibre-topology statement for $g\\circ j$ identifies $|V_s|$ with $V\\cap g^{-1}(s)=\\{x\\}$, so $V_s$ has exactly one point $v$. Write $p_V:V_s\\to V$ and $r_V:V_s\\to\\operatorname{Spec}\\kappa(s)$ for its projections. The maps $j\\circ p_V$ and $r_V$ have equal composites to $S$, by the defining fibre square for $g\\circ j$. Thus the fibre-product universal property defining $Y_s$ gives the induced map $h:V_s\\to Y_s$ with $p_Y\\circ h=j\\circ p_V$, where $p_Y:Y_s\\to Y$ is the first projection. Consequently $p_Y(h(v))=x=p_Y(y)$. The fibre-topology statement makes $p_Y$ injective, so $h(v)=y$.",
+   "uses": [
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TH, lemma-quasi-finite-at-point-characterize, (4), local nature of local quasi-finiteness; schemes.tex Tag 01K1, lemma-fibre-topological."
+   }
+  },
+  {
+   "text": "For any $z\\in V$, choose an affine open $T_z\\subseteq S$ containing $g(z)$ and an affine open $H_z\\subseteq V\\cap g^{-1}(T_z)$ containing $z$, using the affine-open basis. Since $V$ is open in $Y$ with restricted structure sheaf, $H_z$ is also an affine open of $Y$. The affine finite-presentation criterion for $g$ makes $\\mathcal O_S(T_z)\\to\\mathcal O_Y(H_z)=\\mathcal O_V(H_z)$ finitely presented. The section map for $g\\circ j$ on this pair of charts is the same ring map: $j$ restricts sections to $H_z$, and $\\mathcal O_V(H_z)=\\mathcal O_Y(H_z)$ with identical restrictions. These charts therefore witness that $g\\circ j$ is locally of finite presentation. Finally, if $g$ is flat, the neighbourhoods of $z$ contained in $V$ are cofinal among its neighbourhoods in $Y$: intersect any neighbourhood with $V$. On those opens the structure sheaves and their restriction maps agree, so their stalk colimits identify $\\mathcal O_{V,z}$ with $\\mathcal O_{Y,z}$ and identify the structural maps from $\\mathcal O_{S,g(z)}$. Their flatness is therefore the same, giving flatness of $g\\circ j$ at every $z\\in V$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, source-open restriction; Tag 01U3, definition-flat; schemes.tex Tag 01HF, example-open-subspace."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology",
+  "def-kun-topological-dimension-at-point",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-points",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "lem-sc-quasi-finite-points-open",
+  "lem-trf-affine-fibre-point-dimension",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0570, lemma-slice-CM, proof case d=0; conversion of closed fibre local-ring dimension by algebra.tex Tag 00OU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(exists|singleton|isolated).*(LocallyQuasiFinite|quasiFinite)|quasiFinite.*(exists|singleton|isolated)",
+   "results": "{\"t\": \"2026-10-22T06:46:48Z\", \"tool\": \"grep\", \"query\": \"(exists|singleton|isolated).*(LocallyQuasiFinite|quasiFinite)|quasiFinite.*(exists|singleton|isolated)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"3cd5d439a9f7b566\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isolated-fibre, open-immersion and quasi-finiteness declarations are constituent tools; none combines the closed zero-dimensional fibre-local-ring hypothesis with an open singleton-fibre locally quasi-finite neighbourhood and restriction properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-22T06:46:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion\", \"AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType\"], \"digest\": \"5437913a9dbc3611\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isolated-fibre, open-immersion and quasi-finiteness declarations are constituent tools; none combines the closed zero-dimensional fibre-local-ring hypothesis with an open singleton-fibre locally quasi-finite neighbourhood and restriction properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented scheme morphism at a closed fibre point with zero dimensional local ring has an open neighbourhood whose fibre is a singleton and which is locally quasi finite",
+   "results": "{\"t\": \"2026-10-22T06:46:58Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented scheme morphism at a closed fibre point with zero dimensional local ring has an open neighbourhood whose fibre is a singleton and which is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\"], \"digest\": \"370972594ee1a0dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isolated-fibre, open-immersion and quasi-finiteness declarations are constituent tools; none combines the closed zero-dimensional fibre-local-ring hypothesis with an open singleton-fibre locally quasi-finite neighbourhood and restriction properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional closed fibre point has a singleton fibre open neighbourhood with locally quasi finite structure morphism",
+   "results": "{\"t\": \"2026-10-22T06:47:27Z\", \"tool\": \"leansearch\", \"query\": \"A zero dimensional closed fibre point has a singleton fibre open neighbourhood with locally quasi finite structure morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"Algebra.QuasiFinite.isDiscrete_comap_preimage_singleton\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.LocallyQuasiFinite.casesOn\"], \"digest\": \"092c8ecad9aa8bba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isolated-fibre, open-immersion and quasi-finiteness declarations are constituent tools; none combines the closed zero-dimensional fibre-local-ring hypothesis with an open singleton-fibre locally quasi-finite neighbourhood and restriction properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a zero dimensional closed point of a scheme fibre restrict to the open quasi finite locus and isolate that fibre point in an open subscheme",
+   "results": "{\"t\": \"2026-10-22T06:47:38Z\", \"tool\": \"leanfinder\", \"query\": \"At a zero dimensional closed point of a scheme fibre restrict to the open quasi finite locus and isolate that fibre point in an open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.asFiber\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint\", \"AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.fiber\"], \"digest\": \"b343330b6141075a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isolated-fibre, open-immersion and quasi-finiteness declarations are constituent tools; none combines the closed zero-dimensional fibre-local-ring hypothesis with an open singleton-fibre locally quasi-finite neighbourhood and restriction properties"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt_iff_isOpen_singleton_asFiber|quasiFiniteAt.*(isOpen|zero|ringKrullDim)|ringKrullDim_quotSMulTop_succ_eq_ringKrullDim|instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion",
+   "results": "{\"t\": \"2026-10-22T06:47:58Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt_iff_isOpen_singleton_asFiber|quasiFiniteAt.*(isOpen|zero|ringKrullDim)|ringKrullDim_quotSMulTop_succ_eq_ringKrullDim|instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"5039451141728b18\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isolated-fibre, open-immersion and quasi-finiteness declarations are constituent tools; none combines the closed zero-dimensional fibre-local-ring hypothesis with an open singleton-fibre locally quasi-finite neighbourhood and restriction properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented morphism of schemes has an open singleton fibre quasi finite neighbourhood at a closed fibre point with zero dimensional local ring",
+   "results": "{\"t\": \"2026-10-23T17:38:26Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented morphism of schemes has an open singleton fibre quasi finite neighbourhood at a closed fibre point with zero dimensional local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"a15d1bf68c3b1e7b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply constituent fibre, quasi-finiteness, restriction, and finite-presentation tools, not the complete open singleton-fibre neighbourhood statement under the stated local-ring hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "(exists|singleton|isolated).*(LocallyQuasiFinite|quasiFinite)|quasiFinite.*(exists|singleton|isolated)",
+   "results": "{\"t\": \"2026-10-23T17:38:52Z\", \"tool\": \"grep\", \"query\": \"(exists|singleton|isolated).*(LocallyQuasiFinite|quasiFinite)|quasiFinite.*(exists|singleton|isolated)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"c8f61859daa3ff48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply constituent fibre, quasi-finiteness, restriction, and finite-presentation tools, not the complete open singleton-fibre neighbourhood statement under the stated local-ring hypothesis"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-23T17:38:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion\", \"AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType\"], \"digest\": \"5437913a9dbc3611\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply constituent fibre, quasi-finiteness, restriction, and finite-presentation tools, not the complete open singleton-fibre neighbourhood statement under the stated local-ring hypothesis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional closed fibre point has a singleton fibre open neighbourhood with locally quasi finite structure morphism",
+   "results": "{\"t\": \"2026-10-23T17:39:21Z\", \"tool\": \"leansearch\", \"query\": \"A zero dimensional closed fibre point has a singleton fibre open neighbourhood with locally quasi finite structure morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"Algebra.QuasiFinite.isDiscrete_comap_preimage_singleton\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.LocallyQuasiFinite.casesOn\"], \"digest\": \"092c8ecad9aa8bba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply constituent fibre, quasi-finiteness, restriction, and finite-presentation tools, not the complete open singleton-fibre neighbourhood statement under the stated local-ring hypothesis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isolated closed point in a scheme fibre zero dimensional stalk ring open quasi finite locus restriction",
+   "results": "{\"t\": \"2026-10-23T17:39:23Z\", \"tool\": \"leanfinder\", \"query\": \"Isolated closed point in a scheme fibre zero dimensional stalk ring open quasi finite locus restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\"], \"digest\": \"75ef5557e87cc777\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply constituent fibre, quasi-finiteness, restriction, and finite-presentation tools, not the complete open singleton-fibre neighbourhood statement under the stated local-ring hypothesis"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cm-closed-point-flat-quasifinite-slice",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). In the proof of 055W: the application of 0570 producing Z mapping to Y, flat locally finitely presented and locally quasi-finite over S, with singleton designated fibre. More precisely: Tag 0570, label lemma-slice-CM, proof, case d=0: the open quasi-finite singleton-fibre neighbourhood; use local-ring dimension via Tag 00OU, algebra-lemma-dimension-closed-point-finite-type-field.",
+   "via": [
+    "lem-trf-cm-closed-point-flat-quasifinite-slice",
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-zero-dimensional-closed-fibre-open-slice",
+  "worker": "stage1",
+  "summary": "Q77 repaired the landing return against the current live unsplit DAG node, preserving all current metadata, the seven-step source proof, and the retained logged searches. All 21 current cited statements were reread and all 28 quotations checked verbatim; no cited assertion changed. Step 7 now explicitly identifies the section map for the composed open restriction with the finitely presented chart map, in addition to the stalk-map verification of optional flatness. No new nodes or Mathlib leaves.",
+  "blueprint": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). In the proof of 055W: the application of 0570 producing Z mapping to Y, flat locally finitely presented and locally quasi-finite over S, with singleton designated fibre. More precisely: Tag 0570, label lemma-slice-CM, proof, case d=0: the open quasi-finite singleton-fibre neighbourhood; use local-ring dimension via Tag 00OU, algebra-lemma-dimension-closed-point-finite-type-field. Steps 1-4 justify quasi-finiteness at the designated zero-dimensional closed fibre point; steps 5-7 realize the open singleton-fibre neighbourhood and its restriction properties in the 0570 d=0 ingredient.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-point-dimension-local-ring",
+    "why": "Converts the closed fibre point local-ring dimension into affine topological point dimension (00OU); the unit has no substitute for this general commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "why": "General affine quasi-finiteness criterion (0397) used on the finite-presentation chart; no node of the item unit states this ring criterion."
+   },
+   {
+    "node": "lem-sc-quasi-finite-points-open",
+    "why": "General openness of the quasi-finite locus (01TI), exactly the tool invoked in the d=0 paragraph of 0570; the unit has no such openness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "General scheme pointwise quasi-finiteness implies isolated fibre point (01TH); the unit has no pointwise isolated-fibre criterion."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "General source-open restriction of locally quasi-finite maps, needed for the final shrinking and not stated by the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-sc-quasi-finite-points-open",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-lqf-restriction-to-opens"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-711754c1b",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-711754c1b (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps in full, every one of the 21 proof_deps and 8 stmt_deps statements, Stacks 0570 (lemma-slice-CM, proof case d=0, more-morphisms.tex lines 6383-6398) and 00OU (algebra.tex line 27855). The statement is the 0570 d=0 ingredient: 'y closed in Y_s with dim O_{Y_s,y}=0' is equivalent to dim_x(X_s)=0 by 00OU, and closedness is essential (the generic point of A^1 is excluded). Step 1 derives lft from lfp. Step 2 cites lem-trf-affine-fibre-point-dimension for the open chart Spec(k⊗_R A) and the prime Q over q. Step 3 shows Q is maximal, F_Q ≅ O_{Y_s,y} by 01HV(c), and dim_Q Spec F = 0 by 00OU. Step 4 swaps the tensor order, transports point dimension along the homeomorphism, and applies the 0397 ring criterion, giving the pqf-def (1) witness. Step 5 uses 01TI for U and 01TH (with lft) to isolate x, with V=O∩U. Step 6 applies lqf restriction, and p_Y injective gives h(v)=y. Step 7 gives lfp on affine H_z inside V with the same section map, and flatness through equal stalks only when g is flat. Edge cases checked: k[ε]/ε², point ⊔ A^1, a non-rational point, a non-flat g, a non-Noetherian S. There are 0 new nodes, no duplicate, no cycle, no SGA citation. Live and side-live still have the item unsplit. The only change from the PASSed head e9d3 is one correct extra sentence in step 7 (section-map identification). Batch-5 flag: lem-trf-affine-fibre-point-dimension is the generic 01JQ/01JR affine-fibre chart lemma; its 109-node closure contains no other trace-formula or Poincaré-duality node and it is not a step of either assumed proof, so it is genuinely outside the assumptions and not a RETURN. The five generic tool_uses are accepted (00OU, 0397, 01TI, 01TH, lqf restriction). Maintainer note: this is the 8th head with a substance PASS after promotion refusals; it needs promotion, not another re-delivery."
+ }
+}

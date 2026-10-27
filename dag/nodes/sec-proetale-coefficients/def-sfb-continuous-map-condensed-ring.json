@@ -206,7 +206,43 @@
   "existing": false,
   "note": "Universe generalization of the published ContinuousMap construction, whose coefficient binder is T : Type (universe zero). Here T : Type v and Profinite.{u} have independent universes; sections are canonically lifted to max u v + 1. No extra topological or ring hypothesis. The actual underlying abelian sheaf receives the recorded RingPresheaf counit-transport MonObj, for the recorded sfbSheafTensorStructure. The already landed sk-def-sfb-sheaf-tensor was added to stmt_deps for this explicit tensor interface. At v = 0, presheaf, sheaf and underlying abelian sheaf are definitionally the published upstream constructions, checked in a compiled scratch consumer. No existing declaration or dependency node was modified."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Profinite.continuousMapRingSheaf",
+    "Profinite.continuousMapRingObj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Profinite.continuousMapRingSheaf",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap",
+     "lines": [
+      125,
+      130
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Profinite.continuousMapRingObj",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap",
+     "lines": [
+      136,
+      141
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
@@ -216,5 +252,44 @@
   "landing": "20261018T142716-L-3300806",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $*_{\\mathrm{proét}}$ be the category of profinite sets with the coherent topology, and\nlet $T$ be a topological ring. The presheaf of rings\n\n$$\n\\underline T(S):=C(S,T),\\qquad \\underline T(S)\\to\\underline T(S'),\\ a\\mapsto a\\circ u\n\\quad(u\\colon S'\\to S),\n$$\n\nwith the pointwise ring operations, is a sheaf of rings on $*_{\\mathrm{proét}}$. This is\nthe condensed ring $\\underline T$. Its underlying abelian sheaf, with the ring object\nstructure of [det-def-sfb-ring-object], is a ring object of $\\Sh(*_{\\mathrm{proét}},\\Ab)$,\nand this ring object is commutative when $T$ is.",
+  "proof": [
+   {
+    "text": "The functions $C(S,T)$ form a ring under pointwise operations, because $T$ is a\ntopological ring. Precomposition is a ring homomorphism and is strictly functorial, so\n$\\underline T$ is a presheaf of rings. The forgetful functor from rings to sets preserves\nand reflects limits. So it suffices that the presheaf of sets $S\\mapsto C(S,T)$ is a\nsheaf.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Profinite sets have finite disjoint coproducts, and their effective epimorphisms are the\ncontinuous surjections. Hence a presheaf is a sheaf for the coherent topology if and only\nif both of the following hold:",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "- (a) it takes finite coproducts to products;\n- (b) for every continuous surjection $q\\colon S'\\to S$ it satisfies the equalizer\n  condition $F(S)\\to F(S')\\rightrightarrows F(S'\\times_SS')$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(a) holds because a finite disjoint union of profinite sets is a union of clopen pieces,\nso a map out of it is continuous exactly when it is continuous on each piece. For (b), let\n$b\\in C(S',T)$ agree on both projections from $S'\\times_SS'$, i.e. let $b$ be constant on\nthe fibres of $q$. Then $b=a\\circ q$ for a unique map of sets $a\\colon S\\to T$, unique\nbecause $q$ is surjective. Now $q$ is a continuous surjection from a compact space onto a\nHausdorff space, so it is closed and hence a quotient map. Therefore $a$ is continuous.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "By part 3 of [det-def-sfb-ring-object], the underlying abelian sheaf of the sheaf of rings\n$\\underline T$ is a ring object. It is commutative when all the rings $C(S,T)$ are, which\nholds when $T$ is commutative.",
+    "uses": [
+     "det-def-sfb-ring-object"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,397 @@
+{
+ "id": "lem-trf-tate-gauss-multiplicative",
+ "kind": "statement",
+ "title": "Multiplicativity of the Tate Gauss norm",
+ "statement": "Let $K$ be a field [def-weil-field] with a real-valued multiplicative nonarchimedean absolute value. For $r\\ge0$ let $T_r=K\\langle X_1,\\ldots,X_r\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation], so its coefficient families tend to zero in the cofinite filter. Equip it with $\\|\\sum_\\nu c_\\nu X^\\nu\\|_G=\\sup_\\nu|c_\\nu|$. For all $f,g\\in T_r$, one has $\\|fg\\|_G=\\|f\\|_G\\|g\\|_G$. The multiplication is the Cauchy product. The case $r=0$, either zero factor, and trivial absolute values are included; completeness is not required.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "the Gauss-norm discussion preceding Proposition 3, printed pp.8-9 (PDF pp.9-10) Primary PDF read online by Q02 on 2026-10-24; local archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Write $f=\\sum c_\\nu X^\\nu$ and $g=\\sum d_\\nu X^\\nu$. By [def-trf-restricted-series-presentation], for every $\\epsilon>0$ each coefficient family has only finitely many entries of absolute value at least $\\epsilon$, and the product coefficient at $\\gamma$ is $h_\\gamma=\\sum_{u+v=\\gamma}c_ud_v$. This sum is finite: each coordinate of $u$ lies between $0$ and the corresponding coordinate of $\\gamma$, and $v=\\gamma-u$. If either series is zero then every product coefficient is zero and the required equality is $0=0$. Henceforth assume both series nonzero.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Section 1.2, Gauss-norm discussion preceding Proposition 3, printed pp.8-9 (PDF pp.9-10); independent coefficient proof by Q31 replacing the residue-polynomial argument."
+   }
+  },
+  {
+   "text": "For a nonzero coefficient family choose $c_{\\nu_0}\\ne0$ and put $t=|c_{\\nu_0}|>0$. The set $E=\\{\\nu:|c_\\nu|\\ge t\\}$ is finite and nonempty by [def-trf-restricted-series-presentation]. Take the largest value $A$ on $E$. Every entry outside $E$ is less than $t\\le A$, so $A$ is the supremum of all coefficient absolute values and is attained. Its set of attaining indices is a nonempty finite subset of $E$. Do the same for $g$, obtaining $B>0$. Thus $A=\\|f\\|_G$, $B=\\|g\\|_G$, and their attaining sets are finite.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Section 1.2, Gauss-norm discussion preceding Proposition 3, printed pp.8-9 (PDF pp.9-10); independent coefficient proof by Q31 replacing the residue-polynomial argument."
+   }
+  },
+  {
+   "text": "For every $\\gamma$, the finite set of decompositions $u+v=\\gamma$ is nonempty (it contains $(0,\\gamma)$). Multiplicativity of the absolute value gives $|c_ud_v|=|c_u||d_v|\\le AB$. Apply the first clause of [lem-trf-nonarchimedean-finite-sums] to the additive group of $K$ and $N=|\\cdot|$; the strong triangle inequality and $|-x|=|x|$ hold for the stated absolute value. Hence $|h_\\gamma|\\le AB$. Taking the supremum proves $\\|fg\\|_G\\le AB$ and also bounds that supremum without assuming completeness.",
+   "uses": [
+    "lem-trf-nonarchimedean-finite-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Section 1.2, Gauss-norm discussion preceding Proposition 3, printed pp.8-9 (PDF pp.9-10); independent coefficient proof by Q31 replacing the residue-polynomial argument."
+   }
+  },
+  {
+   "text": "Order $\\mathbf N^r$ lexicographically, and take the largest indices $i,j$ in the finite attaining sets for $f,g$. Suppose $u+v=i+j$ and both $|c_u|=A$, $|d_v|=B$. Maximality gives $u\\le i$ and $v\\le j$ lexicographically. If $u<i$, at the first differing coordinate all earlier coordinates of $u,i$ agree and $u_k<i_k$; the sum equation gives all earlier coordinates of $v,j$ equal and $v_k>j_k$, contradicting $v\\le j$. Thus $u=i$, and the sum equation forces $v=j$. Every other decomposition therefore has $|c_u|<A$ or $|d_v|<B$, and, since $A,B>0$, has $|c_ud_v|<AB=|c_id_j|$. For $r=0$ the index set has one empty tuple and there is no other decomposition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Section 1.2, Gauss-norm discussion preceding Proposition 3, printed pp.8-9 (PDF pp.9-10); independent coefficient proof by Q31 replacing the residue-polynomial argument."
+   }
+  },
+  {
+   "text": "Apply the second clause of [lem-trf-nonarchimedean-finite-sums] to the finite Cauchy sum $h_{i+j}=\\sum_{u+v=i+j}c_ud_v$, with distinguished pair $(i,j)$. Step 4 verifies every strict inequality required by that clause, and the absolute value verifies the same group hypotheses as in step 3. It follows that $|h_{i+j}|=|c_id_j|=AB$. Since a coefficient is bounded above by the supremum of all product coefficients, $AB\\le\\|fg\\|_G$. Together with step 3 this is the asserted equality. Trivial absolute values cause no change: restricted families then have finite support, and the same maximal-index argument applies.",
+   "uses": [
+    "lem-trf-nonarchimedean-finite-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Section 1.2, Gauss-norm discussion preceding Proposition 3, printed pp.8-9 (PDF pp.9-10); independent coefficient proof by Q31 replacing the residue-polynomial argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-restricted-series-presentation",
+  "lem-trf-nonarchimedean-finite-sums"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.2, printed pp.8-9; statement read online. Independent maximal-coefficient proof by Q31; local archival PDF unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For two strictly convergent multivariable power series over an absolute valued nonarchimedean field the Gauss norm of their product equals the product of their Gauss norms",
+   "results": {
+    "t": "2026-10-24T09:10:53Z",
+    "tool": "leanfinder",
+    "query": "For two strictly convergent multivariable power series over an absolute valued nonarchimedean field the Gauss norm of their product equals the product of their Gauss norms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.IsRestricted.mul",
+     "PowerSeries.gaussNorm",
+     "PowerSeries.gaussNorm_monomial",
+     "PowerSeries.le_gaussNorm",
+     "Polynomial.gaussNorm_coe_powerSeries",
+     "PadicSeq.norm_mul",
+     "PowerSeries.gaussNorm_C",
+     "HasFPowerSeriesOnBall.prod"
+    ],
+    "digest": "0d7ecbe96342aee0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: GaussNorm.lean:241-263 requires hdom, a uniquely dominant summand in a chosen coefficient of the product. Restrictedness alone is not that hypothesis; producing such indices is a separate argument. Polynomial.gaussNorm_mul only treats one-variable polynomials. Restricted.mul proves closure, not norm equality. No one-line specialization covers all restricted multivariate series."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Gauss norm on a Tate algebra is multiplicative",
+   "results": {
+    "t": "2026-10-24T09:10:49Z",
+    "tool": "leansearch",
+    "query": "The Gauss norm on a Tate algebra is multiplicative",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NormedDivisionRing.norm_mul",
+     "PowerSeries.gaussNorm",
+     "NormedField.norm_mul",
+     "NormMulClass.norm_mul",
+     "Polynomial.gaussNorm",
+     "MulAlgebraNormClass.map_smul_eq_mul",
+     "norm_mul",
+     "Polynomial.gaussNorm_monomial"
+    ],
+    "digest": "7d40191c2ee96161"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: GaussNorm.lean:241-263 requires hdom, a uniquely dominant summand in a chosen coefficient of the product. Restrictedness alone is not that hypothesis; producing such indices is a separate argument. Polynomial.gaussNorm_mul only treats one-variable polynomials. Restricted.mul proves closure, not norm equality. No one-line specialization covers all restricted multivariate series."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm_mul_eq_mul\"",
+   "results": {
+    "t": "2026-10-24T09:10:49Z",
+    "tool": "loogle",
+    "query": "\"gaussNorm_mul_eq_mul\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "MvPowerSeries.gaussNorm_mul_eq_mul"
+    ],
+    "digest": "c08ec68c653a2787"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: GaussNorm.lean:241-263 requires hdom, a uniquely dominant summand in a chosen coefficient of the product. Restrictedness alone is not that hypothesis; producing such indices is a separate argument. Polynomial.gaussNorm_mul only treats one-variable polynomials. Restricted.mul proves closure, not norm equality. No one-line specialization covers all restricted multivariate series."
+  },
+  {
+   "tool": "grep",
+   "query": "gaussNorm_mul|isUnit_iff|isUnit_one_sub",
+   "results": {
+    "t": "2026-10-24T09:01:37Z",
+    "tool": "grep",
+    "query": "gaussNorm_mul|isUnit_iff|isUnit_one_sub",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Inverse.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Inverse.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Inverse.lean"
+    ],
+    "digest": "ad20eea1a5282546"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: GaussNorm.lean:241-263 requires hdom, a uniquely dominant summand in a chosen coefficient of the product. Restrictedness alone is not that hypothesis; producing such indices is a separate argument. Polynomial.gaussNorm_mul only treats one-variable polynomials. Restricted.mul proves closure, not norm equality. No one-line specialization covers all restricted multivariate series."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Gauss norm on a Tate algebra is attained and multiplicative and coefficient reduction of its unit ball has kernel the open unit ball",
+   "results": {
+    "t": "2026-10-24T09:05:09Z",
+    "tool": "leanfinder",
+    "query": "The Gauss norm on a Tate algebra is attained and multiplicative and coefficient reduction of its unit ball has kernel the open unit ball",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.gaussNorm",
+     "Polynomial.gaussNorm_intAdicAbv_le_one",
+     "Polynomial.gaussNorm_coe_powerSeries",
+     "PowerSeries.le_gaussNorm",
+     "Polynomial.exists_eq_gaussNorm",
+     "spectralMulAlgNorm",
+     "PowerSeries.gaussNorm_C",
+     "PowerSeries.gaussNorm_monomial"
+    ],
+    "digest": "1214d465c15e9558"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: GaussNorm.lean:241-263 requires hdom, a uniquely dominant summand in a chosen coefficient of the product. Restrictedness alone is not that hypothesis; producing such indices is a separate argument. Polynomial.gaussNorm_mul only treats one-variable polynomials. Restricted.mul proves closure, not norm equality. No one-line specialization covers all restricted multivariate series."
+  },
+  {
+   "tool": "grep",
+   "query": "gaussNorm_mul|antidiagonal_dominant|IsRestricted",
+   "results": {
+    "t": "2026-10-24T09:33:24Z",
+    "tool": "grep",
+    "query": "gaussNorm_mul|antidiagonal_dominant|IsRestricted",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean"
+    ],
+    "digest": "e0e88b74e44151de"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: local MvPowerSeries/GaussNorm.lean:241-253 requires an existential uniquely dominant Cauchy summand. Restrictedness is not that hypothesis; steps 2 and 4 supply it by finite maxima and lexicographic tie-breaking. Polynomial.gaussNorm results apply only to polynomials; Restricted.mul proves closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplicativity of the supremum coefficient norm for strictly convergent power series in finitely many variables",
+   "results": {
+    "t": "2026-10-24T09:33:24Z",
+    "tool": "leansearch",
+    "query": "Multiplicativity of the supremum coefficient norm for strictly convergent power series in finitely many variables",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPowerSeries.instMul",
+     "MvPowerSeries.WithPiTopology.uniformContinuous_coeff",
+     "FormalMultilinearSeries.summable_norm_mul_pow",
+     "MvPowerSeries.hasSum_aeval",
+     "PowerSeries.gaussNorm",
+     "FormalMultilinearSeries.le_radius_pi",
+     "FormalMultilinearSeries.norm_apply_eq_norm_coef",
+     "PowerSeries.IsRestricted.mul"
+    ],
+    "digest": "a6bbfca3c1b83be2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: local MvPowerSeries/GaussNorm.lean:241-253 requires an existential uniquely dominant Cauchy summand. Restrictedness is not that hypothesis; steps 2 and 4 supply it by finite maxima and lexicographic tie-breaking. Polynomial.gaussNorm results apply only to polynomials; Restricted.mul proves closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm_mul_eq_mul\"",
+   "results": {
+    "t": "2026-10-24T09:33:24Z",
+    "tool": "loogle",
+    "query": "\"gaussNorm_mul_eq_mul\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "MvPowerSeries.gaussNorm_mul_eq_mul"
+    ],
+    "digest": "c08ec68c653a2787"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: local MvPowerSeries/GaussNorm.lean:241-253 requires an existential uniquely dominant Cauchy summand. Restrictedness is not that hypothesis; steps 2 and 4 supply it by finite maxima and lexicographic tie-breaking. Polynomial.gaussNorm results apply only to polynomials; Restricted.mul proves closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Gauss norm on multivariate restricted power series over a nonarchimedean absolute valued field is multiplicative",
+   "results": {
+    "t": "2026-10-24T09:33:25Z",
+    "tool": "leanfinder",
+    "query": "The Gauss norm on multivariate restricted power series over a nonarchimedean absolute valued field is multiplicative",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.gaussNorm_monomial",
+     "PowerSeries.gaussNorm",
+     "PowerSeries.IsRestricted.mul",
+     "Polynomial.gaussNorm_coe_powerSeries",
+     "PowerSeries.gaussNorm_C",
+     "PowerSeries.gaussNorm_zero",
+     "PowerSeries.le_gaussNorm",
+     "PowerSeries.gaussNorm_nonneg"
+    ],
+    "digest": "9a79c39ff7ac5325"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: local MvPowerSeries/GaussNorm.lean:241-253 requires an existential uniquely dominant Cauchy summand. Restrictedness is not that hypothesis; steps 2 and 4 supply it by finite maxima and lexicographic tie-breaking. Polynomial.gaussNorm results apply only to polynomials; Restricted.mul proves closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicativity of the Gauss norm of bounded power series with lexicographically maximal norm attaining coefficients",
+   "results": {
+    "t": "2026-10-24T09:40:02Z",
+    "tool": "leanfinder",
+    "query": "Multiplicativity of the Gauss norm of bounded power series with lexicographically maximal norm attaining coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.le_gaussNorm",
+     "PowerSeries.IsRestricted.mul",
+     "PowerSeries.gaussNorm_monomial",
+     "PowerSeries.gaussNorm",
+     "Polynomial.gaussNorm_coe_powerSeries",
+     "Polynomial.exists_eq_gaussNorm",
+     "Polynomial.gaussNorm_monomial",
+     "Polynomial.gaussNorm"
+    ],
+    "digest": "4131d0d2f12b28bf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: local MvPowerSeries/GaussNorm.lean:241-253 requires an existential uniquely dominant Cauchy summand. Restrictedness is not that hypothesis; steps 2 and 4 supply it by finite maxima and lexicographic tie-breaking. Polynomial.gaussNorm results apply only to polynomials; Restricted.mul proves closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-unit-coefficient-criterion",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Power-bounded elements are integral over a presentation unit ball. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic input: Supremum seminorm estimates on affinoid algebras. The unit criterion used to construct a maximal point of the auxiliary hypersurface 1-Yf=0 in the proof of the Tate Gauss/supremum comparison. Bosch Section 1.2, the Gauss-norm discussion preceding Proposition 3, printed pp.8-9 (PDF pp.9-10); prerequisite of the unit-criterion argument.",
+   "via": [
+    "lem-trf-tate-unit-coefficient-criterion",
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-trf-affinoid-powerbounded-integral",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-gauss-multiplicative",
+  "worker": "stage1",
+  "summary": "Preserved the full statement including incomplete and trivially valued fields. Gave a five-step coefficient proof: finite maximum attainment, finite-sum upper estimate, lexicographic uniqueness and dominant-sum lower estimate. Added one two-clause Mathlib leaf for nonarchimedean finite sums, with all search kinds logged and pinned declarations read. No Lean declaration states this item.",
+  "blueprint": "Historical analytic supporting input under lem-trf-local-term-locality via the inherited Temkin normalization ancestry, specifically Bosch Section 1.2 Gauss multiplicativity needed by the Tate unit criterion. The current contracting-correspondence unit proof is untouched."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-b58d58ab6",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-b58d58ab6 (reviewer sub-agent of L); spot-checked: Read the item, the new leaf, def-trf-restricted-series-presentation, def-weil-field, the parent lem-trf-tate-unit-coefficient-criterion and the pinned Mathlib source. Item statement unchanged and true: Gauss multiplicativity needs no completeness because every Cauchy coefficient is a finite sum. Step 1: cofinite decay from the def node; the antidiagonal sum is finite; a zero factor gives 0=0. Step 2: the norm is attained on the finite set E={|c|>=t}, with t>0 by definiteness. Step 3: leaf clause 1 gives ||fg||<=AB. Step 4: the lexicographic-maximal attaining pair (i,j) is the only antidiagonal pair at maximal norm; I checked the first-differing-coordinate argument, and the strict inequality uses A,B>0. Step 5: leaf clause 2 on antidiagonal(i+j) gives |h_{i+j}|=AB. proof_deps equals the union of uses; no circularity. Small cases: (1+X)(1-X), characteristic 2 (1+X)^2, r=0, trivial absolute value, zero factor. New leaf lem-trf-nonarchimedean-finite-sums: IsNonarchimedean.apply_sum_le_sup at IsNonarchimedean.lean:134 and apply_sum_eq_of_lt at :227 (AddCommGroup, f(-a)=f a, strict dominance) specialize in one line with alpha=K, R=real numbers. It is generic, not a clause of the item; searches recorded; blueprint from/via/same_as correct; no existing duplicate found by rg -L over dag/nodes. No existing node states Gauss multiplicativity (gauss-completion has only submultiplicativity). Minor slip, not fixed: the leaf's source.place says 'line 29' where the variable line is 27; mathlib_match lines are correct. Bosch is absent from literature/; the proof is honestly marked proof_origin agent and is self-contained. Route: only definitions and a Mathlib leaf, so no tool_uses needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateGaussMultiplicative",
+  "declaration": "RestrictedSeries.gaussNorm_mul",
+  "file": "lean/Sheaf/RingTheory/TateGaussMultiplicative.lean",
+  "statement": "theorem gaussNorm_mul (K : Type u) [NormedField K] [IsUltrametricDist K] (r : ℕ) (f g : MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) : MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (f * g).val = MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) f.val * MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) g.val",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-066797071",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Read node, both stmt_deps, Mathlib Restricted.lean:33/107 and GaussNorm.lean:55, the module and the report. NormedField + IsUltrametricDist is exactly a field with a real multiplicative nonarchimedean absolute value; no completeness and no nontriviality assumption. Factors are in IsRestricted.subring at radius 1, the same subring def-trf-restricted-series-presentation uses. gaussNorm(norm, 1) is the coefficient sup (true sup since restricted series are bounded). Conclusion is exactly ‖fg‖=‖f‖‖g‖ for all f, g. Edge cases r=0, zero factor, trivial absolute value, incomplete K, any characteristic and universe u covered. Mathlib gaussNorm_mul_eq_mul needs a single-dominant-term hypothesis so it is not a match; no project duplicate. Node differs from side-live only by lean; statement verbatim; docstrings carry the source place, blueprint id and 5-step plan; only sorry; report has Worker report + Second reading by Q75. Not landed elsewhere. No compile (no change made). Advisory only: docstring step 4 condenses the node's lexicographic argument but agrees with it."
+ }
+}

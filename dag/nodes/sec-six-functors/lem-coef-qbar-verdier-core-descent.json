@@ -1,0 +1,166 @@
+{
+ "id": "lem-coef-qbar-verdier-core-descent",
+ "kind": "lemma",
+ "title": "Descent of coherent Verdier duality and evaluation before retract restriction",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, an algebraic closure Omega of Q_l in an independent universe, and a separated finite-type D.k-scheme X. Use the raw finite rational categories and the actual common-stage category of [def-sf-common-stage-verdier-data]. There exists DualityData B with the following core equations: its finite beta maps are coherent for the actual unit and associator; its dual is additive and Omega-linear; the Omega action on included finite maps is the specified coefficient embedding; its dual retains the literal original coefficient stage and its inclusion comparison has identity components; the scalar comparison square and evaluation-defined biduality descent hold; its omega comparisons commute with the finite dualizing u maps; its evaluation is the included finite evaluation through the canonical tensor comparison and duality comparison; and evaluation is natural in its contravariant argument. These are CoreProperties. For any such B, the three additional split-retract formulas of DualityProperties follow, so B canonically completes to a Duality.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transport paragraph (thm-coef-qbar-verdier); formal expansion of retained proof steps 1--4 and the formal restriction equations in step 10; detailed retained argument: dag/nodes/sec-six-functors/thm-coef-qbar-verdier.json, original proof steps"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal C_E(W)=D^b_c(W,E)$ for the rationalized stages used in the statement and $T_{M/E}$ for their scalar extension. Form the pair category from these stages exactly as in [def-weil-algebraically-closed-coefficients]. We construct the contravariant functor directly on its representatives. By [thm-coef-rational-verdier], $D_E=D_{W,E}$ is a contravariant exact $E$-linear equivalence, with coherent isomorphisms $b_{M/E,K}:T_{M/E}D_EK\\to D_M(T_{M/E}K)$. Define $D(E,K)=(E,D_EK)$ and, for $u:T_{M/E}K\\to T_{M/F}L$, put\n$$d_M(u)=b_{M/E,K}^{-1}\\circ D_M(u)\\circ b_{M/F,L}:\nT_{M/F}D_FL\\longrightarrow T_{M/E}D_EK.$$\nThis has exactly the source and target required for a representative of $D(F,L)\\to D(E,K)$.",
+   "uses": [
+    "thm-coef-rational-verdier",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the finite rational internal-Hom identifications and use the normalized simultaneous scalar comparisons. Their integral unit and tower formulas fix the same finite beta maps, including repeated coefficient fields.",
+   "uses": [
+    "lem-coef-rational-operations",
+    "lem-coef-integral-finite-extension",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the opposite-stage equivalence and coherent pair-functor descent to descend the contravariant representative formula. The resulting object formula retains the literal stage and gives identity inclusion comparisons.",
+   "uses": [
+    "lem-coef-qbar-opposite-stage-pairs",
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use intrinsicQbarLinear on the already specified common-stage category. Its finite-representative scalar formula gives the coefficient embedding normalization; at a common extension containing the scalar, finite linearity gives Omega-linearity of the dual. Represent a distinguished triangle at a finite stage; the evaluation-defined finite shift comparisons commute with scalar extension by uniqueness of their tensor-Hom transposes. They descend and carry the triangle to the distinguished finite dual triangle.",
+   "uses": [
+    "def-weil-pbc-qbar-category",
+    "thm-coef-rational-verdier",
+    "lem-coef-rational-operations",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent omega at the base coefficient stage. The finite canonical u maps identify this with every finite omega. Descend finite evaluation and biduality using their scalar squares and the actual common-stage tensor object formula. The finite inverse biduality map descends too and proves invertibility and the anti-equivalence. Their finite equations give all scalar, omega and evaluation normalizations and evaluation naturality.",
+   "uses": [
+    "lem-coef-integral-finite-extension",
+    "thm-coef-rational-verdier",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a split pair i:P to K and p:K to P, factor tensor(i,Dp) as tensor(i,1) followed by tensor(1,Dp), and use evaluation naturality for p. Functoriality and i followed by p equal identity give evaluation at P. Naturality of the bidual isomorphism and its inverse gives the other two retract equations. Thus the core completes to the full unchanged DualityProperties.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "thm-coef-rational-verdier",
+  "lem-coef-rational-operations",
+  "lem-coef-integral-finite-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-qbar-category",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-coef-qbar-opposite-stage-pairs",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal categorical expansion of the retained common-stage argument, retained proof steps 1--4 and the formal restriction equations in step 10"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent finite-stage Verdier dualities, internal Hom evaluations, dualizing objects and exceptional adjunctions descend to the pair category over an algebraic closure",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.closedCounit\", \"CategoryTheory.Pi.closedCounit\", \"CategoryTheory.Adjunction.derived\", \"FGModuleCat.FGModuleCatDual\", \"FGModuleCat.rightDual\", \"FGModuleCat.exactPairing\", \"FGModuleCat.FGModuleCatDual_coe\", \"FGModuleCat.FGModuleCatDual_obj\"], \"note\": \"\", \"digest\": \"1ab70b1bb79f4957\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant Verdier duality on a filtered common-stage coefficient category from coherent finite coefficient dualities",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.isCofiltered_op_of_isFiltered\", \"CategoryTheory.IsFilteredOrEmpty.isSiftedOrEmpty\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.AB5Star\", \"CategoryTheory.isFiltered_of_isCofiltered_op\", \"CategoryTheory.isCofilteredOrEmpty_op_of_isFilteredOrEmpty\", \"CategoryTheory.isCofiltered_of_isFiltered_op\", \"CategoryTheory.isFiltered_op_of_isCofiltered\"], \"note\": \"\", \"digest\": \"2c3d936545c8526c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism.adjunction",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'CategoryTheory.StageSystem.Morphism.adjunction'\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefQbarVerdier|commonStageHomPairs|SfClassDuality",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdier",
+  "date": "2026-10-25",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "retained proof steps 1--4 and the formal restriction equations in step 10",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierCore",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierCore.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.core_descent",
+  "statement": "theorem core_descent :\n    ∃ B : DualityData D l hl Ω X, CoreProperties D l hl Ω X B",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.CoefQbarVerdier.CoreProperties",
+   "WeilConjectures.CoefQbarVerdier.core_descent",
+   "WeilConjectures.CoefQbarVerdier.core_complete",
+   "WeilConjectures.CoefQbarVerdier.completeCore",
+   "WeilConjectures.CoefQbarVerdier.finite_data_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-07b3e",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261025T203436-L-2817454",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-07b3e",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261025T203436-L-2817454",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoefQbarVerdier/Data/Core/InternalHom/Exceptional/Dualizing + StageSystemOpposite/Adjunction and 8 node files against the published CoefQbarVerdier.lean (diff: data block verbatim except subtype wrappers and 4 dropped private imports), the RationalOperations identification theorems, and the six direct importers compiled against the delivered oleans"
+ }
+}

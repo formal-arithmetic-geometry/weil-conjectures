@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-flat-semisimplicial-derived-hom",
+ "kind": "statement",
+ "title": "Morphisms of flat semisimplicial cartesian derived objects",
+ "statement": "Use the semisimplicial ringed total category $\\mathscr M$ and its derived evaluations $e_n$ of [lem-sfb-semisimplicial-ringed-total-category]. Assume every transition module pullback $f_\\alpha^*$ is exact. Let $B,C\\in D(\\mathscr M)$ be cartesian and put $B_n=e_nB$, $C_n=e_nC$. Assume $\\operatorname{Hom}(B_n,C_n[t])=0$ for every $n\\ge0$ and every $t<0$. Then evaluation induces a bijection\n$$\\operatorname{Hom}_{D(\\mathscr M)}(B,C)\\ \\xrightarrow{\\sim}\\ \\{(v_n)_{n\\ge0}: v_n:B_n\\to C_n,\\ \\ v_n\\theta^B_\\alpha=\\theta^C_\\alpha Lf_\\alpha^*v_m\\ \\text{for every }\\alpha:[m]\\hookrightarrow[n]\\}.$$\nIn particular a global morphism whose degree-zero evaluation is zero is zero.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), injective-order-map adaptation: their Postnikov simplex resolution and degree-dependent negative Hom hypotheses are implied by the displayed all-negative vanishing. The semisimplicial version is agent-supplied."
+ },
+ "stmt_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-semisimplicial-cartesian-simplex-filtration] to $B$, and use its $X_p,F_N,u_N,j_N,S,s,p,\\partial$. By [lem-sfb-semisimplicial-evaluation-free-adjoint], for every $r>0$,\n$$\\operatorname{Hom}(X_p[r],C)\\cong\\operatorname{Hom}(B_p,C_p[-r])=0.$$\nThus all shifts used below are covered by the given negative Hom assumption. The first-stage map $j_0:X_0\\to B$ is the counit, so a composite $X_0\\xrightarrow{j_0}B\\to C$ is adjoint to its degree-zero evaluation.",
+   "uses": [
+    "lem-sfb-semisimplicial-cartesian-simplex-filtration",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), with the full proofs of lemma-nullity-cartesian-objects-derived and lemma-hom-cartesian-objects-derived; injective-order-map adaptation."
+   }
+  },
+  {
+   "text": "Take a compatible family $(v_n)$. Let $a_0:X_0=F_0\\to C$ be adjoint to $v_0$ under [lem-sfb-semisimplicial-evaluation-free-adjoint]. For $i=0,1$ the adjunct of $a_0q_i:X_1\\to C$ is\n$$\\theta^C_{\\delta_i}Lf_{\\delta_i}^*(v_0)(\\theta^B_{\\delta_i})^{-1}=v_1.$$\nHere the equality is precisely the supplied compatibility for $\\delta_i$; the adjunct formula is the labelled-summand formula of that node. Therefore $a_0(q_0-q_1)=0$. Apply clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact] to the first-stage triangle of [lem-sfb-semisimplicial-cartesian-simplex-filtration]. It gives $a_1:F_1\\to C$ with $a_1u_0=a_0$.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-sfb-semisimplicial-cartesian-simplex-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), with the full proofs of lemma-nullity-cartesian-objects-derived and lemma-hom-cartesian-objects-derived; injective-order-map adaptation."
+   }
+  },
+  {
+   "text": "Suppose $N\\ge1$ and compatible $a_0,\\ldots,a_N$ have been chosen. Rotate the filtration triangle to\n$$X_{N+1}[N]\\longrightarrow F_N\\xrightarrow{u_N}F_{N+1}\\longrightarrow X_{N+1}[N+1].$$\nThe first term has no maps to $C$ by Step 1 since $N>0$. Clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact] therefore extends $a_N$ to $a_{N+1}$. Starting with Step 2 and making these choices recursively gives a compatible sequence for all $N$. These are rotations of the triangles supplied by [lem-sfb-semisimplicial-cartesian-simplex-filtration]; the sign on the rotated first map has no effect on its zero composite.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-sfb-semisimplicial-cartesian-simplex-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), with the full proofs of lemma-nullity-cartesian-objects-derived and lemma-hom-cartesian-objects-derived; injective-order-map adaptation."
+   }
+  },
+  {
+   "text": "On the coproduct $S$ of [lem-sfb-semisimplicial-cartesian-simplex-filtration], define $a:S\\to C$ by $a\\iota_N=a_N$. Then\n$$a(1-s)\\iota_N=a_N-a_{N+1}u_N=0$$\nfor every $N$, hence $a(1-s)=0$ by the coproduct universal property. Clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact], applied to its telescope triangle, supplies $\\gamma:B\\to C$ with $\\gamma p=a$. Consequently $\\gamma j_0=a_0$, and [lem-sfb-semisimplicial-evaluation-free-adjoint] identifies $e_0\\gamma$ with $v_0$.",
+   "uses": [
+    "lem-sfb-semisimplicial-cartesian-simplex-filtration",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), with the full proofs of lemma-nullity-cartesian-objects-derived and lemma-hom-cartesian-objects-derived; injective-order-map adaptation."
+   }
+  },
+  {
+   "text": "Derived evaluation and the transitions of [lem-sfb-semisimplicial-ringed-total-category] are functorial, so $(e_n\\gamma)$ is a compatible family. For any injection $\\alpha:[0]\\hookrightarrow[n]$, the two compatibility equations and $e_0\\gamma=v_0$ give\n$$e_n\\gamma\\,\\theta^B_\\alpha=\\theta^C_\\alpha Lf_\\alpha^*(v_0)=v_n\\theta^B_\\alpha.$$\nCancel the isomorphism $\\theta^B_\\alpha$. Such an injection exists for every $n\\ge0$; therefore $e_n\\gamma=v_n$ for every $n$. This proves surjectivity of the displayed evaluation map.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), with the full proofs of lemma-nullity-cartesian-objects-derived and lemma-hom-cartesian-objects-derived; injective-order-map adaptation."
+   }
+  },
+  {
+   "text": "We now prove uniqueness, including the final degree-zero assertion. First $\\operatorname{Hom}(F_N[1],C)=0$ for every $N$: at $N=0$ this is Step 1, and the filtration triangle shifted by one has outer terms $F_N[1]$ and $X_{N+1}[N+2]$. Both have zero Hom into $C$, so the middle term does too, by clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact]. Here and below the triangles are those of [lem-sfb-semisimplicial-cartesian-simplex-filtration]. Explicitly a map from the middle term, zero on the first, factors through the third and hence is zero.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-sfb-semisimplicial-cartesian-simplex-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), with the full proofs of lemma-nullity-cartesian-objects-derived and lemma-hom-cartesian-objects-derived; injective-order-map adaptation."
+   }
+  },
+  {
+   "text": "Let $w:B\\to C$ satisfy $e_0w=0$. The counit identification of [lem-sfb-semisimplicial-evaluation-free-adjoint] gives $wj_0=0$. If $wj_N=0$, clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact] applied to the filtration triangle shows $wj_{N+1}$ factors through $X_{N+1}[N+1]$. Step 1 kills this factor, hence induction gives $wj_N=0$ for all $N$. Therefore $wp=0$ on every coprojection of $S$. Clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact], applied to the telescope triangle $S\\xrightarrow{1-s}S\\xrightarrow{p}B\\xrightarrow{\\partial}S[1]$ of [lem-sfb-semisimplicial-cartesian-simplex-filtration] with $wp=0$, gives $k:S[1]\\to C$ with $w=k\\partial$. By the coproduct property of $S[1]$ stated there, $k$ is determined by its restrictions $k\\,\\iota_N[1]$ to the $F_N[1]$, each zero by Step 6; thus $k=0$ and $w=0$. Apply this to the difference of two morphisms with the same evaluations. This proves injectivity and the stated final assertion.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-sfb-semisimplicial-cartesian-simplex-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), with the full proofs of lemma-nullity-cartesian-objects-derived and lemma-hom-cartesian-objects-derived; injective-order-map adaptation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimplicial-cartesian-simplex-filtration",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sfb-semisimplicial-ringed-total-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 0D9R (lemma-nullity-cartesian-modules-derived) and 0D9S (lemma-hom-cartesian-modules-derived), with the full proofs of lemma-nullity-cartesian-objects-derived and lemma-hom-cartesian-objects-derived; injective-order-map adaptation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between cartesian derived objects on a flat semisimplicial ringed site are the equalizer of component Hom groups when negative Ext vanishes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.hom_ext\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] (H : J.OneHypercoverFamily) (P : CategoryTheory.Functor Cᵒᵖ A),\\n  (∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.Limi\", \"doc\": \"Given a generating family of hypercovers in a site $(\\\\mathcal{C}, J)$, for any object $X$ and covering sieve $S$ on $X$, if two morphisms $x, y: T \\\\to P(X)$ satisfy $x \\\\circ P(f^{\\\\text{op}}) = y \\\\circ\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.f =\\n    CategoryTheory.Limits.biprod.lift\\n\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, the differential $ f $ of the associated short complex in the category of sheaves with values in addit\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.g =\\n    CategoryTheory.Limits.biprod.desc\\n\", \"doc\": \"For a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the second differential $g$ in the associated short complex of sheaves with additive commutative group coeff\"}\n  {\"name\": \"CategoryTheory.Equalizer.Sieve.firstMap\", \"module\": \"Mathlib/CategoryTheory/Sites/EqualizerSheafCondition\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (P : CategoryTheory.Functor Cᵒᵖ (Type (max v u))) →\\n      {X : C} →\\n        (S : CategoryTheory.Sieve X) →\\n          CategoryTheory.Equalizer.FirstObj P S.arrows ⟶ CategoryTheory.Equalizer.Sieve.SecondObj P S\", \"doc\": \"The morphism from the first object to the second object in the equalizer diagram characterizing the sheaf condition, constructed by lifting projections through the downward-closed sieve structure. Spe\"}\n  {\"name\": \"CategoryTheory.Equalizer.Sieve.secondMap\", \"module\": \"Mathlib/CategoryTheory/Sites/EqualizerSheafCondition\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (P : CategoryTheory.Functor Cᵒᵖ (Type (max v u))) →\\n      {X : C} →\\n        (S : CategoryTheory.Sieve X) →\\n          CategoryTheory.Equalizer.FirstObj P S.arrows ⟶ CategoryTheory.Equalizer.Sieve.SecondObj P S\", \"doc\": \"The morphism from the first object $\\\\prod_{\\\\substack{f \\\\in R \\\\\\\\ \\\\text{codomain } X}} P(f^{\\\\text{op}})$ to the second object $\\\\prod_{f' \\\\in S} P(\\\\text{dom}(f')^{\\\\text{op}})$ in the equalizer diagram fo\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.CoversTop.ext\", \"module\": \"Mathlib/CategoryTheory/Sites/CoversTop\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {I : Type u_1} {Y : I → C},\\n  J.CoversTop Y →\\n    ∀ (F : CategoryTheory.Sheaf J A) {c : CategoryTheory.Limits.Cone F.val} (hc : CategoryT\", \"doc\": \"For a sheaf $ F $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, taking values in a category $ \\\\mathcal{A} $, if two morphisms $ f, g: X \\\\to c.\\\\text{pt} $ (where $ c $ is a limit cone\"}\n  {\"name\": \"CategoryTheory.Equalizer.Sieve.SecondObj.ext\", \"module\": \"Mathlib/CategoryTheory/Sites/EqualizerSheafCondition\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.Functor Cᵒᵖ (Type (max v u))} {X : C}\\n  {S : CategoryTheory.Sieve X} (z₁ z₂ : CategoryTheory.Equalizer.Sieve.SecondObj P S),\\n  (∀ (Y Z : C) (g : Z ⟶ Y) (f : Y ⟶ X) (hf : S.arrows f),\\n      CategoryTheory.Limits.Pi.π (fun f \", \"doc\": \"For a presheaf $ P $ on a category $ \\\\mathcal{C} $ and a sieve $ S $ on an object $ X $, two elements $ z_1, z_2 $ of the second object in the equalizer diagram defining the sheaf condition for $ S $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf equalizers, cochain maps and homology-map data do not give morphism descent in an unbounded derived total category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps of derived complexes on a simplicial total topos descend uniquely if negative Hom groups of the components vanish",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.mapBifunctor.hom_ext\", \"module\": \"Mathlib.Algebra.Homology.Bifunctor\", \"type\": \"{Y : D} {j : J} {f g : (mapBifunctor K₁ K₂ F c).X j ⟶ Y}\\n  (h :\\n    ∀ (i₁ : I₁) (i₂ : I₂) (h : ComplexShape.π c₁ c₂ c ⟨i₁, i₂⟩ = j),\\n      ιMapBifunctor K₁ K₂ F c i₁ i₂ j h ≫ f = ιMapBifunctor K₁ K₂ F c i₁ i₂ j h ≫ g) :\\n  f = g\", \"doc\": \"For any object $Y$ in category $\\\\mathcal{D}$ and index $j$ in the total complex, if two morphisms $f, g : (\\\\text{TotalComplex})_j \\\\to Y$ satisfy $\\\\iota_{i_1,i_2,j} \\\\circ f = \\\\iota_{i_1,i_2,j} \\\\circ g$\"}\n  {\"name\": \"HomologicalComplex.mapBifunctor₁₂.hom_ext\", \"module\": \"Mathlib.Algebra.Homology.BifunctorAssociator\", \"type\": \"[HasGoodTrifunctor₁₂Obj F₁₂ G K₁ K₂ K₃ c₁₂ c₄] {j : ι₄} {A : C₄}\\n  {f g : (mapBifunctor (mapBifunctor K₁ K₂ F₁₂ c₁₂) K₃ G c₄).X j ⟶ A}\\n  (hfg :\\n    ∀ (i₁ : ι₁) (i₂ : ι₂) (i₃ : ι₃) (h : ComplexShape.r c₁ c₂ c₃ c₁₂ c₄ (i₁, i₂, i₃) = j),\\n      ι F₁₂ G K₁ K₂ K₃ c₁₂ c₄ i₁ i₂ i₃ j h ≫ f = ι F₁₂ G K₁ K₂ K₃\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_{12}, \\\\mathcal{C}_3, \\\\mathcal{C}_4$ with zero morphisms and preadditive structures, and functors $F_{12}: \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \"}\n  {\"name\": \"CategoryTheory.ShortComplex.RightHomologyMapData.instUnique\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.RightHomology\", \"type\": \": Unique (RightHomologyMapData φ h₁ h₂)\", \"doc\": \"For any morphism $\\\\phi: S_1 \\\\to S_2$ between short complexes in a category with zero morphisms, and given right homology data $h_1$ for $S_1$ and $h_2$ for $S_2$, there exists a unique compatible map \"}\n  {\"name\": \"CategoryTheory.ShortComplex.LeftHomologyMapData.instSubsingleton\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.LeftHomology\", \"type\": \": Subsingleton (LeftHomologyMapData φ h₁ h₂)\", \"doc\": \"Given a morphism between two short complexes in a category with zero morphisms, the induced map between their left homology data is unique. That is, any two such induced maps between the left homology\"}\n  {\"name\": \"CategoryTheory.ShortComplex.RightHomologyMapData.instSubsingleton\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.RightHomology\", \"type\": \": Subsingleton (RightHomologyMapData φ h₁ h₂)\", \"doc\": \"The type of right homology maps between two short complexes forms a subsingleton, meaning any two such maps are equal. This asserts that given short complexes $ S₁ $ and $ S₂ $ in a category with zero\"}\n  {\"name\": \"HomologicalComplex.mapBifunctorDesc\", \"module\": \"Mathlib.Algebra.Homology.Bifunctor\", \"type\": \": (mapBifunctor K₁ K₂ F c).X j ⟶ A\", \"doc\": \"The morphism from the object at index $ j $ in the total complex to an object $ A $, constructed as the unique morphism from the coproduct $ \\\\coprod_{(i_1,i_2) \\\\in \\\\pi^{-1}(\\\\{j\\\\})} K_{i_1,i_2} $ to $ \"}\n  {\"name\": \"HomologicalComplex.Hom.noConfusionType\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \"Sort u_2 →\\n  {ι : Type u_1} →\\n    {V : Type u} →\\n      [inst : CategoryTheory.Category.{v, u} V] →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V] →\\n          {c : ComplexShape ι} →\\n            {A B : HomologicalComplex V c} →\\n              A.Hom B →\\n                {ι' : Type u_1} →\\n   \", \"doc\": \"A type ensuring that homomorphisms between homological complexes are uniquely determined by their components and the complex shape, avoiding confusion between distinct homomorphisms by verifying compa\"}\n  {\"name\": \"CategoryTheory.ShortComplex.HomologyMapData.instUnique\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Homology\", \"type\": \": Unique (HomologyMapData φ h₁ h₂)\", \"doc\": \"For any morphism between short complexes and their homology data, the induced homology map data is uniquely determined by the given morphism and homology data.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf equalizers, cochain maps and homology-map data do not give morphism descent in an unbounded derived total category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"equalizer\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf equalizers, cochain maps and homology-map data do not give morphism descent in an unbounded derived total category"
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian|semisimplicial|simplicial.*[Hh]om",
+   "results": "[grep] OK 0 hit(s)\n\nDirectory: Mathlib/CategoryTheory/Abelian",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf equalizers, cochain maps and homology-map data do not give morphism descent in an unbounded derived total category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms between cartesian complexes on a diagram of ringed topoi are uniquely specified by compatible evaluations under negative Ext vanishing",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.Derivation.noConfusion\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"{P : Sort u_1} →\\n  {C : Type u₁} →\\n    {inst : CategoryTheory.Category.{v₁, u₁} C} →\\n      {D : Type u₂} →\\n        {inst_1 : CategoryTheory.Category.{v₂, u₂} D} →\\n          {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"Two derivations between presheaves of modules are equal if their additive structure, Leibniz rule compatibility, presheaf map compatibility, and vanishing on the image of a morphism $\\\\phi: S \\\\to F^{\\\\t\"}\n  {\"name\": \"HomologicalComplex.mapBifunctor₁₂.hom_ext\", \"module\": \"Mathlib.Algebra.Homology.BifunctorAssociator\", \"type\": \"[HasGoodTrifunctor₁₂Obj F₁₂ G K₁ K₂ K₃ c₁₂ c₄] {j : ι₄} {A : C₄}\\n  {f g : (mapBifunctor (mapBifunctor K₁ K₂ F₁₂ c₁₂) K₃ G c₄).X j ⟶ A}\\n  (hfg :\\n    ∀ (i₁ : ι₁) (i₂ : ι₂) (i₃ : ι₃) (h : ComplexShape.r c₁ c₂ c₃ c₁₂ c₄ (i₁, i₂, i₃) = j),\\n      ι F₁₂ G K₁ K₂ K₃ c₁₂ c₄ i₁ i₂ i₃ j h ≫ f = ι F₁₂ G K₁ K₂ K₃\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_{12}, \\\\mathcal{C}_3, \\\\mathcal{C}_4$ with zero morphisms and preadditive structures, and functors $F_{12}: \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \"}\n  {\"name\": \"PresheafOfModules.Derivation.ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  {M : PresheafOfModules (R.comp (CategoryTheory.forg\", \"doc\": \"Two derivations $\\\\varphi$ between presheaves of commutative rings and presheaves of modules are equal if and only if their induced group homomorphisms $d_X : R(X) \\\\to M(X)$ are equal for all objects $\"}\n  {\"name\": \"PresheafOfModules.Derivation.noConfusionType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"Sort u_1 →\\n  {C : Type u₁} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory.Funct\", \"doc\": \"A type ensuring that derivations between presheaves of modules are uniquely determined by their additive structure, Leibniz rule compatibility, presheaf map compatibility, and vanishing on the image o\"}\n  {\"name\": \"CategoryTheory.DifferentialObject.Hom.noConfusion\", \"module\": \"Mathlib.CategoryTheory.DifferentialObject\", \"type\": \"{P : Sort u_2} →\\n  {S : Type u_1} →\\n    {inst : AddMonoidWithOne S} →\\n      {C : Type u} →\\n        {inst_1 : CategoryTheory.Category.{v, u} C} →\\n          {inst_2 : CategoryTheory.Limits.HasZeroMorphisms C} →\\n            {inst_3 : CategoryTheory.HasShift C S} →\\n              {X Y : CategoryTheory.Di\", \"doc\": \"A function ensuring that two morphisms between differential objects $(X,d_X)$ and $(Y,d_Y)$ in a category $\\\\mathcal{C}$ equipped with shift and zero morphisms are equal if their underlying morphisms $\"}\n  {\"name\": \"CategoryTheory.DifferentialObject.Hom.mk.noConfusion\", \"module\": \"Mathlib.CategoryTheory.DifferentialObject\", \"type\": \"{S : Type u_1} →\\n  {inst : AddMonoidWithOne S} →\\n    {C : Type u} →\\n      {inst_1 : CategoryTheory.Category.{v, u} C} →\\n        {inst_2 : CategoryTheory.Limits.HasZeroMorphisms C} →\\n          {inst_3 : CategoryTheory.HasShift C S} →\\n            {X Y : CategoryTheory.DifferentialObject S C} →\\n       \", \"doc\": \"A principle ensuring that two morphisms between differential objects $(X,d_X)$ and $(Y,d_Y)$ in a category $\\\\mathcal{C}$ equipped with shift and zero morphisms are equal if their underlying morphisms \"}\n  {\"name\": \"CochainComplex.ConnectData.map\", \"module\": \"Mathlib.Algebra.Homology.Embedding.Connect\", \"type\": \": h.cochainComplex ⟶ h'.cochainComplex\", \"doc\": \"Given chain complexes $K,K'$ and cochain complexes $L,L'$ with connecting data $h:K\\\\to L$ and $h':K'\\\\to L'$, this constructs a morphism between the extended cochain complexes $h.\\\\text{cochainComplex} \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.desc\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{Y Z : C} (f : Z ⟶ Y) (I : InjectiveResolution Y) (J : InjectiveResolution Z) : J.cocomplex ⟶ I.cocomplex\", \"doc\": \"Given objects $Y,Z$ in an abelian category $\\\\mathcal{C}$ with injective resolutions $I$ of $Y$ and $J$ of $Z$, and a morphism $f:Z\\\\to Y$, this constructs a morphism between the cochain complexes $J.\\\\t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Simplicial\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|cartesian.*derived|derived.*cartesian",
+   "results": "[grep] OK 0 hit(s)\nDirectory: Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between cartesian derived objects on a flat semisimplicial ringed site are compatible component morphisms when all negative Hom groups vanish",
+   "results": "8 hits read: SheafOfModules.Presentation.map_π_eq, AlgebraicTopology.DoldKan.MorphComponents and its φ and b, PresheafOfModules.Derivation.Universal.fac and desc, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map and isUniversal'. These concern presentation maps, Dold-Kan component data and derivations, not unbounded total-site derived morphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms between cartesian complexes on a diagram of ringed topoi are uniquely specified by compatible evaluations under negative Ext vanishing",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.Derivation.noConfusion\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"{P : Sort u_1} →\\n  {C : Type u₁} →\\n    {inst : CategoryTheory.Category.{v₁, u₁} C} →\\n      {D : Type u₂} →\\n        {inst_1 : CategoryTheory.Category.{v₂, u₂} D} →\\n          {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"Two derivations between presheaves of modules are equal if their additive structure, Leibniz rule compatibility, presheaf map compatibility, and vanishing on the image of a morphism $\\\\phi: S \\\\to F^{\\\\t\"}\n  {\"name\": \"HomologicalComplex.mapBifunctor₁₂.hom_ext\", \"module\": \"Mathlib.Algebra.Homology.BifunctorAssociator\", \"type\": \"[HasGoodTrifunctor₁₂Obj F₁₂ G K₁ K₂ K₃ c₁₂ c₄] {j : ι₄} {A : C₄}\\n  {f g : (mapBifunctor (mapBifunctor K₁ K₂ F₁₂ c₁₂) K₃ G c₄).X j ⟶ A}\\n  (hfg :\\n    ∀ (i₁ : ι₁) (i₂ : ι₂) (i₃ : ι₃) (h : ComplexShape.r c₁ c₂ c₃ c₁₂ c₄ (i₁, i₂, i₃) = j),\\n      ι F₁₂ G K₁ K₂ K₃ c₁₂ c₄ i₁ i₂ i₃ j h ≫ f = ι F₁₂ G K₁ K₂ K₃\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_{12}, \\\\mathcal{C}_3, \\\\mathcal{C}_4$ with zero morphisms and preadditive structures, and functors $F_{12}: \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \"}\n  {\"name\": \"PresheafOfModules.Derivation.ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  {M : PresheafOfModules (R.comp (CategoryTheory.forg\", \"doc\": \"Two derivations $\\\\varphi$ between presheaves of commutative rings and presheaves of modules are equal if and only if their induced group homomorphisms $d_X : R(X) \\\\to M(X)$ are equal for all objects $\"}\n  {\"name\": \"PresheafOfModules.Derivation.noConfusionType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"Sort u_1 →\\n  {C : Type u₁} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory.Funct\", \"doc\": \"A type ensuring that derivations between presheaves of modules are uniquely determined by their additive structure, Leibniz rule compatibility, presheaf map compatibility, and vanishing on the image o\"}\n  {\"name\": \"CategoryTheory.DifferentialObject.Hom.noConfusion\", \"module\": \"Mathlib.CategoryTheory.DifferentialObject\", \"type\": \"{P : Sort u_2} →\\n  {S : Type u_1} →\\n    {inst : AddMonoidWithOne S} →\\n      {C : Type u} →\\n        {inst_1 : CategoryTheory.Category.{v, u} C} →\\n          {inst_2 : CategoryTheory.Limits.HasZeroMorphisms C} →\\n            {inst_3 : CategoryTheory.HasShift C S} →\\n              {X Y : CategoryTheory.Di\", \"doc\": \"A function ensuring that two morphisms between differential objects $(X,d_X)$ and $(Y,d_Y)$ in a category $\\\\mathcal{C}$ equipped with shift and zero morphisms are equal if their underlying morphisms $\"}\n  {\"name\": \"CategoryTheory.DifferentialObject.Hom.mk.noConfusion\", \"module\": \"Mathlib.CategoryTheory.DifferentialObject\", \"type\": \"{S : Type u_1} →\\n  {inst : AddMonoidWithOne S} →\\n    {C : Type u} →\\n      {inst_1 : CategoryTheory.Category.{v, u} C} →\\n        {inst_2 : CategoryTheory.Limits.HasZeroMorphisms C} →\\n          {inst_3 : CategoryTheory.HasShift C S} →\\n            {X Y : CategoryTheory.DifferentialObject S C} →\\n       \", \"doc\": \"A principle ensuring that two morphisms between differential objects $(X,d_X)$ and $(Y,d_Y)$ in a category $\\\\mathcal{C}$ equipped with shift and zero morphisms are equal if their underlying morphisms \"}\n  {\"name\": \"CochainComplex.ConnectData.map\", \"module\": \"Mathlib.Algebra.Homology.Embedding.Connect\", \"type\": \": h.cochainComplex ⟶ h'.cochainComplex\", \"doc\": \"Given chain complexes $K,K'$ and cochain complexes $L,L'$ with connecting data $h:K\\\\to L$ and $h':K'\\\\to L'$, this constructs a morphism between the extended cochain complexes $h.\\\\text{cochainComplex} \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.desc\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{Y Z : C} (f : Z ⟶ Y) (I : InjectiveResolution Y) (J : InjectiveResolution Z) : J.cocomplex ⟶ I.cocomplex\", \"doc\": \"Given objects $Y,Z$ in an abelian category $\\\\mathcal{C}$ with injective resolutions $I$ of $Y$ and $J$ of $Z$, and a morphism $f:Z\\\\to Y$, this constructs a morphism between the cochain complexes $J.\\\\t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Simplicial\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|cartesian.*derived|derived.*cartesian",
+   "results": "[grep] OK 0 hit(s)\nDirectory: Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between cartesian derived objects on a flat semisimplicial ringed site are compatible component morphisms when all negative Hom groups vanish",
+   "results": "8 hits read: SheafOfModules.Presentation.map_π_eq, AlgebraicTopology.DoldKan.MorphComponents and its φ and b, PresheafOfModules.Derivation.Universal.fac and desc, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map and isUniversal'. These concern presentation maps, Dold-Kan component data and derivations, not unbounded total-site derived morphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms between cartesian complexes on a diagram of ringed topoi are uniquely specified by compatible evaluations under negative Ext vanishing",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.Derivation.noConfusion\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"{P : Sort u_1} →\\n  {C : Type u₁} →\\n    {inst : CategoryTheory.Category.{v₁, u₁} C} →\\n      {D : Type u₂} →\\n        {inst_1 : CategoryTheory.Category.{v₂, u₂} D} →\\n          {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"Two derivations between presheaves of modules are equal if their additive structure, Leibniz rule compatibility, presheaf map compatibility, and vanishing on the image of a morphism $\\\\phi: S \\\\to F^{\\\\t\"}\n  {\"name\": \"HomologicalComplex.mapBifunctor₁₂.hom_ext\", \"module\": \"Mathlib.Algebra.Homology.BifunctorAssociator\", \"type\": \"[HasGoodTrifunctor₁₂Obj F₁₂ G K₁ K₂ K₃ c₁₂ c₄] {j : ι₄} {A : C₄}\\n  {f g : (mapBifunctor (mapBifunctor K₁ K₂ F₁₂ c₁₂) K₃ G c₄).X j ⟶ A}\\n  (hfg :\\n    ∀ (i₁ : ι₁) (i₂ : ι₂) (i₃ : ι₃) (h : ComplexShape.r c₁ c₂ c₃ c₁₂ c₄ (i₁, i₂, i₃) = j),\\n      ι F₁₂ G K₁ K₂ K₃ c₁₂ c₄ i₁ i₂ i₃ j h ≫ f = ι F₁₂ G K₁ K₂ K₃\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_{12}, \\\\mathcal{C}_3, \\\\mathcal{C}_4$ with zero morphisms and preadditive structures, and functors $F_{12}: \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \"}\n  {\"name\": \"PresheafOfModules.Derivation.ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  {M : PresheafOfModules (R.comp (CategoryTheory.forg\", \"doc\": \"Two derivations $\\\\varphi$ between presheaves of commutative rings and presheaves of modules are equal if and only if their induced group homomorphisms $d_X : R(X) \\\\to M(X)$ are equal for all objects $\"}\n  {\"name\": \"PresheafOfModules.Derivation.noConfusionType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"Sort u_1 →\\n  {C : Type u₁} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory.Funct\", \"doc\": \"A type ensuring that derivations between presheaves of modules are uniquely determined by their additive structure, Leibniz rule compatibility, presheaf map compatibility, and vanishing on the image o\"}\n  {\"name\": \"CategoryTheory.DifferentialObject.Hom.noConfusion\", \"module\": \"Mathlib.CategoryTheory.DifferentialObject\", \"type\": \"{P : Sort u_2} →\\n  {S : Type u_1} →\\n    {inst : AddMonoidWithOne S} →\\n      {C : Type u} →\\n        {inst_1 : CategoryTheory.Category.{v, u} C} →\\n          {inst_2 : CategoryTheory.Limits.HasZeroMorphisms C} →\\n            {inst_3 : CategoryTheory.HasShift C S} →\\n              {X Y : CategoryTheory.Di\", \"doc\": \"A function ensuring that two morphisms between differential objects $(X,d_X)$ and $(Y,d_Y)$ in a category $\\\\mathcal{C}$ equipped with shift and zero morphisms are equal if their underlying morphisms $\"}\n  {\"name\": \"CategoryTheory.DifferentialObject.Hom.mk.noConfusion\", \"module\": \"Mathlib.CategoryTheory.DifferentialObject\", \"type\": \"{S : Type u_1} →\\n  {inst : AddMonoidWithOne S} →\\n    {C : Type u} →\\n      {inst_1 : CategoryTheory.Category.{v, u} C} →\\n        {inst_2 : CategoryTheory.Limits.HasZeroMorphisms C} →\\n          {inst_3 : CategoryTheory.HasShift C S} →\\n            {X Y : CategoryTheory.DifferentialObject S C} →\\n       \", \"doc\": \"A principle ensuring that two morphisms between differential objects $(X,d_X)$ and $(Y,d_Y)$ in a category $\\\\mathcal{C}$ equipped with shift and zero morphisms are equal if their underlying morphisms \"}\n  {\"name\": \"CochainComplex.ConnectData.map\", \"module\": \"Mathlib.Algebra.Homology.Embedding.Connect\", \"type\": \": h.cochainComplex ⟶ h'.cochainComplex\", \"doc\": \"Given chain complexes $K,K'$ and cochain complexes $L,L'$ with connecting data $h:K\\\\to L$ and $h':K'\\\\to L'$, this constructs a morphism between the extended cochain complexes $h.\\\\text{cochainComplex} \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.desc\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{Y Z : C} (f : Z ⟶ Y) (I : InjectiveResolution Y) (J : InjectiveResolution Z) : J.cocomplex ⟶ I.cocomplex\", \"doc\": \"Given objects $Y,Z$ in an abelian category $\\\\mathcal{C}$ with injective resolutions $I$ of $Y$ and $J$ of $Z$, and a morphism $f:Z\\\\to Y$, this constructs a morphism between the cochain complexes $J.\\\\t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Simplicial\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|cartesian.*derived|derived.*cartesian",
+   "results": "[grep] OK 0 hit(s)\nDirectory: Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: cochain-map extensionality and derivation equalities do not give unbounded derived Hom descent on a varying-ring semisimplicial total site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between cartesian derived objects on a flat semisimplicial ringed site are compatible component morphisms when all negative Hom groups vanish",
+   "results": "8 hits read: SheafOfModules.Presentation.map_π_eq, AlgebraicTopology.DoldKan.MorphComponents and its φ and b, PresheafOfModules.Derivation.Universal.fac and desc, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map and isUniversal'. These concern presentation maps, Dold-Kan component data and derivations, not unbounded total-site derived morphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-negative-ext-hyperdescent",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Morphisms of flat semisimplicial cartesian derived objects.",
+   "via": [
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-semisimplicial-derived-hom",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave the face-only Postnikov proof in seven steps, exposing the exact component free adjoint and the derived simplex filtration as two statement-only inputs. Wrote the first face obstruction, all higher obstruction indices, the telescope extension, and the phantom-map uniqueness argument. Read all cited statements and source proofs; no project attachment or Mathlib match.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Morphisms of flat semisimplicial cartesian derived objects. The seven steps implement the negative-Ext morphism part of the supporting hyperdescent argument, preserving the current direct-image route (3). The recorded ancestor is null, as returned by blueprint_refs.py, and its via chain is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-f98798e99",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-f98798e99 (reviewer sub-agent of L); spot-checked: FIX with two small repairs. I read in full the item, both new nodes and the cited nodes (semisimplicial-ringed-total-category; the hom-out-of-triangle Mathlib leaf yoneda_exact₂/₃). I read these Stacks sources at their places: 0D72 (l.1242), 0D9B (l.1875), 0D9E (l.2535), the abelian proofs nullity/hom-cartesian-objects-derived (l.2829/2886), 0D9Q (l.3231), 0D9R (l.3276) and 0D9S (l.3299). The item statement is unchanged. Its all-negative Hom hypothesis implies the degree-dependent hypotheses of 0D9R/0D9S, and the face-only form is labelled as an agent adaptation. Steps 1-6 check out. The first obstruction a_0(q_0-q_1)=0 holds via adjunct naturality, the derived inverse-adjunct formula and compatibility at δ_0 and δ_1. The higher obstructions use shift N>=1, the telescope extension satisfies a(1-s)=0, Step 5 cancels θ along [0]->[n], and Step 6 is the Hom(F_N[1],C)=0 induction. First fault, in Step 7 (C4-type mislabel): the text factored w through ∂ by 'the same exactness clause' (i). Factoring a map out of the third vertex needs clause (ii). Repaired: Step 7 now names clause (ii), writes w=k∂ explicitly, and gets k=0 from the stated coproduct property of S[1]. Second fault (B2): both new nodes used θ^E/θ^B without introducing them. Repaired with notation-only additions to the statements. I verified both new nodes as true. free-adjoint: it is the Yoneda/left Kan extension along Δ_inj^op of 0D72 restricted to injections; it is 0 for p>m; it is exact since f_α^* is exact; the derived adjunction holds because both functors are exact, as in 0D9E(2). simplex-filtration: the normalized semisimplicial simplex complex at each m is the reduced chain complex of Δ^m, contracted by inserting vertex 0. The brutal truncations tensored with B give the triangles F_N->F_{N+1}->X_{N+1}[N+1]. The first differential is q_0-q_1 (sign checked). The termwise-split colimit gives the telescope. Small cases checked: m=0, m=1, p>m, zero ring, constant field diagrams. Neither node is a duplicate: the trf total-site component-restriction, free-module-resolution and simplex-free-resolution nodes are full-Δ, abelian or constant-coefficient. The flat-semisimplicial-derived-realization and fppf-face nodes are different statements. Neither node restates an item clause, the graph is acyclic and there are no SGA citations. Each new node records 4 search kinds. Live and side-live still show the item unsplit, and it has no repair note. No tool_uses. Fixes are in fixes/dag/nodes/sec-six-functors-basics/ (the item and both new nodes); stmt_deps and proof_deps are unchanged.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatSemisimplicialDerivedHom",
+  "declaration": "CategoryTheory.SemisimplicialRingedTotal.flat_semisimplicial_derived_hom",
+  "file": "lean/Sheaf/CategoryTheory/FlatSemisimplicialDerivedHom.lean",
+  "statement": "theorem flat_semisimplicial_derived_hom {F : LocallyDiscrete (SemiSimplexCategoryᵒᵖ)ᵒᵖ ⥤ᵖ Cat.{u, u}} {D : CoherentSitePseudofunctor SemiSimplexCategoryᵒᵖ F} {R : RingDiagram D} {h : Presheaf.IsSheaf D.totalTopology R.presheaf} (P : Presentation R h) (exact : ∀ {i j : SemiSimplexCategoryᵒᵖ} (a : i ⟶ j), PreservesFiniteLimits (P.pullback a).ordinary ∧ PreservesFiniteColimits (P.pullback a).ordinary) (B C : (R.total h).D) (hB : P.IsCartesian B) (hC : P.IsCartesian C) (negative : ∀ (i : SemiSimplexCategoryᵒᵖ) (t : ℤ), t < 0 → Subsingleton ((P.evaluation i).derived.obj B ⟶ ((P.evaluation i).derived.obj C)⟦t⟧)) : Function.Bijective (fun w : B ⟶ C ↦ (⟨fun i ↦ (P.evaluation i).derived.map w, fun {_ _} a ↦ (P.derivedTransition a).naturality w⟩ : {v : ∀ i : SemiSimplexCategoryᵒᵖ, (P.evaluation i).derived.obj B ⟶ (P.evaluation i).derived.obj C // ∀ {i j : SemiSimplexCategoryᵒᵖ} (a : i ⟶ j), (P.pullback a).derived.map (v j) ≫ (P.derivedTransition a).app C = (P.derivedTransition a).app B ≫ v i})) ∧ (∀ w : B ⟶ C, (P.evaluation (op (SemiSimplexCategory.mk 0))).derived.map w = 0 → w = 0)",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1541f9b8",
+  "group": "N6",
+  "result": "pass",
+  "note": "I matched every clause of the node against the Lean, reading the dependency's declarations (Presentation, derivedTransition, IsCartesian, Evaluation.derived = mapDerivedCategory). Exactness is PreservesFiniteLimits ∧ PreservesFiniteColimits of (P.pullback a).ordinary, the same form as the dependency's cohomology_criterion premise. Both objects are cartesian via P.IsCartesian. Negative vanishing is Subsingleton Hom(e_i B, (e_i C)⟦t⟧) for every i and every t<0. The conclusion is Function.Bijective of the canonical map w ↦ (e_i w) into the subtype of compatible families; the equation Lf^*(v_j) ≫ θ^C = θ^B ≫ v_i equals v_n θ^B_α = θ^C_α Lf_α^* v_m with the direction checked, and the degree-zero clause uses op (SemiSimplexCategory.mk 0). The statement field is verbatim the signature. Imports: public import of the stmt_dep module, plain imports of the stated proof deps (free-adjoint, Mathlib Pretriangulated); the filtration node has no Lean record, so its import is correctly deferred. No new definitions; sorry only; docstrings carry 0D9R/0D9S, the blueprint id and all 7 steps. Only the item's lean field changed (diffed against side-live). No duplicate found in Mathlib or the project Lean trees. Mathematics: the simplex filtration of a cartesian B is finite and contractible per component, and Hom(X_p[r],C)=Hom(B_p,C_p[-r])=0 for r>0; edge cases (zero objects, [0], identity injections) are fine. No compile run (no file changed); the worker reports a clean scompile and the packet shows no tool findings."
+ }
+}

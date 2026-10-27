@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-finite-type-group-ample-line",
+ "kind": "statement",
+ "title": "A finite-type group scheme over a field has an ample invertible module",
+ "statement": "Let $k$ be a field [def-weil-field] and let $G$ be a group scheme over $k$ [def-sc-group-scheme] whose structure morphism is separated and of finite type [def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion. There exists an invertible $\\mathcal O_G$-module $M$ [def-sc-invertible-module] that is ample in the absolute sense [def-weil-pbc-ample-invertible-module]. No properness, smoothness, connectedness or commutativity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BF7, lemma-algebraic-quasi-projective: every algebraic group scheme over a field is quasi-projective; over Spec(k), Morphisms Definition 01VW (definition-quasi-projective) and Lemma 01VK (lemma-ample-over-affine) identify this with the existence of an absolutely ample invertible module. The proof of 0BF7 constructs such a module and handles nonreduced and disconnected groups."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "First work over an algebraically closed field $k$. Put $C=G^0$ and $H=C_{\\mathrm{red}}$. The identity-component lemma gives that $C$ is a finite-type open and closed subgroup and that $H$ is smooth, integral, separated and of finite type. Apply the parameter-family lemma to $H$, obtaining $V,\\mathcal M,(s_v)$. Applying its last assertion to the identity point of $H$ gives a point $v_0\\in V(k)$. Set $L=\\mathcal M_{v_0}$. It is invertible because tensor pullback preserves invertibility.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-translated-cartier-parameter-family",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, lemma-algebraic-quasi-projective"
+   }
+  },
+  {
+   "text": "Smoothness of $H$ makes it normal, so the affine-parameter Picard lemma gives isomorphisms $\\phi_v:\\mathcal M_v\\simeq L$ for all $v\\in V(k)$. Transfer $s_v$ to $t_v=\\phi_v(s_v)$. On each residue-field fibre $\\phi_v$ is a linear isomorphism, hence $H_{t_v}=H_{s_v}$, which is affine. Every closed point of $H$ is $k$-rational and thus lies in one of these opens. Their union is all of $H$: otherwise its nonempty closed complement has a closed point by the Jacobson lemma, a contradiction. Since $H$ is finite type over $k$, it is quasi-compact, and these sections with exponent $1$ verify exactly the absolute ampleness definition for $L$.",
+   "uses": [
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sfb-normal-variety-affine-parameter-picard",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, lemma-algebraic-quasi-projective"
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}k=p>0$, the finite-type scheme $C$ is Noetherian (the field is Noetherian since its only ideals are $(0)$ and $(1)$). The characteristic-$p$ reduction lemma therefore lifts existence of an ample invertible module from $H=C_{\\mathrm{red}}$ to $C$. If $\\operatorname{char}k=0$, Cartier gives that $C$ itself is reduced, so $C=H$ and $L$ is already a module on $C$. In both cases choose an ample invertible module $N$ on $C$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-ample-existence-characteristic-p-reduction",
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, lemma-algebraic-quasi-projective"
+   }
+  },
+  {
+   "text": "The component-translation lemma expresses $G$ as finitely many pairwise disjoint open and closed schemes $D_i$, each isomorphic to $C$. Transfer $N$ along these isomorphisms and glue the resulting modules on the disjoint cover, obtaining an invertible module $M$ on $G$. For $x\\in D_i$, choose $n\\geq1$ and an affine nonvanishing section locus for $N^{\\otimes n}$ at the corresponding point of $C$. Transfer its section to $D_i$ and extend it by the zero section on all other $D_j$. The resulting global section of $M^{\\otimes n}$ has exactly that affine nonvanishing locus, contained in $D_i$. As $G$ is quasi-compact by finite type, this proves $M$ ample directly from the definition.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, lemma-algebraic-quasi-projective"
+   }
+  },
+  {
+   "text": "For the original field $k$, choose an algebraic closure $\\bar k$. Base-change the multiplication, identity and inverse to give $G_{\\bar k}$ its group structure; their identities are preserved by the fibre-product universal property. The separated finite-type base-change lemma ensures that $G_{\\bar k}$ has the hypotheses of the algebraically closed case proved in Steps 1--4. It therefore admits an absolutely ample invertible module. The field-extension existence-descent lemma, with $X=G$ and $K=\\bar k$, now supplies such a module on $G$. This descends existence, and does not assume descent data on the chosen module upstairs.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-sc-group-scheme",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sfb-ample-existence-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, lemma-algebraic-quasi-projective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-scheme-reduction",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sfb-ample-existence-characteristic-p-reduction",
+  "lem-sfb-ample-existence-field-extension",
+  "lem-sfb-cartier-characteristic-zero-smooth",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-normal-variety-affine-parameter-picard",
+  "lem-sfb-translated-cartier-parameter-family",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BF7, lemma-algebraic-quasi-projective"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type group scheme over any field admits an ample invertible sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned separatedness, finite-type Proj, affine and quasi-affine facts do not give an ample line on an arbitrary group scheme; convex AmpleSet and field Galois groups are unrelated. The focused AlgebraicGeometry source search has no ampleness or quasi-projectivity declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic group over a field carries an ample line bundle",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ampleSet_empty\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \": AmpleSet (∅ : Set F)\", \"doc\": \"The empty set is an ample set, as the condition for being ample is vacuously satisfied (there are no elements to check the convex hull of connected components).\"}\n  {\"name\": \"Field.absoluteGaloisGroup\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The absolute Galois group of a field $ K $ is the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise. This group captures the symmetries of the algebraic closure ove\"}\n  {\"name\": \"AmpleSet\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"(s : Set F) : Prop\", \"doc\": \"A set $ s $ is called an ample set if, for every element $ x $ in $ s $, the convex hull of the connected component of $ x $ within $ s $ (with respect to the real numbers) equals the entire ambient s\"}\n  {\"name\": \"Field.instGroupAbsoluteGaloisGroup\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \": Group (G_K K)\", \"doc\": \"The absolute Galois group of a field $ K $, defined as the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise, is equipped with a canonical group structure under com\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"AmpleSet.vadd_iff\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"[ContinuousAdd E] {s : Set E} {y : E} : AmpleSet (y +ᵥ s) ↔ AmpleSet s\", \"doc\": \"For a topological space $E$ with continuous addition, a set $s \\\\subseteq E$ is ample if and only if its translation by any vector $y \\\\in E$ (i.e., the set $y + s$) is also ample. This equivalence hold\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral_of_profinite\", \"module\": \"Mathlib.RingTheory.Invariant.Profinite\", \"type\": \"[Algebra.IsInvariant A B G] : Algebra.IsIntegral A B\", \"doc\": \"If the algebra $ A $ over $ B $ is invariant under the action of a group $ G $, then every element of $ A $ is integral over $ B $.\"}\n  {\"name\": \"AmpleSet.union\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"{s t : Set F} (hs : AmpleSet s) (ht : AmpleSet t) : AmpleSet (s ∪ t)\", \"doc\": \"In a real vector space, the union of any two ample sets is also an ample set. A set is ample if, for every element, the convex hull of its connected component within the set equals the entire ambient \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned separatedness, finite-type Proj, affine and quasi-affine facts do not give an ample line on an arbitrary group scheme; convex AmpleSet and field Galois groups are unrelated. The focused AlgebraicGeometry source search has no ampleness or quasi-projectivity declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned separatedness, finite-type Proj, affine and quasi-affine facts do not give an ample line on an arbitrary group scheme; convex AmpleSet and field Galois groups are unrelated. The focused AlgebraicGeometry source search has no ampleness or quasi-projectivity declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "group.*ample|ample.*group|quasiProjective.*[Gg]roup|[Gg]roup.*quasiProjective",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"594\", \"text\": \"example (Γ : Subgroup (GL (Fin 2) ℝ)) [Γ.HasDetOne] : Algebra ℂ (⨁ i, ModularForm Γ i) :=\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/HSpaces.lean\", \"line\": \"139\", \"text\": \"example {G G' : Type u} [TopologicalSpace G] [Group G] [IsTopologicalGroup G] [TopologicalSpace G']\"}\n  {\"file\": \"Mathlib/Topology/Algebra/FilterBasis.lean\", \"line\": \"48\", \"text\": \"  Example : if `G` is a topological group then the neighbourhoods of the identity are a\"}\n  {\"file\": \"Mathlib/Topology/Algebra/FilterBasis.lean\", \"line\": \"58\", \"text\": \"  axioms. Example : if `G` is a topological group then the neighbourhoods of the identity are an\"}\n  {\"file\": \"Mathlib/Topology/ContinuousMap/Algebra.lean\", \"line\": \"24\", \"text\": \"with carrier `{ f : α → β | Continuous f }`. For example, when `β` is a group, a subgroup\"}\n  {\"file\": \"Mathlib/Topology/ContinuousMap/Algebra.lean\", \"line\": \"28\", \"text\": \"(for example, when `β` is a group, the derived group structure on `continuousSubgroup α β`),\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsOpenUnits.lean\", \"line\": \"19\", \"text\": \"Typical examples include monoids with discrete topology, topological groups (or fields),\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsOpenUnits.lean\", \"line\": \"36\", \"text\": \"Typical examples include monoids with discrete topology, topological groups (or fields),\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean\", \"line\": \"293\", \"text\": \"example (M : Type*) [AddCommGroup M] [Module R M] :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean\", \"line\": \"296\", \"text\": \"example (M : Type*) [AddCommGroup M] [Module R M] :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean\", \"line\": \"299\", \"text\": \"example (M : Type*) [AddCommGroup M] [Module R M] :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/EmbeddingOfLocal.lean\", \"line\": \"18\", \"text\": \"Note that this result is false for topological groups, as shown by the following counterexamples:\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Defs.lean\", \"line\": \"39\", \"text\": \"over `M`, for example, is obtained by requiring the instances `AddGroup M` and\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Defs.lean\", \"line\": \"46\", \"text\": \"/-- Basic hypothesis to talk about a topological group. A topological group over `M`, for example,\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Monoid/Defs.lean\", \"line\": \"36\", \"text\": \"semigroup. A topological additive monoid over `M`, for example, is obtained by requiring both the\"}\n  {\"file\": \"Mathlib/LinearAlgebra/UnitaryGroup.lean\", \"line\": \"64\", \"text\": \"example : Group (unitaryGroup n α) := inferInstance\"}\n  {\"file\": \"Mathlib/LinearAlgebra/UnitaryGroup.lean\", \"line\": \"65\", \"text\": \"example : StarMul (unitaryGroup n α) := inferInstance\"}\n  {\"file\": \"Mathlib/LinearAlgebra/UnitaryGroup.lean\", \"line\": \"183\", \"text\": \"example : unitaryGroup n α →* GeneralLinearGroup α (n → α) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/UnitaryGroup.lean\", \"line\": \"320\", \"text\": \"example : Group (specialOrthogonalGroup n R) := inferInstance\"}\n  {\"file\": \"Mathlib/LinearAlgebra/UnitaryGroup.lean\", \"line\": \"321\", \"text\": \"example : StarMul (specialOrthogonalGroup n R) := inferInstance\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Complex/Module.lean\", \"line\": \"212\", \"text\": \"example (E : Type*) [AddCommGroup E] [Module ℂ E] : IsScalarTower ℝ ℂ E := inferInstance\"}\n  {\"file\": \"Mathlib/Data/NNReal/Defs.lean\", \"line\": \"300\", \"text\": \"noncomputable example : CommGroupWithZero ℝ≥0 := by infer_instance\"}\n  {\"file\": \"Mathlib/Data/NNReal/Defs.lean\", \"line\": \"399\", \"text\": \"example : IsOrderedMonoid ℝ≥0 := instLinearOrderedCommGroupWithZero.toIsOrderedMonoid\"}\n  {\"file\": \"Mathlib/Algebra/Field/Defs.lean\", \"line\": \"39\", \"text\": \"A division ring or field is an example of a `GroupWithZero`. If you cannot find\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/Ulift.lean\", \"line\": \"66\", \"text\": \"(for example finitary alternating groups on a family of types in `u` of unbounded cardinality),\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned separatedness, finite-type Proj, affine and quasi-affine facts do not give an ample line on an arbitrary group scheme; convex AmpleSet and field Galois groups are unrelated. The focused AlgebraicGeometry source search has no ampleness or quasi-projectivity declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group schemes of finite type are quasi projective without smoothness or connectedness assumptions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned separatedness, finite-type Proj, affine and quasi-affine facts do not give an ample line on an arbitrary group scheme; convex AmpleSet and field Galois groups are unrelated. The focused AlgebraicGeometry source search has no ampleness or quasi-projectivity declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|quasiProjective|QuasiProjective",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned separatedness, finite-type Proj, affine and quasi-affine facts do not give an ample line on an arbitrary group scheme; convex AmpleSet and field Galois groups are unrelated. The focused AlgebraicGeometry source search has no ampleness or quasi-projectivity declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type group scheme over a field admits an ample invertible module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u_7) [inst : CommRing R] [Finite (MaximalSpectrum R)], Subsingleton (CommRing.Pic R)\", \"doc\": \"If the maximal spectrum of a commutative ring is finite, then its Picard group is trivial (i.e., contains only the identity element).\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: separatedness and affine/Proj results do not provide an ample module on an arbitrary group scheme; AmpleSet is convex analysis. Project GroupScheme/QuasiProjective proves immersions and an algebraically closed ample-family case, not this exact arbitrary-field absolute-ampleness statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic group over an arbitrary field has an ample line bundle",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ampleSet_empty\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \": AmpleSet (∅ : Set F)\", \"doc\": \"The empty set is an ample set, as the condition for being ample is vacuously satisfied (there are no elements to check the convex hull of connected components).\"}\n  {\"name\": \"AmpleSet\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"(s : Set F) : Prop\", \"doc\": \"A set $ s $ is called an ample set if, for every element $ x $ in $ s $, the convex hull of the connected component of $ x $ within $ s $ (with respect to the real numbers) equals the entire ambient s\"}\n  {\"name\": \"Field.absoluteGaloisGroup\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The absolute Galois group of a field $ K $ is the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise. This group captures the symmetries of the algebraic closure ove\"}\n  {\"name\": \"AmpleSet.union\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"{s t : Set F} (hs : AmpleSet s) (ht : AmpleSet t) : AmpleSet (s ∪ t)\", \"doc\": \"In a real vector space, the union of any two ample sets is also an ample set. A set is ample if, for every element, the convex hull of its connected component within the set equals the entire ambient \"}\n  {\"name\": \"AmpleSet.vadd_iff\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"[ContinuousAdd E] {s : Set E} {y : E} : AmpleSet (y +ᵥ s) ↔ AmpleSet s\", \"doc\": \"For a topological space $E$ with continuous addition, a set $s \\\\subseteq E$ is ample if and only if its translation by any vector $y \\\\in E$ (i.e., the set $y + s$) is also ample. This equivalence hold\"}\n  {\"name\": \"AmpleSet.vadd\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"[ContinuousAdd E] {s : Set E} (h : AmpleSet s) {y : E} : AmpleSet (y +ᵥ s)\", \"doc\": \"In a space $E$ with continuous addition, if a set $s$ is ample, then for any element $y \\\\in E$, the translated set $y + s$ is also ample. This means the property of being an ample set is preserved und\"}\n  {\"name\": \"ampleSet_univ\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"{F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F] : AmpleSet (univ : Set F)\", \"doc\": \"In any real normed vector space $F$, the universal set (containing all elements of $F$) is an ample set. This means that for every $x \\\\in F$, the convex hull of the connected component of $x$ within t\"}\n  {\"name\": \"LibraryNote.the_algebraic_hierarchy\", \"module\": \"Mathlib.Algebra.HierarchyDesign\", \"type\": \": LibraryNote✝\", \"doc\": \"A note documenting the design of the algebraic hierarchy in the library, outlining relationships between algebraic structures such as groups, rings, and modules.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: separatedness and affine/Proj results do not provide an ample module on an arbitrary group scheme; AmpleSet is convex analysis. Project GroupScheme/QuasiProjective proves immersions and an algebraically closed ample-family case, not this exact arbitrary-field absolute-ampleness statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: separatedness and affine/Proj results do not provide an ample module on an arbitrary group scheme; AmpleSet is convex analysis. Project GroupScheme/QuasiProjective proves immersions and an algebraically closed ample-family case, not this exact arbitrary-field absolute-ampleness statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|QuasiProjective|quasiProjective",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: separatedness and affine/Proj results do not provide an ample module on an arbitrary group scheme; AmpleSet is convex analysis. Project GroupScheme/QuasiProjective proves immersions and an algebraically closed ample-family case, not this exact arbitrary-field absolute-ampleness statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-group-ample-difference",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line.",
+   "via": [
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-type-group-ample-line",
+  "worker": "stage1",
+  "summary": "Split Stacks 0BF7 into a genuine moving-family/Picard-rigidity construction and reduction/descent assembly. Reused the existing identity-component and translation nodes. Five new statement-only nodes; Cartier is attached to existing project declarations, none is a Mathlib leaf. Absolute ampleness and arbitrary fields retained.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the existing Moret-Bailly prolongation chain: supporting ample-line input. Realizes Stacks 0BF7 geometric construction, rigidity, components, characteristic alternatives and field descent without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Normality of a smooth variety needed for 0BEH; a generic geometric tool, not another unit proof route."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Preservation of the hypotheses after algebraic closure; generic scheme base-change tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity needed for the characteristic-p Frobenius descent; generic finiteness tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-geometrically-normal",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-9f0e4850c",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-9f0e4850c (reviewer sub-agent of L); spot-checked: Read the item and all 5 new nodes in full, plus every cited statement. Sources read: Stacks 0BF7 (groupoids.tex lemma-algebraic-quasi-projective, all four paragraphs), 047N with remark-when-reduced and 047P, varieties 0BDC and 0BEH, and divisors 0BD4(3) with the Frobenius-norm lemma. No repair note exists, so this is a first split of NV's unsplit supporting node, and the statement is unchanged and matches 0BF7 (absolute 01PS ampleness). Step 1: the identity-component node gives exactly the hypotheses of the family node; v0 comes from its covering clause at e, and invertibility from pullback-tensor clause (1). Step 2: smooth implies normal; the 0BEH node then applies (H integral, separated, finite type, normal; V open in A^d). Nonvanishing loci are preserved, and closed points are rational and Jacobson-dense, which gives the 01PS check with n=1. Step 3: char p uses C Noetherian by finite type over a field plus the 0BD4(3) node (pO_C=0 is implicit but one line); char 0 uses the Cartier node to get C reduced, so C=H. Step 4: finitely many translate components that are open and closed, glued, with sections extended by zero; this is elementary. Step 5: algebraic closure, then the base-change leaf, then 0BDC existence descent. proof_deps equals the union of uses, and there is no cycle. The new nodes are all true and match their sources. I tested the family node with H=Spec k (d=0, D empty), 0BEH with n=0 and p=q, Cartier against alpha_p (excluded), the reduction node with k[e]/e^2, and 0BDC with K=k and X empty. None is a duplicate: the geometrically-reduced-smooth, identity-component, ample-on-reduction, finite-normal-ample-descent, very-ample-descends and abelian-variety-projective nodes are all different, and no new node restates an item clause. Batch-5 flag: lem-trf-smooth-geometrically-normal is Stacks 056T, a generic smooth-implies-normal fact that is neither assumed nor a step of the trace formula or Poincare duality. Its 186-node closure contains no other sec-trace-formula node, and no sec-poincare-duality node except the generic base-change leaf. About 10 sfb nodes already cite it, so I accept it as a tool. I also accept the declared tool uses. No SGA. Maintainer note: the Cartier node's project Lean (GroupScheme/Cartier.lean :342/:356, sorry-free) has lean_audit null, so attachment is left to the maintainer."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeGroupAmpleLine",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_finiteType_group",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeGroupAmpleLine.lean",
+  "statement": "theorem exists_isAmple_of_finiteType_group (k : Type u) [Field k] (G : Over (Spec (.of k))) [GrpObj G] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : ∃ (M : G.left.Modules) (hM : M.IsInvertible), @IsAmple G.left M hM",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfed50ada",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BF7 clause by clause: (k:Type u)[Field k], G : Over (Spec k) [GrpObj G] per def-sc-group-scheme existing:true, [IsSeparated][LocallyOfFiniteType][QuasiCompact] G.hom per def-weil-finite-type-morphism, ∃ M (hM : M.IsInvertible), @IsAmple G.left M hM = absolute 01PS (Ample.lean:48, n>0, affine U = X_s, CompactSpace). No extra instances (no IsAlgClosed, smoothness or Noetherian). Separated hypothesis follows the node and is automatic (047L). Edge cases covered (empty impossible, finite/nonreduced/disconnected/imperfect/char 0 and p, G_a). Not a duplicate: upstream QuasiProjective has only the IsAlgClosed ample family and the ℙ-immersion form, AffineNormalConnectedGroupAmple and NormalSmoothGroupLocalAmpleLine add smooth/connected hypotheses, AlgebraicGroupAmpleDifference is a consumer. Node diff vs live: only lean changed, statement verbatim in file. Single sorry, no defs, source/blueprint docstrings, all 5 proof steps in the docstring, proof-dep imports present, report sections present. No compile needed (no changes)."
+ }
+}

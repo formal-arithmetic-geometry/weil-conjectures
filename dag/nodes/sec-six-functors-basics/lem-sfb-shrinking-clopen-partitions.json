@@ -1,0 +1,197 @@
+{
+ "id": "lem-sfb-shrinking-clopen-partitions",
+ "kind": "statement",
+ "title": "Shrinking refining finite clopen partitions",
+ "statement": "Let $S$ be a compact metric totally disconnected space in the universes of [def-weil-size-convention]. There exist finite partitions $P_i$ of $S$ into nonempty sets, indexed by positive natural numbers, with $P_{i+1}$ refining $P_i$ and every atom clopen of diameter strictly less than $(1/2)^i$. Empty $S$ is permitted, with empty partitions.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 08ZZ, lemma-profinite-refine-open-covering, lines 4206–4229; the shrinking metric common-refinement specialization is the parent theorem docstring step 1."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "For each positive real radius epsilon, cover S by open balls of radius epsilon/3. Use the clopen-basis refinement [lem-weil-pbc-profinite-clopen-basis], in its Mathlib finite disjoint refinement form TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover. Its nonempty disjoint clopen sets form a Finpartition. Each is contained in a ball of radius epsilon/3 and thus has diameter at most 2 epsilon/3, strictly less than epsilon.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose such a partition Q_i with epsilon=(1/2)^i. Define P_1=Q_1 and P_(i+1)=P_i inf Q_(i+1). The infimum partition has the nonempty intersections as atoms, so all atoms are clopen. P_(i+1) refines P_i and P_i refines Q_i. Diameter monotonicity gives the required bound. This also works for empty S.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-clopen-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Topology/ShrinkingClopenPartitions.lean",
+  "place": "Fully proved from the indicated Mathlib declarations and elementary set/order/metric arguments; no postponed proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "PiNat.exists_retraction_subtype_of_isClosed",
+   "results": {
+    "t": "2026-10-26T06:38:59Z",
+    "tool": "loogle",
+    "query": "PiNat.exists_retraction_subtype_of_isClosed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "PiNat.exists_retraction_subtype_of_isClosed"
+    ],
+    "digest": "50851967af4b203e"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact totally disconnected metric space has refining finite clopen partitions of arbitrarily small diameter and embeds into a countable product of finite discrete spaces",
+   "results": {
+    "t": "2026-10-26T06:39:01Z",
+    "tool": "leanfinder",
+    "query": "A compact totally disconnected metric space has refining finite clopen partitions of arbitrarily small diameter and embeds into a countable product of finite discrete spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightProfinite.of",
+     "exists_clopen_partition_of_clopen_cover",
+     "Metric.PiNatEmbed.toPiNatHomeo",
+     "cantorSetHomeomorphNatToBool",
+     "CompHaus.toProfiniteObj",
+     "Metric.PiNatEmbed.isHomeomorph_toPiNat",
+     "Metric.PiNatEmbed.exists_embedding_to_hilbert_cube",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover"
+    ],
+    "digest": "7ac3ab30fd183ce7"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+   "results": {
+    "t": "2026-10-26T06:45:02Z",
+    "tool": "grep",
+    "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean"
+    ],
+    "digest": "cace69bdda7b2f78"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refining finite clopen partitions with arbitrarily small diameters in a compact totally disconnected metric space",
+   "results": {
+    "t": "2026-10-26T06:46:25Z",
+    "tool": "leansearch",
+    "query": "Refining finite clopen partitions with arbitrarily small diameters in a compact totally disconnected metric space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_clopen_partition_of_clopen_cover",
+     "isTopologicalBasis_isClopen",
+     "compact_exists_isClopen_in_isOpen",
+     "loc_compact_Haus_tot_disc_of_zero_dim",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover",
+     "exists_clopen_of_closed_subset_open",
+     "TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover",
+     "isClopen_iInter_of_finite"
+    ],
+    "digest": "634960ba258a67b8"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ClosedCoverStabilizingSelectors",
+  "date": "2026-10-26",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited scalar analytic expansion of paragraph (3), old steps 5–6. This auxiliary construction has no recorded imported blueprint ancestor, as in its parent; the exact argument is preserved in the parent theorem docstring.",
+   "via": [
+    "lem-sfb-closed-cover-retractions-stabilizing-selectors",
+    "lem-sfb-parameter-cochain-completion-boundary-descent",
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ShrinkingClopenPartitions",
+  "file": "lean/Sheaf/Topology/ShrinkingClopenPartitions.lean",
+  "declaration": "TopologicalSpace.exists_shrinking_clopen_partitions",
+  "statement": "theorem exists_shrinking_clopen_partitions\n    (S : Type u) [MetricSpace S] [CompactSpace S] [TotallyDisconnectedSpace S] :\n    ∃ P : ℕ+ → Finpartition (Set.univ : Set S),\n      (∀ i, P (i + 1) ≤ P i) ∧\n      (∀ i p, p ∈ (P i).parts → IsClopen p ∧ Metric.diam p < (1 / 2 : ℝ) ^ (i : ℕ))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T082623-L-2197176",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T082623-L-2197176",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

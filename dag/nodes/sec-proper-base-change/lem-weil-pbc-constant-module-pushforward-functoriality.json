@@ -142,5 +142,60 @@
   ],
   "sorry_after": []
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.constantModulePushforwardMap_id_comp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.constantModulePushforwardMap_id_comp",
+     "module": "WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality",
+     "lines": [
+      210,
+      255
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring (in the coefficient universe one above that of the schemes [def-weil-pbc-scheme-conventions]) and $M$ a $\\Lambda$-module; write $\\underline M_T$ for the constant sheaf of $\\Lambda$-modules with value $M$ on $T_{\\Et}$ [def-weil-pbc-etale-sheaves]. For morphisms $f_1:Y_1\\to X$, $f_2:Y_2\\to X$ and $g:Y_2\\to Y_1$ with $f_1\\circ g=f_2$, let\n$$c_g:f_{1*}\\underline M_{Y_1}\\longrightarrow f_{2*}\\underline M_{Y_2}$$\nbe $f_{1*}$ of the inverse-image unit $\\underline M_{Y_1}\\to g_*g^{-1}\\underline M_{Y_1}$ followed by $g_*$ of the canonical comparison $g^{-1}\\underline M_{Y_1}\\cong\\underline M_{Y_2}$ [lemma-constructible-pullback-constant], composed with the direct-image composition isomorphism $f_{1*}g_*\\cong f_{2*}$ [def-weil-pbc-direct-image]. Then $c_{\\mathrm{id}_{Y}}=\\mathrm{id}$ for every $f:Y\\to X$, and for $g:Y_2\\to Y_1$, $g':Y_3\\to Y_2$ over $X$ (with $f_1\\circ g=f_2$, $f_2\\circ g'=f_3$) one has $c_{g\\circ g'}=c_{g'}\\circ c_g:f_{1*}\\underline M_{Y_1}\\to f_{3*}\\underline M_{Y_3}$. No finiteness assumptions are imposed.",
+  "proof": [
+   {
+    "text": "For g:Y2 -> Y1 over X, take the inverse-image unit at the constant M-sheaf, followed by g_* of the canonical comparison g^* M_Y1 -> M_Y2. Push this map forward by f1 and compose with the canonical g_* f1_* composition comparison. This is exactly the map $c_g$ of the statement. ([lemma-constructible-pullback-constant], [def-weil-pbc-direct-image], [def-weil-pbc-inverse-image]).",
+    "uses": [
+     "lemma-constructible-pullback-constant",
+     "def-weil-pbc-direct-image",
+     "def-weil-pbc-inverse-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Under the constant-sheaf/global-sections adjunction, the canonical pullback comparison preserves the section with each value m. On etale U over X the resulting map is restriction along U times_X Y2 -> U times_X Y1. Restrictions along an identity are identities, and along a composite are the composites in reverse order. This holds on the constant presheaves and extends uniquely to their sheafifications. The pushforward comparison is the fibre-product pasting map, so the identity and composition equalities are the asserted ones. Equivalently, take mates under the inverse-image adjunction and use its unit and composition coherence; the uniqueness of the constant-sheaf comparison gives the same mates. ([lemma-constructible-pullback-constant], [def-weil-pbc-direct-image], [lem-weil-pbc-inverse-image-composition]).",
+    "uses": [
+     "lemma-constructible-pullback-constant",
+     "def-weil-pbc-direct-image",
+     "lem-weil-pbc-inverse-image-composition"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

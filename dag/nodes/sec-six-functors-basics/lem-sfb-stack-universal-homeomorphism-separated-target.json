@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-stack-universal-homeomorphism-separated-target",
+ "kind": "statement",
+ "title": "Universally closed stack diagonals descend through universal homeomorphisms",
+ "statement": "Let $k$ be a field, $\\mathcal Z/k$ an algebraic stack, $Q/k$ an algebraic space, and $f:\\mathcal Z\\to Q$ a universal homeomorphism. Assume that $\\Delta_{\\mathcal Z/k}:\\mathcal Z\\to\\mathcal Z\\times_k\\mathcal Z$ is universally closed: after every algebraic-stack base change, its map of point spaces is closed. Then $\\Delta_{Q/k}:Q\\to Q\\times_kQ$ is a closed immersion, so $Q$ is separated over $k$. Here a universal homeomorphism means a homeomorphism on point spaces after every algebraic-stack base change. Point spaces are field-valued objects modulo isomorphism and common field extension, with topology detected by smooth scheme atlases. A closed immersion of algebraic spaces means a closed immersion after scheme charts [def-weil-closed-immersion]. No finiteness-of-inertia, finite-type or adequacy hypothesis is assumed on $f$. Algebraic stacks and spaces use [def-sfb-algebraic-moduli-stack, def-trf-algebraic-space].",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUY (lemma-keel-mori-diagonal), proof for separatedness, with the same argument applied over k to any universal homeomorphism with universally closed source diagonal; spaces-morphisms.tex Tag 04Y0 (lemma-separated-diagonal-proper), equivalence of universal closedness of an algebraic-space diagonal with its being a closed immersion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "Use the algebraic-stack 2-fibre products of [lem-sfb-algebraic-stack-fibre-products]. Factor $f\\times f$ as $\\mathcal Z\\times_k\\mathcal Z\\xrightarrow{f\\times1}Q\\times_k\\mathcal Z\\xrightarrow{1\\times f}Q\\times_kQ$. Each factor is a base change of $f$. After any further algebraic-stack base change, its point map is therefore a homeomorphism by the hypothesis on $f$. The point map of the base-changed composite is the composite of these two homeomorphisms (factor the base change through the intermediate stack), so $f\\times f$ is a universal homeomorphism. Functoriality of point maps is immediate on field-valued representatives; their topologies are those of [lem-sfb-stack-point-topology].",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUY (lemma-keel-mori-diagonal), separatedness argument, applied over k; universal homeomorphisms as in stacks-morphisms.tex Tag 0CI7 (definition-universal-homeomorphism)."
+   }
+  },
+  {
+   "text": "Let $T\\to Q\\times_kQ$ be any algebraic-space morphism, and set $D=Q\\times_{Q\\times_kQ}T$, $B=(\\mathcal Z\\times_k\\mathcal Z)\\times_{Q\\times_kQ}T$, and $A=\\mathcal Z\\times_{Q\\times_kQ}T$, where the last structure map is $(f,f)$. These are algebraic stacks by [lem-sfb-algebraic-stack-fibre-products]; $D$ is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. The equality $(f\\times f)\\Delta_{\\mathcal Z}=\\Delta_Qf$ gives a commutative square with top map $a:A\\to B$, bottom map $d:D\\to T$ and vertical maps $u:A\\to D$, $v:B\\to T$. Associating the 2-fibre products identifies $A$ with $\\mathcal Z\\times_QD$ and also with $\\mathcal Z\\times_{\\mathcal Z\\times_k\\mathcal Z}B$: both identifications just retain the same object of $\\mathcal Z$, point of $T$, and the two isomorphisms in the product. Thus $u$ is a base change of $f$, $v$ of $f\\times f$, and $a$ of $\\Delta_{\\mathcal Z/k}$. Consequently $|u|,|v|$ are homeomorphisms and $|a|$ is closed by the hypotheses.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUY (lemma-keel-mori-diagonal), separatedness argument, applied over k; universal homeomorphisms as in stacks-morphisms.tex Tag 0CI7 (definition-universal-homeomorphism)."
+   }
+  },
+  {
+   "text": "For a closed subset $C\\subseteq|D|$, the subset $|u|^{-1}(C)$ is closed in $|A|$. Its image under $|a|$ is closed in $|B|$, and its image under the homeomorphism $|v|$ is closed in $|T|$. Commutativity on field-valued points and surjectivity of $|u|$ give the exact equality $|d|(C)=|v|\\bigl(|a|(|u|^{-1}(C))\\bigr)$. Hence $|d|$ is closed. The point topologies agree with the usual algebraic-space topologies by [lem-sfb-stack-point-topology]. As $T$ was arbitrary, $\\Delta_{Q/k}$ is universally closed in the algebraic-space sense.",
+   "uses": [
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUY (lemma-keel-mori-diagonal), separatedness argument, applied over k; universal homeomorphisms as in stacks-morphisms.tex Tag 0CI7 (definition-universal-homeomorphism)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-separated-diagonal-closed] with base scheme $B=\\operatorname{Spec}k$, $U=Q$, $V=\\operatorname{Spec}k$ and $g$ the structure morphism. Its diagonal is $\\Delta_{Q/k}$. Step 3 tested every algebraic-space base change $T\\to Q\\times_kQ$ and proved its point map closed, with precisely the etale-atlas topology required by the cited statement. Thus that statement makes $\\Delta_{Q/k}$ a representable map whose every scheme base change is a closed immersion of schemes; this is its explicit meaning of a closed immersion of algebraic spaces. Hence $Q/k$ is separated. The criterion requires neither quasi-compactness nor finite type of $g$.",
+   "uses": [
+    "lem-sfb-space-separated-diagonal-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04Y0 (lemma-separated-diagonal-proper), implication (2) to (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-stack-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-separated-diagonal-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUY (lemma-keel-mori-diagonal), separatedness proof, with the omitted base-change closed-set argument written out; final criterion Tag 04Y0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A universal homeomorphism from a separated algebraic stack to an algebraic space has separated target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of a morphism of schemes being separated is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is separated, then for any Zariski covering sieve $ S $ on $ Y $, ther\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated.isSeparated_terminal_from\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsSeparated],\\n  AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"For any separated scheme $X$, the unique morphism from $X$ to the terminal object in the category of schemes is itself a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally closed diagonal descends through universal homeomorphism of algebraic stacks to an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [hg : AlgebraicGeometry.UniversallyClosed g],\\n  AlgebraicGeometry.UniversallyClosed (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [hf : AlgebraicGeometry.UniversallyClosed f],\\n  AlgebraicGeometry.UniversallyClosed (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.iff_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyInjective f ↔ AlgebraicGeometry.Surjective (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"A morphism of schemes $ f $ is universally injective if and only if the diagonal morphism in the pullback of $ f $ with itself is surjective.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalHomeomorph\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.homeomorph.*separat|separat.*universal.homeomorph",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic stack universal homeomorphism separated target diagonal universally closed",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] [IsDominant f] : Surjective f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f → AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ of schemes, if for every base change, the induced morphism is a closed map in the topological sense, then $ f $ is universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.out\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is universally closed, then the underlying continuous map of $ f $ is universally closed in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[UniversallyClosed (f ≫ g)] [IsSeparated g] : UniversallyClosed f\", \"doc\": \"If the composition of morphisms $ f $ and $ g $ is universally closed and $ g $ is a separated morphism of schemes, then $ f $ is universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosedTypeComp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : UniversallyClosed f] [hg : UniversallyClosed g] :\\n  UniversallyClosed (f ≫ g)\", \"doc\": \"Given two universally closed morphisms of schemes $f: X \\\\to Y$ and $g: Y \\\\to Z$, their composition $g \\\\circ f: X \\\\to Z$ is also universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.homeomorph.*separat|separat.*universal.homeomorph",
+   "results": "OK 0 hit(s): none",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes; the required statement concerns an arbitrary algebraic stack and an algebraic-space target, so none specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space is separated if its diagonal is universally closed and a universal homeomorphism from an algebraic stack descends closedness of the diagonal",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.IsSeparated.mk, AlgebraicGeometry.isSeparated_iff, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes; the required statement concerns an arbitrary algebraic stack and an algebraic-space target, so none specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalHomeomorph\", \"IsSeparated\"",
+   "results": "OK 0 hit(s): none",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes; the required statement concerns an arbitrary algebraic stack and an algebraic-space target, so none specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally closed diagonal descends from an algebraic stack through a universal homeomorphism to an algebraic space",
+   "results": "OK 8 hit(s): AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.UniversallyInjective.iff_diagonal, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes; the required statement concerns an arbitrary algebraic stack and an algebraic-space target, so none specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space receiving a universal homeomorphism from a stack with universally closed diagonal is separated",
+   "results": "OK 8 hit(s): AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes; the required statement concerns an arbitrary algebraic stack and an algebraic-space target, so none specializes to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-adequate-coarse-space",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The relative diagonal argument after construction of the global universal homeomorphism.",
+   "via": [
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-universal-homeomorphism-separated-target",
+  "worker": "Q38",
+  "summary": "Expanded the relative Stacks 0DUY diagonal argument into explicit base-change and closed-subset steps, using existing algebraic-stack products, point topology, algebraic-space products and the exact 04Y0 diagonal criterion. No new nodes: base-change/composition of universal homeomorphisms and conjugating a closed map by homeomorphisms are elementary from the given definition. Replaced the inadequate definition citation def-sfb-adequate-moduli-space by def-sfb-algebraic-moduli-stack without changing the mathematical statement. Searched the project for an exact attachment and Mathlib with two semantic phrasings, Loogle, LeanSearch and grep; no match. Repair of the returned landing: re-read all current cited statements, in particular the updated 04Y0 criterion, and expanded step 4 to verify its base scheme, algebraic-space base-change quantifier, point topology and representable closed-immersion conclusion explicitly. No hypothesis or conclusion of the item changed in this repair.",
+  "blueprint": "The inherited from.place traces this supporting diagonal argument through the finite-inertia adequate coarse-space prerequisite to det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint direct-image proof (3) is the compactification route; this item is a below-unit supporting lemma, not a replacement of that route. Steps 1--3 supply the universally closed target diagonal in the inherited moduli prerequisite; step 4 supplies separatedness. blueprint_refs.py ancestor reports no imported ancestor (from.node = null); retained the inherited ancestry and precise from.place. Whole-blueprint searches for universally closed diagonal, separated diagonal and universal homeomorphism found no duplicate statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Step 2 takes only its first sentence (the sheaf fibre product of algebraic spaces is an algebraic space and a fibre product), to know that D = Q x_{QxQ} T is an algebraic space so that the 04Y0 criterion applies; this generic fibre-product fact lies in sk-i-curve-zero and no node of sk-thm-sf-ctf-stability states it (lem-sfb-algebraic-stack-fibre-products only gives an algebraic stack)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-8fb56f96f",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-8fb56f96f (reviewer sub-agent of L); spot-checked: I read the item in full, along with the full statements of all four proof deps and the stmt_deps. This re-delivers a4b3d12dc (earlier verdict FIX). That landing was refused because the statement of lem-sfb-space-separated-diagonal-closed had changed. The new head changes only proof step 4 and the split_report summary. The cited statements in the snapshot match live, and live still has the item unsplit with no repair note, so the delivery is not superseded. Sources: Stacks 0DUY (stacks-more-morphisms.tex l.4027-4064, separatedness paragraph) and 04Y0 (spaces-morphisms.tex, lemma-separated-diagonal-proper, (2)=>(1) for any morphism of algebraic spaces). The item generalizes 0DUY to any universal homeomorphism from an algebraic stack to an algebraic space, over k, with a universally closed source diagonal. The generalization is true. Edge cases: identity, empty source, BG for a finite group, line with doubled origin. Step 1: f x f = (1 x f)(f x 1), a composite of two base changes of f. Step 2: A = Z x_{QxQ} T, and pasting gives A = Z x_Q D = Z x_{ZxZ} B; D is an algebraic space by the first sentence of the trf fibre-product node. Step 3: |d|(C) = |v||a||u|^-1(C), using surjectivity of |u|; the point topology equals the étale-atlas topology, which is the def-a1-space-point-topology used by the criterion. Step 4 (repaired): instantiates the current criterion with B = Spec k, U = Q, V = Spec k, and the quantifier is matched exactly. proof_deps equals the union of uses. No new nodes and no duplicates (rg -L for 0DUY found only the parent, the pgl quotient and the 04Y0 node). No SGA. Batch-5: the algebraic-stack definition, the stack fibre products, the point topology, the space fibre products and the 04Y0 criterion are general facts, not steps of the trace formula or of Poincaré duality, so all are accepted. FIX: lem-trf-space-fibre-products-etale-covers (unit sk-i-curve-zero) is off the route of sk-thm-sf-ctf-stability. The earlier tool_uses fix was lost with the refused landing, and the report again wrongly says all cited nodes are in the unit. I re-added it as an accepted generic tool_use (fibre products of algebraic spaces; 82 sfb nodes declare the same) in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-universal-homeomorphism-separated-target.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackUniversalHomeomorphismSeparatedTarget",
+  "declaration": "CategoryTheory.stack_universalHomeomorphism_separated_target",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackUniversalHomeomorphismSeparatedTarget.lean",
+  "statement": "theorem stack_universalHomeomorphism_separated_target {k : Type u} [Field k] (Z : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (Q : AlgebraicSpace (Spec (.of k))) (hZ : IsAlgebraicModuliStack Z) (f : BasedFunctor Z (discreteModuli Q.obj.obj)) (hf : ∀ (T : BasedCategory.{max u v₁ v₂, max (u + 1) w₁ w₂} (Over (Spec (.of k)))), IsAlgebraicModuliStack T → ∀ t : BasedFunctor T (discreteModuli Q.obj.obj), IsHomeomorph (moduliPointMap (moduliTwoFiberFst t f))) (hdiag : ∀ (T : BasedCategory.{max u v₁ v₂, max (u + 1) w₁ w₂} (Over (Spec (.of k)))), IsAlgebraicModuliStack T → ∀ t : BasedFunctor T (moduliTwoFiberProduct (moduliBaseStructure Z) (moduliBaseStructure Z)), IsClosedMap (moduliPointMap (moduliTwoFiberFst t (moduliRelativeDiagonal (moduliBaseStructure Z))))) : AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 Q.obj.obj) (𝟙 Q.obj.obj))",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a9e1cde7",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Re-delivery of 7bcdb40f (RETURN H2). Only change: stmt_dep lem-sfb-stack-point-topology-flat-lfp-open -> def-sfb-stack-point-topological-space (existing:true owner of moduliPointTopologicalSpace), report updated; Lean file byte-identical. Re-checked clauses: field k, algebraic stack Z, algebraic space Q, f into discreteModuli Q, hf IsHomeomorph of moduliTwoFiberFst t f for all algebraic T, hdiag IsClosedMap after all base changes of moduliRelativeDiagonal(moduliBaseStructure Z), conclusion IsRepresentableWith IsClosedImmersion of prod.lift 1 1; universes enlarged, no extra hypotheses; lean.statement verbatim; live node lean null (no rebind), statement unchanged; all 3 added stmt_deps are owning def nodes; Worker report + Second reading present; no compile (no change)."
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-diagonal-uniformizer-finite-normalization",
+ "kind": "statement",
+ "title": "Finite normalization of an already reduced diagonal diagram",
+ "statement": "Let l be prime, Y,P=ProjectiveLine Y,W=diagonalSurface Y Noetherian, l invertible on Y, with DiagonalTraceLocalizations on all three schemes. Supply the completed reduction D, its completion and cycle-system specifications, a completed arrow delta normalized by IsDiagonalLimit, and a Family with a Reference to that arrow [def-sfb-diagonal-coefficient-reference]. Fix E, a maximal-ideal generator pi and n>=0. Assume the lifted residue ring A=ULift(O_E/(pi)^(n+1)) finite, killed by l^(n+1), this exponent invertible on Y,W, and normalized FiniteRoots on P,W. Let d be an already constructed quotient Diagram and supply ScalarCompatibility of family.integral E with d along the quotient map. Then there exist finite realizations eY,eP,eW and QuotientLineRealizations lineP,lineW at the fixed exponent r=n [def-sfb-diagonal-coefficient-quotient-line], for which FiniteDiagonalComparison [def-sfb-diagonal-coefficient-finite-diagonal] holds. In particular the finite image of d.delta is the canonical positive Cartier arrow and d.traceq is the inverse positive unit/Chern splitting followed by constant projection. This theorem constructs neither d nor its scalar compatibility or integration identities.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "def-sfb-diagonal-coefficient-finite-diagonal"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite normalization of an already reduced diagonal diagram"
+ },
+ "proof": [
+  {
+   "text": "Construct the three exact finite realizations, the two positive-root endpoints, the normalized diagonal source isomorphism and the ordinary q direct-image comparison, independently of the completed class and trace.",
+   "uses": [
+    "lem-diagonal-uniformizer-finite-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteTracePresentation_exists at exponent n+1 and the supplied finite quotient ring. This proved generic helper constructs the canonical finite right-derived q_* model with its full cochain-unit equation, derives the supplied ordinary square retaining its normalization, and selects the positive splitting with hom geoP1TwistedMap.",
+   "uses": [
+    "lem-diagonal-finite-trace-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the completed-arrow reduction with the supplied source and lineW endpoint for the Cartier equation. Use completed-trace reduction with the constructed normalized square and canonical splitting for the trace equation. Apply the proved generic finiteDiagonalComparison_of_equations to assemble these witnesses and both equalities into FiniteDiagonalComparison without changing its statement.",
+   "uses": [
+    "lem-diagonal-uniformizer-cartier-reduction",
+    "lem-diagonal-uniformizer-trace-reduction",
+    "lem-diagonal-finite-comparison-assembly"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-uniformizer-finite-models",
+  "lem-diagonal-finite-trace-presentation",
+  "lem-diagonal-uniformizer-cartier-reduction",
+  "lem-diagonal-uniformizer-trace-reduction",
+  "lem-diagonal-finite-comparison-assembly"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite reductions of the coefficient objects, diagonal class and trace",
+  "by": "E2",
+  "note": "Lean assembly from strictly separated coefficient-model, Cartier-arrow and trace-arrow obligations, using the existing canonical derived model, full-unit square theorem and proved finite projective-line splitting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact realization of finite condensed coefficients and diagonal cycle classes under uniformizer reduction; scalar extension of a diagonal diagram preserving normalized traces",
+   "results": "Eight hits on perfectoid BDeRham and unrelated exactness lemmas; no normalized diagonal quotient comparison. Local library supplies integration_transport for formal assembly.",
+   "date": "2026-10-26",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits including rightDerivedUnique and rightDerivedDesc; these supply general unit-normalized right-derived comparisons, not the geometric endpoint or finite-normalization construction.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing canonical right-derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|QuotientLineRealization|FiniteDiagonalComparison",
+   "results": "Search service returned zero hits. Local rg in lean/Sheaf, lean/WeilConjectures and quarantine/Sheaf located IntegrationTransport, DiagonalCoefficientQuotientLine and DiagonalCoefficientFiniteDiagonal. The latter two define the desired normalization predicates; they do not construct the comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use existing definitions and integration transport; comparison constructions remain separate obligations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCoefficientUniformizerReduction",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite normalization of an already reduced diagonal diagram",
+   "via": [
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalUniformizerFiniteNormalization",
+  "file": "lean/Sheaf/Paper/DiagonalUniformizerFiniteNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalUniformizer_finiteNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalUniformizer_finiteNormalization"
+  ],
+  "statement": "theorem diagonalUniformizer_finiteNormalization\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D)\n    (hsystem : DiagonalCycleSystemSpec l Y hY D)\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (hδ : DiagonalTrace.IsDiagonalLimit l Y hY D δ)\n    (family : Family l Y) (reference : Reference l Y δ family)\n    (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ)\n    (hfinite : Finite (ULift.{u + 1} (completedResidue l E π n)))\n    (hA : ((l ^ (n + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0)\n    (hYpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(Y, ⊤)))\n    (hWpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(diagonalSurface Y, ⊤)))\n    (rootsP : FiniteRoots (ProjectiveLine Y) (l ^ (n + 1)))\n    (rootsW : FiniteRoots (diagonalSurface Y) (l ^ (n + 1)))\n    (d : Diagram (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n      Y (quotientLine l E π n))\n    (scalar : ScalarCompatibility (quotientMap l E π n) Y\n      (fun X ↦ spIntegralTwist X l E) (quotientLine l E π n)\n      (quotientLineMap l E π n) (family.integral E) d) :\n    ∃ (eY : FiniteRealization\n        (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n        (ULift.{u + 1} (completedResidue l E π n)) Y)\n      (eP : FiniteRealization\n        (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n        (ULift.{u + 1} (completedResidue l E π n)) (ProjectiveLine Y))\n      (eW : FiniteRealization\n        (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n        (ULift.{u + 1} (completedResidue l E π n)) (diagonalSurface Y))\n      (lineP : QuotientLineRealization l E π n n hA (ProjectiveLine Y) eP)\n      (lineW : QuotientLineRealization l E π n n hA (diagonalSurface Y) eW),\n      FiniteDiagonalComparison\n        (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n        (ULift.{u + 1} (completedResidue l E π n)) (hfinite := hfinite)\n        (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _) hA Y hYpow hWpow\n        (quotientLine l E π n) d eY eP eW (lineP.iso l) (lineW.iso l)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T183206-L-3660312",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T222622-L-674603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

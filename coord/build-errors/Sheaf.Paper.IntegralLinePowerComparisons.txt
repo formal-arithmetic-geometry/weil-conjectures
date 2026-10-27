@@ -1,0 +1,172 @@
+# global build 2026-10-24T21:48:15Z of 1564b541f5: Sheaf.Paper.IntegralLinePowerComparisons failed
+error: Sheaf/Paper/IntegralLinePowerComparisons.lean:140:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (ConcreteCategory.hom ((B n (Int.ofNat (r + 2))).hom.val.app U))
+    (SheafOfModules.scalarExtensionSection (α n)
+      (SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L (r + 2)) U a
+      ((SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L
+            (r + 1)).siteSheafTensorTmul
+        L U x y))
+in the target expression
+  (ConcreteCategory.hom ((B n (Int.ofNat (r + 2))).hom.val.app U))
+      (SheafOfModules.scalarExtensionSection (α n) (power l E X L (Int.ofNat (r + 2))) U a
+        ((Nat.rec L (fun x P ↦ (SheafOfModules.siteSheafTensorRight L).obj P) r).siteSheafTensorTmul L U x y)) =
+    SheafOfModules.siteSheafTensorTmul (finitePower l E X L n (Int.ofNat (r + 1)))
+      ((scalarReductionExtension l E X n).obj L) U
+      ((ConcreteCategory.hom ((b (Int.ofNat (r + 1)) n).hom.val.app U))
+        (sfReductionTensor l E X n (power l E X L (Int.ofNat (r + 1))) U a x))
+      (sfReductionTensor l E X n L U 1 y)
+
+case refine_3
+l : ℕ
+inst✝⁴ : Fact (Nat.Prime l)
+E : Type u
+inst✝³ : Field E
+inst✝² : Algebra ℚ_[l] E
+inst✝¹ : FiniteDimensional ℚ_[l] E
+X : Scheme
+L : scalarReductionSource l E X
+inst✝ : SheafOfModules.IsFiniteLocallyFreeOfRank L 1
+R : Sheaf (ProEt.topology X) CommRingCat := completedIntegralCommRingSheafUnrestricted l E X
+S : ℕ → Sheaf (ProEt.topology X) CommRingCat := fun n ↦ integralCoefficientCommRingSheaf l E X n
+α : (n : ℕ) → completedIntegralCommRingSheafUnrestricted l E X ⟶ integralCoefficientCommRingSheaf l E X n :=
+  fun n ↦ completedIntegralCommRingProjectionUnrestricted l E X n
+c : (n : ℕ) →
+  (M : scalarReductionSource l E X) →
+    (scalarReductionExtension l E X n).obj M ≅ SheafOfModules.changeOfRingsOfUniverses (α n) M :=
+  fun n M ↦ eqToIso ⋯ ≪≫ SheafOfModules.ScalarHomOrdinary.extensionIso (α n) M
+hc :
+  ∀ (n : ℕ) (M : scalarReductionSource l E X) (U : X.ProEtᵒᵖ) (a : ↑((S n).obj.obj U)) (x : ↑(M.val.obj U)),
+    (ConcreteCategory.hom ((c n M).hom.val.app U)) (sfReductionTensor l E X n M U a x) =
+      SheafOfModules.scalarExtensionSection (α n) M U a x
+hci :
+  ∀ (n : ℕ) (M : scalarReductionSource l E X) (U : X.ProEtᵒᵖ) (a : ↑((S n).obj.obj U)) (x : ↑(M.val.obj U)),
+    (ConcreteCategory.hom ((c n M).inv.val.app U)) (SheafOfModules.scalarExtensionSection (α n) M U a x) =
+      sfReductionTensor l E X n M U a x
+hL : SheafOfModules.IsInvertible L
+this : SheafOfModules.IsInvertible L := hL
+B :
+  (n : ℕ) →
+    (m : ℤ) →
+      SheafOfModules.changeOfRingsOfUniverses (α n) (SheafOfModules.signedLinePower L m) ≅
+        SheafOfModules.signedLinePower (line l E X L n) m
+hB :
+  ∀ (n : ℕ),
+    (B n 0).hom = (SheafOfModules.scalarExtensionUnitIso (α n)).hom ∧
+      (B n 1).hom = (c n L).symm.hom ∧
+        (∀ (n_1 : ℕ) (U : X.ProEtᵒᵖ) (s : ↑((integralCoefficientCommRingSheaf l E X n).obj.obj U))
+            (x :
+              ↑((SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L
+                        (n_1 + 1)).val.obj
+                  U))
+            (y : ↑(L.val.obj U)),
+            (ConcreteCategory.hom ((B n (Int.ofNat (n_1 + 2))).hom.val.app U))
+                (SheafOfModules.scalarExtensionSection (α n)
+                  (SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L (n_1 + 2)) U s
+                  ((SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L
+                        (n_1 + 1)).siteSheafTensorTmul
+                    L U x y)) =
+              (SheafOfModules.scalarTensorPower (integralCoefficientCommRingSheaf l E X n) (line l E X L n)
+                    (n_1 + 1)).siteSheafTensorTmul
+                (line l E X L n) U
+                ((ConcreteCategory.hom ((B n (Int.ofNat (n_1 + 1))).hom.val.app U))
+                  (SheafOfModules.scalarExtensionSection (α n)
+                    (SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L (n_1 + 1)) U
+                    s x))
+                ((ConcreteCategory.hom ((c n L).symm.hom.val.app U))
+                  (SheafOfModules.scalarExtensionSection (α n) L U 1 y))) ∧
+          ∀ (n_1 : ℕ),
+            (B n (Int.negSucc n_1)).hom =
+              SheafOfModules.scalarExtensionDualMap (α n)
+                  (SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L (n_1 + 1)) ≫
+                SheafOfModules.homObjMap (B n (Int.ofNat (n_1 + 1))).inv
+                  (𝟙
+                    (SheafOfModules.unit
+                      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)).obj
+                        (integralCoefficientCommRingSheaf l E X n))))
+hneg :
+  ∀ (n n_1 : ℕ) (U : X.ProEtᵒᵖ) (s t : ↑((integralCoefficientCommRingSheaf l E X n).obj.obj U))
+    (φ : ↑((SheafOfModules.signedLinePower L (Int.negSucc n_1)).val.obj U))
+    (x :
+      ↑((SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L (n_1 + 1)).val.obj U)),
+    (ConcreteCategory.hom
+          (((ConcreteCategory.hom ((B n (Int.negSucc n_1)).hom.val.app U))
+                (SheafOfModules.scalarExtensionSection (α n) (SheafOfModules.signedLinePower L (Int.negSucc n_1)) U s
+                  φ)).app
+            (op (Over.mk (𝟙 (unop U))))))
+        ((ConcreteCategory.hom ((B n (Int.ofNat (n_1 + 1))).hom.val.app U))
+          (SheafOfModules.scalarExtensionSection (α n)
+            (SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L (n_1 + 1)) U t x)) =
+      (ConcreteCategory.hom ((α n).hom.app U)) ((ConcreteCategory.hom (φ.app (op (Over.mk (𝟙 (unop U)))))) x) * s * t
+hlocal :
+  ∀ (n : ℕ) (U : X.ProEtᵒᵖ) (e : (m : ℤ) → ↑((SheafOfModules.signedLinePower L m).val.obj U))
+    (f : (m : ℤ) → ↑((SheafOfModules.signedLinePower (line l E X L n) m).val.obj U)),
+    ((∀ (m : ℤ) (W : (Over (unop U))ᵒᵖ),
+          Function.Bijective fun r ↦
+            r • (ConcreteCategory.hom ((SheafOfModules.signedLinePower L m).val.map (unop W).hom.op)) (e m)) ∧
+        e 0 = 1 ∧
+          (∀ (n : ℕ),
+              e (Int.ofNat (n + 2)) =
+                (SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L
+                      (n + 1)).siteSheafTensorTmul
+                  L U (e (Int.ofNat (n + 1))) (e 1)) ∧
+            ∀ (n : ℕ) (W : (Over (unop U))ᵒᵖ),
+              (ConcreteCategory.hom ((e (Int.negSucc n)).app W))
+                  ((ConcreteCategory.hom
+                      ((SheafOfModules.scalarTensorPower (completedIntegralCommRingSheafUnrestricted l E X) L
+                              (n + 1)).val.map
+                        (unop W).hom.op))
+                    (e (Int.ofNat (n + 1)))) =
+                1) →
+      ((∀ (m : ℤ) (W : (Over (unop U))ᵒᵖ),
+            Function.Bijective fun r ↦
+              r •
+                (ConcreteCategory.hom ((SheafOfModules.signedLinePower (line l E X L n) m).val.map (unop W).hom.op))
+                  (f m)) ∧
+          f 0 = 1 ∧
+            (∀ (n_1 : ℕ),
+                f (Int.ofNat (n_1 + 2)) =
+                  (SheafOfModules.scalarTensorPower (integralCoefficientCommRingSheaf l E X n) (line l E X L n)
+                        (n_1 + 1)).siteSheafTensorTmul
+                    (line l E X L n) U (f (Int.ofNat (n_1 + 1))) (f 1)) ∧
+              ∀ (n_1 : ℕ) (W : (Over (unop U))ᵒᵖ),
+                (ConcreteCategory.hom ((f (Int.negSucc n_1)).app W))
+                    ((ConcreteCategory.hom
+                        ((SheafOfModules.scalarTensorPower (integralCoefficientCommRingSheaf l E X n) (line l E X L n)
+                                (n_1 + 1)).val.map
+                          (unop W).hom.op))
+                      (f (Int.ofNat (n_1 + 1)))) =
+                  1) →
+        (ConcreteCategory.hom ((c n L).symm.hom.val.app U)) (SheafOfModules.scalarExtensionSection (α n) L U 1 (e 1)) =
+            f 1 →
+          ∀ (m : ℤ) (r : ↑((completedIntegralCommRingSheafUnrestricted l E X).obj.obj U))
+            (s : ↑((integralCoefficientCommRingSheaf l E X n).obj.obj U)),
+            (ConcreteCategory.hom ((B n m).hom.val.app U))
+                (SheafOfModules.scalarExtensionSection (α n) (SheafOfModules.signedLinePower L m) U s (r • e m)) =
+              ((ConcreteCategory.hom ((α n).hom.app U)) r * s) • f m
+b : PowerComparisons l E X L := fun m n ↦ c n (power l E X L m) ≪≫ B n m
+r n : ℕ
+U : X.ProEtᵒᵖ
+a : ↑((integralCoefficientCommRingSheaf l E X n).obj.obj U)
+x : ↑((power l E X L (Int.ofNat (r + 1))).val.obj U)
+y : ↑(L.val.obj U)
+⊢ (ConcreteCategory.hom ((B n (Int.ofNat (r + 2))).hom.val.app U))
+      (SheafOfModules.scalarExtensionSection (α n) (power l E X L (Int.ofNat (r + 2))) U a
+        ((Nat.rec L (fun x P ↦ (SheafOfModules.siteSheafTensorRight L).obj P) r).siteSheafTensorTmul L U x y)) =
+    SheafOfModules.siteSheafTensorTmul (finitePower l E X L n (Int.ofNat (r + 1)))
+      ((scalarReductionExtension l E X n).obj L) U
+      ((ConcreteCategory.hom ((b (Int.ofNat (r + 1)) n).hom.val.app U))
+        (sfReductionTensor l E X n (power l E X L (Int.ofNat (r + 1))) U a x))
+      (sfReductionTensor l E X n L U 1 y)
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    line l E X L n
+  has type
+    scalarReductionTarget l E X n
+  but is expected to have type
+    ringedSiteModules
+      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)).obj (integralCoefficientCommRingSheaf l E X n))
+  in the application
+    SheafOfModules.signedLinePower (line l E X L n)
+error: Lean exited with code 1

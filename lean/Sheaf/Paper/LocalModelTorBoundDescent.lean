@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.CategoryTheory.InternalSectionModuleFlat
 import Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!

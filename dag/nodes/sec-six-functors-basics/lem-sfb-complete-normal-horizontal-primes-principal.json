@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-complete-normal-horizontal-primes-principal",
+ "kind": "statement",
+ "title": "Horizontal height-one primes in a complete normal power-series algebra",
+ "statement": "Let $(C,\\mathfrak n)$ be a commutative Noetherian normal local domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring] complete for its maximal-ideal-adic topology [def-weil-pbc-adically-complete-ring]. For $d\\ge0$ put $D=C[[T_1,\\ldots,T_d]]$ [def-weil-pbc-multivariate-power-series]. If $\\mathfrak r\\subset D$ is a height-one prime (a nonzero prime with no prime strictly between $(0)$ and $\\mathfrak r$) and $\\mathfrak r\\not\\subseteq\\mathfrak nD$, then $\\mathfrak r=(h)$ for some nonzero $h\\in D$. No factoriality of $C$ or perfection of its residue field is assumed.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 proof of Theorem 21.14.1, second and third paragraphs: coordinate change, reduction to one variable, Weierstrass preparation, and monic polynomial factorization over the fraction field. Bourbaki Algebre commutative VII §3 no.7 Lemma 3 and no.8 Propositions 5-6, also WANTED. No Stacks tag asserts this horizontal-prime theorem. EGA IV4 is WANTED locally; read the online English translation.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "If $d=0$, then $D=C$ and every proper prime is contained in the maximal ideal $\\mathfrak n$, so the horizontal hypothesis is impossible. For $d\\geq1$, set $A=C[[T_1,\\ldots,T_{d-1}]]$ and $t=T_d$. Regrouping coefficients identifies $D=A[[t]]$. Iterating the one-variable normal-domain lemma shows that $A$ is a Noetherian normal domain (start with $C$; at each of the $d-1$ steps the previous ring is Noetherian and normal). The local-ring lemma gives maximal ideal $\\mathfrak m=\\mathfrak nA+(T_1,\\ldots,T_{d-1})$: the displayed ideal consists exactly of the series whose constant coefficient lies in $\\mathfrak n$, by separating the constant term and partitioning positive monomials according to their first nonzero exponent. The completeness lemma with $J=\\mathfrak n$ says $A$ is $\\mathfrak m$-adically complete.",
+   "uses": [
+    "lem-weil-pbc-power-series-normal-domain",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-complete-over-complete-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Theorem 21.14.1, proof, complete-case paragraph, passage to B′ and its maximal ideal; online English translation https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  },
+  {
+   "text": "Choose $f\\in\\mathfrak r\\setminus\\mathfrak nD$. Since $C$ is Noetherian, $\\mathfrak n$ is finitely generated; the coefficient-reduction kernel lemma therefore gives $\\bar f\\ne0$ in $(C/\\mathfrak n)[[T_1,\\ldots,T_d]]$. Apply the axis-coordinate-change lemma to obtain $\\sigma$. Put $\\mathfrak q=\\sigma(\\mathfrak r)$ and $g=\\sigma(f)$. The induced bijection on ideals preserves inclusions, prime ideals, $(0)$ and nonzero ideals, so $\\mathfrak q$ is again a height-one prime. The assertion $\\overline{\\sigma(f)}(0,\\ldots,0,t)\\ne0$ says exactly that $g$, viewed in $A[[t]]$, has nonzero image in $(A/\\mathfrak m)[[t]]$.",
+   "uses": [
+    "lem-sbc-mv-power-series-quotient-kernel",
+    "lem-sfb-power-series-axis-coordinate-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Theorem 21.14.1, proof, coordinate-change reduction; coefficientwise reduction makes the hypotheses explicit; online English translation https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  },
+  {
+   "text": "Apply Weierstrass preparation over the complete local ring $(A,\\mathfrak m)$ to $g$: write $g=uF$ with $u$ a unit and $F\\in A[t]$ monic and distinguished. Then $F=u^{-1}g\\in\\mathfrak q$. In particular $F\\ne1$, since $\\mathfrak q$ is proper.",
+   "uses": [
+    "lem-per-weierstrass-preparation-complete-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Theorem 21.14.1, proof, one-variable paragraph, preparation of f_0; online English translation https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  },
+  {
+   "text": "Apply the normal-domain monic-factorization lemma to $F$. It gives $F=\\prod_{j=1}^s h_j$, with $h_j$ monic of positive degree, distinguished at $\\mathfrak m$, and $A[t]/(h_j)$ a nonzero domain. Since $F\\ne1$, the list is nonempty. Repeatedly applying primality to this product in $A[[t]]$ gives an index $j$ such that $h=h_j\\in\\mathfrak q$.",
+   "uses": [
+    "lem-sfb-normal-domain-monic-prime-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Theorem 21.14.1, proof, final paragraph, monic factors over the fraction field and integral closedness; online English translation https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  },
+  {
+   "text": "The distinguished-polynomial quotient isomorphism gives $A[[t]]/(h)\\simeq A[t]/(h)$, so $A[[t]]/(h)$ is a nonzero domain. Thus $(h)$ is a proper prime ideal: products of classes can vanish only if one class vanishes. The coefficient of $t^{\\deg h}$ in $h$ is $1$, so $h\\ne0$ in $A[[t]]$ and $(h)\\ne(0)$. We have $(0)\\subsetneq(h)\\subseteq\\mathfrak q$. By the defining height-one condition for $\\mathfrak q$, $(h)=\\mathfrak q$. Applying $\\sigma^{-1}$ gives $\\mathfrak r=(\\sigma^{-1}(h))$, with $\\sigma^{-1}(h)\\ne0$ because $\\sigma$ is an automorphism.",
+   "uses": [
+    "lem-per-distinguished-polynomial-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Theorem 21.14.1, proof, conclusion of the complete power-series case; use the division quotient and height one to finish; online English translation https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-distinguished-polynomial-quotient",
+  "lem-per-weierstrass-preparation-complete-local",
+  "lem-sbc-mv-power-series-quotient-kernel",
+  "lem-sfb-normal-domain-monic-prime-factorization",
+  "lem-sfb-power-series-axis-coordinate-change",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-normal-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 21.14.1, complete power-series case, read through the online English translation. Agent assembly uses monic irreducible factors and their quotient isomorphisms instead of contraction and polynomial height computations; EGA IV4 and Bourbaki are WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ww]eierstrass|[Pp]ower[Ss]eries.*[Pp]rincipal|[Pp]rincipal.*[Pp]ower[Ss]eries",
+   "results": "Hits: Mathlib/NumberTheory/Height/EllipticCurve.lean, Mathlib/NumberTheory/Height/EllipticCurve.lean, Mathlib/NumberTheory/Height/EllipticCurve.lean, Mathlib/NumberTheory/Height/EllipticCurve.lean, Mathlib/NumberTheory/Height/EllipticCurve.lean, Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean, Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean  Weierstrass division/preparation are inputs, not the horizontal height-one prime theorem. PowerSeries.exist_eq_span_eq_ncard_of_X_notMem controls generators through the constant-coefficient image; it does not show that image principal. The UFD instance assumes the coefficient ring is a PID, not merely normal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"IsPrincipal\"",
+   "results": "Hits: PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain  Weierstrass division/preparation are inputs, not the horizontal height-one prime theorem. PowerSeries.exist_eq_span_eq_ncard_of_X_notMem controls generators through the constant-coefficient image; it does not show that image principal. The UFD instance assumes the coefficient ring is a PID, not merely normal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weierstrass preparation height one horizontal prime ideal complete normal local coefficient ring power series principal",
+   "results": "Hits: PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod, PowerSeries.isWeierstrassFactorizationAt_iff, PowerSeries.IsWeierstrassDivisorAt.div, PowerSeries.idealX, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.weierstrassDiv, PowerSeries.IsWeierstrassFactorizationAt.recOn, PowerSeries.IsWeierstrassDivisorAt  Weierstrass division/preparation are inputs, not the horizontal height-one prime theorem. PowerSeries.exist_eq_span_eq_ncard_of_X_notMem controls generators through the constant-coefficient image; it does not show that image principal. The UFD instance assumes the coefficient ring is a PID, not merely normal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Height one primes of a formal power series ring over a complete Noetherian normal local domain not contained in the extended maximal ideal are principal",
+   "results": "Hits: PowerSeries.idealX, instIsPrincipalIdealRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, PowerSeries.span_X_isPrime, PowerSeries.maximalIdeal_eq_span_X, PowerSeries.exist_eq_span_eq_ncard_of_X_notMem, IsDedekindDomainDvr, IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers, IsDedekindDomain.isDedekindDomainDvr  Weierstrass division/preparation are inputs, not the horizontal height-one prime theorem. PowerSeries.exist_eq_span_eq_ncard_of_X_notMem controls generators through the constant-coefficient image; it does not show that image principal. The UFD instance assumes the coefficient ring is a PID, not merely normal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal prime divisors in complete normal local formal power series rings are principal by Weierstrass preparation",
+   "results": "Hits: PowerSeries.weierstrassDistinguished, PowerSeries.weierstrassDiv, PowerSeries.isDistinguishedAt_weierstrassDistinguished, PowerSeries.IsWeierstrassDivisor, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.IsWeierstrassDivisorAt, PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit, PowerSeries.exists_isWeierstrassDivision  Weierstrass division/preparation are inputs, not the horizontal height-one prime theorem. PowerSeries.exist_eq_span_eq_ncard_of_X_notMem controls generators through the constant-coefficient image; it does not show that image principal. The UFD instance assumes the coefficient ring is a PID, not merely normal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weierstrass|exist_eq_span|IsPrincipalIdealRing",
+   "results": "Hits: Mathlib/RingTheory/PowerSeries/Ideal.lean, Mathlib/RingTheory/PowerSeries/Ideal.lean, Mathlib/RingTheory/PowerSeries/Ideal.lean, Mathlib/RingTheory/PowerSeries/Ideal.lean, Mathlib/RingTheory/PowerSeries/Ideal.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean  Weierstrass division/preparation are inputs, not the horizontal height-one prime theorem. PowerSeries.exist_eq_span_eq_ncard_of_X_notMem controls generators through the constant-coefficient image; it does not show that image principal. The UFD instance assumes the coefficient ring is a PID, not merely normal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+  "date": "2026-10-24",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Theorem 21.14.1 and Corollary 21.14.2, with the explicit meaning of local parafactoriality in 21.13.8. No Stacks tag states this Ramanujam--Samuel theorem. Lower argument: EGA IV4 proof of Theorem 21.14.1, second and third paragraphs: coordinate change, reduction to one variable, Weierstrass preparation, and monic polynomial factorization over the fraction field. Bourbaki Algebre commutative VII §3 no.7 Lemma 3 and no.8 Propositions 5-6, also WANTED. No Stacks tag asserts this horizontal-prime theorem. EGA IV4 is WANTED locally; read the online English translation.",
+   "via": [
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-normal-horizontal-primes-principal",
+  "worker": "stage1",
+  "summary": "Retained the horizontal-prime statement. Read EGA IV4 21.14.1 online and Stacks 00H6 locally; split via a triangular coordinate change, preparation, monic normal-domain factorization, and the distinguished quotient. Reused both existing Weierstrass Mathlib leaves; created only two statement-only algebra inputs. No Lean attachment found.",
+  "blueprint": "Inherited affine-boundary/CTF route, lower Ramanujam–Samuel argument: EGA IV4 21.14.1 complete-case coordinate change and one-variable preparation/fraction-field factorization paragraphs. blueprint_refs ancestor returns None, retained as the inherited from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-normal-domain",
+    "why": "Generic algebra input: iterate normality and Noetherianity for the coefficient ring A; it does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-local-ring",
+    "why": "Generic algebra input: identifies the maximal ideal of the coefficient power-series ring."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Generic algebra input: combined-ideal completeness for A, required by preparation."
+   },
+   {
+    "node": "lem-sbc-mv-power-series-quotient-kernel",
+    "why": "Generic coefficient-reduction kernel lemma: n is finitely generated because C is Noetherian; needed to start the coordinate change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-normal-domain",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-sbc-mv-power-series-quotient-kernel"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-6c1938b0b",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-6c1938b0b (reviewer sub-agent of L); spot-checked: Read the item split, both new nodes, every cited statement, Mathlib WeierstrassPreparation.lean lines 458 and 651-659/811 and Distinguished.lean:31, and Stacks 00H6 (algebra.tex:8432-8479). EGA IV4 21.14.1 is WANTED and not available locally; the online translation page cuts off at section 21.5, so I checked each step's mathematics directly. Mechanical finding: lem-per-weierstrass-preparation-complete-local and lem-per-distinguished-polynomial-quotient are status-mathlib pure algebra leaves (exact matches exists_isWeierstrassFactorization and IsDistinguishedAt.algEquivQuotient). They contain nothing from the forbidden Artin-Gabber route (no Qbar_l, duality, Gabber finiteness or stable reduction), are still in the DAG and are also cited by lem-per-weierstrass-henselian-cylinder. They are used only at steps 3 and 5, for preparation and the quotient isomorphism, so the finding is accepted. Maintainer note: keep these two leaves if the dropped-route cleanup prunes orphans; their blueprint.from is stale. Steps: d=0 case is vacuous. Step 1: A is a Noetherian normal domain, local with maximal ideal nA+(T), and complete (Lambda=C, J=n). Step 2: n is finitely generated, so the kernel lemma gives nonzero reduction of f; the axis reduction equals the reduction in (A/m)[[t]]; sigma preserves height one. Step 3: F=u^{-1}g lies in q, and F is not 1. Step 4: primality of q picks a factor h_j in q. Step 5: the quotient is a nonzero domain, so (0) < (h) <= q gives (h)=q, then pull back by sigma^{-1}. New nodes are true and not duplicates. Coordinate change: weights w_i > sum_{j>i} a_j w_j make the lex-least exponent a the unique minimal weight; d=1 is the identity; works over any ring. The coordinate step inside henselian-cylinder is bundled in that node's proof, not a citable node. Normal-domain factorization: K[T] monic irreducible factors lie in A[T] by 00H6(1) and normality; A[T]/(h) embeds in the field K[T]/(h); the local clause holds because the reductions of the factors multiply to T^n. Neither restates the item. This is a first split, not a re-split; the item proof is a short assembly of the cited nodes; the four tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteNormalHorizontalPrimesPrincipal",
+  "declaration": "MvPowerSeries.exists_nonzero_generator_of_height_one_of_not_le_extended_maximalIdeal",
+  "file": "lean/Sheaf/RingTheory/CompleteNormalHorizontalPrimesPrincipal.lean",
+  "statement": "theorem exists_nonzero_generator_of_height_one_of_not_le_extended_maximalIdeal (C : Type u) [CommRing C] [IsNoetherianRing C] [IsDomain C] [IsIntegrallyClosed C] [IsLocalRing C] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] (d : ℕ) (r : Ideal (MvPowerSeries (Fin d) C)) (hr : r.IsPrime) (hr0 : r ≠ ⊥) (hheight : ∀ p : Ideal (MvPowerSeries (Fin d) C), p.IsPrime → ⊥ < p → p < r → False) (horiz : ¬ r ≤ (IsLocalRing.maximalIdeal C).map (MvPowerSeries.C (σ := Fin d))) : ∃ h : MvPowerSeries (Fin d) C, h ≠ 0 ∧ r = Ideal.span {h}",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34a9e6ffe",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Statement clause-by-clause equals node: C CommRing+IsNoetherianRing+IsDomain+IsIntegrallyClosed+IsLocalRing, IsAdicComplete at maximalIdeal; D=MvPowerSeries (Fin d) C; height one = IsPrime, ≠⊥, no prime strictly between ⊥ and r; horizontal = ¬ r ≤ maximalIdeal.map C; conclusion ∃ h≠0, r=span{h}. No extra hypotheses, single universe u, lean.statement verbatim. Edge cases d=0 (vacuous), C field (UFD), d=1 checked. Only the lean field changed on the item; 4 stmt_dep records identical to side-live; no new nodes. Docstrings carry source and blueprint id and all 5 proof steps; proof only sorry; no pro-etale; imported WeilConjectures RingTheory modules exist. Report has Worker report and Second reading sections (the second reading is by the same worker, stated in the report). Not recompiled, per instruction. No findings."
+ }
+}

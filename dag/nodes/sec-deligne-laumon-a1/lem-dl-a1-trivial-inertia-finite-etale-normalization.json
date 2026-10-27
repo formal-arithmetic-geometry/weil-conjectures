@@ -1,0 +1,385 @@
+{
+ "id": "lem-dl-a1-trivial-inertia-finite-etale-normalization",
+ "kind": "statement",
+ "title": "Finite Galois normalization with trivial inertia is finite etale",
+ "statement": "Let $X$ be an integral scheme [def-pc-integral-scheme] whose local rings are integrally closed domains [def-weil-pbc-normal-ring], with function field $K=\\mathcal O_{X,\\eta}$. Let $L/K$ be a finite Galois extension, meaning finite-dimensional, separable and normal [def-pc-field-extension], and put $\\Gamma=\\operatorname{Aut}_K(L)$. For every nonempty affine open $V=\\operatorname{Spec}A\\subset X$, let $B_V$ be the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure]. Suppose that for every such $V$ and every prime $\\mathfrak q\\subset B_V$ the subgroup $\\{h\\in\\Gamma:h\\mathfrak q=\\mathfrak q,\\ h|_{\\operatorname{Frac}(B_V/\\mathfrak q)}=1\\}$ is trivial. Then $B_V^\\Gamma=A$ and $\\operatorname{Spec}B_V\\to V$ is finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism] for every $V$. The morphism $\\operatorname{Spec}L\\to X$ through the generic point is quasi-compact and quasi-separated, and its relative normalization $Y\\to X$ [lem-weil-pbc-relative-normalization], whose inverse image over $V$ is $\\operatorname{Spec}B_V$, is finite etale with generic fibre canonically $\\operatorname{Spec}L$. For any separable closure $\\Omega/K$ [def-pd-separable-closure] containing $L$, and algebraic closure $\\widetilde\\Omega$ of $\\Omega$ [def-weil-algebraic-closure], evaluation identifies the geometric generic fibre $|Y_{\\operatorname{Spec}\\widetilde\\Omega}|$ with $\\operatorname{Hom}_K(L,\\Omega)$, equivariantly for $G=\\operatorname{Aut}_K(\\Omega)$, where $\\sigma\\in G$ acts on a lift $t:\\operatorname{Spec}\\widetilde\\Omega\\to Y$ by $t\\mapsto t\\circ\\operatorname{Spec}(\\widetilde\\sigma)$, with $\\widetilde\\sigma$ the unique extension of $\\sigma$ to $\\widetilde\\Omega$, and on $\\operatorname{Hom}_K(L,\\Omega)$ by $\\phi\\mapsto\\sigma\\circ\\phi$. The stabilizer of the point given by the inclusion $L\\subset\\Omega$ is $\\operatorname{Aut}_L(\\Omega)$. No Noetherian, excellence, or prior finiteness-of-normalization hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, final normalization argument; Tag 0BST, lemma-inertia-invariants-etale, applied with trivial inertia."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-relative-normalization",
+  "def-pd-separable-closure",
+  "def-weil-algebraic-closure",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-fibre",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix a nonempty affine open $V=\\operatorname{Spec}A$. The affine function-field lemma makes $A$ a domain and identifies $K=\\mathcal O_{X,\\eta}$ with $\\operatorname{Frac}(A)$ through the germ map. For each prime $\\mathfrak p$ of $A$, the canonical affine local-ring identification is $A_{\\mathfrak p}\\cong\\mathcal O_{X,\\mathfrak p}$. These rings are integrally closed domains by hypothesis, so $A$ is a normal ring by its definition. The theorem on normal rings being integrally closed in their total fraction rings, applied to this domain $A$, now says that $A$ is integrally closed in $K$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034M, lemma-normal-ring-integrally-closed; properties.tex, lemma-locally-normal; schemes.tex, affine local-ring identifications."
+   }
+  },
+  {
+   "text": "Write $B=B_V$. The finite Galois fixed-field theorem gives finiteness of $\\Gamma$ and $L^\\Gamma=K$. Each $h\\in\\Gamma$ carries $B$ to itself: applying $h$ to a monic equation over $A$ leaves its coefficients fixed, and applying $h^{-1}$ gives the reverse inclusion. Thus it acts by ring automorphisms. If $b\\in B^\\Gamma$, then $b\\in K$ by the fixed-field theorem, and its monic equation over $A$ implies $b\\in A$ by step 1. Conversely every element of $A$ is fixed. Therefore $B^\\Gamma=A$. The map $A\\to B$ is integral by the definition of integral closure.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, normalization paragraph; fields.tex Tags 09I1 and 09DW for the finite Galois fixed-field theorem."
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak q\\subset B$, apply the finite-group inertia-invariants theorem with $R=B$ and the action of step 2. Its inertia subgroup is exactly the subgroup in the hypothesis, hence $I=\\{1\\}$ and $B^I=B$, while $B^\\Gamma=A$. It follows that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale on an open neighbourhood of $\\mathfrak q$. These neighbourhoods cover $\\operatorname{Spec}B$, so the morphism is etale. No finiteness of $B$ has been used. Etaleness implies local finite presentation; the affine-open finite-presentation theorem therefore gives that $B$ is finitely presented over $A$. Together with integrality from step 2, the integral-finite-presentation lemma makes $B$ a finite $A$-module. By the definition of a finite morphism, the displayed affine morphism is finite etale.",
+   "uses": [
+    "lem-dl-a1-finite-group-inertia-invariants-etale",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-integral-finite-presentation-finite",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale; morphisms.tex Tag 01TQ, lemma-locally-finite-presentation-characterize; algebra.tex Tag 02JJ, lemma-characterize-finite-in-terms-of-integral."
+   }
+  },
+  {
+   "text": "Let $f:\\operatorname{Spec}L\\to X$ be the stated generic-point morphism. Every nonempty affine open of $X$ contains $\\eta$ by the affine function-field lemma, so its inverse image under $f$ is the one-point affine scheme $\\operatorname{Spec}L$; the empty open has empty inverse image. Thus $f$ is quasi-compact. For its diagonal, the inverse image of any affine open in $\\operatorname{Spec}L\\times_X\\operatorname{Spec}L$ is an open subset of the one-point space $\\operatorname{Spec}L$, hence either empty or a singleton and quasi-compact. This proves quasi-separatedness directly from the diagonal definition. Apply relative normalization to $f$: it produces $\\nu:Y\\to X$ integral, and over each nonempty $V$ its affine description is exactly $\\operatorname{Spec}B_V\\to\\operatorname{Spec}A$, including the inclusion of $B_V$ in $L$. These descriptions and step 3 show that $\\nu$ is finite etale: the finite condition holds on every affine open by its definition, and local finite presentation, flatness and unramifiedness are the etale conditions checked on the displayed affine charts.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism",
+    "lem-weil-pbc-relative-normalization",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, normalization paragraph; morphisms.tex Tags 035F, 035H and 035I for relative normalization."
+   }
+  },
+  {
+   "text": "Over the generic point in $V$, the affine fibre-product theorem gives the fibre ring $B_V\\otimes_A K$. For $S=A\\setminus\\{0\\}$ this is $S^{-1}B_V$: the inverse ring maps are $b\\otimes(a/s)\\mapsto ab/s$ and $b/s\\mapsto b\\otimes(1/s)$, well defined by the localization relation and tensor relations. Its inclusion in $L$ is injective since $B_V\\subset L$ and all $s\\in S$ are nonzero. For $\\lambda\\in L$, take a monic equation $\\lambda^n+a_1\\lambda^{n-1}+\\cdots+a_n=0$ over $K$, and a common denominator $0\\ne d\\in A$ with $da_i\\in A$ for every $i$. Then $d\\lambda$ satisfies the monic equation with coefficients $d^i a_i\\in A$, so $d\\lambda\\in B_V$ and $\\lambda=(d\\lambda)/d\\in S^{-1}B_V$. Thus $S^{-1}B_V=L$ and $Y\\times_X\\operatorname{Spec}K\\cong\\operatorname{Spec}L$. This isomorphism is induced by the inclusions $B_V\\subset L$ and commutes with restriction, so it is canonical and independent of $V$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, normalization in the finite extension L; algebra.tex Tag 0307, lemma-integral-closure-localize (the denominator-clearing argument written explicitly)."
+   }
+  },
+  {
+   "text": "The algebraic extension $\\widetilde\\Omega/\\Omega$ is purely inseparable. Indeed, the separable-first theorem expresses it as separable algebraic followed by purely inseparable, and its separable subextension is just $\\Omega$: every element generates a finite separable extension, which is trivial because $\\Omega$ is separably closed. The algebraic-closure isomorphism theorem, applied to the two $\\Omega$-algebra structures on $\\widetilde\\Omega$ given by the inclusion and by its composite with $\\sigma\\in\\operatorname{Aut}_K(\\Omega)$, extends $\\sigma$ to an automorphism $\\widetilde\\sigma$ of $\\widetilde\\Omega$. In characteristic $p>0$, two such extensions agree on $a$ because some $a^{p^r}$ belongs to $\\Omega$ and the equation $T^{p^r}-\\sigma(a^{p^r})=0$ has at most one root in a field. In characteristic zero $\\widetilde\\Omega=\\Omega$. Hence the extension is unique; uniqueness also gives $\\widetilde{\\sigma\\tau}=\\widetilde\\sigma\\widetilde\\tau$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-pd-separable-closure",
+    "lem-pc-sepclosed-finite-sep-trivial",
+    "lem-pc-algebraic-closure-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030K, lemma-separable-first; algebraic closure existence and uniqueness, applied with a twisted base-field inclusion."
+   }
+  },
+  {
+   "text": "By step 5 and the affine fibre-product theorem, the geometric generic fibre is $Z=\\operatorname{Spec}(L\\otimes_K\\widetilde\\Omega)$. The separable-tensor theorem applies because $L/K$ is finite separable and $\\widetilde\\Omega$ is algebraically closed; it makes this algebra a finite product of copies of $\\widetilde\\Omega$. The finite-product spectrum theorem therefore identifies each point of $Z$ with a one-point open subscheme isomorphic over $\\widetilde\\Omega$ to $\\operatorname{Spec}\\widetilde\\Omega$. Each point consequently has exactly one $\\widetilde\\Omega$-valued lift: the corresponding residue-field map is a $\\widetilde\\Omega$-algebra map $\\widetilde\\Omega\\to\\widetilde\\Omega$ and must be the identity. By the fibre-product universal property and the spectrum anti-equivalence, these lifts are exactly the $K$-algebra embeddings $\\phi:L\\to\\widetilde\\Omega$. Concretely the associated point is the kernel of the evaluation map $L\\otimes_K\\widetilde\\Omega\\to\\widetilde\\Omega$, $a\\otimes c\\mapsto\\phi(a)c$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-separable-tensor-algebraic-closure",
+    "lem-weil-pbc-spec-finite-product-fields",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD1, lemma-baby-stein, finite separable tensor factors; algebra.tex Tag 00ED, lemma-spec-product; schemes.tex Tag 01I4, lemma-fibre-product-affine-schemes."
+   }
+  },
+  {
+   "text": "Every embedding $\\phi:L\\to\\widetilde\\Omega$ of step 7 lands in $L\\subset\\Omega$. For $a\\in L$, its minimal polynomial over $K$ splits into linear factors in $L[T]$ by normality. Applying $\\phi$ to its equation shows that $\\phi(a)$ is a root of this polynomial in $\\widetilde\\Omega$; the split factorization and absence of zero divisors imply that it equals one of the roots already in $L$. Conversely any $K$-embedding $L\\to\\Omega$ composes with $\\Omega\\subset\\widetilde\\Omega$. The two constructions are inverse. Thus the evaluation identification of step 7 is exactly with $\\operatorname{Hom}_K(L,\\Omega)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, finite Galois extension L/K; elementary use of its normality and the evaluation description of the geometric generic fibre."
+   }
+  },
+  {
+   "text": "Write $t_\\phi:\\operatorname{Spec}\\widetilde\\Omega\\to Y$ for the lift associated to $\\phi:L\\to\\Omega$. On coordinate rings, $t_\\phi\\circ\\operatorname{Spec}(\\widetilde\\sigma)$ corresponds to $a\\mapsto\\widetilde\\sigma(\\phi(a))=\\sigma(\\phi(a))$. It is therefore $t_{\\sigma\\circ\\phi}$, proving the required equivariance, with precisely the action convention in the statement. Contravariance of $\\operatorname{Spec}$ and the composition identity in step 6 verify the left action law. At the inclusion $\\phi:L\\subset\\Omega$, the equality $\\sigma\\circ\\phi=\\phi$ is equivalent to $\\sigma(a)=a$ for all $a\\in L$, which defines $\\operatorname{Aut}_L(\\Omega)$. This is the asserted stabilizer.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, lemma-sheaves-point, field-point action convention; Tag 0BTD, finite Galois cover normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "def-weil-pbc-integral-closure",
+  "lem-dl-a1-finite-group-inertia-invariants-etale",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-integral-finite-presentation-finite",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "def-pd-separable-closure",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BTD and 0BST; assembly using the cited algebra and field lemmas, with denominator clearing and the action calculation written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open normal subgroup of the absolute Galois group containing all normalization inertia gives a finite etale normalization in its fixed field with generic fibre stabilizer that subgroup",
+   "results": "8 hits: krullTopology_mem_nhds_one_iff_of_normal, ValuationSubring.inertiaSubgroup, InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, Ideal.Quotient.normal, InfiniteGalois.normalAutEquivQuotient_apply, IsGaloisGroup.iff_isFractionRing, Ideal.inertiaDeg_eq_of_isGaloisGroup, IsGaloisGroup.to_isFractionRing. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux, RingTheory/Etale/QuasiFinite.lean 202-217: it assumes finite type and quasi-finiteness and constructs an etale base extension and idempotents, rather than proving normalization finite etale. IsGaloisGroup and inertia-degree results do not give this scheme-level statement; the Dedekind inertia-cardinality result assumes finite modules and Dedekind rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Ee]tale|[Ii]nertia.*[Ee]tale|fixedField.*[Oo]pen",
+   "results": "0 hits: . Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux, RingTheory/Etale/QuasiFinite.lean 202-217: it assumes finite type and quasi-finiteness and constructs an etale base extension and idempotents, rather than proving normalization finite etale. IsGaloisGroup and inertia-degree results do not give this scheme-level statement; the Dedekind inertia-cardinality result assumes finite modules and Dedekind rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure, Algebra.Etale",
+   "results": "1 hits: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux, RingTheory/Etale/QuasiFinite.lean 202-217: it assumes finite type and quasi-finiteness and constructs an etale base extension and idempotents, rather than proving normalization finite etale. IsGaloisGroup and inertia-degree results do not give this scheme-level statement; the Dedekind inertia-cardinality result assumes finite modules and Dedekind rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite Galois subextension of a separable closure with trivial inertia at every prime has finite etale normalization over a normal integral scheme without Noetherian assumptions",
+   "results": "8 hits: separableClosure, IsSepClosure.isGalois, separableClosure.isGalois, IsGalois.to_isSeparable, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, IsGalois.is_separable_splitting_field, IsGalois.tfae, isGalois_bot. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux, RingTheory/Etale/QuasiFinite.lean 202-217: it assumes finite type and quasi-finiteness and constructs an etale base extension and idempotents, rather than proving normalization finite etale. IsGaloisGroup and inertia-degree results do not give this scheme-level statement; the Dedekind inertia-cardinality result assumes finite modules and Dedekind rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal scheme is unramified in the fixed field of an open normal Galois subgroup containing every inertia subgroup; the normalization has geometric generic fibre G modulo that subgroup",
+   "results": "8 hits: Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.ramificationIdxIn_mul_ramificationIdxIn, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Algebra.IsUnramifiedAt.of_liesOver, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux, RingTheory/Etale/QuasiFinite.lean 202-217: it assumes finite type and quasi-finiteness and constructs an etale base extension and idempotents, rather than proving normalization finite etale. IsGaloisGroup and inertia-degree results do not give this scheme-level statement; the Dedekind inertia-cardinality result assumes finite modules and Dedekind rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trivial inertia at every prime of the integral closure in a finite Galois extension implies finite etale normalization without Noetherian or Japanese hypotheses",
+   "results": "8 hits: Ideal.inertiaDeg_eq_of_isGaloisGroup, Algebra.isInvariant_of_isGalois, IsGaloisGroup.of_isFractionRing, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.inertiaDegIn_ne_zero, Ideal.inertiaDegIn_mul_inertiaDegIn, Ring.instIsIntegrallyClosedNormalClosure, Ideal.inertiaDegIn_eq_inertiaDeg. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux, RingTheory/Etale/QuasiFinite.lean 202-217: it assumes finite type and quasi-finiteness and constructs an etale base extension and idempotents, rather than proving normalization finite etale. IsGaloisGroup and inertia-degree results do not give this scheme-level statement; the Dedekind inertia-cardinality result assumes finite modules and Dedekind rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal integral scheme a finite Galois extension with trivial inertia at every normalization prime has finite etale normalization, geometric generic fibre the embedding set, and stabilizer of an embedding its fixing subgroup",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois, Ideal.inertiaDegIn_mul_inertiaDegIn, IsGaloisGroup.iff_isFractionRing, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.exists_comap_galRestrict_eq, Ideal.inertiaDeg_eq_of_isGalois, Ideal.isPretransitive_of_isGalois, Ideal.inertiaDeg_eq_of_isGaloisGroup. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux, RingTheory/Etale/QuasiFinite.lean 202-217: it assumes finite type and quasi-finiteness and constructs an etale base extension and idempotents, rather than proving normalization finite etale. IsGaloisGroup and inertia-degree results do not give this scheme-level statement; the Dedekind inertia-cardinality result assumes finite modules and Dedekind rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia.*etale|etale.*inertia|integralClosure.*Etale",
+   "results": "4 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean. Read the invariant/Galois and Etale/QuasiFinite declarations: the invariant theorem proves the fixed-ring clause only; the etale result assumes finite type and quasi-finiteness and does not establish the normalization theorem. Ramification-inertia cardinality results require stronger ring or finiteness hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trivial inertia implies the integral closure in a finite Galois field extension is finite etale",
+   "results": "8 hits: Algebra.isInvariant_of_isGalois, integralClosure.isIntegrallyClosedOfFiniteExtension, Algebra.IsInvariant.isIntegral, IsGalois.integral, Ring.instIsIntegrallyClosedNormalClosure, galRestrict.congr_simp, IsGaloisGroup.of_isFractionRing, IsIntegrallyClosed.of_iInf_eq_bot. Read the invariant/Galois and Etale/QuasiFinite declarations: the invariant theorem proves the fixed-ring clause only; the etale result assumes finite type and quasi-finiteness and does not establish the normalization theorem. Ramification-inertia cardinality results require stronger ring or finiteness hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Galois extension with trivial inertia at all primes has finite etale integral closure over a normal domain without Noetherian assumptions",
+   "results": "8 hits: IsIntegralClosure.finite, Ideal.inertiaDegIn_mul_inertiaDegIn, IsGaloisGroup.iff_isFractionRing, Ring.instFiniteNormalClosure, Ring.instFiniteNormalClosure_1, Ideal.inertiaDeg_eq_of_isGalois, Algebra.IsUnramifiedAt.of_liesOver, Ideal.inertiaDeg_eq_of_isGaloisGroup. Read the invariant/Galois and Etale/QuasiFinite declarations: the invariant theorem proves the fixed-ring clause only; the etale result assumes finite type and quasi-finiteness and does not establish the normalization theorem. Ramification-inertia cardinality results require stronger ring or finiteness hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group acting on a ring the inclusion of invariants of the whole group into invariants of a prime inertia subgroup is etale at that prime",
+   "results": "8 hits: IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, arithFrobAt, Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.inertiaDegIn_ne_zero, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.inertiaDeg_eq_of_isGalois. Read the invariant/Galois and Etale/QuasiFinite declarations: the invariant theorem proves the fixed-ring clause only; the etale result assumes finite type and quasi-finiteness and does not establish the normalization theorem. Ramification-inertia cardinality results require stronger ring or finiteness hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isInvariant_of_isGalois|mem_range_algebraMap_iff_fixed|isFinite_iff_isIntegralHom",
+   "results": "7 hits: Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Infinite.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean. Read the invariant/Galois and Etale/QuasiFinite declarations: the invariant theorem proves the fixed-ring clause only; the etale result assumes finite type and quasi-finiteness and does not establish the normalization theorem. Ramification-inertia cardinality results require stronger ring or finiteness hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph of rem-dl-a1-conventions: extension to the open U_0 union infinity is equivalent to trivial inertia at infinity; the finite Galois normalization step in Stacks Tag 0BTD supplies the finite covers for that equivalence.",
+   "via": [
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-dl-a1-trivial-inertia-finite-etale-normalization",
+  "worker": "stage1",
+  "summary": "Split the full statement into nine checked steps, using existing DAG lemmas throughout. No new nodes or statement correction. Proved the affine fixed-ring equality and etaleness before deducing finiteness; verified qcqs normalization, its canonical generic fibre, the unique extended automorphisms, evaluation, equivariance and stabilizer without Noetherian assumptions.",
+  "blueprint": "Realizes the second paragraph of rem-dl-a1-conventions (trivial inertia iff lisse extension), through the final normalization argument of Stacks 0BTD. Steps 1-5 build the finite etale normalization; steps 6-9 identify its geometric generic fibre and action.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Identifies the function field with the fraction field on each affine open; no dimension hypothesis is present in its statement. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Provides the canonical affine local-ring identification used to transfer the normality hypothesis to A_p. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Transfers normality of all local rings of a domain to integral closedness in its fraction field, without Noetherian hypotheses. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-fixed-field",
+    "why": "Finite Galois fixed-field theorem used to compute B^Gamma; a general field tool. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Turns the etale affine morphism into a finitely presented algebra before deducing finiteness. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-finite-presentation-finite",
+    "why": "Integral plus finitely presented implies a finite module; no finiteness-of-normalization assumption is used. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-relative-normalization",
+    "why": "Constructs the relative normalization and supplies its exact affine chart and inclusion into L. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies ordinary and geometric generic fibres with the corresponding tensor-product spectra. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-separable-first-purely-inseparable",
+    "why": "Shows that the algebraic closure of the separably closed field is purely inseparable, after eliminating its separable part. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-pc-sepclosed-finite-sep-trivial",
+    "why": "Eliminates each finite separable subextension of the algebraic closure of Omega. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Extends an automorphism of Omega using uniqueness of algebraic closures with a twisted inclusion. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-pc-separable-tensor-algebraic-closure",
+    "why": "Splits the geometric generic fibre algebra into copies of the algebraically closed coefficient field. No node of sk-d-dl-a1-setup supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Gives the points and one-point open subschemes of that split geometric fibre. No node of sk-d-dl-a1-setup supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-integral-finite-presentation-finite",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-weil-pbc-spec-finite-product-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-86bfde7f0",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-86bfde7f0 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged; review.md has the details. It splits the item into 9 proof steps with no new nodes. The statement is byte-identical to the live base node. The only other change to the statement fields adds 4 definition nodes to stmt_deps (Spec, geometric fibre, quasi-compact, quasi-separated), all notions the statement already uses. I read Stacks 0BST (pione.tex l.2665), the last paragraph of the 0BTD proof (l.2984ff) and 034M (algebra.tex l.8218), and checked every cited statement against its use. Step 1: K=Frac A, A_p equals the local ring of X, and 034M makes A integrally closed in K. Step 2: B^Γ=A from L^Γ=K and step 1. Step 3: the 0BST node with I=1 gives étale; lfp then gives finite presentation (01TQ), and with integrality B is a finite A-module (02JJ). Finiteness is never assumed. Step 4: f is qcqs because preimages of opens are Spec L or empty; relative normalization (iii) gives the chart with ring B_V, so ν is finite étale. Step 5: S^{-1}B=L by the d^i·a_i scaling, which I checked. Step 6: the extension σ̃ exists by the algebraic-closure isomorphism theorem and is unique by p-power roots. Steps 7-9: L⊗_KΩ̃ is a product of copies of Ω̃, the embeddings land in L by normality, the action is a left action and the stabilizer is Aut_L(Ω). Edge cases checked: L=K, X=Spec K, non-qcqs X, empty V, imperfect Ω. No duplicate: open-normal-inertia-fixed-field gives this item's hypothesis, and lisse-extension-inertia is the sheaf-level statement. No SGA cited. I accept the 13 tool_uses as general algebra and scheme tools. Batch 5: lem-trf-etale-descent-through-source-cover is Stacks 036W, a general étale-descent fact that is neither the trace formula, Poincaré duality nor a step of their proofs; the cited 0BST node is pure algebra, so the citation is genuinely outside the assumptions. Minor: the report mentions a citations.json that is not in the commit; this is not a node fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TrivialInertiaFiniteEtaleNormalization",
+  "declaration": "AlgebraicGeometry.finiteEtale_normalizationIn_of_trivial_inertia",
+  "file": "lean/Sheaf/AlgebraicGeometry/TrivialInertiaFiniteEtaleNormalization.lean",
+  "statement": "theorem finiteEtale_normalizationIn_of_trivial_inertia (X : Scheme.{u}) [IsIntegral X] (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (L : Type u) [Field L] [Algebra X.functionField L] [FiniteDimensional X.functionField L] [IsGalois X.functionField L] (hinertia : ∀ (V : X.Opens) [Nonempty V], IsAffineOpen V → ∀ [Algebra Γ(X, V) L] [IsScalarTower Γ(X, V) X.functionField L] (q : PrimeSpectrum (integralClosure Γ(X, V) L)) (g : L ≃ₐ[X.functionField] L), (∀ b : integralClosure Γ(X, V) L, ∃ c : integralClosure Γ(X, V) L, (c : L) = g (b : L) ∧ c - b ∈ q.asIdeal) → g = 1) : (∀ (V : X.Opens) [Nonempty V], IsAffineOpen V → ∀ [Algebra Γ(X, V) L] [IsScalarTower Γ(X, V) X.functionField L], (∀ b : integralClosure Γ(X, V) L, (∀ g : L ≃ₐ[X.functionField] L, g (b : L) = (b : L)) ↔ ∃ a : Γ(X, V), algebraMap Γ(X, V) L a = (b : L)) ∧ IsFinite (Spec.map (CommRingCat.ofHom (algebraMap Γ(X, V) (integralClosure Γ(X, V) L)))) ∧ Etale (Spec.map (CommRingCat.ofHom (algebraMap Γ(X, V) (integralClosure Γ(X, V) L))))) ∧ QuasiCompact (X.fromSpecOfAlgebraFunctionField L) ∧ QuasiSeparated (X.fromSpecOfAlgebraFunctionField L) ∧ IsFinite (X.fromNormalizationIn L) ∧ Etale (X.fromNormalizationIn L) ∧ (∀ (V : X.Opens) [Nonempty V] (hV : IsAffineOpen V) [Algebra Γ(X, V) L] [IsScalarTower Γ(X, V) X.functionField L], ∃ e : (X.fromNormalizationIn L ⁻¹ᵁ V).toScheme ≅ Spec (.of (integralClosure Γ(X, V) L)), e.inv ≫ (X.fromNormalizationIn L ⁻¹ᵁ V).ι ≫ X.fromNormalizationIn L = Spec.map (CommRingCat.ofHom (algebraMap Γ(X, V) (integralClosure Γ(X, V) L))) ≫ hV.fromSpec) ∧ (∃ e : Spec (.of L) ≅ pullback (X.fromNormalizationIn L) X.fromSpecFunctionField, e.hom ≫ pullback.fst _ _ = (X.fromSpecOfAlgebraFunctionField L).toNormalization ∧ e.hom ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom (algebraMap X.functionField L))) ∧ (∀ (Ω Ωa : Type u) [Field Ω] [Field Ωa] [Algebra X.functionField Ω] [Algebra L Ω] [IsScalarTower X.functionField L Ω] [IsSepClosure X.functionField Ω] [Algebra Ω Ωa] [IsAlgClosure Ω Ωa] [Algebra X.functionField Ωa] [IsScalarTower X.functionField Ω Ωa], ∃ (E : ↥(pullback (X.fromNormalizationIn L) (X.fromSpecOfAlgebraFunctionField Ωa) : Scheme.{u}) ≃ (L →ₐ[X.functionField] Ω)) (ρ : (Ω ≃ₐ[X.functionField] Ω) →* Equiv.Perm ↥(pullback (X.fromNormalizationIn L) (X.fromSpecOfAlgebraFunctionField Ωa) : Scheme.{u})), (∀ φ : L →ₐ[X.functionField] Ω, ∃ z : Spec (.of Ωa) ⟶ pullback (X.fromNormalizationIn L) (X.fromSpecOfAlgebraFunctionField Ωa), z ≫ pullback.snd _ _ = 𝟙 _ ∧ z ≫ pullback.fst _ _ = Spec.map (CommRingCat.ofHom ((algebraMap Ω Ωa).comp φ.toRingHom)) ≫ (X.fromSpecOfAlgebraFunctionField L).toNormalization ∧ E (z (IsLocalRing.closedPoint Ωa)) = φ) ∧ (∀ y : ↥(pullback (X.fromNormalizationIn L) (X.fromSpecOfAlgebraFunctionField Ωa) : Scheme.{u}), ∃! z : Spec (.of Ωa) ⟶ pullback (X.fromNormalizationIn L) (X.fromSpecOfAlgebraFunctionField Ωa), z ≫ pullback.snd _ _ = 𝟙 _ ∧ z (IsLocalRing.closedPoint Ωa) = y) ∧ (∀ σ : Ω ≃ₐ[X.functionField] Ω, ∃! τ : Ωa ≃ₐ[X.functionField] Ωa, ∀ a : Ω, τ (algebraMap Ω Ωa a) = algebraMap Ω Ωa (σ a)) ∧ (∀ (σ : Ω ≃ₐ[X.functionField] Ω) (τ : Ωa ≃ₐ[X.functionField] Ωa), (∀ a : Ω, τ (algebraMap Ω Ωa a) = algebraMap Ω Ωa (σ a)) → ∀ z : Spec (.of Ωa) ⟶ pullback (X.fromNormalizationIn L) (X.fromSpecOfAlgebraFunctionField Ωa), z ≫ pullback.snd _ _ = 𝟙 _ → ∃ z' : Spec (.of Ωa) ⟶ pullback (X.fromNormalizationIn L) (X.fromSpecOfAlgebraFunctionField Ωa), z' ≫ pullback.snd _ _ = 𝟙 _ ∧ z' ≫ pullback.fst _ _ = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ z ≫ pullback.fst _ _ ∧ ρ σ (z (IsLocalRing.closedPoint Ωa)) = z' (IsLocalRing.closedPoint Ωa)) ∧ (∀ (σ : Ω ≃ₐ[X.functionField] Ω) (y : ↥(pullback (X.fromNormalizationIn L) (X.fromSpecOfAlgebraFunctionField Ωa) : Scheme.{u})), E (ρ σ y) = σ.toAlgHom.comp (E y)) ∧ (∀ σ : Ω ≃ₐ[X.functionField] Ω, ρ σ (E.symm (IsScalarTower.toAlgHom X.functionField L Ω)) = E.symm (IsScalarTower.toAlgHom X.functionField L Ω) ↔ ∀ a : L, σ (algebraMap L Ω a) = algebraMap L Ω a))",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19d0f3ff4",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Checked node, 13 stmt_dep records, Stacks 0BST and 0BTD (pione.tex l.3010-3030), upstream Normalization.lean abbrevs. All clauses match: hypotheses X, hX, L/K Galois; the A->L map is unique under the scalar tower; the inertia condition is equivalent to Stacks I and the node's Frac(B/q) form; B^Gamma=A; affine finite etale; qcqs of Spec L->X; Mathlib relative normalization finite etale; generic fibre iso fixed by both projections; evaluation equivalence E fixed by sections; unique extension tau; rho fixed by precomposition (checked left action and consistency with sigma∘phi); stabilizer iff fixes L. Edge cases (empty X/V, L=K, imperfect Omega, non-Noetherian) and universe u are fine. lean.statement is verbatim; only lean changed. No defs; sorry only; source, blueprint and proof-plan docstrings present. Advisory: normalizationIn is owned by def-fin-normalization-extension, outside the base stmt_deps, but is an abbrev for the cited node's Mathlib match; chart iso is pinned only up to Aut_A(B), acceptable since the node uses it descriptively. No fixes, no compile run."
+ }
+}

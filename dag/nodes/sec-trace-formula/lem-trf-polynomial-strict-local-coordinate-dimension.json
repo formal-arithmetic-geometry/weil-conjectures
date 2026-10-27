@@ -1,0 +1,233 @@
+{
+ "id": "lem-trf-polynomial-strict-local-coordinate-dimension",
+ "kind": "statement",
+ "title": "Coordinate codimension in polynomial strict local rings",
+ "statement": "Let $k$ be a field, $E$ a finite set, $P=k[T_i:i\\in E]$ [def-weil-pbc-mv-polynomial-ring], $K\\subseteq E$, and $\\mathfrak q\\subset P$ a prime ideal containing every $T_i$ for $i\\in K$. Put $L=(T_i:i\\in K)$, $Q=P/L\\simeq k[T_j:j\\in E\\setminus K]$, and $\\mathfrak q'=\\mathfrak q/L\\subset Q$. Use prime localizations as in [def-weil-pbc-localization-at-prime]. Choose a separable closure of the residue field of $P_{\\mathfrak q}$, which is canonically also the residue field of $Q_{\\mathfrak q'}$. Let $R=(P_{\\mathfrak q})^{\\mathrm{sh}}$ and $R'= (Q_{\\mathfrak q'})^{\\mathrm{sh}}$ be the strict henselizations relative to this choice [def-sc-ring-strict-henselization]. The four rings $P_{\\mathfrak q}$, $Q_{\\mathfrak q'}$, $R$, and $R'$ are Noetherian regular local rings [def-weil-regular-scheme]. Their Krull dimensions [def-weil-pbc-krull-dimension-ring] satisfy\n$$\\dim P_{\\mathfrak q}=\\dim Q_{\\mathfrak q'}+|K|,\\qquad\n\\dim R=\\dim P_{\\mathfrak q},\\qquad \\dim R'=\\dim Q_{\\mathfrak q'},$$\nand consequently $\\dim R=\\dim R'+|K|$. The assertion holds for arbitrary primes $\\mathfrak q$, including nonmaximal ones, and includes $K=\\varnothing$ and $K=E$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Agent-supplied polynomial calculation realizing old step 8 and regularity in old step 7: Tag 00ON (lemma-dimension-base-fibre-equals-total), Tag 00OP (lemma-dim-affine-space), Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), Tag 06LN (lemma-henselization-regular), and Tag 06LK (lemma-henselization-dimension)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-ring-strict-henselization",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=k[T_i:i\\in K]$ and $\\mathfrak m=(T_i:i\\in K)\\subset A$. Grouping monomials according to their exponents on $K$ and $E\\setminus K$ gives $P\\cong A[T_j:j\\in E\\setminus K]$. Evaluation at zero on the $K$-variables has kernel $L$: its kernel consists exactly of sums of monomials divisible by at least one such variable. Thus $Q\\cong k[T_j:j\\in E\\setminus K]$. Similarly $A/\\mathfrak m\\cong k$, so $\\mathfrak m$ is maximal; since $\\mathfrak q\\cap A$ is proper and contains $\\mathfrak m$, it equals $\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OP (lemma-dim-affine-space), origin specialization; the monomial calculation is written out here"
+   }
+  },
+  {
+   "text": "Apply polynomial regularity over the field $k$ to $A$, $P$, and $Q$ (choose finite enumerations of their variable sets). They are Noetherian, and their localizations at every prime are regular local. In particular $P_{\\mathfrak q}$ and $Q_{\\mathfrak q'}$ are Noetherian regular local rings. The origin-localization lemma applied to $A$ gives $\\dim A_{\\mathfrak m}=|K|$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-polynomial-ring-origin-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OQ (proposition-finite-gl-dim-polynomial-ring), first sentence, and 00OP (lemma-dim-affine-space), origin case"
+   }
+  },
+  {
+   "text": "View $A\\to P$ as the coefficient inclusion into the polynomial ring on $E\\setminus K$. The polynomial-projection lemma makes its affine spectrum map flat, and the affine flatness equivalence gives that $A\\to P$ is a flat ring map. This is precisely the flatness needed in the height formula; no assumption that $\\mathfrak q$ is maximal is made.",
+   "uses": [
+    "lem-nagata-polynomial-projection-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize), coefficient inclusion into a polynomial algebra with its free monomial basis"
+   }
+  },
+  {
+   "text": "The local fibre in the height formula is $P_{\\mathfrak q}/\\mathfrak mP_{\\mathfrak q}=P_{\\mathfrak q}/LP_{\\mathfrak q}\\cong Q_{\\mathfrak q'}$. Explicitly send the class of $f/s$ to $\\bar f/\\bar s$. A denominator $s\\notin\\mathfrak q$ has $\\bar s\\notin\\mathfrak q'$, and every fraction on the right lifts this way. The inverse sends $\\bar f/\\bar s$ to the class of $f/s$; changing lifts changes numerator and denominator by elements of $L$, which vanish, and the fraction relation is preserved after multiplying by a denominator outside $\\mathfrak q$. These maps are inverse. Quotienting further by the respective maximal ideals identifies the residue fields of $P_{\\mathfrak q}$ and $Q_{\\mathfrak q'}$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total), local fibre term; fraction calculation for the coordinate quotient"
+   }
+  },
+  {
+   "text": "Apply the flat height formula to the Noetherian rings $A\\to P$, the prime $\\mathfrak q$, and its contraction $\\mathfrak m$ from step 1. Its dimension form, the fibre isomorphism of step 4, and step 2 give $\\dim P_{\\mathfrak q}=\\dim A_{\\mathfrak m}+\\dim Q_{\\mathfrak q'}=|K|+\\dim Q_{\\mathfrak q'}$. Commuting the two summands gives the required first equality.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total)"
+   }
+  },
+  {
+   "text": "Both input local rings are Noetherian and regular by step 2. Strict-henselization regularity therefore makes $R$ and $R'$ regular local rings, hence Noetherian. Dimension invariance applied separately to the same two local rings gives $\\dim R=\\dim P_{\\mathfrak q}$ and $\\dim R'=\\dim Q_{\\mathfrak q'}$. Substitute these into step 5 to obtain $\\dim R=\\dim R'+|K|$. All applications allow the chosen separable closure of the common residue field. If $K=\\varnothing$, $A=k$ and the added dimension is zero; if $K=E$, $Q=k$ and $\\mathfrak q=L$. The same argument covers both.",
+   "uses": [
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06LN (lemma-henselization-regular) and 06LK (lemma-henselization-dimension)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "NY",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/morphisms.tex",
+  "place": "Polynomial coordinate calculation assembled from Tags 00ON, 00OP, 00OQ, 01U5, 06LK and 06LN; elementary quotient/fraction identifications are written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a polynomial ring over a field at a prime containing a subset of variables, setting those variables to zero lowers local dimension by their number, also after strict henselization",
+   "results": "{\"t\": \"2026-10-22T06:01:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a polynomial ring over a field at a prime containing a subset of variables, setting those variables to zero lowers local dimension by their number, also after strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"ringKrullDim_le_ringKrullDim_add_card\"], \"digest\": \"60956bd08340497d\"}; Polynomial.ringKrullDim and MvPolynomial.ringKrullDim give total polynomial dimension, not the dimension of an arbitrary localized prime or strict henselization. The singleton quotient dimension theorem requires a regular element; proving all selected variables regular after localization and strict henselization is additional work. Read KrullDimension/Polynomial.lean:107--132 and Regular.lean:181--193. No exact or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselizations of polynomial local rings and their coordinate quotients are regular local and their dimensions differ by the cardinality of the selected coordinates",
+   "results": "{\"t\": \"2026-10-22T06:01:04Z\", \"tool\": \"leanfinder\", \"query\": \"Strict henselizations of polynomial local rings and their coordinate quotients are regular local and their dimensions differ by the cardinality of the selected coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime\", \"HenselianLocalRing\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"Field.henselian\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\"], \"digest\": \"cb5a24cbfcae8293\"}; Polynomial.ringKrullDim and MvPolynomial.ringKrullDim give total polynomial dimension, not the dimension of an arbitrary localized prime or strict henselization. The singleton quotient dimension theorem requires a regular element; proving all selected variables regular after localization and strict henselization is additional work. Read KrullDimension/Polynomial.lean:107--132 and Regular.lean:181--193. No exact or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"ringKrullDim\"",
+   "results": "{\"t\": \"2026-10-22T06:01:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"ringKrullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"ringKrullDim_mvPolynomial_of_isEmpty\", \"ringKrullDim_mvPolynomial_of_infinite\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite\"], \"digest\": \"006a2642b71e2abf\"}; Polynomial.ringKrullDim and MvPolynomial.ringKrullDim give total polynomial dimension, not the dimension of an arbitrary localized prime or strict henselization. The singleton quotient dimension theorem requires a regular element; proving all selected variables regular after localization and strict henselization is additional work. Read KrullDimension/Polynomial.lean:107--132 and Regular.lean:181--193. No exact or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "At an arbitrary prime of a polynomial algebra containing selected variables, quotienting by them lowers local Krull dimension by their number and strict henselization preserves this equality",
+   "results": "{\"t\": \"2026-10-22T06:01:04Z\", \"tool\": \"leansearch\", \"query\": \"At an arbitrary prime of a polynomial algebra containing selected variables, quotienting by them lowers local Krull dimension by their number and strict henselization preserves this equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.height_le_ringKrullDim_quotient_add_encard\", \"ringKrullDim_quotient_le\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson\", \"height_le_ringKrullDim_quotient_add_spanFinrank\"], \"digest\": \"961078f788b6b2cc\"}; Polynomial.ringKrullDim and MvPolynomial.ringKrullDim give total polynomial dimension, not the dimension of an arbitrary localized prime or strict henselization. The singleton quotient dimension theorem requires a regular element; proving all selected variables regular after localization and strict henselization is additional work. Read KrullDimension/Polynomial.lean:107--132 and Regular.lean:181--193. No exact or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henselization|ringKrullDim.*quotient|quotient.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T06:01:04Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|henselization|ringKrullDim.*quotient|quotient.*ringKrullDim\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Module.lean\", \"Mathlib/RingTheory/KrullDimension/Module.lean\", \"Mathlib/RingTheory/KrullDimension/Module.lean\"], \"digest\": \"f597a36b6ff62f0e\"}; Polynomial.ringKrullDim and MvPolynomial.ringKrullDim give total polynomial dimension, not the dimension of an arbitrary localized prime or strict henselization. The singleton quotient dimension theorem requires a regular element; proving all selected variables regular after localization and strict henselization is additional work. Read KrullDimension/Polynomial.lean:107--132 and Regular.lean:181--193. No exact or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension and regularity of a polynomial algebra localized at an arbitrary prime containing coordinate variables and its strict henselization",
+   "results": "{\"t\": \"2026-10-23T09:33:49Z\", \"tool\": \"leanfinder\", \"query\": \"Dimension and regularity of a polynomial algebra localized at an arbitrary prime containing coordinate variables and its strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.localizationAway_dimension_zero\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmooth.relativeDimension\"], \"digest\": \"f59dccee118431bc\"}; Read the returned hits. Polynomial total-dimension formulas do not give arbitrary prime-local dimension. Regular-sequence quotient formulas require a regularity argument for the coordinate list. HenselianLocalRing.TFAE is not strict-henselization dimension or regularity. No exact or one-line match for all clauses. Checked KrullDimension/Polynomial.lean:107-132 and KrullDimension/Regular.lean:181-193.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henselization|ringKrullDim.*quotient",
+   "results": "{\"t\": \"2026-10-23T09:35:08Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|henselization|ringKrullDim.*quotient\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/OrderOfVanishing/Basic.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\"], \"digest\": \"bbc454f43793c3a3\"}; Read the returned hits. Polynomial total-dimension formulas do not give arbitrary prime-local dimension. Regular-sequence quotient formulas require a regularity argument for the coordinate list. HenselianLocalRing.TFAE is not strict-henselization dimension or regularity. No exact or one-line match for all clauses. Checked KrullDimension/Polynomial.lean:107-132 and KrullDimension/Regular.lean:181-193.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization preserves regular local rings and Krull dimension; coordinate quotient of polynomial local ring decreases dimension by number of coordinates",
+   "results": "{\"t\": \"2026-10-23T09:35:08Z\", \"tool\": \"leansearch\", \"query\": \"Strict henselization preserves regular local rings and Krull dimension; coordinate quotient of polynomial local ring decreases dimension by number of coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_quotient_le\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"HenselianLocalRing.TFAE\", \"ringKrullDim_le_ringKrullDim_quotient_add_card\"], \"digest\": \"de53c1e049a29941\"}; Read the returned hits. Polynomial total-dimension formulas do not give arbitrary prime-local dimension. Regular-sequence quotient formulas require a regularity argument for the coordinate list. HenselianLocalRing.TFAE is not strict-henselization dimension or regularity. No exact or one-line match for all clauses. Checked KrullDimension/Polynomial.lean:107-132 and KrullDimension/Regular.lean:181-193.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"ringKrullDim\"",
+   "results": "{\"t\": \"2026-10-23T09:35:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"ringKrullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"ringKrullDim_mvPolynomial_of_isEmpty\", \"ringKrullDim_mvPolynomial_of_infinite\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite\"], \"digest\": \"006a2642b71e2abf\"}; Read the returned hits. Polynomial total-dimension formulas do not give arbitrary prime-local dimension. Regular-sequence quotient formulas require a regularity argument for the coordinate list. HenselianLocalRing.TFAE is not strict-henselization dimension or regularity. No exact or one-line match for all clauses. Checked KrullDimension/Polynomial.lean:107-132 and KrullDimension/Regular.lean:181-193.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-geometric-stalk-algebra",
+  "date": "2026-10-22",
+  "group": "Q17"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Re-split of lem-trf-smooth-geometric-stalk-algebra: old step 8 and regularity in step 7 (polynomial local height calculation and strict-henselization invariance).",
+   "via": [
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-strict-local-coordinate-dimension",
+  "worker": "stage1",
+  "group": "NY",
+  "summary": "Kept the statement unchanged. Six steps use existing nodes only: monomial regrouping and coordinate quotient; polynomial regularity and origin dimension; flat coefficient inclusion; explicit local-fibre fractions; flat height formula at the arbitrary prime; strict-henselization regularity and dimension invariance. No new nodes or Mathlib leaves. Checked empty/full coordinate sets, a nonmaximal coordinate prime, and imperfect fields.",
+  "blueprint": "Historical nearby-duality/alteration input carried by the existing blueprint.from chain under lem-trf-local-term-locality: realizes lem-trf-smooth-geometric-stalk-algebra old step 8 and regularity in old step 7. Read the latest main-20261023-1620 ancestor and unit texts; the present algebraic lemma is below the fixed unit route, with no change to that route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-28157f700",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-28157f700 (reviewer sub-agent of L); spot-checked: I read all six steps of the split in full and made no fixes. Statement, stmt_deps and the blueprint field are unchanged. There are no new nodes, and proof_deps equals the union of the step uses (9 ids, none missing or merged). Step 1 (elementary): P≅A[T_j] by regrouping monomials, the kernel of evaluating the K-variables at 0 is L, and q∩A=m. Step 2: the polynomial-regular node gives every prime localization of P and Q regular local, and the origin node gives dim A_m=|K|. Step 3: projection-flat plus the flat-iff-affine node make A→P a flat ring map, including when E∖K is empty. Step 4 (elementary): P_q/LP_q≅(P/L)_{q/L} with both maps written out; I checked the inverse is well defined (s̄∉q' iff s∉q, and the fraction relation mod L), mP_q=LP_q, and the residue fields match. Step 5: the 00ON dimension form (Stacks algebra.tex 27421) at an arbitrary, possibly non-maximal prime gives dim P_q=|K|+dim Q_{q'}. Step 6: 06LN (more-algebra.tex 11195) makes R and R' regular, hence Noetherian, and 06LK (11132) preserves dimension; the separable closure is shared through step 4. Small cases all agree: q=(x) in k[x,y] with K={x} gives dims 1 and 0, q=(x,y) gives 2 and 1, and K empty and K=E both work. No hypothesis on k beyond being a field is needed. Duplicate search (rg -L for 00ON, 00OP, and strict henselization with polynomial) found no node stating the item. Accepted tool_uses, which the worker did not declare in split_report.tool_uses, so the merge should add them via --tool-uses: lem-weil-pbc-polynomial-ring-origin-regular-local (sk-thm-p1), lem-sc-strict-henselization-regular and lem-sc-strict-henselization-dimension (sk-thm-br). All three are generic commutative-algebra black boxes, and unit sk-i-curve-zero has no node stating these facts. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialStrictLocalCoordinateDimension",
+  "declaration": "MvPolynomial.polynomial_strictLocal_coordinate_dimension",
+  "file": "lean/Sheaf/RingTheory/PolynomialStrictLocalCoordinateDimension.lean",
+  "statement": "theorem polynomial_strictLocal_coordinate_dimension (k : Type u) [Field k] (E : Type v) [Finite E] (K : Finset E) (L : Ideal (MvPolynomial E k)) (_hL : L = Ideal.span (Set.range (fun i : K ↦ (X i.1 : MvPolynomial E k)))) (q : Ideal (MvPolynomial E k)) [q.IsPrime] (q' : Ideal (MvPolynomial E k ⧸ L)) [q'.IsPrime] (hq : q = q'.comap (Ideal.Quotient.mk L)) (Ω R R' : Type (max u v w)) [Field Ω] [Algebra q.ResidueField Ω] [IsSepClosure q.ResidueField Ω] [Algebra q'.ResidueField Ω] [IsSepClosure q'.ResidueField Ω] (_hΩ : algebraMap q.ResidueField Ω = (algebraMap q'.ResidueField Ω).comp (Ideal.ResidueField.map q q' (Ideal.Quotient.mk L) hq)) [Algebra (Localization.AtPrime q) Ω] [IsScalarTower (Localization.AtPrime q) q.ResidueField Ω] [Algebra (Localization.AtPrime q') Ω] [IsScalarTower (Localization.AtPrime q') q'.ResidueField Ω] [CommRing R] [Algebra (Localization.AtPrime q) R] [CommRing R'] [Algebra (Localization.AtPrime q') R'] (_hR : Algebra.StrictHenselizationPresentationIn.{max u v, w} (Localization.AtPrime q) Ω R) (_hR' : Algebra.StrictHenselizationPresentationIn.{max u v, w} (Localization.AtPrime q') Ω R') : IsRegularLocalRing (Localization.AtPrime q) ∧ IsRegularLocalRing (Localization.AtPrime q') ∧ IsRegularLocalRing R ∧ IsRegularLocalRing R' ∧ ringKrullDim (Localization.AtPrime q) = ringKrullDim (Localization.AtPrime q') + (K.card : WithBot ℕ∞) ∧ ringKrullDim R = ringKrullDim (Localization.AtPrime q) ∧ ringKrullDim R' = ringKrullDim (Localization.AtPrime q') ∧ ringKrullDim R = ringKrullDim R' + (K.card : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93b516a99",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Only the item lean record changes; the 5 stmt_dep nodes are identical to live; lean.statement is verbatim in the file. Clause by clause: k field (Type u), E Finite (Type v), K Finset, L named by _hL, Q = P/L, hq = (L ≤ q and q' = q/L) with no maximality, one Ω with IsSepClosure over both residue fields made compatible by _hΩ through Ideal.ResidueField.map (an iso), R and R' via the StrictHenselizationPresentationIn.{max u v,w} dependency interface with the same Ω, four IsRegularLocalRing conclusions (include local and Noetherian), four ringKrullDim equations with K.card in the node's orientation. Edge cases covered: K empty, K = E, E empty, non-maximal q, any field. Maths correct (00ON, 00OP, 06LN, 06LK). No defs, only sorry, docstrings carry the source place, blueprint id and six steps, autoImplicit false. No duplicate found. Compile not re-run (worker's clean compile); no fixes."
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "id": "lem-z8-ordinary-finite-trace-counit-comparisons",
+ "kind": "statement",
+ "title": "Ordinary finite trace counit component comparisons",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem ordinaryFiniteConstantUnit_tensor_square\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤)))\n    (K : DerivedCategoryModule A Y) :\n    ((canonicalPullbackTensorComparison (ModuleCat.{u + 1} A) f).app K).app\n        (ordinaryFiniteUnit A Y) ≫\n      ((ordinaryFiniteTensor A X).obj ((ordinaryFinitePullback A f).obj K)).map\n        (ordinaryFiniteUnitPullback A f).hom ≫\n      (derivedTensorSingleUnitIso ((ordinaryFinitePullback A f).obj K)).hom =\n    (ordinaryFinitePullback A f).map (derivedTensorSingleUnitIso K).hom\n\ntheorem ordinaryFiniteTraceCounit_presentation\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]\n    [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y]\n    (L : DerivedCategoryModule A X)\n    (τ : (ordinaryFinitePushforward A q).obj L ⟶ ordinaryFiniteUnit A Y)\n    (K : DerivedCategoryModule A Y) [IsIso (ordinaryFiniteProjection A q L K)] :\n    (ordinaryFiniteTraceCounit A q L τ).app K =\n      inv (ordinaryFiniteProjection A q L K) ≫\n        ((ordinaryFiniteTensor A Y).obj K).map τ ≫ (derivedTensorSingleUnitIso K).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-z8-etale-canonical-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The unit normalization in the finite-twist evaluation pullback square gives the inverse-unit square. Cancel the mapped inverse unitor and compose with the target unitor. For the counit presentation, cancel the proper ordered projection in the defining trace-counit projection equation. Both calculations are complete Lean proofs; no proof obligation is added.",
+   "uses": [
+    "def-asd-ordinary-finite-trace-counit",
+    "lem-z8-etale-canonical-tensor-comparison",
+    "lem-asd-finite-twist-derived-evaluation-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-z8-etale-canonical-tensor-comparison",
+  "lem-asd-finite-twist-derived-evaluation-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteTraceCounitComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteTraceCounitComparisons.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteConstantUnit_tensor_square",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteConstantUnit_tensor_square",
+   "AlgebraicGeometry.Etale.ordinaryFiniteTraceCounit_presentation"
+  ],
+  "statement": "theorem ordinaryFiniteConstantUnit_tensor_square\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤)))\n    (K : DerivedCategoryModule A Y) :\n    ((canonicalPullbackTensorComparison (ModuleCat.{u + 1} A) f).app K).app\n        (ordinaryFiniteUnit A Y) ≫\n      ((ordinaryFiniteTensor A X).obj ((ordinaryFinitePullback A f).obj K)).map\n        (ordinaryFiniteUnitPullback A f).hom ≫\n      (derivedTensorSingleUnitIso ((ordinaryFinitePullback A f).obj K)).hom =\n    (ordinaryFinitePullback A f).map (derivedTensorSingleUnitIso K).hom",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

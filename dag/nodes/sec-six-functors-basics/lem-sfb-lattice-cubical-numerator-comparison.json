@@ -1,0 +1,152 @@
+{
+ "id": "lem-sfb-lattice-cubical-numerator-comparison",
+ "kind": "statement",
+ "title": "Finite cubical multiplication numerator calculation",
+ "statement": "Let $R$ be a commutative condensed ring on the coherent profinite site, $r\\geq0$, $J$ a normalized comparison between generalized-section and discrete $\\mathbf Z^r$ actions, $C$ a cubical model with the cell coproducts, boundary, translation and contraction of [lem-sfb-lattice-cubical-augmentation-evaluation], $K$ a finite subset-coordinate Koszul model [lem-sfb-discrete-lattice-koszul-resolution], and $B$ an equivariant unital $R$-algebra [lem-sfb-lattice-flat-twisted-chain-pairing]. Work in ordinary signed cochain tensors and derived localization [def-weil-abstract-derived-category]. Put $L=J(C.L)$, $X=tK(B)$ and $Z=B[0]$. Fix a subset-coordinate chain pairing $P$ as in [lem-sfb-lattice-flat-twisted-chain-pairing] and assume $B$ commutative. For every normalized roof datum $F$ of [def-sfb-lattice-cubical-multiplication-data], its multiplication numerators satisfy $f=\\delta;g$, and its unit equation is $(tu\\otimes1);E=\\lambda;\\varepsilon;\\eta_B$. Moreover on the supported source summand indexed by degrees $p,q$, subsets $A,C$ and cell $[v,I]$, the first numerator has coefficient zero unless $A\\cap C=\\varnothing$ and $A\\cup C=I$; otherwise it has coefficient $c_{p+q}\\epsilon(A,C)T^v(x_A)T^{v+u_A}(y_C)$. No existence of F or denominator quasi-isomorphism is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; descendant lattice expansion, cubical multiplication proof steps 1–6. The current blueprint supplies the route; the structural cubical calculation is the agent-written DAG proof of lem-sfb-lattice-cubical-multiplication-roof."
+ },
+ "stmt_deps": [
+  "def-sfb-lattice-cubical-multiplication-data",
+  "lem-sfb-lattice-flat-twisted-chain-pairing",
+  "lem-sfb-integral-cubical-chain-diagonal",
+  "lem-sfb-lattice-cubical-augmentation-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Compute the first composite on a tensor supported in the summands $x_A\\in K_B^p$, $y_C\\in K_B^q$, with $|A|=p$, $|C|=q$, and on a cube $[v,I]$. The product formula contributes only if $A\\cap C=\\varnothing$ and $A\\cup C=I$; evaluation also requires $|I|=p+q$. In that case it gives\n$$c_{p+q}\\epsilon(A,C)T^v\\bigl(x_A T_A(y_C)\\bigr)=c_{p+q}\\epsilon(A,C)T^v(x_A)T^{v+u_A}(y_C).$$\nHere the evaluation sign is $c_{p+q}$ because $B$ is in internal cochain degree zero. The equality uses $T_A=T^{u_A}$, commutation of the $T_i$ and multiplicativity of $T^v$. Otherwise it is zero. These are identities of internal bilinear maps: the supported summands and the free cube inclusions generate the source under coproducts and tensor products, so this calculation is not an assumption that sections generate every condensed module.",
+   "uses": [
+    "lem-sfb-lattice-flat-twisted-chain-pairing",
+    "lem-sfb-lattice-cubical-augmentation-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion: returned step 12; first numerator coefficient"
+   }
+  },
+  {
+   "text": "For the second composite expand $\\Delta[v,I]$. On the summands just used the two evaluations can be nonzero only for the unique partition $I=A\\sqcup C$. The interchange of $y_C$ (degree $q$) and $[v,A]$ (degree $-p$) gives $(-1)^{-pq}=(-1)^{pq}$. Evaluation on the first cube gives $c_pT^v(x_A)$, and on the second gives $c_qT^{v+u_A}(y_C)$. Thus the coefficient is\n$$\\epsilon(A,C)(-1)^{pq}c_pc_q\\,T^v(x_A)T^{v+u_A}(y_C).$$\nSince\n$$\\frac{(p+q)(p+q+1)}2=\\frac{p(p+1)}2+\\frac{q(q+1)}2+pq,$$\nthis equals the coefficient in step 2 over every commutative $R$. If no such partition exists both coefficients are zero. Equality on the summand inclusions proves equality of the two chain maps.",
+   "uses": [
+    "lem-sfb-integral-cubical-chain-diagonal",
+    "lem-sfb-lattice-cubical-augmentation-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion: returned step 12; second numerator and the sign identity"
+   }
+  },
+  {
+   "text": "For the unit, $tu$ has its only component in Koszul degree zero. Thus $E_B(tu\\otimes1)$ is zero on cubes of positive dimension; on $[v,\\varnothing]$ it is $c_0T^v(1_B)=1_B$. These are exactly the components of $\\eta_B\\varepsilon$, since $c_0=1$ and every $T_i$ fixes $1_B$. ",
+   "uses": [
+    "lem-sfb-lattice-flat-twisted-chain-pairing",
+    "lem-sfb-lattice-cubical-augmentation-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lattice-flat-twisted-chain-pairing",
+  "lem-sfb-lattice-cubical-augmentation-evaluation",
+  "lem-sfb-integral-cubical-chain-diagonal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; descendant lattice expansion, cubical multiplication proof steps 1–6. The current blueprint supplies the route; the structural cubical calculation is the agent-written DAG proof of lem-sfb-lattice-cubical-multiplication-roof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cSign|cubical.*multiplication|Koszul.*roof",
+   "results": "{\"t\": \"2026-10-26T06:55:45Z\", \"tool\": \"grep\", \"query\": \"cSign|cubical.*multiplication|Koszul.*roof\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the returned augmentation, total differential, simplicial homotopy and abstract chain-map results do not give the internal cubical/Koszul comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Iso\", \"hom_inv_id_assoc\"",
+   "results": "{\"t\": \"2026-10-26T06:55:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Iso\\\", \\\"hom_inv_id_assoc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Iso.hom_inv_id_assoc\", \"CategoryTheory.IsIso.hom_inv_id_assoc\", \"CategoryTheory.Iso.map_hom_inv_id_assoc\", \"CategoryTheory.ShortComplex.cyclesIsoX₂_hom_inv_id_assoc\", \"CategoryTheory.ShortComplex.cyclesIsoLeftHomology_hom_inv_id_assoc\", \"CategoryTheory.ShortComplex.opcyclesIsoX₂_hom_inv_id_assoc\", \"CategoryTheory.ShortComplex.opcyclesIsoRightHomology_hom_inv_id_assoc\", \"HomologicalComplex.pOpcyclesIso_hom_inv_id_assoc\"], \"digest\": \"748d5bf6ff16b3ab\"}",
+   "date": "2026-10-26",
+   "verdict": "Useful for the elementary localization cancellation only; it does not construct or compare cubical maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cubical lattice diagonal intertwines twisted Koszul cup product and evaluation with common augmentation roof denominators",
+   "results": "{\"t\": \"2026-10-26T06:55:47Z\", \"tool\": \"leanfinder\", \"query\": \"Cubical lattice diagonal intertwines twisted Koszul cup product and evaluation with common augmentation roof denominators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.unit_tensor_d₁\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"HomologicalComplex.tensor_unit_d₂\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.σ_comp_PInfty\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self_assoc\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\"], \"digest\": \"377864c0f3f8c270\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the returned augmentation, total differential, simplicial homotopy and abstract chain-map results do not give the internal cubical/Koszul comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cubical chain augmentation and signed evaluation are compatible with twisted Koszul multiplication in the ordinary derived category",
+   "results": "{\"t\": \"2026-10-26T06:56:23Z\", \"tool\": \"leansearch\", \"query\": \"Cubical chain augmentation and signed evaluation are compatible with twisted Koszul multiplication in the ordinary derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.augment\", \"ChainComplex.augment_d_succ_succ\", \"CochainComplex.HomComplex.Cochain.smul_v\", \"CochainComplex.augmentTruncate\", \"ChainComplex.augmentTruncate\", \"CochainComplex.HomComplex.Cochain.comp_units_smul\", \"HomologicalComplex.instIsMultiplicativeQuasiIso\", \"CochainComplex.HomComplex.Cochain.comp_smul\"], \"digest\": \"24e72a46e0189399\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the returned augmentation, total differential, simplicial homotopy and abstract chain-map results do not give the internal cubical/Koszul comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.LatticeCubicalMultiplicationRoof",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), ordinary open direct image; descendant lattice expansion, cubical multiplication proof steps 1–6. The current blueprint supplies the route; the structural cubical calculation is the agent-written DAG proof of lem-sfb-lattice-cubical-multiplication-roof.",
+   "via": [
+    "lem-sfb-lattice-cubical-multiplication-roof",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeCubicalNumeratorComparison",
+  "file": "lean/Sheaf/CategoryTheory/LatticeCubicalNumeratorComparison.lean",
+  "declaration": "Profinite.DiscreteLattice.CubicalMultiplication.normalized_roof_numerators",
+  "declarations": [
+   "Profinite.DiscreteLattice.CubicalMultiplication.normalized_roof_numerators"
+  ],
+  "statement": "theorem normalized_roof_numerators [IsCommMonObj B.X] (F : Roof (koszul R r K B) (lattice R r J C) (algebra R r B)) (hF : Normalized R r J C K B F) : F.f (star R r K B P) = F.comparison ≫ F.g (mul R r B) ∧ (unit R r K B P ⊗ₘ 𝟙 (lattice R r J C)) ≫ F.evaluation = (λ_ (lattice R r J C)).hom ≫ F.augmentation ≫ eta R r B ∧ (∀ (p q : ℕ) (A : Subsets r (p : ℤ)) (A' : Subsets r (q : ℤ)) (v : Fin r → ℤ) (I : Subsets r ((p : ℤ) + q)), supported R r J C K B p q A A' v I ≫ ((F.f (star R r K B P)).f 0).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B.X).hom.hom = value R r B p q A A' v I)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-10630",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T082044-L-2126363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-10630",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T082044-L-2126363",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to published; relocated defs diffed verbatim vs published item; three split sorry statements matched against the original conjuncts and CubicalModel coproduct pinning; item node proof_deps vs Lean uses"
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-dl-a1-finite-stage-fibre-vanishing",
+ "kind": "statement",
+ "title": "Point sections compute lisse ranks and detect finite-stage constructible vanishing",
+ "statement": "Fix the finite-field and coefficient datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne\\operatorname{char}k_0$ and $\\Qlb=\\overline{\\mathbf Q}_\\ell$ of [def-weil-finite-field-fiber]. Let $E/\\mathbf Q_\\ell$ be a finite subextension of $\\Qlb$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $T$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], let $F\\in\\Sh_c(T,E)$ [def-weil-constructible-heart], use completed derived pullback [def-weil-derived-pullback-tensor-hom], and use the specified continuous realization $J_T$ of [lem-weil-pbc-condensed-e-realization] and point functor $\\operatorname{Fib}_{s,E}$ of [def-weil-finite-coefficient-point], where $s=\\operatorname{Spec}k$. For a reduced locally closed immersion $b:C\\hookrightarrow T$ with $C$ nonempty and connected and $J_C(Lb^*F)$ lisse of constant finite rank $r$, every $k$-point $x:s\\to C$ has a natural identification\n$$\\operatorname{Fib}_{s,E}(L(bx)^*F)\\cong\\Gamma(s,x^*J_C(Lb^*F)),$$\nand this vector space has dimension $r$. Here lisse means pro-etale locally a finite free module over the continuous coefficient ring; no global basis on $C$ is assumed. In particular, vanishing of this vector space at one such point implies $Lb^*F=0$. For the whole scheme, if $\\operatorname{Fib}_{s,E}(Ly^*F)=0$ for every $k$-rational point $y:s\\to T$, then $F=0$. This includes $T=\\varnothing$ and rank zero, and is restricted to constructible rational adic objects; it asserts no point-conservativity for arbitrary pro-etale sheaves.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.8, Definition 6.8.3 and Proposition 6.8.14(2); rank computation by split covers of Spec k, then finite open–closed devissage (returned proof Steps 7–8)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-constructible-heart",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-condensed-e-realization",
+  "def-weil-finite-coefficient-point",
+  "def-real-lisse-realization-data",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=Lb^*F$ and $L=J_C(K)$. The hypothesis places $L$ in degree zero. By the equivalence and pullback-composition comparisons of [lem-weil-pbc-condensed-e-realization], $J_s(L(bx)^*F)\\cong Lx_c^*L$. A finite locally free module is flat, so its derived pullback is its ordinary module pullback $x^*L$. The sections-localization isomorphism of [lem-tw-lisse-point-sections-realization], applied to an integral representative of $L(bx)^*F$ on $s$, identifies its prescribed rational fibre with $\\Gamma(s,J_s(L(bx)^*F))$. Combining gives the asserted identification with $\\Gamma(s,x^*L)$. It is natural because both cited comparisons are natural; no basis has been chosen.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-tw-lisse-point-sections-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.10 and 4.2.11; Definition 6.8.3, Proposition 6.8.14(2), Remark 6.8.15; explicit assembly with Stacks 09AB and 09AH."
+   }
+  },
+  {
+   "text": "Pull a pro-etale cover trivializing $L$ back along $x$. It trivializes $x^*L$ with rank $r$. By [lem-weil-pbc-geometric-field-proetale-evaluation], this cover of $s$ has a section through some member. Pulling that member's trivialization back along the section gives $x^*L\\cong(E_s^c)^{\\oplus r}$. The continuous-function description in [lem-weil-pbc-condensed-e-realization] gives $E_s^c(s)=C(\\{*\\},E)=E$. Consequently sections give $E^r$, of dimension $r$, including $r=0$. This trivialization is used only to compute dimension, not to define the natural identification in Step 1. If the fibre vanishes, $r=0$; then the original cover of $C$ trivializes $L$ as zero. For any section over any site object its restrictions are zero on this cover, so the separatedness axiom makes the section zero. Thus $L=0$ and the equivalence $J_C$ reflects zero, giving $Lb^*F=0$.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-weil-pbc-condensed-e-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.10 and 4.2.11; Definition 6.8.3, Proposition 6.8.14(2), Remark 6.8.15; explicit assembly with Stacks 09AB and 09AH."
+   }
+  },
+  {
+   "text": "For the global assertion, [lem-dl-a1-heart-connected-lisse-strata] makes $M=J_T(F)$ a sheaf in degree zero and supplies a finite good stratification by reduced locally closed strata, with finitely many connected components and a $k$-point on each nonempty component. For each such component $b:C\\hookrightarrow T$, choose its supplied point $x$. The hypothesis at $y=bx$ and Step 2 give $Lb^*F=0$. The pullback comparison in that stratification statement identifies the restriction of $M$ to $C$ with zero. Hence its restriction to each stratum is zero: restrictions to the open connected components detect sections by the sheaf axiom. No point-detection assertion for unrestricted pro-etale sheaves is used.",
+   "uses": [
+    "lem-dl-a1-heart-connected-lisse-strata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.10 and 4.2.11; Definition 6.8.3, Proposition 6.8.14(2), Remark 6.8.15; explicit assembly with Stacks 09AB and 09AH."
+   }
+  },
+  {
+   "text": "First reduce the ambient scheme to $T_{\\mathrm{red}}$: [lem-weil-pbc-reduction-universal-homeomorphism] and [lem-trf-proetale-topological-invariance] make inverse image an equivalence of pro-etale topoi, so it detects zero also on module sheaves by applying the equivalence to their underlying sheaves and actions. The ring identification and its compatibility with composition are [lem-weil-pbc-continuous-coefficients-immersion-restriction]. The inverse image of $M$ has the same zero restrictions to the reduced strata. By [lem-weil-pbc-finite-type-over-noetherian], $T$ is Noetherian (a field is Noetherian), hence every open encountered below is quasi-compact. All reduced closed subschemes encountered are again separated finite type over $k$.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-trf-proetale-topological-invariance",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.10 and 4.2.11; Definition 6.8.3, Proposition 6.8.14(2), Remark 6.8.15; explicit assembly with Stacks 09AB and 09AH."
+   }
+  },
+  {
+   "text": "On a reduced scheme with this finite good stratification, induct on the number of nonempty strata to show that a module sheaf with zero restrictions to all strata is zero. With none, the scheme is empty and the empty-cover sheaf axiom gives the zero sheaf. Otherwise choose an open stratum $U$ and let $Z$ be the reduced closed complement. Such an open stratum exists: order the finitely many strata by containment in their closures; the frontier condition makes the complement of a maximal stratum the finite union of the closures of the other strata, hence closed. The induced stratification on $Z$ is good and has fewer strata. Its restrictions are zero by composition of inverse images, so induction gives $i^{-1}M=0$; also $j^{-1}M=0$ on $U$. The module open–closed sequence of [lem-weil-pbc-proetale-ringed-open-closed], applicable because $j$ is quasi-compact, reads $0\\to j_!0\\to M\\to i_*0\\to0$, hence $M=0$. The same ring-identifications of Step 4 identify these inverse images with the zero restrictions already proved. Returning from the reduction gives $J_T(F)=0$, and the equivalence [lem-weil-pbc-condensed-e-realization] gives $F=0$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-condensed-e-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.10 and 4.2.11; Definition 6.8.3, Proposition 6.8.14(2), Remark 6.8.15; explicit assembly with Stacks 09AB and 09AH."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-tw-lisse-point-sections-realization",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-dl-a1-heart-connected-lisse-strata",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-trf-proetale-topological-invariance",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Examples 4.1.10 and 4.2.11; Definition 6.8.3, Proposition 6.8.14(2), Remark 6.8.15; explicit assembly with Stacks 09AB and 09AH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite coefficient field rational constructible heart object is zero when its derived pullback point section fibres vanish at all algebraic closure rational points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.isZero\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"In a triangulated category equipped with a t-structure, if an object $X$ satisfies both $X \\\\in {}^\\\\perp \\\\leq n_0$ and $X \\\\in {}^\\\\perp \\\\geq n_1$ for integers $n_0 < n_1$, then $X$ is isomorphic to the \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (s : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) s = 0) → s = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ \\\\mathcal{U} $ is an open cover of $ X $ consisting of open immersion\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.isZero_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ),\\n  i < n → ∀ [hX : X.IsGE n], CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ belongs to the family $\\\\mathcal{G}_n$ of the T-structure (i.e., is isomorphic to a complex strictly supported in \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale locally free sheaves on connected finite type schemes are detected by sections of their pullback to one algebraically closed point and open closed recollement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsZero\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.subsingleton_H_of_isZero\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F : CategoryTheory.Sheaf J AddCommGrpCat} (h : CategoryTheory.Limits.IsZero F) (n : ℕ) : Subsingle\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] [IsEmpty ↥X] : CategoryTheory.Limits.IsZero (X.ellAdicSheaf ℓ)\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero\", \"module\": \"Mathlib.Topology.Sheaves.Abelian\", \"type\": \" {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasColimits C] [CategoryTheory.Limits.HasLimits C] {FC : C → C → Type u_1} {CC : C → Type u} [(X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [instCC : CategoryTheory.ConcreteCategory C FC] [CategoryTheory.Limits.PreservesFilteredCo\", \"doc\": \"A sheaf is zero if and only if its stalks are all zero.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|constructible|proetale).*(conserv|vanish|[Ii]sZero)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite coefficient field rational constructible heart object is zero when its derived pullback point section fibres vanish at all algebraic closure rational points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instHasZeroObject\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasZeroObject (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $ has a zero object, which is both initial and terminal in the category. This zero object arises from the localization process of chain comple\"}\n  {\"name\": \"VectorField.mpullback_zero\", \"module\": \"Mathlib.Geometry.Manifold.VectorField.Pullback\", \"type\": \": mpullback I I' f 0 = 0\", \"doc\": \"The pullback of the zero vector field under a smooth map between manifolds is equal to the zero vector field, i.e., $ f^*0 = 0 $.\"}\n  {\"name\": \"FiniteField.cast_card_eq_zero\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \": (q : K) = 0\", \"doc\": \"For a finite field $ K $ of cardinality $ q $, the element of $ K $ corresponding to the integer $ q $ is zero, i.e., $ q = 0 $ in $ K $.\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"(R) [Field R] : finrank (ResidueField R) (CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n  {\"name\": \"VectorField.mpullbackWithin_zero\", \"module\": \"Mathlib.Geometry.Manifold.VectorField.Pullback\", \"type\": \": mpullbackWithin I I' f 0 s = 0\", \"doc\": \"The pullback of the zero vector in the tangent space via the map $ f $, with respect to the models with corners $ I $ and $ I' $, is the zero vector in the corresponding tangent space.\"}\n  {\"name\": \"AlgebraicClosure.instCharZero\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \"[CharZero k] : CharZero (AlgebraicClosure k)\", \"doc\": \"For any field $ k $, its algebraic closure is a field.\"}\n  {\"name\": \"IsLocalFrameOn.coeff_apply_zero_at\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.LocalFrame\", \"type\": \"(hs : IsLocalFrameOn I F n s u) (ht : t x = 0) (i : ι) : hs.coeff i t x = 0\", \"doc\": \"For a local frame $ s $ of a vector bundle over a set $ u $ in the base space, modeled on a nontrivially normed field $ \\\\mathbb{K} $, if a section $ t $ satisfies $ t(x) = 0 $ at a point $ x \\\\in u $, \"}\n  {\"name\": \"PerfectField.ofCharZero\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"[CharZero K] : PerfectField K\", \"doc\": \"Any field with characteristic zero is a perfect field.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible rational adic sheaves are detected by sections of pullbacks to algebraically closed points",
+   "results": "Actual search returned 8 hits: TopCat.Presheaf.section_ext, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, CondensedSet.LocallyConstant.functorFullyFaithful, SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.StructureSheaf.locally_const_basicOpen, AlgebraicGeometry.structureSheafInType, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, LightCondensed.lanLightCondSet. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits concern ordinary commutative-ring modules, topological-space sheaves or discrete condensed sets, not the specified rational adic fibre and stratified vanishing statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free finite rank sheaf over continuous E coefficients on the pro etale site has dimension equal to its rank after pullback to an algebraically closed point",
+   "results": "Actual search returned 8 hits: Module.rankAtStalk_eq_finrank_of_free, Module.rankAtStalk_self, Module.rankAtStalk_eq, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.isLocallyConstant_rankAtStalk, Module.rankAtStalk, Algebra.SubmersivePresentation.rank_kaehlerDifferential, Module.rankAtStalk_eq_finrank_tensorProduct. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits concern ordinary commutative-ring modules, topological-space sheaves or discrete condensed sets, not the specified rational adic fibre and stratified vanishing statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible rational adic sheaves vanish if their point section fibres vanish on all closed points using a finite lisse stratification",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits concern ordinary commutative-ring modules, topological-space sheaves or discrete condensed sets, not the specified rational adic fibre and stratified vanishing statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_iff_stalkFunctor|rankAtStalk_eq_finrank_of_free|functorFullyFaithful",
+   "results": "Actual search returned 18 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Algebra/Category/Grp/Ulift.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits concern ordinary commutative-ring modules, topological-space sheaves or discrete condensed sets, not the specified rational adic fibre and stratified vanishing statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-constructible-fibres-exact",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-exact",
+ "blueprint": {
+  "from": {
+   "node": "p-dl-a1-exact",
+   "place": "p-dl-a1-exact.proof.md, Step 1 final sentence and Step 5 final sentence (geometric-stalk detection); §6.8, Definition 6.8.3 and Proposition 6.8.14(2); rank computation by split covers of Spec k, then finite open–closed devissage (returned proof Steps 7–8).",
+   "via": [
+    "lem-dl-a1-constructible-fibres-exact"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-dl-a1-finite-stage-fibre-vanishing",
+  "worker": "stage1",
+  "summary": "Computed rank by pulling a local trivialization to the pro-etale point and splitting that cover; used existing natural point-realization comparisons, connected lisse strata and ringed open–closed exactness. Included reduction invariance and empty/rank-zero cases. No new nodes and no statement change.",
+  "blueprint": "p-dl-a1-exact.proof.md Step 1 final sentence and Step 5 final sentence: geometric-fibre detection, through the finite-stage detection step of lem-dl-a1-constructible-fibres-exact.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Continuous coefficient realization equivalence and natural pullback/composition comparisons; this is coefficient infrastructure, not the unit weight-gap argument."
+   },
+   {
+    "node": "lem-tw-lisse-point-sections-realization",
+    "why": "Canonical sections-localization isomorphism at the point for every integral representative; the unit has no alternative point normalization."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "why": "Every cover of the algebraically closed point splits, so finite local freeness computes dimension."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Reduction is a universal homeomorphism, needed for the reduced stratification."
+   },
+   {
+    "node": "lem-trf-proetale-topological-invariance",
+    "why": "Inverse image along the reduction detects zero; no weight argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Identifies coefficient rings under the reduced locally closed restrictions used in devissage."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Ensures all open complements in finite devissage are quasi-compact."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic module-sheaf open–closed exact sequence assembles zero restrictions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-tw-lisse-point-sections-realization",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-trf-proetale-topological-invariance",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-0792f7d7b",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-0792f7d7b (reviewer sub-agent of L); spot-checked: Read the item in full: 5 steps, no new nodes. Statement and stmt_deps are byte-identical to Q56's unsplit node; its citer lem-dl-a1-constructible-fibres-exact uses it as stated. No re-split note. Route: p-dl-a1-exact.proof Step 1, 'δ vanishes on every geometric stalk'. No SGA. Sources read: Bhatt-Scholze Ex 4.2.11, Def 6.8.3, Prop 6.8.14(2), Rem 6.8.15; Stacks proetale.tex:4963 lemma-thickening (09AB) and :5135 lemma-ses-associated-to-open (09AH). Step 1: Fib_{s,E}=Γ(s,-)⊗E (def item 3); λ_C of lem-tw-lisse-point-sections-realization holds for every C in 𝒞_s; condensed-e pullback-composition comparison; locally free ⇒ flat, so Lx^*=x^*. Step 2 (elementary): pulled-back cover splits through a section (geometric-field-proetale-evaluation); E^c_s(s)=E gives dim r; r=0 ⇒ L=0 by separatedness, and the equivalence reflects zero. Step 3: heart-connected-lisse-strata supplies strata, open components, k-points and constant rank; restricting to components gives 0, and the sheaf axiom gives 0 on each stratum. Step 4: reduction to T_red (054M + 09AB node); the coefficient immersion node needs Noetherian, supplied by finite-type-over-noetherian; reducing is needed because an open stratum of a non-reduced T is not the open subscheme. Step 5: checked that a maximal stratum is open (closures are unions of strata, the order is antisymmetric) and that the induced stratification on Z is good; ringed open-closed applies since j is quasi-compact; base case T=∅ included. Edge cases: T=∅, r=0, Spec k[ε], constant E on A^1, j_!E. No duplicates: rg found lem-per-exact-family-detection, det-pe-sections-conservative and lem-per-adic-heart-pullback-fibres, none of which states this. Batch-5 flag lem-trf-proetale-topological-invariance: generic Stacks 09AB, not part of the trace-formula or Poincaré-duality proofs, used only for T_red; accepted. All 8 tool_uses accepted as generic infrastructure. Advisory only: Step 3 relies on the condensed-e composition comparison cited in Steps 1 and 5, not Step 3; Step 1 uses the J_s=F_s agreement stated in the strata node."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.FiniteStageFibreVanishing",
+  "declaration": "WeilConjectures.DeligneLaumon.finite_stage_fibre_vanishing",
+  "declarations": [
+   "WeilConjectures.DeligneLaumon.finiteStagePointComplex",
+   "WeilConjectures.DeligneLaumon.finiteStagePointFibre",
+   "WeilConjectures.DeligneLaumon.finiteStageLisseRestriction",
+   "WeilConjectures.DeligneLaumon.finiteStageOrdinaryPointSections",
+   "WeilConjectures.DeligneLaumon.finite_stage_fibre_vanishing"
+  ],
+  "file": "lean/Sheaf/DeligneLaumon/FiniteStageFibreVanishing.lean",
+  "statement": "theorem finite_stage_fibre_vanishing (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : Padic.FiniteCoefficientFields c.l c.Qbar) (T : LisseRealization.Base D c.l c.different) [IsSeparated (T.scheme ↘ Spec (.of D.k))] : (∀ (C : LisseRealization.Base D c.l c.different) (b : C.scheme ⟶ T.scheme) [b.IsOver (Spec (.of D.k))] [IsImmersion b] [IsReduced C.scheme] [ConnectedSpace C.scheme] (a : LisseRealization.At D c.l c.different E.val C) (r : ℕ) (x : (LisseRealization.point D c.l c.different).scheme ⟶ C.scheme) [x.IsOver (Spec (.of D.k))], Nonempty ((finiteStageLisseRestriction D c.l c.different E.val T C b a r).ι ⋙ finiteStagePointFibre D c.l c.different E.val T (x ≫ b) ≅ (finiteStageLisseRestriction D c.l c.different E.val T C b a r).ι ⋙ finiteStageOrdinaryPointSections D c.l c.different E.val T C b a x) ∧ ∀ F : (finiteStageLisseRestriction D c.l c.different E.val T C b a r).FullSubcategory, Nonempty ((finiteStagePointComplex D c.l c.different E.val T (x ≫ b)).obj F.obj ≅ (DerivedCategory.singleFunctor.{u} (ModuleCat.{u} E.val) 0).obj ((DerivedCategory.homologyFunctor.{u} (ModuleCat.{u} E.val) 0).obj ((finiteStagePointComplex D c.l c.different E.val T (x ≫ b)).obj F.obj))) ∧ Module.finrank E.val ((finiteStagePointFibre D c.l c.different E.val T (x ≫ b)).obj F.obj) = r ∧ (Subsingleton ((finiteStagePointFibre D c.l c.different E.val T (x ≫ b)).obj F.obj) → IsZero ((LisseRealization.pull D c.l c.different E.val b).obj F.obj.obj))) ∧ (∀ F : sfRationalHeart c.l E.val T.scheme, (∀ (y : (LisseRealization.point D c.l c.different).scheme ⟶ T.scheme) [y.IsOver (Spec (.of D.k))], IsZero ((finiteStagePointComplex D c.l c.different E.val T y).obj F)) → IsZero F.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing residue- and localization-normalized LisseRealization.At.J presentation of continuous derived scalar extension on the intrinsic raw coefficient category. Quantifies the supplied normalized realization, with no choice from mere existence, and expresses naturality by a functor isomorphism on the full lisse-restriction subcategory. Helpers only compose recorded functors or package the node's lisse hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de5c3e819",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: T separated finite type via Base + IsSeparated; F in sfRationalHeart; completed pull = rationalDerivedPullback; C a Base (automatic for an immersion into Noetherian T), immersion over k, IsReduced, ConnectedSpace (nonempty). Lisse rank r = J ≅ single0 H0 plus SheafOfModules.IsFiniteLocallyFreeOfRank r (local generators on a cover, no global basis). Conclusions: Nonempty natural iso of functors on the full lisse subcategory between ulifted H0 pointRationalFibre and a.sheaf ⋙ ordinaryPull ⋙ sections; point complex concentrated in degree 0; finrank = r; Subsingleton fibre → IsZero (pull b F); global ∀ k-points IsZero ⇒ IsZero F.obj. Edge cases T=∅, r=0, nonreduced/disconnected T, universes t+1/t kept. Only the item node (lean + 2 landed stmt_deps, allowed) and the new module differ from live; live lean null; statement verbatim; record complete. No hollow helpers, docstrings and proof plan present, sorry only, plain imports = proof_dep modules. Advisory: At.J (sf raw) used instead of the condensed-e realization, whose source is the Pbc rational category; same normalization, correct choice; NL text does not cite def-real-lisse-realization-data. Second reading is the worker's own. No compile (no file changed)."
+ }
+}

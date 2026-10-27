@@ -1,0 +1,214 @@
+{
+ "id": "lem-trf-strict-transform-comparison-epimorphism",
+ "kind": "statement",
+ "title": "Surjective comparison from successive module strict transforms",
+ "statement": "Let $S$ be a scheme, $\\mathcal I\\subseteq\\mathcal O_S$ a finite-type quasi-coherent ideal, and $b:S_1=\\operatorname{Bl}_{\\mathcal I}(S)\\to S$ its blowup. Let $\\mathcal J\\subseteq\\mathcal O_{S_1}$ be a finite-type quasi-coherent ideal and $c:S_2=\\operatorname{Bl}_{\\mathcal J}(S_1)\\to S_1$ its blowup [def-pc-scheme], [pqf-def-coherent], [def-nagata-global-blowup]. Set $Z=V(\\mathcal I)$ and $Z_1=V(\\mathcal J)$. Suppose a finite-type quasi-coherent ideal $\\mathcal K$ on $S$ and an isomorphism $S_2\\cong\\operatorname{Bl}_{\\mathcal K}(S)$ over $S$ are specified, with $V(\\mathcal K)=Z\\cup b(Z_1)$ as subsets. Let $f:X\\to S$ be any morphism and $\\mathcal F$ any quasi-coherent $\\mathcal O_X$-module. Write $X_i=X\\times_SS_i$, $p:X_1\\to X$, $q:X_2\\to X_1$, $f_2:X_2\\to S_2$, and $H=(p\\circ q)^*\\mathcal F\\cong q^*p^*\\mathcal F$ [def-pc-fibre-product], [def-pc-module-pullback]. Let $\\mathcal F_1$ be the module strict transform along $b$, $\\mathcal F_2$ its module strict transform along $c$, and $\\mathcal G$ the module strict transform of $\\mathcal F$ along the specified $\\mathcal K$-blowup, transported to $X_2$ [def-trf-module-strict-transform]. These modules are quasi-coherent. The composite of the pulled-back first quotient with the second quotient is an epimorphism $\\alpha:H\\twoheadrightarrow\\mathcal F_2$. For the canonical epimorphism $\\beta:H\\twoheadrightarrow\\mathcal G$ and $D=(bc\\circ f_2)^{-1}V(\\mathcal K)$, one has $\\ker\\alpha\\subseteq\\ker\\beta$ and a unique epimorphism $\\theta:\\mathcal F_2\\twoheadrightarrow\\mathcal G$ with $\\theta\\alpha=\\beta$; every local section of its kernel is supported on $D$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080I, lemma-strict-transform-composition-blowups, proof paragraphs 1--2: composite quotient, containment of kernels, and the surjective comparison; module clause (1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-trf-module-strict-transform",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-iterated-transform-quotient-support] with $b_0=b$, $b_1=c$, $M=\\mathcal F_1$ and $N=\\mathcal F_2$. It gives quasi-coherence of $\\mathcal F_1,\\mathcal F_2$ and the stated epimorphism $\\alpha$, using the specified identification $H\\cong q^*p^*\\mathcal F$. Put $T_I=(bc f_2)^{-1}Z$ and $T_J=(c f_2)^{-1}Z_1$. The same lemma says $\\alpha$ is an isomorphism off $T_I\\cup T_J$ and its kernel sections vanish there. Apply [lem-trf-strict-transform-sheaf-kernel] to the specified $\\mathcal K$-blowup and $\\mathcal F$. On $X_2$ this gives quasi-coherence of $\\mathcal G$, the epimorphism $\\beta$, and $\\ker\\beta$ equal to all local sections of $H$ zero off $D$; also $\\beta$ is an isomorphism off $D$.",
+   "uses": [
+    "lem-trf-iterated-transform-quotient-support",
+    "lem-trf-strict-transform-sheaf-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, proof paragraphs 1--2 (through the factorization); Tag 080D, definition-strict-transform (1)."
+   }
+  },
+  {
+   "text": "Since $V(\\mathcal K)=Z\\cup b(Z_1)$, one has $T_I\\subseteq D$. If $x\\in T_J$, then $c f_2(x)\\in Z_1$, hence $bc f_2(x)\\in b(Z_1)\\subseteq V(\\mathcal K)$, so $T_J\\subseteq D$. For every open $W\\subseteq X_2$ and $s\\in(\\ker\\alpha)(W)$, [lem-trf-iterated-transform-quotient-support] gives $s|_{W\\setminus(T_I\\cup T_J)}=0$. Restricting further gives $s|_{W\\setminus D}=0$. The kernel description of [lem-trf-strict-transform-sheaf-kernel] therefore gives $s\\in(\\ker\\beta)(W)$. This proves $\\ker\\alpha\\subseteq\\ker\\beta$ as subsheaves.",
+   "uses": [
+    "lem-trf-iterated-transform-quotient-support",
+    "lem-trf-strict-transform-sheaf-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, proof paragraphs 1--2 (through the factorization); Tag 080D, definition-strict-transform (1)."
+   }
+  },
+  {
+   "text": "Define $\\theta$ by local lifts: for a local section $t$ of $\\mathcal F_2$, choose an open cover and sections $h_i$ of $H$ with $\\alpha(h_i)=t|_{W_i}$, and set $\\theta(t)|_{W_i}=\\beta(h_i)$. Differences of lifts lie in $\\ker\\alpha\\subseteq\\ker\\beta$, so the values agree on overlaps, are independent of the lifts, and glue. This also proves linearity, compatibility with restrictions and $\\theta\\alpha=\\beta$. Any such map has these values, so is unique. Every section of $\\mathcal G$ locally lifts along the epimorphism $\\beta$; its lift $h$ yields the preimage $\\alpha(h)$ under $\\theta$. Thus $\\theta$ is an epimorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, proof paragraphs 1--2 (through the factorization); Tag 080D, definition-strict-transform (1)."
+   }
+  },
+  {
+   "text": "By $T_I\\cup T_J\\subseteq D$ and step 1, both $\\alpha$ and $\\beta$ restrict to isomorphisms on $X_2\\setminus D$. There $\\theta=\\beta\\alpha^{-1}$ is an isomorphism. If $t$ is any local section of $\\ker\\theta$ on an open $W$, its restriction to $W\\setminus D$ is consequently zero. This is precisely the asserted support condition on its kernel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, proof paragraphs 1--2 (through the factorization); Tag 080D, definition-strict-transform (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-iterated-transform-quotient-support",
+  "lem-trf-strict-transform-sheaf-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080I, lemma-strict-transform-composition-blowups, proof paragraphs 1--2 (through the factorization); Tag 080D, definition-strict-transform (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For two successive blowups and a chosen composite blowup with union centre the successive module strict transform has a canonical surjection onto the single strict transform",
+   "results": "8 hits: AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, Ideal.quotientToQuotientRangePowQuotSucc_surjective, RingHom.SurjectiveOnStalks.comp, RingHom.SurjectiveOnStalks.of_comp, Algebra.Generators.Cotangent.surjective_map_ofComp, AlgebraicGeometry.SurjectiveOnStalks.comp, AlgebraicGeometry.SurjectiveOnStalks.of_comp; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform",
+   "results": "0 hits: ; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For two successive blowups and a chosen composite blowup with union centre the successive module strict transform has a canonical surjection onto the single strict transform",
+   "results": "8 hits: AlgebraicGeometry.Scheme.stalkMap_comp, Algebra.Generators.Cotangent.surjective_map_ofComp, AlgebraicGeometry.SurjectiveOnStalks.of_comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.LocallyRingedSpace.stalkMap_comp, Submodule.factor_comp_apply, AlgebraicGeometry.instSurjectiveCompScheme, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits: ; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Factoring pullback quotient maps through iterated saturation by exceptional ideals gives an epimorphism between module transforms on a blowup",
+   "results": "8 hits: ModuleCat.epi_as_hom''_mkQ, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, AdicCompletion.map_surjective_of_mkQ_comp_surjective, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, Submodule.factorPowSucc, AdicCompletion.transitionMap, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The iterated strict transform of a quasi coherent module under successive blowups surjects onto its strict transform under the composite blowup",
+   "results": "8 hits: AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.instIsStableUnderCompositionSchemeSurjective, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.SurjectiveOnStalks.of_comp, AlgebraicGeometry.Surjective.of_comp, AlgebraicGeometry.SurjectiveOnStalks.instIsMultiplicativeScheme, AlgebraicGeometry.SurjectiveOnStalks.comp. Read the returned signatures: scheme surjectivity, ideal quotient transitions, finite-module quotient support and ideal-sheaf quotient maps do not state the comparison between these module strict transforms. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform",
+   "results": "0 hits: . Read the returned signatures: scheme surjectivity, ideal quotient transitions, finite-module quotient support and ideal-sheaf quotient maps do not state the comparison between these module strict transforms. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The iterated strict transform of a quasi coherent module under successive blowups surjects onto its strict transform under the composite blowup",
+   "results": "8 hits: AlgebraicGeometry.instSurjectiveCompScheme, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.SurjectiveOnStalks.comp, Module.End.iterate_surjective, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeSurjective, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact. Read the returned signatures: scheme surjectivity, ideal quotient transitions, finite-module quotient support and ideal-sheaf quotient maps do not state the comparison between these module strict transforms. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits: . Read the returned signatures: scheme surjectivity, ideal quotient transitions, finite-module quotient support and ideal-sheaf quotient maps do not state the comparison between these module strict transforms. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient by sections supported on a larger closed subset is a quotient of successive module transforms on blowups",
+   "results": "8 hits: Submodule.factorPowSucc, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, Ideal.powQuotSuccInclusion, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AdicCompletion.transitionMap, Module.support_quotient, Submodule.factorPow. Read the returned signatures: scheme surjectivity, ideal quotient transitions, finite-module quotient support and ideal-sheaf quotient maps do not state the comparison between these module strict transforms. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-module-admissible-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "NG"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "via": [
+    "lem-trf-module-admissible-blowup-calculus",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ],
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 all successive-blowup reductions, using remark-successive-blowups and strict-transform permanence. Re-split of lem-trf-module-admissible-blowup-calculus, returned proof steps 3--4 (canonical quotient comparison)."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-strict-transform-comparison-epimorphism",
+  "worker": "stage1",
+  "summary": "NE checked Stacks 080I paragraphs 1--2 and 080D, and reused the existing iterated quotient/support and strict-transform kernel nodes. Four steps give the canonical composite, kernel containment, the uniquely factored epimorphism and its kernel support; no new nodes. The statement and all its hypotheses are unchanged.",
+  "blueprint": "Supporting admissible-blowup calculus below lem-trf-local-term-locality through the inherited blueprint.from.via chain; this item realizes the quotient-comparison part of lem-trf-module-admissible-blowup-calculus (old steps 3--4), precisely Stacks 080I proof paragraphs 1--2 through the factorization. The current main-20261015 ancestor states the contracting-local-term theorem, not this auxiliary scheme-module lemma. Whole-blueprint searches for strict transform and 080I found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-0fe4e28ed",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-0fe4e28ed (reviewer sub-agent of L); spot-checked: Shape: the delivery is one commit with the item and the report (which has a Review by NE section), and it creates no new nodes. The item statement and stmt_deps are byte-identical to the version NG created in all four snapshots of its re-split. proof_deps equals the union of the step uses, and both used nodes, lem-trf-iterated-transform-quotient-support and lem-trf-strict-transform-sheaf-kernel, are in the item's own unit sk-i-curve-zero, so there are no tool_uses and no SGA citation. Source: I read Stacks divisors.tex Tag 080I lemma-strict-transform-composition-blowups, statement and proof paragraphs 1-2. The item stops at the factorization (pq)^*F -> F'' -> G and adds uniqueness, surjectivity and the support of ker theta. The source's equality of exceptional unions is replaced by the inclusion actually needed. Step 1: the iterated quotient node with b_0=b, b_1=c gives quasi-coherence of F_1 and F_2, the surjection alpha, the isomorphism off T_I u T_J and the vanishing of kernel sections there; the notation matches exactly. The sheaf-kernel node for the centre V(K), transported along the specified S-isomorphism, gives beta with kernel equal to all sections supported on D. Because fpq=bcf_2, that set is exactly D=(bcf_2)^{-1}V(K). Both cited statements say what the step uses from them (C3/C4). Step 2: T_I is in D because Z is in V(K); T_J is in D because b(Z_1) is in V(K). Restricting to W minus D therefore puts ker alpha inside ker beta. Step 3 builds theta by local lifts and checks uniqueness and epi; step 4 notes that alpha and beta are isomorphisms off D, so ker theta vanishes off D. Steps 2-4 are correctly marked elementary. Edge cases checked: F=0, D empty, D=X_2 (G=0), and I=O_S. No hypothesis is added. Duplicates: grep for 080I and 'module strict transform' found no node stating this factorization. lem-trf-strict-transform-composition covers only F=O_X and the scheme isomorphism. lem-trf-iterated-transform-exceptional-support supplies the other half, which the parent's step 3 uses together with this item. The parent's step 3 uses exactly the theta, theta alpha=beta and kernel-support clauses delivered here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictTransformComparisonEpimorphism",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.successiveModuleStrictTransform_comparison_epimorphism",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.successiveModuleStrictTransform",
+   "AlgebraicGeometry.Scheme.Modules.successiveModuleStrictTransformπ",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformCompositeBaseMap",
+   "AlgebraicGeometry.Scheme.Modules.compositeModuleStrictTransform",
+   "AlgebraicGeometry.Scheme.Modules.compositeModuleStrictTransformπ",
+   "AlgebraicGeometry.Scheme.Modules.successiveModuleStrictTransform_comparison_epimorphism"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTransformComparisonEpimorphism.lean",
+  "statement": "theorem successiveModuleStrictTransform_comparison_epimorphism {X S : Scheme.{u}} (f : X ⟶ S) (I : S.IdealSheafData) [I.toModules.IsFiniteType] (J : I.blowup.IdealSheafData) [J.toModules.IsFiniteType] (K : S.IdealSheafData) [K.toModules.IsFiniteType] (e : J.blowup ≅ K.blowup) (he : e.hom ≫ K.blowupMap = J.blowupMap ≫ I.blowupMap) (hK : (K.support : Set S) = (I.support : Set S) ∪ I.blowupMap '' (J.support : Set I.blowup)) (F : X.Modules) [F.IsQuasicoherent] : ∃ h₁ : (moduleStrictTransform f I F).IsQuasicoherent, (successiveModuleStrictTransform f I J F h₁).IsQuasicoherent ∧ (compositeModuleStrictTransform f I J K e he F).IsQuasicoherent ∧ Epi (successiveModuleStrictTransformπ f I J F h₁) ∧ Epi (compositeModuleStrictTransformπ f I J K e he F) ∧ (∀ (V : (Limits.pullback (pullback.snd f I.blowupMap) J.blowupMap).Opens) (s : Γ((tensorPullback (pullback.fst (pullback.snd f I.blowupMap) J.blowupMap)).obj ((tensorPullback (pullback.fst f I.blowupMap)).obj F), V)), (successiveModuleStrictTransformπ f I J F h₁).app V s = 0 → (compositeModuleStrictTransformπ f I J K e he F).app V s = 0) ∧ ∃! θ : successiveModuleStrictTransform f I J F h₁ ⟶ compositeModuleStrictTransform f I J K e he F, successiveModuleStrictTransformπ f I J F h₁ ≫ θ = compositeModuleStrictTransformπ f I J K e he F ∧ Epi θ ∧ ∀ (V : (Limits.pullback (pullback.snd f I.blowupMap) J.blowupMap).Opens) (s : Γ(successiveModuleStrictTransform f I J F h₁, V)), θ.app V s = 0 → ((restrictAdjunction ((pullback.fst (pullback.snd f I.blowupMap) J.blowupMap ≫ pullback.fst f I.blowupMap ≫ f) ⁻¹ᵁ K.support.compl).ι).unit.app (successiveModuleStrictTransform f I J F h₁)).app V s = 0",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21d51787c",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, Stacks 080I (statement + proof paras 1-2), item module, report and all used decls (moduleStrictTransform*, tensorPullbackSectionComp, IdealSheafData.blowup/blowupMap/support, Mathlib restrictAdjunction). Every hypothesis matches the node and none is stronger (F only QC, one universe); F1 QC concluded via ∃ h₁; transport map = canonical pullback.lift(q≫p, f₂≫e.hom); β built from normalized tensorPullbackSectionComp with directions checked; ker α⊆ker β sectionwise; ∃! θ with α≫θ=β, Epi θ and kernel supported on D via restrictAdjunction unit on (q≫p≫f)⁻¹V(K)ᶜ. Edge cases F=0, empty, D=∅, D=X₂, unit ideal covered. Only lean key changed; statement verbatim; one sorry; docstrings present; lines ≤96; fresh item, no duplicate. Advisory: moduleStrictTransformπ (plain cokernel.π abbreviation) comes from theorem node lem-trf-strict-transform-sheaf-kernel (a proof_dep), same as accepted in landed flat-pullback. No compile run (no changes)."
+ }
+}

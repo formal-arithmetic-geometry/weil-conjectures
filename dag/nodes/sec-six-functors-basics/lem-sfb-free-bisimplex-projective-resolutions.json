@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-free-bisimplex-projective-resolutions",
+ "kind": "statement",
+ "title": "Free bisimplex projective resolutions and pointwise cone contractions",
+ "statement": "Let $\\Delta$ have objects $[n]=\\{0,\\ldots,n\\}$, $n\\geq0$, and monotone maps, and put $I=\\Delta\\times\\Delta$. Work with abelian groups in a universe containing the small category $I$. Set $\\mathcal E=\\operatorname{Fun}(I,\\mathrm{Ab})$ and $R_i(j)=\\mathbf Z[\\operatorname{Hom}_I(i,j)]$, the free abelian group of finite integral sums of arrows, with postcomposition as structure maps. Then $\\mathcal E$ is abelian [def-sp-abelian], and kernels, cokernels, epimorphisms and exactness are computed pointwise. There is a natural bijection $\\operatorname{Hom}_{\\mathcal E}(R_i,F)\\cong F(i)$ sending $f$ to $f_i([1_i])$, with inverse $x\\mapsto([\\alpha]\\mapsto F(\\alpha)x)$. Every $R_i$ and every finite sum of these functors is projective, meaning that every map from it lifts through every epimorphism. Moreover $\\bigoplus_{(i,x),\\,x\\in F(i)}R_i\\to F$, with generator $1_i$ sent to $x$, is an epimorphism from a projective object; thus $\\mathcal E$ has enough projectives.\n\nDefine augmented nonnegative chain complexes by\n$$P_n=R_{(n,n)},\\qquad Q_n=\\bigoplus_{a+b=n}R_{(a,b)}.$$\nThe boundary of $P$ is alternating precomposition by the diagonal cofaces. The boundary of $Q$ on the $(a,b)$ summand is alternating precomposition by first-variable cofaces plus $(-1)^a$ times that in the second variable, omitting a direction of degree zero. Both augment to the constant functor $\\underline{\\mathbf Z}$ by sending each vertex to $1$. These are projective resolutions: their terms are projective and their augmented sequences are exact.\n\nMore explicitly, for every $p,q\\geq0$, use the unnormalized free string complexes $U(p),U(q),V(p,q)$ of [lem-sfb-simplex-lattice-shuffle-boundary], retaining repeated vertices. Evaluation gives $P(p,q)=V(p,q)$ and $Q(p,q)=\\operatorname{Tot}(U(p)\\otimes_{\\mathbf Z}U(q))$. Prepending $(0,0)$ defines maps $h_n:P_n(p,q)\\to P_{n+1}(p,q)$. If $e:\\mathbf Z\\to P_0(p,q)$ selects that vertex and $E=e\\epsilon$ in degree zero and zero otherwise, then $\\partial h+h\\partial=1-E$. Prepending $0$ gives $h_p,h_q$ and degree-zero projections $E_p,E_q$ for $U(p),U(q)$. On a tensor with $u\\in U(p)_a$ put\n$$H(u\\otimes v)=h_pu\\otimes v+(-1)^a E_pu\\otimes h_qv.$$\nThen $\\partial H+H\\partial=1-E_p\\otimes E_q$. Both degree-zero augmentations are surjective. The contractions are pointwise and are not asserted to be natural in $(p,q)$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08Q3, example-simplex-contractible, minimum-vertex variant. Agent-formulated free-abelian product-simplex and tensor contractions and representable projectivity, extracted from returned proof steps 1–3; the tag supplies the simplex contraction motivation, not the entire statement."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "lem-sfb-simplex-lattice-shuffle-boundary"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-abelian-presheaves-evaluation-exact] to $\\mathcal C=I^{\\mathrm{op}}$: its presheaves are the covariant diagrams $\\mathcal E$. Thus $\\mathcal E$ is abelian and kernels and cokernels are pointwise. Concretely, for $f:F\\to G$ the groups $G(j)/f_j(F(j))$, with induced structure maps, form its cokernel. Hence $f$ is epic exactly when these quotients vanish: if its cokernel is nonzero, its quotient map is a nonzero map killed by $f$; conversely, componentwise surjectivity permits cancellation of $f$ against any two natural transformations. Kernels and images are likewise the subgroups $\\ker f_j$ and $f_j(F(j))$ with induced maps. Consequently exactness is both preserved and detected pointwise, rather than merely preserved by evaluation.",
+   "uses": [
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written pointwise categorical argument (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "For $x\\in F(i)$ define $T_x(j)(\\sum_\\alpha n_\\alpha[\\alpha])=\\sum_\\alpha n_\\alpha F(\\alpha)x$. The finite, unique expression in the free basis [def-weil-pbc-free-module] makes this a homomorphism. For $\\beta:j\\to k$, $F(\\beta)T_x(j)[\\alpha]=F(\\beta\\alpha)x=T_x(k)R_i(\\beta)[\\alpha]$, proving naturality. Conversely, naturality of $f:R_i\\to F$ at $\\alpha:i\\to j$ gives $f_j[\\alpha]=F(\\alpha)f_i[1_i]$. These formulas prove the two inverse identities. Postcomposition by $F\\to G$ sends $x$ to its image in $G(i)$; precomposition induced by $i'\\to i$ sends $x'\\in F(i')$ to $F(i'\\to i)x'$. Thus the bijection is natural in both variables.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written free-generator calculation of the Yoneda bijection (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "For an epimorphism $a:F\\to G$ and $t:R_i\\to G$, step 1 makes $a_i$ surjective. Choose $y\\in F(i)$ with $a_i(y)=t_i[1_i]$. The map $T_y$ of step 2 lifts $t$, since both composites have that value on $[1_i]$. For any small family $(i_s)_{s\\in S}$, construct $A=\\bigoplus_s R_{i_s}$ pointwise: $A(j)$ consists of finite sums of basis symbols $(s,[\\alpha:i_s\\to j])$, and structure maps postcompose $\\alpha$. Its coproduct property follows by restricting a homomorphism to these summands and summing on each finite support. Lifting a map $A\\to G$ now amounts to choosing such a $y_s$ for every summand and using this property. Choice on the set $S$ supplies them. This proves projectivity for every such coproduct, including finite and empty ones, without assuming that arbitrary products preserve epimorphisms.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written explicit lifting argument for representables and their sums (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "For $S=\\{(i,x):i\\in I,\\ x\\in F(i)\\}$ the coproduct is small in the stated universe. Its maps $T_x:R_i\\to F$ assemble to $a:A\\to F$. For $z\\in F(j)$, the generator $[1_j]$ in the $(j,z)$ summand maps to $z$, so every $a_j$ is surjective. Step 1 makes $a$ epic and step 3 makes $A$ projective. Thus there are enough projectives. Small coproducts also exist abstractly by [lem-weil-pbc-functor-abelian-colimits], applied to the small category $I$ and to $\\mathrm{Ab}$; the explicit finite-support construction above gives the coproduct used here.",
+   "uses": [
+    "lem-weil-pbc-functor-abelian-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written enough-projectives construction (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "At $(p,q)$, an arrow $([n],[n])\\to([p],[q])$ is exactly a weakly increasing string of $n+1$ pairs; thus the free basis identifies $P_n(p,q)$ with $V(p,q)_n$ of [lem-sfb-simplex-lattice-shuffle-boundary]. Precomposing a diagonal coface deletes that pair. Similarly a basis arrow $([a],[b])\\to([p],[q])$ is a pair of strings $(u,v)$, giving $R_{(a,b)}(p,q)=U(p)_a\\otimes_{\\mathbf Z}U(q)_b$ by the free-on-pairs identification in that node's statement. The two coface sums give precisely $D(u\\otimes v)=\\partial u\\otimes v+(-1)^a u\\otimes\\partial v$, with degree-zero directions omitted. These identifications respect postcomposition and both vertex augmentations.",
+   "uses": [
+    "lem-sfb-simplex-lattice-shuffle-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written basis identifications of the two evaluated complexes (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "The displayed boundaries define augmented complexes. For an alternating deletion differential, every deletion of positions $i<j$ occurs twice in $\\partial^2$, with signs $(-1)^{i+j-1}$ and $(-1)^{i+j}$, hence cancels, including repeated entries. For the tensor differential the two mixed terms have coefficients $(-1)^{a-1}$ and $(-1)^a$, and the unmixed terms are zero by the same deletion calculation; if either degree is zero, its differential and both corresponding mixed contributions are absent. On a degree-one string the augmentation sends its boundary to $1-1=0$. Coface precomposition commutes with postcomposition, so the boundaries and augmentations are natural transformations. Finally $P_n$ is representable-free and $Q_n$ is a sum of $n+1$ representable-free functors, and step 3 proves their projectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written square-zero and augmentation calculations (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "On a basis string $z=(z_0,\\ldots,z_n)$ of $V(p,q)$ define $hz=((0,0),z_0,\\ldots,z_n)$. The coordinatewise minimum makes this a legal weakly increasing string even if $z_0=(0,0)$. For $n>0$, deleting the prepended vertex gives $z$, while deletion at position $i+1$ has sign $(-1)^{i+1}$ and is $h$ of the deletion at $i$ of $z$. Therefore $\\partial hz=z-h\\partial z$. For $n=0$, $\\partial h(z_0)=(z_0)-((0,0))=(1-e\\epsilon)(z_0)$. By linearity these identities give $\\partial h+h\\partial=1-E$ in every degree. They use the unnormalized bases of [lem-sfb-simplex-lattice-shuffle-boundary], so no repeated simplex has been set to zero.",
+   "uses": [
+    "lem-sfb-simplex-lattice-shuffle-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written minimum-vertex contraction of the product simplex (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "The identical calculation for an ordinary string, replacing $(0,0)$ by $0$, gives $\\partial h_p+h_p\\partial=1-E_p$ and $\\partial h_q+h_q\\partial=1-E_q$. Here $E_p$ sends every degree-zero vertex to $(0)$ and is zero in positive degrees. Thus $\\partial E_p=0$: its nonzero outputs have degree zero. Also $E_p\\partial=0$: only the boundary of a degree-one string can contribute, and its two vertices have opposite coefficients. The same assertions hold for $E_q$. In particular both $E_p,E_q$ are chain maps, with no assumption about commuting with $h_p,h_q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written single-simplex contraction and degree-zero chain projections (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "For homogeneous $u\\in U(p)_a$, $v\\in U(q)_b$, split the required $H$ into $A(u\\otimes v)=h_pu\\otimes v$ and $B(u\\otimes v)=(-1)^aE_pu\\otimes h_qv$. Expanding $DA+AD$, the mixed terms are $(-1)^{a+1}h_pu\\otimes\\partial v$ and $(-1)^ah_pu\\otimes\\partial v$, which cancel. What remains is $(\\partial h_p+h_p\\partial)u\\otimes v=(1-E_p)u\\otimes v$. For $B$, it vanishes unless $a=0$. If $a=0$, $DB+BD=E_pu\\otimes(\\partial h_q+h_q\\partial)v=E_pu\\otimes(1-E_q)v$. If $a=1$, the only possible term is $E_p\\partial u\\otimes h_qv=0$ by step 8; if $a>1$ every term is zero by degree. This gives $DB+BD=E_p\\otimes(1-E_q)$ in all cases. Adding proves $DH+HD=1-E_p\\otimes E_q$, exactly with the sign and degree-zero convention stated in the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written expansion of the tensor contraction with the Koszul signs (the tag motivates the minimum-vertex contraction only)"
+   }
+  },
+  {
+   "text": "Write $C$ for either evaluated complex and $T$ for its displayed contraction. In positive degree, the projection in $DT+TD=1-E$ is zero, so every cycle $z$ equals $DTz$, proving exactness. In degree zero, a vector $z$ with $\\epsilon z=0$ has $Ez=0$, again giving $z=DTz$. Each boundary has augmentation zero by step 6. Finally $\\epsilon e=1$ for $P$, and $\\epsilon((0)\\otimes(0))=1$ for $Q$, so the augmentations are surjective. This proves exactness of both augmented sequences at every $(p,q)$; the pointwise kernels and cokernels of [lem-weil-pbc-abelian-presheaves-evaluation-exact] give exactness in $\\mathcal E$. With step 6 this proves both are projective resolutions. None of this needs the contractions to be natural: for example a monotone map $[0]\\to[1]$ with value $1$ sends the chosen vertex $0$ to $1$, not to the chosen vertex $0$.",
+   "uses": [
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible; agent-written cycle lifting, augmented exactness, and the limitation on naturality (the tag motivates the minimum-vertex contraction only)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-functor-abelian-colimits",
+  "lem-sfb-simplex-lattice-shuffle-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08Q3, example-simplex-contractible, first-vertex variant as motivation; explicit free-generator lifting and unnormalized chain calculations written by Q126, not attributed to the tag."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal and tensor complexes of free representable simplices are projective resolutions of the constant integer functor on the product simplex category",
+   "results": "{\"t\": \"2026-10-22T06:00:31Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal and tensor complexes of free representable simplices are projective resolutions of the constant integer functor on the product simplex category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.x_projective\", \"ModuleCat.projectiveResolution\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"Rep.barResolution\", \"CategoryTheory.ProjectiveResolution.complex\", \"CategoryTheory.ProjectiveResolution.self_complex\", \"CategoryTheory.ProjectiveResolution.self\", \"Rep.standardResolution\"], \"digest\": \"7bc352fc701ba7d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standardComplex and barResolution concern group representations, and freeYonedaHomEquiv is only the generator identification. None states exactness and projectivity of these two explicit product-simplex resolutions with the displayed contractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prepending the minimum vertex contracts unnormalized chains of a product of ordered simplices and the tensor of simplex chain complexes",
+   "results": "{\"t\": \"2026-10-22T06:00:42Z\", \"tool\": \"leanfinder\", \"query\": \"Prepending the minimum vertex contracts unnormalized chains of a product of ordered simplices and the tensor of simplex chain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.prodStdSimplex.orderHomOfSimplex_coe\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"SSet.prodStdSimplex.orderHomOfSimplex\", \"SSet.prodStdSimplex.objEquiv\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"SSet.prodStdSimplex.nonDegenerate_iff_strictMono_objEquiv\", \"AugmentedSimplexCategory.tensorHomOf\"], \"digest\": \"15d19314914688fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standardComplex and barResolution concern group representations, and freeYonedaHomEquiv is only the generator identification. None states exactness and projectivity of these two explicit product-simplex resolutions with the displayed contractions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free abelian representable functors on the product simplex category give diagonal and separate simplex projective resolutions",
+   "results": "{\"t\": \"2026-10-22T06:00:42Z\", \"tool\": \"leansearch\", \"query\": \"Free abelian representable functors on the product simplex category give diagonal and separate simplex projective resolutions\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"SimplicialObject\"",
+   "results": "{\"t\": \"2026-10-22T06:00:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projective\\\", \\\"SimplicialObject\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standardComplex and barResolution concern group representations, and freeYonedaHomEquiv is only the generator identification. None states exactness and projectivity of these two explicit product-simplex resolutions with the displayed contractions."
+  },
+  {
+   "tool": "grep",
+   "query": "representable.*[Pp]rojective|[Pp]rojective.*representable|simplex.*[Cc]ontract|[Cc]ontract.*simplex",
+   "results": "{\"t\": \"2026-10-22T06:00:43Z\", \"tool\": \"grep\", \"query\": \"representable.*[Pp]rojective|[Pp]rojective.*representable|simplex.*[Cc]ontract|[Cc]ontract.*simplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standardComplex and barResolution concern group representations, and freeYonedaHomEquiv is only the generator identification. None states exactness and projectivity of these two explicit product-simplex resolutions with the displayed contractions."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda|projective.*[Ff]unctor|[Ff]unctor.*projective",
+   "results": "{\"t\": \"2026-10-22T06:00:43Z\", \"tool\": \"grep\", \"query\": \"freeYoneda|projective.*[Ff]unctor|[Ff]unctor.*projective\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Presheaf.lean\", \"Mathlib/CategoryTheory/Presentable/Presheaf.lean\", \"Mathlib/CategoryTheory/Presentable/Presheaf.lean\", \"Mathlib/CategoryTheory/Presentable/Presheaf.lean\", \"Mathlib/CategoryTheory/Presentable/Presheaf.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/Abelian/FreydMitchell.lean\"], \"digest\": \"cc6042e9fcf8fa9d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standardComplex and barResolution concern group representations, and freeYonedaHomEquiv is only the generator identification. None states exactness and projectivity of these two explicit product-simplex resolutions with the displayed contractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free abelian representable functors on the product simplex category form diagonal and tensor projective resolutions of the constant integers with minimum vertex contractions",
+   "results": "{\"t\": \"2026-10-23T04:17:53Z\", \"tool\": \"leanfinder\", \"query\": \"Free abelian representable functors on the product simplex category form diagonal and tensor projective resolutions of the constant integers with minimum vertex contractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonal_succ_projective\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀.obj_obj\", \"CategoryTheory.Idempotents.DoldKan.Γ_obj_obj\", \"Rep.standardComplex.x_projective\", \"CategoryTheory.Idempotents.DoldKan.N\", \"AlgebraicTopology.DoldKan.Γ₀'\"], \"digest\": \"0dcbe390bbf5f2c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: representable Hom equivalence, ordinary simplex extra degeneracy, Dold–Kan normalization, or group-representation projectivity only; none states both specified projective resolutions and their explicit pointwise tensor contraction. Source hits were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"SimplicialObject\"",
+   "results": "{\"t\": \"2026-10-23T04:18:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projective\\\", \\\"SimplicialObject\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: representable Hom equivalence, ordinary simplex extra degeneracy, Dold–Kan normalization, or group-representation projectivity only; none states both specified projective resolutions and their explicit pointwise tensor contraction. Source hits were read."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda|contract.*[Ss]implex|[Ss]implex.*contract",
+   "results": "{\"t\": \"2026-10-23T04:23:55Z\", \"tool\": \"grep\", \"query\": \"freeYoneda|contract.*[Ss]implex|[Ss]implex.*contract\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Generator/Sheaf.lean\", \"Mathlib/CategoryTheory/Generator/Sheaf.lean\", \"Mathlib/CategoryTheory/Generator/Sheaf.lean\", \"Mathlib/CategoryTheory/Generator/Sheaf.lean\", \"Mathlib/CategoryTheory/Generator/Sheaf.lean\", \"Mathlib/CategoryTheory/Generator/Presheaf.lean\", \"Mathlib/CategoryTheory/Generator/Presheaf.lean\", \"Mathlib/CategoryTheory/Generator/Presheaf.lean\"], \"digest\": \"51cbd70097c8e995\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: representable Hom equivalence, ordinary simplex extra degeneracy, Dold–Kan normalization, or group-representation projectivity only; none states both specified projective resolutions and their explicit pointwise tensor contraction. Source hits were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonal free bisimplicial representable chains and tensor simplex chains resolve the constant integer functor",
+   "results": "{\"t\": \"2026-10-23T04:23:56Z\", \"tool\": \"leansearch\", \"query\": \"Diagonal free bisimplicial representable chains and tensor simplex chains resolve the constant integer functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.const\", \"ChainComplex.alternatingConst\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"CategoryTheory.CosimplicialObject.const\", \"SimplexCategory.toTop\", \"CategoryTheory.SimplicialObject.diagonal\", \"SSet.instFiniteTensorUnit\", \"SimplicialObject.Split.nondegComplexFunctor_obj\"], \"digest\": \"56e946aa70e4f467\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: representable Hom equivalence, ordinary simplex extra degeneracy, Dold–Kan normalization, or group-representation projectivity only; none states both specified projective resolutions and their explicit pointwise tensor contraction. Source hits were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmented unnormalized chains on an ordered simplex have a contracting homotopy given by prepending the least vertex and tensor products of contractions",
+   "results": "{\"t\": \"2026-10-23T04:24:01Z\", \"tool\": \"leanfinder\", \"query\": \"Augmented unnormalized chains on an ordered simplex have a contracting homotopy given by prepending the least vertex and tensor products of contractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyHσToZero\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"AlgebraicTopology.DoldKan.Hσ\"], \"digest\": \"19fb07a284fdc9bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: representable Hom equivalence, ordinary simplex extra degeneracy, Dold–Kan normalization, or group-representation projectivity only; none states both specified projective resolutions and their explicit pointwise tensor contraction. Source hits were read."
+  },
+  {
+   "tool": "grep",
+   "query": "ExtraDegeneracy|homotopyEquiv",
+   "results": "{\"t\": \"2026-10-23T04:25:30Z\", \"tool\": \"grep\", \"query\": \"ExtraDegeneracy|homotopyEquiv\", \"sub\": \"AlgebraicTopology/ExtraDegeneracy.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"31\", \"32\", \"34\", \"36\", \"38\"], \"digest\": \"bb4a546541471d34\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: representable Hom equivalence, ordinary simplex extra degeneracy, Dold–Kan normalization, or group-representation projectivity only; none states both specified projective resolutions and their explicit pointwise tensor contraction. Source hits were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bicosimplicial-shuffle-totalization",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: compare the diagonal product-group nerve with its two successive augmentations; the general bicosimplicial shuffle, before any group or coefficient choices. Inherited ancestor command returns None. Re-split of the universal proof: Free bisimplex projective resolutions and pointwise cone contractions.",
+   "via": [
+    "lem-sfb-bicosimplicial-shuffle-totalization",
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-free-bisimplex-projective-resolutions",
+  "worker": "stage1",
+  "group": "Q126",
+  "summary": "Statement retained exactly. Reused the existing Mathlib leaves for abelian presheaves with pointwise kernels/cokernels, functor-category colimits, and free bases. Gave explicit Yoneda and arbitrary-coproduct lifting formulas, the basis identifications, square-zero cancellations, both cone contractions and the tensor sign expansion, followed by cyclewise augmented exactness. No new nodes: each remaining calculation is written directly in elementary steps. No project Lean attachment states all clauses.",
+  "blueprint": "Nearest-ancestor command returns None, as already recorded in the item. The steps realize the universal resolution input to paragraph (3), open direct image, in sk-thm-sf-ctf-stability-direct-images.proof.md along the inherited bicosimplicial-shuffle ancestry. Searches for free representable, projective resolution, functor category and contract found no equivalent blueprint item. Chapter, unit, inherited from.place and via unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-cd99b5dae",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-cd99b5dae (reviewer sub-agent of L); spot-checked: This is the first split of an item that was unsplit on base and on live; no re-split note applies and no other group has split it. The statement is byte-identical to live and stmt_deps are unchanged. The delivery has 0 new nodes and 10 steps; proof_deps equal the union of the uses fields; the closure has no cycle; every cited non-leaf node is in the same unit, so no tool_uses are needed. Cited statements read: abelian-presheaves-evaluation-exact (pointwise kernels/cokernels, which step 1 turns into detection of epis and exactness), def-weil-pbc-free-module, functor-abelian-colimits (redundant but correct) and simplex-lattice-shuffle-boundary (unnormalized U and V with repeats kept, free-on-pairs tensor). Source: Stacks simplicial.tex lines 4580-4609 (08Q3, example-simplex-contractible) is cited only as motivation, which is correct. Blueprint main-20261015 direct-images paragraph (3): the inherited place, via chain, unit and chapter are unchanged. I re-derived every step: Yoneda and its naturality; projectivity of arbitrary small sums of representables by choice; the enough-projectives epi; the identification of strings as pairs of monotone maps and the coface deletions; d^2=0; the cone contraction dh+hd=1-E, including n=0 and z_0=(0,0); E_p d=0; the tensor homotopy H with cases a=0, a=1 and a>=2 giving 1-E_p tensor E_q; exactness in degree 0 and in positive degree. Small case p=q=0 checked by hand. No SGA. Duplicate search: lem-trf-representable-sum-shriek-acyclic (unsplit, unit sk-i-curve-zero) shares the Yoneda, projectivity and enough-projectives clauses for Fun(E^op,Mod_R). This is only a merge advisory: it is a larger node of another unit, and the item proves those clauses in elementary steps 2-4. No bisimplex declaration exists in the Lean tree. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FreeBisimplexProjectiveResolutions",
+  "declaration": "AlgebraicTopology.FreeBisimplex.projective_resolutions",
+  "declarations": [
+   "AlgebraicTopology.FreeBisimplex.representable",
+   "AlgebraicTopology.FreeBisimplex.generator",
+   "AlgebraicTopology.FreeBisimplex.totalTerm",
+   "AlgebraicTopology.FreeBisimplex.totalGenerator",
+   "AlgebraicTopology.FreeBisimplex.predecessorCoface",
+   "AlgebraicTopology.FreeBisimplex.totalBoundary",
+   "AlgebraicTopology.FreeBisimplex.liftComplex",
+   "AlgebraicTopology.FreeBisimplex.evaluateComplex",
+   "AlgebraicTopology.FreeBisimplex.diagram_projectivity",
+   "AlgebraicTopology.FreeBisimplex.projective_resolutions",
+   "AlgebraicTopology.FreeBisimplex.prependString",
+   "AlgebraicTopology.FreeBisimplex.minimumVertex",
+   "AlgebraicTopology.FreeBisimplex.simplexCone",
+   "AlgebraicTopology.FreeBisimplex.productCone",
+   "AlgebraicTopology.FreeBisimplex.simplexProjection",
+   "AlgebraicTopology.FreeBisimplex.productProjection",
+   "AlgebraicTopology.FreeBisimplex.tensorInclusion",
+   "AlgebraicTopology.FreeBisimplex.simplex_contraction",
+   "AlgebraicTopology.FreeBisimplex.product_contraction",
+   "AlgebraicTopology.FreeBisimplex.tensor_contraction"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FreeBisimplexProjectiveResolutions.lean",
+  "statement": "theorem projective_resolutions : ∃ (P Q : ChainComplex (SimplexCategory × SimplexCategory ⥤ AddCommGrpCat.{u}) ℕ) (p : ∀ n : ℕ, P.X n ≅ representable.{u} (⦋n⦌, ⦋n⦌)) (q : ∀ n : ℕ, Q.X n ≅ totalTerm.{u} n) (εP : P.X 0 ⟶ (Functor.const _).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (εQ : Q.X 0 ⟶ (Functor.const _).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (zP : P.d 1 0 ≫ εP = 0) (zQ : Q.d 1 0 ≫ εQ = 0), (∀ n, Projective (P.X n) ∧ Projective (Q.X n)) ∧ (∀ (n : ℕ) (j : SimplexCategory × SimplexCategory) (α : (⦋n + 1⦌, ⦋n + 1⦌) ⟶ j), (p n).hom.app j ((P.d (n + 1) n).app j ((p (n + 1)).inv.app j (generator α))) = ∑ k : Fin (n + 2), (-1 : ℤ) ^ k.val • generator ((SimplexCategory.δ k, SimplexCategory.δ k) ≫ α)) ∧ (∀ (a b : ℕ) (j : SimplexCategory × SimplexCategory) (α : (⦋a⦌, ⦋b⦌) ⟶ j), (q (a + b - 1)).hom.app j ((Q.d (a + b) (a + b - 1)).app j ((q (a + b)).inv.app j (totalGenerator a b (a + b) rfl j α))) = totalBoundary a b j α) ∧ (∀ (j : SimplexCategory × SimplexCategory) (α : (⦋0⦌, ⦋0⦌) ⟶ j), εP.app j ((p 0).inv.app j (generator α)) = ULift.up (1 : ℤ) ∧ εQ.app j ((q 0).inv.app j (totalGenerator 0 0 0 rfl j α)) = ULift.up (1 : ℤ)) ∧ (ShortComplex.mk (P.d 1 0) εP zP).Exact ∧ (ShortComplex.mk (Q.d 1 0) εQ zQ).Exact ∧ Epi εP ∧ Epi εQ ∧ (∀ n : ℕ, P.ExactAt (n + 1) ∧ Q.ExactAt (n + 1)) ∧ (∀ p' q' : ℕ, ∃ (eP : evaluateComplex P (⦋p'⦌, ⦋q'⦌) ≅ liftComplex.{u} (SimplexLatticeShuffle.productChains p' q')) (eQ : evaluateComplex Q (⦋p'⦌, ⦋q'⦌) ≅ liftComplex.{u} (SimplexLatticeShuffle.simplexChains p' ⊗ SimplexLatticeShuffle.simplexChains q')), (∀ (n : ℕ) (α : (⦋n⦌, ⦋n⦌) ⟶ (⦋p'⦌, ⦋q'⦌)), (eP.hom.f n) ((p n).inv.app _ (generator α)) = ULift.up (ModuleCat.freeMk (R := ℤ) ((ULift.up α.1, ULift.up α.2) : (Δ[p'] ⊗ Δ[q'] : SSet.{0}) _⦋n⦌))) ∧ (∀ (a b : ℕ) (α : (⦋a⦌, ⦋b⦌) ⟶ (⦋p'⦌, ⦋q'⦌)), (eQ.hom.f (a + b)) ((q (a + b)).inv.app _ (totalGenerator a b (a + b) rfl _ α)) = ULift.up ((HomologicalComplex.ιTensorObj (SimplexLatticeShuffle.simplexChains p') (SimplexLatticeShuffle.simplexChains q') a b (a + b) rfl).hom (ModuleCat.freeMk (R := ℤ) (ULift.up α.1) ⊗ₜ[ℤ] ModuleCat.freeMk (R := ℤ) (ULift.up α.2)))))",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The five theorem declarations jointly state all clauses of this node: pointwise abelian structure, the generator Yoneda bijection, projectivity and the specified covering epimorphism; the two generator-normalized augmented resolutions and their evaluation isomorphisms; and the single, product, and tensor minimum-vertex contractions. Concrete helper definitions introduce only the free diagrams, summand generators, and cone data already specified by this node. The existing SimplexLatticeShuffle complexes are used unchanged. Every theorem proof is sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cee830425",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Only the item's lean field changed; statement verbatim in the file; dependency records identical to live; no new nodes. The theorem stmt_dep lem-sfb-simplex-lattice-shuffle-boundary was on base, not added, so it is not a fault. Clause check: pointwise abelian structure with epi and exactness detection; Yoneda bijection pinned in both directions; projectivity of representables and finite sums including empty; specified covering epi; enough projectives. P and Q are fixed on generators by term isos, P boundary, Q totalBoundary (sign (-1)^a matches the Mathlib down-N tensor sign; degree-0 omissions and a=b=0 consistent) and augmentations to const ULift Z; exact at the augmented degree 0, epi, ExactAt n+1. Evaluation chain isos are normalized on generators to productChains and simplexChains tensor. Cones: prependString via insertNth 0 0 keeps repeats; tensor H and E pinned on all pure tensors; contraction identity in degree 0 and successor degrees; augmentations surjective; no naturality asserted. No hollow defs, all theorems sorry, docstrings carry source and steps 1-10, no duplicate declaration. Not recompiled per instructions; no fixes. Advisories: Yoneda naturality only implied by the formulas; FreeModule.Basic import is proof-only."
+ }
+}

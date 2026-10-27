@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-unit-root-coordinate-tower-comparison",
+ "kind": "statement",
+ "title": "Compatible unit changes of equations on full root towers",
+ "statement": "Let $p$ be a positive prime, $H$ a commutative ring of characteristic $p$, and $r\\geq0$. Let $t_i,t'_i\\in H$, $a_i\\in H^\\times$ satisfy $t'_i=a_it_i$. Suppose units $b_{i,n}\\in H^\\times$ are given for every $n>0$ prime to $p$, with $b_{i,n}^n=a_i$ and $b_{i,m}^{m/n}=b_{i,n}$ for $n\\mid m$. Form $H_n=H[x_{i,n}]/(x_{i,n}^n-t_i)$ and $H'_n=H[x'_{i,n}]/((x'_{i,n})^n-t'_i)$ [def-weil-pbc-mv-polynomial-ring], with power transitions. The assignments $x'_{i,n}\\mapsto b_{i,n}x_{i,n}$ define coefficient-preserving isomorphisms $H'_n\\to H_n$, commute with every divisibility transition, and induce isomorphisms on the full colimits and their localizations [def-weil-ring-localization-away] at $\\prod_i t'_i$ and $\\prod_i t_i$. They also respect reduction by the boundary ideals and commute with homomorphisms of all these coefficient and unit-root data. For a finite family $t^{(a)}_i=a^{(a)}_it_i$ with compatible roots $b^{(a)}_{i,n}$ of $a^{(a)}_i$, choose the roots of $a^{(a)}_i/a^{(b)}_i$ to be $b^{(a)}_{i,n}/b^{(b)}_{i,n}$. The resulting comparisons satisfy the identity and cocycle laws at finite, residual, full, and punctured levels. The case $r=0$ gives identity maps; the case $n=1$ is substitution of the original equations.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, p.133, labelled parameter-root presentations; agent explicit substitution for unit changes, with coherent normalization against one reference equation."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-sfb-parameter-root-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write $N=\\{n\\in\\mathbf N:n>0,\\ (n,p)=1\\}$ and $P_n=H[X_i]$, $I_n=(X_i^n-t_i)$, and similarly $P'_n,I'_n$. Polynomial evaluation gives $e_n:P'_n\\to H_n$ fixing $H$ and sending $X'_i$ to $b_{i,n}x_{i,n}$. Each generator of $I'_n$ maps to $b_{i,n}^nt_i-t'_i=a_it_i-a_it_i=0$. Hence every sum of polynomial multiples of these generators maps to zero. Define $\\phi_n([P])=e_n(P)$: if $[P]=[Q]$, then $P-Q\\in I'_n$, so the two values agree. This gives a ring map $H'_n\\to H_n$. Replacing $b_{i,n}$ by $b_{i,n}^{-1}$ gives $\\psi_n:H_n\\to H'_n$, since $(b_{i,n}^{-1}x'_{i,n})^n=b_{i,n}^{-n}t'_i=t_i$. Both composites fix coefficients and variables, so polynomial uniqueness followed by surjectivity of the quotient maps makes them identity maps.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities."
+   }
+  },
+  {
+   "text": "For $n\\mid m$ put $q=m/n$. The transition $u_{nm}:H_n\\to H_m$, $x_{i,n}\\mapsto x_{i,m}^q$, is well defined because $(x_{i,m}^q)^n=t_i$; define $u'_{nm}$ similarly. Their identities and composition laws follow by multiplying exponents. On a primed generator the two sides of $u_{nm}\\phi_n=\\phi_m u'_{nm}$ are $b_{i,n}x_{i,m}^q$ and $(b_{i,m}x_{i,m})^q=b_{i,m}^qx_{i,m}^q$, equal by the assumed coherence. They agree on coefficients, and hence on every polynomial class. The inverse maps commute as well by the same equality for inverse units.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities."
+   }
+  },
+  {
+   "text": "The full compatible-root quotient is the colimit of the actual finite-stage power diagram. Given a cocone into a commutative H-algebra B, send each labelled generator x_(i,n) to the image of x_i under the n-th cocone component. Its power relation holds because that component is an H-algebra map; its divisibility relation holds by cocone naturality and the finite power-map formula. Polynomial evaluation therefore descends to the full quotient. It agrees with each cocone component by checking coefficients and variables. Any other factorization agrees on coefficients and on every labelled root by its finite-stage factorization, hence is equal by quotient and polynomial uniqueness. Direct evaluation x'_(i,n) to b_(i,n)x_(i,n) preserves both kinds of full relations by power and coherence of the units; inverse-unit evaluation is inverse, as at finite level. This gives the full comparison and its compatibility with every coprojection.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities."
+   }
+  },
+  {
+   "text": "Put $f=\\prod_i t_i$, $f'=\\prod_i t'_i$ and $A=\\prod_i a_i\\in H^\\times$, so $f'=Af$. For $R=H_n$ or $H_\\infty$ and its primed partner $R'$, the coefficient-preserving comparison $\\phi$ sends $f'$ to $Af$, which is invertible in $R_f$ with inverse $A^{-1}f^{-1}$. The localization universal property therefore extends it uniquely to $R'_{f'}\\to R_f$, with formula $z/(f')^k\\mapsto\\phi(z)A^{-k}/f^k$. The inverse comparison extends because it sends $f$ to $A^{-1}f'$. The composites restrict to identities on $R$ and $R'$, so localization uniqueness makes them identities. The same uniqueness applied to the finite-stage coprojections proves compatibility with the full localized comparison.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities."
+   }
+  },
+  {
+   "text": "For any subset $S\\subseteq\\{1,\\ldots,r\\}$ the comparison carries the ideal $(x'_{i,n}:i\\in S)$ onto $(x_{i,n}:i\\in S)$: its generators are multiplied by units, and its inverse divides by the same units. It also carries the coefficient boundary ideal $(t'_i:i\\in S)$ onto $(t_i:i\\in S)$ because $t'_i=a_it_i$. Thus $[z]\\mapsto[\\phi_n(z)]$ defines inverse maps on both sorts of boundary quotients: a difference in either ideal has image in its corresponding ideal. Power transitions preserve these ideals and their compatibility after reduction follows from the equality in step 2. At the full level the identical argument applies to the ideals generated by the coprojection images of these generators; step 3 proves compatibility with the finite reductions. Applying it to products of the boundary equations also gives their principal ideals. If reduction is followed by localization, the induced maps are the unique extensions of these quotient maps as in step 4, including a zero localized ring.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities."
+   }
+  },
+  {
+   "text": "Let $h:H\\to K$ be a homomorphism preserving $t_i,t'_i,a_i$ and the specified $b_{i,n}$ (with the same $p,r$). Coefficient application and $x_{i,n}\\mapsto y_{i,n}$ give maps of presented rings: the relations map to the defining relations over $K$. In the comparison square both composites on $x'_{i,n}$ equal $h(b_{i,n})y_{i,n}$, and on coefficients they equal $h$. Polynomial uniqueness and quotient surjectivity give equality. The inverse and power-transition squares follow by the same formulas. Boundary quotients retain the equality on classes; the full squares follow by precomposition with each coprojection and colimit uniqueness; the punctured squares follow by localization uniqueness, since $h(f)$ is the target boundary product. This proves naturality for every specified homomorphism of data.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities."
+   }
+  },
+  {
+   "text": "For the finite family, denote its level-$n$ algebra by $H_n^{(a)}$. Define $c_{ab,n}:H_n^{(a)}\\to H_n^{(b)}$ by $x^{(a)}_{i,n}\\mapsto (b^{(a)}_{i,n}/b^{(b)}_{i,n})x^{(b)}_{i,n}$. The ratio has $n$th power $a_i^{(a)}/a_i^{(b)}$ and obeys the power-transition coherence, so steps 1–4 apply. The identity ratio is $1$, and the composite $c_{bc,n}c_{ab,n}$ multiplies a generator by $(b^{(a)}_{i,n}/b^{(b)}_{i,n})(b^{(b)}_{i,n}/b^{(c)}_{i,n})=b^{(a)}_{i,n}/b^{(c)}_{i,n}$. Thus $c_{aa,n}=\\mathrm{id}$ and $c_{bc,n}c_{ab,n}=c_{ac,n}$ by polynomial uniqueness and quotient surjectivity. Equality persists on residual classes, on full colimits by testing coprojections, and on punctures by localization uniqueness, giving every stated identity and cocycle law.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities."
+   }
+  },
+  {
+   "text": "For r=0, polynomial induction shows that coefficients surject onto each finite stage and onto the full presented algebra, since there are no variables. Surjectivity remains after every boundary quotient. The root-coordinate and coefficient-equation ideals are zero; the principal ideal of the empty product is the unit ideal and gives the zero ring. The puncture element is one in every such quotient, so localization is again generated by coefficients, including in the zero ring. Each comparison fixes coefficients, giving the stated coefficient representative for every element. For n=1, the prescribed power identity gives b_(i,n)=a_i and the defining relation gives x_(i,n)=t_i. The comparison is thus b_(i,n)x_(i,n)=a_i t_i=t'_i.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-localization-away-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, p.133: displayed parameter-root presentation; agent calculation of coordinate substitutions and their compatibilities. Stage-3 C3: explicit quotient evaluation constructs the full colimit and all comparisons; generic colimit existence is unnecessary. The rank-zero product-boundary quotient is handled as the zero ring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible roots of unit changes of parameter equations induce natural isomorphisms of Kummer root towers and their punctures satisfying cocycle laws",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"autAdjoinRootXPowSubCEquiv\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {n : ℕ} →\\n      (primitiveRoots n K).Nonempty →\\n        {a : K} →\\n          Irreducible (Polynomial.X ^ n - Polynomial.C a) →\\n            [NeZero n] →\\n              ↥(rootsOfUnity n K) ≃*\\n                AdjoinRoot (Polynomial.X ^ n - Polynomial.C a) ≃ₐ[K] Adj\", \"doc\": \"The group isomorphism mapping each n-th root of unity $\\\\eta \\\\in K$ to the K-algebra automorphism of the field extension $K(\\\\sqrt[n]{a})$ that sends the adjoined root $\\\\alpha$ (satisfying $\\\\alpha^n = a\"}\n  {\"name\": \"autAdjoinRootXPowSubC\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    (n : ℕ) →\\n      (a : K) →\\n        ↥(rootsOfUnity n K) →*\\n          AdjoinRoot (Polynomial.X ^ n - Polynomial.C a) ≃ₐ[K] AdjoinRoot (Polynomial.X ^ n - Polynomial.C a)\", \"doc\": \"The group homomorphism mapping each n-th root of unity $\\\\eta \\\\in K$ to the K-algebra automorphism of the field extension $K(\\\\sqrt[n]{a})$ that sends the adjoined root $\\\\alpha$ (satisfying $\\\\alpha^n = \"}\n  {\"name\": \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (hζ : (primitiveRoots n K).Nonempty) {a : K}\\n  (H : Irreducible (Polynomial.X ^ n - Polynomial.C a)) [inst_1 : NeZero n]\\n  (σ : AdjoinRoot (Polynomial.X ^ n - Polynomial.C a) ≃ₐ[K] AdjoinRoot (Polynomial.X ^ n - Polynomial.C a)),\\n  ↑((autAdjoinRootXPowSubCEqui\", \"doc\": \"For any automorphism $\\\\sigma$ in the Galois group $\\\\text{Gal}(K(\\\\sqrt[n]{a})/K)$, applying the inverse of the Kummer isomorphism $\\\\mu_n(K) \\\\cong \\\\text{Gal}(K(\\\\sqrt[n]{a})/K)$ yields a primitive $n$-th\"}\n  {\"name\": \"AdjoinRootXPowSubCEquivToRootsOfUnity\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {n : ℕ} →\\n      (primitiveRoots n K).Nonempty →\\n        {a : K} →\\n          Irreducible (Polynomial.X ^ n - Polynomial.C a) →\\n            [NeZero n] →\\n              (AdjoinRoot (Polynomial.X ^ n - Polynomial.C a) ≃ₐ[K] AdjoinRoot (Polynomial.X ^ n - Polynomial\", \"doc\": \"Given a field $ K $ and an irreducible polynomial $ f(X) = X^n - a $ over $ K $, for any algebra automorphism $ \\\\sigma $ of the field extension $ K(\\\\alpha) $ (where $ \\\\alpha $ is a root of $ f $), the\"}\n  {\"name\": \"autAdjoinRootXPowSubCEquiv_root\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (hζ : (primitiveRoots n K).Nonempty) {a : K}\\n  (H : Irreducible (Polynomial.X ^ n - Polynomial.C a)) [inst_1 : NeZero n] (η : ↥(rootsOfUnity n K)),\\n  ((autAdjoinRootXPowSubCEquiv hζ H) η) (AdjoinRoot.root (Polynomial.X ^ n - Polynomial.C a)) =\\n    ↑↑η • Adjoin\", \"doc\": \"Under the group isomorphism between the n-th roots of unity in $ K $ and the Galois group $ \\\\text{Gal}(K(\\\\sqrt[n]{a})/K) $, each n-th root of unity $ \\\\eta $ corresponds to the automorphism that sends \"}\n  {\"name\": \"autEquivRootsOfUnity_smul\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (hζ : (primitiveRoots n K).Nonempty) {a : K}\\n  (H : Irreducible (Polynomial.X ^ n - Polynomial.C a)) (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] {α : L},\\n  α ^ n = (a\", \"doc\": \"For any non-zero integer $n$ and Galois automorphism $\\\\sigma \\\\in \\\\text{Gal}(L/K)$, the action of $\\\\sigma$ on an element $\\\\alpha$ via the $\\\\text{autEquivRootsOfUnity}$ equivalence satisfies $\\\\text{autE\"}\n  {\"name\": \"autEquivRootsOfUnity_apply_rootOfSplit\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (hζ : (primitiveRoots n K).Nonempty) {a : K}\\n  (H : Irreducible (Polynomial.X ^ n - Polynomial.C a)) (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] [inst_4 : NeZero n] (\", \"doc\": \"For any nonzero natural number $n$, field extension $L/K$, and primitive $n$-th root of unity $\\\\zeta$, the action of a Galois automorphism $\\\\sigma \\\\in \\\\text{Gal}(L/K)$ on the root $\\\\alpha$ of the poly\"}\n  {\"name\": \"autAdjoinRootXPowSubC_root\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (a : K) (η : ↥(rootsOfUnity n K)),\\n  ((autAdjoinRootXPowSubC n a) η) (AdjoinRoot.root (Polynomial.X ^ n - Polynomial.C a)) =\\n    ↑↑η • AdjoinRoot.root (Polynomial.X ^ n - Polynomial.C a)\", \"doc\": \"For each n-th root of unity $\\\\eta \\\\in K$, the corresponding $K$-algebra automorphism of the field extension $K(\\\\sqrt[n]{a})$ sends the adjoined root $\\\\alpha$ (satisfying $\\\\alpha^n = a$) to $\\\\eta \\\\cdot\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms and single-polynomial adjoin-root equivalences do not state coherent comparisons for simultaneous root towers over arbitrary rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change normal crossings coordinates by units with compatible roots gives coherent root algebra transition isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdjoinRoot.aequiv_aequiv\", \"module\": \"Mathlib/RingTheory/IsAdjoinRoot\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : Ring S] {f : Polynomial R} [inst_2 : Algebra R S]\\n  (h : IsAdjoinRoot S f) {T : Type u_1} [inst_3 : Ring T] [inst_4 : Algebra R T] (h' : IsAdjoinRoot T f) {U : Type u_2}\\n  [inst_5 : Ring U] [inst_6 : Algebra R U] (h'' : IsAdjoinRoot U f) (x :\", \"doc\": \"Given a commutative ring $ R $ and a polynomial $ f \\\\in R[x] $, if $ S $, $ T $, and $ U $ are $ R $-algebras each generated by adjoining a root of $ f $, then for any $ x \\\\in S $, the composition of \"}\n  {\"name\": \"IsAdjoinRoot.algEquiv_algEquiv\", \"module\": \"Mathlib/RingTheory/IsAdjoinRoot\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : Ring S] {f : Polynomial R} [inst_2 : Algebra R S]\\n  (h : IsAdjoinRoot S f) {T : Type u_1} [inst_3 : Ring T] [inst_4 : Algebra R T] (h' : IsAdjoinRoot T f) {U : Type u_2}\\n  [inst_5 : Ring U] [inst_6 : Algebra R U] (h'' : IsAdjoinRoot U f) (x :\", \"doc\": \"Given three $ R $-algebras $ S $, $ T $, and $ U $ generated by adjoining roots of polynomials $ f $, $ f' $, and $ f'' $ respectively, the composition of the canonical $ R $-algebra equivalences $ S \"}\n  {\"name\": \"IsAdjoinRoot.ofEquiv_aequiv\", \"module\": \"Mathlib/RingTheory/IsAdjoinRoot\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : Ring S] {f : Polynomial R} [inst_2 : Algebra R S]\\n  (h : IsAdjoinRoot S f) {T : Type u_1} [inst_3 : Ring T] [inst_4 : Algebra R T] {U : Type u_2} [inst_5 : Ring U]\\n  [inst_6 : Algebra R U] (h'' : IsAdjoinRoot U f) (e : S ≃ₐ[R] T),\\n  (h.ofAlgE\", \"doc\": \"Given two $ R $-algebras $ S $ and $ T $ generated by adjoining roots of polynomials $ f $ and $ f' $ respectively, there exists a canonical $ R $-algebra equivalence between $ S $ and $ T $ construct\"}\n  {\"name\": \"StandardEtalePresentation.mapEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] → StandardEtalePresentation R S → (S ≃ₐ[R] T) → StandardEtalePresentation R\", \"doc\": \"Given a standard étale presentation $ P $ of an $ R $-algebra $ S $ and an $ R $-algebra equivalence $ e : S ≃ₐ[R] T $, this function constructs the corresponding standard étale presentation of $ T $ \"}\n  {\"name\": \"IsAdjoinRoot.ofAlgEquiv_algEquiv\", \"module\": \"Mathlib/RingTheory/IsAdjoinRoot\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : Ring S] {f : Polynomial R} [inst_2 : Algebra R S]\\n  (h : IsAdjoinRoot S f) {T : Type u_1} [inst_3 : Ring T] [inst_4 : Algebra R T] {U : Type u_2} [inst_5 : Ring U]\\n  [inst_6 : Algebra R U] (h'' : IsAdjoinRoot U f) (e : S ≃ₐ[R] T),\\n  (h.ofAlgE\", \"doc\": \"Given two $ R $-algebras $ S $ and $ T $ generated by adjoining roots of polynomials $ f $ and $ f' $, and an $ R $-algebra equivalence $ e : S ≃ₐ[R] T $, the composition of the inverse of $ e $ with \"}\n  {\"name\": \"IsAdjoinRoot.aequiv_ofEquiv\", \"module\": \"Mathlib/RingTheory/IsAdjoinRoot\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : Ring S] {f : Polynomial R} [inst_2 : Algebra R S]\\n  (h : IsAdjoinRoot S f) {T : Type u_1} [inst_3 : Ring T] [inst_4 : Algebra R T] (h' : IsAdjoinRoot T f) {U : Type u_2}\\n  [inst_5 : Ring U] [inst_6 : Algebra R U] (e : T ≃ₐ[R] U), h.algEquiv (\", \"doc\": \"Given two $ R $-algebras $ S $ and $ T $ generated by adjoining roots of polynomials $ f $ and $ f' $ respectively, there exists a canonical $ R $-algebra equivalence between $ S $ and $ T $ construct\"}\n  {\"name\": \"IsAdjoinRoot.aequiv_map\", \"module\": \"Mathlib/RingTheory/IsAdjoinRoot\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : Ring S] {f : Polynomial R} [inst_2 : Algebra R S]\\n  (h : IsAdjoinRoot S f) {T : Type u_1} [inst_3 : Ring T] [inst_4 : Algebra R T] (h' : IsAdjoinRoot T f),\\n  (↑(h.algEquiv h')).comp h.map = h'.map\", \"doc\": \"For a commutative ring $ R $ and $ R $-algebras $ S $ and $ T $ generated by adjoining roots of polynomials $ f $ and $ f' $ respectively, the composition of the evaluation homomorphism $ R[x] \\to S $ \"}\n  {\"name\": \"IsAdjoinRoot.aequiv_trans\", \"module\": \"Mathlib/RingTheory/IsAdjoinRoot\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : Ring S] {f : Polynomial R} [inst_2 : Algebra R S]\\n  (h : IsAdjoinRoot S f) {T : Type u_1} [inst_3 : Ring T] [inst_4 : Algebra R T] (h' : IsAdjoinRoot T f) {U : Type u_2}\\n  [inst_5 : Ring U] [inst_6 : Algebra R U] (h'' : IsAdjoinRoot U f),\\n  (\", \"doc\": \"Given a commutative ring $ R $ and a polynomial $ f \\\\in R[x] $, if $ S $, $ T $, and $ U $ are $ R $-algebras each generated by adjoining a root of $ f $, then the composition of the $ R $-algebra equ\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms and single-polynomial adjoin-root equivalences do not state coherent comparisons for simultaneous root towers over arbitrary rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible roots of unit changes of parameter equations induce natural isomorphisms of Kummer root towers and their punctures satisfying cocycle laws",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"adjoinRootXPowSubCEquiv.congr_simp\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} {a : K} {L : Type u_1} [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] {α α_1 : L} (e_α : α = α_1)\\n  (hζ : (primitiveRoots n K).Nonempty) (H : Irreducible (Polynomial.X ^ n - Polynomial\", \"doc\": \"Let $K$ be a field containing primitive $n$-th roots of unity, let $X^n - a$ be an irreducible polynomial over $K$, and let $L$ be a splitting field of $X^n - a$ containing an element $\\\\alpha$ with $\\\\\"}\n  {\"name\": \"adjoinRootXPowSubCEquiv_symm_eq_root\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \": (adjoinRootXPowSubCEquiv hζ H hα).symm α = root _\", \"doc\": \"Given a field $K$ containing primitive $n$-th roots of unity, an irreducible polynomial $X^n - a$ over $K$, and a splitting field $L$ of $X^n - a$ containing an element $\\\\alpha$ with $\\\\alpha^n = a$, t\"}\n  {\"name\": \"adjoinRootXPowSubCEquiv\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"(hζ : (primitiveRoots n K).Nonempty) (H : Irreducible (X ^ n - C a)) (hα : α ^ n = algebraMap K L a) : K[n√a] ≃ₐ[K] L\", \"doc\": \"Given a field $K$ containing primitive $n$-th roots of unity, an irreducible polynomial $X^n - a$ over $K$, and a splitting field $L$ of $X^n - a$ containing an element $\\\\alpha$ with $\\\\alpha^n = a$, t\"}\n  {\"name\": \"rootsOfUnityEquivOfPrimitiveRoots.congr_simp\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R] {S : Type u_7} {F : Type u_8} [inst_2 : CommRing S]\\n  [inst_3 : IsDomain S] [inst_4 : FunLike F R S] [inst_5 : MonoidHomClass F R S] {n : ℕ} [inst_6 : NeZero n] {f f_1 : F}\\n  (e_f : f = f_1) (hf : Function.Injective ⇑f) (hζ : (primitiveRoots\", \"doc\": \"If two injective monoid homomorphisms between commutative rings are equal, then the induced isomorphisms between their n-th roots of unity subgroups are equal, provided there exists a primitive n-th r\"}\n  {\"name\": \"autAdjoinRootXPowSubC_root\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"(η) : autAdjoinRootXPowSubC n a η (root _) = ((η : Kˣ) : K) • root _\", \"doc\": \"For each n-th root of unity $\\\\eta \\\\in K$, the corresponding $K$-algebra automorphism of the field extension $K(\\\\sqrt[n]{a})$ sends the adjoined root $\\\\alpha$ (satisfying $\\\\alpha^n = a$) to $\\\\eta \\\\cdot\"}\n  {\"name\": \"adjoinRootXPowSubCEquiv_root\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \": adjoinRootXPowSubCEquiv hζ H hα (root _) = α\", \"doc\": \"Given a field $ K $ containing primitive $ n $-th roots of unity, an irreducible polynomial $ X^n - a $ over $ K $, and a splitting field $ L $ of $ X^n - a $ containing an element $ \\\\alpha $ with $ \\\\\"}\n  {\"name\": \"restrictRootsOfUnity_coe_apply\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.Basic\", \"type\": \"[MonoidHomClass F R S] (σ : F) (ζ : rootsOfUnity k R) : (restrictRootsOfUnity σ k ζ : Sˣ) = σ (ζ : Rˣ)\", \"doc\": \"For a monoid homomorphism $\\\\sigma : R \\\\to S$ between commutative monoids and an element $\\\\zeta$ in the $k$-th roots of unity subgroup of $R$, the coercion of the restricted homomorphism $\\\\sigma|_{\\\\mu_\"}\n  {\"name\": \"autEquivRootsOfUnity.congr_simp\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (hζ : (primitiveRoots n K).Nonempty) {a a_1 : K} (e_a : a = a_1)\\n  (H : Irreducible (Polynomial.X ^ n - Polynomial.C a)) (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] [\", \"doc\": \"Given a field $ K $ containing primitive $ n $-th roots of unity and a splitting field $ L $ of the polynomial $ X^n - a $ over $ K $, there exists a group isomorphism between the Galois group $ \\\\text\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms and single-polynomial adjoin-root equivalences do not state coherent comparisons for simultaneous root towers over arbitrary rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms and single-polynomial adjoin-root equivalences do not state coherent comparisons for simultaneous root towers over arbitrary rings"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|[Rr]oot).*(cocycle|[Cc]oordinate[Cc]hange)|(cocycle|[Cc]oordinate[Cc]hange).*(Kummer|[Rr]oot)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms and single-polynomial adjoin-root equivalences do not state coherent comparisons for simultaneous root towers over arbitrary rings"
+  },
+  {
+   "tool": "grep",
+   "query": "(root|Kummer).*(tower|coordinate)|(tower|coordinate).*(root|Kummer)",
+   "results": "{\"t\": \"2026-10-22T07:20:54Z\", \"tool\": \"grep\", \"query\": \"(root|Kummer).*(tower|coordinate)|(tower|coordinate).*(root|Kummer)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/Algebra/Algebra/Defs.lean\", \"Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean\", \"Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean\", \"Mathlib/Algebra/Algebra/Tower.lean\", \"Mathlib/Algebra/Module/LinearMap/Defs.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/Algebra/DirectSum/Algebra.lean\"], \"digest\": \"d04743d4cf4541db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial equivalences, presentations, power series or scalar-tower lemmas do not state the coherent simultaneous root-tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible units scaling variables gives natural isomorphisms of multivariate root algebra towers and localized colimits",
+   "results": "{\"t\": \"2026-10-22T07:20:54Z\", \"tool\": \"leansearch\", \"query\": \"Compatible units scaling variables gives natural isomorphisms of multivariate root algebra towers and localized colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.rescaleAlgHom\", \"Units.instIsScalarTower\", \"Polynomial.instIsScalarTowerElemRootSet\", \"IsLocalization.atUnits\", \"HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization\", \"Module.Basis.unitsSMul\", \"MvPolynomial.instIsScalarTower\", \"MvPolynomial.instIsPushout\"], \"digest\": \"b65fc028ec420325\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial equivalences, presentations, power series or scalar-tower lemmas do not state the coherent simultaneous root-tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"AlgEquiv\"",
+   "results": "{\"t\": \"2026-10-22T07:20:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"AlgEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.isEmptyAlgEquiv\", \"MvPolynomial.uniqueAlgEquiv\", \"MvPolynomial.mapAlgEquiv\", \"MvPolynomial.mapAlgEquiv_refl\", \"MvPolynomial.isEmptyAlgEquiv_symm_toRingHom\", \"MvPolynomial.sumAlgEquiv\", \"MvPolynomial.uniqueAlgEquiv_apply\", \"MvPolynomial.eval₂_const_uniqueAlgEquiv\"], \"digest\": \"e22b6d09124f204e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial equivalences, presentations, power series or scalar-tower lemmas do not state the coherent simultaneous root-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change variables by units in polynomial quotient rings induces isomorphisms compatible with power transitions",
+   "results": "{\"t\": \"2026-10-22T07:21:04Z\", \"tool\": \"leanfinder\", \"query\": \"Change variables by units in polynomial quotient rings induces isomorphisms compatible with power transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.quotientSpanCXSubCAlgEquiv\", \"Polynomial.quotientSpanCXSubCXSubCAlgEquiv\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"AdjoinRoot.coe_mapRingEquiv\", \"AdjoinRoot.Polynomial.quotQuotEquivComm_mk\", \"AdjoinRoot.Polynomial.quotQuotEquivComm_symm_mk_mk\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\"], \"digest\": \"2bb02057a89cdc40\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial equivalences, presentations, power series or scalar-tower lemmas do not state the coherent simultaneous root-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible units scaling variables gives natural isomorphisms of multivariate root algebra towers and localized colimits",
+   "results": "{\"t\": \"2026-10-22T07:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible units scaling variables gives natural isomorphisms of multivariate root algebra towers and localized colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.relation_comp_localizationAway_inl\", \"Algebra.Generators.toAlgHom_ofComp_localizationAway\", \"Algebra.Generators.compLocalizationAwayAlgHom\", \"Algebra.Generators.compLocalizationAwayAlgHom_X_inl\", \"Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr\", \"IsLocalization.Away.mvPolynomialQuotientEquiv_apply\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl\"], \"digest\": \"21d6d8bb74337543\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial equivalences, presentations, power series or scalar-tower lemmas do not state the coherent simultaneous root-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientSpanCXSubCAlgEquiv|quotientSpanCXSubCXSubCAlgEquiv|mapRingEquiv|mvPolynomialQuotientEquiv_apply",
+   "results": "{\"t\": \"2026-10-22T07:33:36Z\", \"tool\": \"grep\", \"query\": \"quotientSpanCXSubCAlgEquiv|quotientSpanCXSubCXSubCAlgEquiv|mapRingEquiv|mvPolynomialQuotientEquiv_apply\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/MvPolynomial/Localization.lean\", \"Mathlib/RingTheory/Polynomial/Quotient.lean\"], \"digest\": \"99726873f1110ab1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial equivalences, presentations, power series or scalar-tower lemmas do not state the coherent simultaneous root-tower comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-universal-residual-charts",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Paragraph (3), open direct image: coordinate independence of the parameter-root charts in the tame-boundary calculation, expanded by lem-sfb-snc-universal-residual-charts step 6 (original step 20).",
+   "via": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-unit-root-coordinate-tower-comparison",
+  "worker": "stage1",
+  "summary": "Explicit inverse substitutions prove the finite comparisons; generator calculations prove transitions, reduction, naturality and cocycles. Existing Mathlib leaves supply polynomial evaluation, colimit existence and localization universality. No new nodes. Boundary ideals are handled for both root generators and base equations. Repaired inherited null blueprint ancestor from the recorded creation chain.",
+  "blueprint": "Paragraph (3), open direct image: coordinate independence of the parameter-root charts in the tame-boundary calculation, expanded by lem-sfb-snc-universal-residual-charts step 6 (original step 20)."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-467f7d41c",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-467f7d41c (reviewer sub-agent of L); spot-checked: I read the full proof, all 8 steps: the maths and the edge cases (r=0, n=1, zero parameters, non-domains) check out. The statement is byte-identical to live (live and side-live: unsplit). There is no repair note, no new node and no tool_uses. The source is ILO IX Prop 2.1, pp.133-134, used only for the A[x]/(x_i^n-t_i) presentation; the SGA 1 XIII citation on that page is unused and the item has no SGA text. Checks per step. Step 1: the relation maps to b^n t - t' = 0, the b^{-1} inverse is valid, and both composites are the identity by MvPolynomial uniqueness plus surjectivity of the quotient map. Step 2: b_n x_m^q = (b_m x_m)^q by the hypothesis b_m^{m/n} = b_n. Step 3: colimit over the directed divisibility poset, using CommAlgCat colimits and uniqueness. Step 4: phi(f') = A f is invertible in R_f, the formula A^{-k}/f^k is right, and the inverse sends f to A^{-1} f'. Step 5: the root ideals (x') = (x) and the equation ideals (t') = (t) are handled separately, and transitions descend because x_n maps into (x_m). Step 6: naturality for maps h preserving the specified b. Step 7: the ratio roots b^(a)/b^(b) are well defined and coherent, their product gives the cocycle law, and the orientation agrees with phi. Step 8: n=1 forces b_{i,1} = a_i. All six cited nodes are mathlib leaves or definitions and their statements were read; review_split's 'no such node' errors come from the chapter symlinks, and find -L locates every node. The citer lem-sfb-snc-universal-residual-charts step 6 uses exactly the stated clauses. Not duplicated by lem-sfb-compatible-kummer-tower-cech or lem-sbc-dvr-etale-unit-root-diagram. Maintainer note: the item's from.node is now det-thm-sf-ctf-stability-direct-images (consistent with the via chain through lem-sfb-admissible-direct-image), but the parent lem-sfb-snc-universal-residual-charts still has a null from.node and needs the same repair. The report names citations.json and searches.jsonl, which are not on the branch."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UnitRootCoordinateTowerComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.UnitRootCoordinates.unitRoot_coordinate_tower_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.stage",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.stageCommRing",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.stageAlgebra",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.labels",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.labelIndex",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.labelOrder",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.root",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.boundaryIdeal",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.reduced",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.reducedCommRing",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.reductionMap",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.view",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.viewCommRing",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.viewMap",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.Change",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.TowerMaps",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.orderCategory",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.TowerMaps.finiteMap",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.TowerMaps.fullMap",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.TowerMaps.diagram",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.TowerMaps.cocone",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.Tower",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.CoefficientMap",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.Comparison",
+   "AlgebraicGeometry.ProEtale.UnitRootCoordinates.unitRoot_coordinate_tower_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/UnitRootCoordinateTowerComparison.lean",
+  "statement": "theorem unitRoot_coordinate_tower_comparison (p : ℕ) (hp : p.Prime) (r : ℕ) : ∃ (T : ∀ (H : Type u) [CommRing H] [CharP H p] (t : Fin r → H), Tower p t) (E : ∀ (H : Type u) [CommRing H] [CharP H p] (t t' : Fin r → H) (c : Change p t t'), Comparison p c) (F : ∀ (H K : Type u) [CommRing H] [CommRing K] [CharP H p] [CharP K p] (t : Fin r → H) (s : Fin r → K) (h : H →+* K), (∀ i, h (t i) = s i) → CoefficientMap p t s h), (∀ (H : Type u) [CommRing H] [CharP H p] (t t' : Fin r → H) (c : Change p t t') (n m : TameRootOrder p) (h : n.val ∣ m.val) d q, ((E H t t' c).equiv (some m) d q).toRingHom.comp ((T H t').transition n m h d q) = ((T H t).transition n m h d q).comp ((E H t t' c).equiv (some n) d q).toRingHom) ∧ (∀ (H : Type u) [CommRing H] [CharP H p] (t t' : Fin r → H) (c : Change p t t') n d q, ((E H t t' c).equiv none d q).toRingHom.comp ((T H t').inclusion n d q) = ((T H t).inclusion n d q).comp ((E H t t' c).equiv (some n) d q).toRingHom) ∧ (∀ (H K : Type u) [CommRing H] [CommRing K] [CharP H p] [CharP K p] (t t' : Fin r → H) (s s' : Fin r → K) (c : Change p t t') (c' : Change p s s') (h : H →+* K) (ht : ∀ i, h (t i) = s i) (ht' : ∀ i, h (t' i) = s' i), (∀ i, h (c.unit i : H) = (c'.unit i : K)) → (∀ i n, h (c.rootUnit i n : H) = (c'.rootUnit i n : K)) → ∀ k d q, ((F H K t s h ht).map k d q).comp ((E H t t' c).equiv k d q).toRingHom = ((E K s s' c').equiv k d q).toRingHom.comp ((F H K t' s' h ht').map k d q)) ∧ (∀ (H : Type u) [CommRing H] [CharP H p] (t : Fin r → H) (c : Change p t t), (∀ i n, c.rootUnit i n = 1) → ∀ k d q, (E H t t c).equiv k d q = RingEquiv.refl _) ∧ (∀ (H : Type u) [CommRing H] [CharP H p] (t₀ t₁ t₂ : Fin r → H) (c₀₁ : Change p t₁ t₀) (c₁₂ : Change p t₂ t₁) (c₀₂ : Change p t₂ t₀), (∀ i n, c₀₁.rootUnit i n * c₁₂.rootUnit i n = c₀₂.rootUnit i n) → ∀ k d q, ((E H t₁ t₀ c₀₁).equiv k d q).trans ((E H t₂ t₁ c₁₂).equiv k d q) = (E H t₂ t₀ c₀₂).equiv k d q) ∧ (∀ (H : Type u) [CommRing H] [CharP H p] (t t' : Fin r → H) (c : Change p t t'), r = 0 → ∀ k d q x, ∃ a : H, viewMap p t' k d q (algebraMap H _ a) = x ∧ (E H t t' c).equiv k d q x = viewMap p t k d q (algebraMap H _ a)) ∧ (∀ (H : Type u) [CommRing H] [CharP H p] (t t' : Fin r → H) (c : Change p t t') (n : TameRootOrder p), n.val = 1 → ∀ i, (E H t t' c).equiv (some n) none false (root p t' (some n) i) = algebraMap H _ (t' i))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The coefficient-preserving generator formulas determine the maps on actual finite and full polynomial quotients and their boundary quotient/localization views. Tower.isColimit uses Mathlib categorical colimits; helper declarations belong to this node. Added landed nodes supply the existing finite and full root-algebra constructions; no notion is copied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5009ec2e",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery of 7f6d28 (RETURN H2/H11). Lean byte-identical to the returned head. H2 repaired: stmt_dep lem-weil-pbc-pth-root-algebra-local replaced by def-sfb-parameter-root-algebra (Q65 existing:true owner of Algebra.pthRootAlgebra). H11 repaired: real 11-point second reading; worker report present. Item node differs from side-live only in lean and stmt_deps; dependency records byte-identical to side-live. Mathematics re-checked independently with no fault: Change data; finite stage pthRootAlgebra n.val r H t; full stage tameRootAlgebra pinned by isColimit in CommAlgCat; Comparison pinned by coeff, root (b*x) and descend squares; boundary tags 0/1/2 and localization at the product of t; transition and coprojection commutation; naturality; identity; cocycle (orientation b01*b12=b02); r=0 (Away 1, zero ring); n=1 (x' maps to t'). One universe u, no hollow definitions, docstrings complete. Nothing compiled because no file changed; worker scompile clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261023T123403-L-1179166",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

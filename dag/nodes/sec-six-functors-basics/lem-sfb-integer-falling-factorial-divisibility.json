@@ -1,0 +1,94 @@
+{
+ "id": "lem-sfb-integer-falling-factorial-divisibility",
+ "kind": "statement",
+ "title": "Factorial divisibility of falling products at integer arguments",
+ "statement": "For $n\\in\\mathbf N$, let $F_n(T)=\\prod_{j=0}^{n-1}(T-j)\\in\\mathbf Z[T]$, in the polynomial ring [def-weil-polynomial-ring]. For every integer $z\\in\\mathbf Z$ there is an integer $a\\in\\mathbf Z$ such that $$F_n(z)=\\prod_{j=0}^{n-1}(z-j)=n!a.$$ The empty product for $n=0$ is $1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00JX, definition-numerical-polynomial and the following paragraph, arithmetic input for the integer-valued binomial polynomials. Exact arithmetic source: Mathlib/RingTheory/Binomial.lean:259,390 (Int.instBinomialRing and Ring.descPochhammer_eq_factorial_smul_choose), with Mathlib/RingTheory/Polynomial/Pochhammer.lean:458 (descPochhammer_eval_eq_prod_range)."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For integer z and natural n the rational falling factorial z times z minus one through z minus n plus one divided by n factorial is an integer",
+   "results": "{\"t\": \"2026-10-23T23:26:15Z\", \"tool\": \"leanfinder\", \"query\": \"For integer z and natural n the rational falling factorial z times z minus one through z minus n plus one divided by n factorial is an integer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.choose_eq_smul\", \"descPochhammer_int_eq_ascFactorial\", \"Int.instBinomialRing\", \"Polynomial.descPochhammer_smeval_eq_descFactorial\", \"Nat.cast_choose_eq_descPochhammer_div\", \"Ring.descPochhammer_eq_factorial_smul_choose\", \"Mathlib.Meta.NormNum.isNat_descFactorial\", \"Ring.smeval_ascPochhammer_self_neg\"], \"digest\": \"9554120fc0c34aa2\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Ring.descPochhammer_eq_factorial_smul_choose specialized to the integer binomial ring (Int.instBinomialRing) gives the witness Ring.choose z n. Polynomial.descPochhammer_eval_eq_prod_range identifies its left side with the displayed product; eval_eq_smeval identifies the two evaluation notations. These sources were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ring.descPochhammer_eq_factorial_smul_choose",
+   "results": "{\"t\": \"2026-10-23T23:26:16Z\", \"tool\": \"loogle\", \"query\": \"Ring.descPochhammer_eq_factorial_smul_choose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ring.descPochhammer_eq_factorial_smul_choose\"], \"digest\": \"8d27fc64736a770a\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Ring.descPochhammer_eq_factorial_smul_choose specialized to the integer binomial ring (Int.instBinomialRing) gives the witness Ring.choose z n. Polynomial.descPochhammer_eval_eq_prod_range identifies its left side with the displayed product; eval_eq_smeval identifies the two evaluation notations. These sources were read."
+  },
+  {
+   "tool": "grep",
+   "query": "descPochhammer_eq_factorial_smul_choose|instBinomialRing|descPochhammer.*prod",
+   "results": "{\"t\": \"2026-10-23T23:26:16Z\", \"tool\": \"grep\", \"query\": \"descPochhammer_eq_factorial_smul_choose|instBinomialRing|descPochhammer.*prod\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/Polynomial/Pochhammer.lean\", \"Mathlib/RingTheory/Polynomial/Pochhammer.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\"], \"digest\": \"dbbe8d3592c42178\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Ring.descPochhammer_eq_factorial_smul_choose specialized to the integer binomial ring (Int.instBinomialRing) gives the witness Ring.choose z n. Polynomial.descPochhammer_eval_eq_prod_range identifies its left side with the displayed product; eval_eq_smeval identifies the two evaluation notations. These sources were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The falling factorial of any integer is divisible by the factorial of its length",
+   "results": "{\"t\": \"2026-10-23T23:28:32Z\", \"tool\": \"leansearch\", \"query\": \"The falling factorial of any integer is divisible by the factorial of its length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Nat.factorial_dvd_descFactorial\", \"Nat.descFactorial_eq_div\", \"Nat.factorial_dvd_factorial\", \"Nat.dvd_factorial\", \"Nat.descFactorial\", \"Nat.factorial_dvd_ascFactorial\", \"Nat.descFactorial_eq_factorial_mul_choose\", \"Nat.descFactorialBinary\"], \"digest\": \"de853cc2ed2d47f4\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Ring.descPochhammer_eq_factorial_smul_choose specialized to the integer binomial ring (Int.instBinomialRing) gives the witness Ring.choose z n. Polynomial.descPochhammer_eval_eq_prod_range identifies its left side with the displayed product; eval_eq_smeval identifies the two evaluation notations. These sources were read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ring.descPochhammer_eq_factorial_smul_choose",
+  "file": "Mathlib/RingTheory/Binomial.lean",
+  "line": 390,
+  "how": "specializes in one line: specialize Ring.descPochhammer_eq_factorial_smul_choose (Binomial.lean:390) to R = ℤ, using Int.instBinomialRing (same file:259), and take the integer witness Ring.choose z n. Rewrite the left side by Polynomial.eval_eq_smeval (Mathlib/Algebra/Polynomial/Smeval.lean:69) and descPochhammer_eval_eq_prod_range (Mathlib/RingTheory/Polynomial/Pochhammer.lean:458). This is the falling product in the statement, not natural-number truncated subtraction. All four declarations read 2026-10-24."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-newton-expansion",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.510, admissible-lattice existence before equation (152), whose enveloping-algebra input is Kostant integral PBW. Full source WANTED: Kostant, Groups over Z (1966), integral enveloping-algebra basis theorem; also Steinberg, Lectures on Chevalley Groups, initial integral-form construction. Supporting calculation: Stacks Tag 00JX, algebra.tex, definition-numerical-polynomial and the paragraph immediately following it (univariate integral binomial expansion); the stated multivariate degree bound and forward-difference coefficient formula are the supporting extension to commuting Cartan variables. Arithmetic input: factorial divisibility of integer falling products, for evaluation at negative as well as nonnegative integers.",
+   "via": [
+    "lem-sfb-integral-newton-expansion",
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

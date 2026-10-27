@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-small-perfect-coefficient-lift",
+ "kind": "statement",
+ "title": "Small perfect coefficient lift",
+ "statement": "Let R be a small commutative ring and C a derived complex of modules over ULift R with the bounded finite-projective property [def-pc-perfect-ring-complex]. Then C has a representative obtained by the canonical coefficient/carrier lift of a bounded finite-projective complex P of small R-modules. The support endpoints of P can be chosen ordered. The lift first applies ModuleCat.uliftFunctor R and then restricts scalars along ULift.ringEquiv : ULift R ≃+* R. No coefficient ring is changed mathematically.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 3: integral models and exact rationalization"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded finite-projective representative M. Restrict its coefficients from ULift R to R along the inverse ring equivalence. Finite generation gives smallness of every term. Take Shrink of each term and conjugate the differentials with the Shrink linear equivalences; d squared remains zero. Projectivity and finite generation transport by these equivalences. Lift the resulting complex back to ULift R: the maps up(x) mapped to the corresponding original vector form a chain isomorphism with M. Apply Q and compose with the presentation of C. Replace a by min(a,b) to obtain ordered endpoints, which also handles the zero complex.",
+   "uses": [
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3: integral models and exact rationalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 3: integral models and exact rationalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded perfect complex over a lifted ring has a bounded finitely generated projective representative with small module carriers",
+   "results": "ModuleCat.enoughProjectives and DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE do not retain finite-projective terms under coefficient and carrier resizing. Module.Finite.small and Shrink.linearEquiv provide ingredients; no complete comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Shrink\", \"Projective\"",
+   "results": "Module.instProjectiveShrink and Module.Projective.of_shrink transport projectivity of individual modules, not entire complexes and their coefficient lift.",
+   "date": "2026-10-25",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "small.*perfect|perfect.*small|fieldCohomologyIntegralModelLift",
+   "results": "Searched Mathlib ModuleCat, Module.Projective, Finiteness.Small and project Sheaf/WeilConjectures. Found Module.Finite.small, Shrink.linearEquiv, Module.Projective.of_equiv and ModuleCat.uliftFunctor, but no comparison for a bounded finite-projective complex over ULift R.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldCohomologyPerfectDescent",
+  "date": "2026-10-25",
+  "group": "X2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-point-perfectness",
+   "place": "Proof Step 3, integral models and exact rationalization",
+   "via": [
+    "lem-sf-field-cohomology-perfect-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.SmallPerfectCoefficientLift",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/SmallPerfectCoefficientLift.lean",
+  "declaration": "DerivedCategory.small_perfect_coefficient_lift",
+  "statement": "theorem small_perfect_coefficient_lift (R : Type u) [CommRing R]\n    [HasDerivedCategory.{u + 1} (ModuleCat.{u + 1} (ULift.{u + 1, u} R))]\n    (C : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1, u} R)))\n    (hC : IsPerfectRingComplex C) :\n    ∃ P : CochainComplex (ModuleCat.{u} R) ℤ,\n      (∃ a b : ℤ, a ≤ b ∧ P.IsStrictlyGE a ∧ P.IsStrictlyLE b) ∧\n      (∀ i : ℤ, Module.Projective R (P.X i) ∧ Module.Finite R (P.X i)) ∧\n      Nonempty (C ≅ Q.obj\n        (((ModuleCat.uliftFunctor.{u + 1, u} R ⋙\n          ModuleCat.restrictScalars.{u + 1, u + 1, u}\n            (ULift.ringEquiv : ULift.{u + 1, u} R ≃+* R).toRingHom\n          ).mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261025T164730-L-1066487",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261025T164730-L-1066487",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

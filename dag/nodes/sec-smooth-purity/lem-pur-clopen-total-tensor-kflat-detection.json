@@ -1,0 +1,233 @@
+{
+ "id": "lem-pur-clopen-total-tensor-kflat-detection",
+ "kind": "statement",
+ "title": "Pure-tensor clopen restriction and flat/K-flat detection",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a finite set, and $j_i:X_i\\hookrightarrow X$ pairwise disjoint open and closed subschemes covering $X$ [def-weil-open-immersion, def-weil-closed-immersion]. Work on their small pro-etale sites in the fixed universes [def-weil-pbc-proetale-site]. Let $R$ be a sheaf of commutative rings, $R_i=R|_{X_i}$, and let $r_i$, $G$ and $e_i$ be the restriction, sectionwise product gluing, and zero insertion functors of [lem-pur-clopen-ringed-module-gluing] on module sheaves [def-weil-sheaf-of-modules-category].\n\nUse the sheafified sectionwise tensor [def-pur-sheaf-tensor-product], unbounded cochain complexes and cohomology [def-weil-abstract-derived-category], signed direct-sum total tensor [def-pc-tensor-complex-sheaves], flat module sheaves (tensoring is exact) [def-pc-flat-sheaf-modules], and K-flat complexes (tensoring every acyclic complex gives an acyclic complex) [def-pc-kflat-complex]. There are natural isomorphisms\n$$a_{i,F,H}:r_i(F\\otimes_RH)\\xrightarrow{\\sim}r_iF\\otimes_{R_i}r_iH,\\qquad r_iR\\cong R_i,$$\nwith $a_{i,F,H}(f\\otimes h)=r_if\\otimes r_ih$ on local sheafified pure tensors. These comparisons respect the ordinary associativity, symmetry, and both unit constraints. Restriction is left adjoint to $e_i$ and preserves every small coproduct in the fixed module universe.\n\nFor every pair $P,Q$ of unbounded $R$-complexes there is a natural chain isomorphism\n$$b_{i,P,Q}:r_i\\operatorname{Tot}(P\\otimes_RQ)\\xrightarrow{\\sim}\\operatorname{Tot}(r_iP\\otimes_{R_i}r_iQ),$$\nwhose map on the $(p,q)$ direct-sum summand is $a_{i,P^p,Q^q}$. It preserves the summand inclusion and has differential formula\n$$x\\otimes y\\longmapsto r_i(dx)\\otimes r_iy+(-1)^p r_ix\\otimes r_i(dy).$$\nThe isomorphism is natural on all chain maps and compatible with the signed symmetries of the total tensor complexes, which send $x\\otimes y$ with $x\\in P^p$, $y\\in Q^q$ to $(-1)^{pq}y\\otimes x$ (and likewise for $r_iP,r_iQ$).\n\nFor every $R$-module sheaf $F$, flatness of $F$ is equivalent to flatness of every $r_iF$. For every unbounded $R$-complex $P$, K-flatness of $P$ is equivalent to K-flatness of every $r_iP$, without assuming boundedness or flat terms. All assertions include empty components, the empty covering partition, and zero ring sheaves.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, sites-modules-lemma-sheafification-tensor and its following bilinear universal property; sites-cohomology.tex Tag 06YN, sites-cohomology-definition-K-flat; Tag 0FPQ, sites-cohomology-lemma-symmetric-monoidal-cat-complexes. Agent finite-clopen tensor construction and tests: returned item steps 4-7."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply the three strictly simpler component theorems: flatness detection, K-flatness detection, and the structural comparison/adjunction data. Their conclusions are exactly the three conjuncts of this theorem, so conjunction introduction gives the result.",
+   "uses": [
+    "lem-pur-clopen-flat-detection",
+    "lem-pur-clopen-kflat-detection",
+    "lem-pur-clopen-structural-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Finite-clopen application: combine the flat, K-flat, and tensor-comparison components."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-flat-detection",
+  "lem-pur-clopen-kflat-detection",
+  "lem-pur-clopen-structural-data"
+ ],
+ "proof_origin": {
+  "kind": "stage3",
+  "by": "S7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0GMW, 03ER, 06YN and 0FPQ; decomposition of the eight-step proof into three independent component statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of module sheaves to disjoint clopen components commutes with sheaf tensor and unbounded direct sum total tensor and detects K-flatness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal\", \"doc\": \"For any commutative ring $ R $, the free module functor from the category of light condensed sets to the category of light condensed $ R $-modules is a monoidal functor. This means it preserves the te\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"Module.FaithfullyFlat.directSum\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] {ι : Type u_1} [Nonempty ι] (M : ι → Type u_2)\\n  [inst_2 : (i : ι) → AddCommGroup (M i)] [inst_3 : (i : ι) → Module R (M i)]\\n  [∀ (i : ι), Module.FaithfullyFlat R (M i)], Module.FaithfullyFlat R (DirectSum ι fun i => M i)\", \"doc\": \"The direct sum of a non-empty family of faithfully flat $ R $-modules is itself a faithfully flat $ R $-module. Specifically, given an index type $ \\\\iota $ and a family $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $ of $ \"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A componentwise tensor equivalence of sheaf module categories detects flat modules and K-flat complexes using zero insertion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.iff_lTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\x\"}\n  {\"name\": \"Module.Flat.iff_lTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type (max u v)⦄ [inst_3 : AddCommGroup N] [inst_4 : AddCommGroup N'] [inst_5 : AddCommGroup N'']\\n      [inst_6 : Module R N] [inst_7 : Module R N'] [inst_8 : Module \", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ M \\\\otimes_R N \\\\xr\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, TensorProduct",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-22",
+   "verdict": "No match: query rejected by Loogle as shown; usable searches below supply the search evidence."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk][ _-]?[Ff]lat|clopen.*tensor|tensor.*clopen",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite clopen restriction of ringed sheaves preserves total tensor differential and flatness iff each component is flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Unramified.Finite\", \"type\": \"[Module.Flat R M] : Module.Flat S M\", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \": Flat R M ↔ PreservesFiniteLimits (tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [Flat f] : Flat (f.resLE V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"Module.Flat.dfinsupp_iff\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \": Flat R (Π₀ i, M i) ↔ ∀ i, Flat R (M i)\", \"doc\": \"The module of dependent finite support functions $\\\\Pi₀(i : \\\\iota), M(i)$ is flat over the commutative semiring $R$ if and only if every component module $M(i)$ is flat over $R$.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : Type (max (max (max u u₁) (v + 1)) v₁)\", \"doc\": \"A presheaf of modules over `R : Cᵒᵖ ⥤ RingCat` consists of family of\\nobjects `obj X : ModuleCat (R.obj X)` for all `X : Cᵒᵖ` together with\\nfunctorial maps `obj X ⟶ (ModuleCat.restrictScalars (R.map f)\"}\n  {\"name\": \"PresheafOfModules.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : PresheafOfModules R\", \"doc\": \"The obvious free presheaf of modules of rank `1`.\"}\n  {\"name\": \"PresheafOfModules.instCategory\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} : CategoryTheory.Category.{max u₁ v, max (max (max (v + 1) u) u₁) v₁} (PresheafOfModules R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) : Type (max u₁ v)\", \"doc\": \"The type of sections of a presheaf of modules.\"}\n  {\"name\": \"PresheafOfModules.Hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M₁ M₂ : PresheafOfModules R) : Type (max u₁ v)\", \"doc\": \"A morphism of presheaves of modules consists of a family of linear maps which\\nsatisfy the naturality condition.\"}\n  {\"name\": \"PresheafOfModules.instPreadditive\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} : CategoryTheory.Preadditive (PresheafOfModules R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.presheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) : CategoryTheory.Functor Cᵒᵖ Ab\", \"doc\": \"The underlying presheaf of abelian groups of a presheaf of modules.\"}\n  {\"name\": \"PresheafOfModules.toPresheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : CategoryTheory.Functor (PresheafOfModules R) (CategoryTheory.Functor Cᵒᵖ Ab)\", \"doc\": \"The forgetful functor `PresheafOfModules R ⥤ Cᵒᵖ ⥤ Ab`.\"}\n  {\"name\": \"PresheafOfModules.instFaithfulFunctorOppositeAbToPresheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} : (PresheafOfModules.toPresheaf R).Faithful\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (self : PresheafOfModules R) (X : Cᵒᵖ) : ModuleCat ↑(R.obj X)\", \"doc\": \"a family of modules over `R.obj X` for all `X`\"}\n  {\"name\": \"PresheafOfModules.instAddCommGroupHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : AddCommGroup (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instAddHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Add (M₁ ⟶ M₂)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: general categorical or ordinary module tools only; the finite-clopen comparison with its specified normalization and unbounded assertions is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj|tensorHom|pullbackComp",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"37\", \"text\": \"noncomputable abbrev tensorObj (X Y : AlgCat.{u} R) : AlgCat.{u} R :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"42\", \"text\": \"noncomputable abbrev tensorHom {W X Y Z : AlgCat.{u} R} (f : W ⟶ X) (g : Y ⟶ Z) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"43\", \"text\": \"    tensorObj W Y ⟶ tensorObj X Z :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"51\", \"text\": \"  tensorObj := instMonoidalCategory.tensorObj\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"52\", \"text\": \"  whiskerLeft X _ _ f := tensorHom (𝟙 X) f\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"38\", \"text\": \"  tensorObj X Y := of R (X ⊗[R] Y)\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"41\", \"text\": \"  tensorHom f g := ofHom (Bialgebra.TensorProduct.map f.1 g.1)\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"55\", \"text\": \"  tensorHom_eq _ _ := by ext; rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommHopfAlgCat.lean\", \"line\": \"177\", \"text\": \"    simp only [unop_comp, unop_tensorObj, hom_comp, coe_tensorObj, lift_unop_hom,\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommHopfAlgCat.lean\", \"line\": \"186\", \"text\": \"    simp only [unop_comp, unop_tensorObj, hom_comp, coe_tensorObj, lift_unop_hom, unop_id, hom_id,\"}\n  {\"file\": \"Mathlib/Algebra/Category/FGModuleCat/Basic.lean\", \"line\": \"164\", \"text\": \"@[simp] lemma tensorObj_obj (M N : FGModuleCat.{u} R) : (M ⊗ N).obj = (M.obj ⊗ N.obj) := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"line\": \"56\", \"text\": \"  tensorObj S T := of R (S ⊗[R] T)\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"line\": \"59\", \"text\": \"  tensorHom f g := ofHom (map f.hom g.hom)\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"line\": \"67\", \"text\": \"@[simp] lemma coe_tensorObj : A ⊗ B = A ⊗[R] B := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"line\": \"71\", \"text\": \"@[simp] lemma tensorHom_hom (f : A ⟶ C) (g : B ⟶ D) : (f ⊗ₘ g).hom = map f.hom g.hom := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"40\", \"text\": \"  tensorObj X Y := of R (X ⊗[R] Y)\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"43\", \"text\": \"  tensorHom f g := ofHom (Coalgebra.TensorProduct.map f.1 g.1)\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"57\", \"text\": \"  tensorHom_eq f g := by ext; rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"167\", \"text\": \"noncomputable def pullbackComp :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"177\", \"text\": \"lemma conjugateEquiv_pullbackComp_inv :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"180\", \"text\": \"    (pullbackPushforwardAdjunction.{v} _) (pullbackComp.{v} φ ψ).inv =\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"194\", \"text\": \"    isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"195\", \"text\": \"      pullbackComp.{v} (G := G ⋙ G') φ\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean\", \"line\": \"130\", \"text\": \"theorem tensorObj_comul (K L : CoalgCat R) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean\", \"line\": \"135\", \"text\": \"  simp only [Comon.monoidal_tensorObj_comon_comul,\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: general categorical or ordinary module tools only; the finite-clopen comparison with its specified normalization and unbounded assertions is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*tensor|tensor.*clopen|[Kk][ _-]?[Ff]lat",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf tensor, ordinary ring-module flatness and Zariski scheme restriction do not state the clopen pro-etale sheaf comparison and K-flat detection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules to a finite clopen partition preserves tensor products and detects flatness and K-flatness",
+   "results": "8 hits: AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Scheme.Modules.restrict, Module.Flat.iff_preservesFiniteLimits_tensorLeft, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.Tilde.toOpen, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf tensor, ordinary ring-module flatness and Zariski scheme restriction do not state the clopen pro-etale sheaf comparison and K-flat detection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf tensor, ordinary ring-module flatness and Zariski scheme restriction do not state the clopen pro-etale sheaf comparison and K-flat detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product decomposition of sheaf module categories preserves direct sum total tensor and detects flatness using zero insertion",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.mapFree, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.freeCofan, SheafOfModules.isColimitFreeCofan, Module.Flat.directSum_iff, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, Module.FaithfullyFlat.directSum",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf tensor, ordinary ring-module flatness and Zariski scheme restriction do not state the clopen pro-etale sheaf comparison and K-flat detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to clopen components of a ringed site preserves tensor products and detects K-flat complexes",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.iff_preservesFiniteLimits_tensorLeft, CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf tensor, ordinary ring-module flatness and Zariski scheme restriction do not state the clopen pro-etale sheaf comparison and K-flat detection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-product-derived-tensor-calculus",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, via finite-clopen derived decomposition: finite-clopen tensor construction and tests: returned item steps 4-7.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-total-tensor-kflat-detection",
+  "worker": "stage1",
+  "summary": "Constructed the adjunction and coproduct comparison from clopen gluing, proved the normalized tensor isomorphism by bilinear representability, checked ordinary constraints and the unbounded signed total differential, and tested flatness/K-flatness with exact zero insertion. Statement unchanged; no new nodes.",
+  "blueprint": "Final invertibility assertion of def-pur-section-invariant, through finite-clopen decomposition: ordinary and total tensor comparisons and component flat/K-flat tests in the parent tensor-calculus split. The current main-20261015 section-invariant text states invertibility via co-smoothness; this is the existing finite-clopen tool below that assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Universal property of sheaf tensor on any ringed site, used to construct and check the clopen comparison; the unit has no separate bilinear representability statement."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Generic signed symmetry formula for unbounded total tensors; used only to test the constructed clopen comparison, not to replace the purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-total-tensor-signed-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-e0f637015",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-e0f637015 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all 8 steps, every cited node's statement, the parent lem-pur-finite-product-derived-tensor-calculus and the sibling citer lem-pur-clopen-kflat-monoidal-descent. I checked these Stacks places, and each tag matches its label: 0GMW (sites-modules-lemma-sheafification-tensor) with the Bilin display after it, 03EK, 03ER (3), 06YN (definition-K-flat) and 0FPQ. No SGA is cited. This is an ordinary one-level split, not a re-split: no repair note exists in the snapshot, the delivery adds no new nodes and changes no unit. Step checks: (1) Hom(F,e_iN)=Hom(r_iF,N) follows from the gluing equivalence, and the coproduct claim follows from the adjunction. (2) The bilinear-family bijection is correct: for V over X_i, V x_X X_i = V; the R(U)-action goes through restriction; and e_iN(U)->e_iN(U_i) is the identity. I checked that the composite bijection is precomposition with the restricted pure-tensor pairing, so the pure-tensor formula holds. (3) Constraint checks on local pure tensors are fine as an elementary step. (4) The degreewise comparison uses the full direct sum. The differential sign (-1)^p is kept by naturality and additivity, and the symmetry sign (-1)^{pq} comes from lem-pur-total-tensor-signed-coherence. (5) Acyclicity is detected componentwise and e_i is exact. (6) and (7) Both directions of the flat and K-flat tests hold through e_i, r_i and r_ie_i=1, and the tensor order matches the definitions. (8) Empty components, I empty and R=0 hold. I tested |I|=1, an empty component, negative degrees and the zero ring and found no counterexample. Accepted tool_uses: lem-pc-sites-sheaf-tensor-bilinear-universal and lem-pur-total-tensor-signed-coherence, both generic. proof_deps equals the union of the step uses, and there is no cycle (the closure has 168 nodes). Advisory: existing slice nodes cover parts of this (lem-weil-pbc-slice-tensor-natural, lem-weil-pbc-slice-restriction-flat, lem-sf-ringed-open-total-tensor-kflat), but they are partial and off the unit route, so this is not a duplicate. FIX (B2/B3): the statement said 'compatible with the signed symmetry on tensor complexes' and no node or formula defined it. In fixes/dag/nodes/sec-smooth-purity/lem-pur-clopen-total-tensor-kflat-detection.json I wrote the formula inline, x(x)y -> (-1)^{pq} y(x)x for x in P^p and y in Q^q, and likewise after restriction. The meaning is unchanged, stmt_deps are unchanged and nothing is weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenTotalTensorKFlatDetection",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.clopen_total_tensor_kflat_detection",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.clopenTensorModules",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTensorRings",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTensorRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTensorRestrictionAdditive",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTensorComplexRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTensorComparison",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTensorUnitComparison",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTensorPure",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTotalTensorSummand",
+   "AlgebraicGeometry.Scheme.ProEt.clopen_total_tensor_kflat_detection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenTotalTensorKFlatDetection.lean",
+  "statement": "theorem clopen_total_tensor_kflat_detection (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t}) (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)] (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k)))) (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i)) (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) : (∀ F : clopenTensorModules.{t, u} R, SheafOfModules.IsFlatOnSite (J := topology X) (R := R) F ↔ ∀ i, SheafOfModules.IsFlatOnSite (J := topology (Y i)) (R := (clopenTensorRings.{t, u} (j i)).obj R) ((clopenTensorRestriction.{t, u} (j i) R).obj F)) ∧ (∀ P : CochainComplex (clopenTensorModules.{t, u} R) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := topology X) (R := R) P ↔ ∀ i, CochainComplex.IsKFlatIndependentCoefficients (J := topology (Y i)) (R := (clopenTensorRings.{t, u} (j i)).obj R) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj P)) ∧ (∀ i, ∃ (h : (clopenTensorRestriction.{t, u} (j i) R).Braided) (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙ clopenTensorComplexRestriction.{t, u} (j i) R ≅ ((clopenTensorComplexRestriction.{t, u} (j i) R).prod (clopenTensorComplexRestriction.{t, u} (j i) R)) ⋙ coefficientTotalTensor.{u, t + 1, t} (topology (Y i)) ((clopenTensorRings.{t, u} (j i)).obj R)), (∀ (F H : clopenTensorModules.{t, u} R) (U : (Y i).ProEt) (x : F.val.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale (j i))).obj U))) (y : H.val.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale (j i))).obj U))), (clopenTensorComparison.{t, u} (j i) R h F H).hom.val.app (op U) (clopenTensorPure.{t, u} R F H _ x y) = clopenTensorPure.{t, u} ((clopenTensorRings.{t, u} (j i)).obj R) ((clopenTensorRestriction.{t, u} (j i) R).obj F) ((clopenTensorRestriction.{t, u} (j i) R).obj H) (op U) x y) ∧ (∀ (P Q : CochainComplex (clopenTensorModules.{t, u} R) ℤ) (p q n : ℤ) (hpq : p + q = n), (clopenTensorRestriction.{t, u} (j i) R).map (clopenTotalTensorSummand.{t, u} R P Q p q n hpq) ≫ (b.hom.app (P, Q)).f n = (clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫ clopenTotalTensorSummand.{t, u} ((clopenTensorRings.{t, u} (j i)).obj R) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj P) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj Q) p q n hpq) ∧ (∀ (P Q : CochainComplex (clopenTensorModules.{t, u} R) ℤ) (p q n : ℤ) (hpq : p + q = n) (hp : (p + 1) + q = n + 1) (hq : p + (q + 1) = n + 1), (clopenTensorRestriction.{t, u} (j i) R).map (clopenTotalTensorSummand.{t, u} R P Q p q n hpq ≫ ((coefficientTotalTensor.{u, t + 1, t} (topology X) R).obj (P, Q)).d n (n + 1)) ≫ (b.hom.app (P, Q)).f (n + 1) = (clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫ (((clopenTensorRestriction.{t, u} (j i) R).map (P.d p (p + 1)) ▷ (clopenTensorRestriction.{t, u} (j i) R).obj (Q.X q)) ≫ clopenTotalTensorSummand.{t, u} ((clopenTensorRings.{t, u} (j i)).obj R) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj P) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj Q) (p + 1) q (n + 1) hp + p.negOnePow • (((clopenTensorRestriction.{t, u} (j i) R).obj (P.X p) ◁ (clopenTensorRestriction.{t, u} (j i) R).map (Q.d q (q + 1))) ≫ clopenTotalTensorSummand.{t, u} ((clopenTensorRings.{t, u} (j i)).obj R) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj P) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj Q) p (q + 1) (n + 1) hq))) ∧ (∀ (P Q : CochainComplex (clopenTensorModules.{t, u} R) ℤ) (p q n : ℤ) (hqp : q + p = n), (clopenTensorRestriction.{t, u} (j i) R).map ((p * q).negOnePow • ((β_ (P.X p) (Q.X q)).hom ≫ clopenTotalTensorSummand.{t, u} R Q P q p n hqp)) ≫ (b.hom.app (Q, P)).f n = (p * q).negOnePow • ((clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫ (β_ ((clopenTensorRestriction.{t, u} (j i) R).obj (P.X p)) ((clopenTensorRestriction.{t, u} (j i) R).obj (Q.X q))).hom ≫ clopenTotalTensorSummand.{t, u} ((clopenTensorRings.{t, u} (j i)).obj R) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj Q) ((clopenTensorComplexRestriction.{t, u} (j i) R).obj P) q p n hqp))) ∧ (∀ i (K : Type (max u (t + 1))), PreservesColimitsOfShape (Discrete K) (clopenTensorRestriction.{t, u} (j i) R)) ∧ (∀ i (e : clopenTensorModules.{t, u} ((clopenTensorRings.{t, u} (j i)).obj R) ⥤ clopenTensorModules.{t, u} R), Nonempty (e ⋙ clopenTensorRestriction.{t, u} (j i) R ≅ 𝟭 _) → (∀ k, k ≠ i → ∀ N, IsZero ((e ⋙ clopenTensorRestriction.{t, u} (j k) R).obj N)) → Nonempty (clopenTensorRestriction.{t, u} (j i) R ⊣ e))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded clopen module restriction, sheafification tensor, and independent-coefficient flat/K-flat predicates. The existential Braided structure supplies ordinary naturality, associativity, symmetry and both unit diagrams; its inverse tensorator and unit isomorphism are exposed transparently. The natural total comparison is normalized on every actual direct-sum summand and records its signed differential and Koszul-symmetry square. The zero-insertion adjunction is stated for every functor with the gluing normalization. Added the already landed def-coef-ringed-tensor-hom-model dependency solely for its existing coefficientTotalTensor constructor; its 208-node dependency closure does not reach this item."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed94a29fa",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Item changed only in lean+stmt_deps; the added landed stmt_dep def-coef-ringed-tensor-hom-model is genuinely used (coefficientTotalTensor = recorded mapBifunctor curriedTensor totalization), allowed by STMT_DEPS MAY GAIN LANDED NODES, no cycle; lean.statement verbatim. Clauses match the node: the dependency's clopenModuleRestriction; existential Braided h pinned by the pure-tensor clause (actual tmul + sheafification unit + tensorObjIsoSheafification), and ε is determined by μ; natural b on all unbounded complex pairs pinned per summand (restriction preserves coproducts); differential sign (-1)^p matches Mathlib's up-ℤ ε₂; summand-tested (-1)^{pq} braiding square; coproduct preservation in max u (t+1); adjunction for every e with the gluing dependency's insertion characterisation; IsFlatOnSite / IsKFlatIndependentCoefficients detection both ways, with no bound or flat-term hypothesis. Index universe w is not tied to the module universe, so the item is more general than the dependency. Edge cases (I empty, empty component, R=0, negative degrees) covered. Docstrings carry source places and the 8 steps; only sorry; no name collisions; imports exist. Advisory: two redundant public imports. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T021330-L-2757971",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.ProEt.clopen_total_tensor_kflat_detection"
+  ],
+  "sorry_after": []
+ }
+}

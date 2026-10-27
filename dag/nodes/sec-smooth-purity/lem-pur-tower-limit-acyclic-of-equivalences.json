@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-tower-limit-acyclic-of-equivalences",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Transport of inverse-limit acyclicity through compatible equivalences",
+ "statement": "Let A, B, C and D be abelian categories [def-sp-abelian], with countable inverse limits in B and D whose limit functors are additive. Let EX : A ≌ C and EY : B ≌ D be equivalences, let P : A → B and Q : C → D be additive functors, and let P followed by EY be naturally isomorphic to EX followed by Q. Assume that, for every K-injective complex U of inverse sequences in C, every K-injective complex V of inverse sequences in D, and every quasi-isomorphism q from the levelwise Q-image of U to V, applying the ordinary inverse-limit functor gives a quasi-isomorphism. Here complexes and quasi-isomorphisms are as in [def-weil-abstract-derived-category], and K-injectivity is as in [def-pur-kinjective-complex]. Then the same property holds for P: if I and T are K-injective complexes of inverse sequences in A and B and j is a quasi-isomorphism from levelwise P(I) to T, the ordinary inverse-limit image of j is a quasi-isomorphism.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A07 and 0D6E, invariance of the resolution acyclicity criterion under equivalences"
+ },
+ "proof": [
+  {
+   "text": "Whiskering EX and EY by the inverse-sequence index yields exact additive equivalences. They preserve quasi-isomorphisms. They preserve K-injective complexes because each is right adjoint to its exact inverse; use the already proved right-adjoint criterion.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the given natural isomorphism first to inverse-sequence categories, using the canonical comparison for composition of right-whiskering, and then to cochain complexes, using mapHomologicalComplexCompIso. Precompose the image of j under the target equivalence by its inverse component. The resulting map j-prime is a quasi-isomorphism with the required source and target in the model categories.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the assumed resolution criterion for Q to j-prime. A functor sends isomorphisms to isomorphisms. Cancel the inverse-limit image of the comparison isomorphism from this conclusion, obtaining the quasi-isomorphism for inverse limit after the target equivalence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The target equivalence preserves inverse limits. Use preservesLimitNatIso to compare inverse limit followed by the target equivalence to its levelwise action followed by inverse limit. Quasi-isomorphisms are invariant under this natural isomorphism. Finally exact equivalences reflect quasi-isomorphisms, giving the inverse-limit image of the original j. No exactness of inverse limits is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F5",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A07 and 0D6E; explicit categorical transport using Mathlib equivalence and limit comparisons"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit quasi-isomorphism acyclicity resolution criterion transported along equivalences of abelian categories compatible with a functor",
+   "results": "Eight hits, including HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W, Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, injective/projective resolution quasi-isomorphisms and localization-factorization lemmas. None transports this inverse-limit resolution criterion across compatible equivalences.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; assemble existing equivalence, K-injective and limit comparison APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "preservesLimitNatIso",
+   "results": "Service returned no hits: unknown identifier preservesLimitNatIso. Local Mathlib has the canonical comparison in CategoryTheory/Limits/Preserves/Limits.lean:84.",
+   "date": "2026-10-27",
+   "verdict": "Use the local canonical limit-comparison API."
+  },
+  {
+   "tool": "grep",
+   "query": "towerLimitAcyclicOfEquivalences|quasiIso_map_iff_of_preservesHomology",
+   "results": "Three hits; the exactness/reflection criterion is Mathlib/Algebra/Homology/QuasiIso.lean:283. No towerLimitAcyclicOfEquivalences theorem. Local searches also found whiskeringRightObjCompIso and mapHomologicalComplexCompIso.",
+   "date": "2026-10-27",
+   "verdict": "Use existing components; a proved transport lemma packages their combination."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientTowerLimitAcyclicAux",
+  "date": "2026-10-27",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-coefficient-tower-limit-acyclic-aux",
+   "place": "Proof steps 1 and 4: invariance under the small-site equivalences"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TowerLimitAcyclicOfEquivalences",
+  "file": "lean/Sheaf/CategoryTheory/TowerLimitAcyclicOfEquivalences.lean",
+  "declaration": "CategoryTheory.towerLimitAcyclicOfEquivalences",
+  "statement": "theorem towerLimitAcyclicOfEquivalences\n    {A : Type a} [Category.{av} A] [Abelian A]\n    {B : Type b} [Category.{bv} B] [Abelian B]\n    {C : Type c} [Category.{cv} C] [Abelian C]\n    {D : Type d} [Category.{dv} D] [Abelian D]\n    [HasLimitsOfShape ℕᵒᵖ B] [HasLimitsOfShape ℕᵒᵖ D]\n    [(lim : (ℕᵒᵖ ⥤ B) ⥤ B).Additive] [(lim : (ℕᵒᵖ ⥤ D) ⥤ D).Additive]\n    (EX : A ≌ C) (EY : B ≌ D) (P : A ⥤ B) [P.Additive]\n    (Q : C ⥤ D) [Q.Additive] (em : P ⋙ EY.functor ≅ EX.functor ⋙ Q)\n    (hq : ∀ (I : CochainComplex (ℕᵒᵖ ⥤ C) ℤ), I.IsKInjective →\n      ∀ (T : CochainComplex (ℕᵒᵖ ⥤ D) ℤ), T.IsKInjective →\n      ∀ (q : ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj Q).mapHomologicalComplex\n        (.up ℤ)).obj I) ⟶ T), QuasiIso q →\n      QuasiIso (((lim : (ℕᵒᵖ ⥤ D) ⥤ D).mapHomologicalComplex (.up ℤ)).map q))\n    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (hI : I.IsKInjective)\n    (T : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) (hT : T.IsKInjective)\n    (j : ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj P).mapHomologicalComplex\n      (.up ℤ)).obj I) ⟶ T) [QuasiIso j] :\n    QuasiIso (((lim : (ℕᵒᵖ ⥤ B) ⥤ B).mapHomologicalComplex (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261027T034637-L-3669140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261027T034637-L-3669140",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

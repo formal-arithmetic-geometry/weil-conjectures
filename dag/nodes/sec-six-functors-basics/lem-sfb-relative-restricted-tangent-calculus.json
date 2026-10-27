@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-relative-restricted-tangent-calculus",
+ "kind": "statement",
+ "title": "Restricted tangent calculus for bialgebras over a base algebra",
+ "statement": "Let $k$ be a field of prime characteristic $p>0$ [def-weil-field] and $R$ any commutative $k$-algebra. Let $C$ be a commutative unital $R$-bialgebra: its unital algebra maps $\\Delta:C\\to C\\otimes_R C$ and $\\varepsilon:C\\to R$ satisfy coassociativity and both counit identities [def-weil-pbc-module-tensor-product]. Set\n$$L_C=\\{v\\in\\operatorname{Hom}_R(C,R):v(cc')=\\varepsilon(c)v(c')+v(c)\\varepsilon(c')\\},\\qquad I=\\ker\\varepsilon.$$\nRestriction gives an $R$-linear isomorphism $L_C\\simeq\\operatorname{Hom}_R(I/I^2,R)$. The maps $v\\mapsto D_v=(1\\otimes v)\\Delta$ and $D\\mapsto\\varepsilon D$ are inverse $R$-linear bijections between $L_C$ and the $R$-linear derivations $D:C\\to C$ satisfying $\\Delta D=(1\\otimes D)\\Delta$. In convolution $(v*w)(c)=(v\\otimes w)(\\Delta c)$ one has $D_{v*w}=D_vD_w$, where this formula uses the same definition of $D_a$ for any $R$-linear functional $a$. The submodule $L_C$ is closed under $[v,w]=v*w-w*v$ and $v^{[p]}=v^{*p}$, and $D_{v^{[p]}}=D_v^p$. These operations give an $R$-bilinear alternating bracket satisfying the Jacobi identity and a restricted operation, meaning: $(av)^{[p]}=a^pv^{[p]}$, $\\operatorname{ad}(v^{[p]})=\\operatorname{ad}(v)^p$, and $(v+w)^{[p]}=v^{[p]}+w^{[p]}+\\sum_{i=1}^{p-1}s_i(v,w)$, where $i s_i(v,w)$ is the coefficient of $t^{i-1}$ in $\\operatorname{ad}(tv+w)^{p-1}(v)$ in $L_C\\otimes_R R[t]$. For a bialgebra homomorphism $f:C\\to C'$ the map $v\\mapsto v\\circ f$ from $L_{C'}$ to $L_C$ is $R$-linear and preserves bracket and $[p]$. A functional $v\\in L_C$ corresponds to the augmented algebra map $c\\mapsto\\varepsilon(c)+\\epsilon v(c)$ into $R[\\epsilon]/(\\epsilon^2)$, naturally in augmented algebra maps. When $C$ is the coordinate algebra of an affine $R$-group, these are its relative tangent vectors at the identity, and the invariant-derivation operations are the relative Lie operations.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 10.28--10.29, printed pp.195--196, and paragraph before Proposition 11.36, p.223. The formulas are extended here to an arbitrary commutative base k-algebra and bialgebra; this generality is agent-supplied. No Stacks tag is claimed to state restricted invariant-derivation calculus."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-restricted-enveloping-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\eta:R\\to C$ for the structure map. Since $\\varepsilon\\eta=1_R$, every $c\\in C$ has the unique decomposition $c=\\eta\\varepsilon(c)+j(c)$ with $j(c)\\in I$. For $v\\in L_C$, applying its product rule to $1\\cdot1$ gives $v(1)=2v(1)$, hence $v(1)=0$ by subtraction, even for $p=2$. Its $R$-linearity then gives $v\\eta=0$. For $x,y\\in I$, the same rule gives $v(xy)=0$, so restriction annihilates $I^2$, the $R$-span of these products. Conversely, given $\\lambda:I/I^2\\to R$ linear, put $v_\\lambda(c)=\\lambda(j(c)\\bmod I^2)$. The equality $j(cc')=\\eta\\varepsilon(c)j(c')+\\eta\\varepsilon(c')j(c)+j(c)j(c')$ proves its product rule after passage to $I/I^2$. Restriction and this formula are inverse, and both are $R$-linear. This proves the cotangent identification without any choice of basis or projectivity assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.28, p.195, together with the augmentation-ideal description of tangent vectors in §10b; agent-supplied relative split-augmentation calculation"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-module-tensor-product] to interpret $\\Delta(c)=\\sum c_1\\otimes c_2$ as notation for a finite tensor expression, not a preferred decomposition. The maps below are induced by balanced bilinear maps, so their values are independent of that expression. The product of $C\\otimes_RC$ is the one of [lem-weil-pbc-algebra-tensor-pushout-universal-property], $(a\\otimes b)(a'\\otimes b')=aa'\\otimes bb'$, so $\\Delta(cc')=\\sum c_1c'_1\\otimes c_2c'_2$. For $v\\in L_C$, multiplicativity of $\\Delta$, the product rule for $v$, and the counit identities give\n$$D_v(cc')=\\sum c_1c'_1\\bigl(\\varepsilon(c_2)v(c'_2)+v(c_2)\\varepsilon(c'_2)\\bigr)=cD_v(c')+D_v(c)c'.$$\nThus $D_v$ is an $R$-linear derivation. Coassociativity gives\n$$\\Delta D_v(c)=\\sum c_1\\otimes c_2v(c_3)=(1\\otimes D_v)\\Delta(c),$$\nso it is invariant. All expressions are equalities of maps obtained by tensoring linear maps; no assertion of tensor exactness is involved.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.29, pp.195–196; expansion of its converse over R, using only the bialgebra axioms"
+   }
+  },
+  {
+   "text": "If $D$ is an invariant $R$-linear derivation, then $v=\\varepsilon D$ satisfies\n$$v(cc')=\\varepsilon(c)v(c')+v(c)\\varepsilon(c')$$\nbecause $\\varepsilon$ is an algebra map. Moreover\n$$D=(1\\otimes\\varepsilon)\\Delta D=(1\\otimes\\varepsilon)(1\\otimes D)\\Delta=D_{\\varepsilon D}.$$\nFor any $R$-linear functional $a:C\\to R$, not necessarily tangent, the other counit identity gives $\\varepsilon D_a(c)=\\sum\\varepsilon(c_1)a(c_2)=a(c)$. Hence $a\\mapsto D_a$ is injective on all functionals and the two maps in the item are inverse on tangent functionals and invariant derivations. Both are $R$-linear by their displayed formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.29 proof, p.196; both inverse identities, with the counit identity also recorded for arbitrary functionals"
+   }
+  },
+  {
+   "text": "For arbitrary $R$-linear functionals $a,b$, coassociativity and $R$-linearity give\n$$D_aD_b(c)=\\sum c_1a(c_2)b(c_3)=D_{a*b}(c).$$\nHere composition means first $D_b$, then $D_a$; this fixes the order without assuming cocommutativity. The same threefold tensor calculation gives $(a*b)*d=a*(b*d)$, and the counit gives $a*\\varepsilon=\\varepsilon*a=a$. Thus convolution is associative and $R$-bilinear. In particular $D_{v*w-w*v}=D_vD_w-D_wD_v$, and induction on $n\\ge1$, starting with $n=1$ and using the displayed composition equality for the induction step, gives $D_{v^{*n}}=D_v^n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.29, p.196, and the restricted-derivation paragraph before Proposition 11.36, p.223; agent-supplied convolution-order calculation"
+   }
+  },
+  {
+   "text": "Put $D=D_v$, $E=D_w$. Expanding $DE(cc')$ by the product rule gives $DE(c)c'+E(c)D(c')+D(c)E(c')+cDE(c')$; the corresponding expansion for $ED$ has the same middle terms. Subtraction proves that $[D,E]$ is a derivation. The invariance equations imply $\\Delta DE=(1\\otimes DE)\\Delta$ and the same for $ED$, by substitution, so $[D,E]$ is invariant. Steps 3–4 therefore show $v*w-w*v\\in L_C$. Bilinearity of the bracket follows from convolution bilinearity and $[v,v]=0$ by subtraction. The Jacobi identity follows by expanding $[D,[E,F]]+[E,[F,D]]+[F,[D,E]]$: each of $DEF,DFE,EFD,EDF,FDE,FED$ occurs once with each sign. Injectivity from step 3 gives Jacobi on $L_C$. These cancellations hold also in characteristic two.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.29 and its preceding invariant-bracket computation, pp.195–196; explicit elementary commutator cancellations"
+   }
+  },
+  {
+   "text": "The scalar fact needed for powers is valid over every $R$ here: [def-weil-field] implies that $i\\in k$ is invertible for $0<i<p$. From the integer identity $i\\binom pi=p\\binom{p-1}{i-1}$, multiplication by $i^{-1}$ in $k$ gives $\\binom pi=0$ in $k$ and hence in $R$. No cancellation in $R$ is needed. Similarly each $i$ has the specified inverse in $R$ given by the image of $i^{-1}\\in k$; this statement remains meaningful if $R$ is the zero ring.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38(a), p.205: scalar binomial cancellation, written using the field k rather than assuming the base R is a field"
+   }
+  },
+  {
+   "text": "Let $D=D_v$ and let $\\mu:C\\otimes_R C\\to C$ be multiplication. Tensor maps and equality on pure tensors are supplied by [def-weil-pbc-module-tensor-product]. Set $U=D\\otimes1$, $V=1\\otimes D$. On $x\\otimes y$, $UV$ and $VU$ both give $D(x)\\otimes D(y)$, hence they commute. The product rule says $D\\mu=\\mu(U+V)$. Induction gives $D^n\\mu=\\mu(U+V)^n$: the case $n=0$ is the identity, and left composition by $D$ and substitution of $D\\mu$ proves the next case. Apply [lem-sfb-commuting-binomial-expansion] with $F=k$ in $\\operatorname{End}_R(C\\otimes_R C)$, an associative unital $k$-algebra by restriction of scalars. Step 6 kills the interior coefficients at $n=p$, so $D^p\\mu=\\mu(U^p+V^p)$. On pure tensors this is $D^p(xy)=D^p(x)y+xD^p(y)$, proving that $D^p$ is an $R$-linear derivation. Iterating the invariance equation gives $\\Delta D^p=(1\\otimes D^p)\\Delta$. By steps 3–4, $v^{*p}=\\varepsilon D_v^p$ is tangent and $D_{v^{[p]}}=D_v^p$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-commuting-binomial-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph before Proposition 11.36, p.223; agent-supplied commuting-operator proof of p-power closure, with the binomial input of Proposition 10.38(a), p.205"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-associative-jacobson-identities] with its field $F=k$ and its algebra $A=\\operatorname{End}_R(C)$, again by restriction of scalars; it does not require $R$ to be a field or $C$ finite. Step 4 makes $v\\mapsto D_v$ bracket- and power-preserving, and step 3 makes it injective. Its coefficientwise extension to polynomials is injective too: a polynomial maps to zero exactly when each of its finitely many coefficients does. Each coefficient of $\\operatorname{ad}(tv+w)^{p-1}(v)$ belongs to $L_C$, by bracket closure and expansion of the finite iterated bracket. Division by $i$ is multiplication by the scalar from step 6. Consequently these coefficients map to the corresponding coefficients for $D_v,D_w$, so the cited Jacobson sum formula implies precisely the stated sum formula. The cited adjoint identity, applied to $D_v$ and evaluated at each $D_w$, gives $\\operatorname{ad}(v^{[p]})=\\operatorname{ad}(v)^p$. Finally $D_{av}=aD_v$ and $R$-linearity of $D_v$ give $(aD_v)^p=a^pD_v^p$; injectivity gives $(av)^{[p]}=a^pv^{[p]}$ for every $a\\in R$, not just scalars in $k$.",
+   "uses": [
+    "lem-sfb-associative-jacobson-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38(a),(b) and Definition 10.39, pp.205–206; paragraph before Proposition 11.36, p.223; coefficientwise passage to the invariant submodule over R"
+   }
+  },
+  {
+   "text": "Let $f:C\\to C'$ be a bialgebra map. Its algebra property and $\\varepsilon'f=\\varepsilon$ show directly that $v\\circ f$ satisfies the augmentation product rule whenever $v\\in L_{C'}$. For arbitrary functionals $a,b:C'\\to R$, the coalgebra identity gives\n$$((a*b)\\circ f)(c)=(a\\otimes b)\\Delta'f(c)=(a\\otimes b)(f\\otimes f)\\Delta(c)=((a\\circ f)*(b\\circ f))(c).$$\nPrecomposition is $R$-linear, hence preserves brackets; induction using this equality preserves convolution powers, in particular $[p]$. This proves the functoriality without asserting that the invariant derivations on different algebras can be composed with one another.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.29, p.196, naturality sentence, and paragraph before Proposition 11.36, p.223; agent-supplied explicit bialgebra-map calculation"
+   }
+  },
+  {
+   "text": "In $R[\\epsilon]/(\\epsilon^2)=R\\oplus\\epsilon R$, multiplication is $(r+\\epsilon s)(r'+\\epsilon s')=rr'+\\epsilon(rs'+sr')$. Thus $c\\mapsto\\varepsilon(c)+\\epsilon v(c)$ is multiplicative exactly when $v$ obeys the displayed augmentation product rule; it is unital and fixes $R$ because $v(1)=0$ and $v\\eta=0$ from step 1. Conversely, an $R$-algebra map reducing to $\\varepsilon$ has a unique $\\epsilon$-coefficient $v$, which is $R$-linear and satisfies that rule. For an augmented algebra map $f$, substitution gives $(\\varepsilon'+\\epsilon v)f=\\varepsilon+\\epsilon(vf)$, proving the asserted naturality, even without a coalgebra condition. For an affine group with coordinate algebra $C$, maps into these dual numbers reducing to the identity section are, by definition, relative tangent vectors there; left invariance on functions is exactly $\\Delta D=(1\\otimes D)\\Delta$. Accordingly the constructed bracket and pth iterate are its relative Lie operations, as in Milne's invariant-derivation definition. No smoothness hypothesis is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.28, p.195, and Proposition 10.29, pp.195–196; relative dual-number formulation, with the restricted operation as on p.223"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-field",
+  "lem-sfb-commuting-binomial-expansion",
+  "lem-sfb-associative-jacobson-identities",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 10.28–10.29, pp.195–196; Proposition 10.38 and Definition 10.39, pp.205–206; paragraph before Proposition 11.36, p.223. The relative R-bialgebra proof, cotangent inverse and commuting-tensor-operator p-closure calculation are supplied by NS; Milne states the field case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(invariant|counit|augmentation).*[Dd]erivation|[Dd]erivation.*(invariant|counit|augmentation)",
+   "results": "{\"t\": \"2026-10-24T08:21:33Z\", \"tool\": \"grep\", \"query\": \"(invariant|counit|augmentation).*[Dd]erivation|[Dd]erivation.*(invariant|counit|augmentation)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\"], \"digest\": \"c4fdafded81aa62d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derivation Lie structures, the derivative of a power, and smooth-manifold invariant derivations do not give relative bialgebra tangent calculus or closure under pth convolution powers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant derivations of a Hopf algebra over commutative ring characteristic p tangent restricted Lie algebra",
+   "results": "{\"t\": \"2026-10-24T08:21:34Z\", \"tool\": \"leansearch\", \"query\": \"Invariant derivations of a Hopf algebra over commutative ring characteristic p tangent restricted Lie algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LeftInvariantDerivation.left_invariant''\", \"Derivation.instLieAlgebra\", \"Derivation.instLieRing\", \"LieDerivation.instLieAlgebra\", \"LieDerivation.instLieRingModule\", \"Derivation.instLieModule\", \"LieDerivation.instLinearMapClass\", \"LieDerivation.instNoetherian\"], \"digest\": \"91f6e3db310435fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derivation Lie structures, the derivative of a power, and smooth-manifold invariant derivations do not give relative bialgebra tangent calculus or closure under pth convolution powers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Derivation\", \"pow\"",
+   "results": "{\"t\": \"2026-10-24T08:21:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Derivation\\\", \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Derivation.leibniz_pow\", \"Derivation.leibniz_zpow\"], \"digest\": \"70e47fb615ee5a6b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derivation Lie structures, the derivative of a power, and smooth-manifold invariant derivations do not give relative bialgebra tangent calculus or closure under pth convolution powers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative Hopf algebra over a ring of prime characteristic, augmentation derivations equal invariant derivations and form a restricted Lie algebra with convolution bracket and pth convolution power",
+   "results": "{\"t\": \"2026-10-24T08:21:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative Hopf algebra over a ring of prime characteristic, augmentation derivations equal invariant derivations and form a restricted Lie algebra with convolution bracket and pth convolution power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.instLieAlgebra\", \"Derivation.instLieRing\", \"Derivation.instBracket\", \"Derivation.instLieModule\", \"LieRinehartAlgebra.instDerivation\", \"LieRinehartAlgebra.instLieRinehartRingDerivation\", \"Derivation.bracket_eq_fun\", \"Derivation.instLieRingModule\"], \"digest\": \"d23016ec69078ea7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derivation Lie structures, the derivative of a power, and smooth-manifold invariant derivations do not give relative bialgebra tangent calculus or closure under pth convolution powers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit derivations to the base ring of a commutative bialgebra identify with left invariant vector fields; differential of bialgebra maps preserves p operation",
+   "results": "{\"t\": \"2026-10-24T08:21:36Z\", \"tool\": \"leanfinder\", \"query\": \"Counit derivations to the base ring of a commutative bialgebra identify with left invariant vector fields; differential of bialgebra maps preserves p operation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LeftInvariantDerivation.toDerivation\", \"LeftInvariantDerivation.left_invariant''\", \"LeftInvariantDerivation.left_invariant'\", \"LeftInvariantDerivation.left_invariant\", \"LeftInvariantDerivation.coe_derivation\", \"LeftInvariantDerivation.toFun_eq_coe\", \"LeftInvariantDerivation.evalAt\", \"LeftInvariantDerivation.evalAt_coe\"], \"digest\": \"3fbb07009aea27ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derivation Lie structures, the derivative of a power, and smooth-manifold invariant derivations do not give relative bialgebra tangent calculus or closure under pth convolution powers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmentation derivations of a commutative bialgebra over a commutative ring correspond to invariant derivations and form a restricted Lie algebra under convolution in characteristic p",
+   "results": "{\"t\": \"2026-10-24T08:45:54Z\", \"tool\": \"leanfinder\", \"query\": \"Augmentation derivations of a commutative bialgebra over a commutative ring correspond to invariant derivations and form a restricted Lie algebra under convolution in characteristic p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.instLieAlgebra\", \"LieRinehartAlgebra.instLieRinehartRingDerivation\", \"LieRinehartAlgebra.instDerivation\", \"Derivation.instLieRing\", \"Derivation.instLieRingModule\", \"Derivation.instLieModule\", \"Derivation.instBracket\", \"LieDerivation.instLieAlgebra\"], \"digest\": \"0044cbd0a41845b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Derivation.instLieAlgebra gives only the ordinary derivation Lie algebra, not the relative bialgebra equivalence or restricted convolution power."
+  },
+  {
+   "tool": "grep",
+   "query": "iterate.*leibniz|leibniz.*iterate|iterate.*mul|iterate.*[Pp]ow",
+   "results": "{\"t\": \"2026-10-24T08:46:20Z\", \"tool\": \"grep\", \"query\": \"iterate.*leibniz|leibniz.*iterate|iterate.*mul|iterate.*[Pp]ow\", \"sub\": \"RingTheory/Derivation\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations found for this query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pth iterate of a derivation of an algebra of characteristic p is a derivation by the iterated Leibniz formula",
+   "results": "{\"t\": \"2026-10-24T08:46:21Z\", \"tool\": \"leansearch\", \"query\": \"The pth iterate of a derivation of an algebra of characteristic p is a derivation by the iterated Leibniz formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.iterate_apply_lie'\", \"Derivation.leibniz_zpow\", \"LieDerivation.iterate_apply_lie\", \"Polynomial.iterate_derivative_derivative_mul_X_sq\", \"LinearMap.iterateFrobenius\", \"iterateFrobenius_def\", \"iterateFrobenius\", \"iterateFrobenius_eq_pow\"], \"digest\": \"594a343f793cf44d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.iterate_apply_lie concerns Lie brackets; the other hits concern powers of an element or polynomial derivatives, not the stated bialgebra tangent calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, \"iterate\"",
+   "results": "{\"t\": \"2026-10-24T08:46:21Z\", \"tool\": \"loogle\", \"query\": \"Derivation, \\\"iterate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"PowerSeries.constantCoeff_iterate_derivative\", \"PowerSeries.coeff_iterate_derivative\"], \"digest\": \"76f24a5ac40946f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the two PowerSeries derivative coefficient identities do not concern bialgebra derivations."
+  },
+  {
+   "tool": "grep",
+   "query": "(invariant|counit|augmentation).*[Dd]erivation|[Dd]erivation.*(invariant|counit|augmentation)",
+   "results": "{\"t\": \"2026-10-24T08:47:00Z\", \"tool\": \"grep\", \"query\": \"(invariant|counit|augmentation).*[Dd]erivation|[Dd]erivation.*(invariant|counit|augmentation)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\"], \"digest\": \"c4fdafded81aa62d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read LeftInvariantDerivation.lean:42–50; its smooth-manifold derivations over a normed field do not state the algebraic bialgebra theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"derivation\"",
+   "results": "{\"t\": \"2026-10-24T08:47:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"counit\\\", \\\"derivation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations found for this query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a coalgebra counit epsilon augmentation derivations C to R extend uniquely to invariant derivations via id tensor v of comultiplication and identify with the dual of the augmentation ideal modulo its square",
+   "results": "{\"t\": \"2026-10-24T08:47:01Z\", \"tool\": \"leanfinder\", \"query\": \"For a coalgebra counit epsilon augmentation derivations C to R extend uniquely to invariant derivations via id tensor v of comultiplication and identify with the dual of the augmentation ideal modulo its square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivationToSquareZeroEquivLift\", \"derivationQuotKerSq_mk\", \"derivationQuotKerSq\", \"derivationToSquareZeroEquivLift_apply_coe_apply\", \"KaehlerDifferential.endEquivDerivation'\", \"derivationToSquareZeroOfLift\", \"liftOfDerivationToSquareZero\", \"liftOfDerivationToSquareZero_apply\"], \"digest\": \"5c18b9dda35e2c89\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: derivationToSquareZeroEquivLift (ToSquareZero.lean:116) covers the square-zero lift clause only, and the Kaehler hits do not give invariant or restricted operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Augmentation derivations of a commutative bialgebra correspond to invariant derivations by the counit and comultiplication",
+   "results": "{\"t\": \"2026-10-24T08:48:27Z\", \"tool\": \"leansearch\", \"query\": \"Augmentation derivations of a commutative bialgebra correspond to invariant derivations by the counit and comultiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BialgHom.ofAlgHom_apply\", \"Bialgebra.mk'\", \"BialgEquiv.toLinearMap_ofAlgEquiv\", \"BialgHom.ofAlgHom\", \"Bialgebra.mk.noConfusion\", \"Bialgebra.comulAlgHom\", \"Bialgebra.comulAlgHom_apply\", \"BialgCat.of_counit\"], \"digest\": \"6792eaf704127cfa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: BialgHom.ofAlgHom and Bialgebra.comulAlgHom construct bialgebra maps, without the tangent and restricted identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-height-one-integration-hom-correspondence",
+  "date": "2026-10-24",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Propositions 11.35--11.37 and Corollary 11.38, printed pp.222--223 (height-one subgroup correspondence and quotient); Proposition 17.80 proof, p.378, for its toral central specialization. The central multiplicative-kernel clause spells out the height-one subgroup attached to a trivial-adjoint toral restricted subalgebra. Supporting input in Q102: Propositions 11.35--11.37 and the first sentence of the proof of Corollary 11.38, printed pp.222--223; Definition 10.39 and Theorem 10.40, pp.206--207. The relative Hom formula is the finite-dual Hopf-algebra formulation of Proposition 11.36, valid after a commutative base-algebra extension, not an appeal to geometric-point faithfulness. The correction to Proposition 11.36 in the book errata, printed p.644, removes the duplicated Lie(phi). Supporting input for integration: Propositions 10.28--10.29, printed pp.195--196, and paragraph before Proposition 11.36, p.223. The formulas are extended here to an arbitrary commutative base k-algebra and bialgebra; this generality is agent-supplied. No Stacks tag is claimed to state restricted invariant-derivation calculus.",
+   "via": [
+    "lem-sfb-height-one-integration-hom-correspondence",
+    "lem-sfb-height-one-restricted-quotient",
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-restricted-tangent-calculus",
+  "worker": "stage1",
+  "summary": "NS checked all clauses over an arbitrary commutative k-algebra, wrote explicit inverse, convolution-order, closure, Jacobson coefficient and functoriality calculations, and reused the existing Jacobson and commuting-binomial nodes. No new nodes, no statement changes, no Lean writing or builds.",
+  "blueprint": "Supporting prerequisite in the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration chain: Milne 10.28–10.29 and the restricted-tangent paragraph before 11.36. Steps 1–4 and 10 supply relative tangent calculus; 5–8 supply Lie and restricted operations; 9 supplies the Hom functoriality used by height-one integration. Current latest direct-images proof (3) and unit read. The ancestor tool prints None for this existing inherited chain; retained its null from.node and its exact existing from.place/via. No unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NS-640939032",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-640939032 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 10 steps, the four cited statements (def-weil-field, def-weil-pbc-module-tensor-product, lem-sfb-commuting-binomial-expansion, lem-sfb-associative-jacobson-identities) and the local Milne iAG2017 at the cited places: Prop 10.28-10.29 on pp.195-196, Prop 10.38 and Def 10.39 on pp.205-206, and the paragraph before 11.36 on p.223. Shape: one commit with the item and the report, no new nodes, statement fields unchanged, no cycle (the only citer is height-one-integration; the Jacobson node depends only on def-weil-field and the binomial leaf). Every calculation was redone: the cotangent identity j(cc')=ηε(c)j(c')+ηε(c')j(c)+j(c)j(c'), D_aD_b=D_{a*b} in Sweedler order with no cocommutativity, εD_a=a for any functional, the commutator and Jacobi steps, and the binomial coefficient (p choose i)=0 via i^{-1} in k. Step 7: D^nμ=μ(U+V)^n, with the binomial node applied over k in End_R(C⊗C). Step 8: the Jacobson node's statement applied in End_R(C), with coefficientwise injectivity, s_i normalized the same way, and (av)^[p]=a^p v^[p] for a in R from R-linearity. Steps 9 and 10 (functoriality and dual numbers) are also correct. Small cases R=0, C=R, the additive and multiplicative groups, and p=2 are consistent. lem-sfb-bialgebra-distribution-tangent-calculus is only the field case without [p], so the item is not a duplicate. FIX: step 2 expands Δ(cc')=Σc1c'1⊗c2c'2, which needs the product on C⊗_R C, and the module-tensor node does not give that product. Step 2 now cites lem-weil-pbc-algebra-tensor-pushout-universal-property (Mathlib status, clause (1)). I added it to the step's uses and to proof_deps, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-relative-restricted-tangent-calculus.json. No other changes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeRestrictedTangentCalculus",
+  "declaration": "RelativeBialgebra.relative_restricted_tangent_calculus",
+  "declarations": [
+   "RelativeBialgebra.tangentFunctionals",
+   "RelativeBialgebra.contraction",
+   "RelativeBialgebra.relative_restricted_tangent_calculus"
+  ],
+  "file": "lean/Sheaf/RingTheory/RelativeRestrictedTangentCalculus.lean",
+  "statement": "theorem relative_restricted_tangent_calculus (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (R : Type v) [CommRing R] [Algebra k R] (C : Type w) [CommRing C] [Bialgebra R C] : (∀ a : C →ₗ[R] R, a ∈ tangentFunctionals R C (Bialgebra.counitAlgHom R C) ↔ ∀ x y : C, a (x * y) = Coalgebra.counit (R := R) x * a y + a x * Coalgebra.counit (R := R) y) ∧ (∃ e : tangentFunctionals R C (Bialgebra.counitAlgHom R C) ≃ₗ[R] Module.Dual R (RingHom.ker (Bialgebra.counitAlgHom R C).toRingHom).Cotangent, ∀ a : tangentFunctionals R C (Bialgebra.counitAlgHom R C), ∀ x : RingHom.ker (Bialgebra.counitAlgHom R C).toRingHom, e a ((RingHom.ker (Bialgebra.counitAlgHom R C).toRingHom).toCotangent x) = a.1 x.1) ∧ (∃ M : Submodule R (Derivation R C C), (∀ D : Derivation R C C, D ∈ M ↔ (Coalgebra.comul (R := R)).comp D.toLinearMap = (TensorProduct.map (LinearMap.id : C →ₗ[R] C) D.toLinearMap).comp (Coalgebra.comul (R := R))) ∧ ∃ e : tangentFunctionals R C (Bialgebra.counitAlgHom R C) ≃ₗ[R] M, (∀ a : tangentFunctionals R C (Bialgebra.counitAlgHom R C), (e a).1.toLinearMap = contraction R C a.1) ∧ (∀ D : M, (e.symm D).1 = (Coalgebra.counit (R := R)).comp D.1.toLinearMap)) ∧ (∀ a b : C →ₗ[R] R, contraction R C (WithConv.toConv a * WithConv.toConv b).ofConv = contraction R C a * contraction R C b) ∧ (∃ B : tangentFunctionals R C (Bialgebra.counitAlgHom R C) →ₗ[R] tangentFunctionals R C (Bialgebra.counitAlgHom R C) →ₗ[R] tangentFunctionals R C (Bialgebra.counitAlgHom R C), ∃ P : tangentFunctionals R C (Bialgebra.counitAlgHom R C) → tangentFunctionals R C (Bialgebra.counitAlgHom R C), (∀ a b : tangentFunctionals R C (Bialgebra.counitAlgHom R C), (B a b).1 = (WithConv.toConv a.1 * WithConv.toConv b.1 - WithConv.toConv b.1 * WithConv.toConv a.1).ofConv) ∧ (∀ a : tangentFunctionals R C (Bialgebra.counitAlgHom R C), (P a).1 = (WithConv.toConv a.1 ^ p).ofConv ∧ contraction R C (P a).1 = contraction R C a.1 ^ p) ∧ (∀ a : tangentFunctionals R C (Bialgebra.counitAlgHom R C), B a a = 0) ∧ (∀ a b c : tangentFunctionals R C (Bialgebra.counitAlgHom R C), B a (B b c) + B b (B c a) + B c (B a b) = 0) ∧ (∀ (r : R) (a : tangentFunctionals R C (Bialgebra.counitAlgHom R C)), P (r • a) = r ^ p • P a) ∧ (∀ a b : tangentFunctionals R C (Bialgebra.counitAlgHom R C), B (P a) b = Nat.iterate (B a) p b) ∧ (∀ a b : tangentFunctionals R C (Bialgebra.counitAlgHom R C), WithConv.toConv (P (a + b)).1 = WithConv.toConv (P a).1 + WithConv.toConv (P b).1 + ∑ i ∈ Finset.Ico 1 p, @LieAlgebra.restrictedJacobsonTerm k _ (WithConv (C →ₗ[R] R)) LieRing.ofAssociativeRing inferInstance p (WithConv.toConv a.1) (WithConv.toConv b.1) i) ∧ (∀ (C' : Type w') [CommRing C'] [Bialgebra R C'] (f : C →ₐc[R] C'), ∃ T : tangentFunctionals R C' (Bialgebra.counitAlgHom R C') →ₗ[R] tangentFunctionals R C (Bialgebra.counitAlgHom R C), (∀ a : tangentFunctionals R C' (Bialgebra.counitAlgHom R C'), (T a).1 = a.1.comp (f : C →ₗ[R] C')) ∧ (∀ a b : tangentFunctionals R C' (Bialgebra.counitAlgHom R C'), (B (T a) (T b)).1 = ((WithConv.toConv a.1 * WithConv.toConv b.1 - WithConv.toConv b.1 * WithConv.toConv a.1).ofConv).comp (f : C →ₗ[R] C')) ∧ (∀ a : tangentFunctionals R C' (Bialgebra.counitAlgHom R C'), (P (T a)).1 = (WithConv.toConv a.1 ^ p).ofConv.comp (f : C →ₗ[R] C')))) ∧ (∃ E : tangentFunctionals R C (Bialgebra.counitAlgHom R C) ≃ {g : C →ₐ[R] DualNumber R // (TrivSqZeroExt.fstHom R R R).comp g = Bialgebra.counitAlgHom R C}, (∀ (a : tangentFunctionals R C (Bialgebra.counitAlgHom R C)) (c : C), (E a).1 c = TrivSqZeroExt.inl (Coalgebra.counit (R := R) c) + TrivSqZeroExt.inr (a.1 c)) ∧ ∀ (A : Type w') [CommRing A] [Algebra R A] (ε : A →ₐ[R] R) (f : A →ₐ[R] C), (Bialgebra.counitAlgHom R C).comp f = ε → ∃ T : tangentFunctionals R C (Bialgebra.counitAlgHom R C) →ₗ[R] tangentFunctionals R A ε, (∀ a : tangentFunctionals R C (Bialgebra.counitAlgHom R C), (T a).1 = a.1.comp f.toLinearMap) ∧ ∀ (a : tangentFunctionals R C (Bialgebra.counitAlgHom R C)) (x : A), ((E a).1.comp f) x = TrivSqZeroExt.inl (ε x) + TrivSqZeroExt.inr ((T a).1 x))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4aaf93052",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 62a9: the theorem node is gone from stmt_deps (kept as proof dep). The only node change is the added landed definition node def-sfb-restricted-enveloping-algebra. The sum term uses its LieAlgebra.restrictedJacobsonTerm; I checked the recursion and the (i:k)^-1 factor at index (p-1,i-1) give the node's s_i, including p=2. Every clause matches: the product-rule membership; the cotangent iso pinned to restriction; the invariant-derivation equivalence with both directions pinned; D_{a*b}=D_aD_b for all functionals in the right order (convMul_def); B and P pinned to convolution, with closure, alternation, Jacobi, P(r a)=r^p P a for r in R, ad(P a)=ad(a)^p and the sum formula; bialgebra-map functoriality; the dual-number equivalence with naturality for arbitrary augmented A. Edge cases R=0, C=R, p=2 and noncocommutative C are fine; universes are independent. Helpers are real, docstrings are present, the only proof is sorry, lean.statement is verbatim, and the report sections are present. Parallel N9 delivery 9c5880ecc (S2 PASS, not yet landed): whichever lands second needs parallel-delivery handling; this version is preferable because it cites the def node. No compile (no change)."
+ }
+}

@@ -77,19 +77,31 @@
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarSheafComposition",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarSheafComposition.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleScalarSheafComposition",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleScalarSheafComposition.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_sheaf_composition",
-  "statement": "theorem rawModuleScalar_sheaf_composition (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : RawModuleScalarComparison.pullback Λ h' L ≫ (RawModuleScalarComparison.forget Λ Y').map ((upperStarComp (ModuleCat.{u + 1} Λ) a h h' w.symm).hom.app L) = (upperStarComp AddCommGrpCat.{u + 1} a h h' w.symm).hom.app ((RawModuleScalarComparison.forget Λ S).obj L) ≫ (upperStar AddCommGrpCat.{u + 1} a).map (RawModuleScalarComparison.pullback Λ h L) ≫ RawModuleScalarComparison.pullback Λ a ((upperStar (ModuleCat.{u + 1} Λ) h).obj L)",
+  "statement": "theorem rawModuleScalar_sheaf_composition\n    (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')\n    (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    RawModuleScalarComparison.pullback Λ h' L ≫\n        (moduleAbelianForget Λ Y').map\n          ((upperStarComp (ModuleCat.{u + 1} Λ) a h h' w.symm).hom.app L) =\n      (upperStarComp AddCommGrpCat.{u + 1} a h h' w.symm).hom.app\n          ((moduleAbelianForget Λ S).obj L) ≫\n        (upperStar AddCommGrpCat.{u + 1} a).map\n          (RawModuleScalarComparison.pullback Λ h L) ≫\n        RawModuleScalarComparison.pullback Λ a\n          ((upperStar (ModuleCat.{u + 1} Λ) h).obj L)",
   "branch": "sheaf-dag",
-  "by": "N4",
-  "date": "2026-10-14",
+  "by": "J1",
+  "date": "2026-10-25",
   "declarations": [
    "AlgebraicGeometry.Etale.rawModuleScalar_sheaf_composition"
-  ]
+  ],
+  "note": "Retire the duplicate Sheaf module under coord/retire-items.tsv. The adopted upstream theorem has the same statement: RawModuleScalarComparison.forget is the abbreviation moduleAbelianForget, so its replacement by moduleAbelianForget is definitional equality. A server-compiled compatibility proof applies this upstream theorem to the exact old signature; #print axioms reports only propext, Classical.choice and Quot.sound. No import of the retired Sheaf path remains in lean/ or quarantine/. The previously listed coefficient-unshifted and source-class consumers already use the upstream module; the source-square Sheaf module is already withdrawn. All three parent nodes and all mathematical dependencies are retained. The unit route is unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -102,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N4",
+  "reviewer": "C-4ec76",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T234517-L-2165262",
+  "landing": "20261025T051856-L-4174676",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: deleted Sheaf rawModuleScalar_sheaf_composition vs upstream WeilConjectures theorem of same name (forget is abbrev of moduleAbelianForget); node diff vs HEAD changes only the lean record; no importers of retired module"
  }
 }

@@ -59,7 +59,18 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-rationalization-karoubi"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-finite-tor-amplitude",
@@ -82,28 +93,62 @@
    "WeilConjectures.finiteTorConstructibleCategory",
    "WeilConjectures.finiteTorConstructibleIntegral",
    "WeilConjectures.finiteTorConstructibleIntegralCategory",
-   "WeilConjectures.finiteTorFieldCoefficientCategory"
+   "WeilConjectures.finiteTorFieldCoefficientCategory",
+   "AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor"
   ],
   "statement": "def finiteTorConstructibleEtale (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) : ObjectProperty (Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) Y)",
   "branch": "newtargets-dag",
-  "by": "NP",
-  "date": "2026-10-21",
+  "by": "Q56",
+  "date": "2026-10-22",
   "existing": false,
-  "note": "Section 1(B), returned H13 repair: retain the landed ordinary-etale primary declaration finiteTorConstructibleEtale and its unchanged signature, and restore the original pro-etale, integral and field-stage declaration family as a superset record. The etale predicate cannot accept this consumer’s proEtaleDerivedCategory objects, so this item uses the original finiteTorConstructible. FiniteTorAmplitudeSites now publicly imports Sheaf.Paper.FiniteTorAmplitude, exposing every declaration listed here while retaining all old imports and the unchanged etale definition. No mathematical definition or dependency statement changes.",
+  "note": "Section 1(B): retain the complete recorded etale, intrinsic pro-etale, integral and field-stage interface and add the published native fixed-ModuleCat pro-etale constructibleFiniteTor predicate. The recorded predicates accept ordinary-etale or intrinsic constant-ring-module endpoints, whereas the recorded affine-line integration uses fixed-ModuleCat pro-etale endpoints. The module only gains a public import of the existing upstream TorAmplitude module; no definition or mathematical statement changes.",
   "file": "lean/Sheaf/Paper/FiniteTorAmplitudeSites.lean"
  },
  "reviewed_lean": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-cc-cd37340bd",
-  "group": "NP",
-  "result": "pass",
-  "note": "Re-delivery after H13 RETURN of c9664d83. Item module byte-identical (sha256 a2faef8b) and item node identical to the previously verified faithful version; re-read: FullCD (∃ cCD:ℕ) for (1), every right adjoint preserves D^b_c, one signed (c-,c+) chosen before G and a≤b with empty output interval allowed, D^b_ctf preservation; hypotheses no stronger than the node; edge cases ok; no sorry; docstrings and verbatim statement ok. H13 repair as requested: def-weil-finite-tor-amplitude keeps NW's module FiniteTorAmplitudeSites, primary finiteTorConstructibleEtale and verbatim statement; declarations are a strict superset (+5 real decls from FiniteTorAmplitude); Sites diff vs live = one added public import; no name clashes, no import cycle, no other node owns either module; existing:false+file is correct since the file changes. Live item still split with lean null (not superseded). No compile run (no fix); worker scompile clean (7.2/8.8 s) and final deliver2 dry run OK."
+  "reviewer": "NT-stage2-cc-d536083ef",
+  "group": "Q56",
+  "result": "fix",
+  "note": "All node clauses match the Lean: D^b_ctf hypotheses via upstream constructibleFiniteTor; normalized traces; native exchange and projection; TraceCompatible with the pullback unit; C, D, b in the node's order, P_U direction checked; the ∃ hW origin witness in the conclusion holds and is harmless; edge cases and universes ok. The §1(B) FiniteTorAmplitudeSites change is one added import and a superset record (ok). Fault: composition (α) used plain coherence* defs of theorem node lem-pur-compact-support-site-coherence (not a stmt_dep) instead of the recorded originComposition of thm-sf-comp-composition. FIX: new helper originChange (upstream rightDerivedLowerShriekOfCompactificationOriginIso at a representative); composition = changes to the chosen compactifications, originComposition at W, change back; CompactSupportSiteCoherence import dropped; signatures and statement unchanged; lean-record adds originChange with the statement pinned; report bullet corrected. nt_compile: fixed item clean in 57.5 s at load ~118 (the delivered file times out at the same load); dep module clean in 6.4 s."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and a scheme $Y$ on which $\\ell$ is invertible. Put $A=A_{E,n}$\nand use the derived cohomology sheaves\n[def-weil-derived-cohomology-sheaves] and the derived tensor product\n[def-weil-derived-tensor]. For an object $K\\in D^b_c(Y,A)$ satisfying the\nfinite-torsion constructibility condition\n[def-weil-finite-torsion-constructibility], say that $K$ has *finite Tor\namplitude* if there are integers $a\\leq b$ such that, for every sheaf $M$ of\n$A$-modules placed in degree zero,\n\n$$\n \\mathcal H^r(K\\otimes^L_A M)=0\n \\qquad\\text{for every }r\\in\\mathbf Z\\setminus[a,b].\n$$\n\nDefine $D^b_{ctf}(Y,A)$ as the full triangulated subcategory of such objects.\nFor $K\\in D^b_c(Y,\\mathcal O_E)$, a derived-complete bounded constructible\ncomplex [def-weil-derived-complete-integral-detailed], say that $K$ has\nfinite Tor amplitude if every reduction $K\\otimes^L_{\\mathcal O_E}A_{E,j}$,\n$j\\in\\mathbf Z_{\\geq1}$, has finite Tor amplitude with one interval\nindependent of $j$, and define $D^b_{ctf}(Y,\\mathcal O_E)$ accordingly. At\nfield coefficients the finite-Tor subcategories are, by definition, the\nbounded constructible rationalized category\n[def-weil-rationalization-karoubi] and its common-stage algebraically closed\ncoefficient category [def-weil-algebraically-closed-coefficients]:\n\n$$\n D^b_{ctf}(Y,E):=D^b_c(Y,E),\n \\qquad\n D^b_{ctf}(Y,\\Qlb):=D^b_c(Y,\\Qlb).\n$$\n\nThe second equality is interpreted in the finite-stage triangulated\n2-colimit.\n\nFor $A_{E,n}$, finite Tor amplitude is an additional condition and does not\nfollow from bounded constructibility. At the integral stage it is imposed by\nthe displayed definition; a separate residue-field argument, using the\ncompatibility of all reductions of one integral object, shows that every\nobject of the derived-complete constructible category in fact satisfies it.",
-  "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ with uniformizer $\\pi_E$, an\ninteger $n\\in\\mathbf Z_{\\geq1}$, and a scheme $Y$ on which $\\ell$ is\ninvertible. Put $A_{E,n}=\\mathcal O_E/\\pi_E^n$, let\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$, regarded as a condensed ring with\ncoefficient sheaf $\\Lambda_Y=p_Y^*\\Lambda$, and use the derived cohomology\nsheaves [def-weil-derived-cohomology-sheaves] and the derived tensor product\nover $\\Lambda_Y$ ([det-def-sfb-derived-tensor-hom]; [def-weil-derived-tensor]\nfor finite $\\Lambda$). For integers $a\\leq b$, an object\n$K\\in D(Y_{\\mathrm{proét}},\\Lambda)$ has *Tor amplitude in $[a,b]$* if, for\nevery sheaf $M$ of $\\Lambda_Y$-modules placed in degree zero,\n\n$$\n \\mathcal H^r(K\\otimes^L_{\\Lambda_Y} M)=0\n \\qquad\\text{for every }r\\in\\mathbf Z\\setminus[a,b],\n$$\n\nand it has *finite Tor amplitude* if it has Tor amplitude in some $[a,b]$.\nThese two conditions make sense, with the same wording, for any commutative\ncondensed ring $\\Lambda$ and any scheme $Y$. Define $D^b_{ctf}(Y,\\Lambda)$ as\nthe full subcategory of the bounded constructible category\n$D^b_c(Y,\\Lambda)$ [det-def-sfb-bounded-constructible] (for\n$\\Lambda=A_{E,n}$: complexes that are bounded with constructible cohomology\nsheaves [def-sfb-bounded-constructible-complexes], with the finite-torsion\nconstructibility condition [def-weil-finite-torsion-constructibility]) on the\nobjects of finite Tor amplitude. The definition is the same for every\n$\\Lambda$.\n\n**Well-definedness.** Tor amplitude in $[a,b]$ is invariant under\nisomorphism, and it widens: Tor amplitude in $[a,b]$ implies Tor amplitude in\n$[a',b']$ whenever $a'\\le a$ and $b\\le b'$. If $K$ has Tor amplitude in\n$[a,b]$ then $K[1]$ has Tor amplitude in $[a-1,b-1]$. If\n$K'\\to K\\to K''\\to K'[1]$ is a distinguished triangle and $K',K''$ have Tor\namplitude in $[a,b]$, so does $K$; and a direct summand of a complex with Tor\namplitude in $[a,b]$ has Tor amplitude in $[a,b]$. Hence the complexes of\nfinite Tor amplitude form a thick subcategory of $D(Y_{\\mathrm{proét}},\\Lambda)$,\nand $D^b_{ctf}(Y,\\Lambda)$ is the intersection of this thick subcategory with\n$D^b_c(Y,\\Lambda)$; it is a full triangulated subcategory.\n\nFor $A_{E,n}$, finite Tor amplitude is an additional condition and does not\nfollow from bounded constructibility. For $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$ it is automatic,\n$D^b_{ctf}(Y,\\Lambda)=D^b_c(Y,\\Lambda)$; this is proved later, see\n[lem-integral-ctf-equals-bc].",
+  "proof": [
+   {
+    "text": "Invariance under isomorphism is clear, since isomorphic complexes have\nisomorphic derived tensor products and cohomology sheaves; widening the\ninterval is immediate from the definition.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Shift: $K[1]\\otimes^{L}M=(K\\otimes^{L}M)[1]$, so its cohomology in degree $r$\nis that of $K\\otimes^{L}M$ in degree $r+1$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Extensions: $-\\otimes^{L}M$ is a triangulated functor, so it turns the\ntriangle into a distinguished triangle\n$K'\\otimes^{L}M\\to K\\otimes^{L}M\\to K''\\otimes^{L}M\\to$, and the long exact\ncohomology sequence [lem-sp-long-exact-of-triangle] shows that\n$\\mathcal H^r(K\\otimes^{L}M)$ sits between $\\mathcal H^r(K'\\otimes^{L}M)$ and\n$\\mathcal H^r(K''\\otimes^{L}M)$, which vanish for $r\\notin[a,b]$.",
+    "uses": [
+     "lem-sp-long-exact-of-triangle"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Summands:\n$\\mathcal H^r((K_1\\oplus K_2)\\otimes^{L}M)=\\mathcal H^r(K_1\\otimes^{L}M)\\oplus\\mathcal H^r(K_2\\otimes^{L}M)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Taking unions over $[a,b]$ (and widening the intervals of the two outer terms\nof a triangle to a common one), the complexes of finite Tor amplitude form a\nthick subcategory. Its intersection with the triangulated subcategory\n$D^b_c(Y,\\Lambda)$ is again a full triangulated subcategory.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

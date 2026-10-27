@@ -1,0 +1,236 @@
+{
+ "id": "lem-trf-site-section-pullback-normalization",
+ "kind": "statement",
+ "title": "Canonical site-section pullback is normalized by comparison units and replacements",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites in the common universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], let $u:\\mathcal C\\to\\mathcal D$ be continuous and cocontinuous [def-weil-pbc-special-cocontinuous-functor](1), and let $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ be its induced geometric morphism [def-trf-geometric-morphism]. Write $L=g^{-1}:\\operatorname{Ab}(\\mathcal D)\\to\\operatorname{Ab}(\\mathcal C)$, also for its termwise and exact derived extensions. Use the ordinary bounded-below derived categories, localization $Q$, and cochain complexes [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories]. For a site object $V$, let $\\alpha^V_K:Q\\Gamma(V,K)\\to R\\Gamma(V,QK)$ be the ordinary right-derived comparison unit [lem-weil-pbc-right-derived-plus-injective], for a bounded-below complex $K$ on that site. Fix $U\\in\\mathcal C$. Let $e_F:\\Gamma(U,LF)\\xrightarrow{\\sim}\\Gamma(u(U),F)$ be the identity on sections given by precomposition, with $e_K$ its termwise version on complexes. There is a unique natural transformation\n$$\\tau:R\\Gamma(u(U),-)\\longrightarrow R\\Gamma(U,L(-))$$\ncharacterized, on every bounded-below complex $K$ of abelian sheaves on $\\mathcal D$, by\n$$\\tau_{QK}\\circ\\alpha^{u(U)}_K=\\alpha^U_{LK}\\circ Q(e_K^{-1}).$$\nIt is the ordinary derived pullback of sections. If $I$ is any bounded-below complex of injective abelian sheaves [def-sp-injective-resolutions], and $r:LI\\to J$ is any quasi-isomorphism to a bounded-below complex of injective abelian sheaves on $\\mathcal C$, then in $D^+(\\operatorname{Ab})$ its component satisfies\n$$\\tau_{QI}\\circ\\alpha^{u(U)}_I=R\\Gamma(U,(Qr)^{-1})\\circ\\alpha^U_J\\circ Q\\Gamma(U,r)\\circ Q(e_I^{-1})=\\alpha^U_{LI}\\circ Q(e_I^{-1}).$$\nHere $\\alpha^{u(U)}_I$ and $\\alpha^U_J$ are the injective-complex computation isomorphisms; the formula does not assume that $LI$ is termwise injective or that $Q\\Gamma(U,r)$ is invertible. For every $\\rho:QI\\cong M$, transport by $R\\Gamma(u(U),\\rho)$ and $R\\Gamma(U,L\\rho)$ gives the component $\\tau_M$, independent of $I,J,r,\\rho$. Thus these formulas commute with all coefficient morphisms in $D^+(\\operatorname{Ab}(\\mathcal D))$ and identify the same transformation for any uniquely isomorphic choice of the right-derived functors and their comparison units.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DD8, lemma-pullback-same-cohomology, bounded-below canonical comparison; comparison-unit construction and uniqueness expanded using derived.tex, lemma-enough-injectives-right-derived and section-derived-functors"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-trf-geometric-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=R\\Gamma(u(U),-)$ and $T=R\\Gamma(U,-)\\circ L$ on $D^+(\\operatorname{Ab}(\\mathcal D))$. The site-sheaves theorem makes both abelian sheaf categories abelian with enough injectives; evaluation is additive by the sites-and-cohomology definition. The continuous-cocontinuous adjunction identifies the underlying set sheaf of $LF$ with $F\\circ u$. Its identity on sections respects addition and coefficient maps, hence gives the additive natural isomorphism $e$. The geometric-inverse-image theorem supplies exactness of $L$, with the sites interchanged to match $g$. Exactness gives $H^n(LK)=L H^n(K)$ (preservation of kernels, images and cokernels), so termwise $L$ preserves quasi-isomorphisms and boundedness below. Thus its stipulated derived extension and the composite $T$ are well defined.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XR (lemma-when-shriek), 00YV (proposition-functoriality-algebraic-structures-topoi); enough injectives: injectives.tex Tag 01DP (theorem-sheaves-injectives)."
+   }
+  },
+  {
+   "text": "For each bounded-below complex $K$ set $\\beta_K=\\alpha^U_{LK}\\circ Q(e_K^{-1})$. For a complex map $f:K\\to K'$, naturality of $e$ and of $\\alpha^U$ gives $T(Qf)\\circ\\beta_K=\\beta_{K'}\\circ Q\\Gamma(u(U),f)$. These transformations descend to the homotopy category: additive functors send a homotopy $h$ to a homotopy, by applying the functor to $f-f'=dh+hd$. Apply clause (1) of the right-derived-plus-injective theorem to $v=\\Gamma(u(U),-)$, $G=T$ and this $\\beta$. It gives a unique natural transformation $\\tau:S\\to T$ satisfying $\\tau_{QK}\\circ\\alpha^{u(U)}_K=\\beta_K$ for every $K$. In particular its naturality holds for all derived morphisms, including those not represented by a complex map.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived) and 05SA (lemma-derived-functor); left Kan extension characterization of the comparison."
+   }
+  },
+  {
+   "text": "Let $I,J,r$ be as stated. Naturality of the comparison unit on $\\mathcal C$, applied to $r:LI\\to J$, is $R\\Gamma(U,Qr)\\circ\\alpha^U_{LI}=\\alpha^U_J\\circ Q\\Gamma(U,r)$. The localization inverts the quasi-isomorphism $r$, and a functor preserves its inverse. Multiply this equality on the left by $R\\Gamma(U,(Qr)^{-1})$ and on the right by $Q(e_I^{-1})$. Step 2 with $K=I$ is precisely the displayed replacement formula of the statement. Clause (2) of the right-derived theorem makes $\\alpha^{u(U)}_I$ and $\\alpha^U_J$ isomorphisms. This computes ordinary derived section pullback: apply the ordinary section map $e_I^{-1}$, apply the target replacement $r$ on sections, and identify the resolved target with $LI$ by $(Qr)^{-1}$. Only $Qr$ is inverted in this calculation.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD8 (lemma-pullback-same-cohomology), bounded-below resolution construction; derived.tex Tag 05TH (lemma-injective-acyclic) and Tag 05TI."
+   }
+  },
+  {
+   "text": "Every $M$ has an isomorphism $\\rho:QI\\cong M$ with $I$ bounded below and injective by the injective-representative theorem, using enough injectives from step 1. Naturality gives explicitly\n$$\\tau_M=T(\\rho)\\circ\\alpha^U_{LI}\\circ Q(e_I^{-1})\\circ(\\alpha^{u(U)}_I)^{-1}\\circ S(\\rho^{-1}).$$\nFor every choice $I,\\rho$, the right side equals the already constructed $\\tau_M$; step 3 makes it independent of $J,r$ as well. For a coefficient morphism $a:M\\to N$, naturality from step 2 is $T(a)\\circ\\tau_M=\\tau_N\\circ S(a)$, so the formula is compatible with arbitrary derived coefficient morphisms without choosing chain representatives for $a$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K (lemma-injective-resolutions-exist); Tag 05SA (lemma-derived-functor); sites-cohomology.tex Tag 0DD8."
+   }
+  },
+  {
+   "text": "Finally choose other right-derived pairs with units, writing $S',R\\Gamma'(U,-)$ and $\\tau'$. Clause (3) of the right-derived theorem gives unique unit-compatible natural isomorphisms $s:S\\cong S'$ and $b:R\\Gamma(U,-)\\cong R\\Gamma'(U,-)$; write $t=bL:T\\cong T'$. For each $K$, unit compatibility gives\n$$(t\\circ\\tau)_{QK}\\circ\\alpha^{u(U)}_K=t_{QK}\\circ\\alpha^U_{LK}\\circ Q(e_K^{-1})=\\alpha'^U_{LK}\\circ Q(e_K^{-1})=(\\tau'\\circ s)_{QK}\\circ\\alpha^{u(U)}_K.$$\nClause (1), with target $T'$, implies $t\\circ\\tau=\\tau'\\circ s$. This proves invariance under precisely the uniquely isomorphic, unit-compatible choices specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S7 (section-derived-functors), 05SA (lemma-derived-functor), 05TI (lemma-enough-injectives-right-derived); uniqueness with comparison units."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DD8 bounded-below comparison, expanded by the universal property of the ordinary right-derived comparison (derived.tex Tags 05S7, 05SA, 05TH, 05TI). The explicit comparison-unit and transport calculations are written here by Q120."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusBaseChange|BaseChangeAux|derived.*pullback.*sections",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlusBaseChange|BaseChangeAux|derived.*pullback.*sections\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf formulas or degreewise derived functors do not state the canonical bounded-below derived section pullback normalization and replacement formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison of right derived functors on injective resolutions equals the underived natural transformation followed by the right derived unit",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"leansearch\", \"query\": \"The canonical comparison of right derived functors on injective resolutions equals the underived natural transformation followed by the right derived unit\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusBaseChange\"",
+   "results": "{\"t\": \"2026-10-22T06:47:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctorPlusBaseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf formulas or degreewise derived functors do not state the canonical bounded-below derived section pullback normalization and replacement formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and independence of the injective replacement formula for a derived natural transformation between composite additive functors",
+   "results": "{\"t\": \"2026-10-22T06:47:51Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality and independence of the injective replacement formula for a derived natural transformation between composite additive functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\"], \"digest\": \"5c5510a66e2a7a85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf formulas or degreewise derived functors do not state the canonical bounded-below derived section pullback normalization and replacement formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For continuous cocontinuous sites the canonical derived pullback of sections is represented on injective complexes by the section identity followed by evaluation of an injective replacement map",
+   "results": "{\"t\": \"2026-10-22T06:47:52Z\", \"tool\": \"leanfinder\", \"query\": \"For continuous cocontinuous sites the canonical derived pullback of sections is represented on injective complexes by the section identity followed by evaluation of an injective replacement map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"CategoryTheory.Presheaf.isLocallyInjective_of_whisker\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.Presheaf.isLocallyInjective_forget_iff\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.Presheaf.isLocallyInjective_forget\"], \"digest\": \"da89d7051e2e4cb1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf formulas or degreewise derived functors do not state the canonical bounded-below derived section pullback normalization and replacement formula"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusBaseChange|rightDerived_fac|rightDerived.*Unit.*naturality",
+   "results": "{\"t\": \"2026-10-22T06:49:23Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlusBaseChange|rightDerived_fac|rightDerived.*Unit.*naturality\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf formulas or degreewise derived functors do not state the canonical bounded-below derived section pullback normalization and replacement formula"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRightDerivedFunctor|rightDerived.*[Ll]ift|rightDerived.*[Ee]xt|rightDerivedFunctorPlus",
+   "results": "{\"t\": \"2026-10-23T04:23:03Z\", \"tool\": \"grep\", \"query\": \"IsRightDerivedFunctor|rightDerived.*[Ll]ift|rightDerived.*[Ee]xt|rightDerivedFunctorPlus\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\"], \"digest\": \"efbebf85cd66fc9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general right-derived constructors supply a tool already represented by lem-weil-pbc-right-derived-plus-injective, but do not alone give the site comparison, its replacement formula, and all independence clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor, NatTrans",
+   "results": "{\"t\": \"2026-10-23T04:23:04Z\", \"tool\": \"loogle\", \"query\": \"Functor.IsLeftDerivedFunctor, NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.IsLeftDerivedFunctor'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "invalid pattern (unknown identifier); retried with the verified name rightDerivedDesc"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural derived pullback of sections for a continuous cocontinuous site functor is uniquely characterized by the comparison units and injective replacements",
+   "results": "{\"t\": \"2026-10-23T04:23:04Z\", \"tool\": \"leansearch\", \"query\": \"The natural derived pullback of sections for a continuous cocontinuous site functor is uniquely characterized by the comparison units and injective replacements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso\", \"TopCat.Sheaf.pullbackIso\", \"CategoryTheory.Functor.sheafPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"SheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"TopCat.Presheaf.pullback_obj_obj_ext_iff\"], \"digest\": \"956d8157012c1c3a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general right-derived constructors supply a tool already represented by lem-weil-pbc-right-derived-plus-injective, but do not alone give the site comparison, its replacement formula, and all independence clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation from an underived functor to a derived composite extends uniquely along the right derived comparison unit by its left Kan extension universal property",
+   "results": "{\"t\": \"2026-10-23T04:23:05Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation from an underived functor to a derived composite extends uniquely along the right derived comparison unit by its left Kan extension universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedDesc\", \"CategoryTheory.Functor.rightDerived_ext\", \"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.rightDerivedNatTrans_fac\", \"CategoryTheory.Functor.rightDerived_fac\", \"CategoryTheory.Functor.leftDerivedLift\", \"CategoryTheory.Functor.rightDerivedNatTrans\", \"CategoryTheory.Functor.rightDerived_fac_app\"], \"digest\": \"756651cfedea1c85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general right-derived constructors supply a tool already represented by lem-weil-pbc-right-derived-plus-injective, but do not alone give the site comparison, its replacement formula, and all independence clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedDesc\"",
+   "results": "{\"t\": \"2026-10-23T04:23:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedDesc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedDesc\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\"], \"digest\": \"94c6d733a80ee046\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general right-derived constructors supply a tool already represented by lem-weil-pbc-right-derived-plus-injective, but do not alone give the site comparison, its replacement formula, and all independence clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback on site sections is independent of injective resolutions and satisfies alpha naturality for any replacement of the inverse image complex",
+   "results": "{\"t\": \"2026-10-23T04:24:54Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pullback on site sections is independent of injective resolutions and satisfies alpha naturality for any replacement of the inverse image complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"CategoryTheory.Meq.pullback_apply\", \"CategoryTheory.GrothendieckTopology.diagramPullback_app\", \"CategoryTheory.GrothendieckTopology.diagramPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.Meq.pullback\", \"CategoryTheory.Meq.pullback_refine\"], \"digest\": \"b422b8e6f00fd560\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general right-derived constructors supply a tool already represented by lem-weil-pbc-right-derived-plus-injective, but do not alone give the site comparison, its replacement formula, and all independence clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-site-object-derived-sections-pullback",
+  "date": "2026-10-22",
+  "group": "Q121"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization via Orgogozo Lemma 3.1.1: the ph/etale comparison used in the first descent isomorphism; canonical-map identification and naturality for the same 0DD8 comparison (returned proof step 4)",
+   "via": [
+    "lem-trf-site-object-derived-sections-pullback",
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-site-section-pullback-normalization",
+  "worker": "stage1",
+  "summary": "Prove normalization by the existing universal right-derived-functor theorem, then derive the replacement equation directly from naturality of the target unit. Write the transport and change-of-derived-pair equations explicitly. No new nodes: all substantive tools already exist; no preservation of injectives or invertibility of evaluated replacement is used. Statement unchanged.",
+  "blueprint": "Canonical-map and naturality subargument of the 0DD8 comparison in the normal-cone specialization route of lem-trf-local-term-locality; current blueprint main-20261015 proof, (1) and (2), normal-cone argument, via the existing ph/etale comparison dependency chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "Generic identity-on-sections description of inverse image for a continuous cocontinuous functor; the local-term unit has no site-adjunction theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-34d7be9a3",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-34d7be9a3 (reviewer sub-agent of L); spot-checked: No new nodes and the statement is unchanged. I read all five steps against the cited statements. Step 1: the site-sheaves node gives abelian with enough injectives; sites-and-cohomology (2) gives Γ additive; the continuous-cocontinuous topos adjunction gives g^{-1}=precomposition, so e is the additive identity on sections; geometric-inverse-image-exact, with the sites swapped, makes L exact, so termwise L preserves quasi-isomorphisms and bounded-below complexes. Step 2: clause (1) of lem-weil-pbc-right-derived-plus-injective with v=Γ(u(U),−) and G=RΓ(U,−)∘L; β_K=α^U_{LK}Q(e_K^{-1}) is typed correctly and natural on K^+, so τ exists and is unique. Step 3: naturality of α^U at r, with Qr inverted by the localization, gives the replacement formula with the correct orientation. Clause (2) is applied only to α^{u(U)}_I and α^U_J; LI is never claimed injective and QΓ(U,r) is never inverted. Step 4: dplus-injective-representative (1) supplies (I,ρ), and the transport formula is correct. Step 5: clause (3) gives s and b, and uniqueness in (1) gives tτ=τ's. Source: Stacks sites-cohomology.tex l.9511 (0DD8), bounded-below injective route; the item is its canonical-map normalization, which the parent's step 4 uses exactly. Edge cases checked: u=id, r=id, zero complexes. No duplicate: the sibling lem-trf-site-injective-sections-model only gives the a/b isomorphisms. No cycle and no SGA. The declared tool use of the continuous-cocontinuous adjunction is accepted, since seven trace-formula nodes already use it and the unit has no equivalent node."
+ }
+}

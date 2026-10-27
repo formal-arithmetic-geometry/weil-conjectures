@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-stack-fibre-product-separated-comparison",
+ "kind": "statement",
+ "title": "Separated comparison between fibre products of DM stacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Stacks in groupoids, Deligne--Mumford stacks, representability by algebraic spaces and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. For a morphism representable by algebraic spaces, separated means that on every scheme base change its algebraic-space diagonal is a closed immersion [def-weil-closed-immersion], tested on scheme charts. Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be Deligne--Mumford stacks over $S$, and let $a:\\mathcal X\\to\\mathcal Z$, $b:\\mathcal Y\\to\\mathcal Z$ be morphisms. Put $P=\\mathcal X\\times_{\\mathcal Z}\\mathcal Y$ and $R=\\mathcal X\\times_S\\mathcal Y$, and let $j:P\\to R$ forget the specified isomorphism in $\\mathcal Z$. The square with top $j$, bottom $\\Delta_{\\mathcal Z/S}:\\mathcal Z\\to\\mathcal Z\\times_S\\mathcal Z$, right $(a,b):R\\to\\mathcal Z\\times_S\\mathcal Z$, and left the common image in $\\mathcal Z$, is $2$-cartesian. In particular $j$ is representable by algebraic spaces. If $\\Delta_{\\mathcal Z/S}$ is separated, then $j$ is separated: for every scheme $T\\to R$, the algebraic space $P\\times_R T\\to T$ has closed-immersion diagonal. The same assertions hold over $\\operatorname{Spec}\\mathbf Z$ for the underlying stacks.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050H (lemma-fibre-product-after-map), part (3) and its displayed 2-cartesian square; restricted to DM stacks, with base S or Spec Z."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-algebraic-stack-change-base-to-integers"
+ ],
+ "proof": [
+  {
+   "text": "Apply part (2) of [lem-sfb-groupoid-diagonal-two-pullback-identities] with $u=a$, $v=b$, $h:\\mathcal Z\\to S$, and $\\mathcal D=h_S$, the discrete groupoid represented by the base. It gives exactly the asserted square, with left map $a\\circ\\operatorname{pr}_{\\mathcal X}$; the structural isomorphism $a(x)\\simeq b(y)$ gives its commutativity 2-isomorphism. Thus $j$ is a 2-base change of $\\Delta_{\\mathcal Z/S}$.",
+   "uses": [
+    "lem-sfb-groupoid-diagonal-two-pullback-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050H (lemma-fibre-product-after-map), displayed 2-cartesian square and proof of (1), (3)."
+   }
+  },
+  {
+   "text": "The DM definition in [def-sfb-stable-pointed-moduli-groupoids] makes $\\Delta_{\\mathcal Z/S}$ representable by algebraic spaces. By stability of representability under arbitrary 2-base change [lem-sfb-fibred-groupoid-representable-smooth-calculus], the square of step 1 makes $j$ representable. More explicitly, for any scheme $T\\to R$ there is a canonical equivalence over $T$, $$E_T:=P\\times_R T\\simeq\\mathcal Z\\times_{\\mathcal Z\\times_S\\mathcal Z}T.$$ Both sides specify a lift to $\\mathcal Z$ of the same pair of objects; on a test scheme they identify the same isomorphism $a(x)\\simeq b(y)$. The right-hand side is an algebraic space by representability of the diagonal.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050H (lemma-fibre-product-after-map), displayed 2-cartesian square and proof of (1), (3)."
+   }
+  },
+  {
+   "text": "Assume $\\Delta_{\\mathcal Z/S}$ is separated. For the arbitrary scheme map $T\\to R$, compose with $(a,b)$ to obtain $T\\to\\mathcal Z\\times_S\\mathcal Z$. By the separatedness hypothesis in its stated scheme-test meaning, the algebraic space $\\mathcal Z\\times_{\\mathcal Z\\times_S\\mathcal Z}T\\to T$ has closed-immersion diagonal. Under the equivalence over $T$ of step 2, its diagonal is precisely $\\Delta_{E_T/T}$. This proves the required closed-immersion assertion for every $T$, hence separatedness of $j$. No separatedness of $S$, or properness of $\\mathcal Z$, was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050H (lemma-fibre-product-after-map), displayed 2-cartesian square and proof of (1), (3)."
+   }
+  },
+  {
+   "text": "For the absolute assertion, the etale atlas in the DM definition [def-sfb-stable-pointed-moduli-groupoids] is smooth by [lem-sfb-fibred-groupoid-representable-smooth-calculus], so these satisfy the algebraic-stack definition [def-sfb-algebraic-moduli-stack]: etale stack descent and representable diagonal are already part of the DM hypothesis, and the same atlas is now smooth and surjective. Part (1) of [lem-sfb-algebraic-stack-change-base-to-integers] views them as algebraic stacks over $\\operatorname{Spec}\\mathbf Z$, in particular with diagonals representable by algebraic spaces. Apply the same groupoid identity [lem-sfb-groupoid-diagonal-two-pullback-identities], now to $\\mathcal Z\\to\\operatorname{Spec}\\mathbf Z$. The scheme-test arguments of steps 2 and 3 use only diagonal representability, so they apply unchanged with $R=\\mathcal X\\times_{\\operatorname{Spec}\\mathbf Z}\\mathcal Y$ and the absolute target diagonal. The separatedness assumption here is on that absolute diagonal; it is not inferred from the relative one.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-algebraic-stack-change-base-to-integers",
+    "lem-sfb-groupoid-diagonal-two-pullback-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04X5 (lemma-category-of-spaces-over-smaller-base-scheme), Tag 04X6 (definition-viewed-as); then stacks-morphisms.tex Tag 050H with base Spec Z."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-groupoid-diagonal-two-pullback-identities",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-algebraic-stack-change-base-to-integers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050H (lemma-fibre-product-after-map), displayed 2-cartesian square and proof of (1), (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If the diagonal of an algebraic stack Z over T is separated then X fiber product over Z Y to X fiber product over T Y is representable and separated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If a morphism $ g: Y \\to S $ is separated, then the first projection morphism from the pullback of $ f: X \\to S $ and $ g $ is also separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $f$ is a separated morphism, then the second projection morphism from the pullback $X \\times_S Y$ to $Y$ is also a separated mor\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.lift (CategoryTheory.CategoryStruct.id X) f ⋯)\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison morphism between two fiber products is a base change of the diagonal of the intermediate stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.pullback_map_diagonal_isPullback\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : C} [CategoryTheory.Limits.HasPullbacks C]\\n  {S T : C} (f : X ⟶ T) (g : Y ⟶ T) (i : T ⟶ S) [inst_2 : CategoryTheory.Limits.HasPullback i i]\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_4 :\\n    CategoryTheory.Limits.Ha\", \"doc\": \"Given morphisms $f: W \\to S$ and $g: X \\to S$ with pullback $P = W \\times_S X$, and compatible morphisms $i_1: W \\to Y$, $i_2: X \\to Z$, $i_3: S \\to T$ satisfying the necessary commutativity conditions, the\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIso\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X Y : C} →\\n      [inst_1 : CategoryTheory.Limits.HasPullbacks C] →\\n        {U V₁ V₂ : C} →\\n          (f : X ⟶ Y) →\\n            (i : U ⟶ Y) →\\n              (i₁ : V₁ ⟶ CategoryTheory.Limits.pullback f i) →\\n                (i₂ : V₂\", \"doc\": \"In a category with pullbacks, given morphisms $ f : X \\to Y $, $ i : U \\to Y $, and morphisms $ i_1 : V_1 \\to X \\times_Y U $, $ i_2 : V_2 \\to X \\times_Y U $, there exists an isomorphism between the pullback\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j k : 𝒰.I₀) →\\n            CategoryTheory.Limits.pullback (AlgebraicGeometr\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, this constructs a morphism from the pullback of $\\\\text{fV}(\\\\mathc\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIso.hom\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X Y : C} →\\n      [inst_1 : CategoryTheory.Limits.HasPullbacks C] →\\n        {U V₁ V₂ : C} →\\n          (f : X ⟶ Y) →\\n            (i : U ⟶ Y) →\\n              (i₁ : V₁ ⟶ CategoryTheory.Limits.pullback f i) →\\n                (i₂ : V₂\", \"doc\": \"The morphism constructed by lifting the composition of the second projection with the first projection in the pullback diagram, ensuring commutativity via the universal property of pullbacks for the d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j : 𝒰.I₀) → AlgebraicGeometry.Scheme.Pullback.v 𝒰 f g i j ⟶ AlgebraicGeome\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs a canonical isomorphism between the pullback objects\"}\n  {\"name\": \"CategoryTheory.Limits.diagonal_pullback_fst\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasPullbacks C]\\n  {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z),\\n  CategoryTheory.Limits.pullback.diagonal (CategoryTheory.Limits.pullback.fst f g) =\\n    CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pul\", \"doc\": \"For morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$, the diagonal morphism of the first projection $\\\\text{pullback.fst}(f,g)$ is equal to the composition of the pullback symmetry i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (𝒱 :\\n    (i : (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰).I₀) →\\n      ((CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰).X i).OpenCover)\\n  (I : (AlgebraicGeometry.Scheme.Pullback.diagonalCover f 𝒰 𝒱).I₀),\\n  (Alg\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f: X \\to Y$, an open cover $\\\\mathcal{U}$ of $Y$, and a compatible family of open covers $\\\\mathcal{V}$ of the pullback components, the morphism in the diagonal cov\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_fst_assoc\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : C} [inst_1 : CategoryTheory.Limits.HasPullbacks C]\\n  {S T : C} (f : X ⟶ T) (g : Y ⟶ T) (i : T ⟶ S) [inst_2 : CategoryTheory.Limits.HasPullback i i]\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_4 :\\n    CategoryTheory.\", \"doc\": \"In a category with pullbacks, for a morphism $ i : T \\to S $, the pullback of the diagonal morphism $ \\\\text{diagonal}(i) $ and the identity morphism on $ S $ is isomorphic to the original pullback of m\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic stacks fiber product comparison separated diagonal base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated g] : IsClosedImmersion (pullback.lift (𝟙 _) f (Category.id_comp (f ≫ g)))\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"[IsStableUnderBaseChange P] [P.RespectsIso] : P.diagonal.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $P$ in a category with pullbacks is stable under base change and respects isomorphisms, then the diagonal morphism property derived from $P$ is also stable under base change. Sp\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "grep",
+   "query": "stack.*pullback|stack.*fibre|stack.*fiber|fibreProductAfterMap",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"line\": \"38\", \"text\": \"* [Stacks: Fibred Categories](https://stacks.math.columbia.edu/tag/02XJ)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/PullbackCone.lean\", \"line\": \"68\", \"text\": \"* [Stacks: Fibre products](https://stacks.math.columbia.edu/tag/001U)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean\", \"line\": \"66\", \"text\": \"* [Stacks: Fibre products](https://stacks.math.columbia.edu/tag/001U)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"line\": \"19\", \"text\": \"* [Stacks: Fibre products](https://stacks.math.columbia.edu/tag/001U)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"193\", \"text\": \"@[stacks 00TF \\\"We require the whole fiber to be smooth instead\\\"]\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|fibreProductAfterMap|pullback_map_diagonal_isPullback",
+   "results": "{\"t\": \"2026-10-23T13:54:17Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|DeligneMumford|fibreProductAfterMap|pullback_map_diagonal_isPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\"], \"digest\": \"132eba9fb754e515\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits give ordinary categorical pullbacks, scheme separatedness, or scheme sheaf isomorphisms; they do not state the 2-fibre-product comparison for stacks. Read Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean:309 and Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:131; neither applies to stacks as a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison morphism of two 2-fibre products of algebraic stacks is representable and separated when the target diagonal is separated",
+   "results": "{\"t\": \"2026-10-23T13:54:18Z\", \"tool\": \"leansearch\", \"query\": \"The comparison morphism of two 2-fibre products of algebraic stacks is representable and separated when the target diagonal is separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.prodComparison\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"CategoryTheory.CartesianMonoidalCategory.prodComparison\", \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\"], \"digest\": \"d585c6f55c44e6c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits give ordinary categorical pullbacks, scheme separatedness, or scheme sheaf isomorphisms; they do not state the 2-fibre-product comparison for stacks. Read Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean:309 and Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:131; neither applies to stacks as a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"diagonal\"",
+   "results": "{\"t\": \"2026-10-23T13:54:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"diagonal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits give ordinary categorical pullbacks, scheme separatedness, or scheme sheaf isomorphisms; they do not state the 2-fibre-product comparison for stacks. Read Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean:309 and Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:131; neither applies to stacks as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For Deligne Mumford stacks the comparison between fibre products over Z and over S is a representable separated base change of the diagonal of Z",
+   "results": "{\"t\": \"2026-10-23T13:54:19Z\", \"tool\": \"leanfinder\", \"query\": \"For Deligne Mumford stacks the comparison between fibre products over Z and over S is a representable separated base change of the diagonal of Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"AlgebraicGeometry.IsSeparated.instSndScheme\", \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\"], \"digest\": \"886546a209d22347\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits give ordinary categorical pullbacks, scheme separatedness, or scheme sheaf isomorphisms; they do not state the 2-fibre-product comparison for stacks. Read Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean:309 and Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:131; neither applies to stacks as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stacks isomorphism sheaf between two objects represents the pullback of the diagonal",
+   "results": "{\"t\": \"2026-10-23T13:55:09Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic stacks isomorphism sheaf between two objects represents the pullback of the diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso_hom\", \"AlgebraicGeometry.Scheme.Hom.isIso_toPshHom\", \"AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso\", \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\"], \"digest\": \"ae1cf3b5bdf5c178\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits give ordinary categorical pullbacks, scheme separatedness, or scheme sheaf isomorphisms; they do not state the 2-fibre-product comparison for stacks. Read Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean:309 and Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:131; neither applies to stacks as a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-separated-source-separated-inertia-target",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Separated-source cancellation for a finite-inertia target. New supporting input: Tag 050H (lemma-fibre-product-after-map), part (3) and its displayed 2-cartesian square; restricted to DM stacks, with base S or Spec Z.",
+   "via": [
+    "lem-sfb-stack-separated-source-separated-inertia-target",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-fibre-product-separated-comparison",
+  "worker": "stage1",
+  "summary": "Retained the existing four-step argument and recorded searches after checking the current source and cited statements. The general groupoid identity gives the square, diagonal representability gives the scheme tests, and separatedness is then the stated scheme-test definition. For the absolute assertion explicitly cited the algebraic-stack definition before applying change of base. Repaired the inherited null blueprint ancestor. No new nodes, statement change, or Lean attachment.",
+  "blueprint": "Supports paragraph (3), open-direct-image preservation, of det-thm-sf-ctf-stability-direct-images through the inherited alteration/moduli prerequisites named in blueprint.from.place. Read the latest blueprint direct-images proof and unit; their route is unchanged. The imported created.item chain terminates at a Lean module rather than a DAG id, so blueprint_refs.py ancestor returns None. Repaired that inherited null reference to the genuine blueprint node already named in from.place and used by the cited groupoid-identity and moduli-definition nodes. No same_as match was found."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-1e165a2c1",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-1e165a2c1 (reviewer sub-agent of L); spot-checked: This is a one-level split with 0 new nodes, and the statement and stmt_deps are unchanged. Stacks 050H (stacks-morphisms.tex l.550-592) clause (3) plus representability in (1) is exactly the item with T=S or Spec Z, and the delivered proof follows the Stacks proof. Step 1: lem-sfb-groupoid-diagonal-two-pullback-identities (2) with D=h_S (terminal) gives the 2-cartesian square, with i=j forgetting the isomorphism; that node has no extra hypotheses. Step 2: the DM definition gives a representable diagonal, and the calculus node gives arbitrary 2-base-change stability; P x_R T is equivalent to Z x_{ZxZ} T over T by pasting. Step 3: elementary, because separatedness is defined by scheme tests and the equivalence over T carries diagonal to diagonal. Step 4: DM implies algebraic stack (etale implies smooth, from the calculus node). change-base-to-integers (1) then gives representable absolute diagonals, P is unchanged, and the hypothesis is on the absolute diagonal. Edge cases checked: schemes (magic square), Spec k -> BG, where j = G_k -> Spec k is separated, not mono, and keeps automorphisms; empty stacks; non-separated S. Duplicate search for 050H found only separation-permanence over a field, proper-diagonal composition and algebraic fibre products, none a duplicate. Batch-5 flags: all four cited nodes are general definitions or stack foundations; the trf closure is only def-trf-algebraic-space and the projective-bundle convention, so they are outside the trace-formula and Poincaré-duality assumptions. The from.node repair to the existing det-thm-sf-ctf-stability-direct-images is metadata only. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackFibreProductSeparatedComparison",
+  "declaration": "CategoryTheory.stack_fibreProduct_separated_comparison",
+  "declarations": [
+   "CategoryTheory.moduliFibreProductComparison",
+   "CategoryTheory.moduliFibreProductPair",
+   "CategoryTheory.moduliFibreProductDiagonalComparison",
+   "CategoryTheory.stack_fibreProduct_separated_comparison",
+   "CategoryTheory.stack_fibreProduct_separated_comparison_overIntegers"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackFibreProductSeparatedComparison.lean",
+  "statement": "theorem stack_fibreProduct_separated_comparison {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (H : BasedCategory.{v₃, w₃} (Over S)) (a : BasedFunctor F H) (b : BasedFunctor G H) (hF : IsDeligneMumfordModuliStack F) (hG : IsDeligneMumfordModuliStack G) (hH : IsDeligneMumfordModuliStack H) : (moduliFibreProductDiagonalComparison a b (moduliBaseStructure H)).toFunctor.IsEquivalence ∧ IsRepresentableByAlgebraicSpaces (moduliFibreProductComparison a b (moduliBaseStructure H)) ∧ (ModuliSchemeTest @IsClosedImmersion (moduliRelativeDiagonal (moduliRelativeDiagonal (moduliBaseStructure H))) → ModuliSchemeTest @IsClosedImmersion (moduliRelativeDiagonal (moduliFibreProductComparison a b (moduliBaseStructure H))))",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 16386997a7be: reuse all existing change-of-base declarations from Sheaf.AlgebraicGeometry.AlgebraicStackChangeBaseToIntegers, with no moved or duplicate definitions. The new existing:true definition-node record def-sfb-algebraic-stack-change-base-to-integers owns their notion in stmt_deps; the algebraicity theorem remains only in the original proof_deps. Relative/absolute theorem signatures and the actual diagonal-comparison helpers are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a050696a0",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery after 1638 extraction was refused at landing for duplicate names. New def node def-sfb-algebraic-stack-change-base-to-integers is existing:true on Sheaf.AlgebraicGeometry.AlgebraicStackChangeBaseToIntegers; all 7 decls present on side-live (l.40-118), statement verbatim with moduliChangeBase l.40-41, branch sheaf-dag, NL matches each construction, no other def-node owner. Item module identical to the 1638 packet (maths PASS) except the public import of the declaring module; item node differs from live only in lean+stmt_deps (adds def-sfb-dm-stack-morphism-properties, def-sfb-relative-moduli-inertia and the new def node; no theorem node in stmt_deps); dependency nodes unchanged; lean.statement verbatim. Maths re-confirmed: canonical (id,φ) 2-cartesian equivalence, representability, scheme-test separatedness, independent absolute-diagonal hypothesis over Spec(ULift ℤ); no extra hypotheses or universe restriction. Helpers not hollow, theorems sorry, docstrings OK, report sections present. No file changed, so no compile. Advisory: specULiftZIsTerminal is reached via def-weil-affine-spectrum through the def node."
+ }
+}

@@ -6,7 +6,6 @@ public import Mathlib.RingTheory.Ideal.Colon
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.RingTheory.AnnihilatorEqIffMinimalPrimeOfFG
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 @[expose] public section
 
@@ -43,6 +42,9 @@ theorem associated_iff_weaklyAssociated_of_fg_stalk
         ((⊥ : Submodule (X.presheaf.stalk x)
           ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)).colon
             {s}).minimalPrimes) := by
-  sorry
+  have _ := hF
+  exact Ideal.annihilator_eq_iff_mem_minimalPrimes_of_fg
+    (M := (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)
+    (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) inferInstance hfg
 
 end AlgebraicGeometry

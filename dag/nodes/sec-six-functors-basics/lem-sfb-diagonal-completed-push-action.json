@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-diagonal-completed-push-action",
+ "kind": "statement",
+ "title": "The section action through completed ordinary pushforward",
+ "statement": "For a prime l, a scheme morphism f : X to S, a completed realization eS of [def-sfb-diagonal-coefficient-reference], a completed module M on X and a pro-etale object U over S, regard the underlying comparison eS.underlying at the completed pushforward of M as a map to ordinary abelian direct image. This map carries the internal section action of the normalized image of a completed coefficient c to the action of completedPushScalar f U c of [lem-sfb-diagonal-completed-scalar-push] on the resulting section of M over the pullback of U. The comparison is heterogeneously equal to the prescribed underlying comparison map.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-sfb-diagonal-completed-scalar-push"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient identification; underlying pushforward part of lem-diagonal-completed-ordinary-square"
+ },
+ "proof": [
+  {
+   "text": "The underlying abelian sheaf of completed ringed direct image is ordinary abelian direct image. Regard eS.underlying as an isomorphism with that target; its homogeneous components give exactly the original map, so their heterogeneous equality is reflexivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the single-site realization action identity to the pushed module and the image of the given section under eS.underlying. Apply eS.underlying.hom and cancel its inverse. The completed pushforward action is restriction of scalars: its coefficient map applied to c multiplies the original section, and its action on one is completedPushScalar. Associativity and multiplication by one give the claimed action.",
+   "uses": [
+    "lem-sfb-diagonal-completed-section-action"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-completed-section-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient identification; underlying pushforward part of lem-diagonal-completed-ordinary-square",
+  "note": "Proved supporting module isolating the expensive definitional identification of underlying completed direct image; no new hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized exact equivalence of completed coefficient module sheaves identifies the module action on sections",
+   "results": "8 hits: AdicCompletion.ofLinearEquiv.congr_simp, AdicCompletion.ofLinearEquiv_apply, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_apply_coe, PresheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv, AdicCompletion.ofLinearEquiv",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing coefficient and module-object APIs. Local source searches also inspected the actual signatures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit-normalized comparison of completed coefficient rings commutes with the direct image coefficient map",
+   "results": "8 hits: LaurentSeries.comparePkg_eq_extension, AbstractCompletion.compare_coe, IsAdicComplete.ofAlgEquiv_comp_liftRingHom, IsAdicComplete.of_liftRingHom, LaurentSeries.coe_X_compare, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, UniformSpace.Completion.mapRingEquiv_apply, LaurentSeries.ratfuncAdicComplRingEquiv_apply",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing coefficient and module-object APIs. Local source searches also inspected the actual signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "sfb_integral_comparison_pullback|completedCoefficientOrdinarySquare_exists|completedRealizationScalarIso",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing coefficient and module-object APIs. Local source searches also inspected the actual signatures."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientOrdinarySquare",
+  "date": "2026-10-27",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), initial coefficient identification",
+   "via": [
+    "lem-diagonal-completed-ordinary-square",
+    "lem-diagonal-completed-frame"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientPushAction",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientPushAction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedPushInputIso_section_action",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedPushInputIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedPushInputIso_hom_heq",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedPushInputIso_section_action",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedPushInputSection"
+  ],
+  "statement": "theorem completedPushInputIso_section_action {l : ℕ} [Fact l.Prime]\n    {X S : Scheme.{u}} (f : X ⟶ S) (eS : CompletedRealization l S)\n    (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)\n    (c : (Scheme.purTwistRing S (Scheme.purTwistZlCompletion S l)).obj.obj U)\n    (x : (eS.F.obj ((diagonalTracePush l f).obj M)).X.obj.obj U) :\n    completedPushInputSection f eS M U\n        (coefficientSectionAction (eS.F.obj ((diagonalTracePush l f).obj M)) U\n          (completedRealizationScalarSection eS U c) x) =\n      completedPushScalar f U c • completedPushInputSection f eS M U x",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T222802-L-695899",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T222802-L-695899",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-abelian-h2-reduced-coproduct-injective",
+ "kind": "statement",
+ "title": "Injectivity of the reduced coproduct in degree-two coherent cohomology",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] and let $A\\to S$ be a proper smooth commutative group algebraic space of finite presentation [def-trf-algebraic-space] whose geometric fibres are smooth proper geometrically connected group schemes. Proper means separated, of finite type and universally closed; smoothness and finite presentation are tested on etale scheme charts. A line module is an $\\mathcal O$-module on the small etale site locally isomorphic to $\\mathcal O$ [def-sc-invertible-module]. Let $T=\\operatorname{Spec}R$ be any affine $S$-scheme and put $B=A\\times_ST$, $C=B\\times_TB$, with structure maps $f:B\\to T$, $q:C\\to T$, addition $m:C\\to B$ and projections $p_1,p_2:C\\to B$. Let $N$ be any $R$-module, with no finiteness or flatness assumption. Define $F=f^*\\widetilde N=\\mathcal O_B\\otimes_RN$ and $G=q^*\\widetilde N=\\mathcal O_C\\otimes_RN$ on the small etale sites. Cohomology means right derived global sections of the underlying additive sheaf. Using the canonical identifications $m^*F=p_1^*F=p_2^*F=G$, the additive map\n$$D=m^*-p_1^*-p_2^*:H^2(B,F)\\longrightarrow H^2(C,G)$$\nis injective. This assertion includes nonreduced and non-Noetherian $T$, all residue characteristics, and the zero module $N$.",
+ "source": {
+  "document": "literature/mumford-fogarty-kirwan-geometric-invariant-theory.pdf",
+  "place": "Chapter 6, coherent cohomology and the group-law obstruction calculation used for Proposition 6.7 (WANTED). This is an agent-stated cohomological prerequisite, not a quotation of an unread proposition. Field Hopf-algebra construction: Milne AV I, before Lemma 12.2, printed p.55 (there for etale rather than coherent cohomology)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-sfb-abelian-affine-reduced-coproduct",
+  "def-sfb-abelian-space-poincare-data"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness implies flatness on every scheme chart by [lem-pc-smooth-flat], hence $A\\to S$ is flat under the chart convention in the statement. The base-change clauses of [lem-sfb-space-flat-proper-fp-locality] make $f:B\\to T$ flat, proper and of finite presentation, in particular quasi-compact and quasi-separated. Apply [lem-sfb-abelian-coherent-exterior-base-change] to the given $A/S$ and this arbitrary $T$. Put $V=H^1(B,\\mathcal O_B)$ and $H^i=H^i(B,\\mathcal O_B)$. It gives $H^0=R$, $V$ finite projective, and cup-product identifications $H^i=\\bigwedge^i_RV$; all these cohomology modules are finite projective and vanish in high degrees. Thus the two factors $B,B$ satisfy the hypotheses of [lem-sfb-projective-cohomology-coefficient-kunneth].",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-projective-cohomology-coefficient-kunneth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 03MO and 03XR in spaces-morphisms.tex via the cited locality node; 01VF in morphisms.tex; relative exterior-cohomology prerequisite as stated in the cited new node"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-projective-cohomology-coefficient-kunneth] with $X=Y=B$, first with coefficient $R$. It identifies $H^1(C,\\mathcal O_C)$ with $V\\oplus V$ via $(u,v)\\mapsto p_1^*u+p_2^*v$, and $H^2(C,\\mathcal O_C)$ with $H^2\\oplus(V\\otimes_RV)\\oplus H^2$. Let $i_1(b)=(b,0)$ and $i_2(b)=(0,b)$. Since $T$ is affine, [lem-sc-etale-affine-qcoherent] gives $H^1(T,\\mathcal O_T)=0$. Consequently pullback by $i_1,i_2$ is the first, respectively second coordinate on $V\\oplus V$: the cross terms factor through $T$, while the matching composites are the identity. The group identities $mi_1=mi_2=\\mathrm{id}_B$, together with the cited functoriality, therefore imply $m^*v=p_1^*v+p_2^*v$ for every $v\\in V$.",
+   "uses": [
+    "lem-sfb-projective-cohomology-coefficient-kunneth",
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I, calculation (3) immediately before Lemma 12.2, printed p.55, adapted from etale to coherent cohomology using the stated ring-base Kunneth input"
+   }
+  },
+  {
+   "text": "Under the degree-two external cup identification of step 2, the projection pullbacks of $u\\smile v$ occupy only the first and last summands. Multiplicativity of pullback and the signed multiplication in [lem-sfb-projective-cohomology-coefficient-kunneth] give\n$$m^*(u\\smile v)=(p_1^*u+p_2^*u)(p_1^*v+p_2^*v).$$\nThe two cross terms are $p_1^*u\\smile p_2^*v-p_1^*v\\smile p_2^*u$. Thus the mixed component of $(m^*-p_1^*-p_2^*)(u\\smile v)$ is $u\\otimes v-v\\otimes u$. By [lem-sfb-abelian-coherent-exterior-base-change], $u\\smile v$ corresponds to $u\\wedge v$. The coefficient comparison $\\alpha_{B,N}^2$ and $\\kappa_N^2$ of the Kunneth node commute with each of $m,p_1,p_2$, and with addition and subtraction. Hence the mixed component of the map in the item is exactly\n$$\\delta_N:(\\bigwedge^2_RV)\\otimes_RN\\longrightarrow(V\\otimes_RV)\\otimes_RN,\\qquad(u\\wedge v)\\otimes n\\longmapsto(u\\otimes v-v\\otimes u)\\otimes n.$$\nThe same $N$ occurs once throughout; no tensor product $N\\otimes_RN$ has been substituted.",
+   "uses": [
+    "lem-sfb-projective-cohomology-coefficient-kunneth",
+    "lem-sfb-abelian-coherent-exterior-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I, calculation (3) before Lemma 12.2, printed p.55; signed expansion and arbitrary-module coefficient comparison supplied here"
+   }
+  },
+  {
+   "text": "It remains to check that the displayed $\\delta_N$ is injective. Localize on a finite principal-open cover of $\\operatorname{Spec}R$ where the finite locally free module $V$ has an ordered basis $e_1,\\ldots,e_g$; the coefficient/localization comparisons of [lem-sfb-projective-cohomology-coefficient-kunneth] justify using these same formulas after localization. In exterior degree two every element is uniquely $\\sum_{i<j}(e_i\\wedge e_j)\\otimes n_{ij}$: the alternating relations remove repeated indices and reorder distinct ones, and the alternating coordinate forms taking $(e_i,e_j)$ to $1$ prove independence. Its image has coefficient $n_{ij}$ at $e_i\\otimes e_j$ for $i<j$. Thus a zero image forces every $n_{ij}=0$ over each open, even when $2=0$ and even when $N$ is not flat. Vanishing on the finite cover implies global vanishing: if $z$ vanishes after inverting each covering element $s_i$, then some $s_i^{k_i}$ kills $z$ for each $i$; these powers generate the unit ideal, so $z=0$. If the original $D(z)$ is zero, its mixed component is zero, and the isomorphism $\\alpha_{B,N}^2$ and this coordinate test force $z=0$. The empty basis-pair set ($g<2$), the zero module, and the zero ring are included.",
+   "uses": [
+    "lem-sfb-projective-cohomology-coefficient-kunneth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM, section-tensor-algebra: finite-free exterior basis; explicit alternating-coordinate and localization argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sfb-abelian-coherent-exterior-base-change",
+  "lem-sfb-projective-cohomology-coefficient-kunneth",
+  "lem-sfb-space-flat-proper-fp-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I, calculation (3) before Lemma 12.2, printed p.55, adapted to coherent cohomology over an affine ring using the two explicit prerequisites; the coefficient and antisymmetric-coordinate argument is supplied by Q06."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an abelian scheme over an affine base the reduced coproduct on degree two coherent cohomology with coefficients pulled back from the base is injective",
+   "results": "[leanfinder] OK 8 hit(s); hits: Algebra.Extension.h1Cotangentι_injective, AlgebraicGeometry.specTargetImageFactorization_app_injective, Algebra.SubmersivePresentation.cotangentComplexAux_injective, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.Cover.fromGlued_injective, AlgebraicGeometry.pointsPi_injective, Algebra.SubmersivePresentation.cotangentComplex_injective, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExteriorAlgebra\", \"TensorProduct\"",
+   "results": "[loogle] OK 0 hit(s); hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianScheme|AbelianVariety|cohomology.*[Cc]oproduct|primitive.*cohomology",
+   "results": "[grep] OK 0 hit(s); hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The primitive part of second coherent cohomology of an abelian scheme with arbitrary base module coefficients is zero",
+   "results": "[leansearch] OK 8 hit(s); hits: groupCohomology.H2Iso, groupCohomology.shortComplexH2, groupCohomology.H2π_eq_zero_iff, Polynomial.eval₂_primPart_eq_zero, groupCohomology.cocycles₂, groupCohomology.H2π, groupCohomology.coboundaries₂_le_cocycles₂, LieModule.Cohomology.twoCochain_alt",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of addition pullback minus the two projection pullbacks on H2 of the structure sheaf of a proper smooth commutative group over an affine scheme",
+   "results": "[leanfinder] OK 8 hit(s); hits: Algebra.Extension.h1Cotangentι_injective, Algebra.SubmersivePresentation.cotangentComplexAux_injective, AlgebraicGeometry.specTargetImageFactorization_app_injective, Algebra.SubmersivePresentation.cotangentComplex_injective, Algebra.Extension.subsingleton_h1Cotangent, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, WeierstrassCurve.Affine.Point.toClass_injective, Algebra.Extension.cotangentComplex_injective_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced coproduct on second coherent cohomology of an abelian scheme with arbitrary module coefficients is injective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.h1Cotangentι_injective\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Injective ⇑Algebra.Extension.h1Cotangentι\", \"doc\": \"The canonical linear map from the first cotangent cohomology module $ H^1 = \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ to the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ in an $ R $-algebra extension is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"The canonical morphism from the glued scheme constructed via colimit from the gluing data of an open cover $\\\\mathcal{U}$ to the original scheme $X$ is injective.\"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] {n : ℕ} [inst_5 : Fact (0 < n)],\\n  Function.Injective ⇑IsDedekindDomain.selmerGroup.fromUnitLift\", \"doc\": \"The group homomorphism from the quotient group $ R^\\times/(R^\\times)^n $ to the Selmer group $ K^\\times/(K^\\times)^n $, defined by lifting units modulo $ n $-th powers in a Dedekind domain $ R $ with frac\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Injective ⇑P.cotangentComplexAux\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra with finite generating set $ \\\\sigma $, the cotangent complex auxiliary map $ \\\\mathrm{cotangentComplexAux} : \\\\mathrm{Cotangent}(P) \\\\to \\\\sigma \\\\to\"}\n  {\"name\": \"groupCohomology.instMonoModuleCatFShortComplexH0\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G),\\n  CategoryTheory.Mono (groupCohomology.shortComplexH0 A).f\", \"doc\": \"In the category of modules over a ring $ k $, the inclusion map from the $ G $-invariant submodule $ V^G $ to $ V $ in the zeroth group cohomology short complex is a monomorphism. This means the inclu\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Function.Injective ⇑P.toExtension.cotangentComplex\", \"doc\": \"The cotangent complex map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ is injective for a submersive presentation of an $R$-algebra $S$.\"}\n  {\"name\": \"groupCohomology.instMonoModuleCatFH1InfRes\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (S : Subgroup G) [inst_2 : S.Normal],\\n  CategoryTheory.Mono (groupCohomology.H1InfRes A S).f\", \"doc\": \"In the inflation-restriction exact sequence in first group cohomology, the inflation map from $ H^1(G/S, A^S) $ to $ H^1(G, A) $ is a monomorphism in the category of modules over the commutative ring \"}\n  {\"name\": \"CochainComplex.cm5b.instInjectiveXIntI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ),\\n  CategoryTheory.Injective ((CochainComplex.cm5b.I K).X n)\", \"doc\": \"For each integer $ n $, the object $ (I K).X(n) $ in the cochain complex $ I K $ constructed via injective replacements is an injective object in the abelian category $ \\\\mathcal{C} $. This follows fro\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"coproduct\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianScheme|AbelianVariety|cohomology.*[Cc]oproduct|primitive.*cohomology",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an abelian scheme addition pullback minus both projections is injective on H2 of the structure sheaf tensor any base module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"groupHomology.instEpiModuleCatH2π\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \": Epi (H2π A)\", \"doc\": \"The projection morphism from degree 2 cycles in the inhomogeneous chain complex to the second group homology $ H_2(G, A) $ is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"(i : 𝒰.I₀) : (pullbackP1Iso 𝒰 f g i).hom ≫ pullback.snd _ _ = pullback.fst _ _ ≫ p2 𝒰 f g\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and an index $i \\\\in \\\\mathcal{U}.I_0$, the composition of the isomorphism $\\\\text{pullbackP1Iso}(\\\\mathcal{U}, f,\"}\n  {\"name\": \"CategoryTheory.Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \": IsLimit (pullbackToBiproductFork f g)\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, the pullback object $P = X \\\\times_Z Y$ equipped with its canonical morphism to the biproduct $X \\\\oplus Y$ satisfies\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.sub_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(φ ψ : M ⟶ N) : (φ - ψ).app U = φ.app U - ψ.app U\", \"doc\": \"For any two sheaf homomorphisms $\\\\phi, \\\\psi : M \\\\to N$ between sheaves of modules over a scheme $X$, and for any open subset $U \\\\subseteq X$, the component of the difference $\\\\phi - \\\\psi$ at $U$ satis\"}\n  {\"name\": \"groupHomology.H2π\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \": ModuleCat.of k (cycles₂ A) ⟶ H2 A\", \"doc\": \"For a commutative ring $k$, group $G$, and $k$-module $A$ with $G$-action, this is the morphism from the degree 2 cycles in the inhomogeneous chain complex to the second group homology module $H_2(G, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.add_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(φ ψ : M ⟶ N) : (φ + ψ).app U = φ.app U + ψ.app U\", \"doc\": \"For any scheme $X$ and sheaves of modules $M,N$ over its structure sheaf, given homomorphisms $\\\\phi,\\\\psi:M\\\\to N$ and an open subset $U\\\\subseteq X$, the component of $\\\\phi+\\\\psi$ at $U$ satisfies $(\\\\phi\"}\n  {\"name\": \"CategoryTheory.Abelian.epi_pullback_of_epi_g\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \"[Epi g] : Epi (pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is an epimorphism, then the first projection morphism from the pullback of $ f : X \\to Z $ and $ g $ to $ X $ is also an epimorphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "No degree two primitive elements in coherent cohomology of a proper smooth connected commutative group scheme over a ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"isZero_groupCohomology_succ_of_subsingleton\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [Subsingleton G] (A : Rep k G) (n : ℕ),\\n  CategoryTheory.Limits.IsZero (groupCohomology A (n + 1))\", \"doc\": \"For any commutative ring $k$, representation $A$ of a trivial group $G$, and natural number $n$, the $(n+1)$-th group cohomology module $H^{n+1}(G, A)$ is a zero object in the category of $k$-modules.\"}\n  {\"name\": \"groupCohomology.coboundaries₁_eq_bot_of_isTrivial\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) [A.IsTrivial], groupCohomology.coboundaries₁ A = ⊥\", \"doc\": \"If $ A $ is a trivial representation of a monoid $ G $ over a commutative ring $ k $, then the first coboundary group $ \\\\text{coboundaries}_1(A) $ is equal to the zero submodule $ \\\\{0\\\\} $.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  (f : Gal(L/K) → Lˣ), groupCohomology.IsMulCocycle₁ f → groupCohomology.IsMulCoboundary₁ f\", \"doc\": \"In the context of Galois cohomology, if $ f : \\\\text{Gal}(L/K) \\\\to L^\\\\times $ is a 1-cocycle (satisfying $ f(gh) = g \\\\cdot f(h) \\\\cdot f(g) $ for all $ g, h \\\\in \\\\text{Gal}(L/K) $), then $ f $ is a 1-cob\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-picard-infinitesimal-lift",
+  "date": "2026-10-23",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology.",
+   "via": [
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-h2-reduced-coproduct-injective",
+  "worker": "stage1",
+  "summary": "Kept the full statement, including arbitrary nonflat N, arbitrary nonreduced/non-Noetherian affine T and characteristic two. Isolated relative exterior coherent cohomology and a generic projective-cohomology external cup/coefficients theorem. Derived degree-one primitiveness from the identity axes, calculated the mixed degree-two component, and proved injectivity by alternating coordinates without division by two. All new-node searches were run through msearch.py and the actual answers read.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the inherited stable-level/Picard-theta/relative-dual/Picard-lifting prerequisite chain in blueprint.from.place. This node is not a key unit node; the split supplies its inherited reduced-coproduct subargument and changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Smooth scheme charts are flat; a generic geometric tool needed to verify the coherent Kunneth hypotheses, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Affine etale quasi-coherent acyclicity makes the identity-axis cross terms zero; the unit has no alternative affine acyclicity statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-smooth-flat",
+  "lem-sc-etale-affine-qcoherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-06986d613",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-06986d613 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, the parent picard-infinitesimal-lift, every cited statement, Milne AV I pp.55-56 (formula (3), Lemma 12.2) and Stacks 0B6C/0FPJ. Item statement unchanged and true. Step 1: smooth implies flat (lem-pc-smooth-flat); flat-proper-fp base change gives the Kunneth hypotheses on B; exterior node gives H^0=R, V finite projective, H^i = wedge^i V. Step 2: degree-one primitivity via i_1=(id,ef), with H^1(T,O)=0 from lem-sc-etale-affine-qcoherent (Milne (3)). Step 3: sign checked; mixed part is u⊗v - v⊗u and carries to delta_N through alpha/kappa naturality. Step 4: coordinate test is correct in char 2 and for non-flat N; principal-cover descent is fine. Small cases checked: g<=1, F_2 with g=2, Z/4 with N=Z/2, N=0, R=0. Both new nodes are true (BBM-type relative exterior result; Tor-independent Kunneth with projective cohomology), are not duplicates (the existing coherent Kunneth and bialgebra nodes are over a field) and do not restate the item or parent. B3 repaired: both new statements used a cup product on small-etale module cohomology of algebraic spaces with no definition node. Added the statement-only unsplit node def-sfb-ringed-site-module-cup-product (Stacks 0B6C relative cup, 0FPJ global cup; Mathlib grep no match; LeanSearch/Loogle recorded unavailable) and cited it in the statements and stmt_deps of both new nodes. Batch 5: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers and lem-sfb-space-flat-proper-fp-locality are general algebraic-space foundations, not part of the trace formula, Poincare duality or their proofs; accepted. Tool uses lem-pc-smooth-flat and lem-sc-etale-affine-qcoherent accepted. No SGA.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianH2ReducedCoproductInjective",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.abelian_h2_reduced_coproduct_injective",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.abelian_h2_reduced_coproduct_injective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianH2ReducedCoproductInjective.lean",
+  "statement": "theorem abelian_h2_reduced_coproduct_injective (S : Scheme.{u}) [IsLocallyNoetherian S] (A : AlgebraicSpace S) (g : CommutativeSpaceGroup A) (hA : Poincare.IsAbelianFamily (groupSpaceProjection A)) (R : Type u) [CommRing R] (t : Spec (.of R) ⟶ S) (N : ModuleCat.{u} R) : Function.Injective (ReducedCoproduct.map A g (Over.mk t) hA R (Iso.refl _) N)",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0062cf024",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Item statement matches the Lean clause by clause: IsLocallyNoetherian S; CommutativeSpaceGroup + Poincare.IsAbelianFamily = proper/smooth/lfp/abelian geometric fibres, not stronger; any affine Spec R over S via Over.mk t + Iso.refl; arbitrary N; F,G = landed affineScalarPullback; Sheaf.functorH of the underlying additive sheaf on the small model; D = m*-p1*-p2* at n=2 with common target; Injective. New def node def-sfb-abelian-affine-reduced-coproduct: cohomology pullback fixed uniquely by extClass boundary compatibility + degree-0 section normalization (∃! true for flat f, chosen via .choose); coefficient comparison fixed on pure sections 1⊗n, natural in N; triangles/maps_flat true and stated in the node; reuses Poincare.product/pair/addition/pullbackUnit, smallModuleTensorPullback, MapIsFlat; no algebraic-space duplicate (existing cohomology-pullback nodes are scheme/top only; no ReducedCoproduct clash); Stacks labels verified. No dependency-record/module edits; modules new; lean.statement verbatim; docstrings with source/blueprint and 4 proof steps; only sorry; one universe u; edge cases R=0, N=0, g<2, char 2, non-flat N covered. Advisory: CommutativeSpaceGroup owner def-sfb-smooth-integral-group-space only reached through the new node's stmt_deps. No compile (no change)."
+ }
+}

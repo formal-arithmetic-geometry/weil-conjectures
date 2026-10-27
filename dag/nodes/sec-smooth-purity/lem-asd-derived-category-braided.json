@@ -1,0 +1,221 @@
+{
+ "id": "lem-asd-derived-category-braided",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof, opening construction of the canonical tensor morphism by transposing the projection formula; abstract derived braiding prerequisite in the import closure, realized by the Koszul homotopy braiding and generic derived-monoidal transport (not a proof of the smooth duality assertion).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The derived category of a braided abelian monoidal category is braided",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian] with a monoidal structure [def-sfb-monoidal-category] whose tensor product is additive in each variable, and with a braiding: a natural isomorphism $\\beta_{X,Y}\\colon X\\otimes Y\\xrightarrow{\\sim}Y\\otimes X$ satisfying the two hexagon identities $\\alpha_{Y,Z,X}\\circ\\beta_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(\\mathrm{id}_Y\\otimes\\beta_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(\\beta_{X,Y}\\otimes\\mathrm{id}_Z)$ and $\\alpha^{-1}_{Z,X,Y}\\circ\\beta_{X\\otimes Y,Z}\\circ\\alpha^{-1}_{X,Y,Z}=(\\beta_{X,Z}\\otimes\\mathrm{id}_Y)\\circ\\alpha^{-1}_{X,Z,Y}\\circ(\\mathrm{id}_X\\otimes\\beta_{Y,Z})$. Assume the graded tensor products and their compatibility with reassociation exist so that the direct-sum total tensor makes the category of $\\mathbf Z$-indexed cochain complexes and its homotopy category $K(C)$ monoidal. Let $D(C)$ and $Q_h\\colon K(C)\\to D(C)$ be the derived category and its localization functor [def-weil-abstract-derived-category]. Assume $Q_h$ carries the derived monoidal structure: $D(C)$ has a functor $\\otimes^L\\colon D(C)\\times D(C)\\to D(C)$ with a natural transformation $\\mu_{X,Y}\\colon Q_hX\\otimes^LQ_hY\\to Q_h(X\\otimes Y)$ that is a binary left derived functor of the tensor on $K(C)$, meaning that for every functor $V\\colon D(C)\\times D(C)\\to D(C)$ composition with $\\mu$ gives a bijection $\\operatorname{Nat}(V,\\otimes^L)\\cong\\operatorname{Nat}(V\\circ(Q_h\\times Q_h),Q_h\\circ\\otimes)$; the two parenthesized triple tensors and the right-parenthesized fourfold tensor, with their composite comparison maps built from $\\mu$, have the corresponding three- and four-variable universal properties, and tensoring on either side with $Q_h\\mathbf 1$, with the comparison maps $\\mu_{\\mathbf 1,-}$ and $\\mu_{-,\\mathbf 1}$, has the corresponding one-variable universal properties. The associator and unitors on $D(C)$ are those induced by these universal properties. Then $D(C)$ is braided monoidal for this derived tensor product, in the sense above, with braiding obtained from the Koszul braiding of $K(C)$ by the binary left derived universal property.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
+  "place": "thm-asd-smooth-tensor: the braiding of D(C) used by the smooth duality map; Lean: upstream file lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean, declaration DerivedCategory.braidedCategory (module WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided, lines 325-328, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-asd-homotopy-category-koszul-braided] with cochain shape $\\mathrm{up}(\\mathbf Z)$. Its tensor-existence hypotheses are among the assumed graded tensor and reassociation hypotheses. It gives a natural braiding $\\beta^K_{X,Y}\\colon X\\otimes Y\\xrightarrow{\\sim}Y\\otimes X$ on $K(C)$, induced on the homogeneous summand of degrees $(p,q)$ by $(-1)^{pq}\\beta_{X^p,Y^q}$, satisfying both hexagons. Thus the source category to be localized is braided; no assertion that tensor preserves all quasi-isomorphisms has been made.",
+   "uses": [
+    "lem-asd-homotopy-category-koszul-braided"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
+    "place": "Abstract braiding prerequisite for the smooth tensor morphism; argument supplied by the agent from the construction documented in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean, steps 2-3 and DerivedCategory.braidedCategory, lines 314-328"
+   }
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category], $D(C)$ is the localization of $K(C)$ at the images $W$ of quasi-isomorphisms. These contain identities: an identity induces the identity on every cohomology object. Set $L=Q_h$. The assumed derived tensor and its canonical associator and unitors give precisely the derived monoidal structure for this localization. In particular the triple universal properties needed for hexagons are hypotheses, rather than being inferred from the binary property alone.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
+    "place": "Abstract braiding prerequisite for the smooth tensor morphism; argument supplied by the agent from the construction documented in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean, steps 2-3 and DerivedCategory.braidedCategory, lines 314-328"
+   }
+  },
+  {
+   "text": "Apply [lem-asd-derived-monoidal-braided-transport] to the braided category $K(C)$, the class $W$, and $L=Q_h$. All its hypotheses were checked above. Its output is a braiding on the given derived tensor of $D(C)$ and includes both hexagon identities. More explicitly, if $\\mu_{X,Y}\\colon LX\\otimes^L LY\\to L(X\\otimes Y)$ is the comparison, its lifted braiding $b$ satisfies $\\mu_{Y,X}\\circ b_{LX,LY}=L(\\beta^K_{X,Y})\\circ\\mu_{X,Y}$, and its inverse is the corresponding lift of $(\\beta^K)^{-1}$. The cited transport theorem gives mutually inverse natural transformations, so these are isomorphisms. Since $\\beta^K$ is the Koszul braiding identified in step 1, this is exactly the required braiding induced by the binary left derived universal property.",
+   "uses": [
+    "lem-asd-derived-monoidal-braided-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
+    "place": "Abstract braiding prerequisite for the smooth tensor morphism; argument supplied by the agent from the construction documented in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean, steps 2-3 and DerivedCategory.braidedCategory, lines 314-328"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-homotopy-category-koszul-braided",
+  "def-weil-abstract-derived-category",
+  "lem-asd-derived-monoidal-braided-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
+  "place": "Abstract braiding prerequisite for the smooth tensor morphism; argument supplied by the agent from the construction documented in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean, steps 2-3 and DerivedCategory.braidedCategory, lines 314-328"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homotopy category of complexes in a braided monoidal category is braided, Koszul sign braiding hexagon",
+   "results": "GradedObject.Monoidal.hexagon_forward (Mathlib.CategoryTheory.GradedObject.Braiding), BraidedCategory.ofBifunctor (Mathlib.CategoryTheory.Monoidal.Braided.Multifunctor), BraidedCategory.hexagon_forward: graded objects and generic API only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory (HomotopyCategory _ _)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'BraidedCategory \\(HomotopyCategory|SymmetricCategory \\(DerivedCategory|BraidedCategory \\(DerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "BraidedCategory.*DerivedCategory|braiding|braided",
+   "results": "No derived-category braiding hits in Algebra/Homology/DerivedCategory; ordinary braided-category API in CategoryTheory/Monoidal. The localized-monoidal source requires W.IsMonoidal, which is not assumed here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product on the derived category has the Koszul braiding",
+   "results": "CategoryTheory.BraidedCategory.ofBifunctor, CategoryTheory.BraidedCategory.braiding, tensorMu, and module/commutative-algebra braidings; none constructs the derived braiding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory (DerivedCategory _)",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of a braided abelian monoidal category is braided for the binary left derived tensor product",
+   "results": "Tor and Tor' (degreewise derived functors), ordinary monoidal localization braiding requiring W.IsMonoidal; second phrasing found localization Qh and shift declarations, not a derived braiding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedMonoidal|HasDerivedMonoidalCategory|braidedCategory",
+   "results": "No derived-category braiding hits in Algebra/Homology/DerivedCategory; ordinary braided-category API in CategoryTheory/Monoidal. The localized-monoidal source requires W.IsMonoidal, which is not assumed here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the homotopy category of cochain complexes with the Koszul sign braiding gives a braided derived monoidal category",
+   "results": "Tor and Tor' (degreewise derived functors), ordinary monoidal localization braiding requiring W.IsMonoidal; second phrasing found localization Qh and shift declarations, not a derived braiding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "variable|instance|Monoidal|IsMonoidal",
+   "results": "No derived-category braiding hits in Algebra/Homology/DerivedCategory; ordinary braided-category API in CategoryTheory/Monoidal. The localized-monoidal source requires W.IsMonoidal, which is not assumed here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "DerivedCategory.braidedCategory"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "DerivedCategory.braidedCategory",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided",
+     "lines": [
+      321,
+      328
+     ],
+     "kind": "instance",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean",
+  "declaration": "DerivedCategory.braidedCategory",
+  "declarations": [
+   "DerivedCategory.braidedCategory"
+  ],
+  "statement": "noncomputable instance braidedCategory [BraidedCategory C] :\n    BraidedCategory (DerivedCategory C) :=\n  inferInstanceAs (BraidedCategory (DerivedMonoidal Qh\n    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))))",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-asd-derived-category-braided",
+  "worker": "stage1",
+  "summary": "Reused the existing Koszul homotopy braiding and abstract derived-monoidal braiding transport nodes; checked their exact statements. Made the upstream graded tensor and coherent derived monoidal hypotheses explicit and removed the ill-typed reference to an etale-sheaf-specific derived tensor definition. No new nodes. Alternative project braidings assume extra Grothendieck/closed/flat-resolution hypotheses and are not attachments.",
+  "blueprint": "The abstract braiding prerequisite of thm-asd-smooth-tensor, proof opening tensor/projection-formula construction; steps 1-3 realize the homotopy braiding, localization, and abstract transport chain documented upstream."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-1e3602aad",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-1e3602aad (reviewer sub-agent of L); spot-checked: Read in full: the item, cited nodes lem-asd-homotopy-category-koszul-braided, lem-asd-derived-monoidal-braided-transport, def-weil-abstract-derived-category, the citer thm-asd-smooth-tensor, and the upstream Lean source (Monoidal/Braided.lean l.250-328; FromJoel Monoidal/Derived.lean l.142-155). The delivery rewrites the vague base statement, which cited def-kun-derived-tensor, the étale-sheaf tensor that cannot type a generic C. The new statement assumes exactly the upstream HasDerivedMonoidalCategory hypotheses: binary derivability, both triple properties, the two unit properties, the right fourfold property, and the graded-tensor families. This is faithful and does not weaken anything. Step 1: the Koszul node applies with shape up(Z). Step 2 is elementary: D(C) is the localization of K(C) at quasi-isomorphisms, and that class contains identities. Step 3: the transport node's hypotheses are implied by the item's stronger ones. I checked the explicit lift formula μ_{Y,X}∘b = L(β)∘μ against flipLift_fac and braiding.hom by unwinding the two flips, and it matches. The proof is a short assembly of two general existing nodes, matching the upstream Lean's inferInstanceAs. There is no cycle and no duplicate: lem-sfb-braided-monoidal-localization needs W stable under the tensor, which fails here, and the sfb derived-monoidal nodes assume flat resolutions. No SGA source is used and no tool_uses are needed. FIX (B3/B2): the statement used 'braided', 'hexagons' and 'binary/multivariable left derived universal property' with no definition node or inline meaning, and the monoidal-category notion was uncited. In the corrected item file, C is now cited as abelian [def-sp-abelian] and monoidal [def-sfb-monoidal-category] with tensor additive in each variable. The braiding is defined with both hexagon identities written out, checked against Mathlib hexagon_forward/hexagon_reverse. The binary universal property is written as Nat(V,⊗^L)≅Nat(V∘(Q_h×Q_h),Q_h∘⊗) via μ, with the triple, fourfold and unit properties tied to their comparison maps. def-sp-abelian and def-sfb-monoidal-category are added to stmt_deps. The content and the steps are unchanged. Minor: the report promises dry-run results that it does not include.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261024T185335-L-3513497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "DerivedCategory.symmetricCategory"
+  ],
+  "sorry_after": []
+ }
+}

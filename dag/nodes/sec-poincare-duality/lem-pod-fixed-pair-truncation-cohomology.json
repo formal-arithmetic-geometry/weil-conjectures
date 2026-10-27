@@ -25,150 +25,71 @@
  ],
  "proof": [
   {
-   "text": "Work simultaneously in $\\mathcal D=D^b_c(W,\\Lambda)$ for $\\Lambda=E$ and $\\overline{\\mathbf Q}_\\ell$. By [prop-constructible-truncations] this category has the stated bounded t-structure and its truncation functors. By [lem-pod-semilinear-field-operation-lifts], $P=P_W$ is an exact equivalence with its canonical shift comparison. That lemma applies with the identity morphism of $W_0$ (which is separated and of finite type even if $W_0$ is not separated). The commutation with both truncations in [prop-constructible-truncations] implies that $P$ preserves both halves: if $K\\in\\mathcal D^{\\le m}$, then $PK\\simeq P\\tau^{\\le m}K\\simeq\\tau^{\\le m}PK$, and similarly for $\\mathcal D^{\\ge m}$. Apply [lem-pod-texact-truncation-comparison] to obtain natural isomorphisms $c^-_K:P\\tau^{\\le m}K\\simeq\\tau^{\\le m}PK$ and $c^+_K:P\\tau^{\\ge m}K\\simeq\\tau^{\\ge m}PK$, characterized by\n$$\\iota_{PK}c^-_K=P(\\iota_K),\\qquad c^+_KP(\\pi_K)=\\pi_{PK}.$$\nThese characterize the particular comparisons in the statement, rather than an arbitrary choice of commuting isomorphisms.",
+   "text": "Obtain the signed Roos, integral-localized, and common-stage shifts and exactness from automorphismConstructibleStage_descended_shifts. The integral shift is the comparison shift by uniqueness of its coordinate/descent normalization. The localization comparison is the actual object equality; its naturality follows from the pure-tensor pullback rule. The identity-normalized localization shift makes its degree-one square commute, and zero/addition/inversion give every integer degree. At the common stage use the identity-normalized stage comparison and shift formulas.",
    "uses": [
-    "prop-constructible-truncations",
-    "lem-pod-semilinear-field-operation-lifts",
-    "lem-pod-texact-truncation-comparison"
+    "lem-sf-automorphism-constructible-stage-equivalence",
+    "lem-a1-integral-pullback-completed-comparison",
+    "def-zl-field-weil-shriek-shift-data"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Second proof sentence: Frobenius pullback commutes with truncations; explicit fixed-pair calculation supplied by the agent."
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Truncation and cohomology paragraphs; BBD 1.3.3–1.3.4."
    }
   },
   {
-   "text": "For either truncation $\\tau$, put $a_K=\\tau(\\theta_K)c_K$. This is an isomorphism, being a composite of two isomorphisms. If $u\\theta_K=\\theta_LP(u)$, naturality of the comparison in [lem-pod-texact-truncation-comparison] gives\n$$\\tau(u)a_K=\\tau(u\\theta_K)c_K=\\tau(\\theta_L)\\tau(Pu)c_K=\\tau(\\theta_L)c_LP(\\tau u)=a_LP(\\tau u).$$\nThus $\\tau(u)$ is a morphism of the fixed pairs defined in [def-weil-weil-sheaf-complex]. The identity and composition laws are those of $\\tau$ on the underlying category. This proves the asserted functor on objects and arrows.",
+   "text": "The exact inverse-image module functor preserves vanishing homology. Its comparison with integral pullback shows that rational pullback preserves the isomorphism closures of the integral standard classes. Every common-stage object has a finite-stage representative; apply the rational argument there and the stage comparison. The recorded standard classes therefore give t-exactness in both categories.",
    "uses": [
-    "lem-pod-texact-truncation-comparison",
-    "def-weil-weil-sheaf-complex"
+    "lem-pod-isomorphism-field-transport",
+    "def-weil-constructible-standard-tstructure"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Second proof sentence: Frobenius pullback commutes with truncations; explicit fixed-pair calculation supplied by the agent."
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Truncation and cohomology paragraphs; BBD 1.3.3–1.3.4."
    }
   },
   {
-   "text": "For upper truncation, naturality of $\\iota$ for $\\theta_K:PK\\to K$ and the defining equation for $c^-$ give\n$$\\iota_K\\theta_{\\tau^{\\le m}K}=\\iota_K\\tau^{\\le m}(\\theta_K)c^-_K=\\theta_K\\iota_{PK}c^-_K=\\theta_KP(\\iota_K).$$\nFor lower truncation, naturality of $\\pi$ and the defining equation for $c^+$ give\n$$\\pi_K\\theta_K=\\tau^{\\ge m}(\\theta_K)\\pi_{PK}=\\tau^{\\ge m}(\\theta_K)c^+_KP(\\pi_K)=\\theta_{\\tau^{\\ge m}K}P(\\pi_K).$$\nThese are precisely the two fixed-pair equations for the canonical truncation maps.",
+   "text": "Use the existing t-exact eTruncLTIso and eTruncGEIso. Their counit/unit equations and naturality prove equivariance of the first two arrows. The existing eTruncGEδLT_comm equation, followed by naturality at the Weil structure, proves equivariance of the connecting arrow. IsoAlgebra.mapOfNatIso constructs the two truncation lifts. Compose them with the shift lift for cohomology; the underlying functor equality is definitional, and the shifted truncGELE object lies in both standard halves at zero.",
    "uses": [
-    "lem-pod-texact-truncation-comparison",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Second proof sentence: Frobenius pullback commutes with truncations; explicit fixed-pair calculation supplied by the agent."
-   }
-  },
-  {
-   "text": "Write $s_{K,r}:P(K[r])\\simeq(PK)[r]$ for the shift comparison of the exact functor $P$ of [lem-pod-semilinear-field-operation-lifts]. Equip $K[r]$ with $\\theta_{K[r]}=(\\theta_K)[r]s_{K,r}$. For a Weil morphism $u$, the equality\n$$u[r]\\theta_{K[r]}=(u\\theta_K)[r]s_{K,r}=(\\theta_L)[r](Pu)[r]s_{K,r}=(\\theta_L)[r]s_{L,r}P(u[r])$$\nuses naturality of $s$ and proves that shifts send Weil arrows to Weil arrows. This specifies the structure on the shifted last term of a triangle.",
-   "uses": [
-    "lem-pod-semilinear-field-operation-lifts",
     "def-weil-weil-sheaf-complex",
-    "lem-a1-integral-pullback-completed-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Second proof sentence: Frobenius pullback commutes with truncations; explicit fixed-pair calculation supplied by the agent."
-   }
-  },
-  {
-   "text": "Put $U_K=\\tau^{\\le m}K$, $V_K=\\tau^{\\ge m+1}K$, and write the canonical distinguished triangle as $U_K\\xrightarrow{\\iota_K}K\\xrightarrow{\\pi_K}V_K\\xrightarrow{\\delta_K}U_K[1]$. The exactness of $P$ from [lem-pod-semilinear-field-operation-lifts] makes\n$$PU_K\\longrightarrow PK\\longrightarrow PV_K\\xrightarrow{s_{U_K,1}P(\\delta_K)}(PU_K)[1]$$\ndistinguished. Its outside terms lie in degrees $\\le m$ and $\\ge m+1$ by Step 1. The uniqueness of the truncation triangle in [lem-weil-heart-short-exact-triangles](1) gives its unique isomorphism to the canonical triangle of $PK$, inducing $1_{PK}$ in the middle. The first and third components are $c^-_K,c^+_K$ (with cutoffs $m,m+1$): their characterizing counit and unit equations are exactly those of [lem-pod-texact-truncation-comparison]. In particular the last square of this triangle isomorphism says\n$$\\delta_{PK}c^+_K=c^-_K[1]s_{U_K,1}P(\\delta_K).$$\nHere uniqueness is used for the whole distinguished truncation triangle, including its last arrow.",
-   "uses": [
-    "lem-pod-semilinear-field-operation-lifts",
-    "lem-weil-heart-short-exact-triangles",
-    "lem-pod-texact-truncation-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3(ii), printed pp. 29–30 (PDF pp. 30–31): uniqueness of the distinguished truncation triangle, including its degree-one arrow."
-   }
-  },
-  {
-   "text": "Transport the canonical triangle of $PK$ along the isomorphism $\\theta_K:PK\\simeq K$. Its outside terms still have the required bounds. By [lem-weil-heart-short-exact-triangles](1), its comparison with the canonical triangle of $K$ is the unique isomorphism over this middle isomorphism. By the truncation adjunctions in the same statement, the first and third components are $\\tau^{\\le m}(\\theta_K)$ and $\\tau^{\\ge m+1}(\\theta_K)$: these have the required counit and unit squares by naturality. Its last square is therefore\n$$\\delta_K\\tau^{\\ge m+1}(\\theta_K)=\\tau^{\\le m}(\\theta_K)[1]\\delta_{PK}.$$\nCompose this equality with $c^+_K$ and use Step 5. The result is\n$$\\delta_K\\theta_{V_K}=(\\tau^{\\le m}\\theta_K)[1]c^-_K[1]s_{U_K,1}P(\\delta_K)=\\theta_{U_K[1]}P(\\delta_K).$$\nThis proves equivariance of the third arrow for exactly the shift structure of Step 4. Together with Step 3 it proves equivariance of all arrows of the canonical truncation triangle.",
-   "uses": [
-    "lem-weil-heart-short-exact-triangles",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3(i),(ii), printed pp. 29–30: adjunctions identify the outer components and uniqueness includes the connecting morphism; the equivariance equation is written out here."
-   }
-  },
-  {
-   "text": "Apply the two functors of Step 2 and then the shift functor of Step 4 to obtain\n$$\\mathcal H^i(K)=(\\tau^{\\ge i}\\tau^{\\le i}K)[i].$$\nThis is the cohomology functor in [prop-constructible-truncations], so its values are in the constructible heart. More explicitly, let $Z_K=\\tau^{\\ge i}\\tau^{\\le i}K$ and\n$$e_{i,K}=\\bigl(\\tau^{\\ge i}(c^-_K)\\,c^+_{\\tau^{\\le i}K}\\bigr)[i]s_{Z_K,i}:P\\mathcal H^i(K)\\xrightarrow{\\sim}\\mathcal H^i(PK).$$\nThe induced structure is $\\mathcal H^i(\\theta_K)e_{i,K}$; its arrow equation follows by composing the two equations of Step 2 and the shift equation of Step 4. Thus every Weil morphism induces an equivariant cohomology-sheaf morphism. The underlying functors and maps are unchanged by these constructions, since the forgetful functor of [def-weil-weil-sheaf-complex] retains the underlying objects and arrows.",
-   "uses": [
-    "prop-constructible-truncations",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Second proof sentence: Frobenius pullback commutes with truncations; explicit fixed-pair calculation supplied by the agent."
-   }
-  },
-  {
-   "text": "The successive upper truncation triangle follows as well: apply Steps 3–6 to $\\tau^{\\le m}K$ at cutoff $m-1$. The outer objects identify canonically with $\\tau^{\\le m-1}K$ and $\\mathcal H^m(K)[-m]$. The first identification is the one preserving the map to $K$; it is unique by the upper truncation adjunction of [lem-weil-heart-short-exact-triangles](1), so its two Frobenius composites agree after that counit and hence agree. The second identification is the defining expression for $\\mathcal H^m$ from Step 7 with the shifts cancelled. Both identifications are therefore equivariant, and the third arrow retains the shifted structure of Step 4. For successive lower truncations, apply the same argument to $\\tau^{\\ge m}K$ at cutoff $m$, and use the lower adjunction (precompose with the unit) to identify $\\tau^{\\ge m+1}\\tau^{\\ge m}K$ with $\\tau^{\\ge m+1}K$. This also proves equivariance for the usual successive-truncation forms of the standard triangles.",
-   "uses": [
-    "lem-weil-heart-short-exact-triangles",
     "prop-constructible-truncations"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3 and paragraph 1.3.4, printed pp. 29–30: truncation adjunctions and absorption of successive truncations; cohomology is the expression in prop-constructible-truncations."
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Truncation and cohomology paragraphs; BBD 1.3.3–1.3.4."
    }
   },
   {
-   "text": "For the point complexes in the statement, write $v=\\operatorname{Fib}_s(u)$ and use their given Weil equation $u\\theta_A=\\theta_BP_s(u)$ [def-weil-weil-sheaf-complex]. Naturality at rational and common-stage coefficients is the actual assertion (2) of [lem-weil-frobenius-point-transport-natural]:\n$$\\operatorname{Fib}_s(P_su)\\iota_A=\\iota_B\\operatorname{Fib}_s(u).$$\nBy the definition of transport in [def-weil-frobenius-point-transport] and functoriality of $\\operatorname{Fib}_s$,\n$$vF_A=\\operatorname{Fib}_s(u\\theta_A)\\iota_A=\\operatorname{Fib}_s(\\theta_B)\\operatorname{Fib}_s(P_su)\\iota_A=\\operatorname{Fib}_s(\\theta_B)\\iota_Bv=F_Bv.$$\nApply the cohomology functor $H^i$ to this equality: at $\\Lambda=E$ the point fibers lie in $D(E)$ and $H^i$ is the cohomology functor of [def-weil-abstract-derived-category]; in the common-stage category the point fibers lie in $D^b_{\\mathrm{fd}}(\\overline{\\mathbf Q}_\\ell)$, where $H^i$ is the stagewise functor $\\mathrm H^i(C')\\otimes_{E'}\\overline{\\mathbf Q}_\\ell$ of [def-weil-coefficient-cohomology-modules], defined on morphisms represented over a common stage. In both cases $H^i(v)H^i(F_A)=H^i(F_B)H^i(v)$. This is the desired assertion for either supplied direct-image Weil lift. No preservation or existence of a direct image on any additional domain was used.",
+   "text": "Apply the point fibre functor to the defining Weil-morphism equation. Conjugate the recorded point-transport naturality equation by the specified fibre and pullback object equalities. This gives both displayed Frobenius equations. Apply the coefficient cohomology functor and its composition law. The argument works in the rational and literal common-stage categories.",
    "uses": [
     "def-weil-weil-sheaf-complex",
     "lem-weil-frobenius-point-transport-natural",
-    "def-weil-frobenius-point-transport",
-    "def-weil-abstract-derived-category",
     "def-weil-coefficient-cohomology-modules"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Second proof sentence: Frobenius pullback commutes with truncations; explicit fixed-pair calculation supplied by the agent."
-   }
-  },
-  {
-   "text": "Every argument above takes place in the underlying category $D^b_c(W,\\Lambda)$ and the category of fixed pairs of [def-weil-weil-sheaf-complex]. The bounded t-structure and commutation in [prop-constructible-truncations], exactness of $P$ in [lem-pod-semilinear-field-operation-lifts], and point-transport naturality in [lem-weil-frobenius-point-transport-natural](2) all explicitly cover both $E$ and the common-stage $\\overline{\\mathbf Q}_\\ell$ category. Thus Steps 1–9 apply directly at either stage, including morphisms represented only after extension of the coefficient field. We have used only underlying distinguished triangles and their equivariant arrows, and have imposed no triangulated structure on fixed pairs.",
-   "uses": [
-    "def-weil-weil-sheaf-complex",
-    "prop-constructible-truncations",
-    "lem-pod-semilinear-field-operation-lifts",
-    "lem-weil-frobenius-point-transport-natural"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Second proof sentence: Frobenius pullback commutes with truncations; explicit fixed-pair calculation supplied by the agent."
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Truncation and cohomology paragraphs; BBD 1.3.3–1.3.4."
    }
   }
  ],
  "proof_deps": [
-  "prop-constructible-truncations",
-  "lem-pod-semilinear-field-operation-lifts",
-  "lem-pod-texact-truncation-comparison",
+  "lem-sf-automorphism-constructible-stage-equivalence",
+  "lem-a1-integral-pullback-completed-comparison",
+  "def-zl-field-weil-shriek-shift-data",
+  "lem-pod-isomorphism-field-transport",
+  "def-weil-constructible-standard-tstructure",
   "def-weil-weil-sheaf-complex",
-  "lem-weil-heart-short-exact-triangles",
+  "prop-constructible-truncations",
   "lem-weil-frobenius-point-transport-natural",
-  "def-weil-frobenius-point-transport",
-  "def-weil-abstract-derived-category",
-  "def-weil-coefficient-cohomology-modules",
-  "lem-a1-integral-pullback-completed-comparison"
+  "def-weil-coefficient-cohomology-modules"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-  "place": "Second proof sentence and final cohomology assertion of prop-weil-operations, expanded using BBD Proposition 1.3.3 and paragraph 1.3.4 (printed pp. 29–30), the existing t-exact comparison, and actual point-transport naturality. The fixed-pair and shifted-boundary equations are written out by the agent."
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "G9: direct assembly of the normalized shifts, exact inverse-image transport, existing t-exact truncation comparisons and their boundary equation, and actual point transport. No fixed-pair Postnikov or orthogonality theorem is required."
  },
  "mathlib_searches": [
   {
@@ -269,33 +190,32 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pod-fixed-pair-truncation-cohomology",
   "worker": "stage1",
-  "summary": "Expanded the Frobenius truncation assertion into ten proof steps without changing the statement. Reused all needed nodes: exactness at the rational/common stages, canonical t-exact comparison, uniqueness of the entire truncation triangle, and point-transport naturality. Wrote the third-arrow equation with its shift comparison, the cohomology composite, successive truncation identifications, and the point-fiber calculation explicitly. No new nodes, no Lean edits or compilation.",
-  "blueprint": "prop-weil-operations.proof.md sentence 2 (Frobenius pullback commutes with truncations) and the final cohomology assertion of prop-weil-operations.md; this item was extracted for those clauses.",
+  "summary": "Repaired the human re-split order with two comparable self-contained statement-only nodes: entire normalized truncation triangle comparison and shifted fixed-pair cohomology/absorption identifications. Reused the existing fixed-pair truncation lemma, kept the full point calculation in the assembly, and archived all ten original steps with their allocation in report.md. Statement unchanged.",
+  "blueprint": "prop-weil-operations.proof.md, sentence 2: Frobenius pullback commutes with truncations; final cohomology clause of prop-weil-operations.md",
   "tool_uses": [
    {
-    "node": "lem-weil-heart-short-exact-triangles",
-    "why": "Only clause (1), uniqueness and adjunctions of canonical truncation triangles, is used as a generic t-structure tool to fix the shifted third-arrow comparison; the unit has no other node stating it."
+    "node": "lem-a1-fixed-pair-truncation-orthogonality",
+    "why": "Generic fixed-pair truncation lifts and adjunctions, already covering old Steps 2–3; no duplicate is created."
    },
    {
     "node": "lem-weil-frobenius-point-transport-natural",
-    "why": "Clause (2) supplies naturality of the specified point transport, including finite-field extension compatibility, which its definition explicitly leaves to this theorem."
+    "why": "Clause (2) is actual point-transport naturality at E and common-stage coefficients."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-heart-short-exact-triangles",
   "lem-weil-frobenius-point-transport-natural"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-O2-ead19e1ca",
-  "group": "O2",
+  "reviewer": "NT-cc-Q25-330e4279f",
+  "group": "Q25",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-ead19e1ca (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement, all ten steps, and every cited statement. The statement matches what the creating Q108 delivery wrote. I checked the source (main-20261015 prop-weil-operations, proof sentence 2 and the final cohomology clause) and BBD 1.3.3(ii). The item is still unsplit in live and side-live, so it is not superseded. It is not on the dropped list, has no re-split note, cites no SGA and closes no cycle. Steps 1-8 and 10 are correct; I checked each equation. Step 1: P is t-exact, which comes from prop-constructible-truncations and gives the c± of lem-pod-texact-truncation-comparison. Steps 2-3: the fixed-pair equations for the truncations and for the maps ι and π. Step 4: the shift structure θ[r]s. Steps 5-6: the third arrow, using uniqueness of the whole truncation triangle; the square δ_{PK}c^+=c^-[1]sP(δ) is oriented correctly and gives δθ_V=θ_{U[1]}P(δ). Step 7: the H^i structure e_{i,K}. Step 8: the successive-truncation identifications. Step 9: the point-transport chain is correct and uses lem-weil-frobenius-point-transport-natural (2) as stated. I tested the zero complex, Λ[-j] at every cutoff, negative shifts, W_0=Spec k_0 and non-separated W_0. Fault fixed (C4): at the Q̄_ℓ stage, step 9 takes H^i from def-weil-abstract-derived-category, which only defines H^i on D(A). Fib_s lands in D^b_fd(Q̄_ℓ), whose H^i is the stagewise functor of def-weil-coefficient-cohomology-modules. I added that node to step 9's uses, to proof_deps and to stmt_deps, and reworded the citation; no cycle results. lem-a1-fixed-pair-truncation-orthogonality overlaps only the elementary steps 2-3, so it is not a duplicate. I accept both declared tool uses: lem-weil-heart-short-exact-triangles (1) and lem-weil-frobenius-point-transport-natural (2).; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-330e4279f (reviewer sub-agent of L); spot-checked: Re-split matches the human's 2026-10-21 order, whose 2026-10-22 note is released, stage 1, keep_plan. Not superseded: live and side-live still have the 10-step O2 split. Item not dropped, no SGA. Only proof, proof_deps and split_report changed; statement and stmt_deps are unchanged. The new proof is 4 assembly steps, 2396 characters. Where the old steps went: old 2-3 are covered by the existing lem-a1-fixed-pair-truncation-orthogonality (the τ(θ)c structure is forced by the adjunction); old 5-6 by the new lem-pod-texact-truncation-triangle-comparison (BBD 1.3.3(ii), read at printed pp. 29-30, including uniqueness of the degree-1 arrow; last square δ_{FK}c+=c-[1]s F(δ) and triangle naturality checked); old 4, 7 and 8 by the new lem-pod-fixed-pair-postnikov-identifications (I recomputed e_{i,K}; absorption and interchange are canonical by BBD 1.3.4-1.3.5, hence equivariant). Old 1, 9 and 10 stay as citation glue and the elementary point-fibre chain, which is kept in full. Step 3 chain δ_Kθ_V=θ_{U[1]}P(δ_K) checked. Step 4 H^i comes from def-weil-coefficient-cohomology-modules at E and Q̄_ℓ. Small cases: zero, M[-j] at every cutoff, P=id with a Jordan block, non-separated W_0. No duplicates found after searching DAG nodes about t-exactness and fixed pairs (heart-short-exact, zl boundary comparison, directed-pair t-structure, zl shriek shift, sfb Mathlib truncation leaves). Batch 5: both newly cited pod nodes are generic t-structure lemmas whose closure contains no trace-formula or Poincaré-duality node, so they lie outside the assumed statements; accepted. Tool uses accepted: a1 orthogonality (generic), point-transport-natural (2). No fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.FixedPairTruncationCohomology",
@@ -332,5 +252,27 @@
   "group": "Q19",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN at 852730d9. Item Lean module byte-identical (sha256 68d0b0fa), so the earlier full substance check holds: c± pinned, mapOfNatIso structures, ι/π/third-arrow equations, H^i, pinned Roos/descent/localization shift, point clauses. Item record changes only stmt_deps (theorem lem-a1-integral-pullback-completed-comparison replaced by new def-pod-integral-completed-comparison-data), proof_deps and Step 4 uses (+theorem), and lean.note; statement and proof verbatim unchanged. New node existing:true on unchanged Sheaf.Paper.IntegralPullbackCompletedComparison: all 21 recorded decls exist; the item uses only Comparison (primary decl). Statement matches ShiftCoordinates/ShiftDescent/Comparison fields (1)-(5), asserts no inhabitation, citations = stmt_deps (6 live nodes); towerIso is the ∃!-choose owned by cited def-weil-pbc-completed-pullback; coefficient nodes reachable transitively. No compile (no file changed); maintainer dry run passed preflight. Advisories: Second reading section is direct-delivery, not independent; Comparison.shifts uses canonical pbcActualCompletedPullShift owned by lem-weil-pbc-ringed-topoi-module-adjunction, outside the new node's stmt_deps (inherited, maintainer note)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261025T033903-L-151736",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,281 @@
+{
+ "id": "lem-sf-etale-ambient-adjoint-projection",
+ "kind": "statement",
+ "title": "Ordinary etale compact-support adjunction and projection over arbitrary bases",
+ "statement": "Let $A$ be a finite commutative ring, and let $f:X\\to Y$ be a morphism of arbitrary schemes [def-pc-scheme] supplied with a factorization $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$, where $j$ is an open immersion [def-weil-open-immersion], $r$ is proper [def-weil-proper-morphism], and $rj=f$. No quasi-compactness condition is imposed on $j$. On the ordinary unbounded small-etale derived categories $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories], with exact extension by zero $Dj_!$ [lem-weil-pbc-extension-by-zero-exact] and total right-derived direct image $Rr_*$, put $F_f=Rr_*Dj_!$. Then $F_f$ has a right adjoint $G_f$ with counit $\\epsilon_f:F_fG_f\\to\\mathrm{id}$. For every $M\\in D(X_{\\mathrm{et}},A)$ and $K\\in D(Y_{\\mathrm{et}},A)$, the canonical compactification projection map is an isomorphism\n$$F_fM\\otimes_A^LK\\xrightarrow{\\sim}F_f(M\\otimes_A^Lf^*K).$$\nHere $f^*=f^{-1}$ is exact inverse image [def-weil-pbc-inverse-image], and tensor is [def-kun-derived-tensor]. The map is the proper counit-defined projection map [def-kun-projection-formula-map] followed by the open-extension tensor comparison. In particular, for $\\omega_f=G_fA_Y$, the transpose of\n$$F_f(\\omega_f\\otimes_A^Lf^*K)\\xrightarrow{\\mathrm{PF}^{-1}}F_f\\omega_f\\otimes_A^LK\\xrightarrow{\\epsilon_{f,A_Y}\\otimes1}A_Y\\otimes_A^LK\\xrightarrow{\\sim}K$$\ndefines a morphism $\\theta_{f,K}:\\omega_f\\otimes_A^Lf^*K\\to G_fK$ for every unbounded $K$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 1, adjunction and compactification projection; arbitrary-base formulation checked against upstream LowerShriekLeftAdjoint.lean, isLeftAdjoint_rightDerivedLowerShriekOfCompactification, lines 207-222, and ProjectionFormula.lean, isIso_projectionMap_of_finite, lines 291-303. The generalization is agent-stated; the blueprint paragraph alone has a Noetherian standing base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map"
+ ],
+ "proof": [
+  {
+   "text": "Exact extension by zero and exact inverse image induce the unbounded derived adjunction D(j_!) ⊣ D(j^*), implemented by derivedOpenImmersionLowerShriekUpperStarAdjunction. It is the termwise derived adjunction of the sheaf adjunction. Its left functor is therefore a left adjoint; no quasi-compactness of j is needed.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply isLeftAdjoint_proper_rightDerivedLowerStar to the proper factor c.g and the finite coefficient ring A, using lem-etale-proper-derived-direct-image-adjoint. The supplied-compactification functor is definitionally D(c.i_!) ⋙ R(c.g_*). Composition of the two left adjoints gives its right-adjoint existence on the entire ordinary unbounded derived category. This uses the existing proper-factor Brown argument rather than repeating its coproduct proof here.",
+   "uses": [
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary M and K, isIso_rightDerivedLowerStarProjectionMap_of_finite A c.g makes the proper projection map invertible. Rewrite the canonical supplied-compactification map using projectionMapOfCompactification_app_app: it is this proper projection component followed by R(c.g_*) of the inverse open projection isomorphism, then by the mapped tensor of the inverse-image composition isomorphism. Functors preserve isomorphisms, so the composite is invertible. This proves invertibility of the specified canonical map, rather than merely existence of an isomorphism of its endpoints.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite",
+    "def-kun-projection-formula-map",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any selected right adjoint G and adjunction, specialize the preceding projection isomorphism to M = G(A_Y), invert it, compose with the counit at A_Y tensored with K and the derived left unitor, then transpose with adj.homEquiv. This is exactly the existing definition sfEtaleAmbientTensorMap. Neither an arbitrary comparison nor invertibility of that transpose is asserted.",
+   "uses": [
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-etale-proper-derived-direct-image-adjoint",
+  "lem-etale-proper-projection-formula-finite",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-kun-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/EtaleProperDerivedDirectImageAdjoint.lean",
+  "place": "T2, 2026-10-22: compose the existing proper derived adjoint with the exact open derived adjunction; use ProjectionFormula.lean, isIso_rightDerivedLowerStarProjectionMap_of_finite, and LowerShriekProjection.lean, projectionMapOfCompactification_app_app, for the canonical projection components. The tensor transpose definition is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite ring coefficients compact support pushforward of a compactifiable scheme morphism on unbounded etale derived categories has a right adjoint and satisfies the projection formula",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; Search hits concern ordinary structure-sheaf module adjunctions, not the right adjoint of torsion etale compact support or its unbounded projection formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability right adjoint to derived proper pushforward torsion etale sheaves and unbounded projection formula",
+   "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; Search hits concern ordinary structure-sheaf module adjunctions, not the right adjoint of torsion etale compact support or its unbounded projection formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjoint\", \"DerivedCategory\"",
+   "results": "No hits; Search hits concern ordinary structure-sheaf module adjunctions, not the right adjoint of torsion etale compact support or its unbounded projection formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|exceptionalInverse|dualizingComplex",
+   "results": "No hits; Search hits concern ordinary structure-sheaf module adjunctions, not the right adjoint of torsion etale compact support or its unbounded projection formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded etale compact support pushforward has a right adjoint for finite ring coefficients",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; Search hits concern ordinary structure-sheaf module adjunctions, not the right adjoint of torsion etale compact support or its unbounded projection formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|projectionMapOfCompactification|dualizingComplexTensorMap",
+   "results": "No hits; inspected returned signatures: none states ordinary unbounded etale compact-support adjunction and projection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsLeftAdjoint\"",
+   "results": "No hits; inspected returned signatures: none states ordinary unbounded etale compact-support adjunction and projection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite commutative coefficient ring, a compactification pushforward R proper star composed with open extension by zero has a right adjoint and an unbounded derived projection formula",
+   "results": "Top hits: Condensed.profiniteSolidCounit, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, CondensedMod.LocallyConstant.adjunction, Condensed.profiniteSolidification, Condensed.profiniteSolid, LightCondMod.LocallyConstant.adjunction, CondensedSet.compactlyGeneratedAdjunction, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; inspected returned signatures: none states ordinary unbounded etale compact-support adjunction and projection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support functor on unbounded derived etale module sheaves over a finite ring admits a right adjoint and satisfies tensor projection formula",
+   "results": "Top hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ, instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits; inspected returned signatures: none states ordinary unbounded etale compact-support adjunction and projection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image as the right adjoint of compactly supported etale cohomology with finite ring coefficients on unbounded complexes",
+   "results": "Top hits: Condensed.profiniteSolidCounit, CondensedMod.LocallyConstant.adjunction, Condensed.profiniteSolid, LightCondMod.LocallyConstant.adjunction, Condensed.profiniteSolidification, CompHausLike.LocallyConstant.adjunction_counit, CondensedSet.LocallyConstant.adjunction, LightCondSet.LocallyConstant.adjunction; inspected returned signatures: none states ordinary unbounded etale compact-support adjunction and projection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-smooth-dualizing-complex-invertible",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Unit step 3, smooth case, through lem-sf-smooth-dualizing-complex-invertible; thm-asd-smooth-tensor.proof.md paragraph 1, construction of the tensor map from ambient adjunction and compactification projection.",
+   "via": [
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-etale-ambient-adjoint-projection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split into the canonical proper/open projection formula, its unit normalization, copower preservation, the existing copowers-to-coproducts criterion, Brown representability and the formal tensor transpose. Reused every input; created no nodes. Checked arbitrary bases and non-quasi-compact opens; upstream candidates rest on a sorry and cannot be attached. Repaired inherited null blueprint ancestor from the parent node.",
+  "blueprint": "Unit sk-prop-sf-rf-shriek-preservation step 3 via the parent smooth-dualizing-complex node: paragraph 1 of current thm-asd-smooth-tensor.proof.md. Only adjunction, projection and construction of theta are claimed; no smooth purity argument is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Grothendieck property for arbitrary small-etale module sheaves, needed by Brown; no Noetherian hypothesis. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic existence of unbounded K-injective resolutions for the Grothendieck module categories. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Termwise sums compute unbounded derived sums in the common universe. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact module inverse image, its sheaf adjunction and its constant-ring unit comparison. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor triangulated descent for inverse image and open extension. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Canonical shift compatibility needed before applying the triangulated-right-adjoint tool. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-sf-triangulated-right-adjoint",
+    "why": "Generic transfer of triangulatedness along a shift-compatible derived adjunction. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exact ordinary-etale extension by zero without quasi-compactness. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-kun-0f0g",
+    "why": "General torsion-ring proper projection formula on arbitrary schemes; the ambient Noetherian lemma is insufficient. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Ordinary unbounded open tensor comparison for any open immersion and constant ring. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic sheaf composition comparison, made linear and applied termwise in step 3. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Canonical derived tensor unit constraints, used for normalization and the final transpose. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-kun-derived-tensor-direct-sums",
+    "why": "Derived tensor preserves arbitrary sums, used only after the projection isomorphism is obtained. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-coproducts-of-copowers",
+    "why": "Generic arrow-retract criterion converting copower preservation to coproduct preservation. This is a generic input, not a replacement of the smooth-preservation unit route."
+   },
+   {
+    "node": "lem-grothendieck-derived-brown-right-adjoint",
+    "why": "Generic Brown criterion on an entire Grothendieck derived category, without compact generation. This is a generic input, not a replacement of the smooth-preservation unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-kun-tensor-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-ed8e468e6",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-ed8e468e6 (reviewer sub-agent of L); spot-checked: I read the whole delivery against its sources. The item's 9 steps are sound, it creates no new nodes, and I made no fixes. Statement: kept, and it matches how all four citers use F_f=Rr_*Dj_!, G_f, PF and θ. Proper factor: Stacks 0F0G (etale-cohomology.tex:20193) allows a proper f, any torsion ring and unbounded E,K over arbitrary bases. This is exactly lem-kun-0f0g, and A finite implies torsion (n=1 when A=0). Open factor: lem-pur-etale-open-derived-tensor is applied in the right direction and needs no quasi-compactness. The abelian-sheaf composition iso is made A-linear by naturality. Triangulated structure: step 2 checks every hypothesis (K-injectives on Mod(X̄) for the shift lemma, then the right-adjoint transfer, then the composite). Coproducts: preservation is derived from the projection formula, not from a cohomological-dimension bound. Step 4 normalises PF at the unit by the triangle identity, so step 6 really identifies the canonical copower comparison; I=∅ is included. Step 7 meets the hypotheses of lem-coproducts-of-copowers, and step 8 those of Brown 0F5Y (injectives.tex:2804). Step 9's θ is the transpose stated in the item, matching thm-asd-smooth-tensor.proof.md paragraph 1 (main-20261015). The blueprint's Noetherian nodes thm-amb-etale-exceptional-adjoint and lem-amb-proper-coproducts-projection cannot be cited over arbitrary bases. The delivery keeps their Brown-based shape and replaces only the Noetherian coproduct input. Mechanical checks: the repaired blueprint.from (sk-prop-sf-rf-shriek-preservation via the parent) is correct; no cycle; proof_deps equals the union of step uses; no merged or missing cites; the only SGA string is 'No SGA route.', which the route-lock regex does not match; the item is not on any dropped list. Edge cases: identity maps, a non-quasi-compact open, A=0, empty X, empty I, and an infinite disjoint-union base with unbounded fibre dimension. I accept all 15 tool_uses as generic inputs; none is batch-5 trf."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfEtaleAmbientAdjointProjection",
+  "declaration": "AlgebraicGeometry.Etale.sfEtaleAmbientAdjointProjection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfEtaleAmbientAdjointProjection",
+   "AlgebraicGeometry.Etale.sfEtaleAmbientTensorMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfEtaleAmbientAdjointProjection.lean",
+  "statement": "theorem sfEtaleAmbientAdjointProjection (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).IsLeftAdjoint ∧ ∀ (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y), IsIso (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app K)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem packages the two ambient assertions for the supplied Compactification f. The helper sfEtaleAmbientTensorMap defines the specified inverse-projection/counit transpose for any selected right adjoint G and its adjunction; no new geometric hypothesis or arbitrary comparison map is introduced. The existing leftDerivedUpperStarIsoMapDerivedCategory identifies the derived inverse image with termwise exact inverse image."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4ad51acb",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Clause-by-clause match: A:Type(u+1) CommRing Finite (A=0 allowed); supplied Compactification c (no qc field); DerivedCategoryModule as recorded; F_f = rightDerivedLowerShriekOfCompactification; conjunct 1 IsLeftAdjoint; conjunct 2 ∀ M K IsIso of projectionMapOfCompactification, which by _app_app (rfl) is proper rightDerivedLowerStarProjectionMap ≫ inverse open-extension tensor comparison ≫ inverse-image composition iso, as the node says; f^* is L(upperStar), identified with termwise exact upperStar per the recorded convention. sfEtaleAmbientTensorMap is the actual homEquiv transpose of inv PF ≫ counit at constantComplex (=𝟙_) ⊗ K ≫ left unitor, for a chosen G/adj; no invertibility claim. lean.statement verbatim; only the lean field differs from live; stmt_deps match the records; all 19 imports exist; docstrings give source place, blueprint tag and the 9 proof steps; only sorry is the main theorem. No duplicate: upstream isLeftAdjoint_rightDerivedLowerShriekOfCompactification covers conjunct 1 only; isIso_projectionMap_of_finite and dualizingComplexTensorMap cover only the chosen compactification (advisory: stage 3 can close the proof with them). Not recompiled (no file changed); worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261022T144239-L-1550858",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

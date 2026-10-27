@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColim
 public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 public import Sheaf.Paper.CondensedCoefficientComparisons
 public import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexDiagram
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexColimit
 import all Sheaf.Paper.CondensedFiniteModelProofAPI

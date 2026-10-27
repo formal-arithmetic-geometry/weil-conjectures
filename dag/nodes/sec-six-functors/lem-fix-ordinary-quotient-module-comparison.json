@@ -1,0 +1,153 @@
+{
+ "id": "lem-fix-ordinary-quotient-module-comparison",
+ "kind": "statement",
+ "title": "One finite module quotient commutes with ordinary pullback along an invertible completed coefficient map",
+ "statement": "Fix a prime l, a finite extension E of Q_l, schemes X,Y with independent site and coefficient universes, and f:X -> Y [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Use the completed coefficient sheaves and the specified ordinary pullback adjunction, completed coefficient map and finite constant-section maps [def-fix-qcqs-completion-ordinary-models]. Suppose ordinaryCoefficientMap(f) is invertible. For n >= 0 let q_W,n be the recorded ordinary extension of scalars along the completed projection to the quotient at exponent n+1, followed by restriction back to completed coefficients [def-pur-integral-derived-operations]. There is a unique natural isomorphism q_Y,n followed by ordinaryPull(f) to ordinaryPull(f) followed by q_X,n whose component sends the ordinary-adjunction-unit image of a tensor x to the quotient generator with coefficient ordinaryFiniteRingMap(f,n)(a) and module section the ordinary-adjunction-unit image of x. The formula holds for every object V of the pro-etale site of Y, every finite coefficient section a on V and every module section x on V, and is evaluated on the base change of V. This is one quotient of module sheaves; no complex, transition or tower compatibility is part of the assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-tensor-product-pullback, Tag 03EL, proof by bilinear-map adjunction; applied to the quotient coefficient module. Finite constant-ring comparison: proetale.tex and prop-weil-pbc-proetale-constant-ring-map. Fixed generator normalization as in the first step of lem-fix-qcqs-ordinary-quotient-restriction."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "The normalized quotient unit M -> q_n M is epic. Use the sectionwise surjectivity of the constant quotient ring map, factoring through the completed ring, and the ordinary common-quotient unit epimorphism lemma. The common-quotient kernel calculation says that sections killed by this unit locally belong to the span of products j*x with j in the kernel of the completed projection. Kernel divisibility writes each such j as the (n+1)-st completed uniformizer power times a section. Therefore every module map killed by uniformizer multiplication kills the kernel of the quotient unit. The abelian epimorphism descent and its universal property show that this unit is a cokernel of uniformizer multiplication. No flatness is needed.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-ordinary-common-quotient-tower",
+    "lem-sp-completed-integral-projection-divisibility",
+    "lem-sp-completed-integral-finite-quotient-hom-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constant-section direct-image maps are natural in the coefficient ring. Test the completed direct coefficient map on every finite projection, using its specified equations, to prove that it commutes with constant integral scalars. In particular it carries the uniformizer section to the uniformizer section. Transpose through the specified ordinary module adjunction; semilinearity of the adjunction unit then shows that ordinary pullback maps uniformizer multiplication to uniformizer multiplication.",
+   "uses": [
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary pullback is additive and left adjoint, hence preserves the quotient-unit cokernels. Uniqueness of cokernels gives an isomorphism L(q_n M) -> q_n(L M) carrying L of the quotient unit to the quotient unit. Cokernel extensionality and naturality of the quotient units prove naturality in M.",
+   "uses": [
+    "def-fix-qcqs-completion-ordinary-models",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift any finite coefficient section a to a completed coefficient r. Tensor balancing identifies the generator a tensor x with the quotient unit applied to r*x. Naturality of the ordinary adjunction unit and the cokernel comparison equation reduce the requested normalization to semilinearity of that unit and the defining finite-projection equation for the completed coefficient map. For uniqueness transpose two normalized comparison maps through ordinaryAdjunction and apply reduction pure-tensor extensionality. This includes exponent one, zero modules and the empty scheme. The coefficient-map invertibility hypothesis is not needed by this stronger proof, but the statement retains it verbatim.",
+   "uses": [
+    "def-fix-qcqs-completion-ordinary-models",
+    "def-pur-integral-derived-operations",
+    "lem-sp-completed-integral-finite-quotient-hom-ext"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product: quotient scalar extension as a cokernel of uniformizer multiplication, preserved by the ordinary left adjoint. Completed coefficient kernel divisibility is the existing lem-sp-completed-integral-projection-divisibility. The constant scalar and finite-projection equations normalize the comparison on generators."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of modules commutes with quotient coefficients and preserves the quotient augmentation",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_assoc; SheafOfModules.pullbackComp; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.Presentation.map_π_eq; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the fixed completed-module quotient comparison normalized on the ordinary adjunction-unit and quotient pure-tensor generators."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the fixed completed-module quotient comparison normalized on the ordinary adjunction-unit and quotient pure-tensor generators."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*restrictScalars|restrictScalars.*pullback",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the fixed completed-module quotient comparison normalized on the ordinary adjunction-unit and quotient pure-tensor generators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules commutes with extension of scalars and restriction along a finite quotient ring",
+   "results": "SheafOfModules.restrictScalars; PresheafOfModules.restrictScalarsObj; ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.pullback; PresheafOfModules.restrictScalars; ModuleCat.tildeInModuleCat; SheafOfModules.pushforwardNatIso_inv; LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the fixed completed-module quotient comparison normalized on the ordinary adjunction-unit and quotient pure-tensor generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryQuotientRestriction",
+  "date": "2026-10-27",
+  "group": "R9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.; Step 2: tensor base change, strict quotient transitions and augmentation; single finite module tensor comparison, before any complex or strict-tower assembly",
+   "via": [
+    "lem-fix-qcqs-ordinary-quotient-restriction",
+    "lem-fix-qcqs-ordinary-restriction-models",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryQuotientModuleComparison",
+  "file": "lean/Sheaf/Paper/OrdinaryQuotientModuleComparison.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.ordinaryQuotientModuleComparison",
+  "declarations": [
+   "WeilConjectures.IntegralOnSlice.ordinaryQuotientModule",
+   "WeilConjectures.IntegralOnSlice.ordinaryQuotientModuleComparison"
+  ],
+  "statement": "theorem ordinaryQuotientModuleComparison\n    {X Y : Scheme.{t}} (f : X ⟶ Y) [IsIso (ordinaryCoefficientMap l E f)] (n : ℕ) :\n    ∃! e : ordinaryQuotientModule l E Y n ⋙ ordinaryPull l E f ≅\n        ordinaryPull l E f ⋙ ordinaryQuotientModule l E X n,\n      ∀ (M : Mod l E Y none) (V : Y.ProEt)\n        (a : (finite l E Y none n).obj.obj (op V)) (x : M.val.obj (op V)),\n        (e.hom.app M).val.app (op ((proEtaleBaseChange f).obj V))\n          (((ordinaryAdjunction l E f).unit.app\n            ((ordinaryQuotientModule l E Y n).obj M)).val.app (op V)\n              (generator l E Y none n M (op V) a x)) =\n          generator l E X none n ((ordinaryPull l E f).obj M)\n            (op ((proEtaleBaseChange f).obj V))\n            ((ordinaryFiniteRingMap l E f n).hom.app (op V) a)\n            (((ordinaryAdjunction l E f).unit.app M).val.app (op V) x)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-derived-operations",
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "lem-sp-completed-integral-projection-divisibility",
+  "lem-weil-pbc-ordinary-common-quotient-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T012931-L-2349462",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261027T034756-L-3685651",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

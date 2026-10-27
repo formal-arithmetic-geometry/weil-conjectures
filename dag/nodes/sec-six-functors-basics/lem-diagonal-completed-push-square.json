@@ -1,0 +1,109 @@
+{
+ "id": "lem-diagonal-completed-push-square",
+ "kind": "statement",
+ "title": "Deriving ordinary coefficient squares with their full units",
+ "statement": "Given additive F:A→B and G:C→D between abelian categories, independently sized derived categories on A,B and C,D, exact equivalences U:A→C and V:B→D, right-derived models RF,RG as in [det-prop-diagonal-tower-limit], and an ordinary isomorphism F V≅U G, there exists ExactSquareOfUniverses with the full universal-unit normalization of [def-sfb-diagonal-trace-models]. Consequently an ordinary normalized coefficient square between CompletedRealizations of [def-sfb-diagonal-coefficient-reference] yields a CompletedPushSquare with precisely that ordinary comparison and normalized derived square.",
+ "stmt_deps": [
+  "det-prop-diagonal-tower-limit",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-coefficient-reference"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient/direct-image comparison; Stacks Tags 05RR and 0941"
+ },
+ "proof": [
+  {
+   "text": "The two right-derived units are universal left Kan extensions. Transport them through the two exact equivalences. Uniqueness of the transported universal pairs supplies the right-derived isomorphism, with its full factorization equation on every complex. Package this with the supplied ordinary square; the universal-unit equation determines the choice up to the equality used downstream.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-derived-exact-equivalence-squares"
+ ],
+ "proof_origin": {
+  "by": "U4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient/direct-image comparison; Stacks Tags 05RR and 0941"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport integration identity through a natural transformation and endpoint isomorphisms; canonical right derived functor computed on K injective complexes; diagonal trace coefficient extension and uniformizer quotient annihilation",
+   "results": "Eight hits, including InjectiveResolution.isoRightDerivedObj and Functor.mapDerivedCategoryFactorsh_hom_app; none states the normalized diagonal comparison. The canonical K-injective unit API is reused.",
+   "date": "2026-10-24",
+   "verdict": "No complete existing diagonal coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits, including rightDerivedUnique and LocalizerMorphism.Derives construction APIs. These provide the canonical unit universal property; they do not assert the geometric coefficient endpoints.",
+   "date": "2026-10-24",
+   "verdict": "Use the published universal-property API for the canonical derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|canonicalDiagonalRightDerived|diagonalUniformizer_annihilator|diagonalCompleted_frame|diagonalCoefficientFamily_extension|diagonalCoefficient_uniformizerFiniteComparison",
+   "results": "Zero hits in the search service. Local rg of both roots found the definitions of Reference, Family and ScalarCompatibility but no constructions.",
+   "date": "2026-10-24",
+   "verdict": "New comparison components are necessary for this reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "date": "2026-10-24",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), coefficient/direct-image comparison; Stacks Tags 05RR and 0941",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletedPushSquare",
+  "file": "lean/Sheaf/Paper/DiagonalCompletedPushSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalExactSquare_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalExactSquare_exists",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CompletedOrdinarySquare",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CompletedOrdinarySquare.derive"
+  ],
+  "statement": "theorem diagonalExactSquare_exists\n    {A B C D : Type a} [Category.{v} A] [Category.{v} B]\n    [Category.{v} C] [Category.{v} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]\n    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]\n    [HasDerivedCategory.{w'} C] [HasDerivedCategory.{w'} D]\n    (F : A ⥤ B) (G : C ⥤ D) [F.Additive] [G.Additive]\n    (U : A ⥤ C) (V : B ⥤ D) [U.Additive] [V.Additive]\n    [U.IsEquivalence] [V.IsEquivalence]\n    [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (RF : DiagonalRightDerived F) (RG : DiagonalRightDerived G)\n    (ordinary : F ⋙ V ≅ U ⋙ G) :\n    Nonempty (DiagonalTrace.ExactSquareOfUniverses F G U V RF RG ordinary)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "independent cc review: item module diff + 13 new modules/nodes vs clone (Family, ScalarCompatibility, FiniteReductions, FamilyPullback, SupportedSource defs; unit sk-prop-diagonal-tower realized=empty; importer grep = 0)"
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "id": "lem-trf-bundle-section-purity-unit-normalization",
+ "kind": "statement",
+ "title": "Affine normalization of the unit integration mate",
+ "statement": "In the finite-ring bundle setting [def-trf-bundle-section-orientation-data], let p be an inverse projection isomorphism with p.inv equal to the canonical projection map at the coefficient unit. If an isomorphism o:B~=L has inverse equal to the zero-section pullback of bundleSectionPurityUnitMap(p), after inverse coefficient comparison, then o satisfies the prescribed affine-frame orientation normalization. No existence, uniqueness, linear naturality or rank-zero normalization of o is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; expanded in lem-trf-finite-ring-bundle-section-orientation, proof Steps 1--10"
+ },
+ "stmt_deps": [
+  "def-trf-bundle-section-orientation-data"
+ ],
+ "proof": [
+  {
+   "text": "At the coefficient unit the proper projection is the transpose of the counit, hence the identity under unitors. Open extension has the same unit equation; both signed symmetries have sign one. Thus the unit purity map is the adjunct of the actual integration trace.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-tensor-unit",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each affine frame mate naturality and the normalized compact-support exchange identify the restricted integration adjunct with the adjunct of the coordinate-tower trace. Pull back by the Cartesian lift of zero and use the section and coefficient compositors to obtain precisely the normalization equation. Integration normalization quantifies over all normalized t,D, as required. The same equations include empty schemes, zero coefficients and rank zero.",
+   "uses": [
+    "def-amb-vector-integration",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "def-trf-bundle-section-orientation-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-unit",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-tensor-sym",
+  "def-amb-vector-integration",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "def-trf-bundle-section-orientation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; expanded in lem-trf-finite-ring-bundle-section-orientation, proof Steps 1--10"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived category tensor product of flat sheaves concentrated in degree zero is concentrated in degree zero",
+   "results": "Flat tensor exactness results; no zero-section orientation theorem.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized vector-bundle integration induces an orientation of its zero section",
+   "results": "Eight linear algebra orientation hits, unrelated to ordinary etale duality.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Generic adjunction naturality.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "grep",
+   "query": "bundleSection|vectorIntegration.*Unit|rankZero",
+   "results": "The original module is the only occurrence of bundleSection; VectorIntegrationMate supplies invertibility, AffineTraceRightNormalForm supplies tensor normal forms.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientation",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Orientation-charts Step 4; canonical zero-section maps and frame normalization",
+   "via": [
+    "lem-trf-finite-ring-bundle-section-orientation",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BundleSectionPurityUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/BundleSectionPurityUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.bundleSectionPurityUnit_normalization",
+  "statement": "theorem bundleSectionPurityUnit_normalization (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] (p : (vectorBundlePurityLower A S d M).obj (vectorBundlePurityTwistedPullback A N hA S d M (ordinaryFiniteUnit A S)) ≅ ((derivedTensor (ModuleCat.{u + 1} A) S).obj (ordinaryFiniteUnit A S)).obj (vectorIntegrationSource A N hA S d M)) (hp : p.inv = vectorBundlePurityProjectionMap A N hA S d M (ordinaryFiniteUnit A S)) (o : bundleSectionObject A S d M ≅ affineLinearBaseCoefficient A N hA S d) (ho : o.inv = (bundleSectionCoefficientIso A N hA S d M).inv ≫ (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).map (bundleSectionPurityUnitMap N hN A hA S hS d M p)) : BundleSectionOrientationNormalization N hN A hA S hS d M o",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb15e",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T100811-L-3625154",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb15e",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T100811-L-3625154",
+  "kind": "interface",
+  "note": "independent cc review: 18 moved decls in FiniteRingBundleSectionOrientationData vs published item module (byte-identical); 4 item theorem signatures vs published (identical); importer FiniteRingSectionDeformation compiled on delivered modules (exit 0); #print axioms on proved theorems (sorryAx only via the new normalization hole and upstream vectorIntegrationMate_isIso); node proof uses == proof_deps"
+ }
+}

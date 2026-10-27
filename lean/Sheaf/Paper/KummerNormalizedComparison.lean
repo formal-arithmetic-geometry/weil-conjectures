@@ -21,6 +21,9 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
+attribute [local irreducible] AlgebraicGeometry.ProEtale.CondensedRing.upperStar
+attribute [local irreducible] AlgebraicGeometry.ProEtale.CondensedRing.lowerStar
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
@@ -34,6 +37,7 @@ def kummerAlternating (S : Scheme.{u}) :
   obj K := AlgebraicTopology.AlternatingCofaceMapComplex.obj K
   map f := AlgebraicTopology.AlternatingCofaceMapComplex.map f
 
+set_option linter.unusedSectionVars false in
 /-- The explicit alternating functor preserves addition.
 Source: direct-image proof (3), coherent signed total
 (blueprint: def-sfb-normalized-kummer-comparison).
@@ -41,7 +45,11 @@ Proof: its map in degree n is the component at simplex n. Natural transformation
 addition is componentwise, so the component is the sum of the two components. -/
 theorem kummerAlternating_additive (S : Scheme.{u}) :
     (kummerAlternating Λ S).Additive := by
-  sorry
+  constructor
+  intro X Y f g
+  apply HomologicalComplex.hom_ext
+  intro n
+  rfl
 attribute [instance] kummerAlternating_additive
 
 /-- The actual Cech cochain functor, retaining all simplicial operators.
@@ -61,7 +69,8 @@ Cech functor is additive termwise, so the induced chain maps preserve sums. -/
 theorem kummerCochains_additive {T W Y S : Scheme.{u}}
     (a : W ⟶ Y) (s : S ⟶ Y) (v : T ⟶ W) :
     (kummerCochains Λ a s v).Additive := by
-  sorry
+  unfold kummerCochains
+  infer_instance
 attribute [instance] kummerCochains_additive
 
 /-- The actual finite-diagonal total of a coherent nerve resolution.
@@ -94,6 +103,33 @@ def kummerTotal {T W Y S : Scheme.{u}}
     CochainComplex (KummerModules Λ S) ℕ :=
   (kummerDiagramTotal Λ S).obj (kummerCechResolution Λ a s v I)
 
+private theorem alternatingTerm {C : Type*} [Category C] [Preadditive C]
+    (K : SimplexCategory ⥤ C) (n : ℕ) :
+    (AlgebraicTopology.AlternatingCofaceMapComplex.obj K).X n = K.obj (.mk n) := by
+  rfl
+
+private theorem overSectionsObj {W : Scheme.{u}} (V : Over W) :
+    (overSections Λ W).obj (op V) = upperStar Λ V.hom ⋙ lowerStar Λ V.hom := by
+  rfl
+
+private theorem cechDiagramObj {T W Y S : Scheme.{u}}
+    (a : W ⟶ Y) (s : S ⟶ Y) (v : T ⟶ W) (n : SimplexCategory) :
+    (((cechOver v).rightOp ⋙ overSections Λ W) ⋙
+      (Functor.whiskeringRight _ _ _).obj (lowerStar Λ a ⋙ upperStar Λ s)).obj n =
+    (upperStar Λ ((cechOver v).obj (op n)).hom ⋙
+      lowerStar Λ ((cechOver v).obj (op n)).hom) ⋙
+        (lowerStar Λ a ⋙ upperStar Λ s) := by
+  change ((overSections Λ W).obj (op ((cechOver v).obj (op n)))) ⋙
+    (lowerStar Λ a ⋙ upperStar Λ s) = _
+  rw [overSectionsObj]
+
+private theorem cechTerm {T W Y S : Scheme.{u}}
+    (a : W ⟶ Y) (s : S ⟶ Y) (v : T ⟶ W)
+    (L : KummerModules Λ W) (n : SimplexCategory) :
+    cechImageTerm Λ a s v L n = ((cechImage Λ a s v).obj L).obj n := by
+  exact (congrArg (fun F : KummerModules Λ W ⥤ KummerModules Λ S ↦ F.obj L)
+    (cechDiagramObj Λ a s v n)).symm
+
 /-- The cochain term is the corresponding actual nerve term.
 Source: direct-image proof (3), alternating cofaces
 (blueprint: def-sfb-normalized-kummer-comparison).
@@ -105,7 +141,8 @@ theorem kummerCochains_term {T W Y S : Scheme.{u}}
     (a : W ⟶ Y) (s : S ⟶ Y) (v : T ⟶ W)
     (L : KummerModules Λ W) (n : ℕ) :
     cechImageTerm Λ a s v L (.mk n) = ((kummerCochains Λ a s v).obj L).X n := by
-  sorry
+  exact (cechTerm Λ a s v L (.mk n)).trans
+    (alternatingTerm ((cechImage Λ a s v).obj L) n).symm
 
 /-- The actual augmentation is inserted into Cech degree zero in each resolution degree.
 Source: direct-image proof (3), restriction of sections and the adjunction counit

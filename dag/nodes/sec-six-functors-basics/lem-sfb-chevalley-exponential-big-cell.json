@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-chevalley-exponential-big-cell",
+ "kind": "statement",
+ "title": "Open root-product chart for an admissible Chevalley representation",
+ "statement": "Let $V$ be a finite-dimensional rational vector space and $R\\subset V\\setminus\\{0\\}$ a reduced crystallographic root system spanning $V$, with coroot functionals $\\bar c_\\alpha$ and weight lattice $P=\\{v\\in V:\\bar c_\\alpha(v)\\in\\mathbf Z\\text{ for every }\\alpha\\in R\\}$ in the conventions of [lem-sfb-root-datum-lattice-embedding]. Let $\\mathfrak g,\\mathfrak h,h_\\delta,e_\\alpha,\\rho,W,\\Omega,\\Lambda$ satisfy the Chevalley-basis and faithful-representation conditions of [lem-sfb-chevalley-admissible-representation]: $\\mathfrak g$ is split semisimple over $\\mathbf Q$, $\\rho$ is faithful on finite-dimensional $W$, the nonzero weight spaces $W_\\lambda$ have weights $\\Omega\\subset P$ with $\\mathbf Z\\Omega=P$, and the full lattice $\\Lambda=\\bigoplus_{\\lambda\\in\\Omega}(\\Lambda\\cap W_\\lambda)$ is stable under every $D_{\\alpha,m}=\\rho(e_\\alpha)^m/m!$, with $\\rho(e_\\alpha)$ nilpotent. Fix a simple-root base $\\Delta$, meaning a subset $\\Delta\\subseteq R$ which is a basis of $V$ such that every root has integral coordinates in $\\Delta$ all nonnegative or all nonpositive. Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $W_F=\\Lambda\\otimes_{\\mathbf Z}F$, and $T=D_F(P)=\\operatorname{Spec}F[P]$, where $F[P]$ has basis $e^\\lambda$, multiplication $e^\\lambda e^\\mu=e^{\\lambda+\\mu}$, comultiplication $e^\\lambda\\mapsto e^\\lambda\\otimes e^\\lambda$, counit $e^\\lambda\\mapsto1$, and antipode $e^\\lambda\\mapsto e^{-\\lambda}$. Embed $T$ in $\\operatorname{GL}(W_F)$ by its weight characters on the summands $(\\Lambda\\cap W_\\lambda)\\otimes F$. Define the finite polynomial matrices $x_\\alpha(a)=\\sum_{m\\geq0}(D_{\\alpha,m}\\otimes1)a^m$ for every commutative $F$-algebra. Group schemes and closed subgroups have the meanings of [def-sc-group-scheme, def-sc-group-scheme-subgroup], and $\\mathbf G_a,\\mathbf G_m$ those of [def-sc-gm-ga]. Let $K\\subseteq\\operatorname{GL}(W_F)$ be the smallest closed subgroup containing $T$ and the images of all $x_\\alpha$. Put $R^+=R\\cap\\sum_{\\delta\\in\\Delta}\\mathbf Z_{\\geq0}\\delta$, $N=|R^+|$, and enumerate $R^+$ by any total order refining nondecreasing height (height is the sum of the simple-root coefficients). Using that order for each product, the multiplication morphism\n$$\\mathbf A_F^N\\times_F T\\times_F\\mathbf A_F^N\\longrightarrow K,\\qquad ((a_\\beta),t,(b_\\beta))\\longmapsto\\left(\\prod_{\\beta\\in R^+}x_{-\\beta}(a_\\beta)\\right)t\\left(\\prod_{\\beta\\in R^+}x_\\beta(b_\\beta)\\right)$$\nis an open immersion [def-weil-open-immersion] whose image contains the identity. It is equivariant for conjugation by $T$: the negative coordinates have characters $-\\beta$, the positive coordinates have characters $\\beta$, and $T$ acts trivially on the middle factor. In particular its differential identifies the tangent representation at the identity with\n$$\\operatorname{Lie}(K)=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\beta\\in R}F\\,d x_\\beta(1),$$\nwhere the displayed root vectors are nonzero and have the distinct torus characters $\\beta$. Tangent spaces and their differentials are at the identity; the $1$ in $d x_\\beta(1)$ is the unit vector in $T_0\\mathbf G_a=F$. This assertion assumes no reductivity of $K$ and makes no identification with the reduction of a chosen integral Lie-algebra form. For $R=\\varnothing$ the morphism is the identity of $T=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Theorem 23.72 proof, pp.510-511: omitted details needed to use the weight-character torus rather than the full diagonal torus. The open-cell strengthening is an agent-stated construction lemma."
+ },
+ "stmt_deps": [
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-chevalley-admissible-representation",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-weil-open-immersion",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "The representation conditions give $D_{\\alpha,i}D_{\\alpha,j}=\\binom{i+j}{i}D_{\\alpha,i+j}$ on the torsion-free lattice, since this equality holds over $\\mathbf Q$. Coefficient comparison therefore proves $x_\\alpha(a)x_\\alpha(b)=x_\\alpha(a+b)$ and $x_\\alpha(a)^{-1}=x_\\alpha(-a)$ over every test algebra. The bracket $[h,e_\\alpha]=\\alpha(h)e_\\alpha$ gives $D_{\\alpha,m}(W_\\lambda)\\subseteq W_{\\lambda+m\\alpha}$, so $t x_\\alpha(a)t^{-1}=x_\\alpha(\\alpha(t)a)$. These are integral polynomial identities, and do not divide by a factorial in $F$. At zero every root map is the identity.",
+   "uses": [
+    "lem-sfb-chevalley-admissible-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Equation (153), p.510; integral coefficient and weight calculations written out."
+   }
+  },
+  {
+   "text": "Write $p_\\pm$ for the ordered products in the statement. By [lem-sfb-chevalley-unipotent-polynomial-coordinates] they identify affine spaces with closed subgroup schemes $U_\\pm$. Choose a rational functional positive on every simple root and separating the finitely many distinct weights: start with the function taking value 1 on every simple root and perturb it within the positive rational cone to avoid the finitely many equations $q(\\lambda-\\mu)=0$. Ordering weight summands by decreasing $q$ puts $U_+$ in the block upper unitriangular group and $U_-$ in the block lower one. Inside the block diagonal group, $T$ is closed: its coordinate pullback sends a diagonal entry on weight $\\lambda$ to $e^\\lambda$, an inverse block determinant to $e^{-r_\\lambda\\lambda}$ where $r_\\lambda=\\dim W_\\lambda$, and off-diagonal entries to zero. Hence it also contains $e^{-\\lambda}=e^{-r_\\lambda\\lambda}(e^\\lambda)^{r_\\lambda-1}$. Since $\\mathbf Z\\Omega=P$, these elements generate $F[P]$, so the pullback is surjective.",
+   "uses": [
+    "lem-sfb-chevalley-unipotent-polynomial-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Equation (152), p.510; weight-compatible matrix blocks and the explicit weight torus; one-sign collection supplied separately."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-block-gauss-scheme-chart] to these weight blocks. Inside its source, $U_-\\times T\\times U_+$ is closed: the three coordinate surjections for the closed inclusions tensor to a surjection, so the product is a closed subscheme. Thus its multiplication map $j:C=\\mathbf A^N\\times T\\times\\mathbf A^N\\to\\operatorname{GL}(W_F)$ is a closed immersion into the Gauss open, hence a quasi-compact immersion. Its coordinate algebra is a polynomial algebra over $F[P]$. The finite set $\\Omega$ generates $P$ by hypothesis, and $P\\subset V$ is torsion-free since $V$ is rational. Hence [lem-trf-fg-torsionfree-group-free] gives a finite basis of $P$, making $F[P]$ a Laurent polynomial algebra. Consequently both $C$ and $C\\times_F C$ are integral. The coordinate origin with middle factor 1 maps to the identity.",
+   "uses": [
+    "lem-sfb-block-gauss-scheme-chart",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.72, pp.510-511; agent Gauss-chart immersion argument, with the general matrix chart stated separately."
+   }
+  },
+  {
+   "text": "[lem-sfb-chevalley-opposite-rational-collection] writes $v_1u_2=u_0t_0v_0$ on an open neighbourhood of $(1,1)$ in $U_+\\times U_-$, with $u_i\\in U_-$, $v_i\\in U_+$ and $t_i\\in T$. Thus on a nonempty open of $C\\times C$ the product of $u_1t_1v_1$ and $u_2t_2v_2$ equals $[u_1(t_1u_0t_1^{-1})](t_1t_0t_2)[(t_2^{-1}v_0t_2)v_2]$, a morphism into $C$. The brackets lie in $U_-$ and $U_+$, respectively, by their subgroup property and the conjugation formula of step 1. For inversion, apply the same collection identity to $v^{-1}(t^{-1}u^{-1}t)=u_0t_0v_0$; then $(utv)^{-1}=u_0(t_0t^{-1})(tv_0t^{-1})$. Its domain is a nonempty open of $C$, since it contains the identity. Both domains are dense by step 3. This proves generic factorization of multiplication and inversion as morphisms, including their scheme structures.",
+   "uses": [
+    "lem-sfb-chevalley-unipotent-polynomial-coordinates",
+    "lem-sfb-chevalley-opposite-rational-collection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.72 omitted details, p.511; agent assembly of localized opposite-product identities, before any reductivity assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-generic-matrix-locus-subgroup-closure] to the immersion $j:C\\to\\operatorname{GL}(W_F)$. The source is affine of finite type and remains integral over any field extension, since its algebra is polynomial/Laurent polynomial by step 3. The identity point is present. Step 4 gives the required nonempty open domains and actual morphism factorizations of multiplication and inversion. Thus the scheme-theoretic image $H$ of $C$ is a closed subgroup. Every generator $T,x_\\alpha$ factors through $C$ by setting the other coordinates to zero, so $K\\subseteq H$. Conversely $C$ factors through $K$ by multiplication of these generators; minimality of the scheme-theoretic image gives $H\\subseteq K$ [def-nagata-scheme-theoretic-image]. Hence $H=K$ as closed subgroup schemes.",
+   "uses": [
+    "lem-sfb-generic-matrix-locus-subgroup-closure",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.72, p.511; agent coordinate-kernel argument. Scheme-theoretic image is used only with its defining minimality and kernel ideal."
+   }
+  },
+  {
+   "text": "By [lemma-nagata-immersion-open-in-scheme-image], the quasi-compact immersion $j$ is an open immersion into its scheme-theoretic image $H=K$. Its image contains the identity by step 3. Conjugating each factor using step 1 gives equivariance: $a_\\beta\\mapsto(-\\beta)(t)a_\\beta$, $b_\\beta\\mapsto\\beta(t)b_\\beta$, and the middle factor is fixed since $T$ is commutative. This identity holds on every test algebra, so it is an identity of morphisms.",
+   "uses": [
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.72, p.511; general immersion/image lemma supplies openness, not a reductive-group big-cell theorem."
+   }
+  },
+  {
+   "text": "The tangent space of an open neighbourhood equals that of the ambient scheme at its point. Directly from the product coordinates at $(0,1,0)$, the differential of multiplication is $(a,z,b)\\mapsto\\sum_\\beta a_\\beta dx_{-\\beta}(1)+z+\\sum_\\beta b_\\beta dx_\\beta(1)$: multiply matrices over $F[\\epsilon]/(\\epsilon^2)$ and discard quadratic terms. It is an isomorphism because step 6 is an open immersion. Differentiating the equivariance identity gives characters $-\\beta,0,\\beta$ on the corresponding summands. Each root coordinate has a nonzero unit tangent vector, whose image is nonzero under this isomorphism; the characters are distinct as elements of $P$, even if their differentials agree in small characteristic. This gives the asserted tangent direct sum. If $R=\\varnothing$, its spanning hypothesis gives $V=P=0$, $T=1$, and both products and the generated group are 1. The displayed morphism is then the identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.72, p.511; tangent calculation in the proved open chart. No integral Lie-algebra reduction is identified."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-admissible-representation",
+  "lem-sfb-chevalley-unipotent-polynomial-coordinates",
+  "lem-sfb-block-gauss-scheme-chart",
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-sfb-chevalley-opposite-rational-collection",
+  "lem-sfb-generic-matrix-locus-subgroup-closure",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-immersion-open-in-scheme-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, pp.510-511, omitted details supplemented by one-sign coordinates, opposite rational collection, and block Gauss charts; no reductivity hypothesis used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordered negative root exponentials times a weight torus times positive root exponentials form an open cell in the group generated on an admissible Chevalley lattice",
+   "results": "{\"t\": \"2026-10-23T21:32:46Z\", \"tool\": \"leanfinder\", \"query\": \"Ordered negative root exponentials times a weight torus times positive root exponentials form an open cell in the group generated on an admissible Chevalley lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.RelCWComplex.openCell\", \"NumberField.mixedEmbedding.fundamentalCone.expMap_target\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"Topology.RelCWComplex.Subcomplex.openCell_eq\", \"NumberField.mixedEmbedding.fundamentalCone\", \"RootPairing.setOf_root_add_zsmul_eq_Icc_of_linearIndependent\", \"ZSpan.fundamentalDomain\", \"RootPairing.setOf_root_add_zsmul_mem_eq_Icc\"], \"digest\": \"d023fc72ed3b37e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-cell hits concern CW complexes; the root-pairing hits are combinatorics. GeneralLinearGroup.upperRightHom_apply and Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec concern ordinary matrices, not root products on an arbitrary Chevalley lattice. The open-immersion hits assume that the morphism is already an open immersion. No candidate supplies this construction before reductivity is known."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral Chevalley group has a Gauss decomposition on a nonempty open neighbourhood of the identity in any characteristic",
+   "results": "{\"t\": \"2026-10-23T21:33:18Z\", \"tool\": \"leanfinder\", \"query\": \"An integral Chevalley group has a Gauss decomposition on a nonempty open neighbourhood of the identity in any characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModularGroup.g_eq_of_c_eq_one\", \"Matrix.SpecialLinearGroup.instTopologicalSpace\", \"Matrix.SpecialLinearGroup.fin_two_exists_eq_mk_of_apply_zero_one_eq_zero\", \"Matrix.GeneralLinearGroup.upperRightHom_apply\", \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"Subgroup.instIsArithmeticRangeSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGL\", \"FixedDetMatrices.reduce_mem_reps\", \"FixedDetMatrices.reps_one_id\"], \"digest\": \"fbc6ea0d22525fe9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-cell hits concern CW complexes; the root-pairing hits are combinatorics. GeneralLinearGroup.upperRightHom_apply and Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec concern ordinary matrices, not root products on an arbitrary Chevalley lattice. The open-immersion hits assume that the morphism is already an open immersion. No candidate supplies this construction before reductivity is known."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"open\"",
+   "results": "{\"t\": \"2026-10-23T21:33:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"root\\\", \\\"open\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-cell hits concern CW complexes; the root-pairing hits are combinatorics. GeneralLinearGroup.upperRightHom_apply and Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec concern ordinary matrices, not root products on an arbitrary Chevalley lattice. The open-immersion hits assume that the morphism is already an open immersion. No candidate supplies this construction before reductivity is known."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley root exponential ordered products and a weight torus form an open immersion into the generated matrix group",
+   "results": "{\"t\": \"2026-10-23T21:33:17Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley root exponential ordered products and a weight torus form an open immersion into the generated matrix group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Opens.instIsOpenImmersionι\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.isOpenImmersion_isMultiplicative\", \"LieAlgebra.coe_rootSpaceWeightSpaceProduct_tmul\", \"RootPairing.weylGroup\", \"LieAlgebra.rootSpaceProduct\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\"], \"digest\": \"07b89d53694dd373\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-cell hits concern CW complexes; the root-pairing hits are combinatorics. GeneralLinearGroup.upperRightHom_apply and Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec concern ordinary matrices, not root products on an arbitrary Chevalley lattice. The open-immersion hits assume that the morphism is already an open immersion. No candidate supplies this construction before reductivity is known."
+  },
+  {
+   "tool": "grep",
+   "query": "big.cell|root.*exponential|Bruhat",
+   "results": "{\"t\": \"2026-10-23T21:33:16Z\", \"tool\": \"grep\", \"query\": \"big.cell|root.*exponential|Bruhat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"Mathlib/Algebra/Module/Lattice.lean\"], \"digest\": \"0203895b40a8f3f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-cell hits concern CW complexes; the root-pairing hits are combinatorics. GeneralLinearGroup.upperRightHom_apply and Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec concern ordinary matrices, not root products on an arbitrary Chevalley lattice. The open-immersion hits assume that the morphism is already an open immersion. No candidate supplies this construction before reductivity is known."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Chevalley root exponential products give closed affine-space coordinates on the positive and negative unipotent matrix subgroups",
+   "results": "{\"t\": \"2026-10-23T22:14:59Z\", \"tool\": \"leanfinder\", \"query\": \"Ordered Chevalley root exponential products give closed affine-space coordinates on the positive and negative unipotent matrix subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e\", \"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.f\", \"RootPairing.GeckConstruction.h\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.u\", \"RootPairing.GeckConstruction.ω\", \"RootPairing.GeckConstruction.ω_mul_f\"], \"digest\": \"94b6cf7a7ec83fc9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches for the required constituents returned only Lie-algebra combinatorics, generic matrix transvections and analytic exponentials; none proves the full group-scheme open chart before reductivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite Chevalley unipotent products admit rational Gauss refactorization near the identity over an arbitrary field",
+   "results": "{\"t\": \"2026-10-23T22:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite Chevalley unipotent products admit rational Gauss refactorization near the identity over an arbitrary field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"Matrix.TransvectionStruct.reverse_inv_prod_mul_prod\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"Matrix.TransvectionStruct.prod_mul_reverse_inv_prod\", \"Matrix.Pivot.listTransvecCol\", \"Matrix.Pivot.listTransvecRow\"], \"digest\": \"2a895371a0b7a74b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches for the required constituents returned only Lie-algebra combinatorics, generic matrix transvections and analytic exponentials; none proves the full group-scheme open chart before reductivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite unipotent Chevalley exponential products can be reordered by rational functions regular at the identity",
+   "results": "{\"t\": \"2026-10-23T22:16:52Z\", \"tool\": \"leansearch\", \"query\": \"Opposite unipotent Chevalley exponential products can be reordered by rational functions regular at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedSpace.exp_unop\", \"AddOpposite.unop_finsuppProd\", \"NormedSpace.exp_op\", \"NormedSpace.exp_units_conj\", \"MulOpposite.exponent\", \"MulOpposite.unop_mul\", \"MulOpposite.unop_list_prod\", \"IsNilpotent.exp_neg_mul_exp_self\"], \"digest\": \"925595a803c3c11d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches for the required constituents returned only Lie-algebra combinatorics, generic matrix transvections and analytic exponentials; none proves the full group-scheme open chart before reductivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"exp\"",
+   "results": "{\"t\": \"2026-10-23T22:18:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"root\\\", \\\"exp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.SubExpr.Pos.root\", \"Lean.SubExpr.isRoot\", \"Lean.SubExpr.mkRoot\", \"Lean.SubExpr.Pos.isRoot\", \"Lean.SubExpr.GoalsLocation.rootExpr\", \"Mathlib.Tactic.ClickSuggestions.GrwInfo.rootExpr\", \"Mathlib.Tactic.ClickSuggestions.RwInfo.rootExpr\", \"Polynomial.rootMultiplicity_expand\"], \"digest\": \"54f966ea9816bacf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches for the required constituents returned only Lie-algebra combinatorics, generic matrix transvections and analytic exponentials; none proves the full group-scheme open chart before reductivity."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|unipotent|exponential",
+   "results": "{\"t\": \"2026-10-23T22:16:52Z\", \"tool\": \"grep\", \"query\": \"Chevalley|unipotent|exponential\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches for the required constituents returned only Lie-algebra combinatorics, generic matrix transvections and analytic exponentials; none proves the full group-scheme open chart before reductivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-root-exponential-group",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, Theorem 23.72 proof, pp.510-511: omitted details needed to use the weight-character torus rather than the full diagonal torus. The open-cell strengthening is an agent-stated construction lemma.",
+   "via": [
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-exponential-big-cell",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the root-product locus as a locally closed matrix subscheme, proved its closure is precisely the generated group using localized opposite-root collection, and obtained openness from the immersion/image lemma. Conjugation and tangent clauses are computed in the chart. Four new statement-only nodes, no Mathlib leaves. No use of the parent reductivity theorem.",
+  "blueprint": "Retained inherited null blueprint ancestor and exact via chain (blueprint_refs ancestor returns None). Realizes the inherited Chevalley-construction prerequisite for det-thm-sf-ctf-stability-direct-images proof (3); latest direct-image proof (3) was read. Whole-blueprint searches Chevalley, root product, unipotent product, Gauss decomposition, triangular, refactorization and generic group found no equivalent statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-b9b7e4dad",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-b9b7e4dad (reviewer sub-agent of L); spot-checked: Read in full: item, 4 new nodes, parent root-exponential-group and siblings, every cited statement, Milne iAG §23h (152)/(153), Thm 23.72 with proof ('details omitted'), Cor 23.73, Notes pp.509-511, and Stacks 01RG lemma-quasi-compact-immersion. Item statement is byte-identical to the Q06 FIX version, so nothing is weakened. Steps check: (1) divided-power binomial law and t x_a t^-1 = x_a(a(t)a); (2) the positive weight-separating q exists, block-triangularity is re-checked, and T is closed in prod GL(W_l) because e^-l = e^-rl (e^l)^(r-1) and ZOmega = P; (3) the product of closed subgroups is closed in L x D x U, which is isomorphic to the Gauss open, so j is a quasi-compact immersion, and fg torsion-free P is free, so C and C x C are geometrically integral; (4) multiplication and inverse collection formulas verified by cancellation, and the domains contain the identity since d(0)=1; (5) generic-closure hypotheses all met, K in H via generators, H in K by image minimality; (6) open into the image by 01RG/Mathlib leaf, equivariance on all test algebras; (7) dual-number differential, R empty gives V=P=0. New nodes are true. Gauss: block LDU with Delta_j = product of det d_i. Unipotent: Steinberg coordinates, checked on SL2 adjoint in char 2. Opposite collection: SL2 with d=1+ab. Generic closure: kernel of B(x)B -> A(x)A is I(x)B + B(x)I over a field, so I is a Hopf ideal. Not duplicates: borel-root-product, unipotent-root-intersection and opposite-root-sl2 assume reductive G; affine-pointed-map-generated-subgroup uses unbounded words, not the closure of C. No SGA, no cycle, no tool_uses. Batch 5: lem-trf-fg-torsionfree-group-free is a Mathlib-leaf algebra fact (fg torsion-free abelian group is free), not part of the trace formula or Poincare duality; root-datum-lattice-embedding and admissible-representation reach the trace-formula chapter only through it. All accepted. FIX (B4): lem-sfb-block-gauss-scheme-chart statement had JSON '\\ne0' with a single backslash, which decodes to a newline followed by 'e0' and breaks the principal-open condition; corrected to \\ne0 in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-block-gauss-scheme-chart.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChevalleyExponentialBigCell",
+  "declaration": "AlgebraicGeometry.ChevalleyExponential.exists_open_cell",
+  "declarations": [
+   "AlgebraicGeometry.ChevalleyExponential.coordinates",
+   "AlgebraicGeometry.ChevalleyExponential.coordinatePoint",
+   "AlgebraicGeometry.ChevalleyExponential.projection",
+   "AlgebraicGeometry.ChevalleyExponential.rootPoint",
+   "AlgebraicGeometry.ChevalleyExponential.characterValue",
+   "AlgebraicGeometry.ChevalleyExponential.dividedPower",
+   "AlgebraicGeometry.ChevalleyExponential.exponentialMatrix",
+   "AlgebraicGeometry.ChevalleyExponential.cellSource",
+   "AlgebraicGeometry.ChevalleyExponential.cellMap",
+   "AlgebraicGeometry.ChevalleyExponential.cellPoint",
+   "AlgebraicGeometry.ChevalleyExponential.exists_open_cell"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ChevalleyExponentialBigCell.lean",
+  "statement": "theorem exists_open_cell (V : Type u) [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V] (R : Set V) (c : R → Module.Dual ℚ V) (hfinite : R.Finite) (hne : ∀ a : R, (a : V) ≠ 0) (hspan : Submodule.span ℚ R = ⊤) (htwo : ∀ a : R, c a a = 2) (hint : ∀ a b : R, ∃ n : ℤ, c a b = (n : ℚ)) (hreflect : ∀ a : R, Set.BijOn (fun v : V ↦ v - c a v • (a : V)) R R) (hreduced : ∀ a : R, R ∩ (Submodule.span ℚ ({(a : V)} : Set V) : Set V) = {(a : V), -(a : V)}) (P : Submodule ℤ V) (hP : ∀ v : V, v ∈ P ↔ ∀ a : R, ∃ n : ℤ, c a v = (n : ℚ)) (g : Type u) [LieRing g] [LieAlgebra ℚ g] [FiniteDimensional ℚ g] (hss : LieAlgebra.HasTrivialRadical ℚ g) (H : LieSubalgebra ℚ g) (hab : IsLieAbelian H) (hmax : ∀ J : LieSubalgebra ℚ g, H ≤ J → IsLieAbelian J → J = H) (θ : H ≃ₗ[ℚ] Module.Dual ℚ V) (e : R → g) (he : ∀ a : R, e a ≠ 0 ∧ ∀ h : H, ⁅(h : g), e a⁆ = θ h a • e a) (hdecomp : DirectSum.IsInternal (Sum.elim (fun _ : Unit ↦ H.toSubmodule) (fun a : R ↦ Submodule.span ℚ ({e a} : Set g)))) (r : ℕ) (δ : Module.Basis (Fin r) ℚ V) (hδ : ∀ i, δ i ∈ R) (hbase : ∀ a : R, (∀ i, ∃ n : ℤ, δ.repr a i = (n : ℚ)) ∧ ((∀ i, 0 ≤ δ.repr a i) ∨ (∀ i, δ.repr a i ≤ 0))) (B : Module.Basis (Fin r ⊕ R) ℚ g) (hB : (∀ i, B (Sum.inl i) = (θ.symm (c ⟨δ i, hδ i⟩) : g)) ∧ ∀ a : R, B (Sum.inr a) = e a) (hopp : ∀ a b : R, (b : V) = -(a : V) → ⁅e a, e b⁆ = (θ.symm (c a) : g)) (hstring : ∀ a b k : R, (a : V) + (b : V) = (k : V) → ∃ p : ℕ, (b : V) - p • (a : V) ∈ R ∧ (∀ n : ℕ, (b : V) - n • (a : V) ∈ R → n ≤ p) ∧ ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e a, e b⁆ = ((ε : ℚ) * (p + 1 : ℚ)) • e k) (hzero : ∀ a b : R, (a : V) + (b : V) ≠ 0 → (a : V) + (b : V) ∉ R → ⁅e a, e b⁆ = 0) (W : Type u) [AddCommGroup W] [Module ℚ W] [LieRingModule g W] [LieModule ℚ g W] [FiniteDimensional ℚ W] (hfaithful : LieModule.IsFaithful ℚ g W) (Λ : Submodule ℤ W) (Ω : Finset V) (hlattice : Submodule.IsLattice ℚ Λ) (hfree : Module.Free ℤ Λ) (hweights : ∀ eta ∈ Ω, eta ∈ P ∧ LieModule.weightSpace W (fun h : H ↦ θ h eta) ≠ ⊥) (hW : DirectSum.IsInternal (fun eta : Ω ↦ (LieModule.weightSpace W (fun h : H ↦ θ h eta)).toSubmodule)) (hgenerate : Submodule.span ℤ (Ω : Set V) = P) (hΛ : DirectSum.IsInternal (fun eta : Ω ↦ ((LieModule.weightSpace W (fun h : H ↦ θ h eta)).toSubmodule.restrictScalars ℤ).comap Λ.subtype)) (n : R → ℕ) (hn : ∀ a : R, (LieModule.toEnd ℚ g W (e a)) ^ n a = 0) (hdiv : ∀ (a : R) (m : ℕ) (w : W), w ∈ Λ → ((Nat.factorial m : ℚ)⁻¹ • (LieModule.toEnd ℚ g W (e a)) ^ m) w ∈ Λ) (d : ℕ) (bΛ : Module.Basis (ULift.{u} (Fin d)) ℤ Λ) (N : ℕ) (β ν : Fin N → R) (hβ : Function.Injective β) (hpositive : Set.range β = {a : R | ∀ i, 0 ≤ δ.repr a i}) (hν : ∀ i, (ν i : V) = -(β i : V)) (horder : ∀ i j : Fin N, i ≤ j → (∑ k, δ.repr (β i) k) ≤ ∑ k, δ.repr (β j) k) (F : Type u) [Field F] [IsAlgClosed F] : ∃ (tGL : (diagonalizableGroup F P).X ⟶ GeneralLinearGroup (ULift.{u} (Fin d)) F) (xGL : R → (StandardGroupSchemes.additive F ⟶ GeneralLinearGroup (ULift.{u} (Fin d)) F)), IsClosedSubgroupScheme tGL ∧ (∀ a : R, IsMonHom (xGL a)) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (s : StandardGroupSchemes.affine F A ⟶ (diagonalizableGroup F P).X) (eta : V) (heta : eta ∈ Ω) (w : Λ), (w : W) ∈ LieModule.weightSpace W (fun h : H ↦ θ h eta) → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (s ≫ tGL)).val.mulVec (fun j ↦ (bΛ.repr w j : A)) = characterValue s ⟨eta, (hweights eta heta).1⟩ • (fun j ↦ (bΛ.repr w j : A))) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (a : R) (z : A), (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (rootPoint (xGL a) z)).val = exponentialMatrix Λ bΛ (LieModule.toEnd ℚ g W (e a)) (hdiv a) (n a) z) ∧ ∃ (K : Grp (Over (Spec (.of F)))) (iK : K.X ⟶ GeneralLinearGroup (ULift.{u} (Fin d)) F) (tK : (diagonalizableGroup F P).X ⟶ K.X) (xK : R → (StandardGroupSchemes.additive F ⟶ K.X)), IsClosedSubgroupScheme iK ∧ tK ≫ iK = tGL ∧ (∀ a : R, xK a ≫ iK = xGL a) ∧ (∀ (J : Grp (Over (Spec (.of F)))) (iJ : J.X ⟶ GeneralLinearGroup (ULift.{u} (Fin d)) F), IsClosedSubgroupScheme iJ → (∃ tJ : (diagonalizableGroup F P).X ⟶ J.X, tJ ≫ iJ = tGL) → (∀ a : R, ∃ y : StandardGroupSchemes.additive F ⟶ J.X, y ≫ iJ = xGL a) → ∃ f : K.X ⟶ J.X, f ≫ iJ = iK) ∧ IsOpenImmersion (cellMap K tK xK β ν).left ∧ cellPoint (fun _ : Fin N ↦ (0 : F)) (fun _ ↦ 0) 1 ≫ cellMap K tK xK β ν = 1 ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (s t : StandardGroupSchemes.affine F A ⟶ (diagonalizableGroup F P).X) (a b : Fin N → A), (s ≫ tK) * (cellPoint a b t ≫ cellMap K tK xK β ν) * (s ≫ tK)⁻¹ = cellPoint (fun j ↦ characterValue s ⟨(ν j : V), (hP _).2 (fun k ↦ hint k (ν j))⟩ * a j) (fun j ↦ characterValue s ⟨(β j : V), (hP _).2 (fun k ↦ hint k (β j))⟩ * b j) t ≫ cellMap K tK xK β ν) ∧ ∃ (v : R → GrpObj.Lie K.X) (D : ((Fin N → F) × GrpObj.Lie (diagonalizableGroup F P).X × (Fin N → F)) ≃ₗ[F] GrpObj.Lie K.X), (∀ a : R, v a ≠ 0 ∧ GrpObj.tangentPoint (v a) = rootPoint (xK a) (TrivSqZeroExt.inr (1 : F) : DualNumber F)) ∧ (∀ (a b : Fin N → F) (z : GrpObj.Lie (diagonalizableGroup F P).X), GrpObj.tangentPoint (D (a, z, b)) = (((List.finRange N).map (fun j ↦ rootPoint (xK (ν j)) (TrivSqZeroExt.inr (a j) : DualNumber F))).prod * (GrpObj.tangentPoint z ≫ tK)) * ((List.finRange N).map (fun j ↦ rootPoint (xK (β j)) (TrivSqZeroExt.inr (b j) : DualNumber F))).prod) ∧ (∀ (a : R) (s : StandardGroupSchemes.affine F F ⟶ (diagonalizableGroup F P).X), (points.map K.X (TrivSqZeroExt.inlAlgHom F F F) (s ≫ tK)) * GrpObj.tangentPoint (v a) * (points.map K.X (TrivSqZeroExt.inlAlgHom F F F) (s ≫ tK))⁻¹ = GrpObj.tangentPoint (characterValue s ⟨(a : V), (hP _).2 (fun k ↦ hint k a)⟩ • v a)) ∧ (∀ (s : StandardGroupSchemes.affine F F ⟶ (diagonalizableGroup F P).X) (z : GrpObj.Lie (diagonalizableGroup F P).X), (points.map K.X (TrivSqZeroExt.inlAlgHom F F F) (s ≫ tK)) * (GrpObj.tangentPoint z ≫ tK) * (points.map K.X (TrivSqZeroExt.inlAlgHom F F F) (s ≫ tK))⁻¹ = GrpObj.tangentPoint z ≫ tK) ∧ (∀ a b : R, a ≠ b → ∃ s : StandardGroupSchemes.affine F F ⟶ (diagonalizableGroup F P).X, characterValue s ⟨(a : V), (hP _).2 (fun k ↦ hint k a)⟩ ≠ characterValue s ⟨(b : V), (hP _).2 (fun k ↦ hint k b)⟩) ∧ (R = ∅ → IsIso tK ∧ IsIso (cellMap K tK xK β ν))",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The exponential and torus morphisms are existentially quantified with their exact test-algebra formulas, so no canonical construction is replaced by an arbitrary map. The subgroup is specified by a closed inclusion and the universal minimality among closed subgroups containing these morphisms. All helper definitions have real data and belong to this node. An integral basis and nilpotence bounds are arbitrary coordinate choices; ULift matrix indices retain the field universe. The character-torus dependency is the already landed def-sfb-diagonalizable-group."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5680779d4",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Only the item node (lean record, +stmt_dep def-sfb-diagonalizable-group) and new module ChevalleyExponentialBigCell.lean changed; lean.statement verbatim. Hypotheses = exists_chevalley_admissible_representation conclusions verbatim (nilpotence via arbitrary bound n; hfree/bΛ follow from IsLattice), positive roots/enumeration/height order exact, F any alg. closed field. tGL pinned by weight-character eigen-equation over all A (determined since Λ=⊕Λ∩W_η), closed subgroup; xGL pinned by integral finite exponential matrix (no division in A), IsMonHom; K = closed subgroup with universal minimality among closed J containing tGL and all xGL. Clauses checked: open immersion of cellMap.left, identity in image, T-equivariance over all test algebras (ν chars -β, β chars β, t fixed), Lie K ≃ F^N×Lie T×F^N via the real differential formula plus v_a=dx_a(1)≠0 with real characters, distinct roots separated on T(F), R=∅ gives isos. Library decls (GrpObj.Lie, tangentPoint injective, IsClosedSubgroupScheme, homMulEquiv, StandardGroupSchemes, diagonalizableGroup) read. Helpers real with source+blueprint docstrings; proof steps 1-7 in docstring; single sorry; universes bound (all u, ULift indices); no stmt citers. Advisory only: local dividedPower/characterValue could later use Algebra.rationalDividedPower. No compile (no change)."
+ }
+}

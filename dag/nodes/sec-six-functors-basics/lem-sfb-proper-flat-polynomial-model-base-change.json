@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-proper-flat-polynomial-model-base-change",
+ "kind": "statement",
+ "title": "Base change of proper flat dualizing complexes on polynomial models",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to S$ a proper, flat morphism of finite presentation [def-weil-proper-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $K_f=f^!\\mathcal O_S$, with its adjunction trace and its normalized polynomial-chart comparisons, be as in [lem-sfb-proper-flat-dualizing-polynomial-model]. The diagonal-class normalization of these comparisons is specified in [lem-sfb-proper-polynomial-comparison-class-normalization]. Let $a:S'\\to S$ be any morphism of schemes. Put $X'=X\\times_SS'$ [def-pc-fibre-product], with projection $b:X'\\to X$ and $f':X'\\to S'$; then $f'$ is again proper, flat and of finite presentation. Let $\\beta_a:Lb^*K_f\\xrightarrow{\\sim}K_{f'}$ be the trace-pair base-change isomorphism of [lem-sfb-proper-flat-space-derived-duality]. It is read on Zariski derived quasi-coherent modules through that node's agreement with $f^!$, and $Lb^*$ is [def-pc-derived-pullback]. Let $V=\\operatorname{Spec}R\\subset S$ and $U=\\operatorname{Spec}B\\subset f^{-1}(V)$ be affine opens. Let $P=R[t_1,\\ldots,t_n]\\twoheadrightarrow B$ be a polynomial presentation and $V'=\\operatorname{Spec}R'\\subset a^{-1}(V)$ an affine open. Put $P'=P\\otimes_RR'$ and $B'=B\\otimes_RR'$, so that $U'=\\operatorname{Spec}B'=U\\times_VV'\\subset X'$. Then $B[0]$ is a perfect $P$-complex [def-pc-perfect-ring-complex], and $\\operatorname{Tor}^P_i(B,P')=0$ for $i>0$. Interpret $K_f|_U$ and $K_{f'}|_{U'}$ through [lem-pc-affine-qcoh-derived-equivalence] and identify them with their polynomial models. Then $\\beta_a|_{U'}$ is the evaluation-counit coinduction base-change isomorphism of [lem-sfb-perfect-coinduction-tor-independent-base-change]:\n$$R\\operatorname{Hom}_P(B,\\Omega^n_{P/R})[n]\\otimes^{\\mathbf L}_BB'\\xrightarrow{\\sim}R\\operatorname{Hom}_{P'}(B',\\Omega^n_{P'/R'})[n].$$\nHere $\\Omega^n_{P/R}\\otimes_RR'=\\Omega^n_{P'/R'}$ sends $dt_1\\wedge\\cdots\\wedge dt_n$ to $dt_1\\wedge\\cdots\\wedge dt_n$ [def-weil-pbc-kahler-differentials, def-weil-pbc-exterior-algebra]. Derived Hom is derived coinduction with its natural $B$-action [def-pur-derived-internal-hom, def-trf-derived-coinduction]. These local descriptions commute with restriction to smaller affine opens and with the normalized ordered polynomial-refinement comparisons on both sides. They also respect identity and composition of base changes. No Noetherian hypothesis on $S$ or $S'$ and no flatness of $a$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0E2F (lemma-base-change-relative-dualizing: arbitrary R -> R', derived base change of the diagonal class), with duality.tex Tags 0E2Y, 0AAB, 0B6J (base change of the relative dualizing complex and of its trace) and 0BV2 (polynomial local calculation)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "def-pc-fibre-product",
+  "lem-sfb-proper-flat-space-derived-duality",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sfb-perfect-coinduction-tor-independent-base-change",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "lem-sfb-proper-polynomial-comparison-class-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Base change preserves properness, flatness and finite presentation, by the three permanence statements cited here. Thus the same proper duality and polynomial-model theorems apply to $f'$. The affine criteria applied to $U/V$ give $R\\to B$ flat and finitely presented. Apply [lem-sfb-arbitrary-polynomial-dual-properties] with its $A=B$ to this very presentation $P\\twoheadrightarrow B$. It says $B[0]$ is perfect over $P$, without a Noetherian hypothesis. This does not follow by applying the Noetherian polynomial-quotient lemma directly to $R$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sfb-arbitrary-polynomial-dual-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "morphisms.tex Tags 01W4 (lemma-base-change-proper), 01U9 (lemma-base-change-flat), 02FV (lemma-finite-presentation-permanence); more-algebra.tex Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring)."
+   }
+  },
+  {
+   "text": "Choose a free $P$-resolution $F_\\bullet\\to B$. The monomial description of $P$ makes each free $P$-module free over $R$, so the same augmented complex is a free $R$-resolution of $B$. Degreewise the balanced-tensor isomorphism is\n$$F_j\\otimes_P(P\\otimes_RR')\\longrightarrow F_j\\otimes_RR',\\quad z\\otimes(p\\otimes r')\\longmapsto pz\\otimes r',$$\nwith inverse $z\\otimes r'\\mapsto z\\otimes(1\\otimes r')$; these maps commute with differentials and augmentations. Hence the resolution definition of Tor identifies $\\operatorname{Tor}_i^P(B,P')$ with $\\operatorname{Tor}_i^R(B,R')$. The base-flat polynomial Tor-bound node, applied to the $R$-flat $P$-module $B$, explicitly says the latter vanishes for $i>0$. Thus the augmented tensor complex resolves $B'$, and $B\\otimes_P^{\\mathbf L}P'\\simeq B'[0]$. The same argument works with $R$ replaced by any base ring and any base-flat polynomial quotient, as used below.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-tor-modules",
+    "lem-trf-base-flat-polynomial-tor-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "more-algebra.tex Tag 0661 (lemma-base-change-comparison), free-resolution computation; Tag 068X (lemma-perfect-over-polynomial-ring), base-flat input."
+   }
+  },
+  {
+   "text": "Write $L=\\Omega^n_{P/R}[n]$ and $C=C_B^P(L)$. Perfect coinduction base change, with $(A,B,A',N)=(P,B,P',L)$, gives its evaluation-counit mate\n$$c:C\\otimes_B^{\\mathbf L}B'\\xrightarrow{\\sim}C_{B'}^{P'}(L\\otimes_P^{\\mathbf L}P').$$\nAll Tor and perfectness hypotheses were verified in steps 1--2. Polynomial differentials have the ordered basis $dt_i$; [lem-weil-pbc-exterior-power-free-basis] makes their top exterior power free of rank one on the ordered wedge. Their differential base-change map sends $dt_i\\otimes1$ to $dt_i$; on the top exterior basis it sends $dt_1\\wedge\\cdots\\wedge dt_n$ to the same wedge. Thus $L\\otimes_P^{\\mathbf L}P'=\\Omega^n_{P'/R'}[n]$: this coefficient is a shifted free rank-one module, so ordinary tensor computes its derived tensor. Under affine derived pullback the source is the restriction of $Lb^*K_f$. The exchange lemma also identifies the underlying finite-projective Hom map as $(h\\otimes u)(z\\otimes v)=uv(h(z)\\otimes1)$, with its actual $B'$-action.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-base-change",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-exterior-algebra",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZP (lemma-bc-surjection), evaluation-counit base-change map; more-algebra.tex Tag 0A6A (lemma-base-change-RHom); algebra.tex Tags 00RV and 00RX."
+   }
+  },
+  {
+   "text": "Use the arbitrary-ring graph-class theorem with the flat finitely presented algebra $B/R$ established in step 1. It supplies the specific class $\\xi_P$ and its scalar-extension equality for $c$ from step 3, on $Q=B\\otimes_RB\\to Q'=B'\\otimes_{R'}B'$. Thus $c$ carries the derived pullback of $\\xi_P$ to $\\xi_{P'}$, with the actual evaluation-counit normalization, not just the span of a generator. The new comparison-normalization theorem identifies both $(C,\\xi_P)$ and $(C',\\xi_{P'})$ with the restrictions of the intrinsic pairs under the specified canonical chart comparisons. It states both class equations explicitly. All its hypotheses hold for $f,f'$ by step 1. This uses a purely affine algebra scalar-compatibility lemma, followed by a single-base geometric normalization lemma; neither identifies the map $\\beta_a$.",
+   "uses": [
+    "lem-sfb-arbitrary-polynomial-graph-class-base-change",
+    "lem-sfb-proper-polynomial-comparison-class-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent arbitrary-ring scalar clause of Tag 0E2E (lemma-relative-dualizing-noetherian), with Tag 0E2F (lemma-base-change-relative-dualizing), Tags 0A70/0A71 (lemma-right-adjoint, lemma-RHom-ext), and ordered volume convention of Tag 0BZI (section-relative-dualizing-complex-algebraic). Exact normalized-class compatibility is an agent enhancement of the generator claim of 0E2F."
+   }
+  },
+  {
+   "text": "Relate the prescribed trace comparison to these classes before using rigidity. Restrict first over the affine bases $V,V'$, retaining the entire proper schemes $X_V,X_{V'}$. The space-duality theorem and its scheme agreement identify their trace pairs with the right-adjoint images of $\\mathcal O_V,\\mathcal O_{V'}$. The affine proper-flat adjoint-base-change theorem constructs the adjoint exchange by pulling the counit and says it preserves that counit. Trace-pair uniqueness therefore identifies it with the restriction of the given $\\beta_a$. Now [lem-sfb-proper-adjoint-diagonal-pair] applies: $V,V'$ are qcqs, and the two morphisms are proper flat of finite presentation. Its explicit base-change clause says this right-adjoint exchange preserves the induced diagonal classes. The affine-base clause of [lem-sfb-proper-polynomial-comparison-class-normalization] identifies the intrinsic classes with exactly these adjoint classes, under the trace-preserving identifications. Its chart clause carries their restrictions to $\\xi_P$ and the primed class. Restrict the resulting class-preserving comparison further to $U'$. No global qcqs hypothesis on $S$ or $S'$ has been inserted, and no right adjoint for the nonproper $U/V$ has been used.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "lem-sfb-proper-adjoint-diagonal-pair",
+    "lem-sfb-proper-polynomial-comparison-class-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "duality.tex Tags 0AAB (lemma-proper-flat-base-change), 0B6J (lemma-trace-map-and-base-change), 0E2Z (lemma-flat-proper-relative-dualizing), 0E4P (remark-relative-dualizing-complex-bis); spaces-duality.tex Tags 0E5I and 0E5L."
+   }
+  },
+  {
+   "text": "The pullback pair on $U'/V'$ is a supplied coherent relative dualizing pair by [lem-sfb-relative-dualizing-pair-base-change]. Its target polynomial pair and the class equations for the canonical chart comparisons are supplied by [lem-sfb-proper-polynomial-comparison-class-normalization]. Step 4 proves that $c$ preserves their classes, and step 5 proves that the prescribed $\\beta_a|_{U'}$ does too. Apply [lem-sfb-relative-dualizing-pair-open-rigidity] on $U'/V'$: there is exactly one class-preserving isomorphism. It equates these two maps. The affine equivalence is fully faithful, so this is the asserted equality of morphisms in $D(B')$, with the evaluation-counit coinduction base-change map of step 3 and precisely the displayed coefficient-line identification.",
+   "uses": [
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-proper-polynomial-comparison-class-normalization",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "duality.tex Tags 0E2Y (lemma-base-change-relative-dualizing), 0E2W (lemma-uniqueness-relative-dualizing); perfect.tex Tag 06Z0 (lemma-affine-compare-bounded)."
+   }
+  },
+  {
+   "text": "Use the class-normalized chart identifications of [lem-sfb-proper-polynomial-comparison-class-normalization] throughout. For a one-variable refinement choose the lift $u\\in P$ of its additional coordinate image. Its normalized contraction sends $\\operatorname{dual}(t-u)\\otimes d(t-u)$ to $1$. After any scalar extension it sends $\\operatorname{dual}(t-u')\\otimes d(t-u')$ to the same $1$; perfect coinduction base change preserves exactly these Koszul evaluations. Ordered tensoring retains the degree signs $(-1)^{ij}$ because a ring map sends each integer sign to itself. Thus the refinement square commutes, with the ordered signs, for one coordinate and by composition for every ordered refinement. For a principal affine restriction, localizing the finite-projective Hom formula in step 3 gives the same formula on each path: $uv(h(z)\\otimes1)$ simply acquires the indicated denominators. The polynomial-model theorem supplies these restriction and refinement comparisons and their cocycles; the normalization theorem explicitly identifies its same canonical comparisons with the class-normalized ones. For arbitrary smaller affine opens, use principal subopens and a common polynomial refinement on them; pair rigidity identifies the two maps after restriction, hence identifies the pair comparisons on the smaller open itself. This last use of uniqueness avoids claiming that arbitrary derived morphisms are a Zariski sheaf.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-polynomial-comparison-class-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0BZI and 0BZJ (lemma-well-defined), ordered polynomial refinements; duality.tex Tag 0E2W, rigidity on every open."
+   }
+  },
+  {
+   "text": "For an identity base change, the counit mate is the identity by the identity comparison in the coinduction-base-change theorem. For a tower $R\\to R'\\to R''$, $B'$ is again flat over $R'$; step 2 verifies all the successive Tor conditions, and that theorem equates direct and successive maps under the tensor associators. They therefore give the identity and composition laws for the chart descriptions. The space trace-pair theorem gives the same laws for the prescribed global maps, so the identification in step 6 respects them. If $n=0$, the ordered volume is $1\\in P=R$ and the graph Koszul complex is the empty tensor with identity evaluation. If $B=0$ or $R'=0$, the pertinent target is the zero derived category and every displayed equality is its unique map. None of the arguments assumes the base rings are nonzero or Noetherian or that $R\\to R'$ is flat.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-trf-polynomial-graph-coinduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F, arbitrary scalar extension and transitivity; duality.tex Tag 0E4P; graph normalization for the empty tuple."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-sfb-arbitrary-polynomial-dual-properties",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-tor-modules",
+  "lem-trf-base-flat-polynomial-tor-bound",
+  "lem-sfb-perfect-coinduction-tor-independent-base-change",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-pbc-exterior-algebra",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-sfb-arbitrary-polynomial-graph-class-base-change",
+  "lem-sfb-proper-polynomial-comparison-class-normalization",
+  "lem-sfb-proper-flat-space-derived-duality",
+  "lem-sfb-affine-flat-proper-adjoint-base-change",
+  "lem-sfb-proper-adjoint-diagonal-pair",
+  "lem-sfb-relative-dualizing-pair-base-change",
+  "lem-sfb-relative-dualizing-pair-open-rigidity",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "lem-trf-polynomial-graph-coinduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0E2E and 0E2F graph-class construction, with duality.tex 0AAB, 0B6J, 0E2Y, 0E2Z and 0E4P. Explicit arbitrary-ring graph-evaluation/mate-pasting compatibility, beyond the generator assertion of 0E2F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizing|upperShriek|relativeDualizing (Mathlib)",
+   "results": "10 hits: AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Tactic/Translate/ToDual.lean, Data/Set/Defs.lean, Analysis/InnerProductSpace/Dual.lean, CategoryTheory/Adjunction/PartialAdjoint.lean, CategoryTheory/Category/Cat/Op.lean, CategoryTheory/Functor/Derived/*.lean, Algebra/Homology/HomotopyFiber.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the word hits concern order duals and derived functors; Mathlib has no relative dualizing complex or upper-shriek base change"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc.*baseChange|baseChange.*coinduc (Mathlib)",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived coinduction base change in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finitely presented scheme dualizing complex polynomial presentation derived Hom arbitrary base change",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Flat.flat_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits do not state derived coherent duality with normalized polynomial-chart base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proper, AlgebraicGeometry.Flat",
+   "results": "0 hits; loogle: unknown identifier 'AlgebraicGeometry.Proper'",
+   "date": "2026-10-24",
+   "verdict": "no match: loogle: unknown identifier 'AlgebraicGeometry.Proper'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complex arbitrary base change polynomial derived Hom",
+   "results": "IsBaseChange.dual; IsBaseChange.toDualBaseChange; Module.Dual.baseChange; IsBaseChange.toDual; IsBaseChange.toDual_apply; Module.Dual.baseChange_baseChange; Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex; KaehlerDifferential.cotangentComplexBaseChange_tmul",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits do not state derived coherent duality with normalized polynomial-chart base change"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|upperShriek|relativeDualizing",
+   "results": "Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean; Mathlib/Tactic/Translate/ToDual.lean; Mathlib/Algebra/Homology/HomotopyFiber.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/Analysis/InnerProductSpace/Dual.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits do not state derived coherent duality with normalized polynomial-chart base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction evaluation counit base change for perfect polynomial quotients",
+   "results": "Rep.resCoindAdjunction_counit_app_hom_hom; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange; Rep.coindResAdjunction_counit_app; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; Algebra.Extension.tensorH1Cotangent; ModuleCat.RestrictionCoextensionAdj.counit'_app; ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits do not state derived coherent duality with normalized polynomial-chart base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coind\"",
+   "results": "Lean.Order.coind_not; Lean.Order.coind_impl; Lean.Order.coind_monotone_exists; Lean.Order.coind_monotone_forall; Lean.Order.coind_monotone_and; Lean.Order.coind_monotone_or; Lean.Parser.Termination.coinductiveFixpoint; Lean.Parser.Command.coinductive",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits do not state derived coherent duality with normalized polynomial-chart base change"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc.*baseChange|baseChange.*coinduc",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits do not state derived coherent duality with normalized polynomial-chart base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-smooth-proper-coherent-trace-pairing",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Simple image of top-to-bottom line cohomology maps. Serre-duality input: canonical homogeneous line and invariant trace pairing before the elementary map-space argument. General coherent-duality input, after computing the canonical character: the smooth proper trace pairing and its compatibility with isomorphisms and scalar extension. Supporting comparison: derived relative cup and base-change mates, before taking cohomology and composing with the coherent trace. Supporting argument here: arbitrary scalar extension of the normalized polynomial model, preservation of the graph-defined diagonal class, and identification with the proper trace-pair comparison.",
+   "via": [
+    "lem-sfb-smooth-proper-coherent-trace-pairing",
+    "lem-sfb-flag-line-equivariant-serre-pairing",
+    "lem-sfb-top-bottom-cohomology-simple-image",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proper-flat-polynomial-model-base-change",
+  "worker": "stage1",
+  "summary": "Repair: extracted arbitrary-ring graph-class scalar naturality and explicitly stated intrinsic/adjoint/polynomial class normalization as two statement-only supporting nodes. Added the exterior-power free-basis input. Retained the perfectness/Tor proof, trace-preserving adjoint identification, rigidity assembly, and restriction/refinement/composition arguments. Corrected the flat-versus-free Tor proof and identified the successive-extension clause in the retained graph-lemma proof plan in report.md.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, (3), proper-direct-image supporting route recorded in the inherited provenance: coherent-duality input to the smooth proper trace pairing. This item supplies only the polynomial-model/base-change comparison; it does not alter the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-base-flat-polynomial-tor-bound",
+    "why": "Generic ordinary-module flatness/Tor computation, used only to identify the algebraic Tor-independent square. No same-unit statement explicitly supplies this Tor vanishing, and this does not replace a six-functor unit step."
+   },
+   {
+    "node": "lem-trf-derived-coinduction-adjunction",
+    "why": "Generic ring-map coinduction adjunction and evaluation-at-one counit needed to fix the comparison morphism and its B-action; the same-unit exchange theorem uses this generic algebra input."
+   },
+   {
+    "node": "lem-trf-polynomial-graph-coinduction",
+    "why": "Generic finite-free resolution of a polynomial graph over an arbitrary ring. It supplies the regular graph computation, not coherent Serre duality or any six-functor unit theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-base-flat-polynomial-tor-bound",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-polynomial-graph-coinduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-a0ab8e59a",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-a0ab8e59a (reviewer sub-agent of L); spot-checked: PASS, no fixes written. This re-delivery repairs every point of the 67d7 RETURN. (1) C3/C4: two new statement-only nodes now carry the class normalization that the item's proof used to take from another node's proof. lem-sfb-proper-polynomial-comparison-class-normalization states it for one base: on each affine base V the intrinsic class ξ_f matches ξ_{a_V} of proper-adjoint-diagonal-pair, and the canonical chart comparison α_P is the unique map sending ξ_f to the graph class ξ_P. lem-sfb-arbitrary-polynomial-graph-class-base-change is the arbitrary-ring version of the Noetherian scalar clause of lem-sfb-polynomial-koszul-diagonal-class: d∘(ξ_P⊗Q')=ξ_{P'}. The f=id over Spec k test of the return now forces the unit to be 1. (2) C1: step 3 cites the exterior-power free-basis node. (3) E5: the two faulty arguments moved into the graph lemma's plan in the report, which is correct (flat derived-tensor exchange for (T,Q),(Q,B),(T,B); the successive-extension clause identifies d). The item statement changed only by adding a sentence that points to the normalization node; no hypothesis or conclusion changed (diffed against 67d7). Steps 1-8 checked against the cited statements: perfectness and Tor via the R-free resolution and the tor-bound node; perfect-coinduction exchange and the coefficient line; the trace-preserving adjoint exchange equals β over the affine V and V' and preserves ξ_{a_V}; pair base change plus open rigidity on U'/V' give β|U'=c; refinements and restrictions follow by rigidity; identity and composition hold, including n=0, B=0 and R'=0. Both new statements were tested on n=0 and on Z→F_p with B=Z[x]. No duplicates in a DAG-wide scan: the existing graph-class and normalization nodes are Noetherian or concern two bases. Stacks tags 0E2E, 0E2F, 0E2Z, 0E4P, 0BV2 and 0E2W exist with the stated labels; no SGA source. Batch 5: every flagged citation is generic algebra, a definition or coherent duality. The closure has 13140 nodes, contains no nt-assume node, and contains no trace-formula or Poincaré-duality theorem. Notes for the maintainer: tool_uses still lists lem-trf-derived-coinduction-adjunction, which the item no longer cites (harmless). The class equation would best also go into the statement and Lean of lem-sfb-proper-flat-dualizing-polynomial-model, whose Lean says only ∃ atlas."
+ }
+}

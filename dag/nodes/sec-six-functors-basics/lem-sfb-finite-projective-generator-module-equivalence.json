@@ -1,0 +1,379 @@
+{
+ "id": "lem-sfb-finite-projective-generator-module-equivalence",
+ "kind": "statement",
+ "title": "Finite projective generator gives an equivalence with modules",
+ "statement": "Let $k$ be a field [def-weil-field] and $\\mathcal C$ an essentially small $k$-linear abelian category [def-sp-abelian], with $k$-bilinear composition and finite-dimensional Hom spaces [def-weil-finite-dimensional-subspace]. Let $P\\in\\mathcal C$ satisfy the following conditions: $\\operatorname{Hom}(P,-)$ takes every short exact sequence to a short exact sequence of $k$-vector spaces; if $f:Y\\to Z$ has $f\\circ h=0$ for all $h:P\\to Y$ then $f=0$; and every $Y\\in\\mathcal C$ admits an epimorphism $P^{\\oplus n}\\to Y$ for some finite $n\\geq0$. Put $R=\\operatorname{End}_{\\mathcal C}(P)$ with multiplication $rs=r\\circ s$. A right $R$-module here is a $k$-vector space with a unital associative $k$-bilinear right action of $R$, with $k$-linear maps preserving the action as morphisms. The functor\n$$H:\\mathcal C\\longrightarrow\\operatorname{Mod}^{\\mathrm{fd}}\\!\\text{-}R,\\qquad H(Y)=\\operatorname{Hom}(P,Y),\\quad h\\cdot r=h\\circ r,\\quad H(f)(h)=f\\circ h$$\nis an equivalence of $k$-linear categories. The zero endomorphism algebra, with $1=0$, is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 9.35, printed p.177, in its projective-generator formulation; finite presentation by finite sums is the argument in that proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sp-abelian",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Composition and the $k$-linear structure give the stated right action: $(h\\cdot r)\\cdot s=h\\circ r\\circ s=h\\cdot(rs)$ and $h\\cdot1=h$. Postcomposition commutes with this action and with $k$-linear combinations, preserves identities and composition, and hence defines the $k$-linear functor $H$. Its values are finite-dimensional by hypothesis. It is faithful: if $H(f)=H(g)$, then $(f-g)\\circ h=0$ for every $h:P\\to Y$, so the assumed detection property gives $f-g=0$. Finite sums and the zero object below exist by [def-sp-abelian].",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 9.35, printed p.177 (PDF p.189): finite presentations, matrix cokernels and fullness."
+   }
+  },
+  {
+   "text": "Write $P^n=\\bigoplus_{j=1}^nP$, with injections $\\iota_j$ and projections $\\pi_j$. The map $H(P^n)\\to R^n$, $h\\mapsto(\\pi_jh)_j$, has inverse $(r_j)\\mapsto\\sum_j\\iota_jr_j$, so is a right $R$-module isomorphism. For every $Y$, the map $\\operatorname{Hom}(P^n,Y)\\to\\operatorname{Hom}_R(R^n,H(Y))$ induced by $H$ is bijective: a module map $a$ gives $b=\\sum_j a(e_j)\\pi_j$, and $H(b)((r_j))=\\sum_j a(e_j)r_j=a((r_j))$. The equations $\\pi_i\\iota_j=\\delta_{ij}$ and $\\sum_j\\iota_j\\pi_j=1$ prove both inverse identities. All maps are $k$-linear. This also covers $n=0$, when both Hom spaces are zero. Here $\\operatorname{Hom}_R$ means the $k$-linear right-action-preserving maps of the statement.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 9.35, printed p.177 (PDF p.189): finite presentations, matrix cokernels and fullness."
+   }
+  },
+  {
+   "text": "Let $F$ be $H$ with the right action forgotten, valued in all $k$-vector spaces. This target is abelian: kernels are ordinary linear kernels, cokernels are quotients by ranges, and injections and surjections have their respective kernel and cokernel universal properties. By hypothesis $F$ is additive and preserves short exact sequences. Thus [lem-sp-exact-functor-preserves-homology], clause (a), says that $F$ preserves epimorphisms and cokernels. In particular, if $q$ is a cokernel of $u$ in $\\mathcal C$, then $F(q)$ is surjective and $F(u),F(q)$ is a cokernel presentation. For an epimorphism $q$ alone, $F(q)$ is surjective as well. For vector spaces, these assertions mean precisely quotient by the image; surjectivity follows since a nonsurjective map has a nonzero quotient map annihilating its image.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 9.35, printed p.177 (PDF p.189): finite presentations, matrix cokernels and fullness."
+   }
+  },
+  {
+   "text": "Every finite-dimensional right $R$-module $M$ has a finite free presentation. Indeed, choose a finite $k$-spanning family $v_1,\\ldots,v_n$ of $M$ [def-weil-finite-dimensional-subspace]. The map $p:R^n\\to M$, $(r_j)\\mapsto\\sum_jv_jr_j$, is surjective: $\\sum_j\\lambda_jv_j=\\sum_jv_j(\\lambda_j1_R)$ by bilinearity and unitality. A finite spanning family of $R=\\operatorname{Hom}(P,P)$, placed in each coordinate, spans $R^n$ over $k$. Therefore $K=\\ker p$ is finite-dimensional by [lem-trf-vector-space-quotient-dimension]. Choose a finite $k$-spanning family $w_1,\\ldots,w_m$ in $K$; the map $a:R^m\\to R^n$ with columns $w_i$ has image $K$, since $k$-scalar multiples are right multiplication by $\\lambda1_R$. Hence $R^m\\xrightarrow{a}R^n\\xrightarrow{p}M\\to0$ is the required presentation. This is a construction from finite spanning families, not an appeal to commutative Noetherian algebra.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "lem-trf-vector-space-quotient-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 9.35, printed p.177 (PDF p.189): finite presentations, matrix cokernels and fullness."
+   }
+  },
+  {
+   "text": "Given that presentation of $M$, Step 2 lifts $a$ to $u:P^m\\to P^n$ with $H(u)=a$ in the displayed coordinates. Form its cokernel $q:P^n\\to X$ using [def-sp-abelian]. By Step 3 and [lem-sp-exact-functor-preserves-homology](a), the surjection $H(q):R^n\\to H(X)$ has kernel $\\operatorname{im}(a)=\\ker p$ on underlying vector spaces. The rule $p(r)\\mapsto H(q)(r)$ is therefore a well-defined bijection $M\\to H(X)$. It is $k$-linear and right $R$-linear because both quotient maps are, so $H$ is essentially surjective. No lift of elements of an arbitrary categorical object was used.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 9.35, printed p.177 (PDF p.189): finite presentations, matrix cokernels and fullness."
+   }
+  },
+  {
+   "text": "For each $X$, choose an epimorphism $q:P^n\\to X$. Since every epimorphism is a cokernel [def-sp-abelian], choose $d:T\\to P^n$ of which $q$ is a cokernel, and choose an epimorphism $t:P^m\\to T$. Put $u=dt$. Then $q$ is also a cokernel of $u$: $bu=0$ implies $bdt=0$, hence $bd=0$ by cancellation of $t$, and $b$ factors uniquely through $q$. Now let $\\alpha:H(X)\\to H(Y)$ be a module morphism. Step 2 gives $b:P^n\\to Y$ with $H(b)=\\alpha H(q)$. Thus $H(bu)=\\alpha H(qu)=0$, so $bu=0$ by Step 1. The cokernel property yields a unique $f:X\\to Y$ with $fq=b$. Finally $H(f)H(q)=\\alpha H(q)$, and $H(q)$ is surjective by Step 3 and [lem-sp-exact-functor-preserves-homology](a), so $H(f)=\\alpha$. Together with faithfulness this proves bijectivity on every Hom space.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 9.35, printed p.177 (PDF p.189): finite presentations, matrix cokernels and fullness."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fully-faithful-ess-surj-equivalence] to Steps 5 and 6, placing the categories in a common containing universe. Its conclusion supplies a quasi-inverse with natural unit and counit isomorphisms. This equivalence is $k$-linear: if its quasi-inverse on a morphism is defined by lifting its conjugate through $H$, then the inverse of the bijective $k$-linear Hom map of $H$ is $k$-linear, and conjugation by the chosen module isomorphisms is $k$-linear. Thus the quasi-inverse is $k$-linear too. If $P=0$, every object is zero because it is an epimorphic image of $P^n=0$; and if $R=0$, every unital right module has $v=v1=v0=0$. The preceding constructions include these cases and all zero ranks.",
+   "uses": [
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 9.35, printed p.177 (PDF p.189): finite presentations, matrix cokernels and fullness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-finite-dimensional-subspace",
+  "lem-trf-vector-space-quotient-dimension",
+  "lem-trf-fully-faithful-ess-surj-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 9.35, printed p.177 (PDF p.189): finite presentations, matrix cokernels and fullness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Morita|equivalence.*ModuleCat|ModuleCat.*equivalence|preadditiveCoyonedaObj_map_surjective",
+   "results": "{\"t\": \"2026-10-24T14:28:31Z\", \"tool\": \"grep\", \"query\": \"Morita|equivalence.*ModuleCat|ModuleCat.*equivalence|preadditiveCoyonedaObj_map_surjective\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Abelian/Yoneda.lean\", \"Mathlib/CategoryTheory/Abelian/Yoneda.lean\"], \"digest\": \"de28d4843b9126a7\"}; Read Abelian/Yoneda.lean:38–65, FreydMitchell.lean:125–146, GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean:112–128 and RingTheory/Morita/Basic.lean:14–35,54–60, Matrix.lean:11–25. Yoneda fullness assumes each object is a quotient of P itself and gives only fullness; Gabriel–Popescu assumes Grothendieck colimits; Freyd–Mitchell gives an embedding into another ring. Morita/Basic explicitly lists the projective-generator characterization as TODO; matrix Morita assumes a matrix algebra. None is this finite module equivalence.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian linear category with a projective generator and finite presentations by finite sums of it is equivalent to finite dimensional right modules over its endomorphism algebra",
+   "results": "{\"t\": \"2026-10-24T14:28:31Z\", \"tool\": \"leansearch\", \"query\": \"An abelian linear category with a projective generator and finite presentations by finite sums of it is equivalent to finite dimensional right modules over its endomorphism algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj\", \"CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteLimitsModuleCatEmbeddingRingFunctor\", \"ModuleCat.endRingEquiv\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Abelian.FreydMitchell.EmbeddingRing\", \"CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteColimitsModuleCatEmbeddingRingFunctor\", \"ModuleCat.abelian\", \"CategoryTheory.Preadditive.homSelfLinearEquivEndMulOpposite\"], \"digest\": \"4344d2a3cdf191b4\"}; Read Abelian/Yoneda.lean:38–65, FreydMitchell.lean:125–146, GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean:112–128 and RingTheory/Morita/Basic.lean:14–35,54–60, Matrix.lean:11–25. Yoneda fullness assumes each object is a quotient of P itself and gives only fullness; Gabriel–Popescu assumes Grothendieck colimits; Freyd–Mitchell gives an embedding into another ring. Morita/Basic explicitly lists the projective-generator characterization as TODO; matrix Morita assumes a matrix algebra. None is this finite module equivalence.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Projective, CategoryTheory.IsSeparator",
+   "results": "{\"t\": \"2026-10-24T14:28:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Projective, CategoryTheory.IsSeparator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.full_comp_preadditiveCoyonedaObj\", \"CategoryTheory.Abelian.preadditiveCoyonedaObj_map_surjective\", \"CategoryTheory.Abelian.has_projective_separator\"], \"digest\": \"d8f9447b15cd2982\"}; Read Abelian/Yoneda.lean:38–65, FreydMitchell.lean:125–146, GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean:112–128 and RingTheory/Morita/Basic.lean:14–35,54–60, Matrix.lean:11–25. Yoneda fullness assumes each object is a quotient of P itself and gives only fullness; Gabriel–Popescu assumes Grothendieck colimits; Freyd–Mitchell gives an embedding into another ring. Morita/Basic explicitly lists the projective-generator characterization as TODO; matrix Morita assumes a matrix algebra. None is this finite module equivalence.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective generator with finite dimensional Hom spaces gives an equivalence of an abelian category with finite dimensional modules over its endomorphism algebra",
+   "results": "{\"t\": \"2026-10-24T14:28:32Z\", \"tool\": \"leanfinder\", \"query\": \"A projective generator with finite dimensional Hom spaces gives an equivalence of an abelian category with finite dimensional modules over its endomorphism algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleRepr.instIsEquivalenceFGModuleCatEmbed\", \"CategoryTheory.Abelian.FreydMitchell.EmbeddingRing\", \"CategoryTheory.Abelian.FreydMitchell.functor\", \"CategoryTheory.Abelian.freyd_mitchell\", \"instIsEquivalenceFGModuleCatUlift\", \"CategoryTheory.finrank_hom_simple_simple_eq_one_iff\", \"CategoryTheory.finrank_hom_simple_simple\", \"CategoryTheory.projective_iff_subsingleton_ext_one\"], \"digest\": \"33a0847644b38c38\"}; Read Abelian/Yoneda.lean:38–65, FreydMitchell.lean:125–146, GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean:112–128 and RingTheory/Morita/Basic.lean:14–35,54–60, Matrix.lean:11–25. Yoneda fullness assumes each object is a quotient of P itself and gives only fullness; Gabriel–Popescu assumes Grothendieck colimits; Freyd–Mitchell gives an embedding into another ring. Morita/Basic explicitly lists the projective-generator characterization as TODO; matrix Morita assumes a matrix algebra. None is this finite module equivalence.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hom functor from a projective generator with finite dimensional endomorphism algebra is fully faithful and essentially surjective onto finite dimensional right modules",
+   "results": "{\"t\": \"2026-10-24T14:28:33Z\", \"tool\": \"leanfinder\", \"query\": \"The Hom functor from a projective generator with finite dimensional endomorphism algebra is fully faithful and essentially surjective onto finite dimensional right modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleRepr.instIsEquivalenceFGModuleCatEmbed\", \"CategoryTheory.Abelian.FreydMitchell.instFullModuleCatEmbeddingRingFunctor\", \"Rep.instEnoughProjectives\", \"ModuleCat.enoughProjectives\", \"FGModuleCat.fullyFaithfulULift\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"FGModuleCat.instFullUlift\", \"Rep.instProjective\"], \"digest\": \"30ae87c3e166f481\"}; Read Abelian/Yoneda.lean:38–65, FreydMitchell.lean:125–146, GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean:112–128 and RingTheory/Morita/Basic.lean:14–35,54–60, Matrix.lean:11–25. Yoneda fullness assumes each object is a quotient of P itself and gives only fullness; Gabriel–Popescu assumes Grothendieck colimits; Freyd–Mitchell gives an embedding into another ring. Morita/Basic explicitly lists the projective-generator characterization as TODO; matrix Morita assumes a matrix algebra. None is this finite module equivalence.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Morita|projective generator|ProjectiveGenerator|progenerator",
+   "results": "{\"t\": \"2026-10-24T14:31:40Z\", \"tool\": \"grep\", \"query\": \"Morita|projective generator|ProjectiveGenerator|progenerator\", \"sub\": \"RingTheory/Morita\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\"], \"digest\": \"3cf7e49783e2d0c1\"}; Read Abelian/Yoneda.lean:38–65, FreydMitchell.lean:125–146, GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean:112–128 and RingTheory/Morita/Basic.lean:14–35,54–60, Matrix.lean:11–25. Yoneda fullness assumes each object is a quotient of P itself and gives only fullness; Gabriel–Popescu assumes Grothendieck colimits; Freyd–Mitchell gives an embedding into another ring. Morita/Basic explicitly lists the projective-generator characterization as TODO; matrix Morita assumes a matrix algebra. None is this finite module equivalence.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor between abelian categories preserves cokernels and finite biproducts",
+   "results": "{\"t\": \"2026-10-24T14:56:19Z\", \"tool\": \"leanfinder\", \"query\": \"An exact additive functor between abelian categories preserves cokernels and finite biproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.exactFunctor_le_additiveFunctor\", \"CategoryTheory.rightExactFunctor_le_additiveFunctor\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.AdditiveFunctor.ofExact\", \"CategoryTheory.AdditiveFunctor.ofRightExact\", \"CategoryTheory.Functor.preservesFiniteColimits_tfae\", \"CategoryTheory.AdditiveFunctor.ofExact_obj_fst\", \"CategoryTheory.leftExactFunctor_le_additiveFunctor\"], \"digest\": \"28e4edc93f81d437\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteColimits_of_exact|preservesColimitsOfShape_of_exact|isColimit.*(Cokernel|cokernel)|of_fullyFaithful|of_full_of_faithful",
+   "results": "{\"t\": \"2026-10-24T14:56:20Z\", \"tool\": \"grep\", \"query\": \"preservesFiniteColimits_of_exact|preservesColimitsOfShape_of_exact|isColimit.*(Cokernel|cokernel)|of_fullyFaithful|of_full_of_faithful\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\"], \"digest\": \"511418a9aef03587\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence",
+   "results": "{\"t\": \"2026-10-24T14:56:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isEquivalence_refl\", \"CategoryTheory.Functor.IsEquivalence\", \"CategoryTheory.Equivalence.isEquivalence_functor\", \"CategoryTheory.Equivalence.isEquivalence_inverse\", \"CategoryTheory.Functor.asEquivalence\", \"CategoryTheory.Functor.inv\", \"CategoryTheory.Functor.IsEquivalence.essSurj\", \"CategoryTheory.Functor.IsEquivalence.faithful\"], \"digest\": \"7b21a45706037bc2\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "match: existing node lem-trf-fully-faithful-ess-surj-equivalence; not the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful essentially surjective functor is an equivalence of categories",
+   "results": "{\"t\": \"2026-10-24T14:56:36Z\", \"tool\": \"leansearch\", \"query\": \"A fully faithful essentially surjective functor is an equivalence of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEquivalence.mk\", \"CategoryTheory.Equivalence.fullyFaithfulFunctor\", \"CategoryTheory.Functor.IsEquivalence.faithful\", \"CategoryTheory.Functor.IsEquivalence.essSurj\", \"CategoryTheory.Functor.IsEquivalence\", \"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.Functor.IsEquivalence.full\", \"CategoryTheory.Functor.IsEquivalence.mk'\"], \"digest\": \"1f221600fbaa3264\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "match: existing node lem-trf-fully-faithful-ess-surj-equivalence; not the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective generator with finite dimensional Hom spaces gives an equivalence of an abelian category with finite dimensional right modules over its endomorphism algebra",
+   "results": "{\"t\": \"2026-10-24T14:58:18Z\", \"tool\": \"leanfinder\", \"query\": \"A projective generator with finite dimensional Hom spaces gives an equivalence of an abelian category with finite dimensional right modules over its endomorphism algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleRepr.instIsEquivalenceFGModuleCatEmbed\", \"CategoryTheory.Abelian.freyd_mitchell\", \"CategoryTheory.Abelian.FreydMitchell.EmbeddingRing\", \"CategoryTheory.Abelian.FreydMitchell.functor\", \"instIsEquivalenceFGModuleCatUlift\", \"CategoryTheory.finrank_hom_simple_simple_eq_one_iff\", \"CategoryTheory.finrank_hom_simple_simple\", \"CategoryTheory.projective_iff_subsingleton_ext_one\"], \"digest\": \"88f2d189cc3f9747\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Projective, CategoryTheory.IsSeparator",
+   "results": "{\"t\": \"2026-10-24T14:58:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Projective, CategoryTheory.IsSeparator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.full_comp_preadditiveCoyonedaObj\", \"CategoryTheory.Abelian.preadditiveCoyonedaObj_map_surjective\", \"CategoryTheory.Abelian.has_projective_separator\"], \"digest\": \"d8f9447b15cd2982\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Morita|projective generator|preadditiveCoyonedaObj_map_surjective",
+   "results": "{\"t\": \"2026-10-24T14:58:18Z\", \"tool\": \"grep\", \"query\": \"Morita|projective generator|preadditiveCoyonedaObj_map_surjective\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Yoneda.lean\", \"Mathlib/CategoryTheory/Abelian/Yoneda.lean\"], \"digest\": \"a9271ee3772448b0\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian linear category with a projective generator and finite presentations by finite sums of it is equivalent to finite dimensional right modules over its endomorphism algebra",
+   "results": "{\"t\": \"2026-10-24T14:58:19Z\", \"tool\": \"leansearch\", \"query\": \"An abelian linear category with a projective generator and finite presentations by finite sums of it is equivalent to finite dimensional right modules over its endomorphism algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj\", \"CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteLimitsModuleCatEmbeddingRingFunctor\", \"ModuleCat.endRingEquiv\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Abelian.FreydMitchell.EmbeddingRing\", \"CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteColimitsModuleCatEmbeddingRingFunctor\", \"ModuleCat.abelian\", \"CategoryTheory.Preadditive.homSelfLinearEquivEndMulOpposite\"], \"digest\": \"4344d2a3cdf191b4\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*(finite|noetherian)|FinitePresentation.*of_finite|finitePresentation_of",
+   "results": "{\"t\": \"2026-10-24T14:59:05Z\", \"tool\": \"grep\", \"query\": \"finitePresentation.*(finite|noetherian)|FinitePresentation.*of_finite|finitePresentation_of\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\"], \"digest\": \"73c26b81e8c611e4\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite dimensional module over a finite dimensional noncommutative algebra is finitely presented",
+   "results": "{\"t\": \"2026-10-24T14:59:05Z\", \"tool\": \"leansearch\", \"query\": \"Every finite dimensional module over a finite dimensional noncommutative algebra is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.mk\", \"Module.finitePresentation_of_finite\", \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"Module.Presentation.finitePresentation\", \"Algebra.Presentation.finitePresentation_of_isFinite\", \"Module.FinitePresentation\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"instFiniteOfFinitePresentation\"], \"digest\": \"69e5067d81a892f1\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-24T14:59:05Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.FinitePresentation\", \"instFinitePresentation\", \"instFiniteOfFinitePresentation\", \"Module.FinitePresentation.of_subsingleton\", \"instFinitePresentationForall\", \"Module.finitePresentation_of_finite\", \"Module.finitePresentation_iff_finite\", \"Module.finitePresentation_of_projective\"], \"digest\": \"3a6ddc9959b70f42\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional right module over a finite dimensional algebra over a field admits a presentation by two finite rank free modules",
+   "results": "{\"t\": \"2026-10-24T14:59:06Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional right module over a finite dimensional algebra over a field admits a presentation by two finite rank free modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.exists_free_surjective\", \"Module.Presentation.finitePresentation\", \"Module.finitePresentation_iff_exists_presentation\", \"FGModuleRepr.ofFinite\", \"instFinitePresentation\", \"Module.Finite.repr\", \"Module.FinitePresentation\", \"Module.FinitePresentation.exists_fin\"], \"digest\": \"1e47432723fabd82\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation_of_finite|finitePresentation_of_.*exact|exists.*exact|exists.*surjective",
+   "results": "{\"t\": \"2026-10-24T14:59:53Z\", \"tool\": \"grep\", \"query\": \"finitePresentation_of_finite|finitePresentation_of_.*exact|exists.*exact|exists.*surjective\", \"sub\": \"Algebra/Module/FinitePresentation.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"93\", \"118\", \"125\", \"251\", \"269\"], \"digest\": \"f73189d27897988a\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hom functor from a projective generator with finite dimensional endomorphism algebra is fully faithful and essentially surjective onto finite dimensional right modules",
+   "results": "{\"t\": \"2026-10-24T14:59:53Z\", \"tool\": \"leanfinder\", \"query\": \"The Hom functor from a projective generator with finite dimensional endomorphism algebra is fully faithful and essentially surjective onto finite dimensional right modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleRepr.instIsEquivalenceFGModuleCatEmbed\", \"CategoryTheory.Abelian.FreydMitchell.instFullModuleCatEmbeddingRingFunctor\", \"Rep.instEnoughProjectives\", \"ModuleCat.enoughProjectives\", \"FGModuleCat.fullyFaithfulULift\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"FGModuleCat.instFullUlift\", \"Rep.instProjective\"], \"digest\": \"30ae87c3e166f481\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherian.*finite|isNoetherian_of_tower|of_restrictScalars_finite|FinitePresentation.*exists_fin|lemma Module.finitePresentation_of_finite",
+   "results": "{\"t\": \"2026-10-24T15:02:59Z\", \"tool\": \"grep\", \"query\": \"isNoetherian.*finite|isNoetherian_of_tower|of_restrictScalars_finite|FinitePresentation.*exists_fin|lemma Module.finitePresentation_of_finite\", \"sub\": \"RingTheory/Noetherian\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Noetherian/OfPrime.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\"], \"digest\": \"5cf277fed9c857ad\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Morita|projective generator|progenerator",
+   "results": "{\"t\": \"2026-10-24T15:03:58Z\", \"tool\": \"grep\", \"query\": \"Morita|projective generator|progenerator\", \"sub\": \"RingTheory/Morita\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\"], \"digest\": \"3cf7e49783e2d0c1\"}; Search hits read. Projective-generator hits give only fullness for a quotient of P itself or embeddings over a different ring, not this finite right-module equivalence. Exact-functor and equivalence-criterion hits are reused through existing DAG nodes; finite module presentation is constructed explicitly in Step 4.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-exact-fibre-coalgebra-reconstruction",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Theorems 9.24 and 9.46--9.47, Notes 9.25--9.27, printed pp.172--173,182--184; Lie tangent-family description is the dual-number calculation in Lemma 23.69, p.506. Differentiation and adjoint bracket: Theorem 10.23, pp.193--194; tensor differential: 10.28, pp.194--195. No existence of a semisimple group is asserted here. Supporting abelian reconstruction before the tensor structure: Milne Theorems 9.32 and 9.37, Sections 9(d)-9(e), coefficient presentation of the reconstructed coalgebra. Supporting input: Milne Lemma 9.35: projective-generator finite-module equivalence before coalgebra dualization.",
+   "via": [
+    "lem-sfb-exact-fibre-coalgebra-reconstruction",
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-projective-generator-module-equivalence",
+  "worker": "stage1",
+  "summary": "Expanded Milne Lemma 9.35 into the right-action calculation, explicit finite-power Hom coordinates, exactness on underlying vector spaces, finite free presentations constructed from finite spanning families, matrix-cokernel essential surjectivity and cokernel descent proving fullness. Reused existing Mathlib leaves; no new nodes. Statement unchanged, including the zero endomorphism algebra.",
+  "blueprint": "Supporting input to Milne Lemma 9.35 in the coalgebra-reconstruction prerequisite of det-thm-sf-ctf-stability-direct-images proof (3); retained the inherited provenance chain. The latest blueprint contains no second statement of this finite projective-generator module equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic exact-functor preservation of epis and cokernels, used only on underlying vector spaces; the unit has no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-trf-vector-space-quotient-dimension",
+    "why": "Only its subspace finite-dimensionality clause, for the kernel of the finite free module surjection; no geometric route is substituted."
+   },
+   {
+    "node": "lem-trf-fully-faithful-ess-surj-equivalence",
+    "why": "Generic categorical equivalence criterion after both full faithfulness and essential surjectivity have been proved explicitly."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-trf-vector-space-quotient-dimension",
+  "lem-trf-fully-faithful-ess-surj-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-d5d7a2462",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-d5d7a2462 (reviewer sub-agent of L); spot-checked: I read all of the mathematics against Milne iAG2017 Lemma 9.35 (printed p.177, PDF p.189), together with Lemmas 9.33–9.34 on p.176 for the projective-generator setting. Shape: one commit with two files (the item and the report), no new nodes, statement unchanged, proof_deps equal to the union of the step uses, and LeanSearch, Loogle/LeanFinder and grep searches recorded. Statement: the right action h·r=h∘r with rs=r∘s is associative; the hypotheses are exactly Milne's projective generator P (exact Hom, detects zero maps, every object a quotient of some P^n). The citing parent uses the item with E_X≅R_X^op, so the orientation agrees. Steps: (1) faithfulness from (f−g)∘h=0. (2) Hom(P^n,Y)≅Hom_R(R^n,H(Y)) via b=Σa(e_j)π_j; I checked both inverse identities and the case n=0. (3) lem-sp-exact-functor-preserves-homology (a) on the functor to vector spaces: preservation of epis and cokernels is exactly what it states. (4) The presentation R^m→R^n→M→0 is built from finite spanning sets: λv=v(λ1_R), ker p is a finite-dimensional R-submodule, and image a=ker p; no commutativity is used. (5) The cokernel of the lifted matrix gives essential surjectivity. (6) Fullness: q is the cokernel of u=dt because t is an epi and cancels; H(bu)=0 gives bu=0, so f exists, and H(f)=α because H(q) is surjective. This does not assume fullness, so there is no circularity. (7) The equivalence criterion applies once both hypotheses are proved, and the quasi-inverse is k-linear. Small cases: Vect^fd with P=k and with P=k^2 (Morita with M_2(k)); P=0 and R=0. Duplicates: rg -L over dag/nodes for projective generator, Lemma 9.35, Morita and equivalence criteria found no node stating this. Every cited node is a Mathlib leaf, and the three declared tool_uses (exact-functor preservation, subspace finite-dimensionality, equivalence criterion) are accepted. Batch-5 flags: lem-trf-vector-space-quotient-dimension (rank-nullity and subspace instances) and lem-trf-fully-faithful-ess-surj-equivalence (Functor.asEquivalence) are generic Mathlib-leaf facts. They are neither statements of the trace formula or Poincaré duality nor steps of their proofs, and their only dependencies are definitions, so both citations are accepted. coord/dag-sync.md is missing from the snapshot. blueprint.from.node=null is inherited from the parent chain, not introduced here. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteProjectiveGeneratorModuleEquivalence",
+  "declaration": "CategoryTheory.finiteProjectiveGenerator_moduleEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/FiniteProjectiveGeneratorModuleEquivalence.lean",
+  "statement": "theorem finiteProjectiveGenerator_moduleEquivalence (k : Type w) [Field k] (C : Type u) [Category.{v} C] [Abelian C] [Linear k C] [EssentiallySmall.{s} C] [∀ X Y : C, FiniteDimensional k (X ⟶ Y)] (P : C) (hExact : ∀ S : ShortComplex C, S.ShortExact → (S.map ((linearCoyoneda k C).obj (Opposite.op P))).ShortExact) (hDetect : ∀ (Y Z : C) (f : Y ⟶ Z), (∀ h : P ⟶ Y, h ≫ f = 0) → f = 0) (hGenerate : ∀ Y : C, ∃ (n : ℕ) (B : Bicone (fun _ : Fin n ↦ P)), Nonempty B.IsBilimit ∧ ∃ q : B.pt ⟶ Y, Epi q) : ∃ e : C ≌ (ObjectProperty.FullSubcategory (fun M : ModuleCat.{v} (End P)ᵐᵒᵖ ↦ FiniteDimensional k M)), e.functor ⋙ ObjectProperty.ι (fun M : ModuleCat.{v} (End P)ᵐᵒᵖ ↦ FiniteDimensional k M) = preadditiveCoyonedaObj P ∧ e.functor.Linear k ∧ e.inverse.Linear k",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-831acd1eb",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Statement matches node/Milne L9.35 clause-by-clause: Field k; Abelian+Linear k+EssentiallySmall.{s} (free universe); all Homs FiniteDimensional; hExact via linearCoyoneda k (short exact → short exact); hDetect; hGenerate via bilimit Bicone Fin n of P + Epi (n=0 ok). R=End P with End.mul_def r*s=s≫r=r∘s; right modules = ModuleCat.{v} (End P)ᵐᵒᵖ, smul_left op r•h=r≫h=h∘r, k-structure by scoped moduleOfAlgebraModule; target FullSubcategory FiniteDimensional k. Functor pinned by e.functor⋙ι = preadditiveCoyonedaObj P (achievable: lift⋙ι defeq); both directions Functor.Linear k (checked H is k-linear). P=0, R=0, noncommutative End all admitted. Only Mathlib notions, so no H2 gap; Morita/Basic TODO, Abelian.Yoneda fullness only, so no duplicate. lean.statement verbatim; single sorry; docstrings with source/blueprint and steps 1–7; report has Worker report + Second reading by Q17; node diff = lean record only. No changes, no compile run (worker: scompile exit 0 both modes)."
+ }
+}

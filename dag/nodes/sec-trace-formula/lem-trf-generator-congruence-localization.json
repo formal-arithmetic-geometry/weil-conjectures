@@ -1,0 +1,282 @@
+{
+ "id": "lem-trf-generator-congruence-localization",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "kind": "statement",
+ "title": "Generator congruences determine a local map and extend to fractions",
+ "statement": "Let $R$ be a commutative ring and $A,A'$ Noetherian commutative $R$-algebras [def-weil-pbc-noetherian-ring]. Let $h:A\\to A'$ be an $R$-algebra homomorphism, and let $\\mathfrak p\\subset A$, $\\mathfrak p'\\subset A'$ be prime ideals with $h^{-1}(\\mathfrak p')=\\mathfrak p$. Write $h_{\\mathfrak p}:A_{\\mathfrak p}\\to A'_{\\mathfrak p'}$ for the induced local homomorphism [def-weil-pbc-localization-at-prime] and $\\widehat h_{\\mathfrak p}:\\widehat{A_{\\mathfrak p}}\\to\\widehat{A'_{\\mathfrak p'}}$ for the induced homomorphism of maximal-ideal completions [def-weil-pbc-adic-completion, lem-weil-pbc-fs-adic-completion-map-local]. Let $B=R[T_1,\\ldots,T_n]/(F_1,\\ldots,F_m)$, with $n,m\\geq0$ finite and the polynomial ring interpreted by iteration of [def-weil-polynomial-ring], and let $\\mathfrak q\\subset B$ be a prime ideal. Suppose $\\theta:B_{\\mathfrak q}\\to\\widehat{A_{\\mathfrak p}}$ is a local $R$-algebra homomorphism, where local means that the inverse image of the target maximal ideal is the source maximal ideal. Put $a_i=\\theta(\\overline T_i/1)$. Fix $N\\geq1$ and $b_1,\\ldots,b_n\\in A'$ such that $F_j(b_1,\\ldots,b_n)=0$ for every $j$, and, writing $\\iota:A'_{\\mathfrak p'}\\to\\widehat{A'_{\\mathfrak p'}}$ for the completion map and $J=(\\mathfrak p'A'_{\\mathfrak p'})^N\\widehat{A'_{\\mathfrak p'}}$, suppose $\\widehat h_{\\mathfrak p}(a_i)-\\iota(b_i/1)\\in J$ for all $i$.\n\nThere is a unique $R$-algebra homomorphism $\\phi:B\\to A'$ with $\\phi(\\overline T_i)=b_i$. For every polynomial $H\\in R[T_1,\\ldots,T_n]$, one has $\\widehat h_{\\mathfrak p}(\\theta(\\overline H/1))-\\iota(\\phi(\\overline H)/1)\\in J$. Moreover $\\phi^{-1}(\\mathfrak p')=\\mathfrak q$, so $\\phi$ induces a local homomorphism $\\phi_{\\mathfrak q}:B_{\\mathfrak q}\\to A'_{\\mathfrak p'}$, and for every $z\\in B_{\\mathfrak q}$ one has $\\widehat h_{\\mathfrak p}(\\theta(z))-\\iota(\\phi_{\\mathfrak q}(z))\\in J$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CAU, lemma-map-approximation, proof, the sentence defining B to A′ and the final passage to a morphism through the marked point: polynomial evaluation, equality of the inverse-image prime, and the completion congruence on all of B_q"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-fs-adic-completion-map-local"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-sum polynomial evaluation of [def-weil-pbc-mv-polynomial-ring] (the same finite monomials as the iterated polynomial ring) to define $e_b:R[T_1,\\ldots,T_n]\\to A'$. Each $F_j$ maps to zero, so every finite sum $\\sum_jG_jF_j$ maps to zero. Thus $\\phi(\\overline H)=e_b(H)$ is independent of the representative, preserves the ring operations and the $R$-structure, and sends $\\overline T_i$ to $b_i$. Any other such map agrees on all polynomials by the cited universal property, hence on their quotient $B$. This proves existence and uniqueness, including empty generator or relation lists.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, lemma-map-approximation, proof: the map B to A′ and the marked-point conclusion, with the omitted algebra written out"
+   }
+  },
+  {
+   "text": "Put $C=A_{\\mathfrak p}$, $D=A'_{\\mathfrak p'}$ and let $\\mathfrak m,\\mathfrak n$ be their maximal ideals. By [def-weil-pbc-localization-at-prime] these are local rings, and [lem-weil-pbc-localization-noetherian] applies to the complements of the respective primes, so both are Noetherian. Apply [lem-weil-pbc-local-completion-local-ring] to each. Write $\\pi_C:\\widehat C\\to C/\\mathfrak m$ and $\\pi_D:\\widehat D\\to D/\\mathfrak n$ for coordinate one. Their kernels are precisely the maximal ideals $\\mathfrak m\\widehat C$ and $\\mathfrak n\\widehat D$. In particular $J=\\mathfrak n^N\\widehat D\\subseteq\\mathfrak n\\widehat D=\\ker\\pi_D$ since $N\\geq1$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 05GG (lemma-hathat-finitely-generated) and 05GI (lemma-radical-completion)"
+   }
+  },
+  {
+   "text": "The local map $h_{\\mathfrak p}:C\\to D$ induces a unital map of fields $\\bar h:C/\\mathfrak m\\to D/\\mathfrak n$. It is injective: if a nonzero $v$ mapped to zero, then $1=\\bar h(vv^{-1})=0$. The coordinate formula in [lem-weil-pbc-fs-adic-completion-map-local] gives $\\pi_D\\widehat h_{\\mathfrak p}=\\bar h\\pi_C$. Thus $\\widehat h_{\\mathfrak p}(x)$ belongs to $\\ker\\pi_D$ if and only if $x$ belongs to $\\ker\\pi_C$. The same formula at every coordinate gives $\\widehat h_{\\mathfrak p}(\\iota_C(c))=\\iota(h_{\\mathfrak p}(c))$; equality is coordinatewise by [def-weil-pbc-adic-completion]. In particular it respects the $R$-structure, since $h$ does.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-completion-map-local",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, lemma-map-approximation, proof: the map B to A′ and the marked-point conclusion, with the omitted algebra written out"
+   }
+  },
+  {
+   "text": "Define $f:B\\to\\widehat D$ by $f(t)=\\widehat h_{\\mathfrak p}(\\theta(t/1))$ and $g:B\\to\\widehat D$ by $g(t)=\\iota(\\phi(t)/1)$. These are $R$-algebra maps by the preceding step. Their composites from $R[T_1,\\ldots,T_n]$ to $\\widehat D/J$ agree on each generator by the given congruences. They agree on coefficients because they are $R$-algebra maps, so the universal property in [def-weil-pbc-mv-polynomial-ring] makes these composites equal. The quotient map has kernel $J$ by [def-weil-pbc-algebra-hom-quotient]. Consequently $f(\\overline H)-g(\\overline H)\\in J$ for every $H$, and hence $f(t)-g(t)\\in J$ for every $t\\in B$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, lemma-map-approximation, proof: the map B to A′ and the marked-point conclusion, with the omitted algebra written out"
+   }
+  },
+  {
+   "text": "For $t\\in B$, $t/1$ belongs to $\\mathfrak qB_{\\mathfrak q}$ exactly when $t\\in\\mathfrak q$: a fraction with numerator in $\\mathfrak q$ is in the extended ideal, and conversely clearing the finitely many denominators in an expression in this ideal gives $st\\in\\mathfrak q$ for some $s\\notin\\mathfrak q$, whence $t\\in\\mathfrak q$ by primality. The same observation applies to $A',\\mathfrak p'$. Locality of $\\theta$ and step 3 now give $t\\in\\mathfrak q\\iff\\theta(t/1)\\in\\ker\\pi_C\\iff f(t)\\in\\ker\\pi_D$. Since $f(t)-g(t)\\in J\\subseteq\\ker\\pi_D$, this is equivalent to $g(t)\\in\\ker\\pi_D$. The residue compatibility of the completion map in [lem-weil-pbc-local-completion-local-ring] identifies the latter condition with $\\phi(t)/1\\in\\mathfrak n$, equivalently $\\phi(t)\\in\\mathfrak p'$. This proves $\\phi^{-1}(\\mathfrak p')=\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, lemma-map-approximation, proof: the map B to A′ and the marked-point conclusion, with the omitted algebra written out"
+   }
+  },
+  {
+   "text": "For $r\\in B$, $s\\notin\\mathfrak q$, define $\\phi_{\\mathfrak q}(r/s)=\\phi(r)/\\phi(s)$ in $D$; step 5 ensures $\\phi(s)\\notin\\mathfrak p'$. If $r/s=r'/s'$, the fraction relation in [def-weil-pbc-localization-at-prime] supplies $u\\notin\\mathfrak q$ with $u(rs'-r' s)=0$. Applying $\\phi$ and cancelling the unit $\\phi(u)/1$ in $D$ proves equality of the two proposed images. The sum and product rules for fractions prove this is an $R$-algebra homomorphism extending $\\phi$. A fraction is in the extended prime exactly when its numerator is in the prime, by the preceding clearing-denominators argument. Therefore $\\phi_{\\mathfrak q}(r/s)\\in\\mathfrak n\\iff\\phi(r)\\in\\mathfrak p'\\iff r\\in\\mathfrak q\\iff r/s\\in\\mathfrak qB_{\\mathfrak q}$; the map is local.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, lemma-map-approximation, proof: the map B to A′ and the marked-point conclusion, with the omitted algebra written out"
+   }
+  },
+  {
+   "text": "Write an arbitrary $z\\in B_{\\mathfrak q}$ as $r/s$ with $s\\notin\\mathfrak q$. Put $U=f(s)$ and $V=g(s)$. The element $U$ is a unit because $s/1$ is a unit in $B_{\\mathfrak q}$ and $f$ extends through $\\widehat h_{\\mathfrak p}\\theta$; $V$ is a unit because $\\phi(s)/1$ is a unit in $D$. Step 4 gives $f(r)-g(r)\\in J$ and $U-V\\in J$. In the commutative ring $\\widehat D$, the explicit identity $f(r)U^{-1}-g(r)V^{-1}=(f(r)-g(r))U^{-1}+g(r)(V-U)U^{-1}V^{-1}$ shows that the difference belongs to $J$. The first term on the left is $\\widehat h_{\\mathfrak p}(\\theta(z))$ and the second is $\\iota(\\phi_{\\mathfrak q}(z))$, because homomorphisms preserve inverses of units. This is the required congruence for every fraction.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, lemma-map-approximation, proof: the map B to A′ and the marked-point conclusion, with the omitted algebra written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-fs-adic-completion-map-local",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CAU, lemma-map-approximation, proof: explicit expansion of the omitted marked-prime and localized congruence argument; completion facts from Algebra Tags 00FN, 05GG, 05GI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "congruen.*locali|locali.*congruen|eval.*sub.*Ideal|Ideal.*eval.*sub",
+   "results": "{\"t\": \"2026-10-22T06:14:26Z\", \"tool\": \"grep\", \"query\": \"congruen.*locali|locali.*congruen|eval.*sub.*Ideal|Ideal.*eval.*sub\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/FinitePresentation.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\"], \"digest\": \"bb68ca6858d03259\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalHom, Localization.AtPrime",
+   "results": "{\"t\": \"2026-10-22T06:14:27Z\", \"tool\": \"loogle\", \"query\": \"IsLocalHom, Localization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Localization.isLocalHom_localRingHom\", \"instIsLocalHomAtPrimeRingHomAlgebraMap\"], \"digest\": \"dd182767a1338c48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Congruence on polynomial generators of two ring maps extends to the localization at a prime if one map is local and the residue field map is injective",
+   "results": "{\"t\": \"2026-10-22T06:14:27Z\", \"tool\": \"leansearch\", \"query\": \"Congruence on polynomial generators of two ring maps extends to the localization at a prime if one map is local and the residue field map is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.map.congr_simp\", \"Localization.localRingHom.congr_simp\", \"Ideal.ResidueField.lift\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"RingHom.FormallyUnramified.ofLocalizationPrime\", \"Polynomial.isIntegral_isLocalization_polynomial_quotient\", \"IsLocalization.instIsDomainLocalizationAlgebraMapSubmonoidPrimeComplOfFaithfulSMul\", \"RingHom.OfLocalizationPrime\"], \"digest\": \"86267d2d6ccd8396\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism into a completed local ring and a map from a finitely presented algebra congruent on generators induce congruent localized homomorphisms and the same inverse image prime",
+   "results": "{\"t\": \"2026-10-22T06:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"A local homomorphism into a completed local ring and a map from a finitely presented algebra congruent on generators induce congruent localized homomorphisms and the same inverse image prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Localization.localRingHom_unique\", \"RingHom.HoldsForLocalization.localRingHom\", \"RingHom.locally_of_exists\", \"RingHom.OfLocalizationPrime\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"Localization.isLocalHom_localRingHom\", \"RingHom.IsStandardOpenImmersion.holdsForLocalizationAway\", \"RingHom.OfLocalizationSpan.mk\"], \"digest\": \"9fc7a8b417d14069\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If two ring homomorphisms agree modulo an ideal contained in the maximal ideal then their inverse image primes agree and fractions remain congruent",
+   "results": "{\"t\": \"2026-10-22T06:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"If two ring homomorphisms agree modulo an ideal contained in the maximal ideal then their inverse image primes agree and fractions remain congruent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"IsLocalization.AtPrime.exists_algebraMap_quot_eq_of_mem_quot\", \"IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply\", \"Ideal.Factors.piQuotientEquiv_map\", \"Ideal.ResidueField.ringHom_ext_iff\", \"PreTilt.untiltAux_smodEq_untiltFun\", \"Ideal.Factors.piQuotientEquiv_mk\", \"Ideal.ResidueField.ringHom_ext\"], \"digest\": \"bffb1dd51d5c3da2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localRingHom_unique|isLocalHom_localRingHom|localRingHom.congr_simp|isLocalRing|residueField",
+   "results": "{\"t\": \"2026-10-22T06:15:02Z\", \"tool\": \"grep\", \"query\": \"localRingHom_unique|isLocalHom_localRingHom|localRingHom.congr_simp|isLocalRing|residueField\", \"sub\": \"RingTheory/Localization/AtPrime/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"27\", \"69\", \"71\", \"107\", \"108\"], \"digest\": \"d4f697dffeaff89b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem localRingHom_unique|instance isLocalHom_localRingHom|theorem localRingHom.congr_simp|def localRingHom",
+   "results": "{\"t\": \"2026-10-22T06:21:49Z\", \"tool\": \"grep\", \"query\": \"theorem localRingHom_unique|instance isLocalHom_localRingHom|theorem localRingHom.congr_simp|def localRingHom\", \"sub\": \"RingTheory/Localization/AtPrime\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\"], \"digest\": \"6d18ec66ce30f663\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IsLocalHom",
+   "results": "{\"t\": \"2026-10-23T11:33:33Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, IsLocalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AdicCompletion.instIsLocalHomMaximalIdealRingHomAlgebraMapOfIsNoetherianRing\", \"AdicCompletion.algebraMap_isLocalHom_of_fg\"], \"digest\": \"c82d9bd2842881c5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Congruent images of algebra generators give congruent maps on a localized finitely presented algebra and determine the inverse image maximal ideal",
+   "results": "{\"t\": \"2026-10-23T11:33:40Z\", \"tool\": \"leanfinder\", \"query\": \"Congruent images of algebra generators give congruent maps on a localized finitely presented algebra and determine the inverse image maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.compLocalizationAwayAlgHom_X_inl\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply\", \"RingHom.finitePresentation_ofLocalizationSpanTarget\", \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"Algebra.FinitePresentation.of_isLocalizationAway\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"Algebra.Presentation.localizationAway\"], \"digest\": \"8d2a3906b68f455c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "congruen.*locali|locali.*congruen|algebraMap_isLocalHom",
+   "results": "{\"t\": \"2026-10-23T11:34:34Z\", \"tool\": \"grep\", \"query\": \"congruen.*locali|locali.*congruen|algebraMap_isLocalHom\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"1817594a47ea70f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial generator congruences modulo an ideal extend to fractions under local algebra homomorphisms",
+   "results": "{\"t\": \"2026-10-23T11:37:04Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial generator congruences modulo an ideal extend to fractions under local algebra homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.compLocalizationAwayAlgHom\", \"FractionalIdeal.coe_extendedHomₐ_eq_span\", \"IsLocalization.Away.mapₐ\", \"FractionalIdeal.extendedHomₐ\", \"IsLocalization.mapₐ\", \"Polynomial.instIsLocalHomRingHomAlgebraMap\", \"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"FractionalIdeal.extendedHom\"], \"digest\": \"15f24382d98485a0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a local ring with finitely generated maximal ideal is local with maximal ideal extended from the original ring and its canonical map is local",
+   "results": "{\"t\": \"2026-10-23T11:39:20Z\", \"tool\": \"leanfinder\", \"query\": \"The completion of a local ring with finitely generated maximal ideal is local with maximal ideal extended from the original ring and its canonical map is local\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isLocalRing_of_isAdicComplete_maximal\", \"HenselianLocalRing.toIsLocalRing\", \"isUnit_iff_notMem_of_isAdicComplete_maximal\", \"instIsHausdorffMaximalIdeal\", \"PowerSeries.instIsLocalRing\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsLocalRing.isLocalHom_residue\", \"instHenselianRingMaximalIdeal\"], \"digest\": \"e7daecd3325f1428\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two algebra homomorphisms congruent on polynomial generators agree modulo an ideal and are congruent on fractions with unit denominators",
+   "results": "{\"t\": \"2026-10-23T11:41:20Z\", \"tool\": \"leanfinder\", \"query\": \"Two algebra homomorphisms congruent on polynomial generators agree modulo an ideal and are congruent on fractions with unit denominators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hom_ext\", \"StandardEtalePair.hom_ext_iff\", \"RingQuot.mkAlgHom_rel\", \"AdjoinRoot.algHom_ext'_iff\", \"Algebra.FormallyUnramified.ext\", \"AdjoinRoot.algHom_ext\", \"AdjoinRoot.algHom_ext_iff\", \"RingQuot.ringQuot_ext'\"], \"digest\": \"7fee4378db557ffd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-map-completion-approximation",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal-local-model branch of lem-trf-local-term-locality, via the Tag 0GDX / Tag 0CAV approximation input; proof, the sentence defining B to A′ and the final passage to a morphism through the marked point: polynomial evaluation, equality of the inverse-image prime, and the completion congruence on all of B_q",
+   "via": [
+    "lem-trf-local-map-completion-approximation",
+    "lem-trf-isomorphism-completion-approximation",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-generator-congruence-localization",
+  "worker": "stage1",
+  "summary": "Retained the statement, reused existing Mathlib leaves for polynomial evaluation, Noetherian localization and local completion, and wrote the quotient construction, residue-field argument, prime equality and fraction identity explicitly. No new nodes and no Lean attachment.",
+  "blueprint": "Historical nodal-local-model branch recorded in blueprint.from: Tag 0CAU approximation, the final map B to A′ and the passage through the marked point. The current latest lem-trf-local-term-locality proof uses contracting correspondences instead; this split is only the existing algebraic helper, not a replacement of that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fs-adic-completion-map-local",
+    "why": "Coordinate formula for the already specified map between completions, a generic ring-theoretic tool; no trace-formula unit statement supplies this coordinate calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fs-adic-completion-map-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-20d241bfb",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-20d241bfb (reviewer sub-agent of L); spot-checked: Read Stacks 0CAU lemma-map-approximation (proof sentence 'This determines an R-algebra map B to A′'), the item in full and the full statements of all 7 proof_deps. The statement and stmt_deps are byte-identical to live; only proof, proof_deps, searches and split_report were added. There are no new nodes, no re-split note, no SGA, no cycle, and live is still unsplit. Step 1: polynomial evaluation factors through (F); uniqueness via mv-ring algHom_ext; iterated vs mv ring identified as elementary. Step 2: C=A_p and D=A'_{p'} are local Noetherian (localization-noetherian), mĈ=ker π_C and nD̂=ker π_D, so J⊆nD̂ since N≥1. Step 3: h_p is local by h^{-1}(p′)=p; the residue map is injective; the coordinate formula of fs-adic-completion-map-local gives π_D ĥ = h̄ π_C and ĥι_C = ιh_p, so ĥ is an R-algebra map. Step 4: the two maps B→D̂/J agree on generators, so by mv uniqueness f−g∈J. Step 5: clearing denominators plus primality; θ local, step 3 and J⊆ker π_D give φ^{-1}(p′)=q as an equality. Step 6: φ_q is well defined via the u(rs′−r′s)=0 relation (zero divisors handled correctly) and is local by the numerator criterion. Step 7: I verified the identity (f−g)U^{-1}+g(V−U)U^{-1}V^{-1} = fU^{-1}−gV^{-1}, and both terms are in J. The parent's step 3 uses exactly these outputs. Edge cases: n=0 and m=0 work; non-injective h and θ are fine; the N=0 counterexample (k[T], q=(T), b=1) shows the N≥1 hypothesis is needed and it is present. Duplicate search with rg -L for 0CAU and phi^{-1}(p') found only the parent and siblings, none of which states this fact. Accepted tool_use: lem-weil-pbc-fs-adic-completion-map-local (generic coordinate formula, already a stmt_dep of the unchanged statement)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeneratorCongruenceLocalization",
+  "declaration": "RingHom.exists_unique_generator_congruence_localization",
+  "file": "lean/Sheaf/RingTheory/GeneratorCongruenceLocalization.lean",
+  "statement": "theorem exists_unique_generator_congruence_localization {R : Type u} {A : Type v} {A' : Type w} [CommRing R] [CommRing A] [CommRing A'] [Algebra R A] [Algebra R A'] [IsNoetherianRing A] [IsNoetherianRing A'] (h : A →ₐ[R] A') (p : Ideal A) (p' : Ideal A') [p.IsPrime] [p'.IsPrime] (hp : Ideal.comap h.toRingHom p' = p) (n m : ℕ) (F : Fin m → MvPolynomial (Fin n) R) (q : Ideal (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range F))) [q.IsPrime] (θ : Localization.AtPrime q →ₐ[R] AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)) [IsLocalHom θ] (N : ℕ) (hN : 1 ≤ N) (b : Fin n → A') (hF : ∀ j : Fin m, MvPolynomial.aeval b (F j) = 0) (hb : ∀ i : Fin n, Classical.choose (RingHom.exists_adicCompletion_map_of_local (Localization.localRingHom p p' h.toRingHom hp.symm)) (θ (algebraMap _ (Localization.AtPrime q) (Ideal.Quotient.mk (Ideal.span (Set.range F)) (MvPolynomial.X i)))) - algebraMap (Localization.AtPrime p') (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p')) (Localization.AtPrime p')) (algebraMap A' (Localization.AtPrime p') (b i)) ∈ Ideal.map (algebraMap (Localization.AtPrime p') (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p')) (Localization.AtPrime p'))) ((IsLocalRing.maximalIdeal (Localization.AtPrime p')) ^ N)) : ∃ φ : (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range F)) →ₐ[R] A', (∀ i : Fin n, φ (Ideal.Quotient.mk (Ideal.span (Set.range F)) (MvPolynomial.X i)) = b i) ∧ (∀ ψ : (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range F)) →ₐ[R] A', (∀ i : Fin n, ψ (Ideal.Quotient.mk (Ideal.span (Set.range F)) (MvPolynomial.X i)) = b i) → ψ = φ) ∧ (∀ H : MvPolynomial (Fin n) R, Classical.choose (RingHom.exists_adicCompletion_map_of_local (Localization.localRingHom p p' h.toRingHom hp.symm)) (θ (algebraMap _ (Localization.AtPrime q) (Ideal.Quotient.mk (Ideal.span (Set.range F)) H))) - algebraMap (Localization.AtPrime p') (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p')) (Localization.AtPrime p')) (algebraMap A' (Localization.AtPrime p') (φ (Ideal.Quotient.mk (Ideal.span (Set.range F)) H))) ∈ Ideal.map (algebraMap (Localization.AtPrime p') (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p')) (Localization.AtPrime p'))) ((IsLocalRing.maximalIdeal (Localization.AtPrime p')) ^ N)) ∧ ∃ hφ : q = Ideal.comap φ.toRingHom p', IsLocalHom (Localization.localAlgHom q p' φ hφ) ∧ ∀ z : Localization.AtPrime q, Classical.choose (RingHom.exists_adicCompletion_map_of_local (Localization.localRingHom p p' h.toRingHom hp.symm)) (θ z) - algebraMap (Localization.AtPrime p') (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p')) (Localization.AtPrime p')) (Localization.localAlgHom q p' φ hφ z) ∈ Ideal.map (algebraMap (Localization.AtPrime p') (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p')) (Localization.AtPrime p'))) ((IsLocalRing.maximalIdeal (Localization.AtPrime p')) ^ N)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9a89bb5a",
+  "group": "Q69",
+  "result": "pass",
+  "note": "All clauses match node lem-trf-generator-congruence-localization (Stacks 0CAU proof): Noetherian A,A', hp comap, h_p = localRingHom, completion map = choose of proved upstream exists_adicCompletion_map_of_local (stated property fixes every coordinate, so the map is canonical; precedent Q139), B = MvPolynomial (Fin n) R / span F, θ local AlgHom, N≥1, hF, hb in J = map ι (𝔪^N); conclusion: existence with explicit uniqueness over all ψ, polynomial congruence, q = comap φ p', IsLocalHom of localAlgHom, congruence for all z. Edge cases n=0, m=0 fine; independent universes; proof sorry only, docstrings and 7 proof steps present, lean.statement verbatim, only lean field changed. Maintainer note: MvPolynomial is owned by proof_dep def-weil-pbc-mv-polynomial-ring, not a stmt_dep; it is canonically the iterated polynomial ring of stmt_dep def-weil-polynomial-ring, and stage 2 cannot add stmt_deps."
+ }
+}

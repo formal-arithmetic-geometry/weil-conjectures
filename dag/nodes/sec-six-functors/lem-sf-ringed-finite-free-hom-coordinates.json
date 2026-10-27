@@ -23,12 +23,14 @@
  ],
  "proof": [
   {
-   "text": "Choose an $R$-linear isomorphism $S\\cong R^{\\oplus d}$ and write $e_j:R\\to S$ for its basis inclusions. Let $U$ denote restriction of scalars [def-pc-sheaf-restrict-scalars]. For every $X\\in D(R)$ there is a natural isomorphism $a_X:X^{\\oplus d}\\xrightarrow{\\sim}UTX$, with components $b_j^X=1_X\\otimes e_j$. Indeed, choose a K-flat resolution $F\\to X$ [lem-pc-kflat-resolution] and compute $TX$ by $F\\otimes_R S$ [lem-pur-derived-change-of-rings]. The tensor definition [def-pur-sheaf-tensor-product] gives the degreewise mutually inverse maps $F^{\\oplus d}\\to U(F\\otimes_R S)$, $(x_j)\\mapsto\\sum_j x_j\\otimes e_j$, and $x\\otimes\\sum_j r_je_j\\mapsto(r_jx)_j$; they commute with differentials. Finite sums of the resolution remain quasi-isomorphisms, since kernels and images of a finite block-diagonal differential are the corresponding finite sums. Thus these maps give $a_X$ after localization. This also proves naturality in $X$. The Lean predicate RingedFiniteFreeBasisCoordinates records this component formula on every K-flat F and every q : Q(F) ≅ X: the chain map b_j has degreewise section x ↦ ringedFiniteFreeScalarSection J φ E h (F.X n) V (e.inv(e_j)(1)) x, and its derived class, with restriction comparison and q transport, equals ι_j followed by a_X and the specified universal counit. This normalization determines a_X, including for rank zero.",
+   "text": "Use the concrete regular-module tensor isomorphism and the supplied basis to construct a natural isomorphism M^d ≅ U(E M) of module sheaves. The comparison with extension of scalars sends the i-th inclusion on x to the actual sheafified basis section tensor x. The finite-free tensor model makes E exact. Thus its universal left-derived counit is an isomorphism on every complex. Localize the degreewise finite biproduct isomorphism, using preservation of finite biproducts by Q and the restriction comparison, to get a natural a : (-)^d ≅ T followed by U. Its localization normalization and naturality imply RingedFiniteFreeBasisCoordinates for every K-flat representative and every isomorphism q.",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pc-kflat-resolution",
+    "lem-sfb-ind-finite-free-scalar-model",
+    "def-sfb-derived-change-of-rings-cochain-model",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
     "lem-pur-derived-change-of-rings",
-    "def-pur-sheaf-tensor-product"
+    "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": true,
    "source": {
@@ -37,9 +39,11 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-dc-hom-scalar-adjunction] with $K=P$ and $N=TQ$. It gives an isomorphism $\\beta:UH_S(TP,TQ)\\xrightarrow{\\sim}H_R(P,UTQ)$. Its normalization says explicitly that the transpose of $\\beta$ is restricted $S$-linear evaluation after inserting the scalar-extension unit $\\eta_P:P\\to UTP$. The same node states that $U$ reflects isomorphisms. All its hypotheses hold: the site is small and $P,Q$ are arbitrary objects of the ordinary unbounded module-sheaf derived categories. No condensed-coefficient or constructibility hypothesis is used. Transport the canonical ordinary and derived scalar adjunctions to the supplied E and T by their object/map formulas and the universal counit comparison. Retain the ordinary 1 tensor x unit formula and the chain-transpose normalization. The β clause is explicitly its tensor-Hom transpose equation: tensor(1, eta_P), then eta on the tensor, then U(mu followed by tensor(epsilon,epsilon)), then U(evaluation). This is the expansion of scalarHomRestrictedEvaluation for the transported models. Transposition is bijective, so it pins β without assuming c invertible.",
+   "text": "Choose the normalized ordinary scalar adjunction. Localize its adjunction along the exact extension E and restriction U, transporting through the universal counit and restriction comparison. The formula for the localized counit proves the required chain-transpose identity. Apply the general closed scalar-Hom comparison to these adjunctions and μ. Its evaluation formula is precisely the required normalization for β.",
    "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction"
+    "lem-sfb-closed-scalar-hom-comparison",
+    "def-sfb-derived-change-of-rings-cochain-model",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -48,10 +52,13 @@
    }
   },
   {
-   "text": "Let c be the specified extended-evaluation transpose. Transpose β after U(c) and the i-th basis inclusion into U T H. The normalized scalar unit inserts 1_S and the κ generator formula, together with the μ localization square, multiplies this by e_i. The resulting map is R-evaluation followed by the i-th basis inclusion into U T Q. By uniqueness of tensor-Hom transpose this equals RHom_R(P,ι_i followed by a_Q). The calculation uses only the bilinear tensor relations on the actual K-flat representatives and localization. For d=0 there are no inclusions. No product preservation or matrix inversion is used.",
+   "text": "A basis section of S is a compatible global section s_i. Global sections act centrally on all morphisms of S-module sheaves, complexes and their derived category. Check on pure tensors that tensor(s_i times identity, identity) is s_i times identity on sheaf tensors; total-complex inclusions give the same identity for total tensor. Naturality of the normalized tensor-model comparison gives the identity on K-flat representatives, and K-flat resolutions transport it to arbitrary derived objects. The ordinary unit section formula shows that the i-th basis inclusion is the ordinary adjunction unit followed by multiplication by s_i. Localizing the identity proves ι_i followed by a_X = η_X followed by U(s_i times identity on TX). Now use the five defining Hom bijections for β: the scalar transpose cancels η, the S closed transpose changes precomposition by s_i to multiplication by s_i on the tensor, and μ followed by its inverse cancels. Centrality moves s_i past T(evaluation); naturality of η gives evaluation followed by the i-th inclusion on Q. The R transpose then yields the asserted coordinate identity. Rank zero requires no coordinate equation. This argument does not need the κ generator equation or the κ/μ compatibility square.",
    "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "def-pur-sheaf-tensor-product"
+    "lem-sfb-closed-scalar-hom-comparison",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-kflat-resolution",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-sheaf-modules-hom-module"
    ],
    "elementary": true,
    "source": {
@@ -61,16 +68,22 @@
   }
  ],
  "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
+  "lem-sfb-ind-finite-free-scalar-model",
+  "def-sfb-derived-change-of-rings-cochain-model",
   "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-closed-scalar-hom-comparison",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
   "lem-pc-kflat-resolution",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-sheaf-modules-hom-module",
   "lem-pur-derived-change-of-rings",
-  "lem-sfb-dc-hom-scalar-adjunction"
+  "def-pc-sheaf-restrict-scalars"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9 and 08JA; basis components fixed by actual scalar sections on all K-flat representatives; ordinary/derived scalar adjunction fixed by unit and chain transposes; Hom transpose fixed by the expansion of scalarHomRestrictedEvaluation. Finite product preservation and matrix inversion are proved by the importing Hom module."
+  "place": "Tags 08J9 and 08JA; W3 concrete finite-free tensor coordinates, exact-adjunction localization, and the global-section scalar calculation through the five closed scalar-Hom bijections."
  },
  "mathlib_searches": [
   {
@@ -182,14 +195,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-b080a",
-  "group": "E8",
+  "reviewer": "COMPILER",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261020T051227-L-1601075",
+  "landing": "20261025T022604-L-1774691",
   "kind": "interface",
-  "note": "independent cc review: Coordinates sorry vs item node step 4 (a/aQ pinned by RingedFiniteFreeBasisCoordinates on all K-flat reps, β by restricted-evaluation transpose, adj/δ by unit and scalarChainTranspose); Data sorry vs tensor-complex node; Hom/Tensor/main proofs vs proof_deps; 5 delivered modules + 3 importers compiled (SpecifiedHomScalarEvaluation fails identically on published = pre-existing)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-completed-local-deformation-tangent",
+ "kind": "statement",
+ "title": "Completion and continuous first-order deformation classes",
+ "statement": "Let $k$ be a field [def-weil-field], let $A$ be a local ring obtained by localizing a finitely generated commutative $k$-algebra at a maximal ideal, and write $\\mathfrak m$ for its maximal ideal. Let $\\widehat A=\\varprojlim_n A/\\mathfrak m^n$ [def-weil-pbc-adic-completion]. For an Artinian local $k$-algebra $R$ with residue field identified with $k$ (Artinian means descending chains of ideals stabilize), let $\\mathcal D_A(R)$ be the groupoid of flat $R$-algebras $Q$ with an identified quotient $Q/\\mathfrak m_RQ\\cong A$; arrows preserve this quotient [def-weil-pbc-flat-ring-map]. Put $\\mathfrak n_Q$ equal to the inverse image of $\\mathfrak m$ under $Q\\to A$. Let $\\mathcal D^{\\mathrm{cont}}_{\\widehat A}(R)$ be the groupoid of complete Noetherian local flat $R$-algebras with marked reduction $\\widehat A$, with continuous marked isomorphisms. All topologies are maximal-ideal-adic. Then $Q\\mapsto\\widehat Q_{\\mathfrak n_Q}$ is a natural functor $\\mathcal D_A\\to\\mathcal D^{\\mathrm{cont}}_{\\widehat A}$; in particular $\\widehat Q$ is $R$-flat and $\\widehat Q\\otimes_R k\\cong\\widehat A$.\nChoose a presentation $P\\twoheadrightarrow A$ with $P$ a localization of a finite polynomial $k$-algebra, and put $J=\\ker(P\\to A)$ and\n$$C=[J/J^2\\to\\Omega^1_{P/k}\\otimes_PA],\\qquad \\widehat C=C\\otimes_A\\widehat A,$$\nin degrees $-1,0$ [def-weil-pbc-kahler-differentials, def-weil-pbc-module-tensor-product]. The second complex is the continuous conormal differential complex obtained by completing the presentation at the inverse image of $\\mathfrak m$; continuous differentials mean the completion of the polynomial differential module, with its continuously extended derivation. Both complexes are independent of the chosen localized polynomial presentation up to canonical isomorphism in the derived category [def-weil-abstract-derived-category]. With the trivial deformation as origin, there are canonical $k$-linear identifications\n$$\\pi_0\\mathcal D_A(k[\\epsilon]/(\\epsilon^2))\\cong\\operatorname{Hom}_{D(A)}(C,A[1]),\\quad \\pi_0\\mathcal D^{\\mathrm{cont}}_{\\widehat A}(k[\\epsilon]/(\\epsilon^2))\\cong\\operatorname{Hom}_{D(\\widehat A)}(\\widehat C,\\widehat A[1]).$$\nUnder them, the tangent map of completion is extension of scalars along $A\\to\\widehat A$. Here $D(A)$ is the derived category of ordinary $A$-modules, and a module on the right is in degree zero before shifting. No separability or equality of the residue field of $A$ with $k$ is assumed. No assertion identifies ordinary differentials of $\\widehat A/k$ with its continuous differentials.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DYV (lemma-completion); defos.tex Tags 0GPZ (lemma-extensions-of-relative-ringed-spaces), 0GQ1 and 0GQ2, via completed polynomial presentations. restricted.tex Tag 0AJR (equation-NL) and Tag 0GAE (lemma-NL-up-to-homotopy), continuous presentation argument adapted to completion at a maximal ideal of a localized polynomial k-algebra; algebra.tex Tag 00MB (lemma-completion-flat). The continuous tangent comparison is this presentation-form consequence, not a verbatim assertion of 0DYV."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-sfb-completed-local-deformation-objects",
+  "def-sfb-two-term-derived-hom-boundary-maps"
+ ],
+ "proof": [
+  {
+   "text": "A finitely generated algebra over $k$ is Noetherian, and localization preserves this, so $A$ is Noetherian. Apply the adic deformation functor theorem with $B=A$ and $J=\\mathfrak m$. For a deformation $Q$, the ideal $\\mathfrak m_RQ$ is nilpotent: the Artinian local maximal ideal is nilpotent. An element of $Q$ whose image is a unit in $A$ is a unit, since an inverse modulo a nilpotent ideal is corrected by a finite geometric series. Thus $Q$ is local with maximal ideal $\\mathfrak n_Q$. Its completion is local by the local-completion theorem, and the deformation theorem supplies Noetherianity, flatness, the marked reduction and the natural base-change isomorphisms. These give exactly the claimed natural functor on groupoids.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-sfb-adic-completion-flat-deformation-functor",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV (lemma-completion); algebra.tex Artinian and local completion results"
+   }
+  },
+  {
+   "text": "First choose the presentation local at the inverse image of $\\mathfrak m$, so $P=k[x_1,\\ldots,x_r]_{\\mathfrak q}$. Such a presentation exists by lifting generators of the finite type algebra before localizing. The naive cotangent model identifies the conormal complex for any original localized polynomial presentation with $\\tau_{\\geq-1}L_{A/k}$, canonically and naturally. Thus replacing the presentation does not change its derived object. Both $P$ and $A$ are Noetherian by the two Noetherianity results in step 1. In particular $J$, $J^2$, $J/J^2$ and the differential module after tensoring with $A$ are finite modules. The polynomial calculus gives $\\Omega^1_{P/k}=P^{\\oplus r}$.",
+   "uses": [
+    "lem-trf-lci-naive-cotangent-model",
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sfb-completed-polynomial-lift-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU (remark-extensions-of-algebras); cotangent.tex Tag 08RB; localized polynomial presentation"
+   }
+  },
+  {
+   "text": "Put $S=\\widehat P$, $B=\\widehat A$ and $I=JS$. Completion of the quotient gives $B=S/I$. Complete the finite-module sequences $0\\to J\\to P\\to A\\to0$ and $0\\to J^2\\to J\\to J/J^2\\to0$. Exactness and the natural tensor comparison identify $I/I^2$ with $(J/J^2)\\otimes_AB$: indeed the completed image of $J^2$ is $J^2S=(JS)^2$. The completed differential term is $B^{\\oplus r}$. The polynomial calculus extends $d$ continuously, and on the dense representatives $j\\in J$ the completed boundary is $[j]\\mapsto\\widehat d j$. Hence its complex is precisely $C\\otimes_AB$. Every module map here is continuous since it preserves ideal powers; equality extends from representatives because finite modules over complete Noetherian rings are separated and complete.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "lem-sfb-completed-polynomial-lift-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, completed presentation calculation; algebra.tex Tags 00MA and 00MB"
+   }
+  },
+  {
+   "text": "The map $A\\to B$ is flat, so ordinary tensoring carries the canonical quasi-isomorphisms between the algebraic presentation complexes to quasi-isomorphisms: tensor preserves the exact sequences defining cycles and boundaries. Consequently $\\widehat C$ is independent of that presentation in $D(B)$. This proves the independence claimed in the statement, where the continuous complex is obtained by completing that presentation. It makes no comparison with the ordinary module $\\Omega^1_{B/k}$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-trf-lci-naive-cotangent-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "algebra.tex Tag 00MB; cotangent.tex Tag 08RB"
+   }
+  },
+  {
+   "text": "Write $T=k[\\epsilon]/(\\epsilon^2)$. For a flat $T$-algebra $E$ with reduction $H$, tensoring $0\\to(\\epsilon)\\to T\\to k\\to0$ gives $\\ker(E\\to H)=\\epsilon E\\cong H$, via $\\bar e\\mapsto\\epsilon e$. Conversely an extension $0\\to H\\xrightarrow{i}E\\to H\\to0$ of $k$-algebras with square-zero kernel becomes a $T$-algebra by $\\epsilon\\mapsto i(1)$. Multiplication then gives $\\epsilon e=i(\\bar e)$, so $\\ker\\epsilon=\\operatorname{im}\\epsilon=i(H)$. Choose a $k$-basis of $H$ and lifts to $E$. These lifts freely generate $E$ over $T$: reduction gives spanning modulo $i(H)$, and the same basis multiplied by $\\epsilon$ spans $i(H)$; any linear relation vanishes first modulo $i(H)$ and then inside its identified copy of $H$. Thus $E$ is free and flat. The constructions are inverse on marked isomorphisms. For $H=B$ every such deformation is automatically complete Noetherian local by the adic deformation theorem, applied to the Noetherian $k$-algebra $B$ with its maximal ideal; $B$ is Noetherian by the same theorem applied in step 1 to the trivial deformation $A$ over $k$, whose completion is $B$, and $B$ is already complete. Marked isomorphisms are local, hence continuous.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sfb-adic-completion-flat-deformation-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPT (lemma-extensions-of-algebras), conversion between dual-number deformations and self-extensions"
+   }
+  },
+  {
+   "text": "For either $K=[N\\xrightarrow{d}F]$ over a ring $H$, with $F$ finite free, or its displayed completed version, the boundary lemma gives $\\operatorname{Hom}(F,H)\\to\\operatorname{Hom}(N,H)\\xrightarrow{\\partial}\\operatorname{Hom}_{D(H)}(K,H[1])$, exact in the middle, with $\\partial(\\phi)=\\phi[1]q$. It is also surjective: apply Hom-out-of-triangle exactness to the triangle $F[0]\\to K\\xrightarrow{q}N[1]\\to F[1]$ and target $H[1]$. The restriction of any class to $F[0]$ is zero because $\\operatorname{Ext}^1_H(F,H)=0$ by projectivity. It therefore factors through $q$. Thus $\\partial$ identifies the cokernel of precomposition by $d$ with the required derived Hom. The boundary lemma makes this identification natural in chain maps and coefficient maps.",
+   "uses": [
+    "lem-sfb-two-term-derived-hom-boundary",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-projective-ext-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, displayed cokernel formula; derived.tex Tag 0149"
+   }
+  },
+  {
+   "text": "Apply step 5 with $H=A$ or $B$. In the first case lift $P\\to A$ to $E$ by choosing lifts of the polynomial variables: all denominators remain units because their reductions are units. In the second case do this for $P\\to B$ and use the polynomial calculus to extend to a continuous lift $a:S\\to E$. In either case denote the presentation ring by $U$, its kernel by $V$ and its quotient by $H$. Restriction of $a$ to $V$ takes values in $i(H)$ and kills $V^2$; it gives an $H$-linear map $\\phi:V/V^2\\to H$. Two lifts differ by $iD$ with $D$ a $k$-derivation, because the kernel is square zero. In the completed case it is continuous; the polynomial calculus represents it by a linear map from the completed free differential module. In the ordinary case the same assertion follows by differentiating polynomials and $D(s^{-1})=-s^{-2}D(s)$. Thus changing the lift changes $\\phi$ exactly by a map factoring through the conormal boundary.",
+   "uses": [
+    "lem-sfb-completed-polynomial-lift-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU (remark-extensions-of-algebras), lift and relation map; completed variant via 07ED"
+   }
+  },
+  {
+   "text": "Conversely, for any $\\phi:V/V^2\\to H$, form the ring $U\\oplus H$ with $(u,b)(u',b')=(uu',\\bar u b'+\\bar u'b)$ and quotient it by the ideal $\\{(v,-\\phi([v])):v\\in V\\}$. It is an ideal since $\\phi$ is linear and kills $V^2$. The quotient $E_\\phi$ maps onto $H$ with kernel the injective copy $(0,H)$: an element in the kernel has $u\\in V$ and equals $(0,b+\\phi([u]))$, while a graph element with first coordinate zero has second coordinate zero. This kernel is square zero. Step 5 makes $E_\\phi$ a flat dual-number deformation, and when $H=B$ the adic deformation theorem makes it complete Noetherian local. A lift $a:U\\to E$ gives an isomorphism $E_\\phi\\to E$, $(u,b)\\mapsto a(u)+i(b)$; it is bijective by the just displayed kernel calculation and surjectivity onto $H$. If $\\phi'=\\phi+D|_V$, the map $(u,b)\\mapsto(u,b-D(u))$ induces $E_\\phi\\cong E_{\\phi'}$. Conversely any marked isomorphism, compared with the canonical lifts, gives such a derivation. In the completed case all resulting isomorphisms are local and hence continuous. This proves bijectivity of the relation-map cokernel with deformation classes, with zero represented by the trivial deformation.",
+   "uses": [
+    "lem-sfb-adic-completion-flat-deformation-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, explicit pushout of the conormal extension"
+   }
+  },
+  {
+   "text": "The cokernel description carries its usual $k$-vector-space structure. Fibre product of two square-zero extensions over $H$ pairs their relation maps $(\\phi,\\psi)$; pushout of the kernel along $(b,c)\\mapsto b+c$ gives $\\phi+\\psi$. Pushout along $b\\mapsto\\lambda b$ gives $\\lambda\\phi$. These operations preserve the trivial origin and, in the completed case, are again complete deformations by step 5. The additive boundary map of step 6 respects scalars as composition is $k$-linear. Steps 6--8 therefore give the two stated canonical $k$-linear tangent identifications.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, addition and scalar multiplication on relation maps"
+   }
+  },
+  {
+   "text": "Finally let $a:P\\to E$ represent an algebraic deformation class by $\\phi:J/J^2\\to A$. The map into $\\widehat E$ extends to $\\widehat a:S\\to\\widehat E$. Completing $0\\to A\\xrightarrow{i}E\\to A\\to0$ as a sequence of finite $E$-modules is exact, and identifies its kernel with $\\widehat A=B$; the topology on $A$ induced by the maximal ideal of $E$ is exactly the $\\mathfrak m$-adic topology. For $j\\in J$ one has $\\widehat a(j)=i(\\phi([j]))$ in that completed kernel. By the natural finite-module tensor comparison the continuous relation map is consequently $\\widehat\\phi:I/I^2\\to B$, with $\\widehat\\phi([j]\\otimes b)=b\\phi([j])$. The same formula extends the maps factoring through differentials. Passing to cokernels and then through the boundary map of step 6 is exactly extension of scalars along $A\\to B$: since $A\\to B$ is flat, $-\\otimes_AB$ is an exact functor of module categories, so it preserves quasi-isomorphisms, induces $D(A)\\to D(B)$ commuting with $[1]$, and sends the quotient chain map $q:C\\to(J/J^2)[1]$ to the quotient chain map of $\\widehat C$ and $\\phi[1]$ to $(\\phi\\otimes_AB)[1]$, with $A\\otimes_AB=B$; hence it sends $\\partial_A(\\phi)=\\phi[1]q$ to $\\partial_B(\\widehat\\phi)$. Hence it is the tangent map of the completion functor. This calculation uses no coefficient-field section and remains valid for inseparable residue extensions.",
+   "uses": [
+    "lem-sfb-completed-polynomial-lift-calculus",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-sfb-two-term-derived-hom-boundary",
+    "lem-weil-pbc-noetherian-completion-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tags 0GPU and 0GPW (remark-extensions-of-algebras-functorial); examples-defos.tex Tag 0DYV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-sfb-adic-completion-flat-deformation-functor",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-sfb-completed-polynomial-lift-calculus",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sfb-two-term-derived-hom-boundary",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-projective-ext-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 0GPU explicit relation-map construction, adapted to completed localized polynomial presentations using more-algebra.tex 07ED and 07NJ; completion functor follows examples-defos.tex 0DYV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a finite type algebra at a maximal ideal sends first order deformations to continuous first order deformations compatibly with completed cotangent Ext",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.Extension.Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.Cotangent.map P.toInfinitesimal)\", \"doc\": \"The cotangent map induced by the canonical homomorphism from an algebra extension $ P $ to its infinitesimal extension $ P/I^2 $ is bijective, where $ I $ denotes the kernel ideal of the extension.\"}\n  {\"name\": \"Algebra.Extension.toInfinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.Hom P.infinitesimal\", \"doc\": \"The canonical homomorphism from an algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $ to its infinitesimal extension $ P/I^2 $, constructed by quotienting $ P $ by the squ\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.CotangentSpace.map P.toInfinitesimal)\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the linear map from the cotangent space of $ P $ to the cotangent space of its infinitesimal extension $ P/I^2 \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic lifting of formally smooth ring maps and cotangent-space completion do not classify continuous marked algebra deformations or identify their tangent comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"KaehlerDifferential\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic lifting of formally smooth ring maps and cotangent-space completion do not classify continuous marked algebra deformations or identify their tangent comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(complet|continuous).*(cotangent|Kaehler|deform)|(cotangent|Kaehler|deform).*(complet|continuous)",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"161\", \"text\": \"  let f := Ideal.mapCotangent _ _ (Algebra.ofId R (AdicCompletion (maximalIdeal R) R))\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic lifting of formally smooth ring maps and cotangent-space completion do not classify continuous marked algebra deformations or identify their tangent comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent space of continuous deformations of a complete local algebra is Ext one of its continuous conormal differential complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": Type _\", \"doc\": \"The cotangent module of the kernel ideal $\\\\ker(\\\\phi)$ of the canonical ring homomorphism $\\\\phi: R \\\\to S$ in an $R$-algebra extension, defined as the quotient $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$. This generalize\"}\n  {\"name\": \"instTopologicalSpaceTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The topology on the tangent space $ T_xM $ at a point $ x $ of a charted space $ M $ modeled on a normed vector space $ E $, induced by the normed vector space structure of $ E $ through the model wit\"}\n  {\"name\": \"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Module (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any commutative local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is equipped with a canonical module structure ov\"}\n  {\"name\": \"IsLocalRing.CotangentSpace\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Type _\", \"doc\": \"The cotangent space of a local ring $ R $ is the quotient of its maximal ideal $ \\\\mathfrak{m} $ by the square $ \\\\mathfrak{m}^2 $, where $ \\\\mathfrak{m} $ consists of all non-units of $ R $. This constr\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The cotangent space of an algebra extension $ S $ over a base ring $ R $ is defined as the tensor product of $ S $ with the module of Kähler differentials $ \\\\Omega_{S/R} $ over $ R $. This constructio\"}\n  {\"name\": \"instAddCommGroupTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $x$ on a manifold $M$ modeled on a normed vector space $E$ via a model with corners $I$ inherits the additive commutative group structure from the normed vector space $E$.\"}\n  {\"name\": \"instModuleTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, a model with corners $I$ on $E$, and a charted space $M$ modeled on $I$, this instance asserts that the tan\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic lifting of formally smooth ring maps and cotangent-space completion do not classify continuous marked algebra deformations or identify their tangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map from algebra deformations to completed local ring deformations is induced on Ext one by completing the conormal presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.Extension.toInfinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.Hom P.infinitesimal\", \"doc\": \"The canonical homomorphism from an algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $ to its infinitesimal extension $ P/I^2 $, constructed by quotienting $ P $ by the squ\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.Extension.infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Algebra.Extension R S\", \"doc\": \"Given an algebra extension $ P $ of a commutative ring $ R $ over a commutative $ R $-algebra $ S $, the infinitesimal extension is constructed by quotienting the ring structure of $ P $ by the square\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic lifting of formally smooth ring maps and cotangent-space completion do not classify continuous marked algebra deformations or identify their tangent comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-scheme-deformation-hull",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: the completion-compatibility clause, separating continuous from ordinary completed-ring differentials.",
+   "via": [
+    "lem-sfb-proper-scheme-deformation-hull",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-completed-local-deformation-tangent",
+  "worker": "stage1",
+  "summary": "Reused the existing adic deformation functor and algebraic conormal model; proved both tangent classifications explicitly using relation maps and graph-ideal quotients, then computed completion on representatives. One new polynomial completion calculus input, not a restatement of a tangent clause.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: the completion-compatibility clause, separating continuous from ordinary completed-ring differentials.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-lci-naive-cotangent-model",
+    "why": "Generic commutative algebra/presentation comparison used in the continuous conormal calculation; no node of this unit supplies that theorem."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic commutative algebra/presentation comparison used in the continuous conormal calculation; no node of this unit supplies that theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-weil-pbc-local-completion-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-bd4f5a435",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-bd4f5a435 (reviewer sub-agent of L); spot-checked: Read the item's 10 steps, the new node lem-sfb-completed-polynomial-lift-calculus, every cited statement, and Stacks 0DYV, 0GPU and 07NJ (all other source tags checked). The statement is unchanged; no SGA source is cited; there is no re-split note (the item was created statement-only on 2026-10-23, so this is a first split). Mathematics checked: step 1 (local Q via nilpotent m_R; adic deformation functor; local completion); step 3 (S/JS=B; completed I/I^2=(J/J^2)⊗B by exact completion and the tensor comparison); step 5 (free-basis flatness, infinite basis included); step 6 (surjectivity via the triangle F[0]→K→N[1] and Ext^1(F,H)=0 with def-pc-ext); step 8 (graph of -φ is an ideal; kernel (0,H); (u,b)↦a(u)+i(b) and (u,b)↦(u,b-Du) are ring maps); step 10 (completed relation map b·φ[j]). The convention matches Stacks 0GPU. The new node is true clause by clause (density and completeness for continuous derivations; local maps P→E extend to S; square-zero lifts exist), works for inseparable residue fields, is not a restatement of the item, and is not duplicated by fs-adic-lift-* or polynomial-local-completion-formally-smooth. FIX (two citation gaps, C4 and C1): step 10 relied on the boundary node's naturality for the change of rings A→B, which that node does not state (it is natural only inside one abelian category); the compatibility is now derived from exactness of ⊗_A B, citing lem-weil-pbc-noetherian-completion-flat. Step 5 now says why B is Noetherian (the adic deformation theorem applied to the trivial deformation). Batch-5 flag on lem-trf-lci-naive-cotangent-model: a generic naive-cotangent comparison; its 523-node closure contains only sk-i-curve-zero homological algebra from sec-trace-formula, with no trace, Poincaré-duality or nt-assume node; it is already in the batch-5 closure without this item, so it is accepted. Tool uses accepted: the lci model and local-completion-quotient. Advisory: lem-sfb-scheme-square-zero-lift-torsor already gives the ordinary classification; someone should confirm that its convention matches this item's (Stacks 0GPU, no sign) where the parent's step 6 combines the two.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedLocalDeformationTangent",
+  "declaration": "Algebra.FlatDeformation.completedLocal_deformation_tangent",
+  "declarations": [
+   "Algebra.FlatDeformation.ContinuousPresentationModel",
+   "Algebra.FlatDeformation.CompletedLocalComparison",
+   "Algebra.FlatDeformation.completedLocal_deformation_tangent"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompletedLocalDeformationTangent.lean",
+  "statement": "theorem completedLocal_deformation_tangent (B : Type u) [CommRing B] [Algebra k B] [Algebra.FiniteType k B] (m : Ideal B) [m.IsMaximal] [Algebra B A] [IsScalarTower k B A] [IsLocalization.AtPrime A m] : ∃ _ : IsNoetherianRing A, Nonempty (CompletedLocalComparison (k := k) (A := A))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9958fbf5b",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Lean byte-identical to 742f, whose review accepted the mathematics; I re-read both modules against the node (statement + 10 steps) and Stacks 0DYV/0GPU/0GPW/0AJR/0GAE/00MB and agree: completion functor pinned on every level with base-change naturality; complete Noetherian local full subgroupoid; tangent equivalences pinned by relation maps via the positive twoTermBoundary (onto since the differential term is free); scalarExtension pinned on all boundaries; presentation isos pinned via ConormalSquare plus the P⊗P' link. The 742f H12/H2 return is repaired: the objects node cites def-trf-naive-cotangent-comparison-data (in live); new existing:true def-sfb-two-term-derived-hom-boundary-maps owns twoTermQuotient/SquareMap/Boundary, its statement verbatim the live signature, TeX matches the code, deps def-sp-abelian + derived category, no other owner; item diff vs live is only the lean field and those two added def stmt_deps. Edge cases r=0/A a field, R=k, trivial deformation, inseparable residue fields are covered; universes common u, Homs in u+1. Advisories: the extra IsNoetherianRing A conclusion is true and harmless; the second reading is a self-check. No files changed, so nothing compiled."
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-completed-primitive-counit-roos-realization-existence",
+ "kind": "statement",
+ "title": "Existence of normalized Roos realizations",
+ "statement": "theorem completedPrimitiveCounit_roos_exists (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{t}} (f : X ⟶ Y) (W : Scheme.{t}) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (_hW : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) (S : CoefficientDerivedSystemReduction l E W) (V : CoefficientDerivedSystemReduction l E Y) : Nonempty (PrimitiveCounit.RoosRealization l E W × PrimitiveCounit.RoosRealization l E X)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 and the finite evaluation/counit assembly described in the item proof; this stage-3 decomposition isolates the existence and uniqueness/assembly subarguments."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Apply the canonical projection- and derived-unit-normalized Roos comparison for W and X. Naturality along any quasi-isomorphism into a K-injective complex, followed by the derived-unit equation, gives exactly RoosResolution. Package this with the projection equation into the two required RoosRealization records.",
+   "uses": [
+    "lem-pur-coefficient-tower-roos-unit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-tower-roos-unit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; naturality of the canonical Roos comparison and its equation on K-injective resolutions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit normalized natural isomorphism existence finite evaluation adjunction",
+   "results": "No direct declaration found; existing coefficient evaluation calculus is the closest interface.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction homEquiv unit natural isomorphism uniqueness",
+   "results": "Generic adjunction hom-equivalence lemmas only; no project-specific comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseEvaluation completedPrimitiveCounit RoosRealization Comparisons",
+   "results": "Only the current item declarations; no duplicate lower statement.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPrimitiveCounitComparison",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-primitive-counit-comparison",
+   "place": "Stage-3 lower statement extracted from the parent proof.",
+   "via": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPrimitiveCounitComparison",
+  "file": "lean/Sheaf/Paper/CompletedPrimitiveCounitComparison.lean",
+  "declaration": "WeilConjectures.completedPrimitiveCounit_roos_exists",
+  "statement": "theorem completedPrimitiveCounit_roos_exists (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{t}} (f : X ⟶ Y) (W : Scheme.{t}) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (_hW : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) (S : CoefficientDerivedSystemReduction l E W) (V : CoefficientDerivedSystemReduction l E Y) : Nonempty (PrimitiveCounit.RoosRealization l E W × PrimitiveCounit.RoosRealization l E X)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T211947-L-4174483",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-662ac",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T050615-L-243965",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules vs clone original (verbatim relocation diffed), new sorry statements vs Comparisons fields/nodes, node lean/proof fields vs Lean; 12 direct importers compiled OK against delivered .lbuild; axioms probe (roos_exists clean, comparisons_exists sorryAx only via the two new realization holes)"
+ }
+}

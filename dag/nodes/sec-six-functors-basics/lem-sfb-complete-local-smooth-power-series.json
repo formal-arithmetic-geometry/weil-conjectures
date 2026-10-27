@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-complete-local-smooth-power-series",
+ "kind": "statement",
+ "title": "Smooth complete local functors are power series extensions",
+ "statement": "Let $k$ be a field [def-weil-field], and let $B\\to A$ be a continuous local $k$-algebra homomorphism of complete Noetherian local rings with residue fields identified with $k$, inducing the identity on these residue fields [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion]. For an Artinian local $k$-algebra $R$ with residue field $k$ put $h_A(R)=\\operatorname{Hom}_{k,\\mathrm{loc},\\mathrm{cont}}(A,R)$ and define $h_B$ similarly; Artinian means that descending chains of ideals stabilize. The transformation $h_A\\to h_B$ is formally smooth if for every surjection $R'\\twoheadrightarrow R$ with square-zero kernel the map $h_A(R')\\to h_A(R)\\times_{h_B(R)}h_B(R')$ is surjective. This condition holds if and only if $A$ is isomorphic, as a complete local $B$-algebra, to $B[[u_1,\\ldots,u_r]]$, where $r=\\dim_k\\mathfrak m_A/(\\mathfrak m_BA+\\mathfrak m_A^2)$ [def-weil-pbc-multivariate-power-series]. The relative tangent space of $h_A\\to h_B$ is the dual of this quotient. In particular, an unobstructed functor prorepresented by $A$ over $k$ has $A\\cong k[[t_1,\\ldots,t_N]]$, with $N$ the dimension of its tangent space; unobstructed means that every element lifts across each such square-zero surjection.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06HL (lemma-smooth-morphism-power-series); tangent-space quotient in example-tangent-space-map-prorepresentable-functor. The square-zero test is equivalent to the arbitrary Artinian-surjection test by factoring through the powers of the nilpotent kernel."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sfb-artin-deformation-test-category"
+ ],
+ "proof": [
+  {
+   "text": "For an Artinian local $R$, [lem-weil-pbc-artinian-local-noetherian-nilpotent] gives $\\mathfrak m_R^N=0$, hence maximal-ideal-adic completeness: the inverse system is eventually constantly $R$. If $R^\\prime\\twoheadrightarrow R$ has kernel $J$, then $J\\subseteq\\mathfrak m_{R^\\prime}$ is nilpotent. Factor it as $R^\\prime/J^{j+1}\\twoheadrightarrow R^\\prime/J^j$, $j\\geq1$, ending at $R^\\prime$. Each kernel $J^j/J^{j+1}$ squares to zero since $2j\\geq j+1$. Inductively apply the assumed square-zero lifting property, using the fixed map $B\\to R^\\prime$ at every stage. Thus the test in the statement implies the test for arbitrary Artinian surjections; the reverse implication just restricts the tests.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06HL and remark-compare-smooth-schlessinger; reduction to square-zero kernels"
+   }
+  },
+  {
+   "text": "Put $T=B[[X_1,\\ldots,X_r]]$ and $N=(X_1,\\ldots,X_r)$. By [lem-weil-pbc-power-series-noetherian] and [lem-weil-pbc-power-series-local-ring], $T$ is Noetherian local. By [lem-weil-pbc-power-series-quotient-variables], $\\ker(T\\to B)=N$, so its maximal ideal is $\\mathfrak n=\\mathfrak m_BT+N$ and its residue field is $k$. By [lem-weil-pbc-power-series-complete-over-complete-base] it is $\\mathfrak n$-adically complete. These facts hold also for $r=0$.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-quotient-variables",
+    "lem-weil-pbc-power-series-complete-over-complete-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06HL, proof: the auxiliary ring T=R[[X_1,...,X_n]]"
+   }
+  },
+  {
+   "text": "First assume $A=T$ as a complete local $B$-algebra. Given an Artinian surjection $R^\\prime\\twoheadrightarrow R$, a map $A\\to R$ and a compatible map $B\\to R^\\prime$, lift each image of $X_i$ to $b_i\\in R^\\prime$. The residue fields agree, so $b_i\\in\\mathfrak m_{R^\\prime}$. Step 1 gives completeness of $R^\\prime$. Apply [lem-weil-pbc-power-series-adic-evaluation] with coefficient ring $B$, target $R^\\prime$, ideal $\\mathfrak m_{R^\\prime}$ and values $b_i$. Its map is local since it sends $\\mathfrak m_B$ and every $X_i$ into $\\mathfrak m_{R^\\prime}$, and is therefore continuous for maximal-ideal topologies. Reduction to $R$ has the original constants and variable values; evaluation uniqueness makes it the prescribed map $A\\to R$. This solves the lifting problem. A complete local $B$-algebra isomorphism $A\\cong T$ transports this construction by composition.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06HL, proof, forward implication: lift variable images"
+   }
+  },
+  {
+   "text": "Conversely assume formal smoothness. Set $V=\\mathfrak m_A/(\\mathfrak m_BA+\\mathfrak m_A^2)$. It is finite-dimensional: the finite ideal generators of $\\mathfrak m_A$ span its quotient over $k$, since $\\mathfrak m_A$ annihilates this quotient [def-weil-pbc-noetherian-ring]. Choose $x_1,\\ldots,x_r\\in\\mathfrak m_A$ lifting a basis of $V$. Set $K=\\mathfrak m_BT+\\mathfrak n^2$. There are $B$-algebra identifications $A/(\\mathfrak m_BA+\\mathfrak m_A^2)=k\\oplus V$ and $T/K=k\\oplus k^r$, with multiplication $(a,v)(b,w)=(ab,aw+bv)$. For the first, use the given coefficient map $k\\to A$ and write each element uniquely as its residue plus an element of $\\mathfrak m_A$; products of two such latter elements vanish in the quotient. For the second, constant and linear coefficients give the displayed decomposition, and [lem-weil-pbc-power-series-combined-ideal-coefficients] with $J=0,n=2$ identifies series with zero constant and linear coefficients with $N^2\\subseteq\\mathfrak n^2$. Terms from $\\mathfrak m_B$ vanish as well. Sending the classes of $x_i$ to those of $X_i$ gives an isomorphism between these two square-zero $k$-algebras. Denote the resulting map $A\\to T/K$ by $f_0$. Independence follows by reading constant and linear coefficients: elements of $\\mathfrak m_BT+\\mathfrak n^2$ have those coefficients in $\\mathfrak m_B$, so no nonzero residue or linear class is killed.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06HL, proof, converse: basis of the relative cotangent space and f_1"
+   }
+  },
+  {
+   "text": "The map $T/\\mathfrak n^2\\twoheadrightarrow T/K$ has square-zero kernel, because $\\mathfrak n^2\\subseteq K\\subseteq\\mathfrak n$. For $n\\geq2$, the maps $T/\\mathfrak n^{n+1}\\twoheadrightarrow T/\\mathfrak n^n$ have square-zero kernels since $2n\\geq n+1$. All these rings are Artinian local with residue field $k$ by [lem-weil-pbc-noetherian-local-quotient-artinian-local], applied to the Noetherian local ring from step 2. Formal smoothness therefore lifts $f_0$ first to $f_2:A\\to T/\\mathfrak n^2$ and recursively to compatible local $B$-algebra maps $f_n:A\\to T/\\mathfrak n^n$. Put $f_1$ equal to the residue map. Completeness [def-weil-pbc-adic-completion] identifies the compatible values $(f_n(a))_n$ with a unique element $f(a)\\in T$. Coordinatewise addition and multiplication prove that $f:A\\to T$ is a $B$-algebra homomorphism. Its residue is the identity on $k$, so it is local and sends $\\mathfrak m_A^n$ into $\\mathfrak n^n$, proving continuity. Modulo $K$ it equals $f_0$, hence its relative cotangent map over $B$ is the chosen basis isomorphism.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06HL, proof, converse: compatible lifts and their inverse limit"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-complete-local-cotangent-surjectivity] to $f:A\\to T$ with coefficient base $C=B$. Step 2 and the hypotheses on $A,B$ supply completeness, Noetherianity and the common residue field; step 5 supplies the relative cotangent isomorphism. Thus $f$ is surjective. Choose $y_i\\in A$ with $f(y_i)=X_i$. Since $f$ induces the identity on residue fields, $y_i\\in\\mathfrak m_A$. Evaluation [lem-weil-pbc-power-series-adic-evaluation] gives a $B$-algebra map $s:T\\to A$, $X_i\\mapsto y_i$. It is local and continuous since $\\mathfrak n$ is generated by $\\mathfrak m_B$ and the variables. The composite $f\\circ s$ fixes constants and all $X_i$, so evaluation uniqueness makes it $\\mathrm{id}_T$. On relative cotangent spaces, $\\overline f\\,\\overline s=1$ and $\\overline f$ is an isomorphism, hence $\\overline s=\\overline f^{-1}$. Apply the same cotangent criterion to $s$ over $B$; it is surjective. It is also injective, since $f\\circ s=1$. Hence $s$ is a $B$-algebra isomorphism, whose inverse $f$ is continuous, as required.",
+   "uses": [
+    "lem-sfb-complete-local-cotangent-surjectivity",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tags 06HL and 06GZ: surjectivity of f, construction of a section, surjectivity of the section"
+   }
+  },
+  {
+   "text": "The relative tangent space means the fibre over the constant map $B\\to k\\to D$ of $h_A(D)\\to h_B(D)$, where $D=k[\\epsilon]/(\\epsilon^2)$. A local $k$-map $g:A\\to D$ is uniquely $g(a)=\\overline a+\\epsilon d(a)$; multiplication says $d(ab)=\\overline a\\,d(b)+\\overline b\\,d(a)$ and $k$-linearity says $d|_k=0$. Thus $d$ kills $\\mathfrak m_A^2$; being over the constant map from $B$ says it kills $\\mathfrak m_BA$. Conversely any $k$-linear $\\lambda:V\\to k$ gives such a map by $a\\mapsto\\overline a+\\epsilon\\lambda(a-\\overline a)$, where the specified coefficient field lifts $\\overline a$ to $A$. The displayed multiplication rule verifies it is a homomorphism. It kills $\\mathfrak m_A^2$, so is continuous. These constructions are mutually inverse and preserve addition and scalar multiplication. This identifies the relative tangent space with $V^\\vee$ and gives dimension $r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06ST (example-tangent-space-map-prorepresentable-functor), with the square-zero calculation written out"
+   }
+  },
+  {
+   "text": "For an unobstructed functor prorepresented by $A$, its natural identifications with $h_A$ turn unobstructedness into the square-zero lifting property for $h_A\\to h_k$, since $h_k(R)$ is a singleton. Apply the equivalence proved above with $B=k$. Now $\\mathfrak m_B=0$, so step 7 identifies its tangent space with $(\\mathfrak m_A/\\mathfrak m_A^2)^\\vee$, of dimension $N$. The power series extension is therefore $k[[t_1,\\ldots,t_N]]$. This includes $N=0$, for which the ring is $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06HL, specialization to B=k; Tag 06ST for tangent dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "def-weil-pbc-adic-completion",
+  "lem-sfb-complete-local-cotangent-surjectivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06HL (lemma-smooth-morphism-power-series), including its uses of 06GZ; Tag 06ST for the tangent map, calculated explicitly in the coefficient-field case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A formally smooth map of complete noetherian local k algebras with common residue field identifies the target with a power series ring over the source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] (f : S →ₐ[R] A)\\n  (hf : Function.Surjective ⇑f), ∃ g, (AdicCompletion.kerProj hf).comp g = AlgHom.id R A\", \"doc\": \"Let `R` be a commutative ring, and let `A` be a formally smooth `R`-algebra. For any `R`-algebra `S` and any surjective `R`-algebra homomorphism `f : S \\\\to A`, let `\\\\hat{S}` be the adic completion of \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness lifting lemmas and analytic formal multilinear inverses do not prove the power series structure theorem for complete local deformation functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Algebra.FormallySmooth",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness lifting lemmas and analytic formal multilinear inverses do not prove the power series structure theorem for complete local deformation functors"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*(powerSeries|PowerSeries)|powerSeries.*formallySmooth|cotangent.*basis|linear.*coeff.*equiv",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/PowerBasis.lean\", \"line\": \"104\", \"text\": \"    Finsupp.sum, linearCombination, Algebra.smul_def, AddMonoidAlgebra.coeffEquiv.exists_congr_left]\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"line\": \"174\", \"text\": \"  rw [← basisCotangentAway_apply _ (), cotangentCompAwaySec, Module.Basis.constr_basis]\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"59\", \"text\": \"        (.span S (.range fun x ↦ P.cotangentSpaceBasis (v x))))\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"63\", \"text\": \"  set f : _ →ₗ[S] (ι →₀ S) := P.cotangentSpaceBasis.repr ∘ₗ P.toExtension.cotangentComplex\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"64\", \"text\": \"  let g : (ι →₀ S) →ₗ[S] (Ω[S⁄R]) := P.toExtension.toKaehler ∘ₗ P.cotangentSpaceBasis.repr.symm\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"69\", \"text\": \"  · exact P.cotangentSpaceBasis.repr.injective.comp <|\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"72\", \"text\": \"    apply Submodule.map_injective_of_injective (f := P.cotangentSpaceBasis.repr.symm.toLinearMap)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"54\", \"text\": \"    P.cotangentSpaceBasis.repr.toLinearMap ∘ₗ P.toExtension.cotangentComplex\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"65\", \"text\": \"    Generators.cotangentSpaceBasis_repr_tmul, one_mul]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"145\", \"text\": \"noncomputable def basisCotangent : Basis σ S P.toExtension.Cotangent :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"153\", \"text\": \"  simp_rw [basisCotangent, Basis.map_apply, LinearEquiv.apply_symm_apply, basisDeriv_apply]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"169\", \"text\": \"    Finsupp.lcomapDomain _ P.map_inj ∘ₗ P.cotangentSpaceBasis.repr.toLinearMap\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"22\", \"text\": \"- `Algebra.Generators.cotangentSpaceBasis`: The canonical basis on `⨁ᵢ S dxᵢ`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"442\", \"text\": \"def cotangentSpaceBasis : Basis ι S P.toExtension.CotangentSpace :=\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"447\", \"text\": \"lemma cotangentSpaceBasis_repr_tmul (r x i) :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"448\", \"text\": \"    P.cotangentSpaceBasis.repr (r ⊗ₜ[P.Ring] KaehlerDifferential.D R P.Ring x : _) i =\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"450\", \"text\": \"  simp only [cotangentSpaceBasis, Basis.baseChange_repr_tmul, mvPolynomialBasis_repr_apply,\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"252\", \"text\": \"    D.basis (.inr i) = D.cotangentEquivProd.symm (0, D.basisLeft i) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"280\", \"text\": \"Version of `Algebra.Generators.exists_presentation_of_free_cotangent` taking a basis instead\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"355\", \"text\": \"  exact exists_presentation_of_basis_cotangent _ <| Module.finBasis S P.toExtension.Cotangent\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Extension.Cotangent.Basis\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"60\", \"text\": \"    P.cotangentRestrict_bijective_of_basis_kaehlerDifferential Sum.inl_injective\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"73\", \"text\": \"    apply P'.cotangentRestrict_bijective_of_basis_kaehlerDifferential P'.map_inj hcompl b\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean\", \"line\": \"139\", \"text\": \"  TensorProduct.congr (coeffLinearEquiv _) (coeffLinearEquiv _) ≪≫ₗ\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"151\", \"text\": \"  (Q.comp P).cotangentSpaceBasis.repr.trans\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness lifting lemmas and analytic formal multilinear inverses do not prove the power series structure theorem for complete local deformation functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elements with independent linear terms in k[[t1,...,tn]] extend to formal coordinates and define a formally smooth power series subring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.polynomial\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type*) [CommRing R] : FormallySmooth R R[X]\", \"doc\": \"For any commutative ring $ R $, the polynomial ring $ R[X] $ is a formally smooth $ R $-algebra. This instance asserts that the canonical algebra structure on $ R[X] $ over $ R $ satisfies the formal \"}\n  {\"name\": \"Algebra.mvPolynomial\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(σ : Type*) : FormallySmooth R (MvPolynomial σ R)\", \"doc\": \"For any commutative ring $ R $ and any type $ \\\\sigma $, the multivariate polynomial ring $ R[\\\\sigma] $ is formally smooth as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallySmooth.adjoin_of_algebraicIndependent\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"{v : ι → L} (hb : AlgebraicIndependent K v) : Algebra.FormallySmooth K (IntermediateField.adjoin K (Set.range v))\", \"doc\": \"If a set of elements in $ L $ is algebraically independent over $ K $, then the intermediate field generated by adjoining these elements to $ K $ is formally smooth over $ K $.\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_algebraicIndependent\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"{v : ι → L} (hb : AlgebraicIndependent K v) (hb' : IntermediateField.adjoin K (Set.range v) = ⊤) :\\n  Algebra.FormallySmooth K L\", \"doc\": \"If a field extension $ L $ over $ K $ contains an algebraically independent set $ \\\\{v_i\\\\}_{i \\\\in I} $ such that the intermediate field generated by $ \\\\{v_i\\\\} $ equals $ L $, then $ L $ is a formally s\"}\n  {\"name\": \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[EssFiniteType K L] {v : ι → L} (hb : AlgebraicIndependent K v)\\n  [Algebra.IsSeparable (IntermediateField.adjoin K (Set.range v)) L] : Algebra.FormallySmooth K L\", \"doc\": \"Let $ K \\\\to L $ be an algebra of essential finite type. If there exists a transcendence basis $ \\\\{v_i\\\\} $ for $ L $ over $ K $ such that the extension $ K(\\\\{v_i\\\\}) \\\\to L $ is separable, then $ K \\\\to L\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.FormallySmooth.inst\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \": FormallySmooth R R\", \"doc\": \"Every commutative ring $ R $ has a canonical formally smooth algebra structure over itself, where scalar multiplication is given by the ring's own multiplication and the algebra map is the identity ho\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness lifting lemmas and analytic formal multilinear inverses do not prove the power series structure theorem for complete local deformation functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous endomorphism of multivariate formal power series with invertible linear part is an automorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPowerSeries.inv\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Inverse\", \"type\": \"{σ : Type u_1} → {k : Type u_3} → [Field k] → MvPowerSeries σ k → MvPowerSeries σ k\", \"doc\": \"For a multivariate power series $\\\\varphi$ over a field $k$ in variables indexed by $\\\\sigma$, the inverse is defined recursively using the inverse of its constant term $a_0^{-1}$ and the formula: $$\\\\te\"}\n  {\"name\": \"MvPowerSeries.invOfUnit\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Inverse\", \"type\": \"{σ : Type u_1} → {R : Type u_2} → [inst : Ring R] → MvPowerSeries σ R → Rˣ → MvPowerSeries σ R\", \"doc\": \"Given a multivariate power series $\\\\varphi$ over a ring $R$ and a unit $u \\\\in R^\\\\times$, this function computes the inverse of $\\\\varphi$ by recursively defining coefficients using the inverse $u^{-1}$\"}\n  {\"name\": \"FormalMultilinearSeries.leftInv\", \"module\": \"Mathlib/Analysis/Analytic/Inverse\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {F : Type u_3} →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace 𝕜 F] →\\n                FormalMultilin\", \"doc\": \"For a formal multilinear series $ p $ and a linear equivalence $ i $, the left inverse series is defined recursively: for $ n = 0 $ it is the constant term $ x $, for $ n = 1 $ it is the inverse of th\"}\n  {\"name\": \"FormalMultilinearSeries.rightInv\", \"module\": \"Mathlib/Analysis/Analytic/Inverse\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {F : Type u_3} →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace 𝕜 F] →\\n                FormalMultilin\", \"doc\": \"For a formal multilinear series $ p $ over a field $ \\\\mathbb{K} $, a continuous linear equivalence $ i : E \\\\simeq_{\\\\mathbb{K}} F $, and an element $ x \\\\in E $, the right inverse series is defined recu\"}\n  {\"name\": \"MvPowerSeries.invOfUnit_eq'\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Inverse\", \"type\": \"∀ {σ : Type u_1} {k : Type u_3} [inst : Field k] (φ : MvPowerSeries σ k) (u : kˣ),\\n  MvPowerSeries.constantCoeff φ = ↑u → φ.invOfUnit u = φ⁻¹\", \"doc\": \"For any multivariate power series $\\\\varphi$ in variables indexed by $\\\\sigma$ over a field $k$, if the constant coefficient of $\\\\varphi$ equals a unit $u \\\\in k^\\\\times$, then the inverse of $\\\\varphi$ co\"}\n  {\"name\": \"FormalMultilinearSeries.comp_rightInv\", \"module\": \"Mathlib/Analysis/Analytic/Inverse\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F]\\n  (p : FormalMultilinearSeries 𝕜 E F) (i : E ≃L[𝕜] F) (x : E),\\n  p 1 = (continuousMultilinearCurry\", \"doc\": \"For a formal multilinear series $ p $ over a field $ \\\\mathbb{K} $, if the first term $ p_1 $ equals the curried version of a continuous linear isomorphism $ i : E \\\\to F $, then composing $ p $ with it\"}\n  {\"name\": \"MvPowerSeries.invOfUnit_eq\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Inverse\", \"type\": \"∀ {σ : Type u_1} {k : Type u_3} [inst : Field k] (φ : MvPowerSeries σ k) (h : MvPowerSeries.constantCoeff φ ≠ 0),\\n  φ.invOfUnit (Units.mk0 (MvPowerSeries.constantCoeff φ) h) = φ⁻¹\", \"doc\": \"For any multivariate power series $\\\\varphi$ over a field $k$ in variables indexed by $\\\\sigma$, if the constant term of $\\\\varphi$ is non-zero, then the inverse of $\\\\varphi$ constructed using the unit f\"}\n  {\"name\": \"FormalMultilinearSeries.leftInv_comp\", \"module\": \"Mathlib/Analysis/Analytic/Inverse\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F]\\n  (p : FormalMultilinearSeries 𝕜 E F) (i : E ≃L[𝕜] F) (x : E),\\n  p 1 = (continuousMultilinearCurry\", \"doc\": \"For a formal multilinear series $ p $ over a field $ \\\\mathbb{K} $, if the first term of $ p $ equals the symmetrized continuous multilinear curry of a linear equivalence $ i : E \\\\simeq_{\\\\mathbb{K}} F \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness lifting lemmas and analytic formal multilinear inverses do not prove the power series structure theorem for complete local deformation functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A formally smooth morphism between complete Noetherian local rings with common coefficient field is a formal power series extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.casesOn\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.FormallySmooth R A → Sort u_1} →\\n            (t : Algebra.FormallySmooth R A) →\\n              ((projective_kaehlerDifferential : Module.Projective A Ω[\", \"doc\": \"Given a property $ P $ of formally smooth $ R $-algebras, if $ P $ holds for any algebra $ A $ where the Kähler differentials $ \\\\Omega_{A/R} $ are projective as an $ A $-module and the first cohomolog\"}\n  {\"name\": \"Algebra.FormallySmooth.mk\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Module.Projective A Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallySmooth R A\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if the module of Kähler differentials $ \\\\Omega_{A/R} $ is projective as an $ A $-module and the first cohomology group of the cotangent complex $ H^1 $ is tri\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic formal smoothness does not identify the Artinian-test prorepresentable functor with a power series extension; quotient cotangent maps do not give the structure theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(formallySmooth|formally_smooth).*(powerSeries|power_series)|cotangent.*surjective|surjective.*cotangent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"105\", \"text\": \"  obtain ⟨⟨x, hx⟩, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"166\", \"text\": \"    rcases Ideal.toCotangent_surjective _ m with ⟨m', hm'⟩\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"177\", \"text\": \"    rcases Ideal.toCotangent_surjective _ m with ⟨m', hm'⟩\"}\n  {\"file\": \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"line\": \"95\", \"text\": \"  have h₁ := Algebra.Extension.Cotangent.mk_surjective (P := pres.toExtension)\"}\n  {\"file\": \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"line\": \"161\", \"text\": \"    exact Extension.toKaehler_surjective.comp pres.cotangentSpaceBasis.repr.symm.surjective\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"line\": \"30\", \"text\": \"- `h1CotangentEquivOfSurjective`: If `R → P.Ring` is surjective, this is the linear isomorphism\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"line\": \"34\", \"text\": \"  `h1CotangentEquivOfSurjective` and `cotangentExtendScalarsEquiv`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"line\": \"81\", \"text\": \"  obtain ⟨x, rfl⟩ := Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"line\": \"109\", \"text\": \"def h1CotangentEquivOfSurjective {R : Type u} {S : Type v} [CommRing R] [CommRing S]\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"line\": \"125\", \"text\": \"    P.extendScalars.h1CotangentEquivOfSurjective Function.surjective_id ≪≫ₗ\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"line\": \"138\", \"text\": \"  obtain ⟨x, rfl⟩ := Algebra.Extension.Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"line\": \"203\", \"text\": \"  ((Cotangent.exact (localizationAway g (S := T)) P).splitSurjectiveEquiv\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"line\": \"211\", \"text\": \"  simpa [cotangentCompLocalizationAwayEquiv, Function.Exact.splitSurjectiveEquiv] using\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"line\": \"219\", \"text\": \"  ((Cotangent.exact (localizationAway g (S := T)) P).splitSurjectiveEquiv\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"line\": \"234\", \"text\": \"  ((Cotangent.exact (localizationAway T g) P).splitSurjectiveEquiv\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"78\", \"text\": \"    · exact P.cotangentSpaceBasis.repr.symm.surjective\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"64\", \"text\": \"  (kerCotangentToTensor R P.Ring S ∘ₗ f).extendScalarsOfSurjective P.algebraMap_surjective\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"202\", \"text\": \"  obtain ⟨x, rfl⟩ := Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"331\", \"text\": \"  exact_kerCotangentToTensor_mapBaseChange _ _ _ P.algebraMap_surjective\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"607\", \"text\": \"    .of_surjective P.equivH1Cotangent.toLinearMap P.equivH1Cotangent.surjective\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"616\", \"text\": \"    _ P.toExtension.cotangentComplex.surjective_rangeRestrict\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"120\", \"text\": \"  obtain ⟨x, rfl⟩ := Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"301\", \"text\": \"  choose f hf using Extension.Cotangent.mk_surjective (P := P.toExtension)\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Basic.lean\", \"line\": \"433\", \"text\": \"lemma Cotangent.mk_surjective : Function.Surjective (mk (P := P)) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Basic.lean\", \"line\": \"434\", \"text\": \"  fun x ↦ Ideal.toCotangent_surjective P.ker x.val\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic formal smoothness does not identify the Artinian-test prorepresentable functor with a power series extension; quotient cotangent maps do not give the structure theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally smooth morphism of prorepresentable functors on local Artinian k algebras is represented by a power series extension of complete Noetherian local rings",
+   "results": "Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete; Algebra.FormallySmooth.lift; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; Algebra.FormallySmooth.exists_lift; Algebra.Smooth.formallySmooth; Algebra.FormallySmooth; RingHom.smooth_def; Algebra.FormallySmooth.inst. None states the complete-local deformation-functor power series criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are algebraic formal smoothness and lifting declarations, not the claimed structure theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-deformation-smoothing-parameters",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Smooth complete local functors are power series extensions.",
+   "via": [
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-complete-local-smooth-power-series",
+  "worker": "stage1",
+  "summary": "Followed Stacks 06HL, wrote the square-zero reduction, finite cotangent and first-order calculation, compatible lifting construction, section argument, tangent dual and unobstructed specialization. Reused existing power series and Artinian quotient tools. Added only the genuinely smaller 06GZ cotangent-surjectivity criterion, searched with all services and a second semantic phrasing; no exact Lean attachment or Mathlib leaf was found. Statement unchanged.",
+  "blueprint": "Supports the existing from.place chain through nodal deformation smoothing parameters in the alteration input to det-thm-sf-ctf-stability-direct-images proof (3). The inherited created.item chain has no extant blueprint ancestor (blueprint_refs ancestor returns None); retained from.node=null and the explicit inherited place. No equivalent blueprint node found by power series, cotangent, 06GZ and surjective cotangent searches.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-quotient-variables",
+    "why": "Generic commutative algebra tool used for the auxiliary power series ring, evaluation or its Artinian quotients; no node of this unit replaces its statement, and this preserves the source 06HL route."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Generic commutative algebra tool used for the auxiliary power series ring, evaluation or its Artinian quotients; no node of this unit replaces its statement, and this preserves the source 06HL route."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic commutative algebra tool used for the auxiliary power series ring, evaluation or its Artinian quotients; no node of this unit replaces its statement, and this preserves the source 06HL route."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Generic commutative algebra tool used for the auxiliary power series ring, evaluation or its Artinian quotients; no node of this unit replaces its statement, and this preserves the source 06HL route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "why": "Generic commutative algebra tool used for the auxiliary power series ring, evaluation or its Artinian quotients; no node of this unit replaces its statement, and this preserves the source 06HL route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-23ed9f80a",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-23ed9f80a (reviewer sub-agent of L); spot-checked: Read Stacks 06HL (full proof), 06GZ (proof via lemma-surjective and Mittag-Leffler) and 06ST in formal-defos.tex; the tags file confirms the labels. The item's statement is unchanged from live, where the item is still unsplit with no proof, and it matches 06HL with Lambda=k plus the 06ST tangent space. The 8 steps reproduce 06HL. Step 1 reduces arbitrary Artinian surjections to square-zero ones via the J^j filtration. Step 2 gives T=B[[X]]: Noetherian, local with maximal ideal m_B T+N, complete (quotient-variables, complete-over-complete-base). Step 3 builds the lift by adic evaluation into the complete ring R', and uniqueness gives the prescribed reduction. Step 4 identifies A/(m_B A+m_A^2) with T/K as k⊕V, using combined-ideal-coefficients at J=0, n=2. Step 5 lifts compatibly along square-zero quotients, which are Artinian by noetherian-local-quotient-artinian-local, and takes the inverse limit. Step 6 applies 06GZ to f, builds the section s by evaluation, gets fs=id by uniqueness, and applies 06GZ again to s. Step 7 is the dual-numbers derivation computation. Step 8 is the case B=k. Every cited statement says what each step takes from it. New node lem-sfb-complete-local-cotangent-surjectivity is 06GZ (1)<=>(3) with base C; it is self-contained and statement-only. It was tested on small cases, including the case that shows compatibility with C is needed (C=R=k[[t]], S=k[[s]], t->s^2). It duplicates no DAG node; complete-source-surjective-mod-ideal is a different hypothesis. Advisory for its later split: it follows from Nakayama plus lem-weil-pbc-complete-source-surjective-mod-ideal. No SGA. Blueprint from.node=null is inherited from the item's chain, and via/place are consistent. The 5 declared sk-thm-p1 tool uses are accepted as generic commutative algebra. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalSmoothPowerSeries",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.formallySmoothOnArtin_iff_powerSeries",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.completeAugmentation",
+   "AlgebraicGeometry.ArtinDeformation.relativeCotangentRelations",
+   "AlgebraicGeometry.ArtinDeformation.RelativeCotangent",
+   "AlgebraicGeometry.ArtinDeformation.IsFormallySmoothOnArtin",
+   "AlgebraicGeometry.ArtinDeformation.RelativeTangentPoints",
+   "AlgebraicGeometry.ArtinDeformation.formallySmoothOnArtin_iff_powerSeries",
+   "AlgebraicGeometry.ArtinDeformation.prorepresented_unobstructed_powerSeries"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompleteLocalSmoothPowerSeries.lean",
+  "statement": "theorem formallySmoothOnArtin_iff_powerSeries (B A : CompleteLocalAlgebra k k) (f : B.ring →ₐ[k] A.ring) [IsLocalHom f.toRingHom] (hf : @Continuous B.ring A.ring (IsLocalRing.maximalIdeal B.ring).adicTopology (IsLocalRing.maximalIdeal A.ring).adicTopology f) (hres : (completeAugmentation A).comp f = completeAugmentation B) : (IsFormallySmoothOnArtin B A f ↔ ∃ e : A.ring ≃ₐ[k] MvPowerSeries (Fin (Module.finrank k (RelativeCotangent B A f))) B.ring, (∀ b : B.ring, e (f b) = MvPowerSeries.C b) ∧ @Continuous A.ring _ (IsLocalRing.maximalIdeal A.ring).adicTopology (IsLocalRing.maximalIdeal _).adicTopology e ∧ @Continuous _ A.ring (IsLocalRing.maximalIdeal _).adicTopology (IsLocalRing.maximalIdeal A.ring).adicTopology e.symm) ∧ (∃ e : RelativeTangentPoints B A f ≃ Module.Dual k (RelativeCotangent B A f), ∀ (a : RelativeTangentPoints B A f) (x : IsLocalRing.maximalIdeal A.ring), e a ((relativeCotangentRelations B A f).mkQ x) = (a.val.hom x).snd)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The primary theorem states the relative power-series criterion and the canonical tangent identification on representatives. prorepresented_unobstructed_powerSeries states the final clause for any set-valued functor with natural prorepresenting equivalences. The five helper constructions belong to this same notion. Existing TestCategory, CompleteLocalAlgebra, LocalMap and squareZeroTest are used through the added landed statement dependency; no duplicate test category or coefficient datum is defined. Locality implies maximal-ideal-adic continuity for LocalMap."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f198c72a1",
+  "group": "Q12",
+  "result": "pass",
+  "note": "First delivery; changes only the item node's lean record plus an added stmt_dep on def-sfb-artin-deformation-test-category (landed by Q74 at 01:28 UTC, before the 04:56 UTC base) and the new module CompleteLocalSmoothPowerSeries.lean. Checked against Stacks 06HL/06ST: CompleteLocalAlgebra k k gives the complete Noetherian local algebras with residue field k; f is a local continuous k-algebra map with identity on residues; IsFormallySmoothOnArtin is the full square-zero fibre-product lifting test (direction checked, not limited to small extensions); RelativeCotangent is m_A/(m_B A + m_A^2) and finrank is its real dimension (Noetherian); the power-series isomorphism with Fin r variables is B-linear via e(f b)=C b and continuous both ways; the relative tangent fibre over the constant B-point is identified with the dual by a pinned second-coordinate formula, which I checked is well defined and true; the corollary takes any F with natural prorepresenting equivalences and unobstructedness and gives N = finrank of the cotangent space. Edge cases r=0, B=k, A=k, any characteristic and k[t]/t^2 are correct. H4: none of the 5 helpers duplicates a definition in lean/Sheaf, lean/WeilConjectures or the Artin* modules; test category, LocalMap and squareZeroTest are reused. Only the two theorem bodies are sorry; docstrings and blueprint tags present; lean.statement verbatim; report has Worker report and Second reading by Q12. Redundant but harmless: hf, hres and the continuity clauses on e. No compile run since no file changed; worker compiled clean."
+ }
+}

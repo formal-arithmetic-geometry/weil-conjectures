@@ -33,7 +33,11 @@
   "def-pc-base-change",
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-tor-amplitude",
-  "def-weil-site-perfect-complex"
+  "def-weil-site-perfect-complex",
+  "sk-def-pairing-data",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-coef-integral-residue-tor",
+  "def-pod-perfect-derived-pairing"
  ],
  "proof": [],
  "proof_deps": [],
@@ -158,7 +162,18 @@
   "def-sf-pf",
   "def-weil-exceptional-inverse-image"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-identification",
  "split_report": {
@@ -175,5 +190,58 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-c00819d48 (reviewer sub-agent of L); spot-checked: I read the whole item and all 20 stmt_deps against blueprint main-20261015 def-sf-pairing.md (order 2529, the same as master 2185 apart from the order line); there are no new nodes. The hypotheses match the source clause by clause: smooth, separated, finite type, geometrically connected, pure dimension d >= 0, either proper or X=X_0 x k, K in D^b_ctf, and perfectness assumed on K^vee rather than K. a_X meets the relative-dimension hypothesis of def-sf-orientation. The cup arrow matches def-sf-cup with L=K^vee(d) and [2d] moved through the shift. The trace is Fib_s(Ra_!(gamma)) followed by the counit, with Fib_s(Lambda_s)=Lambda from the unit clause of lem-sf-point-fibre-derived-tensor. The order of the three arrows agrees with slopmaster2 PoincarePairing.lean lines 138-216; that file has finite etale coefficients and a different setting, so it is correctly not attached. Small cases checked: K=0; X=s with d=0; P^1, whose pre-trace complex has cohomology in degrees -2 and 0; A^1, which is not proper but descends from k_0; b=0 is not perfect. No cycle. sk-def-pairing and def-pod-derived-poincare-pairing are narrower (they assume K perfect and fix the geometry and orientation), so same_as=[] stands. Two faults fixed in fixes/dag/nodes/sec-six-functors/def-sf-pairing.json: (B3) the inline phrase 'K^vee perfect, locally quasi-isomorphic to finite projective Lambda_X-modules' had no definition node and no meaning at the E and Qlbar stages; it now cites def-weil-site-perfect-complex, which is added to stmt_deps. (C4) the counit was attributed to def-weil-exceptional-inverse-image, which only characterizes the functor by an adjunction; it is now the adjunction of axiom (A1) of def-sf-datum, the same counit def-sf-orientation uses. Open point for the maintainer, not counted as a fault: ev_K and the perfectness clause use the tensor-internal-Hom adjunction, and no node states it at the integral (completed-tensor) stage. The blueprint's own text and the accepted sk-def-pairing use the same wording.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "In the setting of [def-sf-datum] and [def-sf-orientation], assume that $k$\nis separably closed, let\n$X$ be smooth, separated of finite type and geometrically connected of pure\ndimension $d$ over $k$, with structure morphism\n$a_X:X\\to s=\\operatorname{Spec}k$ (whose exceptional inverse image is the\nconstructible one of [def-weil-exceptional-inverse-image]; no admissibility\nhypothesis is imposed), and assume either that $X$ is\nproper, or that $X=X_0\\times_{k_0}k$ for a smooth, separated finite-type,\ngeometrically connected $k_0$-scheme $X_0$ (in the latter case no\nproperness is required); these are the hypotheses of global Verdier\nduality. Let $K\\in D^b_{ctf}(X,\\Lambda)$ be such that $K^\\vee$ is perfect\non $X$. The\n*derived Poincare pairing* is the composite\n\n$$\n\\beta_K:\\ R\\Gamma_c(X,K)\\otimes^L_\\Lambda\nR\\Gamma\\bigl(X,K^\\vee(d)\\bigr)[2d]\\longrightarrow\\Lambda,\n$$\n\n$$\n\\begin{array}{lll}\nR\\Gamma_c(X,K)\\otimes^L_\\Lambda R\\Gamma(X,K^\\vee(d))[2d]\n&\\xrightarrow{\\ \\smile_c\\ }&\nR\\Gamma_c\\bigl(X,K\\otimes^L_{\\Lambda_X}K^\\vee(d)\\bigr)[2d]\\\\[2pt]\n&\\xrightarrow{\\ R\\Gamma_c(\\operatorname{ev}_K(d))[2d]\\ }&\nR\\Gamma_c\\bigl(X,\\Lambda_X(d)\\bigr)[2d]\\\\[2pt]\n&\\xrightarrow{\\ \\operatorname{Tr}^{\\mathrm{sm}}_{a_X,\\Lambda}\\ }&\n\\Lambda,\n\\end{array}\n$$\n\nwhere $\\smile_c$ is the mixed-support cup product of\n[def-sf-cup], $\\operatorname{ev}_K$ is the\nevaluation of [def-sf-pf], and\n$\\operatorname{Tr}^{\\mathrm{sm}}_{a_X,\\Lambda}$ is the normalized smooth\ntrace, i.e. the counit of $Ra_{X!}\\dashv Ra_X^!$ read through the\norientation of [def-sf-orientation]. A morphism\n$b:C\\otimes^L_\\Lambda D\\to\\Lambda$ of point complexes is *perfect* if\nits tensor–internal-Hom adjoint $D\\to C^\\vee$ is an isomorphism.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedPoincarePairing",
+  "declaration": "WeilConjectures.SixFunctorDatum.finitePoincarePairing",
+  "declarations": [
+   "WeilConjectures.sfPairingTwistedEvaluation",
+   "WeilConjectures.sfPairingTensorComparison",
+   "WeilConjectures.SfPairingGlobalGeometry",
+   "WeilConjectures.SixFunctorDatum.sfPairingIntegralLine",
+   "WeilConjectures.SixFunctorDatum.sfPairingIntegralDualTwist",
+   "WeilConjectures.SixFunctorDatum.sfPairingIntegralEvaluation",
+   "WeilConjectures.SixFunctorDatum.integralPoincarePairing",
+   "WeilConjectures.SixFunctorDatum.sfPairingFiniteTorInput",
+   "WeilConjectures.SixFunctorDatum.sfPairingFiniteLine",
+   "WeilConjectures.SixFunctorDatum.sfPairingFiniteDualTwist",
+   "WeilConjectures.SixFunctorDatum.sfPairingFiniteTensorComparison",
+   "WeilConjectures.SixFunctorDatum.sfPairingFiniteEvaluation",
+   "WeilConjectures.SixFunctorDatum.finitePoincarePairing",
+   "WeilConjectures.SixFunctorDatum.sfPairingRationalLine",
+   "WeilConjectures.SixFunctorDatum.sfPairingRationalDualTwist",
+   "WeilConjectures.SixFunctorDatum.sfPairingRationalEvaluation",
+   "WeilConjectures.SixFunctorDatum.rationalPoincarePairing",
+   "WeilConjectures.SixFunctorDatum.sfPairingCommonLine",
+   "WeilConjectures.SixFunctorDatum.sfPairingCommonDualTwist",
+   "WeilConjectures.SixFunctorDatum.sfPairingCommonEvaluation",
+   "WeilConjectures.SixFunctorDatum.commonStagePoincarePairing",
+   "WeilConjectures.IsSfPerfectPairing"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedPoincarePairing.lean",
+  "statement": "def finitePoincarePairing (S : SixFunctorDatum D C E (m + 1) (Nat.succ_le_succ (Nat.zero_le m))) (O : SfOrientationDatum S) (X : SixFunctorSpace D) [IsSeparated X.obj.hom] (d : ℕ) [SmoothOfRelativeDimension d (sixFunctorStructure X).hom.left] (_hconnected : GeometricallyConnected X.obj.hom) (_hpure : X.obj.left.IsPureDimension d) (_hglobal : SfPairingGlobalGeometry X) (c : Compactification (sixFunctorStructure X).hom.left) (K : (S.toSixFunctorOperationDatum.finiteTorDomain X).FullSubcategory) (_hperfect : IsFiniteCoefficientSitePerfect.{u, u} C.l E X.obj.left m ((S.finiteCoefficientDual X).obj (op K)).obj.obj)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four coefficient-stage point-complex composites are recorded. The even shift is carried inside the Tate line, using the existing single-functor shifted orientation-line representative. Evaluation uses the recorded coefficient dual, canonical inverse-transpose tensor comparisons and the closed associator/evaluation/unitor; the final arrows are the published orientation-normalized traces. IsSfPerfectPairing reuses the upstream perfect-pairing predicate with the specified adjunction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62bee1b0c",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read item module DerivedPoincarePairing.lean, node, report and deps (PairingData cups/NormalizedSmoothTrace, DerivedAutomorphismHomEvaluation, IntegralResidueTor, CoefficientClosedStructure, orientation lines, SitePerfectComplex, upstream IsPerfectPairing). All hypotheses (smooth rel dim d, separated, finite type, geom. connected, pure dim, proper-or-k0-model, ctf K, site-perfect K^vee) and the three arrows (landed cup, braiding+counit twisted evaluation with canonical Yoneda tensor comparisons, landed orientation/counit normalized trace) match; shift carried in Λ(d)[2d] line, even so sign-free; perfectness reuses MonoidalClosed.IsPerfectPairing. Theorem stmt_deps: podIntegral/Rational/CommonClosed are .exists.choose of ∃! theorems and integral_residue_tor .2 is used as a membership proof -> genuine dependence on theorem conclusions, PASS on that point. lean.statement verbatim; no cycle; no hollow defs, no sorry, no stronger assumptions; edge cases m=0, d=0, K=0, A^1, empty X checked. No compile run (no file changed)."
  }
 }

@@ -9,11 +9,68 @@
   "url": "https://www.numdam.org/item/10.5802/aif.3432.pdf"
  },
  "stmt_deps": [
-  "def-trf-valuation-ring"
+  "def-trf-valuation-ring",
+  "def-trf-restricted-series-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the quotient norm $\\|\\cdot\\|_0$ of an original presentation $q_0:T_r\\twoheadrightarrow C$. Apply [lem-trf-affinoid-spectral-banach-norm] to obtain the complete power-multiplicative norm $\\rho$ and $\\rho\\le\\|\\cdot\\|_0\\le M\\rho$. These inequalities show that a family is bounded for one norm exactly when it is bounded for the other. Consequently $c\\in C^\\circ$ iff $\\rho(c)\\le1$: in the forward direction $\\rho(c)^m=\\rho(c^m)$ is bounded for $m\\ge1$, which forces $\\rho(c)\\le1$; in the reverse direction $\\|c^m\\|_0\\le M$ for $m\\ge1$, and the extra power $c^0=1$ is bounded too. Thus the desired target of the restriction is precisely $C_{\\le1}$.",
+   "uses": [
+    "lem-trf-affinoid-spectral-banach-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR Theorem 6.2.4/1; power-boundedness versus the spectral unit ball, as in Conrad Theorem 1.2.6 and the following paragraph (PDF pp.6–7). Agent assembly, not a transcription of the unavailable BGR proof. Archival copy WANTED; not present in this checkout."
+   }
+  },
+  {
+   "text": "Use [lem-trf-affinoid-canonical-reduction-finite-type] to choose $b_1,\\ldots,b_t\\in C_{\\le1}$ whose classes generate $\\widetilde C$ over $\\kappa=V/\\mathfrak m$. Keep the original generators $a_i=q_0(X_i)$ as well. By the quotient-norm definition, $\\|a_i\\|_0\\le\\|X_i\\|_G=1$, so step 1 gives $\\rho(a_i)\\le1$. Both finite lists therefore lie in the closed unit ball for the complete norm $\\rho$. Do not replace the original generators by smaller scalar multiples: such a replacement need not generate $C$ by restricted series.",
+   "uses": [
+    "lem-trf-affinoid-canonical-reduction-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR sections 6.3–6.4, finite generation of the canonical reduction; adjoining representatives to a fixed affinoid generating set. Agent assembly. Archival copy WANTED; not present in this checkout."
+   }
+  },
+  {
+   "text": "Apply [lem-per-tate-banach-substitution] to the complete $K$-algebra $(C,\\rho)$ and the tuple $(a_1,\\ldots,a_r,b_1,\\ldots,b_t)$. The norm, scalar and completeness hypotheses are supplied by step 1; the coordinate bounds are step 2. This produces a continuous $K$-algebra map $q:T_{r+t}\\to C$ with $\\rho(q(f))\\le\\|f\\|_G$. The coefficient inclusion $\\iota:T_r\\to T_{r+t}$, adding zero exponents in the last $t$ variables, is an isometric algebra map by the coefficient formulas and [lem-trf-restricted-series-gauss-completion]. The maps $q\\iota$ and $q_0$ are continuous and agree on constants and the $r$ variables. Uniqueness in the substitution lemma gives $q\\iota=q_0$; here $q_0$ is continuous for $\\rho$ by step 1. Since $q_0$ is onto, $q$ is onto.",
+   "uses": [
+    "lem-per-tate-banach-substitution",
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Conrad Exercise 1.2.8(3), PDF p.7: restricted-series substitution. Retain the old variables so surjectivity follows from the original presentation. Agent assembly. Archival copy WANTED; not present in this checkout."
+   }
+  },
+  {
+   "text": "Consider the reduction map $\\kappa[U_1,\\ldots,U_{r+t}]\\to\\widetilde C$ induced by this particular $q$. Every class of $\\widetilde C$ is a polynomial in the classes of $b_1,\\ldots,b_t$ by step 2, so it is the image of a polynomial in the last $t$ variables; hence this reduction map is surjective. Apply [lem-trf-tate-reduction-norm-lifting]. Its base is the given algebraically closed complete nontrivially valued $K$; $C$ is nonzero and reduced; step 3 supplies the continuous surjective contractive map and the preceding sentence supplies its reduction hypothesis. If $c\\in C^\\circ$, step 1 gives $\\rho(c)\\le1$, and the lifting lemma gives $f$ with $q(f)=c$ and $\\|f\\|_G=\\rho(c)\\le1$. Every coefficient of $f$ is then in $V$, so $f\\in V\\langle U\\rangle$. Conversely, for $f\\in V\\langle U\\rangle$, the Gauss norm is at most one and step 3 gives $\\rho(q(f))\\le1$; step 1 yields $q(f)\\in C^\\circ$. Thus $q(V\\langle U\\rangle)=C^\\circ$, with $s=r+t$.",
+   "uses": [
+    "lem-trf-tate-reduction-norm-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR sections 6.4.2–6.4.3 and Corollary 5.2.7/8: apply the reduction criterion to the constructed epimorphism and use attained lifts. Agent assembly; the non-elementary criterion is explicitly the cited new node. Archival copy WANTED; not present in this checkout."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-spectral-banach-norm",
+  "lem-trf-affinoid-canonical-reduction-finite-type",
+  "lem-per-tate-banach-substitution",
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-reduction-norm-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Assembly via the spectral Banach norm, finite canonical reduction, restricted-series substitution, and the reduction/norm-lifting criterion. BGR is WANTED; this is an agent construction using separately stated analytic inputs, not a claim to have read its proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +106,45 @@
    "results": "8 hits; read results: Ideal.Quotient.normedCommRing, spectralAlgNorm, PadicAlgCl.spectralNorm_eq, spectralNorm.normedSpace, spectralNorm.seminormedAddCommGroup, spectrum.isClosed, Polynomial.IsDistinguishedAt.algEquivQuotient, spectralNorm.normedField.  No match: algebraic field spectral norms, standard etale presentations and formal Weierstrass distinguished polynomials do not supply a distinguished Tate presentation of an arbitrary reduced affinoid. MvPowerSeries.IsRestricted defines restricted series but gives no affinoid quotient theorem.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|distinguished.*(epimorphism|surjection)|quotient.*(spectralNorm|spectralRadius)",
+   "results": "{\"t\": \"2026-10-24T08:00:04Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|affinoid|distinguished.*(epimorphism|surjection)|quotient.*(spectralNorm|spectralRadius)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions, algebraic FIELD spectral norms and formal Weierstrass quotient results do not give a distinguished presentation of a general reduced strict affinoid. No project declaration states this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced affinoid algebra algebraically closed complete valued field distinguished presentation quotient Gauss spectral norm",
+   "results": "{\"t\": \"2026-10-24T08:00:05Z\", \"tool\": \"leansearch\", \"query\": \"Reduced affinoid algebra algebraically closed complete valued field distinguished presentation quotient Gauss spectral norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.normedCommRing\", \"spectralAlgNorm\", \"PadicAlgCl.spectralNorm_eq\", \"spectralNorm.normedSpace\", \"spectralNorm.seminormedAddCommGroup\", \"spectrum.isClosed\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"spectralNorm.normedField\"], \"digest\": \"cee8c7ad2de9fba4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions, algebraic FIELD spectral norms and formal Weierstrass quotient results do not give a distinguished presentation of a general reduced strict affinoid. No project declaration states this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "TateAlgebra",
+   "results": "{\"t\": \"2026-10-24T08:00:05Z\", \"tool\": \"loogle\", \"query\": \"TateAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'TateAlgebra'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions, algebraic FIELD spectral norms and formal Weierstrass quotient results do not give a distinguished presentation of a general reduced strict affinoid. No project declaration states this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every reduced affinoid algebra over an algebraically closed complete nonarchimedean field has a distinguished presentation by a Tate algebra",
+   "results": "{\"t\": \"2026-10-24T08:00:07Z\", \"tool\": \"leanfinder\", \"query\": \"Every reduced affinoid algebra over an algebraically closed complete nonarchimedean field has a distinguished presentation by a Tate algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"Algebra.IsStandardSmooth.out\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"StandardEtalePair\", \"StandardEtalePresentation.toPresentation\"], \"digest\": \"92a2a81a0306874e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions, algebraic FIELD spectral norms and formal Weierstrass quotient results do not give a distinguished presentation of a general reduced strict affinoid. No project declaration states this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectral norm on a reduced strict affinoid algebra over a stable field with divisible value group is a quotient Gauss norm",
+   "results": "{\"t\": \"2026-10-24T08:06:08Z\", \"tool\": \"leanfinder\", \"query\": \"The spectral norm on a reduced strict affinoid algebra over a stable field with divisible value group is a quotient Gauss norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"spectralAlgNorm_def\", \"spectralAlgNorm\", \"spectralMulAlgNorm\", \"spectralMulAlgNorm_def\", \"isNonarchimedean_spectralNorm\", \"spectralNorm_unique\", \"spectralAlgNorm_isPowMul\", \"isNonarchimedean_spectralNorm_of_finiteDimensional_normal\"], \"digest\": \"1b56427570943c09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions, algebraic FIELD spectral norms and formal Weierstrass quotient results do not give a distinguished presentation of a general reduced strict affinoid. No project declaration states this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-grauert-remmert-powerbounded",
@@ -87,5 +179,59 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-distinguished-presentation",
+  "worker": "stage1",
+  "group": "Q104",
+  "summary": "Statement unchanged. Constructed a presentation by retaining original Tate variables and adjoining lifts of finite reduction generators. Isolated spectral Banach norm, finite canonical reduction and specified-epimorphism norm lifting as three statement-only analytic inputs; reused the existing substitution and Gauss-completion lemmas. Read every cited statement and checked all norm/topology hypotheses and degenerate variable cases; no attachment found.",
+  "blueprint": "Historical analytic prerequisite of lem-trf-local-term-locality through the Temkin normalization chain, as the existing from.place records. The latest blueprint proof is the contracting-correspondence argument; this node remains a historical supporting ingredient below the node level and does not replace that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-per-tate-banach-substitution",
+    "why": "Generic universal mapping property for Tate restricted series into a complete nonarchimedean algebra; no node of sk-i-curve-zero states this norm-controlled substitution theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-tate-banach-substitution"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-5e0552368",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-5e0552368 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full, plus every cited statement. The item's statement, source and blueprint are identical to the live node (it was unsplit with no proof before; this is the first split, with no re-split note). New nodes: (1) spectral-banach-norm is BGR 6.2.4/1; true, and the reducedness and nonzero hypotheses are both necessary. (2) canonical-reduction-finite-type is BGR 6.3.4/3; true, tested on K, K×K and the disc. (3) tate-reduction-norm-lifting is the BGR 6.4.3 criterion (surjective reduction makes the epimorphism distinguished) plus attainment of the quotient norm. It is true over an algebraically closed (hence stable) K and was tested on s=0, T1→K×K with X↦(1,0), and the identity. It assumes a given map, so it does not restate the item. Steps: step 1 proves C°={ρ≤1} in both directions, including the power c^0. Step 2 bounds the old generators via the quotient norm. Step 3 checks every hypothesis of lem-per-tate-banach-substitution against node 1; uniqueness gives qι=q0, so q is surjective. Step 4 checks node 3's reduction hypothesis using the b_j, and the attained lift lies in V<U>; the converse uses contractivity. Searches of the DAG found no duplicates. I accept the substitution tool_use. BGR, Conrad and the other PDFs are not available locally, so I checked against the standard BGR route; the exact theorem numbers remain WANTED. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidDistinguishedPresentation",
+  "declaration": "RestrictedSeries.affinoid_distinguished_presentation",
+  "file": "lean/Sheaf/RingTheory/AffinoidDistinguishedPresentation.lean",
+  "statement": "theorem affinoid_distinguished_presentation (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] [IsAlgClosed K] (V : ValuationSubring K) (hV : ∀ a : K, a ∈ V ↔ ‖a‖ ≤ 1) (C : Type v) [NormedCommRing C] [CompleteSpace C] [Nontrivial C] [IsReduced C] [Algebra K C] (haff : ∃ (r : ℕ) (q₀ : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* C), Function.Surjective q₀ ∧ q₀.comp (constants K r) = algebraMap K C ∧ ∀ U : Set C, IsOpen U ↔ ∀ f, q₀ f ∈ U → ∃ ε : ℝ, 0 < ε ∧ ∀ g, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (g.val - f.val) < ε → q₀ g ∈ U) : ∃ (s : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin s ↦ (1 : ℝ))) →+* C), Function.Surjective q ∧ q.comp (constants K s) = algebraMap K C ∧ (∀ f, ∀ ε : ℝ, 0 < ε → ∃ δ : ℝ, 0 < δ ∧ ∀ g, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin s ↦ 1) (g.val - f.val) < δ → ‖q g - q f‖ < ε) ∧ ∀ c : C, (∃ f, (∀ ν : Fin s →₀ ℕ, MvPowerSeries.coeff ν f.val ∈ V) ∧ q f = c) ↔ ∃ M : ℝ, ∀ m : ℕ, ‖c ^ m‖ ≤ M",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dabf8031c",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean added and stmt_dep def-trf-restricted-series-presentation (landed); statement/source/proof unchanged; lean.statement verbatim in the file. Clauses match: K NontriviallyNormedField+IsUltrametricDist+CompleteSpace+IsAlgClosed; V ValuationSubring with hV = unit ball; Tate algebra = Mathlib IsRestricted.subring radius 1 with gaussNorm; C Nontrivial+IsReduced; haff gives a surjective scalar-compatible q0 and the topology of C = quotient Gauss topology (same encoding as landed grauert_remmert_powerbounded); conclusion: ∃ s, surjective K-algebra q, Gauss ε-δ continuity, iff image of V-coefficient series = {c : ‖c^m‖ bounded for all m}. CompleteSpace C is automatic from the quotient topology; norm-boundedness = topological boundedness since algebraMap is continuous, so the choice of norm is harmless and not using IsAffinoidQuotient is correct. Edge cases: s=0 keeps the constant coefficient in V; C=0 excluded as in the node; m=0 included. No definitions (nothing hollow), only sorry, source/blueprint/proof-step docstrings present, independent universes u v, not pro-etale, no duplicate found. Report has Worker report and Second reading sections (the second reading is a self-check; advisory). Not recompiled; no files changed."
+ }
 }

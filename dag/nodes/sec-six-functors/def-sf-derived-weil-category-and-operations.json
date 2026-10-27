@@ -1,0 +1,273 @@
+{
+ "id": "def-sf-derived-weil-category-and-operations",
+ "kind": "definition",
+ "title": "Tensor, internal Hom and dualizing data on the native derived Weil category",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme. Use exactly the coefficient-ring sheaf $B_X$ on $\\bar X=X_0\\times_{k_0}k$, the abelian Weil-sheaf category $\\mathcal W_X$, its ambient derived category $D(\\mathcal W_X)$ and its bounded constructible full subcategory $\\mathrm{WC}^{\\mathrm{der}}(X_0)$ of [def-sf-native-weil-derived-framework]. Write $F_X^*$ for the geometric-Frobenius pullback of that framework and $Q_X$ for localization of cochain complexes in $\\mathcal W_X$ at quasi-isomorphisms.\n\nFor Weil module sheaves $(M,\\phi_M)$ and $(N,\\phi_N)$, use the sheaf-module tensor $M\\otimes_{B_X}N$ [def-pur-sheaf-tensor-product] and the sheaf-module internal Hom $\\mathcal Hom_{B_X}(M,N)$ [def-pur-sheaf-hom], not global Hom. The tensor has the diagonal Weil isomorphism\n$$F_X^*(M\\otimes_{B_X}N)\\cong F_X^*M\\otimes_{B_X}F_X^*N\\xrightarrow{\\phi_M\\otimes\\phi_N}M\\otimes_{B_X}N.$$\nThe internal Hom has the conjugation Weil isomorphism: after the pullback identification with $\\mathcal Hom_{B_X}(F_X^*M,F_X^*N)$, it sends a local map $h$ to $\\phi_N\\circ h\\circ\\phi_M^{-1}$.\n\nFor complexes $P,T$ in $\\mathcal W_X$, total tensor means the direct-sum total complex of [def-pc-tensor-complex-sheaves], with terms $\\bigoplus_{p+q=n}P^p\\otimes_{B_X}T^q$ and differential $d_P\\otimes1+(-1)^p1\\otimes d_T$ on the $(p,q)$ summand, equipped with the diagonal Weil action. K-flatness in $\\mathcal W_X$ means that total tensor with the complex in either variable preserves quasi-isomorphisms [def-sfb-preserves-kflat-quasi-iso]; a K-flat resolution is a quasi-isomorphism from such a complex. For $B,A\\in D(\\mathcal W_X)$ define $B\\otimes^L_{B_X}A$ by localizing this total tensor on K-flat resolutions of $B$ and $A$. The native derived tensor structure used for this construction is supplied by [lem-sf-weil-native-closed-forgetful].\n\nFor $N\\in D(\\mathcal W_X)$ define $R\\mathcal Hom_X(-,N)$ by the actual chosen-representative construction `ProEtaleWeilSheaf.derivedHom k₀ ℓ X₀ N`. Here K-injective in $\\mathcal W_X$ means that every morphism of complexes from an acyclic complex to it is homotopic to zero; a K-injective resolution is a quasi-isomorphism into such a complex. Choose the K-injective representative $J_N$ of $N$ and use the inverse equivalence from $D(\\mathcal W_X)$ to the homotopy category of K-injective complexes to represent the first variable $B$ by $I_B$. Then\n$$R\\mathcal Hom_X(B,N)=Q_X\\mathcal Hom^\\bullet_{B_X}(I_B,J_N),\\qquad \\mathcal Hom^n_{B_X}(I_B,J_N)=\\prod_{p\\in\\mathbf Z}\\mathcal Hom_{B_X}(I_B^p,J_N^{p+n}),$$\nwith the live product-total differential $(d^n f)^p=(-1)^p(d_{J_N}^{p+n}\\circ f^p-f^{p+1}\\circ d_{I_B}^p)$ and the conjugation Weil action. This is the sign convention of `CochainComplex.bifunctorHomObj` used by the named `derivedHom` construction. Multiplication of the $(n,p)$ component by $(-1)^{np}$ identifies it with the standard Hom complex of [def-pur-hom-complex], whose differential is $d(f)=d_{J_N}\\circ f-(-1)^nf\\circ d_{I_B}$. On a morphism $u:B\\to B'$, apply the chosen inverse equivalence and precompose by its representing homotopy class $I_B\\to I_{B'}$. Thus this is a functor $D(\\mathcal W_X)^{\\mathrm{op}}\\to D(\\mathcal W_X)$, with the native internal-Hom realization of [lem-sf-weil-native-closed-forgetful]. Tensor--Hom adjunction and constructible tensor closure are separate assertions, not clauses of this definition.\n\nLet $s_0=\\operatorname{Spec}k_0$ and $a_{X,0}:X_0\\to s_0$ be the structure map. Its actual compact-support functor\n$$Ra_{X,0!}:\\mathrm{WC}^{\\mathrm{der}}(X_0)\\longrightarrow\\mathrm{WC}^{\\mathrm{der}}(s_0)$$\nis the restricted construction of [def-sf-native-weil-derived-framework], whose preservation is supplied by [lem-sf-native-weil-shriek-triangulated]. When this restricted functor has a right adjoint, choose a functor $Ra_{X,0}^!:\\mathrm{WC}^{\\mathrm{der}}(s_0)\\to\\mathrm{WC}^{\\mathrm{der}}(X_0)$ with its adjunction, meaning bijections\n$$\\operatorname{Hom}(Ra_{X,0!}K,L)\\cong\\operatorname{Hom}(K,Ra_{X,0}^!L)$$\nnatural in $K$ and $L$ in these bounded constructible categories. Define $\\omega_X=Ra_{X,0}^!\\mathbf1_0$. Here $\\mathbf1_0$ is the rank-one $B_{s_0}$-module sheaf $B_{s_0}$ with its canonical Weil action, placed in degree zero on $s_0$ (live `WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ ℓ (Spec k₀))`). Define the ambient contravariant functor $D_X(B)=R\\mathcal Hom_X(B,\\omega_X)$, viewing $\\omega_X$ in $D(\\mathcal W_X)$ by the full inclusion. When $D_X$ carries bounded constructible objects to bounded constructible objects, restrict it to $\\mathrm{WC}^{\\mathrm{der}}(X_0)^{\\mathrm{op}}\\to\\mathrm{WC}^{\\mathrm{der}}(X_0)$. These are live `WeilComplex.dualizingComplex` and `WeilComplex.verdierDual`. Existence of the structure-map right adjoint and preservation under this internal Hom remain separate assertions.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-weil-sheaf-complex.md",
+  "place": "Tensor and internal-Hom notation, in the native derived-Weil realization of def-sf-native-weil-derived-framework. Live DerivedHom.lean:113-120 and VerdierDual.lean:74-134 specify the internal Hom, chosen structure right adjoint, coefficient unit, dualizing complex and dual functor. The framework supplies the category and the three direct-image/pullback constructions; none is redefined here."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pur-hom-complex",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-native-weil-shriek-triangulated",
+  "def-sf-native-derived-tensor-layer"
+ ],
+ "proof": [
+  {
+   "text": "Apply the additive-bifunctor K-flat tensor--Hom representability theorem [lem-sf-kflat-bifunctor-tensor-hom] to the actual native tensor/ihom parametrized adjunction. NativeIsKFlat supplies preservation of quasi-isomorphisms in the needed tensor variable, and the native closed comparison supplies the specified product-total Hom representatives.",
+   "uses": [
+    "lem-sf-kflat-bifunctor-tensor-hom",
+    "lem-sf-weil-native-closed-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose its natural Hom equivalences with the inverse of the chosen closed adjunction. Representability gives an isomorphism from the chosen derived tensor to the localized total tensor. Evaluate the source-variable naturality identity at the identity map and use target naturality to obtain the required both-variable square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-kflat-bifunctor-tensor-hom",
+  "lem-sf-weil-native-closed-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas RHom-from-K-flat-into-K-injective (0A96) and internal-hom (08J9), applied to the native additive tensor--Hom adjunction; elementary representability assembles the native models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The bounded constructible subcategory of the derived category of Frobenius equivariant proetale module sheaves",
+   "results": "[leanfinder] OK 8 hit(s); CondensedMod: (R : Type (u + 1)) → [Ring R] → Type (u + 2); LightCondMod: (R : Type u) → [Ring R] → Type (u + 1); LightCondensed.instIsGrothendieckAbelianLightCondMod: ∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod; Condensed.profiniteSolid: (R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R); instAbelianCondensedMod: (R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R); LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat: (R : Type u) →\n  [inst : CommRing R] →\n    CategoryTheory.MonoidalCategory\n      (CategoryTheory.She; CondensedMod.ofSheafProfinite: (R : Type (u + 1)) →\n  [inst : Ring R] →\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) ; LightCondMod.ofSheafLightProfinite: (R : Type u) →\n  [inst : Ring R] →\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category of Weil sheaves with bounded constructible cohomology and compact support pushforward",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Functor.sheafPushforwardContinuous: : Sheaf K A ⥤ Sheaf J A; TopCat.Sheaf.pushforward: (f : X ⟶ Y) : X.Sheaf C ⥤ Y.Sheaf C; CategoryTheory.Functor.sheafPushforwardCocontinuous: : Sheaf J A ⥤ Sheaf K A; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify: [HasWeakSheafify K A] : (G.sheafPushforwardContinuous A J K).IsRightAdjoint; HasDerivedCategory.standard: : HasDerivedCategory.{max u v} C; HasDerivedCategory: (C : Type u) →\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max ; DerivedCategory.instCategory: : Category.{w} (DerivedCategory C); DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE: (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStri",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "[loogle] OK 3 hit(s); algEquivIsoAlgebraIso:  {R : Type u} [CommRing R] {X Y : Type v} [Ring X] [Ring Y] [Algebra R X] [Algebra R Y] : (X ≃ₐ[R] Y; algEquivIsoAlgebraIso_hom:  {R : Type u} [CommRing R] {X Y : Type v} [Ring X] [Ring Y] [Algebra R X] [Algebra R Y] : algEquivIs; algEquivIsoAlgebraIso_inv:  {R : Type u} [CommRing R] {X Y : Type v} [Ring X] [Ring Y] [Algebra R X] [Algebra R Y] : algEquivIs",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleWeilSheaf|WeilComplex|adicConstantSheaf",
+   "results": "[grep] OK 0 hit(s); No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor and internal Hom for Frobenius equivariant module sheaves over the sheaf of continuous l adic functions",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.ihomPoints; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat; LightCondensed.instMonoidalCategoryLightCondMod; instMonoidalClosedCondensedSet; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dualizing complex is the right adjoint of compact support at the coefficient unit and Verdier dual is derived internal Hom",
+   "results": "8 hits: Condensed.discreteUnderlyingAdj; CategoryTheory.ComonadicLeftAdjoint.R; HomologicalComplex.opCounitIso; CategoryTheory.comonadicRightAdjoint; CategoryTheory.comonadicAdjunction; FGModuleCat.FGModuleCatDual_coe; CategoryTheory.Adjunction.rightOp; CategoryTheory.Adjunction.functorialityAdjunction; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedHom\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom|bifunctorRHom|dualizingComplex|adicConstantSheaf",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor and internal Hom of Frobenius equivariant module sheaves over the sheaf of continuous l adic functions",
+   "results": "OK 8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihomPoints, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, instMonoidalClosedCondensedSet, LightCondensed.instMonoidalCategoryLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not define the native Frobenius-equivariant B_X-module derived operations and conditional constructible dualizing data"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleWeilSheaf|bifunctorRHom|dualizingComplex|verdierDual",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not define the native Frobenius-equivariant B_X-module derived operations and conditional constructible dualizing data"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not define the native Frobenius-equivariant B_X-module derived operations and conditional constructible dualizing data"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dualizing complex as the exceptional inverse image of the unit and Verdier duality for Weil sheaves",
+   "results": "OK 8 hits: FractionalIdeal.dual_inv, Lat.dualEquiv_inverse, LinearEquiv.dualMap_symm, Module.Dual.congr_symm_apply_apply, FractionalIdeal.dual_eq_mul_inv, CommRing.Pic.mk_dual, LinOrd.dualEquiv_inverse, HomologicalComplex.opEquivalence_unitIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not define the native Frobenius-equivariant B_X-module derived operations and conditional constructible dualizing data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived tensor product and contravariant internal Hom in the derived category of sheaves equipped with a Frobenius isomorphism",
+   "results": "OK 8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, instMonoidalClosedCondensedSet, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihomPoints, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.ihomPoints_symm_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not define the native Frobenius-equivariant B_X-module derived operations and conditional constructible dualizing data"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|HasKInjectiveResolutions|kFlat",
+   "results": "OK 1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not define the native Frobenius-equivariant B_X-module derived operations and conditional constructible dualizing data"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-cor-verdier-exchange.proof.md steps 1-2: the definitions of omega and D in step 1 and the tensor-Hom exchange in step 2, expanded by fix-lem-tensor-adjunction.proof.md step 1. Only tensor, actual internal Hom, the unit, omega and D are new here; the category and inverse/direct-image constructions come from the landed native framework. The seed has created.item=null, so this is an explicit source-route breadcrumb.",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "def-sf-derived-weil-category-and-operations",
+  "worker": "stage1",
+  "summary": "Expanded the existing native-derived definition into explicit sheaf tensor, conjugation internal Hom, signed direct-sum tensor and product Hom complexes, with resolutions in the equivariant abelian category. Reused the existing native closed-structure obligation rather than duplicating its existence or comparison assertions. Kept the chosen structure right adjoint and restriction of Verdier dual conditional; neither is silently made unconditional. No new nodes.",
+  "blueprint": "The source breadcrumb fix-cor-verdier-exchange.proof.md steps 1-2 uses omega=Ra^!1 and D=RHom(-,omega); fix-lem-tensor-adjunction.proof.md step 1 uses tensor and internal Hom. Their native category is the existing framework, without identifying it with common-stage or geometric fixed-pair derived categories. The created.item ancestry ends at a maintainer-created seed, so blueprint_refs.py ancestor prints None; preserve the explicit existing from.node=null breadcrumb.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-weil-native-closed-forgetful",
+    "why": "Supplies the native ambient derived tensor/internal-Hom structure used in the definition; it has no dependency path back to this item and is reused only for these constructions, not for biduality."
+   },
+   {
+    "node": "lem-sf-native-weil-shriek-triangulated",
+    "why": "Supplies restriction of the already specified actual compact-support functor to bounded constructible Weil complexes, needed to type its conditional right adjoint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-native-weil-shriek-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-3f26ab81e",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-3f26ab81e (reviewer sub-agent of L); spot-checked: I read the definition split in full; it has no new nodes. The item is still unsplit live, with no repair note, so it is not superseded and the re-split rule does not apply. Against the live base, every clause is kept: K-flat derived tensor with the diagonal action, R Hom built from K-injective representatives of both inputs with the conjugation action, the restricted Ra_{X,0!}, the conditionally chosen right adjoint Ra^!, omega_X = Ra^! 1_0, and D_X with a conditional restriction. Only statement, stmt_deps, status, the searches and split_report changed. Dropping def-pc-kflat-complex and def-pur-kinjective-complex is correct, because both are stated for modules on a ringed site and the Weil-sheaf category of fixed pairs is not one. They are replaced by the categorical K-flat criterion def-sfb-preserves-kflat-quasi-iso, whose hypotheses I checked, and an inline null-homotopy K-injective criterion (Stacks 070H). The tensor and Hom-complex sign conventions match def-pc-tensor-complex-sheaves and def-pur-hom-complex (Stacks 0A8X). The conjugation map phi_N h phi_M^{-1} is correctly typed. The live Lean (DerivedHom.lean ihomBifunctor/derivedHom, BifunctorHom.lean lines 89-124 using KInjectives.Qh.inv for the first variable, VerdierDual.lean lines 60-134 for upperShriek, dualizingComplex and verdierDual) matches the text. lem-sf-weil-native-closed-forgetful has the same coefficient sheaf: its R_T equals B_X by a compositum and quasi-compactness argument. It supplies existence of the derived tensor and internal Hom, a well-definedness theorem cited by name and determining the object up to unique iso. The hypotheses of lem-sf-native-weil-shriek-triangulated hold for the structure map of a separated finite-type X_0 over a qcqs base. The transitive closure of all eight stmt_deps does not contain the item, so there is no cycle. Edge cases checked: zero objects, degree-0 objects, shifts, X_0 = Spec k_0 (omega = 1_0), and scalar Frobenius actions (tensor acts by ab, Hom by b/a). The Mathlib searches cover all three kinds. No SGA is cited, and the report's Stacks tags exist. Delivery errors A-F are clean. Both tool_uses are accepted. No changes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedWeilOperations",
+  "declaration": "AlgebraicGeometry.WeilComplex.ambientVerdierDual",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.ambientVerdierDual",
+   "AlgebraicGeometry.WeilComplex.verdierDualOfPreserves"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedWeilOperations.lean",
+  "statement": "def ambientVerdierDual : (DerivedCategory (ProEtaleWeilSheaf k₀ l X))ᵒᵖ ⥤ DerivedCategory (ProEtaleWeilSheaf k₀ l X)",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the exact native framework, existing ordinary tensor/ihom, live derivedHom, conditional HasUpperShriek and existing dualizingComplex. Adds the curried native total tensor and its direct two-sided QuasiIso tests for NativeIsKFlat, citing def-sfb-preserves-kflat-quasi-iso without changing that dependency record or its monoidal interface; K-flat/K-injective resolution data; the native derived tensor selected from the adjunction-determined closed structure; its natural K-flat representative model; ambient duality; and restriction taking preservation explicitly. The only statement correction clarifies the actual live product-Hom sign convention. All listed declarations belong to DerivedWeilOperations; no generic bifunctor K-flat module is delivered. C4: tensor declarations through nativeDerivedTensor_models are relocated verbatim to Sheaf.Paper.DerivedWeilTensorOperations and publicly re-exported here; the two Verdier declarations remain in this module. There is no change to any declaration signature or definition body. Reviewer (C4 1eafb83e): the relocated tensor declarations are owned by def-sf-native-derived-tensor-layer (stmt_dep) and are no longer listed here, so that each has one owner."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de243f04b",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 89f6d5018724 (H13/H1). Fault fixed as instructed: the def-sfb-preserves-kflat-quasi-iso record is byte-identical to side-live again, TotalTensorKFlatBifunctor.lean is dropped, and NativeIsKFlat is written directly as the two QuasiIso tests on nativeTensorTotal (same Prop as before). Re-checked independently: tensor order (tensor A B = B⊗A, so flip gives P⊗T); nativeTensorMap is the conjugateEquiv transpose of ihom precomposition; the derived tensor is .weilClosed.tensor from native_closed_forgetful, left adjoint of the Hom pinned by nativeModel to derivedHom, so fixed up to unique iso, with _models recording the K-flat normalization; ambientVerdierDual and verdierDualOfPreserves match live derivedHom/verdierDual with explicit preservation; HasUpperShriek stays conditional; binders and universes match the framework. §1(C) sign correction checked against BifunctorHomComplex.lean:55-69,144-153 (the (-1)^{np} rescaling works for both terms); old_statement verbatim; all 4 live citers audited, and the new verdier-dual-triangulated citer's steps 4-5 already make this comparison. lean.statement verbatim; 15 declarations present; 5 sorries, all in theorems; docstrings and report sections present; not dropped or superseded. Advisory only: unused resolution structures, imports kept for citation.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "Q05 stage 2",
+  "old_statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme. Use exactly the coefficient-ring sheaf $B_X$ on $\\bar X=X_0\\times_{k_0}k$, the abelian Weil-sheaf category $\\mathcal W_X$, its ambient derived category $D(\\mathcal W_X)$ and its bounded constructible full subcategory $\\mathrm{WC}^{\\mathrm{der}}(X_0)$ of [def-sf-native-weil-derived-framework]. Write $F_X^*$ for the geometric-Frobenius pullback of that framework and $Q_X$ for localization of cochain complexes in $\\mathcal W_X$ at quasi-isomorphisms.\n\nFor Weil module sheaves $(M,\\phi_M)$ and $(N,\\phi_N)$, use the sheaf-module tensor $M\\otimes_{B_X}N$ [def-pur-sheaf-tensor-product] and the sheaf-module internal Hom $\\mathcal Hom_{B_X}(M,N)$ [def-pur-sheaf-hom], not global Hom. The tensor has the diagonal Weil isomorphism\n$$F_X^*(M\\otimes_{B_X}N)\\cong F_X^*M\\otimes_{B_X}F_X^*N\\xrightarrow{\\phi_M\\otimes\\phi_N}M\\otimes_{B_X}N.$$\nThe internal Hom has the conjugation Weil isomorphism: after the pullback identification with $\\mathcal Hom_{B_X}(F_X^*M,F_X^*N)$, it sends a local map $h$ to $\\phi_N\\circ h\\circ\\phi_M^{-1}$.\n\nFor complexes $P,T$ in $\\mathcal W_X$, total tensor means the direct-sum total complex of [def-pc-tensor-complex-sheaves], with terms $\\bigoplus_{p+q=n}P^p\\otimes_{B_X}T^q$ and differential $d_P\\otimes1+(-1)^p1\\otimes d_T$ on the $(p,q)$ summand, equipped with the diagonal Weil action. K-flatness in $\\mathcal W_X$ means that total tensor with the complex in either variable preserves quasi-isomorphisms [def-sfb-preserves-kflat-quasi-iso]; a K-flat resolution is a quasi-isomorphism from such a complex. For $B,A\\in D(\\mathcal W_X)$ define $B\\otimes^L_{B_X}A$ by localizing this total tensor on K-flat resolutions of $B$ and $A$. The native derived tensor structure used for this construction is supplied by [lem-sf-weil-native-closed-forgetful].\n\nFor $N\\in D(\\mathcal W_X)$ define $R\\mathcal Hom_X(-,N)$ by the actual chosen-representative construction `ProEtaleWeilSheaf.derivedHom k₀ ℓ X₀ N`. Here K-injective in $\\mathcal W_X$ means that every morphism of complexes from an acyclic complex to it is homotopic to zero; a K-injective resolution is a quasi-isomorphism into such a complex. Choose the K-injective representative $J_N$ of $N$ and use the inverse equivalence from $D(\\mathcal W_X)$ to the homotopy category of K-injective complexes to represent the first variable $B$ by $I_B$. Then\n$$R\\mathcal Hom_X(B,N)=Q_X\\mathcal Hom^\\bullet_{B_X}(I_B,J_N),\\qquad \\mathcal Hom^n_{B_X}(I_B,J_N)=\\prod_{p\\in\\mathbf Z}\\mathcal Hom_{B_X}(I_B^p,J_N^{p+n}),$$\nwith differential $d(f)=d_{J_N}\\circ f-(-1)^nf\\circ d_{I_B}$ [def-pur-hom-complex] and the conjugation Weil action. On a morphism $u:B\\to B'$, apply the chosen inverse equivalence and precompose by its representing homotopy class $I_B\\to I_{B'}$. Thus this is a functor $D(\\mathcal W_X)^{\\mathrm{op}}\\to D(\\mathcal W_X)$, with the native internal-Hom realization of [lem-sf-weil-native-closed-forgetful]. Tensor--Hom adjunction and constructible tensor closure are separate assertions, not clauses of this definition.\n\nLet $s_0=\\operatorname{Spec}k_0$ and $a_{X,0}:X_0\\to s_0$ be the structure map. Its actual compact-support functor\n$$Ra_{X,0!}:\\mathrm{WC}^{\\mathrm{der}}(X_0)\\longrightarrow\\mathrm{WC}^{\\mathrm{der}}(s_0)$$\nis the restricted construction of [def-sf-native-weil-derived-framework], whose preservation is supplied by [lem-sf-native-weil-shriek-triangulated]. When this restricted functor has a right adjoint, choose a functor $Ra_{X,0}^!:\\mathrm{WC}^{\\mathrm{der}}(s_0)\\to\\mathrm{WC}^{\\mathrm{der}}(X_0)$ with its adjunction, meaning bijections\n$$\\operatorname{Hom}(Ra_{X,0!}K,L)\\cong\\operatorname{Hom}(K,Ra_{X,0}^!L)$$\nnatural in $K$ and $L$ in these bounded constructible categories. Define $\\omega_X=Ra_{X,0}^!\\mathbf1_0$. Here $\\mathbf1_0$ is the rank-one $B_{s_0}$-module sheaf $B_{s_0}$ with its canonical Weil action, placed in degree zero on $s_0$ (live `WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ ℓ (Spec k₀))`). Define the ambient contravariant functor $D_X(B)=R\\mathcal Hom_X(B,\\omega_X)$, viewing $\\omega_X$ in $D(\\mathcal W_X)$ by the full inclusion. When $D_X$ carries bounded constructible objects to bounded constructible objects, restrict it to $\\mathrm{WC}^{\\mathrm{der}}(X_0)^{\\mathrm{op}}\\to\\mathrm{WC}^{\\mathrm{der}}(X_0)$. These are live `WeilComplex.dualizingComplex` and `WeilComplex.verdierDual`. Existence of the structure-map right adjoint and preservation under this internal Hom remain separate assertions.",
+  "what": "The node simultaneously required the actual ProEtaleWeilSheaf.derivedHom construction and claimed its representatives have the standard Hom differential literally. The live CochainComplex.bifunctorHomObj instead has component (-1)^p (d_J f^p - f^{p+1} d_I). For n=0, p=1, d_I=0 and d_J f nonzero these differ by a minus sign over the characteristic-zero coefficient ring. They are naturally sign-isomorphic via (-1)^(np). Correct only the representative formula and state this identification; retain exactly the live derivedHom functor, all assumptions, tensor, right adjoint and dualizing data. This is not the blueprint unit statement.",
+  "source": {
+   "document": "lean/WeilConjectures/Algebra/Homology/BifunctorHomComplex.lean",
+   "place": "BifunctorHom.d and d_π (lines 49-69), bifunctorHomObj_d_π (lines 144-153); used by CategoryTheory/DerivedCategory/BifunctorHom.lean bifunctorRHom and WeilSheaf/DerivedHom.lean derivedHom."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-derived-weil-compact-projection-formula",
+    "holds": true,
+    "note": "Only the signed direct-sum tensor and its localization are used; their convention is unchanged."
+   },
+   {
+    "id": "lem-sf-weil-verdier-exchange",
+    "holds": true,
+    "note": "Still uses the same live derivedHom and dualizing functors; the representative sign clarification leaves its derived transpositions and conclusion unchanged."
+   },
+   {
+    "id": "lem-sf-derived-weil-tensor-hom-adjunction",
+    "holds": true,
+    "note": "Only the derived tensor and its constructible closure are used; no Hom differential occurs."
+   },
+   {
+    "id": "lem-sf-weil-verdier-dual-triangulated",
+    "holds": true,
+    "note": "Uses the same live derivedHom and explicitly compares its signed product-Hom model to the standard model by (-1)^(pn) in proof steps 4-6. The correction makes that existing comparison explicit and leaves its shifts, triangles and conclusion unchanged."
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1eafb",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034622-L-3666564",
+  "kind": "interface",
+  "note": "independent cc review: Item exchange proof and the verbatim tensor-block and NativeOpenDerivedTensor extractions vs the clone (byte/line diff); sandbox compile of all 10 delivered modules plus VerdierDualLocalization, NativeWeilDualizingHomTransposition and root WeilConjectures, all OK; axioms propext/Classical.choice/Quot.sound plus sorryAx from existing holes"
+ }
+}

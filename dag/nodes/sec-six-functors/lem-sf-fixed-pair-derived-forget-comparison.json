@@ -1,0 +1,240 @@
+{
+ "id": "lem-sf-fixed-pair-derived-forget-comparison",
+ "kind": "statement",
+ "title": "Derived forgetting of fixed pairs and right derived functors",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be Grothendieck abelian categories [def-sp-grothendieck-abelian], let $F:\\mathcal C\\to\\mathcal C$ and $H:\\mathcal D\\to\\mathcal D$ be additive autoequivalences, and use the fixed-pair categories $\\mathcal C^F,\\mathcal D^H$ [def-weil-endofunctor-fixed-pair-category]. Write $U_F,U_H$ for the forgetful functors. These fixed-pair categories are Grothendieck abelian. The functor $U_F$ is exact and conservative and has an exact left adjoint whose underlying object at $M$ is $\\bigoplus_{n\\in\\mathbf Z}F^nM$, with the structure isomorphism shifting the summands (negative powers use a chosen quasi-inverse of $F$). It preserves injective objects and K-injective complexes, where K-injective means that every map from an acyclic complex is null-homotopic [def-sfb-right-derived-functor]. The induced functor $D(U_F):D(\\mathcal C^F)\\to D(\\mathcal C)$ on the ordinary derived categories [def-weil-abstract-derived-category] is conservative.\n\nLet $L:\\mathcal C\\to\\mathcal D$ be additive and left exact, with a natural isomorphism $e:H L\\xrightarrow{\\sim}L F$. Define $\\widetilde L:\\mathcal C^F\\to\\mathcal D^H$ by $\\widetilde L(M,\\theta)=(LM,L(\\theta)\\circ e_M)$. There is a canonical natural isomorphism\n$$D(U_H)\\,R\\widetilde L\\xrightarrow{\\sim}RL\\,D(U_F).$$\nHere $R$ denotes total right derivation, computed by K-injective resolutions [def-sfb-right-derived-functor]. This isomorphism identifies the derived-unit map $D(U_H)(\\widetilde L(M)[0]\\to R\\widetilde L(M[0]))$ with the ordinary map $L(U_FM)[0]\\to RL((U_FM)[0])$. Thus it identifies the actual derived comparison maps, as well as their objects.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean",
+  "place": "Free.preservesHomology_functor (lines 54-58), preservesKInjectiveComplexes_forget (62-65), rightDerivedFunctorMapOfNatIsoCompForgetIso (75-97); Endofunctor/IsoAlgebra.lean Free.adjunction (326-336) and isGrothendieckAbelian (350-367); RightDerivedFunctor/IsoAlgebraComp.lean isIso_of_isIso_forget_mapDerivedCategory_map (102-113). Unit normalization is the normalization of the displayed derived-functor comparison, computed on the same resolution."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the already proved source-library structure rather than the five separate planned statement modules. Endofunctor/IsoAlgebra.lean proves isGrothendieckAbelian F and Free.adjunction F and constructs the free carrier and its summand-shift equation Free.map_ι_comp_str. The forgetful functor is exact and conservative by its existing instances. The ambient small coproducts and their exactness follow from [lem-sfb-grothendieck-filtered-finite-limits], and the autoequivalence preserves the relevant limits and colimits by [lem-galois-equivalence-preserves-limits]. RightDerivedFunctor/IsoAlgebra.lean proves Free.preservesHomology_functor; Mathlib Functor.preservesFiniteLimits_of_preservesHomology gives left exactness, and the adjunction gives right exactness. These are the required structural clauses for [def-weil-endofunctor-fixed-pair-category].",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-sfb-grothendieck-filtered-finite-limits",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean",
+    "place": "Free.preservesHomology_functor and preservesKInjectiveComplexes_forget; Endofunctor/IsoAlgebra.lean, Free.adjunction, Free.map_ι_comp_str and isGrothendieckAbelian"
+   }
+  },
+  {
+   "text": "The free functor preserves monomorphisms. Apply [lem-exc-rg-right-adjoint-preserves-injectives] to Free.adjunction F. The existing source instance preservesKInjectiveComplexes_forget applies [lem-weil-pbc-right-adjoint-preserves-kinjective] to the same exact adjunction. Thus forgetting preserves injectives and K-injectives.",
+   "uses": [
+    "lem-exc-rg-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean",
+    "place": "Free.preservesHomology_functor and preservesKInjectiveComplexes_forget; Endofunctor/IsoAlgebra.lean, Free.adjunction, Free.map_ι_comp_str and isGrothendieckAbelian"
+   }
+  },
+  {
+   "text": "To prove derived conservativity, use the canonical cohomology comparison of the exact forgetful functor, as in [lem-sf-exact-functor-derived-triangulated]. If the forgotten derived map is invertible, this comparison makes the forgotten cohomology map invertible in every integer degree. Conservativity of forget F then makes each cohomology map invertible. Apply DerivedCategory.isIso_iff, namely [lem-weil-pbc-unbounded-derived-iso-cohomology]. This argument keeps the independently chosen derived-category universes.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebraComp.lean",
+    "place": "isIso_of_isIso_forget_mapDerivedCategory_map; its homology argument written directly to keep wC and wF independent"
+   }
+  },
+  {
+   "text": "Fix the universally quantified witnesses hF and hC. Apply [lem-weil-pbc-kinjective-exact-square-comparison] with Hprime = mapOfNatIso e, H = L, r = forget F and s = forget H. The square is definitionally commuting, r and s are exact, and r preserves K-injectives by the source instance of step 2. Use the universal properties of the chosen right-derived functors in [def-sfb-right-derived-functor]. This yields an isomorphism beta uniquely normalized on K-injective complexes: a_I followed by beta_QI equals b_I. Here a and b are the natural transformations formed from the two units and the canonical exact-localization factors, exactly as in the comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-kinjective-exact-square-comparison",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/KInjectiveExactSquareComparison.lean",
+    "place": "sourceIso, leftUnit, rightUnit and existsUnique_normalized"
+   }
+  },
+  {
+   "text": "Extend the equality a followed by Qh(beta) = b to every homotopy object. Represent that object by a complex K and choose s:K to I using hF. Qh sends the homotopy class of s to an isomorphism, since quotientCompQhIso identifies it with Q(s). Naturality of the two transformations along s, their equality at I, and cancellation of the image of this isomorphism under B prove equality at K. This is the private proved helper homotopy_unit_ext. Finally multiply the component equation by the inverse square identification, the forgetful localization factor, and RL of the other localization factor. Cancellation gives exactly the displayed unit equation, with both mapHomotopyCategoryCompIso factors retained. Conversely the displayed equation gives a followed by Qh(gamma) = b by the inverse cancellation. Restrict this equation to K-injectives and invoke step 4 uniqueness to obtain gamma = beta.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/FixedPairDerivedForgetComparison.lean",
+    "place": "homotopy_unit_ext and exists_fixedPairDerivedForgetComparison, explicit naturality and invertible-factor cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-sfb-grothendieck-filtered-finite-limits",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-kinjective-exact-square-comparison",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/FixedPairDerivedForgetComparison.lean",
+  "place": "H4 stage-3 proof: reuse proved source structural results, apply the existing normalized exact-square comparison, extend equality along arbitrary K-injective resolutions, and cancel the exact-localization factors. No new statement or definition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an additive autoequivalence of a Grothendieck abelian category the forgetful functor from fixed pairs preserves injectives and commutes with total right derived functors",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states this fixed-pair derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant object for an infinite cyclic action has a free object which is the direct sum of all integer translates and its derived forgetful functor is conservative",
+   "results": "Condensed.freeAb; Condensed.finFree; ModuleCat.forget₂_addCommGrp_essSurj; Rep.free_projective; AddCommGrpCat.instPreservesMonomorphismsFree; CategoryTheory.Free.embedding; AddCommGrpCat.free; Rep.instEnoughProjectives",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states this fixed-pair derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "algEquivIsoAlgebraIso; algEquivIsoAlgebraIso_hom; algEquivIsoAlgebraIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states this fixed-pair derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|preservesKInjectiveComplexes_forget|rightDerivedFunctorMapOfNatIsoCompForgetIso",
+   "results": "Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states this fixed-pair derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting an invertible endomorphism from sheaves preserves K-injective complexes and commutes with right derived functors",
+   "results": "CochainComplex.isKInjective_of_iso; CategoryTheory.sheafForget; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; SheafOfModules.forgetPreservesLimitsOfSize; SheafOfModules.Finite.forgetPreservesFiniteLimits; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; SheafOfModules.forget",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states this fixed-pair derived comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-open-immersion-compact-image-extension-by-zero",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-zl-morphism-open-closed-reduction, source reduction through prop-functor-package clause 2: the open-immersion compactification comparison; forgetting Frobenius before applying the underlying proper-base-change theorem",
+   "via": [
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-fixed-pair-derived-forget-comparison",
+  "worker": "stage1",
+  "group": "Q125",
+  "summary": "Repair of human re-split order: five independent statement-only nodes retain old steps 1-10 in paired blocks. Existing normalized exact-square comparison retains step 11; the final assembly explicitly writes the unit calculation of step 12. Parent statement verbatim unchanged; assembly 2418 characters. Complete original proof and coverage are in report.md.",
+  "blueprint": "The inherited provenance has no imported blueprint ancestor (blueprint_refs ancestor returns None). This supplies the generic forgetting tool required in the parent lem-sf-weil-open-immersion-compact-image-extension-by-zero, steps 5-6, in the open-immersion comparison for package clause 2; it follows the imported package route without modifying the chapter or unit. New nodes refine returned steps 1-12 in six paired blocks; no chapter or unit change.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-grothendieck-filtered-finite-limits",
+    "why": "Generic limits, colimits, and left exact filtered colimits in grothendieck abelian categories used with the explicitly checked hypotheses in the indicated steps; the six-operations package unit has no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-galois-equivalence-preserves-limits",
+    "why": "Generic an equivalence of categories preserves limits and colimits used with the explicitly checked hypotheses in the indicated steps; the six-operations package unit has no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-exact-square-comparison",
+    "why": "Generic exact-square common K-injective comparison supplies naturality, resolution independence and unit normalization on K-injectives; the fixed-pair unit has no alternative and this reuses an existing theorem instead of creating a duplicate."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic existence of K-injective resolutions in any Grothendieck abelian category, needed for the source category C in the exact-square comparison of step 5 (old step 10 cited it); the six-operations package unit has no replacement for this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-grothendieck-filtered-finite-limits",
+  "lem-galois-equivalence-preserves-limits",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-exact-square-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-b869b5027",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-b869b5027 (reviewer sub-agent of L); spot-checked: I read the item and the five new nodes in full, the cited statements and the sources at the cited places. The human re-split note (released, stage 1, keep_plan) is the same on live and side-live. Live still holds N8's 12-step split, so the delivery is not superseded. Compared with live, only proof, proof_deps and split_report change. Old steps 1-2 go to created-abelian-structure, 3-4 to free-integer-adjunction, 5-6 to created-grothendieck-exact-integer-sum, 7-8 to exact-adjoint-forget-derived-detection, and 9-10 to common-derived-resolution. Step 11 goes to the existing lem-weil-pbc-kinjective-exact-square-comparison (unique β normalized on K-injectives, resolution-independent). Step 12 is written out in assembly step 5, and I checked its naturality chain. The assembly is 2418 characters. The nodes are 1048-1663 characters each and none restates the item. I checked all five statements and found them true: the orientation θ:TX≅X and L(θ)e_X:HLX→LX, the negative recursion through full faithfulness, the generator A(G) through conservativity and exactness, AB4 from AB5 by finite subsums, and 015Z/08BJ with the forgetful functor as the right adjoint. Edge cases: the zero category, and Ab with T=id (Z[t^{±1}]-modules). There is no duplicate: lem-sf-free-derived-weil-resolution cites this item, lem-sf-fixed-pair-adjunction-lift needs an adjunction, and lem-sfb-product-action-exact-forgetting is condensed-specific. No SGA is used, and I accept the tool uses. FIX (C, citation gap): the exact-square node needs K-injective resolutions in C, which old step 10 cited and no cited node now supplies. I added lem-weil-pbc-kinjective-functorial-existence to step 5, recomputed proof_deps, declared the tool use, and corrected a stray \\' in the text. Cosmetic: I corrected the free node's source lines to Endofunctor/IsoAlgebra.lean 120-360 (the adjunction is at line 345). Advisory: the new nodes lack a lean_audit field.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedPairDerivedForgetComparison",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.exists_fixedPairDerivedForgetComparison",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_forget_properties",
+   "CategoryTheory.Endofunctor.IsoAlgebra.exists_fixedPairDerivedForgetComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FixedPairDerivedForgetComparison.lean",
+  "statement": "theorem exists_fixedPairDerivedForgetComparison {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C] {D : Type uD} [Category.{vD} D] [Abelian D] [IsGrothendieckAbelian.{vD} D] (F : C ⥤ C) [F.Additive] [F.IsEquivalence] (H : D ⥤ D) [H.Additive] [H.IsEquivalence] (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] (e : L ⋙ H ≅ F ⋙ L) [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D] [HasDerivedCategory.{wF} (IsoAlgebra F)] [HasDerivedCategory.{wH} (IsoAlgebra H)] : ∀ (hF : ∀ K : CochainComplex (IsoAlgebra F) ℤ, ∃ (I : CochainComplex (IsoAlgebra F) ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s) (hC : ∀ K : CochainComplex C ℤ, ∃ (I : CochainComplex C ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s), ∃! α : (mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutions hF ⋙ (forget H).mapDerivedCategory ≅ (forget F).mapDerivedCategory ⋙ L.rightDerivedFunctorOfQuasiIsoResolutions hC, ∀ K : HomotopyCategory (IsoAlgebra F) (ComplexShape.up ℤ), (forget H).mapDerivedCategory.map (((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutionsUnit hF).app K) ≫ α.hom.app (DerivedCategory.Qh.obj K) ≫ (L.rightDerivedFunctorOfQuasiIsoResolutions hC).map ((forget F).mapDerivedCategoryFactorsh.hom.app K) = (forget H).mapDerivedCategoryFactorsh.hom.app (((mapOfNatIso e).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫ DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso (mapOfNatIsoCompForgetIso e) (ComplexShape.up ℤ)).hom.app K) ≫ DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso (Iso.refl (forget F ⋙ L)) (ComplexShape.up ℤ)).inv.app K) ≫ (L.rightDerivedFunctorOfQuasiIsoResolutionsUnit hC).app (((forget F).mapHomotopyCategory (ComplexShape.up ℤ)).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing IsoAlgebra full subcategory, free functor and transport. Structural clauses apply separately to (C,F) and (D,H). The comparison uses def-sfb-right-derived-functor's recorded arbitrary-resolution interface, with its unit equation on homotopy objects (hence on M[0]). Resolution witnesses are universally quantified proof choices available in the asserted Grothendieck categories. N8's reviewed stage-1 split is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec3125873",
+  "group": "NW",
+  "result": "pass",
+  "note": "Read the node, the 4 stmt_deps, the upstream IsoAlgebra/Free/mapOfNatIso/PreservesKInjectiveComplexes sources and the recorded RightDerivedFunctorOfQuasiIsoResolutions. All clauses match: Grothendieck IsoAlgebra; exact, conservative forget; actual Free.functor ⊣ forget, exact, carrier ∐ Free.obj (F.inv for n<0), shift equation; PreservesInjectiveObjects/KInjectiveComplexes; D(U_F) reflects isos. mapOfNatIso e = (LM, L(θ)∘e_M) with e : L⋙H ≅ F⋙L. ∃! α : R(L̃)⋙D(U_H) ≅ D(U_F)⋙RL, normalized by the units on every homotopy object (M[0] is a special case). All connecting maps are canonical (mapOfNatIsoCompForgetIso = Iso.refl), and uniqueness holds. Resolution hypotheses hF/hC are quantified inside the conclusion; universes independent. lean.statement verbatim; node differs from live only in lean. Docstrings have source place and blueprint; sorry-only; no definitions. The upstream rightDerivedFunctorMapOfNatIsoCompForgetIso uses another R and has no unit normalization, so not existing. Advisory: 4 plain imports unused at statement stage. No recompile (no change); worker reports clean scompile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261024T185957-L-3811999",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

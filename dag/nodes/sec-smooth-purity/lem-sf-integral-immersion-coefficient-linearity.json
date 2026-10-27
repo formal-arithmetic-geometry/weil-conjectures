@@ -1,0 +1,125 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralImmersionPullbackNormalization",
+  "group": "M3",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Proof, first paragraph: exact inverse images on completed integral coefficient modules and passage to derived categories; constructibility paragraph.",
+   "via": [
+    "lem-sf-integral-immersion-pullback-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pro-etale completed integral coefficient pullback preserves constant scalar sections and its derived inverse image is linear",
+   "results": "Eight hits concerning standard etale presentations and Kaehler differentials; none concerns the completed coefficient sheaf or its derived scalar action.",
+   "verdict": "No exact match; use the project coefficient constructions and Mathlib localization APIs.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\"",
+   "results": "CommShift, ofIso and NatTrans.CommShift provide abstract shift transport, not compatibility of these prescribed Roos and completion maps.",
+   "verdict": "No exact match for the prescribed normalization.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "immersion.*(linear|shift)|CoefficientNormalization",
+   "results": "Five Mathlib manifold-immersion hits, unrelated to scheme inverse image. Project search finds only the assigned Comparison clauses; no separate proof of these compatibilities.",
+   "verdict": "No duplicate; the existing lower comparison declarations are used.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image of sheaves of modules commutes with shifts on derived categories and is linear over constant scalar sections",
+   "results": "Eight hits, including SheafOfModules.pullback, DerivedCategory.instLinearShiftFunctorInt and CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. These give the abstract pullback and ordinary derived-shift APIs but do not assert the project completed-coefficient scalar normalization or compatibility of its prescribed Roos comparisons.",
+   "verdict": "Use the existing Mathlib exact derived-functor and linearity APIs in the assembly; the two normalization compatibilities remain separate strictly smaller statements.",
+   "date": "2026-10-26"
+  }
+ ],
+ "id": "lem-sf-integral-immersion-coefficient-linearity",
+ "kind": "lemma",
+ "title": "Normalized immersion coefficient inverse image is constant-section linear",
+ "statement": "For a prime l, a finite extension E/Q_l, and any immersion g:Y→X of schemes, the coefficient identifications of [def-sf-integral-immersion-pullback-normalization-data] preserve all constant integral sections, all finite quotient projections and all quotient transitions. The ordinary derived inverse image, restricted to sfIntegralConstructibleCategory on X, is linear over O_E for the published constant-section actions. This asserts neither comparison isomorphism, shift compatibility, exactness nor preservation of constructibility.",
+ "stmt_deps": [
+  "def-sf-integral-immersion-pullback-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "The normalized completed-ring identification intertwines all finite projections. Apply the canonical profinite coefficient inverse-image comparison; its finite constant-ring maps preserve constants and commute with quotient maps. Joint monicity of the completed projections proves the constant-section and projection equations. The adic datum supplies the transition equation.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-sf-immersion-completed-pullback-normalization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On generators of module inverse image, multiplication by the constant r is carried to multiplication by the same constant r. Tensor balancing and sheafification extend this equality to module morphisms. Degreewise it holds on complexes; linear localization extends it to all derived morphisms for the published constant-section action. Restrict the source to the full integral constructible subcategory. Empty schemes give the same identities in zero module categories.",
+   "uses": [
+    "def-sf-proetale-ring-sheaf-operations",
+    "def-sf-completed-integral-scalar-action",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-sf-immersion-completed-pullback-normalization-data",
+  "def-sf-proetale-ring-sheaf-operations",
+  "def-sf-completed-integral-scalar-action",
+  "lem-weil-integral-constructible-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 098T and 097N; extension to modules and derived constant-section action as in the original normalization node, steps 2 and 6."
+ },
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 098T and 097N; derived.tex Tag 015F; original normalization proof steps 2 and 6."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralImmersionCoefficientLinearity",
+  "file": "lean/Sheaf/Paper/IntegralImmersionCoefficientLinearity.lean",
+  "declaration": "WeilConjectures.IntegralImmersionNormalization.immersion_coefficient_linearity",
+  "statement": "theorem immersion_coefficient_linearity :\n    CoefficientNormalization l E g ∧\n    Functor.Linear (Padic.coefficientExtensionIntegers l E)\n      ((sfIntegralConstructible l E X).ι ⋙ ordinary l E g)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-28c6d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T070255-L-3512892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-28c6d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T070255-L-3512892",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof, data-module move (verbatim diff vs published item), two new sorry lemmas and their nodes against node lem-sf-integral-immersion-pullback-normalization, IntegralCompletedComparison.Comparison and the importer compiles"
+ }
+}

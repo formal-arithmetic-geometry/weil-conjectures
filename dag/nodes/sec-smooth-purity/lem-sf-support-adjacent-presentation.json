@@ -1,0 +1,167 @@
+{
+ "id": "lem-sf-support-adjacent-presentation",
+ "kind": "statement",
+ "title": "Transport of one adjacent compact-support coefficient square",
+ "statement": "Fix a prime l, finite E/Q_l, compactification c=(j,p) of f:X→Y and normalized operations o,d,e [lem-sf-compact-support-proper-image-tower]. Supply any family ι of ordinary finite open extension isomorphisms satisfying the ordinary coefficient equation SfFiniteOpenPresentationCompatible [lem-sf-finite-open-presentation-coefficients]. For arbitrary completed-coefficient K, construct β_n=Res_n D_n((mapDerivedCategoryNatIso ι_n).app (L_n K)); this is sfSupportPresentationLevel. Then supportTransition_n followed by β_n equals β_(n+1) followed by sfCompactSupportTransition_n [def-sf-integral-compact-support-tower]. The conclusion is equality of these specified morphisms for one adjacent index, not existence of a system comparison. No completeness or constructibility is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6, with Stacks Project, sites-modules.tex, lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI, 03DJ), and sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E); coefficient reductions use Definition 3.5.2 and Stacks 06YY."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCompactSupportTowerPresentation",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Finite coefficient presentation and specified quotient transitions; Transport of one adjacent compact-support coefficient square.",
+   "via": [
+    "lem-sf-compact-support-slice-intrinsic-towers",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between exact extension by zero functors commuting with scalar restriction induces a commuting square on derived compact support quotient maps",
+   "results": "8 hits: CategoryTheory.ShortComplex.mapNatIso, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.ShortComplex.mapNatIso_hom, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.Functor.leftDerivedZeroIsoSelf",
+   "date": "2026-10-27",
+   "verdict": "General scalar restriction or natural-isomorphism tools only; none identifies the specified slice and intrinsic quotient arrows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "12 hits. CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction, scalar restriction or derived-localization tools only; no comparison of these specified presentations. Use the existing tools for assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived direct image commutes with coefficient restriction and composition; naturality of the normalized K-injective comparison",
+   "results": "8 hits. CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction, scalar restriction or derived-localization tools only; no comparison of these specified presentations. Use the existing tools for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "sfDirectImageTransition|sfSupportTransition_presentation|finiteExtension.*sfIntrinsicExtensionByZero",
+   "results": "0 hits from msearch. Local rg found SfDirectImageReductionTransitions, IntegralProperTowerTransition and ProperSystemEvaluationTransitions; their hypotheses or conclusions do not match this arbitrary-scheme comparison.",
+   "date": "2026-10-27",
+   "verdict": "No existing matching comparison; retain the original normalized-operation dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [
+  "lem-sf-finite-open-presentation-coefficients",
+  "lem-sf-compact-support-proper-image-tower",
+  "def-sf-integral-compact-support-tower"
+ ],
+ "proof": [
+  {
+   "text": "Transport additivity and exactness along each supplied ordinary finite open isomorphism. Keep sfSupportPresentationLevel as the actual mapIso construction: exact localization of the supplied isomorphism, right-derived finite direct image, and completed restriction. No data are selected from an existence theorem.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lem-sf-integral-open-reduction-comparison",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use uniqueness of the identity-on-sections ordinary restriction comparison to identify sfCompactSupportRestrictionComp with the eqToIso of coefficientRestrictionComp, after the supplied adjacent-restriction equality. Naturality of mapDerivedCategoryCompIso in its first functor gives restrictionComp, the equality of the two derived restriction associators including the derived adjacent-restriction presentation. Apply the higher scalar adjunction Hom equivalence to the two quotient arrows. Naturality in its target and cancellation of the presentation isomorphism identify reductionMap followed by that presentation with sfCompactSupportReductionTransition (reductionMap_change).",
+   "uses": [
+    "lem-sf-finite-open-presentation-coefficients",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-sf-integral-compact-support-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize hι using multiplicativity of mapDerivedCategoryNatIso and naturality of mapDerivedCategoryCompIso in both functors. Cancellation of the composition isomorphisms proves derivedSquare_change. Evaluate it at the lower finite reduction of K. Naturality of the adjacent-restriction presentation and of the localized upper open isomorphism, followed by reductionMap_change, gives openSquare_transport: the commuting adjacent open square before applying any direct image.",
+   "uses": [
+    "lem-sf-finite-open-presentation-coefficients",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-sf-compact-support-proper-image-tower",
+    "def-sf-integral-compact-support-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove uniqueness of a derived comparison satisfying CompactSupportDerivedSquareNormalization. Represent an arbitrary derived object by a K-injective J and resolve its restricted complex by I. The normalization fixes the comparison after a common tail. That tail is invertible: its composite with either comparison equals a composite of localization factors, the image of the quasi-isomorphism to I, and the K-injective computation isomorphism. Cancel the tail, then use naturality along the representing isomorphism. Prove the ordinary direct-image comparison over arbitrary finite coefficient rings: substitute the two ordinary restriction-functor equalities, making their eqToIso presentations reflexive; cancel the canonical comparison and use the two section normalizations. Specialize this functor equality to the actual quotient rings and d.sections. Transport the derived comparisons along the same ordinary functor equalities, and apply the just-proved uniqueness to d.normalization and the canonical proEtaleDerivedDirectImage_restrictScalars normalization. This proves directComparison without asserting that scalar restriction preserves K-injectivity.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-finite-open-presentation-coefficients",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply restrictedComparison to the adjacent open square, directComparison and restrictionComp. First change the presentation of the coefficient restriction by functoriality, then use naturality of the intrinsic derived direct-image square at the lower open comparison and naturality of the completed restriction composition map. Functor.map_comp and associativity identify the result with the two specified support transitions and the original sfSupportPresentationLevel components. This proves the displayed equality on arbitrary unbounded K, including zero, the empty or identity open and n=0.",
+   "uses": [
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-sf-integral-compact-support-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-pbc-proetale-operations",
+  "lem-sf-finite-open-presentation-coefficients",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-sf-integral-compact-support-tower",
+  "lem-sf-compact-support-proper-image-tower",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6, with Stacks Project, sites-modules.tex, lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI, 03DJ), and sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E); coefficient reductions use Definition 3.5.2 and Stacks 06YY. Expanded finite presentation and normalization argument from Steps 1--5 of lem-sf-compact-support-slice-intrinsic-towers. C8: explicit Lean proof by exact-localization coherence, scalar-adjunction transposition, uniqueness from the K-injective normalization, and naturality of the two final restriction maps; all helpers are proved privately in the item module."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfSupportTransitionPresentation",
+  "file": "lean/Sheaf/Paper/SfSupportTransitionPresentation.lean",
+  "declaration": "WeilConjectures.sfSupportTransition_presentation",
+  "declarations": [
+   "WeilConjectures.sfSupportPresentationLevel",
+   "WeilConjectures.sfSupportTransition_presentation"
+  ],
+  "statement": "theorem sfSupportTransition_presentation\n    (c : Compactification f) (o : IntegralOpenReduction.Operations l E c.i)\n    (d : CompactSupportProperImageTower.DirectData l E c.g)\n    (e : CompactSupportProperImageTower.OpenData l E c.i o)\n    (ι : ∀ n : ℕ, IntegralOpenReduction.finiteExtension l E c.i o n ≅\n      sfIntrinsicExtensionByZero c.i (Padic.coefficientExtensionRing l E (n + 1)))\n    (hι : SfFiniteOpenPresentationCompatible l E c.i o e ι)\n    (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :\n    CompactSupportProperImageTower.supportTransition l E c.i c.g o (d := d) e K n ≫\n        (sfSupportPresentationLevel l E c o d ι K n).hom =\n      (sfSupportPresentationLevel l E c o d ι K (n + 1)).hom ≫\n        sfCompactSupportTransition l E c K n",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T222755-L-694270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261027T012819-L-2335053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

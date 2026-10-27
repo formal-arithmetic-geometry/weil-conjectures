@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "W4",
+  "item": "Sheaf.Paper.SfLocalizationAllStages",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization triangle for complementary closed and open immersions on constructible derived categories",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.TStructure.t; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Localization.isTriangulated; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.triangleOfSESIso",
+   "date": "2026-10-25",
+   "verdict": "No matching all-stage construction; the results concern generic localization or adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct integral supported localization with finite quotient comparisons and transport through scalar localization and common coefficient stages",
+   "results": "IsLocalization.exists_isIntegral_smul_of_isIntegral_map; instIsScalarTowerAtPrimeFractionRing; isIntegral_localization'; IsLocalization.instIsScalarTowerAtPrimeFractionRing; IsLocalization.Away.isIntegral_of_isIntegral_map; IsLocalization.Away.integralClosure; isIntegral_localization; instIsLocalizedModuleQuotientSubmoduleLocalizedModuleLocalizationLocalizedToLocalizedQuotient",
+   "date": "2026-10-25",
+   "verdict": "No matching all-stage construction; the results concern generic localization or adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "Sf.*Localization|supported.*recollement",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Unramified.lean; Mathlib/NumberTheory/RamificationInertia/Unramified.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-25",
+   "verdict": "No matching all-stage construction; the results concern generic localization or adjunctions."
+  }
+ ],
+ "id": "lem-sf-rational-localization-construction",
+ "title": "Transport one integral supported localization to the rational stage",
+ "statement": "Fix a field $k$, a prime $\\ell$ and a proof $h_\\ell$ that $\\ell$ is invertible in $k$. Let $t:X\\to\\operatorname{Spec}k$ be separated and of finite type, and let $i:Z\\hookrightarrow X$ be a closed immersion with complementary open immersion $j:U\\hookrightarrow X$. Use the records of [def-sf-localization-stage-data]. Let $E/\\mathbf Q_\\ell$ be finite and suppose an integral localization record $I$ for this coefficient field and immersion pair is given. Then the rational localization record $\\mathrm{SfRationalLocalization}(\\ell,E,k,h_\\ell,t,i,j)$ is nonempty.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Rational coefficient passage in (2) and (3)."
+ },
+ "stmt_deps": [
+  "def-sf-localization-stage-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the integral image functors with the ordinary completed-ring restrictions using the supplied I comparisons. Adjoint additivity, coefficient linearity and the induced shifts make the five functors exact linear functors, with compatible adjunctions. Apply [lem-sf-rational-supported-adjoint-transport] to this data. Identify the raw localization with the published rational category. Uniqueness of the extensions of the pullbacks identifies them with the functors of [def-weil-derived-pullback-tensor-hom]. The transported comparisons give the three unit/counit equations; retain I as the integral field.",
+   "uses": [
+    "lem-sf-rational-supported-adjoint-transport",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-rational-supported-adjoint-transport",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Rational coefficient passage in (2) and (3)."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Rational coefficient passage in (2) and (3).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfRationalLocalizationConstruction",
+  "file": "lean/Sheaf/Paper/SfRationalLocalizationConstruction.lean",
+  "declaration": "WeilConjectures.sfRationalLocalizationConstruction",
+  "declarations": [
+   "WeilConjectures.sfRationalLocalizationConstruction"
+  ],
+  "statement": "theorem sfRationalLocalizationConstruction (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (t : X ⟶ Spec (.of k)) [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t] {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hij : Set.range j = (Set.range i)ᶜ) (I : SfIntegralLocalization l E k hl t i j) : Nonempty (SfRationalLocalization l E k hl t i j)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b23e8",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T101804-L-3736516",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b23e8",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T101804-L-3736516",
+  "kind": "interface",
+  "note": "independent cc review: delivered SfLocalizationData vs clone SfLocalizationAllStages (moved declarations byte-identical, same public imports re-exported); item statements unchanged; 3 new sorry lemmas vs their nodes and the item's stage records; importers FiniteClosedShriek (18.6 s) and QbarCurveDuality (50.0 s vs 49.0 s baseline) compiled against the delivery"
+ }
+}

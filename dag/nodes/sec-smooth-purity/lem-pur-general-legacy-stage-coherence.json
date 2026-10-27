@@ -1,0 +1,213 @@
+{
+ "id": "lem-pur-general-legacy-stage-coherence",
+ "kind": "statement",
+ "title": "Tensor-normalized scalar stage coherence on the specified older rational presentation",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and any scheme $Y$; no structure map from $Y$ to $k$ is assumed. Let $I$ be the finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set]. For $E\\in I$, fix the small model $\\widetilde E=\\mathrm{Shrink}(E)$ and its algebra equivalence $s_E:\\widetilde E\\cong E$, and put $i_{EL}=s_L^{-1}\\circ(E\\hookrightarrow L)\\circ s_E$. Let $\\mathcal A_E^{\\mathrm{old}}$ be the full subcategory of the completed integral derived category whose objects are derived complete and whose reductions modulo every positive uniformizer power are finite-torsion constructible in a single finite cohomological interval independent of the power [def-weil-derived-complete-integral-detailed]. Here the specified presentation is exactly $\\mathrm{boundedConstructibleDerivedCompleteIntegralCategory}(D,\\ell,\\ell\\ne p,\\widetilde E,Y)$, with its functors $\\mathrm{integralDerivedReduction}$. Set $C_E^{\\mathrm{old}}=\\mathcal A_E^{\\mathrm{old}}[1/\\varpi_E]$, the raw Hom scalar localization [def-weil-rationalization-karoubi], namely $\\mathrm{rationalConstructibleCategory}(D,\\ell,\\ell\\ne p,\\widetilde E,Y)$. Its scalar transition $T^{\\mathrm{old}}_{EL}$ is $\\mathrm{rationalScalarExtension}$ along $i_{EL}$. These named presentations specify the categories and maps in the assertions below; no identification with a different presentation of the integral predicate is asserted.\n\nLet $\\alpha_{ELM}:T^{\\mathrm{old}}_{LM}T^{\\mathrm{old}}_{EL}\\cong T^{\\mathrm{old}}_{EM}$ be the tensor associator [lem-weil-scalar-extension-composition] transported along $i_{LM}i_{EL}=i_{EM}$ [lem-route-coefficient-inclusion-laws]. Direct equality transport of the tensor associator equals its composite with the equality isomorphism. These specified $\\alpha$ satisfy\n$$T^{\\mathrm{old}}_{MN}(\\alpha_{ELM})\\,;\\,\\alpha_{EMN}=\\alpha_{LMN}T^{\\mathrm{old}}_{EL}\\,;\\,\\alpha_{ELN}$$\nfor every $E\\le L\\le M\\le N$, including repeated fields; semicolons mean composition in the order written. Consequently there is exactly one stage system on these fixed categories whose functors are the stated $T^{\\mathrm{old}}$ and whose associators are the stated equality-transported tensor isomorphisms [def-sf-directed-common-stage-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Old owning proof argument 5; AlgebraicallyClosedCoefficients.lean:56-111, 220-470 (correctedTensorAssociator_formula, associator_cocycle, stageSystem_existsUnique).",
+  "note": "Construction material from old argument 5 (retained verbatim): For the retained finite-field interface AlgebraicallyClosedCoefficients, conjugate coefficient inclusions by Shrink.algEquiv. Their identity and composition laws follow by cancellation. Transport the tensor associator directly along equality of coefficient maps; equality induction proves it is the original composition with the equality iso. Specialize the normalized tensor pentagon. Equality of all functors and associators uniquely fixes the resulting stage system. Expand each inclusion as s_L inverse, subtype inclusion, s_E. Cancel s_L with its inverse to obtain the identity and composition equations already stated by lem-route-coefficient-inclusion-laws. Eliminate the equality of coefficient maps to reduce correctedTensorAssociator_formula to the original tensor isomorphism followed by eqToIso(rfl). In the pentagon, eliminate the three composite-map equalities; the remaining equation is rationalConstructibleScalar_coherence. Substitution gives the displayed cocycle. For uniqueness, extensionality identifies every functor field, then every associator field by the specified heterogeneous equality; the remaining cocycle field is a proof."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition",
+  "lem-route-coefficient-inclusion-laws",
+  "def-sf-directed-common-stage-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the current inclusion-laws statement with $K=\\mathbf Q_\\ell$ and the fixed site universe $u$. Its $C_E=\\operatorname{Shrink}^{u}(E)$ and canonical $s_E$ are the specified $\\widetilde E,s_E$; its smallness witness is coefficientSmall. Thus its $j_h=s_L^{-1}\\iota_hs_E$ is exactly $i_{EL}$. The displayed laws give $i_{EE}=1$ and $i_{LM}i_{EL}=i_{EM}$, including repeated fields. Applying composition twice gives both triple composites equal to $i_{EN}$. No equality of the coefficient-closure and site universes, or identification of integral predicates, is needed.",
+   "uses": [
+    "lem-route-coefficient-inclusion-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old owning proof argument 5; AlgebraicallyClosedCoefficients.lean:241-263 (coefficientInclusion_laws)"
+   }
+  },
+  {
+   "text": "Write $a(j,i):T_jT_i\\cong T_{ji}$ for the specified older tensor comparison. For an equality $e:ji=v$, define its direct transport $a^e:T_jT_i\\cong T_v$. Equality induction on $e$ reduces $a^e=a(j,i);\\operatorname{eqToIso}(T_e)$ to $a=a;1$. This proves the asserted direct-transport formula, including its inverse, for the actual comparison rather than an arbitrary isomorphism.",
+   "uses": [
+    "lem-pur-legacy-rational-tensor-pentagon"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old owning proof argument 5; AlgebraicallyClosedCoefficients.lean:56-74 (direct equality transport)"
+   }
+  },
+  {
+   "text": "Apply the untransported pentagon to $i=i_{EL}$, $j=i_{LM}$, $h=i_{MN}$. In the current inclusion-laws statement, $j_k\\circ j_h=j_{h\\,\\mathrm{trans}\\,k}$ supplies each composite-map equality through the identification in Step 1. First replace $i_{EM}$ by $ji$, then $i_{LN}$ by $hj$, and finally $i_{EN}$ by $h(ji)$. Equality induction makes these three transport equalities reflexive. The fourth equality $(hj)i=h(ji)$ is associativity of composition; proof irrelevance identifies its chosen proof with reflexivity. Step 2 removes all equality isomorphisms. The two sides become $T_h(a(j,i));a(h,ji)$ and $a(h,j)T_i;a(hj,i)$, equal by the cited pentagon. Reversing the replacements gives the displayed cocycle, including repeated fields.",
+   "uses": [
+    "lem-pur-legacy-rational-tensor-pentagon",
+    "lem-route-coefficient-inclusion-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old owning proof argument 5; AlgebraicallyClosedCoefficients.lean:75-91 and 419-435 (pentagon specialization)"
+   }
+  },
+  {
+   "text": "By the stage-system definition the only fields are the transition functors, associators, and their cocycle proof. Set the first two fields to $T^{\\mathrm{old}}$ and $\\alpha$, and fill the last field by Step 3. This constructs a stage system on exactly the fixed categories; no unitor or equality $T_{EE}=1$ is required.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old owning proof argument 5; AlgebraicallyClosedCoefficients.lean:445-454 (stage-system construction)"
+   }
+  },
+  {
+   "text": "For any other system with these prescribed fields, function extensionality identifies its transition family with the constructed one. After this substitution the stipulated heterogeneous equalities of associators are ordinary equalities; function extensionality identifies the associator family too. The sole remaining field is a proof of the same cocycle proposition, hence equal by proof irrelevance. The structures are equal, proving the claimed unique existence.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old owning proof argument 5; AlgebraicallyClosedCoefficients.lean:96-111 (uniqueStageSystem)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-route-coefficient-inclusion-laws",
+  "lem-pur-legacy-rational-tensor-pentagon",
+  "def-sf-directed-common-stage-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained owning proof argument 5 in source.note, with the explicit equality-induction and structure-extensionality argument checked against lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:56-111, 241-263, 419-454. Current blueprint clauses (2) and (4) give the scalar-stage route; no identification with its intrinsic presentation is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For raw rational constructible coefficient categories on a scheme, tensor associators transported along equal conjugated inclusions between small field models satisfy the pentagon and determine a unique normalized stage system",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv_assoc",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToIso, CategoryTheory.NatIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.NatIso'; ",
+   "date": "2026-10-27",
+   "verdict": "Query rejected for an unknown identifier; corrected Loogle query and two semantic searches also recorded."
+  },
+  {
+   "tool": "grep",
+   "query": "correctedTensorAssociator|coefficientInclusion|stageSystem_existsUnique",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor associator coherence after changing coefficient field models by algebra equivalences",
+   "results": "[leansearch] OK 8 hit(s); Coalgebra.TensorProduct.assoc_toLinearEquiv, IsLocalization.algebraTensorEquiv, Algebra.TensorProduct.assoc, Bialgebra.TensorProduct.assoc, Algebra.TensorProduct.congr_apply, Bialgebra.TensorProduct.assoc_toAlgEquiv, TensorProduct.AlgebraTensorModule.assoc_tmul, Coalgebra.TensorProduct.assoc",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToIso",
+   "results": "12 hits: CategoryTheory.eqToIso, CategoryTheory.eqToIso_refl, CategoryTheory.eqToIso.hom, CategoryTheory.eqToIso.inv, CategoryTheory.eqToIso_trans, CategoryTheory.eqToIso_map_trans, CategoryTheory.eqToIso_map, CategoryTheory.Equivalence.induced_counitIso",
+   "date": "2026-10-27",
+   "verdict": "Generic equality/triangle isomorphism construction only; not the specified normalized coefficient stage theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the specified raw rational constructible categories on any scheme, tensor scalar extension associators transported along conjugated small coefficient field inclusions satisfy the stage cocycle and uniquely determine the stage system",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-27",
+   "verdict": "no match: generic equality isomorphisms, algebra tensor equivalences and scheme pullback congruences do not state this specified older coefficient-stage normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "correctedTensorAssociator|rationalConstructibleScalar_coherence|stageSystem_existsUnique",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "no match: generic equality isomorphisms, algebra tensor equivalences and scheme pullback congruences do not state this specified older coefficient-stage normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of tensor scalar extension after transporting coefficient inclusions through algebra equivalences",
+   "results": "OK 8 hits; AddMonoidAlgebra.tensorEquiv_tmul, MonoidAlgebra.tensorEquiv_tmul, TensorProduct.AlgebraTensorModule.distribBaseChange, IsLocalization.moduleTensorEquiv, Algebra.TensorProduct.congr, Algebra.TensorProduct.congr_apply, algHomEquivSigma, Algebra.TensorProduct.algEquivOfLinearEquivTensorProduct",
+   "date": "2026-10-27",
+   "verdict": "no match: generic equality isomorphisms, algebra tensor equivalences and scheme pullback congruences do not state this specified older coefficient-stage normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToIso",
+   "results": "OK 12 hits; CategoryTheory.eqToIso, CategoryTheory.eqToIso_refl, CategoryTheory.eqToIso.hom, CategoryTheory.eqToIso.inv, CategoryTheory.eqToIso_trans, CategoryTheory.eqToIso_map_trans, CategoryTheory.eqToIso_map, CategoryTheory.Equivalence.induced_counitIso",
+   "date": "2026-10-27",
+   "verdict": "no match: generic equality isomorphisms, algebra tensor equivalences and scheme pullback congruences do not state this specified older coefficient-stage normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Old owning proof argument 5; AlgebraicallyClosedCoefficients.lean:56-111, 220-470 (correctedTensorAssociator_formula, associator_cocycle, stageSystem_existsUnique).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-legacy-stage-coherence",
+  "worker": "stage1",
+  "summary": "Statement preserved. Five explicit steps use conjugated-inclusion laws, prove the transport formula by equality induction, specialize a separately stated untransported legacy tensor pentagon, and construct and identify the unique stage structure by its data fields. One new statement-only tensor-coherence node; no Mathlib leaves. No comparison with intrinsic integral categories is asserted. Returned-delivery repair: rebased the retained split onto the current live item, revalidated the rewritten inclusion-laws statement and its canonical smallness/universe hypotheses, made its j_h notation explicit in steps 1 and 3, and regenerated the obsolete citation quotes.",
+  "blueprint": "Retained old owning proof argument 5 of def-weil-algebraically-closed-coefficients (recorded in item source.note): cancellation of small-model inclusions, direct equality transport, normalized tensor pentagon, and uniqueness of fixed stage data. Current sk-thm-sfb-qlbar-two-colimit clauses (2),(4) are the surrounding scalar-stage route."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NP-0e6bbded3",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-0e6bbded3 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-pur-legacy-rational-tensor-pentagon and every cited statement in full. Sources: AlgebraicallyClosedCoefficients.lean:51-111, 225-263, 415-460; ScalarExtensionComposition.lean:1321-1330 and 1474-1490; blueprint sk-def-sp-scalar-extension-functor.proof.md step (4); sk-thm-sfb-qlbar-two-colimit clauses (2),(4). The item statement is unchanged, and its cocycle matches def-sf-directed-common-stage-data with (i,j,k,l)=(E,L,M,N). The new node's equation is exactly the third conjunct of rationalConstructibleScalar_coherence, same orientation, for arbitrary algebra maps; that theorem is proved without sorry. It holds by module tensor associativity, and I tested the all-identity, repeated-field, zero-object and empty-scheme cases. Step 1 is an instance of the revised inclusion-laws statement (Shrink/coefficientSmall/j_h = i_EL). Step 2 is equality induction (correctedTensorAssociator_formula). Step 3 makes three substitutions, uses definitional associativity for the fourth equality and then the pentagon (private pentagon / associator_cocycle). Steps 4-5 are construction and uniqueness from the three fields only (uniqueStageSystem). Every proof citation is in unit sk-def-sf-operations, so no tool_uses are needed, and there is no cycle. New node B1-B9: statement only, self-contained, four kinds of search recorded, from/place/via set. No duplicate: the composition node's statement has no pentagon, and the shift/intrinsic/ambient/framework-PBC coherence nodes concern other categories or equations. Not a restatement (D1): the untransported pentagon is the external theorem the old proof already relied on, and the item keeps the transport, existence and uniqueness work. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AlgebraicallyClosedCoefficients",
+  "declaration": "WeilConjectures.AlgebraicallyClosedCoefficients.stageSystem_existsUnique",
+  "declarations": [
+   "WeilConjectures.correctedTensorAssociator_formula",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.associator_formula",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.associator_cocycle",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.stageSystem_existsUnique"
+  ],
+  "statement": "theorem stageSystem_existsUnique :\n    ∃! S : StageSystem (Stage D l hl Ω Y),\n      (∀ (E L : Index l Ω) (h : E ≤ L), S.T h = transition D l hl Ω Y E L h) ∧\n      (∀ (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M),\n        HEq (S.assoc h k) (associator D l hl Ω Y E L M h k))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing legacy-presentation match: correctedTensorAssociator_formula gives direct transport = tensor comparison followed by eqToIso; associator_formula identifies the sealed associator with tensorAssociator; associator_cocycle gives the displayed four-field equation; stageSystem_existsUnique gives unique existence with precisely the prescribed transitions and associators. Stage uses rationalConstructibleCategory on boundedConstructibleDerivedCompleteIntegralCategory and transition uses rationalScalarExtension; no identification with the intrinsic sfIntegralConstructible/sfRationalConstructibleCategory presentation is made. No new module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b94beeb92",
+  "group": "NM",
+  "result": "pass",
+  "note": "Existing match on Sheaf.Paper.AlgebraicallyClosedCoefficients (stageSystem_existsUnique + correctedTensorAssociator_formula, associator_formula, associator_cocycle); item changes only lean. Every clause matches: D, l≠p, IsAlgClosure Ω (universe v), arbitrary Y.{u}; Index = FiniteCoefficientFields; Shrink small models and the literal s_L⁻¹∘incl∘s_E inclusion; boundedConstructibleDerivedCompleteIntegral (derived complete, uniform interval before all n, levels n+1); rationalConstructibleCategory = ScalarLocalization; rationalScalarExtension transitions; associator pinned to the tensor associator via associator_formula; Iso-level direct-transport formula; cocycle in the node's order with non-strict ≤; ∃! StageSystem with T/HEq-assoc fields and no unitor. Statement verbatim; no sorry in the module; universes d/u/v independent; no duplicate owner in the side-live DAG; legacy presentation is explicitly what the node names. Advisory: helper defs (Stage/transition/associator) not listed in declarations; existing docstrings cite the split ancestor. No compile (no changed file)."
+ }
+}

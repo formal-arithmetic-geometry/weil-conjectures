@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-graded-local-isomorphism-tail",
+ "kind": "statement",
+ "title": "Eventual isomorphism of a graded map from its standard localizations",
+ "statement": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a nonnegatively graded commutative Noetherian ring [def-weil-pbc-noetherian-ring], and suppose $f_1,\\ldots,f_r\\in S_1$ generate $S$ as an $S_0$-algebra, with $r\\ge0$. Let $M=\\bigoplus_{n\\in\\mathbf Z}M_n$ and $N=\\bigoplus_{n\\in\\mathbf Z}N_n$ be $S$-modules with $S_aM_b\\subseteq M_{a+b}$ and $S_aN_b\\subseteq N_{a+b}$. Let $\\psi:M\\to N$ be $S$-linear and degree-preserving. Assume that $M$ and $N^+=\\bigoplus_{n\\ge0}N_n$ are finitely generated as $S$-modules [def-weil-finitely-generated-module]. For a graded module $T$, let $T_{(f_i)}\\subseteq T_{f_i}$ consist of fractions $x/f_i^a$ with $a\\ge0$ and $x\\in T_a$, with the ordinary localization equivalence relation [def-weil-pbc-module-localization-away, def-sc-degree-zero-module-fractions]. Suppose each induced map $\\psi_{(f_i)}:M_{(f_i)}\\to N_{(f_i)}$, $x/f_i^a\\mapsto\\psi(x)/f_i^a$, is an isomorphism. Set $M^+=\\bigoplus_{n\\ge0}M_n$ and let $\\psi^+:M^+\\to N^+$ be the restriction. Then $K=\\ker\\psi^+$ and $Q=N^+/\\psi^+(M^+)$, with the induced gradings, are finite graded $S$-modules with $K_{(f_i)}=Q_{(f_i)}=0$ for every $i$. For each $T\\in\\{K,Q\\}$ there are finite homogeneous generators $t_j\\in T_{e_j}$ with $e_j\\ge0$ and integers $b_{ij}\\ge1$ satisfying $f_i^{b_{ij}}t_j=0$; for any such generators and exponents, $T_n=0$ whenever $n>B_T=\\max(\\{0\\}\\cup\\{e_j+\\sum_{i=1}^r b_{ij}:j\\})$. In particular, for $n_0=1+\\max(B_K,B_Q)\\ge0$, every $\\psi_n:M_n\\to N_n$ with $n\\ge n_0$ is an $S_0$-linear isomorphism. Empty generating families and zero modules are allowed; no finiteness assumption is imposed on the negative-degree truncation of $N$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: second half, from finiteness of the nonnegative kernel and cokernel through truncation invariance and the final homogeneous-generator annihilator/monomial bound; original steps 5--8. This is the abstract graded-module argument, with no sheaf or Proj hypothesis."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization-away",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "The nonnegative pieces $M^+$ and $N^+$ are $S$-submodules: multiplying a component of degree $b\\ge0$ by a scalar of degree $a\\ge0$ has degree $a+b\\ge0$. Degree preservation restricts $\\psi$ to $\\psi^+$. If $\\sum_n x_n$ lies in its kernel, then $\\sum_n\\psi(x_n)=0$ and uniqueness of homogeneous components gives $\\psi(x_n)=0$ for every $n$. Its image is homogeneous too, since the component of degree $n$ of $\\psi^+(x)$ is $\\psi(x_n)$. Thus $K$ inherits the componentwise kernel grading, and $Q$ has components $Q_n=N_n/\\psi(M_n)$ for $n\\ge0$, with zero components for $n<0$: projecting any representative to degree $n$ gives the quotient projection, and the homogeneous image makes these projections well defined. These descriptions also prove the required compatibility of scalar multiplication with the gradings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-submodule-finite] to the submodules $M^+\\subseteq M$ and $K\\subseteq M$: $S$ is Noetherian and $M$ is finite by hypothesis, so both are finite. The quotient $Q$ is finite because the images of any finite generating family of $N^+$ generate $Q$, directly by [def-weil-finitely-generated-module]. Hence both kernel and cokernel are finite graded modules, without using any finiteness of $N$ itself.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  },
+  {
+   "text": "Fix $i$. Inclusion induces isomorphisms $(M^+)_{(f_i)}\\to M_{(f_i)}$ and $(N^+)_{(f_i)}\\to N_{(f_i)}$. Every degree-zero fraction has numerator in degree $a\\ge0$ and denominator $f_i^a$, so its numerator already lies in the nonnegative truncation [def-sc-degree-zero-module-fractions]. Two such fractions are equal precisely when some power of $f_i$ kills their cross-multiplied difference [def-weil-pbc-module-localization-away]; this is the same equation in the submodule as in the ambient module. For $x\\in T_a$ and $y\\in T_b$, their sum is $(f_i^b x+f_i^a y)/f_i^{a+b}$; its numerator has degree $a+b\\ge0$ in either truncation or ambient module. Likewise a degree-zero scalar $s/f_i^c$, $s\\in S_c$, acts by $sx/f_i^{a+c}$, whose numerator has degree $a+c\\ge0$. Thus the bijections preserve the module operations. They commute with the maps induced by $\\psi$ because both composites send $x/f_i^a$ to $\\psi(x)/f_i^a$. Hence $(\\psi^+)_{(f_i)}$ is an isomorphism by the hypothesis on $\\psi_{(f_i)}$.",
+   "uses": [
+    "def-sc-degree-zero-module-fractions",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  },
+  {
+   "text": "Extend the grading on $S$ to $\\mathbf Z$ by $S_a=0$ for $a<0$, and use the gradings of step 1. The sequence $0\\to K\\to M^+\\xrightarrow{\\psi^+}N^+\\to Q\\to0$ is exact with degree-preserving maps, and $f_i$ has degree $1\\ge0$. Apply [lem-sc-graded-localization-exact] to each consecutive triple, including the zero endpoints; its statement explicitly includes finite exact sequences. The localization of the zero module is zero directly from its fraction description. This gives an exact sequence $0\\to K_{(f_i)}\\to(M^+)_{(f_i)}\\xrightarrow{(\\psi^+)_{(f_i)}}(N^+)_{(f_i)}\\to Q_{(f_i)}\\to0$. The middle arrow is bijective by step 3. At $K_{(f_i)}$ exactness makes its map to $(M^+)_{(f_i)}$ injective, while exactness at $(M^+)_{(f_i)}$ makes its image zero; hence $K_{(f_i)}=0$. At $(N^+)_{(f_i)}$ the quotient map is zero because the middle arrow is surjective, and exactness at $Q_{(f_i)}$ makes that zero map surjective; hence $Q_{(f_i)}=0$.",
+   "uses": [
+    "lem-sc-graded-localization-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  },
+  {
+   "text": "For either $T=K$ or $T=Q$, choose finite generators $g_1,\\ldots,g_s$ using [def-weil-finitely-generated-module]. Decompose each $g_h$ into its finitely many homogeneous components, and take the union of those finite families. Their $S$-span contains every $g_h$, hence is $T$, and each component already belongs to $T$. Omitting zero components gives finite homogeneous generators $t_j\\in T_{e_j}$. All $e_j\\ge0$, since $T$ is concentrated in nonnegative degrees by step 1. If $T=0$, take the empty family.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  },
+  {
+   "text": "For each $i,j$, the fraction $t_j/f_i^{e_j}$ is in $T_{(f_i)}$ because numerator and denominator have the same degree [def-sc-degree-zero-module-fractions]. It is zero by step 4. Comparing it to $0/1$ in the equivalence relation of [def-weil-pbc-module-localization-away] gives $f_i^k(1\\cdot t_j-f_i^{e_j}\\cdot0)=0$ for some $k\\ge0$, hence $f_i^k t_j=0$. Set $b_{ij}=\\max(1,k)$; multiplication by the additional power gives $f_i^{b_{ij}}t_j=0$ and $b_{ij}\\ge1$. There is no division by $f_i$ inside $T$, so this also applies to zero and nilpotent $f_i$.",
+   "uses": [
+    "def-sc-degree-zero-module-fractions",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  },
+  {
+   "text": "Now fix ANY finite homogeneous generating family $t_j\\in T_{e_j}$ and ANY annihilating exponents $b_{ij}\\ge1$ as in the statement. For $x\\in T_n$, write $x=\\sum_j s_jt_j$ and expand each scalar as a polynomial over $S_0$ in the $f_i$, which is possible by the assumed algebra generation. Each resulting term is $c\\prod_i f_i^{a_i}t_j$ with $c\\in S_0$ and $a_i\\ge0$, and is homogeneous of degree $e_j+\\sum_i a_i$. Project this finite equality to degree $n$: terms with a different degree vanish under that projection, so $x$ is a sum only of such terms satisfying $\\sum_i a_i=n-e_j$. This argument is simply expansion of a finite polynomial and uniqueness of homogeneous components; it requires neither algebraic independence of the $f_i$ nor a homogeneous presentation of the relations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  },
+  {
+   "text": "If $r>0$ and $n>B_T$, every retained term of step 7 has $\\sum_i a_i=n-e_j>\\sum_i b_{ij}$. Thus some $a_i\\ge b_{ij}$ (otherwise $\\sum_i a_i\\le\\sum_i(b_{ij}-1)<\\sum_i b_{ij}$). Factoring out $f_i^{b_{ij}}$ makes that term zero. Hence $T_n=0$. If $r=0$, the only polynomial monomial is the empty product, of degree $0$, so a retained term would require $n=e_j$, impossible when $n>B_T\\ge e_j$. If the generating family is empty, $T=0$ and $B_T=0$. These cases establish the stated bound with $\\max(\\{0\\}\\cup\\{e_j+\\sum_i b_{ij}:j\\})$ for every permitted family and choice of exponents.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  },
+  {
+   "text": "Take the generators and exponents obtained in steps 5–6 for $K,Q$, and let $n_0=1+\\max(B_K,B_Q)$. If $n\\ge n_0$, then $n\\ge0$ and both $K_n=0$ and $Q_n=0$ by step 8. By the component descriptions of step 1, $K_n=0$ makes $\\psi_n$ injective and $Q_n=0$ makes it surjective. Write $v:N_n\\to M_n$ for its inverse as a bijection. For $y,z\\in N_n$ and $a\\in S_0$, applying the injective map $\\psi_n$ to $v(y+z)$ and $v(y)+v(z)$ gives $y+z$ in both cases; applying it to $v(ay)$ and $av(y)$ gives $ay$ in both cases. Thus $v$ is additive and $S_0$-linear, proving the asserted $S_0$-linear isomorphism for every $n\\ge n_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-finitely-generated-module",
+  "def-sc-degree-zero-module-fractions",
+  "def-weil-pbc-module-localization-away",
+  "lem-sc-graded-localization-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: nonnegative kernel and cokernel, truncation invariance, and final homogeneous-generator argument (lines 3901–3929)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]runcat|[Ee]ventual|[Aa]nnihilat|[Tt]orsion",
+   "results": "{\"t\": \"2026-10-22T05:54:13Z\", \"tool\": \"grep\", \"query\": \"[Tt]runcat|[Ee]ventual|[Aa]nnihilat|[Tt]orsion\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\"], \"digest\": \"f4bba918097c1c6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern homogeneous ring fractions, finite type algebras, trace, or equality of localized maps, not eventual isomorphy of a graded module map"
+  },
+  {
+   "tool": "loogle",
+   "query": "GradedModule, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T05:54:13Z\", \"tool\": \"loogle\", \"query\": \"GradedModule, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'GradedModule'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rejected query, loogle: unknown identifier 'GradedModule'; valid replacement query also run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite nonnegative truncations of graded modules and isomorphic degree zero localizations imply the homogeneous map is eventually bijective",
+   "results": "{\"t\": \"2026-10-22T05:54:13Z\", \"tool\": \"leansearch\", \"query\": \"Finite nonnegative truncations of graded modules and isomorphic degree zero localizations imply the homogeneous map is eventually bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.map_bijective_iff_localizedModuleMap_bijective\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"HomogeneousLocalization.awayMap_fromZeroRingHom\", \"HomogeneousLocalization.Away.finiteType\", \"HomogeneousLocalization.instAlgebraSubtypeMemOfNat\", \"HomogeneousLocalization.fromZeroRingHom\", \"HomogeneousLocalization.map\", \"HomogeneousLocalization\"], \"digest\": \"3b1c11e0e8711032\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern homogeneous ring fractions, finite type algebras, trace, or equality of localized maps, not eventual isomorphy of a graded module map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degree preserving map of graded modules over a Noetherian ring generated in degree one that is an isomorphism on degree zero localizations is an isomorphism in high degrees when source and nonnegative target truncation are finite",
+   "results": "{\"t\": \"2026-10-22T05:54:19Z\", \"tool\": \"leanfinder\", \"query\": \"A degree preserving map of graded modules over a Noetherian ring generated in degree one that is an isomorphism on degree zero localizations is an isomorphism in high degrees when source and nonnegative target truncation are finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.finiteType\", \"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\"], \"digest\": \"a8cdcd57b4acab68\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern homogeneous ring fractions, finite type algebras, trace, or equality of localized maps, not eventual isomorphy of a graded module map"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]raded.*[Ff]inite|[Ff]inite.*[Gg]raded|[Ee]ventually.*[Bb]ijective|[Ee]ventually.*[Ii]so",
+   "results": "{\"t\": \"2026-10-22T05:54:31Z\", \"tool\": \"grep\", \"query\": \"[Gg]raded.*[Ff]inite|[Ff]inite.*[Gg]raded|[Ee]ventually.*[Bb]ijective|[Ee]ventually.*[Ii]so\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\"], \"digest\": \"0861aedb58897797\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern homogeneous ring fractions, finite type algebras, trace, or equality of localized maps, not eventual isomorphy of a graded module map"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.IsInternal, IsNoetherian",
+   "results": "{\"t\": \"2026-10-22T05:54:31Z\", \"tool\": \"loogle\", \"query\": \"DirectSum.IsInternal, IsNoetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_zero_of_mapsTo_ne\"], \"digest\": \"369b71025a9f670a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern homogeneous ring fractions, finite type algebras, trace, or equality of localized maps, not eventual isomorphy of a graded module map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre quotient criterion for graded module homomorphisms: finite kernel and cokernel killed locally by degree one generators vanish in all sufficiently high graded components",
+   "results": "{\"t\": \"2026-10-22T05:54:32Z\", \"tool\": \"leanfinder\", \"query\": \"Serre quotient criterion for graded module homomorphisms: finite kernel and cokernel killed locally by degree one generators vanish in all sufficiently high graded components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousSubmodule.is_homogeneous'\", \"HomogeneousSubmodule.ext'\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"HomogeneousIdeal.mem_irrelevant_iff\"], \"digest\": \"dba9aac2eb74faed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern homogeneous ring fractions, finite type algebras, trace, or equality of localized maps, not eventual isomorphy of a graded module map"
+  },
+  {
+   "tool": "grep",
+   "query": "eventual|annihilat|truncat|torsion",
+   "results": "{\"t\": \"2026-10-22T06:44:33Z\", \"tool\": \"grep\", \"query\": \"eventual|annihilat|truncat|torsion\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\"], \"digest\": \"f4bba918097c1c6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous ring localizations, trace/direct-sum decompositions, or local bijectivity requiring a unit-ideal cover do not state eventual graded module isomorphy"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite graded module with zero homogeneous localizations at generators of degree one vanishes in all sufficiently large degrees",
+   "results": "{\"t\": \"2026-10-22T06:44:33Z\", \"tool\": \"leansearch\", \"query\": \"A finite graded module with zero homogeneous localizations at generators of degree one vanishes in all sufficiently large degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.fromZeroRingHom\", \"HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization\", \"HomogeneousIdeal.irrelevant_eq_iSup\", \"HomogeneousLocalization.subsingleton\", \"HomogeneousLocalization.Away.finiteType\", \"HomogeneousLocalization.mk_eq_zero_of_num\"], \"digest\": \"c775112f2f6ff075\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous ring localizations, trace/direct-sum decompositions, or local bijectivity requiring a unit-ideal cover do not state eventual graded module isomorphy"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.IsInternal, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T06:44:34Z\", \"tool\": \"loogle\", \"query\": \"DirectSum.IsInternal, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_zero_of_mapsTo_ne\", \"LinearMap.trace_eq_sum_trace_restrict\", \"LinearMap.trace_eq_sum_trace_restrict'\", \"Submodule.exists_isInternal_prime_power_torsion\", \"Submodule.isInternal_prime_power_torsion\", \"Submodule.exists_isInternal_prime_power_torsion_of_pid\", \"Submodule.isInternal_prime_power_torsion_of_pid\"], \"digest\": \"8129f4f5c5d15700\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous ring localizations, trace/direct-sum decompositions, or local bijectivity requiring a unit-ideal cover do not state eventual graded module isomorphy"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degree preserving map between graded modules with finite nonnegative truncations and isomorphic degree zero localizations at degree one algebra generators is bijective in sufficiently high degrees",
+   "results": "{\"t\": \"2026-10-22T06:44:43Z\", \"tool\": \"leanfinder\", \"query\": \"A degree preserving map between graded modules with finite nonnegative truncations and isomorphic degree zero localizations at degree one algebra generators is bijective in sufficiently high degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective\", \"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"IsLocalization.bijective_lift_piRingHom_algebraMap_comp_piEvalRingHom\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"bijective_of_isLocalization_of_span_eq_top\", \"bijective_of_isLocalized_span\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\"], \"digest\": \"1b5a43ea93300e6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous ring localizations, trace/direct-sum decompositions, or local bijectivity requiring a unit-ideal cover do not state eventual graded module isomorphy"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*(finite|isomorph|biject)|homogeneous.*(generat|annihilat)",
+   "results": "{\"t\": \"2026-10-22T06:44:44Z\", \"tool\": \"grep\", \"query\": \"graded.*(finite|isomorph|biject)|homogeneous.*(generat|annihilat)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\"], \"digest\": \"320a266547fc62e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous ring localizations, trace/direct-sum decompositions, or local bijectivity requiring a unit-ideal cover do not state eventual graded module isomorphy"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre graded module criterion finite kernel and cokernel annihilated by powers of irrelevant ideal imply an isomorphism in high degree",
+   "results": "{\"t\": \"2026-10-22T06:44:58Z\", \"tool\": \"leanfinder\", \"query\": \"Serre graded module criterion finite kernel and cokernel annihilated by powers of irrelevant ideal imply an isomorphism in high degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"HomogeneousIdeal.mem_irrelevant_iff\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"localCohomology.isoSelfLERadical\"], \"digest\": \"c5b969780df517ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous ring localizations, trace/direct-sum decompositions, or local bijectivity requiring a unit-ideal cover do not state eventual graded module isomorphy"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-graded-module-section-tail",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7). Re-split prerequisite: second half, from finiteness of the nonnegative kernel and cokernel through truncation invariance and the final homogeneous-generator annihilator/monomial bound; original steps 5--8. This is the abstract graded-module argument, with no sheaf or Proj hypothesis.",
+   "via": [
+    "lem-sfb-finite-graded-module-section-tail",
+    "lem-sfb-projective-coordinate-ring-euler-polynomial",
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-graded-local-isomorphism-tail",
+  "worker": "stage1",
+  "summary": "Expanded the algebraic half of Stacks 0AG7 into nine proof steps, using the existing Noetherian-submodule Mathlib leaf and graded-localization exactness statement. The proof explicitly constructs the quotient grading, transfers degree-zero fractions through nonnegative truncation, obtains homogeneous generators and annihilating powers, and proves the monomial bound including empty families. For the returned delivery, compared the retained split to the current unsplit DAG node, re-read all six dependency statements, and verified all eight citation excerpts. The delivery tool rebases onto the fetched current DAG. The final step now checks inverse additivity and scalar compatibility explicitly. Statement, statement dependencies, sources, ancestry, and all prior search records are retained. No new nodes or Mathlib leaves. In the continuation for returned head 9f8b062493e, rechecked the current unsplit base and all six dependency statements, and expanded step 3 with the addition and scalar-action formulas proving the truncation bijections are module isomorphisms.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7). Re-split prerequisite: second half, from finiteness of the nonnegative kernel and cokernel through truncation invariance and the final homogeneous-generator annihilator/monomial bound; original steps 5--8. This is the abstract graded-module argument, with no sheaf or Proj hypothesis. The nine steps realize the abstract algebraic tail argument extracted from original steps 5–8 of lem-sfb-finite-graded-module-section-tail. The inherited null blueprint ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-graded-localization-exact",
+    "why": "Generic exactness of degree-zero homogeneous localization, applied to a graded kernel/cokernel sequence; this algebraic tool does not replace any unit-level geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-graded-localization-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-8aaceaa92",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-8aaceaa92 (reviewer sub-agent of L); spot-checked: I read the item in full (all nine steps), all six cited statements, and Stacks coherent.tex Tag 0AG7, lemma-recover-tail-graded-module, lines 3911-3929. This is the fifth push of the same split; the returns concern promotion to the live DAG, not the mathematics. Compared field by field with the previous head 9f8b062493ef, only the proof and split_report changed, and in the proof only step 3. Step 3 now writes the sum (f^b x+f^a y)/f^{a+b} and the scalar action (s/f^c)(x/f^a)=sx/f^{a+c}. Both match the operation formulas in the statement of def-weil-pbc-module-localization-away. Their numerators have degrees a+b>=0 and a+c>=0, so the truncation bijections (T^+)_(f)->T_(f) respect the module operations. This is correct. Against live, the statement, stmt_deps, source, created, unit, chapter and blueprint are identical. Live and side-live still hold the item unsplit with no proof, so no other group has superseded it. No repair note names this item. There are no new nodes and no SGA citation. None of the cited statements changed since 9f8b. Step checks: (1) the kernel and image are homogeneous, so Q_n=N_n/psi(M_n) for n>=0. (2) M+ and K are finite by lem-weil-pbc-noetherian-submodule-finite, and Q is a quotient of N+. (4) lem-sc-graded-localization-exact applies to the Z-extended grading with deg f_i=1, which gives K_(f)=Q_(f)=0. (5)-(6) homogeneous generators, and t/f^e=0/1 gives f^k t=0 with b=max(1,k). (7)-(8) polynomial expansion, projection to degree n and the pigeonhole bound, including r=0 and empty families. (9) for n>=n0, psi_n is bijective with an S_0-linear inverse. Tests: S=k[t] with M=S/(t^2)->N=S/(t) gives B_K=2 and Q=0; also r=0, f_i=0, zero modules and an unrestricted negative part of N. Accepted tool_use: lem-sc-graded-localization-exact, a generic algebra black box. No changes. Maintainer note: this is a promotion loop."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Module.GradedLocalIsomorphismTail",
+  "declaration": "LocalizedModule.graded_local_isomorphism_tail",
+  "declarations": [
+   "LocalizedModule.IsTailGeneratingFamily",
+   "LocalizedModule.tailGeneratorBound",
+   "LocalizedModule.GradedTailConclusion"
+  ],
+  "file": "lean/Sheaf/Algebra/Module/GradedLocalIsomorphismTail.lean",
+  "statement": "theorem graded_local_isomorphism_tail {S : Type u} [CommRing S] [IsNoetherianRing S] (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜] (r : ℕ) (f : Fin r → S) (hf : ∀ i, f i ∈ 𝒜 1) (hgen : Algebra.adjoin (𝒜 0) (Set.range f) = ⊤) {M : Type v} [AddCommGroup M] [Module S M] [Module.Finite S M] {N : Type w} [AddCommGroup N] [Module S N] (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜) (𝓝 : ℤ → AddSubgroup N) (h𝓝 : DirectSum.IsInternal 𝓝) (hsmulM : ∀ (a : ℕ) (n : ℤ) (s : S) (x : M), s ∈ 𝒜 a → x ∈ 𝓜 n → s • x ∈ 𝓜 ((a : ℤ) + n)) (hsmulN : ∀ (a : ℕ) (n : ℤ) (s : S) (x : N), s ∈ 𝒜 a → x ∈ 𝓝 n → s • x ∈ 𝓝 ((a : ℤ) + n)) (ψ : M →ₗ[S] N) (hψ : ∀ n x, x ∈ 𝓜 n → ψ x ∈ 𝓝 n) (hfinite : (Submodule.span S (⋃ n : ℕ, (𝓝 n : Set N))).FG) (hloc : ∀ i, Set.BijOn (IsLocalizedModule.map (Submonoid.powers (f i)) (mkLinearMap (Submonoid.powers (f i)) M) (mkLinearMap (Submonoid.powers (f i)) N) ψ) (degreeZeroFractions (fun a : ℕ ↦ (𝒜 a : Set S)) (fun a : ℕ ↦ (𝓜 a : Set M)) (Submonoid.powers (f i))) (degreeZeroFractions (fun a : ℕ ↦ (𝒜 a : Set S)) (fun a : ℕ ↦ (𝓝 a : Set N)) (Submonoid.powers (f i)))) : ∃ (P : Submodule S M) (R : Submodule S N) (φ : P →ₗ[S] R), P.toAddSubgroup = (⨆ n : ℕ, 𝓜 n) ∧ R.toAddSubgroup = (⨆ n : ℕ, 𝓝 n) ∧ (∀ x : P, (φ x : N) = ψ (x : M)) ∧ ∃ (𝓚 : ℤ → AddSubgroup φ.ker) (𝓠 : ℤ → AddSubgroup (R ⧸ φ.range)) (BK BQ : ℕ), (∀ n, 𝓚 n = (𝓜 n).comap (P.subtype.comp φ.ker.subtype).toAddMonoidHom) ∧ (∀ n, 𝓠 n = ((𝓝 n).comap R.subtype.toAddMonoidHom).map φ.range.mkQ.toAddMonoidHom) ∧ GradedTailConclusion 𝒜 f 𝓚 BK ∧ GradedTailConclusion 𝒜 f 𝓠 BQ ∧ ∀ n : ℤ, ((1 + max BK BQ : ℕ) : ℤ) ≤ n → ∃ e : 𝓜 n ≃+ 𝓝 n, (∀ x : 𝓜 n, (e x : N) = ψ (x : M)) ∧ ∀ (a : 𝒜 0) (x y : 𝓜 n), (y : M) = (a : S) • (x : M) → (e y : N) = (a : S) • (e x : N)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d12939c2",
+  "group": "Q123",
+  "result": "pass",
+  "note": "All hypotheses and conclusion clauses match node lem-sfb-graded-local-isomorphism-tail and Stacks 0AG7 (coherent.tex 3862-3929). Noetherian graded S over ℕ with f : Fin r → S in degree 1 and adjoin (𝒜 0) (range f) = ⊤, r = 0 allowed. M, N ℤ-graded via IsInternal with hsmul, independent universes u, v, w. Module.Finite M; N⁺ finite stated as FG of the span of the nonnegative pieces, equal to N⁺ under hsmulN, nothing assumed about N⁻. hloc is BijOn of the canonical IsLocalizedModule.map on the recorded degreeZeroFractions, which equal {x/f_i^a : x ∈ M_a} (wrong-degree denominators are 0). P, R, φ, K = ker φ, Q = R ⧸ range φ and the gradings 𝓚, 𝓠 are all pinned canonically. GradedTailConclusion gives finiteness, internal grading, scalar compatibility, zero negative pieces, T_(f_i) = 0, an existential generating family with B = sup(e_j + Σ b_ij), and the bound for every admissible family; final clause is an S₀-linear AddEquiv equal to ψ_n for n ≥ 1 + max(BK, BQ). Edge cases (r = 0, empty family/zero module, nilpotent f_i, universes) covered. Only declarations from the four stmt_dep records plus Mathlib; proof-only imports private; the three helpers package this node's clauses, are listed in lean.declarations with source/blueprint docstrings, and have no name collisions in side-live. Docstring follows the nine proof steps; proof is sorry only; lean.statement matches the file verbatim; node diff vs side-live is the lean field only. Report has Worker report and Second reading by Q123. No compile: no file changed. No findings."
+ }
+}

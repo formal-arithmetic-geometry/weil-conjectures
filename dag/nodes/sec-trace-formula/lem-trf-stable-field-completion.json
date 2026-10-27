@@ -1,0 +1,364 @@
+{
+ "id": "lem-trf-stable-field-completion",
+ "kind": "statement",
+ "title": "Completion of a stable nonarchimedean field is stable",
+ "statement": "Let $k$ be a field [def-weil-field] with a nontrivial real-valued multiplicative nonarchimedean absolute value. Suppose $k$ is stable [def-trf-stable-nonarchimedean-field]. Let $H=\\widehat k$ be its metric completion [lem-sfb-normed-field-completion], equivalently equivalence classes of Cauchy sequences for $|x-y|$, with termwise field operations and absolute value $|[(a_n)]|=\\lim_n|a_n|$. Then $H$ is stable [def-trf-stable-nonarchimedean-field]: every finite field extension $L/H$, with its minimal-polynomial spectral norm $s_{L/H}$ [lem-trf-incomplete-spectral-algebra-norm], has an $H$-basis $b_1,\\ldots,b_d$ satisfying $$s_{L/H}\\left(\\sum_i h_i b_i\\right)=\\max_i |h_i|s_{L/H}(b_i)\\qquad(h_i\\in H).$$ No completeness of $k$ and no separability of $L/H$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.6.2/3, printed p.158 (scan PDF p.166), completion criterion; proof supplied by the agent because the local archival document is absent.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-stable-nonarchimedean-field",
+  "lem-sfb-normed-field-completion",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-normed-field-completion], $H$ is a complete normed field containing $k$ isometrically and densely. The nonarchimedean inequality on $H$ follows by taking limits of that inequality on approximating sequences in $k$; nontriviality follows from its restriction to $k$. By [lem-trf-complete-stability-separable-criterion] it suffices to prove the orthogonal-basis assertion for every finite separable extension $F/H$. Fix one. By [lem-trf-spectral-norm-algebraic-extension] its spectral norm is a multiplicative nonarchimedean absolute value extending that of $H$. By [lem-per-finite-normed-space-complete], $F$ is complete. Apply [lem-trf-dense-subfield-separable-descent] to $k\\subseteq H\\subseteq F$. It supplies a finite separable subextension $E/k$ inside $F$ which is dense in $F$, with $HE=F$.",
+   "uses": [
+    "lem-sfb-normed-field-completion",
+    "lem-trf-complete-stability-separable-criterion",
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-per-finite-normed-space-complete",
+    "lem-trf-dense-subfield-separable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, ascent, first paragraph; Proposition 3.6.2/2 and Krasner descent"
+   }
+  },
+  {
+   "text": "Write $s=s_{E/k}$. By [lem-trf-incomplete-spectral-algebra-norm] this is a definite ultrametric $k$-algebra norm. Stability of $k$, unfolded using [def-trf-stable-nonarchimedean-field], gives a basis $e_1,\\ldots,e_n$ with $s(\\sum a_i e_i)=\\max_i|a_i|d_i$, where $d_i=s(e_i)>0$. Put $c=\\min_i d_i>0$ and $C=\\max_i d_i$. Then $c\\max_i|a_i|\\le s(\\sum a_ie_i)\\le C\\max_i|a_i|$. Thus [lem-trf-weak-spectral-completion-product] applies to $E/k$: its normed completion $A=\\widehat{(E,s)}$ is an $n$-dimensional $H$-algebra, with extended norm $N$, and an isometric $H$-algebra decomposition $A\\simeq\\prod_{j=1}^r L_j$ with $N=\\max_j s_{L_j/H}$. This uses the spectral norm on $E$, which need not be its absolute value inherited from $F$.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-trf-stable-nonarchimedean-field",
+    "lem-trf-weak-spectral-completion-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, ascent, spectral completion and its norm-direct-sum decomposition"
+   }
+  },
+  {
+   "text": "The images $b_i$ of $e_i$ in $A$ form an orthogonal $H$-basis. Indeed, for $h_i\\in H$ choose $a_{i,t}\\in k$ tending to $h_i$. Scalar multiplication and the extended norm in step 2 give $$N\\left(\\sum_i h_i b_i\\right)=\\lim_t s\\left(\\sum_i a_{i,t}e_i\\right)=\\max_i|h_i|d_i.$$ For spanning, represent $z\\in A$ by an $s$-Cauchy sequence $z_t=\\sum_i a_{i,t}e_i$. The estimate $|a_{i,t}-a_{i,u}|d_i\\le s(z_t-z_u)$ makes every coordinate Cauchy in $k$. Its limit $h_i\\in H$ satisfies $N(z_t-\\sum_i h_ib_i)\\to0$, whence $z=\\sum_i h_i b_i$. The displayed formula implies linear independence because every $d_i>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, ascent, completion preserves cartesian spaces (2.4.3/8), explicit finite-coordinate argument"
+   }
+  },
+  {
+   "text": "The inclusion $E\\hookrightarrow F$ is contractive for $s$. For nonzero $z\\in E$, its monic minimal relation $z^q+\\sum_{i=1}^q a_i z^{q-i}=0$ gives $$|z|_F^q\\le\\max_i|a_i||z|_F^{q-i}.$$ If $|z|_F>s(z)=\\max_i|a_i|^{1/i}$ every term on the right is smaller than the left, a contradiction. Hence $|z|_F\\le s(z)$, also for zero. For an $s$-Cauchy sequence $z_t$, define $q([z_t])=\\lim_t z_t\\in F$. Completeness of $F$ gives the limit and the bound proves independence of representatives. Limits of sums and products show $q:A\\to F$ is a unital algebra map: Cauchy sequences are bounded and $|z_tw_t-zw|\\le\\max(|z_t||w_t-w|,|w||z_t-z|)\\to0$. For $h=[a_t]\\in H$, $q([a_tz_t])=h\\,q([z_t])$, so $q$ is $H$-linear and fixes $E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, ascent, identify the completion factor inducing the valuation of F; explicit comparison and extension"
+   }
+  },
+  {
+   "text": "Under $A\\simeq\\prod_jL_j$, the coordinate idempotents have images under $q$ in $\\{0,1\\}$, since $F$ is a field. They sum to $1$, and no two can map to $1$ since their product is zero. Thus exactly one, indexed by $j_0$, maps to $1$, and $q$ factors through a unital $H$-field embedding $\\phi:L_{j_0}\\hookrightarrow F$. Pull back the norm of $F$ along $\\phi$. It and the spectral absolute value of $L_{j_0}$ both extend the norm of the complete nontrivially valued field $H$; [lem-trf-spectral-norm-algebraic-extension] supplies the latter, and [lem-sfb-algebraic-absolute-value-unique] identifies them. The image of $\\phi$ is finite-dimensional over $H$, hence complete for its inherited norm by [lem-per-finite-normed-space-complete]. It is closed in $F$: a convergent sequence in the image is Cauchy, has a limit there by completeness, and uniqueness of metric limits identifies that limit. It contains the dense $E$, because $q$ fixes $E$, so it is all of $F$. Consequently $F$ is isometrically $H$-isomorphic to this factor.",
+   "uses": [
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-sfb-algebraic-absolute-value-unique",
+    "lem-per-finite-normed-space-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, ascent, the factor inducing the valuation on E has completion F"
+   }
+  },
+  {
+   "text": "Embed $F$ into $A$ by $\\phi^{-1}$ followed by insertion in the $j_0$th product coordinate and the inverse of the decomposition in step 2. This is an $H$-linear isometry, since the product norm of a tuple supported in one coordinate is precisely that coordinate's spectral norm. Its image is a linear subspace of the finite cartesian space of step 3. Apply [lem-trf-cartesian-subspace] to this image and pull its orthogonal basis back through the isometry. We obtain an $H$-basis of $F$ satisfying the exact maximum formula for $s_{F/H}$. Since $F/H$ was arbitrary finite separable and $H$ is complete, [lem-trf-complete-stability-separable-criterion] proves stability of $H$, including its inseparable finite extensions.",
+   "uses": [
+    "lem-trf-cartesian-subspace",
+    "lem-trf-complete-stability-separable-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, end of ascent; subspace permanence (2.3.3/4) and Proposition 3.6.2/2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-field-completion",
+  "lem-trf-complete-stability-separable-criterion",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-per-finite-normed-space-complete",
+  "lem-trf-dense-subfield-separable-descent",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "def-trf-stable-nonarchimedean-field",
+  "lem-trf-weak-spectral-completion-product",
+  "lem-sfb-algebraic-absolute-value-unique",
+  "lem-trf-cartesian-subspace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.6.2/3, printed p.158 (scan p.166), ascent direction. Indexed primary-source text read online; local archival copy absent. Finite-coordinate completion and the selected-factor map expanded by NR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The metric completion of a stable nonarchimedean valued field is stable: every finite extension of the completion has an orthogonal spectral norm basis",
+   "results": {
+    "t": "2026-10-24T15:33:10Z",
+    "tool": "leanfinder",
+    "query": "The metric completion of a stable nonarchimedean valued field is stable: every finite extension of the completion has an orthogonal spectral norm basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "Valued.completable",
+     "spectralNorm.metricSpace",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "spectralNorm.normedAddCommGroup",
+     "spectralNorm.seminormedAddCommGroup"
+    ],
+    "digest": "c08e00eb4c3d27cf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give orthogonal spectral bases over the completion of a stable field."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]table.*[Cc]ompletion|[Cc]ompletion.*[Ss]table|[Cc]artesian.*[Nn]orm|[Oo]rthogonal.*[Ss]pectral",
+   "results": {
+    "t": "2026-10-24T15:33:41Z",
+    "tool": "grep",
+    "query": "[Ss]table.*[Cc]ompletion|[Cc]ompletion.*[Ss]table|[Cc]artesian.*[Nn]orm|[Oo]rthogonal.*[Ss]pectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give orthogonal spectral bases over the completion of a stable field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of a stable nonarchimedean valued field is stable",
+   "results": {
+    "t": "2026-10-24T15:33:42Z",
+    "tool": "leansearch",
+    "query": "The completion of a stable nonarchimedean valued field is stable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instNonarchimedeanRingCompletion",
+     "instNonarchimedeanAddGroupCompletion",
+     "Valued.valuedCompletion",
+     "Valued.extensionValuation",
+     "Valued.extension",
+     "Valuation.Completion",
+     "CauSeq.Completion.Cauchy.field",
+     "AbsoluteValue.Completion"
+    ],
+    "digest": "ed17a8ce143106b5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give orthogonal spectral bases over the completion of a stable field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"Completion\"",
+   "results": {
+    "t": "2026-10-24T15:33:42Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"Completion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give orthogonal spectral bases over the completion of a stable field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability ascends to the completion of a valued field: orthogonal bases for finite spectral field extensions",
+   "results": {
+    "t": "2026-10-24T15:33:44Z",
+    "tool": "leanfinder",
+    "query": "Stability ascends to the completion of a valued field: orthogonal bases for finite spectral field extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm_extends_of_finiteDimensional",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "NumberField.InfinitePlace.Completion.instAlgebra",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "7fb46d5c4d38e0ad"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct spectral normed fields or prove completeness over an already complete base, without exact orthogonal bases."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a stable nonarchimedean valued field has orthogonal bases in every finite extension",
+   "results": {
+    "t": "2026-10-24T15:57:24Z",
+    "tool": "leanfinder",
+    "query": "The completion of a stable nonarchimedean valued field has orthogonal bases in every finite extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "Field.Emb.Cardinal.wellOrderedBasis",
+     "NumberField.instRankOneValuedAdicCompletion",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis_apply_of_eq"
+    ],
+    "digest": "a9d665d8b0ca1578"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion and spectral norm structures do not supply exact orthogonal bases from stability of the dense field."
+  },
+  {
+   "tool": "loogle",
+   "query": "spectralNorm, UniformSpace.Completion",
+   "results": {
+    "t": "2026-10-24T15:57:23Z",
+    "tool": "loogle",
+    "query": "spectralNorm, UniformSpace.Completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion and spectral norm structures do not supply exact orthogonal bases from stability of the dense field."
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*completion|completion.*stable|cartesian.*norm|orthogonal.*spectral",
+   "results": {
+    "t": "2026-10-24T15:57:22Z",
+    "tool": "grep",
+    "query": "stable.*completion|completion.*stable|cartesian.*norm|orthogonal.*spectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion and spectral norm structures do not supply exact orthogonal bases from stability of the dense field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of stable nonarchimedean fields is stable",
+   "results": {
+    "t": "2026-10-24T15:57:23Z",
+    "tool": "leansearch",
+    "query": "Completion of stable nonarchimedean fields is stable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instNonarchimedeanRingCompletion",
+     "instNonarchimedeanAddGroupCompletion",
+     "CauSeq.Completion.Cauchy.field",
+     "AbsoluteValue.Completion",
+     "UniformSpace.Completion.instInvCompletion",
+     "Valued.valuedCompletion",
+     "UniformSpace.Completion.instField.congr_simp",
+     "Valued.valuedCompletion_apply"
+    ],
+    "digest": "53b75f0e495c5718"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion and spectral norm structures do not supply exact orthogonal bases from stability of the dense field."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-dense-weak-stability-transfer",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Proposition 3.6.2/3, printed p.158 (scan PDF p.166), applied through the common completion of a dense isometric field inclusion; this is the generic dense-field transfer used explicitly in the proof of Proposition 5.3.2/3, printed p.214 (scan PDF p.220). Completion ascent half of the BGR criterion.",
+   "via": [
+    "lem-trf-dense-weak-stability-transfer",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-stable-field-completion",
+  "worker": "stage1",
+  "summary": "NR preserved the full statement and split the ascent direction of BGR 3.6.2/3. Reused separable descent and spectral-completion product; two new statement-only inputs give the separable criterion and subspace permanence. Explicitly distinguished the two norms on E, extended its inclusion contractively and identified one complete field factor isometrically. No Lean changes or compilation.",
+  "blueprint": "Historical analytic support below lem-trf-local-term-locality in its inherited ancestry; completion ascent in BGR 3.6.2/3. Read latest main-20261024 contracting-correspondence text: no chapter or unit route is changed. Whole-blueprint orthogonal/cartesian/stable-field searches found no equivalent node; same_as remains []."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NR-b82709cd8",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-b82709cd8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. BGR is absent from literature/, so the worker correctly marked it WANTED with proof_origin agent; I checked all statements mathematically instead. Steps 1-6 are sound. The descent lemma is applied as D=k⊆H⊆F with every hypothesis met. The weak-spectral-completion-product hypotheses come from the orthogonal basis of k (c,C = min/max d_i > 0). Step 4 bounds |z|_F ≤ s_{E/k}(z) correctly from the minimal relation. Step 5 selects one idempotent, identifies the absolute values by algebraic-absolute-value-unique, and gets the image closed and dense, so φ: L_{j0} ≅ F is isometric. In step 6 the H-linear isometry into Â satisfies every hypothesis of the subspace node, and the criterion then covers inseparable extensions too. The spectral formulas of lem-trf-spectral-norm-algebraic-extension and lem-trf-incomplete-spectral-algebra-norm are the same function. lem-trf-cartesian-subspace is true over any K with no completeness needed: maximal weighted-minor pivoting gives an orthogonal basis; I tested U=0, V=0, U=V and n=1. lem-trf-complete-stability-separable-criterion agrees with the Kuhlmann criterion (separably defectless + K^c/K separable ⇒ defectless) for complete K. Neither new node restates the item, and neither duplicates a DAG node (checked ultrametric-orthogonal-extension, best-approximation, almost-orthogonal-basis, dense-weak-stability-transfer). No cycle (DFS over 233 reached nodes). All cited statements are in unit sk-i-curve-zero or are Mathlib leaves, so no tool_uses are needed. Blueprint from/via/same_as are correct. No changes."
+ }
+}

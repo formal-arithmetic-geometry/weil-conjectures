@@ -12,11 +12,116 @@
   "def-weil-closed-immersion",
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism",
-  "def-weil-pbc-kahler-differentials"
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-relative-differential-sheaf",
+  "def-sbc-affine-space",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-henselization-at-prime",
+  "def-pc-base-change",
+  "def-a1-relative-differentials-pullback-map",
+  "def-pc-module-stalk-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An affine finite-type presentation embeds a neighbourhood of $x$ in affine space, which is smooth. Apply the conormal-kernel coordinate slice to this or any supplied smooth envelope. Its $M_0$ contains $X$ and has differential fibre $V/K$, canonically the differential fibre of $X$ by the kernel definition. Thus it is minimal; this proves existence and the inside-envelope assertion.",
+   "uses": [
+    "lem-trf-conormal-kernel-coordinate-slice",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Assembly of the retained coordinate route; old Steps [1, 2, 3], as exposed by the cited statements."
+   }
+  },
+  {
+   "text": "For two minimal envelopes, identify their $X$ germs. The compatible-coordinate lifting lemma supplies etale maps $e_a$ agreeing on $X$. Apply the two-etale case of the fibre-product refinement: the two inverse images of $X$ are the same specified copy, with marked residue field unchanged. These are the required common pointed closed pairs.",
+   "uses": [
+    "lem-trf-cotangent-isomorphism-coordinate-lift",
+    "lem-trf-etale-fibre-product-pair-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Assembly of the retained coordinate route; old Steps [4, 5], as exposed by the cited statements."
+   }
+  },
+  {
+   "text": "Apply the pointed-etale henselization isomorphism to each projection at the marked point. Its quotient compatibility identifies both closed quotients with the henselization of $X$ and preserves its given identification. Compose one ambient isomorphism with the other's inverse. This gives the henselian existence formulation; the common etale neighbourhood was already constructed, so no algebraization of a prescribed isomorphism is needed.",
+   "uses": [
+    "lem-trf-pointed-etale-henselization-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Assembly of the retained coordinate route; old Steps [6], as exposed by the cited statements."
+   }
+  },
+  {
+   "text": "For a smooth closed pair $N\\hookrightarrow M$ and $y\\in N$, the smooth-pair local coordinates give an etale $h=(g,f):U\\to\\mathbf A^{d+r}_k$ with $N\\cap U=h^{-1}(\\mathbf A^d\\times0)$ and $e_N=g|_{N\\cap U}$ etale. Shrink $U$ to an affine $W\\ni y$; open restriction keeps $h$ etale. Apply the one-etale refinement to $W\\times_{\\mathbf A^d}(N\\cap W)$ using $g,e_N$. It gives an etale ambient neighbourhood $P$ with $p^{-1}N=s(N)$ and a retraction $q:P\\to N$. The map $(q,f):P\\to N\\times\\mathbf A^r$ is the restriction of the base change of $h$, hence etale. Thus $q$ is smooth of relative dimension $r$, by affine-space smoothness and relative-dimension composition.",
+   "uses": [
+    "lem-pur-smooth-pair-local-coordinates",
+    "lem-trf-etale-fibre-product-pair-refinement",
+    "def-pc-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE (lemma-etale-local-structure) as stated by lem-pur-smooth-pair-local-coordinates; etale.tex Tag 024T via the refinement node; morphisms.tex Tags 02GO, 02NL. Old Steps [7, 8]."
+   }
+  },
+  {
+   "text": "The centred smooth-section chart theorem applies to $q$ and its closed section. It supplies affine $T,U$, the Cartesian zero section, actual regular coordinate parameters generating the section ideal, and the augmentation quotient $\\Gamma(T)$. Compose the etale ambient maps. Apply this also to $M_0\\hookrightarrow M$ from Step 1: it adjoins or eliminates transverse parameters. Empty parameter lists give the same conclusions for $r=0$.",
+   "uses": [
+    "lem-sc-smooth-section-affine-coordinates",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Assembly of the retained coordinate route; old Steps [9], as exposed by the cited statements."
+   }
+  },
+  {
+   "text": "For ideals use affine quotients. If $B\\twoheadrightarrow A=B/I$ and $B\\to C$ has $C/IC=A$, then $\\pi^{-1}J$ is generated by $I$ and lifts of elements of $J$; extension to $C$ is exactly the inverse image of $J$. In a transverse chart quotient by its parameters gives the same formula. These equalities on affine restrictions prove the specified ideal-sheaf compatibility.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Assembly of the retained coordinate route; old Steps [10], as exposed by the cited statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-conormal-kernel-coordinate-slice",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-cotangent-isomorphism-coordinate-lift",
+  "lem-trf-etale-fibre-product-pair-refinement",
+  "lem-trf-pointed-etale-henselization-isomorphism",
+  "lem-pur-smooth-pair-local-coordinates",
+  "def-pc-base-change",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-smooth-section-affine-coordinates",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Coordinate assembly of the old proof, following the displayed Stacks sources of the five new intermediate lemmas; retained under the released keep_plan repair order."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +157,52 @@
    "results": "{\"t\": \"2026-10-19T13:47:54Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-smooth-embedding-etale-comparison: Minimal smooth envelopes of a finite type scheme have common etale comparison and smooth closed pairs admit local tubular retraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Manifold.IsSmoothEmbedding.isEmbedding\", \"Manifold.isSmoothEmbedding_iff\", \"Manifold.IsSmoothEmbedding.isImmersion\", \"Manifold.IsSmoothEmbedding.casesOn\", \"Manifold.IsSmoothEmbedding.mk\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\"], \"digest\": \"ad52c0d5cf6064af\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; adic filtrations, univariate Weierstrass division, smooth algebra presentations and etale loci do not state this multivariate Taylor/diagram or embedding comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalEmbedding|smoothEnvelope|embedding.*[eé]tale|[eé]tale.*embedding",
+   "results": "{\"t\": \"2026-10-22T04:37:41Z\", \"tool\": \"grep\", \"query\": \"minimalEmbedding|smoothEnvelope|embedding.*[eé]tale|[eé]tale.*embedding\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned etale/smooth chart and locus declarations or manifold embedding declarations; none states minimal ambient comparison, a common Cartesian neighbourhood, or a tubular retraction for a smooth closed pair."
+  },
+  {
+   "tool": "leansearch",
+   "query": "minimal embeddings in smooth schemes and etale tubular neighbourhood of a smooth closed subscheme",
+   "results": "{\"t\": \"2026-10-22T04:37:42Z\", \"tool\": \"leansearch\", \"query\": \"minimal embeddings in smooth schemes and etale tubular neighbourhood of a smooth closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Manifold.isSmoothEmbedding_iff\", \"Manifold.IsSmoothEmbedding.isEmbedding\", \"Manifold.IsSmoothEmbedding.mk\", \"SmoothBumpCovering.embeddingPiTangent_coe\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Manifold.IsSmoothEmbedding\", \"Manifold.IsSmoothEmbedding.isImmersion\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"3ed06623fd2f0ac8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned etale/smooth chart and locus declarations or manifold embedding declarations; none states minimal ambient comparison, a common Cartesian neighbourhood, or a tubular retraction for a smooth closed pair."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"exists\"",
+   "results": "{\"t\": \"2026-10-22T04:37:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"exists\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsEtaleAt.exists_isStandardEtale\"], \"digest\": \"59009f1e8d0939ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned etale/smooth chart and locus declarations or manifold embedding declarations; none states minimal ambient comparison, a common Cartesian neighbourhood, or a tubular retraction for a smooth closed pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-embedding-etale-comparison: minimal smooth ambient embeddings of a finite type scheme have a common etale neighbourhood preserving their closed subscheme",
+   "results": "{\"t\": \"2026-10-22T04:37:49Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-embedding-etale-comparison: minimal smooth ambient embeddings of a finite type scheme have a common etale neighbourhood preserving their closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"f177e36690cc5c4e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned etale/smooth chart and locus declarations or manifold embedding declarations; none states minimal ambient comparison, a common Cartesian neighbourhood, or a tubular retraction for a smooth closed pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-embedding-etale-comparison: lifting a closed immersion to compare two minimal smooth ambient schemes by etale morphisms",
+   "results": "{\"t\": \"2026-10-22T04:37:50Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-embedding-etale-comparison: lifting a closed immersion to compare two minimal smooth ambient schemes by etale morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsImmersion\"], \"digest\": \"f3b1d031a0a5a6c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned etale/smooth chart and locus declarations or manifold embedding declarations; none states minimal ambient comparison, a common Cartesian neighbourhood, or a tubular retraction for a smooth closed pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-embedding-etale-comparison: minimal smooth embeddings have common etale neighbourhoods and smooth closed pairs admit transverse tubular coordinates",
+   "results": "{\"t\": \"2026-10-23T12:11:25Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-embedding-etale-comparison: minimal smooth embeddings have common etale neighbourhoods and smooth closed pairs admit transverse tubular coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Manifold.isSmoothEmbedding_iff\", \"Manifold.IsImmersionAtOfComplement.small\", \"Manifold.IsSmoothEmbedding.isImmersion\", \"Manifold.IsImmersionAtOfComplement.property\", \"SmoothBumpCovering.exists_immersion_euclidean\", \"Manifold.ImmersionAtProp\", \"Manifold.IsImmersionAtOfComplement_def\", \"Manifold.IsImmersionAt.property\"], \"digest\": \"09f58d67f6bd6e76\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: manifold embeddings and generic smooth charts do not state the scheme closed-pair comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-hilbert-samuel-local-presentations",
@@ -87,5 +234,86 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-embedding-etale-comparison",
+  "worker": "stage1",
+  "summary": "Q66 repairs the released human re-split order with independently stated unsplit intermediate arguments (four after review). The ten old steps are preserved verbatim in report.md and mapped to new coordinate-slice, compatible-coordinate, fibre-product-refinement and pointed-henselization nodes, plus existing centred-section input and elementary assembly. Statement and statement dependencies unchanged; assembly under 3000 characters. Maintainer review (Q66 reader): the adapted-coordinate node duplicated the existing split node lem-pur-smooth-pair-local-coordinates (Stacks 0FUE), which gives everything Step 4 uses; it is dropped and that node is cited.",
+  "blueprint": "Retains the historical nearby-duality/alteration route in blueprint.from.place under the explicit keep_plan repair order; no new chapter or unit route. New nodes implement old Steps 1--6 and 8; the existing smooth-pair local-coordinate node implements Step 7; existing centred-section input implements Step 9 and elementary ideal calculation implements Step 10. Latest blueprint ancestor was read; its current contracting-correspondence proof is distinct from this retained historical local resolution input.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-section-affine-coordinates",
+    "why": "Generic smooth-section chart / smooth relative-dimension composition used as a black box in assembly; no resolution-specific replacement in the item unit."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic smooth-section chart / smooth relative-dimension composition used as a black box in assembly; no resolution-specific replacement in the item unit."
+   },
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "Generic etale-local coordinates of a smooth closed pair (Stacks 0FUE) used as a black box in Step 4; no node of the item unit states it, and it replaces the dropped duplicate adapted-coordinate node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-pur-etale-at-point-from-differentials",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-pur-conormal-sequence-smooth-immersion",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-universal-property",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-pur-smooth-pair-local-coordinates"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-4b569adc6",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-4b569adc6 (reviewer sub-agent of L); spot-checked: FIX: one duplicate new node is dropped and assembly Step 4 is re-cited. Everything else is correct and meets the released re-split order of 2026-10-21/22 (at least 3 new nodes, assembly of at most 3000 characters, every old argument kept). The item is not superseded: live still has the 10-step Q73 proof. Field diff against live: only split-owned fields change; statement, stmt_deps, lean and reviewed_lean are untouched. No SGA cited. Mapping of the old proof: Steps 1-3 go to the conormal-kernel slice (00RU and 00DF right exactness give K as the span of df, then 02GU for e, a Cartesian zero slice, and Omega_{M_0} tensor L = V/K by Leibniz); Step 4 goes to the coordinate-lift node (054L chart, 0H93 basis, lifts through the surjective affine quotient, agreement on X with nilpotents); Steps 5 and 8 go to the fibre-product refinement (024T(3) read in etale.tex: a section of a separated etale map is clopen; F_i is closed in P by 01QR; deleting the complement gives U x_{M_a} X = s(X) and kappa(z) = kappa(x)); Step 6 goes to the pointed henselization isomorphism (0A02 locality, 08HQ pointed lift, mutual inverses from the universal properties, 05WQ quotients; the residue hypothesis is needed, e.g. Q to Q(i)); Step 9 is the existing centred chart; Step 10 is an elementary ideal identity. Small cases checked: k[t]/(t^2), the node in A^3, X = {1} with M_2 = G_m and e_2 = t^2, r=0, empty X, J=0 and J=A. No new node restates the item or one of its clauses. Duplicate: lem-trf-smooth-pair-adapted-coordinate-completion duplicates for Step 4 the existing split node lem-pur-smooth-pair-local-coordinates (Stacks more-morphisms 0FUE, read; Lean stage-2 reviewed pass). That node gives an etale h=(g,f) with N cut out Cartesian and g restricted to N etale, so e_N := g restricted to N meets every need of Step 4; the report's duplicate search missed it (C5). Fix in fixes/dag/nodes/sec-trace-formula/lem-trf-smooth-embedding-etale-comparison.json: Step 4 cites that node, adds lem-weil-pbc-etale-composition-cancellation for the open restriction and shrinks to an affine W; proof_deps are recomputed; split_report is updated and gets a tool_uses entry for the 0FUE node. No cycle: the closure of the 0FUE node has 450 nodes and does not contain the item. Assembly is 2636 characters; 4 new nodes remain. Accepted tool uses: lem-sbc-smooth-relative-dimension-permanence, lem-sc-smooth-section-affine-coordinates (same unit), lem-pur-smooth-pair-local-coordinates.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MinimalSmoothEnvelopeComparison",
+  "declaration": "AlgebraicGeometry.Scheme.exists_minimal_smooth_envelope",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.IsMinimalSmoothEnvelope",
+   "AlgebraicGeometry.smoothEnvelopeHenselizationMap",
+   "AlgebraicGeometry.Scheme.exists_minimal_smooth_envelope",
+   "AlgebraicGeometry.Scheme.Hom.exists_minimal_closed_smooth_envelope_inside",
+   "AlgebraicGeometry.Scheme.Hom.exists_common_etale_minimal_smooth_envelopes",
+   "AlgebraicGeometry.Scheme.Hom.minimal_smooth_envelopes_henselian_comparison",
+   "AlgebraicGeometry.Scheme.Hom.exists_etale_smooth_closed_pair_retraction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MinimalSmoothEnvelopeComparison.lean",
+  "statement": "theorem Scheme.exists_minimal_smooth_envelope (k : Type u) [Field k] [CharZero k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) [LocallyOfFiniteType p] [QuasiCompact p] (x : X) : ∃ (U : X.Opens) (hx : x ∈ U) (M : Scheme.{u}) (q : M ⟶ Spec (.of k)) (i : U.toScheme ⟶ M), i ≫ q = U.ι ≫ p ∧ q.IsMinimalSmoothEnvelope i ⟨x, hx⟩",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The node has five assertion clauses, recorded by the five theorems listed in declarations; the primary signature is local existence. IsMinimalSmoothEnvelope expands the node's definition using the recorded canonical differential map, stalk functor and residue extension. smoothEnvelopeHenselizationMap is the explicit structural map required by the henselian comparison. All theorem proofs are sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0dfbb5591",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read all 5 theorems and 2 defs against node clauses and dep declarations (relativeDifferentialsPullbackMap, moduleStalkFunctor, IsHenselizationAtPrime', IdealSheafData.map/comap, AffineSpace, IsRegular). Minimality = IsIso of κ(x)-extended stalk of canonical differential map; existence Zariski-local (node's 'restriction and etale localization', proved by Steps 1-3); common étale nbhd with Cartesian squares and ideal identities true via Mathlib comap = preimage ideal; henselian comparison pins b_k by universal property, b2∘e=b1, over k; tubular chart gives retraction, zero-section Cartesian square, regular coordinate sequence, section ideal on all affines, augmentation quotient, ideal identities. Edge cases r=0, empty, nonclosed points, singular X OK. statement verbatim; stmt_deps only add two landed def nodes; proof_dep modules imported; not dropped; no live Lean record; sorry-only; docstrings OK. Advisory: def-weil-pbc-henselian-terminology only in proof_deps."
+ }
 }

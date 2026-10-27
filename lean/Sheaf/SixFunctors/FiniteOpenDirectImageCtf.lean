@@ -12,15 +12,8 @@ public import Sheaf.Paper.ConstantModelTorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
-import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
-import Sheaf.AlgebraicGeometry.OpenDirectImageClassicalAmplitude
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
-import Sheaf.Paper.ModuleRingedToposDerivedComparison
-import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
-import Sheaf.Paper.OpenTorBoundArbitraryField
-import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.SixFunctors.FiniteCtfInternalEtaleRealization
+import Sheaf.SixFunctors.FiniteEtaleOpenUniformTorImage
 
 /-!
 # Finite-coefficient open direct image with a uniform Tor interval
@@ -58,33 +51,17 @@ Source: blueprint main-20261015, sk-thm-sf-ctf-stability-direct-images.proof.md,
 paragraph (3), finite-coefficient open case
 (blueprint: lem-sfb-finite-open-direct-image-ctf).
 
-Proof plan:
-1. If A is nonzero, finiteness makes A Noetherian and every finite A-module finitely
-presented. The scalar ℓ is invertible over k. The separated finite-type schemes U,X are
-qcqs (lem-weil-pbc-qcqs-over-affine), and j is qcqs by
-lem-weil-pbc-qcqs-morphism-permanence.
-2. Apply lem-sf-module-object-ordinary-coefficient-equivalence to the actual internal
-coefficient ring. Descend the bounded constructible ordinary pro-etale complex to an
-etale complex L using sk-thm-pe-constructible-comparison; the exact interval [a,b] is
-reflected by det-pe-finite-tor-comparison-noetherian. Thus L is bounded above and below.
-3. By det-geo-open-finiteness-ii-amplitude choose d = cd(j), the nonnegative finite
-relative cohomological dimension (def-kun-cd). It bounds every higher module direct
-image and depends only on j and the fixed coefficients, not on K,a,b or cd(k).
-4. The Noetherian coefficient ring, bounded-above L, and the uniform cohomological bound
-allow lem-sf-projection-finite-constant for every finite A-module. Then
-lem-sf-open-tor-bound-arbitrary-field gives Tor interval [a,b+d] against every etale
-module sheaf, using bounded-below L and these projection isomorphisms.
-5. By cor-fin-deligne-open-finite-coefficients the same ordinary etale Rj_*L is bounded
-constructible: the schemes have finite type over k and ℓ is invertible there.
-6. Use lem-sfb-ordinary-proetale-direct-image-plus-comparison on the bounded-below input.
-Use sk-thm-pe-constructible-comparison and det-pe-finite-tor-comparison-noetherian on X
-for constructibility and the full Tor interval. The compatibility from
-lem-pd-module-ringed-topos-derived-comparison and the finite-discrete equivalence
-identify this with the specified total derived internal module direct image and reflect
-both conclusions back to it.
-7. If A is the zero ring all unital modules vanish; take d=0. The zero complex and an
-empty source have zero direct image and every Tor interval. The single d from step 3
-works for every K,a,b, and none of these steps assumes a separably closed field.
+Proof:
+Choose the normalized finite-discrete encoding and use the internal-etale realization
+for each ordered Tor interval. The etale open-image theorem gives a natural-number
+bound d before the input complex and its interval are chosen, including zero rings.
+Lift the internal input through the realization equivalence on U. Its etale antecedent
+is bounded constructible, hence bounded below. The etale theorem gives a bounded
+constructible direct image of amplitude [a,b+d]. Realize this object on X and use the
+bounded-below direct-image comparison and the input isomorphism to identify it with
+the specified internal direct image. Transport constructibility and Tor amplitude
+along this isomorphism. These comparisons also apply to the zero complex and empty
+schemes, without a separable-closedness hypothesis on k.
 -/
 theorem finiteOpenDirectImage_constantModel_torAmplitude
     (ℓ p : ℕ) [Fact ℓ.Prime]
@@ -111,6 +88,54 @@ theorem finiteOpenDirectImage_constantModel_torAmplitude
       DerivedCategory.torAmplitudeIn _ a (b + d)
         ((moduleObjectDerivedPushforward
           (Profinite.continuousMapRingObjOfUniverse.{u, u} A) j).obj K) := by
-  sorry
+  classical
+  let E (T : Scheme.{u}) := (FiniteDiscreteOrdinary.encoding_exists A T).some
+  obtain ⟨hreal, hpush⟩ := FiniteDiscreteOrdinary.finiteCtfInternalEtaleRealization
+    ℓ p k _hp _hne A E
+  have hA : ∃ n : ℕ, 1 ≤ n ∧ (ℓ : ULift.{u + 1} A) ^ n = 0 := by
+    obtain ⟨n, hn, hnil⟩ := _hA
+    refine ⟨n, hn, ?_⟩
+    apply ULift.ext
+    exact hnil
+  obtain ⟨d, _, _, hd⟩ := Etale.finiteEtaleOpen_uniformTorImage
+    ℓ p k _hp (Ne.symm _hne) (ULift.{u + 1} A) hA j
+  refine ⟨(d : ℤ), Int.natCast_nonneg d, ?_⟩
+  intro a b hab K hK htK
+  let V : Over (Spec (.of k)) := Over.mk (U ↘ Spec (.of k))
+  let T : Over (Spec (.of k)) := Over.mk (X ↘ Spec (.of k))
+  have : LocallyOfFiniteType V.hom :=
+    inferInstanceAs (LocallyOfFiniteType (U ↘ Spec (.of k)))
+  have : QuasiCompact V.hom := inferInstanceAs (QuasiCompact (U ↘ Spec (.of k)))
+  have : IsSeparated V.hom := inferInstanceAs (IsSeparated (U ↘ Spec (.of k)))
+  have : LocallyOfFiniteType T.hom :=
+    inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (.of k)))
+  have : QuasiCompact T.hom := inferInstanceAs (QuasiCompact (X ↘ Spec (.of k)))
+  have : IsSeparated T.hom := inferInstanceAs (IsSeparated (X ↘ Spec (.of k)))
+  let f : V ⟶ T := j.asOver (Spec (.of k))
+  obtain ⟨eU, ⟨heU⟩⟩ := hreal V a b hab
+  let L := eU.inverse.obj ⟨K, hK, htK⟩
+  let eL : (FiniteDiscreteOrdinary.internalEtaleRealization A U (E U)).obj L.obj ≅ K :=
+    (heU.app L).symm ≪≫ (ObjectProperty.ι _).mapIso
+      (eU.counitIso.app ⟨K, hK, htK⟩)
+  obtain ⟨_, hQ, htQ⟩ := hd a b hab L.obj L.property.1 L.property.2
+  have habd : a ≤ b + (d : ℤ) := le_trans hab (le_add_of_nonneg_right (by omega))
+  obtain ⟨eX, ⟨heX⟩⟩ := hreal T a (b + (d : ℤ)) habd
+  let Q := eX.functor.obj ⟨_, hQ, htQ⟩
+  have hplus : ∃ n : ℤ, L.obj.IsGE n := by
+    obtain ⟨c, e, hce⟩ := L.property.1.2
+    exact ⟨c, (DerivedCategory.isGE_iff _ _).2 fun i hi ↦ hce.2 i (Or.inl hi)⟩
+  have : QuasiCompact f.left := inferInstanceAs (QuasiCompact j)
+  have : QuasiSeparated f.left := inferInstanceAs (QuasiSeparated j)
+  obtain ⟨epush⟩ := hpush V T f
+  let eQ := (heX.app ⟨_, hQ, htQ⟩) ≪≫ epush.app ⟨L.obj, hplus⟩ ≪≫
+    (moduleObjectDerivedPushforward (FiniteDiscreteOrdinary.coefficient A) j).mapIso eL
+  have : (constantModelBoundedConstructible
+      (FiniteDiscreteOrdinary.coefficient A) X).IsClosedUnderIsomorphisms :=
+    (constantModelConstructibleFiniteTor_wellDefined
+      (FiniteDiscreteOrdinary.coefficient A) X).2.1
+  exact ⟨(constantModelBoundedConstructible
+      (FiniteDiscreteOrdinary.coefficient A) X).prop_of_iso eQ Q.property.1,
+    (DerivedCategory.torAmplitudeIn (FiniteDiscreteOrdinary.Internal A X)
+      a (b + (d : ℤ))).prop_of_iso eQ Q.property.2⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

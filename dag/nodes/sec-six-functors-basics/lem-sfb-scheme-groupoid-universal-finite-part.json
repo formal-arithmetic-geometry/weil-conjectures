@@ -1,0 +1,426 @@
+{
+ "id": "lem-sfb-scheme-groupoid-universal-finite-part",
+ "kind": "statement",
+ "title": "The universal finite-part groupoid over a separated etale scheme",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $(U,R,s,t,e,i,c)$ be an $S$-groupoid scheme [def-a1-groupoid-scheme]; this means that the displayed maps are $S$-maps and satisfy the groupoid laws on every test $S$-scheme. Suppose $s,t:R\\to U$ are separated (closed-immersion diagonals [def-weil-closed-immersion]), flat [def-weil-flat-morphism], and locally of finite presentation [def-sbc-locally-finite-presentation]. For an $S$-scheme $T$, let $F(T)$ be the set of pairs $(a,Z)$ where $a:T\\to U$ and $Z\\subseteq R\\times_{s,U,a}T$ is an open subscheme, finite over $T$ [def-weil-finite-integral-morphism], containing the section $(e\\circ a,1_T)$. Pullback defines $F$ on test schemes. There is an $S$-scheme $M$ with a natural bijection $\\operatorname{Mor}_S(T,M)\\simeq F(T)$ for every $T$, under which $g:M\\to U$ sends $(a,Z)$ to $a$; $g$ is separated and etale [def-weil-etale-morphism]. There is a universal open and closed subscheme $Q\\subseteq R\\times_{s,U,g}M$ [def-weil-open-immersion, def-pc-fibre-product], whose pullback at $(a,Z)$ is $Z$. A $T$-point of $Q$ is a triple $(a,Z,z)$ with $z:T\\to R$, $s\\circ z=a$, and $(z,1_T)$ factoring through $Z$. These schemes carry a groupoid $(M,Q)$ over $S$ [def-a1-groupoid-scheme] with source $(a,Z,z)\\mapsto(a,Z)$ and target $(a,Z,z)\\mapsto(t\\circ z,Z\\circ z^{-1})$. Here $Z\\circ z^{-1}$ is the image of $Z$ under the translation isomorphism $R\\times_{s,U,a}T\\to R\\times_{s,U,tz}T$, $r\\mapsto c(r,i(z))$. The unit is $(a,Z,e(a))$, inverse sends $(a,Z,z)$ to $(tz,Z\\circ z^{-1},i(z))$, and composition sends composable triples with arrows $z_1,z_2$ to the triple with source object $(a_2,Z_2)$ and arrow $c(z_1,z_2)$. Both projections $Q\\to M$ are finite locally free [def-pc-finite-locally-free]. The map $Q\\to R$, $(a,Z,z)\\mapsto z$, together with $g$, is a morphism of groupoids. The induced map $j:Q\\to R_M:=M\\times_{g,U,s}R\\times_{t,U,g}M$, sending a triple to its arrow and its source and target objects, is an open immersion and a morphism of groupoids identical on objects. No affineness, local quasi-finiteness or pointed stabilizer hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04RU (lemma-finite-part-groupoid), including the preceding section-finite-part-groupoid construction; Tag 04RI (lemma-finite-separated-flat-locally-finite-presentation) and Tag 04RR (lemma-finite-plus-section) give scheme representability and separated etaleness. The canonical open immersion into the restricted relation is the first paragraph of Tag 0DTC (lemma-splitting). Flatness and local finite presentation of the finite projections follow from the universal open in the source base change and inversion, as in Tag 0DTD (lemma-splitting-scheme); finite locally free has the finite, flat, locally finitely presented meaning of def-pc-finite-locally-free."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-section-marked-finite-parts-scheme] to $f=s:R\\to U$ and $\\sigma=e$. The groupoid unit law gives $se=1_U$, and all three morphism hypotheses are assumptions of the item. Its functor is exactly $F$, so it supplies the representing scheme $M$, the separated etale forgetful map $g$, and the universal open and closed $Q\\subseteq R\\times_{s,U,g}M$, finite over $M$ and containing the unit. The universal pair pulls back to the given pair by the stated natural representing bijection. The residue-field-point assertion of the cited lemma is not needed.",
+   "uses": [
+    "lem-sfb-section-marked-finite-parts-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 04RI (lemma-finite-separated-flat-locally-finite-presentation), 04RR (lemma-finite-plus-section), 04PH (lemma-finite-separated); section-finite-part-groupoid, universal family"
+   }
+  },
+  {
+   "text": "A finitely presented algebra has finitely many algebra generators, so the local affine definition of local finite presentation [def-sbc-locally-finite-presentation] implies local finite type [def-weil-finite-type-morphism]; thus $s,t$ satisfy the hypotheses of [lem-sfb-universal-finite-parts-groupoid]. Apply that node to the representing $M$, the map $g$, and the universal $Q$ from step 1. It gives the claimed triple description, all five structure maps, their groupoid identities, the morphism $(M,Q)\\to(U,R)$, and finiteness of both projections. In particular the translated family is the image under $r\\mapsto c(r,i(z))$ with inverse $r\\mapsto c(r,z)$. The hypothesis of this citation is representability already obtained in step 1; no finiteness of the entire source fibre is assumed.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-universal-finite-parts-groupoid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU (lemma-finite-part-groupoid), section-finite-part-groupoid, formulas for s-prime, t-prime, e-prime, i-prime and c-prime"
+   }
+  },
+  {
+   "text": "Put $P=R\\times_{s,U,g}M$ and let $q:Q\\to R$ be the arrow map. The projection $P\\to R$ is etale by [lem-weil-pbc-etale-scheme-base-change], since it is the base change of $g$. The inclusion $Q\\hookrightarrow P$ is etale, and hence $q$ is etale, by clauses (1),(2) of [lem-weil-pbc-etale-composition-cancellation]. For the commutative squares $sq=gs_Q$ and $tq=gt_Q$, apply [lem-sfb-scheme-etale-source-target-properties] with the two etale vertical maps $q,g$, first for flatness and then for local finite presentation. Since $s,t$ have these properties, so do $s_Q,t_Q$. They are finite by step 2, and therefore finite locally free by [def-pc-finite-locally-free]. This uses only etale base change and the cited source-and-target property, with no quasi-compactness assumption on $R$ or $U$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU, universal open source projection; scheme-property argument using Descent Tags 04R1 (lemma-local-source-target-characterize), 04R3 (remark-list-local-source-target)"
+   }
+  },
+  {
+   "text": "The restriction $R_M=M\\times_{g,U,s}R\\times_{t,U,g}M$ has the groupoid operations obtained by retaining the two endpoints and using those of $R$; their identities follow componentwise. The morphism from step 2 defines $j:Q\\to R_M$ by its source, arrow and target. Comparing these three projections shows that $j$ respects every operation and is identical on objects. Forgetting the target gives $p:R_M\\to P$, the base change of the separated etale map $g$ along $P\\to U$, $(r,m)\\mapsto t(r)$. It is separated etale by [lem-weil-pbc-separated-base-change] and [lem-weil-pbc-etale-scheme-base-change]. Its pullback $E=Q\\times_P R_M\\to Q$ has both properties by the same nodes. Since $pj$ is the inclusion $Q\\hookrightarrow P$, $j$ gives a section $k:Q\\to E$. By [lem-weil-pbc-etale-section-clopen-immersion], $k$ is an open immersion. Also $E\\to R_M$ is an open immersion by [lem-weil-pbc-open-immersion-base-change]. Their composite is $j$. A composite of two isomorphisms onto open subschemes is again such an isomorphism, so [def-weil-open-immersion] gives the required open immersion.",
+   "uses": [
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0DTC (lemma-splitting), first paragraph, expanded through a section of the separated etale projection; Schemes 01KU and Morphisms 02GO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-section-marked-finite-parts-scheme",
+  "lem-sfb-universal-finite-parts-groupoid",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-separated-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tags 04RI, 04RR, 04RU, and first paragraph of 0DTC; etale source-and-target property from Descent 04R1, 04R3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite part of a separated flat locally finitely presented scheme groupoid represented by the scheme of open finite subschemes of the source fibres containing the unit",
+   "results": {
+    "t": "2026-10-23T13:11:43Z",
+    "tool": "leanfinder",
+    "query": "Finite part of a separated flat locally finitely presented scheme groupoid represented by the scheme of open finite subschemes of the source fibres containing the unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀",
+     "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S"
+    ],
+    "digest": "d50b09050255e30d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe individual finite/etale morphisms and affine opens, not representability of finite open families containing the unit or the universal internal groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of finite clopen subschemes containing a section is represented by a separated etale scheme and has a universal finite subgroupoid",
+   "results": {
+    "t": "2026-10-23T13:11:44Z",
+    "tool": "leanfinder",
+    "query": "The functor of finite clopen subschemes containing a section is represented by a separated etale scheme and has a universal finite subgroupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+     "AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀"
+    ],
+    "digest": "aea11d52fdd169c8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe individual finite/etale morphisms and affine opens, not representability of finite open families containing the unit or the universal internal groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal finite part of a scheme groupoid with separated flat locally finitely presented source map is a finite locally free groupoid on a separated etale scheme",
+   "results": {
+    "t": "2026-10-23T13:26:19Z",
+    "tool": "leanfinder",
+    "query": "Universal finite part of a scheme groupoid with separated flat locally finitely presented source map is a finite locally free groupoid on a separated etale scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme"
+    ],
+    "digest": "4bc5e85183719850"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe individual finite/etale morphisms and affine opens, not representability of finite open families containing the unit or the universal internal groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T13:11:42Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe individual finite/etale morphisms and affine opens, not representability of finite open families containing the unit or the universal internal groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.part|finitePart|finite.*subgroupoid",
+   "results": {
+    "t": "2026-10-23T13:11:41Z",
+    "tool": "grep",
+    "query": "finite.part|finitePart|finite.*subgroupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe individual finite/etale morphisms and affine opens, not representability of finite open families containing the unit or the universal internal groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite part of a scheme morphism with a section is represented by an etale scheme with a universal finite open subscheme",
+   "results": {
+    "t": "2026-10-23T13:11:42Z",
+    "tool": "leansearch",
+    "query": "The finite part of a scheme morphism with a section is represented by an etale scheme with a universal finite open subscheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.IsFinite.casesOn",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.isFinite_iff",
+     "AlgebraicGeometry.IsFinite",
+     "AlgebraicGeometry.IsFinite.mk"
+    ],
+    "digest": "3613f589b81d98be"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe individual finite/etale morphisms and affine opens, not representability of finite open families containing the unit or the universal internal groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated flat locally finitely presented scheme morphism, the functor of finite open subschemes of its base changes is represented by a separated etale scheme",
+   "results": {
+    "t": "2026-10-23T14:33:01Z",
+    "tool": "leanfinder",
+    "query": "For a separated flat locally finitely presented scheme morphism, the functor of finite open subschemes of its base changes is represented by a separated etale scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.Scheme.instHasPullbacksEtale"
+    ],
+    "digest": "1d21deea85c24252"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual morphism properties, etale sites, local representability requiring charts, or unrelated groupoids; none represents this finite-part groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T14:34:28Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual morphism properties, etale sites, local representability requiring charts, or unrelated groupoids; none represents this finite-part groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.part|finitePart|finite.*subgroupoid",
+   "results": {
+    "t": "2026-10-23T14:34:28Z",
+    "tool": "grep",
+    "query": "finite.part|finitePart|finite.*subgroupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual morphism properties, etale sites, local representability requiring charts, or unrelated groupoids; none represents this finite-part groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal finite open source parts of a scheme groupoid form a finite locally free groupoid",
+   "results": {
+    "t": "2026-10-23T14:34:29Z",
+    "tool": "leansearch",
+    "query": "Universal finite open source parts of a scheme groupoid form a finite locally free groupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "idGroupoid",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "Pregroupoid.groupoid",
+     "StructureGroupoid.mk",
+     "StructureGroupoid",
+     "IsFreeGroupoid",
+     "AlgebraicGeometry.IsFinite.instLocallyOfFiniteType"
+    ],
+    "digest": "ecdab59e9132f8ff"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual morphism properties, etale sites, local representability requiring charts, or unrelated groupoids; none represents this finite-part groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal groupoid in schemes whose objects are finite open source fibres containing the identity and whose arrows translate the selected finite part",
+   "results": {
+    "t": "2026-10-23T14:37:11Z",
+    "tool": "leanfinder",
+    "query": "Internal groupoid in schemes whose objects are finite open source fibres containing the identity and whose arrows translate the selected finite part",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme",
+     "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+     "AlgebraicGeometry.Scheme.Hom.discrete_fiber",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "CategoryTheory.PreGaloisCategory.PointedGaloisObject",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "CategoryTheory.PreGaloisCategory.FiberFunctor"
+    ],
+    "digest": "b39d8206c99f742b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual morphism properties, etale sites, local representability requiring charts, or unrelated groupoids; none represents this finite-part groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-groupoid-affine-stabilizer-splitting",
+  "date": "2026-10-23",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Pointed finite-groupoid etale neighbourhoods of finite-inertia DM stacks. Substep: Tag 0DU4 application of the affine scheme groupoid splitting lemma; this node gives no stack quotient or neighbourhood of a stack. Universal finite-part construction used before choosing the stabilizer-supported point (Stacks 04RU, 04RI, 04RR; 0DTC first paragraph).",
+   "via": [
+    "lem-sfb-etale-groupoid-affine-stabilizer-splitting",
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-groupoid-universal-finite-part",
+  "worker": "stage1",
+  "summary": "Reused the existing general section-marked parameter scheme and translation-groupoid nodes; proved finite local freeness with etale source-and-target permanence and proved the restricted-relation open immersion by a section of a separated etale base change. No new nodes or statement changes.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting alteration/moduli route; this prerequisite realizes the universal finite-part construction of Stacks 04RU and its open embedding in 0DTC. Current latest direct-images proof (3) read; no chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-8d1ed0145",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-8d1ed0145 (reviewer sub-agent of L); spot-checked: Read in full against Stacks spaces-more-groupoids section-finite-part-groupoid (l.2039ff), 04RU (l.2139) and 0DTC first proof paragraph (l.2366ff). The statement, stmt_deps and source are unchanged from side-live, so the target is not weakened, and the item is unsplit in live and side-live. Step 1: lem-sfb-section-marked-finite-parts-scheme with f=s, σ=e (se=1); its functor is exactly F and it gives M, separated étale g and the clopen finite Q; the quasi-finite residue clause is correctly unused. Step 2: lem-sfb-universal-finite-parts-groupoid; s and t are lft because they are lfp (the definitions are Mathlib-matched and Mathlib has this as an instance at FinitePresentation.lean:108-113, so I accept it as elementary). That node gives the same structure-map formulas, the groupoid laws, the morphism to (U,R) and finiteness of the projections. Step 3: q:Q→R is étale (open immersion, then base change of g, then composition clauses (1) and (2)). The squares s∘q=g∘s_Q and t∘q=g∘t_Q fit the 'P(f)⇒P(h)' clause of lem-sfb-scheme-etale-source-target-properties for flatness and lfp, so s_Q and t_Q are finite locally free. Step 4: R_M→P is the base change of g, so it is separated and étale. Since p∘j is the inclusion Q↪P, (1,j) is a section of E=Q×_P R_M→Q, hence an open immersion by the etale-section-clopen node; E→R_M is a base change of an open immersion, so the composite j is an open immersion. This is correct and more explicit than Stacks. Small cases checked: Z/2 over a field (M has 2 points, Q has 3), G_m (M empty), the trivial groupoid. No duplicate in the DAG (searched for 04RU, 0DTC, 04RI, 04RR and 'finite part'), no new nodes, same unit, no SGA. Batch-5 flag: lem-trf-smooth-composition (Mathlib leaf, Stacks 01VA) is generic smooth-composition permanence, not a step of the trace formula or Poincaré duality, and Q121 reviewed and accepted the source-target node with the same judgement; accepted. Maintainer note: blueprint.from.node is null, inherited from the creating parent; this is a base fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeGroupoidUniversalFinitePart",
+  "declaration": "AlgebraicGeometry.exists_schemeGroupoidUniversalFinitePart",
+  "declarations": [
+   "AlgebraicGeometry.SchemeGroupoidFinitePartContains",
+   "AlgebraicGeometry.SchemeGroupoidUniversalFinitePart",
+   "AlgebraicGeometry.exists_schemeGroupoidUniversalFinitePart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeGroupoidUniversalFinitePart.lean",
+  "statement": "theorem exists_schemeGroupoidUniversalFinitePart (S U R : Scheme.{u}) (b : U ⟶ S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) (hS : s ≫ b = t ≫ b) [IsSeparated s] [IsSeparated t] [Flat s] [Flat t] [LocallyOfFinitePresentation s] [LocallyOfFinitePresentation t] : Nonempty (SchemeGroupoidUniversalFinitePart b s t e i c)",
+  "branch": "newtargets-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary predicate is literal factorization through the universal open; the structure packages exactly the conclusion and its unique-classifier universal property, not additional hypotheses. The arrow scheme is W.toScheme. The restricted relation is written (R ×_U M) ×_U M, canonically isomorphic to M ×_U R ×_U M. No data is selected from the postponed existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c91d4f52",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Statement matches node and Stacks section-finite-part-groupoid/04RU/0DTC clause by clause: S-groupoid via b with s≫b=t≫b plus IsGroupoidScheme (c(a,b)=a∘b convention matches c'); separated/flat/lfp instances only; represents (∃! classifier with test-scheme equality of opens) is equivalent to the natural bijection, the converse following from finiteness and contains_unit under base change; W open and closed; target pinned by target_arrow and translated_target (translation surjective via r'=c(c(r',z),i z)); unit/inv/comp arrow formulas; both projections IsFiniteLocallyFree (recorded def); j to (R×_{s,U,g}M)×_{t,U,g}M with j_fst=W.ι, j_snd=target, IsOpenImmersion. No hollow data, only the theorem sorried, docstrings and source places present, single universe u. Records: only the item lean field changed, statement verbatim, the 11 dep records identical to side-live. No duplicate declaration found. No compile (no change). Second reading section present but written by the same worker; this review is the independent reading."
+ }
+}

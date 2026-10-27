@@ -1,0 +1,150 @@
+{
+ "id": "lem-sfb-nodal-tangent-canonical-grading",
+ "kind": "statement",
+ "title": "Canonical grading and degree-zero residue isomorphism",
+ "statement": "Let A be a commutative local ring. Its homogeneous subgroups tangentGrading A n [def-sfb-nodal-tangent-comparison-data] carry a canonical GradedRing structure. There is a canonical ring isomorphism A/m ≃ (tangentGrading A)₀ sending the class of a to its degree-zero initial class in the associated graded ring [def-weil-pbc-associated-graded-ring]. No reducedness, finiteness or nodal hypothesis is needed.",
+ "stmt_deps": [
+  "def-sfb-nodal-tangent-comparison-data",
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CBT (constructions (2) and (3)), 0CBU and 0CBW; the explicit comparison calculations below."
+ },
+ "proof": [
+  {
+   "text": "Each direct-sum inclusion is injective. Identify each summand additively with its range. The direct sum of these equivalences has inverse the sum of subgroup inclusions: check this on every summand using DirectSum.addHom_ext and coeAddMonoidHom_of. Therefore the homogeneous subgroups form an internal direct sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  },
+  {
+   "text": "Use the internal direct sum to obtain the decomposition. The associated graded unit lies in degree zero and the product of inclusions is the inclusion of associatedGradedMul in the sum of degrees. These prove the GradedRing fields.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  },
+  {
+   "text": "The associatedGradedRingHom lands in the degree-zero subgroup and kills m. Factor through A/m. Injectivity follows from the proved associated-graded residue-algebra injection; surjectivity follows by lifting the degree-zero graded piece through its submodule quotient. The representative formula is definitional.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Explicit argument filling the omitted equivalence (2)=(3) of Tag 0CBT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of associated graded pieces is graded by the ranges of the homogeneous inclusions with degree zero equal to the residue field",
+   "results": "{\"t\": \"2026-10-23T11:12:14Z\", \"tool\": \"leansearch\", \"query\": \"The direct sum of associated graded pieces is graded by the ranges of the homogeneous inclusions with degree zero equal to the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectSum.Gmodule\", \"GradedModule.isModule\", \"SetLike.gmodule.congr_simp\", \"SetLike.gring\", \"SetLike.gmodule\", \"Submodule.galgebra\", \"GradedRing.toDecomposition\", \"DirectSum.GAlgebra.mk\"], \"digest\": \"f02d559befd51a37\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization: DirectSum internal decompositions and the existing associated-graded ring API prove the claims, but no single lemma has this prescribed image grading."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.Decomposition",
+   "results": "{\"t\": \"2026-10-23T11:12:15Z\", \"tool\": \"loogle\", \"query\": \"DirectSum.Decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DirectSum.Decomposition\", \"DirectSum.instSubsingletonDecomposition\", \"DirectSum.SetLike.IsHomogeneous\", \"DirectSum.Decomposition.isInternal\", \"DirectSum.IsInternal.chooseDecomposition\", \"DirectSum.Decomposition.decompose'\", \"DirectSum.decompose\", \"DirectSum.degree_eq_of_mem_mem\"], \"digest\": \"e54c29b2b2c1762b\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization: DirectSum internal decompositions and the existing associated-graded ring API prove the claims, but no single lemma has this prescribed image grading."
+  },
+  {
+   "tool": "grep",
+   "query": "chooseDecomposition|coeAddMonoidHom_of|Away.mk_surjective",
+   "results": "{\"t\": \"2026-10-23T11:12:14Z\", \"tool\": \"grep\", \"query\": \"chooseDecomposition|coeAddMonoidHom_of|Away.mk_surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean\", \"Mathlib/Algebra/DirectSum/Decomposition.lean\", \"Mathlib/Algebra/DirectSum/Decomposition.lean\", \"Mathlib/Algebra/DirectSum/Basic.lean\", \"Mathlib/Analysis/InnerProductSpace/Projection/FiniteDimensional.lean\", \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\"], \"digest\": \"e204f338db238024\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization: DirectSum internal decompositions and the existing associated-graded ring API prove the claims, but no single lemma has this prescribed image grading."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NodalLocalTangentNormalization",
+  "date": "2026-10-23",
+  "group": "K7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices.; Canonical grading and degree-zero residue isomorphism",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NodalLocalTangentGrading",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalLocalTangentGrading.lean",
+  "declaration": "AlgebraicGeometry.NodalLocal.canonicalGrading",
+  "statement": "def canonicalGrading (A : Type u) [CommRing A] [IsLocalRing A] : GradedRing (tangentGrading A)",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-23",
+  "declarations": [
+   "AlgebraicGeometry.NodalLocal.pieceEquiv",
+   "AlgebraicGeometry.NodalLocal.pieceEquiv_coe",
+   "AlgebraicGeometry.NodalLocal.tangent_internal",
+   "AlgebraicGeometry.NodalLocal.canonicalGrading",
+   "AlgebraicGeometry.NodalLocal.zeroHom",
+   "AlgebraicGeometry.NodalLocal.residueToZero",
+   "AlgebraicGeometry.NodalLocal.tangentZeroIso",
+   "AlgebraicGeometry.NodalLocal.tangentZeroIso_apply"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 6 new modules vs live item (verbatim def move, IsNatural defeq via IsNaturalIso), item/new node records vs Lean, 3 sorry halves vs Stacks 0CBT/0CDV and nodes"
+ }
+}

@@ -33,7 +33,7 @@
  ],
  "proof": [
   {
-   "text": "*The polynomial exists and is unique.* The hypotheses of the definition ($A$, $n$, $M$, $\\varphi$, and $f_1,\\dots,f_r$ generating the unit ideal with $M_{f_i}\\cong(A_{f_i})^n$) are exactly those of [lem-weil-pbc-charpoly-locally-free-existence], which gives exactly one $\\chi\\in A[T]$ with the characterizing property (for every $A\\to A'$ with $M\\otimes_AA'$ free of rank $n$, the image of $\\chi$ in $A'[T]$ is $\\det(T\\cdot1-\\varphi_{A'})$), and gives $\\chi=T^n+c_{n-1}T^{n-1}+\\dots+c_0$. So the definition names one polynomial, and the monic form is that lemma's 'moreover' clause, not a claim of the definition. The determinant on the right is well defined: $M\\otimes_AA'\\cong A'^n$ makes $(M\\otimes_AA')\\otimes_{A'}A'[T]\\cong A'[T]^n$ free with a finite basis, so [def-weil-endomorphism-determinant] applies over the commutative ring $A'[T]$, and it does not depend on the basis (matrices in two bases are conjugate). The free case is the specialization $A'=A$, $A\\to A$ the identity, for which $M\\otimes_AA=M$ and the image of $\\chi$ is $\\chi$.",
+   "text": "Apply [lem-weil-pbc-charpoly-locally-free-existence] in universe max u w to obtain a polynomial χ with the characterizing property, uniqueness, expansion and free-case identity. To compare it with the definition's choice in universe u, fix a ring map A → S with S in universe u and a basis of S ⊗_A M. Lift S to ULift S in universe max u w. Extend the basis, and identify the iterated tensor product with (ULift S) ⊗_A M using [def-weil-module-base-change]. The characteristic polynomial of the extended endomorphism is the image of the original matrix characteristic polynomial: this follows from free-module scalar-extension compatibility and invariance under conjugation. Injectivity of S → ULift S descends the defining equality to S. Thus χ satisfies the universe-u characterizing property, so uniqueness in [lem-weil-pbc-charpoly-locally-free-existence] identifies χ with locallyFreeCharpoly. Transport the characterizing property, uniqueness, expansion and free-case identity along this equality. The matrix expression is the determinant formulation of [def-weil-endomorphism-determinant].",
    "uses": [
     "lem-weil-pbc-charpoly-locally-free-existence",
     "def-weil-endomorphism-determinant",
@@ -57,7 +57,7 @@
    }
   },
   {
-   "text": "*Independence of $n$ (the notation $\\mathrm{CharPol}_A(\\varphi)$ does not record $n$).* Suppose $M$ is finite locally free of constant rank $n$ through $(f_i)$ and of constant rank $n'$ through $(g_j)$. If $A=0$ then $A[T]=0$ and both polynomials are $0$. If $A\\neq0$, let $\\mathfrak m$ be a maximal ideal of $A$. Since the $f_i$ generate the unit ideal, some $f_i\\notin\\mathfrak m$; likewise some $g_j\\notin\\mathfrak m$, and $h=f_ig_j\\notin\\mathfrak m$, so $h$ is not nilpotent and $A_h\\neq0$ [def-weil-ring-localization-away]. Localizing the isomorphism $M_{f_i}\\cong(A_{f_i})^n$ further at $g_j$ gives $M_h\\cong(A_h)^n$ (as $(M_{f_i})_{g_j}=M_h$ by the universal property in [def-weil-pbc-module-localization-away]), and in the same way $M_h\\cong(A_h)^{n'}$. A nonzero commutative ring has invariant basis number ($A_h^n\\cong A_h^{n'}$ gives, after $\\otimes_{A_h}A_h/\\mathfrak n$ for a maximal ideal $\\mathfrak n$, an isomorphism of vector spaces of dimensions $n$ and $n'$), so $n=n'$. Hence the integer $n$ is determined by $M$ when $A\\neq0$, and the property of step 1 is the same for both.",
+   "text": "For a nonzero ring A choose a maximal ideal p and its residue field K=A/p. Each family generating the unit ideal has an element outside p: otherwise its span would be contained in the proper ideal p. Its image in K is nonzero and hence a unit, so the quotient map A → K factors through the localization A_f [def-weil-ring-localization-away]. Identify the given localized module with A_f ⊗_A M using [def-weil-pbc-module-localization-away] and scalar extension. Base change its basis to K and use tensor-product cancellation [def-weil-module-base-change] to obtain a basis of K ⊗_A M of the same finite size. Applying this construction to the two covers gives bases of sizes n and n′ of the same K-vector space. Mathlib's Module.finrank_eq_card_basis yields n=n′. This proves locallyFree_constantRank_eq without passing first through a product localization. If A is the zero ring, its polynomial ring is subsingleton and both characteristic polynomials agree. Otherwise use the rank equality and the cover-independent uniqueness of step 2.",
    "uses": [
     "def-weil-pbc-module-localization-away",
     "def-weil-ring-localization-away",
@@ -80,7 +80,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma 09XI, proof of (3)$\\Rightarrow$(1), last paragraph: Stacks defines CharPol$_A$ by gluing the matrix characteristic polynomials over a standard covering (Algebra 00EO) and omits the details; the characterization by base change and the well-posedness steps are written by an agent"
+  "place": "Lemma 09XI, proof of (3)⇒(1), characteristic-polynomial paragraph (details omitted). Agent J9 formalizes cross-universe comparison by ULift and uniqueness, and rank uniqueness by base changing each local basis directly to one residue field; the unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -148,7 +148,18 @@
   "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -188,22 +199,13 @@
   "note": "def = Classical.choose of landed charpoly_locallyFree_exists_unique.{u,v,u} on identical cover/basis/phi binders (one notion, no second def); spec restates its P (max u w), uniqueness, monic Fin n expansion, free case (forall e = Nonempty-guarded form); _eq covers different covers and ranks without Nontrivial (A=0 subsingleton); rank_eq only under [Nontrivial A]; n=0, r=0 checked"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "K2",
+  "reviewer": "COMPILER",
+  "group": "J9",
   "result": "pass",
-  "landing": "20261012T053938-L-2637791",
+  "landing": "20261026T091846-L-3381917",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "Algebra.locallyFreeCharpoly_eq",
-   "Algebra.locallyFreeCharpoly_spec",
-   "Algebra.locallyFree_constantRank_eq"
-  ],
-  "sorry_after": [
-   "Algebra.locallyFreeCharpoly_spec",
-   "Algebra.locallyFree_constantRank_eq"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

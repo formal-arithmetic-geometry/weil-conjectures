@@ -1,0 +1,376 @@
+{
+ "id": "lem-sfb-space-affine-derived-projection-formula",
+ "kind": "statement",
+ "title": "Flat affine-base projection formula for algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Algebraic spaces and schemes are [def-trf-algebraic-space, def-pc-scheme]. Use the small etale site with structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the full subcategory whose cohomology sheaves are quasi-coherent [def-trf-space-quasi-coherent-module]. Let $A$ be a commutative ring, let $f:X\\to\\operatorname{Spec}A$ be a flat quasi-compact quasi-separated morphism of algebraic spaces, and let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Flatness is tested on etale scheme charts [def-weil-flat-morphism]; quasi-compact means, as the target is affine, that every etale covering of $X$ has a finite subcovering (equivalently $|X|$ is quasi-compact), and quasi-separated means that the diagonal is quasi-compact. For an $A$-module $N$, let $F_N=\\mathcal O_X\\otimes_A N$ be the sheaf tensor product [def-pur-sheaf-tensor-product]. Then $F_N$ is quasi-coherent, the assignment $N\\mapsto F_N$ is exact, and its derived pullback is represented by $F_N[0]$. Write $R\\Gamma(X,-)$ for the unbounded right derived functor of global sections [def-pur-ringed-site-zeroth-hypercohomology], valued in $D(A)$ through $A\\to\\Gamma(X,\\mathcal O_X)$. Derived tensor is computed using K-flat resolutions [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. The canonical projection morphism is a natural isomorphism in $D(A)$,\n$$R\\Gamma(X,E)\\otimes_A^{\\mathbf L}N[0]\\xrightarrow{\\sim}R\\Gamma(X,E\\otimes_{\\mathcal O_X}^{\\mathbf L}F_N[0]).$$\nRegard $f$ as a morphism of ringed topoi of small etale sites [def-weil-pbc-ringed-topos-morphism], with derived functors $Lf^*\\dashv Rf_*$ computed by K-flat, resp. K-injective, resolutions. The projection morphism is the adjoint of the map obtained by pulling back $R f_*E$ and applying the counit $L f^*R f_*E\\to E$, tensored with $L f^*N$. Its naturality includes every homomorphism $N\\to N\\prime$ of $A$-modules. Spectra are [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IN, lemma-cohomology-base-change, specialized to an affine base and modules in degree zero; the flat-pullback convention is the paragraph preceding lemma-check-quasi-coherence-on-covering."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-flat-morphism",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-affine-spectrum",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sfb-constant-module-coefficient-transport",
+  "def-sfb-affine-scalar-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=\\operatorname{Spec}A$ and write $a_A$ for the affine etale associated-module functor. The pullback of $a_A(N)$ is $F_N$: on an affine etale chart $U=\\operatorname{Spec}B\\to X$, both are the etale associated sheaf of $B\\otimes_A N$. Indeed, the Zariski/etale comparison identifies the chart pullback with ordinary scheme pullback, and its affine-sections formula is $n\\otimes b\\mapsto b f^*n$. These formulas commute with chart restrictions by the tensor balancing relation, so identify the sheaves and their maps. Thus $F_N$ is quasi-coherent by preservation of quasi-coherence under space pullback. Since $f$ is flat on scheme charts, the affine criterion makes $B$ flat over $A$. Flat tensor exactness makes $B\\otimes_A-$ exact. The affine associated-module equivalence therefore shows that every short exact sequence of $A$-modules gives a short exact sequence of the $F_N$ on each chart. Exactness of sheaves is local: a local kernel element lifts on a chart and these local lifts give the required sheaf epimorphism onto the kernel. Hence $H:N\\mapsto F_N$ is exact.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, affine specialization; paragraph preceding lemma-check-quasi-coherence-on-covering; spaces-properties.tex Tag 03GA; algebra.tex Tag 00HD."
+   }
+  },
+  {
+   "text": "Let $p_Y:(Y_{\\mathrm{et}},\\mathcal O_Y)\\to(*,A)$ be the global-sections ringed-topos morphism and $p_X=p_Yf$. Its module pullback is $H$ on $X$ and $a_A$ on $Y$: a map $\\mathcal O_X\\otimes_A N\\to M$ is equivalent to the $A$-linear map $N\\to\\Gamma(X,M)$ sending $n$ to the image of $1\\otimes n$, with inverse $b\\otimes n\\mapsto b\\,u(n)$. This proves the adjunction and identifies the structural action. The exact-functor derived-factorization theorem applied to $H$ shows $Lp_X^*N[0]=F_N[0]$. Moreover $Lf^*a_A(K)=Lp_X^*K$ for every $K\\in D(A)$: choose a flat-term K-flat resolution $P$ of $K$; pullback to $Y$ preserves that resolving class, and iterated scalar extension is identified with composite extension by $b\\otimes(c\\otimes x)\\mapsto bc\\otimes x$. In particular $Lf^*a_A(N[0])=F_N[0]$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, canonical map; sites-cohomology.tex Tags 07A4 and 0G7E; exact flat-pullback paragraph preceding lemma-check-quasi-coherence-on-covering."
+   }
+  },
+  {
+   "text": "Record the affine tensor dictionary, including its map. The equivalence $a_A:D(A)\\simeq D_{\\mathrm{QCoh}}(Y_{\\mathrm{et}})$ has quasi-inverse $R\\Gamma(Y,-)$. As $a_A=Lp_Y^*$, the canonical pullback tensor comparison gives $a_A(P\\otimes_A^L Q)\\simeq a_A(P)\\otimes_{\\mathcal O_Y}^L a_A(Q)$. For $M\\in D_{\\mathrm{QCoh}}(Y)$ put $P=R\\Gamma(Y,M)$ and use its canonical counit $a_A(P)\\simeq M$. Applying the inverse equivalence gives $R\\Gamma(Y,M)\\otimes_A^L Q\\simeq R\\Gamma(Y,M\\otimes^L a_A(Q))$. This is the projection mate for $p_Y$: after applying the fully faithful $a_A$, its defining adjunct is precisely the tensor comparison followed by that counit. Thus it is the specified canonical map, natural in both arguments, rather than an arbitrary isomorphism of their values.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, affine equivalence paragraph; Tag 071Q (lemma-derived-quasi-coherent-small-etale-site); sites-cohomology.tex Tags 07A4, 07A6 and 0B56."
+   }
+  },
+  {
+   "text": "Both $X$ and $Y$ are quasi-compact and quasi-separated algebraic spaces over $Y$: for $X$ this is the given qcqs morphism, and for $Y$ it is the identity. The space pushforward-right-adjoint theorem gives $Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y)$ with a right adjoint. Hence $Rf_*$ preserves set-indexed coproducts by the left-adjoint colimit theorem. These are the ambient derived coproducts by the stated coproduct clause of space perfect localizing generation, applied to $X$ and $Y$. Derived tensor with a fixed object preserves coproducts as a left adjoint by the ringed-site closed tensor theorem and the same colimit theorem; this applies also to the one-point ringed site defining $D(A)$. The functor $Lf^*$ preserves coproducts by its derived adjunction, and $a_A$ does so as an equivalence. Finally $Lf^*a_A(Q)$ and $E\\otimes^L Lf^*a_A(Q)$ have quasi-coherent cohomology by the space derived-pullback/tensor theorem. Thus every coproduct in these composites stays in the subcategories where preservation by $Rf_*$ is available.",
+   "uses": [
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-space-perfect-localizing-generation",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-space-derived-qcoh-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, direct-sum paragraph; Tag 08FB (lemma-quasi-coherence-pushforward-direct-sums). The already existing right-adjoint input gives exactly this preservation via adjunction, as in spaces-duality.tex Tag 0E55; no projection formula is used to obtain it."
+   }
+  },
+  {
+   "text": "Fix $E$. For $Q\\in D(A)$ define $T(Q)=Rf_*E\\otimes^L a_A(Q)$ and $U(Q)=Rf_*(E\\otimes^L Lf^*a_A(Q))$. Use the canonical transformation $\\alpha_Q:T(Q)\\to U(Q)$ whose adjunct is $(\\varepsilon_E\\otimes1)\\mu_{Rf_*E,a_A(Q)}$. The exact projection-mate theorem says these functors are exact and this transformation commutes with shifts and with connecting arrows of distinguished triangles. Precomposition by $a_A$ preserves exactness because $a_A$ is induced termwise by an exact functor, by exact derived factorization. Step 4 shows $T,U$ preserve all set-indexed coproducts. At $Q=A[0]$, $a_A(Q)=\\mathcal O_Y[0]$ and the unit normalization in the exact projection-mate theorem gives $\\alpha_{A[0]}=1_{Rf_*E}$. Shift compatibility then makes every $\\alpha_{A[k]}$ invertible.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, canonical adjunction construction, direct sums and triangles, and final shifts-of-structure-sheaf sentence."
+   }
+  },
+  {
+   "text": "Let $\\mathcal C$ be the isomorphism locus of $\\alpha$. It contains every $A[k]$ by Step 5. It is closed under distinguished-triangle two-out-of-three by the triangle-comparison theorem, since the required connecting square was supplied in Step 5. It is closed under coproducts: under the comparisons of Step 4, naturality with every coprojection identifies $\\alpha_{\\bigoplus Q_i}$ with $\\bigoplus\\alpha_{Q_i}$, whose inverse is the sum of the inverses. It is closed under retracts: for $Q\\xrightarrow{i}P\\xrightarrow{r}Q$, $ri=1$, an inverse of $\\alpha_Q$ is $T(r)\\alpha_P^{-1}U(i)$; the two inverse equations follow by naturality and $ri=1$. It is closed under isomorphisms by naturality. Apply derived-module free generation to conclude $\\mathcal C=D(A)$. This is generation of the entire unbounded derived category, not an induction on the length of a bounded resolution.",
+   "uses": [
+    "lem-sf-triangle-two-out-of-three",
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, last paragraph; more-algebra.tex Tag 09PB (remark-P-resolution)."
+   }
+  },
+  {
+   "text": "Take $Q=N[0]$ in Step 6 and apply $R\\Gamma(Y,-)$ to $\\alpha_Q$. Its source is $R\\Gamma(X,E)\\otimes_A^L N[0]$ by Step 3 and the canonical derived direct-image composition comparison for $p_Yf$. Its target is $R\\Gamma(X,E\\otimes_{\\mathcal O_X}^L F_N[0])$ by Step 2 and that same composition comparison. This yields an isomorphism in $D(A)$ with exactly the asserted objects. To check the arrow, the projection-composition identity reads $\\pi_{p_Yf}=Rp_{Y,*}(\\pi_f)\\circ\\pi_{p_Y}$ under those comparisons. The first factor is the image of $\\alpha_Q$ and the second is exactly the affine tensor dictionary of Step 3. Thus the displayed arrow is the canonical counit-defined projection morphism. All comparisons and both projection factors are natural in $Q$ and $E$. In particular every homomorphism $N\\to N'$ gives the stated naturality square, with the actual map $F_N\\to F_{N'}$ of Step 1.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-ringed-projection-tensor-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, formula and initial adjunction construction; sites-cohomology.tex Tag 0B56 and derived direct-image composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-qcqs-space-pushforward-right-adjoint",
+  "lem-sfb-space-perfect-localizing-generation",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-pc-derived-module-free-generation",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-projection-tensor-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IN (lemma-cohomology-base-change), proof specialized to an affine base. The already existing Tag 0E55 right-adjoint statement supplies its direct-sum input; formal affine dictionary and projection composition are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated algebraic space X over a ring A the derived sections of E tensor derived pullback N equal derived sections of E tensor N",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := T, commRing := inst_2 } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackS\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g))\\n  {Z : AlgebraicGeometry.Scheme} (h : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t)\", \"doc\": \"For morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes, and a point $t$ in the fiber product $X \\\\times_S Y$, the composition of the canonical morphism from the spectrum of the tensor product of resi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T') {Z : AlgebraicGeometry.Scheme} (h_1 : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.\", \"doc\": \"For schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and equal pullback triplets $T=T'$, the composition of the morphism induced by the tensor congruence isomorphism $\\\\operatorname{Spec}(T.te\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := S, commRing := inst_1 } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackS\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, the fiber product (pullback) of the morphisms $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ an\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := R, commRing := inst } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpe\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for quasi coherent unbounded complexes on algebraic spaces over an affine scheme",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (s : ↑(c.pt.presheaf.obj (O\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_map_app\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n m : Type vᵒᵖ} (i : n ⟶ m) (S : AlgebraicGeometry.Scheme),\\n  (AlgebraicGeometry.AffineSpace.functor.map i).app S = AlgebraicGeometry.AffineSpace.reindex i.unop S\", \"doc\": \"For any morphism $i: n \\to m$ in the opposite category of types and any scheme $S$, the application of the affine space functor's map to $i$ at $S$ equals the reindexing morphism induced by the corresp\"}\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.DerivedCategory",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.DerivedCategory'\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|cohomology.*base.*change",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space derived quasi coherent projection formula over a ring",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \": 𝔸(n; S) ⟶ Spec ℤ[n].{u, v}\", \"doc\": \"The morphism from the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ to the affine $n$-space over the integers $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\\\\dots,x_n])$, defined as the second projection in th\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_app_isLocalHom\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \"(U : TopologicalSpace.Opens (coequalizer f.toShHom g.toShHom).carrier) :\\n  IsLocalHom ((coequalizer.π f.toShHom g.toShHom :).hom.c.app (op U)).hom\", \"doc\": \"For any open set $U$ in the carrier of the coequalizer of morphisms $f$ and $g$ between locally ringed spaces, the induced ring homomorphism on sections over $U$ given by the coequalizer projection ma\"}\n  {\"name\": \"RingHom.QuasiFinite\", \"module\": \"Mathlib.RingTheory.RingHom.QuasiFinite\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\to S $ between commutative rings is quasi-finite if the commutative ring $ S $, equipped with the $ R $-algebra structure induced by $ f $, is finitely generated as an $ R \"}\n  {\"name\": \"AlgebraicGeometry.Proj.toLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": LocallyRingedSpace\", \"doc\": \"The locally ringed space constructed on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, obtained by equipping the sheafed space with the property that every stalk of\"}\n  {\"name\": \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Module.Projective A Ω[A⁄R]\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a commutative $ R $-algebra. If $ A $ is formally smooth over $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module.\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.appTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \"(H : P f) [IsAffine X] [IsAffine Y] : Q f.appTop.hom\", \"doc\": \"If a morphism $ f $ between affine schemes $ X $ and $ Y $ satisfies property $ P $, then the induced ring homomorphism $ f^\\\\#: \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ on global sectio\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[HasRingHomProperty P Q] (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|AlgebraicSpace",
+   "sub": "AlgebraicGeometry",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme sections, module flatness or affine limits, not the algebraic-space unbounded derived projection formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of a quasi compact quasi separated flat algebraic space commute with derived tensor by an arbitrary module over the base ring",
+   "sub": "",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Γ_def, Module.Flat.of_flat_tensorProduct, AlgebraicGeometry.Scheme.Γ, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, Module.Flat.iff_rTensor_preserves_shortComplex_exact, AlgebraicGeometry.LocallyRingedSpace.Γ, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme sections, module flatness or affine limits, not the algebraic-space unbounded derived projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory",
+   "sub": "",
+   "results": "UNAVAILABLE: service unavailable: <html> <head><title>502 Bad Gateway</title></head> <body> <center><h1>502 Bad Ga",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for quasi coherent unbounded complexes on algebraic spaces over an affine scheme",
+   "sub": "",
+   "results": "8 hits; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.functor_map_app, SheafOfModules.Presentation.map_π_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme sections, module flatness or affine limits, not the algebraic-space unbounded derived projection formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-pullback-limit",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, display identifying RHom with derived sections of the dual tensor Lf*Mn and then with RGamma of the dual tensor Mn.",
+   "via": [
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-derived-projection-formula",
+  "worker": "stage1",
+  "summary": "Q36 checked Tag 08IN and wrote its unit-generation proof with the flat degree-zero coefficient clauses, affine etale tensor dictionary, and canonical projection/naturality identifications explicit. All prerequisites already exist in the DAG; no new nodes are needed. Coproduct preservation is a two-line consequence of the existing right-adjoint theorem and is therefore not made into a duplicate node.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, display identifying RHom with derived sections of the dual tensor Lf*Mn and then with RGamma of the dual tensor Mn. The split realizes the displayed projection-formula input in Tag 0D3F using the affine unit-generation argument of Tag 08IN. The inherited created.item chain has no currently recognized blueprint ancestor (blueprint_refs.py ancestor returns None); its complete inherited from.place and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic input used for Zariski and small etale quasi-coherent modules agree functorially in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic input used for Sections of the pullback of a quasi-coherent module over an affine open in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic input used for Flatness of a scheme morphism on affine charts in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic input used for Tensoring with a flat module preserves exact sequences in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic input used for The functor induced on derived categories by an exact functor, with its factorization through the localization functors in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic input used for Derived tensor comparison for arbitrary ringed topoi in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic input used for Existence of K-flat resolutions on a ringed site in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic input used for Exactness data for the ringed-topos projection mate in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic input used for Left adjoints preserve colimits in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic input used for The derived category of a ringed site is closed symmetric monoidal in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic input used for Isomorphism on two terms of a distinguished triangle in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-derived-module-free-generation",
+    "why": "Generic input used for Generation of a module derived category by shifts of the ring in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic input used for Canonical composition comparison for unbounded ringed-topos direct images in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic input used for Tensor and composition coherence of ringed-topos projection maps in the Tag 08IN affine unit-generation argument; this unit supplies no replacement for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-pc-derived-module-free-generation",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-projection-tensor-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-a81ae5b21",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-a81ae5b21 (reviewer sub-agent of L); spot-checked: PASS: I read the item and every cited node in full, with no fixes needed. The delivery adds a 7-step proof to the item and creates no new nodes. The statement is unchanged and correct. The proof follows Stacks spaces-perfect.tex Tag 08IN (lemma-cohomology-base-change, lines 4662-4720), which I read: (1) on affine étale charts Spec B, F_N = f^*a_A(N) is the sheaf of B⊗_A N, so F_N is quasi-coherent, and N -> F_N is exact because A->B is flat. (2) Lp_X^*N[0] = F_N[0] by exact derived factorization, and Lf^*a_A = Lp_X^* through flat-term K-flat resolutions. (3) Through the equivalence D(A) ≃ D_QCoh(Spec A_et), the projection mate for p_Y is an isomorphism, with the counit and unit identified. (4) Rf_* preserves coproducts on D_QCoh because it has a right adjoint (Tag 0E55), and D_QCoh coproducts are the ambient ones; Lf^*, tensor and a_A also preserve coproducts. (5) The mate node gives exactness, shift compatibility and α_{R_Y}=1, so α is an isomorphism at every A[k]. (6) The isomorphism locus is closed under triangles, coproducts and retracts (I checked the explicit inverse), so free generation gives all of D(A). (7) Apply RΓ and the composition identity π_{p_Y f}=Rp_Y*(π_f)∘π_{p_Y}; this identifies the canonical arrow, natural in N->N'. No circularity: 0E55 uses 08DU, Bondal-van den Bergh (line 3674) and 08FB (line 646), all before 08IN, and the DAG closure (1422 nodes) has no cycle. Duplicate search over dag/nodes for 08IN and projection formula found only scheme-level nodes (lem-pc-qcqs-derived-projection-mate and others), the base-change node lem-sfb-flat-space-derived-pushforward-base-change and the user node lem-sfb-proper-flat-space-pullback-limit, so no duplicate exists. Edge cases checked: N=0, A=0, X empty, non-flat N, unbounded E. All 14 tool_uses are generic tools; accepted. Batch-5: affine-etale-derived-module-realization, space-module-pullback-quasicoherent and space-derived-qcoh-pullback-tensor reach the trace-formula chapter only through the general definition def-trf-algebraic-space. lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the generic Zariski/étale quasi-coherent comparison. None of the four is part of the trace formula, Poincaré duality or their proofs. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineDerivedProjectionFormula",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_affine_derived_projection_formula",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.space_affine_derived_projection_formula"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineDerivedProjectionFormula.lean",
+  "statement": "theorem space_affine_derived_projection_formula (A : CommRingCat.{u}) (X : AlgebraicSpace (Spec A)) (f : X ⟶ schemeSpace (Over.mk (𝟙 (Spec A)))) (hflat : MapIsFlat f) (hqc : MapIsQuasiCompact f.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) [HasDerivedCategory.{w} (ModuleCat.{u} A)] [HasDerivedCategory.{w} X.SmallModules] : ∃ d : AffineProjectionData A X, (∀ N : ModuleCat.{u} A, (X.smallModuleEquivalence.inverse.obj (affineScalarSheaf A X N)).IsQuasicoherent) ∧ (∀ (E : X.DerivedQCoh) (N : ModuleCat.{u} A), IsIso (affineDerivedProjectionMap A X d E.obj N)) ∧ (∀ (E E' : X.DerivedQCoh) (e : E ⟶ E') (N N' : ModuleCat.{u} A) (n : N ⟶ N'), (tensor (DerivedCategory (ModuleCat.{u} A))).map (Prod.mkHom ((affineProjectionRGamma A X d.G d.sections_additive).map e.hom) ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).map n)) ≫ affineDerivedProjectionMap A X d E'.obj N' = affineDerivedProjectionMap A X d E.obj N ≫ (affineProjectionRGamma A X d.G d.sections_additive).map ((affineProjectionTensor A X).map (Prod.mkHom e.hom ((DerivedCategory.singleFunctor X.SmallModules 0).map (affineScalarSheafMap A X n)))))",
+  "branch": "sheaf-dag",
+  "by": "Q103",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The normalized ordinary scalar adjunction fixes the actual structural A-action and pure tensor formula. Its derived adjunction agrees with the chain transpose, and its tensor comparison is characterized on K-flat representatives. The projection arrow is their explicit counit mate. Uses the landed equivalent small ringed model without identifying site object and morphism universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0333f9d0b",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Item statement unchanged vs side-live; the delivery adds only def-node stmt_deps (H2 ok). Clause-by-clause match against node and Stacks 08IN: MapIsFlat chart test, MapIsQuasiCompact of f and its diagonal, E : X.DerivedQCoh, arbitrary N : ModuleCat A, F_N = scalarConstantRealization along the structural ΓSpecIso map, QCoh/exactness/degree-zero comparison/IsIso/simultaneous naturality all asserted. ∃ AffineProjectionData is a conclusion and every data field is pinned (objects/maps, μ by pure-tensor formula, G by sections/add/smul/map, adjunction by transpose, derived adjunction by chain transpose, tensor comparison on K-flat representatives), so it is unique up to unique iso; no invertibility field. Projection = p_X counit mate in D(A), identified with the f-mate by proof step 7. No hollow data; sorry only in 2 theorems with proof docstrings; statement fields verbatim; no name clash or duplicate. Advisory: the new def node cites theorem nodes lem-sfb-scalar-dual-evaluation-descent / lem-sf-ringed-derived-native-tensor for plain defs; MapIsQuasiCompact is owned by def-sfb-proper-curve-moduli (transitive). Not recompiled (no changes)."
+ }
+}

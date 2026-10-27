@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-additive-kernel-separable-axis-extraction",
+ "kind": "statement",
+ "title": "Extracting a coordinate axis from an additive kernel after separable extension",
+ "statement": "Let $k$ be a field of prime characteristic $p>0$ [def-weil-field], let $n\\geq1$, and put $E=\\mathbf G_a^n$ [def-sc-gm-ga, def-sc-group-scheme]. Let $f:E\\to\\mathbf G_a$ be a $k$-group-scheme homomorphism, and let $K/k$ be a separable closure, meaning a separably closed algebraic separable extension. Write $\\mathbb A^1_K=\\operatorname{Spec}K[t]$ [def-weil-affine-spectrum, def-weil-polynomial-ring]. Suppose there is a nonconstant $K$-scheme morphism $u:\\mathbb A^1_K\\to E_K$ such that $f_K\\circ u=0$. There is a $k$-group automorphism $\\alpha:E\\xrightarrow{\\sim}E$ such that $f\\circ\\alpha$ factors through the projection $\\pi:E\\to\\mathbf G_a^{n-1}$ onto the last $n-1$ coordinates: $f\\circ\\alpha=g\\circ\\pi$ for a $k$-group homomorphism $g:\\mathbf G_a^{n-1}\\to\\mathbf G_a$. In particular $\\alpha(\\mathbf G_a\\times\\{0\\}^{n-1})\\subseteq\\ker(f)$ as subgroup schemes, with the kernel the fibre over the zero section. For $n=1$ the conclusion means $f=0$. The automorphism need not be linear, and $k$ need not be perfect.",
+ "source": {
+  "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+  "place": "Lemma 1.11, printed pp.6--7, and Lemma 1.13, printed p.7, using Lemma 1.12 for Galois descent of a principal-part zero; the n=1 degree argument is included. Read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; WANTED locally. No Stacks tag is claimed for this algebraic-group result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine-spectrum dictionary [def-weil-affine-spectrum] and the polynomial universal property [def-weil-pbc-mv-polynomial-ring]: $\\operatorname{Spec}k[x_1,\\ldots,x_n]$ represents the product of $n$ copies of $\\mathbf G_a$, since a map into it is precisely a tuple of images of the $x_i$. Thus $f$ is a polynomial $F$ satisfying $F(X+Y)=F(X)+F(Y)$ by the comultiplication in [def-sc-gm-ga]. Its constant term is zero. Separate this identity by total degree; each nonzero homogeneous component satisfies the same additive identity. Apply [lem-trf-additive-polynomial-monomial-classification] to each positive-degree component and sum. This gives $F=\\sum_i F_i(x_i)$ with $F_i(T)=\\sum_j c_{ij}T^{p^j}$, and the same description holds after any $k$-group coordinate automorphism. Conversely these sums are additive over every $k$-algebra by [def-weil-ring-frobenius].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sc-gm-ga",
+    "lem-trf-additive-polynomial-monomial-classification",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.6, Definition 1.10, Lemma 1.11 (1)⇒(2)⇒(3), printed pp.5–7, and Lemmas 1.12–1.13, printed p.7; read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "If $F=0$, choose $\\alpha=\\mathrm{id}$ and $g=0$. More generally, whenever some $F_i=0$, permute that coordinate to the first position and omit it to obtain $g$. Hence consider a current polynomial $Q=\\sum_i Q_i(x_i)$ with every $Q_i\\ne0$. Write $\\deg Q_i=p^{m_i}$ and its leading coefficient as $c_i\\ne0$, and call $P_Q=\\sum_i c_i x_i^{p^{m_i}}$ its principal part. We will use strong induction on the positive integer $D(Q)=\\sum_i\\deg Q_i$, allowing the zero-coordinate case as a terminal case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.6, Definition 1.10, Lemma 1.11 (1)⇒(2)⇒(3), printed pp.5–7, and Lemmas 1.12–1.13, printed p.7; read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "For every current $Q$ obtained by a $k$-group coordinate automorphism $\\beta$, the curve $v=\\beta_K^{-1}\\circ u$ remains nonconstant and satisfies $Q_K(v)=0$. By [def-weil-affine-spectrum], write its coordinates as $v_i(t)\\in K[t]$. Put $s_i=\\deg v_i$ when nonconstant and $s_i=0$ otherwise, and let $A_i$ be the leading coefficient when $s_i>0$. Then $N=\\max_i(s_i p^{m_i})>0$. The coefficient of $t^N$ in $Q_K(v)$ is $\\sum_{s_i p^{m_i}=N}c_i A_i^{p^{m_i}}$: all lower terms of each $Q_i(v_i)$ have smaller degree, and constant $v_i$ contribute no positive degree. Set $a_i=A_i$ for these maximal indices and $a_i=0$ otherwise. At least one $a_i\\ne0$, and $P_Q(a)=0$. Apply [lem-sfb-diagonal-p-form-separable-isotropy-descent] with $L=K$, which is algebraic separable by hypothesis, to obtain $b\\in k^n\\setminus\\{0\\}$ with $P_Q(b)=0$. This argument applies anew after every coordinate change; no descent of $u$ is asserted.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-polynomial-ring",
+    "lem-sfb-diagonal-p-form-separable-isotropy-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.6, Definition 1.10, Lemma 1.11 (1)⇒(2)⇒(3), printed pp.5–7, and Lemmas 1.12–1.13, printed p.7; read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "Permute the coordinates and the tuple $b$ together so $m_1\\ge\\cdots\\ge m_n$, and let $r$ be the least index with $b_r\\ne0$. Define the polynomial substitution $S$ by $x_i=y_i$ for $i<r$, $x_r=b_r y_r$, and $x_i=y_i+b_i y_r^{p^{m_r-m_i}}$ for $i>r$. It is additive by [def-weil-ring-frobenius] and has polynomial inverse $y_r=x_r/b_r$, $y_i=x_i$ for $i<r$, and $y_i=x_i-b_i(x_r/b_r)^{p^{m_r-m_i}}$ for $i>r$; hence it is a $k$-group automorphism by the affine-spectrum dictionary. In $Q\\circ S$ the coefficient of $y_r^{p^{m_r}}$ is $\\sum_{i\\ge r}c_i b_i^{p^{m_i}}=P_Q(b)=0$. Each lower term of $Q_i$ for $i>r$, after substitution, contributes a $y_r$ power strictly below $p^{m_r}$, since $p^j p^{m_r-m_i}<p^{m_r}$ for $j<m_i$; the same strict bound holds for lower terms of $Q_r$. All coordinate polynomials in $y_i$ with $i\\ne r$ retain their old degrees. Thus either the $y_r$ coordinate polynomial vanishes or $D(Q\\circ S)<D(Q)$. In the latter case the curve $S_K^{-1}\\circ v$ verifies the induction hypothesis for the new polynomial, by step 3. Strong induction therefore reaches a zero coordinate. This also covers degree-one terms ($m_i=0$); it extracts no $p$th root in $k$.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.6, Definition 1.10, Lemma 1.11 (1)⇒(2)⇒(3), printed pp.5–7, and Lemmas 1.12–1.13, printed p.7; read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "Compose the finitely many permutations and substitutions with the terminal permutation putting the zero coordinate first, and call the resulting automorphism $\\alpha$. The polynomial for $f\\circ\\alpha$ is a sum involving only $x_2,\\ldots,x_n$, so the same sum defines the $k$-group homomorphism $g$ with $f\\circ\\alpha=g\\circ\\pi$. These are polynomial identities, hence hold on every $k$-algebra, including algebras with nilpotents; the first factor therefore maps into the scheme-theoretic kernel (the fibre over zero in [def-sc-group-scheme]). For $n=1$, a nonzero $F$ would give $\\deg(F(v_1))=(\\deg F)(\\deg v_1)>0$, contradicting $F(v_1)=0$. Thus $f=0$ in that case, with $g$ the zero map from $\\mathbf G_a^0=\\operatorname{Spec}k$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.6, Definition 1.10, Lemma 1.11 (1)⇒(2)⇒(3), printed pp.5–7, and Lemmas 1.12–1.13, printed p.7; read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; local copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sc-gm-ga",
+  "lem-trf-additive-polynomial-monomial-classification",
+  "def-weil-ring-frobenius",
+  "def-weil-polynomial-ring",
+  "lem-sfb-diagonal-p-form-separable-isotropy-descent",
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+  "place": "Proposition 1.6, Definition 1.10, Lemma 1.11 (1)⇒(2)⇒(3), printed pp.5–7, and Lemmas 1.12–1.13, printed p.7; read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A group homomorphism from a power of the additive algebraic group to Ga with a nonconstant affine line in its kernel after separable closure can be changed by a group automorphism to ignore one coordinate",
+   "results": "{\"t\": \"2026-10-24T10:07:42Z\", \"tool\": \"leansearch\", \"query\": \"A group homomorphism from a power of the additive algebraic group to Ga with a nonconstant affine line in its kernel after separable closure can be changed by a group automorphism to ignore one coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.ker\", \"MonoidHom.coe_toAdditive_ker\", \"AddCon.ker_coeAddHom\", \"AddMonoidHom.ker\", \"AddMonoidHom.ker_rangeRestrict\", \"MonoidHom.coe_toMultiplicative_ker\", \"AffineEquiv.constVAddHom\", \"AddMonoidHom.fiberEquivKer\"], \"digest\": \"1b8a057254c9c77f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract additive groups, polynomial coefficients, coordinate reindexing, elliptic curves, standard smoothness, or Noether normalization; none gives this algebraic-group assertion over an imperfect field."
+  },
+  {
+   "tool": "grep",
+   "query": "principal.part|coordinate.*automorphism|additive.polynomial|wound",
+   "results": "{\"t\": \"2026-10-24T10:08:41Z\", \"tool\": \"grep\", \"query\": \"principal.part|coordinate.*automorphism|additive.polynomial|wound\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract additive groups, polynomial coefficients, coordinate reindexing, elliptic curves, standard smoothness, or Noether normalization; none gives this algebraic-group assertion over an imperfect field."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, AlgEquiv",
+   "results": "{\"t\": \"2026-10-24T10:08:43Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, AlgEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.renameEquiv\", \"MvPolynomial.renameEquiv_refl\", \"MvPolynomial.renameEquiv_symm\", \"MvPolynomial.renameEquiv_trans\", \"MvPolynomial.renameEquiv_apply\", \"MvPolynomial.totalDegree_renameEquiv\", \"MvPolynomial.isEmptyAlgEquiv\", \"MvPolynomial.uniqueAlgEquiv\"], \"digest\": \"d98662c530352602\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract additive groups, polynomial coefficients, coordinate reindexing, elliptic curves, standard smoothness, or Noether normalization; none gives this algebraic-group assertion over an imperfect field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group homomorphism from Ga power n to Ga whose kernel contains a nonconstant affine line over a separable closure ignores a coordinate after an additive polynomial automorphism",
+   "results": "{\"t\": \"2026-10-24T10:08:43Z\", \"tool\": \"leanfinder\", \"query\": \"A group homomorphism from Ga power n to Ga whose kernel contains a nonconstant affine line over a separable closure ignores a coordinate after an additive polynomial automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NoetherNormalization.T1\", \"WeierstrassCurve.Affine.Point.map_map\", \"ax_grothendieck_of_definable\", \"Algebra.Generators.kerCompPreimage\", \"WeierstrassCurve.Affine.Point.map_some\", \"ax_grothendieck_univ\", \"Field.primitive_element_inf_aux_exists_c\", \"ax_grothendieck_of_locally_finite\"], \"digest\": \"1c3a05db048558a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract additive groups, polynomial coefficients, coordinate reindexing, elliptic curves, standard smoothness, or Noether normalization; none gives this algebraic-group assertion over an imperfect field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive polynomial with a polynomial curve in its zero locus over a Galois extension can be transformed to be independent of the first variable over the original field",
+   "results": "{\"t\": \"2026-10-24T10:11:16Z\", \"tool\": \"leanfinder\", \"query\": \"An additive polynomial with a polynomial curve in its zero locus over a Galois extension can be transformed to be independent of the first variable over the original field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial\", \"WeierstrassCurve.Affine.baseChange_addPolynomial\", \"Field.primitive_element_inf_aux_exists_c\", \"WeierstrassCurve.Affine.C_addPolynomial\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.Affine.CoordinateRing.YClass\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"WeierstrassCurve.Affine.map_addPolynomial\"], \"digest\": \"cf15686698c6e98e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract additive groups, polynomial coefficients, coordinate reindexing, elliptic curves, standard smoothness, or Noether normalization; none gives this algebraic-group assertion over an imperfect field."
+  },
+  {
+   "tool": "grep",
+   "query": "principal.part|coordinate.*automorphism|additive.polynomial",
+   "results": "{\"t\": \"2026-10-24T10:53:40Z\", \"tool\": \"grep\", \"query\": \"principal.part|coordinate.*automorphism|additive.polynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group kernels, affine equivalences and variable renaming do not give nonlinear additive-polynomial coordinate extraction; the Weierstrass declarations concern elliptic curves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A vector group homomorphism with an affine line in its kernel after separable closure has a coordinate axis in its kernel after a group automorphism",
+   "results": "{\"t\": \"2026-10-24T10:53:41Z\", \"tool\": \"leansearch\", \"query\": \"A vector group homomorphism with an affine line in its kernel after separable closure has a coordinate axis in its kernel after a group automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.ker\", \"MonoidHom.rangeRestrict\", \"LinearMap.ker_toAddSubmonoid\", \"AffineEquiv.constVAddHom_apply\", \"AffineEquiv.constVAddHom\", \"AffineBasis.coord_smul\", \"AddCon.ker_coeAddHom\", \"AffineEquiv.linearHom_apply\"], \"digest\": \"589a0cd89849f984\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group kernels, affine equivalences and variable renaming do not give nonlinear additive-polynomial coordinate extraction; the Weierstrass declarations concern elliptic curves."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, AlgEquiv",
+   "results": "{\"t\": \"2026-10-24T10:53:42Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, AlgEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.renameEquiv\", \"MvPolynomial.renameEquiv_refl\", \"MvPolynomial.renameEquiv_symm\", \"MvPolynomial.renameEquiv_trans\", \"MvPolynomial.renameEquiv_apply\", \"MvPolynomial.totalDegree_renameEquiv\", \"MvPolynomial.isEmptyAlgEquiv\", \"MvPolynomial.uniqueAlgEquiv\"], \"digest\": \"d98662c530352602\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group kernels, affine equivalences and variable renaming do not give nonlinear additive-polynomial coordinate extraction; the Weierstrass declarations concern elliptic curves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a vector group to the additive group with a nonconstant polynomial curve in its kernel over a separable closure ignores one variable after an additive group automorphism",
+   "results": "{\"t\": \"2026-10-24T10:53:43Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a vector group to the additive group with a nonconstant polynomial curve in its kernel over a separable closure ignores one variable after an additive group automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.VariableChange.mapHom\", \"WeierstrassCurve.Affine.Point.map_map\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial\", \"WeierstrassCurve.Affine.Point.map\", \"WeierstrassCurve.Affine.map_addPolynomial\", \"WeierstrassCurve.Affine.CoordinateRing.mk_φ\", \"WeierstrassCurve.Affine.CoordinateRing.mk_ψ\"], \"digest\": \"aa8e8365eecb182c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group kernels, affine equivalences and variable renaming do not give nonlinear additive-polynomial coordinate extraction; the Weierstrass declarations concern elliptic curves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-line-generated-vector-subgroup-straightening",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Nonzero torus-stable central vector subgroup of a split unipotent group. Positive-characteristic construction: canonical vector factor of the central p-torsion kernel, before proving nonvanishing and torus stability. Supporting input: Proposition 1.15, printed p.9, including the coordinate-automorphism conclusion; the retraction is its coordinate projection. Supporting polynomial input: Lemma 1.11, printed pp.6--7, and Lemma 1.13, printed p.7, using Lemma 1.12 for Galois descent of a principal-part zero; the n=1 degree argument is included.",
+   "via": [
+    "lem-sfb-affine-line-generated-vector-subgroup-straightening",
+    "lem-sfb-commutative-p-torsion-vector-wound-factor",
+    "lem-sfb-split-unipotent-central-vector-subgroup",
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-additive-kernel-separable-axis-extraction",
+  "worker": "stage1",
+  "summary": "Q133: read Conrad Proposition 1.6 and Lemmas 1.11–1.13 online; reuse the existing homogeneous additive-polynomial classification and give the weighted-leading-term and triangular degree-descent calculations explicitly. One new statement-only separable-isotropy-descent node. Checked n=1, F=0, vanishing coordinate polynomials, m_i=0, imperfect fields and scheme-theoretic containment. No statement change.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite chain, ending in Proposition 1.15: Lemma 1.11 principal-part coordinate descent and Lemma 1.13 separable descent. The current latest blueprint was read; no algebraic-group duplicate was found. The inherited ancestor chain has from.node=null; its existing metadata is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-additive-polynomial-monomial-classification",
+    "why": "Generic polynomial-identity classification, applied to homogeneous components to write a group homomorphism as a p-polynomial. The six-functor unit has no such algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-additive-polynomial-monomial-classification"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-4f46f56d5",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-4f46f56d5 (reviewer sub-agent of L); spot-checked: Read Conrad appbnew.pdf (public PDF fetched to /tmp, still WANTED locally): Prop 1.6, Def 1.10, Lemma 1.11 with full proof, Lemmas 1.12-1.13. The item is Lemma 1.11 (1)=>(3) with separable descent by Lemma 1.13 (a separable closure is Galois); statement unchanged. Step 1: Prop 1.6 written out; homogeneous components meet the hypotheses of the trf classification exactly (nonzero, degree d>0, same polynomial additivity identity); F(0)=0; converse via Frobenius. Step 3 matches (1)=>(2) line by line (N=max s_i p^{m_i}, leading coefficient Σc_iA_i^{p^{m_i}}) and is redone after every coordinate change, as Conrad's 'for every h' requires. Step 4 matches Conrad's substitution h': m_r-m_i>=0, inverse correct, y_r^{p^{m_r}} coefficient P_Q(b)=0, lower exponents <p^{m_r}, measure D strictly drops or a coordinate vanishes. Step 5 gives scheme-theoretic containment and handles n=1 by degrees. New node lem-sfb-diagonal-p-form-separable-isotropy-descent: statement only, self-contained, true, strictly smaller than the item; extends Galois to algebraic separable via the normal closure of a finite subextension. Conrad's printed proof of 1.12 normalizes the smallest-exponent coordinate, which needs p-th roots; normalizing a maximal-exponent coordinate instead is correct, and the node's statement stands (noted for its future worker). Inseparable counterexample x^p-ay^p over F_p(a) is excluded by the separability hypothesis. No duplicate found by rg -L over dag/nodes (principal part, p-polynomial, additive polynomial, p^{m_i}, wound, conrad-structure); six sfb candidate statements read. Batch-5: citing lem-trf-additive-polynomial-monomial-classification is accepted. It is a generic algebra lemma that neither assumption gives; its 9-node closure is only definitions and binomial lemmas (mathlib/definition nodes), reaching no trace-formula or duality proof; lem-sfb-torus-vector-group-linearization already cites it. Its split_report.tool_uses entry is accepted. No SGA citations. No fixes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdditiveKernelSeparableAxisExtraction",
+  "declaration": "AlgebraicGeometry.additive_kernel_separable_axis_extraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdditiveKernelSeparableAxisExtraction.lean",
+  "statement": "theorem additive_kernel_separable_axis_extraction {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (n : ℕ) (K : Type u) [Field K] [Algebra k K] [Algebra.IsAlgebraic k K] [Algebra.IsSeparable k K] [IsSepClosed K] (f : (∏ᶜ (fun _ : Fin (n + 1) ↦ Grp.mk (StandardGroupSchemes.additive k))) ⟶ Grp.mk (StandardGroupSchemes.additive k)) (u : StandardGroupSchemes.additive K ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj (∏ᶜ (fun _ : Fin (n + 1) ↦ Grp.mk (StandardGroupSchemes.additive k))).X) (hu : ¬ ∃ c : 𝟙_ (Over (Spec (.of K))) ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj (∏ᶜ (fun _ : Fin (n + 1) ↦ Grp.mk (StandardGroupSchemes.additive k))).X, toUnit (StandardGroupSchemes.additive K) ≫ c = u) (hfu : u ≫ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map f.hom.hom = u ≫ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map (1 : (∏ᶜ (fun _ : Fin (n + 1) ↦ Grp.mk (StandardGroupSchemes.additive k))).X ⟶ StandardGroupSchemes.additive k)) : ∃ α : (∏ᶜ (fun _ : Fin (n + 1) ↦ Grp.mk (StandardGroupSchemes.additive k))) ≅ (∏ᶜ (fun _ : Fin (n + 1) ↦ Grp.mk (StandardGroupSchemes.additive k))), ∃ g : (∏ᶜ (fun _ : Fin n ↦ Grp.mk (StandardGroupSchemes.additive k))) ⟶ Grp.mk (StandardGroupSchemes.additive k), α.hom ≫ f = Pi.map' Fin.succ (fun _ : Fin n ↦ 𝟙 (Grp.mk (StandardGroupSchemes.additive k))) ≫ g ∧ (∃ l : Grp.mk (StandardGroupSchemes.additive k) ⟶ Grp.mk (GrpObj.ker f.hom.hom), l.hom.hom ≫ GrpObj.kerι f.hom.hom = (Pi.lift (fun i : Fin (n + 1) ↦ if i = 0 then 𝟙 (Grp.mk (StandardGroupSchemes.additive k)) else 0)).hom.hom ≫ α.hom.hom.hom) ∧ (n = 0 → f = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-022754d05",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Clause-by-clause match: char p via Fact p.Prime+CharP; n+1 reindexing of n≥1; E = ∏ᶜ Grp.mk (additive k) in Grp(Over Spec k); K separable closure via IsAlgebraic+IsSeparable+IsSepClosed (universe u harmless); u : additive K ⟶ Over.pullback(Spec algebraMap).obj E.X; nonconstancy = no factorization through a K-point; f_K∘u=0 via pullback.map of 1=toUnit≫η; α : E ≅ E in Grp; α.hom≫f = Pi.map' Fin.succ 𝟙 ≫ g; first axis via Pi.lift(if i=0 then 𝟙 else 0) with Mathlib Grp zero = toUnit≫η, factoring through GrpObj.ker (pullback over η); n=0 → f=0. Edge cases n=0, f=0, K=k, imperfect k checked. Statement verbatim; node differs from live only in lean; sorry only; docstrings with source+blueprint+proof steps. H11 self-review advisory only. Parallel Q06 449c3031a (PASS, unlanded) delivers same file+decl with equivalent signature: only one should land, the later must not rebind."
+ }
+}

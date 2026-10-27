@@ -1,0 +1,110 @@
+## Worker report
+
+The three modules define the normalized comparison data and state the clauses of lem-sfb-internal-section-hom-continuity-comparison in the ordinary unbounded derived categories. All postponed proofs are named theorems with `sorry`; every definition contains actual data. No source statement is changed. The earlier worker's stage-1 split objection does not apply to this stage-2 task: Q139 reviewed the split, and the live node had no Lean record when this work started.
+
+### Hypotheses and objects
+
+* `X : Scheme.{u}` uses `Scheme.ProEt.topology X`, whose object universe is `u+1` and morphism universe is `u`. Coefficients and section modules have universe `u+1`, and `DerivedCategory.{u+1}` is the existing ordinary derived category. No equality of site universes is imposed.
+* `Λ` and `Γ` are sheaves on `coherentTopology Profinite.{u}` with `MonObj` and `IsCommMonObj`, precisely the recorded presentation of commutative condensed rings. The coefficient map is `a : Λ ⟶ Γ` with `IsMonHom a`.
+* The pulled-back internal rings are the existing `condensedRingObj Λ X` and `condensedRingObj Γ X`; their map is `coefficientMap a X`. `ring Λ X` and `sectionCoefficientMap a` are the actual section-ring reconstruction and its map.
+* `[∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]` is the assumed ordinary exactness on every scheme. Extension is additive and right exact as the recorded left adjoint, so finite-limit preservation is exactly the additional exactness condition.
+* `Internal`, `Modules`, `equivalence`, `complexForward` and `forward` are the existing internal module category, section-module category, fixed equivalence, termwise equivalence and derived equivalence. They are not privately rebuilt categories.
+* Native tensor and Hom are `CondensedRing.derivedTensor` and `CondensedRing.derivedHom`. Section Hom is the existing `hom`, namely `derivedInternalHomOfUniverses`. `M : ScalarHomModels` supplies the existing K-flat/K-injective ringed-site models, and `μ` is the recorded representative-normalized scalar tensor comparison. These model parameters specify the source's fixed ordinary constructions, not additional flatness or boundedness conditions on the inputs.
+* `HomPresentation S T` uses the dependency's `TensorComparison Λ X S T` and adds the natural Hom isomorphism with its evaluation equation. `homPresentation_nonempty` asserts existence for the prescribed normalized models. Thus the hypotheses `PΛ` and `PΓ` are exactly the evaluation-normalized presentations mentioned by the node.
+
+### Each clause
+
+1. `internalEvaluation` is the native counit with the native Koszul braiding, in the right-evaluation order used by `CoefficientClosedStructure`. `HomPresentation.homIso` is natural in both Hom inputs, and `.evaluation` fixes its normalization together with `.tensor`.
+2. `internalHomRepresentative P` transports the entire existing `SfbHomFilteredColimit.homFixed` functor through the termwise inverse equivalence. `homRepresentativeIso` is the actual equivalence counit, including all maps. `internalHomRepresentative_computes` identifies its localization with native derived Hom; the displayed equation ties the identification to `HomPresentation.homIso`, `localizationIso`, the fixed `coefficientHomResolutionIso`, and the representative counit. No collection of unrelated representatives or arbitrary comparison arrows is used.
+3. `continuity_map_transport` quantifies over a small filtered `I : Type (u+1)`, an actual complex diagram, `b : ℤ`, and its common termwise vanishing below `b`. It compares the actual `colimit.post` arrows by `preservesColimitIso`, `colimMap`, and `homRepresentativeIso`. These are exact termwise colimits of complexes, not underived colimits in a derived category.
+4. `continuity_iff` states the equivalence for every such filtered diagram. `QuasiIso` of the chain comparison is exactly invertibility of its localization. `P` is arbitrary and unbounded; no boundedness of its Hom complex is assumed.
+5. `termwise_lower_bound_iff` compares zero objects degree by degree; `cohomological_lower_bound_iff` compares `K.IsGE b` and `(forward.obj K).IsGE b`. These declarations can be applied separately to either coefficient ring and to every diagram object.
+6. `internalScalarHom` is constructed as the native tensor-Hom transpose of inverse scalar tensor comparison followed by scalar-extended evaluation. It is a map, with no assertion of invertibility. `ScalarTransport.restriction`, `.sections`, `.derivedRestriction` and `.restrictionNormalization` specify the actual restriction identifications, unchanged section maps and their localization. `.extension` and `.adjunction` specify the canonical normalized scalar-extension identification. `.tensor` is the normalized scalar tensor square. `.hom` is the equality carrying the actual internal map to the existing `coefficientBaseChangeHom` on sections.
+7. `internalScalarHom_naturality` states naturality for arbitrary derived morphisms in both inputs. `internalScalarHom_composition` and `internalScalarHom_identity` state the native equations with `internalExtensionComp` and `internalExtensionId`. The compositors and unitors are the actual adjunction mates of restriction, including the coefficient map laws. `scalarTransport_composition` ties the three transports for a, b and a ≫ b to `sectionExtensionComp`, which is the published `scalarHomExtensionComp` followed by the actual coefficient-functor composition transport. `scalarTransport_identity` ties the identity transport to `sectionExtensionId`, which is `scalarHomExtensionId` with the coefficient identity transport. The copied `DerivedCoherence` conjunct is removed.
+8. `internalRestrictedHom` is the five scalar/closed adjunction bijections applied to the identity, with the actual native tensor comparison. `restricted_hom_transport` identifies its image with the dependency's `ClosedScalarHom.iso` and the fixed restriction, extension and Hom comparisons. Applying it at `N = A L` and combining with `.hom` identifies the restricted scalar evaluation maps as in proof step 8.
+9. `coefficient_diagram_evaluation_transport` quantifies over an actual small filtered functor `C : I ⥤ Under (CommMon.mk Λ)`. Its objects are the coefficient maps from Λ, and its arrows are actual commuting coefficient triangles. Exactness is required for every object map and every transition coefficient map on every scheme. It uses the same family of normalized `ScalarTransport`s, arbitrary unbounded K and L, and two whole functorial complex representative diagrams D and E with a natural representative evaluation f. The source and target identifications s and r, together with `_normalization`, pin every f component to the restriction of the actual `internalScalarHom` for the corresponding coefficient object. The first conclusion identifies each native evaluation with the actual section `coefficientBaseChangeHom`, using the corresponding ScalarTransport.extension and HomPresentation isomorphisms; applying its pinned derivedRestriction gives exactly the restricted evaluation equation. The second conclusion gives each actual coefficient triangle and its native scalar-Hom composition equation with internalExtensionComp. The third gives the transported representative arrow squares for every arrow of this very diagram. The fourth identifies the actual `colimMap f` with the induced map on the transported termwise colimits. Quantification over every normalized whole representative system includes the canonical coefficient-transition system and never reselects its arrows. No continuity or invertibility hypothesis is present. The older generic `filtered_colimit_map_transport` is retained only as a general supporting clause; it no longer stands in for the coefficient-diagram assertion.
+10. `finite_free_iff` compares the same finite rank `n` using coproducts of the actual regular module and section-ring unit. `module_colimit_iff` compares a specified cocone and its literal image, and `module_colimit_desc` compares its unique induced maps. `sectionRingFunctor` reconstructs commutative internal ring objects with the actual `sectionScalarMap` on every arrow. An algebra over `B` is `Under B`; `algebra_colimit_iff` uses `Under.post sectionRingFunctor` on the specified cocone, and `algebra_colimit_desc` compares the induced maps. Thus no transition maps, cocone legs or bases are reselected.
+
+There is no boundedness, perfectness or continuity binder on the scalar comparison. The only lower-bound hypotheses occur in the continuity clauses.
+
+### Dependencies read and used
+
+The module uses the declarations below (including their full source signatures and docstrings). The four added statement dependencies were already landed: they supply the shared representative model, its fixed localization, the scalar normalization data and the concrete termwise/derived reconstruction functors. The additional definition nodes below own the missing normalized comparison data; no dependency repair is needed.
+
+* `def-weil-size-convention`: `None`, `None`.
+* `def-weil-pbc-proetale-site`: `Mathlib.AlgebraicGeometry.Sites.Proetale`, `AlgebraicGeometry.Scheme.ProEt`.
+* `sk-def-sfb-condensed-ring`: `Sheaf.Topology.ProfiniteCondensedRing`, `Profinite.CondensedRing`.
+* `sk-def-sfb-pulled-back-coefficients`: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic`, `AlgebraicGeometry.ProEtale.coefficientRing`.
+* `sk-def-sfb-change-of-scalars`: `WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars`, `CategoryTheory.Mod.extendScalars`.
+* `sk-def-sfb-derived-tensor-hom`: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom`, `AlgebraicGeometry.ProEtale.CondensedRing.derivedHom`.
+* `def-pc-kflat-complex`: `Sheaf.Algebra.Homology.KFlatIndependentCoefficients`, `CochainComplex.IsKFlatIndependentCoefficients`.
+* `def-pur-derived-internal-hom`: `Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses`, `CategoryTheory.derivedInternalHomOfUniverses`.
+* `def-weil-pbc-internal-abelian-sheaf-module-equivalence`: `Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence`, `CategoryTheory.InternalAbelianSheafModule.sectionModuleEquivalence`.
+* `def-weil-pbc-category-colimit`: `Mathlib.CategoryTheory.Limits.HasLimits`, `CategoryTheory.Limits.colimit`.
+* `def-sfb-internal-scalar-tensor-comparison`: `Sheaf.Paper.InternalScalarTensorComparison`, `AlgebraicGeometry.ProEtale.CondensedRing.internalScalarTensorComparison`.
+* `def-sfb-section-scalar-map-data`: `Sheaf.CategoryTheory.InternalSectionScalarAdjunction`, `CategoryTheory.InternalAbelianSheafModule.sectionScalarMap`.
+* `def-sfb-internal-section-derived-tensor-comparison`: `Sheaf.Paper.InternalSectionDerivedTensorComparison`, `AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.TensorComparison`.
+* `lem-pur-derived-change-of-rings`: `Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel`, `SheafOfModules.nonempty_derivedChangeOfRingsCochainModel`.
+* `def-sfb-internal-hom-strict-models`: `Sheaf.Paper.DerivedInternalHomFilteredColimitData`, `WeilConjectures.SfbHomFilteredColimit.Normalized`.
+* `def-coef-hom-representative-evaluation`: `Sheaf.Paper.CoefficientHomRepresentativeEvaluation`, `WeilConjectures.coefficientHomSectionEvaluation`.
+* `def-sfb-scalar-hom-comparison-data`: `Sheaf.Algebra.Homology.ScalarInternalHomData`, `CategoryTheory.ScalarHomTensorNormalization`.
+* `def-sfb-internal-section-total-comparison`: `Sheaf.Paper.InternalSectionTotalComparison`, `AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.complexTensorIso`.
+* `lem-pe-internal-section-tensor-comparison`: `Sheaf.CategoryTheory.InternalSectionTensorComparison`, `CategoryTheory.InternalAbelianSheafModule.internal_section_tensor_comparison`.
+* `lem-weil-pbc-exact-functor-complex-cohomology`: Mathlib `CategoryTheory.Functor.homologyFunctorIso`.
+* `lem-weil-pbc-module-sheaves-colimits-forgetful`: `WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful`, `CategoryTheory.moduleSheaves_colimits_forgetful`.
+* `lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact`: Mathlib `CategoryTheory.Sheaf.hasExactColimitsOfShape`.
+* `lem-sfb-module-object-ringed-site-derived-comparison`: `Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison`, `AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.moduleObject_ringedSite_derived_comparison`.
+* `lem-sfb-internal-section-scalar-adjunction`: `Sheaf.CategoryTheory.InternalSectionScalarAdjunction`, `CategoryTheory.InternalAbelianSheafModule.internal_section_scalar_adjunction`.
+* `lem-sfb-scalar-ordinary-tensor-comparison`: `Sheaf.Algebra.Homology.ScalarHomOrdinaryTensorComparison`, `SheafOfModules.ScalarHomOrdinary.scalarOrdinaryTensorComparison_exists`.
+* `lem-sfb-hom-flat-scalar-evaluation-model`: `Sheaf.Algebra.Homology.FlatScalarEvaluationModel`, `CategoryTheory.FlatScalarEvaluation.model_exists`.
+* `lem-sfb-closed-scalar-hom-comparison`: `Sheaf.CategoryTheory.ClosedScalarHomComparison`, `CategoryTheory.ClosedScalarHom.iso`.
+* `lem-sfb-dc-hom-scalar-adjunction`: `Sheaf.Algebra.Homology.ScalarInternalHomAdjunction`, `CategoryTheory.scalarInternalHomAdjunction_exists`.
+* `det-def-sfb-ring-object-sheaf`: `Sheaf.CategoryTheory.RingObjectSheaf`, `CategoryTheory.ringObjectOfSheafOfRings`.
+
+### Edge cases
+
+The empty scheme is permitted. Zero complexes and arbitrary unbounded first inputs are permitted. The rank `n = 0` gives the empty coproduct/zero free module on both sides. `IsFiltered` supplies the source's nonempty filtered indexing convention, so an empty indexing category is not accidentally admitted as filtered; unrelated algebra/module cocone statements also admit empty diagrams when their colimits exist. Identity coefficient maps are explicitly included by `internalScalarHom_identity` and `scalarTransport_identity`, and arbitrary composable exact maps by `internalScalarHom_composition` and `scalarTransport_composition`. A stationary coefficient diagram is admitted by the coefficient-diagram theorem; its representative normalization still fixes its evaluation maps. No Hom complex is assumed K-flat. Small-site object and morphism universes remain distinct. The representative equation prevents conflating chain colimits with chosen derived-category colimits.
+
+### Searches
+
+* `msearch.py ... leanfinder "An exact monoidal equivalence between internal module objects and section ring sheaves transports derived internal Hom continuity and scalar evaluation comparisons"`: 8 nearby results (`LightCondensed.ihomPoints`, its variants, and `SheafOfModules.unitHomEquiv_symm_comp`), none the comparison statement.
+* `msearch.py ... loogle "CategoryTheory.ClosedScalarHom.iso, CategoryTheory.Limits.colimit.post"`: no result; the search service did not know the project-only first declaration. Its source was instead read directly and used.
+* `msearch.py ... grep "internal_section.*(continuity|hom)|hom.*continuity.*comparison" CategoryTheory`: no Mathlib result.
+* `rg` for the item id and internal-section Hom/continuity patterns under `lean/WeilConjectures` and `lean/Sheaf`: no existing declaration for this node. Searches also found and reused the already landed strict Hom representative and scalar coherence interfaces.
+
+The local Stacks sections 08J9/0A95 and the blueprint Hom unit were read alongside the node's ten-step transport argument. This node is an agent application of those sources, not a verbatim Stacks lemma. No `STATEMENT-DISPUTED` issue was found.
+
+### Validation
+
+Compilation is exclusively through the prescribed `scompile.py`. The generic size-transport instances imported by proof dependencies initially left a hidden maximum universe unsolved; the module disables those five imported max-universe instances during elaboration and uses the already existing fixed-universe small-site instances. It imposes no new universe equality or mathematical hypothesis. Final compile and delivery-preflight results are recorded below when complete.
+
+## New nodes
+
+`def-sfb-internal-section-hom-comparison-data`, in `Sheaf.Paper.InternalSectionHomComparisonData`, defines the evaluation-normalized `HomPresentation`, actual native right evaluation, functorial transported representatives and their actual counit, the localization-square predicate, termwise equivalence instance and section-ring functor. Its hypotheses and every field are described in the clause correspondence above. The source is Stacks 08J9/0A95 and 07A4/07A6 with 03EK, applied in the item's steps 3–8. Mathlib LeanFinder returned eight underived nearby definitions (including `ModuleCat.tilde`, `SheafOfModules.evaluation`, and `unitHomEquiv`); the Loogle query had no hits and reported the incorrect namespace of `preservesColimitIso`; Mathlib grep had no matches. Exact project-name searches and DAG/blueprint searches had no matches. The existing tensor, representative and scalar models are reused; none supplies this missing evaluation-normalized internal presentation. All data are real definitions and no theorem is postponed in this data module. Separating its owning definition node also keeps the theorem module's compilation cost within the required per-file budget.
+
+`def-sfb-internal-section-scalar-hom-transport-data`, in `Sheaf.Paper.InternalSectionScalarHomTransportData`, defines the native evaluation-transpose scalar map, five-bijection restricted map, actual section coefficient map and `ScalarTransport`. It uses the preceding evaluation-normalized Hom presentations and the published scalar models. Each field is rendered as detailed in clauses 6 and 8 above. The same source and searches apply: existing scalar constructions provide the ingredients, but none provides these native maps and their normalized presentation-transport interface. Splitting these independent scalar data from the representative data keeps each file within the compilation budget.
+
+
+An independent second reading is reserved for the maintainer’s delivery review. The dispatcher forbids starting another agent.
+
+Final `scompile.py` validation passed for all three registered files, in dependency order, with no errors or unexpected warnings. Library timings were 16.1 s for representative data, 44.5 s for scalar data and 12.8 s for the theorem module. The duplicate sandbox checks passed too.
+
+The first dry run requested a separate LeanSearch record for each new node (the initial records contained LeanFinder, Loogle and grep). The actual LeanSearch query “Evaluation normalized derived internal Hom comparison under the exact equivalence from internal module objects to sheaves of section ring modules, including scalar extension transposes” returned eight results: CategoryTheory.Abelian.Ext.homLinearEquiv, PresheafOfModules.unitHomEquiv, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, SheafOfModules.evaluation, CategoryTheory.sheafSectionsNatIsoEvaluation, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, CategoryTheory.sheafHomSectionsEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars. They are ordinary adjunction/sections/evaluation or Ext declarations; none supplies these normalized derived presentation data. Both new nodes now record that search.
+
+## Returned-delivery repair
+
+H3: Removed the copied section-only coherence conjunct. Added native internal composition and identity equations, canonical internal scalar compositors/unitors, and equations for the three ScalarTransports (a, b, a ≫ b) and the identity ScalarTransport against the published section scalar compositors/unitors. Added `coefficient_diagram_evaluation_transport` on an actual filtered coefficient-ring functor with exact object/transition maps. Its object representatives are pinned to internalScalarHom, and its conclusions explicitly cover section evaluations, arrow squares and the induced map on termwise colimits.
+
+H2: No reference to `FlatScalarEvaluation.DerivedCoherence` remains in a declaration signature or body, and the direct import of its owning theorem module was removed. The data node explicitly cites the existing scalar-comparison definition node for scalarHomExtensionComp/Id.
+
+The item statement and proof plan are unchanged. The first new data node was extended to describe the canonical coherence constructions in its module. The scalar-transport data retain their original pinned sections, restriction, extension, tensor and Hom fields. All postponed assertions remain named theorems with the item's blueprint and proof docstrings.
+
+Self-check of the repair: every exact coefficient arrow, including identity arrows and stationary filtered diagrams, is present. All internal equations mention the native internalScalarHom and canonical adjunction-mate compositor or unitor. ScalarTransport composition uses all three transports and the published section scalar compositor; identity uses the published unitor. The filtered object equation contains both actual native evaluation and actual section coefficientBaseChangeHom; coefficient arrow equations and chain colimit maps are explicit. The unchanged earlier clauses were retained. No statement correction was made.
+
+The current upstream attachments for def-pur-derived-internal-hom and lem-pur-derived-change-of-rings also expose ordinary ModuleCat interfaces, but explicitly retain the generic ringed-site declarations in their lean.declarations and through public imports. This delivery uses those retained generic declarations, which are exactly the required site interfaces; no dependency repair is needed.
+
+Resumed repair validation: all three delivered modules passed the server compiler. The dry run found a truncated primary lean.statement record (a binder assignment was mistaken for the proof separator); the record now contains the complete signature through the final ScalarTransport binder. All Lean attachment dates were refreshed to the UTC delivery date.
+
+## Second reading by Q127
+
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.

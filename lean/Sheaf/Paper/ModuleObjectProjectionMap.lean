@@ -23,7 +23,7 @@ right-adjoint mate gives the required map, without choosing a map between endpoi
 
 set_option autoImplicit false
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
@@ -32,6 +32,34 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- A morphism together with its category and endpoints, used to keep the projection
+map interface compact. All fields below are filled by the existing canonical construction.
+Source: the canonical-map convention (blueprint: def-sfb-module-object-projection-map). -/
+structure ProjectionMorphismData where
+  carrier : Type (v + 1)
+  [category : Category.{v} carrier]
+  source : carrier
+  target : carrier
+  morphism : source ⟶ target
+
+attribute [instance 20000] ProjectionMorphismData.category
+
+/-- The existing canonical projection construction, together with its exact category
+and endpoints. Source: the canonical-map convention
+(blueprint: def-sfb-module-object-projection-map). -/
+def moduleObjectProjectionData
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) : ProjectionMorphismData :=
+  { carrier := _
+    category := _
+    source := _
+    target := _
+    morphism := (((derivedUpperStarLowerStarAdjunction Λ f).rightAdjointProjectionMap
+      (T_C := derivedTensor Λ X) (T_D := derivedTensor Λ Y)
+      (leftDerivedUpperStarTensor Λ f)).app K).app L }
 
 /-- The canonical projection map: the adjoint transpose of the generic K-flat
 pullback tensor comparison followed by counit tensor identity.
@@ -42,8 +70,6 @@ def moduleObjectProjectionMap
       (condensedRingObj Λ X)))
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y))) :=
-  (((derivedUpperStarLowerStarAdjunction Λ f).rightAdjointProjectionMap
-    (T_C := derivedTensor Λ X) (T_D := derivedTensor Λ Y)
-    (leftDerivedUpperStarTensor Λ f)).app K).app L
+  (moduleObjectProjectionData Λ f K L).morphism
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -1,0 +1,159 @@
+{
+ "id": "def-sfb-open-moduli-substack",
+ "kind": "definition",
+ "title": "Full open substacks and the unramified relative diagonal",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal F$ be a category fibred in groupoids over schemes over $S$, with the total-category, discrete-presheaf and 2-fibre-product conventions of [def-sfb-stable-pointed-moduli-groupoids]. A full open substack is specified by a predicate $P$ on its objects, stable under every cartesian pullback, such that for every scheme map $t:h_T\\to\\mathcal F$ the 2-fibre product $h_T\\times_{\\mathcal F}\\mathcal F_P$ is equivalent over $h_T$ to a scheme $W$ with an open immersion $W\\to T$. Its category is the full subcategory $\\mathcal F_P$ with the original projection to schemes. Containment of two such full substacks means implication of their object predicates. The two projections from a 2-fibre product are the actual two comma projections over the base; the second lies over the base because the comparison isomorphism lies over an identity.\n\nA map $Z\\to T$ from an algebraic space [def-trf-algebraic-space] to a scheme is unramified when all its representable etale scheme charts give unramified scheme morphisms [def-weil-unramified-morphism]. The relative diagonal of $\\mathcal F$ is representable and unramified if, for every two scheme maps $T\\to\\mathcal F$ and $U\\to\\mathcal F$, the 2-fibre product is represented by an algebraic space $Z$ with an unramified map $Z\\to T\\times_S U$, and the representing equivalence identifies both projections with those of this specified map. These definitions assert neither existence of a largest open nor existence of an atlas.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-unramified-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0DSM (lemma-open-DM-locus), 06N3 (theorem-DM) and 050N (lemma-separated-implies-morphism-separated, relative diagonal over a scheme); open substacks: stacks-properties.tex Tag 04YM (definition-substacks), expressed by its scheme tests; 2-fibre products: Tag 003R."
+ },
+ "proof": [
+  {
+   "text": "For the second-projection compatibility obligation, restrict the comma comparison natural transformation to the full subcategory defining the 2-fibre product, then apply H.p. For each object the identity-lift condition gives equal base objects by Mathlib IsHomLift.domain_eq and IsHomLift.codomain_eq. IsHomLift.fac' identifies the component with eqToHom of that equality. Thus every component is invertible.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib NatIso.isIso_of_isIso_app and Functor.ext_of_iso to this transformation. Rewrite the two based-functor equations f.w and g.w and unfold the explicitly defined first projection. Symmetry gives equality of the second projection followed by G.p with the chosen base functor. This is precisely the proof field required to define moduliTwoFiberSnd. The other declarations are the original explicit full-subcategory, scheme-test and diagonal definitions; no existence statement or definition changes.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "example-2-fibre-product-categories (Tag 003R); lemma-2-product-categories-over-C (Tag 0040)",
+  "note": "K9, 2026-10-23: direct Mathlib proof of moduliTwoFiberSnd_projection using the comparison natural transformation and its identity-lift condition. Definitions unchanged."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open substacks of the moduli stack of proper algebraic space curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Type*\", \"doc\": \"For a scheme $X$, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme} (U : X.Opens) : Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.instIsOverι\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(U : X.Opens) : U.ι.IsOver X\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, the canonical inclusion morphism from the restricted scheme $U$ to $X$ is over $X$, meaning the triangle formed by the incl\"}\n  {\"name\": \"AlgebraicGeometry.opensRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \": Scheme.Opens U ≃ { V : X.Opens // V ≤ U }\", \"doc\": \"For a scheme $X$ and an open subset $U$ of $X$, there is a canonical equivalence between the open subsets of $U$ and the open subsets of $X$ contained in $U$. This equivalence arises from the open imm\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsProper f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsProper f) →\\n        ([toIsSeparated : AlgebraicGeometry.IsSeparated f] →\\n            [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f] →\\n            \", \"doc\": \"This function allows defining functions on the type of proper morphisms $ f: X \\\\to Y $ of schemes by specifying their behavior when $ f $ is separated, universally closed, and locally of finite type. \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; returned scheme properties are reused, not redefined"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open substack is a full subcategory stable under pullback whose every scheme base change is an open subscheme; unramified relative diagonal is tested on etale scheme charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.PresheafedSpace CommRingCat} (Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y.toPresheafedSpace)\\n  [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f],\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom Y f)\", \"doc\": \"Given an open immersion $ f : X \\to Y $ where $ Y $ is a scheme, this constructs the corresponding morphism of schemes from $ X $ (equipped with the scheme structure inherited via the open immersion) t\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; returned scheme properties are reused, not redefined"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep CurveStack|ProperCurveFamily|ProperCurveModuli|OpenSubstack|OpenModuliSubstack|HasUnramifiedModuliDiagonal|DeligneMumford AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n CurveStack|curveStack|ModuliStack|OpenSubstack|UnramifiedDiagonal|Infinitesimal.*Aut|infinitesimal.*Aut lean/WeilConjectures lean/Sheaf; rg -l open substack|algebraic stack|flat proper finitely presented dag/nodes/sec-six-functors-basics dag/nodes/sec-trace-formula; blueprint_refs.py search stack of curves; blueprint_refs.py search open substack",
+   "results": "Project: StablePointedModuliGroupoids supplies IsModuliStack, HasAlgebraicSpaceDiagonal, SpaceMapIsEtale, SpaceMapIsSurjective, IsDeligneMumfordModuliStack, but no open-substack or proper-curve category. MarkedInfinitesimalAutomorphisms defines scheme-only marked automorphisms; it cannot handle algebraic-space geometric objects. DAG: the corresponding curve-stack theorems exist but do not define the missing category or open-substack interface; stable-pointed-moduli-groupoids defines the general stack/DM vocabulary, which is reused. blueprint_refs.py: 0 blueprint nodes match each query. No standalone definition node matches either missing notion.",
+   "date": "2026-10-22",
+   "verdict": "no duplicate notion; use recorded stack, space and point definitions"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-stack-infinitesimal-dm-locus",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Definition of the curve moduli category and its open DM locus.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenModuliSubstack",
+  "declaration": "CategoryTheory.OpenModuliSubstack",
+  "declarations": [
+   "CategoryTheory.fullModuliSubcategory",
+   "CategoryTheory.fullModuliInclusion",
+   "CategoryTheory.OpenModuliSubstack",
+   "CategoryTheory.OpenModuliSubstack.category",
+   "CategoryTheory.OpenModuliSubstack.IsContainedIn",
+   "CategoryTheory.moduliTwoFiberSnd_projection",
+   "CategoryTheory.moduliTwoFiberSnd",
+   "CategoryTheory.SpaceMapIsUnramified",
+   "CategoryTheory.HasUnramifiedModuliDiagonal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuliSubstack.lean",
+  "statement": "structure OpenModuliSubstack {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S))",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63e1a6e29",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63e1a6e29",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item Lean matches node and Stacks 0DSW/0E6G clause by clause: ProperCurveModuli.category (algebraic-space families: flat/LFT/LFP on etale charts, closed-immersion diagonal, qc, qs, universally closed on points, geometric fibre topologicalKrullDim<=1; cartesian-square arrows); largest open with HasUnramifiedModuliDiagonal (relative diagonal over S, both projections pinned); IsDeligneMumfordModuliStack conjunct; point iff via SchemePointIn up to iso over Spec Ω and HasTrivialInfinitesimalAutomorphisms (automorphisms over D=Spec Ω[ε] restricting to id along the canonical lift; projection to C not fixed); final clause tests all geometric ProperCurveFamily objects and concludes containment and DM. Edge cases (empty curve/open, nonreduced, any char, transcendental Ω) kept; single universe u; no arbitrary maps; sorries only in true Prop fields (hom_operations, moduliTwoFiberSnd_projection) that are in the node statements; docstrings and verbatim statements OK; no live duplicate (marked scheme-only notion agrees for n=0, presheaf generalization needed for spaces). Maintainer notes: Q18 nodal-curve-stack-smooth (RETURNed) defines the same stack as CurveModuli; its re-delivery must reuse ProperCurveModuli/OpenModuliSubstack. Released S1 re-split note (proof 4234 chars) does not affect the statement. Advisory: def-weil-open-immersion not cited in def-sfb-open-moduli-substack."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261023T123833-L-1265004",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

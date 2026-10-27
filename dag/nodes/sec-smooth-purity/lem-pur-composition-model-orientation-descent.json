@@ -1,0 +1,270 @@
+{
+ "id": "lem-pur-composition-model-orientation-descent",
+ "kind": "statement",
+ "title": "Affine zero-section orientation comparison and global descent",
+ "statement": "Fix the finite purity datum [def-pur-conventions]: $p$ prime, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi_E$, $n\\geq1$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$. Let $f:X\\to Y$, $g:Y\\to Z$ be smooth separated finite-type morphisms of pure relative dimensions $d,e\\geq0$ between finite-type $k$-schemes [def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-proper-morphism]. Use the derived operations [def-weil-derived-pullback-tensor-hom] and $\\omega_h=Rh^!\\Lambda$ [def-weil-exceptional-inverse-image]. Let $\\vartheta_h:\\omega_h\\xrightarrow{\\sim}\\Lambda(m_h)[2m_h]$ be the specified diagonal orientations [thm-pur-diagonal-dualizing-object], with $m_f=d,m_g=e,m_{gf}=d+e$. Let $\\sigma=c_{g,f,\\Lambda}^{-1}\\theta_{f,\\omega_g}\\mathrm{sym}$ be the tensor comparison [lem-pur-composition-tensor-mate], and use the compatible affine charts and the maps $\\alpha_h,\\delta_h,\\beta_h,\\kappa,\\nu_{d,e}$ specified in [lem-pur-composition-compatible-dnc-charts].\n\nLet\n$$\\mu:\\Lambda_X(d)[2d]\\otimes^LLf^*\\Lambda_Y(e)[2e]\\xrightarrow{\\sim}\\Lambda_X(d+e)[2d+2e]$$\nbe concatenation of the nonnegative tensor powers defining the twists [def-coefficient-twists-detailed], with the canonical twist pullback [det-prop-sfb-cartesian-coefficients-twists], derived tensor/shift reassociation, and addition of shifts. This yields, naturally for every $K\\in D^b_{ctf}(Z,\\Lambda)$ [def-weil-finite-tor-amplitude], the canonical source isomorphism\n$$I_K:L(gf)^*K(d+e)[2d+2e]\\xrightarrow{\\sim}Lf^*(Lg^*K(e)[2e])(d)[2d],$$\nusing the pullback compositor [lem-weil-pbc-proetale-derived-pullback-composition]. Its ordered factors are the canonical source comparison of [def-pur-composition-comparisons]. The sign for interchanging the blocks shifted by $2d,2e$ is $(-1)^{(2d)(2e)}=+1$.\n\nFor any affine finite-type $k$-scheme $B$, write $P_r:\\mathbf A^r_B\\to B$, $z_r:B\\to\\mathbf A^r_B$, $D_r=Lz_r^*\\omega_{P_r}$ [def-sbc-affine-space, def-asd-vector-bundle-zero-section], and let $\\Gamma_{P_r,\\Lambda}$ be the ordered affine comparison [def-pur-affine-space-comparison], extended to every $n\\geq1$ as in [lem-pur-projection-purity-agreement]. Put $b_r=Lz_r^*(\\Gamma_{P_r,\\Lambda}^{-1})$ with twist restriction. For $q:\\mathbf A^{d+e}_B\\to\\mathbf A^e_B$, the specified comparisons satisfy\n$$\\Gamma_{P_{d+e},\\Lambda}^{-1}\\sigma_{q,P_e}=\\mu(\\Gamma_{q,\\Lambda}^{-1}\\otimes Lq^*\\Gamma_{P_e,\\Lambda}^{-1}),\\qquad b_{d+e}\\nu_{d,e}=\\mu(b_d\\otimes b_e).$$\nHere the orientation of $q$ is the base change of the rank-$d$ bundle orientation; the same formulas hold for $d=0$ or $e=0$ with $\\Gamma_{P_0,-}=1$ and the unit laws. These identities involve the integration-normalized orientations, not independently chosen bundle trivializations.\n\nOn each compatible chart of $X$, the normal-bundle orientations are these $b_r$, and\n$$\\beta_{gf}\\delta_{gf}\\kappa=\\mu((\\beta_f\\delta_f)\\otimes Lf^*(\\beta_g\\delta_g)).$$\nGlobally one has\n$$(**)\\qquad\\vartheta_{gf}\\sigma=\\mu(\\vartheta_f\\otimes Lf^*\\vartheta_g).$$\nThe local-to-global assertion here includes the following detection property. Put $T_X=\\Lambda_X(d+e)[2d+2e]$. Its common-shift removal is a locally free rank-one coefficient sheaf in degree zero. Restriction of $\\operatorname{Aut}_{D(X_{\\mathrm{proet}},\\Lambda)}(T_X)$ to the covering charts above is injective. In particular the automorphism $(\\vartheta_{gf}\\sigma)[\\mu(\\vartheta_f\\otimes Lf^*\\vartheta_g)]^{-1}$ is the identity. The displayed global identity also holds for empty $X$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Proof Steps 1–2: affine-space zero-section multiplication, rank-one descent and canonical twist/shift identification; returned proof Steps 7–9 (ordered 7,9,8)"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "thm-pur-diagonal-dualizing-object",
+  "lem-pur-composition-tensor-mate",
+  "lem-pur-composition-compatible-dnc-charts",
+  "def-coefficient-twists-detailed",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-pur-composition-comparisons",
+  "def-sbc-affine-space",
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-affine-space-comparison",
+  "lem-pur-projection-purity-agreement"
+ ],
+ "proof": [
+  {
+   "text": "Apply the affine integration orientation lemma to obtain the same normalized Gamma family for both ranks, its affine and zero-section equations, and all beta frame identifications.",
+   "uses": [
+    "lem-pur-model-affine-integration-orientation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2"
+   }
+  },
+  {
+   "text": "The chosen unique source comparison satisfies its normalization by choose_spec. Apply eight-factor naturality to all finite-Tor inputs. The even-block sign is one because (-1)^2=1.",
+   "uses": [
+    "def-pur-composition-comparisons",
+    "lem-pur-model-orientation-source-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2"
+   }
+  },
+  {
+   "text": "Apply the chart assembly lemma to the zero-section equation and the beta identifications on all affine pairs. Keep the beta identifications themselves as the second local conclusion.",
+   "uses": [
+    "lem-pur-model-chart-orientation-assembly"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2"
+   }
+  },
+  {
+   "text": "Apply the Tate detection lemma and then chart descent to get the global orientation equality. Substitute it in the quotient equation and cancel the inverse tensor orientation and inverse mu by the isomorphism identities. Assemble all conjuncts with the same normalized Gamma family.",
+   "uses": [
+    "lem-pur-model-orientation-tate-detection",
+    "lem-pur-model-orientation-chart-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-model-affine-integration-orientation",
+  "def-pur-composition-comparisons",
+  "lem-pur-model-orientation-source-naturality",
+  "lem-pur-model-chart-orientation-assembly",
+  "lem-pur-model-orientation-tate-detection",
+  "lem-pur-model-orientation-chart-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zero section affine space purity orientation multiplicativity Tate twists and descent from compatible smooth charts",
+   "results": "8 hits: hom_chart, SmoothBumpCovering.embeddingPiTangent, TangentBundle.coordChange_model_space, ContMDiffFiberwiseLinear.locality_aux₂, inCoordinates_apply_eq₂, inTangentCoordinates_eq, ContMDiffFiberwiseLinear.locality_aux₁, tangentBundleCore",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Iso",
+   "results": "12 hits: CategoryTheory.MonoidalCategory.leftUnitorNatIso, CategoryTheory.MonoidalCategory.rightUnitorNatIso, CategoryTheory.MonoidalCategory.whiskerLeftIso, CategoryTheory.MonoidalCategory.whiskerRightIso, CategoryTheory.MonoidalCategory.tensorIso, CategoryTheory.MonoidalCategory.tensorLeftTensor, CategoryTheory.MonoidalCategory.tensorRightTensor, CategoryTheory.MonoidalCategory.associatorNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*twist|smoothPurity|dualizingComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of normalized dualizing orientations from affine space zero section tensor product and sheaf Hom gluing",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.GlueData.glue_condition_assoc, comp_dualTensorHom, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isoSheafedSpace_inv_assoc, AlgebraicGeometry.Scheme.LocalRepresentability.yoneda_toGlued_yonedaGluedToSheaf, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equality of canonical smooth dualizing orientations checked on etale coordinates using rank one sheaves",
+   "results": "8 hits: ModelWithCorners.uniqueMDiffOn, StandardEtalePresentation.mk.inj, UniqueMDiffOn.eq, ModelWithCorners.uniqueDiffOn, UniqueDiffOn.uniqueMDiffOn, SingularManifold.mk.inj, uniqueMDiffOn_iff_uniqueDiffOn, Manifold.IsImmersionAtOfComplement.congr_iff_of_eventuallyEq",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|dualizing|Tate",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean, Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange.lean, Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange.lean, Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange.lean; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|dualizingComplex|Tate.*twist",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "equality of morphisms between degree zero sheaves in the derived category checked on an open cover",
+   "results": "8 hits: CategoryTheory.Precoverage.ZeroHypercover.glueMorphisms.congr_simp, CategoryTheory.PreZeroHypercover.Hom.ext'_iff, CategoryTheory.PreZeroHypercover.Hom.ext, CategoryTheory.PreZeroHypercover.Hom.mk.congr_simp, AlgebraicGeometry.Scheme.OpenCover.ext_elem, CategoryTheory.PreZeroHypercover.Hom.ext', AlgebraicGeometry.SheafedSpace.congr_hom_app, CategoryTheory.PreZeroHypercover.Hom.ext_iff",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Iso",
+   "results": "12 hits: CategoryTheory.MonoidalCategory.leftUnitorNatIso, CategoryTheory.MonoidalCategory.rightUnitorNatIso, CategoryTheory.MonoidalCategory.whiskerLeftIso, CategoryTheory.MonoidalCategory.whiskerRightIso, CategoryTheory.MonoidalCategory.tensorIso, CategoryTheory.MonoidalCategory.tensorLeftTensor, CategoryTheory.MonoidalCategory.tensorRightTensor, CategoryTheory.MonoidalCategory.associatorNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multiplicativity of integration normalized affine space dualizing orientations and descent of automorphisms of shifted Tate lines",
+   "results": "8 hits: NumberField.mixedEmbedding.volume_eq_two_pow_mul_two_pi_pow_mul_integral, NumberField.mixedEmbedding.fundamentalCone.setLIntegral_expMapBasis_image, NumberField.mixedEmbedding.volume_eq_two_pi_pow_mul_integral, torusIntegral_smul, MeasureTheory.integral_domSMul, NumberField.mixedEmbedding.fundamentalCone.setLIntegral_paramSet_exp, MeasureTheory.integral_comap_eq_mulEquivHaarChar_smul, MeasureTheory.Measure.integral_comp_inv_smul",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|dualizing|Tate",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical orientation of the dualizing object of affine space respects direct sums of vector bundles",
+   "results": "8 hits: Orientation, EuclideanGeometry.o, Orientation.map_apply, Module.Oriented.positiveOrientation, Orientation.map_refl, Orientation.someBasis_orientation, Orientation.volumeForm_def, Orientation.map_positiveOrientation_of_isEmpty",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-composition-coherence",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proof Steps 1–2: affine-space zero-section multiplication, rank-one descent and canonical twist/shift identification; returned proof Steps 7–9 (ordered 7,9,8)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-composition-model-orientation-descent",
+  "worker": "stage1",
+  "summary": "Preserved every clause and hypothesis. Derived the affine product from integration-normalized vector direct sums and the all-n ordered-integration comparison; pulled back to zero sections; substituted the actual chart/DNC equations; descended the quotient automorphism only after common-shift removal to a degree-zero Tate line. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1: direct-sum normal models and agreement of diagonal assemblies; Step 2: canonical twist/shift source comparison. Nine explicit steps replace the model and rank-one descent subargument.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Finite Tate line is locally free rank one; used to compute positive derived tensor powers and justify the degree-zero descent domain."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic finite-coefficient monoidal pullback comparison, including associativity, symmetry, units and composition; fixes the source maps and their zero-section restriction."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Canonical finite Tate pullback identifies the e-th twist in the source comparison."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic canonical derived pullback compositor fixes the K-dependent source isomorphism."
+   },
+   {
+    "node": "cor-pur-vector-bundle-purity",
+    "why": "Integration-normalized direct-sum and base-change compatibility is the normal-bundle model used by the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic adjunction identity transports the specified compact-support site-compositor equation to right-adjoint mates."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-37cb9a3fd",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-37cb9a3fd (reviewer sub-agent of L); spot-checked: FIX with one wording repair; I read the whole item. It is a first split of a node Q91 created today, so no re-split note applies, and it is not on the dropped list. The statement is byte-identical to the Q91-created node. There are no new nodes. I found no cycle: no proof_dep reaches the item, and the only citer is thm-pur-composition-coherence. No SGA is used. The route follows main-20261015 thm-pur-composition-coherence.proof.md Step 1 (direct sums of cor-pur-vector-bundle-purity, DNC charts) and Step 2 (twist/pullback). Old parent Steps 7-9 map to new Steps 1-9 with nothing dropped. The affine identity no longer goes through prop-pur-affine-space-composition-law. It now uses P=Gamma at every n (lem-pur-affine-ordered-integration-transposes) and theta(1 tensor P)=P (lem-pur-affine-coefficient-counit-normalization). On top of these it uses cor's integration-normalized direct-sum clause, carried to the pro-etale site by lem-pur-vector-integration-site-comparison, lem-pur-compact-support-site-coherence and lem-weil-pbc-mate-pasting. This route needs no divisibility of n and does not depend on coordinate order. Checks: in Step 4 the types work out to G_h mu = sigma(G_q tensor Lq^*G_g) and cancel correctly. In Step 5, q z_{d+e}=z_e gives b_e, and cor's base-change clause gives b_d. nu is the zero-section pullback of sigma by the chart lemma (the Q91-fixed affine-chart text). Step 7 cancels alpha_f tensor Lf^*alpha_g. Step 8 applies lem-pur-degree-zero-derived-map-gluing to L[0] on a Zariski cover; its concentration hypothesis is automatic. Step 9 covers empty X through the empty cover. The eight factors of def-pur-composition-comparisons match Step 1, and the sign is +1. Edge cases checked: d=0 or e=0, ramified E with n=1, non-separated X/Y/Z, and pro-etale-local freeness of the twist. The fix is in Step 3, which asserted that the base-changed q-orientation is G_q=P_{q,Lambda} without a reason. It now cites cor-pur-vector-bundle-purity's base-change clause for this (fixes/dag/nodes/sec-smooth-purity/lem-pur-composition-model-orientation-descent.json). I accept the split_report.tool_uses entries: twist-locally-free, derived-pullback-tensor-iso, det-prop twists, the proetale pullback compositor, cor-pur-vector-bundle-purity and the mate-pasting Mathlib leaf. All are generic or route-cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompositionModelOrientationDescent",
+  "declaration": "WeilConjectures.PurityFiniteSetting.composition_model_orientation_descent",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.composition_model_orientation_descent"
+  ],
+  "file": "lean/Sheaf/Paper/CompositionModelOrientationDescent.lean",
+  "statement": "theorem composition_model_orientation_descent (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}} (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] (aZ : Z ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] : CompositionModelOrientationConclusion.{u, w} P d e f g aZ",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "V3: definitions re-exported unchanged from CompositionModelOrientationDefinitions; complete assembly proof from five strictly smaller coordinate/naturality/detection/chart lemmas, with the normalized source clause and quotient cancellation proved here."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83c2901c0",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 11935e5d (F1-F3), all repaired. F1: Gamma = recorded chartGamma (affineSpacePurityComparison through projectionAffineInPresentation) at every positive level, carried to DiagonalPasting.A by the fixed coordinate iso (toIteratedAffineLine) and canonical locality maps; G's forward map is fixed by ModelGammaNormalization, so no choice. Both affine identities, b_r = Lz*(G^-1), the base-changed q-orientation (chartOrdinaryBaseChange) and Gamma_0 = 1 now use Gamma, not theta. F2: copied ModelIntegrationNormalization conjuncts deleted. F3: ModelChartBetaIdentification states beta_f, f*beta_g and beta_gf = normal-coordinate comparison then b_r. Retained clauses (sigma, mu, I_K naturality, sign, chart equation, detection, global (**) with identity quotient) unchanged. Records: only the item lean field differs from side-live; statement verbatim; 24 declarations listed; one sorry. Edge cases checked: d/e = 0, empty B/X, ramified n = 1, non-separated schemes, free universe w. Advisory: chart helpers are owned by lem-pur-diagonal-dnc-chart-normalization, which is not a stmt_dep. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositionModelOrientationDefinitions.lean vs clone item module (definitions verbatim, only blueprint tags), item theorem statement vs clone (byte-identical), five split statements vs original conclusion conjuncts and PurityCompositionCoherence source normalization, item node fields vs clone (only proof/proof_deps/proof_origin/lean/tool_uses)"
+ }
+}

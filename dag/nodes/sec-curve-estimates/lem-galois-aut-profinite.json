@@ -89,7 +89,18 @@
   "def-galois-fibre-functor"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -133,5 +144,23 @@
   "landing": "20261012T060747-L-2911899",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal C$ be a category and $F:\\mathcal C\\to(\\text{finite sets})$\na functor. Then the evaluation embedding identifies\n$\\operatorname{Aut}(F)$ with the closed subgroup of\n$\\prod_X\\operatorname{Aut}(F(X))$ formed by the families compatible with\nall $F(f)$, and this embedding is a closed embedding for the topology of\n[def-galois-category]. Consequently $\\operatorname{Aut}(F)$ is a\ncompact, Hausdorff, totally disconnected topological group, i.e.\nprofinite.",
+  "proof": [
+   {
+    "text": "Let $\\operatorname{Aut}(F)\\subseteq\\prod_X\\operatorname{Aut}(F(X))$\ncarry the topology induced from the product of the discrete topologies,\nas in [def-galois-category], and let $\\xi=(\\gamma_X)$ be an\nelement of the product not induced by a natural\nautomorphism. Then there are $f:X\\to X'$ and $x\\in F(X)$ with\n$F(f)(\\gamma_X(x))\\neq\\gamma_{X'}(F(f)(x))$. The open subsets\n$U=\\{\\gamma:\\gamma(x)=\\gamma_X(x)\\}\\subseteq\\operatorname{Aut}(F(X))$ and\n$U'=\\{\\gamma':\\gamma'(F(f)(x))=\\gamma_{X'}(F(f)(x))\\} \\subseteq\\operatorname{Aut}(F(X'))$ give the open neighbourhood\n$U\\times U'\\times\\prod_{X''\\neq X,X'}\\operatorname{Aut}(F(X''))$ of\n$\\xi$, which misses $\\operatorname{Aut}(F)$; hence\n$\\operatorname{Aut}(F)$ is closed. If all $F(X)$ are finite the product\nis profinite, and closed subgroups of profinite groups are profinite.",
+    "uses": [
+     "def-galois-category"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

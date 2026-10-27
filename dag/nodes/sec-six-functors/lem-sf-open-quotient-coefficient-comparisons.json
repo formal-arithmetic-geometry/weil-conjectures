@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-open-quotient-coefficient-comparisons",
+ "kind": "statement",
+ "title": "Balancing and finite coefficient comparisons by fully faithful restriction",
+ "statement": "Fix l,E,j,o as in [def-sf-open-tensor-quotient-data]. Every pair of completed-coefficient complexes P,Q admits the Balanced coefficient isomorphism, with the full formula placing the coefficient in the first tensor factor. Given any two such balancing isomorphisms on (j_!Q,F) and (Q,j^*F), a fixed signed ordinary total-tensor comparison tc, scalar compatibility sc and scalar reduction comparison r, there are gamma and finiteGamma with exactly the finiteGammaRestriction and reduction equations of StrictSquare. No scalar-unit augmentation, augmented square or Roos normalization is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; scalar extension and restriction, Tags 03DI and 03EK; strict systems, Tag 0941. Strict cochain specialization."
+ },
+ "stmt_deps": [
+  "def-sf-open-tensor-quotient-data"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the existing normalizedIntegralTensorTower to the global slice, identifying its tower with the unrestricted reduction tower. Its coefficient formula is exactly Balanced.coefficients and gives balanced_nonempty.",
+   "uses": [
+    "lem-pur-normalized-integral-tensor-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define gamma by conjugating the fixed integral chain comparison through the two balancing isomorphisms and r: bX inverse, reduction of tc.chain, r, and extension of bU. Cancel bX to obtain reduction as an equality of tower maps, then evaluate at each level and degree.",
+   "uses": [
+    "def-sf-open-tensor-quotient-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The completed coefficient projection is locally surjective. Consequently restriction of scalars on sheaf modules is full (local lifts show that completed-linear maps are finite-linear) and faithful, and so is its induced functor on complexes. At each finite level n, compose gamma_n with the inverse of the complex comparison induced by sc.finite n. Lift this isomorphism uniquely through fully faithful scalar restriction. These lifts are finiteGamma. The map-preimage equation followed by cancellation of the inverse scalar comparison proves finiteGammaRestriction. No compatibility beyond the strict gamma tower is required in the finiteGamma field.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-integral-tensor-tower",
+  "def-sf-open-tensor-quotient-data",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, proof on extension summands; strict quotient-tower specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars extension by zero natural scalar unit compatibility for quotient towers",
+   "results": "Eight ordinary module restriction/scalar-tower results; no ringed-site strict tower compatibility.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero strict coefficient tensor augmentation chain map scalar restriction",
+   "results": "Generic complex tensor and ModuleCat scalar-unit results; no sheafified open quotient tower theorem.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskerRight_comp",
+   "results": "Found whiskerRight_comp in Mathlib.CategoryTheory.Whiskering; used for composing the scalar-unit square.",
+   "date": "2026-10-27",
+   "verdict": "generic composition API only"
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarCompatibility|RoosNormalization; extensionByZero|restrictScalars",
+   "results": "No matching strict-system comparison; generic restriction of scalar APIs only. Repository search found normalizedIntegralTensorTower and fully faithful scalar restriction constructions.",
+   "date": "2026-10-27",
+   "verdict": "use project balancing and generic fully faithful lifting"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorQuotientCochains",
+  "date": "2026-10-27",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor and finite-reduction compatibility: scalar restriction and normalized strict quotient tensor cochains.",
+   "via": [
+    "lem-sf-open-quotient-normalized-cochains",
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorQuotientCoefficientComparisons",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorQuotientCoefficientComparisons.lean",
+  "declaration": "WeilConjectures.OpenTensorQuotient.openQuotientCoefficientComparisons",
+  "declarations": [
+   "WeilConjectures.OpenTensorQuotient.openQuotientCoefficientComparisons",
+   "WeilConjectures.OpenTensorQuotient.balanced_nonempty",
+   "WeilConjectures.OpenTensorQuotient.CoefficientComparisons"
+  ],
+  "statement": "theorem openQuotientCoefficientComparisons :\n    Nonempty (CoefficientComparisons l E j o tc sc st r Q F balancingX balancingU)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T094550-L-243433",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T094550-L-243433",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

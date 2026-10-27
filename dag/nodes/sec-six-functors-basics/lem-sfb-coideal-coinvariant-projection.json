@@ -1,0 +1,378 @@
+{
+ "id": "lem-sfb-coideal-coinvariant-projection",
+ "kind": "statement",
+ "title": "A coideal retraction projects relative Hopf modules onto coinvariants",
+ "statement": "Let $k$ be a field [def-weil-field], $H$ a commutative Hopf $k$-algebra, and $A\\subseteq H$ a unital right coideal subalgebra, meaning $\\Delta(A)\\subseteq A\\otimes_kH$. Use the Hopf identities, quotient coalgebra $C=H/HA^+$, quotient map $\\pi$, and notion of relative Hopf module of [lem-sfb-relative-hopf-module-kernels]. Let $E:H\\to A$ be an $A$-linear map with $E|_A=1_A$. For a relative Hopf module $X$, put $R(X)=\\{x:\\alpha_X(x)=\\pi(1)\\otimes x\\}$ and let $j_X:R(X)\\hookrightarrow X$ be its inclusion. Let $\\kappa_X$ be the canonical isomorphism of [lem-sfb-coideal-canonical-tensor-isomorphism]. The formula $p_X=(E\\otimes_A1_X)\\kappa_X^{-1}\\alpha_X$, with $A\\otimes_AX=X$, defines an $A$-linear map $X\\to R(X)$ satisfying $p_Xj_X=1_{R(X)}$. Consequently $1_H\\otimes_Aj_X:H\\otimes_AR(X)\\to H\\otimes_AX$ is injective, with left inverse $1_H\\otimes_Ap_X$.",
+ "source": {
+  "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+  "place": "Bichon, arXiv:2301.05480v2, Lemma 2.6, coinvariant projection and the tensored split inclusion, specialized to commutative algebras. Read at https://arxiv.org/html/2301.05480v2; local PDF WANTED in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-sfb-relative-hopf-module-kernels",
+  "lem-sfb-coideal-canonical-tensor-isomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $g=\\pi(1)$, $Z=C\\otimes_kX$ with the diagonal action of [lem-sfb-coideal-canonical-tensor-isomorphism], and $\\beta=\\kappa_X^{-1}\\alpha_X$. For $a\\in A$, $\\pi(a)=\\epsilon(a)g$ since $a-\\epsilon(a)1\\in A^+$. Expand $\\Delta(a)$ with its first factors in $A$. The counit identity gives $a(g\\otimes x)=\\sum\\pi(a_{(1)})\\otimes a_{(2)}x=g\\otimes ax$. Therefore $u:X\\to Z$, $x\\mapsto g\\otimes x$, is $A$-linear. The compatibility axiom in [lem-sfb-relative-hopf-module-kernels] makes $\\alpha_X:X\\to Z$ $H$-linear. Consequently $T=1_H\\otimes_A\\alpha_X$ and $\\nu=1_H\\otimes_Au$ are well-defined maps $H\\otimes_AX\\to H\\otimes_AZ$. Commutativity of $H$ makes the given $E$ both left and right $A$-linear. Thus $F_Y:H\\otimes_AY\\to Y$, $h\\otimes y\\mapsto E(h)y$, is well-defined and $A$-linear for each $A$-module $Y$: balancing is $E(ha)y=E(h)ay$.",
+   "uses": [
+    "lem-sfb-relative-hopf-module-kernels",
+    "lem-sfb-coideal-canonical-tensor-isomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Lemma 2.6; Q68 explicit expansion of its projection diagram, step 1"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-coideal-canonical-tensor-isomorphism] also to the left $H$-module $Z$. Its naturality for the $H$-linear map $\\alpha_X$ gives $\\kappa_ZT=(1_C\\otimes\\alpha_X)\\kappa_X$. On a pure tensor $h\\otimes x$, its defining formula and the diagonal action give\n$\\kappa_Z\\nu(h\\otimes x)=\\sum\\pi(h_{(1)})\\otimes\\pi(h_{(2)})\\otimes h_{(3)}x=(\\Delta_C\\otimes1_X)\\kappa_X(h\\otimes x)$.\nHere $h_{(2)}g=\\pi(h_{(2)})$ uses the quotient $H$-action; the last equality is the formula for $\\Delta_C\\pi$ in [lem-sfb-relative-hopf-module-kernels] and coassociativity of $\\Delta_H$. Pure tensors generate, so this is an equality of maps. Precompose both identities with $\\beta$. Since $\\kappa_X\\beta=\\alpha_X$, coassociativity of $\\alpha_X$ gives $\\kappa_ZT\\beta=\\kappa_Z\\nu\\beta$. Injectivity of $\\kappa_Z$ now yields $T\\beta=\\nu\\beta$.",
+   "uses": [
+    "lem-sfb-coideal-canonical-tensor-isomorphism",
+    "lem-sfb-relative-hopf-module-kernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Lemma 2.6; Q68 explicit expansion of its projection diagram, step 2"
+   }
+  },
+  {
+   "text": "Put $q=F_X\\beta:X\\to X$. Apply $F_Z$ to $T\\beta=\\nu\\beta$. On pure tensors, $F_ZT(h\\otimes x)=E(h)\\alpha_X(x)=\\alpha_X(E(h)x)$ by $H$-linearity of $\\alpha_X$, whereas $F_Z\\nu(h\\otimes x)=E(h)(g\\otimes x)=g\\otimes E(h)x$ by step 1. Hence $\\alpha_Xq=g\\otimes q$. This is precisely the defining equation for $R(X)$ in [lem-sfb-relative-hopf-module-kernels]. Since $\\kappa_X$ is an isomorphism of relative Hopf modules [lem-sfb-coideal-canonical-tensor-isomorphism], hence $H$-linear, $\\beta$ is $H$-linear by step 1, so $q$ is $A$-linear. As $R(X)$ is an $A$-submodule, restricting its codomain defines the required $A$-linear $p_X:X\\to R(X)$ with $j_Xp_X=q$.",
+   "uses": [
+    "lem-sfb-relative-hopf-module-kernels",
+    "lem-sfb-coideal-canonical-tensor-isomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Lemma 2.6; Q68 explicit expansion of its projection diagram, step 3"
+   }
+  },
+  {
+   "text": "For $r\\in R(X)$, $\\alpha_X(r)=g\\otimes r=\\kappa_X(1_H\\otimes r)$ by the formula in [lem-sfb-coideal-canonical-tensor-isomorphism]. Thus $\\beta(r)=1_H\\otimes r$ and $q(r)=E(1_H)r=r$, because $E$ restricts to the identity on $A$. Equality in the submodule $R(X)$ is equality after inclusion into $X$, so $p_Xj_X=1_{R(X)}$. The expression $F_X\\beta=(E\\otimes_A1_X)\\kappa_X^{-1}\\alpha_X$, using $A\\otimes_AX=X$, is the formula in the statement.",
+   "uses": [
+    "lem-sfb-coideal-canonical-tensor-isomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Lemma 2.6; Q68 explicit expansion of its projection diagram, step 4"
+   }
+  },
+  {
+   "text": "The $A$-linear maps $j_X$ and $p_X$ induce the indicated maps on tensor products. On each generator $h\\otimes r$ their composite is $h\\otimes p_X(j_X(r))=h\\otimes r$. Additivity gives $(1_H\\otimes_Ap_X)(1_H\\otimes_Aj_X)=1_{H\\otimes_AR(X)}$. A map with a left inverse is injective: apply the left inverse to any equality between two of its values. This proves the last clause without a flatness assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Lemma 2.6; Q68 explicit expansion of its projection diagram, step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-hopf-module-kernels",
+  "lem-sfb-coideal-canonical-tensor-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+  "place": "Lemma 2.6, https://arxiv.org/html/2301.05480v2; local PDF absent (WANTED in report). Explicit tensor calculation by Q68 expanding the diagram."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bimodule conditional expectation on a coideal subalgebra gives a linear projection onto coinvariants of every relative Hopf module",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:56Z",
+    "tool": "leanfinder",
+    "query": "A bimodule conditional expectation on a coideal subalgebra gives a linear projection onto coinvariants of every relative Hopf module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Representation.isProj_averageMap",
+     "Rep.resCoindAdjunction_counit_app_hom_hom",
+     "Rep.invariantsAdjunction_counit_app_hom",
+     "Rep.coinvariantsAdjunction_counit_app",
+     "Representation.averageMap_id",
+     "Rep.indResAdjunction_counit_app_hom_hom",
+     "Representation.ofCoinvariantsTprodLeftRegular",
+     "Representation.averageMap_invariant"
+    ],
+    "digest": "c12918d8ad7ce90a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: group coinvariants are quotients by action differences, whereas the present coinvariants form a coaction equalizer. Averaging requires a finite group of invertible order; Module.Flat.of_retract assumes an already flat ambient module. None supplies this projection from an arbitrary bimodule retraction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coinvariant\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:56Z",
+    "tool": "loogle",
+    "query": "\"coinvariant\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Rep.coinvariantsFunctor",
+     "Representation.Coinvariants",
+     "Rep.toCoinvariants",
+     "Rep.toCoinvariantsKer",
+     "Rep.instIsLeftAdjointModuleCatCoinvariantsFunctor",
+     "Representation.Coinvariants.instAddCommGroup",
+     "Representation.Coinvariants.ker",
+     "Rep.coinvariantsAdjunction"
+    ],
+    "digest": "4890907109005347"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: group coinvariants are quotients by action differences, whereas the present coinvariants form a coaction equalizer. Averaging requires a finite group of invertible order; Module.Flat.of_retract assumes an already flat ambient module. None supplies this projection from an arbitrary bimodule retraction."
+  },
+  {
+   "tool": "grep",
+   "query": "coinvariant|conditional.?expectation|HopfModule",
+   "sub": "RingTheory",
+   "results": {
+    "t": "2026-10-23T21:09:55Z",
+    "tool": "grep",
+    "query": "coinvariant|conditional.?expectation|HopfModule",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: group coinvariants are quotients by action differences, whereas the present coinvariants form a coaction equalizer. Averaging requires a finite group of invertible order; Module.Flat.of_retract assumes an already flat ambient module. None supplies this projection from an arbitrary bimodule retraction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module retraction onto a coideal subalgebra induces a projection to relative Hopf module coinvariants",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:55Z",
+    "tool": "leansearch",
+    "query": "A module retraction onto a coideal subalgebra induces a projection to relative Hopf module coinvariants",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Representation.toCoinvariants",
+     "Submodule.isIdempotentElemEquiv_apply_coe",
+     "Rep.toCoinvariants",
+     "Rep.instEpiModuleCatAppActionCoinvariantsMk",
+     "Rep.toCoinvariantsMkQ",
+     "Representation.Coinvariants.mk",
+     "Representation.Coinvariants.map_id",
+     "Module.Flat.of_retract"
+    ],
+    "digest": "4e374dbad5bebad0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: group coinvariants are quotients by action differences, whereas the present coinvariants form a coaction equalizer. Averaging requires a finite group of invertible order; Module.Flat.of_retract assumes an already flat ambient module. None supplies this projection from an arbitrary bimodule retraction."
+  },
+  {
+   "tool": "grep",
+   "query": "coinvariant|conditional.?expectation|HopfModule",
+   "sub": "RingTheory",
+   "results": {
+    "t": "2026-10-23T21:32:36Z",
+    "tool": "grep",
+    "query": "coinvariant|conditional.?expectation|HopfModule",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra hits provide structural identities; comonad Beck equalizers do not construct the retraction from E or identify this coaction equalizer; representation coinvariants are action quotients, and averaging needs finite group hypotheses absent here. No relative Hopf module projection is supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A conditional expectation onto a coideal subalgebra splits the equalizer of a relative Hopf module coaction",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:32:36Z",
+    "tool": "leansearch",
+    "query": "A conditional expectation onto a coideal subalgebra splits the equalizer of a relative Hopf module coaction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Comonad.beckEqualizer",
+     "CategoryTheory.Comonad.beckSplitEqualizer",
+     "CategoryTheory.Comonad.beckCoalgebraEqualizer",
+     "CategoryTheory.Comonad.CofreeEqualizer.condition",
+     "CategoryTheory.Comonad.ComonadicityInternal.main_pair_F_cosplit",
+     "HopfAlgCat.of_comul",
+     "CategoryTheory.Comonad.instHasEqualizerMapAAppUnitObjAOfHasEqualizerOfIsCosplitPair",
+     "CategoryTheory.Monad.MonadicityInternal.main_pair_G_split"
+    ],
+    "digest": "5c28853f14076335"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra hits provide structural identities; comonad Beck equalizers do not construct the retraction from E or identify this coaction equalizer; representation coinvariants are action quotients, and averaging needs finite group hypotheses absent here. No relative Hopf module projection is supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"coinvariant\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:32:36Z",
+    "tool": "loogle",
+    "query": "\"Comodule\", \"coinvariant\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra hits provide structural identities; comonad Beck equalizers do not construct the retraction from E or identify this coaction equalizer; representation coinvariants are action quotients, and averaging needs finite group hypotheses absent here. No relative Hopf module projection is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A retraction from a commutative Hopf algebra to a right coideal subalgebra projects a relative Hopf module onto its coaction coinvariants",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:32:37Z",
+    "tool": "leanfinder",
+    "query": "A retraction from a commutative Hopf algebra to a right coideal subalgebra projects a relative Hopf module onto its coaction coinvariants",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HopfAlgCat.of_counit",
+     "HopfAlgebra.ofAlgHom",
+     "HopfAlgebra.mul_antipode_rTensor_comul_apply",
+     "HopfAlgCat.rightUnitor_def",
+     "HopfAlgebra.mul_antipode_lTensor_comul_apply",
+     "HopfAlgebra.sum_mul_antipode_eq_smul",
+     "HopfAlgebra.sum_antipode_mul_eq_smul",
+     "HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit"
+    ],
+    "digest": "4b1d8b174546d6bf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra hits provide structural identities; comonad Beck equalizers do not construct the retraction from E or identify this coaction equalizer; representation coinvariants are action quotients, and averaging needs finite group hypotheses absent here. No relative Hopf module projection is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An A linear conditional expectation H to A induces a split inclusion of the coinvariant submodule of a compatible H module C comodule",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:33:13Z",
+    "tool": "leanfinder",
+    "query": "An A linear conditional expectation H to A induces a split inclusion of the coinvariant submodule of a compatible H module C comodule",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.toCoinvariantsMkQ",
+     "Representation.Coinvariants.lift",
+     "Representation.isProj_averageMap",
+     "Rep.coinvariantsShortComplex_g",
+     "Rep.toCoinvariantsMkQ_hom",
+     "Rep.coinvariantsShortComplex_f",
+     "Representation.coinvariantsToFinsupp",
+     "Representation.instIsTrivialSubtypeMemSubgroupCoinvariantsCompLinearMapIdSubtypeToCoinvariants"
+    ],
+    "digest": "dc86a161f8516830"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra hits provide structural identities; comonad Beck equalizers do not construct the retraction from E or identify this coaction equalizer; representation coinvariants are action quotients, and averaging needs finite group hypotheses absent here. No relative Hopf module projection is supplied."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-coideal-faithfully-flat",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism. Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention. Supporting argument: Theorem 3.31, printed pp.73--74, nilpotent-augmentation case: the explicitly asserted isomorphism A^(J) to B. The printed proof of injectivity has a gap: see report.md, Source error; this new node records the true statement only, not that argument. Repair input: faithful flatness from a supplied coideal retraction, replacing the invalid augmentation-ideal summand claim. Supporting construction for the coideal faithful-flatness repair: Bichon Lemma 2.6, coinvariant projection and the tensored split inclusion, specialized to commutative algebras.",
+   "via": [
+    "lem-sfb-split-coideal-faithfully-flat",
+    "lem-sfb-nilpotent-hopf-basis-lifting",
+    "lem-sfb-hopf-subalgebra-faithfully-flat",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-coideal-coinvariant-projection",
+  "worker": "stage1",
+  "summary": "Q68 checked Bichon Lemma 2.6 online and expanded its diagram using the existing canonical tensor isomorphism. Proved balancing, the coassociativity comparison, the coinvariant equation, identity on coinvariants, and the tensored left inverse. No statement correction or new node is needed. No matching completed project declaration or Mathlib theorem was found.",
+  "blueprint": "Supporting coideal-retraction input on the inherited chain below det-thm-sf-ctf-stability-direct-images, proof (3). Current latest blueprint main-20261024 inspected; the inherited right-coideal route is unchanged. Lemma 2.6 is realized by steps 1--5, with the projection diagram expanded in steps 1--3."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-c67c1a492",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c67c1a492 (reviewer sub-agent of L); spot-checked: I read the full item, every step and both cited statements (lem-sfb-relative-hopf-module-kernels, lem-sfb-coideal-canonical-tensor-isomorphism). The statement, stmt_deps and source are identical to the node as created in the Q41 snapshot, and there are no new nodes. Bichon 2301.05480 Lemma 2.6 has no local PDF (WANTED), and proof_origin.by is agent, so I checked the mathematics independently. Step 1: π(a)=ε(a)g and the right-coideal hypothesis give a(g⊗x)=g⊗ax, so u is A-linear; α is H-linear by the compatibility axiom; F_Y is balanced because H is commutative. Step 2: I recomputed κ_Zν=(Δ_C⊗1)κ_X and κ_ZT=(1⊗α)κ_X by naturality; coassociativity of α and injectivity of κ_Z give Tβ=νβ. Step 3: F_ZT=αF_X and F_Zν=uF_X give αq=g⊗q. Step 4: κ_X(1⊗r)=g⊗r and E(1)=1. Step 5: a left inverse. I tested X=0, A=H, H=A=k, and H=k[t^±1] with A=k[t^±n] and a non-comodule E (p(t^r)=E(t^r)∈A). There are no duplicates (the only neighbour, relative-hopf-counit-criterion, states something different) and no SGA citations. The parent's step 3 uses exactly this statement. FIX (C3): step 3 asserted that q is A-linear without justification; that needs κ_X^{-1} to be H-linear, which only the canonical-isomorphism node gives. I added that sentence and the node to the step's uses; proof_deps is unchanged. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-coideal-coinvariant-projection.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoidealCoinvariantProjection",
+  "declaration": "RelativeHopf.coidealCoinvariantProjection",
+  "declarations": [
+   "RelativeHopf.CoinvariantProjectionConclusions",
+   "RelativeHopf.coidealCoinvariantProjection"
+  ],
+  "file": "lean/Sheaf/RingTheory/CoidealCoinvariantProjection.lean",
+  "statement": "theorem coidealCoinvariantProjection (hA : IsRightCoideal k H A) (hSleft : LinearMap.mul' k H ∘ₗ S.toLinearMap.rTensor H ∘ₗ Coalgebra.comul = Algebra.linearMap k H ∘ₗ Coalgebra.counit) (hSright : LinearMap.mul' k H ∘ₗ S.toLinearMap.lTensor H ∘ₗ Coalgebra.comul = Algebra.linearMap k H ∘ₗ Coalgebra.counit) (E : H →ₗ[A] A) (hE : ∀ a : A, E (a : H) = a) : ∃ hJ : ((augmentationIdeal k H A).restrictScalars k).IsCoideal, CoinvariantProjectionConclusions.{u, v, w} k H A S E (hJ := hJ)",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62ca337b0",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause match of node lem-sfb-coideal-coinvariant-projection with RelativeHopf.coidealCoinvariantProjection / CoinvariantProjectionConclusions: Field k; CommRing+Bialgebra H with S and both antipode identities (same interface as deps); Subalgebra A with IsRightCoideal; ∃ hJ proof-only for the quotient coalgebra; E : H →ₗ[A] A with E|_A = id; X with H/A/k modules + scalar towers + Coaction; κ : CanonicalTensorIsomorphism universally quantified but fixed by forward_formula; R pinned by exact carrier = coinvariants at π(1); p pinned by lid ∘ E.rTensor ∘ κ⁻¹ ∘ α; p∘j = id; injectivity of j.baseChange H with left inverse p.baseChange H. No added colinearity, flatness, finiteness or universe-equality assumptions; u,v,w all bound. Node JSON = live except new lean record; stmt_deps unchanged; lean.statement verbatim in the file; no new nodes or dep repairs. Docstrings carry source place, blueprint tag and the 5 proof steps; collecting Prop is not hollow; sorry only; report has Worker report + Second reading by Q15. Edge cases X=0, A=k, A=H, non-colinear E covered. No findings; not recompiled (no file changed)."
+ }
+}

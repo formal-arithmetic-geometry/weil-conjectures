@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-fibred-groupoid-equivalence-criterion",
+ "kind": "statement",
+ "title": "Fibrewise equivalence criterion for categories fibred in groupoids",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal C$ be a category small in the larger universe and let $p:\\mathcal A\\to\\mathcal C$ and $q:\\mathcal B\\to\\mathcal C$ be categories fibred in groupoids, with small fibre groupoids in that universe: every base arrow $u:S\\to T$ admits a cartesian lift with any prescribed target over $T$, and each fibre (objects over $T$ and arrows over $1_T$) is a groupoid. Here an arrow $v:a'\\to a$ over $u:S\\to T$ is cartesian if for every $h:R\\to S$, every arrow $w:z\\to a$ over $u h$ factors uniquely as $v\\widetilde w$ with $\\widetilde w:z\\to a'$ over $h$. Let $G:\\mathcal A\\to\\mathcal B$ satisfy $qG=p$ and preserve cartesian arrows. If, for every $T$, the induced functor $G_T:\\mathcal A(T)\\to\\mathcal B(T)$ is fully faithful (bijections on all morphism sets) and essentially surjective (every object of $\\mathcal B(T)$ is isomorphic over $1_T$ to an image), then there is a cartesian functor $H:\\mathcal B\\to\\mathcal A$ over $\\mathcal C$ and natural isomorphisms $HG\\cong1_{\\mathcal A}$ and $GH\\cong1_{\\mathcal B}$ whose components lie over identities in $\\mathcal C$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 003Z, lemma-equivalence-fibred-categories, parts (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "For $a\\in\\mathcal A(S)$, $a'\\in\\mathcal A(T)$ and $u:S\\to T$, choose a cartesian lift $v:u^*a'\\to a'$ over $u$. Its defining property identifies arrows $a\\to a'$ over $u$ with vertical arrows $a\\to u^*a'$, by $t\\mapsto v\\circ t$. Since $G(v)$ is cartesian, the same holds in $\\mathcal B$ with $G(a)$ and $G(u^*a')$. These identifications intertwine $G$ with the morphism map of $G_S$, which is bijective by hypothesis. Thus $G$ is bijective on arrows over each $u$. Every arrow has one base arrow and $qG=p$, so $G$ is fully faithful on the total categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003Z, lemma-equivalence-fibred-categories, proof."
+   }
+  },
+  {
+   "text": "For every $b\\in\\mathcal B(T)$ choose $a_b\\in\\mathcal A(T)$ and a vertical isomorphism $i_b:b\\xrightarrow{\\sim}G(a_b)$ by essential surjectivity of $G_T$. These are simultaneous choices in the larger universe of [def-weil-size-convention]: the base is small, and its small fibres give a small union of objects. Retain these fibrewise choices; their base objects are exactly $T$.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003Z, lemma-equivalence-fibred-categories, proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-chosen-object-quasi-inverse] to the fully faithful total functor $G$ and the specified $a_b,i_b$. It gives a functor $H$ with $H(b)=a_b$, natural isomorphisms $i:1_{\\mathcal B}\\xrightarrow{\\sim}GH$ and $e:HG\\xrightarrow{\\sim}1_{\\mathcal A}$, and equations $G(H(f))=i_{b'}\\circ f\\circ i_b^{-1}$ and $G(e_a)=i_{G(a)}^{-1}$. This is a use of the prescribed-choice statement, not just existence of an arbitrary ordinary quasi-inverse.",
+   "uses": [
+    "lem-sfb-chosen-object-quasi-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003Z, lemma-equivalence-fibred-categories, quasi-inverse paragraph; Tag 05SG, lemma-construct-quasi-inverse."
+   }
+  },
+  {
+   "text": "On objects $pH(b)=q(b)$ by the choices. Applying $q$ to $G(H(f))=i_{b'}\\circ f\\circ i_b^{-1}$ gives $p(H(f))=q(f)$ because both comparison components are vertical. Hence $pH=q$ as functors. Also $p(e_a)=q(G(e_a))=q(i_{G(a)}^{-1})=1_{p(a)}$. Thus $e:HG\\cong1_{\\mathcal A}$ and $i^{-1}:GH\\cong1_{\\mathcal B}$ have precisely the required vertical components.",
+   "uses": [
+    "lem-sfb-chosen-object-quasi-inverse"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003Z, lemma-equivalence-fibred-categories, proof."
+   }
+  },
+  {
+   "text": "Finally every arrow $w:a\\to a'$ of $\\mathcal A$ is cartesian. Choose a cartesian lift $v:c\\to a'$ of $p(w)$; the defining factorization is $w=v\\circ t$ with $t:a\\to c$ vertical. Since the fibre is a groupoid, $t$ is invertible. For any $z\\to a'$ and compatible base arrow $h$, first take its unique factorization through $v$ over $h$, then compose with $t^{-1}$ to get the unique factorization through $w$ over $h$. This is exactly cartesianness as defined in the statement. In particular $H$ sends cartesian arrows of $\\mathcal B$ to cartesian arrows of $\\mathcal A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003V, lemma-fibred-groupoids, converse proof: factor through a cartesian lift and invert the vertical arrow."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-sfb-chosen-object-quasi-inverse"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 003Z, lemma-equivalence-fibred-categories; omitted over-base verifications expanded using Tag 05SG and the elementary argument of Tag 003V."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivalence|IsEquivalence|isEquivalence",
+   "results": "6 hits; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib subdirectory: CategoryTheory/FiberedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: HasFibers.inducedFunctor only compares a chosen fibre model with the actual fibre (HasFibers.lean:65-76,106); CoGrothendieck compares a particular construction with its fibres. Functor.IsEquivalence.mk and asEquivalence concern ordinary categories and do not supply an inverse over a prescribed base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between categories fibred in groupoids over a category is an equivalence over the base if every fibre functor is an equivalence",
+   "results": "8 hits; HasFibers.instIsEquivalenceFibFiberInducedFunctor, CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor, CategoryTheory.PreGaloisCategory.FiberFunctor.comp_right, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_fiber, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor_map_fiber, CategoryTheory.Grothendieck.isoMk, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor_obj_fiber",
+   "date": "2026-10-23",
+   "verdict": "no match: HasFibers.inducedFunctor only compares a chosen fibre model with the actual fibre (HasFibers.lean:65-76,106); CoGrothendieck compares a particular construction with its fibres. Functor.IsEquivalence.mk and asEquivalence concern ordinary categories and do not supply an inverse over a prescribed base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor over the base between categories fibred in groupoids is an equivalence in the two category precisely when all its fibre functors are fully faithful and essentially surjective",
+   "results": "8 hits; HasFibers.mk, HasFibers.instIsEquivalenceFibFiberInducedFunctor, CategoryTheory.Functor.IsEquivalence.mk, CategoryTheory.Equivalence.essSurj_functor, CategoryTheory.Functor.IsEquivalence.mk', CategoryTheory.Equivalence.fullyFaithfulFunctor, CategoryTheory.Functor.IsEquivalence.rec, CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: HasFibers.inducedFunctor only compares a chosen fibre model with the actual fibre (HasFibers.lean:65-76,106); CoGrothendieck compares a particular construction with its fibres. Functor.IsEquivalence.mk and asEquivalence concern ordinary categories and do not supply an inverse over a prescribed base."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsFibered, CategoryTheory.Functor.IsEquivalence",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: HasFibers.inducedFunctor only compares a chosen fibre model with the actual fibre (HasFibers.lean:65-76,106); CoGrothendieck compares a particular construction with its fibres. Functor.IsEquivalence.mk and asEquivalence concern ordinary categories and do not supply an inverse over a prescribed base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise fully faithful and essentially surjective functor of fibred groupoids has a cartesian quasi inverse over the base category",
+   "results": "8 hits; HasFibers.instIsEquivalenceFibFiberInducedFunctor, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_fiber, HasFibers.canonical, CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor, CategoryTheory.Grothendieck.isoMk_inv_fiber, CategoryTheory.Grothendieck.ιCompMap_inv_app_fiber, CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift",
+   "date": "2026-10-23",
+   "verdict": "no match: HasFibers.inducedFunctor only compares a chosen fibre model with the actual fibre (HasFibers.lean:65-76,106); CoGrothendieck compares a particular construction with its fibres. Functor.IsEquivalence.mk and asEquivalence concern ordinary categories and do not supply an inverse over a prescribed base."
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence|IsEquivalence|isEquivalence",
+   "results": "6 hits; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib subdirectory: CategoryTheory/FiberedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-model equivalences in HasFibers.lean:65-76,106 and the particular CoGrothendieck construction in Grothendieck.lean:136 do not give a base-preserving inverse to an arbitrary fibrewise equivalence; ordinary asEquivalence forgets the prescribed base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibrewise equivalence of categories fibred in groupoids admits a cartesian quasi inverse over the base category",
+   "results": "8 hits; HasFibers.instIsEquivalenceFibFiberInducedFunctor, CategoryTheory.Functor.IsEquivalence.mk', CategoryTheory.Functor.inv, CategoryTheory.Equivalence.inverse, CategoryTheory.Functor.isEquivalence_inv, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber, CategoryTheory.Grothendieck.isoMk_inv_fiber",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-model equivalences in HasFibers.lean:65-76,106 and the particular CoGrothendieck construction in Grothendieck.lean:136 do not give a base-preserving inverse to an arbitrary fibrewise equivalence; ordinary asEquivalence forgets the prescribed base."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsFibered, CategoryTheory.Functor.IsEquivalence",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-model equivalences in HasFibers.lean:65-76,106 and the particular CoGrothendieck construction in Grothendieck.lean:136 do not give a base-preserving inverse to an arbitrary fibrewise equivalence; ordinary asEquivalence forgets the prescribed base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian functor between categories fibred in groupoids with fully faithful essentially surjective fibre functors has an inverse functor over the base",
+   "results": "8 hits; CategoryTheory.Grothendieck.grothendieckTypeToCat_inverse_obj_fiber_as, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber, CategoryTheory.Grothendieck.grothendieckTypeToCatInverse_obj_fiber_as, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_fiber, CategoryTheory.Grothendieck.isoMk_inv_fiber, CategoryTheory.Grothendieck.grothendieckTypeToCatInverse, CategoryTheory.Grothendieck.ιCompMap_inv_app_fiber, CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-model equivalences in HasFibers.lean:65-76,106 and the particular CoGrothendieck construction in Grothendieck.lean:136 do not give a base-preserving inverse to an arbitrary fibrewise equivalence; ordinary asEquivalence forgets the prescribed base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise full faithfulness gives bijections on morphisms over any base arrow and a base preserving inverse equivalence",
+   "results": "8 hits; HasFibers.instIsEquivalenceFibFiberInducedFunctor, CategoryTheory.Functor.FullyFaithful.over, CategoryTheory.Functor.FullyFaithful.preimage, CategoryTheory.Functor.Fiber.hom_ext, CategoryTheory.Functor.Fiber.hom_ext_iff, HasFibers.canonical, HasFibers.Fib.hom_ext_iff, HasFibers.Fib.isoMk",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-model equivalences in HasFibers.lean:65-76,106 and the particular CoGrothendieck construction in Grothendieck.lean:136 do not give a base-preserving inverse to an arbitrary fibrewise equivalence; ordinary asEquivalence forgets the prescribed base."
+  },
+  {
+   "tool": "grep",
+   "query": "def.*(preimage|lift|induced|of)|equivalence|objPreimage",
+   "results": "5 hits; 26, 27, 80, 113, 143; Mathlib subdirectory: CategoryTheory/Functor/FullyFaithful.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-model equivalences in HasFibers.lean:65-76,106 and the particular CoGrothendieck construction in Grothendieck.lean:136 do not give a base-preserving inverse to an arbitrary fibrewise equivalence; ordinary asEquivalence forgets the prescribed base."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-fully-faithful-local-equivalence",
+  "date": "2026-10-23",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: Local essential surjectivity of a fully faithful map of stacks. Passage from fibrewise equivalences to an inverse over the base after global essential surjectivity has been proved.",
+   "via": [
+    "lem-sfb-stack-fully-faithful-local-equivalence",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fibred-groupoid-equivalence-criterion",
+  "worker": "stage1",
+  "summary": "Followed Tag 003Z: compare arrows over each base map by a cartesian lift, choose inverse objects within their original fibres, use the prescribed-choice ordinary quasi-inverse construction, and explicitly check both base equalities, vertical comparisons and cartesianness. One new generic ordinary-category lemma (05SG), not a clause of the fibred criterion; no statement change and no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: Local essential surjectivity of a fully faithful map of stacks. Passage from fibrewise equivalences to an inverse over the base after global essential surjectivity has been proved. This split supplies only the fibrewise-equivalence prerequisite. The latest direct-image proof now uses compactification in paragraph (3); its historical alteration prerequisite is not a proposed change to that unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-2c943fb7f",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-2c943fb7f (reviewer sub-agent of L); spot-checked: I read the item's five steps and the new node lem-sfb-chosen-object-quasi-inverse in full against Stacks categories.tex 003Z (all of the proof), 05SG and 003V. The tag/label pairs are confirmed in tags/tags. Step 1: cartesian with h=1 makes arrows over u the same as vertical arrows into u^*a'. G(v) is cartesian, so G_S being bijective gives total full faithfulness. Step 2: vertical choices over each T, and the total categories are V-small. Step 3: applies the new node with exactly its hypotheses. Step 4: p(Hf)=q(f) and p(e_a)=1 follow from the vertical i, which writes out the over-base checks that 003Z omits. Step 5: w=vt with t invertible, so every arrow is cartesian (with uniqueness), as in 003V, and H is cartesian. Every hypothesis of the item is used and the conclusion is not weakened. The new node is true. Uniqueness of J comes from naturality plus faithfulness, and e is natural with F(e_A)=i_{F(A)}^{-1}, checked after applying F. On a one-object group with F=id and i=g, J(f)=gfg^{-1} and e=g^{-1}, so the orientation is right. Empty categories are trivial. The new node is statement-only, self-contained, cites def-nagata-category, and has the correct source 05SG. It is not a duplicate of lem-trf-fully-faithful-ess-surj-equivalence (02C3), which gives only an existential inverse and so no inverse over C. DAG-wide searches (05SG, 003Z, construct-quasi-inverse, ff with quasi-inverse, fibred groupoid with equivalence) and a Mathlib grep found no duplicate or exact match. It does not restate a clause of the item. There is no cycle and no SGA. Parent step 5 is unaffected. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FibredGroupoidEquivalenceCriterion",
+  "declaration": "CategoryTheory.Functor.exists_cartesian_quasiInverse_of_fibrewise_equivalence",
+  "declarations": [
+   "CategoryTheory.Functor.mapFiber",
+   "CategoryTheory.Functor.exists_cartesian_quasiInverse_of_fibrewise_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FibredGroupoidEquivalenceCriterion.lean",
+  "statement": "theorem exists_cartesian_quasiInverse_of_fibrewise_equivalence {C A B : Type u} [Category.{u} C] [Category.{u} A] [Category.{u} B] (p : A ⥤ C) (q : B ⥤ C) [p.IsFibered] [q.IsFibered] (hp : ∀ T : C, IsGroupoid (Fiber p T)) (hq : ∀ T : C, IsGroupoid (Fiber q T)) (G : A ⥤ B) (hG : G ⋙ q = p) (hcart : ∀ {S T : C} (u : S ⟶ T) {a a' : A} (v : a ⟶ a'), p.IsStronglyCartesian u v → q.IsStronglyCartesian u (G.map v)) (hfull : ∀ T : C, (mapFiber G hG T).Full) (hfaithful : ∀ T : C, (mapFiber G hG T).Faithful) (hessSurj : ∀ T : C, (mapFiber G hG T).EssSurj) : ∃ H : B ⥤ A, H ⋙ p = q ∧ (∀ {S T : C} (u : S ⟶ T) {b b' : B} (v : b ⟶ b'), q.IsStronglyCartesian u v → p.IsStronglyCartesian u (H.map v)) ∧ ∃ (e : G ⋙ H ≅ 𝟭 A) (i : H ⋙ G ≅ 𝟭 B), (∀ a : A, p.IsHomLift (𝟙 (p.obj a)) (e.hom.app a)) ∧ (∀ b : B, q.IsHomLift (𝟙 (q.obj b)) (i.hom.app b))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "mapFiber is the canonical induced fibre functor already introduced by this node; it specializes Mathlib Fiber.inducedFunctor and contains no choices. The size dependency is a metatheoretic convention, realized by the explicit common universe u."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86b735fce",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Node unchanged except for the lean record; lean.statement matches the file verbatim. Checked against Stacks 003Z: IsStronglyCartesian matches the node's cartesian (all h, with uniqueness); IsFibered is equivalent to strong lifts with prescribed target; IsGroupoid of Mathlib's actual Fiber; strict G⋙q=p; Full/Faithful/EssSurj of the canonical mapFiber (Fiber.inducedFunctor, real data, no choices); conclusion H⋙p=q, H preserves cartesian arrows, e:G⋙H≅𝟭A and i:H⋙G≅𝟭B with IsHomLift over identities, order checked. One universe u matches the node's size convention. Edge cases (empty base or fibres, terminal base) are covered. Docstrings, source place, blueprint id and the proof steps are present; single sorry; imports follow the convention. Not recompiled: no change made. Advisory only: mapFiber duplicates the uncited moduliFiberMap/IsFibredInGroupoids of def-sfb-stable-pointed-moduli-groupoids (definitionally equal); inline use is accepted per precedent."
+ }
+}

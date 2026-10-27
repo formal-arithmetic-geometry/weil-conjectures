@@ -1,0 +1,117 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8-6.5.9 and Remark 6.5.10; agent synthesis of returned proof Steps 1-2, the restriction/composition part of Step 4, and the integral exactness part of Step 7 (no assertion here of global t-exactness)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-constructible-stratification",
+  "def-pc-perfect-ring-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-proetale-inverse-image",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact integral stratum restrictions and pro etale perfect charts compatible with completed pullback and distinguished triangles",
+   "results": "8 hits including Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.Scheme.Etale and AlgebraicGeometry.pullbackRestrictIsoRestrict. No completed integral derived chart or normalized shift/scalar API.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem or data interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete integral constructible complexes admit finite stratified perfect charts with exact restriction and completed pullback",
+   "results": "8 hits on manifold local charts and immersions. None concerns completed integral derived sheaves. Loogle query Functor.IsTriangulated returned unknown identifier.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem or data interface."
+  },
+  {
+   "tool": "grep",
+   "query": "integralDerivedPullback.*[Ll]inear|integralDerivedPullback_additive|stratum_chart; blueprint_refs.py search stratum chart",
+   "results": "msearch grep: 0 hits. Local rg finds only the assigned theorem for Charts and ExactRestriction; existing integralOperations_preserve_constructible proves the preservation conjunct. The blueprint search has zero matching blueprint nodes.",
+   "date": "2026-10-25",
+   "verdict": "Preserve existing data by extraction; split only the missing charts and functorial steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratumChartRestrictions",
+  "date": "2026-10-25",
+  "group": "J7"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- the restriction of $\\mathcal F$ to the geometric fibre is again a constructible sheaf whose stalks are those of $\\mathcal F$. Subargument: Proposition 6.6.11; Lemmas 6.5.8-6.5.9 and Remark 6.5.10; agent synthesis of returned proof Steps 1-2, the restriction/composition part of Step 4, and the integral exactness part of Step 7 (no assertion here of global t-exactness).",
+   "via": [
+    "lem-a1-integral-stratum-chart-restrictions",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "def-a1-integral-stratum-chart-restrictions-data",
+ "title": "Data for exact integral stratum charts and their normalized cartesian squares",
+ "kind": "definition",
+ "statement": "Fix a prime l and a finite extension E of Q_l, and put R = O_E and B_T = lim_n (R/pi^(n+1))_T. Use the integral operations and adic presentation of [def-weil-l-adic-coefficient-extension], [def-weil-scheme-morphism-properties], [def-weil-completed-integral-coefficients], [def-weil-pbc-proetale-site], [def-weil-derived-complete-integral-detailed], [def-weil-derived-pullback-tensor-hom], [def-constructible-stratification], [def-pc-perfect-ring-complex], [def-pur-integral-derived-operations], [def-weil-proetale-inverse-image], [def-weil-derived-cohomology-sheaves]. Define constructible K by sfIntegralConstructible of the existing exact coefficient transport. Define ExactRestriction(f) to retain ordinary module-pullback finite exactness and all-limit preservation, countable ring-product and coefficient-limit preservation, the canonical coefficient projection equations, unique coordinate-normalized strict Roos comparison, invertibility of the derived-limit comparison, the specified integral/completed Comparison, completeness of constructible objects, a natural ordinary/integral comparison normalized by the completion unit, preservation of constructibility, and cohomology comparisons. For h:W→X and q:V→X define chartSquare to be the chosen pullback square; finiteSquare is its canonical finite ringed pullback comparison. Define leftReduction and rightReduction with the actual completed quotient adjuncts and chi. PullbackSquare retains a natural isomorphism of the two chart paths and equality after these reductions with finiteSquare. Define chartMap using the pullback universal property. Model(i,U,K) retains a bounded finite-projective R-complex, an isomorphism from the iterated ordinary chart restriction to its completed constant realization, and inheritance of every cohomological interval. Charts(h,K) retains finite locally closed constructible strata, pro-etale covering families, models, ExactRestriction records on every original and base-changed stratum, object and composite chart map, weak etaleness and covering after base change, Comparison on chart projections and PullbackSquare on every chart. Define withConstructible and Charts.pulledStrata by the existing actual stratification pullback. These are the original data constructors, unchanged.",
+ "proof": [],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStratumChartRestrictionsData",
+  "file": "lean/Sheaf/Paper/IntegralStratumChartRestrictionsData.lean",
+  "declaration": "WeilConjectures.IntegralStratumCharts.constructible",
+  "statement": "def constructible (X : Scheme.{u}) : ObjectProperty (PbcCompletedDerived X (pbcIntegralDatum l E))",
+  "declarations": [
+   "WeilConjectures.IntegralStratumCharts.constructible",
+   "WeilConjectures.IntegralStratumCharts.completionMap",
+   "WeilConjectures.IntegralStratumCharts.ExactRestriction",
+   "WeilConjectures.IntegralStratumCharts.chartSquare",
+   "WeilConjectures.IntegralStratumCharts.finiteSquare",
+   "WeilConjectures.IntegralStratumCharts.leftReduction",
+   "WeilConjectures.IntegralStratumCharts.rightReduction",
+   "WeilConjectures.IntegralStratumCharts.PullbackSquare",
+   "WeilConjectures.IntegralStratumCharts.withConstructible",
+   "WeilConjectures.IntegralStratumCharts.chartMap",
+   "WeilConjectures.IntegralStratumCharts.Model",
+   "WeilConjectures.IntegralStratumCharts.Charts",
+   "WeilConjectures.IntegralStratumCharts.Charts.pulledStrata"
+  ],
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fc3f",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T123202-L-1840578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fc3f",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T123202-L-1840578",
+  "kind": "interface",
+  "note": "independent cc review: 13 extracted data decls and item signature byte-diffed vs clone (identical); item proof vs integralOperations_preserve_constructible + integralPullback_completedComparison + the two new children; sandbox compile of Data/Charts/Functorial/item + direct importer ConstructiblePullbackTExact, exit 0; axioms propext/sorryAx/Classical.choice/Quot.sound"
+ }
+}

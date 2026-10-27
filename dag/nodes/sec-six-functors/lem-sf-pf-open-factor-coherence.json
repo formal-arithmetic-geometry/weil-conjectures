@@ -6,62 +6,49 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Apply [lem-sf-open-roos-unit-adjunction] to $j$ and $j'$. All schemes are finite type over $k$, so its qcqs, quasi-compact-open and adic coefficient checks apply. Its Roos/unit equivalence identifies the full subcategories defined by the Roos completeness predicate, and its unit-compatible restriction and complete adjunction give clause (1), including full faithfulness.",
-   "uses": [
-    "lem-sf-open-roos-unit-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-    "place": "Base-change paragraph, open factor; assembly of extracted open-factor arguments."
-   }
-  },
-  {
-   "text": "Apply [lem-sf-open-tensor-quotient-augmentation] to $j,K,P$. Its strict scalar comparison is exactly $(j_!K)_n\\cong j_!K_n$, with every quotient transition. Its constructibility and cohomology assertions give clause (2), the same uniform interval, and $j^*P\\in D^b_c(U,R)$. For clause (2) alone take $P=0$, which belongs to the full constructible category by its definition.",
-   "uses": [
-    "lem-sf-open-tensor-quotient-augmentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-    "place": "Base-change paragraph, open factor; assembly of extracted open-factor arguments."
-   }
-  },
-  {
-   "text": "Use the augmented strict tensor square of [lem-sf-open-tensor-quotient-augmentation] and its completion [lem-sf-open-projection-roos-completion]. The latter supplies $\\gamma^c=\\lambda_j^{-1}R\\lim\\gamma_\\bullet$ as the integral open datum, with the actual equation $\\gamma^c\\chi_{j_!K,P}=j_!\\chi_{K,j^*P}\\gamma^B$, invertibility, and identity open restriction. Thus this datum realizes precisely the projection assertions in clause (3).",
+   "text": "Obtain the augmented tensor data q and actual-unit reflectors for j. Apply lem-sf-open-factor-open-realization to obtain the fixed Open data; repeat for jprime.",
    "uses": [
     "lem-sf-open-tensor-quotient-augmentation",
-    "lem-sf-open-projection-roos-completion"
+    "lem-sf-open-roos-unit-adjunction",
+    "lem-sf-open-factor-open-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-    "place": "Base-change paragraph, open factor; assembly of extracted open-factor arguments."
-   }
+   "elementary": false
   },
   {
-   "text": "For the given Cartesian square apply [lem-sf-open-exchange-roos-restriction]. By the first step, the constructible $K$ is complete in the actual-unit sense as well. The exchange is exactly the specified strict-reduction map, not an arbitrary isomorphism with the same endpoints. Its formula and restriction equation give invertible $\\beta^c$ and $j'^*\\beta^c=1$ under the required pullback-composition and open-unit identifications, completing clause (3).",
+   "text": "Apply the existing completed projection theorem to q, then lem-sf-open-factor-projection-realization. This supplies the two tensor-completeness assertions, tensorRestriction, its unit equation and gamma_restriction.",
    "uses": [
-    "lem-sf-open-roos-unit-adjunction",
-    "lem-sf-open-exchange-roos-restriction"
+    "lem-sf-open-projection-roos-completion",
+    "lem-sf-open-factor-projection-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-    "place": "Base-change paragraph, open factor; assembly of extracted open-factor arguments."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing completed exchange theorem, then lem-sf-open-factor-exchange-realization to obtain horizontal Pull data, normalized ordinary exchange, completedSquare, square_unit, beta_restriction and unit-precomposition injectivity.",
+   "uses": [
+    "lem-sf-open-exchange-roos-restriction",
+    "lem-sf-open-factor-exchange-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble Assertion with these fields. Naturality of eta and unit_commutes prove gamma_unit and beta_unit after cancelling each comparison hom/inverse. Each gamma and beta is a composite of isomorphisms, hence invertible. For beta_unique apply unit-precomposition injectivity to its given equation and the proved beta_unit equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sf-open-exchange-roos-restriction",
+  "lem-sf-open-factor-exchange-realization",
+  "lem-sf-open-factor-open-realization",
+  "lem-sf-open-factor-projection-realization",
   "lem-sf-open-projection-roos-completion",
   "lem-sf-open-roos-unit-adjunction",
   "lem-sf-open-tensor-quotient-augmentation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-  "place": "Base-change paragraph, open factor. Expanded using Bhatt–Scholze Lemmas 6.5.5 and 6.5.8, Stacks Tags 099M, 099N, 09BN, 09BP, 0GL1, and the existing strict-system normalization and completion-unit comparison nodes."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations."
  },
  "mathlib_match": null,
  "title": "Completed open restriction, constructibility and normalization of the open maps",
@@ -220,11 +207,6 @@
   "module": "Sheaf.SixFunctors.OpenFactorCoherence",
   "declaration": "WeilConjectures.OpenFactorCoherence.openFactorCoherence",
   "declarations": [
-   "WeilConjectures.OpenFactorCoherence.Open",
-   "WeilConjectures.OpenFactorCoherence.gamma",
-   "WeilConjectures.OpenFactorCoherence.theta",
-   "WeilConjectures.OpenFactorCoherence.OrdinaryExchange",
-   "WeilConjectures.OpenFactorCoherence.beta",
    "WeilConjectures.OpenFactorCoherence.Assertion",
    "WeilConjectures.OpenFactorCoherence.openFactorCoherence"
   ],
@@ -235,5 +217,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-856b5",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T102004-L-3764455",
+  "kind": "interface",
+  "note": "independent cc review: OpenFactorCoherenceData vs published item lines 96-211 (byte-identical); the 3 realization statements vs the Assertion fields they fill and the pinning of Open/Pull/OrdinaryExchange/Tensor; the 3 direct importers compiled against the delivered modules (all OK); axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
 }

@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-nodal-line-serre-riemann-roch",
+ "kind": "statement",
+ "title": "Serre duality and Riemann--Roch for line bundles on nodal curves",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] and $X$ a nonempty connected projective reduced $k$-scheme of pure dimension one [def-pc-scheme] [def-kun-projective]. Assume that every singular closed point has completed local ring $k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion] [def-weil-pbc-multivariate-power-series]. There is an invertible module $\\omega_X$ [def-sc-invertible-module] with functorial $k$-linear isomorphisms\n$$\\operatorname{Hom}_{\\mathcal O_X}(F,\\omega_X)\\simeq\\operatorname{Hom}_k(H^1(X,F),k)$$\nfor every coherent module $F$. Here module cohomology is Zariski cohomology [def-sc-ringed-space-module-cohomology]. For every invertible module $M$, put $g=h^1(X,\\mathcal O_X)$ and $N=\\omega_X\\otimes M^{-1}$, where $M^{-1}=\\mathcal Hom(M,\\mathcal O_X)$ [def-pur-sheaf-hom] [def-pur-sheaf-tensor-product]. All the displayed cohomology spaces are finite-dimensional, and\n$$h^0(X,N)=h^1(X,M),\\quad h^0(X,\\omega_X)=g,\\quad h^0(X,M)-h^1(X,M)=\\deg_X M+1-g.$$\nThe degree satisfies\n$$\\deg_XM=\\chi(X,M)-\\chi(X,\\mathcal O_X)=\\sum_Z\\deg(\\nu_Z^*M),$$\nwhere $Z$ runs over the irreducible components [def-weil-irreducible-components], $\\nu_Z:\\widetilde Z\\to X$ is their normalization [def-sc-normalization], and on each proper smooth normalization the degree is the Euler-characteristic degree [def-pc-degree-line-bundle] [def-pc-euler-characteristic]. The representing module $\\omega_X$ is unique up to the unique isomorphism preserving the displayed duality isomorphisms. Reducedness, pure dimension and connectedness use [def-pc-reduced-scheme] [def-weil-pure-dimension] [def-weil-connected-scheme]; algebraic closedness is [def-weil-algebraic-closure].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0BS2 (lemma-duality-dim-1), 0BS4 (remark-rework-duality-locally-free), 0BS6 (lemma-rr); the nodal specialization is Gorenstein by moduli-curves.tex Tag 0E6R (lemma-gorenstein-dualizing). The component-normalization degree convention follows varieties.tex Tag 0AYU (lemma-degree-birational-pullback), applied to the disjoint normalization; global functions are curves.tex Section genus (proper reduced connected over an algebraically closed field)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-kun-projective",
+  "pqf-def-coherent",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-normalization",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-weil-algebraic-closure",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "The structure map $f:X\\to\\operatorname{Spec}k$ is proper because it is projective, hence is of finite type. The field $k$ is Noetherian (its only ideals are $0$ and $k$), so the finite-type Noetherian theorem makes $X$ Noetherian. Finite-type affine $k$-algebras are finitely presented; thus $f$ is locally of finite presentation. It is quasi-compact by finite type and quasi-separated because $X$ is locally Noetherian, hence is of finite presentation. Finally $f$ is flat by field-flatness.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-sbc-locally-finite-presentation",
+    "lem-pc-flat-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6R, lemma-gorenstein-dualizing, hypotheses; algebra.tex Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation."
+   }
+  },
+  {
+   "text": "Since $k$ is algebraically closed, its own identity extension can be chosen as its algebraic closure. The only geometric fibre of $f$ in the chosen-algebraic-closure convention is therefore $X$ itself. Its nonemptiness, reducedness, pure dimension one and nodal completed local rings are the hypotheses of the item. Apply the relative nodal dualizing theorem over $\\operatorname{Spec}k$: its dualizing module $W$ is invertible and is the fibre's Serre-duality module. Independently, reduced-curve duality supplies the coherent representing module $\\omega_X$ with the displayed natural $k$-linear isomorphisms and its uniqueness as a representing pair. As $W$ represents that same functor, this uniqueness identifies $\\omega_X$ with $W$. Thus $\\omega_X$ is invertible, and the full functorial duality and uniqueness clauses follow.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-reduced-curve-dualizing-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2, lemma-duality-dim-1 (5); moduli-curves.tex Tag 0E6R, lemma-gorenstein-dualizing, specialized to an algebraically closed field."
+   }
+  },
+  {
+   "text": "For any invertible $M$, its dual $M^{-1}$ and $N=\\omega_X\\otimes M^{-1}$ are invertible by tensor-dual closure. On a trivializing open an invertible module is $\\mathcal O_X$, so is quasi-coherent of finite type. On the locally Noetherian scheme $X$, the coherent-module criterion makes $M,N,\\omega_X$ and $\\mathcal O_X$ coherent. Proper coherent-cohomology finiteness applies to each, in every degree. Dimension vanishing applies since $X$ is Noetherian of dimension one: all their $H^q$ for $q>1$ vanish. Thus all displayed spaces are finite-dimensional and $\\chi(X,L)=h^0(X,L)-h^1(X,L)$ for each of these line modules $L$.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02O6, lemma-proper-over-affine-cohomology-finite; Tag 01XZ, lemma-coherent-Noetherian; cohomology.tex Tag 02UZ, proposition-vanishing-Noetherian."
+   }
+  },
+  {
+   "text": "There is a canonical $k$-linear bijection $H^0(X,\\omega_X\\otimes M^{-1})\\to\\operatorname{Hom}(M,\\omega_X)$: on a trivializing open with generator $e$ and dual generator $e^\\vee$, send $w\\otimes e^\\vee$ to the map $ae\\mapsto aw$. The inverse sends $\\phi$ to $\\phi(e)\\otimes e^\\vee$. Replacing $e$ by $ue$ multiplies $\\phi(e)$ by $u$ and $e^\\vee$ by $u^{-1}$, so both constructions agree on overlaps and glue. Compose with the duality isomorphism of step 2 at $F=M$. Taking dimensions gives $h^0(X,N)=h^1(X,M)$: for a finite basis of a vector space its coordinate functionals are a basis of its dual, so the two dimensions agree. Taking $M=\\mathcal O_X$ gives $h^0(X,\\omega_X)=h^1(X,\\mathcal O_X)=g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS4, remark-rework-duality-locally-free; the rank-one Hom identification is written out."
+   }
+  },
+  {
+   "text": "The global-functions theorem applies to $X$: it is nonempty, proper, connected, reduced and one-dimensional over the algebraically closed field $k$. Hence $H^0(X,\\mathcal O_X)=k$, and step 3 gives $\\chi(X,\\mathcal O_X)=1-g$. By the Euler-characteristic definition of degree, $\\deg_X M=\\chi(X,M)-\\chi(X,\\mathcal O_X)$. Substitute the preceding equality and $\\chi(X,M)=h^0(X,M)-h^1(X,M)$ to obtain $h^0(X,M)-h^1(X,M)=\\deg_X M+1-g$. This is an integer rearrangement; no smoothness of $X$ is used.",
+   "uses": [
+    "lem-sc-global-functions",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, lemma-proper-geometrically-reduced-global-sections (2),(3), and degree Definition 0AYR; curves.tex Tag 0BS6, lemma-rr, rank-one numerical specialization."
+   }
+  },
+  {
+   "text": "Apply the weighted-component degree formula to $X$ and $M$. It gives finitely many reduced integral proper one-dimensional components $Z$ and $\\deg_XM=\\sum_Z m_Z\\deg_Z(M|_Z)$. At a component-generic point $\\eta$, reduced-curve duality explicitly asserts that $\\mathcal O_{X,\\eta}$ is a field. As a module over itself a field has only the submodules $0$ and itself, so has length one: $m_Z=1$. Therefore $\\deg_XM=\\sum_Z\\deg_Z(M|_Z)$.",
+   "uses": [
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-sfb-reduced-curve-dualizing-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYW, lemma-degree-in-terms-of-components; reducedness makes every generic multiplicity one."
+   }
+  },
+  {
+   "text": "The reduced-curve normalization theorem gives that each $\\widetilde Z$ is a smooth proper connected curve. Fix a component $Z$; by step 6 it is an integral scheme proper over $k$ of dimension one, hence separated and of finite type, i.e. a proper curve. Normalization properties give that $\\widetilde Z\\to Z$ is finite, surjective and birational, that $\\widetilde Z$ is proper over $k$ and that $\\dim\\widetilde Z=1$. By the definition of the normalization, over a nonempty affine open $\\operatorname{Spec}A\\subseteq Z$ the scheme $\\widetilde Z$ is $\\operatorname{Spec}A'$ with $A'$ the integral closure of the domain $A$ in $K=k(Z)$; so $A'$ is a domain with fraction field $K$, and its generic point is the only point over the generic point of $Z$. All these affine pieces therefore share one generic point, so $\\widetilde Z$ is integral with $k(\\widetilde Z)=K$, and is a proper curve. The map $\\widetilde Z\\to Z$ is dominant, and the extension $k(Z)\\to k(\\widetilde Z)$ is the identity of $K$, so it is finite of degree $d=1$. The proper-curve pullback-degree theorem applied to this morphism and the line bundle $M|_Z$ gives $\\deg_{\\widetilde Z}(\\nu_Z^*M)=1\\cdot\\deg_Z(M|_Z)$. Here pulling back the restriction along $\\widetilde Z\\to Z$ is pulling back along the composite $\\nu_Z:\\widetilde Z\\to X$, by the functorial pullback isomorphism. Substitute this equality into the sum of step 6. It gives precisely the asserted normalization-component formula with the same Euler-characteristic degree on each smooth normalization.",
+   "uses": [
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-sc-normalization-properties",
+    "def-sc-normalization",
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYZ, lemma-degree-pullback-map-proper-curves, with deg(X/Y)=1 on each integral component (the birational case of Tag 0AYU, lemma-degree-birational-pullback); Tag 0BXR, lemma-normalization-locally-algebraic; morphisms.tex Tag 0BXC, lemma-normalization-birational."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-flat-field",
+  "def-weil-geometric-fibre",
+  "lem-sfb-gorenstein-curve-relative-dualizing",
+  "lem-sfb-reduced-curve-dualizing-module",
+  "lem-pc-tensor-dual-invertible",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-global-functions",
+  "def-pc-degree-line-bundle",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-sc-normalization-properties",
+  "def-sc-normalization",
+  "lem-sfb-proper-curve-bundle-pullback-degree",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0BS2 and 0BS4; numerical rank-one Riemann--Roch from the Euler-characteristic degree definition; varieties.tex Tags 0BUG, 0AYW, 0AYZ (degree one, the birational case of 0AYU); moduli-curves.tex Tag 0E6R."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality and Riemann Roch for line bundles on a connected projective nodal curve with degree summed on normalized components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} → [inst_1 : DecidableEq F] → W.Point →+ Additive (ClassGroup W.CoordinateRing)\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        (WeierstrassCurve.Affine.CoordinateRing.mk W) (Polynomial.C (W.addPolynomial x₁ y₁ (W.slope x₁ x₂ y₁ \", \"doc\": \"Let $ W $ be an affine Weierstrass curve over a field $ F $, and let $ (x_1, y_1), (x_2, y_2) $ be two points on $ W $ satisfying the curve equation. If these points are not inverses (i.e., $ x_1 = x_\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_addMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P Q : WeierstrassCurve.Projective.PointClass F},\\n  W.NonsingularLift P → W.NonsingularLift Q → W.NonsingularLift (W.addMap P Q)\", \"doc\": \"For any two projective points $[P]$ and $[Q]$ on a Weierstrass curve $W$ over a field $F$, if both $[P]$ and $[Q]$ satisfy the nonsingularity condition (i.e., they lie on the curve $Y^2Z = X^3 + aXZ^2\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern elliptic coordinate ideals and invertible modules over rings, not Serre duality or Riemann--Roch on singular curves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper reducible Gorenstein curve h0 of omega tensor inverse L equals h1 of L and Euler characteristic equals degree plus one minus arithmetic genus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        (WeierstrassCurve.Affine.CoordinateRing.mk W) (Polynomial.C (W.addPolynomial x₁ y₁ (W.slope x₁ x₂ y₁ \", \"doc\": \"Let $ W $ be an affine Weierstrass curve over a field $ F $, and let $ (x_1, y_1), (x_2, y_2) $ be two points on $ W $ satisfying the curve equation. If these points are not inverses (i.e., $ x_1 = x_\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F},\\n  W.Nonsingular x y →\\n    WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C (W.negY x y)) *\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C y) =\\n      WeierstrassCurve.Affine.Coordinate\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$, the product of the ideals generated by $(X - x, Y - (-y - a_1 x - a_3))$ and $(X - x, Y - y)$ in the coordinate rin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℤ},\\n  ↑n ≠ 0 → (W.preΨ n).natDegree = (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For a Weierstrass curve over a commutative ring $R$, and for any non-zero integer $n$, the natural degree of the pre-division polynomial $\\\\Psi_n$ is given by $\\\\frac{n^2 - 1}{2}$ if $n$ is odd, and $\\\\f\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℕ},\\n  ↑n ≠ 0 → (W.preΨ' n).natDegree = (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For a Weierstrass curve $W$ over a commutative ring $R$ and a non-zero natural number $n$, the natural degree of the pre-normalized division polynomial $\\\\Psi'_n$ is given by $\\\\frac{n^2 - (4 \\\\text{ if \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (p q : Polynomial R),\\n  (Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X) =\\n    p ^ 2 - p * q * (Polynomial.C W'.a₁ * Polynomial.X + Polynomial.C W'.a₃) -\\n      q ^ 2 *\\n        (\", \"doc\": \"For any polynomials $ p, q \\\\in R[X] $, the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of the affine Weierstrass curve is given by $ p^2 - p q (a_1 X + a_3) - q^2 (X^3 + a_2 X\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern elliptic coordinate ideals and invertible modules over rings, not Serre duality or Riemann--Roch on singular curves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern elliptic coordinate ideals and invertible modules over rings, not Serre duality or Riemann--Roch on singular curves."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|dualizing|riemann.?roch",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern elliptic coordinate ideals and invertible modules over rings, not Serre duality or Riemann--Roch on singular curves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Riemann Roch and Serre duality for invertible sheaves on a proper nodal curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.inv_eq_dual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(M : Pic R) : M⁻¹ = Pic.mk R (Dual R M)\", \"doc\": \"For any element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, the inverse of $ M $ under the tensor product operation is equal to the isomorphism class of its dual module, i.e., $ M^{-1} = [\\\\mathrm{D\"}\n  {\"name\": \"CommRing.Pic.mk_dual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R (Dual R M) = (Pic.mk R M)⁻¹\", \"doc\": \"For any invertible $ R $-module $ M $, the isomorphism class of its dual module $ \\\\mathrm{Dual}_R(M) $ in the Picard group $ \\\\mathrm{Pic}(R) $ is the inverse of the class of $ M $, i.e., $ [\\\\mathrm{Du\"}\n  {\"name\": \"Module.Invertible.instDual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Module.Invertible R (Dual R M)\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, if $ M $ is invertible, then its dual module $ \\text{Dual}_R(M) $ consisting of all $ R $-linear maps $ M \\to R $ is also an invertible $ R $-\"}\n  {\"name\": \"Module.Invertible.instFinite\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Module.Finite R M\", \"doc\": \"An invertible module over a commutative semiring is finitely generated.\"}\n  {\"name\": \"Module.Invertible.bijective\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommSemiring R} {inst_1 : AddCommMonoid M} {inst_2 : Module R M}\\n  [self : Module.Invertible R M], Function.Bijective ⇑(contractLeft R M)\", \"doc\": \"If $ R $ is a commutative semiring and $ M $ is an invertible $ R $-module, then the canonical linear map $ \\\\text{contractLeft}: M \\\\otimes_R M^* \\\\to R $ is bijective, where $ M^* $ denotes the dual mo\"}\n  {\"name\": \"WeierstrassCurve.coe_Δ'\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass\", \"type\": \": W.Δ' = W.Δ\", \"doc\": \"The discriminant $\\\\Delta$ of a Weierstrass curve $W$ over a commutative ring $R$ is invertible, as demonstrated by the equality $\\\\Delta' = \\\\Delta$, where $\\\\Delta'$ denotes the corresponding unit in th\"}\n  {\"name\": \"Module.Invertible.linearEquivDual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": M ≃ₗ[R] Dual R N\", \"doc\": \"A linear isomorphism between the R-module $ M $ and the dual module $ \\\\text{Hom}_R(N, R) $, established via a bijective currying operation that corresponds to the equivalence $ M \\\\otimes_R N \\\\to R $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"{x y : F} (h : W.Nonsingular x y) :\\n  (XYIdeal' h : FractionalIdeal W.CoordinateRing⁰ W.FunctionField) = XYIdeal W x (C y)\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the invertible fractional ideal $XYIdeal'$ constructed from the nonsingular condition equals the ideal generated b\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern elliptic coordinate ideals and invertible modules over rings, not Serre duality or Riemann--Roch on singular curves."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|dualizing|riemann.?roch",
+   "date": "2026-10-23",
+   "results": "15 hits: Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Tactic/Translate/ToDual.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean",
+   "verdict": "no match: returned declarations concern elliptic-curve equations, module Picard groups, polynomial interpolation, or categorical duals; none states coherent Serre duality and degree on nodal curves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper Gorenstein curve Serre duality coherent sheaf first cohomology line bundle Riemann Roch",
+   "date": "2026-10-23",
+   "results": "8 hits: WeierstrassCurve.IsIntegral, WeierstrassCurve.b₂_of_isCharNeTwoNF, WeierstrassCurve.IsShortNF, WeierstrassCurve.j, WeierstrassCurve.preΨ'_four, WeierstrassCurve.c₄_of_isShortNF_of_char_three, WeierstrassCurve.a₄_of_isCharThreeJNeZeroNF, WeierstrassCurve.IsCharNeTwoNF",
+   "verdict": "no match: returned declarations concern elliptic-curve equations, module Picard groups, polynomial interpolation, or categorical duals; none states coherent Serre duality and degree on nodal curves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"cohomology\"",
+   "date": "2026-10-23",
+   "results": "0 hits: ",
+   "verdict": "no match: returned declarations concern elliptic-curve equations, module Picard groups, polynomial interpolation, or categorical duals; none states coherent Serre duality and degree on nodal curves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality and Riemann Roch for line bundles on a projective nodal reducible curve",
+   "date": "2026-10-23",
+   "results": "8 hits: WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, WeierstrassCurve.Projective.nonsingularLift_addMap, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Projective.addMap_of_Y_eq, WeierstrassCurve.Affine.FunctionField, WeierstrassCurve.Projective.nonsingular_add, WeierstrassCurve.Affine.CoordinateRing.XYIdeal'",
+   "verdict": "no match: returned declarations concern elliptic-curve equations, module Picard groups, polynomial interpolation, or categorical duals; none states coherent Serre duality and degree on nodal curves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper Gorenstein curve the dual of H1 of a line bundle is H0 of its inverse tensored with the canonical sheaf",
+   "date": "2026-10-23",
+   "results": "8 hits: CommRing.Pic.mk_dual, Algebra.H1Cotangent, CommRing.Pic.inv_eq_dual, WeierstrassCurve.Affine.Point.toClass_some, CharacterModule.dual_rTensor_conj_homEquiv, CharacterModule.homEquiv_symm_apply_apply_apply, CharacterModule.homEquiv, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+   "verdict": "no match: returned declarations concern elliptic-curve equations, module Picard groups, polynomial interpolation, or categorical duals; none states coherent Serre duality and degree on nodal curves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-special-clifford-subcurve",
+  "date": "2026-10-23",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Serre duality and Riemann--Roch for line bundles on nodal curves.",
+   "via": [
+    "lem-sfb-nodal-special-clifford-subcurve",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-line-serre-riemann-roch",
+  "worker": "stage1",
+  "summary": "Q42: assembled reduced-curve representing duality and relative nodal invertibility, wrote the rank-one Hom calculation, derived Riemann--Roch from the Euler-characteristic degree, and used weighted components plus componentwise normalization invariance. Every non-elementary input already exists; no new nodes or leaves. No statement change.",
+  "blueprint": "Supports the existing ancestry place: det-thm-sf-ctf-stability-direct-images proof (3), nodal-curve linear-series input in the alteration reduction. The assembly realizes its auxiliary duality, dimension and multidegree claims. The inherited null from.node is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "General Projective morphisms are proper used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "General Invertible modules: duals and tensor products used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "General Coherence on locally Noetherian schemes used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "General Well-definedness of the Euler characteristic used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "General Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "General Global functions on a proper curve used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "lem-trf-degree-weighted-irreducible-components",
+    "why": "General Degree as a multiplicity-weighted sum over integral components used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "lem-trf-reduced-curve-normalization-genus",
+    "why": "General Normalization formula for the arithmetic genus of a reduced proper curve used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "General Properties of the normalization used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "General Pullback and tensor product of invertible modules, and their fibres used exactly as stated in the cited assembly step; the nodal duality auxiliary needs this generic algebraic-geometry input, which its unit does not supply separately."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-pc-tensor-dual-invertible",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-global-functions",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-sc-normalization-properties",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-efc38159c",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-efc38159c (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes. Statement and stmt_deps are identical to side-live, which is unsplit, and there is no repair note. Sources read: Stacks 0BS2 (5), 0BS6, 0E6R, 0AYU, 0AYW, 0AYZ. Steps 1-6 check against the cited statements. Step 1: projective gives proper and finite type, X is Noetherian, 00FP gives finite presentation, and f is flat. Step 2: over the algebraically closed k the geometric fibre is X up to the canonical isomorphism, so the Gorenstein node (field case) gives an invertible W; the reduced-curve node's representing-pair uniqueness then gives omega_X = W. Step 3: coherence, finite dimensionality, and H^q = 0 for q > 1. Step 4: the rank-one Hom identification is written out and elementary. Step 5: global functions (proper, connected, reduced) give chi(O) = 1 - g, which yields Riemann-Roch. Step 6: 0AYW with m_i = 1, because O_{X,eta} is a field. Small cases checked: P1 with O(d); the nodal cubic (arithmetic genus 1, normalization genus 0); two P1 meeting at a point with O(a,b). Duplicate search: lem-sc-riemann-roch is smooth-only, the trf marked-nodal node is relative, and the reduced-curve dualizing node has no Riemann-Roch; the item duplicates neither. FIX, step 7: it cited lem-per-birational-curve-degree-invariance, which is in route-pivot-dropped (2026-10-19, artin-gabber section). It now cites the same-unit, reviewed lem-sfb-proper-curve-bundle-pullback-degree (0AYZ) with d = 1. Hypotheses checked: Z is an integral proper curve; Z~ -> Z is finite, surjective and birational, and Z~ is proper of dimension 1 (normalization properties (a)); integrality of Z~ and k(Z~) = k(Z) are written out from def-sc-normalization. proof_deps was recomputed, proof_origin now names 0AYZ, and the dropped tool_use entry was removed. Batch-5 flags: the Gorenstein lci chain, def-trf-schematically-dense-open, trf 0AYW and the trf normalization-genus node are generic algebraic geometry and not part of the trace formula or Poincare duality, so accepted. The dropped birational-degree citation is removed. The artin-gabber route point is answered by the same removal; no forbidden tool was used. Maintainer note: the existing Gorenstein node's closure reaches the dropped def-weil-pbc-trivial-kan-fibration through the trf lci/cotangent chain. That is not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalLineSerreRiemannRoch",
+  "declaration": "AlgebraicGeometry.exists_nodal_line_serre_riemann_roch",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalLineSerreRiemannRoch.lean",
+  "statement": "theorem exists_nodal_line_serre_riemann_roch (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsHProjective (X ↘ Spec (.of k))] [ConnectedSpace X] [IsReduced X] (hpure : X.IsPureDimension 1) (hnodal : ∀ x : X, IsClosed ({x} : Set X) → x ∉ (X ↘ Spec (.of k)).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}))) : ∃ (ω : X.Modules), ω.IsInvertible ∧ ∃ (e : ∀ (F : X.Modules), F.IsQuasiCoherentFiniteType → (F ⟶ ω) ≃ₗ[k] Module.Dual k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) F 1)), (∀ (F G : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (hG : G.IsQuasiCoherentFiniteType) (a : F ⟶ G) (φ : G ⟶ ω) (x : Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) F 1), e F hF (a ≫ φ) x = e G hG φ (Scheme.Modules.scalarCohomologyMap (X ↘ Spec (.of k)) a 1 x)) ∧ (∀ (F : X.Modules), F.IsQuasiCoherentFiniteType → FiniteDimensional k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) F 1)) ∧ FiniteDimensional k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) ω 0) ∧ FiniteDimensional k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) (Scheme.Modules.unit X) 1) ∧ (Module.finrank k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) ω 0) = Module.finrank k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) (Scheme.Modules.unit X) 1)) ∧ (∀ (M : X.Modules), M.IsInvertible → FiniteDimensional k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) M 0) ∧ FiniteDimensional k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) M 1) ∧ FiniteDimensional k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) (ω ⊗ Scheme.Modules.dual M) 0) ∧ Module.finrank k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) (ω ⊗ Scheme.Modules.dual M) 0) = Module.finrank k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) M 1) ∧ (Module.finrank k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) M 0) : ℤ) - Module.finrank k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) M 1) = Scheme.Modules.degree k M + 1 - Module.finrank k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) (Scheme.Modules.unit X) 1) ∧ Scheme.Modules.degree k M = Scheme.Modules.eulerChar k M - Scheme.Modules.eulerChar k (Scheme.Modules.unit X) ∧ ∃ (m : ℕ) (Z : Fin m → Scheme.{u}) (hZ : ∀ i, IsIntegral (Z i)) (j : ∀ i, Z i ⟶ X), (∀ i, IsClosedImmersion (j i)) ∧ Function.Injective (fun i ↦ Set.range (j i)) ∧ (∀ C : Set X, C ∈ irreducibleComponents X ↔ ∃ i, Set.range (j i) = C) ∧ Scheme.Modules.degree k M = ∑ i : Fin m, @Scheme.Modules.degree k _ (@Scheme.normalization (Z i) (hZ i)) ⟨@Scheme.fromNormalization (Z i) (hZ i) ≫ j i ≫ X ↘ Spec (.of k)⟩ ((Scheme.Modules.tensorPullback (@Scheme.fromNormalization (Z i) (hZ i) ≫ j i)).obj M)) ∧ (∀ (ω' : X.Modules), ω'.IsQuasiCoherentFiniteType → ∀ (e' : ∀ (F : X.Modules), F.IsQuasiCoherentFiniteType → (F ⟶ ω') ≃ₗ[k] Module.Dual k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) F 1)), (∀ (F G : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (hG : G.IsQuasiCoherentFiniteType) (a : F ⟶ G) (φ : G ⟶ ω') (x : Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) F 1), e' F hF (a ≫ φ) x = e' G hG φ (Scheme.Modules.scalarCohomologyMap (X ↘ Spec (.of k)) a 1 x)) → ∃! i : ω ≅ ω', ∀ (F : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (φ : F ⟶ ω) (x : Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) F 1), e' F hF (φ ≫ i.hom) x = e F hF φ x)",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49cafbe82",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Only the item node changed (lean + stmt_deps); the added stmt_dep def-sc-field-linear-module-cohomology-operations is a landed definition node, allowed by brief-stage2 l.177. lean.statement verbatim, proof sorry only. Hypotheses: IsAlgClosed k; X.Over Spec k; IsHProjective; ConnectedSpace (nonempty); IsReduced; IsPureDimension 1. hnodal covers closed x outside smoothLocus (= singular over a perfect field) with a ring iso AdicCompletion ≃+* k[[X0,X1]]/(X0X1): def-trf convention, slightly stronger and still true. Duality e F : (F⟶ω) ≃ₗ[k] Dual H¹ for every IsQuasiCoherentFiniteType F (= coherent on a Noetherian X); contravariant naturality correct; the k-actions on Hom (Modules.Linear) and on scalarCohomology come from the same structure map; cohomology is the RingedSpace.moduleCohomology record. Finiteness, h0(ω⊗dual M)=h1(M), h0(ω)=h1(O), integer RR, degree=χ(M)-χ(O) (recorded def) all stated; dual = homObj record, localization tensor = CochainTensorUniverses record. Component sum: ∃ Fin m integral closed immersions, injective ranges iff irreducibleComponents, canonical normalization, tensorPullback of the composite, composite Over structure; matches the Lean of proof_deps degree_weighted_irreducible_components and proper_curve_bundle_pullback_degree. Uniqueness: ∃! iso ω≅ω' preserving e for any coherent natural (ω',e') (0BS2; Yoneda). Edge cases: P1 O(d), nodal cubic g=h1(O), two P1 at a node, smooth X, any characteristic. H4 searches fine; no definitions; docstrings with sources, blueprint tag and 7 proof steps; lines ≤100; plain imports = proof_dep modules (all 22 checked). No compile (no change); worker reports a clean compile in 12.6 s/13.1 s. Advisory: tensorPullback is owned by def-pc-module-pullback, which is absent from stmt_deps because the node TeX does not cite it; a maintainer may add it."
+ }
+}

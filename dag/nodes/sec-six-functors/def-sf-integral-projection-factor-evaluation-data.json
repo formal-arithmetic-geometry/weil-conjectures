@@ -1,0 +1,125 @@
+{
+ "id": "def-sf-integral-projection-factor-evaluation-data",
+ "kind": "definition",
+ "title": "Finite coordinates for the separate proper and open coefficient maps",
+ "statement": "For D,C,E,n>=1,S as in [def-sf-operation-stages], f:X->Y, a compactification c and m>=0, define directIso as the coefficient directAdjunction.right whiskered with finite inclusion, followed by finiteDirectImage whiskered with integral reduction. Define extensionIso analogously from coefficient openExtension and finiteOpenExtension. Define direct(M) and extension(K) by first reducing the exchange-stage properPush/openExtension equality transport and then applying the respective natural comparison. Define support(K) by coefficient supportAdjunction.left followed by finiteSupport. These are specified composites of existing isomorphisms, with no chosen data or postponed proof.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Explicit coefficient-comparison and finite-realization composites for the proper, open and support factors; compatibility with counits and j_!."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-integral-projection-middle-map"
+ ],
+ "proof": [
+  {
+   "text": "Compose the supplied coefficient comparison and finite realization natural isomorphisms. For exchange-stage coordinates first apply scalar reduction to eqToIso of the recorded functor equality. Every inverse and component is from an actual specified isomorphism. No existence witness is chosen.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-integral-projection-middle-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-integral-projection-middle-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Explicit coordinate composites for the unary factors; X9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving a composition of adjunction mates and the naturality of an adjunction Hom equivalence",
+   "results": "Eight generic adjunction results, including CategoryTheory.Adjunction.homEquiv_naturality_left and homEquiv_naturality_right_square_iff in Mathlib.CategoryTheory.Adjunction.Basic. None identifies the specified geometric coefficient comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality supports the combining proof; no exact normalized proper/open realization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate of a composite natural transformation is composition of mates",
+   "results": "Generic mateEquiv composition lemmas, no normalized geometric coefficient statement.",
+   "date": "2026-10-27",
+   "verdict": "Use generic adjunction identities in the assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic homEquiv naturality and unit/counit formulas only.",
+   "date": "2026-10-27",
+   "verdict": "No exact geometric result."
+  },
+  {
+   "tool": "grep",
+   "query": "factoredSupport|support.*factor|factor.*support",
+   "results": "No Mathlib geometric match; local library has the finite support adjunct coordinates, but not the separate unary proper/open evaluation equations.",
+   "date": "2026-10-27",
+   "verdict": "This strictly smaller missing factor is stated separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionSupportFactorCoordinates",
+  "date": "2026-10-27",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-projection-support-factor-coordinates",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The single-compactification projection-generator square, without the refinement assertions. Separate proper counit factor and open tensor factor. Local open tensor square before proper image and one-input support factorization.",
+   "via": [
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionFactorEvaluationData",
+  "file": "lean/Sheaf/Paper/IntegralProjectionFactorEvaluationData.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.FactorEvaluation.directIso",
+  "declarations": [
+   "WeilConjectures.FixProjectionCompactification.FactorEvaluation.directIso",
+   "WeilConjectures.FixProjectionCompactification.FactorEvaluation.extensionIso",
+   "WeilConjectures.FixProjectionCompactification.FactorEvaluation.direct",
+   "WeilConjectures.FixProjectionCompactification.FactorEvaluation.extension",
+   "WeilConjectures.FixProjectionCompactification.FactorEvaluation.support"
+  ],
+  "statement": "def directIso",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T050655-L-253002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T050655-L-253002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

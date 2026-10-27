@@ -202,7 +202,32 @@
   "result": "pass",
   "note": "Read node, blueprint source order 1524, both stmt deps, the dependency module and upstream ContinuousMap.lean (T : Type, universe 0) and RingPresheaf isMonHom_sheafCompose_map. All clauses exact: sectionwise postcomposition is real data with rfl naturality; the sheaf morphism is between the recorded continuousMapRingSheafOfUniverse objects; the ring-object clause uses the dependency's MonObj and the sfbSheafTensorStructure tensor; id is strict; comp is map φ ≫ map ψ in the correct order. Universes u and v are independent and bound; T, T', T'' share v, as the dependency's RingCat.{max u v+1} interface requires; v=0 recovers upstream. Empty S, zero and noncommutative rings covered; no extra hypotheses. Node differs from the side clone only in lean; lean.statement verbatim in file. Docstrings carry source place and blueprint tag; theorems are sorry; report has Worker report and Second reading by Q116. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings. No fixes needed."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Profinite.continuousMapRingSheafMap"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Profinite.continuousMapRingSheafMap",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap",
+     "lines": [
+      160,
+      164
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
@@ -219,5 +244,24 @@
    "Profinite.isMonHom_continuousMapRingObjMapOfUniverse"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\varphi\\colon T\\to T'$ be a continuous ring homomorphism of topological rings. The\nmaps\n\n$$\n\\varphi_*\\colon\\underline T(S)=C(S,T)\\to C(S,T')=\\underline{T'}(S),\\qquad a\\mapsto\\varphi\\circ a,\n$$\n\nform a morphism of condensed rings $\\varphi_*\\colon\\underline T\\to\\underline{T'}$\n([def-sfb-continuous-map-condensed-ring]). Hence they also form a morphism of the\nunderlying ring objects ([det-def-sfb-ring-object]). This construction is strictly\nfunctorial: $(\\mathrm{id}_T)_*=\\mathrm{id}$, and $(\\psi\\circ\\varphi)_*=\\psi_*\\circ\\varphi_*$\nfor a further continuous ring homomorphism $\\psi\\colon T'\\to T''$.",
+  "proof": [
+   {
+    "text": "A composite of continuous maps is continuous, so $\\varphi\\circ a\\in C(S,T')$. Because\n$\\varphi$ is a ring homomorphism and the operations are pointwise, $a\\mapsto\\varphi\\circ a$\nis a ring homomorphism. It commutes with precomposition, since\n$\\varphi\\circ(a\\circ u)=(\\varphi\\circ a)\\circ u$, so it is a morphism of sheaves of rings.\nBy part 3 of [det-def-sfb-ring-object], it is then a morphism of ring objects. The identities\n$\\mathrm{id}\\circ a=a$ and $(\\psi\\circ\\varphi)\\circ a=\\psi\\circ(\\varphi\\circ a)$ give\nfunctoriality.",
+    "uses": [
+     "det-def-sfb-ring-object"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

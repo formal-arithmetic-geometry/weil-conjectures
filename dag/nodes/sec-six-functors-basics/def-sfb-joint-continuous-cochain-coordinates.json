@@ -1,0 +1,153 @@
+{
+ "id": "def-sfb-joint-continuous-cochain-coordinates",
+ "kind": "definition",
+ "title": "Evaluation-exact jointly continuous cochain coordinate data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $E$ be a topological field [def-weil-field], $J$ a topological group, $V$ a topological $E$-vector space, and $\\rho:J\\to\\operatorname{Aut}_E(V)$ an $E$-linear action. Let $B,C$ be integer-indexed cochain complexes of abstract $E$-vector spaces, and fix the localization $Q$ to their abstract derived category [def-weil-abstract-derived-category]. A jointly continuous cochain coordinate datum for $(E,J,V,\\rho,B,C)$ consists of the following data and identities.\nFor every $n\\geq0$ there are injective $E$-linear evaluation maps $b_n:B^n\\to\\operatorname{Fun}(J^{n+1},V)$ and $c_n:C^n\\to\\operatorname{Fun}(J^n,V)$. The image of $b_n$ is exactly the jointly continuous functions $F$ satisfying $F(ax_0,\\ldots,ax_n)=\\rho(a)F(x_0,\\ldots,x_n)$, and the image of $c_n$ is exactly all jointly continuous functions. Both complexes are zero in negative degrees. Evaluation identifies the differential on $B$ with\n$$(\\delta F)(x_0,\\ldots,x_{n+1})=\\sum_{i=0}^{n+1}(-1)^iF(x_0,\\ldots,\\widehat{x_i},\\ldots,x_{n+1}),$$\nand that on $C$ with\n$$(df)(g_1,\\ldots,g_{n+1})=\\rho(g_1)f(g_2,\\ldots,g_{n+1})+\\sum_{i=1}^{n}(-1)^if(g_1,\\ldots,g_i g_{i+1},\\ldots,g_{n+1})+(-1)^{n+1}f(g_1,\\ldots,g_n),$$\nincluding $(dv)(g)=\\rho(g)v-v$. The datum further includes an actual cochain isomorphism $\\Phi:B\\simeq C$, with inverse $\\Psi$, such that\n$$c_n(\\Phi_n z)(g_1,\\ldots,g_n)=b_n(z)(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_n),$$\n$$b_n(\\Psi_n z)(x_0,\\ldots,x_n)=\\rho(x_0)c_n(z)(x_0^{-1}x_1,\\ldots,x_{n-1}^{-1}x_n).$$\nIn degree zero these evaluate at $1$ and send $v$ to $x_0\\mapsto\\rho(x_0)v$. Finally it includes an isomorphism $D:Q(B)\\simeq Q(C)$ whose forward and inverse arrows are respectively $Q(\\Phi)$ and $Q(\\Psi)$. This defines the coordinate datum; it asserts no existence theorem and imposes no compactness or discreteness conditions.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential; agent-written homogeneous coordinate expansion, recorded as the JointContinuousCochainCoordinates structure in lean/Sheaf/RepresentationTheory/TopologicalHomogeneousCochainCoordinates.lean, lines 42--104."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "JointContinuousCochainCoordinates|homogeneousCochains",
+   "results": {
+    "t": "2026-10-24T11:28:53Z",
+    "tool": "grep",
+    "query": "JointContinuousCochainCoordinates|homogeneousCochains",
+    "sub": "RepresentationTheory/Homological/ContCohomology",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean"
+    ],
+    "digest": "f3a9a949eef274ca"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib hits concern TopRep homogeneous cochains, not this structure. Searches of both project roots found the existing structure in Sheaf.RepresentationTheory.TopologicalHomogeneousCochainCoordinates. No independent definition node carries it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous and inhomogeneous jointly continuous equivariant cochain complexes with evaluation maps and cumulative product coordinate isomorphism",
+   "results": {
+    "t": "2026-10-24T11:28:53Z",
+    "tool": "leansearch",
+    "query": "Homogeneous and inhomogeneous jointly continuous equivariant cochain complexes with evaluation maps and cumulative product coordinate isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.cochainsFunctor",
+     "CochainComplex.HomComplex",
+     "ContinuousCohomology.kerHomogeneousCochainsZeroEquiv",
+     "continuousCohomology",
+     "CochainComplex.HomComplex.Cochain.single",
+     "CochainComplex.shiftEval.congr_simp",
+     "groupCohomology.inhomogeneousCochains"
+    ],
+    "digest": "d93b9ce552ac41a7"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match: returned topological homogeneous cochains, algebraic cochains, and Hom complexes; none is the evaluation-exact joint-continuity coordinate structure. The exact structure already exists in the project and is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"JointContinuousCochainCoordinates\"",
+   "results": {
+    "t": "2026-10-24T11:28:53Z",
+    "tool": "loogle",
+    "query": "\"JointContinuousCochainCoordinates\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib hits for this name. The exact project structure is reused without a second declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-coset-homogeneous-averaging",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Direct-images paragraph (3), arithmetic transfer expansion: the jointly continuous homogeneous cochain spaces and their differential used in finite-coset averaging; definition-only repair requested by the maintainer for returned head abb2a2928a88.",
+   "via": [
+    "lem-sfb-finite-coset-homogeneous-averaging",
+    "lem-sfb-continuous-cochain-finite-index-transfer",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.TopologicalHomogeneousCochainCoordinates",
+  "declaration": "ContinuousCohomology.JointContinuousCochainCoordinates",
+  "statement": "structure JointContinuousCochainCoordinates\n    (E : Type u) [Field E] [TopologicalSpace E] [IsTopologicalDivisionRing E]\n    (J : Type v) [Group J] [TopologicalSpace J] [IsTopologicalGroup J]\n    (V : Type w) [AddCommGroup V] [Module E V] [TopologicalSpace V]\n    [IsTopologicalAddGroup V] [ContinuousSMul E V]\n    (ρ : J →* V ≃ₗ[E] V)\n    (B C : CochainComplex (ModuleCat.{t} E) ℤ)\n    [HasDerivedCategory.{r} (ModuleCat.{t} E)]",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only attachment requested by the independent return on abb2a2928a88. Reuses the existing structure verbatim in its current module; no declaration is moved, copied, or restated. The theorem node records its existence and naturality results, whereas this definition node names the coordinate data quantified in the averaging theorem. The record includes the full homogeneous/inhomogeneous and derived-coordinate interface."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1d1d0b6b",
+  "group": "Q49",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1d1d0b6b",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after the A2/H2 RETURN of abb2a2928a88. The Lean module is byte-identical to the head whose mathematics was already accepted; I re-checked every clause and edge case. The item changes only lean and stmt_deps; the only stmt_dep added is the new definition node def-sfb-joint-continuous-cochain-coordinates, which replaces the theorem node. The new node meets the H12 rules (kind, status, three search kinds, created, blueprint.from/via, lean_audit, chapter/unit). Its existing:true record has a lean.statement verbatim from the file, and its TeX matches every field of the existing structure JointContinuousCochainCoordinates. That structure is reused, not duplicated. The report has the Worker report, New nodes and Second reading sections. No compile was run because no file was changed. No findings."
+ }
+}

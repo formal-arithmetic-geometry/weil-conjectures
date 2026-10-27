@@ -1,0 +1,158 @@
+{
+ "id": "lem-sf-strict-direct-image-integral-models",
+ "kind": "statement",
+ "title": "Normalized strict integral model at one coefficient field",
+ "statement": "Let $k$ be a field, $\\ell$ a prime invertible in $k$, $E/\\mathbf Q_\\ell$ finite, and $f:Z\\to X$ a morphism of separated finite-type $k$-schemes. There exists an IntegralModel over $E$ [def-sf-strict-direct-image-scalar-data]: its strict reduction diagram, ambient universal-unit identification, actual-augmentation reconstruction normalization, additive and scalar-linear integral image, scalar equation and native reconstruction shift compatibility are all retained. This statement involves one field only, and asserts no comparisons between different fields or rationalizations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+  "place": "Agent-expanded strict scalar comparison argument, original DAG Steps 1--8; current blueprint retains only the underlying closed-immersion argument."
+ },
+ "stmt_deps": [
+  "def-sf-strict-direct-image-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type schemes $Z,X$ are Noetherian: choose finite affine covers by finite-type $k$-algebras and apply [lem-weil-pbc-finite-type-algebra-noetherian] (a field has only two ideals). They are finite-dimensional by [lem-kun-dimension-finite-type], and $\\ell$ remains invertible under their structural ring maps. Thus [prop-weil-pbc-scalar-extension] applies. By [lem-sf-integral-direct-image-constructible], the specified $I_E$ has values in $\\mathcal C_E(X)$. The normalized comparison [lem-pur-completed-coefficient-pushforward-comparison], interpreted on strict diagrams as required by [lem-weil-derived-direct-image-composition], gives the actual natural isomorphism $\\psi_E:F_E\\to I_E$, not merely isomorphic values. Consequently $F_E$ also preserves these full constructible subcategories. By [lem-weil-integral-scalar-extension-constructible], each specified $S^W_{L/E}$ preserves them too.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-kun-dimension-finite-type",
+    "prop-weil-pbc-scalar-extension",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-weil-derived-direct-image-composition",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)"
+   }
+  },
+  {
+   "text": "The ambient $F_E$ is additive and $R_E$-linear by [lem-sbc-completed-operations-linear-natural-exchange]. With the constant-section action of [lem-weil-integral-constructible-linear], naturality gives $I_E(h)=\\psi_{E,V}F_E(h)\\psi_{E,U}^{-1}$. Bilinearity of composition therefore gives $I_E(ah)=aI_E(h)$ and $I_E(h+h')=I_E(h)+I_E(h')$. Taking $h=\\operatorname{id}$ in naturality yields $I_E(a\\operatorname{id}_K)\\psi_{E,K}=\\psi_{E,K}F_E(a\\operatorname{id}_K)$; these are precisely the constant scalar multiplications. In particular the normalized comparison itself respects them.",
+   "uses": [
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)"
+   }
+  },
+  {
+   "text": "We check shifts for $\\psi_E$ with the specified, rather than transported, shifts. Its construction in [lem-pur-completed-coefficient-pushforward-comparison] is $F_E$ of the strict reduction augmentation followed by the strict-tower direct-image/limit comparison and the coefficient-restriction comparisons of [lem-weil-ringed-tower-pushforward-limit-comparison]. The augmentation has quotient maps in the unshifted product coordinate and zero in the shifted coordinate by [lem-trf-completion-unit-strict-quotient-model]. Under a shift by $r$, its first coordinate is simply reindexed and its zero coordinate remains zero; the signed Roos shift therefore commutes with it by [lem-weil-roos-comm-shift]. For the remaining comparisons use their K-injective derived-composition normalization [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]: on $I$ and a resolution $j:f_*I\\to J$ the comparison is represented by $g_*j$. By [lem-weil-pbc-kinjective-shift], $I[r],J[r],j[r]$ are permissible shifted resolutions; the comparison is then $g_*(j[r])=(g_*j)[r]$. This is an equality of chain maps, hence of the entire derived comparisons. Applied also to the tower-site factorizations, it proves shift compatibility of all factors of $\\psi_E$. This argument uses the normalized strict-derived-limit comparison, not uniqueness from evaluated projections.",
+   "uses": [
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-weil-roos-comm-shift",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-kun-dimension-finite-type",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "lem-weil-roos-comm-shift",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-kinjective-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-smooth-purity/lem-sf-strict-direct-image-scalar-comparison.json",
+  "place": "Expansion of its normalized strict-model, integral conjugation and raw rationalization proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent integral direct image scalar comparison and raw rational localization",
+   "results": "8 hits: isIntegral_localization', Algebra.intNorm_eq_of_isLocalization, Localization.AtPrime.instIsScalarTower, IsLocalizedModule.isInteger_smul, instIsScalarTowerAtPrimeFractionRing_1, IsLocalization.instIsScalarTowerAtPrimeFractionRing, IsLocalization.isInteger_smul, IsLocalization.Away.isIntegral_of_isIntegral_map",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict integral derived direct image has a functorial normalized reconstruction and coherent scalar comparisons",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.ι_toNormalization",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*comparison|direct.*image",
+   "results": "25 hits: Mathlib/Geometry/Euclidean/Volume/Measure.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Topology/Order/ScottTopology.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfStrictDirectImageScalarComparison",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-closed-unit-all-stages",
+   "place": "Original rational-stage and algebraically closed scalar-comparison expansion: Normalized strict integral model at one coefficient field",
+   "via": [
+    "lem-sf-strict-direct-image-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfStrictDirectImageIntegralModels",
+  "file": "lean/Sheaf/Paper/SfStrictDirectImageIntegralModels.lean",
+  "declaration": "WeilConjectures.SfStrictDirectImageScalar.strictDirectImageIntegralModel",
+  "declarations": [
+   "WeilConjectures.SfStrictDirectImageScalar.strictDirectImageIntegralModel"
+  ],
+  "statement": "theorem strictDirectImageIntegralModel (k : Type u) [Field k] (hl : IsUnit (l : k)) {Z X : Scheme.{u}} [Z.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (f : Z ⟶ X) [f.IsOver (Spec (.of k))] : Nonempty (IntegralModel l E f)",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-46419",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T124514-L-2044117",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-46419",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T124514-L-2044117",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations, diffed against the published item module (byte-identical, re-exported by public import); the three new sorry statements read against their nodes and the published rational associator/unitor; all 7 delivered modules and the 5 direct importers compiled in a sandbox; axioms traced to upstream sorryAx"
+ }
+}

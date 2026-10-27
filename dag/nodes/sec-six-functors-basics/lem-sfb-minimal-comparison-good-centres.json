@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-minimal-comparison-good-centres",
+ "kind": "statement",
+ "title": "Good centres in a minimum-length comparison of regular nodal models",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-pc-field-extension, def-weil-affine-spectrum]. Let $T_1,T_2$ be integral regular schemes of dimension two [def-pc-integral-scheme, def-weil-regular-scheme, def-kun-topological-krull-dimension], projective, flat and finitely presented over $S$ [def-kun-projective, def-weil-flat-morphism, def-sbc-locally-finite-presentation], with nonempty nodal geometric curve fibres and smooth generic fibres. Fix a $K$-isomorphism $\\alpha:(T_1)_K\\cong(T_2)_K$. Suppose there exists a finite sequence $q_1:W=T_{1,m}\\to\\cdots\\to T_{1,0}=T_1$ of blowups of reduced closed special-fibre points [def-nagata-global-blowup], together with an $S$-morphism $q_2:W\\to T_2$ whose generic fibre is $\\alpha\\circ(q_1)_K$. Among all such pairs consisting of a sequence and a second morphism with this fixed generic identification, let this sequence have minimum length $m$. Then every centre $x_j\\in (T_{1,j})_k$ lies in the relative smooth locus of $T_{1,j}\\to S$ and its residue field $\\kappa(x_j)$ is a finite separable extension of $k$ [def-weil-residue-field, def-pc-separable-polynomial]. Here nodal geometric curve fibres means reduced geometric fibres of pure dimension one whose nonsmooth closed points over an algebraically closed field $\\Omega$ have completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-geometric-fibre, def-weil-pure-dimension, def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]; the fibres may be disconnected.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Agent minimum-length refinement of Tag 0C5S (lemma-birational-regular-surfaces), using Tag 0C5J (lemma-factor-through-contraction) and point-blowup fibre defects. Extracted argument: expanded common-model steps 3--5; no marked model or conductor conclusion."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-nagata-global-blowup",
+  "def-weil-residue-field",
+  "def-pc-separable-polynomial",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-ordinary-resolution-rule",
+  "def-sfb-surface-point-blowup-data",
+  "def-trf-projective-nodal-tower"
+ ],
+ "proof": [
+  {
+   "text": "Write $X_i=T_{1,i}$, with $b_{i+1}:X_{i+1}\\to X_i$ centred at $x_i$. The nodal local-chart statement gives Noetherianity, local dimension at most two and dimension two at closed special points of $T_1,T_2$. Flatness over the DVR makes the generic open dense: on every affine chart the uniformizer is a nonzerodivisor, hence misses the generic prime of this integral scheme. The point-blowup geometry and fibre-defect statements inductively give integral regular Noetherian projective flat surfaces $X_i$, unchanged on that dense generic open; their exceptional closed points have local dimension two and the same is true off each centre. Thus every centre has local dimension two and every stage is pure of dimension two. The terminal map $q_2$ is proper by projectivity of $W$ and separatedness of $T_2$, and birational because its generic restriction is the prescribed isomorphism. All centre fields are finite over $k$ by the closed-point field lemma applied to the finite-type special fibres.",
+   "uses": [
+    "lem-sfb-nodal-trait-finite-singular-charts",
+    "lem-sfb-regular-point-blowup-geometry",
+    "lem-sfb-point-blowup-fibre-defects",
+    "lem-kun-projective-implies-proper",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0AGR (lemma-blowup-regular) and 0C5S (lemma-birational-regular-surfaces), proper birational second projection; local hypotheses from models.tex 0CDD."
+   }
+  },
+  {
+   "text": "Every irreducible special-fibre component of $W$ which has coefficient $>1$ in $\\operatorname{div}(\\pi)$, or which is a strict transform of an exceptional $\\mathbf P^1_l$ with $l/k$ inseparable, is contracted by $q_2$. Indeed, if such a component $D$ is not contracted, its image is a component $C$ of $(T_2)_k$. Apply the regular-trait component statement to $T_2$: projectivity gives properness, flatness and regularity are assumed, and step 1 gives Noetherianity and both local-dimension hypotheses. Its ordinary special fibre is reduced because its geometric special fibre is reduced by nodality. Thus the local ring at the generic point of $C$ is a DVR with maximal ideal $(\\pi)$. The normal-modification statement then makes $q_2$ an isomorphism over a neighbourhood of this point. Hence the coefficient on $D$ is one, excluding the first case. In the second case $k(D)=l(t)$ by strict-transform persistence and the same isomorphism identifies it with $k(C)$. Apply the birational geometric-reduction statement with ground field $k$, geometrically reduced scheme $(T_2)_k$, component $C$, and both birational maps equal to $\\mathrm{id}_C$. It says $k(C)\\otimes_k L$ is reduced for every field extension $L/k$. This fails for $l(t)$: for an inseparable element of the finite extension $l/k$, its minimal polynomial has repeated roots over $\\bar k$, giving a nonzero nilpotent in the corresponding simple subfield tensored with $\\bar k$. Faithful scalar extension to $l(t)$ preserves this injection and this nilpotent. This contradiction excludes noncontraction. Properness makes the zero-dimensional irreducible image of a contracted $D$ a single closed point.",
+   "uses": [
+    "lem-sfb-regular-trait-curve-surface-components",
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-point-blowup-fibre-defects",
+    "lem-sfb-birational-cartier-geometric-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP (lemma-modification-normal-iso-over-codimension-1), clause (2); Tag 04KS (lemma-generic-points-geometrically-reduced); persistence from 0AGQ."
+   }
+  },
+  {
+   "text": "Suppose some centre is not smooth with separable residue field, and take the first one. Before it the models remain nodal by the good-centre clause of the fibre-defect statement (induction starting from $T_1$). If this centre is nonsmooth, its new exceptional component has coefficient two. Otherwise its residue extension is inseparable, and its new exceptional component is a $\\mathbf P^1_l$ of the second bad type in step 2. Follow this component through the remaining blowups. Whenever a later centre lies on its current strict transform, replace the chosen component by that later blowup's exceptional component. The two persistence clauses ensure that the chosen component is still bad of the same type. The index of its birth strictly increases at each replacement, so the finite process terminates at an exceptional component $E$ which no later centre meets. Its final strict transform is contracted by step 2.",
+   "uses": [
+    "lem-sfb-point-blowup-fibre-defects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ (lemma-blowup), fibre-divisor defects and persistence under point blowups; agent finite last-descendant selection."
+   }
+  },
+  {
+   "text": "Apply the untouched-blowup deletion statement to $X_m\\to\\cdots\\to X_0$, this exceptional component, and $f=q_2$. It gives a sequence of length $m-1$ over $T_1$ and a descended $S$-map to $T_2$. Take $V=(T_1)_K$: every old centre is special, so the new centres are special too, and deletion preserves the generic identification $\\alpha$. This is one of the pairs over which $m$ was minimized, a contradiction. Thus every centre is smooth with separable residue field; finiteness was proved in step 1. For $m=0$ the conclusion is vacuous.",
+   "uses": [
+    "lem-sfb-delete-untouched-point-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5J (lemma-factor-through-contraction), via the extracted internal tower deletion statement; minimum-length contradiction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-trait-finite-singular-charts",
+  "lem-sfb-regular-point-blowup-geometry",
+  "lem-sfb-point-blowup-fibre-defects",
+  "lem-kun-projective-implies-proper",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-kun-closed-point-field",
+  "lem-sfb-regular-trait-curve-surface-components",
+  "lem-sfb-normal-modification-codimension-one",
+  "lem-sfb-birational-cartier-geometric-reduction",
+  "lem-sfb-delete-untouched-point-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Agent minimum-length refinement using 0AGQ, 0C5J and 0BFP; the statement is not asserted verbatim by 0C5S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "minimal.*blow|blow.*minimal|semistable|nodal",
+   "results": "{\"t\": \"2026-10-22T06:33:10Z\", \"tool\": \"grep\", \"query\": \"minimal.*blow|blow.*minimal|semistable|nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and unramified local algebra do not give the point-centre criterion for a two-model minimum-length surface comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal common resolutions of regular reduced nodal curve models over a discrete valuation ring blow up only separable smooth closed points",
+   "results": "{\"t\": \"2026-10-22T06:33:11Z\", \"tool\": \"leansearch\", \"query\": \"Minimal common resolutions of regular reduced nodal curve models over a discrete valuation ring blow up only separable smooth closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.minimal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"WeierstrassCurve.isGoodReduction_iff\"], \"digest\": \"26d1cf125e277612\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and unramified local algebra do not give the point-centre criterion for a two-model minimum-length surface comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T06:33:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and unramified local algebra do not give the point-centre criterion for a two-model minimum-length surface comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A minimum length point blowup sequence between regular semistable models of curves over a DVR with a second birational projection has only smooth centres with separable residue fields",
+   "results": "{\"t\": \"2026-10-22T06:33:12Z\", \"tool\": \"leanfinder\", \"query\": \"A minimum length point blowup sequence between regular semistable models of curves over a DVR with a second birational projection has only smooth centres with separable residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"da0f40634a265c54\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and unramified local algebra do not give the point-centre criterion for a two-model minimum-length surface comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Birational maps between regular semistable curves admit minimal resolutions without multiplicity two exceptional components or inseparable exceptional residue fields",
+   "results": "{\"t\": \"2026-10-22T06:33:57Z\", \"tool\": \"leanfinder\", \"query\": \"Birational maps between regular semistable curves admit minimal resolutions without multiplicity two exceptional components or inseparable exceptional residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\"], \"digest\": \"73d3bdb6a46a6357\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and unramified local algebra do not give the point-centre criterion for a two-model minimum-length surface comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A minimum length resolution of a birational map between regular nodal models over a discrete valuation ring has only smooth centres with separable residue fields",
+   "results": "{\"t\": \"2026-10-23T04:24:15Z\", \"tool\": \"leanfinder\", \"query\": \"A minimum length resolution of a birational map between regular nodal models over a discrete valuation ring has only smooth centres with separable residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"1c0a197b5797f72d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass minimality and smoothness do not state the surface-centre criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*blow|blow.*minimal|semistable|nodal",
+   "results": "{\"t\": \"2026-10-23T04:25:49Z\", \"tool\": \"grep\", \"query\": \"minimal.*blow|blow.*minimal|semistable|nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass minimality and smoothness do not state the surface-centre criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal resolutions of birational maps of regular nodal models of curves over a discrete valuation ring blow up only smooth points with separable residue field",
+   "results": "{\"t\": \"2026-10-23T04:25:49Z\", \"tool\": \"leansearch\", \"query\": \"Minimal resolutions of birational maps of regular nodal models of curves over a discrete valuation ring blow up only smooth points with separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsSeparableResidueFieldOfQuotientIdeal\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"instIsSeparableQuotientIdealOfResidueField\", \"Algebra.isSeparable_residueField_iff\", \"WeierstrassCurve.reduction\", \"IsSeparable\", \"WeierstrassCurve.isMinimal_iff\"], \"digest\": \"c0d8088aba9edc6d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass minimality and smoothness do not state the surface-centre criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-23T04:25:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass minimality and smoothness do not state the surface-centre criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A minimum common resolution of regular semistable curve models contains no blowup at a node or a point with inseparable residue field",
+   "results": "{\"t\": \"2026-10-23T04:25:54Z\", \"tool\": \"leanfinder\", \"query\": \"A minimum common resolution of regular semistable curve models contains no blowup at a node or a point with inseparable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\"], \"digest\": \"3aab192178e69054\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass minimality and smoothness do not state the surface-centre criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent minimum-length refinement of Tag 0C5S (lemma-birational-regular-surfaces), using Tag 0C5J (lemma-factor-through-contraction) and point-blowup fibre defects. Extracted argument: expanded common-model steps 3--5; no marked model or conductor conclusion.",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-minimal-comparison-good-centres",
+  "worker": "stage1",
+  "summary": "Preserve the statement. Separate the persistence/last-descendant argument from the general internal tower deletion lemma; exclude noncontracted bad components by the codimension-one isomorphism of the second projection. Reuse existing nodal local geometry, blowup defects and birational geometric-reduction nodes. One new statement-only node, no Mathlib leaves. Repair of the refused landing: revalidated the current ordinary-special-fibre formulation of lem-sfb-regular-trait-curve-surface-components, explicitly checked its hypotheses in step 2, and refreshed its verbatim citation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent minimum-length refinement of Tag 0C5S (lemma-birational-regular-surfaces), using Tag 0C5J (lemma-factor-through-contraction) and point-blowup fibre defects. Extracted argument: expanded common-model steps 3--5; no marked model or conductor conclusion.; steps 1--4 realize the extracted minimum comparison argument, retaining the fixed generic identification.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic scheme/field tool: Projective morphisms are proper. Used for its stated local or properness conclusion; no step of the alteration unit is replaced."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Generic scheme/field tool: [stacks-project]. Used for its stated local or properness conclusion; no step of the alteration unit is replaced."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic scheme/field tool: Residue fields of closed points. Used for its stated local or properness conclusion; no step of the alteration unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-kun-closed-point-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-661e9290b",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-661e9290b (reviewer sub-agent of L); spot-checked: This head repairs the landing refusal of the PASSed head f4150062ec3e. Compared with that snapshot, only the item's step-2 text and one sentence of split_report.summary changed; the new node lem-sfb-delete-untouched-point-blowup is byte-identical. Live and side-live still have the item unsplit with the same statement, stmt_deps, blueprint and source, so it is not superseded. Every cited node's statement in the snapshot equals live, including the changed lem-sfb-regular-trait-curve-surface-components, so the citation repair matches the current DAG. Step 2 now checks that lemma's current hypotheses, and they hold: proper (projective), flat, Noetherian and regular, local dimensions from step 1, and the ordinary fibre (T_2)_k is reduced because reducedness descends from the reduced geometric fibre. It gives O_{T_2,η_C} as a DVR with maximal ideal (π); normal-modification (2) then makes q_2 an isomorphism near η_C, so the coefficient is 1, and with birational-cartier-geometric-reduction (id maps, unit ideal) k(C)=l(t) contradicts inseparability. I re-read steps 1, 3 and 4 and the new node: blowups at distinct closed points commute, then Stacks 0C5J (lemma-factor-through-contraction) descends f; the edge cases a=n and m=0 are fine, and the node is not a duplicate of point-blowdown-factorization. Batch-5: the four flagged closures end in lem-trf-generic-fibre-points-smooth (Stacks 056V/01V9), lem-trf-parameter-blowup-algebra-regular (commutative algebra), def-trf-projective-nodal-tower (a definition) and lem-trf-flat-module-torsionfree-domain (Stacks 0539). All are generic results outside the trace formula and Poincaré duality, so they are accepted. The generic kun/nagata tools are accepted as before. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MinimalComparisonGoodCentres",
+  "declaration": "AlgebraicGeometry.minimal_comparison_good_centres",
+  "file": "lean/Sheaf/AlgebraicGeometry/MinimalComparisonGoodCentres.lean",
+  "statement": "theorem minimal_comparison_good_centres (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (T₁ T₂ : Over (Spec (.of R))) [IsIntegral T₁.left] [IsIntegral T₂.left] (hregular₁ : IsRegularScheme T₁.left) (hregular₂ : IsRegularScheme T₂.left) (hdim₁ : topologicalKrullDim T₁.left = 2) (hdim₂ : topologicalKrullDim T₂.left = 2) [IsHProjective T₁.hom] [IsHProjective T₂.hom] [Flat T₁.hom] [Flat T₂.hom] [LocallyOfFinitePresentation T₁.hom] [LocallyOfFinitePresentation T₂.hom] (hnodal₁ : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback T₁.hom g) ∧ IsReduced (pullback T₁.hom g) ∧ (pullback T₁.hom g).IsPureDimension 1 ∧ ∀ x : ↥(pullback T₁.hom g), IsClosed ({x} : Set ↥(pullback T₁.hom g)) → (¬ ∃ U : (pullback T₁.hom g).Opens, x ∈ U ∧ Smooth (U.ι ≫ pullback.snd T₁.hom g)) → IsGeometricOrdinaryDoublePoint Ω (pullback T₁.hom g) x) (hnodal₂ : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback T₂.hom g) ∧ IsReduced (pullback T₂.hom g) ∧ (pullback T₂.hom g).IsPureDimension 1 ∧ ∀ x : ↥(pullback T₂.hom g), IsClosed ({x} : Set ↥(pullback T₂.hom g)) → (¬ ∃ U : (pullback T₂.hom g).Opens, x ∈ U ∧ Smooth (U.ι ≫ pullback.snd T₂.hom g)) → IsGeometricOrdinaryDoublePoint Ω (pullback T₂.hom g) x) [Smooth (pullback.snd T₁.hom (Spec.map (CommRingCat.ofHom (algebraMap R K))))] [Smooth (pullback.snd T₂.hom (Spec.map (CommRingCat.ofHom (algebraMap R K))))] (α : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj T₁ ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj T₂) (A : OrdinaryBlowupTower T₁.left) (p : ∀ j : Fin A.length, A.level j.castSucc) (hp : ∀ j : Fin A.length, IsClosed ({p j} : Set (A.level j.castSucc))) (hcentre : ∀ j : Fin A.length, A.center j = SurfacePointBlowup.pointIdeal (p j) (hp j)) (hspecial : ∀ j : Fin A.length, (A.toBase j.castSucc ≫ T₁.hom) (p j) = IsLocalRing.closedPoint R) (q₂ : Over.mk (A.toBase (Fin.last A.length) ≫ T₁.hom) ⟶ T₂) (hgeneric : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map q₂ = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (Over.homMk (A.toBase (Fin.last A.length)) rfl) ≫ α.hom) (hminimal : ∀ (B : OrdinaryBlowupTower T₁.left) (p' : ∀ j : Fin B.length, B.level j.castSucc) (hp' : ∀ j : Fin B.length, IsClosed ({p' j} : Set (B.level j.castSucc))), (∀ j : Fin B.length, B.center j = SurfacePointBlowup.pointIdeal (p' j) (hp' j)) → (∀ j : Fin B.length, (B.toBase j.castSucc ≫ T₁.hom) (p' j) = IsLocalRing.closedPoint R) → ∀ q'₂ : Over.mk (B.toBase (Fin.last B.length) ≫ T₁.hom) ⟶ T₂, (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map q'₂ = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (Over.homMk (B.toBase (Fin.last B.length)) rfl) ≫ α.hom → A.length ≤ B.length) : ∀ j : Fin A.length, (∃ U : (A.level j.castSucc).Opens, p j ∈ U ∧ Smooth (U.ι ≫ A.toBase j.castSucc ≫ T₁.hom)) ∧ (SurfacePointBlowup.residueMap (A.toBase j.castSucc ≫ T₁.hom) (p j) (hspecial j)).hom.Finite ∧ @Algebra.IsSeparable ((Spec (.of R)).residueField (IsLocalRing.closedPoint R)) ((A.level j.castSucc).residueField (p j)) _ _ (SurfacePointBlowup.residueMap (A.toBase j.castSucc ≫ T₁.hom) (p j) (hspecial j)).hom.toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c8813db4",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Node unchanged except for the lean record and three appended stmt_deps, all landed def nodes whose declarations the statement uses (OrdinaryBlowupTower, SurfacePointBlowup.pointIdeal/residueMap, IsGeometricOrdinaryDoublePoint); lean.statement is verbatim in the file; no parallel landing. Every clause matches: DVR/fraction field, integral regular dim-2 IsHProjective flat lfp models, nonempty reduced pure-dim-1 nodal geometric fibres (no connectedness), smooth generic fibres, fixed α over K, closed special reduced-point centres, S-morphism q₂ with hgeneric, minimality over all competitors with the same α; conclusion gives a smooth open neighbourhood plus finite and Algebra.IsSeparable residue field via the canonical map. Edge cases m=0, generic geometric points and empty fibres checked; universes bound; only sorry; docstrings and both report sections present. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "id": "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+ "kind": "statement",
+ "title": "A finite-type stalk isomorphism over a reduced finite-component target spreads to an open immersion",
+ "statement": "Let $g:Y\\to X$ be a finite-type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Suppose $X$ is reduced [def-pc-reduced-scheme] and has finitely many irreducible components [def-weil-irreducible-components]. Let $y\\in Y$, put $x=g(y)$, and assume that the induced map of local rings $\\mathcal O_{X,x}\\to\\mathcal O_{Y,y}$ [def-weil-pbc-module-stalk] is an isomorphism. Then there exists an open neighbourhood $V\\subseteq Y$ of $y$ such that $g|_V:V\\to X$ is an open immersion [def-weil-open-immersion]. No finite-presentation, Noetherian, or reduced-source hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NH, label lemma-local-isomorphism, statement and proof immediately preceding Tag 09NI."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-module-stalk",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Remove from $X$ the union of its finitely many irreducible components not containing $x$, obtaining an open $X_0$ containing $x$. Choose an affine open $U=\\operatorname{Spec}A\\subseteq X_0$ containing $x$. By the definition of locally finite type, choose a member $W=\\operatorname{Spec}B$ of the finite-type affine cover of $g^{-1}(U)$ containing $y$, with $B$ a finitely generated $A$-algebra. Write $\\varphi:A\\to B$ for the restricted map on coordinate rings. The ring $A$ is reduced. Every irreducible component $D$ of $U$ is $C\\cap U$ for an irreducible component $C$ of $X$: indeed the components-cover lemma puts the irreducible subset $D$ in some $C$, and the components-open-injection lemma makes $C\\cap U$ a component of $U$, so maximality gives equality. Such a $C$ meets $X_0$, hence contains $x$. Thus every component of $\\operatorname{Spec}A$ contains $x$. By the spectrum components/minimal-primes correspondence, every minimal prime of $A$ is contained in the prime $\\mathfrak p$ corresponding to $x$.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-components-open-injection",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-finite-type-morphism",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NH, label lemma-local-isomorphism, proof."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\subset B$ correspond to $y$. The affine spectrum dictionary gives $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. The affine-open stalk-localization theorem identifies the ambient stalks at $x,y$ with $A_{\\mathfrak p},B_{\\mathfrak q}$, and the spectrum-map stalk formula identifies the induced map with $a/s\\mapsto\\varphi(a)/\\varphi(s)$. Thus the hypothesis says that this particular map $\\alpha:A_{\\mathfrak p}\\to B_{\\mathfrak q}$ is an isomorphism.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NH, label lemma-local-isomorphism, proof."
+   }
+  },
+  {
+   "text": "The map $A\\to A_{\\mathfrak p}$ is injective. In fact, if $a/1=0$, the fraction equivalence relation supplies $s\\notin\\mathfrak p$ with $sa=0$. Every minimal prime $\\mathfrak r$ is contained in $\\mathfrak p$, so $s\\notin\\mathfrak r$ and primality gives $a\\in\\mathfrak r$. Every prime contains a minimal prime, so $a$ lies in every prime. The radical/intersection formula with the zero ideal implies that $a$ is nilpotent, hence zero since $A$ is reduced.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NH, label lemma-local-isomorphism, proof."
+   }
+  },
+  {
+   "text": "Choose algebra generators $b_1,\\ldots,b_r$ of $B$ over $A$. Represent each $\\alpha^{-1}(b_i/1)$ by a fraction $c_i/s_i$ in $A_{\\mathfrak p}$. Set $f=\\prod_i s_i\\notin\\mathfrak p$ and $a_i=c_i\\prod_{j\\ne i}s_j$, so $b_i/1=\\varphi(a_i)/\\varphi(f)$ in $B_{\\mathfrak q}$. The zero-fraction criterion supplies $g_i\\notin\\mathfrak q$ with $g_i(\\varphi(f)b_i-\\varphi(a_i))=0$ in $B$. Set $h=\\prod_i g_i\\notin\\mathfrak q$; then $h(\\varphi(f)b_i-\\varphi(a_i))=0$ for every $i$. Empty products are $1$, so the construction also covers $r=0$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NH, label lemma-local-isomorphism, proof."
+   }
+  },
+  {
+   "text": "Put $C=B_{\\varphi(f)h}$. In $C$ both $\\varphi(f)$ and $h$ are units, so the localization universal property gives $\\beta:A_f\\to C$ and the equations above give $b_i=\\beta(a_i/f)$. Since the $b_i$ generate $B$, its entire image in $C$, in particular the image of $h$, lies in $\\beta(A_f)$. Choose $f'\\in A$ and $N\\geq0$ with $\\beta(f'/f^N)=h$. The natural map $C\\to B_{\\mathfrak q}$ exists because $\\varphi(f)h\\notin\\mathfrak q$. In $B_{\\mathfrak q}$, the image of $f'$ is $\\varphi(f)^N h$, a unit. Under the isomorphism $\\alpha$ this says $f'/1$ is a unit in the local ring $A_{\\mathfrak p}$, whose maximal ideal is $\\mathfrak pA_{\\mathfrak p}$; hence $f'\\notin\\mathfrak p$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NH, label lemma-local-isomorphism, proof."
+   }
+  },
+  {
+   "text": "The images of $f$ and $f'$ are units in $C$, so the universal property extends $\\varphi$ to $\\gamma:A_{ff'}\\to C$. This map is surjective: its image contains $B$ by the generator equations, contains $\\varphi(f)^{-1}$, and contains $h^{-1}$ because $h=f'/f^N$ and thus $h^{-1}=f^N/f'$ in $C$; every element of $C$ is $b/(\\varphi(f)h)^k$. It is injective as well: its composite with $C\\to B_{\\mathfrak q}$ equals $A_{ff'}\\to A_{\\mathfrak p}\\xrightarrow{\\alpha}B_{\\mathfrak q}$, by the fraction formula. If $a/(ff')^k$ vanishes under this composite then $a/1=0$ in $A_{\\mathfrak p}$, whence $a=0$ by step 3. Therefore $\\gamma$ is an isomorphism.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NH, label lemma-local-isomorphism, proof."
+   }
+  },
+  {
+   "text": "By the principal-localization open-immersion theorem, $V=D_B(\\varphi(f)h)\\subseteq W$ is the open subscheme $\\operatorname{Spec}C$ and $D_A(ff')\\subseteq U$ is $\\operatorname{Spec}A_{ff'}$. The point $y$ belongs to $V$, since $\\varphi(f)h\\notin\\mathfrak q$. Contravariant functoriality of spectrum takes the isomorphism $\\gamma$ to an isomorphism $V\\cong D_A(ff')$ over $U$. Consequently the original $g|_V$ identifies $V$ with this open subscheme of $U$, hence with an open subscheme of $X$. This is an open immersion by definition, as required.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NH, label lemma-local-isomorphism, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-components-open-injection",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NH, label lemma-local-isomorphism, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism to a reduced scheme with finitely many irreducible components inducing an isomorphism on local rings at a point is an open immersion near that point",
+   "results": "{\"t\": \"2026-10-23T12:55:34Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism to a reduced scheme with finitely many irreducible components inducing an isomorphism on local rings at a point is an open immersion near that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso.exists_isOpenImmersion\", \"AlgebraicGeometry.isLocalIso_iff\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso_stalkMap\", \"AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso\"], \"digest\": \"70018e348f97ec5f\"}; No match: local-isomorphism definitions assume source-local open immersions, and spreading-out requires a separately supplied injective germ. They do not specialize in one line to this reduced finite-component criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X) : (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).EssFiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [X.IsGermInjectiveAt x] {y : ↥Y} (e : sX x = sY y) (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk x) (h : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.stalkMap sY y) φ = \", \"doc\": \"Given `S`-schemes `X Y` and points `x : X` `y : Y` over `s : S`.\\nSuppose we have the following diagram of `S`-schemes\\n```\\nSpec 𝒪_{X, x} ⟶ X\\n    |\\n  Spec(φ)\\n    ↓\\nSpec 𝒪_{Y, y} ⟶ Y\\n```\\nThen the map `Sp\"}\n\nNo match: local-isomorphism definitions assume source-local open immersions, and spreading-out requires a separately supplied injective germ. They do not specialize in one line to this reduced finite-component criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ii]so|[Ii]so.*stalk|local.*isomorph",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"line\": \"34\", \"text\": \"lemma isomorphisms_eq_stalkwise :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"line\": \"45\", \"text\": \"example : IsZariskiLocalAtTarget (isomorphisms Scheme) := inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"line\": \"49\", \"text\": \"  convert! HasAffineProperty.of_isZariskiLocalAtTarget (isomorphisms Scheme) with X Y f hY\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"75\", \"text\": \"  stalkMap_surjective := fun _ ↦ (ConcreteCategory.bijective_of_isIso _).2\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"110\", \"text\": \"      (Scheme.arrowStalkMapSpecIso f x)).mpr\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"163\", \"text\": \"  refine isomorphisms_eq_stalkwise.ge _ ⟨?_, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"171\", \"text\": \"    have := TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing CommRingCat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"264\", \"text\": \"lemma stalkMap_injective_of_isOpenMap_of_injective [CompactSpace X]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"line\": \"104\", \"text\": \"  HasRingHomProperty.stalkMap_of_respectsIso RingHom.EssFiniteType.respectsIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"47\", \"text\": \"instance (priority := 900) [IsOpenImmersion f] : SurjectiveOnStalks f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"67\", \"text\": \"  eq_stalkwise ▸ stalkwiseIsZariskiLocalAtTarget_of_respectsIso RingHom.surjective_respectsIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"70\", \"text\": \"  eq_stalkwise ▸ stalkwise_isZariskiLocalAtSource_of_respectsIso RingHom.surjective_respectsIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"74\", \"text\": \"  rw [eq_stalkwise, stalkwise_SpecMap_iff RingHom.surjective_respectsIso,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"78\", \"text\": \"  eq_stalkwise ▸ .stalkwise RingHom.surjective_respectsIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"261\", \"text\": \"      (IsAffineOpen.arrowStalkMapIso f U hU V hV hVU hx)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"297\", \"text\": \"    IsOpen { x | (f.stalkMap x).hom.FormallySmooth } := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"306\", \"text\": \"  ⟨{ x | (f.stalkMap x).hom.FormallySmooth }, f.isOpen_smoothLocus⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"342\", \"text\": \"  refine (RingHom.FormallySmooth.respectsIso.cancel_right_isIso _ (f.stalkMap x)).symm.trans ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"362\", \"text\": \"/-- If `P` respects isos, then `stalkwise P` respects isos. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"363\", \"text\": \"lemma stalkwise_respectsIso (hP : RingHom.RespectsIso P) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"364\", \"text\": \"    (stalkwise P).RespectsIso where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"376\", \"text\": \"/-- If `P` respects isos, then `stalkwise P` is local at the target. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"377\", \"text\": \"lemma stalkwiseIsZariskiLocalAtTarget_of_respectsIso (hP : RingHom.RespectsIso P) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean\", \"line\": \"11\", \"text\": \"# Local isomorphisms\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean\", \"line\": \"13\", \"text\": \"A local isomorphism of schemes is a morphism that is source-locally an open immersion.\"}\n\nNo match: local-isomorphism definitions assume source-local open immersions, and spreading-out requires a separately supplied injective germ. They do not specialize in one line to this reduced finite-component criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type morphism over a reduced scheme with finite generic points and isomorphic local rings is an open immersion on a neighbourhood",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X), ∃ U, x ∈ U ∧ AlgebraicGeometry.IsOpenImmersion (CategoryTheory.CategoryStruct.comp U.ι f)) →\\n    AlgebraicGeometry.IsLocalIso f\", \"doc\": \"If for every point $x$ in $X$, there exists an open neighborhood $U$ of $x$ such that the composition of the inclusion $U \\\\to X$ with $f$ is an open immersion, then $f$ is a local isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] : IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{R : CommRingCat.{u}} (f : R) : IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away f))))\", \"doc\": \"The morphism from the spectrum of the localization of a commutative ring $ R $ at an element $ f $ to the spectrum of $ R $ is an open immersion. This corresponds to the inclusion of the principal ope\"}\n  {\"name\": \"AlgebraicGeometry.isLocalIso_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsLocalIso f ↔\\n    ∀ (x : ↥X), ∃ U, x ∈ U ∧ AlgebraicGeometry.IsOpenImmersion (CategoryTheory.CategoryStruct.comp U.ι f)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is a local isomorphism if and only if for every point $x \\\\in X$, there exists an open neighborhood $U$ of $x$ such that the restriction of $f$ to the open subscheme \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(X : LocallyRingedSpace) {U : TopCat} (f : U ⟶ X.toTopCat) (hf : IsOpenEmbedding f) :\\n  LocallyRingedSpace.IsOpenImmersion (X.ofRestrict hf)\", \"doc\": \"Given a locally ringed space $ X $, an open subset $ U $, and an open embedding $ f: U \\to X $, the morphism from the restricted locally ringed space $ X|_U $ to $ X $ is an open immersion. This means \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} : IsOpenImmersion f ↔ IsOpenEmbedding f ∧ ∀ x, IsIso (f.stalkMap x)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is an open immersion if and only if its underlying continuous map is an open embedding and for every point $x \\\\in X$, the induced stalk map $f_x^\\\\#:\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(x : X) : IsIso (f.stalkMap x)\", \"doc\": \"A morphism $ f: X \\to Y $ between locally ringed spaces is an open immersion if its underlying continuous map is a topological open embedding and the induced sheaf morphism restricts to isomorphisms on\"}\n\nNo match: local-isomorphism definitions assume source-local open immersions, and spreading-out requires a separately supplied injective germ. They do not specialize in one line to this reduced finite-component criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced ring A with finitely many minimal primes a finite type algebra B and prime q with A_p isomorphic to B_q the scheme map is locally an isomorphism at q",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.of_isLocalization\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] (M : Submonoid R) [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [IsLocalization M S],\\n  AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S)))\", \"doc\": \"If $ S $ is the localization of a commutative ring $ R $ at a submonoid $ M $, then the induced morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ is a preimmersion in the category of sche\"}\n  {\"name\": \"AlgebraicGeometry.Spec_map_localization_isIso\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat) (M : Submonoid ↑R) (x : PrimeSpectrum (Localization M)),\\n  CategoryTheory.IsIso\\n    (AlgebraicGeometry.PresheafedSpace.Hom.stalkMap\\n      (AlgebraicGeometry.Spec.toPresheafedSpace.map (CommRingCat.ofHom (algebraMap (↑R) (Localization M))).op) x)\", \"doc\": \"Let $R$ be a commutative ring and $M$ be a submonoid of $R$. Let $\\\\phi: R \\\\to M^{-1}R$ be the canonical localization map. For any prime ideal $\\\\mathfrak{p}$ of the ring $M^{-1}R$, the ring homomorphis\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_Spec_map_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ {R S : CommRingCat} (φ : R ⟶ S),\\n      AlgebraicGeometry.stalkwise (fun {R S} [CommRing R] [CommRing S] => P) (AlgebraicGeometry.Spec.map \", \"doc\": \"For any property $ P $ of ring homomorphisms that is invariant under ring isomorphisms, a morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ induced by a ring homomorphism $ R \\\\to S $ sati\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ {R S : CommRingCat} (φ : R ⟶ S),\\n      AlgebraicGeometry.stalkwise (fun {R S} [CommRing R] [CommRing S] => P) (AlgebraicGeometry.Spec.map \", \"doc\": \"For a ring homomorphism $\\\\varphi: R \\\\to S$ and a property $P$ of ring homomorphisms invariant under isomorphisms, the induced morphism of schemes $\\\\operatorname{Spec}(\\\\varphi): \\\\operatorname{Spec}(S) \"}\n  {\"name\": \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat) (M : Submonoid ↑R) (x : PrimeSpectrum (Localization M)),\\n  CategoryTheory.IsIso\\n    (AlgebraicGeometry.PresheafedSpace.Hom.stalkMap\\n      (AlgebraicGeometry.Spec.toPresheafedSpace.map (CommRingCat.ofHom (algebraMap (↑R) (Localization M))).op) x)\", \"doc\": \"Let $R$ be a commutative ring and $M$ be a submonoid of $R$. Let $\\\\phi: R \\\\to M^{-1}R$ be the canonical localization map. This induces a morphism of presheafed spaces $f: \\\\text{Spec}(M^{-1}R) \\\\to \\\\tex\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P],\\n  RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] f => P (AlgebraicGeometry.Spec.map (CommRingCat.ofHom f))\", \"doc\": \"If a morphism property $ P $ is Zariski-local at both the source and target, then the corresponding property for ring homomorphisms (via the induced morphism of spectra) satisfies the local property c\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_isLocalization\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {R S : Type u_1} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (f : R) [IsLocalization.Away f S],\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S)))\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at an element $ f $, then the induced morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ is an open immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {R : CommRingCat} (f : ↑R),\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap (↑R) (Localization.Away f))))\", \"doc\": \"The morphism from the spectrum of the localization of a commutative ring $ R $ at an element $ f $ to the spectrum of $ R $ is an open immersion. This corresponds to the inclusion of the principal ope\"}\n\nNo match: local-isomorphism definitions assume source-local open immersions, and spreading-out requires a separately supplied injective germ. They do not specialize in one line to this reduced finite-component criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ii]so|[Ii]so.*stalk|local.*isomorph",
+   "results": "{\"t\": \"2026-10-23T14:23:21Z\", \"tool\": \"grep\", \"query\": \"stalk.*[Ii]so|[Ii]so.*stalk|local.*isomorph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\"], \"digest\": \"dc46df6fab448b1f\"}; Read returned candidates: local-isomorphism/open-embedding criteria require stronger hypotheses; the spreading-out theorem (SpreadingOut.lean:335-360) assumes germ injectivity and only spreads a morphism, not an open immersion. No exact or one-line match for 09NH.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type morphism over a reduced scheme with finite generic points and isomorphic local rings is an open immersion on a neighbourhood",
+   "results": "{\"t\": \"2026-10-23T14:23:22Z\", \"tool\": \"leansearch\", \"query\": \"Finite type morphism over a reduced scheme with finite generic points and isomorphic local rings is an open immersion on a neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso.mk\", \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"AlgebraicGeometry.isLocalIso_iff\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict\", \"AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso\"], \"digest\": \"5467500faf1da977\"}; Read returned candidates: local-isomorphism/open-embedding criteria require stronger hypotheses; the spreading-out theorem (SpreadingOut.lean:335-360) assumes germ injectivity and only spreads a morphism, not an open immersion. No exact or one-line match for 09NH.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-23T14:23:22Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.spread_out_of_isGermInjective\"], \"digest\": \"0c9de4a267d89e07\"}; Read returned candidates: local-isomorphism/open-embedding criteria require stronger hypotheses; the spreading-out theorem (SpreadingOut.lean:335-360) assumes germ injectivity and only spreads a morphism, not an open immersion. No exact or one-line match for 09NH.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism to a reduced scheme with finitely many irreducible components inducing an isomorphism on local rings at a point is an open immersion near that point",
+   "results": "{\"t\": \"2026-10-23T14:23:23Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism to a reduced scheme with finitely many irreducible components inducing an isomorphism on local rings at a point is an open immersion near that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso.exists_isOpenImmersion\", \"AlgebraicGeometry.isLocalIso_iff\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso_stalkMap\", \"AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso\"], \"digest\": \"70018e348f97ec5f\"}; Read returned candidates: local-isomorphism/open-embedding criteria require stronger hypotheses; the spreading-out theorem (SpreadingOut.lean:335-360) assumes germ injectivity and only spreads a morphism, not an open immersion. No exact or one-line match for 09NH.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced ring A with finitely many minimal primes a finite type algebra B and prime q with A_p isomorphic to B_q the scheme map is locally an isomorphism at q",
+   "results": "{\"t\": \"2026-10-23T14:23:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced ring A with finitely many minimal primes a finite type algebra B and prime q with A_p isomorphic to B_q the scheme map is locally an isomorphism at q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion.of_isLocalization\", \"AlgebraicGeometry.Spec_map_localization_isIso\", \"AlgebraicGeometry.stalkwise_Spec_map_iff\", \"AlgebraicGeometry.stalkwise_SpecMap_iff\", \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"AlgebraicGeometry.HasRingHomProperty.isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsOpenImmersion.of_isLocalization\", \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\"], \"digest\": \"b6be4a78562d1496\"}; Read returned candidates: local-isomorphism/open-embedding criteria require stronger hypotheses; the spreading-out theorem (SpreadingOut.lean:335-360) assumes germ injectivity and only spreads a morphism, not an open immersion. No exact or one-line match for 09NH.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+  "date": "2026-10-23",
+  "group": "Q100"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting 09NI proof, final paragraph: apply lemma-local-isomorphism at each selected point of the affine finite-type factor.",
+   "via": [
+    "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+    "lem-trf-integral-codimension-one-affine-neighbourhood",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+  "worker": "stage1",
+  "summary": "Checked Stacks Tag 09NH in full and wrote its affine denominator argument in seven steps, reusing existing Mathlib-leaf nodes for the topology, radicals, stalk dictionary and principal opens. Explicitly proves injectivity from reducedness and survival of every component, and spells out both surjectivity and injectivity of A_(ffprime) -> B_(f h). No new nodes or additional hypotheses.",
+  "blueprint": "Supporting 09NI argument, final paragraph applying Tag 09NH to the affine finite-type factor; this is the existing supporting chain under lem-trf-local-term-locality, not a replacement of its contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-10ec92f88",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-10ec92f88 (reviewer sub-agent of L); spot-checked: Read Stacks varieties.tex Tag 09NH (lemma-local-isomorphism, l.8913-8949), statement and proof. The item's hypotheses match the source exactly: finite type, reduced target, finitely many target components, and the induced local-ring map is an isomorphism. The conclusion also matches. Statement and stmt_deps are byte-identical to side-live, where the item is still unsplit with no review, so there is no supersession and no repair note applies. There are no new nodes. All 17 cited nodes exist, are unmerged and have status mathlib, so route is fine and no tool_uses are needed. proof_deps equals the union of uses. I checked each step against what the cited nodes state. Step 1 gets X_0 by removing components, takes an affine U from the basis lemma, takes W from the cover in the finite-type definition, shows every component of U is C∩U by maximality, and uses V(minimal prime) to get every minimal prime ⊆ p. Step 2 identifies the given map as α: a/s↦φ(a)/φ(s), using the affine-open stalk (b),(c) and Spec-map stalk nodes. Step 3 proves A→A_p injective from the minimal-prime containment, the radical formula and reducedness. Step 4 builds the denominators f and h, with the r=0 case covered. Step 5 shows h is in β(A_f) and f'∉p through the unit in the local ring. Step 6 shows γ:A_{ff'}→C is surjective (it hits h^{-1}=f^N/f') and injective (by uniqueness of the universal-property map, then step 3). Step 7 uses principal opens and Spec functoriality to show g|_V is an isomorphism onto D(ff')⊂U⊂X. Edge cases checked: no generators, p minimal, several components through x, a non-reduced source (never needed). No duplicate found in the DAG (rg -L 09NH/local-isomorphism), in blueprint main-20261015, or in Mathlib (of_isIso_stalkMap and IsLocalIso assume more). Two minor points, neither a fault: the report names citations.json and searches.jsonl, which the commit does not include, and some search entries appear twice. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeStalkIsomorphismOpenNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_isOpenImmersion_of_stalkMap_isIso_of_finiteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeStalkIsomorphismOpenNeighbourhood.lean",
+  "statement": "theorem exists_isOpenImmersion_of_stalkMap_isIso_of_finiteType {Y X : Scheme.{u}} (g : Y ⟶ X) [LocallyOfFiniteType g] [QuasiCompact g] [IsReduced X] (hcomponents : (irreducibleComponents X).Finite) (y : Y) (hstalk : IsIso (g.stalkMap y)) : ∃ V : Y.Opens, y ∈ V ∧ IsOpenImmersion (V.ι ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17bf5cb92",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read node (only lean field differs from side-live; stmt/stmt_deps/proof_deps unchanged), Stacks varieties.tex Tag 09NH l.8912-8949, all 6 stmt_dep records and the single module. Lean matches clause by clause: Scheme.{u} g; finite type = [LocallyOfFiniteType g][QuasiCompact g] per def-weil-finite-type-morphism record; [IsReduced X]; (irreducibleComponents X).Finite; canonical IsIso (g.stalkMap y); conclusion ∃ V : Y.Opens, y ∈ V ∧ IsOpenImmersion (V.ι ≫ g). No extra hypotheses or universe restriction; edge cases (empty Y, r=0 generators, generic x) fine. No hollow defs, sorry only, source/blueprint docstrings with 7-step plan, lean.statement verbatim, public stmt_dep imports (PresheafModuleStalkFunctor exists in side-live). No existing declaration in project lean or Mathlib (of_isIso_stalkMap/IsLocalIso need stronger hypotheses). No file changed, so no compile."
+ }
+}

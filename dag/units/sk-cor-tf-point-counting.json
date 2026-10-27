@@ -1,0 +1,34 @@
+{
+ "id": "sk-cor-tf-point-counting",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "Point counting and the zeta function",
+ "lean": [],
+ "uses": [
+  "sk-def-sf-weil-complexes",
+  "sk-thm-tf-uniform-formula",
+  "sk-thm-trace-transport"
+ ],
+ "statement": "Let $X_0$ be separated and of finite type over $\\mathbf F_q$, put\n$X=X_0\\times_{\\mathbf F_q}\\overline{\\mathbf F}_q$, and for a closed point\n$x\\in|X_0|$ let $d_x=[\\kappa(x):\\mathbf F_q]$ be its degree.\n\nGive $\\Lambda_X$ the Weil structure of constant sheaves defined after\n[sk-def-sf-weil-complexes]. For every coefficient\nring $\\Lambda$ of [sk-thm-tf-uniform-formula] and every $m\\geq1$,\n\n$$\n \\operatorname{tr}_{\\Lambda}\n    (\\operatorname{Frob}_{X,\\Lambda_X}^m\\mid R\\Gamma_c(X_{\\mathrm{pro\\acute et}},\\Lambda_X))\n   =\\#X_0(\\mathbf F_{q^m})\\cdot1_{\\Lambda}.\n \\tag{1}\n$$\n\nFor $\\Lambda=\\Ql,E,\\overline{\\mathbf Q}_\\ell$ this gives\n\n$$\n \\#X_0(\\mathbf F_{q^m})\n   =\\sum_i(-1)^i\\operatorname{Tr}\n      (\\operatorname{Frob}_{X,\\Lambda_X}^m\\mid H_c^i(X_{\\mathrm{pro\\acute et}},\\Lambda_X)),\n$$\n\nand\n\n$$\n \\begin{aligned}\n Z(X_0,T)\n   &:=\\exp\\left(\\sum_{m\\geq1}\n          \\#X_0(\\mathbf F_{q^m})\\frac{T^m}{m}\\right)\\\\\n   &=\\prod_{x\\in|X_0|}(1-T^{d_x})^{-1}\n     =\\prod_i\\det(1-T\\operatorname{Frob}_{X,\\Lambda_X}\\mid H_c^i(X_{\\mathrm{pro\\acute et}},\\Lambda_X))^{(-1)^{i+1}}.\n \\end{aligned}\n$$\n\nThe first two series lie in $1+T\\mathbf Z[[T]]$, and the last equality\nholds in $\\Lambda[[T]]$. Moreover $Z(X_0,T)$ belongs to\n$\\mathbf Q(T)$.",
+ "steps": [
+  {
+   "text": "For $K=\\Lambda_X$ every stalk is $\\Lambda$, and every local operator is\nits identity, with categorical trace $1_\\Lambda$. Thus\n[sk-thm-tf-uniform-formula] gives (1),\nand its cohomological form, the identity (2) of [sk-thm-tf-uniform-formula],\ngives the formula over the fields. By the orbit count in the proof of\n[sk-thm-trace-transport],\n$\\#X_0(\\mathbf F_{q^m})=\\sum_{d_x\\mid m}d_x$. Expanding each\n$(1-T^{d_x})^{-1}$ as a geometric series shows that the closed-point\nproduct has integer coefficients, and this orbit count identifies its\nlogarithm with the series defining $Z(X_0,T)$. The last equality is\n[sk-thm-trace-transport] for $K=\\Lambda_X$."
+  },
+  {
+   "text": "It remains to descend rationality from $\\Ql$ to $\\mathbf Q$.\nWrite $Z(X_0,T)=\\sum_{n\\geq0}z_nT^n$, with $z_n\\in\\mathbf Z$.\nRationality over $\\Ql$ means that there are integers $d,N$ and\n$b_1,\\ldots,b_d\\in\\Ql$ such that\n$z_n+b_1z_{n-1}+\\cdots+b_dz_{n-d}=0$ for all $n>N$.\nThese are linear equations with rational coefficients in the $d$\nunknowns $b_i$. Their coefficient rows span a finite-dimensional\nsubspace of $\\mathbf Q^{d+1}$, so finitely many of the equations imply\nall the others. This finite rational linear system has a solution over\n$\\Ql$, hence one over $\\mathbf Q$ by Gaussian elimination. With these\nrational $b_i$, the product of $1+b_1T+\\cdots+b_dT^d\\in\\mathbf Q[T]$\nand $Z(X_0,T)$ is a polynomial, so $Z(X_0,T)\\in\\mathbf Q(T)$."
+  },
+  {
+   "text": "The point-counting identity over $\\overline{\\mathbf Q}_\\ell$, also for proper\n$X_0$ with ordinary cohomology, is [cor-trf-point-counting]."
+  }
+ ],
+ "source": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-cor-tf-point-counting/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

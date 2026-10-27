@@ -2,6 +2,32 @@
  "kind": "statement",
  "proof": [
   {
+   "text": "The unchanged comparison data and comparisons_existsUnique construction are provided by the self-contained normalized-comparison module, publicly re-exported here. Its proof is now recorded at stage3-pur-normalized-scalar-tower-comparisons.",
+   "uses": [
+    "stage3-pur-normalized-scalar-tower-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For derivedSigma_existsUnique, let Good be flat-term K-flat sequence complexes. K-flat resolutions show that their images resolve every object of the homotopy category, so restriction of bifunctors to pairs of Good representatives is fully faithful. Change of rings preserves Good without requiring flatness of the coefficient map. Apply tensor-comparison descent to the two specified system tensor models, the universal scalar cochain counit, and the uniquely normalized strict sigma. This gives existence and uniqueness of the exact DerivedSigmaModel equation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-pur-kflat-change-of-rings-independent",
+    "def-pur-scalar-extension-tower-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the already proved identity unit, evaluate the normalized scalar/pullback association on adjunction-unit generators. Scalar multiplication is the action unitor; adjunction injectivity proves the ordinary square. Lifting to cochains preserves the square. The tensor half is the existing normalized scalar tensor unit theorem.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-scalar-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Apply [lem-pur-normalized-scalar-comparison-realization] to the stated $P,Q$, $E\\subset L$ and $f$. It supplies flat-term K-flat finite models, their normalized scalar extensions, the simultaneous association $(x\\otimes a)\\otimes b\\mapsto x\\otimes i_m(a)b$, and the normalized finite pullback and tensor systems. Thus these are the actual quotient systems of the item, with every transition, and all ordinary complexes used below have their derived interpretations.",
    "uses": [
     "lem-pur-normalized-scalar-comparison-realization"
@@ -13,17 +39,16 @@
    }
   },
   {
-   "text": "Apply [lem-pur-strict-coefficient-comparison-calculus] with $u$ the geometric morphism of small pro-etale topoi induced by $f$ (inverse image $f^{-1}$), $\\phi^a$ the constant-coefficient identifications, and $R^0=A,R^1=B,R^2=C$. The coefficient maps and quotient transitions of [def-weil-integral-scalar-extension] and the constant-coefficient pullbacks of [def-weil-proetale-inverse-image] give its commuting coefficient squares. Its balanced formulas identify its $\\kappa,\\sigma,c$ with the canonical maps in the item. Its strict square is exactly the displayed equation, and its generator value is the required $(b\\otimes x)\\otimes(1\\otimes y)$. Its inverse, transition, identity and coefficient-composition equations give the corresponding assertions on these models. For $L=E$ the tensor identity is also exactly [lem-pur-scalar-tensor-unit] (the normalized $\\sigma$ followed by $T(U,U)$ is the action unitor on $T$) on the ringed quotient sequence site of the item's Lean statement.",
+   "text": "For square, transpose the two strict chain maps through the ordinary scalar-extension and geometric pullback adjunctions, then test each total degree on homogeneous tensor generators. Naturality of the scalar section and pullback unit, the normalized sigma and c formulas, and naturality of the total tensor on generators identify both values with the same tensor of pulled scalar-unit sections. For composition, transpose through the two successive scalar adjunctions. For the pullback half also transpose through geometric pullback; for the tensor half test homogeneous total-tensor generators. The specified scalar associator sends c tensor (b tensor x) to c*j(b) tensor x; on the transposed unit generators both coefficients are one. The two normalized routes therefore agree. Extensionality gives equal strict natural isomorphisms, retaining transitions and inverse maps. The unit theorem is retained unchanged. The completed composition proof is in the separate stage3-pur-scalar-tower-composition module, publicly re-exported here to keep the independent compilation units small.",
    "uses": [
-    "lem-pur-strict-coefficient-comparison-calculus",
-    "def-weil-integral-scalar-extension",
-    "def-weil-proetale-inverse-image",
-    "lem-pur-scalar-tensor-unit"
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-scalar-tensor-unit",
+    "stage3-pur-scalar-tower-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent re-split assembly step 2; original proof steps 3--7"
+    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03EL and 07A4: scalar association, sheaf tensor and signed totalization; direct generator calculation of the original node proof steps 3--7."
    }
   },
   {
@@ -40,17 +65,22 @@
   }
  ],
  "proof_deps": [
+  "stage3-pur-normalized-scalar-tower-comparisons",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-pur-kflat-change-of-rings-independent",
+  "def-pur-scalar-extension-tower-data",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-scalar-tensor-unit",
   "lem-pur-normalized-scalar-comparison-realization",
-  "lem-pur-strict-coefficient-comparison-calculus",
-  "def-weil-integral-scalar-extension",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-pur-scalar-tensor-unit"
+  "stage3-pur-scalar-tower-composition",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Short assembly of the independent strict coefficient calculus and normalized realization tasks; complete former nine-step argument preserved verbatim in the Q06 report."
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "D2 stage 3: direct generator proofs of strict square and scalar composition, in addition to the existing comparisons_existsUnique, unit, and derivedSigma_existsUnique proofs. Realization models, completed coherence, and quotient association remain the original named holes. No new statements or holes. The proved comparison construction and composition theorem are isolated in self-contained modules after profiling."
  },
  "mathlib_match": null,
  "status": "split",
@@ -209,26 +239,8 @@
   "module": "Sheaf.Paper.ScalarExtensionTowerCoherence",
   "declaration": "WeilConjectures.ScalarExtensionTower.scalarExtensionTowerCoherence",
   "declarations": [
-   "WeilConjectures.ScalarExtensionTower.sequenceSmall",
-   "WeilConjectures.ScalarExtensionTower.siteSmall",
-   "WeilConjectures.ScalarExtensionTower.tensor",
-   "WeilConjectures.ScalarExtensionTower.Complex",
-   "WeilConjectures.ScalarExtensionTower.scalarAdditive",
-   "WeilConjectures.ScalarExtensionTower.scalar",
-   "WeilConjectures.ScalarExtensionTower.pull",
-   "WeilConjectures.ScalarExtensionTower.kappa",
-   "WeilConjectures.ScalarExtensionTower.scalarUnit",
-   "WeilConjectures.ScalarExtensionTower.scalarComp",
-   "WeilConjectures.ScalarExtensionTower.generator",
-   "WeilConjectures.ScalarExtensionTower.pullSection",
-   "WeilConjectures.ScalarExtensionTower.Comparisons",
-   "WeilConjectures.ScalarExtensionTower.comparisons_existsUnique",
-   "WeilConjectures.ScalarExtensionTower.comparisons",
-   "WeilConjectures.ScalarExtensionTower.leftRoute",
-   "WeilConjectures.ScalarExtensionTower.rightRoute",
    "WeilConjectures.ScalarExtensionTower.square",
    "WeilConjectures.ScalarExtensionTower.unit",
-   "WeilConjectures.ScalarExtensionTower.composition",
    "WeilConjectures.ScalarExtensionTower.integralTensorGenerator",
    "WeilConjectures.ScalarExtensionTower.IsTensorModelNormalized",
    "WeilConjectures.ScalarExtensionTower.TensorModel",
@@ -250,7 +262,7 @@
   "by": "Q55",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The complete node is rendered by the main derived-reduction theorem together with square, unit, composition, quotientModels and their pure-tensor-normalized canonical adapters. All maps live on actual ringed quotient sequence sites, so equality includes every transition and inverse; the representative-normalized realizations pin the named completed comparisons."
+  "note": "The complete node is rendered by the main derived-reduction theorem together with square, unit, composition, quotientModels and their pure-tensor-normalized canonical adapters. All maps live on actual ringed quotient sequence sites, so equality includes every transition and inverse; the representative-normalized realizations pin the named completed comparisons. Strict comparison data and comparisons_existsUnique are relocated to stage3-pur-normalized-scalar-tower-comparisons and publicly re-exported by this module. The unchanged composition signature is owned by stage3-pur-scalar-tower-composition and publicly re-exported here."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -261,14 +273,25 @@
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
-  "result": "pass",
-  "landing": "20261019T002522-L-2146755",
+  "reviewer": "C-6309c",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T135058-L-3664568",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 6309 Lean byte-identical to the 8af9 delivery (reviewed FIX), Rational split withdrawn, 8af9 node fixes taken; 3 delivered modules + 3 direct importers on main compiled OK in /tmp/d2s6309"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

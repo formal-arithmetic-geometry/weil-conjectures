@@ -1,0 +1,242 @@
+{
+ "id": "lem-trf-tor-coefficient-resolution-map",
+ "kind": "statement",
+ "title": "The canonical Tor coefficient map in free-resolution coordinates",
+ "statement": "Let $R\\to A\\xrightarrow{g}B$ be homomorphisms of commutative rings with their composite $R\\to B$, and $M$ an $R$-module. Let $P_\\bullet\\to M$ be an exact augmented free $R$-resolution in degrees $j\\geq0$, with freeness as in [def-weil-pbc-free-module], extended by zero in negative degrees. Put $C=P_\\bullet\\otimes_R A$ and $D=P_\\bullet\\otimes_R B$, without augmentations [def-weil-pbc-module-tensor-product, def-weil-pbc-module-chain-complex-homology]. Let $\\iota_{A,n}:\\operatorname{Tor}^R_n(M,A)\\to H_n(C)$ and $\\iota_{B,n}:\\operatorname{Tor}^R_n(M,B)\\to H_n(D)$ be the canonical resolution-computation isomorphisms for Tor [def-weil-pbc-tor-modules]. By [lem-trf-tor-resolution-coefficient-actions], for the coefficient actions of [def-trf-tor-coefficient-module] and the actions on homology by multiplication in the coefficient factor, $\\iota_{A,n}$ is $A$-linear, $\\iota_{B,n}$ is $B$-linear, and the $A$-action on $\\operatorname{Tor}^R_n(M,B)$ is the restriction of its $B$-action along $g$; so $\\iota_{A,n}\\otimes_A1_B$ and the map $c_n$ below are well defined. The formulas $\\phi_j(p\\otimes a)=p\\otimes g(a)$ define an $A$-linear chain map $\\phi:C\\to\\operatorname{Res}_gD$, where $\\operatorname{Res}_g$ means restriction of scalars along $g$. For every $n\\geq0$ let $h_n:H_n(C)\\to H_n(D)$ be its induced map and let\n$$\\alpha_n:H_n(C)\\otimes_A B\\to H_n(D),\\qquad [z]\\otimes b\\mapsto b\\cdot h_n([z])$$\nbe its $B$-linear tensor extension. Let $c_n$ be the canonical coefficient-base-change map, namely the $B$-linear extension of the coefficient map $\\operatorname{Tor}^R_n(M,g)$, so $c_n(t\\otimes b)=b\\cdot\\operatorname{Tor}^R_n(M,g)(t)$. Then\n$$\\iota_{B,n}\\circ c_n=\\alpha_n\\circ(\\iota_{A,n}\\otimes_A1_B).$$\nMore explicitly, for every cycle $z=\\sum_i p_i\\otimes a_i\\in C_n$ and $b\\in B$ both sides send $\\iota_{A,n}^{-1}([z])\\otimes b$ to $[\\sum_i p_i\\otimes g(a_i)b]$. This identity holds for every choice of free resolution and requires no flatness; no invertibility of $c_n$ or $\\alpha_n$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00M8, algebra-lemma-flat-base-change-tor: canonical resolution comparison, adapted to a fixed base R; the map-identification part, without any flatness assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-tor-modules",
+  "def-trf-tor-coefficient-module",
+  "lem-trf-tor-resolution-coefficient-actions"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing tensoringRight natural transformation for the coefficient homomorphism. Its component sends p tensor a to p tensor g(a) definitionally. Tensor induction proves that it commutes with coefficient multiplication by a: the pure-tensor case is map_mul and the zero and sum cases are additivity. The natural transformation already supplies the chain compatibility.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product) and 00LY (algebra-section-tor): tensoring coefficient morphisms; homology as cycles modulo boundaries"
+   }
+  },
+  {
+   "text": "The supplied ProjectiveResolution already provides projective terms; no separate conversion from freeness is needed. Apply ProjectiveResolution.leftDerived_app_eq, clause (2) of [lem-weil-pbc-tor-map-via-resolution-lift], to the coefficient homomorphism. Compose with the B-resolution isomorphism and cancel its inverse. Tor'_obj_map and evaluation give iota_B Tor(M,g)(t) = H(phi) iota_A(t).",
+   "uses": [
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-trf-tor-coefficient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY, after Lemma 00LZ (algebra-lemma-tor-welldefined), coefficient-variable functoriality; Tag 05CF (algebra-lemma-characterize-projective), free modules are projective"
+   }
+  },
+  {
+   "text": "First prove the transported homology action formula by applying [lem-trf-tor-resolution-coefficient-actions] to the inverse image of a homology class under iota, then using linearity and the inverse identities. The restriction and scalar-associativity clauses of that lemma provide the A-action and the A/B scalar tower on coefficient-B Tor. LinearMap.liftBaseChange extends the existing A-linear coefficient map to c, with c(b tensor t)=b Tor(M,g)(t). Define alpha = iota_B composed with c composed with the B-base-change of iota_A inverse. These are explicit linear maps. The naturality equality of Step 2 and coefficient linearity give alpha(b tensor x)=b H(phi)(x).",
+   "uses": [
+    "lem-trf-tor-resolution-coefficient-actions",
+    "def-trf-tor-coefficient-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M7 (algebra-section-functoriality-tor), item (1); Tag 00CV (algebra-section-tensor-product), universal property"
+   }
+  },
+  {
+   "text": "Tensor extensionality proves the comparison square from the two pure-tensor formulas and Step 2. Any other pair satisfying those formulas equals (c,alpha) by tensor extensionality, proving uniqueness. Given z=sum p_i tensor a_i and b, let mu be the chain endomorphism multiplying the B factor by b, and let w be the image of z under cyclesMap(phi composed with mu). The cyclesMap_i identity, additivity, and the pure-tensor formulas give iCycles(w)=sum p_i tensor (g(a_i)b), using commutativity. Homology-pi naturality and homologyMap_comp identify its class with H(mu)(H(phi)([z])). The transported action formula identifies that with b H(phi)([z]). The formulas for c and alpha now give both asserted values. This uses no exactness after tensoring, flatness or invertibility of the extensions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-tor-resolution-coefficient-actions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LY and 00M7: coefficient functoriality and coefficient multiplication, followed by the tensor universal property of 00CV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-weil-pbc-tor-map-via-resolution-lift",
+  "def-trf-tor-coefficient-module",
+  "lem-trf-tor-resolution-coefficient-actions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00LY/00LZ and 00M7(1); implemented by projective-resolution naturality, tensor extension, and functorial maps on cycles and homology. The fixed-base map identification only, without the flatness or isomorphism assertion of 00M8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Without flatness the coefficient base change map on Tor factors through the canonical tensor homology map and tensor associativity on a free resolution",
+   "results": "8 hits: Module.Flat.isBaseChange, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange, Module.Flat.baseChange, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, LinearMap.tensorKerEquiv_apply, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.IsPushout.cancelBaseChange_tmul. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolution comparison for the Tor functor natural in the second module intertwines the coefficient algebra module structure and the tower of scalar actions",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, Rep.Tor_map, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_map, CategoryTheory.Tor_obj, CategoryTheory.Tor, Rep.torIso. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "4 hits: CategoryTheory.Tor, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor_map. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def Tor\\b|def Tor\\x27|lemma Tor\\x27|theorem Tor\\x27",
+   "results": "2 hits: Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical Tor coefficient base change map equals the tensor homology comparison followed by the homology of the tensor scalar tower associator on any free resolution",
+   "results": "8 hits: IsBaseChange.linearMapLeftRightHom.congr_simp, TensorProduct.AlgebraTensorModule.distribBaseChange, LinearMap.baseChange_eq_ltensor, LinearMap.baseChange, LinearMap.baseChangeHom, LinearMap.liftBaseChange_tmul, KaehlerDifferential.cotangentComplexBaseChange_tmul, LinearMap.BilinMap.baseChange. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor, CategoryTheory.Functor.leftDerived",
+   "results": "{\"t\": \"2026-10-23T04:07:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Tor, CategoryTheory.Functor.leftDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor_map\"], \"digest\": \"21e4a6780b0fd35a\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Tor/derived-functor infrastructure only; the needed resolution naturality is already the existing leaf lem-weil-pbc-tor-map-via-resolution-lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a fixed free resolution of a module the canonical Tor coefficient map is induced by tensoring the coefficient homomorphism and taking homology",
+   "results": "{\"t\": \"2026-10-23T04:07:53Z\", \"tool\": \"leanfinder\", \"query\": \"On a fixed free resolution of a module the canonical Tor coefficient map is induced by tensoring the coefficient homomorphism and taking homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rTensor.toFun\", \"Module.Relations.Solution.isPresentationCoreTensor\", \"lTensor.toFun\", \"Rep.torIso\", \"Rep.Tor_map\", \"Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul\", \"Module.Relations.Solution.tensor_var\", \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul\"], \"digest\": \"84628698274a80eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Tor/derived-functor infrastructure only; the needed resolution naturality is already the existing leaf lem-weil-pbc-tor-map-via-resolution-lift"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor_map|Tor\\x27_map_app|leftDerived.*[Nn]at|[Nn]at.*leftDerived",
+   "results": "{\"t\": \"2026-10-23T04:08:12Z\", \"tool\": \"grep\", \"query\": \"Tor_map|Tor\\\\x27_map_app|leftDerived.*[Nn]at|[Nn]at.*leftDerived\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfFunctorialResolutions.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Quotient/Preadditive.lean\"], \"digest\": \"a7475bff7a3a9fdb\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Tor/derived-functor infrastructure only; the needed resolution naturality is already the existing leaf lem-weil-pbc-tor-map-via-resolution-lift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality in the coefficient module of Tor computed by a projective resolution",
+   "results": "{\"t\": \"2026-10-23T04:08:13Z\", \"tool\": \"leansearch\", \"query\": \"Naturality in the coefficient module of Tor computed by a projective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality\", \"CategoryTheory.ProjectiveResolution.iso_hom_naturality\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc\"], \"digest\": \"3264aab6790a0273\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Tor/derived-functor infrastructure only; the needed resolution naturality is already the existing leaf lem-weil-pbc-tor-map-via-resolution-lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "CategoryTheory ProjectiveResolution leftDerived natTrans computation in an arbitrary projective resolution for a natural transformation between additive functors",
+   "results": "{\"t\": \"2026-10-23T04:09:35Z\", \"tool\": \"leanfinder\", \"query\": \"CategoryTheory ProjectiveResolution leftDerived natTrans computation in an arbitrary projective resolution for a natural transformation between additive functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.leftDerived_app_eq\", \"CategoryTheory.Functor.leftDerived_map_eq\", \"CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq\", \"CategoryTheory.NatTrans.leftDerived\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc\"], \"digest\": \"de8d0dc3232bcdba\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Tor/derived-functor infrastructure only; the needed resolution naturality is already the existing leaf lem-weil-pbc-tor-map-via-resolution-lift"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived_app_eq|Tor\\x27_obj_map|Tor\\x27_map_app|isoLeftDerivedObj_hom_naturality",
+   "results": "{\"t\": \"2026-10-23T04:10:24Z\", \"tool\": \"grep\", \"query\": \"leftDerived_app_eq|Tor\\\\x27_obj_map|Tor\\\\x27_map_app|isoLeftDerivedObj_hom_naturality\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\"], \"digest\": \"09dcbebaa5003c4a\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Tor/derived-functor infrastructure only; the needed resolution naturality is already the existing leaf lem-weil-pbc-tor-map-via-resolution-lift"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tor-flat-base-change",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), local coefficient base-change in the monomial Tor-independence reduction of Expose VIII 3.4.3.; repair step 4: identify the fixed-base coefficient comparison on free-resolution cycles.",
+   "via": [
+    "lem-trf-tor-flat-base-change",
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-tor-coefficient-resolution-map",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused the existing all-degree Tor resolution-naturality Mathlib leaf (clause 2), free-implies-projective leaf, and coefficient-action lemma. Checked balancing, chain maps, boundary independence and pure-tensor formulas explicitly. No new nodes, no flatness, no change of base ring, no claim of invertibility.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality, proof (1)--(2), specialization route, is only provenance for this descendant algebra tool. This split realizes the immediate parent lem-trf-tor-flat-base-change repair step 4: identify the fixed-base coefficient comparison on free-resolution cycles. It preserves the existing coefficient-resolution route and does not replace the unit argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-3ca77c006",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-3ca77c006 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The delivery leaves the statement, stmt_deps, source, blueprint, chapter and unit unchanged from the live and side-live copies, where the node is unsplit and has no reviewed record or repair note. It adds no new nodes. I read the Stacks sources: algebra.tex 18216-18290 (00LY, 00LZ and the remark on second-variable functoriality) and 18714-18745 (00M7(1), 00M8). The proof uses only the map identification, not the flat isomorphism of 00M8, and proof_origin says so. Step 1 (elementary): phi is R-bilinear because R->B factors through g, it is A-linear, the chain identity holds on generators, and h_n respects boundaries. Step 2: Mathlib leaf free->projective (Module.Projective.of_free), then clause (2) of lem-weil-pbc-tor-map-via-resolution-lift with N=A, N'=B, psi=g. That leaf matches leftDerived_app_eq, which I checked exists at Mathlib/CategoryTheory/Abelian/LeftDerived.lean:240. It uses the same canonical iota as def-weil-pbc-tor-modules, and 1_P tensor g equals phi. Step 3: A-balancing follows from the A-linearity in def-trf-tor-coefficient-module (tower R->A->A, f=g) and from lem-trf-tor-resolution-coefficient-actions (iota linearity and the B-action restricting along g). Step 4: both maps are B-linear and agree on pure tensors, and the explicit formula is that lemma's multiplication formula. The statement gives the parent lem-trf-tor-flat-base-change step 2 exactly the phi, alpha_n and square it uses. Edge cases checked: n=0; M=0 or B=0; g=id; and Z, Z/2 with n=1, where both sides are 0 and no invertibility is claimed. Route: off-unit citations are only definition nodes and Mathlib leaves, and the coefficient-actions lemma is in the same unit sk-i-curve-zero, so no tool_uses are needed and no SGA source is used. I searched dag/nodes for Tor base-change statements and found no duplicate. No changes, fixes/ left empty."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TorCoefficientResolutionMap",
+  "declaration": "ModuleCat.tor_coefficient_resolution_map",
+  "declarations": [
+   "ModuleCat.torResolutionCoefficientComplex",
+   "ModuleCat.torResolutionCoefficientChain",
+   "ModuleCat.torResolutionCoefficientAddEquiv",
+   "ModuleCat.torResolutionHomologyModule",
+   "ModuleCat.torResolutionCoefficientIso",
+   "ModuleCat.torResolutionHomologyModule_smul",
+   "ModuleCat.tor_coefficient_resolution_map"
+  ],
+  "file": "lean/Sheaf/RingTheory/TorCoefficientResolutionMap.lean",
+  "statement": "theorem tor_coefficient_resolution_map (R A B : Type u) [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] [Algebra A B] [IsScalarTower R A B] (M : ModuleCat.{u} R) (P : ProjectiveResolution M) [∀ j : ℕ, Module.Free R (P.complex.X j)] (n : ℕ) : (∀ (j : ℕ) (p : P.complex.X j) (a : A), ((torResolutionCoefficientChain R A B M P).f j).hom (p ⊗ₜ[R] a) = p ⊗ₜ[R] algebraMap A B a) ∧ (∀ (j : ℕ) (a : A) (x : (torResolutionCoefficientComplex R A M P).X j), ((torResolutionCoefficientChain R A B M P).f j).hom (TensorProduct.map (LinearMap.id : P.complex.X j →ₗ[R] P.complex.X j) (LinearMap.mulLeft R a) x) = TensorProduct.map (LinearMap.id : P.complex.X j →ₗ[R] P.complex.X j) (LinearMap.mulLeft R (algebraMap A B a)) (((torResolutionCoefficientChain R A B M P).f j).hom x)) ∧ ∃! maps : (B ⊗[A] torCoefficientModule R A M A n →ₗ[B] torCoefficientModule R B M B n) × (B ⊗[A] torResolutionHomologyModule R A M P n →ₗ[B] torResolutionHomologyModule R B M P n), (∀ (b : B) (t : torCoefficientModule R A M A n), maps.1 (b ⊗ₜ[A] t) = b • @id (torCoefficientModule R B M B n) (torCoefficientLinearMap R A M A B n (Algebra.ofId A B) t)) ∧ (∀ (b : B) (x : torResolutionHomologyModule R A M P n), maps.2 (b ⊗ₜ[A] x) = b • @id (torResolutionHomologyModule R B M P n) ((HomologicalComplex.homologyMap (torResolutionCoefficientChain R A B M P) n).hom x)) ∧ (torResolutionCoefficientIso R B M P n).toLinearMap.comp maps.1 = maps.2.comp (LinearMap.baseChange B (torResolutionCoefficientIso R A M P n).toLinearMap) ∧ (∀ (k : ℕ) (p : Fin k → P.complex.X n) (a : Fin k → A) (z : (torResolutionCoefficientComplex R A M P).cycles n), ((torResolutionCoefficientComplex R A M P).iCycles n).hom z = ∑ i, p i ⊗ₜ[R] a i → ∀ b : B, ∃ w : (torResolutionCoefficientComplex R B M P).cycles n, ((torResolutionCoefficientComplex R B M P).iCycles n).hom w = ∑ i, p i ⊗ₜ[R] (algebraMap A B (a i) * b) ∧ torResolutionCoefficientIso R B M P n (maps.1 (b ⊗ₜ[A] (torResolutionCoefficientIso R A M P n).symm (((torResolutionCoefficientComplex R A M P).homologyπ n).hom z))) = ((torResolutionCoefficientComplex R B M P).homologyπ n).hom w ∧ maps.2 (b ⊗ₜ[A] @id (torResolutionHomologyModule R A M P n) (((torResolutionCoefficientComplex R A M P).homologyπ n).hom z)) = ((torResolutionCoefficientComplex R B M P).homologyπ n).hom w)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Tensor symmetry writes the two tensor sources with B first. The theorem specifies the canonical B-linear extensions by unique existence, their pure-tensor formulas, the comparison square and both cycle values. Homology retains its existing underlying group and its coefficient action is transported along the canonical resolution isomorphism; torResolutionHomologyModule_smul identifies this action with multiplication on the coefficient factor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ce997203",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Item JSON changes only lean; lean.statement is verbatim the file signature. Read Stacks 00LZ, 00M7 and 00M8 (map identification only, no flatness) and the landed dep modules TorCoefficientModule and TorResolutionCoefficientActions. Lean matches the node clause by clause: ProjectiveResolution plus termwise Module.Free is no stronger than a free resolution; complexes are unaugmented tensorRight mapHomologicalComplex in .down ℕ; iota is the canonical isoLeftDerivedObj, with the S-action transported along it and torResolutionHomologyModule_smul identifying it with multiplication on the coefficient factor (real data, no duplicate); phi gives the formula p⊗a ↦ p⊗g(a) and A-linearity; c_n and α_n are fixed by ∃! with pure-tensor formulas, B⊗_A T order disclosed and matching the landed downstream torCoefficientBaseChange; the square uses baseChange B ι_A; the cycle clause covers every finite sum through Fin k. Edge cases n=0, k=0, zero modules and rings, g=id, and non-flat ℤ→ℤ/2 in degree 1 are covered. Docstrings carry source, blueprint tag and proof steps; all theorems are sorry. Report has both sections; the second reading was a disclosed self-reread. No change, so no compile. Advisory only: unneeded Free hypothesis on the smul helper."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T083307-L-2317370",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "def-sfb-universal-scheme-action-fixed-points",
+ "kind": "definition",
+ "title": "Universally fixed points of an internal scheme group action",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $R$ be a group object in schemes over $S$ (the relative form of [def-sc-group-scheme]), and let $X$ be an $S$-scheme with an $R$-action $a:R\\times_S X\\to X$ satisfying the unit and associativity identities. For an $S$-scheme $U$, define the set of universally fixed points to consist of $x:U\\to X$ such that, for every $S$-scheme $V$, every $f:V\\to U$, and every $t:V\\to R$, one has $a(t,x\\circ f)=x\\circ f$. This specifies the fixed subfunctor on all test schemes, including nonreduced ones. No representability, affineness, smoothness, field or nonemptiness condition is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 2.2, fixed-point/centralizer functors, and Corollary 3.3.5 proof, printed p.101; explicit universal fixed-subgroup convention in lem-sfb-torus-equivariant-quotient-fixed-surjectivity."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal fixed subfunctor of a group scheme action points fixed after every base change",
+   "results": "{\"t\": \"2026-10-24T10:18:36Z\", \"tool\": \"leansearch\", \"query\": \"Universal fixed subfunctor of a group scheme action points fixed after every base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.mem_subgroup\", \"MulAction.IsFixedBlock.univ\", \"MulAction.fixedPoints_of_subsingleton\", \"AddAction.fixedPoints_of_subsingleton\", \"FixedPoints.subgroup\", \"FixedPoints.subalgebra\", \"MulAction.set_mem_fixedBy_of_subset_fixedBy\", \"FixedPoints.submonoid\"], \"digest\": \"ba13a92d11935501\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: abstract fixed points or general scheme morphism properties do not quantify over further test-scheme base changes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme action universal fixed points after every further base change",
+   "results": "{\"t\": \"2026-10-24T10:18:37Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme action universal fixed points after every further base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\", \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\"], \"digest\": \"52ae3a4a8878f24f\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: abstract fixed points or general scheme morphism properties do not quantify over further test-scheme base changes."
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*fixed|fixed.*subfunctor|fixedPoints",
+   "results": "{\"t\": \"2026-10-24T10:23:16Z\", \"tool\": \"grep\", \"query\": \"universal.*fixed|fixed.*subfunctor|fixedPoints\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: abstract fixed points or general scheme morphism properties do not quantify over further test-scheme base changes."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l universalActionFixedPoints|fixed.*subfunctor lean/WeilConjectures/AlgebraicGeometry lean/Sheaf/AlgebraicGeometry",
+   "results": "No WeilConjectures match. Sheaf/AlgebraicGeometry/TorusFixedSchemeSmooth.lean has only a theorem with an inline universally fixed condition; SchemeActionFixedIdeal handles an abstract discrete automorphism group, not points of an internal group scheme. No existing reusable definition.",
+   "date": "2026-10-24",
+   "verdict": "No definition of the required notion."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "fixed subgroup; fixed points; universal fixed",
+   "results": "fixed subgroup: one Frobenius/Tate-module node; fixed points: five Frobenius/trace nodes; universal fixed: zero blueprint nodes. A search of the actual DAG statements finds related fixed-scheme theorems, but no definition node of the universal scheme-action fixed subfunctor.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-equivariant-quotient-fixed-surjectivity",
+  "date": "2026-10-24",
+  "group": "Q67"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The universally fixed subgroup functor in the torus-centralizer surjectivity input, Conrad Corollary 3.3.5 proof, printed p.101. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Torus fixed groups preserve surjections of connected affine algebraic groups. Corollary 3.3.5 proof, printed p.101: surjectivity on torus centralizers for surjections of smooth connected affine groups over a field. The scheme version uses the smooth fixed groups and the faithfully flat quotient map onto the group-theoretic image; it includes inseparable kernels.",
+   "via": [
+    "lem-sfb-torus-equivariant-quotient-fixed-surjectivity",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UniversalActionFixedPoints",
+  "declaration": "AlgebraicGeometry.universalActionFixedPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UniversalActionFixedPoints.lean",
+  "statement": "def universalActionFixedPoints {S : Scheme.{u}} (R : Grp (Over S)) (X : Over S) [ModObj R.X X] (U : Over S) : Set (U ⟶ X)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6cb61de2",
+  "group": "Q67",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6cb61de2",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Conrad Cor 3.3.5 p.101: k alg closed; H,J smooth connected affine finite-type Grp(Over Spec k); R ≅ splitTorus k r (r=0 allowed); ModObj actions + multiplicativity = action by automorphisms; q flat+surjective, IsModHom equivariant. Conclusion: closed subgroups HF,JF representing universalActionFixedPoints on all U; qF pinned by its commuting square; Flat/Surjective/LFP/QC/QS; ker qF points = {x | x≫q=1 ∧ universally fixed} on all U; IsFppfGroupQuotient(kerι qF, qF). No extra hypotheses; single universe u. New def node universalActionFixedPoints is a real predicate matching its node; no existing duplicate in the live lean trees. Both statements verbatim; stmt_deps added (tori, fppf quotient, new def) are used and landed or new. 8-step proof docstring, only sorry. Notes: second reading is a self-reading but substantive; parallel Q87 delivery eb7c of the same item with its own UniversalFixedSubgroup def is in review, so whichever lands second must rebind."
+ }
+}

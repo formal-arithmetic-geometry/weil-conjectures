@@ -1,0 +1,119 @@
+{
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedBridge",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Nearest blueprint ancestor lookup for lem-sf-native-weil-tensor-ringed-bridge returns None. Source paragraph: cor-coef-verdier-weil-equivariance, internal Hom/evaluation and normalized action-site restriction. Internal-Hom/evaluation paragraph; the normalized component construction of lem-sf-native-action-site-hom-comparison, step 2.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-native-normalized-action-hom",
+ "kind": "statement",
+ "title": "The normalized underlying map of the native action Hom comparison",
+ "statement": "Fix an ordinary NativeFrobeniusRingedModel A and a specified twisted action presentation P [lem-sf-native-frobenius-ringed-model, def-sf-twisted-action-presentation-data]. The functor A.toWeil P carries the action-site internal Hom naturally to native internal Hom [lem-sf-native-action-site-hom-comparison], with underlying component exactly A.E.functor.map(P.hom(M,N).hom) followed by A.hom(U(M),U(N)).hom. The sites and equivalences are specified inputs; neither their existence nor any derived assertion is concluded.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation paragraph; the normalized component construction of lem-sf-native-action-site-hom-comparison, step 2."
+ },
+ "stmt_deps": [
+  "lem-sf-native-frobenius-ringed-model",
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-native-action-site-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved action_hom_component for each pair; its underlying map is E(P.hom) followed by A.hom by construction. P.hom_naturality followed by A.hom_naturality proves naturality after applying native forgetting. Faithfulness of native forgetting proves the native naturality equation. NatIso.ofComponents assembles the isomorphism, and its normalization is reflexivity.",
+   "uses": [
+    "lem-sf-native-action-site-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal-Hom/evaluation paragraph; the normalized component construction of lem-sf-native-action-site-hom-comparison, step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-action-site-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation paragraph; the normalized component construction of lem-sf-native-action-site-hom-comparison, step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between categories of modules compatible with internal Hom preserves tensor unit and restriction along action site preserves tensor and Hom",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, Rep.MonoidalClosed.linearHomEquivComm, Rep.MonoidalClosed.linearHomEquiv, Rep.instIsRightAdjointActionModuleCatRes, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, Rep.instIsLeftAdjointActionModuleCatRes, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, CategoryTheory.Mod_.comap_obj_mod",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized action-site Hom comparison. Reuse the proved action_hom_component and prove its bifunctorial normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence",
+   "results": "12 hits: CategoryTheory.Equivalence, CategoryTheory.Equivalence.refl, CategoryTheory.Equivalence.instInhabited, CategoryTheory.Equivalence.instPowInt, CategoryTheory.Equivalence.instCategory, CategoryTheory.Equivalence.pow, CategoryTheory.Equivalence.powNat, CategoryTheory.Equivalence.functor",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized action-site Hom comparison. Reuse the proved action_hom_component and prove its bifunctorial normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesKInjectiveComplexes|tensorHomEquiv",
+   "results": "17 hits: Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized action-site Hom comparison. Reuse the proved action_hom_component and prove its bifunctorial normalization."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeNormalizedActionHom",
+  "file": "lean/Sheaf/Paper/NativeNormalizedActionHom.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.normalized_action_hom",
+  "statement": "theorem normalized_action_hom\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))]\n    (A : NativeFrobeniusRingedModel k₀ l X)\n    (P : TwistedActionRingedSite.Presentation A.J A.s A.R A.a) :\n    letI := P.category\n    ∃ h : Functor.uncurry.obj (SheafOfModules.homFunctor (R := P.coefficient)) ⋙\n        A.toWeil P ≅ ((A.toWeil P).op.prod (A.toWeil P)) ⋙\n          Functor.uncurry.obj (ihomBifunctor k₀ l X),\n      ∀ M N : TwistedActionRingedSite.Modules P.coefficient,\n        (h.hom.app (op M, N)).hom.f = A.E.functor.map (P.hom M N).hom ≫\n          (A.hom (P.modules.functor.obj M).obj.a (P.modules.functor.obj N).obj.a).hom",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "independent cc review: delivered BridgeData structure+attributes vs published item (byte-identical); underived_restriction vs Presentation fields (tensor_pure/unit_sections/evaluation/symmetry) and Underived/TensorCoherence; new node records vs Lean; 2 direct importers compiled OK against delivery"
+ }
+}

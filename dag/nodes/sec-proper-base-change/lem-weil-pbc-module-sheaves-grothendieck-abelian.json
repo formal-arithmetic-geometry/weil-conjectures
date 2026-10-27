@@ -126,7 +126,18 @@
   "item": "lem-weil-pbc-grothendieck-spectral-sequence",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -170,5 +181,70 @@
   "landing": "20261012T044757-L-2042203",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a ring, $\\Lambda_T$ the constant sheaf of rings with value $\\Lambda$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},\\Lambda)=\\Mod(\\Lambda_T)$ the category of sheaves of $\\Lambda_T$-modules [def-weil-sheaf-of-modules-category]. Then $\\Mod(T_{\\Et},\\Lambda)$ is a Grothendieck abelian category [def-sp-grothendieck-abelian]: it is abelian, it has all small colimits, filtered colimits in it are exact, and it has a generator. In particular (case $\\Lambda=\\mathbf Z$) the category $\\Ab(T_{\\Et})$ of abelian sheaves [def-weil-pbc-abelian-etale-sheaves] is Grothendieck abelian.",
+  "proof": [
+   {
+    "text": "**Step 1.** *Abelian.* Write $\\mathcal O=\\Lambda_T$, a sheaf of rings on $T_{\\Et}$ [def-weil-pbc-constant-sheaf]. Sheafification of presheaves of abelian groups exists on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. Hence the category $\\Mod(\\mathcal O)$ of sheaves of $\\mathcal O$-modules is abelian [def-weil-sheaf-of-modules-category], [def-sp-abelian]: kernels are computed sectionwise and cokernels are the sheafifications of the sectionwise cokernels. By [lem-weil-pbc-module-sheaves-colimits-forgetful] (1) the forgetful functor $\\mathrm{forget}:\\Mod(\\mathcal O)\\to\\Ab(T_{\\Et})$ is faithful and exact.",
+    "uses": [
+     "def-weil-pbc-constant-sheaf",
+     "def-weil-pbc-abelian-etale-sheaves",
+     "def-weil-sheaf-of-modules-category",
+     "def-sp-abelian",
+     "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 2.** *Small colimits.* By [lem-weil-pbc-module-sheaves-colimits-forgetful] (2), applied to the site $T_{\\Et}$ (on which abelian sheafification exists [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-sheafification]) and $\\mathcal O=\\Lambda_T$, every diagram $\\mathcal I\\to\\Mod(\\mathcal O)$ indexed by a small category has a colimit, the sheafification of the sectionwise colimit; by (3) of the same lemma $\\mathrm{forget}$ carries it to the colimit in $\\Ab(T_{\\Et})$. In particular arbitrary direct sums $\\bigoplus_{k\\in K}\\mathcal F_k$ over a set $K$ exist in $\\Mod(\\mathcal O)$, with coprojections $\\iota_k$, and for morphisms $h_k:\\mathcal F_k\\to\\mathcal G$ there is a unique $h:\\bigoplus_k\\mathcal F_k\\to\\mathcal G$ with $h\\iota_k=h_k$.",
+    "uses": [
+     "lem-weil-pbc-module-sheaves-colimits-forgetful",
+     "def-weil-pbc-abelian-etale-sheaves",
+     "def-weil-pbc-sheafification"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 3.** *Filtered colimits are exact.* Let $\\mathcal I$ be a small filtered category and $0\\to\\mathcal F_i\\xrightarrow{a_i}\\mathcal G_i\\xrightarrow{b_i}\\mathcal H_i\\to0$ a diagram ($i\\in\\mathcal I$) of short exact sequences in $\\Mod(\\mathcal O)$. Colimits commute with cokernels in any category (both are colimits), so $\\colim\\mathcal F_i\\to\\colim\\mathcal G_i\\to\\colim\\mathcal H_i\\to0$ is exact; it remains to show that $a=\\colim a_i$ is a monomorphism. Apply $\\mathrm{forget}$: by step 2 (part (3) of [lem-weil-pbc-module-sheaves-colimits-forgetful]) $\\mathrm{forget}(a)$ is, up to the canonical isomorphisms, the colimit in $\\Ab(T_{\\Et})$ of the morphisms $\\mathrm{forget}(a_i)$, which are monomorphisms because $\\mathrm{forget}$ is exact (step 1). Filtered colimits in $\\Ab(T_{\\Et})$ are exact [lem-weil-pbc-abelian-etale-sheaves-grothendieck], so $\\mathrm{forget}(a)$ is a monomorphism. A faithful functor reflects monomorphisms: if $a x=a y$ then $\\mathrm{forget}(a)\\mathrm{forget}(x)=\\mathrm{forget}(a)\\mathrm{forget}(y)$, so $\\mathrm{forget}(x)=\\mathrm{forget}(y)$ and $x=y$. Hence $a$ is a monomorphism and $0\\to\\colim\\mathcal F_i\\to\\colim\\mathcal G_i\\to\\colim\\mathcal H_i\\to0$ is exact.",
+    "uses": [
+     "lem-weil-pbc-module-sheaves-colimits-forgetful",
+     "lem-weil-pbc-abelian-etale-sheaves-grothendieck"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 4.** *The objects $j_{U!}\\Lambda_U$.* By [lem-weil-pbc-affine-etale-essentially-small-cover] choose a set $\\mathcal S$ of affine objects of $T_{\\Et}$ such that every object $V$ of $T_{\\Et}$ has a covering $\\{U_k\\to V\\}_{k\\in K}$ with all $U_k\\in\\mathcal S$. For $U\\in\\mathcal S$ let $\\mathcal O[h_U ]$ be the presheaf of $\\mathcal O$-modules $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}(V,U)}\\mathcal O(V)$ of [lem-weil-pbc-free-yoneda-presheaf-module] and $j_{U!}\\Lambda_U=\\mathcal O[h_U ]^\\#$ its sheafification as a presheaf of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification]. For every $\\mathcal F\\in\\Mod(\\mathcal O)$ we get bijections, natural in $\\mathcal F$, $\\mathrm{Hom}_{\\Mod(\\mathcal O)}(j_{U!}\\Lambda_U,\\mathcal F)\\cong\\mathrm{Hom}_{\\mathrm{PMod}(\\mathcal O)}(\\mathcal O[h_U ],\\mathcal F)\\cong\\mathcal F(U)$: the first by the universal property of sheafification [def-weil-presheaf-modules-sheafification], the second by [lem-weil-pbc-free-yoneda-presheaf-module]. Write $h_s:j_{U!}\\Lambda_U\\to\\mathcal F$ for the morphism attached to $s\\in\\mathcal F(U)$; naturality says that for $w:\\mathcal F\\to\\mathcal G$ the morphism $w\\circ h_s$ is attached to $w_U(s)\\in\\mathcal G(U)$, i.e. $w\\circ h_s=h_{w_U(s)}$. Since the bijections are additive maps of groups (the sheafification bijection is a homomorphism of abelian groups, and so is $\\beta\\mapsto\\beta_U(e_{\\mathrm{id}_U})$), $h_s=0$ iff $s=0$.",
+    "uses": [
+     "lem-weil-pbc-affine-etale-essentially-small-cover",
+     "lem-weil-pbc-free-yoneda-presheaf-module",
+     "def-weil-presheaf-modules-sheafification"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 5.** *A generator.* Let $G=\\bigoplus_{U\\in\\mathcal S}j_{U!}\\Lambda_U$, which exists by step 2 since $\\mathcal S$ is a set. $G$ is a separator: let $u\\neq v:\\mathcal F\\to\\mathcal G$ in $\\Mod(\\mathcal O)$ and $w=u-v\\neq0$. A morphism of sheaves is determined by its components [def-weil-sheaf-of-modules-category], so there are an object $V$ and $s\\in\\mathcal F(V)$ with $w_V(s)\\neq0$. Choose a covering $\\{U_k\\to V\\}_{k}$ with $U_k\\in\\mathcal S$ (step 4). Since $\\mathcal G$ is a sheaf, a section whose restrictions to all members of a covering vanish is zero [def-weil-pbc-abelian-etale-sheaves]; so for some $k$, with $U=U_k$, $w_U(s|_U)=w_V(s)|_U\\neq0$. Then $w\\circ h_{s|_U}=h_{w_U(s|_U)}\\neq0$ by step 4. Let $h:G\\to\\mathcal F$ be the morphism with $h\\iota_U=h_{s|_U}$ and $h\\iota_{U'}=0$ for $U'\\neq U$ (step 2). Then $w h\\iota_U\\neq0$, so $wh\\neq0$, i.e. $uh\\neq vh$. $G$ is also a generator in the sense of subobjects: if $N'\\subsetneq N$ is a proper subobject, the quotient map $q:N\\to N/N'$ is nonzero (the cokernel of a non-isomorphic monomorphism is nonzero in an abelian category), so by the above with $u=q$, $v=0$ there is $h:G\\to N$ with $qh\\neq0$, i.e. $h$ does not factor through $N'$.",
+    "uses": [
+     "def-weil-sheaf-of-modules-category",
+     "def-weil-pbc-abelian-etale-sheaves"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 6.** *Conclusion.* By steps 1, 2, 3 and 5, $\\Mod(T_{\\Et},\\Lambda)=\\Mod(\\Lambda_T)$ is abelian, has all small colimits, has exact filtered colimits and has the generator $G$; it is a Grothendieck abelian category [def-sp-grothendieck-abelian]. For $\\Lambda=\\mathbf Z$ the category $\\Ab(T_{\\Et})$ is Grothendieck abelian by [lem-weil-pbc-abelian-etale-sheaves-grothendieck] (equivalently, by the above for $\\Lambda=\\mathbf Z$, since every abelian sheaf carries exactly one $\\mathbf Z_T$-module structure and every morphism of abelian sheaves is $\\mathbf Z_T$-linear, so that $\\mathrm{forget}:\\Mod(\\mathbf Z_T)\\to\\Ab(T_{\\Et})$ is an isomorphism of categories).\n\n*Source: Stacks project, sites-modules.tex, Modules on Sites, Lemmas 03DA, 03DB, 03DI (with the equation after it), 03EW (3); topologies.tex Definition 021B and Lemma 04HR for the set of affine objects; sites-cohomology.tex proof of Lemma 07AC.*",
+    "uses": [
+     "def-sp-grothendieck-abelian",
+     "lem-weil-pbc-abelian-etale-sheaves-grothendieck"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

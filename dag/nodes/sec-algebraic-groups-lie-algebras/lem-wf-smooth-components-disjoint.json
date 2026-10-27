@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-smooth-components-disjoint",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Irreducible components of a smooth variety do not meet",
@@ -12,35 +12,145 @@
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-smooth-components-disjoint.md",
   "place": "node lem-wf-smooth-components-disjoint, order 2487"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-regular-scheme",
+  "def-weil-closed-points",
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme"
+ ],
  "proof": [
   {
-   "text": "Write $A=k[X]$. The irreducible components of $X=\\operatorname{Spec}A$\nare the sets $V(\\mathfrak p)$ for the minimal primes $\\mathfrak p$ of\n$A$, distinct minimal primes giving distinct components. Suppose\n$V(\\mathfrak p_1)\\cap V(\\mathfrak p_2)\\neq\\varnothing$ with\n$\\mathfrak p_1\\neq\\mathfrak p_2$ minimal. This intersection is\n$V(\\mathfrak p_1+\\mathfrak p_2)$ with $\\mathfrak p_1+\\mathfrak p_2$ a\nproper ideal, so it is contained in some maximal ideal\n$\\mathfrak m$, a closed point $x$. The local ring\n$A_{\\mathfrak m}$ is regular by hypothesis, hence a domain by\n[lem-sc-regular-local-domain], so it has a unique minimal prime, namely\n$(0)$. But $\\mathfrak p_1A_{\\mathfrak m}$ and $\\mathfrak p_2A_{\\mathfrak m}$\nare two distinct minimal primes of $A_{\\mathfrak m}$, since primes of\nthe localization correspond to primes of $A$ inside $\\mathfrak m$,\ncompatibly with inclusion. This contradiction shows that distinct\ncomponents are disjoint.",
+   "text": "Put $A=\\Gamma(X,\\mathcal O_X)$ and identify the affine scheme $X$ with $\\operatorname{Spec}A$. The finite-type structure morphism $X\\to\\operatorname{Spec}k$ makes $A$ a finitely generated $k$-algebra by [lem-pc-affine-finite-type-algebra]. If $X$ is empty, it has no nonempty irreducible or connected components and all conclusions are vacuous; hence assume it is nonempty.",
    "uses": [
-    "lem-sc-regular-local-domain"
+    "lem-pc-affine-finite-type-algebra"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2, lemma-locally-finite-type-characterize, (1) implies (2), applied to the affine pair X and Spec k; blueprint proof, opening sentence"
+   }
   },
   {
-   "text": "There are finitely many components $C_1,\\ldots,C_m$ by\n[lem-wf-affine-noetherian-components], each closed, pairwise disjoint,\nand covering $X$. The complement of $C_j$ is the finite union of the\nothers, hence closed, so $C_j$ is also open. Each $C_j$ is irreducible,\nhence connected, and open and closed, so it is a connected component.",
+   "text": "By [lem-weil-pbc-spec-irreducible-components-minimal-primes], write any two components as $C_i=V(\\mathfrak p_i)$ with $\\mathfrak p_i$ minimal prime ideals. If they meet, a prime $\\mathfrak q$ in their intersection contains both $\\mathfrak p_i$. By [lem-weil-pbc-proper-ideal-contained-in-maximal], choose a maximal ideal $\\mathfrak m\\supseteq\\mathfrak q$. Thus $\\mathfrak p_1,\\mathfrak p_2\\subseteq\\mathfrak m$.",
    "uses": [
-    "lem-wf-affine-noetherian-components"
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES, lemma-irreducible, (3); Tag 00E0, lemma-Zariski-topology, (2) and proof of (8); blueprint proof, first paragraph"
+   }
+  },
+  {
+   "text": "The point $x=\\mathfrak m$ is closed: the closed set $V(\\mathfrak m)$ equals $\\{\\mathfrak m\\}$, since no proper prime strictly contains a maximal ideal. Applying [lem-weil-pbc-affine-open-stalk-localization] to the affine open $U=X$ identifies $\\mathcal O_{X,x}$ with $A_{\\mathfrak m}$. The former is regular by the stated hypothesis, so [lem-sc-regular-local-domain] makes it, and hence $A_{\\mathfrak m}$, a nonzero integral domain.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, (6), and Algebra Tag 00NP, lemma-regular-domain; blueprint proof, first paragraph"
+   }
+  },
+  {
+   "text": "Let $\\lambda:A\\to A_{\\mathfrak m}$ and $K=\\ker\\lambda$. Since $A_{\\mathfrak m}$ is a nonzero domain, $K$ is proper and prime: $\\lambda(ab)=0$ implies $\\lambda(a)=0$ or $\\lambda(b)=0$. For either $\\mathfrak p_i$, if $a\\in K$, the fraction equality criterion of [def-weil-pbc-localization-at-prime] gives $sa=0$ for some $s\\notin\\mathfrak m$. Then $sa\\in\\mathfrak p_i$ and $s\\notin\\mathfrak p_i$, so primality gives $a\\in\\mathfrak p_i$. Thus $K\\subseteq\\mathfrak p_i$; minimality of $\\mathfrak p_i$ among prime ideals implies $K=\\mathfrak p_i$. Consequently $\\mathfrak p_1=\\mathfrak p_2$ and $C_1=C_2$. This proves distinct components are disjoint.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-smooth-components-disjoint.proof.md",
+    "place": "First paragraph: the localization contradiction; expanded using the fraction equality criterion instead of invoking preservation of minimal primes without a citation"
+   }
+  },
+  {
+   "text": "By [lem-wf-affine-noetherian-components] there are finitely many irreducible components $C_1,\\ldots,C_r$. They are closed by [def-weil-irreducible-components], and they cover $X$ by [lem-sc-irreducible-components-cover]. The disjointness just proved gives $X\\setminus C_j=\\bigcup_{i\\ne j}C_i$. This finite union of closed sets is closed; hence every $C_j$ is both open and closed.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-smooth-components-disjoint.proof.md",
+    "place": "Second paragraph, first two sentences: finiteness, covering, and the complement of a component"
+   }
+  },
+  {
+   "text": "Each $C_j$ is nonempty and irreducible, so [lem-pc-irreducible-space-connected] makes it connected. For $x\\in C_j$, let $D_x$ be the connected component supplied by [lem-sfb-connected-component-maximality]. Its maximality gives $C_j\\subseteq D_x$. If $D_x$ met $X\\setminus C_j$, the two relatively clopen sets $D_x\\cap C_j$ and $D_x\\setminus C_j$ would be nonempty and partition $D_x$, contradicting connectedness. Thus $D_x=C_j$. Finally every point lies in a $C_j$ by step 5, so these are exactly all connected components.",
+   "uses": [
+    "lem-pc-irreducible-space-connected",
+    "lem-sfb-connected-component-maximality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004V, definition-irreducible-components and following sentence; Tag 004T, lemma-connected-components, (3)-(4); blueprint proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-affine-open-stalk-localization",
   "lem-sc-regular-local-domain",
-  "lem-wf-affine-noetherian-components"
+  "def-weil-pbc-localization-at-prime",
+  "lem-wf-affine-noetherian-components",
+  "def-weil-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-pc-irreducible-space-connected",
+  "lem-sfb-connected-component-maximality"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-smooth-components-disjoint.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-smooth-components-disjoint.proof.md",
+  "place": "Both proof paragraphs, with the localization argument expanded by the kernel calculation and all non-elementary ingredients cited as existing DAG nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "disjoint.*irreducibleComponents|isClopen.*irreducibleComponents|connectedComponent.*irreducibleComponents|finite_irreducibleComponents",
+   "results": "Finiteness declarations in Mathlib/Topology/NoetherianSpace.lean and AlgebraicGeometry/Noetherian.lean; the Smooth.lean hits concern a dense smooth locus, not disjointness under regularity at closed points.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Irreducible components of a spectrum are disjoint when all local rings at maximal ideals are domains",
+   "results": "irreducibleComponents, PrimeSpectrum.irreducibleSpace, instJacobsonSpaceOfIsJacobsonRing, irreducibleComponents_eq_singleton, isReduced_ofLocalizationMaximal, AlgebraicGeometry.irreducibleSpace_of_isIntegral, PrimeSpectrum.isIrreducible_iff_vanishingIdeal_isPrime, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; none has the closed-point regularity implication.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, irreducibleComponents",
+   "results": "PrimeSpectrum.zeroLocus_minimalPrimes, vanishingIdeal_irreducibleComponents, vanishingIdeal_mem_minimalPrimes, zeroLocus_ideal_mem_irreducibleComponents, minimalPrimes.equivIrreducibleComponents and Ideal.minimalPrimes.equivIrreducibleComponents; these identify components but do not give the item.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Distinct irreducible components of the spectrum of a finite type algebra over a field are disjoint if the localizations at maximal ideals are regular local rings",
+   "results": "Algebra.QuasiFinite.discreteTopology_primeSpectrum, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier, MaximalSpectrum.iInf_localization_eq_bot, PrimeSpectrum.iInf_localization_eq_bot, isReduced_ofLocalizationMaximal, PrimeSpectrum.irreducibleSpace, Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, PrimeSpectrum.t1Space_iff_isField; general spectrum facts only, no disjointness from regular maximal localizations.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If each maximal localization is an integral domain then any two irreducible components of the prime spectrum are disjoint",
+   "results": "PrimeSpectrum.irreducibleSpace, PrimeSpectrum.instQuasiSeparatedSpace, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier, PrimeSpectrum.quasiSober, IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes, PrimeSpectrum.vanishingIdeal_irreducibleComponents, PrimeSpectrum.zeroLocus_minimalPrimes, PrimeSpectrum.instQuasiSoberElemZeroLocus; general spectrum facts only, no disjointness from regular maximal localizations.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -50,7 +160,60 @@
   "lem-wf-affine-noetherian-components"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-i-geometry"
+ "unit": "sk-i-geometry",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-wf-smooth-components-disjoint",
+  "worker": "stage1",
+  "summary": "Kept the statement and blueprint minimal-prime route. Added explicit affine finite-type and stalk identifications, minimal-prime classification, maximal-ideal existence, the fraction-zero kernel calculation, component covering, and connected-component maximality. All supporting statements already exist in the DAG; no new nodes or Mathlib leaves were needed. Read latest blueprint and Stacks tags and recorded actual Mathlib searches.",
+  "blueprint": "Latest blueprint sk-p-geometry/lem-wf-smooth-components-disjoint.proof.md, first paragraph realized by steps 1-4 and second paragraph by steps 5-6. The stored unit sk-i-geometry remains unchanged: its regular-local-domain/component clause is realized by the same route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic affine finite-type coordinate-algebra bridge, needed to apply this unit's finiteness lemma; it replaces no unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-1651ac96e",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-1651ac96e (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, plus every cited statement. The statement is verbatim the same in the master, main-20261015 and latest blueprints and is unchanged by the delivery; the delivery has 0 new nodes and no repair note applies. Step 1: lem-pc-affine-finite-type-algebra (Stacks 01T2 (1)=>(2)) gives a finite-type coordinate algebra; I accept this tool use as a generic bridge that replaces no step of the unit. Step 2: minimal primes give the components (00ES(3)) and every prime lies in a maximal ideal (00E0). Step 3: clause (c) of lem-weil-pbc-affine-open-stalk-localization identifies the stalk with A_m; m is a closed point, so the stalk is regular and hence a nonzero domain by lem-sc-regular-local-domain (00NP, closed in slopmaster2). Step 4: I checked the kernel calculation line by line: ker(A->A_m) is prime, contained in each p_i inside m, and so equal to each by minimality. It matches the project's Lean proof. Steps 5-6: finite components (same-unit node), closed and covering (004V/004W), so each is clopen; irreducible implies connected, and maximality of connected components (004T) makes them the connected components. All tags were verified in tags/tags and there is no SGA. Small cases tested: empty X, Spec k, Spec(k x k), Spec k[u,v]/(uv) (excluded because the origin is not regular), k[x]/(x^2). Duplicate search: the nearest nodes, lem-sfb-normal-locally-finite-components and lem-trf-normal-topologically-noetherian-components, need normal local rings at every point, so they are not one-line specializations. Advisory for the maintainer: the sorry-free PrimeSpectrum.disjoint_of_mem_irreducibleComponents, isClopen_of_mem_irreducibleComponents and connectedComponent_eq_of_mem_irreducibleComponents (RegularLocalRing/Defs.lean:313-377) state the result at the PrimeSpectrum/localization level, not exactly the scheme statement, so the split is legitimate; they are the natural stage-2 targets."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularClosedPointComponents",
+  "declaration": "AlgebraicGeometry.components_of_regular_closed_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularClosedPointComponents.lean",
+  "statement": "theorem components_of_regular_closed_points {k : Type u} [Field k] (X : Scheme.{u}) [IsAffine X] [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (hreg : ∀ x : X, x ∈ closedPoints X → IsRegularLocalRing (X.presheaf.stalk x)) : (irreducibleComponents X).Finite ∧ (irreducibleComponents X).Pairwise Disjoint ∧ (∀ C ∈ irreducibleComponents X, IsClopen C) ∧ irreducibleComponents X = Set.range (fun x : X => connectedComponent x)",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d676820fa",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Clause-by-clause match of components_of_regular_closed_points with the node (affine, LFT+QC over Spec k, IsRegularLocalRing stalks only at closedPoints; Finite, Pairwise Disjoint, IsClopen, equality with range connectedComponent). Statement verbatim in master and latest blueprint. Only the lean field changed; record verbatim. Empty scheme and non-regular examples checked. The ring-level PrimeSpectrum theorems in WeilConjectures RegularLocalRing/Defs.lean are not the scheme statement, so no duplicate (advisory: stage 3 proves via them). No hollow defs, proof sorry, docstrings and imports OK. No file changed, so no compile; worker reports a clean compile."
+ }
 }

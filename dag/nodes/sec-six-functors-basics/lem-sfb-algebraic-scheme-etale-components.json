@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-algebraic-scheme-etale-components",
+ "kind": "statement",
+ "title": "Universal finite etale component scheme of a finite-type scheme over a field",
+ "statement": "Let $k$ be a field [def-weil-field]. For every separated scheme $X$ of finite type over $k$ [def-pc-scheme, def-weil-finite-type-morphism, def-weil-proper-morphism], there exists a finite etale $k$-scheme $\\Pi_k(X)$ [def-weil-finite-integral-morphism, def-weil-etale-morphism] and a $k$-morphism $q_X:X\\to\\Pi_k(X)$ with the following properties. For every finite etale $k$-scheme $E$, composition with $q_X$ is a bijection $\\operatorname{Hom}_k(\\Pi_k(X),E)\\xrightarrow{\\sim}\\operatorname{Hom}_k(X,E)$. The assignment is functorial in $X$, with $q_Y\\circ f=\\Pi_k(f)\\circ q_X$ for every $k$-morphism $f:X\\to Y$. For every second separated finite-type $k$-scheme $Y$, its canonical comparisons $\\Pi_k(\\operatorname{Spec}k)\\cong\\operatorname{Spec}k$ and $\\Pi_k(X\\times_kY)\\cong\\Pi_k(X)\\times_k\\Pi_k(Y)$ are isomorphisms compatible with the $q$ maps [def-weil-affine-spectrum, def-pc-fibre-product]. For every field extension $L/k$ [def-pc-field-extension], the canonical comparison $\\Pi_L(X_L)\\cong\\Pi_k(X)_L$ is an isomorphism identifying $q_{X_L}$ with $(q_X)_L$. For every point $t\\in\\Pi_k(X)$, the fibre $X_t$ [def-pc-scheme-fibre] is nonempty and geometrically connected: after every field extension of its residue field [def-weil-residue-field], it is nonempty and has connected underlying space [def-weil-connected-scheme]. The fibres of the underlying map $|q_X|$ are exactly the connected components of $|X|$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 1.29, 1.30(a,b), 1.31(a,b) and Remark 1.33, printed pp.15-16: construction of pi_0(X), universal property, product and field-extension comparisons, and geometrically connected fibres."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\Gamma(X,\\mathcal O_X)$. The directed-union lemma gives the actual subalgebra $B=B_k(A)$. Fix an algebraic closure $\\Omega/k$. Both $X$ and $X_\\Omega$ are Noetherian by finite type over a field; let $N$ be the finite number of irreducible components of $X_\\Omega$. For any $D\\in\\mathcal E_k(A)$, the etale algebra classification and the separable tensor splitting identify $D\\otimes_k\\Omega$ with $\\Omega^d$, where $d=\\dim_kD$. Since $X$ is quasi-compact (finite type over $k$) and quasi-separated (separated implies quasi-separated), flat base change identifies $A\\otimes_k\\Omega$ with $\\Gamma(X_\\Omega,\\mathcal O)$; tensoring the injection $D\\subseteq A$ remains injective (extend a $k$-basis of $D$ to one of $A$). Thus the $d$ coordinate idempotents give $d$ disjoint nonempty clopens of $X_\\Omega$ partitioning it. Every irreducible component lies in one part, so $d\\le N$. The nonempty set of such dimensions has a largest member; choose $D_0$ attaining it. For every $D$, directedness gives $D'\\supseteq D,D_0$ in the family. Maximal dimension forces $D'=D_0$, so $D\\subseteq D_0$ and $B=D_0$ is finite etale. This also handles empty $X$: then $A=B=0$, $N=0$ and $d=0$.",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-pc-separable-tensor-algebraic-closure",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.29, printed p.15; the preceding idempotent discussion, with the finite-type and flat-base-change inputs made explicit"
+   }
+  },
+  {
+   "text": "Define $\\Pi_k(X)=\\operatorname{Spec}B$ and let $q_X$ correspond to the inclusion $B\\hookrightarrow A$ under the morphism-into-affine bijection. This is real algebraic data, and step 1 makes $\\Pi_k(X)$ finite etale. Let $E$ be finite etale over $k$. A finite morphism is affine, so $E=\\operatorname{Spec}C$ for its finite-dimensional algebra $C$. A map $X\\to E$ corresponds exactly to a $k$-algebra map $C\\to A$ (the $k$-linearity is the equation on structure maps). By the directed-union lemma its image lies in $B$, and it factors uniquely as $C\\to B\\hookrightarrow A$. Applying the same affine bijection gives exactly the claimed bijection under composition with $q_X$.",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.29 and the paragraph defining pi_0(X), printed p.15"
+   }
+  },
+  {
+   "text": "For $f:X\\to Y$, define $\\Pi_k(f)$ to be the unique map whose composite with $q_X$ is $q_Yf$, using step 2 with $E=\\Pi_k(Y)$. Uniqueness proves the identity and composition laws and the displayed naturality equation. For $X=\\operatorname{Spec}k$, $A=k$ and its finite etale subalgebra $k$ already equals $A$; hence $B=k$ and $q_X$ is the identity. This gives the canonical terminal comparison and its compatibility.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Universal property following Proposition 1.29; the terminal-object clause of the item"
+   }
+  },
+  {
+   "text": "For any field extension $L/k$, $X_L$ is again separated of finite type over $L$ by separated finite-type base change, so $\\Pi_L(X_L)$ is defined. $X$ is quasi-compact and quasi-separated (it is finite type, and separated implies quasi-separated), so flat base change gives the canonical ring isomorphism $A\\otimes_kL\\cong\\Gamma(X_L,\\mathcal O)$. Apply the maximal ind-etale scalar-extension lemma to this algebra: $B_L(\\Gamma(X_L,\\mathcal O))=B_k(A)\\otimes_kL$. Taking spectra, and identifying $\\operatorname{Spec}(B\\otimes_kL)$ with the fibre product $\\Pi_k(X)\\times_k\\operatorname{Spec}L$ by the affine fibre-product lemma, gives $\\Pi_L(X_L)\\cong\\Pi_k(X)_L$. The ring map defining $q_{X_L}$ is the scalar extension of the inclusion defining $q_X$, so this comparison identifies the actual maps, not just their isomorphism classes. By the uniqueness in step 2 it is the canonical comparison.",
+   "uses": [
+    "lem-sfb-maximal-ind-etale-field-base-change",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.30(a), printed p.15, and the sentence after its proof on p.16; algebraic form supplied by Stacks 0CKU"
+   }
+  },
+  {
+   "text": "Write $B=\\prod_{i\\in I}k_i$ by the etale algebra classification. Its points are the finitely many clopen spectra of the $k_i$. The point $t_i$ is the open set $D(e_i)\\subseteq\\operatorname{Spec}B$, and the morphism-into-affine lemma gives $q_X^{-1}(D(e_i))=X_{e_i}=U_{e_i}$. Since $\\{t_i\\}\\cong\\operatorname{Spec}k_i$ is an open subscheme, the open fibre-product lemma identifies the scheme fibre $X_i=X\\times_{\\Pi_k(X)}\\operatorname{Spec}k_i$ with the open subscheme $U_{e_i}$ of $X$. A coordinate idempotent $e_i\\ne0$ stays nonzero in $A$, so its corresponding clopen $|X_i|$ is nonempty. If $|X_i|$ were disconnected, a nontrivial clopen partition of it would also be a clopen partition inside $X$, and hence would give an idempotent $e\\in A$ with $e_ie=e$ and $e\\ne0,e_i$. Every idempotent of $A$ lies in $B$ by the directed-union lemma. But the only idempotents in the field factor $e_iB=k_i$ are $0$ and $e_i$, a contradiction. Therefore these fibres are connected. A connected subset of $X$ cannot meet two disjoint clopen $X_i$, so the nonempty fibres are exactly its connected components.",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-spec-finite-product-fields",
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.31(a), printed p.16; explicit idempotent proof of the sentence pi(X_x)=kappa(x)"
+   }
+  },
+  {
+   "text": "For a point $t$ with residue field $F=k_i$, choose an algebraic closure $\\Omega/F$. Step 4 identifies $(q_X)_\\Omega$ with $q_{X_\\Omega}$. The embedding $F\\hookrightarrow\\Omega$ gives a rational point $s$ of $\\Pi_k(X)_\\Omega$, and associativity of fibre products identifies $(X_t)_\\Omega$ with the fibre of $q_{X_\\Omega}$ over $s$. Step 5 applied over $\\Omega$ makes that fibre nonempty and connected. The algebraic-closure criterion for geometric connectedness, applied to the $F$-scheme $X_t$, now shows that it stays nonempty and connected after every field extension of $F$. No perfection assumption on $k$ is used.",
+   "uses": [
+    "lem-weil-geometrically-connected-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.31(b), printed p.16, with the geometric connectedness criterion made explicit"
+   }
+  },
+  {
+   "text": "Set $T=\\Pi_k(X)\\times_k\\Pi_k(Y)$. This is finite etale: its projection to $\\Pi_k(X)$ is the base change of the etale structure map of $\\Pi_k(Y)$, and composing with the etale structure map of $\\Pi_k(X)$ is etale. By the affine fibre-product lemma $T=\\operatorname{Spec}(B_X\\otimes_kB_Y)$ for the coordinate algebras $B_X,B_Y$; the tensor products of finite bases of the two coordinate algebras span the tensor product, so $T$ is finite over $k$ by the definition of finite. By step 2 the map $(q_X,q_Y):X\\times_kY\\to T$ factors uniquely through a comparison $c:\\Pi_k(X\\times_kY)\\to T$. The source product is again separated finite type: finite type is stable under base change and composition, and separatedness follows because under $(X\\times_kY)\\times_k(X\\times_kY)\\cong(X\\times_kX)\\times_k(Y\\times_kY)$ its diagonal is $\\Delta_X\\times_k\\Delta_Y$, a closed immersion by the closed-immersion products lemma. Thus the previous steps apply to it.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-fibre-product",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.30(b), printed pp.15-16; construction of the canonical product comparison"
+   }
+  },
+  {
+   "text": "Pass to a separable closure $k^s/k$. By the etale fibre description, a finite etale $k^s$-scheme is a finite disjoint union of copies of $\\operatorname{Spec}k^s$ (a finite separable extension of a separably closed field has degree one). By steps 4-5, $X_{k^s}$ and $Y_{k^s}$ are partitioned into their nonempty connected fibres $U_i$ and $V_j$ over the points of the two component schemes. Each $U_i$ is geometrically connected by the separably-closed-field lemma, and the product-components lemma applied to $U_i\\times V_j\\to V_j$ says that $U_i\\times V_j$ has one connected component, hence is nonempty and connected. These products are the disjoint clopen pieces of $(X\\times Y)_{k^s}$, so they are exactly its components. Step 5 for the product identifies the geometric-point map induced by $c$ with the bijection from these components to the pairs $(i,j)$. This map is Galois equivariant because $c$ is defined over $k$. The inverse bijection is equivariant too. Full faithfulness of the geometric-point functor on etale $k$-schemes lifts this inverse to a morphism $T\\to\\Pi_k(X\\times Y)$; faithfulness makes its two composites the identities. Hence $c$ is an isomorphism. Its compatibility with the $q$ maps is its defining equation. If either scheme is empty, both index sets of pairs and both component schemes of the product are empty, and the same argument applies.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-separably-closed-geometrically-connected",
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "lem-exc-etale-field-point-functor-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.30(b), printed p.16; Remark 1.33(a); full-faithfulness descent of the component bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-etale-subalgebra-directed-union",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-scheme-clopen-idempotent",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-maximal-ind-etale-field-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-exc-etale-field-point-functor-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 1.29-1.31 and Remark 1.33(a), printed pp.15-16; Stacks 0CKR-0CKU supply the algebraic scalar-extension input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scheme of finite type over a field has a universal finite etale scheme of connected components, commuting with products and field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits classify etale algebras or discuss topological components; none constructs the universal component scheme for general finite-type schemes or proves its product and field-extension compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"connected\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsClosedUnderIsomorphismsSchemeConnectedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \" : CategoryTheory.ObjectProperty.IsClosedUnderIsomorphisms fun x => ConnectedSpace ↥x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.GeometricallyConnected\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyConnected\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"We say that a morphism `f : X ⟶ Y` is geometrically connected if for all `Spec K ⟶ Y` with `K`\\na field, `X ×[Y] Spec K` is connected.\"}\n  {\"name\": \"AlgebraicGeometry.instSurjectiveOfGeometricallyConnected\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyConnected f] : AlgebraicGeometry.Surjective f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyConnected.eq_geometrically\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" : @AlgebraicGeometry.GeometricallyConnected = AlgebraicGeometry.geometrically fun x => ConnectedSpace ↥x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.GeometricallyConnected f] : AlgebraicGeometry.geometrically (fun x => ConnectedSpace ↥x) f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyConnected.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (geometrically_connectedSpace : AlgebraicGeometry.geometrically (fun x => ConnectedSpace ↥x) f) : AlgebraicGeometry.GeometricallyConnected f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.geometricallyConnected_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.GeometricallyConnected f ↔ AlgebraicGeometry.geometrically (fun x => ConnectedSpace ↥x) f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (s : ↥S) [AlgebraicGeometry.GeometricallyConnected f] : AlgebraicGeometry.GeometricallyConnected (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f s)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyConnected.iff_geometricallyConnected_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) : AlgebraicGeometry.GeometricallyConnected f ↔ ∀ (s : ↥S), AlgebraicGeometry.GeometricallyConnected (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f s)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instConnectedSpaceCarrierCarrierCommRingCatFiberOfGeometricallyConnected\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (s : ↥S) [AlgebraicGeometry.GeometricallyConnected f] : ConnectedSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f s)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyConnected.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Connected\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.GeometricallyConnected f] [AlgebraicGeometry.GeometricallyConnected g] [AlgebraicGeometry.UniversallyOpen f] [AlgebraicGeometry.UniversallyOpen g] : AlgebraicGeometry.GeometricallyConnected (CategoryTheory.CategoryStruct.\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits classify etale algebras or discuss topological components; none constructs the universal component scheme for general finite-type schemes or proves its product and field-extension compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "component[Ss]cheme|[Ee]tale[Cc]omponent|pi0|π₀|largest.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s) Directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits classify etale algebras or discuss topological components; none constructs the universal component scheme for general finite-type schemes or proves its product and field-extension compatibilities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal finite separable subalgebra of global functions represents the etale scheme of geometric connected components",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] [EssFiniteType K L] : FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"Algebra.IsSeparable.isAlgebraic\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"[Nontrivial F] [Algebra.IsSeparable F K] : Algebra.IsAlgebraic F K\", \"doc\": \"Every separable algebra $ K $ over a nontrivial commutative ring $ F $ is algebraic over $ F $. That is, if $ F $ is a nontrivial commutative ring and $ K $ is a separable $ F $-algebra, then every el\"}\n  {\"name\": \"Subalgebra.isSeparable_iff\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"[Ring L] [Algebra F L] {S : Subalgebra F L} : Algebra.IsSeparable F S ↔ ∀ x ∈ S, IsSeparable F x\", \"doc\": \"A subalgebra $ S $ of $ L $ over $ F $ is separable if and only if every element $ x \\\\in S $ is separable over $ F $.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K L] : FormallyEtale K L ↔ Algebra.IsSeparable K L\", \"doc\": \"For a commutative ring $ K $ and a $ K $-algebra $ L $ of essential finite type, $ L $ is formally étale over $ K $ if and only if $ L $ is separable over $ K $.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits classify etale algebras or discuss topological components; none constructs the universal component scheme for general finite-type schemes or proves its product and field-extension compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected components of an algebraic scheme over a field are represented by a finite etale quotient and this quotient preserves products",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι, ∃ (x : Finite ι), ∃ f x, ∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a finite coproduct of connected objects. Specifically, there exists a finite set $\\\\iota$, a family of connected objec\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι f g x, (∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)) ∧ Finite ι\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a colimit of finitely many connected objects. Specifically, there exists a finite index set $\\\\iota$, a family of conn\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {ι : Type u} [Finite ι] (R : ι → CommRingCat), CategoryTheory.IsIso (AlgebraicGeometry.sigmaSpec R)\", \"doc\": \"For any finite index set $\\\\iota$ and a family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, the canonical morphism from the coproduct (disjoint union) of the affine schemes $\\\\operatorname{Spec}(R_i)$ \"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits classify etale algebras or discuss topological components; none constructs the universal component scheme for general finite-type schemes or proves its product and field-extension compatibilities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-finite-commutative-reduced-splitting",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 5, splitting the finite cyclic factors into their identity components and finite etale reduced subgroups over the given perfect field. Supporting general scheme-theoretic input: the universal finite etale scheme of connected components, before transporting the group operations.",
+   "via": [
+    "lem-sfb-perfect-finite-commutative-reduced-splitting",
+    "lem-sfb-additive-subgroup-perfect-decomposition",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algebraic-scheme-etale-components",
+  "worker": "stage1",
+  "summary": "Keep the full statement. Construct the largest finite etale subalgebra using an explicit dimension bound and directedness; prove universality and functoriality, canonical scalar extension, actual nonempty connected fibres and their geometric connectedness, and the product comparison by component pairs and fully faithful Galois descent. Two new statement-only algebraic prerequisites concern arbitrary field algebras, not clauses of this scheme theorem.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), via the existing alteration/ILO and Milne prerequisite chain in blueprint.from.place. The ancestor command returns None for this historical chain; keep its null from.node and retain the via chain. The component-scheme prerequisite is realized by steps 1-8.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-separable-tensor-algebraic-closure",
+    "why": "Generic foundational input: Tensor product of a finite separable field with an algebraic closure. Used only for the explicit component-scheme construction; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Generic foundational input: The spectrum of a finite product of fields is a finite discrete scheme whose points are the spectra of the factors. Used only for the explicit component-scheme construction; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic foundational input: Geometric connectedness is tested on one algebraically closed extension. Used only for the explicit component-scheme construction; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-exc-etale-field-point-functor-fully-faithful",
+    "why": "Generic foundational input: Full faithfulness of the concrete geometric-point functor. Used only for the explicit component-scheme construction; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic foundational input (added by the reviewer): a fibre product of closed immersions over a common base is a closed immersion; used in step 7 for separatedness of X x_k Y. Used only for the explicit component-scheme construction; this unit has no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-exc-etale-field-point-functor-fully-faithful",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-3f5c7d9d6",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-3f5c7d9d6 (reviewer sub-agent of L); spot-checked: Delivery is mathematically correct; corrected item file written. Fault C1: steps 1, 4, 5 and 7 used five standard facts with no cited node; all five are existing DAG nodes and are now cited. Sources read: Milne iAG2017 pp.14-16, Props 1.29-1.31 and Rem 1.33(a), which match the item; Stacks more-algebra 0CKR/0CKS/0CKT/0CKU (lemma-change-fields-max-weakly-etale-subalgebra holds for arbitrary A). New nodes accepted. directed-union: correct (image of a finite etale algebra is a quotient, idempotents generate quotients of k x k); tested on A=0, A=k, k[e]/e^2, purely inseparable and separable F. maximal-ind-etale-field-base-change: exactly 0CKU. Neither is a duplicate (weak-etale-field, field-geometric-fibre-construction, ind-etale-stability were checked) or a restated clause of the item. Steps: 1, bound by irreducible components of X_Omega plus maximal-dimension directedness; 2, universality through morphism-into-affine; 3, functoriality; 4, base change with q identified; 5, connected fibres via idempotents in B; 6, criterion applied over the residue field F, not k; 7-8, the comparison is an isomorphism via k^s components and full faithfulness of the point functor. All are correct, including the empty and imperfect cases. Citations added: lem-pc-separated-quasi-separated (steps 1, 4); lem-pod-separated-finite-type-base-change (step 4, so that Pi_L(X_L) is defined); lem-weil-pbc-fibre-product-affine-spectra (steps 4, 7); morphism-into-affine-scheme plus lem-weil-pbc-open-fibre-product (step 5, fibre equals the open U_{e_i}); lem-weil-pbc-closed-immersion-products (step 7, separatedness of X x Y). proof_deps updated. tool_uses entry added for closed-immersion-products (unit sk-thm-br, generic). Graph walk found no cycle. Statement unchanged; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleComponents",
+  "declaration": "AlgebraicGeometry.EtaleComponents.exists_component_functors",
+  "declarations": [
+   "AlgebraicGeometry.EtaleComponents.Input",
+   "AlgebraicGeometry.EtaleComponents.pointInput",
+   "AlgebraicGeometry.EtaleComponents.productInput",
+   "AlgebraicGeometry.EtaleComponents.baseChangeInput",
+   "AlgebraicGeometry.EtaleComponents.exists_component_functors"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComponents.lean",
+  "statement": "theorem exists_component_functors : ∃ (P : ∀ (k : Type u) [Field k], Input k ⥤ Over (Spec (.of k))) (q : ∀ (k : Type u) [Field k], ObjectProperty.ι (fun X : Over (Spec (.of k)) ↦ IsSeparated X.hom ∧ LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom) ⟶ P k), (∀ (k : Type u) [Field k] (X : Input k), IsFinite ((P k).obj X).hom ∧ Etale ((P k).obj X).hom ∧ (∀ (E : Over (Spec (.of k))) [IsFinite E.hom] [Etale E.hom], Function.Bijective (fun h : (P k).obj X ⟶ E ↦ (q k).app X ≫ h))) ∧ (∀ (k : Type u) [Field k], ∃ e : (P k).obj (pointInput k) ≅ (pointInput k).obj, (q k).app (pointInput k) ≫ e.hom = 𝟙 (pointInput k).obj) ∧ (∀ (k : Type u) [Field k] (X Y : Input k), ∃ e : (P k).obj (productInput X Y) ≅ Over.mk (pullback.fst ((P k).obj X).hom ((P k).obj Y).hom ≫ ((P k).obj X).hom), ((q k).app (productInput X Y)).left ≫ e.hom.left ≫ pullback.fst ((P k).obj X).hom ((P k).obj Y).hom = pullback.fst X.obj.hom Y.obj.hom ≫ ((q k).app X).left ∧ ((q k).app (productInput X Y)).left ≫ e.hom.left ≫ pullback.snd ((P k).obj X).hom ((P k).obj Y).hom = pullback.snd X.obj.hom Y.obj.hom ≫ ((q k).app Y).left) ∧ (∀ (k L : Type u) [Field k] [Field L] [Algebra k L] (X : Input k), ∃ e : (P L).obj (baseChangeInput (L := L) X) ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k L)))).obj ((P k).obj X), (q L).app (baseChangeInput (L := L) X) ≫ e.hom = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k L)))).map ((q k).app X)) ∧ (∀ (k : Type u) [Field k] (X : Input k) (t : ((P k).obj X).left), Nonempty ((((q k).app X).left).fiber t) ∧ ∀ (L : Type u) [Field L] [Algebra (((P k).obj X).left.residueField t) L], ConnectedSpace ↥(pullback (((q k).app X).left.fiberToSpecResidueField t) (Spec.map (CommRingCat.ofHom (algebraMap (((P k).obj X).left.residueField t) L))))) ∧ (∀ (k : Type u) [Field k] (X : Input k) (x : X.obj.left), (((q k).app X).left ⁻¹' {((q k).app X).left x}) = connectedComponent x)",
+  "branch": "sheaf-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b76bf386c",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Lean exists_component_functors matches every clause of the node: finite etale P with Hom bijection by composition with q; functor P and natural q on the full subcategory of separated finite-type k-schemes; point, product and base-change comparisons, each with q-compatibility equations that the universal property pins down; nonempty fibres, ConnectedSpace (which includes Nonempty) after every extension of κ(t); q⁻¹{q x} = connectedComponent x. No extra hypotheses; empty X, Spec k, imperfect k and arbitrary extensions are covered; single universe u is the standard convention. The 12 stmt_deps are Mathlib existing:true records used exactly; plain imports = the stated proof_deps' modules; statement verbatim; only the theorem proof is sorry; helpers are real data; docstrings carry the source and blueprint id plus the 8-step plan. Node differs from live only in lean; no duplicate in Mathlib or the project; not landed by another group. No file changed, so no compile."
+ }
+}

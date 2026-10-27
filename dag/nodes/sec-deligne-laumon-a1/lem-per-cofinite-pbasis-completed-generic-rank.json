@@ -248,20 +248,37 @@
   "module": "Sheaf.RingTheory.CofinitePBasisCompletedGenericRank",
   "declaration": "RingTheory.cofinitePBasisCompletedGenericRank",
   "file": "lean/Sheaf/RingTheory/CofinitePBasisCompletedGenericRank.lean",
-  "statement": "theorem cofinitePBasisCompletedGenericRank (A : Type u) [CommRing A] [IsDomain A] [IsLocalRing A] [IsNoetherianRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (p : ℕ) [Fact p.Prime] [CharP A p] (d : ℕ) (hd : 1 ≤ d) (hdim : ringKrullDim A = d) (k : Type v) [Field k] [CharP k p] [Algebra k A] (hres : Function.Bijective ((IsLocalRing.residue A).comp (algebraMap k A))) (E : Type w) (β : E → k) (hpb : ∃ b : Module.Basis {a : E →₀ ℕ // ∀ i : E, a i < p} (Subfield.closure (Set.range (fun x : k ↦ x ^ p))) k, ∀ a, b a = (a : E →₀ ℕ).prod (fun i e ↦ β i ^ e)) (F : Finset E → Subfield k) (hF : ∀ J, F J = Subfield.closure (Set.range (fun x : k ↦ x ^ p) ∪ {x : k | ∃ i : E, i ∉ J ∧ β i = x})) [∀ J : Finset E, Algebra (F J) A] (hcomp : ∀ (J : Finset E) (x : F J), algebraMap (F J) A x = algebraMap k A (x : k)) (L : Type z) [Field L] [Algebra A L] [IsFractionRing A L] : ∃ J0 : Finset E, ∀ J : Finset E, J0 ⊆ J → Module.rank L (L ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) (KaehlerDifferential (F J) A)) = (d + J.card : ℕ)",
+  "statement": "theorem cofinitePBasisCompletedGenericRank (A : Type u) [CommRing A] [IsDomain A] [IsLocalRing A] [IsNoetherianRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (p : ℕ) [Fact p.Prime] [CharP A p] (d : ℕ) (hd : 1 ≤ d) (hdim : ringKrullDim A = d) (k : Type v) [Field k] [Algebra k A] [CharP k p] (hres : Function.Bijective ((IsLocalRing.residue A).comp (algebraMap k A))) (E : Type w) (β : E → k) (hpb : ∃ b : Module.Basis {a : E →₀ ℕ // ∀ i : E, a i < p} (Subfield.closure (Set.range (fun x : k ↦ x ^ p))) k, ∀ a, b a = (a : E →₀ ℕ).prod (fun i e ↦ β i ^ e)) (F : Finset E → Subfield k) (hF : ∀ J : Finset E, F J = Subfield.closure (Set.range (fun x : k ↦ x ^ p) ∪ {x : k | ∃ i : E, i ∉ J ∧ β i = x})) [∀ J : Finset E, Algebra (F J) A] (hcomp : ∀ (J : Finset E) (x : F J), algebraMap (F J) A x = algebraMap k A (x : k)) (L : Type z) [Field L] [Algebra A L] [IsFractionRing A L] : ∃ J0 : Finset E, ∀ J : Finset E, J0 ⊆ J → Module.rank L (L ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) (KaehlerDifferential (F J) A)) = (d + J.card : ℕ)",
   "branch": "newtargets-dag",
-  "by": "Q85",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.CofinitePBasisCompletedGenericRank deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ec5046e4f",
-  "group": "Q85",
+  "reviewer": "NT-stage2-cc-b823f7f98",
+  "group": "Q157",
   "result": "pass",
-  "note": "Every clause matches the node: complete Noetherian local domain, char p with Fact p.Prime, ringKrullDim A = d with d >= 1, coefficient field via algebra map with bijective residue composite, p-basis as Module.Basis of bounded monomials over closure(range x^p) = k^p, F_J fixed by hF, algebra instances fixed by hcomp, M_J = AdicCompletion (maximalIdeal A) (KaehlerDifferential (F J) A), exists J0, forall J containing J0, Module.rank L (L tensor M_J) = d + |J|. No stronger assumption; universes u v w z independent. Edge cases E empty, J0 nonempty in general, infinite p-basis, d=0/p prime OK. Only the item lean record changed vs live; dep records identical; statement field verbatim. Docstrings have source, blueprint id and 6 proof steps; sorry only; imports are stmt_dep modules plus stated proof-dep and mathlib_match modules. No duplicate notion (trf continuous differentials differ). nt_compile --json clean (about 2 s); broken control copy fails. Advisory for stage 3: the cofinite-subfields node gained Lean record Sheaf.FieldTheory.CofiniteSubfieldsDifferentialRank after delivery; add the import then."
+  "note": "Only the item lean record changed vs live (live lean null after dead-module removal f6bf55e2b05); statement field verbatim in the module. Every clause matches node/ILO IV 2.1.6 (2.b): complete Noetherian local domain, CharP p prime, ringKrullDim=d>=1, coefficient field via hres, p-basis as Basis of bounded monomials over closure(Frobenius range)=k^p, F_J pinned by hF, algebra pinned by hcomp, M_J=AdicCompletion of Kaehler, exists J0 forall J⊇J0 Module.rank L (L⊗M_J)=d+|J|. No stronger assumption, independent universes, edge cases (E empty/infinite, J0 nonempty needed) OK. No defs, sorry only, docstrings with source/blueprint/6 steps, imports exist, no H4 duplicate, report sections present. Notes: stale reviewed_lean/lean_removed fields to refresh; node earlier unreached (dispatcher's call)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/CofinitePBasisCompletedGenericRank.lean",
+  "module": "Sheaf.RingTheory.CofinitePBasisCompletedGenericRank",
+  "declaration": "RingTheory.cofinitePBasisCompletedGenericRank",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

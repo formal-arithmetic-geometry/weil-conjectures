@@ -25,10 +25,10 @@
  ],
  "proof": [
   {
-   "text": "The structure maps to $\\operatorname{Spec}k$ and [lem-weil-pbc-finite-type-over-noetherian, lem-fin-finite-type-fibre-dimension-bound] show that $V,T$ are Noetherian and finite-dimensional; $\\ell$ stays invertible. Apply [prop-weil-pbc-integral-tstructure, prop-weil-localized-tstructure]. Composing their truncation comparisons and shifting gives $\\mathcal H^r(QL)\\cong Q\\mathcal H^r(L)$. Torsion identities vanish in the localized Hom groups [def-weil-pbc-rational-category], so bounded truncation triangles put $QL$ in the heart when its off-zero cohomologies are $\\varpi$-power torsion. The equivalence [lem-per-continuous-rational-derived-realization] identifies this heart with constructible continuous module sheaves; [det-lem-coefficient-heart-closure] identifies its exact sequences with sheaf exact sequences.",
+   "text": "The structure maps to $\\operatorname{Spec}k$ and [lem-weil-pbc-finite-type-over-noetherian, lem-kun-dimension-finite-type] show that $V,T$ are Noetherian and finite-dimensional; $\\ell$ stays invertible. Apply [prop-weil-pbc-integral-tstructure, prop-weil-localized-tstructure]. Composing their truncation comparisons and shifting gives $\\mathcal H^r(QL)\\cong Q\\mathcal H^r(L)$. Torsion identities vanish in the localized Hom groups [def-weil-pbc-rational-category], so bounded truncation triangles put $QL$ in the heart when its off-zero cohomologies are $\\varpi$-power torsion. The equivalence [lem-per-continuous-rational-derived-realization] identifies this heart with constructible continuous module sheaves; [det-lem-coefficient-heart-closure] identifies its exact sequences with sheaf exact sequences.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-dimension-finite-type",
     "prop-weil-pbc-integral-tstructure",
     "prop-weil-localized-tstructure",
     "def-weil-pbc-rational-category",
@@ -84,12 +84,24 @@
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
     "place": "Proposition 6.8.4, Definitions 6.8.3 and 6.8.6, Proposition 6.8.14 and Remark 6.8.15; finite quotient pullback/scalar comparisons and lisse ranks"
    }
+  },
+  {
+   "text": "For the intrinsic presentation, use [lem-intrinsic-adic-finite-fibre-cocone] on the uniquely normalized rational geometric fibres. The StageSystem descFunctor construction sends a pair (L,K) to its finite-stage fibre extended to Qbar. Its finite-stage restriction isomorphisms give SfAdicCommonFiberSpec. Combine with the original twelve clauses.",
+   "uses": [
+    "lem-intrinsic-adic-finite-fibre-cocone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), Proposition 6.8.14 and Remark 6.8.15; scalar compatibility before common-stage descent"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-rational-category",
   "det-lem-coefficient-heart-closure",
-  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-intrinsic-adic-finite-fibre-cocone",
+  "lem-kun-dimension-finite-type",
   "lem-per-adic-common-stage-truncations",
   "lem-per-adic-normalized-fibre-comparisons",
   "lem-per-adic-normalized-fibre-exactness",
@@ -102,7 +114,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Sections 6.8.2–6.8.15, with the raw rational/common-stage presentations and the generic t-structure descent made explicit"
+  "place": "BS 6.8.2–6.8.15. D4 proves base geometry directly using the source-library finite-type dimension bound (lem-kun-dimension-finite-type), constructs the stalk unit from global sections, and realizes completed integral restriction and coherent pullback through the existing PBC reduction and descent APIs. Remaining heart/fibre steps are unchanged. X2 adds the intrinsic common-stage clause: Proposition 6.8.4(6), Proposition 6.8.14 and Remark 6.8.15, scalar compatibility of the finite-stage fibres (lem-intrinsic-adic-finite-fibre-cocone) followed by StageSystem descent."
  },
  "mathlib_searches": [
   {
@@ -201,7 +213,6 @@
   "det-lem-coefficient-heart-common-stratification",
   "lem-a1-integral-pullback-completed-comparison",
   "lem-cbc-completed-pullback-triangles",
-  "lem-fin-finite-type-fibre-dimension-bound",
   "lem-pc-bounded-above-flat-kflat-site",
   "lem-pod-adic-limit-finite-modules",
   "lem-pod-lisse-tensor-and-scalar-extension",
@@ -260,22 +271,25 @@
   "note": "Section 1(B): the recorded theorem and its fibres use the lifted Pbc raw coefficient categories, while the current constructible Weil heart uses the intrinsic sf raw and general common-stage categories. This module publicly preserves the entire original interface and restates all twelve assertion clauses, supplying the actual constant-section-normalized coefficient-model transport and the section/fraction/common-stage fibre normalization needed by this consumer. No site universes or extra geometric hypotheses are identified."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "H1",
-  "result": "pass",
-  "landing": "20261019T132231-L-1205560",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.sfAdicCommonFiber_exists",
-   "WeilConjectures.sfAdicHeartPullbackFibres",
-   "WeilConjectures.sfAdicRationalFiber_existsUnique"
-  ],
-  "sorry_after": [
-   "WeilConjectures.sfAdicCommonFiber_exists"
-  ]
+  "reviewer": "C-60ab6",
+  "group": "X2",
+  "result": "fix",
+  "landing": "20261025T164720-L-1059828",
+  "kind": "interface",
+  "note": "independent cc review: item proof of sfAdicCommonFiber_exists vs stageSystem descFunctor + new sfAdicFiniteFiberCocone vs its node and stageSystem_existsUnique/associator; removed imports vs AdicHeartPullbackFibres transitive route and unit sk-p-dl-a1-perverse realized; 14 direct importers compiled (13 ok, DlLocalHeartCoverDefects pre-existing missing olean)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

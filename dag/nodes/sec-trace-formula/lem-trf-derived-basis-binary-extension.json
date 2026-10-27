@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-derived-basis-binary-extension",
+ "kind": "statement",
+ "title": "Extension of derived descent solutions across two open unions",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\mathcal B$ be a set of open subsets covering $X$, with $U\\cap V=\\bigcup_{T\\in\\mathcal B,\\,T\\subset U\\cap V}T$ for $U,V\\in\\mathcal B$. For every $U\\in\\mathcal B$ give $K_U\\in D(\\mathcal O_U)$ [def-pc-derived-category] and for every inclusion $V\\subset U$ in $\\mathcal B$ give an isomorphism $\\rho_V^U:K_U|_V\\xrightarrow{\\sim}K_V$, with $\\rho_U^U=1$ and $\\rho_T^U=\\rho_T^V\\circ(\\rho_V^U|_T)$ for $T\\subset V\\subset U$. Assume $\\operatorname{Hom}(K_U,K_U[i])=0$ for every $U\\in\\mathcal B$ and every integer $i<0$. For a union $O$ of members of $\\mathcal B$, put $\\mathcal B_O=\\{U\\in\\mathcal B:U\\subset O\\}$. A solution on $O$ means an object $F\\in D(\\mathcal O_O)$ with isomorphisms $s_U:F|_U\\xrightarrow{\\sim}K_U$ for every $U\\in\\mathcal B_O$, satisfying $\\rho_V^U\\circ(s_U|_V)=s_V$ for all inclusions $V\\subset U$ in $\\mathcal B_O$. Let $O_1,O_2$ be unions of members of $\\mathcal B$ with supplied solutions $(F_1,s_1)$ and $(F_2,s_2)$. There is a unique isomorphism $c_{12}:F_1|_{O_1\\cap O_2}\\xrightarrow{\\sim}F_2|_{O_1\\cap O_2}$ with $s_{2,V}\\circ(c_{12}|_V)=s_{1,V}$ for every $V\\in\\mathcal B_{O_1\\cap O_2}$. For any third union $O_3$ with a supplied solution, the similarly characterized comparisons satisfy $c_{13}=c_{23}\\circ c_{12}$ on $O_1\\cap O_2\\cap O_3$. There exist a solution $(F,s)$ on $O_1\\cup O_2$ and isomorphisms $f_j:F|_{O_j}\\xrightarrow{\\sim}F_j$ for $j=1,2$ such that $f_2|_{O_1\\cap O_2}=c_{12}\\circ(f_1|_{O_1\\cap O_2})$ and $s_U=s_{j,U}\\circ(f_j|_U)$ whenever $U\\in\\mathcal B_{O_j}$. The solution supplies $s_U$ and its inclusion equations for every $U\\in\\mathcal B_{O_1\\cup O_2}$, including those contained in neither $O_1$ nor $O_2$. No quasi-compactness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D69 (cohomology-remark-uniqueness), 0D6A (cohomology-lemma-solution-in-finite-case), and 0D6C (cohomology-theorem-glueing-bbd-general), overlap comparisons and successor step."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-trf-derived-module-open-map-comp-iso"
+ ],
+ "proof": [
+  {
+   "text": "Put $O=O_1\\cup O_2$ and $W=O_1\\cap O_2$. Every finite intersection of unions of $\\mathcal B$ is again a union of $\\mathcal B$: for a point in the intersection choose a containing member in each union and repeatedly use the intersection-refinement hypothesis. Consequently $\\mathcal B_W$ covers $W$, and any two of its members have their intersection covered by smaller members of $\\mathcal B_W$. The same holds for a triple intersection and for every union considered below. We regard each such open as its open subscheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D69 (cohomology-remark-uniqueness), restriction of the intersection-refining family"
+   }
+  },
+  {
+   "text": "On $V\\in\\mathcal B_W$ set $a_V=s_{2,V}^{-1}\\circ s_{1,V}$. The solution equations give $a_U|_V=s_{2,V}^{-1}(\\rho_V^U)(\\rho_V^U)^{-1}s_{1,V}=a_V$ when $V\\subset U$. For each of the four ordered pairs of objects among $F_1|_W,F_2|_W$, their restrictions to $V$ are isomorphic to $K_V$, so their negative Hom groups vanish by conjugating with the supplied isomorphisms. Apply [lem-trf-derived-basis-local-hom-glue] on $W$ with family $\\mathcal B_W$. It glues $(a_V)$ to a unique map $c_{12}$ and $(a_V^{-1})$ to a map in the reverse direction. Injectivity in that same result for both endomorphism pairs shows their composites are identities, since their restrictions to every $V$ are identities. Thus $c_{12}$ is the required unique isomorphism.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D68 (cohomology-lemma-uniqueness) and 0D69 (cohomology-remark-uniqueness)"
+   }
+  },
+  {
+   "text": "For three solutions repeat step 2 on their pairwise intersections. On each $V\\in\\mathcal B$ contained in the triple intersection, the restrictions of $c_{23}c_{12}$ and $c_{13}$ are both $s_{3,V}^{-1}s_{1,V}$. Apply injectivity in [lem-trf-derived-basis-local-hom-glue] on that intersection for the pair $F_1,F_3$, whose local negative Hom vanishes by their identifications with $K_V$. This proves the asserted cocycle equation.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D69 (cohomology-remark-uniqueness), triple-intersection equation"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-derived-open-gluing-objects] to the scheme $O$, its two opens $O_1,O_2$, and the objects $F_1,F_2$ with overlap isomorphism $c_{12}$. It gives $F\\in D(\\mathcal O_O)$ and isomorphisms $f_j:F|_{O_j}\\to F_j$ satisfying $f_2|_W=c_{12}(f_1|_W)$. Its conclusion uses the canonical iterated-restriction comparisons; we use those same comparisons in all following restriction equations.",
+   "uses": [
+    "lem-sc-derived-open-gluing-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG (cohomology-lemma-glue), object-gluing assertion"
+   }
+  },
+  {
+   "text": "Fix any $U\\in\\mathcal B_O$, including a member crossing both pieces. Let $\\mathcal C_U=\\{V\\in\\mathcal B:V\\subset U,\\ V\\subset O_1\\text{ or }V\\subset O_2\\}$. It covers $U$: choose a member $A$ contained in a piece and containing the point, then refine $A\\cap U$. It is intersection-refining because a smaller member of the intersection remains in a piece. For $V\\in\\mathcal C_U$ define $\\tau_V=s_{j,V}(f_j|_V)$ using a piece containing $V$. If both pieces contain $V$, step 2 and step 4 give $s_{2,V}(f_2|_V)=s_{2,V}(c_{12}|_V)(f_1|_V)=s_{1,V}(f_1|_V)$, so the definition is independent of $j$. For $T\\subset V$ in $\\mathcal C_U$ choose the same piece as for $V$; then $\\rho_T^V(\\tau_V|_T)=\\tau_T$. Define $b_V=(\\rho_V^U)^{-1}\\tau_V:F|_V\\to K_U|_V$. The cocycle equation for $\\rho$ gives $b_V|_T=(\\rho_T^U)^{-1}\\tau_T=b_T$. All $b_V$ are isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6A (cohomology-lemma-solution-in-finite-case), two-open case: the family B-prime and its two solutions"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-basis-local-hom-glue] on $U$ with family $\\mathcal C_U$ and pair $F|_U,K_U$. On $V\\in\\mathcal C_U$ both objects are isomorphic to $K_V$, through $\\tau_V$ and $\\rho_V^U$, so its negative-Hom hypothesis holds. The compatible $b_V$ glue uniquely to $s_U:F|_U\\to K_U$. Apply the same result in the reverse direction to $b_V^{-1}$, and for each endomorphism pair to compare the two composites with the identity. All these pairs have local negative Hom zero by the same identifications with $K_V$. Injectivity therefore shows that $s_U$ is an isomorphism, with $\\rho_V^U(s_U|_V)=\\tau_V$ for every $V\\in\\mathcal C_U$. This construction applies to every $U\\in\\mathcal B_O$.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D68 and 0D6A (cohomology-lemma-solution-in-finite-case), unique comparison of the two solutions on U"
+   }
+  },
+  {
+   "text": "If $U\\subset O_j$, the map $s_{j,U}(f_j|_U)$ has the same restrictions $b_V$ as $s_U$ on $\\mathcal C_U$, by the solution equations. Injectivity in [lem-trf-derived-basis-local-hom-glue] for $F|_U,K_U$ gives their equality. For an arbitrary inclusion $T\\subset U$ in $\\mathcal B_O$, every $V\\in\\mathcal C_T$ also lies in $\\mathcal C_U$. Thus $\\rho_V^T((\\rho_T^U(s_U|_T))|_V)=\\rho_V^U(s_U|_V)=\\tau_V=\\rho_V^T(s_T|_V)$. Cancel $\\rho_V^T$ and use injectivity for the pair $F|_T,K_T$ on $\\mathcal C_T$ to conclude $\\rho_T^U(s_U|_T)=s_T$. Its local negative Hom hypothesis again follows from $\\tau_V,\\rho_V^T$. Hence all structure maps, including the crossing ones, satisfy the required equations. Empty opens or an empty family on the empty scheme are included by the empty-cover clause of the Hom-gluing lemma and the unrestricted two-open gluing assertion; no finite subcover or cohomological bound was used.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6A (cohomology-lemma-solution-in-finite-case), verification left to the reader after constructing rho-U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-basis-local-hom-glue",
+  "lem-sc-derived-open-gluing-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D68, 0D69 and 0D6A, two-open construction, using Tag 08DG; the two pieces are supplied solutions on unions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend solutions of derived category descent across the union of two opens with vanishing negative self Ext and all basis restriction identifications",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.OpenCover.ext_elem', 'CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext', \"TopCat.Sheaf.existsUnique_gluing'\", 'TopCat.Sheaf.existsUnique_gluing', 'AlgebraicGeometry.Scheme.zero_of_zero_cover', 'AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux', 'TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types', 'CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf']; note=; digest=91205cb096c22c52",
+   "date": "2026-10-22",
+   "verdict": "no match: hits glue ordinary sheaf sections or schemes; none extends supplied derived solutions and all original-family identifications across two opens. The valid Loogle query and derived-gluing source greps find no declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue two already constructed derived objects on open subsets with a prescribed overlap isomorphism and extend the identifications to every member of an open basis",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.GlueData', 'AlgebraicGeometry.Scheme.GlueData.glued', 'AlgebraicGeometry.LocallyRingedSpace.GlueData', 'TopCat.GlueData.ofOpenSubsets', 'AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion', 'AlgebraicGeometry.LocallyRingedSpace.GlueData.recOn', 'TopCat.GlueData.ofOpenSubsets_toGlueData_V', \"TopCat.GlueData.mk'\"]; note=; digest=35758e403afe6da1",
+   "date": "2026-10-22",
+   "verdict": "no match: hits glue ordinary sheaf sections or schemes; none extends supplied derived solutions and all original-family identifications across two opens. The valid Loogle query and derived-gluing source greps find no declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"glue\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits glue ordinary sheaf sections or schemes; none extends supplied derived solutions and all original-family identifications across two opens. The valid Loogle query and derived-gluing source greps find no declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|DerivedCategory).*(glue|gluing|descent)|(glue|gluing|descent).*(derived|DerivedCategory)",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: hits glue ordinary sheaf sections or schemes; none extends supplied derived solutions and all original-family identifications across two opens. The valid Loogle query and derived-gluing source greps find no declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "BBD finite open gluing: extend derived descent solutions on two open unions to their union, including basis opens crossing both pieces",
+   "results": "8 hits; top=['TopCat.Presheaf.isGluing_iff_pairwise', 'TopCat.Presheaf.IsGluing', 'AlgebraicGeometry.Scheme.Cover.gluedCover', 'TopCat.GlueData.ofOpenSubsets_toGlueData_V', \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"TopCat.GlueData.mk'\", 'TopCat.GlueData.ofOpenSubsets', 'AlgebraicGeometry.Scheme.GlueData.openCover']; note=; digest=c52a1da99f544099",
+   "date": "2026-10-22",
+   "verdict": "no match: hits glue ordinary sheaf sections or schemes; none extends supplied derived solutions and all original-family identifications across two opens. The valid Loogle query and derived-gluing source greps find no declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "BBD|[Dd]erived.*[Gg]lu|[Gg]lu.*[Dd]erived",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits glue ordinary sheaf sections or schemes; none extends supplied derived solutions and all original-family identifications across two opens. The valid Loogle query and derived-gluing source greps find no declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"glue\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/topological gluing and abstract derived-category or Ext declarations do not supply this unbounded descent extension with all crossing-family identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|DerivedCategory).*(glue|gluing|descent)|(glue|gluing|descent).*(derived|DerivedCategory)",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/topological gluing and abstract derived-category or Ext declarations do not supply this unbounded descent extension with all crossing-family identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "BBD descent for unbounded derived categories with vanishing negative Ext on a basis of open subsets",
+   "results": "8 hits; top=['HasDerivedCategory.standard', 'CategoryTheory.HasProjectiveDimensionLT.mk', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", 'CategoryTheory.hasExt_of_enoughProjectives', 'DerivedCategory.right_fac_of_isStrictlyLE', 'CategoryTheory.instAB4OfSize', 'CategoryTheory.instAB4StarOfSize', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE']; note=; digest=fc9351b682d7b098",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/topological gluing and abstract derived-category or Ext declarations do not supply this unbounded descent extension with all crossing-family identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue two derived objects on open subsets with negative self extensions zero and extend compatible identifications to every original basis open",
+   "results": "8 hits; top=['TopCat.GlueData.ofOpenSubsets_toGlueData_V', 'TopCat.Presheaf.IsGluing', \"TopCat.Sheaf.existsUnique_gluing'\", 'TopCat.Sheaf.existsUnique_gluing', 'AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk', 'TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types', \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", 'TopCat.Presheaf.IsSheafUniqueGluing']; note=; digest=b53ec0b840574bb8",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/topological gluing and abstract derived-category or Ext declarations do not supply this unbounded descent extension with all crossing-family identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible derived category morphisms glue uniquely over an intersection refining open cover when all negative Ext groups vanish",
+   "results": "8 hits; top=[\"TopCat.Sheaf.existsUnique_gluing'\", 'TopCat.Sheaf.existsUnique_gluing', 'CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue', 'CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue', 'TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types', 'CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE', 'TopCat.Presheaf.IsSheaf.isSheafUniqueGluing']; note=; digest=d66769b8bfc8bf43",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/topological gluing and abstract derived-category or Ext declarations do not supply this unbounded descent extension with all crossing-family identifications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-basis-bbd-descent",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; BBD descent for derived objects with vanishing negative self extensions. Re-split component: BBD descent of the polynomial-chart dualizing object: the overlap comparison and successor construction, previously steps 2, 4 and 5 of lem-trf-derived-basis-bbd-descent.",
+   "via": [
+    "lem-trf-derived-basis-bbd-descent",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-derived-basis-binary-extension",
+  "worker": "stage1",
+  "summary": "Q77 expands overlap comparison, binary gluing and all crossing-member equations using two existing nodes; no new nodes, no statement change. Constructed inverses by Hom gluing rather than assuming isomorphisms descend.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; BBD descent for derived objects with vanishing negative self extensions. Re-split component: BBD descent of the polynomial-chart dualizing object: the overlap comparison and successor construction, previously steps 2, 4 and 5 of lem-trf-derived-basis-bbd-descent. Steps 1-3 give the overlap comparison; step 4 glues objects; steps 5-7 supply and verify every original-family structure map.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-derived-open-gluing-objects",
+    "why": "Generic two-open object-gluing theorem, Stacks 08DG, used as a black box for the open scheme O; the unit has no distinct replacement for this derived-category construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-derived-open-gluing-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-2407c0ae1",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-2407c0ae1 (reviewer sub-agent of L); spot-checked: I read the item's 7 steps in full against Stacks cohomology.tex 0D68, 0D69, 0D6A (n=2) and 08DG (lemma-glue l.11071; tags checked). The delivery has 0 new nodes and the statement and stmt_deps are unchanged. Steps 2 and 3: lem-trf-derived-basis-local-hom-glue on W=O1∩O2 (and on the triple intersection) with B_W. Its negative-Hom hypothesis comes from s_{j,V} and K_V; it gives the unique c12, the inverse comes from the a_V^{-1} family, and injectivity gives the cocycle. Step 4 uses lem-sc-derived-open-gluing-objects (08DG, object existence only). It is a tool of unit sk-thm-picard-duality, declared in split_report.tool_uses, and is the call the source makes; accepted under C8. Steps 5-7: C_U covers U and is intersection-refining. τ is independent of the piece by steps 2 and 4. I checked b_V|_T=b_T with the ρ cocycle. s_U is glued and inverted by the Hom bijection. The solution equations on crossing members and on U⊂O_j are proved through C_T⊂C_U, and I checked the cancellation chain. This writes out the details 0D6A leaves to the reader. Edge cases: empty pieces (the empty-family clause, which the parent's first successor step needs), O1=O2, disjoint pieces, ∅∈B, members crossing both pieces. The parent bbd-descent step 3 uses the statement as given (O1=U_α, O2=W_α). Duplicate search over dag/nodes for 0D66/0D68/0D69/0D6A/0D6C and 'negative self' found only the derived-basis family and unrelated nodes. No SGA; citations match uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedBasisBinaryExtension",
+  "declaration": "AlgebraicGeometry.derived_basis_binary_extension",
+  "declarations": [
+   "AlgebraicGeometry.DerivedBasisBinary.System",
+   "AlgebraicGeometry.DerivedBasisBinary.Solution",
+   "AlgebraicGeometry.DerivedBasisBinary.restrictHom",
+   "AlgebraicGeometry.DerivedBasisBinary.IsComparison",
+   "AlgebraicGeometry.derived_basis_binary_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBasisBinaryExtension.lean",
+  "statement": "theorem derived_basis_binary_extension (X : Scheme.{u}) [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (B : Set X.Opens) (hcover : sSup B = ⊤) (hrefine : ∀ U ∈ B, ∀ V ∈ B, sSup {T : X.Opens | T ∈ B ∧ T ≤ U ⊓ V} = U ⊓ V) (D : System X B) (hnegative : ∀ (U : {U : X.Opens // U ∈ B}) (i : ℤ), i < 0 → Subsingleton (D.K U ⟶ (D.K U)⟦i⟧)) (O₁ O₂ : X.Opens) (hO₁ : sSup {U : X.Opens | U ∈ B ∧ U ≤ O₁} = O₁) (hO₂ : sSup {U : X.Opens | U ∈ B ∧ U ≤ O₂} = O₂) (S₁ : Solution X D O₁) (S₂ : Solution X D O₂) : ∃ c₁₂ : (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (inf_le_left : O₁ ⊓ O₂ ≤ O₁))).mapDerivedCategory.obj S₁.F ≅ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (inf_le_right : O₁ ⊓ O₂ ≤ O₂))).mapDerivedCategory.obj S₂.F, IsComparison X S₁ S₂ c₁₂ ∧ (∀ c, IsComparison X S₁ S₂ c → c = c₁₂) ∧ (∀ (O₃ : X.Opens), sSup {U : X.Opens | U ∈ B ∧ U ≤ O₃} = O₃ → ∀ (S₃ : Solution X D O₃) (c₁₃ : (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (inf_le_left : O₁ ⊓ O₃ ≤ O₁))).mapDerivedCategory.obj S₁.F ≅ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (inf_le_right : O₁ ⊓ O₃ ≤ O₃))).mapDerivedCategory.obj S₃.F) (c₂₃ : (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (inf_le_left : O₂ ⊓ O₃ ≤ O₂))).mapDerivedCategory.obj S₂.F ≅ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (inf_le_right : O₂ ⊓ O₃ ≤ O₃))).mapDerivedCategory.obj S₃.F), IsComparison X S₁ S₃ c₁₃ → IsComparison X S₂ S₃ c₂₃ → restrictHom X inf_le_left inf_le_right (le_inf (inf_le_left.trans inf_le_left) inf_le_right : O₁ ⊓ O₂ ⊓ O₃ ≤ O₁ ⊓ O₃) S₁.F S₃.F c₁₃.hom = restrictHom X inf_le_left inf_le_right (inf_le_left : O₁ ⊓ O₂ ⊓ O₃ ≤ O₁ ⊓ O₂) S₁.F S₂.F c₁₂.hom ≫ restrictHom X inf_le_left inf_le_right (le_inf (inf_le_left.trans inf_le_right) inf_le_right : O₁ ⊓ O₂ ⊓ O₃ ≤ O₂ ⊓ O₃) S₂.F S₃.F c₂₃.hom) ∧ ∃ (S : Solution X D (O₁ ⊔ O₂)) (f₁ : (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (le_sup_left : O₁ ≤ O₁ ⊔ O₂))).mapDerivedCategory.obj S.F ≅ S₁.F) (f₂ : (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (le_sup_right : O₂ ≤ O₁ ⊔ O₂))).mapDerivedCategory.obj S.F ≅ S₂.F), ((derivedModuleOpenMapCompIso X (homOfLE inf_le_left) (homOfLE le_sup_left)).inv.app S.F ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE inf_le_left)).mapDerivedCategory.map f₁.hom ≫ c₁₂.hom = (derivedModuleOpenMapCompIso X (homOfLE inf_le_right) (homOfLE le_sup_right)).inv.app S.F ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE inf_le_right)).mapDerivedCategory.map f₂.hom) ∧ (∀ (U : {U : X.Opens // U ∈ B}) (hU : U.val ≤ O₁), (S.s U (hU.trans le_sup_left)).hom = (derivedModuleOpenMapCompIso X (homOfLE hU) (homOfLE le_sup_left)).inv.app S.F ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hU)).mapDerivedCategory.map f₁.hom ≫ (S₁.s U hU).hom) ∧ (∀ (U : {U : X.Opens // U ∈ B}) (hU : U.val ≤ O₂), (S.s U (hU.trans le_sup_right)).hom = (derivedModuleOpenMapCompIso X (homOfLE hU) (homOfLE le_sup_right)).inv.app S.F ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hU)).mapDerivedCategory.map f₂.hom ≫ (S₂.s U hU).hom)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the shared localized-open-site model of D(O_U), canonically equivalent via Scheme.Modules.overEquiv U to modules on the open subscheme. The item-owned helpers package its explicitly stated system, solution, and comparison equations. The canonical comparison definitions moduleOpenMapCompIso and derivedModuleOpenMapCompIso are owned by def-trf-derived-module-open-map-comp-iso, recorded existing:true on Sheaf.AlgebraicGeometry.DerivedBasisIncreasingUnion. The increasing-union theorem is not a statement dependency. The downstream BBD module is not imported, so the identity normalization is the explicit sectionwise-identity natural isomorphism localized by Mathlib."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-583599411",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery fixes the 743e H2/H12 return: the theorem stmt_dep is replaced by new def node def-trf-derived-module-open-map-comp-iso (existing:true on DerivedBasisIncreasingUnion; moduleOpenMapCompIso/derivedModuleOpenMapCompIso bodies read in live source and match the node). Item node differs from live only in lean+stmt_deps; lean.statement verbatim in file. Clause check vs node/Stacks 0D67-0D6C: hcover, hrefine, System K/rho/rho_id (inline = derivedModuleOpenMapIdIso body)/rho_comp, hnegative Subsingleton, union hypotheses, Solution F/s/compatible; conclusion ∃ c12 with IsComparison and uniqueness, triple cocycle for every O3/S3/c13/c23 via restrictHom, ∃ S on O1⊔O2 with f1,f2, overlap equation and s_U = s_j,U∘f_j|U, crossing members via Solution fields. No extra assumptions; empty/disjoint/equal pieces covered. Helpers real-data with docstrings; sole sorry is the main theorem; report sections present. No compile (no file changed). Advisory: parallel N6 limit-extension 76cb adds def-trf-module-open-map-comp-iso owning the same two declarations; second lander must drop_nodes and rebind its stmt_dep."
+ }
+}

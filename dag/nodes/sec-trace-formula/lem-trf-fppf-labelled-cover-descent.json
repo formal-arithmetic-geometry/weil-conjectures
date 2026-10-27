@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-fppf-labelled-cover-descent",
+ "kind": "statement",
+ "title": "Descent of a labelled fppf cover to clopen pieces and component sections",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and fix its big fppf site [def-pc-fppf-site] within the size convention [def-weil-size-convention]. Let $T$ be an object, let $\\{g_\\alpha:U_\\alpha\\to T\\}_{\\alpha\\in A}$ be a small fppf covering family, and let $\\lambda:A\\to I$ be a labelling by a small set. Suppose that $U_\\alpha\\times_TU_\\beta=\\varnothing$ whenever $\\lambda(\\alpha)\\ne\\lambda(\\beta)$, where fibre products have the meaning of [def-pc-fibre-product]. For each $i\\in I$ let $G_i$ be a sheaf of sets on the site [def-weil-pbc-sites-and-cohomology]. Suppose given $s_\\alpha\\in G_{\\lambda(\\alpha)}(U_\\alpha)$ such that, whenever $\\lambda(\\alpha)=\\lambda(\\beta)=i$, their pullbacks to $U_\\alpha\\times_TU_\\beta$ agree in $G_i$. Then the subsets $T_i=\\bigcup_{\\lambda(\\alpha)=i}g_\\alpha(U_\\alpha)$, with their open subscheme structures [def-weil-open-immersion], are pairwise disjoint open and closed subschemes covering $T$. Their inclusions exhibit $T$ as their coproduct as schemes, in the sense of [def-weil-pbc-category-colimit]. Each $g_\\alpha$ factors through $T_{\\lambda(\\alpha)}$, and there are unique sections $a_i\\in G_i(T_i)$ whose pullback to every $U_\\alpha$ with label $i$ is $s_\\alpha$. Empty index sets, empty covering members and empty pieces are permitted.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed), proof from the empty mixed fibre products through the disjoint open images; Tag 02WO (lemma-representable-sheaf-coproduct-sheaves), scheme decomposition. Agent set-indexed cover-and-section version, using morphisms.tex Tag 01UA (lemma-fppf-open), Tag 01S1 (lemma-base-change-surjective), and the sheaf equalizer axiom."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-open-immersion",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "By [def-pc-fppf-site], the maps are flat and locally of finite presentation, and their images cover T. Their images are open by [lem-weil-pbc-flat-lfp-open]. Given a point in two differently labelled images, apply the point-lifting consequence of [lem-weil-pbc-base-change-image] to the pullback square obtained from the Over S pullback by its forgetful functor. This gives a point of the mixed pullback, contradicting its emptiness.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed), proof, disjoint open images; morphisms.tex Tags 01UA (lemma-fppf-open) and 01S1 (lemma-base-change-surjective), image formula in the proof"
+   }
+  },
+  {
+   "text": "For every $i$, the union $T_i=\\bigcup_{\\lambda(\\alpha)=i}g_\\alpha(U_\\alpha)$ is open, so equip it with the restricted structure sheaf and write $j_i:T_i\\hookrightarrow T$ for its open-subscheme inclusion [def-weil-open-immersion]. Step 1 shows that the $T_i$ are pairwise disjoint and cover $T$. Consequently $T\\setminus T_i=\\bigcup_{j\\ne i}T_j$ is open, so $T_i$ is also closed. These are unions indexed by subsets of the given small sets, within [def-weil-size-convention]. No finiteness or quasi-compactness is used.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed), proof, the two complementary open unions; agent-written set-indexed extension"
+   }
+  },
+  {
+   "text": "For each a with label a = i, its image lies in T_i by definition. The open-immersion lifting API (IsOpenImmersion.lift and lift_fac) constructs the unique h_a into T_i with h_a followed by j_i equal to g_a. This API is the inverse of the isomorphism onto the image, restricted to g_a: the same factorization as the planned base-change construction, without explicitly forming its pullback. The composite to S is g_a followed by T to S, so this is a morphism over S.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY (lemma-base-change-immersion), open-immersion case; Tag 01HH (lemma-open-immersion), isomorphism onto the image; morphisms.tex Tag 01S1, image formula in the proof"
+   }
+  },
+  {
+   "text": "To prove the claimed coproduct universal property, let $Z$ be any scheme and choose maps $b_i:T_i\\to Z$. On an intersection of different pieces both restrictions have empty source and are the unique map from the empty scheme; on a self-intersection they agree with $b_i$. The open-cover gluing theorem [lem-weil-pbc-scheme-morphism-gluing] gives a unique $b:T\\to Z$ with $b\\circ j_i=b_i$ for all $i$. This is precisely the colimit property of [def-weil-pbc-category-colimit] for the discrete small category on $I$. It proves that the actual inclusions $j_i$, rather than just some isomorphic pieces, exhibit $T$ as the scheme coproduct. The same argument works for an empty open cover of the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JA (section-glueing-schemes), mapping property of Tag 01JB (lemma-glue); sheaves.tex Tag 00AN (lemma-mapping-property-glue); agent-written disjoint-cover specialization"
+   }
+  },
+  {
+   "text": "For fixed i, index by the subtype of members a with label a = i. These factorizations jointly cover T_i by its definition. For each such a, the square with top map the identity of U_a, left map h_a, right map g_a, and bottom map the monomorphism j_i is a pullback: its universal property follows by cancelling j_i, using [lem-weil-pbc-open-immersion-monomorphism]. Thus h_a is flat and locally of finite presentation by base-change stability, so the subtype family is an fppf cover by [def-pc-fppf-site]. For any two maps p and q to members whose composites with h agree, their composites with g agree after j_i. The universal property [def-pc-fibre-product] gives a map to the original overlap. Pulling back the original matching equation along this map gives compatibility on every test object. This directly proves compatibility without choosing an overlap comparison isomorphism or adding empty covering members.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021O (lemma-fppf), part (3); morphisms.tex Tag 01S1, image formula in the proof; schemes.tex Tag 01L7 (lemma-immersions-monomorphisms); agent-written removal of empty members and universal-property comparison"
+   }
+  },
+  {
+   "text": "The subtype family defines a covering sieve in the over topology: Sieve.overEquiv_ofArrows identifies its underlying sieve with the fppf covering sieve from step 5. Apply the Type-valued sheaf axiom [def-weil-pbc-sites-and-cohomology], in its Presieve.isSheafFor_arrows_iff form, to obtain a unique section with the given restrictions. Unpack the subtype to recover the proof-indexed restrictions in the conclusion. The set-theoretic unions, the empty initial scheme used in step 4, the subtype cover and the sheaf axiom all permit empty types, so no inhabitedness assumption is needed.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VM (definition-sheaf-sets), equalizer axiom and following explanation of unique gluing; topologies.tex Tag 021L (section-fppf), definition of fppf covering"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-base-change-image",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 0F15 and 02WO, expanded to labelled families; direct Mathlib open-immersion lifting, open-cover gluing, subtype fppf covering, and sheaf amalgamation. Full Lean proof by N3, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(fppf|cover).*(partition|[Cc]lopen)|([Cc]lopen|partition).*(fppf|cover)",
+   "results": "{\"t\": \"2026-10-22T06:00:06Z\", \"tool\": \"grep\", \"query\": \"(fppf|cover).*(partition|[Cc]lopen)|([Cc]lopen|partition).*(fppf|cover)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern gluing schemes or sections on a topological space, or isolated quasi-finite fibre points; none descends an arbitrary labelled fppf cover to clopen scheme pieces together with its component sheaf sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"isClopen\"",
+   "results": "{\"t\": \"2026-10-22T06:00:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"isClopen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\"], \"digest\": \"15628ec0b2832814\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern gluing schemes or sections on a topological space, or isolated quasi-finite fibre points; none descends an arbitrary labelled fppf cover to clopen scheme pieces together with its component sheaf sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Disjoint labelled open images of an fppf cover define open closed pieces, and compatible sections of sheaves descend to these pieces",
+   "results": "{\"t\": \"2026-10-22T06:00:07Z\", \"tool\": \"leansearch\", \"query\": \"Disjoint labelled open images of an fppf cover define open closed pieces, and compatible sections of sheaves descend to these pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Presheaf.IsCompatible\", \"TopCat.Presheaf.IsSheaf.isSheafOpensLeCover\", \"TopCat.Presheaf.IsCompatible.sectionPairwise\", \"TopCat.Presheaf.IsSheafOpensLeCover\", \"AlgebraicGeometry.Scheme.GlueData.openCover\"], \"digest\": \"8ffc92888d6816ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern gluing schemes or sections on a topological space, or isolated quasi-finite fibre points; none descends an arbitrary labelled fppf cover to clopen scheme pieces together with its component sheaf sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf covering of a scheme with labels whose differently labelled fibre products are empty descends to a clopen partition and glues compatible sheaf sections",
+   "results": "{\"t\": \"2026-10-22T06:00:20Z\", \"tool\": \"leanfinder\", \"query\": \"An fppf covering of a scheme with labels whose differently labelled fibre products are empty descends to a clopen partition and glues compatible sheaf sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_J\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_V\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map\"], \"digest\": \"6a2ae720df39b1d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern gluing schemes or sections on a topological space, or isolated quasi-finite fibre points; none descends an arbitrary labelled fppf cover to clopen scheme pieces together with its component sheaf sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Scheme.Hom",
+   "results": "{\"t\": \"2026-10-22T07:03:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Scheme.Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply\"], \"digest\": \"44474ff5ac3bcac4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits are topological or Zariski gluing, scheme open-cover gluing, or scheme covering constructions; none states labelled fppf image descent together with component sheaf sections. Scheme.Cover.glueMorphisms is used through the existing Mathlib leaf lem-weil-pbc-scheme-morphism-gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A labelled fppf covering with empty mixed fibre products induces clopen pieces and unique glued sections of component sheaves",
+   "results": "{\"t\": \"2026-10-22T07:03:35Z\", \"tool\": \"leanfinder\", \"query\": \"A labelled fppf covering with empty mixed fibre products induces clopen pieces and unique glued sections of component sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_J\"], \"digest\": \"293381b4a639a7eb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits are topological or Zariski gluing, scheme open-cover gluing, or scheme covering constructions; none states labelled fppf image descent together with component sheaf sections. Scheme.Cover.glueMorphisms is used through the existing Mathlib leaf lem-weil-pbc-scheme-morphism-gluing."
+  },
+  {
+   "tool": "grep",
+   "query": "(fppf|cover).*(partition|[Cc]lopen)|([Cc]lopen|partition).*(fppf|cover)",
+   "results": "{\"t\": \"2026-10-22T07:03:44Z\", \"tool\": \"grep\", \"query\": \"(fppf|cover).*(partition|[Cc]lopen)|([Cc]lopen|partition).*(fppf|cover)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits are topological or Zariski gluing, scheme open-cover gluing, or scheme covering constructions; none states labelled fppf image descent together with component sheaf sections. Scheme.Cover.glueMorphisms is used through the existing Mathlib leaf lem-weil-pbc-scheme-morphism-gluing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A jointly surjective family of flat locally finitely presented scheme maps with disjoint labelled images gives a clopen decomposition and sheaf gluing",
+   "results": "{\"t\": \"2026-10-22T07:03:45Z\", \"tool\": \"leansearch\", \"query\": \"A jointly surjective family of flat locally finitely presented scheme maps with disjoint labelled images gives a clopen decomposition and sheaf gluing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.Scheme.JointlySurjective.mk\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.Cover.mkOfCovers\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\"], \"digest\": \"0c787f913d4fc851\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits are topological or Zariski gluing, scheme open-cover gluing, or scheme covering constructions; none states labelled fppf image descent together with component sheaf sections. Scheme.Cover.glueMorphisms is used through the existing Mathlib leaf lem-weil-pbc-scheme-morphism-gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend a partition of a covering family of schemes and glue matching sections of sheaves on a site",
+   "results": "{\"t\": \"2026-10-22T07:03:53Z\", \"tool\": \"leanfinder\", \"query\": \"Descend a partition of a covering family of schemes and glue matching sections of sheaves on a site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map\"], \"digest\": \"16731c29659acf41\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits are topological or Zariski gluing, scheme open-cover gluing, or scheme covering constructions; none states labelled fppf image descent together with component sheaf sections. Scheme.Cover.glueMorphisms is used through the existing Mathlib leaf lem-weil-pbc-scheme-morphism-gluing."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_gluing|sheafValGluedMk|def gluedCover",
+   "results": "{\"t\": \"2026-10-22T07:04:04Z\", \"tool\": \"grep\", \"query\": \"existsUnique_gluing|sheafValGluedMk|def gluedCover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Flasque.lean\", \"Mathlib/Topology/Sheaves/Flasque.lean\", \"Mathlib/Topology/Sheaves/LocalPredicate.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\"], \"digest\": \"37928481dda2a3c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits are topological or Zariski gluing, scheme open-cover gluing, or scheme covering constructions; none states labelled fppf image descent together with component sheaf sections. Scheme.Cover.glueMorphisms is used through the existing Mathlib leaf lem-weil-pbc-scheme-morphism-gluing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fppf-sheaf-coproduct-partition",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the Tag 02WQ coproduct in the etale-relation quotient used in polarized scheme descent: the scheme-test decomposition needed to fill the omitted diagonal verification and to test the coproduct atlas. Historical ancestry through lem-trf-local-term-locality is retained. Re-split of the supporting fppf-partition argument: old proof steps 3, 4 and 5 (open-image descent and glued component sections).",
+   "via": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-fppf-labelled-cover-descent",
+  "worker": "stage1",
+  "group": "Q43",
+  "summary": "Split into six explicit steps using existing Mathlib leaves and definitions only. Proved disjointness through the fibre-product image formula, factorization through surjective open-immersion projections, the actual coproduct inclusions by open-cover gluing, the label subcovers by base change and removal of empty members, and section descent by the defining equalizer. No statement change, no new nodes, no attachment, and all empty cases checked.",
+  "blueprint": "Historical ancestry lem-trf-local-term-locality retained: this is the supporting labelled-cover descent argument in lem-trf-fppf-sheaf-coproduct-partition (old steps 3-5), used in the Tag 02WQ coproduct atlas for the etale-relation quotient and polarized scheme descent. The split realizes the current item source Tag 0F15 proof, disjoint open image paragraph, without changing any chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-4a2e7a737",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-4a2e7a737 (reviewer sub-agent of L); spot-checked: I read the full proof and every cited statement. Shape: one commit with the item and the report only. There are no new nodes, and the statement and stmt_deps are unchanged since Q01 created the item. proof_deps equals the union of the step uses, and there is no SGA. Source: spaces.tex Tag 0F15 (empty mixed fibre products, disjoint open images via 01UA) and Tag 02WO. The item is the set-indexed version of that argument plus the descent of sections, with matching hypotheses. Steps: (1) flat-lfp-open gives open images; base-change-image with C=U_alpha gives g_beta^{-1}(g_alpha(U_alpha)) = q(P) = empty, so images with different labels are disjoint. (2) Elementary: the T_i are pairwise disjoint and cover T, and each complement is open. (3) The base change q of j_i is an open immersion with image g_alpha^{-1}(T_i) = U_alpha, so it is an isomorphism (isoOpensRange) and h_alpha = p∘q^{-1} satisfies j_i∘h_alpha = g_alpha. (4) Scheme-morphism gluing over the disjoint open cover gives the coproduct of the discrete diagram. (5) Base change of the cover along j_i; differently labelled members are empty and same-label members are identified with h_alpha. Fibre products over T_i and over T agree because j_i is monic. (6) The sheaf equalizer axiom gives the unique a_i, and an empty label class gives the singleton G_i(empty). Edge cases checked: one label; two components; repeated members; unused label; empty member; A empty; I empty. Duplicate search over 0F15/02WO and fppf+clopen+label found only the parent's sheaf-level siblings and scheme-coproduct-family; none is a duplicate. Every citation is a definition or a Mathlib leaf, so there is no route issue and no tool_uses are needed. Advisory for the maintainer: the parent's step 3 uses the fppf covering of T_i by the h_alpha, which the item's statement does not state. If the parent is touched again, cite lem-trf-fppf-covering-base-change there."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfLabelledCoverDescent",
+  "declaration": "AlgebraicGeometry.Scheme.fppf_labelled_cover_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfLabelledCoverDescent.lean",
+  "statement": "theorem fppf_labelled_cover_descent {S : Scheme.{u}} (T : Over S) {A : Type v} {I : Type w} (U : A → Over S) (g : ∀ a, U a ⟶ T) (hcover : Presieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (g a).left) ∈ fppfPrecoverage T.left) (label : A → I) (hmixed : ∀ a b, label a ≠ label b → IsEmpty (pullback (g a) (g b)).left) (G : I → Sheaf (fppfTopology.over S) (Type t)) (s : ∀ (i : I) (a : A), label a = i → (G i).obj.obj (op (U a))) (hmatch : ∀ (i : I) (a b : A) (ha : label a = i) (hb : label b = i), (G i).obj.map (pullback.fst (g a) (g b)).op (s i a ha) = (G i).obj.map (pullback.snd (g a) (g b)).op (s i b hb)) : ∃ V : I → T.left.Opens, (∀ i, (V i : Set T.left) = ⋃ (a : A) (_ : label a = i), Set.range (g a).left) ∧ (∀ i, IsClosed (V i : Set T.left)) ∧ Pairwise (fun i j ↦ Disjoint (V i) (V j)) ∧ iSup V = ⊤ ∧ Nonempty (IsColimit (Cofan.mk T.left (fun i ↦ (V i).ι))) ∧ ∃ h : ∀ (i : I) (a : A) (_ : label a = i), (U a ⟶ Over.mk ((V i).ι ≫ T.hom)), (∀ (i : I) (a : A) (ha : label a = i), h i a ha ≫ Over.homMk (V i).ι = g a) ∧ ∀ i, ∃! sec : (G i).obj.obj (op (Over.mk ((V i).ι ≫ T.hom))), ∀ (a : A) (ha : label a = i), (G i).obj.map (h i a ha).op sec = s i a ha",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e8e157d4",
+  "group": "ND",
+  "result": "pass",
+  "note": "Clause-by-clause match: Over S objects/maps; hcover is fppfPrecoverage membership of the underlying family; hmixed is IsEmpty of the Over pullback (its left is the fibre product over T); sheaves of sets on fppfTopology.over S; equality-indexed sections and same-label matching. Conclusions: V pinned to the union of images, closed, pairwise disjoint, iSup=⊤, IsColimit of the actual Cofan of (V i).ι, factorizations over S, ∃! component sections on Over.mk((V i).ι≫T.hom) (same object as the parent's fppfPartitionOpen). No extra hypotheses; universes free; empty A/I/label/member and large-I cases hold. Only the item lean field changed vs live; 7 dep nodes identical; statement verbatim; docstrings with source, blueprint and 6 proof steps; sorry only; no hollow defs; ≤100 chars. Source Tags 0F15/02WO read. No duplicate (FpqcLabelledClopenDescent and the parent FppfSheafCoproductPartition are different statements). Advisory only: private proof-only imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261023T123914-L-1290327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

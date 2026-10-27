@@ -1,0 +1,139 @@
+{
+ "id": "lem-trf-point-reduction-augmentation-complete",
+ "kind": "statement",
+ "title": "Completeness of the specified actual quotient-cone augmentation",
+ "statement": "Fix the finite field datum D with geometric field k and characteristic p, a prime $\\ell\\ne p$, and a finite extension E of $\\mathbf Q_\\ell$ with integer ring $\\mathcal O_E$ and uniformizer $\\varpi$, as in [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$. Let R be the completed integral coefficient sheaf on s, and let $A_n$ be its finite constant coefficient quotient $\\mathcal O_E/(\\varpi^{n+1})$ for $n\\in\\mathbf N$, as in [def-weil-integral-reduction-tower]. Let P be a flat-term K-flat good complex of R-modules as in [lem-pur-integral-operations-well-defined], with $[P]$ integral constructible and derived complete as in [def-weil-derived-complete-integral-detailed]. Write $D_n=\\Gamma(s,\\operatorname{Res}(P\\otimes_R A_n))$ for the actual ordinary quotient tower with its specified quotient transitions, with scalar action restricted to the single integral coefficient ring $\\mathcal O_E$. Let H be the concrete two-product Roos cocone, the mapping fibre of one minus the transition shift, from [lem-pur-integral-operations-well-defined]. The map $a_P:\\Gamma(s,P)\\to H(D_\\bullet)$ of [lem-trf-point-transport-cone-comparison-descent], whose unshifted product coordinate consists of the quotient units and whose shifted coordinate is zero, becomes an isomorphism after localization in the fixed small derived category of integral coefficient modules.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-trf-point-transport-cone-comparison-descent"
+ ],
+ "proof": [
+  {
+   "text": "Identify the identity-extension scalar tower with the actual quotient tower by the canonical balanced tensor identification. It sends 1 tensor x to 1 tensor x, commutes with the quotient transitions, and therefore is an isomorphism of whole strict towers.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize that identification diagonally on both Roos coordinates and apply exact point sections. The normalized source completion comparison of pointSectionsCompletionCone has quotient-unit first coordinate and zero shifted coordinate. Joint extensionality of these two coordinates identifies it with the specified actual quotient augmentation. Derived completeness makes the comparison invertible.",
+   "uses": [
+    "lem-trf-point-sections-completion-cone",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-trf-point-sections-completion-cone",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact evaluation commutes with the mapping cone realization of a strict inverse tower of complexes",
+   "results": "MappingCone functoriality and mapHomologicalComplex comparisons only; no specific quotient transport or completeness unit theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact point sections of the canonical completion unit of a derived complete complex is an isomorphism",
+   "results": "Completion of normed modules and general Kan-extension units; no coefficient sheaf completion or specified point transport.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "mappingCocone.lift and its two projection formulas supply the cone assembly, but neither of the coefficient-specific assertions.",
+   "date": "2026-10-26",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "strictQuotientPointMap|augmentation.*[Ii]so|identity.*[Tt]ower; point.*transport|transport.*point|completion.*[Ii]so",
+   "results": "Sheaf PointTransportStrictQuotient states its laws only on good complexes. PointSectionsCompletionCone uses integralScalarTowerFunctor rather than the actual unrestricted quotient tower. No existing ordinary-module theorem states these exact interfaces. Mathlib only has generic cone functoriality.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerRealization",
+  "group": "G6",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), Completeness of the specified actual quotient-cone augmentation",
+   "via": [
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.PointReductionAugmentationComplete",
+  "file": "lean/Sheaf/Paper/PointReductionAugmentationComplete.lean",
+  "declaration": "WeilConjectures.pointReductionAugmentation_isIso",
+  "statement": "theorem pointReductionAugmentation_isIso\n    (hl : l ≠ D.p)\n    (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory)\n    (hP : sfIntegralConstructible l E (Spec (.of D.k)) (DerivedCategory.Q.obj P.obj)) :\n    IsIso ((PointTransportCone.moduleQ l E).map\n      (PointTransportCone.augmentation D l E P.obj))",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery b2da vs returned 8fe8 (diff -r: LFTN split removed, C5 fix and item stmt_deps fix taken, Lean otherwise identical); spec vs published statement (earlier defeq check, published blob unchanged cb8c8b5c887); delivered set + 3 direct importers compiled in sandbox; #print axioms; nodes vs Lean"
+ }
+}

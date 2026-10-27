@@ -1,0 +1,105 @@
+{
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 10: support and resolution subarguments for the coefficient transport comparisons.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarProofs",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarProofs.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.continuous_scalar_resolution",
+  "statement": "theorem continuous_scalar_resolution\n    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]\n    (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)\n    [HasSheafify JC AddCommGrpCat.{u + 1}] [HasSheafify JD AddCommGrpCat.{u + 1}]\n    [JC.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]\n    [JD.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]\n    [JC.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]\n    [JD.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]\n    (F : C ⥤ D) [F.IsContinuous JC JD] [RepresentablyFlat F]\n    (S R : Sheaf JD CommRingCat.{u + 1}) (T : Sheaf JC CommRingCat.{u + 1})\n    (a : R ⟶ S) (b : T ⟶ (F.sheafPushforwardContinuous CommRingCat.{u + 1} JC JD).obj R)\n    (I : CochainComplex (SheafOfModules.{u + 1}\n      ((sheafCompose JD (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)) ℤ) [I.IsKInjective]\n    (J : CochainComplex (SheafOfModules.{u + 1}\n      ((sheafCompose JD (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ℤ) [J.IsKInjective]\n    (j : ((SheafOfModules.restrictScalars.{u + 1}\n      ((sheafCompose JD (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map a)).mapHomologicalComplex\n        (.up ℤ)).obj I ⟶ J) [QuasiIso j] :\n    QuasiIso (((SheafOfModules.pushforward.{u + 1} (F := F) (J := JC) (K := JD)\n      (R := (sheafCompose JD (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)\n      (S := (sheafCompose JC (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj T)\n      ((sheafCompose JC (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map b)).mapHomologicalComplex\n        (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "id": "lem-pur-continuous-scalar-resolution",
+ "kind": "statement",
+ "title": "Scalar resolution under continuous ringed direct image",
+ "statement": "Let F : C → D be a continuous representably flat functor of sites with sheafification and locally-bijective equivalences for additive sheaves, and sheaf composition with the forgetful commutative-ring functor. Let a : R → S be commutative coefficient sheaves on D and b : T → F_*R a ringed coefficient map on C. For a K-injective complex I of S-modules and a K-injective complex J of R-modules, if j : res_a(I) → J is a quasi-isomorphism, then the continuous module pushforward along b sends j to a quasi-isomorphism.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 0D6E; already proved generic subargument of blueprint sk-thm-purity-transport Step 10, moved from the assigned module for compile performance."
+ },
+ "proof": [
+  {
+   "text": "Pass C and D to their small equivalent sites and obtain the induced continuous flat functor. The small module categories are equivalent to the original module categories. These equivalences are exact and preserve K-injective complexes, by their equivalence adjunctions. Construct the ringed restriction and direct-image models on the small sites. The original and small-model functors commute by natural isomorphisms which are identity on all module sections. Apply the ringed resolution theorem to these models and transport its quasi-isomorphism back along the three equivalences using quasiIso_map_of_models.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-sp-varying-ring-operations",
+    "lem-pur-scalar-site-pushforward-additive"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sp-varying-ring-operations",
+  "lem-pur-scalar-site-pushforward-additive"
+ ],
+ "proof_origin": "K3 proved this argument as a private helper; K1 isolates the unchanged proof with a public supporting statement. No new proof assumption or sorry.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invertibility of derived adjunction mates from injective resolutions and preservation of quasi isomorphisms by ringed direct image; scalar restriction preserves open extension essential image",
+   "results": "Eight hits for restriction/coextension, injective presentations, right-derived-zero on injectives, and scheme module adjunctions. No exact unbounded coefficient-system statement.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement for this existing proved helper."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "Twelve hits for equivalence criteria and fully faithful adjoints. These underlie the helper, but none supplies its exact mate or derived support conclusion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse standard adjunction APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_mate.*[iI]sIso|continuous_scalar_resolution|scalarRestriction_openSupported|inverse_mate_isIso_of_support",
+   "results": "Zero Mathlib hits. The shared library has these proved private helpers in the assigned module; they are transferred, not reproved or replaced by holes. Imported blueprint searches found no exact statement.",
+   "date": "2026-10-27",
+   "verdict": "Isolate the existing proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone/published item (verbatim move by diff; only systemRestrictionPullInv_isIso newly proved), 8 node JSONs vs Lean signatures, 4 direct importers compiled against the delivery and against the published build"
+ }
+}

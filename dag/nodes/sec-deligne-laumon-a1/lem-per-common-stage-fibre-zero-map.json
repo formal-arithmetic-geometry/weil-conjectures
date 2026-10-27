@@ -1,0 +1,125 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; common-stage heart and fibre descent"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Formal assembly of Proposition 6.8.14 and Remark 6.8.15, following the parent node numbered proof steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite diagrams and exact geometric fibre functors to a filtered colimit of abelian categories with normalized scalar extension comparisons",
+   "results": "8 results: Condensed.hasExactColimitsOfShape, GrothendieckTopology.Point exact colimits, CondensedMod AB5/AB4/AB4Star, AddCommGrpCat filtered colimit exactness, AB4.of_AB5, AB5OfSize.ofShape. None is the specified adic construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesHomology",
+   "results": "12 results about preservation of homology, kernels and cokernels; no normalized adic descent or finite-stage representation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommonStageHeartExactness|CommonStageFibreDescent|common_stage_fibre",
+   "results": "0 hits from remote Mathlib search. Local project search finds only the item records and its theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functors and zero morphism detection for filtered common-stage categories of finite coefficient sheaves",
+   "results": "8 results: ShortComplex.LeftHomologyData.exact_map_iff, RightHomologyData.exact_map_iff, Exact.map and Exact.map_of_preservesRightHomologyOf, Functor.IsHomological.toPreservesZeroMorphisms, preservesZeroMorphisms_of_additive, preservesZeroMorphisms_of_full, ExactFunctor.of. These do not give the specified common-stage descent or comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedFibreCommonStage",
+  "date": "2026-10-25",
+  "group": "G6"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "id": "lem-per-common-stage-fibre-zero-map",
+ "kind": "statement",
+ "title": "Joint zero-map detection from finite-stage fibre comparisons",
+ "statement": "Let k be a field, l a prime invertible in k, R a continuous rational realization family, Ω an algebraic closure of Q_l, and ω normalized finite fibres [def-per-adic-fibre-comparison-data, lem-per-adic-normalized-fibre-exactness]. Supply CommonStageHeartExactness [def-per-common-stage-fibre-descent-interfaces]. For each finite-type separated k-scheme X and each geometric point x, let V_x be any CommonPoint for ω: an exact additive finite-dimensional common-heart fibre functor with natural isomorphisms on every finite stage. If a common-heart arrow f:F→G has V_x(f)=0 for every algebraically closed geometric point x, then f=0. No scalar or pullback compatibility hypothesis on the V_x is required.",
+ "stmt_deps": [
+  "def-per-common-stage-fibre-descent-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite-heart presentations of the two endpoints, then one finite stage representing the conjugated arrow, using [lem-per-adic-common-stage-truncations, prop-weil-pbc-common-stage-calculus]. Naturality of finite_stage conjugates each common fibre map to the scalar extension of the finite fibre map. The supplied faithful scalar extension reflects zero. Finite zero-map detection of [lem-per-adic-normalized-fibre-exactness] then makes this representative zero. Its quotient and the original conjugated arrow are zero. The stage is chosen for the arrow independently of the geometric point; the conclusion also covers empty schemes.",
+   "uses": [
+    "lem-per-adic-common-stage-truncations",
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-per-adic-normalized-fibre-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; finite-stage joint detection and abelian defect tests"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-adic-common-stage-truncations",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-per-adic-normalized-fibre-exactness"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, geometric fibre detection in the common heart; zero-map part of parent proof step 9.",
+   "via": [
+    "lem-per-adic-normalized-fibre-common-stage",
+    "lem-per-adic-normalized-fibre-comparisons",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCommonStageFibreZeroMap",
+  "file": "lean/Sheaf/Paper/AdicCommonStageFibreZeroMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.common_stage_fibre_zero_map",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.common_stage_fibre_zero_map"
+  ],
+  "statement": "theorem common_stage_fibre_zero_map (ω : Fibres (k := k) l R)\n    (point : ∀ (X : FiniteTypeBase k) (κ : Type u) [Field κ] [IsAlgClosed κ]\n      (x : Spec (.of κ) ⟶ X.scheme), CommonPoint l R Ω ω X κ x)\n    (h : CommonStageHeartExactness.{u, v, w} l Ω (k := k))\n    (X : FiniteTypeBase k)\n    (F G : (pbcQbarStandardT l Ω X.scheme).heart.FullSubcategory) (f : F ⟶ G)\n    (hf : ∀ (κ : Type u) [Field κ] [IsAlgClosed κ] (x : Spec (.of κ) ⟶ X.scheme),\n      (point X κ x).functor.map f = 0) : f = 0",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-522a5",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T162456-L-462047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-522a5",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T162456-L-462047",
+  "kind": "interface",
+  "note": "independent cc review: item proof against the three new sorried lemmas; moved CommonStageHeartExactness/CommonStageFibreDescent against the published records (field bodies identical, no other users in the clone); the lemma statements against their nodes, CommonPoint and NormalizedFibre.Assertions.detects_zero_map; the item node fields against the Lean proof"
+ }
+}

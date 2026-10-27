@@ -11,6 +11,8 @@ import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1ExchangeIso
 import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Untwist
 import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1KummerBaseChange
 
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer
+
 /-! # The ordinary etale projective-line decomposition
 
 Source: main-20261015, thm-amb-p1-decomposition.md and its proof
@@ -115,7 +117,9 @@ theorem ordinaryFiniteP1Decomposition (N : ℕ) (hN : 0 < N)
           (ordinaryFinitePullback A g).map (p1DecompositionMap A N hN hA S hS c) ≫
               ordinaryFiniteP1Exchange A g (ordinaryFiniteUnit A (ProjectiveLine S)) ≫
               (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
-                (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom =
+                (ordinaryFiniteUnitPullback A
+                  (X := ProjectiveLine S') (Y := ProjectiveLine S)
+                  (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom =
             p1DecompositionSourceMap A N hN hA g hS ≫
               p1DecompositionMap A N hN hA S'
                 ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c' := by
@@ -138,7 +142,9 @@ theorem ordinaryFiniteP1Decomposition (N : ℕ) (hN : 0 < N)
       (ordinaryFinitePullback A g).map (p1DecompositionMap A N hN hA S hS c) ≫
         ordinaryFiniteP1Exchange A g (ordinaryFiniteUnit A (ProjectiveLine S)) ≫
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
-          (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom =
+          (ordinaryFiniteUnitPullback A
+            (X := ProjectiveLine S') (Y := ProjectiveLine S)
+            (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom =
       p1DecompositionSourceMap A N hN hA g hS ≫
         p1DecompositionMap A N hN hA S' hS' c' := by
     exact biprodMap_desc (ordinaryFinitePullback A g)

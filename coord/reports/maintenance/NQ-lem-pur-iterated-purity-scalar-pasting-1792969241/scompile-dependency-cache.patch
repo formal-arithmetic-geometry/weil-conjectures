@@ -1,0 +1,43 @@
+--- a/batch2/scompile.py
++++ b/batch2/scompile.py
+@@ -53,6 +53,19 @@
+ NO_ANSWER = "no answer from the server within"
+ def cacheable(result):
+     return result[0] != 124   # a timeout is not stored (server load can cause it)
++def server_dependency_stamp():
++    """Include committed overlay sources and compiler tools, even while publication stays red."""
++    command = ("cd " + shlex.quote(PROJECT) +
++               " && git rev-parse HEAD:lean HEAD:tools"
++               " && sha256sum local/builds/published local/builds/published.json local/builds/last.json")
++    cmd = ["ssh", "-i", str(H / "weil_formal.pem"), "-o", "ConnectTimeout=20",
++           "-o", "ServerAliveInterval=15", "ubuntu@the project server", command]
++    try:
++        p = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
++    except (OSError, subprocess.TimeoutExpired):
++        return None
++    return p.stdout.strip() if p.returncode == 0 and p.stdout.strip() else None
++
+ def _runner_many(args, sources):
+     """compile_attach runner: compile the caller's snapshot as run_many does."""
+     return list(_direct_many(args["g"], args["item"], args["files"], {p: b.decode() for p, b in sources.items()}))
+@@ -67,14 +80,18 @@
+         snap = {f: pathlib.Path(f).read_bytes() for f in files}
+     except OSError as e:
+         return 2, f"cannot read the source ({e}); nothing compiled"
++    stamp = server_dependency_stamp()
++    if stamp is None:
++        return 2, "cannot read current server dependency state; no cached compile result reused; retry the compile"
++    dep = CA.digest("server-source-state-v1", stamp)
+     prio = os.path.basename(sys.argv[0]) == "deliver2.py"
+     task = CA.digest(g, item, *files, prio)
+-    content = CA.digest(task, *[snap[f] for f in files])
++    content = CA.digest(task, *[snap[f] for f in files], dep)
+     spec = {"module": str(pathlib.Path(__file__).resolve()), "module_name": "scompile", "func": "_runner_many",
+             "args": {"g": g, "item": item, "files": files}, "label": pathlib.Path(files[0]).name,
+             "fail_result": [2, "compile tool fault: the compile runner stopped without a result (see ~/weil-launcher/compile-attach.log)"],
+             "alive_paths": [str(pathlib.Path(files[0]).parent)]}
+-    r = CA.attach("s", task, content, CA.digest(CA.published_stamp()), spec, snap, prio=prio)
++    r = CA.attach("s", task, content, dep, spec, snap, prio=prio)
+     if isinstance(r, dict) and r.get("superseded"):
+         return 3, ("NOT compiled: a newer version of these files was sent to compile while this request waited; this request "
+                    "was withdrawn (one request per file at a time). Run the command again for the result of the current version.")

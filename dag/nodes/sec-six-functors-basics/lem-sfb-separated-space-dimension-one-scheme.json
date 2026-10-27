@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-separated-space-dimension-one-scheme",
+ "kind": "statement",
+ "title": "Separated algebraic spaces of dimension at most one over a field are schemes",
+ "statement": "Let $K$ be a field [def-weil-field]. Let $X$ be an algebraic space over $\\operatorname{Spec}K$ [def-trf-algebraic-space, def-weil-affine-spectrum], separated and locally of finite type (the diagonal is a closed immersion and the morphism on etale scheme charts is locally of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism]). Assume its topological Krull dimension is at most one [def-kun-topological-krull-dimension], with the topology tested on an etale scheme atlas. Then $X$ is representable by a $K$-scheme. No quasi-compactness, properness, reducedness, or connectedness hypothesis is required; the empty space is allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "First $X$ is locally Noetherian: every etale scheme chart $V\\to X$ is locally of finite type over $K$ by the hypothesis. The field is Noetherian (its only ideals are $0$ and $K$), so [pqf-lem-locnoeth-lft] makes each such $V$ locally Noetherian. This is exactly the atlas definition of locally Noetherian for an algebraic space. Use [lem-a1-space-affine-atlas-open-cover] to cover $X$ by open subspaces $Z$ with surjective etale affine scheme atlases. Each $Z$ is quasi-compact by the last clause of [lem-a1-space-etale-open-image]. Its diagonal is the restriction of the closed diagonal of $X/K$, hence is closed and quasi-compact on scheme tests. Thus $Z$ is separated and Noetherian (locally Noetherian, quasi-compact, quasi-separated). Restriction of the locally Noetherian atlases to the open gives locally Noetherian atlases of $Z$ [pqf-def-locnoeth].",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-a1-space-affine-atlas-open-cover",
+    "lem-a1-space-etale-open-image",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD (lemma-codim-1-point-in-schematic-locus), first sentence: reduction to quasi-compact separated Noetherian open subspaces; Noetherian conventions are Tag 03EA"
+   }
+  },
+  {
+   "text": "For each open piece $Z$, its topological dimension is at most one: a strict chain of irreducible closed subsets of $|Z|$ gives a strict chain of their closures in $|X|$; intersection of these closures with $|Z|$ recovers the original chain. This proves the bound directly from [def-kun-topological-krull-dimension]. Fix $x\\in|Z|$. Apply [lem-sfb-noetherian-space-finite-scheme-cover] to obtain a separated Noetherian $K$-scheme $U$ and a finite surjective $f:U\\to Z$. By [lem-sfb-finite-space-morphism-topology], $f$ is locally quasi-finite. Hence [lem-sfb-space-quasifinite-source-dimension-bound] gives $\\dim|U|\\leq\\dim|Z|\\leq1$. By [lem-pc-scheme-dimension-local-rings], every stalk $\\mathcal O_{U,u}$ has dimension at most one. In particular the inequality holds at all points over $x$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-finite-space-morphism-topology",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD (lemma-codim-1-point-in-schematic-locus), first paragraph: finite cover and local dimension bound"
+   }
+  },
+  {
+   "text": "Put $R=U\\times_ZU$. It is a scheme by diagonal representability [def-trf-algebraic-space]. The two projections $s,t$ are finite by base change [lem-sfb-finite-space-morphism-topology]. On test schemes an arrow is a pair $(a,b)$ with $f(a)=f(b)$; identity is $(a,a)$, inverse exchanges the pair, and composition sends $((a,b),(b,c))$ to $(a,c)$. These formulas define the groupoid laws [def-a1-groupoid-scheme] directly. The orbit of any chosen $u$ over $x$ is exactly $f^{-1}(x)$: one containment follows from $fs=ft$; for the other, any two points over $x$ lift to a point of $U\\times_ZU$ by [lem-a1-space-fibre-product-point]. This orbit is finite by [lem-sfb-finite-space-morphism-topology]. Apply [lem-sfb-finite-groupoid-codimension-one-invariant-affine] using step 2 to obtain an affine open $W\\subseteq U$ containing the orbit with $s^{-1}(W)=t^{-1}(W)$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-finite-space-morphism-topology",
+    "def-a1-groupoid-scheme",
+    "lem-a1-space-fibre-product-point",
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD (lemma-codim-1-point-in-schematic-locus), first paragraph and beginning of second paragraph: finite relation and invariant affine neighbourhood"
+   }
+  },
+  {
+   "text": "The open $W$ is saturated for $f$: if $w\\in W$ and $v\\in U$ have the same image, [lem-a1-space-fibre-product-point] gives a relation arrow between them, and invariance puts $v$ in $W$. Thus $f^{-1}(f(W))=W$. Since $f$ is surjective and closed [lem-sfb-finite-space-morphism-topology], the equality $|Z|\\setminus f(W)=f(|U|\\setminus W)$ shows that $f(W)$ is open. By the open-subspace correspondence in [lem-a1-space-etale-open-image], let $Z^{\\prime}\\subseteq Z$ be the open subspace with this point set. Pulling back $Z^{\\prime}$ to $U$ gives precisely $W$ (the same open-subspace correspondence). Consequently $W\\to Z^{\\prime}$ is the base change of $f$, and is finite [lem-sfb-finite-space-morphism-topology] and surjective. It contains $x$ in its image. The target $Z^{\\prime}$ is locally Noetherian and separated by restriction; it is quasi-compact because it is the continuous surjective image of the affine scheme $W$. Hence $Z^{\\prime}$ is Noetherian. Apply [lem-sfb-noetherian-space-finite-affine-descent] to conclude that $Z^{\\prime}$ is an affine scheme.",
+   "uses": [
+    "lem-a1-space-fibre-product-point",
+    "lem-sfb-finite-space-morphism-topology",
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-noetherian-space-finite-affine-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD (lemma-codim-1-point-in-schematic-locus), second paragraph: descend the saturated open and apply finite affine descent"
+   }
+  },
+  {
+   "text": "The construction gives representable open neighbourhoods of every point of every $Z$, hence a set-indexed cover of $X$ by representable opens (one can use the set of all open subsets that are representable). The fppf sheaf $X$ [def-trf-algebraic-space] is in particular a Zariski sheaf. The inclusions of these open subfunctors are representable open immersions by their definition. For every scheme section $T\\to X$, their pullbacks are open subschemes covering $T$: each point of $T$ maps to a point of $X$ in one of the opens, and pullback of that open has precisely the inverse-image point set [lem-a1-space-etale-open-image]. These verify all clauses of [lem-pc-schemes-criterion], which gives a representing scheme over $\\operatorname{Spec}K$. If $X$ is empty, the empty family satisfies the same covering condition and the representing scheme is empty. No step imposed a global finite covering, reducedness, or connectedness.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-etale-open-image",
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD (lemma-codim-1-point-in-schematic-locus), last sentence, globalized using Schemes Tag 01JJ (lemma-glue-functors)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-etale-open-image",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-noetherian-space-finite-scheme-cover",
+  "lem-sfb-finite-space-morphism-topology",
+  "lem-sfb-space-quasifinite-source-dimension-bound",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-trf-algebraic-space",
+  "def-a1-groupoid-scheme",
+  "lem-a1-space-fibre-product-point",
+  "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+  "lem-sfb-noetherian-space-finite-affine-descent",
+  "lem-pc-schemes-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0ADD (lemma-codim-1-point-in-schematic-locus), finite-cover / finite-groupoid proof, applied on quasi-compact open pieces; the final Zariski globalization is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated algebraic space locally of finite type over a field with dimension at most one is a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.affine_isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R) ↔ IsDomain ↑R\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is integral if and only if the commutative ring $R$ is a domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral.nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsIntegral X], Nonempty ↥X\", \"doc\": \"Every integral scheme has a non-empty underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated algebraic spaces of dimension one over a field are representable by schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.IsSeparated ↔ AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"A scheme $X$ is separated if and only if the unique morphism from $X$ to the terminal object in the category of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated.isSeparated_terminal_from\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsSeparated],\\n  AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"For any separated scheme $X$, the unique morphism from $X$ to the terminal object in the category of schemes is itself a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"AlgebraicSpace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicSpace|schematicLocus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated algebraic space locally of finite type over a field with dimension at most one is a scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions.",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-separated-space-dimension-one-scheme",
+  "worker": "stage1",
+  "group": "Q79",
+  "summary": "Expanded Tag 0ADD into its finite scheme cover, dimension transfer, finite relation, invariant affine open, saturation, finite affine descent and Zariski representability arguments. Five independent statement-only prerequisites were searched; scheme and algebraic-space notions and topology are kept distinct. The statement is unchanged.",
+  "blueprint": "The inherited created.item chain has no blueprint ancestor (blueprint_refs.py ancestor prints None). The recorded place traces det-thm-sf-ctf-stability-direct-images proof (3), via nodal-curve moduli, to the supporting dimension-one schemehood fact. These steps refine that fact along its cited Stacks proof and do not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Scheme charts locally of finite type over a field are locally Noetherian; this is a general scheme tool."
+   },
+   {
+    "node": "lem-a1-space-affine-atlas-open-cover",
+    "why": "General algebraic-space open covering by affine etale atlases."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "General open-subspace correspondence, quasi-compactness and base-change description, needed to localize and descend W."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "General comparison of scheme dimension and stalk dimensions."
+   },
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Lifts pairs of points with the same image into the relation, needed for orbit and saturation."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "General Zariski gluing criterion for representability; no schemehood theorem in this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-a1-space-fibre-product-point",
+  "lem-pc-schemes-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-a92f40b67",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-a92f40b67 (reviewer sub-agent of L); spot-checked: I read the whole item and all five new nodes; no changes were needed. Statement: the statement, stmt_deps and source are identical to live, and live had no proof, so nothing was shortened. The item is still unsplit in live and side-live, is not dropped, has no re-split note, and cites no SGA. Sources: I read Stacks 0ADD (both proof paragraphs), 09YC, 0ABI (orbit = t(s^{-1}u), line 2532), 0ABW, 0A4J and 07VP. Step 1: Noetherian separated Z come from 01T6, the affine-atlas cover and the qc clause of the open-image node; the diagonal of Z is a base change of the closed diagonal. Step 2: dim|Z| <= 1 by the closure-chain argument; then cover node, lqf, dimension node (Z is quasi-separated, f representable), and lem-pc-scheme-dimension-local-rings. Step 3: R = U x_Z U has finite projections; the orbit equals the fibre through the algebraic-space point-lift node, which is needed here because Z is not yet a scheme; the hypotheses of 0ABI are met. Step 4: W is saturated; f(W) is open because its complement is the closed image f(U\\W); W -> Z' is a base change, hence finite and surjective; Z' is Noetherian; 07VP applies. The point set of the pullback is elementary from the open-subspace definition. Step 5: all clauses of 01JJ are checked, and the empty case is handled. New nodes: all five are true restatements of Stacks lemmas with matching hypotheses (09YC with 04NZ/04ZK; 0ABW with 0A4J, quasi-separated implies decent; 0ABI; 07VP; 03ZS/0415/04NY). Each is smaller than the item, none restates an item clause, and duplicate searches by tag and keyword found nothing equivalent (the stack-properties, 03XX and scheme-only dimension nodes differ). Tool uses: the a1-space foundations, 01T6, lem-pc-scheme-dimension-local-rings and 01JJ are accepted as generic tools. Batch 5: def-trf-algebraic-space and def-a1-space-point-topology are general definitions. The three a1-space lemmas reach only algebraic-space and fppf-descent foundations in sk-i-curve-zero, never a step of the trace formula or Poincare duality, so all flagged citations are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedSpaceDimensionOneScheme",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_scheme_of_separated_dim_le_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedSpaceDimensionOneScheme.lean",
+  "statement": "theorem exists_scheme_of_separated_dim_le_one {K : Type u} [Field K] (X : AlgebraicSpace (Spec (.of K))) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) (hlft : ∀ (U : Over (Spec (.of K))) (a : yoneda.obj U ⟶ X.obj.obj), IsEtale a → LocallyOfFiniteType U.hom) (hdim : topologicalKrullDim (Point X.obj.obj) ≤ 1) : ∃ U : Over (Spec (.of K)), Nonempty (yoneda.obj U ≅ X.obj.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Separatedness is the closed-immersion scheme-test condition for the diagonal in presheaves on Over (Spec K); local finite type is tested on every etale scheme chart. Reuses the landed Point and pointTopologicalSpace; their existing definition node is added to stmt_deps. The conclusion is a representing scheme over K, expressed by an isomorphism of presheaves on Over (Spec K)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-521aed4d8",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0ADD clause by clause. Field K; X : AlgebraicSpace (Spec K); separated = closed-immersion scheme tests of the relative diagonal (presheaf product over Spec K, same pattern as landed exists_scheme_of_separated_etale); local finite type on every étale scheme chart (equivalent to the atlas definition, not vacuous); topologicalKrullDim of the landed final étale point topology ≤ 1; conclusion ∃ U over Spec K with yoneda U ≅ X. Empty space, dim 0, non-qc and non-reduced cases covered; no universe restriction. Node differs from live only in lean and the allowed landed stmt_dep def-a1-space-point-topology; statement verbatim; no definitions; sorry-only proof; docstrings carry the source place, blueprint tag and five proof steps. Advisory only: Point and IsClosedImmersion owners reached transitively; self-written second reading. No recompile, nothing changed."
+ }
+}

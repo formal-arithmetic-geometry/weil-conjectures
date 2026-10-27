@@ -1,0 +1,258 @@
+{
+ "id": "lem-trf-cohen-presentation-lifted-evaluation-square",
+ "kind": "statement",
+ "title": "A fixed Cohen presentation lifts to a local power-series evaluation square",
+ "statement": "Let $(A,\\mathfrak m_A)$ and $(R,\\mathfrak m_R)$ be commutative Noetherian local rings [def-weil-pbc-noetherian-ring], complete for their maximal ideals [def-weil-pbc-adically-complete-ring], and let $r:R\\twoheadrightarrow A$ be a surjective local homomorphism. Local means that the source maximal ideal maps into the target maximal ideal. Let $p\\ge0$ be the characteristic of $A/\\mathfrak m_A$. Fix $n\\ge0$ and a ring $\\Lambda$, a characteristic-zero field if $p=0$, and a Cohen ring with residue characteristic $p$ if $p>0$ [def-weil-pbc-cohen-ring]. Put $T_0=\\Lambda[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series] and fix a surjective local homomorphism $c_0:T_0\\twoheadrightarrow A$. For every finite tuple $b_1,\\ldots,b_s$ generating $J=\\ker r$, including $s=0$ when $J=0$, put $T=T_0[[y_1,\\ldots,y_s]]$, identify it with $\\Lambda[[x_1,\\ldots,x_n,y_1,\\ldots,y_s]]$ by regrouping coefficients, and let $\\pi:T\\to T_0$ take the constant coefficient in the $y$ variables. Then $T_0,T$ are complete regular local rings [def-weil-regular-scheme], with maximal ideals $\\mathfrak m_\\Lambda T_0+(x_1,\\ldots,x_n)$ and $\\mathfrak m_\\Lambda T+(x_1,\\ldots,x_n,y_1,\\ldots,y_s)$ respectively, and $\\pi$ is surjective local. There exist local ring homomorphisms $f:T_0\\to R$ and $h:T\\to R$ such that $rf=c_0$, $h|_{T_0}=f$, $h(y_j)=b_j$, and $rh=c_0\\pi$. For every $F=\\sum_\\nu a_\\nu y^\\nu\\in T$ and $N\\ge1$ they satisfy\n$$h(F)\\equiv\\sum_{|\\nu|<N}f(a_\\nu)b^\\nu\\pmod{\\mathfrak m_R^N},\\qquad |\\nu|=\\sum_j\\nu_j,\\quad b^\\nu=\\prod_j b_j^{\\nu_j}.$$\nNo surjectivity of $h$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PZ (lemma-ci-well-defined), proof, first and third paragraphs: fixed Cohen source, continuous lift and adjoining kernel variables to form the displayed square; excludes the subsequent surjectivity assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "By the coefficient-family definition, regrouping a family indexed by $(\\alpha,\\nu)\\in\\mathbf N^n\\times\\mathbf N^s$ gives a ring isomorphism $\\Lambda[[x,y]]\\cong T_0[[y]]$: addition agrees coefficientwise, and the product coefficient at $(\\alpha,\\nu)$ is the same finite sum over $(\\alpha_1,\\nu_1)+(\\alpha_2,\\nu_2)=(\\alpha,\\nu)$. The inclusion of $T_0$ is constant in $y$. Taking the coefficient at $\\nu=0$ is a ring map $\\pi$ with this inclusion as a section, hence is surjective. These statements include empty index sets.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, first and third paragraphs; the lifted square before the subsequent surjectivity assertion."
+   }
+  },
+  {
+   "text": "Apply the field/Cohen power-series theorem over $\\Lambda$ with $d=n$ and $d=n+s$. Through step 1 this gives exactly the asserted completeness, regular locality, and maximal-ideal formulas for $T_0$ and $T$. The map $\\pi$ sends every coefficient-maximal-ideal generator into $\\mathfrak m_\\Lambda T_0$, every $x_i$ into $\\mathfrak m_{T_0}$, and every $y_j$ to zero. Thus it maps $\\mathfrak m_T$ into $\\mathfrak m_{T_0}$ and is local.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, first and third paragraphs; the lifted square before the subsequent surjectivity assertion."
+   }
+  },
+  {
+   "text": "Put $J=\\ker r$. For $u\\in J$, the element $u$ cannot be a unit since $r(u)=0$ in the nonzero local ring $A$, so $J\\subseteq\\mathfrak m_R$. To check closedness, if $u\\in\\bigcap_{N\\ge1}(J+\\mathfrak m_R^N)$, locality of $r$ gives $r(u)\\in\\mathfrak m_A^N$ for every $N$. Completeness includes $\\bigcap_N\\mathfrak m_A^N=0$, hence $u\\in J$. The reverse inclusion is immediate. Therefore $J=\\bigcap_N(J+\\mathfrak m_R^N)$. Identify $R/J$ with $A$ by $[u]\\mapsto r(u)$; this is bijective by surjectivity of $r$ and the definition of $J$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, first and third paragraphs; the lifted square before the subsequent surjectivity assertion."
+   }
+  },
+  {
+   "text": "The field/Cohen formal-smoothness lemma says that $\\mathbf Z\\to T_0$ is formally smooth for $\\mathfrak m_{T_0}$ in both allowed cases. Apply the complete-target lifting lemma over $\\mathbf Z$, with its source $S=T_0$, target $R$ (called $A$ in that lemma), ideal of definition $I=\\mathfrak m_R$, closed kernel $J$, and quotient map $g=c_0:T_0\\to R/J\\cong A$. All ring maps are $\\mathbf Z$-linear. We have $J^1\\subseteq I$ by step 3. Also $g(\\mathfrak m_{T_0})\\subseteq q(I)$: if $a\\in\\mathfrak m_A$, any lift $u$ under $r$ is a nonunit, since a unit has unit image, hence $u\\in I$. In particular this holds for $a=c_0(z)$ with $z\\in\\mathfrak m_{T_0}$. Take the lemma's integers $t=r=1$. Its conclusion supplies $f:T_0\\to R$ with $rf=c_0$ and $f(\\mathfrak m_{T_0})\\subseteq\\mathfrak m_R$, the required locality.",
+   "uses": [
+    "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, first and third paragraphs; the lifted square before the subsequent surjectivity assertion."
+   }
+  },
+  {
+   "text": "Every $b_j$ lies in $J\\subseteq\\mathfrak m_R$. Apply adic power-series evaluation with coefficient ring $C=T_0$, coefficient map $\\alpha=f$, target $R$, ideal $\\mathfrak m_R$, and variables $y_1,\\ldots,y_s$. This gives a ring map $h:T_0[[y]]\\to R$ restricting to $f$, with $h(y_j)=b_j$, and with precisely the displayed congruence for every $F$ and $N\\ge1$. By step 2 the maximal ideal of $T$ is generated by $\\mathfrak m_\\Lambda$, the $x_i$, and the $y_j$. The images of the first two groups lie in $f(\\mathfrak m_{T_0})\\subseteq\\mathfrak m_R$ and those of the last group are the $b_j$. Consequently $h$ is local.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, first and third paragraphs; the lifted square before the subsequent surjectivity assertion."
+   }
+  },
+  {
+   "text": "Apply $r$ to the congruence of step 5. It sends $\\mathfrak m_R^N$ into $\\mathfrak m_A^N$. Every term with $|\\nu|>0$ vanishes because $r(b_j)=0$, and the constant term becomes $r(f(a_0))=c_0(a_0)$. Hence $rh(F)-c_0\\pi(F)\\in\\mathfrak m_A^N$ for every $N\\ge1$. The separatedness included in completeness of $A$ makes this difference zero, proving $rh=c_0\\pi$. If $s=0$, evaluation is just $h=f$ and $\\pi$ is the identity; if $n=0$ the same arguments start with $T_0=\\Lambda$. Nothing here requires any surjectivity property of $h$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, first and third paragraphs; the lifted square before the subsequent surjectivity assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PZ (lemma-ci-well-defined), proof, first and third paragraphs; the lifted square before the subsequent surjectivity assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(lift|formallySmooth|formally_smooth).*([Cc]omplete|[Cc]ohen)|([Cc]ohen).*lift",
+   "results": "{\"t\": \"2026-10-22T07:06:48Z\", \"tool\": \"grep\", \"query\": \"(lift|formallySmooth|formally_smooth).*([Cc]omplete|[Cc]ohen)|([Cc]ohen).*lift\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Idempotents.lean\"], \"digest\": \"40aca963cf82b686\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness assumes a different lifting property and completeness at the quotient ideal; the hits do not lift an adically smooth Cohen source through an arbitrary closed kernel or construct the enlarged local square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a Cohen power series presentation through a surjective homomorphism of complete local rings",
+   "results": "{\"t\": \"2026-10-22T07:06:49Z\", \"tool\": \"leansearch\", \"query\": \"Lift a Cohen power series presentation through a surjective homomorphism of complete local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.liftRingHom\", \"IsAdicComplete.liftAlgHom\", \"PowerSeries.map_surjective\", \"IsAdicComplete.mk_comp_liftRingHom\", \"PowerSeries.mapAlgHom\", \"Polynomial.lifts_iff_ringHom_rangeS\", \"AdicCompletion.liftAlgHom\", \"RingHom.liftOfSurjective\"], \"digest\": \"07fd58432b5a415e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness assumes a different lifting property and completeness at the quotient ideal; the hits do not lift an adically smooth Cohen source through an arbitrary closed kernel or construct the enlarged local square."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsLocalHom",
+   "results": "{\"t\": \"2026-10-22T07:06:49Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, IsLocalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.map.isLocalHom\"], \"digest\": \"823d28b90b3d1f09\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness assumes a different lifting property and completeness at the quotient ideal; the hits do not lift an adically smooth Cohen source through an arbitrary closed kernel or construct the enlarged local square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a fixed Cohen power series presentation of a complete local ring through a complete local surjection and extend it by variables mapping to kernel generators",
+   "results": "{\"t\": \"2026-10-22T07:07:01Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a fixed Cohen power series presentation of a complete local ring through a complete local surjection and extend it by variables mapping to kernel generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"IsAdicComplete.liftRingHom\", \"IsAdicComplete.StrictMono.liftRingHom\", \"IsAdicComplete.of_liftRingHom\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.mk_liftRingHom\"], \"digest\": \"0b82457c022e950a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness assumes a different lifting property and completeness at the quotient ideal; the hits do not lift an adically smooth Cohen source through an arbitrary closed kernel or construct the enlarged local square."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_of_mk_map_comp_surjective|mem_span_pow_iff_exists_isHomogeneous",
+   "results": "{\"t\": \"2026-10-22T07:12:32Z\", \"tool\": \"grep\", \"query\": \"surjective_of_mk_map_comp_surjective|mem_span_pow_iff_exists_isHomogeneous\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\"], \"digest\": \"c3b56aa43932f4e3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic formal smoothness assumes a different lifting property and completeness at the quotient ideal; the hits do not lift an adically smooth Cohen source through an arbitrary closed kernel or construct the enlarged local square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local lifting of a fixed Cohen power series quotient through a complete local surjection, adjoining variables for its kernel, with a commuting square",
+   "results": "{\"t\": \"2026-10-22T07:12:42Z\", \"tool\": \"leanfinder\", \"query\": \"Local lifting of a fixed Cohen power series quotient through a complete local surjection, adjoining variables for its kernel, with a commuting square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"IsAdicComplete.henselianRing\", \"IsAdicComplete.liftRingHom\", \"IsAdicComplete.mk_liftRingHom\", \"PowerSeries.exists_isWeierstrassDivision\", \"Algebra.FormallySmooth.liftOfSurjective_apply\"], \"digest\": \"3b8b12f9ca975fb4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the second phrasing again finds algebraic formal smoothness and completion lifting, not the adic Cohen lifting and enlarged commuting square."
+  },
+  {
+   "tool": "grep",
+   "query": "(lift|formallySmooth|formally_smooth).*([Cc]omplete|[Cc]ohen)|([Cc]ohen).*lift",
+   "results": "{\"t\": \"2026-10-23T09:48:51Z\", \"tool\": \"grep\", \"query\": \"(lift|formallySmooth|formally_smooth).*([Cc]omplete|[Cc]ohen)|([Cc]ohen).*lift\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\"], \"digest\": \"4cde7f576a39baf6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give coefficientwise maps, compatible inverse-limit lifts, or algebraic formal smoothness, not the adic field/Cohen lift with the specified evaluation square. Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete assumes algebraic formal smoothness and completeness at the quotient ideal, which are not the item hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A formally smooth adic power series ring over a Cohen ring lifts through a surjection of complete local rings",
+   "results": "{\"t\": \"2026-10-23T09:48:51Z\", \"tool\": \"leansearch\", \"query\": \"A formally smooth adic power series ring over a Cohen ring lifts through a surjection of complete local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.of_comp_surjective\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Algebra.FormallySmooth.liftOfSurjective\"], \"digest\": \"c6245db5c9b3990e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give coefficientwise maps, compatible inverse-limit lifts, or algebraic formal smoothness, not the adic field/Cohen lift with the specified evaluation square. Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete assumes algebraic formal smoothness and completeness at the quotient ideal, which are not the item hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsLocalHom",
+   "results": "{\"t\": \"2026-10-23T09:48:52Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, IsLocalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.map.isLocalHom\"], \"digest\": \"823d28b90b3d1f09\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give coefficientwise maps, compatible inverse-limit lifts, or algebraic formal smoothness, not the adic field/Cohen lift with the specified evaluation square. Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete assumes algebraic formal smoothness and completeness at the quotient ideal, which are not the item hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a fixed Cohen power series presentation along a surjection of complete Noetherian local rings and evaluate new variables in its kernel",
+   "results": "{\"t\": \"2026-10-23T09:48:57Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a fixed Cohen power series presentation along a surjection of complete Noetherian local rings and evaluate new variables in its kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.kerProj\", \"AdicCompletion.evalₐ_liftRingHom\", \"AdicCompletion.factor_eval_liftRingHom\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"AdicCompletion.evalₐ_comp_liftRingHom\", \"AdicCompletion.evalOneₐ_liftAlgHom\", \"IsAdicComplete.mk_liftRingHom\"], \"digest\": \"bb05cedbd6e0f19f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give coefficientwise maps, compatible inverse-limit lifts, or algebraic formal smoothness, not the adic field/Cohen lift with the specified evaluation square. Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete assumes algebraic formal smoothness and completeness at the quotient ideal, which are not the item hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic formal smoothness lifts a prescribed map from a characteristic zero field or Cohen power series ring to a complete local quotient, with power series substitution in maximal ideal elements",
+   "results": "{\"t\": \"2026-10-23T09:51:22Z\", \"tool\": \"leanfinder\", \"query\": \"Adic formal smoothness lifts a prescribed map from a characteristic zero field or Cohen power series ring to a complete local quotient, with power series substitution in maximal ideal elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"IsAdicComplete.liftAlgHom\", \"Algebra.FormallySmooth.mk_lift\", \"IsAdicComplete.liftRingHom\", \"Algebra.FormallySmooth.comp_lift\"], \"digest\": \"3f1194eb5c548afd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give coefficientwise maps, compatible inverse-limit lifts, or algebraic formal smoothness, not the adic field/Cohen lift with the specified evaluation square. Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete assumes algebraic formal smoothness and completeness at the quotient ideal, which are not the item hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-local-ci-presentation-independence",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of lem-trf-local-term-locality: complete-local presentation comparison in the retained descendant lem-trf-complete-local-ci-presentation-independence, steps 3–4, lifting the fixed Cohen presentation and adjoining kernel variables; Stacks 09PZ first and third proof paragraphs.",
+   "via": [
+    "lem-trf-complete-local-ci-presentation-independence",
+    "lem-trf-regular-quotient-completion-kernel-test"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cohen-presentation-lifted-evaluation-square",
+  "worker": "stage1",
+  "group": "Q142",
+  "summary": "Reused the existing field/Cohen regular-complete, adic formal-smoothness, complete-target lifting and evaluation nodes. Wrote out coefficient regrouping, kernel closedness, all lifting hypotheses with exponents one, locality and the commuting square by separatedness. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the fixed Cohen lifting and enlarged square in the retained presentation-comparison route below lem-trf-local-term-locality; the newest blueprint has no separate Cohen-square node. The source is Stacks 09PZ, first and third proof paragraphs, stopping before surjectivity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic field/Cohen power-series structure theorem supplies regularity, completeness and maximal ideals; this unit has no separate such algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+    "why": "Generic adic formal smoothness of field/Cohen power-series rings is the lifting input of Stacks 09PZ; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-lift-into-complete",
+    "why": "Generic continuous lifting through a closed kernel in a complete ring, used with both exponents one; this unit has no such lifting theorem."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic complete-target power-series evaluation supplies the map and truncation formula, without any surjectivity claim; this unit has no such universal-property theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-222e1d624",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-222e1d624 (reviewer sub-agent of L); spot-checked: Read the full item and the Stacks dpa.tex 09PZ proof, paragraphs 1 and 3. The item states exactly the fixed Cohen/field lift and the y-variable square, and leaves out the omitted-details surjectivity, which lem-trf-adic-evaluation-homogeneous-preimages covers. The statement is byte-identical to live, where it is still unsplit. No new nodes, no repair note and no SGA. Step 2 cites lem-weil-pbc-power-series-field-cohen-regular-complete with d=n and d=n+s: maximal ideals, completeness and regularity follow, and pi is local because y_j goes to 0. Step 3: J is inside m_R, and J is closed because A is separated. Step 4: the Z-version formal-smoothness node feeds lem-weil-pbc-fs-adic-lift-into-complete with S=T_0, A=R, I=m_R, t=r=1. The condition g(m_T0) in q(m_R) holds because nonunits lift to nonunits, and the conclusion gives a local f with rf=c_0. Step 5: the adic-evaluation node with C=T_0, alpha=f and b_j in m_R gives exactly the item's congruence, and locality of h follows from the generators of m_T. Step 6: applying r kills every term with |nu|>0 and separatedness gives rh=c_0 pi. Tested the edge cases s=0, n=0, a field Lambda with zero maximal ideal, zero or redundant generators, and r=id. A duplicate search (rg -L for Cohen/lift/y-variables and 09PZ) found no node stating this lift and square. The four declared tool_uses of sec-proper-base-change algebra lemmas are generic black boxes that unit sk-i-curve-zero cannot supply, and I accept them. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CohenPresentationLiftedEvaluationSquare",
+  "declaration": "MvPowerSeries.cohen_presentation_lifted_evaluation_square",
+  "file": "lean/Sheaf/RingTheory/CohenPresentationLiftedEvaluationSquare.lean",
+  "statement": "theorem cohen_presentation_lifted_evaluation_square {A : Type u} {R : Type v} {Λ : Type w} [CommRing A] [CommRing R] [CommRing Λ] [IsNoetherianRing A] [IsNoetherianRing R] [IsLocalRing A] [IsLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (r : R →+* A) [IsLocalHom r] (hr : Function.Surjective r) (p : ℕ) [CharP (IsLocalRing.ResidueField A) p] (hΛ : (p = 0 ∧ IsField Λ ∧ CharZero Λ) ∨ (0 < p ∧ IsCohenRing p Λ)) (n : ℕ) (c₀ : MvPowerSeries (Fin n) Λ →+* A) [IsLocalHom c₀] (hc₀ : Function.Surjective c₀) (s : ℕ) (b : Fin s → R) (hb : Ideal.span (Set.range b) = RingHom.ker r) : ∃ (_ : IsLocalRing Λ) (_ : IsRegularLocalRing (MvPowerSeries (Fin n) Λ)) (_ : IsRegularLocalRing (MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ))), (∃ e : MvPowerSeries (Fin n ⊕ Fin s) Λ ≃+* MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ), ∀ (G : MvPowerSeries (Fin n ⊕ Fin s) Λ) (α : Fin n →₀ ℕ) (ν : Fin s →₀ ℕ), coeff α (coeff ν (e G)) = coeff (Finsupp.sumElim α ν) G) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) Λ)) (MvPowerSeries (Fin n) Λ) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ))) (MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ)) ∧ IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) Λ) = (IsLocalRing.maximalIdeal Λ).map C ⊔ Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) Λ)) ∧ IsLocalRing.maximalIdeal (MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ)) = (IsLocalRing.maximalIdeal Λ).map ((C : MvPowerSeries (Fin n) Λ →+* MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ)).comp C) ⊔ Ideal.span (Set.range (fun i : Fin n ↦ (C (X i : MvPowerSeries (Fin n) Λ) : MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ))) ∪ Set.range (X : Fin s → MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ))) ∧ Function.Surjective (constantCoeff : MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ) →+* MvPowerSeries (Fin n) Λ) ∧ IsLocalHom (constantCoeff : MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ) →+* MvPowerSeries (Fin n) Λ) ∧ ∃ (f : MvPowerSeries (Fin n) Λ →+* R) (h : MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ) →+* R), IsLocalHom f ∧ IsLocalHom h ∧ r.comp f = c₀ ∧ h.comp C = f ∧ (∀ j : Fin s, h (X j) = b j) ∧ r.comp h = c₀.comp constantCoeff ∧ ∀ (F : MvPowerSeries (Fin s) (MvPowerSeries (Fin n) Λ)) (N : ℕ), 1 ≤ N → Ideal.Quotient.mk (IsLocalRing.maximalIdeal R ^ N) (h F) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal R ^ N) (MvPolynomial.eval₂ f b (F.truncTotal N))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-155107395",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read the item node, Stacks 09PZ ¶1/¶3, all 5 stmt_dep records (IsNoetherianRing, IsAdicComplete, IsCohenRing source in side-live, MvPowerSeries, IsRegularLocalRing via def-weil-regular-scheme mathlib_match) and Mathlib truncTotal (degree < N). Hypotheses match exactly (IsLocalHom = local for local rings; hΛ disjunction exact; hb exactly generation; s=0 allowed). Conclusions match exactly: regrouping iso pinned by coefficient equation; regular local, complete and maximal-ideal formulas for T₀ and T; constantCoeff surjective and local; local f and h with rf=c₀, h∘C=f, h(X j)=b j, rh=c₀π; congruence via eval₂ f b (truncTotal N) mod m_R^N; no surjectivity of h. Edge cases n=0, s=0, field Λ, N=1, r=id OK; universes independent. statement field verbatim in file; non-lean fields identical to live; fresh landing, no rebind; no new defs or nodes; sorry only; docstrings have source and blueprint id; report has Worker report and Second reading sections. No compile needed (no FIX)."
+ }
+}

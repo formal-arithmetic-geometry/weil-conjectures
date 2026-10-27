@@ -1,0 +1,207 @@
+{
+ "id": "lem-sfb-projective-closed-intersection-dimension",
+ "kind": "statement",
+ "title": "Dimension theorem for intersection of closed subsets of projective space",
+ "statement": "Let $k$ be a field [def-weil-field], let $N\\geq0$, and write $\\mathbf P^N_k=\\mathbf P(\\{0,\\ldots,N\\};\\operatorname{Spec}k)$ for projective space [def-nagata-projective-space-base-change]. Let $X,Y\\subseteq|\\mathbf P^N_k|$ be nonempty closed subsets, with their induced topologies. Suppose $\\dim X=r$ and $\\dim Y=s$, where $r,s\\geq0$ are integers and dimension is topological Krull dimension [def-kun-topological-krull-dimension]. If $r+s\\geq N$, then $X\\cap Y$ is nonempty and $\\dim(X\\cap Y)\\geq r+s-N$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2R, varieties-lemma-intersection-in-projective-space, statement and proof, lines 6365-6412."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-nagata-projective-space-base-change",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "First replace $X,Y$ by irreducible closed subsets $X_0\\subseteq X$, $Y_0\\subseteq Y$ of dimensions $r,s$. Indeed, by [def-kun-topological-krull-dimension], a finite integral supremum of chain lengths is attained. Take the last member $X_0$ of a chain of length $r$ in $X$. The same chain lies in $X_0$, while every chain in $X_0$ is a chain in $X$, since $X_0$ is closed in $X$. Thus $\\dim X_0=r$; it is nonempty and irreducible by the definition of the chain. Do the same for $Y$. Both subsets are closed in projective space because $X,Y$ are closed. A lower bound for $\\dim(X_0\\cap Y_0)$ gives the same bound for $\\dim(X\\cap Y)$: its closed irreducible chains remain such in $X\\cap Y$.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2R, reduction to maximal-dimensional irreducible closed subsets, expanded from the component choice in its proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-affine-cone-dimension] to $X_0$ and $Y_0$. Their cones $U=C(X_0)$ and $V=C(Y_0)$ in $\\mathbf A^{N+1}_k$ are nonempty irreducible closed subsets of dimensions $r+1$ and $s+1$. They both contain the origin $o$. In particular they are equidimensional, so the affine intersection estimate applies.",
+   "uses": [
+    "lem-sfb-projective-affine-cone-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2R, proof, punctured affine-space projection and closures of inverse images."
+   }
+  },
+  {
+   "text": "By [lem-sfb-affine-closed-intersection-dimension], since $o\\in U\\cap V$, we obtain $\\dim(U\\cap V)\\geq(r+1)+(s+1)-(N+1)=r+s-N+1\\geq1$. Here the ambient affine dimension parameter is $N+1$ and the final inequality uses the given $r+s\\geq N$.",
+   "uses": [
+    "lem-sfb-affine-closed-intersection-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2Q and 0B2R, application of the affine intersection bound."
+   }
+  },
+  {
+   "text": "Put $Z=X_0\\cap Y_0$. Inverse images preserve intersections, so the defining set formula for the cones gives $U\\cap V=\\{o\\}\\cup\\pi^{-1}(Z)=C(Z)$. If $Z$ were empty, this would be the one-point space $\\{o\\}$, of dimension zero: its only nonempty irreducible closed subset is itself. This contradicts step 3. Thus $Z$ is nonempty. Since $Z$ is closed in $X_0$, each of its irreducible closed chains is one in $X_0$; hence $0\\leq\\dim Z\\leq r$, and $\\dim Z$ is a finite integer. The cone dimension formula now gives $\\dim(U\\cap V)=\\dim Z+1$. Subtracting $1$ from step 3 gives $\\dim Z\\geq r+s-N$. Step 1 transfers nonemptiness and the bound to $X\\cap Y$.",
+   "uses": [
+    "lem-sfb-projective-affine-cone-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2R, final descent from the punctured cones; explicit origin and empty-intersection check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-projective-affine-cone-dimension",
+  "lem-sfb-affine-closed-intersection-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2R, varieties-lemma-intersection-in-projective-space: affine-cone proof, with the cone geometry isolated and the removal of the origin expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two nonempty closed subsets of projective n space whose dimensions add to at least n intersect",
+   "results": "{\"t\": \"2026-10-23T11:26:27Z\", \"tool\": \"leanfinder\", \"query\": \"Two nonempty closed subsets of projective n space whose dimensions add to at least n intersect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.Subspace.instInf\", \"Projectivization.Subspace.instInfSet\", \"Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat\", \"Projectivization.exists_not_orthogonal_self\", \"Projectivization.exists_not_self_orthogonal\", \"Projectivization.Subspace.instCompleteLattice\", \"Convex.helly_theorem\", \"Projectivization.Subspace.subspaceInhabited\"], \"digest\": \"d3b9c4adb7baaceb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern projective linear subspaces, zero-locus identities, convexity, or categorical projective dimension, and do not assert the dimension/intersection theorem for arbitrary projective closed subsets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"krullDim\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-23T11:26:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"krullDim\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern projective linear subspaces, zero-locus identities, convexity, or categorical projective dimension, and do not assert the dimension/intersection theorem for arbitrary projective closed subsets."
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*dimension|dimension.*intersection|krullDim.*[Pp]rojective",
+   "results": "{\"t\": \"2026-10-23T11:26:28Z\", \"tool\": \"grep\", \"query\": \"intersection.*dimension|dimension.*intersection|krullDim.*[Pp]rojective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern projective linear subspaces, zero-locus identities, convexity, or categorical projective dimension, and do not assert the dimension/intersection theorem for arbitrary projective closed subsets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective dimension theorem closed subvarieties intersect if the sum of their dimensions is at least the dimension of projective space",
+   "results": "{\"t\": \"2026-10-23T11:26:28Z\", \"tool\": \"leansearch\", \"query\": \"Projective dimension theorem closed subvarieties intersect if the sum of their dimensions is at least the dimension of projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.finrank_add_finrank_le_of_disjoint\", \"AffineSubspace.inter_nonempty_of_nonempty_of_sup_direction_eq_top\", \"Projectivization.Subspace.span_eq_sInf\", \"Submodule.finrank_sup_add_finrank_inf_eq\", \"ProjectiveSpectrum.zeroLocus_sup_ideal\", \"Projectivization.Subspace.span_sup\", \"ProjectiveSpectrum.isClosed_iff_zeroLocus\", \"Submodule.isCompl_iff_disjoint\"], \"digest\": \"e9495765781c7cf1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern projective linear subspaces, zero-locus identities, convexity, or categorical projective dimension, and do not assert the dimension/intersection theorem for arbitrary projective closed subsets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective dimension theorem: sum of dimensions of disjoint projective algebraic sets is strictly smaller than ambient dimension",
+   "results": "{\"t\": \"2026-10-23T11:26:30Z\", \"tool\": \"leanfinder\", \"query\": \"Projective dimension theorem: sum of dimensions of disjoint projective algebraic sets is strictly smaller than ambient dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instHasProjectiveDimensionLTHAddNat\", \"CategoryTheory.instHasProjectiveDimensionLTHAddNat_1\", \"ProjectiveSpectrum.sup_vanishingIdeal_le\", \"CategoryTheory.instHasProjectiveDimensionLTSucc\", \"CategoryTheory.instHasProjectiveDimensionLTBiprod\", \"CategoryTheory.projectiveDimension_lt_iff\", \"CategoryTheory.hasProjectiveDimensionLT_of_ge\", \"Projectivization.card_of_finrank\"], \"digest\": \"2b1e7aa293cc714a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern projective linear subspaces, zero-locus identities, convexity, or categorical projective dimension, and do not assert the dimension/intersection theorem for arbitrary projective closed subsets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"ProjectiveSpectrum\"",
+   "results": "{\"t\": \"2026-10-23T13:03:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"topologicalKrullDim\\\", \\\"ProjectiveSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned linear-subspace, convexity, zero-locus, and categorical projective-dimension results do not state the projective closed-subset dimension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.*[Kk]rull|[Kk]rull.*[Pp]rojective|cone.*[Kk]rull|[Kk]rull.*cone",
+   "results": "{\"t\": \"2026-10-23T13:09:05Z\", \"tool\": \"grep\", \"query\": \"Projective.*[Kk]rull|[Kk]rull.*[Pp]rojective|cone.*[Kk]rull|[Kk]rull.*cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned linear-subspace, convexity, zero-locus, and categorical projective-dimension results do not state the projective closed-subset dimension theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective dimension theorem: two nonempty closed subsets of projective N space intersect with dimension at least dim X plus dim Y minus N",
+   "results": "{\"t\": \"2026-10-23T13:09:09Z\", \"tool\": \"leanfinder\", \"query\": \"Projective dimension theorem: two nonempty closed subsets of projective N space intersect with dimension at least dim X plus dim Y minus N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Convex.helly_theorem\", \"Convex.helly_theorem'\", \"Convex.helly_theorem_set\", \"Convex.helly_theorem_set'\", \"CategoryTheory.instHasProjectiveDimensionLTHAddNat\", \"CategoryTheory.instHasProjectiveDimensionLTHAddNat_1\", \"ProjectiveSpectrum.sup_vanishingIdeal_le\", \"Projectivization.Subspace.instInfSet\"], \"digest\": \"02f7d86256d36dc1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned linear-subspace, convexity, zero-locus, and categorical projective-dimension results do not state the projective closed-subset dimension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonempty closed subsets of projective space satisfy dim intersection at least dim X plus dim Y minus N when the sum is at least N",
+   "results": "{\"t\": \"2026-10-23T13:14:23Z\", \"tool\": \"leansearch\", \"query\": \"Nonempty closed subsets of projective space satisfy dim intersection at least dim X plus dim Y minus N when the sum is at least N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.finrank_add_finrank_le_of_disjoint\", \"nonempty_inter_closedPoints\", \"Submodule.finrank_sup_add_finrank_inf_eq\", \"Projectivization.Subspace.span_sup\", \"AffineSubspace.inter_nonempty_of_nonempty_of_sup_direction_eq_top\", \"Projectivization.Subspace.mk.injEq\", \"TopologicalSpace.vietoris.isClosed_inter_nonempty_of_isClosed\", \"IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed\"], \"digest\": \"8a731619578de6ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned linear-subspace, convexity, zero-locus, and categorical projective-dimension results do not state the projective closed-subset dimension theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hopf-bilinear-image-dimension",
+  "date": "2026-10-23",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Hopf dimension inequality for a bilinear map without zero divisors. Geometric input: projective intersection dimension theorem applied to the Segre image and the projectivized kernel.",
+   "via": [
+    "lem-sfb-hopf-bilinear-image-dimension",
+    "lem-sfb-nodal-special-clifford-subcurve",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-closed-intersection-dimension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Follow Stacks 0B2R through closed affine cones and the conditional affine intersection inequality 0B2Q. Two searched statement-only prerequisites; finite-dimensional irreducible reduction and the empty-cone case proved in the item. No Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Hopf dimension inequality for a bilinear map without zero divisors. Geometric input: projective intersection dimension theorem applied to the Segre image and the projectivized kernel. Steps 1-4 supply the projective intersection tool used in the Hopf inequality, without changing the alteration/constructibility route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-dddf968f3",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-dddf968f3 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited node and Stacks varieties.tex Tags 0B2Q (lines 6338-6362) and 0B2R (lines 6364-6410) in full. The item statement matches 0B2R and is unchanged. The four steps are correct and the hypotheses are discharged: step 1 reduces to irreducible X_0, Y_0 of dims r, s by the chain argument; step 2 takes the cones C(X_0), C(Y_0), which are irreducible, hence equidimensional, have dims r+1, s+1 and contain o; step 3 applies the affine bound with n=N+1 and o in the intersection, giving at least r+s-N+1 >= 1; step 4 uses U∩V=C(Z), excludes Z empty because then the intersection is {o} of dim 0, then uses 0<=dim Z<=r and the cone formula. lem-sfb-affine-closed-intersection-dimension matches 0B2Q; it only adds nonemptiness of A, B. lem-sfb-projective-affine-cone-dimension is true (C(Z) closed, dim d+1, irreducible for irreducible Z) and checked on N=0, a non-rational point, and two points of P^1. Neither node restates the item. Duplicate search: rg -L over the DAG for 0B2Q, 0B2R and the labels, a statement scan, and blueprint_refs search all found nothing. Route lock is clean (Stacks only), no tool_uses, blueprint.from.node=None is inherited. One fault, B3/C4: the cone node defined π chartwise on D_+(T_i) citing only def-nagata-projective-space-base-change, which explicitly provides no standard-chart interface and no morphisms into P. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-projective-affine-cone-dimension.json: cite lem-weil-pbc-projective-space-standard-charts (c) for D_+(T_i)_k=Spec k[u_{j/i}], add it to stmt_deps, and restate π as the unique morphism with π^{-1}(D_+(T_i)_k)=D(x_i) and restriction u_{j/i}->x_j/x_i (true: the chart maps glue on D(x_ix_j)). The rest is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveClosedIntersectionDimension",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.closed_intersection_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveClosedIntersectionDimension.lean",
+  "statement": "theorem ProjectiveSpace.closed_intersection_dimension (k : Type u) [Field k] (N : ℕ) (X Y : Set (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of k)))) (hXClosed : IsClosed X) (hYClosed : IsClosed Y) (hXNonempty : X.Nonempty) (hYNonempty : Y.Nonempty) (r s : ℕ) (hXDim : topologicalKrullDim X = (r : WithBot ℕ∞)) (hYDim : topologicalKrullDim Y = (s : WithBot ℕ∞)) (hSum : N ≤ r + s) : (X ∩ Y).Nonempty ∧ ((r + s - N : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim ↥(X ∩ Y)",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9377047ff",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read the node, Stacks varieties.tex 0B2R/0B2Q, the ProjectiveSpace def (side-live WeilConjectures/AlgebraicGeometry/ProjectiveSpace.lean:130, n S : Type u), topologicalKrullDim and Field. Each clause matches: Field k at any u; P(ULift (Fin (N+1)); Spec k) = P^N_k; arbitrary closed nonempty Sets; dimension equalities to r, s : ℕ on subtypes; hSum N ≤ r+s; conclusion Nonempty ∧ ((r+s-N : ℕ)) ≤ dim of ↥(X∩Y), with ℕ-subtraction exact under hSum. No extra assumptions. Lean statement verbatim in file; stmt_deps unchanged; only the lean record added; not in side-live yet. Docstrings carry source and proof steps; sorry only; two needed imports; report sections present. Edge cases N=0, r+s=N, non-rational points, reducible sets fine. No fix, so no compile run. No findings."
+ }
+}

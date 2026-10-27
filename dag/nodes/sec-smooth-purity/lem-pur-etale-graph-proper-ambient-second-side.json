@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-etale-graph-proper-ambient-second-side",
+ "kind": "statement",
+ "title": "Second side of the product graph under proper ambient change",
+ "statement": "Fix schemes $X,Y$, $f:X\\to Y$, a compactification $c$, presentations $s,t$ [def-pur-etale-graph-presentation-maps], and a finite commutative ring $A$. Suppose $pr:P_t\\to P_s$ is proper and $q:U_t\\to U_s$ makes the open square Cartesian, $a_tq=a_s$, and $pr p_s=p_t$. Let $D_2$ be the second-neighborhood transport and $L$ the endpoint transport of [def-pur-etale-graph-proper-ambient-data]. The second graph-side maps of [lem-sf-etale-locally-closed-graph-model] satisfy $B_{2,s}D_2=L B_{2,t}$. Neither the first side nor the intersection word appears in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal); applied to the explicit product-graph formula."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-presentation-maps",
+  "def-pur-etale-graph-proper-ambient-data",
+  "lem-sf-etale-locally-closed-graph-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit product and neighborhood maps, their Cartesian squares, and their graph and projection equations.",
+   "uses": [
+    "def-pur-etale-graph-proper-ambient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the transport composition law twice: first to the old second-side square followed by the second-neighborhood square, then to the supplied ambient square followed by the new second-side square. Both rectangles have identical product and neighborhood projections by the explicit pullback-lift equations. Proof irrelevance identifies the Cartesian-square and factorization witnesses, so the two resulting transports are equal.",
+   "uses": [
+    "lem-pur-etale-proper-ambient-transport-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-proper-ambient-data",
+  "lem-pur-etale-proper-ambient-transport-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Proper-projection grids of the graph construction, vertical and horizontal pasting, Tags 0F7C--0F7D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartesian proper open exchange vertical horizontal pasting product graph comparison",
+   "results": "Eight hits, all concerning topology of products or set graphs; no derived exchange pasting theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper ambient change of product graph comparison extension by zero direct image coherence",
+   "results": "Eight hits on set graphs, Function.extend, and graph products, not derived-category comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosedGraph.*|LowerStarComp.*assoc",
+   "results": "msearch found no Mathlib hits. Direct rg in the two project roots found the explicit graph model and related parent theorems; the parent imports this item, so using it would be circular. Existing graph-neighborhood words also import this item transitively.",
+   "date": "2026-10-26",
+   "verdict": "No independent theorem for the three component equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonProperAmbient",
+  "date": "2026-10-26",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The side and intersection comparisons in the proper ambient change, before shrinking; steps 5--7 of the pairwise product-graph normalization.",
+   "via": [
+    "lem-pur-etale-graph-comparison-proper-ambient",
+    "lem-pur-etale-pairwise-product-graph-normalization",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProperAmbientSecondSide",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProperAmbientSecondSide.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphProperAmbientSecondSide",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphProperAmbientSecondSide"
+  ],
+  "statement": "theorem etaleGraphProperAmbientSecondSide\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (s t : EtaleGraphPresentation f) (pr : t.P ⟶ s.P) [IsProper pr]\n    (q : t.U ⟶ s.U) (sq : IsPullback q t.e s.e pr)\n    (hz : t.a ≫ q = s.a) (hp : pr ≫ s.p = t.p) :\n    (locallyClosedGraphSide₂ s.a s.e s.p c.i c.g\n      ((Category.assoc _ _ _).trans (s.fac.trans c.comm)) A).hom ≫\n        (s.properAmbientSecondTransport c t pr q sq hz hp A).hom =\n      (etaleProperAmbientTransport A s.a s.e s.p t.a t.e t.p pr q sq hz hp).hom ≫\n        (locallyClosedGraphSide₂ t.a t.e t.p c.i c.g\n      ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) A).hom",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T023027-L-514396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T023027-L-514396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

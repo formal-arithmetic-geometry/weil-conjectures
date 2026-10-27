@@ -15,7 +15,7 @@
     "lem-weil-pbc-module-sheaf-colimit-constructible"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Fibre degree bounds hold for all field-valued points (Stacks 03J5)",
@@ -33,99 +33,72 @@
  ],
  "proof": [
   {
-   "text": "*(2)$\\Rightarrow$(1).* Assume (2) and let $y\\in Y$. Take $K=\\kappa(y)$ [def-weil-residue-field] and for $\\operatorname{Spec}K\\to Y$ the canonical morphism $j_y:\\operatorname{Spec}\\kappa(y)\\to Y$. By [def-pc-scheme-fibre] the fibre $X_y$ is the fibre product $X\\times_Y\\operatorname{Spec}\\kappa(y)$ of $f$ and $j_y$, regarded over $\\kappa(y)$ through its second projection, and the $\\kappa(y)$-algebra structure of $\\Gamma(X_y,\\mathcal O_{X_y})$ used in the degree [def-weil-pbc-fibre-degree-bound] is the one induced by that projection; this is exactly the scheme $X_K$ of (2) with its structure over $K$. (If $X_K$ is another choice of the fibre product, the unique isomorphism $u:X_K\\to X_y$ of fibre products commutes with the second projections, so the projection of $X_y$ is that of $X_K$ composed with the isomorphism $u^{-1}$, finite by [lem-weil-pbc-isomorphism-finite] and [lem-weil-pbc-finite-composition], and $\\Gamma(u)$ is an isomorphism of $\\kappa(y)$-algebras, so finiteness and the dimension of global sections agree.) Hence (2) says that $X_y$ is finite over $\\kappa(y)$ with $\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})\\le n$. As $y$ was arbitrary, $n$ bounds the degrees of the fibres of $f$ [def-weil-pbc-fibre-degree-bound].",
+   "text": "For the reverse implication, apply the field-valued hypothesis with K=κ(y) and g=Y.fromSpecResidueField y. By def-pc-scheme-fibre the second projection is definitionally f.fiberToSpecResidueField y. Thus both clauses of def-weil-pbc-fibre-degree-bound follow without changing the chosen pullback.",
    "uses": [
-    "def-weil-residue-field",
     "def-pc-scheme-fibre",
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 03J5 (lemma-characterize-universally-bounded), statement at line 15322, proof at line 15339, first two sentences (equivalence of (1) and (2))"
+   }
+  },
+  {
+   "text": "For the forward implication fix K and g:Spec K→Y, set ξ=default and h=pullback.snd f g. The canonical map φ:K→κ_alg(ξ) is an isomorphism by Mathlib Ideal.algEquivResidueFieldOfField. Compose asIso φ with the inverse of Scheme.Spec.residueFieldIso to obtain e:K≅κ_Spec K(ξ). Scheme.Spec.map_residueFieldIso_inv_eq_fromSpecResidueField and Spec.map_comp give Spec.map e.hom=fromSpecResidueField ξ. Hence this residue morphism is an isomorphism. Its pullback h.fiberι ξ is an isomorphism by the pullback-of-isomorphism instance.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 03J5 (lemma-characterize-universally-bounded), statement at line 15322, proof at line 15339, first two sentences (equivalence of (1) and (2))"
+   }
+  },
+  {
+   "text": "Apply finite_fiber_degree_pullback f g ξ to the finite fibre at g(ξ), supplied by the assumed bound. It gives finiteness of q=h.fiberToSpecResidueField ξ and equality of its degree with that original fibre. From h.fiber_fac and invertibility of p=h.fiberι ξ, obtain p⁻¹≫q≫Spec.map e.hom=h. Isomorphisms and finite morphisms compose, so h is finite.",
+   "uses": [
+    "lem-weil-pbc-fibre-degree-base-change",
     "def-weil-pbc-fibre-degree-bound",
+    "def-pc-scheme-fibre",
     "lem-weil-pbc-isomorphism-finite",
     "lem-weil-pbc-finite-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339, 'The implication (2) => (1) is trivial' (take the canonical Spec kappa(y) -> Y)"
+    "place": "Morphisms, Lemma Tag 03J5 (lemma-characterize-universally-bounded), statement at line 15322, proof at line 15339, first two sentences (equivalence of (1) and (2))"
    }
   },
   {
-   "text": "*The point of $\\operatorname{Spec}K$.* For the converse, let $K$ be a field and $g:\\operatorname{Spec}K\\to Y$ a morphism [def-weil-affine-spectrum]. Since $K$ is a field, $\\operatorname{Spec}K$ has exactly one point $\\xi=(0)$. Apply [lem-weil-pbc-spec-residue-field-identification] with $R=K$, $\\mathfrak p=(0)$: the canonical morphism $j_\\xi:\\operatorname{Spec}\\kappa(\\xi)\\to\\operatorname{Spec}K$ of the residue field [def-weil-residue-field] equals $\\operatorname{Spec}(\\varphi)$ with $\\varphi=e^{-1}\\circ\\pi:K\\to\\kappa(\\xi)$, where $\\pi:K\\to K_{(0)}/(0)K_{(0)}$ and $e$ is a ring isomorphism. Every nonzero element of $K$ is a unit, so the localization $K\\to K_{(0)}$ is an isomorphism, and the quotient by the zero ideal is an isomorphism; hence $\\pi$ and $\\varphi$ are isomorphisms of fields, and $j_\\xi=\\operatorname{Spec}(\\varphi)$ is an isomorphism of schemes with inverse $\\operatorname{Spec}(\\varphi^{-1})$. Under $\\Gamma(\\operatorname{Spec}A,\\mathcal O)=A$ the map induced by $j_\\xi$ on global sections is $\\varphi:K\\to\\kappa(\\xi)$.",
+   "text": "The already proved source-library lemma Scheme.Hom.finrankΓ_eq_of_iso h q (asIso p).symm e applies directly to p⁻¹≫q≫Spec.map e.hom=h. It gives h.finrankΓ=q.finrankΓ for the exact algebra structures in the bound definition. Transitivity with the degree equality from the preceding step and the assumed bound at g(ξ) proves h.finrankΓ≤n. No basis-transport theorem or separate field-base fibre-identification theorem is needed.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-residue-field",
-    "lem-weil-pbc-spec-residue-field-identification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339, second sentence (the field k of the point Spec(k) -> Y, written out)"
-   }
-  },
-  {
-   "text": "*(1)$\\Rightarrow$(2): the base change of the fibre.* Assume (1); let $g$, $\\xi$, $\\varphi$ be as in step 2 and $y=g(\\xi)$. Put $X_K=X\\times_Y\\operatorname{Spec}K$ with projections $\\mathrm{pr}_1:X_K\\to X$ and $\\mathrm{pr}_2:X_K\\to\\operatorname{Spec}K$ [def-pc-fibre-product]. By (1), the fibre $X_y$ [def-pc-scheme-fibre] is finite over $\\kappa(y)$ of degree $d=\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})\\le n$ [def-weil-pbc-fibre-degree-bound]. Apply [lem-weil-pbc-fibre-degree-base-change] with $S=Y$, $T=\\operatorname{Spec}K$, the morphisms $f$ and $g$, $X_T=X_K$, $f_T=\\mathrm{pr}_2$, $t=\\xi$ and $s=g(\\xi)=y$: the fibre $F=(X_K)_\\xi=X_K\\times_{\\operatorname{Spec}K}\\operatorname{Spec}\\kappa(\\xi)$ of $\\mathrm{pr}_2$ at $\\xi$ (fibre product of $\\mathrm{pr}_2$ and $j_\\xi$), with projections $p:F\\to X_K$ and $q:F\\to\\operatorname{Spec}\\kappa(\\xi)$, $\\mathrm{pr}_2\\circ p=j_\\xi\\circ q$, is finite over $\\kappa(\\xi)$ (the morphism $q$ is finite) and $\\dim_{\\kappa(\\xi)}\\Gamma(F,\\mathcal O_F)=d$, where $\\Gamma(F,\\mathcal O_F)$ is a $\\kappa(\\xi)$-algebra through $q$.",
-   "uses": [
-    "def-pc-fibre-product",
-    "def-pc-scheme-fibre",
-    "def-weil-pbc-fibre-degree-bound",
-    "lem-weil-pbc-fibre-degree-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339, 'The other implication holds because if the image of Spec(k) -> Y is y, then X_k = Spec(k) x_{Spec(kappa(y))} X_y' (degree preserved by the base change of fields)"
-   }
-  },
-  {
-   "text": "*$F$ is $X_K$.* Since $j_\\xi$ is an isomorphism (step 2), $(X_K,\\mathrm{id}_{X_K},j_\\xi^{-1}\\circ\\mathrm{pr}_2)$ is a fibre product of $\\mathrm{pr}_2$ and $j_\\xi$ [def-pc-fibre-product]: it commutes, $\\mathrm{pr}_2\\circ\\mathrm{id}=j_\\xi\\circ(j_\\xi^{-1}\\circ\\mathrm{pr}_2)$, and for a scheme $W$ with $a:W\\to X_K$, $b:W\\to\\operatorname{Spec}\\kappa(\\xi)$, $\\mathrm{pr}_2\\circ a=j_\\xi\\circ b$, the morphism $a$ is the unique $h:W\\to X_K$ with $\\mathrm{id}\\circ h=a$, and it satisfies $j_\\xi^{-1}\\circ\\mathrm{pr}_2\\circ a=b$. By uniqueness of fibre products up to unique isomorphism, the first projection $p:F\\to X_K$ is an isomorphism, and $q=j_\\xi^{-1}\\circ\\mathrm{pr}_2\\circ p$.",
-   "uses": [
-    "def-pc-fibre-product"
+    "def-weil-pbc-fibre-degree-bound"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339, second sentence, specialization of the base change to T = Spec(k), t its point (kappa(t) = k), written out"
-   }
-  },
-  {
-   "text": "*$X_K$ is finite over $K$.* By step 4, $\\mathrm{pr}_2=j_\\xi\\circ q\\circ p^{-1}$. The isomorphisms $p^{-1}$ and $j_\\xi$ are finite [lem-weil-pbc-isomorphism-finite], $q$ is finite (step 3), and a composition of finite morphisms is finite [lem-weil-pbc-finite-composition]; so $\\mathrm{pr}_2:X_K\\to\\operatorname{Spec}K$ is finite [def-weil-finite-integral-morphism], i.e. $X_K$ is finite over $K$.",
-   "uses": [
-    "lem-weil-pbc-isomorphism-finite",
-    "lem-weil-pbc-finite-composition",
-    "def-weil-finite-integral-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339, second sentence ('X_k ... is finite over k'), written out"
-   }
-  },
-  {
-   "text": "*The degree of $X_K$.* Apply $\\Gamma(-,\\mathcal O)$ to $\\mathrm{pr}_2\\circ p=j_\\xi\\circ q$: with $\\alpha:K\\to\\Gamma(X_K,\\mathcal O_{X_K})$ and $\\beta:\\kappa(\\xi)\\to\\Gamma(F,\\mathcal O_F)$ the maps induced by $\\mathrm{pr}_2$ and $q$ (the algebra structures of the degree), $p^*:\\Gamma(X_K,\\mathcal O_{X_K})\\to\\Gamma(F,\\mathcal O_F)$ the ring isomorphism induced by the isomorphism $p$, and $\\varphi$ the map induced by $j_\\xi$ (step 2), we get $p^*\\circ\\alpha=\\beta\\circ\\varphi$. So $p^*(\\alpha(a)v)=\\beta(\\varphi(a))p^*(v)$: $p^*$ is a bijection, additive and semilinear along the field isomorphism $\\varphi$, hence maps a $K$-basis of $\\Gamma(X_K,\\mathcal O_{X_K})$ onto a $\\kappa(\\xi)$-basis of $\\Gamma(F,\\mathcal O_F)$ and conversely. Therefore $\\dim_K\\Gamma(X_K,\\mathcal O_{X_K})=\\dim_{\\kappa(\\xi)}\\Gamma(F,\\mathcal O_F)=d\\le n$ (step 3). Together with step 5 this is (2) for $g$; as $K$ and $g$ were arbitrary, (1) implies (2).",
-   "uses": [
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339, second sentence ('of degree <= n'), written out"
+    "place": "Morphisms, Lemma Tag 03J5 (lemma-characterize-universally-bounded), statement at line 15322, proof at line 15339, first two sentences (equivalence of (1) and (2))"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-residue-field",
   "def-pc-scheme-fibre",
   "def-weil-pbc-fibre-degree-bound",
-  "lem-weil-pbc-isomorphism-finite",
-  "lem-weil-pbc-finite-composition",
-  "def-weil-affine-spectrum",
+  "lem-weil-pbc-prime-residue-field-algebra",
   "lem-weil-pbc-spec-residue-field-identification",
   "def-pc-fibre-product",
   "lem-weil-pbc-fibre-degree-base-change",
-  "def-weil-finite-integral-morphism"
+  "lem-weil-pbc-isomorphism-finite",
+  "lem-weil-pbc-finite-composition"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma Tag 03J5 (lemma-characterize-universally-bounded), statement at line 15322, proof at line 15339, first two sentences (equivalence of (1) and (2))"
+  "place": "Morphisms, Lemma Tag 03J5 (lemma-characterize-universally-bounded), equivalence of (1) and (2), assembled using Mathlib residue-field identifications and the proved source-library finrankΓ_eq_of_iso."
  },
  "mathlib_searches": [
   {
@@ -190,6 +163,41 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degrees of fibres of a scheme morphism are bounded by n if and only if pullback to every field valued point is finite of degree at most n",
+   "results": "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.IsFinite.finite_preimage_singleton; AlgebraicGeometry.IsFinite.instFstScheme; AlgebraicGeometry.IsFinite.instSndScheme; AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme; AlgebraicGeometry.Scheme.Hom.discrete_fiber; AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme; AlgebraicGeometry.finite_appTop_of_universallyClosed; 8 hits; full output in search-results-parent.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform bound on dimensions of global sections of finite fibres can be checked on all morphisms from spectra of fields",
+   "results": "AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite; AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.IsFinite.finite_preimage_singleton; AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict; AlgebraicGeometry.isField_of_universallyClosed; 8 hits; full output in search-results-parent.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, CategoryTheory.Limits.pullback.snd",
+   "results": "AlgebraicGeometry.IsFinite.instSndScheme; AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt; AlgebraicGeometry.Scheme.Hom.finrank_pullback_snd; 3 hits; full output in search-results-parent.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "03J5|[Bb]ounds[Ff]iber[Dd]egrees|universally.?bounded|fiber.*finrank|finrank.*fiber",
+   "results": "; subdirectory Mathlib/AlgebraicGeometry; 0 hits; full output in search-results-parent.txt",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Testing bounded degrees of finite scheme theoretic fibres over residue fields on arbitrary field extensions",
+   "results": "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; AlgebraicGeometry.IsFinite.finite_preimage_singleton; AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField; Algebra.QuasiFinite.finite_fiber; Algebra.quasiFinite_iff; 8 hits; full output in search-results-parent.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
   }
  ],
  "mathlib_match": null,
@@ -200,16 +208,36 @@
   "item": "lem-weil-pbc-composition-fibre-degree-bound",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "item": "lem-weil-pbc-fibre-degree-bound-field-points",
   "worker": "stage1",
-  "summary": "Checked against Stacks Morphisms Lemma 03J5 (morphisms.tex 15322, proof 15339; tag verified in tags/tags) and Definition 03J4. Statement unchanged (it is (1)<=>(2) of 03J5; the trailing claims of 03J5 on points and residue degrees are not part of this node). Six steps: (2)=>(1) by K = kappa(y), j_y canonical, X_K = X_y by def-pc-scheme-fibre (choice of fibre product handled by isomorphism-finite + finite-composition); (1)=>(2): Spec K has one point xi, and by spec-residue-field-identification j_xi = Spec(phi) with phi: K -> kappa(xi) an isomorphism; lem-weil-pbc-fibre-degree-base-change with T = Spec K, t = xi, s = y gives F = (X_K)_xi finite over kappa(xi) of degree d = deg X_y <= n; F -> X_K is an isomorphism since j_xi is (universal property, elementary); X_K -> Spec K = j_xi o q o p^{-1} is finite (isomorphism-finite, finite-composition); the degree is transported by the phi-semilinear ring isomorphism p^* (elementary). The specialization of the base-change node is exact up to the canonical isomorphisms K = kappa(xi) and (X_K)_xi = X_K, written out in steps 2 and 4. No new nodes. Mathlib: no match (searches added: LeanSearch, Loogle, LeanFinder, local_search, grep)."
+  "summary": "Repair of the 2026-10-22 re-split return: statement and existing metadata preserved. Extracted two independent statement-only unsplit nodes: canonical field-base fibre identification (old steps 2 and 4) and compatible finite-degree isomorphism transport (old step 1 comparison and steps 5 and 6). The parent retains the residue-field test and application of the existing arbitrary base-change degree theorem. Its proof is a short three-step assembly; all original arguments are preserved verbatim and mapped to their destinations in report.md. Ran and read logged Mathlib searches for both new nodes and the parent; no full match.",
+  "blueprint": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules'); resolves the 03J5 equivalence used below this constructible-approximation branch, retaining the source route.",
+  "tool_uses": []
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Morphisms 03J5 (the equivalence only); (1)=>(2) via lem-weil-pbc-fibre-degree-base-change and the identification of the fibre over the unique point of Spec K (steps 2, 4, 6 written out). No new nodes; no Mathlib match.",
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-6de61845a",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-6de61845a (reviewer sub-agent of L); spot-checked: Re-split note (live coord/repair-notes, released 2026-10-22; requires at least 2 comparable statement-only nodes and an assembly of at most 3000 characters) is met. The item statement and stmt_deps are byte-identical to live. live and side-live still hold the 6-step split from 2026-10-10, so the delivery is not superseded. Mapping of the old steps: step 1's residue-field test stays as new step 1, and its comparison of fibre-product choices goes to finite-field-degree-isomorphism-transport with φ=id (def-pc-fibre-product's comparison commutes with pr2). Steps 2+4 (φ=germ∘residue is a field isomorphism, j_ξ=Spec φ, Γ(j_ξ)=φ, fibre projection p iso, q=j_ξ⁻¹hp) go to field-base-point-fibre-isomorphism. Step 3 stays as new step 2 (fibre-degree-base-change with S=Y, T=Spec K, t=ξ, s=y; its hypothesis comes from (1)). Steps 5+6 (finite under iso and composition, u*α=βφ, semilinear basis transport, equal dimensions) go to the transport node. Nothing was dropped. The new statements are 1011 and 1108 characters and the assembly is 1768. Neither new node restates a clause of the item. Both are true; I checked them on: W empty, fields with nontrivial automorphisms, dual numbers, twisted φ, non-affine W. Both are self-contained and cite defining nodes. Both record leansearch, leanfinder/loogle and grep searches, with the failed loogle query marked unavailable. blueprint from/via/same_as are correct. Duplicate scans and reads of spec-field-point-residue-field, morphism-from-spec-field, field-point-factors-through-immersion, spec-residue-field-identification and spec-map-global-sections found no duplicate. Steps 2 and 3 apply the cited statements exactly (F=(X_T)_t, j=j_ξ, h∘p=j_ξ∘q). proof_deps equals the union of uses; all lemmas are in sk-thm-p1; tool_uses is empty. Source is Stacks morphisms.tex 03J5 lines 15321-15356; no SGA."
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints",
   "declaration": "AlgebraicGeometry.Scheme.Hom.boundsFiberDegrees_iff_fieldPoints",
@@ -227,5 +255,15 @@
   "group": "E1",
   "result": "pass",
   "note": "f:X⟶Y arbitrary, n:ℕ (n=0 ok); (1)=BoundsFiberDegrees f n (H1 dep, fiberToSpecResidueField/finrankΓ as M1 9a8fc0675); (2) ∀ K:Type u [Field K] (g:Spec (.of K)⟶Y), IsFinite (pullback.snd f g) ∧ (pullback.snd f g).finrankΓ ≤ n = X×_Y Spec K over K via 2nd projection; ↔; #check: IsFinite=AlgebraicGeometry.IsFinite, finrankΓ=Scheme.Hom.finrankΓ; no statement change"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261023T102657-L-2949317",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

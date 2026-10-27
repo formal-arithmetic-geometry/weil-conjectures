@@ -19,26 +19,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Algebra.Algebra.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Mathlib.CategoryTheory.MorphismProperty.Limits
-import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
-import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Normalization
-import WeilConjectures.Blowup.AdmissibleBlowup
-import Sheaf.AlgebraicGeometry.NagataBoundaryDivisorCartier
-import WeilConjectures.Blowup.BlowupUniversal
-import WeilConjectures.Blowup.Complement
-import WeilConjectures.Blowup.Proper
-import WeilConjectures.AlgebraicGeometry.Regular
-import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
-import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
-import WeilConjectures.AlgebraicGeometry.LocalizedSeparablePolynomialModel
-import WeilConjectures.AlgebraicGeometry.SpreadPurelyInseparableFactors
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.FieldTheory.PrimitiveElement
-import Mathlib.RingTheory.Etale.StandardEtale
+import Sheaf.AlgebraicGeometry.CoverNestedCartierPreparation
+import Sheaf.AlgebraicGeometry.AlterationCartierSubboundary
+import Sheaf.AlgebraicGeometry.Morphisms.GenericRadicialEtaleFactorization
+import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
+import Mathlib.RingTheory.KrullDimension.Field
 
 /-!
 # Regular alterations adapted to nested opens
@@ -52,11 +37,193 @@ with normalization, two boundary blowups and generic finite-algebra spreading
 
 noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
+
+private theorem generic_eq {X Z : Scheme.{u}} [IsIntegral X] [IsIntegral Z]
+    (f : X ⟶ Z) [IsDominant f] : f (genericPoint X) = genericPoint Z := by
+  apply ((genericPoint_spec Z).eq _).symm
+  have h := (genericPoint_spec X).image f.continuous
+  simpa only [Set.image_univ, f.denseRange.closure_range] using h
+
+private theorem generic_map_spec {X Z : Scheme.{u}} [IsIntegral X] [IsIntegral Z]
+    (f : X ⟶ Z) (hf : f (genericPoint X) = genericPoint Z) :
+    Spec.map (f.functionFieldMap hf) ≫ Z.fromSpecFunctionField =
+      X.fromSpecFunctionField ≫ f := by
+  dsimp only [Scheme.Hom.functionFieldMap]
+  rw [Spec.map_comp, Category.assoc,
+    Scheme.SpecMap_stalkSpecializes_fromSpecStalk]
+  exact Scheme.SpecMap_stalkMap_fromSpecStalk f
+
+private theorem finite_generic_of_spectrum {X Z : Scheme.{u}} [IsIntegral X] [IsIntegral Z]
+    (f : X ⟶ Z) [IsDominant f] (v : Spec X.functionField ⟶ Spec Z.functionField)
+    [IsFinite v] (hv : v ≫ Z.fromSpecFunctionField = X.fromSpecFunctionField ≫ f) :
+    (f.functionFieldMap (generic_eq f)).hom.Finite := by
+  have he : Spec.map (f.functionFieldMap (generic_eq f)) = v := by
+    apply (cancel_mono Z.fromSpecFunctionField).mp
+    rw [generic_map_spec, hv]
+  apply (IsFinite.SpecMap_iff _).mp
+  rw [he]
+  infer_instance
+
+private theorem generic_map_comp {X Y Z : Scheme.{u}}
+    [IsIntegral X] [IsIntegral Y] [IsIntegral Z]
+    (f : X ⟶ Y) (g : Y ⟶ Z) [IsDominant f] [IsDominant g] :
+    (f ≫ g).functionFieldMap (generic_eq (f ≫ g)) =
+      g.functionFieldMap (generic_eq g) ≫ f.functionFieldMap (generic_eq f) := by
+  apply Spec.map_injective
+  apply (cancel_mono Z.fromSpecFunctionField).mp
+  rw [generic_map_spec, Spec.map_comp, Category.assoc, generic_map_spec]
+  exact (congrArg (fun v ↦ v ≫ g) (generic_map_spec f (generic_eq f)).symm).trans
+    (Category.assoc _ _ _)
+
+private theorem generic_map_congr {X Z : Scheme.{u}} [IsIntegral X] [IsIntegral Z]
+    (f g : X ⟶ Z) (hf : f (genericPoint X) = genericPoint Z)
+    (hg : g (genericPoint X) = genericPoint Z) (he : f = g) :
+    f.functionFieldMap hf = g.functionFieldMap hg := by
+  subst g
+  rfl
+
+private theorem finite_generic_comp {X Y Z : Scheme.{u}}
+    [IsIntegral X] [IsIntegral Y] [IsIntegral Z]
+    (f : X ⟶ Y) (g : Y ⟶ Z) [IsDominant f] [IsDominant g]
+    (hf : (f.functionFieldMap (generic_eq f)).hom.Finite)
+    (hg : (g.functionFieldMap (generic_eq g)).hom.Finite) :
+    ((f ≫ g).functionFieldMap (generic_eq (f ≫ g))).hom.Finite := by
+  have : IsFinite (Spec.map (f.functionFieldMap (generic_eq f))) :=
+    (IsFinite.SpecMap_iff _).mpr hf
+  have : IsFinite (Spec.map (g.functionFieldMap (generic_eq g))) :=
+    (IsFinite.SpecMap_iff _).mpr hg
+  apply finite_generic_of_spectrum (f ≫ g)
+    (Spec.map (f.functionFieldMap (generic_eq f)) ≫
+      Spec.map (g.functionFieldMap (generic_eq g)))
+  rw [Category.assoc, generic_map_spec, ← Category.assoc, generic_map_spec,
+    Category.assoc]
+
+private theorem closeds_iSup_coe {X : Type u} [TopologicalSpace X]
+    {n : ℕ} (C : Fin n → Closeds X) :
+    ((⨆ i, C i : Closeds X) : Set X) = ⋃ i, (C i : Set X) := by
+  rw [← Finset.sup_univ_eq_iSup, Closeds.coe_finset_sup]
+  simp
+
+private theorem finite_component_equiv {X : Type u} [TopologicalSpace X]
+    (n : ℕ) (Z : Fin n → Set X) (hc : ∀ i, IsClosed (Z i))
+    (hi : ∀ i, IsIrreducible (Z i))
+    (ha : ∀ i j, Z i ⊆ Z j → i = j) (hcover : ⋃ i, Z i = Set.univ) :
+    ∃ e : Fin n ≃ {S : Set X // S ∈ irreducibleComponents X},
+      ∀ i, (e i).val = Z i := by
+  classical
+  have hsub (S : Set X) (hS : IsIrreducible S) : ∃ i, S ⊆ Z i := by
+    obtain ⟨z, hz, hSz⟩ := isIrreducible_iff_sUnion_isClosed.mp hS
+      (Finset.univ.image Z) (by simpa using hc)
+      (by simpa only [Finset.coe_image, Finset.coe_univ, Set.image_univ,
+        Set.sUnion_range, hcover] using Set.subset_univ S)
+    obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp hz
+    exact ⟨i, hSz⟩
+  have hmem (i) : Z i ∈ irreducibleComponents X := by
+    refine ⟨hi i, fun S hS hZS ↦ ?_⟩
+    obtain ⟨j, hj⟩ := hsub S hS
+    have hij := ha i j (hZS.trans hj)
+    exact hij ▸ hj
+  let f : Fin n → {S : Set X // S ∈ irreducibleComponents X} :=
+    fun i ↦ ⟨Z i, hmem i⟩
+  have hf : Function.Bijective f := by
+    constructor
+    · intro i j hij
+      exact ha i j (congrArg Subtype.val hij).le
+    · intro S
+      obtain ⟨i, hiS⟩ := hsub S.val S.property.1
+      exact ⟨i, Subtype.ext ((S.property.2 (hi i) hiS).antisymm hiS)⟩
+  exact ⟨Equiv.ofBijective f hf, fun _ ↦ rfl⟩
+
+private theorem snc_component_equiv {Y : Scheme.{u}} [IsIntegral Y]
+    (D : Y.IdealSheafData) (n : ℕ) (C : Fin n → Y.IdealSheafData)
+    (hCinj : Function.Injective (fun i ↦ (C i).support))
+    (hC : ∀ i, IsIntegral (C i).subscheme)
+    (hCsupp : D.support = ⨆ i, (C i).support)
+    (hCdim : ∀ i, ∀ z : (C i).subscheme,
+      ringKrullDim (Y.presheaf.stalk ((C i).subschemeι z)) =
+        ringKrullDim ((C i).subscheme.presheaf.stalk z) + 1) :
+    ∃ e : Fin n ≃ {Z : Set (D.support : Set Y) //
+        Z ∈ irreducibleComponents (D.support : Set Y)},
+      ∀ i, Subtype.val '' (e i).val = ((C i).support : Set Y) := by
+  classical
+  let Z : Fin n → Set (D.support : Set Y) :=
+    fun i ↦ Subtype.val ⁻¹' ((C i).support : Set Y)
+  have hle (i) : (C i).support ≤ D.support := by
+    rw [hCsupp]
+    exact le_iSup (fun j ↦ (C j).support) i
+  have hZimage (i) : Subtype.val '' Z i = ((C i).support : Set Y) := by
+    ext y
+    exact ⟨fun ⟨z, hz, hzy⟩ ↦ hzy ▸ hz, fun hy ↦ ⟨⟨y, hle i hy⟩, hy, rfl⟩⟩
+  have hirr (i) : IsIrreducible (Z i) := by
+    have := hC i
+    let f : (C i).subscheme → (D.support : Set Y) :=
+      fun z ↦ ⟨(C i).subschemeι z, hle i (by
+        exact Set.mem_of_mem_of_subset (Set.mem_range_self z)
+          (show Set.range (C i).subschemeι ⊆ (C i).support from
+            (C i).range_subschemeι.le))⟩
+    have hf : Continuous f := (C i).subschemeι.continuous.subtype_mk _
+    have he : f '' Set.univ = Z i := by
+      ext y
+      constructor
+      · rintro ⟨z, _, rfl⟩
+        change (C i).subschemeι z ∈ (C i).support
+        exact Set.mem_of_mem_of_subset (Set.mem_range_self z)
+          (show Set.range (C i).subschemeι ⊆ (C i).support from
+            (C i).range_subschemeι.le)
+      · intro hy
+        have hy' : y.val ∈ ((C i).support : Set Y) := hy
+        have hyr : y.val ∈ Set.range (C i).subschemeι :=
+          (C i).range_subschemeι.symm ▸ hy'
+        obtain ⟨z, hz⟩ := hyr
+        exact ⟨z, trivial, Subtype.ext hz⟩
+    rw [← he]
+    exact (IrreducibleSpace.isIrreducible_univ _).image f hf.continuousOn
+  let ξ := fun i ↦ (C i).subschemeι
+    (letI := hC i; genericPoint (C i).subscheme)
+  have hgen (i) : IsGenericPoint (ξ i) ((C i).support : Set Y) := by
+    have := hC i
+    have h := (genericPoint_spec (C i).subscheme).image (C i).subschemeι.continuous
+    simpa only [Set.image_univ, (C i).range_subschemeι,
+      (C i).support.isClosed.closure_eq] using h
+  have hdim (i) : Order.coheight (ξ i) = 1 := by
+    have := hC i
+    have hh := hCdim i (genericPoint (C i).subscheme)
+    rw [ringKrullDim_eq_zero_of_field, zero_add, ringKrullDim_stalk_eq_coheight] at hh
+    exact_mod_cast hh
+  have hanti (i j) (hij : Z i ⊆ Z j) : i = j := by
+    have hij' : ((C i).support : Set Y) ⊆ (C j).support := by
+      rw [← hZimage i, ← hZimage j]; exact Set.image_mono hij
+    have hs : ξ j ⤳ ξ i := (hgen j).specializes (hij' (hgen i).mem)
+    have he : ξ i = ξ j := by
+      by_contra hn
+      have ht : ξ i < ξ j := lt_iff_le_not_ge.mpr ⟨hs, fun hji ↦
+        hn (Specializes.antisymm (show ξ i ⤳ ξ j from hji) hs).eq⟩
+      have hh := Order.coheight_strictAnti ht (by rw [hdim j]; norm_num)
+      rw [hdim i, hdim j] at hh
+      exact lt_irrefl _ hh
+    apply hCinj
+    apply SetLike.coe_injective
+    change ((C i).support : Set Y) = ((C j).support : Set Y)
+    rw [← (show closure {ξ i} = ((C i).support : Set Y) from hgen i),
+      ← (show closure {ξ j} = ((C j).support : Set Y) from hgen j), he]
+  have hcover : ⋃ i, Z i = Set.univ := by
+    ext y
+    simp only [Set.mem_iUnion, Set.mem_univ, iff_true]
+    have he : (D.support : Set Y) = ⋃ i, ((C i).support : Set Y) :=
+      (congrArg (fun K : Closeds Y ↦ (K : Set Y)) hCsupp).trans (closeds_iSup_coe _)
+    obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
+      ((congrArg (fun U : Set Y ↦ y.val ∈ U) he).mp y.property)
+    exact ⟨i, hi⟩
+  obtain ⟨e, he⟩ := finite_component_equiv n Z
+    (fun i ↦ (C i).support.isClosed.preimage continuous_subtype_val) hirr hanti hcover
+  exact ⟨e, fun i ↦ by rw [he i]; exact hZimage i⟩
 
 /-- A regular alteration adapted to two nested dense opens and a prescribed finite étale cover.
 The finite family is indexed by `Fin n` and enumerates exactly the irreducible components
@@ -215,6 +382,165 @@ theorem exists_nestedOpen_regular_alteration
                 IsFinite u ∧ (topologically IsHomeomorph).universally u ∧
                 IsFinite e ∧ Etale e ∧ Surjective e ∧ 1 ≤ d ∧
                 ∀ s : S0.toScheme, e.finrank s = d := by
-  sorry
+  classical
+  have _ := hp
+  have hSne : Nonempty S := ⟨hS.nonempty.some, hS.nonempty.some_mem⟩
+  let η := S.fromSpecStalkOfMem (genericPoint T)
+    (((genericPoint_spec T).mem_open_set_iff S.isOpen).mpr
+      (by simpa using hS.nonempty))
+  have hη : η ≫ S.ι = T.fromSpecFunctionField := S.fromSpecStalkOfMem_ι _ _
+  have : Nonempty (pullback c η : Scheme.{u}) := by
+    obtain ⟨x, _⟩ := (pullback.snd c η).surjective
+      (IsLocalRing.closedPoint T.functionField)
+    exact ⟨x⟩
+  let x : (pullback c η : Scheme.{u}) := Classical.choice inferInstance
+  obtain ⟨hF, hX, _, _, _, _, hq, _, eX, heX, B, hB, b,
+    hBsep, hBft, hBqc, hb, hbdom, eB, _, _, ⟨I, J, hI, hJ, hIs, hJs⟩,
+    hg, hgdom, lift, hlift⟩ :=
+    exists_cover_nested_cartier_preparation T (T ↘ Spec (.of k))
+      S Tcirc hST hS hTcirc H c η hη x
+  let F := (pullback c η).residueField x
+  let q := T.fromNormalizationIn F
+  let g := b ≫ q
+  have : IsIntegral B := hB
+  have : IsProper g := hg
+  have : IsDominant g := hgdom
+  have : IsSeparated (g ≫ (T ↘ Spec (.of k))) := hBsep
+  have : LocallyOfFiniteType (g ≫ (T ↘ Spec (.of k))) := hBft
+  have : QuasiCompact (g ≫ (T ↘ Spec (.of k))) := hBqc
+  have : IsIntegral (T.normalizationIn F) := hX
+  obtain ⟨eB, heB⟩ := eB
+  let eF := eX ≪≫ eB
+  have heF : eF.hom ≫ B.fromSpecFunctionField ≫ g =
+      T.fromSpecOfAlgebraFunctionField F := by
+    calc
+      _ = eX.hom ≫ (eB.hom ≫ B.fromSpecFunctionField ≫ b) ≫ q := by
+        simp only [eF, Iso.trans_hom, g, Category.assoc]
+      _ = eX.hom ≫ (T.normalizationIn F).fromSpecFunctionField ≫ q := by
+        rw [heB]
+      _ = (T.fromSpecOfAlgebraFunctionField F).toNormalization ≫ q := by
+        rw [← Category.assoc, heX]
+      _ = _ := Scheme.Hom.toNormalization_fromNormalization _
+  have : Module.Finite T.functionField F := hF
+  have : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap T.functionField F))) :=
+    (IsFinite.SpecMap_iff _).mpr (by simpa using hF)
+  have hgf : (g.functionFieldMap (generic_eq g)).hom.Finite := by
+    apply finite_generic_of_spectrum g
+      (eF.inv ≫ Spec.map (CommRingCat.ofHom (algebraMap T.functionField F)))
+    change eF.inv ≫ T.fromSpecOfAlgebraFunctionField F = _
+    rw [← heF, Iso.inv_hom_id_assoc]
+  have hJI : J.support ≤ I.support := by
+    change (J.support : Set B) ⊆ (I.support : Set B)
+    rw [hJs, hIs]
+    exact Set.compl_subset_compl.mpr (g.preimage_mono hST)
+  obtain ⟨Y, a, hY, hadom, hYreg, hYsep, hYft, hYqc, ha, haf,
+    D, n, C, Aout, hD, hCinj, hCreg, hCsupp, hCint, _, _, _, _, hDS, hDT⟩ :=
+    exists_alteration_cartier_subboundary k B (g ≫ (T ↘ Spec (.of k))) I J hI hJ hJI
+  have : IsIntegral Y := hY
+  have : IsDominant a := hadom
+  have : IsProper a := ha
+  let h := a ≫ g
+  have : IsProper h := inferInstance
+  have : IsDominant h := inferInstance
+  have haf' : (a.functionFieldMap (generic_eq a)).hom.Finite := haf
+  have hhf := finite_generic_comp a g haf' hgf
+  have : Surjective h :=
+    surjective_of_isDominant_of_isClosed_range h h.isClosedMap.isClosed_range
+  let W := h ⁻¹ᵁ S
+  let r := h ∣_ S
+  have hrsurj : Surjective r := by
+    refine ⟨fun s ↦ ?_⟩
+    obtain ⟨y, hy⟩ := h.surjective s.val
+    refine ⟨⟨y, show h y ∈ S from hy.symm ▸ s.property⟩, ?_⟩
+    apply Subtype.ext
+    have he := congrArg (fun m : W.toScheme ⟶ T ↦
+      m ⟨y, show h y ∈ S from hy.symm ▸ s.property⟩) (morphismRestrict_ι h S)
+    exact he.trans hy
+  have : Nonempty W.toScheme := by
+    obtain ⟨y, _⟩ := r.surjective ⟨hS.nonempty.some, hS.nonempty.some_mem⟩
+    exact ⟨y⟩
+  have : IsIntegral W.toScheme := isIntegral_of_isOpenImmersion W.ι
+  have : IsIntegral S.toScheme := isIntegral_of_isOpenImmersion S.ι
+  have : IsProper r := inferInstance
+  have : IsDominant r := inferInstance
+  have : IsLocallyNoetherian T :=
+    LocallyOfFiniteType.isLocallyNoetherian (T ↘ Spec (.of k))
+  have : IsLocallyNoetherian Y := hYreg.1
+  have : QuasiCompact S.ι := inferInstance
+  have : QuasiCompact W.ι := inferInstance
+  have : IsSeparated (S.ι ≫ (T ↘ Spec (.of k))) := inferInstance
+  have : LocallyOfFiniteType (S.ι ≫ (T ↘ Spec (.of k))) := inferInstance
+  have : QuasiCompact (S.ι ≫ (T ↘ Spec (.of k))) := inferInstance
+  have : IsSeparated (h ≫ (T ↘ Spec (.of k))) := by
+    simpa only [h, Category.assoc] using hYsep
+  have : LocallyOfFiniteType (h ≫ (T ↘ Spec (.of k))) := by
+    simpa only [h, Category.assoc] using hYft
+  have : QuasiCompact (h ≫ (T ↘ Spec (.of k))) := by
+    simpa only [h, Category.assoc] using hYqc
+  have : IsSeparated (W.ι ≫ h ≫ (T ↘ Spec (.of k))) := inferInstance
+  have : LocallyOfFiniteType (W.ι ≫ h ≫ (T ↘ Spec (.of k))) := inferInstance
+  have : QuasiCompact (W.ι ≫ h ≫ (T ↘ Spec (.of k))) := inferInstance
+  have : IsDominant W.ι := Opens.isDominant_ι (W.isOpen.dense
+    (by obtain ⟨y⟩ := ‹Nonempty W.toScheme›; exact ⟨y.val, y.property⟩))
+  have : IsDominant S.ι := Opens.isDominant_ι hS
+  have hirr : (W.ι.functionFieldMap (generic_eq W.ι)).hom.Finite := by
+    have he : W.ι.functionFieldMap (generic_eq W.ι) = W.ι.functionFieldIso.hom := rfl
+    rw [he]
+    exact RingHom.Finite.of_surjective _ (ConcreteCategory.bijective_of_isIso _).2
+  have hWf := finite_generic_comp W.ι h hirr hhf
+  have hrfinite : (r.functionFieldMap (generic_eq r)).hom.Finite := by
+    have he : W.ι ≫ h = r ≫ S.ι := (morphismRestrict_ι h S).symm
+    have he' : (W.ι ≫ h).functionFieldMap (generic_eq (W.ι ≫ h)) =
+        (r ≫ S.ι).functionFieldMap (generic_eq (r ≫ S.ι)) :=
+      generic_map_congr _ _ _ _ he
+    rw [he', generic_map_comp, CommRingCat.hom_comp] at hWf
+    exact hWf.of_comp_finite
+  obtain ⟨_, S0, hS0, hS0dense, _, hS0finite, _, T0, _, u0, e, hue,
+    hu0, huhomeo, hefinite, heetale, hesum, _⟩ :=
+    Scheme.Hom.exists_generic_radicial_etale_factorization k
+      (W.ι ≫ h ≫ (T ↘ Spec (.of k))) (S.ι ≫ (T ↘ Spec (.of k)))
+      r (by
+        dsimp only [r, W]
+        exact morphismRestrict_ι_assoc h S (T ↘ Spec (.of k))) hrfinite
+  have : IsFinite e := hefinite
+  have : Etale e := heetale
+  have : Surjective e := hesum
+  have hS0ne : Nonempty S0.toScheme := ⟨hS0.some, hS0.some_mem⟩
+  have : IsIntegral S0.toScheme := isIntegral_of_isOpenImmersion S0.ι
+  let d := e.finrank (genericPoint S0.toScheme)
+  have hd : 1 ≤ d := e.one_le_finrank_iff_surjective.mpr hesum _
+  have hedegree (s : S0.toScheme) : e.finrank s = d :=
+    e.isLocallyConstant_finrank.apply_eq_of_preconnectedSpace s _
+  obtain ⟨E, hE⟩ := snc_component_equiv D n C hCinj
+    (fun i ↦ (hCreg i).1) hCsupp (fun i z ↦ by
+      have hh := hCint {i}
+      have he : (⨆ j ∈ ({i} : Finset (Fin n)), C j) = C i := by simp
+      rw [he] at hh
+      simpa using (hh z).2)
+  have hWS : (h ⁻¹ᵁ S : Set Y) = (D.support : Set Y)ᶜ := by
+    rw [hIs, compl_compl] at hDS
+    exact hDS
+  have hVT : (h ⁻¹ᵁ Tcirc : Set Y) =
+      (⋃ i ∈ Aout, Subtype.val '' (E i).val)ᶜ := by
+    rw [hJs, compl_compl] at hDT
+    change a ⁻¹' ((g ⁻¹ᵁ Tcirc : B.Opens) : Set B) = _
+    rw [hDT]
+    congr 1
+    simp_rw [hE]
+    rw [← Finset.sup_eq_iSup, Closeds.coe_finset_sup, Finset.sup_eq_iSup]
+    rfl
+  refine ⟨Over.mk (h ≫ (T ↘ Spec (.of k))), hY, hYreg,
+    (show IsSeparated (h ≫ (T ↘ Spec (.of k))) from inferInstance),
+    (show LocallyOfFiniteType (h ≫ (T ↘ Spec (.of k))) from inferInstance),
+    (show QuasiCompact (h ≫ (T ↘ Spec (.of k))) from inferInstance),
+    h, inferInstance, inferInstance, rfl,
+    ⟨generic_eq h, hhf⟩, D, hD, n, E, Aout, hWS, hVT,
+    inferInstance, inferInstance, ?_, S0, hS0ne, hS0dense,
+    hS0finite, T0, u0, e, d, hue, hu0, huhomeo,
+    hefinite, heetale, hesum, hd, hedegree⟩
+  refine ⟨(a ∣_ g ⁻¹ᵁ S) ≫ lift, ?_⟩
+  exact (Category.assoc _ _ _).trans
+    ((congrArg (fun m ↦ (a ∣_ g ⁻¹ᵁ S) ≫ m) hlift).trans
+      (morphismRestrict_comp a g S).symm)
 
 end AlgebraicGeometry

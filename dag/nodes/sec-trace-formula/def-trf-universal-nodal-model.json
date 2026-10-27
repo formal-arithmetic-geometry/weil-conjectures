@@ -1,0 +1,132 @@
+{
+ "id": "def-trf-universal-nodal-model",
+ "kind": "definition",
+ "title": "Universal nodal model and its section-induced base map",
+ "status": "split",
+ "statement": "In any scheme universe, let $Z_u$ be the universe lift of $\\mathbb Z$, and form the polynomial rings $A=Z_u[a]$ [def-weil-polynomial-ring] and $P=A[u,v]$ [def-weil-pbc-mv-polynomial-ring], with $u,v$ indexed by $\\{0,1\\}$. Put $r=uv-a$ and $B=P/(r)$. Define the schemes $S_{\\mathrm{nod}}=\\operatorname{Spec}A$ and $Y_{\\mathrm{nod}}=\\operatorname{Spec}B$ [def-pc-scheme] [def-weil-affine-spectrum], and the structural morphism $\\pi_{\\mathrm{nod}}:Y_{\\mathrm{nod}}\\to S_{\\mathrm{nod}}$ induced by the coefficient inclusion $A\\to P\\to B$. For each commutative ring $R$ in this universe, the canonical map $Z_u\\to R$ is integer casting after the universe-lift equivalence. For every scheme $V$ in this universe and every $h\\in\\Gamma(V,\\mathcal O_V)$, let $\\varphi_h:A\\to\\Gamma(V,\\mathcal O_V)$ be polynomial evaluation at $h$ with this coefficient map, and define $\\beta_h:V\\to S_{\\mathrm{nod}}$ to be $V\\to\\operatorname{Spec}\\Gamma(V,\\mathcal O_V)\\xrightarrow{\\operatorname{Spec}\\varphi_h}\\operatorname{Spec}A$. All rings, schemes and morphisms here are the explicit indicated constructions.",
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Section section-etale-local-nodal, displayed universal model preceding lemma-etale-local-structure-nodal-family (Tag 0CBY), and its cartesian square; the section-induced base map is polynomial evaluation followed by the canonical map to the spectrum of global sections."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodalModel|nodalBaseMap|universal.nodal",
+   "results": "{\"t\": \"2026-10-23T12:24:05Z\", \"tool\": \"grep\", \"query\": \"nodalModel|nodalBaseMap|universal.nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match; reuse the landed universal model definitions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal nodal model Spec Z[a][u,v]/(uv-a) over Spec Z[a] and the map induced by a global section h",
+   "results": "{\"t\": \"2026-10-23T12:24:05Z\", \"tool\": \"leansearch\", \"query\": \"The universal nodal model Spec Z[a][u,v]/(uv-a) over Spec Z[a] and the map induced by a global section h\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.toSpecΓ\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.IsAffineOpen.isoSpec\", \"AlgebraicGeometry.IsAffineOpen.toSpecΓ_isoSpec_inv_assoc\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc\", \"AlgebraicGeometry.IsAffineOpen.isoSpec_hom_apply\"], \"digest\": \"bc5c9a7ecffbc7c8\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match; reuse the landed universal model definitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal nodal model Spec Z[a][u,v]/(uv-a) over Spec Z[a] and the map induced by a global section h",
+   "results": "{\"t\": \"2026-10-23T12:24:07Z\", \"tool\": \"leanfinder\", \"query\": \"The universal nodal model Spec Z[a][u,v]/(uv-a) over Spec Z[a] and the map induced by a global section h\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"AlgebraicGeometry.pointsPi\", \"AlgebraicGeometry.AffineSpace.map_SpecMap\", \"AlgebraicGeometry.AffineSpace.over_over\"], \"digest\": \"ee52ff1f53684cd0\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match; reuse the landed universal model definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"nodalModel|nodalBaseMap\" lean/WeilConjectures lean/Sheaf; rg -n \"nodalModel|nodalBaseMap\" dag/lean_names_upstream.json",
+   "results": "No match in WeilConjectures or the upstream-name index. Sheaf.SixFunctors.TraceFormula.NodalFamilyEtaleLocalModel defines the eleven exact constructions (lines 48–115); NodalEtaleChart and StrictlySemistableCurve consume them. Reuse all definitions unchanged with existing: true.",
+   "date": "2026-10-23",
+   "verdict": "exact existing project definitions; no new Lean definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"universal nodal|nodalModelBaseMap|nodalBaseMap|def-trf-universal-nodal-model\" dag/nodes; python3 tools/blueprint_refs.py search \"universal nodal model\"; python3 tools/blueprint_refs.py ancestor lem-trf-nodal-chart-boundary-shrinking",
+   "results": "DAG: lem-trf-etale-cover-field-curve-nodality, def-trf-modification, lem-trf-split-node-algebraization-finite-type, def-trf-strictly-semistable-curve, lem-trf-nodal-family-etale-local-model, def-trf-schematically-dense-open, lem-trf-nodal-etale-chart, def-trf-strict-semistable-curve, lem-sfb-nodal-curve-stack-smooth. None is a definition node for the universal model. The theorem node records exists_etale_nodal_local_model; its plain model definitions need an owner, as the maintainer requested in H2. Blueprint search: 0 blueprint nodes match universal nodal model. Ancestor: lem-trf-local-term-locality.",
+   "date": "2026-10-23",
+   "verdict": "no existing definition node owns this notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-chart-boundary-shrinking",
+  "date": "2026-10-23",
+  "group": "Q113"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The universal model underlying the chart W=Spec_V O_V[u,v]/(uv-h) in the historical ILO VI Proposition 1.9 equation (1.a) boundary-shrinking step.",
+   "via": [
+    "lem-trf-nodal-chart-boundary-shrinking",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.NodalFamilyEtaleLocalModel",
+  "declaration": "AlgebraicGeometry.nodalModelBaseMap",
+  "declarations": [
+   "AlgebraicGeometry.nodalInteger",
+   "AlgebraicGeometry.nodalBaseRing",
+   "AlgebraicGeometry.nodalPolynomialRing",
+   "AlgebraicGeometry.nodalRelation",
+   "AlgebraicGeometry.nodalModelRing",
+   "AlgebraicGeometry.nodalBase",
+   "AlgebraicGeometry.nodalModel",
+   "AlgebraicGeometry.nodalModelBaseMap",
+   "AlgebraicGeometry.nodalIntegerMap",
+   "AlgebraicGeometry.nodalPolynomialMap",
+   "AlgebraicGeometry.nodalBaseMap"
+  ],
+  "statement": "def nodalModelBaseMap : nodalModel ⟶ nodalBase",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership repair requested by the maintainer (H2, returned immutable head a6d95ac94574). Registers the eleven already landed plain definitions without moving or changing them. nodalModelBaseMap is the structural map and nodalBaseMap the section-induced base map, with their explicit ring constructions. The theorem exists_etale_nodal_local_model is not among these declarations and none of these definitions uses its conclusion."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e698b0a07",
+  "group": "Q113",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e698b0a07",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of a6d95ac. The Lean file is byte-identical. The theorem stmt_dep lem-trf-nodal-family-etale-local-model is replaced by the new def node def-trf-universal-nodal-model: existing:true on the unchanged module Sheaf.SixFunctors.TraceFormula.NodalFamilyEtaleLocalModel, listing all 11 plain defs. The item's used decls (nodalModelBaseMap, nodalBaseMap, nodalModelRing) are among them. The statement matches each def; the source is Stacks curves.tex section-etale-local-nodal / 0CBY. stmt_deps are 4 defs, no cycle; the signature is verbatim from def; H12 fields are present; no landed module is moved or edited. The item statement was re-checked clause by clause (Z closed, p t∉Z, V° = Zᶜ, node lifts in U×_V V°, t survives, IsUnit of h on V°⊓Tᶜ), with edge cases h=0, nilpotent, unit, T=V and universes: correct. The second reading is now genuine (11 clauses). No compile, since no file changed."
+ }
+}

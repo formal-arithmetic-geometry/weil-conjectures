@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-rational-residue-distinct-order-basis",
+ "kind": "statement",
+ "title": "A finite subspace over a rational residue field has a basis with distinct orders",
+ "statement": "Let $k$ be a field [def-weil-field], let $K/k$ be a field extension [def-pc-field-extension], and let $R\\subset K$ be a discrete valuation ring [def-sc-discrete-valuation-ring] containing $k$ and having fraction field $K$ (every element of $K$ is a quotient of two elements of $R$). Let $\\mathfrak m$ be its maximal ideal and assume the quotient map restricts to an isomorphism $k\\xrightarrow{\\sim}R/\\mathfrak m$. Write $\\nu:K^\\times\\to\\mathbf Z$ for the normalized valuation: the quotient homomorphism $K^\\times\\to K^\\times/R^\\times$ followed by the order-preserving identification of the value group with $\\mathbf Z$, normalized so a generator of $\\mathfrak m$ has value $1$. Let $U\\subset K$ be a finite-dimensional $k$-linear subspace [def-weil-finite-dimensional-subspace] of dimension $d$ [def-weil-vector-space-dimension]. Then $U$ has a $k$-basis $u_1,\\ldots,u_d$ with $\\nu(u_1)<\\cdots<\\nu(u_d)$. For $U=0$ this means the empty basis.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00IE, algebra-definition-value-group: normalized integer valuation of a DVR. Agent auxiliary, not asserted by that tag: the rational-residue filtration argument giving a basis of distinct orders; its complete induction is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Induct on $d=\\dim_k U$. If $d=0$, a basis has zero members by [def-weil-vector-space-dimension], so $U=0$ and its empty basis proves the assertion. Suppose $d>0$, and assume the assertion for every subspace of dimension less than $d$, with the same $k,K,R$. Choose a finite spanning family $e_1,\\ldots,e_r$ of $U$ using [def-weil-finite-dimensional-subspace]. Write $e_i=a_i/b_i$ with $a_i,b_i\\in R$ and $b_i\\ne0$, and put $q=\\prod_i b_i\\ne0$. Then $qe_i=a_i\\prod_{j\\ne i}b_j\\in R$. Since $k\\subset R$, every $x=\\sum_i c_i e_i\\in U$ satisfies $qx=\\sum_i c_i(qe_i)\\in R$.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent dimension-induction argument using Tag 00IE (algebra-definition-value-group); Tag 00PD (algebra-lemma-characterize-dvr) for the DVR context. The distinct-order-basis assertion is not a theorem of these tags."
+   }
+  },
+  {
+   "text": "For $x\\in U\\setminus\\{0\\}$ we have $qx\\in R\\setminus\\{0\\}$, so [lem-sc-dvr-valuation-ring-characterization] gives $\\nu(qx)\\ge0$. Multiplicativity in [lem-sc-dvr-valuation-arithmetic] gives $\\nu(x)\\ge-\\nu(q)$. Thus the nonempty set $\\{\\nu(x):x\\in U\\setminus\\{0\\}\\}\\subset\\mathbf Z$ is bounded below. Subtract its integer lower bound and apply the least-element principle for natural numbers. Choose $u\\in U\\setminus\\{0\\}$ attaining its least value $n$. For every nonzero $x\\in U$, $\\nu(x/u)=\\nu(x)-\\nu(u)\\ge0$, hence $x/u\\in R$ by [lem-sc-dvr-nonnegative-valuation-in-ring]; this also holds for $x=0$.",
+   "uses": [
+    "lem-sc-dvr-valuation-ring-characterization",
+    "lem-sc-dvr-valuation-arithmetic",
+    "lem-sc-dvr-nonnegative-valuation-in-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent dimension-induction argument using Tag 00IE (algebra-definition-value-group); Tag 00PD (algebra-lemma-characterize-dvr) for the DVR context. The distinct-order-basis assertion is not a theorem of these tags."
+   }
+  },
+  {
+   "text": "Let $\\rho:R\\to R/\\mathfrak m$ be the quotient map, and let $\\iota:k\\xrightarrow{\\sim}R/\\mathfrak m$ be its restriction, an isomorphism by hypothesis. Define $\\lambda:U\\to k$ by $\\lambda(x)=\\iota^{-1}(\\rho(x/u))$. Division by the fixed $u$ is additive, and for $c\\in k$, $\\rho(cx/u)=\\iota(c)\\rho(x/u)$, so $\\lambda$ is $k$-linear. Also $\\lambda(u)=1$. Put $W=\\{x\\in U:\\lambda(x)=0\\}$. For nonzero $w\\in W$, $w/u\\in\\mathfrak m$; it cannot be a unit, since an ideal containing a unit contains $1$. The quotient definition $K^\\times/R^\\times$ of $\\nu$ gives $\\nu(w/u)\\ne0$, while its nonnegativity follows from the choice of $n$. Hence $\\nu(w)>n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent dimension-induction argument using Tag 00IE (algebra-definition-value-group); Tag 00PD (algebra-lemma-characterize-dvr) for the DVR context. The distinct-order-basis assertion is not a theorem of these tags."
+   }
+  },
+  {
+   "text": "The vectors $f_i=e_i-\\lambda(e_i)u$ lie in $W$. If $w=\\sum_i c_i e_i\\in W$, then $\\sum_i c_i\\lambda(e_i)=\\lambda(w)=0$, and consequently $w=\\sum_i c_i f_i$. Thus $W$ is finite-dimensional by [def-weil-finite-dimensional-subspace]. Since $\\lambda(cu)=c$ for $c\\in k$, its image is all of $k$. The singleton $(1)$ is a basis of $k$ over itself, so its dimension is $1$. Apply [lem-weil-pbc-idempotent-charpoly-rank-nullity] with $V=U$, target $k$, and map $\\lambda$: $1+\\dim_kW=d$, hence $\\dim_kW=d-1<d$. Both vector spaces are finite-dimensional, as required by that node.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent dimension-induction argument using Tag 00IE (algebra-definition-value-group); Tag 00PD (algebra-lemma-characterize-dvr) for the DVR context. The distinct-order-basis assertion is not a theorem of these tags."
+   }
+  },
+  {
+   "text": "Apply the induction hypothesis to the subspace $W\\subset K$. It gives a basis $w_1,\\ldots,w_{d-1}$ with strictly increasing orders (empty when $d=1$). Step 3 gives $\\nu(u)<\\nu(w_1)$ when $W\\ne0$. Every $x\\in U$ decomposes explicitly as $x=\\lambda(x)u+(x-\\lambda(x)u)$ with the second summand in $W$, so $u,w_1,\\ldots,w_{d-1}$ spans $U$. In a relation $cu+\\sum_i c_iw_i=0$, applying $\\lambda$ gives $c=0$, and independence of the basis of $W$ gives all $c_i=0$. This is a basis of $d$ members with the required strict order, completing the induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent dimension-induction argument using Tag 00IE (algebra-definition-value-group); Tag 00PD (algebra-lemma-characterize-dvr) for the DVR context. The distinct-order-basis assertion is not a theorem of these tags."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-vector-space-dimension",
+  "def-weil-finite-dimensional-subspace",
+  "lem-sc-dvr-valuation-ring-characterization",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-sc-dvr-nonnegative-valuation-in-ring",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent dimension-induction argument using Tag 00IE (algebra-definition-value-group); Tag 00PD (algebra-lemma-characterize-dvr) for the DVR context. The distinct-order-basis assertion is not a theorem of these tags."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Valuation, LinearIndependent",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\", \"sub\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional vector subspace of a discretely valued field whose residue field is the scalar field has a basis with pairwise distinct valuations",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Field.Emb.Cardinal.wellOrderedBasis\", \"IsDiscreteValuationRing.isRankOneDiscrete\", \"Module.Basis.ofZLatticeBasis\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"IsLocalRing.basisQuotient\", \"Module.Basis.extendOfIsLattice\", \"NumberField.Units.basisOfIsMaxRank\", \"IsLocalRing.basisQuotient_apply\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"bf1e6a8ae9d72aea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "valuation.*(basis|linearIndependent|finrank)|distinct.*valuat|valuat.*distinct",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"top\": [\"Mathlib/RingTheory/Valuation/Basic.lean\", \"Mathlib/RingTheory/Valuation/Basic.lean\"], \"note\": \"\", \"sub\": \"RingTheory\", \"digest\": \"90c0900220ca2717\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional subspace of a valued field with residue field equal to the ground field admits a basis of elements having different orders",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Valued.ResidueField\", \"FiniteDimensional.fintypeBasisIndex\", \"FiniteDimensional.of_finite_basis\", \"FiniteDimensional.instFintypeElemOfVectorSpaceIndex\", \"FiniteDimensional.instFintypeElemOfVectorSpaceIndex.congr_simp\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet\", \"WithAbs.instFiniteDimensional\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"0d6a7324ff8c6668\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "valuation|ValueGroup",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\", \"sub\": \"LinearAlgebra/Basis\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a basis adapted to the filtration by orders of vanishing on a finite dimensional subspace of a valued field with one dimensional residue field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Field.Emb.Cardinal.wellOrderedBasis\", \"IsLocalRing.basisQuotient\", \"IsLocalRing.basisQuotient_apply\", \"Submodule.basisOfPidOfLE\", \"Module.Basis.extendOfIsLattice\", \"Ideal.adic_basis\", \"Module.Basis.extendOfIsLattice_apply\", \"IsLocalRing.basisQuotient_repr\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"2c194ea0dbe4810b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"basis\", \"valuation\"",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"top\": [\"Valuation.subgroups_basis\", \"Valuation.hasBasis_nhds_zero\", \"Valuation.hasBasis_nhds\", \"Valuation.hasBasis_uniformity\", \"Valuation.hasBasis_nhds_coe_zero\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"84aabcb7387dcbe3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "valuation.*(basis|subspace)|basis.*valuation|adapted.*basis|basis.*adapted",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"top\": [\"Mathlib/Topology/Algebra/Valued/ValuativeRel.lean\", \"Mathlib/Topology/Algebra/Valued/ValuativeRel.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/ValuativeRel/ValuativeTopology.lean\", \"Mathlib/Topology/Algebra/ValuativeRel/ValuativeTopology.lean\", \"Mathlib/Topology/Algebra/ValuativeRel/ValuativeTopology.lean\", \"Mathlib/Topology/Algebra/ValuativeRel/ValuativeTopology.lean\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"e6b0e152a23ec1af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valuation with one dimensional leaves admits a valuation basis for every finite dimensional vector subspace",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Submodule.smithNormalFormBotBasis\", \"Module.Basis.exists_basis\", \"Module.Basis.ofZLatticeBasis\", \"Submodule.smithNormalFormTopBasis\", \"Module.Basis.extendOfIsLattice\", \"Module.Basis.toFlag_carrier\", \"Module.Basis.mem_toFlag\", \"Submodule.exists_smith_normal_form_of_rank_eq\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"518a4f6607e79f05\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "smithNormalFormBotBasis|exists_smith_normal_form_of_rank_eq|theorem exists_basis",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"top\": [\"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/Basis/VectorSpace.lean\"], \"note\": \"\", \"sub\": \"LinearAlgebra\", \"digest\": \"dbd1a8960e285622\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuation-topology neighbourhood bases, ordinary vector-space bases, PID module bases, and bases of residue quotients do not give a k-basis of a subspace of K with distinct normalized orders. Read IsLocalRing.basisQuotient at Mathlib/RingTheory/LocalRing/Quotient.lean:84, Module.Basis.exists_basis at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:176, and Submodule.exists_smith_normal_form_of_rank_eq at Mathlib/LinearAlgebra/FreeModule/PID.lean:581; none specializes in one line to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional vector subspace of a discretely valued field with scalar residue field admits a basis with pairwise different valuations",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.Emb.Cardinal.wellOrderedBasis\", \"Module.Basis.ofZLatticeBasis\", \"NumberField.mixedEmbedding.fundamentalCone.completeBasis\", \"Module.Basis.extendOfIsLattice\", \"IsLocalRing.basisQuotient\", \"Submodule.basisOfPid\", \"NumberField.Units.basisOfIsMaxRank\", \"Submodule.basisOfPidOfLE\"], \"digest\": \"b0cfd5bc3a19bee4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary bases, PID module bases, residue quotient bases and valuation neighbourhood bases do not impose distinct orders on a k-subspace. Read LocalRing/Quotient.lean:84, FreeModule/PID.lean:581 and Basis/VectorSpace.lean:176; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "valuation.*(basis|linearIndependent|finrank)|distinct.*valuat|valuat.*distinct",
+   "results": "{\"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/Basic.lean\", \"Mathlib/RingTheory/Valuation/Basic.lean\"], \"digest\": \"90c0900220ca2717\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary bases, PID module bases, residue quotient bases and valuation neighbourhood bases do not impose distinct orders on a k-subspace. Read LocalRing/Quotient.lean:84, FreeModule/PID.lean:581 and Basis/VectorSpace.lean:176; no one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional subspace of a valued field with residue field equal to the scalar field has a basis of different valuations",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.fintypeBasisIndex\", \"Valued.ResidueField\", \"FiniteDimensional.instFintypeElemOfVectorSpaceIndex\", \"Valuation.subgroups_basis\", \"FiniteDimensional.instFintypeElemOfVectorSpaceIndex.congr_simp\", \"FiniteDimensional.of_finite_basis\", \"WithAbs.instFiniteDimensional\", \"Valued.integer.totallyBounded_iff_finite_residueField\"], \"digest\": \"10c34e709cc174b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary bases, PID module bases, residue quotient bases and valuation neighbourhood bases do not impose distinct orders on a k-subspace. Read LocalRing/Quotient.lean:84, FreeModule/PID.lean:581 and Basis/VectorSpace.lean:176; no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, LinearIndependent",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary bases, PID module bases, residue quotient bases and valuation neighbourhood bases do not impose distinct orders on a k-subspace. Read LocalRing/Quotient.lean:84, FreeModule/PID.lean:581 and Basis/VectorSpace.lean:176; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A basis adapted to the valuation filtration with one dimensional residue graded pieces on a finite dimensional subspace",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.smithNormalFormTopBasis\", \"Submodule.smithNormalFormBotBasis\", \"Submodule.basisOfPid\", \"Submodule.basisOfPidOfLE\", \"Submodule.basisOfPidOfLESpan\", \"Module.Basis.SmithNormalForm.bN\", \"Field.Emb.Cardinal.wellOrderedBasis\", \"SubmodulesRingBasis\"], \"digest\": \"7dcac2d84e5445bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary bases, PID module bases, residue quotient bases and valuation neighbourhood bases do not impose distinct orders on a k-subspace. Read LocalRing/Quotient.lean:84, FreeModule/PID.lean:581 and Basis/VectorSpace.lean:176; no one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-residue-valuation-product-dimension",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Section 2.4, Theorem 5, printed p.10, the Riemann-Roch and Clifford bounds for the generated sub-linear series; Stacks Project Tag 0BS6, curves.tex, lemma-rr, for Riemann-Roch. Local Morrison PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Agent auxiliary: the product-of-sections dimension estimate underlying the Clifford bound, proved by distinct orders at a rational smooth point. Supporting input: for a finite-dimensional subspace of the fraction field, the valuation filtration has one-dimensional nonzero graded pieces because the residue field equals the scalars; choose a basis of distinct orders.",
+   "via": [
+    "lem-sfb-residue-valuation-product-dimension",
+    "lem-sfb-linear-series-degree-dimension-bound",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rational-residue-distinct-order-basis",
+  "worker": "stage1",
+  "summary": "Kept the full rational-residue DVR statement. No exact project declaration or Mathlib match found. Gave explicit dimension induction: a common denominator bounds all orders below, a least-order vector gives a scalar residue functional, its kernel is explicitly finitely spanned and has dimension d-1 by the existing rank-nullity leaf, and adjoining that vector to the inductive kernel basis completes the proof. No new nodes; reused existing valuation and linear-algebra nodes. Checked zero space, dimension one, negative orders, arbitrary scalar characteristic, and the necessity of the residue-field hypothesis.",
+  "blueprint": "Realizes the inherited product-of-sections supporting estimate for the Clifford bound, in the alteration/plurinodal prerequisite chain under det-thm-sf-ctf-stability-direct-images, proof (3). Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. blueprint_refs.py ancestor confirms a null nearest imported ancestor; retained the existing from.place and via chain. Whole-blueprint searches for valuation basis and distinct orders found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-dvr-valuation-ring-characterization",
+    "why": "Generic DVR valuation fact: a nonzero ring element has nonnegative order. Used only to bound the subspace orders after multiplying by a common denominator; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-dvr-valuation-ring-characterization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-eef90da91",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-eef90da91 (reviewer sub-agent of L); spot-checked: I read the item and all 5 proof steps in full, and every cited statement. There are no new nodes. The statement, stmt_deps, blueprint, source and created fields are identical to clones/live, where the item is still unsplit; this is the first delivery and there is no repair note, so the target is not weakened and no other group has taken the item. Source: Stacks algebra.tex 00IE definition-value-group (l.11987, after lemma-valuation-group building K*/A*) and 00PD lemma-characterize-dvr (l.29104). These give the conventions, and the item is honestly labelled an agent auxiliary. No SGA. The statement is true. Small cases: U=0 (empty basis); ⟨1,1+t⟩ in k(t) at t=0 gives basis (1,t); ⟨t^-2,t^-1⟩ (negative orders) works; and the residue hypothesis is needed (U=k' with residue field k'≠k is a counterexample). Step 1: strong induction is set up correctly; the common denominator q=∏b_i gives qU⊂R using k⊂R and that R is a domain. Step 2: valuation-ring-characterization (ν≥0 on R∖0), arithmetic multiplicativity and nonnegative-in-ring are applied with exactly their hypotheses; least-order u. Step 3: λ=ι^{-1}ρ(·/u) is k-linear with λ(u)=1; a nonzero w in the kernel has w/u∈𝔪, not a unit, so ν(w/u)≠0 by the inline K^×/R^× definition, hence ν(w)>n. Step 4: the kernel W is spanned by e_i−λ(e_i)u, and the rank-nullity Mathlib leaf on U→k gives dim W=d−1. Step 5: explicit spanning and independence. Elementary marks are justified and proof_deps equals the union of uses. The only citer, lem-sfb-residue-valuation-product-dimension, uses the statement verbatim. A DAG duplicate search found nothing. Accepted tool_use: lem-sc-dvr-valuation-ring-characterization, a generic DVR nonnegativity fact used as a black box. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RationalResidueDistinctOrderBasis",
+  "declaration": "IsDiscreteValuationRing.exists_basis_strictMono_order_of_residue_bijective",
+  "file": "lean/Sheaf/RingTheory/RationalResidueDistinctOrderBasis.lean",
+  "statement": "theorem exists_basis_strictMono_order_of_residue_bijective (k : Type u) (K : Type v) (R : Type w) [Field k] [Field K] [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Algebra k K] [Algebra k R] [Algebra R K] [IsScalarTower k R K] [IsFractionRing R K] (hres : Function.Bijective ((IsLocalRing.residue R).comp (algebraMap k R))) (U : Submodule k K) [FiniteDimensional k U] : ∃ b : Module.Basis (Fin (Module.finrank k U)) k U, StrictMono (fun i ↦ -WithZero.log ((maximalIdeal R).valuation K (b i : K)))",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac80aac41",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: Field k, Algebra k K, DVR R with IsFractionRing R K, Algebra k R + IsScalarTower k R K for k⊂R, residue hypothesis as Bijective(residue ∘ algebraMap k R), normalized order -WithZero.log((maximalIdeal R).valuation K ·) (uniformizer ↦ 1, same convention as dvr_valuation_ring_characterization), U : Submodule k K finite-dimensional, ∃ Basis (Fin finrank) with StrictMono orders. U=0/Fin 0, d=1, negative orders, arbitrary characteristic covered; no extra assumptions; independent universes. lean.statement matches the file verbatim; node differs from live only in lean; no new nodes/defs; docstrings carry source 00IE/00PD + blueprint tag + 5-step proof; proof sorry only; no clash or duplicate found. No findings."
+ }
+}

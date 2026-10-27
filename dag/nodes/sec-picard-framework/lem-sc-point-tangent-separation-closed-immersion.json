@@ -30,139 +30,142 @@
  ],
  "proof": [
   {
-   "text": "Because $X$ is proper over $k$ and $\\mathcal L$ is coherent, [lem-pc-coherent-hi] applied to $X\\to\\operatorname{Spec}(k)$ gives that $H^0(X,\\mathcal L)$ is finite-dimensional over $k$. Hence $V$ is finite-dimensional and has a basis.",
+   "text": "Proper coherent cohomology makes H^0(X,L) finite-dimensional; transport along H.zeroLinearEquiv with its k-linear structure, then use that a submodule of a finite-dimensional vector space is finite-dimensional.",
    "uses": [
     "lem-pc-coherent-hi"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
+    "document": "literature/stacks-project/coherent.tex",
     "place": "Tag 02O5, Proposition 30.19.1"
    }
   },
   {
-   "text": "Hypothesis (0) says that the evaluation map from $V$ generates $\\mathcal L$. Therefore the basis defines $\\varphi_{\\mathcal L,V}:X\\to\\mathbf P(V^\\vee)$ by [def-weil-pbc-morphism-to-projective-space-by-sections], and the construction identifies $\\varphi_{\\mathcal L,V}^*\\mathcal O(1)$ with $\\mathcal L$ using [def-pc-projective-space-twist].",
+   "text": "For each closed x, the sections whose germs lie in m_x L_x form a k-submodule of V. If all basis vectors vanished there, their span would be this submodule, contradicting hypothesis (0). The union of their generating loci contains every closed point, hence is X: a nonempty closed complement in the compact T0 space X contains a closed point. At each stalk, an invertible-module trivialization turns a nonvanishing basis vector into a unit, so these germs span. Apply the stalk-span characterization of generating sections.",
    "uses": [
-    "def-weil-pbc-generating-sections",
-    "def-weil-pbc-morphism-to-projective-space-by-sections",
-    "def-pc-projective-space-twist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0E8S, setup and construction"
-   }
-  },
-  {
-   "text": "The morphism $\\varphi_{\\mathcal L,V}$ is proper: its composite with $\\mathbf P(V^\\vee)\\to\\operatorname{Spec}(k)$ is the proper morphism $X\\to\\operatorname{Spec}(k)$, and projective space is separated over $k$, so [lem-weil-pbc-proper-to-separated] applies.",
-   "uses": [
-    "lem-weil-pbc-proper-to-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01W6"
-   }
-  },
-  {
-   "text": "Condition (1) makes $\\varphi_{\\mathcal L,V}$ injective on closed points: if $x\\ne y$ had the same projective image, every section vanishing at $x$ would vanish at $y$, contradicting (1). The closed-fibre argument is the statement of [lem-sc-point-tangent-closed-fibre-singleton]: for every closed point $p$ the fibre is empty or exactly $\\{x\\}$, with $x$ closed. Its proof uses that a nonempty fibre is closed and therefore has a closed point by [lem-sc-quasi-compact-kolmogorov-closed-point], while any nonclosed point in a finite-type scheme has infinitely many closed specializations by [lem-sc-finite-type-nonclosed-closure-closed-points], contradicting injectivity. Hence every fibre over a closed point is finite.",
-   "uses": [
-    "lem-sc-point-tangent-closed-fibre-singleton",
-    "lem-sc-quasi-compact-kolmogorov-closed-point",
-    "lem-sc-finite-type-nonclosed-closure-closed-points"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0E8S, proof after condition (1), with Tags 005E and 0478 for the closed-point details"
-   }
-  },
-  {
-   "text": "Apply [thm-sc-proper-finite-fibre-finite-neighbourhood] (Tag 02OH) at each closed point $p$ of $\\mathbf P(V^\\vee)$, using properness from step 3, the finite closed fibre from step 4, and that $\\mathbf P(V^\\vee)$ is locally Noetherian by [pqf-lem-locnoeth-lft], being of finite type over the Noetherian scheme $\\operatorname{Spec}(k)$. This gives an open neighbourhood $U_p$ on which $\\varphi$ is finite. The union of the $U_p$ contains every closed point; its closed complement, if nonempty, would contain a closed point by [lem-sc-quasi-compact-kolmogorov-closed-point], since projective space is quasi-compact and Kolmogorov. Thus the union is all of $\\mathbf P(V^\\vee)$ and $\\varphi$ is finite.",
-   "uses": [
-    "thm-sc-proper-finite-fibre-finite-neighbourhood",
-    "lem-sc-quasi-compact-kolmogorov-closed-point",
-    "pqf-lem-locnoeth-lft"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02OH, lemma-proper-finite-fibre-finite-in-neighbourhood"
-   }
-  },
-  {
-   "text": "It remains to prove surjectivity of $\\varphi^\\sharp:\\mathcal O_{\\mathbf P(V^\\vee)}\\to\\varphi_*\\mathcal O_X$. Since $\\varphi$ is finite, $\\varphi_*\\mathcal O_X$ is a quasi-coherent $\\mathcal O_{\\mathbf P(V^\\vee)}$-module of finite type [def-weil-finite-integral-morphism], hence so is the cokernel of $\\varphi^\\sharp$; its support is closed by [lem-weil-pbc-finite-type-module-support-closed], and if nonempty it contains a closed point of $\\mathbf P(V^\\vee)$ by [lem-sc-quasi-compact-kolmogorov-closed-point]. So it suffices to check surjectivity on stalks at closed points $p$. If the fibre over $p$ is empty, then $p$ is not in the closed set $\\varphi(X)$ and $(\\varphi_*\\mathcal O_X)_p=0$. For a closed $p$ with fibre $\\{x\\}$, the equality of sets from [lem-sc-point-tangent-closed-fibre-singleton] and the closedness of the proper map $\\varphi$ (step 3) show that the $\\varphi^{-1}(U)$, for $U$ running through the open neighbourhoods of $p$, form a fundamental system of open neighbourhoods of $x$; this identifies $(\\varphi_*\\mathcal O_X)_p$ with $\\mathcal O_{X,x}$, and the stalk map is finite because $\\varphi$ is finite. Both residue fields are $k$ by [lem-weil-pbc-closed-point-residue-field-base], since the source and projective target are of finite type over the algebraically closed field $k$.",
-   "uses": [
-    "lem-sc-point-tangent-closed-fibre-singleton",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-nonvanishing-iff-generates-at",
+    "lem-weil-pbc-invertible-stalk-linear-equiv",
+    "lem-weil-pbc-generating-sections-stalk-span",
     "lem-sc-quasi-compact-kolmogorov-closed-point"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0E8S, proof, stalk check"
+    "place": "Tag 0E8S, generation and the setup"
    }
   },
   {
-   "text": "Condition (2) says that $T_{X/k,x}\\to T_{\\mathbf P(V^\\vee)/k,p}$ is injective. By [lem-sc-point-tangent-cotangent-surjective], the induced map $\\mathfrak m_p/\\mathfrak m_p^2\\to\\mathfrak m_x/\\mathfrak m_x^2$ is surjective.",
+   "text": "Construct the coordinate morphism phi from the generating basis. Use the existing generatingSections_pair theorem from CompleteLinearSystemClosed, now public, for the section-preserving isomorphism phi^* O(1) = L. Its existing native-chart comparison remains private in that module; no complete-linear-system closedness theorem is used. On a standard chart every section t in V is the coordinate ratio sum_i c_i T_i/T_j times the generating basis section s_j; this is map_eq_linearRatio_smul in the adopted library. Consequently its nonvanishing locus on that chart is the inverse image of the basic open of this ratio. Hypothesis (1) therefore makes phi injective on closed points.",
    "uses": [
-    "lem-sc-point-tangent-cotangent-surjective"
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "def-pc-projective-space-twist",
+    "lem-sc-nonvanishing-iff-generates-at",
+    "lem-pc-complete-linear-system-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2E, lemma-tangent-space-rational-point"
+    "place": "Tag 0E8S; constructions.tex Tags 01N8 and 01NE, standard-chart formulas"
    }
   },
   {
-   "text": "The finite local stalk map has equal residue fields and is surjective on cotangent spaces, so [lem-sc-point-tangent-finite-local-cotangent-surjective] gives a surjection $\\mathcal O_{\\mathbf P,p}\\to\\mathcal O_{X,x}$. Hence $\\varphi^\\sharp$ is surjective on all stalks (step 6), so on every affine open $\\operatorname{Spec}R$ of $\\mathbf P(V^\\vee)$, whose inverse image $\\operatorname{Spec}A$ is affine because $\\varphi$ is finite, the ring map $R\\to A$ is surjective; thus $\\varphi$ is a closed immersion by [def-weil-closed-immersion].",
+   "text": "The coordinate map is proper because its composite to the separated projective target base is proper. Closed-point injectivity gives empty or singleton fibres over closed points. Projective space is locally Noetherian; the proper finite-fibre neighbourhood theorem makes phi finite on a neighbourhood of every closed target point. These opens cover the compact T0 target, since a nonempty closed complement would contain a closed point. Thus phi is finite.",
    "uses": [
-    "lem-sc-point-tangent-finite-local-cotangent-surjective",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-sc-point-tangent-closed-fibre-singleton",
+    "thm-sc-proper-finite-fibre-finite-neighbourhood",
+    "pqf-lem-locnoeth-lft",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, proper finite-fibre step; coherent.tex Tag 02OH"
+   }
+  },
+  {
+   "text": "At a closed x, Nullstellensatz identifies both residue fields with k, and the residue map of phi is bijective by composition with the structure map. For a tangent vector theta killed by the differential, the explicit formula for schemeTangentMap and its zero show theta followed by phi factors through the residue-field point of phi(x). Choose a standard chart containing phi(x). A section t in V vanishing at x is a ratio r times its generating coordinate section, and r evaluates to zero at phi(x). The factorization implies theta pulls this ratio back to zero. The preimage of the chart under theta is the whole dual-number spectrum because it contains its closed point. Naturality and scalar compatibility of section pullback now show theta^*t = 0. Adjunction uniqueness identifies this with the tensor-pullback unit in hypothesis (2), contradicting tangent separation for nonzero theta. Thus the differential is injective, and rational tangent-cotangent duality gives cotangent surjectivity.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-sc-scheme-tangent-space",
+    "lem-sc-tangent-map-linear",
+    "lem-sc-tangent-space-vector-space",
+    "lem-sc-point-tangent-cotangent-surjective",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, tangent separation; Tags 0B2B, 0B2E and 0B2F"
+   }
+  },
+  {
+   "text": "The rational unramified cotangent criterion supplies an unramified source neighbourhood of every closed x. These neighbourhoods cover X by compactness and the closed-point argument. Unramifiedness is local at the source, so phi is unramified.",
+   "uses": [
+    "lem-sc-rational-unramified-cotangent-criterion",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "lemma-injective-tangent-spaces-unramified"
+   }
+  },
+  {
+   "text": "For a closed target point with singleton fibre {x}, the residue-field map is surjective, hence purely inseparable. The finite unramified one-point criterion gives a target neighbourhood on which phi is a closed immersion. For an empty fibre use the complement of the closed image, on which the source is empty. The resulting target neighbourhoods cover all closed points, hence the entire target. Closed immersions are local at the target, so phi is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-finite-unramified-one-point-closed",
+    "lem-sc-point-tangent-closed-fibre-singleton",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
     "def-weil-closed-immersion"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0E8M, lemma-when-surjective-local; Tag 0E8S conclusion (varieties.tex)"
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 04DG, lemma-finite-unramified-one-point"
    }
   },
   {
-   "text": "When $V=H^0(X,\\mathcal L)$, this is the complete linear system, and [def-sc-ample] identifies the closed-immersion property and pullback isomorphism with very ampleness.",
+   "text": "The preceding construction works for every finite basis of V and supplies the required twist isomorphism. Choose a finite basis of V to witness very ampleness. This already follows for any generating separating V, and in particular proves the requested implication when V is the whole section space.",
    "uses": [
     "def-sc-ample"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0E8S, final conclusion"
+    "place": "Tag 0E8S conclusion"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-coherent-hi",
-  "def-weil-pbc-generating-sections",
+  "lem-sc-nonvanishing-iff-generates-at",
+  "lem-weil-pbc-invertible-stalk-linear-equiv",
+  "lem-weil-pbc-generating-sections-stalk-span",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
   "def-weil-pbc-morphism-to-projective-space-by-sections",
   "def-pc-projective-space-twist",
+  "lem-pc-complete-linear-system-closed",
   "lem-weil-pbc-proper-to-separated",
   "lem-sc-point-tangent-closed-fibre-singleton",
-  "lem-sc-quasi-compact-kolmogorov-closed-point",
-  "lem-sc-finite-type-nonclosed-closure-closed-points",
   "thm-sc-proper-finite-fibre-finite-neighbourhood",
   "pqf-lem-locnoeth-lft",
   "lem-weil-pbc-closed-point-residue-field-base",
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-sc-scheme-tangent-space",
+  "lem-sc-tangent-map-linear",
+  "lem-sc-tangent-space-vector-space",
   "lem-sc-point-tangent-cotangent-surjective",
-  "lem-sc-point-tangent-finite-local-cotangent-surjective",
+  "lem-sc-rational-unramified-cotangent-criterion",
+  "lem-weil-pbc-finite-unramified-one-point-closed",
   "def-weil-closed-immersion",
   "def-sc-ample"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "R2",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0E8S proof; Tag 02O5 finite-dimensionality"
+  "place": "Tag 0E8S, with the proved rational unramified cotangent criterion and etale.tex Tag 04DG replacing the finite-local-stalk/cokernel argument; reuses generatingSections_pair from CompleteLinearSystemClosed for the universal section pair"
  },
  "mathlib_searches": [
   {
@@ -211,7 +214,6 @@
  },
  "tool_uses": [
   "pqf-lem-locnoeth-lft",
-  "lem-weil-pbc-finite-type-module-support-closed",
   "lem-pc-coherent-hi"
  ],
  "reviewed": {
@@ -240,5 +242,26 @@
   "group": "H1",
   "result": "pass"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261023T131745-L-2147605",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,67 @@
+# Worker report — Q126
+
+1. Files written:
+- dag/nodes/sec-six-functors-basics/lem-sfb-purely-inseparable-curve-frobenius.json: item, split; unchanged statement, four assembly steps.
+- dag/nodes/sec-six-functors-basics/lem-sfb-one-variable-purely-inseparable-subfield.json: statement, unsplit; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-relative-frobenius-function-field-image.json: statement, unsplit; no Mathlib match.
+- citations.json and this report; searches.jsonl and search-results.json preserve the actual search record.
+
+2. Attachments: none. The item has no exact declaration in WeilConjectures. Its Sheaf.AlgebraicGeometry.Curve.PurelyInseparableFrobenius declaration exists but its proof is sorry, as read directly; it is not finished. Searches by blueprint tag, purely inseparable curves, function fields and Frobenius gave no eligible attachment for either new statement.
+
+3. WANTED: none. All sources used are present locally.
+
+4. The returned issue was granularity: 3878 characters of proof were held in one work item. The sandbox contained no node, report or searches when this repair began; the current live JSON (including the accepted older proof and metadata) supplied the retained starting point. I did not change the statement, hypotheses, Frobenius conventions, source route or Lean. Two proper subarguments are now separate unsplit nodes. Neither is an existence/uniqueness clause of the item's curve factorization: one is a theorem about subfields, the other identifies the image of an already constructed map. The new nodes have no proof steps or proof dependencies; other workers can claim them independently. The curve-model and root-tower lemmas are still used by the field argument assigned below, though no longer directly by the parent.
+
+5. Nothing mathematical remains unfinished for this split; the new statements intentionally await their own stage-1 workers. No compiler, Lake, repository git, repository write, source download or agent was used.
+
+## Review by Q126
+
+I read coord/delivery-errors.md B–E, the chapter and unit, the three-level restriction in SETUP.md, and the current GOAL. This is a repair below the existing high-genus-cover route, not a change of that route. The item is not the unit's key statement. I read Curves 0CCX (lemma-purely-inseparable), 0CCY (lemma-inseparable-deg-p-smooth), 0CCZ (lemma-purely-inseparable-smooth), 0BY1 (theorem-curves-rational-maps), and Varieties 0CCF (lemma-inseparable-deg-p-smooth) and 0CCG (remark-n-fold-relative-frobenius). For the first new node, 0CCX supplies the tower route and 0CCY the equality-of-index-p-subfields route; the explicit algebraically closed specialization from the returned proof is preserved below. For the second, I checked 0CCG's two projections and 0CCY's image kK^p against the affine calculation. Here k is algebraically closed, hence scalars have p^n-th roots: the image is K^{p^n}. No SGA route is involved.
+
+I opened every statement cited in the new four-step parent and the statements used by the extracted arguments. Step 1 uses proper-curve-function-field-morphisms precisely for finite generation, transcendence degree one and the k-embedding, then the new subfield theorem precisely for [L:E]=p^r and E=L^{p^r}. Its finite purely inseparable hypothesis is the item's assumption, and E inherits its k-structure from f being a k-morphism. Step 2 uses smooth-curve-relative-frobenius-degree for the geometric properties of T and nonconstancy of F, and the new image theorem for F^*k(T)=L^{p^r}. Taking inverse maps onto this common image is elementary field algebra. Step 3 uses exactly the bijection, identity and composition clauses of proper-curve-function-field-morphisms. Both curves meet its smooth/proper/integral/dimension-one hypotheses, so theta and its inverse give inverse morphisms, and equality of pullbacks gives hF=f. Step 4 uses the same composition clause and the degree theorem on any competing exponent; p>=2 gives m=r, and injectivity of F^* and faithfulness give h=g. All citations have verbatim statement quotations in citations.json. The parent has no hidden tower or affine-image argument remaining.
+
+The first new statement introduces k,E,L, finite generation, transcendence degree and the power subfield; the second introduces k,C,n,T and both defining projections of F. All notions used have their defining nodes or an explicit definition. No unsplit statement contains a proof sketch. The two searches by distinct semantic phrasings, Loogle and source grep were actually run for each node with msearch.py; the raw results are retained. I read Mathlib/FieldTheory/PurelyInseparable/Basic.lean at finrank_eq_pow (322 onward): it proves the degree is a p-power but does not prove E=L^{p^r}. I read Exponent.lean's iterateFrobenius and algebraMap_iterateFrobenius (263–302): these are abstract field maps under an exponent bound, not the relative-Frobenius twist's pullback image. The remaining hits about separable/perfect closures and finite fields do not supply either statement. Neither node is a Mathlib leaf.
+
+Edge cases: E=L gives r=0 and L^{p^0}=L; for L=k(t), E=k(t^{p^r}) gives degree p^r and the claimed image. The field argument uses transcendence degree one essentially (no claim about degree p^r subfields in k(s,t)). For the image statement n=0 is the identity; on P^1 its coordinate t pulls back to t^{p^n}, and arbitrary constants remain in the image since k is perfect. Integral dimension-one curves are nonempty, so their affine charts and function fields exist. The theta construction works also when f is already an isomorphism. No statement dispute or source error was found. Each parent step is shorter than 2000 characters; the total assembly is below 3000. The substantial arguments are preserved as separate future work below, not dropped or replaced by vague references.
+
+## Assignment of every old argument
+
+The first new node takes the degree-p root tower and total degree (old step 1 after identifying L,E), every intermediate field's finite generation and transcendence degree and smooth proper model (old step 2), the conclusion [K_j:K_j^p]=p from the image computation and the existing degree theorem (last part of old step 3), and the quotient-of-polynomials argument, index comparison, degree multiplication, descent and r=0 base case (old step 4). Its future worker can use the existing root-tower node, degree-multiplicativity node, curve-model node, relative-Frobenius degree node, and the second new node; none depends on the first new node. These are proof materials for future splitting, not proof_deps of an unsplit node.
+
+The second new node takes the whole affine-image calculation in old step 3: the tensor formula, extraction of roots of all scalar coefficients, the identity for the image of a sum, the reverse inclusion a^{p^n}=F^*(a tensor 1), and passage to fractions. The old geometric degree input already has its separate existing node. The final parent steps retain the construction of theta, construction of h and its inverse, comparison of their composites and hF, and the exponent and isomorphism uniqueness arguments (old steps 5 and 6). Thus no argument of the old six steps disappears.
+
+### Retained old proof material, verbatim
+
+Old step 1:
+
+Put $L=k(X)$ and identify $k(Y)$ with its image $E=f^*k(Y)\subseteq L$. By [lem-sfb-proper-curve-function-field-morphisms], $E/k$ and $L/k$ are finitely generated of transcendence degree one. Apply [lem-weil-pbc-purely-inseparable-pth-root-tower] to the given finite purely inseparable extension $L/E$. We obtain $E=K_0\subset K_1\subset\cdots\subset K_r=L$, with $K_j=K_{j-1}(\alpha_j)$, $\alpha_j^p\in K_{j-1}$, and $[K_j:K_{j-1}]=p$. Repeatedly applying [lem-weil-pbc-field-degree-multiplicativity] gives $[L:E]=p^r$, including the empty tower $r=0$.
+
+Old step 2:
+
+Each $K_j$ is finite-dimensional over $E$, being an $E$-linear subspace of $L$. A finite $E$-basis of $K_j$ together with finite field generators of $E/k$ generates $K_j/k$ as a field. For a transcendental $t\in E$, every element of $K_j\subseteq L$ is algebraic over $k(t)$ because $L/k$ has transcendence degree one. Thus $K_j/k$ is finitely generated of transcendence degree one. By [lem-trf-algclosed-curve-model], choose a smooth proper integral dimension-one curve $C_j/k$ and a $k$-isomorphism $k(C_j)\cong K_j$. These identifications allow field computations on the $K_j$ themselves.
+
+Old step 3:
+
+For any one of these curves $C$ and any $n\geq0$, [lem-sfb-smooth-curve-relative-frobenius-degree] supplies the smooth proper integral curve $C^{(p^n)}$ and the nonconstant map $F_{C/k,n}$ of function-field degree $p^n$. Its image subfield is $k(C)^{p^n}$, as the following affine calculation shows. On a nonempty affine open $\operatorname{Spec}A\subseteq C$, the twist has algebra $A\otimes_{k,\varphi_n}k$, and the map is $a\otimes b\mapsto a^{p^n}b$, by its two defining projections [def-pc-base-change], [def-weil-absolute-frobenius-scheme]. For every $b\in k$, the polynomial $T^{p^n}-b$ has a root $c\in k$. Hence the image of a sum $\sum_i a_i\otimes b_i$, with $c_i^{p^n}=b_i$, is $(\sum_i a_i c_i)^{p^n}$. Conversely $a^{p^n}$ is the image of $a\otimes1$. Passing to fractions using [def-sc-function-field] gives exactly $k(C)^{p^n}$. In particular $[K_j:K_j^p]=p$ for every $j$.
+
+Old step 4:
+
+For $j\geq1$, every $x\in K_j=K_{j-1}(\alpha_j)$ is a quotient of polynomials in $\alpha_j$ with coefficients in $K_{j-1}$. Raising this quotient to the $p$th power puts it in $K_{j-1}$ since $\alpha_j^p\in K_{j-1}$. Therefore $K_j^p\subseteq K_{j-1}$. The fields $K_j^p$ and $K_{j-1}$ both have index $p$ in $K_j$, by steps 1 and 3. The middle field is finite over the bottom field since it is a subspace of the finite-dimensional space $K_j$ over $K_j^p$. Applying [lem-weil-pbc-field-degree-multiplicativity] to $K_j^p\subseteq K_{j-1}\subseteq K_j$ gives $p=p[K_{j-1}:K_j^p]$, so $K_{j-1}=K_j^p$. Descending through the tower gives $E=L^{p^r}$; for $r=0$ this says $E=L$.
+
+Old step 5:
+
+Apply [lem-sfb-smooth-curve-relative-frobenius-degree] to $X$ with $n=r$. Put $T=X^{(p^r)}$ and $F=F_{X/k,r}$. The affine calculation of step 3 applied to $X$ gives $F^*k(T)=L^{p^r}=E=f^*k(Y)$. Thus $\theta=(F^*)^{-1}\circ f^*:k(Y)\xrightarrow{\sim}k(T)$ is a $k$-isomorphism. By [lem-sfb-proper-curve-function-field-morphisms], $\theta$ and $\theta^{-1}$ induce nonconstant maps $h:T\to Y$ and $h':Y\to T$. Their composites induce identity field maps, so that same bijection gives $h'h=\operatorname{id}_T$ and $hh'=\operatorname{id}_Y$. Finally $(h\circ F)^*=F^*\theta=f^*$, so $f=h\circ F$. This proves existence also when $r=0$.
+
+Old step 6:
+
+If $f=g\circ F_{X/k,m}$ for a $k$-isomorphism $g:X^{(p^m)}\to Y$ and an integer $m\geq0$, then [lem-sfb-proper-curve-function-field-morphisms] says $g^*$ is an isomorphism and $f^*=F_{X/k,m}^*g^*$. Consequently [lem-sfb-smooth-curve-relative-frobenius-degree] gives $p^r=[L:E]=p^m$. Since $p\geq2$, the sequence $p^n$ is strictly increasing, so $m=r$. With this exponent fixed, $F^*h^*=f^*=F^*g^*$ and injectivity of the field embedding $F^*$ give $h^*=g^*$. Injectivity in [lem-sfb-proper-curve-function-field-morphisms] now gives $h=g$.
+
+## Not duplicates
+
+- lem-sfb-one-variable-purely-inseparable-subfield vs lem-sfb-smooth-curve-relative-frobenius-degree: The new statement classifies embedded subfields of one-variable fields and their degree, with no curve morphism or isomorphism conclusion. The existing statement concerns Relative Frobenius of a smooth proper curve has degree p to the n.
+- lem-sfb-relative-frobenius-function-field-image vs lem-trf-scheme-frobenius-finite-radicial: The new statement computes the exact function-field image as the power subfield, not finiteness, radiciality, degree, a definition of Frobenius, or a curve factorization. The existing statement concerns Finiteness and radiciality of the scalar-extended scheme Frobenius.
+- lem-sfb-relative-frobenius-function-field-image vs lem-trf-relative-frobenius-finite: The new statement computes the exact function-field image as the power subfield, not finiteness, radiciality, degree, a definition of Frobenius, or a curve factorization. The existing statement concerns Finiteness of the n-fold relative Frobenius.
+- lem-sfb-relative-frobenius-function-field-image vs lem-sfb-purely-inseparable-curve-frobenius: The new statement computes the exact function-field image as the power subfield, not finiteness, radiciality, degree, a definition of Frobenius, or a curve factorization. The existing statement concerns Purely inseparable smooth proper curve maps are relative Frobenius.
+- lem-sfb-relative-frobenius-function-field-image vs lem-sfb-smooth-curve-relative-frobenius-degree: The new statement computes the exact function-field image as the power subfield, not finiteness, radiciality, degree, a definition of Frobenius, or a curve factorization. The existing statement concerns Relative Frobenius of a smooth proper curve has degree p to the n.
+
+The whole-DAG source-tag/keyword searches and blueprint_refs searches for purely inseparable, subfield, function field, relative Frobenius, power subfield and transcendence degree one found no statement of either new fact. In particular, the curve function-field correspondence gives embeddings but not their Frobenius image or the classification of inseparable subfields; the curve-model theorem only constructs models. No new id existed before this repair.

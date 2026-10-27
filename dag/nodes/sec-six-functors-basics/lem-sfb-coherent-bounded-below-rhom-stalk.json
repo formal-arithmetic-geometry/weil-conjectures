@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-coherent-bounded-below-rhom-stalk",
+ "kind": "statement",
+ "title": "Derived stalk comparison for a coherent sheaf and a bounded-below complex",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent], let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category] have cohomology zero in every sufficiently negative degree, and let $x\\in X$. Write $A=\\mathcal O_{X,x}$, and compute stalk complexes by applying the exact stalk functor termwise [def-weil-pbc-module-stalk]. The canonical comparison is an isomorphism in $D(A)$ [def-weil-abstract-derived-category]: $$\\bigl(R\\mathcal Hom_{\\mathcal O_X}(\\mathcal F[0],E)\\bigr)_x\\xrightarrow{\\sim}R\\operatorname{Hom}_A(\\mathcal F_x[0],E_x).$$ Both derived internal Hom functors are [def-pur-derived-internal-hom], on the Zariski ringed site and on the one-object ringed site respectively. The comparison is natural in $\\mathcal F$ and $E$, in particular it intertwines precomposition by every endomorphism of $\\mathcal F$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0GM8 (lemma-stalk-internal-hom), case (2); coherent degree-zero modules on Noetherian schemes are pseudo-coherent (perfect.tex Tag 08E8, lemma-identify-pseudo-coherent-noetherian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-coherent",
+  "def-pc-derived-category",
+  "def-weil-pbc-module-stalk",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-module-stalk-functor",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-pc-stalk-tensor-complex-degrees",
+  "lem-pc-stalk-tensor-complex-differential"
+ ],
+ "proof": [
+  {
+   "text": "Choose $a\\in\\mathbf Z$ with $H^i(E)=0$ for $i<a$. For any representative $C^\\bullet$ of $E$, its good truncation $G^\\bullet=\\tau_{\\ge a}C^\\bullet$ is zero below $a$ and $C^\\bullet\\to G^\\bullet$ is a quasi-isomorphism: in retained degrees its cohomology is that of $C^\\bullet$, and the discarded cohomology is zero. Thus we may compute with a termwise bounded-below complex, without imposing quasi-coherence on $E$.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Good truncation used in the bounded-below case of lemma-stalk-internal-hom (Tag 0GM8); truncation formula in derived-categories.tex."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-coherent-affine-free-resolution] to $X,\\mathcal F,x$. Obtain an affine open $U\\ni x$ and a bounded-above finite-free complex $P^\\bullet\\to\\mathcal F|_U[0]$ which is a quasi-isomorphism; choose $b$ with $P^p=0$ for $p>b$. By [lem-sc-derived-internal-hom-restrict-open] the restriction of the global derived Hom is the derived Hom of the restricted arguments. Stalks at $x$ are unchanged by this restriction: neighbourhoods contained in $U$ are cofinal among all neighbourhoods of $x$. It therefore suffices to compute on $U$.",
+   "uses": [
+    "lem-sc-coherent-affine-free-resolution",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8(2), local finite-free calculation; restriction is Tag 08DL (lemma-restriction-RHom-to-U)."
+   }
+  },
+  {
+   "text": "[lem-sc-derived-hom-finite-free-model] identifies $H^\\bullet=\\mathcal Hom^\\bullet_{\\mathcal O_U}(P^\\bullet,G^\\bullet|_U)$ with a representative of $R\\mathcal Hom_{\\mathcal O_U}(\\mathcal F|_U[0],E|_U)$. Its hypotheses hold: $P^\\bullet$ is bounded above and finite free, $G^\\bullet|_U$ is termwise bounded below, and the augmentation is a quasi-isomorphism. Exactness of stalks [lem-weil-pbc-module-stalk-exact] makes $P_x^\\bullet\\to\\mathcal F_x[0]$ a quasi-isomorphism, with finite-free terms, and $G_x^\\bullet$ represents $E_x$ and is zero below $a$. Apply the same finite-free-model lemma to the one-point ringed space with ring $A$ to compute $R\\operatorname{Hom}_A(\\mathcal F_x[0],E_x)$ by $\\operatorname{Hom}_A^\\bullet(P_x^\\bullet,G_x^\\bullet)$.",
+   "uses": [
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8(2), computation of both sides by finite-free Hom complexes; modules.tex Tag 01AG (lemma-abelian)."
+   }
+  },
+  {
+   "text": "In degree $n$ the Hom complex of [def-pur-hom-complex] has factors $\\mathcal Hom(P^p,G^{p+n}|_U)$ only for $a-n\\le p\\le b$, a finite interval. For $P^p\\cong\\mathcal O_U^{r_p}$ the canonical germ-of-map homomorphism is the identity on $(G_x^{p+n})^{r_p}$, hence $\\mathcal Hom(P^p,G^{p+n}|_U)_x\\cong\\operatorname{Hom}_A(P_x^p,G_x^{p+n})$. Finite products commute with stalks: representatives for finitely many germs can be restricted to their common neighbourhood, and finitely many equalities of germs can be imposed on another common neighbourhood. Thus these maps give a degreewise isomorphism $\\gamma:(H^\\bullet)_x\\to\\operatorname{Hom}_A^\\bullet(P_x^\\bullet,G_x^\\bullet)$. The differential formula $d(f)^p=d_G^{p+n}f^p-(-1)^nf^{p+1}d_P^p$ commutes with taking germs, so $\\gamma$ is an isomorphism of complexes.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8(2), expanded finite-products calculation; Hom differential from section-hom-complexes."
+   }
+  },
+  {
+   "text": "In the derived category, the canonical stalk comparison is the map induced by taking the germ of a local Hom and then deriving. Computing it with the finite-free model gives precisely $Q(\\gamma)$: the replacement maps in [def-pur-derived-internal-hom] are inverted, and germ evaluation commutes with their precomposition and postcomposition. Consequently the two models in Step 3 and the complex isomorphism in Step 4 identify the canonical comparison itself as an isomorphism in $D(A)$, rather than merely identify the cohomology groups. The same equality $(v\\circ f\\circ u)_x=v_x\\circ f_x\\circ u_x$ shows naturality in both arguments before localization; the derived functor and independence of representatives in [def-pur-derived-internal-hom] preserve these commuting squares. In particular for an endomorphism $u$ of $\\mathcal F$ the square is $\\gamma\\circ(u^*)_x=(u_x)^*\\circ\\gamma$.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8 canonical comparison, with the functorial construction in section-internal-hom and lemma-pullback-internal-hom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "lem-sc-coherent-affine-free-resolution",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0GM8 (lemma-stalk-internal-hom), case (2), expanded using the existing affine finite-free resolution and Hom-model lemmas; canonical comparison from lemma-pullback-internal-hom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian scheme the stalk of derived sheaf Hom from a coherent sheaf into a bounded below complex equals derived Hom of stalks",
+   "results": "Returned 8 hits: ModuleCat.Tilde.stalkIso_hom, AlgebraicGeometry.Scheme.Modules.instAbelian, smoothSheafCommRing.ι_forgetStalk_hom_apply, smoothSheafCommRing.ι_forgetStalk_hom, ModuleCat.Tilde.stalkToFiberLinearMap_germ, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.stalkIso.  Read the displayed types and descriptions; none states the derived stalk comparison for a coherent first argument and bounded-below second argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"Hom\"",
+   "results": "Returned 12 hits: RingHom.SurjectiveOnStalks, RingHom.surjectiveOnStalks_of_isLocalization, RingHom.surjectiveOnStalks_of_surjective, RingHom.SurjectiveOnStalks.of_comp, RingHom.SurjectiveOnStalks.comp, RingHom.surjectiveOnStalks_iff_of_isLocalHom, RingHom.surjectiveOnStalks_of_exists_div, RingHom.SurjectiveOnStalks.baseChange.  Read the displayed types and descriptions; none states the derived stalk comparison for a coherent first argument and bounded-below second argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*stalk|stalk.*derived.*[Hh]om|stalk.*[Pp]seudo[Cc]oherent",
+   "results": "Returned 0 hits: .  Read the displayed types and descriptions; none states the derived stalk comparison for a coherent first argument and bounded-below second argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom commutes with stalks for a coherent sheaf and bounded below complex",
+   "results": "Returned 8 hits: smoothSheafCommRing.forgetStalk_hom_comp_evalHom_assoc, smoothSheafCommRing.forgetStalk_hom_comp_evalHom, smoothSheaf.evalHom, ModuleCat.Tilde.stalkIso, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, LightCondensed.ihomPoints, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, smoothSheafCommRing.forgetStalk_hom_comp_evalHom_apply.  Read the displayed types and descriptions; none states the derived stalk comparison for a coherent first argument and bounded-below second argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk functor commutes with derived internal Hom when its first argument is pseudo coherent and the second is bounded below",
+   "results": "Returned 8 hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, stalkSkyscraperSheafAdjunction, TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPushforward_germ_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor, TopCat.Presheaf.stalkPullbackHom.  Read the displayed types and descriptions; none states the derived stalk comparison for a coherent first argument and bounded-below second argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*stalk|stalk.*derived.*[Hh]om|stalk.*[Pp]seudo[Cc]oherent",
+   "results": "Read the 0 displayed hits: .  None states the derived comparison with a coherent first argument and an arbitrary bounded-below second argument; ordinary stalk maps, free sheaf presentations and Ext-size results do not give it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom stalk comparison for pseudo coherent complexes with bounded below second argument",
+   "results": "Read the 8 displayed hits: TopCat.Presheaf.stalk_hom_ext, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, smoothSheafCommRing.forgetStalk_hom_comp_evalHom, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo', AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_apply, TopCat.Presheaf.stalkPullbackIso.  None states the derived comparison with a coherent first argument and an arbitrary bounded-below second argument; ordinary stalk maps, free sheaf presentations and Ext-size results do not give it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"Hom\"",
+   "results": "Read the 12 displayed hits: RingHom.SurjectiveOnStalks, RingHom.surjectiveOnStalks_of_isLocalization, RingHom.surjectiveOnStalks_of_surjective, RingHom.SurjectiveOnStalks.of_comp, RingHom.SurjectiveOnStalks.comp, RingHom.surjectiveOnStalks_iff_of_isLocalHom, RingHom.surjectiveOnStalks_of_exists_div, RingHom.SurjectiveOnStalks.baseChange.  None states the derived comparison with a coherent first argument and an arbitrary bounded-below second argument; ordinary stalk maps, free sheaf presentations and Ext-size results do not give it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk functor commutes with derived internal Hom from a coherent module into a bounded below complex on a Noetherian scheme",
+   "results": "Read the 8 displayed hits: ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toOpen_germ_assoc, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, LightCondensed.ihomPoints_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat.  None states the derived comparison with a coherent first argument and an arbitrary bounded-below second argument; ordinary stalk maps, free sheaf presentations and Ext-size results do not give it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free resolution of a coherent sheaf computes derived Hom and its stalk over the local ring for a bounded below complex",
+   "results": "Read the 8 displayed hits: SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree_I, CategoryTheory.Sheaf.H, SheafOfModules.generatorsOfIsCokernelFree_π, ModuleCat.Tilde.stalkToFiberLinearMap.  None states the derived comparison with a coherent first argument and an arbitrary bounded-below second argument; ordinary stalk maps, free sheaf presentations and Ext-size results do not give it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-dualizing-closed-stalk-normalized",
+  "date": "2026-10-23",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E; 0E3E proof: duality, generic rank one and absence of finite-support submodules, and the dualizing Euler characteristic; supporting input: Tag 0AWL (lemma-good-dualizing-normalized), specialized to S=Spec(k) with k[0]; proper adjoint identification: Tag 0AWI (example-proper-over-local). Proof of Tag 0AWL: identify the closed-immersion exceptional inverse image with derived Hom over the local ring; the derived stalk comparison is Tag 0GM8(2).",
+   "via": [
+    "lem-sfb-proper-dualizing-closed-stalk-normalized",
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-coherent-bounded-below-rhom-stalk",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the bounded-below derived stalk comparison by good truncation, existing affine finite-free resolution, sheaf and point Hom models, and the explicit degreewise finite-product stalk map. No new nodes; distinguished the existing degree-zero/cohomology comparison from the required derived isomorphism and retained naturality.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images (3) through the inherited alteration/dualizing-normalization chain, specifically the Tag 0GM8(2) input to lem-sfb-proper-dualizing-closed-stalk-normalized; current latest blueprint read. No exact blueprint duplicate found. Inherited nearest ancestor is null.",
+  "tool_uses": [
+   {
+    "node": "def-kun-truncations",
+    "why": "Generic good truncation formula gives a termwise bounded-below representative; this unit supplies no separate truncation construction."
+   },
+   {
+    "node": "lem-sc-coherent-affine-free-resolution",
+    "why": "Generic coherent sheaf resolution on an affine neighbourhood; no such resolution lemma in this unit."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic Zariski restriction of derived internal Hom permits the local computation."
+   },
+   {
+    "node": "lem-sc-derived-hom-finite-free-model",
+    "why": "Generic finite-free Hom model applied on the open and on the one-point ringed space; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic exactness of module stalks preserves the resolution quasi-isomorphism."
+   },
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Generic definition gives the finite diagonal product and its signed differential."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic derived functor construction and functoriality identify the canonical comparison after localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-truncations",
+  "lem-sc-coherent-affine-free-resolution",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-2d87a3b36",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-2d87a3b36 (reviewer sub-agent of L); spot-checked: Read the whole delivery. Statement unchanged against the live unsplit node and matches Stacks 0GM8(2) (cohomology.tex l.13483) for coherent F[0], which is pseudo-coherent by 08E8; the citer lem-sfb-proper-dualizing-closed-stalk-normalized uses it as stated. Instead of 0GM8's truncated-K′ argument with details omitted, the proof uses a full affine finite-free resolution, which is valid on a Noetherian X. S1 truncation: def-kun-truncations, C→τ≥a C is a quasi-isomorphism. S2: lem-sc-coherent-affine-free-resolution hypotheses exact; restrict-open holds for arbitrary K and L. S3: finite-free-model lemma applies on U and on the one-point space with ring A (checked true via lem-sc-bounded-above-finite-free-hom-acyclic); module-stalk-exact (2)-(5) preserves the quasi-isomorphism and the truncation. S4: degree-n factors only for a-n≤p≤b, Hom(O^r,G)_x=(G_x)^r, finite products commute with stalks, signed differential matches def-pur-hom-complex. S5: checked that the germ-then-derive square commutes through the inverted qis Hom(F,I)_x→Hom(P,I)_x←Hom(P,G)_x and Hom_A(P_x,G_x)→Hom_A(P_x,J); naturality from (vfu)_x=v_x f_x u_x. Edge cases checked: F=0, E=0, X empty, A a field, E=G[k] (agrees with lem-sc-derived-internal-hom-stalk-localization), non-quasi-coherent E, E with cohomology unbounded above. Bounded below is needed exactly for the finite products. No duplicate: the stalk-localization, ext-stalk-localization and stalk-internal-hom-evaluation nodes are weaker or underived. No new nodes. Seven generic tool_uses accepted. No SGA; no repair note; live node still unsplit, so not superseded. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentBoundedBelowRHomStalk",
+  "declaration": "AlgebraicGeometry.isIso_derivedInternalHomStalkComparison_of_coherent_boundedBelow",
+  "declarations": [
+   "AlgebraicGeometry.rhomStalkTensorSheafIso",
+   "AlgebraicGeometry.rhomStalkTensorDegreeIso",
+   "AlgebraicGeometry.rhomStalkTensorComplexIso",
+   "AlgebraicGeometry.exists_rhomStalkTensorComparison",
+   "AlgebraicGeometry.rhomStalkTensorComparison",
+   "AlgebraicGeometry.derivedInternalHomStalkComparison",
+   "AlgebraicGeometry.derivedInternalHomStalkComparison_naturality",
+   "AlgebraicGeometry.isIso_derivedInternalHomStalkComparison_of_coherent_boundedBelow"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentBoundedBelowRHomStalk.lean",
+  "statement": "theorem isIso_derivedInternalHomStalkComparison_of_coherent_boundedBelow (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (_hF : RingedSpace.IsCoherent X.toRingedSpace F) (E : schemeDerivedCategory X) (_hE : ∃ a : ℤ, E.IsGE a) (x : X) : IsIso (derivedInternalHomStalkComparison X x ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F) E)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The comparison is explicitly the tensor-Hom transpose of stalked evaluation. Its derived tensor comparison is uniquely fixed on K-flat representatives by the existing pure-tensor germ formula. The main IsIso assertion is in D(O_X,x), and the separate general naturality theorem includes degree-zero endomorphism precomposition. The standard ModuleCat presentation is the dependency’s ordinaryModuleDerivedInternalHom; termwise exact stalks are mapDerivedCategory with its existing factorization isomorphism. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e077bcbd4",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Item matches Stacks 0GM8(2) clause by clause: CompactSpace+IsLocallyNoetherian (recorded), RingedSpace.IsCoherent F, E : schemeDerivedCategory with ∃ a, E.IsGE a (no qcoh/upper bound), any x; IsIso of the canonical comparison curry(β ≫ μ ≫ F.map(ev via schemeDerivedTensorHomEquiv 𝟙)) into ordinaryModuleDerivedInternalHom of the derived stalks, i.e. Stacks' lemma-pullback-internal-hom map; separate general naturality theorem gives End(F) precomposition. μ = .choose of a sorried ∃! pinned by naturality + K-flat normalization (pullbackTensorModelMap, mapDerivedCategoryFactors, germ complex iso, μ_Q), judged true; helper chooses pinned by germ/injection equations. Mechanical theorem-stmt_dep finding: PASS. The statement uses theorem conclusions (comparisonStalk* Prop instances for mapDerivedCategory, stalkTensorIso/exists_stalk_tensor_degree_iso data and spec, stalk_tensor_degree_differential as chain-map proof), not plain defs. Only item node changed (lean + 7 landed stmt_deps, allowed); no dep records touched; no H4 duplicate (pullback-Hom nodes are scheme-morphism only; DerivedInternalHomStalkLocalization degree-zero/per-cohomology); defs non-hollow, theorems sorry, docstrings/source/blueprint/proof steps present, universes bound, lines ≤100. No compile (no change). Advisory: helper-level owners def-pc-derived-pullback-tensor-comparison/def-pc-kflat-complex/braidedCategory' owner not in stmt_deps (transitive); six private proof-dep imports unused by statements (common stage-3 practice, not counted as H9)."
+ }
+}

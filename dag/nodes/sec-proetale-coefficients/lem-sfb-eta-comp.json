@@ -271,7 +271,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-aa69365af (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All five steps check against the current blueprint, Stacks categorical lemmas, Mathlib sources, and master comparison construction. Coefficient categories and target base-change directions remain distinct and unchanged. No new nodes, missing dependencies, cycles, duplicate statements, or repairs required."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      651,
+      660
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -289,5 +314,44 @@
   "date": "2026-10-18",
   "existing": true,
   "note": "Exact existing theorem in the published pro-etale module-object framework, read through scompile.py --source. The section binds Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}, arbitrary X Y : Scheme.{u}, and f : X ⟶ Y; the theorem binds arbitrary Z and g. The section's MonObj instance is explicitly omitted since the equality is on underlying abelian sheaves, so it applies in particular to every condensed ring without a commutativity condition. condensedPushforwardHom is the recorded eta, and lowerStarComp.hom at condensedRingObj Λ X is the recorded c_{f,g} at Λ_X. The construction also agrees with the node's explicit normalization: upperStarComp is the inverse of (conjugateIsoEquiv adjCompositeScheme adjComposite).symm (lowerStarComp.symm); hence its inverse is exactly m_{a,b} with conjugate c_{a,b}^{-1}. upperStarFromPointComp uses that inverse followed by comp_toSpecZ, and condensedPullbackHom is its component at Λ. The branch label denotes the published WeilConjectures source root, resolved by the side overlay rather than the older local slopmaster2 checkout. No new module or construction is introduced."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a condensed ring, and let $f\\colon X\\to Y$ and\n$g\\colon Y\\to Z$ be morphisms of schemes. Then\n$$\n\\eta_{g\\circ f}=c_{f,g}\\circ g_*(\\eta_f)\\circ\\eta_g\\colon\n\\Lambda_Z\\longrightarrow(g\\circ f)_*\\Lambda_X ,\n$$\nwhere the $\\eta$ are as in [def-sfb-eta] and\n$c_{f,g}\\colon g_*f_*\\cong(g\\circ f)_*$ is the composition isomorphism of\n[def-sfb-finite-lower-star-comp] at $\\Lambda_X$.",
+  "proof": [
+   {
+    "text": "Write $F=p^*\\Lambda$, a sheaf on $(\\Spec\\Z)_{\\mathrm{proét}}$, so that\n$\\Lambda_X=\\pi_X^*F$ for every scheme $X$. Let $f\\colon X\\to Y$. By\n[def-sfb-alpha] and [def-sfb-pullback-from-point-comp-iso],\n$\\alpha_f$ is the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*F\\cong f^*\\pi_Y^*F$, followed by $\\pi_Y\\circ f=\\pi_X$. By\n[def-sfb-eta], $\\eta_f$ is the mate of $\\alpha_f$ under $f^*\\dashv f_*$.",
+    "uses": [
+     "def-sfb-alpha",
+     "def-sfb-pullback-from-point-comp-iso",
+     "def-sfb-eta"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The composition isomorphism of pullbacks is, by definition\n([def-sfb-finite-upper-star-comp]), conjugate to the composition isomorphism of\npushforwards ([def-sfb-finite-lower-star-comp]). So under the adjunction\n$\\pi_Y^*\\dashv\\pi_{Y*}$, the morphism $\\eta_f\\colon\\pi_Y^*F\\to f_*\\pi_X^*F$\ncorresponds to\n$$\nF\\longrightarrow\\pi_{X*}\\pi_X^*F\\cong\\pi_{Y*}f_*\\pi_X^*F,\n$$\nthe unit of $\\pi_X^*\\dashv\\pi_{X*}$ followed by the inverse of the\ncomposition isomorphism $\\pi_{Y*}f_*\\cong(\\pi_Y\\circ f)_*=\\pi_{X*}$.",
+    "uses": [
+     "def-sfb-finite-upper-star-comp",
+     "def-sfb-finite-lower-star-comp"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply this description to $f$, $g$ and $g\\circ f$. Under\n$\\pi_Z^*\\dashv\\pi_{Z*}$, both sides of the claim correspond to morphisms\n$F\\to\\pi_{Z*}(g\\circ f)_*\\pi_X^*F$. Each is the unit of\n$\\pi_X^*\\dashv\\pi_{X*}$ followed by a composite of composition isomorphisms\nof pushforwards, together with naturality of the units. These composites\nagree by the associativity of the composition isomorphisms for the triple\n$f,g,\\pi_Z$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "That associativity holds on sections. Both sides are the restriction along\nthe canonical isomorphism between the iterated fibre products\n$((V\\times_{\\Spec\\Z}Z)\\times_ZY)\\times_YX$ and $V\\times_{\\Spec\\Z}X$, and maps\ninto a fibre product are determined by their projections.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

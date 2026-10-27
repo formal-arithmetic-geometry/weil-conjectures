@@ -1,0 +1,406 @@
+{
+ "id": "lem-trf-fppf-local-representations-fully-faithful",
+ "kind": "statement",
+ "title": "Local representing schemes define a fully faithful descent functor",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $\\{T_i\\to T\\}_{i\\in I}$ a set-indexed fppf covering of its big fppf site [def-pc-fppf-site]. Work in the universes and small site skeletons of [def-weil-size-convention]. All fibre products are over $T$ [def-pc-fibre-product]. Write $h_Z(W)=\\operatorname{Mor}_T(W,Z)$, and let $\\mathcal L$ be the full category of sheaves of sets $H$ on this site [def-weil-pbc-sites-and-cohomology] for which each $h_{T_i}\\times H$ is represented by a scheme. Let $\\mathcal D$ be the category of scheme descent data on the covering [def-trf-scheme-cover-descent-datum]: objects are schemes $X_i/T_i$ and isomorphisms $\\phi_{ij}:X_i\\times_TT_j\\simeq T_i\\times_TX_j$ over $T_i\\times_TT_j$ satisfying the triple cocycle; morphisms are compatible families of $T_i$-maps. Restrictions to slices are sectionwise [def-pur-localized-ringed-site]. Choose representations $\\alpha_{H,i}:h_{X_{H,i}}\\simeq h_{T_i}\\times H$ for all $H\\in\\mathcal L$ and $i$. There is a functor $R:\\mathcal L\\to\\mathcal D$ with the following properties. The map $X_{H,i}\\to T_i$ represents the first projection of $\\alpha_{H,i}$; for every $a:W\\to T_i$, the fibre of $\\alpha_{H,i}(W)$ over $a$ is a natural bijection $\\operatorname{Mor}_{T_i}((W,a),X_{H,i})\\simeq H(W)$. Conversely these slice bijections recover $\\alpha_{H,i}$ by the disjoint union over all $a$. The transition of $R(H)$ is the isomorphism between $X_{H,i}\\times_TT_j$ and $T_i\\times_TX_{H,j}$ that identifies their representations of $h_{T_i}\\times H\\times h_{T_j}$, preserving all three coordinates. For a sheaf map $v:H\\to K$, $R(v)_i$ represents $\\mathrm{id}_{h_{T_i}}\\times v$. For every $H,K\\in\\mathcal L$, the map $\\operatorname{Hom}(H,K)\\to\\operatorname{Hom}_{\\mathcal D}(R(H),R(K))$ induced by $R$ is bijective. In particular compatible local isomorphisms between the slice restrictions of $H$ and $K$ extend to a unique global isomorphism, and a family of these global comparisons is natural whenever its restrictions are natural.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W5, lemma-descent-data-sheaves, right-to-left functor and omitted morphism/quasi-inverse checks; Sites Tag 04TQ, lemma-glue-maps."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-scheme-cover-descent-datum",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the first projection of the chosen product representation alpha on the identity of X, obtaining p0 : X -> U_i over T and its underlying scheme map p. The naturality of the projection gives first(x) = x followed by p0. The equality p followed by f_i = X.hom gives q with identity underlying scheme map. Evaluation preserves products, identifying the product sections with pairs (a,s). Restrict this equivalence to maps over U_i: send x to the second coordinate of alpha((Over.map f_i)(x) followed by q). Its inverse is the underlying map alpha^{-1}(a,s), where a is the structure map of the test object. The first-coordinate identity makes this a map over U_i. Both inverse identities follow from those of alpha, and naturality from the second projection. This constructs the slice representation b with both required projection formulas. No cover assumption is used in this step.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let D be inclusion of the locally representable full subcategory followed by the sheaf pseudofunctor toDescentData. Define R(H) to have data D(H), local schemes Over.mk(p(H,i)), and representations b(H,i). Define R(z) as the induced-category morphism with underlying D(z). The functor laws are inherited from D. By the definition of SchemeCoverDescentDatum, its overlap scheme comparisons are those represented by these sheaf transitions, so the fibre-product coordinate interpretation and cocycle are retained. Forgetting the schemes and representations gives D definitionally. Thus e is the identity natural isomorphism, localEq is reflexivity, and the compatibility of e with b is reflexivity. This implements the original overlap and functoriality steps using the existing descent-data interface.",
+   "uses": [
+    "def-trf-scheme-cover-descent-datum",
+    "def-pc-fibre-product",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fppf covering presieve generates a covering sieve. Apply the fully faithful clause of setSheafCoverDescent to this sieve, and compose with the fully faithful inclusion of the locally representable full subcategory. This proves D fully faithful. The forgetful functor from SchemeCoverDescent is an induced-category functor and is faithful. Since R followed by this forgetful functor is D, cancellation gives R fully faithful and hence bijectivity of every R.map. This is precisely gluing compatible local maps and uniqueness, supplied by Sites Tag 04TQ.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "def-trf-scheme-cover-descent-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A fully faithful functor induces an equivalence on isomorphisms. Use its inverse on any local descent isomorphism and use injectivity for uniqueness. Right whiskering by a fully faithful functor is fully faithful on functor categories, so apply the same isomorphism equivalence to A and B and their given natural isomorphism. This gives the final unique natural-family lift in arbitrary diagram universes.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-yoneda-fully-faithful",
+  "def-pur-localized-ringed-site",
+  "def-trf-scheme-cover-descent-datum",
+  "def-pc-fibre-product",
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W5 and remark-what-product-means: explicit product-fibre equivalence, represented via the existing SchemeCoverDescentDatum interface; literature/stacks-project/sites.tex, Tag 04TQ for full faithfulness. Implemented in Lean by N4 on 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulToDescentData|bijective_toDescentData_map",
+   "results": {
+    "t": "2026-10-22T06:13:17Z",
+    "tool": "grep",
+    "query": "fullyFaithfulToDescentData|bijective_toDescentData_map",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean"
+    ],
+    "digest": "678bc0bab0160de6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected DescentData.lean lines 550-628, IsStack.lean lines 71-78, PseudofunctorSheafOver.lean lines 1-52 and Representability.lean lines 19-60, 79-175. Abstract descent requires a prestack/stack hypothesis and does not supply these scheme representations, slice/product bijections and their coordinate compatibility; the scheme gluing hits require Zariski open immersions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps between locally representable sheaves correspond bijectively to compatible maps between their local representing schemes",
+   "results": {
+    "t": "2026-10-22T06:13:17Z",
+    "tool": "leansearch",
+    "query": "Maps between locally representable sheaves correspond bijectively to compatible maps between their local representing schemes",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+   "results": {
+    "t": "2026-10-22T06:13:18Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData"
+    ],
+    "digest": "f0cd0ca6f47298c8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected DescentData.lean lines 550-628, IsStack.lean lines 71-78, PseudofunctorSheafOver.lean lines 1-52 and Representability.lean lines 19-60, 79-175. Abstract descent requires a prestack/stack hypothesis and does not supply these scheme representations, slice/product bijections and their coordinate compatibility; the scheme gluing hits require Zariski open immersions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fixed fppf covering, choosing schemes representing the local restrictions of a sheaf defines a fully faithful functor to scheme descent data",
+   "results": {
+    "t": "2026-10-22T06:13:41Z",
+    "tool": "leanfinder",
+    "query": "For a fixed fppf covering, choosing schemes representing the local restrictions of a sheaf defines a fully faithful functor to scheme descent data",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+     "CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful",
+     "CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq",
+     "CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful",
+     "CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff",
+     "CategoryTheory.Pseudofunctor.isPrestackFor_iff",
+     "CategoryTheory.instFullSheafFunctorOppositeCompSheafComposeSheafToPresheafOfFaithful",
+     "CategoryTheory.fullyFaithfulSheafToPresheaf"
+    ],
+    "digest": "73e55a6ef72d9419"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected DescentData.lean lines 550-628, IsStack.lean lines 71-78, PseudofunctorSheafOver.lean lines 1-52 and Representability.lean lines 19-60, 79-175. Abstract descent requires a prestack/stack hypothesis and does not supply these scheme representations, slice/product bijections and their coordinate compatibility; the scheme gluing hits require Zariski open immersions."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudofunctorOver|IsStack|IsPrestack",
+   "results": {
+    "t": "2026-10-22T06:14:14Z",
+    "tool": "grep",
+    "query": "pseudofunctorOver|IsStack|IsPrestack",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 22,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean",
+     "Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean"
+    ],
+    "digest": "481c817b065c0eb5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected DescentData.lean lines 550-628, IsStack.lean lines 71-78, PseudofunctorSheafOver.lean lines 1-52 and Representability.lean lines 19-60, 79-175. Abstract descent requires a prestack/stack hypothesis and does not supply these scheme representations, slice/product bijections and their coordinate compatibility; the scheme gluing hits require Zariski open immersions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf locally represented on an fppf cover yields overlap isomorphisms by Yoneda satisfying the cocycle, and compatible local scheme maps glue uniquely to a sheaf map",
+   "results": {
+    "t": "2026-10-22T06:14:27Z",
+    "tool": "leanfinder",
+    "query": "A sheaf locally represented on an fppf cover yields overlap isomorphisms by Yoneda satisfying the cocycle, and compatible local scheme maps glue uniquely to a sheaf map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq",
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val",
+     "AlgebraicGeometry.Scheme.Cover.gluedCover_t'",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf_app_toGlued",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f"
+    ],
+    "digest": "c976d79406f2fdfb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected DescentData.lean lines 550-628, IsStack.lean lines 71-78, PseudofunctorSheafOver.lean lines 1-52 and Representability.lean lines 19-60, 79-175. Abstract descent requires a prestack/stack hypothesis and does not supply these scheme representations, slice/product bijections and their coordinate compatibility; the scheme gluing hits require Zariski open immersions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps between sheaves locally represented by schemes on an fppf covering are exactly compatible families of maps of representing schemes",
+   "results": {
+    "t": "2026-10-22T07:06:43Z",
+    "tool": "leansearch",
+    "query": "Maps between sheaves locally represented by schemes on an fppf covering are exactly compatible families of maps of representing schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.toGlued",
+     "CategoryTheory.PresheafHom.IsSheafFor.app",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk",
+     "AlgebraicGeometry.Scheme.Cover.glueMorphisms"
+    ],
+    "digest": "1d417e505e7fe591"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DescentData.lean lines 550-628 requires a specified prestack and supplies no local scheme/slice correspondence; Representability.lean lines 19-60 requires relatively representable Zariski open immersions. Neither is this fppf scheme-descent construction or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+   "results": {
+    "t": "2026-10-22T07:06:44Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData"
+    ],
+    "digest": "f0cd0ca6f47298c8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DescentData.lean lines 550-628 requires a specified prestack and supplies no local scheme/slice correspondence; Representability.lean lines 19-60 requires relatively representable Zariski open immersions. Neither is this fppf scheme-descent construction or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulToDescentData|bijective_toDescentData_map",
+   "results": {
+    "t": "2026-10-22T07:06:44Z",
+    "tool": "grep",
+    "query": "fullyFaithfulToDescentData|bijective_toDescentData_map",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean"
+    ],
+    "digest": "678bc0bab0160de6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DescentData.lean lines 550-628 requires a specified prestack and supplies no local scheme/slice correspondence; Representability.lean lines 19-60 requires relatively representable Zariski open immersions. Neither is this fppf scheme-descent construction or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf locally represented on an fppf covering gives a fully faithful functor to descent data of schemes, with transitions preserving the section and base coordinates",
+   "results": {
+    "t": "2026-10-22T07:13:41Z",
+    "tool": "leanfinder",
+    "query": "A sheaf locally represented on an fppf covering gives a fully faithful functor to descent data of schemes, with transitions preserving the section and base coordinates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+     "CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful",
+     "CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful",
+     "CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq",
+     "CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff",
+     "CategoryTheory.Pseudofunctor.isEquivalence_toDescentData",
+     "CategoryTheory.fullyFaithfulSheafToPresheaf",
+     "CategoryTheory.Pseudofunctor.isPrestackFor_iff"
+    ],
+    "digest": "b1e53120d57fc00d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DescentData.lean lines 550-628 requires a specified prestack and supplies no local scheme/slice correspondence; Representability.lean lines 19-60 requires relatively representable Zariski open immersions. Neither is this fppf scheme-descent construction or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "LocalRepresentability|pseudofunctorOver",
+   "results": {
+    "t": "2026-10-22T07:13:41Z",
+    "tool": "grep",
+    "query": "LocalRepresentability|pseudofunctorOver",
+    "sub": "AlgebraicGeometry/Sites",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/Representability.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Representability.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Representability.lean"
+    ],
+    "digest": "17ddcc0f34fa052e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DescentData.lean lines 550-628 requires a specified prestack and supplies no local scheme/slice correspondence; Representability.lean lines 19-60 requires relatively representable Zariski open immersions. Neither is this fppf scheme-descent construction or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fppf-sheaf-representability-descent-data",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The geometric quotient-presentation support for the local-term specialization chain: Tag 0265, first and third representability steps, applications of Descent lemma-descent-data-sheaves to the local pullbacks of the quotient atlas and its diagonal. Extracted task: product/slice identification, representing-scheme overlap functor and unique natural reconstruction (old steps 3, 4, 8).",
+   "via": [
+    "lem-trf-fppf-sheaf-representability-descent-data",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-fppf-local-representations-fully-faithful",
+  "worker": "stage1",
+  "summary": "Explicit product/slice bijections, coordinate-preserving overlap isomorphisms and cocycle, functoriality, compatible local maps and gluing, full faithfulness and natural isomorphism reconstruction. Reuses existing nodes; no new nodes or changed statement.",
+  "blueprint": "Realizes the existing ancestry through lem-trf-local-term-locality: the quotient representability support in Tag 0265 uses the forward functor of Tag 02W5. Supplies the product/slice identification and old parent steps 3, 4 and 8 without using the parent equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Generic gluing and unique descent of set-sheaf morphisms, specialized to the chosen fppf cover; no trace-formula-unit node supplies this site-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-85ecc4722",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-85ecc4722 (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full. The statement and stmt_deps are byte-identical to the base and match Stacks 02W5 (descent.tex, lemma-descent-data-sheaves), right-to-left construction, where the representing objects are objects of the site. The parent's old steps 3, 4 and 8 are all carried, with more detail. Step 1: Yoneda gives p, the fibre bijections b_a are natural (b_{au}(xu)=H(u)b_a(x)), and the reconstruction has its inverse; restriction is sectionwise by def-pur-localized-ringed-site. Step 2: the fibre-product universal bijection gives the coordinates (a_i,s,a_j), phi_ij is over T_ij, and the cocycle and repeated indices follow by Yoneda injectivity. Step 3: R(v)_i from id×v satisfies the descent square in coordinates, and R is a functor. Step 4: I recomputed that the K-coordinates of the two outputs of the square are v_i(s) and v_j(s); marking it elementary is acceptable. Step 5: the morphism clause of lem-pe-set-sheaf-cover-descent applies (small skeleton with fibre products, U=T terminal); R(v)_i=f_i by injectivity, and faithfulness follows by uniqueness of gluing. Step 6: local isomorphisms and naturality via fullness, faithfulness and uniqueness; that the glued v restricts to the given local isomorphisms is only implicit, but it is correct. The edge cases (empty cover with T empty, singleton cover, repeated indices) hold, and no separatedness or effectivity is assumed. proof_deps equals the union of the uses and the closure is acyclic. The tool use of lem-pe-set-sheaf-cover-descent is declared, the same as on the parent, and accepted. No duplicate: lem-galois-flc-representable, lem-weil-pbc-etale-representable-descent-glue, the lem-galois-fpqc-* nodes and the sibling scheme-data-sheaf-gluing all state other things. There are no new nodes. The item is unsplit in side-live, is not in the drop list and has no repair note. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfLocalRepresentationsFullyFaithful",
+  "declaration": "AlgebraicGeometry.fppfLocalRepresentationsFullyFaithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfLocalRepresentationsFullyFaithful.lean",
+  "statement": "theorem fppfLocalRepresentationsFullyFaithful {I : Type (u + 1)} (T : Scheme.{u}) (U : I → Scheme.{u}) (f : ∀ i, U i ⟶ T) (hcov : Presieve.ofArrows U f ∈ Scheme.fppfPrecoverage T) (X : (IsLocallyRepresentableFppfSheaf f).FullSubcategory → I → Over T) (alpha : ∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I), (prod (uliftYoneda.{u + 1}.obj (Over.mk (f i))) H.obj.obj).RepresentableBy (X H i)) : ∃ (p : ∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I), (X H i).left ⟶ U i) (q : ∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I), (Over.map (f i)).obj (Over.mk (p H i)) ≅ X H i) (b : ∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I), Functor.RepresentableBy (((Scheme.fppfTopology.overMapPullback (Type (u + 1)) (f i)).obj H.obj).obj) (Over.mk (p H i))) (R : (IsLocallyRepresentableFppfSheaf f).FullSubcategory ⥤ SchemeCoverDescent f) (localEq : ∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I), (R.obj H).localScheme i = Over.mk (p H i)) (e : R ⋙ schemeCoverDescentForget f ≅ (IsLocallyRepresentableFppfSheaf f).ι ⋙ (Scheme.fppfTopology.pseudofunctorOver (Type (u + 1))).toDescentData f), (∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I), (q H i).hom.left = 𝟙 (X H i).left) ∧ (∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I) (W : Over T) (x : W ⟶ X H i), ((prod.fst (X := uliftYoneda.{u + 1}.obj (Over.mk (f i))) (Y := H.obj.obj)).app (op W) ((alpha H i).homEquiv x)).down.left = x.left ≫ p H i) ∧ (∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I) (W : Over (U i)) (x : W ⟶ Over.mk (p H i)), (prod.snd (X := uliftYoneda.{u + 1}.obj (Over.mk (f i))) (Y := H.obj.obj)).app (op ((Over.map (f i)).obj W)) ((alpha H i).homEquiv ((Over.map (f i)).map x ≫ (q H i).hom)) = (b H i).homEquiv x) ∧ (∀ (H : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (i : I) (W : Over (U i)) (x : W ⟶ (R.obj H).localScheme i), (((e.hom.app H).hom i).hom.app (op W)) (((R.obj H).representation i).homEquiv x) = (b H i).homEquiv (x ≫ eqToHom (localEq H i))) ∧ (∀ H K : (IsLocallyRepresentableFppfSheaf f).FullSubcategory, Function.Bijective (R.map : (H ⟶ K) → (R.obj H ⟶ R.obj K))) ∧ (∀ (H K : (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (c : R.obj H ≅ R.obj K), ∃! z : H ≅ K, R.mapIso z = c) ∧ (∀ (J : Type v) [Category.{w} J] (A B : J ⥤ (IsLocallyRepresentableFppfSheaf f).FullSubcategory) (c : A ⋙ R ≅ B ⋙ R), ∃! z : A ≅ B, Functor.isoWhiskerRight z R = c)",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24304ad1d",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Item node unchanged except lean; lean.statement verbatim; uses the recorded SchemeCoverDescent/IsLocallyRepresentableFppfSheaf/toDescentData/overMapPullback interfaces; I:Type(u+1), sheaves in Type(u+1) on fppfTopology.over T as in def-trf-scheme-cover-descent-datum; no extra hypotheses. p, q (left = id), b are fixed by the fst/snd equations with the chosen alpha (fibre bijections, disjoint-union recovery); R is fixed by e : R⋙forget ≅ ι⋙toDescentData plus the representation/b compatibility, so transitions preserve (a_i,s,a_j) and R(v) corresponds to id×v; Bijective R.map is the genuine 04TQ full faithfulness; ∃! iso lift and the natural-family lift match the node. Edge cases (empty I ⇒ T empty, repeated indices, empty representing schemes, free diagram universes v,w) fine. No definitions (H5 n/a), sorry only, source/blueprint docstrings with the 6 node steps (4+5 merged), lines ≤94, proof dep SetSheafCoverDescent plain-imported per rule 7, not a duplicate of the parent equivalence. No compile (no file changed); worker's clean compile accepted. Advisory: public import Sites.Limits possibly redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261023T105407-L-3552434",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

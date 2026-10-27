@@ -17,9 +17,62 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
   "place": "Steps 1, 3 and 5: supported coordinate product and closed exceptional adjunct"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Preserve the existing support_closed induction, classSource_eq defining equation, target_succ defining equation and Noetherian complementary-open proof of zero_exact. Close classSource_nil and classSource_cons by unfolding classSource once and reducing the respective supportData equations; both sides are definitionally equal. No support identification or replacement construction is used.",
+   "uses": [
+    "def-pur-affine-space-coordinate-boundaries",
+    "def-pur-supported-cup",
+    "def-pur-affine-space-comparison",
+    "lem-exc-proetale-closed-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For boundary_plus, the ordinary finite Tate sheaf is in degree zero, its shift by two is bounded below by -2, and exact comparison preserves that bound. For target_plus, the positive exponent is invertible by exponentUnit. The existing finite_etale_torsion_twist_line theorem implies flatness of its degree-one sheaf; flat_comparisonUpperStar_obj preserves flatness. The single complex of this flat sheaf has Tor amplitude [0,0]. The existing source lower-tensor estimate, in its isGE_tensor_of_torAmplitudeGE_right form, bounds its tensor with any bounded-below input. The shift-tensor comparison lowers the bound by two in the specified right-tensor order; no braiding is needed. Induct on the literal action recursion, beginning with the degree-zero coefficient unit.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "lem-asd-finite-etale-twist-line",
+    "lem-exc-constant-inverse-image-flat",
+    "lem-sc-source-tor-amplitude-lower-tensor-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on tower dimension to prove that maps into iteratedAffineLine are determined by their projection to B and the pullbacks of all coordinate sections, using AffineSpace.hom_ext at each stage. Induct on the support list: the intersection immersion kills every listed coordinate, by the pullback equation and zeroLocusSubschemeι_appTop. The zero section factors through every coordinate divisor by liftZeroLocusSubscheme, and through their successive pullbacks by pullback.lift. For the full finRange list, let e.hom be the intersection immersion followed by the tower projection, and e.inv the constructed lift of zero. Coordinate extensionality proves e.hom followed by zero equals the intersection immersion. Monicity of the intersection immersion and the zero-section projection identity prove the two inverse equations. Monicity of zero proves uniqueness. These arguments apply also to c=0 and empty or nonreduced B.",
+   "uses": [
+    "def-pur-affine-space-coordinate-boundaries",
+    "def-pur-supported-cup",
+    "def-pur-affine-space-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary constant sheaf in degree zero is bounded below. Its exact comparison image has bounded-below etale origin by plusEtaleOrigin_mapDerivedCategory_obj. Transport this property through mapDerivedCategorySingleFunctor to obtain unit_origin for the specified pro-etale coefficient unit. Retain the actual supported cup recursion, its unique support transport, the canonical proper closed comparison and the exceptional Hom equivalence. Generic construction helpers cache the same list fold, equality transports, supported composite, closed-single comparison and exceptional adjunct in this module; their bodies contain no proof holes and their specialization preserves the original maps.",
+   "uses": [
+    "def-pur-affine-space-coordinate-boundaries",
+    "def-pur-supported-class-operations",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-space-coordinate-boundaries",
+  "def-pur-supported-cup",
+  "def-pur-affine-space-comparison",
+  "lem-exc-proetale-closed-exact",
+  "lem-asd-finite-etale-twist-line",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "def-pur-supported-class-operations",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Coordinate supported product and exceptional adjunct; E3 Lean proofs of the six obligations remaining after B8, 2026-10-25. The proof constructs the support isomorphism directly and uses flat single-complex tensor bounds."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -75,10 +128,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-smooth-purity",
@@ -108,7 +165,13 @@
    "AlgebraicGeometry.ProEtale.AffineZeroPurity.unit_origin",
    "AlgebraicGeometry.ProEtale.AffineZeroPurity.zero_exact",
    "AlgebraicGeometry.ProEtale.AffineZeroPurity.closedSingleIso",
-   "AlgebraicGeometry.ProEtale.AffineZeroPurity.thom"
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.thom",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateProductFold",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateProductTransport",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateProductStart",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateSupportedCompose",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.closedSingleComparison",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateThomAdjunct"
   ],
   "file": "lean/Sheaf/Paper/AffineSpaceThomMap.lean",
   "statement": "def thom (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] (c : ℕ) : unit P n B ⟶ (rightDerivedUpperShriek (ModuleCat.{u + 1} (setting P n).Coefficient) (zero B c)).obj (target P n (iteratedAffineLine B c) c)",
@@ -132,5 +195,15 @@
   "group": "NH",
   "result": "fix",
   "note": "Re-delivery after RETURN 0fa11caf: the requested H2/H13 repair is exact (item and def-pur-affine-space-thom-map now cite def-pur-supported-class-operations, whose live existing:true record lists all 5 functorialCup* operations used); the 3 Lean modules are byte-identical. New finding, H13: new node def-pur-affine-space-coordinate-boundaries cites the theorem lem-pur-vector-integration-site-comparison for the site comparison, but the Lean uses `comparison A X` = VectorIntegrationSite.comparison (FiniteSiteCoordinates.lean:33), owned by def-pur-finite-site-coordinates; no declaration of the lemma's module is used. FIX: fixes/def-pur-affine-space-coordinate-boundaries.json swaps that stmt_dep and the statement citation to def-pur-finite-site-coordinates; no cycle (closure check). Substance checked independently: level n+1 covers all n>=1 with no e|n; B separated finite type, c=0 included; boundaries = the unique Cartier-Kummer family at l^(n+2) realized by closed exchange plus site comparison; product via the published supportedCup (reverse order, sign +1, advisory); supportIso unique over X; thom = exceptional adjunct; normalization = Rz^!(gamma) then collapse; IsIso plus both inverse equations; untwisted clause is a derived iso; base change for arbitrary g without flatness; no hollow definitions; statements verbatim; no existing dependency record changed. No compile: no .lean file changed (worker's runs clean: 38.2/49.9/30.7 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T204524-L-2968039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

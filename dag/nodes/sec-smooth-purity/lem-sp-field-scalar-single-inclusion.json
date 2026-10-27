@@ -1,0 +1,176 @@
+{
+ "id": "lem-sp-field-scalar-single-inclusion",
+ "kind": "statement",
+ "title": "Normalized scalar data for a single finite field inclusion",
+ "statement": "Let ell be prime, E,F finite extensions of Q_ell, iota:E -> F a Q_ell-algebra embedding, and T a Noetherian scheme. For any specified abelian strict coefficient tower presentations D_A,D_B and normalized integral reduction towers R_A,R_B [def-sp-field-scalar-system-data] and [def-sp-field-scalar-reduction-data], there exists ScalarData ell E F iota T D_A D_B R_A R_B [def-sp-field-scalar-normalized-data]. Thus one inclusion has its quotient and completed coefficient maps, integral and quotient basis, exact whole-system extension and restriction, derived localization, finite-power coordinates, preservation of normalization and each cohomological and Tor interval, and its ordinary and derived normalized integral-reduction comparison. No identity, successive-extension coherence or simultaneous choice is asserted.",
+ "stmt_deps": [
+  "def-sp-field-scalar-system-data",
+  "def-sp-field-scalar-reduction-data",
+  "def-sp-field-scalar-normalized-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "paragraph (1), finite free scalar extension and reduction formula"
+ },
+ "proof": [
+  {
+   "text": "Choose an integral basis $b_1,\\ldots,b_r$ of $S/R$, $r=[F:E]$. Since $F/E$ is finite algebraic and $\\overline{\\mathbf Q}_\\ell$ is algebraically closed, choose an $E$-embedding of $F$ into the fixed $\\overline{\\mathbf Q}_\\ell$ containing $E$ [def-pur-conventions]; the basis formulas below do not depend on it. The basis-induced sheaf comparison gives $S_T\\simeq R_T^{\\oplus r}$ for the completed coefficients identified in the coefficient-tower definition. Reducing the same algebraic basis modulo $\\ell^n$ gives $(S/\\ell^n)\\simeq(R/\\ell^n)^r$: existence and uniqueness follow by taking each coordinate modulo $\\ell^n$. The specified-basis constant-sheaf lemma gives $B_{n,T}\\simeq A_{n,T}^r$. For $m\\le n$ each basis column reduces to the same $b_i\\bmod\\ell^m$, so these are an isomorphism of strict $A_\\bullet$-modules $B_\\bullet\\simeq A_\\bullet^r$. Finally $(\\ell^n)=(\\varpi_E^{h_En})$ and $(\\ell^n)S=(\\varpi_F^{h_Fn})$ because the omitted factors are units. Positive multiples of $h_E,h_F$ are cofinal; none of this assumes ramification index one.",
+   "uses": [
+    "lem-sfb-local-field-integral-basis",
+    "det-prop-sfb-cartesian-coefficients-finite-free",
+    "sk-def-sp-coefficient-towers",
+    "lem-pur-constant-specified-basis",
+    "def-pur-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a strict system $M$, define extension by $(CM)_n=M_n\\otimes_{A_n}B_n$ with transition $x\\otimes b\\mapsto t_M(x)\\otimes q_B(b)$. Balancing follows from $q_B(a b)=q_A(a)q_B(b)$. In the common bases its restricted underlying system is $M^r$, with coordinatewise transitions. The finite-free scalar-coordinate lemma gives this tensor identification on sheaves (and hence in the inverse-sequence topos), rather than asserting that tensor sheaves are computed on sections. Kernels and cokernels of strict systems are levelwise, so extension is exact. Its termwise derived functor exists by the exact-functor lemma. Apply K-flat derived change of rings in the ringed topos of systems: since this ordinary extension is already exact, its value on any K-flat resolution is quasi-isomorphic to its value on the original complex. Thus it identifies with $C_T$, with the asserted finite-power identification including all transitions.",
+   "uses": [
+    "lem-sfb-finite-free-scalar-coordinates",
+    "det-sp-coefficient-towers-abelian",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each $T$ is Noetherian by finite type over the Noetherian field scheme $\\operatorname{Spec}k$ (its affine ring is a field, with only ideals zero and one). Apply finite-free derived scalar calculus to $A_n\\to B_n$ on $T_{\\mathrm{proet}}$. It preserves bounded constructibility and any specified Tor interval $[u,v]$, without enlarging either endpoint. Explicitly, for a degree-zero $B_n$-module $N$, its tensor with $C_nK_n$ restricts to $K_n\\otimes^L_{A_n}\\operatorname{Res}N$, and restriction detects zero objects. Cohomology commutes with the exact scalar functor; the same coordinate description identifies its underlying cohomology with $\\mathcal H^i(K_n)^r$. Hence every common cohomological interval $[a,b]$ is also retained. These estimates are independent of $n$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sf-finite-free-derived-scalar-calculus",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For $m\\le n$, successive derived scalar extension identifies the source of the actual reduction map of $C_TK$ with $(K_n\\otimes^L_{A_n}A_m)\\otimes^L_{A_m}B_m$: both reassociations identify it with $K_n\\otimes^L_{A_n}B_m$. Under these identifications the map is $t^K_{n,m}\\otimes1$. Indeed on a K-flat representative the adjunction unit inserts $1$ and the transition sends $x\\otimes b$ to $t_K(x)\\otimes q_B(b)$; multiplication in $B_m$ then gives exactly the stated adjunct. The system-derived construction supplies these transition maps and evaluation comparisons simultaneously. For normalized $K$, $t^K_{n,m}$ is invertible, hence so is this map. Together with Step 3 this is precisely membership in $\\mathcal N_B(T)$, with the same uniform intervals.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-coef-semilinear-derived-sections",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary $K\\in D(R_T)$ choose a flat-term K-flat representative $P$. Ringed pullback preserves both properties, so $P\\otimes_{R_T}S_T$ and $P\\otimes_{R_T}A_n$ compute the required further derived extensions. Both sides of the claimed level comparison identify with $P\\otimes_{R_T}B_n$ by successive derived scalar extension: $((x\\otimes s)\\otimes b)\\mapsto x\\otimes\\bar s b$ and $((x\\otimes a)\\otimes b)\\mapsto x\\otimes a b$. The inverse in each case inserts $1$. These are $B_n$-linear chain isomorphisms. They commute with $n\\to m$ because both resulting composites send a local tensor generator to $x\\otimes q_{n,m}(a b)$. This is an equality of sheaf maps by their tensor universal property, not an equality of independently chosen maps in the evaluated derived categories.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strict coefficient tensor descent to the ordinary multiplication/insertion comparison on flat K-flat representatives. Universal counits give the natural derived reduction isomorphism and its representative equation on whole systems, without asserting identity or successive-extension coherence.",
+   "uses": [
+    "lem-sp-strict-coefficient-tensor-descent",
+    "det-sp-reduction-tower-normalized"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-conventions",
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-reduction-tower-normalized",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-kflat-resolution",
+  "lem-pur-constant-specified-basis",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-finite-free-derived-scalar-calculus",
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-sfb-local-field-integral-basis",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sp-strict-coefficient-tensor-descent",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "paragraph (1), finite free scalar extension and reduction formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar extension of sheaves of modules, tensor associativity and identity, normalized strict coefficient systems",
+   "results": "{\"t\": \"2026-10-25T13:56:08Z\", \"tool\": \"leansearch\", \"query\": \"Exact scalar extension of sheaves of modules, tensor associativity and identity, normalized strict coefficient systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalars\", \"ModuleCat.extendScalars_assoc'\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor\", \"PresheafOfModules.Sheafify.mul_smul\", \"ModuleCat.extendScalars_assoc\", \"ModuleCat.ExtendScalars.smul_tmul\", \"ModuleCat.extendScalars_assoc_assoc\"], \"digest\": \"dfe85a1e15157b5a\"}",
+   "date": "2026-10-25",
+   "verdict": "Scalar functors and coherence tools only; no normalized whole-system record or field-specific theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-25T13:56:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.leftAdjointUniq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq\", \"CategoryTheory.Adjunction.leftAdjointUniq_refl\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\"], \"digest\": \"ef3654c89ecf172c\"}",
+   "date": "2026-10-25",
+   "verdict": "Scalar functors and coherence tools only; no normalized whole-system record or field-specific theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalarsId|leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-25T13:59:21Z\", \"tool\": \"grep\", \"query\": \"extendScalarsComp|extendScalarsId|leftAdjointUniq\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"697286867c4b0e20\"}",
+   "date": "2026-10-25",
+   "verdict": "Scalar functors and coherence tools only; no normalized whole-system record or field-specific theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldScalarNormalizedSystems",
+  "group": "J7",
+  "date": "2026-10-25"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "paragraph (1), finite free scalar extension and reduction formula",
+   "via": [
+    "lem-sp-field-scalar-normalized-systems"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldScalarSingleInclusion",
+  "file": "lean/Sheaf/Paper/FieldScalarSingleInclusion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldScalar.field_scalar_single_inclusion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldScalar.field_scalar_single_inclusion"
+  ],
+  "statement": "theorem field_scalar_single_inclusion (l : ℕ) [Fact l.Prime] (E F : Type u) [Field E] [Field F] [Algebra (Padic l) E] [Algebra (Padic l) F] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F] (ι : E →ₐ[Padic l] F) (T : Scheme.{u}) [IsNoetherian T] (DA : SpCoefficientTowersAbelian.{u, u} l E T) (DB : SpCoefficientTowersAbelian.{u, u} l F T) (RA : SpReductionTower l E T DA) (RB : SpReductionTower l F T DB) : Nonempty (ScalarData l E F ι T DA DB RA RB)",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7371",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T163741-L-815329",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7371",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T163741-L-815329",
+  "kind": "interface",
+  "note": "independent cc review: Moved records vs published FieldScalarNormalizedSystems (identical apart from blueprint tag); item theorem signature unchanged; #print axioms on the scratch build = propext, sorryAx (only from the 3 new sorry statements), Classical.choice, Quot.sound; identity/successive statements checked for truth with arbitrary ScalarData against the pinning fields of FieldScalarSystemData/ReductionData"
+ }
+}

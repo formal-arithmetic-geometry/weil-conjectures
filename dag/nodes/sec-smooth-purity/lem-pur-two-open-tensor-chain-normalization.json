@@ -1,0 +1,238 @@
+{
+ "id": "lem-pur-two-open-tensor-chain-normalization",
+ "kind": "statement",
+ "title": "Normalized two-open tensor chains in both tensor orders",
+ "statement": "Fix the finite coefficient datum $k,A=A_{E,n}$ of [def-pur-conventions]. All schemes below are separated finite-type $k$-schemes. Write $D_A(T)=D(T_{\\mathrm{proet}},A)$ for the ordinary unbounded derived category of constant-$A$ module sheaves. Use the actual pullback, derived tensor, signed symmetry $\\sigma$, section-normalized adjunction units $\\eta^i$, open base-change maps $\\beta$, open tensor maps $\\gamma$, and unique-left-adjoint open compositors of [def-sf-finite-open-tensor-operations], with their normalization as in [lem-sf-open-tensor-normalization] and the canonical tensor/pullback identifications of [lem-pur-derived-pullback-tensor-iso]. All complexes are arbitrary unbounded objects. Let $w:W\\hookrightarrow V$ and $v:V\\hookrightarrow Y$ be open immersions, put $u=vw$, and let $F\\in D_A(V)$, $H\\in D_A(Y)$, $Q\\in D_A(W)$ and $\\delta:Lv^*H\\xrightarrow{\\sim}w_!Q$ be given. For every open $i:T\\hookrightarrow S$, $K\\in D_A(S)$ and $L\\in D_A(T)$ define\n$$\\rho^i_{K,L}=i_!(\\sigma_{L,Li^*K})\\circ\\gamma^i_{L,K}\\circ\\sigma_{K,i_!L}:K\\otimes_A^Li_!L\\longrightarrow i_!(Li^*K\\otimes_A^LL).$$\nThis is an isomorphism whose restriction along $i$, under the stated units and tensor comparisons, is the identity on $Li^*K\\otimes_A^LL$. The canonical compositor $c_{v,w}:v_!w_!\\xrightarrow{\\sim}u_!$ satisfies, under $Lu^*\\cong Lw^*Lv^*$,\n$$Lu^*(c_{v,w,L})\\circ Lw^*(\\eta^v_{w_!L})\\circ\\eta^w_L=\\eta^u_L$$\nfor every $L\\in D_A(W)$.\n\nDefine the two actual composites\n$$e_L:v_!F\\otimes_A^LH\\xrightarrow{\\gamma^v}v_!(F\\otimes_A^LLv^*H)\\xrightarrow{v_!(1\\otimes\\delta)}v_!(F\\otimes_A^Lw_!Q)\\xrightarrow{v_!(\\rho^w)}v_!w_!(Lw^*F\\otimes_A^LQ)\\xrightarrow{c_{v,w}}u_!(Lw^*F\\otimes_A^LQ),$$\n$$e_R:H\\otimes_A^Lv_!F\\xrightarrow{\\rho^v}v_!(Lv^*H\\otimes_A^LF)\\xrightarrow{v_!(\\delta\\otimes1)}v_!(w_!Q\\otimes_A^LF)\\xrightarrow{v_!(\\gamma^w)}v_!w_!(Q\\otimes_A^LLw^*F)\\xrightarrow{c_{v,w}}u_!(Q\\otimes_A^LLw^*F).$$\nPut $T=Lw^*F$ and $d=(\\eta^w_Q)^{-1}\\circ Lw^*(\\delta):Lw^*Lv^*H\\xrightarrow{\\sim}Q$. Let $a:Lu^*v_!F\\xrightarrow{\\sim}T$ be $Lw^*((\\eta^v_F)^{-1})$ under restriction composition. Define\n$$r_L=(a\\otimes d)\\circ\\mu_{u;v_!F,H},\\qquad r_R=(d\\otimes a)\\circ\\mu_{u;H,v_!F}.$$\nHere the $d$ factors use $Lu^*H\\cong Lw^*Lv^*H$. Both $e_L$ and $e_R$ are isomorphisms and their actual restrictions satisfy\n$$Lu^*e_L=\\eta^u_{T\\otimes_A^LQ}\\circ r_L,\\qquad Lu^*e_R=\\eta^u_{Q\\otimes_A^LT}\\circ r_R.$$\nNo boundedness, constructibility or finite Tor-amplitude is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry reduction for open extensions; returned open-product proof Steps 2--6: composite open unit, right-extension signed comparison, and the two nested tensor chains. Agent-formulated unbounded open-operation lemma; the full retained argument is in the delivery report, not asserted to be a literal theorem of the blueprint."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sf-finite-open-tensor-operations",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-pur-finite-open-gamma-restriction to the published gamma. By lem-pur-finite-tensor-pull-coherence pullback commutes with the signed symmetry, which is natural and involutive. Expand rho, move the inner symmetry past the open unit by naturality, then past the inverse-unit tensor map by symmetry naturality. The adjacent two symmetries cancel, giving the exact rho restriction formula. Gamma is an isomorphism from its published projection isomorphism; the involutive symmetry gives an explicit inverse, hence rho is an isomorphism.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations",
+    "lem-pur-finite-open-gamma-restriction",
+    "lem-pur-finite-tensor-pull-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the actual compositor comp, apply Mathlib Adjunction.unit_leftAdjointUniq_hom_app to the composite adjunction transported along pullComp.symm. Expand ofNatIsoRight_unit and comp_unit_app. This gives exactly the first conjunct, including the inverse pullback compositor.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private nestedRestriction calculation combines the two unit-normalized one-open maps: pullback-compositor naturality rewrites restriction along the composite as iterated restriction; naturality of the v-unit moves it past the inner map; substitute the inner normalization and the compositor-unit equation. This gives the composite unit after the product of the two restriction maps.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In the left chain put b=inverse eta-v at F and d=w-star(delta) followed by inverse eta-w at Q. Gamma normalization at v and rho normalization at w give the two inputs to nestedRestriction. Naturality of tensorPullIso moves tensor(1,delta) past the w comparison. Tensor-map functoriality combines its coordinates with inverse eta-w. Apply nestedTensorMap: tensor-comparison naturality and composition compatibility give the specified r_L. The right chain uses rho at v and gamma at w, giving r_R with the order Q tensor w-star F throughout. These are explicit equalities of the named maps, not support-based detection of equality.",
+   "uses": [
+    "lem-pur-finite-open-gamma-restriction",
+    "lem-pur-finite-tensor-pull-coherence",
+    "def-sf-finite-open-tensor-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every factor is invertible: gamma by the actual published projection isomorphism, rho by the symmetry calculation, tensor(delta) by functoriality, and comp by adjunction uniqueness. Functors preserve isomorphisms, proving invertibility of both complete chains.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations",
+    "lem-pur-finite-tensor-pull-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-open-tensor-operations",
+  "lem-pur-finite-open-gamma-restriction",
+  "lem-pur-finite-tensor-pull-coherence",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Explicit Lean naturality calculation of the recorded two-open normalization plan, reducing finite-presentation coherence to two reusable interface statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|jShriek|j_shriek",
+   "results": "{\"hits\": [], \"count\": 0, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "{\"hits\": [\"CategoryTheory.Adjunction.map_η_comp_η\", \"CategoryTheory.Adjunction.ε_comp_map_ε\", \"CategoryTheory.Adjunction.map_η_comp_η_assoc\", \"CategoryTheory.Adjunction.ε_comp_map_ε_assoc\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\", \"CategoryTheory.Adjunction.mapAddMon\", \"CategoryTheory.Adjunction.mapMon\"], \"count\": 12, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two composable open immersions on unbounded derived pro-etale module categories: unit normalized projection tensor chains in either tensor order are isomorphisms with the specified restriction and composite adjunction unit",
+   "results": "{\"hits\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"count\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unit normalized extension by zero tensor projection for two nested open immersions in arbitrary unbounded derived categories, with reversed tensor order",
+   "results": "{\"hits\": [\"CategoryTheory.Tor'\", \"CategoryTheory.MonoidalOpposite.tensorIso\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"HomologicalComplex.tensor_unit_d₂\", \"CategoryTheory.ChosenPullbacksAlong.Over.tensorUnit_left\", \"CategoryTheory.unop_tensor_unop\", \"CategoryTheory.Over.tensorUnit_left\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'\"], \"count\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for successive extension by zero functors with an arbitrary isomorphism v star H isomorphic to w shriek Q, including the right-handed projection formula and its restriction unit equation",
+   "results": "{\"hits\": [\"CategoryTheory.SmallObject.SuccStruct.extendToSuccRestrictionLEIso\", \"CategoryTheory.SmallObject.SuccStruct.extendToSuccRestrictionLEIso_hom_app\", \"CategoryTheory.SmallObject.SuccStruct.extendToSuccObjIso_hom_naturality\", \"CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend\", \"CategoryTheory.SmallObject.SuccStruct.extendToSuccRestrictionLEIso_inv_app\", \"CategoryTheory.SmallObject.SuccStruct.extendToSuccObjIso_hom_naturality_assoc\", \"Condensed.lanPresheafIso_hom\", \"Condensed.lanPresheafNatIso_hom_app\"], \"count\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorComp|restrictFunctorAdjCounitIso|instIsIsoFunctorCounitRestrictAdjunction",
+   "results": "{\"hits\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"count\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|leftAdjointUniq.*unit|unit.*leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-22T06:57:27Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|extension_by_zero|leftAdjointUniq.*unit|unit.*leftAdjointUniq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\"], \"digest\": \"3b8f98b356ea48e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction uniqueness or scheme structure-sheaf restriction only; not the specified unbounded pro-etale two-open tensor chains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for extension by zero for two composable open immersions is normalized by the adjunction unit in either order of the derived tensor product",
+   "results": "{\"t\": \"2026-10-22T06:57:28Z\", \"tool\": \"leansearch\", \"query\": \"The projection formula for extension by zero for two composable open immersions is normalized by the adjunction unit in either order of the derived tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.isOpenImmersion_isMultiplicative\", \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_snd\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.IsOpenImmersion.comp\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\"], \"digest\": \"f1b4ee32325709aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction uniqueness or scheme structure-sheaf restriction only; not the specified unbounded pro-etale two-open tensor chains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-22T06:57:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.leftAdjointUniq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq\", \"CategoryTheory.Adjunction.leftAdjointUniq_refl\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\"], \"digest\": \"ef3654c89ecf172c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction uniqueness or scheme structure-sheaf restriction only; not the specified unbounded pro-etale two-open tensor chains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For nested open immersions, the normalized extension by zero projection formulas in both tensor orders restrict to their adjunction units on unbounded derived module categories",
+   "results": "{\"t\": \"2026-10-22T06:57:38Z\", \"tool\": \"leanfinder\", \"query\": \"For nested open immersions, the normalized extension by zero projection formulas in both tensor orders restrict to their adjunction units on unbounded derived module categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.homEquiv_extendScalarsComp\"], \"digest\": \"b50276c4ecc006dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction uniqueness or scheme structure-sheaf restriction only; not the specified unbounded pro-etale two-open tensor chains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive projection formulas for extension by zero, signed commutativity and compatibility of the open composite unit under restriction",
+   "results": "{\"t\": \"2026-10-22T07:06:22Z\", \"tool\": \"leanfinder\", \"query\": \"Successive projection formulas for extension by zero, signed commutativity and compatibility of the open composite unit under restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.projRestricts_eq_comp\", \"Profinite.NobelingProof.πs'_apply_apply\", \"Profinite.NobelingProof.projRestricts_comp_projRestrict\", \"Profinite.NobelingProof.πs'\", \"Profinite.NobelingProof.coe_πs'\", \"Profinite.NobelingProof.proj_comp_of_subset\", \"Profinite.NobelingProof.πs\", \"Profinite.NobelingProof.CC_comp_zero\"], \"digest\": \"ae29506499ac5abc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction uniqueness or scheme structure-sheaf restriction only; not the specified unbounded pro-etale two-open tensor chains"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-open-product-swap",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Symmetry reduction for open extensions; returned open-product proof Steps 2--6: composite open unit, right-extension signed comparison, and the two nested tensor chains.",
+   "via": [
+    "lem-pur-finite-open-product-swap",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-two-open-tensor-chain-normalization",
+  "worker": "stage1",
+  "summary": "Retained the full arbitrary-unbounded statement and wrote both actual restriction calculations. Reused the open tensor normalization and pullback tensor coherence statements; composite unit is calculated from the Hom bijection. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the two nested open tensor chains in the open-product symmetry reduction serving prop-pur-affine-space-composition-law (coordinate-order independence); follows the recorded ancestry through finite-open-product-swap.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic unit-normalized open tensor isomorphism on ordinary unbounded constant-A module categories, not a replacement for an affine-space purity step."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic naturality, signed symmetry and composition compatibility of finite-level pullback tensor comparisons on arbitrary unbounded objects."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-c8f13ea2e",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-c8f13ea2e (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes, keeps its statement (created 2026-10-22 by Q117) and adds a 7-step proof. I re-derived each step from the cited statements. Step 1: i^*γ = η∘(η^{-1}⊗1)∘μ is the 'identity under units' clause of lem-sf-open-tensor-normalization written out. Step 2: σ compatibility from lem-pur-derived-pullback-tensor-iso plus η-naturality gives i^*ρ = η∘(1⊗η^{-1})∘μ, because the Koszul braiding is involutive. Step 3: the compositor-unit equation is exactly Mathlib unit_leftAdjointUniq_hom_app (Adjunction/Unique.lean 51-55) for the composite adjunction of def-weil-pbc-composite-adjunction, with its right adjoint identified with u^* through pullComp, which is how def-sf-finite-open-tensor-operations defines comp. Steps 4-6: I checked the arrow types of f_L and f_R, the use of naturality of η^v at f, naturality of μ_w in b, and the composition clause μ_u = μ_w∘w^*μ_v; this gives r_L and r_R, with the Q⊗T order kept in Step 6. Step 7: invertibility is correct. ℓ is invertible on the k-schemes since ℓ≠p, and every cited clause allows arbitrary unbounded inputs. I checked edge cases: identity opens, empty W, and signs for odd⊗odd factors. Duplicate search: only lem-cbc-extension-zero-composition is nearby, and it states invertibility and coherence but no unit equation. The proof is not circular and no source is SGA. I accept both tool_uses: they are already stmt_deps and are generic finite-level comparisons. Maintainer note: the parent lem-pur-finite-open-product-swap names compositors via lem-cbc-extension-zero-composition, while this item uses def-sf's unique-left-adjoint comp; the parent's Step 2 should identify the two."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TwoOpenTensorChainNormalization",
+  "declaration": "WeilConjectures.FiniteOpenProduct.twoOpenTensorChainNormalization",
+  "declarations": [
+   "WeilConjectures.FiniteOpenProduct.twoOpenUnitIso",
+   "WeilConjectures.FiniteOpenProduct.twoOpenLeftChain",
+   "WeilConjectures.FiniteOpenProduct.twoOpenRightChain",
+   "WeilConjectures.FiniteOpenProduct.twoOpenFirstRestriction",
+   "WeilConjectures.FiniteOpenProduct.twoOpenDeltaRestriction",
+   "WeilConjectures.FiniteOpenProduct.twoOpenLeftRestriction",
+   "WeilConjectures.FiniteOpenProduct.twoOpenRightRestriction",
+   "WeilConjectures.FiniteOpenProduct.twoOpenRhoNormalization",
+   "WeilConjectures.FiniteOpenProduct.twoOpenTensorChainNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/TwoOpenTensorChainNormalization.lean",
+  "statement": "theorem twoOpenTensorChainNormalization (P : PurityFiniteSetting.{u}) (W V Y : Over (Spec (CommRingCat.of P.field.k))) [IsSeparated W.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated V.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (w : W ⟶ V) (v : V ⟶ Y) [IsOpenImmersion w.left] [IsOpenImmersion v.left] (F : FiniteD P.Coefficient V.left) (H : FiniteD P.Coefficient Y.left) (Q : FiniteD P.Coefficient W.left) (δ : (pull P.Coefficient v.left).obj H ≅ (finiteShriek P.Coefficient w.left).obj Q) : (∀ L : FiniteD P.Coefficient W.left, (adj P.Coefficient w.left).unit.app L ≫ (pull P.Coefficient w.left).map ((adj P.Coefficient v.left).unit.app ((finiteShriek P.Coefficient w.left).obj L)) ≫ (pullComp P.Coefficient w.left v.left).inv.app ((finiteShriek P.Coefficient v.left).obj ((finiteShriek P.Coefficient w.left).obj L)) ≫ (pull P.Coefficient (w.left ≫ v.left)).map ((comp P.Coefficient w.left v.left).hom.app L) = (adj P.Coefficient (w.left ≫ v.left)).unit.app L) ∧ IsIso (twoOpenLeftChain P.Coefficient w.left v.left F H Q δ) ∧ IsIso (twoOpenRightChain P.Coefficient w.left v.left F H Q δ) ∧ ((pull P.Coefficient (w.left ≫ v.left)).map (twoOpenLeftChain P.Coefficient w.left v.left F H Q δ) = twoOpenLeftRestriction P.Coefficient w.left v.left F H Q δ ≫ (adj P.Coefficient (w.left ≫ v.left)).unit.app (tensor P.Coefficient W.left ((pull P.Coefficient w.left).obj F) Q)) ∧ ((pull P.Coefficient (w.left ≫ v.left)).map (twoOpenRightChain P.Coefficient w.left v.left F H Q δ) = twoOpenRightRestriction P.Coefficient w.left v.left F H Q δ ≫ (adj P.Coefficient (w.left ≫ v.left)).unit.app (tensor P.Coefficient W.left Q ((pull P.Coefficient w.left).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f64a4e974",
+  "group": "NW",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the 4 dependency records equal live; the live node is still split with no lean. lean.statement occurs verbatim once in the file. Clause check: compositor unit equation (η^w ≫ w^*η^v ≫ pullComp.inv ≫ u^*comp = η^u, ∀L) is unit_leftAdjointUniq_hom_app for the composite adjunction that defines comp; twoOpenLeftChain/RightChain have exactly the four factors of e_L/e_R in order (Q⊗T kept); a, d, r_L, r_R match, including pullComp for Lu^*H≅Lw^*Lv^*H; IsIso and the restriction equations pull(u).map e = r ≫ η^u have the right targets; the rho clause is in twoOpenRhoNormalization as IsIso plus i^*ρ = μ ≫ (1⊗η⁻¹) ≫ η, using the existing rho = σ ≫ γ ≫ i_!σ. Binders: Over Spec k with separated + LOFT + QC, IsOpenImmersion, unbounded FiniteD, arbitrary δ; nothing stronger; universes explicit. twoOpenUnitIso is asIso of the actual unit via the existing isIso_mapDerivedCategoryAdjunction_unit instance; no hollow defs; only sorry proofs; docstrings carry source, blueprint tag and proof steps; no duplicate of the rho normalization or the chains found. Edge cases (identity opens, empty W, signs, char 2, n=1) fine. Advisories: μ is the def-node tensorPullIso rather than a canonicalFinitePullbackTensor declaration (same Stacks 07A4 map, different presentation; the node says to use def-sf operations); the plain Adjunction.Basic import is redundant; the parent finite-open-product-swap should identify its compositor with def-sf comp. No recompile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261025T210250-L-3503757",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

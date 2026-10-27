@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-condensed-action-injective-infrastructure",
+ "kind": "statement",
+ "title": "Internal condensed action categories and injective derived infrastructure",
+ "statement": "Fix the small coherent profinite site and a coefficient universe containing its objects, morphisms and all section sets below [def-weil-size-convention]. Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $\\mathcal M_R$ be its internal module category [sk-def-sfb-module-objects], and let $J,H$ be topological groups. Write $\\underline J(S)=C(S,J)$ and $\\mathcal A_R(J)$ for internal $R$-modules with a natural $\\underline J$-action by linear automorphisms [def-sfb-condensed-action-module].\n\nThe presheaf $\\underline J$ is a sheaf of groups. The action-site equivalence identifies $\\mathcal A_R(J)$ with module sheaves over the ring $R_J$ on the small action site: forgetting action creates sectionwise kernels and sheafified sectionwise cokernels and detects zero objects. Both $\\mathcal M_R$ and $\\mathcal A_R(J)$ are Grothendieck abelian [def-sp-grothendieck-abelian]. The formula\n$$\\Gamma_{R,J}M(S)=\\{m\\in M(S)\\mid \\forall(V\\to S),\\ \\forall g\\in C(V,J),\\ g\\cdot m|_V=m|_V\\}$$\ndefines a sheaf of $R$-modules and a normalized adjunction $T_J\\dashv\\Gamma_{R,J}$: the forward transpose restricts the codomain to this invariant subsheaf and the inverse composes its inclusion. Forgetting action detects exactness; trivial inflation, restriction along every continuous group homomorphism $u:H\\to J$, and restriction along every condensed ring map $R\\to R'$ are additive and exact.\n\nEvery complex in the action category has a K-injective resolution (a quasi-isomorphism to a complex $I$ such that every chain map from an acyclic complex to $I$ is null homotopic); every bounded-below complex has a bounded-below resolution by injective modules which is K-injective. The ordinary total right derived functor $F_J=R\\Gamma_{R,J}$ [def-sfb-right-derived-functor] is computed by $\\Gamma_{R,J}I$, and its canonical computation unit is invertible on K-injectives, in particular on bounded-below complexes of injectives. It is additive and triangulated. There is the canonical derived adjunction $D(T_J)\\dashv F_J$, induced by the above Hom bijections; its unit and counit commute with the fixed signed K-injective shifts. Exact trivial, group and scalar restrictions descend termwise with their canonical signed shift comparisons.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice input; returned restriction-calculus proof steps 1, 2, 3; agent-formulated Internal condensed action categories and injective derived infrastructure. Exact external reference WANTED."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-internal-action-site-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For a finite jointly surjective profinite cover $\\{S_i\\to S\\}$, compatible continuous maps $h_i:S_i\\to J$ define a unique set map $h:S\\to J$: compatibility on $S_i\\times_S S_j$ makes its value independent of the chosen preimage. The surjection $q:\\coprod_i S_i\\to S$ is a quotient map by [lem-sfb-compact-hausdorff-surjection-quotient], since its source is compact and $S$ is Hausdorff. The glued map is continuous because $h q$ is continuous on each summand and $q$ has the quotient topology. The empty cover gives the unique map from the empty set. Pointwise multiplication and inversion preserve continuity and commute with restriction; hence $\\underline J$ is a group sheaf. Postcomposition with a continuous group homomorphism $u:H\\to J$ gives a morphism of these group sheaves.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08YD (lemma-closed-map), 0AAU (lemma-closed-morphism-quotient-topology); elementary descent along their quotient map"
+   }
+  },
+  {
+   "text": "Use the abelian sheaf tensor of [sk-def-sfb-sheaf-tensor]; its strong monoidal sheafification gives the monoidal local-equivalence hypothesis of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. The latter identifies internal $R$-modules with module sheaves, identically on underlying abelian sheaves, sections and restrictions. It therefore identifies the action data and equivariant maps in [def-sfb-condensed-action-module] with the sectionwise $\\underline J$-equivariant module sheaves. Apply [lem-sfb-internal-action-site-presentation] to the small coherent profinite site, the group sheaf from step 1 and $R$. The base site has finite limits and all the values are in the specified coefficient universe. Its small ringed action site and $R_{\\underline J}$ give the asserted equivalence; write $R_J=R_{\\underline J}$. The same result gives precisely sectionwise kernels, sheafified sectionwise cokernels, and zero detection after forgetting action.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-condensed-action-module",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), categorical input: translation from internal modules and the existing small action-site presentation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-sheaf-action-grothendieck-inflation] to this site and $\\underline J$. Its category is the action category of step 2 with exactly the specified addition, so it is Grothendieck abelian and its forgetful functor detects exactness. Apply the same statement to the terminal group sheaf: its unique action identifies its objects and maps with $\\mathcal M_R$, giving the Grothendieck structure there. For the morphism $\\underline H\\to\\underline J$ of step 1 its exact additive inflation is restriction along $u$. For $\\underline J\\to1$ it is trivial inflation from $\\mathcal M_R$. Thus both restrictions and trivial inflation are additive and exact. All applications allow the zero ring and the trivial group.",
+   "uses": [
+    "lem-sfb-sheaf-action-grothendieck-inflation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), generic Grothendieck and exact-inflation infrastructure, specialized to continuous-map group sheaves"
+   }
+  },
+  {
+   "text": "Through the identification of step 2, which keeps sections, restrictions and action operators, an object of $\\mathcal A_R(J)$ is an $\\underline J$-equivariant module sheaf on this site. Apply [lem-sfb-sheaf-product-fixed-adjunction] to the small coherent profinite site, which has finite limits, the ring sheaf $R$ and the group sheaf $K=\\underline J$ of step 1 (with $L$ the trivial group sheaf), and take $P=K$. With $p=g\\in C(V,J)$ its displayed submodules $M^P(S)$ are exactly the sections in the formula for $\\Gamma_{R,J}M(S)$. Its statement gives that they form an $R$-module subsheaf, naturally in $M$; that restricting equivariant maps defines the additive functor $\\Gamma_{R,J}=\\Gamma_P$ with its sectionwise injective inclusion $i_P$; and the natural additive adjunction $T_J=T_P\\dashv\\Gamma_{R,J}$ whose forward transpose keeps every section map and restricts its codomain to the invariant submodule and whose inverse composes with $i_P$. The image of $i_P$ is exactly the fully fixed sections of [def-sfb-condensed-action-module], so this is the normalized invariants datum specified there. The statement covers the trivial group sheaf and the zero ring.",
+   "uses": [
+    "lem-sfb-sheaf-product-fixed-adjunction",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), normalized invariant subsheaf and adjunction, from the existing fixed-subsheaf adjunction node"
+   }
+  },
+  {
+   "text": "For a condensed ring map $\\varphi:R\\to R'$, [def-pc-sheaf-restrict-scalars] keeps the abelian sheaf and maps unchanged and sets $r m=\\varphi(r)m$. An $R'(S)$-linear action remains $R(S)$-linear, so scalar restriction also acts on the equivariant categories. It is additive. The kernel formula of [def-weil-sheaf-of-modules-category] is unchanged. So is the cokernel: the section quotient has the same abelian presheaf, and [def-weil-presheaf-modules-sheafification] defines its module sheafification on the sheafification of that abelian presheaf; its unique extended action restricts along $\\varphi$. Therefore the ordinary module scalar restriction preserves kernels and cokernels and finite biproducts, hence is exact. In the action categories forgetting identifies its underlying functor with this one, so the exactness detection of step 3 proves its exactness there. This uses neither flatness nor surjectivity of $\\varphi$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), section on change of rings; elementary comparison of the same kernel and abelian-sheaf cokernel"
+   }
+  },
+  {
+   "text": "Both categories are Grothendieck abelian by step 3. Apply [lem-sfb-grothendieck-k-injective] to each: every complex has a quasi-isomorphism to a K-injective complex. By [lem-sp-grothendieck-enough-injectives] they also have enough injectives. For a bounded-below complex, [lem-sc-bounded-below-injective-resolution-existence] gives a bounded-below quasi-isomorphic complex of injective objects; [lem-weil-pbc-bounded-below-injectives-kinjective] makes that complex K-injective. In particular this gives the required equivariant resolutions, in the action category itself.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P (theorem-K-injective-embedding-grothendieck); bounded-below replacement and K-injectivity in the cited existing Mathlib leaves"
+   }
+  },
+  {
+   "text": "The source and target of the additive $\\Gamma_{R,J}$ have the K-injective resolutions of step 6. The computation assertion of [def-sfb-right-derived-functor] therefore gives $F_J(K)\\cong\\Gamma_{R,J}I$ for each K-injective resolution $K\\to I$, and its computation unit is invertible on every K-injective $I$. This includes bounded-below injective complexes by step 6. Apply [lem-pc-right-derived-functor-triangulated] to these same two abelian categories and this additive functor: its unbounded K-injective right derived functor has the canonical shifts and is triangulated. In particular it is additive, as part of the triangulated-functor structure.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined); triangulated structure also in the cited existing project theorem"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-right-adjoint-preserves-kinjective], the right adjoint $\\Gamma_{R,J}$ of the exact $T_J$ sends K-injectives to K-injectives. For any complex $X$ of $\\mathcal M_R$ and K-injective action complex $I$, [lem-weil-pbc-termwise-adjunction-homotopy] gives $\\operatorname{Hom}_{K(\\mathcal A_R(J))}(T_JX,I)\\cong\\operatorname{Hom}_{K(\\mathcal M_R)}(X,\\Gamma_{R,J}I)$ with the original transpose formulas. By [lem-weil-pbc-kinjective-hom-derived] these are the corresponding derived Hom sets: both targets are K-injective. Using step 7 and exact termwise $D(T_J)$, this is the natural bijection $\\operatorname{Hom}_{D(\\mathcal A_R(J))}(D(T_J)X,K)\\cong\\operatorname{Hom}_{D(\\mathcal M_R)}(X,F_JK)$. The natural bijections define the derived adjunction, and their formulas show it is induced by the specified underived Hom bijections. They apply to all derived objects since every object has a complex representative and every $K$ has the resolution of step 6.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective), 0DVC (lemma-pre-derived-adjoint-functors); explicit normalized Hom calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] separately to the exact additive trivial inflation, group restriction, and scalar restriction from steps 3 and 5. Each descends termwise, has the canonical signed shift comparisons, and is triangulated. In the complex shift by $n$, both routes have differential $(-1)^nF(d)$; thus these are precisely the stated signed comparisons, with no change of convention.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor), 014X (lemma-additive-exact-homotopy-category); full signed factorization supplied by the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Finally apply [lem-sp-canonical-right-derived-adjunction-shift] with $C=\\mathcal M_R$, $D=\\mathcal A_R(J)$, $L=T_J$ and right adjoint $\\Gamma_{R,J}$. The abelian categories and K-injective resolutions come from steps 3 and 6, additivity and exactness from steps 3--4. Its conclusion concerns the canonical derived adjunction induced from precisely this underived adjunction, computed on K-injectives as in step 8, and retains the fixed K-injective shift of step 7. Consequently both its unit and counit commute with those shifts. This supplies the normalization asserted in the last paragraph without choosing a replacement shift on $F_J$.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0DVC and 0A8D; fixed-shift normalization from the cited existing generic theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-sfb-sheaf-action-grothendieck-inflation",
+  "lem-sfb-sheaf-product-fixed-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-sfb-right-derived-functor",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-canonical-right-derived-adjunction-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), categorical dense-lattice input; explicit invariant-subsheaf construction and assembly from existing action-site and generic derived-category results. Stacks Tags 08YD, 0AAU, 03DA, 079P, 070I, 070K, 070Y, 08BJ, 014X, 015F supply the generic route; no external source states the entire normalized internal condensed-action package."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal condensed group action module categories are Grothendieck abelian, fixed sections are right adjoint to exact trivial action, and K-injective resolutions compute derived invariants",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"instAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Abelian (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules forms an abelian category. This follows from the fact that the category of sheaves on the site of light profinite spaces (equipped wit\"}\n  {\"name\": \"Rep.Tor\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → ℕ → CategoryTheory.Functor (Rep k G) (CategoryTheory.Functor (Rep k G) (ModuleCat k))\", \"doc\": \"For a commutative ring $k$ and group $G$, the $n$-th Tor functor is a bifunctor from the category of representations $\\\\text{Rep}(k, G)$ to $k$-modules. It is constructed as the $n$-th left-derived fun\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"Rep.Tor_obj\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] (n : ℕ) (X : Rep k G),\\n  (Rep.Tor k G n).obj X = ((Rep.coinvariantsTensor k G).obj X).leftDerived n\", \"doc\": \"For any commutative ring $k$, group $G$, natural number $n$, and representation $X$ in $\\\\text{Rep}(k, G)$, the $n$-th Tor functor applied to $X$ is defined as the $n$-th left-derived functor of the co\"}\n  {\"name\": \"Condensed.instAB4CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4 (CondensedMod R)\", \"doc\": \"The category of condensed modules over any ring $ R $ satisfies the AB4 axiom, meaning it has all coproducts and coproducts preserve exact sequences (are exact functors).\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete coefficient modules, ordinary group actions, or generic derived/monoidal tools; none states this normalized internal condensed-action assertion, whose separate generic tools already have DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Injective\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete coefficient modules, ordinary group actions, or generic derived/monoidal tools; none states this normalized internal condensed-action assertion, whose separate generic tools already have DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "condensed.*(injective|invariant|grothendieck)|(injective|invariant|grothendieck).*condensed",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/Condensed/Basic.lean\", \"line\": \"20\", \"text\": \"We use the coherent Grothendieck topology on `CompHaus`, and define condensed objects in `C` to\"}\n  {\"file\": \"Mathlib/Condensed/Light/AB.lean\", \"line\": \"13\", \"text\": \"# Grothendieck's AB axioms for light condensed modules\"}\n  {\"file\": \"Mathlib/Condensed/AB.lean\", \"line\": \"17\", \"text\": \"This file proves that the category of condensed modules over a ring satisfies Grothendieck's axioms\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete coefficient modules, ordinary group actions, or generic derived/monoidal tools; none states this normalized internal condensed-action assertion, whose separate generic tools already have DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules with a group sheaf action have exact forgetful functor and a canonical derived fixed point adjunction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.forgetToSheafModuleCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(X : Cᵒᵖ) (hX : Limits.IsInitial X) : SheafOfModules.{w} R ⥤ Sheaf J (ModuleCat.{w} (R.1.obj X))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and an initial object $X$ in $\\\\mathcal{C}^\\\\text{op}$, this functor maps a sheaf of modules $M$ o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.toPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ X.PresheafOfModules\", \"doc\": \"The functor that sends each sheaf of modules over the structure sheaf of a scheme $X$ to its underlying presheaf of modules, and each sheaf homomorphism to its underlying presheaf morphism, effectivel\"}\n  {\"name\": \"SheafOfModules.toSheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules.{v} R ⥤ Sheaf J AddCommGrpCat.{v}\", \"doc\": \"The functor that maps each sheaf of modules over a sheaf of rings $ R $ to its underlying sheaf of abelian groups, and each sheaf homomorphism to the corresponding morphism between their underlying sh\"}\n  {\"name\": \"SheafOfModules.fullyFaithfulForget\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": (forget.{v} R).FullyFaithful\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of presheaves of modules over $ R $ is fully faithful. This means that for any two sheaves of \"}\n  {\"name\": \"SheafOfModules.forget\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules.{v} R ⥤ PresheafOfModules R.val\", \"doc\": \"The functor that sends each sheaf of modules over a sheaf of rings $ R $ to its underlying presheaf of modules over the presheaf of rings $ R $, and each sheaf homomorphism to its underlying presheaf \"}\n  {\"name\": \"SheafOfModules.forget_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) (F : SheafOfModules R), (SheafOfModules.forget R).obj F = F.val\", \"doc\": \"The forgetful functor sends each sheaf of modules over a sheaf of rings $ R $ to its underlying presheaf of modules over the presheaf of rings $ R $, effectively disregarding the sheaf condition. For \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheafOfModules X).Faithful\", \"doc\": \"The functor that sends each sheaf of modules over the structure sheaf of a scheme $X$ to its underlying presheaf of modules, and each sheaf homomorphism to its underlying presheaf morphism, effectivel\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete coefficient modules, ordinary group actions, or generic derived/monoidal tools; none states this normalized internal condensed-action assertion, whose separate generic tools already have DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Injective\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the entire internal condensed-action assertion; applicable generic tools already have DAG nodes and are cited individually"
+  },
+  {
+   "tool": "grep",
+   "query": "Condensed.*(Action|invariants|Injective)|(Action|invariants|Injective).*Condensed",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the entire internal condensed-action assertion; applicable generic tools already have DAG nodes and are cited individually"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules with an internal group sheaf action have a derived invariants functor right adjoint to trivial action",
+   "results": "8 hits: Rep.instIsRightAdjointModuleCatInvariantsFunctor, Rep.invariantsFunctor, Rep.invariantsAdjunction, Rep.coinvariantsAdjunction, ContinuousCohomology.invariants, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, Rep.instIsLeftAdjointModuleCatCoinvariantsFunctor. Read Mathlib/RepresentationTheory/Invariants.lean: ordinary representations, not arbitrary internal ring/group sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the entire internal condensed-action assertion; applicable generic tools already have DAG nodes and are cited individually"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of rings with an action of a condensed group form a Grothendieck abelian category and derived invariants are right adjoint to exact trivial action",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; instAbelianCondensedMod; Condensed.instAB4CondensedMod; Condensed.instAB4StarCondensedMod; instAbelianLightCondMod; Condensed.instAB5CondensedMod; CondensedMod; CondensedMod.LocallyConstant.adjunction. Read Mathlib/Condensed/Module.lean:35-43: CondensedMod has a fixed ordinary coefficient ring, not an internal ring sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the entire internal condensed-action assertion; applicable generic tools already have DAG nodes and are cited individually"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck abelian category of equivariant sheaves over an internal condensed coefficient ring, K-injective right derived fixed points with signed shifts",
+   "results": "8 hits: CategoryTheory.Sheaf.instIsGrothendieckAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.sheafIsAbelian, CochainComplex.isKInjective_shift_iff, instIsGrothendieckAbelianModuleCat, instAbelianCondensedMod, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, DerivedCategory.instHasShiftInt. Generic tools or fixed-ring modules only; existing DAG tools reused.",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the entire internal condensed-action assertion; applicable generic tools already have DAG nodes and are cited individually"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-derived-restriction-calculus",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), dense-lattice input; returned restriction-calculus proof steps 1, 2, 3; agent-formulated Internal condensed action categories and injective derived infrastructure. Exact external reference WANTED.",
+   "via": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-action-injective-infrastructure",
+  "worker": "stage1",
+  "summary": "Q139: split into ten explicit steps using existing action-site, Grothendieck, resolution, Hom-computation and fixed-shift nodes; no new nodes. Verified arbitrary topological groups and internal coefficient rings, zero/trivial/empty cases and arbitrary nonflat scalar restrictions. Corrected continuous u to continuous group homomorphism, with explicit counterexample to the literal unrestricted wording in report.md. Reviewer FIX: the invariant subsheaf and normalized adjunction (old steps 4-6) now cite the existing lem-sfb-sheaf-product-fixed-adjunction instead of re-proving it.",
+  "blueprint": "Paragraph (3) of the current direct-images proof: generic categorical/injective infrastructure below its dense-lattice input, through the recorded created.item ancestry. No new geometric route and no change of chapter or unit. blueprint_refs.py ancestor reports None for this inherited agent-formulated chain; retained that existing provenance.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic categorical tool used with its stated hypotheses in proof step(s) 6; the dense-lattice unit does not provide this general sheaf/module or K-injective theorem. This does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic categorical tool used with its stated hypotheses in proof step(s) 7; the dense-lattice unit does not provide this general sheaf/module or K-injective theorem. This does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic categorical tool used with its stated hypotheses in proof step(s) 8; the dense-lattice unit does not provide this general sheaf/module or K-injective theorem. This does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic categorical tool used with its stated hypotheses in proof step(s) 8; the dense-lattice unit does not provide this general sheaf/module or K-injective theorem. This does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic categorical tool used with its stated hypotheses in proof step(s) 10; the dense-lattice unit does not provide this general sheaf/module or K-injective theorem. This does not replace any geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sp-canonical-right-derived-adjunction-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-1b7840131",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-1b7840131 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 21 cited statements, blueprint paragraph (3) and the Stacks tags at their labels (08YD, 0AAU, 03DA, 079P, 070I/K/Y, 08BJ, 014X, 015F, 0DVC, 0A8D). No new nodes, no SGA. Accepted the statement correction from continuous map u to continuous group homomorphism u. The counterexample checks: on C2 with the sign action, the constant map to the non-identity element makes 1_H act by -1, so u^* is not an action. The parent restriction-calculus node and def-sfb-condensed-action-module already use homomorphisms. Checked steps 1-3 and 7-12. Step 1: the gluing quotient only needs the profinite base S to be Hausdorff; J may be non-Hausdorff. Step 2: strong monoidal sheafification gives monoidal local equivalences, and the action-site presentation hypotheses hold (small site with finite limits, group sheaf, universes). Steps 3 and 7: Grothendieck structure, exact inflation and exact scalar restriction (no flatness needed). Steps 8-10: K-injective and bounded-below resolutions, the derived functor, and the Hom bijection, with no cycle with the termwise step 11. Step 12: the fixed-shift adjunction hypotheses hold. Edge cases pass: empty S, trivial J, zero ring. The five tool_uses are accepted as generic K-injective/adjunction black boxes. FIX (C5): old steps 4-6 re-prove the existing same-unit base node lem-sfb-sheaf-product-fixed-adjunction. That node states the invariant subsheaf (identical formula), the additive functor with its injective inclusion, and the adjunction with the same transposes; it does not reach the item. The corrected item merges those steps into one step 4 that cites it with P=K=J, renumbers steps 5-10 and updates proof_deps and the tool_uses step numbers. The statement is unchanged. Side note: def-sfb-condensed-derived-invariants also says 'u:H->J continuous' without 'homomorphism'.; 1 file(s) fixed by the reviewer"
+ }
+}

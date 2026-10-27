@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-finite-pinching-invertible-patching",
+ "kind": "statement",
+ "title": "Invertible sheaves on a finite pinching square",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $v:X'\\to X$ and $j:Z\\hookrightarrow X$ be $S$-morphisms, with $v$ finite [def-weil-finite-integral-morphism] and $j$ a closed immersion [def-weil-closed-immersion]. Put $Z'=X'\\times_XZ$ [def-pc-fibre-product], with projections $j':Z'\\to X'$ and $w:Z'\\to Z$. Assume that $X$ has an affine open cover by $U=\\operatorname{Spec}R$ [def-weil-affine-spectrum] such that $v^{-1}U=\\operatorname{Spec}A$, $Z\\times_XU=\\operatorname{Spec}B$, $Z'\\times_XU=\\operatorname{Spec}F$, the map $A\\to F$ is surjective, and the canonical map $R\\to A\\times_FB$ is an isomorphism. Here $A\\times_FB=\\{(a,b):a|_F=b|_F\\}$, with coordinatewise ring operations. Pullback gives an equivalence between invertible sheaves on $X$ [def-sc-invertible-module] and triples $(M,N,\\alpha)$, where $M$ is invertible on $X'$, $N$ is invertible on $Z$, and $\\alpha:(j')^*M\\xrightarrow{\\sim}w^*N$ is an isomorphism on $Z'$. A morphism of triples is a pair of module maps commuting with $\\alpha$; thus the equivalence also identifies automorphisms. The equivalence respects tensor products. It is natural for every base change $T\\to S$ for which the base-changed square again has this affine fibre-product description. In particular it is natural for flat base changes. Empty $Z$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D2J (lemma-finitely-presented-module-over-fibre-product), with Tag 07RU (lemma-module-over-fibre-product), applied to rank-one finite projectives and glued on the stated affine cover. Tensor and base-change naturality are the canonical pullback comparisons."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-sc-invertible-module",
+  "def-sfb-pinching-line-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix a chart $U=\\operatorname{Spec}R$ in the assumed cover. Write $M_A=\\Gamma(v^{-1}U,M)$ and $N_B=\\Gamma(Z\\times_XU,N)$. The affine invertible-sheaf dictionary makes these finite projectives of rank one, and the affine pullback formula turns $\\alpha$ into $F\\otimes_A M_A\\simeq F\\otimes_B N_B$. Apply finite-projective patching to construct the actual module $P_U=\\{(m,n):\\alpha(1\\otimes m)=1\\otimes n\\}$. It is finite projective over $R$, and its two scalar extensions, with their specified comparison on $F$, are precisely the given modules and comparison. On morphisms the construction sends $(a,b)$ to the restriction of $a\\oplus b$ to this kernel. The affine tilde equivalence turns module homomorphisms into all morphisms of the associated quasi-coherent sheaves. The general patched-module comparison gives these projection counits even before imposing finite projectivity.",
+   "uses": [
+    "lem-sc-affine-cap-section-open-dictionary",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sfb-fibre-product-finite-projective-patching",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sfb-patched-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0D2J and 07RU; Schemes Tags 01IB and 01I9"
+   }
+  },
+  {
+   "text": "The finite projective $P_U$ has rank one at every prime. Indeed put $J=\\ker(R\\to B)$; surjectivity of $A\\to F$ shows $R\\to B$ is surjective and identifies $J$ with $\\ker(A\\to F)$. If $\\mathfrak p\\supseteq J$, let $\\mathfrak q=\\mathfrak p/J\\in\\operatorname{Spec}B$. A standard-open free neighbourhood of $\\mathfrak p$ for $P_U$ has some rank $d$. After tensoring its fibre with $\\kappa(\\mathfrak q)=\\kappa(\\mathfrak p)$, the projection comparison identifies it with the rank-one fibre of $N_B$, so $d=1$. If $\\mathfrak p\\not\\supseteq J$, choose $r\\in J\\setminus\\mathfrak p$. Localizing $0\\to R\\to A\\oplus B\\to F\\to0$ at $r$ gives $R_r=A_r$, since $B_r=F_r=0$. Hence $\\mathfrak p$ corresponds to a prime of $A_r$; the same free-neighbourhood and fibre calculation, now with $M_A$, gives rank one. Principal-open sections of $\\widetilde {P_U}$ are these localizations, so these rank-one free neighbourhoods trivialize $L_U=\\widetilde {P_U}$. Thus $L_U$ is invertible. Conversely an invertible sheaf on $U$ has finite projective rank-one sections by the affine dictionary, and the unit of patching recovers those sections. Consequently pullback on this chart is fully faithful on all module maps and essentially surjective on line-bundle triples.",
+   "uses": [
+    "lem-sfb-fibre-product-finite-projective-patching",
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-affine-cap-section-open-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0D2J and 07RU; Algebra Tag 00NX; Schemes Tag 01HV"
+   }
+  },
+  {
+   "text": "These constructions commute with principal-open restriction. For $r\\in R$, exactness of localization applied to the two kernels $R=\\ker(A\\oplus B\\to F)$ and $P_U=\\ker(M_A\\oplus N_B\\to F\\otimes_BN_B)$ identifies $R_r=A_r\\times_{F_r}B_r$ and $(P_U)_r=\\{(m,n)\\in(M_A)_r\\oplus(N_B)_r:\\alpha_r(1\\otimes m)=1\\otimes n\\}$. The ring map $A_r\\to F_r$ remains surjective: a preimage of a fraction is obtained by lifting its numerator. The principal-open descriptions of tilde sections identify the localized projection maps with the restricted projection maps. Therefore the fully faithful affine equivalence of steps 1--2 also holds on every such principal open.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 00CS (Algebra, proposition-localization-exact); the argument of more-algebra lemma-diagram-localize"
+   }
+  },
+  {
+   "text": "For charts $U_i,U_j$, their intersection has a cover by opens principal in both affine charts. On each such open, step 3 and affine full faithfulness give a unique isomorphism $L_{U_i}\\simeq L_{U_j}$ inducing the identity on the prescribed triple. On smaller opens the maps agree, because they agree on a principal-open basis and affine full faithfulness is faithful there. Glue these maps over the intersection. On triple intersections their two possible composites induce the same identity triple, and equality can again be checked on a principal-open basis inside one chart. Thus the transition maps satisfy the cocycle condition. Gluing modules produces $L$ on $X$, invertible because this is local on $X$, with the desired pullback identifications. The same argument glues the unique local lift of any morphism of triples. It also proves uniqueness of that lift globally. Thus pullback is an equivalence of the categories stated in the item. Applying the bijection on Hom sets to invertible endomorphisms identifies automorphisms as well: lifts of an inverse are inverse by faithfulness.",
+   "uses": [
+    "lem-sc-affine-inter-principal-both",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Sheaves Tags 04TN, 00AL and 00AM; Schemes principal-open basis and common principal refinements"
+   }
+  },
+  {
+   "text": "For two triples take their tensor product componentwise and tensor their overlap identifications. The sheaf $L_1\\otimes L_2$ is invertible, and the canonical pullback comparisons identify its triple with that tensor-product triple: on simple tensors the comparison is $(1\\otimes x)\\otimes(1\\otimes y)\\mapsto1\\otimes(x\\otimes y)$. Full faithfulness yields the unique comparison between $L_1\\otimes L_2$ and the sheaf reconstructed from the tensor-product triple. Its inverse lifts the inverse triple map. The unit comparison uses the diagonal identification $R=A\\times_FB$ on each chart. The associativity, symmetry and unit diagrams commute because their pullbacks act identically on the displayed simple tensors, and pullback is faithful. This proves tensor compatibility.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Modules Tag 01CT (lemma-constructions-invertible); canonical tensor and composition comparisons"
+   }
+  },
+  {
+   "text": "Let $T\\to S$ be a base change satisfying the stated affine hypothesis. Pullback of the reconstructed $L$ to $X_T$ is invertible. Its restrictions to $X^{\\prime}_T$ and $Z_T$ identify with the pulled-back $M,N$ by the canonical composition comparison for pullback; on $Z^{\\prime}_T$ the overlap comparison is the pullback of $\\alpha$. Apply the equivalence already proved on the new square: full faithfulness gives a unique isomorphism from the reconstruction of this new triple to $L|_{X_T}$ inducing those identifications. This is natural in triple morphisms by faithfulness. For two successive allowed base changes the composite comparison and the direct comparison induce the same maps on both components, by the pullback composition formula, so are equal. The identity base change likewise gives the identity. This establishes the asserted naturality without claiming that tensoring an arbitrary kernel is exact.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Modules Tag 01CT; composition comparisons and uniqueness under the equivalence"
+   }
+  },
+  {
+   "text": "Finally suppose $T\\to S$ is flat. The map $X_T\\to X$ is flat by flat base change; on an affine open $\\operatorname{Spec}C\\subseteq X_T$ mapping into a chosen $U=\\operatorname{Spec}R$, the affine criterion makes $C$ flat over $R$. The three inverse-image charts have rings $A\\otimes_R C$, $B\\otimes_R C$, $F\\otimes_R C$ by the affine fibre-product formula. Tensoring $0\\to R\\to A\\oplus B\\to F\\to0$ with $C$ preserves its kernel, so $C\\cong(A\\otimes_R C)\\times_{F\\otimes_R C}(B\\otimes_R C)$. Surjectivity of the first map to $F\\otimes_R C$ follows by lifting numerators of simple tensors. Finite generation of $A$ over $R$ persists by tensoring a finite list of generators, and $R\\to B$ being a quotient remains a quotient after tensoring. Thus the base-changed square satisfies all the hypotheses on an affine cover, and step 6 applies. If $Z$ is empty, then $B=F=0$ on every chart, $R=A$ and $P_U=M_A$. There is a unique module on the empty scheme and a unique overlap identification, so the same construction gives precisely the asserted equivalence, including automorphisms and tensor products.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Morphisms Tags 01U9 and 01U5; Schemes Tag 01I4; Algebra Tag 00HD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-cap-section-open-dictionary",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sfb-fibre-product-finite-projective-patching",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sfb-patched-module-base-change",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-affine-inter-principal-both",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly from Tags 0D2J and 07RU; rank-one restriction and scheme gluing expanded using Algebra 00NX, Schemes 01IB/01I9, Sheaves 00AM. The base-change and tensor clauses are checked by full faithfulness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles on a fibre product of commutative rings with one surjective map are equivalent to pairs of invertible modules with an isomorphism after base change",
+   "results": "8 hit(s): CommRing.Pic.mapAlgebra_apply, CommRing.Pic, CommRing.Pic.mk_eq_mk_iff, CommRing.Pic.AsModule, CommRing.relPic, CommRing.Pic.mk, CommRing.Pic.mapAlgebra, CommRing.Pic.mk_eq_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: Pic.mapAlgebra and Pic.mk_eq_mk_iff describe extension of scalars and equality of classes; projective lifting and finite presentation do not give patching over a ring fibre product. No scheme-level pinching equivalence is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Patching finitely generated projective modules over pullback rings when one map is surjective",
+   "results": "8 hit(s): Module.projective_lifting_property, Module.finitePresentation_of_projective_of_exact, Module.Projective.of_lifting_property', Module.Projective.of_lifting_property, Module.Finite.exists_comp_eq_id_of_projective, Module.Projective.of_lifting_property'', Module.finitePresentation_of_projective, Module.Projective.iff_split_of_projective",
+   "date": "2026-10-23",
+   "verdict": "no match: Pic.mapAlgebra and Pic.mk_eq_mk_iff describe extension of scalars and equality of classes; projective lifting and finite presentation do not give patching over a ring fibre product. No scheme-level pinching equivalence is supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite projective modules over a pullback ring with one surjective ring map are obtained by gluing projective modules",
+   "results": "8 hit(s): Module.Projective.of_ringEquiv, Module.Projective, Module.Projective.of_lifting_property, Module.projective_lifting_property, Module.Projective.of_lifting_property', Module.Flat.projective_of_finitePresentation, Module.Finite.exists_comp_eq_id_of_projective, AlgebraicGeometry.Scheme.Pullback.gluedIsLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: Pic.mapAlgebra and Pic.mk_eq_mk_iff describe extension of scalars and equality of classes; projective lifting and finite presentation do not give patching over a ring fibre product. No scheme-level pinching equivalence is supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Milnor\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: Pic.mapAlgebra and Pic.mk_eq_mk_iff describe extension of scalars and equality of classes; projective lifting and finite presentation do not give patching over a ring fibre product. No scheme-level pinching equivalence is supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"pullback\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: Pic.mapAlgebra and Pic.mk_eq_mk_iff describe extension of scalars and equality of classes; projective lifting and finite presentation do not give patching over a ring fibre product. No scheme-level pinching equivalence is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor.*patch|patch.*projective|[Ii]nvertible.*[Pp]ullback|[Pp]icard.*[Pp]ullback",
+   "results": "3 hit(s): Mathlib/Geometry/Manifold/VectorField/Pullback.lean, Mathlib/Geometry/Manifold/VectorField/Pullback.lean, Mathlib/Geometry/Manifold/VectorField/Pullback.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Pic.mapAlgebra and Pic.mk_eq_mk_iff describe extension of scalars and equality of classes; projective lifting and finite presentation do not give patching over a ring fibre product. No scheme-level pinching equivalence is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "fibre.product|fiber.product|patching",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: Pic.mapAlgebra and Pic.mk_eq_mk_iff describe extension of scalars and equality of classes; projective lifting and finite presentation do not give patching over a ring fibre product. No scheme-level pinching equivalence is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|patching|fibre.product|fiber.product",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned lifting, finite-presentation and local-projectivity results do not patch modules over a fibre-product ring; the scheme constructions do not assert the pinching equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Patching projective modules over pullback rings with a surjective homomorphism",
+   "results": "8 hits: Module.projective_lifting_property, Module.Projective.of_lifting_property', LinearMap.exists_rightInverse_of_surjective, Module.Projective.of_lifting_property, Function.Surjective.surjective_linearMapComp_left, Module.Projective.of_lifting_property'', Module.Projective.of_ringEquiv, Function.Surjective.module",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned lifting, finite-presentation and local-projectivity results do not patch modules over a fibre-product ring; the scheme constructions do not assert the pinching equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"pullback\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned lifting, finite-presentation and local-projectivity results do not patch modules over a fibre-product ring; the scheme constructions do not assert the pinching equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective modules over a fibre product of commutative rings with one surjective map are equivalent to matching pairs of finite projective modules",
+   "results": "8 hits: Algebra.FormallyUnramified.projective_of_restrictScalars, Module.Finite.exists_comp_eq_id_of_projective, Module.finitePresentation_of_projective, Module.Flat.projective_of_finitePresentation, Module.projective_of_localization_maximal, Module.projective_of_isLocalizedModule, Module.finitePresentation_of_projective_of_exact, Module.Projective.of_ringEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned lifting, finite-presentation and local-projectivity results do not patch modules over a fibre-product ring; the scheme constructions do not assert the pinching equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "pinching|patching|Milnor|Picard.*pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned lifting, finite-presentation and local-projectivity results do not patch modules over a fibre-product ring; the scheme constructions do not assert the pinching equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles on a pinched scheme are obtained by gluing invertible modules along a closed finite conductor square",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules, ModuleCat.tilde, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned lifting, finite-presentation and local-projectivity results do not patch modules over a fibre-product ring; the scheme constructions do not assert the pinching equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Milnor patching of finitely generated projective modules over pullback rings with one surjection",
+   "results": "8 hits: Module.finitePresentation_of_projective, Module.Finite.exists_comp_eq_id_of_projective, Module.Projective.of_lifting_property, Module.Projective.of_lifting_property', Module.finitePresentation_of_projective_of_exact, Module.Projective.of_lifting_property'', Module.projective_of_localization_maximal, Module.projective_lifting_property",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned lifting, finite-presentation and local-projectivity results do not patch modules over a fibre-product ring; the scheme constructions do not assert the pinching equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Milnor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned lifting, finite-presentation and local-projectivity results do not patch modules over a fibre-product ring; the scheme constructions do not assert the pinching equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-normalization-picard-sequence",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Normalization and the gluing-parameter sequence of a nodal curve. Auxiliary input: Invertible-module patching needed to upgrade the units-sequence argument to all base schemes, before taking Picard sheafification.",
+   "via": [
+    "lem-sfb-nodal-normalization-picard-sequence",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-pinching-invertible-patching",
+  "worker": "stage1",
+  "summary": "Q33: constructed the inverse on each affine chart from finite-projective patching, checked rank one by the conductor ideal and fibres, localized the explicit kernels, glued on common principal refinements, and proved full faithfulness, tensor coherence and allowed base-change naturality. One new algebra lemma; no scheme-level restatement. No statement correction.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Normalization and the gluing-parameter sequence of a nodal curve. Auxiliary input: Invertible-module patching needed to upgrade the units-sequence argument to all base schemes, before taking Picard sheafification.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-cap-section-open-dictionary",
+    "why": "Generic Affine dictionary for an invertible module and its section used for the affine-to-scheme patching argument; no statement of the constructible-stability unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic Glueing morphisms and sheaves of modules along an open covering used for the affine-to-scheme patching argument; no statement of the constructible-stability unit supplies this algebraic-geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-cap-section-open-dictionary",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-e4f275841",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-e4f275841 (reviewer sub-agent of L); spot-checked: PASS, with no fixes and no dropped nodes. I read more-algebra 08KH, 07RU and its sequel, 0D2I and 0D2J in full, and checked every tag in tags/tags. The new node lem-sfb-fibre-product-finite-projective-patching is 0D2J restated exactly, with the variables relabelled (Stacks A'->A is our A->F). It gives the full-subcategory equivalence on all module maps, the quasi-inverse K = M x_{F(x)M} N, the counits from 07RU and the unit from 0D2I(2). It is statement-only and self-contained, and a DAG search found no duplicate. lem-sfb-patched-module-base-change is only its counit sub-clause, and the other 08KH-family nodes cover flat algebras, topology or scheme pushouts. Mathlib has only RingHom.pullback. The item statement is unchanged and holds for empty Z, Z=X and the identity square. Step by step: step 1 uses the affine dictionary, the pullback-section formula on j' and w, and the tilde adjunction. Step 2 shows rank one by the conductor J: p containing J via B, kappa(p)=kappa(q); p not containing J via R_r = A_r. Step 3 (elementary) localizes the kernels. Step 4 glues on opens principal in both charts (01HR), so intersections of affines are never assumed affine, and applies glue (1)/(2). Step 5 checks tensor coherence by faithfulness. Step 6 covers allowed base changes by uniqueness. Step 7 handles flat base change: X_T->X is flat, R->C is flat, the charts are A(x)C etc., and flat-tensor-exact keeps the fibre product. That covers the parent's arbitrary T over a field. Every cited unit is on the route, the declared tool_uses are generic, and no SGA is cited. Advisories only: the step source.document fields say more-algebra.tex where the places are Schemes/Sheaves/Modules/Morphisms tags; the step-1 patched-module citation is redundant; the blueprint from.node is null, inherited from the ancestor chain (a base-node fault)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePinchingInvertiblePatching",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_pinching_invertible_patching",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePinchingInvertiblePatching.lean",
+  "statement": "theorem finite_pinching_invertible_patching {S X A B : Scheme.{u}} (p : X ⟶ S) (v : A ⟶ X) (j : B ⟶ X) [IsFinite v] [IsClosedImmersion j] (h : HasAffinePinchingCover v j) : PinchingLineEquivalence v j ∧ (pinchingUnitTriple v j).IsLift (𝟙_ X.Modules) (pinchingUnitIso v) (pinchingUnitIso j) ∧ (∀ (D E : PinchingLineTriple v j) (P : PinchingLineLift D) (Q : PinchingLineLift E), (D.tensor E).IsLift (P.line ⊗ Q.line) ((Classical.choose (module_pullback_tensor v)) P.line Q.line ≪≫ (P.left ⊗ᵢ Q.left)) ((Classical.choose (module_pullback_tensor j)) P.line Q.line ≪≫ (P.right ⊗ᵢ Q.right))) ∧ (∀ (T : Scheme.{u}) (t : T ⟶ S), HasAffinePinchingCover (pinchingBaseMap p v t) (pinchingBaseMap p j t) → PinchingLineEquivalence (pinchingBaseMap p v t) (pinchingBaseMap p j t) ∧ ∀ (D : PinchingLineTriple v j) (P : PinchingLineLift D), (D.baseChange p t).IsLift ((tensorPullback (pullback.fst p t)).obj P.line) (pinchingBaseProjection p v t P.line ≪≫ (tensorPullback (pullback.fst (v ≫ p) t)).mapIso P.left) (pinchingBaseProjection p j t P.line ≪≫ (tensorPullback (pullback.fst (j ≫ p) t)).mapIso P.right)) ∧ (∀ (T : Scheme.{u}) (t : T ⟶ S) [Flat t], HasAffinePinchingCover (pinchingBaseMap p v t) (pinchingBaseMap p j t))",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4db72dfb",
+  "group": "Q19",
+  "result": "pass",
+  "note": "First S2 delivery; compared with the live node the item changes only lean + the new (A) stmt_dep def-sfb-pinching-line-data. Clause check vs node: S-morphisms via p and composites; IsFinite/IsClosedImmersion; Z'=pullback v j with fst/snd; HasAffinePinchingCover = 4x IsAffineOpen + Surjective(fst.app) + IsPullback of section rings in CommRingCat (appLE justified by pullback.condition, orientation right); PinchingLineEquivalence = all triples lift + exists-unique lift of every compatible pair of arbitrary maps between invertible modules (fully faithful + ess. surj., automorphisms included); unit and binary tensor lift clauses pinned by canonical unit/module_pullback_tensor (exists characterized on pure tensors)/composition comparisons; allowed base change gives the new equivalence + q_X^*L lifts D.baseChange with canonical projections; Flat t implies the cover hypothesis (proof step 7, true). Edge cases empty Z/X, Z=X, identity base change, zero maps covered; one universe u, no extra hypotheses. New def node: real data, canonical isos only, all section-5 fields, 16 declarations listed; no name clash in side-live/slopmaster2. Its theorem stmt_deps are genuine uses (choose, invertibility proof, _isIso for asIso). Statements verbatim, JSON layout ok, lines <=100, docstrings with source+blueprint, 7 proof steps in docstring, sorry only; plain imports = stated proof_dep modules, the two record-less proof_deps rightly not imported. No compile (no change). Advisories: Ring.Constructions import possibly redundant; Compatible unused by item."
+ }
+}

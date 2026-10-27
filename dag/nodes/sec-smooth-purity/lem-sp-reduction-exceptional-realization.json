@@ -1,0 +1,177 @@
+{
+ "id": "lem-sp-reduction-exceptional-realization",
+ "kind": "statement",
+ "title": "A counit-preserving ordinary-etale realization of the intrinsic exceptional adjunction",
+ "statement": "In the standing finite-type separated field setting [sk-def-sfb-dc-setting], fix the open/proper compactification j,p and a finite commutative ell-primary coefficient ring A. If its intrinsic compact-support functor preserves Dctf, there are a right functor G on intrinsic Dctf and an adjunction F_A ⊣ G, together with ReductionExceptionalRealization [def-sp-reduction-exceptional-realization-objects]. In particular the ordinary origins are bounded constructible of finite Tor amplitude, the output isomorphism is natural, and it satisfies the actual transported counit equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Retained Steps 3--4: finite-coefficient comparison, restriction and counit transport"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sp-reduction-exceptional-realization-objects"
+ ],
+ "proof": [
+  {
+   "text": "Comparison inverse image followed by intrinsic realization is an equivalence on the full constructible finite-Tor subcategories: compare the intrinsic good-object property with the fixed-module property, apply bounded-below comparison full faithfulness, and use ordinary constructible origins and Tor reflection for essential surjectivity.",
+   "uses": [
+    "det-pe-finite-tor-comparison-noetherian",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite ell-primary ring has invertible exponent on the field and on Y. Use the already proved ordinary-etale finite-ring preservation APIs underlying sk-prop-sf-rf-shriek-preservation: AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedUpperShriek in WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek and the ordinary compact-support preservation theorem. These statements concern the etale Dctf property, not the general condensed pro-etale direct-image stability package. Restrict the ordinary adjunction to the full subcategories, then transport it through the finite-ring comparison equivalence.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "sk-prop-sf-rf-shriek-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the restricted adjunction across the two comparison equivalences. Use reductionSiteCompactSupportIso for the left identification, the target equivalence counit for the input origin, and the definitionally identical output functor for the output comparison.",
+   "uses": [
+    "def-sp-reduction-exceptional-realization-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand ofNatIsoLeft and composite-adjunction counits. Naturality moves the inverse equivalence unit across the left comparison; the equivalence triangle identity cancels it. The full inclusion maps the restricted counit to the ordinary counit. Lift the compact-support comparison componentwise; its naturality follows from the specified comparison. Together with the origin equivalence counit and the identity output comparison, these equations give reductionRealizationCounitEquation. This counit-transport construction remains to be formalized with an efficient definitional interface; the attempted Lean construction exceeded the kernel limit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-reduction-direct-image",
+  "def-weil-exceptional-inverse-image",
+  "sk-prop-sf-rf-shriek-preservation",
+  "def-sp-reduction-exceptional-realization-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K5",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Retained Steps 3--4: finite-coefficient comparison, restriction and counit transport; Lean implements the retained source argument in the named comparison coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint coefficient extension comparison isomorphism smooth exceptional inverse image",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; localCohomology.diagramComp; LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction; HomologicalComplex.extendSingleIso_inv_f; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionExceptional|exceptional.*[Ss]calar|[Ss]calar.*[Ee]xceptional",
+   "results": "No matching declaration.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth exceptional inverse image commutes with derived extension of finite coefficient rings",
+   "results": "RingHom.IsStandardSmooth.smooth; Algebra.Smooth.exists_finiteType; RingHom.IsStandardSmooth; RingHom.IsStandardSmoothOfRelativeDimension; RingHom.Smooth; Algebra.Smooth; Algebra.IsStandardSmooth; Algebra.Smooth.comp",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateEquiv",
+   "results": "No matching declaration.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*exceptional|exceptional.*coefficient",
+   "results": "No matching declaration.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionExceptional|isIso_of.*openCover|constructibleFiniteTor_rightDerivedUpperShriek",
+   "results": "No matching declaration.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A mate of coefficient extension between smooth exceptional inverse images is an isomorphism, detected on open coordinate charts",
+   "results": "Manifold.LiftSourceTargetPropertyAt.property; writtenInExtChartAt; IsOpen.liftSourceTargetPropertyAt; Manifold.LiftSourceTargetPropertyAt; Manifold.LiftSourceTargetPropertyAt.localPresentationAt; Manifold.IsImmersionAtOfComplement.writtenInCharts; contMDiffOn_extend_symm; Manifold.IsLocalSourceTargetProperty",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence transports an adjunction and its counit, and isomorphisms in a derived category can be detected on an open cover",
+   "results": "CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Equivalence.toAdjunction_counit; CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence; CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1; CategoryTheory.Adjunction.toEquivalence_functor; CategoryTheory.Functor.adjunction; CategoryTheory.Equivalence.toAdjunction; CategoryTheory.Adjunction.counitAsIsoOfIso",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these specified intrinsic coefficient and chart comparisons; use the existing adjunction and comparison APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.ReductionExceptional",
+  "date": "2026-10-25",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Retained Steps 3--4: finite-coefficient comparison, restriction and counit transport",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ReductionExceptionalRealization",
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionExceptionalRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionExceptionalRealization_exists",
+  "statement": "theorem reductionExceptionalRealization_exists\n    (ℓ pchar : ℕ) [Fact ℓ.Prime] (_hp : 0 < pchar) (hℓ : pchar ≠ ℓ)\n    (k : Type u) [Field k] [CharP k pchar]\n    {X Z Y : Scheme.{u}}\n    [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]\n    [IsSeparated (Z ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n    (j : X ⟶ Z) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]\n    (p : Z ⟶ Y) [IsProper p] [p.IsOver (Spec (.of k))] (_hf : j ≫ p = f)\n    (A : Type u) [CommRing A] [Finite A]\n    (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0)\n    (hF : ∀ M : spFiniteConstructibleTorCategory X A,\n      spFiniteConstructibleTor Y A ((reductionCompactSupport A j p).obj M.obj)) :\n    ∃ (G : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A)\n      (adj : reductionCtfCompactSupport A j p hF ⊣ G),\n      Nonempty (ReductionExceptionalRealization A j p hF G adj)",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bc7ac",
+  "group": "K5",
+  "result": "fix",
+  "landing": "20261025T211641-L-4013015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bc7ac",
+  "group": "K5",
+  "result": "fix",
+  "landing": "20261025T211641-L-4013015",
+  "kind": "interface",
+  "note": "independent cc review: Lean files vs previous head 22b4d (byte-identical); Objects module vs current published ReductionExceptional prefix (verbatim); 2 sorry statements vs nodes/source Steps 3-4, 5-12; 25 direct importers compiled against sandbox build with fixed item (all exit 0)"
+ }
+}

@@ -1,0 +1,173 @@
+{
+ "id": "lem-sfb-polynomial-rank-one-system-existence",
+ "kind": "statement",
+ "title": "Construction of the finite polynomial translation system",
+ "statement": "Fix a prime $\\ell$, a normed field $E$ with a normed $\\mathbf Q_\\ell$-algebra structure and finite dimension over $\\mathbf Q_\\ell$, and integers $k,m\\geq0$. Then there exists a PolynomialSystem for $(\\ell,E,k,m)$ [def-sfb-polynomial-rank-one-model-data]. In particular its stages are identified with exactly the degree-at-most-n polynomial spaces, its operator is minus the first partial derivative, its exponent is n+1, and its action is the specified negative translation. This assertion constructs only the finite system; it does not assert an internal scalar-extended colimit presentation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated expansion in lem-sfb-polynomial-rank-one-difference-model. Specifically: original expanded proof steps 1--5."
+ },
+ "stmt_deps": [
+  "def-sfb-polynomial-rank-one-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $q=r+m$ and $I_n=\\{a\\in\\mathbf N^q:\\sum_i a_i\\leq n\\}$. Every coordinate of $a\\in I_n$ is at most $n$, so $I_n$ is finite. By the coefficient description in [def-weil-pbc-mv-polynomial-ring], the monomials $x^a$ for $a\\in I_n$ are a basis of $V_n$. Thus $V_n$ is finite-dimensional, the inclusions are injective, and their matrices are the coordinate inclusions. Every monomial belongs to $I_n$ for its total degree; no uniform degree bound is imposed.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the finite polynomial translation filtration below the coefficient comparison."
+   }
+  },
+  {
+   "text": "For a translation parameter $u=(t,g_2,\\ldots,g_r)$, repeated use of [lem-pur-commutative-ring-binomial-expansion] gives, for $a=(a_1,\\ldots,a_r)$ and spectator exponent $b$, $$\\rho_n(u)(y^az^b)=\\sum_{0\\leq c_i\\leq a_i}\\left(\\prod_{i=1}^r\\binom{a_i}{c_i}(-u_i)^{a_i-c_i}\\right)y^cz^b.$$ Every displayed exponent has total degree at most $|a|+|b|$, so this defines an endomorphism of $V_n$ and agrees across inclusions. Substituting twice gives $f(y-u-v,z)$; substituting zero gives $f$. Hence these are linear automorphisms with inverse parameter $-u$, satisfying the representation law and equivariance of the transitions.",
+   "uses": [
+    "lem-pur-commutative-ring-binomial-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the finite polynomial translation filtration below the coefficient comparison."
+   }
+  },
+  {
+   "text": "The entries in the preceding finite matrix are polynomial functions of $u$. The coordinate isomorphism $V_n\\cong E^{I_n}$ and its inverse are continuous by [lem-sfb-finite-dimensional-linear-map-continuous]: $E$ is a complete nontrivially normed finite extension of $\\mathbf Q_\\ell$ and $V_n$ is finite-dimensional Hausdorff. The coordinates of $u\\in\\mathbf Z_\\ell^r$ are continuous into $E$. Finite sums and products are continuous in this topological field. Consequently $(u,v)\\mapsto\\rho_n(u)v$ is jointly continuous, and $u\\mapsto\\rho_n(u)$ is continuous in the finite matrix topology. This checks continuity of the representation, rather than only continuity for fixed $u$.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the finite polynomial translation filtration below the coefficient comparison."
+   }
+  },
+  {
+   "text": "Use the explicit monomial derivative of [def-weil-pbc-polynomial-partial-derivative]. If $k$ is the exponent of $y_1$ in a monomial $w=y_1^k w_0$, with $w_0$ independent of $y_1$, then $$D_n^jw=(-1)^j k(k-1)\\cdots(k-j+1)y_1^{k-j}w_0\\quad(0\\leq j\\leq k),\\qquad D_n^jw=0\\quad(j>k).$$ This follows by induction on $j$, starting with the empty product at $j=0$. Since $k\\leq n$, $D_n^{n+1}=0$. The derivative lowers degree, hence preserves $V_n$ and commutes with its inclusions. The $G$-substitutions change only variables in $w_0$, so differentiating before or after them gives the same expression. This proves commutation with $G$, including its identity-only case $r=1$.",
+   "uses": [
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the finite polynomial translation filtration below the coefficient comparison."
+   }
+  },
+  {
+   "text": "Dividing the preceding formula by $j!$ is permitted in the characteristic-zero field $E$. For $w=y_1^k w_0$ the Taylor sum is $$\\sum_{j=0}^n\\frac{t^jD_n^jw}{j!}=\\sum_{j=0}^k\\binom{k}{j}(-t)^j y_1^{k-j}w_0=(y_1-t)^kw_0,$$ by [lem-pur-commutative-ring-binomial-expansion]. Extend by linearity to $V_n$. With $e_n=n+1>0$, all conditions of [def-sfb-ind-unipotent-system] are now checked: finite dimension, positive nilpotence exponent, injective intertwining transitions, continuity, commutation and the specified exponential identity.",
+   "uses": [
+    "lem-pur-commutative-ring-binomial-expansion",
+    "def-sfb-ind-unipotent-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the finite polynomial translation filtration below the coefficient comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-pur-commutative-ring-binomial-expansion",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-sfb-ind-unipotent-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated expansion in lem-sfb-polynomial-rank-one-difference-model. Specifically: original expanded proof steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The bounded degree monomials form a finite dimensional polynomial translation representation with nilpotent derivative exponential",
+   "results": "8 hits: LieDerivation.exp; Polynomial.degreeLT.basis; Module.End.exp_mul_of_derivation; MvPolynomial.restrictDegree; IsNilpotent.exp; MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite; MvPolynomial.degreesLE; Polynomial.basisMonomials.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded degree multivariate polynomial spaces with translation action and nilpotent partial derivative have Taylor exponential equal to translation",
+   "results": "8 hits: Polynomial.coe_taylorEquiv; Polynomial.taylor_apply; Polynomial.taylor_eval; Polynomial.taylor_taylor; Polynomial.taylorLinearEquiv_apply_coe; Polynomial.taylorEquiv_symm; Polynomial.taylorEquiv; Polynomial.toAlgHom_taylorEquiv.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.pderiv, MvPolynomial.totalDegree",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "taylor|totalDegree|degreeLE|restrictTotalDegree",
+   "results": "25 hits, including MvPowerSeries.totalDegree_truncFinset, totalDegree_trunc', Polynomial.map_taylor and analytic Taylor-series results. Local source inspection additionally found MvPolynomial.restrictDegree, degreesLE, le_totalDegree and coeff_pderiv.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PolynomialRankOneDifferenceModel",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent-formulated expansion in lem-sfb-polynomial-rank-one-difference-model.",
+   "via": [
+    "lem-sfb-polynomial-rank-one-difference-model",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PolynomialRankOneSystemExistence",
+  "file": "lean/Sheaf/Paper/PolynomialRankOneSystemExistence.lean",
+  "declaration": "Profinite.CondensedAction.PolynomialRankOne.exists_polynomial_system",
+  "statement": "theorem exists_polynomial_system (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (k m : ℕ) : Nonempty (PolynomialSystem ℓ E k m)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-96f37",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T080838-L-1626806",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-96f37",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T080838-L-1626806",
+  "kind": "interface",
+  "note": "independent cc review: data module vs old item module (verbatim apart from blueprint tags); item statement unchanged; the 2 sorried splits (system existence, presentation for arbitrary Q) against the item node's plan steps 1-5/6-9 and IndUnipotent.System/exists_presentation"
+ }
+}

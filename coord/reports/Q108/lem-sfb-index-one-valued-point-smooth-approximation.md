@@ -1,0 +1,59 @@
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-index-one-valued-point-smooth-approximation.json: retained the statement; three-step split with an explicit scaled-generator model, finite defect induction, and final localization. No Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-index-one-differential-defect-criterion.json: new statement-only node, arbitrary index-one DVR-valued differential defect and its zero criterion. Unsplit; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-index-one-residue-dilatation-defect-drop.json: new statement-only node, one concrete residue-centre dilatation, its evaluation map, and defect decrement. Unsplit; no Mathlib match.
+- citations.json: verbatim statement witnesses for every proof-step citation.
+- searches.jsonl: original search-command records. The item retains its previous Q70 searches as history and adds the Q108 searches actually run.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the exact blueprint tag and for index-one, valued-point, Neron, smoothening, dilatation and differential-defect notions. No project declaration states the item or either new lemma. No Lean was written or compiled.
+
+## Literature wanted
+
+WANTED: Bosch–Lütkebohmert–Raynaud, Néron Models, local literature/bosch-lutkebohmert-raynaud-neron-models.pdf, §§3.2–3.3 and 3.6 (printed pp.62–79), for the item and both new nodes; §7.2 Theorem 1 proof (printed pp.176–177), for the affine-model reduction.
+
+The primary scan at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf was read online. No literature or repository files were downloaded or edited. The assembly proof is marked agent-written because the local document is missing and the scaled-generator presentation and induction have been made explicit here.
+
+## Problems found and corrections
+
+The imported item had no proof. BLR 3.6 Proposition 4 is not itself a satisfactory new dependency: it would merely move nearly the whole conclusion to another node. Instead I exposed the preceding differential criterion and Proposition 3's single-step estimate; the item carries the model construction and termination argument itself.
+
+The existing strict-henselization-valued defect and permissible-centre statements cannot be applied to an arbitrary A. I did not identify A with R^sh or assume that the fraction-field extension is separable. BLR 3.6 Definition 1 includes residue separability in its phrase “ramification index 1”; our hypotheses give precisely those two conditions. The flatness implicit in BLR's definition is automatic for an injective local map of DVRs. For the affine models I wrote injectivity of multiplication by the uniformizer explicitly; over a DVR this is the corresponding flatness condition.
+
+The original statement remains unchanged, and no statement dispute was found. Separatedness of W is unnecessary because the construction is entirely inside one affine chart. I corrected the preliminary source pointer for the affine dilatation formula: it occurs in the construction preceding 3.2 Proposition 1; clauses (a)–(b) then give flatness and the universal lifting property.
+
+The current blueprint's six-functor unit and chapter were read. This is a supporting node far below its alteration/trait-extension prerequisite, not the key unit statement. The inherited blueprint.from.node is null, exactly as `tools/blueprint_refs.py ancestor` reports; its full inherited via chain is retained and extended in the new nodes. Searches of the whole imported blueprint for smooth approximation, smoothening, dilatation, ramification index, smooth model, smooth defect, Kahler, differential torsion and index one found no exact duplicate. No unit or chapter record was changed.
+
+## Unfinished work
+
+The two supporting statements remain unsplit, as required for a one-level delivery. There are no Mathlib leaves. Searches returned general smooth-locus, standard-smooth, localization, cotangent-space, valuative-criterion and elliptic-reduction results, none asserting either valued-point defect result. In particular Mathlib/RingTheory/Smooth/Locus.lean:56 describes the smooth locus using H1Cotangent and the free locus of differentials, and its local smooth-neighbourhood lemma starts from IsSmoothAt; neither derives smoothness from the torsion length after evaluation in A. I read that file and the formally smooth and smooth definitions in Smooth/Basic.lean. All recorded new-node searches ran through the mandated msearch.py command, including two different natural-language phrasings for each; no unavailable service was reported in these new searches.
+
+## Not duplicates
+
+lem-sfb-index-one-differential-defect-criterion vs lem-sfb-trait-section-differential-defect-criterion: the existing statement fixes A=R^sh; the new statement permits any index-one DVR extension with separable, possibly transcendental residue extension and provides a principal affine smooth neighbourhood, not just a smoothness-at-section predicate.
+
+lem-sfb-index-one-residue-dilatation-defect-drop vs lem-sfb-permissible-dilatation-section-estimate: the existing statement fixes A=R^sh and a permissible centre with condition (N), a smooth open U and a differential local-freeness condition. The new statement applies to arbitrary A and the specific kernel of B→κ(A); it supplies the index-one residue-point variant of BLR 3.6 Proposition 3. It cannot follow by substituting A into the existing statement.
+
+lem-sfb-index-one-residue-dilatation-defect-drop vs lem-sfb-canonical-group-dilatation-defect-drop: the existing statement concerns the canonical centre in a group scheme and strict-henselization identity-section defect. The new statement has no group and follows a specified arbitrary valued point.
+
+lem-sfb-index-one-residue-dilatation-defect-drop vs lem-sfb-group-dilatation-universal-property: the existing statement concerns group schemes and their dilatation universal property; it has no differential defect inequality. The new statement concerns arbitrary affine finite-type models and one specified residue-point centre.
+
+lem-sfb-index-one-differential-defect-criterion vs lem-sfb-generic-smooth-model-smoothening: the existing statement constructs a global smoothening detected on R^sh points, not the differential defect criterion for a chosen arbitrary DVR-valued point.
+
+lem-sfb-index-one-residue-dilatation-defect-drop vs lem-sfb-dvr-relation-minors-length: the existing statement is a matrix-minor computation of module length and has no dilatation or valued-point statement.
+
+## Review by Q108
+
+I read BLR 7.2 Theorem 1's proof on printed pp.176–177 for the item's affine-model reduction, BLR 3.6 Definition 1 and its discussion on p.78 for the exact extension hypotheses, and p.79's preamble, Proposition 3 and Proposition 4 for the defect criterion, one-step decrement and finite iteration. For the criterion node I also read 3.3's module decomposition and Lemma 1 on p.65; the p.79 preamble expressly extends this criterion to the index-one points under consideration. For the decrement node I read 3.2's affine construction and Proposition 1 on p.63 to check that B[I/π] is the torsion-free chart, with an actual evaluation into A, rather than the unsaturated quotient presentation. The two new nodes state these precise smaller inputs and contain no proof or proof dependencies.
+
+For step 1 I opened the statements of def-sc-discrete-valuation-ring, def-weil-finite-type-morphism, def-weil-affine-spectrum, def-weil-ring-localization-away, def-sbc-smooth-morphisms and def-weil-pbc-finite-type-algebra. The finite-type definition gives a finite affine cover with finite generated coordinate rings, so I select a member of that cover rather than claiming an arbitrary affine open has finite-type coordinate ring without justification. The DVR description gives a uniformizer and valuation-ring interpretation; the same π is a uniformizer of A by hypothesis. Thus scaling finitely many generator values makes them integral. B0 is a subalgebra of C, not merely the algebra generated by their images in L: the latter would lose the generic scheme V when the point is not dominant. The displayed inverse formulas verify its generic-fibre identification, and restriction of a smooth scheme is smooth directly from the affine-local definition (also explicit in the latest blueprint update to the smoothness definition).
+
+For step 2 I checked the full hypotheses and conclusions of both new nodes. B0 has finite type, injective multiplication by π, smooth generic spectrum V, and the specified evaluation into A. The criterion gives a finite integer d. At each application the decrement node itself guarantees every algebraic hypothesis needed at the next application; its map into A extends the preceding evaluation and its generic localization remains C. The index-one and residue separability conditions concern the fixed R→A and hence persist. The invariant δj≤max(0,d−j) includes the base case and the induction step, and at j=d its upper bound is zero. There is no assumed uniform bound over all points, and no circular appeal to the desired smooth model. I marked this step non-elementary because it invokes the two substantive lemmas; the remaining induction arithmetic is elementary.
+
+For step 3 I checked that the criterion's statement literally supplies f with φd(f) a unit and Spec(Bd[1/f]) smooth. The spectrum definition supplies the map a from the localized evaluation; the finite-type and localization definitions show its coordinate algebra is generated by finitely many generators and 1/f. The base-change definition and the explicitly checked generic localizations identify UK with Spec(C[1/f]); the restriction's domain is Spec L because A[1/π]=L. The equality h∘aK=w is verified by the identical algebra map ψ on C, so no compatibility theorem is being silently borrowed. All citations have verbatim statement witnesses in citations.json; I read those statements, not just their titles or proofs.
+
+I checked the B–E error cases against the actual files. Each new statement introduces R,A,π,B,φ,M,T and δ and cites its notions. Every non-elementary ingredient of the assembly is a cited node, and none of the new nodes merely states the original smooth-approximation conclusion. The original statement, source, provenance and earlier searches were retained. Both new statements are tested at A=R and at transcendental separable residue extension A=R[t]_(π). For B=R[x] with φ(x)=0, δ=0 and the centre ideal (π,x) gives B'=R[x/π], again with defect zero, testing the max(0,δ−1) endpoint. For a positive-defect example, let R=k[[π]] with char(k)≠2, A=R, B=R[x]/(x²−π²), φ(x)=π. The evaluated differential module is R/(2π), of length 1; the saturated dilatation has equation t²−1, φ'(t)=1, so its evaluated differential torsion has length zero. Using the unsaturated relation π²(t²−1)=0 would have been wrong. For W=Spec K the construction gives Spec R, and W empty has no w. Zero defect requires no iteration; no completeness or excellence was used in the proof. All proof steps are shorter than 2000 characters, and the complete assembly is shorter than 3000 characters. No SGA source is used.
+
+I checked for duplicate statements over the whole DAG by concepts and literature place, read the existing strict-henselization and group-dilatation statements named above, and searched the blueprint and project source before creating either id. The differences are mathematical hypotheses, not just different titles. I did not create separate nodes for scaling generators, adjoining the inverse of a unit, generic tensor/localization identities, or finite induction. The source PDF remains explicitly WANTED; this is a documented source-availability limitation rather than a hidden literature claim.

@@ -157,20 +157,37 @@
   "module": "Sheaf.AlgebraicGeometry.PrimeToEllDecomposedEtaleFiniteSubcover",
   "declaration": "AlgebraicGeometry.primeToEllDecomposed_etale_finite_subcover",
   "file": "lean/Sheaf/AlgebraicGeometry/PrimeToEllDecomposedEtaleFiniteSubcover.lean",
-  "statement": "theorem primeToEllDecomposed_etale_finite_subcover (X : Scheme.{u}) [IsNoetherian X] (ell : ℕ) (hell : ell.Prime) {I : Type w} (U : I → Scheme.{u}) (f : ∀ i : I, U i ⟶ X) (het : ∀ i : I, Etale (f i)) (hcover : ∀ x : X, ∃ (i : I) (z : U i), f i z = x ∧ ((f i).residueFieldMap z).hom.Finite ∧ Nat.Coprime ((f i).residueDegree z) ell) : ∃ I₀ : Set I, I₀.Finite ∧ ∀ x : X, ∃ i ∈ I₀, ∃ z : U i, f i z = x ∧ ((f i).residueFieldMap z).hom.Finite ∧ Nat.Coprime ((f i).residueDegree z) ell",
+  "statement": "theorem primeToEllDecomposed_etale_finite_subcover (X : Scheme.{u}) [IsNoetherian X] (ell : ℕ) (hEll : ell.Prime) {I : Type w} (U : I → Scheme.{u}) (f : ∀ i : I, U i ⟶ X) (hEtale : ∀ i : I, Etale (f i)) (hCover : ∀ x : X, ∃ (i : I) (z : U i), f i z = x ∧ ((f i).residueFieldMap z).hom.Finite ∧ Nat.Coprime ((f i).residueDegree z) ell) : ∃ I₀ : Set I, I₀.Finite ∧ ∀ x : X, ∃ (i : I) (_ : i ∈ I₀) (z : U i), f i z = x ∧ ((f i).residueFieldMap z).hom.Finite ∧ Nat.Coprime ((f i).residueDegree z) ell",
   "branch": "newtargets-dag",
-  "by": "Q145",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.PrimeToEllDecomposedEtaleFiniteSubcover deleted (dead: no target reaches it); this node is not reached either."
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b8df6cb39",
-  "group": "Q145",
+  "reviewer": "NT-stage2-cc-d7797c777",
+  "group": "NW",
   "result": "pass",
-  "note": "Only the item lean field changes vs live. Each hypothesis/conclusion clause matches ILO II Cor 2.2.4 and the node: IsNoetherian X (≡ finite affine Noetherian cover), ell.Prime, I : Type w arbitrary, Etale (f i), canonical residueFieldMap with explicit RingHom.Finite, Nat.Coprime residueDegree ell, ∃ finite I₀ : Set I with the same property, no conditions on the sources. Edge cases (X or I empty, identity cover, char ℓ, infinite extension) are handled. Not a duplicate: the completely-decomposed sibling is degree 1 and the Alt-S predicate adds hypotheses. Docstrings, source place, blueprint tag, proof steps, rule-7 imports and the verbatim statement are all fine. nt_compile --json: exit 0, 2.6 s, clean. Report uses the standard accepted second-reading form. No findings."
+  "note": "Only the item lean field changes vs side-live, plus one new module with a single sorry theorem; it restores the Q145 statement (passed review 2026-10-19, later deleted as dead in 8a6a58ff1c5); no live clash. Clauses match ILO II Cor 2.2.4 and the node: IsNoetherian X (= locally Noetherian + compact, equivalent to a finite affine Noetherian cover), ell.Prime with no char/invertibility condition, I : Type w free, Etale (f i), canonical residueFieldMap with explicit RingHom.Finite, Nat.Coprime residueDegree ell, ∃ I₀ : Set I finite with the same property, no hypotheses on the sources. Edge cases: empty X, empty I, identity cover, char ℓ, infinite extensions. lean.statement verbatim (script check); docstrings carry the source place, blueprint tag and 3 proof steps; Worker report and Second reading sections present. Not recompiled per instructions; worker scompile clean. Node is currently unreached (parent lem-per-alteration-cover-calculus also lean_removed); dispatcher's call, not a delivery fault. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/PrimeToEllDecomposedEtaleFiniteSubcover.lean",
+  "module": "Sheaf.AlgebraicGeometry.PrimeToEllDecomposedEtaleFiniteSubcover",
+  "declaration": "AlgebraicGeometry.primeToEllDecomposed_etale_finite_subcover",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

@@ -1,0 +1,328 @@
+{
+ "id": "lem-sf-concrete-integral-projection-cone",
+ "kind": "statement",
+ "title": "Complete endpoints and reduced cone of the actual integral projection",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$; put $A_n=R/(t^n)$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Use the operation datum [def-fix-six-functor-datum], not a datum assuming projection invertibility. Schemes are finite type over $k$ and their structure morphisms need not be separated. Use the small pro-etale coefficient categories and the specified compactification projection map [def-exchange-projection], with compact-support functors [def-weil-integral-rational-qbar-compact-support]. Let $f:X\\to Y$ be separated of finite type, $K\\in D^b_c(X,R)$ and $L\\in D^b_{ctf}(Y,R)$ in the derived-complete integral convention [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude]. Put\n$$S=Rf_!K\\widehat\\otimes_R^LL,\\quad T=Rf_!(K\\widehat\\otimes_R^LLf^*L),\\quad u=\\operatorname{PF}_{f,K,L}:S\\to T.$$\nAll the integral objects $Lf^*L$, $K\\widehat\\otimes_R^LLf^*L$, $Rf_!K$, $S$ and $T$ are bounded constructible and derived complete. Their finite reductions have bounded constructible cohomology and finite Tor amplitude in common finite intervals independent of $n$. In particular arbitrary integral $K$ here has uniformly finite-Tor reductions. Under the canonical operation comparisons, the derived reduction of the actual map $u$ at every $n$ is exactly $\\operatorname{PF}_{f,K_n,L_n}$ for $K_n=K\\otimes_R^LA_n$, $L_n=L\\otimes_R^LA_n$. A cone $C$ of $u$ belongs to the same complete constructible category and satisfies the derived identification\n$$C\\otimes_R^LA_n\\cong\\operatorname{Cone}(\\operatorname{PF}_{f,K_n,L_n}).$$\nThese are identifications in the derived category, including the map and its quotient transitions. No existence of a lift of independently chosen finite-level arrows, and no detection of equality of maps by reduction, is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete repair of fix-prop-projection-formula, former proof step(s) 4, 6; Proof, repaired concrete step 6"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-fix-six-functor-datum",
+  "def-exchange-projection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Use integral_residue_tor to identify the integral constructible and uniform finite-Tor predicates, for K and for completed pullback of L. Obtain the pullback constructibility from integralOperations_preserve_constructible.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1, Lemmas 6.5.3–6.5.4; residue Tor test as recorded in lem-coef-integral-residue-tor"
+   }
+  },
+  {
+   "text": "Use the already proved private pull_domains and tensor_domains helpers for the actual ordinary inner tensor. Finite type over the field supplies Noetherianity, finite dimension and invertibility of the coefficient prime; no separated structure map is assumed. The tensor-domain result supplies constructibility and invertibility of the actual completion unit. The qcqs compact-support realization gives constructibility of the ordinary image, and integralDomains gives constructibility of the completed endpoints. Apply residue Tor to all these constructible objects. These are lower typing lemmas; the projection-formula theorem is never invoked.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-exchange-projection",
+    "lem-coef-integral-residue-tor",
+    "lem-kun-dimension-finite-type",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-fix-constructible-tensor-completion",
+    "lem-fix-qcqs-completion-unit-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.5.5, 6.5.9(5), 6.7.7; canonical compact-support comparisons and bounds as recorded in lem-coef-integral-compact-support"
+   }
+  },
+  {
+   "text": "The ordinary proper/open projection square is compactSupportProjectionCoefficientChange. Naturality of finiteReductionIso and of the finite projection transports it to the exact normalized endpoint maps. The qcqs finite compact-support comparison gives their invertibility. The integral projection is inverse source unit followed by the ordinary projection and target unit: functoriality and cancellation of the target unit give the required actual-map square.",
+   "uses": [
+    "lem-pur-compact-support-projection-coefficient-change",
+    "lem-qcqs-compact-support-finite-comparison",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Specified proper-counit/open-tensor projection composite and its coefficient comparisons; concrete integral reduction step"
+   }
+  },
+  {
+   "text": "The triangulated integral constructible subcategory contains every distinguished cone. Give derived scalar extension its triangulated structure via the universal counit-normalized shift theorem, transported along finiteReductionIso. Apply isoTriangleOfIso₁₂ to the reduced distinguished triangle and the given finite cone triangle; the first two components are exactly the stated source and target comparisons.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-sbc-derived-scalar-extension-counit-shift",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; algebraization.tex Tag 0999, definition-derived-complete and following paragraph; derived.tex Tag 014A, lemma-third-isomorphism-triangle"
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat target representative. Mathlib DerivedCategory.right_fac represents the arrow into it by a right fraction. Resolve the source of that fraction by a flat-term K-flat complex, and compose the representing map; the roof equation gives the endpoint identity. TR3 identifies its signed cone with the given cone. Tensoring a cone is the cone of the tensored map, and the triangulated subcategory of acyclic complexes gives cone K-flatness. The universal reduction counit is invertible on that cone. Its representative normalization and naturality give the derived transition equation. The unrestricted and intrinsic ordinary quotient transitions agree by uniqueness of their pure-tensor formulas. The cone transition is the original two-summand cone map of the unrestricted transitions. The generic degreewise cone naturality computation, applied to the intrinsic transition after identifying it with the unrestricted one, proves its strict transition equation with the signed cone comparisons.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "def-weil-integral-reduction-tower",
+    "def-weil-abstract-derived-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YY; cone convention derived.tex Tag 014E (definition-cone); explicit finite direct-sum tensor calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-exchange-projection",
+  "lem-kun-dimension-finite-type",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-fix-constructible-tensor-completion",
+  "lem-fix-qcqs-completion-unit-locality",
+  "lem-pur-compact-support-projection-coefficient-change",
+  "lem-qcqs-compact-support-finite-comparison",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "lem-sf-triangle-morphism-iso",
+  "lem-pc-kflat-resolution",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-weil-integral-reduction-tower",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "K2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Canonical coefficient square, existing ordinary pullback/tensor domain proofs, counit-normalized triangulated reduction, right fractions and actual flat resolutions, and signed-cone naturality. The target statement and the original two-summand cone-transition construction are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete integral compact support projection map has complete constructible cone and its reductions are the finite projection maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.π\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} → Set (I → Bool) → (J : I → Prop) → [(i : I) → Decidable (J i)] → Set (I → Bool)\", \"doc\": \"The set $\\\\pi$ consists of all functions obtained by applying the Nobeling projection map $\\\\text{Proj}(J)$ to elements of the set $C \\\\subseteq (I \\\\to \\\\{\\bot, \\\\top\\\\})$. Specifically, for each $c \\\\in C$, \"}\n  {\"name\": \"Profinite.NobelingProof.πs'\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    [inst : LinearOrder I] →\\n      [inst_1 : WellFoundedLT I] →\\n        {o₁ o₂ : Ordinal.{u}} →\\n          o₁ ≤ o₂ →\\n            LocallyConstant ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord I x < o₁) ℤ →ₗ[ℤ]\\n              LocallyConstant ↑\", \"doc\": \"For ordinals $o_1 \\\\leq o_2$, this is the ℤ-linear map between spaces of locally constant integer-valued functions on the spaces $\\\\pi(C, \\\\text{ord}_I^{-1}(<o_1))$ and $\\\\pi(C, \\\\text{ord}_I^{-1}(<o_2))$,\"}\n  {\"name\": \"Profinite.NobelingProof.πs\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    [inst : LinearOrder I] →\\n      [inst_1 : WellFoundedLT I] →\\n        (o : Ordinal.{u}) →\\n          LocallyConstant ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord I x < o) ℤ →ₗ[ℤ]\\n            LocallyConstant ↑C ℤ\", \"doc\": \"For a fixed ordinal $ o $, the function $ \\\\pi_s $ defines a $ \\\\mathbb{Z} $-linear map from the space of locally constant $ \\\\mathbb{Z} $-valued functions on the subset $ \\\\{c \\\\in C \\\\mid \\\\text{ord}_I(c) \"}\n  {\"name\": \"Profinite.NobelingProof.πJ\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Span\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    [inst : LinearOrder I] →\\n      (s : Finset I) → LocallyConstant ↑(Profinite.NobelingProof.π C fun x => x ∈ s) ℤ →ₗ[ℤ] LocallyConstant ↑C ℤ\", \"doc\": \"The linear map induced by the Nobeling projection restricted to finite subsets, defined as the pullback map from the space of locally constant integer-valued functions on $\\\\pi(C,s)$ to the space of lo\"}\n  {\"name\": \"Profinite.NobelingProof.coe_πs'\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o₁ o₂ : Ordinal.{u}}\\n  (h : o₁ ≤ o₂) (f : LocallyConstant ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord I x < o₁) ℤ),\\n  ((Profinite.NobelingProof.πs' C h) f).toFun = f.toFun ∘ Profinite.Nobeli\", \"doc\": \"For ordinals $o_1 \\\\leq o_2$, the underlying function of the ℤ-linear map $\\\\pi_s'$ between spaces of locally constant integer-valued functions on $\\\\pi(C, \\\\text{ord}_I^{-1}(<o_1))$ and $\\\\pi(C, \\\\text{ord\"}\n  {\"name\": \"Profinite.NobelingProof.ProjRestrict\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) → (J : I → Prop) → [inst : (i : I) → Decidable (J i)] → ↑C → ↑(Profinite.NobelingProof.π C J)\", \"doc\": \"The function restricting the Nobeling projection map $\\\\text{Proj}_J$ to the set $C$, mapping each function $c \\\\in C$ to its projection $\\\\text{Proj}_J(c)$ in the image set $\\\\pi(C, J)$. This projection \"}\n  {\"name\": \"Profinite.NobelingProof.πs'_apply_apply\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o₁ o₂ : Ordinal.{u}}\\n  (h : o₁ ≤ o₂) (g : LocallyConstant ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord I x < o₁) ℤ)\\n  (a : ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord I\", \"doc\": \"For any $ g $ in the space of locally constant $\\\\mathbb{Z}$-valued functions on $\\\\pi(C, \\\\text{ord}_I^{-1}(<o_1))$ and any $ a $ in $\\\\pi(C, \\\\text{ord}_I^{-1}(<o_2))$, the evaluation of the linear map $\"}\n  {\"name\": \"Profinite.NobelingProof.iso_map\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    (J : I → Prop) →\\n      [inst : (i : I) → Decidable (J i)] → C(↑(Profinite.NobelingProof.π C J), ↑(Profinite.IndexFunctor.obj C J))\", \"doc\": \"The continuous map from the Nobeling projection image $\\\\pi(C,J)$ to the index functor image $\\\\text{IndexFunctor.obj}(C,J)$, defined by restricting functions to the subtype $\\\\{i \\\\in I \\\\mid J(i)\\\\}$ and \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic compact support projection formula from reduction of the canonical map and derived Nakayama",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) → (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → M →ₗ[R] AdicCompletion I M\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"IsAdicComplete.of_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : ∀ (n : ℕ), M →ₗ[R] N ⧸ (I ^ n • ⊤ : Submodule R N))\\n  (h : ∀ {m n : ℕ} (hle : m ≤ n), factorPow I N hle ∘ₗ f n = f m) (x : M) :\\n  of I N (lift I f h x) = AdicCompletion.lift I f h x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"Hausdorffification.lift_comp_of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : M →ₗ[R] N) : (lift I f).comp (of I M) = f\", \"doc\": \"For a commutative ring $ R $, ideal $ I $, $ R $-modules $ M $ and $ N $ where $ N $ satisfies the Hausdorff condition $ \\\\bigcap_{n \\\\geq 1} I^n N = 0 $, and a linear map $ f : M \\\\to N $, the compositi\"}\n  {\"name\": \"AdicCompletion.kerProj\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        {A : Type u_4} →\\n          [inst_2 : CommRing A] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R S] →\\n                {f : S →ₐ[R] A} → Function.Surjective ⇑f → AdicCompletion\", \"doc\": \"Let $R, S, A$ be commutative rings, where $S$ and $A$ are algebras over $R$. For any surjective $R$-algebra homomorphism $f: S \\\\to A$, this definition constructs an $R$-algebra homomorphism from the a\"}\n  {\"name\": \"PadicInt.cast_toZModPow\", \"module\": \"Mathlib.NumberTheory.Padics.RingHoms\", \"type\": \"(m n : ℕ) (h : m ≤ n) (x : ℤ_[p]) : ZMod.cast (toZModPow n x) = toZModPow m x\", \"doc\": \"For natural numbers $m$ and $n$ with $m \\\\leq n$, and for any $p$-adic integer $x \\\\in \\\\mathbb{Z}_p$, the canonical coercion of the projection of $x$ to $\\\\mathbb{Z}/p^n\\\\mathbb{Z}$ into $\\\\mathbb{Z}/p^m\\\\m\"}\n  {\"name\": \"IsAdicComplete.of_comp_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : ∀ (n : ℕ), M →ₗ[R] N ⧸ (I ^ n • ⊤ : Submodule R N))\\n  (h : ∀ {m n : ℕ} (hle : m ≤ n), factorPow I N hle ∘ₗ f n = f m) : of I N ∘ₗ lift I f h = AdicCompletion.lift I f h\", \"doc\": \"Let $R$ be a commutative ring, $I$ be an ideal of $R$, and $M, N$ be $R$-modules. Assume that $N$ is $I$-adically complete. Let $(f_n : M \\\\to N/I^n N)_{n \\\\in \\\\mathbb{N}}$ be a compatible family of $R$\"}\n  {\"name\": \"AdicCompletion.evalOneₐ_of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"(x : R) : evalOneₐ I (of I R x) = x\", \"doc\": \"For any element $ x $ in a commutative ring $ R $, the composition of the canonical map from $ R $ to its $ I $-adic completion and the evaluation homomorphism from the $ I $-adic completion to the qu\"}\n  {\"name\": \"AdicCompletion.eval_comp_of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(n : ℕ) : (eval I M n).comp (of I M) = mkQ _\", \"doc\": \"For each natural number $n$, the composition of the evaluation map from the $I$-adic completion of $M$ to $M/I^nM$ and the canonical linear map from $M$ to its $I$-adic completion equals the canonical\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"cone\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"DerivedCategory.mappingCocone_triangle_distinguished\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] {K L : CochainComplex C ℤ} (φ : K ⟶ L) : DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCocone.triangle φ) ∈ CategoryTheory.Pretriangulated.distinguishedTriangles\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.mappingCone_triangle_distinguished\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] {K L : CochainComplex C ℤ} (φ : K ⟶ L) : DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle φ) ∈ CategoryTheory.Pretriangulated.distinguishedTriangles\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(complete|adic)|[Nn]akayama",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"line\": \"135\", \"text\": \"`πᵢ : (Π i, R i) →+* R i` is the projection. For a complete description of all prime ideals,\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Nakayama.lean\", \"line\": \"12\", \"text\": \"# Nakayama's lemma\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Nakayama.lean\", \"line\": \"16\", \"text\": \"* `exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul` is Nakayama's lemma, in the following form:\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Nakayama.lean\", \"line\": \"26\", \"text\": \"/-- **Nakayama's Lemma**. Atiyah-Macdonald 2.5, Eisenbud 4.7, Matsumura 2.2. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"102\", \"text\": \"/-- If `A` is formally smooth over `R`, the projection from the adic completion of\"}\n  {\"file\": \"Mathlib/RingTheory/Nakayama.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.Finiteness.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/Nakayama.lean\", \"line\": \"13\", \"text\": \"# Nakayama's lemma\"}\n  {\"file\": \"Mathlib/RingTheory/Nakayama.lean\", \"line\": \"15\", \"text\": \"This file contains some alternative statements of Nakayama's Lemma as found in\"}\n  {\"file\": \"Mathlib/RingTheory/Nakayama.lean\", \"line\": \"16\", \"text\": \"[Stacks: Nakayama's Lemma](https://stacks.math.columbia.edu/tag/00DV).\"}\n  {\"file\": \"Mathlib/RingTheory/Nakayama.lean\", \"line\": \"21\", \"text\": \"  [Stacks: Nakayama's Lemma](https://stacks.math.columbia.edu/tag/00DV),\"}\n  {\"file\": \"Mathlib/RingTheory/Jacobson/Radical.lean\", \"line\": \"203\", \"text\": \"/-- A form of Nakayama's lemma for modules over noncommutative rings. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/IdempotentFG.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Finiteness.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/Support.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Cotangent.lean\", \"line\": \"17\", \"text\": \"public import Mathlib.RingTheory.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"line\": \"176\", \"text\": \"/-- The canonical projection from the `I`-adic completion to `R ⧸ I`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"line\": \"480\", \"text\": \"/-- The canonical projection from the `I`-adic completion of `S` to `S ⧸ I`. Defined\"}\n  {\"file\": \"Mathlib/RingTheory/Filtration.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.Finiteness.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Module.lean\", \"line\": \"16\", \"text\": \"public import Mathlib.RingTheory.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Module.lean\", \"line\": \"186\", \"text\": \"    -- By Nakayama's lemma, it suffices to show that `k ⊗ ker(i) = 0`.\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Module.lean\", \"line\": \"376\", \"text\": \"    -- By Nakayama's lemma, `l` is injective.\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Quotient.lean\", \"line\": \"16\", \"text\": \"public import Mathlib.RingTheory.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Etale.lean\", \"line\": \"92\", \"text\": \"The proof lifts a primitive element of the residue field extension via Nakayama's lemma. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/Free.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Nakayama\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/MaximalIdeal/Square.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Nakayama\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"cone\"",
+   "results": "Logged search: OK, 2 hits; DerivedCategory.mappingCocone_triangle_distinguished, DerivedCategory.mappingCone_triangle_distinguished",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the complete constructible pro-etale projection-map and compatible cone reduction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical projection map for derived complete constructible integral sheaves reduces to the finite coefficient projection map and its cone reduces to the cone",
+   "results": "Logged search: OK, 8 hits; Condensed.isColimitLocallyConstantPresheaf_desc_apply, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.lanSheafProfinite, LightCondAb.ofSheafLightProfinite, LightCondensed.isColimitLocallyConstantPresheafDiagram, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the complete constructible pro-etale projection-map and compatible cone reduction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(complete|adic)|reduction.*[Cc]one",
+   "results": "Logged search: OK, 22 hits; Mathlib/RingTheory/Spectrum/Prime/RingHom.lean, Mathlib/RingTheory/Smooth/AdicCompletion.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/Order/Category/CompleteLat.lean, Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean, Mathlib/Analysis/Normed/Module/Bases.lean, Mathlib/Analysis/Normed/Module/Bases.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the complete constructible pro-etale projection-map and compatible cone reduction assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete integral constructible sheaves compact support tensor pullback coefficient reduction canonical projection formula cone",
+   "results": "Logged search: OK, 8 hits; SheafOfModules.pullback, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', CategoryTheory.CommSq.cocone, CompHausLike.pullback.cone_π, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.IsPullback.cone, CategoryTheory.Sheaf.coneΓ_π_app, CategoryTheory.Sheaf.coneΓ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the complete constructible pro-etale projection-map and compatible cone reduction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic sheaves completed pullback tensor and compact support preserve bounded constructibility and uniform finite Tor amplitude with coefficient change compatibility",
+   "results": "Logged search: OK, 8 hits; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, LightCondensed.instMonoidalClosedLightCondMod, AdicCompletion.ofTensorProduct, LightCondensed.instMonoidalCategoryLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the complete constructible pro-etale projection-map and compatible cone reduction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProductEquivOfFiniteNoetherian|mappingCone_triangle_distinguished",
+   "results": "Logged search: OK, 7 hits; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the complete constructible pro-etale projection-map and compatible cone reduction assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof: integral reconstruction sentence “Thus [thm-sf-pf-adic] reconstructs the integral map”; complete endpoints and actual-map reduction/cone prerequisites (former concrete steps 4 and 6)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-concrete-integral-projection-cone",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused residue Tor, completed operation preservation, compact support realization, actual structural-map reduction, triangulated closure and K-flat cone tools; supplied a strict quotient-transition calculation. No new nodes; no PF invertibility or reduction faithfulness used.",
+  "blueprint": "fix-prop-projection-formula proof, integral reconstruction sentence; realizes the complete endpoints and canonical reduced-map/cone part of former concrete steps 4 and 6.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Uniform Tor test for arbitrary integral constructible inputs and outputs, independent of projection invertibility."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Primitive completed pullback/tensor constructibility and canonical reduction comparisons."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension needed to apply the compact-support bound."
+   },
+   {
+    "node": "lem-coef-integral-compact-support",
+    "why": "Canonical complete compact-support realization and its uniform finite reduction bounds."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Compatibility of actual operation maps, units and counits under coefficient reduction."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Cone closure of the integral constructible category."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exact triangulated reduction, computed on K-flat resolutions."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Compares any cone triangle with the chosen strict cone model."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat resolution of a representative complex."
+   },
+   {
+    "node": "lem-pur-kflat-map-factorization",
+    "why": "Represents the actual arrow between K-flat flat-term endpoints."
+   },
+   {
+    "node": "lem-sfb-kflat-homotopy-triangulated",
+    "why": "K-flatness of the chain-map cone for computing derived reductions."
+   },
+   {
+    "node": "lem-weil-integral-reduction-tower-well-defined",
+    "why": "Resolution-independent canonical quotient transitions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-integral-residue-tor",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-triangle-morphism-iso",
+  "lem-pc-kflat-resolution",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-cec59b603",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-cec59b603 (reviewer sub-agent of L); spot-checked: Stage-1 split of lem-sf-concrete-integral-projection-cone: 5 steps, no new nodes, statement unchanged. I read the item, the parent fix-prop-projection-formula (whose step 4 uses this item), all 16 cited statements, thm-sf-pf-adic, prop-sf-pf-reduction, the unit sk-rem-sf-pf-done, the main-20261015 fix-prop-projection-formula proof, and Stacks 06YY/0999/014A/06YS/0G7D. Steps 1-2: the residue-Tor lemma (ℓ is invertible on finite-type k-schemes) and the preservation/compact-support tools are applied with every hypothesis met (d from kun-dimension, a uniform Tor interval for K and for B), and no separatedness of X or Y is used. Step 4: rotation plus cone closure gives C in D^b_c, and the exact change of rings, TR3 and the third-iso lemma are correct. Step 5: the K-flat factorization gives v representing u, Cone(v) is K-flat, and I checked the termwise cone identity and the transitions by hand. Fault C4 in step 3, fixed: compatibility with the successive-reduction transitions was attributed to lem-fix-operation-reduction, which states no such compatibility. It is supplied by the integral-stage datum of def-exchange-projection and by the successive-reduction clause of lem-coef-integral-compact-support. I rewrote that sentence and added lem-coef-integral-compact-support to the step-3 uses; it was already in proof_deps. Advisory: step 3 does not list bounded domains for the intermediate objects on the compactification. These are covered by the domains that def-exchange-projection supplies and by the step-2 tools, at the same level of detail as the accepted thm-sf-pf-adic step 4. Edge cases checked: K=0, L=0, f=id, X empty, n=1, R/(t). No cycle, no SGA. All declared tool_uses accepted. Maintainer note: the item's content is a sub-part of thm-sf-pf-adic (steps 1, 3, 4). Combined with residue-tor (D^b_c = D^b_ctf), citing thm-sf-pf-adic would be the blueprint's own route for parent step 4. The node was created by the reviewed parent re-split, so this is not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConcreteIntegralProjectionCone",
+  "declaration": "WeilConjectures.ConcreteIntegralProjection.concreteIntegralProjectionCone",
+  "declarations": [
+   "WeilConjectures.ConcreteIntegralProjection.finiteArrow",
+   "WeilConjectures.ConcreteIntegralProjection.ordinarySourceComparison",
+   "WeilConjectures.ConcreteIntegralProjection.ordinaryTargetComparison",
+   "WeilConjectures.ConcreteIntegralProjection.targetComparison",
+   "WeilConjectures.ConcreteIntegralProjection.coneComparison",
+   "WeilConjectures.ConcreteIntegralProjection.coneTransition",
+   "WeilConjectures.ConcreteIntegralProjection.derivedConeComparison",
+   "WeilConjectures.ConcreteIntegralProjection.restrictedDerivedConeComparison",
+   "WeilConjectures.ConcreteIntegralProjection.reductionShift",
+   "WeilConjectures.ConcreteIntegralProjection.sourceComparison",
+   "WeilConjectures.ConcreteIntegralProjection.targetUnit",
+   "WeilConjectures.ConcreteIntegralProjection.concreteIntegralProjectionCone"
+  ],
+  "file": "lean/Sheaf/Paper/ConcreteIntegralProjectionCone.lean",
+  "statement": "theorem concreteIntegralProjectionCone (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (r : ℕ) (hr : 1 ≤ r) (_operations : SixFunctorOperationDatum D ({ l := l, different := hl, Qbar := Ω } : D.CoefficientDatum) E r hr) (aX : SfProEtaleProjection.TensorModel l E X) (aZ : SfProEtaleProjection.TensorModel l E c.Z) (aY : SfProEtaleProjection.TensorModel l E Y) (K : sfIntegralConstructibleCategory l E X) (L : sfIntegralConstructibleCategory l E Y) (_hL : finiteTorConstructibleIntegral l E Y L.obj) : finiteTorConstructibleIntegral l E X K.obj ∧ finiteTorConstructibleIntegral l E X ((integralDerivedPullback l E f).obj L.obj) ∧ finiteTorConstructibleIntegral l E X ((IntegralOnSlice.completion l E X none).obj (SfProEtaleProjection.ordinaryInner l E f aX K.obj L.obj)) ∧ finiteTorConstructibleIntegral l E Y ((image (completed l E) c).obj K.obj) ∧ finiteTorConstructibleIntegral l E Y (SfProEtaleProjection.completedSource l E c aY K.obj L.obj) ∧ finiteTorConstructibleIntegral l E Y (SfProEtaleProjection.completedTarget l E c aX K.obj L.obj) ∧ ∃ h : ∀ n : ℕ, IsIso ((scalarReductionDerivedExtension l E Y n).map (targetUnit l E c aX K.obj L.obj)), (∀ n : ℕ, IsIso (sourceComparison l E c D hl aX aY K L n) ∧ IsIso (targetComparison l E c aX K.obj L.obj n (h n)) ∧ (scalarReductionDerivedExtension l E Y n).map (SfProEtaleProjection.integralMap l E D hl f c aX aZ aY K L).hom ≫ targetComparison l E c aX K.obj L.obj n (h n) = sourceComparison l E c D hl aX aY K L n ≫ (finiteArrow l E c K.obj L.obj n).hom) ∧ (∀ (C : DerivedCategory (scalarReductionSource l E Y)) (g : SfProEtaleProjection.completedTarget l E c aX K.obj L.obj ⟶ C) (d : C ⟶ (SfProEtaleProjection.completedSource l E c aY K.obj L.obj)⟦(1 : ℤ)⟧), Triangle.mk (SfProEtaleProjection.integralMap l E D hl f c aX aZ aY K L).hom g d ∈ distTriang _ → sfIntegralConstructible l E Y C ∧ (∀ (n : ℕ) (Cn : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E (n + 1))) (gn : (finiteArrow l E c K.obj L.obj n).right ⟶ Cn) (dn : Cn ⟶ (finiteArrow l E c K.obj L.obj n).left⟦(1 : ℤ)⟧), Triangle.mk (finiteArrow l E c K.obj L.obj n).hom gn dn ∈ distTriang _ → ∃ e : (@Functor.mapTriangle _ _ _ _ _ _ (scalarReductionDerivedExtension l E Y n) (reductionShift l E Y n)).obj (Triangle.mk (SfProEtaleProjection.integralMap l E D hl f c aX aZ aY K L).hom g d) ≅ Triangle.mk (finiteArrow l E c K.obj L.obj n).hom gn dn, e.hom.hom₁ = sourceComparison l E c D hl aX aY K L n ∧ e.hom.hom₂ = targetComparison l E c aX K.obj L.obj n (h n)) ∧ ∃ (P Q : CochainComplex (scalarReductionSource l E Y) ℤ) (v : P ⟶ Q), proEtaleFlatRepresentatives Y (completedIntegralCommRingSheafUnrestricted l E Y) P ∧ proEtaleFlatRepresentatives Y (completedIntegralCommRingSheafUnrestricted l E Y) Q ∧ ∃ (eP : DerivedCategory.Q.obj P ≅ SfProEtaleProjection.completedSource l E c aY K.obj L.obj) (eQ : DerivedCategory.Q.obj Q ≅ SfProEtaleProjection.completedTarget l E c aX K.obj L.obj), DerivedCategory.Q.map v ≫ eQ.hom = eP.hom ≫ (SfProEtaleProjection.integralMap l E D hl f c aX aZ aY K L).hom ∧ ∃ eC : DerivedCategory.Q.obj (CochainComplex.mappingCone v) ≅ C, (∀ n : ℕ, IsIso (derivedConeComparison l E Y v eC n)) ∧ (∀ n : ℕ, IsIso (restrictedDerivedConeComparison l E Y v eC n)) ∧ (∀ n : ℕ, (sfDerivedReductionTransition l E Y n).app C ≫ restrictedDerivedConeComparison l E Y v eC n = restrictedDerivedConeComparison l E Y v eC (n + 1) ≫ DerivedCategory.Q.map (coneTransition l E Y v n)) ∧ ∀ n : ℕ, unrestrictedTowerTransition l E Y (CochainComplex.mappingCone v) n ≫ (coneComparison l E Y v n).hom = (coneComparison l E Y v (n + 1)).hom ≫ coneTransition l E Y v n)",
+  "branch": "sheaf-dag",
+  "by": "Q85",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The completed integral map and finite projection are the published normalized proper-counit/open composites. All helpers contain explicit canonical data. The theorem retains complete constructible and uniform Tor bounds, the actual reduction square, triangle isomorphisms with specified endpoint components, and a strict K-flat cone model with canonical derived quotient-transition compatibility. No projection-invertibility hypothesis is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6accaa619",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Checked every clause against the node and the declarations it uses. Hypotheses: finite field datum, l≠p, finite E, A_n as index n+1; X, Y finite type over k without separatedness; f separated of finite type; K integral constructible; L integral constructible plus uniform finite Tor. Conclusion: uniform finite Tor for K, Lf*L, completed tensor, Rf_!K, S, T. u = SfProEtaleProjection.integralMap (the arrow sk-thm-sf-pf-proetale states is invertible); finite PF = finiteReductionProjection (same projectionMap as prop-sf-pf-reduction). Reduction square uses canonical source/target comparisons (IsIso, node order). Every distinguished cone C is sfIntegralConstructible, with a triangle iso to any cone of PF_n whose first two components are pinned. Quotient transitions via a flat K-flat chain-map model v. No hollow helpers, Nonempty or free arrows; only the theorem is sorry; source/blueprint docstrings and a 5-step proof docstring present; recorded statement verbatim; declaration list exact; node change is the lean field only; no stage-3 cycle. No compile run (no file changed). Advisories only: (1) decls owned by nodes outside stmt_deps (theorem nodes sk-thm-sf-pf-proetale, prop-sf-pf-reduction, reduction-tower nodes, def-pur-integral-derived-operations), per precedent; (2) unused stmt_dep decls: ExchangeProjectionStage, sfQcqsCompactSupportRealization, operation datum (passed, unused); (3) transitions rendered via the K-flat cone model; transition compatibility of the source/target comparisons not stated separately."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-00339",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T023420-L-563644",
+  "kind": "interface",
+  "note": "independent cc review: delivered ConcreteIntegralProjectionCone.lean vs clones/live (statements of changed defs definitionally identical, item theorem unchanged); node lem-sf-concrete-integral-projection-cone proof_deps vs the private domain helpers in SfProEtaleProjectionFormula; #print axioms in a scratch copy (sorryAx only via the upstream sorry compactSupportProjectionCoefficientChange and the unchanged upstream defs)"
+ }
+}

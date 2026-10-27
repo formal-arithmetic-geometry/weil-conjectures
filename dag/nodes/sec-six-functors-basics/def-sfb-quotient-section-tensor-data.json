@@ -1,0 +1,138 @@
+{
+ "id": "def-sfb-quotient-section-tensor-data",
+ "kind": "definition",
+ "title": "The fixed quotient scalar tensor and section normalization interfaces",
+ "statement": "Let Λ and Λ′ be commutative condensed rings, let a : Λ → Λ′ be a unital ring morphism, and use their pulled-back coefficient rings on each small pro-etale site [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Fix the internal/section module equivalences [def-weil-pbc-internal-abelian-sheaf-module-equivalence], unbounded derived tensor and pullback [sk-def-sfb-derived-tensor-hom, sk-def-sfb-module-derived-pushpull], and actual operation comparisons [lem-pd-section-derived-pushpull-normalization, def-sfb-module-object-projection-map]. Record the section ring map induced by a, its sheafified extension-of-scalars cochain model [lem-pur-derived-change-of-rings], and the total scalar balancing map. TensorNormalized is the scalar tensor/counit square on every flat-term K-flat pair. ScalarSectionData consists of an ordinary section extension model, its ordinary comparison and its derived comparison. ScalarSectionNormalized fixes the scalar-unit generator and the computation square on every complex. UnitCondition records invertibility of the localized regular units and the three monoidal constraint equations. SectionTensorNormalized fixes the sheafified balancing generator and its cochain square; TensorSectionCondition is conjugation by the fixed scalar and tensor comparisons. GeometricCondition identifies the specified native pullback tensorator, adjunction unit and counit through the fixed section comparisons. SectionPullNormalized fixes the ordinary scalar/pullback balancing map and its all-complex computation square; PullSectionCondition conjugates the specified scalar/pullback transformation by those same comparisons. All formulas are the exact Lean definitions, with no flatness of a or boundedness assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0G7E, 07A4, 07A6; sites-modules.tex Tags 03EK and 03EL. Extracted from lem-sfb-quotient-section-tensor-normalization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pd-section-derived-pushpull-normalization",
+  "def-sfb-module-object-projection-map",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The parent proof steps, specialized to the actual condensed coefficient map and fixed internal/section comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars is monoidal and its canonical tensor comparison commutes with pullback and computation counits",
+   "results": "Ordinary module extension, its counit and pseudofunctor composition; monoidal adjunction counit. No exact match for the specified unbounded internal/section comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project generic derived-monoidal API and section comparison interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedTensorComparison",
+   "results": "Unknown identifier: a project declaration outside the Mathlib search environment.",
+   "date": "2026-10-27",
+   "verdict": "Read the existing project declaration directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is a strong monoidal functor, computed on K-flat complexes by the tensor balancing map",
+   "results": "Tor, exact mapDerivedCategory, and ordinary tensor constructions; no direct normalized section comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic derived comparison found locally in WeilConjectures."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalized|ScalarSectionNormalized|SectionPullNormalized",
+   "results": "Mathlib search has no matches. Local search finds the fixed project definitions, the restricted coefficient normalization and the downstream private canonicalScalarTensorIso computations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic computations without importing the circular downstream module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorNormalization",
+  "date": "2026-10-27",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-normalization",
+   "place": "Separated construction and normalization steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorData",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.sectionQuotient",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.sectionQuotient",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.SectionModel",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.totalScalar",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.TensorNormalized",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarRegularUnit",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.ScalarSectionData",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.ScalarSectionNormalized",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.TensorIso",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.derivedScalarUnit",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.UnitCondition",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.sectionScalarElement",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.SectionTensorNormalized",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.TensorSectionCondition",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.GeometricCondition",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.SectionPullNormalized",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.PullSectionCondition"
+  ],
+  "statement": "abbrev sectionQuotient (T : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "independent cc review: Data split diffed byte-for-byte vs clone item (only blueprint tags differ); item proof vs ComparisonSpec; 3 holes vs plan steps 1/2-5/8; nodes vs Lean; 3 direct importers + all 11 delivered modules compiled in /tmp/t3rev (all OK); #print axioms clean except sorryAx via the 3 holes"
+ }
+}

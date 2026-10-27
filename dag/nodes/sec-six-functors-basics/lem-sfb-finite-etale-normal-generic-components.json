@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-finite-etale-normal-generic-components",
+ "kind": "statement",
+ "title": "Generic fields and normalization components of a finite etale cover",
+ "statement": "Let $X$ be a normal integral Noetherian scheme, with function field $F$, and let $p:Y\\to X$ be finite etale [def-pc-integral-scheme, def-sc-function-field, def-weil-finite-integral-morphism, def-weil-etale-morphism]. Here Noetherian means locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], and normal means every local ring is an integrally closed domain. There is a finite set $I$ and a disjoint union $Y=\\coprod_{i\\in I}Y_i$ into nonempty open and closed integral normal subschemes. Each $Y_i\\to X$ is finite etale and surjective. Put $F_i=k(Y_i)$. There are compatible identifications\n$$Y\\times_X\\operatorname{Spec}F\\cong\\coprod_{i\\in I}\\operatorname{Spec}F_i,$$\nwhere each $F_i/F$ is finite separable; moreover $Y_i$ is canonically the normalization of $X$ in $F_i$ [def-fin-normalization-extension]. Thus every field factor of the generic finite etale algebra is the function field of exactly one $Y_i$, and its normalization over $X$ is finite etale. The empty cover corresponds to $I=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BQL, lemma-finite-etale-covering-normal-unramified, statement and first proof paragraph (finite decomposition into integral normal components, generic points dominate); generic finite etale field factors as in Tag 02GL, morphisms-lemma-etale-over-field."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-fin-normalization-extension",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "First $Y$ is Noetherian. Indeed, over any affine $V=\\operatorname{Spec}A\\subseteq X$, finiteness gives $p^{-1}V=\\operatorname{Spec}B$ with $B$ a finite $A$-module [def-weil-finite-integral-morphism]. A finite list of module generators also generates $B$ as an $A$-algebra; and the single affine $\\operatorname{Spec}B$ is a finite affine cover of the inverse image. Thus $p$ is of finite type by [def-weil-finite-type-morphism]. Apply [lem-weil-pbc-finite-type-over-noetherian] to the given Noetherian $X$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL, lemma-finite-etale-covering-normal-unramified, first proof paragraph; Noetherian specialization justified by Morphisms Tag 01T6, lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "Apply [lem-fin-etale-normal-components] to the etale map $Y\\to X$, using step 1 and normal integrality of $X$. This gives a finite disjoint union of open-and-closed normal integral subschemes $Y_i$. Write $I$ for the finite indexing set. Each $Y_i$ is nonempty because an integral scheme is nonempty [def-pc-integral-scheme]. If $Y$ is empty use the empty family. Conversely a nonempty summand cannot occur in an empty scheme.",
+   "uses": [
+    "lem-fin-etale-normal-components",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL, first proof paragraph, normality and disjoint integral components; Properties Tag 0357, lemma-normal-locally-finite-nr-irreducibles."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-etale-clopen-restriction] to each nonempty clopen $Y_i\\subseteq Y$. The base $X$ is irreducible because it is integral. Thus each $p_i:Y_i\\to X$ is finite etale and surjective.",
+   "uses": [
+    "lem-sfb-finite-etale-clopen-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035C (lemma-closed-immersion-finite), 01WK (lemma-composition-finite), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), 01WN (lemma-finite-proper), and 03WT (lemma-etale-open): restriction to a clopen source subset, followed by the open-and-closed image argument over an irreducible target."
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-sfb-integral-finite-etale-generic-field] to $p_i$ between the integral schemes $Y_i$ and $X$. It gives the finite separable extension $F_i/F$ and the canonical component generic-fibre isomorphism, with both projections.",
+   "uses": [
+    "lem-sfb-integral-finite-etale-generic-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), part (2), with Tag 01RV (lemma-integral-scheme-rational-functions); affine generic fibre and localization calculation in the proof of the returned item, step 5."
+   }
+  },
+  {
+   "text": "Each open subscheme $Y_i$ is locally Noetherian, since $Y$ is Noetherian [pqf-def-locnoeth]. It is normal integral by step 2, and $F_i/F$ is finite by step 4. Apply [lem-sfb-finite-normal-cover-normalization] to $p_i$. Its affine integral-closure equalities give the canonical normalization isomorphism inducing the identity on $F_i$. This normalization is finite etale by step 3.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-sfb-finite-normal-cover-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I (lemma-characterize-normalization), applied to the generic-point map and a finite normal integral cover; Properties Tag 0358 (lemma-normal-integral-sections) and Algebra Tag 00GK (lemma-finite-is-integral). Affine integral-closure argument of returned steps 6--7."
+   }
+  },
+  {
+   "text": "Finally apply [lem-sc-etale-fibre-product-base-change-coproduct] to $Y=\\coprod_iY_i$ and $\\operatorname{Spec}F\\to X$. With the component identifications of step 4 this gives the required compatible $F$-isomorphism $Y\\times_X\\operatorname{Spec}F\\cong\\coprod_i\\operatorname{Spec}F_i$. Equivalently its algebra is $\\prod_iF_i$. The primitive nonzero idempotents of a finite product of fields are exactly the coordinate idempotents: an idempotent in a field is $0$ or $1$, and one with two nonzero coordinates splits into two orthogonal nonzero idempotents. Hence every field factor, understood as a factor indexed by its primitive idempotent, comes from exactly one component $Y_i$; distinct isomorphic field factors are still distinct factors. Step 5 identifies its normalization with that $Y_i$. All assertions for the empty cover hold with $I=\\varnothing$, the empty fibre and the zero generic algebra.",
+   "uses": [
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL, finite disjoint component decomposition; Tag 02GL, finite separable generic fibres; Schemes Tags 01JB and 01JC, gluing after base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-etale-normal-components",
+  "def-pc-integral-scheme",
+  "lem-sfb-finite-etale-clopen-restriction",
+  "lem-sfb-integral-finite-etale-generic-field",
+  "pqf-def-locnoeth",
+  "lem-sfb-finite-normal-cover-normalization",
+  "lem-sc-etale-fibre-product-base-change-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BQL, lemma-finite-etale-covering-normal-unramified, both proof paragraphs; generic fibre clause from Morphisms Tag 02GL. The normalization identification is expanded on affine charts using Properties Tag 0358."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Connected components of a finite etale cover of a normal integral scheme are integral normal schemes equal to normalization in their generic fields",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integral-normalization instances do not identify the connected components of a finite etale cover with its generic field factors; Etale.iff_exists_algEquiv_prod treats a field base only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"Etale\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integral-normalization instances do not identify the connected components of a finite etale cover with its generic field factors; Etale.iff_exists_algEquiv_prod treats a field base only."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Ee]tale|[Ee]tale.*normalization|[Ee]tale.*[Nn]ormal",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integral-normalization instances do not identify the connected components of a finite etale cover with its generic field factors; Etale.iff_exists_algEquiv_prod treats a field base only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale cover of normal integral scheme normalization in a finite separable field extension connected components",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integral-normalization instances do not identify the connected components of a finite etale cover with its generic field factors; Etale.iff_exists_algEquiv_prod treats a field base only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic field factors of a finite etale algebra over a normal noetherian domain extend uniquely as its integral closure factors",
+   "results": "8 hits; KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span, KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map, Ideal.Factors.liesOver, Polynomial.instEtaleUniversalCoprimeFactorizationRing, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integral-normalization instances do not identify the connected components of a finite etale cover with its generic field factors; Etale.iff_exists_algEquiv_prod treats a field base only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale cover of a normal integral Noetherian scheme is a disjoint union of normalizations in finite separable function fields",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalization",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization coproduct constructions do not state the etale normal-component and generic-field identification; Algebra.Etale.iff_exists_algEquiv_prod classifies algebras over a field only."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Ee]tale|[Ee]tale.*normalization|[Ee]tale.*[Nn]ormal",
+   "results": "0 hits; ; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization coproduct constructions do not state the etale normal-component and generic-field identification; Algebra.Etale.iff_exists_algEquiv_prod classifies algebras over a field only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected components of finite etale covers of normal integral schemes and their separable function fields",
+   "results": "8 hits; Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallyEtale.of_isSeparable_aux, separableClosure, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Field.sepDegree",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization coproduct constructions do not state the etale normal-component and generic-field identification; Algebra.Etale.iff_exists_algEquiv_prod classifies algebras over a field only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"Etale\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization coproduct constructions do not state the etale normal-component and generic-field identification; Algebra.Etale.iff_exists_algEquiv_prod classifies algebras over a field only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale algebra over a normal domain equals the product of integral closures in its generic field factors",
+   "results": "8 hits; Algebra.Etale.iff_exists_algEquiv_prod, instFintypeAlgEquivOfIsDomainOfIsIntegrallyClosedOfFiniteOfIsTorsionFree, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Ring.instFiniteNormalClosure, Ring.instFiniteNormalClosure_1, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Ideal.exists_comap_galRestrict_eq, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization coproduct constructions do not state the etale normal-component and generic-field identification; Algebra.Etale.iff_exists_algEquiv_prod classifies algebras over a field only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-radical-curve-normalization",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, etaleness of normalization off the branch points: select the field factor defined by the chosen radicals, rather than assuming all the binomials are irreducible.",
+   "via": [
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-etale-normal-generic-components",
+  "worker": "stage1",
+  "summary": "Q39 repairs the batch5 spreading-of-work return: three independent statement-only nodes extract the clopen restriction and surjectivity (old 3--4), generic field computation (old 5), and affine integral closure with canonical gluing (old 6--7). The statement is unchanged. Old 1--2 and 8 remain as the short assembly; the report preserves the complete old proof and assigns every extracted argument.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images alteration prerequisite, through tame-radical-curve-normalization: the finite etale algebra built from radicals is decomposed into its actual field factors, whose normalizations are its normal integral components. It does not assume that the radical algebra is itself a field.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic scheme/algebra tool: Normal components after etale pullback. Used only for this stated prerequisite of the finite etale component argument; the constructibility unit does not replace this prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sbc-normal-sections-finite-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-c91a034e8",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-c91a034e8 (reviewer sub-agent of L); spot-checked: Faithful re-split per the released human note of 2026-10-22. Base proof has 8 steps (6143 chars). New parent has 6 steps (2655 chars): old 1, 2 and 8 verbatim (8 only renumbered), statement and stmt_deps unchanged, proof_deps = union of uses. New statement-only nodes, all true: (a) lem-sfb-finite-etale-clopen-restriction carries old 3-4 (closed immersion by zero extension, finite/etale composite, clopen nonempty image over irreducible X gives surjective); (b) lem-sfb-integral-finite-etale-generic-field carries old 5 (A->B injective, B⊗F ≅ S^-1B ≅ Frac B = L finite separable via 02GL(2), both projections); (c) lem-sfb-finite-normal-cover-normalization carries old 6-7 (B integrally closed and integral over A, so B is the integral closure of A in L; glued inside L to Z ≅ X^L, unique by identity on L, matching 035I and the 0BQL second paragraph). Sizes 1150/1449/1711 chars, none restates the item. Parent steps checked against lem-fin-etale-normal-components, lem-weil-pbc-finite-type-over-noetherian, pqf-def-locnoeth and lem-sc-etale-fibre-product-base-change-coproduct. Sources read: pione 0BQL l.2430, morphisms 02GL l.8175 and 035I l.13936, properties 0358 l.1006. Edge cases: empty U/Y, reducible base, identity, cusp normalization, purely inseparable L, automorphisms of L. Duplicate search by rg -L on the tags and normalization/clopen keywords found no duplicate; candidates such as lem-sbc-finite-normal-dense-open-iso and lem-per-componentwise-normalization-affine-charts differ. Item not dropped, new ids are new, no SGA. Form checks pass: created, blueprint.from/via, 3 search kinds, unsplit. Tool use lem-fin-etale-normal-components accepted (already accepted at Q48). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleNormalGenericComponents",
+  "declaration": "AlgebraicGeometry.exists_finite_etale_normal_generic_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleNormalGenericComponents.lean",
+  "statement": "theorem exists_finite_etale_normal_generic_components {X Y : Scheme.{u}} [IsIntegral X] [IsLocallyNoetherian X] [CompactSpace X] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x)) (p : Y ⟶ X) [IsFinite p] [Etale p] : ∃ (n : ℕ) (U : Fin n → Y.Opens) (hI : ∀ i, IsIntegral (U i).toScheme) (A : ∀ i, Algebra X.functionField (U i).toScheme.functionField), (∀ i, IsClosed (U i : Set Y)) ∧ (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i, U i) = ⊤ ∧ (n = 0 ↔ IsEmpty Y) ∧ (∀ i, (∀ y : (U i).toScheme, IsIntegrallyClosed ((U i).toScheme.presheaf.stalk y)) ∧ IsFinite ((U i).ι ≫ p) ∧ Etale ((U i).ι ≫ p) ∧ Surjective ((U i).ι ≫ p) ∧ FiniteDimensional X.functionField (U i).toScheme.functionField ∧ Algebra.IsSeparable X.functionField (U i).toScheme.functionField ∧ ∃! e : (U i).toScheme ≅ X.normalizationIn (U i).toScheme.functionField, e.hom ≫ X.fromNormalizationIn (U i).toScheme.functionField = (U i).ι ≫ p ∧ (U i).toScheme.fromSpecFunctionField ≫ e.hom = (X.fromSpecOfAlgebraFunctionField (U i).toScheme.functionField).toNormalization) ∧ ∃ e : (∐ fun i : Fin n ↦ Spec (U i).toScheme.functionField) ≅ pullback p X.fromSpecFunctionField, ∀ i, Sigma.ι (fun j : Fin n ↦ Spec (U j).toScheme.functionField) i ≫ e.hom ≫ pullback.fst p X.fromSpecFunctionField = (U i).toScheme.fromSpecFunctionField ≫ (U i).ι ∧ Sigma.ι (fun j : Fin n ↦ Spec (U j).toScheme.functionField) i ≫ e.hom ≫ pullback.snd p X.fromSpecFunctionField = Spec.map (CommRingCat.ofHom (algebraMap X.functionField (U i).toScheme.functionField))",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bc382cbb",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Read node, Stacks 0BQL, all 10 stmt_dep records, and Normalization.lean (normalizationIn = relative normalization of Spec L→X). Statement verbatim in file; node differs from side-live only in lean (live lean None); no competing delivery. Clauses match: IsIntegral+IsLocallyNoetherian+CompactSpace+stalks integrally closed (inline normality, as in the node and lem-fin-etale-normal-components); IsFinite/Etale p; Fin n clopen disjoint covering integral normal opens; component maps finite/etale/surjective; FiniteDimensional + Algebra.IsSeparable; existential Algebra pinned by the generic-fibre projection identities (Spec F→X mono); ∃! normalization iso over X and on the generic map (true: normalization affine over X, Y_i integral); coproduct ≅ generic pullback with both projections; n=0 ↔ IsEmpty Y. Edge cases empty/identity/X⊔X/field/imperfect OK; arbitrary universe u. Sorry-only, docstrings with source and blueprint carry all 8 steps, report sections present. Noetherian hypothesis is a node choice beyond 0BQL (stage-1 reviewed). No recompile, no fixes. Advisory: unused private proof-dep imports."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

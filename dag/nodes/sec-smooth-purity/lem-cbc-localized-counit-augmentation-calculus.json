@@ -1,0 +1,250 @@
+{
+ "id": "lem-cbc-localized-counit-augmentation-calculus",
+ "kind": "statement",
+ "title": "Counit calculus for augmented arrows and arbitrary resolutions",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] with homotopy and derived categories and localizations $Q:K(\\mathcal A)\\to D(\\mathcal A)$, $Q':K(\\mathcal B)\\to D(\\mathcal B)$ [def-weil-abstract-derived-category]. Fix functors $G:K(\\mathcal A)\\to K(\\mathcal B)$ and $L:D(\\mathcal A)\\to D(\\mathcal B)$, and a natural transformation $\\tau:LQ\\to Q'G$. Fix a class $\\mathcal P$ on which $\\tau$ is invertible. For a category $\\mathcal X$, let $S,R:\\mathcal X\\to K(\\mathcal A)$ and $a:S\\to R$ be a natural transformation with $S(X)\\in\\mathcal P$ for every $X$. Set\n$$w_X=L(Qa_X)\\tau_{S(X)}^{-1}:Q'G(S(X))\\to L(QR(X)).$$\nFor any quasi-isomorphism $r:H\\to R(X)$ with $H\\in\\mathcal P$, the map\n$$\\chi_r=\\tau_H L(Qr)^{-1}:L(QR(X))\\xrightarrow{\\sim}Q'G(H)$$\nis an isomorphism satisfying $Q'G(r)\\chi_r=\\tau_{R(X)}$ and $Q'G(r)\\chi_rw_X=Q'G(a_X)$. For any two such resolutions put $c_{s,r}=\\chi_s\\chi_r^{-1}$. These maps satisfy $c_{s,r}\\chi_rw_X=\\chi_sw_X$, $c_{t,s}c_{s,r}=c_{t,r}$ and $c_{r,r}=1$. If $h:H\\to H'$ satisfies $sh=r$, then $Q'G(h)=c_{s,r}$; no such $h$ is required to exist. For every $f:X\\to Y$, put $B(f)=Q'G(S(f))$ and $D(f)=L(QR(f))$. Then\n$$D(f)w_X=w_YB(f).$$\nIf a class $W$ of arrows of $\\mathcal X$ is carried to isomorphisms by both $B$ and $D$, these maps descend as a natural transformation on $\\mathcal X[W^{-1}]$; explicitly $w_XB(f)^{-1}=D(f)^{-1}w_Y$ for $f\\in W$. For resolutions $r$ over $R(X)$ and $s$ over $R(Y)$ the computed map is $\\chi_sD(f)\\chi_r^{-1}$, and its composite with $\\chi_rw_X$ is $\\chi_sw_YB(f)$. All these formulas use only the specified natural transformation $\\tau$ and given resolution arrows. No inverse of $\\tau_{R(X)}$ or $Q'G(r)$ and no lift of $a_X$ to $H$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Completed-pullback invocation: transport of the actual augmentation through a resolving counit, comparison cocycle and representative naturality (former strict-quotient computation Steps 3–5 and the inverse-naturality part of Step 6). Stacks derived.tex Tag 06XN (lemma-find-existence-computes) supplies computing counits in the application; the abstract augmented-arrow calculus is agent-written."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Write $F=L\\circ Q$ and $T=Q'\\circ G$, and write composition right to left, as in the statement. For a given $r:H\\to R(X)$, $Q(r)$ is invertible because $Q$ localizes at quasi-isomorphisms [def-weil-abstract-derived-category]. Functors preserve inverses, so $F(r)$ is invertible. Also $\\tau_H$ is invertible by $H\\in\\mathcal P$. Consequently $\\chi_r=\\tau_HF(r)^{-1}$ has inverse $F(r)\\tau_H^{-1}$: both products cancel to identities. The same argument applies to every specified resolution; it does not assert that resolutions exist for all objects.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Augmented-arrow calculus supplying the completed-pullback comparison; agent calculation"
+   }
+  },
+  {
+   "text": "Naturality of $\\tau$ at $r$ gives $T(r)\\tau_H=\\tau_{R(X)}F(r)$, whence $T(r)\\chi_r=\\tau_{R(X)}$. Naturality at $a_X$ gives $\\tau_{R(X)}F(a_X)=T(a_X)\\tau_{S(X)}$. Since $S(X)\\in\\mathcal P$, postcomposing this equality with $\\tau_{S(X)}^{-1}$ gives $\\tau_{R(X)}w_X=T(a_X)$. Combining the two equalities yields $T(r)\\chi_rw_X=T(a_X)$. This argument only inverts $F(r)$ and $\\tau$ at good objects; it never inverts $T(r)$ or $\\tau_{R(X)}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Augmented-arrow calculus supplying the completed-pullback comparison; agent calculation"
+   }
+  },
+  {
+   "text": "For resolutions $r,s,t$ of the same $R(X)$, insert $c_{s,r}=\\chi_s\\chi_r^{-1}$. Then $c_{s,r}\\chi_rw_X=\\chi_sw_X$ by $\\chi_r^{-1}\\chi_r=1$. Likewise $c_{t,s}c_{s,r}=\\chi_t\\chi_s^{-1}\\chi_s\\chi_r^{-1}=\\chi_t\\chi_r^{-1}=c_{t,r}$, and $c_{r,r}=\\chi_r\\chi_r^{-1}=1$. Thus the comparison and cocycle are defined even if no comparison arrow between resolutions is supplied.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Augmented-arrow calculus supplying the completed-pullback comparison; agent calculation"
+   }
+  },
+  {
+   "text": "Suppose $s:H'\\to R(X)$ and $h:H\\to H'$ satisfy $sh=r$. Naturality gives $T(h)\\tau_H=\\tau_{H'}F(h)$, and functoriality gives $F(s)F(h)=F(r)$. Multiplying by the already existing inverses implies $F(h)F(r)^{-1}=F(s)^{-1}$. Hence $T(h)\\chi_r=\\tau_{H'}F(h)F(r)^{-1}=\\tau_{H'}F(s)^{-1}=\\chi_s$. Postcompose with $\\chi_r^{-1}$ to obtain $T(h)=c_{s,r}$. This is conditional on a given $h$; it is no lifting or existence assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Augmented-arrow calculus supplying the completed-pullback comparison; agent calculation"
+   }
+  },
+  {
+   "text": "Define the functors $B=T\\circ S$ and $D=F\\circ R$. For $f:X\\to Y$, naturality of $a$ is $R(f)a_X=a_YS(f)$. Naturality of $\\tau$ at $S(f)$, and invertibility at $S(X),S(Y)$, give $F(S(f))\\tau_{S(X)}^{-1}=\\tau_{S(Y)}^{-1}T(S(f))$. Therefore\n$$D(f)w_X=F(R(f))F(a_X)\\tau_{S(X)}^{-1}=F(a_Y)F(S(f))\\tau_{S(X)}^{-1}=F(a_Y)\\tau_{S(Y)}^{-1}T(S(f))=w_YB(f).$$\nThe components $w_X$ thus form a natural transformation $w:B\\to D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Augmented-arrow calculus supplying the completed-pullback comparison; agent calculation"
+   }
+  },
+  {
+   "text": "Suppose $B$ and $D$ invert $W$. Apply clauses (1) and (2) of [lem-weil-pbc-localization-universal-property] to the localization $q:\\mathcal X\\to\\mathcal X[W^{-1}]$, target $D(\\mathcal B)$, and the functors $B,D$ and transformation $w$ from Step 5. These clauses give lifts $\\bar B,\\bar D$, factorization isomorphisms $\\phi_B:\\bar Bq\\simeq B$, $\\phi_D:\\bar Dq\\simeq D$, and the unique descended transformation with component $\\phi_{D,X}^{-1}w_X\\phi_{B,X}$ at $qX$. This is descent with the usual factorization identifications, requiring no calculus of fractions for $W$. For $f\\in W$, precompose $D(f)w_X=w_YB(f)$ with $D(f)^{-1}$ and postcompose with $B(f)^{-1}$ to get $w_XB(f)^{-1}=D(f)^{-1}w_Y$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, part (3); natural-transformation lifting as stated in the cited Mathlib leaf (Localization.liftNatTrans, liftNatTrans_app)"
+   }
+  },
+  {
+   "text": "For $r:H\\to R(X)$ and $s:H'\\to R(Y)$ set $d_{s,r}(f)=\\chi_sD(f)\\chi_r^{-1}:T(H)\\to T(H')$. This is $D(f)$ expressed through the two specified isomorphisms, so it is the computed map. Using Step 5,\n$$d_{s,r}(f)\\chi_rw_X=\\chi_sD(f)w_X=\\chi_sw_YB(f).$$\nFor completeness these coordinates respect composition: for a resolution $t$ over $R(Z)$ and $g:Y\\to Z$,\n$$d_{t,s}(g)d_{s,r}(f)=\\chi_tD(g)\\chi_s^{-1}\\chi_sD(f)\\chi_r^{-1}=\\chi_tD(gf)\\chi_r^{-1}=d_{t,r}(gf).$$\nEvery formula uses only $\\tau$, the given arrows, their functorial images, and the inverses justified in Step 1. In particular the augmentation was never lifted to any $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Augmented-arrow calculus supplying the completed-pullback comparison; agent calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Abstract naturality and inverse-cancellation calculation for the augmentation comparison; the supplied counit is taken as data, not constructed using Tag 06XN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a natural augmentation through a derived functor counit with isomorphism components on good objects and compare arbitrary resolutions with a cocycle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, an object $ X \\\\in \\\\mathcal{C} $, its injective resolutio\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_map_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : C \\to D $ between abelian categories, natural number $ n $, and morphism $ f : X \\to Y $, the map induced by $ f $ on the $ n $-th right-derived functor $ F^R $ is equal to\"}\n  {\"name\": \"CategoryTheory.Functor.toRightDerivedZero\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, this constructs a natural transformation from $ F $ to its 0th right-derived functor $ R^\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$ with injective resolutions $I$ and $J$, and a morphism $\\\\\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, there exists an isomorphism in $\\\\mathcal{D}$ between \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.InjectiveRes\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs a canonical morphism from $ F(\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y)\\n  (P : CategoryTheory.InjectiveResolution X) (Q : CategoryTheory.InjectiveReso\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$, their injective resolutions $P$ and $Q$, a morphism $f : X \\\\to Y$, and an additive functor $F : \\\\mathcal{C} \\\\to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern bounded-below injective resolutions or general derived transformations; none states the simultaneous augmented-arrow, arbitrary-resolution and localization formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localization functor and natural counit give canonical resolution comparisons compatible with an augmented map and localization naturality",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.NatTrans",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern bounded-below injective resolutions or general derived transformations; none states the simultaneous augmented-arrow, arbitrary-resolution and localization formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]ounit.*[Aa]ugment|[Aa]ugment.*[Cc]ounit|[Rr]esolution.*[Cc]ocycle)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern bounded-below injective resolutions or general derived transformations; none states the simultaneous augmented-arrow, arbitrary-resolution and localization formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit naturality defines a map from a good object's image to a derived object independently of the chosen resolution without lifting the arrow",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y)\\n  (P : CategoryTheory.InjectiveResolution X) (Q : CategoryTheory.InjectiveReso\", \"doc\": \"Given abelian category $\\\\mathcal{C}$, objects $X,Y \\\\in \\\\mathcal{C}$, morphism $f:X\\\\to Y$, injective resolutions $P\\\\to X$ and $Q\\\\to Y$, morphism $\\\\phi:P\\\\to Q$ of cochain complexes satisfying $\\\\phi_0 \\\\c\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y)\\n  (P : CategoryTheory.InjectiveResolution X) (Q : CategoryTheory.InjectiveReso\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$, their injective resolutions $P$ and $Q$, a morphism $f : X \\\\to Y$, and an additive functor $F : \\\\mathcal{C} \\\\to\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.W₁_ι_app\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfFunctorialResolutions\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} {Φ : CategoryTheory.LocalizerMorphism W₁ W₂}\\n  {ρ : CategoryTheory.Functor C₂ C₁} \", \"doc\": \"The natural transformation $\\\\iota$ from the identity functor on $\\\\mathcal{C}_1$ to the composition of a functor $\\\\Phi$ with a resolution functor $\\\\rho$, constructed via whiskering operations applied t\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$ with injective resolutions $I$ and $J$, and a morphism $\\\\\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, an object $ X \\\\in \\\\mathcal{C} $, its injective resolutio\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.Φ_functor_map_ι_app\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfFunctorialResolutions\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} {Φ : CategoryTheory.LocalizerMorphism W₁ W₂}\\n  {ρ : CategoryTheory.Functor C₂ C₁} \", \"doc\": \"The natural transformation $\\\\iota$ from the identity functor on $\\\\mathcal{C}_1$ to the composition of a functor $\\\\Phi$ with a resolution functor $\\\\rho$, constructed via horizontal composition (whisker\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_map_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : C \\to D $ between abelian categories, natural number $ n $, and morphism $ f : X \\to Y $, the map induced by $ f $ on the $ n $-th right-derived functor $ F^R $ is equal to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern bounded-below injective resolutions or general derived transformations; none states the simultaneous augmented-arrow, arbitrary-resolution and localization formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation invertible on good objects compares arbitrary quasi-isomorphic resolutions, transports augmented arrows, and descends naturally to localization",
+   "results": "Actual msearch log: ok=True, n_hits=8; HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans; HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans; CategoryTheory.LocalizerMorphism.isIso_iff_of_hasRightResolutions; CategoryTheory.LocalizerMorphism.functorialRightResolutions.localizerMorphismInv; CategoryTheory.LocalizerMorphism.isIso_iff_of_hasLeftResolutions; CategoryTheory.LocalizerMorphism.functorialRightResolutions.localizerMorphismInv_functor; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits are cofibrant/model or bounded resolution constructions, universal derived counits, or specialized adjunctions; none states all the arbitrary-natural-transformation augmentation formulas. The existing Localization.liftNatTrans leaf handles descent only."
+  },
+  {
+   "tool": "grep",
+   "query": "([Aa]ugment.*[Cc]ounit|[Cc]ounit.*[Aa]ugment|[Rr]esolution.*[Cc]ocycle)",
+   "results": "Actual msearch log: ok=True, n_hits=0; ; grep directory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits are cofibrant/model or bounded resolution constructions, universal derived counits, or specialized adjunctions; none states all the arbitrary-natural-transformation augmentation formulas. The existing Localization.liftNatTrans leaf handles descent only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Localization.liftNatTrans",
+   "results": "Actual msearch log: ok=True, n_hits=0; ",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits are cofibrant/model or bounded resolution constructions, universal derived counits, or specialized adjunctions; none states all the arbitrary-natural-transformation augmentation formulas. The existing Localization.liftNatTrans leaf handles descent only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural counit invertible on resolving objects transports augmented arrows and compares arbitrary resolutions without lifts",
+   "results": "Actual msearch log: ok=True, n_hits=8; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Adjunction.Localization.ε; CategoryTheory.Functor.totalLeftDerivedCounit; CategoryTheory.SimplicialObject.cechNerveAdjunction; CategoryTheory.LiftLeftAdjoint.counitCoequalises; CategoryTheory.Adjunction.functorialityCounit; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc; ModuleCat.RestrictionCoextensionAdj.counit'",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits are cofibrant/model or bounded resolution constructions, universal derived counits, or specialized adjunctions; none states all the arbitrary-natural-transformation augmentation formulas. The existing Localization.liftNatTrans leaf handles descent only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given tau from L Q to Q G with tau H invertible, tau H composed with inverse L Q r canonically identifies any good resolution, naturally for an augmented map",
+   "results": "Actual msearch log: ok=True, n_hits=8; CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso; CategoryTheory.Abelian.LeftResolution.chainComplexXIso; CategoryTheory.Abelian.LeftResolution.chainComplexMap; CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_1; CategoryTheory.LocalizerMorphism.functorialRightResolutions.W₁_ι_app; CategoryTheory.InjectiveResolution.descFOne; CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_0; CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits are cofibrant/model or bounded resolution constructions, universal derived counits, or specialized adjunctions; none states all the arbitrary-natural-transformation augmentation formulas. The existing Localization.liftNatTrans leaf handles descent only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-strict-quotient-pullback-computation",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Completed-pullback invocation: transport of the actual augmentation through a resolving counit, comparison cocycle and representative naturality (former strict-quotient computation Steps 3–5 and the inverse-naturality part of Step 6). Stacks derived.tex Tag 06XN (lemma-find-existence-computes) supplies computing counits in the application; the abstract augmented-arrow calculus is agent-written.",
+   "via": [
+    "lem-cbc-strict-quotient-pullback-computation",
+    "lem-cbc-adic-pullback-presentation-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-localized-counit-augmentation-calculus",
+  "worker": "stage1",
+  "summary": "Expanded all augmented-arrow, arbitrary-resolution, cocycle, comparison-arrow and representative-naturality formulas into seven steps. Only the existing general localization universal-property leaf is needed beyond inverse cancellation and the derived-localization definition. No new nodes or statement changes. Retained inherited searches and added the actual Q90 search log.",
+  "blueprint": "Supplies the completed-pullback invocation in lem-cbc-completed-extension-zero-comparison: transporting its augmentation through a computing counit and comparing representatives (the intermediate strict-quotient computation Steps 3–6 specified by blueprint.from). The blueprint does not spell out these abstract formulas, so their proof is marked agent-written.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent of functors and natural transformations at an arbitrary class W, used after the augmentation naturality calculation; it is an existing Mathlib leaf, not a replacement of the compact-support base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-d1ff69fbe",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-d1ff69fbe (reviewer sub-agent of L); spot-checked: I read the item and checked every step by hand. The delivery has 0 new nodes. The statement is byte-identical to the base; the only stmt_deps change adds lem-weil-pbc-localization-universal-property, the Mathlib leaf for Localization.lift/fac/liftNatTrans (Predicate.lean l.278-335, read), which gives the X[W^-1] notion and the descent. The item was created by Q66 and is unsplit with an empty proof on the base, in clones/live and in clones/side-live, so it is not superseded. It has no repair note, does not appear in any dropped list, and cites no SGA. Checks: the types of chi_r, w_X, B, D and d_{s,r} are correct. Step 1 inverts Q(r) exactly as def-weil-abstract-derived-category states (localization at quasi-isomorphisms, K(A) form included). Step 2: naturality at r and at a_X gives T(r)chi_r=tau_R and tau_R w_X=T(a_X), without inverting T(r) or tau_R. Step 3 is the cocycle by cancellation. Step 4: from sh=r, F(h)F(r)^-1=F(s)^-1, hence T(h)=c_{s,r}. Step 5: I verified the four-term naturality chain term by term. Step 6: clauses (1) and (2) of the leaf give the component phi_D^-1 w phi_B, matching liftNatTrans_app; the inverse formula is correct. Advisory: with the right-to-left convention, 'precompose with D(f)^-1' should say 'postcompose'; the displayed formula is right. Step 7: the resolved composite and its compatibility with composition hold. The citer lem-cbc-strict-quotient-pullback-computation (steps 3 and 4) uses exactly these clauses. Small cases: the identity case (tau=id, G=L=id) and the zero case (G=0, P=acyclic, tau non-invertible) both work. Duplicate candidates read (lem-sc-preorder-bar-total-cone-augmentation, lem-pod-derived-reduction-sheaf-resolution-independence, lem-fd-whole-tower-integral-pullback-comparison, lem-cbc-cochain-augmentation-descent): none is a duplicate. Searches cover all three kinds, with one LeanSearch run honestly recorded as unavailable. I accept the tool_use: the off-unit leaf is generic descent. Sources checked: Stacks 04VG (categories l.4406) and 06XN (derived l.5092); the main-20261015 cbc proof uses the completed pullback only as data, so proof_origin=agent is correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizedCounitAugmentation",
+  "declaration": "CategoryTheory.LocalizedCounitAugmentation.calculus",
+  "declarations": [
+   "CategoryTheory.LocalizedCounitAugmentation.augmentation",
+   "CategoryTheory.LocalizedCounitAugmentation.resolutionIso",
+   "CategoryTheory.LocalizedCounitAugmentation.comparison",
+   "CategoryTheory.LocalizedCounitAugmentation.computedMap",
+   "CategoryTheory.LocalizedCounitAugmentation.calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalizedCounitAugmentation.lean",
+  "statement": "theorem calculus {X : Type uX} [Category.{vX} X] (S R : X ⥤ HomotopyCategory A (ComplexShape.up ℤ)) (a : S ⟶ R) (hS : ∀ x, P (S.obj x)) : (∃ w : S ⋙ G ⋙ DerivedCategory.Qh ⟶ R ⋙ DerivedCategory.Qh ⋙ L, ∀ x, w.app x = augmentation G L τ P hτ S R a hS x) ∧ (∀ (x : X) (H : HomotopyCategory A (ComplexShape.up ℤ)) (r : H ⟶ R.obj x) (hH : P H) (hr : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) r), (resolutionIso G L τ P hτ r hH hr).hom ≫ DerivedCategory.Qh.map (G.map r) = τ.app (R.obj x) ∧ augmentation G L τ P hτ S R a hS x ≫ (resolutionIso G L τ P hτ r hH hr).hom ≫ DerivedCategory.Qh.map (G.map r) = DerivedCategory.Qh.map (G.map (a.app x))) ∧ (∀ (x : X) (H H' H'' : HomotopyCategory A (ComplexShape.up ℤ)) (r : H ⟶ R.obj x) (hH : P H) (hr : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) r) (s : H' ⟶ R.obj x) (hH' : P H') (hs : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s) (t : H'' ⟶ R.obj x) (hH'' : P H'') (ht : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) t), (augmentation G L τ P hτ S R a hS x ≫ (resolutionIso G L τ P hτ r hH hr).hom ≫ (comparison G L τ P hτ r hH hr s hH' hs).hom = augmentation G L τ P hτ S R a hS x ≫ (resolutionIso G L τ P hτ s hH' hs).hom) ∧ (comparison G L τ P hτ r hH hr s hH' hs ≪≫ comparison G L τ P hτ s hH' hs t hH'' ht = comparison G L τ P hτ r hH hr t hH'' ht) ∧ (comparison G L τ P hτ r hH hr r hH hr = Iso.refl _) ∧ (∀ h : H ⟶ H', h ≫ s = r → DerivedCategory.Qh.map (G.map h) = (comparison G L τ P hτ r hH hr s hH' hs).hom)) ∧ (∀ (x y : X) (f : x ⟶ y), augmentation G L τ P hτ S R a hS x ≫ L.map (DerivedCategory.Qh.map (R.map f)) = DerivedCategory.Qh.map (G.map (S.map f)) ≫ augmentation G L τ P hτ S R a hS y) ∧ (∀ (W : MorphismProperty X) (hB : W.IsInvertedBy (S ⋙ G ⋙ DerivedCategory.Qh)) (hD : W.IsInvertedBy (R ⋙ DerivedCategory.Qh ⋙ L)), (∃ w : Localization.lift (S ⋙ G ⋙ DerivedCategory.Qh) hB W.Q ⟶ Localization.lift (R ⋙ DerivedCategory.Qh ⋙ L) hD W.Q, ∀ x, w.app (W.Q.obj x) = (Localization.fac (S ⋙ G ⋙ DerivedCategory.Qh) hB W.Q).hom.app x ≫ augmentation G L τ P hτ S R a hS x ≫ (Localization.fac (R ⋙ DerivedCategory.Qh ⋙ L) hD W.Q).inv.app x) ∧ (∀ (x y : X) (f : x ⟶ y) (hf : W f), @inv _ _ _ _ (DerivedCategory.Qh.map (G.map (S.map f))) (hB f hf) ≫ augmentation G L τ P hτ S R a hS x = augmentation G L τ P hτ S R a hS y ≫ @inv _ _ _ _ (L.map (DerivedCategory.Qh.map (R.map f))) (hD f hf))) ∧ (∀ (x y : X) (f : x ⟶ y) (H H' : HomotopyCategory A (ComplexShape.up ℤ)) (r : H ⟶ R.obj x) (hH : P H) (hr : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) r) (s : H' ⟶ R.obj y) (hH' : P H') (hs : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s), augmentation G L τ P hτ S R a hS x ≫ (resolutionIso G L τ P hτ r hH hr).hom ≫ computedMap G L τ P hτ R f r hH hr s hH' hs = DerivedCategory.Qh.map (G.map (S.map f)) ≫ augmentation G L τ P hτ S R a hS y ≫ (resolutionIso G L τ P hτ s hH' hs).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47884b26e",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Every clause matches the node: w = inv τ_S ≫ L(Qh a), χ_r = L(Qh r)⁻¹ ≪≫ τ_H, the T(r)χ_r and augmented identities, c_{s,r} and its cocycle/identity laws, Q'G(h)=c_{s,r} for a given h, naturality, descent to W.Localization with components pinned via fac, inverse naturality on W, computed map χ_r⁻¹ D(f) χ_s and its composite. Nothing inverts τ_R or G(r) or lifts a, and no extra hypothesis is added. All clauses are provable. The node differs from side-live only in its lean field; the statement is verbatim in the file; the imports are the Mathlib modules recorded for the statement dependencies. The four definitions are not hollow; there is one sorry; docstrings and source tags are present. The item is not superseded, dropped or under a repair note; the only earlier run is the stage-1 Q90 review, so this is not a stage-2 re-delivery. Not recompiled because no file changed. Advisory: the second reading is a self-reread."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261022T143835-L-1413695",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.LocalizedCounitAugmentation.calculus"
+  ],
+  "sorry_after": []
+ }
+}

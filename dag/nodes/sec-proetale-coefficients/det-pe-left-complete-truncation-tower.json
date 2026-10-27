@@ -231,7 +231,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-faa2c800f (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, blueprint route, and Stacks Tag 0118. All three proof steps, coefficient hypotheses, boundary indices, Milnor application, and canonical limit map check out. No new nodes, duplicate theorem, circular dependency, target weakening, or forbidden SGA use found. Concrete source checks and edge cases are recorded in review.md; no repairs needed."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -265,5 +276,27 @@
    "AlgebraicGeometry.Scheme.ProEt.truncation_tower_cohomology"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be an abelian category, $K$ an object of $D(\\mathcal C)$, and\n$\\tau_{\\geq-n}K$ ($n\\geq0$) its truncations for the standard $t$-structure, with the\ntruncation maps $K\\to\\tau_{\\geq-n}K$ and $\\tau_{\\geq-(n+1)}K\\to\\tau_{\\geq-n}K$. Fix\n$q\\in\\mathbf Z$ and put $N=\\max(0,-q)$.\n\n1. $H^q(\\tau_{\\geq-n}K)=0$ for $n<N$, and for $n\\geq N$ the map\n   $H^q(K)\\to H^q(\\tau_{\\geq-n}K)$ is an isomorphism.\n2. Let $T$ be the transition endomorphism of a product $\\prod_nH^q(\\tau_{\\geq-n}K)$ (with\n   components $\\prod_mH^q(\\tau_{\\geq-m}K)\\to H^q(\\tau_{\\geq-(n+1)}K)\\to H^q(\\tau_{\\geq-n}K)$).\n   Then $1-T$ is a split epimorphism, so its cokernel\n   $R^1\\varprojlim_nH^q(\\tau_{\\geq-n}K)$ vanishes, and the maps\n   $H^q(K)\\to H^q(\\tau_{\\geq-n}K)$ exhibit $H^q(K)$ as $\\varprojlim_nH^q(\\tau_{\\geq-n}K)$.",
+  "proof": [
+   {
+    "text": "*1.* The object $\\tau_{\\geq-n}K$ lies in degrees $\\geq-n$, so its $H^q$ vanishes for $q<-n$,\ni.e. for $n<-q$. For $q\\geq-n$ the truncation map $K\\to\\tau_{\\geq-n}K$ induces an isomorphism\non $H^q$ (represent $K$ by a complex; $\\tau_{\\geq-n}K$ is the quotient complex\n$0\\to K^{-n}/\\operatorname{im}d^{-n-1}\\to K^{-n+1}\\to\\cdots$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*2.* Write $G_n=H^q(\\tau_{\\geq-n}K)$ and let $c_n\\colon H^q(K)\\to G_n$ be the maps induced by\nthe truncation maps; they are compatible with the transitions. By 1, $G_n=0$ for $n<N$ and\n$c_n$ is an isomorphism for $n\\geq N$. Let $\\rho_n=c_n^{-1}$ for $n\\geq N$ and $\\rho_n=0$\notherwise. The map $\\sigma\\colon\\prod_nG_n\\to\\prod_nG_n$ with components\n$y\\mapsto-c_n\\bigl(\\sum_{N\\leq k<n}\\rho_k(y_k)\\bigr)$ satisfies $(1-T)\\circ\\sigma=\\mathrm{id}$:\nin component $n\\geq N$ this is $-c_n(\\sum_{N\\le k<n}\\rho_ky_k)+c_n(\\sum_{N\\le k\\le n}\\rho_ky_k)\n=y_n$, and components $n<N$ vanish. Hence $1-T$ is a split epimorphism and its cokernel\n$R^1\\varprojlim_nG_n$ vanishes.\n\nA cone $(L,(\\ell_n))$ over the tower $(G_n)$ factors uniquely through $H^q(K)$ via\n$\\rho_N\\circ\\ell_N$: for $n\\geq N$ the transition maps between the $G_n$ are isomorphisms\ncompatible with the $c_n$, and for $n<N$ the terms vanish. Hence $(H^q(K),(c_n))$ is a limit\ncone.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

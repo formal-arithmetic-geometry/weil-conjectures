@@ -315,20 +315,37 @@
   "module": "Sheaf.RingTheory.CompleteLocalDomainRegularOpen",
   "declaration": "IsLocalRing.exists_nonempty_open_regular_of_complete_domain",
   "file": "lean/Sheaf/RingTheory/CompleteLocalDomainRegularOpen.lean",
-  "statement": "theorem IsLocalRing.exists_nonempty_open_regular_of_complete_domain (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsDomain R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] : ∃ U : Set (PrimeSpectrum R), IsOpen U ∧ U.Nonempty ∧ ∀ p ∈ U, IsRegularLocalRing (Localization.AtPrime p.asIdeal)",
+  "statement": "theorem exists_nonempty_open_regular_of_complete_domain (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsDomain R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] : ∃ U : Set (PrimeSpectrum R), IsOpen U ∧ U.Nonempty ∧ ∀ p ∈ U, IsRegularLocalRing (Localization.AtPrime p.asIdeal)",
   "branch": "newtargets-dag",
-  "by": "Q90",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.CompleteLocalDomainRegularOpen deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-7eaac350d",
-  "group": "Q90",
-  "result": "fix",
-  "note": "Statement matches node and Stacks 07PI/07P7 clause by clause, using the recorded dependency declarations (Noetherian, local, domain, maximalIdeal-adic complete; ∃ open nonempty U with IsRegularLocalRing at each prime). No added hypotheses or universe restriction. Proof is sorry only; no definitions; no duplicate found. Imports are the stmt_dep and proof_dep record modules and the named declarations exist. Delivered file compiles clean (nt_compile --json, 2.0 s). H8: the proof docstring omitted node steps 2-3, 6 and 9; fixes/CompleteLocalDomainRegularOpen.lean replaces it with a ten-step docstring, signature byte-identical, compiles clean (5.5 s)."
+  "reviewer": "NT-stage2-cc-16782d94d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Stacks 07PI/07P7 clause by clause: (R : Type u) CommRing, IsNoetherianRing, IsLocalRing, IsDomain, IsAdicComplete (maximalIdeal R) R; ∃ U : Set (PrimeSpectrum R), IsOpen U ∧ U.Nonempty ∧ ∀ p ∈ U, IsRegularLocalRing (Localization.AtPrime p.asIdeal). No extra hypotheses, no universe restriction; edge cases (field, zero ring excluded, char 0/p) fine. lean.statement verbatim; public imports = 5 stmt_dep record modules; plain imports = exactly the 16 proof_dep record and mathlib_match modules, all present in side-live. Only `lean` changed vs live (item had lean_removed, no live declaration, so no duplicate). sorry only, no defs, 10-step proof docstring (earlier Q90 H8 fix included), source/blueprint docstrings, report sections present. No compile, no file changed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/CompleteLocalDomainRegularOpen.lean",
+  "module": "Sheaf.RingTheory.CompleteLocalDomainRegularOpen",
+  "declaration": "IsLocalRing.exists_nonempty_open_regular_of_complete_domain",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

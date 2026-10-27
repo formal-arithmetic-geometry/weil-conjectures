@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-rank-one-flag-curve",
+ "kind": "statement",
+ "title": "The Borel quotient of a semisimple-rank-one reductive group is a curve",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Let $G$ be reductive and $T\\subseteq G$ a maximal torus, as in [def-sfb-reductive-torus-centralizer-terminology]. Let $R(G)$ be the largest smooth connected solvable normal subgroup, where solvable means that successive scheme-theoretic commutator subgroup schemes eventually become trivial. Assume every maximal torus of the represented fppf quotient $G/R(G)$ [lem-sfb-affine-normal-quotient-geometry] has dimension one [def-kun-topological-krull-dimension]. For every Borel subgroup $B\\supseteq T$ [def-sfb-borel-subgroup-scheme], the scheme $G/B$ representing the fppf sheaf quotient of right cosets [lem-sfb-homogeneous-orbit-quotient-geometry] has Krull dimension one. No characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.16, (a) implies (c), printed pp.412--413."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-borel-subgroup-scheme",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Take the smooth connected projective flag scheme $Y=\\mathcal B(G)$ of [lem-sfb-general-borel-flag-variety], with the point $b_B$ whose scheme stabilizer is $B$. By [lem-sfb-smooth-group-orbit-geometry] its orbit $O$ is locally closed, and by [lem-sfb-homogeneous-orbit-quotient-geometry] the orbit with reduced structure is $G/B$. The transitivity in the flag statement shows that $O$ contains every $F$-point of $Y$. Every closed point of $Y$ has residue field $F$ by [lem-weil-pbc-closed-point-residue-field-base]. Thus $O$ contains all closed points. By [lem-sc-lft-over-field-jacobson-space] these are dense in $Y$, so the locally closed $O$ is open; its closed complement has no closed points and hence is empty by the same density statement. The scheme $Y$ is reduced by [sbc-lem-smooth-geometrically-reduced]. A reduced locally closed subscheme with dense open support in a reduced scheme is that open subscheme: its radical defining ideal has zero radical and is zero. Consequently $O=Y$ as schemes. This identifies $G/B$ with $Y$, equivariantly for $G$. In particular we can use the nonempty, connected, proper finite-type scheme $Y$ to compute the dimension of the quotient in the statement.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (b) implies (c), printed p.413; identification of the Borel variety with G/B, with the orbit argument expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rank-one-opposite-borel-intersection] to the given $G,T,R(G)$. Its hypotheses are exactly the reductivity and quotient-rank hypothesis of this item. Its first conclusion gives exactly two Borel subgroups containing $T$. By the bijection and fixed-point clause of [lem-sfb-general-borel-flag-variety], these give exactly two scheme-theoretically $T$-fixed $F$-points of $Y$, and these points are distinct. Only the two-Borel clause is used, not the stronger intersection assertion.",
+   "uses": [
+    "lem-sfb-rank-one-opposite-borel-intersection",
+    "lem-sfb-general-borel-flag-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (a) implies (b), printed p.412, and (b) implies (c), printed p.413."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proper-homogeneous-torus-fixed-bound] with $H=B$, $S=T$, and $X=G/B\\simeq Y$. All its hypotheses hold: reductivity supplies smoothness and connectedness of $G$, a Borel is closed, a torus is split over the algebraically closed field, and properness was obtained in step 1. For $d=\\dim Y$, the bound supplies $d+1$ distinct fixed points, whereas step 2 supplies exactly two. Therefore $d\\leq1$.",
+   "uses": [
+    "lem-sfb-proper-homogeneous-torus-fixed-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (b) implies (c), printed p.413, using Corollary 20.12, printed p.411."
+   }
+  },
+  {
+   "text": "If $d\\leq0$, [lem-weil-pbc-finite-type-dim-zero-artinian] makes the nonempty connected finite-type scheme $Y$ a finite discrete topological space. A nonempty connected discrete space has exactly one point $y$. It is closed, so [lem-weil-pbc-closed-point-residue-field-base] identifies its residue field with $F$. Every $F$-point with image $y$ factors through $\\operatorname{Spec}\\kappa(y)$, and its residue-field map must be the unique inverse of this identification; hence there is only one $F$-point of $Y$. This contradicts the two distinct points in step 2. Thus $d>0$, and together with step 3 this gives $d=1$. The equivariant quotient identification of step 1 gives $\\dim(G/B)=1$ for the arbitrary given $B\\supseteq T$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (b) implies (c), printed p.413; expansion of the nonzero-dimension inference using Stacks Tag 00KH (algebra-lemma-Noetherian-dimension-0)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-rank-one-opposite-borel-intersection",
+  "lem-sfb-proper-homogeneous-torus-fixed-bound",
+  "lem-weil-pbc-finite-type-dim-zero-artinian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.16 (a) implies (b) implies (c), printed pp.412--413, and Corollary 20.12, printed p.411."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|semisimpleRank|SemisimpleRank|oppositeBorel|flagVariety",
+   "results": "{\"t\": \"2026-10-23T21:48:04Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|semisimpleRank|SemisimpleRank|oppositeBorel|flagVariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra root systems, abstract flags and linear dimension results do not state the algebraic-group flag-curve theorem; Loogle rejected the identifier AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The flag variety of a reductive group of semisimple rank one is a curve",
+   "results": "{\"t\": \"2026-10-23T21:48:04Z\", \"tool\": \"leansearch\", \"query\": \"The flag variety of a reductive group of semisimple rank one is a curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Flag.recOn\", \"Flag.rec\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"FDRep.simple_iff_end_is_rank_one\", \"simple_of_finrank_eq_one\", \"FiniteDimensional.of_rank_eq_one\", \"Valuation.IsRankOneDiscrete.instIsCyclicSubtypeUnitsMemSubgroupValueGroup\", \"WeierstrassCurve.IsIntegral\"], \"digest\": \"7505cd2e087d6178\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra root systems, abstract flags and linear dimension results do not state the algebraic-group flag-curve theorem; Loogle rejected the identifier AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, Borel",
+   "results": "{\"t\": \"2026-10-23T21:48:04Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, Borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra root systems, abstract flags and linear dimension results do not state the algebraic-group flag-curve theorem; Loogle rejected the identifier AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive algebraic group of semisimple rank one has a one dimensional flag variety and two opposite Borel subgroups whose scheme theoretic intersection is a maximal torus",
+   "results": "{\"t\": \"2026-10-23T21:48:06Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive algebraic group of semisimple rank one has a one dimensional flag variety and two opposite Borel subgroups whose scheme theoretic intersection is a maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\"], \"digest\": \"7fcb6e95f98aa3cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra root systems, abstract flags and linear dimension results do not state the algebraic-group flag-curve theorem; Loogle rejected the identifier AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|semisimpleRank|SemisimpleRank|flagVariety",
+   "results": "{\"t\": \"2026-10-23T22:26:43Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|semisimpleRank|SemisimpleRank|flagVariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern Lie-algebra Borel submodules, representation-module ranks, field Krull dimension, or measurable Borel spaces; no projective algebraic-group quotient theorem. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive group with semisimple rank one has a one dimensional flag variety",
+   "results": "{\"t\": \"2026-10-23T22:26:43Z\", \"tool\": \"leansearch\", \"query\": \"A reductive group with semisimple rank one has a one dimensional flag variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"FDRep.simple_iff_end_is_rank_one\", \"simple_of_finrank_eq_one\", \"IntermediateField.rank_eq_one_iff\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"FiniteDimensional.of_rank_eq_one\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\"], \"digest\": \"08eb2ea10578c246\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern Lie-algebra Borel submodules, representation-module ranks, field Krull dimension, or measurable Borel spaces; no projective algebraic-group quotient theorem. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\"",
+   "results": "{\"t\": \"2026-10-23T22:26:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis.borelLower\", \"LieAlgebra.Basis.borelUpper\", \"LieAlgebra.Basis.iSup_cartan_borelLower_borelUpper_eq_top\", \"LieAlgebra.Basis.borelUpper_eq\", \"LieAlgebra.Basis.borelUpper_le_biSup\", \"LieAlgebra.Basis.borelLower_eq\", \"LieAlgebra.Basis.borelLower_le_biSup\", \"Mathlib.Tactic.Borelize.tacticBorelize___\"], \"digest\": \"f6a7c18a77802c4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern Lie-algebra Borel submodules, representation-module ranks, field Krull dimension, or measurable Borel spaces; no projective algebraic-group quotient theorem. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Borel quotient of a reductive algebraic group of semisimple rank one has Krull dimension one",
+   "results": "{\"t\": \"2026-10-23T22:26:44Z\", \"tool\": \"leanfinder\", \"query\": \"The Borel quotient of a reductive algebraic group of semisimple rank one has Krull dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_eq_zero_of_field\", \"instKrullDimLEOfNatNat\", \"ringKrullDim_eq_zero_of_isField\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim_of_mem_jacobson\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"Nontrivial.of_finiteRingKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\"], \"digest\": \"75889549f59a2179\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern Lie-algebra Borel submodules, representation-module ranks, field Krull dimension, or measurable Borel spaces; no projective algebraic-group quotient theorem. AlgebraicGeometry grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-one-adjoint-projective-linear",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Theorem 20.16, (a) implies (c), printed pp.412--413.",
+   "via": [
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-one-flag-curve",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; realized Milne Theorem 20.16 by identifying the general flag scheme with G/B, reusing the existing two-Borel assertion, applying a new general proper-homogeneous torus fixed-point bound, and excluding dimension zero by connectedness. Checked all citations and edge cases; one new statement-only lemma, no Mathlib leaf.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Theorem 20.16, (a) implies (c), printed pp.412--413. Realizes the flag-curve subargument of Theorem 20.16 (a) implies (b) implies (c); the existing opposite-Borel node supplies only (b), and the new Corollary 20.12 node supplies the fixed-point estimate.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Step 1 takes only that the smooth F-scheme B(G) is reduced (fibre of a smooth morphism over Spec F is geometrically reduced, Stacks 056T); no node of sk-thm-sf-ctf-stability or its cited units states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-8dc37342f",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-8dc37342f (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 pp.410-413 (Lemma 20.10, Prop 20.11, Cor 20.12, Lemma 20.15, Thm 20.16). The item's statement is unchanged; it is the reductive form of 20.16 (a)=>(c). Step 1 identifies Y=B(G) with G/B: transitivity puts every F-point in the orbit, closed points are F-points and dense, so the orbit is open with empty complement, Y is reduced, and the identification is equivariant. Step 2 uses only the two-Borel clause of rank-one-opposite-borel-intersection, whose hypotheses are word for word the item's; the flag bijection turns these into two distinct fixed points. Step 3 applies the new Cor 20.12 node with H=B, S=T, whose hypotheses I checked, giving d<=1. Step 4 excludes d=0 with dim-zero-artinian: a single point has a single F-point, which contradicts step 2. This fills the gap Milne leaves. The new node is a faithful general statement of Cor 20.12 (any H, any torus, no reductivity), not a clause of the item. I tested r=0, G=H, G_m on P^n (sharp bound), SL2/PGL2/GL2 and a nonsmooth H. The node is statement only, three search kinds are logged, and the DAG rg search found no duplicate. There is no cycle, the item is not superseded on live or side-live, and there is no SGA. Batch-5: lem-trf-split-lattice-torus-projection (split-torus smoothness and reducedness) and lem-trf-fppf-covering-base-change (a Mathlib leaf) are generic lemmas outside the trace-formula and Poincare-duality assumptions. The full closures contain no blueprint-imported trf or pod node, no trace-transport node and no nt-assume or nt-target node, so I accepted both citations. FIX: sbc-lem-smooth-geometrically-reduced (unit sk-def-smooth) is off the unit's route; I accepted it as a generic tool (a smooth F-scheme is reduced) and declared it in the item's split_report.tool_uses, at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-rank-one-flag-curve.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RankOneFlagCurve",
+  "declaration": "AlgebraicGeometry.rankOne_flag_quotient_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RankOneFlagCurve.lean",
+  "statement": "theorem rankOne_flag_quotient_dimension {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hRank : RankOneRoots.HasSemisimpleRankOne G) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (t : T ⟶ B) (ht : t ≫ iB = iT) (Q : Over (Spec (.of F))) (q : G.X ⟶ Q) (hQ : Presheaf.IsSheaf (Scheme.fppfTopology.over (Spec (.of F))) (yoneda.obj Q)) (ηq : coequalizer (yoneda.map (fst G.X B.X)) (yoneda.map (lift (fst G.X B.X) (snd G.X B.X ≫ iB.hom.hom) ≫ μ[G.X])) ⟶ yoneda.obj Q) (hηq : coequalizer.π _ _ ≫ ηq = yoneda.map q) (hUniversal : ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u), Function.Bijective (fun f : yoneda.obj Q ⟶ Z.obj ↦ ηq ≫ f)) : topologicalKrullDim Q.left = 1",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9825a0c79",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Node changes only lean plus stmt_dep def-sfb-rank-one-root-interfaces (landed, lean-reviewed). HasSemisimpleRankOne (largest smooth connected solvable normal R, IsFppfQuotient, every maximal torus of Q has topologicalKrullDim 1; extra existence-of-maximal-torus clause automatic) renders the radical-quotient hypothesis. IsReductive, IsMaximalTorus, IsBorelGroupScheme with t ≫ iB = iT render G, T, B ⊇ T. The G/B presentation (right-coset coequalizer, ηq pinned by hηq, fppf sheafification universal property, hQ) is verbatim from exists_homogeneous_fppf_quotient, so it is pinned and non-vacuous. Conclusion topologicalKrullDim Q.left = 1. No characteristic binder, single universe u, autoImplicit false. Statement verbatim in file, one sorry, docstrings carry source place, blueprint id and 4 proof steps; report sections present; proof-dep imports exist. Edge cases (rank 0, tori, GL2, char 2) fine. No recompile (no file changed)."
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "def-sfb-space-etale-presentation-property",
+ "kind": "definition",
+ "title": "Etale presentation diagrams and the presentation property of a space morphism",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. For presheaves of sets $F,G$ on schemes over $S$ and a natural transformation $f:F\\to G$, an etale presentation diagram consists of $S$-schemes $U,V$, maps $a:h_U\\to F$, $b:h_V\\to G$ which are representable etale in the scheme-test sense of [def-trf-algebraic-space], and an $S$-morphism $h:U\\to V$ such that $f\\circ a=b\\circ h_{h}$, where $h_T$ denotes the Yoneda presheaf and $h_h:h_U\\to h_V$ is induced by $h$. Scheme etaleness means [def-weil-etale-morphism]. For any property $P$ of scheme morphisms, define the presentation property of $f$ to mean that there exists such a diagram with $a$ representable surjective in the same scheme-test sense and $P(h)$. No surjectivity condition is imposed on $b$. This definition applies in particular to maps between the underlying presheaves of algebraic spaces over $S$ [def-trf-algebraic-space]; when $P$ is etale local on source and target it is the property of space morphisms defined by etale presentations.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MJ (lemma-local-source-target), presentation diagrams and condition (2); the following definition-P. The diagram data and existential presentation condition extend verbatim to maps of presheaves."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale presentation diagram of a morphism of algebraic spaces and a property holding on a surjective source presentation",
+   "results": "{\"t\": \"2026-10-24T11:26:09Z\", \"tool\": \"leansearch\", \"query\": \"Etale presentation diagram of a morphism of algebraic spaces and a property holding on a surjective source presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.casesOn\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.LocallyOfFinitePresentation.casesOn\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"StandardEtalePresentation.rec\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.sourceAffineLocally\"], \"digest\": \"4f562adedcf9d7a9\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space presentation definition in Mathlib: the hits concern standard etale ring presentations, scheme etaleness or scheme-local properties. Reuse the existing Sheaf declarations instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EtalePresentation\"",
+   "results": "{\"t\": \"2026-10-24T11:26:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"EtalePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"StandardEtalePresentation.x\", \"StandardEtalePresentation.P\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"StandardEtalePresentation.toPresentation\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePresentation.toSubmersivePresentation\", \"StandardEtalePresentation.mapEquiv\"], \"digest\": \"dfcb7f3525893a5c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space presentation definition in Mathlib: the hits concern standard etale ring presentations, scheme etaleness or scheme-local properties. Reuse the existing Sheaf declarations instead."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePresentation|HasEtalePresentationProperty",
+   "results": "{\"t\": \"2026-10-24T11:26:09Z\", \"tool\": \"grep\", \"query\": \"EtalePresentation|HasEtalePresentationProperty\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"a20fac22b7049c95\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space presentation definition in Mathlib: the hits concern standard etale ring presentations, scheme etaleness or scheme-local properties. Reuse the existing Sheaf declarations instead."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l HasEtalePresentationProperty|structure EtalePresentation lean/Sheaf lean/WeilConjectures; scan definition-node lean declarations for EtalePresentation and HasEtalePresentationProperty; blueprint_refs.py search etale presentation",
+   "results": "The only defining module is lean/Sheaf/AlgebraicGeometry/SpaceEtalePresentationPropertyCriterion.lean, lines 54 and 69. No WeilConjectures definition and no definition-node owner of either declaration. Blueprint search: 0 blueprint nodes match etale presentation. The existing theorem node lists the definitions but is not their definition-node owner.",
+   "date": "2026-10-24",
+   "verdict": "Bind both existing declarations to this new definition node; no source is moved, copied or redefined."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-eventually-smooth",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Arithmetic models of a smooth group with a fibrewise nonempty open.; arithmetic approximation: smoothness must hold at a finite stage, not only after pullback; the presentation predicate used to state smoothness of the limit and stage pullback projections",
+   "via": [
+    "lem-sfb-space-eventually-smooth",
+    "lem-sfb-group-open-arithmetic-model",
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtalePresentationPropertyCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.HasEtalePresentationProperty",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.EtalePresentation",
+   "AlgebraicGeometry.AlgebraicSpace.HasEtalePresentationProperty"
+  ],
+  "statement": "def HasEtalePresentationProperty {S : Scheme.{u}}\n    (P : MorphismProperty Scheme.{u}) {F G : (Over S)ᵒᵖ ⥤ Type u} (f : F ⟶ G) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair requested by the independent reviewer of c222c2c66daf: owns the existing plain structure EtalePresentation and definition HasEtalePresentationProperty, whose full signatures and bodies were read in the named landed module. Neither is chosen from the criterion theorem. No declaration is moved or copied; the criterion remains a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f0579948",
+  "group": "Q14",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f0579948",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Re-delivery of c222c2c66daf (RETURN H2). Repaired as instructed: in the item's stmt_deps the theorem node lem-sfb-space-etale-presentation-property-criterion is replaced by the new definition node def-sfb-space-etale-presentation-property; the criterion stays in proof_deps. The new node has kind definition, source Stacks 03MJ condition (2) and definition-P, stmt_deps def-pc-scheme, def-trf-algebraic-space and def-weil-etale-morphism, and a TeX statement matching the EtalePresentation structure and the HasEtalePresentationProperty def clause by clause. Its lean record is existing:true on Sheaf.AlgebraicGeometry.SpaceEtalePresentationPropertyCriterion with a verbatim statement field; nothing is moved or copied, and no other definition node in live owns these names. The Lean file is byte-identical to c222 (cmp). The item's mathematics was re-checked: full finite presentation (hlfp, hqc, hqs), affine stages, a cone limiting on underlying schemes, arrow direction Ti->Ti0, the same smoothness predicate in hypothesis and conclusion, and the conclusion exists j>=i0, forall i>=j. Edge cases checked: empty space, empty base and singleton index allowed; empty index set excluded as in the source. No hollow definition, sorry only, docstrings present, report sections present. No compile: no file was changed, and the Lean file is identical to the head the worker compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T081446-L-1969605",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.etalePresentation_property_criterion",
+   "AlgebraicGeometry.AlgebraicSpace.etalePresentation_property_iff_scheme"
+  ],
+  "sorry_after": []
+ }
+}

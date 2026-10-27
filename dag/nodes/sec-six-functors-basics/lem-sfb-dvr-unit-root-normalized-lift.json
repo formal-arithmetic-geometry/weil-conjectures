@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-dvr-unit-root-normalized-lift",
+ "kind": "statement",
+ "title": "Compatible normalized unit-root lifts of a local DVR diagram",
+ "statement": "Let $S\\to T$ be an injective local homomorphism of discrete valuation rings [def-sc-discrete-valuation-ring], with compatible fraction fields $N\\subseteq F$ [def-pc-field-extension]. Let $h\\geq1$ have invertible image in $S$, and let $u\\in S^\\times$. There exist finite separable algebraic field extensions $N'/N$ and $F'/F$ [def-weil-pbc-separable-algebraic-extension], compatible embeddings $N'\\hookrightarrow F'$ extending $N\\hookrightarrow F$, and $r\\in N'$ such that $r^h=u$, $N'=N(r)$ and $F'=F(r)$ (using the image of $r$ in the last equality). Let $D$ and $E$ be the integral closures of $S$ in $N'$ and of $T$ in $F'$ [def-weil-pbc-integral-closure]. There exist maximal ideals $a\\subset D$, $b\\subset E$ with $b\\cap D=a$, $a\\cap S=\\mathfrak m_S$ and $b\\cap T=\\mathfrak m_T$, such that $S_1=D_a$ and $T_1=E_b$ [def-weil-pbc-localization-at-prime] are discrete valuation rings and the canonical maps form a commuting square of injective local homomorphisms $S\\to S_1$, $T\\to T_1$, $S_1\\to T_1$, $S\\to T$. The element $r$ belongs to $S_1$, and\n$$\\mathfrak m_SS_1=\\mathfrak m_{S_1},\\qquad \\mathfrak m_TT_1=\\mathfrak m_{T_1}.$$\nBoth residue extensions $S_1/\\mathfrak m_{S_1}$ over $S/\\mathfrak m_S$ and $T_1/\\mathfrak m_{T_1}$ over $T/\\mathfrak m_T$ are finite separable. Here $N(r)$ and $F(r)$ mean generated subfields; finite means finite-dimensional; local means pulling back maximal ideals. There is no finiteness or residue-separability assumption on $F/N$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BRM, lemma-abhyankar, first claim (adjoin an h-th root of a unit), expressed for an arbitrary local DVR diagram with its selected normalization branches."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "For $R=S,T$, the DVR definition makes $R$ a principal ideal domain. By [lem-weil-pbc-pid-noetherian-normal], it is Noetherian and integrally closed. By [lem-weil-pbc-spec-domain-stalks-function-field], $\\operatorname{Spec}R$ is integral with function field $\\operatorname{Frac}(R)$, and its stalk at $p$ is $R_p$. Apply [lem-weil-pbc-localization-normal-domain] at each prime to see that all these stalks are normal domains. The affine cover consisting of $\\operatorname{Spec}R$ itself is a Noetherian affine cover; the spectrum is quasi-compact (indeed a local PID which is not a field has exactly the primes $0$ and $\\mathfrak m_R$). Thus both base spectra meet the normal integral Noetherian hypotheses of the component lemma below.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 00GY (lemma-localize-normal-domain); Schemes Tag 01HV (lemma-spec-sheaves). Base hypotheses for the first claim of Tag 0BRM."
+   }
+  },
+  {
+   "text": "Put $C=S[X]/(X^h-u)$ and $B=T[X]/(X^h-u)$, with roots $x_C,x_B$ and coefficient map $C\\to B$. The image of $h$ is a unit in $T$, since ring maps carry units to units. For either base $R$, the root $x$ is a unit: $x\\cdot(u^{-1}x^{h-1})=1$. Hence the derivative $hx^{h-1}$ is a unit. The algebra localized at this derivative is therefore the original root algebra, and [lem-weil-pbc-standard-etale-monic-derivative] proves it etale. Its root satisfies a monic equation and generates it, so [lem-weil-pbc-finite-of-integral-generators] proves it finite over $R$. It is nonzero: division by the monic degree-$h$ polynomial gives unique representatives of degree less than $h$, and in particular the class of $1$ is nonzero. This calculation applies to $h=1$ as well.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-finite-of-integral-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM (lemma-abhyankar), first claim, finite etale unit-root algebras; Algebra Tags 00UC (lemma-standard-etale), 02JJ (lemma-characterize-finite-in-terms-of-integral)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-etale-normal-generic-components] to $\\operatorname{Spec}B\\to\\operatorname{Spec}T$ and choose a nonempty component. It is $\\operatorname{Spec}E$ for the integral closure $E$ of $T$ in its finite separable generic field $F'$. Its generic algebra is a field quotient of $F[X]/(X^h-u)$, so $F'=F(r)$ for the image $r$ of $x_B$, and $r^h=u$. Inside $F'$ let $N'=N[r]$. It has dimension at most $h$ over $N$ and is a domain. Multiplication by any nonzero element is an injective endomorphism of this finite-dimensional vector space, hence surjective; thus $N'$ is a field and equals $N(r)$. The map $N[X]/(X^h-u)\\to N'$ is surjective. Apply the same component lemma to $\\operatorname{Spec}C\\to\\operatorname{Spec}S$: its generic algebra is a finite product of finite separable fields. A surjective map from this product to a field selects one factor (the orthogonal coordinate idempotents map to $0$ or $1$, exactly one to $1$). Consequently $N'/N$ is finite separable, and its selected component is $\\operatorname{Spec}D$, where $D$ is the integral closure of $S$ in $N'$. Both $S\\to D$ and $T\\to E$ are finite etale and their spectra are surjective. The inclusion $N'\\subseteq F'$ extends $N\\subseteq F$ by construction.",
+   "uses": [
+    "lem-sfb-finite-etale-normal-generic-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL (lemma-finite-etale-covering-normal-unramified), statement and both proof paragraphs; unit-root generic fields in the first claim of Tag 0BRM."
+   }
+  },
+  {
+   "text": "The inclusion $N'\\hookrightarrow F'$ restricts to an injective $S$-algebra map $D\\to E$: every element of $D$ satisfies a monic polynomial over $S$, whose image is a monic polynomial over $T$. The surjection $\\operatorname{Spec}E\\to\\operatorname{Spec}T$ from step 3 gives a prime $b$ above $\\mathfrak m_T$. Set $a=b\\cap D$. The square of ring inclusions commutes, and locality of $S\\to T$ gives $a\\cap S=(b\\cap T)\\cap S=\\mathfrak m_S$. By [lem-weil-pbc-integral-prime-over-maximal-maximal], $a$ and $b$ are maximal, applied respectively to the integral maps $S\\to D$ and $T\\to E$. Here integrality is part of the definition of each integral closure. This selects compatible branches without any algebraicity assumption on $F/N$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-sfb-finite-etale-normal-generic-components",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM (lemma-abhyankar), first claim, choice of an upper maximal ideal and its lower contraction; Algebra Tag 00GS (lemma-integral-over-field)."
+   }
+  },
+  {
+   "text": "Set $S_1=D_a$ and $T_1=E_b$. The inclusions into $N'\\subseteq F'$ identify these localizations with subrings of these fields. The map $S_1\\to T_1$ is $d/s\\mapsto d/s$: if $s\\notin a$, then its image is not in $b$, so the map is defined and injective. Its maximal ideal contracts to $aD_a$, since $d/s$ lies in $bE_b$ exactly when $d\\in a$. The identical fraction calculation proves $S\\to S_1$ and $T\\to T_1$ injective and local, using $a\\cap S=\\mathfrak m_S$ and $b\\cap T=\\mathfrak m_T$. All four maps commute because their values on $S$ agree in $F'$. Finally $r\\in D$, since $r^h=u$ is a monic equation over $S$; hence $r\\in S_1$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM (lemma-abhyankar), first claim, displayed local square; explicit fraction maps using Algebra Tag 00CO and the local-ring conventions of Tag 07BH."
+   }
+  },
+  {
+   "text": "Choose uniformizers $\\pi_S,\\pi_T$ using the DVR definition. Apply [lem-sbc-etale-trait-stalk] to the finite etale maps $\\operatorname{Spec}D\\to\\operatorname{Spec}S$ and $\\operatorname{Spec}E\\to\\operatorname{Spec}T$, at $a$ and $b$. Their images are the closed points by step 4. By [lem-weil-pbc-spec-domain-stalks-function-field], the actual source stalks and structural maps are $D_a=S_1$, $E_b=T_1$ and their canonical maps. The trait-stalk lemma proves these stalks are domain DVRs and gives $\\mathfrak m_{S_1}=(\\pi_S)$ and $\\mathfrak m_{T_1}=(\\pi_T)$. These are exactly $\\mathfrak m_SS_1=\\mathfrak m_{S_1}$ and $\\mathfrak m_TT_1=\\mathfrak m_{T_1}$, since extending a principal ideal extends its generator.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sbc-etale-trait-stalk",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AP2 (lemma-Dedekind-etale-extension), local DVR assertion; Tag 0BRM first claim; Schemes Tag 01HV for the actual affine stalk maps."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-algebra-residue-field-separable] to the etale algebra maps $S\\to D$ at $a$ and $T\\to E$ at $b$. By the contractions in step 4, it gives finite separable extensions $\\kappa(a)/\\kappa(\\mathfrak m_S)$ and $\\kappa(b)/\\kappa(\\mathfrak m_T)$. The localization definition identifies these four fields respectively with $S_1/\\mathfrak m_{S_1}$, $S/\\mathfrak m_S$, $T_1/\\mathfrak m_{T_1}$, $T/\\mathfrak m_T$, with the canonical residue maps. This supplies the remaining two clauses. Only invertibility of $h$ and the local inclusion of the original DVRs have been used.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U3 (lemma-etale-over-field), 00U4 (lemma-etale-at-prime), and 07BH; finite separable residue extensions in Tag 0BRM, first claim."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-sfb-finite-etale-normal-generic-components",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sbc-etale-trait-stalk",
+  "lem-weil-pbc-etale-algebra-residue-field-separable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BRM (lemma-abhyankar), first claim; normalization of the finite etale root components made explicit by Tag 0BQL, with Tags 00UC, 00U4, 0AP2 and 01HV for the algebra and local assertions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral closures at DVR branches after adjoining a root of a unit are unramified extensions of DVRs",
+   "results": "{\"t\": \"2026-10-24T06:00:29Z\", \"tool\": \"leansearch\", \"query\": \"Integral closures at DVR branches after adjoining a root of a unit are unramified extensions of DVRs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsCyclotomicExtension.Rat.isIntegralClosure_adjoin_singleton_of_prime_pow\", \"IsCyclotomicExtension.Rat.isIntegralClosure_adjoin_singleton_of_prime\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"IsCyclotomicExtension.Rat.isIntegralClosure_adjoin_singleton\"], \"digest\": \"cabd654cbd4b8e42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local unramified residue/index criteria and integral-closure results do not construct compatible normalized unit-root branches and their fraction fields."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, AdjoinRoot",
+   "results": "{\"t\": \"2026-10-24T06:00:29Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, AdjoinRoot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local unramified residue/index criteria and integral-closure results do not construct compatible normalized unit-root branches and their fraction fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining an invertible degree root of a unit to a finite normalized DVR branch gives local DVR extensions with ramification index one and finite separable residue fields",
+   "results": "{\"t\": \"2026-10-24T06:00:30Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining an invertible degree root of a unit to a finite normalized DVR branch gives local DVR extensions with ramification index one and finite separable residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Ideal.ramificationIdx_le_finrank\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\"], \"digest\": \"37e215cb2b229b9b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local unramified residue/index criteria and integral-closure results do not construct compatible normalized unit-root branches and their fraction fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization commutes with adjoining a prime to residue characteristic root of a unit at a selected discrete valuation branch",
+   "results": "{\"t\": \"2026-10-24T06:01:39Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization commutes with adjoining a prime to residue characteristic root of a unit at a selected discrete valuation branch\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"PreTilt.valAux\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"IsDedekindDomain.HeightOneSpectrum.valuation_of_unit_mod_eq\", \"ModP.preVal_mk\", \"ModP.preVal\"], \"digest\": \"754b85b22c1c5033\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local unramified residue/index criteria and integral-closure results do not construct compatible normalized unit-root branches and their fraction fields."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx.*one|AdjoinRoot.*[Ee]tale|[Ee]tale.*AdjoinRoot",
+   "results": "{\"t\": \"2026-10-24T06:00:29Z\", \"tool\": \"grep\", \"query\": \"ramificationIdx.*one|AdjoinRoot.*[Ee]tale|[Ee]tale.*AdjoinRoot\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"13d2a062e4e62669\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramificationIdx_eq_one assumes an already unramified map and does not construct compatible normalized root branches; Smooth/IntegralClosure.lean:290-320 concerns localization and integrality, not this diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining a prime to residue characteristic root of a unit to a local inclusion of discrete valuation rings gives compatible integral closure branches with ramification index one",
+   "results": "{\"t\": \"2026-10-24T07:18:03Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining a prime to residue characteristic root of a unit to a local inclusion of discrete valuation rings gives compatible integral closure branches with ramification index one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq\", \"IsLocalization.AtPrime.ramificationIdx_map_eq_ramificationIdx\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_one_iff\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"IsDedekindDomain.primesOverEquivPrimesOver_inertiagDeg_eq\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\"], \"digest\": \"2fcd1c452d4bc8af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ramification indices of already unramified maps, cyclotomic special cases, standard etale presentations or field products; none states the compatible normalized unit-root DVR diagram."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsIntegralClosure",
+   "results": "{\"t\": \"2026-10-24T07:18:03Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, IsIntegralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ramification indices of already unramified maps, cyclotomic special cases, standard etale presentations or field products; none states the compatible normalized unit-root DVR diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*[Ee]tale|[Ee]tale.*AdjoinRoot|ramificationIdx_eq_one",
+   "results": "{\"t\": \"2026-10-24T07:18:03Z\", \"tool\": \"grep\", \"query\": \"AdjoinRoot.*[Ee]tale|[Ee]tale.*AdjoinRoot|ramificationIdx_eq_one\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\"], \"digest\": \"897de77809423770\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ramification indices of already unramified maps, cyclotomic special cases, standard etale presentations or field products; none states the compatible normalized unit-root DVR diagram."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closures of discrete valuation rings in fields generated by roots of units are unramified",
+   "results": "{\"t\": \"2026-10-24T07:18:03Z\", \"tool\": \"leansearch\", \"query\": \"Integral closures of discrete valuation rings in fields generated by roots of units are unramified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsCyclotomicExtension.Rat.isIntegralClosure_adjoin_singleton_of_prime\", \"Valuation.Integers.integrallyClosed\", \"IsCyclotomicExtension.Rat.isIntegralClosure_adjoin_singleton\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\", \"IsCyclotomicExtension.Rat.isIntegralClosure_adjoin_singleton_of_prime_pow\", \"instIsIntegrallyClosedSubtypeMemSubring\"], \"digest\": \"7276e917d2360ded\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ramification indices of already unramified maps, cyclotomic special cases, standard etale presentations or field products; none states the compatible normalized unit-root DVR diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale components of binomial unit root algebras over DVRs are integral closures in finite separable extensions with compatible local branches",
+   "results": "{\"t\": \"2026-10-24T07:19:31Z\", \"tool\": \"leanfinder\", \"query\": \"Finite etale components of binomial unit root algebras over DVRs are integral closures in finite separable extensions with compatible local branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.IsStandardEtale\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"StandardEtalePair\", \"StandardEtalePresentation\", \"Algebra.instIsStandardEtale\", \"Algebra.instIsStandardEtaleRing\"], \"digest\": \"a4a20188c9cb45f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ramification indices of already unramified maps, cyclotomic special cases, standard etale presentations or field products; none states the compatible normalized unit-root DVR diagram."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abhyankar-arbitrary-dvr-branches",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Abhyankar cancellation for arbitrary local DVR extensions. Unit-root reduction in the proof of the supporting Abhyankar cancellation lemma; the first claim of Stacks 0BRM, with both chosen normalized branches.",
+   "via": [
+    "lem-sfb-abhyankar-arbitrary-dvr-branches",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-unit-root-normalized-lift",
+  "worker": "stage1",
+  "summary": "All clauses proved using existing generic finite-etale normalization, standard root algebra, and actual trait-stalk interfaces; no new nodes. Fields and compatible branches are constructed explicitly and all citation statements were read. No assumption on the residue extension or degree of F/N is introduced.",
+  "blueprint": "Historical auxiliary algebra under det-thm-sf-ctf-stability-direct-images (3), through the inherited creation chain. Current latest direct-image proof (3) invokes proper/open preservation and does not itself state this unit-root lemma. Steps 1--7 realize exactly the first claim of Stacks 0BRM specified by the item, retaining its inherited blueprint.from.node=null and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-etale-trait-stalk",
+    "why": "Gives domain DVRs and principal maximal ideals for the actual etale stalk maps. No node of this unit supplies this generic commutative-algebra/stalk interface; this supports, rather than replaces, the inherited unit-root route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-etale-trait-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-3b679cabc",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-3b679cabc (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the 12 cited statements and the source in full; review.md has the details. Stacks 0BRM (more-algebra.tex, lemma-abhyankar), first claim: it adjoins a root of x^e=u, and the localized root algebras are finite étale because e and u are invertible. It picks an upper maximal ideal, contracts it, and gets ramification index 1 and finite separable residue extensions. The item states this claim for an arbitrary injective local DVR map S->T. Its hypotheses are h invertible in S and u in S^x; it puts no assumption on F/N and is not weakened. I also read pione 0BQL (lines 2430-2460) behind lem-sfb-finite-etale-normal-generic-components. Step 1: PID, Noetherian and normal leaf, stalks R_p, normal localization; this gives the hypotheses of the component lemma. Step 2: C=S[X]/(X^h-u). Since x has inverse u^{-1}x^{h-1}, Q'(x)=hx^{h-1} is a unit, so C_{Q'}=C, which is étale by the standard-étale leaf. C is finite with one integral generator and nonzero by monic division. Step 3: the component lemma gives Y_i=Spec E, the normalization by def-fin-normalization-extension in the affine case. F' is a factor of F[X]/(X^h-u). N[r] is a finite-dimensional domain, so a field. A surjection from the product of the N_j onto N' selects one factor through the idempotents, so N' is finite separable and its component is Spec D. Step 4: D lies in E through monic relations. Surjectivity gives b over m_T; put a=b∩D; locality gives a∩S=m_S. Maximality comes from the Mathlib leaf isMaximal_of_isIntegral_of_isMaximal_comap', applied to S->D and to T->E. Step 5 is a correct elementary fraction calculation: injective local maps and a commuting square inside F', with r in D. Step 6: lem-sbc-etale-trait-stalk at a and at b gives domain DVRs and m_{S_1}=(pi_S), m_{T_1}=(pi_T). Step 7: the étale residue-field leaf gives finite separable extensions, and S local gives kappa(m_S)=S/m_S. Small cases: h=1; S=T; u already an h-th power; char p with p not dividing h; p | h is excluded, correctly. Duplicates: I grepped for 0BRM, abhyankar and unit-root and read the lem-sbc-dvr-unit-root-local-square/-etale-unit-root-diagram/-at-prime/-generation and abhyankar-local-* nodes. None gives the integral-closure identification together with both maximal-ideal equalities and both residue clauses, so there is no merge. No cycle: none of the 495 nodes the item reaches depends on it. Accepted tool use: lem-sbc-etale-trait-stalk (unit sk-prop-input-spreading) as a generic Stacks 0AP2 tool, an étale stalk over a DVR is a DVR with the same uniformizer. The lem-weil-pbc-* nodes are Mathlib leaves. No new nodes, no fixes. Minor: the report says several tool_uses were declared, but the node declares only trait-stalk. The inherited blueprint.from.node null is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrUnitRootNormalizedLift",
+  "declaration": "RingTheory.exists_dvr_unit_root_normalized_lift",
+  "file": "lean/Sheaf/RingTheory/DvrUnitRootNormalizedLift.lean",
+  "statement": "theorem exists_dvr_unit_root_normalized_lift (S : Type u) [CommRing S] [IsDomain S] [IsDiscreteValuationRing S] (T : Type v) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T] [Algebra S T] (hinj : Function.Injective (algebraMap S T)) [IsLocalHom (algebraMap S T)] (N : Type w) [Field N] [Algebra S N] [IsFractionRing S N] (F : Type z) [Field F] [Algebra T F] [IsFractionRing T F] [Algebra N F] [Algebra S F] [IsScalarTower S T F] [IsScalarTower S N F] (h : ℕ) (hh : 1 ≤ h) (hunit : IsUnit (h : S)) (u : Sˣ) : ∃ (N' : Type w) (_ : Field N') (_ : Algebra N N') (_ : Algebra S N') (_ : IsScalarTower S N N') (F' : Type z) (_ : Field F') (_ : Algebra F F') (_ : Algebra T F') (_ : IsScalarTower T F F') (i : N' →+* F') (r : N'), FiniteDimensional N N' ∧ Algebra.IsSeparable N N' ∧ FiniteDimensional F F' ∧ Algebra.IsSeparable F F' ∧ i.comp (algebraMap N N') = (algebraMap F F').comp (algebraMap N F) ∧ r ^ h = algebraMap S N' (u : S) ∧ IntermediateField.adjoin N ({r} : Set N') = ⊤ ∧ IntermediateField.adjoin F ({i r} : Set F') = ⊤ ∧ ∃ (D : Subalgebra S N') (E : Subalgebra T F') (d : D →+* E), D = integralClosure S N' ∧ E = integralClosure T F' ∧ (∀ x : D, (d x : F') = i (x : N')) ∧ ∃ (a : Ideal D) (_ : a.IsMaximal) (b : Ideal E) (_ : b.IsMaximal) (hab : a = b.comap d), a.comap (algebraMap S D) = IsLocalRing.maximalIdeal S ∧ b.comap (algebraMap T E) = IsLocalRing.maximalIdeal T ∧ ∃ (_ : IsDiscreteValuationRing (Localization.AtPrime a)) (_ : IsDiscreteValuationRing (Localization.AtPrime b)) (_ : Algebra S (Localization.AtPrime a)) (_ : Algebra T (Localization.AtPrime b)) (_ : IsLocalHom (algebraMap S (Localization.AtPrime a))) (_ : IsLocalHom (algebraMap T (Localization.AtPrime b))) (j : Localization.AtPrime a →+* N'), algebraMap S (Localization.AtPrime a) = (algebraMap D (Localization.AtPrime a)).comp (algebraMap S D) ∧ algebraMap T (Localization.AtPrime b) = (algebraMap E (Localization.AtPrime b)).comp (algebraMap T E) ∧ (∀ x : D, j (algebraMap D (Localization.AtPrime a) x) = (x : N')) ∧ (∃ r₁ : Localization.AtPrime a, j r₁ = r) ∧ Function.Injective (algebraMap S (Localization.AtPrime a)) ∧ Function.Injective (algebraMap T (Localization.AtPrime b)) ∧ Function.Injective (Localization.localRingHom a b d hab) ∧ IsLocalHom (Localization.localRingHom a b d hab) ∧ (Localization.localRingHom a b d hab).comp (algebraMap S (Localization.AtPrime a)) = (algebraMap T (Localization.AtPrime b)).comp (algebraMap S T) ∧ (IsLocalRing.maximalIdeal S).map (algebraMap S (Localization.AtPrime a)) = IsLocalRing.maximalIdeal (Localization.AtPrime a) ∧ (IsLocalRing.maximalIdeal T).map (algebraMap T (Localization.AtPrime b)) = IsLocalRing.maximalIdeal (Localization.AtPrime b) ∧ FiniteDimensional (IsLocalRing.ResidueField S) (IsLocalRing.ResidueField (Localization.AtPrime a)) ∧ Algebra.IsSeparable (IsLocalRing.ResidueField S) (IsLocalRing.ResidueField (Localization.AtPrime a)) ∧ FiniteDimensional (IsLocalRing.ResidueField T) (IsLocalRing.ResidueField (Localization.AtPrime b)) ∧ Algebra.IsSeparable (IsLocalRing.ResidueField T) (IsLocalRing.ResidueField (Localization.AtPrime b))",
+  "branch": "sheaf-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d89a295d2",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps and their lean records, Stacks 0BRM first claim and 0BQL, the module, report (Worker report + Second reading by Q140 present). Every clause matches: DVR S,T with hinj+IsLocalHom; fraction fields made compatible by IsScalarTower S T F / S N F (not stronger); h≥1, IsUnit h, u:Sˣ; N',F' finite separable in the universes of N,F, i compatible with N→F; r^h=u, adjoin N {r}=⊤, adjoin F {i r}=⊤; D,E = integralClosure; d fixed by i; a,b maximal, a=b.comap d, comaps = maximal ideals; localizations DVRs; S→S₁, T→T₁ algebra structures tied to canonical composites, injective and local; localRingHom injective, local, square commutes; r in range of j, which is fixed on D (the canonical embedding); both m S₁=m_{S₁} equalities; residue extensions finite separable via Mathlib ResidueField instance from the pinned maps. The duplicate Algebra S (Loc a) instance is harmless because it is tied to the same composite. Edge cases h=1, u an h-th power, S=T, char 0/p∤h covered; p|h excluded as in the source. lean.statement verbatim; node diff lean-only; no defs; sorry only; docstrings carry source, blueprint and 7 steps; universes independent; proof-dep imports exist, no cycle; no H4 match (upstream dvr_unit_root_* are different statements). No compile (no change). Note: Q27 2ed97b7b delivered the same item (same path and decl, equivalent signature) and got PASS; only one should land, and the later must not overwrite the other's record."
+ }
+}

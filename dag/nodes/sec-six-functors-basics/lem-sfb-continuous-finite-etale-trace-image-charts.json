@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-continuous-finite-etale-trace-image-charts",
+ "kind": "statement",
+ "title": "Continuous finite lattice-sum charts of an actual integral trace image",
+ "statement": "Fix a prime $\\ell$, a finite normed extension $E/\\mathbf Q_\\ell$ and its valuation ring $A$ [def-weil-pbc-continuous-integral-coefficients]. Assume $E$ is totally disconnected. Let $X$ be a scheme, $P$ a locally finite free internal $E_X$-module, $p:U\\to X$ a finite etale surjection, $M$ a locally finite free internal $A_U$-module, and $e:E_U\\otimes_{A_U}M\\simeq p^*P$. Local freeness means the scheme-cover predicate of [lem-weil-pbc-continuous-locally-free-pullback]. Supply any actual morphism $\\tau:p_*p^*P\\to P$ satisfying [def-sfb-internal-finite-etale-trace-formula]. Form the categorical integral image $I$ of the pushed embedding of [def-weil-pbc-continuous-lattice-intersection] followed by restriction of scalars of $\\tau$. There is a pro-etale scheme cover $C$ of $X$ such that for each member $C_s$ there are integers $r_s\\geq0$, $d_s>0$ and submodules $\\Lambda_j\\subset E^{r_s}$ for $j\\in\\operatorname{Fin}(d_s)$, each having an $A$-basis also an $E$-basis of $E^{r_s}$, and a continuous-function presentation of $(C_s\\to X)^*I$ with values in $\\sum_j\\Lambda_j$, as in [def-sfb-continuous-function-module-presentation]. The presentation uses the induced topology on the actual sum submodule. No epimorphy of $\\tau$ or local-freeness conclusion for $I$ is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "def-weil-pbc-continuous-lattice-intersection",
+  "def-sfb-internal-finite-etale-trace-formula",
+  "def-sfb-continuous-function-module-presentation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, first and second paragraphs, through the identification with the sum of the constant embedded lattices"
+ },
+ "proof": [
+  {
+   "text": "Apply the simultaneous embedded-sheet-chart theorem. It supplies a common pro-etale cover, positive sheet count, full algebraic lattices, a rational ambient continuous-function presentation and actual sheet-range equations.",
+   "uses": [
+    "lem-sfb-continuous-finite-etale-lattice-sheet-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each chart apply the trace-sheet-range theorem to the given τ and its normalized formula. Apply continuous_lattice_sum after transporting Padic.coefficientExtensionIntegers to continuousIntegers, to identify the supremum of continuous sheet ranges with the range of the actual inclusion of continuous functions into the algebraic sum.",
+   "uses": [
+    "lem-sfb-finite-etale-trace-sheet-ranges",
+    "lem-sfb-continuous-lattice-sum",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual pulled-back image inclusion is monic, and the continuous encoding and presheaf evaluation preserve monomorphisms. Its section maps, followed by ambient coordinates, are injective and have the same range as the injective continuous sum-lattice inclusion. Construct additive equivalences by unique lifts through this inclusion. Restriction and scalar compatibility follow after composing with that injective inclusion from naturality of the module map and the ambient presentation. These equivalences form the required ContinuousFunctionPresentation. Keep the supplied cover and bases.",
+   "uses": [
+    "def-sfb-finite-etale-lattice-sheet-maps",
+    "def-sfb-continuous-function-module-presentation",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-finite-etale-lattice-sheet-charts",
+  "lem-sfb-finite-etale-trace-sheet-ranges",
+  "lem-sfb-continuous-lattice-sum",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-sfb-finite-etale-lattice-sheet-maps",
+  "def-sfb-continuous-function-module-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation: simultaneous embedded sheet charts, trace-image ranges and continuous functions into the finite algebraic sum"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The integral trace image of a locally free lattice over a finite etale surjection has charts by continuous functions into finite sums of full lattices",
+   "results": "8 hits: Algebra.intTrace, Algebra.intTrace_eq_trace, Algebra.intTrace.congr_simp, Algebra.intTraceAux, Algebra.isIntegral_trace, Algebra.intTrace_eq_of_isLocalization, Algebra.algebraMap_intTrace, ZLattice.comap_discreteTopology. No sheaf chart theorem.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral trace image of a locally free lattice over a finite etale surjection has charts by continuous functions into finite sums of full lattices",
+   "results": "8 hits: Module.Basis.ofIsCoprimeDifferentIdeal, IsIntegralClosure.module_free, IsIntegralClosure.range_le_span_dualBasis, ClassGroup.fintypeOfAdmissibleOfFinite, FiniteDimensional.exists_is_basis_integral, integralClosure_le_span_dualBasis, Module.Basis.ofIsCoprimeDifferentIdeal_apply, Algebra.intTrace. No continuous trace-image charts.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtaleTraceFormula|ContinuousFunctionPresentation|trace.*[Ii]mage.*[Cc]hart|continuous.*[Ll]attice.*[Ff]ree",
+   "results": "0 hits",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleTraceLattice",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, first and second paragraphs, through the identification with the sum of the constant embedded lattices",
+   "via": [
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFiniteEtaleTraceImageCharts",
+  "file": "lean/Sheaf/Paper/ContinuousFiniteEtaleTraceImageCharts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousFiniteEtaleTrace_image_charts",
+  "statement": "theorem continuousFiniteEtaleTrace_image_charts\n    (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [TotallyDisconnectedSpace E] (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : LocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P)\n    {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff l E) U))\n    (hM : LocallyFree (condensedRingObj (integralCoeff l E) U) M)\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap l E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P)\n    (τ : (lowerStar (Profinite.continuousMapRingObj E) p).obj\n      ((upperStar (Profinite.continuousMapRingObj E) p).obj P) ⟶ P)\n    (hτ : FiniteEtaleTraceFormula (Profinite.continuousMapRingObj E) p P τ) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      ∃ (r d : ℕ) (_ : 0 < d)\n        (L : Fin d → Submodule (continuousIntegers l E) (Fin r → E)),\n        (∀ j, ∃ b : Module.Basis (Fin r) (continuousIntegers l E) (L j),\n          ∃ c : Module.Basis (Fin r) E (Fin r → E), ∀ i, (b i : Fin r → E) = c i) ∧\n        Nonempty (ContinuousFunctionPresentation (C.X s) (continuousIntegers l E)\n          ↥(⨆ j, L j)\n          ((upperStar (integralCoeff l E) (C.f s)).obj\n            (image (latticePushedEmbedding (integralScalarMap l E) X P p M e ≫\n              (Mod.comap (coefficientMap (integralScalarMap l E) X)).map τ))))",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022850-L-489971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T071254-L-3908089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

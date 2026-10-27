@@ -1,0 +1,108 @@
+{
+ "id": "def-sfb-localization-hom-comparison-data",
+ "kind": "definition",
+ "title": "Fixed internal-Hom continuity and evaluation-defined scalar comparisons",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "On a ringed site with the size convention [def-weil-size-convention], use the module categories [def-weil-sheaf-of-modules-category], their ordinary unbounded derived categories and localization functors $Q_R$ [def-weil-abstract-derived-category], and the fixed functorial K-injective representatives of ambient derived internal Hom $H_R$ [def-pur-derived-internal-hom]. For $K\\in D(R)$ put $\\Gamma_K(P)=\\mathcal Hom_R(Q_R^{-1}K,I_R(P))$, using exactly the chosen representative of $K$ and the fixed functorial resolution $I_R$. For every sequential diagram $D$ of complexes define the continuity map to be $Q_R(\\operatorname{colimit.post}(D,\\Gamma_K))$, from $Q_R(\\operatorname{colim}(D\\Gamma_K))$ to $Q_R\\Gamma_K(\\operatorname{colim}D)$, with the ordinary termwise sheaf colimits [def-weil-pbc-category-colimit]. Define $\\mathrm{HasLocalizationHomContinuity}(K)$ to mean that this map is an isomorphism for every $D$ admitting one common termwise lower bound. For any map $a:R\\to S$ of commutative ring sheaves, use the actual normalized scalar models, $F_a\\dashv U_a$, the strong derived tensor comparison $\\mu_a$, and the evaluation-normalized scalar-Hom adjunction $\\alpha_a$ [def-sfb-scalar-hom-comparison-data], with the closed tensor and evaluation [def-coef-ringed-tensor-hom-model]. Define $\\chi_{a,K,L}:F_aH_R(K,L)\\to H_S(F_aK,F_aL)$ to be the transpose over $S$ of $F_a(\\operatorname{ev}_{K,L})\\circ\\mu_a^{-1}$. Define $\\rho_{a,K,L}:U_aF_aH_R(K,L)\\to H_R(K,U_aF_aL)$ to be $\\alpha_a\\circ U_a(\\chi_{a,K,L})$. These are constructions, with no continuity, boundedness or invertibility assertion about $\\chi$ or $\\rho$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62, conditional internal-sheaf formulation; Stacks 03DB, 07A4, 07A6, 08J7, 08J9 and 0A95; existing definitions in InternalHomLocalizationComparison."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom sequential colimit continuity comparison on complexes of module sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.isColimitOfEval\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \"(s : Cocone F) (hs : ∀ (i : ι), IsColimit ((eval C c i).mapCocone s)) : IsColimit s\", \"doc\": \"Given a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{HomologicalComplex}(C, c) $ in a category $ C $ with zero morphisms and complex shape $ c $, if for every index $ i \\\\in \\\\iota $ the evaluation of the cocone\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"module\": \"Mathlib.Algebra.Homology.GrothendieckAbelian\", \"type\": \"[HasFilteredColimitsOfSize.{w, w'} C] : HasFilteredColimitsOfSize.{w, w'} (HomologicalComplex C c)\", \"doc\": \"If a category $ \\\\mathcal{C} $ has filtered colimits of size $ \\\\kappa $, then the category of homological complexes over $ \\\\mathcal{C} $ with shape $ c $ also has filtered colimits of size $ \\\\kappa $.\"}\n  {\"name\": \"HomologicalComplex.preservesColimitsOfShape_of_eval\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \"{D : Type*} [Category* D] (G : D ⥤ HomologicalComplex C c)\\n  (_ : ∀ (i : ι), PreservesColimitsOfShape J (G ⋙ eval C c i)) : PreservesColimitsOfShape J G\", \"doc\": \"If a functor $ G : \\\\mathcal{D} \\\\to \\\\mathrm{HomologicalComplex}(\\\\mathcal{C}, c) $ has the property that its composition with every evaluation functor $ \\\\mathrm{eval}_i $ preserves colimits of shape $ J\"}\n  {\"name\": \"HomologicalComplex.instHasLimit\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \": HasLimit F\", \"doc\": \"For any functor $ F $ from a category $ J $ to the category of homological complexes in a category $ V $ with zero morphisms and a fixed complex shape, the functor $ F $ has a limit in the category of\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfSize.{w', w} (PresheafOfModules.{v} R.val)] : HasColimitsOfSize.{w', w} (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n  {\"name\": \"HomologicalComplex.hasExactColimitsOfShape\", \"module\": \"Mathlib.Algebra.Homology.GrothendieckAbelian\", \"type\": \"(J : Type w) [Category.{w'} J] [HasFiniteLimits C] [HasColimitsOfShape J C] [HasExactColimitsOfShape J C] :\\n  HasExactColimitsOfShape J (HomologicalComplex C c)\", \"doc\": \"If a category $\\\\mathcal{C}$ has finite limits, colimits of shape $J$, and exact colimits of shape $J$, then the category of homological complexes over $\\\\mathcal{C}$ with a fixed complex shape $c$ also\"}\n  {\"name\": \"instPreservesHomologyFunctorAddCommGrpCatColim\", \"module\": \"Mathlib.Algebra.Category.Grp.AB\", \"type\": \": (colim (J := J) (C := AddCommGrpCat.{u})).PreservesHomology\", \"doc\": \"The colimit functor from diagrams of shape $\\\\mathcal{J}$ in the category of additive commutative groups to the category itself preserves homology. Specifically, for any short complex in this category,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib notion. The five exact project definitions exist only in the theorem-owned module; this delivery moves them without duplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extension internal Hom comparison transpose evaluation restriction adjunction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (s : S) (g : X ⟶ (ModuleCat.restrictScalars f).obj Y) (x : ↑X),\\n  (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt f s g) x = s • (CategoryTheory.ConcreteCategory.hom g) x\", \"doc\": \"Let $R$ and $S$ be commutative rings, $f: R \\\\to S$ a ring homomorphism, $X$ an $R$-module, and $Y$ an $S$-module. Let $g: X \\\\to Y$ be an $R$-linear map, where $Y$ is viewed as an $R$-module via restri\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} →\\n              S →\\n                (X ⟶ (ModuleCat.restrictScalars f).obj Y) →\\n                  have this := Module.compHom \", \"doc\": \"Given a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function evaluates the natural bijection between $ S $-linear maps $ X \\to Y $ (viewed as an $ R $-modul\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : (ModuleCat.extendScalars f).obj X ⟶ Y) (x : ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars f g)) x =\\n    (CategoryTheory.Concrete\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the natural bijection between $ R $-linear maps $ X → Y^{\\text{res}} $ and $ S $-linear maps $ X^{\\text{ext}} → Y $ sends an\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (Y ⟶ (ModuleCat.coextendScalars f).obj X) → ((ModuleCat.restrictScalars f).obj Y ⟶ X)\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S) {X : ModuleCat R} {Y : ModuleCat S}\\n  (g : Y ⟶ (ModuleCat.coextendScalars f).obj X) (y : ↑((ModuleCat.restrictScalars f).obj Y)),\\n  (ModuleCat.Hom.hom (ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction f g)) y = (\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the adjunction between restriction of scalars (mapping $ S $-modules to $ R $-modules) and coextension of scalars (mapping $ R $-modules to $ S $-modules) esta\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y)\\n  (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj (ModuleCat.of S S)) ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrict\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, there is a natural bijection between $ R $-linear maps from $ X $ to the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib notion. The five exact project definitions exist only in the theorem-owned module; this delivery moves them without duplication."
+  },
+  {
+   "tool": "grep",
+   "query": "localizationHomComplex|HasLocalizationHomContinuity|localizationHomRestrictedComparison",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib notion. The five exact project definitions exist only in the theorem-owned module; this delivery moves them without duplication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-hom-telescope-evaluation",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final inverting-ell paragraph of lem-sfb-dc-hom-preserves.proof.md: the continuity hypothesis and evaluation-transpose comparison used in the scalar telescope and its evaluation square.",
+   "via": [
+    "lem-sfb-scalar-hom-telescope-evaluation",
+    "lem-sfb-integral-general-lfp-hom-inversion",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalizationHomComparisonData",
+  "declaration": "CategoryTheory.HasLocalizationHomSequentialContinuity",
+  "declarations": [
+   "CategoryTheory.HasLocalizationHomSequentialContinuity"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/LocalizationHomComparisonData.lean",
+  "statement": "abbrev HasLocalizationHomSequentialContinuity (R : Sheaf J CommRingCat.{max c v r}) (K : DerivedCategory (scalarModules J R)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q97",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reviewer fix (landing): the five constructions stay in the published, stage-3-proved module Sheaf.Algebra.Homology.InternalHomLocalizationComparison (unchanged live text), because the landing index refuses an intra-delivery move ('declares names ... also in'). This module publicly re-exports them and adds one transparent abbrev alias of HasLocalizationHomContinuity; this node owns all five names listed here.",
+  "fixed_by": "NT-stage2-cc-c6be4156b"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6be4156b",
+  "group": "Q97",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6be4156b",
+  "group": "Q97",
+  "result": "fix",
+  "note": "Item maths re-read clause by clause and correct (hyps, β legs λ_n=t^-nη, γ := β_H≫ρ≫H(β_L⁻¹) IsIso + both squares, qis change square, ∀n≥0 evaluation identity; no extra hyps; edge cases t=0/unit/nilpotent, zero ring, unbounded reps). H2/H12 repair of af979 correct in substance: new def node def-sfb-localization-hom-comparison-data owns the five plain defs, item cites it, theorem kept in proof_deps, dep module = live minus defs with stage-3 proofs intact. But the intra-delivery move trips the nt_parallel2/import_prune check-3 'also in InternalHomLocalizationComparison' false positive (tool unchanged since Oct 19; Q14 2472d1bb refused the same way). FIX in the landed Q14 735d shape: fixes/InternalHomLocalizationComparison.lean = live text byte-identical; fixes/LocalizationHomComparisonData.lean = public re-export + abbrev HasLocalizationHomSequentialContinuity; fixes/def-sfb-localization-hom-comparison-data.json lean-only change (abbrev primary, 5 re-exported names in declarations); report + reviewer-fix section. Item module/record/stmt_deps unchanged. nt_compile --json: def module 1.6 s, item 13.2 s clean; check_lean_text [] for both records. Maintainer: delivered dep record lem-sfb-internal-hom-localization-comparison describes the move; use --revert-nodes on it if the live record is preferred."
+ }
+}

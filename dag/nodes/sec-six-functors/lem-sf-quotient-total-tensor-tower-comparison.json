@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-quotient-total-tensor-tower-comparison",
+ "kind": "statement",
+ "title": "Strict balancing comparison of quotient total tensor towers",
+ "statement": "Let C be a small site and A any commutative ring, I an ideal. Write B for the inverse limit of the constant quotient sheaves B_n=A/I^(n+1), with projection pi_n and quotient transitions [def-sfb-constant-completion-coefficient-data]. Use actual sheafified scalar extension and direct-sum total tensor [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves, def-coef-ringed-tensor-hom-model]. Suppose tau_n is a natural chain map from the restricted tensor of the two pi_(n+1)-extensions to the analogous n-th tensor, taking (a tensor x) tensor (b tensor y) to (q(a) tensor x) tensor (q(b) tensor y). For arbitrary unbounded complexes P,Q of B-modules, the reduction tower of Tot(P tensor_B Q) [def-pur-strict-quotient-completion-data] is isomorphic as a strict tower of complexes to the tower formed using tau. Its component takes c tensor (x tensor y) in bidegree (p,q), p+q=k, to (1 tensor x) tensor (c tensor y). No flatness, Noetherian or boundedness assumption is required. The Lean interface retains a complex V with an isomorphism b from the reduction complex and a tower isomorphism from V.asFunctor; the displayed formula is for kappa composed with b. One may take V equal to the reduction complex and b equal to its identity.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, the strict quotient balancing calculation; sites-cohomology.tex Tags 07A4 and 06YM"
+ },
+ "stmt_deps": [
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-strict-quotient-completion-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-normalized-finite-tensor-comparison at every n to obtain the finite scalar total-tensor isomorphism e_n. It sends (a*b) tensor (x tensor y) to (a tensor x) tensor (b tensor y). Additivity of the actual reduction functors follows from their extension/restriction composition.",
+   "uses": [
+    "lem-sf-normalized-finite-tensor-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, the strict quotient balancing calculation; sites-cohomology.tex Tags 07A4 and 06YM"
+   }
+  },
+  {
+   "text": "For a successor map, compare reductionStep followed by e_n with e_(n+1) followed by the given tau_n. The generic total_extension_hom_ext of lem-pur-integral-tensor-transition-compatibility reduces equality degreewise to c tensor (x tensor y). The reductionStep section formula and the two normalizations show that both paths give (1 tensor x) tensor (q(c) tensor y).",
+   "uses": [
+    "lem-pur-integral-tensor-transition-compatibility",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, the strict quotient balancing calculation; sites-cohomology.tex Tags 07A4 and 06YM"
+   }
+  },
+  {
+   "text": "Use NatTrans.ofOpSequence with components e_n to construct the tower natural transformation. The successor calculation gives naturality; its components are isomorphisms, so it is an isomorphism. Take V to be the original reduction complex and b its identity. The normalization follows from the finite-level formula with scalar factors 1 and c.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, the strict quotient balancing calculation; sites-cohomology.tex Tags 07A4 and 06YM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-normalized-finite-tensor-comparison",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pur-integral-tensor-transition-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, the strict quotient balancing calculation; sites-cohomology.tex Tags 07A4 and 06YM",
+  "note": "Filled the existing general tower-comparison theorem from the proved finite comparison and generator extensionality. Its public signature, public imports, and docstring are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of an unbounded total tensor product of sheaf complexes commutes with the quotient transition maps as a strict inverse sequence",
+   "results": "8 hits about ordinary module scalar extension and direct limits; none about strict towers of sheaf complexes.",
+   "date": "2026-10-25",
+   "verdict": "No match for unbounded sheaf complexes with the specified quotient tower and unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of the tensor product is naturally isomorphic to tensor product of scalar extensions for sheaves of modules and complexes",
+   "results": "8 hits about ordinary module and presheaf tensor/scalar maps; no strict total-complex tower comparison.",
+   "date": "2026-10-25",
+   "verdict": "No match for unbounded sheaf complexes with the specified quotient tower and unit."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Tt]ensor|[Tt]ensor.*changeOfRings",
+   "results": "0 hits from msearch; rg of the project found private scalarTensorTotal in IntegralTensorReductionTowerComparison and total_extension_hom_ext in IntegralTensorTransitionCompatibility. They give the levelwise tools, not the simultaneous general strict-tower theorem.",
+   "date": "2026-10-25",
+   "verdict": "No match for unbounded sheaf complexes with the specified quotient tower and unit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientCompletedTensorAdjunction",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof Step 1, tensor/internal-Hom transposes at the integral stage: returned detailed step 2, the strict quotient balancing calculation; sites-cohomology.tex Tags 07A4 and 06YM",
+   "via": [
+    "lem-sf-ambient-completed-tensor-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientTotalTensorTowerComparison",
+  "file": "lean/Sheaf/Paper/QuotientTotalTensorTowerComparison.lean",
+  "declaration": "CategoryTheory.AmbientCompletedTensor.quotientTotalTensorTowerComparison",
+  "statement": "theorem quotientTotalTensorTowerComparison\n    (τ : ∀ n : ℕ, (((change (projection J A I (n + 1))).mapHomologicalComplex (.up ℤ)).prod\n        ((change (projection J A I (n + 1))).mapHomologicalComplex (.up ℤ)) ⋙\n      coefficientTotalTensor.{u, u, u} J (finite J A I (n + 1)) ⋙\n        (res (projection J A I (n + 1))).mapHomologicalComplex (.up ℤ)) ⟶\n      (((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).prod\n        ((change (projection J A I n)).mapHomologicalComplex (.up ℤ)) ⋙\n      coefficientTotalTensor.{u, u, u} J (finite J A I n) ⋙\n        (res (projection J A I n)).mapHomologicalComplex (.up ℤ)))\n    (hτ : ∀ (n : ℕ) (P Q : Cx (completed J A I))\n      (p q k : ℤ) (h : p + q = k) (U : Cᵒᵖ)\n      (a b : (finite J A I (n + 1)).obj.obj U)\n      (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),\n      (((τ n).app (P, Q)).f k).val.app U\n        (coefficientTensorGenerator.{u, u, u} J (finite J A I (n + 1))\n          (((change (projection J A I (n + 1))).mapHomologicalComplex (.up ℤ)).obj P)\n          (((change (projection J A I (n + 1))).mapHomologicalComplex (.up ℤ)).obj Q)\n          p q k h U\n          (tensorSection (projection J A I (n + 1)) (P.X p) U a x)\n            (tensorSection (projection J A I (n + 1)) (Q.X q) U b y)) =\n        coefficientTensorGenerator.{u, u, u} J (finite J A I n)\n          (((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).obj Q)\n          p q k h U\n          (tensorSection (projection J A I n) (P.X p) U ((transition J A I n).hom.app U a) x)\n            (tensorSection (projection J A I n) (Q.X q) U ((transition J A I n).hom.app U b) y))\n    (P Q : Cx (completed J A I)) :\n    ∃ (V : CochainComplex (ℕᵒᵖ ⥤ Mod (completed J A I)) ℤ)\n      (b : reductionComplex J A I true\n        ((coefficientTotalTensor.{u, u, u} J (completed J A I)).obj (P, Q)) ≅ V)\n      (κ : V.asFunctor ≅\n      (Functor.ofOpSequence (X := fun n : ℕ ↦\n        (((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).prod\n        ((change (projection J A I n)).mapHomologicalComplex (.up ℤ)) ⋙\n      coefficientTotalTensor.{u, u, u} J (finite J A I n) ⋙\n        (res (projection J A I n)).mapHomologicalComplex (.up ℤ))) τ).flip.obj (P, Q)),\n      ∀ (n : ℕ) (p q k : ℤ) (h : p + q = k) (U : Cᵒᵖ)\n        (c : (finite J A I n).obj.obj U)\n        (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),\n        ((κ.hom.app (op n)).f k).val.app U\n          (((b.hom.f k).app (op n)).val.app U\n            (tensorSection (projection J A I n)\n            (((coefficientTotalTensor.{u, u, u} J (completed J A I)).obj (P, Q)).X k) U c\n            (coefficientTensorGenerator.{u, u, u} J (completed J A I)\n              P Q p q k h U x y))) =\n          coefficientTensorGenerator.{u, u, u} J (finite J A I n)\n          (((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).obj Q)\n          p q k h U\n          (tensorSection (projection J A I n) (P.X p) U 1 x)\n            (tensorSection (projection J A I n) (Q.X q) U c y)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T162059-L-258577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1fa77",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T065850-L-2483130",
+  "kind": "interface",
+  "note": "independent cc review: 1fa77da0 vs 55f3 delivery (only Mod qualification + obtain→choose in item; other Lean/change record identical) and new node statement vs owner nodes of reduction/res"
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "id": "def-pur-brown-bounded-transport",
+ "kind": "definition",
+ "title": "Bounded Brown site transport data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Given [def-pur-brown-system-site], define Transport as the canonical compact-support site map and its finite evaluation normalization, bounded-below invertibility and fully faithful site units/counits, lower-bound preservation, normalized exceptional output, actual transported counit and equation, and the natural additive R-linear Brown Hom bijection for bounded-below etale-origin systems. No unbounded pro-etale adjoint or existence assertion.",
+ "stmt_deps": [
+  "def-pur-brown-system-site"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "First Hom display: finite evaluations, quotient mates and bounded site transport."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict coefficient realization, finite Brown evaluation, actual quotient mates and bounded etale proetale site transport",
+   "results": {
+    "t": "2026-10-24T16:03:55Z",
+    "tool": "leansearch",
+    "query": "Strict coefficient realization, finite Brown evaluation, actual quotient mates and bounded etale proetale site transport",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyEtale.iff_comp_bijective",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "Algebra.Etale.formallyEtale",
+     "Algebra.FormallyEtale.of_restrictScalars",
+     "AlgebraicGeometry.Scheme.Etale",
+     "FirstOrder.Language.Term.realize_quotient_mk'",
+     "Algebra.etaleLocus_eq_univ_iff",
+     "Profinite.lim"
+    ],
+    "digest": "015b87e28fc272e1"
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic existing APIs only, no exact comparison-data type."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": {
+    "t": "2026-10-24T16:03:56Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction",
+     "CategoryTheory.Adjunction.isLeftAdjoint",
+     "CategoryTheory.Adjunction.isRightAdjoint",
+     "CategoryTheory.Adjunction.mk'",
+     "CategoryTheory.Adjunction.mkOfHomEquiv",
+     "CategoryTheory.Adjunction.mkOfUnitCounit",
+     "CategoryTheory.Adjunction.ofIsLeftAdjoint",
+     "CategoryTheory.Adjunction.ofIsRightAdjoint"
+    ],
+    "digest": "d2183a4d275d6f7e"
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic existing APIs only, no exact comparison-data type."
+  },
+  {
+   "tool": "grep",
+   "query": "BrownTowerComparison|FiniteEvaluation|TransportData",
+   "results": {
+    "t": "2026-10-24T16:03:55Z",
+    "tool": "grep",
+    "query": "BrownTowerComparison|FiniteEvaluation|TransportData",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic existing APIs only, no exact comparison-data type."
+  },
+  {
+   "tool": "rg",
+   "query": "BrownTowerComparison|BrownTowerRealization|finite evaluation in DAG, Mathlib, WeilConjectures and Sheaf; blueprint_refs.py search finite evaluation",
+   "results": "No full matching comparison interface. Existing etale-only realization and recorded image packages read and reused; generic realization is needed on the pro-etale site. Blueprint returns completed exchange, tower gluing and integral Verdier, none states this interface.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate complete interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-brown-tower-finite-site-comparison",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Ordinary-derived finite evaluation and bounded site comparison for the first Hom display.",
+   "via": [
+    "lem-pur-brown-tower-finite-site-comparison",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.BrownTowerBoundedTransport",
+  "declaration": "AlgebraicGeometry.BrownTowerComparison.Transport",
+  "declarations": [
+   "AlgebraicGeometry.BrownTowerComparison.TransportData",
+   "AlgebraicGeometry.BrownTowerComparison.Transport"
+  ],
+  "file": "lean/Sheaf/Paper/BrownTowerBoundedTransport.lean",
+  "statement": "structure Transport (S : StrictEtaleCompactSupport O t c) (G : EtaleTowerBrownAdjunction S) (H : FiniteEvaluation S G) (D : TransportData S G H) [finite : ∀ n : ℕ, Finite (Ring O t n)] : Prop",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be152aa2d",
+  "group": "N0",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be152aa2d",
+  "group": "N0",
+  "result": "fix",
+  "note": "Lean and node records correct in substance: all hypotheses exact (no Noetherian/finite-field assumption; E : Type (u+1) = dependency etaleTowerBrownAdjunction universe); FiniteEvaluation pins chi by identity transpose, e_nG≅right_n e_n natural on all unbounded Q with counit equation, quotient mates via mateEquiv of projection pinned to etaleTowerBrownRestriction, actual transition + identity/composition cocycles; Transport: bound only on finite exceptional images, GQ/N bounded below, N normalized, evaluation_def pasted, counit fixed by counit_formula via levelwise-pinned d, Hom Equiv = F(a)≫counit tied to Brown homEquiv, natural/additive/R-linear, full faithfulness on D+; no unbounded proetale adjoint. New def nodes (Realization/FiniteEvaluation/Site/BoundedTransport) are real data with pinning equations, no clash in side-live. Only fault: H11 'Second reading by N0' was the author's self-reading → FIX fixes/lem-pur-brown-tower-finite-site-comparison.report.md (worker report + New nodes verbatim + independent clause-by-clause second reading). Advisories: ordinaryFiniteRight/Adjunction = etaleUpper/etaleAdjunction body without IsNoetherian args; Ring = strictEtaleBrownRing; levelRealization = site-generic constantModule; proSystemDerived/proLevelDerived duplicate ExceptionalSystemTransport instances at default priority; d pinned only levelwise (node states no d). No Lean changed, no compile."
+ }
+}

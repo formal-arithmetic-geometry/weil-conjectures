@@ -1,0 +1,328 @@
+{
+ "id": "lem-pur-chart-normal-differential",
+ "kind": "statement",
+ "title": "Actual normal comparison of etale coordinate diagonals",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, $n\\geq1$ and $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, at $E=\\mathbf Q_\\ell$ in [def-pur-conventions]. Let $Y$ be an affine finite-type $k$-scheme, let $h:U\\to Y$ be smooth separated of finite type and pure relative dimension $d\\geq0$, and let $e:U\\to A=\\mathbf A^d_Y$ be an etale $Y$-map, where $U$ is finite type over $k$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms, def-weil-etale-morphism, def-sbc-affine-space]. Put $p:A\\to Y$, so $h=pe$. Use fibre products [def-pc-fibre-product] $W=U\\times_YU$, $W_A=A\\times_YA$, with first projections $p_U,p_A$ and diagonal closed immersions $\\Delta_U,\\Delta_A$ [def-weil-closed-immersion]. Put $Z=U\\times_AU\\subset W$ and $O=W\\setminus(Z\\setminus\\Delta_U(U))$, with its induced open subscheme structure [def-weil-open-immersion]. Write $i:O\\hookrightarrow W$ and $q=(e\\times e)|_O:O\\to W_A$. Both diagonal immersions are regular of codimension $d$ and their normal bundles are the relative tangent bundles [lem-pur-diagonal-regular-immersion, def-pur-normal-bundle]. Let $\\mathcal G_U,\\mathcal G_A$ be their conormal graded algebras [lem-pur-conormal-graded-algebra], using $O$ for the first ambient scheme. The actual graded comparison of [lem-pur-conormal-algebra-flat-base-change] is an isomorphism\n$$c:e^*\\mathcal G_A\\xrightarrow{\\sim}\\mathcal G_U,$$\nwith affine formula $[a]\\otimes r\\mapsto[q^\\sharp(a)r]$. Its degree-zero component is the identity and its degree-one component is the canonical conormal pullback map of [lem-weil-pbc-closed-immersion-conormal-flat-base-change]. Passing to relative spectra [lem-weil-pbc-affine-morphism-relative-spec] gives the specific isomorphism\n$$N_{\\Delta_U/W}=N_{\\Delta_U/O}\\xrightarrow{\\sim}U\\times_A N_{\\Delta_A/W_A}.$$\nIt preserves projection and zero section, and under the tangent-bundle identifications it is the differential $de:T_{U/Y}\\xrightarrow{\\sim}e^*T_{A/Y}$. More precisely, the degree-one coordinate difference from the two factors of $W_A$ pulls back to the corresponding difference of its two pulled-back coordinates on $O$; this fixes the differential convention on both sides. Restricting $W$ to $O$ does not change its conormal graded algebra on the diagonal. These identifications include $d=0$ and the empty source.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 2: normal bundles and the differential; Stacks 0635 (divisors-lemma-conormal-algebra-functorial-flat), 0473 (morphisms-lemma-conormal-functorial-flat); inherited proof Step 4"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-conormal-algebra-flat-base-change",
+  "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "lem-pur-diagonal-regular-immersion",
+  "def-pur-normal-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Construct the open O explicitly as the complement of the closed image of the complement of the etale diagonal in U times_A U. The map U times_A U to U times_Y U is a closed immersion, since p is separated. Its inverse image of O is precisely the etale diagonal. The open-immersion pullback criterion gives the Cartesian square, and the product of the two etale chart maps gives q etale. For positive d use the stated regular-diagonal theorem. For d=0, h and p are etale, their diagonal stalk maps are isomorphisms, and the empty sequence generates the zero kernel and preserves Krull dimension.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-open-immersion",
+    "lem-pur-diagonal-regular-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–2; actual normalized chart comparison"
+   }
+  },
+  {
+   "text": "Apply the actual conormal graded flat base-change map to the chart square and to restriction to O, using the identity map on the centre for the latter. Both maps are invertible and retain every normalization in IsBaseChangeMap, including the canonical degree-one conormal map.",
+   "uses": [
+    "lem-pur-conormal-algebra-flat-base-change",
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-closed-immersion-conormal-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–2; actual normalized chart comparison"
+   }
+  },
+  {
+   "text": "Construct the relative-spectrum map from the corresponding sheaf algebra map using global sections on the affine target and the affine-scheme adjunction. Prove its section formula on all opens by quasi-coherent module extensionality. For its Cartesian property, compare the module on the actual scheme pullback using affine pushforward base change and the module base-change algebra formula. The affine-scheme/quasi-coherent-algebra anti-equivalence reflects the resulting isomorphism. For the restriction over the identity base, use the same anti-equivalence directly.",
+   "uses": [
+    "def-pur-normal-bundle",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–2; actual normalized chart comparison"
+   }
+  },
+  {
+   "text": "Obtain the normalized diagonal derivation and prove its universal map from relative differentials invertible on the affine-open basis by the affine comparison theorem. Identify the ideal-sheaf model with the categorical kernel via the injective ideal inclusion. Transporting along this identification gives the required conormal isomorphism on arbitrary opens, with convention p2*a-p1*a.",
+   "uses": [
+    "lem-sc-diagonal-conormal-derivation-exists",
+    "lem-sc-diagonal-conormal-affine-comparison",
+    "def-sc-relative-differential-sheaf",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–2; actual normalized chart comparison"
+   }
+  },
+  {
+   "text": "The centred-coordinate theorem applied to the diagonal section of the first smooth projection proves that the canonical Sym(conormal) to conormal graded algebra map is invertible. Compose it with Sym of the normalized differential isomorphism and apply the relative-spectrum anti-equivalence. The counit fixes the section formula and the symmetric-algebra universal property identifies the augmentations, giving the required normal/tangent isomorphisms and zero-section identities. For the graded chart and restriction maps, degree-one extensionality shows that augmentation commutes: both composites vanish on degree one.",
+   "uses": [
+    "lem-trf-smooth-section-centred-coordinates",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+    "lem-pur-conormal-graded-algebra-hom-ext",
+    "pur9-dg-def-tangent",
+    "def-pur-normal-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–2; actual normalized chart comparison"
+   }
+  },
+  {
+   "text": "Represent the differential da by the ideal section p2*a-p1*a on the intersection of the two inverse images of its domain. The canonical degree-one base-change formula pulls this representative back by q; restriction to O pulls the corresponding representative on U times_Y U back by the open immersion. The two included ideal sections agree, by the two projection identities for q, so injectivity of the ideal inclusion identifies their conormal classes. Gradedness gives the same identity in the graded algebras. Conjugate the actual normal map by the constructed normal/tangent isomorphisms. Their section formulas and this identity show exactly da maps to d(e*a), proving IsDifferential. Transport the normal Cartesian square along these isomorphisms. All arguments preserve empty sources and d=0.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+    "lem-pur-conormal-algebra-flat-base-change",
+    "lem-pur-conormal-graded-algebra",
+    "def-sc-relative-differential-sheaf",
+    "pur9-dg-def-tangent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–2; actual normalized chart comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-conormal-algebra-flat-base-change",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+  "def-pur-normal-bundle",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-module-base-change-map-algebra",
+  "lem-sc-diagonal-conormal-derivation-exists",
+  "lem-sc-diagonal-conormal-affine-comparison",
+  "def-sc-relative-differential-sheaf",
+  "lem-trf-smooth-section-centred-coordinates",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+  "lem-pur-conormal-graded-algebra-hom-ext",
+  "pur9-dg-def-tangent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V7",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1–2; actual normalized chart comparison; Lean proof uses direct open geometry, affine pushforward base change, and normalized ideal representatives"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The flat conormal graded algebra comparison for Cartesian diagonal centres of an etale affine coordinate chart induces the differential isomorphism of normal vector bundles preserving zero sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.FormallyEtale.comp_bijective\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A] (I : Ideal B),\\n  I ^ 2 = ⊥ → Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"Given a formally étale algebra $ A $ over a commutative semiring $ R $, and an ideal $ I $ of a ring $ B $ with $ I^2 = 0 $, the function obtained by composing the canonical quotient homomorphism $ B \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale coordinate differences identify the full normal cone of the smooth diagonal with the pullback affine diagonal normal bundle via the derivative",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Algebra.FormallyEtale S T] : TensorProduct S T Ω[S⁄R] ≃ₗ[T] Ω[T⁄R]\", \"doc\": \"The canonical isomorphism `T ⊗[S] Ω[S⁄R] ≃ₗ[T] Ω[T⁄R]` for `T` a formally étale `S`-algebra.\\nAlso see `S ⊗[R] Ω[A⁄R] ≃ₗ[S] Ω[S ⊗[R] A⁄S]` at `KaehlerDifferential.tensorKaehlerEquiv`.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Algebra.FormallyEtale S T] (x : TensorProduct S T Ω[S⁄R]) : (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale R S T) x = (KaehlerDifferential.map\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Algebra.FormallyEtale S T] (s : S) : (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale R S T).symm ((KaehlerDifferential.D R T) ((algebraMap S T)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|normalBundle|tensorCotangent|tensorKaehlerEquiv",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"20\", \"text\": \"- `Algebra.Extension.Cotangent`: The conormal space `I/I²`. (Defined in `Generators/Basic`)\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"365\", \"text\": \"/-- The inclusion of `H¹(L_{S/R})` into the conormal space of a presentation. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"21\", \"text\": \"- `Algebra.Extension.tensorCotangentSpace`: If `T` is an `R`-algebra, there is a `T`-linear\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"23\", \"text\": \"- `Algebra.Extension.tensorCotangentOfFlat`: If `T` is flat over `R`, there is a `T`-linear\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"48\", \"text\": \"def tensorCotangentSpace (P : Extension.{u} R S) (T : Type*) [CommRing T] [Algebra R T] :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"68\", \"text\": \"    (KaehlerDifferential.tensorKaehlerEquiv R T P.Ring PT.Ring)).restrictScalars T\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"72\", \"text\": \"lemma tensorCotangentSpace_tmul_tmul (t : T) (s : S) (x : Ω[P.Ring⁄R]) :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"137\", \"text\": \"def tensorCotangentHom : S ⊗[D.T] D.presLeft.toExtension.Cotangent →ₗ[S] P.toExtension.Cotangent :=\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"142\", \"text\": \"lemma tensorCotangentHom_tmul (x : D.presLeft.toExtension.ker) :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"143\", \"text\": \"    D.tensorCotangentHom (1 ⊗ₜ[D.T] Extension.Cotangent.mk x) =\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"145\", \"text\": \"  simp_rw +instances [tensorCotangentHom, LinearMap.liftBaseChange_tmul, one_smul, presLeft,\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"line\": \"151\", \"text\": \"def tensorCotangentInv : P.toExtension.Cotangent →ₗ[S] S ⊗[D.T] D.presLeft.toExtension.Cotangent :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"95\", \"text\": \"    (KaehlerDifferential.tensorKaehlerEquiv R 𝓀[R] P Pp).symm\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"185\", \"text\": \"    .of_equiv (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale R (MvPolynomial (Fin n) R) P')\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"line\": \"15\", \"text\": \"- `KaehlerDifferential.tensorKaehlerEquivBase`: `(S ⊗[R] Ω[A⁄R]) ≃ₗ[S] Ω[B⁄S]` for `B = S ⊗[R] A`.\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"line\": \"16\", \"text\": \"- `KaehlerDifferential.tensorKaehlerEquiv`: `(B ⊗[A] Ω[A⁄R]) ≃ₗ[B] Ω[B⁄S]` for `B = S ⊗[R] A`.\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"line\": \"169\", \"text\": \"lemma tensorKaehlerEquiv_left_inv [Algebra.IsPushout R S A B] :\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"line\": \"187\", \"text\": \"Also see `KaehlerDifferential.tensorKaehlerEquiv` for the version with `B ⊗[A] Ω[A⁄R]`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"line\": \"189\", \"text\": \"def tensorKaehlerEquivBase [h : Algebra.IsPushout R S A B] :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"22\", \"text\": \"- `Ideal.tensorCotangentHom`: The canonical map `T ⊗[R] I/I² → (I · (T ⊗[R] S))/(I · (T ⊗[R] S))²`.\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"23\", \"text\": \"- `Ideal.tensorCotangentEquiv`: When `T` is `R`-flat, `tensorCotangentHom` is an isomorphism.\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"41\", \"text\": \"This map is always surjective (`tensorCotangentHom_surjective`) and injective\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"42\", \"text\": \"if `T` is `R`-flat (`tensorCotangentHom_injective_of_flat`). -/\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"43\", \"text\": \"def tensorCotangentHom :\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"line\": \"18\", \"text\": \"- `KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale`:\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The flat conormal graded algebra comparison for Cartesian diagonal centres of an etale affine coordinate chart induces the differential isomorphism of normal vector bundles preserving zero sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Bundle.contMDiffOn_zeroSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \"{t : Set B} : ContMDiffOn IB (IB.prod 𝓘(𝕜, F)) n (zeroSection F E) t\", \"doc\": \"The zero section of a vector bundle over a base space $ B $ with fibers modeled on a normed vector space $ F $ over a nontrivially normed field $ \\\\mathbb{K} $ is $ C^n $-differentiable on any subset $\"}\n  {\"name\": \"Bundle.contMDiff_zeroSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \": ContMDiff IB (IB.prod 𝓘(𝕜, F)) n (zeroSection F E)\", \"doc\": \"The zero section of a vector bundle is $ C^n $-differentiable with respect to the product model structure on the total space, where the base space is modeled on $ I_B $ and the fiber is modeled on $ \\\\\"}\n  {\"name\": \"Bundle.mdifferentiableAt_zeroSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.MDifferentiable\", \"type\": \"{x : B} : MDifferentiableAt IB (IB.prod 𝓘(𝕜, F)) (zeroSection F E) x\", \"doc\": \"The zero section of a vector bundle is differentiable at every point in the base space with respect to the product model with corners defined by the base's model and the fiber's model.\"}\n  {\"name\": \"Bundle.mdifferentiableOn_zeroSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.MDifferentiable\", \"type\": \"{t : Set B} : MDifferentiableOn IB (IB.prod 𝓘(𝕜, F)) (zeroSection F E) t\", \"doc\": \"The zero section of a vector bundle is differentiable on every subset of the base space, with respect to the product model structure on the base and fiber.\"}\n  {\"name\": \"Bundle.mdifferentiable_zeroSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.MDifferentiable\", \"type\": \": MDifferentiable IB (IB.prod 𝓘(𝕜, F)) (zeroSection F E)\", \"doc\": \"The zero section of a vector bundle is differentiable with respect to the model structures $ I_B $ and the product model $ I_B \\\\times \\\\mathcal{I}(\\\\mathbb{K}, F) $, where $ \\\\mathcal{I}(\\\\mathbb{K}, F) $\"}\n  {\"name\": \"Bundle.contMDiffAt_zeroSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \"{x : B} : ContMDiffAt IB (IB.prod 𝓘(𝕜, F)) n (zeroSection F E) x\", \"doc\": \"The zero section of a vector bundle is $ C^n $-differentiable at every point in the base space $ B $. This means that, with respect to appropriate charts on the base manifold and the product model str\"}\n  {\"name\": \"ContMDiffSection.coe_zero\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \": ⇑(0 : Cₛ^n⟮I; F, V⟯) = 0\", \"doc\": \"The zero section of a vector bundle over a manifold with corners, which maps each point to the zero element in its fiber, when coerced to a function, equals the zero function that sends every point to\"}\n  {\"name\": \"Bundle.contMDiffWithinAt_zeroSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \"{t : Set B} {x : B} : ContMDiffWithinAt IB (IB.prod 𝓘(𝕜, F)) n (zeroSection F E) t x\", \"doc\": \"For a vector bundle over a manifold with corners modeled on a normed vector space, the zero section mapping each base point to its fiber's zero element is $ C^n $-differentiable within any subset $ t \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "normalBundle|conormal.*[Bb]aseChange|diagonal.*[Dd]ifferential",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the actual scheme normal comparison with all clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normal bundle map of an etale morphism along smooth diagonals is its differential",
+   "results": "8 hits; hfdifferential, fdifferential_apply, fdifferential, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, mdifferentiableAt_totalSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the actual scheme normal comparison with all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "results": "3 hits; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the actual scheme normal comparison with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of conormal graded algebras for an etale coordinate diagonal induces the differential isomorphism of normal bundles preserving zero sections",
+   "results": "8 hits; KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Generators.CotangentSpace.compEquiv_symm_zero, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.Generators.CotangentSpace.compEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the actual scheme normal comparison with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded algebra of the ideal of a smooth diagonal pulls back under etale maps and its degree one map sends da to d of the pullback a",
+   "results": "8 hits; KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.Generators.H1Cotangent.δ_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Generators.H1Cotangent.δAux_ofComp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Generators.H1Cotangent.δ_eq_δAux",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the actual scheme normal comparison with all clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-orientation-charts",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-orientation-charts",
+   "place": "Step 2: normal bundles and the differential; Stacks 0635 (divisors-lemma-conormal-algebra-functorial-flat), 0473 (morphisms-lemma-conormal-functorial-flat); inherited proof Step 4",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-chart-normal-differential",
+  "worker": "stage1",
+  "summary": "Expanded the chart normal comparison into the Cartesian/flat hypotheses, actual graded map, open-neighbourhood invariance, relative-spectrum and augmentation calculation, and normalized coordinate-difference calculation. Reused all geometric and algebraic tools; no new nodes or changed statement.",
+  "blueprint": "det-sp-orientation-charts proof Step 2: normal bundles; its Step 1 supplies the Cartesian domain.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-diagonal-regular-immersion",
+    "why": "Generic The diagonal is a regular immersion used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+    "why": "Generic Conormal sheaf of a closed immersion under (flat) base change used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic Conormal graded algebra on a closed subscheme used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic Affine morphisms and quasi-coherent algebras (relative spectrum) used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Generic Relative Spec commutes with base change used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-diagonal-conormal-derivation-exists",
+    "why": "Generic The normalized difference derivation into the diagonal conormal used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-diagonal-conormal-affine-sections",
+    "why": "Generic Affine diagonal conormal coordinates and normalization formula used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "why": "Generic Conormal sheaf of the diagonal and relative differentials used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+    "why": "Generic QuasiCoherentSymmetricAlgebraCore used only for its stated geometric/algebraic construction or coordinate formula; the orientation unit provides no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-diagonal-regular-immersion",
+  "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-sc-diagonal-conormal-derivation-exists",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-67e11f501",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-67e11f501 (reviewer sub-agent of L); spot-checked: First split of the worker-created item, with 0 new nodes and no repair note, so the re-split rule does not apply. The statement is unchanged. Its 14 bracket citations are exactly the stmt_deps, and proof_deps is the union of the 16 step uses. There is no SGA citation. Step 1: lem-pur-chart-cartesian-domain is applied with X=U, j=id and V=Y (Y affine). All its hypotheses hold, and it gives O, the Cartesian square of centres and q étale, hence flat. lem-pur-diagonal-regular-immersion needs neither d>=1 nor properness. Step 2: lem-pur-conormal-algebra-flat-base-change is applied with (g,i',f)=(q,Delta_A,e). It gives the actual c with [a]⊗r -> [q#(a)r], c_0=id, c_1 the conormal map, and c an isomorphism. This matches Stacks 0635 (divisors.tex line 4454) and 0473. Step 3: restricting to the open neighbourhood O is elementary and correct. Step 4: relative Spec, its anti-equivalence and its base change (Stacks 01LX) give the map, and since c is graded with c_0=1, epsilon_U c = e*epsilon_A, so the zero sections correspond. Step 5: with the convention p2*a-p1*a -> da (Stacks 08S2), q=e×e gives c_1(da)=d(e*a). Uniqueness of algebra maps out of Sym (lem-weil-pbc-quasi-coherent-symmetric-algebra-core) then identifies the map with de. The direction was checked. The step implicitly uses Sym C ≅ G for a regular immersion as part of the Step 1 identification, which is acceptable. Step 6: the empty source and the d=0 case are correct. Small cases checked: identity, a coordinate permutation, t->t^m on G_m with m invertible (d(t^m)=m t^(m-1) dt), and the two-sheet étale cover in d=0. No duplicate among the DAG's chart, normal-bundle and differential nodes; the sibling lem-pur-chart-dnc-vector-factors consumes this map. The 9 generic tool_uses are accepted. Batch-5 flag: pur9-dg-def-tangent reaches lem-trf-dth-fitting-smooth-locus (Stacks 0C3K, the Fitting-ideal description of the smooth locus) through a stmt_dep of that definition. This is a general scheme fact that neither the trace formula nor Poincaré duality gives, and it is not a step of either. The item uses only the definition T=Spec Sym Omega, so the citation is accepted. Maintainer note: the flag comes from that definition's stmt_dep on a sec-trace-formula node."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartNormalDifferential",
+  "declaration": "AlgebraicGeometry.ChartNormalDifferential.comparison",
+  "declarations": [
+   "AlgebraicGeometry.ChartNormalDifferential.normalAlgebraIso",
+   "AlgebraicGeometry.ChartNormalDifferential.IsSpecMap",
+   "AlgebraicGeometry.ChartNormalDifferential.pullbackSection",
+   "AlgebraicGeometry.ChartNormalDifferential.IsDifferenceIdentification",
+   "AlgebraicGeometry.ChartNormalDifferential.IsNormalTangentIdentification",
+   "AlgebraicGeometry.ChartNormalDifferential.IsDifferential",
+   "AlgebraicGeometry.ChartNormalDifferential.Comparison",
+   "AlgebraicGeometry.ChartNormalDifferential.comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ChartNormalDifferential.lean",
+  "statement": "theorem comparison (D : WeilConjectures.FiniteFieldDatum.{u}) (_C : D.CoefficientDatum) (n : ℕ) (_hn : 1 ≤ n) {Y U : Scheme.{u}} [IsAffine Y] (aY : Y ⟶ Spec (CommRingCat.of D.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (d : ℕ) (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e] [IsSeparated (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y))] [LocallyOfFiniteType (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y))] [QuasiCompact (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y))] [SmoothOfRelativeDimension d (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y))] : Nonempty (@Comparison U (AffineSpace (ULift.{u} (Fin d)) Y) Y d (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) e inferInstance inferInstance (SmoothOfRelativeDimension.smooth (Nat.card (ULift.{u} (Fin d))) (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)) (SmoothOfRelativeDimension.smooth d (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y))))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The Comparison structure packages every clause with uniquely normalized maps: the existing graded base-change predicate, the relative-spectrum section formula, and the second-minus-first differential convention. The actual construction of O is specified as an equality of opens; no arbitrary comparison or chosen isomorphism is substituted. Regularity is given by stalk regular sequences and the codimension equality, retaining d=0 and the empty source; the normal cone is the existing relative-spectrum model reexported by PurityNormalProjection."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-131847a5b",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Read the node, all 14 stmt_dep records (unchanged vs live), the live dependency sources (IsBaseChangeMap/existsUnique_baseChangeMap, PurityNormalBundle, RelativeTangentBundle, IsRegularImmersionOfPureCodimension, PurityFiniteSetting) and the delivered module. Hypotheses match the node exactly (Y affine finite type over k; h=e≫p smooth sep. finite type rel. dim d; e étale into AffineSpace (ULift (Fin d)) Y); no extra assumptions; d=0 and empty U kept; single universe. All Comparison data are pinned by their Prop fields: O by open_set, δ by mono, c by the dependency's ∃! IsBaseChangeMap, ν and r by IsSpecMap via the ring map ρ, ω by the p2−p1 difference convention, t by Sym degree one, de by IsDifferential. normal_is_differential checked on generators (da ↦ [p2*e*a − p1*e*a]), signs and directions consistent. Gates: no hollow defs, only the theorem sorry, docstrings with source/blueprint and the 6 proof steps, lines ≤100, imports resolve, no name clash, statement verbatim, report sections present. Advisory: setting unbundled (D,C,n,hn) rather than P with extension=⊥; tangent/differential/Sym declarations come from proof_dep nodes not in stmt_deps (H2 forbids adding them at stage 2; maintainer note); regularity written out because the predicate forces c≥1; normal cone is the Spec_Z G model. No file changed, so nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261025T022559-L-1767798",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

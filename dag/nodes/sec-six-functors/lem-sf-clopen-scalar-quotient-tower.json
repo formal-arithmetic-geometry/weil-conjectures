@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-clopen-scalar-quotient-tower",
+ "kind": "statement",
+ "title": "Clopen scalar quotient comparisons form a natural strict tower isomorphism",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme T, a clopen U, and normalized coefficient restriction data d of [def-sf-clopen-restriction-data]. The unrestricted completed-integral quotient tower of [def-weil-integral-reduction-tower], followed termwise by sfClopenComplexRestriction(d), is naturally isomorphic to sfClopenComplexRestriction(d) followed by the unrestricted quotient tower on U. The isomorphism is natural on all unbounded input complexes and commutes with every strict transition, without completeness or constructibility assumptions.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-sf-clopen-restriction-data",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-module (Tag 03D2), lemma-adjoint-pullback-pushforward-modules (Tag 03D7), lemma-push-pull-composition-modules (Tag 03D8), lemma-tensor-product-pullback (Tag 03EL); sites-cohomology.tex, Tag 06YY. Step 1 of lem-fix-clopen-integral-completion-restriction."
+ },
+ "proof": [
+  {
+   "text": "Take the actual quotient isomorphisms from sf_clopen_scalar_quotient_comparison. To prove transition compatibility and naturality in the complex, precompose with the inverse quotient comparison and apply the sheafified tensor-generator extensionality theorem. Its inverse sends a local pure tensor to the corresponding ambient pure tensor by the supplied normalization. For transitions use d.transition and the normalized unrestrictedIntegralTransition formula; for naturality use the scalar-extension map formula. NatTrans.ofOpSequence and pointwise invertibility assemble a natural isomorphism of strict towers.",
+   "uses": [
+    "lem-sf-clopen-scalar-quotient-comparison",
+    "def-weil-integral-reduction-tower",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-clopen-scalar-quotient-comparison",
+  "def-weil-integral-reduction-tower",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-module (Tag 03D2), lemma-adjoint-pullback-pushforward-modules (Tag 03D7), lemma-push-pull-composition-modules (Tag 03D8), lemma-tensor-product-pullback (Tag 03EL); sites-cohomology.tex, Tag 06YY. Step 1 of lem-fix-clopen-integral-completion-restriction.",
+  "note": "J6 proves this supporting comparison in full, separated after profiling; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms of inverse sequences from component isomorphisms compatible with successor transition maps",
+   "results": "Eight hits including NatIso.ofComponents_inv_app and ComposableArrows.isoMk; none proves coherence for the specified scalar quotient comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Assemble the proved tensor coherence with generic natural-isomorphism constructors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ofOpSequence",
+   "results": "Two hits: NatTrans.ofOpSequence and its app lemma in Mathlib.CategoryTheory.Functor.OfSequence.",
+   "date": "2026-10-27",
+   "verdict": "Use this constructor after proving the successor transition squares."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.ofOpSequence; quotient restriction in Mathlib/CategoryTheory/Functor/OfSequence.lean, dag/nodes, lean/Sheaf/Paper/SfClopenScalarQuotientComparison.lean",
+   "results": "Generic sequence constructor exists; SfClopenScalarQuotientComparison supplies component comparisons and tensor normalization, with coherence explicitly left to its consumer.",
+   "date": "2026-10-27",
+   "verdict": "No direct quotient tower naturality theorem; prove transition and map coherence on generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClopenIntegralCompletionRestriction",
+  "date": "2026-10-27",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Coefficient/strict-tower substep of lem-sf-clopen-pullback-quotient-tower, below the integral completion comparison.",
+   "via": [
+    "lem-fix-clopen-integral-completion-restriction",
+    "lem-fix-clopen-completed-restriction-comparison",
+    "lem-fix-clopen-projective-chart-common-refinement",
+    "lem-fix-constructible-projective-chart-refinement",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClopenScalarQuotientTower",
+  "file": "lean/Sheaf/Paper/ClopenScalarQuotientTower.lean",
+  "declaration": "WeilConjectures.clopenScalarQuotientTower",
+  "statement": "theorem clopenScalarQuotientTower\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : Scheme.{u}) (U : T.Opens) (hU : IsClosed (U : Set T))\n    (d : SfClopenCoefficientRestriction l E T U) :\n    Nonempty ((Functor.ofOpSequence (unrestrictedIntegralTransition l E T)).flip ⋙\n        (Functor.whiskeringRight ℕᵒᵖ _ _).obj (sfClopenComplexRestriction d) ≅\n      sfClopenComplexRestriction d ⋙\n        (Functor.ofOpSequence (unrestrictedIntegralTransition l E U.toScheme)).flip)",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.ClopenIntegralCompletionRestriction",
+  "worker": "stage3",
+  "summary": "Proved support argument separated after profiling; no new unproved obligation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T094428-L-224781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T094428-L-224781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

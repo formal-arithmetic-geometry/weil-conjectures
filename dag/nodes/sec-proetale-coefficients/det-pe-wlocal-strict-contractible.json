@@ -49,7 +49,65 @@
   "existing": true,
   "note": "Exact existing definitions in the root namespace: IsWLocalRing and IsWStrictlyLocalRing from WeilConjectures.RingTheory.ProEtale.WLocal, and IsWContractibleRing from WeilConjectures.RingTheory.ProEtale.WContractible. IsWLocalRing gives a w-local prime spectrum; WLocalSpace gives closed closed-points and uniqueness of closed specializations, with existence automatic for spectral spaces. IsWStrictlyLocalRing adds strict henselianity of Localization.AtPrime m for every maximal ideal m. IsWContractibleRing adds ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R)), using the quotient topology. The imported WLocalSpace.closedPointsHomeomorph identifies closed points with components and gives the equivalent closed-points formulation. No duplicate module is written."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "IsWContractibleRing",
+    "IsWLocalRing",
+    "IsWStrictlyLocalRing",
+    "WLocalSpace.closedPointsHomeomorph"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "IsWContractibleRing",
+     "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+     "lines": [
+      38,
+      42
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "IsWLocalRing",
+     "module": "WeilConjectures.RingTheory.ProEtale.WLocal",
+     "lines": [
+      28,
+      31
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "IsWStrictlyLocalRing",
+     "module": "WeilConjectures.RingTheory.ProEtale.WLocal",
+     "lines": [
+      149,
+      153
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "WLocalSpace.closedPointsHomeomorph",
+     "module": "WeilConjectures.Topology.SpectralSpace.WLocal.ConnectedComponents",
+     "lines": [
+      84,
+      87
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-pe-wlocal",
  "reviewed_lean": {
@@ -59,5 +117,15 @@
   "group": "Q68",
   "result": "pass",
   "note": "Existing binding to IsWLocalRing/IsWStrictlyLocalRing (WLocal.lean), IsWContractibleRing (WContractible.lean), WLocalSpace.closedPointsHomeomorph; read in slopmaster2 and side clone (identical, sorry-free). Clause check: WLocalSpace = spectral + closed closed-points + unique closed specialization (existence automatic) = closed max-spectrum + unique maximal ideal over each prime; strict locality = IsStrictlyHenselianLocalRing (Localization.AtPrime m) for all maximal m; contractible = ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R)) with quotient topology; closed-points equivalent via canonical homeomorph. Node statement and deps unchanged, lean.statement verbatim, no extra hypotheses or universe restriction, zero ring/field cases fine. lcompile of a check file (all #checks + closed-points derivation) compiled cleanly. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $R$ be a ring and $T=\\operatorname{Spec}R$, a spectral space with set $T^c$ of closed\npoints (the maximal ideals of $R$).\n\n1. $R$ is *w-local* if $T$ is w-local [def-weil-pbc-w-local]: $T^c$ is closed in $T$ and\n   every prime of $R$ is contained in exactly one maximal ideal.\n2. $R$ is *w-strictly local* if it is w-local and, for every maximal ideal $\\mathfrak m$,\n   the local ring $R_{\\mathfrak m}$ is strictly henselian\n   [def-weil-pbc-henselian-terminology].\n3. $R$ is *w-contractible* if it is w-strictly local and the profinite space\n   $\\pi_0(T)$ of connected components (with the quotient topology from $T$) is\n   extremally disconnected: the closure of every open subset of $\\pi_0(T)$ is open.\n   Equivalently, by [det-pe-wlocal-components], the compact Hausdorff space $T^c$ (with\n   the subspace topology) is extremally disconnected.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-cotangent-bar-diagram-compatibility",
+ "kind": "statement",
+ "title": "Polynomial-pair bar diagrams and semilinear comparison compatibility",
+ "statement": "Let $(A\\to B\\to C)\\to(A'\\to B'\\to C')$ be a commutative diagram of homomorphisms of commutative rings, with vertical maps $a_0,b_0,c_0$. Choose a common size bound and small identity-cover polynomial presentation sites for both triples. Let $\\mathcal E,\\mathcal C_i,u_i,F_i,M_i,a,b$ and their primed versions be the pair sites, projection functors and differential short exact sequences of [lem-trf-cotangent-differential-presheaf-ses]. Let $X_i=K_{\\mathcal E}^C(M_i)$, $X_i'=K_{\\mathcal E'}^{C'}(M_i')$, with $c_i,\\alpha_i,c_i',\\alpha_i'$ as in [lem-trf-cotangent-bar-term-identifications] and bar notation [def-trf-derived-colimit-bar-system]. Define $v:\\mathcal E\\to\\mathcal E'$ by\n$$(P\\to B,Q\\to C)\\longmapsto(P\\otimes_A A'\\to B',Q\\otimes_A A'\\to C').$$\nDefine $v_1(P)=P\\otimes_A A'$, $v_2(Q)=Q\\otimes_A A'$, $v_3(S)=S\\otimes_B B'$, with the induced augmentations. These are functors between the presentation sites. They satisfy $u_1'v=v_1u_1$, $u_2'v=v_2u_2$, and $u_3'v\\cong v_3u_3$ via\n$$(Q\\otimes_A A')\\otimes_{P\\otimes_A A'}B'\\simeq Q\\otimes_P B'\\simeq(Q\\otimes_P B)\\otimes_B B'.$$\nThere are $c_0$-semilinear natural maps $s_i:M_i\\to v^{-1}M_i'$ taking the differential generators $\\mathrm dp\\otimes c$, $\\mathrm dq\\otimes c$, and $\\mathrm d(q\\otimes1)\\otimes c$ to the corresponding primed differentials tensored with $c_0(c)$. They satisfy $s_2a=(v^{-1}a')s_1$ and $s_3b=(v^{-1}b')s_2$. The maps\n$$T_i:(U_n\\to\\cdots\\to U_0,x)\\longmapsto(vU_n\\to\\cdots\\to vU_0,s_{i,U_0}(x))$$\ntherefore give a morphism of the degreewise short exact sequences $0\\to X_1\\to X_2\\to X_3\\to0$ and $0\\to X_1'\\to X_2'\\to X_3'\\to0$, with the latter restricted to $C$. If $t_i$ denotes the induced coefficient map on the individual sites (on $F_1\\otimes_B C$ for $i=1$), then $c_i'T_i=K(v_i,t_i)c_i$ in $D(C)$, inserting the displayed natural isomorphism for $i=3$. Moreover\n$$\\alpha_i'T_i=f_i\\alpha_i\\quad(i=1,2,3)$$\nafter restriction to $C$, where $f_2:L_{C/A}\\to L_{C'/A'}$ and $f_3:L_{C/B}\\to L_{C'/B'}$ are the standard cotangent maps and $f_1:L_{B/A}\\otimes_B^{\\mathbf L}C\\to L_{B'/A'}\\otimes_{B'}^{\\mathbf L}C'$ is induced by the standard cotangent map for $(a_0,b_0)$ and $c_0$ [lem-trf-cotangent-resolution-coherence]. In bar-tensor coordinates the first comparison has coefficient formula $x\\otimes c\\mapsto t(x)\\otimes c_0(c)$, where $t:F_{B/A}\\to v_1^{-1}F_{B'/A'}$ sends $\\mathrm dp\\otimes r$ to $\\mathrm d(p\\otimes1)\\otimes b_0(r)$. These bar maps and the comparison identities respect identities and composition, with the canonical tensor-associativity identifications. No flatness or injectivity of any vertical map is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QL (section-functoriality), arbitrary ring squares applied to the pair-site construction of Tag 08QU (lemma-triangle-ses); sites-cohomology Tags 08PG/08PH (example-left-derived-colimits/example-morphism-categories) and 08Q8 (lemma-change-of-rings), explicit semilinear bar compatibility."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-differential-presheaf-ses",
+  "lem-trf-cotangent-bar-term-identifications",
+  "def-trf-derived-colimit-bar-system",
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Work with the common small presentation categories of [lem-trf-cotangent-differential-presheaf-ses]. If $P=A[x_s]$ and $Q=P[y_t]$, extension of coefficients gives $P\\otimes_A A'=A'[x_s]$ and $Q\\otimes_A A'=(P\\otimes_A A')[y_t]$: the inverse maps fix the displayed coefficients and variables. The augmentations send $p\\otimes a'$ to $b_0(\\epsilon_P(p))a'$ and $q\\otimes a'$ to $c_0(\\epsilon_Q(q))a'$. The ring squares make them compatible. On arrows use $\\phi\\otimes1,\\psi\\otimes1$ and then take opposites; these preserve identity and composition. This constructs $v,v_i$ and the first two projection identities. For the third let $P'=P\\otimes_A A'$, $Q'=Q\\otimes_A A'$. The balanced algebra map $Q'\\otimes_{P'}B'\\to Q\\otimes_P B'$ sends $(q\\otimes a')\\otimes b'$ to $q\\otimes(a'b')$, and its inverse sends $q\\otimes b'$ to $(q\\otimes1)\\otimes b'$. Next $Q\\otimes_P B'\\to(Q\\otimes_P B)\\otimes_B B'$ sends $q\\otimes b'$ to $(q\\otimes1)\\otimes b'$, with inverse $(q\\otimes b)\\otimes b'\\mapsto q\\otimes b_0(b)b'$. Their relations, augmentations and arrow compatibility follow on pure tensors. Thus they give the asserted natural isomorphism of third projections. Transport to the chosen skeletons uses these same identifications.",
+   "uses": [
+    "lem-trf-cotangent-differential-presheaf-ses"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QL (section-functoriality), polynomial coefficient extension; 08QU (lemma-triangle-ses), polynomial-pair values."
+   }
+  },
+  {
+   "text": "At a pair $U$ use the three differential descriptions of [lem-trf-cotangent-differential-presheaf-ses]. The universal property in [def-weil-pbc-kahler-differentials] gives the maps $\\mathrm d p\\mapsto\\mathrm d(p\\otimes1)$ and $\\mathrm d q\\mapsto\\mathrm d(q\\otimes1)$: the latter derivations kill $A$, and the relative one kills $P$ since its target kills $P'$. Extend by $c\\mapsto c_0(c)$ to obtain $s_1,s_2,s_3$. Balancing holds because the polynomial-to-coefficient augmentations commute with the ring diagram. In the original third coordinates the formula is $\\mathrm d(q\\otimes1)\\otimes c\\mapsto\\mathrm d((q\\otimes1)\\otimes1)\\otimes c_0(c)$, followed by the step-1 identification; these generators span, since $\\mathrm d(q\\otimes b)=b\\,\\mathrm d(q\\otimes1)$ over $B$. For a pair arrow $(\\phi,\\psi)$, both routes send the first two generators to $\\mathrm d(\\phi(p)\\otimes1)\\otimes c_0(c)$ and $\\mathrm d(\\psi(q)\\otimes1)\\otimes c_0(c)$, respectively; the third has the same relative formula. This proves naturality. The two routes through $a$ send $\\mathrm dp\\otimes c$ to $\\mathrm d(p\\otimes1)\\otimes c_0(c)$ in the middle module. The two routes through $b$ send $\\mathrm dq\\otimes c$ to its relative primed differential tensored with $c_0(c)$. Equality on generators proves both squares.",
+   "uses": [
+    "lem-trf-cotangent-differential-presheaf-ses",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QU (lemma-triangle-ses), evaluation and differential generator maps; 08QL (section-functoriality)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-colimit-bar] to $v$, the coefficient map $c_0:C\\to C'$, and the natural transformations $s_i$. Its semilinear bar formula is exactly $T_i$ in the statement. Its exactness clause takes the two objectwise short exact sequences of [lem-trf-cotangent-differential-presheaf-ses] to degreewise short exact sequences. The squares in step 2 hold in each bar summand, so $T_2K(a)=K(a')T_1$ and $T_3K(b)=K(b')T_2$. In particular this is a morphism of the two short exact sequences after scalar restriction. The chain-map assertion can also be read directly: deleting an internal or leftmost vertex leaves the same coefficient on both sides, and deleting the rightmost vertex commutes with $s_i$ by its naturality; hence every signed face commutes.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-differential-presheaf-ses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits) and 08PH (example-morphism-categories), exactness and chain-map formula."
+   }
+  },
+  {
+   "text": "By [lem-trf-cotangent-lower-shriek], $c_i$ reindexes each chain by $u_i$ and retains its coefficient. Define $t_i$ on the individual sites by the differential generator maps just used, and for $i=1$ put $t_1(x\\otimes c)=t(x)\\otimes c_0(c)$. The formulas are natural by the same universal-property calculation in step 2. For $i=1,2$, $c_i'T_i$ and $K(v_i,t_i)c_i$ reindex the chain by the equal functors $u_i'v=v_iu_i$ and apply the same coefficient map, so agree already on complexes. For $i=3$ use the step-1 natural isomorphism. It takes the image of $q\\otimes b$ to $(q\\otimes1)\\otimes b_0(b)$, and thus identifies the coefficient maps on $\\mathrm d(q\\otimes1)\\otimes c$. The natural-isomorphism clause of [lem-trf-derived-colimit-bar] makes the two resulting bar maps equal in $D(C)$. This proves all three $c_i'T_i=K(v_i,t_i)c_i$ identities with the stated third identification.",
+   "uses": [
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), reindexing; cotangent Tag 08QW (lemma-triangle-compute-lower-shriek), comparisons; natural-isomorphism bar homotopy as in cited node."
+   }
+  },
+  {
+   "text": "For $i=2$ apply the arbitrary-square identity of [lem-trf-cotangent-sheaf-model] to $(A\\to C)\\to(A'\\to C')$; for $i=3$ apply it to $(B\\to C)\\to(B'\\to C')$. The site functors and coefficient maps in that identity are precisely $v_i,t_i$. It gives $\\theta_i'K(v_i,t_i)=f_i\\theta_i$, with all target scalars restricted along $c_0$. By [lem-trf-cotangent-bar-term-identifications], $\\alpha_i=\\theta_i c_i$ and $\\alpha_i'=\\theta_i'c_i'$ for these two indices. Substituting step 4 yields $\\alpha_i'T_i=\\theta_i'K(v_i,t_i)c_i=f_i\\alpha_i$. The cited square identity identifies these $f_i$ with the standard-resolution maps, not merely some maps with the same cohomology.",
+   "uses": [
+    "lem-trf-cotangent-sheaf-model",
+    "lem-trf-cotangent-bar-term-identifications"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), two descriptions of the canonical map; Tag 08QX (proposition-triangle), second and third identifications."
+   }
+  },
+  {
+   "text": "Write $H=L\\pi_{1,!}^B F_1$ and $H'=L\\pi_{1,!}^{B'}F_1'$, and let $h:H\\to H'$ be the semilinear bar map for $v_1,t$. Put $J=K_{\\mathcal C_1}^C(F_1\\otimes_B C)$, and let $\\beta:J\\simeq H\\otimes_B^{\\mathbf L}C$ be the bar-tensor comparison (similarly for primes). The flat-value hypothesis needed in [lem-trf-derived-colimit-change-rings] follows directly from [lem-trf-cotangent-bar-term-identifications] for $F_1$ and $F_1'$. Apply its compatibility with indexing functors and coefficient-ring squares to $(B\\to C)\\to(B'\\to C')$. It gives $\\beta'K(v_1,t_1)=\\widetilde h\\beta$, where $\\widetilde h$ is the induced derived tensor map. On a bar generator both routes are $(v_1P_\\bullet,t(x))\\otimes c_0(c)$, proving the requested coefficient formula as well. The square identity of [lem-trf-cotangent-sheaf-model] for $(A\\to B)\\to(A'\\to B')$ is $\\theta_{B'/A'}h=f_{a_0,b_0}^{\\mathrm{std}}\\theta_{B/A}$. Its image under the induced derived tensor maps gives $(\\theta_{B'/A'}\\otimes^{\\mathbf L}1)\\widetilde h=f_1(\\theta_{B/A}\\otimes^{\\mathbf L}1)$. Finally [lem-trf-cotangent-bar-term-identifications] defines $\\alpha_1=(\\theta_{B/A}\\otimes^{\\mathbf L}1)\\beta c_1$. Substitute step 4 and the last two identities into this composite to obtain $\\alpha_1'T_1=f_1\\alpha_1$. No replacement of derived tensor by ordinary tensor for an arbitrary complex has been used.",
+   "uses": [
+    "lem-trf-derived-colimit-change-rings",
+    "lem-trf-cotangent-bar-term-identifications",
+    "lem-trf-cotangent-sheaf-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q8 (lemma-change-of-rings), flat-presheaf bar comparison; cotangent Tags 08QL and 08QX (section-functoriality, proposition-triangle), first comparison."
+   }
+  },
+  {
+   "text": "For an identity diagram each differential generator is fixed, and $(p\\otimes a)\\mapsto pa$ identifies its polynomial extension functor with the identity. For two composable diagrams the tensor-associativity map $(P\\otimes_A A')\\otimes_{A'}A''\\to P\\otimes_A A''$ sends $(p\\otimes a')\\otimes a''$ to $p\\otimes a'a''$; on differential coefficients the composite sends $\\mathrm dp\\otimes c$ to $\\mathrm d(p\\otimes1)\\otimes(c_0'c_0)(c)$. The same check applies to $Q$ and $Q\\otimes_P B$ and to the step-1 third-projection isomorphism, on their pure tensors. Thus the $s_i$ compose under these natural identifications. Identity and composition of the $T_i$ now follow from [lem-trf-derived-colimit-bar], with its natural-isomorphism clause where skeletons require it. The standard cotangent maps obey identity and composition by [lem-trf-cotangent-resolution-coherence]; the change-of-rings identifications obey the coefficient-square compatibility of [lem-trf-derived-colimit-change-rings]. Consequently the comparison identities in steps 4--6 compose by substitution and associativity. None of these arguments assumes flatness or injectivity of the vertical maps: the only flatness invoked was that of the polynomial differential values.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-derived-colimit-change-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), composition of polynomial-extension maps; sites-cohomology Tags 08PH/08Q8, reindexing and coefficient-change comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-cotangent-bar-term-identifications",
+  "lem-trf-cotangent-differential-presheaf-ses",
+  "lem-trf-cotangent-lower-shriek",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-cotangent-sheaf-model",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-derived-colimit-change-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QL, 08QU, 08QW, 08QX and sites-cohomology Tags 08PG, 08PH, 08Q8; explicit generator verification of triple-diagram and comparison compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A commutative diagram of three rings induces semilinear maps of short exact differential bar complexes compatible with standard cotangent comparison isomorphisms",
+   "results": "8 hits; top=['Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Generators.H1Cotangent.δ_comp_equiv', 'Algebra.Generators.H1Cotangent.δ', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.Extension.H1Cotangent.map_comp', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Extension.CotangentSpace.map_cotangentComplex']; note=; digest=75e359ad68fdbb0d. Full output retained in lem-trf-cotangent-bar-diagram-compatibility.search-0.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: presentation CotangentSpace.map_cotangentComplex and H1Cotangent composition formulas do not supply the three semilinear polynomial-pair bar maps or the derived tensor comparison square. Read Extension/Cotangent/Basic.lean:53-65,98-117 and Kaehler/JacobiZariski.lean:15-48."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"map_comp\"",
+   "results": "9 hits; top=['Algebra.Extension.Cotangent.map_comp', 'Algebra.Extension.H1Cotangent.map_comp_apply', 'Algebra.Extension.Cotangent.map_comp_h1Cotangentι', 'Algebra.Extension.H1Cotangent.map_comp', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_comp_apply', 'Algebra.Extension.CotangentSpace.map_comp', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange']; note=; digest=9ac468d62153153f. Full output retained in lem-trf-cotangent-bar-diagram-compatibility.search-1.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: presentation CotangentSpace.map_cotangentComplex and H1Cotangent composition formulas do not supply the three semilinear polynomial-pair bar maps or the derived tensor comparison square. Read Extension/Cotangent/Basic.lean:53-65,98-117 and Kaehler/JacobiZariski.lean:15-48."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(naturality|commut|transitiv)|bar.*differential [sub=RingTheory]",
+   "results": "3 hits; top=['Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean', 'Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean']; note=; digest=1d8237d5454fd14f. Full output retained in lem-trf-cotangent-bar-diagram-compatibility.search-2.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: presentation CotangentSpace.map_cotangentComplex and H1Cotangent composition formulas do not supply the three semilinear polynomial-pair bar maps or the derived tensor comparison square. Read Extension/Cotangent/Basic.lean:53-65,98-117 and Kaehler/JacobiZariski.lean:15-48."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of polynomial presentations commutes with all three derived cotangent comparison maps and the scalar extension map",
+   "results": "8 hits; top=['LinearMap.toMvPolynomial_baseChange', 'LinearMap.polyCharpolyAux_baseChange', 'Algebra.Presentation.baseChange', 'Algebra.PreSubmersivePresentation.baseChange_toPresentation', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Extension.baseChange', 'Algebra.SubmersivePresentation.baseChange']; note=; digest=32c077bc022bdf87. Full output retained in lem-trf-cotangent-bar-diagram-compatibility.search-3.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: presentation CotangentSpace.map_cotangentComplex and H1Cotangent composition formulas do not supply the three semilinear polynomial-pair bar maps or the derived tensor comparison square. Read Extension/Cotangent/Basic.lean:53-65,98-117 and Kaehler/JacobiZariski.lean:15-48."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bar maps for a diagram A B C to A prime B prime C prime commute with the comparison to cotangent complexes including the first derived tensor term",
+   "results": "8 hits; top=['Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.Generators.H1Cotangent.δ_comp_equiv', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Generators.H1Cotangent.δAux_ofComp', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Generators.CotangentSpace.fst_compEquiv']; note=; digest=9043b20cc0397e8c. Full output retained in lem-trf-cotangent-bar-diagram-compatibility.search-4.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: presentation CotangentSpace.map_cotangentComplex and H1Cotangent composition formulas do not supply the three semilinear polynomial-pair bar maps or the derived tensor comparison square. Read Extension/Cotangent/Basic.lean:53-65,98-117 and Kaehler/JacobiZariski.lean:15-48."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(naturality|commut|transitiv)|bar.*differential [sub=RingTheory]",
+   "results": "3 hits; top=['Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean', 'Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean']; note=; digest=1d8237d5454fd14f. Full outputs saved in sandbox search-0.txt through search-4.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned extension CotangentSpace maps and H1Cotangent/Jacobi-Zariski formulas concern the naive presentation complex, not all three derived polynomial-pair bar comparisons. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 98-117, 339-344; Kaehler/JacobiZariski.lean:15-48; Extension/Cotangent/BaseChange.lean:15-27,46-65."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"map_comp\"",
+   "results": "9 hits; top=['Algebra.Extension.Cotangent.map_comp', 'Algebra.Extension.H1Cotangent.map_comp_apply', 'Algebra.Extension.Cotangent.map_comp_h1Cotangentι', 'Algebra.Extension.H1Cotangent.map_comp', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_comp_apply', 'Algebra.Extension.CotangentSpace.map_comp', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange']; note=; digest=9ac468d62153153f. Full outputs saved in sandbox search-0.txt through search-4.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned extension CotangentSpace maps and H1Cotangent/Jacobi-Zariski formulas concern the naive presentation complex, not all three derived polynomial-pair bar comparisons. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 98-117, 339-344; Kaehler/JacobiZariski.lean:15-48; Extension/Cotangent/BaseChange.lean:15-27,46-65."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of polynomial presentations commutes with all three derived cotangent comparison maps and the scalar extension map",
+   "results": "8 hits; top=['LinearMap.toMvPolynomial_baseChange', 'LinearMap.polyCharpolyAux_baseChange', 'Algebra.Presentation.baseChange', 'Algebra.PreSubmersivePresentation.baseChange_toPresentation', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Extension.baseChange', 'Algebra.SubmersivePresentation.baseChange']; note=; digest=32c077bc022bdf87. Full outputs saved in sandbox search-0.txt through search-4.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned extension CotangentSpace maps and H1Cotangent/Jacobi-Zariski formulas concern the naive presentation complex, not all three derived polynomial-pair bar comparisons. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 98-117, 339-344; Kaehler/JacobiZariski.lean:15-48; Extension/Cotangent/BaseChange.lean:15-27,46-65."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative diagram of three rings induces semilinear maps of short exact differential bar complexes compatible with standard cotangent comparison isomorphisms",
+   "results": "8 hits; top=['Algebra.H1Cotangent.map', 'Algebra.Generators.H1Cotangent.δ_comp_equiv', 'Algebra.Extension.H1Cotangent.map_comp', 'Algebra.Extension.H1Cotangent.map', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Generators.H1Cotangent.δ', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Generators.H1Cotangent.δAux_ofComp']; note=; digest=cec47561c0e98ab7. Full outputs saved in sandbox search-0.txt through search-4.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned extension CotangentSpace maps and H1Cotangent/Jacobi-Zariski formulas concern the naive presentation complex, not all three derived polynomial-pair bar comparisons. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 98-117, 339-344; Kaehler/JacobiZariski.lean:15-48; Extension/Cotangent/BaseChange.lean:15-27,46-65."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the derived cotangent transitivity triangle computed by polynomial pair presentation categories and bar tensor complexes",
+   "results": "8 hits; top=['Algebra.Extension.H1Cotangent.map_comp', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Extension.Cotangent.map_comp', 'Algebra.H1Cotangent.map', 'Algebra.Generators.H1Cotangent.δ_comp_equiv', 'Algebra.Extension.CotangentSpace.map_comp_apply', 'Algebra.Extension.CotangentSpace.map_comp']; note=; digest=d4efd2c33cec9726. Full outputs saved in sandbox search-0.txt through search-4.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned extension CotangentSpace maps and H1Cotangent/Jacobi-Zariski formulas concern the naive presentation complex, not all three derived polynomial-pair bar comparisons. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 98-117, 339-344; Kaehler/JacobiZariski.lean:15-48; Extension/Cotangent/BaseChange.lean:15-27,46-65."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-transitivity-triangle",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Re-split component: old steps 7--8: polynomial-pair diagram maps, tensor-associativity and compatibility of the three term comparisons.",
+   "via": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-bar-diagram-compatibility",
+  "worker": "stage1",
+  "summary": "Q143: seven-step proof from existing semilinear bar, differential, lower-shriek, cotangent-square and change-of-rings statements; all tensor and generator checks explicit, no new nodes and no statement change.",
+  "blueprint": "Historical auxiliary chain in blueprint.from: transitivity-triangle old steps 7--8, arbitrary polynomial-pair diagram maps and all three term comparisons. Realizes this inherited supporting input only; the main-20261015 ancestor now follows the contracting-correspondence route, whose unit realization is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-3b8e0b13d",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-3b8e0b13d (reviewer sub-agent of L); spot-checked: Ordinary one-level split, with no repair note. It has 7 steps, no new nodes, and the statement and stmt_deps are unchanged. Steps 1-2 are elementary and check out: P⊗A'=A'[x], Q⊗A'=(P⊗A')[y]; both inverses of the third-projection isomorphism Q'⊗_{P'}B'≅Q⊗_PB'≅(Q⊗_PB)⊗_BB' hold on pure tensors; s_i is well defined by the Kähler universal property (d(a⊗1)=0, balancing through the commuting square); the a/b squares hold on spanning generators, using d(q⊗b)=b d(q⊗1). Step 3: the semilinear formula, exactness and composition clauses of lem-trf-derived-colimit-bar give the morphism of short exact sequences, and the face convention matches (d_n deletes U_0). Step 4: the bar representative of c_i in lem-trf-cotangent-lower-shriek gives the i=1,2 squares on chains; for i=3 the natural-isomorphism homotopy clause applies. Step 5: the arbitrary-square paragraph of lem-trf-cotangent-sheaf-model has exactly u=v_i and t=t_i, and with α_i=θc_i (term-identifications) it gives α_i'T_i=f_iα_i. Step 6: the flat-value α_1 composite from term-identifications, the functor/ring-square compatibility of lem-trf-derived-colimit-change-rings and the (a0,b0) sheaf-model square give α_1'T_1=f_1α_1; derived tensors are taken only on flat-termed complexes. Step 7: associativity is a natural isomorphism of indexing functors, covered by the bar node; standard-map composition comes from resolution-coherence. Source checked: Stacks cotangent.tex section-functoriality (08QL) and proposition-triangle (08QX). No flatness or injectivity is used; I checked the identity diagram, C'=0, and b0=Z→Z/n. No duplicate: bar-arrow-comparisons treats maps inside a single triple. The closure of 395 nodes contains no cycle. No SGA citation. All cited nodes are in unit sk-i-curve-zero apart from the Kähler definition leaf, so no tool_uses are needed."
+ }
+}

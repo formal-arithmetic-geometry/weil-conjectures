@@ -1,0 +1,262 @@
+{
+ "id": "lem-dl-a1-strict-henselization-residue-automorphism-lift",
+ "kind": "statement",
+ "title": "Lift a residue automorphism through a strict henselization to a fraction-field separable closure",
+ "statement": "Let $(H,\\mathfrak m_H,\\kappa)$ be a henselian normal local domain [def-weil-pbc-henselian-terminology, def-weil-pbc-normal-ring], put $F=\\operatorname{Frac}(H)$, and choose a separable closure $\\kappa_s/\\kappa$ [def-pd-separable-closure]. Let $R$ be the strict henselization of $H$ at this residue closure [def-weil-pbc-strict-henselization-limit], with $R/\\mathfrak m_R=\\kappa_s$. Suppose $R$ is a domain and an $H$-embedding $R\\hookrightarrow\\Omega$ into a separable closure $\\Omega/F$ is given. Then for every $\\tau\\in\\operatorname{Gal}(\\kappa_s/\\kappa)$ there exist an $H$-algebra automorphism $t:R\\xrightarrow{\\sim}R$ reducing to $\\tau$, its extension $t_L:\\operatorname{Frac}(R)\\xrightarrow{\\sim}\\operatorname{Frac}(R)$ over $F$, and an automorphism $u\\in\\operatorname{Aut}_F(\\Omega)$ restricting to $t_L$. More precisely, if $B_e$ are finite local etale $H$-algebras with residue $e$ whose filtered colimit over finite Galois subextensions $e/\\kappa$ of $\\kappa_s/\\kappa$ is identified with $R$ [lem-wf-strict-henselization-finite-lifts], there are unique $H$-automorphisms $t_e$ of $B_e$ reducing to $\\tau|_e$, they commute with every transition $B_e\\to B_f$, and their induced colimit automorphism is $t$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSW, lemma-identify-inertia, paragraph on automorphisms of the strict henselization; algebra.tex Tag 0BSL, remark-construct-sh-from-h, and Tag 04GK, lemma-henselian-cat-finite-etale."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-normal-ring",
+  "def-pd-separable-closure",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-wf-strict-henselization-finite-lifts",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Use H itself as its henselization: the identity local map H\\to H has the universal property in [def-weil-pbc-henselization-at-prime], since a factorization of any local map g:H\\to T through the identity must be g. Apply [lem-wf-strict-henselization-finite-lifts] with A=H. It supplies the finite local etale lifts B_e and identifies their colimit, restricted to finite Galois intermediate fields e/\\kappa of \\kappa_s, with R, respecting H and the residue maps. Write i_e:B_e\\to R and q_e:B_e\\to e for the coprojections and residue maps. This also applies to any diagram and residue-compatible colimit identification specified in the last clause of the item; the argument below uses only those data.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "lem-wf-strict-henselization-finite-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BSL, remark-construct-sh-from-h; Tag 04GK, lemma-henselian-cat-finite-etale."
+   }
+  },
+  {
+   "text": "Fix \\tau\\in\\operatorname{Gal}(\\kappa_s/\\kappa). Each finite Galois e/\\kappa is preserved by \\tau. Indeed for x\\in e, the minimal polynomial of x over \\kappa splits in e; \\tau(x) is a root of that same polynomial, so lies in e. The same argument for \\tau^{-1} gives \\tau(e)=e. Thus \\tau_e=\\tau|_e is a \\kappa-automorphism, and for e\\subset f the two maps e\\to f given by \\tau_f followed after inclusion and inclusion followed after \\tau_e agree elementwise. Here normality is part of the finite Galois condition stated in [lem-wf-strict-henselization-finite-lifts].",
+   "uses": [
+    "lem-wf-strict-henselization-finite-lifts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, proof paragraph identifying automorphisms of the strict henselization with residue Galois automorphisms."
+   }
+  },
+  {
+   "text": "Apply the Hom-set bijection [lem-weil-pbc-henselian-finite-etale-map-bijective] over the henselian local base H to S=T=B_e. It lifts \\tau_e uniquely to an H-map t_e:B_e\\to B_e. Lift \\tau_e^{-1} to s_e by the same bijection. Both s_et_e and t_es_e reduce to the identity, so injectivity of this bijection gives s_et_e=t_es_e=\\mathrm{id}; hence t_e is an automorphism. For a transition v_{ef}:B_e\\to B_f, the maps t_fv_{ef} and v_{ef}t_e have the same reduction by step 2, so the same bijection, now with S=B_e,T=B_f, makes them equal. The inverse maps s_e satisfy the identical compatibility. All applications have finite etale source and target; no claim about Hom into an infinite colimit is being made.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-map-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BSL, remark-construct-sh-from-h; Tag 04GK, lemma-henselian-cat-finite-etale."
+   }
+  },
+  {
+   "text": "The compatible maps i_et_e induce an H-endomorphism t of R by the colimit universal property [def-weil-pbc-category-colimit]; the compatible i_es_e induce s. On every coprojection, sti_e=i_es_et_e=i_e and tsi_e=i_et_es_e=i_e. Uniqueness in that universal property gives st=ts=\\mathrm{id}. Let q:R\\to\\kappa_s be the specified residue quotient. The residue-compatible identification in [lem-wf-strict-henselization-finite-lifts] gives qt i_e=\\operatorname{incl}_e q_et_e=\\operatorname{incl}_e\\tau_eq_e=\\tau qi_e for every e. The same colimit uniqueness, with target \\kappa_s, gives qt=\\tau q. Therefore the induced residue automorphism of t is \\tau, and its restrictions on the finite-stage coprojections are exactly the required t_e.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-wf-strict-henselization-finite-lifts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, proof paragraph identifying automorphisms of the strict henselization with residue Galois automorphisms."
+   }
+  },
+  {
+   "text": "Put L=\\operatorname{Frac}(R). Define t_L(a/b)=t(a)/t(b) for a,b\\in R, b\\ne0. The denominator is nonzero since t is injective. The relation a/b=c/d is ad=cb, which t preserves, so the formula is well defined; the usual common-denominator addition and multiplication identities show it is a field homomorphism. The same formula for s is its inverse. Since t fixes H, this map fixes all fractions from H, hence F. The given embedding j:R\\hookrightarrow\\Omega extends by j_L(a/b)=j(a)/j(b); the same fraction identities show it is a field embedding fixing F. Identify L with its image under j_L.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, proof paragraph identifying automorphisms of the strict henselization with residue Galois automorphisms."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-separable-closure-exists-galois](2), the given separable closure \\Omega/F is algebraic and normal (take the intermediate base field to be F). Apply [lem-sfb-normal-intermediate-isomorphism-lifts] with k=F, ambient field \\Omega, both intermediate subfields equal to j_L(L), and intermediate isomorphism j_Lt_Lj_L^{-1}. Its hypotheses require normality only of \\Omega/F, not of L/F. It gives u\\in\\operatorname{Aut}_F(\\Omega) satisfying uj_L=j_Lt_L. This is the asserted extension, and steps 3 and 4 give all the finite-stage uniqueness and compatibility clauses.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-sfb-normal-intermediate-isomorphism-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BME, lemma-lift-maps (2); separable-closure normality as in Tags 09GT, 09HC, 030J, 09I2 cited by lem-weil-pbc-separable-closure-exists-galois."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselization-at-prime",
+  "lem-wf-strict-henselization-finite-lifts",
+  "lem-weil-pbc-henselian-finite-etale-map-bijective",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-sfb-normal-intermediate-isomorphism-lifts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSW, lemma-identify-inertia, automorphism paragraph, using algebra.tex Tags 0BSL/04GK and fields.tex Tag 0BME (2); the compatibility and inverse computations are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every automorphism of the separable closure of the residue field lifts to an automorphism of the strict henselization and then to a separable closure of the fraction field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"galLift\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"{A : Type u_1} →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (L₂ : Type u_4) →\\n        {B : Type u_6} →\\n          {B₂ : Type u_7} →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given commutative rings $A$, $B$, and $B_2$, fields $K$, $L$, and $L_2$ with $K$ as the fraction field of $A$, and $L$, $L_2$ as algebraic extensions of $K$, if $B$ and $B_2$ are the integral closures\"}\n  {\"name\": \"galLiftEquiv_apply\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} (K : Type u_2) (L : Type u_3) (L₂ : Type u_4) {B : Type u_6} {B₂ : Type u_7} [inst : CommRing A]\\n  [inst_1 : CommRing B] [inst_2 : CommRing B₂] [inst_3 : Algebra A B] [inst_4 : Algebra A B₂] [inst_5 : Field K]\\n  [inst_6 : Field L] [inst_7 : Field L₂] [inst_8 : Algebra A K] [inst_9 :\", \"doc\": \"Given a commutative ring $ A $ with fraction field $ K $, and algebraic extensions $ L $, $ L_2 $ of $ K $, if $ B $, $ B_2 $ are the integral closures of $ A $ in $ L $, $ L_2 $ respectively under sc\"}\n  {\"name\": \"galLiftEquiv\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"{A : Type u_1} →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (L₂ : Type u_4) →\\n        {B : Type u_6} →\\n          {B₂ : Type u_7} →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given a commutative ring $ A $ with fraction field $ K $, and algebraic extensions $ L $, $ L_2 $ of $ K $, if $ B $, $ B_2 $ are the integral closures of $ A $ in $ L $, $ L_2 $ respectively under sc\"}\n  {\"name\": \"IsSepClosed.lift_def\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} {M : Type u_3} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Field M] [inst_4 : Algebra K M] [inst_5 : IsSepClosed M] [inst_6 : Algebra.IsSeparable K L],\\n  IsSepClosed.lift = Classical.choice ⋯\", \"doc\": \"For any finite separable field extension $ L/K $ and any separably closed field $ M $ containing $ K $, there exists a $ K $-algebra homomorphism from $ L $ to $ M $.\"}\n  {\"name\": \"IsSepClosed.lift\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"{K : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      [inst : Field K] →\\n        [inst_1 : Field L] →\\n          [inst_2 : Algebra K L] →\\n            [inst_3 : Field M] → [inst_4 : Algebra K M] → [IsSepClosed M] → [Algebra.IsSeparable K L] → L →ₐ[K] M\", \"doc\": \"Given a separably closed field $ M $ and a finite separable field extension $ L/K $, this function constructs a $ K $-algebra homomorphism from $ L $ to $ M $. This exists because $ M $ being separabl\"}\n  {\"name\": \"galRestrictHom\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (B : Type u_6) →\\n        [inst : CommRing A] →\\n          [inst_1 : CommRing B] →\\n            [inst_2 : Algebra A B] →\\n              [inst_3 : Field K] →\\n                [inst_4 : Field L] →\\n                  [inst_5 : Algebra A K] →\\n    \", \"doc\": \"The structure defines a group isomorphism between the automorphism group of $ L $ over $ K $ and the automorphism group of the integral closure $ B $ of $ A $ in $ L $, constructed by restricting auto\"}\n  {\"name\": \"galLift_id\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} (K : Type u_2) (L : Type u_3) {B : Type u_6} [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [\", \"doc\": \"Given commutative rings $A$, $B$, and $B_2$, fields $K$, $L$, and $L_2$ where $K$ is the fraction field of $A$, and $L$, $L_2$ are algebraic extensions of $K$, if $B$ and $B_2$ are the integral closur\"}\n  {\"name\": \"IsLocalRing.ResidueField.mapAut_apply\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] (f : R ≃+* R),\\n  IsLocalRing.ResidueField.mapAut f = IsLocalRing.ResidueField.mapEquiv f\", \"doc\": \"For any commutative local ring $ R $ and ring automorphism $ f : R ≃+* R $, the automorphism induced on the residue field $ R/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal) via th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosure, AlgEquiv",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"IsSepClosure.equiv\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \" (K : Type u) [Field K] (L : Type v) (M : Type w) [Field L] [Field M] [Algebra K M] [IsSepClosure K M] [Algebra K L] [IsSepClosure K L] : L ≃ₐ[K] M\", \"doc\": \"A (random) isomorphism between two separable closures of `K`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]enseli.*([Aa]utomorphism|[Aa]lg[Ee]quiv)|([Aa]utomorphism|[Aa]lg[Ee]quiv).*[Hh]enseli",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue automorphisms lift compatibly through finite etale algebras over a henselian normal local ring and extend to the global separable closure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.ResidueField.mapAut\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \": RingAut R →* RingAut (IsLocalRing.ResidueField R)\", \"doc\": \"For a commutative local ring $ R $, this defines a group homomorphism from the automorphism group $ \\\\text{Aut}(R) $ to the automorphism group of its residue field $ R/\\\\mathfrak{m} $ (where $ \\\\mathfrak\"}\n  {\"name\": \"Ideal.ResidueField.liftₐ\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Ideal\", \"type\": \"(I : Ideal A) [I.IsPrime] (f : A →ₐ[R] B) (hf₁ : I ≤ RingHom.ker f)\\n  (hf₂ : I.primeCompl ≤ (IsUnit.submonoid B).comap f) : I.ResidueField →ₐ[R] B\", \"doc\": \"Given a prime ideal $ I $ in a commutative ring $ A $, an $ R $-algebra homomorphism $ f : A →ₐ[R] B $, and conditions that $ I $ is contained in the kernel of $ f $ and the complement of $ I $ maps i\"}\n  {\"name\": \"Ideal.ResidueField.liftₐ_algebraMap\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Ideal\", \"type\": \"(I : Ideal A) [I.IsPrime] (f : A →ₐ[R] B) (hf₁ : I ≤ RingHom.ker f) (hf₂ : I.primeCompl ≤ (IsUnit.submonoid B).comap f)\\n  (r : A) : liftₐ I f hf₁ hf₂ (algebraMap _ _ r) = f r\", \"doc\": \"For a prime ideal $ I $ in a commutative ring $ A $, an $ R $-algebra homomorphism $ f : A →ₐ[R] B $, and conditions that $ I $ is contained in the kernel of $ f $ and the complement of $ I $ maps int\"}\n  {\"name\": \"AlgEquiv.liftNormal.congr_simp\", \"module\": \"Mathlib.FieldTheory.Galois.Profinite\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {K₁ : Type u_3} {K₂ : Type u_4} [inst_1 : Field K₁] [inst_2 : Field K₂]\\n  [inst_3 : Algebra F K₁] [inst_4 : Algebra F K₂] (χ χ_1 : K₁ ≃ₐ[F] K₂),\\n  χ = χ_1 →\\n    ∀ (E : Type u_6) [inst_5 : Field E] [inst_6 : Algebra F E] [inst_7 : Algebra K₁ E] [inst_8 : Algebra K₂ E\", \"doc\": \"Given a normal field extension $ E/F $ and two $ F $-algebra equivalences $ \\\\chi, \\\\chi_1 : K_1 \\\\simeq_{\\\\text{alg}} K_2 $ between intermediate fields $ K_1, K_2 $, if $ \\\\chi = \\\\chi_1 $, then their exte\"}\n  {\"name\": \"IsLocalRing.ResidueField.lift_residue_apply\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"{R S : Type*} [CommRing R] [IsLocalRing R] [Field S] (f : R →+* S) [IsLocalHom f] (x) : lift f (residue R x) = f x\", \"doc\": \"For any commutative local ring $ R $, field $ S $, and local ring homomorphism $ f : R \\\\to S $, the induced ring homomorphism from the residue field of $ R $ to $ S $ satisfies $ \\\\text{lift}(f)(\\\\text{\"}\n  {\"name\": \"Ideal.ResidueField.lift\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Ideal\", \"type\": \"(f : R →+* S) (hf₁ : I ≤ RingHom.ker f) (hf₂ : I.primeCompl ≤ (IsUnit.submonoid S).comap f) : I.ResidueField →+* S\", \"doc\": \"Given a ring homomorphism $ f : R → S $, if a prime ideal $ I $ is contained in the kernel of $ f $ and the complement of $ I $ maps into the units of $ S $, then there exists a unique ring homomorphi\"}\n  {\"name\": \"Ideal.ResidueField.lift_algebraMap\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Ideal\", \"type\": \"(f : R →+* S) (hf₁ : I ≤ RingHom.ker f) (hf₂ : I.primeCompl ≤ (IsUnit.submonoid S).comap f) (r : R) :\\n  lift I f hf₁ hf₂ (algebraMap _ _ r) = f r\", \"doc\": \"For a ring homomorphism $ f : R → S $, if a prime ideal $ I $ is contained in the kernel of $ f $ and the complement of $ I $ maps into the units of $ S $, then the lifted homomorphism from the residu\"}\n  {\"name\": \"Ideal.ResidueField.lift.congr_simp\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Ideal\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] (I : Ideal R) [inst_2 : I.IsPrime]\\n  (f f_1 : R →+* S) (e_f : f = f_1) (hf₁ : I ≤ RingHom.ker f)\\n  (hf₂ : I.primeCompl ≤ Submonoid.comap f (IsUnit.submonoid S)),\\n  Ideal.ResidueField.lift I f hf₁ hf₂ = Ideal.ResidueField.lift \", \"doc\": \"Given a ring homomorphism $ f : R → S $, if a prime ideal $ I $ is contained in the kernel of $ f $ and every element in the complement of $ I $ maps to a unit in $ S $, then there exists a unique rin\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every automorphism of the residue separable closure lifts to the strict henselization and to a separable closure of its fraction field",
+   "results": "8 hits: galLift, galLiftEquiv_apply, IsSepClosed.lift, IsSepClosed.lift_def, galLiftEquiv_algebraMap_apply, IsLocalRing.ResidueField.mapAut_apply, IsLocalRing.ResidueField.mapAut, galLift_id",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states the finite-etale residue automorphism lifting and strict-henselization colimit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]enseli.*([Aa]utomorphism|[Aa]lgEquiv)|([Aa]utomorphism|[Aa]lgEquiv).*[Hh]enseli",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states the finite-etale residue automorphism lifting and strict-henselization colimit comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian finite etale algebras reduction residue field fully faithful automorphism lifting",
+   "results": "8 hits: Ideal.ResidueField.liftₐ, HenselianLocalRing.TFAE, HenselianLocalRing, Ideal.ResidueField.liftₐ_algebraMap, FGAlgCat.fullyFaithfulUliftFunctor, HenselianLocalRing.mk, IsLocalRing.ResidueField.lift_residue_apply, Field.henselian",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states the finite-etale residue automorphism lifting and strict-henselization colimit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsHenselianLocalRing, AlgEquiv",
+   "results": "0 hits: ; loogle: unknown identifier 'IsHenselianLocalRing'",
+   "date": "2026-10-24",
+   "verdict": "unavailable: loogle: unknown identifier 'IsHenselianLocalRing'"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Etale",
+   "results": "0 hits: ; loogle: unknown identifier 'Etale'",
+   "date": "2026-10-24",
+   "verdict": "unavailable: loogle: unknown identifier 'Etale'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduction functor on finite etale algebras over a henselian local ring is fully faithful and residue field automorphisms lift uniquely",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, HenselianLocalRing.TFAE, Algebra.instFormallyUnramifiedResidueField, RingHom.EssFiniteType.residueFieldMap, Algebra.instFiniteResidueFieldOfFormallyUnramified, StandardEtalePair.homEquiv_symm_apply, Algebra.instFormallyUnramifiedResidueField_1, StandardEtalePresentation.lift_bijective",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states the finite-etale residue automorphism lifting and strict-henselization colimit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Henselian|[Ss]trict[Hh]ensel|liftNormal",
+   "results": "0 hits: ; Mathlib subdirectory: RingTheory/Henselian",
+   "date": "2026-10-24",
+   "verdict": "inconclusive: this subdirectory query returned no hits; the later RingTheory query includes Henselian.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, \"ResidueField\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states the finite-etale residue automorphism lifting and strict-henselization colimit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "HenselianLocalRing|[Ss]trict[Hh]ensel",
+   "results": "5 hits: Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean; Mathlib subdirectory: RingTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states the finite-etale residue automorphism lifting and strict-henselization colimit comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-henselian-global-inertia-comparison",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph, equivalence of extension across infinity with trivial inertia: normal-local comparison used through lem-dl-a1-weil-kernel-inertia; returned comparison proof steps 13 and 14.",
+   "via": [
+    "lem-dl-a1-henselian-global-inertia-comparison",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-dl-a1-strict-henselization-residue-automorphism-lift",
+  "worker": "stage1",
+  "summary": "Q26 checked the local sources and project Lean, reused existing finite-etale Hom lifting, strict-henselization finite-stage colimit and normal-extension Mathlib leaves, and wrote the restriction, compatibility, colimit inverse, residue, fraction-field and global-extension arguments explicitly. No statement change and no new nodes.",
+  "blueprint": "Realizes rem-dl-a1-conventions, final paragraph equivalence between extension across infinity and trivial inertia, through lem-dl-a1-weil-kernel-inertia and lem-dl-a1-henselian-global-inertia-comparison: the residue-surjectivity argument isolated in this item. The newest latest/ conventions node retains this assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-strict-henselization-finite-lifts",
+    "why": "Generic construction of strict henselization by finite local etale residue lifts, already a statement dependency; the conventions unit has no proof steps or replacement construction."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-map-bijective",
+    "why": "Generic full faithfulness of reduction for finite etale algebras over a henselian local ring; used solely to lift maps and compare their composites, not to replace the conventions unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-strict-henselization-finite-lifts",
+  "lem-weil-pbc-henselian-finite-etale-map-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-e2f1a6128",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-e2f1a6128 (reviewer sub-agent of L); spot-checked: I read the item in full (statement unchanged; on the base it had no proof, and the delivery adds 6 steps with no new nodes) against Stacks 0BSW (lemma-identify-inertia, proof para 2: Aut(A^sh/A^h)=Gal via 0BSL/04GK), 04GK and 0BME(2). Step 1: H is its own henselization (the canonical map H_m=H, universal property trivial), so lem-wf-strict-henselization-finite-lifts with A=H gives the B_e, the Galois-indexed colimit and the residue-compatible identification with R. Step 2: tau(e)=e for finite Galois e, from minimal polynomials of tau and tau^-1. Step 3: the 04GK Hom bijection (lem-weil-pbc-henselian-finite-etale-map-bijective) with kappa⊗B_e=e lifts tau_e and tau_e^-1; injectivity gives inverses, the uniqueness clause and compatibility with transitions. Step 4: colimit universal property gives t and s with st=ts=id, and qt=tau q by uniqueness into kappa_s. Step 5: fraction-field extension; H→R is injective via Omega. Step 6: lem-weil-pbc-separable-closure-exists-galois(2) gives Omega/F normal, and lem-sfb-normal-intermediate-isomorphism-lifts with M1=M2=j_L(L) gives u. Every cited statement says what its step uses. Edge cases checked: H a field, kappa separably closed, tau=1, imperfect kappa. Duplicate search: lem-wf-strict-henselian-fraction-inertia is only the DVR special case; strict-henselization-functoriality, residue-lift-diagram and normal-geometric-specialization-conjugacy do not state the item. Batch-5 flag def-weil-pbc-henselization-at-prime: a general definition (04GN/04GQ), not part of the trace-formula or Poincaré proofs, and already a stmt_dep of the cited lem-wf node; accepted. tool_uses (lem-wf finite lifts, 04GK bijection) are generic and accepted; the conventions unit sk-d-dl-a1-setup has no steps. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationResidueAutomorphismLift",
+  "declaration": "Algebra.strictHenselization_residue_automorphism_lift",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationResidueAutomorphismLift.lean",
+  "statement": "theorem strictHenselization_residue_automorphism_lift (H K R : Type u) [CommRing H] [HenselianLocalRing H] [IsDomain H] [IsIntegrallyClosed H] [Field K] [Algebra (IsLocalRing.ResidueField H) K] [IsSepClosure (IsLocalRing.ResidueField H) K] [Algebra H K] [IsScalarTower H (IsLocalRing.ResidueField H) K] [CommRing R] [IsLocalRing R] [IsDomain R] [Algebra H R] (P : StrictHenselizationPresentationIn.{u, u} H K R) (F : Type v) [Field F] [Algebra H F] [IsFractionRing H F] (L : Type w) [Field L] [Algebra R L] [IsFractionRing R L] [Algebra H L] [IsScalarTower H R L] [Algebra F L] [IsScalarTower H F L] (Ω : Type z) [Field Ω] [Algebra F Ω] [IsSepClosure F Ω] [Algebra H Ω] [IsScalarTower H F Ω] (j : R →ₐ[H] Ω) (_hj : Function.Injective j) (τ : K ≃ₐ[IsLocalRing.ResidueField H] K) : ∃ (t : R ≃ₐ[H] R) (tL : L ≃ₐ[F] L) (jL : L →ₐ[F] Ω) (g : Ω ≃ₐ[F] Ω), (∀ r : R, P.residueMap (t r) = τ (P.residueMap r)) ∧ (∀ r : R, tL (algebraMap R L r) = algebraMap R L (t r)) ∧ (∀ r : R, jL (algebraMap R L r) = j r) ∧ (∀ x : L, g (jL x) = jL (tL x)) ∧ ∀ (D : ObjectProperty.FullSubcategory (fun e : finiteResidueLiftIndex H K ↦ Normal (IsLocalRing.ResidueField H) e.val) ⥤ CommAlgCat.{u} H) (_local : ∀ e, IsLocalRing (D.obj e)) (_finite : ∀ e, Module.Finite H (D.obj e)) (_etale : ∀ e, Etale H (D.obj e)) (q : ∀ e, D.obj e →+* e.obj.val), (∀ e, Function.Surjective (q e)) → (∀ e, RingHom.ker (q e) = (IsLocalRing.maximalIdeal H).map (algebraMap H (D.obj e))) → (∀ e h, q e (algebraMap H (D.obj e) h) = algebraMap (IsLocalRing.ResidueField H) e.obj.val (IsLocalRing.residue H h)) → ∀ c : Cocone D, IsColimit c → ∀ i : c.pt ≅ CommAlgCat.of H R, (∀ e b, P.residueMap (i.hom.hom ((c.ι.app e).hom b)) = (q e b : K)) → ∃ ts : ∀ e, D.obj e ≃ₐ[H] D.obj e, (∀ e b, (q e (ts e b) : K) = τ (q e b : K)) ∧ (∀ e (s : D.obj e ≃ₐ[H] D.obj e), (∀ b, (q e (s b) : K) = τ (q e b : K)) → s = ts e) ∧ (∀ (e f : ObjectProperty.FullSubcategory (fun e : finiteResidueLiftIndex H K ↦ Normal (IsLocalRing.ResidueField H) e.val)) (a : e ⟶ f) b, ts f ((D.map a).hom b) = (D.map a).hom (ts e b)) ∧ (∀ e b, t (i.hom.hom ((c.ι.app e).hom b)) = i.hom.hom ((c.ι.app e).hom (ts e b)))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-182d82108",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read node, Stacks 0BSW/0BSL/04GK/0BME, all 6 stmt_dep records and live Lean (HenselianLocalRing, IsIntegrallyClosed, IsSepClosure, StrictHenselizationPresentationIn.residueMap, finiteResidueLiftIndex, StrictHenselizationFiniteLiftSystem). Delta vs live is lean record plus used stmt_dep def-sc-ring-strict-henselization. Every clause rendered: t reduces to tau via P.residueMap; tL over F extends t; jL pinned by jL∘algebraMap=j; g∘jL=jL∘tL; for every Galois-indexed finite local etale diagram with residue-compatible colimit iso, unique t_e reducing to tau, commuting with transitions, and colimit of t_e equals t (t before ∀D is true by uniqueness over strictly henselian R). IsLocalRing R follows from P. Common u for H,K,R matches dep; F,L,Ω have free universes. Edge cases: field H, sep-closed kappa, tau=1, imperfect kappa, nonempty index. No duplicates (HenselianResidueGaloisAction differs). Statement verbatim, sorry only, docstrings with source, blueprint and 6 steps, imports exist. Advisory: pbc-strict-henselization-limit is not used directly; lem-wf gives the comparison. No compile, since no file changed."
+ }
+}

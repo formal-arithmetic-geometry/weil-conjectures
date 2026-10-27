@@ -1,0 +1,282 @@
+{
+ "id": "lem-trf-proj-localized-graded-comparison",
+ "kind": "statement",
+ "title": "Localization and multiplication of the Proj graded comparison",
+ "statement": "Let $A=\\bigoplus_{n\\geq0}A_n$ be a nonnegatively graded commutative ring, $T$ a scheme [def-pc-scheme], $L$ an invertible $\\mathcal O_T$-module [def-sc-invertible-module], and $\\psi:A\\to\\Gamma_*(T,L)$ a graded ring homomorphism [def-sc-invertible-section-ring]. Set $U=\\bigcup_{e>0,\\ f\\in A_e}T_{\\psi(f)}$, using the nonvanishing opens [def-sc-section-generating-locus], and $P=\\operatorname{Proj}(A)$ [def-pc-proj]. Let $r:U\\to P$ be the canonical morphism, specified by $r^{-1}D_+(f)=T_{\\psi(f)}$ and by the degree-zero chart formula $r^\\sharp(b/f^q)=\\psi(b)/\\psi(f)^q$ for $b\\in A_{qe}$, $q\\geq0$. There is a unique family of $\\mathcal O_U$-linear maps $\\theta_m:r^*\\mathcal O_P(m)\\to L^{\\otimes m}|_U$, $m\\geq0$ [def-weil-pbc-proj-twisting-sheaf, def-pc-module-pullback, def-pur-sheaf-tensor-product], with the following chart normalization: for every $e>0$, $f\\in A_e$, $q\\geq0$, and $b\\in A_{m+qe}$, the pullback of the fraction $b/f^q$ on $D_+(f)$ is sent on $T_{\\psi(f)}$ to $\\psi(b)/\\psi(f)^q$. Division means the inverse of multiplication by the free generator $\\psi(f)^q$ of $L^{\\otimes qe}$ on this open. These chart maps commute with restriction and agree on overlaps. Each global homogeneous section $b\\in A_m$ is sent to $\\psi(b)|_U$. The family respects the unit and the graded multiplication maps: for all $m,n\\geq0$,\n$$\\theta_{m+n}\\circ r^*(\\mu^P_{m,n})=\\mu^L_{m,n}\\circ(\\theta_m\\otimes\\theta_n),$$\nwhere the canonical tensor-pullback comparison identifies the sources, $\\mu^P$ is induced by multiplication of homogeneous fractions and $\\mu^L$ is tensor multiplication of powers of $L$. No degree-generation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK (lemma-invertible-map-into-proj), proof: extension to the localized graded algebra; Tag 01N8 (lemma-converse-construction), local bases and gluing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-generating-locus"
+ ],
+ "proof": [
+  {
+   "text": "Fix $m\\geq0$, $f\\in A_e$, $e>0$, and put $W_f=T_{\\psi(f)}$, $s=\\psi(f)|_{W_f}$. By [def-weil-pbc-proj-twisting-sheaf], the sections of $\\mathcal O_P(m)$ on $D_+(f)$ are precisely the homogeneous fractions $b/f^q$ with $b\\in A_{m+qe}$. By [def-sc-section-generating-locus], multiplication by $s$ is an isomorphism $L^{\\otimes m}|_{W_f}\\to L^{\\otimes(m+e)}|_{W_f}$: locally in a frame of $L$, it is multiplication by the unit representing $s$. Define $\\alpha_{m,f}(b/f^q)=\\psi(b)|_{W_f}/s^q$. If $b/f^q=b'/f^{q'}$, then $f^k(f^{q'}b-f^qb')=0$ for some $k\\geq0$. Applying the graded map $\\psi$ and cancelling the invertible multiplication maps $s^k$ and $s^{q+q'}$ gives $\\psi(b)/s^q=\\psi(b')/s^{q'}$. Thus the formula is independent of representatives, including when $f$ is a zero divisor.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), localized extension; Tag 01N8 (lemma-converse-construction), division by a generating section"
+   }
+  },
+  {
+   "text": "These maps are additive and semilinear for the given $r^\\sharp$. Explicitly, common denominators give\n$$\\alpha_{m,f}(b/f^q+b'/f^{q'})=(\\psi(b)s^{q'}+\\psi(b')s^q)/s^{q+q'}=\\alpha_{m,f}(b/f^q)+\\alpha_{m,f}(b'/f^{q'}).$$\nFor $a\\in A_{te}$, the specified scalar chart map and the tensor multiplication in [def-sc-invertible-section-ring] give\n$$\\alpha_{m,f}((a/f^t)(b/f^q))=\\psi(ab)/s^{t+q}=r^\\sharp(a/f^t)\\,\\alpha_{m,f}(b/f^q).$$\nZero is sent to zero. Thus $\\alpha_{m,f}$ is an $A_{(f)}$-linear map into $\\Gamma(W_f,L^{\\otimes m})$, whose scalar action is through $r^\\sharp$.",
+   "uses": [
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK, existence: the localized extension is a graded ring map"
+   }
+  },
+  {
+   "text": "For an inclusion $D_+(g)\\subseteq D_+(f)$ with $g$ homogeneous of positive degree, apply [lem-weil-pbc-proj-graded-module-sheaf-exists] (a) to $A(m)$: there are $k\\geq1$ and homogeneous $a$ with $g^k=af$, and restriction sends $b/f^q$ to $a^qb/g^{kq}$. The preimage equality for $r$ gives $W_g\\subseteq W_f$. On $W_g$, both $\\psi(g)$ and $\\psi(f)$ freely generate their respective powers of $L$, and $\\psi(g)^k=\\psi(a)\\psi(f)$. Consequently\n$$\\frac{\\psi(a)^q\\psi(b)}{\\psi(g)^{kq}}=\\frac{\\psi(b)}{\\psi(f)^q}.$$\nThis is obtained by multiplying by the invertible denominator $\\psi(g)^{kq}\\psi(f)^q$ and using the displayed relation; it requires no cancellation in $A$. Hence the $\\alpha_{m,f}$ commute with every restriction between standard opens. In particular the two maps restrict equally on the common chart $D_+(fg)=D_+(f)\\cap D_+(g)$.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01M4 (lemma-standard-open) and 01M7 (lemma-proj-sheaves), restrictions for A(m); Tag 01NK, uniqueness on localizations"
+   }
+  },
+  {
+   "text": "The standard opens form a basis of $P$: the complement of $V_+(I)$ is the union of $D_+(h)$ over homogeneous $h\\in I$; their finite intersections are $D_+(fg)$. Put $F_m=\\mathcal O_P(m)$ and $G_m=r_*(L^{\\otimes m}|_U)$, a sheaf of $\\mathcal O_P$-modules with $G_m(V)=\\Gamma(r^{-1}V,L^{\\otimes m})$ and scalars through $r^\\sharp$, as in [lem-pc-module-pullback-adjunction]. The preceding steps give compatible maps on this basis. Apply [lem-weil-pbc-sheaf-morphism-on-basis] to the underlying abelian sheaves to obtain $\\alpha_m:F_m\\to G_m$. Its components are $\\mathcal O_P$-linear: for any open $V$ and sections $a,u$ on $V$, the equality $\\alpha_m(au)=r^\\sharp(a)\\alpha_m(u)$ holds after restriction to each basis open inside $V$, hence holds by the sheaf condition. The adjunction in [lem-pc-module-pullback-adjunction] gives $\\theta_m:r^*F_m\\to L^{\\otimes m}|_U$. In the tensor definition [def-pc-module-pullback], its local rule is $t\\otimes u\\mapsto t\\alpha_m(u)$, so on pulled-back fractions it has exactly the required normalization. This gives a single global map in each degree, hence the asserted agreement on overlaps.",
+   "uses": [
+    "def-pc-proj",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 009U (lemma-restrict-basis-equivalence-modules), and Tag 0096 (lemma-adjoint-pullback-pushforward-modules); Constructions Tag 01NK, local construction and gluing"
+   }
+  },
+  {
+   "text": "For $b\\in A_m$, [def-weil-pbc-proj-twisting-sheaf] identifies its restriction on each $D_+(f)$ with $b/1$. Taking $q=0$ therefore sends its pullback to $\\psi(b)|_{W_f}$, hence to $\\psi(b)|_U$ since the $W_f$ cover $U$. In degree zero $\\alpha_{0,f}(a/f^q)=r^\\sharp(a/f^q)$; in particular $1\\mapsto1$, so $\\theta_0$ is the unit map. For $b\\in A_{m+qe}$ and $c\\in A_{n+te}$, the multiplication maps in the statement satisfy\n$$\\alpha_{m+n,f}(bc/f^{q+t})=\\frac{\\psi(bc)}{s^{q+t}}=\\frac{\\psi(b)}{s^q}\\frac{\\psi(c)}{s^t}.$$\nHere the last product is the tensor multiplication of [def-sc-invertible-section-ring]. Locally, the tensor-pullback identification sends $(u\\otimes x)\\otimes(v\\otimes y)$ to $uv\\otimes(x\\otimes y)$ by the balanced tensor definition [def-pur-sheaf-tensor-product, def-pc-module-pullback]. A germ of each pulled-back factor is a sum of scalar multiples of pulled-back fraction germs, since $r(x)$ lies in the standard-open basis. Bilinearity extends the displayed equality to these sums. Equality of the two sheaf maps follows locally on sections, proving the required multiplication identity for every $m,n$, including zero.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-section-ring",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK, property (2) and the graded-algebra comparison; Tag 01N8, fraction formula and tensor multiplication"
+   }
+  },
+  {
+   "text": "If $\\theta'_m$ is another family with the stated chart normalization, transpose it by [lem-pc-module-pullback-adjunction] to $\\alpha'_m:\\mathcal O_P(m)\\to r_*(L^{\\otimes m}|_U)$. The tensor adjunction rule sends $u$ to $\\theta'_m(1\\otimes u)$. Thus $\\alpha'_m$ and $\\alpha_m$ agree on every fraction on every standard open; these are all sections there by [def-weil-pbc-proj-twisting-sheaf]. They are equal by [lem-weil-pbc-sheaf-morphism-on-basis], and the adjunction bijection implies $\\theta'_m=\\theta_m$ for every $m$. This also covers $U=\\varnothing$, when all target section modules are zero. No step assumed that $A$ was generated in degree one, that any twist was invertible on all of $P$, or that $T$ was quasi-compact.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), uniqueness on homogeneous localizations; Sheaves Tags 009U and 0096"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-section-generating-locus",
+  "def-sc-invertible-section-ring",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "def-pc-proj",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK (lemma-invertible-map-into-proj), proof of existence and uniqueness, expanded using Tag 01M7 fraction charts and Sheaves Tags 009U and 0096"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A graded ring map to the section ring of a line bundle extends on nonvanishing opens to a multiplicative map from pulled back Proj twists by the homogeneous fraction formula",
+   "results": "{\"t\": \"2026-10-22T06:15:53Z\", \"tool\": \"leanfinder\", \"query\": \"A graded ring map to the section ring of a line bundle extends on nonvanishing opens to a multiplicative map from pulled back Proj twists by the homogeneous fraction formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\"], \"digest\": \"3b783f2b2b6baedd\"}; Read Basic.lean:443-460: fromOfGlobalSections maps a graded ring to ordinary functions and supplies a scheme morphism only; homogeneous-localization hits concern degree zero, not a comparison to tensor powers of an arbitrary line bundle. No matching sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|twist|InvertibleSectionRing",
+   "results": "{\"t\": \"2026-10-22T06:16:06Z\", \"tool\": \"grep\", \"query\": \"fromOfGlobalSections|twist|InvertibleSectionRing\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"ce941cfaded12e89\"}; Read Basic.lean:443-460: fromOfGlobalSections maps a graded ring to ordinary functions and supplies a scheme morphism only; homogeneous-localization hits concern degree zero, not a comparison to tensor powers of an arbitrary line bundle. No matching sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "graded localization of a section ring induces a multiplicative comparison of pulled back twisting sheaves",
+   "results": "{\"t\": \"2026-10-22T06:16:07Z\", \"tool\": \"leansearch\", \"query\": \"graded localization of a section ring induces a multiplicative comparison of pulled back twisting sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.isLocalization_mul\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isLocalization_atPrime\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"HomogeneousLocalization.AtPrime\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"HomogeneousLocalization.map_mk\", \"ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop\"], \"digest\": \"5860e5ea383c8db4\"}; Read Basic.lean:443-460: fromOfGlobalSections maps a graded ring to ordinary functions and supplies a scheme morphism only; homogeneous-localization hits concern degree zero, not a comparison to tensor powers of an arbitrary line bundle. No matching sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, IsLocalization",
+   "results": "{\"t\": \"2026-10-22T06:16:07Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Basic.lean:443-460: fromOfGlobalSections maps a graded ring to ordinary functions and supplies a scheme morphism only; homogeneous-localization hits concern degree zero, not a comparison to tensor powers of an arbitrary line bundle. No matching sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend a graded morphism into tensor powers of an invertible sheaf after inverting a homogeneous section and glue the algebra comparison",
+   "results": "{\"t\": \"2026-10-22T06:16:13Z\", \"tool\": \"leanfinder\", \"query\": \"extend a graded morphism into tensor powers of an invertible sheaf after inverting a homogeneous section and glue the algebra comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.openToLocalization\"], \"digest\": \"35c3bfe55d8ad0ab\"}; Read Basic.lean:443-460: fromOfGlobalSections maps a graded ring to ordinary functions and supplies a scheme morphism only; homogeneous-localization hits concern degree zero, not a comparison to tensor powers of an arbitrary line bundle. No matching sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|twist|InvertibleSectionRing",
+   "results": "{\"t\": \"2026-10-23T04:19:57Z\", \"tool\": \"grep\", \"query\": \"fromOfGlobalSections|twist|InvertibleSectionRing\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"ce941cfaded12e89\"}; Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:440-460: fromOfGlobalSections constructs a scheme map from A to ordinary global functions. The awayToSection and awayMap hits concern degree-zero structure-sheaf charts. None supplies maps to powers of an arbitrary invertible sheaf or the asserted twist multiplication comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, ModuleCat",
+   "results": "{\"t\": \"2026-10-23T04:19:57Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, ModuleCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:440-460: fromOfGlobalSections constructs a scheme map from A to ordinary global functions. The awayToSection and awayMap hits concern degree-zero structure-sheaf charts. None supplies maps to powers of an arbitrary invertible sheaf or the asserted twist multiplication comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded ring map into a line bundle section ring extends to homogeneous fractions and glues to a multiplicative comparison of Proj twisting sheaves",
+   "results": "{\"t\": \"2026-10-23T04:19:58Z\", \"tool\": \"leansearch\", \"query\": \"A graded ring map into a line bundle section ring extends to homogeneous fractions and glues to a multiplicative comparison of Proj twisting sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem'\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.Proj.mul_apply\"], \"digest\": \"187259b7341409e1\"}; Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:440-460: fromOfGlobalSections constructs a scheme map from A to ordinary global functions. The awayToSection and awayMap hits concern degree-zero structure-sheaf charts. None supplies maps to powers of an arbitrary invertible sheaf or the asserted twist multiplication comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded ring homomorphism to the section ring of an invertible sheaf induces compatible maps from pulled back Proj twists to tensor powers of the sheaf by homogeneous fractions",
+   "results": "{\"t\": \"2026-10-23T04:19:58Z\", \"tool\": \"leanfinder\", \"query\": \"A graded ring homomorphism to the section ring of an invertible sheaf induces compatible maps from pulled back Proj twists to tensor powers of the sheaf by homogeneous fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\"], \"digest\": \"b64ec597f7c783de\"}; Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:440-460: fromOfGlobalSections constructs a scheme map from A to ordinary global functions. The awayToSection and awayMap hits concern degree-zero structure-sheaf charts. None supplies maps to powers of an arbitrary invertible sheaf or the asserted twist multiplication comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a morphism of twisting sheaves on projective spectrum using localization of a graded map into powers of an invertible module and prove multiplication compatibility",
+   "results": "{\"t\": \"2026-10-23T04:20:23Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a morphism of twisting sheaves on projective spectrum using localization of a graded map into powers of an invertible module and prove multiplication compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.openToLocalization\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\"], \"digest\": \"c3967256636aa31c\"}; Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:440-460: fromOfGlobalSections constructs a scheme map from A to ordinary global functions. The awayToSection and awayMap hits concern degree-zero structure-sheaf charts. None supplies maps to powers of an arbitrary invertible sheaf or the asserted twist multiplication comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proj-invertible-map-twist-iso",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra/Proj ampleness criterion below lem-trf-local-term-locality, via the canonical generated-open comparison: returned item proof Steps 1 and 6, homogeneous-fraction extension and its multiplication identity.",
+   "via": [
+    "lem-trf-proj-invertible-map-twist-iso",
+    "lem-trf-proj-canonical-map-twist-comparison",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-proj-localized-graded-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the localized graded extension in Stacks 01NK into explicit well-defined fraction maps, scalar linearity, restriction calculations, basis extension and pullback adjunction, unit/multiplication, and uniqueness. All needed ingredients already have DAG nodes; no new nodes or Lean files. Statement unchanged.",
+  "blueprint": "The inherited ancestor is lem-trf-local-term-locality, through the listed Proj ampleness/descent chain; this split realizes precisely the homogeneous-fraction extension and multiplication identity identified by blueprint.from.place, i.e. the source 01NK comparison used in Steps 1 and 6 of the parent split. The ancestor itself has no separate Proj statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Use the arbitrary graded-module chart restriction formula for A(m); this is a generic Proj construction, not a replacement of a trace-formula unit step."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-morphism-on-basis",
+    "why": "Extend compatible maps between actual sheaves from the standard-open basis and test equality; no node of this unit supplies this generic sheaf tool."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Transpose the constructed sheaf map using the explicitly defined tensor pullback; no node of this unit gives the generic ringed-space adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-8adb5e91f",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-8adb5e91f (reviewer sub-agent of L); spot-checked: I read the whole delivery and it is correct, so I made no changes. It contains only the item and its report: no new nodes, no unit edits, no Lean. Against clones/live, the statement, stmt_deps, blueprint and source are unchanged; only status, the proof, proof_deps, proof_origin, split_report and appended searches changed. There is no repair note, so this is not a re-split, and there is no SGA reference. Source: I read Stacks 01NK (constructions.tex l.3217-3325) and 01N8. The item is 01NK's theta restricted to degrees >=0 with r fixed, and no hypothesis is added. Step by step: (1) the fraction map psi(b)/s^q is well defined, by cancelling the injective multiplications s^k and s^{q+q'} (def-sc-section-generating-locus); this holds even for zero-divisor or nilpotent f. (2) The map is additive and linear over r^sharp, using the statement's chart formula and multiplicativity of psi. (3) It commutes with restrictions, by part (a) of lem-weil-pbc-proj-graded-module-sheaf-exists (g^k=af, rho(b/f^q)=a^qb/g^{kq}); I checked the degrees and psi(g)^{kq}=psi(a)^q psi(f)^q, and equal opens D_+(f)=D_+(f') are covered. (4) The basis lemma extends the maps into G_m=r_*(L^m|_U), and the adjunction transposes them (lem-pc-module-pullback-adjunction); linearity is checked on the basis. (5) Global sections go to psi(b)|_U (q=0), alpha_0=r^sharp gives the unit, and the multiplication identity holds on fraction pure tensors, which generate the stalks. (6) Uniqueness follows from the transpose theta'(1 tensor u) agreeing with alpha on charts, then basis uniqueness and the adjunction bijection. Small cases: k[x] with deg x=2 (O_P(1)=0, theta_1=0), m=0, empty U. Duplicates: I read the 01NK hits (the parent lem-trf-proj-invertible-map-twist-iso, canonical-map-twist-comparison, generated-pullback-frames, space-line-module-proj-map, line-proj-chart-pullback, sc chart-fraction-relation); none states this normalized multiplicative family. Accepted tool_uses: the generic graded-module sheaf and pullback-adjunction nodes, used as black boxes; the basis node is a Mathlib leaf. Two minor points, no change: Step 4's basis sentence should read 'positive-degree h' (a one-line fix via hf), and Step 1 does not list def-sc-invertible-section-ring, although it is in stmt_deps and proof_deps."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjLocalizedGradedComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.existsUnique_proj_localized_graded_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Proj.comparisonFraction",
+   "AlgebraicGeometry.Proj.comparisonProduct",
+   "AlgebraicGeometry.Scheme.Modules.projComparisonDomain",
+   "AlgebraicGeometry.Scheme.Modules.projComparisonImage",
+   "AlgebraicGeometry.Scheme.Modules.ProjComparisonFamily",
+   "AlgebraicGeometry.Scheme.Modules.projComparisonValue",
+   "AlgebraicGeometry.Scheme.Modules.ProjComparisonChartNormalized",
+   "AlgebraicGeometry.Scheme.Modules.existsUnique_proj_localized_graded_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjLocalizedGradedComparison.lean",
+  "statement": "theorem existsUnique_proj_localized_graded_comparison (r : (projComparisonDomain 𝒜 L ψ).toScheme ⟶ Proj 𝒜) (hr_preimage : ∀ (e : ℕ) (_he : 0 < e) (f : 𝒜 e), (projComparisonDomain 𝒜 L ψ).ι ''ᵁ (r ⁻¹ᵁ Proj.basicOpen 𝒜 f.val) = generatingLocus (ψ f.val e)) (hr_formula : ∀ (e : ℕ) (_he : 0 < e) (f : 𝒜 e) (q : ℕ) (b : 𝒜 (q • e)), ((projComparisonDomain 𝒜 L ψ).ι.appIso (r ⁻¹ᵁ Proj.basicOpen 𝒜 f.val)).inv (r.app (Proj.basicOpen 𝒜 f.val) (Proj.awayToSection 𝒜 f.val (HomogeneousLocalization.Away.mk 𝒜 f.property q b.val b.property))) • projComparisonImage 𝒜 L ψ (q • e) (f.val ^ q) ((projComparisonDomain 𝒜 L ψ).ι ''ᵁ (r ⁻¹ᵁ Proj.basicOpen 𝒜 f.val)) = projComparisonImage 𝒜 L ψ (q • e) b.val ((projComparisonDomain 𝒜 L ψ).ι ''ᵁ (r ⁻¹ᵁ Proj.basicOpen 𝒜 f.val))) : ∃ θ : ProjComparisonFamily 𝒜 L ψ r, ProjComparisonChartNormalized 𝒜 L ψ r θ ∧ (∀ (m : ℕ) (V W : (Proj 𝒜).Opens) (h : W ≤ V) (s : Γ(Proj.twist 𝒜 (m : ℤ), V)), projComparisonValue 𝒜 L ψ r θ m W ((Proj.twist 𝒜 (m : ℤ)).presheaf.map (homOfLE h).op s) = (L.tensorPow m).presheaf.map (homOfLE (Scheme.Hom.image_mono (projComparisonDomain 𝒜 L ψ).ι ((Opens.map r.base).monotone h))).op (projComparisonValue 𝒜 L ψ r θ m V s)) ∧ (∀ (m : ℕ) (b : 𝒜 m), projComparisonValue 𝒜 L ψ r θ m ⊤ ((Proj.unitToTwist b.property ≫ eqToHom (congrArg (Proj.twist 𝒜) (zero_add (m : ℤ)))).app ⊤ (1 : Γ(Proj 𝒜, ⊤))) = projComparisonImage 𝒜 L ψ m b.val ((projComparisonDomain 𝒜 L ψ).ι ''ᵁ (r ⁻¹ᵁ ⊤))) ∧ (∀ (V : (Proj 𝒜).Opens) (a : Γ(Proj 𝒜, V)), projComparisonValue 𝒜 L ψ r θ 0 V (Scheme.Modules.Hom.app (Proj.unitToTwistZero (𝒜 := 𝒜)) V (unitSectionsEquiv V a)) = unitSectionsEquiv ((projComparisonDomain 𝒜 L ψ).ι ''ᵁ (r ⁻¹ᵁ V)) (((projComparisonDomain 𝒜 L ψ).ι.appIso (r ⁻¹ᵁ V)).inv (r.app V a))) ∧ (∀ (m n : ℕ) (V : (Proj 𝒜).Opens) (s : Γ(Proj.twist 𝒜 (m : ℤ), V)) (t : Γ(Proj.twist 𝒜 (n : ℤ), V)), projComparisonValue 𝒜 L ψ r θ (m + n) V (Proj.comparisonProduct 𝒜 m n V s t) = (L.tensorPowAddIso m n).inv.app ((projComparisonDomain 𝒜 L ψ).ι ''ᵁ (r ⁻¹ᵁ V)) (tmulSection (projComparisonValue 𝒜 L ψ r θ m V s) (projComparisonValue 𝒜 L ψ r θ n V t))) ∧ (∀ θ' : ProjComparisonFamily 𝒜 L ψ r, ProjComparisonChartNormalized 𝒜 L ψ r θ' → θ' = θ)",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The normalized family is unique among all families satisfying the fraction normalization. Division is expressed equivalently after multiplication by the free denominator. The unit and graded multiplication equalities are expressed on actual pulled-back sections on every open; these locally generate the tensor pullback, so this is the full sheaf-map compatibility under the canonical tensor-pullback comparison. Helpers are explicit section-level data for this same comparison, with no new independent notion or chosen map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8491aec61",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Item node changes only in its new lean field; one new module; lean.statement verbatim, followed by sorry. Checked against Stacks 01NK (constructions.tex l.3216-3323) and 01N8: U = sup of generatingLocus(psi f e) over e>0; r pinned by hr_preimage and hr_formula (fraction formula after multiplying by the free generator psi(f^q), equivalent to division, q=0 included); theta_m are actual maps tensorPullback(twist m) -> L^m|U; chart normalization uses the genuine fraction degreePart.mk b f^q with tensorPowAddIso/tmulSection, identical to sectionRingGMul; restriction/overlap, global b -> psi(b)|U via unitToTwist, unit via unitToTwistZero and r.app, multiplication on pulled-back pure tensors over every open (locally generating, so equivalent to the arrow identity), uniqueness among all chart-normalized families. comparisonProduct copies nothing (twistTensorIso is P(n;S) only, Proj.twistMul multiplies by a global element). tensorPow/tensorPowAddIso/tmulSection/unitSectionsEquiv/restrictAppIso are upstream API owned by no theorem node, so no H2 issue. Edge cases: empty U, m=n=0, non-degree-one-generated A, zero-divisor f, no quasi-compactness; single universe forced by r. Docstrings carry source and blueprint id; the theorem docstring has the six proof steps; only sorry. Not recompiled: no file changed."
+ }
+}

@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-abelian-euler-tensor-homogeneity",
+ "kind": "statement",
+ "title": "Homogeneity of the Euler characteristic of tensor powers on an abelian variety",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety] of dimension $g\\geq1$ [def-kun-topological-krull-dimension], and let $L$ be an invertible $\\mathcal O_A$-module [def-sc-invertible-module]. Write $\\chi(A,M)=\\sum_{i\\geq0}(-1)^i\\dim_kH^i(A,M)\\in\\mathbf Z$ for coherent Zariski Euler characteristic [def-pc-euler-characteristic]; for an invertible $M$ this is a finite sum of finite dimensions. For $n\\in\\mathbf Z$, let $L^{\\otimes n}$ mean the usual tensor power for $n>0$, $\\mathcal O_A$ for $n=0$, and $(L^{-1})^{\\otimes(-n)}$ for $n<0$, where $L^{-1}$ is the tensor inverse of $L$. Then $$\\chi(A,L^{\\otimes n})=n^g\\chi(A,L)\\quad\\text{for every }n\\in\\mathbf Z.$$ No ampleness or nondegeneracy hypothesis is imposed on $L$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Theorem 11.1(b), printed p.54 (PDF p.60), tensor-power consequence of abelian Riemann–Roch: for a divisor D representing L, apply the formula to nD for each integer n."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-abelian-variety] and [def-weil-proper-morphism], $A$ is proper and finite type over $k$. A field is Noetherian (its only ideals are $0,k$); hence [lem-weil-pbc-finite-type-over-noetherian] makes $A$ Noetherian. Rank-one local frames [def-sc-invertible-module] show that every signed power $L^{\\otimes n}$ is invertible, quasi-coherent and finite type, as is $\\mathcal O_A$. By [pqf-lem-coherent-ft-locnoeth] they are coherent. Thus [lem-pc-euler-characteristic-well-defined] gives the finite Euler sums in the statement.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sc-invertible-module",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, lemma-coherent-Noetherian; Tag 02O5, proper coherent finiteness; Noetherian permanence is Morphisms Tag 01T6."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-snapper-numerical-polynomial] with $X=A$, $\\mathcal F=\\mathcal O_A$, $r=1$ and $\\mathcal L_1=L$. It gives $P\\in\\mathbf Q[X]$ with $P(n)=\\chi(A,L^{\\otimes n})$ for every $n\\in\\mathbf Z$, including zero and negative exponents. Put $c=\\chi(A,L)$; then $P(1)=c$. The numerical polynomial here is on the whole integer lattice, not just the ample or eventual Hilbert function.",
+   "uses": [
+    "lem-sc-snapper-numerical-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, lemma-numerical-polynomial-from-euler (section Tag 0BEL), specialize to one invertible module."
+   }
+  },
+  {
+   "text": "Use the representing family of [lem-sfb-abelian-polarization-calculus]. For every positive integer $n$, pullback and tensor give $t_x^*(L^{\\otimes n})\\otimes(L^{\\otimes n})^{-1}\\cong(t_x^*L\\otimes L^{-1})^{\\otimes n}$. This identity holds for families over every test scheme, respecting the identity rigidification. Since addition in the represented Picard functor is tensor product, the represented morphisms satisfy $\\phi_{L^{\\otimes n}}=[n]_{A^\\vee}\\circ\\phi_L$. The cited statement also gives $\\dim A^\\vee=g$.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I §8, dual variety and rigidified invertible-sheaf families, pp.36–40; expand the defining family of the polarization map."
+   }
+  },
+  {
+   "text": "For $n>0$, [lem-sc-isogeny-facts] on $A^\\vee$ gives $\\deg[n]=n^{2g}$. Apply [lem-sfb-isogeny-postcomposition-degree] to $h=\\phi_L$ and $u=[n]_{A^\\vee}$. With the zero convention even when $\\phi_L$ is not an isogeny, step 3 gives $d(\\phi_{L^{\\otimes n}})=n^{2g}d(\\phi_L)$. Apply [lem-sfb-abelian-euler-degree-square] to both invertible sheaves. Consequently $P(n)^2=c^2n^{2g}$ for every positive integer $n$.",
+   "uses": [
+    "lem-sc-isogeny-facts",
+    "lem-sfb-isogeny-postcomposition-degree",
+    "lem-sfb-abelian-euler-degree-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 7.2, p.33; Proposition 7.1, p.32 and degree multiplicativity; Theorem 11.1(a), p.54, with degree-zero convention before Theorem 10.9, p.46."
+   }
+  },
+  {
+   "text": "The positive integers are distinct in $\\mathbf Q$. By [lem-trf-polynomial-infinite-evaluation-identity], $P^2=c^2X^{2g}$ in $\\mathbf Q[X]$. Thus $(P-cX^g)(P+cX^g)=0$. Two nonzero polynomials over $\\mathbf Q$ have nonzero product, since the product of their leading coefficients is nonzero; hence $P=cX^g$ or $P=-cX^g$. The second case evaluated at $1$ gives $c=-c$, so $c=0$ and again $P=cX^g$. Evaluate at every integer $n$ and use step 2 and injectivity of $\\mathbf Z\\to\\mathbf Q$. This proves the required signed-power identity, including $n=0$ because $g\\geq1$.",
+   "uses": [
+    "lem-trf-polynomial-infinite-evaluation-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Algebra/Polynomial/Roots.lean",
+    "place": "Polynomial.eq_of_infinite_eval_eq, lines 156–160; elementary factorization and leading-coefficient argument over Q."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-variety",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sc-invertible-module",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sc-isogeny-facts",
+  "lem-sfb-isogeny-postcomposition-degree",
+  "lem-sfb-abelian-euler-degree-square",
+  "lem-trf-polynomial-infinite-evaluation-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Theorems 7.2 and 11.1(a), pp.33 and 54, combined with Stacks Tag 0BEM; polynomial argument prescribed by the maintainer return of 2026-10-23. Does not use Theorem 11.1(b)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "euler.*tensor|tensor.*euler|riemann.?roch|abelian.?variety",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic of a line bundle tensor power on an abelian variety equals n power dimension times Euler characteristic",
+   "results": "8 hits; top: IncidenceAlgebra.eulerChar_prod, TensorPower, FDRep.char_tensor, TensorPower.mulEquiv, IncidenceAlgebra.eulerChar, LinearEquiv.lTensor_zpow, TensorPower.gMul_def, exteriorPower.toTensorPower_apply_ιMulti",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\"",
+   "results": "12 hits; top: ComplexShape.EulerCharSigns, ComplexShape.EulerCharSigns.χ, GradedObject.eulerChar, HomologicalComplex.eulerChar, ComplexShape.EulerCharSigns.mk, ComplexShape.EulerCharSigns.χ_next, HomologicalComplex.homologyEulerChar, ComplexShape.eulerCharSignsDownNat",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Riemann\"",
+   "results": "12 hits; top: BoxIntegral.IntegrationParams.Riemann, BoxIntegral.IntegrationParams.bRiemann, BoxIntegral.IntegrationParams.henstock_le_riemann, BoxIntegral.IntegrationParams.rCond_of_bRiemann_eq_false, BoxIntegral.HasIntegral.of_bRiemann_eq_false_of_forall_isLittleO, Manifold.riemannianEDist, Manifold.exists_lt_of_riemannianEDist_lt, Manifold.riemannianEDist_self",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Riemann Roch on an abelian variety implies the Euler polynomial of tensor powers of an invertible sheaf is homogeneous of degree equal to dimension",
+   "results": "8 hits; top: LinearMap.polyCharpoly_coeff_isHomogeneous, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_preΨ, Matrix.charpoly.univ_coeff_isHomogeneous, WeierstrassCurve.natDegree_preΨ_le, Polynomial.hilbertPoly_X_pow_succ, WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis, WeierstrassCurve.natDegree_preΨ'_le",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a g dimensional abelian variety the Euler characteristic of the nth tensor power of any line bundle L is n to the g times chi L for every integer n",
+   "results": "8 hits; top: FDRep.char_tensor, IncidenceAlgebra.eulerChar_prod, LinearEquiv.lTensor_zpow, CommRing.Pic.mk_tensor, CommRing.Pic.mul_eq_tensor, AddChar.zpow_apply, AddChar.zsmul_apply, AddChar.pow_eq_nsmul",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Riemann Roch for any line bundle L on an abelian variety of dimension g: g factorial times chi L equals its top self intersection",
+   "results": "{\"t\": \"2026-10-23T14:17:14Z\", \"tool\": \"leanfinder\", \"query\": \"Riemann Roch for any line bundle L on an abelian variety of dimension g: g factorial times chi L equals its top self intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"FunctionField.classNumber\", \"jacobiSum_one_one\", \"ClassGroup.cardM\", \"NumberField.Units.finrank_mul_regOfFamily_eq_det\", \"NumberField.Units.finrank_mul_regulator_eq_det\", \"NumberField.dedekindZeta_residue\"], \"digest\": \"c431ba1efb7e27bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern incidence-algebra Euler characteristics, abstract tensor or representation characters, elliptic-curve ideal classes, number-field formulas, or measure-theoretic intersections; none is coherent Riemann–Roch or tensor-power Euler homogeneity on arbitrary-dimensional abelian varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "riemann.?roch|intersectionNumber|intersection_number|abelianVariety",
+   "results": "{\"t\": \"2026-10-23T14:32:05Z\", \"tool\": \"grep\", \"query\": \"riemann.?roch|intersectionNumber|intersection_number|abelianVariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern incidence-algebra Euler characteristics, abstract tensor or representation characters, elliptic-curve ideal classes, number-field formulas, or measure-theoretic intersections; none is coherent Riemann–Roch or tensor-power Euler homogeneity on arbitrary-dimensional abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an abelian variety the Euler characteristic of an invertible sheaf equals its top self intersection divided by the factorial of the dimension",
+   "results": "{\"t\": \"2026-10-23T14:32:06Z\", \"tool\": \"leansearch\", \"query\": \"On an abelian variety the Euler characteristic of an invertible sheaf equals its top self intersection divided by the factorial of the dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IncidenceAlgebra.eulerChar\", \"IncidenceAlgebra.eulerChar_prod\", \"WeierstrassCurve.j\", \"WeierstrassCurve.IsCharTwoJNeZeroNF.a₄\", \"AlgebraicGeometry.IsEtale\", \"WeierstrassCurve.c₄_of_char_two\", \"WeierstrassCurve.b₄_of_char_two\", \"IntermediateField.finrank_top\"], \"digest\": \"b675b4dc91dc0f59\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern incidence-algebra Euler characteristics, abstract tensor or representation characters, elliptic-curve ideal classes, number-field formulas, or measure-theoretic intersections; none is coherent Riemann–Roch or tensor-power Euler homogeneity on arbitrary-dimensional abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T14:32:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"eulerChar\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern incidence-algebra Euler characteristics, abstract tensor or representation characters, elliptic-curve ideal classes, number-field formulas, or measure-theoretic intersections; none is coherent Riemann–Roch or tensor-power Euler homogeneity on arbitrary-dimensional abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary invertible sheaf M on a g dimensional abelian variety the top intersection number of M is g factorial times the coherent Euler characteristic of M",
+   "results": "{\"t\": \"2026-10-23T14:32:41Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary invertible sheaf M on a g dimensional abelian variety the top intersection number of M is g factorial times the coherent Euler characteristic of M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClassGroup.cardM\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"FunctionField.classNumber\", \"NumberField.Units.finrank_mul_regOfFamily_eq_det\", \"NumberField.Units.finrank_mul_regulator_eq_det\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"IncidenceAlgebra.eulerChar_prod\", \"NumberField.dedekindZeta_residue\"], \"digest\": \"4d32bc0528caf76b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern incidence-algebra Euler characteristics, abstract tensor or representation characters, elliptic-curve ideal classes, number-field formulas, or measure-theoretic intersections; none is coherent Riemann–Roch or tensor-power Euler homogeneity on arbitrary-dimensional abelian varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "euler.*tensor|tensor.*euler|riemann.?roch|intersection.*number",
+   "results": "{\"t\": \"2026-10-23T14:33:24Z\", \"tool\": \"grep\", \"query\": \"euler.*tensor|tensor.*euler|riemann.?roch|intersection.*number\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/PiSystem.lean\"], \"digest\": \"8a1d6b829b1ca969\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern incidence-algebra Euler characteristics, abstract tensor or representation characters, elliptic-curve ideal classes, number-field formulas, or measure-theoretic intersections; none is coherent Riemann–Roch or tensor-power Euler homogeneity on arbitrary-dimensional abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RiemannRoch\"",
+   "results": "{\"t\": \"2026-10-23T14:33:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"RiemannRoch\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern incidence-algebra Euler characteristics, abstract tensor or representation characters, elliptic-curve ideal classes, number-field formulas, or measure-theoretic intersections; none is coherent Riemann–Roch or tensor-power Euler homogeneity on arbitrary-dimensional abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic of every integer tensor power of an arbitrary line bundle on an abelian variety is n to the dimension times its Euler characteristic",
+   "results": "{\"t\": \"2026-10-23T14:33:26Z\", \"tool\": \"leanfinder\", \"query\": \"Euler characteristic of every integer tensor power of an arbitrary line bundle on an abelian variety is n to the dimension times its Euler characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IncidenceAlgebra.eulerChar_prod\", \"FDRep.char_tensor\", \"CommRing.Pic.mk_tensor\", \"CommRing.Pic.mul_eq_tensor\", \"LinearEquiv.lTensor_zpow\", \"FDRep.char_one\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"CommRing.Pic.mapAlgebra_apply\"], \"digest\": \"1ba8071c7c63eebe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern incidence-algebra Euler characteristics, abstract tensor or representation characters, elliptic-curve ideal classes, number-field formulas, or measure-theoretic intersections; none is coherent Riemann–Roch or tensor-power Euler homogeneity on arbitrary-dimensional abelian varieties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-line-bundle-degree-square",
+  "date": "2026-10-23",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Theorem 11.1(a),(b), printed p.54, with the zero-degree convention for non-isogenies preceding Theorem 10.9, printed p.46. Combine the degree/Euler-characteristic square formula with abelian Riemann–Roch; the identity applies to arbitrary invertible sheaves. Supporting input: Theorem 11.1(b): homogeneous Euler polynomial of arbitrary invertible sheaves, before extracting the intersection coefficient.",
+   "via": [
+    "lem-sfb-abelian-line-bundle-degree-square",
+    "lem-sfb-abelian-trace-intersection",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-euler-tensor-homogeneity",
+  "worker": "stage1",
+  "summary": "Q04 repaired D1/D2/D4 by discarding the proposed Riemann–Roch leaf and all uses of it. Repaired D3 with existing Snapper polynomiality, the scheme-theoretic degree-square identity, tensor additivity of the represented polarization family, degree of positive multiplication, and the explicit factorization/sign argument in Q[X]. Statement unchanged; no new nodes, no new Mathlib leaves, no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Theorem 11.1(a),(b), printed p.54, with the zero-degree convention for non-isogenies preceding Theorem 10.9, printed p.46. Combine the degree/Euler-characteristic square formula with abelian Riemann–Roch; the identity applies to arbitrary invertible sheaves. Supporting input: Theorem 11.1(b): homogeneous Euler polynomial of arbitrary invertible sheaves, before extracting the intersection coefficient. The three steps realize the supporting tensor-power consequence without altering the chapter or unit route; latest blueprint direct-image proof (3) uses compactification. Inherited null blueprint ancestor is retained, as reported by blueprint_refs.py ancestor. Repair: the five steps instead establish homogeneity before extracting an intersection coefficient, using the polynomial/degree-square route required by the maintainer. No abelian Riemann–Roch input or parent conclusion is assumed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "Generic polynomiality for signed invertible twists on proper schemes; the unit supplies no substitute and the maintainer explicitly requires this input."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion on locally Noetherian schemes, needed to check Snapper hypotheses."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Generic finiteness and boundedness of coherent cohomology on a proper scheme over a field."
+   },
+   {
+    "node": "lem-sc-isogeny-facts",
+    "why": "Generic degree of positive multiplication on the dual abelian variety; this does not replace a six-functor unit step."
+   },
+   {
+    "node": "lem-trf-polynomial-infinite-evaluation-identity",
+    "why": "Generic polynomial algebra over Q, already a Mathlib leaf; no trace-formula or Poincare-duality argument is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-snapper-numerical-polynomial",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-isogeny-facts",
+  "lem-trf-polynomial-infinite-evaluation-identity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-955306141",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-955306141 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery has no new nodes, the statement is unchanged, and it follows the route that the return of the earlier delivery 75c85a7b8344 prescribed; the circular Riemann–Roch leaf is removed and the parent's conclusion is not used. (1) Proper/finite type, Spec k Noetherian, invertible => coherent via pqf-lem-coherent-ft-locnoeth, and pc-euler-well-defined give finite Euler sums; all hypotheses hold. (2) Snapper (Stacks varieties.tex line 10195, read) with F=O_A, r=1 gives P in Q[X] with P(n)=chi(L^n) on all of Z. (3) phi_{L^n}=[n] o phi_L follows from (L^n)_0 = L_0^{tensor n}, the group law of the represented functor and the polarization-calculus statement (dim A^vee=g); it is genuinely elementary and no existing node states it. (4) isogeny-facts(a) gives deg[n]=n^{2g} for every n>=1 (Stacks 0BFG); postcomposition-degree applies to h=phi_L and u=[n] with the zero convention; degree-square holds for arbitrary L; all use the same kernel-order degree. (5) The infinite-evaluation identity gives P^2=c^2X^{2g}, the domain property gives P=+-cX^g, and P(1)=c fixes the sign, including c=0. Small cases agree: g=1; n=0 gives chi(O_A)=0; n=-1 matches Serre duality; degenerate p_1^*O(P) on E_1 x E_2 gives 0. The statement matches Milne I 11.1(b), p.54. No proof_dep's closure reaches the item, and degree-square (Milne 11.1(a), unsplit) comes before homogeneity in Mumford §16, so the route is not circular. No duplicate node states the item. All six batch-5 flags are generic (coherent finiteness, the schematically dense definition, forward-difference algebra, Proj(Sym E) geometry, composition of finite locally free morphisms, the Mathlib polynomial identity), not steps of the trace formula or Poincare duality; accepted. split_report.tool_uses accepted. No SGA cited, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.EulerTensorHomogeneity",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.eulerChar_tensor_integer_power",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/EulerTensorHomogeneity.lean",
+  "statement": "theorem IsAbelianVariety.eulerChar_tensor_integer_power (k : Type u) [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (g : ℕ) (hg : 1 ≤ g) (hdim : topologicalKrullDim A.left = (g : WithBot ℕ∞)) (L : A.left.Modules) [L.IsInvertible] (n : ℤ) : (if 0 ≤ n then L.tensorPow n.toNat else L.dual.tensorPow (-n).toNat).eulerChar k = n ^ g * L.eulerChar k",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa5a03b4f",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: algebraically closed field k; A in Over (Spec k) with [GrpObj A] [IsAbelianVariety A]; dimension g>=1 via topologicalKrullDim A.left = g; L any [L.IsInvertible] (recorded Scheme.Modules class, no ampleness); eulerChar k with k-structure from OverClass.fromOver (A.hom); signed power = tensorPow for n>=0 (power 0 = unit) and L.dual.tensorPow (-n).toNat for n<0, same convention as the recorded Snapper theorem; conclusion n^g * chi(L) in Z, sign kept. Edge cases n=0, n=±1, chi=0 and g=0 (excluded) checked; universes bound. Milne I 11.1(b) read on PDF p.60. Item record changes only lean; statement verbatim in file; one sorry; no definitions (nothing hollow); source and blueprint docstrings present; the 5-step proof plan matches the node; plain imports are the proof-dependency modules and all exist. No compile run, no file changed. Advisory only: the 'Second reading by Q86' section calls itself the author's own self-check, though it does match each clause."
+ }
+}

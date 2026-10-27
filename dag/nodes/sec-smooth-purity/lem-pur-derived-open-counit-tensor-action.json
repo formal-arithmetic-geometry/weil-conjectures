@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-derived-open-counit-tensor-action",
+ "kind": "statement",
+ "title": "Tensor counit square for derived open extension",
+ "statement": "For a commutative ring A and a scheme S, let j be the standard affine chart in the projective line over S [def-amb-affine-trace-construction]. For every H,M in the unbounded etale derived category of the projective line [def-weil-pbc-derived-categories], the specified openAction [def-pur-ordinary-affine-tensor-actions] on j* M, followed by extension by zero of the inverse tensor pullback comparison [def-asd-ordinary-finite-p1-arrows] and the actual counit at H tensor M, equals tensoring H with the actual counit at M. The ordinary pullback and canonical signed symmetries are fixed, not chosen",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+ },
+ "stmt_deps": [
+  "def-pur-ordinary-affine-tensor-actions",
+  "lem-pur-open-counit-tensor-action",
+  "lem-pur-tensor-projection-right-transport",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-tensor-sym"
+ ],
+ "proof": [
+  {
+   "text": "transport the derived exact open adjunction by its canonical right comparison.\nThe mixed tensorator in the existing projection is the transported tensorator, so\nTensorProjectionRightTransport identifies its projection with the ordinary one.\nThe abstract openCounit_tensorAction then gives the equality, since derived pullback\nis braided. Every symmetry is the canonical signed derived symmetry.",
+   "uses": [
+    "def-pur-ordinary-affine-tensor-actions",
+    "lem-pur-open-counit-tensor-action",
+    "lem-pur-tensor-projection-right-transport",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+    "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-ordinary-affine-tensor-actions",
+  "lem-pur-open-counit-tensor-action",
+  "lem-pur-tensor-projection-right-transport",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-tensor-sym"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An iterated tensor pullback and associator source comparison intertwines the canonical projection formula for compact support with the pasted coefficient action along a tower",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap.*counit|counit.*projectionMap",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryAffineCounitTensorNormalization",
+  "date": "2026-10-25",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: composition of the explicit projective-line adjunctions and the same iterated counit for direct sums",
+   "via": [
+    "lem-pur-ordinary-affine-counit-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenCounitTensorAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenCounitTensorAction.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedOpenCounit_tensorAction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedOpenCounit_tensorAction"
+  ],
+  "statement": "theorem derivedOpenCounit_tensorAction\n    (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})\n    (H M : DerivedCategoryModule A (ProjectiveLine S)) :\n    OrdinaryAffineTensorActions.openAction A S H\n        ((ordinaryFinitePullback A (ProjectiveLine.affineChart S)).obj M) ≫\n      (affineTraceOpenLeft A S).map\n        (ordinaryFiniteTensorPullback A (ProjectiveLine.affineChart S) H M).symm.hom ≫\n      (affineTraceOpenAdjunction A S).counit.app\n        (((ordinaryFiniteTensor A (ProjectiveLine S)).obj H).obj M) =\n      ((ordinaryFiniteTensor A (ProjectiveLine S)).obj H).map\n        ((affineTraceOpenAdjunction A S).counit.app M)",
+  "statements": [
+   "theorem derivedOpenCounit_tensorAction\n    (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})\n    (H M : DerivedCategoryModule A (ProjectiveLine S)) :\n    OrdinaryAffineTensorActions.openAction A S H\n        ((ordinaryFinitePullback A (ProjectiveLine.affineChart S)).obj M) ≫\n      (affineTraceOpenLeft A S).map\n        (ordinaryFiniteTensorPullback A (ProjectiveLine.affineChart S) H M).symm.hom ≫\n      (affineTraceOpenAdjunction A S).counit.app\n        (((ordinaryFiniteTensor A (ProjectiveLine S)).obj H).obj M) =\n      ((ordinaryFiniteTensor A (ProjectiveLine S)).obj H).map\n        ((affineTraceOpenAdjunction A S).counit.app M)"
+  ],
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; the 5 moved defs byte-identical in OrdinaryAffineCounitTensorMaps (public re-export, 0 importers); 3 sorry holes checked against OrdinaryFiniteP1Datum.counit_normalization, derivedOpenImmersionLowerShriekProjectionMap (= adjunction projectionMap) and the canonical compact-support compositor lemmas; #print axioms of item, tower, line and the 5 categorical lemmas on a scratch build"
+ }
+}

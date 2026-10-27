@@ -193,7 +193,40 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.HasInjectiveAcyclicity.of_comp",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation",
+     "lines": [
+      340,
+      379
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.HasTorsionBaseChange.of_comp",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation",
+     "lines": [
+      381,
+      396
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -230,24 +263,37 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be proper, with $f$ surjective. If\n$\\mathrm{PBC}(f)$ and $\\mathrm{PBC}(hf)$ hold, then $\\mathrm{PBC}(h)$ holds.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring which is torsion as an abelian group (every\nelement has finite additive order; for instance $\\Lambda=\\mathbf Z/n$). For a\nmorphism of schemes $f:X\\to Y$ say that\n\n- $f$ has *torsion base change* over $\\Lambda$ if, for every cartesian square\n  [def-weil-pbc-cartesian-square] with $f$ on the right and an arbitrary\n  $g:Y'\\to Y$ at the bottom, the derived exchange morphism\n  [def-weil-pbc-derived-exchange] $g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ is an\n  isomorphism for every $K\\in\\Dplus(X_{\\Et},\\Lambda)$ whose cohomology sheaves\n  are torsion [def-weil-pbc-torsion-etale-sheaf];\n- $f$ has *injective acyclicity* over $\\Lambda$ if, for every such square and\n  every injective sheaf $I$ of $\\Lambda$-modules on $X_{\\Et}$ which is torsion,\n  $R^qf'_*g'^{-1}I=0$ for $q>0$ [def-weil-pbc-direct-image].\n\nLet $f:X\\to Y$ be surjective and $h:Y\\to Z$ arbitrary.\n\n1. If $f$ has torsion base change and $hf$ has injective acyclicity over\n   $\\Lambda$, then $h$ has injective acyclicity over $\\Lambda$.\n2. If $f$ and $hf$ have torsion base change over $\\Lambda$, then so does $h$.",
   "proof": [
    {
-    "text": "$\\mathrm{PBC}(h)$ is equivalent to $\\mathrm{IA}(h)$, so we prove\n$\\mathrm{IA}(h)$. Fix a base change $c:Z'\\to Z$, write $Y'=Y\\times_ZZ'$,\n$X'=X\\times_ZZ'$ with projections $b$, $a$, and base-changed maps $f'$, $h'$,\nand fix a prime $r$ and an injective $\\mathbf F_r$-module sheaf $I$ on $Y$. By\n[lem-weil-pbc-retract-supplied], $b^{-1}I$ is a direct summand of\n$b^{-1}f_*J$ for a suitable injective $J$ on $X$. The underived proper\nexchange identifies $b^{-1}f_*J$ with $f'_*a^{-1}J$; $\\mathrm{IA}_r(f)$ and\n$\\mathrm{IA}_r(hf)$ kill the higher direct images of $a^{-1}J$ along $f'$ and\n$h'f'$, so the spectral sequence of\n[lem-weil-pbc-grothendieck-spectral-sequence] collapses to the $q=0$ row and\nyields $R^ph'_*(f'_*a^{-1}J)=0$ for $p>0$. Via the exchange identification\nthis is the vanishing for $b^{-1}f_*J$, and\n[lem-weil-pbc-vanishing-descends-retract] descends it to the retract\n$b^{-1}I$, proving $\\mathrm{IA}_r(h)$.",
+    "text": "Since $\\Lambda$ is torsion, every sheaf of $\\Lambda$-modules is torsion.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(1) Fix a cartesian square with $h$ on the right and $c:Z'\\to Z$ at the bottom;\nwrite $Y'=Y\\times_ZZ'$, $X'=X\\times_ZZ'$, $b:Y'\\to Y$, $a:X'\\to X$ and $f'$, $h'$\nfor the base-changed maps. Let $I$ be an injective sheaf of $\\Lambda$-modules on\n$Y$. Choose a monomorphism $f^{-1}I\\hookrightarrow J$ with $J$ injective on $X$.\nBy [lem-weil-pbc-retract-supplied] ($f$ is surjective) the adjoint map\n$s:I\\to f_*J$ is a monomorphism, so by injectivity of $I$ it has a retraction\n$r$ with $rs=\\mathrm{id}_I$. Torsion base change for $f$ implies injective\nacyclicity of $f$ and, at the injective sheaf $J$, that the underived exchange\n$b^{-1}f_*J\\to f'_*a^{-1}J$ is an isomorphism\n([lemma-weil-pbc-property-iff-acyclicity]). Thus $a^{-1}J$ is $f'_*$-acyclic,\nand the Grothendieck spectral sequence\n[lem-weil-pbc-grothendieck-spectral-sequence] for $X'\\xrightarrow{f'}Y'\\xrightarrow{h'}Z'$\nat $a^{-1}J$ collapses to its row $q=0$ and gives\n\n$$\n R^qh'_*(b^{-1}f_*J)\\cong R^qh'_*(f'_*a^{-1}J)\\cong R^q(h'f')_*a^{-1}J=0\n \\qquad(q>0)\n$$\n\nby injective acyclicity of $hf$. The sheaf $b^{-1}I$ is a retract of\n$b^{-1}f_*J$ via $b^{-1}s$ and $b^{-1}r$, so\n[lem-weil-pbc-vanishing-descends-retract] gives $R^qh'_*b^{-1}I=0$ for $q>0$.",
     "uses": [
      "lem-weil-pbc-retract-supplied",
+     "lemma-weil-pbc-property-iff-acyclicity",
      "lem-weil-pbc-grothendieck-spectral-sequence",
      "lem-weil-pbc-vanishing-descends-retract"
     ],
     "elementary": false
    },
    {
-    "text": "Fix a base change $a:Z'\\to Z$ and an injective $\\mathbf F_\\ell$-module sheaf\n$I$ on $Y$. Choose a\nmonomorphism $f^{-1}I\\hookrightarrow J$ with $J$ injective on $X$. Applying\n$f_*$ gives $\\iota:I\\to f_*J$. If a germ $a\\in I_{\\bar y}$ maps to zero,\nchoose a geometric $\\bar x\\to X$ above $\\bar y$ (surjectivity). The canonical\nstalk identification $(f^{-1}I)_{\\bar x}\\cong I_{\\bar y}$ sends $a$ to the\ngerm of $a$ at $\\bar x$; the monomorphism into $J$ makes that germ zero. The\ndefinition of the direct-image stalk then says that $a$ vanishes on an etale\nneighbourhood of $\\bar y$, so $a=0$. Thus $\\iota$ is monic. Injectivity of $I$ supplies a retraction\n$r:f_*J\\to I$ with $r\\circ\\iota=\\mathrm{id}_I$, making $I$ a direct summand.\nAfter base change, proper underived exchange gives\n$b^{-1}f_*J\\cong f'_*a_X^{-1}J$. The spectral sequence\n\n$$\nR^ph'_*R^qf'_*a_Y^{-1}I\\Longrightarrow R^{p+q}(h'f')_*a_X^{-1}I\n$$\n\nis computed using the injective $J$ and the assumed acyclicity of $hf$.\nThe $q>0$ terms vanish for $J$ by $\\mathsf{IA}(f)$, and total-degree\nvanishing for $hf$ forces $R^ph'_*a_Y^{-1}(f_*J)=0$ for $p>0$. Derived\ndirect image preserves finite direct sums and retracts, so the same vanishing\nholds for the direct summand $a_Y^{-1}I$. This is Tag `0A4C`; the\nstalk injectivity argument is written here because surjectivity is essential.",
-    "uses": [],
-    "elementary": null
+    "text": "(2) By (1), applied with the injective acyclicity of $hf$ implied by its torsion\nbase change, $h$ has injective acyclicity. Moreover the underived exchange\nmorphism $c^{-1}h_*G\\to h'_*b^{-1}G$ is an isomorphism for every sheaf $G$ of\n$\\Lambda$-modules on $Y$: at $G=f_*J$ with $J$ injective this follows from the\nvertical pasting of the exchange morphisms of $f$ and $hf$, both isomorphisms at\n$J$; a general $G$ is the kernel of a map $f_*J_1\\to f_*J_2$ of such sheaves\n(the unit $G\\to f_*f^{-1}G$ is a monomorphism since $f$ is surjective), and both\nsides of the exchange are left exact. Injective acyclicity together with the\nunderived exchange isomorphism gives torsion base change for $h$\n([lemma-weil-pbc-property-iff-acyclicity]). This is Stacks Project, Tag 0A4C.",
+    "uses": [
+     "lemma-weil-pbc-property-iff-acyclicity"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

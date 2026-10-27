@@ -1,0 +1,127 @@
+{
+ "id": "def-pur-exceptional-reconstruction-presentations",
+ "kind": "definition",
+ "title": "Normalized presentations for exceptional reconstruction",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Using the coefficient, realization and strict-system interfaces [def-weil-pbc-scheme-conventions], [def-weil-pbc-bounded-constructible-complete], [def-weil-pbc-rational-category], [lem-weil-pbc-condensed-e-realization], [prop-weil-pbc-qbar-condensed-two-colimit], [lem-pur-compact-support-condensed-realization], [lem-coef-derived-system-evaluation-calculus], [def-pur-etale-tower-brown-adjunction-data], [lem-pur-finite-coefficient-adjoint-comparisons], [lem-pur-coefficient-system-derived-comparison], [def-pur-exceptional-system-transport-interfaces], [def-pur-clopen-strict-system-comparison], define the canonical lifted Q_l coefficient field, its embedding into the fixed algebraic closure, and U_T as rationalization, the specified realization, and derived scalar extension. The complex-square map applies an ordinary natural comparison termwise. Its localization-square predicate requires equality of the two composites through the four specified localization factorizations. The section-value graph records equality of an input section and its mapped value across equivalent coefficient presentations. These constructions define the representative normalization for ordinary strict-system inverse-image presentation comparisons.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-condensed-e-realization",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-etale-tower-brown-adjunction-data",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-pur-exceptional-system-transport-interfaces",
+  "def-pur-clopen-strict-system-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/",
+  "place": "sk-prop-sp-integral-adjunction, ordinary strict-system construction and counit normalization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary coefficient system presentation comparison normalized on sections and complex localization",
+   "results": "Eight module presentation results (SheafOfModules.Presentation.map and related relations/generators); none supplies normalized ordinary strict-system transport.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "0 hits. Existing mate/uniqueness primitives are used directly, but do not package the geometric context.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ReconstructionContext|SequenceImageBridge|coefficient.*presentation.*comparison (Mathlib CategoryTheory); reconstruction context (dag/nodes); SequenceImageBridge|localizationSquare|sectionValue (WeilConjectures and Sheaf)",
+   "results": "Mathlib 0 hits; blueprint_refs search 0 nodes; DAG rg no matching context; project only unrelated localizationSquare and private sectionValue declarations. Existing ClopenSequenceRealization and site comparison records are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalized ordinary derived coefficient system presentation localization comparison",
+   "results": "Eight hits on unrelated commutative algebra localization and generic derived comparison; HasDerivedCategory.standard is reused. No strict-system normalized presentation context.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-condensed-exceptional-reconstruction",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "ordinary representative normalization of the reconstruction context",
+   "via": [
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalReconstructionPresentations",
+  "declaration": "WeilConjectures.CondensedExceptionalReconstruction.SequenceLocalization",
+  "declarations": [
+   "WeilConjectures.CondensedExceptionalReconstruction.Field",
+   "WeilConjectures.CondensedExceptionalReconstruction.fieldNormed",
+   "WeilConjectures.CondensedExceptionalReconstruction.fieldFinite",
+   "WeilConjectures.CondensedExceptionalReconstruction.Omega",
+   "WeilConjectures.CondensedExceptionalReconstruction.embedding",
+   "WeilConjectures.CondensedExceptionalReconstruction.realization",
+   "WeilConjectures.CondensedExceptionalReconstruction.complexSquare",
+   "WeilConjectures.CondensedExceptionalReconstruction.localizationSquare",
+   "WeilConjectures.CondensedExceptionalReconstruction.pasteComparisons",
+   "WeilConjectures.CondensedExceptionalReconstruction.SequenceLocalization",
+   "WeilConjectures.CondensedExceptionalReconstruction.sectionValue"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalReconstructionPresentations.lean",
+  "statement": "def SequenceLocalization {T S : Scheme.{u}} (g : T ⟶ S) (PT : ExceptionalProEvaluation T (clopenSystemRing l (Field.{u} l)) (clopenSystemUniformizer l (Field.{u} l))) (PS : ExceptionalProEvaluation S (clopenSystemRing l (Field.{u} l)) (clopenSystemUniformizer l (Field.{u} l))) (O : ExceptionalProOrdinaryImage (clopenSystemRing l (Field.{u} l)) (clopenSystemUniformizer l (Field.{u} l)) g) (I : SheafOfModules.CoefficientSystemDerivedImage.{u + 1, u, u + 1, u, u + 1, u + 2} (J := Scheme.ProEt.topology S) (K := Scheme.ProEt.topology T) _ _ _ _ _ O PS PT) (ST : ClopenSequenceRealization l (Field.{u} l) T) (SS : ClopenSequenceRealization l (Field.{u} l) S) (ordinaryPull : SS.ordinary.functor ⋙ pull (quotientRings l (Field.{u} l)) (quotientMaps l (Field.{u} l)) g ≅ O.inverse ⋙ ST.ordinary.functor) (derivedPull : SS.derived.functor ⋙ P (quotientRings l (Field.{u} l)) (quotientMaps l (Field.{u} l)) g ≅ I.system.inverse ⋙ ST.derived.functor) : Prop",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2902ee70",
+  "group": "O4",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2902ee70",
+  "group": "O4",
+  "result": "fix",
+  "note": "Re-delivery after the 9f276 RETURN. Presentations/Context/Comparison modules are byte-identical to the returned head; main module and new ExceptionalRealizationNormalization read in full. F1 fixed: theorem takes supplied C : ComparisonFamily, context and hcontext (context reduction = C's); D = C.coefficient(Field l).realization; specifiedSupport is an Eq transport of C.atCompactification; no free realization, reduction or sequence unit/counit remains; comparison is still the homEquiv transpose under the exact upstream UpperShriek adjunction. F3 fixed: coefficientInclusion pinned on sections, coefficientUnit pinned via homEquiv of normalizationAdjunction (so it is multiplication), shifts_normalized pins every component to the canonical composite CommShift (leftAdjointCommShift, encoding mapDerivedCategory, ofIso of leftDerivedFunctorIsoMapDerivedCategory); HEq carriers agree (sectionModuleEquivalence keeps the underlying sheaves). F2 fixed: existing:true owners def-pur-exceptional-system-transport-interfaces and def-pur-etale-tower-brown-adjunction-data; declarations present, statements verbatim, no other def owner. Mechanical H2 finding on lem-pur-compact-support-condensed-realization: genuine dependence (C is the theorem's asserted object; realization typed by sorry omegaScalar_preserves; projectedCounit uses omegaProjection_isIso; omegaExtension_flat instance), so PASS on that point. Clauses, edge cases (n+1 levels, m=n, r and shifts over all of Z, empty schemes), universes, one sorry theorem, docstrings and report sections OK. FIX: def-pur-exceptional-reconstruction-context statement prose still cited lem-sf-exceptional-system-transport although its stmt_deps name def-pur-exceptional-system-transport-interfaces; fixes/def-pur-exceptional-reconstruction-context.json replaces that one citation, all other fields unchanged. No Lean changed, so no compile; the worker reports a clean scompile of all five modules."
+ }
+}

@@ -1,0 +1,286 @@
+{
+ "id": "lem-sf-integral-support-functor-normalization",
+ "kind": "statement",
+ "title": "Normalized integral support functors and their restricted adjunctions",
+ "statement": "Fix the global datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $t$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. Put $A_n=R/t^n$ for $n\\ge1$, $B_T=\\varprojlim_n(A_n)_T$ on the small pro-etale site of $T=X,U,Z$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site]. Write $\\mathcal C_T=D^b_c(T,R)$ for the full derived-complete integral constructible subcategory of $D(\\operatorname{Mod}(B_T))$, with uniformly bounded constructible finite reductions [def-weil-derived-complete-integral-detailed].\n\nUse ordinary module operations over $B_T$ [def-sf-proetale-ring-sheaf-operations]. Identify the specified integral pullbacks $i_R^*,j_R^*$ with ordinary inverse image by the projection- and shift-compatible comparisons of [lem-sf-integral-immersion-pullback-normalization]. Let $J_R$ be the specified integral compact-support operation for $j$, using the compactification $(j,\\mathrm{id}_X)$ [def-weil-integral-rational-qbar-compact-support], and let $I_R$ be the specified integral direct image for $i$ [def-weil-derived-direct-image]. Thus their strict finite towers are respectively $(\\operatorname{Res}_n j_!N_n)_n$ and $(\\operatorname{Res}_n Ri_{*,n}M_n)_n$, with quotient-induced transitions; $N_n,M_n$ denote derived reductions and $\\operatorname{Res}_n$ restriction along $B_T\\to(A_n)_T$ [def-weil-integral-derived-reduction].\n\nThere are canonical natural isomorphisms of derived-category-valued functors\n$$J_R\\xrightarrow{d_j}j_!^{\\mathrm{ord}}|_{\\mathcal C_U},\\qquad I_R\\xrightarrow{d_i}i_*^{\\mathrm{ord}}|_{\\mathcal C_Z}.$$\nThe first is the comparison from strict system realization using the actual reduction/total-limit unit and the open reduction isomorphism. The second is inverse to the canonical direct-image/strict-limit comparison on quotient towers; termwise $i_*$ commutes with $\\operatorname{Res}_n$. Both respect shifts and finite projections. Ordinary open extension and closed direct image preserve completeness; their finite reductions are $j_!N_n$ and $i_*M_n$, constructible in the same uniform integer cohomological interval as the inputs. Consequently $J_R,I_R$ are exact $R$-linear functors into $\\mathcal C_X$, with the termwise shift comparisons.\n\nThe ordinary derived adjunctions restrict under these comparisons to\n$$J_R\\dashv j_R^*,\\qquad i_R^*\\dashv I_R$$\non the full integral constructible categories. Their units and counits are the ordinary termwise derived units and counits under the specified comparisons; on the open side these agree with the strict-system-realized adjunction maps. For every $M\\in\\mathcal C_Z$ the natural composite $j_R^*I_RM$ is zero. These conclusions concern the specified functors and maps, rather than an unspecified isomorphism of their object values.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Integral-stage paragraph, extension by zero, closed direct image and adjunction maps; rational-stage paragraph, exact R-linear integral support operations. Returned support-functor parts of steps 2 and 3, and step 4. Agent-extracted integral normalization lemma from the returned proof; precise Stacks tags and the complete retained argument are recorded in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sf-proetale-ring-sheaf-operations",
+  "lem-sf-integral-immersion-pullback-normalization",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-derived-reduction",
+  "def-weil-system-operation-exchange-realization",
+  "def-sf-ordinary-integral-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sf-integral-immersion-pullback-normalization] to obtain Noetherian X,U,Z and quasi-compact j. Define the base structures on U and Z by composition. Finite-type and quasi-compact composition supply their structure-map properties. The base prime-unit lemma [lem-weil-structure-direct-images-constructible] maps along each residue-field algebra map and supplies the required inverse instances.",
+   "uses": [
+    "lem-sf-integral-immersion-pullback-normalization",
+    "lem-weil-structure-direct-images-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sf-open-support-normalization] and [lem-sf-closed-support-normalization]. Their clauses are strictly separate open and closed comparison arguments. The isomorphisms dj and di transport the already constructible outputs of the actual support functors to the ordinary images, using isomorphism closure [lem-weil-integral-constructible-triangulated].",
+   "uses": [
+    "lem-sf-open-support-normalization",
+    "lem-sf-closed-support-normalization",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed ordinary pull map is invertible on constructible inputs by completeness; invert its whiskering with the full inclusion to form closedPull. Restrict the ordinary derived closed adjunction along the two fully faithful inclusions, with closedPull inverse and di inverse. Apply [lem-sp-fully-faithful-adjunction-restriction]: its component formulas and inverse/hom cancellation prove closedUnit and closedCounit. The open lemma fixes its adjunction to that same restriction; the same two formulas prove openUnit and openCounit. Copy the remaining separate comparison, projection, shift, exactness, scalar and zero-composite clauses into Normalization. The actual compact-support linearity theorem sfCompactSupportFiniteIntegralFunctor_linear and directImage_linear of [def-weil-system-operation-exchange-realization] supply scalar linearity without new obligations.",
+   "uses": [
+    "lem-sp-fully-faithful-adjunction-restriction",
+    "def-weil-system-operation-exchange-realization",
+    "def-weil-compact-support-finite-action"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-compact-support-finite-action",
+  "def-weil-system-operation-exchange-realization",
+  "lem-sf-closed-support-normalization",
+  "lem-sf-integral-immersion-pullback-normalization",
+  "lem-sf-open-support-normalization",
+  "lem-sp-fully-faithful-adjunction-restriction",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-structure-direct-images-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Open and closed support arguments split separately; actual full-subcategory adjunction assembly uses Mathlib CategoryTheory/Adjunction/Restrict.lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|[Pp]roetale|[Rr]oos",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed immersion integral adic constructible sheaves strict tower pushforward extension by zero adjunction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral extension by zero and closed direct image agree with strict quotient tower realization on bounded constructible complete adic sheaves and give exact linear adjunctions",
+   "results": "8 hits: IsAdicComplete.StrictMono.extend, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.StrictMono.extend_eq, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.of_lift, AdicCompletion.map_exact, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, AdicCompletion.eval_comp_of",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*(adjunction|pushforward)|constructible.*(extension|pushforward)|extension.*zero",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"Adj\"",
+   "results": "12 hits: PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat, PresheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction, CategoryTheory.Adjunction.sheafPushforwardContinuous, CategoryTheory.Adjunction.sheafPushforwardContinuous_counit_app_hom_app, CategoryTheory.Adjunction.sheafPushforwardContinuous_unit_app_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and closed immersion direct image preserve adic completion and constructibility with their canonical derived adjunction units and counits",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"Adj\"",
+   "results": "{\"t\": \"2026-10-22T07:57:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"pushforward\\\", \\\"Adj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"CategoryTheory.Adjunction.sheafPushforwardContinuous\", \"CategoryTheory.Adjunction.sheafPushforwardContinuous_counit_app_hom_app\", \"CategoryTheory.Adjunction.sheafPushforwardContinuous_unit_app_hom_app\"], \"digest\": \"f5704ec9823ee73a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adic module-completion, structure-sheaf, presheaf-adjunction or pro-etale-site infrastructure does not state completed ring-sheaf strict-tower support normalization with the specified maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral extension by zero and closed direct image agree with strict quotient tower realization on bounded constructible complete adic sheaves and give exact linear adjunctions",
+   "results": "{\"t\": \"2026-10-22T07:57:33Z\", \"tool\": \"leanfinder\", \"query\": \"Integral extension by zero and closed direct image agree with strict quotient tower realization on bounded constructible complete adic sheaves and give exact linear adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"IsAdicComplete.StrictMono.extend_eq\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"AdicCompletion.map_exact\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"AdicCompletion.eval_comp_of\"], \"digest\": \"140cc802b95ba086\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adic module-completion, structure-sheaf, presheaf-adjunction or pro-etale-site infrastructure does not state completed ring-sheaf strict-tower support normalization with the specified maps."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|[Pp]roetale|[Rr]oos",
+   "results": "{\"t\": \"2026-10-22T07:58:03Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|[Pp]roetale|[Rr]oos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adic module-completion, structure-sheaf, presheaf-adjunction or pro-etale-site infrastructure does not state completed ring-sheaf strict-tower support normalization with the specified maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed immersion integral adic constructible sheaves strict tower pushforward extension by zero adjunction",
+   "results": "{\"t\": \"2026-10-22T07:58:04Z\", \"tool\": \"leansearch\", \"query\": \"Open closed immersion integral adic constructible sheaves strict tower pushforward extension by zero adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\"], \"digest\": \"572d794889eb1ab8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adic module-completion, structure-sheaf, presheaf-adjunction or pro-etale-site infrastructure does not state completed ring-sheaf strict-tower support normalization with the specified maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and closed immersion direct image preserve adic completion and constructibility with their canonical derived adjunction units and counits",
+   "results": "{\"t\": \"2026-10-22T07:58:15Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero and closed immersion direct image preserve adic completion and constructibility with their canonical derived adjunction units and counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.of_comp_lift\", \"AdicCompletion.map_of\", \"AlgebraicGeometry.Scheme.kerAdjunction_unit_app\", \"AlgebraicGeometry.Scheme.kerAdjunction\", \"Condensed.profiniteSolidification\", \"Condensed.profiniteSolidCounit\"], \"digest\": \"7d456789b7a2c913\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adic module-completion, structure-sheaf, presheaf-adjunction or pro-etale-site infrastructure does not state completed ring-sheaf strict-tower support normalization with the specified maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-rational-localization-triangle-orthogonality",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Integral-stage paragraph, extension by zero, closed direct image and adjunction maps; rational-stage paragraph, exact R-linear integral support operations. Returned support-functor parts of steps 2 and 3, and step 4.",
+   "via": [
+    "lem-sf-rational-localization-triangle-orthogonality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-support-functor-normalization",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Seven-step assembly from existing normalized open reduction, completed direct-image/limit, finite constructibility, exact-linear derived functor and full-subcategory adjunction nodes. Checked actual units, strict transitions, projection normalization and termwise shifts; no new nodes.",
+  "blueprint": "Realizes the integral-stage extension-by-zero and closed direct-image sentences, their adjunction-map normalization, and the exact R-linear support-functor input of the rational-stage paragraph of prop-sf-open-closed-triangle-all-stages.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed pro-etale open-closed localization used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic strict reduction and normalized realization of completed open extension used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic direct image, derived limits, and completeness used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "lem-sf-open-finite-constructibility-interval",
+    "why": "Generic open extension preserves finite constructibility and its cohomological interval used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic constructible pro-étale coefficients are of étale origin used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Generic exactness and full faithfulness at finite level used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic comparison direct image used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "lem-fin-closed-immersion",
+    "why": "Generic closed immersions preserve constructibility used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic natural comparison of strict derived inverse limit and the product cone used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Generic bounded constructible derived-complete integral complexes form a triangulated subcategory used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "lem-weil-integral-constructible-linear",
+    "why": "Generic the integral constructible category is o_e-linear with o_e-linear shift used in the support-functor normalization assembly; it supplies the stated ringed-site, strict-tower, finite-constructibility or exact-derived tool without changing the open-closed unit route."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Generic identification of Koszul completeness with quotient-tower completeness for the completed coefficient sheaf, needed to apply prop-weil-pbc-direct-image-limits (Koszul completeness) to objects of the integral category (quotient-tower completeness); no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sf-integral-open-reduction-comparison",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-proetale-constructible-origin",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-fin-closed-immersion",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-integral-constructible-linear",
+  "prop-weil-pbc-koszul-reconstruction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-4181fe553",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-4181fe553 (reviewer sub-agent of L); spot-checked: I read the item in full, all 20 proof-dependency statements, the main-20261015 parent proof (integral-stage and rational-stage paragraphs) and the Stacks tags cited (0A07 and 04C4 read). The statement is unchanged, the split has 7 steps and no new nodes, and there is no repair note, so the re-split rule does not apply. The steps are sound and the hypotheses hold. (R,(t)) fits the adic datum: R is Noetherian, R/t is a finite field (torsion) and [R --t^n--> R] gives perfect quotients. j is quasi-compact. l is invertible on X, U and Z. A closed immersion is qcqs. (j,id_X) is a valid compactification, since def-weil-compactifications-refinements does not require density. The formula for d_j and its unit/counit identification come exactly from lem-sf-integral-open-reduction-comparison. On the closed side, the strict tower agrees with def-weil-derived-direct-image because Res_n commutes with i_*. The directions b and c in the fully-faithful restriction are correct. The shift and linearity steps are honest degreewise and naturality arguments, and no finite Tor amplitude is used. The dependency closure contains no cycle, there is no duplicate node (det-sf-open-closed-extension-zero-limits is a different statement), and no SGA source is cited. Edge cases checked: Z empty, U empty, n=1, nonreduced Z, zero input, arbitrary shift. Two faults repaired. (C1/C4) Step 3 applied prop-weil-pbc-direct-image-limits, whose completeness is the Koszul condition, to objects whose completeness is the quotient-tower condition of def-weil-derived-complete. It did not cite the equivalence. I added prop-weil-pbc-koszul-reconstruction (c_K o kappa_K = comp_K) to Step 3's text and uses, to proof_deps and to split_report.tool_uses. (E5) In Step 4, the passage from R^q i_* G = 0 for constructible sheaves to H^r(Ri_*G_n) = i_* H^r(G_n) was a bare 'consequently'. The truncation-triangle induction is now written out. I accept the declared generic tool_uses. Fix file: fixes/dag/nodes/sec-smooth-purity/lem-sf-integral-support-functor-normalization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralSupportFunctorNormalization",
+  "declaration": "WeilConjectures.IntegralSupportNormalization.integralSupportFunctorNormalization",
+  "declarations": [
+   "WeilConjectures.IntegralSupportNormalization.integralSupportFunctorNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralSupportFunctorNormalization.lean",
+  "statement": "theorem integralSupportFunctorNormalization (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) {Z U X : Scheme.{u}} [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (_hcomplement : Set.range j = (Set.range i)ᶜ) : Nonempty (Normalization l E D i j)",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of 197c081aaa3c: ordinary interfaces are owned by def-sf-ordinary-integral-comparison-data (exact existing definitions); unused pullOpen/pullClosed witnesses removed as permitted by H3. Original hypotheses and normalized support clauses retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9741ba70",
+  "group": "Q68",
+  "result": "fix",
+  "note": "Re-delivery of 197c RETURN. Lean differs only by removing unreferenced pullOpen/pullClosed (H3 alternative accepted; closedPull pinned by closedPull_formula, openPull by openCounit+openSystemCounit). H2 repaired: theorem stmt_dep replaced by new def-sf-ordinary-integral-comparison-data, existing:true on unchanged SfIntegralOrdinaryRecollementRealization; used decls (SfOrdinaryIntegralComparison, sfOrdinaryDerivedPull/Adjunction, sfOrdinaryPushReduction) all recorded, statement verbatim, TeX matches structure fields, no duplicate owner. Item TeX/proof byte-identical, signature verbatim, hypotheses as before. FIX: whole new-node JSON adding 6 body-owner stmt_deps with TeX cites (def-sf-scalar-reduction-categories-restriction, def-pur-integral-operation-complex-models, def-a1-integral-finite-pullback-tower, def-pur-integral-finite-pullback, def-weil-tower-transition-endomorphism, def-weil-cohomological-support); check_new_node clean, no cycle. Advisory: integralPullbackFiniteComparison theorem-owned (inherited, unused by item). No compile needed (no Lean change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a5f73",
+  "group": "D6",
+  "result": "fix",
+  "landing": "20261025T122724-L-1799577",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live IntegralSupportFunctorNormalization.lean (incl. H4 a74c29ee): verbatim move; OpenSupport/ClosedSupport vs Normalization fields; 4 direct importers compiled against delivered modules"
+ }
+}

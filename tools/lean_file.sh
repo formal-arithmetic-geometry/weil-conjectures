@@ -1,8 +1,10 @@
 #!/bin/bash
-# Compile one Lean file, with 2 threads and a time limit.
+# Compile one Lean file, with one thread (-j1) and a time limit.
 # Usage: SHEAF_GROUP=<group> tools/lean_file.sh <file.lean>
 #
-# - The time limit is SHEAF_FILE_TIMEOUT, default 60 s.
+# - The time limit is SHEAF_FILE_TIMEOUT, default 60 s: a compile that takes longer is NOT accepted (exit 124).
+#   2026-10-26 (the human): Lean is stopped only at SHEAF_FILE_RUN_LIMIT (default 300 s, never below SHEAF_FILE_TIMEOUT),
+#   so the slow declaration finishes and its messages are shown; the run still fails when it took over SHEAF_FILE_TIMEOUT.
 # - A library file compiled here writes its .olean into the group's private mirror local/build/<group>/ of the shared build,
 #   so the group's later compiles can import a module it has just landed, before the next global build.
 #   The shared build itself is only written when a green global build is published (build.py); a compile waits while
@@ -83,16 +85,27 @@ compile() {
   while [ -e "$SHEAF_ROOT/local/PUBLISHING" ] && [ $n -lt 60 ]; do sleep 2; n=$((n + 1)); done
   [ -n "${SHEAF_GROUP:-}" ] && refresh_mirror
   [ ${#OUT[@]} -gt 0 ] && { rm -f "${PARTS[@]}"; git hash-object "$F" > "$M/$R.src" 2>/dev/null || rm -f "$M/$R.src"; }
-  ( cd "$SHEAF_LEAN" && LEAN_PATH="$LP" timeout "${SHEAF_FILE_TIMEOUT:-60}" env LEAN_NUM_THREADS=1 nice -n 19 \
-      lean "${OPTS[@]}" -R "$SHEAF_LEAN" "${OUT[@]}" "$F" )
+  T0=$(date +%s.%N)
+  # 2026-10-26 (the human): Lean runs with transparent huge pages off (tools/thp-off, PR_SET_THP_DISABLE); without it
+  # every page fault of its madvised heap ran synchronous compaction. A missing wrapper leaves the compile as before.
+  local THPOFF=(); [ -x "$SHEAF_ROOT/tools/thp-off" ] && THPOFF=("$SHEAF_ROOT/tools/thp-off")
+  ( cd "$SHEAF_LEAN" && LEAN_PATH="$LP" timeout "$RUN_LIMIT" env LEAN_NUM_THREADS=1 "${THPOFF[@]}" nice -n 19 \
+      lean -j1 "${OPTS[@]}" -R "$SHEAF_LEAN" "${OUT[@]}" "$F" )
 }
-T0=$(date +%s.%N); START=$(mktemp); compile; rc=$?
+LIMIT=${SHEAF_FILE_TIMEOUT:-60}
+RUN_LIMIT=${SHEAF_FILE_RUN_LIMIT:-120}
+awk -v r="$RUN_LIMIT" -v l="$LIMIT" 'BEGIN{exit !(r < l)}' && RUN_LIMIT=$LIMIT
+START=$(mktemp); compile; rc=$?
 if [ $rc -ne 0 ] && [ $rc -ne 124 ] && [ "$SHEAF_ROOT/local/builds/published" -nt "$START" ]; then
   echo "A global build was published during the compile; compiling again."; compile; rc=$?
 fi
 rm -f "$START"
 DT=$(awk -v a="$(date +%s.%N)" -v b="$T0" 'BEGIN{printf "%.1f", a-b}')
 if [ $rc -eq 124 ]; then
-  echo "Timeout after ${SHEAF_FILE_TIMEOUT:-60} s: the cause is a definition the file uses; find it and change it."; exit 124
+  echo "NOT ACCEPTED: stopped after ${RUN_LIMIT} s, the longest a compile may run (the limit for one file is ${LIMIT} s): the cause is a definition the file uses; find it and change it."; exit 124
+fi
+if awk -v d="$DT" -v l="$LIMIT" 'BEGIN{exit !(d > l)}'; then
+  echo "NOT ACCEPTED: compiled in ${DT} s > ${LIMIT} s, the limit for one file (SHEAF_FILE_TIMEOUT). It ran up to ${RUN_LIMIT} s only so that the slow declarations finish and report (the messages above); the cause is a definition the file uses: find it and change it."
+  exit 124
 fi
 echo "Compiled in ${DT} s"; exit $rc

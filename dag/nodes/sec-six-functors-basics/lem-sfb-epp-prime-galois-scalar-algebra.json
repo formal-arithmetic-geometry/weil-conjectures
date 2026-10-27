@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-epp-prime-galois-scalar-algebra",
+ "kind": "statement",
+ "title": "Scalar extension of a prime-degree Galois field",
+ "statement": "Let $p$ be prime, let $E/F$ be a finite Galois extension of fields of degree $p$, and let $F\\to L$ be any field extension [def-pc-field-extension], [def-weil-pbc-separable-algebraic-extension]. Galois means separable and normal, with normal meaning that every irreducible polynomial over $F$ having a root in $E$ splits in $E$. Then the $L$-algebra $E\\otimes_F L$ [def-weil-pbc-module-tensor-product] is reduced and is either a field which is Galois of degree $p$ over $L$, or is isomorphic as an $L$-algebra to $\\prod_{i=1}^p L$. Here reduced means that the only nilpotent element is zero; the field alternative has its canonical scalar map from $L$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F4, lemma-make-finite-level, proof second paragraph: split or degree-p field alternative under scalar extension. This is the general field-algebra fact used there, independent of DVR or finite-level hypotheses."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=L\\otimes_F E$, with $(l\\otimes e)(l^{\\prime}\\otimes e^{\\prime})=ll^{\\prime}\\otimes ee^{\\prime}$ and scalar map $l\\mapsto l\\otimes1$. The swap $e\\otimes l\\mapsto l\\otimes e$ is an $L$-algebra isomorphism from the algebra in the statement to $U$: its inverse is the same swap, and both preserve products of pure tensors. By [lem-pc-finrank-field-base-change], $\\dim_LU=p$. By [lem-weil-pbc-finite-separable-tensor-field-reduced], applied to $E/F$ and $L/F$ and then the swap, $U$ is reduced. In particular $U\\ne0$, since $p>0$.",
+   "uses": [
+    "lem-pc-finrank-field-base-change",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, implicit scalar-algebra input; Algebra Tag 030U (lemma-separable-extension-preserves-reducedness); finite-dimensional scalar extension."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-dim-algebra-artinian], $U$ is Artinian. Apply [lem-sfb-reduced-artinian-residue-product]: if $\\mathcal M$ is its finite set of maximal ideals, the quotient map gives an $L$-algebra isomorphism $U\\simeq\\prod_{\\mathfrak m\\in\\mathcal M}K_{\\mathfrak m}$, with $K_{\\mathfrak m}=U/\\mathfrak m$ a field. Its $U$-algebra structure in the cited statement restricts to the specified $L$-algebra structure. Since $U\\ne0$, this product is nonzero, so $r=|\\mathcal M|>0$. Each $K_{\\mathfrak m}$ is finite-dimensional over $L$: the images of any finite $L$-basis of $U$ span the quotient.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-reduced-artinian-residue-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tags 00J6 (lemma-finite-dimensional-algebra), 00J7 (lemma-artinian-finite-nr-max), 00JB (lemma-artinian-finite-length), reduced case."
+   }
+  },
+  {
+   "text": "For $\\mathfrak m,\\mathfrak n\\in\\mathcal M$, both contract to zero in $L$: the scalar map into either quotient is a unital homomorphism between fields and hence injective. Apply [lem-weil-pbc-tensor-galois-prime-transitivity] with $k=F$, $K=E$, $A=L$. It gives $\\sigma\\in\\operatorname{Aut}_F(E)$ such that $T^{-1}(\\mathfrak m)=\\mathfrak n$, where $T(l\\otimes e)=l\\otimes\\sigma(e)$. This formula is $F$-balanced and preserves multiplication, and the formula with $\\sigma^{-1}$ gives its inverse. It fixes $L$. Therefore $[u]_{\\mathfrak n}\\mapsto[T(u)]_{\\mathfrak m}$ and its inverse induce an $L$-algebra isomorphism $K_{\\mathfrak n}\\simeq K_{\\mathfrak m}$. All these fields consequently have the same positive degree $d$ over $L$.",
+   "uses": [
+    "lem-weil-pbc-tensor-galois-prime-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Tag 038B (lemma-closed-fixed-by-Galois), Galois invariants and prime transitivity; explicit quotient transport."
+   }
+  },
+  {
+   "text": "Choose an $L$-basis of each $K_{\\mathfrak m}$. In the finite product, the vectors with one basis element in one coordinate and zero elsewhere form a basis: coordinatewise expansion proves spanning, and projecting a relation to each coordinate proves independence. Thus step 2 gives $p=\\dim_LU=rd$. Since $p$ is prime and $r,d>0$, either $r=1,d=p$ or $r=p,d=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, implicit prime-degree dichotomy; elementary basis and prime-divisor argument written by Q123."
+   }
+  },
+  {
+   "text": "If $r=1$, step 2 identifies $U$ as an $L$-algebra with its unique field quotient $K$. It has degree $p$ by step 4. The maps $E\\to K$, $e\\mapsto[1\\otimes e]$, and $L\\to K$, $l\\mapsto[l\\otimes1]$, are unital field maps, so identify $E,L$ with their images. These images have compositum $K$: every element of $K$ is a finite sum of images of pure tensors, and $[l\\otimes e]=[l\\otimes1][1\\otimes e]$, so belongs to that compositum. The image of $E$ is finite Galois over the common image of $F$. Apply [lem-sfb-galois-compositum-restriction] to these subfields of $K$ to obtain that $K/L$ is Galois. Hence $E\\otimes_FL$ is a degree-$p$ Galois field with its canonical $L$-structure.",
+   "uses": [
+    "lem-sfb-galois-compositum-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, field alternative; Fields Galois compositum argument, as stated by IsGalois.sup_right in Mathlib/FieldTheory/Galois/Basic.lean:557."
+   }
+  },
+  {
+   "text": "If $r=p,d=1$, the canonical scalar map $L\\to K_{\\mathfrak m}$ is an isomorphism for every $\\mathfrak m$: it is injective, and $1\\ne0$ is a basis of the one-dimensional $L$-vector space $K_{\\mathfrak m}$, so the map is surjective. These are $L$-algebra isomorphisms. Enumerate the $p$ maximal ideals and take their product in step 2 to obtain $U\\simeq L^p$ as $L$-algebras. Compose with the swap in step 1. Reducedness was already proved in step 1, so both alternatives and the reducedness clause follow.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F4, split alternative; elementary one-dimensional field and product identification written by Q123."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finrank-field-base-change",
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-weil-pbc-tensor-galois-prime-transitivity",
+  "lem-sfb-galois-compositum-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Q123, 2026-10-24: explicit proof of the scalar-algebra dichotomy implicit in Tag 09F4 (lemma-make-finite-level), using cited reduced-Artinian and Galois-transitivity results; the source does not write this general auxiliary proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a Galois field extension of prime degree p to any field is either a degree p Galois field extension or a product of p copies of the new base field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FiniteField.algEquivExtension\", \"module\": \"Mathlib/FieldTheory/Finite/Extension\", \"type\": \"(k : Type u_1) →\\n  [inst : Field k] →\\n    [inst_1 : Finite k] →\\n      (p : ℕ) →\\n        [inst_2 : Fact (Nat.Prime p)] →\\n          [inst_3 : CharP k p] →\\n            (n : ℕ) →\\n              [inst_4 : NeZero n] →\\n                (l : Type u_2) →\\n                  [inst_5 : Field l] →\\n                 \", \"doc\": \"Given a finite field $ k $ of characteristic $ p $ and a field extension $ l $ of $ k $ with finite rank $ n $, this constructs an algebra equivalence between $ l $ and the finite field extension of d\"}\n  {\"name\": \"IsGalois.of_separable_splitting_field_aux\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] {p : Polynomial F}\\n  [hFE : FiniteDimensional F E] [sp : Polynomial.IsSplittingField F E p],\\n  p.Separable →\\n    ∀ (K : Type u_3) [inst_3 : Field K] [inst_4 : Algebra F K] [inst_5 : Algebra K E] [inst_6 : IsSc\", \"doc\": \"Let $ E/F $ be a finite-dimensional field extension, and let $ p \\\\in F[x] $ be a separable polynomial whose splitting field is $ E $. For any intermediate field $ K $ between $ F $ and $ E $ satisfyin\"}\n  {\"name\": \"GaloisField.instIsGaloisOfFinite\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"∀ {K : Type u_2} {K' : Type u_3} [inst : Field K] [inst_1 : Field K'] [Finite K'] [inst_3 : Algebra K K'], IsGalois K K'\", \"doc\": \"For any fields $ K $ and $ K' $, if $ K' $ is a finite type and equipped with an algebra structure over $ K $, then the field extension $ K'/K $ is Galois. This means the extension is algebraic, norma\"}\n  {\"name\": \"FiniteField.Extension\", \"module\": \"Mathlib/FieldTheory/Finite/Extension\", \"type\": \"(k : Type u_1) → [inst : Field k] → (p : ℕ) → [Fact (Nat.Prime p)] → ℕ → [CharP k p] → Type\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this definition constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is\"}\n  {\"name\": \"IsGalois.tfae\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] [FiniteDimensional F E],\\n  [IsGalois F E, IntermediateField.fixedField ⊤ = ⊥, Nat.card Gal(E/F) = Module.finrank F E,\\n      ∃ p, p.Separable ∧ Polynomial.IsSplittingField F E p].TFAE\", \"doc\": \"For a finite-dimensional field extension $E/F$, the following are equivalent: (1) $E/F$ is Galois; (2) the fixed field of the entire Galois group $\\\\text{Gal}(E/F)$ equals the base field $F$; (3) the o\"}\n  {\"name\": \"FiniteField.card_algEquiv_extension\", \"module\": \"Mathlib/FieldTheory/Finite/Extension\", \"type\": \"∀ (k : Type u_1) [inst : Field k] [inst_1 : Finite k] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] [inst_3 : CharP k p] (n : ℕ)\\n  [inst_4 : NeZero n], Fintype.card Gal(FiniteField.Extension k p n/k) = n\", \"doc\": \"The cardinality of the Galois group $\\\\text{Gal}(K/k)$ of a finite field extension $K/k$ of degree $n$ is equal to $n$, i.e., $|\\\\text{Gal}(K/k)| = n$.\"}\n  {\"name\": \"FiniteField.nonempty_algHom_extension\", \"module\": \"Mathlib/FieldTheory/Finite/Extension\", \"type\": \"∀ (k : Type u_1) [inst : Field k] [Finite k] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] [inst_3 : CharP k p] (n : ℕ)\\n  [NeZero n] [inst_5 : Algebra (ZMod p) k], Nonempty (k →ₐ[ZMod p] FiniteField.Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $ (a prime) and a natural number $ n $, there exists an algebra homomorphism from $ k $ to the finite field extension of degree $ n $ over $ k $, compa\"}\n  {\"name\": \"FiniteField.natCard_algEquiv_extension\", \"module\": \"Mathlib/FieldTheory/Finite/Extension\", \"type\": \"∀ (k : Type u_1) [inst : Field k] [inst_1 : Finite k] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] [inst_3 : CharP k p] (n : ℕ)\\n  [inst_4 : NeZero n], Nat.card Gal(FiniteField.Extension k p n/k) = n\", \"doc\": \"For a finite field $k$ of characteristic $p$ and a natural number $n$, the cardinality of the Galois group of the finite field extension of degree $n$ over $k$ is equal to $n$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor domain-to-field, Galois splitting and relative degree primitives do not give this complete split-or-prime-degree dichotomy in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Galois extension E over F of prime degree and any field L over F the tensor product E tensor F L is a field or completely split",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"module\": \"Mathlib/FieldTheory/LinearDisjoint\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] (K : Type u_1) [inst_3 : Field K]\\n  [inst_4 : Algebra F K] [IsDomain (TensorProduct F E K)],\\n  Algebra.IsAlgebraic F E ∨ Algebra.IsAlgebraic F K → IsField (TensorProduct F E K)\", \"doc\": \"Let $F$ be a field, and let $E$ and $K$ be field extensions of $F$. If the tensor product ring $E \\\\otimes_F K$ is an integral domain, and at least one of the extensions $E/F$ or $K/F$ is algebraic, th\"}\n  {\"name\": \"IntermediateField.LinearDisjoint.isField_of_isAlgebraic\", \"module\": \"Mathlib/FieldTheory/LinearDisjoint\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] {A : IntermediateField F E}\\n  {L : Type w} [inst_3 : Field L] [inst_4 : Algebra F L] [inst_5 : Algebra L E] [inst_6 : IsScalarTower F L E],\\n  A.LinearDisjoint L → Algebra.IsAlgebraic F ↥A ∨ Algebra.IsAlgebraic F L\", \"doc\": \"If two intermediate fields $A$ and $L$ are linearly disjoint over a base field $F$, and at least one of the field extensions $F \\\\to A$ or $F \\\\to L$ is algebraic, then their tensor product $A \\\\otimes_F\"}\n  {\"name\": \"IsGalois.tfae\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] [FiniteDimensional F E],\\n  [IsGalois F E, IntermediateField.fixedField ⊤ = ⊥, Nat.card Gal(E/F) = Module.finrank F E,\\n      ∃ p, p.Separable ∧ Polynomial.IsSplittingField F E p].TFAE\", \"doc\": \"For a finite-dimensional field extension $E/F$, the following are equivalent: (1) $E/F$ is Galois; (2) the fixed field of the entire Galois group $\\\\text{Gal}(E/F)$ equals the base field $F$; (3) the o\"}\n  {\"name\": \"IsGalois.of_separable_splitting_field_aux\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] {p : Polynomial F}\\n  [hFE : FiniteDimensional F E] [sp : Polynomial.IsSplittingField F E p],\\n  p.Separable →\\n    ∀ (K : Type u_3) [inst_3 : Field K] [inst_4 : Algebra F K] [inst_5 : Algebra K E] [inst_6 : IsSc\", \"doc\": \"Let $ E/F $ be a finite-dimensional field extension, and let $ p \\\\in F[x] $ be a separable polynomial whose splitting field is $ E $. For any intermediate field $ K $ between $ F $ and $ E $ satisfyin\"}\n  {\"name\": \"IntermediateField.LinearDisjoint.isField_of_forall\", \"module\": \"Mathlib/FieldTheory/LinearDisjoint\", \"type\": \"∀ (F : Type u) [inst : Field F] (A : Type v) [inst_1 : Field A] (B : Type w) [inst_2 : Field B] [inst_3 : Algebra F A]\\n  [inst_4 : Algebra F B],\\n  (∀ (K : Type (max v w)) [inst_5 : Field K] [inst_6 : Algebra F K] (fa : A →ₐ[F] K) (fb : B →ₐ[F] K),\\n      fa.fieldRange.LinearDisjoint ↥fb.fieldRange) →\", \"doc\": \"If $ A $ and $ B $ are fields over $ F $ such that for every field extension $ K $ of $ F $ and for all $ F $-algebra homomorphisms $ f_A: A \\\\to K $ and $ f_B: B \\\\to K $, the images $ f_A(A) $ and $ f\"}\n  {\"name\": \"IntermediateField.LinearDisjoint.isField_of_isAlgebraic'\", \"module\": \"Mathlib/FieldTheory/LinearDisjoint\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] {A : Type u_1} {B : Type u_2}\\n  [inst_3 : Field A] [inst_4 : Algebra F A] [inst_5 : Field B] [inst_6 : Algebra F B] {fa : A →ₐ[F] E} {fb : B →ₐ[F] E},\\n  fa.fieldRange.LinearDisjoint ↥fb.fieldRange →\\n    Algebra.Is\", \"doc\": \"Any intermediate field between fields $ K $ and $ L $ is itself a field under the operations inherited from $ L $.\"}\n  {\"name\": \"IntermediateField.LinearDisjoint.isDomain\", \"module\": \"Mathlib/FieldTheory/LinearDisjoint\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] {A : IntermediateField F E}\\n  {L : Type w} [inst_3 : Field L] [inst_4 : Algebra F L] [inst_5 : Algebra L E] [inst_6 : IsScalarTower F L E],\\n  A.LinearDisjoint L → IsDomain (TensorProduct F (↥A) L)\", \"doc\": \"If an intermediate field $ A $ and the field $ L $ are linearly disjoint over $ F $, then their tensor product $ A \\\\otimes_F L $ is a domain (i.e., has no zero divisors).\"}\n  {\"name\": \"IntermediateField.LinearDisjoint.of_isField\", \"module\": \"Mathlib/FieldTheory/LinearDisjoint\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] {A : IntermediateField F E}\\n  {L : Type w} [inst_3 : Field L] [inst_4 : Algebra F L] [inst_5 : Algebra L E] [inst_6 : IsScalarTower F L E],\\n  IsField (TensorProduct F (↥A) L) → A.LinearDisjoint L\", \"doc\": \"If the tensor product $ A \\\\otimes_F L $ is a field, then the intermediate field $ A $ and the image of the canonical algebra homomorphism from $ F $ to $ L $ are linearly disjoint. This means their un\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor domain-to-field, Galois splitting and relative degree primitives do not give this complete split-or-prime-degree dichotomy in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, Algebra.TensorProduct",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Algebra.TensorProduct'",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor domain-to-field, Galois splitting and relative degree primitives do not give this complete split-or-prime-degree dichotomy in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sGalois.*[Tt]ensor|[Tt]ensor.*[Ii]sGalois|finrank.*dvd.*finrank|finrank.*[Aa]djoin.*dvd",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Dimension/Free.lean\", \"line\": \"73\", \"text\": \"theorem Module.finrank_dvd_finrank_left :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Dimension/Free.lean\", \"line\": \"77\", \"text\": \"theorem Module.finrank_dvd_finrank_right :\"}\n  {\"file\": \"Mathlib/FieldTheory/Relrank.lean\", \"line\": \"224\", \"text\": \"theorem relfinrank_dvd_finrank_top_of_le (h : A ≤ B) : relfinrank A B ∣ finrank A E :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Relrank.lean\", \"line\": \"276\", \"text\": \"theorem relfinrank_dvd_of_le_left (h : A ≤ B) : B.relfinrank C ∣ A.relfinrank C :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Relrank.lean\", \"line\": \"450\", \"text\": \"theorem relfinrank_dvd_finrank_top_of_le (h : A ≤ B) : relfinrank A B ∣ finrank A E :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Relrank.lean\", \"line\": \"456\", \"text\": \"theorem relfinrank_dvd_finrank_bot : relfinrank A B ∣ finrank F B :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Relrank.lean\", \"line\": \"457\", \"text\": \"  inf_relfinrank_right A B ▸ dvd_of_mul_left_eq _ (finrank_bot_mul_relfinrank inf_le_right)\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Algebraic.lean\", \"line\": \"124\", \"text\": \"theorem finrank_dvd_of_le_left (h : F ≤ E) : finrank E L ∣ finrank F L := by\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Algebraic.lean\", \"line\": \"127\", \"text\": \"  exact Module.finrank_dvd_finrank_left F E L\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Algebraic.lean\", \"line\": \"129\", \"text\": \"theorem finrank_dvd_of_le_right (h : F ≤ E) : finrank K F ∣ finrank K E := by\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Algebraic.lean\", \"line\": \"131\", \"text\": \"  exact Module.finrank_dvd_finrank_right K F E\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"line\": \"304\", \"text\": \"theorem nonempty_algHom_of_finrank_dvd (h : Module.finrank F K ∣ Module.finrank F L) :\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"line\": \"308\", \"text\": \"  have := Module.finite_of_finrank_pos (Nat.pos_of_dvd_of_pos h Module.finrank_pos)\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"line\": \"318\", \"text\": \"theorem natCard_algHom_of_finrank_dvd (h : Module.finrank F K ∣ Module.finrank F L) :\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Extension.lean\", \"line\": \"64\", \"text\": \"  nonempty_algHom_of_finrank_dvd (finrank_zmod_extension k p n ▸ dvd_mul_right _ _)\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"715\", \"text\": \"  exact Nat.le_of_dvd finrank_pos <| finSepDegree_adjoin_simple_dvd_finrank F E α\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"744\", \"text\": \"    finSepDegree F E ≤ finrank F E := Nat.le_of_dvd finrank_pos <| finSepDegree_dvd_finrank F E\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Rank.lean\", \"line\": \"52\", \"text\": \"theorem finrank_left_dvd_finrank_sup_of_free :\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Rank.lean\", \"line\": \"68\", \"text\": \"theorem finrank_right_dvd_finrank_sup_of_free :\"}\n  {\"file\": \"Mathlib/RingTheory/LinearDisjoint.lean\", \"line\": \"772\", \"text\": \"      (finrank_left_dvd_finrank_sup_of_free A B) (finrank_right_dvd_finrank_sup_of_free A B)\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor domain-to-field, Galois splitting and relative degree primitives do not give this complete split-or-prime-degree dichotomy in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Galois extension of prime degree after field base change is either split or a Galois field of the same degree",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsGalois.to_normal\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"∀ {F : Type u_1} {inst : Field F} {E : Type u_2} {inst_1 : Field E} {inst_2 : Algebra F E} [self : IsGalois F E],\\n  Normal F E\", \"doc\": \"If $ E/F $ is a Galois field extension, then $ E/F $ is a normal extension, meaning every irreducible polynomial in $ F[x] $ with a root in $ E $ splits completely into linear factors in $ E $.\"}\n  {\"name\": \"IsGalois.tower_top_of_isGalois\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"[IsGalois F E] : IsGalois K E\", \"doc\": \"In a tower of fields $ K \\\\subseteq F \\\\subseteq E $, if the field extension $ E/F $ is Galois (i.e., algebraic, normal, and separable), then the field extension $ E/K $ is also Galois.\"}\n  {\"name\": \"IsGalois.tfae\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"[FiniteDimensional F E] :\\n  List.TFAE\\n    [IsGalois F E, IntermediateField.fixedField (⊤ : Subgroup Gal(E/F)) = ⊥, Nat.card Gal(E/F) = finrank F E,\\n      ∃ p : F[X], p.Separable ∧ p.IsSplittingField F E]\", \"doc\": \"For a finite-dimensional field extension $E/F$, the following are equivalent: (1) $E/F$ is Galois; (2) the fixed field of the entire Galois group $\\\\text{Gal}(E/F)$ equals the base field $F$; (3) the o\"}\n  {\"name\": \"isCyclic_tfae\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"(K L) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L]\\n  (hK : (primitiveRoots (Module.finrank K L) K).Nonempty) :\\n  List.TFAE\\n    [IsGalois K L ∧ IsCyclic Gal(L/K),\\n      ∃ a : K, Irreducible (X ^ (finrank K L) - C a) ∧ IsSplittingField K L (X ^ (finrank K L) - C a),\\n      ∃ (α : L), α ^ (\", \"doc\": \"Let $L/K$ be a finite field extension of degree $n = [L:K]$. Suppose that the base field $K$ contains a primitive $n$-th root of unity. Then the following statements are equivalent:\\\\n1. The extension \"}\n  {\"name\": \"isGalois_bot\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \": IsGalois F (⊥ : IntermediateField F E)\", \"doc\": \"The field extension $ F/F $ is Galois, where $ F $ is the base field considered as the bottom intermediate field within any field extension $ E/F $.\"}\n  {\"name\": \"GaloisField\", \"module\": \"Mathlib.FieldTheory.Finite.GaloisField\", \"type\": \"(p : ℕ) → [Fact (Nat.Prime p)] → ℕ → Type\", \"doc\": \"The splitting field of the polynomial $ X^{p^n} - X $ over $ \\\\mathbb{Z}/p\\\\mathbb{Z} $, which is the unique finite field with $ p^n $ elements containing all roots of this polynomial.\"}\n  {\"name\": \"instFieldGaloisField\", \"module\": \"Mathlib.FieldTheory.Finite.GaloisField\", \"type\": \"(p : ℕ) → [inst : Fact (Nat.Prime p)] → (n : ℕ) → Field (GaloisField p n)\", \"doc\": \"For any prime number $ p $ and natural number $ n $, the Galois field $ \\\\text{GaloisField}(p, n) $ with $ p^n $ elements is a field. This field is the splitting field of the polynomial $ X^{p^n} - X $\"}\n  {\"name\": \"gal_isSolvable_of_splits\", \"module\": \"Mathlib.FieldTheory.AbelRuffini\", \"type\": \"{p q : F[X]} (_ : Fact ((p.map (algebraMap F q.SplittingField)).Splits)) (hq : IsSolvable q.Gal) : IsSolvable p.Gal\", \"doc\": \"If the polynomial $ p $ splits in the splitting field of $ q $ and the Galois group of $ q $ is solvable, then the Galois group of $ p $ is also solvable.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor domain-to-field, Galois splitting and relative degree primitives do not give this complete split-or-prime-degree dichotomy in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, TensorProduct",
+   "results": "0 hits; names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the complete tensor-algebra dichotomy; IsGalois.sup_right is reused through the existing Galois-compositum node."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*isGalois|isGalois.*tensor|finrank_eq_card_aut|card_aut_eq_finrank",
+   "results": "13 hits; names/files: Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean, Mathlib/FieldTheory/Finite/Extension.lean, Mathlib/FieldTheory/Galois/NormalBasis.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the complete tensor-algebra dichotomy; IsGalois.sup_right is reused through the existing Galois-compositum node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prime degree Galois extension after scalar extension is a field or completely split",
+   "results": "8 hits; names/files: IsGalois.to_normal, IsGalois.tfae, FiniteField.Extension, isGalois_bot, IsGalois, Algebra.IsQuadraticExtension.isGalois, IsGalois.is_separable_splitting_field, Algebra.IsQuadraticExtension.normal",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the complete tensor-algebra dichotomy; IsGalois.sup_right is reused through the existing Galois-compositum node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a finite Galois extension of prime degree is a field or a product of copies of the base field",
+   "results": "8 hits; names/files: GaloisField.instIsGaloisOfFinite, IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.to_isFractionRing, Algebra.isInvariant_of_isGalois, IsGalois.of_separable_splitting_field_aux, IsGaloisGroup.of_isFractionRing, Ideal.isPretransitive_of_isGaloisGroup, Ideal.isPretransitive_of_isGalois",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the complete tensor-algebra dichotomy; IsGalois.sup_right is reused through the existing Galois-compositum node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For fields E and L over F with E finite Galois of prime dimension, E tensor F L is either Galois of the same dimension or L to that power",
+   "results": "8 hits; names/files: GaloisField.instIsGaloisOfFinite, IsGalois.tfae, IsGalois.sup_right, IsGalois.of_card_aut_eq_finrank, FiniteGaloisIntermediateField, IsGalois.tower_top_of_isGalois, IsGalois, IsGaloisGroup.finiteDimensional",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the complete tensor-algebra dichotomy; IsGalois.sup_right is reused through the existing Galois-compositum node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-mixed-finite-level-preparation",
+  "date": "2026-10-24",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09F4, lemma-make-finite-level, preceded by adjoining a primitive pth root to the coefficient field; finite-level definition and bounds in the paragraphs following that lemma, before Tag 09F5. Smaller input: Tag 09EX, lemma-pre-purely-inseparable-case Field-algebra split-or-degree-p assertion in Tag 09F4, second paragraph.",
+   "via": [
+    "lem-sfb-epp-mixed-finite-level-preparation",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-prime-galois-scalar-algebra",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six steps prove reducedness, decompose the finite-dimensional algebra, identify factor degrees by Galois transitivity, and derive the prime-degree alternatives. All needed substantive results already have nodes; no new nodes.",
+  "blueprint": "Historical support to det-thm-sf-ctf-stability-direct-images proof (3), through the existing creation chain. Read latest sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md: current proof (3) does not state this Epp auxiliary. blueprint_refs.py ancestor returns None, retained; steps realize the split-or-degree-p field input implicit in Stacks 09F4 second paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "why": "Generic finite-separable field algebra reducedness under arbitrary field extension; used only as algebraic input to the historical Epp route. The unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-separable-tensor-field-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-1af64da12",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-1af64da12 (reviewer sub-agent of L); spot-checked: Read the item's 6 steps and every cited statement. The proof is correct: dimension p by lem-pc-finrank-field-base-change; reducedness by lem-weil-pbc-finite-separable-tensor-field-reduced (open generic tool, tool_uses declared); Artinian reduced product decomposition with L-structure inherited from the R-algebra isomorphism; transitivity from lem-weil-pbc-tensor-galois-prime-transitivity with k=F, K=E, A=L (contractions to the field L are 0; the comap orientation is correct, checked against Mathlib exists_smul_of_under_eq_of_profinite); p=rd; the r=1 case via the compositum of the images of E and L; the d=1 case via a 1-dimensional quotient. Statement unchanged and true; it generalizes the Kummer dichotomy implicit in Stacks 09F4 (more-algebra.tex:35088ff). Small cases tested: Q(i)/Q against L=Q, Q(i), R, a closed field, Artin–Schreier, and a transcendental L. No duplicate in the DAG; no new nodes. Mechanical finding: step 5 cites lem-per-galois-compositum-restriction, a node of the dropped 2026-10-19 lem-per-artin-gabber-affine-curve/Gabber chain. The mathematics used is only IsGalois.sup_right, not Gabber finiteness or any other excluded input, but the citation still points to a dropped-route node. FIX: repointed proof_deps and step 5 to lem-sfb-galois-compositum-restriction, the maintainer-directed replacement with an identical statement, status mathlib, in the item's own unit and present in the snapshot. Corrected item in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.PrimeGaloisScalarAlgebra",
+  "declaration": "Algebra.TensorProduct.prime_galois_scalar_algebra",
+  "file": "lean/Sheaf/FieldTheory/PrimeGaloisScalarAlgebra.lean",
+  "statement": "theorem prime_galois_scalar_algebra (F : Type u) (E : Type v) (L : Type w) [Field F] [Field E] [Field L] [Algebra F E] [Algebra F L] [FiniteDimensional F E] [IsGalois F E] (p : ℕ) (hp : p.Prime) (hdegree : Module.finrank F E = p) : IsReduced (E ⊗[F] L) ∧ ((∃ h : IsField (E ⊗[F] L), @IsGalois L _ (E ⊗[F] L) h.toField (rightAlgebra (R := F) (A := E) (B := L)) ∧ @Module.finrank L (E ⊗[F] L) _ _ (rightAlgebra (R := F) (A := E) (B := L)).toModule = p) ∨ Nonempty (@AlgEquiv L (E ⊗[F] L) (Fin p → L) _ _ _ (rightAlgebra (R := F) (A := E) (B := L)) _))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de6abfa14",
+  "group": "N8",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: prime p, FiniteDimensional+IsGalois F E with finrank p (FiniteDimensional implied), arbitrary Algebra F L, IsReduced outside the Or, field alternative IsGalois L with finrank p and split alternative AlgEquiv to Fin p → L, both via canonical rightAlgebra (l ↦ 1 ⊗ₜ l); independent universes u v w; lean.statement verbatim; node otherwise unchanged vs live; no duplicate in Mathlib, the project Lean trees or the DAG (checked the Galois tensor decomposition, coproduct, DVR-root-reduced and transitivity modules); no definitions, sorry only, source and blueprint docstrings with all 6 steps; private proof imports exist live; report has Worker report and Second reading sections (the second is a self-check). Not recompiled (no file changed)."
+ }
+}

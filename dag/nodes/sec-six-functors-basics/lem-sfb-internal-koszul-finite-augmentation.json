@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-internal-koszul-finite-augmentation",
+ "kind": "statement",
+ "title": "Strict finite singleton augmentation maps for a residue-zero section",
+ "statement": "Let l be prime, E a finite extension of Q_l and X a scheme. Write O for the constant small-site section ring and q for its first residue map [def-sfb-internal-completion-section-transport]. Let a be a global section of O whose image under q is zero on every site object. For every, possibly unbounded, complex P of actual integral internal modules [sk-def-pe-derived-completion], there are chain maps v_n from complex(P) tensor the level-n dual singleton Koszul complex [def-weil-pbc-ringed-koszul-system] to the actual transported positive quotient complex at n [def-sfb-internal-quotient-tower-model]. Composing the degree-zero tensor unit with v_n gives the actual quotient unit. The restriction of v_n to every total-tensor summand of nonzero Koszul degree is zero. The v_n commute with the successor transitions. No K-flatness, quasi-isomorphism, or inverse-limit assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), singleton augmentation; also proetale.tex, Section derived-completion-noetherian (099L) and Lemma naive-completion (099M)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-quotient-tower-model",
+  "def-sfb-internal-completion-section-transport",
+  "sk-def-pe-derived-completion",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Use the singleton scalar-cone presentation for N=complex(P), obtaining e_n: N tensor Q_n isomorphic to cone(f_n) with its normalized unit, off-degree-zero projection vanishing and successor projection equations.",
+   "uses": [
+    "lem-sfb-ringed-singleton-koszul-cone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue-kernel power annihilation theorem gives f_n followed by the right unitor and actual quotient unit equal to zero. Use mappingCone.desc with zero homotopy and this quotient map to define w_n: cone(f_n) to quotients(P)_n. Set v_n=e_n.hom followed by w_n. Its composite with the cone inclusion is the specified quotient map, so the normalized unit equation follows by cancellation of the tensor right unitor.",
+   "uses": [
+    "lem-sfb-internal-quotient-scalar-annihilation",
+    "lem-sfb-ringed-singleton-koszul-cone"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The degree-q component of w_n is the second cone projection followed by the right unitor and quotient unit. Hence its composite with a nonzero Koszul-degree summand vanishes, by the cone presentation. The successor projection equation and naturality of quotientUnits give the transition identity degreewise; complex extensionality finishes. These are applications of mappingCone.desc_f and the category composition laws.",
+   "uses": [
+    "lem-sfb-ringed-singleton-koszul-cone",
+    "def-sfb-internal-quotient-tower-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-singleton-koszul-cone",
+  "lem-sfb-internal-quotient-scalar-annihilation",
+  "def-sfb-internal-quotient-tower-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), singleton augmentation; also proetale.tex, Section derived-completion-noetherian (099L) and Lemma naive-completion (099M).; explicit zero-homotopy cone descent, T8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dual singleton Koszul complex resolves the quotient by a regular element compatibly with powers and quotient transition maps",
+   "results": "8 hits including Algebra.PreSubmersivePresentation.cotangentComplexAux, KaehlerDifferential.quotKerTotalEquiv and RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev; none states a strict sheaf Koszul augmentation.",
+   "date": "2026-10-26",
+   "verdict": "No matching strict finite sheaf augmentation or normalized K-flat acyclicity theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation of the two term Koszul complex of a regular element tensor a K flat complex is a quasi isomorphism",
+   "results": "8 hits: general ShortComplex.QuasiIso and HomologicalComplex.quasiIso APIs, quasiIso_comp, QuasiIso, quasiIso_iff, quasiIsoAt_comp and quasiIso_iff_comp_left. No coefficient augmentation theorem.",
+   "date": "2026-10-26",
+   "verdict": "General quasi-isomorphism API only; no matching finite sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιMapBifunctor",
+   "results": "HomologicalComplex.ιMapBifunctor, ι_mapBifunctorDesc, mapBifunctor.hom_ext, ι_mapBifunctorMap and related inclusion formulas.",
+   "date": "2026-10-26",
+   "verdict": "Use the actual total-tensor summand inclusions to specify the zero components; no augmentation to the actual internal coefficient quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*[Qq]uotient|[Qq]uotient.*koszul",
+   "results": "No hits in the Mathlib search service. Local library search found RegularQuotientCompletionUnit, KoszulQuotientTensorAugmentation and CompletedKoszulQuotientRoosAugmentation, using different constant-module or cone models.",
+   "date": "2026-10-26",
+   "verdict": "No declaration has the actual internal-module quotient target and the specified dual singleton source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalKoszulQuotientResolution",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Reduction paragraph: the finite residue reduction is the cone of multiplication by the uniformizer; strict finite augmentation maps",
+   "via": [
+    "lem-sfb-internal-koszul-quotient-resolution",
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalKoszulFiniteAugmentation",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalKoszulFiniteAugmentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.koszul_finite_augmentation",
+  "statement": "theorem koszul_finite_augmentation\n    (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)\n    (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,\n      (residue l E X).hom.app (op U) (a.val (op U)) = 0)\n    (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :\n    ∃ v : ∀ n : ℕ,\n        ((ringedKoszulTensorTower (ring l E X) 1 (fun _ ↦ a)).obj\n          (complex l E X P)).obj (op n) ⟶ (quotients l E X P).obj (op n),\n      (∀ n, ringedKoszulTensorUnitComponent (ring l E X) 1 (fun _ ↦ a)\n          (complex l E X P) (op n) ≫ v n = (quotientUnits l E X P).app (op n)) ∧\n      (∀ (n : ℕ) (p j : ℤ), j ≠ 0 →\n        HomologicalComplex.ιMapBifunctor (complex l E X P)\n            ((ringedKoszulDualTower (ring l E X) 1 (fun _ ↦ a)).obj (op n))\n            (curriedTensor _) (.up ℤ) p j (p + j) rfl ≫ (v n).f (p + j) = 0) ∧\n      (∀ n, ((ringedKoszulTensorTower (ring l E X) 1 (fun _ ↦ a)).obj\n          (complex l E X P)).map (homOfLE (Nat.le_add_right n 1)).op ≫ v n =\n        v (n + 1) ≫ (quotients l E X P).map\n          (homOfLE (Nat.le_add_right n 1)).op)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T001925-L-41712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261026T024100-L-637444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

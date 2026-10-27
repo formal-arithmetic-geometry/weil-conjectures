@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-localized-affine-residue-criterion-quasifinite",
+ "kind": "statement",
+ "title": "Localized affine residue criterion and return to scheme quasi-finiteness",
+ "statement": "Let $g:Z\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Choose affine opens $V=\\operatorname{Spec}R\\subseteq S$ and $U=\\operatorname{Spec}A\\subseteq Z$ such that $g(U)\\subseteq V$ [def-weil-affine-spectrum], and a point $s\\in V$ represented by $\\mathfrak p\\subset R$. Put $B=R_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pB$, $k=B/\\mathfrak m=\\kappa(s)$, $C=A\\otimes_R B$ and $F=C/\\mathfrak mC$ [def-weil-pbc-localization-at-prime]. Suppose that for every prime $P\\subset C$ with contraction $\\mathfrak m$ in $B$, the residue field $\\kappa(P)=\\operatorname{Frac}(C/P)$ has $\\operatorname{trdeg}_k\\kappa(P)=0$ [def-kun-transcendence-degree]. Then the canonical maps give isomorphisms of $k$-algebras $F\\cong C\\otimes_B k\\cong A\\otimes_R k$ and of $k$-schemes $U_s\\cong\\operatorname{Spec}F$, where $U_s=U\\times_V\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre]. Under these isomorphisms the primes $P/\\mathfrak mC$ of $F$ correspond to the primes $P$ of $C$ over $\\mathfrak m$ with residue field $\\operatorname{Frac}(C/P)$. The scheme $\\operatorname{Spec}F$ is of finite type over $k$, every point is closed, and its underlying space is finite and discrete. Consequently $\\{u\\in U:g(u)=s\\}$ is finite and $g$ is quasi-finite at every such $u$ in the original schemes $Z,S$ [pqf-def-quasifinite]. No dimension, generic algebraicity, Noetherian, properness, or normality hypothesis is imposed on the base.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AB6, label lemma-quasi-finite-in-codim-1, proof of condition (2), closed points of the fibre and final quasi-finiteness paragraph, with affine tensor identifications (returned proof steps 8–10)."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-kun-transcendence-degree",
+  "def-pc-scheme-fibre",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-lft-affine-pairs] to the given opens $U,V$. Thus $A$ is generated over $R$ by finitely many elements $a_1,\\ldots,a_n$. Their images $a_i\\otimes1$ generate $A\\otimes_R k$ over $k$: every pure tensor $a\\otimes\\lambda$ is a polynomial in these images with coefficients in $k$, since $a$ is a polynomial in the $a_i$ over $R$; every tensor is a finite sum of pure tensors. This uses the finite-generation description of [def-weil-pbc-finite-type-algebra].",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2, lemma-locally-finite-type-characterize; finite-generation calculation for the fibre algebra"
+   }
+  },
+  {
+   "text": "Write $q:B\\to k=B/\\mathfrak m$. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives mutually inverse maps\n$$C/\\mathfrak mC\\longrightarrow C\\otimes_B k,\\quad[c]\\longmapsto c\\otimes1,\\qquad c\\otimes q(b)\\longmapsto[bc].$$\nThe first kills $\\mathfrak mC$ because $bc\\otimes1=c\\otimes q(b)=0$ for $b\\in\\mathfrak m$; changing a lift $b$ changes $bc$ by an element of $\\mathfrak mC$, so the second is well-defined. The composites fix $[c]$ and $c\\otimes q(b)$. The same universal property gives mutually inverse maps\n$$ (A\\otimes_R B)\\otimes_B k\\longrightarrow A\\otimes_R k,\\quad(a\\otimes b)\\otimes\\lambda\\longmapsto a\\otimes q(b)\\lambda,\\qquad a\\otimes\\lambda\\longmapsto(a\\otimes1)\\otimes\\lambda.$$\nThe balancing relations verify both maps, and the composites fix every pure tensor. These maps respect the $k$-actions and multiplication on pure tensors, hence are $k$-algebra isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E6, remark-fundamental-diagram, fibre ring as a localized quotient; explicit elementary universal-property identifications"
+   }
+  },
+  {
+   "text": "The quotient map $\\pi:C\\to F$ identifies primes $Q$ of $F$ with primes $P=\\pi^{-1}Q$ containing $\\mathfrak mC$: the inverse sends $P$ to $P/\\mathfrak mC$, since $F/(P/\\mathfrak mC)\\cong C/P$ by $[[c]]\\mapsto[c]$. A prime $P$ contains $\\mathfrak mC$ exactly when its contraction to $B$ is $\\mathfrak m$: one direction follows because this contraction is proper and contains the maximal ideal $\\mathfrak m$, and the other follows by extending the contracted ideal. The displayed quotient isomorphism identifies fraction fields, giving $\\kappa(Q)=\\operatorname{Frac}(F/Q)\\cong\\operatorname{Frac}(C/P)=\\kappa(P)$ as extensions of $k$. Here $k$ embeds in $C/P$, because the kernel of $B\\to C/P$ is exactly $\\mathfrak m$. Thus the residue fields in the assertion and their $k$-structures agree.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E5, lemma-spec-closed, explicit quotient-prime correspondence; Tag 00E6, remark-fundamental-diagram"
+   }
+  },
+  {
+   "text": "For a prime $Q\\subset F$, put $D=F/Q$ and $L=\\operatorname{Frac}(D)$. By the preceding step $\\operatorname{trdeg}_k L=0$. By [def-kun-transcendence-degree], a singleton $\\{x\\}$ cannot be algebraically independent; thus every $x\\in L$ is a root of a nonzero polynomial over $k$. If $0\\ne x\\in D$, choose such a polynomial of least degree, $c_0+c_1T+\\cdots+c_dT^d$. Its degree is positive, and $c_0\\ne0$, since otherwise division by $T$ and $x\\ne0$ gives a polynomial of smaller degree vanishing at $x$. Its equation gives\n$$x^{-1}=-c_0^{-1}(c_1+c_2x+\\cdots+c_dx^{d-1})\\in D.$$\nHence $D$ is a field and $Q$ is maximal. This argument applies to every prime; if $F=0$ there are no primes and the conclusion is vacuous.",
+   "uses": [
+    "def-kun-transcendence-degree",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GA, lemma-finite-residue-extension-closed, intermediate-ring argument written out; applied in Morphisms Tag 01TE"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-local-ring-canonical-morphism], applied to $V$ at $s$, the natural map $B=R_{\\mathfrak p}\\to\\mathcal O_{S,s}$ is an isomorphism, and by its clause (5) with $J=\\mathfrak m$ the canonical morphism $\\operatorname{Spec}\\kappa(s)\\to V$ of [def-pc-scheme-fibre] is $\\operatorname{Spec}$ of the composite $R\\to B\\to B/\\mathfrak m=k$. Hence, by [lem-weil-pbc-fibre-product-affine-spectra],\n$$U_s=\\operatorname{Spec}A\\times_{\\operatorname{Spec}R}\\operatorname{Spec}k\\cong\\operatorname{Spec}(A\\otimes_R k)\\cong\\operatorname{Spec}F,$$\nwith the projections induced by the tensor inclusions; the second isomorphism is induced by step 2. The map to $\\operatorname{Spec}k$ corresponds to $\\lambda\\mapsto1\\otimes\\lambda$, so this is an isomorphism of $k$-schemes. Step 1 supplies a single affine cover with finite-type coordinate algebra over $k$. Since $\\operatorname{Spec}k$ has just one point, its only opens are itself and the empty open; this cover proves local finite type directly from [def-weil-finite-type-morphism]. The quasi-compactness of $\\operatorname{Spec}F$ in [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] proves quasi-compactness of the structure map, again by checking those two opens. Thus $\\operatorname{Spec}F$ is of finite type over $k$. Since step 4 makes every prime maximal, no two distinct primes are comparable. Its ring Krull dimension is at most zero by [def-weil-pbc-krull-dimension-ring], and [lem-weil-pbc-spec-topological-krull-dimension-ring] gives the same bound for its topological Krull dimension.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; Algebra Tags 00E8 and 00KE; finite type checked directly over the one-point base"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-dim-zero-artinian] with $X=\\operatorname{Spec}F$ and the field $k$. Step 5 verifies finite type and topological dimension at most zero, so the cited statement gives that its underlying space is finite and discrete and every point is closed. It includes the empty spectrum. By the fibre homeomorphism in [def-pc-scheme-fibre], applied to the restriction $g|_U:U\\to V$ and $s\\in V$, the first projection $U_s\\to U$ identifies its underlying space with $\\{u\\in U:g(u)=s\\}$, proving finiteness of that set.",
+   "uses": [
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KH, lemma-Noetherian-dimension-0; Schemes Tag 01K1, lemma-fibre-topological"
+   }
+  },
+  {
+   "text": "Fix $u\\in U$ with $g(u)=s$, represented by $\\mathfrak q\\subset A$ over $\\mathfrak p\\subset R$. The prime of $A\\otimes_R k$ corresponding to $\\mathfrak q$ exists by [lem-weil-pbc-fibre-ring-primes-bijection]. It is an isolated point because steps 2 and 6 identify this spectrum with the discrete space $\\operatorname{Spec}F$. The finite-type map $R\\to A$ of step 1 is therefore quasi-finite at $\\mathfrak q$ by [def-weil-pbc-ring-map-quasi-finite-at-prime]. The original affine opens $u\\in U\\subset Z$ and $V\\subset S$, with $g(U)\\subset V$, now witness quasi-finiteness of $g:Z\\to S$ at $u$ in [pqf-def-quasifinite]. This proves the pointwise assertion in the original schemes using exactly these affine witnesses.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TD, definition-quasi-finite; Algebra Tag 00PL, definition-quasi-finite; fibre correspondence Tag 00E6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, final paragraph: algebraic fibre residues give closed fibre points and quasi-finiteness; expanded using Algebra 00GA and 00KH and Schemes 01I4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type affine scheme chart over Spec R the fibre over p is finite discrete and the morphism is quasi finite at its points if all primes of A tensor R_p over pR_p have algebraic residue fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n  {\"name\": \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FiniteType R S],\\n  Algebra.QuasiFinite R S ↔ ∀ (x : PrimeSpectrum R), (PrimeSpectrum.comap (algebraMap R S) ⁻¹' {x}).Finite\", \"doc\": \"An $ R $-algebra $ S $ of finite type is quasi-finite over $ R $ if and only if, for every prime ideal $ \\\\mathfrak{p} $ in the prime spectrum of $ R $, the preimage of $ \\\\{\\\\mathfrak{p}\\\\} $ under the i\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_primeSpectrum\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Finite (PrimeSpectrum R)] [Algebra.QuasiFinite R S], Finite (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring with a finite prime spectrum and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum of $ S $ is also f\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.IsFinite (AlgebraicGeometry.Spec.map f) ↔ (CommRingCat.Hom.hom f).Finite\", \"doc\": \"For commutative rings $R$ and $S$, a ring homomorphism $f : R \\to S$ induces a morphism of schemes $\\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R)$. This morphism is finite if and only if the ring ho\"}\n  {\"name\": \"Algebra.QuasiFinite.isDiscrete_comap_preimage_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : PrimeSpectrum R), IsDiscrete (PrimeSpectrum.comap (algebraMap R S) ⁻¹' {P})\", \"doc\": \"For a quasi-finite algebra $ S $ over a commutative ring $ R $, the preimage of a singleton set $\\\\{P\\\\}$ in the prime spectrum $\\\\operatorname{Spec}(R)$ under the induced map $\\\\operatorname{Spec}(S) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume quasi-finiteness or finiteness, or characterize it on all fibres; none proves this single-fibre residue criterion, its localized tensor-ring comparisons and its pointwise conclusion for the ambient scheme morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine finite type fibre whose every residue field is algebraic is finite and discrete and gives quasi finiteness on the surrounding scheme chart",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"IsAlgebraic\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume quasi-finiteness or finiteness, or characterize it on all fibres; none proves this single-fibre residue criterion, its localized tensor-ring comparisons and its pointwise conclusion for the ambient scheme morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(quasiFinite|quasi_finite|LocallyQuasiFinite).*(algebraic|IsAlgebraic)|(algebraic|IsAlgebraic).*(quasiFinite|LocallyQuasiFinite)",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"27\", \"text\": \"- `AlgebraicGeometry.LocallyQuasiFinite` : The class of locally quasi-finite morphisms.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"32\", \"text\": \"- `AlgebraicGeometry.locallyQuasiFinite_iff_isFinite_fiber`: If `f` is quasi-compact,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"34\", \"text\": \"- `AlgebraicGeometry.locallyQuasiFinite_iff_isDiscrete_preimage_singleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"36\", \"text\": \"- `AlgebraicGeometry.locallyQuasiFinite_iff_finite_preimage_singleton`:\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume quasi-finiteness or finiteness, or characterize it on all fibres; none proves this single-fibre residue criterion, its localized tensor-ring comparisons and its pointwise conclusion for the ambient scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism is quasi finite at points of an affine chart over s when every prime of the localization of the chart over the maximal ideal of the local base has transcendence degree zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFiniteType f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n         \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite type if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ with $ f(V) \\\\subseteq U $, t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is locally of finite type, $ U $ is an affine open subset of $ Y $, and $ V $ is an affine open subset of $ X $ contained in the preimage of $ U $ under $ f $, \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type. For any affine open subset $U \\\\subseteq Y$ and affine open subset $V \\\\subseteq X$ contained in $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes that is locally of finite type, if $ U $ is an affine open subset of $ Y $ and $ V $ is an affine open subset of $ X $ contained in $ f^{-1}(U) $, then the indu\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume quasi-finiteness or finiteness, or characterize it on all fibres; none proves this single-fibre residue criterion, its localized tensor-ring comparisons and its pointwise conclusion for the ambient scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a field with all prime residue fields algebraic has finite discrete spectrum and affine fibre points are quasi finite",
+   "results": "[leanfinder] OK 8 hit(s); returned names: Algebra.QuasiFinite.finite_primeSpectrum, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.quasiFinite_iff, Algebra.QuasiFinite.iff_finite_comap_preimage_singleton, Algebra.QuasiFinite.discreteTopology_primeSpectrum, Algebra.QuasiFinite.finite_fiber, Algebra.QuasiFinite.finite_primesOver, Algebra.instFiniteResidueFieldOfQuasiFiniteAt",
+   "date": "2026-10-23",
+   "verdict": "no match: returned quasi-finite algebra and scheme declarations either define quasi-finiteness or assume it. None states this localized single-fibre residue criterion together with its canonical ring and scheme identifications and quasi-finiteness for the ambient morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFiniteAt\", \"IsAlgebraic\"",
+   "results": "[loogle] OK 0 hit(s); returned names: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned quasi-finite algebra and scheme declarations either define quasi-finiteness or assume it. None states this localized single-fibre residue criterion together with its canonical ring and scheme identifications and quasi-finiteness for the ambient morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(QuasiFiniteAt|quasiFiniteAt).*(algebraic|IsAlgebraic)|(IsAlgebraic|algebraic).*(QuasiFiniteAt|quasiFiniteAt)",
+   "results": "[grep] OK 0 hit(s); returned names: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned quasi-finite algebra and scheme declarations either define quasi-finiteness or assume it. None states this localized single-fibre residue criterion together with its canonical ring and scheme identifications and quasi-finiteness for the ambient morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine finite type fibre with all residue fields algebraic has finite discrete space and the morphism is quasi finite at its points",
+   "results": "[leansearch] OK 8 hit(s); returned names: Algebra.QuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite, Algebra.QuasiFinite.recOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.recOn, Algebra.QuasiFinite.casesOn, AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: returned quasi-finite algebra and scheme declarations either define quasi-finiteness or assume it. None states this localized single-fibre residue criterion together with its canonical ring and scheme identifications and quasi-finiteness for the ambient morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localized affine scheme fibre quotient by the maximal ideal identifies with tensor residue field; transcendence degree zero at every fibre point implies quasi finiteness there",
+   "results": "[leanfinder] OK 8 hit(s); returned names: Algebra.quasiFinite_iff, Algebra.QuasiFinite.finite_fiber, Algebra.QuasiFiniteAt, Algebra.QuasiFinite.instResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, RingHom.QuasiFinite.holdsForLocalizationAway, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, Algebra.QuasiFiniteAt.baseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: returned quasi-finite algebra and scheme declarations either define quasi-finiteness or assume it. None states this localized single-fibre residue criterion together with its canonical ring and scheme identifications and quasi-finiteness for the ambient morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generically-finite-quasifinite-over-dimension-one",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Stacks 0BFP repair: Tag 0AB6, lemma-quasi-finite-in-codim-1, condition (1); its application in Tag 0AB7, lemma-finite-in-codim-1, supplies the codimension-one route in 0BFP(2).; Tag 0AB6, label lemma-quasi-finite-in-codim-1, proof of condition (2), closed points of the fibre and final quasi-finiteness paragraph, with affine tensor identifications (returned proof steps 8–10).",
+   "via": [
+    "lem-sfb-generically-finite-quasifinite-over-dimension-one",
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-localized-affine-residue-criterion-quasifinite",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Wrote explicit quotient/tensor inverses and prime/residue identifications, the algebraic-domain inverse formula proving maximality, the finite-type and zero-dimensional checks, and the original affine witnesses for pointwise quasi-finiteness. Reused existing DAG nodes throughout; no new nodes. Checked zero/empty and nonreduced cases and an arbitrary non-Noetherian base.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), alteration prerequisites through the existing de Jong codimension-one chain; this item realizes the final fibre step of Stacks 0AB6 recorded in its blueprint.from.place. No change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-8ddd6bdeb",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-8ddd6bdeb (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement against Stacks varieties.tex 0AB6 (lemma-quasi-finite-in-codim-1), in particular the final paragraph of its proof, which uses 01TF/01TE. The delivery has no new nodes, and the statement is byte-identical to the live one, where the item is still unsplit. The statement is true on any base. Steps 1-4 are correct. Step 1 uses lft-affine-pairs for finite generation. Step 2 builds both tensor/quotient isomorphisms from clauses (1)-(3) of the tensor-pushout node, with the maps written in full. Step 3 gives the prime correspondence: P contains mC iff P∩B=m, because B is local; it also shows k embeds in C/P. Step 4 shows each prime is maximal: trdeg 0 gives a least-degree polynomial with c0≠0 and the inverse formula. Steps 6 and 7 are correct: step 6 uses the 00KH leaf finite-type-dim-zero-artinian with the fibre homeomorphism, and step 7 shows isolation in Spec(A⊗_R κ(p)) and then applies ring quasi-finite and pqf-def-quasifinite with the original U and V. One fault (C1/C3) in step 5: it identified U_s=U×_V Spec κ(s) with Spec A×_{Spec R} Spec(R_p/pR_p) without citing anything. def-pc-scheme-fibre defines that morphism through the stalk O_{S,s}→κ(s). FIX: cite lem-weil-pbc-spec-local-ring-canonical-morphism, whose affine description gives R_p≅O_{V,s} and whose clause (5) with J=m gives the morphism. That node is Lean-closed and already used by sfb nodes of this unit. I added it to step 5's uses and to proof_deps, and step 6 now says that def-pc-scheme-fibre is applied to g|_U:U→V. Edge cases checked: R a field, k[t] (the hypothesis correctly fails), an empty fibre, k[ε]/(ε²), a non-Noetherian R, and an infinite disjoint union of points (finite on U only). No SGA source, no tool_uses needed, no duplicates, no cycle. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-localized-affine-residue-criterion-quasifinite.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalizedAffineResidueCriterion",
+  "declaration": "AlgebraicGeometry.localizedAffineResidueCriterion",
+  "declarations": [
+   "AlgebraicGeometry.localizedAffineCoordinateAlgebra",
+   "AlgebraicGeometry.localizedAffineCoordinateAlgebra_algebra",
+   "AlgebraicGeometry.localizedAffinePrimeQuotient_algebra",
+   "AlgebraicGeometry.localizedAffineFibreQuotient",
+   "AlgebraicGeometry.localizedAffineResidueCriterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedAffineResidueCriterion.lean",
+  "statement": "theorem localizedAffineResidueCriterion (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (Z S : Scheme.{u}) (g : Z ⟶ S) [LocallyOfFiniteType g] (iU : Spec (.of A) ⟶ Z) [IsOpenImmersion iU] (iV : Spec (.of R) ⟶ S) [IsOpenImmersion iV] (hchart : Spec.map (CommRingCat.ofHom (algebraMap R A)) ≫ iV = iU ≫ g) (p : PrimeSpectrum R) (hres : ∀ (P : Ideal (localizedAffineCoordinateAlgebra R A p)) [P.IsPrime] [P.LiesOver (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal))], Algebra.trdeg p.asIdeal.ResidueField (FractionRing (localizedAffineCoordinateAlgebra R A p ⧸ P)) = 0) : ∃ (t : p.asIdeal.ResidueField →+* localizedAffineFibreQuotient R A p) (e₁ : localizedAffineFibreQuotient R A p ≃+* (localizedAffineCoordinateAlgebra R A p ⊗[Localization.AtPrime p.asIdeal] p.asIdeal.ResidueField)) (e₂ : (localizedAffineCoordinateAlgebra R A p ⊗[Localization.AtPrime p.asIdeal] p.asIdeal.ResidueField) ≃+* (A ⊗[R] p.asIdeal.ResidueField)), (∀ b : Localization.AtPrime p.asIdeal, t (IsLocalRing.residue _ b) = algebraMap _ (localizedAffineFibreQuotient R A p) (algebraMap _ (localizedAffineCoordinateAlgebra R A p) b)) ∧ (∀ c : localizedAffineCoordinateAlgebra R A p, e₁ (algebraMap _ (localizedAffineFibreQuotient R A p) c) = c ⊗ₜ 1) ∧ (∀ (a : A) (b : Localization.AtPrime p.asIdeal) (x : p.asIdeal.ResidueField), e₂ ((a ⊗ₜ[R] b) ⊗ₜ x) = a ⊗ₜ[R] (IsLocalRing.residue _ b * x)) ∧ (∀ x : p.asIdeal.ResidueField, e₁ (t x) = 1 ⊗ₜ x) ∧ (∀ x : p.asIdeal.ResidueField, e₂ (1 ⊗ₜ x) = 1 ⊗ₜ[R] x) ∧ (∃ eU : (Spec.map (CommRingCat.ofHom (algebraMap R A))).fiber p ≅ Spec (.of (localizedAffineFibreQuotient R A p)), eU.hom ≫ Spec.map (CommRingCat.ofHom t) = (Spec.map (CommRingCat.ofHom (algebraMap R A))).fiberToSpecResidueField p ≫ Spec.map (Scheme.Spec.residueFieldIso (.of R) p).inv ∧ eU.hom ≫ Spec.map (CommRingCat.ofHom ((algebraMap (localizedAffineCoordinateAlgebra R A p) (localizedAffineFibreQuotient R A p)).comp (Algebra.TensorProduct.includeLeft : A →ₐ[R] localizedAffineCoordinateAlgebra R A p).toRingHom)) = (Spec.map (CommRingCat.ofHom (algebraMap R A))).fiberι p) ∧ Function.Injective (PrimeSpectrum.comap (algebraMap (localizedAffineCoordinateAlgebra R A p) (localizedAffineFibreQuotient R A p))) ∧ (Set.range (PrimeSpectrum.comap (algebraMap (localizedAffineCoordinateAlgebra R A p) (localizedAffineFibreQuotient R A p))) = {P : PrimeSpectrum (localizedAffineCoordinateAlgebra R A p) | P.asIdeal.comap (algebraMap (Localization.AtPrime p.asIdeal) (localizedAffineCoordinateAlgebra R A p)) = IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)}) ∧ (∀ Q : PrimeSpectrum (localizedAffineFibreQuotient R A p), Function.Bijective (Ideal.ResidueField.map (Q.comap (algebraMap (localizedAffineCoordinateAlgebra R A p) (localizedAffineFibreQuotient R A p))).asIdeal Q.asIdeal (algebraMap (localizedAffineCoordinateAlgebra R A p) (localizedAffineFibreQuotient R A p)) rfl)) ∧ LocallyOfFiniteType (Spec.map (CommRingCat.ofHom t)) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom t)) ∧ (∀ Q : PrimeSpectrum (localizedAffineFibreQuotient R A p), IsClosed ({Q} : Set (PrimeSpectrum (localizedAffineFibreQuotient R A p)))) ∧ Finite (PrimeSpectrum (localizedAffineFibreQuotient R A p)) ∧ DiscreteTopology (PrimeSpectrum (localizedAffineFibreQuotient R A p)) ∧ Set.Finite {z : Z | z ∈ Set.range iU ∧ g z = iV p} ∧ (∀ z : Z, z ∈ Set.range iU → g z = iV p → g.IsQuasiFiniteAtPoint z)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The Spec charts are open immersions into the original schemes. Ring equivalences together with the stated residue-scalar compatibility equations express canonical k-algebra equivalences without file-local instances or let binders. The fibre isomorphism includes both projection compatibilities."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3244190c",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read the node, the 7 stmt_dep records, the module, the report and Stacks 0AB6 final paragraph; checked Mathlib Spec.residueFieldIso, Scheme.Hom.fiber and Fiber.lean:88, and project IsQuasiFiniteAtPoint. Hypotheses match the node with nothing stronger: open-immersion charts plus hchart forcing the induced R-algebra, hres over all primes of A⊗_R R_p lying over m with trdeg_k Frac(C/P)=0 via algebraOfLiesOver, no extra Noetherian/dimension/universe assumptions. Every conclusion clause is present: t, e1, e2 uniquely pinned with k-compatibility; fibre iso with both projections pinned (residueFieldIso.inv direction correct); prime correspondence (injective comap, exact range) and bijective residue-field map; LocallyOfFiniteType ∧ QuasiCompact; closed points, finite, discrete; finiteness restricted to range iU; IsQuasiFiniteAtPoint for the original g. Edge cases A=0, empty fibre, R=0, field base, k[ε], non-Noetherian base handled. lean.statement verbatim; only the lean field changed vs live; docstrings carry the source and blueprint; sorry only; no new nodes; no name clashes; report has both sections. Not recompiled (no FIX). Non-blocking notes: the public global rightAlgebra instance on an abbrev risks a leftAlgebra diamond for downstream importers (cannot arise here); the second reading is a self re-reading."
+ }
+}

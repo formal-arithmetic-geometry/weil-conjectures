@@ -1,0 +1,375 @@
+{
+ "id": "lem-sfb-space-fp-module-limit-category",
+ "kind": "statement",
+ "title": "Finite-presentation module continuity for affine limits of spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. An $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category] is of finite presentation if etale locally it has an exact presentation $\\mathcal O_X^m\\to\\mathcal O_X^n\\to M\\to0$ with $m,n$ finite. For a morphism $a:X\\to Y$ use tensor pullback $a^*M=\\mathcal O_X\\otimes_{a^{-1}\\mathcal O_Y}a^{-1}M$ for the canonical morphism of ringed etale topoi [lem-trf-space-enlarged-etale-ringed-site-model]. Let $I$ be a small nonempty directed set and $(X_i,q_{ji})$ an inverse system of quasi-compact quasi-separated algebraic spaces with affine transition maps $q_{ji}:X_j\\to X_i$ for $j\\ge i$, and limit $X$ with projections $q_i$. Here quasi-compact means admitting a surjective etale chart from a quasi-compact scheme, quasi-separated means that the diagonal is quasi-compact, and affine means representable with affine source after pullback to every affine scheme test; a representable map is quasi-compact when its inverse images of affine scheme tests are quasi-compact. Tensor pullback preserves finite presentation. Every finitely presented module $M$ on $X$ is isomorphic to $q_i^*M_i$ for some $i$ and finitely presented $M_i$ on $X_i$. For fixed finitely presented $F_i,G_i$ on $X_i$, every map $q_i^*F_i\\to q_i^*G_i$ is the pullback of a map $q_{ji}^*F_i\\to q_{ji}^*G_i$ for some $j\\ge i$. Two maps between fixed finitely presented modules on one stage that become equal on $X$ are equal after pullback to some later stage. All comparisons of iterated pullbacks use the canonical composition isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07V7 (lemma-descend-modules-finite-presentation); finite-presentation preservation under pullback: sites-modules.tex, Tag 03DO (lemma-local-pullback), clause (7). The inverse-system hypotheses are written out in full."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-module-tensor-composition"
+ ],
+ "proof": [
+  {
+   "text": "First record the site conventions needed below. A finite presentation is a quasi-coherent presentation with finite index sets, so every finitely presented module is quasi-coherent. On a scheme, the Zariski/small-etale equivalence preserves and reflects finite presentation by the exact-finiteness comparison. Its natural pullback comparison identifies scheme tensor pullback with tensor pullback between small etale topoi. Consequently a finitely presented module on an etale scheme chart gives a finitely presented ordinary scheme module, and conversely. For a surjective etale atlas, finite presentation is detected on its pullback: the enlarged-site model identifies this pullback with localization, and presentations on a covering of the atlas are precisely presentations on a covering of the space. This last assertion uses the definition of finite presentation, not a claim that arbitrary inverse image is exact.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DX (proposition-equivalence-quasi-coherent), 05VG (lemma-equivalence-quasi-coherent-properties); spaces-properties.tex Tag 03M3 (proposition-quasi-coherent), chart convention"
+   }
+  },
+  {
+   "text": "For any $a:Y\\to Z$ of algebraic spaces and finitely presented $N$ on $Z$, choose a jointly surjective etale scheme family $V_b\\to Z$ carrying finite presentations of $N$. Cover each $Y\\times_Z V_b$ by etale schemes $W_{bc}$. The composites $W_{bc}\\to Y$ cover $Y$ by etale base change and composition. Write $h_{bc}:W_{bc}\\to V_b$. On $W_{bc}$ the restriction of $a^*N$ is $h_{bc}^*(N|_{V_b})$: both are tensor pullback along the same composite to $Z$, using the composition and localization comparisons in the enlarged-site model. By step 1, $N|_{V_b}$ is a finitely presented Zariski module. Scheme tensor pullback preserves finite presentation, without flatness, so $h_{bc}^*(N|_{V_b})$ is finitely presented. The scheme comparison and locality from step 1 now give finite presentation of $a^*N$. This proves the pullback clause, including all transition and projection pullbacks used below.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-pc-tensor-pullback-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DO (lemma-local-pullback), clause (7), proved here by reduction to scheme charts"
+   }
+  },
+  {
+   "text": "Choose $0\\in I$ and restrict to the directed cofinal tail $i\\geq0$. The tail is cofinal since for each $k$ there is $j\\geq0,k$; compatible tail maps extend uniquely to $k$ by composition, independently of $j$ by directedness. Choose an affine surjective etale atlas $U_0\\to X_0$. Set $U_i=X_i\\times_{X_0}U_0$, $R_i=U_i\\times_{X_i}U_i$ and $T_i=U_i\\times_{X_i}U_i\\times_{X_i}U_i$. The affine-locality theorem makes each $U_i$ affine, since $X_i\\to X_0$ is affine. Fibre-product representability makes $R_i,T_i$ schemes. The qcqs fibre-product theorem uses point-space quasi-compactness: $X_i$ and $U_i$ (affine, so qcqs) have quasi-compact point spaces by the continuous-surjection clause of the finite-subatlas lemma, and quasi-separatedness is the same diagonal test. Applied to $U_i\\times_{X_i}U_i$, then $R_i\\times_{X_i}U_i$, it makes $R_i,T_i$ qcqs in that sense; the affine-atlas lemma gives surjective etale maps from affine schemes, so these schemes are quasi-compact, and the diagonal test on affine opens makes them quasi-separated. Transition maps of all three systems are base changes of $X_j\\to X_i$, hence affine. More explicitly $R_i=X_i\\times_{X_0}R_0$ and $T_i=X_i\\times_{X_0}T_0$: a test map on either side specifies the same ordered pairs or triples of atlas lifts with one common map to $X_i$. The space-limit theorem makes $X\\to X_0$ affine, so $X\\times_{X_0}U_0\\to U_0$ is affine and $X\\times_{X_0}U_0$ is an affine scheme by affine-locality. Its base-change clause therefore gives $U=\\lim U_i=X\\times_{X_0}U_0$, $R=\\lim R_i=U\\times_XU$ and $T=\\lim T_i=U\\times_XU\\times_XU$. These are scheme limits, testing on schemes. Projections, identity and composition maps are the coordinate maps, compatible with these identifications. The map $U\\to X$ is surjective etale by base change.",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-sfb-space-affine-locality",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-sfb-qc-space-affine-etale-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V7 (lemma-descend-modules-finite-presentation), first paragraph; Tag 07SF (lemma-directed-inverse-system-has-limit), clauses (1),(2); spaces-morphisms.tex Tag 073B (lemma-quasi-compact-quasi-separated-permanence), clause (3)"
+   }
+  },
+  {
+   "text": "Let $M$ be finitely presented on $X$. The groupoid equivalence associates to it the quasi-coherent scheme module $A=M|_U$ with an isomorphism $\\alpha:t^*A\\simeq s^*A$ on $R$, identity on the diagonal and satisfying the composition equation on $T$. Here $t=\\operatorname{pr}_0$, $s=\\operatorname{pr}_1$; thus on a triple $(u_0,u_1,u_2)$ the equation is $\\alpha_{02}=\\alpha_{12}\\circ\\alpha_{01}$. Step 1 makes $A$ finitely presented as an ordinary scheme module. Apply clause (1) of scheme module continuity to $U=\\lim U_i$ to obtain a finitely presented $A_i$ on $U_i$ and a specified isomorphism of its limit pullback with $A$. Transport $\\alpha$ through this isomorphism and the canonical pullback comparisons; retain its inverse $\\beta=\\alpha^{-1}$. All their sources and targets are pullbacks of $A_i$, hence finitely presented by step 2.",
+   "uses": [
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-fp-modules-affine-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V7 (lemma-descend-modules-finite-presentation), application of limits.tex Tag 01ZR (lemma-descend-modules-finite-presentation) to U and R"
+   }
+  },
+  {
+   "text": "Apply clause (2) of scheme module continuity on $R=\\lim R_j$ to lift both $\\alpha$ and $\\beta$ between the fixed modules $t_i^*A_i,s_i^*A_i$. Directedness places both lifts $a,b$ at one stage. Their composites pull back to identities, so clause (3), twice on the relation scheme system, makes $ba=1$ and $ab=1$ after a further common stage. Thus $a$ is an isomorphism. Let $e_j:U_j\\to R_j$ be the diagonal and let $p_{kl}:T_j\\to R_j$ select vertices $k,l$. On $U$ the maps $e_j^*a$ and $1$ agree. On $T$ the maps $p_{02}^*a$ and $p_{12}^*a\\circ p_{01}^*a$ agree. Their finite-stage sources and targets are fixed pullbacks of the finitely presented $A_j$; scheme pullback preserves finite presentation. Clause (3) applied to $U=\\lim U_j$ and $T=\\lim T_j$ gives a later stage $k$ where both equations hold. Earlier equations persist under further pullback because a functor preserves composition and identity. We have therefore obtained a genuine groupoid module $(A_k,a_k)$, including its identity, inverse and cocycle equations, whose limit datum is the specified datum of $M$.",
+   "uses": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V7 (lemma-descend-modules-finite-presentation), last sentence expanded using limits.tex Tag 01ZR (2),(3) on U, R and composable pairs"
+   }
+  },
+  {
+   "text": "Apply the groupoid equivalence at stage $k$ to $(A_k,a_k)$ to obtain a quasi-coherent module $M_k$ on $X_k$. Its atlas restriction is $A_k$. Step 1 and the etale-local definition make $M_k$ finitely presented, since $A_k$ is finitely presented. Pulling back its datum to $U,R$ gives the datum of $M$: the atlas module comparison is the chosen isomorphism, and the relation-map comparison is the prescribed equality $a_k|_R=\\alpha$. The canonical composition comparisons give these identifications, since each of the two ways to pull back is pullback along the same composite to $X_k$. Full faithfulness of the groupoid equivalence on $X$ lifts the datum isomorphism and its inverse to inverse module maps, hence $q_k^*M_k\\simeq M$. This proves object descent.",
+   "uses": [
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V7 (lemma-descend-modules-finite-presentation), equivalences with groupoid modules; spaces-properties.tex Tag 03M3 (proposition-quasi-coherent)"
+   }
+  },
+  {
+   "text": "For the map clause start at the specified index $i$ and repeat the atlas construction there. Restrict $F_i,G_i$ to finitely presented scheme modules $B_i,C_i$ on $U_i$, with their canonical relation isomorphisms $\\alpha_{F,i},\\alpha_{G,i}$. A prescribed map $u:q_i^*F_i\\to q_i^*G_i$ gives a map $v:B\\to C$ commuting with the relation data. Scheme continuity (2) on $U$ lifts $v$ to $v_j:B_j\\to C_j$. On $R_j$ compare the two parallel maps $\\alpha_{G,j}\\circ t_j^*v_j$ and $s_j^*v_j\\circ\\alpha_{F,j}$ from $t_j^*B_j$ to $s_j^*C_j$. Their limit pullbacks agree, and their sources and targets are finitely presented. Scheme continuity (3) on $R$ therefore makes them equal at a later stage $k$. Fullness of the groupoid equivalence on $X_k$ gives the unique module map $q_{ki}^*F_i\\to q_{ki}^*G_i$ whose atlas restriction is $v_k$. Its limit pullback has the same atlas restriction as $u$, and faithfulness on $X$ makes it equal to $u$. All comparisons here are the canonical composition comparisons, so this is descent of the specified map between the fixed models.",
+   "uses": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V7 (lemma-descend-modules-finite-presentation), formal full-faithfulness argument; limits.tex Tag 01ZR (2),(3)"
+   }
+  },
+  {
+   "text": "Finally, let $u_i,v_i:F_i\\to G_i$ have equal limit pullbacks. Restrict them to $U_i$. Their pullbacks to $U$ agree; clause (3) of scheme module continuity on $U=\\lim U_j$ gives $k\\geq i$ where the two atlas maps agree. Faithfulness of the groupoid equivalence on $X_k$ implies $q_{ki}^*u_i=q_{ki}^*v_i$. This proves eventual equality. The same argument includes empty spaces and zero modules; no projection was assumed surjective, only the base-changed atlas was.",
+   "uses": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V7 (lemma-descend-modules-finite-presentation), faithfulness; limits.tex Tag 01ZR (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-qcoh-groupoid-equivalence",
+  "lem-trf-fp-modules-affine-limit-descent",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sfb-qc-space-affine-etale-atlas"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07V7 (lemma-descend-modules-finite-presentation), proof, with the final formal argument expanded; limits.tex Tag 01ZR and descent.tex Tags 03DX, 05VG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented module sheaves on quasi compact quasi separated algebraic spaces descend along affine inverse limits with morphisms and eventual equality",
+   "results": "8 hits; SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsFinitePresentation\"",
+   "results": "12 hits; SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.instIsClosedUnderIsomorphismsIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitePresentation|descend.*[Mm]odule",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of finitely presented module sheaves and maps along affine inverse limits of algebraic spaces",
+   "results": "8 hits; SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of quasi coherent sheaves of finite presentation on algebraic spaces using an etale groupoid presentation and filtered inverse limits",
+   "results": "8 hits; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale atlas of a quasi compact quasi separated algebraic space has quasi compact separated scheme double and triple overlaps and these Cech nerve schemes commute with affine inverse limits",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsLimit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|cechNerve|cech.*limit",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine inverse limits of algebraic spaces commute with etale atlas relation schemes and their composable pairs which are quasi compact separated schemes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.isAffine_of_isLimit, AlgebraicGeometry.AffineScheme.hasLimits, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.AffineScheme.hasColimits, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs algebraic space affine etale presentation, the relation and triple relation are qcqs schemes and the nerve commutes with arbitrary affine base change and inverse limits",
+   "results": "8 hits; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|QuasiSeparated.*pullback|IsSeparated.*pullback",
+   "results": "4 hits; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Double and triple overlaps of an affine etale atlas of a quasi separated algebraic space are quasi compact separated schemes",
+   "results": "8 hits; AlgebraicGeometry.quasiSeparatedSpace_iff_affine, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.IsAffineOpen.isQuasiSeparated, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme U with surjective etale atlas map to a quasi compact quasi separated algebraic space X, U times X U and U times X U times X U are quasi compact separated schemes",
+   "results": "8 hits; AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, scheme morphism permanence and local finite-presentation predicates do not state module-sheaf continuity for varying algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-invertible-limit-descent",
+  "date": "2026-10-23",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D2X (2): descend the chosen line module to a stage of the proper-space approximation. Supporting input: 0D2X proof (2), both applications of module continuity 07V7: descend objects, then evaluation and its inverse with their equations.",
+   "via": [
+    "lem-sfb-space-invertible-limit-descent",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fp-module-limit-category",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 07V7 into atlas, relation and triple-overlap scheme continuity, with inverse equations, diagonal identity, cocycle, maps and eventual equality. Reused the existing general qcqs fibre-product theorem instead of creating an atlas-overlap lemma. Statement unchanged; zero new nodes. Recorded the source proof corrections (inverse limit and finite-presentation restriction) in report.md.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D2X (2): descend the chosen line module to a stage of the proper-space approximation. Supporting input: 0D2X proof (2), both applications of module continuity 07V7: descend objects, then evaluation and its inverse with their equations.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic prerequisite used with its stated hypotheses: Zariski and small etale quasi-coherent modules agree functorially. It supplies scheme continuity, chart comparison or algebraic-space atlas geometry; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic prerequisite used with its stated hypotheses: Enlarged etale ringed-site models of algebraic spaces. It supplies scheme continuity, chart comparison or algebraic-space atlas geometry; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic prerequisite used with its stated hypotheses: Fibre products of algebraic spaces and pullback of etale coverings. It supplies scheme continuity, chart comparison or algebraic-space atlas geometry; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic prerequisite used with its stated hypotheses: Chartwise etale permanence for algebraic spaces. It supplies scheme continuity, chart comparison or algebraic-space atlas geometry; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic prerequisite used with its stated hypotheses: Tensor pullback preserves finite presentation. It supplies scheme continuity, chart comparison or algebraic-space atlas geometry; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic prerequisite used with its stated hypotheses: Finite affine refinement of an atlas of a quasi-compact algebraic space. It supplies scheme continuity, chart comparison or algebraic-space atlas geometry; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic prerequisite used with its stated hypotheses: Affine schemes are quasi-compact and quasi-separated. It supplies scheme continuity, chart comparison or algebraic-space atlas geometry; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-fp-modules-affine-limit-descent",
+    "why": "Generic prerequisite used with its stated hypotheses: Finite-presentation module, morphism and equality descent over arbitrary qcqs affine-transition limits. It supplies scheme continuity, chart comparison or algebraic-space atlas geometry; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Generic prerequisite used with its stated hypotheses: a surjective point map from a quasi-compact point space has quasi-compact target (Stacks 03E4). It reconciles the chart and point-space quasi-compactness conventions before the qcqs fibre-product theorem is applied in step 3; it does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-fp-modules-affine-limit-descent",
+  "lem-a1-space-finite-affine-subatlas"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-ddb3a3ed0",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-ddb3a3ed0 (reviewer sub-agent of L); spot-checked: First split of the item, not a re-split. There are no new nodes, and the statement and stmt_deps are byte-identical to live. The statement matches Stacks 07V7 with the hypotheses of lemma-descend-finite-presentation (directed I, affine transitions, qcqs X_i); the colimit of categories is unpacked into object descent, map descent and eventual equality, plus the pullback clause from 03DO(7). I read the statement of all 14 cited nodes. Steps 1-2: fp implies qc; the 05VG comparison; the scheme/étale pullback comparison; localization in the enlarged site; 01BQ has no flatness hypothesis. Step 4: the orientation t=pr_0, s=pr_1 in 03M3 gives the cocycle α02=α12∘α01, which is the step's equation. Steps 4-8 use 01ZR(1)-(3) on U, R and T, then full faithfulness of 03M3. All of these check out. Edge cases tested: singleton I, constant system, X empty (U_0=Spec 0), empty limit, nonseparated X_i. The report's source-error notes on 07V7 (colim written for an inverse limit; QCoh written where 01ZR only covers fp modules) are correct. One fault, C4, in step 3: it applied lem-sfb-qcqs-space-fibre-product, which uses point-space quasi-compactness, to spaces that are quasi-compact in the chart sense, with no bridge between the two. It also left implicit that U=X×_{X_0}U_0 is an affine scheme, which 01ZR needs. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-fp-module-limit-category.json: step 3 now cites lem-a1-space-finite-affine-subatlas (03E4 continuous-surjection clause) and lem-sfb-qc-space-affine-etale-atlas (03H6), and adds the sentence that U is affine (X→X_0 is affine, then affine-locality). Both nodes are added to proof_deps; the lem-a1 node is added to tool_uses; the step is 1800 characters. Batch-5: all 10 flagged citations are general definitions or foundations of algebraic spaces and modules, including 01ZR scheme continuity. None is a step of the trace formula or Poincaré duality, so no assumption leaf is needed. No SGA is cited and there is no duplicate in the DAG.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFinitePresentationModuleLimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finitePresentation_module_descent_affineLimit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.moduleLimitPullbackComparison",
+   "AlgebraicGeometry.AlgebraicSpace.isFinitePresentation_moduleTensorPullback",
+   "AlgebraicGeometry.AlgebraicSpace.finitePresentation_module_descent_affineLimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFinitePresentationModuleLimit.lean",
+  "statement": "theorem finitePresentation_module_descent_affineLimit {S : Scheme.{u}} {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ AlgebraicSpace S) (hqc : ∀ i : Iᵒᵖ, ∃ (U : Over S) (a : yoneda.obj U ⟶ (D.obj i).obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : ∀ (i : Iᵒᵖ) (U V : Over S), IsAffine U.left → IsAffine V.left → ∀ (a : yoneda.obj U ⟶ (D.obj i).obj.obj) (b : yoneda.obj V ⟶ (D.obj i).obj.obj), ∃ (W : Over S) (p : W ⟶ U) (q : W ⟶ V), IsPullback (yoneda.map p) (yoneda.map q) a b ∧ CompactSpace W.left) (haff : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) (D.map f).hom.hom) (c : Cone D) (hc : IsLimit c) : (∀ M : c.pt.Modules, M.IsFinitePresentation → ∃ (i : I) (M_i : (D.obj (op i)).Modules), M_i.IsFinitePresentation ∧ Nonempty ((moduleTensorPullback (c.π.app (op i))).obj M_i ≅ M)) ∧ (∀ (i : I) (F_i G_i : (D.obj (op i)).Modules), F_i.IsFinitePresentation → G_i.IsFinitePresentation → ∀ f : (moduleTensorPullback (c.π.app (op i))).obj F_i ⟶ (moduleTensorPullback (c.π.app (op i))).obj G_i, ∃ (j : I) (hij : i ≤ j) (f_j : (moduleTensorPullback (D.map (homOfLE hij).op)).obj F_i ⟶ (moduleTensorPullback (D.map (homOfLE hij).op)).obj G_i), (moduleLimitPullbackComparison D c hij F_i).inv ≫ (moduleTensorPullback (c.π.app (op j))).map f_j ≫ (moduleLimitPullbackComparison D c hij G_i).hom = f) ∧ (∀ (i : I) (F_i G_i : (D.obj (op i)).Modules), F_i.IsFinitePresentation → G_i.IsFinitePresentation → ∀ f g : F_i ⟶ G_i, (moduleTensorPullback (c.π.app (op i))).map f = (moduleTensorPullback (c.π.app (op i))).map g → ∃ (j : I) (hij : i ≤ j), (moduleTensorPullback (D.map (homOfLE hij).op)).map f = (moduleTensorPullback (D.map (homOfLE hij).op)).map g)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two theorems jointly state the node: unqualified finite-presentation preservation and the three continuity clauses. The helper is the already existing tensor-normalized composition isomorphism followed by the cone equation. Added already-landed statement dependencies expose the canonical small-site module tensor pullback, the slice sheafification instances used by Mathlib finite presentation, and the canonical composition helper; no flat-base-change assertion is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73ac2c6dc",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-delivery repairing the H2 return of 0bf644af. The Lean module is byte-identical, so the earlier compile evidence stands; I did not compile. The item's stmt_deps swap lem-sfb-space-flat-direct-image-base-change for the new def-sfb-space-module-tensor-composition. That node is existing:true on the unchanged landed SpaceFlatDirectImageBaseChange module and records moduleCompositeChart_triangle, moduleCompositeChart, moduleTensorComposition_existsUnique and moduleTensorComposition. Its statement field is verbatim the file's signature, and its node statement (a^*∘b^* ≅ (b∘a)^*, normalized by c⊗(d⊗m) ↦ c·r♯(d)⊗m on composite charts) matches the ∃! predicate. Its stmt_deps cover ModuleChart, moduleChartScalar and moduleTensorSection. Tags 03D7, 03D8 and 03G8 verified; no other live owner of these declarations. Item re-read against 07V7 and 03DO(7): the pullback clause holds for every morphism; hqc, hqs, haff and the directed index set match the node and are no stronger; the object, map and eventual-equality clauses are correct, with the right comparison direction; edge cases covered. Gates: real def, sorry-only proofs, docstrings carry source place and blueprint id, no pro-étale substitute. Item not superseded in live."
+ }
+}

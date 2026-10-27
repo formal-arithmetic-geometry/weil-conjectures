@@ -1,0 +1,114 @@
+{
+ "id": "lem-trf-ambient-comparison-system-existence",
+ "kind": "statement",
+ "title": "Ambient normalized primitive comparison data exist simultaneously on all schemes",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "For every prime ell there is one family of whole-system reduction/realization calculi, natural Roos models, normalized primitive pullback and scalar realization models, indexed by every finite ell-adic coefficient field, every embedding and every scheme. The actual completion unit is invertible on constructible inputs; the scalar whole-system counit is invertible on such inputs; pullback counits are invertible when ell is invertible on source and target. No geometric or scalar coherence equation is asserted. These are exactly the fields of IntegralComparisonSystem in the Lean attachment.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0941; Strict quotient model construction and descent; extension of the primitive-model scope beyond the invertible-base indexing of EffectiveComparisonRealizationModels."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Proof: for each coefficient field and scheme take the whole-system derived reduction\nadjunction with its quotient evaluation comparisons. The right-derived restriction\nand limit construction supplies its natural Roos comparison, normalized on every\nK-injective tower by the ordinary cone. On a flat-term K-flat representative, whole\nsystem pullback of its reduction is the diagram of the pulled-back finite quotient\ncomplexes. Its Roos realization is the defining completed pullback. Derived change\nof rings similarly identifies scalar change of reduction with the diagram of the\nscalar quotient tensors; the balanced association multiplies the two coefficient\nfactors and retains all quotient transitions. These constructions are available\nwithout inverting ell on the base scheme: they concern module sheaves and the\nactual quotient coefficient maps. Descent along K-flat resolutions gives the two\nnormalized primitive models on the ambient categories. For a constructible complete\ninput, normalized reconstruction makes the actual unit invertible. Its counit on\nthe scalarized reduction is invertible by the same normalized quotient tensor\ncalculation. With ell invertible on both schemes, the pullback calculation and\nconstructibility preservation give invertibility of its pullback counit as well.\nChoose these constructions simultaneously over all the field and scheme parameters.\nThis proves existence of the primitive data only; no mixed, scalar-unit, scalar-tower\nor geometric coherence equation is asserted here.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 0941; normalized quotient-complex construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Strict quotient model construction and descent; extension of the primitive-model scope beyond the invertible-base indexing of EffectiveComparisonRealizationModels."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "simultaneous normalized integral pullback comparison realization coherent scalar extension system",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc",
+   "date": "2026-10-25",
+   "verdict": "no match: these ordinary category and module results do not compare the specified normalized pro-etale quotient realization models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived reduction and completed pullback models exist simultaneously for all schemes and coefficient fields",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.instQuasiCompactFstScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.IsIntegralHom.instFstScheme",
+   "date": "2026-10-25",
+   "verdict": "no match: these ordinary category and module results do not compare the specified normalized pro-etale quotient realization models"
+  },
+  {
+   "tool": "grep",
+   "query": "(completed|normalized).*(scalar|comparison).*(unit|assoc)|ambientComparisonSystem",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: these ordinary category and module results do not compare the specified normalized pro-etale quotient realization models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SimultaneousIntegralPullbackComparisons",
+  "date": "2026-10-25",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Strict quotient model construction and descent; extension of the primitive-model scope beyond the invertible-base indexing of EffectiveComparisonRealizationModels.",
+   "via": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientComparisonSystemExistence",
+  "file": "lean/Sheaf/Paper/AmbientComparisonSystemExistence.lean",
+  "declaration": "WeilConjectures.ambientComparisonSystem_exists",
+  "statement": "theorem ambientComparisonSystem_exists (l : ℕ) [Fact l.Prime] :\n    Nonempty (IntegralComparisonSystem.{u} l)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T162139-L-324177",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T162139-L-324177",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

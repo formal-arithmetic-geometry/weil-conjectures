@@ -1,0 +1,202 @@
+{
+ "id": "lem-sf-finite-free-scalar-cochain-properties",
+ "kind": "statement",
+ "title": "Finite-free ordinary scalar extension on unbounded cochain complexes",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, an embedding $\\iota:E\\to L$ and any scheme $W$. Let $R_W,S_W$, the actual ordinary scalar functor, its termwise complex functor, and its universal derived counit be those of [lem-weil-finite-free-completed-scalar-comparison]. Then the ordinary scalar functor preserves countable products; its complex functor sends every flat-term K-flat complex to a flat-term K-flat complex in the sense of [lem-pur-integral-operations-well-defined], [def-pc-kflat-complex]; and its universal derived counit is an isomorphism on every unbounded complex. In particular the counit claim requires no flatness of the input complex. The statement concerns completed coefficient sheaves, and makes no flatness assertion for ramified finite quotient inclusions.",
+ "stmt_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product, and sites-cohomology.tex, Tag 06YY (K-flat change of rings); finite-free exactness, products and derived counit of Steps 4, 6 and 7 of lem-weil-scalar-pullback-strict-cone-naturality."
+ },
+ "proof": [
+  {
+   "text": "Finite freeness identifies the restriction of the scalar functor with a finite direct sum of identity functors. The coordinate inverse to each product comparison uses a finite sum over the basis index, so ordinary scalar extension preserves countable products. Restriction creates kernels and cokernels and reflects isomorphisms; the same finite-power comparison proves exactness. In Lean use the proved scalarExactProducts helper of the finite-free quotient Roos module, with the product-form free basis converted to a finite biproduct.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-finite-free-quotient-roos-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; the local construction in Steps 1–3 of lem-weil-scalar-pullback-strict-cone-naturality, from Bhatt–Scholze Definition 3.4.10 and Lemma 6.5.9(4)."
+   }
+  },
+  {
+   "text": "Apply the change-of-rings theorem with independent site and coefficient universes to the recorded ordinary scalar functor and its object/map specification. Transport termwise flatness through the site-sheaf tensor-right comparison. Its conclusion is exactly the good-complex property.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; the local construction in Steps 1–3 of lem-weil-scalar-pullback-strict-cone-naturality, from Bhatt–Scholze Definition 3.4.10 and Lemma 6.5.9(4)."
+   }
+  },
+  {
+   "text": "Exactness implies that termwise scalar extension sends every quasi-isomorphism to a quasi-isomorphism. Its composite with the target localization therefore inverts all quasi-isomorphisms. The universal left-derived counit is invertible by the general localization criterion Functor.isIso_of_isLeftDerivedFunctor_of_inverts; evaluate this natural isomorphism on every complex. The model counit is definitionally the published scalar counit.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; the local construction in Steps 1–3 of lem-weil-scalar-pullback-strict-cone-naturality, from Bhatt–Scholze Definition 3.4.10 and Lemma 6.5.9(4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-finite-free-quotient-roos-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product, and sites-cohomology.tex, Tag 06YY (K-flat change of rings); finite-free exactness, products and derived counit of Steps 4, 6 and 7 of lem-weil-scalar-pullback-strict-cone-naturality."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free change of rings of sheaves preserves countable products and the universal derived scalar counit is invertible on every cochain complex",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.instCountableAB4StarOfAB4StarOfSize",
+     "LightCondensed.instCountableAB4StarLightCondMod",
+     "SheafOfModules.ιFree",
+     "SheafOfModules.free",
+     "SheafOfModules.mapFree",
+     "SheafOfModules.freeFunctor",
+     "CommRingCat.Under.instPreservesFiniteProductsUnderTensorProd",
+     "SheafOfModules.ιFree_mapFree_inv"
+    ],
+    "digest": "733055ebce3f79f9"
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact specialized Mathlib statement; use the existing project constructions and the generic lemmas described in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free change of coefficient sheaves commutes with countable products and strict Roos cones and descends to derived scalar pullback naturality",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.mapFree",
+     "SheafOfModules.map_ιFree_mapFree_hom"
+    ],
+    "digest": "1a9d027adf1c5f65"
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact specialized Mathlib statement; use the existing project constructions and the generic lemmas described in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(associat|unit)|pullback.*tensor",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact specialized Mathlib statement; use the existing project constructions and the generic lemmas described in the proof."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarPullbackStrictConeNaturality",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "In both composites the first arrow is the transport of cohomology along $g_Y$, namely $\\tau_{\\operatorname{For}K}$ for $\\RGamma$ and $\\tau_{c,\\operatorname{For}K}$ for $\\RGammac$. Resolution-level scalar compatibility: returned proof Steps 2, 4, 5, 8 (strict tensor generators, both cone coordinates, descent and coherence). Finite-free ordinary scalar extension on unbounded cochain complexes.",
+   "via": [
+    "lem-weil-scalar-pullback-strict-cone-naturality",
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeScalarCochainProperties",
+  "file": "lean/Sheaf/Paper/FiniteFreeScalarCochainProperties.lean",
+  "declaration": "WeilConjectures.finiteFreeScalarCochainProperties",
+  "declarations": [
+   "WeilConjectures.finiteFreeScalarCochainProperties"
+  ],
+  "statement": "theorem finiteFreeScalarCochainProperties (W : AlgebraicGeometry.Scheme.{t}) :\n    PreservesLimitsOfShape (Discrete ℕ) (completedOrdinaryScalarExtension l E L ι W) ∧\n    (∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,\n      integralOperationsGoodComplex l L W\n        ((completedOrdinaryScalarComplex l E L ι W).obj P.obj)) ∧\n    (∀ P : CochainComplex (integralTowerModules l E W) ℤ,\n      IsIso (completedScalarCounit l E L ι W P))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "worker": "J3",
+  "item": "Sheaf.Paper.ScalarPullbackStrictConeNaturality",
+  "summary": "Finite-free ordinary scalar extension on unbounded cochain complexes. This is a genuine part of the original argument, with the exact Lean declaration attached.",
+  "blueprint": "In both composites the first arrow is the transport of cohomology along $g_Y$, namely $\\tau_{\\operatorname{For}K}$ for $\\RGamma$ and $\\tau_{c,\\operatorname{For}K}$ for $\\RGammac$. Resolution-level scalar compatibility: returned proof Steps 2, 4, 5, 8 (strict tensor generators, both cone coordinates, descent and coherence). Finite-free ordinary scalar extension on unbounded cochain complexes."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-eebdd",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T123457-L-2304317",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-eebdd",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T123457-L-2304317",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published (byte-identical signature); moved 13-def block vs published item (byte-identical); new nodes' lean.statement vs Lean signatures; both direct importers compiled against delivered modules; #print axioms"
+ }
+}

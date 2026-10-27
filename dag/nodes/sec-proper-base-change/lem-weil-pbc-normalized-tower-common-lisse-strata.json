@@ -18,42 +18,28 @@
  ],
  "proof": [
   {
-   "text": "the proved native_common_strata first restricts to fixed scalars, uses\nfinite fibre-product intersections to refine the constructible stratifications of\nthe finitely many cohomology sheaves at level zero in [a,b], then lifts the finite\nlocal models to native coefficient modules on covering sieves. Outside this interval the zero\nsheaf is finite lisse. Refine the resulting finite locally closed partition by\nconnected components, which are finite and open and closed on a Noetherian scheme.\nOn a stratum, restrict the normalization from level n to level zero. Exact inverse\nimage commutes with cohomology. The proved pullbackScalarExtensionIso derives\ncommutation with scalar extension by comparing the two composite right adjoints,\nusing the canonical coefficient direct-image comparison. The ideal I/I^(n+1)\nin A/I^(n+1) is nilpotent and its quotient is A/I. The proved helpers\nquotient_ideal_nilpotent, quotient_factor_kernel and quotient_factor_equiv\ngive these identifications; nilpotent_quotient_lissity specializes the declared\nnilpotent theorem on an equal-universe site. Apply nilpotent-reduction-lissity\nto propagate finite-type lissity from level zero to level n. The coefficient ring\nis finite, so each finite-type constant module is a finite set. The proved helper\nrelative_lisse_iff_native transports relative finite\nlissity to native constant coefficients and back. Its comparison uses the\ncanonical constant-section map, constant module restriction, and uniqueness of\nleft adjoints. Local models are preserved on every slice; the proved helper\nnativeSieveFiniteLisse_all_objects supplies the covers required by the\nsitewise nilpotent theorem. These comparisons give precisely the relative\ncoefficient presentation below. For the\nempty scheme, choose an empty stratification; no stratum condition remains.",
+   "text": "Apply the proved native_common_strata construction to the first quotient after fixed-scalar restriction. It supplies one native finite-lisse sieve on every stratum and cohomological degree in the common interval. Apply normalizedTower_lisse_of_native_strata to these sieves; its nilpotent reduction argument propagates the models through all normalized quotients and transports them through the canonical inverse-image coefficient maps.",
    "uses": [
     "def-constructible-stratification",
-    "def-weil-pbc-proetale-modules",
     "lem-weil-pbc-nilpotent-reduction-lissity",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lemma-constructible-common-refinement",
-    "lemma-constructible-of-refines",
-    "new-lem-pur-intrinsic-lisse-fixed",
-    "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-proetale-weakly-etale-localization"
+    "new-lem-weil-pbc-normalized-tower-lisse-propagation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094I in sites-cohomology.tex; local-effectivity steps 2--3, finite refinement and nilpotent propagation"
+    "place": "Tag 094I; finite refinement and nilpotent propagation in local-effectivity steps 2--3"
    }
   }
  ],
  "proof_deps": [
   "def-constructible-stratification",
-  "def-weil-pbc-proetale-modules",
   "lem-weil-pbc-nilpotent-reduction-lissity",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lemma-constructible-common-refinement",
-  "lemma-constructible-of-refines",
-  "new-lem-pur-intrinsic-lisse-fixed",
-  "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-proetale-weakly-etale-localization"
+  "new-lem-weil-pbc-normalized-tower-lisse-propagation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 094I in sites-cohomology.tex; local-effectivity steps 2--3, finite refinement and nilpotent propagation"
+  "place": "Tag 094I; finite refinement and nilpotent propagation, with the intermediate Lean theorem normalizedTower_lisse_of_native_strata"
  },
  "mathlib_searches": [
   {
@@ -120,14 +106,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-cfb1a",
-  "group": "F9",
+  "reviewer": "COMPILER",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261020T153004-L-2859933",
+  "landing": "20261026T222720-L-685757",
   "kind": "interface",
-  "note": "independent cc review: 27 delivered consumers vs live sources with the alias→Stratification and import substitution applied (byte-identical); 12 node records vs live (only lean.statement/note respelled); 155-module sandbox (28 delivered + 67 direct importers + intermediates) all compiled"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

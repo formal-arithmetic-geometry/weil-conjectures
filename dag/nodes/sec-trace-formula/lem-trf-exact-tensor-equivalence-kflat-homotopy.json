@@ -1,0 +1,332 @@
+{
+ "id": "lem-trf-exact-tensor-equivalence-kflat-homotopy",
+ "kind": "statement",
+ "title": "Exact tensor equivalences preserve the acyclic K-flat test and homotopy categories",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] equipped with tensor bifunctors additive in each variable and countable coproducts. For integer-indexed cochain complexes use the direct-sum total tensor with degree $n$ object $\\bigoplus_{p+q=n}X^p\\otimes Y^q$ and differential $d_X\\otimes1+(-1)^p1\\otimes d_Y$. Let $E:\\mathcal A\\rightleftarrows\\mathcal B:I$ be mutually inverse additive exact equivalences with specified unit and counit satisfying the triangle identities. Write $E_{\\rm Ch},I_{\\rm Ch}$ for their termwise functors. Suppose natural chain isomorphisms $E_{\\rm Ch}\\operatorname{Tot}(X\\otimes Y)\\cong\\operatorname{Tot}(E_{\\rm Ch}X\\otimes E_{\\rm Ch}Y)$ and the analogous isomorphisms for $I_{\\rm Ch}$ are given. Here exact means preservation of kernels and cokernels. Call a complex acyclic if every $H^n=\\ker d^n/\\operatorname{im}d^{n-1}$ is zero, a chain map a quasi-isomorphism if every induced $H^n$ map is invertible [def-weil-abstract-derived-category], and a complex $P$ K-flat if $\\operatorname{Tot}(X\\otimes P)$ is acyclic for every acyclic $X$; this is the test in [def-pc-kflat-complex, def-pc-module-kflat-complex] for sheaves and modules respectively. Then $E_{\\rm Ch}$ and $I_{\\rm Ch}$ are inverse equivalences of complex categories with termwise unit and counit. There are natural isomorphisms $E(H^nX)\\cong H^n(E_{\\rm Ch}X)$, and likewise for $I$. Both functors preserve and reflect acyclicity, quasi-isomorphisms, K-flatness and K-flat resolutions (quasi-isomorphisms $P\\to X$ with $P$ K-flat). They preserve and reflect cochain homotopies, where $u-v=d h+h d$ with $h$ of degree $-1$, and hence induce inverse equivalences $K(\\mathcal A)\\simeq K(\\mathcal B)$ with the same termwise unit and counit. These equivalences commute with shifts and the usual mapping cones: the comparisons use the signed shifted differential and the block cone differential, and carry their canonical inclusions and projections to the corresponding maps. All assertions concern unbounded complexes; the tensor comparisons are isomorphisms of complexes, not merely comparisons of individual cohomology groups.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YN (definition-K-flat), together with more-algebra.tex Tag 06XZ (definition-K-flat); derived.tex section-homotopy: the exact tensor-equivalence invariance argument for the acyclic total-tensor test, cohomology and homotopies, not a theorem asserted by these definitions."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "For $F=E$ or $I$, define $(F_{\\rm Ch}X)^n=F(X^n)$, $d^n=F(d_X^n)$, and $(F_{\\rm Ch}u)^n=F(u^n)$. Since $F(0)=0$ and $F(ba)=F(b)F(a)$, these are complexes and chain maps and define functors. Naturality of the given $\\eta:1\\cong IE$ and $\\varepsilon:EI\\cong1$, applied to each $d_X^n$, makes their termwise components chain isomorphisms. The two triangle identities hold degree by degree. Thus these functors are inverse equivalences of the complex categories [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), exactness via kernels and cokernels; termwise application to complexes"
+   }
+  },
+  {
+   "text": "For either additive functor $F$, write $\\iota_j,\\pi_j$ for a binary biproduct's injections and projections [def-sp-abelian]. The maps $b=(F\\pi_1,F\\pi_2):F(U\\oplus V)\\to FU\\oplus FV$ and $a=(F\\iota_1,F\\iota_2):FU\\oplus FV\\to F(U\\oplus V)$ are inverse: their products are the identities by $\\pi_j\\iota_k=\\delta_{jk}$ and $\\sum_j\\iota_j\\pi_j=1$, after applying additivity. Also $F0$ is zero since $1_{F0}=F(1_0)=F(0)=0$. Hence $F$ preserves finite products and coproducts. Equalizers and coequalizers are kernels and cokernels of differences; the assumed kernel and cokernel preservation therefore gives finite-limit and finite-colimit preservation. This verifies the exactness convention required by the next cited statement.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), exactness via kernels and cokernels; termwise application to complexes"
+   }
+  },
+  {
+   "text": "Use the exact-functor cohomology comparison [lem-weil-pbc-exact-functor-complex-cohomology], implemented by ShortComplex.mapHomologyIso for X.sc n. Its naturality lemma gives a natural isomorphism from mapped complex homology to the image of homology; invert it for the displayed direction. Apply this construction to both E and I.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), exactness via kernels and cokernels; termwise application to complexes"
+   }
+  },
+  {
+   "text": "At each integer n, ShortComplex.exact_map_iff_of_faithful identifies exactness of the mapped short complex with exactness of X.sc n. Quantifying over n gives preservation and reflection of acyclicity. HomologicalComplex.quasiIso_map_iff_of_preservesHomology gives the analogous quasi-isomorphism equivalence [def-weil-abstract-derived-category]. The required homology-preservation and reflection instances are supplied by the additive equivalence.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), exactness via kernels and cokernels; termwise application to complexes"
+   }
+  },
+  {
+   "text": "A chain isomorphism induces invertible cohomology maps, by applying the cohomology functor to its inverse [def-weil-abstract-derived-category], so acyclicity is invariant under chain isomorphism. If $P\\cong P'$ then for each $X$, functoriality of the tensor and totalization gives $\\operatorname{Tot}(X\\otimes P)\\cong\\operatorname{Tot}(X\\otimes P')$, whose inverse is obtained by tensoring the inverse. Thus the acyclic-test definition of K-flatness in the statement is invariant under chain isomorphism as well.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); more-algebra.tex Tag 06XZ (definition-K-flat). Direct transport of the acyclic total-tensor test through the stipulated chain isomorphisms."
+   }
+  },
+  {
+   "text": "Suppose $P$ is K-flat and $Y$ is an acyclic complex of $\\mathcal B$. The previous acyclicity result makes $I_{\\rm Ch}Y$ acyclic. The given tensor comparison and termwise counit give chain isomorphisms\n$$E_{\\rm Ch}\\operatorname{Tot}(I_{\\rm Ch}Y\\otimes P)\\cong\\operatorname{Tot}(E_{\\rm Ch}I_{\\rm Ch}Y\\otimes E_{\\rm Ch}P)\\cong\\operatorname{Tot}(Y\\otimes E_{\\rm Ch}P).$$\nThe complex inside $E_{\\rm Ch}$ is acyclic by the defining test for $P$, hence so is the last complex. Therefore $E_{\\rm Ch}P$ is K-flat. Interchange $E,I$, and use $I_{\\rm Ch}E_{\\rm Ch}X\\cong X$ from the inverse termwise unit, to prove preservation by $I_{\\rm Ch}$. Conversely, if $E_{\\rm Ch}P$ is K-flat, every acyclic $X$ has $E_{\\rm Ch}X$ acyclic, and\n$$E_{\\rm Ch}\\operatorname{Tot}(X\\otimes P)\\cong\\operatorname{Tot}(E_{\\rm Ch}X\\otimes E_{\\rm Ch}P)$$\nis acyclic; reflection of acyclicity gives the test for $P$. Interchanging $E,I$ proves reflection by $I_{\\rm Ch}$. The right-hand tensor position of $P$ is unchanged throughout; no symmetry of tensor is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); more-algebra.tex Tag 06XZ (definition-K-flat). Direct transport of the acyclic total-tensor test through the stipulated chain isomorphisms."
+   }
+  },
+  {
+   "text": "The displayed K-flat-resolution tests are conjunctions of a quasi-isomorphism condition and the right-factor acyclic tensor test, both written inline. Apply and_congr to the quasi-isomorphism equivalence of step 4 and the tensor-test equivalence of step 6. Repeat for I. No specialized sheaf or monoidal K-flat predicate is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); more-algebra.tex Tag 06XZ (definition-K-flat). Direct transport of the acyclic total-tensor test through the stipulated chain isomorphisms."
+   }
+  },
+  {
+   "text": "Functor.mapHomotopy applies an additive functor to the cochain homotopy equations; Functor.preimageHomotopy lifts each component by fullness and reflects its equation by faithfulness. These maps give the two implications on Nonempty homotopies, for both E and I.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RN (section-homotopy), Tag 013H (definition-complexes-notation); homology.tex Tag 0112 (lemma-compose-homotopy-cochain) and the preceding cochain homotopy formula"
+   }
+  },
+  {
+   "text": "Use the complex equivalence e.mapHomologicalComplex from step 1. Define the unit and counit on a homotopy-category object represented by X by applying the quotient functor to the corresponding complex unit and counit components. NatIso.ofComponents supplies the natural isomorphisms: naturality follows by quotienting complex-level naturality. Every homotopy-category object has a complex representative. Functor.map_comp then turns the two complex triangle identities into the required identities on quotient classes. The component equations hold definitionally.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RN (section-homotopy), Tag 013H (definition-complexes-notation); homology.tex Tag 0112 (lemma-compose-homotopy-cochain) and the preceding cochain homotopy formula"
+   }
+  },
+  {
+   "text": "For both E and I, use the canonical commShiftIso of mapHomologicalComplex, whose components in every degree are definitionally identities, and the canonical commShiftIso of mapHomotopyCategory. Additivity is exactly what preserves the signed shifted differential.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone); homology.tex Tag 011G (definition-shift-cochain)"
+   }
+  },
+  {
+   "text": "For both E and I use CochainComplex.mappingCone.mapHomologicalComplexIso. Mathlib map_inr gives the inclusion equation. Its explicit biproduct formula, composed with fst, gives the projection equation by the injection-projection identities and additivity. Mathlib map_δ gives the equation for the negative cone projection and the canonical shift comparison. Finally mapTrianglehIso gives the comparison after quotienting; simplify its construction from mapTriangleIso to check its first two components are identities and its third is the quotient of the same cone comparison [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone); homology.tex Tag 011G (definition-shift-cochain)"
+   }
+  },
+  {
+   "text": "Each degreewise formula above is defined for every integer, and the total-tensor chain isomorphisms were hypotheses for the unbounded direct-sum totalizations themselves. The K-flat tests in step 6 quantify over all acyclic complexes. Hence none of the conclusions requires boundedness, exactness of countable coproducts, or additional tensor-flatness assumptions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); more-algebra.tex Tag 06XZ (definition-K-flat). Direct transport of the acyclic total-tensor test through the stipulated chain isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "U1: direct equivalence transport of the Tag 06YN acyclic right-tensor test (also more-algebra.tex Tag 06XZ), implemented using Mathlib exactness/homology comparisons, mapHomotopy/preimageHomotopy, canonical shift and cone comparisons, and the quotient images of the termwise unit and counit. Homology and shift/cone conventions: homology.tex Tags 010N, 0112, 011G and derived.tex Tag 014E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive tensor equivalence of abelian categories preserves cohomology quasi isomorphisms K flat complexes and induces an equivalence on homotopy categories",
+   "results": "{\"t\": \"2026-10-22T06:47:15Z\", \"tool\": \"leanfinder\", \"query\": \"An exact additive tensor equivalence of abelian categories preserves cohomology quasi isomorphisms K flat complexes and induces an equivalence on homotopy categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.quotientCompQhIso\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"DerivedCategory.isIso_Qh_map_iff\", \"HomologicalComplexUpToQuasiIso.quotientCompQhIso\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso\", \"HomotopyCategory.quasiIso_eq_quasiIso_map_quotient\"], \"digest\": \"8189280a5a1e97b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homology and localization components exist, but no declaration gives the equivalence with the K-flat acyclic-tensor test and homotopy compatibility under these hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence preserves and reflects K-flat complexes using total tensor compatibility and acyclic complexes",
+   "results": "{\"t\": \"2026-10-22T06:47:04Z\", \"tool\": \"leansearch\", \"query\": \"Exact equivalence preserves and reflects K-flat complexes using total tensor compatibility and acyclic complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"1cd028815bc0b64d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homology and localization components exist, but no declaration gives the equivalence with the K-flat acyclic-tensor test and homotopy compatibility under these hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-22T06:47:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"kFlat\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homology and localization components exist, but no declaration gives the equivalence with the K-flat acyclic-tensor test and homotopy compatibility under these hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat|mapHomotopyCategory.*[Ee]quiv|[Ee]quiv.*mapHomotopyCategory",
+   "results": "{\"t\": \"2026-10-22T06:47:04Z\", \"tool\": \"grep\", \"query\": \"kFlat|mapHomotopyCategory.*[Ee]quiv|[Ee]quiv.*mapHomotopyCategory\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homology and localization components exist, but no declaration gives the equivalence with the K-flat acyclic-tensor test and homotopy compatibility under these hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of additive categories lifts to homotopy categories and preserves homology and acyclicity of unbounded complexes",
+   "results": "{\"t\": \"2026-10-22T06:47:17Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence of additive categories lifts to homotopy categories and preserves homology and acyclicity of unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso\", \"HomologicalComplexUpToQuasiIso.Qh\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W\", \"DerivedCategory.Qh\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\"], \"digest\": \"3544afc68a5eb99f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homology and localization components exist, but no declaration gives the equivalence with the K-flat acyclic-tensor test and homotopy compatibility under these hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functors of abelian categories commute with homology of unbounded cochain complexes",
+   "results": "{\"t\": \"2026-10-23T04:08:42Z\", \"tool\": \"leanfinder\", \"query\": \"Exact additive functors of abelian categories commute with homology of unbounded cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"DerivedCategory.instIsHomologicalHomologyFunctor\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.homologySequence_exact₂\", \"DerivedCategory.homologyFunctorFactors\", \"CategoryTheory.Functor.homologySequence_exact₁\", \"HomotopyCategory.instIsHomologicalIntUpHomologyFunctor\", \"CategoryTheory.Functor.IsHomological.exact\"], \"digest\": \"9aba448fd13c4ac7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.homology",
+   "results": "{\"t\": \"2026-10-23T04:08:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.homology'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "invalid query (unknown identifier); retried with plain words and the actual homology comparison names"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorIso|mapHomologyIso|homologyComparison",
+   "results": "{\"t\": \"2026-10-23T04:08:45Z\", \"tool\": \"grep\", \"query\": \"homologyFunctorIso|mapHomologyIso|homologyComparison\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\"], \"digest\": \"a7e2f55a16e0c323\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor between abelian categories commutes with the homology functor on complexes",
+   "results": "{\"t\": \"2026-10-23T04:09:08Z\", \"tool\": \"leansearch\", \"query\": \"An exact functor between abelian categories commutes with the homology functor on complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesHomology_of_map_exact\", \"CategoryTheory.Functor.preservesHomology_of_preservesEpis_and_kernels\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf\", \"CategoryTheory.ExactFunctor.of\", \"CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf\", \"CategoryTheory.Functor.PreservesHomology\", \"CategoryTheory.ShortComplex.mapHomologyIso'\"], \"digest\": \"894f3ec74197b8c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving kernels and cokernels preserves homology with a natural comparison isomorphism",
+   "results": "{\"t\": \"2026-10-23T04:09:17Z\", \"tool\": \"leanfinder\", \"query\": \"A functor preserving kernels and cokernels preserves homology with a natural comparison isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.map_leftRightHomologyComparison'\", \"CategoryTheory.ShortComplex.mapHomologyIso\", \"CategoryTheory.ShortComplex.HomologyData.map_iso\", \"CategoryTheory.ShortComplex.hasHomology_of_preserves\", \"CategoryTheory.ShortComplex.hasHomology_of_preserves'\", \"CategoryTheory.Functor.PreservesHomology\", \"CategoryTheory.ShortComplex.mapLeftHomologyIso\", \"CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology\"], \"digest\": \"d2e8c7368a63188b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorIso|PreservesHomology|mapHomologyIso",
+   "results": "{\"t\": \"2026-10-23T04:09:17Z\", \"tool\": \"grep\", \"query\": \"homologyFunctorIso|PreservesHomology|mapHomologyIso\", \"sub\": \"Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"20\", \"21\", \"22\", \"40\"], \"digest\": \"a74d459bcda9edad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive tensor equivalences of abelian categories preserve and reflect K-flat unbounded complexes and induce equivalences of homotopy categories compatible with cones and shifts",
+   "results": "{\"t\": \"2026-10-23T04:10:26Z\", \"tool\": \"leanfinder\", \"query\": \"Exact additive tensor equivalences of abelian categories preserve and reflect K-flat unbounded complexes and induce equivalences of homotopy categories compatible with cones and shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\"], \"digest\": \"9bc97b10a8142efd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-23T04:10:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"kFlat\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat|KFlat|[Ee]quivalence",
+   "results": "{\"t\": \"2026-10-23T04:10:28Z\", \"tool\": \"grep\", \"query\": \"kFlat|KFlat|[Ee]quivalence\", \"sub\": \"Algebra/Homology/HomotopyCategory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean\"], \"digest\": \"0284b022437f8dce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact tensor equivalence preserves and reflects K-flat complexes acyclicity quasi-isomorphisms and cochain homotopies",
+   "results": "{\"t\": \"2026-10-23T04:10:30Z\", \"tool\": \"leansearch\", \"query\": \"An exact tensor equivalence preserves and reflects K-flat complexes acyclicity quasi-isomorphisms and cochain homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyEquiv.quasiIso_hom\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\", \"HomologicalComplex.mem_quasiIso_iff\", \"HomotopyEquiv.isKInjective\", \"HomotopyEquiv.isKProjective\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.ShortComplex.exact_iff_of_iso\"], \"digest\": \"2bb9cb9f5b95d0f6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; exact-functor cohomology components are already represented by lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf); no hit gives the acyclic total-tensor K-flat equivalence under the stated abstract hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-one-point-derived-ring-identification",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Polynomial resolutions remain resolutions under Tor-independent tensoring. In the Stacks 08QP resolution computation, identify the one-object ringed-site K-flat scalar-extension construction with ordinary ring-module scalar extension, including the universal derived counit. Old steps 4--6: exactness, acyclic total-tensor tests and homotopy equations under termwise evaluation.",
+   "via": [
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-trf-tor-independent-cotangent-base-change",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-exact-tensor-equivalence-kflat-homotopy",
+  "worker": "stage1",
+  "summary": "Retained the statement and its four statement dependencies. Reused the existing exact-functor cohomology Mathlib leaf rather than creating a duplicate. Gave twelve explicit steps: termwise unit/counit, biproduct/exactness check, natural cohomology comparison, zero/isomorphism reflection, isomorphism invariance, both acyclic K-flat tests, resolutions, fullness/faithfulness on homotopies, quotient equivalence, signed shifts, block cones and unboundedness. No new node is needed: the remaining steps are direct componentwise or defining-test calculations. All citations were read and quoted in citations.json. Repair of the promotion return: compared the retained delivery with the current live unsplit item, reread all five current dependency statements and revalidated every citation. The live statement, source, statement dependencies, creation and blueprint fields agree with the retained version; deliver.py rebuilds the split on the freshly fetched live sheaf-dag. Step 11 now explicitly covers the negative cone projection in the live derived-category definition.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Polynomial resolutions remain resolutions under Tor-independent tensoring. In the Stacks 08QP resolution computation, identify the one-object ringed-site K-flat scalar-extension construction with ordinary ring-module scalar extension, including the universal derived counit. Old steps 4--6: exactness, acyclic total-tensor tests and homotopy equations under termwise evaluation. This split supplies the exact-equivalence subargument used by step 2 of lem-trf-one-point-derived-ring-identification; no change to the geometric chapter or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-5b6564a71",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-5b6564a71 (reviewer sub-agent of L); spot-checked: I read the whole 12-step proof and the five cited statements: def-sp-abelian, def-weil-abstract-derived-category, the Mathlib leaf lem-weil-pbc-exact-functor-complex-cohomology, def-pc-kflat-complex and def-pc-module-kflat-complex. This re-delivery answers a promotion return. Compared with the earlier head 25ae8fa5, the statement, source, stmt_deps and blueprint are identical. The only proof change is one new sentence in step 11, which handles the negative projection -p of the def node's cone triangle by additivity; it is correct. In both the live and side-live clones the item is still unsplit with an empty proof, and its statement there equals the delivered one. Stacks sources checked: 06YN (sites-cohomology definition-K-flat, line 2999, P in the right factor), 06XZ, 014E (cone matrix and the canonical maps i, p), 011G, 010N and 0112. Step checks: step 2 shows that preserving kernels and cokernels gives the leaf's finite-limit/colimit exactness. Step 6 transports K-flatness through the given Tot comparisons in both directions, keeping P on the right, testing every acyclic object and using no symmetry. Step 8 lifts homotopies through the full and faithful functor. Steps 10-11 check the shift sign for every r and the cone conjugation, with b F(iota1)=iota1 and pi2 b=F(pi2). Small cases checked: identity equivalence, zero category, degree-0 complex, cones of 0 and of the identity. No duplicate in the DAG; the nearest nodes are lem-sfb-kflat-homotopy-triangulated and lem-pd-module-ringed-topos-derived-comparison, which state other things. No new nodes, no SGA, no tool_uses needed. Maintainer note: this is a promotion-return re-delivery of the already reviewed 25ae8fa5 split; land it on the current base."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ExactTensorEquivalenceKFlatHomotopy",
+  "declaration": "CategoryTheory.exactTensorEquivalence_kFlat_homotopy",
+  "file": "lean/Sheaf/Algebra/Homology/ExactTensorEquivalenceKFlatHomotopy.lean",
+  "statement": "theorem exactTensorEquivalence_kFlat_homotopy {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [Abelian B] [HasCountableCoproducts A] [HasCountableCoproducts B] (TA : A ⥤ A ⥤ A) (TB : B ⥤ B ⥤ B) [TA.Additive] [∀ X : A, (TA.obj X).Additive] [TB.Additive] [∀ Y : B, (TB.obj Y).Additive] (e : A ≌ B) [e.functor.Additive] [e.inverse.Additive] (_tensorE : Functor.uncurry.obj TA.map₂CochainComplex ⋙ e.functor.mapHomologicalComplex (.up ℤ) ≅ (e.functor.mapHomologicalComplex (.up ℤ)).prod (e.functor.mapHomologicalComplex (.up ℤ)) ⋙ Functor.uncurry.obj TB.map₂CochainComplex) (_tensorI : Functor.uncurry.obj TB.map₂CochainComplex ⋙ e.inverse.mapHomologicalComplex (.up ℤ) ≅ (e.inverse.mapHomologicalComplex (.up ℤ)).prod (e.inverse.mapHomologicalComplex (.up ℤ)) ⋙ Functor.uncurry.obj TA.map₂CochainComplex) : (∀ n : ℤ, Nonempty (homologyFunctor A (.up ℤ) n ⋙ e.functor ≅ e.functor.mapHomologicalComplex (.up ℤ) ⋙ homologyFunctor B (.up ℤ) n)) ∧ (∀ X : CochainComplex A ℤ, ((e.functor.mapHomologicalComplex (.up ℤ)).obj X).Acyclic ↔ X.Acyclic) ∧ (∀ (X Y : CochainComplex A ℤ) (f : X ⟶ Y), QuasiIso ((e.functor.mapHomologicalComplex (.up ℤ)).map f) ↔ QuasiIso f) ∧ (∀ P : CochainComplex A ℤ, (∀ X : CochainComplex B ℤ, X.Acyclic → (mapBifunctor X ((e.functor.mapHomologicalComplex (.up ℤ)).obj P) TB (.up ℤ)).Acyclic) ↔ (∀ X : CochainComplex A ℤ, X.Acyclic → (mapBifunctor X P TA (.up ℤ)).Acyclic)) ∧ (∀ (P X : CochainComplex A ℤ) (q : P ⟶ X), (QuasiIso ((e.functor.mapHomologicalComplex (.up ℤ)).map q) ∧ ∀ Y : CochainComplex B ℤ, Y.Acyclic → (mapBifunctor Y ((e.functor.mapHomologicalComplex (.up ℤ)).obj P) TB (.up ℤ)).Acyclic) ↔ (QuasiIso q ∧ ∀ Y : CochainComplex A ℤ, Y.Acyclic → (mapBifunctor Y P TA (.up ℤ)).Acyclic)) ∧ (∀ (X Y : CochainComplex A ℤ) (f g : X ⟶ Y), Nonempty (Homotopy ((e.functor.mapHomologicalComplex (.up ℤ)).map f) ((e.functor.mapHomologicalComplex (.up ℤ)).map g)) ↔ Nonempty (Homotopy f g)) ∧ (∀ r : ℤ, ∃ s : shiftFunctor (CochainComplex A ℤ) r ⋙ e.functor.mapHomologicalComplex (.up ℤ) ≅ e.functor.mapHomologicalComplex (.up ℤ) ⋙ shiftFunctor (CochainComplex B ℤ) r, ∀ (X : CochainComplex A ℤ) (n : ℤ), (s.hom.app X).f n = 𝟙 _) ∧ (∀ r : ℤ, Nonempty (shiftFunctor (HomotopyCategory A (.up ℤ)) r ⋙ e.functor.mapHomotopyCategory (.up ℤ) ≅ e.functor.mapHomotopyCategory (.up ℤ) ⋙ shiftFunctor (HomotopyCategory B (.up ℤ)) r)) ∧ (∀ (X Y : CochainComplex A ℤ) (f : X ⟶ Y), (e.functor.mapHomologicalComplex (.up ℤ)).map (CochainComplex.mappingCone.inr f) ≫ (CochainComplex.mappingCone.mapHomologicalComplexIso f e.functor).hom = CochainComplex.mappingCone.inr ((e.functor.mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ (X Y : CochainComplex A ℤ) (f : X ⟶ Y) (n : ℤ), (CochainComplex.mappingCone.mapHomologicalComplexIso f e.functor).hom.f n ≫ (CochainComplex.mappingCone.fst ((e.functor.mapHomologicalComplex (.up ℤ)).map f)).1.v n (n + 1) rfl = e.functor.map ((CochainComplex.mappingCone.fst f).1.v n (n + 1) rfl)) ∧ (∀ (X Y : CochainComplex A ℤ) (f : X ⟶ Y), (e.functor.mapHomologicalComplex (.up ℤ)).map (CochainComplex.mappingCone.triangle f).mor₃ ≫ ((e.functor.mapHomologicalComplex (.up ℤ)).commShiftIso (1 : ℤ)).hom.app X = (CochainComplex.mappingCone.mapHomologicalComplexIso f e.functor).hom ≫ (CochainComplex.mappingCone.triangle ((e.functor.mapHomologicalComplex (.up ℤ)).map f)).mor₃) ∧ (∀ (X Y : CochainComplex A ℤ) (f : X ⟶ Y), ∃ c : (e.functor.mapHomotopyCategory (.up ℤ)).mapTriangle.obj (CochainComplex.mappingCone.triangleh f) ≅ CochainComplex.mappingCone.triangleh ((e.functor.mapHomologicalComplex (.up ℤ)).map f), c.hom.hom₁ = 𝟙 _ ∧ c.hom.hom₂ = 𝟙 _ ∧ c.hom.hom₃ = (HomotopyCategory.quotient B (.up ℤ)).map (CochainComplex.mappingCone.mapHomologicalComplexIso f e.functor).hom) ∧ (∀ n : ℤ, Nonempty (homologyFunctor B (.up ℤ) n ⋙ e.inverse ≅ e.inverse.mapHomologicalComplex (.up ℤ) ⋙ homologyFunctor A (.up ℤ) n)) ∧ (∀ X : CochainComplex B ℤ, ((e.inverse.mapHomologicalComplex (.up ℤ)).obj X).Acyclic ↔ X.Acyclic) ∧ (∀ (X Y : CochainComplex B ℤ) (f : X ⟶ Y), QuasiIso ((e.inverse.mapHomologicalComplex (.up ℤ)).map f) ↔ QuasiIso f) ∧ (∀ P : CochainComplex B ℤ, (∀ X : CochainComplex A ℤ, X.Acyclic → (mapBifunctor X ((e.inverse.mapHomologicalComplex (.up ℤ)).obj P) TA (.up ℤ)).Acyclic) ↔ (∀ X : CochainComplex B ℤ, X.Acyclic → (mapBifunctor X P TB (.up ℤ)).Acyclic)) ∧ (∀ (P X : CochainComplex B ℤ) (q : P ⟶ X), (QuasiIso ((e.inverse.mapHomologicalComplex (.up ℤ)).map q) ∧ ∀ Y : CochainComplex A ℤ, Y.Acyclic → (mapBifunctor Y ((e.inverse.mapHomologicalComplex (.up ℤ)).obj P) TA (.up ℤ)).Acyclic) ↔ (QuasiIso q ∧ ∀ Y : CochainComplex B ℤ, Y.Acyclic → (mapBifunctor Y P TB (.up ℤ)).Acyclic)) ∧ (∀ (X Y : CochainComplex B ℤ) (f g : X ⟶ Y), Nonempty (Homotopy ((e.inverse.mapHomologicalComplex (.up ℤ)).map f) ((e.inverse.mapHomologicalComplex (.up ℤ)).map g)) ↔ Nonempty (Homotopy f g)) ∧ (∀ r : ℤ, ∃ s : shiftFunctor (CochainComplex B ℤ) r ⋙ e.inverse.mapHomologicalComplex (.up ℤ) ≅ e.inverse.mapHomologicalComplex (.up ℤ) ⋙ shiftFunctor (CochainComplex A ℤ) r, ∀ (X : CochainComplex B ℤ) (n : ℤ), (s.hom.app X).f n = 𝟙 _) ∧ (∀ r : ℤ, Nonempty (shiftFunctor (HomotopyCategory B (.up ℤ)) r ⋙ e.inverse.mapHomotopyCategory (.up ℤ) ≅ e.inverse.mapHomotopyCategory (.up ℤ) ⋙ shiftFunctor (HomotopyCategory A (.up ℤ)) r)) ∧ (∀ (X Y : CochainComplex B ℤ) (f : X ⟶ Y), (e.inverse.mapHomologicalComplex (.up ℤ)).map (CochainComplex.mappingCone.inr f) ≫ (CochainComplex.mappingCone.mapHomologicalComplexIso f e.inverse).hom = CochainComplex.mappingCone.inr ((e.inverse.mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ (X Y : CochainComplex B ℤ) (f : X ⟶ Y) (n : ℤ), (CochainComplex.mappingCone.mapHomologicalComplexIso f e.inverse).hom.f n ≫ (CochainComplex.mappingCone.fst ((e.inverse.mapHomologicalComplex (.up ℤ)).map f)).1.v n (n + 1) rfl = e.inverse.map ((CochainComplex.mappingCone.fst f).1.v n (n + 1) rfl)) ∧ (∀ (X Y : CochainComplex B ℤ) (f : X ⟶ Y), (e.inverse.mapHomologicalComplex (.up ℤ)).map (CochainComplex.mappingCone.triangle f).mor₃ ≫ ((e.inverse.mapHomologicalComplex (.up ℤ)).commShiftIso (1 : ℤ)).hom.app X = (CochainComplex.mappingCone.mapHomologicalComplexIso f e.inverse).hom ≫ (CochainComplex.mappingCone.triangle ((e.inverse.mapHomologicalComplex (.up ℤ)).map f)).mor₃) ∧ (∀ (X Y : CochainComplex B ℤ) (f : X ⟶ Y), ∃ c : (e.inverse.mapHomotopyCategory (.up ℤ)).mapTriangle.obj (CochainComplex.mappingCone.triangleh f) ≅ CochainComplex.mappingCone.triangleh ((e.inverse.mapHomologicalComplex (.up ℤ)).map f), c.hom.hom₁ = 𝟙 _ ∧ c.hom.hom₂ = 𝟙 _ ∧ c.hom.hom₃ = (HomotopyCategory.quotient A (.up ℤ)).map (CochainComplex.mappingCone.mapHomologicalComplexIso f e.inverse).hom) ∧ (∃ η : 𝟭 (HomotopyCategory A (.up ℤ)) ≅ e.functor.mapHomotopyCategory (.up ℤ) ⋙ e.inverse.mapHomotopyCategory (.up ℤ), ∃ ε : e.inverse.mapHomotopyCategory (.up ℤ) ⋙ e.functor.mapHomotopyCategory (.up ℤ) ≅ 𝟭 (HomotopyCategory B (.up ℤ)), (∀ X : CochainComplex A ℤ, η.hom.app ((HomotopyCategory.quotient A (.up ℤ)).obj X) = (HomotopyCategory.quotient A (.up ℤ)).map ((e.mapHomologicalComplex (.up ℤ)).unitIso.hom.app X)) ∧ (∀ Y : CochainComplex B ℤ, ε.hom.app ((HomotopyCategory.quotient B (.up ℤ)).obj Y) = (HomotopyCategory.quotient B (.up ℤ)).map ((e.mapHomologicalComplex (.up ℤ)).counitIso.hom.app Y)) ∧ (∀ X : HomotopyCategory A (.up ℤ), (e.functor.mapHomotopyCategory (.up ℤ)).map (η.hom.app X) ≫ ε.hom.app ((e.functor.mapHomotopyCategory (.up ℤ)).obj X) = 𝟙 _) ∧ (∀ Y : HomotopyCategory B (.up ℤ), η.hom.app ((e.inverse.mapHomotopyCategory (.up ℤ)).obj Y) ≫ (e.inverse.mapHomotopyCategory (.up ℤ)).map (ε.hom.app Y) = 𝟙 _))",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-465c81311",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read the item node, the 4 stmt_deps with their Lean (Abelian; complexes, quasi-isos and homotopy category; the sheaf-specialised and monoidal K-flat predicates), the proof dep homologyFunctorIso, and the Mathlib map₂CochainComplex/mapBifunctor, mappingCone.mapHomologicalComplexIso (fst/inr formulas checked), and the mapHomotopyCategory CommShift and triangleh comparison. Hypotheses match without strengthening: independent universes, HasCountableCoproducts, T additive in each variable, e : A ≌ B (exactness automatic for an equivalence), natural Tot isomorphisms for E and I. Every conclusion clause is present for both functors as iff or as a pinned comparison; K-flatness is the node's right-factor acyclic test written inline (no general predicate exists to duplicate); the homotopy-category unit and counit are pinned to e.mapHomologicalComplex with both triangle identities. Unbounded ℤ complexes. lean.statement verbatim; node differs from live only in lean; no defs, a single sorry, docstrings with source, blueprint and 12 steps. Notes: the homotopy-category shift is only Nonempty (Mathlib's canonical CommShift instance exists and the pinned cone triangle uses it); the complex-level equivalence is Mathlib's Equivalence.mapHomologicalComplex, referenced directly. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T204712-L-3822928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

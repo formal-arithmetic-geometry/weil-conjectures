@@ -1,0 +1,413 @@
+{
+ "id": "lem-sfb-stack-affinization-qcqs",
+ "kind": "statement",
+ "title": "Canonical affinization of a qcqs algebraic stack",
+ "statement": "Let $k$ be a field [def-weil-field] and let $\\mathcal U$ be an algebraic stack over $k$ [def-sfb-algebraic-moduli-stack] whose structural map $\\mathcal U\\to\\operatorname{Spec}k$ is quasi-compact and quasi-separated [def-sfb-stack-qcqs-morphism]. Put $R=\\Gamma(\\mathcal U,\\mathcal O_{\\mathcal U})$, with structure sheaf and global sections as in [def-sfb-stack-quasi-coherent-algebra]. There is a unique $k$-morphism up to $2$-isomorphism $a_{\\mathcal U}:\\mathcal U\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] whose restriction along every scheme morphism $u:V\\to\\mathcal U$ corresponds to the ring map $u^*:R\\to\\Gamma(V,\\mathcal O_V)$ under [lem-weil-pbc-morphism-into-affine-scheme]. The morphism $a_{\\mathcal U}$ is quasi-compact and quasi-separated. Under the canonical $R\\simeq\\Gamma(\\operatorname{Spec}R,\\mathcal O)$, its map on global functions is $\\mathrm{id}_R$. In particular no finite-type, separated-diagonal or moduli-space hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 075S, lemma-quasi-compact-quasi-separated-permanence (2), applied to the affinization map into an affine scheme. Construction: smooth descent of the scheme affine-target correspondence (existing node lem-weil-pbc-morphism-into-affine-scheme); it is also the canonical morphism used by Alper Remark 4.1.3 and Remark 5.1.2."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-sfb-relative-moduli-inertia"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=\\operatorname{Spec}R$. By [def-sfb-stack-quasi-coherent-algebra], an element $r\\in R$ is a compatible family $(r_x)$, indexed by objects $x$ of $\\mathcal U$ over schemes $V$, with $r_x\\in\\Gamma(V,\\mathcal O_V)$, and the ring operations are pointwise. Evaluation gives a ring map $e_x:R\\to\\Gamma(V,\\mathcal O_V)$. By [lem-weil-pbc-morphism-into-affine-scheme] it determines a unique scheme map $a_x:V\\to Y$ with $a_x^\\sharp=e_x$. The structure map $k\\to R$ is the family of structural pullbacks $k\\to\\Gamma(V,\\mathcal O_V)$; let $g:Y\\to\\operatorname{Spec}k$ be the corresponding affine-scheme map. Since $(ga_x)^\\sharp=a_x^\\sharp g^\\sharp$ is the structural map $k\\to\\Gamma(V,\\mathcal O_V)$, the same bijection for the target $\\operatorname{Spec}k$ shows that $ga_x$ is the structure morphism of $V$: each $a_x$ is a $k$-morphism, an object of $h_Y(V)$. For an arrow $x'\\to x$ over $v:V'\\to V$, compatibility gives $e_{x'}=v^*e_x$, so the same bijection gives $a_{x'}=a_xv$. Send $x$ to $a_x$ and this arrow to the unique arrow over $v$ in the discrete fibred category $h_Y$. These assignments respect identities and composition, and hence give a functor $a:\\mathcal U\\to h_Y$ over the base by the morphism convention of [def-sfb-stable-pointed-moduli-groupoids]. Its restriction to every scheme test is the required map.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine); stacks-sheaves.tex Tag 06TV (definition-structure-sheaf). The objectwise assembly is written here from the definitions."
+   }
+  },
+  {
+   "text": "By step 1, for each object $x/V$ the composite $ga_x$ is the structural map of $V$; thus $ga$ is the given structural morphism $p$ of $\\mathcal U$, and $a$ is a $k$-morphism. If $b$ is a $k$-morphism with the specified restrictions, then $b(x)^\\sharp=e_x=a_x^\\sharp$, so [lem-weil-pbc-morphism-into-affine-scheme] gives $b(x)=a_x$ for every $x$. The target fibres have only identity arrows, so $b$ and $a$ also agree on arrows, and these equalities give the unique $2$-isomorphism $b\\simeq a$, compatible with every arrow. This is exactly the asserted uniqueness up to $2$-isomorphism, read in the definitions of [def-sfb-stack-quasi-coherent-algebra] and [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine), uniqueness, together with the stated definitions of global sections and functors to a discrete fibred category."
+   }
+  },
+  {
+   "text": "Under $R\\simeq\\Gamma(Y,\\mathcal O_Y)$ the pullback $a^*(r)$ has component $a_x^*(r)=e_x(r)=r_x$ at every object $x/V$. Equality of global sections is equality of these compatible families by [def-sfb-stack-quasi-coherent-algebra]. Therefore $a^*=\\mathrm{id}_R$. This also fixes the normalization of the map, without choosing an atlas or a presentation.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06TV (definition-structure-sheaf), global sections as compatible families; schemes.tex Tag 01I1 (lemma-morphism-into-affine)."
+   }
+  },
+  {
+   "text": "The affine scheme $Y$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Hence $g:Y\\to\\operatorname{Spec}k$ is quasi-separated as a scheme morphism by clause (1) of [lem-weil-pbc-qcqs-morphism-permanence], so its diagonal $d:Y\\to Y\\times_kY$ is quasi-compact. The source of $d$ is again $Y$, so clause (1) makes $d$ quasi-separated too, and clause (3) keeps both properties for every scheme base change $h_T:A_T=T\\times_{Y\\times_kY}Y\\to T$. Schemes are regarded as discrete fibred groupoids, so this $2$-fibre product is the scheme fibre product: $d$ is representable. To pass to the algebraic-space predicates of [def-sfb-stack-qcqs-morphism], let $h:A\\to T$ be a quasi-compact scheme morphism and $C\\to T$ a quasi-compact algebraic space, with representable surjective etale $h_U\\to C$, $U$ a quasi-compact scheme, as in that definition. Then $h_{A\\times_TU}\\to A\\times_TC$ is representable, etale and surjective, since its fibre product with any $h_{T'}\\to A\\times_TC$ is $h_{T'}\\times_Ch_U$. The scheme $A\\times_TU$ is quasi-compact by clauses (3) and (2); hence $A\\times_TC$ is quasi-compact, and $h$ is quasi-compact as a map of algebraic spaces. Apply this to $h_T$ and to its scheme diagonal, whose sheaf fibre products are scheme fibre products: each $h_T$ is quasi-compact and quasi-separated as a map of algebraic spaces. Thus $d$ is quasi-separated as a representable stack morphism, and is quasi-compact as a stack morphism by [lem-sfb-representable-stack-quasicompact-tests]. The products used here and below exist as algebraic stacks by [lem-sfb-algebraic-stack-fibre-products].",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-representable-stack-quasicompact-tests",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050T (lemma-characterize-representable-quasi-compact); schemes.tex Tags 01KN (lemma-affine-separated), 01KV (lemma-compose-after-separated), 01K5 (lemma-base-change-quasi-compact), 01KU (lemma-separated-permanence)."
+   }
+  },
+  {
+   "text": "Factor $a$ as $\\mathcal U\\xrightarrow{\\gamma}\\mathcal U\\times_kY\\xrightarrow{q}Y$, where $\\gamma=(1,a)$ and $q$ is the second projection. The graph square with bottom arrow $d:Y\\to Y\\times_kY$ and right arrow $(a\\operatorname{pr}_1,\\operatorname{pr}_2)$ is $2$-cartesian: an object of its pullback is $(x,y,\\alpha:a(x)\\simeq y)$ and is uniquely identified, over $x$, with $(x,a(x),1)$. Thus $\\gamma$ is a base change of the quasi-compact $d$ of step 4, and $q$ is a base change of the quasi-compact structural map $p$. Base change preserves quasi-compactness directly from [def-sfb-stack-qcqs-morphism]: testing the pullback at a quasi-compact stack is testing the original morphism at the composite map. Composition preserves it by testing $q$ first, then $\\gamma$ at the resulting quasi-compact stack. Hence $a=q\\gamma$ is quasi-compact. The graph and the identifications use the explicit $2$-fibre product of [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Y (lemma-quasi-compact-permanence), graph argument; Tags 050V and 050W, whose base-change and composition assertions are proved here directly from the testing definition."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stack-quasiseparated-cancellation] over $\\operatorname{Spec}k$ to $\\mathcal U\\xrightarrow{a}Y\\xrightarrow{g}\\operatorname{Spec}k$. The composite is the given quasi-separated $p$ by step 2. Its other hypothesis is quasi-separatedness of $\\Delta_g=d$ as a representable morphism, established on all scheme tests in step 4. Therefore $a$ is quasi-separated. Together with steps 1--5 this proves every clause. In particular the argument used neither finite type nor a separated diagonal nor a moduli-space property.",
+   "uses": [
+    "lem-sfb-stack-quasiseparated-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050M (lemma-compose-after-separated), clause (4); the cancellation used in Tag 075S (lemma-quasi-compact-quasi-separated-permanence), clause (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-representable-stack-quasicompact-tests",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-stack-quasiseparated-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 050Y and 050M(4), the ingredients of 075S(2). Objectwise construction from schemes.tex 01I1 and stacks-sheaves.tex 06TV, written here from the definitions rather than invoking smooth descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical morphism from a quasi compact quasi separated algebraic stack to the spectrum of its global functions exists and is quasi compact quasi separated with identity map on global functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.QuasiCompact X.toSpecΓ\", \"doc\": \"For any scheme $X$ that is a compact topological space, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is quasi-compact. This morphism arises as the unit of the \"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated X.toSpecΓ\", \"doc\": \"If the underlying topological space of a scheme $X$ is quasi-separated, then the canonical morphism from $X$ to the affine scheme associated with its ring of global sections $\\\\operatorname{Spec}(\\\\Gamm\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-compact. This morphism is constructed by gluing local normalization maps defined via integral closure\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"toSpecΓ\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIso_toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \" (R : CommRingCat) : CategoryTheory.IsIso (AlgebraicGeometry.toSpecΓ R)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \" (R : CommRingCat) : R ⟶ AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op (AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R)))\", \"doc\": \"The counit morphism `R ⟶ Γ(Spec R)` given by `AlgebraicGeometry.StructureSheaf.toOpen`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X ⟶ AlgebraicGeometry.Spec (X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"The canonical map `X ⟶ Spec Γ(X, ⊤)`. This is the unit of the `Γ-Spec` adjunction.\"}\n  {\"name\": \"AlgebraicGeometry.toSpecΓ_SpecMap_ΓSpecIso_inv\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" (R : CommRingCat) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec R).toSpecΓ (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.ΓSpecIso R).inv) = CategoryTheory.CategoryStruct.id (AlgebraicGeometry.Spec R)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.toSpecΓ_SpecMap_ΓSpecIso_inv_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" (R : CommRingCat) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec R ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec R).toSpecΓ (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.ΓSpecIso R).inv) h) = h\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ_naturality\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : CategoryTheory.CategoryStruct.comp f Y.toSpecΓ = CategoryTheory.CategoryStruct.comp X.toSpecΓ (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SpecMap_ΓSpecIso_inv_toSpecΓ_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" (R : CommRingCat) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec ((AlgebraicGeometry.Spec R).presheaf.obj (Opposite.op ⊤)) ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.ΓSpecIso R).inv) (CategoryTheory.CategoryStruct.comp (AlgebraicGeome\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec (Y.presheaf.obj (Opposite.op ⊤)) ⟶ Z) : CategoryTheory.CategoryStruct.comp f (CategoryTheory.CategoryStruct.comp Y.toSpecΓ h) = CategoryTheory.CategoryStruct.comp X.toSpecΓ (CategoryTheory.Catego\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SpecMap_ΓSpecIso_inv_toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" (R : CommRingCat) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.ΓSpecIso R).inv) (AlgebraicGeometry.Spec R).toSpecΓ = CategoryTheory.CategoryStruct.id (AlgebraicGeometry.Spec ((AlgebraicGeometry.Spec R).presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ_preimage_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" (X : AlgebraicGeometry.Scheme) (r : ↑(X.presheaf.obj (Opposite.op ⊤))) : (TopologicalSpace.Opens.map X.toSpecΓ.base).obj (PrimeSpectrum.basicOpen r) = X.basicOpen r\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ_apply\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" (X : AlgebraicGeometry.Scheme) (x : ↥X) : X.toSpecΓ x = (AlgebraicGeometry.Spec.map (X.presheaf.Γgerm x)) (IsLocalRing.closedPoint ↑(X.presheaf.stalk x))\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ_appTop\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" (X : AlgebraicGeometry.Scheme) : AlgebraicGeometry.Scheme.Hom.appTop X.toSpecΓ = (AlgebraicGeometry.Scheme.ΓSpecIso (X.presheaf.obj (Opposite.op ⊤))).hom\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "affinization|affinisation|toSpecΓ",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"141\", \"text\": \"  (basicOpen 𝒜 f).toSpecΓ ≫ Spec.map (awayToSection 𝒜 f)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"147\", \"text\": \"  simp [basicOpenToSpec, Scheme.Opens.toSpecΓ_appTop]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"166\", \"text\": \"    dsimp [basicOpenToSpec, Scheme.Opens.toSpecΓ]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"214\", \"text\": \"  rw [reassoc_of% this, ← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_assoc, basicOpenToSpec,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"244\", \"text\": \"    Spec.map_comp, Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_assoc]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"322\", \"text\": \"instance [X.Over (Spec R)] [IsAffine X] : X.toSpecΓ.IsOver (Spec R) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"325\", \"text\": \"  inferInstanceAs (X.toSpecΓ.IsOver (Spec R))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1052\", \"text\": \"    (isLimitOfPreserves (Scheme.Γ.rightOp ⋙ Scheme.Spec) hc) (D.obj i).toSpecΓ.opensRange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1053\", \"text\": \"    ((preimage_opensRange_toSpecΓ (X := c.pt) (c.π.app i)).trans\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1057\", \"text\": \"    ((preimage_opensRange_toSpecΓ (D.map fij)).symm.trans hj)⟩⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"276\", \"text\": \"/-- `toSpecΓ _` is an isomorphism so these are mutually two-sided inverses. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"277\", \"text\": \"theorem Γ_Spec_left_triangle : toSpecΓ (Γ.obj (op X)) ≫ X.toΓSpec.c.app (op ⊤) = 𝟙 _ := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"278\", \"text\": \"  unfold toSpecΓ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"346\", \"text\": \"lemma toSpecΓ_unop (R : CommRingCatᵒᵖ) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"347\", \"text\": \"    AlgebraicGeometry.toSpecΓ (Opposite.unop R) = CommRingCat.ofHom (algebraMap _ _) := rfl\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Spec.lean\", \"line\": \"282\", \"text\": \"def toSpecΓ (R : CommRingCat.{u}) : R ⟶ Γ.obj (op (Spec.toLocallyRingedSpace.obj (op R))) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Spec.lean\", \"line\": \"286\", \"text\": \"instance isIso_toSpecΓ (R : CommRingCat.{u}) : IsIso (toSpecΓ R) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Spec.lean\", \"line\": \"292\", \"text\": \"    f ≫ toSpecΓ S = toSpecΓ R ≫ Γ.map (Spec.toLocallyRingedSpace.map f.op).op := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Spec.lean\", \"line\": \"305\", \"text\": \"  Iso.symm <| NatIso.ofComponents.{u, u, u + 1, u + 1} (fun R ↦ asIso (toSpecΓ R) :)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"95\", \"text\": \"    fun _ ↦ (Scheme.Opens.toSpecΓ_SpecMap_presheaf_map ..).symm\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"220\", \"text\": \"    simp only [Scheme.isoSpec, asIso_hom, Scheme.toSpecΓ_naturality,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"356\", \"text\": \"  refine ⟨W, hxW, W.toSpecΓ ≫ Spec.map φ' ≫ hV.fromSpec, ?_, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"357\", \"text\": \"  · rw [W.fromSpecStalkOfMem_toSpecΓ_assoc x hxW, ← Spec.map_comp_assoc, ← h₁,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"142\", \"text\": \"      (f ⁻¹ᵁ U.1).toSpecΓ ≫ Spec.map (CommRingCat.ofHom <| integralClosure Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"150\", \"text\": \"  rw [← Iso.inv_comp_eq, reassoc_of% this, ← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_assoc,\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact quasi separated algebraic stack has a quasi compact quasi separated affinization morphism to Spec of global sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.affine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsAffine X], CategoryTheory.IsIso X.toSpecΓ\", \"doc\": \"For any affine scheme $X$, the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, establishing a natural correspondence between affine schemes and the spectra of their \"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $X$ is affine if the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, where $\\\\Gamma(X)$ denotes the ring of global sections of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"[QuasiSeparatedSpace X] : QuasiSeparated X.toSpecΓ\", \"doc\": \"If the underlying topological space of a scheme $X$ is quasi-separated, then the canonical morphism from $X$ to the affine scheme associated with its ring of global sections $\\\\operatorname{Spec}(\\\\Gamm\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[X.IsQuasiAffine] : IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [toCompactSpace : CompactSpace ↥X]\\n  [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ], X.IsQuasiAffine\", \"doc\": \"If $ X $ is a compact topological space and the canonical morphism $ X \\\\to \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from a quasi compact quasi separated algebraic stack to an affine scheme are quasi compact quasi separated and correspond to maps on global functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  AlgebraicGeometry.AffineTargetMorphismProperty.diagonal (fun X x x_1 x_2 => CompactSpace ↥X) f ↔\\n    QuasiSeparatedSpace ↥X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.QuasiCompact X.toSpecΓ\", \"doc\": \"For any scheme $X$ that is a compact topological space, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is quasi-compact. This morphism arises as the unit of the \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiSeparated f ↔ QuasiSeparatedSpace ↥X\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is quasi-separated, then a morphism $f: X \\\\to Y$ is quasi-separated if and only if $X$ is a quasi-separated topological space.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.QuasiCompact f ↔\\n    ∀ (U : Y.Opens), AlgebraicGeometry.IsAffineOpen U → IsCompact ↑((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is a compact subset of the topological space underlying \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from an algebraic stack to the spectrum of its ring of global functions is quasi compact and quasi separated when the stack is qcqs over a field",
+   "results": "OK; 8 hits; AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.quasiCompact_over_affine_iff",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|IsAlgebraicStack|affinization|affinisation|toSpecΓ",
+   "results": "OK; 25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a quasi compact quasi separated algebraic stack to the spectrum of its global sections and maps to affine schemes",
+   "results": "OK; 8 hits; AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.IsAffine.casesOn, AlgebraicGeometry.toSpecΓ, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.AffineScheme.Γ, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine, AlgebraicGeometry.affineAnd",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiCompact_of_comp|quasiSeparated_of_comp|quasiCompact.*comp|quasiSeparated.*comp",
+   "results": "OK; 20 hits; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry/Morphisms",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact and quasi separated algebraic stack morphisms can be cancelled against a quasi separated outer morphism with quasi separated diagonal",
+   "results": "OK; 8 hits; AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.quasiSeparated_over_affine_iff",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiSeparated\", \"of_comp\"",
+   "results": "OK; 1 hits; AlgebraicGeometry.QuasiSeparated.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic stacks X Y Z and composable maps f g, if g is quasi separated and its diagonal is quasi separated and g composed with f is quasi compact and quasi separated, then f is quasi compact and quasi separated",
+   "results": "OK; 8 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation of quasi compactness and quasi separatedness of morphisms of algebraic stacks from a composite using hypotheses on the outer map and its diagonal",
+   "results": "OK; 8 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.quasiCompact_comp",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiSeparated|quasiSeparated",
+   "results": "OK; 5 hits; 11, 21, 48, 50, 51; Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism between affine schemes is quasi separated and every monomorphism of schemes is quasi separated",
+   "results": "OK; 8 hits; AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.mk",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiSeparated\", \"IsAffine\"",
+   "results": "OK; 3 hits; AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.IsAffineOpen.isQuasiSeparated, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes with affine source is quasi separated and the diagonal of any scheme morphism is quasi separated",
+   "results": "OK; 8 hits; AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_over_affine_iff, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The morphism from Spec of a commutative algebra to Spec of its base ring and its diagonal are quasi separated scheme morphisms",
+   "results": "OK; 8 hits; AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "grep",
+   "query": "isAffineHom_of_isAffine",
+   "results": "OK; 2 hits; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any map from an affine scheme to an affine scheme has affine inverse images of affine opens",
+   "results": "OK; 8 hits; AlgebraicGeometry.isAffineHom_iff, AlgebraicGeometry.IsAffineOpen.preimage, AlgebraicGeometry.IsAffineHom.mk, AlgebraicGeometry.IsAffineHom.isAffine_preimage, AlgebraicGeometry.affinePreimage, AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion, AlgebraicGeometry.IsAffineOpen.preimage_of_isIso, AlgebraicGeometry.isAffineHom_of_forall_exists_isAffineOpen",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isAffineHom_of_isAffine",
+   "results": "OK; 1 hits; AlgebraicGeometry.isAffineHom_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism between two affine schemes is an affine morphism",
+   "results": "OK; 8 hits; AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.IsAffineHom, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.AffineTargetMorphismProperty, AlgebraicGeometry.HasAffineProperty, AlgebraicGeometry.AffineTargetMorphismProperty.of, AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.AffineScheme.ofHom",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "grep",
+   "query": "of_quasiSeparatedSpace|quasiSeparatedSpace_of_isAffine",
+   "results": "OK; 4 hits; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+   "results": "OK; 1 hits; AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiCompact.of_comp|HasOfPostcompProperty.*QuasiCompact",
+   "results": "OK; 4 hits; Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry/Morphisms",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compactness of a morphism of algebraic stacks follows from quasi compactness of a composite when the outer morphism is quasi separated",
+   "results": "OK; 8 hits; AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.quasiCompact_iff_compactSpace, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.quasiSeparated_isStableUnderComposition",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact.of_comp",
+   "results": "OK; 1 hits; AlgebraicGeometry.QuasiCompact.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable morphisms of algebraic stacks if the composite is quasi compact and the second morphism is quasi separated then the first morphism is quasi compact",
+   "results": "OK; 8 hits; AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.quasiCompact_comp, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness can be cancelled for morphisms of algebraic stacks when the outer map is quasi separated without representability of the inner map",
+   "results": "OK; 8 hits; AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_comp, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.quasiSeparated_isStableUnderComposition",
+   "date": "2026-10-23",
+   "verdict": "no match for the stack item: the hits are scheme statements, not the algebraic-stack construction. Scheme cancellation and quasi-separated-source hits are useful generic tools, already represented in the DAG."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-product-affinization",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: the canonical map from the product to the spectrum of global functions, before applying the existing global adequate-moduli criterion",
+   "via": [
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-affinization-qcqs",
+  "worker": "stage1",
+  "summary": "Constructed the map objectwise from the actual compatible-family definition of global functions; checked functoriality, k-linearity, uniqueness and identity pullback. Proved quasi-compactness by the graph square and the testing definition, and quasi-separatedness by the existing cancellation lemma after verifying its diagonal hypothesis. All prerequisites are existing nodes, so no new nodes are introduced. Preserved statement, statement dependencies and inherited provenance.",
+  "blueprint": "Realizes the inherited from.place: the canonical map used in Q44 product-affinization before applying the adequate-moduli criterion, on the direct-image stability alteration branch. The ancestor command returns None; inherited null ancestor and via chain are retained. Latest unit and direct-image proof read, no change to their route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Scheme affine-target correspondence assembles the stack map objectwise; no node of this unit states the scheme ring-map bijection."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine-scheme quasi-separatedness supplies the diagonal test; this is a Mathlib leaf."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme quasi-separated-source and base-change facts check the target diagonal; this is a Mathlib leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-67adfa144",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-67adfa144 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, with every cited statement: def-sfb-stack-quasi-coherent-algebra, 01I1 morphism-into-affine, def-sfb-stable-pointed-moduli-groupoids, affine-scheme-qcqs, qcqs-morphism-permanence, def-sfb-stack-qcqs-morphism, 050T representable-quasicompact-tests, 04T2 fibre-products and 050M(4) cancellation. Also read the Stacks sources 01I1, 06TV, 050Y, 075S, 050M and 050T. There are no new nodes. The statement is unchanged and holds in the small cases: empty stack (R=0), affine U (a=id), proper connected scheme with Γ=k (the structure map) and BG (structure map, qcqs and non-representable). No duplicate in the DAG: the existing affinization nodes are for schemes or algebraic spaces. No cycle and no SGA. Two repairable faults, both fixed in the proof text only; uses and proof_deps are unchanged. (1) Step 1 called a a functor over the base before k-linearity of the a_x was shown (it came in step 2). The k-structure argument (g a_x)^♯ = a_x^♯ g^♯ now sits in step 1, and step 2 is rewritten to match. (2) Step 4 said the scheme qc/qs properties of the base changes of d are 'precisely' the algebraic-space tests. But def-sfb-stack-qcqs-morphism tests against all qc algebraic spaces, and both 050T(i) and the Δ_b hypothesis of the cancellation lemma need that form. Step 4 now proves the reduction: base change of a qc étale scheme atlas of C, then permanence (3) and (2). Steps 3, 5 (the graph square of 050Y, with q correctly the base change of p = ga) and 6 are correct. The use of schemes as discrete algebraic stacks is presupposed by the statement and definitions; noted, not a fault. Tool uses of the three Mathlib-leaf scheme facts are accepted. Batch-5: def-sfb-stable-pointed-moduli-groupoids (fibred-groupoid and 2-fibre-product conventions; reaches only the def-trf-projective-bundle-morphism definition) and lem-sfb-algebraic-stack-fibre-products (04T2; reaches only the def-trf-algebraic-space definition) are general definitions and foundational stack theory, not the trace formula, Poincaré duality or steps of their proofs. No RETURN.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackAffinizationQcqs",
+  "declaration": "CategoryTheory.stack_affinization_qcqs",
+  "declarations": [
+   "CategoryTheory.moduliAffineGlobalPullbackFamily",
+   "CategoryTheory.moduliAffineGlobalPullbackFamily_compatible",
+   "CategoryTheory.moduliAffineGlobalPullback",
+   "CategoryTheory.stack_affinization_qcqs"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackAffinizationQcqs.lean",
+  "statement": "theorem stack_affinization_qcqs (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (hqc : IsQuasiCompactAlgebraicModuliMap.{u, v, w, u, u + 1, t, s} (moduliBaseStructure F)) (hqs : IsQuasiSeparatedAlgebraicModuliMap (moduliBaseStructure F)) : ∃ (B : CommRingCat.{u}) (e : B ≃+* moduliGlobalSectionsRing (moduliStructureSheaf F hF.1.1)) (q : Spec B ⟶ Spec (.of k)) (a : BasedFunctor F (discreteModuli (yoneda.obj (Over.mk q)))), (∀ (x : F.obj) (b : B), moduliAffineGlobalPullbackFamily a b x = ((e b).1 (op x)).down) ∧ IsQuasiCompactAlgebraicModuliMap.{u, v, w, u, u + 1, t, s} a ∧ IsQuasiSeparatedAlgebraicModuliMap a ∧ moduliAffineGlobalPullback hF.1.1 a = e.toRingHom ∧ ∀ (a' : BasedFunctor F (discreteModuli (yoneda.obj (Over.mk q)))), (∀ (x : F.obj) (b : B), moduliAffineGlobalPullbackFamily a' b x = ((e b).1 (op x)).down) → Nonempty (ModuliTwoIso a' a)",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The conclusion supplies a small ring B with an isomorphism to the actual compatible-family global-section ring, so Spec B stays in the scheme universe without a smallness hypothesis. Characterization on all scheme objects, qcqs, the induced ring map equal to that isomorphism, and uniqueness up to vertical 2-isomorphism are all explicit. Helpers construct the actual pullback of global functions. The added landed dependency owns moduliBaseStructure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b16e1e55",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Checked every clause against node lem-sfb-stack-affinization-qcqs and Stacks 075S/01I1/06TV. Hypotheses: field k, IsAlgebraicModuliStack F, qc/qs of moduliBaseStructure F (owner def-sfb-relative-moduli-inertia is landed and on base; the added stmt_dep is used). No finite-type, diagonal or representability assumption. Conclusion: small ring B with e : B ≃+* moduliGlobalSectionsRing (true by atlas descent, same convention as landed adequate_product_affinization); q pinned by the evaluation clause; objectwise 01I1 correspondence via (ΓSpecIso B).inv ≫ Γ.map of the Yoneda scheme map; qc/qs of a with the same test universes t,s; moduliAffineGlobalPullback = e (id_R); uniqueness as Nonempty ModuliTwoIso for every a' with the same restrictions. Edge cases (empty F, affine F, BG, independent universes) are covered. lean.statement is verbatim; helpers carry real data with source/blueprint docstrings; the theorem docstring carries the 6 proof steps; report sections present; no name clashes. Advisory only: inline scheme-map expression duplicates moduliChartSchemeMap/moduliRepresentableSchemeMap, justified by the import-cycle constraint. No compile run (no file changed)."
+ }
+}

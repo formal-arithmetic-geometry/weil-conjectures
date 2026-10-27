@@ -1,0 +1,86 @@
+{
+ "id": "lem-pod-algebraic-extension-closure-equivalence",
+ "kind": "statement",
+ "title": "Algebraic closures across an algebraic field extension",
+ "statement": "Let $K\\to L$ be an algebraic extension of fields: every element of $L$ is a root of a nonzero polynomial over $K$ [def-pc-field-extension, def-weil-algebraic-element]. Let $\\Omega_K$ be an algebraic closure of $K$ and $\\Omega_L$ an algebraic closure of $L$ [def-weil-algebraic-closure]. Give $\\Omega_L$ its $K$-algebra structure by the composite $K\\to L\\to\\Omega_L$. There exists a field isomorphism $a:\\Omega_L\\xrightarrow{\\sim}\\Omega_K$ whose restriction to $K$ is the specified structure homomorphism $K\\to\\Omega_K$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09GJ, lemma-algebraic-permanence, followed by Tag 09GV, lemma-algebraic-closures-isomorphic; exact combined Mathlib construction IsAlgClosure.equivOfAlgebraic, Mathlib/FieldTheory/IsAlgClosed/Basic.lean:439-441."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Algebraic closures of an algebraic extension and of the base field are isomorphic over the base field",
+   "results": "IsAlgClosure.ofAlgebraic (Mathlib.FieldTheory.IsAlgClosed.Basic) is relevant. Other hits concern the relative algebraic closure, not this statement. Read Basic.lean:411-441.",
+   "date": "2026-10-22",
+   "verdict": "match: IsAlgClosure.equivOfAlgebraic at line 439 gives the requested K-algebra equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic closure of an algebraic field extension is isomorphic over the base to an algebraic closure of the base field",
+   "results": "IsAlgClosure.ofAlgebraic and AlgebraicClosure.instIsAlgClosureOfIsAlgebraic; relative-algebraic-closure maps are different notions. Read the exact construction IsAlgClosure.equivOfAlgebraic at Basic.lean:439.",
+   "date": "2026-10-22",
+   "verdict": "match: the exact combined construction is IsAlgClosure.equivOfAlgebraic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAlgClosure.equivOfAlgebraic\"",
+   "results": "IsAlgClosure.equivOfAlgebraic and IsAlgClosure.equivOfAlgebraic'; the former has type L ≃ₐ[K] M for L an algebraic closure of J and M an algebraic closure of K, with J/K algebraic.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivOfAlgebraic|theorem ofAlgebraic",
+   "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean:424 ofAlgebraic, :429 equivOfAlgebraic', :439 equivOfAlgebraic (body :440-441); all read in their surrounding variable context :411-441. Search subdirectory FieldTheory/IsAlgClosed.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsAlgClosure.equivOfAlgebraic",
+  "file": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+  "how": "exact: lines 439-441, with variable hypotheses read at lines 411-422; instantiate K=K, J=L, L=Omega_L, M=Omega_K. The composite K-algebra structure has the required IsScalarTower. Its K-algebra equivalence supplies precisely the stated isomorphism.",
+  "line": 439
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-weil-cohomology-base-change-frobenius-power",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The base-change Frobenius convention used through Poincare duality: identifying the separately chosen algebraic closures before comparing geometric fibers (thm-weil-poincare-duality, Base change clause and proof paragraph on Frob_{q^r}=Frob_q^r).",
+   "via": [
+    "lem-pod-weil-cohomology-base-change-frobenius-power"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "def-pur-signed-twist-site-transport-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Unit multiples and permutations: literal signed coefficient comparison definitions.",
+   "via": [
+    "lem-pur-signed-twist-site-transport",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Literal signed finite Tate comparison data",
+ "statement": "Fix the finite purity setting [def-pur-conventions] and a scheme [def-pc-scheme]. At predecessor n, the coefficient ring is the finite quotient A=ULift(O_E/(varpi_E^(n+1))). The signed etale powers are the tensor and internal-Hom powers of [lem-asd-etale-finite-twist-pullback], and the pro-etale powers are those of [def-coefficient-twists-detailed] with their constant A-action retained. Define pulled sections using the unit of [def-weil-pbc-site-comparison-morphism] followed by arbitrary restrictions. The etale evaluation is the closed-category counit; the pro-etale evaluation applies the local functional on the terminal object of its slice, using [def-pur-sheaf-hom] and [def-pur-sheaf-tensor-product]. SignedSiteEvaluation requires equality of these evaluations on all pulled sections. SignedSiteMultiplication requires the square with the actual ordered products; their normalization is [def-sf-signed-line-product-normalization-data]. SignedSiteGeometric is a family of inverse-image isomorphisms for every scheme map; SignedSiteGeometricLaws requires the root-projection equations of [lem-amb-finite-tate-site-descent], evaluation, and the canonical identity and composition constraints. SignedSitePullbackSquare uses the comparison mate of [lem-weil-pbc-comparison-pullback]. SignedSiteTheta and SignedSiteThetaNormalized prescribe the projection formula of [def-pur-frame-class]; SignedSiteRootCoefficient is its equation with the same-root map of [lem-amb-finite-root-site-comparison]. These are literal predicates, with no chosen comparison family. The dual conventions are those of [lem-pur-signed-line-derived-base-change].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; root-normalized signed refinement of lem-pur-supported-cup-functoriality Step 1 and the inverse-limit coefficient identification in def-pur-frame-class; agent formulation, not a claim that 07A4 states Tate descent."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-scheme",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-amb-finite-root-site-comparison",
+  "def-pur-frame-class",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-signed-line-derived-base-change",
+  "lem-weil-pbc-comparison-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-sf-signed-line-product-normalization-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor for sheaves of modules preserves the dual of a finite locally free line and its evaluation pairing",
+   "results": "8 hits: Scheme.Modules.pullback; SheafOfModules.pullback; pullbackObjFreeIso.congr_simp; pullbackPushforwardAdjunction; Equivalence.sheafCongrPrecoherent_inverse_map_val_app; instIsLeftAdjointPullback; pullbackObjFreeIso_hom_naturality; pullbackObjFreeIso_hom_naturality_assoc.",
+   "date": "2026-10-25",
+   "verdict": "Generic pullback and free-module API, no normalization of the actual signed Tate comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image of module sheaves sends a finite locally free line dual to its dual preserving evaluation and uniquely extends a positive Tate comparison to signed powers",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv; ModuleCat.tilde; LightCondensed.free; ModuleCat.Tilde.toOpen; ModuleCat.tildeInModuleCat; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.freeHomEquiv_symm_comp; ModuleCat.Tilde.const.",
+   "date": "2026-10-25",
+   "verdict": "no exact result for the specified root-normalized signed Tate maps; generic free-sheaf and tilde results do not assert the evaluation, product or geometric equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual, CategoryTheory.Functor.Monoidal",
+   "results": "1 hit: CategoryTheory.hasRightDualOfEquivalence, Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence.",
+   "date": "2026-10-25",
+   "verdict": "dual transport along an equivalence, not the specified Tate comparison and its local normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|signed.*[Pp]ower",
+   "results": "1 hit: Mathlib/Combinatorics/Enumerative/Partition/GenFun.lean:53, each n is assigned a value, which we use as the coefficients of the power series.",
+   "date": "2026-10-25",
+   "verdict": "unrelated power-series use; no Tate sheaf comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SignedTwistSiteTransport",
+  "date": "2026-10-25",
+  "group": "A6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedTwistSiteTransportData",
+  "file": "lean/Sheaf/Paper/SignedTwistSiteTransportData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.signedSiteCoefficient",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.signedSiteCoefficient",
+   "WeilConjectures.PurityFiniteSetting.signedSiteEtale",
+   "WeilConjectures.PurityFiniteSetting.signedSitePro",
+   "WeilConjectures.PurityFiniteSetting.signedSiteModule",
+   "WeilConjectures.PurityFiniteSetting.signedSiteImage",
+   "WeilConjectures.PurityFiniteSetting.signedSiteEtaleEvaluation",
+   "WeilConjectures.PurityFiniteSetting.signedSiteProEvaluation",
+   "WeilConjectures.PurityFiniteSetting.SignedSiteEvaluation",
+   "WeilConjectures.PurityFiniteSetting.SignedSiteProducts",
+   "WeilConjectures.PurityFiniteSetting.SignedSiteMultiplication",
+   "WeilConjectures.PurityFiniteSetting.SignedSiteGeometric",
+   "WeilConjectures.PurityFiniteSetting.signedSiteGeometricSection",
+   "WeilConjectures.PurityFiniteSetting.SignedSiteGeometricLaws",
+   "WeilConjectures.PurityFiniteSetting.SignedSitePullbackSquare",
+   "WeilConjectures.PurityFiniteSetting.SignedSiteTheta",
+   "WeilConjectures.PurityFiniteSetting.SignedSiteThetaNormalized",
+   "WeilConjectures.PurityFiniteSetting.SignedSiteRootCoefficient"
+  ],
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-25",
+  "statement": "abbrev signedSiteCoefficient (P : PurityFiniteSetting.{u}) (n : ℕ)"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "independent cc review: delivered SignedTwistSiteTransportData defs vs clone a25e16ef939 SignedTwistSiteTransport lines 44-284 (byte-identical); theorem signature byte-identical; 3 new sorry statements = item conjuncts (node lean.statement = signature ×3); root_normalized compiled in scratch against live defs, axioms propext/Classical.choice/Quot.sound; 0 importers"
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-epp-weak-perfect-residue",
+ "kind": "statement",
+ "title": "Weak Epp over a perfect residue field",
+ "statement": "Let $A\\to B$ be an injective local map of discrete valuation rings [def-sc-discrete-valuation-ring], with fraction fields $K\\subseteq L$ [def-pc-field-extension]. Local means that the inverse image of the target maximal ideal is the source maximal ideal. Assume that $k=A/\\mathfrak m_A$ is perfect (characteristic zero, or characteristic $p>0$ with surjective Frobenius), and that $B/\\mathfrak m_B$ is generated as a field by finitely many elements over $k$. There is a finite field extension $N/K$ such that, if $R_N$ is the integral closure of $A$ in $N$ and $C_N$ is the integral closure of $B$ in $(L\\otimes_KN)_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product], then for every maximal ideal $q$ of $C_N$, the contraction $n=q\\cap R_N$ is maximal, both $(R_N)_n$ and $(C_N)_q$ are discrete valuation rings [def-weil-pbc-localization-at-prime], and $n(C_N)_q=q(C_N)_q$. Here finite means finite-dimensional over the base field, and the subscript red means quotient by the ideal of all nilpotent elements. No essential finite type hypothesis on $B/A$, completeness, separability of $N/K$, or stability under further extensions is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F9, theorem-epp, perfect-residue finitely-generated-residue specialization used explicitly in Tag 09II (proposition-epp-essentially-finite-type), proof paragraph applying Epp to A' and B' at its finitely many maximal ideals."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "First handle residue characteristic zero. Choose a uniformizer $\\pi$ of $A$. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], its nonzero nonunit image in $B$ is $u\\theta^e$ for a uniformizer $\\theta$ and $e\\geq1$. Put $S=A[t]/(t^e-\\pi)$. The root-algebra theorem [lem-sbc-dvr-uniformizer-root-algebra] makes $S$ a DVR with uniformizer $t$. It is generated over $A$ by $1,t,\\ldots,t^{e-1}$; put $N=\\operatorname{Frac}(S)$. Since $S[1/\\pi]=S[1/t]$ is a field (invert a nonzero element by its uniformizer-power expression), $N/K$ is finite. For any maximal ideal $q$ of $C_N$, [lem-sfb-dvr-algebraic-normalization-structure], case (a), gives a maximal contraction $n$ and DVRs $(R_N)_n,(C_N)_q$. To identify $R_N=S$, note $S/A$ is integral by its monic equation. An $x\\in N$ integral over $A$ is integral over $S$. If $x=u t^{-r}$ with $u$ a unit and $r>0$, multiplying a monic equation of degree $h$ by $t^{rh}$ gives $u^h\\in(t)$, impossible. The uniformizer-power factorization therefore puts $x$ in $S$. Its base index is $e$, since $\\pi=t^e$. Apply [lem-sfb-abhyankar-arbitrary-dvr-branches] with $d=e$ to obtain $n(C_N)_q=q(C_N)_q$. This finishes characteristic zero; below assume residue characteristic $p>0$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-sbc-dvr-uniformizer-root-algebra",
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-sfb-abhyankar-arbitrary-dvr-branches"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, first proof paragraph; Tags 09EV (root algebra) and 0BRM (Abhyankar)"
+   }
+  },
+  {
+   "text": "Write $l=B/\\mathfrak m_B$. Apply [lem-sfb-finitely-generated-residue-perfect-core] to the given finitely generated field extension $l/k$. Every element of $l_{\\mathrm{perf}}$ is separable algebraic over $k$. Apply [lem-sfb-epp-strict-complete-reduction] with a fixed uniformizer $\\pi$ of $A$. This supplies the complete pair $A^{\\prime}\\to B^{\\prime}$, its lower uniformizer $\\pi^{\\prime}$, and residue fields $k^{\\prime}\\subseteq l^{\\prime}$ with $k^{\\prime}$ algebraically closed and equal to the perfect core of $l^{\\prime}$. It remains to construct a weak solution for this pair in the prescribed form required for descent.",
+   "uses": [
+    "lem-sfb-finitely-generated-residue-perfect-core",
+    "lem-sfb-epp-strict-complete-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, positive-characteristic residue and completion reduction; ILO IV 3.2.3(ii),(iii) for the residue hypothesis"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-epp-compatible-coefficient-dvrs] to this complete pair. Obtain $A_0\\to A^{\\prime}$, $A_0\\to D\\to B^{\\prime}$ with commuting square, residue fields $k^{\\prime}$ and $l^{\\prime}$, $\\mathfrak m_{A_0}D=\\mathfrak m_D$, and finite fraction-field extension $\\operatorname{Frac}(B^{\\prime})/\\operatorname{Frac}(D)$. All hypotheses of [lem-sfb-epp-finite-coefficient-triple] hold for $U=A_0,V=D,W=B^{\\prime}$: completeness, algebraic closedness, the perfect-core equality, and finite upper fraction-field degree are precisely the preceding structural conclusions. It yields a finite weak solution $H/F_0$, where $F_0=\\operatorname{Frac}(A_0)$. In equal characteristic $p$ take its prescribed separable-plus-uniformizer-root form.",
+   "uses": [
+    "lem-sfb-epp-compatible-coefficient-dvrs",
+    "lem-sfb-epp-finite-coefficient-triple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, last two coefficient-ring paragraphs; Tag 09F8, lemma-special-case"
+   }
+  },
+  {
+   "text": "In equal characteristic $p$, $A_0\\to A^{\\prime}$ is an isomorphism sending $t$ to $\\pi^{\\prime}$, by [lem-sfb-epp-compatible-coefficient-dvrs]. Transport the solution $H$ across this isomorphism. Its prescribed compositum form is then exactly the one required by [lem-sfb-epp-strict-complete-reduction]. The descent assertion supplies the required finite weak solution for $A\\to B$. This handles equal characteristic; only characteristic zero of $K$ with residue characteristic $p$ remains.",
+   "uses": [
+    "lem-sfb-epp-compatible-coefficient-dvrs",
+    "lem-sfb-epp-strict-complete-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, k[[t]] paragraph and completion-descent paragraph"
+   }
+  },
+  {
+   "text": "In the mixed case put $K^{\\prime}=\\operatorname{Frac}(A^{\\prime})$ and $M=\\operatorname{Frac}(B^{\\prime})$. Apply case (a) of [lem-sfb-dvr-algebraic-normalization-structure] to $A_0\\to A^{\\prime}$ and $H/F_0$. Choose a field factor $N$ of $(K^{\\prime}\\otimes_{F_0}H)_{\\mathrm{red}}$; it is finite over $K^{\\prime}$. Associativity identifies $(M\\otimes_{K^{\\prime}}N)_{\\mathrm{red}}$ with a product of factors of $(M\\otimes_{F_0}H)_{\\mathrm{red}}$: tensor the finite product decomposition over $K^{\\prime}$ and then reduce; images of nilpotents remain nilpotent after tensoring, and a finite sum of multiples of nilpotents is nilpotent. Thus quotienting the tensor product by their image ideal does not change its reduction. For a chosen local upper branch $T$, the weak solution $H$ gives a lower local DVR $S$ with $\\mathfrak m_ST=\\mathfrak m_T$. The normalization structure theorem applied to $A^{\\prime}\\to B^{\\prime}$ and $N/K^{\\prime}$ supplies an intermediate local DVR $R$. The maps $S\\to R\\to T$ exist by monic equations [def-weil-pbc-integral-closure]: elements integral over $A_0$ in $H$ are integral over $A^{\\prime}$ in $N$, and those integral over $A^{\\prime}$ are integral over $B^{\\prime}$ in the upper factor; localization at the contractions makes both maps local. Write a uniformizer of $S$ as $u r^a$ in $R$, and $r$ as $v t^b$ in $T$, using [lem-weil-pbc-dvr-unit-times-uniformizer-power]. Locality gives $a,b\\geq1$. The equality $\\mathfrak m_ST=\\mathfrak m_T$ forces $ab=1$, hence $b=1$ and $\\mathfrak m_RT=\\mathfrak m_T$. Thus $N$ is a weak solution for $A^{\\prime}\\to B^{\\prime}$.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, change from the coefficient DVR to the original complete lower DVR; Tag 09EM, normalized factors; index-one intermediate-ring argument written explicitly"
+   }
+  },
+  {
+   "text": "Apply the mixed-characteristic descent assertion of [lem-sfb-epp-strict-complete-reduction] to the finite weak solution $N/K^{\\prime}$ just constructed. There is no inseparability restriction in characteristic zero. It produces a finite weak solution for the original $A\\to B$. Unpacking its definition gives exactly the maximal contraction, both DVR localizations, and maximal-ideal equality required in the statement, for every maximal ideal of the upper integral closure.",
+   "uses": [
+    "lem-sfb-epp-strict-complete-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, completion descent and final coefficient reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-sfb-abhyankar-arbitrary-dvr-branches",
+  "lem-sfb-finitely-generated-residue-perfect-core",
+  "lem-sfb-epp-strict-complete-reduction",
+  "lem-sfb-epp-compatible-coefficient-dvrs",
+  "lem-sfb-epp-finite-coefficient-triple",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F9, theorem-epp, proof; perfect-core hypothesis supplied by ILO IV 3.2.3(ii),(iii). The complete finite-coefficient triple is Tag 09F8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Epp elimination of ramification for a local extension of discrete valuation rings with perfect lower residue field and finitely generated upper residue field yields a finite fraction field extension with ramification index one",
+   "results": "{\"t\": \"2026-10-24T04:06:26Z\", \"tool\": \"leanfinder\", \"query\": \"Epp elimination of ramification for a local extension of discrete valuation rings with perfect lower residue field and finitely generated upper residue field yields a finite fraction field extension with ramification index one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Algebra.instFormallyUnramifiedResidueField\"], \"digest\": \"837843d0554429c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramification index formulas and consequences of existing unramifiedness do not produce a finite extension eliminating ramification."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Ideal.ramificationIdx",
+   "results": "{\"t\": \"2026-10-24T04:06:22Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Ideal.ramificationIdx\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramification index formulas and consequences of existing unramifiedness do not produce a finite extension eliminating ramification."
+  },
+  {
+   "tool": "grep",
+   "query": "Epp|eliminat.*ramification|weak.*solution",
+   "results": "{\"t\": \"2026-10-24T04:06:22Z\", \"tool\": \"grep\", \"query\": \"Epp|eliminat.*ramification|weak.*solution\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\"], \"digest\": \"9de77b14ab30e9b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramification index formulas and consequences of existing unramifiedness do not produce a finite extension eliminating ramification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For DVRs with perfect base residue field and finitely generated residue extension a finite base field extension eliminates wild ramification in every normalized tensor factor",
+   "results": "{\"t\": \"2026-10-24T04:06:23Z\", \"tool\": \"leansearch\", \"query\": \"For DVRs with perfect base residue field and finitely generated residue extension a finite base field extension eliminates wild ramification in every normalized tensor factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_le_finrank\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"Algebra.Unramified.baseChange\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"Ideal.sum_ramification_inertia\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"IsUnramifiedAtInfinitePlaces.bot\"], \"digest\": \"ab05592da5dcce05\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramification index formulas and consequences of existing unramifiedness do not produce a finite extension eliminating ramification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak Epp theorem for perfect residue fields: after finite extension of the lower fraction field every normalized base changed DVR has maximal ideal generated by the lower uniformizer",
+   "results": "{\"t\": \"2026-10-24T04:06:27Z\", \"tool\": \"leanfinder\", \"query\": \"Weak Epp theorem for perfect residue fields: after finite extension of the lower fraction field every normalized base changed DVR has maximal ideal generated by the lower uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\"], \"digest\": \"98e90e8094b7c05d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramification index formulas and consequences of existing unramifiedness do not produce a finite extension eliminating ramification."
+  },
+  {
+   "tool": "grep",
+   "query": "Epp|eliminat.*ramification|weakly.unramified",
+   "results": "{\"t\": \"2026-10-24T04:42:39Z\", \"tool\": \"grep\", \"query\": \"Epp|eliminat.*ramification|weakly.unramified\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"410a93be9a576780\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existing unramifiedness and ramification formulas do not construct the Epp extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite extension of the lower fraction field makes every normalized branch of an extension of DVRs have ramification index one",
+   "results": "{\"t\": \"2026-10-24T04:42:40Z\", \"tool\": \"leansearch\", \"query\": \"A finite extension of the lower fraction field makes every normalized branch of an extension of DVRs have ramification index one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdxIn\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.Factors.ramificationIdx_ne_zero\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_one_iff\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\"], \"digest\": \"d961e0d65bb16b4f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existing unramifiedness and ramification formulas do not construct the Epp extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Ideal.ramificationIdx",
+   "results": "{\"t\": \"2026-10-24T04:42:40Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Ideal.ramificationIdx\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existing unramifiedness and ramification formulas do not construct the Epp extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite base extension eliminates ramification after normalization for local maps of discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T04:42:42Z\", \"tool\": \"leanfinder\", \"query\": \"Finite base extension eliminates ramification after normalization for local maps of discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsUnramifiedAt.of_liesOver\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"IsLocalization.AtPrime.ramificationIdx_map_eq_ramificationIdx\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Ideal.ramificationIdx_eq_one_of_map_localization\"], \"digest\": \"ca9a5865a84cea4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existing unramifiedness and ramification formulas do not construct the Epp extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epp elimination of ramification for an injective local extension of discrete valuation rings with perfect residue field and finitely generated residue extension",
+   "results": "{\"t\": \"2026-10-24T04:42:43Z\", \"tool\": \"leanfinder\", \"query\": \"Epp elimination of ramification for an injective local extension of discrete valuation rings with perfect residue field and finitely generated residue extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Ideal.ramificationIdx_le_finrank\", \"Algebra.IsUnramifiedAt.of_liesOver\"], \"digest\": \"bce64343d0737aec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existing unramifiedness and ramification formulas do not construct the Epp extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-essentially-finite-type-traits",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation.",
+   "via": [
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-weak-perfect-residue",
+  "worker": "stage1",
+  "summary": "Statement retained. Split the Epp argument into tame cancellation, the finitely generated residue perfect-core bound, strict/completion descent, compatible coefficient DVRs, and the finite coefficient triple. Existing normalization and root-algebra nodes are reused; the mixed-characteristic intermediate-ring index-one calculation is written out, not an arbitrary stability assertion for weak solutions.",
+  "blueprint": "Historical auxiliary input through lem-sfb-epp-essentially-finite-type-traits to det-thm-sf-ctf-stability-direct-images proof (3); the latest blueprint direct-image proof (3) no longer contains the algebraic detour. Kept inherited null ancestor and creation chain; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-dvr-uniformizer-root-algebra",
+    "why": "Generic root-of-uniformizer DVR algebra used in the tame initial step; the unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic uniformizer-power factorization for the tame index and the elementary intermediate-ring calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-5b13010f5",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-5b13010f5 (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes, the cited statements and the sources: Stacks more-algebra 09EM, 09EJ, 0BRM, 09ES, 09ET, 09F8 and 09F9 at their labels, and ILO IV 3.2.1-3.2.3 on pp.55-56. The item statement is unchanged; perfect k with finitely generated l implies the Epp condition through the new perfect-core node (ILO 3.2.3 (i)-(iii)). Step 1 (residue char 0) is the Abhyankar case: the root algebra is a DVR, R_N=S is proved in the step, and the arbitrary-DVR Abhyankar node (0BRM via 09E7, no finiteness of L/K) applies with d=e. Steps 2-4 follow the 09F9 order. Strict henselization and completion (09ET, 09EJ, 09ES) give k'=k^sep=k^alg; the equality k'=perfect core of l' holds by ILO 3.2.2 plus perfectness of k'. The Cohen or k'[[t]] coefficient square is next: in equal char A0=k'[[t]] is isomorphic to A' with t to pi'; D to B' exists by formal smoothness and B' is finite over D. Then 09F8 applies with U=A0, V=D, W=B', and I checked all five hypotheses. Its char-p compositum clause is automatic for finite extensions of k((t)), as Stacks 09F9 says. Step 5 (mixed char) writes out the solutions-go-down calculation: the tensor-product reductions agree, the maps S->R->T are local, and ab=1. It is marked elementary and I accept that. Step 6 is the char-0 descent. All new nodes are true, statement-only, in the same unit, strictly smaller than the item, and none restates one of its clauses. The DAG grep for 0BRM/09F9/09F8/09ET/09EJ/09ES/Epp/perfect core found no duplicates; the lem-per-epp-* (ILO, excellent mixed-char) and lem-sbc-* Abhyankar nodes (finite separable settings) differ. Accepted tool_use: lem-sbc-dvr-uniformizer-root-algebra (sk-prop-input-spreading), a generic root-of-uniformizer DVR algebra. No changes made. This is not a re-split delivery: there is no repair note."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EppWeakPerfectResidue",
+  "declaration": "IsDiscreteValuationRing.exists_epp_weak_perfect_residue",
+  "file": "lean/Sheaf/RingTheory/EppWeakPerfectResidue.lean",
+  "statement": "theorem exists_epp_weak_perfect_residue (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (B : Type w) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] (hinj : Function.Injective (algebraMap A B)) (L : Type x) [Field L] [Algebra B L] [IsFractionRing B L] [Algebra A L] [Algebra K L] [IsScalarTower A B L] [IsScalarTower A K L] [PerfectField (IsLocalRing.ResidueField A)] (hfg : (⊤ : IntermediateField (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField B)).FG) : ∃ (N : Type (max u v w x)) (_ : Field N) (_ : Algebra K N) (_ : Algebra A N) (_ : IsScalarTower A K N), Module.Finite K N ∧ (fun f : integralClosure A N →+* integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)) => ∀ (q : Ideal (integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)))) [q.IsMaximal], (q.comap f).IsMaximal ∧ (∃ hdom : IsDomain (Localization.AtPrime (q.comap f)), @IsDiscreteValuationRing (Localization.AtPrime (q.comap f)) _ hdom) ∧ (∃ hdom : IsDomain (Localization.AtPrime q), @IsDiscreteValuationRing (Localization.AtPrime q) _ hdom) ∧ Ideal.map ((algebraMap _ (Localization.AtPrime q)).comp f) (q.comap f) = Ideal.map (algebraMap _ (Localization.AtPrime q)) q) (((((Ideal.Quotient.mkₐ K (nilradical (L ⊗[K] N))).comp Algebra.TensorProduct.includeRight).restrictScalars A).comp (integralClosure A N).val).codRestrict ((integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N))).restrictScalars A) (fun a => (a.property.map (((Ideal.Quotient.mkₐ K (nilradical (L ⊗[K] N))).comp Algebra.TensorProduct.includeRight).restrictScalars A)).tower_top)).toRingHom",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical normalization map is constructed inline using includeRight, quotient by nilradical, restrictScalars and codRestrict; the lambda is applied to that explicit map and beta-reduces, with no let/have binder or arbitrary map. The downstream essentially-finite-type helper module is deliberately not imported, avoiding an eventual proof import cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08dcf1890",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Read the node, the 5 Mathlib stmt_dep records, Stacks more-algebra definition-solution (l.34445) and theorem-epp (l.35518), the delivered module and the report. Clause match: DVR binders; injective algebraMap plus IsLocalHom (equals the node's contraction-of-maximal-ideal condition; hinj is not redundant); fraction fields with towers that pin the unique K→L; PerfectField on the A-residue field; ⊤ IntermediateField FG; ∃ N : Type (max u v w x) with Module.Finite K N and A-tower; R_N = integralClosure A N; C_N = integralClosure B ((L⊗[K]N)/nilradical); canonical inline map (includeRight→mkₐ→restrictScalars→codRestrict, no choice); every maximal q: comap maximal, both localizations DVR (∃ IsDomain), n(C_N)_q = q(C_N)_q. No extra hypotheses; universes independent; edge cases (char 0/p/mixed, A=B, inseparable N, several factors) covered. lean.statement verbatim (script check); only the lean field changed vs live; sorry only; docstrings carry source, blueprint id and the 6 proof steps; report has both sections. Note: the inline map body is identical to downstream eppNormalizationMap (owned by lem-sfb-epp-essentially-finite-type-traits, which uses this item as a proof dep), so inlining avoids an import cycle and creates no duplicate declaration. No compile: no change made."
+ }
+}

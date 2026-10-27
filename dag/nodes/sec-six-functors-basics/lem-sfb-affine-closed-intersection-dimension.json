@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-affine-closed-intersection-dimension",
+ "kind": "statement",
+ "title": "Affine-space intersection dimension lower bound",
+ "statement": "Let $k$ be a field [def-weil-field] and $n\\in\\mathbf N$. Let $A,B\\subseteq|\\mathbf A^n_k|$ be nonempty closed subsets of affine space [def-sbc-affine-space], with their induced topologies. Suppose $\\dim A=a$ and $\\dim B=b$ for integers $a,b\\geq0$, where dimension is topological Krull dimension [def-kun-topological-krull-dimension]. Suppose $A$ and $B$ are equidimensional, meaning that every irreducible component [def-weil-irreducible-components] of $A$ has dimension $a$ and every irreducible component of $B$ has dimension $b$. Then every irreducible component of $A\\cap B$ has dimension at least $a+b-n$. In particular, if $A\\cap B$ is nonempty, then $\\dim(A\\cap B)\\geq a+b-n$. No nonemptiness conclusion for $A\\cap B$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2Q, varieties-lemma-intersection-in-affine-space, lines 6338-6362; last sentence is its immediate nonempty-intersection consequence."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-affine-space",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=k[x_1,\\ldots,x_n]$. The description of closed sets in [lem-weil-pbc-spec-irreducible-closed-subsets-primes] gives ideals $I,J\\subset R$ with $A=V(I)$ and $B=V(J)$. Set $X=\\operatorname{Spec}(R/I)$ and $Y=\\operatorname{Spec}(R/J)$. By [lem-weil-pbc-spec-quotient-closed-immersion] and [def-weil-closed-immersion], these are closed subschemes of $\\operatorname{Spec}R=\\mathbf A^n_k$, with images $V(I),V(J)$. Explicitly, the primes of $R/I$ correspond to primes of $R$ containing $I$, by inverse image and $\\mathfrak p\\mapsto\\mathfrak p/I$; the basic open of $\\bar f$ corresponds to $V(I)\\cap D(f)$. Thus the induced topologies are exactly those in the item. Consequently $X,Y$ are nonempty, finite type over $k$, and equidimensional of dimensions $a,b$.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2Q, first sentence of proof: choose closed subscheme structures on the two closed subsets."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], $T=X\\times_kY=\\operatorname{Spec}S$ where $S=(R/I)\\otimes_k(R/J)$. Write $u_i=\\bar x_i\\otimes1$ and $v_i=1\\otimes\\bar x_i$. The $2n$ elements $u_i,v_i$ generate $S$ over $k$; its presentation is $k[u_1,\\ldots,u_n,v_1,\\ldots,v_n]/(I(u),J(v))$, since maps out of either algebra are precisely pairs of $k$-algebra maps from $R/I,R/J$. Let $H=(u_1-v_1,\\ldots,u_n-v_n)$ and $D=S/H$. There is an explicit isomorphism $D\\cong R/(I+J)$: both $u_i,v_i$ map to the class of $x_i$; inversely the class of $x_i$ maps to the common class of $u_i,v_i$. These maps respect all relations and their composites fix the generators. Hence $Z=\\operatorname{Spec}D$ is a closed subscheme of $T$ by [lem-weil-pbc-spec-quotient-closed-immersion], and its underlying space is homeomorphic to $A\\cap B=V(I+J)$ by the prime/basic-open correspondence of step 1. By [lem-wf-affine-noetherian-components], $S$ is Noetherian. Both $T,Z$ are finite type over $k$ by their displayed finite generating sets.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2Q, diagonal equations in the first paragraph of the proof; explicit coordinate-ring presentation."
+   }
+  },
+  {
+   "text": "The structure map $X\\to\\operatorname{Spec}k$ is flat: every affine coordinate algebra is a $k$-vector space, so [lem-weil-pbc-module-over-field-flat] and [lem-weil-pbc-flat-morphism-affine-criterion] apply. Thus the projection $p:T\\to Y$ is flat by [lem-weil-pbc-flat-morphism-base-change]. The finite-type base-change and composition assertions of [lem-sfb-finite-type-composition-base-change] show that $p$ and $T\\to\\operatorname{Spec}k$ are finite type. In particular $p$ and $Y\\to\\operatorname{Spec}k$ are locally finite type, as required for the fibre-dimension equality.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2M, lemma-dimension-product-locally-algebraic, proof of (1), flatness of the projection."
+   }
+  },
+  {
+   "text": "Fix $z\\in T$ with projections $x\\in X,y\\in Y$. Apply [lem-sc-fibre-dimension-after-base-change] to $X\\to\\operatorname{Spec}k$ base changed along $Y\\to\\operatorname{Spec}k$: $\\dim_z(T_y)=\\dim_xX$, since the fibre of $X$ over the unique point of $\\operatorname{Spec}k$ is $X$. Apply [lem-sbc-flat-composite-fibre-dimension-at-point] to $T\\xrightarrow pY\\to\\operatorname{Spec}k$, using step 3. The fibres over the unique point of $\\operatorname{Spec}k$ are $T,Y$ themselves, so $\\dim_zT=\\dim_z(T_y)+\\dim_yY=\\dim_xX+\\dim_yY$. Finally [lem-sbc-equidimensional-open-local-dimension], with the whole schemes as the opens and the equidimensionality in step 1, gives $\\dim_xX=a$ and $\\dim_yY=b$. Thus $\\dim_zT=a+b$ for every $z\\in T$. These are local topological dimensions, not local-ring dimensions.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-sbc-equidimensional-open-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2Q and 0B2M(1); the pointwise product-dimension formula, derived from Morphisms Tags 02FY and 02JS."
+   }
+  },
+  {
+   "text": "Let $C$ be any irreducible component of $Z$. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], $C=V_D(\\mathfrak q)$ for a minimal prime $\\mathfrak q\\subset D$. Let $P\\subset S$ be its inverse image. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], the point $\\eta=P$ of $T$ has closure $V_S(P)$, which is exactly the image of $C$ under the closed immersion $Z\\to T$. Thus $C$, regarded as a closed subset of $T$, is nonempty and irreducible, and $\\eta$ is its generic point. Since $S$ is Noetherian and $H\\subset P$, [lem-weil-pbc-noetherian-height-quotient-bound] applied to the $n$ differences gives $\\operatorname{ht}_S(P)\\leq\\operatorname{ht}_{D}(\\mathfrak q)+n=n$. Indeed the only prime contained in the minimal prime $\\mathfrak q$ is itself, so every chain ending below it has length zero. Repeated or zero differences cause no problem: the bound is by the length $n$ of the generating list.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2Q, local quotient dimension estimate using Algebra Tag 00KW; generic-point version of the same height estimate."
+   }
+  },
+  {
+   "text": "For the whole affine open $T=\\operatorname{Spec}S$, [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{T,\\eta}$ with $S_P$. By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim S_P=\\operatorname{ht}_S(P)\\leq n$. Apply [lem-kun-dimension-formula] to the finite-type $k$-scheme $T$ at $\\eta$ and use step 4: $a+b=\\dim\\mathcal O_{T,\\eta}+\\operatorname{trdeg}_k\\kappa_T(\\eta)$. Apply [lem-sc-closed-irreducible-dimension-trdeg] to the closed irreducible subset $C\\subset T$ with generic point $\\eta$: $\\dim C=\\operatorname{trdeg}_k\\kappa_T(\\eta)$. The two equations give $a+b=\\dim S_P+\\dim C\\leq n+\\dim C$, hence $\\dim C\\geq a+b-n$. All terms being subtracted are finite integers: $\\dim S_P\\leq n$, and the displayed equality has finite left side $a+b$. The homeomorphism in step 2 carries this bound to every component of $A\\cap B$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-kun-dimension-formula",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic, (6),(10), equivalently Morphisms Tag 02FX; final dimension conversion in Tag 0B2Q."
+   }
+  },
+  {
+   "text": "For completeness, suppose $A\\cap B$ is nonempty. Its dimension is a finite nonnegative integer $d\\leq a$: any closed irreducible chain in $A\\cap B$ is such a chain in $A$, since the intersection is closed in $A$. By [def-kun-topological-krull-dimension], a chain of length $d$ is attained. Its last member $C$ is an irreducible component: a strictly larger irreducible subset would have irreducible closure strictly containing $C$, extending that chain to length $d+1$. The same chain and monotonicity give $\\dim C=d$. Step 6 therefore gives $\\dim(A\\cap B)=d\\geq a+b-n$. If the intersection is empty, it has no irreducible components, so the first conclusion is vacuous and the second is conditional. No nonemptiness of an affine intersection was used.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2Q, immediate nonempty-intersection consequence of the componentwise estimate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-kun-dimension-formula",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2Q and its cited Tags 0B2M, 0A21, 00KW. Same product/diagonal/height argument, evaluated at a component generic point using the existing dimension-formula nodes, instead of suppressing the component-isolation argument at closed points."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cone.*dim|dim.*cone|intersection.*dimension|dimension.*intersection",
+   "results": "{\"t\": \"2026-10-23T13:03:06Z\", \"tool\": \"grep\", \"query\": \"cone.*dim|dim.*cone|intersection.*dimension|dimension.*intersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"4dd64de1f8b0b97a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull height/quotient inequalities require a local-ring and dimension-comparison argument; they do not directly state the affine algebraic-set intersection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every irreducible component of the intersection of equidimensional closed subsets of affine n space has dimension at least dim X plus dim Y minus n",
+   "results": "{\"t\": \"2026-10-23T13:03:06Z\", \"tool\": \"leansearch\", \"query\": \"Every irreducible component of the intersection of equidimensional closed subsets of affine n space has dimension at least dim X plus dim Y minus n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"irreducibleComponents\", \"topologicalKrullDim_subspace_le\", \"irreducibleComponent_mem_irreducibleComponents\", \"isIrreducible_irreducibleComponent\", \"isClosed_of_mem_irreducibleComponents\", \"irreducibleComponents_eq_maximals_closed\", \"Submodule.finrank_sup_add_finrank_inf_eq\", \"irreducibleComponent_subset_connectedComponent\"], \"digest\": \"96ae1fcda58be38e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull height/quotient inequalities require a local-ring and dimension-comparison argument; they do not directly state the affine algebraic-set intersection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*dim|dim.*intersection|inter.*[Kk]rull|[Kk]rull.*inter",
+   "results": "{\"t\": \"2026-10-23T13:09:05Z\", \"tool\": \"grep\", \"query\": \"intersection.*dim|dim.*intersection|inter.*[Kk]rull|[Kk]rull.*inter\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\"], \"digest\": \"f6202b12eca1510c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull height/quotient inequalities require a local-ring and dimension-comparison argument; they do not directly state the affine algebraic-set intersection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"krullDim\", \"Ideal\"",
+   "results": "{\"t\": \"2026-10-23T13:09:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"krullDim\\\", \\\"Ideal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Ideal.mem_minimalPrimes_of_krullDimLE_zero\", \"Ring.KrullDimLE.nilradical_eq_maximalIdeal\", \"Ring.KrullDimLE.eq_maximalIdeal_of_isPrime\", \"Ring.KrullDimLE.radical_eq_maximalIdeal\", \"Ring.KrullDimLE.isNilpotent_iff_mem_maximalIdeal\", \"Ideal.krullDimLE_zero_quotient_iff_forall_minimalPrimes_isMaximal\", \"Ideal.finiteHeight_of_finiteRingKrullDim\", \"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\"], \"digest\": \"0bc8b0e2a9f17bf3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull height/quotient inequalities require a local-ring and dimension-comparison argument; they do not directly state the affine algebraic-set intersection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection dimension inequality for irreducible closed algebraic subsets of affine space: every component has dimension at least the sum minus the ambient dimension",
+   "results": "{\"t\": \"2026-10-23T13:09:08Z\", \"tool\": \"leanfinder\", \"query\": \"Intersection dimension inequality for irreducible closed algebraic subsets of affine space: every component has dimension at least the sum minus the ambient dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"height_le_ringKrullDim_quotient_add_spanFinrank\", \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"topologicalKrullDim_subspace_le\", \"AmpleSet.of_one_lt_codim\"], \"digest\": \"c3444eb0efbffc81\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull height/quotient inequalities require a local-ring and dimension-comparison argument; they do not directly state the affine algebraic-set intersection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank|ringKrullDim_le_ringKrullDim_add_spanFinrank",
+   "results": "{\"t\": \"2026-10-23T13:12:26Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank|ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\"], \"digest\": \"f403786a5c8d37ab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Krull height/quotient inequalities require a local-ring and dimension-comparison argument; they do not directly state the affine algebraic-set intersection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local topological dimension of a product of schemes over a field at a point equals the sum of local dimensions of its projections",
+   "results": "{\"t\": \"2026-10-23T14:10:28Z\", \"tool\": \"leanfinder\", \"query\": \"Local topological dimension of a product of schemes over a field at a point equals the sum of local dimensions of its projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk_prod\", \"Module.rankAtStalk_pi\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"AlgebraicGeometry.pointsPi\", \"AlgebraicGeometry.instCartesianMonoidalCategoryScheme\", \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"SSet.hasDimensionLT_prod\", \"SSet.hasDimensionLE_prod\"], \"digest\": \"1eb84b9324cc3d67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: module ranks, simplicial dimensions, or general fibre-product structure do not state the affine intersection theorem or pointwise dimension equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, Limits.pullback",
+   "results": "{\"t\": \"2026-10-23T14:11:19Z\", \"tool\": \"loogle\", \"query\": \"topologicalKrullDim, Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Limits.pullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: loogle: unknown identifier 'Limits.pullback'"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|dimension.*prod|prod.*dimension",
+   "results": "{\"t\": \"2026-10-23T14:11:50Z\", \"tool\": \"grep\", \"query\": \"topologicalKrullDimAt|dimension.*prod|prod.*dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: module ranks, simplicial dimensions, or general fibre-product structure do not state the affine intersection theorem or pointwise dimension equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local dimension of a fibre product of finite type schemes over a field is the sum of the local dimensions of the two factors",
+   "results": "{\"t\": \"2026-10-23T14:11:51Z\", \"tool\": \"leansearch\", \"query\": \"The local dimension of a fibre product of finite type schemes over a field is the sum of the local dimensions of the two factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_prod\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"Module.rankAtStalk_prod\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"Module.rankAtStalk_pi\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"45d50e9e3ec9fd96\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: module ranks, simplicial dimensions, or general fibre-product structure do not state the affine intersection theorem or pointwise dimension equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDimAt\"",
+   "results": "{\"t\": \"2026-10-23T14:12:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"topologicalKrullDimAt\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: module ranks, simplicial dimensions, or general fibre-product structure do not state the affine intersection theorem or pointwise dimension equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension at a point of the fibre product of two schemes locally of finite type over a field is additive",
+   "results": "{\"t\": \"2026-10-23T14:12:48Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension at a point of the fibre product of two schemes locally of finite type over a field is additive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.IsFinite.instFstScheme\"], \"digest\": \"7884fc536e712eeb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: module ranks, simplicial dimensions, or general fibre-product structure do not state the affine intersection theorem or pointwise dimension equality."
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*dimension|dimension.*intersection|height_le_height_add_encard_of_subset",
+   "results": "{\"t\": \"2026-10-23T14:14:58Z\", \"tool\": \"grep\", \"query\": \"intersection.*dimension|dimension.*intersection|height_le_height_add_encard_of_subset\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\"], \"digest\": \"3a0fd571ae43340a\"}",
+   "date": "2026-10-23",
+   "verdict": "partial match: Ideal.height_le_height_add_encard_of_subset is the algebraic height bound, already the existing Mathlib leaf lem-weil-pbc-noetherian-height-quotient-bound; the geometric product and dimension comparisons remain necessary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every irreducible component of the intersection of two equidimensional closed subsets of affine n space over a field has dimension at least their dimensions summed minus n",
+   "results": "{\"t\": \"2026-10-23T14:14:59Z\", \"tool\": \"leanfinder\", \"query\": \"Every irreducible component of the intersection of two equidimensional closed subsets of affine n space over a field has dimension at least their dimensions summed minus n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AmpleSet.of_one_lt_codim\", \"AffineSubspace.inter_nonempty_of_nonempty_of_sup_direction_eq_top\", \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"Submodule.finrank_sup_add_finrank_inf_eq\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf_of_nonempty\", \"ProjectiveSpectrum.sup_vanishingIdeal_le\", \"AlgebraicGeometry.Scheme.zeroLocus_biInf\"], \"digest\": \"bee9382f7fabeb5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: module ranks, simplicial dimensions, or general fibre-product structure do not state the affine intersection theorem or pointwise dimension equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-closed-intersection-dimension",
+  "date": "2026-10-23",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Hopf dimension inequality for a bilinear map without zero divisors. Geometric input: projective intersection dimension theorem applied to the Segre image and the projectivized kernel. Supporting input: Affine intersection inequality used after the cones have been shown to meet at the origin.",
+   "via": [
+    "lem-sfb-projective-closed-intersection-dimension",
+    "lem-sfb-hopf-bilinear-image-dimension",
+    "lem-sfb-nodal-special-clifford-subcurve",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-closed-intersection-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; expanded the diagonal-cut proof using only existing DAG nodes. Pointwise product dimension is derived from the cited flat-fibre formulas, not inferred from total product dimension. At a component generic point, the n-generator height bound and dimension formula give the componentwise lower bound. No new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Hopf dimension inequality for a bilinear map without zero divisors. Geometric input: projective intersection dimension theorem applied to the Segre image and the projectivized kernel. Supporting input: Affine intersection inequality used after the cones have been shown to meet at the origin.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic field-fibre dimension invariance used to prove the pointwise product formula of Stacks 0B2M; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Generic flat composite fibre-dimension equality, exactly the input cited in the proof of Stacks 0B2M."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Converts the given pure component dimensions into the local topological dimensions in the product formula."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Converts local topological dimension into local-ring dimension plus residue transcendence degree at a generic point."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Identifies the dimension of the chosen intersection component with its generic residue transcendence degree."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-kun-dimension-formula",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-842fc964e",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-842fc964e (reviewer sub-agent of L); spot-checked: Read the item and all 19 cited statements. The item has no new nodes or repair note. Its statement matches Stacks 0B2Q (varieties.tex 6338-6362) and is unchanged. Proof checked step by step. Step 1: closed sets are V(I), and Spec(R/I) maps homeomorphically onto V(I) by the quotient closed immersion. Step 2: T=Spec((R/I)⊗(R/J)), the diagonal quotient D≅R/(I+J) (checked on generators both ways), and S is Noetherian because it is a finitely generated k-algebra. Step 3: X→Spec k is flat (affine criterion plus field-module flatness), so p is flat by base change, and finite type follows from both clauses of the composition/base-change node. Step 4: dim_z T=a+b by 02FY and 02JS, exactly as in the proof of 0B2M(1); def-kun-dimension and def-kun-topological-dimension-at-point give the same local dimension. Step 5: a component is V(q) with q a minimal prime, and the n-generator bound gives ht P≤ht q+n=n with S Noetherian and H⊆P. Step 6: O_{T,η}=S_P, so dim S_P=ht P; then the dimension formula 02FX and dim C=trdeg κ_T(η) give dim C≥a+b-n. Step 7 is genuinely elementary: a chain of maximal length has an irreducible component as its top member. Edge cases checked: n=0, disjoint subsets, a+b<n, reducible equidimensional sets, nonreduced quotients, non-closed fields. No duplicate node (rg -L for 0B2Q, 0B2M and 00KW; lem-sfb-scheme-product-dimension states only total dimension). The dependency closure contains no cycle. No SGA citation. All 14 searches are recorded, covering the three kinds. The 5 declared tool_uses are generic dimension tools and are accepted. The only citer, the parent projective-intersection lemma, first reduces to irreducible subsets, so its use of the equidimensionality hypothesis is sound. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineClosedIntersectionDimension",
+  "declaration": "AlgebraicGeometry.AffineSpace.closed_intersection_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineClosedIntersectionDimension.lean",
+  "statement": "theorem AffineSpace.closed_intersection_dimension (k : Type u) [Field k] (n : ℕ) (A B : Set (AffineSpace (ULift.{u} (Fin n)) (Spec (.of k)))) (hAClosed : IsClosed A) (hBClosed : IsClosed B) (hANonempty : A.Nonempty) (hBNonempty : B.Nonempty) (a b : ℕ) (hADim : topologicalKrullDim A = (a : WithBot ℕ∞)) (hBDim : topologicalKrullDim B = (b : WithBot ℕ∞)) (hAEquidim : ∀ C ∈ irreducibleComponents ↥A, topologicalKrullDim C = (a : WithBot ℕ∞)) (hBEquidim : ∀ C ∈ irreducibleComponents ↥B, topologicalKrullDim C = (b : WithBot ℕ∞)) : (∀ C ∈ irreducibleComponents ↥(A ∩ B), ((a + b : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim C + (n : WithBot ℕ∞)) ∧ ((A ∩ B).Nonempty → ((a + b : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim ↥(A ∩ B) + (n : WithBot ℕ∞))",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5edd54136",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0B2Q: field k, n:ℕ, Mathlib AffineSpace (ULift (Fin n)) (Spec k) per def-sbc-affine-space match; closed, nonempty sets with subspace topology; dims a,b:ℕ in WithBot ℕ∞; equidimensionality over irreducibleComponents of ↥A, ↥B; componentwise and conditional-nonempty bounds written additively (a+b ≤ dim+n), equivalent to integer a+b−n for nonempty spaces, including a+b<n and infinite dims; no nonemptiness asserted. Edge cases n=0, disjoint inputs, reducible inputs, arbitrary fields checked. Node unchanged except lean; statement field verbatim; only change is the item record; no new nodes. Imported proof_dep project modules exist on live. Docstrings carry source place, blueprint id and the 7 proof steps; sorry only, no definitions. Consistent with the projective citer (Q52). No duplicates. No fixes; no compile (no file changed)."
+ }
+}

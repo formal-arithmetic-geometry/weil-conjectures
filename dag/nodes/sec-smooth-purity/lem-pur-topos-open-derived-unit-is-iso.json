@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-topos-open-derived-unit-is-iso",
+ "kind": "statement",
+ "title": "Actual open extension unit is invertible after exact localization",
+ "statement": "Let (C,J) be a small site, A a subterminal sheaf of sets, and R a sheaf of commutative rings. Use the actual extension/restriction adjunction and exact functors of [def-pur-topos-open-scalar-section-data]. Then the unit of its exact-derived adjunction is an isomorphism. No represented-open or enough-points assumption is used.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE and 0E8I; subterminal specialization of the sectionwise direct-sum formula."
+ },
+ "stmt_deps": [
+  "def-pur-topos-open-scalar-section-data",
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Yoneda and sheafification identify sections of A at U with arrows from the sheafified representable to A. Subterminality makes this Hom set a subsingleton. Each element-site object supplies one section, so the restricted direct-sum extension has exactly one summand and its inclusion is an isomorphism. The displayed direct-sum Hom adjunction is the actual unit.",
+   "uses": [
+    "lem-weil-pbc-element-presheaf-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The element projection is continuous and cocontinuous, so restriction commutes with sheafification. The sheafified extension/restriction composite is therefore isomorphic to the identity. Adjoint uniqueness (or the monad unit-isomorphism criterion) makes its actual unit invertible.",
+   "uses": [
+    "lem-weil-pbc-element-site-descent",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degreewise adjunction unit is invertible in every degree. The localization unit formula identifies the exact-derived unit on a quotient object with the quotient of this cochain unit composed with factorization isomorphisms. This is invertible. Every derived object is isomorphic to a quotient object, hence the natural transformation is invertible.",
+   "uses": [
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-element-presheaf-extension",
+  "lem-weil-pbc-element-site-descent",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE and 0E8I; explicit single-summand unit proof and exact localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The adjunction unit for extension by zero from a subterminal slice of a sheaf topos is an isomorphism",
+   "results": "Sheafification counit isomorphisms and skyscraper units; no subterminal module extension unit.",
+   "date": "2026-10-24",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.IsIso",
+   "results": "Adjunction.unit_isIso_of_L_fully_faithful, fullyFaithfulLOfIsIsoUnit; generic adjunction criteria.",
+   "date": "2026-10-24",
+   "verdict": "Generic criteria used only after constructing the actual composite isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_unit_of_iso|unit_isIso_of_L_fully_faithful",
+   "results": "CategoryTheory.Adjunction.isIso_unit_of_iso in Mathlib.CategoryTheory.Monad.Adjunction.",
+   "date": "2026-10-24",
+   "verdict": "Used for the ordinary actual adjunction after identifying its composite."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ToposOpenScalarUnit",
+  "date": "2026-10-24",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Purity transport Step 1 and Step 3, coefficient compatibility of the open constituent: normalization of scalar balancing by the actual open-adjunction unit, before taking an inverse-exchange adjunct.",
+   "via": [
+    "lem-pur-topos-open-scalar-derived-from-ordinary",
+    "lem-pur-topos-open-scalar-unit",
+    "lem-pur-topos-scalar-inverse-exchange-mate",
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ToposOpenUnitIsIso",
+  "file": "lean/Sheaf/CategoryTheory/ToposOpenUnitIsIso.lean",
+  "declaration": "SheafOfModules.ToposOpenScalar.toposOpenDerivedUnit_isIso",
+  "statement": "theorem toposOpenDerivedUnit_isIso\n    (hA : IsSubterminal A) :\n    IsIso (OpenTensorNormalization.exactDerivedAdjunction (normalizedAdjunction R A)).unit",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-24"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "independent cc review: the residual derived-from-ordinary statement against its node and the DerivedChangeOfRingsCochainModel structure, judged true; the moved section defs against the clone HEAD of ToposOpenScalarUnit, verbatim; the item node proof/proof_deps against the Lean assembly; importers of the item, none"
+ }
+}

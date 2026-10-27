@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-transverse-subgroup-product-open",
+ "kind": "statement",
+ "title": "Open multiplication for transverse smooth closed subgroups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $G$ be a smooth affine group scheme of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and let $H,K\\hookrightarrow G$ be smooth closed subgroup schemes [def-sc-group-scheme-subgroup]. For any group scheme $J$ write $\\operatorname{Lie}(J)=T_eJ$ for its tangent space at the identity; identify the tangent spaces of $H$ and $K$ with their images in $\\operatorname{Lie}(G)$. Suppose $H\\cap K=1$ as subgroup functors on all commutative $k$-algebras and that addition is an isomorphism of vector spaces\n$$\\operatorname{Lie}(H)\\oplus\\operatorname{Lie}(K)\\xrightarrow{\\sim}\\operatorname{Lie}(G).$$\nThen multiplication $H\\times_k K\\to G$, $(h,k)\\mapsto hk$, is an open immersion [def-weil-open-immersion]. Neither $G$, $H$ nor $K$ is assumed connected.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.33 proof of (d), printed p.266: multiplication is injective as a functor, its differential is an isomorphism, and the orbit map identifies its source with an open subscheme. The statement isolates the general transverse-subgroup criterion used in that argument."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-open-immersion",
+  "def-sc-scheme-tangent-space",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}C$. The affine quotient description of a closed immersion [def-weil-closed-immersion], applied to the affine open $G$ itself, gives $H=\\operatorname{Spec}A$ and $K=\\operatorname{Spec}B$ with $A=C/I$, $B=C/J$. Since $H\\to\\operatorname{Spec}k$ and $K\\to\\operatorname{Spec}k$ are smooth [def-sbc-smooth-morphisms], [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] shows that $k\\to A$ and $k\\to B$ are smooth ring maps; in particular $A$ and $B$ are finitely presented, hence finitely generated, $k$-algebras. By [lem-weil-pbc-fibre-product-affine-spectra], $H\\times_kK=\\operatorname{Spec}(A\\otimes_kB)$ with projections induced by $a\\mapsto a\\otimes1$ and $b\\mapsto1\\otimes b$; the elements $a_i\\otimes1,1\\otimes b_j$ from finite generating sets of $A$ and $B$ generate $A\\otimes_kB$, so $H\\times_kK$ is of finite type over $k$ [def-weil-finite-type-morphism]. The base-change clause of [lem-weil-pbc-smooth-ring-map-base-change-composition], applied to $k\\to B$ along $k\\to A$, makes $A\\to A\\otimes_kB$ smooth, and its composition clause makes $k\\to A\\otimes_kB$ smooth; by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] again, $H\\times_kK\\to\\operatorname{Spec}k$ is smooth. Since $G$ is smooth of finite type by hypothesis, both source and target of multiplication are smooth finite-type $k$-schemes.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VA (lemma-composition-smooth), 01VB (lemma-base-change-smooth); elementary finite-generation calculation on the affine product."
+   }
+  },
+  {
+   "text": "Let $R$ be any commutative $k$-algebra. If $hk=h\\prime k\\prime$ in $G(R)$, then $(h\\prime)^{-1}h=k\\prime k^{-1}$ lies in $H(R)\\cap K(R)$, which is $\\{1\\}$ by hypothesis. Hence $h=h\\prime$ and $k=k\\prime$. This uses the subgroup inclusions on $R$-points [def-sc-group-scheme-subgroup], including nonreduced $R$. Thus multiplication is injective on all affine $k$-scheme tests. For any $k$-scheme $T$, two maps $T\\to H\\times_kK$ with equal composites agree on every affine open of $T$ by that calculation, and therefore agree as scheme morphisms. For an arbitrary scheme test with equal composites, those composites give the same map to $\\operatorname{Spec}k$, so it reduces to a $k$-scheme test. Multiplication is a monomorphism.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(d), proof, printed p.266: trivial intersection as functors implies injectivity."
+   }
+  },
+  {
+   "text": "Under the projection identification $T_{(e,e)}(H\\times_kK)=T_eH\\oplus T_eK$ of [lem-sc-product-tangent-space-direct-sum], the tangent map of $H\\times K\\to G\\times G$ is the pair of the inclusion tangent maps: this follows by composing with the two projections, using the tangent map as composition on dual-number maps [def-sc-scheme-tangent-space]. Now [lem-sc-group-addition-tangent-differential], whose group law is written additively but need not be commutative, says the tangent map of multiplication on $G$ sends $(v,w)$ to $v+w$. Consequently $dm_{(e,e)}$ is exactly the addition isomorphism in the hypothesis.",
+   "uses": [
+    "lem-sc-product-tangent-space-direct-sum",
+    "def-sc-scheme-tangent-space",
+    "lem-sc-group-addition-tangent-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(d), proof, printed p.266: multiplication induces an isomorphism on identity tangent spaces."
+   }
+  },
+  {
+   "text": "Fix $(h,k)\\in H(k)\\times K(k)$. Define the scheme automorphisms $a(u,v)=(hu,vk)$ on $H\\times K$ and $b(g)=hgk$ on $G$. Their inverses use $h^{-1},k^{-1}$, and the group axioms [def-sc-group-scheme] give the identity $m\\circ a=b\\circ m$ on all algebra-valued points, hence as scheme morphisms. The automorphism $a$ sends $(e,e)$ to $(h,k)$ and $b$ sends $e$ to $hk$. Differentiation is composition on dual-number maps [def-sc-scheme-tangent-space], so $dm_{(h,k)}\\,da_{(e,e)}=db_e\\,dm_{(e,e)}$; differentiating the inverse identities shows $da,db$ are invertible. Step 3 now makes $dm_{(h,k)}$ invertible. The product universal property [def-pc-fibre-product] identifies all rational points of $H\\times_kK$ with such pairs. No connectedness or conjugation-stability assumption is used.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-scheme-tangent-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(d), printed p.266: orbit-map argument; explicit left H and right K translation identities."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-tangent-isomorphism-etale] to $m:H\\times_kK\\to G$: the field is algebraically closed, step 1 verifies smoothness and finite type, and step 4 verifies the differential condition at every rational point, including every component. Thus $m$ is etale. By [def-weil-etale-morphism] it is flat and locally of finite presentation. Together with the monomorphism of step 2 these are precisely the hypotheses of [lem-pe-flat-lfp-monomorphism-open], which proves that $m$ is an open immersion.",
+   "uses": [
+    "lem-sfb-smooth-tangent-isomorphism-etale",
+    "def-weil-etale-morphism",
+    "lem-pe-flat-lfp-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025G (theorem-etale-radicial-open), implication (3) implies (1); Milne printed p.267 for the smooth tangent criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "def-sc-group-scheme-subgroup",
+  "lem-sc-product-tangent-space-direct-sum",
+  "def-sc-scheme-tangent-space",
+  "lem-sc-group-addition-tangent-differential",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "lem-sfb-smooth-tangent-isomorphism-etale",
+  "def-weil-etale-morphism",
+  "lem-pe-flat-lfp-monomorphism-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.33(d), printed p.266, general transverse-subgroup form; identity differential and explicit translations followed by the Stacks etale-monomorphism criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(tangent|differential).*(iso|[ée]tale)|([ée]tale|Etale).*([Mm]ono|[Oo]pen[Ii]mmersion)",
+   "results": "Actual search output: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned open-immersion permanence and analytic manifold immersion declarations do not state this group-scheme multiplication criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For smooth algebraic subgroups H K with trivial intersection and Lie H direct sum Lie K equal Lie G multiplication H times K into G is open immersion",
+   "results": "Actual search output: 8 hits; AlgebraicGeometry.instIsSmoothOfIsOpenImmersion, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.isOpenImmersion_isMultiplicative, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion, AlgebraicGeometry.instIsOpenImmersionInlScheme, AlgebraicGeometry.isOpenImmersion_sigmaDesc, AlgebraicGeometry.IsOpenImmersion.comp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.comp. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned open-immersion permanence and analytic manifold immersion declarations do not state this group-scheme multiplication criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Etale",
+   "results": "Actual search output: 1 hits; AlgebraicGeometry.Etale.instOfIsOpenImmersion. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned open-immersion permanence and analytic manifold immersion declarations do not state this group-scheme multiplication criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of two smooth closed subgroups with trivial scheme theoretic intersection and complementary Lie algebras is an open immersion",
+   "results": "Actual search output: 8 hits; IsOpen.isImmersionAtOfComplement, Manifold.IsImmersionAtOfComplement.prodMap, Manifold.IsImmersionOfComplement.prodMap, Manifold.IsImmersionAt.isImmersionAtOfComplement_complement, Manifold.IsImmersionOfComplement.isImmersion, Manifold.IsImmersion.isImmersionOfComplement_complement, Manifold.IsImmersionAtOfComplement.isImmersionAt, Manifold.IsImmersionAtOfComplement. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned open-immersion permanence and analytic manifold immersion declarations do not state this group-scheme multiplication criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "(transverse|[Cc]omplementary).*(subgroup|[Ll]ie)|([Ll]ie|[Tt]angent).*(openImmersion|isOpenImmersion)",
+   "results": "Actual output: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For transverse smooth closed subgroup schemes H K in an algebraic group G with trivial intersection multiplication H times K to G is an open immersion",
+   "results": "Actual output: 8 hits; AlgebraicGeometry.instIsSmoothOfIsOpenImmersion, AlgebraicGeometry.isOpenImmersion_eq_inf, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.mono, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsEtale",
+   "results": "Actual output: 0 hits; . loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of smooth closed subgroup schemes H and K with trivial intersection and complementary tangent spaces is an open immersion",
+   "results": "Actual output: 8 hits; IsOpen.isImmersionAtOfComplement, Manifold.IsImmersionAtOfComplement.prodMap, Manifold.IsImmersionOfComplement.prodMap, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.instIsOpenImmersionInrScheme, AlgebraicGeometry.instIsSmoothOfIsOpenImmersion, AlgebraicGeometry.instIsOpenImmersionInlScheme, Manifold.IsImmersionOfComplement.isImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trivial intersection subgroups and direct sum Lie algebras imply their product is an open subscheme",
+   "results": "Actual output: 8 hits; DirectSum.lie_of_of_ne, Prod.instLieAddGroup, DirectSum.toLieAlgebra, DirectSum.lie_of, DirectSum.lieAlgebra_ext, DirectSum.lie_of_same, DirectSum.lieAlgebra, DirectSum.lieAlgebraOfIdeals",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cocharacter-limit-smooth-structure",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Identify the actual Lie(B) weights with an integral positive half-space; the simple-root base is subsequently constructed in the item. Supporting input: Milne 21.29, first paragraph: limit-group representability, smoothness, connectedness, unipotence and nonnegative Lie weights, before regularity is imposed. Supporting input: Open multiplication for transverse smooth closed subgroups.",
+   "via": [
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-transverse-subgroup-product-open",
+  "worker": "stage1",
+  "summary": "Checked Milne 13.33(d), p.266, and the smooth-variety tangent criterion on p.267. Retained the statement, including functorial intersection and disconnected groups. Wrote the affine smooth-source verification, cancellation on every algebra, identity differential, and explicit independent left/right translations. Reused existing product-tangent, multiplication-differential and flat-lfp-monomorphism nodes. Added one generic rational-tangent criterion node, searched in Mathlib twice. No Lean attachment.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain, specifically the transverse-subgroup multiplication input to Milne 13.33(d). The current blueprint ancestor command prints None; the inherited null ancestor and via chain are preserved. The latest blueprint direct-image proof was read; this is a supporting algebraic-group lemma below that route. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product description used only to verify the smooth finite-type source; this unit has no replacement."
+   },
+   {
+    "node": "lem-sc-product-tangent-space-direct-sum",
+    "why": "Generic tangent space of a product at rational points, needed to compute the multiplication differential."
+   },
+   {
+    "node": "lem-sc-group-addition-tangent-differential",
+    "why": "Generic differential of a group law at the identity; the unit does not supply this algebraic-group foundation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic comparison of smoothness of Spec of a ring map with smoothness of the ring map, needed in step 1 to pass between the smooth schemes H, K, H x K and their coordinate rings; added by the reviewer (the definition node only describes smoothness affine-locally)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sc-product-tangent-space-direct-sum",
+  "lem-sc-group-addition-tangent-differential",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-b4db240cd",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-b4db240cd (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Thm 13.33 and its proof pp.265-266 (GL_V case: tangent iso at identity, injective since the intersection is trivial as functors, orbit map; open subset of the closure via 1.65) and p.267 (for smooth varieties, étale at P = tangent iso). Also read Stacks morphisms.tex lemma-etale-at-point 02GU, 02J4 and 01TB at their labels. No SGA source. The item statement is retained; the two added stmt_deps (tangent space, fibre product) are used in the statement. Step 2 checked: cancellation (h')^{-1}h=k'k^{-1} lies in H(R)∩K(R)={1} for every k-algebra R, extended to all scheme tests; it is elementary. Step 3 checked: the product-tangent node plus the group-law differential node (no commutativity assumed) give dm(v,w)=v+w, which is the hypothesis map. Step 4 checked: a(u,v)=(hu,vk), b(g)=hgk, m∘a=b∘m, with invertible differentials. Step 5 checked: the new node gives étale, def-weil-etale gives flat+lfp, and lem-pe-flat-lfp-monomorphism-open (Mathlib leaf) with the monomorphism of step 2 gives an open immersion. The new node lem-sfb-smooth-tangent-isomorphism-etale is true: Ω fibre iso gives unramified, equal dimensions plus miracle flatness give flat, and the étale locus is open and contains every closed point. It is self-contained and statement-only. Tested on empty X, Frobenius, cusp normalization (needs target smoothness) and a closed point into A^1. rg over 02GU / tangent-étale nodes found no duplicate: lem-pur-etale-at-point-from-differentials is only for maps to A^d; lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension needs f smooth; lem-sc-finite-flat-unramified-tangent-criterion needs f finite locally free. FIX (C4/C1), step 1: the move from smooth H, K, H×K to smooth ring maps and back was attributed to def-sbc-smooth-morphisms, which gives only an affine-local remark, and finite generation of C was asserted with no cited statement. Repaired by citing the existing node lem-weil-pbc-smooth-ring-map-iff-smooth-affine in both directions, taking finite generation from finite presentation, and citing def-weil-finite-type-morphism for H×K. Added to uses/proof_deps, and the off-unit split node is added to split_report.tool_uses. The declared tool_uses are accepted as generic foundations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TransverseSubgroupProductOpen",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_transverse_subgroup_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/TransverseSubgroupProductOpen.lean",
+  "statement": "theorem isOpenImmersion_transverse_subgroup_product (k : Type u) [Field k] [IsAlgClosed k] (G H K : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [GrpObj K] [IsAffine G.left] [Smooth G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : H ⟶ G) (j : K ⟶ G) [IsClosedSubgroupScheme i] [IsClosedSubgroupScheme j] [Smooth H.hom] [Smooth K.hom] (hinter : ∀ (R : Type u) [CommRing R] [Algebra k R] (h : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ H) (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ K), h ≫ i = t ≫ j → h ≫ i = 1) (hLie : ∀ v : schemeTangentSpace k G.left G.hom (GrpObj.onePoint G), ∃! w : schemeTangentSpace k G.left G.hom (GrpObj.onePoint G) × schemeTangentSpace k G.left G.hom (GrpObj.onePoint G), (∃ a : Spec (.of (DualNumber (G.left.residueField (GrpObj.onePoint G)))) ⟶ H.left, a ≫ i.left = w.1.val) ∧ (∃ b : Spec (.of (DualNumber (G.left.residueField (GrpObj.onePoint G)))) ⟶ K.left, b ≫ j.left = w.2.val) ∧ w.1 + w.2 = v) : IsOpenImmersion ((i ⊗ₘ j) ≫ μ[G]).left",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The Lie direct-sum isomorphism is expressed equivalently as unique decomposition of ambient identity tangent vectors into the two subgroup images; image membership is factorization through the subgroup inclusion. No new tangent-space or group-scheme definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-830c0089c",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Only the item's lean record was added (diffed against the live node). The single sorry theorem matches the node: k is an algebraically closed field; G is GrpObj over Spec k with IsAffine, Smooth and LocallyOfFiniteType+QuasiCompact (as the finite-type record prescribes); H and K are IsClosedSubgroupScheme (IsMonHom, injective on R-points, closed immersion) and Smooth; hinter gives trivial intersection on all k-algebras R in Type u, including nonreduced R, with 1 the Hom-group unit; hLie gives unique decomposition into the dual-number lift images in the recorded schemeTangentSpace at onePoint, whose addition is pinned by exists_tangentVectors_vectorSpace, so this is equivalent to Lie(H) ⊕ Lie(K) ≅ Lie(G) because the inclusions are monomorphisms; the conclusion is IsOpenImmersion ((i ⊗ₘ j) ≫ μ[G]).left with the Over-cartesian product as the fibre product. No connectedness hypothesis. Edge cases (H=1/K=G, finite étale G, H=K=1, infinitesimal intersection, universes) are fine. lean.statement is verbatim the file signature. Docstrings carry the source place, blueprint id and the 5 proof steps. No definitions, no hollow constructions, no stronger assumptions. No compile run because no file was changed."
+ }
+}

@@ -22,109 +22,55 @@
  ],
  "proof": [
   {
-   "text": "Write $P_L=P\\otimes_R R'$, $K_L=B'\\otimes_{\\underline{R'}}\\underline{P_L}$, and $J_L=B'\\otimes_{\\underline{R'}}\\underline{\\operatorname{Hom}_{R'}^\\bullet(P_L,R')}$. Each term of $P_L$ is a summand of a finite free $R'$-module: tensor the splitting exhibiting the corresponding term of $P$ as a summand of $R^n$. Apply [lem-pod-point-completed-evaluation] over $E$ and over $L$. It identifies $H$ and $J_L$ with the respective internal Homs, gives the canonical sections identifications with $P^\\vee$ and $\\operatorname{Hom}_{R'}^\\bullet(P_L,R')$, and identifies the actual completed evaluations with the signed module evaluations. Its constructibility and completeness conclusions apply also to $K\\otimes_B^L H$ and to the analogous $L$-model. These finite-projective models have finite Tor amplitude as in [def-weil-finite-tor-amplitude]: tensoring a finite free term is exact, and tensoring its direct summand is a direct summand of that exact functor; each reduction is therefore represented by a bounded flat complex in the same degree interval. Thus the tensor comparison of [lem-sf-point-fibre-derived-tensor] applies to these objects.",
+   "text": "Apply [lem-pod-perfect-dual-scalar-calculus] to $R\\to R'$ and $P$. It supplies the actual signed cochain map $\\beta_P(f\\otimes a)(x\\otimes b)=f(x)ab$, its derived naturality, identity and tower equations, and its localization to $E\\subset L$. Apply [lem-pod-completed-hom-scalar-transpose] to the given point models: the completed Hom arrow, conjugated by the specified $\\chi$, is the sheaf realization $\\gamma$ of this $\\beta_P$. Its models and evaluation tensors have the completeness, constructibility and uniform finite-Tor hypotheses required there.",
    "uses": [
-    "lem-pod-point-completed-evaluation",
-    "def-weil-finite-tor-amplitude",
-    "lem-sf-point-fibre-derived-tensor"
+    "lem-pod-perfect-dual-scalar-calculus",
+    "lem-pod-completed-hom-scalar-transpose"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: internal Hom at the point computed over the coefficient ring; explicit scalar/evaluation calculation on finite-projective models"
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation."
    }
   },
   {
-   "text": "Define $\\beta_P:P^\\vee\\otimes_R R'\\to\\operatorname{Hom}_{R'}^\\bullet(P_L,R')$ by $\\beta_P(f\\otimes a)(x\\otimes b)=f(x)ab$, with $R\\to R'$ understood. This respects the balancing relations in both tensors and is $R'$-linear. For homogeneous $f$ of degree $j$, [def-pur-hom-complex] gives $df=-(-1)^j f d_P$, since the target ring is in degree zero. Consequently $d\\beta_P(f\\otimes a)=\\beta_P(df\\otimes a)$, so this is a cochain map in precisely that Hom convention. With factors ordered as $P\\otimes P^\\vee$, the evaluation sign specified by [lem-pod-point-derived-hom-evaluation] is $(-1)^{pj}$ for $x\\in P^p$. Hence evaluating after $1\\otimes\\beta_P$ gives $(-1)^{pj}f(x)ab$, exactly scalar extension of evaluation. Degree-zero coefficients introduce no further sign.",
+   "text": "Use [lem-pod-completed-model-sections-transport] with $A=P^\\vee$, $C=\\operatorname{Hom}_{R'}^\\bullet(P\\otimes_R R',R')$, $v=\\beta_P$ and $g=\\gamma$. For the source and target unit maps write $q_E=e_A^{-1}$ and $q_L=e_C^{-1}$; these are precisely evaluation on $1\\otimes x$ by [lem-pod-point-completed-evaluation] in the finite-projective Hom models. The transport equality gives $q_L\\Gamma(s,\\delta)\\varphi_H^{-1}(q_E^{-1}\\otimes1)=\\beta_P$. Equivalently $q_L\\Gamma(s,\\delta)=\\beta_P(q_E\\otimes1)\\varphi_H$, the claimed square with the specified vertical maps. On $f\\otimes a$ evaluated at $x\\otimes b$ it is $f(x)ab$; both uncurried evaluations have the same sign $(-1)^{\\deg x\\deg f}$ by [lem-pod-perfect-dual-scalar-calculus].",
    "uses": [
-    "def-pur-hom-complex",
-    "lem-pod-point-derived-hom-evaluation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: internal Hom at the point computed over the coefficient ring; explicit scalar/evaluation calculation on finite-projective models"
-   }
-  },
-  {
-   "text": "Use $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison] to identify $T_{L/E}$ on these complete objects with $F=-\\otimes_B^L B'$. Its naturality identifies $T_{L/E}(\\operatorname{ev})$ with $F(\\operatorname{ev})$. On the finite-projective models the ordinary tensor associator identifies $FK$ with $K_L$, by $(b\\otimes x)\\otimes b'\\mapsto bb'\\otimes(x\\otimes1)$; its inverse sends $b'\\otimes(x\\otimes a)$ to $(1\\otimes x)\\otimes ab'$. The quotient-normalization stipulated in the item says that, at every finite quotient, the operation comparison is this canonical scalar-association map: it sends $((x\\otimes\\bar a)\\otimes(y\\otimes\\bar b))$ to $(x\\otimes y)\\otimes\\bar a\\bar b$, and the formula commutes with every quotient transition. The completion map $\\chi$ has exactly these quotient components and zero shifted-product component by the cited node. Hence the operation comparison and $\\chi$ form a commuting map of strict quotient towers before taking the cone; equality survives the derived limit. The stipulated internal-Hom arrow is therefore the transpose of the explicitly extended evaluation, so after completion its uncurried formula is $(-1)^{pj}h(x)ab$ and its curried formula is $\\gamma(h\\otimes a)(x\\otimes b)=h(x)ab$. Equality can be checked on local pure tensors, which generate the sheaf tensors; it is equality of chain maps and hence of derived morphisms. The completed evaluation used here is the one specified by [lem-pod-point-completed-evaluation], not a separately chosen map.",
-   "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-pur-integral-operations-scalar-extension",
+    "lem-pod-perfect-dual-scalar-calculus",
+    "lem-pod-completed-hom-scalar-transpose",
+    "lem-pod-completed-model-sections-transport",
     "lem-pod-point-completed-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: internal Hom at the point computed over the coefficient ring; explicit scalar/evaluation calculation on finite-projective models"
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation."
    }
   },
   {
-   "text": "Now take sections. Let $q_E:\\Gamma(s,H)\\xrightarrow{\\sim}P^\\vee$ and $q_L:\\Gamma(s,R\\mathcal Hom_{B'}(K_L,B'))\\xrightarrow{\\sim}\\operatorname{Hom}_{R'}^\\bullet(P_L,R')$ be the evaluations on $1\\otimes x$ of [lem-pod-point-completed-evaluation]. Let $\\delta:T_{L/E}H\\to R\\mathcal Hom_{B'}(T_{L/E}K,B')$ be the stipulated arrow, and interpret its target through $T_{L/E}K\\cong K_L$. By [lem-weil-point-sections-scalar-extension], $\\varphi_H^{-1}=\\Gamma(s,\\chi_H)\\theta_H$, where $\\theta_H(f\\otimes a)$ is the section represented by $f\\otimes a$. Thus Step 3 gives the explicit equality\n$$q_L\\Gamma(s,\\delta)\\varphi_H^{-1}(q_E^{-1}(f)\\otimes a)(x\\otimes b)=f(x)ab=\\beta_P(f\\otimes a)(x\\otimes b).$$\nEquivalently $q_L\\Gamma(s,\\delta)=\\beta_P(q_E\\otimes1)\\varphi_H$, the required square. These are the prescribed vertical maps: $q_E,q_L$ evaluate on the unit, and $\\varphi$ uses precisely $\\chi$ followed by the sections-tensor map. The compatibility of the sections tensor constraint with scalar extension in [lem-sf-point-fibre-derived-tensor] identifies the uncurried square with this same calculation. The sign on both evaluations is the common $(-1)^{pj}$ from Step 2.",
+   "text": "The derived naturality and normalized identity/tower equations of [lem-pod-perfect-dual-scalar-calculus] and [lem-pod-completed-hom-scalar-transpose] pass through the exact sections transport of [lem-pod-completed-model-sections-transport], which uses the specified associators. The rationalized equation follows from that node by tensoring over $R'$ with $L$; [lem-pod-perfect-dual-scalar-calculus] identifies its module Hom models with those over $E$ and $L$. The comparisons are linear: scalar extension and precomposition are linear, as is the displayed formula for $\\gamma$. For a localized morphism $u/\\varpi_E^n$, the last clause of [lem-pod-completed-model-sections-transport] applies to these linear comparisons and sends precomposition by it to precomposition by $u$ divided by $\\varpi_E^n$. It proves naturality independent of the fraction representative, and also transports the identity and tower equations.",
    "uses": [
-    "lem-pod-point-completed-evaluation",
-    "lem-weil-point-sections-scalar-extension",
-    "lem-sf-point-fibre-derived-tensor"
+    "lem-pod-perfect-dual-scalar-calculus",
+    "lem-pod-completed-hom-scalar-transpose",
+    "lem-pod-completed-model-sections-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: internal Hom at the point computed over the coefficient ring; explicit scalar/evaluation calculation on finite-projective models"
-   }
-  },
-  {
-   "text": "For a cochain map $u:P\\to Q$, the two naturality routes, evaluated on $f\\otimes a$ and $x\\otimes b$, are both $f(u(x))ab$. Hence $\\beta_P(u^\\vee\\otimes1)=(u\\otimes1)^\\vee\\beta_Q$. On the sheaf side the operation comparison is natural by [lem-pur-integral-operations-scalar-extension]; on sections $\\varphi$ is natural by [lem-weil-point-sections-scalar-extension], and the internal-Hom sections comparison is natural by [lem-pod-point-derived-hom-evaluation]. These are comparisons of the derived functors themselves, so this also gives naturality on their derived morphisms, not only on the displayed chain representatives. Contravariance is precomposition in every occurrence.",
-   "uses": [
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-point-sections-scalar-extension",
-    "lem-pod-point-derived-hom-evaluation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: internal Hom at the point computed over the coefficient ring; explicit scalar/evaluation calculation on finite-projective models"
-   }
-  },
-  {
-   "text": "For $L=E$, the multiplication identifications send $f\\otimes a$ to $af$ and $x\\otimes b$ to $bx$; then $\\beta(f\\otimes a)(x\\otimes b)=abf(x)$ is the identity on the identified dual. The quotient-normalized operation comparison and $\\varphi$ have this identity normalization by their stipulated quotient formulas and by [lem-weil-point-sections-scalar-extension]. For $E\\subset L\\subset M$, write $R''=\\mathcal O_M$. Applying the two successive normalized Hom maps to $((f\\otimes a)\\otimes c)$ and evaluating on $((x\\otimes b)\\otimes d)$ gives $f(x)abcd$ in $R''$. Direct extension followed by the module associator gives the same value. At each finite quotient the two normalized scalar-association maps multiply the coefficient factors in the same order, so their strict-tower limits respect the specified integral associator; the sections equation in [lem-weil-point-sections-scalar-extension] then cancels the intervening $\\chi^{-1}\\chi$. Thus the square respects the specified associators, rather than merely some isomorphic choices.",
-   "uses": [
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-point-sections-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: internal Hom at the point computed over the coefficient ring; explicit scalar/evaluation calculation on finite-projective models"
-   }
-  },
-  {
-   "text": "Tensor the integral square over $R'$ with $L$. This preserves equality of its morphisms. The rational sections comparisons are exactly the rationalized ones in [lem-weil-point-sections-scalar-extension]. Finite-projective terms are summands of finite free modules, so their duals and all the displayed Hom formulas rationalize by the same finite-matrix calculation; in particular $\\beta$ becomes $(P_E)^\\vee\\otimes_E L\\to\\operatorname{Hom}_L^\\bullet(P_E\\otimes_E L,L)$ with the same formula, $P_E=P\\otimes_R E$. Termwise localization preserves quasi-isomorphisms: a fraction belongs to a kernel precisely when some allowed denominator kills its image, and multiplying that denominator into the numerator lifts it from the original kernel; images localize by their defining fractions. Thus this is the derived rationalized square. Finally [def-weil-rationalization-karoubi] says that rationalized morphisms are $\\operatorname{Hom}_{\\mathrm{int}}(-,-)\\otimes_R E$. Every such morphism is a fraction $u/\\varpi_E^n$ after taking a common denominator in a finite sum. Both contravariant dual constructions send this to $u^\\vee/\\varpi_E^n$, and all comparisons are linear in this action. Multiply the integral naturality equation by $\\varpi_E^{-n}$ in $L$ to obtain naturality for this fraction. The fraction relation preserves that equation, proving independence of its representative. Tensoring the identity and associator equations of Step 6 gives their rational versions too.",
-   "uses": [
-    "lem-weil-point-sections-scalar-extension",
-    "def-weil-rationalization-karoubi"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: internal Hom at the point computed over the coefficient ring; explicit scalar/evaluation calculation on finite-projective models"
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation."
    }
   }
  ],
  "proof_deps": [
-  "lem-pod-point-completed-evaluation",
-  "def-weil-finite-tor-amplitude",
-  "lem-sf-point-fibre-derived-tensor",
-  "def-pur-hom-complex",
-  "lem-pod-point-derived-hom-evaluation",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-point-sections-scalar-extension",
-  "def-weil-rationalization-karoubi"
+  "lem-pod-perfect-dual-scalar-calculus",
+  "lem-pod-completed-hom-scalar-transpose",
+  "lem-pod-completed-model-sections-transport",
+  "lem-pod-point-completed-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-  "place": "Second sentence; expanded signed finite-projective scalar/evaluation calculation with the prescribed completion and sections comparisons"
+  "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Short assembly of the signed algebra, completed transpose and sections-transport nodes."
  },
  "mathlib_searches": [
   {
@@ -218,29 +164,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pod-point-scalar-hom-evaluation",
   "worker": "stage1",
-  "summary": "Corrected the under-specified scalar comparison by choosing its quotient-normalized canonical representative. Step 3 now checks compatibility with the explicit completion map chi at every finite quotient before taking the cone, then computes the signed Hom formula; Step 6 uses the same normalization for identity and tower coherence. No new nodes, no Lean attachment or exact Mathlib match.",
-  "blueprint": "lem-pod-point-dualizing-complex.proof.md, second sentence: internal Hom at the point computed over the coefficient ring, here made compatible with finite coefficient-field extension; the repair makes the quotient-level scalar comparison canonical before completion.",
-  "tool_uses": [
-   {
-    "node": "lem-sf-point-fibre-derived-tensor",
-    "why": "Generic monoidal point-fibre comparison identifies the uncurried evaluation square and states its scalar-extension compatibility."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Generic finite-free comparison identifies the prescribed strict-tower scalar extension with ordinary tensor, including its actual completion map."
-   },
-   {
-    "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "Generic operation/scalar comparison supplies the stipulated natural internal-Hom arrow and its coherence."
-   },
-   {
-    "node": "lem-weil-point-sections-scalar-extension",
-    "why": "Generic point sections/scalar comparison supplies the specified vertical maps and their identity, associator and rationalization normalizations."
-   }
-  ]
+  "summary": "Repair of the 7777-character split: unchanged statement; three independent statement-only tasks for signed dual-complex calculus, the strict-tower completed transpose, and sections/localized-morphism transport. Every old argument is preserved verbatim in report.md and assigned to these tasks. The item is now only their assembly.",
+  "blueprint": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. All seven returned steps are distributed among the three new nodes; the parent retains the actual square calculation."
  },
  "tool_uses": [
   "lem-sf-point-fibre-derived-tensor",
@@ -249,12 +177,23 @@
   "lem-weil-point-sections-scalar-extension"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q21-426422b9a",
-  "group": "Q21",
+  "reviewer": "NT-cc-NJ-434eea90a",
+  "group": "NJ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-426422b9a (reviewer sub-agent of L); spot-checked: I read the blueprint source (lem-pod-point-dualizing-complex.proof.md, second sentence), the parent's Step 7, all seven steps of the item and the statement of every cited node. There are no new nodes. On the open question of which comparison is meant: the statement of lem-pur-integral-operations-scalar-extension only says natural coherent isomorphisms exist, and the report's unit-twist example correctly shows that is ambiguous. The item resolves this by naming the quotient-normalized comparison: level-wise (x⊗ā)⊗(y⊗b̄)↦(x⊗y)⊗āb̄, with the Hom arrow the transpose of evaluation. This matches how that node's proof actually builds it (Steps 9, 11 and 12, 'the generator formulas define the maps'). It is also the θ^Hom that def-weil-derived-pullback-tensor-hom uses at the Q̄_ℓ stage. So it names an existing map rather than adding a hypothesis, and nothing is weakened. Step 3 compares the two strict towers against the quotient and zero shifted-product components stated for χ in lem-weil-finite-free-completed-scalar-comparison. Step 4 uses φ^{-1}=Γ(χ)θ, which is stated verbatim in lem-weil-point-sections-scalar-extension. I rechecked the signs: df=-(-1)^j f d_P, and the evaluation sign is (-1)^{pj}. I tested P=0, R[0], R^n with L/E ramified, R[-1], [R→ϖ R], L=E, and the tower E⊂L⊂M. Finite Tor amplitude holds because the reductions are bounded and flat in a fixed degree interval. There are no cycles. Duplicate candidates: lem-pod-point-duality-coefficient-compatibility is downstream (it cites the parent); lem-sf-ringed-finite-free-hom-base-change, lem-pc-base-change-rhom-perfect and lem-trf-point-complex-scalar-extension are not duplicates. Batch-5 check: the new citation lem-pod-point-completed-evaluation reaches lem-pod-connected-constant-h0, which was created under prop-cohomological-finiteness (finiteness of H^i_c). It is used only for H^0 of Spec k with constant R/ϖ^m coefficients. Neither the trace-formula assumption nor the Poincaré-duality assumption gives this, and it is not a step of either proof, so it is genuinely outside them. Accepted tool_uses: lem-sf-point-fibre-derived-tensor, lem-weil-finite-free-completed-scalar-comparison, lem-pur-integral-operations-scalar-extension, lem-weil-point-sections-scalar-extension. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-434eea90a (reviewer sub-agent of L); spot-checked: Re-split repair (human note of 2026-10-21, released 2026-10-22): read in full. Item: statement and stmt_deps are byte-identical to live; the proof is a 2203-character, 3-step assembly; proof_deps equals the union of the uses. Each of the 7 old steps (7777 characters) is assigned to an explicit clause of a new node:\n- lem-pod-perfect-dual-scalar-calculus takes old steps 2, 5, 6 and 7 (the algebra).\n- lem-pod-completed-hom-scalar-transpose takes old steps 1, 3, 5 and 6 (the completed sheaf map).\n- lem-pod-completed-model-sections-transport takes old steps 4, 5, 6 and 7 (sections).\nThe three nodes are of comparable size (2144, 3219 and 2824 characters), have distinct inputs, are statement-only and unsplit, and none restates the item.\nChecks:\n- Sign: d(f)=-(-1)^j f d_P, read from def-pur-hom-complex. The (-1)^{pj} evaluation is a chain map and matches lem-pod-point-derived-hom-evaluation.\n- β small cases: P=0, R[0], R[1] and [R --ϖ--> R], including localization.\n- Sections transport: unwinding with φ^{-1}=Γ(χ)θ (lem-weil-point-sections-scalar-extension) gives v(x⊗a). I checked q_E=e_A^{-1} against lem-pod-point-completed-evaluation.\n- Completed transpose: checked for L=E, ramified L/E and the tower E⊂L⊂M.\n- Duplicates: lem-pc-base-change-rhom-perfect, lem-fix-site-perfect-scalar-hom, lem-pc-perfect-ring-hom-tensor-differential and lem-pc-strictly-perfect-ordinary-evaluation are only abstract invertibility or tool results, not duplicates.\n- No cycles; all cited ids exist and are unmerged.\nBatch-5: the citation lem-pod-completed-hom-scalar-transpose → lem-pod-point-completed-evaluation reaches lem-pod-connected-constant-h0, which computes H^0 of the point with constant coefficients (created under the finiteness proposition). Neither assumption gives it and it is not part of either proof, so it is accepted. The item already cited this node on base, so the batch-5 closure is unchanged.\nMinor, not a fault: the sections-transport node's LeanSearch was rate-limited and recorded as unavailable, and its Loogle patterns errored.\nNo fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

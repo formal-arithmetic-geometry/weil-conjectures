@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-normal-domain-monic-prime-factorization",
+ "kind": "statement",
+ "title": "Monic prime factorization over a normal domain",
+ "statement": "Let $A$ be a commutative normal domain [def-weil-pbc-normal-ring], let $K=\\operatorname{Frac}(A)$, and let $F\\in A[T]$ be monic [def-weil-polynomial-ring], meaning its leading coefficient is $1$. There exist $s\\geq0$ and monic polynomials $h_1,\\ldots,h_s\\in A[T]$ of positive degree such that $F=\\prod_{j=1}^s h_j$, every image $(h_j)_K\\in K[T]$ is irreducible, and every quotient $A[T]/(h_j)$ is a nonzero integral domain [def-weil-pbc-algebra-hom-quotient]. Irreducible means nonzero, nonunit, with a unit factor in every factorization in $K[T]$. Repeated factors are allowed, and the empty product is $1$. Moreover, if $A$ is local with maximal ideal $\\mathfrak m$ and every coefficient of $F$ below its leading coefficient belongs to $\\mathfrak m$, the factors can be chosen with every coefficient of every $h_j$ below its leading coefficient in $\\mathfrak m$. No Noetherian, factorial, completeness, or separability hypothesis is imposed on $A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00H6, lemma-polynomials-divide, clauses (1) and (2), lines 8432-8479: integral coefficients of monic factors, and lower coefficients in the radical of the lower-coefficient ideal. Combined with field-polynomial factorization as in EGA IV4 proof of Theorem 21.14.1, final paragraph (online translation; EGA IV4 WANTED locally)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "If $F=1$, take $s=0$; all assertions are vacuous. Otherwise $F_K$ is a nonzero nonunit in $K[T]$: a nonzero constant is a unit over a field, and a monic constant is $1$. Apply [lem-sfb-field-polynomial-irreducible-factorization] to $F_K$. Write $F_K=u\\prod_j p_j$, where $u\\in K^\\times$ and each $p_j$ is irreducible; each $p_j$ has positive degree, since a constant is either $0$ or a unit over a field. Put $c_j=\\operatorname{lc}(p_j)\\ne0$ and $g_j=c_j^{-1}p_j$. Multiplication by the unit constant $c_j^{-1}$ preserves irreducibility by its definition. Comparing the highest coefficients gives $u\\prod_jc_j=1$, so $F_K=\\prod_jg_j$ with all $g_j$ monic, irreducible and of positive degree. This is a finite list with multiplicities, not a list of distinct factors.",
+   "uses": [
+    "lem-sfb-field-polynomial-irreducible-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC1 (lemma-polynomial-ring-UFD), one variable over a field; normalization by leading coefficients written out by Q72"
+   }
+  },
+  {
+   "text": "Each $g_j$ divides $F_K$. Apply [lem-sfb-normal-monic-divisor-descent] to $A$, its fraction field $K$, the monic $F$ and this monic divisor, obtaining $h_j\\in A[T]$ with $(h_j)_K=g_j$. The inclusion $A\\hookrightarrow K$ is injective, so the highest nonzero coefficient and degree are preserved: each $h_j$ is monic and has the same positive degree as $g_j$. The coefficientwise image of $F-\\prod_jh_j$ is zero; injectivity on each coefficient gives $F=\\prod_jh_j$ in $A[T]$. This uses normality only for the descent, not a factorial assumption on $A$.",
+   "uses": [
+    "lem-sfb-normal-monic-divisor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00H6 (lemma-polynomials-divide), clause (1), and coefficientwise injectivity"
+   }
+  },
+  {
+   "text": "Fix $j$ and put $d=\\deg h_j>0$. The coefficient inclusion induces a unital ring map $\\iota:A[T]/(h_j)\\to K[T]/(g_j)$, sending the class of $P$ to the class of $P_K$; it is well defined since $(h_j)_K=g_j$. By [lem-weil-pbc-monic-quotient-free], over $A$ and over $K$ these quotients have bases $1,t,\\ldots,t^{d-1}$. If $b=\\sum_{i<d}a_it^i$ maps to zero, linear independence of the $K$-basis gives $a_i=0$ in $K$ for every $i$, hence $a_i=0$ in $A$. Thus $\\iota$ is injective. By [lem-trf-irreducible-polynomial-quotient-field], irreducibility of $g_j$ makes $K[T]/(g_j)$ a field; a field is nonzero and has no zero divisors, since $xy=0$ with $x\\ne0$ gives $y=x^{-1}xy=0$. The source of $\\iota$ is nonzero because $\\iota(1)=1\\ne0$, and if $bc=0$ its image has a zero factor, whence injectivity gives $b=0$ or $c=0$. This proves the required domain assertion without treating irreducibility in $A[T]$ as primality.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-trf-irreducible-polynomial-quotient-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09FI (example-quotient-polymial-ring), quotient by an irreducible polynomial is a field; injectivity written by Q72 using the cited monic power bases"
+   }
+  },
+  {
+   "text": "For the local assertion use the same factors, and reduce $F=h_jq_j$, where $q_j=\\prod_{i\\ne j}h_i$, modulo $\\mathfrak m$. The ring $k=A/\\mathfrak m$ is a field: for $a\\notin\\mathfrak m$, maximality gives $1=ra+x$ with $x\\in\\mathfrak m$, so the class of $r$ is its inverse. Both reduced factors remain monic. If their degrees are $d,e$, the top product coefficient is $1$ and $d+e=n=\\deg F$. Let $r,t$ be their lowest nonzero exponents. In the convolution at exponent $r+t$ the sole nonzero term is the product of these two nonzero coefficients, so their product has lowest exponent $r+t$. But the reduced product is $T^n$, hence $r+t=n=d+e$. Since $r\\le d$ and $t\\le e$, one has $r=d$ and $t=e$. Thus $\\overline h_j=T^d$, which says exactly that every lower coefficient of $h_j$ lies in $\\mathfrak m$. The empty product and constant complementary factor cause no exception.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00H6 (lemma-polynomials-divide), clause (2), local specialization; Q72 supplies the elementary residue-field convolution argument instead of invoking the general radical theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-polynomial-irreducible-factorization",
+  "lem-sfb-normal-monic-divisor-descent",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-trf-irreducible-polynomial-quotient-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly by Q72 of Tags 0BC1 and 00H6(1), the monic power basis, and field prime quotients (fields.tex Tag 09FI); local clause proved directly by lowest coefficients as in the idea of 00H6(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial over a normal domain factors as a finite product of monic polynomials irreducible over its fraction field, and each factor defines a domain quotient",
+   "results": "Hits: Polynomial.Monic.exists_splits_map, Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, AlgebraicClosure.Monics.map_eq_prod, Polynomial.isIntegrallyClosed_iff', Polynomial.exists_monic_irreducible_factor, Irreducible.exists_dvd_monic_irreducible_of_isIntegral, Polynomial.fintypeSubtypeMonicDvd, Polynomial.fact_irreducible_factor. GaussLemma and IsIntegral supply descent of individual factors; field factorization is present. The combined finite factorization, domain quotients and distinguishedness require an argument, not one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite monic factorization over an integrally closed domain into polynomials whose quotient rings are integral domains",
+   "results": "Hits: Polynomial.isIntegrallyClosed_iff', Polynomial.Monic.dvd_of_fraction_map_dvd_fraction_map, integralClosure.mem_lifts_of_monic_of_dvd_map, instIsIntegrallyClosedPolynomialOfIsDomain, Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, UniqueFactorizationMonoid.instIsIntegrallyClosed, Ideal.Factors.fact_ramificationIdx_neZero, Ideal.uniqueFactorizationMonoid. GaussLemma and IsIntegral supply descent of individual factors; field factorization is present. The combined finite factorization, domain quotients and distinguishedness require an argument, not one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, IsIntegrallyClosed",
+   "results": "Hits: Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, Polynomial.isIntegrallyClosed_iff', Polynomial.Monic.dvd_of_fraction_map_dvd_fraction_map, Polynomial.Monic.dvd_iff_fraction_map_dvd_fraction_map, IsIntegrallyClosed.eq_map_mul_C_of_dvd, minpoly.IsIntegrallyClosed.unique_of_degree_le_degree_minpoly, IsIntegrallyClosed.minpoly.unique, minpoly.IsIntegrallyClosed.isIntegral_iff_leadingCoeff_dvd. GaussLemma and IsIntegral supply descent of individual factors; field factorization is present. The combined finite factorization, domain quotients and distinguishedness require an argument, not one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_map_mul_C_of_dvd|mem_lifts_of_monic_of_dvd_map|isIntegral_coeff_of_dvd",
+   "results": "Hits: Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/IsIntegral.lean, Mathlib/RingTheory/Polynomial/IsIntegral.lean, Mathlib/RingTheory/Polynomial/IsIntegral.lean. GaussLemma and IsIntegral supply descent of individual factors; field factorization is present. The combined finite factorization, domain quotients and distinguishedness require an argument, not one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial over a field is a finite product of monic irreducible polynomials and irreducible polynomials are prime",
+   "results": "Hits: Polynomial.exists_monic_irreducible_factor, Polynomial.irreducible_factor, Polynomial.fact_irreducible_factor, Polynomial.irreducible_of_monic, Polynomial.mem_normalizedFactors_iff, Polynomial.Monic.irreducible_iff_natDegree, Polynomial.factor, Irreducible.exists_dvd_monic_irreducible_of_isIntegral. GaussLemma and IsIntegral supply descent of individual factors; field factorization is present. The combined finite factorization, domain quotients and distinguishedness require an argument, not one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_map_mul_C_of_dvd|mem_lifts_of_monic_of_dvd_map|isIntegral_coeff_of_dvd|dvd_of_fraction_map_dvd_fraction_map",
+   "results": "{\"t\": \"2026-10-24T06:54:51Z\", \"tool\": \"grep\", \"query\": \"eq_map_mul_C_of_dvd|mem_lifts_of_monic_of_dvd_map|isIntegral_coeff_of_dvd|dvd_of_fraction_map_dvd_fraction_map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\"], \"digest\": \"43a6b1dc397f8bc2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monic factorization of polynomials over an integrally closed domain with prime principal ideals",
+   "results": "{\"t\": \"2026-10-24T06:54:51Z\", \"tool\": \"leansearch\", \"query\": \"Monic factorization of polynomials over an integrally closed domain with prime principal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Monic.dvd_of_fraction_map_dvd_fraction_map\", \"Ideal.Factors.fact_ramificationIdx_neZero\", \"Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map\", \"integralClosure.mem_lifts_of_monic_of_dvd_map\", \"Ideal.uniqueFactorizationMonoid\", \"Ideal.factors_span_eq\", \"Polynomial.exists_monic_irreducible_factor\", \"Polynomial.Monic.dvd_iff_fraction_map_dvd_fraction_map\"], \"digest\": \"1dd11df73126cf2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T06:54:51Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Monic, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map\", \"Polynomial.isIntegrallyClosed_iff'\", \"Polynomial.Monic.dvd_of_fraction_map_dvd_fraction_map\", \"Polynomial.Monic.dvd_iff_fraction_map_dvd_fraction_map\", \"IsIntegrallyClosed.eq_map_mul_C_of_dvd\", \"minpoly.IsIntegrallyClosed.unique_of_degree_le_degree_minpoly\", \"IsIntegrallyClosed.minpoly.unique\", \"minpoly.IsIntegrallyClosed.isIntegral_iff_leadingCoeff_dvd\"], \"digest\": \"a4171f862fc76f9c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial over an integrally closed domain is a product of monic irreducibles over the fraction field, with domain quotients and factors distinguished when the polynomial is distinguished",
+   "results": "{\"t\": \"2026-10-24T06:54:52Z\", \"tool\": \"leanfinder\", \"query\": \"A monic polynomial over an integrally closed domain is a product of monic irreducibles over the fraction field, with domain quotients and factors distinguished when the polynomial is distinguished\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map\", \"Polynomial.Monic.dvd_of_fraction_map_dvd_fraction_map\", \"Polynomial.isIntegrallyClosed_iff'\", \"Polynomial.Monic.dvd_iff_fraction_map_dvd_fraction_map\", \"integralClosure.mem_lifts_of_monic_of_dvd_map\", \"Irreducible.exists_dvd_monic_irreducible_of_isIntegral\", \"Polynomial.exists_monic_irreducible_factor\", \"AlgebraicClosure.Monics.map_eq_prod\"], \"digest\": \"bca8f5ec8657fe46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every monic polynomial over a field is a finite product of monic irreducible polynomials counted with multiplicity",
+   "results": "{\"t\": \"2026-10-24T06:57:39Z\", \"tool\": \"leanfinder\", \"query\": \"Every monic polynomial over a field is a finite product of monic irreducible polynomials counted with multiplicity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.exists_monic_irreducible_factor\", \"Polynomial.fact_irreducible_factor\", \"Polynomial.factor\", \"Polynomial.irreducible_factor\", \"Polynomial.Monic.exists_splits_map\", \"AlgebraicClosure.Monics.map_eq_prod\", \"Polynomial.Splits.def\", \"Polynomial.splits_iff\"], \"digest\": \"5b8f8de73627bef7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "grep",
+   "query": "div_modByMonic_unique|modByMonic_add_div|degree_modByMonic_lt|eq_map_mul_C_of_dvd",
+   "results": "{\"t\": \"2026-10-24T06:59:22Z\", \"tool\": \"grep\", \"query\": \"div_modByMonic_unique|modByMonic_add_div|degree_modByMonic_lt|eq_map_mul_C_of_dvd\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Minpoly/Field.lean\", \"Mathlib/FieldTheory/Minpoly/IsIntegrallyClosed.lean\", \"Mathlib/FieldTheory/Minpoly/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\"], \"digest\": \"9b4ea2e4a935f838\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monic divisor of a monic polynomial over the fraction field descends to an integrally closed domain",
+   "results": "{\"t\": \"2026-10-24T06:59:22Z\", \"tool\": \"leansearch\", \"query\": \"Monic divisor of a monic polynomial over the fraction field descends to an integrally closed domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.mem_lifts_of_monic_of_dvd_map\", \"Polynomial.Monic.dvd_of_fraction_map_dvd_fraction_map\", \"Polynomial.Monic.dvd_iff_fraction_map_dvd_fraction_map\", \"instIsIntegrallyClosedPolynomialOfIsDomain\", \"minpoly.isIntegrallyClosed_eq_field_fractions\", \"FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial\", \"Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map\", \"UniqueFactorizationMonoid.instIsIntegrallyClosed\"], \"digest\": \"3a6a9135e8fed067\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique quotient and remainder division by a monic polynomial over a commutative ring",
+   "results": "{\"t\": \"2026-10-24T06:59:22Z\", \"tool\": \"leansearch\", \"query\": \"Unique quotient and remainder division by a monic polynomial over a commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.div_modByMonic_unique\", \"Polynomial.IsMonicOfDegree.of_dvd_sub\", \"Polynomial.divByMonic\", \"Polynomial.modByMonic_add_div\", \"Polynomial.divModByMonicAux\", \"Polynomial.modByMonic_eq_sub_mul_div\", \"Polynomial.modByMonic\", \"Polynomial.divModByMonicAux.congr_simp\"], \"digest\": \"e0df47a8e2100ebe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.div_modByMonic_unique",
+   "results": "{\"t\": \"2026-10-24T06:59:22Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.div_modByMonic_unique\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Polynomial.div_modByMonic_unique\"], \"digest\": \"a6fb853b765f7503\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an integrally closed domain a monic divisor over the fraction field of a monic polynomial has coefficients in the domain",
+   "results": "{\"t\": \"2026-10-24T06:59:23Z\", \"tool\": \"leanfinder\", \"query\": \"Over an integrally closed domain a monic divisor over the fraction field of a monic polynomial has coefficients in the domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Monic.dvd_of_fraction_map_dvd_fraction_map\", \"integralClosure.mem_lifts_of_monic_of_dvd_map\", \"Polynomial.Monic.dvd_iff_fraction_map_dvd_fraction_map\", \"Polynomial.isIntegral_coeff_of_dvd\", \"exists_integer_of_is_root_of_monic\", \"minpoly.IsIntegrallyClosed.isIntegral_iff_leadingCoeff_dvd\", \"isInteger_of_is_root_of_monic\", \"Polynomial.isIntegrallyClosed_iff'\"], \"digest\": \"e08a5146f3ca711e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Division by a monic polynomial over a commutative ring has a unique quotient and remainder with remainder degree smaller than the divisor",
+   "results": "{\"t\": \"2026-10-24T06:59:24Z\", \"tool\": \"leanfinder\", \"query\": \"Division by a monic polynomial over a commutative ring has a unique quotient and remainder with remainder degree smaller than the divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.div_modByMonic_unique\", \"Polynomial.divModByMonicAux\", \"Polynomial.modByMonic_add_div\", \"Polynomial.divByMonic\", \"Polynomial.IsMonicOfDegree.of_dvd_sub\", \"Polynomial.modByMonic\", \"Polynomial.modByMonic_eq_sub_mul_div\", \"Polynomial.div_eq_quo_add_rem_div\"], \"digest\": \"635ac21660b14f08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_map_mul_C_of_dvd",
+   "results": "{\"t\": \"2026-10-24T07:00:29Z\", \"tool\": \"grep\", \"query\": \"eq_map_mul_C_of_dvd\", \"sub\": \"RingTheory/Polynomial/GaussLemma.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"80\", \"161\", \"162\", \"201\"], \"digest\": \"ccc89972fd72c947\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: results provide individual algebra tools only; their applicable statements were read"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-normal-horizontal-primes-principal",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4, proof of Theorem 21.14.1, complete power-series case: final paragraph: monic factor over the fraction field has integral coefficients, hence lies in the normal coefficient ring; isolate the polynomial algebra independent of the power-series prime.",
+   "via": [
+    "lem-sfb-complete-normal-horizontal-primes-principal",
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-domain-monic-prime-factorization",
+  "worker": "stage1",
+  "group": "Q72",
+  "summary": "Preserved every hypothesis and clause. Normalized a field UFD factorization, descended each monic divisor using one new Mathlib leaf, proved the quotient injection by the existing power-basis leaf, and proved the local coefficient condition directly by convolution in the residue field. No Lean attachment gives the whole item.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs.py ancestor confirms this); this node is an algebraic tool below the EGA IV4 21.14.1 complete power-series paragraph recorded in blueprint.from.place. Steps 1-3 realize monic prime factorization there; step 4 supplies the distinguished-coefficient condition required by the parent. The latest unit was read; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-85b413103",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-85b413103 (reviewer sub-agent of L); spot-checked: I read the item in full: 4 steps, statement unchanged. I also read the new node lem-sfb-normal-monic-divisor-descent and every cited statement. Sources: Stacks 00H6, algebra.tex:8432-8479, and 0BC1 at algebra.tex:29578; Mathlib GaussLemma.lean:80-83 and AdjoinRoot. The mathematics is correct. Small cases tested: F=1, F=T^r, Z with T^2+1, the non-UFD normal domain k[x,y,z]/(xy-z^2), and the local clause with m=0 and over Z_(p). The new node is true (Gauss lemma for an integrally closed A with a monic divisor). It is not a restatement of the item and not a duplicate: lem-weil-monic-divisor-integral only covers Z/Q, and lem-zl-monic-divisor-algebraic-coefficients only gives algebraicity over a subfield. Mechanical finding: steps 1 and 3 cite lem-per-polynomial-ufd-prime-quotient, which is on line 1763 of route-pivot-dropped.txt (2026-10-19 artin-gabber section). That node is generic PID/UFD algebra, so this is a citation fault, not use of the forbidden route; the item uses no Qbar, adic, middle t-structure, Gabber or alteration input. FIX: step 1 now cites a new statement-only leaf, lem-sfb-field-polynomial-irreducible-factorization: a nonzero P in K[T] equals u times a product of irreducibles. It is unsplit with mathlib_candidate WfDvdMonoid.exists_factors (Defs.lean:77) plus Polynomial.isUnit_iff (Degree/Units.lean:48), source Stacks 0BC1, created.item set to this item. A whole-DAG search found no live node stating this. Step 3 now cites the existing lem-trf-irreducible-polynomial-quotient-field (K[T]/(p) is a field), whose closure has no dropped node, and adds that a field is a nonzero domain. proof_deps were recomputed and the dropped id is gone. Unit, chapter route and item statement are unchanged, and no SGA source is used.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
+}

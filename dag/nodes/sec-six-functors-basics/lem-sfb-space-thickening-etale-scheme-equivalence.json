@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-space-thickening-etale-scheme-equivalence",
+ "kind": "statement",
+ "title": "Etale scheme objects are invariant under algebraic-space thickenings",
+ "statement": "Let $B$ be a scheme and work with algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A thickening means a representable closed immersion inducing a homeomorphism on underlying spaces; closed immersions are tested after every scheme base change [def-weil-closed-immersion], and underlying spaces have the quotient topology from a surjective etale scheme atlas [def-a1-space-point-topology]. Let $i:W_0\\hookrightarrow W$ be any thickening. For an algebraic space $H$, let $\\operatorname{EtSch}(H)$ have as objects schemes $V$ with a representable etale map $V\\to H$, and as arrows all morphisms of schemes over $H$. Then base change induces an equivalence of categories $$\\operatorname{EtSch}(W)\\longrightarrow\\operatorname{EtSch}(W_0),\\qquad V\\longmapsto V\\times_W W_0.$$ In particular every etale scheme object over $W_0$ has an etale scheme lift over $W$, and for any two such lifts the map on morphism sets is bijective. No quasi-compactness, separation, finite type, or finite-order hypothesis on the thickening is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05ZS, lemma-thickening-equivalence, full statement."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "For every scheme test $T\\to W$, thickening base change makes $W_0\\times_WT\\to T$ a surjective closed immersion of schemes. The cited scheme lemma therefore makes it integral, universally injective and surjective. Representability is already part of the definition of $i$. All hypotheses of integral-radicial etale invariance hold, so pullback gives an equivalence $F:\\operatorname{EtSp}(W)\\to\\operatorname{EtSp}(W_0)$ of the categories of chartwise etale algebraic-space objects.",
+   "uses": [
+    "lem-sfb-space-thickening-base-change",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-sfb-space-integral-radicial-etale-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZS (lemma-thickening-equivalence), proof using Tag 05ZH (theorem-topological-invariance) and Tag 05ZR (lemma-thickening-scheme)."
+   }
+  },
+  {
+   "text": "If $V\\to W$ is a scheme object, then $V_0=W_0\\times_WV$ is a scheme: the projection $V_0\\to V$ is a scheme base change of the representable map $i$. Chartwise etaleness is preserved by base change, and for scheme sources it is equivalent to representable etaleness. Consequently $F(V)$ lies in $\\operatorname{EtSch}(W_0)$, and $F$ restricts to the functor in the statement, with its action on arrows given by fibre products.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZS (lemma-thickening-equivalence), proof using Tag 05ZH (theorem-topological-invariance) and Tag 05ZR (lemma-thickening-scheme)."
+   }
+  },
+  {
+   "text": "Given $U_0\\in\\operatorname{EtSch}(W_0)$, essential surjectivity of the ambient equivalence gives a chartwise etale algebraic space $V\\to W$ and an isomorphism $V_0=W_0\\times_WV\\cong U_0$ over $W_0$. Thus $V_0$ is represented by the scheme $U_0$. Thickening base change makes $V_0\\hookrightarrow V$ a thickening; the cited thickening-of-a-scheme theorem now shows that $V$ is a scheme. Its chartwise etale structure map is representable etale by the scheme-source clause of etale permanence. Hence $V$ is an object of $\\operatorname{EtSch}(W)$ lifting $U_0$. None of these results assumes finite order of the thickening.",
+   "uses": [
+    "lem-sfb-space-integral-radicial-etale-invariance",
+    "lem-sfb-space-thickening-base-change",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZS (lemma-thickening-equivalence), proof using Tag 05ZH (theorem-topological-invariance) and Tag 05ZR (lemma-thickening-scheme)."
+   }
+  },
+  {
+   "text": "For schemes $V,V\\prime$, Yoneda identifies natural transformations $h_V\\to h_{V\\prime}$ with scheme morphisms $V\\to V\\prime$, compatibly with their maps to $W$. Therefore $\\operatorname{EtSch}(W)$ is the full subcategory of scheme objects in $\\operatorname{EtSp}(W)$, and likewise over $W_0$. The ambient full faithfulness gives precisely the required bijections on their morphism sets. Choose the lifts of step 3 and their reduction isomorphisms. Define an inverse functor on arrows by the unique preimages under these Hom bijections. Uniqueness proves preservation of identities and compositions. The chosen reduction isomorphisms form the counit; lift their inverses to obtain the unit. Naturality and the triangle identities can be checked after the faithful functor $F$, where they are identities. This proves the claimed equivalence and both concluding assertions.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-pc-yoneda",
+    "lem-sfb-space-integral-radicial-etale-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZS (lemma-thickening-equivalence), proof using Tag 05ZH (theorem-topological-invariance) and Tag 05ZR (lemma-thickening-scheme)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-thickening-base-change",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-sfb-space-integral-radicial-etale-invariance",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-thickening-of-scheme-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-pc-yoneda"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05ZS (lemma-thickening-equivalence), proof using Tag 05ZH (theorem-topological-invariance) and Tag 05ZR (lemma-thickening-scheme)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An infinitesimal thickening of algebraic spaces induces an equivalence of categories of etale scheme objects",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme etale category, its forgetful fully faithful functor, and equivalences of sheaf categories on affine/small sites do not give invariance of etale scheme objects over arbitrary algebraic-space thickenings"
+  },
+  {
+   "tool": "grep",
+   "query": "thickening.*[Ee]tale|[Ee]tale.*thickening|AlgebraicSpace",
+   "results": "Actual search: 0 hits; . Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme etale category, its forgetful fully faithful functor, and equivalences of sheaf categories on affine/small sites do not give invariance of etale scheme objects over arbitrary algebraic-space thickenings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"equivalence\"",
+   "results": "Actual search: 5 hits; SimplexCategory.skeletalEquivalence, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec_1, CommAlgCat.instIsEquivalenceOppositeFiniteEtaleFintypeCatFiniteSpecOfIsSepClosed, CommAlgCat.instIsEquivalenceOppositeFiniteEtaleFintypeCatFiberOfIsSepClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme etale category, its forgetful fully faithful functor, and equivalences of sheaf categories on affine/small sites do not give invariance of etale scheme objects over arbitrary algebraic-space thickenings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback by a nilpotent closed immersion gives an equivalence on etale schemes over an algebraic space",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme etale category, its forgetful fully faithful functor, and equivalences of sheaf categories on affine/small sites do not give invariance of etale scheme objects over arbitrary algebraic-space thickenings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A thickening of algebraic spaces induces equivalence of etale algebraic spaces",
+   "results": "Actual search: 8 hits; RingHom.Etale.toAlgebra, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.of_equiv, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme etale category, its forgetful fully faithful functor, and equivalences of sheaf categories on affine/small sites do not give invariance of etale scheme objects over arbitrary algebraic-space thickenings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a closed immersion inducing a homeomorphism of algebraic spaces gives an equivalence on etale scheme objects",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-23",
+   "verdict": "no match: hits only provide the etale over-category and permanence for schemes, not equivalence for scheme objects over algebraic-space thickenings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pushout-compatible-etale-charts",
+  "date": "2026-10-23",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2). Input for lifting a scheme object across U -> Y and X -> Z: Stacks 05ZS, lemma-thickening-equivalence.",
+   "via": [
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-thickening-etale-scheme-equivalence",
+  "worker": "stage1",
+  "summary": "Followed Stacks 05ZS, verifying the scheme-test hypotheses of 05ZH, restriction to scheme objects via the existing 05ZR node, and the Hom bijections via Yoneda. Added only the statement-only 05ZH theorem, with chartwise etale objects and representable integral radicial surjection hypotheses. Reused existing thickening base-change and scheme representability nodes; no finite-order hypothesis added. No project declaration states the item.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/marked-plurinodal chain and its 07W3 compatible-chart prerequisite. The latest blueprint direct-images proof (3) still uses the proper/open factorization; this split changes neither that route nor the unit. The inherited blueprint.from.node is null and blueprint.from.place/via are retained; the ancestor command returns None. This is a source-level foundation below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Generic scheme lemma verifies the integral, universally injective, surjective hypotheses after every scheme test; the unit does not supply a replacement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product construction supplies the pullbacks in the functor; this is a foundational tool, not a trace-formula route."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale permanence and the scheme-source equivalence connect the ambient category to representable etale scheme objects."
+   },
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Retains the actual Yoneda sheaf when comparing scheme objects and algebraic-space objects."
+   },
+   {
+    "node": "lem-pc-yoneda",
+    "why": "The full Yoneda bijection identifies scheme arrows with natural transformations, so the restriction is to full subcategories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-trf-scheme-algebraic-space",
+  "lem-pc-yoneda"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-f1aa8a0f8",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-f1aa8a0f8 (reviewer sub-agent of L); spot-checked: I read Stacks spaces-more-morphisms 05ZS (l.1817), the full statement and proof of 05ZH (l.1316), Remark 05ZI, and 05ZR (l.1730, general and finite-order proofs). The item's split follows the Stacks proof of 05ZS exactly. Step 1: the scheme-test hypotheses of the new 05ZH node come from 09ZX thickening base change (stated for any algebraic-space T) and the scheme lemma that a surjective closed immersion is integral, universally injective and surjective. Step 2: scheme objects go to scheme objects, by representability of i plus the base-change and scheme-source clauses of chartwise etale permanence. Step 3: essential surjectivity of 05ZH plus 05ZR with no finiteness assumption makes the lift V a scheme, and it is representable etale. Step 4: by Yoneda, EtSch is a full subcategory of EtSp; the step writes out the inverse functor and the unit/counit. The new node lem-sfb-space-integral-radicial-etale-invariance is faithful to 05ZH: Stacks' integral includes representable, the scheme-test forms of universally injective and surjective are equivalent for representable maps, chartwise etale equals Stacks etale, and the arrows are all maps over H. It is statement-only, self-contained, and not a clause of the item (purely inseparable field extensions are covered but are not thickenings). Tested on the identity, empty spaces, a purely inseparable extension and the infinite nil-ideal k[e_i]/(e_i^2). Not a duplicate: thickening-detects-iso only detects isomorphisms, sbc-lem-thickening-etale-site is about schemes, and lem-trf-proetale-topological-invariance is about pro-etale sheaves. There is no cycle and no SGA source. The only change to the item statement is a definition citation, [def-a1-space-point-topology]; the mathematics is unchanged. Batch 5: all seven flagged citations are general algebraic-space foundations, namely def-trf-algebraic-space, trf fibre products (02X2), etale permanence (03FR-03FV), scheme as a space (025Y), point topology (03BX), 09ZX and the existing 05ZR node. Their closures contain no trace-formula or Poincare-duality statement or step and do not reach nt-assume, so I accept them. I accept the five general foundation tool_uses; the unit route is unchanged."
+ }
+}

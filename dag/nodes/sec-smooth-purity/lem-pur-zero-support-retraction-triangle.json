@@ -1,0 +1,317 @@
+{
+ "id": "lem-pur-zero-support-retraction-triangle",
+ "kind": "statement",
+ "title": "Affine-line support localization after the retraction",
+ "statement": "Fix the finite-field and finite-coefficient datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ has characteristic $p_0$, $\\ell\\ne p_0$, $E/\\mathbf Q_\\ell$ is finite with uniformizer $\\varpi_E$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. Let $Y$ be a separated finite-type $k$-scheme, assume $e(E/\\mathbf Q_\\ell)\\mid n$, and set $N=n/e$. Use the affine-line datum [def-pur-affine-line-datum]: $X=\\mathbf A^1_Y$, projection $p:X\\to Y$, zero section $s:Y\\hookrightarrow X$, complementary open $j:U=\\mathbf G_{m,Y}\\hookrightarrow X$, and $\\pi=pj$. Work with ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-modules], with derived direct images [def-weil-derived-direct-image]. Put $F=A_X(1)[0]$, where the twist is the one in the affine-line datum. Let $Rs^!_0$ be the right derived functor on bounded-below complexes of $M\\mapsto s^{-1}\\ker(M\\to j_*j^*M)$ [def-pur-flasque-support], and put $B_0=Rs^!_0F$, $P=Rp_*F$, $Q=R\\pi_*A_U(1)[0]$.\n\nThe ring $A$ is finite; $Y,X,U$ are Noetherian, $X,U$ are finite type over $k$, and $j$ is quasi-compact. Here Noetherian means quasi-compact and locally Noetherian. The functor $s_*$ on these module sheaves is exact; its termwise derived functor is canonically $Rs_*$, commutes with shifts, and satisfies $\\mathcal H^q(s_*L)=s_*\\mathcal H^q(L)$ for every complex $L$ and integer $q$ [def-weil-derived-cohomology-sheaves]. The canonical composition comparisons of [lem-weil-derived-direct-image-composition] for $ps=\\mathrm{id}_Y$ and $pj=\\pi$ identify the image under $Rp_*$ of the support localization triangle of [lem-pur-support-localization-triangle] with a distinguished triangle [def-weil-triangulated-category]\n$$B_0\\longrightarrow P\\xrightarrow{r}Q\\xrightarrow{\\delta}B_0[1].$$\nIts first arrow is the image of the support-adjunction counit $s_*B_0\\to F$, and $r$ is the image of $F\\to Rj_*j^*F$ under $Rp_*$ followed by the canonical composition comparison. These identifications are natural in the displayed input. No identification of $Rs^!_0$ with a transported exceptional functor is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-derived-direct-image",
+  "def-pur-flasque-support",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-triangulated-category",
+  "lem-pur-support-localization-triangle",
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pur-finite-kummer-level], $A\\cong(\\mathbf Z/\\ell^N\\mathbf Z)^{ef}$ as a module, with $e,f,N$ finite positive integers. The right side has $(\\ell^N)^{ef}$ elements, so $A$ is a finite commutative ring. The hypotheses $e\\mid n$, $n\\geq1$ and $\\ell\\ne p_0$ are precisely those of that lemma.",
+   "uses": [
+    "lem-pur-finite-kummer-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-affine-line-support-geometry] to the field $k$ and the finite-type $k$-scheme $Y$. Its $X,s,U,j$ are our affine-line pair. It gives finite type of $X,U$, Noetherianity of $Y,X,U$, and quasi-compactness of $j$.",
+   "uses": [
+    "lem-pur-affine-line-support-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2."
+   }
+  },
+  {
+   "text": "By [lem-exc-proetale-closed-exact], $s_*$ is exact, since its complementary open $j$ is quasi-compact and $A$ is finite. Apply [lem-weil-pbc-exact-functor-derived-functor]: its termwise functor computes $Rs_*$ on every complex. Termwise application commutes with shifts by [lem-sf-exact-functor-derived-triangulated]. For a complex $L$, exactness preserves the kernel of $d^q$, the image of $d^{q-1}$ and their quotient, giving $\\mathcal H^q(s_*L)=s_*\\mathcal H^q(L)$, naturally; the same calculation shows that these identifications descend through quasi-isomorphisms.",
+   "uses": [
+    "lem-exc-proetale-closed-exact",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; exactness preserves the kernels, images and quotients defining cohomology. Closed pushforward exactness is Tag 09BM, proetale.tex, lemma-closed-immersion-complement-retrocompact-exact."
+   }
+  },
+  {
+   "text": "The degree-zero sheaf complex $F$ is bounded below. Apply [lem-pur-support-localization-triangle], using the finite ring and quasi-compact complement already checked. Its support functor is exactly $Rs^!_0$, so it gives $s_*B_0\\xrightarrow{\\epsilon}F\\xrightarrow{\\eta}Rj_*j^*F\\xrightarrow{b}(s_*B_0)[1]$. In the model [def-pur-support-triangle] the first arrow is the supported-kernel inclusion and the second is the open unit. By [lem-sf-ringed-closed-kernel-adjoint], the kernel identification carries that inclusion to the sheaf support counit, and the derived counit is induced by this sheaf counit. Thus $\\epsilon$ is the support-adjunction counit, with the triangle functoriality asserted by the localization theorem.",
+   "uses": [
+    "lem-pur-support-localization-triangle",
+    "def-pur-support-triangle",
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2."
+   }
+  },
+  {
+   "text": "The module-sheaf categories admit K-injective resolutions by [prop-pur-kinjective-resolutions-exist], on the small sites stipulated in the statement. The functor $p_*$ is additive by [lem-weil-proetale-module-direct-image-left-exact]. Hence [lem-pc-right-derived-functor-triangulated] applies to its ordinary right derived functor $Rp_*$ and makes the image of the preceding triangle distinguished, using its specified shift isomorphism $\\sigma:Rp_*((s_*B_0)[1])\\xrightarrow{\\sim}(Rp_*s_*B_0)[1]$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-proetale-module-direct-image-left-exact",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2."
+   }
+  },
+  {
+   "text": "In [def-pur-affine-line-datum], $ps=\\mathrm{id}_Y$ and $pj=\\pi$; restriction of its twist gives $j^*F=A_U(1)[0]$, compatibly with base change by [lem-pur-finite-kummer-level]. Since $\\ell$ is invertible on these $k$-schemes, the finite-level, unrestricted comparison of [lem-weil-derived-direct-image-composition], together with $Rs_*=s_*$, gives natural isomorphisms $\\alpha:Rp_*s_*B_0\\xrightarrow{\\sim}B_0$ and $\\beta:Rp_*Rj_*j^*F\\xrightarrow{\\sim}Q$. They use the inverses of $c_{p,s}$ and $c_{p,j}$ and the canonical identity identification.",
+   "uses": [
+    "def-pur-affine-line-datum",
+    "lem-pur-finite-kummer-level",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2."
+   }
+  },
+  {
+   "text": "Transport the distinguished image triangle by $(\\alpha,1_P,\\beta)$ and its shifted first component. Explicitly its arrows are $u=Rp_*(\\epsilon)\\alpha^{-1}$, $r=\\beta Rp_*(\\eta)$, and $\\delta=\\alpha[1]\\sigma Rp_*(b)\\beta^{-1}$. The three squares commute by these formulas, so invariance under isomorphism of distinguished triangles gives $B_0\\to P\\to Q\\to B_0[1]$. These formulas give the stated first two arrows. Every map and comparison used above is natural, so the same formulas commute with morphisms of the input. This proves the required naturality.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-kummer-level",
+  "lem-pur-affine-line-support-geometry",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-support-localization-triangle",
+  "def-pur-support-triangle",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-pur-affine-line-datum",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2. Assembly from existing DAG lemmas; exact closed pushforward checked against Stacks Tags 09BM and 015F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supportLocalization|sectionsWithSupport|retractedSupport|upperShriek",
+   "results": "{\"t\": \"2026-10-22T06:45:43Z\", \"tool\": \"grep\", \"query\": \"supportLocalization|sectionsWithSupport|retractedSupport|upperShriek\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf localization, underived Zariski module pushforward or syntax support; none states the pro-etale support retraction triangle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of a closed section support localization triangle along a retraction",
+   "results": "{\"t\": \"2026-10-22T06:45:43Z\", \"tool\": \"leansearch\", \"query\": \"Pushforward of a closed section support localization triangle along a retraction\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\"",
+   "results": "{\"t\": \"2026-10-22T06:45:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"support\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Macro.Exception.unsupportedSyntax\", \"Lean.Macro.throwUnsupported\", \"IO.Error.mkUnsupportedOperation\", \"IO.Error.unsupportedOperation\", \"Std.Http.Status.httpVersionNotSupported\", \"Std.Http.Status.unsupportedMediaType\", \"Std.Http.Protocol.H1.Error.unsupportedVersion\", \"Lean.Elab.unsupportedSyntaxExceptionId\"], \"digest\": \"d9148962c94e22f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf localization, underived Zariski module pushforward or syntax support; none states the pro-etale support retraction triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed section of a scheme morphism, pushforward of the derived sections with support triangle and composition identify its first term with the support adjoint value",
+   "results": "{\"t\": \"2026-10-22T06:45:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed section of a scheme morphism, pushforward of the derived sections with support triangle and composition identify its first term with the support adjoint value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\"], \"digest\": \"b900fe3208c56d00\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf localization, underived Zariski module pushforward or syntax support; none states the pro-etale support retraction triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Applying derived projection to the zero section support localization triangle yields the support functor fiber of affine line restriction to the punctured line",
+   "results": "{\"t\": \"2026-10-22T06:45:56Z\", \"tool\": \"leanfinder\", \"query\": \"Applying derived projection to the zero section support localization triangle yields the support functor fiber of affine line restriction to the punctured line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\"], \"digest\": \"cd825a3f49e7d70d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf localization, underived Zariski module pushforward or syntax support; none states the pro-etale support retraction triangle."
+  },
+  {
+   "tool": "grep",
+   "query": "supportLocalization|sectionsWithSupport|retractedSupport|upperShriek",
+   "results": "{\"t\": \"2026-10-22T08:07:19Z\", \"tool\": \"grep\", \"query\": \"supportLocalization|sectionsWithSupport|retractedSupport|upperShriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic retracts, exact functor localization and triangulated functors do not supply the affine-line pro-etale support triangle; the semantic hits on schemes concern Zariski structure sheaves and affine limits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Push a closed section support localization triangle through a derived direct image along a retraction",
+   "results": "{\"t\": \"2026-10-22T08:07:20Z\", \"tool\": \"leansearch\", \"query\": \"Push a closed section support localization triangle through a derived direct image along a retraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Retract.map_i\", \"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map\", \"ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap\", \"CategoryTheory.Retract.map\", \"CategoryTheory.Retract.trans_i\", \"CategoryTheory.Retract.i\"], \"digest\": \"eed5223cec545472\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic retracts, exact functor localization and triangulated functors do not supply the affine-line pro-etale support triangle; the semantic hits on schemes concern Zariski structure sheaves and affine limits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"t\": \"2026-10-22T08:07:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsTriangulated.instId\", \"CategoryTheory.Functor.IsTriangulated\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair\", \"CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms\", \"CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor\", \"CategoryTheory.Functor.isTriangulated_of_iso\", \"CategoryTheory.Functor.isTriangulated_iff_of_iso\"], \"digest\": \"31acebc33d5862fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic retracts, exact functor localization and triangulated functors do not supply the affine-line pro-etale support triangle; the semantic hits on schemes concern Zariski structure sheaves and affine limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the zero section of the affine line over a scheme, the derived support localization triangle pushes forward along the projection to the support functor, the affine line direct image and the punctured line direct image",
+   "results": "{\"t\": \"2026-10-22T08:07:22Z\", \"tool\": \"leanfinder\", \"query\": \"For the zero section of the affine line over a scheme, the derived support localization triangle pushes forward along the projection to the support functor, the affine line direct image and the punctured line direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\", \"AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map\", \"AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.opensRange_map\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map\", \"AlgebraicGeometry.Scheme.Hom.toImage_app\"], \"digest\": \"be152547be553457\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic retracts, exact functor localization and triangulated functors do not supply the affine-line pro-etale support triangle; the semantic hits on schemes concern Zariski structure sheaves and affine limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived closed support functor for ordinary constant coefficient pro etale sheaves on the affine line is the fiber of restriction of the projection direct image to the multiplicative group",
+   "results": "{\"t\": \"2026-10-22T08:14:08Z\", \"tool\": \"leanfinder\", \"query\": \"Derived closed support functor for ordinary constant coefficient pro etale sheaves on the affine line is the fiber of restriction of the projection direct image to the multiplicative group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.StructureSheaf.res_const\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiber\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\"], \"digest\": \"a959da0a0c32f7a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic retracts, exact functor localization and triangulated functors do not supply the affine-line pro-etale support triangle; the semantic hits on schemes concern Zariski structure sheaves and affine limits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-gysin-structure",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-gysin-structure",
+   "place": "First paragraph, localization triangle through Rp_* and the identifications ps=id and pj=pi; returned steps 1-2.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-zero-support-retraction-triangle",
+  "worker": "stage1",
+  "summary": "Q133: split by direct assembly from existing nodes, with no new nodes. Verified finite coefficients and the quasi-compact affine-line support pair, exactness and termwise derivation of s_*, and the canonical composition maps. The transported boundary is given explicitly, with naturality; no exceptional-functor transport is invoked. Statement unchanged.",
+  "blueprint": "Realizes the first paragraph of lem-pur-gysin-structure.proof.md, from applying the support localization triangle through Rp_* to ps=id and pj=pi.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Exact closed pushforward on ordinary finite constant pro-etale modules; the quasi-compact complement is verified by the affine-line geometry lemma. This is a general-purpose prerequisite; no statement of the affine-line Kummer unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor comparison identifies termwise closed pushforward with its ordinary right derived functor. This is a general-purpose prerequisite; no statement of the affine-line Kummer unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor shift compatibility, applied to closed pushforward. This is a general-purpose prerequisite; no statement of the affine-line Kummer unit supplies this generic fact."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of K-injective resolutions for the ordinary sheaf-module categories on the stipulated small sites. This is a general-purpose prerequisite; no statement of the affine-line Kummer unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-proetale-module-direct-image-left-exact",
+    "why": "Additivity of module direct image, needed for the generic triangulated right-derived theorem. This is a general-purpose prerequisite; no statement of the affine-line Kummer unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic triangulatedness of an additive functor derived through K-injectives; used for Rp_*. This is a general-purpose prerequisite; no statement of the affine-line Kummer unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sf-ringed-closed-kernel-adjoint",
+    "why": "Identifies the supported-kernel inclusion with the actual support counit on sheaves and after derivation. This generic ringed support-adjunction fact verifies the arrow normalization; the affine-line Kummer unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sf-exact-functor-derived-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-ringed-closed-kernel-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-f8c6b2247",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-f8c6b2247 (reviewer sub-agent of L); spot-checked: Q133 head f8c6b224. One commit, which changes only the item and the report. The statement is unchanged. The split has 7 steps and no new nodes. The item has no repair note, so the re-split rules do not apply. Blueprint source: main-20261015 lem-pur-gysin-structure.proof.md, first paragraph (support triangle for (s,j), then Rp_*, s_* exact, ps=id, pj=π). The 7 steps realize exactly that paragraph. Step checks: (1) lem-pur-finite-kummer-level gives A≅(Z/ℓ^N)^{ef}, so A is finite; its hypotheses e|n, n≥1 and ℓ≠p0 match the item. (2) lem-pur-affine-line-support-geometry applies to the finite-type k-scheme Y and gives finite type of X and U, Noetherianity of Y, X and U, and quasi-compactness of j. (3) lem-exc-proetale-closed-exact (quasi-compact complement, finite ring) gives s_* exact; lem-weil-pbc-exact-functor-derived-functor says every complex computes Rs_*; lem-sf-exact-functor-derived-triangulated gives the shift compatibility; the H^q formula is an elementary kernel/image calculation and holds for unbounded L. (4) lem-pur-support-localization-triangle: the item's Rs^!_0 is literally the theorem's Rs^! on D^+, and F=A_X(1)[0] is bounded below. def-pur-support-triangle gives the first arrow as the kernel inclusion and the second as the open unit. lem-sf-ringed-closed-kernel-adjoint (any ring sheaf, here constant A) carries the inclusion to the counit, and the derived counit is induced by the sheaf counit. Bounded-below injective complexes are K-injective, so the two derived functors agree on D^+. (5) K-injectives on small sites plus additivity of p_* make Rp_* triangulated by lem-pc-right-derived-functor-triangulated, with σ as its shift comparison. (6) Clause 1 of lem-weil-derived-direct-image-composition (finite level, all of D, ℓ invertible) gives c_{p,s} and c_{p,j}, whose inverses are used correctly; together with the identity normalization they give α and β. j^*A_X(1)=A_U(1) by base-change compatibility of the twist. (7) The triangle is transported along the triangle isomorphism (α,1,β,α[1]) using TR1, with explicit formulas for u, r and δ; naturality follows because every comparison is natural. Structure: proof_deps equals the union of the steps' uses, there is no cycle, and no step exceeds 2000 characters. Searching the DAG for Rs^! together with Rπ_* finds only the item and its parent, so there is no duplicate. The item cites no SGA source. Edge cases: Y empty, Y a point, N=1 and non-reduced Y are all fine; separatedness is not used. I accept the generic tool_uses. Batch-5: both flagged citations reach lem-poincare-compatible-primitive-roots through def-pur-affine-line-datum, which the item's own statement already cites, so the path is already in the statement closure. The proof closure adds 5 nodes, none of them in a trace-formula or Poincaré-duality chapter. The flagged node is a twist-foundation fact, not a duality step; this was accepted before for Q03, Q159 and Q123. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityZeroSupportRetractionTriangle",
+  "declaration": "WeilConjectures.PurityFiniteSetting.zero_support_retraction_triangle",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ZeroSupportSheaves",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportFinite",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportClosed",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportOpen",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportInput",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportValueFunctor",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportMiddleFunctor",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportOpenFunctor",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportRestriction",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportAdjunction",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportClosedExact",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportCollapse",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportFirst",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportLocalFirstFunctor",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportLocalThirdFunctor",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportLocalTriangle",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportAlpha",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportOpenCoefficient",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportQ",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportBeta",
+   "WeilConjectures.PurityFiniteSetting.zeroSupportTriangle",
+   "WeilConjectures.PurityFiniteSetting.ZeroSupportRetractionTriangle",
+   "WeilConjectures.PurityFiniteSetting.zero_support_retraction_triangle"
+  ],
+  "file": "lean/Sheaf/Paper/PurityZeroSupportRetractionTriangle.lean",
+  "statement": "theorem zero_support_retraction_triangle (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : Finite P.Ring ∧ IsNoetherian Y ∧ IsNoetherian (Line Y) ∧ IsNoetherian (Punctured Y) ∧ (LocallyOfFiniteType (lineProjection Y ≫ a) ∧ QuasiCompact (lineProjection Y ≫ a)) ∧ (LocallyOfFiniteType (puncturedProjection Y ≫ a) ∧ QuasiCompact (puncturedProjection Y ≫ a)) ∧ ∃ (hq : QuasiCompact (openImmersion Y)) (hPair : IsCompl (Set.range (zeroSection Y)) (Set.range (openImmersion Y))), @ZeroSupportRetractionTriangle P Y hq hPair h",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11ea14281",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Single-item delivery: only the item's lean field and one new module change; the 9 stmt_dep records are byte-equal to side-live; lean.statement is verbatim. Checked clause by clause: P/h/separated finite-type a; A finite, Y/X/U Noetherian, X/U finite type and j quasi-compact all stated as conclusions; s_* exact via preservesFiniteColimits_lowerStar_of_isCompl, plus Rs_* comparison, shift and homology isos for all q. The triangle B0→P→Q→B0[1] is distinguished and identified with Rp_*.mapTriangle of the localization triangle with components pinned to alpha, identity, beta. alpha is built from the canonical rightDerivedFunctorIsoMapDerivedCategory, the inverse finiteDirectImageComposition, zeroSection_comp_over, lowerStarId and mapDerivedCategoryIdIso; beta from the Plus/unbounded compatibility, the inverse compositor and c. c.hom is pinned to the canonical twistEtalePullback map. The first arrow uses the counit of .choose of the stmt_dep theorem supportLocalizationTriangle. The boundary d is pinned at F through an iso to supportModelTriangle with the published model comparisons. Squares 1 and 3 commute by construction; square 2 is a true Plus/unbounded unit coherence, so the statement is not a tautology. Edge cases (empty Y, all degrees, universes) fine; no hollow definitions; only the theorem's sorry; docstrings and source places present. Advisories only: (1) native ModuleCat presentation instead of the recorded FiniteCoefficientModules/SfIntegralDirectImage types, forced by the composition and localization deps; (2) the Rs_*/shift/homology background facts are rendered as Nonempty isos, while the canonical iso is the one used in alpha; (3) support model declarations owned by def-pur-support-triangle and def-pur-triangle-meaning are outside stmt_deps but inside the stmt_dep theorem's statement closure. No file changes, so no compile."
+ }
+}

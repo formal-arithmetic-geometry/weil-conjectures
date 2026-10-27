@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-scheme-product-image-closure",
+ "kind": "statement",
+ "title": "Closure of a product image for schemes over a field",
+ "statement": "Let $k$ be a field [def-weil-field] and $A,B,X,Y$ schemes [def-pc-scheme] with specified morphisms to $\\operatorname{Spec}k$ [def-weil-affine-spectrum]. Let $f:A\\to X$ and $g:B\\to Y$ commute with those structure morphisms. Let $j_X:C_f\\hookrightarrow X$ and $j_Y:C_g\\hookrightarrow Y$ be the reduced induced closed subschemes on the closed subsets $\\overline{f(|A|)}$ and $\\overline{g(|B|)}$, respectively [lem-weil-pbc-reduced-induced-closed-subscheme]. With fibre products and their induced morphisms as in [def-pc-fibre-product], the following equality of subsets of $|X\\times_{\\operatorname{Spec}k}Y|$ holds: $\\overline{(f\\times_k g)(|A\\times_{\\operatorname{Spec}k}B|)}=(j_X\\times_k j_Y)(|C_f\\times_{\\operatorname{Spec}k}C_g|)$. All closures are Zariski topological closures. No quasi-compactness, finite-type, reducedness or separatedness assumption on $A,B,X,Y$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04Q0 (lemma-closure-image-product-map), statement and proof; the product of closed subsets is expressed as the image of the product of their reduced induced closed subschemes."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=X\\times_kY$, write $p_X,p_Y$ for its projections, put $F=f(|A|)$, $G=g(|B|)$, and let $E=(f\\times_kg)(|A\\times_kB|)$. The image formula of [lem-sfb-scheme-pullback-point-images], applied over $\\operatorname{Spec}k$, gives $E=p_X^{-1}(F)\\cap p_Y^{-1}(G)$. Apply the same formula to $j_X,j_Y$. Since their images are $\\overline F,\\overline G$ by [lem-weil-pbc-reduced-induced-closed-subscheme], the image $H=(j_X\\times_kj_Y)(|C_f\\times_kC_g|)$ equals $p_X^{-1}(\\overline F)\\cap p_Y^{-1}(\\overline G)$. Morphisms of schemes are continuous, so $H$ is closed and contains $E$. Thus $\\overline E\\subseteq H$.",
+   "uses": [
+    "lem-sfb-scheme-pullback-point-images",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04Q0, image identification; Tag 047B, first sentence of proof."
+   }
+  },
+  {
+   "text": "Write $Q=C_f\\times_kC_g$, $q=j_X\\times_kj_Y$, and let $r_X,r_Y$ be the projections of $Q$. The closed immersions $j_X,j_Y$ are homeomorphisms onto their images [def-weil-closed-immersion]. Hence $F_0=j_X^{-1}(F)$ is dense in $|C_f|$: every nonempty relative open subset of $\\overline F$ meets $F$, by the definition of closure. Likewise $G_0=j_Y^{-1}(G)$ is dense in $|C_g|$. To show $H\\subseteq\\overline E$, let $O\\subseteq|P|$ be open with $O\\cap H\\ne\\varnothing$. Then $W=q^{-1}(O)$ is nonempty open in $|Q|$, by continuity and $q(|Q|)=H$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 047B, replacement of the ambient schemes by the reduced image closures; relative-density and neighbourhood reformulation."
+   }
+  },
+  {
+   "text": "By [lem-sc-scheme-over-field-universally-open] the projection $r_X:Q\\to C_f$ is open (use $X=C_g$, $S=C_f$, and interchange the two fibre-product factors). Consequently $r_X(W)$ is nonempty open and meets the dense subset $F_0$. Choose $c\\in r_X(W)\\cap F_0$. Form the scheme-theoretic fibre $Q_c=Q\\times_{C_f}\\operatorname{Spec}\\kappa(c)$ [def-pc-scheme-fibre], whose point space identifies with $r_X^{-1}(c)$. The inverse image $W_c$ of $W$ in $Q_c$ is therefore nonempty open. The fibre-product universal property [def-pc-fibre-product] identifies $Q_c$ with $\\operatorname{Spec}\\kappa(c)\\times_k C_g$: both represent pairs consisting of a map to $\\operatorname{Spec}\\kappa(c)$ and a compatible map to $C_g$. Apply [lem-sc-scheme-over-field-universally-open] again, now with $X=\\operatorname{Spec}\\kappa(c)$ and $S=C_g$. The projection of $W_c$ to $C_g$ is nonempty open, so meets $G_0$.",
+   "uses": [
+    "lem-sc-scheme-over-field-universally-open",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 047B, nonempty open W, open first projection, and open projection of the residue-field fibre; openness input Tag 0383 (morphisms-lemma-scheme-over-field-universally-open)."
+   }
+  },
+  {
+   "text": "Choose $d\\in G_0$ in that image and a point $t\\in W_c$ projecting to $d$. Its image $w\\in W$ satisfies $r_X(w)=c$ and $r_Y(w)=d$. Thus $p_X(q(w))=j_X(c)\\in F$ and $p_Y(q(w))=j_Y(d)\\in G$. By the image formula proved in step 1, $q(w)\\in E$; since $w\\in W$, also $q(w)\\in O$. Every open subset meeting $H$ therefore meets $E$, which gives $H\\subseteq\\overline E$ by the neighbourhood definition of closure. Together with step 1 this is the asserted equality. If $H$ is empty, step 1 already gives $E=\\varnothing$ and the equality, so no nonemptiness hypothesis has been introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 047B, final choice of b and nonempty intersection with W; Tag 04Q0, conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scheme-pullback-point-images",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-sc-scheme-over-field-universally-open",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04Q0 (lemma-closure-image-product-map), expanded using Tag 047B (lemma-closure-of-product), with its Tag 0383 openness input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closure.*(prod|pullback)|closure_image.*(prod|pullback)|(prod|pullback).*closure_image",
+   "results": "{\"t\": \"2026-10-23T19:13:58Z\", \"tool\": \"grep\", \"query\": \"closure.*(prod|pullback)|closure_image.*(prod|pullback)|(prod|pullback).*closure_image\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"0ee6a20e667d2a8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: closure_prod_eq and DenseRange.prodMap concern Cartesian products of topological spaces, not scheme fibre products; Scheme.Pullback.range_fst describes only an image projection, and the dominant-morphism declarations do not assert dominance of this product map. Normalization grep hits are unrelated integral-closure formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom, closure, pullback",
+   "results": "{\"t\": \"2026-10-23T19:13:59Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom, closure, pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'pullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid query: loogle: unknown identifier 'pullback'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For two morphisms of schemes over a field, the image of their fibre product is dense in the product of their image closures",
+   "results": "{\"t\": \"2026-10-23T19:13:59Z\", \"tool\": \"leansearch\", \"query\": \"For two morphisms of schemes over a field, the image of their fibre product is dense in the product of their image closures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.denseRange\", \"DenseRange.prodMap\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.instIsDominantCompScheme\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.dominant_eq_topologically\"], \"digest\": \"73b67aee911057ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: closure_prod_eq and DenseRange.prodMap concern Cartesian products of topological spaces, not scheme fibre products; Scheme.Pullback.range_fst describes only an image projection, and the dominant-morphism declarations do not assert dominance of this product map. Normalization grep hits are unrelated integral-closure formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of schemes over a field the closure of the image of their product equals the product of the closures of their images",
+   "results": "{\"t\": \"2026-10-23T19:14:00Z\", \"tool\": \"leanfinder\", \"query\": \"For morphisms of schemes over a field the closure of the image of their product equals the product of the closures of their images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"closure_prod_eq\", \"AlgebraicGeometry.Scheme.Pullback.range_fst_comp\", \"AlgebraicGeometry.Scheme.Pullback.range_snd_comp\", \"AlgebraicGeometry.Scheme.Pullback.range_fst\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"Complex.closure_reProdIm\"], \"digest\": \"7351916c1e6320f6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: closure_prod_eq and DenseRange.prodMap concern Cartesian products of topological spaces, not scheme fibre products; Scheme.Pullback.range_fst describes only an image projection, and the dominant-morphism declarations do not assert dominance of this product map. Normalization grep hits are unrelated integral-closure formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDominant|DenseRange",
+   "results": "{\"t\": \"2026-10-23T19:14:32Z\", \"tool\": \"grep\", \"query\": \"IsDominant|DenseRange\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\"], \"digest\": \"2f23284fa6fff807\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: closure_prod_eq and DenseRange.prodMap concern Cartesian products of topological spaces, not scheme fibre products; Scheme.Pullback.range_fst describes only an image projection, and the dominant-morphism declarations do not assert dominance of this product map. Normalization grep hits are unrelated integral-closure formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsDominant, CategoryTheory.Limits.pullback.map",
+   "results": "{\"t\": \"2026-10-23T19:14:33Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsDominant, CategoryTheory.Limits.pullback.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: closure_prod_eq and DenseRange.prodMap concern Cartesian products of topological spaces, not scheme fibre products; Scheme.Pullback.range_fst describes only an image projection, and the dominant-morphism declarations do not assert dominance of this product map. Normalization grep hits are unrelated integral-closure formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre product of two dominant morphisms of schemes over a field has dense image in the fibre product of the targets",
+   "results": "{\"t\": \"2026-10-23T19:14:34Z\", \"tool\": \"leanfinder\", \"query\": \"The fibre product of two dominant morphisms of schemes over a field has dense image in the fibre product of the targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.instIsDominantCompScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.IsDominant\"], \"digest\": \"ce3b6ba0e5a67fb8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: closure_prod_eq and DenseRange.prodMap concern Cartesian products of topological spaces, not scheme fibre products; Scheme.Pullback.range_fst describes only an image projection, and the dominant-morphism declarations do not assert dominance of this product map. Normalization grep hits are unrelated integral-closure formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "closure.*(prod|pullback)|IsDominant.*(prod|pullback)|(prod|pullback).*IsDominant",
+   "results": "{\"t\": \"2026-10-23T20:46:08Z\", \"tool\": \"grep\", \"query\": \"closure.*(prod|pullback)|IsDominant.*(prod|pullback)|(prod|pullback).*IsDominant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"0ee6a20e667d2a8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No exact closure-of-product-image declaration. Grep hits concern normalization, or the already existing range-map and base-change-image tools, rather than the closure theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of the topological image closures of two scheme morphisms over a field equals the closure of the product morphism image",
+   "results": "{\"t\": \"2026-10-23T20:46:08Z\", \"tool\": \"leansearch\", \"query\": \"The product of the topological image closures of two scheme morphisms over a field equals the closure of the product morphism image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DenseRange.prodMap\", \"closure_prod_eq\", \"closure_pi_set\", \"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Scheme.Pullback.range_snd_comp\", \"Submodule.topologicalClosure_iSup_map_single\", \"Submodule.closure_coe_iSup_map_single\"], \"digest\": \"5c9a887ce53e7936\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only Cartesian topological product closure lemmas and scheme image or projection formulas were returned; these do not assert closure equality for a scheme fibre product."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsDominant, CategoryTheory.Limits.pullback.map",
+   "results": "{\"t\": \"2026-10-23T20:46:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsDominant, CategoryTheory.Limits.pullback.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No exact closure-of-product-image declaration. Grep hits concern normalization, or the already existing range-map and base-change-image tools, rather than the closure theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of arbitrary schemes over a field, the closure of the image of their product map equals the product of their image closures",
+   "results": "{\"t\": \"2026-10-23T20:46:09Z\", \"tool\": \"leanfinder\", \"query\": \"For morphisms of arbitrary schemes over a field, the closure of the image of their product map equals the product of their image closures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.range_fst_comp\", \"AlgebraicGeometry.Scheme.Pullback.range_snd_comp\", \"closure_prod_eq\", \"AlgebraicGeometry.Scheme.Pullback.range_fst\", \"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"Complex.closure_reProdIm\"], \"digest\": \"c2376c6bb636ca62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only Cartesian topological product closure lemmas and scheme image or projection formulas were returned; these do not assert closure equality for a scheme fibre product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre product over a field of two dominant scheme morphisms is dominant without quasi compactness assumptions",
+   "results": "{\"t\": \"2026-10-23T20:47:40Z\", \"tool\": \"leanfinder\", \"query\": \"Fibre product over a field of two dominant scheme morphisms is dominant without quasi compactness assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDominantCompScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"AlgebraicGeometry.IsDominant.of_comp\", \"AlgebraicGeometry.IsDominant.comp_iff\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\"], \"digest\": \"920909f27ac157df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only Cartesian topological product closure lemmas and scheme image or projection formulas were returned; these do not assert closure equality for a scheme fibre product."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem range_map|lemma range_map|range_map |image_preimage_eq_of_isPullback|instance.*UniversallyOpen.*Subsingleton|instUniversallyOpenOfIsIntegral",
+   "results": "{\"t\": \"2026-10-23T20:49:04Z\", \"tool\": \"grep\", \"query\": \"theorem range_map|lemma range_map|range_map |image_preimage_eq_of_isPullback|instance.*UniversallyOpen.*Subsingleton|instUniversallyOpenOfIsIntegral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"ccad4417fc87df0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No exact closure-of-product-image declaration. Grep hits concern normalization, or the already existing range-map and base-change-image tools, rather than the closure theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-field-groupoid-image-closure",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: 04Q8 supplies the closure groupoid and, on the identity morphism of R1, its reduced source. In the proof of 04Q8, the 04Q7 composition argument uses 04Q0: the closure of a product image over a field.",
+   "via": [
+    "lem-sfb-perfect-field-groupoid-image-closure",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-product-image-closure",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 04Q0 through its 047B open-projection and residue-field-fibre argument. Reused existing Mathlib leaves for exact pointwise product images, universal openness over arbitrary fields, and scheme fibres. No new nodes or statement changes. Avoided assuming the original source maps factor through reduced image closures.",
+  "blueprint": "Supporting input in the inherited chain from det-thm-sf-ctf-stability-direct-images, proof (3), through the closure groupoid input (04Q8/04Q7): steps 1--4 realize exactly the 04Q0 closure-of-product-image fact. The current latest blueprint direct-images proof paragraph (3) was read; no chapter or unit route is changed. The ancestor command reports null for the inherited created.item chain; preserve that existing ancestry instead of inventing a new blueprint parent."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-f887290c3",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-f887290c3 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement and Stacks varieties.tex 04Q0 (l.4463) and 047B (l.4425-4459). The statement and stmt_deps are unchanged; they match 04Q0 for arbitrary schemes over k and are not weakened. Step 1: lem-sfb-scheme-pullback-point-images is Mathlib range_map (PullbackCarrier:355, Mono id_{Spec k}). With reduced-induced clause (2), image = T, it gives E = p_X^{-1}(F)∩p_Y^{-1}(G) and H = p_X^{-1}(F̄)∩p_Y^{-1}(Ḡ), so closure(E) ⊆ H. Step 2: closed immersion as homeomorphism onto image; F_0 and G_0 dense; W = q^{-1}(O) nonempty. Step 3: 0383 leaf (arbitrary S) used twice, as in the source. def-pc-scheme-fibre gives W_c ≠ ∅. Q_c ≅ Spec κ(c) ×_k C_g is a fibre-product pasting, a few lines from the universal property; its C_g-component is r_Y. Step 4 is elementary. proof_deps equals the union of uses. lem-weil-pbc-reduced-induced-closed-subscheme (sk-thm-p1) is Lean-closed, so a tool, not route; no tool_uses needed. No duplicate: rg for 047B/04Q0 finds only the item and its parent. Mathlib searches cover all three kinds and there is no match. Small cases pass: empty sources; generic points of A^1 (closure is A^2); non-reduced sources without factorization; non-reduced Q. Not superseded: live and side-live are unsplit. There are no new nodes and no SGA. Minor: citations.json named in the report is absent from the commit, which does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeProductImageClosure",
+  "declaration": "AlgebraicGeometry.closure_range_pullback_map_over_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeProductImageClosure.lean",
+  "statement": "theorem closure_range_pullback_map_over_field (k : Type u) [Field k] {A B X Y : Scheme.{u}} (a : A ⟶ Spec (CommRingCat.of k)) (b : B ⟶ Spec (CommRingCat.of k)) (x : X ⟶ Spec (CommRingCat.of k)) (y : Y ⟶ Spec (CommRingCat.of k)) (f : A ⟶ X) (g : B ⟶ Y) (hf : f ≫ x = a) (hg : g ≫ y = b) : closure (Set.range (pullback.map a b x y f g (𝟙 (Spec (CommRingCat.of k))) ((Category.comp_id a).trans hf.symm) ((Category.comp_id b).trans hg.symm))) = Set.range (pullback.map ((vanishingIdeal (TopologicalSpace.Closeds.closure (Set.range f))).subschemeι ≫ x) ((vanishingIdeal (TopologicalSpace.Closeds.closure (Set.range g))).subschemeι ≫ y) x y (vanishingIdeal (TopologicalSpace.Closeds.closure (Set.range f))).subschemeι (vanishingIdeal (TopologicalSpace.Closeds.closure (Set.range g))).subschemeι (𝟙 (Spec (CommRingCat.of k))) (Category.comp_id _) (Category.comp_id _))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41c0da1b2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Statement of closure_range_pullback_map_over_field read clause by clause against the node and Stacks 04Q0/047B: k a field, A,B,X,Y : Scheme.{u} over Spec k, hf : f≫x=a, hg : g≫y=b, pullback.map over 𝟙 Spec k (equation arguments in Mathlib's order). C_f/C_g are vanishingIdeal(closure(range)).subscheme/subschemeι, the construction characterized by the recorded dep reduced_induced_closed_subscheme (module matches its record). Conclusion is closure(range)=range as point sets. No extra hypotheses, instances or universe restriction. Node differs from live only in lean; statement field verbatim in the file; docstrings carry the source place, the blueprint id and the 4 proof steps; sorry-only; no name collision; report has both sections. Edge cases (empty sources, identities, non-reduced, any field) covered. No findings; no recompile (no change)."
+ }
+}

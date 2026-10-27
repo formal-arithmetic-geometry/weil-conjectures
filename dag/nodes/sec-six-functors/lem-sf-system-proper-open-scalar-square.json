@@ -1,0 +1,246 @@
+{
+ "id": "lem-sf-system-proper-open-scalar-square",
+ "kind": "statement",
+ "title": "Finite-free scalar extension of the intrinsic semilinear proper/open mate",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let $A_1\\leftarrow A_2\\leftarrow\\cdots$ and $B_1\\leftarrow B_2\\leftarrow\\cdots$ be inverse sequences of commutative rings with a compatible unital map $A_\\bullet\\to B_\\bullet$. Assume there are a finite integer $d\\geq1$ and compatible $A_n$-bases of $B_n$ of rank $d$: every transition carries each basis vector to the corresponding basis vector. On fixed small pro-etale sites of schemes $T$, use the ordinary unbounded derived categories $D(\\mathscr S_{C,T})$ of strict semilinear $(C_n)_T$-module systems, $C=A,B$, and derived scalar extension $T_T=-\\otimes^L_{A_\\bullet}B_\\bullet$ [def-weil-pbc-proetale-site, lem-coef-semilinear-derived-sections]. A strict system consists of module sheaves $M_n$ with linear maps $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$, and componentwise morphisms commuting with transitions.\n\nLet $k:U\\hookrightarrow V$, $i:W\\hookrightarrow Z$ be quasi-compact open immersions and $r:U\\to W$, $p:V\\to Z$ proper morphisms with $pk=ir$ [def-weil-scheme-morphism-properties]. No absolute separatedness or Cartesian hypothesis is imposed. Write $P_{v,C}\\dashv S_{v,C}$ for exact inverse image and total derived direct image, and $J_{a,C}\\dashv P_{a,C}$ for exact extension by zero. Let $\\Gamma_{Q,C}:J_{i,C}S_{r,C}\\to S_{p,C}J_{k,C}$ be the intrinsic proper/open mate of [lem-sf-semilinear-proper-open-mate-pasting], normalized by its open unit and clopen component projection. For every $v$ define $\\chi_v:T S_{v,A}\\to S_{v,B}T$ as the $P_{v,B}\\dashv S_{v,B}$ transpose of $T(\\varepsilon_{v,A})$ after $P_{v,B}T\\cong TP_{v,A}$. Let $\\beta_a:TJ_{a,A}\\cong J_{a,B}T$ be canonical open tensor balancing, the open projection isomorphism with second factor $B_\\bullet$ [lem-sf-open-tensor-normalization]. Then, for every $M\\in D(\\mathscr S_{A,U})$,\n$$S_{p,B}(\\beta_{k,M})\\circ\\chi_{p,J_{k,A}M}\\circ T_Z(\\Gamma_{Q,A,M})\n=\\Gamma_{Q,B,T_UM}\\circ J_{i,B}(\\chi_{r,M})\\circ\\beta_{i,S_{r,A}M}.$$\nThis is an equality in $D(\\mathscr S_{B,Z})$ before evaluation or total inverse limit, retaining all quotient transitions. The scalar direct-image comparisons obey composition with the canonical direct-image compositors, so this square may be whiskered by an outer proper direct image. The maps commute with the canonical cochain shifts. No constructibility, normalization, finite-Tor or boundedness hypothesis on $M$ is required.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemma 5.13 and Constructions 5.14–5.15 (pp. 34–35), coefficient-system proper/open operations. Agent-formulated finite-free scalar naturality of their intrinsic mate, including non-Cartesian squares; not a verbatim assertion of Zheng."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-scheme-morphism-properties",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sf-open-tensor-normalization",
+  "def-sf-diagram-system-operation-shifts",
+  "def-coef-semilinear-proper-open-mate",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-sf-system-finite-free-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Publicly reexport the unchanged scalar construction data and its existing exactness and invertibility proofs. No new data are chosen.",
+   "uses": [
+    "def-sf-system-finite-free-scalar-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Instantiate exchangeMate_cube with the A/B inverse-image adjunctions for r and p, the four scalar functors, inverse ell_r and ell_p and the open balancing beta_i and beta_k. The cube hypothesis is scalarIntrinsicAlphaCube. By the definitions of chi and gamma, its conclusion is the first conjunct verbatim.",
+   "uses": [
+    "lem-sf-scalar-intrinsic-alpha-cube",
+    "lem-weil-pbc-exchange-mate-cube",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalarInverseImageCoherence. Whisker ell_(v≫w) by pComp_A and the composite ell_w/ell_v square by pComp_B; their equality is exactly the first coherence clause. Apply mateEquiv to this equality and use conjugateEquiv_mateEquiv_vcomp, mateEquiv_conjugateEquiv_vcomp and mateEquiv_hcomp. Evaluating yields the displayed chi composition equation because sComp is the conjugate of pComp. Repeat with the vertical identity square and pId, then cancel the sId_B inverse to obtain the identity equation.",
+   "uses": [
+    "lem-sf-scalar-inverse-image-coherence",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact-derived natural isomorphisms and composition isomorphisms commute with shifts, so ell does. The direct adjunction shift of diagramOpenClopenShiftModels and the generic shifted mate lemma yield the chi shift. For betaInv unfold the inverse mate word and use shift compatibility of the two open adjunctions and ell inverse; taking the inverse iso gives beta. For gamma, the geometric squareP is a composite of exact-derived comparison maps. Its inverse open mate betaInv and beta therefore commute with shifts. The proved diagram model helpers give the shifts of pi, pComp and jComp; equality transports commute by eliminating the equality. Substitution into alpha proves its shift compatibility, then the generic mate-shift lemma gives gamma for A and B.",
+   "uses": [
+    "lem-pur-diagram-open-clopen-shift-models",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-system-finite-free-scalar-data",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-diagram-open-clopen-shift-models",
+  "lem-sf-scalar-intrinsic-alpha-cube",
+  "lem-sf-scalar-inverse-image-coherence",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng 5.13 and Constructions 5.14--5.15; formal reduction by mate calculus, with intrinsic alpha naturality and inverse-image coherence extracted as smaller obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semilinear.*(shriek|proper)|proper.*open.*scalar|scalar.*refinement",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension preserves the proper open adjunction mate on derived diagrams of sheaves",
+   "results": "OK: 8 hits; ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.unit, PresheafOfModules.freeAdjunctionUnit, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper open interchange of derived semilinear coefficient systems commutes with finite free scalar extension without separatedness of the schemes",
+   "results": "OK: 8 hits; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.HasRingHomProperty.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "OK: 12 hits; CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars between finite free inverse ring diagrams commutes with the normalized derived proper open interchange before inverse limit",
+   "results": "OK: 8 hits; Condensed.profiniteSolidCounit, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization, AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open.*scalar|scalar.*proper.*open|semilinear.*mate",
+   "results": "{\"t\": \"2026-10-23T16:12:29Z\", \"tool\": \"grep\", \"query\": \"proper.*open.*scalar|scalar.*proper.*open|semilinear.*mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"Mathlib/ModelTheory/Arithmetic/Presburger/Definability.lean\"], \"digest\": \"f4b48d24d617b937\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic module-scalar or categorical mate declarations only; none states the proper/open scalar cube on arbitrary strict semilinear derived systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor extension of scalars commutes with proper open interchange in unbounded derived categories of sheaf systems",
+   "results": "{\"t\": \"2026-10-23T16:12:30Z\", \"tool\": \"leansearch\", \"query\": \"Tensor extension of scalars commutes with proper open interchange in unbounded derived categories of sheaf systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"ModuleCat.extendScalars\", \"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.ExtendScalars.map'\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"ModuleCat.ExtendScalars.map_tmul\", \"TensorProduct.isBaseChange\", \"ModuleCat.ExtendScalars.smul_tmul\"], \"digest\": \"1c01147efc088d58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic module-scalar or categorical mate declarations only; none states the proper/open scalar cube on arbitrary strict semilinear derived systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-23T16:12:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv\", \"CategoryTheory.conjugateEquiv_id\", \"CategoryTheory.conjugateEquiv_iso\", \"CategoryTheory.conjugateEquiv_of_iso\", \"CategoryTheory.conjugateEquiv_symm_id\", \"CategoryTheory.conjugateEquiv_symm_iso\", \"CategoryTheory.conjugateEquiv_symm_of_iso\", \"CategoryTheory.conjugateEquiv_adjunction_id\"], \"digest\": \"ba8c03cd98cda1e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic module-scalar or categorical mate declarations only; none states the proper/open scalar cube on arbitrary strict semilinear derived systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of scalars on derived sheaf module systems preserves the proper open adjunction mate",
+   "results": "{\"t\": \"2026-10-23T16:12:31Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free extension of scalars on derived sheaf module systems preserves the proper open adjunction mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"LightCondensed.freeForgetAdjunction\", \"Condensed.freeForgetAdjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\"], \"digest\": \"5df01da6b45e5f00\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic module-scalar or categorical mate declarations only; none states the proper/open scalar cube on arbitrary strict semilinear derived systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a commutative cube of inverse image functors commutes with extension of scalars and extension by zero",
+   "results": "{\"t\": \"2026-10-23T16:13:07Z\", \"tool\": \"leanfinder\", \"query\": \"The mate of a commutative cube of inverse image functors commutes with extension of scalars and extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.extendScalars_assoc'\", \"ModuleCat.extendScalars_id_comp_assoc\", \"ModuleCat.extendScalars_assoc_assoc\", \"ModuleCat.extendScalars_assoc\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\"], \"digest\": \"2e9e44b89e7e291d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic module-scalar or categorical mate declarations only; none states the proper/open scalar cube on arbitrary strict semilinear derived systems"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exceptional-refinement-mates",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Exceptional inverse-image construction: compatibility of compactification refinements with coefficient extension, needed to define their common-finite-field images; ancestor construction returned steps 20–21.",
+   "via": [
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-system-proper-open-scalar-square",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Exact finite-free tensor models retain all semilinear transitions; open-unit and clopen component calculations prove the alpha cube before localization. Specialized the existing four-adjunction cube with all comparisons and domains specified. Mate pasting gives direct-image composition and canonical mate shifts give shift compatibility. No new nodes, no attachment, no Mathlib match.",
+  "blueprint": "Nearest imported ancestor is null, as blueprint_refs.py ancestor reports. This created coefficient-construction branch serves current latest blueprint sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md, sentences on tensor reassociation, evaluation, adjunction units and counits and preservation of their mates; inherited from.place and via retained.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Specifies the unit-square-counit mate and its transpose, fixing the chi orientation."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Whole-system exactness, tensor models and adjunction operations for arbitrary inverse ring sequences."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Generic unique mate shift on right adjoints, including unit/counit compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-mate-cube",
+    "why": "Generic categorical cube theorem, specialized with explicit categories and invertible comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Localizes actual equalities of ordinary system transformations."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic mate composition law giving the direct-image compositor equation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-6b507ee5b",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-6b507ee5b (reviewer sub-agent of L); spot-checked: I read the item and all 9 cited statements in full. There are no new nodes. The statement and stmt_deps are byte-identical to live (unsplit), and there is no re-split note. Step 1: the compatible bases make T⁰ ≅ M^{⊕d} exact componentwise, so derived T is the localized T⁰ via the K-flat definition in lem-coef-semilinear-derived-sections. Step 2: lem-sf-open-tensor-normalization covers arbitrary system ring maps. With g = id, its β-inverse (adjunct of T(u) after ℓ⁻¹) is the same map as the γ_{M,B} with second factor B named in the statement. Step 3: the clopen product model gives Tπ_s = π_sT. Step 4: steps 2–3 are substituted into α_Q = c∘J_b(π_sP_q)∘β_{i,p} and the equality is localized. Step 5: I checked the substitution against the exchangeMate_cube Lean signature: pF.inv = ℓ_r and pK.inv = ℓ_p have mates χ_r and χ_p, pG = β_i, pH = β_k, hc is step 4, and the conclusion is exactly the item's display. Steps 6 and 7 use mate-pasting clauses 2–4 and shift-compatibility-unique (iii). Small cases checked: d = 1 with the identity map, U = ∅, and identity opens. No duplicate: lem-sfb-proper-open-tower-derived-unit, fix-lem-exchanges and lem-trf-compact-composition-proper-square-normalization concern finite A or the global package. Sources checked: Zheng pp. 34–36 (L5.13, C5.14–5.15) as context, with the proof correctly marked agent-written; Stacks tags 03DI, 0E8I, 0F7B, 04VG, 0B65 and 0A8D exist. No SGA is cited. tool_uses accepted as generic tools. Batch-5: the flagged path through lem-pur-diagram-open-clopen-shift-models ends at lem-trf-adjoint-composition-coherence, a mathlib-status leaf on pure categorical adjunction-composition coherence. It is not part of the trace formula or Poincaré duality, so it is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SystemProperOpenScalarSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.systemProperOpenScalarSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.systemProperOpenScalarSquare"
+  ],
+  "file": "lean/Sheaf/SixFunctors/SystemProperOpenScalarSquare.lean",
+  "statement": "theorem systemProperOpenScalarSquare : (∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (M : Derived A a U), (T A B a b φ hφ d hd e Z).map ((gamma A a k r p i h).app M) ≫ (chi A B a b φ hφ d hd e p).app ((J A a k).obj M) ≫ (R B b p).map ((beta A B a b φ hφ d hd e k).hom.app M) = (beta A B a b φ hφ d hd e i).hom.app ((R A a r).obj M) ≫ (J B b i).map ((chi A B a b φ hφ d hd e r).app M) ≫ (gamma B b k r p i h).app ((T A B a b φ hφ d hd e U).obj M)) ∧ (∀ {X Y Z : Scheme.{u}} (v : X ⟶ Y) (w : Y ⟶ Z) (M : Derived A a X), (T A B a b φ hφ d hd e Z).map ((sComp A a v w).hom.app M) ≫ (chi A B a b φ hφ d hd e (v ≫ w)).app M = (chi A B a b φ hφ d hd e w).app ((R A a v).obj M) ≫ (R B b w).map ((chi A B a b φ hφ d hd e v).app M) ≫ (sComp B b v w).hom.app ((T A B a b φ hφ d hd e X).obj M)) ∧ (∀ (X : Scheme.{u}) (M : Derived A a X), (chi A B a b φ hφ d hd e (𝟙 X)).app M ≫ (sId B b X).hom.app ((T A B a b φ hφ d hd e X).obj M) = (T A B a b φ hφ d hd e X).map ((sId A a X).hom.app M)) ∧ (∀ {X Y : Scheme.{u}} (v : X ⟶ Y), NatTrans.CommShift (ell A B a b φ hφ d hd e v).hom ℤ ∧ NatTrans.CommShift (chi A B a b φ hφ d hd e v) ℤ) ∧ (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j], NatTrans.CommShift (beta A B a b φ hφ d hd e j).hom ℤ) ∧ (∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), NatTrans.CommShift (gamma A a k r p i h) ℤ ∧ NatTrans.CommShift (gamma B b k r p i h) ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Construction declarations are publicly reexported, unchanged, from SystemProperOpenScalarData and owned by def-sf-system-finite-free-scalar-data. The scalar square follows by exchangeMate_cube from the intrinsic inverse-image cube; direct-image composition and identity follow by mate pasting from ell coherence; shift compatibility is proved from exact-functor and adjunction APIs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a97ae43",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery of the fe3335f1 H2 RETURN. Item Lean byte-identical to fe3335 (substance accepted there and re-read: square in node order, chi = mateEquiv of ell, which is pinned by an identity-on-sections ∃!, beta = inverse of the inverse open mate, sComp/sId composition and identity clauses, CommShift clauses, arbitrary M, no extra hypotheses, all proofs sorry, docstrings OK, lean.statement verbatim, 21 declarations present). Stmt_deps: the theorem lem-pur-diagram-open-clopen-shift-models is replaced by the new def node def-sf-diagram-system-operation-shifts (existing:true on live Sheaf.Paper.DiagramOpenClopenShiftModels; pullShift/extensionShift/directShift are plain inferInstanceAs mapDerivedCategory/rightDerivedFunctor CommShift instances, signatures match, no Models choice; stmt_dep def-sp-semilinear-constant-ring-operations owns P/R/J/pull/push/extension; Stacks 015F/03DJ/070H/07A6 exist; no other def owner). Also adds the landed def owners def-coef-semilinear-proper-open-mate (gamma) and def-sf-semilinear-proper-open-comparisons (sComp/sId/jAdj). Only def nodes added vs base; the theorem stays in proof_deps; item unlanded live. No compile (no FIX, Lean unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-29e45",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T021254-L-2751689",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs clone's item prefix (verbatim except private-helper rename); new sorry statements vs pinned pComp/pId/ell/alpha definitions in SemilinearProperOpenMatePasting; item proof vs node steps; both direct importers + transitive EISM compiled against delivered files"
+ }
+}

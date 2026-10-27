@@ -15,29 +15,20 @@
  ],
  "proof": [
   {
-   "text": "Put $T=\\overline{f(|U|)}$. By [lem-weil-pbc-reduced-induced-closed-subscheme], there is a reduced closed subscheme $i_T:T_{\\mathrm{red}}\\to X$ with underlying image $T$. Since $U$ is reduced and $f(|U|)\\subseteq T$, apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $f$ and $i_T$. It gives a morphism $g:U\\to T_{\\mathrm{red}}$ with $i_T\\circ g=f$.",
+   "text": "Put T = closure (Set.range f). The proved source-library theorem Scheme.Hom.ker_eq_vanishingIdeal identifies f.ker with vanishingIdeal T, without any quasi-compactness hypothesis. Since f.image is definitionally f.ker.subscheme, the reducedness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] gives IsReduced f.image. Since f.imageι is definitionally f.ker.subschemeι, the range clause of the same theorem gives Set.range f.imageι = T. Its closed immersion instance is supplied by Mathlib, as in [def-weil-closed-immersion].",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+    "def-weil-closed-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced), proof lines 983-987, citing Schemes Tag 0356 (lemma-map-into-reduction), lines 2268-2289"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $z:Z\\to X$ be any closed subscheme through which $f$ factors. Then $f(|U|)\\subseteq z(|Z|)$, and $z(|Z|)$ is closed by [def-weil-closed-immersion]. Hence $T\\subseteq z(|Z|)$. The scheme $T_{\\mathrm{red}}$ is reduced by [lem-weil-pbc-reduced-induced-closed-subscheme]. Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $i_T:T_{\\mathrm{red}}\\to X$ and $z$ to obtain a factorization of $i_T$ through $z$. Thus $i_T$ is contained in every closed subscheme through which $f$ factors. Together with Step 1, this is the defining minimality of the scheme-theoretic image.",
+   "text": "Given a closed immersion i : Z → X and a factorization g ≫ i = f, every point f(x) equals i(g(x)). Thus Set.range f is contained in Set.range i. The latter is closed by [def-weil-closed-immersion], so it also contains T. Applying [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], in its recorded source-library form IsClosedImmersion.existsUnique_fac_of_range_subset_range, to the now-reduced source f.image and the morphism f.imageι gives the unique factorization through i.",
    "uses": [
     "def-weil-closed-immersion",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
     "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced), proof lines 983-987, using Schemes Tag 0356 (lemma-map-into-reduction) for the map from T_red"
-   }
+   "elementary": false
   },
   {
    "text": "For a reduced open subscheme U⊂X, take f to be its open immersion. Its underlying image is |U|, and by definition its scheme-theoretic closure is the scheme-theoretic image of this immersion. The first two steps therefore identify that closure with the reduced induced closed subscheme on the topological closure of |U|.",
@@ -55,9 +46,9 @@
   "def-weil-closed-immersion"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 056B (lemma-scheme-theoretic-image-reduced), proof lines 983-987, with its cited Schemes Tag 0356 (lemma-map-into-reduction); definition-scheme-theoretically-dense, clause (1), for the final specialization"
+  "by": "library",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; lean/WeilConjectures/AlgebraicGeometry/ReducedInducedClosedSubscheme.lean; lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "place": "Scheme.Hom.ker_eq_vanishingIdeal; Scheme.IdealSheafData.reduced_induced_closed_subscheme (reducedness and range clauses); IsClosedImmersion.existsUnique_fac_of_range_subset_range. These implement Stacks Tag 056B via Tag 0356; the Lean glue takes the closure of the range inclusion and packages the five clauses."
  },
  "mathlib_searches": [
   {
@@ -186,5 +177,26 @@
   "result": "fix",
   "note": "Statement correct against node and Stacks 056B (morphisms.tex 977-988): arbitrary f, only [IsReduced U]. Mathlib Hom.ker is ofIdeals of the componentwise kernels for arbitrary f, so f.image/imageι is the general scheme-theoretic image; the ker = vanishingIdeal(closure range f) clause matches the dependency's T_red; reducedness, range and minimality (unique factor through every closed immersion that f factors through) clauses verified true. The open-subscheme 'in particular' clause is the instance f := V.ι (Opens.range_ι; Stacks definition-scheme-theoretically-dense (1)). Edge cases (empty U, constant map, closed/dense open immersion, identity) and universes fine; lean.statement verbatim; no added hypotheses; sorry only; report has both sections. nt_compile --json clean (4.0 s delivered, 7.4 s fixed). Only finding, H8 minor: the docstring omitted node proof step 3 (open-subscheme specialisation). fixes/ReducedSchemeImage.lean adds it as step 4 plus a module-docstring sentence; signature and node JSON unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261023T132030-L-2186174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

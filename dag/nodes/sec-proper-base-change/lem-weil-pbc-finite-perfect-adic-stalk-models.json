@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-stalk-models",
+ "kind": "statement",
+ "title": "Separate finite-level markings of a normalized algebraic stalk tower",
+ "statement": "Let X be a locally Noetherian quasi-compact scheme, d an adic coefficient datum on A, and M a derived module over the completed coefficient sheaf. Assume finite quotient constant functors preserve zero morphisms, and fix isomorphisms φ from constant quotient ring sheaves to finite coefficient sheaves compatible with quotient maps and the completed scalar map. Suppose M has uniform finite perfect quotient models [lem-weil-pbc-residue-perfect-finite-quotient-models]. There is an etale cover V_i of X and, for each i, a normalized algebraic tower T_i [def-weil-pbc-finite-perfect-adic-tower-data] all of whose levels are perfect. For each n separately there is an etale covering sieve of V_i on which the actual quotient M_n is isomorphic to finite coefficient realization of T_i.level n. The markings need not be compatible in n and no common pro-etale cover is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse, the paragraph constructing normalized algebraic M_n before taking their limit; Tags 09AL, 09B1 and 094G."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "lem-weil-pbc-residue-perfect-finite-quotient-models",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply finitePerfectAdic_etale_stalk_data to obtain an etale cover, perfect algebraic stalk levels and their consecutive scalar-extension isomorphisms, bounded finite-lisse descended etale levels, and coefficient transport conditional on a supplied local stalk isomorphism. No normalized tower or marking sieve is supplied by this step.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-etale-stalk-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual derived module scalar adjunctions along A to A/I^(n+1) and A/I^(n+2) to A/I^(n+1). Define each transition as the adjoint transpose of the given consecutive reduction isomorphism. The hom-equivalence inverse law identifies its transpose with that isomorphism, proving normalization. Package these functors, adjunctions and transitions, with perfect residue, into FinitePerfectAdicAlgebraTower.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each chart and each level separately, install the finiteness of A/I^(n+1) from the datum. Apply the connected-chart clause of finiteRing_derived_local_constancy to the descended level and the algebraic-closure point specified in the data. This gives an etale cover carrying the required isomorphisms with that exact derived geometric stalk.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose each level-cover arrow with its chart map to regard it as an object of X.Etale. Form Sieve.ofArrows. Joint surjectivity of the level-cover proves membership in smallEtaleTopology via ofArrows_mem_smallEtaleTopology_iff. Every arrow in this sieve factors through one generating object; apply the conditional coefficient transport to its local stalk isomorphism and this factorization. Retain the constructed normalized algebraic tower and its levelwise perfectness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "lem-weil-pbc-finite-perfect-adic-etale-stalk-data",
+  "lem-weil-pbc-finite-ring-derived-local-constancy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F2",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse: algebraic stalk diagram followed by separate finite-level local constancy; the latter is implemented using the existing finite-ring theorem and explicit generated-sieve assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized tower of locally constant perfect complexes over finite quotient rings admits compatible pro-etale local trivializations by an algebraic stalk tower",
+   "results": "8 hits, all etale algebra definitions or elementary etale morphism results, with no normalized derived tower or stalk extraction theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. Use the project finite-ring and normalized Isom APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"Sieve\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "adicTower|compatible.*trivial",
+   "results": "6 hits in CategoryTheory.Shift.Adjunction and manifold local frames, unrelated to normalized algebraic quotient towers.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded locally constant perfect complex over a finite ring has finite locally constant sheaf of derived isomorphisms with a fixed geometric stalk complex",
+   "results": "8 hits: condensed locally constant functors, generic constant sheaf invariance and counit criteria; no finite-ring derived Isom-sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic tools only; the project finite-ring derived mapping-sheaf theorems are needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicTowerExtraction",
+  "date": "2026-10-27",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tag 09C6, lemma-connected-adic-lisse, the paragraph constructing normalized algebraic M_n before taking their limit; Tags 09AL, 09B1 and 094G.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicStalkModels",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicStalkModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdic_stalk_models",
+  "statement": "theorem finitePerfectAdic_stalk_models\n    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d))\n    (hmodels : HasUniformFinitePerfectModels X d φ M) :\n    ∃ 𝒱 : Cover.{t} etalePrecoverage X, ∀ i : 𝒱.I₀,\n      ∃ T : FinitePerfectAdicAlgebraTower d,\n        (∀ n : ℕ, DerivedCategory.IsPerfect (T.level n)) ∧\n        FinitePerfectAdicLevelMarkings X d φ M (𝒱.etalePrecoverageToEtale i) T",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FinitePerfectAdicLevelMarkings",
+   "AlgebraicGeometry.Scheme.finitePerfectAdic_stalk_models"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3fd",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261027T050617-L-244429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T064446-L-2181137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

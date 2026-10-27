@@ -16,72 +16,54 @@
  ],
  "proof": [
   {
-   "text": "Assume $\\mathcal M$ is of finite presentation on an open $U\\ni x$. Apply lem-pc-tensor-pullback-finite-presentation to $g_U:g^{-1}(U)\\to U$ and $\\mathcal M|_U$. The composition and tensor formula of def-pc-module-pullback identify $g_U^*(\\mathcal M|_U)$ with $(g^*\\mathcal M)|_{g^{-1}(U)}$: both are the tensor pullback of the same restricted sheaf along the restricted ring-sheaf map. Since $g(x')=x$, the inverse image $g^{-1}(U)$ contains $x'$. Thus $g^*\\mathcal M$ is of finite presentation on a neighbourhood of $x'$.",
+   "text": "Use the ordinary scheme module pullback, identified with tensorPullback by uniqueness of left adjoints to pushforward (nonempty_tensorPullbackAdjunction and pullbackPushforwardAdjunction). Private proved helpers transport finite presentation through the opens/over-site equivalence, identifying (M.over U).IsFinitePresentation with (M.restrict U.ι).IsFinitePresentation. These helpers apply the existing finite-presentation pushforward theorem for continuous cocontinuous left adjoints to the site equivalence in both directions, then use overFunctorEquiv and the equivalence unit.",
    "uses": [
-    "lem-pc-tensor-pullback-finite-presentation",
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "def-weil-pbc-module-finite-type-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T (lemma-devissage-finite-presentation), (1) implies (4); Modules Tag 01BQ (lemma-pullback-finite-presentation)."
-   }
+   "elementary": true
   },
   {
-   "text": "Conversely, let $U'\\subseteq X'$ be an open neighbourhood of $x'$ on which $g^*\\mathcal M$ is of finite presentation. By lem-weil-pbc-etale-morphism-open-map, $W=g(U')$ is open in $X$, and $x\\in W$. Factor the restricted morphism as $U'\\xrightarrow{q}W\\hookrightarrow X$. The composite $U'\\to X$ is etale, since the inclusion $U'\\hookrightarrow X'$ is an open immersion and etale morphisms compose; $W\\hookrightarrow X$ is etale as well. The cancellation clause of lem-weil-pbc-etale-composition-cancellation therefore makes $q$ etale. It is surjective by the definition of $W$.",
+   "text": "For any V contained in the inverse image of U, compose restrictFunctorIsoPullback, pullbackCompOfEq for resLE_comp_ι, the ordinary pullback composition isomorphism, and the tensor/ordinary comparison to identify the pullback of M restricted to U along g.resLE U V with tensorPullback g M restricted to V. In the forward direction take V=g inverse image U. The proved ordinary-pullback preservation instance in WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent gives finite presentation, and g x′=x gives membership.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In the reverse direction set U=g(V), an open by the étale open-map theorem, and q=g.resLE U V. It is étale by the resLE instance (open-immersion composition and étale restriction/cancellation), and surjective directly from the definition of U. Its singleton family belongs to fppfPrecoverage by Hom.singleton_mem_fppfPrecoverage and therefore generates an fpqc covering sieve by fppfTopology_le_fpqcTopology. This existing Mathlib inclusion packages the quasi-compact refinement condition; no separate affine-refinement construction is needed.",
    "uses": [
     "lem-weil-pbc-etale-morphism-open-map",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T, paragraph beginning “The etale morphism g is open”; Morphisms Tags 03WT, 02GP, 02GN and 02GW."
-   }
-  },
-  {
-   "text": "The singleton family $\\{q:U'\\to W\\}$ is an fpqc covering, even though $q$ need not be quasi-compact. Indeed $q$ is flat by def-weil-etale-morphism. For any affine open $V\\subseteq W$, put $U'_V=q^{-1}(V)$. The restricted map $q_V:U'_V\\to V$ is surjective and etale: its composite with the etale open immersion $V\\hookrightarrow W$ is the composite of $q$ with the etale open immersion $U'_V\\hookrightarrow U'$, so apply etale composition and cancellation once more. By lem-weil-pbc-etale-covering-affine-refinement, finitely many affine opens $A_1,\\ldots,A_m\\subseteq U'_V$ have images covering $V$. They are also affine opens of $U'$. These are exactly the finite affine refinements required in def-weil-pbc-fpqc-covering for the family $\\{q\\}$.",
-   "uses": [
-    "def-weil-etale-morphism",
     "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-covering-affine-refinement",
-    "def-weil-pbc-fpqc-covering"
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T, the etale covering U\\prime to g(U\\prime); Topologies Tag 0218 (lemma-etale-affine) and Definition 022B (definition-fpqc-covering)."
-   }
+   "elementary": true
   },
   {
-   "text": "The restriction $\\mathcal M|_W$ is quasi-coherent, since the affine-local condition in pqf-def-coherent restricts to opens. By the tensor formula and composition identification in def-pc-module-pullback, $q^*(\\mathcal M|_W)\\cong(g^*\\mathcal M)|_{U'}$: pulling back along $U'\\to W\\to X$ or along $U'\\to X'\\to X$ uses the same composite ringed-space morphism. This pullback is of finite presentation by the choice of $U'$. Apply the finite-presentation reflection clause (2) of lem-pc-fpqc-descent to the fpqc covering $\\{q\\}$ established in Step 3. It gives finite presentation of $\\mathcal M|_W$, proving the reverse implication. Neither direction used the residue-field isomorphism, but that hypothesis is retained in the statement.",
+   "text": "Apply isFinitePresentation_of_toDescentData_iso to the singleton family q, the descent datum of M restricted to U, and its identity isomorphism. The only component is the ordinary pullback along q, which has finite presentation by the comparison of Step 2 and the given restriction over V. Transport the conclusion back through the opens/over-site equivalence. The image U contains x because x′ belongs to V and g x′=x. The residue-field hypothesis is retained but unused.",
    "uses": [
-    "pqf-def-coherent",
+    "lem-pc-fpqc-descent",
     "def-pc-module-pullback",
-    "lem-pc-fpqc-descent"
+    "def-weil-pbc-module-finite-type-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T, (4) implies (1), using Descent Tag 05B0 (lemma-finite-presentation-descends)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-module-pullback",
   "def-weil-etale-morphism",
   "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-module-finite-type-presentation",
   "lem-pc-fpqc-descent",
-  "lem-pc-tensor-pullback-finite-presentation",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "pqf-def-coherent"
+  "lem-weil-pbc-etale-morphism-open-map"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 057T (lemma-devissage-finite-presentation), proof of (1) iff (4), with the fpqc refinement in Topologies Tag 0218 and Definition 022B made explicit."
+  "place": "Tag 057T, lemma-devissage-finite-presentation, (1) iff (4). Lean uses the existing ordinary-pullback preservation instance and Mathlib fppfTopology_le_fpqcTopology to package the pullback and covering steps. Proof written by P5, 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -194,7 +176,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-tensor-pullback-finite-presentation",
   "lem-pc-fpqc-descent"
  ],
  "reviewed": {
@@ -223,5 +204,26 @@
   "result": "pass",
   "note": "Lean theorem matches node and Stacks 057T (1)<=>(4) clause by clause: [Etale g], g x' = x, residue-field IsIso kept, [M.IsQuasicoherent] (quasi-coherent part of recorded pqf-def-coherent, no finite-type hypothesis added), exists open nbhd with (M.over U).IsFinitePresentation iff the same for (tensorPullback g).obj M over U'. Recorded dependency declarations only; single shared universe forced by the morphism; empty/zero cases covered; body sorry only; docstrings give source and blueprint; lean.statement verbatim; node change is lean field only; report has both sections; no duplicate found. nt_compile clean 5.7 s; #check/#print axioms as expected. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261023T123938-L-1298183",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-sequential-free-colimit-hom-exact",
+ "kind": "statement",
+ "title": "Hom exactness for sequential finite-free colimits with a Mittag-Leffler kernel system",
+ "statement": "Let $R$ be a commutative ring, let $G_n$ be $R$-modules with $R$-linear maps $u_n:G_n\\to G_{n+1}$ for integers $n\\ge1$, and suppose $G_n\\cong R^{r_n}$ for finite integers $r_n\\ge0$. Let compatible maps $\\iota_n:G_n\\to P$ exhibit an $R$-module $P$ as their colimit [def-weil-pbc-category-colimit]. For an $R$-module $N$ put $L_N=\\{(h_n)\\in\\prod_{n\\ge1}\\operatorname{Hom}_R(G_n,N):h_{n+1}u_n=h_n\\text{ for every }n\\}$, with componentwise $R$-module operations. Restriction gives an $R$-linear isomorphism $\\rho_N:\\operatorname{Hom}_R(P,N)\\xrightarrow{\\sim}L_N$, $h\\mapsto(h\\iota_n)_n$. These isomorphisms are natural in $N$: for every $v:N\\to N^\\prime$, $\\rho_{N^\\prime}(vh)=(v h\\iota_n)_n$. If $0\\to N_1\\xrightarrow{a}N_2\\xrightarrow{b}N_3\\to0$ is a short exact sequence of $R$-modules (meaning $a$ is injective, $b$ is surjective and $\\operatorname{im}a=\\ker b$), and the inverse sequence $\\operatorname{Hom}_R(G_n,N_1)$ with precomposition transitions $h\\mapsto h u_n$ is Mittag-Leffler [def-weil-pbc-mittag-leffler-system], then $0\\to\\operatorname{Hom}_R(P,N_1)\\xrightarrow{a\\circ-}\\operatorname{Hom}_R(P,N_2)\\xrightarrow{b\\circ-}\\operatorname{Hom}_R(P,N_3)\\to0$ is short exact.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059X (lemma-countgen-projective), paragraphs beginning with the finite-free Hom exact sequence and ending with its functorial identification for the colimit; inverse-limit exactness is Tag 0598 (lemma-ML-exact-sequence)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-mittag-leffler-system"
+ ],
+ "proof": [
+  {
+   "text": "For each $N$, restriction is well-defined: $(h\\iota_{n+1})u_n=h\\iota_n$ by cocone compatibility. It preserves addition and scalar multiplication componentwise. Conversely, for $(h_n)\\in L_N$, its adjacent compatibility implies compatibility with all composites by induction on the number of transitions. Thus it is a cocone to $N$ on the small category of positive integers. The colimit universal property [def-weil-pbc-category-colimit] gives a unique linear map $h:P\\to N$ with $h\\iota_n=h_n$. This proves bijectivity of $\\rho_N$; since it is linear, its inverse is linear as well.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X (lemma-countgen-projective), finite-free Hom rows and final functorial colimit identification; Tag 0598 (lemma-ML-exact-sequence)."
+   }
+  },
+  {
+   "text": "For $v:N\\to N^\\prime$, associativity gives $\\rho_{N^\\prime}(vh)_n=(vh)\\iota_n=v(h\\iota_n)$. Postcomposition $v_*:(h_n)\\mapsto(vh_n)$ preserves compatibility since $(vh_{n+1})u_n=v(h_{n+1}u_n)=vh_n$. Hence $\\rho_{N^\\prime}\\circ(v\\circ-)=v_*\\circ\\rho_N$, which proves the asserted naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X (lemma-countgen-projective), finite-free Hom rows and final functorial colimit identification; Tag 0598 (lemma-ML-exact-sequence)."
+   }
+  },
+  {
+   "text": "Fix $n$ and put $H_{i,n}=\\operatorname{Hom}_R(G_n,N_i)$, $A_n(f)=af$ and $B_n(g)=bg$. The row $0\\to H_{1,n}\\xrightarrow{A_n}H_{2,n}\\xrightarrow{B_n}H_{3,n}\\to0$ is exact directly: injectivity of $a$ implies injectivity of $A_n$; if $bg=0$, the unique pointwise preimage $f(x)$ defined by $af(x)=g(x)$ exists by $\\operatorname{im}a=\\ker b$ and is linear by injectivity of $a$. Conversely $baf=0$. Finally choose a basis $e_1,\\ldots,e_{r_n}$ of $G_n$, lift each value $k(e_j)$ through the surjection $b$, and extend these finitely many lifts linearly to obtain $g$ with $bg=k$. This also covers $r_n=0$, using the empty basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X (lemma-countgen-projective), finite-free Hom rows and final functorial colimit identification; Tag 0598 (lemma-ML-exact-sequence)."
+   }
+  },
+  {
+   "text": "Use precomposition by $u_n$ as the transition $H_{i,n+1}\\to H_{i,n}$. The squares commute because $(af)u_n=a(fu_n)$ and $(bg)u_n=b(gu_n)$. The rows of step 3 therefore form a short exact sequence of inverse systems of underlying abelian groups indexed by the positive integers. Its kernel system $(H_{1,n})$ is ML by the stated hypothesis [def-weil-pbc-mittag-leffler-system]. Apply part (3) of [lem-weil-pbc-mittag-leffler-limit-exact]: its compatible-sequence limit is exactly $L_{N_i}$. Thus $0\\to L_{N_1}\\xrightarrow{a_*}L_{N_2}\\xrightarrow{b_*}L_{N_3}\\to0$ is exact. These induced maps are $R$-linear by their coordinate formulas, so exactness of underlying abelian groups gives exactness of these modules.",
+   "uses": [
+    "def-weil-pbc-mittag-leffler-system",
+    "lem-weil-pbc-mittag-leffler-limit-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X (lemma-countgen-projective), finite-free Hom rows and final functorial colimit identification; Tag 0598 (lemma-ML-exact-sequence)."
+   }
+  },
+  {
+   "text": "By step 2 the maps on these limits satisfy $\\rho_{N_2}(af)=a_*\\rho_{N_1}(f)$ and $\\rho_{N_3}(bg)=b_*\\rho_{N_2}(g)$. Injectivity of $a_*$ and bijectivity of the $\\rho$ imply injectivity of $a\\circ-$. If $bg=0$, step 4 supplies $x\\in L_{N_1}$ with $a_*x=\\rho_{N_2}(g)$; setting $f=\\rho_{N_1}^{-1}(x)$ gives $af=g$, and the reverse inclusion in the kernel follows from $ba=0$. Given $k:P\\to N_3$, choose $y\\in L_{N_2}$ with $b_*y=\\rho_{N_3}(k)$ and put $g=\\rho_{N_2}^{-1}(y)$; then $bg=k$. This proves every clause of the required short exactness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X (lemma-countgen-projective), finite-free Hom rows and final functorial colimit identification; Tag 0598 (lemma-ML-exact-sequence)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-mittag-leffler-system",
+  "lem-weil-pbc-mittag-leffler-limit-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059X (lemma-countgen-projective), finite-free Hom rows and final functorial colimit identification; Tag 0598 (lemma-ML-exact-sequence)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|[Pp]rojective.*[Cc]olimit|[Cc]olimit.*[Pp]rojective",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/Generator/Abelian.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Basic.lean\"]} Search subdirectory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "No match: exact filtered colimits, eventual ranges of set-valued systems, and exactness characterizations do not prove Hom exactness from the stated Mittag-Leffler kernel hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsMittagLeffler",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsMittagLeffler\", \"CategoryTheory.Functor.IsMittagLeffler.toPreimages\", \"CategoryTheory.Functor.toEventualRanges_nonempty\", \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"CategoryTheory.Functor.IsMittagLeffler.eq_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range\", \"CategoryTheory.Functor.isMittagLeffler_iff_eventualRange\", \"CategoryTheory.Functor.IsMittagLeffler.subset_image_eventualRange\"]}",
+   "date": "2026-10-22",
+   "verdict": "No match: exact filtered colimits, eventual ranges of set-valued systems, and exactness characterizations do not prove Hom exactness from the stated Mittag-Leffler kernel hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a sequential colimit of finite free modules preserves short exact sequences if all inverse Hom systems are Mittag Leffler",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instAB5ModuleCat\", \"Profinite.NobelingProof.succ_exact\", \"Condensed.instAB5CondensedMod\", \"CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteColimitsModuleCatEmbeddingRingFunctor\", \"localCohomology.ofDiagram\", \"CategoryTheory.Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi\", \"ModuleCat.localizedModule_functor_map_exact\", \"CategoryTheory.Limits.colim.exact_mapShortComplex\"]}",
+   "date": "2026-10-22",
+   "verdict": "No match: exact filtered colimits, eventual ranges of set-valued systems, and exactness characterizations do not prove Hom exactness from the stated Mittag-Leffler kernel hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|DirectLimit.*[Ee]xact|[Ee]xact.*DirectLimit",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Colimit/Module.lean\", \"Mathlib/Algebra/Colimit/Ring.lean\", \"Mathlib/Algebra/Category/ModuleCat/Limits.lean\"]} Search subdirectory: Algebra",
+   "date": "2026-10-22",
+   "verdict": "No match: exact filtered colimits, eventual ranges of set-valued systems, and exactness characterizations do not prove Hom exactness from the stated Mittag-Leffler kernel hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from sequential finite free colimit is exact for a short exact sequence with Mittag Leffler inverse Hom kernel system",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.ShortComplex.exact_of_f_is_kernel\", \"CategoryTheory.Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi\", \"CategoryTheory.Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono\", \"HomologicalComplex.hasExactColimitsOfShape\", \"CategoryTheory.ShortComplex.LeftHomologyData.exact_iff\", \"instPreservesHomologyFunctorAddCommGrpCatColim\", \"CategoryTheory.Functor.preservesHomologyOfExact\"]}",
+   "date": "2026-10-22",
+   "verdict": "No match: exact filtered colimits, eventual ranges of set-valued systems, and exactness characterizations do not prove Hom exactness from the stated Mittag-Leffler kernel hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit, Function.Exact",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "No match: exact filtered colimits, eventual ranges of set-valued systems, and exactness characterizations do not prove Hom exactness from the stated Mittag-Leffler kernel hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a direct sequence of finite free modules with colimit P, Hom(P,-) preserves a short exact sequence when the inverse system Hom(Fn,kernel) has eventually constant images",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"instAB5ModuleCat\", \"AdicCompletion.map_exact\", \"Condensed.instAB5CondensedMod\", \"localCohomology.ofDiagram\", \"Module.DirectLimit.of.zero_exact\", \"instAB4StarModuleCat\", \"Condensed.instAB4StarCondensedMod\"]}",
+   "date": "2026-10-22",
+   "verdict": "No match: exact filtered colimits, eventual ranges of set-valued systems, and exactness characterizations do not prove Hom exactness from the stated Mittag-Leffler kernel hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|colimit.*[Hh]om|[Hh]om.*colimit",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Generator/Indization.lean\", \"Mathlib/CategoryTheory/Generator/Indization.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/Abelian/NonPreadditive.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\"]} Search subdirectory: CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item: returned colimit universal properties, exact filtered colimits/products, and ML definitions or stable ranges do not give Hom exactness under the kernel-system ML hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from direct limit of finite free modules is exact if the inverse Hom kernel system is Mittag Leffler",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectLimit.Module.hom_ext_iff\", \"ModuleCat.directLimitIsColimit\", \"Module.DirectLimit.hom_ext_iff\", \"Ring.DirectLimit.of.zero_exact\", \"Module.DirectLimit.of.zero_exact\", \"Module.DirectLimit.inhabited\", \"DirectLimit.Module.hom_ext\", \"ModuleCat.directLimitCocone\"]}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item: returned colimit universal properties, exact filtered colimits/products, and ML definitions or stable ranges do not give Hom exactness under the kernel-system ML hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsMittagLeffler",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsMittagLeffler\", \"CategoryTheory.Functor.IsMittagLeffler.toPreimages\", \"CategoryTheory.Functor.toEventualRanges_nonempty\", \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"CategoryTheory.Functor.IsMittagLeffler.eq_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range\", \"CategoryTheory.Functor.isMittagLeffler_iff_eventualRange\", \"CategoryTheory.Functor.IsMittagLeffler.subset_image_eventualRange\"]}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item: returned colimit universal properties, exact filtered colimits/products, and ML definitions or stable ranges do not give Hom exactness under the kernel-system ML hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a sequential colimit of finite free modules preserves short exact sequences when the inverse Hom system of the kernel is Mittag Leffler",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"instAB5ModuleCat\", \"instIsGrothendieckAbelianModuleCat\", \"instAB4StarModuleCat\", \"instAB4ModuleCat\", \"AdicCompletion.map_exact\", \"Condensed.instAB4CondensedMod\", \"Condensed.instAB4StarCondensedMod\"]}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item: returned colimit universal properties, exact filtered colimits/products, and ML definitions or stable ranges do not give Hom exactness under the kernel-system ML hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|[Pp]rojective.*[Cc]olimit|[Cc]olimit.*[Pp]rojective",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/Generator/Abelian.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Basic.lean\"]} Search subdirectory: CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item: returned colimit universal properties, exact filtered colimits/products, and ML definitions or stable ranges do not give Hom exactness under the kernel-system ML hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of modules stays exact after applying Hom from a direct limit of projective modules if inverse Hom of its kernel has eventually stable images",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.exact_d_f\", \"instAB4StarModuleCat\", \"instAB5ModuleCat\", \"Module.finitePresentation_of_projective_of_exact\", \"CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃\", \"Module.DirectLimit.of.zero_exact\", \"CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂\"]}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item: returned colimit universal properties, exact filtered colimits/products, and ML definitions or stable ranges do not give Hom exactness under the kernel-system ML hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-countable-flat-mittag-leffler-projective",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Last sentence: 'countably generated, flat and Mittag-Leffler ... whence projective'. Supporting Tag 059X: the finite-free Hom rows, inverse-limit exactness, and functorial Hom-colimit identification in the last two paragraphs.",
+   "via": [
+    "lem-trf-countable-flat-mittag-leffler-projective",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-sequential-free-colimit-hom-exact",
+  "worker": "stage1",
+  "summary": "Read Stacks 059X and 0598, retained the statement, expanded the universal-property isomorphism and naturality, proved the finite-free Hom rows by basis lifting, and reused the existing general ML limit exactness theorem with every hypothesis checked. No new nodes.",
+  "blueprint": "The inherited from.place locates the historical semistable-alteration support of lem-trf-local-term-locality, proof (1)--(2); this item realizes the final two paragraphs of supporting Stacks 059X. The latest blueprint locality proof now quotes Varshavsky directly; this delivery only splits the assigned existing algebraic support and does not change its ancestors or the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-mittag-leffler-limit-exact",
+    "why": "Step 4 uses part (3), exactness of compatible-sequence inverse limits with ML kernel, as a generic algebraic tool explicitly invoked in Stacks 059X via 0598; no node of sk-i-curve-zero gives this general theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-mittag-leffler-limit-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-64b79e0e8",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-64b79e0e8 (reviewer sub-agent of L); spot-checked: The statement is the same as the live node (statement, stmt_deps, source and blueprint unchanged). The delivery has no new nodes and only adds a 5-step proof. There is no repair note, so this is not a re-split, and live and side-live still show the item unsplit. No SGA is cited and there is no cycle. Source: Stacks algebra.tex Tag 059X (lemma-countgen-projective, l.22193), which uses Tag 0598 (l.20770); I confirmed both tags in tags/tags. The steps match the source: (1) restriction gives a cocone and the universal property of def-weil-pbc-category-colimit makes rho_N a linear bijection; (2) naturality follows from associativity; (3) the finite-free Hom rows are exact, with linearity of the preimage from injectivity of a and surjectivity by basis lifting, including r_n=0; (4) the ML kernel tower and part (3) of lem-weil-pbc-mittag-leffler-limit-exact give the exact limit row, and L_N is exactly that node's compatible-sequence limit; (5) every clause is transported through rho. Edge cases checked: all r_n=0 gives P=0; u_n=id gives Hom(G_1,-); ML is necessary, since doubling maps give Z[1/2], where surjectivity fails for 0->Z->Q->Q/Z->0. The only citer, lem-trf-countable-flat-mittag-leffler-projective step 3, applies the item exactly as stated. I found no duplicate of the item or of its step-1 isomorphism in the DAG. I accept the tool use of lem-weil-pbc-mittag-leffler-limit-exact as a generic algebraic tool. The report notes that the current blueprint's lem-trf-local-term-locality proof quotes Varshavsky directly; that is a maintainer matter, not a fault of this split."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SequentialFreeColimitHomExact",
+  "declaration": "Module.sequential_free_colimit_hom_exact",
+  "declarations": [
+   "Module.sequentialHomSystem"
+  ],
+  "file": "lean/Sheaf/RingTheory/SequentialFreeColimitHomExact.lean",
+  "statement": "theorem sequential_free_colimit_hom_exact {R : Type u} [CommRing R] (F : ℕ ⥤ ModuleCat.{v} R) (hfree : ∀ n : ℕ, ∃ r : ℕ, Nonempty (F.obj n ≃ₗ[R] (Fin r → R))) (c : Cocone F) (hc : IsColimit c) : (∃ ρ : (N : ModuleCat.{w} R) → (c.pt →ₗ[R] N) ≃ₗ[R] ModuleCat.sectionsSubmodule (sequentialHomSystem F N), (∀ (N : ModuleCat.{w} R) (h : c.pt →ₗ[R] N) (n : ℕ), (ρ N h).val (Opposite.op n) = h.comp (c.ι.app n).hom) ∧ (∀ (N N' : ModuleCat.{w} R) (a : N →ₗ[R] N') (h : c.pt →ₗ[R] N) (n : ℕ), (ρ N' (a.comp h)).val (Opposite.op n) = a.comp ((ρ N h).val (Opposite.op n)))) ∧ (∀ (N₁ : ModuleCat.{w₁} R) (N₂ : ModuleCat.{w₂} R) (N₃ : ModuleCat.{w₃} R) (a : N₁ →ₗ[R] N₂) (b : N₂ →ₗ[R] N₃), Function.Injective a → Function.Exact a b → Function.Surjective b → (sequentialHomSystem F N₁ ⋙ forget (ModuleCat R)).IsMittagLeffler → Function.Injective (fun h : c.pt →ₗ[R] N₁ ↦ a.comp h) ∧ Function.Exact (fun h : c.pt →ₗ[R] N₁ ↦ a.comp h) (fun h : c.pt →ₗ[R] N₂ ↦ b.comp h) ∧ Function.Surjective (fun h : c.pt →ₗ[R] N₂ ↦ b.comp h))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78dded0fb",
+  "group": "Q44",
+  "result": "pass",
+  "note": "The node matches side-live apart from lean, and the item is not landed elsewhere. lean.statement matches the file verbatim, and the only sorry is in the main theorem. Clauses checked: CommRing R; F : ℕ ⥤ ModuleCat.{v} R with n ↦ n+1; hfree via Fin r → R including rank 0; Cocone plus IsColimit (def-weil-pbc-category-colimit); L_N = sectionsSubmodule of sequentialHomSystem (real ofOpSequence of lcomp precomposition, componentwise operations); ρ pinned by the restriction formula plus naturality; SES given as Injective/Exact/Surjective with independent universes w1-w3; ML via (· ⋙ forget).IsMittagLeffler as the def-weil-pbc-mittag-leffler-system record directs; conclusion has all three Hom clauses. Edge cases: rank 0 / P = 0, zero transitions, N1 = 0 or N3 = 0, index shift; no extra hypotheses. Citer lem-trf-countable-flat-mittag-leffler-projective step 3 is served. No duplicate of the helper or theorem in the project or Mathlib. Docstrings carry source, blueprint and proof steps 1-5; report sections present. No findings; no compile needed since nothing was changed."
+ }
+}

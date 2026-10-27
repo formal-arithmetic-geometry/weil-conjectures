@@ -1,0 +1,328 @@
+{
+ "id": "lem-trf-conormal-kernel-coordinate-slice",
+ "kind": "statement",
+ "title": "Conormal-kernel coordinates and a smooth zero slice",
+ "statement": "Let $k$ be a field, $B$ a smooth finite-type $k$-algebra, $I\\subset B$ an ideal and $\\mathfrak p\\supset I$ a prime. Put $A=B/I$, $M=\\operatorname{Spec}B$, $X=\\operatorname{Spec}A$, $x=\\mathfrak p/I$, $L=\\kappa(x)$ and $V=\\Omega_{B/k}\\otimes_BL$. Write $K$ for the kernel of the canonical surjection $V\\to\\Omega_{A/k}\\otimes_AL$, and put $n=\\dim_LV$, $r=\\dim_LK$. There is an affine open neighbourhood $W\\subset M$ of $\\mathfrak p$ and functions $f_1,\\ldots,f_r$ in the ideal of $X\\cap W$ and $g_1,\\ldots,g_{n-r}\\in\\Gamma(W,\\mathcal O_W)$ such that the $df_i$ form a basis of $K$, and the $df_i,dg_j$ together form a basis of $V$. The coordinate map\n$$e=(f_1,\\ldots,f_r,g_1,\\ldots,g_{n-r}):W\\longrightarrow\\mathbf A^n_k$$\nis etale. The closed subscheme $M_0=V(f_1,\\ldots,f_r)\\subset W$ contains $X\\cap W$ and its map $(g_j):M_0\\to\\mathbf A^{n-r}_k$ is the base change of $e$ along the coordinate subspace $\\mathbf A^{n-r}_k\\hookrightarrow\\mathbf A^n_k$; in particular $M_0$ is smooth over $k$. The canonical differential-fibre map identifies\n$$\\Omega_{M_0/k}\\otimes L=V/\\langle df_1,\\ldots,df_r\\rangle.$$\nThese assertions impose no smoothness or reducedness on $X$. For $r=0$ the zero slice is $W$. Here differentials, residue fields, affine space and base change are as in [def-weil-pbc-kahler-differentials], [def-sc-relative-differential-sheaf], [def-weil-residue-field], [def-weil-module-base-change], [def-sbc-affine-space], [def-pc-base-change]; smoothness, finite type, closed immersions and etaleness are as in [def-sbc-smooth-morphisms], [def-weil-finite-type-morphism], [def-weil-closed-immersion], [def-weil-etale-morphism]. Smoothness of the algebra means [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent coordinate-slice consequence of Tag 02GU, lemma-etale-at-point (8), Tag 02G1, lemma-smooth-omega-finite-locally-free, and Tag 02GO, lemma-base-change-etale; algebra.tex Tags 00RU, lemma-differential-seq, and 00DF, lemma-tensor-product-exact. Retains old item Steps 1--3; the quotient formula is the Leibniz calculation in old Step 3."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-residue-field",
+  "def-weil-module-base-change",
+  "def-sbc-affine-space",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the quotient conormal sequence to $k\\to B\\to A=B/I$: $(I/I^2)\\to A\\otimes_B\\Omega_{B/k}\\to\\Omega_{A/k}\\to0$, with $[f]\\mapsto1\\otimes df$. Tensor this right exact sequence over $A$ with $L$. Tensor associativity gives the exact sequence $(I/I^2)\\otimes_A L\\to V\\to\\Omega_{A/k}\\otimes_A L\\to0$. Thus $K$ is precisely the $L$-span of the classes $df\\otimes1$, $f\\in I$; there is no claim that the first arrow is injective.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RU, lemma-differential-seq, and Tag 00DF, lemma-tensor-product-exact"
+   }
+  },
+  {
+   "text": "By the definition of a smooth ring map, $\\Omega_{B/k}$ is a direct summand of a finite free $B$-module; after tensoring the splitting with $L$, $V$ is a direct summand of a finite-dimensional $L$-space and hence finite-dimensional. Choose a maximal linearly independent subfamily of the spanning family $\\{df\\otimes1:f\\in I\\}$ of $K$. It has $r$ members, say $df_1,\\ldots,df_r$, with $f_i\\in I$. The presentation of Kähler differentials by symbols $db$ shows that $\\{db\\otimes1:b\\in B\\}$ spans $V$. Starting with these $r$ vectors, repeatedly append a member of this spanning family outside the span until it is all of $V$. This gives $g_1,\\ldots,g_{n-r}\\in B$ and the required basis $df_i,dg_j$. This is finite-dimensional basis selection, with no lifting of arbitrary $L$-linear combinations to functions.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T2, definition-smooth; elementary basis selection from the symbol construction in Tag 00RM, section-differentials, preceding Tag 07BK, definition-differentials"
+   }
+  },
+  {
+   "text": "The affine smoothness comparison makes $M=\\operatorname{Spec}B$ smooth over $k$; it is finite type by hypothesis. The affine differential-sheaf description and the associated-sheaf stalk localization theorem identify the fibre at $\\mathfrak p$ with $V$, compatibly with $db$: the tensor identification is $(m/s)\\otimes\\ell\\mapsto m\\otimes s^{-1}\\ell$, with inverse $m\\otimes\\ell\\mapsto(m/1)\\otimes\\ell$. Here $\\kappa(\\mathfrak p)=\\kappa(\\mathfrak p/I)=L$: the prime-residue-field theorem identifies both with the fraction field of the same domain $B/\\mathfrak p=A/x$. Apply the prescribed-differential-basis criterion to the global functions $(f_1,\\ldots,f_r,g_1,\\ldots,g_{n-r})$ on $M$. It produces an open neighbourhood $U$ of $\\mathfrak p$ on which their map to $\\mathbf A^n_k$ is etale. This uses no condition on $\\Omega_{A/k}$ or on $X$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-sc-relative-differential-sheaf",
+    "lem-pur-etale-at-point-from-differentials",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6, lemma-smooth-characterize; Tag 02GU, lemma-etale-at-point (8), in the prescribed-coordinate form of lem-pur-etale-at-point-from-differentials"
+   }
+  },
+  {
+   "text": "Choose an affine open $W\\subseteq U$ containing $\\mathfrak p$ using the affine-open basis. Its inclusion into $U$ is an open immersion, hence etale, and composition shows that $e:W\\to\\mathbf A^n_k$ remains etale. Restrict all chosen functions to $W$ and put $C=\\Gamma(W,\\mathcal O_W)$. By the defining restriction compatibility of the differential sheaf, the fibre at the marked point and all the chosen differential classes remain the ones already used in $V$. The germ-normalized stalk localization theorem and the tensor formula of Step 3 give these fibre identifications.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens; morphisms.tex Tags 02GP, lemma-open-immersion-etale, and 02GN, lemma-composition-etale"
+   }
+  },
+  {
+   "text": "Let $J=(f_1,\\ldots,f_r)\\subseteq C$ and $M_0=\\operatorname{Spec}(C/J)$. Each $f_i$ was in $I$, so its restriction vanishes on the scheme $X\\cap W$, not just on its points. The map $C\\to\\Gamma(X\\cap W,\\mathcal O)$ therefore factors through $C/J$. The affine quotient description of a closed immersion shows that this is the claimed containment $X\\cap W\\subseteq M_0$. When $r=0$, $J=(0)$, so $M_0=W$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, lemma-closed-immersion; elementary factorization through a quotient ring"
+   }
+  },
+  {
+   "text": "Write $P=k[T_1,\\ldots,T_n]$ and $Q=(T_1,\\ldots,T_r)$. The coordinate subspace is $\\operatorname{Spec}(P/Q)=\\mathbf A^{n-r}_k$ with its remaining coordinates $T_{r+j}$. Under the coordinate map $P\\to C$, $T_i\\mapsto f_i$ and $T_{r+j}\\mapsto g_j$, the extended ideal $QC$ is $J$. The tensor-quotient identification gives $C\\otimes_P(P/Q)\\cong C/J$. The affine fibre-product theorem thus identifies $M_0$ with $W\\times_{\\mathbf A^n_k}\\mathbf A^{n-r}_k$. The second projection has coordinates $g_j\\bmod J$, so it is precisely the stated map $(g_j)$.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4, lemma-fibre-product-affine-schemes, and 01JQ, lemma-fibre-product-affines; algebra.tex Tag 00DF, lemma-tensor-product-exact, for the tensor quotient"
+   }
+  },
+  {
+   "text": "By etale base change, $M_0\\to\\mathbf A^{n-r}_k$ is etale. An etale morphism is smooth, and $\\mathbf A^{n-r}_k\\to\\operatorname{Spec}k$ is smooth, so smoothness of compositions gives smoothness of $M_0/k$. All three results apply to the whole affine zero slice, not merely to its marked point.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "sbc-lem-affine-space-smooth",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GO, lemma-base-change-etale; Tag 02GK, lemma-etale-smooth-unramified; Tag 01VA, lemma-composition-smooth; algebra.tex Tag 00T7, lemma-standard-smooth, for affine space"
+   }
+  },
+  {
+   "text": "Apply the same conormal exact sequence and tensor right exactness to $C\\twoheadrightarrow C/J$ and its residue field $L$. It identifies the differential fibre of $M_0/k$ with the fibre of $\\Omega_{C/k}$ modulo the span of $dh$, $h\\in J$. If $h=\\sum_i a_i f_i$, Leibniz gives $dh=\\sum_i a_i\\,df_i+\\sum_i f_i\\,da_i$. Since every $f_i$ vanishes at the marked point, the second sum has zero residue fibre; the first is in the span of the $df_i$. Conversely each $f_i$ lies in $J$, so the image is exactly that span. The affine differential-sheaf restriction compatibility identifies the fibre of $\\Omega_{C/k}$ with $V$. The resulting quotient is therefore $V/\\langle df_1,\\ldots,df_r\\rangle$, and its quotient map is the canonical differential map, since the conormal map sends $[h]$ to $dh$. No step assumed $X$ reduced or smooth. The germ-normalized stalk localization theorem and the tensor formula of Step 3 give these fibre identifications.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-kahler-differentials",
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RU, lemma-differential-seq, including its Leibniz proof; Tag 00DF, lemma-tensor-product-exact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-sc-relative-differential-sheaf",
+  "lem-pur-etale-at-point-from-differentials",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-smooth-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Coordinate-slice argument assembled from Tags 00RU and 00DF and the cited general scheme lemmas; the item is an agent consequence, not a verbatim Stacks lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-conormal-kernel-coordinate-slice: in a smooth finite type algebra over a field choose ideal elements whose differentials span the conormal kernel and complete them to etale coordinates cutting out a smooth slice",
+   "results": "{\"t\": \"2026-10-23T12:11:21Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-conormal-kernel-coordinate-slice: in a smooth finite type algebra over a field choose ideal elements whose differentials span the conormal kernel and complete them to etale coordinates cutting out a smooth slice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.P\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.toSubmersivePresentation\", \"StandardEtalePresentation\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\"], \"digest\": \"6a7db5addfa51f11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|smooth.*slice|minimal.*envelope",
+   "results": "{\"t\": \"2026-10-23T12:12:39Z\", \"tool\": \"grep\", \"query\": \"conormal|smooth.*slice|minimal.*envelope\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T12:12:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.subsingleton_kaehlerDifferential\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\"], \"digest\": \"62262afa55990dab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_mvPolynomial|of_basis_kaehlerDifferential",
+   "results": "{\"t\": \"2026-10-23T12:13:30Z\", \"tool\": \"grep\", \"query\": \"exists_etale_mvPolynomial|of_basis_kaehlerDifferential\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\"], \"digest\": \"6ce89e045518872e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-conormal-kernel-coordinate-slice: independent differentials of equations defining a closed subscheme in a smooth scheme extend to etale coordinates and define a smooth zero locus",
+   "results": "{\"t\": \"2026-10-23T12:13:30Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-conormal-kernel-coordinate-slice: independent differentials of equations defining a closed subscheme in a smooth scheme extend to etale coordinates and define a smooth zero locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\"], \"digest\": \"174e5b1031db7ebe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a smooth algebra choose elements of an ideal whose differentials form a basis of the conormal kernel and complete to etale coordinates",
+   "results": "{\"t\": \"2026-10-23T12:51:18Z\", \"tool\": \"leanfinder\", \"query\": \"In a smooth algebra choose elements of an ideal whose differentials form a basis of the conormal kernel and complete to etale coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"StandardEtalePresentation.P\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"Algebra.IsStandardEtale\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair\", \"StandardEtalePresentation.x\"], \"digest\": \"ec8d3fff61cb8d26\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary standard-smooth charts, differential exactness, etale base-change isomorphisms and etale loci do not state this simultaneous choice of ideal equations, complementary coordinates, zero slice and canonical fibre quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "etale_aeval_of_basis|exact_kerCotangentToTensor_mapBaseChange",
+   "results": "{\"t\": \"2026-10-23T12:53:02Z\", \"tool\": \"grep\", \"query\": \"etale_aeval_of_basis|exact_kerCotangentToTensor_mapBaseChange\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\"], \"digest\": \"49ae915ea1e11aaf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary standard-smooth charts, differential exactness, etale base-change isomorphisms and etale loci do not state this simultaneous choice of ideal equations, complementary coordinates, zero slice and canonical fibre quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth algebra over a field has local etale coordinates extending independent differentials of elements of an ideal",
+   "results": "{\"t\": \"2026-10-23T12:53:02Z\", \"tool\": \"leansearch\", \"query\": \"A smooth algebra over a field has local etale coordinates extending independent differentials of elements of an ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.mk\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Smooth.formallySmooth\", \"Algebra.Smooth\", \"Algebra.FormallyEtale.instFormallySmooth\"], \"digest\": \"19780b9359b1e6bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary standard-smooth charts, differential exactness, etale base-change isomorphisms and etale loci do not state this simultaneous choice of ideal equations, complementary coordinates, zero slice and canonical fibre quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T12:53:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"29c4cb60d87f5b73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary standard-smooth charts, differential exactness, etale base-change isomorphisms and etale loci do not state this simultaneous choice of ideal equations, complementary coordinates, zero slice and canonical fibre quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed differential basis in the residue fibre of a smooth algebra gives an etale map to affine space after localization; quotient by some of these coordinates is smooth",
+   "results": "{\"t\": \"2026-10-23T12:55:02Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed differential basis in the residue fibre of a smooth algebra gives an etale map to affine space after localization; quotient by some of these coordinates is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.toSubmersivePresentation\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"006df6f79468d7fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary standard-smooth charts, differential exactness, etale base-change isomorphisms and etale loci do not state this simultaneous choice of ideal equations, complementary coordinates, zero slice and canonical fibre quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-embedding-etale-comparison",
+  "date": "2026-10-23",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Minimal smooth envelopes and etale comparisons; Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2, minimal-embedding paragraph; BM, Desingularization algorithms I (2003), section 6.1.2; comparison argument supplied by agent from smooth local coordinates. No Stacks tag states the full minimal-envelope comparison. Re-split: old Steps 1--3: choose the differential kernel, complete it to coordinates, and take its zero slice.",
+   "via": [
+    "lem-trf-smooth-embedding-etale-comparison",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-conormal-kernel-coordinate-slice",
+  "worker": "stage1",
+  "summary": "Chose ideal differentials and completed them directly to a basis, used the existing prescribed-coordinate criterion, and computed the zero slice and its differential quotient. Reused existing general lemmas, including the exact quotient conormal sequence rather than the weaker surjection-differentials node. Statement unchanged; no new nodes.",
+  "blueprint": "Retains the historical nearby-duality/alteration branch and the old smooth-embedding comparison Steps 1--3 named in blueprint.from.place. This node supplies only their conormal-coordinate and smooth-slice calculation. The current blueprint local-term proof itself uses contracting correspondences; this split makes no change to the ancestor or its unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Converts the assumed algebra smoothness to smoothness of its spectrum; this is a generic affine comparison."
+   },
+   {
+    "node": "lem-pur-etale-at-point-from-differentials",
+    "why": "Prescribed functions with a differential fibre basis give an etale coordinate map; this generic local chart criterion does not replace any unit-level step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Only the generic implication etale implies smooth is used for the base-changed slice."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Only smoothness of the affine-space projection is used; the unit has no replacement for this basic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-pur-etale-at-point-from-differentials",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-659cf1c94",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-659cf1c94 (reviewer sub-agent of L); spot-checked: I read all 8 steps against each cited statement. The delivery has no new nodes, and the statement is byte-identical to the Q66 delivery that created the item; only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. I checked the sources: 00RU lemma-differential-seq (algebra.tex 34103) matches the Jacobi-Zariski node (exact at the middle term, delta=[f]->1(x)df, w surjective), and 00DF is the right-exactness node, which needs no flatness. Step 1: K is the L-span of df(x)1 for f in I. Step 2 is elementary basis selection, with V finite-dimensional because Omega_B is projective. Step 3: the prescribed-differential criterion's hypotheses hold (finite type, smooth, basis of the fibre, kappa(p)=Frac(B/p) via the tilde-stalk and prime-residue nodes). Step 4: the open immersion is etale and so is the composite. Step 5: J lies in the ideal of X cap W. Step 6: C(x)_P P/Q = C/J and both projections are identified. Step 7: etale base change, etale implies smooth, A^{n-r} smooth, composition. Step 8: Leibniz with f_i in p gives image exactly <df_i>, and Omega_C(x)L = V by restriction compatibility. Small cases checked: I=0, r=0 (M_0=W), r=n, n=0, B=k[t] with I=(t^2) (K=0) and non-closed p. No cycle, no missing or merged deps, no SGA. Candidates checked and not duplicates: smooth-conormal-basis-etale-polynomial-chart, conormal-free-presentation-basis, smooth-augmentation-first-order-coordinates. Accepted tool_uses: smooth-ring-map-iff-smooth-affine, pur-etale-at-point-from-differentials, etale-smooth-zero-dimensional-fibres (etale implies smooth only), sbc-lem-affine-space-smooth. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConormalKernelCoordinateSlice",
+  "declaration": "AlgebraicGeometry.exists_conormalKernelCoordinateSlice",
+  "declarations": [
+   "AlgebraicGeometry.conormalCoordinateFibreMap",
+   "AlgebraicGeometry.ConormalKernelCoordinateSlice",
+   "AlgebraicGeometry.exists_conormalKernelCoordinateSlice"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalKernelCoordinateSlice.lean",
+  "statement": "theorem exists_conormalKernelCoordinateSlice (k B : Type u) [Field k] [CommRing B] [Algebra k B] [Algebra.Smooth k B] [Algebra.FiniteType k B] (I p : Ideal B) [p.IsPrime] (hp : I ≤ p) : Nonempty (ConormalKernelCoordinateSlice k B I p)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The structure bundles precisely the existential witnesses and canonical-map compatibilities of this node; no witness is chosen from a sorry. Affine spaces use their polynomial-spectrum model (AffineSpace.SpecIso), and all differential fibres are written with the residue field on the left and tensor products over B via restriction of scalars. The canonical prime residue field p.ResidueField equals kappa(p/I) canonically because both are the fraction field of B/p."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc3206664",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Read node, 13 stmt_dep records, module, report; live node differs only by new lean record. Every clause matches: L=p.ResidueField (canonical κ(p/I)), V=L⊗_BΩ_B, K=ker of baseChange of KaehlerDifferential.map B→B/I; open-immersion affine W with point over p; f_i∈I·C (ideal of X∩W); kernel/ambient bases pinned via fibreIso fixed to the canonical map (true iso for open immersion); Etale of Spec(aeval (Sum.elim f g)); contains span f ≤ I·C; IsPullback square checked on generators and truly cartesian (C⊗_P P/Q=C/J); whole-slice Smooth; quotientIso V/K≅L⊗Ω_{C/J} pinned to canonical map. No extra hypotheses, edge cases I=0/r=0/r=n/n=0/(t^2) ok, universes forced by scheme clauses. Not a duplicate of exists_etale_aeval_sumElim_of_ker (needs smooth quotient). Statement verbatim, docstrings/source/blueprint ok, only sorry in theorem. Advisory H9: unused public/proof-plan imports. No compile (no file changed)."
+ }
+}

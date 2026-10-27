@@ -1,0 +1,141 @@
+{
+ "id": "def-pur-shifted-tate-unit-scalar-data",
+ "kind": "definition",
+ "title": "Shifted Tate units and normalized integral scalar comparison data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, finite extensions $E,F/\\mathbf Q_\\ell$ in one universe, an algebra map $\\iota:E\\to F$ over $\\mathbf Q_\\ell$, their valuation rings and chosen uniformizers [def-weil-l-adic-coefficient-extension], and a scheme $S$ in that universe with its small pro-etale site [def-weil-pbc-proetale-site]. Put $R_{E,S}=\\widehat{\\mathcal O}_{E,S}$ [def-weil-completed-integral-coefficients], $U_{E,S}=R_{E,S}[0]$ [def-weil-constant-coefficient-objects], and let $C_{F/E,S}=(-)\\otimes^L_{R_{E,S}}R_{F,S}$ be ordinary derived scalar extension [lem-pur-derived-change-of-rings]. Write $\\chi:C_{F/E,S}\\to C^{\\mathrm{tower}}_{F/E,S}$ for the specified comparison with strict-tower scalar extension [def-weil-integral-scalar-extension, lem-weil-finite-free-completed-scalar-comparison]. These definitions name the following existing constructions, and assert no domain-preservation or coefficient-cocycle theorem.\n\n1. Given a finite-field datum $D$ of characteristic $p$ and $\\ell\\ne p$ as in [def-pur-conventions], define $u_{F/E,S}:C_{F/E,S}U_{E,S}\\xrightarrow{\\sim}U_{F,S}$ to be $\\chi_{U_{E,S}}$ followed by the normalized strict coefficient-unit isomorphism of [lem-weil-constant-coefficient-objects-constructible]. This is ordinary coefficient multiplication with its fixed quotient-coordinate and K-flat normalization. For $n\\in\\mathbf Z$, define $s_{F/E,n}:C_{F/E,S}(-[n])\\xrightarrow{\\sim}(C_{F/E,S}(-))[n]$ by the ordinary derived commutation-with-shift structure selected with its termwise-tensor and universal-counit normalization in [lem-weil-point-completed-scalar-shift]. Define the coefficient-base inclusion $\\mathbf Q_\\ell^{\\uparrow}\\to E$ by $x\\mapsto\\operatorname{algebraMap}(\\mathbf Q_\\ell,E)(x.\\mathrm{down})$, where $\\mathbf Q_\\ell^{\\uparrow}$ is its canonical universe lift.\n\n2. Fix a purity setting $P$ [def-pur-conventions], hence $k=\\overline{\\mathbf F}_q$ and $\\ell\\ne p$, and a $k$-scheme $S$ (without finite-type, separatedness or nonemptiness requirements for these definitions). Define the residue-field inverse of $\\ell$ at every $x\\in S$ by mapping its fixed stalk unit through the residue homomorphism. With the existing Tate twisting functor $(-)(m)$ [def-coefficient-twists-detailed], define $T_{E,S,d}=U_{E,S}(d)[2d]$ for $d\\in\\mathbf N$. Let $\\beta_{F/E,M}:C_{F/E,S}(M(d))\\xrightarrow{\\sim}(C_{F/E,S}M)(d)$ be the fixed ordinary twist comparison of [lem-weil-integral-twist-derived-scalar]. Its value on the unit uses the existing integral constant constructible object of [def-weil-constant-weil-structure]. Define\n$$q_{F/E,S,d}=(u_{F/E,S}(d)\\circ\\beta_{F/E,U_{E,S}})[2d]\\circ s_{F/E,U_{E,S}(d),2d}:C_{F/E,S}T_{E,S,d}\\xrightarrow{\\sim}T_{F,S,d}.$$\nDefine the predicate $\\operatorname{UnitDomain}(E,S,d)$ to be the conjunction that $U_{E,S}$ and $T_{E,S,d}$ belong to the derived-complete integral constructible finite-Tor category [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude], and that every positive derived reduction [def-weil-integral-derived-reduction] of $U_{E,S}$ has containing Tor interval $[0,0]$, while every positive derived reduction of $T_{E,S,d}$ has containing Tor interval $[-2d,-2d]$. The predicate is only defined here; its truth and the identity, tower and shift coherence assertions are separate theorems.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-constant-coefficient-objects",
+  "def-weil-constant-weil-structure",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-derived-reduction",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-point-completed-scalar-shift",
+  "lem-weil-integral-twist-derived-scalar"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2 and 4: the twisted and shifted integral inverse image and its coefficient-unit specialization; extracted normalized q construction in lem-pur-shifted-tate-unit-scalar-coherence, definitions preceding its theorem (the source prescribes transport, not the auxiliary coherence theorem)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Definitions of shifted Tate unit and canonical scalar extension unit and shift comparisons for completed integral coefficients",
+   "results": "OK 8 hits: WittVector.verschiebung; CategoryTheory.Adjunction.shift_unit_app; CategoryTheory.Adjunction.CommShift.CompatibilityUnit; CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app; CochainComplex.HomComplex.Cochain.shift_units_smul; CategoryTheory.Adjunction.CommShift.commShift_unit; CategoryTheory.Adjunction.CommShift.mk'; CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right.",
+   "date": "2026-10-24",
+   "verdict": "Generic Witt-vector or shift-adjunction declarations, not the specialized completed-coefficient definitions; reuse the existing project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shifted Tate unit integral coefficient scalar comparison q canonical shift multiplication on the coefficient unit",
+   "results": "OK 8 hits: PreTilt.coeff_pow_p; WittVector.succNthValUnits; PreTilt.coeff_def; WittVector.teichmuller_mul_pow_coeff_of_ne; PowerSeries.weierstrassUnit_smul; WittVector.mk_fontaineTheta; WittVector.teichmuller_mul_pow_coeff; xInTermsOfW.",
+   "date": "2026-10-24",
+   "verdict": "No matching completed Tate-unit construction; reuse the exact published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "shiftedTateUnit|shiftedTateScalarIso|PurShiftedTate",
+   "results": "OK 0 hit(s) in Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration with these specialized names."
+  },
+  {
+   "tool": "rg",
+   "query": "shiftedTateUnit|shiftedTateScalarIso|PurShiftedTate lean/WeilConjectures lean/Sheaf",
+   "results": "No upstream WeilConjectures match. Exact constructions in lean/Sheaf/Paper/PurShiftedTateUnitScalarCoherence.lean: unitIso lines 57-63, shiftIso 70-76, baseInclusion 81-82, shiftedTateResidueInverse 95-100, shiftedTateUnit 108-112, shiftedTateUnitDomain 117-128, shiftedTateScalarIso 138-149.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing definitions: record existing:true and do not copy or redefine."
+  },
+  {
+   "tool": "DAG declaration-record scan",
+   "query": "PurShiftedTateUnitScalarCoherence, shiftedTateUnit, shiftedTateScalarIso, shiftedTateResidueInverse, PurShiftedTate.unitIso, PurShiftedTate.shiftIso",
+   "results": "The seven declarations are recorded by the statement node lem-pur-shifted-tate-unit-scalar-coherence; no definition node records them. The other declaration-record match is the theorem node lem-pur-unshifted-line-unit-tower in a different module.",
+   "date": "2026-10-24",
+   "verdict": "The independent H2 return requests a missing definition owner, not a new Lean construction."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "shifted Tate unit",
+   "results": "2 blueprint nodes match 'shifted Tate unit': def-sf-orientation and def-weil-exceptional-inverse-image.",
+   "date": "2026-10-24",
+   "verdict": "Neither defines these completed-unit comparison helpers or UnitDomain; no exact blueprint definition owner."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-adic-operation-domains-source-comparison",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Purity transport Steps 2-4; normalized source comparison at the coefficient unit and the shifted Tate unit in the extracted operation-domains argument.",
+   "via": [
+    "lem-pur-adic-operation-domains-source-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.PurShiftedTateUnitScalarCoherence",
+  "declaration": "WeilConjectures.PurityFiniteSetting.shiftedTateScalarIso",
+  "declarations": [
+   "WeilConjectures.PurShiftedTate.unitIso",
+   "WeilConjectures.PurShiftedTate.shiftIso",
+   "WeilConjectures.PurShiftedTate.baseInclusion",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateResidueInverse",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateUnit",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateUnitDomain",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateScalarIso"
+  ],
+  "statement": "def shiftedTateScalarIso (d : ℕ) :\n    (completedDerivedScalarExtension P.coefficients.l E F ι S).obj\n        (P.shiftedTateUnit E S d) ≅ P.shiftedTateUnit F S d",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 ownership repair requested by the independent review of 6048593f72b0: these seven plain definitions already exist in the named module but had no definition-node owner. This record reuses them verbatim and includes no coherence theorem or new Lean file. Unit and shift maps retain their existing theorem-constructed normalizations; UnitDomain is a predicate, not an assumption or assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-720e7b65a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-720e7b65a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery of H2 RETURN 6048593f72b0: Lean byte-identical (sha 6cfff40c), item diff only stmt_deps+lean.note. Required repairs done: lem-pur-shifted-tate-unit-scalar-coherence -> new existing:true def-pur-shifted-tate-unit-scalar-data (7 plain defs of PurShiftedTateUnitScalarCoherence; statement matches u/s/baseInclusion/residue inverse/T/q/UnitDomain bodies; its theorem stmt_deps supply .choose/IsIso data; 3 deps missing from partial snapshot exist in side-live); lem-weil-integral-constructible-linear -> def-sf-integral-constructible-linear-structure; 4 recommended def owners added. Mechanical finding judged: lem-pur-completed-line-tensor-coherence (associatorData/ordinaryUnit ∃!.choose), lem-zl-constant-geometric-stalk-unit (integralChainUnit ∃!.choose in integralUnit), lem-weil-integral-twist-derived-scalar (integral_twist_derived_scalar.choose = β), lem-pur-integral-operations-scalar-extension (scalarPullbackOrdinary ∃!.choose under θ) are theorem-constructed objects -> PASS on that point. All clauses and edge cases (empty scheme, d=0, F=E, ramified, shifts) as accepted at 6048. Advisory: second reading is self-reading. No file changed, no compile."
+ }
+}

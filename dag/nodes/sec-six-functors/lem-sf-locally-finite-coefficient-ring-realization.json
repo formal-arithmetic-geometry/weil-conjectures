@@ -1,0 +1,296 @@
+{
+ "id": "lem-sf-locally-finite-coefficient-ring-realization",
+ "kind": "statement",
+ "title": "Native locally finite function coefficients are the finite-subextension condensed coefficients",
+ "statement": "Let $\\ell$ be prime and $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its extended $\\ell$-adic norm topology. Let $C$ be the commutative condensed ring whose sections on a profinite set $S$ are the continuous maps $S\\to\\Omega$ with image in one finite intermediate extension of $\\mathbf Q_\\ell$, with pointwise operations [sk-def-sfb-qlbar-condensed]. For any scheme $T$, let $p_T^*C$ be its coefficient inverse image on the small pro-etale site [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site], in the universes of [def-weil-size-convention]. Let $B_T$ be the ring sheaf of [def-sf-native-weil-derived-framework]: on $V\\to T$ its sections are continuous functions $|V|\\to\\Omega$ such that each point has an open neighbourhood on which the image spans a finite-dimensional $\\mathbf Q_\\ell$-subspace, with precomposition restrictions and pointwise operations. There is a canonical isomorphism of sheaves of commutative rings\n$$\\theta_T:p_T^*C\\xrightarrow{\\sim}B_T.$$\nFor a finite intermediate field $E\\subset\\Omega$, write $C(-,E)=\\underline E$ for the condensed ring of continuous $E$-valued functions [sk-def-sfb-condensed-ring]; the composite $p_T^*C(-,E)\\to p_T^*C\\xrightarrow{\\theta_T}B_T$ of $\\theta_T$ with the pullback of the inclusion is, under the canonical continuous-function realization $p_T^*C(-,E)\\cong(V\\mapsto C(|V|,E))$ [lem-weil-pbc-continuous-coefficient-realizations], postcomposition of functions with $E\\hookrightarrow\\Omega$. For every scheme morphism $h:T'\\to T$, the square of ring-sheaf maps $\\eta_h:p_T^*C\\to h_*p_{T'}^*C$ (the coefficient map of [sk-def-sfb-coefficient-morphisms], mate of the canonical pullback comparison) and $B_T\\to h_*B_{T'}$ commutes with $\\theta_T$ and $h_*\\theta_{T'}$; the bottom map is precomposition of functions. No Noetherianity or separatedness hypothesis on $T$ is required.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 and Lemma 5.6 (finite-subextension coefficient and point pullback). Agent-formulated identification with the native locally finite range condition, read also in lean/WeilConjectures/SixFunctors/ProEtale/Adic/ConstantSheaf.lean:79-150,230-242,306-333; the statement compares the finite-subextension ring, not the all-continuous norm-topology ring."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-sf-native-weil-derived-framework",
+  "sk-def-sfb-condensed-ring",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "sk-def-sfb-coefficient-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing globalCoefficientIso from def-weil-pbc-condensed-qbar-coefficient-construction, then compose with the existing source-library padicAlgClSheafIsoAdicConstantSheaf. The latter is the sheafification comparison of bounded functions with locally finite functions, already proved by local bijectivity in PadicAlgClSheafIso.lean. The source-library PadicAlgClSheafRing.lean proves that its hom preserves the native ring-object structure. Thus the composite is an isomorphism and a monoid homomorphism for every scheme, without extra hypotheses.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 (continuous-function realization), with the finite-subextension colimit preceding Lemma 5.6; agent local-gluing argument for the norm-topological locally finite subring."
+   }
+  },
+  {
+   "text": "Identify fieldDiagramIso at each finite intermediate field with chartComparison: apply the composite point/scheme adjunction Hom equivalence, use finiteFieldComparison_test, and compare with the defining chartComparisonAdjoint. Extensionality on profinite tests proves equality with the actual normalized comparison.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 (continuous-function realization), with the finite-subextension colimit preceding Lemma 5.6; agent local-gluing argument for the norm-topological locally finite subring."
+   }
+  },
+  {
+   "text": "Compute a finite-field cocone leg followed by padicAlgClSheafToAdicConstantSheaf. The inverse sheafification counit on the continuous-function sheaf is its sheafification unit. Naturality of this unit and the adjunction equation for padicAlgClSheafToAdicConstantSheaf reduce the composite to the literal presheaf inclusion, hence to postcomposition with the field inclusion. Combine this calculation with globalCoefficientIso_fac and step 2 to prove the required section equation.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 (continuous-function realization), with the finite-subextension colimit preceding Lemma 5.6; agent local-gluing argument for the norm-topological locally finite subring."
+   }
+  },
+  {
+   "text": "Prove coefficient_pushforward_naturality from naturality of the scheme-adjunction unit and upperStarFromPointComp. Prove finiteLeg_native_naturality by evaluating sections: continuousFunctionPushforward and adicConstantSheafToLowerStar both precompose with pullback.fst, and the calculation of step 3 identifies their finite-field inclusions pointwise.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 (continuous-function realization), with the finite-subextension colimit preceding Lemma 5.6; agent local-gluing argument for the norm-topological locally finite subring."
+   }
+  },
+  {
+   "text": "Apply completedCondensedAlgebraicClosure from sk-prop-sfb-qlbar-colimit-x: its actual finite-field ring cocone is a colimit for every scheme. Bundle the two sides of the desired square as monoid homomorphisms, using the existing IsMonHom instances for the coefficient mate, the constructed isomorphisms, lax monoidal direct image, and the native precomposition map. The canonical monoidal comparison between pushforward-then-forget and forget-then-pushforward transports the target ring structure; its underlying map is the identity. Its hom_ext reduces equality to every finite-field leg. After each leg use coefficient_pushforward_naturality, the normalization from step 3, continuousChart_scheme_naturality, and finiteLeg_native_naturality. These equations identify the composites, so ring-colimit uniqueness proves the square.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction",
+    "lem-weil-pbc-continuous-chart-scheme-naturality",
+    "sk-prop-sfb-qlbar-colimit-x"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 (continuous-function realization), with the finite-subextension colimit preceding Lemma 5.6; agent local-gluing argument for the norm-topological locally finite subring."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-qbar-coefficient-construction",
+  "lem-weil-pbc-continuous-chart-scheme-naturality",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 and the finite-subextension colimit preceding Lemma 5.6; reuse of the proved bounded-function realization and native sheafification comparison. The finite-field normalization and direct-image square are checked explicitly by Y6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"pullback\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyFiniteFunctions|finiteIntermediateFieldValued|adicConstantSheaf",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finite continuous Qbar ell valued functions form the pro etale coefficient sheaf of the filtered union of finite p adic extensions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.lanSheafProfinite\", \"LightCondensed.lanLightCondSet\", \"CompHausLike.LocallyConstant.functor_obj_val\", \"LightCondensed.ofSheafForgetLightProfinite\", \"LocallyConstant.freeOfProfinite\", \"Condensed.locallyConstantPresheaf\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"Profinite.exists_locallyConstant_fin_two\"], \"digest\": \"a68ee0d002e5f7c5\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locally finite continuous algebraic p adic coefficient sheaf on the pro etale site is the pullback of the condensed ring of functions valued in a finite subextension",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"Condensed.lanSheafProfinite\", \"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"CondensedMod.ofSheafProfinite\", \"CondensedMod.LocallyConstant.functor\"], \"digest\": \"9adf0176125d07bc\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDimensional.*(range|span)|range.*finiteDimensional",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/HausdorffDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\"], \"digest\": \"3d751ad8d9a5f195\", \"sub\": \"Topology\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The continuous function sheaf on a pro etale scheme with locally bounded coefficient field is a filtered colimit of finite field valued function sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"SheafOfModules.Presentation.isColimit\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.lanSheafProfinite\", \"LightCondensed.lanLightCondSet\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"Condensed.isColimitLocallyConstantPresheaf\"], \"digest\": \"9cd8f71a5956cba9\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"FiniteDimensional\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of the filtered colimit of condensed finite extensions of Q ell is the sheaf of continuous algebraic ell adic functions with locally finite dimensional range",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.lanSheafProfinite\", \"BDeRhamPlus\", \"Condensed.profiniteSolid\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Condensed.profiniteSolidCounit\", \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"Condensed.isColimitLocallyConstantPresheaf\", \"LightCondensed.isColimitLocallyConstantPresheafDiagram\"], \"digest\": \"7e064217697023fc\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ContinuousMap\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyFiniteFunctions|finiteIntermediateFieldValued|adicConstantSheaf",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finite continuous algebraic p adic functions as the pullback of the condensed filtered union of finite extensions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Padic.adicCompletionEquiv\", \"PadicAlgCl.isAlgebraic\", \"PadicAlgCl\", \"PadicInt.algebra\", \"Padic\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"PadicComplex\", \"LocallyConstant.comapₐ\"], \"digest\": \"89b0e2c232df9f4f\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pro etale pullback of the condensed ring of finite subextension valued continuous algebraic p adic functions is the ring sheaf of locally finite dimensional continuous functions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"Condensed.profiniteSolid\", \"BDeRhamPlus\", \"BDeRham\", \"Condensed.lanSheafProfinite\", \"Condensed.profiniteFree\", \"Condensed.ofSheafForgetProfinite\", \"CondensedMod.ofSheafProfinite\"], \"digest\": \"dca275a06ba782fe\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Condensed.*(colimit|pullback)|continuousMapRingObj",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\"], \"digest\": \"6a3893d8b0d13ded\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of finite extension valued continuous function sheaves consists of locally bounded coefficient field functions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.isColimitLocallyConstantPresheaf\", \"smoothSheafCommRing.evalHom\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"LightCondensed.isColimitLocallyConstantPresheafDiagram\", \"LightCondensed.fintypeCatAsCofanIsColimit\"], \"digest\": \"22eed97261d6d64a\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-locally-finite-adic-compact-support-sums",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supplied anchor lem-a1-local-boundary-duality, steps 1–2: exceptional adjunction; current cor-coef-verdier-weil-equivariance, final paragraph: First two bullet points and final paragraph: open extension and proper direct image on the localizing hulls. Agent-formulated version for the native locally-finite coefficient sheaf and finite-type schemes without absolute separatedness; this precise coefficient/domain variant is the unsplit obligation, not an invocation of the stronger whole-ambient assertion. Coefficient identification needed before the proper-image direct-sum argument: the native locally finite function ring versus the finite-subextension condensed ring. The ancestor command returns None for this maintainer-seeded chain.",
+   "via": [
+    "lem-sf-locally-finite-adic-compact-support-sums",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-locally-finite-coefficient-ring-realization",
+  "worker": "stage1",
+  "summary": "Q90: identified local finite-dimensional range with local finite-field range; reused the finite-field continuous realization and the existing sheaf-ring colimit, constructed its inverse by explicit open-cover gluing, and checked coefficient normalization and the scheme-morphism mate square. No new nodes and no statement change.",
+  "blueprint": "The maintainer-seeded ancestor chain has from.node=null (ancestor command: None). This split supplies the coefficient identification in the item from.place, before the proper-image direct-sum argument; it does not replace the biduality unit route. Whole-blueprint searches for locally finite and continuous-function found no statement of this unrestricted-scheme coefficient identification.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-qlbar-condensed-subextensions",
+    "why": "Finite subsets and composita of coefficient fields; used as elementary coefficient algebra, absent from this biduality unit."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Uniqueness and nonarchimedean property of the finite-extension norm needed to apply the continuous realization."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Canonical finite-field function realization and its actual adjoint/coefficient normalization; a generic point-pullback tool."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Its last sheaf-ring colimit clause, for arbitrary schemes, supplies the coefficient cocone."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Identity/composition compatibility for the actual point-pullback comparisons in the naturality square."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-006bcc1f6",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-006bcc1f6 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 6 steps in full, every cited statement (5 stmt_deps, 7 proof_deps, plus sk-def-sfb-pullback-from-point(-comp) and sk-def-sfb-condensed-ring), and HRS 2305.18131 Example 3.1 (p.6, Λ_X(U)=Map_cont(U,Λ)) and Lemma 5.6 (p.16; there Q̄_ℓ=colim E holds for the colimit topology, which is the finite-subextension ring C the item uses, not all norm-continuous maps). The statement is true. Cases tested: empty T, geometric point, V=a(S) with S profinite (compactness gives one field), disconnected T with fields of unbounded degree, and the N∪{∞} sequence that is norm-continuous but not locally finite. I also checked that B_T is a pro-étale sheaf: over an affine open M, finitely many quasi-compact affines upstairs give one compositum field on M. Step 1: span = field, elementary, correct. Step 2: ultrametric gives total disconnectedness, and the realization node's iso and continuous φ-clause apply to finite E in Type 0. Step 3: the last clause of qlbar-colimit-x is a colimit of sheaves of rings over any scheme, so its universal property gives θ with the required normalization. Step 4: explicit Zariski gluing; open covers are pro-étale coverings, and overlaps are never assumed affine (E1 ok). Step 5: a genuine two-sided inverse; θτ=id patchwise, τθ=id by colimit uniqueness. Step 6: η_h is the mate (sk-def-sfb-coefficient-morphisms); the formula g∘pr_V comes from the adjoint test-projection normalization of the realization node and the composition compatibility of profinite-point-pullback (same p_T^* as sk-def-sfb-pullback-from-point); naturality in Λ plus the colimit give the square. No new nodes. No duplicate: def-weil-pbc-condensed-qbar-coefficient-construction targets the sheafified globally bounded presheaf, lem-weil-pbc-condensed-qbar-function-coefficients needs a noetherian X, lem-sfb-constructible-algcl-topology-comparison and lem-sfb-qlbar-point-abelian-colimit state other things. Declared tool_uses accepted as generic coefficient tools; no SGA. FIX (B3/brief §2): the statement used p_T^*C(-,E), 'the continuous-function realization' and the top map p_T^*C→h_*p_{T'}^*C without citing them. Added [sk-def-sfb-condensed-ring], [lem-weil-pbc-continuous-coefficient-realizations] and [sk-def-sfb-coefficient-morphisms] (top map = η_h) to the text and stmt_deps; no weakening; closure checked acyclic. Fixed file: fixes/dag/nodes/sec-six-functors/lem-sf-locally-finite-coefficient-ring-realization.json. Minor, left as is: the item's source.place glosses Lemma 5.6 as 'point pullback'; the report and step places describe it correctly.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocallyFiniteCoefficientRingRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.locallyFiniteCoefficientRing_realization",
+  "file": "lean/Sheaf/Paper/LocallyFiniteCoefficientRingRealization.lean",
+  "statement": "theorem locallyFiniteCoefficientRing_realization (ℓ : ℕ) [Fact ℓ.Prime] : ∃ θ : ∀ T : Scheme.{u}, condensedRingObj (Profinite.padicAlgClRingObj ℓ) T ≅ (weilCoefficientsForgetAb ℓ T).obj (adicConstantSheaf ℓ T), (∀ T : Scheme.{u}, IsMonHom (θ T).hom) ∧ (∀ (T : Scheme.{u}) (E : PadicAlgCl.FiniteIntermediateField ℓ) (V : T.ProEtᵒᵖ) (s : (condensedRingObj (Profinite.continuousMapRingObj E) T).obj.obj V) (x : V.unop.left), (((((upperStarFromPoint T).map (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) ≫ (θ T).hom).hom.app V) s).down.1 x) = (((chartComparison T E).hom.app V s).down x : PadicAlgCl ℓ)) ∧ (∀ (X Y : Scheme.{u}) (h : X ⟶ Y), condensedPushforwardHom (Profinite.padicAlgClRingObj ℓ) h ≫ (lowerStar Ab.{u + 1} h).map (θ X).hom = (θ Y).hom ≫ (weilCoefficientsForgetAb ℓ Y).map (adicConstantSheafToLowerStar ℓ h))",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The family of underlying abelian-sheaf isomorphisms consists of ring morphisms (IsMonHom), normalized on every finite-subextension leg by the actual chartComparison, and natural for the canonical condensedPushforwardHom and native precomposition map. No new coefficient construction or scheme hypotheses are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-892bfbc17",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Every clause matches the node through the recorded declarations: padicAlgClRingObj (finite-subextension C), condensedRingObj/upperStarFromPoint (p_T^*C), weilCoefficientsForgetAb∘adicConstantSheaf (locally finite B_T, pointwise ring), condensedPushforwardHom (eta_h), adicConstantSheafToLowerStar (precomposition along pullback.fst). The ring iso is an Ab-iso with IsMonHom. The normalization by chartComparison over all finite E, V, s, x pins theta uniquely (pulled colimit legs are jointly epi; sections are determined pointwise), so the existential is not free. Naturality covers all h:X->Y. No extra hypotheses or universe restrictions. Edge cases checked: empty schemes, E=Q_l, identity morphism, non-quasi-compact schemes. Only the lean field changed vs side-live; statement verbatim; docstrings carry source, blueprint and the 6 steps; plain imports are proof_deps modules; no duplicate found in side lean. Advisory only: the SpectralNorm import stands in for an unstated node. Not compiled (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261022T145710-L-2051553",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-signed-representatives",
+ "kind": "lemma",
+ "title": "Signed coherent pullback tensor exchange on K-flat representatives",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite coefficient extension $E/\\mathbb{Q}_\\ell$, schemes $X,Y$ and a morphism $f:X\\to Y$. Use the coherent sequence modules, exact inverse image $F$ and normalized coherent tensor comparison $\\mu$ of [def-pur-completed-pullback-tower-realizations], the K-flat tensor models [def-coef-ringed-tensor-hom-model], and the signed derived braidings $\\sigma_X,\\sigma_Y$ of [def-pur-finite-pullback-tensor-braiding]. For any two unbounded K-flat complexes $P,Q$ of coefficient-sequence module sheaves on $Y$, put $M=Q_Y(P)$ and $N=Q_Y(Q)$. Then $F(\\sigma_Y(M,N))\\,\\mu(N,M)=\\mu(M,N)\\,\\sigma_X(FM,FN)$. No termwise flatness, boundedness, constructibility, or invertibility of $\\ell$ is assumed. This is the representative calculation; the extension by naturality to all derived objects is separate.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-finite-pullback-tensor-braiding"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product (the total tensor construction); More on Algebra, Tag 0FNG, section-sign-rules, item-flip-tensor-product."
+ },
+ "proof": [
+  {
+   "text": "In each degree apply injectivity of the actual sequence-module adjunction Hom equivalence. Naturality of its unit moves the source signed exchange before that unit. Total-summand injections, tensor sheafification and pure-tensor extensionality reduce the two module maps to sections. Use the specified formulas for pullbackTensorSequenceCochain and pullbackTensorSignedTotal. All section maps preserve integer multiples, so both sections are (-1)^(p*q) times the tensor of the unit sections of y and x. This proves the signed chain square, for arbitrary unbounded P and Q.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-finite-pullback-tensor-braiding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply DerivedCategory.Q to this chain equality. Naturality of the exact-pullback factorization supplies its comparison with the derived inverse image. The K-flat preservation declaration gives target K-flat models. Insert the canonical comparison normalization on (P,Q) and (Q,P), and the signed braiding normalization on the source pair and the target pair. Cancel the invertible source tensor representative and target tensor of factorization maps. Naturality of the target braiding gives the desired representative equation.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-finite-pullback-tensor-braiding",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-finite-pullback-tensor-braiding",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit adjunction-unit and signed-generator calculation from Tag 07A4 and the sign convention of Tag 0FNG, followed by categorical cancellation of the fixed K-flat models."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pure tensor normalized inverse image comparison on cochain complexes commutes with Koszul signed exchange, and the induced derived comparison commutes with braiding on K flat representatives",
+   "results": "8 hits: HomologicalComplex left/right unitor formulas, commShiftIso_map₂CochainComplex_flip hom/inv formulas, and HasGoodTensor₁₂. No coherent pullback normalization square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctor.hom_ext",
+   "results": "1 hit, HomologicalComplex.mapBifunctor.hom_ext in Mathlib.Algebra.Homology.Bifunctor; used to reduce equality of total-degree maps to the summand maps.",
+   "date": "2026-10-27",
+   "verdict": "use as elementary extensionality tool"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding.*pullback|pullback.*braiding|SignedTensorPullback",
+   "results": "msearch Mathlib grep: 3 hits concerning categorical pullback/coproduct braidings. Local rg found the finite signed-representative proof and the generic pure-tensor signed formulas, but no coherent sequence signed exchange theorem.",
+   "date": "2026-10-27",
+   "verdict": "reuse the finite proof pattern and existing normalizations; no duplicate coherent theorem"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The normalized tensor comparison for Frobenius and coefficient twists, including signed symmetry before taking the coherent derived inverse limit.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorSignedRepresentatives",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorSignedRepresentatives.lean",
+  "declaration": "WeilConjectures.completedPullbackTensor_signed_representatives",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_signed_representatives"
+  ],
+  "statement": "theorem completedPullbackTensor_signed_representatives {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := coefficientSequenceTopology (ProEt.topology Y))\n      (R := coefficientSequenceCommRingSheaf l E Y) P)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := coefficientSequenceTopology (ProEt.topology Y))\n      (R := coefficientSequenceCommRingSheaf l E Y) Q) :\n    let M := DerivedCategory.Q.obj P\n    let N := DerivedCategory.Q.obj Q\n    (pullbackTensorSequenceDerived l E f).map\n      ((pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology Y))\n        (coefficientSequenceCommRingSheaf l E Y)\n        (pullbackTensorCalculus l E Y).systemClosed\n        (pullbackTensorCalculus l E Y).systemTensorModel).hom.app (M,N)) ≫\n      (pullbackTensorSystemComparison l E f).hom.app (N,M) =\n    (pullbackTensorSystemComparison l E f).hom.app (M,N) ≫\n      (pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology X))\n        (coefficientSequenceCommRingSheaf l E X)\n        (pullbackTensorCalculus l E X).systemClosed\n        (pullbackTensorCalculus l E X).systemTensorModel).hom.app\n          ((pullbackTensorSequenceDerived l E f).obj M,\n            (pullbackTensorSequenceDerived l E f).obj N)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T034619-L-3666051",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T034619-L-3666051",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

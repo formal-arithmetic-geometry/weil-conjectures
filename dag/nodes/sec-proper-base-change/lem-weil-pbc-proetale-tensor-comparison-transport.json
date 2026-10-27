@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-proetale-tensor-comparison-transport",
+ "kind": "statement",
+ "title": "Transport of representative-normalized derived tensor comparisons",
+ "statement": "Fix native pro-etale f:X→Y, R,S,c and native tensor models a,b [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let L:Mod(R)→Mod(S) be additive, e:L≅f*, d an ExactModel of L and l:d.functor≅Lf* with l(QC);nativeFactors(C)=d.factors(C);Q(e_C(C)) for every complex C. Let ay,bx be TensorModels and μ an ordinary comparison with e(M⊗N);μ_native=μ;tensor(e(M),e(N)). Let tc be a TensorComparison for L,d,ay,bx,μ [lem-weil-pbc-ringed-projection-restriction]. Suppose ea:a.tensor≅ay.functor and eb:b.tensor≅bx.functor restrict on resolving pairs to a.representative⁻¹;ay.representative and b.representative⁻¹;bx.representative. Then for every M,N in D(R), l(a(M,N));α_native(M,N);eb(Lf*M,Lf*N)=d.functor(ea(M,N));tc.comparison(M,N);bx(l(M),l(N)). This asserts only the tensor square, with no right adjoint or projection mate.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product: ordinary tensor comparison, signed total complexes, and localization on flat K-flat representatives."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing pro-etale resolving descent datum with target D(S) to reduce equality of the two natural transformations to a resolving pair P,Q.",
+   "uses": [
+    "lem-weil-pbc-proetale-tensor-descent-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prepend the mapped native source representative and postcompose the native pullback factors and inverse target representative. These comparisons are invertible. Use the ea,eb representative equations and naturality to move them across the factors. The two representative normalizations identify the paths with their respective inverse total comparisons, together with the factorization of l.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The total transport square identifies these inverse total comparisons after mapping to the derived category. The supplied total comparison is invertible because the other three sides of this square are invertible. Cancel the comparisons and reflect equality through resolving restriction.",
+   "uses": [
+    "lem-weil-pbc-proetale-tensor-total-transport",
+    "lem-weil-pbc-proetale-tensor-descent-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-tensor-total-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A8",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, explicit transport calculation inside the native/global projection comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor pullback comparison is determined by normalization on flat K flat representative complexes",
+   "results": "8 hits, mainly Scheme.Pullback.Triplet.tensorCongr and Tor functoriality.",
+   "date": "2026-10-27",
+   "verdict": "No representative-normalized derived tensor transport theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.map_injective",
+   "results": "1 hit: Functor.FullyFaithful.map_injective in Mathlib.CategoryTheory.Functor.FullyFaithful.",
+   "date": "2026-10-27",
+   "verdict": "Use this to reflect equality through the existing resolving restriction functor."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorComparison.*Transport|Representative.*whisker|proEtaleTensorPullbackDescentData",
+   "results": "msearch: 0 hits. Direct rg finds the existing ProEtaleTensorPullbackDescentData and ResolvingRepresentativeWhiskering modules.",
+   "date": "2026-10-27",
+   "verdict": "Reuse proEtaleTensorPullbackDescentData; prove only the additional transport square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleProjectionGlobalComparison",
+  "date": "2026-10-27",
+  "group": "A8"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-pbc-proetale-projection-global-comparison",
+   "place": "Proof: normalization of the ordinary and derived tensor comparisons.",
+   "via": []
+  },
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleTensorComparisonTransport",
+  "file": "lean/Sheaf/Paper/ProEtaleTensorComparisonTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleTensorComparisonTransport",
+  "statement": "theorem proEtaleTensorComparisonTransport\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (L : Mod R ⥤ Mod S) [L.Additive]\n    (e : L ≅ proEtaleRingModulePullback f R S c) (d : ExactModel L)\n    (l : d.functor ≅ proEtaleRingDerivedPullback f R S c)\n    (hf : ∀ C : CochainComplex (Mod R) ℤ,\n      l.hom.app (DerivedCategory.Q.obj C) ≫\n        (proEtaleRingDerivedPullbackFactors f R S c).hom.app C =\n      d.factors.hom.app C ≫\n        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app C))\n    (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)\n    (ay : TensorModel R) (bx : TensorModel S)\n    (mu : ∀ M N : Mod R, L.obj (((tensor R).obj M).obj N) ≅\n      ((tensor S).obj (L.obj M)).obj (L.obj N))\n    (tc : TensorComparison L d ay bx mu)\n    (he : ∀ M N : Mod R,\n      e.hom.app (((tensor R).obj M).obj N) ≫\n        (proEtaleOrdinaryTensorPullback f R S c M N).hom =\n      (mu M N).hom ≫ ((tensor S).map (e.hom.app M)).app (L.obj N) ≫\n        ((tensor S).obj ((proEtaleRingModulePullback f R S c).obj M)).map (e.hom.app N))\n    (ea : a.tensor ≅ ay.functor) (eb : b.tensor ≅ bx.functor)\n    (ha : Functor.isoWhiskerLeft\n      (((resolving R).ι ⋙ DerivedCategory.Q).prod\n        ((resolving R).ι ⋙ DerivedCategory.Q)) ea = a.representative.symm ≪≫ ay.representative)\n    (hb : Functor.isoWhiskerLeft\n      (((resolving S).ι ⋙ DerivedCategory.Q).prod\n        ((resolving S).ι ⋙ DerivedCategory.Q)) eb = b.representative.symm ≪≫ bx.representative) :\n    ∀ M N : Der R,\n      l.hom.app (a.tensor.obj (M, N)) ≫\n          (proEtaleCanonicalTensorComparison f R S c a b).hom.app (M, N) ≫\n          eb.hom.app ((proEtaleRingDerivedPullback f R S c).obj M,\n            (proEtaleRingDerivedPullback f R S c).obj N) =\n        d.functor.map (ea.hom.app (M, N)) ≫ tc.comparison.hom.app (M, N) ≫\n          bx.functor.map (Prod.mkHom (l.hom.app M) (l.hom.app N))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T034615-L-3665534",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T034615-L-3665534",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

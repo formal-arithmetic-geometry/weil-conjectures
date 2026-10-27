@@ -1,0 +1,499 @@
+{
+ "id": "lem-sfb-galois-coefficient-path-coherence",
+ "kind": "statement",
+ "title": "Coherent ringed paths for Galois coefficient restriction",
+ "statement": "Let $k$ be a field, $k^s/k$ a separable closure [def-pd-separable-closure], $s=\\operatorname{Spec}k$, $\\bar s=\\operatorname{Spec}k^s$, and $G=\\operatorname{Aut}_k(k^s)$ with its Krull topology. Use small sites in the compatible universes of [def-weil-size-convention]. For a profinite set $P$ put $T[P]=\\varprojlim_i\\coprod_{P_i}T$ over its finite quotients [lem-weil-pbc-profinite-test-object-functor].\n\nLet $R$ be any commutative condensed ring, $R_T=p_T^*R$, and use internal modules and ordinary unbounded derived categories [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-categories]. Write $\\mathcal M_R$ for internal condensed $R$-modules and $\\mathcal A_G(R)$ for such modules with an $R$-linear action of the condensed group $\\underline G(P)=C(P,G)$ [def-sfb-condensed-action-module].\n\nLet $a:X\\to s$ be qcqs. For each coefficient ring use the normalized field equivalence, geometric functor $F_R=E_Ra_*$ and invariants $\\Gamma_G^R$ specified in [lem-sfb-geometric-sections-adjunction]. Put $\\mathcal K_R=\\mathbf RF_R$ and $B_R=D(\\operatorname{ev}_*^R)\\mathbf R\\Gamma_G^R\\mathcal K_R$. Let $\\delta_R:R\\Gamma_R(X,-)\\to B_R$ be the comparison whose value on a K-injective resolution is the class of restriction to $X^s$ with invariant codomain, as normalized in [lem-sfb-galois-kinjective-section-model].\n\nFor every ring map $\\varphi:R\\to R'$, the geometric, invariant, evaluation and global-section scalar-restriction squares are commuting squares of actual ringed-topos direct images: $a$, the field equivalence, $p_G$, and the morphism from the condensed topos with ring $R$ to the one-point topos with ring $\\mathbf Z$ via $\\mathbf Z\\to R(*)$. Scalar restriction is direct image on the identity underlying topos. The canonical derived direct-image composition comparisons provide natural isomorphisms\n$$c_F:\\mathcal K_R\\operatorname{Res}_X\\xrightarrow{\\sim}\\operatorname{Res}_G\\mathcal K_{R'},\\qquad c_G:\\mathbf R\\Gamma_G^R\\operatorname{Res}_G\\xrightarrow{\\sim}\\operatorname{Res}\\,\\mathbf R\\Gamma_G^{R'},\\qquad c_\\Gamma:R\\Gamma_R(X,\\operatorname{Res}_X-)\\xrightarrow{\\sim}R\\Gamma_{R'}(X,-).$$\nThey are normalized by the corresponding identity-on-sections ordinary comparisons and the K-injective derived-composition units. If $c_B:B_R\\operatorname{Res}_X\\to B_{R'}$ is the composite of $c_F,c_G$ and the evaluation identification, then\n$$c_B\\circ\\delta_{R,\\operatorname{Res}_X M'}=\\delta_{R',M'}\\circ c_\\Gamma$$\nfor every $M'\\in D(R'_X)$. Identity and successive coefficient changes satisfy the composition cocycle. With the canonical shifts, all these derived functors are triangulated and the normalized comparisons commute with integer shifts; on shifted K-injective representatives the latter comparison is $C(\\gamma)_{I[n]}=C(\\gamma)_I[n]$, including the signed differential, and the connecting-arrow square of every distinguished triangle commutes. No flatness of $\\varphi$, preservation of K-injectives by scalar restriction, finite cohomological dimension, or underived continuous-cochain replacement is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent refinement to the geometric/invariant coefficient paths, their cocycle and triangulated normalization. Exact combined reference WANTED."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-size-convention",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-geometric-sections-adjunction",
+  "lem-sfb-galois-kinjective-section-model",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-triangulated-category",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Present the internal module categories as the section-ring module categories specified by the geometric-sections lemma. Let $u_R:(X,R_X)\\to(B_G,p_G^{-1}R)$ be the composite of $a$ and the normalized field equivalence, so $u_{R*}=F_R$, and let $v_R:(B_G,p_G^{-1}R)\\to(\\operatorname{Cond},R)$ have direct image $\\Gamma_G^R$. These are actual ringed-topos maps: the field equivalence identifies the pulled-back rings naturally in $R$, and invariants is the stated module direct image of $p_G$. By the action-topos lemma, $\\operatorname{Cond}^{\\underline G}$ is presented by the small action site, $p_G$ is a geometric morphism with trivial-action inverse image, and $\\varphi$ induces the same map on the trivially acted-on rings, so the square of $p_G$ with the coefficient maps commutes as ringed-topos morphisms with identity comparison on underlying sheaves. For a ring map $\\varphi$ let $s_X,s_G,s_0$ be its ringed maps on the identity underlying topoi. Their module direct images are scalar restriction. The squares $u_Rs_X=s_Gu_{R'}$ and $v_Rs_G=s_0v_{R'}$ have identity comparisons on section groups: every section $m$ is unchanged, and $r\\cdot m$ becomes $\\varphi(r)m$. This also commutes with the action-site restriction $m\\mapsto b\\cdot f^*m$, since the action is linear. Thus the geometric and invariant squares commute with their structural ring maps, not just after forgetting coefficients.",
+   "uses": [
+    "lem-sfb-geometric-sections-adjunction",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-weil-pbc-restriction-ringed-topos-module-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the normalized geometric/invariant paths"
+   }
+  },
+  {
+   "text": "Let $e_R:(\\operatorname{Cond},R)\\to(\\operatorname{Set},\\mathbf Z)$ be the global-sections ringed-topos morphism of the scalar-coherence lemma, applied to the profinite site. Its inverse image is the constant-sheaf functor and its ring map is $\\underline{\\mathbf Z}\\to R$; on the terminal profinite set it is $\\mathbf Z\\to R(*)$. Its module direct image is $\\operatorname{ev}_*^R$, because $*$ is terminal. Hence $e_Rs_0=e_{R'}$, with identity ordinary comparison. Write $t_R=e_Rv_Ru_R$; its module direct image is global sections on $X$ followed by forgetting scalars, using the normalized restriction-and-gluing isomorphism $\\gamma_R$. The total coefficient square is $t_Rs_X=t_{R'}$. In particular it is a square of ringed-topos maps to $(\\operatorname{Set},\\mathbf Z)$. Scalar restriction is exact: the underlying abelian sheaf and the kernels and cokernels are unchanged. Evaluation is exact by the section-model lemma. Thus the right derived functors of these exact operations are their termwise functors $D(\\operatorname{Res})$ and $D(\\operatorname{ev}_*)$.",
+   "uses": [
+    "lem-coef-derived-sections-scalar-coherence",
+    "lem-sfb-galois-kinjective-section-model",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the normalized geometric/invariant paths"
+   }
+  },
+  {
+   "text": "For either $h=u,v$, put $s_{\\rm in}$ and $s_{\\rm out}$ for the corresponding coefficient maps. The two composites $h_Rs_{\\rm in}=s_{\\rm out}h_{R'}$ give the natural isomorphism\n$$c_h=\\kappa_{s_{\\rm out},h_{R'}}\\,\\kappa_{h_R,s_{\\rm in}}^{-1}:Rh_{R*}D(s_{{\\rm in}*})\\longrightarrow D(s_{{\\rm out}*})Rh_{R'*}.$$\nHere the middle objects are the same derived direct image of the common ringed-topos map, with the ordinary identity-on-sections identification. This yields precisely $c_F,c_G$. The inverse of $\\sigma_{R_X,R'_X}$ of the scalar-coherence lemma is $c_\\Gamma$. All these isomorphisms have the asserted ordinary and derived-unit normalization. Explicitly, for an $R'$-K-injective $I'$ and an $R$-K-injective replacement $j:s_{{\\rm in}*}I'\\to J$, the composition theorem says $h_{R*}j$ is a quasi-isomorphism representing $c_h^{-1}$, after the canonical comparisons for the other factorization. This uses the composition theorem, not K-injective preservation by scalar restriction.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-coef-derived-sections-scalar-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the normalized geometric/invariant paths"
+   }
+  },
+  {
+   "text": "Compose the normalized comparisons for the path $(u_R,v_R,e_R)$ to obtain $d_R:Rt_{R*}\\xrightarrow{\\sim}D(e_{R*})Rv_{R*}Ru_{R*}=B_R$. On an $R_X$-K-injective $I$, both $F_RI$ and $\\Gamma_G^RF_RI$ are K-injective by the section-model lemma. Therefore the composition comparisons on these two stages use identity replacements. Since evaluation is exact, the resulting comparison from $R\\Gamma_R(X,QI)$ to $B_R(QI)$ is exactly $Q C(\\gamma_R)_I$. The section-model lemma identifies this class with $\\delta_{R,QI}$ and says it is natural under changes of resolution. Every derived object has such a representative, so $d_R=\\delta_R$ under the ordinary identification $t_{R*}=\\Gamma_X$. This pins down the specified section comparison, rather than an arbitrary isomorphism of its endpoints.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-galois-kinjective-section-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the normalized geometric/invariant paths"
+   }
+  },
+  {
+   "text": "Move $s_X$ across the path $(u_R,v_R,e_R)$, using successively the two squares of step 1 and the evaluation equality of step 2. Under ordinary sections every intermediate comparison sends $m$ to itself. Expanding $c_F,c_G$ by step 3, the resulting derived path has comparison $c_B\\circ(d_R D(s_{X*}))$. Alternatively first regard $(u_R,v_R,e_R)$ as its composite $t_R$, move $s_X$ across $t_R$, and then split the $R'$-path; its comparison is $d_{R'}\\circ c_\\Gamma$. The cocycle identity\n$$(Rh_*\\kappa_{g,f})\\kappa_{h,gf}=(\\kappa_{h,g}Rf_*)\\kappa_{hg,f}$$\nidentifies these rebracketings, applied at each adjacent triple; inverse adjacent comparisons cancel. Substituting $d_R=\\delta_R$ gives the required equality for every $M'$. For $R\\to R'\\to R''$, perform the same rebracketing with two successive identity-topos coefficient edges: their composite acts by $r\\mapsto\\varphi(r)\\mapsto\\psi\\varphi(r)$, exactly the single composite coefficient edge. The same cocycle identifies the two comparisons. For the identity coefficient edge its two unit laws give the identity comparisons. This proves the coefficient composition and identity laws for all the displayed paths.",
+   "uses": [
+    "lem-pur-ringed-derived-composition-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the normalized geometric/invariant paths"
+   }
+  },
+  {
+   "text": "All right derived functors here are triangulated by the general K-injective triangulated-functor theorem; the exact scalar restrictions, evaluation, and field equivalence are triangulated by the exact-functor theorem. Check shift compatibility of each normalized composition comparison directly. If $I$ is K-injective and $j:f_*I\\to J$ is the replacement used to compute $\\kappa_{g,f}$, then $I[n],J[n]$ and $j[n]$ are valid shifted representatives and replacement. An additive termwise functor satisfies $C(H)(I[n])=C(H)(I)[n]$, with differential $(-1)^nH(d_I)$. The degree-$r$ map computing the shifted comparison is $g_*(j^{r+n})$, exactly degree $r$ of $(g_*j)[n]$. Thus $\\kappa$, its inverse, and the composites defining $c_F,c_G,c_\\Gamma,c_B$ commute with the canonical shifts. This calculation is independent of replacements by naturality of the normalized comparisons. It does not require $f_*I$ itself to be K-injective.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070H, definition-K-injective and its following shift observation; lemma-enough-K-injectives-implies; sites-cohomology.tex Tag 0D6E"
+   }
+  },
+  {
+   "text": "For $\\delta_R$ use the section-model representative $C(\\gamma_R)_I$. Its degree-$r$ component on $I[n]$ is $\\gamma_{R,I^{r+n}}$, which is the degree-$r$ component of $C(\\gamma_R)_I[n]$. Naturality of $\\gamma_R$ gives the chain-map equation with $(-1)^nd_I$ on both sides. Consequently $C(\\gamma_R)_{I[n]}=C(\\gamma_R)_I[n]$, with no additional sign. This proves shift compatibility of the specified $\\delta_R$. Finally for any displayed comparison $\\alpha:A\\to B$ and triangle $L\\to M\\to N\\xrightarrow{w}L[1]$, naturality gives $\\alpha_{L[1]}A(w)=B(w)\\alpha_N$. Using $s_B\\alpha_{L[1]}=\\alpha_L[1]s_A$, the connecting-arrow square is $\\alpha_L[1]s_AA(w)=s_BB(w)\\alpha_N$. Both image triangles are distinguished by step 6, so this is the required compatibility with distinguished triangles, including their connecting arrows.",
+   "uses": [
+    "lem-sfb-galois-kinjective-section-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 070H and canonical cochain shift; agent component calculation using the normalized section-model comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-geometric-sections-adjunction",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-coef-derived-sections-scalar-coherence",
+  "lem-sfb-galois-kinjective-section-model",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-kinjective-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the normalized geometric/invariant paths"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Condensed Galois descent geometric and invariant scalar restriction comparisons are normalized derived ringed direct image paths coherent with shifts",
+   "results": {
+    "t": "2026-10-22T06:00:56Z",
+    "tool": "leanfinder",
+    "query": "Condensed Galois descent geometric and invariant scalar restriction comparisons are normalized derived ringed direct image paths coherent with shifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "SheafOfModules.pushforwardCongr",
+     "CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "PresheafOfModules.restrictScalarsCompToPresheaf",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+     "PresheafOfModules.pushforward₀CompToPresheaf",
+     "SheafOfModules.pullbackComp"
+    ],
+    "digest": "561c311bce85e0a5"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pushforward/scalar identities, exact functors on Ext and condensed naturality do not supply these normalized unbounded Galois coefficient paths."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonflat coefficient change commutes with the restriction to separable closure invariant section comparison by derived pushforward composition cocycle",
+   "results": {
+    "t": "2026-10-22T06:00:53Z",
+    "tool": "leansearch",
+    "query": "Nonflat coefficient change commutes with the restriction to separable closure invariant section comparison by derived pushforward composition cocycle",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"rightDerived\"",
+   "results": {
+    "t": "2026-10-22T06:00:54Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"rightDerived\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pushforward/scalar identities, exact functors on Ext and condensed naturality do not supply these normalized unbounded Galois coefficient paths."
+  },
+  {
+   "tool": "grep",
+   "query": "(Galois|Condensed).*(CoefficientComparison|[Cc]ocycle|[Ss]calar.*[Cc]omparison)|CoefficientComparison",
+   "results": {
+    "t": "2026-10-22T06:00:53Z",
+    "tool": "grep",
+    "query": "(Galois|Condensed).*(CoefficientComparison|[Cc]ocycle|[Ss]calar.*[Cc]omparison)|CoefficientComparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pushforward/scalar identities, exact functors on Ext and condensed naturality do not supply these normalized unbounded Galois coefficient paths."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived geometric section and invariant functors for internal condensed modules satisfy a scalar change square compatible with the signed shift and connecting arrows",
+   "results": {
+    "t": "2026-10-22T06:01:39Z",
+    "tool": "leanfinder",
+    "query": "Derived geometric section and invariant functors for internal condensed modules satisfy a scalar change square compatible with the signed shift and connecting arrows",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CondensedMod.hom_naturality_apply",
+     "CategoryTheory.Functor.mapExactFunctor_smul",
+     "LightCondMod.hom_naturality_apply",
+     "instAbelianCondensedMod",
+     "SheafOfModules.unitHomEquiv_comp_apply",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom"
+    ],
+    "digest": "f433871645b34074"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pushforward/scalar identities, exact functors on Ext and condensed naturality do not supply these normalized unbounded Galois coefficient paths."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*([Cc]omp|[Ss]hift)|rightDerived.*([Cc]omp|[Ss]hift)",
+   "results": {
+    "t": "2026-10-22T09:35:34Z",
+    "tool": "grep",
+    "query": "pushforward.*([Cc]omp|[Ss]hift)|rightDerived.*([Cc]omp|[Ss]hift)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Sheaves/Presheaf.lean",
+     "Mathlib/Topology/Sheaves/Presheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean"
+    ],
+    "digest": "762c0cc679a43609"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary module pushforward, formal derived transformations and shift infrastructure do not state the normalized condensed Galois coefficient diagram and its section comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Condensed Galois invariant section derived comparison commutes with scalar restriction without flatness",
+   "results": {
+    "t": "2026-10-22T09:35:35Z",
+    "tool": "leansearch",
+    "query": "Condensed Galois invariant section derived comparison commutes with scalar restriction without flatness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "galRestrict'_galLift",
+     "ContinuousLinearMap.restrictScalarsₗ.congr_simp",
+     "Submodule.restrictScalars_inf",
+     "AlgebraicGeometry.Scheme.Modules.map_smul",
+     "ContinuousLinearMap.restrictScalarsL",
+     "instSeminormedAddCommGroupRestrictScalars",
+     "PresheafOfModules.restrictHomEquivOfIsLocallySurjective"
+    ],
+    "digest": "0e5f21890826678d"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary module pushforward, formal derived transformations and shift infrastructure do not state the normalized condensed Galois coefficient diagram and its section comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, Functor.rightDerived",
+   "results": {
+    "t": "2026-10-22T09:35:35Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.pushforward, Functor.rightDerived",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.rightDerived'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No usable result: query rejected for unknown identifier; a valid second Loogle query was run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived direct images of ringed topoi commute with nonflat scalar restriction via normalized composition cocycle and integer shifts",
+   "results": {
+    "t": "2026-10-22T09:35:36Z",
+    "tool": "leanfinder",
+    "query": "Unbounded derived direct images of ringed topoi commute with nonflat scalar restriction via normalized composition cocycle and integer shifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforwardComp_inv_app_val_app",
+     "SheafOfModules.pushforwardComp_hom_app_val_app",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pushforward_assoc",
+     "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+     "SheafOfModules.pushforwardNatTrans_comp",
+     "SheafOfModules.pushforwardNatIso"
+    ],
+    "digest": "d6c98f817d9cd8f7"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary module pushforward, formal derived transformations and shift infrastructure do not state the normalized condensed Galois coefficient diagram and its section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardComp|lemma pushforward_assoc|instCommShiftDerivedCategoryMapDerivedCategoryInt",
+   "results": {
+    "t": "2026-10-22T09:36:21Z",
+    "tool": "grep",
+    "query": "def pushforwardComp|lemma pushforward_assoc|instCommShiftDerivedCategoryMapDerivedCategoryInt",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean"
+    ],
+    "digest": "03626a63bb00f1f4"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary module pushforward, formal derived transformations and shift infrastructure do not state the normalized condensed Galois coefficient diagram and its section comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": {
+    "t": "2026-10-22T09:36:22Z",
+    "tool": "loogle",
+    "query": "\"rightDerived\", \"comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint",
+     "CategoryTheory.Functor.rightDerivedNatTrans_comp",
+     "CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc",
+     "CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+     "CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc"
+    ],
+    "digest": "d295d3bf12c461b8"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary module pushforward, formal derived transformations and shift infrastructure do not state the normalized condensed Galois coefficient diagram and its section comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical total right derived ringed topos direct image comparison agrees with invariant geometric Galois descent and is triangulated under arbitrary change of condensed coefficient rings",
+   "results": {
+    "t": "2026-10-22T09:36:24Z",
+    "tool": "leanfinder",
+    "query": "Canonical total right derived ringed topos direct image comparison agrees with invariant geometric Galois descent and is triangulated under arbitrary change of condensed coefficient rings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforwardNatIso",
+     "SheafOfModules.pushforwardNatIso_hom",
+     "PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val",
+     "SheafOfModules.instIsRightAdjointPushforward"
+    ],
+    "digest": "dc2d9264cf80a3e1"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary module pushforward, formal derived transformations and shift infrastructure do not state the normalized condensed Galois coefficient diagram and its section comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-galois-global-descent",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), separable-closure descent input; returned global-descent proof steps 9-11: Coherent ringed paths for Galois coefficient restriction.",
+   "via": [
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-galois-coefficient-path-coherence",
+  "worker": "stage1",
+  "summary": "Reused the existing ringed coefficient restriction, unbounded direct-image composition and cocycle nodes; supplied the geometric/invariant/evaluation ringed squares, identified the specified section comparison, pasted the coefficient diagram, and checked signed shifts and connecting arrows. No new nodes and no statement change.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3), separable-closure descent auxiliary route recorded in blueprint.from; no closer imported blueprint ancestor exists (ancestor command returns None).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "why": "Generic tool for normalized unbounded ringed direct-image composition, coefficient restriction, resolutions or triangulated structure; the unit descent route needs this interface and supplies no replacement for it."
+   },
+   {
+    "node": "lem-coef-derived-sections-scalar-coherence",
+    "why": "Generic tool for normalized unbounded ringed direct-image composition, coefficient restriction, resolutions or triangulated structure; the unit descent route needs this interface and supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic tool for normalized unbounded ringed direct-image composition, coefficient restriction, resolutions or triangulated structure; the unit descent route needs this interface and supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic tool for normalized unbounded ringed direct-image composition, coefficient restriction, resolutions or triangulated structure; the unit descent route needs this interface and supplies no replacement for it."
+   },
+   {
+    "node": "lem-pur-ringed-derived-composition-cocycle",
+    "why": "Generic tool for normalized unbounded ringed direct-image composition, coefficient restriction, resolutions or triangulated structure; the unit descent route needs this interface and supplies no replacement for it."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic tool for normalized unbounded ringed direct-image composition, coefficient restriction, resolutions or triangulated structure; the unit descent route needs this interface and supplies no replacement for it."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic tool for normalized unbounded ringed direct-image composition, coefficient restriction, resolutions or triangulated structure; the unit descent route needs this interface and supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-shift",
+    "why": "Generic tool for normalized unbounded ringed direct-image composition, coefficient restriction, resolutions or triangulated structure; the unit descent route needs this interface and supplies no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-coef-derived-sections-scalar-coherence",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-kinjective-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-1a06390af",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-1a06390af (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, every cited statement and Stacks 0D6E (sites-cohomology.tex:4010-4030). This is a first split with no repair note; live still has the item unsplit. Statement and stmt_deps are unchanged from live and there are no new nodes. The mathematics checks. Step 1: the u/v coefficient squares commute as ringed-topos morphisms, since the ring comparison is natural in R. Step 2: e_R is g_R of lem-coef-derived-sections-scalar-coherence; Hom(1,M)=M(*), so e_R* is evaluation, and e_R s_0 = e_R' because the ring map is unital. Step 3: c_h is a kappa-composite, c_Gamma = sigma^{-1} with the right direction, and the normalisation needs no preservation of K-injectives. Step 4: F_R I and Gamma_G F_R I are K-injective, so d_R = Q C(gamma)_I = delta_R. Step 5: pasting through the composition cocycle and unit laws, which cover identity-topos coefficient edges. Step 6: the shifted kappa is computed by j[n] (degree r: g_*(j^{r+n})). Step 7: C(gamma)_{I[n]} = C(gamma)_I[n] with no extra sign, and the connecting-arrow algebra checks. Edge cases checked: identity phi, the zero ring, G=1, non-flat Z->Z/2, n=±1. No duplicate found: condensed-derived-restriction-calculus and scalar-restriction-interchange concern group restriction, and trf-scheme-galois-coefficient-change is a different statement. No SGA source is cited. I accept the 8 declared tool uses as generic infrastructure. One fault, C1/C4, repaired: step 1 uses that Cond^G is presented by a small site and that the p_G/coefficient square commutes as ringed-topos morphisms. Steps 3 and 5 need this to apply kappa and the cocycle, but step 1 cited no node stating it. FIX: step 1 now cites lem-sfb-action-topos-geometric-restriction (same unit, split; no cycle), which is added to proof_deps. The whole corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-galois-coefficient-path-coherence.json.; 1 file(s) fixed by the reviewer"
+ }
+}

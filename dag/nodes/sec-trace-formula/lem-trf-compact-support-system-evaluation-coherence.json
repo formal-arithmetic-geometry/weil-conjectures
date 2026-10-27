@@ -19,91 +19,44 @@
  ],
  "proof": [
   {
-   "text": "The ringed sequence site realizes the ordinary category $\\mathscr S_W$ as module sheaves with componentwise exactness, and its evaluation functors are the vertical evaluations described in [def-coef-ringed-sequence-site]. Thus the notation $D(\\mathscr S_W)$, $e_n$, and the whole-system direct image $S_p^{\\mathrm{str}}$ in the statement refer to the actual ordinary system category; no separate section category is introduced.",
+   "text": "Obtain normalized actual operation presentations and the four unit/counit equations from [lem-trf-compact-support-normalized-presentation]. Define theta_n to be compactSupportSystemEvaluationIso, the canonical composite of restricted evaluation, direct-image evaluation and open evaluation. This gives the six normalization clauses and the canonical-theta clause directly.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-coef-semilinear-derived-sections"
+    "lem-trf-compact-support-normalized-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), second paragraph: ordinary levelwise compact-support operations assembled into a system before the derived limit."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-coef-semilinear-derived-sections] to the morphism of small pro-etale sites $p_{\\mathrm{proet}}$ of [def-weil-proetale-inverse-image]. Its coefficient hypothesis holds: [prop-weil-pbc-proetale-constant-ring-map] gives ring isomorphisms $p^{-1}B_{Y,n}\\cong B_{Z,n}$, and they commute with the quotient maps because both composites send a constant section $a\\in A_m$ to its image in $A_n$, which determines a map of constant ring sheaves. The exact inverse image on systems is $V=p^{-1}_\\bullet$, the levelwise module direct image has total right derived functor $G=Rp_{*,\\bullet}=S_p^{\\mathrm{str}}$, and the node supplies natural identifications $e_nG\\cong Rp_{*,n}e_n$ compatible with units, counits and transition maps. Its transition clause says that, in extension form, the transitions of $GN$ are $Rp_{*,n}(t^N_{m,n})\\circ b_{m,n,N_m}$ with $b_{m,n}$ the specified mate, not a separately chosen level map.",
+   "text": "For N=J_j M and P=Rp_{*,bullet}N, use [lem-trf-direct-image-restriction-transition] to identify the restriction-form direct-image transition. Expand the scalar-adjunction homEquiv of b followed by Rp_n of the adjunct input transition. The identity unit_mateEquiv_symm, naturality of the coefficient restriction square, and homEquiv.apply_symm_apply identify this transpose with Rp_m(tau_N) followed by the derived coefficient comparison. This is the proved private restriction_mate_transpose calculation.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-coef-semilinear-derived-sections"
+    "lem-trf-direct-image-restriction-transition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), second paragraph: ordinary levelwise compact-support operations assembled into a system before the derived limit."
-   }
+   "elementary": true
   },
   {
-   "text": "For the open immersion, [lem-weil-proetale-weakly-etale-localization] identifies $X_{\\mathrm{proet}}$ with the localization $Z_{\\mathrm{proet}}/X$ and $B_{Z,n}|_X$ with $B_{X,n}$, so [lem-pur-site-restriction-module-adjunction-exact] gives exact $j_!\\dashv j^*$ at each level. These extensions commute with restriction along $B_{Z,m}\\to B_{Z,n}$, since both leave the underlying additive sheaf unchanged, so applying $j_!$ to every component and every transition $\\tau^M_{m,n}$ is the exact system functor $J_j^{\\mathrm{str}}$ of [lem-coef-semilinear-derived-sections], which acts on derived categories with the ordinary level adjunctions. Being exact and computed termwise, $e_nJ_j^{\\mathrm{str}}=j_!e_n$, and the system $N=J_j^{\\mathrm{str}}M$ has transitions $j_!(\\tau^M_{m,n})$; its extension-form transitions $t^N_{m,n}$ are their adjoints. Combining with step 2 gives the canonical identification $e_nS_p^{\\mathrm{str}}J_j^{\\mathrm{str}}M\\cong Rp_{*,n}j_!e_nM$.",
+   "text": "Use [lem-trf-completed-restriction-transition] to pass from the actual source tower transition to the completed restriction of the quotient-linear transition of P. Naturality of the specified restriction-composition iso moves the right direct-image comparison across it. Substitute the direct-image transition square from the preceding step. The open-evaluation hom at level m cancels its inverse inside the target transition. The remaining word is exactly theta_m followed by compactSupportSystemTargetTransition. The proved private evaluated_tower_square carries out this composition and cancellation.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-coef-semilinear-derived-sections"
+    "lem-trf-completed-restriction-transition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), second paragraph: ordinary levelwise compact-support operations assembled into a system before the derived limit."
-   }
+   "elementary": true
   },
   {
-   "text": "The identifications of steps 2--3 are natural in $M$. By the transition clause of step 2 applied to $N=J_j^{\\mathrm{str}}M$, the extension-form transition of $S_p^{\\mathrm{str}}N$ from $m$ to $n$ is carried by these identifications to $Rp_{*,n}(t^N_{m,n})\\circ b_{m,n,N_m}$; its restriction-form transition is the transpose under $-\\otimes^L_{B_{Y,m}}B_{Y,n}\\dashv\\operatorname{Res}_{m,n}$, because the two forms of a transition correspond under that adjunction (as in the definition of the reduction maps $t_{m,n}$ in [lem-coef-semilinear-derived-sections]). Applying the exact restriction $\\operatorname{Res}_m$ and $\\operatorname{Res}_m\\operatorname{Res}_{m,n}=\\operatorname{Res}_n$ gives exactly the transition of $(T_n(M))_n$ in the statement. Therefore the levelwise identifications carry the transitions of the tower to the displayed ones.",
+   "text": "Package the canonical theta and the transition equality with the six normalization assertions and four adjunction equations into CompactSupportSystemEvaluationWitness. The naturality is that of the natural isomorphisms used to define theta, and all constructions precede the inverse limit.",
    "uses": [
-    "lem-coef-semilinear-derived-sections"
+    "def-trf-compact-support-system-evaluation-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), second paragraph: ordinary levelwise compact-support operations assembled into a system before the derived limit."
-   }
-  },
-  {
-   "text": "Restriction of scalars along $\\widehat R_Y\\to(B_{Y,n})_n$ is exact on the whole system category [def-coef-ringed-sequence-site], computed termwise. The exact-functor derived factorization [lem-weil-pbc-exact-functor-derived-factorization] computes $U_Y$ on derived objects and morphisms termwise, so $\\operatorname{ev}_nU_Y=\\operatorname{Res}_ne_n$ on derived systems, compatibly with transitions. Composing with steps 3--4 gives the isomorphisms $\\Theta_{M,n}$ and their compatibility with transitions, i.e. the whole-tower isomorphism $\\Theta_M$, natural for every derived system morphism because every identification used is a natural isomorphism of functors.",
-   "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), second paragraph: ordinary levelwise compact-support operations assembled into a system before the derived limit."
-   }
-  },
-  {
-   "text": "The units and counits in [lem-coef-semilinear-derived-sections] are the componentwise adjunction maps for $p^{-1}_\\bullet\\dashv Rp_{*,\\bullet}$ and for $j_!\\dashv j^*$. Since the evaluation and transition identifications above are the ones supplied by that node, their mate formulas and the corresponding unit/counit identities are carried by $\\Theta_M$ to the displayed levelwise formulas. This verifies the claimed compatibility before any inverse limit is taken.",
-   "uses": [
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), second paragraph: ordinary levelwise compact-support operations assembled into a system before the derived limit."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-sequence-site",
-  "lem-coef-semilinear-derived-sections",
-  "def-weil-proetale-inverse-image",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization"
+  "lem-trf-compact-support-normalized-presentation",
+  "lem-trf-direct-image-restriction-transition",
+  "lem-trf-completed-restriction-transition",
+  "def-trf-compact-support-system-evaluation-diagram"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "Clause (3), second paragraph: ordinary system-level evaluation and transition comparison before the derived limit."
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10, specialized to actual geometric presentations; mate-transpose and tower-pasting calculations proved in Lean by T4, 2026-10-27."
  },
  "mathlib_searches": [
   {
@@ -243,5 +196,26 @@
   "result": "fix",
   "note": "Read the item, the new def node, both modules, the report, prior returns and the IntegralOpenReduction/OpenSystems interfaces. Clauses, hypotheses, universes and edge cases match; the source and target transitions are real definitions, the functors are canonical, units/counits are conclusions; ordinary/derived coefficient squares, p evaluations and the j right evaluation are pinned by section/K-injective normalization and unit/counit equations; the scalar adjunctions cancel. Fault (H3): the existentially chosen open presentation o has unnormalized OpenSystems.restrictionEvaluation, so extensionEvaluation, theta and the target transitions can be twisted by per-level units (e.g. (-1)^n). Fix: the witness conjunct compactSupportOpenRestrictionSectionsNormalized (restrictionEvaluation is the identity on sections), which pins e_n J = j_! e_n; full replacement module and lean-record override with the declarations list; statement text unchanged; a rfl check of section-carrier defeq timed out (argued on paper). nt_compile --json clean: delivered 18.7 s/6.5 s, fixed 27.3 s/5.0 s."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T235940-L-1472900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

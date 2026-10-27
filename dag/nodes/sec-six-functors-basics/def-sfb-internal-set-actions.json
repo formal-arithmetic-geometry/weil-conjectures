@@ -1,0 +1,181 @@
+{
+ "id": "def-sfb-internal-set-actions",
+ "kind": "definition",
+ "title": "Internal set actions and normalized precomposition data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a universe $\\mathcal V$ [def-weil-size-convention], a $\\mathcal V$-small category $C$, and a precoverage $J$ [def-weil-pbc-sites-and-cohomology]. For a group sheaf $K:C^{op}\\to\\mathbf{Grp}_{\\mathcal V}$, let $\\underline K$ be its underlying set sheaf with internal monoid unit and multiplication given sectionwise by $1$ and group multiplication. Define $\\operatorname{SetActions}_J(K)=\\operatorname{Mod}(\\operatorname{Sh}(C,J),\\underline K)$: an object is a set sheaf with a natural left $K$-action satisfying unit and associativity, and an arrow is an equivariant sheaf map. Define its section action by evaluating the action morphism. On the labeled action sites $C_K$ [def-sfb-internal-action-site-basic], a group-presheaf map $\\theta:L\\to K$ defines the functor $C_L\\to C_K$ that fixes base objects and sends $(f,a)$ to $(f,\\theta(a))$. For sites $(C,J)$ and $(D,T)$ and $F:D\\to C$ whose precomposition preserves sheaves, define the lifted precomposition on sheaves by $M\\mapsto F^{op}\\circ M$, with the same component maps. If $C$ has finite limits and $J$ is a site for coverings, label change and projection preserve sheaves; their lifted precompositions are called restriction and trivial inflation, respectively, for any coefficient category $A:\\operatorname{Type}(\\mathcal V+1)$ with homs in $\\mathcal V$. For a commutative ring sheaf $R$, define the pulled coefficient by this same precomposition, and write $|M|$ for the underlying set sheaf of a module sheaf [def-weil-sheaf-of-modules-category]. A normalized module pullback for a ringed topos morphism $f$ [def-weil-pbc-ringed-topos-morphism] is a functor $f^*$, its adjunction with the induced module direct image, and an isomorphism $|f^*M|\\cong f^{-1}|M|$ whose Hom correspondence agrees with the given set-sheaf adjunction. For $F$ and $R$, define a precomposition-pullback datum to consist of a ringed morphism with inverse image equal to the lifted precomposition and identity structural map, a normalized additive module pullback preserving finite limits and colimits, sectionwise linear equivalences with the original module sections along $F$, compatible with restrictions, morphisms and the underlying-set comparison, and tensor and regular-unit isomorphisms [def-pur-sheaf-tensor-product] sending local pure tensors and regular sections to themselves under these equivalences. For a map $\\varphi:R\\to R'$ of commutative ring sheaves on a site, define a coefficient-change datum to be a ringed morphism $(\\mathscr E,R')\\to(\\mathscr E,R)$ with inverse image equal to the identity and structural map equal to $\\varphi$ under that equality. These are definitions of data and section formulas, not assertions that every such datum exists.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-internal-action-site-basic",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written internal-action categorical infrastructure: the existing constructions in ActionToposGeometricRestriction, before its geometricRestriction theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal group sheaf actions and restriction functors on a small site",
+   "results": {
+    "t": "2026-10-24T11:38:47Z",
+    "tool": "leansearch",
+    "query": "Internal group sheaf actions and restriction functors on a small site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.ΓRes",
+     "Action.res",
+     "ContAction.res",
+     "Action.instFaithfulRes",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+     "SheafOfModules.restrictScalars",
+     "CategoryTheory.Sheaf.ΓRes_map",
+     "CategoryTheory.Sheaf.natTransΓRes_app"
+    ],
+    "digest": "f74557d6ee8228a8"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib hits do not give this internal-action interface. Project grep finds the exact existing declarations in ActionToposGeometricRestriction; DAG grep finds them owned only by its theorem, not by a general definition node. Reuse these declarations with existing:true."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category of internal group sheaf actions and label changing restriction and trivial inflation",
+   "results": {
+    "t": "2026-10-24T11:38:48Z",
+    "tool": "leanfinder",
+    "query": "Category of internal group sheaf actions and label changing restriction and trivial inflation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContAction.resComp",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul",
+     "Action.res",
+     "ContAction.resComp_hom",
+     "ContAction.resComp_inv",
+     "ContAction.res_obj_obj",
+     "Action.res_obj_V",
+     "ContAction.res_map"
+    ],
+    "digest": "677e257541933ac8"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib hits do not give this internal-action interface. Project grep finds the exact existing declarations in ActionToposGeometricRestriction; DAG grep finds them owned only by its theorem, not by a general definition node. Reuse these declarations with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "SetActions|PrecompositionPullback|CoefficientChange|groupSheaf",
+   "results": {
+    "t": "2026-10-24T11:38:47Z",
+    "tool": "grep",
+    "query": "SetActions|PrecompositionPullback|CoefficientChange|groupSheaf",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib hits do not give this internal-action interface. Project grep finds the exact existing declarations in ActionToposGeometricRestriction; DAG grep finds them owned only by its theorem, not by a general definition node. Reuse these declarations with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"SetActions|PrecompositionPullback|CoefficientChange|groupSheaf\" lean/WeilConjectures lean/Sheaf; rg -l \"SetActions|PrecompositionPullback\" dag/nodes; tools/blueprint_refs.py search \"internal group action\"",
+   "results": "No exact general interface in WeilConjectures. Sheaf/CategoryTheory/ActionToposGeometricRestriction.lean contains the reused definitions and typing lemmas. DAG matches are the theorem owner and specialized consumers; def-sfb-profinite-action-base-coefficients is specialized to profinite sets, not general sites. No separate general definition owner or blueprint search hit.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing Lean declarations; add only their missing definition-node ownership."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-restriction-geometric-coherence",
+  "date": "2026-10-24",
+  "group": "Q145"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent-written internal-action categorical infrastructure: the existing constructions in ActionToposGeometricRestriction, before its geometricRestriction theorem.",
+   "via": [
+    "lem-sfb-internal-restriction-geometric-coherence",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ActionToposGeometricRestriction",
+  "declaration": "CategoryTheory.InternalActionSite.SetActions",
+  "declarations": [
+   "CategoryTheory.InternalActionSite.groupSheaf",
+   "CategoryTheory.InternalActionSite.groupOne",
+   "CategoryTheory.InternalActionSite.groupMul",
+   "CategoryTheory.InternalActionSite.groupMonoid",
+   "CategoryTheory.InternalActionSite.SetActions",
+   "CategoryTheory.InternalActionSite.setAction",
+   "CategoryTheory.InternalActionSite.restrictionSite",
+   "CategoryTheory.InternalActionSite.actionPrecomposition_isSheaf",
+   "CategoryTheory.InternalActionSite.precomposition",
+   "CategoryTheory.InternalActionSite.restriction",
+   "CategoryTheory.InternalActionSite.inflation",
+   "CategoryTheory.InternalActionSite.moduleSets",
+   "CategoryTheory.InternalActionSite.ModulePullback",
+   "CategoryTheory.InternalActionSite.pulledCoefficient",
+   "CategoryTheory.InternalActionSite.PrecompositionPullback",
+   "CategoryTheory.InternalActionSite.CoefficientChange"
+  ],
+  "statement": "abbrev SetActions (J : Precoverage C) (K : Cᵒᵖ ⥤ GrpCat.{u})\n    (hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u}))",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2/H12 repair of 364e2fece838: attaches the already landed plain definitions, structures and precomposition typing lemma. No data is selected from geometricRestriction and that theorem is not a statement dependency; this avoids its proof-dependency cycle through the current item."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14dfd2aff",
+  "group": "Q145",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14dfd2aff",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Re-delivery of returned 364e2fec (H2/H12). Lean byte-identical (cmp) to the head whose clause matching was accepted; re-read finite limits, identities (ψ≫θ), fixed adjoint (all U⟶V in Cᵒᵖ, all k∈K(V), counit=inclusion), terminal equivalence, presented identities: correct, all sorry, real data. Item change is only stmt_deps: theorem lem-pd-sheaf-scalar-extension-constraint-coherence → def-sfb-scalar-extension-constraint-data + def-sfb-internal-set-actions + def-sfb-internal-action-site-basic; lean.statement verbatim. New existing:true nodes: all 16 resp. 3 declarations exist in side-live; statements verbatim (abbrev SetActions / abbrev ScalarExtensionConstraintModules); TeX matches code (Mod over sectionwise group monoid, label change, precomposition lift, restriction/inflation, ModulePullback/PrecompositionPullback/CoefficientChange fields; sheafification-unit pure tensors, independent universes); stmt_deps all present def nodes, no cycle via parent theorem. No compile (no file changed); worker scompile clean. MAINTAINER NOTE: Q112 d1e299fa (S2 PASS, unlanded) creates the same id def-sfb-internal-set-actions (8 decls, action category only). This node is the near-superset (adds restriction/inflation/precomposition/CoefficientChange; omits only the Prop law lemmas groupOperations_naturality/groupMonoid_laws) → land this first and rebind Q112; if Q112 lands first, Q145 must rebase and extend. Advisory: could also list the law lemmas incl. restrictionSite_laws."
+ }
+}

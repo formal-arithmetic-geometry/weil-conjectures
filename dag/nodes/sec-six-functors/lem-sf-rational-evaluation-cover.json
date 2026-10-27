@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-rational-evaluation-cover",
+ "kind": "statement",
+ "title": "Rational perfect evaluation on a covering",
+ "statement": "Fix a finite-field datum D, coefficient datum C, finite extension E of Q_l, and a finite-type D-space X. Let A be coefficient closed models normalized by the integral ambient realization and rationalization of [def-sf-datum]. For rational constructibles K,M, assume K is site-perfect in the sense of [def-weil-site-perfect-complex]. Then the image of the canonical rational tensor-dual evaluation under the constructible-to-ambient inclusion of [lem-sf-coefficient-dual-model-transport] is invertible on a covering sieve over every object of the pro-etale site, after restriction to each actual slice site.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md",
+  "place": "Rational local calculation, steps 8--10: slice comparison and bounded-complex devissage."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-weil-site-perfect-complex",
+  "lem-sf-coefficient-dual-model-transport"
+ ],
+ "proof": [
+  {
+   "text": "choose the covering and bounded local complex in the site-perfect\npredicate. Apply rationalSliceCompletedEvaluation to compare restriction of\nthe specified evaluation with completed evaluation on each actual slice.\nNormalize the global comparison through the integral ambient realization and\nrationalization; the tensor-Hom evaluation and symmetry equations identify its\nadjunct. For the fixed restricted target, rationalThickEvaluation gives the\nthick evaluation locus in the ambient raw scalar localization. It contains the\nunit, hence finite sums and the termwise rational retracts in the local model.\nInduct on its finite support using brutal-tail distinguished triangles and\nshifts of its terms. The localized complex belongs to the locus; transport\nalong the local model isomorphism proves the stated component invertible.\nNo constructibility of local terms, or integral lifting of rational retractions,\nis used. Empty support is the zero case, and zero-rank retracts cause no exception.",
+   "uses": [
+    "lem-sf-rational-slice-completed-evaluation",
+    "lem-sf-rational-thick-evaluation",
+    "def-weil-site-perfect-complex",
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-sf-coefficient-dual-model-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-rational-slice-completed-evaluation",
+  "lem-sf-rational-thick-evaluation",
+  "def-weil-site-perfect-complex",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-sf-coefficient-dual-model-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, applied to the coefficient-stage argument at Rational local calculation, steps 8--10: slice comparison and bounded-complex devissage."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful closed functor reflects dualizability and perfect tensor Hom evaluation",
+   "results": "8 hits including Functor.FullyFaithful.reflectsIsomorphisms, fullyFaithfulOfCoreflective, reflectsIsomorphisms_of_full_and_faithful",
+   "date": "2026-10-25",
+   "verdict": "Only categorical reflection tools; none states normalized closed evaluation transport, ambient rational slice detection, local bounded rational evaluation, or filtered coefficient descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Functor.Faithful",
+   "results": "12 hits including Functor.preimageIso and isIso_of_fully_faithful",
+   "date": "2026-10-25",
+   "verdict": "These reflect isomorphisms after a fully faithful functor, but do not identify the evaluation maps or establish local rational invertibility."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff.*cone|isIso_of_reflects_iso",
+   "results": "25 hits in Mathlib, including Functor.ReflectsIso and sheaf stalk applications",
+   "date": "2026-10-25",
+   "verdict": "No matching statement for normalized coefficient closed structures or rational constructibles on actual slice sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between triangulated categories sends a morphism to an isomorphism if and only if its cone becomes zero",
+   "results": "8 hits including Functor.distTriang_iff, map_distinguished_iff and IsHomological.exact",
+   "date": "2026-10-25",
+   "verdict": "General triangulated tools only; the specialized comparison, bounded rational local calculation and torsion detection remain additional arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SitePerfectDualizableHom",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-dualizable-hom",
+   "place": "Rational local calculation, steps 8--10: slice comparison and bounded-complex devissage.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalEvaluationCover",
+  "file": "lean/Sheaf/Paper/RationalEvaluationCover.lean",
+  "declaration": "WeilConjectures.rationalEvaluation_cover",
+  "statement": "theorem rationalEvaluation_cover\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (X : SixFunctorSpace D)\n    (A : SixFunctorCoefficientClosedModels C.l E X.obj.left)\n    (K M : (⊤ : ObjectProperty\n      (sfRationalConstructibleCategory C.l E X.obj.left)).FullSubcategory)\n    (hK : IsSfRationalCoefficientSitePerfect C.l E X.obj.left K.obj) :\n    ∀ V : X.obj.left.ProEt, ∃ R : Sieve V,\n      R ∈ Scheme.ProEt.topology X.obj.left V ∧\n      ∀ (U : X.obj.left.ProEt) (f : U ⟶ V), R f →\n        IsIso ((IntegralOnSlice.restrictionRational C.l E X.obj.left\n          (U := none) (V := some U) PUnit.unit).map\n          ((CoefficientDualModels.stageInclusion C.l E X.obj.left).map\n            ((⊤ : ObjectProperty\n              (sfRationalConstructibleCategory C.l E X.obj.left)).ι.map\n              (ringedSiteDualEvaluationLeft A.rational.closed A.rational.symmetric\n                A.rational.closed.monoidal.tensorUnit (Iso.refl _) K M))))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sf-rational-evaluation-cover",
+  "worker": "E4",
+  "summary": "Stage-3 reduction; see Lean proof and report.",
+  "blueprint": {
+   "node": "prop-sf-dualizable-hom",
+   "place": "Rational local calculation, steps 8--10: slice comparison and bounded-complex devissage.",
+   "via": []
+  },
+  "tool_uses": [
+   {
+    "node": "def-weil-site-perfect-complex",
+    "why": "Generic Perfect complexes on the coefficient site is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "lem-weil-pbc-degreewise-split-derived-triangle",
+    "why": "Generic A degreewise split short exact sequence of complexes gives the cone triangle is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T100943-L-3642728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T100943-L-3642728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

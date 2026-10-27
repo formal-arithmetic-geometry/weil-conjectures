@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-curve-frobenius-separable-factorization",
+ "kind": "statement",
+ "title": "Frobenius and separable factors of a nonconstant smooth proper curve map",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure], and let $C,D$ be smooth proper geometrically integral curves of dimension one over $k$ [def-sc-curves], [def-pc-integral-scheme], [def-pc-geometrically-irreducible]. Let $u:C\\to D$ be a nonconstant $k$-morphism, where nonconstant means not factoring through a $k$-rational point of $D$. There exist a smooth proper geometrically integral $k$-curve $C'$ of dimension one and $k$-morphisms $F:C\\to C'$ and $v:C'\\to D$ with $u=v\\circ F$, such that $v$ is nonconstant and its induced extension of function fields $k(C')/k(D)$ is finite separable [def-sc-function-field], [def-pc-field-extension], [def-pc-field-tower]. The factorization can be chosen as follows.\n\nIf $\\operatorname{char}k=0$, take $C'=C$, $F=\\operatorname{id}_C$, and $v=u$. If $\\operatorname{char}k=p>0$, there is an integer $n\\geq0$ such that\n$$C'=C^{(p^n)}:=C\\times_{\\operatorname{Spec}k,\\,\\operatorname{Spec}(\\varphi_n)}\\operatorname{Spec}k,\\qquad \\varphi_n:k\\to k,\\quad a\\mapsto a^{p^n},$$\nwith the $k$-structure on $C'$ given by the second projection [def-pc-base-change], [def-pc-field-characteristic]. Here $F$ is the $n$-fold relative Frobenius: on an affine open $\\operatorname{Spec}A\\subset C$ its ring map is $A\\otimes_{k,\\varphi_n}k\\to A$, $a\\otimes b\\mapsto a^{p^n}b$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), positive-characteristic Frobenius/separable factorization; Tag 0BY1 (curves-theorem-curves-rational-maps), passage between nonconstant proper curve morphisms and function-field embeddings. The characteristic-zero case is the identity factorization, with separability as in fields.tex Tag 030K (fields-lemma-separable-first)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-pc-base-change",
+  "def-pc-field-characteristic",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-ring-frobenius"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-proper-curve-function-field-morphisms] to $u$. Write $K=k(D)$ and $L=k(C)$ and regard $K$ as a subfield of $L$ by $u^*$. The cited statement gives that $L/K$ is finite, that both fields are finitely generated of transcendence degree one over $k$, and that morphisms of these smooth proper integral curves are determined by their induced field embeddings.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), first sentence of proof, using Tag 0BY1 (curves-theorem-curves-rational-maps)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-separable-first-purely-inseparable], the separable algebraic closure $E$ of $K$ in $L$ is a subfield with $E/K$ separable algebraic and $L/E$ purely inseparable. If $\\operatorname{char}k=0$, the same cited statement says $E=L$. Thus $L/K$ is finite separable. In this case $C'=C$, $F=\\operatorname{id}_C$, and $v=u$ give all the assertions. Henceforth assume $\\operatorname{char}k=p>0$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030K (fields-lemma-separable-first), including the characteristic-zero case."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-curve-intermediate-field-realization] to $u$ and $K\\subseteq E\\subseteq L$. It gives finite $E/K$ and $L/E$, a smooth proper integral curve $Z$, a $k$-isomorphism $\\theta:k(Z)\\cong E$, and nonconstant maps $a:C\\to Z$, $b:Z\\to D$ with $u=b\\circ a$ and the prescribed field embeddings. Thus the extension induced by $a$ is finite purely inseparable, while that induced by $b$ is finite separable, by step 2 and these identifications.",
+   "uses": [
+    "lem-sfb-curve-intermediate-field-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof, the sentence realizing the intermediate field as X -> Z -> Y; Tag 0BY1 (curves-theorem-curves-rational-maps), equivalence of (1) and (6); Tag 0BY3 (curves-lemma-nonsingular-model-smooth), smoothness over a perfect field."
+   }
+  },
+  {
+   "text": "The map $a$ has smooth proper integral dimension-one source and target and finite purely inseparable function-field extension. Thus [lem-sfb-purely-inseparable-curve-frobenius] gives $n\\geq0$ and a $k$-isomorphism $h:C^{(p^n)}\\xrightarrow{\\sim}Z$ with $a=h\\circ F_{C/k,n}$. Set $C'=C^{(p^n)}$, $F=F_{C/k,n}$, and $v=b\\circ h$. Then $v\\circ F=b\\circ a=u$. Since $h$ is a $k$-isomorphism, $C'$ is smooth proper integral of dimension one, $v$ is nonconstant, and $k(C')/v^*K$ is isomorphic to $k(Z)/b^*K$, hence finite separable.",
+   "uses": [
+    "lem-sfb-purely-inseparable-curve-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), final sentence using Tag 0CCZ (curves-lemma-purely-inseparable-smooth)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-frobenius-twist-geometric-integrality-affine] to the geometrically integral $C$, in characteristic $p$ and at the integer $n$ of step 4. It gives geometric integrality of $C^{(p^n)}$, its second-projection $k$-structure, and exactly the displayed affine formula for $F_{C/k,n}$, including $n=0$. Together with step 4 this supplies every remaining clause.",
+   "uses": [
+    "lem-sfb-frobenius-twist-geometric-integrality-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CC9 (varieties-definition-relative-frobenius), defining Cartesian diagram; Tag 0CCG (varieties-remark-n-fold-relative-frobenius), first displayed product and pair morphism. Geometric integrality follows by iterating the base change in its definition; the affine calculation and n=0 identity convention are the expanded calculation of parent step 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-curve-function-field-morphisms",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-sfb-curve-intermediate-field-realization",
+  "lem-sfb-purely-inseparable-curve-frobenius",
+  "lem-sfb-frobenius-twist-geometric-integrality-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof; characteristic-zero clause from fields.tex Tag 030K (fields-lemma-separable-first)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nonconstant morphism of smooth proper curves over an algebraically closed field factors into an iterated relative Frobenius followed by a morphism inducing a finite separable function field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} {L : Type w} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Field F] [inst_3 : Field K] [inst_4 : Field L] {W' : WeierstrassCurve.Affine R} [inst_5 : DecidableEq F]\\n  [inst_6 : DecidableEq K] [inst_7 : DecidableEq L] [inst_8 : Algebra R S]\", \"doc\": \"For any algebra homomorphisms $ f : F → K $ and $ g : K → L $ between fields extending a commutative ring $ R $, and for any point $ P $ on an affine Weierstrass curve $ W' $ over $ F $, the compositi\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"functionField_iff\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"∀ (Fq : Type u_1) (F : Type u_2) [inst : Field Fq] [inst_1 : Field F] (Fqt : Type u_3) [inst_2 : Field Fqt]\\n  [inst_3 : Algebra (Polynomial Fq) Fqt] [IsFractionRing (Polynomial Fq) Fqt] [inst_5 : Algebra (RatFunc Fq) F]\\n  [inst_6 : Algebra Fqt F] [inst_7 : Algebra (Polynomial Fq) F] [IsScalarTower (\", \"doc\": \"A field $ F $ is a function field over $ F_q $ if and only if it is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib/RingTheory/Smooth/Field\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field L] [inst_1 : Field K] [inst_2 : Algebra K L] [PerfectField K]\\n  [Algebra.EssFiniteType K L], Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read all returned hits; these concern Weierstrass points, field extensions, categorical Frobenius or number-theoretic ramification, not the stated theorem for arbitrary smooth proper curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: read all returned hits; these concern Weierstrass points, field extensions, categorical Frobenius or number-theoretic ramification, not the stated theorem for arbitrary smooth proper curves"
+  },
+  {
+   "tool": "grep",
+   "query": "(frobenius|inseparable).*(factor|curve)|curve.*separable",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"line\": \"180\", \"text\": \"`(A' ⊓ (Subobject.pullback f).obj B').arrow ≫ f`, see `frobeniusStrongEpiMonoFactorisation`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"line\": \"198\", \"text\": \"  simpa [frobeniusMorphism, IsPullback.lift_fst, ← imageFactorisation_F_m,\"}\n  {\"file\": \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"line\": \"218\", \"text\": \"noncomputable def frobeniusStrongEpiMonoFactorisation :\"}\n  {\"file\": \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"line\": \"237\", \"text\": \"      (frobeniusStrongEpiMonoFactorisation f A' B').toMonoIsImage)\"}\n  {\"file\": \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"line\": \"239\", \"text\": \"      (frobeniusStrongEpiMonoFactorisation f A' B').toMonoIsImage)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read all returned hits; these concern Weierstrass points, field extensions, categorical Frobenius or number-theoretic ramification, not the stated theorem for arbitrary smooth proper curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor a map of nonsingular projective curves into its purely inseparable part and its separable part",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsPurelyInseparable.bijective_algebraMap_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[Nontrivial E] [IsDomain F] [IsTorsionFree F E] [IsPurelyInseparable F E] [Algebra.IsSeparable F E] :\\n  Function.Bijective (algebraMap F E)\", \"doc\": \"Let $ F $ be an integral domain and $ E $ a nontrivial torsion-free $ F $-algebra that is both purely inseparable and separable. Then the canonical algebra homomorphism from $ F $ to $ E $ is bijectiv\"}\n  {\"name\": \"isPurelyInseparable_iff\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \": IsPurelyInseparable F E ↔ ∀ x : E, IsIntegral F x ∧ (IsSeparable F x → x ∈ (algebraMap F E).range)\", \"doc\": \"A field extension $ E $ over $ F $ is purely inseparable if and only if every element of $ E $ is integral over $ F $, and every element of $ E $ that is separable over $ F $ must belong to the image \"}\n  {\"name\": \"Polynomial.Separable.map_irreducible_of_isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Tower\", \"type\": \"{f : F[X]} (hsep : f.Separable) (hirr : Irreducible f) [IsPurelyInseparable F E] : Irreducible (f.map (algebraMap F E))\", \"doc\": \"Let $ F/E $ be a purely inseparable field extension. If $ f $ is a separable irreducible polynomial over $ F $, then the polynomial obtained by applying the algebra homomorphism $ F \\to E $ to the coef\"}\n  {\"name\": \"IsPurelyInseparable.mk\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"∀ {F : Type u_1} {E : Type u_2} [inst : CommRing F] [inst_1 : Ring E] [inst_2 : Algebra F E],\\n  Algebra.IsIntegral F E → (∀ (x : E), IsSeparable F x → x ∈ (algebraMap F E).range) → IsPurelyInseparable F E\", \"doc\": \"If $ E $ is an integral extension of $ F $ and every separable element of $ E $ over $ F $ lies in $ F $, then $ E $ is purely inseparable over $ F $.\"}\n  {\"name\": \"IsPurelyInseparable.inseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : ∀ x : E, IsSeparable F x → x ∈ (algebraMap F E).range\", \"doc\": \"In a purely inseparable field extension $ E/F $, every element $ x \\\\in E $ that is separable over $ F $ must belong to the image of the canonical embedding $ F \\\\to E $, i.e., $ x \\\\in F $.\"}\n  {\"name\": \"IsPurelyInseparable.of_injective_comp_algebraMap\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(L : Type w) [Field L] [IsAlgClosed L] [Nonempty (E →+* L)]\\n  (h : Function.Injective fun f : E →+* L ↦ f.comp (algebraMap F E)) : IsPurelyInseparable F E\", \"doc\": \"Let $ F \\\\subseteq E $ be a field extension, and let $ L $ be an algebraically closed field containing $ E $. If the map sending each field homomorphism $ f : E \\\\to L $ to its composition with the cano\"}\n  {\"name\": \"IsPurelyInseparable.surjective_algebraMap_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] [Algebra.IsSeparable F E] : Function.Surjective (algebraMap F E)\", \"doc\": \"If $ E $ is a purely inseparable field extension of $ F $ and the algebra $ E $ over $ F $ is separable, then the canonical ring homomorphism (algebra map) from $ F $ to $ E $ is surjective.\"}\n  {\"name\": \"IsPurelyInseparable.inseparable'\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"∀ {F : Type u_1} {E : Type u_2} {inst : CommRing F} {inst_1 : Ring E} {inst_2 : Algebra F E}\\n  [self : IsPurelyInseparable F E] (x : E), IsSeparable F x → x ∈ (algebraMap F E).range\", \"doc\": \"In a purely inseparable field extension $ E/F $, every element $ x \\\\in E $ that is separable over $ F $ satisfies $ x \\\\in \\\\mathrm{im}(\\\\mathrm{algebraMap} \\\\, F \\\\, E) $, i.e., lies in the image of the c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read all returned hits; these concern Weierstrass points, field extensions, categorical Frobenius or number-theoretic ramification, not the stated theorem for arbitrary smooth proper curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separate the inseparable part of a finite map of regular projective curves by a Frobenius twist of the source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Projective.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Projective R} {f : R →+* S}\\n  (P : Fin 3 → R),\\n  Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toProjective.Nonsingular (⇑f ∘ P) ↔ W'.Nonsingular P)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism, and let $ W' $ be a Weierstrass curve over $ A $. For a point $ P $ on $ W' $, the point $ f \\\\circ P $ is nonsingular on the projective Weierstra\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_equation\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"For an injective ring homomorphism $ f : A \\\\to B $, the projective Weierstrass curve equation over $ B $ obtained by base change satisfies $ (W'.\\\\text{baseChange } B).\\\\text{Equation}(f \\\\circ P) $ if a\"}\n  {\"name\": \"WeierstrassCurve.Projective.map_equation\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Projective R} {f : R →+* S}\\n  (P : Fin 3 → R), Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toProjective.Equation (⇑f ∘ P) ↔ W'.Equation P)\", \"doc\": \"For an injective ring homomorphism $ f : A \\\\to B $, a point $ P = [X:Y:Z] $ in projective space satisfies the equation of the projective Weierstrass curve $ W' $ over $ B $ (obtained by applying $ f $\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} {L : Type w} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Field F] [inst_3 : Field K] [inst_4 : Field L] {W' : WeierstrassCurve.Affine R} [inst_5 : DecidableEq F]\\n  [inst_6 : DecidableEq K] [inst_7 : DecidableEq L] [inst_8 : Algebra R S]\", \"doc\": \"For any algebra homomorphisms $ f : F → K $ and $ g : K → L $ between fields extending a commutative ring $ R $, and for any point $ P $ on an affine Weierstrass curve $ W' $ over $ F $, the compositi\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read all returned hits; these concern Weierstrass points, field extensions, categorical Frobenius or number-theoretic ramification, not the stated theorem for arbitrary smooth proper curves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-curve-genus-monotonicity",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2).",
+   "via": [
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-curve-frobenius-separable-factorization",
+  "worker": "stage1",
+  "summary": "Repair of the batch5 re-split return: extracted intermediate-field finiteness, transcendence degree, model realization and compatible maps as one statement-only node; extracted scalar-extension geometry and affine Frobenius compatibility as another. Preserved the statement and the field-decomposition/Frobenius-classification route. All old arguments are mapped and reproduced in report.md. The parent is a short assembly of the two new nodes and existing field/correspondence/classification nodes.",
+  "blueprint": "The inherited ancestry points to det-thm-sf-ctf-stability-direct-images clause (3), via the high-genus-cover auxiliary argument listed in blueprint.from.via. This split realizes the Frobenius/separable separation used by lem-sfb-finite-curve-genus-monotonicity; the current blueprint file states clause (3) without a proof. The immediate literature route is Stacks 0CD2. New helpers distribute the intermediate-field realization (old steps 3-4) and twisted-base-change/affine calculation (old step 6)."
+ },
+ "tool_uses": [
+  "lem-trf-algclosed-curve-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-8df531761",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-8df531761 (reviewer sub-agent of L); spot-checked: Re-split answered correctly; no fix files written; review.md written. Delivered item differs from base (live: split, reviewed NF 78ba31e9) only in proof, proof_deps and split_report, so the statement and stmt_deps are unchanged. Old→new mapping: old 1, 2 and 5 (already one-citation applications of 0BY1-correspondence, 030K and 0CCZ nodes) stay verbatim as parent steps 1, 2 and 4. Old 3+4 (finite E/K and L/E, E/k f.g. trdeg 1, model Z, maps a and b, u=b∘a, extension identifications; about 1311 chars) are explicit clauses of new node A, lem-sfb-curve-intermediate-field-realization. Old 6 (geometric integrality of the twist via Spec(ι∘φ_n), affine formula, n=0; 1066 chars) is all of new node B, lem-sfb-frobenius-twist-geometric-integrality-affine. Parent: 2113 chars, 5 citation steps, nothing dropped, old texts verbatim in the report. Hypotheses checked: 030K applies to the finite L/K, and char 0 gives E=L. A supplies a smooth proper integral Z with pullbacks pinned. The purely-inseparable node's hypotheses hold for a: C^(p^n), second-projection structure and F=(F^n,s) agree with B and with the item. B applies to the geometrically integral C. Truth: A uses model existence over algebraically closed (perfect) k (curves.tex l.2671-2695, 0BY1, 0BY3); edge cases E=K and E=L, and t↦t^{2p} on P^1. In B, (F^n,s) is well defined because s∘F^n=Spec φ_n∘s; ι∘φ_n is a field homomorphism, so imperfect k is fine; F^{-1}(U_n)=U; (ca)⊗b and a⊗c^{p^n}b have the same image; n=0 and X=Spec k checked (varieties l.7071 0CC9, l.7254 0CCG). Neither node restates an item clause. No duplicates among relative-frobenius-finite, smooth-curve-relative-frobenius-degree, def-trf-scheme-frobenius, def-weil-relative-frobenius-geometric-fiber, d-relative-frob, the 0BY1 node or the trf model node. Both nodes are statement-only and self-contained, with 4 kinds of Mathlib search recorded. No SGA cited, no cycle; the new ids are absent from live and side-live (NJ's earlier S1 run not merged). Advisory: the item's tool_uses still lists lem-trf-algclosed-curve-model, which the item no longer cites (it belongs to A's future split); the Lean docstring still shows the 6-step proof, for stage 2; the source places say 'parent step 6' in the old numbering."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FrobeniusSeparableFactorization",
+  "declaration": "AlgebraicGeometry.exists_curve_frobenius_separable_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FrobeniusSeparableFactorization.lean",
+  "statement": "theorem exists_curve_frobenius_separable_factorization (k : Type u) [Field k] [IsAlgClosed k] (C D : Scheme.{u}) (sC : C ⟶ Spec (.of k)) (sD : D ⟶ Spec (.of k)) [IsCurve sC] [IsCurve sD] [Smooth sC] [Smooth sD] [IsProper sC] [IsProper sD] [GeometricallyIntegral sC] [GeometricallyIntegral sD] [IsIntegral C] [IsIntegral D] (hCdim : topologicalKrullDim C = 1) (hDdim : topologicalKrullDim D = 1) (u : C ⟶ D) (hu : u ≫ sD = sC) (hu_nonconstant : ¬ ∃ y : Spec (.of k) ⟶ D, y ≫ sD = 𝟙 _ ∧ sC ≫ y = u) : ∃ (C' : Scheme.{u}) (s' : C' ⟶ Spec (.of k)) (_ : IsIntegral C') (F : C ⟶ C') (v : C' ⟶ D), IsCurve s' ∧ Smooth s' ∧ IsProper s' ∧ GeometricallyIntegral s' ∧ topologicalKrullDim C' = 1 ∧ F ≫ s' = sC ∧ v ≫ sD = s' ∧ F ≫ v = u ∧ (¬ ∃ y : Spec (.of k) ⟶ D, y ≫ sD = 𝟙 _ ∧ s' ≫ y = v) ∧ (∃ i : D.functionField →+* C'.functionField, Spec.map (CommRingCat.ofHom i) ≫ D.fromSpecStalk (genericPoint D) = C'.fromSpecStalk (genericPoint C') ≫ v ∧ @Module.Finite D.functionField C'.functionField _ _ (@Algebra.toModule _ _ _ _ i.toAlgebra) ∧ @Algebra.IsSeparable D.functionField C'.functionField _ _ i.toAlgebra) ∧ (CharZero k → C' = C ∧ HEq s' sC ∧ HEq F (𝟙 C) ∧ HEq v u) ∧ ∀ (p : ℕ) (hp : p.Prime) (hk : (p : k) = 0), ∃ (n : ℕ) (hC : (p : Γ(C, ⊤)) = 0) (e : C' = pullback sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n)))), s' = eqToHom e ≫ pullback.snd sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) ∧ F ≫ eqToHom e ≫ pullback.fst sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) = C.iterateFrobenius hp hC n",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbcc700d1",
+  "group": "NS",
+  "result": "pass",
+  "note": "Read the item node, module, report and all 12 stmt_deps records; checked IsCurve, Scheme.iterateFrobenius, iterateFrobeniusOfPrime and Mathlib GeometricallyIntegral/Smooth/IsProper in source. Every hypothesis and conclusion clause matches the node. Nonconstant = no factorization through a k-rational point, exact. IsIntegral C/D is redundant via GeometricallyIntegral.isIntegral_of_subsingleton. The field map i is pinned by the generic-stalk diagram (unique, since Spec of a stalk is mono), with finite separable = Module.Finite ∧ Algebra.IsSeparable as recorded for def-pc-field-tower. Char 0 gives literal C'=C, F=id, v=u. Char p: C' = pullback sC (Spec φ_n) with snd as structure; F ≫ fst = C.iterateFrobenius together with F ≫ s' = sC is exactly Stacks relative Frobenius (affine a⊗b ↦ a^{p^n}b); n=0 allowed. The two added stmt_deps are landed nodes with lean records (brief-stage2 l.167) and are used. No general relative-Frobenius definition node with a Lean declaration exists (d-relative-frob is finite-field-specific, lean null). No name/module collision. lean.statement is verbatim. Docstrings carry the source places and the 6 proof steps. One sorry theorem, no definitions. Advisory: the proof-only PurelyInseparable import is unused by the statement. No file changed, so no compile; the worker reports a clean compile and dry-run OK."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

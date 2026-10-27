@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-open-square-closed-unit-triangle",
+ "kind": "statement",
+ "title": "Closed-unit localization triangle for an open-image composite",
+ "statement": "Use small pro-etale sites [def-weil-pbc-proetale-site]. For a commutative condensed ring $R$ [sk-def-sfb-condensed-ring], put $R_T=p_T^*R$ [sk-def-sfb-pulled-back-coefficients]. Modules are internal $R_T$-modules [sk-def-sfb-module-objects]; $D(T,R)$ is their ordinary unbounded derived category with the actual derived direct images and inverse images [sk-def-sfb-module-derived-pushpull]. Write $D^+(T,R)$ for the full subcategory with cohomology zero in sufficiently negative degrees. For an open immersion use the exact extension by zero [def-sfb-module-open-lower-shriek]. All inverse images below use the canonical identifications of the pulled-back coefficient rings.\n\nLet $Y$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Let $j:V\\hookrightarrow Y$ and $b:W\\hookrightarrow V$ be open immersions, let $h:H\\hookrightarrow V$ be the reduced closed complement of $W$, and let $i:Z\\hookrightarrow Y$ be any closed immersion [def-weil-open-immersion, def-weil-closed-immersion]. For an $R_W$-module $M$, put $K=Rb_*M[0]$ and $B_M=Rj_*b_!M[0]$. These objects are bounded below. Use the actual closed unit $\\eta_{h,K}:K\\to h_*h^*K$ and the actual open counit $b^*Rb_*M[0]\\xrightarrow{\\sim}M[0]$. There is a distinguished triangle, natural in $M$,\n$$i^*B_M\\longrightarrow i^*Rj_*K\\xrightarrow{i^*Rj_*(\\eta_{h,K})}i^*Rj_*h_*h^*K\\longrightarrow i^*B_M[1].$$\nIts first arrow is obtained by applying $i^*Rj_*$ to the open counit $b_!b^*K\\to K$, after identifying $b^*K$ with $M[0]$ by that counit; its second arrow is exactly the displayed closed-unit arrow. This is a triangle in $D(Z,R)$ for the specified internal-module functors, rather than only for their underlying cohomology sheaves. In particular, $i^*B_M=0$ if and only if $i^*Rj_*(\\eta_{h,K})$ is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), all-continuous tame-boundary input: coefficient-linear closed-unit localization; extracted from returned transverse exchange proof steps 1-3. Agent-extracted formal lemma; not a theorem printed in this blueprint paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-module-open-lower-shriek",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The open subscheme V of the Noetherian scheme Y is Noetherian, so the open immersion b is quasi-compact. Apply condensed_open_closed_recollement only for its underived assertions that closed pushforward is exact, full and faithful. Its bounded-below triangles are not substituted for the required unbounded statement.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), closed-unit localization input; formal recollement argument using the adopted source library."
+   }
+  },
+  {
+   "text": "Use the actual adjunctions a = D(b_!) ⊣ D(b^*) and d = Lh^* ⊣ Rh_*. The source extension-by-zero functor is fully faithful; therefore a has invertible unit. Closed pushforward preserves K-injectives as a right adjoint of an exact pullback. Full faithfulness descends to its right derived functor, so d has invertible counit. Transport the actual open derived adjunction along the canonical Lb^* ≅ D(b^*) comparison. The adjunction triple D(b_!) ⊣ D(b^*) ⊣ Rb_* gives invertibility of this transported counit. Its restriction to M[0] is precisely the isomorphism c in the statement, with the required formula definitionally.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-exc-kinjective-derived-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), closed-unit localization input; formal recollement argument using the adopted source library."
+   }
+  },
+  {
+   "text": "The source internal-module open/closed API gives h^*b_! = 0 and joint detection of zero by b^* and h^*. Exact termwise pullback and extension by zero commute with homology. The canonical comparison Lh^* ≅ D(h^*) therefore promotes both assertions to the ordinary unbounded derived categories. If Lh^*K = 0, complete the open counit D(b_!)D(b^*)K → K to a distinguished triangle. Open restriction inverts it by the adjunction triangle identity and invertibility of the unit; closed restriction inverts it because both endpoints are zero. Joint detection kills the cone. Thus the counit is invertible and K lies in the essential image of D(b_!). This is a complete private Lean proof, not an additional assumption.",
+   "uses": [
+    "lem-sfb-internal-open-extension-disjoint-vanishing",
+    "lem-exc-open-closed-detection",
+    "lem-sfb-module-derived-functor-compositor-shifts",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), closed-unit localization input; formal recollement argument using the adopted source library."
+   }
+  },
+  {
+   "text": "Apply the proved source-library Recollement.existsUnique_distTriang_counit_unit to these exact adjunctions, full faithfulness, mixed vanishing and essential-image criterion. Its triangle has literally the counit of a and unit of d. Choose its unique connecting map for each K. Recollement.exists_triangleHom applied to a morphism K → L gives the naturality equation for these choices, so they assemble into a natural transformation. Specialize to K = Rb_*M[0] and replace the first vertex by b_!M[0] using b_!c. The explicit triangle isomorphism proves that the first arrow is b_!(c inverse) followed by the open counit, while the closed-unit arrow is unchanged.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), closed-unit localization input; formal recollement argument using the adopted source library."
+   }
+  },
+  {
+   "text": "Apply the actual triangulated composite F = Li^*Rj_* and its canonical shift isomorphism. Whiskering the preceding natural transformations produces a and delta in the statement. The image triangle is distinguished; its second arrow is exactly F applied to the actual closed unit, and the stated first-arrow formula holds definitionally.",
+   "uses": [
+    "lem-sfb-module-derived-functor-compositor-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), closed-unit localization input; formal recollement argument using the adopted source library."
+   }
+  },
+  {
+   "text": "The existing source right-derived-functor t-structure API puts Rb_*M[0] in degree at least zero. Exact extension by zero commutes with the degree-zero embedding, so the same API puts Rj_*b_!M[0] in degree at least zero. Both bounded-below witnesses can therefore be chosen to be zero. Finally Mathlib Triangle.isZero₁_iff_isIso₂ applied to the distinguished image triangle gives precisely the requested zero/isomorphism equivalence.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), closed-unit localization input; formal recollement argument using the adopted source library."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-exc-kinjective-derived-fully-faithful",
+  "lem-sfb-internal-open-extension-disjoint-vanishing",
+  "lem-exc-open-closed-detection",
+  "lem-sfb-module-derived-functor-compositor-shifts",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X3",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), closed-unit localization input; formal recollement argument using the adopted source library."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For open immersions b W into V and j V into Y, apply derived direct image and closed restriction to the localization triangle b shriek L to Rb star L to h star h inverse Rb star L",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app'_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangles of short exact complexes and Zariski structure-sheaf open restrictions do not state the internal pro-etale closed-unit triangle with its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Push a pro etale open closed recollement triangle along another open immersion and restrict to a closed subscheme retaining the actual closed adjunction unit",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.ofRestrict_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangles of short exact complexes and Zariski structure-sheaf open restrictions do not state the internal pro-etale closed-unit triangle with its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived localization triangle for a pair of open immersions and restriction to a closed boundary in pro etale module sheaves",
+   "results": "8 hits: CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Adjunction.derived, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, DerivedCategory.triangleOfSES, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangles of short exact complexes and Zariski structure-sheaf open restrictions do not state the internal pro-etale closed-unit triangle with its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"triangle\"",
+   "results": "12 hits: DerivedCategory.mappingCocone_triangle_distinguished, DerivedCategory.mappingCone_triangle_distinguished, DerivedCategory.triangleOfSES, DerivedCategory.triangleOfSES_distinguished, DerivedCategory.triangleOfSES_obj₁, DerivedCategory.triangleOfSES_obj₂, DerivedCategory.triangleOfSES_obj₃, DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangles of short exact complexes and Zariski structure-sheaf open restrictions do not state the internal pro-etale closed-unit triangle with its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(closedUnit|closed_unit|localizationTriangle|localization_triangle)",
+   "results": "5 hits: Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangles of short exact complexes and Zariski structure-sheaf open restrictions do not state the internal pro-etale closed-unit triangle with its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closed unit localization triangle for pro etale internal modules obtained by applying derived direct image and closed restriction to an open closed pair",
+   "results": "OK 8 hits: ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.openToLocalization, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.FormallyEtale.localization_map, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, Algebra.FormallyEtale.localization_base",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the specified internal pro-etale module localization triangle after Rj_* and i^*, including its actual adjunction maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(closedUnit|closed_unit|localizationTriangle|localization_triangle)",
+   "results": "OK 6 hits: Mathlib/Topology/Algebra/Star/Unitary.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the specified internal pro-etale module localization triangle after Rj_* and i^*, including its actual adjunction maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived localization triangle for internal modules on a pro etale site with actual closed unit and open counit",
+   "results": "OK 8 hits: CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the specified internal pro-etale module localization triangle after Rj_* and i^*, including its actual adjunction maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"triangle\"",
+   "results": "OK 12 hits: DerivedCategory.mappingCocone_triangle_distinguished, DerivedCategory.mappingCone_triangle_distinguished, DerivedCategory.triangleOfSES, DerivedCategory.triangleOfSES_distinguished, DerivedCategory.triangleOfSES_obj₁, DerivedCategory.triangleOfSES_obj₂, DerivedCategory.triangleOfSES_obj₃, DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the specified internal pro-etale module localization triangle after Rj_* and i^*, including its actual adjunction maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open closed localization short exact sequence of complexes induces a natural distinguished triangle with the adjunction unit and counit for ringed sites",
+   "results": "OK 8 hits: CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.triangleOfSES_distinguished, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, DerivedCategory.triangleOfSES, CategoryTheory.ShortComplex.ShortExact.singleTriangle, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the specified internal pro-etale module localization triangle after Rj_* and i^*, including its actual adjunction maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-transverse-tame-open-shriek-exchange",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), all-continuous tame-boundary input: coefficient-linear closed-unit localization; extracted from returned transverse exchange proof steps 1-3.",
+   "via": [
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-open-square-closed-unit-triangle",
+  "worker": "stage1",
+  "summary": "Q140: seven-step assembly using existing ringed open/closed localization, exact internal/sectionwise adjunction transport, natural SES triangles and canonical derived functors. Checked actual closed unit and open counit, Noetherian/quasi-compact hypotheses, bounded below clauses and zero/isomorphism criterion. No new nodes or statement change.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images: formal localization input extracted along the recorded ancestor chain. blueprint_refs ancestor returns None for the live item; preserved the live null ancestor and via chain. Whole-blueprint searches localization, closed unit, ring-sheaf, open-closed found no equal statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic coefficient/adjunction transport used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic coefficient/adjunction transport used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-sfb-kinjective-direct-image-open-word-model",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-sc-derived-adjunction-from-underived",
+    "why": "Generic coefficient/adjunction transport used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-sfb-module-derived-functor-compositor-shifts",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic open/closed or derived-category calculus used for the actual ordinary internal-module functors; supplies a formal input absent from this direct-image stability unit, without replacing its finiteness route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-module-derived-functor-compositor-shifts",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-71b8aa805",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-71b8aa805 (reviewer sub-agent of L); spot-checked: Read the item, all 17 cited statements, the citer lem-sfb-transverse-tame-open-shriek-exchange (Steps 1 and 4 match the statement), blueprint sk-thm-sf-ctf-stability direct-images paragraph (3) (honestly an agent-extracted lemma) and Stacks proetale 09AH at l.5135. Live node still unsplit; no repair note; not in the drop list; no SGA; 0 new nodes; statement unchanged and not weakened. Edge cases checked: M=0, W=∅, W=V (H=∅), Z=∅, R=0. Steps 1, 2 and 4-7 are correct. Step 1: open in Noetherian gives b quasi-compact, as 09AH needs. Step 2: ringed open/closed SES transported along E_T, with exactness and mixed zeros. Step 4: the open-restriction counit with f=h=b gives an invertible counit. Step 5: Lj^*/Rj_* exact by the compositor-shifts node. Step 6: D^{>=0} by negative vanishing. Step 7: LES argument checked. One fault, C4 in Step 3: it credited lem-sfb-exact-open-closed-unbounded-calculus with identifying the localized unit with the specified Lh^*⊣Rh_* unit. That node only builds the D(Q)⊣D(I) adjunctions. FIX: Step 3 now also cites lem-sc-derived-adjunction-from-underived (counit formula; with invertible exact-functor comparisons the counits, hence the units, agree) and spells this out; proof_deps unchanged. Not duplicates: condensed-open-closed-recollement (D^+ only), fin-module-open-closed-triangle (étale), prop-sf-open-closed-triangle-all-stages (D^b_c), exc-proetale-derived-adjunction-triangle (finite A). 17 generic tool_uses accepted. The report lists citations.json/searches.jsonl, which are not in the commit (report-only inaccuracy).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenSquareClosedUnitTriangle",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenSquareClosedUnit.closed_unit_triangle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenSquareClosedUnit.directImage",
+   "AlgebraicGeometry.ProEtale.OpenSquareClosedUnit.extensionImage",
+   "AlgebraicGeometry.ProEtale.OpenSquareClosedUnit.image",
+   "AlgebraicGeometry.ProEtale.OpenSquareClosedUnit.closed_unit_triangle"
+  ],
+  "file": "lean/Sheaf/Paper/OpenSquareClosedUnitTriangle.lean",
+  "statement": "theorem closed_unit_triangle {W V Y H Z : Scheme.{u}} [IsLocallyNoetherian Y] [CompactSpace Y] (j : V ⟶ Y) (b : W ⟶ V) [IsOpenImmersion j] [IsOpenImmersion b] (h : H ⟶ V) [IsClosedImmersion h] [IsReduced H] (_hcomplement : Set.range h = (Set.range b)ᶜ) (i : Z ⟶ Y) [IsClosedImmersion i] : ∃ c : directImage Λ b ⋙ (CondensedRing.upperStar Λ b).mapDerivedCategory ≅ DerivedCategory.singleFunctor (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) 0, (∀ M, c.hom.app M = (leftDerivedUpperStarIsoMapDerivedCategory Λ b).inv.app ((directImage Λ b).obj M) ≫ (derivedUpperStarLowerStarAdjunction Λ b).counit.app ((DerivedCategory.singleFunctor _ 0).obj M)) ∧ ∃ (a : extensionImage Λ j b ⋙ moduleObjectDerivedPullback Λ i ⟶ directImage Λ b ⋙ image Λ j i) (δ : directImage Λ b ⋙ moduleObjectDerivedPullback Λ h ⋙ moduleObjectDerivedPushforward Λ h ⋙ image Λ j i ⟶ (extensionImage Λ j b ⋙ moduleObjectDerivedPullback Λ i) ⋙ shiftFunctor _ (1 : ℤ)), (∀ M, a.app M = (image Λ j i).map ((CondensedRing.openImmersionLowerShriek Λ b).mapDerivedCategory.map (c.inv.app M) ≫ (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ b).counit.app ((directImage Λ b).obj M))) ∧ (∀ M, Triangle.mk (a.app M) ((image Λ j i).map ((derivedUpperStarLowerStarAdjunction Λ h).unit.app ((directImage Λ b).obj M))) (δ.app M) ∈ distTriang _) ∧ (∀ M, (∃ n : ℤ, ((directImage Λ b).obj M).IsGE n) ∧ (∃ n : ℤ, ((extensionImage Λ j b).obj M).IsGE n)) ∧ (∀ M, IsZero ((moduleObjectDerivedPullback Λ i).obj ((extensionImage Λ j b).obj M)) ↔ IsIso ((image Λ j i).map ((derivedUpperStarLowerStarAdjunction Λ h).unit.app ((directImage Λ b).obj M))))",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Natural triangle on the ordinary unbounded internal-module derived categories. The exact-open counit is identified with the actual derived counit by the canonical left-derived/exact comparison. The closed arrow uses the specified derived adjunction unit. The three helper definitions only name explicit composites used in the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0e7c5f0d",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Node delta is lean-only; the live node has no lean record and no module exists live. lean.statement is verbatim in the file, with one sorry. Clause check against the source declarations: R_T modules are Mod(condensedRingObj Λ T) over the ProEt topology, with the framework universes. Rj_* and Li^* are moduleObjectDerivedPushforward/Pullback (right/leftDerivedFunctor). Y Noetherian = IsLocallyNoetherian + CompactSpace. j, b open and i closed immersions carry no extra hypotheses. The reduced complement is h closed, IsReduced H, range h = (range b)ᶜ. The open counit c is pinned uniquely via leftDerivedUpperStarIsoMapDerivedCategory.inv ≫ the derivedUpperStarLowerStarAdjunction counit, and its invertibility is asserted. The first arrow a is pinned to image.map(D(b_!).map c.inv ≫ the mapDerivedCategoryAdjunction counit). The second arrow is literally the image of the unit of Lh^*⊣Rh_*. The natural δ goes into the shifted first vertex, the triangle is distinguished for all M, both IsGE clauses are present, and IsZero(i^*B_M) ↔ IsIso uses the same arrow. Edge cases M=0, R=0, W=∅, W=V, Z=∅ and non-reduced V are allowed. Helpers are named composites, not hollow; docstrings carry the source and blueprint tag; the seven proof steps are in the theorem docstring; imports exist. No stronger assumptions and no substitute. No change made, so no compile run; the worker's dry run was OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261025T061114-L-2399095",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

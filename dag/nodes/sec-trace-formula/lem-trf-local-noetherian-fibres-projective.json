@@ -17,145 +17,69 @@
  ],
  "proof": [
   {
-   "text": "We first record explicitly the base-change calculations used below. For any $R$-algebra $T$, put $S_T=S\\otimes_RT$. Images $s_i\\otimes1$ of finite algebra generators $s_i$ of $S$ generate $S_T$ over $T$: expand each $s$ as a polynomial in the $s_i$ and balance its coefficients in each pure tensor. If $U\\hookrightarrow V$ is an injection of $T$-modules, the maps $U\\otimes_T(S\\otimes_RT)\\simeq U\\otimes_RS$, $u\\otimes(s\\otimes t)\\mapsto tu\\otimes s$, with inverse $u\\otimes s\\mapsto u\\otimes(s\\otimes1)$, and the same maps for $V$, identify its tensor with $S_T$ with tensoring the original injection over $R$ with $S$. Thus $S_T$ is $T$-flat by [def-weil-pbc-flat-ring-map]. These inverse formulas are well defined by the bilinearity relations [def-weil-pbc-module-tensor-product].",
+   "text": "Fix $\\mathfrak p\\subset R$ and a field extension $K/\\kappa(\\mathfrak p)$, and put $F=S\\otimes_R\\kappa(\\mathfrak p)$. By [lem-weil-pbc-fibre-product-affine-spectra] the base change $(\\operatorname{Spec}F)_K$ is $\\operatorname{Spec}(F\\otimes_{\\kappa(\\mathfrak p)}K)$; it is integral by hypothesis, so by [def-pc-integral-scheme] it is nonempty and its ring $F\\otimes_{\\kappa(\\mathfrak p)}K$ is a nonzero integral domain. Tensor balancing [def-weil-pbc-module-tensor-product] identifies $F\\otimes_{\\kappa(\\mathfrak p)}K\\cong S\\otimes_RK$ by $(s\\otimes a)\\otimes t\\mapsto s\\otimes at$ and $s\\otimes t\\mapsto(s\\otimes1)\\otimes t$, so $S\\otimes_RK$ is a nonzero integral domain. Suppose $S$ is not projective. Apply [lem-trf-projectivity-maximal-bad-reduced-quotient] to obtain $A=R/I$ and $B=S/IS$. Then $A$ is nonzero, reduced and Noetherian, $A\\to B$ is flat and finite type with geometrically integral fibres, $B$ is not $A$-projective, and $B/JB$ is $A/J$-projective for every nonzero ideal $J\\subseteq A$.",
    "uses": [
-    "def-weil-pbc-flat-ring-map",
+    "lem-trf-projectivity-maximal-bad-reduced-quotient",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-integral-scheme",
     "def-weil-pbc-module-tensor-product"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, finite type and flatness under base change, expanded"
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph: maximal bad ideal and radical reduction, including preservation under quotient base change; translation of geometric integrality into the ring condition expanded"
    }
   },
   {
-   "text": "Let $\\mathfrak p'\\subset T$ contract to $\\mathfrak p\\subset R$. The induced map $R/\\mathfrak p\\hookrightarrow\\kappa(\\mathfrak p')$ extends to a field embedding $\\kappa(\\mathfrak p)\\hookrightarrow\\kappa(\\mathfrak p')$, since every nonzero denominator stays nonzero. Tensor balancing [def-weil-pbc-module-tensor-product] gives $S_T\\otimes_T\\kappa(\\mathfrak p')\\simeq(S\\otimes_R\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')$, sending $(s\\otimes t)\\otimes\\lambda$ to $(s\\otimes1)\\otimes\\bar t\\lambda$ and inversely $(s\\otimes a)\\otimes\\lambda\\mapsto(s\\otimes1)\\otimes\\bar a\\lambda$. The same formulas hold after every further field extension of $\\kappa(\\mathfrak p')$. Hence all fibres of $T\\to S_T$ are geometrically integral because every field extension of each original fibre $S\\otimes_R\\kappa(\\mathfrak p)$ is a nonzero domain by hypothesis. In particular the hypotheses persist for $T=R/I$ and for the completion used later.",
+   "text": "Apply [lem-trf-reduced-algebra-generic-completion-cover] to $A\\to B$. Write $f\\ne0$ for its element, $C=\\varprojlim A/(f^n)$ and $D=B\\otimes_A C$. It gives $B_f$ free over $A_f$, faithful flatness of $A\\to A_f\\times C$, Noetherianity and $fC$-adic completeness of $C$, finite type and flatness of $C\\to D$, geometrically integral fibres, and projectivity of $D/fD$ over $C/fC$.",
    "uses": [
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, geometric integrality under base change, expanded"
-   }
-  },
-  {
-   "text": "Assume the set of ideals $I\\subseteq R$ for which $S/IS$ is not projective over $R/I$ is nonempty. The ascending chain condition gives a maximal member $I$. It is proper, since $S/RS=0$ is projective over the zero ring. Put $J=\\sqrt I$. The ideal $J/I$ is finitely generated and every generator is nilpotent; if their nilpotence exponents are $e_1,\\ldots,e_r$, every monomial of degree $1+\\sum(e_i-1)$ vanishes, so $J/I$ is nilpotent. If $I\\ne J$, maximality gives projectivity of $S/JS$, while Step 1 gives flatness of $S/IS$ over $R/I$. Applying [lem-trf-local-nilpotent-projective-flat-lift] contradicts the choice of $I$. Thus $I$ is radical. Replace $(R,S)$ by $(R/I,S/IS)$, retaining the hypotheses by Steps 1--2. The quotient is Noetherian because generators of the inverse image of an ideal descend to generators. We now have a nonzero reduced Noetherian ring $R$, with $S$ not projective but $S/JS$ projective over $R/J$ for every nonzero ideal $J$.",
-   "uses": [
-    "lem-trf-local-nilpotent-projective-flat-lift"
+    "lem-trf-reduced-algebra-generic-completion-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, maximal bad ideal and radical reduction"
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, second proof paragraph: generic freeness on a domain localization, localization/completion cover, and projective reduction of the completed base change"
    }
   },
   {
-   "text": "Choose a minimal prime $\\mathfrak r\\subset R$ using [lem-weil-pbc-minimal-prime-over-proper-ideal] with the proper ideal zero. By [lem-weil-pbc-minimal-prime-reduced-localization-field], $\\mathfrak rR_{\\mathfrak r}=0$. Choose finite generators $x_i$ of $\\mathfrak r$. The fraction criterion gives $g_i\\notin\\mathfrak r$ with $g_ix_i=0$. Set $g=\\prod_i g_i$ (empty product $1$); then $g\\notin\\mathfrak r$ and $\\mathfrak rR_g=0$. Thus $R_g\\simeq(R/\\mathfrak r)_g$ is a nonzero domain. It is Noetherian by [lem-weil-pbc-localization-noetherian]. Apply [lem-pur-noetherian-algebra-module-generic-freeness] to $R_g\\to S_g$ and the cyclic $S_g$-module $S_g$, finite type by Step 1. Obtain $0\\ne a=r/g^n\\in R_g$ such that $(S_g)_a$ is free over $(R_g)_a$. For $f=gr$ the localization $R_f$ equals $(R_g)_a$ and $S_f$ equals $(S_g)_a$. The element $f$ is nonzero, since its image $g^{n+1}a$ in the domain $R_g$ is nonzero. Consequently $S_f$ is free over $R_f$.",
+   "text": "For each prime of $C$, take the identity field extension in the preceding geometric-integrality conclusion. Its fibre is a nonzero integral domain. Thus [lem-trf-complete-flat-integral-fibres-projective], with base $C$, ideal $fC$ and algebra $D$, applies and makes $D$ projective over $C$.",
    "uses": [
-    "lem-weil-pbc-minimal-prime-over-proper-ideal",
-    "lem-weil-pbc-minimal-prime-reduced-localization-field",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-pur-noetherian-algebra-module-generic-freeness"
+    "lem-trf-complete-flat-integral-fibres-projective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, generic freeness applied to a domain localization, as in its second paragraph"
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, last proof paragraph: associated primes of integral fibres, properness over the complete base, and application of Tag 05DP (lemma-flat-pure-over-complete-projective)"
    }
   },
   {
-   "text": "Let $A=R^\\wedge=\\varprojlim_{n\\ge1}R/(f^n)$ and $N=S\\otimes_RA$. By [lem-trf-local-completion-product-faithfully-flat], $R\\to R_f\\times A$ is faithfully flat. The completion $A$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. Since $(f)$ is generated by one element, [lem-weil-pbc-adic-completion-mod-ideal] gives that $A$ is $fA$-adically complete and gives the canonical $R$-algebra isomorphism $A/fA\\simeq R/(f)$. We will verify the hypotheses of [lem-trf-local-flat-pure-complete-projective] with base $A$, algebra $B=N$, module $M=N$ and ideal $fA$.",
+   "text": "Put $E=A_f\\times C$. The map $B\\otimes_AE\\to B_f\\times D$, $b\\otimes(a,c)\\mapsto(b\\otimes a,b\\otimes c)$, has inverse defined on the two summands by $(b\\otimes a,0)\\mapsto b\\otimes(a,0)$ and $(0,b\\otimes c)\\mapsto b\\otimes(0,c)$. The tensor relations make these maps well defined and inverse [def-weil-pbc-module-tensor-product]. To lift a map from the free module $B_f$ along a surjection, choose preimages of the images of its basis vectors and extend linearly; hence $B_f$ is projective. Step 3 makes $D$ projective. Any $E$-module $M$ decomposes as $e_1M\\oplus e_2M$ for $e_1=(1,0)$ and $e_2=(0,1)$, since $e_1+e_2=1$ and $e_1e_2=0$. For a surjection $q:M\\to N$, an element $y=e_i y$ has a preimage $e_i x$ whenever $q(x)=y$, so $e_iM\\to e_iN$ is surjective. Any map from $B_f\\times D$ restricts to these components; their projective lifts combine to an $E$-linear lift [def-weil-pbc-projective-module]. Thus $B\\otimes_AE$ is projective over $E$. The swap $e\\otimes b\\mapsto b\\otimes e$, with inverse $b\\otimes e\\mapsto e\\otimes b$, is $E$-linear by tensor balancing, so $E\\otimes_AB$ is projective too. Apply [lem-trf-local-projective-faithfully-flat-descent] along the faithfully flat map of Step 2 to conclude that $B$ is projective over $A$, contradicting Step 1. Consequently the original $S$ is projective over $R$.",
    "uses": [
-    "lem-trf-local-completion-product-faithfully-flat",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-adic-completion-mod-ideal",
-    "lem-trf-local-flat-pure-complete-projective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, completion and the criterion of Tag 05DP"
-   }
-  },
-  {
-   "text": "Step 1 gives that $A\\to N$ is finite type and flat; $N$ is a finite $N$-module, generated by $1$. The isomorphism of Step 5 gives $N/fN\\simeq S/fS$: explicitly $(s\\otimes a)\\bmod fN\\mapsto s\\bar a\\bmod fS$, where $\\bar a\\in R/(f)$ is the projection of $a$, and $s\\bmod fS\\mapsto(s\\otimes1)\\bmod fN$ is its inverse. These are well defined and inverse by the tensor relations [def-weil-pbc-module-tensor-product] and $A/fA\\simeq R/(f)$. They are linear over the identified base rings. Since $(f)\\ne0$, the maximal-bad-ideal reduction in Step 3 makes $S/fS$ projective over $R/(f)$, hence $N/fN$ projective over $A/fA$.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, projective reduction and base-change hypotheses, expanded"
-   }
-  },
-  {
-   "text": "Fix a prime $\\mathfrak p\\subset A$ and put $F=N\\otimes_A\\kappa(\\mathfrak p)$. By Step 2, $F$ is a nonzero domain. Consider $D=N/\\mathfrak pN$ and $K=\\operatorname{Frac}(A/\\mathfrak p)=\\kappa(\\mathfrak p)$. Step 1 applied again to $A\\to N$ shows that $D$ is flat over $A/\\mathfrak p$. Tensoring the injection $A/\\mathfrak p\\hookrightarrow K$ with $D$ injects $D\\hookrightarrow D\\otimes_{A/\\mathfrak p}K=F$, by [def-weil-pbc-flat-ring-map]. This injection sends $1$ to $1$, so $D$ is a nonzero domain and $A/\\mathfrak p\\to D$ is injective (compose it with the field embedding into $F$). Therefore $\\mathfrak q_{\\mathfrak p}=\\mathfrak pN$ is prime, contracts to $\\mathfrak p$, and is exactly the kernel of $N\\to F$. For every $0\\ne z\\in F$, $bz=0$ if and only if the image of $b\\in N$ in $F$ is zero. Thus $\\operatorname{Ann}_N(z)=\\mathfrak pN$. Since $z=1$ is allowed, the associated primes of $F$ as an $N$-module are exactly $\\{\\mathfrak pN\\}$, by [def-weil-pbc-annihilator-associated-primes]. No assertion is made about all primes of $N$ lying over $\\mathfrak p$.",
-   "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-annihilator-associated-primes"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, identification of the sole associated prime of each fibre, expanded"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-adic-complete-jacobson-radical] for the complete pair $(A,fA)$, every maximal ideal of $A$ contains $f$. Choose a maximal ideal $\\mathfrak m$ containing $\\mathfrak p$; then $\\mathfrak p+fA\\subseteq\\mathfrak m$. Step 7 applied to $\\mathfrak m$ supplies the proper prime $\\mathfrak mN$ of $N$. It contains $fN+\\mathfrak pN$, so $fN+\\mathfrak q_{\\mathfrak p}\\ne N$. This is precisely the associated-prime condition of [lem-trf-local-flat-pure-complete-projective], for every associated prime identified in Step 7. The use of a prime over $\\mathfrak m$ is essential: membership of $f$ in the Jacobson radical of $A$ alone does not imply membership in the Jacobson radical of $N$.",
-   "uses": [
-    "lem-weil-pbc-adic-complete-jacobson-radical",
-    "lem-trf-local-flat-pure-complete-projective"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, properness of fN plus the associated prime, expanded"
-   }
-  },
-  {
-   "text": "All hypotheses of [lem-trf-local-flat-pure-complete-projective] now hold for $(A,fA,N,N)$: Noetherianity and completeness are Step 5, finite type, finiteness, flatness and projective reduction are Step 6, and the condition on every associated prime of every fibre is Steps 7--8. It follows that $N$ is projective as an $A$-module.",
-   "uses": [
-    "lem-trf-local-flat-pure-complete-projective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, application of Tag 05DP"
-   }
-  },
-  {
-   "text": "Write $C=R_f\\times A$. The two central idempotents split $S\\otimes_RC\\simeq S_f\\times N$, as a $C$-module. Freeness makes $S_f$ projective, and Step 9 makes $N$ projective. This pair is projective over $C$: a surjection and a map from it decompose by the same two idempotents, and componentwise projectivity supplies lifts whose pair is a $C$-linear lift. Apply [lem-trf-local-projective-faithfully-flat-descent] to the faithfully flat map $R\\to C$ of Step 5. It follows that $S$ is projective over $R$, contradicting Step 3. The set of bad ideals was therefore empty, and the original $S$ is projective over the original $R$.",
-   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-projective-module",
     "lem-trf-local-projective-faithfully-flat-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof, faithfully flat descent conclusion"
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, faithfully flat descent conclusion; componentwise lifting expanded"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-annihilator-associated-primes",
-  "def-weil-pbc-flat-ring-map",
+  "def-pc-integral-scheme",
   "def-weil-pbc-module-tensor-product",
-  "lem-pur-noetherian-algebra-module-generic-freeness",
-  "lem-trf-local-completion-product-faithfully-flat",
-  "lem-trf-local-flat-pure-complete-projective",
-  "lem-trf-local-nilpotent-projective-flat-lift",
+  "def-weil-pbc-projective-module",
+  "lem-trf-complete-flat-integral-fibres-projective",
   "lem-trf-local-projective-faithfully-flat-descent",
-  "lem-weil-pbc-adic-complete-jacobson-radical",
-  "lem-weil-pbc-adic-completion-mod-ideal",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-minimal-prime-over-proper-ideal",
-  "lem-weil-pbc-minimal-prime-reduced-localization-field"
+  "lem-trf-projectivity-maximal-bad-reduced-quotient",
+  "lem-trf-reduced-algebra-generic-completion-cover",
+  "lem-weil-pbc-fibre-product-affine-spectra"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective; base-change, tensor-quotient and annihilator calculations expanded explicitly"
+  "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective; assembly of reduced-quotient, generic/completion-cover, and complete-base integral-fibre arguments"
  },
  "mathlib_searches": [
   {
@@ -220,33 +144,24 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-local-noetherian-fibres-projective",
   "worker": "stage1",
-  "summary": "Repair of return at 3f0f6ac44f: replaced the false claim about every prime over a base prime by the exact annihilator calculation Ass_N(N tensor_A kappa(p))={pN}; gave explicit base-change and reduction maps and the maximal-ideal argument for fN+pN proper. Cited existing completion, completeness and Jacobson inputs. Corrected the theorem tag to 05FS and malformed TeX. Added the domain-localization preparation needed by the actual generic-freeness statement. Retained all four original statement-only children and all search logs; no additional nodes.",
+  "summary": "Repair of the live-DAG promotion return on 2026-10-23: compared the retained delivery with the unchanged current ten-step read-clone item and re-read all current parent citations, packet statement dependencies, and preserved-proof inputs. The required initial server dry run passed at 14c13eb36c5. Kept the statement, route, three statement-only packets, logged searches and full preserved source arguments. Clarified assembly Step 4 by giving an explicit preimage e_i x to verify surjectivity on each idempotent component before using componentwise projective lifting. The E-linear tensor swap still matches the exact descent statement. Source tag is corrected to 05FS. Delivery is rebuilt by deliver.py on its current fetched DAG; live promotion remains the maintainer operation. No Lean changes.",
   "blueprint": "Realizes the Tag 05FT projectivity input in the semistable-alteration proof of lem-trf-local-term-locality, specifically the sentence invoking projectivity of S over R together with Tag 05FQ.",
-  "tool_uses": [
-   {
-    "node": "lem-pur-noetherian-algebra-module-generic-freeness",
-    "why": "Generic commutative-algebra input to the domain-localization/completion proof of Stacks 05FS; the present unit has no substitute for this algebra fact."
-   },
-   {
-    "node": "lem-weil-pbc-adic-completion-noetherian",
-    "why": "Generic commutative-algebra input to the domain-localization/completion proof of Stacks 05FS; the present unit has no substitute for this algebra fact."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-pur-noetherian-algebra-module-generic-freeness",
   "lem-weil-pbc-adic-completion-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q06-269098f49",
-  "group": "Q06",
+  "reviewer": "NT-cc-Q89-81017e9ed",
+  "group": "Q89",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-269098f49 (reviewer sub-agent of L); spot-checked: Mathematics and citations pass the full review, including Tags 05FS/05DP, all ten steps, hypotheses, edge cases, dependency closure, and route checks. The new descent node has malformed TeX `$A\\\\too B$`; corrected whole JSON is in `fixes/dag/nodes/sec-trace-formula/lem-trf-local-projective-faithfully-flat-descent.json` with `$A\\\\to B$`.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-81017e9ed (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the 2026-10-21 re-split, after 7a0a44d6, 1a063deb and 43764ceb, each of which got a FIX. The three statement-only packets are byte-identical to 4376, and I re-read them in full. Packet 1, lem-trf-projectivity-maximal-bad-reduced-quotient, is the first paragraph of Stacks flat.tex 05FS: a maximal bad ideal I exists and is proper; it is radical by lem-trf-local-nilpotent-projective-flat-lift; and quotients by nonzero ideals are projective. Packet 2, lem-trf-reduced-algebra-generic-completion-cover, is the second paragraph: domain localization, generic freeness of any rank, the faithfully flat cover R→R_f×R^∧, A/fA≅R/(f), base-changed fibres, and N/fN≅S/fS projective. Packet 3, lem-trf-complete-flat-integral-fibres-projective, is 05DP with M=B. B/pB injects into its domain fibre, so pB is the only associated prime. mB is proper for a maximal m⊇p, and I⊆m by the Jacobson-radical node. All three packets are true, of comparable size, and none restates the item. Edge cases checked: R=0, f a unit (zero completion), I=A, I=0, k[[t]][x]. An rg -L scan of dag/nodes for 05FS/05DP/05FT, bad ideals and completion covers found no duplicates. The 05FT and finite-presentation projectivity nodes are base-era variants, and packet 3 needs completeness and reduction instead of geometric fibres. The only new change, in Step 4, writes out the surjection e_iM→e_iN using the preimage e_i x; it is correct. The previous FIX was lost a third time. source.place again says Tag 05FT, but tags/tags maps 05FS to lemma-fibres-irreducible-flat-projective and 05FT to the non-Noetherian lemma. Step 1 (C1/E1) again lacks the translation from the scheme-language geometric integrality of def-pc-geometrically-irreducible to packet 1's ring condition (S⊗_R K is a nonzero domain). FIX: the new head with place set to 05FS, and Step 1 restored to cite lem-weil-pbc-fibre-product-affine-spectra, def-pc-integral-scheme and def-weil-pbc-module-tensor-product. Its last sentence is tightened so the assembly stays under the limit at 2997 characters. proof_deps is set to the union of the steps' uses. Steps 2-4 and split_report are kept, and the statement is unchanged. Route is sk-i-curve-zero; no SGA, no tool_uses. Maintainer note: this FIX has now been lost three times (7a0a→1a06→4376→8101), and the report again wrongly claims the 05FS correction was made.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.RingTheory.NoetherianGeometricallyIntegralProjective",
@@ -266,5 +181,16 @@
   "result": "pass",
   "note": "Read the item node, all 6 stmt_dep records, Stacks flat.tex:2178-2190 (tag table: label = 05FS), both delivered Lean modules, report.md (has Worker report, Dependency modules, Second reading by NH) and the 5-file delivery diff. The Lean matches the source clause for clause: CommRing R, S; Algebra R S; IsNoetherianRing; RingHom.FiniteType and RingHom.Flat of algebraMap; for every PrimeSpectrum point, GeometricallyIntegral of Spec.map of the canonical ResidueField -> Ideal.Fiber S map, lifted to the common universe max u v by the functorial RingHom.ulift (not an arbitrary map); conclusion Module.Projective R S. IsIntegral includes nonemptiness; the universe restriction on test fields is harmless because an algebraic closure fits in it; no extra hypotheses; universes independent and bound. Edge cases R=0, S=0, S=R, R[x] and a nonreduced base all agree with the source. No duplicate: the side theorem Algebra.projective_of_geometricallyIntegral_fibres is the 05FT finite-presentation variant. Every proof dependency with a module is imported. Docstrings carry source, blueprint id and all 10 proof steps; lines <=100; sorry only; no definitions. The dependency repair of LocalProjectiveFaithfullyFlatDescent changes only the file format (header, module, public imports, exposed section); its declaration is unchanged, its node changed only in lean with a lean.note, and it is a proof dependency admitted by stage2_delivery. nt_compile --json on both files: clean (1.9 s, 2.5 s); a control run with an injected error confirmed the tool reports diagnostics and printed the expected signature. Maintainer note: the item node's source.place says Tag 05FT but the label is 05FS; this is a stage-1 metadata typo that stage 2 may not change, not a fault of this delivery."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -108,7 +108,30 @@
   "pqf-def-coherent"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isClosedImmersion",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect",
+     "lines": [
+      184,
+      208
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "split_report": {
@@ -157,5 +180,38 @@
   "group": "NJ",
   "result": "pass",
   "note": "Wrote review.md. Checked the immutable statement, dependencies, source, definitions, edge cases, docstrings, report sections, and verbatim signature. Server-only compile reproduced cleanly in 2.3 seconds. No delivery errors found; branch head unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S=\\operatorname{Spec}(A)$ be an affine scheme with $A$ Noetherian,\nlet $f:X\\to S$ be\nprojective, i.e. the composite of a closed immersion\n$X\\to\\mathbf P^n_S$ and the projection, and let\n$\\mathcal G$ be a coherent\n$\\mathcal O_X$-module flat over $S$. Let $\\mathcal U$ be a finite cover of\n$X$ by affine opens. Then the derived direct image\n$Rf_*\\mathcal G$, represented in $D(A)$ by the Cech complex\n$\\check C^\\bullet(\\mathcal U,\\mathcal G)$ ([lem-pc-cech-resolution]), is a\nperfect object of $D(A)$, i.e. isomorphic in $D(A)$ to a bounded\ncomplex of finite projective $A$-modules.",
+  "proof": [
+   {
+    "text": "The projective morphism $f$ is separated, so the finite intersections of\nmembers of $\\mathcal U$ are affine. By [lem-pc-rf-base-change-flat-module]\nthe Cech complex $\\check C^\\bullet(\\mathcal U,\\mathcal G)$ is\nquasi-isomorphic to its bounded truncation $K$, whose terms are flat over\n$A$ (this is also checked directly below).",
+    "uses": [
+     "lem-pc-rf-base-change-flat-module"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Each term of the Cech complex is a finite direct sum of flat\n$A$-modules. To check this explicitly, write an affine\nintersection as $U=\\operatorname{Spec}(B)$ and\n$\\mathcal G|_U=\\widetilde M$. For any injection $N'\\to N$ of\n$A$-modules, let $Q$ be the kernel of\n$M\\otimes_A N'\\to M\\otimes_A N$. At a prime $\\mathfrak q$ of\n$B$, with inverse image $\\mathfrak p$ in $A$, the module\n$M_{\\mathfrak q}$ is flat over $A_{\\mathfrak p}$ by relative\nflatness. Localizing the displayed map at $\\mathfrak q$\ntherefore gives an injection, so $Q_{\\mathfrak q}=0$ for every\n$\\mathfrak q$. Consequently $Q=0$, proving that $M$ is flat\nover $A$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The cohomology modules $\\Gamma(S,R^qf_*\\mathcal G)$ of this bounded flat\ncomplex ([lem-pc-cech-resolution]) are finite over $A$ by\n[lem-pc-projective-coherent-finiteness].\nApplying [lem-pc-noetherian-flat-complex-perfect] gives a\nbounded finite projective representative in $D(A)$.",
+    "uses": [
+     "lem-pc-cech-resolution",
+     "lem-pc-projective-coherent-finiteness",
+     "lem-pc-noetherian-flat-complex-perfect"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

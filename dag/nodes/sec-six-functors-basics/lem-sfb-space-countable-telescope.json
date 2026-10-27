@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-space-countable-telescope",
+ "kind": "statement",
+ "title": "Countable cohomology criterion for a perfect telescope",
+ "statement": "Work in the universes of [def-weil-size-convention], with schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. A space is quasi-compact if its point space is quasi-compact and quasi-separated if its absolute diagonal is quasi-compact on scheme tests. Let $S$ be a scheme and $X$ a quasi-compact quasi-separated algebraic space over $S$ such that $\\mathcal O_X(V)$ is countable for every affine scheme $V$ etale over $X$. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ have $\\mathcal H^i(K)(V)$ countable for every integer $i$ and every such $V$. There exist a sequence of perfect objects $P_m$ of $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ with transition maps $t_m:P_m\\to P_{m+1}$ and maps $a_m:P_m\\to K$ with $a_{m+1}t_m=a_m$ such that $K$, with these legs, is a homotopy colimit: the coproduct map $(a_m)_m$ fits into a distinguished triangle $\\bigoplus_mP_m\\xrightarrow{1-\\mathrm{shift}}\\bigoplus_mP_m\\to K\\to(\\bigoplus_mP_m)[1]$. All sums are small ambient derived sums. Homotopy colimit has the meaning of [def-kun-truncations].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CRV, lemma-countable, implication (2) to (1); legs are the derived-colimit convention of derived.tex Tags 090Z and 0CRH. The perfect objects lie in D_QCoh: the proof produces them through the equivalence D_QCoh(O_X) = D(A,d) of theorem-DQCoh-is-Ddga."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-kun-truncations",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a perfect compact generator $G$ of $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ by [lem-sfb-space-compact-perfect-generator]. Its shifted Hom groups detect zero objects, exactly as required by [lem-sfb-space-generator-dg-equivalence]. Apply that node to obtain $(A,d)$ and the exact equivalence $F:C_X\\simeq D(A,d)$ with quasi-inverse $T$. For every integer $i$ it gives $H^i(A)\\cong\\operatorname{Hom}(G,G[i])$ and $H^i(F(K))\\cong\\operatorname{Hom}(G,K[i])$.",
+   "uses": [
+    "lem-sfb-space-compact-perfect-generator",
+    "lem-sfb-space-generator-dg-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRV, lemma-countable, proof (2) to (1), choice of generator and DG model; Tag 09MC, theorem-DQCoh-is-Ddga."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-countable-perfect-ext] with $E=G$. The hypotheses are precisely the given countability of affine etale structure rings and of all cohomology sheaves of $K$; $G$ is perfect by step 1. Thus both Hom groups in step 1 are countable. Hence $H^i(A)$ and $H^i(M)$ are countable for every integer $i$, where $M=F(K)$. Apply [lem-sfb-dg-countable-compact-telescope] to get compact $Q_m$, transitions $u_m$, legs $b_m:Q_m\\to M$, and their telescope triangle with third object $M$.",
+   "uses": [
+    "lem-sfb-space-countable-perfect-ext",
+    "lem-sfb-dg-countable-compact-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRV, lemma-countable, final paragraph using Tag 0CRU, lemma-countable-cohomology, and dga.tex Tag 0CRM, lemma-countable."
+   }
+  },
+  {
+   "text": "An equivalence preserves every existing coproduct: the bijections $\\operatorname{Hom}(T(\\bigoplus N_j),L)\\cong\\operatorname{Hom}(\\bigoplus N_j,F(L))\\cong\\prod_j\\operatorname{Hom}(N_j,F(L))\\cong\\prod_j\\operatorname{Hom}(T(N_j),L)$ give its universal property, with the specified coprojections. The same applies to $F$. These bijections and the defining bijection for compactness show that $P_m=T(Q_m)$ is compact in $C_X$. By [lem-sfb-space-compact-objects-perfect] each $P_m$ is perfect. The coproducts in $C_X$ are the ambient derived coproducts by [lem-sfb-space-perfect-localizing-generation].",
+   "uses": [
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-compact-objects-perfect",
+    "def-pc-compact-object",
+    "lem-sfb-space-perfect-localizing-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRV, lemma-countable, transport through the equivalence; Tag 09M8, proposition-compact-is-perfect; equivalence universal-property calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-functor-preserves-hocolim] to the exact, coproduct-preserving $T$ and the triangle of step 2. Let $\\epsilon:TF\\xrightarrow{\\sim}\\mathrm{id}_{C_X}$ be its counit. Set $t_m=T(u_m)$ and $a_m=\\epsilon_K T(b_m)$; then $a_{m+1}t_m=\\epsilon_K T(b_{m+1}u_m)=a_m$. The image triangle, using the coproduct comparison $\\bigoplus T(Q_m)\\simeq T(\\bigoplus Q_m)$ and $\\epsilon_K$, has first arrow $1-\\mathrm{shift}$ and second arrow restricting to $a_m$ on each coprojection. It is therefore the required distinguished triangle with third object $K$, by [def-kun-truncations]. Its ambient interpretation follows from step 3.",
+   "uses": [
+    "lem-kun-functor-preserves-hocolim",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRV, lemma-countable, equivalence preserves homotopy colimits; derived.tex Tags 090Z and 0CRH, including the compatible legs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-compact-perfect-generator",
+  "lem-sfb-space-generator-dg-equivalence",
+  "lem-sfb-space-countable-perfect-ext",
+  "lem-sfb-dg-countable-compact-telescope",
+  "lem-sfb-space-compact-objects-perfect",
+  "def-pc-compact-object",
+  "lem-sfb-space-perfect-localizing-generation",
+  "lem-kun-functor-preserves-hocolim",
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CRV, lemma-countable, implication (2) to (1); Tags 09MC, 0CRU, 09M8 and dga.tex Tag 0CRM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived quasi-coherent object with countable cohomology on a finite type algebraic space is a sequential homotopy colimit of perfect complexes",
+   "results": "Hits: DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.Q, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, HasDerivedCategory",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived-category representatives and countable colimit axioms do not give a perfect approximation criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable cohomology criterion for homotopy colimit of perfect objects",
+   "results": "Hits: CategoryTheory.CountableAB4.mk, CategoryTheory.CountableAB4.of_countableAB5, CategoryTheory.CountableAB4.of_hasExactColimitsOfShape_nat_and_finite, CategoryTheory.Limits.HasCountableColimits.out, CategoryTheory.CountableAB4.of_hasExactColimitsOfShape_nat, CategoryTheory.instCountableAB4OfAB4OfSize, CategoryTheory.CountableAB4Star.of_countableAB5Star, CategoryTheory.CountableAB4.ofShape",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived-category representatives and countable colimit axioms do not give a perfect approximation criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hocolim\", \"Perfect\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived-category representatives and countable colimit axioms do not give a perfect approximation criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]ountable.*[Pp]erfect|[Pp]erfect.*[Cc]ountable|[Hh]ocolim)",
+   "results": "0 hits; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived-category representatives and countable colimit axioms do not give a perfect approximation criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*perfect|perfect.*countable|hocolim",
+   "results": "0 hits; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: affine transition limit theorems, quasicoherent presentations, topological perfect sets and AB4 axioms do not state the perfect telescope criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Countable\"",
+   "results": "Hits: exists_perfect_nonempty_of_isClosed_of_not_countable, exists_countable_union_perfect_of_isClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: affine transition limit theorems, quasicoherent presentations, topological perfect sets and AB4 axioms do not state the perfect telescope criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent derived object with countable cohomology is a telescope of perfect complexes",
+   "results": "Hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.ctorIdx, CategoryTheory.instCountableAB4OfAB4OfSize, CategoryTheory.CountableAB4Star, HasDerivedCategory, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-24",
+   "verdict": "no match: affine transition limit theorems, quasicoherent presentations, topological perfect sets and AB4 axioms do not state the perfect telescope criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable cohomology on a quasi compact quasi separated algebraic space gives a sequential homotopy colimit of perfect complexes",
+   "results": "Hits: AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, localCohomology.hasColimitDiagram, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "date": "2026-10-24",
+   "verdict": "no match: affine transition limit theorems, quasicoherent presentations, topological perfect sets and AB4 axioms do not state the perfect telescope criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-sections-perfect-telescope",
+  "date": "2026-10-24",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image.",
+   "via": [
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-countable-telescope",
+  "worker": "stage1",
+  "summary": "Expanded the DG-algebra proof of Stacks 0CRV with explicit countability inputs, compactness transport and compatible telescope legs. Four statement-only supporting lemmas; existing generator, ambient-coproduct and telescope-transport nodes reused.",
+  "blueprint": "Supports the inherited prerequisite of latest det-thm-sf-ctf-stability-direct-images proof (3), through 0CRW: the application of 0CRV to a descended structure-sheaf image. Steps realize 0CRV proof (2) to (1), without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-functor-preserves-hocolim",
+    "why": "Generic exact-functor telescope transport, used with the quasi-inverse of the DG equivalence. It is the formal transport invoked in 0CRV; the unit has no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-functor-preserves-hocolim"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-610955353",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-610955353 (reviewer sub-agent of L); spot-checked: The item's statement is unchanged from live and agrees with Stacks 0CRV (2)⇒(1), with the hocolim triangle and legs of 090Z/0CRH. Live still has the item unsplit, it is the first delivery, and none of the new ids exists live. The four steps are a short assembly of cited nodes. Step 1: compact-perfect-generator gives exactly the hypotheses of the new dg-equivalence node (09MC proof, A=End^•(I), H^i(F L)=Hom(G,L[i])). Step 2: the new countable-perfect-ext with E=G (0CRU plus the countability of perfect cohomology from 0CRV) gives the countable H^i(A) and H^i(M) that the new dg-countable-compact-telescope (0CRM) needs. Step 3: an elementary Hom-bijection calculation moves compactness through the equivalence, then compact-objects-perfect (09M8 converse) applies; perfect-localizing-generation says coproducts in C_X are the ambient ones. Step 4: lem-kun-functor-preserves-hocolim gives c with c p'=T(p)α, and I checked a_m=ε_K T(b_m) and a_{m+1}t_m=a_m. All four new nodes are true, statement-only, self-contained and correctly tagged, with five recorded searches each, and smaller than the item. They are not duplicates: perfect-objects-compact is only the forward direction, the lem-sc nodes are for Noetherian schemes, countable-hypercohomology has no Ext clause, and the coef dg nodes concern model categories. The tool use of lem-kun-functor-preserves-hocolim is accepted, as on the parent node. No SGA is cited. Batch-5 flags: the def-trf-algebraic-space and def-trf-space-quasi-coherent-module citations are general definitions, and the two flagged existing nodes reach the trf chapter only through def-trf-algebraic-space; none is a step of the trace-formula or Poincaré-duality proofs, so all are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCountableTelescope",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_perfect_telescope_of_countable",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCountableTelescope.lean",
+  "statement": "theorem exists_perfect_telescope_of_countable {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : X.IsAbsolutelyQuasiSeparated) (hO : ∀ V : X.EtaleSite, IsAffine (X.etaleForget.obj V) → Countable (X.structureSheaf.obj.obj (op V))) (K : X.DerivedQCoh) (hK : ∀ (i : ℤ) (V : X.EtaleSite), IsAffine (X.etaleForget.obj V) → Countable (((X.smallModuleEquivalence.inverse).obj ((DerivedCategory.homologyFunctor X.SmallModules i).obj K.obj)).val.obj (op V))) : ∃ (P : ℕ → X.DerivedQCoh) (t : ∀ m : ℕ, (P m).obj ⟶ (P (m + 1)).obj) (a : ∀ m : ℕ, (P m).obj ⟶ K.obj) (B : X.DerivedModules) (ι : ∀ m : ℕ, (P m).obj ⟶ B) (hc : IsColimit (Cofan.mk B ι)) (q : K.obj ⟶ B⟦(1 : ℤ)⟧), (∀ m : ℕ, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, 0, w} X.smallStructureSheaf (P m).obj) ∧ (∀ m : ℕ, t m ≫ a (m + 1) = a m) ∧ Triangle.mk (𝟙 B - (@id (B ⟶ B) (hc.desc (Cofan.mk B (fun m : ℕ ↦ t m ≫ ι (m + 1)))))) (hc.desc (Cofan.mk K.obj a)) q ∈ distTriang X.DerivedModules",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85c6a22b1",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read the item node, all 12 stmt_deps, Stacks 0CRV (2)=>(1), the delivered module and the live sources of DerivedQCoh, SmallModules/smallModuleEquivalence, IsAbsolutelyQuasiSeparated, IsPerfectOnRingedSiteOfUniverses and IsSequentialHomotopyColimit. Every hypothesis matches the node: qc via the point space, absolute qs, countable O_X(V) and countable H^i(K)(V) on all affine etale charts of the original site, transported by smallModuleEquivalence.inverse. No extra hypothesis. Conclusion: P m in DerivedQCoh and perfect (the {u,u,0,w} form equals {u,u,u,w}); t m ≫ a (m+1) = a m; a cofan with IsColimit in the ambient derived category; the triangle (1 - shift, desc a, q) is distinguished, i.e. the def-kun-truncations shape plus the legs. Node diff vs live: only the lean record and 4 landed stmt_deps that own used declarations. Statement verbatim. No defs; sorry only; docstrings give source, blueprint id and proof steps; both report sections present. Edge cases: empty X, K=0, negative degrees, zero-ring charts. No file changed, so no compile. Advisory: Point is owned by def-a1-algebraic-space-point-classes (not a stmt_dep) and is reached through def-a1-space-point-topology; established pattern."
+ }
+}

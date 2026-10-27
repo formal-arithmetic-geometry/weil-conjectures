@@ -1,0 +1,113 @@
+{
+ "id": "lem-sp-tower-ordinary-unit-evaluation",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-ordinary-localization",
+   "place": "Second proof step: identify the specified closed unit by ordinary_unit_evaluation and the normalization fields.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "title": "Evaluation of the normalized ordinary tower unit",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, Base b, a morphism f:X -> Y of schemes and Geometry g for f, as in def-sp-tower-shriek-data. For every coefficient index n and strict system M on Y, evaluating the unit of g.ordinaryAdjunction and composing with g.ordinaryPushEvaluation at g.pull(M), then with constant-ring pushforward of g.ordinaryPullEvaluation at M, equals the unit of the canonical constant-ring adjunction at M_n. This is an equation in the ordinary category of modules over B_n(Y), for arbitrary f; it asserts no localization, exactness or preservation of colimits.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2), ordinary counit-unit exact sequence before passage to complexes"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data"
+ ],
+ "proof": [
+  {
+   "text": "In the proved private transport_unit_evaluation helper, abstract the target coefficient family, transitions, system pull/push functors, ordinary adjunction, dependent package of the level pull/push functors and adjunction, and ordinary evaluation comparisons. Eliminate the coefficient equality, then the transition HEq, then the system functor and adjunction HEqs. Eliminate the equality of dependent level packages, and finally the two comparison HEqs. The generic unit equation is now definitionally the required fixed-coordinate equation.",
+   "uses": [
+    "def-sp-tower-shriek-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply transport_unit_evaluation with the actual generic data and the normalization fields of g. Its equation input is g.generic.ordinary_unit_evaluation n M, a field of the existing generic Geometry interface. No existence theorem or derived comparison is used. Equality elimination works uniformly at n=0 and for empty schemes and zero systems.",
+   "uses": [
+    "def-coef-semilinear-geometry-derived"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-shriek-data",
+  "def-coef-semilinear-geometry-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "Operations proof (2), transpose normalization; direct dependent equality elimination of the existing ordinary unit equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "heterogeneous equality of adjunctions compatibility of evaluated unit under coefficient identifications",
+   "results": "Generic adjunction uniqueness and unit formulas; no theorem about the fixed coefficient systems or their Geometry normalization fields.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HEq",
+   "results": "Core heterogeneous-equality elimination and congruence tools; no normalized unit evaluation theorem.",
+   "date": "2026-10-26",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary_unit_evaluation|levelAdjunction_eq",
+   "results": "No Mathlib match. Local search finds the generic ordinary_unit_evaluation field in SemilinearGeometryDerived and normalization fields in SmoothPurityTowerShriekData, but no theorem transporting that equation to the fixed constant-ring coordinates.",
+   "date": "2026-10-26",
+   "verdict": "no fixed-coordinate match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerOrdinaryLocalization",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerOrdinaryUnitEvaluation",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerOrdinaryUnitEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.geometry_unit_evaluation",
+  "statement": "theorem geometry_unit_evaluation (b : Base l E)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) (n : ℕ) (M : S l E Y) :\n    (ev l E Y n).map (g.ordinaryAdjunction.unit.app M) ≫\n      (g.ordinaryPushEvaluation n).hom.app (g.pull.obj M) ≫\n      (proEtaleConstantRingPushforward (R l E n) f).map\n        ((g.ordinaryPullEvaluation n).hom.app M) =\n      (proEtaleConstantRingAdjunction (R l E n) f).unit.app ((ev l E Y n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T023134-L-523346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261026T203417-L-3526465",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,176 @@
+{
+ "id": "lem-zl-clopen-sheet-disjoint",
+ "kind": "statement",
+ "title": "Distinct constant-field sheets have disjoint ranges",
+ "statement": "Let \\(k_0\\subset k_1\\) be finite fields, \\(r\\in\\mathbf N\\) satisfy \\(\\#k_1=(\\#k_0)^r\\), and let \\(X/k_0\\) and \\(C/k_1\\) be schemes. Write \\(\\bar X=X\\times_{k_0}\\bar k_0\\), \\(\\bar C=C\\times_{k_1}\\bar k_1\\), with scheme projections \\(p_X,p_C\\) and closure projections \\(b_X,b_C\\). Let \\(\\tau:\\bar k_1\\simeq_{k_0}\\bar k_0\\) be the chosen algebraic-closure isomorphism `algebraicClosureAlgEquiv k₀ k₁`, \\(c:C\\to X\\) a monomorphism, and \\(v:\\bar C\\to\\bar X\\) a map satisfying \\(p_X\\circ v=c\\circ p_C\\) and \\(b_X\\circ v=\\operatorname{Spec}(\\tau^{-1})\\circ b_C\\). For each \\(n\\in\\mathbf N\\) with \\(r\\nmid n\\), the ranges of \\(v\\) and \\(\\operatorname{Fr}_X^n\\circ v\\) are disjoint, where \\(\\operatorname{Fr}_X\\) is the automorphism on \\(\\bar X\\) induced by the inverse of \\(x\\mapsto x^{\\#k_0}\\) on \\(\\bar k_0\\). No open immersion or finite type assumption is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The cardinality equation identifies r with finrank k₀ k₁. The order theorem for finite-field Frobenius implies that a power fixing the embedded field k₁ has exponent divisible by r. Use Module.natCard_eq_pow_finrank and FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, converting geometric to arithmetic Frobenius by inversion and injectivity of the field embedding. This invokes [lem-sfb-finite-field-galois-frobenius].",
+   "uses": [
+    "lem-sfb-finite-field-galois-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Suppose the ranges meet and form their intersection pullback. The projection to X followed by c is fixed by Frobenius, so monicity of c identifies the two projections to C. The closure projection equation then gives equality of the two resulting morphisms to Spec k₁.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "The nonempty intersection maps flatly and surjectively to Spec of the algebraic closure, hence epimorphically. Cancel that map to see that the indicated Frobenius power fixes k₁. This contradicts the nondivisibility hypothesis. The existing APIs are Scheme.Pullback.range_fst_comp, Flat.epi_of_flat_of_surjective, and faithfulness of Spec.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-field-galois-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real.",
+  "note": "A5: explicit Lean proof of a proper part of the cyclic-return argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Frobenius permutes the embeddings of a finite field extension cyclically, with period equal to the extension degree",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FiniteField.instIsCyclicAlgEquivOfFinite",
+     "FiniteField.Extension.frob",
+     "FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate",
+     "FiniteField.Extension.frob_apply",
+     "FiniteField.frobeniusAlgEquivOfAlgebraic",
+     "FiniteField.frobeniusAlgHom_apply",
+     "FiniteField.frobeniusAlgEquivOfAlgebraic_apply",
+     "FiniteField.card_algEquiv_extension"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact native-sheaf statement. Use the existing finite-field order, pullback and adjunction APIs in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the image of all Frobenius translates of extension by zero to one sheet has the image of the original morphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Pullback.range_map",
+     "AlgebraicGeometry.Scheme.Pullback.range_fst",
+     "AlgebraicGeometry.Scheme.Pullback.range_fst_comp",
+     "AlgebraicGeometry.Scheme.Pullback.range_snd_comp",
+     "AlgebraicGeometry.Scheme.Pullback.range_snd",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.preimage_toBase_eq_range_ι",
+     "AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left",
+     "AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact native-sheaf statement. Use the existing finite-field order, pullback and adjunction APIs in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact native-sheaf statement. Use the existing finite-field order, pullback and adjunction APIs in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*[Uu]pperStar.*[Ll]owerShriek|orderOf_frobeniusAlgEquiv|mapOfNatIso",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/Finite/Basic.lean",
+     "Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact native-sheaf statement. Use the existing finite-field order, pullback and adjunction APIs in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ClopenReturnSaturationEpi",
+  "date": "2026-10-27",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Geometric-socle/Frobenius orbit calculation: Distinct constant-field sheets have disjoint ranges",
+   "via": [
+    "lem-zl-clopen-return-saturation-epi",
+    "lem-zl-clopen-return-subobject"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.ClopenSheetDisjoint",
+  "file": "lean/Sheaf/DeligneLaumon/ClopenSheetDisjoint.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.clopen_sheet_disjoint_pow",
+  "statement": "theorem clopen_sheet_disjoint_pow\n    {k₀ k₁ : Type u} [Field k₀] [Finite k₀] [Field k₁] [Finite k₁]\n    [Algebra k₀ k₁] {X C : Scheme.{u}}\n    [X.Over (Spec (.of k₀))] [C.Over (Spec (.of k₁))]\n    (c : C ⟶ X) [Mono c] (r : ℕ) (hr : Nat.card k₁ = Nat.card k₀ ^ r)\n    (v : (C ↘ Spec (.of k₁)).geometricFiber ⟶ (X ↘ Spec (.of k₀)).geometricFiber)\n    (hp : v ≫ (X ↘ Spec (.of k₀)).geometricFiberProj =\n      (C ↘ Spec (.of k₁)).geometricFiberProj ≫ c)\n    (hb : v ≫ (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure =\n      (C ↘ Spec (.of k₁)).geometricFiberToAlgebraicClosure ≫\n        Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₁).symm.toRingHom))\n    (n : ℕ) (hn : ¬ r ∣ n) :\n    Set.range v.base ∩\n      Set.range (v ≫ ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ n).hom).base = ∅",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T012801-L-2329987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T012801-L-2329987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

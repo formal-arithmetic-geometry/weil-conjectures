@@ -1,0 +1,207 @@
+{
+ "id": "lem-sfb-disjoint-symmetric-two-cocycle-integration",
+ "kind": "statement",
+ "title": "Integration of symmetric two-cocycles on disjoint subsets",
+ "statement": "Let $E$ be a finite set [def-sfb-finite-infinite-set] and $A$ a commutative group, written multiplicatively with identity $1$ (multiplication is associative and commutative, $1a=a$, and every $a$ has an inverse $a^{-1}$ with $a^{-1}a=1$). For each ordered pair of disjoint subsets $U,V\\subseteq E$ let $q(U,V)\\in A$ be given. Assume $q(U,V)=q(V,U)$, $q(\\varnothing,V)=1$, and, for all three pairwise disjoint subsets $U,V,W\\subseteq E$,\n$$q(U,V)q(U\\cup V,W)=q(V,W)q(U,V\\cup W).$$\nThen there exists a function $b:\\mathcal P(E)\\to A$, where $\\mathcal P(E)$ denotes the set of subsets of $E$, such that $b(B)=1$ whenever $|B|\\leq1$ and, for all disjoint $U,V\\subseteq E$,\n$$q(U,V)=\\frac{b(U\\cup V)}{b(U)b(V)}.$$\nDivision means multiplication by inverses. No divisibility or torsion condition on $A$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary algebra below the cubical-line coherence input: integrate the two-variable cocycle obtained by fixing a singleton in the third argument. Agent-written finite-set lemma; not claimed as a theorem in this blueprint."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the number of elements of the finite set $E$ [def-sfb-finite-infinite-set], with the induction assertion quantified over all cocycles satisfying the stated hypotheses. If $E=\\varnothing$, put $b(\\varnothing)=1$; the only pair is $(\\varnothing,\\varnothing)$ and its required equation is $1=1$. For nonempty $E$ choose $x\\in E$ and put $F=E\\setminus\\{x\\}$. Restriction of $q$ to disjoint subsets of $F$ retains symmetry, normalization and the three-block identity. Since $|F|<|E|$, induction gives $b_0:\\mathcal P(F)\\to A$ with $b_0(B)=1$ for $|B|\\leq1$ and $b_0(R\\cup S)=q(R,S)b_0(R)b_0(S)$ for disjoint $R,S\\subseteq F$.",
+   "uses": [
+    "def-sfb-finite-infinite-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary algebra below the cubical-line coherence input: integrate the two-variable cocycle obtained by fixing a singleton in the third argument. Agent-written finite-set lemma; not claimed as a theorem in this blueprint."
+   }
+  },
+  {
+   "text": "For every $B\\subseteq E$ define $b(B)=b_0(B)$ if $x\\notin B$, and $b(B)=b_0(B\\setminus\\{x\\})q(B\\setminus\\{x\\},\\{x\\})$ if $x\\in B$. Both arguments of $q$ in the second formula are disjoint subsets of $E$, so this defines a function on the entire power set. Its empty-set value and its singleton values away from $x$ are $1$ by the properties of $b_0$. At $\\{x\\}$ its value is $b_0(\\varnothing)q(\\varnothing,\\{x\\})=1$. Thus every required normalization holds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary algebra below the cubical-line coherence input: integrate the two-variable cocycle obtained by fixing a singleton in the third argument. Agent-written finite-set lemma; not claimed as a theorem in this blueprint."
+   }
+  },
+  {
+   "text": "Let $U,V\\subseteq E$ be disjoint. If $x\\notin U\\cup V$, their equation is the equation for $b_0$. If $x\\in V$, put $S=V\\setminus\\{x\\}$. Then $U,S,\\{x\\}$ are pairwise disjoint, $U,S\\subseteq F$, and direct substitution gives\n$$\\frac{b(U\\cup V)}{b(U)b(V)}\n=\\frac{b_0(U\\cup S)q(U\\cup S,\\{x\\})}{b_0(U)b_0(S)q(S,\\{x\\})}\n=\\frac{q(U,S)q(U\\cup S,\\{x\\})}{q(S,\\{x\\})}\n=q(U,S\\cup\\{x\\})=q(U,V).$$\nThe middle equality uses the induction equation; the next equality is exactly the assumed cocycle identity on $(U,S,\\{x\\})$, after multiplication by $q(S,\\{x\\})^{-1}$. These equations remain valid if $U$ or $S$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary algebra below the cubical-line coherence input: integrate the two-variable cocycle obtained by fixing a singleton in the third argument. Agent-written finite-set lemma; not claimed as a theorem in this blueprint."
+   }
+  },
+  {
+   "text": "If instead $x\\in U$, disjointness gives $x\\notin V$, so apply the preceding case to $(V,U)$. Symmetry gives $q(V,U)=q(U,V)$; commutativity in $A$ and $V\\cup U=U\\cup V$ identify its quotient with the required one. These cases exhaust disjoint pairs, since $x$ cannot lie in both. The constructed $b$ therefore completes the induction. Only multiplication and inversion in $A$ have been used, so no roots, divisibility, or torsion hypothesis is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary algebra below the cubical-line coherence input: integrate the two-variable cocycle obtained by fixing a singleton in the third argument. Agent-written finite-set lemma; not claimed as a theorem in this blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Agent-written finite-set induction supporting the paragraph (3) auxiliary route; this algebraic lemma is not asserted in the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric normalized two cocycle on disjoint subsets of a finite set is the coboundary of a function equal to one on empty sets and singletons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.IsMulCoboundary₂\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"{G : Type u_1} → {M : Type u_2} → [Mul G] → [CommGroup M] → [SMul G M] → (G × G → M) → Prop\", \"doc\": \"A function $ f : G \\\\times G \\\\to M $ is a 2-coboundary if there exists a function $ x : G \\\\to M $ such that for all $ g, h \\\\in G $, the equation $ g \\\\cdot x(h) / x(gh) \\\\cdot x(g) = f(g, h) $ holds, whe\"}\n  {\"name\": \"groupCohomology.IsCoboundary₂\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"{G : Type u_1} → {A : Type u_2} → [Mul G] → [AddCommGroup A] → [SMul G A] → (G × G → A) → Prop\", \"doc\": \"A function $ f: G \\\\times G \\\\to A $ is a 2-coboundary if there exists a function $ x: G \\\\to A $ such that for all $ g, h \\\\in G $, the equation $ g \\\\cdot x(h) - x(gh) + x(g) = f(g, h) $ holds, where $ \\\\\"}\n  {\"name\": \"groupCohomology.coboundariesOfIsCoboundary₂\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"{k G A : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      [inst_2 : AddCommGroup A] →\\n        [inst_3 : Module k A] →\\n          [inst_4 : DistribMulAction G A] →\\n            [inst_5 : SMulCommClass G k A] →\\n              {f : G × G → A} →\\n                groupCohomology.IsCoboundary₂\", \"doc\": \"For any commutative ring $ k $, group $ G $, and $ k $-module $ A $ equipped with a compatible $ G $-action, if a function $ f : G \\\\times G \\\\to A $ satisfies the 2-coboundary condition (i.e., there ex\"}\n  {\"name\": \"groupCohomology.isCoboundary₂_of_mem_coboundaries₂\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G A : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : AddCommGroup A] [inst_3 : Module k A]\\n  [inst_4 : DistribMulAction G A] [inst_5 : SMulCommClass G k A],\\n  ∀ f ∈ groupCohomology.coboundaries₂ (Rep.ofDistribMulAction k G A), groupCohomology.IsCoboundary₂ f\", \"doc\": \"If a function $ f: G \\\\times G \\\\to A $ belongs to the submodule of 2-coboundaries in group cohomology, then there exists a function $ x: G \\\\to A $ such that $ f $ is the 2-coboundary of $ x $, i.e., $ \"}\n  {\"name\": \"groupCohomology.coboundariesOfIsMulCoboundary₂\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"{G M : Type} →\\n  [inst : Group G] →\\n    [inst_1 : CommGroup M] →\\n      [inst_2 : MulDistribMulAction G M] →\\n        {f : G × G → M} →\\n          groupCohomology.IsMulCoboundary₂ f → ↥(groupCohomology.coboundaries₂ (Rep.ofMulDistribMulAction G M))\", \"doc\": \"For a group $ G $ and a commutative group $ M $ equipped with a multiplicative distributive $ G $-action, if a function $ f : G \\times G \\to M $ is a 2-coboundary (i.e., satisfies the multiplicative cob\"}\n  {\"name\": \"groupCohomology.isMulCoboundary₂_of_mem_coboundaries₂\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {G M : Type} [inst : Group G] [inst_1 : CommGroup M] [inst_2 : MulDistribMulAction G M],\\n  ∀ f ∈ groupCohomology.coboundaries₂ (Rep.ofMulDistribMulAction G M),\\n    groupCohomology.IsMulCoboundary₂ (⇑Additive.toMul ∘ f)\", \"doc\": \"If a function $ f : G \\\\times G \\\\to M $ belongs to the submodule of 2-coboundaries in the group cohomology of $ G $ with coefficients in the $ \\\\mathbb{Z} $-module $ M $, then $ f $ satisfies the 2-cobo\"}\n  {\"name\": \"groupCohomology.coboundaries₂_le_cocycles₂\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G),\\n  groupCohomology.coboundaries₂ A ≤ groupCohomology.cocycles₂ A\", \"doc\": \"The submodule of 2-coboundaries is contained within the submodule of 2-cocycles for a group $ G $ acting on a module $ A $.\"}\n  {\"name\": \"groupCohomology.coboundariesOfIsCoboundary₁\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"{k G A : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      [inst_2 : AddCommGroup A] →\\n        [inst_3 : Module k A] →\\n          [inst_4 : DistribMulAction G A] →\\n            [inst_5 : SMulCommClass G k A] →\\n              {f : G → A} →\\n                groupCohomology.IsCoboundary₁ f →\", \"doc\": \"Let $G$ be a group and $A$ a representation of $G$ over a commutative ring $k$. A function $f: G \\\\to A$ is defined to be a 1-coboundary if there exists an element $a \\\\in A$ such that $f(g) = g \\\\cdot a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsMulCoboundary₂ defines the existence of a potential; it does not prove that a symmetric disjoint-subset cocycle has one. The other coboundary hits assume that membership already holds. Read LowDegree.lean lines 625-626 and 677-678."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integrate a symmetric multiplicative two cocycle on the partial monoid of disjoint finite subsets into a function on its power set",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"groupCohomology.cocycles₂.coe_mk\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"(f : G × G → A) (hf) : ((⟨f, hf⟩ : cocycles₂ A) : G × G → A) = f\", \"doc\": \"For any group $ G $, $ G $-module $ A $, and 2-cocycle $ f : G \\\\times G \\\\to A $ with proof $ hf $, the canonical embedding of the cocycle $ (f, hf) $ into the space of functions $ G \\\\times G \\\\to A $ y\"}\n  {\"name\": \"groupCohomology.cocyclesOfIsMulCocycle₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{f : G × G → M} (hf : IsMulCocycle₂ f) : cocycles₂ (Rep.ofMulDistribMulAction G M)\", \"doc\": \"For any group $ G $ and commutative group $ M $ equipped with a multiplicative distributive action of $ G $, any function $ f : G \\\\times G \\\\to M $ satisfying the 2-cocycle condition $ f(gh, j) \\\\cdot f\"}\n  {\"name\": \"groupCohomology.cocyclesOfIsCocycle₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{f : G × G → A} (hf : IsCocycle₂ f) : cocycles₂ (Rep.ofDistribMulAction k G A)\", \"doc\": \"For any commutative ring $k$, group $G$, and $k$-module $A$ with a $G$-action compatible with scalar multiplication, a function $f : G \\\\times G \\\\to A$ satisfying the 2-cocycle condition $f(gh, j) + f(\"}\n  {\"name\": \"finprod_mem_powerset_insert\", \"module\": \"Mathlib.Algebra.BigOperators.Finprod\", \"type\": \"{f : Set α → M} {s : Set α} {a : α} (hs : s.Finite) (has : a ∉ s) :\\n  ∏ᶠ t ∈ 𝒫 insert a s, f t = (∏ᶠ t ∈ 𝒫 s, f t) * ∏ᶠ t ∈ 𝒫 s, f (insert a t)\", \"doc\": \"Let $ M $ be a commutative monoid, $ \\\\alpha $ a type, $ f : \\\\mathcal{P}(\\\\alpha) \\\\to M $ a function, $ s \\\\subseteq \\\\alpha $ a finite set, and $ a \\\\in \\\\alpha $ an element not in $ s $. Then the finite p\"}\n  {\"name\": \"groupCohomology.instFunLikeSubtypeForallProdCarrierVModuleCatMemSubmoduleCocycles₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": FunLike (cocycles₂ A) (G × G) A\", \"doc\": \"The 2-cocycles in group cohomology are equipped with a function-like structure, allowing them to be viewed as functions from $ G \\times G $ to $ A $, with equality of cocycles determined by equality of\"}\n  {\"name\": \"groupCohomology.isMulCoboundary₂_of_mem_coboundaries₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"(f : G × G → M) (hf : f ∈ coboundaries₂ (Rep.ofMulDistribMulAction G M)) :\\n  IsMulCoboundary₂ (M := M) (Additive.toMul ∘ f)\", \"doc\": \"If a function $ f : G \\\\times G \\\\to M $ belongs to the submodule of 2-coboundaries in the group cohomology of $ G $ with coefficients in the $ \\\\mathbb{Z} $-module $ M $, then $ f $ satisfies the 2-cobo\"}\n  {\"name\": \"groupCohomology.cocyclesOfIsMulCocycle₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{f : G → M} (hf : IsMulCocycle₁ f) : cocycles₁ (Rep.ofMulDistribMulAction G M)\", \"doc\": \"Given a function $ f : G → M $ satisfying the 1-cocycle condition $ f(gh) = g \\\\cdot f(h) * f(g) $ for all $ g,h ∈ G $, this constructs the corresponding 1-cocycle in the group cohomology of $ G $ with\"}\n  {\"name\": \"Finset.sum_powerset_insert\", \"module\": \"Mathlib.Algebra.BigOperators.Group.Finset.Powerset\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} {s : Finset α} {a : α} [inst : AddCommMonoid β] [inst_1 : DecidableEq α],\\n  a ∉ s →\\n    ∀ (f : Finset α → β), ∑ t ∈ (insert a s).powerset, f t = ∑ t ∈ s.powerset, f t + ∑ t ∈ s.powerset, f (insert a t)\", \"doc\": \"For any finite set $ s $ of type $ \\\\alpha $, element $ a \\\\notin s $, and function $ f : \\\\mathrm{Finset}(\\\\alpha) \\\\to \\\\beta $ where $ \\\\beta $ is an additive commutative monoid, the sum of $ f(t) $ over \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cocyclesOfIsMulCocycle₂ packages an already supplied group cocycle, and isMulCoboundary₂_of_mem_coboundaries₂ assumes a coboundary. The finite-product hits only rearrange products; read Powerset.lean lines 32-37 and 55-58."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Disjoint\", \"cocycle\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits for the two name fragments together."
+  },
+  {
+   "tool": "grep",
+   "query": "(cocycle.*[Dd]isjoint|[Dd]isjoint.*cocycle|symmetric.*[Cc]ocycle|[Cc]ocycle.*symmetric)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits in the whole Mathlib source for disjoint cocycles or symmetric cocycles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative associative twisted multiplication indexed by squarefree subsets has a unique normalized multiplicative potential",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"UniqueProds\", \"module\": \"Mathlib/Algebra/Group/UniqueProds/Basic\", \"type\": \"(G : Type u_1) → [Mul G] → Prop\", \"doc\": \"The group $ G $ has the unique product property, meaning that for any two non-empty finite subsets $ A $ and $ B $ of $ G $, the product set $ AB $ contains at least one element that can be uniquely e\"}\n  {\"name\": \"UniqueFactorizationMonoid.normalizationMonoid\", \"module\": \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors\", \"type\": \"{α : Type u_1} → [inst : CommMonoidWithZero α] → [UniqueFactorizationMonoid α] → NormalizationMonoid α\", \"doc\": \"The normalization monoid structure on a unique factorization monoid $\\\\alpha$, defined by taking the product of normalized prime factors for each element. For nonzero $a \\\\in \\\\alpha$, the normalization \"}\n  {\"name\": \"uniqueNormalizationMonoidOfUniqueUnits\", \"module\": \"Mathlib/Algebra/GCDMonoid/Basic\", \"type\": \"{α : Type u_1} → [inst : CommMonoidWithZero α] → [Subsingleton αˣ] → Unique (NormalizationMonoid α)\", \"doc\": \"If $\\\\alpha$ is a commutative monoid with zero whose group of units $\\\\alpha^\\\\times$ is trivial (contains only the identity element), then the normalization monoid structure on $\\\\alpha$ is uniquely dete\"}\n  {\"name\": \"UniqueFactorizationMonoid.prod_normalizedFactors\", \"module\": \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors\", \"type\": \"∀ {α : Type u_1} [inst : CommMonoidWithZero α] [inst_1 : NormalizationMonoid α] [inst_2 : UniqueFactorizationMonoid α]\\n  {a : α}, a ≠ 0 → Associated (UniqueFactorizationMonoid.normalizedFactors a).prod a\", \"doc\": \"In a unique factorization monoid, for any non-zero element $ a $, the product of the normalized prime factors of $ a $ is associated with $ a $, meaning they differ by a unit in the monoid.\"}\n  {\"name\": \"Associates.FactorSet.unique\", \"module\": \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet\", \"type\": \"∀ {α : Type u_1} [inst : CommMonoidWithZero α] [UniqueFactorizationMonoid α] [Nontrivial α]\\n  {p q : Associates.FactorSet α}, p.prod = q.prod → p = q\", \"doc\": \"In a nontrivial unique factorization monoid $\\\\alpha$, if two factor sets $p$ and $q$ (representing multisets of irreducible elements in the associates monoid extended with a top element) have equal pr\"}\n  {\"name\": \"Nat.card_finMulAntidiag_of_squarefree\", \"module\": \"Mathlib/Algebra/Order/Antidiag/Nat\", \"type\": \"∀ {d n : ℕ}, Squarefree n → (d.finMulAntidiag n).card = d ^ ArithmeticFunction.cardDistinctFactors n\", \"doc\": \"If $ n $ is a square-free natural number, then the number of functions $ f : \\\\mathrm{Fin}(d) \\\\to \\\\mathbb{N} $ satisfying $ \\\\prod_{i \\\\in \\\\mathrm{Fin}(d)} f(i) = n $ is equal to $ d^{\\\\omega(n)} $, where\"}\n  {\"name\": \"subsingleton_normalizedGCDMonoid_of_unique_units\", \"module\": \"Mathlib/Algebra/GCDMonoid/Basic\", \"type\": \"∀ {α : Type u_1} [inst : CommMonoidWithZero α] [Subsingleton αˣ], Subsingleton (NormalizedGCDMonoid α)\", \"doc\": \"The group of invertible elements (units) in a commutative monoid with zero is equipped with a normalized GCD monoid structure. In this structure, the greatest common divisor of any two units is the id\"}\n  {\"name\": \"NormalizationMonoid\", \"module\": \"Mathlib/Algebra/GCDMonoid/Basic\", \"type\": \"(α : Type u_2) → [CommMonoidWithZero α] → Type u_2\", \"doc\": \"A structure on a commutative monoid with zero that includes normalization properties, ensuring each element has a normalized form under specified conditions.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: UniqueProds concerns uniquely represented products and NormalizationMonoid concerns normalization up to units, not a potential for a disjoint-subset cocycle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric normalized two cocycle on disjoint subsets of a finite set has a multiplicative potential normalized on empty sets and singletons",
+   "results": "OK 8 hits: groupCohomology.IsMulCoboundary₂, groupCohomology.IsMulCocycle₂, groupCohomology.IsCocycle₂, groupCohomology.IsMulCocycle₁, groupCohomology.IsMulCoboundary₁, groupCohomology.cocycles₂_map_one_fst, groupCohomology.cocycles₂_ρ_map_inv_sub_map_inv, groupCohomology.map_one_fst_of_isMulCocycle₂",
+   "date": "2026-10-24",
+   "verdict": "no match: IsMulCocycle₂ and IsMulCoboundary₂ are predicates (LowDegree.lean lines 625-626, 677-678); the other group-cohomology hits assume a supplied coboundary or discuss its class, rather than proving existence for disjoint subsets."
+  },
+  {
+   "tool": "grep",
+   "query": "(cocycle.*[Dd]isjoint|[Dd]isjoint.*cocycle|symmetric.*[Cc]ocycle|[Cc]ocycle.*symmetric)",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits for disjoint or symmetric cocycles."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integrating an associative symmetric multiplicative two cocycle on disjoint finite subsets as a coboundary",
+   "results": "OK 8 hits: groupCohomology.IsMulCoboundary₂, groupCohomology.IsCoboundary₂, groupCohomology.coboundaries₂, groupCohomology.coboundariesOfIsMulCoboundary₂, groupCohomology.instFunLikeSubtypeForallProdCarrierVModuleCatMemSubmoduleCoboundaries₂, groupCohomology.coboundariesOfIsCoboundary₂, groupCohomology.H2π_eq_zero_iff, groupCohomology.mem_cocycles₂_of_comp_eq_d₁₂",
+   "date": "2026-10-24",
+   "verdict": "no match: IsMulCocycle₂ and IsMulCoboundary₂ are predicates (LowDegree.lean lines 625-626, 677-678); the other group-cohomology hits assume a supplied coboundary or discuss its class, rather than proving existence for disjoint subsets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Disjoint\", \"cocycle\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits for disjoint or symmetric cocycles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An associative commutative multiplication on squarefree finite subsets admits a normalized potential by finite set induction",
+   "results": "OK 8 hits: Nat.grahamConjecture_of_squarefree, Nat.card_finMulAntidiag_of_squarefree, BoundingSieve.prodPrimes_squarefree, Nat.sum_divisors_filter_squarefree, Finset.isSquare_prod, Finset.squarefree_prod_of_pairwise_isCoprime, Nat.prod_primeFactors_sdiff_of_squarefree, ArithmeticFunction.IsMultiplicative.prod_primeFactors",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern squarefree integers, prime factors and products, not integration of a disjoint-subset cocycle."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-disjoint-cubic-cocycle-integration",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Multiplication pulls a symmetric cubical line back to its square-exponent power; coherence input: the cube section itself preserves the induced cube structures on the product group, before evaluating it on diagonal homomorphisms. Algebraic integration input: symmetry and the four-block cocycle identify every disjoint-block cube section with a third alternating difference of local frames. Degree-lowering auxiliary: integrate q(U,V)=t(U,V,{x}) in the induction removing one element.",
+   "via": [
+    "lem-sfb-disjoint-cubic-cocycle-integration",
+    "lem-sfb-cube-section-cubical-compatibility",
+    "lem-sfb-cubical-symmetric-multiplication-square",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-disjoint-symmetric-two-cocycle-integration",
+  "worker": "stage1",
+  "summary": "Q35 supplies a complete four-step finite-set induction, retaining the statement and inherited source/search records. Removing one element permits an explicit extension of the potential; the three-block identity verifies the mixed pair and symmetry verifies its transpose. All proof steps are elementary and no new nodes are needed. Project declarations and the whole DAG/blueprint were searched without an exact match.",
+  "blueprint": "Auxiliary algebra under det-thm-sf-ctf-stability-direct-images paragraph (3), through the inherited created-item chain: integrates q(U,V)=t(U,V,{x}) for the cubic integration lemma. The latest paragraph (3) itself concerns direct-image assembly and does not assert this algebraic lemma; the proof is explicitly agent-written."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-4d0f1b321",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-4d0f1b321 (reviewer sub-agent of L); spot-checked: Ordinary first split with no repair note; the item is still unsplit on live and side-live. The statement, stmt_deps, source and blueprint fields are unchanged. Of the item's fields, only proof, proof_deps, proof_origin, split_report and the appended searches changed. There are no new nodes. I read the main-20261024 sk-thm-sf-ctf-stability-direct-images.proof.md: paragraph (3) is the proper direct-image assembly, and no cocycle appears anywhere in the unit, so proof_origin=agent is correct. No SGA, no off-unit statements, no tool_uses. The conclusion is exactly what the parent lem-sfb-disjoint-cubic-cocycle-integration uses in its step 2: q(U,V)=t(U,V,{x}) on F, and b=1 on |B|<=1. I checked all 4 steps. Step 1: induction on |E| with the claim quantified over all q; base E=empty; the restriction to F keeps all hypotheses. Step 2: b defined from b0 and q(B\\{x},{x}); b({x})=1 by normalization. Step 3: with S=V\\{x}, the quotient equals q(U,S)q(U∪S,{x})/q(S,{x}), which is q(U,V) by the cocycle identity on the pairwise disjoint triple (U,S,{x}); empty blocks are fine. Step 4: x in U is reduced to step 3 by symmetry and commutativity. The steps are honestly elementary and proof_deps equals the union of uses. Independent test: I enumerated every normalized symmetric cocycle for |E|=0..3 over Z/2 and Z/3, with counts (1,1,2,16) and (1,1,3,81), and the construction passes on all of them. I scanned the DAG for duplicates: there are none, and the parent is a different degree-3 statement. The Mathlib searches cover all three kinds (LeanSearch, LeanFinder/Loogle, grep); the group-cohomology hits are only predicates. Advisory: blueprint.from.node is null. This is inherited from creation and shared by the whole created chain, whose last via node points to det-thm-sf-ctf-stability-direct-images; a maintainer should repair it on the whole chain."
+ },
+ "lean": {
+  "module": "Sheaf.Combinatorics.DisjointSymmetricTwoCocycleIntegration",
+  "declaration": "Set.exists_disjoint_symmetric_two_cocycle_integral",
+  "file": "lean/Sheaf/Combinatorics/DisjointSymmetricTwoCocycleIntegration.lean",
+  "statement": "theorem exists_disjoint_symmetric_two_cocycle_integral {ι : Type u} (E : Set ι) (hE : E.Finite) {A : Type v} [CommGroup A] (q : (U V : Set E) → Disjoint U V → A) (hsym : ∀ (U V : Set E) (hUV : Disjoint U V), q U V hUV = q V U hUV.symm) (hempty : ∀ V : Set E, q ∅ V disjoint_bot_left = 1) (hcocycle : ∀ (U V W : Set E) (hUV : Disjoint U V) (hUW : Disjoint U W) (hVW : Disjoint V W), q U V hUV * q (U ∪ V) W (hUW.sup_left hVW) = q V W hVW * q U (V ∪ W) (hUV.sup_right hUW)) : ∃ b : Set E → A, (∀ B : Set E, B.ncard ≤ 1 → b B = 1) ∧ ∀ (U V : Set E) (hUV : Disjoint U V), q U V hUV = b (U ∪ V) / (b U * b V)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcb2203b1",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Only the lean field changed; the node is split with no lean record on live/side-live, so not a rebind. One theorem, Set.exists_disjoint_symmetric_two_cocycle_integral, proved by sorry, no definitions. lean.statement is verbatim in the file. Every clause matches the node: E : Set ι with E.Finite (def-sfb-finite-infinite-set), CommGroup A, q on disjoint pairs, hsym, hempty, hcocycle with sup_left/sup_right unions in the node's order; ∃ b with b=1 for ncard≤1 and q=b(U∪V)/(b U*b V). No extra assumptions; universes u,v independent and bound. Edge cases (E=∅, empty blocks, trivial/torsion A) covered. Matches the representation of the parent lem-sfb-disjoint-cubic-cocycle-integration. Searches show no existing declaration. Docstrings give the source place, blueprint id and 4 proof steps; report has Worker report and Second reading by Q124. Not recompiled, per instruction. No findings."
+ }
+}

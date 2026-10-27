@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "By [thm-weil-pbc-site-comparison], the specified unit $\\eta_{T,J}:J\\to U_TS_TJ$ is a natural isomorphism for every $J\\in D^+(T_{\\mathrm{et}},A)$. Apply the functor $S_{\\mathrm{source}(h)}R_h$ to it: its inverse is the image of $\\eta_{T,J}^{-1}$, giving exactly $\\rho_{h,J}^{-1}$. The source is bounded below because $R_h$ preserves $D^+$ by hypothesis and $S$ preserves $D^+$ by [def-sf-comparison-derived-pullback]; hence its isomorphic target is bounded below too. Naturality follows by applying this functor to the naturality square of $\\eta$. In particular $R_gH$, $R_fR_gH$, $R_{gf}H$ and their $S$-images have the bounds needed below.",
+   "text": "By [thm-weil-pbc-site-comparison] the actual unit $\\eta_{T,J}$ is naturally invertible on $D^+$. Applying $S_sR_h$ gives $\\rho_h$ with inverse $S_sR_h(\\eta^{-1})$. The source is bounded below by the assumed $R_h$ bound and [def-sf-comparison-derived-pullback]; its isomorphic target is too. Thus $R_gH$, $R_fR_gH$, $R_{gf}H$ and their comparison images have the required bounds.",
    "uses": [
     "thm-weil-pbc-site-comparison",
     "def-sf-comparison-derived-pullback"
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "Apply [lem-pur-bounded-site-adjunction-transpose] to each $h=f,g,gf$ at its specified compactification. Its $C,F_e,F_p,f^\\times$ are respectively our $S,F_h,P_h,R_h$, and its displayed Hom bijection is exactly the $\\Phi$ fixed in the statement, not a freely chosen adjunction. Its counit is therefore $\\mu$. The hypotheses hold: the schemes are finite type over $k$, each map is separated finite type, each ambient dimension admits an integer upper bound, and $R_hJ\\in D^+$ is assumed. It gives natural isomorphisms $B_{h,G}$ and the precise equality\n$$\\mu_{h,SJ}\\circ P_h(\\rho_{h,J})\\circ B_{h,R_hJ}=S(\\epsilon_{h,J}).$$\nBoth this equality and the naturality of $B$ will be used only on bounded-below etale inputs.",
+   "text": "Apply [lem-pur-bounded-site-adjunction-transpose] at each chosen compactification. Its $C,F_e,F_p,f^\\times$ are $S,F_h,P_h,R_h$ and its specified Hom map is exactly $\\Phi$, so its counit is $\\mu$. Finite type, separatedness of the maps, the finite ambient dimension bound, and $R_hJ\\in D^+$ supply its hypotheses. It gives natural invertible $B_h$ and $\\mu_{h,SJ}\\circ P_h(\\rho_{h,J})\\circ B_{h,R_hJ}=S(\\epsilon_{h,J})$.",
    "uses": [
     "lem-pur-bounded-site-adjunction-transpose"
    ],
@@ -52,61 +52,29 @@
    }
   },
   {
-   "text": "Each of the four factors in the displayed definition of $\\Xi_H$ is an isomorphism: the $\\rho$ factors by step 1, $S_X(\\theta_H^{-1})$ by the hypothesis on $\\theta$, and the remaining factor because functors preserve inverse pairs. Their sources and targets concatenate as written in the statement. They are natural in $H$ (inverse naturality follows by multiplying a naturality square by the inverses), so their composite is a natural isomorphism. For later use put $K=R_{gf}H$, $L=R_fR_gH$, $t=\\theta_H$, $r=\\rho_{g,H}$, $b=\\rho_{f,R_gH}$ and $v=\\rho_{gf,H}$. Reversing the four factors and cancelling $v^{-1}v$ gives\n$$\\Xi_H^{-1}\\circ v=Q_f(r)\\circ b\\circ S_X(t).$$",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-weil-boundary-conjugated-comparison-normal-form] with $\\mathcal C_T=D^+(T_{\\mathrm{et}},A)$, $\\mathcal D_T=D(T_{\\mathrm{proet}},A)$, $c=gf$ and $m_H=\\mu_{gf,S_BH}$. Its assumptions are step 2 and the given $\\alpha,\\theta$. This constructs the stated natural isomorphisms $\\Xi,\\alpha^p$. Put $K=R_{gf}H$, $L=R_fR_gH$, $t=\\theta_H$, $r=\\rho_{g,H}$ and $b=\\rho_{f,R_gH}$. The lemma gives $\\Xi_H^{-1}\\rho_{gf,H}=Q_f(r)bS_X(t)$, and reduces the left pasted counit to $S_B(\\epsilon_{gf,H}\\alpha_K)B_{g,F_fK}^{-1}P_g(B_{f,K}^{-1})$.",
+   "uses": [
+    "lem-weil-boundary-conjugated-comparison-normal-form"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
     "place": "Corollary 5.1.6 (p. 35); agent-written formal composition-unit and relative-counit calculation, with the specified normalization of lem-pur-bounded-site-adjunction-transpose."
    }
   },
   {
-   "text": "The same inverse-pair and naturality argument applied to $B_{gf,G}$, $S_B(\\alpha_G)$, $B_{g,F_fG}^{-1}$ and $P_g(B_{f,G})^{-1}$ proves that the stated $\\alpha^p_G$ is a natural isomorphism. Here $F_fG\\in D^+$ by hypothesis. Applying the step-2 counit equality at $gf$ and substituting the four-factor definition of $\\alpha^p$ shows that the left side of the desired identity is\n$$S_B(\\epsilon_{gf,H}\\circ\\alpha_K)\\circ B_{g,F_fK}^{-1}\\circ P_g(B_{f,K}^{-1}).$$\nThis uses only associativity, functoriality and $B_{gf,K}^{-1}B_{gf,K}=1$.",
-   "uses": [],
-   "elementary": true,
+   "text": "Use [lem-weil-boundary-iterated-counit-normal-form] with these $K,L,t,r,b$, $e_f=\\epsilon_{f,R_gH}$, $e_g=\\epsilon_{g,H}$, $m_g=\\mu_{g,S_BH}$, $m_0=\\mu_{f,S_YR_gH}$ and $m_1=\\mu_{f,Q_gS_BH}$. Its first two squares are step 2; its third is naturality of $\\mu_f$ at $r$, between the bounded-below objects of step 1. It rewrites the right pasted counit as $S_B(\\epsilon_{g,H}F_g(\\epsilon_{f,R_gH})F_gF_f(t))B_{g,F_fK}^{-1}P_g(B_{f,K}^{-1})$. The assumed mate normalization identifies this with step 3. Only relative counits on bounded-below targets were used.",
+   "uses": [
+    "lem-weil-boundary-iterated-counit-normal-form"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
     "place": "Corollary 5.1.6 (p. 35); agent-written formal composition-unit and relative-counit calculation, with the specified normalization of lem-pur-bounded-site-adjunction-transpose."
    }
   },
   {
-   "text": "Expand the right side using step 3. Naturality of the given relative counit $\\mu_f:P_fQ_f\\to\\mathrm{id}$ at $r:S_YR_gH\\to Q_gS_BH$ says\n$$\\mu_{f,Q_gS_BH}\\circ P_fQ_f(r)=r\\circ\\mu_{f,S_YR_gH}.$$\nThus that side becomes\n$$\\mu_{g,S_BH}\\circ P_g(r)\\circ P_g(\\mu_{f,S_YR_gH}\\circ P_f(b))\\circ P_gP_f(S_X(t)).$$\nThe two targets of the naturality square are bounded below by step 1, so the assumed naturality of the relative counit applies.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 5.1.6 (p. 35); agent-written formal composition-unit and relative-counit calculation, with the specified normalization of lem-pur-bounded-site-adjunction-transpose."
-   }
-  },
-  {
-   "text": "In the expression of step 5, use step 2 for $g$ at $H$ and for $f$ at $R_gH$, cancelling the respective invertible $B$ factors on the right. The result is\n$$S_B(\\epsilon_{g,H})\\circ B_{g,R_gH}^{-1}\\circ P_g(S_Y(\\epsilon_{f,R_gH}))\\circ P_g(B_{f,L}^{-1})\\circ P_gP_f(S_X(t)).$$\nAll arguments of $B$ and of the etale counits here are bounded below by the assumptions on $F_h,R_h$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 5.1.6 (p. 35); agent-written formal composition-unit and relative-counit calculation, with the specified normalization of lem-pur-bounded-site-adjunction-transpose."
-   }
-  },
-  {
-   "text": "Use the following three inverse-naturality equations, in the indicated order, in step 6:\n$$B_{g,R_gH}^{-1}\\circ P_g(S_Y\\epsilon_{f,R_gH})=S_B(F_g\\epsilon_{f,R_gH})\\circ B_{g,F_fL}^{-1},$$\n$$B_{f,L}^{-1}\\circ P_f(S_Xt)=S_Y(F_ft)\\circ B_{f,K}^{-1},$$\n$$B_{g,F_fL}^{-1}\\circ P_g(S_YF_ft)=S_B(F_gF_ft)\\circ B_{g,F_fK}^{-1}.$$\nEach is the naturality square for $B_h:SF_h\\to P_hS$ at, respectively, $\\epsilon_{f,R_gH}$, $t$, and $F_ft$, multiplied by the two inverse $B$ components. Functoriality and associativity now give for the right side\n$$S_B(\\epsilon_{g,H}\\circ F_g(\\epsilon_{f,R_gH})\\circ F_gF_f(t))\\circ B_{g,F_fK}^{-1}\\circ P_g(B_{f,K}^{-1}).$$",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 5.1.6 (p. 35); agent-written formal composition-unit and relative-counit calculation, with the specified normalization of lem-pur-bounded-site-adjunction-transpose."
-   }
-  },
-  {
-   "text": "The assumed etale mate normalization says precisely\n$$\\epsilon_{g,H}\\circ F_g(\\epsilon_{f,R_gH})\\circ F_gF_f(t)=\\epsilon_{gf,H}\\circ\\alpha_K.$$\nSubstitution into step 7 gives the expression in step 4. This proves the displayed pasted-counit identity as an equality of maps from $P_gP_fS_XK$ to $S_BH$. Every occurrence of $\\mu$ above has a bounded-below target and the $Q$-object is of etale origin; no adjunction on arbitrary pro-etale objects was used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 5.1.6 (p. 35); agent-written formal composition-unit and relative-counit calculation, with the specified normalization of lem-pur-bounded-site-adjunction-transpose."
-   }
-  },
-  {
-   "text": "The degree-zero constant sheaf $A_e$ is bounded below. By [lem-pe-constant-left-module-inverse-image], inverse image for $\\nu_B$ identifies $S_BA_e$ with $A_p$, preserving every scalar, and the identification is also valid termwise on derived categories. Specialize the four factors of $\\Xi_H$ to $H=A_e$. Then $\\rho_{g,A_e}=\\lambda_g$ and $\\rho_{gf,A_e}=\\lambda_{gf}$ by definition; the middle two factors are unchanged. This is exactly the four-arrow composite in the last clause. The identity already proved specializes with it.",
+   "text": "By [lem-pe-constant-left-module-inverse-image], $S_BA_e\\cong A_p$ canonically preserves scalars, also termwise in the derived categories. Since $A_e$ is in degree zero, specialize the constructed four factors and the identity at $H=A_e$. The first and last comparison factors become $\\lambda_g^{-1}$ and $\\lambda_{gf}$ by definition. The other two factors are unchanged, giving precisely the stated four-arrow constant-coefficient composite.",
    "uses": [
     "lem-pe-constant-left-module-inverse-image"
    ],
@@ -121,6 +89,8 @@
   "thm-weil-pbc-site-comparison",
   "def-sf-comparison-derived-pullback",
   "lem-pur-bounded-site-adjunction-transpose",
+  "lem-weil-boundary-conjugated-comparison-normal-form",
+  "lem-weil-boundary-iterated-counit-normal-form",
   "lem-pe-constant-left-module-inverse-image"
  ],
  "proof_origin": {
@@ -236,11 +206,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-weil-boundary-comparison-composition-transport",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged and proved comparison-unit invertibility, the normalized single-map counit equality, naturality and invertibility of both transported maps, the pasted-counit identity by explicit cancellation and three naturality equations, and scalar-preserving specialization. Reused existing nodes; no new nodes. No exact project attachment or Mathlib specialization found.",
-  "blueprint": "The ancestor cor-weil-boundary-duality-discharge first proof paragraph needs an independently formal costalk comparison; the immediate parent lem-weil-boundary-dualizing-composition steps 6–7 require precisely the unit-conjugated composition mate and its counit normalization. Steps 1–4 construct the transported maps, steps 5–8 verify the counit identity, and step 9 gives the constant-coefficient dualizing specialization.",
+  "summary": "Repair of human re-split return: statement unchanged; two independent categorical normal-form arguments are new statement-only unsplit nodes of comparable proof workload. The parent is a short assembly of site-comparison invertibility, the existing single-map normalization, the two normal forms, the given mate equation, and constant specialization. Every original equation and argument is preserved in the report with its new location.",
+  "blueprint": "Ancestor cor-weil-boundary-duality-discharge, first proof paragraph, via lem-weil-boundary-dualizing-composition. Returned steps 3–4 are isolated in the conjugated-comparison normal form; steps 5–7 in the iterated-counit normal form. Parent steps 1–2 retain the existing comparison and normalization inputs, step 4 applies the given mate equation (old step 8), step 5 retains old step 9.",
   "tool_uses": [
    {
     "node": "thm-weil-pbc-site-comparison",
@@ -267,12 +237,12 @@
   "lem-pe-constant-left-module-inverse-image"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NY-e1ee1ded8",
-  "group": "NY",
+  "reviewer": "NT-cc-Q111-5f79a7f45",
+  "group": "Q111",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-e1ee1ded8 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are unchanged from the live side node, which is unsplit (a first split, not a re-split answer). The item is not on the drop list, the delivery adds no new nodes, and there is no cycle; its only citer is lem-weil-boundary-dualizing-composition, whose step 4 uses exactly the formula and normalization stated here. I checked the sources: BS Cor 5.1.6 (p. 35) proves the unit invertible only on D^+, and Rem 5.1.8 shows it fails for unbounded inputs, so the item correctly keeps every input in D^+. The cited statements say what the steps take from them. thm-weil-pbc-site-comparison applies because A=O_E/ϖ^n is a finite ring. In lem-pur-bounded-site-adjunction-transpose, Φ, ρ, B, the counit equation and the f^×K∈D^+ hypothesis match the item's R_h D^+ assumption. lem-pe-constant-left-module-inverse-image gives S_BA_e≅A_p. I redid steps 1–9 myself: the inverse ρ, the types in Ξ^{-1}v=Q_f(r)b S_X(t), the LHS reduction through step 2 at gf, the naturality of μ_f at r, and the three B-naturality squares at ε_{f,R_gH}, t and F_f t, all correctly oriented. Each object involved is in D^+ by the F/R hypotheses, and the result equals the mate normalization. Edge cases hold: identity B and ρ reduce the identity to the étale mate, f=id needs no extra input, H=0 or empty schemes give zero maps, and n=1 uses no field property. I accept the 4 declared tool_uses (site comparison, derived-pullback definition, bounded transpose, constant inverse image). No SGA source is cited. The searches are recorded, the steps are at most 715 characters, and I made no changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-5f79a7f45 (reviewer sub-agent of L); spot-checked: The re-split note (2026-10-22: at least 2 nodes, at most 3000 characters, no argument dropped) is fulfilled. Against the live node only proof, proof_deps and split_report changed; the statement, stmt_deps and the landed lean record are byte-identical. The proof went from 5000 characters in 9 steps to 2331 in 5. Old steps 3–4 became lem-weil-boundary-conjugated-comparison-normal-form and old steps 5–7 became lem-weil-boundary-iterated-counit-normal-form. Both are statement-only and unsplit, depend only on def-nagata-category, and have grep/leanfinder/leansearch/loogle searches; they are of comparable size. Old steps 1, 2 and 9 were already applications of existing nodes (thm-weil-pbc-site-comparison, lem-pur-bounded-site-adjunction-transpose, lem-pe-constant-left-module-inverse-image) and are kept as such. Old step 8, the mate substitution, is in step 4. Neither new node restates the item: neither has the mate relation, the site comparison or the constant clause. I redid both calculations with explicit types. Node 1: reversing Ξ and cancelling ρ_c gives Ξ^{-1}ρ_c=Q_f(ρ_g)ρ_{f,R_gH}S_X(θ), and the m-square absorbs B_{c,K} so that a_K gives S_B(ε_cα_K)B_g^{-1}P_g(B_f^{-1}). Node 2: m_1 naturality, the m_0 square, B_f naturality at t, the m_g square and B_g naturality at e_f∘F_f(t) give the stated right side without inverting t, r, b or m; t, r or b equal to 0 and identity B are consistent. Assembly: the m-square in step 3 is step 2 at gf. Step 4's squares are step 2 for g at H and for f at R_gH∈D⁺, plus μ_f naturality at r between bounded-below objects. The left side of node 2 is the item's right side after substituting node 1's identity 1, and the mate normalization closes the argument. BS Cor 5.1.6 and Rem 5.1.8 match the D⁺-only uses. rg over the DAG finds no duplicates; the equivalence- and adjunction-based candidates listed in the report do not specialize to the new nodes. No SGA source is used. No cycle."
  },
  "lean": {
   "module": "Sheaf.Paper.BoundaryComparisonCompositionTransport",
@@ -310,5 +280,31 @@
   "group": "Q29",
   "result": "pass",
   "note": "Each node clause matches the Lean. Setting: PurityFiniteSetting (k alg. closure of F_q, l≠p, E finite, level≥1; landed def-pur-conventions added to stmt_deps, which is allowed). X/Y/B and f/g separated finite type via instances. Leg holds the compactification, dimension bound, given right adjoint R_h with its adjunction, and the two D+ preservation assumptions, nothing more. alpha/theta/mate match the node's mate normalization. rho pinned to boundedSiteRho; B = compactSupportSiteComparison.symm (oriented S F→P S, checked in source); mu = boundedSiteCounit (inverse Hom transpose at identity, identity witness); Xi and alphaP pinned by their exact four-factor formulas; the pasted-counit identity is a genuine equation needing mate. The A_e clause is canonical (single-functor commutation to P.constant B = ν^*A_e) and is the node's own definitional specialization. Edge cases (empty schemes, n=1, f or g identity, H=0) covered; universes u/u+1 as in the landed dependency. Single sorry, no hollow defs, docstrings with source places and 9 proof steps, no line >100, record statement verbatim, only the item node changed. Advisories: redundant imports of dependency-record and proof modules; fixed-scalar pro-etale compact support is forced by the landed lem-pur-bounded-site-adjunction-transpose. No compile run (no files changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261025T142738-L-747394",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonCompositionTransport.transport"
+  ],
+  "sorry_after": []
  }
 }

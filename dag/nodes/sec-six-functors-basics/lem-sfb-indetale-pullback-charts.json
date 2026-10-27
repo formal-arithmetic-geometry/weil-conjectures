@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-indetale-pullback-charts",
+ "kind": "statement",
+ "title": "Affine ind-etale charts under binary pullback along an affine-open refinement",
+ "statement": "Let U,V,P,A,D be schemes, b:U → V and p:P → U. Let i:A → U be an open immersion with A affine, and let r:D → A be affine pro-etale. Suppose P has a small open cover T_beta by affine schemes, and each composite T_beta → P → U → V factors as an affine pro-etale map to an affine open W_beta of V followed by its inclusion. Then P ×_U D, formed using p and r followed by i, has a small open cover E_gamma by affine schemes whose composites to V likewise factor through affine opens by affine pro-etale maps. All factorization equalities use the first projection to P. No quasi-compactness, separatedness or surjectivity is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 2.3.3(4) and Remark 4.1.3; affine-local pullback step 4 of lem-sfb-weakly-etale-indetale-cech-refinement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "sk-def-pe-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Form Q=P ×_U A. Pull back the given cover T of P to Q, then apply its affine refinement S. Since A → U is an open immersion, each S_gamma → T_beta is an open immersion between affine schemes, hence affine pro-etale. Retain the selected target W_beta and compose its pro-affine-etale map with this open immersion. All indices remain in the prescribed universe.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-scheme",
+    "lem-weil-pbc-open-immersion-etale",
+    "sk-def-pe-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the affine cover S back along Q ×_A D → Q. Its components are S_gamma ×_A D. The projection to S_gamma is affine pro-etale by affine base change; it is affine because its source is the pullback of affine schemes over the affine scheme A. Compose with S_gamma → T_beta → W_beta. The pullback-pasting isomorphism (P ×_U A) ×_A D ≅ P ×_U D transports this open cover. The pullback projection identities prove each claimed equality to V.",
+   "uses": [
+    "def-pc-fibre-product",
+    "sk-def-pe-morphisms"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "lem-weil-pbc-open-immersion-etale",
+  "sk-def-pe-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 2.3.3(4) and Remark 4.1.3; Q6 implements the local argument with pullback open covers and pullback-pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open affine ind etale charts on a pullback along an ind etale refinement of an affine open",
+   "results": "8 hits, including instIsAffinePullbackSchemeOfIsAffineHom_1 and OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; none supplies ind-etale target factorizations.",
+   "date": "2026-10-25",
+   "verdict": "No exact theorem; combine cover API and source proAffineEtale stability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"IsAffine\"",
+   "results": "6 hits, including Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine and IsAffine.of_isPullback.",
+   "date": "2026-10-25",
+   "verdict": "Affineness only, no covering factorization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "proAffineEtale.*pullback|pullback.*proAffineEtale",
+   "results": "No Mathlib hits. Source ProAffineEtale supplies affine base-change and composition instances.",
+   "date": "2026-10-25",
+   "verdict": "No existing chart theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.WeaklyEtaleIndEtaleCechRefinement",
+  "date": "2026-10-25",
+  "group": "Q6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph; affine-local induction on Cech terms, binary pullback chart construction.",
+   "via": [
+    "lem-sfb-weakly-etale-indetale-cech-refinement",
+    "lem-sfb-proetale-supported-model-coinduction",
+    "lem-sfb-supported-hull-proetale-descent",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IndEtalePullbackCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/IndEtalePullbackCharts.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_indEtale_pullback_charts",
+  "statement": "theorem exists_affine_indEtale_pullback_charts\n    {U V P A D : Scheme.{u}} (b : U ⟶ V) (p : P ⟶ U)\n    (i : A ⟶ U) [IsAffine A] [IsOpenImmersion i]\n    (r : D ⟶ A) (hr : proAffineEtale r)\n    (T : Scheme.OpenCover.{u} P)\n    (hT : ∀ β : T.I₀, IsAffine (T.X β) ∧\n      ∃ (W : V.Opens) (_hW : IsAffineOpen W) (g : T.X β ⟶ W.toScheme),\n        proAffineEtale g ∧ g ≫ W.ι = T.f β ≫ p ≫ b) :\n    ∃ E : Scheme.OpenCover.{u} (pullback p (r ≫ i)),\n      ∀ β : E.I₀, IsAffine (E.X β) ∧\n        ∃ (W : V.Opens) (_hW : IsAffineOpen W) (g : E.X β ⟶ W.toScheme),\n          proAffineEtale g ∧\n          g ≫ W.ι = E.f β ≫ pullback.fst p (r ≫ i) ≫ p ≫ b",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8cbd5",
+  "group": "Q6",
+  "result": "fix",
+  "landing": "20261025T202832-L-2757273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8cbd5",
+  "group": "Q6",
+  "result": "fix",
+  "landing": "20261025T202832-L-2757273",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + new IndEtalePullbackCharts module/node against the unchanged item statement, unit sk-prop-sf-comp-coherence realized list, #print axioms, and node records"
+ }
+}

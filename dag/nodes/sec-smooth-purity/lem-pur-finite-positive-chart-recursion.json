@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-finite-positive-chart-recursion",
+ "kind": "statement",
+ "title": "Normalization of an explicitly constructed positive chart recursion",
+ "status": "split",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], a k-scheme T, its signed finite coefficient sheaves [def-pur-finite-tensor-reduction-data] and normalized signed products [def-pur-finite-signed-twist-products]. Given an ordinary sheaf isomorphism e1 from the first signed sheaf to the coefficient unit, construct e0 by the coefficient realization unit/counit and the constant-module unit comparison [def-pur-proetale-constant-module-unit] and define e(n+2) as the inverse signed product in degrees n+1 and 1 followed by e(n+1) tensor e1 and the left unitor. For every natural degree d, site object V, coherent signed frame b, and ordinary representatives x1 and x of b(1) and b(d), if e1 sends x1 to coefficient one, the explicitly recursive chart e(d) sends x to coefficient one. This is an assertion about the constructed recursion, with no existence or uniqueness assertion.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-signed-twist-products",
+  "def-pur-proetale-constant-module-unit"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, compatibility with the invertible twist by associativity of derived tensor; expanded Step 8 of def-pur-finite-positive-root-charts."
+ },
+ "proof": [
+  {
+   "text": "At zero the realization unit/counit and the constant module unit comparison take the frame basis one to the coefficient-one section. At one the assertion is precisely the given hypothesis on e1.",
+   "uses": [
+    "def-pur-finite-tensor-reduction-data",
+    "def-pur-finite-signed-twist-products",
+    "def-pur-proetale-constant-module-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on positive powers. Realization identifies ordinary and intrinsic section modules. Lift the degree n+1 frame vector to an ordinary section. The normalized signed product in degrees n+1 and 1 takes its pure tensor with x1 to the degree n+2 frame vector, by the positive frame axiom. Since realization and the product are injective, its inverse takes x to that pure tensor. Apply the induction hypothesis and the hypothesis on e1. Naturality of the ordinary tensor and the unit unitor take the tensor of the two coefficient-one sections to coefficient one.",
+   "uses": [
+    "def-pur-finite-signed-twist-products"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-signed-twist-products",
+  "def-pur-proetale-constant-module-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R4",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Explicit ordinary-sheaf realization of the positive-power construction in Step 2."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordered tensor powers of a trivialization of a rank one sheaf send the ordered basis to the unit section",
+   "results": "8 hits about vector-bundle local frames and trivializations. No sheaf tensor-chart recursion or section normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered tensor powers of a trivialization of a rank one sheaf send the ordered basis to the unit section",
+   "results": "8 hits: Algebra.TensorProduct.basis_apply, vector-bundle frame and trivialization lemmas, TensorProduct.uniqueRight. No exact sheaf recursion statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorIso\", \"leftUnitor\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteTensorFrame|finiteTensorOrdinaryChartRecursion|finiteTensorFrameBasis",
+   "results": "0 Mathlib hits. Local rg finds the existing frame definition, basis-section realization and signed-product prescription; no recursive chart normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePositiveRootCharts",
+  "date": "2026-10-25",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Step 2, compatibility with the invertible twist: ordered positive-power charts and their local basis normalization.",
+   "via": [
+    "def-pur-finite-positive-root-charts",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePositiveChartRecursion",
+  "file": "lean/Sheaf/Paper/FinitePositiveChartRecursion.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTensorOrdinaryChartRecursion_normalized",
+  "statement": "theorem finiteTensorOrdinaryChartRecursion_normalized (P : PurityFiniteSetting.{u})\n    (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))]\n    (e₁ : P.finiteTensorFixedSheaf T 1 ≅\n      𝟙_ (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient)))\n    (d : ℕ) (V : T.ProEt) (b : P.FiniteTensorFrame T V)\n    (x₁ : (P.finiteTensorFixedSheaf T 1).obj.obj (Opposite.op V))\n    (x : (P.finiteTensorFixedSheaf T d).obj.obj (Opposite.op V))\n    (hx₁ : HEq (P.finiteTensorSection T 1 V x₁) (P.finiteTensorFrameBasis T V b 1))\n    (he₁ : e₁.hom.hom.app (Opposite.op V) x₁ =\n      (Functor.LaxMonoidal.ε (sheafToPresheaf (ProEt.topology T)\n        (ModuleCat.{u + 1} P.Coefficient))).app (Opposite.op V) (1 : P.Coefficient))\n    (hx : HEq (P.finiteTensorSection T d V x) (P.finiteTensorFrameBasis T V b d)) :\n    (P.finiteTensorOrdinaryChartRecursion T e₁ d).hom.hom.app (Opposite.op V) x =\n      (Functor.LaxMonoidal.ε (sheafToPresheaf (ProEt.topology T)\n        (ModuleCat.{u + 1} P.Coefficient))).app (Opposite.op V) (1 : P.Coefficient)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteTensorOrdinaryZeroChart",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorOrdinaryChartRecursion",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorOrdinaryChartRecursion_normalized"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T143856-L-1097536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T143856-L-1097536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

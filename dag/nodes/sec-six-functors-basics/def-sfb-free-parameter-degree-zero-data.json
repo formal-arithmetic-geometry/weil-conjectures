@@ -1,0 +1,162 @@
+{
+ "id": "def-sfb-free-parameter-degree-zero-data",
+ "kind": "definition",
+ "title": "Normalized closed-Hom and unary-Hom degree-zero comparison",
+ "status": "split",
+ "statement": "For the commutative condensed ring and free parameter of [def-sfb-free-parameter-evaluation-data], $A_P$ is flat. Normalize the natural isomorphism $D(A_P\\otimes -)\\cong A_P[0]\\otimes^L-$ as follows: on any K-flat complex $K$, its inverse followed by termwise localization is the braiding $A_P[0]\\otimes^L QK\\to QK\\otimes^L A_P[0]$, the canonical single-object tensor comparison $QK\\otimes^L A_P[0]\\cong Q(K\\otimes A_P)$, and the localized ordinary braiding. There exists a unique such natural isomorphism. Define the isomorphism $R\\mathcal Hom(A_P[0],-)\\cong R(\\mathcal Hom(A_P,-))$ by uniqueness of right adjoints using this normalized tensor isomorphism and the derived tensor-Hom adjunction. For an ordinary module $N$, define the source degree-zero identification $H^0(F(N[0]))\\cong p_X^*\\mathcal Hom(A_P,N)$ by this isomorphism, exact point pullback and the canonical $R^0=\\mathcal Hom$ identification. Define the target identification $H^0(R\\rho_*p_U^*N[0])\\cong\\rho_*p_U^*N$ by exact single-complex pullback and $R^0=\\rho_*$. The underived evaluation map inserts the same universal generator and uses the ordinary strong tensorator and evaluation.",
+ "stmt_deps": [
+  "def-sfb-free-parameter-evaluation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J7, equation-internal-hom; Tags 07A4, 07A6, 07A7; canonical constructions in lem-sfb-free-parameter-evaluation-coherence proof steps 1–12"
+ },
+ "proof": [
+  {
+   "text": "Apply restriction_free_flat_comparison to the commutative monoid with underlying condensed ring R. Its represented-free-module finite-limit clause is exactly finite-limit preservation by tensorLeft A_P. Convert this to ObjectProperty.flat. This includes the empty profinite parameter and the zero ring.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A flat object F placed in degree zero is K-flat. For every complex K, the native K-flat-right tensor comparison identifies QK tensor F[0] with Q(K tensor F[0]); compose with the single-complex termwise tensor comparison. Naturality follows from naturality of the native tensor comparison and of the single-complex comparison. For K also K-flat, expanding the two definitions shows this is precisely QObjTensorSingleFunctorObjIso: both use the same localization lax tensorator. Compose with the derived braiding and the localized ordinary braiding to obtain a natural isomorphism on all complexes. Lift this isomorphism through DerivedCategory.Q and the exact tensor functor factorization. The lifting component formula proves the prescribed normalization.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, resolve Q.objPreimage Y by a K-flat complex K using exists_quasiIso_flat_kFlat. The localized resolution and the object-preimage comparison give QK isomorphic to Y. The normalization identifies the inverse components of any two candidates at QK after canceling the exact-functor factorization. Naturality along QK isomorphic to Y and cancellation identify their components at Y. Extensionality of natural transformations and isomorphisms proves uniqueness. All remaining definitions retain their given canonical compositions.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-action-injective-restriction",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-abstract-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C6",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J7, internal Hom via K-flat tensor representatives; Stacks sites-modules.tex Tag 03EV for flat represented free modules",
+  "note": "Lean construction from existing library comparisons and localization, with uniqueness proved using a K-flat resolution. Public definitions and statements are unchanged."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Canonical free profinite parameter evaluation and relative substitution maps on unbounded derived modules",
+   "results": "OK 8 hits: Condensed.profiniteFree, ModuleCat.freeDesc_apply, LocallyConstant.freeOfProfinite, PresheafOfModules.evaluation_map, AdicCompletion.eval, Condensed.profiniteSolidification, Module.map_eval_injective, FGModuleCat.FGModuleCatEvaluation. No derived adjunction/evaluation specification for this item.",
+   "date": "2026-10-23",
+   "verdict": "No exact declaration"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Canonical derived evaluation for a free profinite parameter and its scalar adjunction maps",
+   "results": "OK 8 hits: LocallyConstant.freeOfProfinite, Condensed.profiniteFree, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, AdicCompletion.coe_eval, Condensed.profiniteSolid, Profinite.NobelingProof.GoodProducts.square_commutes, Profinite.NobelingProof.Nobeling_aux.",
+   "date": "2026-10-23",
+   "verdict": "No canonical maps in the internal-module derived categories"
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.ihom, CategoryTheory.Adjunction.homEquiv",
+   "results": "OK 7 hits: MonoidalClosed.homEquiv_apply_eq, homEquiv_symm_apply_eq, ofEquiv_curry_def, ofEquiv_uncurry_def, LightCondensed.ihomPoints_symm_apply, ihomPoints_apply, Rep.homEquiv_def.",
+   "date": "2026-10-23",
+   "verdict": "Generic closed adjunction used; no complete specialized data"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep parameterTensor|scalarPullComparison|FreeParameterEvaluation CategoryTheory; rg freeParameter|evaluationCoherence|ProfiniteFreeSlice in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search free parameter evaluation; rg -l new node ids dag/nodes",
+   "results": "msearch: OK 0 hits. No new node ids, 0 matching blueprint nodes. Existing ProfiniteFreeSlice and PointDerivedHom provide the imported free and closed derived objects; the parent ProfiniteConstantDerivedFunctions has related downstream private maps but cannot be imported here without the returned dependency cycle. No acyclic node owns these specialized canonical map specifications.",
+   "date": "2026-10-23",
+   "verdict": "Factor the missing canonical data on the recorded dependencies; no duplicate object definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-parameter-evaluation-coherence",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: profinite parameter functions on the closed stratum, independently of a root tower or a normal crossings boundary; normalization, variable linear maps, whole profinite families and coefficient restriction (returned proof steps 6–8)",
+   "via": [
+    "lem-sfb-free-parameter-evaluation-coherence",
+    "lem-sfb-profinite-constant-derived-functions",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.FreeParameterDegreeZeroData",
+  "declaration": "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.sourceZero",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.freeParameter_flat",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.parameterTensorLimits",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.parameterTensor_existsUnique",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.parameterTensor",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.unaryHomComparison",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.evaluationApp",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.degreeZero",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.sourceZero",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.targetZero"
+  ],
+  "file": "lean/Sheaf/Paper/FreeParameterDegreeZeroData.lean",
+  "statement": "def sourceZero (X : Scheme.{u}) (P : Profinite.{u}) (N : PointModules R)",
+  "branch": "sheaf-dag",
+  "by": "Q155",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6e4ba966",
+  "group": "Q155",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6e4ba966",
+  "group": "Q155",
+  "result": "fix",
+  "note": "Re-delivery for landing return L. Maths unchanged from 07d4261482bb, which was reviewed in full: 4 of 6 modules and 4 of 5 new node files are byte-identical; the item node changes only lean and +5 new-node stmt_deps. F1 (H4/C6): the L repair made FreeParameterRelativeMaps publicly import the parent module ProfiniteConstantDerivedFunctions. The parent node lists the item in proof_deps, so the stage-3 import of the item into the parent would be a cycle and the parent could never cite the item. FIXED: dropped the parent import; FreeParameterEvaluation.familyParameterMap is now a data def (same pullback lift (q,alpha(q,p'))) whose prodComparison IsIso comes from the proved profiniteToCommRingCatOp_isRightAdjoint plus Spec as a right adjoint. No new sorry and no restated theorem (import_prune rule 5 checks theorems only). restricted_whole_family uses familyParameterMap with pullback.lift_snd _ _ _ for the over-X[Q] equation. The new node json lists familyParameterMap, adds stmt_dep lem-weil-pbc-profinite-locally-constant-right-adjoint (on base, proved) and cites it in the statement; the item lean-record note is updated. F2: the lost 07d4 universe FIX is re-applied (D : Type w, Category.{v} D; the old D : Type (u+3) excluded the Type (u+2) slice derived categories). nt_compile --json on the 4 unchanged plus 2 fixed modules: all clean (26.4/11.0/34.7/5.3/14.3/19.9 s). Maintainer note: when the parent is proved in stage 3 it should reuse FreeParameterEvaluation.familyParameterMap and add the item import, which is no longer a cycle."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T050718-L-3834626",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

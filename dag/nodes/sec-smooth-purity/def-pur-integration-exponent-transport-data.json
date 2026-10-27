@@ -1,0 +1,144 @@
+{
+ "id": "def-pur-integration-exponent-transport-data",
+ "kind": "definition",
+ "title": "Canonical coordinates for exponent transport of integration",
+ "statement": "For the finite constant coefficient module categories and root-normalized Tate lines of [def-pur-finite-site-coordinates], define the shifted root transition, its ordered tensor powers and bundle pullbacks. Define the projective decomposition square and the conjunction of this square with its inverse and second-projection equations. Define the affine and vector trace-transition equations. For a positive modulus killing a finite coefficient ring, define IntegrationTransposeData: the TensorCompatibilityData of [def-pur-vector-tensor-site-equations], the bounded ordinary exceptional object, the ordinary adjunct isomorphism, the comparison-unit rho isomorphism, and their pro-etale composite with all stated formulas. IntegrationTensorTransitionEquations requires compatible such witnesses at two moduli and the actual integration, transpose and inverse transitions. The full conclusion specializes these predicates to a finite-type scheme over the field in [def-pur-conventions]. All coordinates and predicates are the verbatim original definitions of the parent node, reexported from a common module; only the forward-square predicate is new.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Paragraphs 1--2: inverse-projection integration, adjunction transpose; accepted parent proof Steps 1--12. Stacks categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints; etale-cohomology.tex Tag 03PK, section-kummer."
+ },
+ "stmt_deps": [
+  "cor-pur-vector-bundle-purity",
+  "def-amb-etale-compact-support",
+  "def-amb-vector-integration",
+  "def-asd-vector-bundle-zero-section",
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-kun-projection-formula-map",
+  "def-pur-conventions",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "lem-amb-finite-tate-site-descent",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-amb-vector-bundle-purity",
+  "thm-sf-ambient-adjoint-class",
+  "def-pur-finite-site-coordinates",
+  "def-pur-supported-projective-site-arrows",
+  "def-pur-proetale-ordered-integration",
+  "def-pur-proetale-frame-integration",
+  "def-pur-proetale-vector-integration",
+  "def-pur-vector-integration-adjunction-arrows",
+  "def-pur-proetale-vector-integration-arrows",
+  "def-pur-finite-site-tensor-projection",
+  "def-pur-bounded-site-transpose-arrows",
+  "def-pur-vector-tensor-site-equations",
+  "def-pur-vector-purity-normalization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of integration under a morphism of finite Tate lines, inverse projection formula, and adjunction transpose",
+   "results": "8 hits, including TopCat.Presheaf.pushforwardToOfIso, ContinuousLinearMap.integral_id_map, Module.Dual.transpose and transpose_dualTensorHom. None states finite-site coefficient integration transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv, homEquiv_unit, homEquiv_counit. These supply generic Hom calculus but not the geometric root-transition equations or their coefficient integration data.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*[Ee]xponent|[Ee]xponent.*[Cc]ounit|[Tt]ensor.*[Ii]ntegrat",
+   "results": "0 hits in Mathlib. Local Sheaf search finds vectorTensorComparison and vectorExponentIndependence in VectorIntegrationSiteComparison; they are reused through separate acyclic statement records.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegrationExponentTransposeTransport",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Proof, inverse diagonal identification: root-normalized vector-bundle integration at the normal-bundle endpoint; Canonical coordinates for exponent transport of integration",
+   "via": [
+    "lem-pur-integration-exponent-transpose-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegrationExponentTransposeData",
+  "file": "lean/Sheaf/Paper/IntegrationExponentTransposeData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationExponentTransposeConclusion",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27",
+  "statement": "def IntegrationExponentTransposeConclusion (P : WeilConjectures.PurityFiniteSetting.{u})\n    (S : Scheme.{u}) (aS : S ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aS] [QuasiCompact aS] (d : ℕ)\n    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] : Prop",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationEtale",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationPro",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationLower",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationProLower",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationRightTarget",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationTransposeData",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationTensorTransitionEquations",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationLineTransition",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationVectorTransition",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationTensorTransition",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationTowerTransition",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationOrdinaryOrdered",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationDecompositionEquations",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationProjectiveEquations",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationAffineEquations",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationTraceComparison",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationTensorEquations",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationVectorEquations",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationExponentTransposeConclusion",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationDecompositionSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/new-module Lean and node JSONs (incl. head-commit nodes missing from snapshot) vs clone sheaf-dag item, VectorIntegrationSiteComparison and the owner nodes of the declarations used"
+ }
+}

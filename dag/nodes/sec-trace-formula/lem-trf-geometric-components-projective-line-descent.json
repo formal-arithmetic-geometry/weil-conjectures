@@ -1,0 +1,376 @@
+{
+ "id": "lem-trf-geometric-components-projective-line-descent",
+ "kind": "statement",
+ "title": "Reduced components and projective-line descent over algebraically closed fields",
+ "statement": "Let $k\\subseteq L$ be algebraically closed fields [def-weil-algebraic-closure, def-pc-field-extension], and let $C$ be a finite type $k$-scheme [def-weil-finite-type-morphism], with no separatedness assumption. For each irreducible component of $C$ [def-weil-irreducible-components], give its closed subset the reduced induced closed-subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme], denoting the resulting scheme by $R$. Then $R_L=R\\times_kL$ [def-pc-fibre-product] is reduced and irreducible, the projection $R_L\\to R$ is surjective, and $R\\mapsto R_L$ is a bijection between the reduced component schemes of $C$ and of $C_L$. For each such $R$ one has $R_L\\cong\\mathbf P^1_L$ over $L$ if and only if $R\\cong\\mathbf P^1_k$ over $k$, where the projective line is [def-sc-p1-standard, def-nagata-projective-space-base-change]. More precisely, any $L$-isomorphism between $R_L$ and $\\mathbf P^1_L$, together with its inverse, descends to mutually inverse morphisms between $R\\times_k\\operatorname{Spec}A$ and $\\mathbf P^1_A$ for some finitely generated $k$-subalgebra $A\\subseteq L$. There is a maximal ideal $\\mathfrak m\\subset A$ with $A/\\mathfrak m\\cong k$, and specialization of these morphisms gives the asserted $k$-isomorphism. This does not assert that the given $L$-isomorphism itself is defined over $k$. The empty scheme is allowed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038F (lemma-bijection-irreducible-components); limits.tex Tag 01ZM (lemma-descend-finite-presentation), parts (2)--(3); algebra.tex Tag 00FV (theorem-nullstellensatz); returned Steps 9--10."
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "def-sc-p1-standard",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix a component $T\\subseteq |C|$ and its reduced induced scheme $R$. The reduced-induced-subscheme theorem gives a reduced closed immersion with support $T$; hence $R$ is nonempty and irreducible. On a finite affine cover $\\operatorname{Spec}B_i$ of $C$, its inverse images are $\\operatorname{Spec}(B_i/I_i)$, where $I_i$ is radical. Each quotient is a finitely generated $k$-algebra, so these finitely many affines exhibit $R$ as finite type over $k$. The spectrum of a field is locally Noetherian: its only ideals are $(0)$ and $(1)$. Thus the local-Noetherian ascent and local-finite-presentation results give that $R$ is locally Noetherian and locally finitely presented over $k$. Its finite-type hypothesis gives quasi-compactness; local Noetherianity gives quasi-separatedness. Its structure morphism is quasi-separated by qcqs morphism permanence. Consequently $R\\to\\operatorname{Spec}k$ is of finite presentation, without requiring $C$ or $R$ separated.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 01J3 (schemes.tex, lemma-reduced-closed-subscheme); Tags 01T6, 01TX (morphisms.tex); Tag 01OY (properties.tex)."
+   }
+  },
+  {
+   "text": "Use $k$ itself as an algebraic closure of $k$. Since $R\\times_k k\\cong R$ is reduced, the chosen-algebraic-closure test says that $R$ is geometrically reduced. In particular $R_L$ is reduced. Algebraic closedness also implies separable closedness (every irreducible separable polynomial is linear). Apply the subset geometric-irreducibility lemma with $X=R$, subset $|R|$, and $\\Omega=k$ with its identity extension. Its initial inverse image is the nonempty irreducible space $|R|$. Its conclusion for $E=L$ says exactly that $R_L$ is nonempty and irreducible.",
+   "uses": [
+    "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "lem-sbc-subset-geometric-irreducibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 020I (lemma-perfect-reduced), 035X (lemma-geometrically-reduced), and 038I (lemma-characterize-geometrically-irreducible)."
+   }
+  },
+  {
+   "text": "The projection $R_L\\to R$ is surjective. Indeed, on any affine open $\\operatorname{Spec}B$ of $R$, its inverse image is $\\operatorname{Spec}(B\\otimes_k L)$ by the affine fibre-product formula. The map $B\\to B\\otimes_k L$ is faithfully flat by field-extension base change, and hence its map on spectra is surjective. Every point of $R$ belongs to one of these affines.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "algebra.tex Tag 00HQ (lemma-ff-rings), implication (1) to (2); affine field base change."
+   }
+  },
+  {
+   "text": "For every field extension $E/k$, the tensor-of-fields lemma over the separably closed field $k$ says that $\\operatorname{Spec}(L\\otimes_kE)$ is irreducible and nonempty. The affine fibre-product formula therefore makes $\\operatorname{Spec}L$ geometrically irreducible over $k$. Apply the product-component bijection with $U=\\operatorname{Spec}L$ and $V=C$. It gives a bijection from the components of $C_L$ to those of $C$, induced by projection. For a component $W$ corresponding to $T$, its image is contained in $T$, so $W$ lies in the full inverse image of $T$. That inverse image is the support of $R_L$: on an affine chart it is $V(I_i(B_i\\otimes_kL))$, because $(B_i/I_i)\\otimes_kL\\cong(B_i\\otimes_kL)/I_i(B_i\\otimes_kL)$ by the universal property of tensor products. Step 2 makes this support irreducible, so maximality of $W$ gives $W=|R_L|$.",
+   "uses": [
+    "lem-weil-pbc-field-tensor-irreducible",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-product-irreducible-components-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 038F (lemma-bijection-irreducible-components) and 038H (lemma-separably-closed-field-irreducible-components)."
+   }
+  },
+  {
+   "text": "Base change of the closed immersion $R\\hookrightarrow C$ is a closed immersion $R_L\\hookrightarrow C_L$. Step 2 supplies reducedness, and Step 4 identifies its support with the corresponding component. The uniqueness clause for the reduced induced closed subscheme identifies it with that component's reduced scheme. Conversely every component of $C_L$ occurs in Step 4, and distinct components of $C$ have distinct corresponding supports. These identifications prove the asserted bijection of reduced component schemes.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "schemes.tex Tags 01JY (base change of immersions) and 01J3 (uniqueness of reduced closed subschemes)."
+   }
+  },
+  {
+   "text": "The standard cover of $P=\\mathbf P^1_k=\\operatorname{Proj}k[x_0,x_1]$ consists of $\\operatorname{Spec}k[t]$ and $\\operatorname{Spec}k[s]$ with intersection $\\operatorname{Spec}k[t,t^{-1}]$, where $s=t^{-1}$. The two polynomial algebras are finitely generated; the finite cover makes $P$ finite type and quasi-compact. Each intersection is affine, hence quasi-compact, so the affine-cover criterion makes $P$ quasi-separated. The local-finite-presentation result over the locally Noetherian $\\operatorname{Spec}k$, and qcqs morphism permanence, show that $P\\to\\operatorname{Spec}k$ is of finite presentation. Next, $P$ is the base-change projective line $P'=\\mathbf P(\\{0,1\\};\\operatorname{Spec}k)=\\operatorname{Spec}k\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^1_{\\mathbf Z}$. By the standard-charts lemma with $S=\\operatorname{Spec}k$, (a) and (c), $P'$ is covered by $D_+(T_0)_S=\\operatorname{Spec}k[u_{1/0}]$ and $D_+(T_1)_S=\\operatorname{Spec}k[u_{0/1}]$. By (b) on the first chart, $T_1=u_{1/0}T_0$ with $T_0$ a free generator, so $D_+(T_1)_S\\cap D_+(T_0)_S$ is the locus $D(u_{1/0})=\\operatorname{Spec}k[u_{1/0},u_{1/0}^{-1}]$, on which $T_0=u_{0/1}T_1=u_{0/1}u_{1/0}T_0$ gives $u_{0/1}=u_{1/0}^{-1}$. Hence $t\\mapsto u_{1/0}$, $s\\mapsto u_{0/1}$ define chart isomorphisms over $k$ that agree on the overlaps, and they glue to a $k$-isomorphism $P\\cong P'$. By this identification, the base-change definition of projective space and associativity of fibre products, $P\\times_k\\operatorname{Spec}A\\cong\\operatorname{Spec}A\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^1_{\\mathbf Z}=\\mathbf P^1_A$ for every $k$-algebra $A$, in particular for $A=L$ and $A=k$.",
+   "uses": [
+    "def-sc-p1-standard",
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "morphisms.tex Tag 01TX (lemma-noetherian-finite-type-finite-presentation); the two standard projective-line charts."
+   }
+  },
+  {
+   "text": "Index by the set $I$ of finitely generated $k$-subalgebras $A\\subseteq L$, ordered by inclusion. It is nonempty since it contains $k$, and directed since the algebra generated by the union of two finite generating sets contains both. The algebra-union lemma gives $L=\\varinjlim_{A\\in I}A$. The spectrum-colimit theorem identifies $\\operatorname{Spec}L$ with $\\varprojlim_{A\\in I}\\operatorname{Spec}A$ and gives affine transition maps; all stages are qcqs by the affine-scheme theorem. The stage $A=k$ has the two finite-presentation models $R$ and $P$ from Steps 1 and 6. Their pullbacks to later stages remain of finite presentation by base-change permanence.",
+   "uses": [
+    "lem-kun-algebra-union",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); preparation for Tag 01ZM."
+   }
+  },
+  {
+   "text": "Suppose $\\alpha:R_L\\xrightarrow{\\sim}P_L$ is the given $L$-isomorphism and write $\\beta=\\alpha^{-1}$. Apply clause (2) of the spreading-out theorem to $\\alpha$ and the fixed models $R,P$ at stage $k$. Apply it again to $\\beta$ with the models interchanged. Choose a stage $A_0\\subseteq L$ containing the two resulting finitely generated subalgebras, and pull both morphisms to $A_0$. This produces $a:R_{A_0}\\to P_{A_0}$ and $b:P_{A_0}\\to R_{A_0}$ whose base changes, under the canonical fibre-product identifications, are precisely $\\alpha$ and $\\beta$. The theorem requires finite presentation and qcqs base stages, verified in Steps 1, 6 and 7; it imposes no separatedness assumption.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), clause (2)."
+   }
+  },
+  {
+   "text": "The base changes of $b\\circ a$ and $\\mathrm{id}_{R_{A_0}}$ agree, and so do those of $a\\circ b$ and $\\mathrm{id}_{P_{A_0}}$, because $\\beta\\alpha=\\mathrm{id}$ and $\\alpha\\beta=\\mathrm{id}$. Apply clause (3) of spreading out to each pair, and choose one later stage $A\\subseteq L$ containing the two equality stages. Base change preserves composition and identities, so the pulled-back maps $a_A,b_A$ satisfy both inverse identities over $A$. They still base change to the prescribed maps $\\alpha,\\beta$. This proves the stated descent of the isomorphism together with its inverse to a finitely generated $k$-subalgebra, rather than just descent of an abstract isomorphism class.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), clause (3)."
+   }
+  },
+  {
+   "text": "The algebra $A\\subseteq L$ is nontrivial, so the maximal-ideal theorem gives $\\mathfrak m\\subset A$. The point $\\mathfrak m$ of $\\operatorname{Spec}A$ is closed, and $\\operatorname{Spec}A$ is finite type over $k$ because $A$ is finitely generated. The closed-point residue-field theorem identifies its structural residue map $k\\to\\kappa(\\mathfrak m)=A/\\mathfrak m$ with an isomorphism. Thus the quotient followed by its inverse is a $k$-algebra map $A\\to k$. Pull back $a_A,b_A$ along this map. Fibre-product associativity identifies their sources and targets with $R$ and $P$, and pulling back their two inverse identities gives mutually inverse $k$-morphisms $R\\leftrightarrows\\mathbf P^1_k$.",
+   "uses": [
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FV (theorem-nullstellensatz) and morphisms.tex Tag 01TB (closed-point residue fields)."
+   }
+  },
+  {
+   "text": "Conversely, a $k$-isomorphism $R\\cong\\mathbf P^1_k$ and its inverse base change to mutually inverse $L$-morphisms, using $\\mathbf P^1_k\\times_kL\\cong\\mathbf P^1_L$. The specialization in Step 10 is allowed to change the chosen $L$-isomorphism: it proves existence of a $k$-isomorphism and does not claim that $\\alpha$ is defined over $k$. If $C$ is empty, it has no irreducible components and neither does its base change; the component correspondence is the empty bijection, and all assertions quantified over $R$ are vacuous.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Concluding base-change and empty-scheme cases; assembly of Tag 01ZM with Tag 00FV."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-sc-p1-standard",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "lem-kun-algebra-union",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-sc-product-irreducible-components-bijection",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-field-tensor-irreducible",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spec-colimit-limit",
+  "pqf-lem-lft-fp-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Assembly of Tags 038F, 038H, 035X, 020I, Limits Tag 01ZM(2)-(3), and Algebra Tag 00FV; existing generic tool nodes supply each input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For algebraically closed fields k contained in L reduced irreducible components of a finite type scheme pull back bijectively and a component is a projective line if and only if its scalar extension is",
+   "results": "{\"t\": \"2026-10-22T06:09:57Z\", \"tool\": \"leanfinder\", \"query\": \"For algebraically closed fields k contained in L reduced irreducible components of a finite type scheme pull back bijectively and a component is a projective line if and only if its scalar extension is\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Proj.isSeparated\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"WeierstrassCurve.Projective.comp_equiv_comp\"], \"digest\": \"d315fd1b8dc59c4b\"}; Proj and geometric-reducedness results do not supply the reduced component identification together with projective-line isomorphism descent and specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend an isomorphism with projective line along a field extension by finite presentation approximation and specialize at a rational point over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-22T06:09:58Z\", \"tool\": \"leanfinder\", \"query\": \"Descend an isomorphism with projective line along a field extension by finite presentation approximation and specialize at a rational point over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\"], \"digest\": \"bf62baf1bb2cf108\"}; Proj and geometric-reducedness results do not supply the reduced component identification together with projective-line isomorphism descent and specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For algebraically closed fields k contained in L reduced irreducible components of a finite type scheme pull back bijectively and a component is a projective line if and only if its scalar extension is",
+   "results": "{\"t\": \"2026-10-22T06:09:55Z\", \"tool\": \"leansearch\", \"query\": \"For algebraically closed fields k contained in L reduced irreducible components of a finite type scheme pull back bijectively and a component is a projective line if and only if its scalar extension is\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Proj and geometric-reducedness results do not supply the reduced component identification together with projective-line isomorphism descent and specialization.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.GeometricallyIrreducible",
+   "results": "{\"t\": \"2026-10-22T06:09:56Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, AlgebraicGeometry.GeometricallyIrreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Proj and geometric-reducedness results do not supply the reduced component identification together with projective-line isomorphism descent and specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojective[Ll]ine|irreducibleComponents.*(pullback|baseChange)|isIso.*[Ff]ield",
+   "results": "{\"t\": \"2026-10-22T06:09:56Z\", \"tool\": \"grep\", \"query\": \"[Pp]rojective[Ll]ine|irreducibleComponents.*(pullback|baseChange)|isIso.*[Ff]ield\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\"], \"digest\": \"2ae11f84ce61d6aa\"}; Proj and geometric-reducedness results do not supply the reduced component identification together with projective-line isomorphism descent and specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojective[Ll]ine|irreducibleComponents.*(pullback|baseChange)|isIso.*[Ff]ield",
+   "results": "{\"t\": \"2026-10-23T09:27:04Z\", \"tool\": \"grep\", \"query\": \"[Pp]rojective[Ll]ine|irreducibleComponents.*(pullback|baseChange)|isIso.*[Ff]ield\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\"], \"digest\": \"b7ab95c44b3c5e48\"}; Read the returned declarations: geometric-integrality interfaces, Proj properness, smooth/etale algebra descent, and flat descent of an existing morphism do not give the component statement with prescribed projective-line isomorphism descent and specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend an isomorphism between finite presentation schemes along a field extension and specialize at a rational point of a finitely generated algebra over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-23T09:27:04Z\", \"tool\": \"leansearch\", \"query\": \"Descend an isomorphism between finite presentation schemes along a field extension and specialize at a rational point of a finitely generated algebra over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instIsIsoSchemeMapOfCommRingCat\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_over\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\"], \"digest\": \"6b1fb70e0bc4a4cd\"}; Read the returned declarations: geometric-integrality interfaces, Proj properness, smooth/etale algebra descent, and flat descent of an existing morphism do not give the component statement with prescribed projective-line isomorphism descent and specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-23T09:27:04Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.GeometricallyIntegral.eq_geometrically\", \"AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral\", \"AlgebraicGeometry.GeometricallyIntegral.mk\", \"AlgebraicGeometry.geometricallyIntegral_iff\", \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian\", \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton\", \"AlgebraicGeometry.instIsIntegralFiberOfGeometricallyIntegral\", \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian\"], \"digest\": \"42c5f577f256c5d3\"}; Read the returned declarations: geometric-integrality interfaces, Proj properness, smooth/etale algebra descent, and flat descent of an existing morphism do not give the component statement with prescribed projective-line isomorphism descent and specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced irreducible components of finite type schemes over an algebraically closed field are preserved under field extension and an isomorphism with the projective line descends by finite presentation and specialization",
+   "results": "{\"t\": \"2026-10-23T09:27:11Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced irreducible components of finite type schemes over an algebraically closed field are preserved under field extension and an isomorphism with the projective line descends by finite presentation and specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"ca18ab12e99a5d57\"}; Read the returned declarations: geometric-integrality interfaces, Proj properness, smooth/etale algebra descent, and flat descent of an existing morphism do not give the component statement with prescribed projective-line isomorphism descent and specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between scalar extensions of finitely presented schemes spreads out to a finitely generated subalgebra of the extension field",
+   "results": "{\"t\": \"2026-10-23T09:28:02Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism between scalar extensions of finitely presented schemes spreads out to a finitely generated subalgebra of the extension field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.FinitePresentation.trans\", \"Algebra.FinitePresentation.baseChange\"], \"digest\": \"92e4afc1a77da435\"}; Read the returned declarations: geometric-integrality interfaces, Proj properness, smooth/etale algebra descent, and flat descent of an existing morphism do not give the component statement with prescribed projective-line isomorphism descent and specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semistable-marked-base-change",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Re-split argument: Reduced components and projective-line descent over algebraically closed fields (returned item Steps 9,10).",
+   "via": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-geometric-components-projective-line-descent",
+  "worker": "stage1",
+  "summary": "Proved all clauses without a separatedness assumption, reusing existing DAG nodes exclusively. Finite presentation is verified before approximation; prescribed maps and their inverse identities descend separately, then specialize at a k-rational closed point. No statement changes and no new nodes.",
+  "blueprint": "Realizes the inherited ancestor reference to lem-trf-local-term-locality proof (1)--(2), nearby-cycle semistable-modification branch: returned semistable-marked-base-change Steps 9--10, geometric components and projective-line recognition. Current latest ancestor and spreading-out blueprint were read; no route change.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-algebra-union",
+    "why": "Generic algebraic-geometric tool used in steps 7. Its statement supplies the indicated input; the contracting-local-term unit supplies no field-base-change or finite-presentation substitute."
+   },
+   {
+    "node": "lem-sbc-subset-geometric-irreducibility",
+    "why": "Generic algebraic-geometric tool used in steps 2. Its statement supplies the indicated input; the contracting-local-term unit supplies no field-base-change or finite-presentation substitute."
+   },
+   {
+    "node": "lem-sc-product-irreducible-components-bijection",
+    "why": "Generic algebraic-geometric tool used in steps 4. Its statement supplies the indicated input; the contracting-local-term unit supplies no field-base-change or finite-presentation substitute."
+   },
+   {
+    "node": "lem-weil-pbc-field-tensor-irreducible",
+    "why": "Generic algebraic-geometric tool used in steps 4. Its statement supplies the indicated input; the contracting-local-term unit supplies no field-base-change or finite-presentation substitute."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic algebraic-geometric tool used in steps 1, 5. Its statement supplies the indicated input; the contracting-local-term unit supplies no field-base-change or finite-presentation substitute."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic algebraic-geometric tool used in steps 8, 9. Its statement supplies the indicated input; the contracting-local-term unit supplies no field-base-change or finite-presentation substitute."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic tool used in step 6 (added by the review): its chart statement identifies the Proj k[x_0,x_1] projective line of def-sc-p1-standard with the base-change projective line Spec k x_Z P^1_Z of def-nagata-projective-space-base-change, which the item statement cites for P^1_L and P^1_A; the contracting-local-term unit supplies no such comparison."
+   }
+  ],
+  "new_nodes": []
+ },
+ "tool_uses": [
+  "lem-kun-algebra-union",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-sc-product-irreducible-components-bijection",
+  "lem-weil-pbc-field-tensor-irreducible",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-e0aa008eb",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-e0aa008eb (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the statements of all 24 cited nodes; the delivery adds no new nodes. Sources checked: Stacks 038F (varieties.tex l.1380), 01ZM (1)-(3) (limits.tex l.2370), and 00FV/035X/038I through the existing nodes. Statement tests: C empty; a reduced point; two P^1 meeting at a point; a nonreduced C; A^1 with doubled origin (qs via local Noetherianity); and the translation t->t+lambda, which specializes to a different k-isomorphism, as the statement allows. Steps 1-5 and 7-11 are correct. Step 1 proves finite presentation without separatedness. Steps 2 and 4 use the subset irreducibility lemma with Omega=k and 038F with U=Spec L, then component maximality. Steps 8-9 use 01ZM(2) twice and (3) twice on finitely presented models. Step 10 uses a closed point with k->A/m an isomorphism. The six declared off-unit tool_uses are generic and accepted. Fault C4 is in Step 6: it identifies P x_k Spec A with P^1_A 'by the base-change definition and associativity'. But P = Proj k[x0,x1] (def-sc-p1-standard), while P^1_A = Spec A x_Z P^1_Z (def-nagata-projective-space-base-change), and no cited statement compares them; the sibling and parent use this mixed convention. FIX: Step 6 now cites lem-weil-pbc-projective-space-standard-charts with S=Spec k. Its parts (a) and (c) give charts Spec k[u_{1/0}] and Spec k[u_{0/1}]. Part (b) gives the overlap D(u_{1/0}) and u_{0/1}=u_{1/0}^{-1}. The chart isomorphisms glue to P = Spec k x_Z P^1_Z. I added the node to proof_deps and split_report.tool_uses. Statement and stmt_deps are unchanged. The corrected item is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricComponentsProjectiveLineDescent",
+  "declaration": "AlgebraicGeometry.geometric_components_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.geometric_components_baseChange",
+   "AlgebraicGeometry.reduced_component_projectiveLine_iff",
+   "AlgebraicGeometry.reduced_component_projectiveLine_iso_descends"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricComponentsProjectiveLineDescent.lean",
+  "statement": "theorem geometric_components_baseChange (k L : Type u) [Field k] [IsAlgClosed k] [Field L] [IsAlgClosed L] [Algebra k L] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] : Set.BijOn (Set.preimage (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k L))))) (irreducibleComponents C) (irreducibleComponents ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k L))))) ∧ ∀ T : TopologicalSpace.Closeds C, (T : Set C) ∈ irreducibleComponents C → IsReduced (pullback (Scheme.IdealSheafData.vanishingIdeal T).subschemeι (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k L))))) ∧ IrreducibleSpace ↥(pullback (Scheme.IdealSheafData.vanishingIdeal T).subschemeι (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k L))))) ∧ Surjective (pullback.fst (Scheme.IdealSheafData.vanishingIdeal T).subschemeι (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k L))))) ∧ ∀ D : TopologicalSpace.Closeds ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k L)))), (D : Set _) = (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k L)))) ⁻¹' (T : Set C) → (pullback.snd (Scheme.IdealSheafData.vanishingIdeal T).subschemeι (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k L))))).ker = Scheme.IdealSheafData.vanishingIdeal D",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e8d2dc39",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read node (11 steps, 8 stmt_deps), all dep lean records, live ProjectiveSpace/ProjectiveLine/ProjectiveSpace.map/isPullback_map/TwistData, reduced_induced_closed_subscheme interface. Three sorry theorems, no defs. Hypotheses exact (IsAlgClosed k,L; Algebra k L; LocallyOfFiniteType+QuasiCompact; no separatedness). Thm1: BijOn preimage on components + IsReduced/IrreducibleSpace/Surjective of R×_C C_L + ker = vanishingIdeal(π⁻¹T) (scheme structure). Thm2: Over-iso iff with base-change ProjectiveLine, consistent with def-sc-p1-standard's TwistData. Thm3: ∃ fg A, Iso a over Spec A, r and s pinned by both projections, e/e⁻¹ and b/b⁻¹ are base changes via cartesian isPullback_map, m maximal with (A/m)≃ₐ[k]k; no claim b_L=e. Edge cases: empty C vacuous, nonreduced/nonseparated C, L=k ok; universes all u forced by Spec. lean.statement verbatim; node non-lean fields identical to live; no name clash; all imports exist in side-live; docstrings with Stacks tags + blueprint; report has Worker report and Second reading sections. No compile needed (no change)."
+ }
+}

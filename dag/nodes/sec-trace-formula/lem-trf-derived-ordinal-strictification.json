@@ -1,0 +1,294 @@
+{
+ "id": "lem-trf-derived-ordinal-strictification",
+ "kind": "statement",
+ "title": "Strict chain representatives for ordinal derived descent data",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $\\lambda$ be a set-sized ordinal, and let $(W_\\alpha)_{\\alpha<\\lambda}$ be increasing opens of $X$ with $W_\\alpha=\\bigcup_{\\beta<\\alpha}W_\\beta$ at every non-successor $\\alpha<\\lambda$, including $W_0=\\varnothing$ when $\\lambda>0$. A covering of $X$ is not required. Let $K_\\alpha\\in D(\\mathcal O_{W_\\alpha})$ [def-pc-derived-category] satisfy $\\operatorname{Hom}(K_\\alpha,K_\\alpha[i])=0$ for every $i<0$. Suppose isomorphisms $r_\\beta^\\alpha:K_\\alpha|_{W_\\beta}\\xrightarrow{\\sim}K_\\beta$ are given for all $\\beta<\\alpha<\\lambda$ and satisfy $r_\\gamma^\\alpha=r_\\gamma^\\beta\\circ(r_\\beta^\\alpha|_{W_\\gamma})$ for $\\gamma<\\beta<\\alpha$. For each $\\alpha$ fix any K-injective complex $I_\\alpha$ of $\\mathcal O_{W_\\alpha}$-modules [def-pur-kinjective-complex] and an isomorphism $e_\\alpha:QI_\\alpha\\xrightarrow{\\sim}K_\\alpha$, with $Q$ the derived localization. There exist quasi-isomorphisms [def-pc-quasi-iso-modules] of complexes $f_{\\beta\\alpha}:I_\\beta\\to I_\\alpha|_{W_\\beta}$ such that $f_{\\gamma\\alpha}=(f_{\\beta\\alpha}|_{W_\\gamma})\\circ f_{\\gamma\\beta}$ as chain maps for every $\\gamma<\\beta<\\alpha$, and $Q(f_{\\beta\\alpha})=(e_\\alpha|_{W_\\beta})^{-1}\\circ(r_\\beta^\\alpha)^{-1}\\circ e_\\beta$ in $D(\\mathcal O_{W_\\beta})$ for every $\\beta<\\alpha$. Here restriction of a complex is termwise restriction, canonically identified after $Q$ with derived restriction.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), proof, transfinite recursion on chosen K-injective representatives, successor composition and the limit comparison C to I_alpha (returned steps 1, 3, 7--8); comparison direction and uniqueness citation corrected as in the parent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-kinjective-complex",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Put $a_{\\beta\\alpha}=(e_\\alpha|_{W_\\beta})^{-1}(r_\\beta^\\alpha)^{-1}e_\\beta$. The given cocycle implies $a_{\\gamma\\alpha}=(a_{\\beta\\alpha}|_{W_\\gamma})a_{\\gamma\\beta}$. We construct, by transfinite recursion on $\\alpha<\\lambda$, all maps into index $\\alpha$, retaining the earlier maps, with the two invariants $Q(f_{\\beta\\alpha})=a_{\\beta\\alpha}$ and strict triple composition. At index zero there are no maps to choose. On the site of opens of $W_\\alpha$, the slice at $W_\\beta$ is literally the site of opens contained in $W_\\beta$, with the restricted structure sheaf. Thus [lem-pur-kinjective-restrict-localized] makes $I_\\alpha|_{W_\\beta}$ K-injective. Choose a common universe containing the set of opens and the coefficient modules, so the module-size hypothesis of that lemma holds. Restriction sends a zero component to the same zero component, supplying its zero-morphism parameter. We will also use the following elementary consequence of [def-weil-abstract-derived-category]: if $Q(g)$ is invertible then each $H^q(g)$ is invertible, because $H^q$ factors through $Q$; hence $g$ is a quasi-isomorphism. Conversely $Q$ inverts quasi-isomorphisms by its definition.",
+   "uses": [
+    "lem-pur-kinjective-restrict-localized",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), transfinite recursion; limit comparison uses Tag 0D68 (cohomology-lemma-uniqueness), rather than the finite-case pointer printed in 0D6B."
+   }
+  },
+  {
+   "text": "Suppose $\\alpha=\\delta+1$. By [lem-weil-pbc-kinjective-hom-derived], applied to the source $I_\\delta$ and the K-injective target $I_\\alpha|_{W_\\delta}$ from Step 1, choose a chain map $g:I_\\delta\\to I_\\alpha|_{W_\\delta}$ representing $a_{\\delta\\alpha}$. A morphism in the homotopy category is a homotopy class of chain maps, so the asserted surjectivity supplies an actual representative. Put $f_{\\delta\\alpha}=g$ and $f_{\\beta\\alpha}=(g|_{W_\\beta})f_{\\beta\\delta}$ for $\\beta<\\delta$. The cocycle equation of Step 1 proves the prescribed derived class of every new map. Each is a quasi-isomorphism by the cohomology argument of Step 1. For $\\gamma<\\beta<\\delta$, substitute the old equality $f_{\\gamma\\delta}=(f_{\\beta\\delta}|_{W_\\gamma})f_{\\gamma\\beta}$ into this formula; associativity gives $f_{\\gamma\\alpha}=(f_{\\beta\\alpha}|_{W_\\gamma})f_{\\gamma\\beta}$ strictly. The triple with $\\beta=\\delta$ is the defining formula itself.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), transfinite recursion; limit comparison uses Tag 0D68 (cohomology-lemma-uniqueness), rather than the finite-case pointer printed in 0D6B."
+   }
+  },
+  {
+   "text": "Suppose $\\alpha$ is a nonzero limit and that all earlier maps have been constructed. Continuity gives the increasing cover $W_\\alpha=\\bigcup_{\\beta<\\alpha}W_\\beta$. Apply [lem-trf-derived-strict-open-colimit] on this open subscheme, to the ordinal $\\alpha$, the complexes $I_\\beta$, and the earlier maps. All its quasi-isomorphism and strict-composition hypotheses are induction invariants. Obtain a complex $C$ on $W_\\alpha$ and quasi-isomorphisms $s_\\beta:I_\\beta\\to C|_{W_\\beta}$ with $s_\\gamma=(s_\\beta|_{W_\\gamma})f_{\\gamma\\beta}$. Write $M=QC$ and $N=QI_\\alpha$. We must construct one derived map $M\\to N$, before choosing a chain representative; individual lifts on the opens would supply only homotopy compatibility.",
+   "uses": [
+    "lem-trf-derived-strict-open-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), transfinite recursion; limit comparison uses Tag 0D68 (cohomology-lemma-uniqueness), rather than the finite-case pointer printed in 0D6B."
+   }
+  },
+  {
+   "text": "Set $h_\\beta=a_{\\beta\\alpha}Q(s_\\beta)^{-1}:M|_{W_\\beta}\\xrightarrow{\\sim}N|_{W_\\beta}$. For $\\gamma<\\beta<\\alpha$, the equations $a_{\\gamma\\alpha}=(a_{\\beta\\alpha}|_{W_\\gamma})a_{\\gamma\\beta}$, $Q(f_{\\gamma\\beta})=a_{\\gamma\\beta}$ and $Q(s_\\gamma)=(Q(s_\\beta)|_{W_\\gamma})Q(f_{\\gamma\\beta})$ give $h_\\gamma=h_\\beta|_{W_\\gamma}$ by cancellation. Let $\\mathcal C$ be the set of distinct opens among the $W_\\beta$, $\\beta<\\alpha$. Equal opens receive equal maps by the same equation, using the order of their indices, so $h$ defines an inclusion-compatible family on $\\mathcal C$. It covers $W_\\alpha$ and refines intersections: the intersection of two members is the smaller member itself. On each $W_\\beta$, the maps $e_\\beta Q(s_\\beta)^{-1}$ and $r_\\beta^\\alpha(e_\\alpha|_{W_\\beta})$ identify $M|_{W_\\beta}$ and $N|_{W_\\beta}$ with $K_\\beta$. Conjugation, also after shifts, therefore identifies each negative Hom group for any of the ordered pairs $(M,N),(N,M),(M,M),(N,N)$ on this open with $\\operatorname{Hom}(K_\\beta,K_\\beta[i])=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), transfinite recursion; limit comparison uses Tag 0D68 (cohomology-lemma-uniqueness), rather than the finite-case pointer printed in 0D6B."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-basis-local-hom-glue] on $W_\\alpha$, with covering collection $\\mathcal C$, $O=W_\\alpha$ and pair $(M,N)$. Step 4 checks precisely its intersection and local negative-Hom hypotheses. Its Hom bijection gives $u:M\\to N$ restricting to every $h_\\beta$. For $(N,M)$ it gives $v:N\\to M$ restricting to $h_\\beta^{-1}$. Apply the injective parts of the bijections for $(M,M)$ and $(N,N)$: the composites $vu$ and $uv$ restrict to the identities, so they equal the identities globally. Thus $u$ is an isomorphism, with $u|_{W_\\beta}\\,Q(s_\\beta)=a_{\\beta\\alpha}$. This uses the general local-Hom uniqueness statement, not existence for a finite subcover; there need not be any finite subcover.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), transfinite recursion; limit comparison uses Tag 0D68 (cohomology-lemma-uniqueness), rather than the finite-case pointer printed in 0D6B."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kinjective-hom-derived] for the source $C$ and the given K-injective target $I_\\alpha$, choose a chain map $t:C\\to I_\\alpha$ with $Q(t)=u$. Define $f_{\\beta\\alpha}=(t|_{W_\\beta})s_\\beta$. Step 5 gives $Q(f_{\\beta\\alpha})=(u|_{W_\\beta})Q(s_\\beta)=a_{\\beta\\alpha}$, so these maps are quasi-isomorphisms by Step 1. Moreover the chain equality from Step 3 gives, without changing any earlier choice, $f_{\\gamma\\alpha}=(t|_{W_\\gamma})s_\\gamma=(t|_{W_\\gamma})(s_\\beta|_{W_\\gamma})f_{\\gamma\\beta}=(f_{\\beta\\alpha}|_{W_\\gamma})f_{\\gamma\\beta}$. This completes the limit extension with strict composition.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), transfinite recursion; limit comparison uses Tag 0D68 (cohomology-lemma-uniqueness), rather than the finite-case pointer printed in 0D6B."
+   }
+  },
+  {
+   "text": "The zero, successor and nonzero-limit cases extend the same partial system without changing its earlier maps, so set-sized transfinite recursion supplies all required $f_{\\beta\\alpha}$. For $\\lambda=0$ or $1$ there are no pairs. Empty or repeated opens are allowed throughout; the Hom-gluing lemma includes the empty scheme, and Step 4 checks repetitions explicitly. Only covers of individual limit opens were used, so the family need not cover $X$. The complexes $I_\\alpha$ and identifications $e_\\alpha$ remain the prescribed ones.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), transfinite recursion; limit comparison uses Tag 0D68 (cohomology-lemma-uniqueness), rather than the finite-case pointer printed in 0D6B."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kinjective-restrict-localized",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-trf-derived-strict-open-colimit",
+  "lem-trf-derived-basis-local-hom-glue"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), transfinite recursion; limit comparison uses Tag 0D68 (cohomology-lemma-uniqueness), rather than the finite-case pointer printed in 0D6B."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "gluing|glue|negative.*[Ee]xt",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective replacements, bounded representative fractions or ordinary injective-resolution maps; none constructs strictly compatible maps on a continuous ordinal family of opens with the prescribed derived classes"
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|rectif|transfinite",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective replacements, bounded representative fractions or ordinary injective-resolution maps; none constructs strictly compatible maps on a continuous ordinal family of opens with the prescribed derived classes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"homEquiv\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective replacements, bounded representative fractions or ordinary injective-resolution maps; none constructs strictly compatible maps on a continuous ordinal family of opens with the prescribed derived classes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"transfinite\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective replacements, bounded representative fractions or ordinary injective-resolution maps; none constructs strictly compatible maps on a continuous ordinal family of opens with the prescribed derived classes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a strictly commuting system of complexes over an increasing open cover to a K-injective target representing compatible local derived isomorphisms",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transfinite choice of chain representatives for a compatible family of derived isomorphisms on nested open subsets",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a limit ordinal, lift compatible derived isomorphisms to a single chain map from a colimit into a K-injective complex using negative Ext vanishing",
+   "results": "8 hits; top=['CochainComplex.cm5b', 'DerivedCategory.right_fac_of_isStrictlyLE', 'DerivedCategory.left_fac_of_isStrictlyGE', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'CategoryTheory.InjectiveResolution.extMk_hom', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'CategoryTheory.InjectiveResolution.extMk_surjective', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective']; note=; digest=5eac63d98194de68",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective replacements, bounded representative fractions or ordinary injective-resolution maps; none constructs strictly compatible maps on a continuous ordinal family of opens with the prescribed derived classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose K-injective representatives of derived objects on a continuous ordinal open cover and strictly composable chain maps realizing their coherent transition isomorphisms",
+   "results": "8 hits; top=['CochainComplex.cm5b', 'CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p', 'CategoryTheory.InjectiveResolution.ofCocomplex', 'CochainComplex.cm5b.I', 'CochainComplex.cm5b.I_X', 'CochainComplex.cm5b.instInjectiveXIntI', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'CochainComplex.isKInjective_of_injective']; note=; digest=2171f635eba1115a",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective replacements, bounded representative fractions or ordinary injective-resolution maps; none constructs strictly compatible maps on a continuous ordinal family of opens with the prescribed derived classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rectification of an ordinal indexed derived descent datum to strictly coherent morphisms of K-injective complexes",
+   "results": "8 hits; top=['CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ', 'CategoryTheory.InjectiveResolution.descFSucc', \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", 'CategoryTheory.InjectiveResolution.toRightDerivedZero_eq', 'CochainComplex.cm5b', 'DerivedCategory.right_fac_of_isStrictlyLE', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'CategoryTheory.Functor.toRightDerivedZero']; note=; digest=22777b33dd5adfea",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective replacements, bounded representative fractions or ordinary injective-resolution maps; none constructs strictly compatible maps on a continuous ordinal family of opens with the prescribed derived classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible local isomorphisms from a complex to a K-injective object glue and lift to a chain map when local negative self extensions vanish",
+   "results": "8 hits; top=['CochainComplex.cm5b', 'CochainComplex.isKInjective_of_injective_aux', 'CochainComplex.cm5b.fac', 'CategoryTheory.InjectiveResolution.descFSucc', 'CochainComplex.cm5b.i', \"CategoryTheory.InjectiveResolution.ι'\", 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CategoryTheory.InjectiveResolution.descFOne']; note=; digest=61741fa757bac454",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective replacements, bounded representative fractions or ordinary injective-resolution maps; none constructs strictly compatible maps on a continuous ordinal family of opens with the prescribed derived classes"
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|rectif|transfinite",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give K-injective lifting, bounded factorizations, ordinary sheaf compatibility or finite composable-arrow diagrams, not strictification of prescribed derived ordinal descent data"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strictification of ordinal derived descent data by chain maps between fixed K-injective complexes",
+   "results": "8 hits; top=['CochainComplex.isKInjective_of_injective_aux', 'CochainComplex.isKInjective_of_iso', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CategoryTheory.InjectiveResolution.desc_commutes', 'CochainComplex.IsKInjective.recOn', 'CochainComplex.cm5b', 'CochainComplex.IsKInjective', 'CochainComplex.IsKInjective.rec']; note=; digest=65883685e6e899b6",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give K-injective lifting, bounded factorizations, ordinary sheaf compatibility or finite composable-arrow diagrams, not strictification of prescribed derived ordinal descent data"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"transfinite\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give K-injective lifting, bounded factorizations, ordinary sheaf compatibility or finite composable-arrow diagrams, not strictification of prescribed derived ordinal descent data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly composable chain representatives for derived descent data on an ordinal indexed increasing family of open subsets",
+   "results": "8 hits; top=['TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCoverMap', 'TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCover', 'TopCat.Presheaf.SheafCondition.instNonemptyStructuredArrowPairwiseOpensLeCoverPairwiseToOpensLeCover', 'TopCat.Presheaf.IsCompatible.sectionPairwise', 'TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCover_map', 'CategoryTheory.ComposableArrows.mkOfObjOfMapSucc_exists', 'TopCat.partialSections', 'CategoryTheory.TransfiniteCompositionOfShape.ofComposableArrows']; note=; digest=f8122e8c8eeabf67",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give K-injective lifting, bounded factorizations, ordinary sheaf compatibility or finite composable-arrow diagrams, not strictification of prescribed derived ordinal descent data"
+  },
+  {
+   "tool": "grep",
+   "query": "gluing|glueing|ordinal",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give K-injective lifting, bounded factorizations, ordinary sheaf compatibility or finite composable-arrow diagrams, not strictification of prescribed derived ordinal descent data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfinite recursion constructing strictly compatible quasi-isomorphisms between fixed K-injective models of objects on nested opens",
+   "results": "8 hits; top=['CochainComplex.cm5b', 'CochainComplex.isKInjective_of_injective_aux', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'CochainComplex.IsKInjective', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CochainComplex.cm5b.I', 'DerivedCategory.right_fac_of_isStrictlyLE']; note=; digest=0bf5416830f11bbe",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give K-injective lifting, bounded factorizations, ordinary sheaf compatibility or finite composable-arrow diagrams, not strictification of prescribed derived ordinal descent data"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-basis-increasing-union",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; BBD descent for derived objects with vanishing negative self extensions. Supporting BBD descent component: Tag 0D6B (cohomology-lemma-glueing-increasing-union), specialized to the ringed space of a scheme. Re-split component: proof, transfinite recursion on chosen K-injective representatives, successor composition and the limit comparison C to I_alpha (returned steps 1, 3, 7--8); comparison direction and uniqueness citation corrected as in the parent.",
+   "via": [
+    "lem-trf-derived-basis-increasing-union",
+    "lem-trf-derived-basis-bbd-descent",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-derived-ordinal-strictification",
+  "worker": "stage1",
+  "summary": "Split the ordinal recursion into successor lifting, strict-open colimit at limits, compatible derived comparison, inverse gluing, and chain-level composition. Reused all supporting nodes; no new nodes. Checked empty/repeated opens, arbitrary prescribed models, and non-covering ambient family. Corrected the source proof's comparison direction and finite-case uniqueness pointer without changing the statement.",
+  "blueprint": "Nearest blueprint ancestor lem-trf-local-term-locality: auxiliary BBD descent component along the existing relative-duality/Temkin chain, specifically Tag 0D6B transfinite choice and limit comparison. Current latest ancestor was read; it does not independently restate this auxiliary lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic restriction of K-injective complexes to a slice, applied to the site of opens; this unit has no separate resolution-restriction theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kinjective-restrict-localized"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-92fe8d2f8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-92fe8d2f8 (reviewer sub-agent of L); spot-checked: I read the whole split; it is correct and I made no fixes. No new nodes, no unit changes, and the statement is identical to every earlier Q88 snapshot. It is a plain one-level split, not a re-split order. Stacks 0D6B (cohomology.tex 11343-11455) matches the item's recursion: successor lift and compose, then at a limit a termwise colimit C and a chain map tau from C to I_alpha. The report's source corrections are right: Stacks writes tau as representing sigma : K_alpha -> C, which is the wrong direction, and it points to the finite-case lemma for uniqueness where the 0D68 global-Hom gluing argument is needed. Each cited statement says what the step takes from it. kinjective-restrict-localized: the slice over W_beta is canonically the site of opens of W_beta (a 'literally' that holds up to that identification). I accept it as a declared tool use; it is a generic lemma from unit sk-def-sf-operations. kinjective-hom-derived: Mathlib leaf; surjectivity for an arbitrary source into a K-injective target. strict-open-colimit: applied on the scheme W_alpha, which its earlier opens cover by continuity; it gives strict coprojections. basis-local-hom-glue: intersections of members are the smaller member; negative Hom holds by conjugation to K_beta. I recomputed the a-cocycle, the successor strictness, h_beta|_{W_gamma}=h_gamma, the inverse gluing (vu=1, uv=1 by injectivity) and the limit strictness (t|)s_gamma=(f_{beta alpha}|)f_{gamma beta}. Edge cases checked: lambda=0,1; W_0 empty; repeated opens; alpha=omega with no finite subcover; a family not covering X. No dependency cycle (only the parent increasing-union cites it), no duplicate found by rg, and no SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedOrdinalStrictification",
+  "declaration": "AlgebraicGeometry.derived_ordinal_strictification",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOrdinalStrictification.lean",
+  "statement": "theorem derived_ordinal_strictification (X : Scheme.{u}) (lambda : Ordinal.{v}) [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (W : lambda.ToType → X.Opens) (hincreasing : Monotone W) (hcontinuous : ∀ alpha : lambda.ToType, Order.IsSuccPrelimit alpha → W alpha = ⨆ beta : {beta : lambda.ToType // beta < alpha}, W beta.val) (K : ∀ alpha : lambda.ToType, DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (W alpha)))) (hnegative : ∀ (alpha : lambda.ToType) (i : ℤ), i < 0 → Subsingleton (K alpha ⟶ (K alpha)⟦i⟧)) (I : ∀ alpha : lambda.ToType, CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (W alpha))) ℤ) (hI : ∀ alpha : lambda.ToType, (I alpha).IsKInjective) (e : ∀ alpha : lambda.ToType, DerivedCategory.Q.obj (I alpha) ≅ K alpha) (r : ∀ (beta alpha : lambda.ToType) (h : beta < alpha), (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hincreasing h.le))).mapDerivedCategory.obj (K alpha) ≅ K beta) (hcocycle : ∀ (gamma beta alpha : lambda.ToType) (hgb : gamma < beta) (hba : beta < alpha), (derivedModuleOpenMapCompIso X (homOfLE (hincreasing hgb.le)) (homOfLE (hincreasing hba.le))).inv.app (K alpha) ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hincreasing hgb.le))).mapDerivedCategory.map (r beta alpha hba).hom ≫ (r gamma beta hgb).hom = (r gamma alpha (hgb.trans hba)).hom) : ∃ (f : ∀ (beta alpha : lambda.ToType) (h : beta < alpha), I beta ⟶ ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hincreasing h.le))).mapHomologicalComplex (.up ℤ)).obj (I alpha)), (∀ (beta alpha : lambda.ToType) (h : beta < alpha), QuasiIso (f beta alpha h)) ∧ (∀ (gamma beta alpha : lambda.ToType) (hgb : gamma < beta) (hba : beta < alpha), f gamma beta hgb ≫ ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hincreasing hgb.le))).mapHomologicalComplex (.up ℤ)).map (f beta alpha hba) ≫ (Functor.mapHomologicalComplexCompIso (moduleOpenMapCompIso X (homOfLE (hincreasing hgb.le)) (homOfLE (hincreasing hba.le))) (.up ℤ)).hom.app (I alpha) = f gamma alpha (hgb.trans hba)) ∧ (∀ (beta alpha : lambda.ToType) (h : beta < alpha), DerivedCategory.Q.map (f beta alpha h) = (e beta).hom ≫ (r beta alpha h).inv ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hincreasing h.le))).mapDerivedCategory.map (e alpha).inv ≫ (Functor.mapDerivedCategoryFactors (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hincreasing h.le)))).hom.app (I alpha))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the shared localized-open-site categories and the existing sectionwise identity comparison definitions from DerivedBasisIncreasingUnion. The composition conclusion is an equality of chain maps after the canonical direct/iterated restriction identification. No covering hypothesis on X; prescribed I and e are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9067413bc",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: arbitrary ordinal (ToType), monotone W, IsSuccPrelimit continuity (gives W_0=⊥), no cover hypothesis, the given K-injective I and isomorphisms e as inputs, Subsingleton negative Hom, r and cocycle identical to the landed parent, strict chain-map composition via the sectionwise-identity mapHomologicalComplexCompIso, derived class e_β ≫ r⁻¹ ≫ R(e_α⁻¹) ≫ mapDerivedCategoryFactors. Edge cases λ=0/1, empty or repeated opens, non-covering family checked; universes u,v,w free. Only the lean field changed and the statement is verbatim; one sorry in the theorem body, no defs; docstrings carry the source, blueprint id and proof. The helpers moduleOpenMapCompIso/derivedModuleOpenMapCompIso are reused from the parent module (canonical data, same as the landed BbdDescent sibling). Maintainer note: the parent's future proof import of this module would close an import cycle, so leave it out and list it per stages/2-statements §3(7), or first move the helpers to their own module. Not recompiled (no change); relied on the worker's clean compile."
+ }
+}

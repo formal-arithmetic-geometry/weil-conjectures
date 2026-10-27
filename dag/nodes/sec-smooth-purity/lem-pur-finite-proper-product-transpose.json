@@ -20,109 +20,80 @@
  ],
  "proof": [
   {
-   "text": "Fix the finite coefficient ring and write $P_u=Lu^*$, $R_u=Ru_*$; all tensors below are derived over $A$. The ordinary unbounded operations and adjunctions are those of [def-weil-pbc-proetale-operations]. The constant-ring structure maps compose by [lem-pur-proetale-constant-ring-composition], so composable scheme maps give precisely the composite ringed-topos morphism. Apply [lem-sfb-ringed-derived-monoidal-comparisons] to these ringed topoi: the pullback tensor comparisons are symmetric monoidal and the K-injective direct-image compositor is adjunction-compatible with pullback composition. Its finite-level specialization is the canonical compositor of [lem-weil-derived-direct-image-composition]. Consequently, after the stated comparisons, $\\varepsilon_{bt,K}=\\varepsilon_{t,K}\\circ P_t(\\varepsilon_{b,R_tK})$. This fixes the actual counit, rather than merely choosing some adjunction on isomorphic functors. All later formulas insert these same comparisons.",
+   "text": "Use ordinaryDerivedProductLegTransposes for the first two conjuncts. Its construction import has been factored into FiniteProperProductMaps, so it can be imported without cycling through this theorem.",
    "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-pur-proetale-constant-ring-composition",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-derived-direct-image-composition"
+    "def-pur-finite-proper-product-maps",
+    "lem-pur-ordinary-derived-product-leg-transposes"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+    "place": "Tag 0E48, label remark-compatible-with-diagram, and equation-projection-formula-map immediately preceding it; The counit calculation in the symmetry paragraph; returned proof Steps 3--6. This is an agent-formulated comparison, not the literal assertion of the Stacks tag. The argument is retained in report.md from literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
    }
   },
   {
-   "text": "Put $Q=P_bF\\otimes J$ and $T=P_rH$. The exchange definition [def-exchange-projection] gives $\\varepsilon_{t,T}\\circ P_t(x)=P_r(\\varepsilon_{a,H})$ after the square pullback comparison. The projection map in that same definition satisfies $\\varepsilon_{t,T\\otimes P_tJ}\\circ P_t(\\pi_{t;T,J})=(\\varepsilon_{t,T}\\otimes1)\\mu_t$. Therefore naturality of $\\mu_t$ [lem-pur-derived-pullback-tensor-iso] and tensor bifunctoriality give\n$$\\widehat v=\\varepsilon_{t,E}\\circ P_t(v)=(\\varepsilon_{t,T}\\circ P_t(x))\\otimes1_{P_tJ}=P_r(\\varepsilon_{a,H})\\otimes1_{P_tJ}.$$\nThis is a calculation with the defining transposes, and uses no invertibility of $x$ or $\\pi_t$.",
+   "text": "Use finiteProperCompositorMate to rewrite kappa.inv as conjugate(comp.hom). conjugateEquiv_counit and naturality of comp prove compositor_transpose. Expand Adjunction.comp_homEquiv, use inverse-hom naturality and the counit formula to prove successive_transpose. These give the fourth and fifth conjuncts.",
    "uses": [
-    "def-exchange-projection",
-    "lem-pur-derived-pullback-tensor-iso"
+    "lem-pur-finite-proper-compositor-mate",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+    "place": "Tag 0E48, label remark-compatible-with-diagram, and equation-projection-formula-map immediately preceding it; The counit calculation in the symmetry paragraph; returned proof Steps 3--6. This is an agent-formulated comparison, not the literal assertion of the Stacks tag. The argument is retained in report.md from literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
    }
   },
   {
-   "text": "Transpose $w$ under $P_b\\dashv R_b$. Naturality of the counit moves the postcomposed $R_b(\\sigma_{J,P_bF})$ outside the transpose. The projection definition [def-exchange-projection] then gives, under $\\mu_b$,\n$$\\widehat w=\\sigma_{J,P_bF}\\circ(\\varepsilon_{b,J}\\otimes1_{P_bF})\\circ\\sigma_{P_bF,P_bG}=1_{P_bF}\\otimes\\varepsilon_{b,J}.$$\nIndeed the last equality is naturality of the signed symmetry followed by $\\sigma_{J,P_bF}\\circ\\sigma_{P_bF,J}=1$. Pullback carries the input symmetry to the displayed one by [lem-pur-derived-pullback-tensor-iso]. Both counits and all morphisms being tensored have degree zero; no assertion that the symmetry itself has trivial Koszul signs is used.",
+   "text": "Apply compositor_transpose and successive_transpose to omega, substitute the two existing leg identities, and apply finiteProductNormalForm to the actual a- and b-counits. Its conclusion unfolds to the third conjunct, retaining every canonical source comparison.",
    "uses": [
-    "def-exchange-projection",
-    "lem-pur-derived-pullback-tensor-iso"
+    "lem-pur-ordinary-derived-product-leg-transposes",
+    "lem-pur-finite-product-normal-form"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+    "place": "Tag 0E48, label remark-compatible-with-diagram, and equation-projection-formula-map immediately preceding it; The counit calculation in the symmetry paragraph; returned proof Steps 3--6. This is an agent-formulated comparison, not the literal assertion of the Stacks tag. The argument is retained in report.md from literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
    }
   },
   {
-   "text": "Compute the composite transpose, keeping $Q=P_bF\\otimes J$. By Step 1 and the composite hom bijection [def-weil-pbc-composite-adjunction], the transpose of $\\kappa_{b,t}^{-1}\\circ R_b(v)\\circ w$ is\n$$\\varepsilon_{t,E}\\circ P_t(\\varepsilon_{b,R_tE})\\circ P_tP_b(R_bv)\\circ P_tP_b(w).$$\nNaturality of $\\varepsilon_b$ for $v:Q\\to R_tE$ rewrites the middle pair as $P_t(v)\\circ P_t(\\varepsilon_{b,Q})$. Hence the displayed arrow equals\n$$\\bigl(\\varepsilon_{t,E}\\circ P_t(v)\\bigr)\\circ P_t\\bigl(\\varepsilon_{b,Q}\\circ P_b(w)\\bigr)=\\widehat v\\circ P_t(\\widehat w).$$\nThe cancellation of $\\kappa$ here is justified by the adjunction compatibility of [lem-sfb-ringed-derived-monoidal-comparisons], not just by associativity of direct images.",
+   "text": "Use finiteProperTransportTranspose for the actual swap morphism, the projection equality swapStructure, and the specified swapTensor. Expand swapPush and swapPull and simplify equality-isomorphism components to obtain swap_transpose.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-pur-finite-proper-transport-transpose"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+    "place": "Tag 0E48, label remark-compatible-with-diagram, and equation-projection-formula-map immediately preceding it; The counit calculation in the symmetry paragraph; returned proof Steps 3--6. This is an agent-formulated comparison, not the literal assertion of the Stacks tag. The argument is retained in report.md from literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
    }
   },
   {
-   "text": "Insert Steps 2 and 3 into Step 4. Pullback tensor naturality gives $P_t(\\widehat w)=1_{P_tP_bF}\\otimes P_t(\\varepsilon_{b,J})$. Use $P_tP_b=P_c=P_rP_a$ through [lem-weil-pbc-proetale-derived-pullback-composition]; compatibility of these comparisons with tensor is [lem-pur-derived-pullback-tensor-iso]. Thus\n$$\\widehat\\Omega_{a,b}=(P_r\\varepsilon_{a,H}\\otimes1)\\circ(1\\otimes P_t\\varepsilon_{b,J})=P_r\\varepsilon_{a,H}\\otimes P_t\\varepsilon_{b,J}.$$\nThe last equality is the composition law for a bifunctor. This proves all three transpose formulas and the asserted composite hom-bijection formula.",
+   "text": "Apply inverse-hom injectivity to the final equality. Precomposition naturality moves sigma through transposition. Substitute swap_transpose and the third conjunct for the reversed pair. finiteProductEvaluationSwap on the two actual counits identifies the resulting evaluation map with the original one.",
    "uses": [
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-pur-derived-pullback-tensor-iso"
+    "lem-pur-finite-product-evaluation-swap",
+    "def-weil-pbc-composite-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
-   }
-  },
-  {
-   "text": "For the swap write $s=\\bar s:C\\to C'$, $E'=P_{r'}J\\otimes P_{t'}H$, and $d:P_sE'\\to E$ for the pullback comparisons followed by $\\sigma_{P_tJ,P_rH}$. The isomorphism of sites in [lem-weil-proetale-isomorphism-inverse-image] makes $P_s\\dashv R_s$ an equivalence on the ordinary derived categories (apply its exact inverse functors termwise). Its unit $\\eta_s$ is invertible. With $c's=c$, the specified transport is\n$$S_{a,b}=R_c(d)\\circ\\kappa_{c',s}^{-1}\\circ R_{c'}(\\eta_{s,E'}).$$\nFor any $u:M\\to R_{c'}E'$, its transported transpose, using Step 1, is\n$$d\\circ\\varepsilon_{s,P_sE'}\\circ P_s(\\varepsilon_{c',R_sP_sE'})\\circ P_sP_{c'}(R_{c'}\\eta_{s,E'}\\circ u).$$\nNaturality of $\\varepsilon_{c'}$ moves $\\eta_{s,E'}$ to the left of $\\varepsilon_{c',E'}$; the triangle identity $\\varepsilon_{s,P_sE'}\\circ P_s(\\eta_{s,E'})=1$ cancels it. The result is exactly $d\\circ P_s(\\widehat u)$. Composition and transport use [lem-sfb-ringed-derived-monoidal-comparisons, lem-weil-derived-direct-image-composition], so this calculation concerns the stipulated $S_{a,b}$.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-derived-direct-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
-   }
-  },
-  {
-   "text": "Apply Step 5 with $(a,H)$ and $(b,J)$ interchanged, and then Step 6 to $u=\\Omega_{b,a}$. Precomposing by $\\sigma_{F,G}$ precomposes the transpose by $P_c(\\sigma_{F,G})$. The pullback/tensor and composition comparisons [lem-pur-derived-pullback-tensor-iso, lem-weil-pbc-proetale-derived-pullback-composition] identify the result with\n$$\\sigma_{P_tJ,P_rH}\\circ(P_t\\varepsilon_{b,J}\\otimes P_r\\varepsilon_{a,H})\\circ\\sigma_{P_rP_aF,P_tP_bG}=P_r\\varepsilon_{a,H}\\otimes P_t\\varepsilon_{b,J}.$$\nThis is signed symmetry naturality and its involution identity. It equals $\\widehat\\Omega_{a,b}$ by Step 5. Injectivity of the ordinary adjunction hom bijection [def-weil-pbc-proetale-operations] proves the claimed equality of forward maps. No boundedness, finite Tor, etale-origin or constructibility condition entered any step.",
-   "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+    "place": "Tag 0E48, label remark-compatible-with-diagram, and equation-projection-formula-map immediately preceding it; The counit calculation in the symmetry paragraph; returned proof Steps 3--6. This is an agent-formulated comparison, not the literal assertion of the Stacks tag. The argument is retained in report.md from literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
    }
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
+  "def-pur-finite-proper-product-maps",
+  "def-weil-pbc-adjunction-conjugate",
   "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-proetale-operations",
-  "lem-pur-derived-pullback-tensor-iso",
-  "lem-pur-proetale-constant-ring-composition",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-weil-derived-direct-image-composition",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-proetale-isomorphism-inverse-image"
+  "lem-pur-finite-product-evaluation-swap",
+  "lem-pur-finite-product-normal-form",
+  "lem-pur-finite-proper-compositor-mate",
+  "lem-pur-finite-proper-transport-transpose",
+  "lem-pur-ordinary-derived-product-leg-transposes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0E48 and 0D6E; explicit counit expansion of the proper symmetry paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md. The blueprint states the reduction but does not supply these calculations."
+  "place": "Tags 0E48, 07A4, 07A6, 0D6D and 0D6E; explicit Lean inverse-hom, conjugation, tensor-naturality and triangle calculations in the original unit route."
  },
  "mathlib_searches": [
   {
@@ -254,20 +225,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-finite-proper-product-transpose",
   "worker": "stage1",
-  "summary": "Expanded the three counit transposes and swap into seven typed calculations on ordinary unbounded finite-coefficient pro-etale categories. Reused the existing general ringed-topos monoidal/adjunction compositor theorem, avoiding a duplicate normalization node. No statement changes or new nodes. Retained all prior searches and provenance.",
-  "blueprint": "Realizes the proper-product symmetry ingredient of prop-pur-affine-space-composition-law Steps 3--4, through the recorded ancestors; expands the proper two-counit paragraph of lem-sf-kunneth-coherence without invoking compact-support or exceptional operations.",
+  "summary": "Repair of the 2026-10-22 re-split return: extracted three independent, statement-only lemmas for the two leg transposes, successive transposes through the specified derived compositor, and isomorphism transport. The five-step assembly retains the tensor-of-counits and signed-swap arguments. Statement, Lean record, all previous search records and provenance are unchanged. The full original seven arguments and their assignment are preserved in the report.",
+  "blueprint": "Proper two-counit symmetry paragraph of current lem-sf-kunneth-coherence, serving prop-pur-affine-space-composition-law Steps 3--4 through the recorded ancestors; original Steps 2--3 -> leg lemma, 1 and 4 -> composite lemma, 6 -> transport lemma, 5 and 7 -> assembly Steps 3 and 5.",
   "tool_uses": [
-   {
-    "node": "def-exchange-projection",
-    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
-   },
-   {
-    "node": "def-weil-pbc-composite-adjunction",
-    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
-   },
    {
     "node": "def-weil-pbc-proetale-operations",
     "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
@@ -277,23 +240,7 @@
     "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
    },
    {
-    "node": "lem-pur-proetale-constant-ring-composition",
-    "why": "Identifies the actual constant-ring maps for a composite with the composite ringed-topos structure maps."
-   },
-   {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "Canonical ordinary ringed-topos compositor preserves the actual adjunction counit, tensor and diagram isomorphisms; this is a generic coherence tool, not a replacement for the affine-space trace route."
-   },
-   {
-    "node": "lem-weil-derived-direct-image-composition",
-    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
-   },
-   {
     "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
-   },
-   {
-    "node": "lem-weil-proetale-isomorphism-inverse-image",
     "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
    }
   ]
@@ -303,47 +250,21 @@
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-proetale-operations",
   "lem-pur-derived-pullback-tensor-iso",
-  "lem-pur-proetale-constant-ring-composition",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-weil-derived-direct-image-composition",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-proetale-isomorphism-inverse-image"
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N0-46f6035c5",
-  "group": "N0",
+  "reviewer": "NT-cc-Q119-e476ac73a",
+  "group": "Q119",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-46f6035c5 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited statement in full (def-exchange-projection, lem-sfb-ringed-derived-monoidal-comparisons, lem-weil-derived-direct-image-composition and its proof Step 1, lem-pur-derived-pullback-tensor-iso, lem-weil-pbc-proetale-derived-pullback-composition, def-weil-pbc-proetale-operations, lem-weil-proetale-isomorphism-inverse-image, def-weil-pbc-composite-adjunction, lem-pur-proetale-constant-ring-composition), Stacks 0E48 (remark-compatible-with-diagram plus equation-projection-formula-map; its verification is omitted) and lem-sf-kunneth-coherence.proof.md l.26-33. The delivery is valid: statement and stmt_deps match the base exactly, the base proof was empty, there are 0 new nodes, the item is still unsplit on live and side-live, it is not in the dropped list, there is no repair note, and there is no SGA citation and no cycle. I recomputed each step's mathematics myself. Typing with f=a, g=b, f'=t, g'=r is correct. Step 2: v-hat=Lr*eps_a tensor 1, from the pi-transpose (eps tensor 1)mu and the Ex-transpose Lr*eps_a theta. Step 3: w-hat=1 tensor eps_b, from mu commuting with the signed symmetry, naturality of sigma, and sigma sigma=1. Steps 4-5: the composite transpose is v-hat composed with P_t(w-hat), giving P_r eps_a tensor P_t eps_b. Step 6: S=R_c(d)kappa^{-1}R_{c'}(eta_s) equals the transport along the swap and sigma; the transpose is d P_s(u-hat) by counit naturality and the triangle identity. Step 7: r's=t, t's=r, and symmetry naturality and involution close it. Edge cases checked: zero objects, empty schemes, identities, odd shifts, unbounded tensors at n>1. No duplicate found (lem-trf-exceptional-kunneth-counit and lem-sf-kv-alpha-transpose-coherence state different things). All nine tool_uses are accepted as generic coherence tools. Advisory only: Step 1 identifies the finite compositor of lem-weil-derived-direct-image-composition with the ringed-topos kappa via that node's proof Step 1; this is acceptable because the ringed lemma's normalization determines the comparison for the same K-injective functors. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-e476ac73a (reviewer sub-agent of L); spot-checked: Q119 lem-pur-finite-proper-product-transpose e476ac73 answers the batch5 re-split note (live = side-live, released 2026-10-22). Supersession check: live and side-live still hold the 7-step 5519-char proof, and none of the 3 new ids exists. The item is not in route-pivot-dropped and the delivery cites no SGA. Against live, the item changes only proof, proof_deps and split_report; statement, stmt_deps, Lean record and searches are byte-identical. New proof: 5 steps, 2312 chars, uses equal to the text citations, proof_deps their union. Old step mapping: 1+4 go to lem-pur-ordinary-derived-composite-transpose (counit normalization through the finite compositor, then v-hat∘P_f(w-hat)); 2+3 go to lem-pur-ordinary-derived-product-leg-transposes (v-hat=((P_r eps_a∘theta_F)⊗1)mu_t and w-hat=(1⊗eps_b)mu_b, signed symmetries kept); 6 goes to lem-pur-ordinary-derived-isomorphism-transport-transpose (S_d=R_c(d)kappa^-1 R_q(eta_s), an isomorphism via lem-weil-proetale-isomorphism-inverse-image, transpose d∘P_s(u-hat)∘alpha). Old 5 and 7 stay as the short assembly with the same arguments and citations; as nodes they would restate the item's own Omega-hat and swap clauses. The three nodes carry 1341, 1702 and 1059 chars of the old argument, which is comparable, and none restates the item. I recomputed all three statements against def-exchange-projection (Ex transpose P_r eps∘theta; pi = R_u(a)∘eta), def-weil-pbc-composite-adjunction, lem-sfb-ringed-derived-monoidal-comparisons (adjunction-compatible kappa, eps_gf=eps_f∘P_f eps_g) and lem-pur-derived-pullback-tensor-iso (symmetry and composition compatibility). I also checked the substitutions: f=t, g=b, Q=P_bF⊗J, h=Omega; c'∘s̄=c, r'∘s̄=t, t'∘s̄=r. Edge cases checked: identities, zero objects, s=id, d=id, odd shifts. All new nodes are statement-only and self-contained, with four search kinds, correct blueprint.from/via and created.item. Sources read: Stacks 0E48 (remark-compatible-with-diagram l.13715, equation-projection-formula-map l.13666), 0D6E (l.4011) and the main-20261015 lem-sf-kunneth-coherence proper two-counit paragraph. rg duplicate search found nothing equivalent (lem-pd-monoidal-adjunction-equivalence-transport, lem-sfb-derived-composition-adjunction-normalization and lem-pur-coprojection-composition-mate state different things). The 3 declared tool_uses were already accepted on the item. FIX, one fault (B3/C): the transport node's statement cites [lem-pur-proetale-constant-ring-composition, lem-weil-pbc-proetale-derived-pullback-composition] to define alpha_{s,q}, but neither id is in its stmt_deps. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-ordinary-derived-isomorphism-transport-transpose.json, which adds both; it creates no cycle. Nothing else changed.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.FiniteProperProductTranspose",
   "declaration": "WeilConjectures.FiniteProperProduct.finiteProperProductTranspose",
   "declarations": [
-   "WeilConjectures.FiniteProperProduct.A",
-   "WeilConjectures.FiniteProperProduct.D",
-   "WeilConjectures.FiniteProperProduct.tensor",
-   "WeilConjectures.FiniteProperProduct.pull",
-   "WeilConjectures.FiniteProperProduct.push",
-   "WeilConjectures.FiniteProperProduct.adj",
-   "WeilConjectures.FiniteProperProduct.comp",
-   "WeilConjectures.FiniteProperProduct.sigma",
-   "WeilConjectures.FiniteProperProduct.residueInverse",
-   "WeilConjectures.FiniteProperProduct.mu",
-   "WeilConjectures.FiniteProperProduct.realization",
-   "WeilConjectures.FiniteProperProduct.pushModel",
-   "WeilConjectures.FiniteProperProduct.iteratedPushModel",
-   "WeilConjectures.FiniteProperProduct.kappa",
-   "WeilConjectures.FiniteProperProduct.theta",
-   "WeilConjectures.FiniteProperProduct.exchange",
-   "WeilConjectures.FiniteProperProduct.projection",
-   "WeilConjectures.FiniteProperProduct.external",
-   "WeilConjectures.FiniteProperProduct.v",
-   "WeilConjectures.FiniteProperProduct.w",
-   "WeilConjectures.FiniteProperProduct.omega",
-   "WeilConjectures.FiniteProperProduct.swapTensor",
-   "WeilConjectures.FiniteProperProduct.swapPush",
    "WeilConjectures.FiniteProperProduct.finiteProperProductTranspose"
   ],
   "file": "lean/Sheaf/Paper/FiniteProperProductTranspose.lean",
@@ -352,7 +273,7 @@
   "by": "Q88",
   "date": "2026-10-21",
   "existing": false,
-  "note": "All six clauses, including the explicit composite Hom bijection and actual swap transport, on the ordinary unbounded intrinsic coefficient category. Helper definitions specialize the recorded operations and canonical comparisons; kappa transports finiteDirectImageComposition through the existing section/K-injective-normalized realization equivalences. The API index level-1 has exponent (level-1)+1=level by the recorded positivity. No statement change."
+  "note": "All six clauses, including the explicit composite Hom bijection and actual swap transport, on the ordinary unbounded intrinsic coefficient category. Helper definitions specialize the recorded operations and canonical comparisons; kappa transports finiteDirectImageComposition through the existing section/K-injective-normalized realization equivalences. The API index level-1 has exponent (level-1)+1=level by the recorded positivity. No statement change. Construction-only helper declarations are moved verbatim to FiniteProperProductMaps and publicly reexported here; names, types and data are identical."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -361,5 +282,27 @@
   "group": "Q88",
   "result": "pass",
   "note": "Read the node, all 9 stmt_dep records, the item module and the exact side-live declarations (canonicalFinitePullbackTensor and its composition/braiding laws, sfIntrinsicDerivedPullbackComp, sfIntrinsicConstantModuleAdjunction, proEtaleConstantDerivedDirectImage = recorded sfFiniteDerivedDirectImage, finiteDirectImageComposition, ExchangeProjection/SuppliedDomains, PurityFiniteSetting). Hypotheses: separated + LocallyOfFiniteType + QuasiCompact on B/Y/Z, IsProper a and b, arbitrary unbounded H and J; level-1+1 = level by level_pos; ell-invertibility derived, not assumed. exchange = mateEquiv of comp(t,b)^-1 >> eq >> comp(r,a); variance checked against Mathlib, equal to eta_t >> Rt(theta) >> Rt Lr(eps_a). projection = homEquiv(mu >> eps (x) 1). kappa = transported recorded compositor. Six clauses verified by hand: v-hat, w-hat, Omega-hat (via the mu composition law), the composite-adjunction pair with kappa, and the swap with S = Rc'(eta_s) >> kappa^-1 >> eq >> Rc(mu_s, comps, sigma) in the node's order. Edge cases: n=1, empty schemes, zero objects, identity maps, odd shifts, universes. Only the lean field changed; statement verbatim; one sorry; docstrings and 100-char lines OK; report sections present. Not recompiled per the 2026-10-21 instruction; the worker reports a clean compile. Advisories only: local exchange/projection specialisations instead of the fixed-scalar finiteExchangeProjection; self-reread second reading; push/adj owned by a proof_dep, not a stmt_dep."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 5f2f vs 1cd1 (Lean+nodes byte-identical); item/leg vs clone; 5 downstream modules compiled against delivered set; change-record Users vs computed users"
  }
 }

@@ -1,0 +1,282 @@
+{
+ "id": "lem-per-field-pullback-galois-action",
+ "kind": "statement",
+ "title": "Field-extension pullback under the abelian Galois-stalk equivalences",
+ "statement": "Let $K\\subseteq L$ be fields [def-pc-field-extension], with compatible separable closures $K^s\\subseteq L^s$ [def-kun-separably-closed] inside an algebraically closed field $\\Omega$ containing $L^s$. Put $G_K=\\operatorname{Gal}(K^s/K)$ and $G_L=\\operatorname{Gal}(L^s/L)$. Write $u:\\operatorname{Spec}L\\to\\operatorname{Spec}K$ [def-weil-affine-spectrum] and $r:\\operatorname{Gal}(L^s/L)\\to\\operatorname{Gal}(K^s/K)$ for restriction, with the Krull topologies. Use the geometric points $p_L:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}L$ and $p_K=u p_L$ [def-weil-geometric-point]. Let $E_K$ and $E_L$ be the canonical equivalences of [lem-exc-abelian-sheaves-gmodules], taking an abelian etale sheaf to its geometric stalk with its discrete continuous Galois action [def-exc-discrete-modules-category]. Then there is a natural additive isomorphism\n$$E_L(u^{-1}F)\\simeq\\operatorname{Res}_r(E_K(F))$$\nfor every abelian sheaf $F$ on $(\\operatorname{Spec}K)_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves, def-weil-pbc-inverse-image]. Here $\\operatorname{Res}_r$ leaves the underlying abelian group unchanged and makes $\\tau\\in\\operatorname{Gal}(L^s/L)$ act as $r(\\tau)$. The underlying isomorphism is the canonical stalk-pullback identification $(u^{-1}F)_{p_L}\\simeq F_{p_K}$ [def-weil-pbc-geometric-stalks]. On global sections the canonical pullback map is carried to the inclusion $M^{G_K}\\to M^{G_L}$, $m\\mapsto m$, for $M=E_K(F)$ with the restricted action on the right.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q1 (lemma-stalk-pullback), part (3); Tag 03QW (section-galois-action-stalks); Tag 04JQ (lemma-equivalence-abelian-sheaves-point); Tag 04JM (lemma-global-sections-point). The assertion packages their compatibility under an arbitrary field inclusion."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-kun-separably-closed",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "lem-exc-abelian-sheaves-gmodules",
+  "def-exc-discrete-modules-category",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-per-galois-restriction-image], restriction $r:G_L\\to G_K$ is a well-defined continuous homomorphism for the given compatible separable closures; no algebraicity of $L/K$ is required. For a discrete continuous $G_K$-module $M$, the stabilizer of $m$ for the restricted action is $r^{-1}(\\operatorname{Stab}_{G_K}(m))$, hence open. The action laws and additivity are unchanged. Equivariant homomorphisms remain equivariant after restriction, so this defines $\\operatorname{Res}_r$ in [def-exc-discrete-modules-category].",
+   "uses": [
+    "lem-per-galois-restriction-image",
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BMJ (lemma-galois-profinite), Krull topology; restriction specialization stated by lem-per-galois-restriction-image; inverse images of open stabilizers."
+   }
+  },
+  {
+   "text": "Use the specified canonical natural additive isomorphism c = Etale.upperStarCompSheafFiberIso for u and p_L. Compute its germ formula by expanding its three factors: the isomorphism of geometric points transports a pointed lift to the pullback lift; the general-site sheafFiberComapIso germ formula gives the abstract pullback unit; naturality and Adjunction.unit_leftAdjointUniq_hom_app identify that unit with the constructed Etale.upperStar unit [def-weil-pbc-inverse-image]. Thus c_F sends the germ of the unit-pulled section at the base-changed pointed neighbourhood to the original germ [def-weil-pbc-geometric-stalks]. This proves the formula for the actual canonical comparison, not merely existence of some comparison. Represent c_F(iL(m)) by a germ using Point.toPresheafFiber_jointly_surjective; bijectivity of c_F and iL shows that every source element m is the inverse image of a pulled-back germ.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 (lemma-stalk-pullback), part (3) and the direct colimit proof; germ normalization recorded by lem-weil-pbc-inverse-image-stalk-germ."
+   }
+  },
+  {
+   "text": "For tau in G_L, apply [lem-exc-galois-automorphism-extension] over L to obtain an L-automorphism t of Omega extending tau. Restrict its scalars to K. The scalar towers and the hypothesis characterizing r show that t restricts on Ks to r(tau). Since t fixes L, Spec(t) fixes p_L. Change a pointed lift x over K by Spec(t) to x′; the pullback lift y′ is Spec(t) followed by y, as follows by the two pullback projections. Apply the supplied action-compatibility hypotheses hL and hK to these lifts. The canonical germ formula in step 2 identifies both resulting germs. Every source vector is a pulled-back germ by step 2, so d = iL followed by c followed by iK inverse is equivariant. No separate construction or choice of the canonical equivalences is needed.",
+   "uses": [
+    "lem-exc-galois-automorphism-extension",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QW (section-galois-action-stalks), equation-galois-action and the subsequent surjective restriction/factorization discussion; Tag 04JQ (lemma-equivalence-abelian-sheaves-point); Tag 03Q1 (lemma-stalk-pullback), part (3)."
+   }
+  },
+  {
+   "text": "By [def-exc-discrete-modules-category], the additive equivariant bijection $c_F$ is a morphism of discrete $G_L$-modules. Its inverse is equivariant: substituting $c_F^{-1}(m)$ into $c_F(\\tau x)=r(\\tau)c_F(x)$ gives $\\tau c_F^{-1}(m)=c_F^{-1}(r(\\tau)m)$. Naturality of $c_F$ in step 2 is the same square after restriction, because restriction leaves coefficient maps unchanged. These maps consequently form the asserted natural additive isomorphism $E_L\\circ u^{-1}\\simeq\\operatorname{Res}_r\\circ E_K$, whose underlying map is precisely $c_F$.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 and 04JQ, assembly of the canonical stalk comparison as an equivariant natural isomorphism."
+   }
+  },
+  {
+   "text": "Apply [aux-etale-global-sections-injective] and [aux-etale-global-sections-image] over K to the supplied equivalence and stalk isomorphism. The scalar towers identify p_L followed by u with the canonical K geometric point. The actual germ map is an injective additive homomorphism with image precisely the invariant subgroup, so its codomain restriction is an additive equivalence a. Base change preserves terminal objects. Applying the same two results over L at the base-changed terminal neighbourhood gives an additive equivalence b_L. The equivariant isomorphism in step 4 transports invariants isomorphically (its inverse is equivariant too), giving b with the required germ normalization. Finally the canonical unit-on-germs formula from step 2 [def-weil-pbc-inverse-image, def-weil-pbc-geometric-stalks] gives b(unit(z)) = a(z) as elements of the same K module. This is the inclusion m maps to m and does not require r to be surjective.",
+   "uses": [
+    "aux-etale-global-sections-injective",
+    "aux-etale-global-sections-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JM (lemma-global-sections-point), canonical terminal germ identification with invariants; Tag 03Q1 (lemma-stalk-pullback), part (3), for the unit germ formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-galois-restriction-image",
+  "def-exc-discrete-modules-category",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks",
+  "lem-exc-galois-automorphism-extension",
+  "aux-etale-global-sections-injective",
+  "aux-etale-global-sections-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q1 (3), 03QW, 04JQ and 04JM. M3: complete Lean proof by canonical general-site germ computation, supplied lift-change normalizations, equivariant natural-isomorphism assembly and actual terminal-germ identifications. Continuity uses the stated restriction-image theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an extension of fields the inverse image of an etale sheaf corresponds to restriction of the discrete Galois module and the cohomology pullback is restriction on group cohomology",
+   "results": "{\"t\": \"2026-10-24T10:16:39Z\", \"tool\": \"leanfinder\", \"query\": \"For an extension of fields the inverse image of an etale sheaf corresponds to restriction of the discrete Galois module and the cohomology pullback is restriction on group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galRestrict\", \"galLift_galRestrict'\", \"galRestrictHom\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"coe_galRestrict_apply\", \"Ideal.exists_comap_galRestrict_eq\", \"finGaloisGroupMap\", \"IntermediateField.restrictRestrictAlgEquivMapHom\"], \"digest\": \"290359b9cf873ce6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousCohomology.resolutionMap concerns continuous group cohomology alone; the algebraic-geometry hits concern structure-sheaf stalks, not etale abelian sheaves and Galois actions. The project EtaleStalkContinuousCohomology declaration compares one field at a time and does not state this field-extension compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\", \"res\"",
+   "results": "{\"t\": \"2026-10-24T10:16:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"continuousCohomology\\\", \\\"res\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"ContinuousCohomology.resolutionMap_id\", \"ContinuousCohomology.resolutionMap\", \"ContinuousCohomology.resolutionMap_zero\", \"ContinuousCohomology.resolutionMap_comp_d\", \"ContinuousCohomology.resolutionMap_comp\", \"ContinuousCohomology.resolutionMap_succ\", \"ContinuousCohomology.mem_const_resol₀\"], \"digest\": \"fdaed14a0b735e7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousCohomology.resolutionMap concerns continuous group cohomology alone; the algebraic-geometry hits concern structure-sheaf stalks, not etale abelian sheaves and Galois actions. The project EtaleStalkContinuousCohomology declaration compares one field at a time and does not state this field-extension compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHAddEquivContinuousCohomology|galois.*[Pp]ullback|[Pp]ullback.*[Gg]alois",
+   "results": "{\"t\": \"2026-10-24T10:16:39Z\", \"tool\": \"grep\", \"query\": \"sheafHAddEquivContinuousCohomology|galois.*[Pp]ullback|[Pp]ullback.*[Gg]alois\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Sieves.lean\", \"Mathlib/CategoryTheory/Sites/Sieves.lean\", \"Mathlib/CategoryTheory/Sites/Sieves.lean\", \"Mathlib/CategoryTheory/Sites/Sieves.lean\", \"Mathlib/CategoryTheory/Sites/Sieves.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\"], \"digest\": \"66318b061356a742\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousCohomology.resolutionMap concerns continuous group cohomology alone; the algebraic-geometry hits concern structure-sheaf stalks, not etale abelian sheaves and Galois actions. The project EtaleStalkContinuousCohomology declaration compares one field at a time and does not state this field-extension compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functoriality of etale cohomology of fields as Galois cohomology under field extensions",
+   "results": "{\"t\": \"2026-10-24T10:16:40Z\", \"tool\": \"leansearch\", \"query\": \"Functoriality of etale cohomology of fields as Galois cohomology under field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"finGaloisGroupFunctor\", \"finGaloisGroupMap.map_comp\", \"termGal(_/_)\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"IsGalois.of_algEquiv\", \"InfiniteGalois.asProfiniteGaloisGroupFunctor\", \"instIsAbelianGalois\"], \"digest\": \"65402ffe1f539ccb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousCohomology.resolutionMap concerns continuous group cohomology alone; the algebraic-geometry hits concern structure-sheaf stalks, not etale abelian sheaves and Galois actions. The project EtaleStalkContinuousCohomology declaration compares one field at a time and does not state this field-extension compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks identify pullback along Spec of a field embedding with restriction along the map of absolute Galois groups",
+   "results": "{\"t\": \"2026-10-24T10:16:42Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric stalks identify pullback along Spec of a field embedding with restriction along the map of absolute Galois groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fromSpecStalk_toSpecΓ\", \"AlgebraicGeometry.Scheme.fromSpecStalk_app\", \"AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_toSpecΓ\", \"AlgebraicGeometry.Scheme.fromSpecStalk_appTop\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec\", \"AlgebraicGeometry.Scheme.Spec_fromSpecStalk\", \"AlgebraicGeometry.stalkMap_toStalk_apply\", \"AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc\"], \"digest\": \"d049940a5ee2abcd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousCohomology.resolutionMap concerns continuous group cohomology alone; the algebraic-geometry hits concern structure-sheaf stalks, not etale abelian sheaves and Galois actions. The project EtaleStalkContinuousCohomology declaration compares one field at a time and does not state this field-extension compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "galois.*(stalk|sheaf)|((stalk|sheaf).*galois)|pullback.*[Ff]iber",
+   "results": "{\"t\": \"2026-10-24T10:52:31Z\", \"tool\": \"grep\", \"query\": \"galois.*(stalk|sheaf)|((stalk|sheaf).*galois)|pullback.*[Ff]iber\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\"], \"digest\": \"000607ffdf7f9e82\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme fibers, relative gluing and ideal-sheaf Galois connections, not discrete absolute-Galois modules of etale sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of an etale abelian sheaf on the spectrum of a field is restriction of its Galois representation",
+   "results": "{\"t\": \"2026-10-24T10:52:31Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of an etale abelian sheaf on the spectrum of a field is restriction of its Galois representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.Scheme.Opens.topIso_inv\", \"CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_gc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app\", \"AlgebraicGeometry.Scheme.Modules.inv_app\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_ofRestrict\"], \"digest\": \"f49e43269c5a9e7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern open restrictions, structure sheaves and site equivalences; none states field-extension pullback as restriction of the absolute Galois action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-24T10:52:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafFiber\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits for the joint sheafFiber/pullback name pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of an abelian etale sheaf along a field extension corresponds under the geometric stalk equivalence to restriction of its absolute Galois group action",
+   "results": "{\"t\": \"2026-10-24T10:52:33Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of an abelian etale sheaf along a field extension corresponds under the geometric stalk equivalence to restriction of its absolute Galois group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.mk_toAlgEquivAux\", \"InfiniteGalois.algEquivToLimit\", \"InfiniteGalois.limitToAlgEquiv\", \"InfiniteGalois.toAlgEquivAux_eq_proj_of_mem\", \"AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint\", \"InfiniteGalois.limitToAlgEquiv_apply\", \"InfiniteGalois.toAlgEquivAux_eq_liftNormal\", \"TopCat.Presheaf.stalkPullbackIso\"], \"digest\": \"f5d88501a23e2a84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned InfiniteGalois inverse-limit automorphisms and Zariski TopCat stalk pullback results; neither gives the small-etale Galois-action compatibility for a field extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk pullback isomorphism for sheaves on small etale sites is equivariant for the homomorphism of absolute Galois groups induced by a field inclusion",
+   "results": "{\"t\": \"2026-10-24T10:53:13Z\", \"tool\": \"leanfinder\", \"query\": \"The stalk pullback isomorphism for sheaves on small etale sites is equivariant for the homomorphism of absolute Galois groups induced by a field inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkPullbackIso\", \"TopCat.Presheaf.stalkPullbackInv\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"TopCat.Presheaf.germ_stalkPullbackHom\", \"TopCat.Presheaf.germ_stalkPullbackInv\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"TopCat.Presheaf.germ_stalkPullbackInv_assoc\"], \"digest\": \"bde93c81f64715b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned InfiniteGalois inverse-limit automorphisms and Zariski TopCat stalk pullback results; neither gives the small-etale Galois-action compatibility for a field extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-dense-henselian-field-etale-comparison",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks. Field-extension pullback under the abelian Galois-stalk equivalences.",
+   "via": [
+    "lem-per-dense-henselian-field-etale-comparison",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-field-pullback-galois-action",
+  "worker": "stage1",
+  "summary": "Q138: retained the statement and all statement dependencies. Proved restriction is a functor on discrete modules, used the existing natural stalk/unit germ comparison, checked equivariance by one extending automorphism of Omega, assembled the natural additive isomorphism, and identified the global pullback as the literal inclusion on invariants. Reused existing general tools throughout; no new nodes.",
+  "blueprint": "Realizes the field-extension comparison subargument of the recorded ancestor lem-per-artin-gabber-affine-curve, Step 3 (duality/local-model purity), through the existing dense-henselian-field comparison chain. Read latest/ at ef6f9619fdbffa59e88528fb56483d76c70258c8; this node adds no new route to the chapter or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic canonical pullback isomorphism, naturality and unit-on-germs formula for any scheme morphism; the unit has no separate general site-theoretic version."
+   },
+   {
+    "node": "lem-exc-galois-automorphism-extension",
+    "why": "Generic extension of a separable-closure automorphism to any containing algebraically closed field; needed to realize both Galois actions by the same automorphism."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules-action",
+    "why": "Explicit lift-change action formula valid without algebraicity of Omega; a generic field-stalk tool, not a replacement for the perverse argument."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "Canonical additive field-stalk equivalences, already named in the item, and compatibility with the set-valued lift-change action."
+   },
+   {
+    "node": "aux-etale-global-sections-injective",
+    "why": "Injectivity of the canonical terminal germ map for arbitrary algebraically closed Omega; used to specify the actual global-sections identification."
+   },
+   {
+    "node": "aux-etale-global-sections-image",
+    "why": "The image of the canonical terminal germ map is exactly the invariant subgroup for arbitrary algebraically closed Omega; used with injectivity, rather than an unspecified additive equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-galois-automorphism-extension",
+  "lem-exc-abelian-sheaves-gmodules",
+  "aux-etale-global-sections-injective",
+  "aux-etale-global-sections-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-5e1e59225",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-5e1e59225 (reviewer sub-agent of L); spot-checked: I read the whole item and the statement of every cited node. There are no new nodes, and the statement, stmt_deps and blueprint are unchanged; only status and proof differ from the Q53 snapshot copy. Source checks in Stacks etale-cohomology.tex: 03Q1 lemma-stalk-pullback, 03QW section-galois-action-stalks (precomposition formula (U,ū∘Spec σ,t)), 04JM lemma-global-sections-point (direct terminal-triple proof) and 04JQ. Step 1: restriction is continuous (lem-per-galois-restriction-image, no algebraicity needed), so Res_r is a functor on discrete modules; surjectivity is never used. Step 2: the stalk-germ lemma with f=u and ȳ=p_L gives c_F and its germ formula, and bijectivity makes the pulled-back germs exhaust the source. Step 3: τ̃∈Aut_L(Ω) comes from the extension lemma, which needs no algebraicity of Ω. It is also a K-automorphism restricting to r(τ) on K^s. Since (v,p_L)∘Spec τ̃=(v∘Spec τ̃,p_L), the lift-change formula over L and over K gives equivariance, and the result does not depend on the choice of τ̃. Step 4 is genuinely elementary. Step 5: the aux global-sections nodes (any algebraically closed Ω) together with the unit formula on terminal germs give the inclusion m↦m from M^{G_K} into M^{G_L}. Edge cases tested: K=L; ℝ⊂ℂ; transcendental ℚ(t) with Ω=ℂ; purely inseparable L/K; non-surjective r (the invariants grow, so the global clause is only an inclusion). An rg -L search finds no duplicate node, and there is no cycle (216-node closure). I accept the six generic tool_uses (brief §100). No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldPullbackGaloisAction",
+  "declaration": "AlgebraicGeometry.Scheme.fieldPullback_galoisAction",
+  "declarations": [
+   "Rep.restrictDiscrete",
+   "AlgebraicGeometry.Scheme.fieldStalkActionCompatible",
+   "AlgebraicGeometry.Scheme.fieldPullback_galoisAction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldPullbackGaloisAction.lean",
+  "statement": "theorem fieldPullback_galoisAction (K L Ks Ls Ω : Type u) [Field K] [Field L] [Field Ks] [Field Ls] [Field Ω] [Algebra K L] [Algebra K Ks] [IsSepClosure K Ks] [Algebra L Ls] [IsSepClosure L Ls] [Algebra Ks Ls] [Algebra K Ls] [Algebra Ls Ω] [Algebra K Ω] [Algebra L Ω] [Algebra Ks Ω] [IsScalarTower K L Ls] [IsScalarTower K Ks Ls] [IsScalarTower K Ls Ω] [IsScalarTower L Ls Ω] [IsScalarTower Ks Ls Ω] [IsAlgClosed Ω] (r : Gal(Ls/L) →* Gal(Ks/K)) (hres : ∀ τ : Gal(Ls/L), (algebraMap Ks Ls).comp (r τ).toRingHom = τ.toRingHom.comp (algebraMap Ks Ls)) (EK : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1} ≌ Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K))) (EL : Sheaf (Spec (.of L)).smallEtaleTopology AddCommGrpCat.{u + 1} ≌ Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ls/L))) (iK : EK.functor ⋙ ObjectProperty.ι _ ⋙ Rep.RepToAction ℤ (Gal(Ks/K)) ⋙ Action.forget (ModuleCat.{u + 1} ℤ) (Gal(Ks/K)) ⋙ forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat ≅ (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap L Ω)) ≫ Spec.map (CommRingCat.ofHom (algebraMap K L)))).sheafFiber) (iL : EL.functor ⋙ ObjectProperty.ι _ ⋙ Rep.RepToAction ℤ (Gal(Ls/L)) ⋙ Action.forget (ModuleCat.{u + 1} ℤ) (Gal(Ls/L)) ⋙ forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat ≅ (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))).sheafFiber) (hK : fieldStalkActionCompatible K Ks Ω (Spec.map (CommRingCat.ofHom (algebraMap L Ω)) ≫ Spec.map (CommRingCat.ofHom (algebraMap K L))) EK iK) (hL : fieldStalkActionCompatible L Ls Ω (Spec.map (CommRingCat.ofHom (algebraMap L Ω))) EL iL) : ∃ h : ∀ M : Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)), ∀ m : M.obj.V, IsOpen {τ : Gal(Ls/L) | (Rep.res r M.obj).ρ τ m = m}, ∃ e : Etale.upperStar AddCommGrpCat.{u + 1} (Spec.map (CommRingCat.ofHom (algebraMap K L))) ⋙ EL.functor ≅ EK.functor ⋙ Rep.restrictDiscrete r h, (∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (m : (EL.functor.obj ((Etale.upperStar AddCommGrpCat.{u + 1} (Spec.map (CommRingCat.ofHom (algebraMap K L)))).obj F)).obj.V), (iK.hom.app F) ((e.hom.app F).hom.hom m) = ((Etale.upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} (Spec.map (CommRingCat.ofHom (algebraMap K L))) (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))).hom.app F) ((iL.hom.app _) m)) ∧ (∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (T : (Spec (.of K)).Etale) (_hT : IsTerminal T) (x : (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap L Ω)) ≫ Spec.map (CommRingCat.ofHom (algebraMap K L)))).fiber.obj T), ∃ (a : F.obj.obj (op T) ≃+ (@Representation.invariants ℤ (Gal(Ks/K)) (EK.functor.obj F).obj.V _ _ (EK.functor.obj F).obj.hV1 (EK.functor.obj F).obj.hV2 (EK.functor.obj F).obj.ρ)) (b : ((Etale.upperStar AddCommGrpCat.{u + 1} (Spec.map (CommRingCat.ofHom (algebraMap K L)))).obj F).obj.obj (op ((Spec.map (CommRingCat.ofHom (algebraMap K L))).Etale.obj T)) ≃+ (@Representation.invariants ℤ (Gal(Ls/L)) (EK.functor.obj F).obj.V _ _ (EK.functor.obj F).obj.hV1 (EK.functor.obj F).obj.hV2 ((EK.functor.obj F).obj.ρ.comp r))), (∀ z : F.obj.obj (op T), (a z).val = (iK.inv.app F) ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap L Ω)) ≫ Spec.map (CommRingCat.ofHom (algebraMap K L)))).toPresheafFiber T x F.obj z)) ∧ (∀ z, (b z).val = (e.hom.app F).hom.hom ((iL.inv.app _) ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))).toPresheafFiber ((Spec.map (CommRingCat.ofHom (algebraMap K L))).Etale.obj T) ((pointSmallEtaleFiberEtaleIso (Spec.map (CommRingCat.ofHom (algebraMap K L))) (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))).inv.app T x) ((Etale.upperStar AddCommGrpCat.{u + 1} (Spec.map (CommRingCat.ofHom (algebraMap K L)))).obj F).obj z))) ∧ (∀ z : F.obj.obj (op T), (b ((((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (Spec.map (CommRingCat.ofHom (algebraMap K L)))).unit.app F).hom.app (op T)) z)).val = (a z).val))",
+  "branch": "sheaf-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ffb3d6d6",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Read node, 10 stmt_dep records, module, report (Worker report + Second reading by Q82 present). Only the item's lean field changed; new module only; statement verbatim in file; no name collisions. Clauses: K⊆L via Algebra and actual Spec.map; compatible IsSepClosure Ks/Ls with towers; Ω IsAlgClosed with towers implying K-L-Ω and K-Ks-Ω, so p_K = p_L≫u literally and dependency witnesses satisfy hK (non-vacuous); r uniquely pinned by hres, continuity proved in conclusion as h; EK/EL universally quantified normalized witnesses of lem-exc-abelian-sheaves-gmodules (stronger); e : u^*⋙EL ≅ EK⋙Res_r natural in DiscreteContinuousRep; underlying map = Etale.upperStarCompSheafFiberIso (canonical stalk pullback, checked source); global sections at any terminal T with a/b pinned by germ normalizations and b(unit z)=a z giving inclusion m↦m (not bijection). Rep.restrictDiscrete = ObjectProperty.lift of Mathlib resFunctor (DiscreteModule.res is on the other, equivalent category), real data, docstrings. Universe u fields / u+1 coefficients per project convention, as in sister etaleGlobalSections_galoisInvariants. Edge cases K=L, R⊂C, inseparable/transcendental, large Ω, zero sheaf OK. No hollow defs, sorry only, no pro-etale substitute. No recompile per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T092012-L-3393878",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

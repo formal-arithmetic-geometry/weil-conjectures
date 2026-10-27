@@ -1,0 +1,777 @@
+{
+ "id": "lem-sfb-finite-stage-supported-generation",
+ "kind": "statement",
+ "title": "Finite-stage supported generators and their actual derived scalar images",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting], and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with the extended $\\ell$-adic norm topology. On profinite sets with finite jointly surjective covers put\n$$C(S)=\\{f\\in C(S,\\Omega):f(S)\\subset E\\text{ for some finite }\\mathbf Q_\\ell\\subset E\\subset\\Omega\\},\\quad B(S)=C(S,\\Omega),\\quad A_E(S)=C(S,E).$$\nUse the condensed rings [sk-def-sfb-qlbar-condensed, def-sfb-continuous-map-condensed-ring], their coefficient pullbacks $R_T=p_T^*R$ [sk-def-sfb-pulled-back-coefficients], and the ordinary unbounded derived categories $D(R_T)$ of internal module objects [sk-def-sfb-module-objects, sk-def-sfb-derived-categories]. Constructible always means finite constant local models on a finite constructible locally closed stratification [sk-def-sfb-constructible], and lisse means finite free on a pro-étale cover [def-sfb-lisse-coefficient-module]. For a locally closed immersion $a:S\\hookrightarrow X$ define $a_!=i_*j_!$ for an open-then-closed factorization $a=i\\circ j$ [def-weil-closed-immersion, def-weil-open-immersion, def-sfb-module-open-lower-shriek, def-sfb-module-lower-star].\n\nFor every coefficient inclusion $R\\to R'$ among $A_E\\to C$, $C\\to B$ and $A_E\\to B$, put $T_T^{R,R'}=R'_T\\otimes^L_{R_T}-$, computed on K-flat resolutions [sk-def-sfb-derived-extension-of-scalars]. These functors are exact for the triangulated structures. Their right adjoints are exact termwise restrictions of scalars, with shift-compatible unit represented by $v\\mapsto1\\otimes v$. They agree with derived extension for section-module sheaves under the canonical equivalence with internal modules. For every such $a$ and every $K\\in D(R_S)$ there is a natural $R'_X$-linear isomorphism\n$$T_X^{R,R'}(a_!K)\\cong a_!T_S^{R,R'}K.$$\nFor lisse $R_S$-modules $L$, $T_S^{R,R'}L[0]\\cong(R'_S\\otimes_{R_S}L)[0]$ is lisse in degree zero; these comparisons respect the transitivity $A_E\\to C\\to B$ of scalar extension and inverse image.\n\nLet $\\mathcal G_C$ consist of all\n$$G_{a,E,L}=a_!(C_S\\otimes^L_{A_{E,S}}L[0]),$$\nwhere $a$ varies over constructible locally closed immersions, $E$ over finite intermediate fields, and $L$ over lisse $A_{E,S}$-modules. Every $G_{a,E,L}$ is bounded constructible, and $D^b_c(X,C)$ is exactly the smallest full replete triangulated subcategory of $D(C_X)$ containing $\\mathcal G_C$ [def-weil-triangulated-subcategory]. Each object is obtainable from zero and finitely many such generators by finitely many integer shifts and distinguished-triangle extensions. For the specified $J_X=T_X^{C,B}$ the generator comparison is\n$$J_XG_{a,E,L}\\cong a_!(B_S\\otimes_{A_{E,S}}L)[0].$$\nThe scheme $X$ is Noetherian and every locally closed scheme $S\\hookrightarrow X$ is again separated of finite type over $k$. Empty schemes, empty supports and rank zero are included. No flatness of a coefficient inclusion is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), proper coefficient-change obligation; extraction of the returned topology-comparison proof, old steps 1, 2, 3, 4. Agent extraction; exact norm-topology reference remains WANTED. "
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-weil-triangulated-subcategory",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-norm-algcl-coefficient-inclusion",
+  "def-sfb-internal-section-scalar-pullback-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine cover of X as in the finite-type definition. Each coordinate algebra is finitely generated over k and hence Noetherian by lem-wf-affine-noetherian-components. Thus X is locally Noetherian and quasi-compact, hence Noetherian. Every closed subscheme of X has affine charts Spec(A/I), finitely generated over k. Every open of such a closed subscheme is quasi-compact, so a finite affine refinement by principal opens has finitely generated coordinate algebras (A/I)[1/f]. Consequently every locally closed S is again finite type and Noetherian. It is separated: its diagonal is the restriction of the closed diagonal of X over k, since an immersion is a monomorphism. On affine charts the required closed immersions are quotient maps; their base changes are quotient maps and their composites are quotient maps. Thus these assertions hold for arbitrary subscheme structures, including empty S. All complements of the immersions used below are quasi-compact.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; finite-type affine-chart verification; definitions of open and closed immersions"
+   }
+  },
+  {
+   "text": "Apply lem-sfb-internal-section-scalar-adjunction to each of the three ring maps on each scheme T. The reconstructed section-ring sheaves have exactly the same scalar units as the internal rings. In those section categories lem-pur-derived-change-of-rings gives the everywhere-defined triangulated scalar functor, computed on K-flat resolutions. The specified derived adjunction and its actual unit are those of lem-pur-sheaf-ring-derived-coefficient-adjunction. Transport back gives T_T and exact termwise scalar restriction. On a K-flat representative P the unit is P→Res(R'_T⊗P), v↦1⊗v. For P[n] the same formula in degree q is the formula on P^{q+n}; the differential on both sides is multiplied by (-1)^n. K-flat representatives remain K-flat under shifts. Hence this is the shift-compatible unit for the indicated canonical shift structures. This proves the first scalar assertions, including agreement with section-module derived extension, without asserting exactness of ordinary scalar extension.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-kflat-homotopy-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A6 (lemma-adjoint); internal comparison: sites-modules.tex Tags 03EK and 0GMW"
+   }
+  },
+  {
+   "text": "For a lisse R_S-module L, pass through the exact section equivalence. Pulling its trivializing pro-etale cover back to an arbitrary site object gives the covering hypothesis of lem-sfb-locally-free-derived-scalars. That lemma makes L[0] K-flat and identifies derived scalar extension with (R'_S⊗L)[0], locally (R'_S)^{r}. The internal comparison of step 2 returns this as an R'_S-linear isomorphism. For any scheme inverse image use lem-sfb-internal-scalar-pullback-normalization; its lambda gives the natural scalar/pullback comparison. In section coordinates it is the balanced pullback map of lem-sfb-kflat-scalar-comparison-normalization, which also states its composition and identity compatibilities. This gives inverse-image compatibility on the full unbounded categories, not just on the lisse objects.",
+   "uses": [
+    "lem-sfb-locally-free-derived-scalars",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GN1, lemma-flatness-sheafification-refined; sites-cohomology.tex Tags 0G7E and 0D6D"
+   }
+  },
+  {
+   "text": "Let j:U→T be open. Work in section-module categories using lem-sfb-internal-module-operations-transport. The functors j_!, j^* are exact and adjoint by lem-weil-pbc-proetale-ringed-open-closed, so their termwise derived functors have the localized adjunction of def-weil-exact-derived-adjunction. For K in D(R_U) and N in D(R'_T) the successive specified adjunctions give\nHom(T_T j_! K,N) ≅ Hom(j_!K,Res_T N) ≅ Hom(K,j_R^*Res_T N)\n≅ Hom(K,Res_U j_{R'}^*N) ≅ Hom(T_U K,j_{R'}^*N) ≅ Hom(j_!T_U K,N).\nThe middle comparison is the identity on underlying restricted sheaves and maps, with the same R_U-action because both coefficient maps are pulled back from the point. Both functors are therefore left adjoint to Res_U j_{R'}^*. The unique unit-compatible isomorphism of lem-weil-pbc-conjugate-iso-unit-equation gives T_T j_!≅j_!T_U. It lies in D(R'_T), so is R'_T-linear, and is natural in K.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-exact-derived-adjunction",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), alternative open-adjunction proof; Stacks Tag 0B65, lemma-transformation-between-functors-and-adjoints"
+   }
+  },
+  {
+   "text": "Let i:Z→T be closed, with complementary open j. Set H=T_T(i_*K). Scalar/pullback compatibility from step 3 and the mixed vanishing j^*i_*=0 give j^*H=0. The actual closed unit is therefore an isomorphism H→i_*i^*H by lem-sfb-condensed-support-derived-localization for R'. Now i^*H≅T_Z(i^*i_*K)≅T_ZK, by scalar/pullback compatibility and the closed counit for R. Their composite gives the required natural R'_T-linear isomorphism T_T i_*K≅i_*T_ZK. This argument uses the unbounded support statement, not a bounded-below recollement. For a=i∘j in the stated open-then-closed factorization, apply first this closed comparison and then i_* of step 4. The result is T_X a_!K≅a_!T_SK for every K.",
+   "uses": [
+    "lem-sfb-condensed-support-derived-localization",
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); derived internal support localization"
+   }
+  },
+  {
+   "text": "For a scalar tower R→R'→R'', restrictions compose by the identity on underlying complexes and actions. Both T^{R',R''}T^{R,R'} and T^{R,R''} are left adjoint to this composite restriction. Choose their unique unit-compatible isomorphism. Its unit is the composite v↦1⊗v↦1⊗(1⊗v); thus on balanced representatives its contraction is c⊗(b⊗v)↦cb⊗v. For a longer tower both contractions preserve this same composite unit, hence are equal by uniqueness. The inverse-image comparisons are mates of the underlying identity restriction squares, by lem-sfb-kflat-scalar-comparison-normalization. The open comparison in step 4 is the corresponding conjugate. Mate pasting therefore makes these comparisons compatible with the scalar-tower contractions. For the closed comparison in step 5, its defining composite is the closed unit followed by i_* of lambda and the closed counit. Pasting those naturality squares gives the same composite for either tower path: lambda pastes by mate pasting, and the adjacent unit/counit pair cancels by the adjunction identity. Equivalently, apply the fully faithful closed restriction to these maps between supported objects; both become the same scalar/pullback tower map. This proves the claimed transitivity compatibilities, including for a_!=i_*j_!.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-condensed-support-derived-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), scalar transitivity and compatibility; canonical comparison normalized by composite adjunction units"
+   }
+  },
+  {
+   "text": "For each G_{a,E,L}, step 3 for A_E→C identifies its inner derived object with a lisse C_S-module M in degree zero. Thus G≅(a_!M)[0], and lem-sfb-coefficient-heart-lisse-extension-constructible puts G in D^b_c(X,C). Conversely, det-cor-coefficient-heart-ii-generation for the bounded-image condensed coefficient ring C expresses every object of D^b_c(X,C) by finitely many cones and shifts from a_!M with M lisse over C_S. The S of each generator satisfies the standing scheme assumptions by step 1. Clause (1) of sk-thm-sfb-qlbar-two-colimit applied on S supplies a finite E and lisse A_{E,S}-module L with C_S⊗L≅M. Step 3 identifies this ordinary scalar extension with its derived version, hence this supported generator is isomorphic to G_{a,E,L}. No assertion about finite-field descent over the all-continuous ring B is used.",
+   "uses": [
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "det-cor-coefficient-heart-ii-generation",
+    "sk-thm-sfb-qlbar-two-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+    "place": "Converse, Single sheaves and Complexes; finite-stage replacement uses sk-thm-sfb-qlbar-two-colimit proof (1)"
+   }
+  },
+  {
+   "text": "The finite constructions in step 7 belong to any full replete triangulated subcategory containing the specified generators. Conversely D^b_c(X,C) is itself such a subcategory by det-cor-coefficient-heart-ii-triangulated. These two inclusions prove the asserted smallest-subcategory equality. Cones can be expressed as distinguished-triangle extensions after rotation: for f:A→B, the rotated cone triangle has vertices B, Cone(f), A[1]. Thus the finite cones and shifts in step 7 give precisely finite shifts and triangle extensions from zero and finitely many G's. The zero object is allowed initially; for empty X this supplies the entire zero category, and no positive-rank or nonempty-support hypothesis has entered.",
+   "uses": [
+    "det-cor-coefficient-heart-ii-triangulated",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+    "place": "Converse and final induction; elementary rotation and finite-assembly consequence"
+   }
+  },
+  {
+   "text": "Finally, apply step 5 to J_X=T_X^{C,B} and the specified generator. Step 6 contracts the scalar tower and step 3 computes its lisse input:\nJ_XG_{a,E,L} ≅ a_! T_S^{C,B}T_S^{A_E,C}L[0] ≅ a_!T_S^{A_E,B}L[0] ≅ (a_!(B_S⊗_{A_{E,S}}L))[0].\nThese are isomorphisms in D(B_X), not merely isomorphisms of individual cohomology sheaves. Their tower and inverse-image compatibilities are exactly those checked in steps 3 and 6. For L=0 every tensor and extension is zero; on an empty support every extension is zero. This also verifies the stated rank-zero and empty-support cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1)–(3), substitution into the defined generator and lisse degree-zero comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-triangulated-subcategory",
+  "det-cor-coefficient-heart-ii-generation",
+  "det-cor-coefficient-heart-ii-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "lem-sfb-condensed-support-derived-localization",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-homotopy-triangulated",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-wf-affine-noetherian-components",
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "(3), finite-stage generator reduction; assembled with scalar-six pullback (1)–(3) and coefficient-heart generation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible derived sheaves with finite subextension valued algebraic closure coefficients are generated by supported local systems defined over finite extensions of Q ell",
+   "results": {
+    "t": "2026-10-22T06:03:09Z",
+    "tool": "leanfinder",
+    "query": "Bounded constructible derived sheaves with finite subextension valued algebraic closure coefficients are generated by supported local systems defined over finite extensions of Q ell",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+     "SheafOfModules.GeneratingSections.IsFiniteType.finite",
+     "SheafOfModules.GeneratingSections.IsFiniteType",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.IsFiniteType",
+     "CategoryTheory.presheafIsGeneratedBy_of_isFinite",
+     "ChevalleyThm.chevalley_polynomialC"
+    ],
+    "digest": "eaad31e77dbb02b7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension for arbitrary maps between condensed coefficient fields sends supported finite free pro etale local systems to supported lisse modules and commutes with locally closed extension by zero",
+   "results": {
+    "t": "2026-10-22T06:03:10Z",
+    "tool": "leanfinder",
+    "query": "Derived scalar extension for arbitrary maps between condensed coefficient fields sends supported finite free pro etale local systems to supported lisse modules and commutes with locally closed extension by zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteSolid",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "Condensed.profiniteFree",
+     "LightCondensed.free",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondMod.ofSheafLightProfinite",
+     "CondensedMod.ofSheafProfinite"
+    ],
+    "digest": "65699e3efe864125"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite triangulated generation of constructible complexes by locally closed extensions of lisse finite coefficient field models using coefficient filtered colimit descent",
+   "results": {
+    "t": "2026-10-22T06:03:19Z",
+    "tool": "leanfinder",
+    "query": "Finite triangulated generation of constructible complexes by locally closed extensions of lisse finite coefficient field models using coefficient filtered colimit descent",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.instIsLEObjSingleFunctor",
+     "DerivedCategory.isGE_Q_obj_iff"
+    ],
+    "digest": "54e3c504d98744f0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty\", \"triangulatedClosure\"",
+   "results": {
+    "t": "2026-10-22T06:03:20Z",
+    "tool": "loogle",
+    "query": "\"ObjectProperty\", \"triangulatedClosure\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|[Ll]isse).*(generat|triangulatedClosure)|(generat|triangulatedClosure).*(constructible|[Ll]isse)",
+   "results": {
+    "t": "2026-10-22T06:03:20Z",
+    "tool": "grep",
+    "query": "(constructible|[Ll]isse).*(generat|triangulatedClosure)|(generat|triangulatedClosure).*(constructible|[Ll]isse)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Spectral/ConstructibleTopology.lean",
+     "Mathlib/Topology/Spectral/ConstructibleTopology.lean",
+     "Mathlib/Topology/Constructible.lean",
+     "Mathlib/Topology/Constructible.lean"
+    ],
+    "digest": "8bd697180a16338b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complexes over an algebraic closure are finite extensions of shifts of supported finite field local systems",
+   "results": {
+    "t": "2026-10-22T06:03:21Z",
+    "tool": "leansearch",
+    "query": "Constructible complexes over an algebraic closure are finite extensions of shifts of supported finite field local systems",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Topology.IsConstructible",
+     "Topology.IsConstructible.isLocallyConstructible",
+     "DerivedCategory.TStructure.t",
+     "Topology.isConstructible_compl",
+     "Topology.IsLocallyConstructible",
+     "HomologicalComplex.instIsSupportedOfIsStrictlySupported",
+     "AlgebraicClosure.isAlgClosed",
+     "algebraicClosure.isAlgebraic"
+    ],
+    "digest": "aad8c4100335663c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient ring on a noetherian scheme commutes with open extension by zero and closed pushforward and is ordinary tensor on locally finite free sheaves",
+   "results": {
+    "t": "2026-10-22T06:03:21Z",
+    "tool": "leanfinder",
+    "query": "Change of coefficient ring on a noetherian scheme commutes with open extension by zero and closed pushforward and is ordinary tensor on locally finite free sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+     "AlgebraicGeometry.Scheme.Modules.map_smul",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj",
+     "SheafOfModules.pushforwardSections_coe",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction"
+    ],
+    "digest": "9b65ae0588d462dd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"Triangulated\"",
+   "results": {
+    "t": "2026-10-22T06:03:21Z",
+    "tool": "loogle",
+    "query": "\"extendScalars\", \"Triangulated\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "(extendScalars|extensionOfScalars|changeOfRings).*(lisse|LowerShriek|lowerShriek)|(lisse|lowerShriek).*(tensor|scalar)",
+   "results": {
+    "t": "2026-10-22T06:03:21Z",
+    "tool": "grep",
+    "query": "(extendScalars|extensionOfScalars|changeOfRings).*(lisse|LowerShriek|lowerShriek)|(lisse|lowerShriek).*(tensor|scalar)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars commutes with extension by zero of locally finite free sheaves on a pro etale site",
+   "results": {
+    "t": "2026-10-22T06:03:22Z",
+    "tool": "leansearch",
+    "query": "Derived extension of scalars commutes with extension by zero of locally finite free sheaves on a pro etale site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.Sheafify.map_smul_eq",
+     "Function.ExtendByZero.linearMap",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor",
+     "PresheafOfModules.Sheafify.smul_zero",
+     "PresheafOfModules.pullback",
+     "LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+     "IsLocalizedModule.mapExtendScalars_apply_apply"
+    ],
+    "digest": "1d5eb25290576791"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite stage supported generators for bounded constructible finite subextension algebraic closure modules with canonical scalar extension to norm continuous coefficients commuting with locally closed extension and ordinary finite free tensor",
+   "results": {
+    "t": "2026-10-22T06:05:26Z",
+    "tool": "leanfinder",
+    "query": "Finite stage supported generators for bounded constructible finite subextension algebraic closure modules with canonical scalar extension to norm continuous coefficients commuting with locally closed extension and ordinary finite free tensor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_finite_inj_algHom_of_fg",
+     "Ideal.FinrankQuotientMap.span_eq_top",
+     "exists_fg_and_mem_baseChange",
+     "Algebra.Smooth.exists_subalgebra_finiteType",
+     "Algebra.finite_of_essFiniteType_of_isAlgebraic",
+     "Algebra.Smooth.exists_finiteType",
+     "Module.Finite.left",
+     "exists_integral_inj_algHom_of_fg"
+    ],
+    "digest": "eae66dda7804f74f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible derived category over the filtered union condensed coefficient ring is generated by finite field lisse strata and their derived base change is supported lisse over the continuous algebraic closure ring",
+   "results": {
+    "t": "2026-10-22T06:05:27Z",
+    "tool": "leanfinder",
+    "query": "A constructible derived category over the filtered union condensed coefficient ring is generated by finite field lisse strata and their derived base change is supported lisse over the continuous algebraic closure ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "CondensedMod.IsSolid",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "CondensedMod.ofSheafCompHaus",
+     "LightCondMod.ofSheafLightProfinite",
+     "CondensedMod.ofSheafStonean",
+     "Condensed.profiniteSolid"
+    ],
+    "digest": "09e9abb018296675"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type sheaf generators, ordinary scalar adjunction and bounded derived representatives do not state finite-field supported triangulated generation together with the specified pro-etale scalar comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|constructible).*(triangulated|generat)|(scalar|tensor).*(locallyClosed|lowerShriek)",
+   "results": {
+    "t": "2026-10-22T07:14:44Z",
+    "tool": "grep",
+    "query": "(lisse|constructible).*(triangulated|generat)|(scalar|tensor).*(locallyClosed|lowerShriek)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Constructible.lean",
+     "Mathlib/Topology/Constructible.lean"
+    ],
+    "digest": "e947727185b1a461"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free condensed modules or bounded derived representatives, not finite-field supported constructible generation and its actual scalar images."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extendScalars\"",
+   "results": {
+    "t": "2026-10-22T07:14:44Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"extendScalars\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free condensed modules or bounded derived representatives, not finite-field supported constructible generation and its actual scalar images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of condensed coefficient scalars commutes with extension by zero and finite triangulated generation by lisse sheaves",
+   "results": {
+    "t": "2026-10-22T07:14:44Z",
+    "tool": "leansearch",
+    "query": "Derived extension of condensed coefficient scalars commutes with extension by zero and finite triangulated generation by lisse sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.lanLightCondSet",
+     "Condensed.freeForgetAdjunction",
+     "LightCondensed.freeForgetAdjunction",
+     "Condensed.free",
+     "Condensed.lanCondensedSet",
+     "Condensed.profiniteSolidIsPointwiseRightKanExtension",
+     "Condensed.instAB4CondensedMod",
+     "instCategoryCondensed"
+    ],
+    "digest": "317ec4e1f57882c8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free condensed modules or bounded derived representatives, not finite-field supported constructible generation and its actual scalar images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible condensed algebraic closure coefficient complexes are generated by locally closed extensions of finite field lisse modules, and derived coefficient extension commutes with these supports",
+   "results": {
+    "t": "2026-10-22T07:14:52Z",
+    "tool": "leanfinder",
+    "query": "Bounded constructible condensed algebraic closure coefficient complexes are generated by locally closed extensions of finite field lisse modules, and derived coefficient extension commutes with these supports",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteSolid",
+     "Condensed.finFree",
+     "Condensed.profiniteFree",
+     "CondensedMod.IsSolid",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "CondensedMod.LocallyConstant.functor",
+     "LightCondMod.LocallyConstant.functor",
+     "CondensedMod.ofSheafProfinite"
+    ],
+    "digest": "1175ff1a4a213e83"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free condensed modules or bounded derived representatives, not finite-field supported constructible generation and its actual scalar images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cone generation of a bounded constructible derived category by shifts of locally closed extension by zero of finite rank local systems, descending algebraic closure local systems to finite extensions",
+   "results": {
+    "t": "2026-10-22T07:15:20Z",
+    "tool": "leanfinder",
+    "query": "Finite cone generation of a bounded constructible derived category by shifts of locally closed extension by zero of finite rank local systems, descending algebraic closure local systems to finite extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.IsGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "Condensed.finFree",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "DerivedCategory.instIsLEObjSingleFunctor"
+    ],
+    "digest": "fa11b08720722a4c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free condensed modules or bounded derived representatives, not finite-field supported constructible generation and its actual scalar images."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-algcl-topology-comparison",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), proper coefficient-change obligation; extraction of the returned topology-comparison proof, old steps 1, 2, 3, 4.",
+   "via": [
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-stage-supported-generation",
+  "worker": "stage1",
+  "summary": "Q136: unchanged statement; assemble existing finite supported lisse generation and finite-field descent with normalized K-flat scalar adjunctions, unbounded open/closed support comparison, and scalar-tower coherence. No new nodes.",
+  "blueprint": "Paragraph (3), proper coefficient-change obligation, of the current stability direct-images proof; finite-stage generator part extracted by Q50. Implements scalar-six pullback proof (1)–(3) and coefficient-heart generation. The imported created-item chain has no blueprint ancestor (ancestor command returns None).",
+  "tool_uses": [
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic tool for Closed immersion of schemes: supplies exactly the statement used in proof step(s) 1. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic tool for Localization of an exact adjunction to derived categories: supplies exactly the statement used in proof step(s) 4. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic tool for Morphisms of finite type: supplies exactly the statement used in proof step(s) 1. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Generic tool for Open immersion of schemes: supplies exactly the statement used in proof step(s) 1. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic tool for Separated, universally closed and proper morphisms: supplies exactly the statement used in proof step(s) 1. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "def-weil-triangulated-subcategory",
+    "why": "Generic tool for Full triangulated subcategory: supplies exactly the statement used in proof step(s) 8. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "det-cor-coefficient-heart-ii-generation",
+    "why": "Generic tool for Generation of $D^b_c(X,\\Lambda)$ by extensions by zero of lisse sheaves: supplies exactly the statement used in proof step(s) 7. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "det-cor-coefficient-heart-ii-triangulated",
+    "why": "Generic tool for Bounded constructible complexes with field coefficients form a triangulated subcategory: supplies exactly the statement used in proof step(s) 8. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic tool for Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions: supplies exactly the statement used in proof step(s) 2. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic tool for Derived change of rings along a map of ring sheaves is left adjoint to restriction of scalars, with normalized unit and transposes: supplies exactly the statement used in proof step(s) 2. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "why": "Generic tool for Constructibility of a locally closed lisse coefficient extension: supplies exactly the statement used in proof step(s) 7. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-sfb-condensed-support-derived-localization",
+    "why": "Generic tool for Open/closed localization for ordinary derived condensed module objects: supplies exactly the statement used in proof step(s) 5, 6. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic tool for Internal and sectionwise module operations agree: supplies exactly the statement used in proof step(s) 4. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-sfb-internal-scalar-pullback-normalization",
+    "why": "Generic tool for Normalized internal scalar extension and geometric pullback: supplies exactly the statement used in proof step(s) 3, 5. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic tool for Scalar adjunction transport between internal and sectionwise module sheaves: supplies exactly the statement used in proof step(s) 2, 3, 4. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-sfb-kflat-homotopy-triangulated",
+    "why": "Generic tool for K-flatness is a triangulated property in the homotopy category: supplies exactly the statement used in proof step(s) 2. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic tool for Representative and adjunction normalization of scalar pullback comparison: supplies exactly the statement used in proof step(s) 3, 6. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-sfb-locally-free-derived-scalars",
+    "why": "Generic tool for Derived scalar extension of locally finite free module sheaves: supplies exactly the statement used in proof step(s) 3. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic tool for An isomorphism of right adjoints determines a unique isomorphism of left adjoints compatible with the units: supplies exactly the statement used in proof step(s) 4, 6. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic tool for Mates of pasted squares and of conjugate-whiskered squares: supplies exactly the statement used in proof step(s) 6. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic tool for An open subscheme of a Noetherian scheme is Noetherian: supplies exactly the statement used in proof step(s) 1. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic tool for Ringed pro-etale open-closed localization: supplies exactly the statement used in proof step(s) 4. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic tool for Affine schemes of finite type are Noetherian with finitely many components: supplies exactly the statement used in proof step(s) 1. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   },
+   {
+    "node": "sk-thm-sfb-qlbar-two-colimit",
+    "why": "Generic tool for Descent to a finite coefficient field; $\\Dctf(X,\\Qlb)$ as a $2$-colimit: supplies exactly the statement used in proof step(s) 7. The stability unit does not restate this infrastructure; its coefficient-change route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-closed-immersion",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-triangulated-subcategory",
+  "det-cor-coefficient-heart-ii-generation",
+  "det-cor-coefficient-heart-ii-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "lem-sfb-condensed-support-derived-localization",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-homotopy-triangulated",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-wf-affine-noetherian-components",
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-174aeea98",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-174aeea98 (reviewer sub-agent of L); spot-checked: I read the item and all 9 steps in full; there are no new nodes. Statement and stmt_deps are unchanged against live and side-live, the live node is still unsplit, and there is no re-split repair note. Cycle check: a BFS from all 24 proof_deps on the snapshot, live and side-live never reaches the item. All off-unit cites are declared in tool_uses and are generic tools, since paragraph (3) of the main-20261015 stability proof gives no argument here. Step checks: step 1 (finite-type, Noetherian and separatedness facts, qc complements) is correct. Step 2 (internal/section scalar adjunction, derived change of rings, unit x↦x⊗1, K-flat shift closure) is correct. Step 3 uses lem-sfb-locally-free-derived-scalars for an arbitrary ring map, with no flatness of C→B, plus the internal pullback normalization and the K-flat mate composition and identity laws. Step 4 gets T j_! ≅ j_! T from the conjugate-iso unit lemma via the Hom chain, and is R'-linear. Step 5 gets T i_* ≅ i_* T from the unbounded support-localization node (closed unit iso when j^*=0, closed counit iso). Step 6 proves tower coherence by unit uniqueness and mate pasting. Step 7 combines heart lisse-extension constructibility, det-cor generation and clause (1) of sk-thm-sfb-qlbar-two-colimit on S. C is exactly the sk-def-sfb-qlbar-condensed ring, A_E is the continuous-map ring for E, and B is never identified with C. Step 8 (closure plus rotation) and step 9 (the generator formula in D(B_X)) are correct. Minor remark, not a fault: the heart nodes use the closure factorization for a_!, while the item allows any open-then-closed factorization; the two agree canonically because j_! is supported on the closure. Edge cases checked: empty X and S, L=0, identity stages, shifts, unbounded K. Batch-5 flags: (a) the kflat-scalar node reaches lem-pod-derived-exact-square-composition, which is generic derived pasting of exact-functor squares and not part of Poincaré duality, so it is accepted; (b) the two-colimit node reaches lem-trf-fully-faithful-ess-surj-equivalence, a general category-theory fact and not part of the trace formula, so it is accepted. No SGA is cited. No fixes are written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteStageSupportedGeneration",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteStageGeneration.finite_stage_supported_generation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.support",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.singleComparison",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.ExactScalarUnit",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.SectionAgreement",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.ScalarAssertions",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.Comparisons",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.restrictionTower",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.TowerCompatible",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.generator",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.IsGenerator",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.FiniteConstruction",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.GenerationAssertions",
+   "AlgebraicGeometry.ProEtale.FiniteStageGeneration.finite_stage_supported_generation"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteStageSupportedGeneration.lean",
+  "statement": "theorem finite_stage_supported_generation (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ) (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] : IsNoetherian X.left ∧ (∀ (S : Scheme.{u}) (a : S ⟶ X.left), IsImmersion a → IsNoetherian S ∧ LocallyOfFiniteType (a ≫ X.hom) ∧ QuasiCompact (a ≫ X.hom) ∧ IsSeparated (a ≫ X.hom)) ∧ (∀ T : Scheme.{u}, ScalarAssertions (NormAlgclComparison.coefficientInclusion ℓ) T) ∧ (∀ (E : PadicAlgCl.FiniteIntermediateField ℓ) (T : Scheme.{u}), ScalarAssertions (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) T ∧ ScalarAssertions (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E ≫ NormAlgclComparison.coefficientInclusion ℓ) T) ∧ (∃ b : Comparisons (NormAlgclComparison.coefficientInclusion ℓ) X.left, ∀ E : PadicAlgCl.FiniteIntermediateField ℓ, ∃ (a : Comparisons (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X.left) (c : Comparisons (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E ≫ NormAlgclComparison.coefficientInclusion ℓ) X.left), TowerCompatible (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) (NormAlgclComparison.coefficientInclusion ℓ) X.left a b c) ∧ GenerationAssertions ℓ X.left ∧ ∀ (S Z : Scheme.{u}) (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X.left) [IsClosedImmersion i], Topology.IsConstructible (Set.range (j ≫ i)) → ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ) (M : Modules (Profinite.continuousMapRingObj E) S), IsLisseCoefficientModule (Profinite.continuousMapRingObj E) M → Nonempty ((D (NormAlgclComparison.coefficientInclusion ℓ) X.left).obj (generator ℓ j i E M) ≅ (DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.lowerStar (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) i).obj ((CondensedRing.openImmersionLowerShriek (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) j).obj ((extension (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E ≫ NormAlgclComparison.coefficientInclusion ℓ) S).obj M))))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "H4/H12 repair of immutable head 60bdbbf705fe: replace the duplicate def-sfb-section-scalar-comparison-data owner with the landed def-sfb-internal-section-scalar-pullback-comparison-data (Q96, PASS cb908946e), which owns the identical SectionScalarComparison and SectionScalarNormalized declarations. Retain def-sfb-norm-algcl-coefficient-inclusion and def-sfb-internal-derived-scalar-comparisons. No mathematical statement or Lean source change; Lean SHA-256 986dbeed080bf6552ea07f476067cab74694e2c1df0d5f6bb8e502ea09e103af."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45666c6c0",
+  "group": "NN",
+  "result": "pass",
+  "note": "H4/H12 correction from the 60bdbbf7 return is complete: duplicate def-sfb-section-scalar-comparison-data dropped; item stmt_deps cite the landed def-sfb-internal-section-scalar-pullback-comparison-data (Q96, same hash in snapshot and side-live, owns SectionScalarComparison and SectionScalarNormalized used by SectionAgreement); def-sfb-norm-algcl-coefficient-inclusion (byte-identical to the version checked before; coefficientInclusionRing, coefficientInclusion and the IsMonHom instance; no other owner) and def-sfb-internal-derived-scalar-comparisons kept. Lean byte-identical (sha 986dbeed) across e55b/60bd/4566; item node differs only in stmt_deps and lean.note; statement verbatim. Independent re-read of the substance: actual C/B/A_E and inclusions, ScalarAssertions (K-flat computation, unit v->1⊗v, section agreement, lisse degree 0), pinned pull, existential supported isomorphism as the node states, tower normalized by SuccessiveNormalized/composite unit, replete generator class, smallest replete triangulated subcategory plus FiniteConstruction, J_X formula in D(B_X), geometric clauses; edge cases empty X and S, rank 0, N=0, unbounded inputs, no flatness, arbitrary u. Item not landed live; all 26 imports exist. Advisory: supported-tower clause vacuous (c existential). No compile: no file changed."
+ }
+}

@@ -1,0 +1,215 @@
+{
+ "id": "lem-sf-primitive-reduction-transpose",
+ "kind": "statement",
+ "title": "Primitive integral operation comparisons are the specified counit transposes",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. For finite-type $k$-schemes $W$ work on their small pro-etale sites and put $\\widehat R_W=\\lim_n(A_n)_W$ [def-weil-pbc-proetale-site]. Let $\\mathcal R_W\\dashv\\mathcal L_W$ be the actual reduction/total-limit adjunction on ordinary derived categories of strict semilinear module systems, with unit $u$ and counit $e$ [lem-coef-derived-system-evaluation-calculus], using the simultaneous section constructions [lem-coef-semilinear-derived-sections]. System operations are exact inverse image $P_v$, derived direct image $S_v$ with $P_v\\dashv S_v$, exact open extension $J_j\\dashv P_j$, and derived tensor. All maps $v$ are separated finite type; maps denoted $p$ are proper and opens $j$ are quasi-compact [def-weil-scheme-morphism-properties]. Integral operations $A_{\\rm int}$ are completed pullback and tensor, proper direct image, and localized completed-ring open extension [def-pur-integral-derived-operations, def-weil-derived-direct-image, lem-sf-integral-open-reduction-comparison]. Inputs $K_i$ are derived-complete constructible integral complexes. Every input and intermediate system occurring in the assertion is normalized, has compatible etale-origin witnesses and constructible cohomology, and has cohomological and finite Tor amplitudes in common finite intervals [def-weil-derived-complete-integral-detailed, def-coef-normalized-dvr-tower, def-weil-pbc-etale-origin-witness, def-weil-finite-tor-amplitude].\n\nFor a basic operation $A$ write $d_A:\\mathcal L A(\\mathcal R K_i)\\xrightarrow{\\sim}A_{\\rm int}(K_i)$ for its defining strict reduction-tower identification, with two inputs for tensor and with $d_j$ fixed by [lem-sf-integral-open-reduction-comparison]. Write $r_A:\\mathcal R A_{\\rm int}(K_i)\\to A(\\mathcal R K_i)$ for the canonical coefficient comparison of [lem-fix-operation-reduction], using the specified $r_j$ for open extension. These maps and the canonical completed ringed-site structural maps are fixed independently, through the section-normalized constructions [def-sf-integral-system-operations, def-sf-integral-system-canonical-bridge].\n\nFor each single $A=P_v,S_p,J_j$ or tensor, its specified coefficient comparison is the adjunction transpose of $d_A^{-1}$, as a natural equality of whole derived semilinear-system maps:\n$$r_A=e_{A(\\mathcal R K_i)}\\circ\\mathcal R(d_A^{-1}).$$\nFor pullback, tensor and proper image, the quotient-complex/total-limit models defining $d_A$ identify $d_A^{-1}$ with the defining tower realization map. In these coordinates the specified $r_A$ is the scalar-extension adjoint of the actual total-limit projection at each $n$, with the strict quotient transitions retained. For open extension, the specified identifications satisfy\n$$d_j^{-1}=\\mathcal L(r_j)\\circ u_{j_!K},\\qquad\n e_{J_j\\mathcal R K}\\circ\\mathcal R\\mathcal L(r_j)\\circ\\mathcal R(u_{j_!K})=r_j.$$\nAll equalities are natural in every input in the stated domain and hold before finite evaluation; the asserted identification is of the specified whole-system maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "The maps-used sentence beginning “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; primitive transpose identification (returned proof step 2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-scheme-morphism-properties",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-finite-tor-amplitude",
+  "lem-fix-operation-reduction",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Split the word by its constructor. The length-at-most-one bound forces every immediate child to have length zero, hence to be an input or unit; its primitiveFormulas proposition is True. Inputs and units themselves also have proposition True.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For tensor and pullback use the canonical quotient-augmentation identities and invertibility of their reduced completion maps. For any adjunction F⊣G, augmentation chi:X→Y, d:Y→G N, and r:F X→N, the identity chi≫d=u_X≫G(r) transposes to F(chi)≫F(d)≫e_N=r. Cancel the invertible F(chi). This gives exactly inverseOrZero(F(chi)) followed by r, the independently defined coefficient comparison.",
+   "uses": [
+    "lem-sf-primitive-quotient-augmentations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For proper image pushR is the actual counit by definition. Reduction maps the identity in the asserted right side to the identity, so the formula is immediate.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For open extension, openDInv is definitionally u followed by L(openR). The inverse Hom-equivalence identity gives the counit-transpose formula for every input. A length-zero child is an admissible input or the coefficient unit. Open reconstruction effectivity supplies invertibility of the fixed open reduction mate and the actual unit. Replace inverseOrZero by inv and cancel each pair of inverse maps to get both inverse laws.",
+   "uses": [
+    "lem-sf-open-reconstruction-effectivity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-primitive-quotient-augmentations",
+  "lem-sf-open-reconstruction-effectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence; factor the representative calculations from the elementary Hom-equivalence, inverse cancellation, and length-zero recursion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semilinear.*(reduction|counit)|completed.*(pullback|tensor).*counit",
+   "results": "0 hits: ; searched Mathlib/CategoryTheory. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical coefficient reduction map for an integral sheaf operation is the transpose of its inverse derived limit identification",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.isoSheafify_inv, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, TopCat.Presheaf.toSheafify, SheafOfModules.Presentation.mapRelations, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, AlgebraicGeometry.SheafedSpace.restrictTopIso_inv, SheafOfModules.freeCofan_inj, Condensed.lanPresheafExt_inv. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\", \"naturality\"",
+   "results": "2 hits: CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived quotient tower projection adjoints give coherent counit formulas for geometric operations on complete coefficient sheaves",
+   "results": "8 hits: AdicCompletion.eval_comp_of, SheafOfModules.Presentation.map_π_eq, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.ΓSpec.adjunction_counit_app', PresheafOfModules.Derivation.Universal.fac, CategoryTheory.constantSheafAdj_counit_w, SheafOfModules.generatorsOfIsCokernelFree_π. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite reduction comparison for completed pullback tensor proper direct image and open extension equals reduction of the inverse quotient limit identification followed by the counit of reduction and derived inverse limit",
+   "results": "8 hits: AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst, AlgebraicGeometry.pullbackSpecIso_inv_snd, AlgebraicGeometry.pullbackSpecIso_hom_snd, AlgebraicGeometry.pullbackSpecIso_hom_fst, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*(pullback|tensor).*counit|reduction.*total.limit.*adjunction",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical reduction maps of completed sheaf operations are the transposes under reduction and derived inverse limit",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreHomEquivUnitCounit\", \"CategoryTheory.Adjunction.CoreUnitCounit\", \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient reduction comparison for completed pullback tensor and proper pushforward is the reduction inverse limit adjunction counit conjugated by the canonical tower realization",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse of the reduction total limit adjunction sends a realization morphism to the strict quotient system map given by scalar adjoints of limit projections for complete sheaf complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓNatIsoLim\", \"LightCondensed.isoLocallyConstantOfIsColimit_inv\", \"Condensed.isoLocallyConstantOfIsColimit_inv\", \"CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj\", \"CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj_fac\", \"CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac\", \"CategoryTheory.Sheaf.isLimitConeΓ\", \"CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac_assoc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-generator-reduction-coherence",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps-used sentence beginning “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; primitive transpose identification (returned proof step 2)",
+   "via": [
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-primitive-reduction-transpose",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Reuse the existing cochain counit calculation, projection-normalized completed primitive realizations, Roos-effectivity canonical reduction maps, and specified open reconstruction. The argument identifies strict system representatives for pullback, tensor and proper image; open extension follows by counit naturality and the triangle identity. No faithfulness of finite evaluation is used.",
+  "blueprint": "fix-prop-coherence.proof.md, maps-used sentence: primitive coefficient maps for tensor, pullback, proper direct image and open extension are the specified counit transposes, supplying the returned primitive step of lem-sf-generator-reduction-coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-completed-primitive-counit-comparison",
+    "why": "Generic natural projection-normalized Roos realization for completed pullback and tensor; the compatibility unit requires this fixed realization rather than a different proof route."
+   },
+   {
+    "node": "lem-pur-integral-operation-roos-effectivity",
+    "why": "Generic identification of canonical reduction of a pullback/tensor Roos complex with the scalar adjunct of its actual projection; the unit does not supply a different representative computation."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-865c01339",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-865c01339 (reviewer sub-agent of L); spot-checked: Read the item and all 9 proof_deps statements in full; the item statement is unchanged and the delivery adds no new nodes; the transitive closure has no cycle. The claim r_A = e∘R(d_A^{-1}) holds level by level, since the counit at level n is the adjoint of the projection (lem-coef-derived-system-evaluation-calculus) and r_A at level n is defined as the adjoint of the projection (def-weil-derived-direct-image for proper image, lem-pur-integral-operation-roos-effectivity for pullback and tensor). Steps 1, 3 and 4 lift this to whole systems on strict representatives using the formula x⊗b ↦ b·pr_n(q(x)) of lem-coef-sequence-adjunction-cochain-transposes; I checked its transition square for every m≥n. Step 2: r_F and r_T go from A_int to L N, so they are d_A^{-1}; the zero-shifted-coordinate normalization of the Roos comparison makes the projections agree. Steps 5–6 are correct elementary steps: d_j^{-1}=L(r_j)u_X, then counit naturality and the triangle identity give both open equations. The open clause is equivalent to r∘R(d)=e in lem-sf-open-reduction-adjunction-transport; this is not a new-node duplicate. Hypotheses checked: ℓ invertible, derived-complete D^b_c inputs, quasi-compact j. Edge cases: U empty, j=id, constant coefficients, m=n. Blueprint place is fix-prop-coherence.proof.md line 9; Stacks tags 07A6, 0941 and 0FPI verified; no SGA. Accepted tool uses: primitive-counit-comparison and Roos-effectivity, both generic. Advisory only: step 1 implicitly identifies the cochain-transposes adjunction with the evaluation-calculus adjunction (same Hom correspondence); Roos-effectivity's 'good complex' is undefined in that node (pre-existing)."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.GeneratorReductionStatement",
+  "declaration": "WeilConjectures.GeneratorReduction.primitiveReductionTranspose",
+  "statement": "theorem primitiveReductionTranspose (o : Operations l E)\n    {a : S} (B : Word W location a)\n    (_hLength : B.length ≤ 1)\n    (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))\n    (lo hi torLo torHi : ℤ)\n    (_hAdm : ∀ k : I, Admissible l E\n      (IntegralSystemRealization.calculus l E (W (location k))) (K k) lo hi torLo torHi)\n    (_hIntermediate : Word.admissible l E W location o K lo hi torLo torHi B) :\n    B.primitiveFormulas l E W location o K",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing primitive theorem in the generator module, lines 635–644. Specialize Word.primitiveFormulas to one tensor, pull, push or open vertex. The coefficient arrows are the independently defined tensorR/pullR/pushR/openR; tensorD and pullD are the specified whole-tower Roos isomorphisms; proper d is identity in the defining L S R coordinates. For open extension openDInv is definitionally unit followed by L(openR), and the conclusion supplies its two inverse laws and the counit-transpose equality. Naturality and the projection normalization belong to the imported actual functors and representative-normalized comparisons. No new module, theorem, construction or DAG dependency is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1bdf11a4",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Only change: the item's lean record, existing:true binding to the landed GeneratorReduction.primitiveReductionTranspose, which is owned by the parent lem-sf-generator-reduction-coherence and listed in its declarations; statement verbatim with the source. Clause check: one primitive vertex per case of primitiveFormulas (length ≤ 1), asserting r_A = R(d_A⁻¹) ≫ e on whole coefficientSequenceDerived maps. tensorD/pullD are the ∃!-pinned Roos models (CompletedPullbackTensorComparison:689, 758). tensorR/pullR/pushR/openR are built from completion units, the RealizationModel.reductionPull bridge (pinned by its model field), the actual counit and the canonical mateEquiv open mate; none is defined by the asserted equality. The open case adds both inverse laws, and openDInv = u ≫ L(openR) gives both node displays. Hypotheses Admissible/Word.admissible cover the node domain with no extra assumptions. Edge cases checked. Not a dropped item, no repair note, not bound by another group. Advisories: the proper-image clause and the open d_j⁻¹ display are definitional in the parent's L S R / mate coordinates, consistent with node steps 4–5; the theorem omits k, finite type and ℓ invertible (a true generalisation; the parent supplies FiniteTypeFamily); the docstring tag names the parent node. No FIX and no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a25ee",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261026T001415-L-4190115",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-sf-generator-reduction-coherence nodes (proof_deps = 4 forward squares + substitution + tensor squares); moved completionMap_isIso byte-identical to live; restored structuralReductionWordSubstitution identical to K4 dc9dd96 signature and its node; tensor adaptation = one import line, compiled",
+  "sorry_before": [
+   "WeilConjectures.GeneratorReduction.generatorReductionCoherence"
+  ],
+  "sorry_after": []
+ }
+}

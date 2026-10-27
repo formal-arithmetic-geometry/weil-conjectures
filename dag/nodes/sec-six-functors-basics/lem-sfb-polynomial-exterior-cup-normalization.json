@@ -1,0 +1,195 @@
+{
+ "id": "lem-sfb-polynomial-exterior-cup-normalization",
+ "kind": "statement",
+ "title": "Polynomial exterior evaluation and the signed derived cup map",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring], $G$ a profinite group, and $r\\geq0$. Use internal modules, trivial $G$-actions, ordinary derived categories, and the universe convention [sk-def-sfb-module-objects, def-sfb-condensed-action-module, def-weil-abstract-derived-category, def-weil-size-convention]. Fix additive condensed-group maps $a_i:\\underline G\\to(A,+)$, $1\\leq i\\leq r$. Write $C=R\\Gamma_{A,G}(A[0])$, and let $\\alpha_i=[a_i]:A[-1]\\to C$ and the unital derived cup product have the positive connecting-class normalization of [lem-sfb-condensed-derived-restriction-calculus].\n\nLet $P^n$ be the internal direct sum of $A$ on monomials in $x_{a,i}$ for $1\\leq a\\leq n$, $1\\leq i\\leq r$, with polynomial notation [def-weil-pbc-mv-polynomial-ring] and differential\n$$(df)(x_1,\\ldots,x_{n+1})=f(x_2,\\ldots,x_{n+1})+\\sum_{a=1}^{n}(-1)^a f(x_1,\\ldots,x_a+x_{a+1},\\ldots,x_{n+1})+(-1)^{n+1}f(x_1,\\ldots,x_n).$$\nSet $K=\\bigoplus_{I\\subseteq\\{1,\\ldots,r\\}}A[-|I|]$ with zero differential. Define $i:K\\to P$ by $e_\\varnothing\\mapsto1$ and $e_{\\{i_1<\\cdots<i_q\\}}\\mapsto x_{1,i_1}\\cdots x_{q,i_q}$. Evaluation $x_{a,i}\\mapsto a_i(g_a)$ gives $\\mathrm{ev}:P\\to U^\\bullet$, where $U^n=\\underline{\\operatorname{Hom}}_A(A[\\underline G^n],A)$. Let $j:U^\\bullet\\to\\mathscr B$ and $\\epsilon:C\\xrightarrow{\\sim}\\mathscr B$ be the canonical underived-to-derived map and normalized augmentation into the derived internal bar totalization of [lem-sfb-condensed-derived-invariant-bar]. Put $\\eta=j\\mathrm{ev}$.\n\nDefine $\\chi:K\\to C$ by the unit on the empty summand and $\\alpha_{i_1}\\smile\\cdots\\smile\\alpha_{i_q}$ on the summand for $\\{i_1<\\cdots<i_q\\}$. There exist signs $\\varepsilon_q\\in\\{1,-1\\}$ depending only on $q$ and the fixed tensor/shift convention, with $\\varepsilon_0=\\varepsilon_1=1$, such that the diagonal automorphism $\\sigma$ of $K$ equal to $\\varepsilon_{|I|}$ on its $I$-summand satisfies\n$$\\sigma^2=1,\\qquad \\eta i=\\epsilon\\chi\\sigma$$\nin $D(\\operatorname{Mod}_A)$. On the empty summand this is equality with the actual cup unit. The assertion includes $r=0$, the zero ring and zero or repeated characters, and asserts equality of derived arrows, without asserting that $\\eta$ is invertible or that $U^n$ is acyclic.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent polynomial-bar reduction of the trivial lattice case, former item step 5: simultaneous finite-summand normalization of polynomial evaluation against connecting-class cups. Exact reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-condensed-derived-invariant-bar"
+ ],
+ "proof": [
+  {
+   "text": "All polynomial substitutions are $A$-linear maps on the monomial direct sums: each monomial expands into finitely many monomials. The evaluation formula of [def-weil-pbc-mv-polynomial-ring], applied on every profinite test object, is natural under restriction and gives the internal map $\\mathrm{ev}$. The polynomial faces satisfy the cosimplicial identities: deleting end variables and replacing adjacent variables by their sum commute in the required order, with overlapping replacements using $(x+y)+z=x+(y+z)$. Thus terms in $d^2$ cancel in pairs with opposite signs. The faces on $U^\\bullet$ are precisely those of [def-sfb-condensed-equivariant-bar-data]. Additivity $a_i(gh)=a_i(g)+a_i(h)$ identifies evaluation of each polynomial face with the corresponding group-bar face, including the two end faces because the action is trivial. Hence $\\mathrm{ev}$ is a cochain map.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent polynomial-bar normalization: polynomial chain maps, existing ordered-cup comparison, and finite-summand assembly."
+   }
+  },
+  {
+   "text": "For $I=\\{i_1<\\cdots<i_q\\}$ put $m_I=\\prod_{b=1}^q x_{b,i_b}$. For $q\\geq1$, in degree $q+1$ define $T_k=(\\prod_{b<k}x_{b,i_b})(\\prod_{b\\geq k}x_{b+1,i_b})$ for $1\\leq k\\leq q+1$. The first face of $m_I$ is $T_1$, its $a$-th interior face is $T_a+T_{a+1}$, and its last face is $T_{q+1}$. Consequently $dm_I=T_1+\\sum_{a=1}^q(-1)^a(T_a+T_{a+1})+(-1)^{q+1}T_{q+1}=0$, by cancellation of each $T_k$. For $q=0$, $d1=1-1=0$. These identities prove that the specified $i:K\\to P$ is a cochain map. Its evaluated component on the $I$-summand is exactly $z_I(g_1,\\ldots,g_q)=\\prod_{b=1}^q a_{i_b}(g_b)$, and is $1$ for the empty summand.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent polynomial-bar normalization: polynomial chain maps, existing ordered-cup comparison, and finite-summand assembly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-internal-bar-ordered-cup] to the ordered tuple $(a_{i_1},\\ldots,a_{i_q})$. Its $A,G,U^\\bullet,\\mathscr B,j,\\epsilon$ and positive connecting classes are exactly those fixed here. It gives $j\\mathrm{ev}i\\iota_I=\\varepsilon_q\\epsilon(\\alpha_{i_1}\\smile\\cdots\\smile\\alpha_{i_q})$, as derived arrows from $A[-q]$, where $\\iota_I$ is the summand injection. That node explicitly makes $\\varepsilon_q$ independent of the ring, group and characters, so the same degree sign works simultaneously for all subsets of size $q$. It also gives $\\varepsilon_0=\\varepsilon_1=1$, with the actual unit at $q=0$. No invertibility of $j$ or underived-column acyclicity enters this application.",
+   "uses": [
+    "lem-sfb-internal-bar-ordered-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent polynomial-bar normalization: polynomial chain maps, existing ordered-cup comparison, and finite-summand assembly."
+   }
+  },
+  {
+   "text": "Define $\\sigma$ diagonally by these degree signs (degrees greater than $r$ have no summands). Since $\\varepsilon_q^2=1$, its square is $1_K$. By the definition of $\\chi$, step 3 says that $\\eta i$ and $\\epsilon\\chi\\sigma$ agree after every $\\iota_I$. For the finite direct sum, writing $\\pi_I$ for its projections, $1_K=\\sum_I\\iota_I\\pi_I$; composing with this identity proves equality of the entire derived arrows. For $r=0$ there is only the empty summand and step 3 gives the unit equality. All polynomial cancellations and diagonal identities hold in the zero ring and in characteristic two. The cited comparison allows zero and repeated characters; nothing in the argument divides by a coefficient or asserts that their products are linearly independent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent polynomial-bar normalization: polynomial chain maps, existing ordered-cup comparison, and finite-summand assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-condensed-equivariant-bar-data",
+  "lem-sfb-internal-bar-ordered-cup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent polynomial-bar normalization: polynomial chain maps, existing ordered-cup comparison, and finite-summand assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(polynomial|coordinate|bar).*(cup|connecting)|(cup|connecting).*(polynomial|coordinate|bar)",
+   "results": "{\"t\": \"2026-10-22T05:59:26Z\", \"tool\": \"grep\", \"query\": \"(polynomial|coordinate|bar).*(cup|connecting)|(cup|connecting).*(polynomial|coordinate|bar)\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic discrete bar differentials and topological continuous cohomology do not identify these specified internal derived arrows or their tensor-shift signs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cup\"",
+   "results": "{\"t\": \"2026-10-22T05:59:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"cup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AddSubgroup.instCharacteristicUpperCentralSeries\", \"Subgroup.instCharacteristicUpperCentralSeries\", \"AddSubgroup.instCharacteristicUpperCentralSeriesStep\", \"Subgroup.instCharacteristicUpperCentralSeriesStep\"], \"digest\": \"b25fd9aa96c2038e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic discrete bar differentials and topological continuous cohomology do not identify these specified internal derived arrows or their tensor-shift signs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of the entire exterior direct sum map with cup products of continuous additive characters in the derived condensed bar complex",
+   "results": "{\"t\": \"2026-10-22T05:59:38Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison of the entire exterior direct sum map with cup products of continuous additive characters in the derived condensed bar complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.MultiInd.d_succ\", \"ContinuousCohomology.MultiInd.d\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"ContinuousCohomology.MultiInd.complex\", \"inhomogeneousCochains.d_eq\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"Rep.standardComplex.compForgetAugmentedIso\", \"Rep.barComplex.isoStandardComplex\"], \"digest\": \"375fab9eab46a7c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic discrete bar differentials and topological continuous cohomology do not identify these specified internal derived arrows or their tensor-shift signs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial evaluation followed by the derived bar augmentation agrees with the finite direct sum of ordered coordinate connecting cup products up to degree signs",
+   "results": "{\"t\": \"2026-10-22T05:59:38Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial evaluation followed by the derived bar augmentation agrees with the finite direct sum of ordered coordinate connecting cup products up to degree signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex.d_single\", \"Rep.standardComplex.d_of\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"Algebra.Generators.H1Cotangent.δAux_monomial\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\"], \"digest\": \"716185a3dfc081a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic discrete bar differentials and topological continuous cohomology do not identify these specified internal derived arrows or their tensor-shift signs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The polynomial coordinate monomial exterior map into derived internal condensed group invariants equals the ordered cup product map with diagonal shift signs",
+   "results": "{\"t\": \"2026-10-22T06:00:06Z\", \"tool\": \"leansearch\", \"query\": \"The polynomial coordinate monomial exterior map into derived internal condensed group invariants equals the ordered cup product map with diagonal shift signs\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: \", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial coordinate evaluation into the derived internal bar totalization equals ordered cup products of additive condensed group characters up to tensor shift signs",
+   "results": "{\"t\": \"2026-10-22T11:18:32Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial coordinate evaluation into the derived internal bar totalization equals ordered cup products of additive condensed group characters up to tensor shift signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"Rep.barComplex.d_single\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\"], \"digest\": \"fcc38f0c25fee0ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern discrete representations, unrelated polynomial differentials or additive characters with multiplicative targets, not the specified internal condensed derived arrows."
+  },
+  {
+   "tool": "grep",
+   "query": "(polynomial|coordinate|bar).*(cup|connecting)|(cup|connecting).*(polynomial|coordinate|bar)",
+   "results": "{\"t\": \"2026-10-22T11:19:10Z\", \"tool\": \"grep\", \"query\": \"(polynomial|coordinate|bar).*(cup|connecting)|(cup|connecting).*(polynomial|coordinate|bar)\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern discrete representations, unrelated polynomial differentials or additive characters with multiplicative targets, not the specified internal condensed derived arrows."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered products of additive characters in a derived internal condensed group bar complex represent derived cup products",
+   "results": "{\"t\": \"2026-10-22T11:19:10Z\", \"tool\": \"leansearch\", \"query\": \"Ordered products of additive characters in a derived internal condensed group bar complex represent derived cup products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.coe_prod\", \"AddChar.instAddCommGroup\", \"AddChar.prod_apply\", \"AddChar.instCommMonoid\", \"AddChar.instAddCommMonoid\", \"AddChar.directSum\", \"AddChar.instCommGroup\", \"Rep.barComplex\"], \"digest\": \"eb65902cef5e4345\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern discrete representations, unrelated polynomial differentials or additive characters with multiplicative targets, not the specified internal condensed derived arrows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cup\"",
+   "results": "{\"t\": \"2026-10-22T11:19:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"cup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AddSubgroup.instCharacteristicUpperCentralSeries\", \"Subgroup.instCharacteristicUpperCentralSeries\", \"AddSubgroup.instCharacteristicUpperCentralSeriesStep\", \"Subgroup.instCharacteristicUpperCentralSeriesStep\"], \"digest\": \"b25fd9aa96c2038e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern discrete representations, unrelated polynomial differentials or additive characters with multiplicative targets, not the specified internal condensed derived arrows."
+  },
+  {
+   "tool": "grep",
+   "query": "cup|barComplex|inhomogeneousCochains",
+   "results": "{\"t\": \"2026-10-22T11:19:40Z\", \"tool\": \"grep\", \"query\": \"cup|barComplex|inhomogeneousCochains\", \"sub\": \"RepresentationTheory/Homological\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\"], \"digest\": \"3b9a103e6bef40c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern discrete representations, unrelated polynomial differentials or additive characters with multiplicative targets, not the specified internal condensed derived arrows."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of an ordered monomial in separate bar variables followed by underived to derived comparison represents the product of degree one connecting morphisms",
+   "results": "{\"t\": \"2026-10-22T11:19:42Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation of an ordered monomial in separate bar variables followed by underived to derived comparison represents the product of degree one connecting morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.H1Cotangent.δAux_monomial\", \"Algebra.PreSubmersivePresentation.aevalDifferential\", \"Algebra.PreSubmersivePresentation.aevalDifferential_single\", \"Rep.barComplex.d_single\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"Algebra.Generators.H1Cotangent.δAux_mul\", \"Algebra.Generators.H1Cotangent.δAux\", \"Algebra.Generators.H1Cotangent.δAux_X\"], \"digest\": \"dade7309836100b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern discrete representations, unrelated polynomial differentials or additive characters with multiplicative targets, not the specified internal condensed derived arrows."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trivial-ladic-derived-exterior",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent polynomial-bar reduction of the trivial lattice case, former item step 5: simultaneous finite-summand normalization of polynomial evaluation against connecting-class cups. Exact reference WANTED.",
+   "via": [
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-exterior-cup-normalization",
+  "worker": "stage1",
+  "summary": "Q15 repaired return L by reconciling the retained 60f2b3d77e0 delivery with the current live DAG: the live item is unsplit, its statement, statement dependencies, source and blueprint metadata agree exactly, and all three current cited statements still supply the retained proof. Re-read every cited statement and the normalization interfaces; all retained citation quotes remain verbatim. Retained the four-step polynomial cancellation, ordered-cup comparison and finite-summand assembly, and the original search log. The delivery tool rebuilds this split on the current live base for promotion by L; no new nodes, Lean edits or compiles.",
+  "blueprint": "Paragraph (3), open direct image, of the main-20261015 direct-images proof; the agent polynomial-bar expansion beneath lem-sfb-trivial-ladic-derived-exterior, former normalization step. Existing lem-sfb-internal-bar-ordered-cup supplies the normalization; no change to the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-7aa024404",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-7aa024404 (reviewer sub-agent of L); spot-checked: I read the item in full. Its statement is unchanged; it has 4 steps, 0 new nodes, and proof_deps equal the union of the step uses. With split_report removed, the item JSON is identical to the earlier head d4691664ac81. This push only refreshes the report and split_report for the integration return L (the earlier split was not promoted to live). I re-read all the mathematics anyway. Step 1: substituting x_a+x_{a+1} matches the interior bar face g_a g_{a+1} because a_i is additive. Under the trivial action the first face drops g_1, so ev is a cochain map; d²=0 by associativity of the overlapping substitutions. The faces are those of def-sfb-condensed-equivariant-bar-data, and the evaluation property of the polynomial ring node is applied in each section ring A(T). Step 2: I recomputed the faces of m_I (first T_1, a-th interior T_a+T_{a+1}, last T_{q+1}); the alternating sum telescopes to 0, and I checked q=0,1,2 by hand. Step 3: lem-sfb-internal-bar-ordered-cup applies to the ordered tuple (a_{i_1},…,a_{i_q}). Its j, ε, U, 𝓑, classes and cup are fixed by the same derived-invariant-bar and restriction-calculus nodes the item cites, and ev(m_I) is its z. It gives one universal sign ε_q per degree with ε_0=ε_1=1 and the actual unit. Step 4: on the finite biproduct, 1_K=Σι_Iπ_I and σ²=1. Edge cases hold: r=0, q>r, the zero ring, characteristic 2, and zero or repeated characters. There is no cycle: the closure has 766 nodes and does not contain the item. The single citer, lem-sfb-trivial-ladic-derived-exterior step 3, uses the item with the same η, i and χ. The item is not a restatement of the ordered-cup node: it adds P, i, ev and the simultaneous σ. No SGA is cited; the source is main-20261015 direct-images paragraph (3), lines 19–25, with the exact reference marked WANTED. Batch-5 check: the flagged lem-trf-free-module-sheaf-universal-property is the universal property of the free module sheaf on a small site (Stacks 04BL). It is a general construction, not a step of the trace formula or of Poincaré duality, so I accept it; the other trf nodes in the closure are generic too. No repair note exists for this item, and no fixes were written."
+ }
+}

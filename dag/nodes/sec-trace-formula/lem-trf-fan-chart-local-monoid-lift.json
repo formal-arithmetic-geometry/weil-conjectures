@@ -1,0 +1,197 @@
+{
+ "id": "lem-trf-fan-chart-local-monoid-lift",
+ "kind": "statement",
+ "title": "Zariski local monoid lifts of a prescribed characteristic fan chart",
+ "statement": "Let $(V,N)$ be a locally Noetherian fs log scheme [def-trf-fs-log-blowup] whose log structure is associated to one on the Zariski site, and write $\\overline N=N/\\mathcal O_V^\\times$ on that site. Let $F$ be a fine fan [def-trf-fine-fan-blowup], and let $c:(V,\\overline N)\\to(F,\\mathcal P_F)$ be a local morphism of sharp monoidal spaces with $c^{-1}\\mathcal P_F\\simeq\\overline N$. For each $v\\in V$ put $z=c(v)$ and $P=\\mathcal P_{F,z}$. The subset $F_z$ consisting of all generalizations of $z$ is an open affine fan canonically isomorphic to the sharpened spectrum of $P$. The monoid $P\\simeq\\overline N_v$ is sharp fine saturated and $P^{\\mathrm{gp}}$ is free abelian of finite rank.\nThere exist a Zariski open neighborhood $U\\subseteq c^{-1}(F_z)$ of $v$ and a homomorphism $h:P\\to\\Gamma(U,N)$ which is a log chart and whose sharpening is precisely $c|_U$ under this identification of $F_z$. Equivalently, its homomorphism $P\\to\\Gamma(U,\\overline N)$ is the prescribed one induced by $c$, and the associated log structure of $\\alpha h$ is $N|_U$. The homomorphism on $P^{\\mathrm{gp}}$ at $v$ can be any group section of $N_v^{\\mathrm{gp}}\\to\\overline N_v^{\\mathrm{gp}}$ under the displayed identification.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.4(iii), 3.1.8(ii), 3.1.10(ii), pp.98--100; 3.3.12--3.3.13, pp.108--109: Zariski local lift expanded using free characteristic groups (VI 1.6, p.70)."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the canonical stalk model: a normalized fan localization L, the equivalence Associates R ≃ P normalized by the actual quotient, integrality of R, and the fs sharp finite-free properties of P.",
+   "uses": [
+    "lem-trf-fan-chart-stalk-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend that equivalence to group completions by the universal property; transport a finite basis. Apply integral monoid free-sharpening splitting to R. Transport its group section to P^gp. For any prescribed section s and p in P choose a representative r of p. The element s(p)/r has trivial quotient, so the kernel clause gives a unit v of R representing it. Thus s(p) equals v*r in the completion. Injectivity of R in its completion makes these representatives multiplicative and yields a monoid section j with the specified groupification.",
+   "uses": [
+    "lem-trf-integral-monoid-free-sharpening-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Spread j to U,h,a with exact germ and prescribed characteristic sections. Apply the characteristic fan criterion to h. Its germ equation and the monoid-section groupification give the required last equality for the originally prescribed s.",
+   "uses": [
+    "lem-trf-fan-chart-germ-spreading",
+    "lem-trf-fan-chart-section-is-chart"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fan-chart-stalk-model",
+  "lem-trf-integral-monoid-free-sharpening-splitting",
+  "lem-trf-fan-chart-germ-spreading",
+  "lem-trf-fan-chart-section-is-chart"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 3.7(a), p.75; VIII 3.1.4, 3.1.8, 3.1.10, 3.3.12; F8 formal algebraic transport and arbitrary-section restriction; geometric comparison, spreading and chart check separated as three strict subarguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every characteristic fan chart of a Zariski fine saturated log scheme lifts locally to a monoid chart by splitting its free characteristic group.",
+   "results": "{\"t\": \"2026-10-22T06:12:36Z\", \"tool\": \"leanfinder\", \"query\": \"Every characteristic fan chart of a Zariski fine saturated log scheme lifts locally to a monoid chart by splitting its free characteristic group.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"NumberField.Units.logEmbeddingQuot\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"153beb028f68ec43\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogChart\"",
+   "results": "{\"t\": \"2026-10-22T06:12:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogChart\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fan.?chart|characteristic.?monoid|log.?structure",
+   "results": "{\"t\": \"2026-10-22T06:12:37Z\", \"tool\": \"grep\", \"query\": \"fan.?chart|characteristic.?monoid|log.?structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of the characteristic monoid of a fine saturated Zariski log structure lifts locally to a chart by lifting a finite basis of the group completion.",
+   "results": "{\"t\": \"2026-10-22T06:12:37Z\", \"tool\": \"leansearch\", \"query\": \"A section of the characteristic monoid of a fine saturated Zariski log structure lifts locally to a chart by lifting a finite basis of the group completion.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StructureGroupoid.LocalInvariantProp.liftPropOn_chart\", \"StructureGroupoid.LocalInvariantProp.liftPropAt_chart\", \"Algebra.GrothendieckAddGroup.lift\", \"AddMonoidAlgebra.lift_of\", \"FreeAbelianGroup.liftMonoid_coe\", \"instCanLiftUnitsValIsUnit\", \"Submonoid.LocalizationMap.lift_apply\", \"Submonoid.LocalizationMap.lift₀_apply\"], \"digest\": \"62cc72a2a292d60f\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of the characteristic monoid of a fine saturated Zariski log structure lifts locally to a chart by lifting a finite basis of the group completion.",
+   "results": "{\"t\": \"2026-10-22T06:13:08Z\", \"tool\": \"leanfinder\", \"query\": \"A section of the characteristic monoid of a fine saturated Zariski log structure lifts locally to a chart by lifting a finite basis of the group completion.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.StructureSheaf.locally_const_basicOpen\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen\", \"AlgebraicGeometry.StructureSheaf.exists_const\"], \"digest\": \"de2e5ccc38949b3f\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fan.?chart|characteristic.?monoid|log.?structure",
+   "results": "{\"t\": \"2026-10-23T09:58:54Z\", \"tool\": \"grep\", \"query\": \"fan.?chart|characteristic.?monoid|log.?structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ringed-space stalks and local ring maps, topology inclusion, ordinary scheme integrality and localization; none supplies log-structure unit extension or characteristic comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski locally lift the characteristic monoid of a fine saturated logarithmic structure to a chart.",
+   "results": "{\"t\": \"2026-10-23T09:58:55Z\", \"tool\": \"leansearch\", \"query\": \"Zariski locally lift the characteristic monoid of a fine saturated logarithmic structure to a chart.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StructureGroupoid.LocalInvariantProp.liftPropOn_chart\", \"ULift.charP\", \"StructureGroupoid.LocalInvariantProp.liftPropAt_chart\", \"Submonoid.LocalizationMap.lift₀_apply\", \"AddSubmonoid.LocalizationMap.lift_comp_lift_eq\", \"Submonoid.LocalizationWithZeroMap.lift_def\", \"AddSubmonoid.LocalizationMap.lift_comp_lift\", \"Submonoid.LocalizationMap.lift₀_def\"], \"digest\": \"bb65cf1210dbd88c\"}; Read hits: ringed-space stalks and local ring maps, topology inclusion, ordinary scheme integrality and localization; none supplies log-structure unit extension or characteristic comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T09:58:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ringed-space stalks and local ring maps, topology inclusion, ordinary scheme integrality and localization; none supplies log-structure unit extension or characteristic comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed characteristic fan chart of a Zariski fine saturated log scheme lifts locally to a monoid chart with any group section at the point.",
+   "results": "{\"t\": \"2026-10-23T09:58:57Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed characteristic fan chart of a Zariski fine saturated log scheme lifts locally to a monoid chart with any group section at the point.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"ChartedSpace.LiftPropAt\", \"ChartedSpace.LiftPropWithinAt.prop\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"StructureGroupoid.LocalInvariantProp.liftPropWithinAt_indep_chart_target\", \"Manifold.LiftSourceTargetPropertyAt.localPresentationAt\"], \"digest\": \"6e393a2bea842e1c\"}; Read hits: ringed-space stalks and local ring maps, topology inclusion, ordinary scheme integrality and localization; none supplies log-structure unit extension or characteristic comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-fan-chart-blowup",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, 3.3.2--3.3.13, pp.106--109, especially 3.3.4(ii), 3.3.8--3.3.11, 3.3.13(i),(iii); finite cover as in proof of 3.3.15. Subargument: returned log-fan-chart-blowup proof step(s) 3,4,5; Expose VIII 3.1.4(iii), 3.1.8(ii), 3.1.10(ii), pp.98--100; 3.3.12--3.3.13, pp.108--109: Zariski local lift expanded using free characteristic groups (VI 1.6, p.70).",
+   "via": [
+    "lem-trf-log-fan-chart-blowup",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fan-chart-local-monoid-lift",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused existing fan localization, fs face quotient, group splitting, finite-presentation, logification and fan universal-property nodes. One new general Zariski/etale change-of-units stalk lemma. Wrote arbitrary-section, finite-equation shrinking and all-point logification checks explicitly.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, 3.3.2--3.3.13, pp.106--109, especially 3.3.4(ii), 3.3.8--3.3.11, 3.3.13(i),(iii); finite cover as in proof of 3.3.15. Subargument: returned log-fan-chart-blowup proof step(s) 3,4,5; Expose VIII 3.1.4(iii), 3.1.8(ii), 3.1.10(ii), pp.98--100; 3.3.12--3.3.13, pp.108--109: Zariski local lift expanded using free characteristic groups (VI 1.6, p.70).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Generic Stacks 03PU sheaf isomorphism detection used after the log-stalk computation; no node of this unit supplies the conservative geometric-stalk criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-09c26d746",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-09c26d746 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged from the Q109 import), all 5 steps, the new node, every cited statement, and ILO VI 3.7(a) p.75, VIII 3.1.3-3.1.10 pp.98-100 and 3.3.12-3.3.13 pp.108-109; no SGA. Steps: (1) P ≅ N̄_v is sharp fs with free gp, via fan-point localization plus the chart face quotient and fs-face-sharpening. (2) Every group section t restricts to a monoid section, since t(p)−l lies in ker π = A^×. (3) Finite presentation gives a homomorphism h after finite shrinking, with h̄ = ρ_c. (4) Locality shows the prime of c(y) is P∖E; surjectivity and the injectivity algebra u·αh(e) = u'·αh(e') check out. (5) 03PU on geometric stalks plus ILO 3.1.8(ii) gives equality of the sharpenings. The new node is true: étale logification stalk is L⊕_{A^×}B^×, units act freely because N_x̄ is integral, so L is integral, and N_x̄/B^× = (Q−E)/E^gp. Tested on trivial log, standard log point and a singular fs cone. C5 fault: the new node's pushout and characteristic isomorphisms are exactly the stalk formulas of the existing same-unit node lem-trf-zariski-prelog-logification-comparison (Q17, on base) applied with P = N_Z, a node the report's not-duplicate list missed. FIX: the new node now takes those isomorphisms from the Q17 node (added to stmt_deps) and keeps integrality, unit groups, injectivity and the chart face formula as its own content. Item step 4 now cites the Q17 node (uses and proof_deps). No drops. Accepted tool_use: lem-weil-pbc-sets-etale-iso-on-geometric-stalks (generic 03PU).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FanChartLocalMonoidLift",
+  "declaration": "AlgebraicGeometry.fan_chart_local_monoid_lift",
+  "declarations": [
+   "AlgebraicGeometry.fan_chart_local_monoid_lift"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FanChartLocalMonoidLift.lean",
+  "statement": "theorem fan_chart_local_monoid_lift {X : FineSaturatedLogScheme.{u}} {F : FineFan.Fan.{u}} (c : LogFanChart X F) (x : X.scheme) : ∃ L : FineFan.PointLocalization F (c.map.hom.base x), IsFineSaturatedMonoid (FineFan.stalk F.space.presheaf (c.map.hom.base x)) ∧ FineFan.IsSharp (FineFan.stalk F.space.presheaf (c.map.hom.base x)) ∧ (∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (Additive (Algebra.GrothendieckGroup (FineFan.stalk F.space.presheaf (c.map.hom.base x)))))) ∧ (∃ s : Algebra.GrothendieckGroup (FineFan.stalk F.space.presheaf (c.map.hom.base x)) →* Algebra.GrothendieckGroup (FineFan.stalk X.logStructure.zariskiPresheaf x), Function.RightInverse s (c.stalkGroupQuotient x)) ∧ ∀ s : Algebra.GrothendieckGroup (FineFan.stalk F.space.presheaf (c.map.hom.base x)) →* Algebra.GrothendieckGroup (FineFan.stalk X.logStructure.zariskiPresheaf x), Function.RightInverse s (c.stalkGroupQuotient x) → ∃ (U : X.scheme.Opens) (hx : x ∈ U) (h : FineFan.stalk F.space.presheaf (c.map.hom.base x) →* X.logStructure.monoidSheaf.obj.obj (op ((logOpenEtale X.scheme).obj U))) (a : X.logStructure.sharpSpace.restrict U.isOpenEmbedding ⟶ F.space.restrict L.openSet.isOpenEmbedding), (∀ y ∈ U, c.map.hom.base y ∈ L.openSet) ∧ X.logStructure.IsChart ((logOpenEtale X.scheme).obj U) h ∧ a ≫ F.space.ofRestrict L.openSet.isOpenEmbedding = X.logStructure.sharpSpace.ofRestrict U.isOpenEmbedding ≫ c.map ∧ (∀ (p : FineFan.stalk F.space.presheaf (c.map.hom.base x)) (y : X.scheme) (hy : y ∈ U), FineFan.stalkMap (X.logStructure.sharpSpace.ofRestrict U.isOpenEmbedding) ⟨y, hy⟩ (FineFan.germ X.logStructure.sharpSpace.presheaf U y hy (X.logStructure.sharpSection U (h p))) = FineFan.germ (X.logStructure.sharpSpace.restrict U.isOpenEmbedding).presheaf ⊤ ⟨y, hy⟩ (by trivial) (FineFan.affinePullback (a ≫ L.iso.hom) p)) ∧ ∀ p : FineFan.stalk F.space.presheaf (c.map.hom.base x), Algebra.GrothendieckGroup.of (FineFan.germ X.logStructure.zariskiPresheaf U x hx (h p)) = s (Algebra.GrothendieckGroup.of p)",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-367e29440",
+  "group": "Q127",
+  "result": "pass",
+  "note": "All node clauses are matched in Lean. X : FineSaturatedLogScheme. LogFanChart (zariski, map, stalkBijective) renders the local fan chart; ∃ PointLocalization renders F_z ≅ S(P). P is sharp and fs, with a finite ℤ-basis of P^gp (n=0 allowed). The canonical stalkGroupQuotient involves no choice. Existence of a group section is asserted separately. For every section s there are U ∋ x inside c⁻¹(F_z), IsChart on logOpenEtale U at every geometric point, a with a ≫ ofRestrict = ofRestrict ≫ c.map, an all-point sharpening germ equality with affinePullback, and germ groupification = s on generators. The node is unchanged apart from lean, the statement is verbatim, there is one sorry, the helpers are real, and docstrings carry the source places and proof steps. Edge cases checked: rank 0, empty scheme, torsion units, singular P. Advisories (precedent Q93): the statement uses decls owned by the theorem nodes lem-trf-log-fan-chart-blowup (a citation would be cyclic), strict-fan-chart-local-comparison (PointLocalization) and affine-fan-hom-universal (affinePullback); recommend existing:true def nodes; stage-3 import cycle with LogFanChartBlowup. No compile was run because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29bc9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T081837-L-2086505",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement unchanged vs clone; three relocated defs byte-identical and publicly re-exported (zero external users/importers in clone); three new holes checked true against LogFanChart (zariski field) and node statements; item node proof/proof_deps vs Lean proof"
+ }
+}

@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-normalized-base-relative-factorization",
+ "kind": "statement",
+ "title": "Full relative factorization and generic fibre of finite normalizations",
+ "statement": "Let $k$ be a field, let $S$ be a normal integral finite-type $k$-scheme with function field $K=k(S)$, and let $f:X\\to S$ be dominant, where $X$ is integral of finite type over $k$. Suppose the generic fibre $X_K$ is geometrically integral. Put $F=k(X)$. Let $L/F$ be a finite separable extension and $E/K$ a finite separable subextension of $L/K$, with the given inclusions of $F$ and $E$ in $L$ agreeing on $K$. Put $T=\\operatorname{Nor}_E(S)$, $Y=\\operatorname{Nor}_L(X)$ and $W=X\\times_ST$. There is exactly one morphism $g:Y\\to T$ satisfying $q\\circ g=f\\circ\\nu$ and inducing the specified embedding $E\\hookrightarrow L$, where $q:T\\to S$ and $\\nu:Y\\to X$ are the normalization maps. The induced morphism $h=(\\nu,g):Y\\to W$ is finite surjective. The algebra $F\\otimes_KE$ is a field, its multiplication map into $L$ is injective, and the fibre of $W\\to X$ at the generic point of $X$ is $\\operatorname{Spec}(F\\otimes_KE)$. The map $g$ is dominant. Under the canonical identification $k(T)=E$, its generic fibre $Y\\times_T\\operatorname{Spec}E$ is canonically isomorphic to the normalization of $X_K$ in $L$ with the $E$-structure induced by $E\\hookrightarrow L$; this isomorphism commutes with the maps to $X_K$ and induces the identity on $L$.\n\nNormal means that every local ring is an integrally closed domain. Dominant means having dense image. Finite separable means finite-dimensional with separable minimal polynomials. The notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-sc-function-field], [def-pc-field-extension], [def-pc-geometrically-irreducible], [def-fin-normalization-extension], [def-weil-finite-integral-morphism], [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F32 (lemma-quasi-finite-Noetherian-universally-open), applied through lem-sfb-finite-dominant-normal-base-universally-open; algebra.tex Tag 0307 (lemma-integral-closure-localize). Agent affine factorization and dense generic-point argument, followed by localization identification of the generic fibre, supporting de Jong §§3.2 and 3.5 (local PDF WANTED)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-geometrically-irreducible",
+  "def-fin-normalization-extension",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-normalization model theorem to $(S,K,E)$ and $(X,F,L)$. It gives integral normal $T,Y$, function fields $E,L$, finite surjective $q,\\nu$, and Noetherian $S,T,X,Y$. Fix a nonempty affine $U=\\operatorname{Spec}A\\subseteq S$ and a nonempty affine $V=\\operatorname{Spec}B\\subseteq f^{-1}(U)$. Dominance makes $A\\to B$ injective. The affine fraction-field theorem identifies $\\operatorname{Frac}(A)=K$ and $\\operatorname{Frac}(B)=F$. Write $C=\\operatorname{IntCl}_A(E)$ and $D=\\operatorname{IntCl}_B(L)$; the normalization definition gives $T_U=\\operatorname{Spec}C$ and $Y_V=\\operatorname{Spec}D$.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-fin-normalization-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Affine normalization construction, with the existing finite-normalization model theorem; morphisms.tex Tag 01RV (lemma-integral-scheme-rational-functions) for the generic fields."
+   }
+  },
+  {
+   "text": "The specified embedding $E\\hookrightarrow L$ sends $C$ into $D$: an element of $C$ satisfies a monic polynomial over $A$, hence the same polynomial over $B$. Thus the inclusion $C\\to D$ defines $Y_V\\to T_U$ over $U$. These maps agree on overlaps. Indeed, on principal restrictions of an affine chart the integral closures are the corresponding localizations by Tag 0307, and the maps remain the same inclusions into $L$. On intersections of base charts first choose smaller affine base opens; their preimages are covered by affine source opens. Localization identifies every restricted normalization ring with its closure in the same field, so on these refinements both maps are the same inclusion into $L$. Consequently they glue to $g:Y\\to T$, with $qg=f\\nu$. Any other map with these properties must on $Y_V$ give a ring map $C\\to D$ whose composite with the injection $D\\hookrightarrow L$ is the specified embedding of $C\\subseteq E$. It is therefore this inclusion, proving uniqueness. In particular $g$ maps the generic point of $Y$ to that of $T$, since the inverse image of $(0)\\subset D$ in $C$ is $(0)$. This proves dominance and the required embedding on function fields.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-fin-normalization-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); affine construction of the relative map and its uniqueness, written out here."
+   }
+  },
+  {
+   "text": "The fibre-product universal property gives $h=(\\nu,g):Y\\to W$. Over $V\\subseteq f^{-1}(U)$ its target chart is $V\\times_U T_U=\\operatorname{Spec}(B\\otimes_A C)$ by the affine fibre-product theorem, and its inverse image is exactly $Y_V=\\operatorname{Spec}D$. The ring map is $b\\otimes c\\mapsto bc$. A finite list generating $D$ as a $B$-module, which exists since $\\nu$ is finite, also generates it as a $B\\otimes_A C$-module: use coefficients $b\\otimes1$. These affine target charts cover $W$ and have affine inverse images, so $h$ is affine by the affine-locality theorem; on each chart $h_*\\mathcal O_Y$ is the finite module $\\widetilde D$, so $h_*\\mathcal O_Y$ is a finite quasi-coherent $\\mathcal O_W$-algebra and the definition of finite morphism shows that $h$ is finite.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines); finite module generators give finiteness directly."
+   }
+  },
+  {
+   "text": "Using the charts of step 1, put $H=A\\setminus\\{0\\}$ and $B_0=H^{-1}B$. Then $\\operatorname{Spec}B_0=V\\times_U\\operatorname{Spec}K$ is a nonempty affine open of $X_K$, and $\\operatorname{Frac}(B_0)=\\operatorname{Frac}(B)=F$: both $B$ and $B_0$ lie inside $F$, and every fraction of $B$ is a fraction of $B_0$. Geometric integrality makes $X_K\\times_K\\operatorname{Spec}E$ integral; by the affine fibre-product theorem its open subscheme over $\\operatorname{Spec}B_0$ is $\\operatorname{Spec}(B_0\\otimes_K E)$, so, by the affine fraction-field theorem applied to this integral scheme, $B_0\\otimes_K E$ is a domain once it is nonzero. It is nonzero: a $K$-linear functional $B_0\\to K$ taking $1$ to $1$ gives a retraction of $E\\to B_0\\otimes_K E$. Localizing at $B_0\\setminus\\{0\\}$ gives $F\\otimes_K E$ by the localization-tensor theorem; each element of this multiplicative set remains nonzero, as the same argument splits $B_0\\to B_0\\otimes_K E$ using a functional $E\\to K$. Hence this tensor product is a nonzero domain. It has finite dimension over $F$, bounded by $[E:K]$. Multiplication by any nonzero element is an injective linear endomorphism of this finite-dimensional vector space, hence surjective; it therefore has an inverse. Thus $F\\otimes_K E$ is a field. The prescribed inclusions into $L$ define the unital multiplication homomorphism $a\\otimes e\\mapsto ae$; its kernel is a proper ideal of a field, so it is injective.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Localization-tensor identification from Tags 00DK (lemma-tensor-localization) and 00D2 (lemma-tensor-with-bimodule); geometric integrality and elementary finite-dimensional linear algebra. Schemes Tags 01I4 and 01JQ identify the chosen generic-base affine chart."
+   }
+  },
+  {
+   "text": "Let $H=A\\setminus\\{0\\}$. Tag 0307 gives $H^{-1}C=E$: it is the integral closure of $K$ in $E$, and every element of the finite extension $E/K$ is integral over $K$. Consequently $T\\times_S\\operatorname{Spec}K=\\operatorname{Spec}E$. Associativity of the fibre-product universal property and the affine tensor description now identify the fibre of $W\\to X$ over $\\eta_X=\\operatorname{Spec}F$ with $\\operatorname{Spec}(F\\otimes_K E)$. By step 4 it has exactly one point, say $w$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); schemes.tex Tags 01I4 and 01JQ for the affine fibre over the generic point."
+   }
+  },
+  {
+   "text": "The finite dominant map $q:T\\to S$ has integral source and normal locally Noetherian target by step 1. The universally-open theorem therefore applies, so its base change $p:W\\to X$ is open. For every nonempty open $O\\subseteq W$, $p(O)$ is a nonempty open of the integral scheme $X$ and contains $\\eta_X$. Thus $O$ meets $p^{-1}(\\eta_X)=\\{w\\}$, so $w$ is dense in $W$. The generic point of $Y$ maps under $\\nu$ to $\\eta_X$ (on rings $B\\subseteq D\\subseteq L$), so $h(Y)$ contains $w$. Since $h$ is finite, the finite-closed-map theorem makes $h(Y)$ closed. A closed subset containing the dense point $w$ is all of $W$, which proves surjectivity onto the full fibre product.",
+   "uses": [
+    "lem-sfb-finite-dominant-normal-base-universally-open",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F32 (lemma-quasi-finite-Noetherian-universally-open), through the cited normal-base specialization; morphisms.tex Tag 01WN (lemma-finite-proper) gives closedness."
+   }
+  },
+  {
+   "text": "On the charts of step 1, the part of $Y\\times_T\\operatorname{Spec}E$ over $V$ has coordinate ring $D\\otimes_C E=H^{-1}D$, since $E=H^{-1}C$ by step 5. Explicitly the isomorphism sends $d\\otimes(c/a)$ to $dc/a$ and its inverse sends $d/a$ to $d\\otimes(1/a)$, for $a\\in H$. Applying Tag 0307 to $B\\subseteq L$ identifies $H^{-1}D$ with the integral closure of $H^{-1}B$ in $H^{-1}L=L$. The charts $\\operatorname{Spec}(H^{-1}B)$ cover $X_K$ by the affine fibre-product description, and their fraction fields are $F$. Thus these rings are precisely the charts defining $\\operatorname{Nor}_L(X_K)$. Both constructions restrict by the same inclusions and localizations inside $L$, so the chart identifications agree on affine refinements of overlaps and glue. Each chart identification fixes $H^{-1}B$ and the embedded field $E$, and induces the identity on the fraction field $L$; the glued isomorphism is therefore over $X_K$, respects the specified $E$-structure, and induces the identity on $L$, as required.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-fin-normalization-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize), applied to the generic-base localization; explicit tensor-localization maps and gluing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-normalization-model-functoriality",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-finite-integral-morphism",
+  "pqf-lem-affine-local-target",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-sfb-finite-dominant-normal-base-universally-open",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Affine assembly of Stacks Tags 0307, 01I4, 01JQ, 01WN and 0F32, through the existing cited nodes; realizes the normalized-base part of the finite-normal relative-curve model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a dominant morphism with geometrically integral generic fibre the normalization in a finite function field extension maps finitely and surjectively onto the fibre product with the normalized base in an intermediate constant field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"pullback\"",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.Scheme.Hom.normalization (CategoryTheory.Limits.pullback.snd f g) ⟶ CategoryTheory.Limits.pullback (AlgebraicGeometry.Scheme.Hom.fromNormalization f\", \"doc\": \"The comparison lemma between the normalization of the pullback to the pullback of the\\nnormalization. This is an isomorphism when `g` is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.Smooth g] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g)\", \"doc\": \"Normalization commutes with smooth base change.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g) (CategoryTheory.Limits.pullback.snd (AlgebraicGeometry.Scheme.Hom.fromNorm\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization (CategoryTheory.Limits.pullback.snd f g)) (CategoryTheory.CategoryStruct.comp (Algebr\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g) (CategoryTheory.CategoryStruct.\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(Surjective|surjective|pullback|generic)|normalizationPullback",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"586\", \"text\": \"/-- The comparison lemma between the normalization of the pullback to the pullback of the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"588\", \"text\": \"noncomputable def normalizationPullback :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"589\", \"text\": \"    (pullback.snd f g).normalization ⟶ pullback f.fromNormalization g :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"590\", \"text\": \"  (pullback.snd f g).normalizationDesc (pullback.map _ _ _ _ f.toNormalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"595\", \"text\": \"lemma normalizationPullback_snd :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"131\", \"text\": \"    let e : (pullback.snd f fT).normalization ≅ V ⨿ (W.ι ≫ pullback.snd f fT).normalization :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"132\", \"text\": \"      (Scheme.Hom.normalizationCoprodIso (pullback.snd f fT) H).symm ≪≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"164\", \"text\": \"    f.normalizationPullback fT ≫ pullback.fst _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"184\", \"text\": \"      exact .of_iso' H (.refl _) (asIso <| f.normalizationPullback fT) (.refl _) (.refl _)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a geometrically integral family in a finite extension factors surjectively through base normalization and its generic fibre equals normalization of the generic fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Y.Opensᵒᵖ ⥤ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full fibre product with finite normalization of a normal base has a dense generic point when the generic function fields are linearly disjoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiSeparated (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-separated, meaning that the diagonal morphism $ X \\\\to X \\\\times_{\\\\text{Normalization}(f)} X $ is quasi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of an integral variety in a finite field extension factors through the normalization of its base and surjects onto the full fibre product when the generic fibre is geometrically integral",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+   "date": "2026-10-23",
+   "verdict": "no match: normalizationDesc constructs a relative normalization map for qcqs data; normalizationPullback is an isomorphism only for smooth base change. Neither states full surjectivity for this dominant f, the tensor-field assertion, and the generic E-fibre identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"pullback\"",
+   "results": "Returned 7 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback, AlgebraicGeometry.Scheme.Hom.normalizationPullback, AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: normalizationDesc constructs a relative normalization map for qcqs data; normalizationPullback is an isomorphism only for smooth base change. Neither states full surjectivity for this dominant f, the tensor-field assertion, and the generic E-fibre identification."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(fiber|pullback)|integralClosure.*localiz",
+   "results": "Returned 9 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. Directory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: normalizationDesc constructs a relative normalization map for qcqs data; normalizationPullback is an isomorphism only for smooth base change. Neither states full surjectivity for this dominant f, the tensor-field assertion, and the generic E-fibre identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization after extending the function field and the normalized base, with generic fibre given by localization of integral closure",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, Ring.instFiniteNormalClosure, Ring.instFiniteNormalClosure_1, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Ring.instIsIntegrallyClosedNormalClosure, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: normalizationDesc constructs a relative normalization map for qcqs data; normalizationPullback is an isomorphism only for smooth base change. Neither states full surjectivity for this dominant f, the tensor-field assertion, and the generic E-fibre identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a variety in a finite extension of its function field commutes with restriction to the generic fibre of a dominant morphism and maps onto the base change by the normalization of the base",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: normalizationDesc constructs a relative normalization map for qcqs data; normalizationPullback is an isomorphism only for smooth base change. Neither states full surjectivity for this dominant f, the tensor-field assertion, and the generic E-fibre identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-normal-relative-curve-model",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; extracted arguments of the returned split, steps 2, 3, 4, 6: Full relative factorization and generic fibre of finite normalizations.",
+   "via": [
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normalized-base-relative-factorization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven explicit steps construct the relative map by inclusions of integral closures, prove finiteness on affine tensor charts, prove the generic tensor is a field, deduce full surjectivity from universal openness and closedness, and identify the generic fibre by localization. Every non-elementary input is an existing node; no new nodes. Source and project/Mathlib searches checked; no exact attachment or Mathlib match. On the current DAG the item remains unsplit; the retained split has been checked against all current cited statements. The affine in the field-tensor argument is now chosen explicitly as a generic-base localization, and overlap comparisons first refine the base charts.",
+  "blueprint": "The inherited provenance det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction and de Jong constant-field models: realizes parent finite-normal-relative-curve-model old steps 2, 3, 4, 6. The inherited blueprint ancestor is null, as tools/blueprint_refs.py ancestor reports; the existing detailed place and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-5da0b6b8c",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-5da0b6b8c (reviewer sub-agent of L); spot-checked: S1 re-push (0 new nodes) of head 5b9a8009bbb. That head was reviewed FIX, but the landing refused it because the side completion was never promoted. The live and side-live nodes are still unsplit with no repair note, so this is not a re-split. Statement, stmt_deps, blueprint and source are unchanged. Diff against the earlier FIX: the step-4 affine-spectra citation was kept, B_0 is now chosen as H^-1 B, and the step-2 overlap refinement is reworded. The step-3 affine-locality citation was LOST. Fault C1, re-applied: step 3 concludes that h is finite from charts that only cover W, while def-weil-finite-integral-morphism requires h affine and quantifies over every affine open. FIX: cite pqf-lem-affine-local-target (Tag 01S8) and conclude through the finite quasi-coherent algebra h_*O_Y. Step 4's 'geometric integrality implies B_0⊗E is a domain' is reworded to give the route already in its uses: X_K×_K E is integral, its piece over Spec B_0 is Spec(B_0⊗E) by the affine-spectra node, and the affine fraction-field node makes that ring a domain. proof_deps is the union of the uses. All seven steps were read against the cited statements. (1) Normalization models give T and Y with function fields E and L, finite surjective maps and Noetherian schemes; Frac A=K and Frac B=F. (2) C→D by monic equations; overlaps agree because maps into T_{U''} are ring maps into L (0307); uniqueness via D⊂L. (3) h^-1(V×_U T_U)=Y_V, and B-generators of D are B⊗_A C-generators. (4) Localization-tensor, the retraction argument, a finite-dimensional domain is a field, and the map into L is injective. (5) H^-1 C=E by 0307, so the fibre is Spec(F⊗_K E), one point. (6) The universally-open node applies to q (T integral, S normal Noetherian), so W→X is open; w is dense and h(Y) is closed, hence h is surjective; no flatness is used. (7) The charts are D⊗_C E=H^-1 D, the closure of H^-1 B in L, which gives Nor_L(X_K) over X_K, compatible with E and the identity on L. Sources read: Stacks algebra.tex 0307 (line 7597, with proof) and more-morphisms.tex 0F32 (line 21788). No SGA. No duplicate found: rg for Nor_E and F⊗_K E hits only downstream consumers and integral-finite-etale-generic-field. No cycle, since the only citer is the parent. No tool_uses needed. Edge cases checked: E=K, f=id, zero-dimensional S, ramified E/K, and failure without geometric integrality.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedBaseRelativeFactorization",
+  "declaration": "AlgebraicGeometry.normalized_base_relative_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedBaseRelativeFactorization.lean",
+  "statement": "theorem normalized_base_relative_factorization (k : Type u) [Field k] (S X : Scheme.{u}) [IsIntegral S] [IsIntegral X] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (p : S ⟶ Spec (.of k)) [LocallyOfFiniteType p] [QuasiCompact p] (f : X ⟶ S) [IsDominant f] [LocallyOfFiniteType (f ≫ p)] [QuasiCompact (f ≫ p)] [Algebra S.functionField X.functionField] [GeometricallyIntegral (pullback.snd f S.fromSpecFunctionField)] (L E : Type u) [Field L] [Field E] [Algebra X.functionField L] [FiniteDimensional X.functionField L] [Algebra.IsSeparable X.functionField L] [Algebra S.functionField E] [FiniteDimensional S.functionField E] [Algebra.IsSeparable S.functionField E] [Algebra S.functionField L] [Algebra E L] [IsScalarTower S.functionField E L] [IsScalarTower S.functionField X.functionField L] (hcompat : X.fromSpecOfAlgebraFunctionField L ≫ f = Spec.map (CommRingCat.ofHom (algebraMap S.functionField L)) ≫ S.fromSpecFunctionField) : (∃! g : X.normalizationIn L ⟶ S.normalizationIn E, g ≫ S.fromNormalizationIn E = X.fromNormalizationIn L ≫ f ∧ (X.fromSpecOfAlgebraFunctionField L).toNormalization ≫ g = Spec.map (CommRingCat.ofHom (algebraMap E L)) ≫ (S.fromSpecOfAlgebraFunctionField E).toNormalization) ∧ (∀ (g : X.normalizationIn L ⟶ S.normalizationIn E) (hfg : g ≫ S.fromNormalizationIn E = X.fromNormalizationIn L ≫ f), (X.fromSpecOfAlgebraFunctionField L).toNormalization ≫ g = Spec.map (CommRingCat.ofHom (algebraMap E L)) ≫ (S.fromSpecOfAlgebraFunctionField E).toNormalization → IsFinite (pullback.lift (X.fromNormalizationIn L) g hfg.symm) ∧ Surjective (pullback.lift (X.fromNormalizationIn L) g hfg.symm) ∧ IsDominant g ∧ ∃ (c : (pullback.lift (X.fromSpecOfAlgebraFunctionField L) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField L))) hcompat).normalization ⟶ Spec (.of E)) (e : pullback g (S.fromSpecOfAlgebraFunctionField E).toNormalization ≅ (pullback.lift (X.fromSpecOfAlgebraFunctionField L) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField L))) hcompat).normalization), (pullback.lift (X.fromSpecOfAlgebraFunctionField L) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField L))) hcompat).toNormalization ≫ c = Spec.map (CommRingCat.ofHom (algebraMap E L)) ∧ e.hom ≫ c = pullback.snd g (S.fromSpecOfAlgebraFunctionField E).toNormalization ∧ e.hom ≫ (pullback.lift (X.fromSpecOfAlgebraFunctionField L) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField L))) hcompat).fromNormalization ≫ pullback.fst f S.fromSpecFunctionField = pullback.fst g (S.fromSpecOfAlgebraFunctionField E).toNormalization ≫ X.fromNormalizationIn L ∧ e.hom ≫ (pullback.lift (X.fromSpecOfAlgebraFunctionField L) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField L))) hcompat).fromNormalization ≫ pullback.snd f S.fromSpecFunctionField = pullback.snd g (S.fromSpecOfAlgebraFunctionField E).toNormalization ≫ Spec.map (CommRingCat.ofHom (algebraMap S.functionField E)) ∧ (pullback.lift (X.fromSpecOfAlgebraFunctionField L) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField L))) hcompat).toNormalization ≫ e.inv ≫ pullback.fst g (S.fromSpecOfAlgebraFunctionField E).toNormalization = (X.fromSpecOfAlgebraFunctionField L).toNormalization) ∧ IsField (X.functionField ⊗[S.functionField] E) ∧ Function.Injective (Algebra.TensorProduct.productMap (IsScalarTower.toAlgHom S.functionField X.functionField L) (IsScalarTower.toAlgHom S.functionField E L)) ∧ ∃ e : Spec (.of (X.functionField ⊗[S.functionField] E)) ≅ pullback X.fromSpecFunctionField (pullback.fst f (S.fromNormalizationIn E)), e.hom ≫ pullback.fst _ _ = Spec.map (CommRingCat.ofHom (algebraMap X.functionField (X.functionField ⊗[S.functionField] E))) ∧ e.hom ≫ pullback.snd _ _ ≫ pullback.snd f (S.fromNormalizationIn E) = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : E →ₐ[S.functionField] X.functionField ⊗[S.functionField] E).toRingHom) ≫ (S.fromSpecOfAlgebraFunctionField E).toNormalization",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdc6ecd5d",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: k a field; S integral and normal (hS: stalks are integrally closed domains), of finite type over k through p; X integral, of finite type through f≫p (f is a k-morphism, the standard reading); f dominant; X_K geometrically integral via GeometricallyIntegral(pullback.snd f η_S); L/F and E/K finite separable with IsScalarTower K F L and K E L. The free Algebra K F instance is pinned to f^# by hcompat, because fromSpecOfAlgebraFunctionField = Spec(F→L)≫η_X and F→L is injective. Conclusions: ∃! g including the generic E→L equation; for that g, h=pullback.lift ν g is IsFinite and Surjective onto the full pullback, and g is IsDominant; the generic-fibre iso to (lift … hcompat).normalization has c pinned by Spec(E→L), compatibility with fst/snd to X_K and identity on L; IsField(F⊗_K E); injective productMap; Spec(F⊗E) ≅ generic fibre of W→X with pinned projections. Dependency records match: Mathlib functionField per the def-sc-function-field note, normalizationIn/fromNormalizationIn, GeometricallyIntegral, IsFinite, pullback. lean.statement is verbatim; the node changes only in lean; first delivery, no rebind; no duplicate found in side-live Sheaf/WeilConjectures or Mathlib. Docstrings carry Stacks 0F32/0307, de Jong §§3.2/3.5, the blueprint id and the 7 proof steps; proof is sorry only; no hollow definitions; the report has both sections (the second reading was by the same worker). Not recompiled, as instructed (no FIX)."
+ }
+}

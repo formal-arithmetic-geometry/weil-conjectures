@@ -34,11 +34,13 @@
    }
   },
   {
-   "text": "Apply Euler additivity [lem-pc-euler-additive] to Step 1. Since a finite morphism is affine [def-weil-finite-integral-morphism], the cohomology edge isomorphisms [lem-weil-pbc-affine-morphism-cohomology-edge] for $\\nu$ identify $H^j(B,\\nu_*\\mathcal O_{\\widetilde B})$ with $H^j(\\widetilde B,\\mathcal O_{\\widetilde B})$ in every degree, linearly over $k$. Taking alternating dimensions gives $\\chi(B)=\\chi(\\widetilde B)-e$. For the open-and-closed component inclusions $j_i:\\widetilde B_i\\to\\widetilde B$, the structure sheaf is $\\bigoplus_i j_{i,*}\\mathcal O_{\\widetilde B_i}$. Apply Euler additivity to its finite split direct-sum filtration and the same affine edge isomorphisms to the finite morphisms $j_i$. Thus $\\chi(B)=\\sum_i\\chi(\\widetilde B_i)-e$.",
+   "text": "First identify each supplied integral closed component with the canonical reduced closed component, using the universal property of a reduced closed subscheme. Transport normalization across these isomorphisms using its universal property [lem-sbc-relative-normalization-universal-property], and reindex the coproduct by the supplied component equivalence. Apply Euler additivity [lem-pc-euler-additive] to Step 1. The coherent terms have finite-dimensional cohomology and a common upper vanishing bound [lem-pc-euler-characteristic-well-defined]; finite-pushforward finite presentation and the explicit skyscraper decomposition supply the hypotheses of the Lean additivity API. Since a finite morphism is affine [def-weil-finite-integral-morphism], affine cohomology comparison [lem-weil-pbc-affine-morphism-cohomology-edge], in the numerical form Modules.eulerChar_pushforward_of_isAffineHom, gives chi(B, nu_*O)=chi(tilde B,O). The pairwise-disjoint-open-cover Euler formula Modules.eulerChar_eq_sum_of_pairwise_disjoint_of_isQuasicoherent, followed by isomorphism invariance of cohomology, computes the Euler characteristic of the coproduct as the sum of the component Euler characteristics. Thus chi(B)=sum_i chi(tilde B_i)-e. This uses the already-proved numerical affine API, without invoking the recorded edge-map theorem or a finite-Euler wrapper.",
    "uses": [
     "lem-pc-euler-additive",
     "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-affine-morphism-cohomology-edge"
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-sbc-relative-normalization-universal-property"
    ],
    "elementary": false,
    "source": {
@@ -47,10 +49,11 @@
    }
   },
   {
-   "text": "Each $\\widetilde B_i$ is proper over $k$, hence of finite type, and is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its dimension is one. Therefore [lem-sc-noetherian-cohomology-above-dimension] gives $H^j(\\widetilde B_i,\\mathcal O)=0$ for every $j\\ge2$. For the smooth proper connected curve $\\widetilde B_i$, [lem-sc-global-functions] gives $H^0(\\widetilde B_i,\\mathcal O)=k$, and [def-sc-genus] gives $\\dim_kH^1(\\widetilde B_i,\\mathcal O)=g_i$. The Euler sum [def-pc-euler-characteristic] consequently has exactly the degree-zero and degree-one contributions: $\\chi(\\widetilde B_i)=1-g_i$.",
+   "text": "The closed embedding identifies the dimension of each supplied integral component with that of its image. Normalization preserves this dimension [lem-sc-normalization-exists], so every normalized component has dimension one. Smoothness then gives relative dimension one over k. Properness, smoothness and connectedness are supplied in the hypotheses. Apply the existing structure-sheaf specialization of Riemann--Roch, eulerChar_unit_eq [lem-sc-riemann-roch], and identify arithmetic and geometric genus using genus_eq_arithmeticGenus [lem-pc-genus-agrees-sc]. This gives chi(tilde B_i,O)=1-g_i. The global-functions calculation [lem-sc-global-functions] supplies the GlobalSectionsBijective instance required by these formulas. Finiteness of normalization [lem-sc-normalization-exists] also makes the component coproduct proper for Step 2.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-normalization-exists",
+    "lem-sc-riemann-roch",
+    "lem-pc-genus-agrees-sc",
     "lem-sc-global-functions",
     "def-sc-genus",
     "def-pc-euler-characteristic"
@@ -76,16 +79,21 @@
   "def-sc-genus",
   "def-weil-finite-integral-morphism",
   "lem-pc-euler-additive",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-genus-agrees-sc",
+  "lem-sbc-relative-normalization-universal-property",
   "lem-sc-global-functions",
-  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-normalization-exists",
+  "lem-sc-riemann-roch",
   "lem-trf-nodal-normalization-quotient",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "lem-weil-pbc-finite-type-over-noetherian"
+  "lem-weil-pbc-affine-morphism-cohomology-edge"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "H7",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0C1R, 0AYT, 0BY7 and 08AA, with the split-node computation Tag 0CBW"
+  "place": "Tags 0C1R and 08AA; curves.tex Tags 0CBW, 0BY7 and 0BS6. Lean realization uses the existing numerical affine pushforward and disjoint-open-cover Euler APIs and the proved structure-sheaf specialization eulerChar_unit_eq; component identifications are proved privately from closed-subscheme and normalization universal properties."
  },
  "mathlib_searches": [
   {
@@ -202,8 +210,6 @@
  "tool_uses": [
   "lem-pc-euler-additive",
   "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sc-noetherian-cohomology-above-dimension",
   "lem-sc-global-functions"
  ],
  "reviewed": {
@@ -232,5 +238,26 @@
   "result": "pass",
   "note": "Checked each clause of the node against the Lean: k algebraically closed, B proper/reduced/connected, pure dimension one per component, split-node completion condition worded as in the landed dependency lemma, e = number of nonsmooth points (finite by that lemma, ncard), components as integral closed subschemes (unique up to iso), recorded normalization/Hom.genus/eulerChar declarations; formula in ℤ correct. Genus uses the recorded def-sc-genus declaration (dim H0 of Ω¹), which the genus node states equals dim H1(O) for smooth proper connected curves. No extra hypotheses; universes as in the dependency lemma. Item record differs from live only by the added lean field; the 12 dependency records are unchanged; lean.statement matches the file exactly. No duplicate statement in lean/Sheaf. Docstrings carry the source place and blueprint tag, the proof docstring follows the four steps, proof is sorry only, both report sections present. nt_compile --json: 3.4 s, exit 0, clean. Advisory: the worker report says reduced-normalization helpers are used, but the statement does not use them."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261023T131550-L-2122911",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

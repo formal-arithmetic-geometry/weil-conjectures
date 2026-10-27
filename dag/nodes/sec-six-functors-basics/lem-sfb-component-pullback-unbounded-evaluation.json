@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-component-pullback-unbounded-evaluation",
+ "kind": "statement",
+ "title": "Unbounded module evaluation of component pullback on w-contractible tests",
+ "statement": "Let $W$ be a w-contractible affine scheme [sk-def-pe-wlocal], let $S=\\pi_0(W)$ with its profinite quotient topology, and let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. Use the small pro-etale site and compatible coefficient universes [def-weil-pbc-proetale-site, def-weil-size-convention]. Give $\\operatorname{Prof}/S$ finite jointly surjective coverings, let $q_S$ be its slice projection to the condensed topos, put $\\Lambda_S=q_S^*\\Lambda$, and let $\\pi_W$ be the component morphism with $p_W=q_S\\pi_W$ [lem-zl-component-relative-profinite-site]. Write $F_W=\\pi_W^*$ on module sheaves and on their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], with coefficient identification $F_W\\Lambda_S=p_W^*\\Lambda$. For every w-contractible affine object $U\\to W$, put $T=\\pi_0(U)$, with its induced map to $S$. For every $\\Lambda_S$-module sheaf $M$ there is a canonical identification\n$$(F_WM)(U)=M(T\\to S),$$\nnatural in $M$ and in maps between such $U$, and linear for the canonical identification $(p_W^*\\Lambda)(U)=\\Lambda(T)$. Evaluation at $U$ on module sheaves over $W$ and evaluation at $T$ on module sheaves over $\\operatorname{Prof}/S$ are exact. For every unbounded $K\\in D(\\operatorname{Prof}/S,\\Lambda_S)$ there is a natural isomorphism of entire derived objects\n$$R\\Gamma(T,K|_T)\\xrightarrow{\\sim}R\\Gamma(U,F_WK),$$\nwhere restriction means restriction to $\\operatorname{Prof}/T$, and derived sections are computed termwise by these exact evaluations [def-pur-ringed-site-zeroth-hypercohomology]. Its normalization is the degreewise displayed module identification, in the pullback direction. In particular at $U=W$ it is the canonical pullback of global sections. Empty $W,U$ and arbitrary unbounded complexes are allowed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1), equation (4.2) and its preceding component-pullback evaluation argument; Section 3 unbounded derived categories."
+ },
+ "stmt_deps": [
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-zl-component-relative-profinite-site",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-zl-condensed-lisse-evaluation-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved source isWeaklyContractible_of_iso to the affine test U with its canonical isoSpec. A finite qcqs cover gives a locally surjective map of representable set sheaves from the coproduct to U. Projectivity lifts the identity section, providing a section of that coproduct map. Hence U has the split-cover property required by affine_component_site_projection.",
+   "uses": [
+    "lem-weil-pbc-source-affine-wcontractible-evaluation",
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The relative component-test universal mapping property constructs the canonical lift U to the test indexed by pi_0(U). It also proves that every compatible b,c factors through this lift and that the lifts are natural in U. Define the abelian section comparison by the fixed sheaf-pullback adjunction unit followed by restriction along the lift. Its normalization and naturality follow directly from this factorization and naturality of the unit.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use relative_component_lift_pullback_space to identify the relative-test and affine-test functors. Transport their pushforwards and adjunctions through this isomorphism. Uniqueness of left adjoints and the normalized evaluation clause of affine_component_site_projection show that the section comparison composed with the known evaluation isomorphism is the identity. It is therefore invertible.",
+   "uses": [
+    "lem-sfb-relative-component-lift-pullback-space",
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical strong braided structure and exactness of component inverse image. Its monoidal adjunction unit, the restriction comparison, and evaluation are monoidal, so the section comparison preserves tensor actions and coefficient multiplication. Convert the resulting internal commutative rings and module objects to the actual section rings and section modules. The alpha,beta coefficient factorization is the corresponding clause of condensed_component_pullback_compatibility. Restriction along alpha inverse cancels alpha in the section-ring comparison, giving linearity.",
+   "uses": [
+    "lem-zl-condensed-component-inverse-image",
+    "lem-zl-condensed-component-pullback-compatibility",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at U preserves finite limits. Weak contractibility turns locally surjective maps of set sheaves into surjective maps on sections, so evaluation of abelian sheaves preserves epimorphisms and is exact. Forgetting the module action preserves finite limits and colimits and reflects them, yielding exact target module evaluation. The section comparison then transports exactness of pullback followed by target evaluation and scalar restriction to source evaluation. Apply the existing exact-functor right-derived unit theorem and the already defined componentEvaluationDerivedIso to obtain the ordinary unbounded comparison.",
+   "uses": [
+    "lem-weil-pbc-source-affine-wcontractible-evaluation",
+    "lem-pur-exact-derived-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-zl-affine-component-site-projection",
+  "lem-zl-component-relative-profinite-site",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-sfb-relative-component-lift-pullback-space",
+  "lem-zl-condensed-component-inverse-image",
+  "lem-zl-condensed-component-pullback-compatibility",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-exact-derived-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3 and Proposition 4.3(1), (4.2). E8: unit-defined monoidal evaluation, adjunction uniqueness, and transport of exactness instead of a second profinite derived-evaluation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(component|[Ww]Contractible).*(evaluat|section)|section.*[Ww]Contractible",
+   "results": "{\"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Topology/Separation/Regular.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean\", \"Mathlib/Order/Interval/Set/OrdConnectedComponent.lean\", \"Mathlib/CategoryTheory/Limits/Types/Limits.lean\", \"Mathlib/Data/Set/UnionLift.lean\", \"Mathlib/Data/Set/UnionLift.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: constructors for condensed sheaves and scheme module pullback do not give component evaluation with arbitrary condensed scalars on unbounded complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Component pullback sheaf sections on weakly contractible affine equal sections on connected components",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Profinite\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Condensed.isSheafProfinite\", \"LightProfinite.hasSheafify_type\", \"LightProfinite.hasSheafify\", \"Condensed.lanSheafProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf\", \"LightCondMod.LocallyConstant.instFullSheafLightProfiniteCoherentTopologyTypeConstantSheaf\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: constructors for condensed sheaves and scheme module pullback do not give component evaluation with arbitrary condensed scalars on unbounded complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extremally disconnected profinite base change of a w-contractible affine is w-contractible",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.exists_map_eq_top\", \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: constructors for condensed sheaves and scheme module pullback do not give component evaluation with arbitrary condensed scalars on unbounded complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a weakly contractible affine scheme component pullback of a condensed module evaluates on an affine U as sections on pi0 U",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackObjUnitToUnit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: constructors for condensed sheaves and scheme module pullback do not give component evaluation with arbitrary condensed scalars on unbounded complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived sections of component pullback on weakly contractible affine equal derived sections of profinite components naturally with module scalar actions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondAb.ofSheafLightProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"CondensedMod.ofSheafCompHaus\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"CompHausLike.LocallyConstantModule.functor\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: constructors for condensed sheaves and scheme module pullback do not give component evaluation with arbitrary condensed scalars on unbounded complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "(component|[Ww]Contractible).*(evaluat|section)|section.*[Ww]Contractible",
+   "results": "{\"t\": \"2026-10-22T11:22:15Z\", \"tool\": \"grep\", \"query\": \"(component|[Ww]Contractible).*(evaluat|section)|section.*[Ww]Contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Separation/Regular.lean\", \"Mathlib/RingTheory/WittVector/Basic.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/Data/Set/UnionLift.lean\", \"Mathlib/Data/Set/UnionLift.lean\", \"Mathlib/Order/Interval/Set/OrdConnectedComponent.lean\"], \"digest\": \"ee829abcf6c23e9e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, finite limits of module evaluations or condensed-object constructors, not relative component evaluation with arbitrary condensed scalars and its normalized unbounded derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Component inverse image of condensed module sheaves on a weakly contractible affine scheme equals evaluation on its profinite connected components",
+   "results": "{\"t\": \"2026-10-22T11:22:16Z\", \"tool\": \"leansearch\", \"query\": \"Component inverse image of condensed module sheaves on a weakly contractible affine scheme equals evaluation on its profinite connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.inv_app\", \"LightCondensed.lanLightCondSet\", \"LightCondensed\", \"Condensed.underlying\", \"Condensed.lanSheafProfinite\", \"CondensedMod.isDiscrete_tfae\", \"Condensed.ofSheafProfinite\", \"SheafOfModules.evaluationPreservesLimit\"], \"digest\": \"953acd33216bb4ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, finite limits of module evaluations or condensed-object constructors, not relative component evaluation with arbitrary condensed scalars and its normalized unbounded derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"ConnectedComponents\"",
+   "results": "{\"t\": \"2026-10-22T11:22:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"ConnectedComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, finite limits of module evaluations or condensed-object constructors, not relative component evaluation with arbitrary condensed scalars and its normalized unbounded derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along the component morphism of a weakly contractible affine scheme evaluates a condensed module on its profinite connected component space and gives an unbounded derived sections comparison",
+   "results": "{\"t\": \"2026-10-22T11:22:20Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback along the component morphism of a weakly contractible affine scheme evaluates a condensed module on its profinite connected component space and gives an unbounded derived sections comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso\"], \"digest\": \"6a182c7d35d48d3c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, finite limits of module evaluations or condensed-object constructors, not relative component evaluation with arbitrary condensed scalars and its normalized unbounded derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact component inverse image of a sheaf of modules on profinite spaces over pi zero has sections M of pi zero U on weakly contractible affine U and preserves unbounded derived global sections",
+   "results": "{\"t\": \"2026-10-22T11:22:35Z\", \"tool\": \"leanfinder\", \"query\": \"Exact component inverse image of a sheaf of modules on profinite spaces over pi zero has sections M of pi zero U on weakly contractible affine U and preserves unbounded derived global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.ofSheafProfinite\", \"Condensed.profiniteSolid\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondAb.ofSheafLightProfinite\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafCompHaus\", \"Condensed.profiniteFree\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"a9f7cf9f651a27f4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, finite limits of module evaluations or condensed-object constructors, not relative component evaluation with arbitrary condensed scalars and its normalized unbounded derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-wcontractible-component-derived-hom",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: unbounded derived internal functions comparison on the w-contractible affine basis; general component theorem used as a tool, not the parameter statement. HRS Proposition 4.3(1): Proposition 4.3(1), equation (4.2) and its preceding component-pullback evaluation argument; Section 3 unbounded derived categories.",
+   "via": [
+    "lem-sfb-wcontractible-component-derived-hom",
+    "lem-sfb-profinite-constant-derived-functions",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-component-pullback-unbounded-evaluation",
+  "worker": "stage1",
+  "summary": "Reused existing relative component evaluation, clopen refinement, module transport and contractible unbounded-section theorems. Verified the split-cover hypothesis, scalar linearity, exact evaluations on both slice sites, the entire unbounded derived isomorphism and its canonical pullback normalization. Statement unchanged; no new nodes.",
+  "blueprint": "Inherited provenance: sk-thm-sf-ctf-stability, paragraph (3) on open direct image, via the recorded chain of component-derived-Hom tools. This node realizes HRS Proposition 4.3(1), the evaluation argument and equation (4.2), without replacing a unit-level route. The ancestor command returns None for this existing imported provenance chain.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wcb-clopen-partition",
+    "why": "Generic clopen refinement theorem supplies the split finite qcqs cover hypothesis; the unit does not prove contractible-site geometry."
+   },
+   {
+    "node": "lem-zl-affine-component-site-projection",
+    "why": "Generic relative component-site evaluation theorem, used with its corrected split-cover hypothesis; no full internal-Hom comparison is taken from it."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-transport",
+    "why": "Generic operation-by-operation transport of module actions through a geometric inverse image."
+   },
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Existing relative component test functor and its factorization of the condensed-point morphism identify the coefficient ring."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "General exactness of geometric inverse image with transported coefficients, also for slice restriction."
+   },
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Generic exactness of module evaluation on a w-contractible affine object of the small site."
+   },
+   {
+    "node": "det-pe-wc-sections-derived",
+    "why": "Generic termwise computation of unbounded derived evaluation on a w-contractible affine, with arbitrary sheaf-ring coefficients."
+   },
+   {
+    "node": "lem-zl-contractible-derived-sections-tensor",
+    "why": "Only its exact evaluation and unbounded termwise sections clauses for extremally disconnected profinite sites are used; no tensor comparison or lisse theorem is needed."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "Generic sheafified Kan adjunction identifies the canonical evaluation isomorphism with the ordinary pullback of sections."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent of natural isomorphisms through localization at quasi-isomorphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-affine-component-site-projection",
+  "lem-zl-component-relative-profinite-site",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-9790dcdf2",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-9790dcdf2 (reviewer sub-agent of L); spot-checked: PASS, no changes. The delivery is a 0-node, 5-step split; the statement is unchanged and there is no re-split note. Source checked: HRS Prop. 4.3(1), proof of (4.2), pp. 8–9; the item is its ordinary unbounded, relative-over-S form for arbitrary commutative condensed Λ. Step 1: det-pe-wcb-clopen-partition gives U-maps g_k, which give a section of ⊔U_i→U, so U satisfies exactly the split-cover condition of lem-zl-affine-component-site-projection. relative-component-lift-pullback-space identifies the limit lift with T_E (the Q06 gap). Step 2: scalar linearity comes from the geometric-module-transport product comparison. Λ_S(T→S)=Λ(T) because localized-site restriction is sectionwise, and p_W=q_Sπ_W gives the coefficient identification. Step 3: evaluation is exact on W_proet (wc-sections-exact) and on Prof/T, since T is extremally disconnected by sk-def-pe-wlocal (contractible-derived-sections-tensor, profinite branch). Restriction is an exact inverse image. Step 4: both sides are computed termwise (wc-sections-derived and the profinite clause); ρ^{-1} is a chain isomorphism and descends by localization-universal-property (2). Step 5: the unit/Kan coprojection gives the pullback of global sections at U=W, and empty objects give zero. Advisory: the Kan-unit normalization of the component evaluation is pinned only in that node's Lean (ComponentSiteEvaluation), not in its DAG text; accepted as the meaning of 'canonical', with a maintainer note. Edge cases checked: U=W, S a point, empty, zero ring, unbounded complexes. No duplicate of the relative derived statement found (the condensed-point-basis and point-lan evaluations are absolute and underived). Batch-5: lem-zl-affine-component-site-projection reaches sec-trace-formula only through def-trf-geometric-morphism, a general definition. lem-trf-geometric-inverse-image-exact is the generic fact that inverse image is exact; its closure adds only def-trf-abelian-inverse-image-presentation. Neither is part of the proof of the trace formula or of PD, so both are accepted. All 10 tool_uses are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentPullbackUnboundedEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_pullback_unbounded_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentScalarRestrictionLimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentScalarRestrictionColimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentAffineObject",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentAffineObjectMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentTestProjection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentSourceSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentTargetSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentEvaluationRingIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentEvaluationTarget",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentSourceDerivedSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentTargetDerivedSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentEvaluationDerivedIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentAbelianAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentPullbackUnboundedEvaluation",
+   "AlgebraicGeometry.ProEtale.CondensedRing.component_pullback_unbounded_evaluation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentPullbackUnboundedEvaluation.lean",
+  "statement": "theorem component_pullback_unbounded_evaluation (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (W : Scheme.{u}) [IsAffine W] [IsWContractibleRing Γ(W, ⊤)] : ∃ (_ : (componentTests W).IsContinuous ((coherentTopology Profinite.{u}).over (affineComponentSpace W)) (Scheme.ProEt.topology W)), ∃ (_ : (componentInverse W).Braided) (_ : PreservesFiniteLimits (componentInverse W)) (_ : PreservesFiniteColimits (componentInverse W)), ∃ α : (componentInverse W).mapMon.obj (Mon.mk (profiniteCoefficient Λ.X (affineComponentSpace W))) ≅ Mon.mk (condensedRingObj Λ.X W), (∃ β : (coherentTopology Profinite.{u}).overPullback Ab.{u + 1} (affineComponentSpace W) ⋙ componentInverse W ≅ upperStarFromPoint W, NatTrans.IsMonoidal β.hom ∧ α.hom.hom = β.hom.app Λ.X) ∧ ComponentPullbackUnboundedEvaluation Λ W α",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the already landed def-zl-condensed-lisse-evaluation-model for the canonical relative-test inverse image, coefficient transport and derived module functor. Helpers expose the component test objects, the unit-normalized linear evaluations and their explicitly defined entire unbounded derived comparison; no duplicate component pullback is constructed. The additional statement dependency records this reused interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbda4938d",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Read node, all 9 stmt_deps (byte-identical to live), the module, report, live CondensedLisseEvaluationModel/ComponentRelativeProfiniteSite/AffineComponentSiteProjection/RingedSiteZerothHypercohomology and the parent WContractibleComponentDerivedHom. Every clause is rendered: W,U w-contractible affine via IsWContractibleRing; S=affineComponentSpace; Λ commutative CondensedRing; Λ_S=profiniteCoefficient; F_W=landed componentInverse/componentModules/componentDerived (head identical to the landed componentClause); e is a linear iso of module functors, natural in M and U; a and e pinned to the Kan coprojection for all b,c (the canonical lift exists by the dependency's ∃! UMP), giving the unit pullback at U=W; exactness of both evaluations; IsIso right-derived units; δ = explicitly defined entire-object comparison. Only change besides lean: stmt_deps gains the already landed def-zl-condensed-lisse-evaluation-model (allowed). Statement verbatim, 15 declarations present, docstrings with source/blueprint and 5 proof steps, only the theorem is sorry, no Nonempty/bounded binders. Advisories: inherited free Braided/β pattern; δ/units formal from exactness; RΓ(T,K|T) as evaluation at T→S; duplicate restrictScalars instances. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261025T143151-L-960432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

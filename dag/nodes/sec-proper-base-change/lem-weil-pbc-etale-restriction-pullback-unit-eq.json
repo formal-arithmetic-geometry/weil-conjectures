@@ -120,5 +120,50 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.etale_restriction_pullback_unit_eq"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.etale_restriction_pullback_unit_eq",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleRestrictionPullbackUnitEq",
+     "lines": [
+      94,
+      334
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let\n$$\\begin{array}{ccc}W'&\\xrightarrow{\\;g'\\;}&W\\\\ {\\scriptstyle p'}\\big\\downarrow&&\\big\\downarrow{\\scriptstyle p}\\\\ Y&\\xrightarrow{\\;g\\;}&X\\end{array}$$\nbe a commutative square of schemes with $p$ étale such that the induced morphism $\\iota=(g',p'):W'\\to W\\times_XY$ is an isomorphism (so $p'$ is étale as well). Regard $(W,p)$ as an object of $X_{\\Et}$ and $(W',p')$ as an object of $Y_{\\Et}$ [def-weil-pbc-etale-site]. Let $F$ be an abelian sheaf on $X_{\\Et}$, let $\\rho_F:p^{-1}F\\xrightarrow{\\sim}F|_W$ and $\\rho_{g^{-1}F}:p'^{-1}g^{-1}F\\xrightarrow{\\sim}(g^{-1}F)|_{W'}$ be the isomorphisms of [lem-weil-pbc-etale-inverse-image-restriction], let $\\eta_g$ and $\\eta_{g'}$ be the units of the adjunctions $g^{-1}\\dashv g_*$ and $g'^{-1}\\dashv g'_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image], and let $\\kappa:g'^{-1}p^{-1}F\\cong(p g')^{-1}F=(g p')^{-1}F\\cong p'^{-1}g^{-1}F$ be built from the composition isomorphisms of [lem-weil-pbc-inverse-image-composition]. Then the following two homomorphisms $\\Gamma(W,p^{-1}F)\\to(g^{-1}F)(W'\\xrightarrow{p'}Y)$ are equal:\n\n1. $\\eta_{g',p^{-1}F}(W):\\Gamma(W,p^{-1}F)\\to(g'^{-1}p^{-1}F)(W\\times_WW')$, followed by restriction along $\\theta=(g',\\mathrm{id}):W'\\to W\\times_WW'$, by $\\kappa(W')$ and by $\\rho_{g^{-1}F}(W')$;\n2. $\\rho_F(W):\\Gamma(W,p^{-1}F)\\to F(W\\xrightarrow{p}X)$, followed by $\\eta_{g,F}(W):F(W)\\to(g^{-1}F)(W\\times_XY)$ and by restriction along the $Y$-morphism $\\iota:W'\\to W\\times_XY$.\n\nIn words: under the identifications $\\rho$ of inverse images along étale maps with restrictions, pulling a section back along $g'$ agrees with pulling it back along $g$ and restricting along $\\iota$.",
+  "proof": [
+   {
+    "text": "Put $h=p\\circ g'=g\\circ p'$. By clause (2) of [lem-weil-pbc-etale-inverse-image-restriction], under $\\rho$ the unit of $p^{-1}\\dashv p_*$ is restriction of sections; restricting this description along the diagonal $W\\to W\\times_XW$ (an open immersion, $p$ being étale) expresses $\\rho_F(W)^{-1}$ as the unit $\\eta_{p,F}$ at $W$ followed by restriction along the diagonal, and likewise $\\rho_{g^{-1}F}(W')^{-1}\\circ(\\text{restriction along }\\iota)$ through the unit of $p'^{-1}\\dashv p'_*$ restricted along $(\\iota,\\mathrm{id})$. By clause (2) of [lem-weil-pbc-inverse-image-composition], the composition isomorphism $g'^{-1}p^{-1}\\cong h^{-1}$ is compatible with the units: the unit of $h^{-1}\\dashv h_*$ is the composite of the units for $p$ and for $g'$, followed by the composition isomorphism. Evaluating at $W$ and restricting along $W'\\to W\\times_XW'$, $w'\\mapsto(g'(w'),w')$, identifies the homomorphism in 1, followed by the inverse of $p'^{-1}g^{-1}F\\cong h^{-1}F$, with the unit of $h$ restricted to $W'$ and precomposed with $\\rho_F(W)^{-1}$. The same computation for the factorization $h=g\\circ p'$ identifies the homomorphism in 2, followed by the same isomorphism, with the same map. Cancelling the composition isomorphism gives the equality. Étaleness of $p'$ follows from stability of étale morphisms under base change, as $\\iota$ is an isomorphism.",
+    "uses": [
+     "lem-weil-pbc-etale-inverse-image-restriction",
+     "lem-weil-pbc-inverse-image-composition"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

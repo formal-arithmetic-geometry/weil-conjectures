@@ -1,0 +1,284 @@
+{
+ "id": "lem-coef-finite-bidual-transpose",
+ "kind": "statement",
+ "title": "Evaluation-preserving scalar comparison respects its double transpose",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, let $A\\to B$ be a morphism of sheaves of commutative rings, and use the ordinary unbounded module derived categories $D(A),D(B)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $S=-\\otimes_A^LB$ [lem-pur-derived-change-of-rings] and $H_R(U,V)=R\\mathcal Hom_R(U,V)$ for $R=A,B$ [def-pur-derived-internal-hom]. Use the canonical tensor comparisons of ringed-topos derived pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], with the signed symmetry $\\tau$ of complexes. Choose $\\Omega_A\\in D(A)$, $\\Omega_B\\in D(B)$ and a morphism $u:S\\Omega_A\\to\\Omega_B$. Put $D_R T=H_R(T,\\Omega_R)$, let $\\operatorname{ev}^R_T:D_RT\\otimes_R^LT\\to\\Omega_R$ be evaluation, and define $\\delta^R_T:T\\to D_R^2T$ as the tensor-Hom transpose of $\\operatorname{ev}^R_T\\circ\\tau_{T,D_RT}$.\n\nLet $K\\in D(A)$ and suppose, for $T=K$ and $T=D_AK$, that maps $h_T:S(D_AT)\\to D_B(ST)$ satisfy\n$$\\operatorname{ev}^B_{ST}\\circ(h_T\\otimes1_{ST})=u\\circ S(\\operatorname{ev}^A_T),$$\nunder the canonical tensor identifications. Then the following equality holds in $D(B)$, with common source $SK$ and target $D_B(SD_AK)$:\n$$h_{D_AK}\\circ S(\\delta^A_K)=D_B(h_K)\\circ\\delta^B_{SK}.$$\nIf $h_K$ and $h_{D_AK}$ are isomorphisms, the identification\n$$S(D_A^2K)\\xrightarrow{h_{D_AK}}D_B(SD_AK)\\xrightarrow{D_B(h_K)^{-1}}D_B^2(SK)$$\ncarries $S(\\delta^A_K)$ to $\\delta^B_{SK}$. The equality uses the same signed tensor symmetry on both sides: on homogeneous representatives of degrees $i,j$ scalar extension preserves the sign $(-1)^{ij}$. No constructibility, biduality-isomorphism, or flatness hypothesis on $B/A$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+  "place": "Proof: 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility'; returned step 4, including both transposes and the signed symmetry"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-pur-cochain-coefficient-arrows",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the given CoefficientClosedStructure adjunctions and their evaluation_naturality fields [def-coef-ringed-tensor-hom-model]. Identify each specified braiding on K-flat pairs with the native Koszul braiding: the symmetry_model field of [lem-sf-ringed-derived-closed-symmetric-monoidal] supplies its pure-section formula, [lem-sf-ringed-tensor-complex-constraints] supplies the same formula for the native map, and the tensor-sheafification adjunction and total-degree coproduct universal property give equality. Apply the signed cochain scalar-comparison equation of [lem-pur-cochain-comparison-monoidal-equations]. The two TensorComparisonModel normalizations and naturality of the counit identify its localization with the desired symmetry square on K-flat pairs. Cancel their invertible counits, supplied by the given change-of-rings model [lem-pur-derived-change-of-rings]. Every derived object has a K-flat representative by [lem-pc-kflat-resolution]; naturality of the specified comparison and both braidings transports the square to all objects. No general ringed-topos comparison system is needed.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "lem-pur-cochain-comparison-monoidal-equations",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Sentence 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility', expanded by the tensor-Hom adjunction"
+   }
+  },
+  {
+   "text": "For clarity retain all tensor comparisons. Set $V=D_AK$, $X=SK$, $Y=SV$, $h=h_K:Y\\to D_BX$ and $h'=h_V:S(D_AV)\\to D_BY$. Put $a=h'\\circ S(\\delta^A_K)$ and $b=D_B(h)\\circ\\delta^B_X$, both maps $X\\to D_BY$. By the bijection in [lem-sf-ringed-derived-closed-symmetric-monoidal], it suffices to compare $\\mathcal U(f)=\\operatorname{ev}^B_Y\\circ(f\\otimes1_Y):X\\otimes_B^LY\\to\\Omega_B$ for $f=a,b$. This reduction uses injectivity of the bijection, without any invertibility of either $h$ or a double-dual map.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Sentence 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility', expanded by the tensor-Hom adjunction"
+   }
+  },
+  {
+   "text": "Naturality of the tensor comparison, the assumed evaluation identity for $T=V$, and the defining transpose equation for $\\delta^A_K$ give\n$$\\begin{aligned}\n\\mathcal U(a)&=\\operatorname{ev}^B_Y\\circ(h'\\otimes1_Y)\\circ(S\\delta^A_K\\otimes1_Y)\\\\\n&=u\\circ S(\\operatorname{ev}^A_V)\\circ t_{D_AV,V}^{-1}\\circ(S\\delta^A_K\\otimes1_Y)\\\\\n&=u\\circ S\\bigl(\\operatorname{ev}^A_V\\circ(\\delta^A_K\\otimes1_V)\\bigr)\\circ t_{K,V}^{-1}\\\\\n&=u\\circ S\\bigl(\\operatorname{ev}^A_K\\circ\\tau^A_{K,V}\\bigr)\\circ t_{K,V}^{-1}.\n\\end{aligned}$$\nThe last equality is exactly the inverse-transpose formula of [lem-sf-ringed-derived-closed-symmetric-monoidal], applied to the definition of $\\delta^A_K$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Sentence 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility', expanded by the tensor-Hom adjunction"
+   }
+  },
+  {
+   "text": "The naturality in the tensor parameter of the adjunction in [lem-sf-ringed-derived-closed-symmetric-monoidal] says, for $h:Y\\to D_BX$,\n$$\\operatorname{ev}^B_Y\\circ(D_B(h)\\otimes1_Y)=\\operatorname{ev}^B_{D_BX}\\circ(1_{D_B^2X}\\otimes h).$$\nIndeed, both maps are the inverse transpose of the precomposition map $H_B(h,\\Omega_B)$: naturality in the parameter identifies precomposition of an uncurried map by $1\\otimes h$ with postcomposition of its transpose by $H_B(h,\\Omega_B)$. Tensor bifunctoriality and the transpose definition of $\\delta^B_X$ now give\n$$\\begin{aligned}\n\\mathcal U(b)&=\\operatorname{ev}^B_{D_BX}\\circ(\\delta^B_X\\otimes1_{D_BX})\\circ(1_X\\otimes h)\\\\\n&=\\operatorname{ev}^B_X\\circ\\tau^B_{X,D_BX}\\circ(1_X\\otimes h)\\\\\n&=\\operatorname{ev}^B_X\\circ(h\\otimes1_X)\\circ\\tau^B_{X,Y}\\\\\n&=u\\circ S(\\operatorname{ev}^A_K)\\circ t_{V,K}^{-1}\\circ\\tau^B_{X,Y}.\n\\end{aligned}$$\nThe third equality is naturality of symmetry, and the last is the assumed evaluation identity for $T=K$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Sentence 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility', expanded by the tensor-Hom adjunction"
+   }
+  },
+  {
+   "text": "The scalar symmetry square proved in Step 1 is\n$$t_{V,K}\\circ S(\\tau^A_{K,V})=\\tau^B_{X,Y}\\circ t_{K,V}.$$\nMultiplying by the inverses of the two $t$'s gives $t_{V,K}^{-1}\\circ\\tau^B_{X,Y}=S(\\tau^A_{K,V})\\circ t_{K,V}^{-1}$. Substituting this in Step 4 makes its final expression exactly the last expression of Step 3. Thus $\\mathcal U(a)=\\mathcal U(b)$ and the injective transpose bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal] gives $a=b$, the asserted equality. The cited symmetry is the one induced by $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$ in bidegree $(i,j)$; scalar extension is additive and does not change degrees, so the comparison preserves that same factor $(-1)^{ij}$, also in characteristic two.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Sentence 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility', expanded by the tensor-Hom adjunction"
+   }
+  },
+  {
+   "text": "Suppose now that $h$ and $h'$ are isomorphisms. The contravariant functor $D_B=H_B(-,\\Omega_B)$ sends the inverse of $h$ to the inverse of $D_B(h)$: applying the functor to $h^{-1}h=1$ and $hh^{-1}=1$ verifies both inverse identities. Postcompose the equality $h'\\circ S(\\delta^A_K)=D_B(h)\\circ\\delta^B_X$ with $D_B(h)^{-1}$. Cancellation yields $D_B(h)^{-1}\\circ h'\\circ S(\\delta^A_K)=\\delta^B_X$, precisely the requested identification. No assertion that either $\\delta$ is invertible was used.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Sentence 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility', expanded by the tensor-Hom adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-pur-cochain-comparison-monoidal-equations",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V3",
+  "date": "2026-10-24",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+  "place": "Transposing evaluation, expanded using the existing closed adjunction; signed scalar symmetry proved directly on K-flat representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "double dual map compatibility with evaluation preserving scalar extension derived internal Hom",
+   "results": "8 hits: Module.Dual.eval_naturality, CharacterModule.dual_rTensor_conj_homEquiv, CharacterModule.homEquiv, Module.Dual.eval_comp_comp_evalEquiv_eq, CharacterModule.dual_comp, LinearMap.dualMap_eq_lcomp, CharacterModule.dual, CharacterModule.uncurry_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: module bidual evaluation and Cartesian exponential comparison do not state the derived tensor signed double-transpose equality for arbitrary target complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric monoidal closed functor evaluation pairing transpose biduality map commutes",
+   "results": "8 hits: CategoryTheory.coev_app_comp_pre_app, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev, CategoryTheory.expComparison_ev, CategoryTheory.ihom.ev_coev_assoc, CategoryTheory.MonoidalClosed.coev_app_comp_pre_app, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: module bidual evaluation and Cartesian exponential comparison do not state the derived tensor signed double-transpose equality for arbitrary target complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"doubleDual\"",
+   "results": "12 hits: AddChar.doubleDualEmb, AddChar.doubleDualEmb_apply, AddChar.doubleDualEquiv, AddChar.doubleDualEmb_bijective, AddChar.doubleDualEmb_injective, AddChar.doubleDualEmb_eq_zero, AddChar.doubleDualEmb_ne_zero, AddChar.doubleDualEmb_inj",
+   "date": "2026-10-22",
+   "verdict": "no match: module bidual evaluation and Cartesian exponential comparison do not state the derived tensor signed double-transpose equality for arbitrary target complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "doubleDual|double.dual|bidual|expComparison",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module bidual evaluation and Cartesian exponential comparison do not state the derived tensor signed double-transpose equality for arbitrary target complexes",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation preserving comparison double dual transpose compatibility",
+   "results": "8 hits: Module.Dual.eval_naturality, Module.Dual.transpose, LinearMap.toMatrix_transpose, Module.Dual.eval, Module.Dual.transpose_apply, LinearEquiv.trans_dualMap_symm_flip, LinearMap.dualMap, Module.evalEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: module bidual evaluation and Cartesian exponential comparison do not state the derived tensor signed double-transpose equality for arbitrary target complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "toIhomIhom|bidual|doubleDual|expComparison",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Cartesian exponential comparisons require Cartesian tensor; module bidual evaluation does not state the ringed-site derived signed double-transpose identity. Rigid tensor-Hom formulas assume dualizable objects.",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Double dual map commutes with scalar extension preserving evaluation and tensor symmetry",
+   "results": "8 hits: LinearEquiv.trans_dualMap_symm_flip, LinearEquiv.dualMap, LinearEquiv.dualMap_apply, Module.Dual.eval_comp_comp_evalEquiv_eq, Module.Dual.eval_naturality, Module.Dual.instIsReflecive, Module.evalEquiv, TensorProduct.dualDistribInvOfBasis",
+   "date": "2026-10-22",
+   "verdict": "no match: Cartesian exponential comparisons require Cartesian tensor; module bidual evaluation does not state the ringed-site derived signed double-transpose identity. Rigid tensor-Hom formulas assume dualizable objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toIhomIhom\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Cartesian exponential comparisons require Cartesian tensor; module bidual evaluation does not state the ringed-site derived signed double-transpose identity. Rigid tensor-Hom formulas assume dualizable objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric monoidal closed functor evaluation preserving comparison double dual morphism compatibility",
+   "results": "8 hits: CategoryTheory.coev_expComparison, CategoryTheory.expComparison_ev, CategoryTheory.expComparison, CategoryTheory.uncurry_expComparison, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.expComparison_whiskerLeft, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: Cartesian exponential comparisons require Cartesian tensor; module bidual evaluation does not state the ringed-site derived signed double-transpose identity. Rigid tensor-Hom formulas assume dualizable objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"eval\"",
+   "results": "12 hits: Module.Dual.eval, Module.bijective_dual_eval, Module.IsReflexive.bijective_dual_eval', Module.Dual.eval_apply, Module.Dual.eval_naturality, Module.Dual.eval_comp_comp_evalEquiv_eq, Module.symm_dualMap_evalEquiv, Module.DualBases.eval_of_ne",
+   "date": "2026-10-22",
+   "verdict": "no match: Cartesian exponential comparisons require Cartesian tensor; module bidual evaluation does not state the ringed-site derived signed double-transpose identity. Rigid tensor-Hom formulas assume dualizable objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of bidual evaluation under a strong symmetric monoidal functor with a map of dualizing objects",
+   "results": "8 hits: CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_symm_naturality, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation",
+   "date": "2026-10-22",
+   "verdict": "no match: Cartesian exponential comparisons require Cartesian tensor; module bidual evaluation does not state the ringed-site derived signed double-transpose identity. Rigid tensor-Hom formulas assume dualizable objects."
+  },
+  {
+   "tool": "grep",
+   "query": "eval_naturality|transpose|dualMap_comp",
+   "results": "7 hits: Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Cartesian exponential comparisons require Cartesian tensor; module bidual evaluation does not state the ringed-site derived signed double-transpose identity. Rigid tensor-Hom formulas assume dualizable objects.",
+   "subdirectory": "LinearAlgebra/Dual"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-coef-finite-verdier",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-coef-finite-verdier",
+   "place": "Proof: 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility'; returned step 4, including both transposes and the signed symmetry",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-finite-bidual-transpose",
+  "worker": "stage1",
+  "summary": "Expanded both inverse transposes and retained the canonical scalar tensor comparisons, proving equality using evaluation naturality and signed symmetry. Statement unchanged; all ingredients already exist in the DAG, so no new nodes. Project Lean supplies a categorical formal core but not the full ringed-site statement under these hypotheses.",
+  "blueprint": "Realizes cor-coef-finite-verdier proof sentence 'transposing evaluation as in lem-weil-duality-pairing gives double-dual compatibility': Steps 2-5 give both transposes, Step 6 the isomorphism identification.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic unbounded ringed-site tensor-Hom bijection, evaluation formula and natural signed symmetry; no coefficient-biduality node supplies this categorical tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic symmetric monoidality of the specified ringed-topos derived pullback, specialized to change of ring sheaves on the identity topos; this is not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Identifies scalar extension with the K-flat derived pullback on the identity ringed topos, without a flatness hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-9952b2356",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-9952b2356 (reviewer sub-agent of L); spot-checked: I read the whole item. The split has 6 steps and creates no new nodes; the statement is unchanged and carries no SGA source. I re-derived every step with its arrow directions. Steps 3 and 4 uncurry a and b with ev, using: the hypotheses at T=D_AK and T=K, naturality of t, the transpose definitions of both δ, ev_Y∘(D_B(h)⊗1)=ev_{D_BX}∘(1⊗h) (from the parameter-naturality of the closed-structure bijection), bifunctoriality and naturality of the symmetry. Step 5 inverts the symmetry compatibility t_{V,K}S(τ)=τt_{K,V} of lem-sfb-ringed-derived-monoidal-comparisons and concludes by injectivity. All cited statements say what the steps take from them. lem-sfb is applied to the identity geometric morphism with ring map A→B, a legitimate ringed-topos morphism; it needs no flatness, and lem-pur-derived-change-of-rings identifies Lu* with S. Small cases hold: K=0 or Ω=0; A=B with h=H(1,u), which reduces to symmetry naturality; odd shifts; non-flat Z→Z/2. Route: the closed-structure lemma is in the same unit, and the change-of-rings and internal-Hom nodes are in sk-def-sf-operations, which the unit cites. lem-sfb is an off-unit generic tool use, which I accept. No cycle in the dependency closures. The citer cor-coef-finite-verdier steps 3 and 5 match the statement. Duplicate search: lem-sf-evaluation-bidual-comparison-transport (Q02, unsplit, same day) is an abstract version that additionally assumes invertible w, β and an equivalence, so it is no one-line generalization of the item. lem-sf-etale-twisted-bidual-transport (exact g*, invertible twist) and the per/pod point nodes are not duplicates either. Maintainer note: Q02's node could reuse this argument."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteBidualTranspose",
+  "declaration": "CategoryTheory.FiniteBidualTranspose.finite_bidual_transpose",
+  "declarations": [
+   "CategoryTheory.FiniteBidualTranspose.scalarCounit",
+   "CategoryTheory.FiniteBidualTranspose.TensorComparisonModel",
+   "CategoryTheory.FiniteBidualTranspose.finite_bidual_transpose"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteBidualTranspose.lean",
+  "statement": "theorem finite_bidual_transpose (M : SheafOfModules.DerivedChangeOfRingsCochainModel.{c, v, max c v r, wA, wB} φ) (hE : M.E.mapHomologicalComplex (.up ℤ) = CochainPullback.extend φ) (SA : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, wA} J A)) (SB : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, wB} J B)) (TA : CoefficientTensorModels.{r, c, v, wA} J A SA) (TB : CoefficientTensorModels.{r, c, v, wB} J B SB) (sA : @SymmetricCategory _ _ SA.monoidal) (sB : @SymmetricCategory _ _ SB.monoidal) (coherenceA : RingedDerivedTensorCoherence.{c, v, r, wA} J A SA TA sA) (coherenceB : RingedDerivedTensorCoherence.{c, v, r, wB} J B SB TB sB) (t : SA.tensor ⋙ M.T ≅ (M.T.prod M.T) ⋙ SB.tensor) (ht : TensorComparisonModel.{c, v, r, wA, wB} J φ M hE SA SB TA TB t) (ΩA : DerivedCategory (RingedTensorModules.{c, v, r} J A)) (ΩB : DerivedCategory (RingedTensorModules.{c, v, r} J B)) (u : M.T.obj ΩA ⟶ ΩB) (K : DerivedCategory (RingedTensorModules.{c, v, r} J A)) (hK : M.T.obj ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)) ⟶ (derivedInternalHomOfUniverses.{c, v, r, wB} J B).obj (op (M.T.obj K), ΩB)) (hDK : M.T.obj ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)), ΩA)) ⟶ (derivedInternalHomOfUniverses.{c, v, r, wB} J B).obj (op (M.T.obj ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA))), ΩB)) (hevK : SB.tensor.map (Prod.mkHom hK (𝟙 (M.T.obj K))) ≫ SB.evaluation (M.T.obj K) ΩB = t.inv.app ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA), K) ≫ M.T.map (SA.evaluation K ΩA) ≫ u) (hevDK : SB.tensor.map (Prod.mkHom hDK (𝟙 (M.T.obj ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA))))) ≫ SB.evaluation (M.T.obj ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA))) ΩB = t.inv.app ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)), ΩA), (derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)) ≫ M.T.map (SA.evaluation ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)) ΩA) ≫ u) : (M.T.map ((SA.transpose K ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)) ΩA ((sA.braiding K ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA))).hom ≫ SA.evaluation K ΩA))) ≫ hDK = (SB.transpose (M.T.obj K) ((derivedInternalHomOfUniverses.{c, v, r, wB} J B).obj (op (M.T.obj K), ΩB)) ΩB ((sB.braiding (M.T.obj K) ((derivedInternalHomOfUniverses.{c, v, r, wB} J B).obj (op (M.T.obj K), ΩB))).hom ≫ SB.evaluation (M.T.obj K) ΩB)) ≫ (derivedInternalHomOfUniverses.{c, v, r, wB} J B).map (Prod.mkHom hK.op (𝟙 ΩB))) ∧ (∀ (eK : M.T.obj ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)) ≅ (derivedInternalHomOfUniverses.{c, v, r, wB} J B).obj (op (M.T.obj K), ΩB)) (eDK : M.T.obj ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)), ΩA)) ≅ (derivedInternalHomOfUniverses.{c, v, r, wB} J B).obj (op (M.T.obj ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA))), ΩB)), eK.hom = hK → eDK.hom = hDK → M.T.map ((SA.transpose K ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA)) ΩA ((sA.braiding K ((derivedInternalHomOfUniverses.{c, v, r, wA} J A).obj (op K, ΩA))).hom ≫ SA.evaluation K ΩA))) ≫ eDK.hom ≫ (derivedInternalHomOfUniverses.{c, v, r, wB} J B).map (Prod.mkHom eK.inv.op (𝟙 ΩB)) = (SB.transpose (M.T.obj K) ((derivedInternalHomOfUniverses.{c, v, r, wB} J B).obj (op (M.T.obj K), ΩB)) ΩB ((sB.braiding (M.T.obj K) ((derivedInternalHomOfUniverses.{c, v, r, wB} J B).obj (op (M.T.obj K), ΩB))).hom ≫ SB.evaluation (M.T.obj K) ΩB))) ∧ (∀ X Y : DerivedCategory (RingedTensorModules.{c, v, r} J A), M.T.map (sA.braiding X Y).hom ≫ t.hom.app (Y, X) = t.hom.app (X, Y) ≫ (sB.braiding (M.T.obj X) (M.T.obj Y)).hom)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Ordinary unbounded ringed-site derived categories, with independent site object, arrow, coefficient and source/target localization universes. The existing scalar universal pair and actual ordinary scalar tensor comparison normalize the derived tensor identification on K-flat representatives. The bidual is written directly using the existing closed transpose of signed evaluation, avoiding the dropped-route module. Includes the double-transpose equality, its conditional isomorphism identification, and signed symmetry compatibility."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13f3a2bf3",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery of 9fdb7119 (RETURN H2) with an identical Lean file (sha256 838964f4). stmt_deps now cite def-zl-ringed-derived-closed-symmetric-monoidal-data (existing:true, owns RingedTensorModules/RingedDerivedTensorCoherence) instead of the theorem; the theorem stays in proof_deps, so the finding is resolved. Clause check: site/universes c,v,r,wA,wB independent; S = M.T of DerivedChangeOfRingsCochainModel, hE provable (extend φ = extensionFunctor.mapHC, obj/map = changeOfRings/Hom); H_R = derivedInternalHomOfUniverses; ev = SA.evaluation counit in order D_RT⊗T; δ = transpose(braiding≫ev); hevK/hevDK = (h_T⊗1)≫ev_B = t.inv≫S(ev_A)≫u with correct types; main equality S(δ^A)≫hDK = δ^B≫H_B(hK.op,1); iso clause via eK/eDK with D_B(eK.inv) = D_B(hK)^{-1}; sign conjunct = t intertwines the Koszul braidings (true, stated by the node). t pinned by TensorComparisonModel on K-flats (ε iso on K-flats, scalar extension preserves K-flat), braidings pinned by symmetry_model, adjunction by uncurry_model: no free data. Edge cases K=0, Ω=0, zero ring, ℤ→ℤ/2, odd shifts, char 2 admitted. Statement verbatim, no line over 100 characters, only lean+stmt_deps changed, the 3 added defs are used and acyclic, docstrings/blueprint/6-step proof present, single sorry, no dropped-route import, no pro-étale substitute. Not recompiled (no file changed). Advisories: unused public import RingedTopoiCanonicalTensorPullbackOfUniverses (stage-1 stmt_dep, helper justified by the universe mismatch); def-sfb-derived-change-of-rings-cochain-model would be the cleaner owner of DerivedChangeOfRingsCochainModel than lem-pur (whose record also lists it); IsKFlatIndependentCoefficients reaches the item transitively via def-coef/def-zl."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T071226-L-152428",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

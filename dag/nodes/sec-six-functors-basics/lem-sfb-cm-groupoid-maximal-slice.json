@@ -1,0 +1,576 @@
+{
+ "id": "lem-sfb-cm-groupoid-maximal-slice",
+ "kind": "statement",
+ "title": "Maximal Cohen--Macaulay slice of a scheme groupoid",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $(U,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme], meaning that all its structure morphisms are over $S$. Put $G=U\\times_{\\Delta_{U/S},\\,U\\times_SU,\\,(s,t)}R$, with its morphism $G\\to U$ [def-pc-fibre-product]. A morphism is Cohen--Macaulay if it is flat [def-weil-flat-morphism] and every local ring of every scheme-theoretic fibre [def-pc-scheme-fibre] is Noetherian [def-weil-pbc-noetherian-ring] with depth [def-weil-pbc-depth] equal to Krull dimension [def-weil-pbc-krull-dimension-ring]. Assume $s,t$ are Cohen--Macaulay and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $u\\in U$ be a finite type point, meaning that $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type [def-weil-affine-spectrum, def-weil-residue-field, def-weil-finite-type-morphism]. Then there exist an affine scheme $B$, a locally finitely presented immersion $g:B\\to U$ [def-weil-closed-immersion], and $b\\in B$ mapping to $u$, with $\\kappa(u)\\to\\kappa(b)$ an isomorphism, such that $h=s\\circ\\operatorname{pr}_R:B\\times_{g,U,t}R\\to U$ is Cohen--Macaulay and locally of finite presentation. For the point $x=(b,e(u))$ in the fibre $h^{-1}(u)$, one has $\\dim_x h^{-1}(u)=\\dim G_u$. Here $G_u=G\\times_U\\operatorname{Spec}\\kappa(u)$, dimension at a point is the minimum of the Krull dimensions of its open neighbourhoods [def-kun-topological-dimension-at-point], and $\\dim G_u$ is the supremum of the lengths of chains of irreducible closed subsets of $G_u$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04MZ (lemma-max-slice), conclusions (1)--(4) and (6), with Tag 04MY (situation-slice); the immersion identifies the residue fields and hence identifies the fibre in (6) with the fibre of h."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Write $F_u=s^{-1}(u)$ and $d=\\dim_{e(u)}F_u$. At $e(u)$ choose affine source and target neighbourhoods with a finite presentation, as in [def-sbc-locally-finite-presentation]. Applying [lem-trf-affine-fibre-point-dimension] to $s$ and these neighbourhoods gives that $d$ is a finite nonnegative integer. The same affine calculation, $\\kappa(v)\\otimes_A A[z]/(f)=\\kappa(v)[z]/(\\bar f)$, at each point of each fibre shows that every fibre of a locally finitely presented morphism is locally of finite type over its residue field.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-trf-affine-fibre-point-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, first paragraph: finiteness of the induction parameter; affine fibre calculation"
+   }
+  },
+  {
+   "text": "The finite-type-point characterization gives an affine open $V\\subset U$ in which $u$ is closed. Thus $\\operatorname{Spec}\\kappa(u)\\to U$ is a closed immersion into $V$ followed by an open immersion. Its base change by $t:F_u\\to U$ identifies $G_u\\to F_u$ as an immersion. By [lem-weil-pbc-immersion-base-change-lft] and composition of locally finite type maps, $G_u$ is locally of finite type over $\\kappa(u)$. On test schemes its arrows are loops at $u$, so the groupoid laws give it a group structure. Regard it as its actual representable algebraic space. Etale charts are locally finitely presented, hence locally of finite type, so the chartwise hypothesis of [lem-sfb-field-groupoid-constant-local-dimension] holds. That node gives $\\dim_{e(u)}G_u=\\sup_{z\\in G_u}\\dim_zG_u$. The identity atlas and [lem-weil-pbc-dimension-supremum-local-dimensions] identify this supremum with the topological dimension $a=\\dim G_u$ used here.",
+   "uses": [
+    "lem-sfb-finite-type-field-point-characterization",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-a1-groupoid-scheme",
+    "def-trf-scheme-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-sfb-field-groupoid-constant-local-dimension",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, preceding optimality paragraph; Tag 04LU, group case (existing algebraic-space dimension node specialized to schemes)"
+   }
+  },
+  {
+   "text": "For completeness the immersion in step 2 implies $a\\le d$ without a dimension theorem about local rings. Factor it as a closed subspace of an open $O\\subset F_u$ containing $e(u)$. In any neighbourhood $N$ of $e(u)$ in $F_u$, a chain of irreducible closed subsets of $G_u\\cap N$ is a chain of closed subsets of $O\\cap N$. Hence $\\dim(G_u\\cap N)\\le\\dim(O\\cap N)\\le\\dim N$, the last inequality being [lem-weil-pbc-open-subspace-dimension-monotone]. Taking a neighbourhood $N$ attaining $d$ gives $a=\\dim_{e(u)}G_u\\le d$ by the definition of local dimension. In particular $a$ is also a nonnegative integer, since the identity belongs to $G_u$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-kun-topological-krull-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, preceding optimality paragraph: elementary chain comparison for the locally closed stabilizer"
+   }
+  },
+  {
+   "text": "We will use the following direct consequence of the cited statements. Arbitrary base change preserves a Cohen--Macaulay locally finitely presented morphism: on affine charts finite presentation is preserved by tensoring, by [lem-weil-pbc-finite-presentation-base-change-composition] and [lem-weil-pbc-fibre-product-affine-spectra]; flatness is preserved by [lem-weil-pbc-flat-morphism-base-change]. Each new fibre is the old fibre extended along its residue-field map by [lem-weil-pbc-fibre-of-base-change]. The old fibres are locally finite type by step 1, so the FIRST paragraph of [lem-pur-cohen-macaulay-field-extension] shows their extended local rings are Cohen--Macaulay. This uses no Noetherian hypothesis on either base scheme.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-fibre-of-base-change",
+    "lem-pur-cohen-macaulay-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, use of Tag 04MV; base change checked from affine finite presentations, flat base change, and field extension of fibres"
+   }
+  },
+  {
+   "text": "For any $g:B\\to U$ put $H_g=B\\times_{g,U,t}R$ and $R_B=H_g\\times_{s\\operatorname{pr}_R,U,g}B$. The source $s_B:R_B\\to B$ (last projection) is the base change of $h_g=s\\operatorname{pr}_R:H_g\\to U$; the target is isomorphic to it by $(b_0,r,b_1)\\mapsto(b_1,i(r),b_0)$. Thus when $h_g$ is Cohen--Macaulay and locally finitely presented so are both restricted projections, by step 4. On test schemes loops at $b\\in B$ are exactly loops at $g(b)$ with the specified object $b$; consequently the restricted stabilizer is $B\\times_U G$. In particular its fibre at $b$ is $G_{g(b)}\\times_{\\kappa(g(b))}\\kappa(b)$. Also $s_B^{-1}(b)=h_g^{-1}(g(b))\\times_{\\kappa(g(b))}\\kappa(b)$ by the fibre-of-base-change statement. These identifications send the restricted identity to $(b,e(g(b)))$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MY (situation-slice), Tag 04MV (lemma-restrict-property): explicit fibre products and inverse"
+   }
+  },
+  {
+   "text": "Use strong induction on the integer $d$ for all groupoids and finite type points in the statement, proving the stated conclusion together with the extra assertion that the two restricted projections are Cohen--Macaulay and locally finitely presented. Steps 1--3 apply to every such input. If $d=a$, choose any affine open neighbourhood $B$ of $u$, with $b=u$. Its inclusion is an immersion and identifies residue fields. Open immersions are locally finitely presented: on affine neighbourhoods a principal open is $\\operatorname{Spec}A_f$ with $A_f=A[z]/(fz-1)$. The source $H_g$ is the open subscheme $t^{-1}(B)$ of $R$, so $h_g$ is the restriction of $s$, and its local rings and fibre local rings agree with those of $s$. Hence it is Cohen--Macaulay and locally finitely presented. Step 5 proves the extra assertion. Its fibre at $u$ is an open neighbourhood of $e(u)$ in $F_u$, so [lem-weil-pbc-dimension-at-point-open-subspace] gives the required dimension $d=a$. This includes $d=0$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, induction and equality case; open restrictions made explicit"
+   }
+  },
+  {
+   "text": "If $d>a$, apply [lem-sfb-cm-groupoid-hypersurface-slice] to the given groupoid and $u$. It supplies an affine $B_0$, a locally finitely presented immersion $g_0:B_0\\to U$, and $b_0$ over $u$ with the same residue field. Its saturation $h_0$ is Cohen--Macaulay at $(b_0,e(u))$ and the restricted source fibre has dimension $d-1$ at its identity. Since $s,t$ are flat and locally finitely presented and $g_0$ is locally finitely presented, [lem-sfb-groupoid-cm-locus-descent] applies and gives an open $W\\subset B_0$ containing $b_0$, with $h_0$ Cohen--Macaulay on the entire inverse image of $W$.",
+   "uses": [
+    "lem-sfb-cm-groupoid-hypersurface-slice",
+    "lem-sfb-groupoid-cm-locus-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, strict case: Tag 0461 followed by Tag 047W(5)"
+   }
+  },
+  {
+   "text": "Choose an affine open $B_1\\subset W$ containing $b_0$ and put $b_1=b_0$. The immersion $g_1:B_1\\to U$ is the composite of this open inclusion and $g_0$, so remains an immersion and locally finitely presented, by [lem-weil-pbc-proper-fp-permanence](e), the local presentation of an open inclusion from step 6, and [lem-sbc-locally-finite-presentation-composition]. The saturation $h_1$ is a source-open restriction of $h_0|_{p^{-1}(W)}$, so remains Cohen--Macaulay and locally finitely presented. Step 5 gives Cohen--Macaulay locally finitely presented restricted projections. The restricted source fibre is an open neighbourhood of the identity in the previous restricted fibre, so still has local dimension $d-1$. Finally $b_1$ is a finite type point: choose the affine $V\\subset U$ of step 2; the immersion makes $b_1$ closed in $g_1^{-1}(V)$, and then in an affine neighbourhood inside this open. The finite-type-point characterization applies with the identity residue-field extension.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-sfb-finite-type-field-point-characterization",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, shrinking the first slice, verifying the induction hypotheses"
+   }
+  },
+  {
+   "text": "The restricted groupoid over $B_1$ and $b_1$ now meets every hypothesis of the induction claim, with parameter $d-1<d$. Apply it to obtain an affine $C$, a locally finitely presented immersion $j:C\\to B_1$, and $c\\in C$ over $b_1$ with identical residue field. The saturation $h_{C/B_1}$ is Cohen--Macaulay and locally finitely presented; the twice restricted source fibre at its identity has dimension equal to the stabilizer fibre of the groupoid over $B_1$ at $b_1$. By step 5 and $\\kappa(b_1)=\\kappa(u)$ that stabilizer fibre is canonically $G_u$. The twice restricted projections also satisfy the extra assertion of the induction claim.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, application of the induction hypothesis"
+   }
+  },
+  {
+   "text": "Set $g=g_1\\circ j:C\\to U$. Composition of immersions and of locally finitely presented morphisms gives the required type of $g$; its residue-field map at $c$ is the composite of two isomorphisms. The two saturation maps $h_1$ and $h_{C/B_1}$ are Cohen--Macaulay and locally finitely presented. Applying [lem-sfb-cm-groupoid-double-restriction] gives that $h_C=s\\operatorname{pr}_R:C\\times_{g,U,t}R\\to U$ has these properties as well. This application requires no global surjectivity for $h_1$. Step 5 gives the extra assertion for the restriction directly to $C$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-sfb-cm-groupoid-double-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, final paragraph: composite immersion and Tag 04MX"
+   }
+  },
+  {
+   "text": "Associating fibre products identifies the twice restricted arrow scheme with $C\\times_{g,U,t}R\\times_{s,U,g}C$: on test schemes both consist of $(c_0,r,c_1)$ with $t(r)=g(c_0)$ and $s(r)=g(c_1)$; the intermediate objects are forced to be $j(c_0),j(c_1)$. This isomorphism preserves source, target and identity. By step 5 its source fibre at $c$ is $h_C^{-1}(u)\\times_{\\kappa(u)}\\kappa(c)$. The map $\\kappa(u)\\to\\kappa(c)$ is an isomorphism, so projection identifies this fibre with $h_C^{-1}(u)$, taking its identity to $x=(c,e(u))$. Step 9 therefore gives $\\dim_x h_C^{-1}(u)=\\dim G_u$. Taking $B=C$ and $b=c$ completes the induction and the proof.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MZ, clauses (5),(6) under composition; explicit identifications from Tag 04MY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-affine-fibre-point-dimension",
+  "lem-sfb-finite-type-field-point-characterization",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-a1-groupoid-scheme",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-sfb-field-groupoid-constant-local-dimension",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-kun-topological-krull-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-pur-cohen-macaulay-field-extension",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-sfb-cm-groupoid-hypersurface-slice",
+  "lem-sfb-groupoid-cm-locus-descent",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-cm-groupoid-double-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04MZ (lemma-max-slice), proof, with Tag 04MY (situation-slice); the induction, open shrinking and iterated restriction are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "max.slice|slice.*groupoid|Cohen.?Macaulay",
+   "results": {
+    "t": "2026-10-23T13:12:46Z",
+    "tool": "grep",
+    "query": "max.slice|slice.*groupoid|Cohen.?Macaulay",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal slicing of a Cohen Macaulay groupoid reduces source fibre dimension to stabilizer dimension",
+   "results": {
+    "t": "2026-10-23T13:12:47Z",
+    "tool": "leansearch",
+    "query": "Maximal slicing of a Cohen Macaulay groupoid reduces source fibre dimension to stabilizer dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StructureGroupoid.maximalAtlas",
+     "restr_mem_maximalAtlas",
+     "StructureGroupoid.LocalInvariantProp.liftPropOn_of_mem_maximalAtlas",
+     "StructureGroupoid.chart_mem_maximalAtlas",
+     "StructureGroupoid.id_mem_maximalAtlas",
+     "StructureGroupoid.maximalAtlas_mono",
+     "StructureGroupoid.restriction_mem_maximalAtlas_subtype",
+     "StructureGroupoid.mem_maximalAtlas_of_eqOnSource"
+    ],
+    "digest": "700d248969dbce51"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T13:12:47Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cohen Macaulay locally finitely presented groupoid admits an affine immersed slice whose fibre dimension at the identity equals the stabilizer dimension",
+   "results": {
+    "t": "2026-10-23T13:12:53Z",
+    "tool": "leanfinder",
+    "query": "A Cohen Macaulay locally finitely presented groupoid admits an affine immersed slice whose fibre dimension at the identity equals the stabilizer dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.reduce_to_affine_nbhd",
+     "AlgebraicGeometry.exists_lift_of_germInjective",
+     "AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion",
+     "AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion",
+     "AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion",
+     "AlgebraicGeometry.instIsPreimmersionFromSpecStalk"
+    ],
+    "digest": "d30210c42fb31dc4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A groupoid of schemes with Cohen Macaulay source and target can be sliced until source fibre dimension equals stabilizer dimension while retaining Cohen Macaulay saturation",
+   "results": {
+    "t": "2026-10-23T13:17:33Z",
+    "tool": "leanfinder",
+    "query": "A groupoid of schemes with Cohen Macaulay source and target can be sliced until source fibre dimension equals stabilizer dimension while retaining Cohen Macaulay saturation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.FormallyUnramified",
+     "AlgebraicGeometry.IsSmooth",
+     "AlgebraicGeometry.IsEtale"
+    ],
+    "digest": "e2f254236d2b0804"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T14:43:34Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no Cohen--Macaulay groupoid slicing theorem; hits concern affine neighbourhoods, smooth charts, manifold structure groupoids or set-theoretic stabilizers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T14:46:44Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no Cohen--Macaulay groupoid slicing theorem; hits concern affine neighbourhoods, smooth charts, manifold structure groupoids or set-theoretic stabilizers."
+  },
+  {
+   "tool": "grep",
+   "query": "max.slice|slice.*groupoid|Cohen.?Macaulay",
+   "results": {
+    "t": "2026-10-23T14:56:19Z",
+    "tool": "grep",
+    "query": "max.slice|slice.*groupoid|Cohen.?Macaulay",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no Cohen--Macaulay groupoid slicing theorem; hits concern affine neighbourhoods, smooth charts, manifold structure groupoids or set-theoretic stabilizers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal slice of a Cohen Macaulay groupoid at a finite type point reduces dimension to that of the stabilizer",
+   "results": {
+    "t": "2026-10-23T14:56:20Z",
+    "tool": "leansearch",
+    "query": "Maximal slice of a Cohen Macaulay groupoid at a finite type point reduces dimension to that of the stabilizer",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MulAction.stabilizer",
+     "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal",
+     "restr_mem_maximalAtlas",
+     "ProperlyDiscontinuousSMul.finite_stabilizer",
+     "StructureGroupoid.chart_mem_maximalAtlas",
+     "ProperlyDiscontinuousSMul.finite_stabilizer'",
+     "ProperlyDiscontinuousVAdd.finite_stabilizer",
+     "SubAddAction.stabilizer_of_subAdd"
+    ],
+    "digest": "3947e670c9aa4dd6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no Cohen--Macaulay groupoid slicing theorem; hits concern affine neighbourhoods, smooth charts, manifold structure groupoids or set-theoretic stabilizers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T14:56:21Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no Cohen--Macaulay groupoid slicing theorem; hits concern affine neighbourhoods, smooth charts, manifold structure groupoids or set-theoretic stabilizers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cohen Macaulay scheme groupoid admits an affine immersed slice with saturation fibre dimension equal to stabilizer dimension",
+   "results": {
+    "t": "2026-10-23T14:56:21Z",
+    "tool": "leanfinder",
+    "query": "A Cohen Macaulay scheme groupoid admits an affine immersed slice with saturation fibre dimension equal to stabilizer dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset",
+     "AlgebraicGeometry.reduce_to_affine_nbhd",
+     "AlgebraicGeometry.Scheme.local_affine",
+     "AlgebraicGeometry.Scheme.affineOpenCover_idx",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι",
+     "AlgebraicGeometry.reduce_to_affine_global",
+     "AlgebraicGeometry.Scheme.affineOpenCover_X"
+    ],
+    "digest": "7e32a8f03c683091"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no Cohen--Macaulay groupoid slicing theorem; hits concern affine neighbourhoods, smooth charts, manifold structure groupoids or set-theoretic stabilizers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cm-relation-point-slice",
+  "date": "2026-10-23",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 04N0 (lemma-max-slice-quasi-finite), clauses (1)--(4), with Situation 04MY (situation-slice), specialized to an equivalence relation, whose stabilizer is the identity V. Only the local slice and its saturation map are asserted. Supporting input in the proof of Tag 04N0: maximal slice, before imposing any quasi-finiteness conclusion (04MZ).",
+   "via": [
+    "lem-sfb-cm-relation-point-slice",
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cm-groupoid-maximal-slice",
+  "worker": "stage1",
+  "summary": "Preserved the statement of Tag 04MZ. Wrote its finite-dimensional strong induction, including the equality case, global CM shrinking, preservation of the induction hypotheses and the final canonical fibre identifications. Three smaller unsplit inputs isolate Tags 0461, 047W(5), and 04MX. Reused existing generic dimension, base-change, finite-type-point and immersion permanence nodes; no new Mathlib leaf. No attachment in the live Lean project.",
+  "blueprint": "The inherited provenance traces this item to det-thm-sf-ctf-stability-direct-images proof (3), through the detailed alteration/moduli/fppf-bootstrap prerequisites. The latest blueprint now states the direct-image compactification assembly in that paragraph; this delivery keeps the inherited prerequisite and proves exactly its Stacks 04MZ subproblem, without changing the unit route. blueprint_refs ancestor returns null, retained for the item and all new nodes. Whole-blueprint searches found no same_as.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-affine-fibre-point-dimension",
+    "why": "Finite nonnegative local dimension of an lfp fibre, applied to the affine presentation at the identity; a generic affine calculation, not a replacement of the slicing route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Identify scheme topological dimension with the supremum used in the existing algebraic-space dimension theorem."
+   },
+   {
+    "node": "lem-pur-cohen-macaulay-field-extension",
+    "why": "Only its first paragraph: arbitrary field extension preserves the CM locus of locally finite-type field schemes. Together with flat base change this proves the base-change input of the Stacks restriction argument without a global Noetherian hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Shrinking source neighbourhoods does not change the local fibre dimension."
+   },
+   {
+    "node": "lem-sbc-locally-finite-presentation-composition",
+    "why": "Composition preserves lfp, used only for the two successive immersions."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Flatness under base change, for the CM restriction argument."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-of-base-change",
+    "why": "Canonical fibre identification for restricted sources and residue-field extensions."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Choose affine neighbourhoods inside the CM open of the first slice."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Tensor-product description of affine base change of lfp maps."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "View the stabilizer fibre as a locally closed subscheme of the source fibre and check local finite type."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-affine-fibre-point-dimension",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-pur-cohen-macaulay-field-extension",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-immersion-base-change-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-a1963c347",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-a1963c347 (reviewer sub-agent of L); spot-checked: I read the item, all 3 new nodes and every cited statement against Stacks more-groupoids.tex: 04MY, 0461 with its full proof, the 04MZ statement and proof, 04LH and its proof, 047W(5), and 04MV/04MW/04MX. The item statement is 04MZ (1)-(4),(6), unchanged. Steps 1-11 carry out the 04MZ induction: finite d (from lem-trf-affine-fibre-point-dimension); G_u is an lft immersed group with a=dim_{e(u)}G_u (04LU node plus the supremum leaf); a<=d by a chain argument; CM+lfp is stable under base change, using flat base change and the first paragraph of the CM-field-extension node, with no Noetherian base; the equality case is an affine open; the strict case uses the hypersurface slice (0461), then the CM-locus descent (047W(5)), then affine shrinking; the finite-type point is re-verified; the induction hypothesis is applied; the result is assembled through double restriction (04MX, fppf via 045V); the twice-restricted groupoid is identified with R_C. The induction claim, base and step are explicit (D4). New nodes: hypersurface-slice = 0461, locus-descent = 04LH+047W(5), double-restriction = 04MX for P=CM∧lfp. All three are true, tested on the identity groupoid, the pair groupoid of A^1 and a positive-dimensional group, and none is a restated clause. All are statement-only, self-contained, with three search kinds recorded. rg -L over dag/nodes for 0461/047W/04MX/04LH/04MZ/lemma-slice finds no duplicate: the quasifinite-locus-descent, flat-relation-cm-open (0460), sbc CM-locus and trf 0570 nodes differ. Ten tool_uses accepted as generic. Batch 5: lem-trf-affine-fibre-point-dimension is a commutative-algebra fibre-dimension fact whose closure contains no other trf node; def-trf-scheme-algebraic-space is a general definition; the closure of lem-sfb-field-groupoid-constant-local-dimension reaches only algebraic-space foundations (def-trf-algebraic-space, atlas and fibre-product tests). None is part of the trace formula or Poincare duality, so all are outside the assumed statements. Minor, accepted: step 11 leaves implicit the one-line step-5 identification s_{C/B1}^{-1}(c)=h_{C/B1}^{-1}(b1)⊗κ(c). No SGA cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidMaximalSlice",
+  "declaration": "AlgebraicGeometry.exists_cm_groupoid_maximal_slice",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidMaximalSlice.lean",
+  "statement": "theorem exists_cm_groupoid_maximal_slice {S U R : Scheme.{u}} (p : U ⟶ S) (q : R ⟶ S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) (hs : s ≫ p = q) (ht : t ≫ p = q) [Flat s] [Flat t] [LocallyOfFinitePresentation s] [LocallyOfFinitePresentation t] (hcm : ∀ (f : R ⟶ U), f = s ∨ f = t → ∀ (v : U) (r : f.fiber v), IsNoetherianRing ((f.fiber v).presheaf.stalk r) ∧ (IsLocalRing.depth (R := (f.fiber v).presheaf.stalk r) ((f.fiber v).presheaf.stalk r) : WithBot ℕ∞) = ringKrullDim ((f.fiber v).presheaf.stalk r)) (u : U) [LocallyOfFiniteType (U.fromSpecResidueField u)] [QuasiCompact (U.fromSpecResidueField u)] : ∃ (B : Scheme.{u}) (g : B ⟶ U) (b : B), IsAffine B ∧ IsImmersion g ∧ LocallyOfFinitePresentation g ∧ g b = u ∧ IsIso (g.residueFieldMap b) ∧ Flat (pullback.snd g t ≫ s) ∧ LocallyOfFinitePresentation (pullback.snd g t ≫ s) ∧ (∀ (v : U) (y : (pullback.snd g t ≫ s).fiber v), IsNoetherianRing (((pullback.snd g t ≫ s).fiber v).presheaf.stalk y) ∧ (IsLocalRing.depth (R := ((pullback.snd g t ≫ s).fiber v).presheaf.stalk y) (((pullback.snd g t ≫ s).fiber v).presheaf.stalk y) : WithBot ℕ∞) = ringKrullDim (((pullback.snd g t ≫ s).fiber v).presheaf.stalk y)) ∧ ∃ x : (pullback.snd g t ≫ s).fiber u, pullback.fst g t ((pullback.snd g t ≫ s).fiberι u x) = b ∧ pullback.snd g t ((pullback.snd g t ≫ s).fiberι u x) = e u ∧ topologicalKrullDimAt x = topologicalKrullDim (pullback (pullback.lift s t (hs.trans ht.symm)) (pullback.lift (U.fromSpecResidueField u) (U.fromSpecResidueField u) rfl) : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4ab90ec0",
+  "group": "Q63",
+  "result": "fix",
+  "note": "Lean statement and records correct: only lean field changed; 15 stmt_dep nodes identical to live; statement verbatim. Clause check vs Stacks 04MY/04MZ (1)-(4),(6): IsGroupoidScheme+hs/ht over S; CM = Flat + fibre-stalk Noetherian ∧ depth=ringKrullDim for s,t; LFP s,t; finite type point = LOFT+QC of fromSpecResidueField; conclusion IsAffine/IsImmersion/LFP g, g b=u, IsIso residueFieldMap, h=snd≫s flat/LFP/CM on all fibres, x∈h.fiber u over (b,e u) (unique), topologicalKrullDimAt x = topologicalKrullDim of R×_{U×_SU}Spec κ(u) = G_u by pasting. No stronger hypotheses, no hollow defs, single sorry, docstring has source+blueprint+11 steps, no duplicate. Sole fault H11: 'Second reading by Q63' disclaims an independent reading → FIX fixes/lem-sfb-cm-groupoid-maximal-slice.report.md (worker report verbatim + real clause-by-clause second reading). No Lean changed, no compile run."
+ }
+}

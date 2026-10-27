@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-finite-diagonal-contraction-naturality",
+ "kind": "statement",
+ "title": "FiniteDiagonalContractionNaturality",
+ "statement": "Naturality of the first canonical diagonal-unit isomorphism, in contraction direction.\nSource: blueprint def-pur-td-datum, first unit isomorphism and canonical-map paragraph.\n(blueprint: lem-pur-finite-diagonal-contraction-naturality).\n\nLean signature:\ntheorem contractionCore_naturality (c : Compactification f)\n    (K K' : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))\n    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X K)\n    (hK' : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X K')\n    (hU : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X\n      (coefficientUnit (ModuleCat.{u + 1} A) X))\n    (hP : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) (pullback f f)\n      ((pullFor A (pullback.fst f f)).obj K))\n    (hP' : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) (pullback f f)\n      ((pullFor A (pullback.fst f f)).obj K')) (a : K ⟶ K') :\n    (compactSupportFor A (c.ofIsPullback (IsPullback.of_hasPullback f f))).map\n        (((tensorFor A (pullback f f)).map ((pullFor A (pullback.fst f f)).map a)).app\n          ((compactSupportFor A (HasCompactification.compactification\n            (Etale.TraceDiagonalDatum.diagonal f))).obj (coefficientUnit (ModuleCat A) X))) ≫\n      (contractionCore A f c K' hK' hU hP').hom =\n        (contractionCore A f c K hK hU hP).hom ≫ a",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.md",
+  "place": "Canonical-map paragraph and the displayed unit"
+ },
+ "stmt_deps": [
+  "def-pur-finite-trace-canonical-maps",
+  "lem-weil-derived-tensor-functorial",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-sf-comp-composition",
+  "lem-pur-proetale-derived-pullback-identity"
+ ],
+ "proof": [
+  {
+   "text": "write V = Lp1*, D = LDelta*, S = RDelta!, T = Rp2!, and U for the coefficient\nunit. Put B = S(U). The contraction is T applied to the following four isomorphisms,\nfollowed by canonical compact-support section contraction:\nV(K) tensor B --signed symmetry--> B tensor V(K)\n--projection--> S(U tensor D(V(K))) --unit multiplication--> S(D(V(K)))\n--pullback section comparison--> S(K), then T(S(K)) --> K.\nFor a map a : K --> K', signed tensor symmetry commutes a tensor 1 with 1 tensor a.\nThe projection transformation is natural in its second input; its isomorphism\ncertificate changes no component. Left multiplication by U and the pullback\ncomposition/identity comparisons are natural. Apply S, then T, to their squares.\nThe section contraction square is natural because both changes of compactification,\ncompact-support composition, and its identity normalization are natural isomorphisms\non the full etale-origin category. Compose these five squares, using functoriality\nand associativity, to obtain precisely the displayed equation. The hypotheses supply\nexactly the etale-origin and finite-Tor certificates needed by these canonical maps;\nno invertibility or nonzero condition is used. In particular the argument applies to\nthe identity morphism and empty schemes. The remaining formal work is to assemble\nthese naturality squares while keeping the large native functors folded.",
+   "uses": [
+    "def-pur-finite-trace-canonical-maps",
+    "lem-weil-derived-tensor-functorial",
+    "lem-weil-finite-compact-projection-formula",
+    "thm-sf-comp-composition",
+    "lem-pur-proetale-derived-pullback-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-trace-canonical-maps",
+  "lem-weil-derived-tensor-functorial",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-sf-comp-composition",
+  "lem-pur-proetale-derived-pullback-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.md",
+  "place": "Naturality of the specified canonical maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of canonical diagonal contraction and compact support self-square exchange in a derived category",
+   "results": "Generic categorical naturality results; no exact native diagonal contraction or compact-support self-square exchange match.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits, including CategoryTheory.NatTrans.naturality; no native canonical composite.",
+   "date": "2026-10-27",
+   "verdict": "component naturality only"
+  },
+  {
+   "tool": "grep",
+   "query": "contractionCore|exchangeCore",
+   "results": "Zero Mathlib hits; exact canonical maps are in the project source.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-td-datum",
+   "place": "FiniteDiagonalContractionNaturality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-inv",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTraceDiagonalDatum",
+  "date": "2026-10-27",
+  "group": "V3"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteDiagonalContractionNaturality",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.contractionCore_naturality",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.contractionCore_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteDiagonalContractionNaturality.lean",
+  "statement": "theorem contractionCore_naturality (c : Compactification f)\n    (K K' : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))\n    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X K)\n    (hK' : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X K')\n    (hU : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X\n      (coefficientUnit (ModuleCat.{u + 1} A) X))\n    (hP : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) (pullback f f)\n      ((pullFor A (pullback.fst f f)).obj K))\n    (hP' : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) (pullback f f)\n      ((pullFor A (pullback.fst f f)).obj K')) (a : K ⟶ K') :\n    (compactSupportFor A (c.ofIsPullback (IsPullback.of_hasPullback f f))).map\n        (((tensorFor A (pullback f f)).map ((pullFor A (pullback.fst f f)).map a)).app\n          ((compactSupportFor A (HasCompactification.compactification\n            (Etale.TraceDiagonalDatum.diagonal f))).obj (coefficientUnit (ModuleCat A) X))) ≫\n      (contractionCore A f c K' hK' hU hP').hom =\n        (contractionCore A f c K hK hU hP).hom ≫ a",
+  "by": "V3",
+  "date": "2026-10-27",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6565d",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T202718-L-3479550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6565d",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T202718-L-3479550",
+  "kind": "interface",
+  "note": "independent cc review: Item FiniteTraceDiagonalDatum and node def-pur-td-datum against the clone. The 15-declaration extraction is byte-identical; contraction/exchange naturality statements checked against contractionCore/exchangeCore (true; projection and base-change naturality partly checked in Lean)."
+ }
+}

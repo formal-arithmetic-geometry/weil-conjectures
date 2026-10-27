@@ -22,6 +22,7 @@ import Sheaf.CategoryTheory.CondensedProductActionInflation
 import Sheaf.CategoryTheory.CondensedDerivedInvariantBar
 import Sheaf.CategoryTheory.InternalActionSitePresentation
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Removing a pro-prime-to-ell factor from derived invariants
 

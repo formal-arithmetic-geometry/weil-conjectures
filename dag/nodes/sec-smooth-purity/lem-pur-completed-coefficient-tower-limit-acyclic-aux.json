@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-completed-coefficient-tower-limit-acyclic-aux",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Inverse limits preserve the completed pushforward resolution quasi-isomorphism",
+ "statement": "For a completed coefficient structural map c and a K-injective source tower I, if j is a quasi-isomorphism from the levelwise pushforward of I to a K-injective target tower T, then the ordinary inverse-limit map induced by j is a quasi-isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A07 and 0D6E, tower pushforward-limit acyclicity"
+ },
+ "proof": [
+  {
+   "text": "Replace each original pro-etale site by its AsSmall model in the coefficient universe max u (t+1), carrying the topology and the existing commutative completed ring by precomposition. The original module categories and their strict tower categories are equivalent to these models. These equivalences preserve K-injective complexes and quasi-isomorphisms. No coefficient ring or site objects are replaced by arbitrary witnesses.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport base change as eY.inverse followed by proEtaleBaseChange f followed by eX.functor. Its continuity follows by composition, and its finite-limit preservation makes it representably flat. Restrict the supplied structural map c to the small model, retaining its components. Full faithfulness of forgetting commutativity lifts it uniquely to a commutative ring-sheaf map. The continuous ringed-topos constructor supplies the usual module pushforward on these models.",
+   "uses": [
+    "lem-weil-pbc-continuous-ringed-topos-module-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pointwise identity comparison of module pushforwards, lifted to towers and complexes, identifies the transported chain map with the target module equivalence applied to j. Its comparison factors are isomorphisms, so it is a quasi-isomorphism. Apply ringedTowerPushforwardLimitAcyclic to the transported K-injective towers and this quasi-isomorphism. Cancel the images of the comparison isomorphisms to obtain the inverse-limit map of the transported j.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An equivalence preserves inverse limits. The canonical preservesLimitNatIso identifies the preceding map with the target module equivalence applied to the original inverse-limit map. Quasi-isomorphisms are invariant under this natural isomorphism and reflected by the exact module equivalence. Therefore the original inverse-limit map is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-tower-limit-acyclic-of-equivalences"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-tower-limit-acyclic-of-equivalences",
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+  "lem-weil-ringed-tower-pushforward-limit-acyclic"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F5",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A07 and 0D6E, via the existing small-site ringedTowerPushforwardLimitAcyclic theorem and explicit AsSmall transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientTowerLimitAcyclic",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-coefficient-tower-limit-acyclic",
+   "place": "Proof Step 2"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientTowerLimitAcyclicAux",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientTowerLimitAcyclicAux.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.towerLimit_push_acyclic_aux",
+  "statement": "theorem towerLimit_push_acyclic_aux {X Y : Scheme.{t}} (f : X ⟶ Y) (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X)) (I : CochainComplex (ℕᵒᵖ ⥤ Mod X (R l E X)) ℤ) (hI : I.IsKInjective) (T : CochainComplex (ℕᵒᵖ ⥤ Mod Y (R l E Y)) ℤ) (hT : T.IsKInjective) (j : ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj (push f c)).mapHomologicalComplex (.up ℤ)).obj I) ⟶ T) [QuasiIso j] : QuasiIso (((lim : (ℕᵒᵖ ⥤ Mod Y (R l E Y)) ⥤ Mod Y (R l E Y)).mapHomologicalComplex (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T235931-L-1471563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261027T034637-L-3669140",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

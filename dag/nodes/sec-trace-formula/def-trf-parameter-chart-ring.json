@@ -1,0 +1,129 @@
+{
+ "id": "def-trf-parameter-chart-ring",
+ "kind": "definition",
+ "title": "Parameter chart rings, origin localizations, completions and substitutions",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring, $n,r\\ge0$, and $u:\\{0,\\ldots,n-1\\}\\to R$. In $S=R[t_0,\\ldots,t_{r-1}]$ [def-weil-pbc-mv-polynomial-ring], define $v=(u_0,\\ldots,u_{n-1},t_0,\\ldots,t_{r-1})$. Let $J\\subseteq\\{0,\\ldots,n+r-1\\}$ and let $a$ be an optional pivot in this index set. For a uniform definition extend the labels by a last dummy label $*$, extend $v$ by $v_*=0$, embed $J$ in the enlarged labels as $\\widetilde J$, and put $b=a$ if $a$ is defined and $b=*$ otherwise. Put $L=\\widetilde J\\setminus\\{b\\}$. Define the quotient chart algebra $C=S[Y_l:l\\in L]/(v_l-v_bY_l:l\\in L)$ and the canonical map $\\alpha:S\\to C$. This is the polynomial quotient construction of [def-trf-parameter-blowup-chart-ring] over $S$, with these extended labels. For each original label $i$, define $w_i=\\overline{Y_i}$ if its embedded label belongs to $L$, and $w_i=\\alpha(v_i)$ otherwise. Define the origin ideal $q=(w_i:0\\le i<n+r)\\subseteq C$. When $q$ is prime define $B=C_q$ [def-weil-pbc-localization-at-prime], its structural map $R\\to S\\xrightarrow{\\alpha}C\\to B$, its maximal-ideal completion $\\widehat B$ [def-weil-pbc-adic-completion], the ideal $\\mathfrak m_B\\widehat B$, and the canonical map $C\\to B\\to\\widehat B$. Finally, for any commutative ring $F$, define the substituted variable $V_i\\in F[[W_0,\\ldots,W_{n+r-1}]]$ [def-weil-pbc-multivariate-power-series] by $V_i=W_{a'}W_i$ if $i\\in J$ and $a\\ne\\mathrm{some}(i)$, and by $V_i=W_i$ otherwise, where $a'=a$ when defined and $a'=i$ otherwise. These are definitions for every $J,a$; the coordinate-blowup applications use $J=\\varnothing,a=\\mathrm{none}$ or $a\\in J$. No primality, regularity, completion comparison or identification with a blowup is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-parameter-blowup-chart-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C0S (lemma-regular-complete-containing-coefficient-field), explicit parameter-chart construction in lem-trf-parameter-chart-completion-substitution and generic-normal-slice proof steps 10--12; quotient-chart algebra as in divisors.tex Tag 0804. The coordinate rings and maps are definitions, not the completion comparison theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Polynomial quotient coordinate blowup chart with ratio coordinates and localization at the coordinate origin",
+   "results": "[leansearch] OK 8 hit(s). IsLocalization.Away.mvPolynomialQuotientEquiv; IsLocalization.Away.mvPolynomialQuotientEquiv_apply; IsLocalization.Away.mvPolynomialQuotientEquiv.congr_simp; Polynomial.quotientSpanCXSubCXSubCAlgEquiv; Algebra.Generators.localizationAway_σ; MvPolynomial.isLocalization; RatFunc.mk_eq_div; RatFunc.ofFractionRing_eq. No complete parameter-chart datum.",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse published project definitions."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Parameter chart polynomial quotient localization at origin and adic completion with coordinate substitution",
+   "results": "[leanfinder] OK 8 hit(s). Polynomial.IsDistinguishedAt.algEquivQuotient; Polynomial.IsDistinguishedAt.algEquivQuotient_apply; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply; PowerSeries.IsWeierstrassDivisorAt.mod'; PowerSeries.algEquivQuotientWeierstrassDistinguished; Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply. No parameter-chart datum.",
+   "date": "2026-10-24",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep ParameterChartRing|parameterChartOrigin|parameterChartSubstitutionVariable; rg -l of same pattern in dag/nodes, lean/Sheaf, lean/WeilConjectures and Mathlib; blueprint_refs.py search parameter; read def-trf-parameter-blowup-chart-ring and def-trf-permissible-coordinate-chart-ring",
+   "results": "[grep] OK 0 hit(s) in Mathlib. Direct rg: only lean/Sheaf/RingTheory/ParameterChartCompletionSubstitution.lean and dag/nodes/sec-trace-formula/lem-trf-parameter-chart-completion-substitution.json. blueprint_refs.py: 21 blueprint nodes match parameter, none owns these definitions. Existing fixed-pivot chart nodes own traceChartRing/traceChartCoordinate and PermissibleCoordinateChart.Chart and its strict-transform equations, not the option pivot, origin localization, completion maps and substitution datum.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing project declarations found; add ownership node with existing:true, without duplicating code."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-center-formal-normal-slice",
+  "date": "2026-10-24",
+  "group": "Q71"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Generic normal slice, proof steps 10--12: the local coordinate chart, its origin localization and completion, and the fixed-coefficient substitutions used in numerical order recovery.",
+   "via": [
+    "lem-trf-generic-center-formal-normal-slice",
+    "lem-trf-test-sequence-order-recovery",
+    "lem-trf-residual-companion-boundary-reduction",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.ParameterChartCompletionSubstitution",
+  "declaration": "IsLocalRing.ParameterChartRing",
+  "declarations": [
+   "IsLocalRing.parameterChartBaseParameter",
+   "IsLocalRing.parameterChartCenter",
+   "IsLocalRing.parameterChartPivot",
+   "IsLocalRing.ParameterChartRing",
+   "IsLocalRing.parameterChartPolynomialMap",
+   "IsLocalRing.parameterChartCoordinate",
+   "IsLocalRing.parameterChartOrigin",
+   "IsLocalRing.ParameterChartLocalRing",
+   "IsLocalRing.parameterChartStructuralMap",
+   "IsLocalRing.ParameterChartCompletion",
+   "IsLocalRing.parameterChartCompletedIdeal",
+   "IsLocalRing.parameterChartIntoCompletion",
+   "IsLocalRing.parameterChartSubstitutionVariable"
+  ],
+  "statement": "noncomputable abbrev ParameterChartRing (u : Fin n → R) (J : Finset (Fin (n + r)))\n    (a : Option (Fin (n + r)))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Ownership record requested by the immutable-head review of Q71 2ccb842950bc. Reuses exactly the thirteen published definitions, whose full source bodies were read. Surrounding explicit variables are {R : Type u} [CommRing R] {n r : ℕ}; no regularity assumption is needed for the quotient and coordinate data, and the localization/completion definitions take the origin prime instance. The fixed-pivot quotient nodes do not record the full option-pivot/origin/completion/substitution datum. No source file or declaration is duplicated, and no theorem is used to choose data."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-118fb5224",
+  "group": "Q71",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-118fb5224",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 of 2ccb842950bc. New existing:true def node def-trf-parameter-chart-ring owns the 13 IsLocalRing.parameterChart*/ParameterChart* defs of Sheaf.RingTheory.ParameterChartCompletionSubstitution; its TeX matches each body, its lean.statement is verbatim, its stmt_deps exist, it is not a duplicate of def-trf-parameter-blowup-chart-ring or def-trf-permissible-coordinate-chart-ring, and no race in side-live. Item stmt_deps add def-trf-parameter-chart-ring and def-nagata-blowup-chart-ring (plus marked-ideal-order and adapted-center); the rest of the node is unchanged. The Lean is identical to 2ccb except the docstring advisory (chart after localizing at x). lean.statement is verbatim in the file. Independent re-reading: hypotheses (E entries = SNC components; transversality via HasAdaptedNormalCrossingsCenter on ⊥ reduces to distinct RSP boundary equations), conclusions (common U, pinned reduced closure T smooth, boundary/flag/ideal-power/zero-spreading clauses, formal coefficient section, faithful-flat contraction, 0C0S ψ, chart transport and fraction-chart equivalence) and edge cases (E=[], n=0, nonclosed x, t-pivot, universes) all OK. No compile: no file changed."
+ }
+}

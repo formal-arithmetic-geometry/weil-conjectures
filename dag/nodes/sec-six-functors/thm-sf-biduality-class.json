@@ -187,7 +187,18 @@
   "thm-fix-general-biduality"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -240,5 +251,29 @@
   "group": "Q58",
   "result": "pass",
   "note": "Statement, dependencies, canonical duality data, edge cases, documentation, route-pivot compliance, and permitted sorry usage all check out; scompile reached overlay compilation but server session refusal prevented final confirmation."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X$ be separated of finite type over $\\Fbar$, and let\n$\\Lambda=A_{E,n},\\mathcal O_E,E$, or $\\Qlb$.\nregarded as a condensed ring, and use the categories\n$\\Dctf(X,\\Lambda)\\subseteq D(X_{\\mathrm{pro\\acute et}},\\Lambda)$ of\n[def-sf-setting]. Put\n$\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$,\n$D_{X,\\Lambda}=R\\mathcal Hom_\\Lambda(-,\\omega_{X,\\Lambda})$.\nThen $D_{X,\\Lambda}$ is an exact contravariant anti-equivalence\nof $D^b_{ctf}(X,\\Lambda)$, and the evaluation-defined map\n\n$$\nK\\longrightarrow D_{X,\\Lambda}D_{X,\\Lambda}K\n$$\n\nis a natural isomorphism ([sk-thm-pd-verdier-duality]). For\n$\\Lambda=\\mathcal O_E,E,\\Qlb$ this is the whole category\n$\\Dbc(X,\\Lambda)$.\n\nAt finite coefficients, an input Tor interval $[a,b]$ gives\n$[-b-2\\dim X,-a]$ for its dual. For $K\\in\\Dbc(X,\\mathcal O_E)$ the\nreductions $K_n$ have Tor amplitude in one interval $[a,b]$, and the\nreductions of $D_{X,\\mathcal O_E}K$, which are the duals $D_{X,A_{E,n}}K_n$\n([sk-prop-scalar-six]), have Tor amplitude in $[-b-2\\dim X,-a]$. In\nparticular the finite or integral dualizing object has interval\n$[-2\\dim X,0]$.",
+  "proof": [
+   {
+    "text": "The finite-stage anti-equivalence is [thm-fix-general-biduality],\nwith its independent bound from\n[lem-weil-verdier-preservation-strata]. For $\\Lambda=\\mathcal O_E$, the\nevaluation map $K\\to D_XD_XK$ is a map in $\\Dbc(X,\\mathcal O_E)$, whose\nobjects are derived complete; its reduction modulo $\\pi_E$ is the finite\nevaluation map for $K_1$, because duality commutes with reduction\n([sk-prop-scalar-six]), so it is an isomorphism, and derived Nakayama shows\nthe cone vanishes ([thm-coef-integral-verdier]). The Tor bounds follow from\nthe finite ones for the reductions, whose Tor interval is uniform by\n[lem-coef-integral-residue-tor]. For $E$, objects are obtained by cones and\nshifts from integral generators ([sk-lem-integral-models]), and duality\ncommutes with $-\\otimes_{\\mathcal O_E}E$; for $\\Qlb$, objects and morphisms\ndescend to a finite $E$ ([sk-thm-sfb-qlbar-two-colimit]) and duality commutes\nwith extension of scalars. These reductions are carried out in\n[det-pd-biduality-coefficients], and they apply to the evaluation map\nitself, so the resulting isomorphism is the stated double-dual map for every\nadmissible $\\Lambda$ ([sk-thm-pd-verdier-duality]).",
+    "uses": [
+     "thm-fix-general-biduality",
+     "lem-weil-verdier-preservation-strata",
+     "thm-coef-integral-verdier",
+     "lem-coef-integral-residue-tor",
+     "sk-lem-integral-models",
+     "sk-thm-sfb-qlbar-two-colimit",
+     "sk-thm-pd-verdier-duality"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

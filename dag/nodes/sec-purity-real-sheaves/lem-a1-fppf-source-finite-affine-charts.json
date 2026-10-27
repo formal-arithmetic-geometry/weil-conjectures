@@ -1,0 +1,240 @@
+{
+ "id": "lem-a1-fppf-source-finite-affine-charts",
+ "kind": "statement",
+ "title": "Finite affine source charts over an affine target neighbourhood",
+ "statement": "Let $X,Y,S$ be schemes [def-pc-scheme], let $q:X\\to Y$ be flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and surjective on points, and let $h:Y\\to S$ satisfy that $h\\circ q$ is locally of finite type [def-weil-finite-type-morphism]. For every $y\\in Y$ there exist affine opens $V=\\operatorname{Spec}R\\subseteq S$ and $W=\\operatorname{Spec}A\\subseteq Y$ [def-weil-affine-spectrum], with $h(y)\\in V$, $y\\in W$, and $W\\subseteq h^{-1}(V)$, an integer $n\\geq0$, and affine opens $U_i=\\operatorname{Spec}B_i\\subseteq X$, $1\\leq i\\leq n$, contained in $q^{-1}(W)$, such that $W=\\bigcup_{i=1}^n q(U_i)$. The induced coordinate maps form towers $R\\to A\\to B_i$; each $A\\to B_i$ is flat [def-weil-pbc-flat-ring-map] and of finite presentation [def-weil-pbc-finitely-presented-algebra], and each composite $R\\to B_i$ is of finite type [def-weil-pbc-finite-type-algebra]. No quasi-compactness or separation assumption is made on $q$, $h$, or $X,Y,S$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02KL (lemma-flat-finitely-presented-permanence), locally-of-finite-type alternative; Proof, first sentence and the sentences selecting finitely many affine opens whose images cover the affine target; old item steps 1-3, including all three affine-pair coordinate criteria."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$. By the affine-open basis, choose an affine open $V\\subseteq S$ containing $h(y)$, then an affine open $W\\subseteq Y$ with $y\\in W\\subseteq h^{-1}(V)$; the latter inverse image is open by continuity of the scheme morphism. Put $R=\\mathcal O_S(V)$ and $A=\\mathcal O_Y(W)$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens; applied twice as in the local reduction of Tag 02KL"
+   }
+  },
+  {
+   "text": "Let $\\mathcal U$ be the set of affine opens $U\\subseteq X$ contained in $q^{-1}(W)$. The affine-open basis covers $q^{-1}(W)$ by these $U$. Since $q$ is surjective, every $w\\in W$ has a preimage $x$, and some $U\\in\\mathcal U$ contains $x$; hence $W=\\bigcup_{U\\in\\mathcal U}q(U)$. Flatness and local finite presentation make $q$ open, so each $q(U)$ is open in $Y$ and contained in $W$. The affine scheme $W$ is quasi-compact; by the finite-subcover definition choose finitely many $U_1,\\ldots,U_n\\in\\mathcal U$ with $W=\\bigcup_{i=1}^nq(U_i)$. This selects images covering $W$ and does not assert that the selected opens cover $q^{-1}(W)$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, proof: openness and finite affine selection; inputs Tags 01IT, 01UA and 00E8"
+   }
+  },
+  {
+   "text": "Put $B_i=\\mathcal O_X(U_i)$. The containments $q(U_i)\\subseteq W$ and $h(W)\\subseteq V$ give coordinate maps $R\\to A\\to B_i$. Functoriality of the structure-sheaf maps in the composite scheme morphism identifies their composite with the coordinate map for $h\\circ q$ on $(U_i,V)$. These are the canonical affine presentations $V=\\operatorname{Spec}R$, $W=\\operatorname{Spec}A$, $U_i=\\operatorname{Spec}B_i$, up to their canonical isomorphisms.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, proof, final affine translation; functorial induced coordinate maps"
+   }
+  },
+  {
+   "text": "Apply the flat affine-pair criterion to $q$ and $(U_i,W)$ to obtain that $A\\to B_i$ is flat. Apply the locally-finite-presentation affine-pair criterion to the same $q,U_i,W$ to obtain finite presentation of $A\\to B_i$. Finally $(h\\circ q)(U_i)\\subseteq V$, so the locally-finite-type affine-pair criterion for $h\\circ q$ and $(U_i,V)$ shows that $R\\to B_i$ is of finite type. All criteria apply to arbitrary affine pairs; they impose no quasi-compactness or separation hypotheses on the original morphisms or schemes. The charts and coordinate maps satisfy every required clause.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U5 (lemma-flat-characterize), 01TQ (lemma-locally-finite-presentation-characterize), and 01T2 (lemma-locally-finite-type-characterize), each implication (1) => (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, first affine reduction and finite affine selection; coordinate criteria Tags 01U5, 01TQ, 01T2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat surjective locally finitely presented morphism of schemes admits finitely many affine open source charts covering each affine target, with flat finitely presented coordinate algebras and finite type over an affine base",
+   "results": "{\"t\": \"2026-10-22T07:58:06Z\", \"tool\": \"leanfinder\", \"query\": \"A flat surjective locally finitely presented morphism of schemes admits finitely many affine open source charts covering each affine target, with flat finitely presented coordinate algebras and finite type over an affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\"], \"digest\": \"2ff470166d8dd30e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-pair flatness and finite-presentation criteria do not select finite source charts. QuasiCompactCover.exists_isAffineOpen_of_isCompact requires a quasi-compact-cover structure, which must first be constructed using openness and surjectivity; the coordinate towers and base finite-type conclusions require further affine criteria. These are multiple arguments, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(affine|finite).*cover|finite.*(affine|flat).*cover|faithfullyFlat.*(pi|prod)|[Ff]aithfullyFlat.*[Pp]i",
+   "results": "{\"t\": \"2026-10-22T07:58:44Z\", \"tool\": \"grep\", \"query\": \"exists.*(affine|finite).*cover|finite.*(affine|flat).*cover|faithfullyFlat.*(pi|prod)|[Ff]aithfullyFlat.*[Pp]i\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"c9a7e6f0d7de58ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-pair flatness and finite-presentation criteria do not select finite source charts. QuasiCompactCover.exists_isAffineOpen_of_isCompact requires a quasi-compact-cover structure, which must first be constructed using openness and surjectivity; the coordinate towers and base finite-type conclusions require further affine criteria. These are multiple arguments, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-22T07:58:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"LocallyOfFinitePresentation\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-pair flatness and finite-presentation criteria do not select finite source charts. QuasiCompactCover.exists_isAffineOpen_of_isCompact requires a quasi-compact-cover structure, which must first be constructed using openness and surjectivity; the coordinate towers and base finite-type conclusions require further affine criteria. These are multiple arguments, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat surjective locally finitely presented scheme morphism has finite affine source charts jointly covering any affine target with flat finitely presented coordinate maps",
+   "results": "{\"t\": \"2026-10-22T07:59:20Z\", \"tool\": \"leansearch\", \"query\": \"A flat surjective locally finitely presented scheme morphism has finite affine source charts jointly covering any affine target with flat finitely presented coordinate maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\"], \"digest\": \"86c625103ef22965\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-pair flatness and finite-presentation criteria do not select finite source charts. QuasiCompactCover.exists_isAffineOpen_of_isCompact requires a quasi-compact-cover structure, which must first be constructed using openness and surjectivity; the coordinate towers and base finite-type conclusions require further affine criteria. These are multiple arguments, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an affine open W of Y mapping into affine V in S, select a finite jointly surjective family of affine opens of X for a flat surjective locally finitely presented q X to Y, with coordinate rings finitely presented flat over O W and finite type over O V",
+   "results": "{\"t\": \"2026-10-22T07:59:31Z\", \"tool\": \"leanfinder\", \"query\": \"Over an affine open W of Y mapping into affine V in S, select a finite jointly surjective family of affine opens of X for a flat surjective locally finitely presented q X to Y, with coordinate rings finitely presented flat over O W and finite type over O V\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"ef3364dcbca8437a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-pair flatness and finite-presentation criteria do not select finite source charts. QuasiCompactCover.exists_isAffineOpen_of_isCompact requires a quasi-compact-cover structure, which must first be constructed using openness and surjectivity; the coordinate towers and base finite-type conclusions require further affine criteria. These are multiple arguments, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*finite.*affine|finite.*affine.*cover|finitePresentation_appLE|finiteType_appLE",
+   "results": "{\"t\": \"2026-10-24T00:44:24Z\", \"tool\": \"grep\", \"query\": \"exists.*finite.*affine|finite.*affine.*cover|finitePresentation_appLE|finiteType_appLE\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"2c238eeae3823ab9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give affine charts, coordinate criteria or finite refinements under a pre-existing cover hypothesis; none states all clauses of the item in one line. Existing DAG leaves supply the separate criteria."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine source opens jointly cover an affine target under a flat surjective locally finitely presented scheme morphism",
+   "results": "{\"t\": \"2026-10-24T00:44:24Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine source opens jointly cover an affine target under a flat surjective locally finitely presented scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\"], \"digest\": \"02cf7147c0aabf23\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give affine charts, coordinate criteria or finite refinements under a pre-existing cover hypothesis; none states all clauses of the item in one line. Existing DAG leaves supply the separate criteria."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-24T00:44:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give affine charts, coordinate criteria or finite refinements under a pre-existing cover hypothesis; none states all clauses of the item in one line. Existing DAG leaves supply the separate criteria."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective flat locally finitely presented scheme morphism admits finitely many affine source opens whose images cover a prescribed affine target open; compatible affine coordinates are flat finitely presented and finite type over the base",
+   "results": "{\"t\": \"2026-10-24T00:44:25Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective flat locally finitely presented scheme morphism admits finitely many affine source opens whose images cover a prescribed affine target open; compatible affine coordinates are flat finitely presented and finite type over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\"], \"digest\": \"e0b5fa5bd34db3bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give affine charts, coordinate criteria or finite refinements under a pre-existing cover hypothesis; none states all clauses of the item in one line. Existing DAG leaves supply the separate criteria."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isAffineOpen_of_isCompact|quasiCompactCover|exists.*affine|finite",
+   "results": "{\"t\": \"2026-10-24T00:45:31Z\", \"tool\": \"grep\", \"query\": \"exists_isAffineOpen_of_isCompact|quasiCompactCover|exists.*affine|finite\", \"sub\": \"AlgebraicGeometry/Cover/QuasiCompact.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"35\", \"38\", \"44\", \"46\"], \"digest\": \"8cf9e6e853b4976b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give affine charts, coordinate criteria or finite refinements under a pre-existing cover hypothesis; none states all clauses of the item in one line. Existing DAG leaves supply the separate criteria."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open surjective map of schemes to a compact affine scheme admits finitely many affine open subschemes of its domain with jointly surjective images",
+   "results": "{\"t\": \"2026-10-24T00:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"An open surjective map of schemes to a compact affine scheme admits finitely many affine open subschemes of its domain with jointly surjective images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\"], \"digest\": \"405c1ae797a22c3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give affine charts, coordinate criteria or finite refinements under a pre-existing cover hypothesis; none states all clauses of the item in one line. Existing DAG leaves supply the separate criteria."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-lft-flat-lfp-source-descent",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Proof, first sentence and the sentences selecting finitely many affine opens whose images cover the affine target; old item steps 1-3, including all three affine-pair coordinate criteria.",
+   "via": [
+    "lem-a1-lft-flat-lfp-source-descent",
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-fppf-source-finite-affine-charts",
+  "worker": "stage1",
+  "summary": "Checked Tag 02KL against the stated arbitrary schemes and all-affine-pair coordinate criteria. Reused seven existing statement/definition tools plus scheme/spectrum definitions; no new nodes. Expanded the finite image-cover argument and verified flatness, finite presentation and composite finite type separately. Statement unchanged.",
+  "blueprint": "Auxiliary geometric descent step along the recorded ancestry from lem-a1-affine-hc0 through lem-a1-separated-etale-space-scheme to lem-a1-lft-flat-lfp-source-descent. This item realizes the local affine reduction and finite-image-cover portion of Tag 02KL used by that descent; no change to the current blueprint ancestor or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-fb7ba1c85",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-fb7ba1c85 (reviewer sub-agent of L); spot-checked: PASS. The delivery is one commit containing the item and its report, with no new nodes. Statement, stmt_deps and blueprint are byte-identical to live, which still has the item unsplit with no re-split note, so no target is weakened and the item is not superseded. I read Stacks descent.tex Tag 02KL (lemma-flat-finitely-presented-permanence) and its proof (reduce to S and Y affine, f open by 01UA, finitely many affine X_i whose images cover Y), and morphisms.tex 01UA. Step 1: the 01IT basis lemma at h(y) gives an affine V, and again inside h^{-1}(V) at y gives an affine W; correct. Step 2: affine opens U in q^{-1}(W) have images in W and cover W by surjectivity of q; 01UA makes each q(U) open; W is affine, hence quasi-compact (00E8 node plus the definition of quasi-compactness), so finitely many images cover W. No quasi-compactness of X and no affine intersections are used (E1 OK). Step 3: the coordinate maps R->A->B_i and their composite are elementary. Step 4: 01U5 gives A->B_i flat, 01TQ (1)=>(2) gives it finitely presented, and 01T2 applied to h∘q on (U_i,V) gives R->B_i of finite type. Each cited node is a Mathlib leaf whose statement says exactly what the step takes, using the same definition nodes as the item. proof_deps equals the union of the uses, there is no SGA, and no tool_uses are needed. Edge cases checked: empty Y, n>=1 in actual witnesses, a non-quasi-compact source, zero rings. Duplicate search (02KL, finite affine charts): lem-sfb-fppf-lifts-finite-affine-charts, lem-trf-finite-affine-composite-presentation and lem-trf-lfp-fppf-source-locality state different facts. The item is strictly smaller than its parent lem-a1-lft-flat-lfp-source-descent. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FppfSourceFiniteAffineCharts",
+  "declaration": "AlgebraicGeometry.exists_fppf_source_finite_affine_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FppfSourceFiniteAffineCharts.lean",
+  "statement": "theorem exists_fppf_source_finite_affine_charts {X Y S : Scheme.{u}} (q : X ⟶ Y) (h : Y ⟶ S) [Flat q] [LocallyOfFinitePresentation q] [Surjective q] [LocallyOfFiniteType (q ≫ h)] (y : Y) : ∃ (V : S.Opens) (W : Y.Opens), IsAffineOpen V ∧ IsAffineOpen W ∧ h y ∈ V ∧ y ∈ W ∧ ∃ (eWV : W ≤ h ⁻¹ᵁ V) (n : ℕ) (U : Fin n → X.Opens), (∀ i : Fin n, IsAffineOpen (U i)) ∧ (W : Set Y) = ⋃ i : Fin n, q '' (U i : Set X) ∧ ∃ (eUW : ∀ i : Fin n, U i ≤ q ⁻¹ᵁ W) (eUV : ∀ i : Fin n, U i ≤ (q ≫ h) ⁻¹ᵁ V), ∀ i : Fin n, (q.appLE W (U i) (eUW i)).hom.Flat ∧ (q.appLE W (U i) (eUW i)).hom.FinitePresentation ∧ (h.appLE V W eWV ≫ q.appLE W (U i) (eUW i)).hom.FiniteType ∧ h.appLE V W eWV ≫ q.appLE W (U i) (eUW i) = (q ≫ h).appLE V (U i) (eUV i)",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e9d5b649",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep Mathlib records, Stacks 02KL (descent.tex 4385-4416), module and report. All hypotheses exact (Flat, LocallyOfFinitePresentation, Surjective q; LocallyOfFiniteType (q≫h); arbitrary Scheme.{u}; no qc/separation). Conclusion: affine V,W with h y∈V, y∈W, W≤h⁻¹V; U: Fin n→X.Opens affine in q⁻¹W with W=⋃ q''U i; canonical appLE maps: A→B_i flat and FinitePresentation, R→B_i FiniteType; extra tower equality holds by appLE_comp_appLE. Edge cases ok (empty Y, n=0 typed, empty charts, non-qc source, non-separated). No defs, sorry only, docstrings with source/blueprint/4 proof steps, lean.statement verbatim, node differs from live only in lean, no live clash. Advisory: 3 private imports serve proof deps only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261026T092514-L-3438186",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_fppf_source_finite_affine_charts"
+  ],
+  "sorry_after": []
+ }
+}

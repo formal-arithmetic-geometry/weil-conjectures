@@ -22,57 +22,31 @@
  "status": "split",
  "proof": [
   {
-   "text": "First record the elementary free-algebra comparison used below. If $F\\dashv G$ is a geometric inverse image and $R$ a ring sheaf, give $GQ$ its $R$-algebra structure through the adjunction unit for any $FR$-algebra $Q$. The set-adjunction restricts to algebra homomorphisms: the algebra equations on an adjunct are exactly the adjuncts of the original equations, since $F$ preserves finite products and the unit is natural. Consequently\n$\\operatorname{Hom}_{FR\\text{-alg}}(F(R[E]),Q)=\\operatorname{Hom}_{R\\text{-alg}}(R[E],GQ)=\\operatorname{Hom}(E,GQ)=\\operatorname{Hom}(FE,Q)$.\nThus $F(R[E])\\cong(FR)[FE]$ by the free-algebra universal property, with the comparison sending the coefficient and generator maps to their inverse images. Evaluation and the free-algebra unit are preserved because both sides send each generator to that same section. This applies also when the source topos is a presheaf category.",
-   "uses": [
-    "def-trf-geometric-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SV (lemma-pullback-cotangent-morphism-topoi), commuting free/forgetful diagram in its proof; universal-property argument written out."
-   }
-  },
-  {
-   "text": "Let $a$ be sheafification from presheaves on the open-set site of $T$ to sheaves. It is a left adjoint preserving finite limits by [lem-weil-pbc-sheafification-sets-exact], hence is the inverse image of a geometric morphism. Form the standard resolution sectionwise: $P_n(V)=(F_{\\mathcal A(V)}U)^{n+1}\\mathcal B(V)$. Its restriction maps and all simplicial maps are the standard functorial maps of [lem-trf-cotangent-resolution-coherence]. Iterating step 1 identifies $aP_\\bullet$ with $\\mathcal P_\\bullet$, including evaluation faces, unit degeneracies and augmentation. Apply [lem-trf-topos-inverse-image-differentials] to $a$ and then [lem-weil-pbc-ringed-topoi-module-pullback-tensor] with identity coefficient map to obtain, degree by degree,\n$a(\\Omega_{P_n/\\mathcal A}\\otimes_{P_n}\\mathcal B)\\cong\\Omega_{\\mathcal P_n/\\mathcal A}\\otimes_{\\mathcal P_n}\\mathcal B$.\nHere on the presheaf side differentials and tensors are sectionwise; on the sheaf side they are their sheafifications. All comparisons commute with faces, so they commute with their alternating sums. This proves the asserted sheafification identity as complexes. Its presheaf-to-sheaf unit evaluated at $V$ is the asserted section map, and its naturality in $V$ proves restriction compatibility.",
+   "text": "Sheafification $a$ is a geometric inverse image by [lem-weil-pbc-sheafification-sets-exact]. Apply [lem-trf-geometric-standard-differential-comparison] to $a$ from the presheaf topos. On that topos the standard construction is sectionwise, so its alternating complex evaluates to $L_{\\mathcal B(V)/\\mathcal A(V)}$. The comparison identifies its sheafification with the displayed sheaf complex, including faces and degeneracies. The sheafification unit, evaluated on each open $V$, gives the actual section map into $L_{\\mathcal B/\\mathcal A}(V)$; On differential tensors it sends $\\mathrm dp\\otimes b$ to $\\mathrm d(\\eta p)\\otimes\\eta b$, where $\\eta$ is the sheafification unit; unit naturality for inclusions of opens proves restriction compatibility.",
    "uses": [
     "lem-weil-pbc-sheafification-sets-exact",
-    "lem-trf-cotangent-resolution-coherence",
-    "lem-trf-topos-inverse-image-differentials",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+    "lem-trf-geometric-standard-differential-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tags 08SR, 08SS, 08SW and 08SX (definition-standard-resolution-sheaves-rings, definition-cotangent-complex-morphism-sheaves-rings, lemma-compute-L-morphism-sheaves-rings, remark-map-sections-over-U)."
+    "place": "Tags 08SR, 08SS, 08SW (lemma-compute-L-morphism-sheaves-rings), 08SX (remark-map-sections-over-U)."
    }
   },
   {
-   "text": "For a continuous $u:T'\\to T$, the functor on open sets $V\\mapsto u^{-1}V$ preserves the terminal open, intersections, and covering unions. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to obtain the geometric inverse image $u^{-1}$; it is exact on underlying abelian sheaves, and therefore on the transported module structures. Step 1 identifies $u^{-1}\\mathcal P_\\bullet$ with the standard resolution of $u^{-1}\\mathcal B$ over $u^{-1}\\mathcal A$, including every face and degeneracy. The differential comparison [lem-trf-topos-inverse-image-differentials] and the tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor], with coefficient map the identity, now identify the simplicial modules defining the two cotangent complexes. Taking the same alternating sum of faces gives a canonical isomorphism of complexes $u^{-1}L_{\\mathcal B/\\mathcal A}\\cong L_{u^{-1}\\mathcal B/u^{-1}\\mathcal A}$. Exactness ensures that this is also the asserted identification in the derived categories.",
+   "text": "For continuous $u:T'\\to T$, the inverse-open functor preserves finite limits and covers. By [lem-weil-pbc-left-exact-site-inverse-image-tensor] it gives the geometric inverse image $u^{-1}$, additive and exact on abelian sheaves. It therefore preserves kernels, images and their quotients, hence cohomology and quasi-isomorphisms, also with the transported module actions. Apply [lem-trf-geometric-standard-differential-comparison]: its actual complex isomorphism descends to the required derived identification. Its ring-square naturality and identity/composition clauses give precisely the asserted coherence.",
    "uses": [
     "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-trf-topos-inverse-image-differentials",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+    "lem-trf-geometric-standard-differential-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SV (lemma-pullback-cotangent-morphism-topoi), using the free/forgetful square."
+    "place": "Tag 08SV (lemma-pullback-cotangent-morphism-topoi)."
    }
   },
   {
-   "text": "These comparisons are natural in ring maps and coherent for composites. Indeed the free-algebra comparison is determined by its coefficient map and by $[b]\\mapsto[Fb]$ on generators. The differential comparison carries $\\mathrm db$ to $\\mathrm d(Fb)$, and the tensor comparison carries a pure tensor to the tensor of its images. For two successive inverse images, both candidate comparisons therefore have the same values on coefficients, generators, and the generating expressions $\\mathrm dp\\otimes b$ in each degree. The universal properties of free algebras, differentials and tensors force equality. The identity functor gives the identity by the same calculation. The calculation also commutes with the standard maps for squares of rings, which compose strictly by [lem-trf-cotangent-resolution-coherence].",
-   "uses": [
-    "lem-trf-topos-inverse-image-differentials",
-    "lem-trf-cotangent-resolution-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Functoriality paragraph following Tag 08SS and proof of Tag 08SV."
-   }
-  },
-  {
-   "text": "Take the continuous inclusion $i:\\{t\\}\\to T$. By [lem-weil-pbc-topological-inverse-image-stalk], evaluation of $i^{-1}\\mathcal F$ on the singleton is canonically $\\mathcal F_t$, with the section $s$ mapped to its germ $s_t$. On a singleton a sheaf is determined by this value, its value on the empty open being terminal. Hence step 3 for $i$ is precisely $(L_{\\mathcal B/\\mathcal A})_t\\cong L_{\\mathcal B_t/\\mathcal A_t}$. This identifies the actual complexes and their ring actions. Stalk exactness [lem-weil-pbc-module-stalk-exact] also permits passage to derived objects. The germ formula and step 4 show naturality in sheaf-ring maps. Restricting first to an open neighbourhood of $t$ gives the same germs, so the identification is compatible with open restrictions.",
+   "text": "Apply step 2 to the inclusion $i:\\{t\\}\\to T$. By [lem-weil-pbc-topological-inverse-image-stalk], evaluation on the singleton is the stalk, and the unit sends sections to their germs. A sheaf on a singleton is determined by this value, with terminal value on the empty open. Thus the comparison is $(L_{\\mathcal B/\\mathcal A})_t\\cong L_{\\mathcal B_t/\\mathcal A_t}$; its module action is the stalk action since $(bm)_t=b_t m_t$. By [lem-weil-pbc-module-stalk-exact], stalks preserve kernels and cokernels, hence cohomology and quasi-isomorphisms, so this comparison descends to derived categories. Ring-map naturality comes from step 2; restriction to a neighbourhood leaves these germs unchanged.",
    "uses": [
     "lem-weil-pbc-topological-inverse-image-stalk",
     "lem-weil-pbc-module-stalk-exact"
@@ -80,78 +54,30 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08T0 (lemma-stalk-cotangent-complex), specialized to ordinary topological stalks."
+    "place": "Tag 08T0 (lemma-stalk-cotangent-complex)."
    }
   },
   {
-   "text": "Put $C=W^{-1}B$ and $D=S^{-1}A$. The hypothesis on $S$ gives the unique map $D\\to C$, $a/s\\mapsto f(a)/f(s)$. By [lem-weil-pbc-localization-flat], $C$ is flat over $B$. By [lem-weil-pbc-flat-tensor-exact], tensoring the sequences of cycles and boundaries of any acyclic complex by $C$ preserves their exactness. Thus $C[0]$ is K-flat by [def-pc-module-kflat-complex]. The ordinary-module K-flat tensor computation [lem-pc-source-kflat-module-tensor-model], using the symmetry of ordinary tensor, consequently identifies $K\\otimes_B^{\\mathbf L}C$ with the termwise complex $K\\otimes_B C$ for every $K$. In particular this applies to $K=L_{B/A}$.",
+   "text": "Put $D=S^{-1}A$, $C=W^{-1}B$. The fraction formula $a/s\\mapsto f(a)/f(s)$ gives $D\\to C$, since $f(S)\\subseteq W$. By [lem-trf-localization-cotangent-vanishing], $L_{D/A}=L_{C/B}=0$; by [lem-weil-pbc-localization-flat], $C$ is flat over $B$. Apply [lem-trf-cotangent-zero-relative-square]. Its two canonical arrows are $L_{B/A}\\otimes_B^{\\mathbf L}C\\to L_{C/A}\\to L_{C/D}$, whose composite is the square comparison. Its flat chain representative is precisely the canonical map in the statement and is a quasi-isomorphism. For successive localizations, apply its composition clauses to the induced successive ring squares: both ordinary and derived composites agree with the direct comparison under the specified tensor associator.",
    "uses": [
+    "lem-trf-localization-cotangent-vanishing",
     "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-flat-tensor-exact",
-    "def-pc-module-kflat-complex",
-    "lem-pc-source-kflat-module-tensor-model"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SF (lemma-localize), replacement of derived tensor by ordinary tensor for a flat localization."
-   }
-  },
-  {
-   "text": "Apply the transitivity triangle [lem-trf-cotangent-transitivity-triangle] to $A\\to B\\to C$. The third term $L_{C/B}$ is zero by [lem-trf-localization-cotangent-vanishing]. By [lem-kun-distinguished-cone-zero], its first arrow is an isomorphism $L_{B/A}\\otimes_B^{\\mathbf L}C\\xrightarrow{\\sim}L_{C/A}$. It is the arrow induced by the standard ring functoriality, as specified in the transitivity statement. Use step 6 to replace the source by the ordinary localized complex.",
-   "uses": [
-    "lem-trf-cotangent-transitivity-triangle",
-    "lem-trf-localization-cotangent-vanishing",
-    "lem-kun-distinguished-cone-zero"
+    "lem-trf-cotangent-zero-relative-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08R3 (lemma-localize-on-top), proof from the transitivity triangle; Tag 08SF (lemma-localize), first comparison."
-   }
-  },
-  {
-   "text": "Apply the transitivity triangle [lem-trf-cotangent-transitivity-triangle] to $A\\to D\\to C$. By [lem-trf-localization-cotangent-vanishing], $L_{D/A}=0$. Its derived tensor with $C$ is zero as well, since it can be computed using the zero K-flat representative. Rotate the triangle: the third term is now this zero object shifted once. The zero-cone criterion [lem-kun-distinguished-cone-zero] gives an isomorphism $L_{C/A}\\xrightarrow{\\sim}L_{C/D}$. Compose it with step 7. The result is the canonical map $L_{B/A}\\otimes_B C\\to L_{C/D}$: both arrows come from the corresponding squares of ring maps, and [lem-trf-cotangent-resolution-coherence] says their composite is the standard map for $A\\to D$, $B\\to C$. This proves the localization assertion.",
-   "uses": [
-    "lem-trf-cotangent-transitivity-triangle",
-    "lem-trf-localization-cotangent-vanishing",
-    "lem-kun-distinguished-cone-zero",
-    "lem-trf-cotangent-resolution-coherence",
-    "def-pc-module-kflat-complex",
-    "lem-pc-source-kflat-module-tensor-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SF (lemma-localize), second comparison; equivalently transitivity for localization of the base using Tag 08R2(3)."
-   }
-  },
-  {
-   "text": "For successive localizations $B\\to C\\to C'$ and the matching successive localizations of $A$, extend the two comparison maps to $C'$. The tensor associativity identification sends $(x\\otimes c)\\otimes c'$ to $x\\otimes cc'$. On the standard simplicial resolution, both the resulting composite and the direct comparison are induced by the same composite square of ring maps. Their equality is the strict composition assertion of [lem-trf-cotangent-resolution-coherence], degreewise on $\\mathrm dp\\otimes b$. Hence they give the same map after localization of complexes. These are the quasi-isomorphisms proved in steps 7--8, so this equality is also the required compatibility of the localization identifications in derived categories.",
-   "uses": [
-    "lem-trf-cotangent-resolution-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SF (lemma-localize) together with Section 08QL (section-functoriality), standard maps for composite squares."
+    "place": "Tag 08SF (lemma-localize), via Tag 08R3 (lemma-localize-on-top)."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-module-kflat-complex",
-  "def-trf-geometric-morphism",
-  "lem-kun-distinguished-cone-zero",
-  "lem-pc-source-kflat-module-tensor-model",
-  "lem-trf-cotangent-resolution-coherence",
-  "lem-trf-cotangent-transitivity-triangle",
+  "lem-trf-cotangent-zero-relative-square",
+  "lem-trf-geometric-standard-differential-comparison",
   "lem-trf-localization-cotangent-vanishing",
-  "lem-trf-topos-inverse-image-differentials",
-  "lem-weil-pbc-flat-tensor-exact",
   "lem-weil-pbc-left-exact-site-inverse-image-tensor",
   "lem-weil-pbc-localization-flat",
   "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "lem-weil-pbc-sheafification-sets-exact",
   "lem-weil-pbc-topological-inverse-image-stalk"
  ],
@@ -285,51 +211,31 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-affine-cotangent-comparison",
   "worker": "stage1",
-  "summary": "Proved the sheafification and inverse-image assertions by comparing the standard resolutions, derived the stalk formula using a singleton inverse image, and obtained simultaneous ring localization from two natural transitivity triangles. Reused existing tensor, exactness, flatness, K-flat-model and zero-cone nodes; introduced only underived sheaf differentials pullback and full localization cotangent vanishing. The statement is unchanged.",
+  "summary": "Current-DAG repair of the returned landing refusal: the initial retained-packet dry run passed at dd5a0bf6709. Compared every parent field to the current shared node: only proof, proof_deps and split_report differ; the live nine-step proof equals original-proof.json. Re-read all current citation and child-definition statements and the Stacks source passages; all nine exact quotation records still match. Retained both required statement-only tasks and all ten logged searches. Made the section-map normalization explicit on differential tensors using the sheafification unit, preserving the unchanged theorem and proof route. The final assembly has 2789 characters. The delivery tool rebases this packet onto current origin; promotion of side completion into the live queue remains the maintainer action.",
   "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Sheaf cotangent stalks, section maps and ring localization.",
   "tool_uses": [
    {
-    "node": "def-pc-module-kflat-complex",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
-   },
-   {
-    "node": "lem-kun-distinguished-cone-zero",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
-   },
-   {
-    "node": "lem-pc-source-kflat-module-tensor-model",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-flat-tensor-exact",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
-   },
-   {
     "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
+    "why": "Generic sheaf exactness, inverse image or flat localization tool used for the same comparison route; it replaces no unit step."
    },
    {
     "node": "lem-weil-pbc-localization-flat",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
+    "why": "Generic sheaf exactness, inverse image or flat localization tool used for the same comparison route; it replaces no unit step."
    },
    {
     "node": "lem-weil-pbc-module-stalk-exact",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
+    "why": "Generic sheaf exactness, inverse image or flat localization tool used for the same comparison route; it replaces no unit step."
    },
    {
     "node": "lem-weil-pbc-sheafification-sets-exact",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
+    "why": "Generic sheaf exactness, inverse image or flat localization tool used for the same comparison route; it replaces no unit step."
    },
    {
     "node": "lem-weil-pbc-topological-inverse-image-stalk",
-    "why": "Generic sheaf, module, or derived-category tool used exactly as stated in the comparison of standard cotangent resolutions; no step of the unit route is replaced."
+    "why": "Generic sheaf exactness, inverse image or flat localization tool used for the same comparison route; it replaces no unit step."
    }
   ]
  },
@@ -346,12 +252,87 @@
   "lem-weil-pbc-topological-inverse-image-stalk"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-NU-64655d1e7",
-  "group": "NU",
+  "reviewer": "NT-cc-Q05-b62e47f4c",
+  "group": "Q05",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-64655d1e7 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes; checked all nine steps against cited statements and Stacks sources. Localization maps, coefficient categories, edge cases, duplicate candidates, and dependency acyclicity check out. No non-elementary step exceeds 2000 characters. Detailed checks and route-pivot snapshot limitation are recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-b62e47f4c (reviewer sub-agent of L); spot-checked: This is the fifth delivery of the human's 2026-10-21 re-split order. The four earlier heads (47ddae21, da41b227, ce287c9a, e1163ab8) were PASSed and each was returned at landing because the side completion had not been promoted to the live DAG. Compared with e1163ab8, both new nodes are byte-identical JSON. In the item, only step 1 changed: it adds that the sheafification unit sends dp⊗b to d(ηp)⊗ηb. That is correct, because the geometric child carries the universal differential and coefficient tensor maps to the corresponding maps. The statement, stmt_deps, proof_deps, source, blueprint and lean fields are unchanged. The re-split is compliant. Old steps 1-4 are now lem-trf-geometric-standard-differential-comparison, which covers arbitrary geometric morphisms including presheaf topoi. Old steps 6-9 are now lem-trf-cotangent-zero-relative-square, a criterion for any ring square with zero relative cotangent complexes. Old step 5 stays in full as parent step 3. The children are of comparable size (3996 and 2599 characters of old argument), both unsplit, and neither restates the item. The parent is a 2789-character assembly. Step checks: step 1, sheafification-sets-exact gives the geometric morphism from the trivial-topology site, and the unit gives the section maps (Stacks 08SW/08SX, cotangent.tex l.3198, l.3229). Step 2, left-exact-site-inverse-image-tensor applies because V↦u^{-1}V preserves finite limits and covers, and u^{-1} is exact (08SV, l.3178). Step 3, topological-inverse-image-stalk and module-stalk-exact hold for arbitrary ringed spaces (08T0, l.3354). Step 4, L_{D/A}=0 and L_{C/B}=0 with 0∈S allowed, and C is flat over B (08SF l.1660 via 08R3 l.1649). Both children are true. In the ring child, the triangle for A→B→B' has zero third term and the triangle for A→A'→B' has zero first term, so both arrows are isomorphisms. Tested on the identity square, zero rings, 0∈S, and k→k×k, which is not a tensor pushout. In the geometric child, F preserves finite products, so the adjunction restricts to algebras, which gives F(R[E])≅(FR)[FE]; iterating and applying the Ω and ⊗ comparisons gives the complex isomorphism. No duplicates: lem-trf-cotangent-augmentation-localization (fixed base, localizing B only) is a special case of the ring child; the lem-sfb standard-sheaf cotangent nodes use this item; site-inverse-image-composition-generators is a general site result. Batch 5: both newly cited sec-trace-formula nodes are generic cotangent-complex results from Stacks, with only definition stmt_deps or the base-cited cotangent-resolution-coherence. They are outside the trace-formula and Poincaré-duality assumptions, so they are accepted. No SGA is used, no target is weakened, there is no cycle, and the generic split_report tool_uses are accepted. Advisory: the ring child could list lem-trf-cotangent-transitivity-triangle in its stmt_deps. Maintainer note: promote the side completion of the item to the live DAG so this split can land; there is nothing for the worker to repair."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheafCotangentComparison",
+  "declaration": "TopCat.SheafCotangent.exists_comparison",
+  "declarations": [
+   "TopCat.SheafCotangent.sectionArrow",
+   "TopCat.SheafCotangent.restrictionSquare",
+   "TopCat.SheafCotangent.SectionModel",
+   "TopCat.SheafCotangent.sheafComplex",
+   "TopCat.SheafCotangent.sectionElement",
+   "TopCat.SheafCotangent.additiveComplex",
+   "TopCat.SheafCotangent.evaluationComplex",
+   "TopCat.SheafCotangent.differentialSheaf",
+   "TopCat.SheafCotangent.differentialSection",
+   "TopCat.SheafCotangent.freeAlgebraPresheaf",
+   "TopCat.SheafCotangent.freeSheafAlgebra",
+   "TopCat.SheafCotangent.freeSheafSection",
+   "TopCat.SheafCotangent.PolynomialSections",
+   "TopCat.SheafCotangent.polynomialSection",
+   "TopCat.SheafCotangent.StandardSheafModel",
+   "TopCat.SheafCotangent.SheafModel",
+   "TopCat.SheafCotangent.RingSquare",
+   "TopCat.SheafCotangent.inverseImageArrow",
+   "TopCat.SheafCotangent.inverseImageSquare",
+   "TopCat.SheafCotangent.sectionSquare",
+   "TopCat.SheafCotangent.pushforwardComplex",
+   "TopCat.SheafCotangent.inverseAdjunction",
+   "TopCat.SheafCotangent.pullbackComplex",
+   "TopCat.SheafCotangent.MapModel",
+   "TopCat.SheafCotangent.derivedModuleObject",
+   "TopCat.SheafCotangent.derivedModuleIso",
+   "TopCat.SheafCotangent.InverseModel",
+   "TopCat.SheafCotangent.identitySquare",
+   "TopCat.SheafCotangent.composeSquare",
+   "TopCat.SheafCotangent.stalkArrow",
+   "TopCat.SheafCotangent.germSquare",
+   "TopCat.SheafCotangent.stalkComplex",
+   "TopCat.SheafCotangent.moduleGerm",
+   "TopCat.SheafCotangent.StalkModel",
+   "TopCat.SheafCotangent.StalkRingMap",
+   "TopCat.SheafCotangent.inverseComposition",
+   "TopCat.SheafCotangent.baseChangeComplex",
+   "TopCat.SheafCotangent.baseChangeMap",
+   "TopCat.SheafCotangent.localizationArrow",
+   "TopCat.SheafCotangent.localizationSquare",
+   "TopCat.SheafCotangent.LocalizationModel",
+   "TopCat.SheafCotangent.Comparison",
+   "TopCat.SheafCotangent.exists_comparison"
+  ],
+  "file": "lean/Sheaf/Topology/SheafCotangentComparison.lean",
+  "statement": "theorem exists_comparison (C : Coherence.{u}) : Nonempty (Comparison C)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem is the complete structured comparison assertion. Helpers prescribe sectionwise standard coordinates, actual module sheafification, canonical section/germ maps and tensor adjoints; inverse-image and stalk comparisons include module-category derived isomorphisms with fixed underlying complex maps. No data are chosen from a mere existence theorem. Repair of H3 at 4b9173e067c0: freeSheafAlgebra is the actual sheafification of V ↦ A(V)[E(V)]; initialFreeIso and freeTermIso identify the standard terms with A[B] and A[P_n], normalized on coefficients and generators. The sectionwise-to-sheaf-iterate comparison is now explicit mathematical data, not true by the definition of the terms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c701a9c89",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 4b9173e067c0 (H3). The delta is exactly the prescribed repair: freeAlgebraPresheaf (V↦A(V)[E(V)], restriction acts on coefficients and variables), freeSheafAlgebra = its sheafification, freeSheafSection = the unit; StandardSheafModel gains initialFreeIso P_0≅A[B] and freeTermIso n : P_{n+1}≅A[P_n], each fixed on C a and X p (p any sectionwise section, through polynomialSection). Local sections of that form generate, so the isos are unique, and they exist by the free/sheafification universal property; with face_formula and degeneracy_formula the faces and degeneracies are the free evaluation and unit maps, so aP•≅P• (08SW) is no longer definitional. Same repair as the accepted Q88 3fa06f3f, whose landing timed out; live node still lean:null. Only the module, report and node lean field changed (3 declarations added); statement verbatim; declarations equal the file; one sorry with all nine proof steps. Section, inverse-image, stalk and localization clauses (QuasiIso, successive_tensor) and edge cases re-read and sound. No compile (no FIX); worker reports 41.5-51.6 s. Advisory: SheafDifferentials.* and standardComplex/standardComplexMap/tensorComplexAdj are plain defs owned by theorem nodes outside stmt_deps; compile time is near the 60 s landing limit, so retry a load timeout rather than return."
+ }
 }

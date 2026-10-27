@@ -71,11 +71,22 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-tower-geometric",
  "lean": {
-  "module": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "module": "Sheaf.SixFunctors.SemilinearProperOpenCore",
   "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Modules",
   "declarations": [
    "AlgebraicGeometry.ProEtale.SemilinearProperOpen.constantRingSheafify",
@@ -111,22 +122,15 @@
    "AlgebraicGeometry.ProEtale.SemilinearProperOpen.extension_additive",
    "AlgebraicGeometry.ProEtale.SemilinearProperOpen.extension_limits",
    "AlgebraicGeometry.ProEtale.SemilinearProperOpen.extension_colimits",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.J",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.levelTower",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.E",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPushOrdinary_existsUnique",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPullInv",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPullInv_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalP",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalR",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalR_isIso"
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.J"
   ],
   "statement": "abbrev Modules (X : Scheme.{u})",
   "branch": "newtargets-dag",
   "by": "NB",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Definition owner for the published constant-ring specialization and its canonical ordinary/derived operations and evaluation mates. Reuses the declarations verbatim; none is chosen from or depends on semilinearProperOpenMatePasting. Generic Systems/DS remain owned by def-coef-semilinear-system-models. No module or theorem is redefined."
+  "note": "Definition owner for the published constant-ring specialization and its canonical ordinary/derived operations and evaluation mates. Reuses the declarations verbatim; none is chosen from or depends on semilinearProperOpenMatePasting. Generic Systems/DS remain owned by def-coef-semilinear-system-models. No module or theorem is redefined. C2: unchanged core constructions now live in Sheaf.SixFunctors.SemilinearProperOpenCore and are publicly re-exported by the original item. Evaluation auxiliaries stay in the item and its existing main attachment; no statement or construction was changed.",
+  "file": "lean/Sheaf/SixFunctors/SemilinearProperOpenCore.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -145,33 +149,13 @@
   "note": "Re-delivery of the H2 RETURN of 4720c777bda7. VaryingRingGraphSummand.lean is byte-identical (sha256 fa3f906a…), so the earlier full substance check (graph_clopen, graphMap, theta, evaluation clause, finite_normalization, edge cases, universes, no hollow defs, docstrings) carries over. Item delta: stmt_dep lem-sf-semilinear-proper-open-mate-pasting replaced by new def node def-sp-semilinear-constant-ring-operations, plus the lean.note; nothing else changed. New node: kind definition, existing:true on unchanged Sheaf.SixFunctors.SemilinearProperOpenMatePasting; all 42 listed declarations exist there; statement 'abbrev Modules (X : Scheme.{u})' matches line 86 verbatim; TeX matches coefficients/ringSystem/Modules=Systems/Derived=DS/push/pull=leftAdjoint/adj/extension/J/E/evalPushOrdinary/evalPullInv/evalP/evalR; nothing is .choose of the theorem; 9 definition stmt_deps, all live, no theorem, no cycle; no competing def node on the module. nt_compile --json clean: SemilinearProperOpenMatePasting 30.4 s, item 8.8 s, exit 0, no warnings. Earlier advisories A1–A3 optional."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U4",
-  "result": "pass",
-  "landing": "20261021T061713-L-1815513",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalJInv_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalR_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma_evaluation",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma_identities",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma_scalarRestriction",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoJInv_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoPullInv_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoR_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.semilinearProperOpenMatePasting"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma_evaluation",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma_identities",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma_scalarRestriction",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoJInv_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoPullInv_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoR_isIso",
-   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.semilinearProperOpenMatePasting"
-  ]
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
  }
 }

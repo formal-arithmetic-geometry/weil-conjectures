@@ -1,0 +1,241 @@
+{
+ "id": "lem-pur-open-small-ringed-site-coherence",
+ "kind": "statement",
+ "title": "Coherent small open ringed-site realization and exact restriction",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $A$ a finite commutative ring, and $\\tau$ either the small etale or small pro-etale topology [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. Choose small representatives in a common coefficient universe [def-weil-size-convention]. For each open subscheme $U\\subseteq T$, write $A_U$ for the constant sheaf of rings [def-weil-pbc-constant-sheaf]. The functor $\\iota_U:(V\\to U)\\mapsto(V\\to T,V\\to U)$ is an equivalence of sites $U_\\tau\\simeq T_\\tau/U$ [def-pur-localized-ringed-site], identifying covering families in both directions. Under this equivalence there is a canonical isomorphism of ring sheaves $e_U:A_U\\xrightarrow{\\sim}A_T|_U$ which carries each constant section $a\\in A$ to the same constant section. Module restriction [def-weil-sheaf-of-modules-category] is the exact functor $r_U$ given by\n$$ (r_U F)(V\\to U)=F(V\\to T),\\qquad (r_U f)_{V\\to U}=f_{V\\to T}, $$\nwith scalar action transported along $e_U$. For $W\\subseteq U\\subseteq T$, the direct site equivalence and the successive site equivalences agree under relocalization $(T_\\tau/U)/W\\simeq T_\\tau/W$. If $e_{W/U}:A_W\\xrightarrow{\\sim}A_U|_W$ denotes the corresponding coefficient comparison on $U$, then\n$$ e_W=(e_U|_W)\\circ e_{W/U}. $$\nConsequently the canonical comparison $\\eta_{W,U}:r_{W/U}r_U\\xrightarrow{\\sim}r_W$ of exact module functors is sectionwise the identity, including scalar actions and morphisms; these comparisons satisfy the identity and associativity laws for further nested opens.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03EH, lemma-relocalize, with the ringed localization and constant-sheaf normalization specialized to both small scheme sites; agent-formulated coherence statement. Source-by-source details and old Steps 2--4 are retained in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Work with the common bounded representatives of [def-weil-size-convention], before passage to skeleta. For the etale site, [lem-weil-pbc-open-immersion-etale] makes $U\\hookrightarrow T$ an object, and [lem-weil-pbc-etale-site-localization-open] gives precisely $\\iota_U$ and preservation of covering families in both directions. For the pro-etale site, apply [lem-weil-proetale-weakly-etale-localization] to the open subscheme $U$: its clause (1) gives the same object and arrow formulas and the same covering identification. Transfer these equivalences to the chosen small representatives. Thus both cases identify sheaves by precomposition with $\\iota_U$; no change of universe is needed.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XZ (section-localize); small pro-etale specialization: proetale.tex, Tag 098K (definition-big-small-proetale), and more-morphisms.tex, Tags 094T/0951; reuse the existing localization statements."
+   }
+  },
+  {
+   "text": "Let $P_T$ be the constant ring presheaf with value $A$ and let $u_T:P_T\\to A_T$ be its sheafification unit [def-weil-pbc-constant-sheaf]. Its restriction to $T_\\tau/U$ is literally the constant ring presheaf there. Apply [lem-pur-ring-presheaf-sheafification-localization] to $P_T$. After Step 1 its isomorphism is $e_U:A_U\\simeq A_T|_U$, with $e_Uu_U=u_T|_U$. In particular it sends the constant section $a$ to the same constant section. The equivalence of sites preserves this sheafification description: a map from the constant presheaf into a sheaf on either side is exactly the same family of maps on the corresponding objects.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-pur-ring-presheaf-sheafification-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XR (lemma-when-shriek), 00XZ (section-localize); ring-valued sheafification comparison and its unit identity as stated in the cited node."
+   }
+  },
+  {
+   "text": "Restrict an $A_T$-module on the slice using [def-pur-localized-ringed-site], then use $\\iota_U$ and $e_U$ to regard it as an $A_U$-module. This gives exactly $(r_UF)(V\\to U)=F(V\\to T)$ and $(r_Uf)_{V\\to U}=f_{V\\to T}$, with action $b\\cdot x=e_U(b)x$. Restriction to the slice is exact by [lem-pur-site-restriction-module-adjunction-exact], applied to $\\mathcal C=T_\\tau$ and $\\mathcal O=A_T$. The two subsequent changes are equivalences: their inverses use the inverse site equivalence and $e_U^{-1}$. Hence kernels and cokernels transfer by their universal properties, and exactness is preserved. This proves exactness of the specified $r_U$, rather than sectionwise surjectivity on arbitrary objects.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX (definition-localize-ringed-site), section 03DH and Tag 03DJ (lemma-extension-by-zero-exact); restriction exactness in the cited module-adjunction theorem."
+   }
+  },
+  {
+   "text": "For $W\\subseteq U$, the relocalization of [def-pur-localized-ringed-site] sends $((V\\to U),V\\to W)$ to $V\\to W$; its inverse remembers the composite $V\\to W\\to U$. These are inverse on objects and arrows, and coverings are the same underlying families. Both direct and successive scheme-site identifications send $V\\to W$ to $V\\to T$ and leave its arrows unchanged. Thus their restrictions, including their sheafification units, agree under this relocalization.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03EH (lemma-relocalize), object formula and commutative triangle; ringed counterpart sites-modules.tex Tag 04IY (lemma-relocalize)."
+   }
+  },
+  {
+   "text": "Use the unit identity of [lem-pur-ring-presheaf-sheafification-localization] on both $T$ and $U$. Under Step 4,\n$$(e_U|_W)e_{W/U}u_W=(e_U|_W)(u_U|_W)=u_T|_W=e_Wu_W.$$\nSince $A_W$ is the sheafification of its constant ring presheaf, uniqueness in [def-weil-pbc-sheafification] gives $e_W=(e_U|_W)e_{W/U}$. This proves the coefficient cocycle on all sections, not just an equality tested on the global constants. For the identity inclusion the comparison has composite $u_U$ with the unit, so the same uniqueness makes it the identity.",
+   "uses": [
+    "lem-pur-ring-presheaf-sheafification-localization",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH (proposition-sheafification-adjoint), uniqueness, and Tag 03EH (lemma-relocalize); coefficient identity corresponding to sites-modules.tex Tag 04IY."
+   }
+  },
+  {
+   "text": "For $V\\to W$, both $r_{W/U}r_UF$ and $r_WF$ have the group $F(V\\to T)$ and the same restriction maps. Their $A_W(V)$-actions are respectively $b\\cdot x=(e_U|_W)(e_{W/U}(b))x$ and $b\\cdot x=e_W(b)x$, equal by Step 5. The identity on this group therefore defines the module isomorphism $\\eta_{W,U}$. The morphism formula in [def-pur-localized-ringed-site] shows naturality: both sides of its naturality square are $f_{V\\to T}$. For an identity inclusion the component is the identity. For a further open $Z\\subseteq W$, every component along either parenthesization of the three restrictions is $1_{F(V\\to T)}$ for $V\\to Z$; their scalar actions agree by applying the coefficient cocycle twice. The two composites are consequently equal, proving associativity.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IX (definition-localize-ringed-site), 04IY (lemma-relocalize); explicit verification of the omitted ring-map equality and its induced module coherences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-size-convention",
+  "lem-pur-ring-presheaf-sheafification-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Assembly of existing site equivalences, ring-sheafification normalization and exact module restriction; explicit unit-uniqueness proof of the cocycle. Tags 00XZ, 03EH, 00WH; sites-modules.tex Tags 04IX/04IY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open small etale and proetale sites identified with slice sites with constant coefficient rings and exact module restriction coherent for nested opens",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.etalePretopology, Algebra.isOpen_etaleLocus.  The overFunctor and overFunctorMap declarations give localized module restriction and its sectionwise compositor; CoverLifting gives the ring sheafification comparison. They do not identify both small sites with their slices and prove exactness and normalization/coherence for constant coefficients. Scheme.Modules.restrictFunctorComp is for structure-sheaf modules, not these small ringed sites. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of ringed small sites preserves constant sheaves and sectionwise exact module restriction with transitive coefficient comparisons",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent, ModuleCat.localizedModule_functor_map_exact, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.IsFinitePresentation, SheafOfModules.instAbelian, SheafOfModules.isFinitePresentation.  The overFunctor and overFunctorMap declarations give localized module restriction and its sectionwise compositor; CoverLifting gives the ring sheafification comparison. They do not identify both small sites with their slices and prove exactness and normalization/coherence for constant coefficients. Scheme.Modules.restrictFunctorComp is for structure-sheaf modules, not these small ringed sites. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "3 hits: SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv.  The overFunctor and overFunctorMap declarations give localized module restriction and its sectionwise compositor; CoverLifting gives the ring sheafification comparison. They do not identify both small sites with their slices and prove exactness and normalization/coherence for constant coefficients. Scheme.Modules.restrictFunctorComp is for structure-sheaf modules, not these small ringed sites. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|pushforwardContinuousSheafificationCompatibility",
+   "results": "22 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean.  The overFunctor and overFunctorMap declarations give localized module restriction and its sectionwise compositor; CoverLifting gives the ring sheafification comparison. They do not identify both small sites with their slices and prove exactness and normalization/coherence for constant coefficients. Scheme.Modules.restrictFunctorComp is for structure-sheaf modules, not these small ringed sites. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small etale and proetale site open restriction constant coefficient sheaf transitivity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.StructureSheaf.res_const', CategoryTheory.Sheaf.IsConstant.rec, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.IsConstant.recOn, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.IsConstant, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp.  The overFunctor and overFunctorMap declarations give localized module restriction and its sectionwise compositor; CoverLifting gives the ring sheafification comparison. They do not identify both small sites with their slices and prove exactness and normalization/coherence for constant coefficients. Scheme.Modules.restrictFunctorComp is for structure-sheaf modules, not these small ringed sites. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of ringed sites commutes with sheafification of constant rings and exact restriction of modules",
+   "results": "8 hits: PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toPresheaf_map_toSheafify, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.sheafificationCompForgetCompToPresheaf. No full match: these give module sheafification interfaces, not the two scheme-site equivalences together with normalized constant-ring and module coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-open-cover-cohomology-detection",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Open-site and constant-coefficient normalization needed for the inverse-diagonal identification; inherited Steps 2--4 of lem-pur-open-cover-cohomology-detection, via the degree-zero gluing and vector-integration comparison.",
+   "via": [
+    "lem-pur-open-cover-cohomology-detection",
+    "lem-pur-degree-zero-derived-map-gluing",
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-open-small-ringed-site-coherence",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its seven statement dependencies. Reused both small-site localization nodes, ring-valued sheafification compatibility, and exact module restriction. Proved the coefficient cocycle by the sheafification universal property, then wrote out scalar actions, naturality, identity and associativity. No new nodes, no Lean changes.",
+  "blueprint": "Provides the open-site/constant-coefficient coherence used by the inverse diagonal identification in cor-pur-dualizing-object-purity, through lem-pur-vector-integration-site-comparison, lem-pur-degree-zero-derived-map-gluing and lem-pur-open-cover-cohomology-detection.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site equivalence for weakly etale objects, specialized to open subschemes; the smooth-purity unit gives no substitute site-localization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-c24b6f0d1",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-c24b6f0d1 (reviewer sub-agent of L); spot-checked: Read the item, its six steps, every cited node's statement, the parent lem-pur-open-cover-cohomology-detection, and the old Q43 Steps 2-4 that the re-split moved into this node. The delivery keeps the statement, the 7 stmt_deps and all metadata byte-identical to the Q127 base and adds a 6-step proof with 0 new nodes; the 5 inherited search records are kept and 1 is added. Every argument of old Steps 2-4 is there in more detail. Step 1: open immersion etale, the etale slice equivalence (unsplit, gives the functor and the topology) and pro-etale weakly-etale localization (1) (covers opens), then transport to skeleta. Step 2: the ring-presheaf sheafification leaf gives e_U with e_U u_U = u_T|_U, and the leaf's universe hypothesis holds. Step 3: exactness of j_U^* from lem-pur-site-restriction-module-adjunction-exact with O=A_T (commutative); the changes along the site equivalence and e_U are equivalences, so exactness is kept. Steps 4-6 are elementary: relocalization; the cocycle (e_U|_W)e_{W/U}u_W = u_T|_W = e_W u_W, giving equality of sheaf maps by sheafification uniqueness; identity components with matching scalar actions, naturality and associativity. Tested U=T, W=U, U empty, A=0 and disconnected T. Stacks tags 00XZ, 00Y0, 03EH (checked at sites.tex l.5455), 00WH, 00XR, 03DH, 04IX, 03DJ, 04IY, 098K, 094T, 0951 and 02GP exist with the labels cited. No SGA. proof_deps equals the union of the uses. Every cited unit (sk-prop-cd, sk-def-sf-operations, sk-thm-p1, sk-def-sf-admissible, sk-thm-picard-semicon) is on the transitive route of sk-thm-smooth-purity. The declared tool use lem-weil-proetale-weakly-etale-localization is accepted. No duplicate: the pro-etale localization node covers one open in one topology, with no cocycle and no exactness, and is cited, not restated. Maintainer notes: the item has no lean_audit field, already missing on the base; review_split.py does not follow the snapshot's chapter symlinks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenSmallRingedSiteCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.Etale.purOpenSmallRingedSiteCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Etale.purOpenEquiv",
+   "AlgebraicGeometry.Scheme.Etale.purOpenComposition",
+   "AlgebraicGeometry.Scheme.Etale.purOpenCompositionContinuous",
+   "AlgebraicGeometry.Scheme.Etale.purOpenCompositionCocontinuous",
+   "AlgebraicGeometry.Scheme.Etale.purOpenRingComparison",
+   "AlgebraicGeometry.Scheme.Etale.purOpenRestriction",
+   "AlgebraicGeometry.Scheme.Etale.purOpenCompositionComp",
+   "AlgebraicGeometry.Scheme.Etale.purOpenCompositionId",
+   "AlgebraicGeometry.Scheme.Etale.purOpenRestrictionCongr",
+   "AlgebraicGeometry.Scheme.Etale.purOpenSmallRingedSiteCoherence",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenEquiv",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenComposition",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenCompositionContinuous",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenCompositionCocontinuous",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenRingComparison",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenCompositionComp",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenCompositionId",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenRestrictionCongr",
+   "AlgebraicGeometry.Scheme.ProEt.purOpenSmallRingedSiteCoherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSmallRingedSiteCoherence.lean",
+  "statement": "theorem purOpenSmallRingedSiteCoherence (A : CommRingCat.{u + 1}) [Finite A] : ∃ (eta : ∀ {W U T : Scheme.{u}} (k : W ⟶ U) (j : U ⟶ T) [IsOpenImmersion k] [IsOpenImmersion j], purOpenRestriction j A ⋙ purOpenRestriction k A ≅ purOpenRestriction (k ≫ j) A) (delta : ∀ T : Scheme.{u}, purOpenRestriction (𝟙 T) A ≅ 𝟭 _), (∀ {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j], (∀ (V : U.Etale) (S : Sieve V), S ∈ (U.smallEtaleTopology) V ↔ S.functorPushforward (purOpenEquiv j).functor ∈ ((T.smallEtaleTopology).over (Etale.mk j)) ((purOpenEquiv j).functor.obj V)) ∧ (∀ (V : Over (Etale.mk j)) (S : Sieve V), S ∈ ((T.smallEtaleTopology).over (Etale.mk j)) V ↔ S.functorPushforward (purOpenEquiv j).inverse ∈ (U.smallEtaleTopology) ((purOpenEquiv j).inverse.obj V)) ∧ (∀ V : U.Etale, (toSheafify (U.smallEtaleTopology) ((Functor.const U.Etaleᵒᵖ).obj (RingCat.of A))).app (op V) ≫ (purOpenRingComparison j A).hom.hom.app (op V) = (toSheafify (T.smallEtaleTopology) ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A))).app (op ((purOpenComposition j).obj V))) ∧ (purOpenRestriction j A).Additive ∧ PreservesFiniteLimits (purOpenRestriction j A) ∧ PreservesFiniteColimits (purOpenRestriction j A) ∧ (∀ (F : ringedSiteModules.{u + 1} ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A))) (V : U.Etale), (((purOpenRestriction j A).obj F).val.obj (op V) : Type (u + 1)) = (F.val.obj (op ((purOpenComposition j).obj V)) : Type (u + 1))) ∧ (∀ (F G : ringedSiteModules.{u + 1} ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A))) (f : F ⟶ G) (V : U.Etale), (((purOpenRestriction j A).map f).val.app (op V)).hom.toAddMonoidHom = (f.val.app (op ((purOpenComposition j).obj V))).hom.toAddMonoidHom) ∧ (∀ (F : ringedSiteModules.{u + 1} ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A))) (V : U.Etale) (b : ((constantSheaf (U.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A)).obj.obj (op V)) (x : ((purOpenRestriction j A).obj F).val.obj (op V)), (b • x) = (@SMul.smul _ (F.val.obj (op ((purOpenComposition j).obj V))) _ ((purOpenRingComparison j A).hom.hom.app (op V) b) x))) ∧ (∀ {W U T : Scheme.{u}} (k : W ⟶ U) (j : U ⟶ T) [IsOpenImmersion k] [IsOpenImmersion j] (V : W.Etale), ((purOpenCompositionComp k j).hom.app V).left = 𝟙 V.left) ∧ (∀ {W U T : Scheme.{u}} (k : W ⟶ U) (j : U ⟶ T) [IsOpenImmersion k] [IsOpenImmersion j] (V : W.Etale), (purOpenRingComparison (k ≫ j) A).hom.hom.app (op V) = ((purOpenRingComparison k A).hom.hom.app (op V) ≫ (purOpenRingComparison j A).hom.hom.app (op ((purOpenComposition k).obj V)) ≫ ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A)).obj.map ((purOpenCompositionComp k j).hom.app V).op)) ∧ (∀ (T : Scheme.{u}) (V : T.Etale), (purOpenRingComparison (𝟙 T) A).hom.hom.app (op V) = ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A)).obj.map ((purOpenCompositionId T).hom.app V).op) ∧ (∀ {W U T : Scheme.{u}} (k : W ⟶ U) (j : U ⟶ T) [IsOpenImmersion k] [IsOpenImmersion j] (F : ringedSiteModules.{u + 1} ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A))) (V : W.Etale) (x : ((purOpenRestriction k A).obj ((purOpenRestriction j A).obj F)).val.obj (op V)), ((eta k j).hom.app F).val.app (op V) x = F.val.map ((purOpenCompositionComp k j).hom.app V).op x) ∧ (∀ (T : Scheme.{u}) (F : ringedSiteModules.{u + 1} ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A))) (V : T.Etale) (x : ((purOpenRestriction (𝟙 T) A).obj F).val.obj (op V)), ((delta T).hom.app F).val.app (op V) x = F.val.map ((purOpenCompositionId T).inv.app V).op x) ∧ (∀ {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] (F : ringedSiteModules.{u + 1} ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A))), ((eta (𝟙 U) j).hom.app F ≫ (purOpenRestrictionCongr (Category.id_comp j) A).hom.app F) = ((delta U).hom.app ((purOpenRestriction j A).obj F)) ∧ ((eta j (𝟙 T)).hom.app F ≫ (purOpenRestrictionCongr (Category.comp_id j) A).hom.app F) = ((purOpenRestriction j A).map ((delta T).hom.app F))) ∧ (∀ {Z W U T : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ U) (j : U ⟶ T) [IsOpenImmersion h] [IsOpenImmersion k] [IsOpenImmersion j] (F : ringedSiteModules.{u + 1} ((constantSheaf (T.smallEtaleTopology) RingCat.{u + 1}).obj (RingCat.of A))), ((purOpenRestriction h A).map ((eta k j).hom.app F) ≫ (eta h (k ≫ j)).hom.app F) = ((eta h k).hom.app ((purOpenRestriction j A).obj F) ≫ (eta (h ≫ k) j).hom.app F ≫ (purOpenRestrictionCongr (Category.assoc h k j) A).hom.app F))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two namespaces state every clause separately for the small etale and pro-etale sites. Named adapters use the published slice equivalences, Mathlib constant sheafification compatibility, and actual module pushforward; no new site or coefficient notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47095438f",
+  "group": "NO",
+  "result": "pass",
+  "note": "Checked every clause of the node against both namespaces (etale, pro-etale): site equivalence = published overEquiv/sliceEquiv with the covering-sieve iff both ways; e_U = Mathlib pushforwardContinuousSheafificationCompatibility (canonical) with the toSheafify unit identity; r_U = SheafOfModules.pushforward e_U, with Additive + finite limits + finite colimits and the object/morphism/scalar formulas; Over.mapComp/mapId relocalization with .left = identity; cocycle on all sections; eta/delta existential but pinned sectionwise to F.val.map of the canonical transport; unit and associativity laws type-check. Universes u+1 consistent with the project; Finite A allows the zero ring; empty opens covered. Only the item node lean field and the one module changed; lean.statement verbatim; 20 declarations match the file; docstrings carry sources, blueprint tag and the 6 steps; exactly 2 sorrys. Advisory: overEquiv/sliceEquiv are owned by proof-dep theorem nodes not in stmt_deps (same as NY precedent); possibly unused private proof import; lean_audit already absent on base. No compile run (no file changed)."
+ }
+}

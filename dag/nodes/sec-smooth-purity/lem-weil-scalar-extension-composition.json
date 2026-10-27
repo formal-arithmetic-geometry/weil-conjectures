@@ -17,6 +17,18 @@
  ],
  "proof": [
   {
+   "text": "Construct the legacy ordinary sheaf scalar associator and unit in ScalarExtensionComposition from the normalized scalar extension/restriction adjunction. The completed coefficient maps compose and preserve identities by equality of all finite quotient projections. Restriction of scalars therefore has canonical composition and identity isomorphisms. Adjunction conjugation supplies their left-adjoint comparisons. The normalized adjunction unit gives the formulas on 1 tensor x; linearity and balancing extend them to all scalar generators. Sheafification and the tensor Hom universal property prove uniqueness. This supplies the ordinary comparisons reused by the intrinsic interface below.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03D7: scalar extension/restriction and adjunction; current blueprint sk-def-sp-scalar-extension, composition paragraph."
+   }
+  },
+  {
    "text": "Restrict the globally normalized scalarCompletion natural transformation to the intrinsic integral subcategory. Its derived-completeness clause makes every component invertible. To prove uniqueness from the good-complex equation, choose a K-flat resolution with flat terms of any derived object, cancel the completed representative comparison there, and transport equality along the resolution isomorphism using naturality. This constructs exactly sfIntegralOrdinaryComparison, without any finite-field structure on Y.",
    "uses": [
     "def-weil-rationalization-karoubi",
@@ -67,22 +79,36 @@
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-scalar-extension-composition.md",
     "place": "Proof, second paragraph (unit and associator coherence)"
    }
+  },
+  {
+   "text": "For the legacy interface, restrict the ordinary derived comparisons directly to the legacy full integral subcategories. Tensor their components and inverses with one in the raw Hom localization; induction on zero, addition and pure tensors proves naturality using the prescribed rational scalar Hom maps. On sheaf generators the inverse associator inserts 1 tensor x and the inverse unit inserts 1 tensor x, proving both unit equations and the pentagon. The exact-functor derived composition and identity comparisons preserve these equations; full-subcategory faithfulness and localization preserve them again. Conjugate by rationalOrdinaryComparison. Naturality moves the comparisons past maps, and adjacent inverse factors cancel. Choose these unit and composition families to prove exists_rationalScalarExtension_composition. No K-flat resolution is needed for this legacy argument because integralOrdinaryScalar_exact already supplies the exact ordinary functor.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Step (4): associativity on tensor representatives and its unit/pentagon coherence."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-pur-cochain-coefficient-arrows",
   "def-weil-rationalization-karoubi",
   "def-weil-derived-complete-integral-detailed",
   "lem-weil-normalized-scalar-completion",
   "lem-pc-kflat-resolution",
   "lem-weil-integral-constructible-triangulated",
   "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "def-weil-integral-scalar-extension",
   "lem-weil-integral-scalar-extension-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-scalar-extension-composition.md",
-  "place": "The original four-step unit route, implemented using the existing global normalized completion comparison, fully faithful conjugation, and exact-functor derived coherence; ordinary tensor inverse formulas are checked on sheafification generators."
+  "place": "The original four-step unit route, implemented using the existing global normalized completion comparison, fully faithful conjugation, and exact-functor derived coherence; ordinary tensor inverse formulas are checked on sheafification generators. Q7 also proves the preserved legacy interface by normalized scalar-extension adjunction, exact-functor derived coherence, full-subcategory restriction, and raw Hom tensor localization; its unit/pentagon equations are checked on inverse tensor generators before conjugation."
  },
  "mathlib_searches": [
   {
@@ -149,7 +175,18 @@
   "prop-weil-pbc-scalar-extension"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -262,12 +299,13 @@
   "note": "Owning-node repair of Q22: preserve legacy declarations by import and state canonical composition on the currently recorded sfRationalConstructibleCategory and sfRationalScalarExtension. The intrinsic comparison is uniquely fixed by the existing quotient-completion chain map; its conjugated ordinary balanced tensor associator and multiplication unit are localized componentwise, with both unit equations and the pentagon. No identification with the withdrawn integral predicate or finite-field structure on Y is assumed."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A6",
+  "group": "Q7",
   "result": "pass",
-  "landing": "20261020T051009-L-1522974",
-  "kind": "interface"
+  "landing": "20261025T143755-L-1085659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

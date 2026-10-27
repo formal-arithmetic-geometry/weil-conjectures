@@ -1,0 +1,345 @@
+{
+ "id": "lem-sfb-curve-graph-fixed-polynomial-cover",
+ "kind": "statement",
+ "title": "Affine numerical cover and fixed coordinate polynomial of curve isomorphism graphs",
+ "statement": "Let $S$ be a locally Noetherian scheme [pqf-def-locnoeth, def-pc-scheme], and let $X\\to S$ and $Y\\to S$ be flat, finitely presented projective morphisms [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-kun-projective] with geometric fibres of dimension at most one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Fix projective embeddings $i_X:X\\hookrightarrow\\mathbf P^a_S$ and $i_Y:Y\\hookrightarrow\\mathbf P^b_S$, and let $L=i_X^*\\mathcal O(1)$, $N=i_Y^*\\mathcal O(1)$ [def-sc-invertible-module, def-pc-module-pullback, def-pc-projective-space-twist]. There is an affine open cover $(U_i)$ of $S$ by Noetherian schemes such that the following hold on each $U=U_i$. The restrictions $X_U,Y_U$ are proper, flat and finitely presented [def-weil-proper-morphism]. There are integers $c_X,\\lambda_X,c_Y,\\lambda_Y$ such that for every field-valued point $t:\\operatorname{Spec}K\\to U$,\n$$\\chi(X_t,\\mathcal O_{X_t})=c_X,\\quad\\chi(X_t,L_t)=\\lambda_X,\\quad\\chi(Y_t,\\mathcal O_{Y_t})=c_Y,\\quad\\chi(Y_t,N_t)=\\lambda_Y$$\n[def-pc-euler-characteristic]. Set $d_X=\\lambda_X-c_X$, $d_Y=\\lambda_Y-c_Y$, $P_X(n)=nd_X+c_X$, $P_Y(n)=nd_Y+c_Y$. For all $n\\ge0$ these polynomials equal $\\chi(X_t,L_t^{\\otimes n})$ and $\\chi(Y_t,N_t^{\\otimes n})$. There is a closed immersion $j:E=X_U\\times_UY_U\\hookrightarrow\\mathbf P^{(a+1)(b+1)-1}_U$ whose pulled-back degree-one module is $M=\\operatorname{pr}_X^*L\\otimes\\operatorname{pr}_Y^*N$ [def-weil-closed-immersion, def-pc-fibre-product, def-pur-sheaf-tensor-product]. For every algebraically closed field $\\Omega$, every $t:\\operatorname{Spec}\\Omega\\to U$, and every isomorphism $f:X_t\\simeq Y_t$, its closed graph $\\Gamma_f\\subset E_t$ satisfies\n$$\\chi(\\Gamma_f,M_t^{\\otimes n}|_{\\Gamma_f})=R(n)=n(d_X+d_Y)+c_X=P_X(n)+P_Y(n)-P_Y(0)\\qquad(n\\ge0).$$\nMoreover $R$ is its coordinate Hilbert polynomial for $j_t$: for every homogeneous ideal defining $j_t(\\Gamma_f)$, the dimension over $\\Omega$ of its degree-$n$ coordinate quotient equals $R(n)$ for all sufficiently large $n$ [def-sfb-projective-coordinate-hilbert-polynomial]. If such an $f$ exists then $c_X=c_Y$. Empty fibres have Euler characteristic and polynomial zero; no reducedness, pure dimension, connectedness or nonemptiness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), numerical quasi-compactness paragraph and displayed graph Euler calculation; perfect.tex Tag 0B9T (lemma-chi-locally-constant-geometric); varieties.tex Tag 0AYX (lemma-degree-tensor-product); Segre and coordinate-ring comparison as recorded in the parent steps 1, 2 and 5."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist",
+  "def-pc-euler-characteristic",
+  "def-weil-closed-immersion",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "def-sfb-coordinate-quotient-grading"
+ ],
+ "proof": [
+  {
+   "text": "Apply the projective-twist data lemma to both specified embeddings. It gives properness of $X/S,Y/S$ and finite presentation and base-flatness of $\\mathcal O_X,L,\\mathcal O_Y,N$ (twists zero and one). Properness includes separatedness. Apply the graph-family base-change lemma with source $X$, target $Y$, and again with the roles reversed. In particular all restrictions to base opens and all field fibres are proper, flat and finitely presented, with separated targets. The induced twists are the pullbacks specified in the statement.",
+   "uses": [
+    "lem-sfb-flat-projective-twist-base-change-data",
+    "lem-sfb-hilbert-graph-family-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A (lemma-Mor-into-Hilb), base-change paragraph; constructions.tex Tag 01MT (lemma-apply-modules), twists; morphisms.tex Tag 01WC (lemma-locally-projective-proper)."
+   }
+  },
+  {
+   "text": "Apply Euler local constancy to the four modules of step 1. At each $s\\in S$ intersect their four constancy neighbourhoods. Refine this open by affine opens contained in a Noetherian affine neighbourhood of $s$ from local Noetherianity. Such opens are Noetherian by the open-subscheme lemma. They give the required cover. On each $U$ call the four values $c_X,\\lambda_X,c_Y,\\lambda_Y$. The arbitrary-base-change clause of Euler local constancy, applied to $\\operatorname{Spec}K\\to U$, gives exactly these values at every field-valued point, not only at residue-field points.",
+   "uses": [
+    "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T (lemma-chi-locally-constant-geometric); properties.tex Tags 01OV (definition-noetherian) and 01OW (lemma-locally-Noetherian)."
+   }
+  },
+  {
+   "text": "We check the dimension hypothesis on all field fibres. Fix $s\\in S$ and write $C=X_s$ or $Y_s$. If $C$ is empty, every scalar extension is empty. Otherwise the affine-cover scalar-extension lemma supplies matching affine covers $\\operatorname{Spec}A_i$ and $\\operatorname{Spec}(A_i\\otimes_{\\kappa(s)}F)$ for every field extension $F/\\kappa(s)$; each $A_i$ is of finite type and the scalar extension is nonempty. Ring dimension is unchanged by field extension. The affine-open-cover dimension formula, together with the equality of scheme topological dimension and the supremum of its local-ring dimensions, therefore shows that $C_F$, $C$, and $C_{\\overline{\\kappa(s)}}$ have the same dimension. The last is at most one by hypothesis. Every field-valued fibre over $s$ is such a $C_F$, so the degree-additivity theorem applies to it.",
+   "uses": [
+    "lem-pc-dim-base-change-affine-covers",
+    "lem-pc-dim-base-change",
+    "lem-pc-dimension-affine-open-cover",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3 (lemma-dimension-preserved-field-extension); properties.tex Tag 04MU (lemma-dimension); matching scalar-extension affine charts as in the cited affine-cover node."
+   }
+  },
+  {
+   "text": "For any proper field fibre $C$ and invertible module $A$, degree is $\\chi(C,A)-\\chi(C,\\mathcal O_C)$. In particular $\\deg(\\mathcal O_C)=0$. Tensor degree additivity and induction on $n$ give $\\deg(A^{\\otimes n})=n\\deg(A)$: the case $n=0$ is the preceding identity, and the successor case adds $\\deg(A)$. Thus $\\chi(C,A^{\\otimes n})=n\\deg(A)+\\chi(C,\\mathcal O_C)$ for every $n\\ge0$. Applying this to $L_t,N_t$ using steps 2 and 3 gives exactly $P_X(n)=nd_X+c_X$ and $P_Y(n)=nd_Y+c_Y$. On an empty fibre all cohomology vector spaces are zero, so this argument also gives the asserted zero polynomial.",
+   "uses": [
+    "def-pc-degree-line-bundle",
+    "lem-trf-curve-degree-tensor-additive",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYR (definition-degree-invertible-sheaf) and Tag 0AYX (lemma-degree-tensor-product), rank-one case and induction."
+   }
+  },
+  {
+   "text": "The product of the two base-changed embeddings is a closed immersion $E\\hookrightarrow\\mathbf P^a_U\\times_U\\mathbf P^b_U$ by the product clause of the closed-immersion permanence lemma; equivalently, it factors into two base changes of closed immersions, and a composite of closed immersions is a closed immersion by the same lemma. Compose with the Segre closed immersion to obtain $j$ into $\\mathbf P^{(a+1)(b+1)-1}_U$. For the Segre coordinates $z_{rs}=x_ry_s$, the transition ratio of the pulled-back degree-one generator is $(x_ry_s)/(x_{r'}y_{s'})=(x_r/x_{r'})(y_s/y_{s'})$. This is precisely the product of the transition ratios of the two degree-one modules. After pulling back to $E$, these local identifications glue to $j^*\\mathcal O(1)\\cong\\operatorname{pr}_X^*L\\otimes\\operatorname{pr}_Y^*N=M$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-chow-segre",
+    "def-chow-segre",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD (lemma-segre-embedding), construction by the sections $X_iY_j$; schemes.tex Tag 01JY (lemma-base-change-immersion); morphisms.tex Tag 01QO (lemma-characterize-closed-immersion)."
+   }
+  },
+  {
+   "text": "Fix $t:\\operatorname{Spec}\\Omega\\to U$ and $f:X_t\\simeq Y_t$. The graph-family lemma makes $(\\mathrm{id},f)$ a closed immersion; its first projection is an isomorphism $\\Gamma_f\\simeq X_t$. Pullback preserves tensor products and their powers, so the restriction of $M_t^{\\otimes n}$ to the graph identifies with $(L_t\\otimes f^*N_t)^{\\otimes n}$ on $X_t$. A scheme isomorphism identifies the sheaf categories by exact inverse functors and identifies global sections; applying these functors to an injective resolution identifies all cohomology groups. Consequently $\\chi(X_t,\\mathcal O)=\\chi(Y_t,\\mathcal O)$ and $\\chi(X_t,f^*N_t)=\\chi(Y_t,N_t)$; hence $c_X=c_Y$ and $\\deg(f^*N_t)=d_Y$. By step 4 and degree additivity the graph Euler characteristic is $n(d_X+d_Y)+c_X$. Finally $P_X(n)+P_Y(n)-P_Y(0)=nd_X+c_X+nd_Y+c_Y-c_Y=R(n)$.",
+   "uses": [
+    "lem-sfb-hilbert-graph-family-base-change",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pc-euler-characteristic",
+    "def-pc-degree-line-bundle",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), displayed graph Euler calculation; varieties.tex Tags 0AYR and 0AYX; quot.tex Tag 0D1A (lemma-Mor-into-Hilb)."
+   }
+  },
+  {
+   "text": "Base change preserves the closed immersion $j$, and the composite of $j_t$ with the graph closed immersion is a closed immersion by the composite clause of the closed-immersion permanence lemma. Let $J$ be any homogeneous ideal defining this embedded graph. Apply the coordinate-ring/Euler comparison to $\\Omega[z_0,\\ldots,z_{(a+1)(b+1)-1}]/J$. For all sufficiently large $n$ its degree-$n$ dimension equals the Euler characteristic of its $n$th twist. That twist is $M_t^{\\otimes n}|_{\\Gamma_f}$: the transition rule $e_r^{(n)}=(z_r/z_{r'})^ne_{r'}^{(n)}$ of the twisting modules gives $\\mathcal O(n)\\cong\\mathcal O(1)^{\\otimes n}$ on $\\mathbf P^{(a+1)(b+1)-1}_U$ and shows that the pullback of $\\mathcal O(1)$ along $\\mathbf P^{(a+1)(b+1)-1}_\\Omega\\to\\mathbf P^{(a+1)(b+1)-1}_U$ is $\\mathcal O(1)$; the pullback and iterated-pullback compatibilities with tensor products then carry the identification $j^*\\mathcal O(1)\\cong M$ of step 5 to $(j_t\\circ\\Gamma)^*\\mathcal O(n)\\cong M_t^{\\otimes n}|_{\\Gamma_f}$; step 6 identifies its Euler characteristic with $R(n)$. This proves the coordinate Hilbert-polynomial assertion for every such $J$, including nonsaturated ideals. The comparison explicitly allows the empty closed subscheme, for which the eventual dimensions and the polynomial vanish.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-sfb-projective-coordinate-ring-euler-polynomial",
+    "lem-weil-pbc-closed-immersion-products",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7 (lemma-recover-tail-graded-module) and Tag 01YS (lemma-coherent-projective), as assembled in the cited comparison node; varieties.tex Tag 08AE (lemma-hilbert-polynomial-H0)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-projective-twist-base-change-data",
+  "lem-sfb-hilbert-graph-family-base-change",
+  "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-pc-degree-line-bundle",
+  "lem-trf-curve-degree-tensor-additive",
+  "def-pc-euler-characteristic",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-chow-segre",
+  "def-chow-segre",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-projective-coordinate-ring-euler-polynomial",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), numerical quasi-compactness paragraph and graph calculation, expanded with the cited Stacks dimension, Segre and coordinate-tail inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Polarized flat projective curves admit affine base neighborhoods with constant Euler characteristics and a fixed Hilbert polynomial for every isomorphism graph",
+   "results": "{\"t\": \"2026-10-22T05:56:19Z\", \"tool\": \"leanfinder\", \"query\": \"Polarized flat projective curves admit affine base neighborhoods with constant Euler characteristics and a fixed Hilbert polynomial for every isomorphism graph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine\", \"WeierstrassCurve\", \"WeierstrassCurve.toAffine\", \"WeierstrassCurve.Affine.CoordinateRing.instSubsingleton\", \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"WeierstrassCurve.Projective\", \"WeierstrassCurve.Projective.nonsingularLift_some\", \"WeierstrassCurve.Projective.nonsingular_some\"], \"digest\": \"df85b07d19b6c3ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass equations and Polynomial.hilbertPoly concern different objects; no fibre Euler constancy or graph Hilbert polynomial theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hilbert polynomial of a graph of an isomorphism of projective curves is the sum of the two Hilbert polynomials minus the constant Euler characteristic",
+   "results": "{\"t\": \"2026-10-22T05:56:19Z\", \"tool\": \"leanfinder\", \"query\": \"The Hilbert polynomial of a graph of an isomorphism of projective curves is the sum of the two Hilbert polynomials minus the constant Euler characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"WeierstrassCurve.Affine.addPolynomial\", \"WeierstrassCurve.Affine.C_addPolynomial\", \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope\", \"WeierstrassCurve.Affine.addPolynomial_slope\", \"WeierstrassCurve.Projective.map_polynomialZ\", \"WeierstrassCurve.Projective.map_polynomial\"], \"digest\": \"ba1c98114ccde8c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass equations and Polynomial.hilbertPoly concern different objects; no fibre Euler constancy or graph Hilbert polynomial theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"euler\"",
+   "results": "{\"t\": \"2026-10-22T05:56:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"euler\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass equations and Polynomial.hilbertPoly concern different objects; no fibre Euler constancy or graph Hilbert polynomial theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertPolynomial|hilbertPolynomial|EulerCharacteristic|eulerCharacteristic",
+   "results": "{\"t\": \"2026-10-22T05:56:03Z\", \"tool\": \"grep\", \"query\": \"HilbertPolynomial|hilbertPolynomial|EulerCharacteristic|eulerCharacteristic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass equations and Polynomial.hilbertPoly concern different objects; no fibre Euler constancy or graph Hilbert polynomial theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graphs of isomorphisms of polarized proper flat curves have locally constant fixed numerical Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T05:56:03Z\", \"tool\": \"leansearch\", \"query\": \"The graphs of isomorphisms of polarized proper flat curves have locally constant fixed numerical Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"Polynomial.hilbertPoly_linearMap\", \"CategoryTheory.RepresentablyFlat.of_iso\", \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"Polynomial.hilbertPoly_smul\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.respectsIso\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\"], \"digest\": \"d1307fa7ff65b4fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass equations and Polynomial.hilbertPoly concern different objects; no fibre Euler constancy or graph Hilbert polynomial theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"euler\"",
+   "results": "{\"t\": \"2026-10-23T04:10:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"euler\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give flatness/base-change properties, combinatorial polynomial transforms or Weierstrass curves, not fibre Euler constancy and the graph coordinate Hilbert polynomial."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertPolynomial|hilbertPolynomial|eulerCharacteristic|eulerChar",
+   "results": "{\"t\": \"2026-10-23T04:10:47Z\", \"tool\": \"grep\", \"query\": \"HilbertPolynomial|hilbertPolynomial|eulerCharacteristic|eulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give flatness/base-change properties, combinatorial polynomial transforms or Weierstrass curves, not fibre Euler constancy and the graph coordinate Hilbert polynomial."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat projective families of curves have locally constant Euler characteristics and isomorphism graphs with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-23T04:10:51Z\", \"tool\": \"leanfinder\", \"query\": \"Flat projective families of curves have locally constant Euler characteristics and isomorphism graphs with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"35d9ef43980cbb37\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give flatness/base-change properties, combinatorial polynomial transforms or Weierstrass curves, not fibre Euler constancy and the graph coordinate Hilbert polynomial."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic of a tensor product of line bundles on proper curves gives the Hilbert polynomial of isomorphism graphs",
+   "results": "{\"t\": \"2026-10-23T04:10:54Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristic of a tensor product of line bundles on proper curves gives the Hilbert polynomial of isomorphism graphs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"IncidenceAlgebra.eulerChar_prod\", \"FDRep.char_tensor\", \"IncidenceAlgebra.eulerChar\", \"Polynomial.hilbertPoly_mul_one_sub_pow_add\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"LinearMap.polyCharpolyAux_map_aeval\", \"LinearMap.charpoly\"], \"digest\": \"806d86bd4b07c2b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give flatness/base-change properties, combinatorial polynomial transforms or Weierstrass curves, not fibre Euler constancy and the graph coordinate Hilbert polynomial."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert polynomial of the graph of an isomorphism of proper curves equals the sum of their polarized Hilbert polynomials minus their Euler characteristic",
+   "results": "{\"t\": \"2026-10-23T04:12:17Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert polynomial of the graph of an isomorphism of proper curves equals the sum of their polarized Hilbert polynomials minus their Euler characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_linearMap\", \"Polynomial.hilbertPoly_X_pow_succ\", \"Polynomial.hilbertPoly_succ\", \"Polynomial.hilbertPoly_mul_one_sub_succ\", \"Polynomial.hilbertPoly_add_left\", \"Polynomial.hilbertPoly_mul_one_sub_pow_add\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\"], \"digest\": \"9ea46196f8652cec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give flatness/base-change properties, combinatorial polynomial transforms or Weierstrass curves, not fibre Euler constancy and the graph coordinate Hilbert polynomial."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-curve-isom-graphs",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; Tag 0DSQ (lemma-curves-diagonal-separated-fp), numerical quasi-compactness paragraph and displayed graph Euler calculation; perfect.tex Tag 0B9T (lemma-chi-locally-constant-geometric); varieties.tex Tag 0AYX (lemma-degree-tensor-product); Segre and coordinate-ring comparison as recorded in the parent steps 1, 2 and 5.",
+   "via": [
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-graph-fixed-polynomial-cover",
+  "worker": "stage1",
+  "summary": "Split by the Stacks 0DSQ numerical proof using existing nodes only. Verified four Euler-constancy inputs and all field fibres; wrote the tensor-power induction, graph Euler calculation, Segre transition functions and nonsaturated coordinate-ideal comparison. Statement and all imported metadata are unchanged; no new nodes. Actual current Mathlib searches are appended.",
+  "blueprint": "The inherited null ancestor was confirmed by blueprint_refs.py ancestor. This is the numerical prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), through stable-pointed curve Isom rigidity: parent lem-sfb-projective-curve-isom-graphs old steps 1, 2 and 5. The seven steps realize the Noetherian affine numerical cover, product polarization, graph polynomial and coordinate comparison on the inherited Stacks 0DSQ route. Whole-blueprint searches for Hilbert polynomial, Segre and Euler characteristic found no statement of this complete item.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-dim-base-change-affine-covers",
+    "why": "Scalar-extension affine covers for finite type field fibres, a general tool not supplied by the unit."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Only its first, finite-type-algebra clause: dimension is unchanged by arbitrary field extension; not its curve clause."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Computes dimension from the matching affine covers; a generic dimension tool."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Identifies the local-ring dimension used by the affine-cover node with the topological dimension of the item."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Rank-one degree additivity on arbitrary proper schemes of dimension at most one, exactly the Stacks 0DSQ numerical route."
+   },
+   {
+    "node": "lem-chow-segre",
+    "why": "The standard Segre closed immersion for the fixed product polarization; no alteration route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Canonical pullback, tensor and iterated-pullback identifications for the two line bundles on a graph."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Composite and product of closed immersions (Stacks 01QN/01JY family), a generic permanence tool; added by the reviewer Q12 in place of an inline affine-chart argument in steps 5 and 7."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-chow-segre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-66d5b015f",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-66d5b015f (reviewer sub-agent of L); spot-checked: Read in full: the item, the 7 steps and the statement of every cited node. Sources read: Stacks 0DSQ (moduli-curves.tex quasi-compactness paragraph: Q+P-P(0) via 0AYR/0AYX), 0B9T (perfect.tex), 0AYX (varieties.tex). There are no new nodes and the statement is unchanged. The item is NB's statement-only node holding old steps 1, 2 and 5 of lem-sfb-projective-curve-isom-graphs, and all retained arguments reappear. Step checks: (1) the twist-data lemma and the graph-family lemma give proper, fp and flat for O_X, L, O_Y and N. (2) The four 0B9T constancies on Noetherian affine refinements, with the base-change clause at S'=Spec K, cover all field points. (3) The scalar-extension affine covers, dim-base-change (ring clause), the affine-cover dimension formula and the local-ring bridge give dim ≤1 on every field fibre; the empty case is handled. (4) deg A^n = n deg A by induction on 0AYX. (5) The Segre transition ratios give j*O(1) ≅ M. (6) The graph is closed, the pullback (L⊗f*N)^n transports along f, c_X=c_Y, and R = n(dX+dY)+cX. (7) The coordinate-ring/Euler node covers any non-saturated J and the empty case. Small cases checked: P^1 diagonal conic 2n+1, two points, double line, empty, disconnected. FIX 1 (C1, steps 5 and 7): the closedness of the composite/product closed immersion was argued by an inline 'composite of surjective ring maps' chart argument that silently uses 01IN. It now cites the existing lem-weil-pbc-closed-immersion-products (composite and product clauses; 11-node closure, no trf, no cycle). FIX 2 (step 7): 'by step 5 that twist is M_t^n|Γ' skipped O(n) ≅ O(1)^n and the pullback of O(1) from P^N_U to P^N_Ω. Both are now written out with def-pc-projective-space-twist and lem-weil-pbc-invertible-pullback-tensor. Batch-5: lem-trf-curve-degree-tensor-additive is 0AYX general curve-degree theory; its closure has only sk-i-curve-zero 0AYV/0AYW/01XZ preparation nodes, which neither assumption gives and which are not proof steps of either, so accepted. lem-sfb-proper-flat-sheaf-euler-local-constancy reaches only def-trf-schematically-dense-open (a definition), trf affine-open limit descent and pod 01KU separated base change, all generic, so accepted. The 7 recorded tool_uses are accepted, plus lem-weil-pbc-closed-immersion-products. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-curve-graph-fixed-polynomial-cover.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveGraphFixedPolynomialCover",
+  "declaration": "AlgebraicGeometry.CurveGraphFixedPolynomial.exists_affine_numerical_cover",
+  "declarations": [
+   "AlgebraicGeometry.CurveGraphFixedPolynomial.fibreEuler",
+   "AlgebraicGeometry.CurveGraphFixedPolynomial.HasFibreValues",
+   "AlgebraicGeometry.CurveGraphFixedPolynomial.HasGraphValues",
+   "AlgebraicGeometry.CurveGraphFixedPolynomial.HasLocalValues",
+   "AlgebraicGeometry.CurveGraphFixedPolynomial.exists_affine_numerical_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveGraphFixedPolynomialCover.lean",
+  "statement": "theorem exists_affine_numerical_cover {S X Y : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) (g : Y ⟶ S) [IsHProjective f] [IsHProjective g] [Flat f] [Flat g] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (a b : ℕ) (iX : X ⟶ ℙ(ULift.{u} (Fin (a + 1)); S)) (iY : Y ⟶ ℙ(ULift.{u} (Fin (b + 1)); S)) [IsClosedImmersion iX] [IsClosedImmersion iY] (hiX : iX ≫ (ℙ(ULift.{u} (Fin (a + 1)); S) ↘ S) = f) (hiY : iY ≫ (ℙ(ULift.{u} (Fin (b + 1)); S) ↘ S) = g) (hX : ∀ s : S, topologicalKrullDim ↥(pullback f (ProjectiveHilbertPolynomial.geometricPoint S s) : Scheme.{u}) ≤ 1) (hY : ∀ s : S, topologicalKrullDim ↥(pullback g (ProjectiveHilbertPolynomial.geometricPoint S s) : Scheme.{u}) ≤ 1) : ∃ (I : Type u) (U : I → S.Opens), (⨆ i, U i) = ⊤ ∧ ∀ i : I, IsAffineOpen (U i) ∧ IsNoetherian (U i).toScheme ∧ HasLocalValues (pullback.snd f (U i).ι) (pullback.snd g (U i).ι) ((Scheme.Modules.tensorPullback (pullback.fst f (U i).ι ≫ iX)).obj (ProjectiveSpace.twist (ULift.{u} (Fin (a + 1))) S 1)) ((Scheme.Modules.tensorPullback (pullback.fst g (U i).ι ≫ iY)).obj (ProjectiveSpace.twist (ULift.{u} (Fin (b + 1))) S 1)) a b",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four real helper definitions expand only this node’s clauses: explicit field-fibre Euler characteristic, two numerical values and their linear polynomial, graph values, and the conjunction over one base open. Graphs use their source X_t with both projections fixed. The coordinate clause quantifies every homogeneous ideal presentation, including nonsaturated ones, using the existing induced quotient grading. The polynomial-Proj/relative-projective-space identification is supplied as an over-field isomorphism, with no assumption on the input. No new theorem other than this node is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-842153a21",
+  "group": "Q14",
+  "result": "pass",
+  "note": "First S2 delivery for this item. Only the item's lean record and stmt_deps changed (checked against side-live); the added landed def-sfb-coordinate-quotient-grading is allowed. Statement field is verbatim from the file; the 4 helpers are real expressions, the theorem proof is sorry, docstrings and 7-step proof are present, longest line 93, imports follow the rule. Clause check against the node and Stacks 0DSQ/0B9T/0AYX: locally Noetherian S; f, g projective, flat, lfp+qc+qs; fixed closed embeddings with structure equations; geometric-fibre dimension <=1 via the recorded geometricPoint. Affine Noetherian cover. On each open: restrictions proper/flat/fp; four integers fixed before every field point K:Type u, with chi(L^n)=n(l-c)+c and zero on empty fibres; closed immersion j into P^{(a+1)(b+1)-1}_U with Nonempty j^*O(1) iso prX^*L tensor prY^*N; R pinned as (dX+dY)X+cX = PX+PY-PY(0). For every algebraically closed K, t and e : X_t iso Y_t over Spec K: cX=cY; gamma is a closed immersion fixed uniquely by its 3 projections (so it is the graph); graph Euler n(dX+dY)+cX; IsCoordinatePolynomial on gamma composed with baseChangeEmbedding; every homogeneous ideal J (including nonsaturated) gives the eventual dimension R(n); empty graph gives R=0. The existential bridge q : Proj.projectiveSpaceOverAffine iso P(;Spec K) over K is accepted: no canonical iso exists (TODO in ProjectiveSpace.lean:73) and Hilbert functions are PGL-invariant, so the clause does not depend on q and is not vacuous. Edge cases: empty S, empty or mismatched fibres, n=0, a=b=0, nonreduced/disconnected fibres, universes. No compile (no file changed); the worker reports a clean compile in 2.4 s. Advisory: Proj.projectiveSpaceOverAffine and projectiveSpaceOverAffineToSpec (owner def-nagata-affine-proj) and coordinateQuotientImmersion (plain def owned by theorem node lem-sfb-projective-coordinate-ring-euler-polynomial) are not in stmt_deps; an S2 fix cannot change stmt_deps; maintainer may add def-nagata-affine-proj."
+ }
+}

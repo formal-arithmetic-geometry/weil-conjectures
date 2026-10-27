@@ -1,0 +1,282 @@
+{
+ "id": "det-def-sfb-pullback-from-point",
+ "kind": "definition",
+ "title": "Pulling back from the point",
+ "statement": "Let $*_{\\mathrm{proét}}$ be the pro-étale site of a point: profinite sets with\nthe coherent topology ([det-def-sfb-condensed-ring]). For a scheme $X$ let\n$X_{\\mathrm{proét}}$ be its small pro-étale site ([def-weil-pbc-proetale-site]),\nand let $\\pi_X\\colon X\\to\\Spec\\Z$ be the structure morphism. Since $\\Spec\\Z$ is\nterminal, $\\pi_Y\\circ f=\\pi_X$ for every morphism $f\\colon X\\to Y$.\n\n1. **Profinite sets as pro-étale schemes.** For a profinite set $S$, let\n   $LC(S,\\Z)$ be the ring of locally constant functions $S\\to\\Z$. If $S_i$ runs\n   over the finite quotients of $S$, then\n   $$\n   \\Spec LC(S,\\Z)=\\lim_i\\coprod_{S_i}\\Spec\\Z .\n   $$\n   The morphism $\\Spec LC(S,\\Z)\\to\\Spec\\Z$ is weakly étale. Precomposition\n   makes $S\\mapsto\\Spec LC(S,\\Z)$ a functor\n   $$\n   u\\colon *_{\\mathrm{proét}}\\longrightarrow(\\Spec\\Z)_{\\mathrm{proét}} .\n   $$\n   It preserves finite limits, it sends finite jointly surjective families to\n   pro-étale coverings, and it is continuous.\n\n2. **Test objects.** For a scheme $X$ and a profinite set $S$, put\n   $$\n   X[S]:=\\Spec LC(S,\\Z)\\times_{\\Spec\\Z}X=\\lim_i\\coprod_{S_i}X .\n   $$\n   The functor $u_X\\colon *_{\\mathrm{proét}}\\to X_{\\mathrm{proét}}$,\n   $S\\mapsto X[S]$, is $u$ followed by base change along $\\pi_X$.\n\n3. **Inverse image from the point.** Let\n   $p_*\\colon\\Sh((\\Spec\\Z)_{\\mathrm{proét}},\\Ab)\\to\\Sh(*_{\\mathrm{proét}},\\Ab)$,\n   $(p_*G)(S)=G(\\Spec LC(S,\\Z))$, be restriction along $u$. Define\n   $$\n   p^*:=\\mathrm{sheafify}\\circ\\operatorname{Lan}_{u^{\\mathrm{op}}}\\colon\n   \\Sh(*_{\\mathrm{proét}},\\Ab)\\longrightarrow\\Sh((\\Spec\\Z)_{\\mathrm{proét}},\\Ab).\n   $$\n   Then $p^*$ is left adjoint to $p_*$. For the tensor products of\n   [lem-weil-pbc-sheaf-tensor-closed], $p^*$ is strong monoidal and braided.\n\n4. **Inverse image to $X$.** Define\n   $$\n   p_X^*:=\\pi_X^*\\circ p^*\\colon\n   \\Sh(*_{\\mathrm{proét}},\\Ab)\\longrightarrow\\Sh(X_{\\mathrm{proét}},\\Ab),\n   $$\n   where $\\pi_X^*$ is the pullback of [def-sfb-finite-upper-star]\n   for $\\mathcal A=\\Ab$. It is strong monoidal and braided, since $p^*$ and\n   $\\pi_X^*$ are ([def-sfb-finite-upper-star-monoidal],\n   [lem-sfb-finite-upper-star-braided]). It is a left\n   adjoint, with right adjoint $G\\mapsto\\bigl(S\\mapsto G(X[S])\\bigr)$; so\n   $p_X^*$ is the inverse image along $u_X$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-pullback-from-point.md",
+  "place": "node det-def-sfb-pullback-from-point, order 1084"
+ },
+ "stmt_deps": [
+  "det-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-sfb-finite-upper-star-braided",
+  "def-sfb-profinite-to-proetale",
+  "def-sfb-profinite-test-objects",
+  "def-sfb-point-lower-star",
+  "def-sfb-point-upper-star",
+  "def-sfb-upper-star-from-point"
+ ],
+ "proof": [
+  {
+   "text": "The structure maps satisfy $\\pi_Y\\circ f=\\pi_X$, since $\\Spec\\Z$ is terminal ([lem-weil-pbc-spec-z-terminal]): both are the unique morphism $X\\to\\Spec\\Z$. For $u$, use [def-sfb-profinite-to-proetale]: its map on $g:S'\\to S$ is induced by $h\\mapsto h\\circ g$. Identity and composition follow from precomposition and the contravariance of $\\Spec$. The weakly étale assertion is [lem-sfb-lc-weakly-etale]. Preservation of finite limits, finite jointly surjective covers, and sheaves under restriction are respectively [lem-sfb-profinite-to-proetale-finite-limits], [lem-sfb-profinite-to-proetale-cover-preserving], and [lem-sfb-profinite-to-proetale-continuous].",
+   "uses": [
+    "lem-weil-pbc-spec-z-terminal",
+    "def-sfb-profinite-to-proetale",
+    "lem-sfb-lc-weakly-etale",
+    "lem-sfb-profinite-to-proetale-finite-limits",
+    "lem-sfb-profinite-to-proetale-cover-preserving",
+    "lem-sfb-profinite-to-proetale-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-pullback-from-point.proof.md",
+    "place": "part 1; first paragraph"
+   }
+  },
+  {
+   "text": "Use [def-sfb-profinite-test-objects] for $u_X$ and its formula $X[S]=\\lim_i\\coprod_{S_i}X$. At $X=\\Spec\\Z$, the canonical identification $\\Spec LC(S,\\Z)\\times_{\\Spec\\Z}\\Spec\\Z\\cong\\Spec LC(S,\\Z)$ identifies its finite-quotient diagram with $\\coprod_{S_i}\\Spec\\Z$. Thus the same formula also gives the inverse-limit identity in part 1. These identities mean the canonical isomorphisms of schemes, compatible with maps of finite quotients.",
+   "uses": [
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-pullback-from-point.proof.md",
+    "place": "parts 1 and 2; second paragraph, including the absolute specialization"
+   }
+  },
+  {
+   "text": "Take $p_*$ to be restriction, as in [def-sfb-point-lower-star]. By [lem-sfb-point-lan-exists], the underlying abelian presheaf of every condensed abelian group has the required left Kan extension. Hence [def-sfb-point-upper-star] constructs the stated functor by that Kan extension followed by sheafification. The natural bijections $\\Hom(p^*F,G)\\cong\\Hom(F,p_*G)$ are [def-sfb-point-adjunction].",
+   "uses": [
+    "def-sfb-point-lower-star",
+    "lem-sfb-point-lan-exists",
+    "def-sfb-point-upper-star",
+    "def-sfb-point-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-pullback-from-point.proof.md",
+    "place": "part 3; third paragraph, construction and adjunction"
+   }
+  },
+  {
+   "text": "For the sheafified objectwise tensor product over $\\Z$, [lem-sfb-point-upper-star-unit] supplies the lax structure on $p_*$, the adjoint oplax structure on $p^*$ and its invertible unit comparison. [lem-sfb-point-upper-star-tensor] supplies its invertible tensor comparisons. [lem-sfb-point-upper-star-braided] states that these give a strong monoidal functor compatible with symmetry. These three nodes use the tensor product of [sk-def-sfb-sheaf-tensor] for $\\mathcal A=\\Ab$; it is the one of [lem-weil-pbc-sheaf-tensor-closed] in the item: both are sheafifications of the objectwise abelian-group tensor product, with sheafified constant unit $\\Z$.",
+   "uses": [
+    "lem-sfb-point-upper-star-unit",
+    "lem-sfb-point-upper-star-tensor",
+    "lem-sfb-point-upper-star-braided",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-pullback-from-point.proof.md",
+    "place": "part 3; third paragraph, monoidal and braided structures"
+   }
+  },
+  {
+   "text": "Define $p_X^*=\\pi_X^*\\circ p^*$ using [def-sfb-upper-star-from-point], which also supplies its strong monoidal braided structure for the same sheaf tensor product. At $g=\\pi_X$ and $\\mathcal A=\\Ab$, [def-sfb-finite-upper-lower-star-adjunction] and [def-sfb-point-adjunction] give, naturally in $F,G$,\n$$\\Hom(\\pi_X^*p^*F,G)\\cong\\Hom(p^*F,\\pi_{X*}G)\\cong\\Hom(F,p_*\\pi_{X*}G).$$\nThis proves the claimed adjunction without any finiteness or properness assumption on $X$.",
+   "uses": [
+    "def-sfb-upper-star-from-point",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-point-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-pullback-from-point.proof.md",
+    "place": "part 4; final paragraph, definition and composite adjunction"
+   }
+  },
+  {
+   "text": "By [def-sfb-point-lower-star], [def-sfb-finite-lower-star] and [def-sfb-profinite-test-objects],\n$$(p_*\\pi_{X*}G)(S)=(\\pi_{X*}G)(\\Spec LC(S,\\Z))=G(\\Spec LC(S,\\Z)\\times_{\\Spec\\Z}X)=G(X[S]).$$\nFor $g:S'\\to S$, both restriction maps are $G$ applied to the base change of the map induced by $h\\mapsto h\\circ g$; for a sheaf map $G\\to H$, both maps at $S$ are its component at $X[S]$. Thus this is an identification of functors, natural in both variables. Its values are sheaves, since the composite direct image is sheaf-valued. The preceding adjunction therefore makes $p_X^*$ inverse image along $u_X$.",
+   "uses": [
+    "def-sfb-point-lower-star",
+    "def-sfb-finite-lower-star",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-pullback-from-point.proof.md",
+    "place": "part 4; final paragraph, displayed section formula and inverse-image identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-z-terminal",
+  "def-sfb-profinite-to-proetale",
+  "lem-sfb-lc-weakly-etale",
+  "lem-sfb-profinite-to-proetale-finite-limits",
+  "lem-sfb-profinite-to-proetale-cover-preserving",
+  "lem-sfb-profinite-to-proetale-continuous",
+  "def-sfb-profinite-test-objects",
+  "def-sfb-point-lower-star",
+  "lem-sfb-point-lan-exists",
+  "def-sfb-point-upper-star",
+  "def-sfb-point-adjunction",
+  "lem-sfb-point-upper-star-unit",
+  "lem-sfb-point-upper-star-tensor",
+  "lem-sfb-point-upper-star-braided",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-upper-star-from-point",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-lower-star"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-pullback-from-point.proof.md",
+  "place": "four blueprint proof paragraphs, expanded into six checked assembly steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pull back condensed abelian groups from profinite sets to the small pro-etale site of a scheme using Spec of locally constant integer functions, with a braided strong monoidal left adjoint",
+   "results": "Condensed.profiniteSolid, Condensed.profiniteFree, CondensedMod.ofSheafProfinite, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondAb.ofSheafLightProfinite, Condensed.lanSheafProfinite, profiniteToCondensed",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, Sheaf",
+   "results": "loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-25",
+   "verdict": "no match: query not resolved by service"
+  },
+  {
+   "tool": "grep",
+   "query": "profiniteToProEt|pointUpperStar|upperStarFromPoint|LocallyConstant.*Spec",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image from condensed abelian groups to pro-etale sheaves on a scheme is braided strong monoidal",
+   "results": "CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, CategoryTheory.Monoidal.instBraidedTransportedInverseEquivalenceTransported, CategoryTheory.Functor.mapCommGrp_obj_grp_inv, CategoryTheory.Equivalence.mapCommMon_inverse, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.sheafToPresheafMonoidal, CategoryTheory.MorphismProperty.instIsMonoidalInverseImageOfMonoidalOfRespectsIso",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image functor from the proetale topos of a point to the proetale topos of an arbitrary scheme",
+   "results": "AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
+   "date": "2026-10-25",
+   "verdict": "partial match: general Kan-extension sheaf pullback and adjunction only, already represented by existing dependency nodes; not the full item"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|sheafAdjunctionContinuous",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1084,
+ "blueprint_uses": [
+  "def-weil-pbc-proetale-site",
+  "det-def-sfb-condensed-ring",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-sfb-finite-upper-star-braided",
+  "lem-sfb-lc-weakly-etale",
+  "def-sfb-profinite-to-proetale",
+  "lem-sfb-profinite-to-proetale-finite-limits",
+  "lem-sfb-profinite-to-proetale-cover-preserving",
+  "lem-sfb-profinite-to-proetale-continuous",
+  "def-sfb-profinite-test-objects",
+  "def-sfb-point-lower-star",
+  "lem-sfb-point-lan-exists",
+  "def-sfb-point-upper-star",
+  "def-sfb-point-adjunction",
+  "lem-sfb-point-upper-star-unit",
+  "lem-sfb-point-upper-star-tensor",
+  "lem-sfb-point-upper-star-braided",
+  "def-sfb-upper-star-from-point",
+  "lem-sfb-upper-star-from-point-left-adjoint",
+  "def-sfb-finite-lower-star"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme",
+  "AlgebraicGeometry.ProEtale.profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.isContinuous_profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.profiniteToProEtOf",
+  "AlgebraicGeometry.ProEtale.pointLowerStar",
+  "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.pointUpperStar",
+  "AlgebraicGeometry.ProEtale.pointUpperStarLowerStarAdjunction",
+  "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+  "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+  "AlgebraicGeometry.ProEtale.monoidal_pointUpperStar",
+  "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar",
+  "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+  "AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint",
+  "AlgebraicGeometry.ProEtale.laxBraided_upperStarFromPoint",
+  "AlgebraicGeometry.ProEtale.isLeftAdjoint_upperStarFromPoint"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme",
+  "AlgebraicGeometry.ProEtale.profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.isContinuous_profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.profiniteToProEtOf",
+  "AlgebraicGeometry.ProEtale.pointLowerStar",
+  "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+  "AlgebraicGeometry.ProEtale.pointUpperStar",
+  "AlgebraicGeometry.ProEtale.pointUpperStarLowerStarAdjunction",
+  "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+  "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+  "AlgebraicGeometry.ProEtale.monoidal_pointUpperStar",
+  "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar",
+  "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+  "AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint",
+  "AlgebraicGeometry.ProEtale.laxBraided_upperStarFromPoint",
+  "AlgebraicGeometry.ProEtale.isLeftAdjoint_upperStarFromPoint"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-def-sfb-pullback-from-point",
+  "from": null,
+  "same_as": [
+   "sk-def-sfb-pullback-from-point"
+  ]
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-condensed-point",
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "det-def-sfb-pullback-from-point",
+  "worker": "stage1",
+  "summary": "Reused existing nodes throughout; supplied the previously omitted absolute inverse-limit identity by the relative test-object formula at Spec Z; explicitly composed the adjunction bijections and checked naturality of the right-adjoint section formula. No new nodes, statement changes, SGA sources or Lean writes.",
+  "blueprint": "Current latest blueprint proof paragraphs 1-4: steps 1-2 realize parts 1-2, steps 3-4 realize part 3, and steps 5-6 realize part 4. same_as records the existing sk-def-sfb-pullback-from-point formulation."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NK-aa034d76d",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-aa034d76d (reviewer sub-agent of L); spot-checked: I read the item in full against the main-20261023-1620 blueprint statement and proof (latest is identical). The statement is verbatim and the six steps follow the blueprint's four parts. The only change is that the explicit composite adjunction (def-sfb-finite-upper-lower-star-adjunction at g=pi_X with A=Ab, then def-sfb-point-adjunction) replaces lem-sfb-upper-star-from-point-left-adjoint, which is correct. I read every cited statement; each says what its step takes from it. Step 2 uses the statement of def-sfb-profinite-test-objects at X=Spec Z for the absolute limit identity. Step 6 checks the section formula and its naturality through def-sfb-finite-lower-star. Edge cases checked: S empty, a point or finite; X empty or Spec Z. There are no new nodes. sk-def-sfb-pullback-from-point (reviewed) states the same thing and is recorded in same_as; landed det/sk twins were handled the same way, so I accept it. Two citation faults, both fixed in fixes/dag/nodes/sec-proetale-coefficients/det-def-sfb-pullback-from-point.json. (1) C1: step 1 used 'Spec Z terminal' without a node; it now cites the Mathlib leaf lem-weil-pbc-spec-z-terminal (specZIsTerminal). (2) C4: step 4 identified the tensor of the point-upper-star lemmas with that of lem-weil-pbc-sheaf-tensor-closed without citing sk-def-sfb-sheaf-tensor; it now cites it. The two definitions agree: a(objectwise tensor over Z) with unit a(Z). proof_deps were updated to match; neither added dependency reaches the item, so there is no cycle. lem-weil-pbc-sheaf-tensor-closed is off-route (sk-def-exchange) but sits in the blueprint statement as a definition source, and the item is a definition, so no tool_use is needed. No SGA source.; 1 file(s) fixed by the reviewer"
+ }
+}

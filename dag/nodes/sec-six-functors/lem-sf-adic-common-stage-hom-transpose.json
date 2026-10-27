@@ -1,0 +1,238 @@
+{
+ "id": "lem-sf-adic-common-stage-hom-transpose",
+ "kind": "statement",
+ "title": "Evaluation transpose at common finite coefficient stages",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $T$ be a separated finite-type $k$-scheme. On its small pro-etale site [def-weil-pbc-proetale-site], for each finite $E\\subset\\Omega$ put $B_{E,T}=\\varprojlim_{n\\ge1}(\\mathcal O_E/\\varpi_E^n)_T$ [def-weil-completed-integral-coefficients], $E_T=B_{E,T}[1/\\varpi_E]$, and $R_T=p_T^*\\underline\\Omega$, where $\\underline\\Omega(S)$ consists of continuous functions on a profinite set $S$ valued in one finite subextension [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal C_E(T)=D^b_c(T,E)$ for the raw rationalization of derived-complete integral constructible complexes, with its specified completed finite scalar transitions $S_{F/E}$ [def-weil-rationalization-karoubi]. Write $\\mathcal C_T$ for the common-stage pair category of these $\\mathcal C_E(T)$, with Hom groups the directed colimits over common finite fields [def-weil-algebraically-closed-coefficients]. For $A=E_T,R_T$, let $\\mathcal D_T(A)$ be the full subcategory of $D(\\operatorname{Mod}(A))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] of bounded objects whose cohomology sheaves have a finite locally closed stratification on each stratum of which they are pro-etale locally finite free over $A$.\n\nUse the tensor, internal Hom and evaluation of [def-weil-derived-pullback-tensor-hom]. Let $M,N\\in\\mathcal C_T$ be a permitted Hom pair: at some common finite field they have integral constructible representatives whose completed internal Hom is constructible, and $H\\in\\mathcal C_T$ is the coefficient-passage internal Hom, transported at larger fields by the specified rational Hom scalar comparisons. Denote its right evaluation by $e:H\\otimes M\\to N$, using the signed symmetry to convert the left-evaluation convention when necessary.\n\nFor every $L\\in\\mathcal C_T$, the evaluation map\n$$\\operatorname{Hom}_{\\mathcal C_T}(L,H)\\longrightarrow\\operatorname{Hom}_{\\mathcal C_T}(L\\otimes M,N),\\qquad a\\longmapsto e\\circ(a\\otimes1_M)$$\nis a bijection natural in $L$ and in the permitted pair. It is the directed colimit of the finite rational completed tensor-Hom transpose bijections; for every finite extension, extending a pairing and then transposing equals extending its transpose followed by the specified rational Hom comparison, for arbitrary constructible target. These assertions include all localized arrows and the signed swap. Only a finite stage witnessing the permitted Hom pair is required; there is no site-perfectness hypothesis on $M$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Lemma 3.4.11, with raw rationalization and common-field descent; old step 9; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-adic-closed-reindexing-maps",
+  "def-sf-rational-common-tensor-symmetries",
+  "def-sf-rational-verdier-data",
+  "def-pod-partial-closed-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "For the witness-domain equivalence, a permitted compositum pair is itself a finite-field witness. In the reverse direction use integral_constructible_internalHom: every pair of integral constructible objects on this separated finite-type scheme has constructible ambient Hom. Translate the intrinsic sfIntegralConstructible predicate to and from boundedConstructibleDerivedCompleteIntegral with sfDerivedComplete_iff_legacy, retaining the same finite reductions and interval. Apply this to the entries extended to their compositum. This proves the required predicate without choosing a witness or assuming perfectness.",
+   "uses": [
+    "cor-coef-integral-internal-hom",
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take S from podCommonClosed_existsUnique, obtaining its exact finite-stage normalization. For each a:L→H(P), apply injectivity of S.transpose to prove S.transpose.symm(a)=T(a,1)≫ev_P: parameter naturality reduces its transpose to a followed by transpose(ev_P)=a. This identifies the evaluation map with the inverse additive equivalence, so it is bijective.",
+   "uses": [
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "def-pod-partial-closed-interfaces"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For f:L′→L and g:P→Q, use normalized common evaluation naturality for g and precompose with T(f≫a,1). Functoriality of T identifies the two composites with the required inverse-transpose naturality equation, using the evaluation formula just proved. For the signed-swap equation apply common tensor braiding naturality to (1_M,a), and postcompose with ev_P.",
+   "uses": [
+    "lem-sf-normalized-common-evaluation-naturality",
+    "lem-sf-common-tensor-braiding-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every finite coefficient embedding E→F apply rationalHomScalar_transpose D l hl X E F to obtain both the exact displayed scalar-transpose square and its signed-swap clause, for all rational arrows and arbitrary permitted targets.",
+   "uses": [
+    "lem-coef-rational-hom-scalar-transpose"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "cor-coef-integral-internal-hom",
+  "lem-sf-derived-complete-legacy-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "def-pod-partial-closed-interfaces",
+  "lem-sf-normalized-common-evaluation-naturality",
+  "lem-sf-common-tensor-braiding-naturality",
+  "lem-coef-rational-hom-scalar-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stage-3 Lean assembly from the existing normalized common closed datum, integral Hom closure, evaluation naturality and braiding naturality; finite scalar clauses use rationalHomScalar_transpose."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation induces a tensor Hom transpose bijection in a common finite coefficient stage constructible l adic category compatible with scalar extension",
+   "results": "[leanfinder] OK 8 hit(s); AdicCompletion.tensor_map_id_left_eq_map: ∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\n  TensorProduct.Alge; AdicCompletion.ofTensorProductEquivOfPiFintype: {R : Type u_1} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (ι : Type u_4) →\n        [Fintype ι] →\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R); AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of: ∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x; AdicCompletion.ofTensorProduct_naturality: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\n    AdicCompletion.ofTensorProduct I N ; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian: {R : Type u} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (M : Type u) →\n        [inst_1 : AddCommGroup M] →\n          [inst_2 : Module R M] →\n            [IsNoetherianRing R] →\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I ; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply: ∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian: ∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M; AdicCompletion.ofTensorProduct: {R : Type u_1} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (M : Type u_2) →\n        [inst_1 : AddCommGroup M] →\n          [inst_2 : Module R M] → TensorProduct R (AdicCompletion I R) M →ₗ[AdicCompletion I R] AdicCompletion I M",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*transpose|transpose.*scalar|constructible.*adjunction",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Directed colimits of rational completed tensor Hom adjunctions give the common stage evaluation transpose for permitted constructible Hom pairs",
+   "results": "[leansearch] OK 8 hit(s); TensorProduct.directLimitLeft_rTensor_of: {i : ι} (x : G i ⊗[R] M) : directLimitLeft f M (LinearMap.rTensor M (of ..) x) = of _ _ _ (f ▷ M) _ x; CategoryTheory.FunctorToTypes.adj: : tensorLeft F ⊣ rightAdj F; ModuleCat.monoidalClosedHomEquiv: (M N P : ModuleCat.{u} R) :\n  ((MonoidalCategory.tensorLeft M).obj N ⟶ P) ≃ (N ⟶ ((linearCoyoneda R (ModuleCat R)).obj (op M)).obj P); TensorProduct.toDirectLimit: : DirectLimit G f ⊗[R] M →ₗ[R] DirectLimit (G · ⊗[R] M) (f ▷ M); Submodule.FG.lTensor.directLimit: [DecidableEq { Q : Submodule R N // Q.FG }] :\n  Module.DirectLimit (R := R) (ι := { Q : Submodule R N // Q.FG }) (fun Q ↦ M ⊗[R] Q.val)\n      (fun _ _ hPQ ↦ (inclusion hPQ).lTensor M) ≃ₗ[R]\n    M ⊗[R] N; ModuleCat.directLimitIsColimit_desc: ∀ {R : Type u} [inst : Ring R] {ι : Type v} [inst_1 : Preorder ι] (G : ι → Type v)\n  [inst_2 : (i : ι) → AddCommGroup (G i)] [inst_3 : (i : ι) → Module R (G i)] (f : (i j : ι) → i ≤ j → G i →ₗ[R] G j)\n  [inst_4 : DirectedSystem G fun i j h => ⇑(f i j h)] [inst_5 : DecidableEq ι]\n  (s : CategoryTheor; CategoryTheory.evaluationAdjunctionLeft: (c : C) : (evaluation _ _).obj c ⊣ evaluationRightAdjoint D c; DirectLimit.Module.hom_ext_iff: ∀ {R : Type u_1} {ι : Type u_2} [inst : Preorder ι] {G : ι → Type u_3} {T : ⦃i j : ι⦄ → i ≤ j → Type u_4}\n  {f : (x x_1 : ι) → (h : x ≤ x_1) → T h} [inst_1 : (i j : ι) → (h : i ≤ j) → FunLike (T h) (G i) (G j)]\n  [inst_2 : DirectedSystem G fun x1 x2 x3 => ⇑(f x1 x2 x3)] [inst_3 : IsDirectedOrder ι] ",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible internal Hom witnessed at a finite coefficient field represents tensor pairings in the common stage algebraic closure category",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ihom: : C ⥤ C; CategoryTheory.MonoidalClosed.internalHom: [MonoidalClosed C] : Cᵒᵖ ⥤ C ⥤ C; CategoryTheory.internalHom: {C : Type u} →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\n      [CategoryTheory.MonoidalClosed C] → CategoryTheory.Functor Cᵒᵖ (CategoryTheory.Functor C C); CategoryTheory.MonoidalClosed.closed: {C : Type u} →\n  {inst : CategoryTheory.Category.{v, u} C} →\n    {inst_1 : CategoryTheory.MonoidalCategory C} →\n      [self : CategoryTheory.MonoidalClosed C] → (X : C) → CategoryTheory.Closed X; CategoryTheory.Closed: {C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.MonoidalCategory C] → C → Type (max u v); ModuleCat.monoidalClosedHomEquiv: (M N P : ModuleCat.{u} R) :\n  ((MonoidalCategory.tensorLeft M).obj N ⟶ P) ≃ (N ⟶ ((linearCoyoneda R (ModuleCat R)).obj (op M)).obj P); CategoryTheory.Types.tensorProductAdjunction: (X : Type v₁) : tensorLeft X ⊣ coyoneda.obj (Opposite.op X); FGModuleCat.instIsMonoidalClosedModuleCatIsFG: : (ModuleCat.isFG K).IsMonoidalClosed",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*transpose|transpose.*scalar|constructible.*adjunction",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/condensed adjunctions or algebraic adic completion do not state the specified raw rational constructible common-stage transpose"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible finite stage tensor Hom transpose bijections induce a bijection on common stage constructible l adic Hom colimits",
+   "results": "8 hits: CategoryTheory.Limits.ColimitPresentation.Total.Hom.mk.inj, Rep.homEquiv, CategoryTheory.colimitYonedaHomEquiv, CategoryTheory.Limits.colimit.homIso', homTensorHomEquiv, Algebra.TensorProduct.map_bijective, CategoryTheory.Limits.ColimitPresentation.Total.Hom.mk.injEq, TensorProduct.lTensorHomToHomLTensor",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/condensed adjunctions or algebraic adic completion do not state the specified raw rational constructible common-stage transpose"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"colimit\"",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/condensed adjunctions or algebraic adic completion do not state the specified raw rational constructible common-stage transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation induces tensor Hom adjunction for constructible adic complexes after common finite coefficient field descent",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.eval_comp_of, AdicCompletion.ofTensorProduct_surjective_of_finite",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/condensed adjunctions or algebraic adic completion do not state the specified raw rational constructible common-stage transpose"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom adjunction in raw rationalized derived complete sheaves commutes with finite coefficient extension and filtered Hom colimits",
+   "results": "8 hits: lTensorHomEquivHomLTensor, ModuleCat.monoidalClosedHomEquiv, TensorProduct.lTensorHomToHomLTensor, CategoryTheory.FunctorToTypes.adj, lTensorHomEquivHomLTensor_toLinearMap, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/condensed adjunctions or algebraic adic completion do not state the specified raw rational constructible common-stage transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered system of closed constructible rational coefficient categories has an evaluation adjunction when internal Hom exists at a finite field stage",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, CategoryTheory.evaluationAdjunctionRight, CategoryTheory.evaluationAdjunctionLeft, LightCondMod.LocallyConstant.adjunction, Condensed.profiniteSolidCounit, LightCondSet.LocallyConstant.adjunction, CategoryTheory.evaluationIsLeftAdjoint, LightCondensed.ihomPoints_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/condensed adjunctions or algebraic adic completion do not state the specified raw rational constructible common-stage transpose"
+  },
+  {
+   "tool": "grep",
+   "query": "monoidalClosedHomEquiv|tensorLeftAdjunction|tensorRightHomEquiv",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean; subdirectory Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/condensed adjunctions or algebraic adic completion do not state the specified raw rational constructible common-stage transpose"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native obligation with no imported blueprint ancestor (blueprint_refs.py ancestor prints None): realizes the evaluation/biduality descent sentence of thm-coef-qbar-verdier, via lem-sf-adic-qbar-constructible-realization, proof step 3 (old step 9).",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-common-stage-hom-transpose",
+  "worker": "stage1",
+  "summary": "Retained the statement and statement dependencies. Reused the existing completed rational transpose and arbitrary-target scalar-transpose lemmas. Checked the permitted domain after scalar extension, displayed the actual comparison square, and proved representative independence, surjectivity, injectivity and naturality on common-stage Hom colimits. No new nodes, no Lean changes. Repair after return at 27a36fd77d8: compared the retained split with the current unsplit live item, re-read all six current cited statements, made original representative fields and their comparison conjugations explicit in step 4, and wrote both naturality equations in step 6. All fourteen citation excerpts revalidated; the delivery tool rebuilds on current origin/sheaf-dag.",
+  "blueprint": "Native obligation with no imported blueprint ancestor (blueprint_refs.py ancestor prints None): realizes the evaluation/biduality descent sentence of thm-coef-qbar-verdier, via lem-sf-adic-qbar-constructible-realization, proof step 3 (old step 9).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Finite coefficient extension preserves constructibility and identifies the permitted internal Hom at every larger finite field; this generic coefficient theorem is needed to apply the finite-stage adjunction."
+   },
+   {
+    "node": "lem-coef-completed-tensor-hom-transpose",
+    "why": "Steps 2 and 6 take from its statement the finite-stage rational tensor-Hom transpose bijection (BS Lemma 3.4.11), natural in all variables and swap-compatible, for any constructible test object; it is a generic closed-structure tool of unit sk-thm-sf-package, and no node of sk-prop-sf-biduality-general states the finite completed adjunction."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N5-c1feb2501",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-c1feb2501 (reviewer sub-agent of L); spot-checked: I read the item in full: six steps, no new nodes. Its statement and stmt_deps are unchanged from the node Q53 created. Against the returned head 27a36, only steps 4 and 6 and split_report changed. I read the full statements of every cited node: lem-pur-integral-operations-scalar-extension, def-weil-rationalization-karoubi, def-weil-derived-pullback-tensor-hom (including how the common-stage operations are conjugated by the scalar comparisons θ), def-weil-algebraically-closed-coefficients, lem-coef-completed-tensor-hom-transpose and lem-coef-rational-hom-scalar-transpose. For the last one I also read its Lean statement, rationalHomScalar_transpose, which fixes the orientation. Its equation is transpose_F(μ⁻¹≫S b) = S(transpose_E b) ≫ rationalHomScalarComparison.hom, and that comparison is the rationalised Hom comparison θ^Hom defined at DerivedPullbackTensorHom.lean:527. I also read the parent's step 3, which uses exactly this bijection, and the unit sk-prop-sf-biduality-general. Sources: Bhatt–Scholze Def 3.4.10 and Lemma 3.4.11 (p. 22) and Prop 6.8.14 and Rem 6.8.15 (pp. 61–62) agree with the route; no SGA is cited. Step checks: (1) Scalar extension keeps objects constructible and gives the internal-Hom comparison, so the Hom pair is permitted at every field E containing the witness E0. (2) The rational completed transpose with the signed swap gives β_E(a) = e∘(a⊗1); the swap conversion follows from naturality of the symmetry. (3) The scalar-transpose lemma with K=L_E, L=M_E, W=N_E gives β_F(c∘S a) = S(β_E a)∘μ⁻¹; with a=1 it gives the evaluation compatibility that step 4 needs. (4) and (5) The directed-colimit argument is elementary and correct: injectivity is checked at the later field where the images agree, with no faithfulness assumption on the transition maps. (6) Both naturality equations are correct (the second is dinaturality of evaluation), and they pass to common-stage classes. Edge cases checked: zero objects, E=F, two witness fields, a representative killed only at a later field, arrows with denominators, and the Koszul sign. Duplicate search over common-stage transpose and evaluation nodes found nothing. FIX (re-applied from the review of 27a36, whose fix was lost on re-delivery): lem-coef-completed-tensor-hom-transpose belongs to unit sk-thm-sf-package and is off this unit's route, but split_report.tool_uses did not declare it. I added the entry in fixes/dag/nodes/sec-six-functors/lem-sf-adic-common-stage-hom-transpose.json and accept it as a generic finite-stage adjunction tool, Lean-bound in Sheaf.Paper.CompletedTensorHomTranspose. I also accept the declared tool use of lem-pur-integral-operations-scalar-extension.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicCommonStageHomTranspose",
+  "declaration": "WeilConjectures.adicCommonStageHomTranspose",
+  "file": "lean/Sheaf/Paper/AdicCommonStageHomTranspose.lean",
+  "statement": "theorem adicCommonStageHomTranspose (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] : (∀ M N : generalAlgebraicallyClosedConstructibleCategory l Ω X, commonStageHomPairs l Ω X (op M, N) ↔ ∃ (E : Index l Ω) (hM : M.stage ≤ E) (hN : N.stage ≤ E), constructibleRationalHomPairs l (Coefficient.{u} l Ω E) X (op (M.toStage hM), N.toStage hN)) ∧ (∃ S : PodPartialClosed (@commonStageDerivedTensor l _ Ω _ _ _ X (RationalVerdier.units D l hl X)) (commonStageHomPairs l Ω X) (commonStageDerivedInternalHom l Ω X), @PodCommonTransposeNormalization l _ Ω _ _ _ X (RationalVerdier.units D l hl X) S ∧ (∀ (L : generalAlgebraicallyClosedConstructibleCategory l Ω X) (P : (commonStageHomPairs l Ω X).FullSubcategory) (a : L ⟶ (commonStageDerivedInternalHom l Ω X).obj P), (S.transpose L P).symm a = (@commonStageDerivedTensor l _ Ω _ _ _ X (RationalVerdier.units D l hl X)).map (Prod.mkHom a (𝟙 P.obj.1.unop)) ≫ S.evaluation P) ∧ (∀ (L : generalAlgebraicallyClosedConstructibleCategory l Ω X) (P : (commonStageHomPairs l Ω X).FullSubcategory), Function.Bijective (fun a : L ⟶ (commonStageDerivedInternalHom l Ω X).obj P ↦ (@commonStageDerivedTensor l _ Ω _ _ _ X (RationalVerdier.units D l hl X)).map (Prod.mkHom a (𝟙 P.obj.1.unop)) ≫ S.evaluation P)) ∧ (∀ (L L' : generalAlgebraicallyClosedConstructibleCategory l Ω X) (P Q : (commonStageHomPairs l Ω X).FullSubcategory) (f : L' ⟶ L) (g : P ⟶ Q) (a : L ⟶ (commonStageDerivedInternalHom l Ω X).obj P), (S.transpose L' Q).symm (f ≫ a ≫ (commonStageDerivedInternalHom l Ω X).map g) = (@commonStageDerivedTensor l _ Ω _ _ _ X (RationalVerdier.units D l hl X)).map (Prod.mkHom f g.hom.1.unop) ≫ (S.transpose L P).symm a ≫ g.hom.2) ∧ (∀ (L : generalAlgebraicallyClosedConstructibleCategory l Ω X) (P : (commonStageHomPairs l Ω X).FullSubcategory) (a : L ⟶ (commonStageDerivedInternalHom l Ω X).obj P), ((@pullbackTensorCommonBraiding l _ Ω _ _ _ X (RationalVerdier.units D l hl X)) P.obj.1.unop L).hom ≫ (S.transpose L P).symm a = (@commonStageDerivedTensor l _ Ω _ _ _ X (RationalVerdier.units D l hl X)).map (Prod.mkHom (𝟙 P.obj.1.unop) a) ≫ ((@pullbackTensorCommonBraiding l _ Ω _ _ _ X (RationalVerdier.units D l hl X)) P.obj.1.unop ((commonStageDerivedInternalHom l Ω X).obj P)).hom ≫ S.evaluation P)) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F] (ι : E →ₐ[Padic l] F), (∀ (K L W : sfRationalConstructibleCategory l E X) (hL : constructibleRationalHomPairs l E X (op L, W)) (b : (RationalVerdier.tensor D l hl X E).obj (K, L) ⟶ W), (@podRationalClosed l _ F _ _ _ X (RationalVerdier.units D l hl X)).transpose ((RationalVerdier.scalar l X E F ι).obj K) (rationalHomScalarPair l E F ι X ⟨(op L, W), hL⟩) ((@rationalTensorScalarComparison l _ E _ _ _ F _ _ _ ι X (RationalVerdier.units D l hl X)).inv.app (K, L) ≫ (RationalVerdier.scalar l X E F ι).map b) = (RationalVerdier.scalar l X E F ι).map ((@podRationalClosed l _ E _ _ _ X (RationalVerdier.units D l hl X)).transpose K ⟨(op L, W), hL⟩ b) ≫ (rationalHomScalarComparison l E F ι X ⟨(op L, W), hL⟩).hom) ∧ (∀ K L : sfRationalConstructibleCategory l E X, (@pullbackTensorRationalBraiding l _ F _ _ _ X (RationalVerdier.units D l hl X) ((RationalVerdier.scalar l X E F ι).obj L) ((RationalVerdier.scalar l X E F ι).obj K)).hom ≫ (@rationalTensorScalarComparison l _ E _ _ _ F _ _ _ ι X (RationalVerdier.units D l hl X)).inv.app (K, L) = (@rationalTensorScalarComparison l _ E _ _ _ F _ _ _ ι X (RationalVerdier.units D l hl X)).inv.app (L, K) ≫ (RationalVerdier.scalar l X E F ι).map ((@pullbackTensorRationalBraiding l _ E _ _ _ X (RationalVerdier.units D l hl X) L K).hom)))",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of immutable head 706ac052572a, points 1--4: replace the two theorem statement dependencies with def-sf-adic-closed-reindexing-maps and def-sf-rational-common-tensor-symmetries. Extend the former existing:true record to own podRationalClosed and its existsUnique pinning theorem. Retain the earlier RationalVerdier helper ownership repair. Lean source and signature are byte-for-byte unchanged; only definition ownership and dependency records are repaired."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54e88c379",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Re-delivery of 706ac052572a (RETURN H2), all 4 points addressed. Lean file byte-identical (sha 6ef7d16d) to the reviewed 706a/a974 snapshots; earlier full clause reading still holds (witness iff, pinned S via PodCommonTransposeNormalization, evaluation formula + bijection, 3-variable naturality, Koszul swap, arbitrary-target scalar-transpose square). stmt_deps: the theorems lem-pod-derived-automorphism-hom-evaluation/lem-pur-derived-pullback-tensor-iso are replaced by def-sf-adic-closed-reindexing-maps/def-sf-rational-common-tensor-symmetries (+ def-sf-rational-verdier-data, def-pod-partial-closed-interfaces); every statement constant has a cited definition owner. Reindexing-maps existing:true record extended lean-only with podRationalClosed (choose of ∃!, canonical) + _existsUnique (theorem-node double listing as for PodCommonTransposeNormalization). Against side-live 9a9a239: only lean/stmt_deps differ, nothing landed is overwritten, statement verbatim, no cycle. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261025T143744-L-1081556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,337 @@
+{
+ "id": "lem-per-trait-test-supported-kummer-continuity",
+ "kind": "statement",
+ "title": "Derived supported Kummer continuity for affine regular pairs",
+ "statement": "Fix a prime $\\ell$, $A=\\mathbf F_\\ell$, ordinary small-etale derived categories [def-weil-pbc-derived-categories], finite Tate twists [def-asd-finite-etale-tate-twist], and the canonical Kummer class of [lem-per-regular-immersion-class-calculus], with the bounded-below closed-support adjunction [def-per-closed-support-plus-adjunction].\n\nLet $I$ be a small nonempty directed set and $(Z_a\\hookrightarrow V_a)_{a\\in I}$ an inverse system of pairs of regular affine Noetherian schemes [def-weil-regular-scheme, def-weil-affine-spectrum, def-weil-closed-immersion], with affine transition maps and $\\ell$ invertible on each $V_a$. Fix $c\\geq0$. Suppose that each $Z_a\\hookrightarrow V_a$ is cut out by global regular equations $t_{a,1},\\ldots,t_{a,c}$, that every transition pulls these elements back to the corresponding elements, and that the limits $Z=\\varprojlim_a Z_a$ and $V=\\varprojlim_a V_a$ are regular affine Noetherian schemes with the limiting regular sequence cutting out $Z\\hookrightarrow V$ [def-weil-pbc-regular-sequence, def-per-regular-closed-immersion-codimension].\n\nLet $\\gamma_a:R\\Gamma(Z_a,A)\\to R\\Gamma_{Z_a}(V_a,A(c))[2c]$ be the derived global supported Kummer map, and define $\\gamma$ for the limiting pair in the same way; supported sections mean [def-pur-etale-derived-supported-sections]. The $\\gamma_a$ form a compatible directed diagram, and there is a canonical commutative square in the derived category $D(A)$ of ordinary $A$-modules [def-weil-abstract-derived-category], with both vertical maps isomorphisms:\n$$\\begin{array}{ccc}\n\\varinjlim_a R\\Gamma(Z_a,A)&\\xrightarrow{\\varinjlim\\gamma_a}&\\varinjlim_a R\\Gamma_{Z_a}(V_a,A(c))[2c]\\\\\n\\downarrow\\scriptstyle\\sim&&\\downarrow\\scriptstyle\\sim\\\\\nR\\Gamma(Z,A)&\\xrightarrow{\\gamma}&R\\Gamma_Z(V,A(c))[2c].\n\\end{array}$$\nHere the filtered derived colimits are computed by taking degreewise filtered colimits in compatible diagrams of cochain-complex representatives; filtered colimits of $A$-modules are exact, so this specifies their derived meaning. The bottom arrow is the canonical class for the limiting regular sequence, with the same Kummer sign, rather than an arbitrary isomorphism of the two objects. In particular, if every $\\gamma_a$ is an isomorphism, then so is $\\gamma$. No flatness of the transition maps is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI section 2.1 (supported Cartier Kummer construction), Definition 2.3.1 (regular-sequence class) and Proposition 2.2.3.1 (base-change compatibility preserving conormal data). Continuity ingredient: Stacks Project Tag 03Q6, etale-cohomology.tex, lemma-directed-colimit-cohomology (ambient, complement and closed schemes). The simultaneous derived-arrow comparison is an agent-formulated statement-only obligation; the exact square is not a verbatim theorem in ILO."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "lem-per-regular-immersion-class-calculus",
+  "def-per-closed-support-plus-adjunction",
+  "def-weil-regular-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-regular-sequence",
+  "def-per-regular-closed-immersion-codimension",
+  "def-pur-etale-derived-supported-sections",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $W_{a,k}=V(t_{a,1},\\ldots,t_{a,k})$, so $W_{a,0}=V_a$ and $W_{a,c}=Z_a$, and $U_a=V_a\\setminus Z_a$. Define the corresponding limiting flag and $U=V\\setminus Z$. Preserved equations show directly by quotient rings that every flag square is Cartesian. The complement is the finite union of the principal opens $D(t_{a,k})$; these also pull back, and their limits are $D(t_k)$. Thus $U$ is the limit of the $U_a$, and the restricted transition maps are affine, since they are base changes of the affine transitions. All three systems $V_a,Z_a,U_a$ are qcqs: the first two are affine Noetherian, and the third is an open in a Noetherian affine. By [def-weil-pbc-regular-sequence], multiplication by $t_{a,k}$ on each preceding quotient is injective, so every $W_{a,k}\\hookrightarrow W_{a,k-1}$ is Cartier, likewise at the limit. Intermediate flag schemes need not be regular. Fix an index $a_0$ when using continuity: its upper tail is cofinal, since every finite collection of indices has a common upper bound. A cocone on that tail extends uniquely by passing to such an upper bound; two extensions agree at a further upper bound. This identifies its colimits with those over the original directed set.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Definition 2.3.1; Cartesian flag and open-complement calculations."
+   }
+  },
+  {
+   "text": "For $T_a=V_a,Z_a,U_a$, apply [lemma-weil-pbc-etale-cohomology-continuity] to the upper tail at $a_0$ and the torsion coefficient sheaf $A(m)$ there. Its pullbacks are the required coefficients by [lem-asd-etale-finite-twist-pullback]. Step 1 verifies qcqs, affine transitions, and the stated limits. Hence the canonical maps $\\varinjlim_a H^r(T_a,A(m))\\to H^r(T,A(m))$ are isomorphisms for $r\\geq0$. The natural comparison of [lem-weil-pbc-etale-module-cohomology-forget] identifies these abelian-sheaf cohomology groups with module-sheaf cohomology. The maps are $A$-linear because section pullback is $A$-linear; a bijective $A$-linear map has an $A$-linear inverse. For $r<0$ both sides vanish, since the coefficients are sheaves in degree zero. Use $m=0$ on $Z_a$ and $m=c$ on $V_a,U_a$.",
+   "uses": [
+    "lemma-weil-pbc-etale-cohomology-continuity",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q6, lemma-directed-colimit-cohomology; passage to constant-ring module coefficients."
+   }
+  },
+  {
+   "text": "Take $B=T=V_a$ and $C=Z_a$ in [lem-pur-support-restriction-triangle], with $F=A(c)$. This gives the triangle of supported sections, sections on $V_a$, and sections on $U_a$. The cone and pullback comparison in [lem-asd-supported-kummer-support-hom-naturality] makes these triangles compatible with every transition and limit map, including forgetting support. Filtered colimits of their cohomology exact sequences are exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. Compare this sequence with the limiting one. In the five consecutive terms $H^{r-1}(V)\\to H^{r-1}(U)\\to H_Z^r(V)\\to H^r(V)\\to H^r(U)$, all four nonsupported comparison maps are isomorphisms by Step 2. The middle map is injective: a class mapping to zero has zero image in $H^r(V)$, hence comes from $H^{r-1}(U)$; its limiting lift comes from $H^{r-1}(V)$, which can be lifted back and subtracted. It is surjective: lift the ambient image of a supported class; its restriction is zero by injectivity on $H^r(U)$, so lift it from the supported term; correct the difference using surjectivity on $H^{r-1}(U)$. Thus supported continuity holds for every integer $r$. In particular, put $X_a=R\\Gamma(Z_a,A)$, $Y_a=R\\Gamma_{Z_a}(V_a,A(c))[2c]$ and $X,Y$ for the limits. We have canonical isomorphisms $\\alpha^q:\\varinjlim H^qX_a\\cong H^qX$ and $\\beta^q:\\varinjlim H^qY_a\\cong H^qY$, with $r=q+2c$ for the latter.",
+   "uses": [
+    "lem-pur-support-restriction-triangle",
+    "lem-asd-supported-kummer-support-hom-naturality",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0A45 (support triangle) and 03Q6; explicit exact-sequence comparison."
+   }
+  },
+  {
+   "text": "We now compute the actual class under any one of the Cartesian flag maps $h:T'\\to T$ of Step 1. Closed direct image on constant-ring modules is exact and identifies modules on the closed subscheme with modules annihilated by restriction to its open complement, by [lem-trf-oriented-closed-base-localization]. Consequently for a closed $j:C\\hookrightarrow T$ and any module $M$ on $C$, $h^{-1}j_*M$ is supported on $C'$; its adjunction unit identifies it with $j'_*j'^{-1}h^{-1}j_*M=j'_*h_C^{-1}M$, using the counit $j^{-1}j_*M\\cong M$. This is the canonical exchange, natural in $M$, and exactness applies the same calculation termwise to complexes. For constants it is precisely $b_{h,C}$ of [lem-pur-etale-closed-constant-tensor]: $h^{-1}$ is exact, so the inverse image $A_{T'}\\to h^{-1}j_*A_C$ of the surjective unit $A_T\\to j_*A_C$ is an epimorphism, and both maps carry it to the unit $A_{T'}\\to j'_*A_{C'}$ ($b_{h,C}$ by its statement, the exchange by the triangle identities), hence they agree. The same argument identifies $b_{h,C}$ with the closed exchanges of [lem-asd-ordinary-supported-kummer] and [lem-asd-supported-kummer-support-hom-naturality], which are base-change mates of the same square and also carry unit to unit. Units, counits and [lem-weil-pbc-mate-pasting] show that these exchanges paste for successive closed immersions. Twisting closed direct image has the canonical comparison $j_*M\\otimes A_T(m)\\cong j_*(M\\otimes A_C(m))$: trivialize the rank-one coefficient line etale locally, where the comparison is the identity on $j_*M$; these local isomorphisms glue. Rank one and its pullback/tensor compatibilities are supplied by [lem-asd-etale-finite-twist-pullback]. Tensoring with the line is exact by the same local calculation, so this also gives the derived comparison. These comparisons respect exchange, composition and shifts, as can be checked on the same trivializations and on complexes.",
+   "uses": [
+    "lem-trf-oriented-closed-base-localization",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-weil-pbc-mate-pasting",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-supported-kummer-support-hom-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI section 2.1 and Proposition 2.2.3.1; explicit closed-exchange and coefficient identifications."
+   }
+  },
+  {
+   "text": "Let $i_a:Z_a\\hookrightarrow V_a$ and write $\\phi_a:i_{a*}A_{Z_a}\\to A_{V_a}(c)[2c]$ for the transpose of the specified class under [def-per-closed-support-plus-adjunction]. The regular-sequence formula of [lem-per-regular-immersion-class-calculus], at $n=1$, expresses this arrow as the following finite composite: push the last Cartier map forward through the preceding closed immersions, then apply the preceding Cartier map twisted and shifted, continuing to the first. This is the transpose of the stated composite of exceptional classes because the units and counits for the composite adjunction are pasted, as in [lem-cat-right-adjoint-composition]. Step 4 supplies the identifications of the successive direct images and twists. For each factor [lem-asd-ordinary-supported-kummer] identifies its inverse image along the corresponding flag map with the new Cartier map. Its hypothesis is exactly that the pulled-back divisor is Cartier, verified in Step 1; no flatness is required. Apply inverse image to the finite composite: its preservation of composition, the exchanges of Step 4, and the factor identities give\n$$h^{-1}\\phi_a\\circ b_{h,Z_a}^{-1}=\\phi_b.$$\nThe same calculation applies to a projection from the limit, yielding $\\phi$ on $V$. This proves the required nonflat compatibility rather than taking it from the flat-base-change clause of the class-calculus node. There is no additional sign: every factor is its positive Cartier Kummer map. For $c=0$ the composite is the identity on $A$ and the same equation holds.",
+   "uses": [
+    "def-per-closed-support-plus-adjunction",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-cat-right-adjoint-composition",
+    "lem-asd-ordinary-supported-kummer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Definition 2.3.1, Theorem 2.3.2 and Proposition 2.2.3.1; finite Cartier-factor computation."
+   }
+  },
+  {
+   "text": "For $q\\geq0$, represent $x\\in H^q(Z_a,A)$ by $x:A_{Z_a}\\to A_{Z_a}[q]$ using [lem-weil-pbc-free-sheaf-derived-sections]. Under the supported-Hom identification [lem-amb-closed-support-hom], the operation induced by the class has the explicit formula\n$$\\Phi( H^q(\\gamma_a)(x))=\\phi_a[q]\\circ i_{a*}x.$$\nIndeed the adjunction transpose of the class is $\\phi_a$, so applying it to $x$ and then transposing is this composition, by the unit/counit formulas of [def-per-closed-support-plus-adjunction]. For a transition or projection $h$, [lem-asd-supported-kummer-support-hom-naturality] says that pullback of this supported element is represented by $h^{-1}(\\phi_a[q]\\,i_{a*}x)b^{-1}$. Naturality of the exchange from Step 4 rewrites it as $(h^{-1}\\phi_a\\,b^{-1})[q]\\,i'_*h_Z^{-1}x$. Step 5 identifies the first factor with $\\phi'[q]$. This is the displayed formula for $H^q(\\gamma')(h_Z^*x)$, with the same supported-Hom normalization. For $q<0$ the source $H^q(Z_a,A)$ vanishes. Write $u_{ba},v_{ba}$ for the ordinary and supported transitions on $X_a,Y_a$, and $u_a,v_a$ for the limiting legs. We have now proved for every integer $q$ both\n$$H^q(v_{ba})H^q(\\gamma_a)=H^q(\\gamma_b)H^q(u_{ba}),\\qquad H^q(v_a)H^q(\\gamma_a)=H^q(\\gamma)H^q(u_a).$$",
+   "uses": [
+    "lem-weil-pbc-free-sheaf-derived-sections",
+    "lem-amb-closed-support-hom",
+    "def-per-closed-support-plus-adjunction",
+    "lem-asd-supported-kummer-support-hom-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI section 2.1, supported-Hom interpretation and Proposition 2.2.3.1; explicit operation calculation."
+   }
+  },
+  {
+   "text": "The field hypothesis is decisive. Since $A=\\mathbf F_\\ell$ with $\\ell$ prime, [lem-trf-field-complex-cohomology-splitting] gives a bijection $\\operatorname{Hom}_{D(A)}(P,Q)\\cong\\prod_q\\operatorname{Hom}_A(H^qP,H^qQ)$ for arbitrary, possibly unbounded and infinite-dimensional, $P,Q$. Apply its injectivity to the two equations of Step 6 for all $q$. This proves $v_{ba}\\gamma_a=\\gamma_bu_{ba}$ and $v_a\\gamma_a=\\gamma u_a$ as equalities of the actual arrows in $D(A)$. Thus the $\\gamma_a$ are a morphism of directed diagrams and their pullback legs give a cone to the actual $\\gamma$. This argument uses the injectivity clause of the Hom bijection, not merely detection of isomorphisms by cohomology.",
+   "uses": [
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Algebra/Homology/FieldComplexCohomologySplitting.lean",
+    "place": "field_complex_cohomology_splitting: unrestricted canonical Hom bijection; application to the equations of Step 6."
+   }
+  },
+  {
+   "text": "For any $P\\in D(A)$ define $S(P)$ explicitly as the complex with term $H^q(P)$ in degree $q$ and zero differential. By the surjectivity of the same Hom bijection there is a unique $\\theta_P:Q S(P)\\to P$ inducing the identity on every $H^q$ (with the canonical cohomology of a zero-differential complex). Lift the inverse identity family to obtain an inverse: injectivity makes both composites identities. For $f:P\\to P'$ let $S(f)^q=H^q(f)$. Functoriality of cohomology gives a strict chain-map functor $S$, and injectivity gives $f\\theta_P=\\theta_{P'}Q S(f)$. Consequently $S(X_a),S(Y_a)$, with the degreewise maps $H^q(u_{ba}),H^q(v_{ba})$ and $H^q(\\gamma_a)$, are compatible diagrams of complex representatives of the original directed arrow diagram. Include $S(X),S(Y)$ and their pullback legs. Step 7 makes all of these squares commute strictly degree by degree. No choices of vector-space complements enter $S$, $\\theta$, or these chain maps.",
+   "uses": [
+    "lem-trf-field-complex-cohomology-splitting",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Algebra/Homology/FieldComplexCohomologySplitting.lean",
+    "place": "Unrestricted canonical Hom bijection; explicit zero-differential complex and uniqueness argument."
+   }
+  },
+  {
+   "text": "Take degreewise filtered colimits of these strict diagrams, obtaining zero-differential complexes $L_X^q=\\varinjlim_aH^q(X_a)$ and $L_Y^q=\\varinjlim_aH^q(Y_a)$ and the chain map $g^q=\\varinjlim_aH^q(\\gamma_a)$. This computes the derived meaning stipulated in the item. More explicitly, [lem-sbc-filtered-colimit-cochain-homology] implies $H^q(\\varinjlim_a C_a)\\cong\\varinjlim_aH^q(C_a)$ for any compatible diagram of integer-indexed $A$-complexes: apply its nonnegative version to the three-term complexes $C_a^{q-1}\\to C_a^q\\to C_a^{q+1}$ placed in degrees $0,1,2$, and take cohomology in degree $1$. Their middle cohomology is exactly $H^q(C_a)$ and their colimits are degreewise. These comparisons are natural for the original cocone and arrow maps. Hence for any other compatible representatives of the same derived diagram the Hom bijection of [lem-trf-field-complex-cohomology-splitting] gives a unique comparison to $QL_X,QL_Y$ inducing these canonical colimit cohomology identifications. Lift the inverse families to see that the comparisons are isomorphisms; injectivity makes them commute with every colimit leg and with $g$. This verifies independence from representatives with the prescribed arrows.",
+   "uses": [
+    "lem-sbc-filtered-colimit-cochain-homology",
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DB (lemma-directed-colimit-exact); degreewise homology comparison of lem-sbc-filtered-colimit-cochain-homology and field Hom bijection."
+   }
+  },
+  {
+   "text": "The degreewise continuity maps $\\alpha^q,\\beta^q$ of Step 3 define chain isomorphisms $L_X\\to S(X)$ and $L_Y\\to S(Y)$. Compose their localizations with $\\theta_X,\\theta_Y$ to obtain the canonical vertical comparisons $a:QL_X\\to X$ and $b:QL_Y\\to Y$. They have the required pullback cocone legs, since this holds on cohomology and the Hom bijection is injective. For every stage $a_0$, the limit equation in Step 6 says $\\beta^q\\iota_{a_0}H^q(\\gamma_{a_0})=H^q(\\gamma)\\alpha^q\\iota_{a_0}$. The colimit universal property therefore gives $\\beta^qg^q=H^q(\\gamma)\\alpha^q$ for all $q$. Injectivity of the field Hom bijection yields $b\\,Qg=\\gamma\\,a$ in $D(A)$, the required square. In particular its bottom arrow is the specified Kummer arrow: its maps are $H^q(\\gamma)$ with the sign already fixed in Steps 5–6, and the Hom bijection permits no other arrow with those maps. If every $\\gamma_a$ is invertible, the inverses of $S(\\gamma_a)$ form a natural transformation in the opposite direction; their degreewise colimit is inverse to $g$. Thus $\\gamma=b\\,Qg\\,a^{-1}$ is invertible. For $c=0$ the shift is zero and the class is the identity; empty supports give zero complexes, so these cases are included.",
+   "uses": [
+    "lem-trf-field-complex-cohomology-splitting",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Definition 2.3.1 (including codimension zero), together with the explicit degreewise colimit square and the field Hom bijection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-regular-sequence",
+  "lemma-weil-pbc-etale-cohomology-continuity",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-pur-support-restriction-triangle",
+  "lem-asd-supported-kummer-support-hom-naturality",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-pur-etale-closed-constant-tensor",
+  "lem-weil-pbc-mate-pasting",
+  "def-per-closed-support-plus-adjunction",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-cat-right-adjoint-composition",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-weil-pbc-free-sheaf-derived-sections",
+  "lem-amb-closed-support-hom",
+  "lem-trf-field-complex-cohomology-splitting",
+  "def-weil-abstract-derived-category",
+  "lem-sbc-filtered-colimit-cochain-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI section 2.1, Definition 2.3.1 and Proposition 2.2.3.1: direct Cartier-flag pullback calculation; Stacks 03Q6 on ambient, closed and open-complement systems plus the support triangle; agent-derived upgrade to the canonical arrow square using the unrestricted field Hom bijection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global supported etale Kummer maps commute with filtered inverse limits of affine Noetherian regular pairs preserving regular equations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"StandardEtalePair.lift_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : S) (h : P.HasMap x), (P.lift x h) P.X = x\", \"doc\": \"Given a standard étale pair $ P = (f, g) $ over a commutative ring $ R $, an element $ x $ in a ring $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, and the canonical ring homomorphism\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePresentation.hasMap\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), self.HasMap self.x\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation of $ S $ over $ R $, the element $ x $ in $ S $ corresponding to the polynomial va\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern etale algebras, structure-sheaf sections of affine scheme limits or Galois topological continuity, not derived supported Kummer maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of the cone of a supported etale fundamental class along affine limits with compatible regular sequences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (s : ↑(c.pt.presheaf.obj (O\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern etale algebras, structure-sheaf sections of affine scheme limits or Galois topological continuity, not derived supported Kummer maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"IsFiltered\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: service returned zero declarations for this combination of notions"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|supported.*cohomology|etale.*colimit",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"13\", \"text\": \"# Kummer-Dedekind theorem\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"15\", \"text\": \"This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"29\", \"text\": \"* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"35\", \"text\": \"* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"56\", \"text\": \"kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"45\", \"text\": \"  case of Kummer's lemma.\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"45\", \"text\": \"* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"50\", \"text\": \"* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"612\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"622\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"632\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"28\", \"text\": \"This is a special case of the so-called *Kummer's lemma* (see for example [washington_cyclotomic],\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"99\", \"text\": \"This is a special case of the so-called *Kummer's lemma*. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"14\", \"text\": \"# Kummer-Dedekind criterion for the splitting of prime numbers\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"16\", \"text\": \"In this file, we give a specialized version of the Kummer-Dedekind criterion for the case of the\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"54\", \"text\": \"open Polynomial NumberField Ideal KummerDedekind UniqueFactorizationMonoid\"}\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"829\", \"text\": \"-- `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` in `NumberTheory.KummerDedekind`\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup.lean\", \"line\": \"52\", \"text\": \"$K^\\\\times / (K^\\\\times)^n$ by the long exact sequence from Kummer theory and Hilbert's theorem 90,\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"line\": \"38\", \"text\": \"* In Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind:\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/Lemmas.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.KummerExtension\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/Lemmas.lean\", \"line\": \"13\", \"text\": \"(We put these in a separate file because of the `KummerExtension` import.)\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.KummerPolynomial\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"14\", \"text\": \"# Kummer Extensions\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern Kummer field extensions, Kummer-Dedekind, binomial valuations or a valued-field completion, not supported etale fundamental classes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived supported etale cohomology continuity Kummer fundamental class affine limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"cyclotomicCharacter.continuous\", \"module\": \"Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter\", \"type\": \"(p : ℕ) [Fact p.Prime] (K L : Type*) [Field K] [Field L] [Algebra K L] :\\n  Continuous ((cyclotomicCharacter L p).comp (MulSemiringAction.toRingAut Gal(L/K) L))\", \"doc\": \"The cyclotomic character homomorphism from the Galois group $\\\\mathrm{Gal}(L/K)$ to the multiplicative group of $p$-adic integers $\\\\mathbb{Z}_p^\\times$ is continuous with respect to the Krull topology o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] : CompactSpace c.pt\", \"doc\": \"If $ I $ is a cofiltered category and $ D : I \\to \\text{Scheme} $ is a diagram where each object $ D(i) $ is a compact space and each morphism $ D(f) $ is an affine morphism, then the limit of $ D $ (i.\"}\n  {\"name\": \"ProfiniteGrp.toLimit_fun_continuous\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : Continuous (toLimit_fun P)\", \"doc\": \"The canonical group homomorphism from a profinite group $ P $ to the limit of its finite quotient groups is continuous with respect to the product topology on the limit.\"}\n  {\"name\": \"InfiniteGalois.algEquivToLimit_continuous\", \"module\": \"Mathlib.FieldTheory.Galois.Profinite\", \"type\": \": Continuous (algEquivToLimit k K)\", \"doc\": \"The algebraic equivalence from the infinite Galois group $\\\\text{Gal}(K/k)$ to the limit of the profinite Galois group functor is continuous with respect to the Krull topology on $\\\\text{Gal}(K/k)$ and \"}\n  {\"name\": \"InfiniteGalois.mulEquivToLimit_symm_continuous\", \"module\": \"Mathlib.FieldTheory.Galois.Profinite\", \"type\": \"[IsGalois k K] : Continuous (mulEquivToLimit k K).symm\", \"doc\": \"The inverse of the isomorphism between the infinite Galois group $\\\\text{Gal}(K/k)$ and the inverse limit of the profinite Galois groups of its finite Galois subextensions is continuous with respect to\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"(j : A.𝒰D.I₀) : IsLimit (A.c' j)\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Γ_preservesLimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": PreservesLimits Γ.{u}.rightOp\", \"doc\": \"The contravariant global sections functor $ \\\\Gamma $ for affine schemes, when considered as a covariant functor from the opposite category of affine schemes to the category of commutative rings, prese\"}\n  {\"name\": \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] :\\n  PreservesLimit D Scheme.Γ.rightOp\", \"doc\": \"For any diagram of schemes where all morphisms are affine and each scheme is compact and quasi-separated, the right opposite of the global sections functor (mapping schemes to their global sections in\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern etale algebras, structure-sheaf sections of affine scheme limits or Galois topological continuity, not derived supported Kummer maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-punctual-purity-trait-test",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 first paragraph, printed p.254 (Fujiwara 2002 Corollary 6.1.5 reduction), with Proposition 3.2.4 (completion invariance) and Proposition 3.2.5 (prime-field/equal-characteristic case), printed pp.244--245. Complete-trait formulation obtained by first completing the strictly henselian regular local test ring. Fresh input: Derived continuity of the specified supported Kummer arrow, not a per-degree substitute.",
+   "via": [
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-trait-test-supported-kummer-continuity",
+  "worker": "stage1",
+  "summary": "Returned-route repair. Removed the excluded transverse Gysin limit theorem and rebuilt continuity and arbitrary Cartier-preserving pullback compatibility explicitly from admissible continuity, support-triangle and ordinary Cartier Kummer inputs. Retained the accepted field-Hom, strict representative, filtered homology and final square arguments. Statement unchanged; no new nodes.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, latest proof Step 3: the finite-torsion regular local model below dimension-normalized duality. This item supplies the derived supported Kummer continuity obligation created by lem-per-punctual-purity-trait-test; the unit/chapter route is retained. The latest blueprint contains no equivalent derived continuity statement.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-etale-cohomology-continuity",
+    "why": "General Stacks 03Q6 continuity for torsion sheaves; applied separately to ambient, closed and open-complement systems. The unit does not replace this ordinary cohomology tool."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Coefficient lines and their arbitrary pullback/tensor comparisons; no purity or supported continuity conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic natural comparison between module and underlying abelian-sheaf cohomology, needed to use ordinary continuity."
+   },
+   {
+    "node": "lem-pur-support-restriction-triangle",
+    "why": "General closed-support localization triangle; used to derive continuity by an explicit exact-sequence chase."
+   },
+   {
+    "node": "lem-asd-supported-kummer-support-hom-naturality",
+    "why": "Generic cone/Hom pullback normalization for a closed pair; used to calculate, not assume, class compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "Generic exactness of filtered colimits of abelian groups, applied to the support long exact sequences."
+   },
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Generic exact closed-topos localization on modules, used for closed exchange and its naturality on complexes."
+   },
+   {
+    "node": "lem-pur-etale-closed-constant-tensor",
+    "why": "Canonical composition-normalized exchange for closed constant sheaves, fixing the exchange used by supported-Hom pullback."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic adjunction calculation identifying pasted exchanges; no geometric purity content."
+   },
+   {
+    "node": "lem-cat-right-adjoint-composition",
+    "why": "Generic pasted unit/counit rule for composite adjunctions, identifying the transpose of the finite class composite."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Ordinary Cartier Kummer boundary and its arbitrary Cartier-preserving pullback. This is the permitted coefficient-level input; the higher-codimension computation remains in the proof."
+   },
+   {
+    "node": "lem-weil-pbc-free-sheaf-derived-sections",
+    "why": "Generic free constant-sheaf representation of ordinary cohomology as derived Hom."
+   },
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Generic supported sections as derived Hom from the closed constant sheaf."
+   },
+   {
+    "node": "lem-trf-field-complex-cohomology-splitting",
+    "why": "Generic unrestricted Hom computation in D of vector spaces; used to lift and detect actual derived arrows and normalize representatives."
+   },
+   {
+    "node": "lem-sbc-filtered-colimit-cochain-homology",
+    "why": "Generic filtered module-complex homology comparison; three-term truncations give all integer degrees."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-etale-cohomology-continuity",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-pur-support-restriction-triangle",
+  "lem-asd-supported-kummer-support-hom-naturality",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-pur-etale-closed-constant-tensor",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cat-right-adjoint-composition",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-weil-pbc-free-sheaf-derived-sections",
+  "lem-amb-closed-support-hom",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-sbc-filtered-colimit-cochain-homology"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-8e8401bcd",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-8e8401bcd (reviewer sub-agent of L); spot-checked: Read in full: contract documents, the earlier return for ffb721, Q84 note, item and every cited statement, ILO XVI Prop. 2.2.3.1 (any base change of generalized classes, p.233), Stacks 03Q6 label. Return point repaired: a BFS from the item reaches 10461 ids and none is on route-pivot-dropped.txt. transverse-gysin-limit and noetherian-supported-product-calculus are gone. The old Step 1 is rebuilt as Steps 1-6 from admissible nodes, as the return asked; the old Steps 2-5 are now 7-10 (old Step 4 verbatim as Step 9) and re-read. Statement and stmt_deps unchanged; no new nodes. Step 1: Cartesian flags, affine U_a transitions, qcqs, Cartier from regularity, all checked. Step 2: 03Q6 node with torsion A(m), m=l. Step 3: support triangle (B=T=V_a), cone maps of the naturality node, five-lemma chase correct. Step 4: closed exchange from the closed-topos essential image is valid for arbitrary h; the twist projection map is checked locally. Step 5: the class-calculus chart composite transposed via pasted adjunctions is independent of which i^! is used; ordinary Kummer arbitrary Cartier-preserving pullback (N=l, A=F_l) is used without flatness. Step 6: the Phi formula and naturality give the operation equality. Steps 7-10: field Hom bijection, canonical S(P), theta_P, and the 3-term sbc trick are all correct. FIX: Step 4 claimed without argument that its exchange 'is precisely b_{h,C}', and Steps 5-6 also need the exchanges of lem-asd-ordinary-supported-kummer and support-hom-naturality to be this same map. I added the argument (A_T'->h^{-1}j_*A_C is an epimorphism and all of these maps send it to the unit) and added both nodes, already proof_deps, to the step's uses; the step is now 1926 characters. Batch 5, all three accepted as generic: oriented-closed-base-localization is topos closed-complement theory; field-complex-splitting is linear algebra over a field; lem-asd-ordinary-supported-kummer reaches only generic pod/trf lemmas (stalk tensor/scalar, schematic density, limit descent) and is already in the statement closure via class-calculus. None is a step of the trace formula or Poincare duality. Accepted the 15 tool_uses. No SGA; unit sk-p-dl-a1-perverse route kept. Edge cases c=0, constant system, nonflat k[t,x]->k[t] and unbounded complexes all checked.; 1 file(s) fixed by the reviewer"
+ }
+}

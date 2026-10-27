@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group O4
+Authors: SHEAF group T2
 -/
 module
 
@@ -11,211 +11,142 @@ public import Sheaf.Paper.FiniteCoefficientPoint
 public import Sheaf.AlgebraicGeometry.PureDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Sheaf.Paper.FiniteTorStability
-import Sheaf.Paper.PointFibreDerivedTensor
-import Sheaf.Paper.PointFibreEquivalence
-import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
-import Sheaf.Paper.PointSectionsDerivedReduction
+public import Sheaf.Paper.GlobalVerdierDualityData
+import Sheaf.Paper.GlobalIdentityNormalization
+import Sheaf.CategoryTheory.ProjectionInternalHom
+import Mathlib.CategoryTheory.Adjunction.Unique
 
-/-! # Global Verdier duality at all coefficient stages
-
-Source: blueprint main-20261015, sec-six-functors/sk-thm-sf-global-duality,
-statement and its six proof steps (blueprint: sk-thm-sf-global-duality).
-
-The assertion is in the constructible point category, before applying the recorded
-point fibre equivalences. The four categories, compact-support adjunctions, closed
-structures, ordinary direct images and coefficient comparisons are the published ones.
-In particular there is no ambient exceptional-adjoint hypothesis.
--/
+/-! # Global Verdier duality by the five adjunction bijections -/
 
 @[expose] public noncomputable section
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
 set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
-set_option autoImplicit false
-set_option relaxedAutoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
-universe u
-
+universe u a b
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 open CategoryTheory.Pretriangulated.Opposite
 open scoped CategoryTheory.Functor
-
-namespace WeilConjectures
-namespace GlobalVerdierDuality
+namespace WeilConjectures.GlobalVerdierDuality
 open ConstructibleExceptionalCoefficients VerdierExchange
 
-variable (l : ℕ) [Fact l.Prime]
-  (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-
-/-- The identity adjunction, with its existing exact and shift structures. Using this
-operation makes the point dual literally internal Hom into the coefficient unit.
-Source: blueprint global-duality proof step 3, identity normalization
-(blueprint: sk-thm-sf-global-duality). -/
-def identityOperation (T : Scheme.{u}) (s : Stage.{u} l) : Operation l Ω T T s where
-  F := 𝟭 _
-  G := 𝟭 _
-  adjunction := Adjunction.id
-  leftExact := inferInstance
-  rightExact := inferInstance
-  unitShift := inferInstance
-  counitShift := inferInstance
+variable {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
+  (S : CoefficientClosedStructure H)
+private theorem transpose_left (P Q : D) {T T' : D} (f : T ⟶ T')
+    (g : S.tensor.obj (T', P) ⟶ Q) :
+    S.transpose T P Q (S.tensor.map (Prod.mkHom f (𝟙 P)) ≫ g) =
+      f ≫ S.transpose T' P Q g := by
+  let := S.monoidal
+  simpa only [CoefficientClosedStructure.transpose, CoefficientClosedStructure.tensor,
+    MonoidalCategory.tensor_map, MonoidalCategory.tensorHom_id,
+    MonoidalCategory.tensorRight, MonoidalCategory.curriedTensor, Functor.flip,
+    Prod.sectR, MonoidalCategory.tensor, Functor.comp_obj] using
+    (S.adjunction P).homEquiv_naturality_left f g
+private theorem transpose_symm_left (P Q : D) {T T' : D} (f : T ⟶ T')
+    (g : T' ⟶ H.obj (op P, Q)) :
+    (S.transpose T P Q).symm (f ≫ g) =
+      S.tensor.map (Prod.mkHom f (𝟙 P)) ≫ (S.transpose T' P Q).symm g := by
+  let := S.monoidal
+  simpa only [CoefficientClosedStructure.transpose, CoefficientClosedStructure.tensor,
+    MonoidalCategory.tensor_map, MonoidalCategory.tensorHom_id,
+    MonoidalCategory.tensorRight, MonoidalCategory.curriedTensor, Functor.flip,
+    Prod.sectR, MonoidalCategory.tensor, Functor.comp_obj] using
+    (S.adjunction P).homEquiv_naturality_left_symm f g
+private theorem transpose_symm_id (P Q : D) :
+    (S.transpose (H.obj (op P, Q)) P Q).symm (𝟙 _) = S.evaluation P Q :=
+  (S.adjunction P).homEquiv_symm_id Q
+private def unitAdjunction :
+    @MonoidalCategory.tensorRight D _ S.monoidal S.monoidal.tensorUnit ⊣ 𝟭 D := by
+  letI := S.monoidal
+  exact Adjunction.id.ofNatIsoLeft (MonoidalCategory.rightUnitorNatIso D).symm
+private def closedUnitIso (O : D) : H.obj (op S.monoidal.tensorUnit, O) ≅ O :=
+  ((S.adjunction S.monoidal.tensorUnit).rightAdjointUniq (unitAdjunction S)).app O
+private theorem closedUnitIso_hom (O : D) :
+    (closedUnitIso S O).hom =
+      (S.monoidal.rightUnitor _).inv ≫ S.evaluation S.monoidal.tensorUnit O := by
+  let := S.monoidal
+  have h := Adjunction.homEquiv_symm_rightAdjointUniq_hom_app
+    (S.adjunction S.monoidal.tensorUnit) (unitAdjunction S) O
+  change ((unitAdjunction S).homEquiv _ _).symm (closedUnitIso S O).hom = _ at h
+  rw [unitAdjunction, Adjunction.homEquiv_ofNatIsoLeft_symm_apply] at h
+  simp only [Adjunction.homEquiv_counit, Adjunction.id, Functor.id_map,
+    NatTrans.id_app, Iso.symm_inv,
+    MonoidalCategory.rightUnitorNatIso_hom_app] at h
+  dsimp only [Functor.comp_obj, Functor.id_obj] at h
+  simp only [Category.comp_id] at h
+  change (S.monoidal.rightUnitor _).hom ≫ (closedUnitIso S O).hom =
+    S.evaluation S.monoidal.tensorUnit O at h
+  rw [← h, Iso.inv_hom_id_assoc]
+private theorem closedUnitIso_inv (O : D) :
+    (closedUnitIso S O).inv = S.transpose O S.monoidal.tensorUnit O
+      (S.monoidal.rightUnitor O).hom := by
+  let := S.monoidal
+  apply (S.adjunction S.monoidal.tensorUnit).homEquiv O O |>.symm.injective
+  have h := Adjunction.homEquiv_symm_rightAdjointUniq_hom_app
+    (unitAdjunction S) (S.adjunction S.monoidal.tensorUnit) O
+  rw [← Adjunction.rightAdjointUniq_inv_app] at h
+  change ((S.adjunction S.monoidal.tensorUnit).homEquiv O O).symm
+    (closedUnitIso S O).inv = _ at h
+  change _ = ((S.adjunction S.monoidal.tensorUnit).homEquiv O O).symm
+    (((S.adjunction S.monoidal.tensorUnit).homEquiv O O) _)
+  rw [Equiv.symm_apply_apply]
+  simpa [unitAdjunction] using h
 
 section Stage
-variable {X S : Scheme.{u}} {s : Stage.{u} l}
-  {F : Operation l Ω X S s} {unit : C l Ω S s}
+variable (l : ℕ) [Fact l.Prime]
+  (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+  {X S : Scheme.{u}} {s : Stage.{u} l}
+  {F : Operation.{u, u} l Ω X S s} {unit : C.{u, u} l Ω S s}
 
-/-- The stage data specialized to the identity of the point and the same structure
-morphism on both sides. This is the existing StageData, without a new duality notion.
-Source: blueprint global-duality proof steps 2--3
-(blueprint: sk-thm-sf-global-duality). -/
-abbrev Data (F : Operation l Ω X S s) (unit : C l Ω S s) :=
-  StageData l Ω s F (identityOperation l Ω S s) F unit
-
-/-- Evaluation identifies Hom from the tensor unit to omega with omega. This is the
-actual evaluation map, with the right unitor inserted, before asserting invertibility.
-Source: blueprint global-duality proof step 6
-(blueprint: sk-thm-sf-global-duality). -/
-def unitEvaluation (d : Data l Ω F unit) :
-    (d.dualX l Ω).obj (op d.closedX.monoidal.tensorUnit) ⟶ F.G.obj unit :=
-  (d.closedX.monoidal.rightUnitor _).inv ≫
-    d.closedX.evaluation d.closedX.monoidal.tensorUnit (F.G.obj unit)
-
-/-- The inverse candidate is the transpose of the right unitor of omega.
-Source: blueprint global-duality proof step 6, tensor/Hom triangles
-(blueprint: sk-thm-sf-global-duality). -/
-def unitCoevaluation (d : Data l Ω F unit) :
-    F.G.obj unit ⟶ (d.dualX l Ω).obj (op d.closedX.monoidal.tensorUnit) :=
-  d.closedX.transpose _ d.closedX.monoidal.tensorUnit (F.G.obj unit)
-    (d.closedX.monoidal.rightUnitor _).hom
-
-/-- The natural isomorphism has the evaluation/projection transpose as its components;
-its constant specialization is the same component followed by evaluation of Hom(unit,-).
-All data here are conclusions. The point coefficient dual is `d.dualY`, since its
-exceptional operation is the literal identity adjunction.
-Source: blueprint global-duality statement, naturality, shifts and final clause
-(blueprint: sk-thm-sf-global-duality). -/
-structure Conclusion (d : Data l Ω F unit) where
-  exchange : StageConclusion l Ω d
-  dualizing : d.dualizing = Iso.refl (F.G.obj unit)
-  unitIso : (d.dualX l Ω).obj (op d.closedX.monoidal.tensorUnit) ≅ F.G.obj unit
-  evaluation : unitIso.hom = unitEvaluation l Ω d
-  coevaluation : unitIso.inv = unitCoevaluation l Ω d
-  constant : (d.dualY l Ω).obj (op (F.F.obj d.closedX.monoidal.tensorUnit)) ≅
-    d.star.obj (F.G.obj unit)
-  constant_hom : constant.hom =
-    exchange.epsilon.hom.app (op d.closedX.monoidal.tensorUnit) ≫ d.star.map unitIso.hom
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem epsilon_isIso (d : Data l Ω F unit)
+    (hd : d.dualizing = Iso.refl (F.G.obj unit))
+    (hn : ∀ (M : C.{u, u} l Ω X s) {K L : C.{u, u} l Ω S s} (k : K ⟶ L),
+      F.F.map (d.closedX.tensor.map (Prod.mkHom (d.pull.map k) (𝟙 M))) ≫
+          (d.projection L M).hom =
+        (d.projection K M).hom ≫ d.closedY.tensor.map (Prod.mkHom k (𝟙 _)))
+    (M : C.{u, u} l Ω X s) : IsIso (d.epsilon l Ω M) := by
+  let E := fun K : C.{u, u} l Ω S s ↦
+    (d.closedY.transpose K (F.F.obj M) unit).symm.trans
+      ((Iso.homCongr (d.projection K M) (Iso.refl unit)).symm.trans
+        ((F.adjunction.homEquiv _ unit).trans
+          ((d.closedX.transpose _ M (F.G.obj unit)).trans (d.adjunction.homEquiv K _))))
+  have hnE : ∀ {K L : C.{u, u} l Ω S s} (k : K ⟶ L)
+      (g : L ⟶ d.homY.obj (op (F.F.obj M), unit)),
+      E K (k ≫ g) = k ≫ E L g := by
+    intro K L k g
+    dsimp only [E, Equiv.trans_apply]
+    simp only [Iso.homCongr_symm, Iso.homCongr_apply, Iso.symm_inv, Iso.symm_hom,
+      Iso.refl_inv, Category.comp_id]
+    rw [transpose_symm_left]
+    rw [← Category.assoc, ← hn M k, Category.assoc]
+    rw [Adjunction.homEquiv_naturality_left, transpose_left,
+      Adjunction.homEquiv_naturality_left]
+  let e := isoOfNaturalHomEquiv E hnE
+  have he : e.hom = d.epsilon l Ω M := by
+    change E _ (𝟙 _) = _
+    dsimp only [E, Equiv.trans_apply]
+    simp only [Iso.homCongr_symm, Iso.homCongr_apply, Iso.symm_inv, Iso.symm_hom,
+      Iso.refl_inv, Category.comp_id,
+      transpose_symm_id]
+    simp only [StageData.epsilon, hd, Iso.refl_hom]
+    change _ = (d.adjunction.homEquiv _ _)
+      (d.closedX.transpose _ _ _ ((F.adjunction.homEquiv _ _)
+        ((d.projection _ M).hom ≫ d.closedY.evaluation _ unit) ≫ 𝟙 _))
+    rw [Category.comp_id]
+  rw [← he]
+  exact e.isIso_hom
 
 end Stage
 
-section Geometry
-variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
-  {X S : Scheme.{u}} (f : X ⟶ S)
-  [X.Over (Spec (.of D.k))] [S.Over (Spec (.of D.k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
-  [LocallyOfFiniteType (S ↘ Spec (.of D.k))] [QuasiCompact (S ↘ Spec (.of D.k))]
-  [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-  (A : System l Ω D hl (f := f)) (c : Compactification f)
-
-/-- A global-duality package uses the existing exact finite-Tor categories and the
-published compact-support system. Ring realizations fix internal Hom, evaluation,
-ordinary direct image, projection and signed shifts on the actual small sites.
-Coefficient comparisons below include nonflat finite reduction, completed scalar
-extension, rationalization and common finite stages. They are conclusions, never
-extra assumptions on X or K.
-Source: blueprint global-duality statement and proof steps 1--6
-(blueprint: sk-thm-sf-global-duality). -/
-structure Package where
-  unit (s : Stage.{u} l) : C l Ω S s
-  stage (s : Stage.{u} l) : Data l Ω (A.ring.operation c s) (unit s)
-  conclusion (s : Stage.{u} l) : Conclusion l Ω (stage s)
-  ring (s : RingStage.{u} l) : RingRealization l Ω f s (stage (s.stage l))
-  projection (s : RingStage.{u} l) :
-    RingProjection l Ω c s (ring s) (A.ring.left c s)
-  ringShifts (s : RingStage.{u} l) :
-    RingShiftRealization l Ω (ring s) (conclusion (s.stage l)).exchange
-  unitX (s : RingStage.{u} l) :
-    (s.inclusion l Ω X).obj (stage (s.stage l)).closedX.monoidal.tensorUnit ≅ ringUnit l X s
-  unitY (s : Stage.{u} l) : (stage s).closedY.monoidal.tensorUnit ≅ unit s
-  unitX_normalized (s : RingStage.{u} l) (K : C l Ω X (s.stage l)) :
-    (s.inclusion l Ω X).map ((stage (s.stage l)).closedX.monoidal.rightUnitor K).hom =
-      (ring s).tensorX.hom.app (K, (stage (s.stage l)).closedX.monoidal.tensorUnit) ≫
-        (ring s).modelX.closed.tensor.map (Prod.mkHom (𝟙 _)
-          ((unitX s).hom ≫ (ring s).modelX.unitIso.inv)) ≫
-        ((ring s).modelX.closed.monoidal.rightUnitor ((s.inclusion l Ω X).obj K)).hom
-  unitY_normalized (s : RingStage.{u} l) (K : C l Ω S (s.stage l)) :
-    (s.inclusion l Ω S).map ((stage (s.stage l)).closedY.monoidal.rightUnitor K).hom =
-      (ring s).tensorY.hom.app (K, (stage (s.stage l)).closedY.monoidal.tensorUnit) ≫
-        (ring s).modelY.closed.tensor.map (Prod.mkHom (𝟙 _)
-          ((s.inclusion l Ω S).map (unitY (s.stage l)).hom ≫
-            (ring s).unitIso.hom ≫ (ring s).modelY.unitIso.inv)) ≫
-        ((ring s).modelY.closed.monoidal.rightUnitor ((s.inclusion l Ω S).obj K)).hom
-  ringScalar {s t : RingStage.{u} l}
-      (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l)) (ha : Allowed l a) :
-    ∃ b : StageScalar l Ω (stage (s.stage l)) (stage (t.stage l))
-        (A.ring.scalar a ha true).functor (A.ring.scalar a ha false).functor
-        (A.ring.scalar a ha false).functor,
-      ScalarConclusion l Ω b ∧
-      Nonempty (ScalarShifts l Ω (conclusion (s.stage l)).exchange
-        (conclusion (t.stage l)).exchange b) ∧
-      (b.exceptional.q l Ω) = (A.ring.comparison c a ha).q ∧
-      (t.inclusion l Ω S).map b.unit.hom ≫ (ring t).unitIso.hom =
-        (A.ring.scalar a ha false).realization.hom.app (unit (s.stage l)) ≫
-          (pbcDerivedExtend (a.map S)).map (ring s).unitIso.hom ≫ ringUnitScalar l a S
-  rationalization (E : FieldStage.{u} l) :
-    ∃ b : StageScalar l Ω (stage (.integral E)) (stage (.rational E))
-        (ConstructibleExceptionalCoefficients.rationalization l Ω E X)
-        (ConstructibleExceptionalCoefficients.rationalization l Ω E S)
-        (ConstructibleExceptionalCoefficients.rationalization l Ω E S),
-      ScalarConclusion l Ω b ∧
-      Nonempty (ScalarShifts l Ω (conclusion (.integral E)).exchange
-        (conclusion (.rational E)).exchange b) ∧
-      b.exceptional = A.fields.rationalizationComparison c E
-  rationalScalar (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier) :
-    ∃ b : StageScalar l Ω (stage (.rational E)) (stage (.rational L))
-        (ConstructibleExceptionalCoefficients.rationalScalar l Ω E L i X)
-        (ConstructibleExceptionalCoefficients.rationalScalar l Ω E L i S)
-        (ConstructibleExceptionalCoefficients.rationalScalar l Ω E L i S),
-      ScalarConclusion l Ω b ∧
-      Nonempty (ScalarShifts l Ω (conclusion (.rational E)).exchange
-        (conclusion (.rational L)).exchange b) ∧
-      b.exceptional = A.fields.rationalComparison c E L i
-  common (i : AlgebraicallyClosedCoefficients.Index l Ω) :
-    ∃ b : StageScalar l Ω (stage (.rational (commonField l Ω i))) (stage .closed)
-        (commonInclusion l Ω X i) (commonInclusion l Ω S i) (commonInclusion l Ω S i),
-      ScalarConclusion l Ω b ∧
-      Nonempty (ScalarShifts l Ω (conclusion (.rational (commonField l Ω i))).exchange
-        (conclusion .closed).exchange b) ∧
-      b.exceptional = A.common.commonComparison c i
-
-end Geometry
-
-/-- Both geometric alternatives are retained, including the nonproper descended case.
-An isomorphism in Over identifies the structure map, as well as the underlying scheme.
-Source: blueprint global-duality statement, second sentence
-(blueprint: sk-thm-sf-global-duality). -/
-def GeometricAlternative (D : FiniteFieldDatum.{u}) (X : Over (Spec (.of D.k))) : Prop :=
-  IsProper X.hom ∨
-    ∃ (X₀ : Over (Spec (.of D.k₀))) (_ : Smooth X₀.hom) (_ : IsSeparated X₀.hom)
-      (_ : LocallyOfFiniteType X₀.hom) (_ : QuasiCompact X₀.hom)
-      (_ : GeometricallyConnected X₀.hom), Nonempty (X ≅ D.geometricFiber X₀)
-
-/-- State the assertion at the geometric point with its identity structure morphism.
-The quantifier ranges over the already constructed normalized systems; it is not an
-existence assumption, and the theorem is independent of the compactification chosen.
-Source: blueprint global-duality proof steps 1--3
-(blueprint: sk-thm-sf-global-duality). -/
-def Assertion (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
-    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
-    [IsSeparated (X ↘ Spec (.of D.k))] : Prop :=
-  letI : (Spec (.of D.k)).Over (Spec (.of D.k)) := ⟨𝟙 _⟩
-  ∀ (A : System l Ω D hl (f := X ↘ Spec (.of D.k)))
-    (c : Compactification (X ↘ Spec (.of D.k))),
-    Nonempty (Package l Ω D hl (X ↘ Spec (.of D.k)) A c)
+variable (l : ℕ) [Fact l.Prime]
+  (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- Global Verdier duality in the full bounded constructible point category at all
 four coefficient stages. Its natural isomorphism has the actual projection/evaluation
@@ -254,7 +185,36 @@ theorem global_verdier_duality (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (d : ℕ) (_hd : X.IsPureDimension d)
     (_hX : GeometricAlternative D (Over.mk (X ↘ Spec (.of D.k)))) :
     Assertion l Ω D hl X := by
-  sorry
+  let : (Spec (.of D.k)).Over (Spec (.of D.k)) := ⟨𝟙 _⟩
+  have hExchange := VerdierExchange.verdier_exchange l Ω D hl (X ↘ Spec (.of D.k))
+  intro A c
+  obtain ⟨N⟩ := identity_normalization l Ω D hl X hExchange A c
+  have h : ∀ s M, IsIso ((N.stage s).epsilon l Ω M) := fun s M ↦
+    epsilon_isIso l Ω (N.stage s) (N.dualizing s) (N.projection_naturality s) M
+  let U := fun s ↦ closedUnitIso (N.stage s).closedX ((A.ring.operation c s).G.obj (N.unit s))
+  let C : ∀ s, Conclusion l Ω (N.stage s) := fun s ↦ {
+    exchange := (N.maps s).toConclusion l Ω (h s)
+    dualizing := N.dualizing s
+    unitIso := U s
+    evaluation := closedUnitIso_hom _ _
+    coevaluation := closedUnitIso_inv _ _
+    constant := ((N.maps s).toConclusion l Ω (h s)).epsilon.app
+      (op (N.stage s).closedX.monoidal.tensorUnit) ≪≫ (N.stage s).star.mapIso (U s)
+    constant_hom := rfl }
+  exact ⟨{
+    unit := N.unit
+    stage := N.stage
+    conclusion := C
+    ring := N.ring
+    projection := N.projection
+    ringShifts := fun s ↦ N.ringShifts s (h (s.stage l))
+    unitX := N.unitX
+    unitY := N.unitY
+    unitX_normalized := N.unitX_normalized
+    unitY_normalized := N.unitY_normalized
+    ringScalar := N.ringScalar h
+    rationalization := N.rationalization h
+    rationalScalar := N.rationalScalar h
+    common := N.common h }⟩
 
-end GlobalVerdierDuality
-end WeilConjectures
+end WeilConjectures.GlobalVerdierDuality

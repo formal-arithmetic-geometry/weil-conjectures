@@ -1,0 +1,157 @@
+{
+ "id": "lem-sf-etale-restriction-compositor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-exceptional",
+   "place": "Proof, final paragraph: identifying the transposes with the same compact-support coefficient comparison; geometric composition of the compact-support counits.",
+   "via": [
+    "lem-sf-compact-coefficient-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Etale restriction commutes with canonical compact-support composition",
+ "statement": "Let $A,B$ be finite commutative rings and $\\varphi:A\\to B$ a unital homomorphism. Let $X\\xrightarrow fY\\xrightarrow gZ$ be quasi-compact morphisms of schemes [def-pc-scheme, def-weil-finite-type-morphism, def-weil-proper-morphism], with fixed compactifications of $f,g,fg$. Write $F_{h,R}=Rh_{!,R}$ on $D^+(T_{\\mathrm{et}},R)$ [def-amb-etale-compact-support], $U_T=D^+(\\operatorname{Res}_{\\varphi,T})$, and $c_h:F_{h,A}U_{\\mathrm{source}(h)}\\xrightarrow{\\sim}U_{\\mathrm{target}(h)}F_{h,B}$ for the proper/open restriction comparison, whose open factor is the inverse unit mate and whose proper factor is the derived direct-image restriction comparison [lem-fix-compact-support-coefficient-change]. Let $\\alpha_R:F_{g,R}F_{f,R}\\xrightarrow{\\sim}F_{fg,R}$ be the canonical chosen-compactification compositor [lem-amb-etale-compact-comparisons]. Then for every $L\\in D^+(X_{\\mathrm{et}},B)$,\n$$\\alpha_{A,U_XL}\\,;\\,c_{fg,L}=F_{g,A}(c_{f,L})\\,;\\,c_{g,F_{f,B}L}\\,;\\,U_Z(\\alpha_{B,L}),$$\nwhere semicolons mean composition in order from left to right. Both sides have source $F_{g,A}F_{f,A}U_XL$ and target $U_ZF_{fg,B}L$. No scalar extension or tensor presentation is involved.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, compatible compactification triangle and independence of choices; Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, first restriction-of-scalars square."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-amb-etale-compact-support",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-amb-etale-compact-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical compactification triangle Compactification.Triangle.ofHasCompactification of f,g, obtained from the supplied compactifications of g and fg by Compactification.ofComp and restriction. This construction needs no qcqs hypothesis or new application of Nagata. The canonical compositor comparison theorem computes its component as proper composition, open composition and cartesian proper/open interchange, conjugated by the chosen-compactification comparisons.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, compatible compactification triangle and independence of choices; Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, first restriction-of-scalars square."
+   }
+  },
+  {
+   "text": "Commute scalar restriction through proper composition using the resolution-normalized direct-image comparison. For open composition, take the open-adjunction transpose; both paths identify the same inverse image and the same unit. For mixed interchange, paste the scalar inverse-image square with its cartesian inverse-image square and take mates. These three equations give the restriction square for the compatible triangle.",
+   "uses": [
+    "lem-fix-compact-support-coefficient-change",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, compatible compactification triangle and independence of choices; Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, first restriction-of-scalars square."
+   }
+  },
+  {
+   "text": "For the chosen compactifications use the canonical refinement factors. Each is proper pushforward of the proper/open comparison, so the same mate square commutes with it. Cancel the inverse refinement factors. This gives the displayed equation with exactly the specified compositor and restriction comparisons.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "def-weil-pbc-proper-open-comparison",
+    "lem-fix-compact-support-coefficient-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, compatible compactification triangle and independence of choices; Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, first restriction-of-scalars square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proper-open-comparison",
+  "lem-amb-etale-compact-comparisons",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, compatible compactification triangle and independence of choices; Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, first restriction-of-scalars square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar restriction commutes with the canonical compositor for etale compactly supported derived direct images",
+   "results": "LinearMap.restrictScalars_comp; AlgHom.restrictScalars; PresheafOfModules.restrictScalarsObj; ModuleCat.restrictScalarsComp; ModuleCat.RestrictScalars.obj'; ModuleCat.restrictScalarsComp'App_hom_naturality; ModuleCat.restrictScalars; SheafOfModules.restrictScalars",
+   "date": "2026-10-25",
+   "verdict": "No match: the results do not state the normalized scalar-restriction/compact-support compositor equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar restriction intertwines the canonical composition isomorphism for derived compact support of etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; PresheafOfModules.restrictScalarsCompToPresheaf; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-25",
+   "verdict": "No match: the results do not state the normalized scalar-restriction/compact-support compositor equation."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*composition|[Rr]estriction.*[Cc]ompositor",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No match: the results do not state the normalized scalar-restriction/compact-support compositor equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp in Mathlib.CategoryTheory.Adjunction.Mates: mates commute with horizontal composition of supplied squares.",
+   "date": "2026-10-25",
+   "verdict": "Generic pasting lemma only; it does not verify the normalized proper/open and refinement squares for these concrete functors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompactCoefficientComposition",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleRestrictionCompositor",
+  "file": "lean/Sheaf/SixFunctors/EtaleRestrictionCompositor.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportRestrictionPlus_compositor",
+  "statement": "theorem compactSupportRestrictionPlus_compositor\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (g : Y ⟶ Z)\n    [QuasiCompact f] [QuasiCompact g]\n    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]\n    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :\n    (rightDerivedLowerShriekPlusCompIso A f g).hom.app\n        ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj L) ≫\n      (compactSupportCoefficientRestrictionPlus φ\n        (HasCompactification.compactification (f ≫ g))).hom.app L =\n    (rightDerivedLowerShriekPlus (ModuleCat.{u + 1} A) g).map\n        ((compactSupportCoefficientRestrictionPlus φ\n          (HasCompactification.compactification f)).hom.app L) ≫\n      (compactSupportCoefficientRestrictionPlus φ\n        (HasCompactification.compactification g)).hom.app\n          ((rightDerivedLowerShriekPlus (ModuleCat.{u + 1} B) f).obj L) ≫\n      (Sheaf.restrictScalars Z.smallEtaleTopology φ).mapDerivedCategoryPlus.map\n        ((rightDerivedLowerShriekPlusCompIso B f g).hom.app L)",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8ed0",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T164929-L-1133303",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8ed0",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T164929-L-1133303",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and new EtaleRestrictionCompositor module vs clone, nodes and unit sk-prop-sf-biduality-general (realized empty); signatures unchanged; 5 direct importers compiled against the delivered modules; axioms checked"
+ }
+}

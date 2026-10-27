@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-kostant-rosenlicht-affine-orbits",
+ "kind": "statement",
+ "title": "Unipotent orbits on affine schemes are closed",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field]. Let $V$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism, def-sbc-smooth-morphisms, def-weil-connected-scheme]. Assume $V$ is unipotent in the sense of [def-sfb-solvable-group-structure], meaning that all geometric points in a faithful finite-dimensional representation are unipotent matrices. Let $Y$ be an affine scheme of finite type over $k$ [def-pc-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism], with a $k$-scheme action $a:V\\times_kY\\to Y$ satisfying the unit and multiplication identities. For every $y\\in Y(k)$, the image of the orbit morphism $V\\to Y$, $v\\mapsto a(v,y)$, is closed in the underlying topological space of $Y$. With its reduced induced subscheme structure it is a closed subscheme of $Y$ [def-weil-pbc-scheme-reduction]. No reducedness assumption on $Y$ and no characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.64 (Kostant--Rosenlicht) and its proof, printed pp.373--374; the theorem explicitly allows an affine algebraic scheme, not only an affine variety."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-solvable-group-structure",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Write $O$ for the image of $q:V\\to Y$, $v\\mapsto vy$. The affine-source separatedness lemma makes $Y\\to\\operatorname{Spec}k$ separated. The orbit-geometry lemma therefore applies: $O$ is locally closed, $q:V\\to O$ is faithfully flat, and its closure and boundary are invariant. Let $X=(\\overline O)_{\\mathrm{red}}\\hookrightarrow Y$ and $Z=(\\overline O\\setminus O)_{\\mathrm{red}}\\hookrightarrow X$. The reduced-induced-closed-subscheme lemma constructs both. Here $O$ is open dense in $X$; in particular $Z$ is a proper closed subset. Both reduced subschemes are invariant, as in the invariant-closure and boundary assertion of the orbit lemma. They inherit actions of $V$. Writing $Y=\\operatorname{Spec}B$, the same reduced-subscheme lemma writes $X=\\operatorname{Spec}A$ with $A=B/J$ reduced. A finite set of algebra generators of $B$ maps to generators of $A$, so $X$ is affine finite type. No reduction of the original $Y$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.64, pp.373--374, first two sentences; Propositions 7.4--7.5, pp.139--140."
+   }
+  },
+  {
+   "text": "Let $I\\subset A$ be the radical ideal defining $Z$. It is nonzero: $I=0$ would give $Z=\\operatorname{Spec}A=X$, whereas $y\\in O$ is outside $Z$. If $Z$ is empty there is already nothing to prove, so suppose otherwise. It suffices to contradict this supposition by finding a nonzero scalar in $I$. The ideal description and the equality $V(I)=Z$ are supplied by the reduced-induced-closed-subscheme lemma.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.64, p.374, the ideal I(Z) is nonzero."
+   }
+  },
+  {
+   "text": "Give $X$ the right action $x\\cdot v=v^{-1}x$ and pull it back to $c:A\\to A\\otimes_k k[V]$. The affine spectrum dictionary and tensor-pushout lemma identify this tensor product with the coordinate ring of $X\\times_kV$: maps to any affine scheme are pairs of algebra maps agreeing on $k$. Pulling back the right-action identities gives $(c\\otimes1)c=(1\\otimes\\Delta)c$ and $(1\\otimes\\epsilon)c=1$. Thus the representation/comodule dictionary gives the rational representation $(v f)(x)=f(v^{-1}x)$. Since $Z$ is an invariant closed subscheme, the composite $I\\xrightarrow c A\\otimes k[V]\\to(A/I)\\otimes k[V]$ is zero. Its kernel is $I\\otimes k[V]$: choose a vector-space complement $A=I\\oplus C$, tensor this direct sum, and the quotient map is the identity on the $C$ summand and zero on the $I$ summand. Consequently $I$ is itself a rational submodule. Choose $0\\ne h\\in I$. Apply the finite-subrepresentation lemma to the singleton $\\{h\\}$ in this rational module to obtain a nonzero finite-dimensional rational submodule $W\\subset I$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-comodule-finite-subrepresentation",
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 4(d), pp.86--87, coordinate representation of an action; Remark 4.1 and Proposition 4.7/Corollary 4.8; applied in Theorem 17.64, p.374."
+   }
+  },
+  {
+   "text": "Choose a basis $W\\simeq k^d$, where $d\\geq1$. The representation/comodule dictionary turns its rational action into a homomorphism $V\\to\\operatorname{GL}_{d,k}$. The fixed-vector lemma applies to this representation: $V$ is smooth affine finite type, and the faithful representation in the definition of unipotence is a closed immersion, hence is injective on points over every $k$-algebra; its geometric unipotence includes all $k$-points. We obtain $0\\ne f\\in W\\subset I$ fixed by every $v\\in V(k)$. In particular, applying the formula of step 3 to $v^{-1}$ gives $f(vy)=f(y)$ for every $v\\in V(k)$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-sfb-solvable-group-structure",
+    "lem-sfb-unipotent-rational-representation-fixed-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.64, p.374, the nonzero fixed function; Proposition 14.3, p.280, and Corollary 14.12, p.283."
+   }
+  },
+  {
+   "text": "The Jacobson-density lemma and the closed-point residue-field lemma show that $V(k)$ is dense in $V$: its closed points are dense and have residue field $k$. By continuity of $q$, $q(V)\\subset\\overline{q(V(k))}$, so $q(V(k))$ is dense in $X$ since $q(V)=O$ and $O$ is dense. Step 4 says that $f-c$, where $c=f(y)\\in k$, vanishes on that dense subset. Its vanishing locus is closed, so it is all of $X$. The radical-ideal description of the reduced induced structure, applied to all of the reduced affine scheme $X$, says that a function vanishing at all its points is zero. Hence $f=c$ in $A$. Since $f\\ne0$, $c\\ne0$; its inverse in $k$ gives $1=c^{-1}f\\in I$, contradicting $Z\\ne\\varnothing$. Thus $Z$ is empty and $O=\\overline O$ is closed in $Y$. The reduced-induced-closed-subscheme lemma now gives exactly the claimed closed subscheme structure on this image, including when $Y$ is nonreduced.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.64, p.374, last three sentences; explicit density argument for the constant function on the reduced orbit closure."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-comodule-finite-subrepresentation",
+  "lem-weil-pbc-vector-space-free",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-solvable-group-structure",
+  "lem-sfb-unipotent-rational-representation-fixed-vector",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.64, pp.373--374, using Remark 4.1, Proposition 4.7/Corollary 4.8 and Propositions 7.4--7.5; the orbit closure is explicitly given its reduced structure."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every orbit of a smooth connected unipotent algebraic group acting on an affine finite type scheme over an algebraically closed field is closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat),\\n  IsClosed (Set.range ⇑(CategoryTheory.PreGaloisCategory.autEmbedding F))\", \"doc\": \"The image of the automorphism group embedding $\\\\text{Aut}(F) \\\\to \\\\prod_{X \\\\in \\\\mathcal{C}} \\\\text{Aut}(F(X))$ is a closed subset in the product topology, where each factor $\\\\text{Aut}(F(X))$ is equippe\"}\n  {\"name\": \"isClosedMap_smul\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {α : Type u_2} {G : Type u_4} [inst : TopologicalSpace α] [inst_1 : Group G] [inst_2 : MulAction G α]\\n  [ContinuousConstSMul G α] (c : G), IsClosedMap fun x => c • x\", \"doc\": \"For any group $ G $ acting continuously on a topological space $ \\\\alpha $, the scalar multiplication map $ x \\\\mapsto c \\\\cdot x $ by each element $ c \\\\in G $ is a closed map, meaning the image of every\"}\n  {\"name\": \"MulAction.IsPretransitive.t1Space_iff\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {α : Type u_2} (G : Type u_4) [inst : TopologicalSpace α] [inst_1 : Group G] [inst_2 : MulAction G α]\\n  [ContinuousConstSMul G α] (x : α) [MulAction.IsPretransitive G α], T1Space α ↔ IsClosed {x}\", \"doc\": \"A topological space $\\\\alpha$ with a pretransitive group action is a T1 space if and only if the singleton set $\\\\{x\\\\}$ is closed for some point $x \\\\in \\\\alpha$.\"}\n  {\"name\": \"ProperSMul\", \"module\": \"Mathlib/Topology/Algebra/ProperAction/Basic\", \"type\": \"(G : Type u_1) →\\n  (X : Type u_2) → [TopologicalSpace G] → [TopologicalSpace X] → [inst : Group G] → [MulAction G X] → Prop\", \"doc\": \"The action of the topological group $G$ on the topological space $X$ is proper, meaning that the map $(g, x) \\\\mapsto (g \\\\cdot x, x)$ from $G \\\\times X$ to $X \\\\times X$ is a proper map (the preimage of \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"instProperSMulSubtypeMemSubgroupOfIsClosedCoe\", \"module\": \"Mathlib/Topology/Algebra/ProperAction/Basic\", \"type\": \"∀ {G : Type u_1} {X : Type u_2} [inst : Group G] [inst_1 : MulAction G X] [inst_2 : TopologicalSpace G]\\n  [inst_3 : TopologicalSpace X] {H : Subgroup G} [ProperSMul G X] [H_closed : IsClosed ↑H], ProperSMul (↥H) X\", \"doc\": \"If a topological group $ G $ acts properly on a topological space $ X $ and $ H $ is a closed subgroup of $ G $, then the action of $ H $ on $ X $ is also proper.\"}\n  {\"name\": \"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G] (X : Action FintypeCat G) [CategoryTheory.PreGaloisCategory.IsConnected X],\\n  MulAction.IsPretransitive G X.V.carrier\", \"doc\": \"For a group action on the category of finite types, if the underlying object is connected, then the action is pretransitive. That is, for any two elements $x, y$ in the underlying finite type $X.V$, t\"}\n  {\"name\": \"smul_closure_orbit_subset\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : Monoid M] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α] (c : M) (x : α), c • closure (MulAction.orbit M x) ⊆ closure (MulAction.orbit M x)\", \"doc\": \"For any element $c$ in a monoid $M$ and any $x$ in a topological space $\\\\alpha$, the scalar multiplication of $c$ on the closure of the orbit of $x$ under $M$ is contained within the closure of the or\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kostant Rosenlicht theorem unipotent group orbits on affine varieties are closed",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"vadd_closure_orbit_subset\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : AddMonoid M] [inst_2 : AddAction M α]\\n  [ContinuousConstVAdd M α] (c : M) (x : α), c +ᵥ closure (AddAction.orbit M x) ⊆ closure (AddAction.orbit M x)\", \"doc\": \"For any additive monoid $ M $ acting continuously on a topological space $ \\\\alpha $, and for any $ c \\\\in M $ and $ x \\\\in \\\\alpha $, the additive action of $ c $ on the closure of the orbit of $ x $ und\"}\n  {\"name\": \"IsClosed.leftCoset\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"{U : Set G} (h : IsClosed U) (x : G) : IsClosed (x • U)\", \"doc\": \"In a topological group, if a subset $ U \\\\subseteq G $ is closed, then for any element $ x \\\\in G $, the left coset $ x \\\\cdot U $ is also closed in the topology of $ G $.\"}\n  {\"name\": \"smul_closure_orbit_subset\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"(c : M) (x : α) : c • closure (MulAction.orbit M x) ⊆ closure (MulAction.orbit M x)\", \"doc\": \"For any element $c$ in a monoid $M$ and any $x$ in a topological space $\\\\alpha$, the scalar multiplication of $c$ on the closure of the orbit of $x$ under $M$ is contained within the closure of the or\"}\n  {\"name\": \"IsClosed.rightCoset\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"{U : Set G} (h : IsClosed U) (x : G) : IsClosed (op x • U)\", \"doc\": \"In a topological group $ G $, if $ U $ is a closed subset, then the right coset $ xU $ is also closed for any $ x \\\\in G $.\"}\n  {\"name\": \"IsCompact.mul_closure_one_eq_closure\", \"module\": \"Mathlib.Topology.Algebra.Group.Pointwise\", \"type\": \"{K : Set G} (hK : IsCompact K) : K * (closure { 1 } : Set G) = closure K\", \"doc\": \"For any compact set $ K $ in a topological group $ G $, the product of $ K $ with the closure of the singleton set $\\\\{1\\\\}$ (where $1$ denotes the identity element) is equal to the closure of $ K $. Fo\"}\n  {\"name\": \"OpenAddSubgroup.isClosed\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] [inst_1 : TopologicalSpace G] [ContinuousAdd G] (U : OpenAddSubgroup G),\\n  IsClosed ↑U\", \"doc\": \"In a topological additive group $G$ with continuous addition, every open additive subgroup $U$ has a closed underlying set in the topology of $G$.\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"[IsAffine X] {U : Set X} : IsCompact U ∧ IsOpen U ↔ ∃ s : Set Γ(X, ⊤), s.Finite ∧ U = ⋃ i ∈ s, X.basicOpen i\", \"doc\": \"For an affine scheme $ X $, an open subset $ U $ is compact and open if and only if there exists a finite set $ S $ of global sections of the structure sheaf on $ X $ such that $ U $ is the union of t\"}\n  {\"name\": \"AddAction.univ_eq_iUnion_orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"∀ (G : Type u_1) (α : Type u_2) [inst : AddGroup G] [inst_1 : AddAction G α], Set.univ = ⋃ x, x.orbit\", \"doc\": \"For any additive group $ G $ acting on a type $ \\\\alpha $, the universal set of $ \\\\alpha $ is equal to the indexed union of all orbits under the action of $ G $, i.e., $ \\\\alpha = \\\\bigcup_{x \\\\in \\\\alpha/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\", \"IsClosed\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|Kostant|unipotent.*orbit|orbit.*unipotent",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/Differential/Liouville.lean\", \"line\": \"18\", \"text\": \"[Rosenlicht, M. Integration in finite terms][Rosenlicht_1972].\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/Basic.lean\", \"line\": \"368\", \"text\": \"This is needed for an argument in [Rosenlicht, M. Integration in finite terms][Rosenlicht_1972].\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Kostant|Rosenlicht|unipotent.*orbit|orbit.*unipotent",
+   "results": "2 hits: Mathlib/FieldTheory/Differential/Liouville.lean, Mathlib/RingTheory/Derivation/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: topology of abstract group actions and finite-group invariant rings do not imply closed orbits of unipotent algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\", \"IsClosed\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: topology of abstract group actions and finite-group invariant rings do not imply closed orbits of unipotent algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kostant Rosenlicht theorem every orbit of a unipotent algebraic group acting on an affine scheme is closed",
+   "results": "8 hits: IsClosed.leftCoset, isClosedMap_smul, IsClosed.rightCoset, instProperSMulSubtypeMemSubgroupOfIsClosedCoe, CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed, MulAction.isClosedMap_quotient, MulAction.IsPretransitive.t1Space_iff, isMinimal_iff_isClosed_smul_invariant",
+   "date": "2026-10-23",
+   "verdict": "no match: topology of abstract group actions and finite-group invariant rings do not imply closed orbits of unipotent algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unipotent algebraic group acting on an affine variety has all orbits Zariski closed",
+   "results": "8 hits: MulAction.IsFixedBlock.orbit, Algebra.IsInvariant.isIntegral, MulAction.IsPartition.of_orbits, MulAction.isPretransitive_iff_orbit_eq_univ, MulAction.orbit.pairwiseDisjoint, MulAction.instElemOrbit_1, AddAction.ofQuotientStabilizer_mem_orbit, AddAction.instIsPretransitiveElemOrbit_1",
+   "date": "2026-10-23",
+   "verdict": "no match: topology of abstract group actions and finite-group invariant rings do not imply closed orbits of unipotent algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-borel-intersection",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained. Supporting input: Theorem 17.64, used at the end of Section 17h to make the unipotent orbit closed inside its invariant affine neighbourhood.",
+   "via": [
+    "lem-sfb-chevalley-borel-intersection",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-kostant-rosenlicht-affine-orbits",
+  "worker": "stage1",
+  "summary": "Read Milne Theorem 17.64 and its inputs in Chapters 4, 7 and 14. Gave the orbit closure its reduced structure explicitly, constructed the rational action on its boundary ideal, reduced to a finite-dimensional subrepresentation using the existing node, applied the existing unipotent fixed-vector theorem, and wrote out the density and scalar contradiction. No new nodes or statement changes; removed the unused subgroup-definition statement dependency. No matching project declaration or Mathlib theorem was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained. Supporting input: Theorem 17.64, used at the end of Section 17h to make the unipotent orbit closed inside its invariant affine neighbourhood. The five steps realize precisely the Kostant--Rosenlicht input here; inherited null ancestor retained (ancestor command returns None).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme/linear-algebra input used exactly as stated in the orbit-closure argument; the unit has no alternative for this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-35f3f3959",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-35f3f3959 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 Thm 17.64 (pp.373-374) and all five steps in full; no new nodes. The statement is byte-identical to the base and to live (still unsplit), and the only change to stmt_deps, dropping def-sc-group-scheme-subgroup, is correct. Step 1: affine-source-separated plus smooth-group-orbit-geometry give a locally closed O and an invariant closure/boundary; that node's step 6 shows invariance holds as reduced subschemes. Step 2: I≠0 because y∈O∖Z. Step 3: I checked the right action v^{-1}x, which gives the comodule identities and (vf)(x)=f(v^{-1}x); I⊗k[V] is the kernel over a field; finite-subrepresentation applied to {h} gives W⊂I. Step 4: a closed immersion into GL_n is injective on R-points, so the fixed-vector lemma applies, and its k-point conclusion gives f(vy)=f(y). Step 5: V(k) dense via the Jacobson and residue-field leaves, the nilradical of the reduced A is 0, so f is a nonzero scalar and Z=∅. Edge cases checked: G_a acting on A^2, a nonreduced Y with trivial action, Z empty. No duplicate node found. Accepted tool_use: lem-weil-pbc-reduced-induced-closed-subscheme, a generic lemma used as a black box. Minor point, not changed: the base statement cites scheme-reduction for the reduced induced structure."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.KostantRosenlichtAffineOrbits",
+  "declaration": "AlgebraicGeometry.kostant_rosenlicht_affine_orbits",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/KostantRosenlichtAffineOrbits.lean",
+  "statement": "theorem kostant_rosenlicht_affine_orbits {k : Type u} [Field k] [IsAlgClosed k] (V : Grp (Over (Spec (.of k)))) [IsAffine V.X.left] [Smooth V.X.hom] [ConnectedSpace V.X.left] [LocallyOfFiniteType V.X.hom] [QuasiCompact V.X.hom] (hV : SolvableGroupStructure.IsUnipotent V) (Y : Over (Spec (.of k))) [IsAffine Y.left] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [ModObj V.X Y] (y : 𝟙_ (Over (Spec (.of k))) ⟶ Y) : IsClosed (Set.range (lift (𝟙 V.X) (toUnit V.X ≫ y) ≫ γ[V.X, Y]).left) ∧ ∃ (O : Scheme.{u}) (j : O ⟶ Y.left), IsReduced O ∧ IsClosedImmersion j ∧ Set.range j = Set.range (lift (𝟙 V.X) (toUnit V.X ≫ y) ≫ γ[V.X, Y]).left",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74f97cc61",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Milne Thm 17.64: alg-closed k; V : Grp(Over Spec k) smooth/connected/affine/LFT+QC; hV uses the recorded IsUnipotent (definition read in full, repeated smoothness adds no assumption); Y affine LFT+QC; action is ModObj V.X Y (unit/mul laws), same interface and orbit expression as the landed orbit-geometry theorem; y is a rational point; conclusion is IsClosed of the scheme-map range plus existence of a reduced closed subscheme with that exact range (unique, so it is the reduced induced structure). No reducedness or characteristic hypothesis, one universe u. lean.statement matches the file verbatim; node otherwise byte-identical to live; sorry only; source and blueprint docstrings with the 5 proof steps; imports follow the rules. Edge cases checked: empty Y, trivial V, nonreduced Y, Ga on A^2. Project grep found no existing Kostant–Rosenlicht theorem. No compile run (no changes); relied on the delivery's compile evidence."
+ }
+}

@@ -1,0 +1,383 @@
+{
+ "id": "lem-sfb-rational-fixed-section-jets",
+ "kind": "statement",
+ "title": "Jet representations from a rational action along a fixed section",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected separated finite-type $k$-group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $X$ be an integral separated finite-type $k$-scheme [def-pc-integral-scheme, def-pc-scheme]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Products are scheme fibre products [def-pc-fibre-product]. Let $Y\\subseteq X$ be a nonempty dense open subscheme [def-weil-open-immersion], with an action $a:G\\times_kY\\to Y$, namely a morphism satisfying the unit and multiplication identities. Let $\\alpha:G\\times_kX\\dashrightarrow X$ be its rational extension, a rational map meaning an equivalence class of morphisms on dense opens, with its largest domain $D$. Suppose $P\\in X(k)$, $(e,P)\\in D$, and $\\alpha|_{V\\times_k\\{P\\}}$ is the constant morphism with value $P$, where $V=\\{g:(g,P)\\in D\\}$. Then $D$ contains $G\\times_k\\{P\\}$ and $\\alpha|_{G\\times_k\\{P\\}}=P\\circ p_G$. Write $R=\\mathcal O_{X,P}$ for the stalk of the structure sheaf, $\\mathfrak m=\\ker(R\\to k)$ for its maximal ideal, and $Q_n=R/\\mathfrak m^{n+1}$ for $n\\geq1$, with ordinary ideal powers and quotient rings [def-weil-pbc-algebra-hom-quotient]. Each $Q_n$ is a nonzero finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace]. The canonical map $i_n:X_n=\\operatorname{Spec}Q_n\\to X$ is a closed immersion [def-weil-closed-immersion]. The restriction of $\\alpha$ to $G\\times_kX_n\\subseteq D$ factors through $i_n$ and defines an action $a_n:G\\times_kX_n\\to X_n$. Its inverse pullback gives a homomorphism $\\rho_n:G\\to\\operatorname{GL}(Q_n)$, where the general linear group is [def-sc-general-linear-group] after choosing a basis, and $\\rho_n(B)(g)$ is an algebra automorphism of $B\\otimes_kQ_n$ for each commutative $k$-algebra $B$ [def-weil-pbc-module-tensor-product]. The quotient maps $Q_{n+1}\\to Q_n$ intertwine these representations. The scheme-theoretic kernels $K_n=G\\times_{\\operatorname{GL}(Q_n),\\rho_n,e}\\operatorname{Spec}k$ are closed finite-type subgroup schemes [def-sc-group-scheme-subgroup], and $K_{n+1}\\subseteq K_n$. No faithfulness assumption, smoothness of $X$, or affineness of $G$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.9, printed p.150, construction of the jet representations; Proposition 8.25, printed p.154, rational-action variant. Agent-extracted local-action input, not the global-action assertion of Proposition 8.9. The missing detailed local argument is written in report.md. The rational variant is explicitly used in Milne (2013), Proposition 4.1, final paragraph, arXiv:1311.6060v2 (local article WANTED). No Stacks tag states this local-action construction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-rational-point-thickenings-base-change] to $(X,P)$. Its hypotheses are precisely separatedness, finite type and a rational point, without smoothness of $X$. Thus $P$ is closed, its ideal sheaf $\\mathcal J$ defines $X_n=\\operatorname{Spec}Q_n$ by $\\mathcal J^{n+1}$, and $Q_n$ is nonzero finite-dimensional. For every $k$-scheme $T$, the section in $T\\times X$ has ideal $\\mathcal J_T$, and its $(n+1)$st power defines $T\\times X_n$. These identifications and the surjections $Q_{n+1}\\to Q_n$ are compatible with every base change.",
+   "uses": [
+    "lem-sfb-rational-point-thickenings-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, p.150, local quotients and base change; Stacks 04EY (definition-first-order-infinitesimal-neighbourhood), 04EZ (lemma-first-order-infinitesimal-neighbourhood)."
+   }
+  },
+  {
+   "text": "We will compare maps on opens of $T\\times X$, for $T=G^r$ and also $T=\\operatorname{Spec}k$. The open $T\\times Y$ is scheme-theoretically dense there. Indeed, on a chart $\\operatorname{Spec}(B\\otimes_k A)$ with $A$ a domain, choose a nonempty principal $D(f)\\subseteq Y\\cap\\operatorname{Spec}A$. The injection $A\\to A_f$ remains injective after tensoring with $B$: choose a $k$-basis of $B$, so this is a direct sum of copies of that injection. Thus a function vanishing on $T\\times Y$ vanishes on the chart. This sheaf injection restricts to every open. By [lemma-nagata-ext-scheme-theoretically-dominant-separated], two maps from any such open into the separated $k$-scheme $X$ agreeing on $T\\times Y$ are equal. In particular $D$ contains $G\\times Y$ with restriction $a$: this morphism is a representative of $\\alpha$, and any other representative agrees on overlaps by the same argument. Their union therefore glues to the maximal representative. For $g\\in G(k)$ write $D_g=\\{x:(g,x)\\in D\\}$ and $f_g=\\alpha(g,-):D_g\\to X$; it restricts to the automorphism $a(g,-)$ on $Y$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational action on the completion; explicit affine density calculation. Stacks 01RH (morphisms-lemma-equality-of-morphisms), 0A1Y (lemma-rational-map-from-reduced-to-separated)."
+   }
+  },
+  {
+   "text": "The scheme $G$ is regular by [lem-weil-pbc-smooth-scheme-over-field-regular], and is nonempty and connected. Hence [lem-sc-regular-connected-integral] makes $G$ integral, in particular irreducible. The open $V=\\{g:(g,P)\\in D\\}$ contains $e$. For each $g\\in G(k)$ the opens $V$ and $gV^{-1}$ intersect, by irreducibility. Their intersection is smooth and nonempty, so [lem-pc-rational-points-dense] supplies $u\\in(V\\cap gV^{-1})(k)$. Write $v=u^{-1}g\\in V(k)$, so $g=uv$. This uses translations and inversion as scheme automorphisms, directly from the group-object identities; it requires no affineness of $G$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-pc-rational-points-dense",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action variant; agent expansion of the fixed-section continuation. Stacks 056S (lemma-smooth-regular), 0569, 033N underpin the cited regularity and integrality inputs."
+   }
+  },
+  {
+   "text": "For these $u,v$, consider the open $E\\subseteq G\\times X$ defined by $(u^{-1}h,x)\\in D$ and $\\alpha(u^{-1}h,x)\\in D_u$. On $E$ the formula $F(h,x)=f_u(\\alpha(u^{-1}h,x))$ is a morphism. It is defined at $(g,P)$, since $u,v\\in V$ and $f_v(P)=P=f_u(P)$ by the hypothesis. On $E\\cap(G\\times Y)$ it equals $a(h,x)$ by the action identity. By step 2 this is a representative of $\\alpha$, so maximality gives $E\\subseteq D$ and $F=\\alpha|_E$. Thus $g\\in V$ for every $g\\in G(k)$. If $G\\setminus V$ were nonempty, [lem-sc-lft-over-field-jacobson-space] would supply a closed point of $G$ in it; [lem-kun-closed-point-field] makes its residue field finite over $k$, hence equal to the algebraically closed field $k$. This contradicts $G(k)\\subset V$. Therefore $V=G$, so $G\\times\\{P\\}\\subseteq D$ and the assumed equality along $V\\times\\{P\\}$ is now the asserted equality along the whole section.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154: omitted local-action details, supplied here by translating representatives. Stacks 0478 (lemma-locally-finite-type-Jacobson), 01RH for the comparison."
+   }
+  },
+  {
+   "text": "Over $G$ define $C(g,x)=(g,\\alpha(g,x))$ on $D$, and $C^-(g,x)=(g,\\alpha(g^{-1},x))$ on $D^-=\\{(g,x):(g^{-1},x)\\in D\\}$. Both domains contain the whole section and both maps fix it as a morphism. Put $N=D\\cap C^{-1}(D^-)$ and $M=D^-\\cap(C^-)^{-1}(D)$. On $N$, the composite $C^-C$ is the identity: on $G\\times Y$ this is the original action law, and step 2 extends the equality. Likewise $CC^-=\\mathrm{id}$ on $M$. These equations imply $C(N)\\subseteq M$, $C^-(M)\\subseteq N$, and make $C:N\\to M$ an isomorphism with inverse $C^-$. Both opens contain the whole section. An isomorphism fixing a closed section identifies the kernels of restriction to that section, so $C$ identifies $\\mathcal J_G|_M$ with $\\mathcal J_G|_N$, and likewise every power. This is an equality of ideals, not merely of their radicals.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, p.150, action on local quotients, adapted to the rational action of Proposition 8.25 by the explicitly displayed mutually inverse open maps; Stacks 01RH."
+   }
+  },
+  {
+   "text": "The topological support of $G\\times X_n$ is exactly the section, since its defining ideal is $\\mathcal J_G^{n+1}$. It consequently factors through both open subschemes $N,M$, hence through $D$; factoring through an open uses only containment of the topological image. Step 5 identifies its ideal on $N,M$, so restricts $C$ to an automorphism $C_n$ of $G\\times X_n$ over $G$. Its second component is $a_n$, and $i_na_n=\\alpha(1_G\\times i_n)$. The identity law holds since $f_e=\\mathrm{id}$ wherever defined by step 2. For the multiplication law, on the open of $G\\times G\\times X$ where both composites are defined, $\\alpha(g,\\alpha(h,x))$ and $\\alpha(gh,x)$ agree by step 2 and the action law on $Y$. This open contains the entire section, hence $G\\times G\\times X_n$. Restricting the equality and using that $i_n$ is a monomorphism gives $a_n(g,a_n(h,z))=a_n(gh,z)$ as morphisms, including nilpotents. Thus $a_n$ is an action.",
+   "uses": [
+    "lem-sfb-rational-point-thickenings-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, p.150, infinitesimal actions; Stacks 04EZ (lemma-first-order-infinitesimal-neighbourhood), explicit ideal-power restriction and rational-action identities."
+   }
+  },
+  {
+   "text": "For any $k$-scheme $T$ and $h:T\\to G$, the action of $h$ on $T\\times X_n$ is a $T$-automorphism $c_h$, inverse $c_{h^{-1}}$. Its inverse pullback $T_h=c_{h^{-1}}^*$ acts on the free sheaf $\\mathcal O_T\\otimes_k Q_n$. In a basis of $Q_n$ it is an invertible matrix of sections of $\\mathcal O_T$. By [lem-a1-locally-ringed-space-affine-adjunction] and the coordinate description in [def-sc-general-linear-group], this is a $T$-point of $\\operatorname{GL}(Q_n)$. The construction commutes with all pullbacks $T'\\to T$. By [lem-galois-yoneda-fully-faithful], on the category of $k$-schemes it therefore gives a morphism $\\rho_n:G\\to\\operatorname{GL}(Q_n)$. Since $c_{(hh')^{-1}}=c_{h'^{-1}}c_{h^{-1}}$, contravariance gives $T_{hh'}=T_hT_{h'}$ and $T_1=1$; thus it is a group-scheme homomorphism. For $T=\\operatorname{Spec}B$, step 1 identifies its underlying algebra with $B\\otimes_kQ_n$, and $T_h$ is a $B$-algebra automorphism, not just a linear map.",
+   "uses": [
+    "lem-sfb-rational-point-thickenings-base-change",
+    "def-sc-general-linear-group",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, p.150, natural representations on local quotients; Stacks 001P (categories-lemma-yoneda), 01I1 (schemes-lemma-morphism-into-affine)."
+   }
+  },
+  {
+   "text": "Both restrictions to $X_n$ and $X_{n+1}$ come from the same open isomorphism $C$, which preserves both ideal powers. Hence inverse pullback commutes with $Q_{n+1}\\twoheadrightarrow Q_n$, also after every scalar extension. By [lem-sc-kernel-subgroup], $K_n$ is a closed subgroup with $K_n(B)=\\ker\\rho_n(B)$ for every commutative $k$-algebra $B$. It is finite type: on a finite affine cover of the finite-type scheme $G$, its coordinate rings are quotients of finitely generated $k$-algebras. If $h\\in K_{n+1}(B)$, compatibility and the surjectivity of $B\\otimes Q_{n+1}\\to B\\otimes Q_n$ give $\\rho_n(h)=1$. Apply this to the universal points on affine charts of $K_{n+1}$; their induced maps to $K_n$ agree on overlaps by the closed-immersion monomorphism. They glue to $K_{n+1}\\to K_n$ over $G$, which is a closed immersion by [lem-weil-pbc-closed-immersion-factor-ideal-inclusion]. This proves the descending assertion scheme-theoretically.",
+   "uses": [
+    "lem-sfb-rational-point-thickenings-base-change",
+    "lem-sc-kernel-subgroup",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, p.150, kernels of compatible jet representations, before stabilization or faithfulness is invoked; Stacks 01QP (morphisms-lemma-closed-immersion-ideals)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-point-thickenings-base-change",
+  "def-pc-integral-scheme",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-pc-rational-points-dense",
+  "def-sc-group-scheme",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-kun-closed-point-field",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sc-kernel-subgroup",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 8.9 and 8.25, printed pp.150,154. The translation and open-isomorphism arguments fill the rational-action details not supplied there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rational.*action|action.*jet|fixed.*infinitesimal",
+   "results": "{\"t\": \"2026-10-24T09:37:10Z\", \"tool\": \"grep\", \"query\": \"rational.*action|action.*jet|fixed.*infinitesimal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract ring actions, invariants, or the definition/domain of rational maps; none constructs algebraic jet actions from a partial fixed-point action of a possibly non-affine group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local rational group action at a fixed rational point extends to regular actions on all finite jets",
+   "results": "{\"t\": \"2026-10-24T09:37:10Z\", \"tool\": \"leansearch\", \"query\": \"A local rational group action at a fixed rational point extends to regular actions on all finite jets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.residue_smul\", \"Filter.Germ.instAddAction\", \"Filter.Germ.instVAdd\", \"MulAction.Regular.isPretransitive\", \"AffineBasis.instMulAction\", \"AddAction.vadd_mem_fixedBy_iff_mem_fixedBy\", \"FixedPoints.term_^*_\", \"SubAddAction.exists_vadd_of_last_eq\"], \"digest\": \"836318536cf7b25c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract ring actions, invariants, or the definition/domain of rational maps; none constructs algebraic jet actions from a partial fixed-point action of a possibly non-affine group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"rational\"",
+   "results": "{\"t\": \"2026-10-24T09:37:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"rational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract ring actions, invariants, or the definition/domain of rational maps; none constructs algebraic jet actions from a partial fixed-point action of a possibly non-affine group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational algebraic group action fixing a point induces algebraic representations on every infinitesimal neighbourhood of that point",
+   "results": "{\"t\": \"2026-10-24T09:37:11Z\", \"tool\": \"leanfinder\", \"query\": \"A rational algebraic group action fixing a point induces algebraic representations on every infinitesimal neighbourhood of that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isInvariant\", \"Algebra.isInvariant_iff\", \"Algebra.IsInvariant.isIntegral_of_profinite\", \"Algebra.IsInvariant\", \"Algebra.IsInvariant.isIntegral\", \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"FixedPoints.toAlgHom_bijective\", \"Rep.invariantsFunctor_obj_carrier\"], \"digest\": \"8afb04f1763e5b2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract ring actions, invariants, or the definition/domain of rational maps; none constructs algebraic jet actions from a partial fixed-point action of a possibly non-affine group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational action regular near the identity at a fixed point extends to an action on each truncated local algebra",
+   "results": "{\"t\": \"2026-10-24T09:41:16Z\", \"tool\": \"leanfinder\", \"query\": \"A rational action regular near the identity at a fixed point extends to an action on each truncated local algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.instMulSemiringAction\", \"IsSMulRegular.one\", \"isSMulRegular_of_group\", \"IsLocalRing.ResidueField.residue_smul\", \"IsSMulRegular.of_isLocalizedModule\", \"IsSMulRegular.of_smul_eq_one\", \"IsSMulRegular.of_isLocalization\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\"], \"digest\": \"ddd6c6f242cf1bc7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract ring actions, invariants, or the definition/domain of rational maps; none constructs algebraic jet actions from a partial fixed-point action of a possibly non-affine group."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*action|action.*jet|fixed.*infinitesimal",
+   "results": "{\"t\": \"2026-10-24T10:11:57Z\", \"tool\": \"grep\", \"query\": \"rational.*action|action.*jet|fixed.*infinitesimal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract representations and quotient stabilizers do not construct scheme actions on jets from a rational action; rational-map declarations cover only the notion and its maximal representative."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme.RationalMap\"",
+   "results": "{\"t\": \"2026-10-24T10:11:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme.RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.toRationalMap_representative\"], \"digest\": \"a7b5c2ac90fd9211\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract representations and quotient stabilizers do not construct scheme actions on jets from a rational action; rational-map declarations cover only the notion and its maximal representative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational algebraic group action regular near a fixed point induces compatible linear representations on truncated local rings",
+   "results": "{\"t\": \"2026-10-24T10:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"A rational algebraic group action regular near a fixed point induces compatible linear representations on truncated local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"Representation.apply_eq_of_leftRegular_eq_of_generator\", \"TannakaDuality.FiniteGroup.leftRegular\", \"TannakaDuality.FiniteGroup.rightRegular\", \"Representation.apply_eq_of_coe_eq\", \"Representation.instIsTrivialSubtypeMemSubgroupCoinvariantsCompLinearMapIdSubtypeToCoinvariants\", \"Representation.ofQuotient_coe_apply\", \"Representation.quotientToInvariants\"], \"digest\": \"c36ce404b23b7281\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract representations and quotient stabilizers do not construct scheme actions on jets from a rational action; rational-map declarations cover only the notion and its maximal representative."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational group action fixing a rational point induces group scheme representations on its finite local quotient algebras",
+   "results": "{\"t\": \"2026-10-24T10:12:29Z\", \"tool\": \"leansearch\", \"query\": \"A rational group action fixing a rational point induces group scheme representations on its finite local quotient algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHom\", \"MulAction.ofQuotientStabilizer\", \"Representation.toInvariants\", \"Representation.quotientToInvariants\", \"Rep.toInvariants\", \"Representation.ofQuotient_coe_apply\", \"IsLocalRing.ResidueField.instMulSemiringAction\", \"Representation.ofQuotient\"], \"digest\": \"fa36b0a0f17f9aa3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract representations and quotient stabilizers do not construct scheme actions on jets from a rational action; rational-map declarations cover only the notion and its maximal representative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group action defined near a fixed section acts on every infinitesimal neighbourhood of that section",
+   "results": "{\"t\": \"2026-10-24T10:12:30Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group action defined near a fixed section acts on every infinitesimal neighbourhood of that section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smul_singleton_mem_nhds_of_sigmaCompact\", \"smul_mem_nhds_smul\", \"smul_mem_nhds_smul_iff\", \"smul_mem_nhds_self\", \"Set.univ_smul_nhds_zero\", \"vadd_mem_nhds_vadd_iff\", \"ProperlyDiscontinuousSMul.exists_nhds_image_smul_eq_self\", \"CategoryTheory.PreGaloisCategory.nhds_one_has_basis_stabilizers\"], \"digest\": \"4a177665ff470002\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract representations and quotient stabilizers do not construct scheme actions on jets from a rational action; rational-map declarations cover only the notion and its maximal representative."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-fixed-point-affineness",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Proposition 8.25 rational-action proof: the full-stabilizer case, using the finite-jet argument of Proposition 8.9. Input: the local fixed-point construction before choosing a faithful jet.",
+   "via": [
+    "lem-sfb-rational-fixed-point-affineness",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-fixed-section-jets",
+  "worker": "stage1",
+  "summary": "Reused all finite-thickening and representability inputs already in the DAG; supplied the fixed-section continuation using translated representatives and Jacobson closed points, then an explicit open isomorphism preserving the section ideal powers. No smoothness of X, faithfulness or affineness of G is used. Normalized inherited doubled TeX escapes; no mathematical statement changed.",
+  "blueprint": "This created item has no blueprint ancestor (blueprint_refs.py ancestor returns None). It realizes the local-action input to Milne 8.25, p.154, by the jet construction in 8.9, p.150. The current latest six-functor unit is untouched.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-a1-locally-ringed-space-affine-adjunction",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-factor-ideal-inclusion",
+    "why": "Generic geometric or representability input, used exactly as stated; the six-functor unit has no replacement for this auxiliary algebraic-group argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-pc-rational-points-dense",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-kun-closed-point-field",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sc-kernel-subgroup",
+  "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-7e91a61ab",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-7e91a61ab (reviewer sub-agent of L); spot-checked: Shape (A): one commit touching only the item node and the report. No new nodes. Compared with the Q159 creation record, the statement and stmt_deps are byte-identical; only split-owned fields changed. Mathlib searches cover all three kinds (grep, LeanSearch, Loogle/LeanFinder) with no match. Source: read Milne iAG 2017 Prop 8.9 (p.150) and its erratum requiring reduced X (X is integral here), and Prop 8.25 (pp.153-154), which defers the rational-action case to Milne 2013 §4.1. That paper is correctly listed as WANTED and proof_origin is agent. Read every cited statement: thickenings-base-change (no smoothness needed); nagata-ext schematic-density equality; smooth over a field implies regular, and regular connected implies integral; rational-points-dense; Jacobson plus kun (a); ideal-sheaf and powers definitions; GL_c with c>=1, since Q_n is nonzero; affine adjunction; Yoneda; sc-kernel-subgroup, which needs no affineness; closed-immersion-factor lemma. Steps checked: Step 2 density holds because B⊗A -> B⊗A_f stays injective over a field and localizes to every open. Step 3 factorization g=uv uses irreducibility of G and density of k-points. Step 4 continuation: F=f_u∘α(u^{-1}h,x) is defined at (g,P) because (v,P)∈D and α(v,P)=P∈D_u; F agrees with a on G×Y, so maximality gives G(k)⊆V, and the Jacobson closed-point argument gives V=G. Step 5: C and C^- are mutually inverse on N and M, and C∘s=s gives C*J^m=J^m. Step 6: the restriction to G×X_n is an action; the associativity open contains G×G×{P}, and i_n is a monomorphism. Step 7: c_{(hh')^{-1}}=c_{h'^{-1}}c_{h^{-1}}, so T_{hh'}=T_hT_{h'}. Step 8: transitions compatible, kernels closed and finite type, K_{n+1}⊆K_n scheme-theoretically. Edge cases: X=Spec k; G trivial; translation on an elliptic curve (hypothesis fails, correctly excluded); nonreduced B; n=1. Duplicates: fixed-point-action-finite-jets (global action, smooth X), smooth-section-finite-jets, dense/torus-fixed-local-ideal-jets (affine G), conjugation-finite-jet-kernel and smooth-section-rational-extension are all different. The unsplit rational-action-domain-laws gives only k-point laws; it could serve part of Step 4 but is not a duplicate. Accepted all 10 declared tool_uses as generic black boxes. No SGA source, no cycle. review.md written; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalFixedSectionJets",
+  "declaration": "AlgebraicGeometry.RationalFixedSectionJets.rational_fixed_section_jets",
+  "declarations": [
+   "AlgebraicGeometry.RationalFixedSectionJets.stalkAlgebra",
+   "AlgebraicGeometry.RationalFixedSectionJets.JetRing",
+   "AlgebraicGeometry.RationalFixedSectionJets.jetScheme",
+   "AlgebraicGeometry.RationalFixedSectionJets.jetInclusion",
+   "AlgebraicGeometry.RationalFixedSectionJets.jetTransition",
+   "AlgebraicGeometry.RationalFixedSectionJets.sectionMap",
+   "AlgebraicGeometry.RationalFixedSectionJets.tensorBase",
+   "AlgebraicGeometry.RationalFixedSectionJets.tensorJet",
+   "AlgebraicGeometry.RationalFixedSectionJets.rational_fixed_section_jets"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalFixedSectionJets.lean",
+  "statement": "theorem rational_fixed_section_jets [IsAlgClosed k] (G X Y : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] [ConnectedSpace G.left] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsIntegral X.left] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (j : Y ⟶ X) [IsOpenImmersion j.left] [Nonempty Y.left] (hY : DenseRange j.left) [ModObj G Y] (f : (G ⊗ X).left.PartialMap X.left) (hmax : f.domain = f.toRationalMap.domain) (hrestrict : ∃ dY : (G ⊗ Y).left ⟶ f.domain.toScheme, dY ≫ f.domain.ι = (G ◁ j).left ∧ dY ≫ f.hom = (γ[G,Y] ≫ j).left) (P : 𝟙_ (Over (Spec (.of k))) ⟶ X) (he : (sectionMap G X P).left ((η[G]).left (IsLocalRing.closedPoint k)) ∈ f.domain) (hfix : ∀ (T : Scheme.{u}) (g : T ⟶ G.left) (d : T ⟶ f.domain.toScheme), d ≫ f.domain.ι = g ≫ (sectionMap G X P).left → d ≫ f.hom = g ≫ (toUnit G ≫ P).left) : (∃ d : G.left ⟶ f.domain.toScheme, d ≫ f.domain.ι = (sectionMap G X P).left ∧ d ≫ f.hom = (toUnit G ≫ P).left) ∧ ∃ (c : ℕ → ℕ) (b : ∀ n, Module.Basis (LinearGroupSchemes.Index.{u} (c n)) k (JetRing X (P.left (IsLocalRing.closedPoint k)) n)) (i : ∀ n, jetScheme X (P.left (IsLocalRing.closedPoint k)) n ⟶ X) (a : ∀ n, ModObj G (jetScheme X (P.left (IsLocalRing.closedPoint k)) n)) (ρ : ∀ n, Grp.mk G ⟶ Grp.mk (GeneralLinearGroup (LinearGroupSchemes.Index.{u} (c n)) k)) (r : ∀ (n : ℕ) (B : Type u) [CommRing B] [Algebra k B], ((Spec (.of B)).asOver (Spec (.of k)) ⟶ G) → (B ⊗[k] JetRing X (P.left (IsLocalRing.closedPoint k)) n) ≃ₐ[B] (B ⊗[k] JetRing X (P.left (IsLocalRing.closedPoint k)) n)), (∀ n, 0 < c n ∧ Nontrivial (JetRing X (P.left (IsLocalRing.closedPoint k)) n) ∧ FiniteDimensional k (JetRing X (P.left (IsLocalRing.closedPoint k)) n) ∧ (i n).left = jetInclusion X (P.left (IsLocalRing.closedPoint k)) n ∧ IsClosedImmersion (i n).left) ∧ (∀ n, ∃ dn : (G ⊗ jetScheme X (P.left (IsLocalRing.closedPoint k)) n).left ⟶ f.domain.toScheme, dn ≫ f.domain.ι = (G ◁ i n).left ∧ dn ≫ f.hom = ((a n).smul ≫ i n).left) ∧ (∀ (n : ℕ) (B : Type u) [CommRing B] [Algebra k B] (g : (Spec (.of B)).asOver (Spec (.of k)) ⟶ G), LinearMap.toMatrix ((b n).baseChange B) ((b n).baseChange B) (r n B g).toLinearMap = (GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} (c n)) k B (g ≫ (ρ n).hom.hom) : Matrix (LinearGroupSchemes.Index.{u} (c n)) (LinearGroupSchemes.Index.{u} (c n)) B) ∧ Spec.map (CommRingCat.ofHom (r n B g).toRingHom) ≫ (tensorJet X (P.left (IsLocalRing.closedPoint k)) n B).left = (lift (tensorBase X (P.left (IsLocalRing.closedPoint k)) n B ≫ g⁻¹) (tensorJet X (P.left (IsLocalRing.closedPoint k)) n B) ≫ (a n).smul).left) ∧ (∀ (n : ℕ) (B : Type u) [CommRing B] [Algebra k B] (g : (Spec (.of B)).asOver (Spec (.of k)) ⟶ G) (z : B ⊗[k] JetRing X (P.left (IsLocalRing.closedPoint k)) (n + 1)), Algebra.TensorProduct.map (AlgHom.id k B) (jetTransition X (P.left (IsLocalRing.closedPoint k)) n) (r (n + 1) B g z) = r n B g (Algebra.TensorProduct.map (AlgHom.id k B) (jetTransition X (P.left (IsLocalRing.closedPoint k)) n) z)) ∧ (∀ n, IsClosedSubgroupScheme (GrpObj.kerι (ρ n).hom.hom) ∧ LocallyOfFiniteType (GrpObj.ker (ρ n).hom.hom).hom ∧ QuasiCompact (GrpObj.ker (ρ n).hom.hom).hom) ∧ (∀ n, ∃ t : GrpObj.ker (ρ (n + 1)).hom.hom ⟶ GrpObj.ker (ρ n).hom.hom, IsClosedImmersion t.left ∧ t ≫ GrpObj.kerι (ρ n).hom.hom = GrpObj.kerι (ρ (n + 1)).hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliaries spell out the canonical local-quotient construction of this node; JetRing X x n is the paper's Q_(n+1), with ideal power n+2. The rational map is supplied by a maximal partial representative, hmax. The representations are bundled group-scheme homomorphisms, with inverse pullback specified over every test algebra, including nonreduced ones."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b76b0dfa",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Read node, all 17 stmt_deps, module, report (Worker report + Second reading by Q150 present). lean.statement verbatim in file. Hypotheses match node, none stronger (no affine G, no smooth X); rational map = Mathlib PartialMap with hmax (maximal domain) + hrestrict (restriction to G×Y = ModObj action); hfix tests the open V scheme-theoretically on all schemes mapping to it. Conclusions: section in D with constant value; JetRing = stalk/m^(n+2), index shift n↦n+1 covers paper n≥1 bijectively; canonical closed immersion i_n; jet ModObj actions factoring α; ρ_n bundled Grp hom to upstream GL with B-points pinned by matrix + Spec inverse-pullback equation (variance checked: r = c_{g⁻¹}^*, homomorphism law consistent); transitions intertwine; kernels GrpObj.ker are closed subgroup, LOFT+QC; K_{n+1}→K_n closed immersion over G. Edge cases n=0, X=Spec k, singular X, any char, nonreduced/zero B fine. No existing jet declarations (related nodes unlanded; TorusFixedLocalIdealJets affine-only). Helpers have real data + docstrings; only sorry on theorem. No recompile (no change). Non-blocking note: stalkAlgebra is a global canonical instance."
+ }
+}

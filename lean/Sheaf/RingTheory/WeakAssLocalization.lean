@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.Ideal.Colon
+import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
 
 /-!
 # Weak association detected by localization at a prime
@@ -22,6 +23,23 @@ Source: Stacks Project, Algebra, Lemma 10.66.2, Tag 0566
 universe u v
 
 namespace Module
+
+/-- Clearing denominators identifies the annihilator of `m/s` with the extended annihilator
+of `m`, independently of the denominator. -/
+private theorem colon_localized_mk
+    {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M]
+    (p : Ideal R) [p.IsPrime] (m : M) (s : p.primeCompl) :
+    ((⊥ : Submodule (Localization.AtPrime p) (LocalizedModule.AtPrime p M)).colon
+      {IsLocalizedModule.mk' (LocalizedModule.mkLinearMap p.primeCompl M) m s}) =
+        ((⊥ : Submodule R M).colon {m}).map
+          (algebraMap R (Localization.AtPrime p)) := by
+  ext z
+  obtain ⟨r, t, rfl⟩ := IsLocalization.exists_mk'_eq p.primeCompl z
+  rw [Submodule.mem_colon_singleton, Submodule.mem_bot,
+    IsLocalizedModule.mk'_smul_mk', IsLocalizedModule.mk'_eq_zero',
+    IsLocalization.mk'_mem_map_algebraMap_iff p.primeCompl]
+  simp only [Submodule.mem_colon_singleton, Submodule.mem_bot, mul_smul]
+  exact ⟨fun ⟨a, ha⟩ ↦ ⟨a, a.2, ha⟩, fun ⟨a, ha, h⟩ ↦ ⟨⟨a, ha⟩, h⟩⟩
 
 /-- Weak association of `p` to `M`, weak association of its extension to `Mₚ`, and existence
 of an element of `Mₚ` whose annihilator has radical `p Rₚ` are equivalent.
@@ -60,6 +78,35 @@ theorem weakly_associated_atPrime_iff
       (∃ x : LocalizedModule.AtPrime p M,
         ((⊥ : Submodule (Localization.AtPrime p) (LocalizedModule.AtPrime p M)).colon
           {x}).radical = p.map (algebraMap R (Localization.AtPrime p)))) := by
-  sorry
+  let A := Localization.AtPrime p
+  let f := LocalizedModule.mkLinearMap p.primeCompl M
+  have under : (p.map (algebraMap R A)).under R = p := by
+    rw [IsLocalization.AtPrime.map_eq_maximalIdeal p A,
+      IsLocalization.AtPrime.under_maximalIdeal A p]
+  have min_iff (m : M) (s : p.primeCompl) :
+      p.map (algebraMap R A) ∈
+        ((⊥ : Submodule A (LocalizedModule.AtPrime p M)).colon
+          {IsLocalizedModule.mk' f m s}).minimalPrimes ↔
+        p ∈ ((⊥ : Submodule R M).colon {m}).minimalPrimes := by
+    rw [colon_localized_mk, IsLocalization.minimalPrimes_map p.primeCompl A,
+      Set.mem_preimage, under]
+  constructor
+  · constructor
+    · rintro ⟨m, hm⟩
+      exact ⟨IsLocalizedModule.mk' f m 1, (min_iff m 1).mpr hm⟩
+    · rintro ⟨x, hx⟩
+      obtain ⟨⟨m, s⟩, rfl⟩ := IsLocalizedModule.mk'_surjective p.primeCompl f x
+      exact ⟨m, (min_iff m s).mp hx⟩
+  · constructor
+    · rintro ⟨x, hx⟩
+      obtain ⟨⟨m, s⟩, rfl⟩ := IsLocalizedModule.mk'_surjective p.primeCompl f x
+      refine ⟨IsLocalizedModule.mk' f m s, ?_⟩
+      rw [colon_localized_mk]
+      exact IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes A p _
+        ((min_iff m s).mp hx)
+    · rintro ⟨x, hx⟩
+      refine ⟨x, ?_⟩
+      rw [← Ideal.radical_minimalPrimes, hx, Ideal.minimalPrimes_eq_subsingleton_self]
+      exact Set.mem_singleton _
 
 end Module

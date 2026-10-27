@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-hilbert-graph-family-base-change",
+ "kind": "statement",
+ "title": "Closed Hilbert graph families and arbitrary base change",
+ "statement": "Let $z:Z\\to S$ and $x:X\\to S$ be morphisms of schemes [def-pc-scheme]. Assume $z$ is proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] and finitely presented [def-sbc-locally-finite-presentation], and $x$ is separated [def-weil-proper-morphism]. For each $S$-scheme $T$ put $Z_T=Z\\times_ST$, $X_T=X\\times_ST$, and $W_T=Z_T\\times_TX_T$ [def-pc-fibre-product]. Then $Z_T\\to T$ is proper, flat and finitely presented and $X_T\\to T$ is separated. For every $T$-morphism $f:Z_T\\to X_T$, its actual graph map $\\Gamma_f=(\\mathrm{id},f):Z_T\\to W_T$ [def-sfb-relative-morphisms-presheaf] is a closed immersion [def-weil-closed-immersion], and its associated closed subscheme is a point of $\\operatorname{Hilb}^{\\mathrm{proper}}_{(Z\\times_SX)/S}(T)$ [def-sfb-proper-hilbert-presheaf]. For every morphism $h:T'\\to T$ of $S$-schemes, pullback takes any closed proper flat finitely presented family $D\\subset W_T$ to another such family, and the canonical iterated-fibre-product identifications identify $(\\Gamma_f)_{T'}$ with $\\Gamma_{f_{T'}}$ as closed subschemes. These identifications respect identity and composite base changes. In particular $f\\mapsto\\Gamma_f$ defines a natural transformation $\\gamma:\\operatorname{Mor}_S(Z,X)\\to\\operatorname{Hilb}^{\\mathrm{proper}}_{(Z\\times_SX)/S}$.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D1A, quot-lemma-Mor-into-Hilb, proof: graph construction and base-change permanence before the final injectivity paragraph; naturality of this construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-morphisms-presheaf",
+  "def-sfb-proper-hilbert-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply the scheme base-change permanence results to $z:Z\\to S$ along $T\\to S$: properness is preserved by [lem-weil-pbc-proper-fp-permanence] (b), flatness by [lem-weil-pbc-flat-morphism-base-change], and finite presentation (local finite presentation, quasi-compactness and quasi-separatedness) by [lem-weil-pbc-qcqs-morphism-permanence] (3). Thus $Z_T\\to T$ is proper, flat and finitely presented. The universal property [def-pc-fibre-product] identifies $W_T=Z_T\\times_TX_T$ with $(Z\\times_SX)\\times_ST$, by the maps having the same projections to $Z,X,T$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A, quot-lemma-Mor-into-Hilb, proof, base-change permanence and the displayed graph target."
+   }
+  },
+  {
+   "text": "The diagonal $X_T\\to X_T\\times_TX_T$ is the pullback of $X\\to X\\times_SX$: maps into either pullback specify two maps into $X$ and one into $T$, with the same two $X$-maps. This follows directly from [def-pc-fibre-product]. The original diagonal is closed by separatedness [def-weil-proper-morphism]; its pullback is closed by [lem-weil-pbc-closed-immersion-base-change]. Hence $X_T\\to T$ is separated.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL, lemma-base-change-separated, proof, restricted to schemes."
+   }
+  },
+  {
+   "text": "Write $P=Z_T\\times_TX_T$. The graph [def-sfb-relative-morphisms-presheaf] is the pullback of the diagonal of $X_T/T$ along $(f\\circ\\operatorname{pr}_Z,\\operatorname{pr}_X):P\\to X_T\\times_TX_T$. Indeed a map into that pullback is a pair $(a:U\\to Z_T,b:U\\to X_T)$ with $f\\circ a=b$; it is uniquely determined by $a$, using [def-pc-fibre-product]. Therefore [lem-weil-pbc-closed-immersion-base-change] makes the actual graph a closed immersion. By [def-weil-closed-immersion] it identifies $Z_T$ with its closed subscheme $D_f$ in $P$. Under this identification the structure map of $D_f$ is $Z_T\\to T$, since $\\operatorname{pr}_Z\\circ\\Gamma_f=\\mathrm{id}$. Step 1 and [def-sfb-proper-hilbert-presheaf] give the required Hilbert point.",
+   "uses": [
+    "def-sfb-relative-morphisms-presheaf",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-sfb-proper-hilbert-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A, quot-lemma-Mor-into-Hilb, proof, graph construction and membership in Hilb; graph pullback expanded from spaces-morphisms-lemma-semi-diagonal."
+   }
+  },
+  {
+   "text": "For $h:T\\prime\\to T$ and a closed subscheme $D\\subset W_T$, let $r:W_{T\\prime}\\to W_T$ be the base-change map. The fibre-product universal property [def-pc-fibre-product] gives $D\\times_{W_T}W_{T\\prime}\\cong D\\times_TT\\prime$, compatibly with inclusion into $W_{T\\prime}$. By [lem-pc-closed-subscheme-base-change-ideal-image], this inclusion is closed and its defining ideal is $\\operatorname{im}(r^*\\mathcal I_D\\to\\mathcal O_{W_{T\\prime}})$, precisely ideal pullback in [def-sfb-proper-hilbert-presheaf]. By [lem-weil-pbc-proper-fp-permanence] (b), [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence] (3), applied to $D\\to T$ along $h$, its structure map to $T\\prime$ is proper, flat and finitely presented. This proves permanence for every such family without a flatness assumption on $h$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "def-sfb-proper-hilbert-presheaf",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JU, lemma-fibre-product-immersion (1), and quot.tex Tag 0CZY, situation-hilb, base-change paragraph."
+   }
+  },
+  {
+   "text": "For $D=D_f$, the identification $Z_T\\times_TT\\prime\\cong Z_{T\\prime}$ sends its pulled-back inclusion into $W_{T\\prime}=Z_{T\\prime}\\times_{T\\prime}X_{T\\prime}$ to $(\\mathrm{id},f_{T\\prime})$: its first projection is the identity and its second is the base-changed morphism. These two projection equalities uniquely determine the inclusion by [def-pc-fibre-product]. Thus the pullback and $\\Gamma_{f_{T\\prime}}$ are isomorphic over the ambient scheme, and their structure-sheaf maps have the same kernel [def-sbc-closed-immersion-ideal-sheaf]. They consequently define the same closed subscheme, not merely the same underlying closed subset.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-relative-morphisms-presheaf",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A, quot-lemma-Mor-into-Hilb, naturality of the graph construction, expanded using the fibre-product universal property."
+   }
+  },
+  {
+   "text": "For the identity of $T$, the comparison maps have the original projections, so uniqueness in [def-pc-fibre-product] makes them identity comparisons. For $T\\prime\\prime\\xrightarrow{k}T\\prime\\xrightarrow{h}T$, both the iterated comparison and the comparison for $h\\circ k$ have the same projections to $Z,X,T\\prime\\prime$; uniqueness makes them equal. The induced identifications of closed subschemes also agree because they commute with the inclusions. Therefore Step 5 says exactly $\\operatorname{Hilb}^{\\mathrm{proper}}(h)(D_f)=D_{\\operatorname{Mor}(h)(f)}$ for the two presheaf maps [def-sfb-relative-morphisms-presheaf, def-sfb-proper-hilbert-presheaf]. The maps $f\\mapsto D_f$ form the asserted natural transformation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-relative-morphisms-presheaf",
+    "def-sfb-proper-hilbert-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A, quot-lemma-Mor-into-Hilb, natural transformation, identity and composition checked by uniqueness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sfb-relative-morphisms-presheaf",
+  "def-weil-closed-immersion",
+  "def-sfb-proper-hilbert-presheaf",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D1A, quot-lemma-Mor-into-Hilb, graph and base-change paragraphs; Tag 0CZY, situation-hilb. Naturality and comparison coherence expanded by the fibre-product universal property; ideal identification from schemes.tex Tag 01JU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "graph|Hilbert.*functor|properHilbert",
+   "results": "{\"t\": \"2026-10-22T05:58:45Z\", \"tool\": \"grep\", \"query\": \"graph|Hilbert.*functor|properHilbert\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: separate base-change and graph-closedness facts do not give the natural proper-Hilbert-family transformation; this requires their assembly and ideal/pullback compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graph of a morphism to a separated scheme is closed and its Hilbert family is natural under base change",
+   "results": "{\"t\": \"2026-10-22T05:58:45Z\", \"tool\": \"leansearch\", \"query\": \"The graph of a morphism to a separated scheme is closed and its Hilbert family is natural under base change\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"graph\"",
+   "results": "{\"t\": \"2026-10-22T05:58:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"graph\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: separate base-change and graph-closedness facts do not give the natural proper-Hilbert-family transformation; this requires their assembly and ideal/pullback compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graphs into a separated scheme define closed proper flat finitely presented families and their formation commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T05:58:56Z\", \"tool\": \"leanfinder\", \"query\": \"Graphs into a separated scheme define closed proper flat finitely presented families and their formation commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsSeparated.instMap\"], \"digest\": \"bb84ceac6f703675\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: separate base-change and graph-closedness facts do not give the natural proper-Hilbert-family transformation; this requires their assembly and ideal/pullback compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graph is a closed subscheme of the product in a family, functorially for pullbacks of the base scheme",
+   "results": "{\"t\": \"2026-10-22T05:59:12Z\", \"tool\": \"leanfinder\", \"query\": \"A graph is a closed subscheme of the product in a family, functorially for pullbacks of the base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.exists_preimage\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.Scheme.Pullback.Triplet\", \"AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"AlgebraicGeometry.Scheme.exists_preimage_of_isPullback\"], \"digest\": \"313045bdea2b8780\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: separate base-change and graph-closedness facts do not give the natural proper-Hilbert-family transformation; this requires their assembly and ideal/pullback compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "isStableUnderBaseChange|IsClosedImmersion.*[Ll]ift|[Gg]raph",
+   "results": "{\"t\": \"2026-10-22T05:59:54Z\", \"tool\": \"grep\", \"query\": \"isStableUnderBaseChange|IsClosedImmersion.*[Ll]ift|[Gg]raph\", \"sub\": \"AlgebraicGeometry/Morphisms/Separated.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"82\", \"139\", \"344\", \"345\", \"351\"], \"digest\": \"97cddf0d7f006e6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: separate base-change and graph-closedness facts do not give the natural proper-Hilbert-family transformation; this requires their assembly and ideal/pullback compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graphs into separated schemes define proper flat finitely presented Hilbert families naturally under arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T04:11:18Z\", \"tool\": \"leanfinder\", \"query\": \"Graphs into separated schemes define proper flat finitely presented Hilbert families naturally under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.IsSeparated\"], \"digest\": \"6f91d7e78570c035\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply separate graph, separatedness, stability or natural-transformation primitives, but not the proper-Hilbert-family construction and all its compatibility clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert|hilbert|isStableUnderBaseChange|isClosedImmersion.*[Gg]raph",
+   "results": "{\"t\": \"2026-10-23T04:11:45Z\", \"tool\": \"grep\", \"query\": \"Hilbert|hilbert|isStableUnderBaseChange|isClosedImmersion.*[Gg]raph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\"], \"digest\": \"ea88631c485a5127\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply separate graph, separatedness, stability or natural-transformation primitives, but not the proper-Hilbert-family construction and all its compatibility clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-23T04:11:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"AlgebraicGeometry.IsSeparated.mk\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\"], \"digest\": \"7ee8f330b984a287\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply separate graph, separatedness, stability or natural-transformation primitives, but not the proper-Hilbert-family construction and all its compatibility clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graph construction defines a natural transformation from relative morphisms to the proper Hilbert functor",
+   "results": "{\"t\": \"2026-10-23T04:11:46Z\", \"tool\": \"leansearch\", \"query\": \"The graph construction defines a natural transformation from relative morphisms to the proper Hilbert functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.mk\", \"CategoryTheory.Equivalence.asNatTrans\", \"CategoryTheory.Pseudofunctor.Grothendieck.map\", \"CategoryTheory.RelCat.graphFunctor\", \"CategoryTheory.TwoSquare.natTrans\", \"CategoryTheory.Grothendieck.ιNatTrans\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.natTrans\", \"CategoryTheory.Limits.natTransIntoForgetCompFiberwiseColimit\"], \"digest\": \"236a4f87eaf8d58e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply separate graph, separatedness, stability or natural-transformation primitives, but not the proper-Hilbert-family construction and all its compatibility clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a proper flat finitely presented source has closed graph in the product with a separated target, compatible with pullback of ideal sheaves",
+   "results": "{\"t\": \"2026-10-23T04:12:21Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a proper flat finitely presented source has closed graph in the product with a separated target, compatible with pullback of ideal sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\"], \"digest\": \"39feabd2ce899c15\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply separate graph, separatedness, stability or natural-transformation primitives, but not the proper-Hilbert-family construction and all its compatibility clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graphs-open-in-hilbert",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; Tag 0D1A, quot-lemma-Mor-into-Hilb, proof: graph construction and base-change permanence before the final injectivity paragraph; naturality of this construction.",
+   "via": [
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hilbert-graph-family-base-change",
+  "worker": "stage1",
+  "summary": "Read Stacks 0D1A and 0CZY and its base-change inputs. Assemble existing property-stability and closed-subscheme ideal-image nodes, prove the two graph/diagonal pullback identifications by their universal property, and check identity/composition by projections. No statement change and no new nodes. The fixed-degree finite Hilbert functor in the project is not this proper Hilbert functor.",
+  "blueprint": "Realizes the already recorded ancestry place: det-thm-sf-ctf-stability-direct-images proof (3), via de Jong 3.9 and lem-sfb-graphs-open-in-hilbert, graph construction in quot-lemma-Mor-into-Hilb before its injectivity paragraph. Ancestor command returns None, as in the existing blueprint.from.node; place and via retained. Whole-blueprint graph/Hilbert searches found no node stating this proper-family transformation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Generic arbitrary scheme base-change theorem for the defining ideal; needed to compare closed subschemes under non-flat base change, not a change to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-subscheme-base-change-ideal-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-fa33bbba1",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-fa33bbba1 (reviewer sub-agent of L); spot-checked: I read the whole item, all cited statements and Stacks quot.tex 0D1A lemma-Mor-into-Hilb (statement and full proof). The item is the scheme case of the graph construction, without injectivity, and its hypotheses match the source one for one. There are no new nodes, the statement is unchanged and no repair note applies. One fault (C4/E1): Steps 1 and 4 got the base-change stability of proper, flat and finitely presented maps from the algebraic-space node lem-sfb-space-flat-proper-fp-locality, claiming that 'identity charts give the scheme properties'. That node defines universal closedness as closedness after every algebraic-space base change, so applying it to schemes needs an unstated scheme/space comparison theorem. The fix (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-hilbert-graph-family-base-change.json) cites the existing scheme Mathlib leaves instead: lem-weil-pbc-proper-fp-permanence (b), lem-weil-pbc-flat-morphism-base-change, and lem-weil-pbc-qcqs-morphism-permanence (3), whose base-change instances I read at FinitePresentation.lean:85, QuasiCompact.lean:165 and QuasiSeparated.lean:124. proof_deps was recomputed. Steps 2, 3, 5 and 6 are correct and were checked by universal property: the diagonal pullback square is cartesian, the graph is the pullback of the diagonal along (f∘pr_Z, pr_X), the pulled-back inclusion is (id, f_T'), equal kernels give equal closed subschemes, and identities and composites hold by uniqueness. Step 4 uses the ideal-image tool lem-pc-closed-subscheme-base-change-ideal-image, which is off-unit, declared and accepted; it matches the ideal pullback of def-sfb-proper-hilbert-presheaf with no flatness assumption on h. Edge cases checked: empty Z or T; Z=S, where graphs are sections; non-flat base change by k[ε]→k; non-separated X (doubled origin), where the graph is not closed; positive-dimensional Z, which shows the finite-degree Hilbert functor is not a duplicate. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertGraphFamilyBaseChange",
+  "declaration": "AlgebraicGeometry.hilbert_graph_family_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertGraphFamilyBaseChange.lean",
+  "statement": "theorem hilbert_graph_family_base_change {Z X S : Scheme.{u}} (z : Z ⟶ S) (x : X ⟶ S) [IsProper z] [Flat z] [LocallyOfFinitePresentation z] [IsSeparated x] : (∀ T : Over S, IsProper (pullback.fst T.hom z) ∧ Flat (pullback.fst T.hom z) ∧ LocallyOfFinitePresentation (pullback.fst T.hom z) ∧ IsSeparated (pullback.fst T.hom x)) ∧ (∀ (T T' : Over S) (h : T' ⟶ T) (D : (properHilbertPresheaf (pullback.fst z x ≫ z)).obj (op T)), IsProperHilbertFamily (pullback.fst z x ≫ z) T' (D.1.comap (baseChangeMap (pullback.fst z x ≫ z) h))) ∧ ∃ γ : relativeMorphismsPresheaf z x ⟶ properHilbertPresheaf (pullback.fst z x ≫ z), (∀ (T : Over S) (f : (relativeMorphismsPresheaf z x).obj (op T)), IsClosedImmersion (relativeMorphismGraph z x T f) ∧ (γ.app (op T) f).1 = (relativeMorphismGraph z x T f).ker) ∧ (∀ (T T' : Over S) (h : T' ⟶ T) (f : (relativeMorphismsPresheaf z x).obj (op T)), (relativeMorphismGraph z x T f).ker.comap (baseChangeMap (pullback.fst z x ≫ z) h) = (relativeMorphismGraph z x T' ((relativeMorphismsPresheaf z x).map h.op f)).ker) ∧ (∀ (T : Over S) (D : (properHilbertPresheaf (pullback.fst z x ≫ z)).obj (op T)), D.1.comap (baseChangeMap (pullback.fst z x ≫ z) (𝟙 T)) = D.1) ∧ (∀ (T T' T'' : Over S) (h : T' ⟶ T) (k : T'' ⟶ T') (D : (properHilbertPresheaf (pullback.fst z x ≫ z)).obj (op T)), (D.1.comap (baseChangeMap (pullback.fst z x ≫ z) h)).comap (baseChangeMap (pullback.fst z x ≫ z) k) = D.1.comap (baseChangeMap (pullback.fst z x ≫ z) (k ≫ h)))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e62a0179",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read item, 8 stmt_deps, dep Lean RelativeMorphismsPresheaf/ProperHilbertPresheaf/baseChangeMap, parent graphs_open_in_hilbert, Stacks quot.tex 0D1A. Hypotheses exactly IsProper/Flat/LFP on z (proper => fp) and IsSeparated on x; universe u throughout. All clauses present: permanence of Z_T/X_T, comap-permanence for arbitrary D and arbitrary h (no flatness), γ pinned to the actual graph's ker with closed immersion, ker.comap = ker of pulled-back graph (closed-subscheme equality), identity/composite comap laws. Ambient W_T matches the Hilbert presheaf. No duplicate (parent is stronger and lacks arbitrary-D permanence). Statement verbatim; node differs from live only by lean; one sorry; docstrings have source, blueprint and 6 steps; report sections present. Clauses 2/5/6 are redundant with the presheaf structure but are what the node asks: advisory only. No compile (no file changed)."
+ }
+}

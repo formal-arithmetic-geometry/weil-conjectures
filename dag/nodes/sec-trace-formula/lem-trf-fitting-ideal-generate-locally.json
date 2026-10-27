@@ -18,88 +18,82 @@
  ],
  "proof": [
   {
-   "text": "Work on an affine open $U=\\operatorname{Spec}A$ containing $s$, with prime $\\mathfrak p$ corresponding to $s$. By [lem-weil-pbc-quasi-coherent-finite-type-affine](a), $M=\\mathcal F(U)$ is a finite $A$-module; by [lem-weil-pbc-affine-tilde-gamma-adjunction](3), $\\mathcal F|_U\\cong\\widetilde M$. The germ localization of [lem-sbc-affine-module-germ-localization] identifies $\\mathcal F_s$ with $M_{\\mathfrak p}$. Write $I=\\operatorname{Fit}_r(M)$ using the chosen finite surjection $A^n\\twoheadrightarrow M$. By [lem-trf-fitting-ideal-independence-base-change](2), its base change to $A_{\\mathfrak p}$ is $IA_{\\mathfrak p}=\\operatorname{Fit}_r(M_{\\mathfrak p})$. Applied to the quasi-coherent Fitting ideal sheaf, [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] says exactly that $s\\notin|Z_r|$ is equivalent to $I\\not\\subseteq\\mathfrak p$ and to $\\operatorname{Fit}_r(\\mathcal F)_s=\\mathcal O_{S,s}$.",
+   "text": "Apply [lem-trf-fitting-ideal-sheaf-affine-sections] to every surjective finite free presentation on each affine open. This proves the first conjunct without rebuilding the affine gluing argument.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-sbc-affine-module-germ-localization",
-    "lem-trf-fitting-ideal-independence-base-change",
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+    "lem-trf-fitting-ideal-sheaf-affine-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "0C3C (section-fitting-ideals), 0C3F (lemma-fitting-ideal-generate-locally); affine identifications from Schemes 01IA and 01HV, finite generation from Properties 01PB"
+    "place": "Tag 0C3C, section-fitting-ideals, affine characterization"
    }
   },
   {
-   "text": "Suppose $I\\not\\subseteq\\mathfrak p$. If $n\\le r$, see the end of this step. Otherwise put $a=n-r>0$. Some generating $a$-minor $\\delta$ of $I$ is outside $\\mathfrak p$, since if every such minor lay in the prime then their generated ideal would lie in it. Choose the $a$ kernel rows giving this minor and reorder the $n$ generator coordinates so that these rows form a matrix $(C\\ D)$ with $C$ square of size $a$ and $\\det C=\\delta$ (up to sign, which does not change $D(\\delta)$). In $M_\\delta$, writing the generator column as $(x,y)$ with $r$ entries in $y$, the relations say $Cx+Dy=0$. By [lem-weil-pbc-matrix-adjugate-identity], multiplying by $\\operatorname{adj}(C)$ gives $\\delta x+\\operatorname{adj}(C)Dy=0$. Hence $x=-\\delta^{-1}\\operatorname{adj}(C)Dy$: the $r$ entries of $y$ generate $M_\\delta$. Via the affine counit of Step 1 ([lem-weil-pbc-affine-tilde-gamma-adjunction](3)) the entries of $y$ are sections of $\\mathcal F$ over $U$; restrict them to $D(\\delta)$. They generate $\\mathcal F|_{D(\\delta)}$ in the sense of [def-weil-pbc-generating-sections]: for $t\\in D(\\delta)$ with prime $\\mathfrak q\\not\\ni\\delta$, [lem-sbc-affine-module-germ-localization] identifies $\\mathcal F_t$ with $M_{\\mathfrak q}$ compatibly with germs, and $M_{\\mathfrak q}$ is a localization of $M_\\delta$, where the relation $x=-\\delta^{-1}\\operatorname{adj}(C)Dy$ persists, so the germs of $y$ generate $\\mathcal F_t$; a section $\\sigma$ of $\\mathcal F$ over an open $W\\subseteq D(\\delta)$ thus has germ $\\sum_i f_{i,t}y_{i,t}$ at each $t$, and the two sections $\\sigma$ and $\\sum_if_iy_i$ agree on a neighbourhood of $t$. This proves generation of $\\mathcal F$ by at most $r$ sections on the neighbourhood $D(\\delta)$ of $s$. The case $n\\le r$ is the same stalk argument applied on $U$ to the $n$ chosen generators.",
+   "text": "Over a local ring B, a finite module with unit r-th Fitting ideal has r generators: specialize [lem-trf-affine-principal-fitting-generators] to f=1, whose multiplication kernel is zero, and transport the generators through the quotient-by-zero isomorphism. Conversely r generators define a surjection from B^r, whose r-th Fitting ideal is the unit ideal by convention; [lem-trf-fitting-ideal-independence-base-change](1) identifies it with that of the original presentation.",
    "uses": [
-    "lem-weil-pbc-matrix-adjugate-identity",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-sbc-affine-module-germ-localization",
-    "def-weil-pbc-generating-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "07ZC (lemma-fitting-ideal-generate-locally), direct kernel-minor proof of (1) implies (4) instead of the residue-field/Nakayama argument; adjugate identity as in Algebra 07DQ"
-   }
-  },
-  {
-   "text": "Generation by at most $r$ sections on a neighbourhood implies generation of the stalk by their germs: a local expression as a linear combination passes to the same expression in germs. Conversely, if $M_{\\mathfrak p}=\\mathcal F_s$ is generated by at most $r$ elements, pad the list by zeros to obtain a surjection $A_{\\mathfrak p}^{\\oplus r}\\twoheadrightarrow M_{\\mathfrak p}$. For this presentation the $r$th Fitting ideal is the unit ideal by the $n\\le r$ convention. Presentation independence in [lem-trf-fitting-ideal-independence-base-change](1) equates it with the ideal of the localized original presentation, which is $IA_{\\mathfrak p}$ by Step 1. Thus this stalk ideal is the whole local ring and $s\\notin|Z_r|$ by Step 1. This closes the three implications of clause (2), without a finite-presentation hypothesis.",
-   "uses": [
-    "lem-trf-fitting-ideal-independence-base-change",
-    "def-weil-pbc-generating-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "07ZC (1), (3), (4), with independence 07Z8 and base change 07ZA(3); Divisors 0C3F"
-   }
-  },
-  {
-   "text": "Now let $g:T\\to S$ be any morphism. Cover $T$ by affine opens $V=\\operatorname{Spec}B$ mapping into affine opens $U=\\operatorname{Spec}A$ of $S$, and use the ring homomorphism $\\varphi:A\\to B$ induced by $g$. The affine pullback formula [lem-weil-pbc-tilde-pullback-base-change] identifies $\\mathcal F_T|_V$ with $\\widetilde{B\\otimes_A M}$, where $M=\\mathcal F(U)$ as in Step 1. This module is finite: if $m_1,\\ldots,m_n$ generate $M$, then $1\\otimes m_1,\\ldots,1\\otimes m_n$ generate it, since $b\\otimes\\sum a_i m_i=\\sum b\\varphi(a_i)(1\\otimes m_i)$. Thus [lem-weil-pbc-spec-module-tilde-sections] and [lem-weil-pbc-quasi-coherent-finite-type-affine](a) show that $\\mathcal F_T$ is again finite type and quasi-coherent. By [lem-trf-fitting-ideal-independence-base-change](2), the ideal on $V$ is $\\operatorname{Fit}_r(B\\otimes_A M)=\\varphi(I)B$, where $I=\\operatorname{Fit}_r(M)$; the change in tensor-factor order is the map $b\\otimes m\\mapsto m\\otimes b$ with its evident inverse. This proves the needed Fitting base-change formula on each affine chart, without any flatness assumption on $g$.",
-   "uses": [
-    "lem-weil-pbc-tilde-pullback-base-change",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-trf-affine-principal-fitting-generators",
     "lem-trf-fitting-ideal-independence-base-change"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "0C3D (lemma-base-change-fitting-ideal), proved on affine charts by More on Algebra 07ZA(3); Schemes 01I9(1)"
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 080Z, lemma-principal-fitting-ideal, specialized to f=1; Tag 07ZC, lemma-fitting-ideal-generate-locally"
    }
   },
   {
-   "text": "For $t\\in V$ corresponding to $\\mathfrak q\\subset B$, its image $s=g(t)$ corresponds to $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Then $\\varphi(I)B\\subseteq\\mathfrak q$ if and only if $I\\subseteq\\mathfrak p$: one direction tests $\\varphi(a)$ for $a\\in I$, and the other uses that $\\mathfrak q$ is an ideal and therefore contains every finite $B$-linear combination of these images. By Step 4 and clause (2), already proved in Steps 1-3 and applicable to $\\mathcal F_T$, local generation by at most $r$ sections at $t$ is therefore equivalent to $g(t)\\notin|Z_r|$. Such neighbourhoods cover $T$ exactly when $g(T)\\subseteq S\\setminus|Z_r|$. Finally [lem-weil-pbc-morphism-factors-through-open-subscheme] makes this image containment equivalent to a (unique) factorization of $g$ through the open subscheme $S\\setminus|Z_r|$. The reverse implication from a factorization to image containment is immediate by composing its underlying maps. This is clause (1).",
+   "text": "Choose an affine neighbourhood U of x. Its section module is finite by [lem-weil-pbc-quasi-coherent-finite-type-affine], so choose a finite free presentation. By [lem-sbc-affine-module-germ-localization], the germ map is localization at the point prime; its base-change equivalence identifies the actual module stalk with B tensor F(U), where B is the local ring at x. Apply [lem-trf-fitting-ideal-independence-base-change](2) and step 2. An ideal extends to the unit ideal in B exactly when it is not contained in the point prime: one direction inverts an element outside the prime, and the other uses containment of the extended prime in the maximal ideal. The affine and closed-immersion clauses of [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] identify this condition with being off the Fitting support and with surjectivity of the ideal inclusion on stalks.",
    "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sbc-affine-module-germ-localization",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-trf-fitting-ideal-sheaf-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C3F (divisors-lemma-fitting-ideal-generate-locally) and Tag 05P8 (divisors-lemma-locally-free-rank-r-pullback) part (2), using More on Algebra Tag 07ZC (more-algebra-lemma-fitting-ideal-generate-locally) (1)<=>(3) for the stalk clause"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-stalk-generators-neighbourhood] to replace the stalk generator bound in step 3 by generation on a neighbourhood. This proves all pointwise equivalences, including r=0.",
+   "uses": [
+    "lem-trf-finite-stalk-generators-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01B8, lemma-finite-type-surjective-on-stalk"
+   }
+  },
+  {
+   "text": "For g:T to S, [lem-trf-fitting-sheaf-arbitrary-pullback] supplies finite type and quasi-coherence of the actual tensor pullback and identifies its Fitting ideal with comap of the original. Mathlib IdealSheafData.support_comap identifies its support with the inverse image of the original support. Step 4 on T therefore equates local r-generation everywhere with image containment in the complement. The open-immersion lift of [lem-weil-pbc-morphism-factors-through-open-subscheme] gives precisely the requested factorization; a factorization conversely has image in that complement.",
+   "uses": [
+    "lem-trf-fitting-sheaf-arbitrary-pullback",
     "lem-weil-pbc-morphism-factors-through-open-subscheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "05P8 (lemma-locally-free-rank-r-pullback), part (2) and its proof; open factorization from Schemes 01HI"
+    "place": "Tag 0C3D, lemma-base-change-fitting-ideal, and Tag 05P8(2), lemma-locally-free-rank-r-pullback"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-sbc-affine-module-germ-localization",
+  "lem-trf-fitting-ideal-sheaf-affine-sections",
+  "lem-trf-affine-principal-fitting-generators",
   "lem-trf-fitting-ideal-independence-base-change",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sbc-affine-module-germ-localization",
   "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "lem-weil-pbc-matrix-adjugate-identity",
-  "def-weil-pbc-generating-sections",
-  "lem-weil-pbc-tilde-pullback-base-change",
-  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-trf-finite-stalk-generators-neighbourhood",
+  "lem-trf-fitting-sheaf-arbitrary-pullback",
   "lem-weil-pbc-morphism-factors-through-open-subscheme"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tags 0C3F and 05P8(2), following the affine route of More on Algebra 07ZC; the forward generator implication is written directly by kernel-minor elimination using the adjugate identity instead of the source's residue-field/Nakayama reduction."
+  "place": "Tags 0C3C, 0C3D, 0C3F and 05P8(2); local-ring generator criterion via More on Algebra Tag 080Z with f=1 and presentation independence; neighbourhood extension by Modules Tag 01B8."
  },
  "mathlib_searches": [
   {
@@ -201,11 +195,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-fitting-ideal-generate-locally",
   "worker": "stage1",
-  "summary": "Kept all hypotheses and both conclusions; added only definition citations for quasi-coherence/finite type and module pullback. Five proof steps derive the generator criterion by an explicit invertible kernel minor, prove the stalk converse by presentation independence, compute arbitrary pullback by tensor base change, and apply open factorization. Reused the existing DAG throughout; no new nodes. Checked Stacks 0C3F, 05P8(2), 07ZC and every cited statement, with no finished Lean attachment or Mathlib match.",
-  "blueprint": "Retains lem-trf-local-term-locality as the nearest ancestor and the exact imported via chain. This is the bounded-generator Fitting ingredient of the nodal-family geometry below the ancestor's specialization-to-the-normal-cone route, not a separate clause literally stated in its proof; the complete current blueprint was searched for Fitting/generator duplicates and none states the item.",
+  "summary": "Repair of the batch5 re-split return: statement unchanged; move the constructive invertible-relation-minor/sheaf-generation argument and arbitrary-pullback affine Fitting computation to two independent statement-only unsplit nodes. The parent retains affine/stalk identifications, selection of a minor, the stalk converse by presentation independence, and prime contraction/open factorization. The entire returned argument is preserved with an ownership map in report.md; no Lean written or compiled.",
+  "blueprint": "Retains lem-trf-local-term-locality as the nearest ancestor and the exact imported via chain. This is the bounded-generator Fitting ingredient of the nodal-family geometry below the ancestor's specialization-to-the-normal-cone route, not a separate clause literally stated in its proof; the complete current blueprint was searched for Fitting/generator duplicates and none states the item. The two children realize the returned proof steps 2 and 4 respectively; parent steps 1, 2, 4 retain returned steps 1, 3, 5 and the minor selection.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
@@ -228,16 +222,15 @@
  "tool_uses": [
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-sbc-affine-module-germ-localization",
-  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "lem-weil-pbc-tilde-pullback-base-change"
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q60-da96f416e",
-  "group": "Q60",
+  "reviewer": "NT-cc-Q79-b9b621f6c",
+  "group": "Q79",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-da96f416e (reviewer sub-agent of L); spot-checked: I read all five steps in full, every cited statement, and the Stacks sources: Divisors 0C3C, 0C3D, 0C3F and 05P8(2) with its proof, and More on Algebra 07ZA and 07ZC. The statement matches 0C3F, 07ZC (1)(3)(4) and 05P8(2) hypothesis by hypothesis. It assumes only finite type and quasi-coherence, no finite presentation, and allows any S-scheme T; the 'rows in K' definition of the minors agrees with Stacks'. The statement is not weakened. The steps are sound. Step 1 identifies F_s with M_p and Fit_r(M) with its localization, and uses the ideal zero-set dictionary. Step 2 eliminates generators with the adjugate of an invertible kernel minor; I checked the matrix calculation. Step 3 (elementary) closes the stalk converse by presentation independence (1). Step 4 computes the arbitrary pullback on affine charts with the tilde pullback node and base change (2), with no flatness assumed. Step 5 handles prime contraction and factors the morphism through the open subscheme. No cycle (99 transitive dependencies checked) and no duplicate (searched the DAG for fitting, 0C3F, 07ZC and 05P8). The blueprint has no Fitting text, so same_as is correctly empty. Small cases checked: M=0; free A^n over a field; A/J with J not finitely generated; k[eps]/(eps^2) with r=0; r=0<n; empty T. Accepted the four declared tool uses (01PB finite type, germ localization, ideal zero set, tilde pullback). Two repairs in fixes/dag/nodes/sec-trace-formula/lem-trf-fitting-ideal-generate-locally.json. (1) B3: the statement now cites def-weil-pbc-generating-sections for 'generated by at most r sections', added to stmt_deps. (2) E5/C4: the end of Step 2 relied on an uncited identification of F restricted to D(delta) with the module of M_delta over Spec A_delta; it is now a stalk argument through germ localization and the generating-sections definition. Step 2 and Step 3 uses and proof_deps are updated to match.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-b9b621f6c (reviewer sub-agent of L); spot-checked: I read the re-split delivery in full and it is correct. The item statement and its stmt_deps are byte-identical to the live node. The proof is down to 2426 characters, in 4 steps. The two long old arguments, old step 2 (1811 characters) and old step 4 (1096 characters), are now two new statement-only unsplit nodes of comparable size, each with a real proof to write. lem-trf-invertible-relation-minor-generators: rows of (C D) in the kernel give Cx+Dy=0, multiplying by adj(C) gives δx+adj(C)Dy=0, so y generates M_δ, and M~ restricted to D(δ) is generated in the covering sense of def-weil-pbc-generating-sections; the a=0, b=0 and δ=0 cases hold. lem-trf-fitting-sheaf-arbitrary-pullback: it is Stacks 0C3D (read), with the affine tensor identification (01I9), the generators 1⊗m_i and the formula Fit_r(B⊗M)=φ(I)B from 07ZA(3); it needs no flatness, and the case Z→Z/2 checks out. Old steps 1, 3 and 5 stay in the parent as short assembly with the same citations and both directions of each argument. The step-1 dictionary, the stalk converse by zero-padding, the contraction φ(I)B⊆q ⇔ I⊆φ^{-1}q and the open factorization are all present, so nothing was blurred. Neither child restates the item or one of its clauses, and neither cites the item. I compared the children with the existing Fitting, minor and adjugate nodes and found no duplicate (affine-principal-fitting-generators, matrix-left-inverse-minors, cramer, minor-inclusions, coherent-universal-rank-locus). I checked the sources Divisors 0C3D, 0C3F, 05P8 and More on Algebra 07ZC; the item is not weakened. Batch-5 check: both listed sec-trace-formula citations are pure commutative algebra (determinant elimination, and Fitting ideals commuting with pullback). They are not steps of the trace formula or of Poincaré duality, and the item was already in the batch-5 closure through sfb citers, so I accept them. Maintainer note: split_report.tool_uses still lists lem-weil-pbc-tilde-pullback-base-change, which the item no longer cites; that work moved to the pullback child. The entry is stale but harmless."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FittingIdealGenerateLocally",
@@ -257,5 +250,26 @@
   "result": "fix",
   "note": "Delivery re-delivers an already-landed item (Q108, reviewed by NT-stage2-cc-7d19ac20c, batch 416b4a1356): the module is byte-identical to the landed one except 'Authors: SHEAF group Q106' (was Q108), and the node only changes lean.by and lean.date; the worker report does not say it is a copy. FIX: fixes/FittingIdealGenerateLocally.lean restores the Q108 attribution and is identical to the landed module. Independent check: hypotheses are only finite type + quasi-coherent; the affine conjunct pins fittingIdealSheaf (ofIdeals of the supremum over presentations, real data) to each presentation ideal, true by 07Z8/07ZA(3); clause (1) holds for every g with tensorPullback and the Epi generating predicate iff a factorization through support.compl; clause (2) gives all three equivalences (toModulesι stalk surjective, neighbourhood generation, stalk span = top over the local ring). Edge cases r=0, n<=r, F=0, empty S/T, non-f.p., non-flat; one universe u; lean.statement verbatim; source/blueprint docstrings and proof plan present; only sorry. nt_compile: clean, 5.4 s; an error probe was reported. No mathematical findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T001827-L-33944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

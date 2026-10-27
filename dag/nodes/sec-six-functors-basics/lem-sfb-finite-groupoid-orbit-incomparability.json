@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-finite-groupoid-orbit-incomparability",
+ "kind": "statement",
+ "title": "Finite groupoid orbits have no nontrivial specializations",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme]. Assume $s,t$ are finite [def-weil-finite-integral-morphism]. For $x\\in U$ write $O(x)=t(s^{-1}(\\{x\\}))$ for its orbit; arrows can be compared and composed after extending their residue fields to a common field. If $x,y\\in U$ are distinct and $y\\in O(x)$, then $y\\notin\\overline{\\{x\\}}$. Thus no two distinct points of an orbit specialize to one another.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABG (lemma-no-specializations-map-to-same-point), statement."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Underlying arrows compose: if $a,b\\in R$ have $s(a)=t(b)=v$, the tensor product $\\kappa(a)\\otimes_{\\kappa(v)}\\kappa(b)$ is nonzero by [lem-weil-common-extension-fields-tensor-nontrivial], and has a prime by [lem-weil-common-extension-fields-maximal-ideal]. By [lem-weil-pbc-fibre-product-points] this gives $z\\in R\\times_{s,U,t}R$ projecting to $a,b$. The groupoid identities in [def-a1-groupoid-scheme] give $s(c(z))=s(b)$ and $t(c(z))=t(a)$. The identity arrow gives $x\\in O(x)$, and composition shows that $v\\in O(x)$ and an arrow from $v$ to $w$ imply $w\\in O(x)$.",
+   "uses": [
+    "lem-weil-common-extension-fields-tensor-nontrivial",
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-pbc-fibre-product-points",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABG (lemma-no-specializations-map-to-same-point), orbit notation; the composition of point-arrows implicit in the iteration; compare Groupoids Tag 022Q (lemma-pre-equivalence-equivalence-relation-points)."
+   }
+  },
+  {
+   "text": "A finite morphism $f:X\\to Y$ has no strict specialization inside a fibre. Indeed it is integral by [pqf-lem-finite-integral-lft]. If $a\\leadsto b$ and $f(a)=f(b)=v$, choose an affine neighbourhood $V=\\operatorname{Spec}A$ of $v$. By the definition of an integral morphism in [def-weil-finite-integral-morphism], $f^{-1}V=\\operatorname{Spec}B$ and $A\\to B$ is integral. The two primes satisfy $\\mathfrak p_a\\subseteq\\mathfrak p_b$: every basic open containing $b$ contains $a$, by the definition of specialization in the Zariski topology [def-weil-affine-spectrum]. They have the same contraction, hence are equal by [pqf-lem-incomparability], so $a=b$.",
+   "uses": [
+    "pqf-lem-finite-integral-lft",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "pqf-lem-incomparability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABG (lemma-no-specializations-map-to-same-point), the sentence that there are no specializations in fibres of a finite morphism; Morphisms Tag 02NT (lemma-integral-fibres) and Algebra Tag 00GT (lemma-integral-no-inclusion)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-closed-map-finite-fibres], the set $s^{-1}(\\{x\\})$ is finite, its image $O(x)$ is finite, and $s$ is a closed map. By [lem-trf-closed-map-specializing], for every arrow $r$ and every specialization $s(r)\\leadsto v$, there is $r\\leadsto r^+$ with $s(r^+)=v$. If $s(r)\\ne v$ then $r\\ne r^+$. Continuity of $t$ gives $t(r)\\leadsto t(r^+)$; if their targets were equal, step 2 applied to the finite morphism $t$ would force $r=r^+$. Thus this target specialization is strict.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-trf-closed-map-specializing",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABG (lemma-no-specializations-map-to-same-point), first two sentences of the proof: lift along the closed source map and use fibre incomparability for the target map."
+   }
+  },
+  {
+   "text": "Suppose, towards a contradiction, $x\\ne y$, $y\\in O(x)$ and $x\\leadsto y$. Put $u_0=x$, $u_1=y$, and choose an arrow $r_0$ from $u_0$ to $u_1$. Inductively maintain $u_n,u_{n+1}\\in O(x)$, $u_n\\leadsto u_{n+1}$ with $u_n\\ne u_{n+1}$, and $s(r_n)=u_n$, $t(r_n)=u_{n+1}$. Apply step 3 to $r_n$ and $u_n\\leadsto u_{n+1}$: choose $r_{n+1}$ specializing from $r_n$ with source $u_{n+1}$ and put $u_{n+2}=t(r_{n+1})$. Step 3 makes $u_{n+1}\\leadsto u_{n+2}$ strict, and step 1 gives $u_{n+2}\\in O(x)$. This proves the inductive claim, including its base case, for every finite length.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABG (lemma-no-specializations-map-to-same-point), the iteration beginning “Hence we can continue”, with explicit induction invariant and base case."
+   }
+  },
+  {
+   "text": "Specialization on $U$ is antisymmetric: if two points specialize to one another, their singleton closures are the same irreducible closed subset and both are generic points of it, hence the points coincide by [lem-sc-scheme-sober]. Consequently the points $u_0,\\ldots,u_N$ of step 4 are pairwise distinct. Indeed if $i<j$ and $u_i=u_j$, transitivity along the chain gives $u_{i+1}\\leadsto u_j=u_i$, contradicting strictness of $u_i\\leadsto u_{i+1}$ and antisymmetry. Taking $N=|O(x)|$ produces $N+1$ distinct members of the set of size $N$ from step 3, a contradiction. Therefore $y\\notin\\overline{\\{x\\}}$. This applies to every ordered pair of distinct points in a common orbit: inversion and composition in step 1 identify their orbits.",
+   "uses": [
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABG (lemma-no-specializations-map-to-same-point), last sentence of the proof: the finite orbit cannot contain arbitrarily long strict specialization chains."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields-tensor-nontrivial",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-pbc-fibre-product-points",
+  "def-a1-groupoid-scheme",
+  "pqf-lem-finite-integral-lft",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "pqf-lem-incomparability",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-trf-closed-map-specializing",
+  "def-pc-scheme",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABG (lemma-no-specializations-map-to-same-point), entire proof, with the elementary orbit-composition argument of Groupoids Tag 022Q written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Distinct points in the same orbit of a scheme groupoid with finite source and target cannot specialize to one another",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.le_iff_specializes\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {a b : ↥X}, a ≤ b ↔ b ⤳ a\", \"doc\": \"For any scheme $X$ and points $a, b \\\\in X$, the inequality $a \\\\leq b$ in the specialization preorder holds if and only if $b$ specializes to $a$.\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) X\", \"doc\": \"For any scheme $X$ and points $x,y$ in $X$ where $x$ specializes to $y$, the morphism of schemes obtained by applying the spectrum map to the specialization-induced morphism between stalks of the stru\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism $\\\\operatorname{Spec}$ applied to the specialization-induced stalk map $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism induced by the specialization map between stalks $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ with the canonical mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X},\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (X.fromSpecStalk x).base) = {y | y ⤳ x}\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the image of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is the set of all points $y \\\\in X$ that specialize to $x$, i.e., $\\\\{y \\\\in X \\\\mid y \\\\tex\"}\n  {\"name\": \"genericPoint_specializes\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : QuasiSober α] [inst_2 : IrreducibleSpace α] (x : α),\\n  genericPoint α ⤳ x\", \"doc\": \"In a quasi-sober irreducible topological space, the unique generic point specializes to every point $x$ in the space. This means that every neighborhood of $x$ is also a neighborhood of the generic po\"}\n  {\"name\": \"Inseparable.specializes'\", \"module\": \"Mathlib/Topology/Inseparable\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] {x y : X}, Inseparable x y → y ⤳ x\", \"doc\": \"If two points $x$ and $y$ in a topological space are inseparable (i.e., their neighborhood filters are equal), then $y$ specializes to $x$ (every neighborhood of $x$ is also a neighborhood of $y$).\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Orbits of a finite groupoid scheme contain no nontrivial specializations of points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulAction.mem_fixedPoints_iff_card_orbit_eq_one\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"{a : α} [Fintype (orbit M a)] : a ∈ fixedPoints M α ↔ Fintype.card (orbit M a) = 1\", \"doc\": \"For a monoid $ M $ acting on a type $ \\\\alpha $, an element $ a \\\\in \\\\alpha $ is a fixed point of the action if and only if the orbit of $ a $ has cardinality 1, assuming the orbit is finite.\"}\n  {\"name\": \"MulAction.orbitRel.Quotient.mapsTo_smul_orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(g : G) (x : orbitRel.Quotient G α) : Set.MapsTo (g • ·) x.orbit x.orbit\", \"doc\": \"For any group element $ g $ and any orbit $ O $ in the quotient set $ \\\\alpha / G $, the scalar multiplication by $ g $ maps $ O $ to itself, i.e., $ g \\\\cdot O \\\\subseteq O $.\"}\n  {\"name\": \"AddAction.subsingleton_orbit_iff_mem_fixedPoints\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"∀ {M : Type u} [inst : AddMonoid M] {α : Type v} [inst_1 : AddAction M α] {a : α},\\n  (AddAction.orbit M a).Subsingleton ↔ a ∈ AddAction.fixedPoints M α\", \"doc\": \"For any additive monoid $ M $ acting on a type $ \\\\alpha $ and any element $ a \\\\in \\\\alpha $, the orbit of $ a $ under the action of $ M $ is a subsingleton (i.e., contains at most one element) if and o\"}\n  {\"name\": \"Finite.of_finite_mulAction_orbitRel_quotient\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"[Finite G] [Finite Ω] : Finite α\", \"doc\": \"Let $G$ be a finite group acting on a set $\\\\alpha$. If the quotient set $\\\\Omega$ (the set of orbits under the group action) is finite, then $\\\\alpha$ is finite.\"}\n  {\"name\": \"MulAction.IsPartition.of_orbits\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \": Setoid.IsPartition (Set.range fun a : X => orbit G a)\", \"doc\": \"The collection of orbits under a group action on a set $X$ forms a partition of $X$, meaning every element of $X$ belongs to exactly one orbit and no orbit is empty.\"}\n  {\"name\": \"MulAction.subsingleton_orbit_iff_mem_fixedPoints\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"{a : α} : (orbit M a).Subsingleton ↔ a ∈ fixedPoints M α\", \"doc\": \"For any element $a$ in a set $\\\\alpha$ under a monoid action, the orbit of $a$ is a subsingleton (i.e., contains at most one element) if and only if $a$ is a fixed point of the action, meaning $m \\\\cdot\"}\n  {\"name\": \"MulAction.IsFixedBlock.orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"(a : X) : IsFixedBlock G (orbit G a)\", \"doc\": \"For any element $ a \\\\in X $, the orbit $ \\\\text{orbit}_G(a) $ is a fixed block under the group action of $ G $.\"}\n  {\"name\": \"MulAction.orbit.pairwiseDisjoint\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \": (Set.range fun x : X => orbit G x).PairwiseDisjoint id\", \"doc\": \"The collection of all orbits of a group action on a set forms a pairwise disjoint family of subsets, meaning any two distinct orbits are disjoint.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Specializes\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*speciali|speciali.*orbit",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*speciali|speciali.*orbit",
+   "results": "{\"t\": \"2026-10-23T09:31:34Z\", \"tool\": \"grep\", \"query\": \"orbit.*speciali|speciali.*orbit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Orbits of a finite correspondence that is a groupoid have no distinct comparable points in the specialization order",
+   "results": "{\"t\": \"2026-10-23T09:31:34Z\", \"tool\": \"leansearch\", \"query\": \"Orbits of a finite correspondence that is a groupoid have no distinct comparable points in the specialization order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"specializationPreorder\", \"specializationOrder\", \"Specializes\", \"Specialization.instPreorder\", \"smul_eq_of_smul_le\", \"MulAction.orbit.pairwiseDisjoint\", \"AddAction.orbit.pairwiseDisjoint\", \"MulAction.IsPartition.of_orbits\"], \"digest\": \"3be165ba1886fe2b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Specializes\"",
+   "results": "{\"t\": \"2026-10-23T09:31:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"Specializes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Distinct points in one orbit of a scheme groupoid with finite source and target are incomparable under specialization",
+   "results": "{\"t\": \"2026-10-23T09:31:44Z\", \"tool\": \"leanfinder\", \"query\": \"Distinct points in one orbit of a scheme groupoid with finite source and target are incomparable under specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.le_iff_specializes\", \"Specializes.antisymm\", \"inseparable_iff_specializes_and\", \"IsOpen.not_specializes\", \"not_specializes_iff_exists_open\", \"Inseparable.specializes'\", \"Inseparable.specializes\", \"specializes_iff_inseparable\"], \"digest\": \"bdd25fbf248e9fad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "specializes|DiscreteTopology|discreteTopology",
+   "results": "{\"t\": \"2026-10-23T09:33:58Z\", \"tool\": \"grep\", \"query\": \"specializes|DiscreteTopology|discreteTopology\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally quasi finite morphism of schemes has discrete fibers so comparable points with the same image are equal",
+   "results": "{\"t\": \"2026-10-23T09:34:07Z\", \"tool\": \"leanfinder\", \"query\": \"A locally quasi finite morphism of schemes has discrete fibers so comparable points with the same image are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\"], \"digest\": \"733ba54071667ad3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "isDiscrete_preimage_singleton|LocallyQuasiFinite.*IsFinite|IsFinite.*LocallyQuasiFinite",
+   "results": "{\"t\": \"2026-10-23T09:35:44Z\", \"tool\": \"grep\", \"query\": \"isDiscrete_preimage_singleton|LocallyQuasiFinite.*IsFinite|IsFinite.*LocallyQuasiFinite\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"28\", \"32\", \"34\", \"60\", \"63\"], \"digest\": \"e1ecdd618f5369c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*special|special.*groupoid|orbit.*incompar|incompar.*orbit",
+   "results": "{\"t\": \"2026-10-23T09:38:58Z\", \"tool\": \"grep\", \"query\": \"groupoid.*special|special.*groupoid|orbit.*incompar|incompar.*orbit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite closed scheme equivalence relation has finite orbits and a strict specialization in an orbit can be lifted repeatedly to contradict finiteness",
+   "results": "{\"t\": \"2026-10-23T09:39:00Z\", \"tool\": \"leanfinder\", \"query\": \"A finite closed scheme equivalence relation has finite orbits and a strict specialization in an orbit can be lifted repeatedly to contradict finiteness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\"], \"digest\": \"9de0229c03edd26d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary finite group actions, general topology, Artinian schemes or discrete fibres, not the finite scheme-groupoid orbit assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-no-specializations-map-to-same-point.",
+   "via": [
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-groupoid-orbit-incomparability",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0ABG into five steps, retaining the statement. All ingredients already have nodes: point-arrow composition is a three-line tensor/fibre-product argument, fibre incomparability is the affine application of integral prime incomparability, and closed-map lifting supplies the explicit strict-chain induction. No new nodes. No Lean attachment was found.",
+  "blueprint": "Supporting input for det-thm-sf-ctf-stability-direct-images (3), through the inherited alteration/moduli/Tag 0ADD/Tag 0ABI branch. The current latest blueprint direct-image proof states only the high-level compactification route; this supporting Stacks argument is below that route. Inherited from.place is already precise. tools/blueprint_refs.py ancestor prints None for this item, so its inherited from.node=null and via chain are preserved. Searches for finite groupoid, orbit, specializations, 022Q and incomparability found no blueprint node stating the item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-b012ca301",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-b012ca301 (reviewer sub-agent of L); spot-checked: Read Stacks more-groupoids 0ABG (lines 2748-2767), groupoids 022Q, morphisms 02NT and algebra 00GT. The item statement is unchanged and matches 0ABG. The source's printed u,u' in R is a typo for u,u' in U; the item already states U and the report records the typo. No new nodes and no re-split note. Step 1: points z of R x_{s,U,t} R with given projections exist because the tensor of residue fields is nontrivial and has a prime (fibre-product-points). sc=s pr_1 and tc=t pr_0 from def-a1-groupoid-scheme give the right orientation for orbit closure. Step 2: finite implies integral; over an affine V the preimage is affine with A->B integral; specialization gives p_a in p_b with the same contraction, so pqf-lem-incomparability gives a=b. No existing DAG node states this fact (scanned all statements). Step 3: finite fibres and closed map from lem-weil-pbc-finite-closed-map-finite-fibres; closed maps lift specializations from the given point (lem-trf-closed-map-specializing); strictness of t(r)~>t(r+) follows from step 2 applied to t. Step 4: the induction invariant, base and step are all stated. Step 5: antisymmetry via the sober lemma, pairwise distinctness via transitivity, and N+1 distinct points in an orbit of size N. Inversion for the final clause comes from si=t, ti=s in the cited definition. proof_deps equals the union of uses; no cycle (only citer is the parent codimension-one-invariant-affine). Tested on: empty groupoid, trivial groupoid on Spec of a DVR, swap groupoid, a finite group action. No duplicate of the item among the groupoid/orbit nodes. Batch-5: lem-trf-closed-map-specializing is the Mathlib leaf IsClosedMap.specializingMap (Stacks 0066(1), general topology), outside both assumed statements and not part of their proofs, so it is accepted. No SGA used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupoidOrbitIncomparability",
+  "declaration": "AlgebraicGeometry.IsGroupoidScheme.not_mem_closure_singleton_of_isFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupoidOrbitIncomparability.lean",
+  "statement": "theorem IsGroupoidScheme.not_mem_closure_singleton_of_isFinite {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (_hG : IsGroupoidScheme s t e i c) [IsFinite s] [IsFinite t] (x y : U) (_hxy : x ≠ y) (_hy : y ∈ t.base '' (s.base ⁻¹' {x})) : y ∉ closure ({x} : Set U)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1916c6051",
+  "group": "O2",
+  "result": "pass",
+  "note": "Node diff is lean-only; lean.statement matches the file exactly. Lean matches the node and Stacks 0ABG clause by clause: IsGroupoidScheme s t e i c (recorded def-a1 declaration), [IsFinite s] [IsFinite t] (recorded Mathlib leaf), distinct x y : U, orbit t.base '' (s.base ⁻¹' {x}) in the correct s→t direction, conclusion y ∉ closure {x} = ¬(x ⤳ y) by specializes_iff_mem_closure. The node's 'no two distinct points specialize' follows from the inverse law. Stacks' 'u,u' ∈ R' is a typo for U. Edge cases fine: empty scheme, x=y excluded, singleton orbits vacuous, single universe u as IsGroupoidScheme requires, no extra assumptions. No definitions, sorry-only proof, source and blueprint docstrings with proof steps 1-5, all imports exist in Mathlib. No duplicate in live Sheaf Lean or the DAG. Both report sections present. No fixes and no compile needed."
+ }
+}

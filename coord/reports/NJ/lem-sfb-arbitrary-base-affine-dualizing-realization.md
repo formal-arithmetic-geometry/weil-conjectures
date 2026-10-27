@@ -1,0 +1,52 @@
+# Stage-1 delivery: lem-sfb-arbitrary-base-affine-dualizing-realization
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-arbitrary-base-affine-dualizing-realization.json: statement, now split into ten proof steps; no Mathlib match.
+- citations.json: exact statement quotations for all 38 citations in the ten steps.
+- report.md: this report. searches.jsonl contains the searches executed through msearch.py. write_split.py is a sandbox-only preparation script, not a delivered project file.
+
+There are **0 new nodes and 0 Mathlib leaves**. No unit record is edited: this item is a supporting lemma, not the unit's key statement.
+
+## Attachments
+
+None. I searched lean/WeilConjectures for the exact item tag, affine dualizing phrases, and relativeDualizing/RelativeDualizing/relative_dualizing/coherent-dualizing terms. The affine-space hits concern etale coefficient purity, not coherent structure-sheaf duality. No project declaration states this item. I wrote no Lean and ran no compiler, Lake command or local DAG checker.
+
+## WANTED
+
+None for the mathematical proof. All sources used are present under literature/stacks-project/.
+
+## Findings and changes
+
+The live item was unsplit, with no proof and no repair note; the sandbox initially contained only dispatch markers. I preserved the statement and its statement dependencies. Its existing Mathlib searches are retained, and five new actual searches are appended, including two semantic phrasings. The results give ordinary scheme/module-sheaf infrastructure, affine scheme anti-equivalence and abstract derived categories, not this result. In particular Scheme.Modules.Hom (Modules/Sheaf.lean:44) is underived, AffineScheme.ΓIsEquiv (AffineScheme.lean:224) concerns affine schemes, and DerivedCategory linear instances (DerivedCategory/Linear.lean:29-36) do not identify coherent derived sheaf categories. The exact commands and result digests are retained in searches.jsonl.
+
+The main danger was accidentally reusing the locally Noetherian affine duality nodes as arbitrary-base results. I did not do that. The proof instead uses the existing general affine relative Tor criterion and the existing flat finitely presented quotient pseudo-coherence lemma. In step 3 a finite algebra presentation and a composite of exact tensor functors establish all the latter lemma's hypotheses. Thus neither Noetherianity nor coherence of an arbitrary coordinate ring is tacitly assumed.
+
+The blueprint-reference ancestor command returns None, agreeing with the inherited blueprint.from.node=null. I retained that provenance and its detailed non-unspecified place and via list. I read the current latest blueprint's unit and det-thm-sf-ctf-stability-direct-images statement and proof. The current proof's (3) gives the direct-image/compactification route, not an explicit coherent-duality calculation. This item lies in the inherited supporting nodal-family branch, and the split does not change the unit's route. I searched the whole blueprint for relative dualizing and pseudo coherent. Its relative-dualizing hits are etale coefficient notions, not the coherent object here; same_as remains empty. The inherited unit record and latest unit text differ in detail; this delivery does not alter either. The inherited instruction to read coord/dag-sync.md names a file absent from this shared repository; the current shared-repository/delivery protocol in the dispatch brief was followed.
+
+## Not duplicates
+
+No new node is introduced. Existing lem-trf-affine-relative-dualizing-comparison and lem-trf-relative-pair-localization-affine-realization impose a locally Noetherian base and therefore cannot discharge this item. Existing lem-trf-affine-relative-tor-amplitude-criterion has no Noetherian hypothesis; existing lem-sfb-flat-fp-quotient-pseudocoherent states the exact restriction-of-scalars fact needed here. Existing lem-trf-affine-algebra-class-evaluation-comparison handles the actual multiplication/class map and localization over arbitrary rings. Existing lem-sc-affine-pseudo-coherent-rhom-qcoherent handles the additional Hom(M,T) clause. These are reused, not duplicated.
+
+## Review by NJ
+
+I read duality.tex, definition-relative-dualizing-complex and lemma-relative-dualizing-complex-algebra (Tags 0E2T and 0E2U), including the latter's proof, against every clause of the supplied item. It explicitly works without Noetherian assumptions. I also read perfect.tex, lemma-affine-compare-bounded (06Z0), lemma-pseudo-coherent (08E5), lemma-pseudo-coherent-affine (08E7), lemma-tor-dimension-rel-affine (0DHY), definition-relatively-perfect and lemma-affine-locally-rel-perfect, and lemma-quasi-coherence-internal-hom (0A6H), including its boundedness conditions and proof. I read more-algebra.tex, lemma-more-relative-pseudo-coherent-is-moot (0E1T), and cohomology.tex, lemma-Rhom-complex-of-direct-summands-finite-free (08I5) and lemma-restriction-RHom-to-U (08DL). There are no new nodes needing separate source checks.
+
+I opened and read the statement of every cited node, not just its dependency list or proof. My checks by step were:
+
+1. The two affine morphism criteria quantify over every pair of specified affine opens, exactly as needed. Flatness and local finite presentation are supplied hypotheses; I made no shrinking assumption.
+2. The supplied-pair definition supplies pseudo-coherence and local relative finite Tor dimension. The pseudo-coherence definition permits restriction of its local finite-free models; lem-sc-pseudo-coherent-qcoh asserts quasi-coherent cohomology on every scheme. The affine equivalence specifies RΓ as its inverse. The affine pseudo-coherence criterion gives the module finite-free model. Most importantly, the relative Tor criterion expressly turns local finite Tor dimension into a single finite R-interval on this affine chart. Its arbitrary-base statement is sufficient. I tested with Q=R explicitly to obtain bounded-below targets for subsequent Hom comparisons.
+3. I checked that R→B is both flat and finitely presented before invoking 0E1T: the displayed two sets of polynomial variables give finite presentation; flat base change and exact tensor composition give flatness. Multiplication B→A is surjective even if the rings have zero divisors or R→A is not injective. The existing flat-fp-quotient node then applies to A[0], which is finite free over itself. The flat-single tensor theorem is stated for all unbounded complexes, so its one-point ringed-site specialization supplies the lower bound for T_1.
+4. The affine fibre-product node names both projections, so its first ring map is precisely a→a⊗1. The section formula for associated modules supplies A_{μ(b)} on D(b), identifying the entire diagonal algebra and its restriction maps. The pullback/tensor comparison contains the open restriction and affine derived-extension assertions actually used. No unjustified assertion about intersections of arbitrary affine opens is needed.
+5. The algebra-class evaluation node explicitly covers a pseudo-coherent degree-zero algebra and a bounded-below second object, without Noetherianity, and explicitly identifies multiplication maps. Step 3 verifies those hypotheses for B, A, T_1. The restriction-of-Hom node and the open evaluation-mate theorem give the actual restricted Hom comparison. I wrote the transposition argument to ensure that the original supplied multiplication isomorphism restricts to the class multiplication, rather than selecting an arbitrary isomorphism of target objects. Full faithfulness then reflects its invertibility.
+6. The affine pseudo-coherent Hom node allows a bounded-above finite projective first representative and a cohomologically bounded-below second object. Those are exactly the properties proved in step 2. The finite-free Hom model applies both to U and the one-point ringed space of A. I wrote the finite interval c-n≤p≤b and the differential formula to justify the evaluation normalization; no infinite product commutation with tilde is claimed. The canonical tensor comparison and tensor–Hom bijection fix the natural map independently of representatives.
+7. The pair definition defines the scalar map as the transpose of the unit action. The same tensor and open evaluation-mate comparisons used in step 5 send that unit action to its restriction, giving equality of the actual scalar maps. This is stronger than merely identifying their target objects.
+8. The affine equivalence is triangulated and has a full subcategory as target, which gives all integer shifts and reflects inverses. Its pullback comparison is natural on maps. Faithfulness on Spec B then proves both directions of the equation preserving γ and θ. This step uses no rigidity or uniqueness theorem, avoiding a cycle through the parent item.
+9. The algebra-class evaluation statement explicitly includes affine-open and successive localization compatibility. For the general Hom comparison I compared the evaluation transposes under the canonical open tensor comparison and invertible evaluation mate. I wrote the scalar and composition identities on maps and roofs; no arbitrary identification is substituted. The smaller product chart is an open because both factors are opens over the same base, not because an arbitrary affine intersection was assumed affine.
+10. The zero ring/empty affine case gives zero derived categories and a valid interval [0,0]. The identity morphism reduces the diagonal and pullback formulas to unit/evaluation identities. These are direct checks from definitions.
+
+I checked delivery-errors B–E: all objects are supplied or introduced, the statement is preserved, no new clause-copy node or elementary-fact node is created, no forbidden SGA source is used, every non-elementary input is an existing cited statement, and the union of step uses is proof_deps. Cross-unit statements are declared as generic tool uses in split_report, since they supply affine coherent derived-category tools rather than replacing a unit step. citations.json copies the cited statements verbatim, including the hypotheses I checked. Every non-elementary step is below 2000 characters (the longest is 1288); none hides an unrecorded comparison lemma. There was no mathematical correction required after the source/hypothesis audit.
+
+## Unfinished work
+
+None in this stage-1 split. Proofs of the pre-existing statement-only supporting nodes remain their own future items; this delivery does not split or edit them.

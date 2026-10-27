@@ -6,6 +6,7 @@ Authors: SHEAF group Q32
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveLineTrace
+public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
@@ -56,34 +57,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Either projection of the chosen fibre square of the projective line.
-Source: blueprint lem-amb-p1-diagonal-integrals, first sentence
-(blueprint: lem-amb-p1-diagonal-integrals). -/
-def projectiveLineDiagonalProjection (S : Scheme.{u}) (a : Bool) :
-    pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S) ⟶ ProjectiveLine S :=
-  match a with
-  | false => pullback.fst _ _
-  | true => pullback.snd _ _
-
-/-- The canonical projective-line chart for either projection, including its equation
-over the base. It comes from projective-space base change and the flipped square.
-Source: blueprint lem-amb-p1-diagonal-integrals, proof step 1
-(blueprint: lem-amb-p1-diagonal-integrals). -/
-def projectiveLineDiagonalChart (S : Scheme.{u}) (a : Bool) :
-    {e : ProjectiveLine (ProjectiveLine S) ≅
-      pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S) //
-      e.hom ≫ projectiveLineDiagonalProjection S a =
-        (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)} :=
-  match a with
-  | false => ⟨(ProjectiveSpace.isPullback_map (ULift (Fin 2))
-      (ProjectiveLine S ↘ S)).flip.isoPullback,
-      (ProjectiveSpace.isPullback_map (ULift (Fin 2))
-        (ProjectiveLine S ↘ S)).flip.isoPullback_hom_fst⟩
-  | true => ⟨(ProjectiveSpace.isPullback_map (ULift (Fin 2))
-      (ProjectiveLine S ↘ S)).isoPullback,
-      (ProjectiveSpace.isPullback_map (ULift (Fin 2))
-        (ProjectiveLine S ↘ S)).isoPullback_hom_snd⟩
-
 /-- The projective-line trace along either projection. Transport along its canonical
 chart uses the chart's inverse-image/direct-image unit, direct-image composition,
 the normalized shifted twist comparison, and the recorded projective-line trace.
@@ -92,9 +65,7 @@ Source: blueprint lem-amb-p1-diagonal-integrals, the maps t_{p_a}
 def projectiveLineDiagonalTrace (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :
-    (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).obj
-      ((ordinaryFiniteLine A N hA
-        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧) ⟶
+    ordinaryFiniteP1DiagonalTarget A N hA S a ⟶
       ordinaryFiniteUnit A (ProjectiveLine S) :=
   letI : IsLocallyNoetherian (ProjectiveLine S) :=
     LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
@@ -129,9 +100,7 @@ Source: blueprint lem-amb-p1-diagonal-integrals, proof step 1
 def projectiveLineDiagonalChartPushforward (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :
-    (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).obj
-      ((ordinaryFiniteLine A N hA
-        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧) ⟶
+    ordinaryFiniteP1DiagonalTarget A N hA S a ⟶
       (ordinaryFinitePushforward A (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)).obj
         ((ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧) :=
   let e := (projectiveLineDiagonalChart S a).val
@@ -171,20 +140,5 @@ theorem projectiveLineDiagonalTrace_eq (N : ℕ) (hN : 0 < N)
           (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom) := by
   simp only [projectiveLineDiagonalTrace, projectiveLineDiagonalChartPushforward,
     Category.assoc]
-
-/-- The canonical source identification A_P → Rp_* RDelta_* A_P. The two units
-compose to the identity-map unit because p Delta = id, so this is the canonical
-derived-composition identification, in the direction required by the integral.
-Source: blueprint lem-amb-p1-diagonal-integrals, alpha_a and proof steps 3 and 5
-(blueprint: lem-amb-p1-diagonal-integrals). -/
-def projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]
-    (S : Scheme.{u}) (a : Bool) :
-    ordinaryFiniteUnit A (ProjectiveLine S) ⟶
-      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).obj
-        ((ordinaryFinitePushforward A (pullback.diagonal (ProjectiveLine S ↘ S))).obj
-          (ordinaryFiniteUnit A (ProjectiveLine S))) :=
-  supportedDerivedUnit A (projectiveLineDiagonalProjection S a) ≫
-    (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map
-      (supportedDerivedUnit A (pullback.diagonal (ProjectiveLine S ↘ S)))
 
 end AlgebraicGeometry.Etale

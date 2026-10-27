@@ -1,0 +1,274 @@
+{
+ "id": "lem-trf-geometric-pure-fibre-point-dimension",
+ "kind": "statement",
+ "title": "Pure geometric fibres give the ordinary pointwise fibre dimension",
+ "statement": "Let $g:T\\to B$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation], and let $d\\in\\mathbb N$. Suppose every nonempty geometric fibre of $g$ [def-weil-geometric-fibre] is pure of dimension $d$ [def-weil-pure-dimension]. For $x\\in T$ put $s=g(x)$, write $T_s=T\\times_B\\operatorname{Spec}\\kappa(s)$ for the ordinary fibre [def-pc-scheme-fibre], and identify $x$ with its point in $T_s$. For an algebraic closure $\\Omega=\\overline{\\kappa(s)}$ [def-weil-algebraic-closure], put $T_{\\bar s}=T\\times_B\\operatorname{Spec}\\Omega$, with projection $p:T_{\\bar s}\\to T_s$. Then there exists $\\bar x\\in T_{\\bar s}$ with $p(\\bar x)=x$, and every such point satisfies $\\dim_x(T_s)=\\dim_{\\bar x}(T_{\\bar s})=d$, where both dimensions are local topological Krull dimensions [def-kun-topological-dimension-at-point], not the Krull dimensions of the local rings. In particular $\\dim_x(T_{g(x)})=d$ for every $x\\in T$. No flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P4 (lemma-dimension-at-a-point-preserved-field-extension), combined with Varieties Tag 0A21 (lemma-dimension-locally-algebraic), parts (3),(5); extracted geometric-to-ordinary fibre argument from lem-trf-dth-fitting-smooth-locus, original proof Step 2, serving the geometric-fibre version of Divisors Tag 0C3K."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-pc-scheme-fibre",
+  "def-weil-algebraic-closure",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Mathlib directly supplies local finite type from local finite presentation (FinitePresentation.lean, the LocallyOfFiniteType instance, using finite presentation implies finite type on affine charts). Apply stability under base change to obtain local finite type for the ordinary fibre Y = T_s over k = κ(s), and then for Y ×_{Spec k} Spec Ω over Ω.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TP (definition-finite-presentation), 01T2 (lemma-locally-finite-type-characterize), 01TW (lemma-finite-presentation-finite-type) and 01T4 (lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "The geometric-fibre identification gives $T_{\\bar s}=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$ with projection $p$. The field-extension map $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}k$ is surjective. Its base change $p$ is therefore surjective, so the given $x\\in Y$ has a lift $\\bar x$. In particular $T_{\\bar s}$ is nonempty, and the purity hypothesis applies to it.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1 (lemma-base-change-surjective); the spectrum of a field has one point"
+   }
+  },
+  {
+   "text": "Apply fibre_dimension_after_base_change to the ordinary-fibre structure morphism Y → Spec k and the field-extension map Spec Ω → Spec k. This compares local dimensions in their fibres at every point of the displayed pullback. For any scheme over a field, its fibre inclusion over the unique base point is an embedding whose image is the whole scheme, by fiberHomeo. It is therefore a homeomorphism. Transport local dimension by identifying open neighbourhoods through this homeomorphism, both for Y and its field extension. This yields dim_x Y = dim_xbar (Y ×_{Spec k} Spec Ω) for every lift xbar of x.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-pc-scheme-fibre",
+    "def-kun-dimension",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1), from Algebra Tag 00P4 (lemma-dimension-at-a-point-preserved-field-extension)"
+   }
+  },
+  {
+   "text": "Surjectivity supplies a point xbar of the geometric fibre, so hpure applies and every irreducible component has dimension d. The top open of this fibre is homeomorphic to its underlying space; pull irreducible components back through the inverse homeomorphism and transport their dimensions. Apply topologicalKrullDimAt_eq_of_equidimensional_open over Ω to this top open, obtaining dimension d at every geometric-fibre point. Combine this with the comparison in Step 3 for each lift, and use the lift from Step 2 for the final ordinary-fibre equality.",
+   "uses": [
+    "def-weil-pure-dimension",
+    "lem-sbc-equidimensional-open-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), parts (3),(5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-dimension",
+  "def-kun-topological-dimension-at-point",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "lem-pc-field-extension-surjective",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FY (1), using Algebra Tag 00P4; Varieties Tag 0A21 (3),(5) for the pure-dimensional geometric fibre, and Tags 01T4 and 01S1 for the base changes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equidimensional geometric fibres imply constant local topological dimension on ordinary fibres",
+   "results": "{\"t\": \"2026-10-22T06:10:22Z\", \"tool\": \"leansearch\", \"query\": \"Equidimensional geometric fibres imply constant local topological dimension on ordinary fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"IsLocalFrameOn.fintypeOfFiniteDimensional\", \"IsLocalFrameOn.fintype_of_finiteDimensional\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"IsLocallyConstant.isOpen_fiber\", \"topologicalKrullDim\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"42ec485735df242b\"}; The returned fibre/smoothness APIs do not assert descent of pure geometric fibre dimension to local topological dimension of ordinary fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-22T06:10:22Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.fiber, topologicalKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned fibre/smoothness APIs do not assert descent of pure geometric fibre dimension to local topological dimension of ordinary fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all nonempty geometric fibres of a locally finitely presented scheme morphism have pure dimension d then the ordinary fibre has topological dimension d at each point",
+   "results": "{\"t\": \"2026-10-22T06:10:34Z\", \"tool\": \"leanfinder\", \"query\": \"If all nonempty geometric fibres of a locally finitely presented scheme morphism have pure dimension d then the ordinary fibre has topological dimension d at each point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\"], \"digest\": \"4b9361bd9c37152f\"}; The returned fibre/smoothness APIs do not assert descent of pure geometric fibre dimension to local topological dimension of ordinary fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPureDimension|topologicalKrullDimAt|equidimensional",
+   "results": "{\"t\": \"2026-10-22T06:11:39Z\", \"tool\": \"grep\", \"query\": \"IsPureDimension|topologicalKrullDimAt|equidimensional\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"2b027e3be165cb00\"}; The returned fibre/smoothness APIs do not assert descent of pure geometric fibre dimension to local topological dimension of ordinary fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local topological dimension of an ordinary fibre equals d if its base change to the algebraic closure of the residue field is equidimensional of dimension d",
+   "results": "{\"t\": \"2026-10-22T06:11:39Z\", \"tool\": \"leanfinder\", \"query\": \"Local topological dimension of an ordinary fibre equals d if its base change to the algebraic closure of the residue field is equidimensional of dimension d\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Could not connect to the workload on the requested port. Make sure it \", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned fibre/smoothness APIs do not assert descent of pure geometric fibre dimension to local topological dimension of ordinary fibres.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"equidimensional\"",
+   "results": "{\"t\": \"2026-10-22T06:13:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"equidimensional\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned fibre/smoothness APIs do not assert descent of pure geometric fibre dimension to local topological dimension of ordinary fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equidimensional|topologicalKrullDimAt|IsPureDimension",
+   "results": "{\"t\": \"2026-10-23T04:22:53Z\", \"tool\": \"grep\", \"query\": \"equidimensional|topologicalKrullDimAt|IsPureDimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"2b027e3be165cb00\"}; Read the returned hits: fibre topology, smooth morphisms, global Krull dimension and local-ring height do not state the item or specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local dimension of fibres is unchanged by field extension and equals d for pure d dimensional geometric fibres",
+   "results": "{\"t\": \"2026-10-23T04:22:54Z\", \"tool\": \"leansearch\", \"query\": \"Local dimension of fibres is unchanged by field extension and equals d for pure d dimensional geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Field.Algebra.IsSeparable.finSepDegree_eq\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"IsPurelyInseparable.insepDegree_eq\", \"IsPurelyInseparable.finInsepDegree_eq\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"IsPurelyInseparable.hasExponent_of_finiteDimensional\"], \"digest\": \"1eaea1cfe16a05b4\"}; Read the returned hits: fibre topology, smooth morphisms, global Krull dimension and local-ring height do not state the item or specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-23T04:22:54Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.fiber, topologicalKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: fibre topology, smooth morphisms, global Krull dimension and local-ring height do not state the item or specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pure geometric fibres imply local topological dimension of the ordinary fibre equals their common dimension",
+   "results": "{\"t\": \"2026-10-23T04:22:57Z\", \"tool\": \"leanfinder\", \"query\": \"Pure geometric fibres imply local topological dimension of the ordinary fibre equals their common dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.Scheme.Hom.fiberHomeo\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Algebra.IsStandardSmooth.relativeDimension\"], \"digest\": \"2cce77348f94b336\"}; Read the returned hits: fibre topology, smooth morphisms, global Krull dimension and local-ring height do not state the item or specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme locally of finite type over a field local topological Krull dimension is invariant under extending the ground field and is constant on equidimensional schemes",
+   "results": "{\"t\": \"2026-10-23T04:23:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a scheme locally of finite type over a field local topological Krull dimension is invariant under extending the ground field and is constant on equidimensional schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\", \"IsClosedEmbedding.topologicalKrullDim_le\", \"Ring.krullDimLE_iff\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"Ring.KrullDimLE.of_isLocalization\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"416afdc94c539f39\"}; Read the returned hits: fibre topology, smooth morphisms, global Krull dimension and local-ring height do not state the item or specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-dth-fitting-smooth-locus",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof '(1) and (2)': specialization to the normal cone; the nodal relative-curve geometry in the nearby-duality alteration reduction, specifically the fibrewise singular-locus calculation used by lem-trf-nodal-family-fitting-singular. Extracts the whole geometric-to-ordinary fibre dimension argument of lem-trf-dth-fitting-smooth-locus, original proof Step 2, before applying the smoothness-at-a-point criterion.",
+   "via": [
+    "lem-trf-dth-fitting-smooth-locus",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-geometric-pure-fibre-point-dimension",
+  "worker": "stage1",
+  "summary": "Q120: checked the locally finite presentation hypothesis, surjective point lifting, arbitrary-lift dimension comparison and equidimensional geometric-fibre calculation against the existing nodes and Stacks. Reused all needed general lemmas; no new nodes. Normalized doubled TeX escapes, with no mathematical statement change.",
+  "blueprint": "Realizes the geometric-fibre dimension input extracted from lem-trf-dth-fitting-smooth-locus Step 2, in the nearby-duality/normal-cone specialization branch of lem-trf-local-term-locality proof '(1) and (2)'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lft-pointwise-criterion",
+    "why": "Stacks 01T2 (Mathlib leaf): pointwise finite-type charts from the finite presentations give local finite type in the every-affine-open sense of def-weil-finite-type-morphism; a generic finiteness tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Stability under arbitrary base change supplies local finite type over the two residue fields; this is a generic finiteness tool, not a replacement of the trace-specialization route."
+   },
+   {
+    "node": "lem-pc-field-extension-surjective",
+    "why": "Surjectivity of the map of field spectra is the generic point-lifting input; the unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Stability of surjectivity under base change lifts x to the geometric fibre; this is a generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Tag 02FY (1) compares the exact two local topological fibre dimensions; the trace unit does not provide this general base-change theorem."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Apply its general locally algebraic equidimensional-open statement to the whole geometric fibre; it supplies the Tag 0A21 dimension computation, not a different trace argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-base-change",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-equidimensional-open-local-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-9eccc841c",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-9eccc841c (reviewer sub-agent of L); spot-checked: Q120 lem-trf-geometric-pure-fibre-point-dimension 9eccc841: one-level split with no new nodes. The statement is byte-identical to the NY base once the doubled backslashes are normalized, and stmt_deps and source are unchanged. Checked against Stacks 02FY(1) (morphisms.tex: any lift x', only local finite type needed), 0A21(3),(5) (varieties.tex) and 01T2/01TW/01T4/01S1. Small cases checked: d=0 with a nonreduced fibre, the generic point of A^d (topological versus local-ring dimension), a reducible pure fibre, several lifts over an inseparable residue extension, and empty T. Step 2: the geometric fibre is the base change of the ordinary fibre (def-weil-geometric-fibre), the projection is surjective by field-extension surjectivity plus base change, so a lift exists and purity applies. Step 3: lem-sc-fibre-dimension-after-base-change with S'=Spec Omega covers every lift, and its dim convention agrees with def-kun-topological-dimension-at-point. Step 4: lem-sbc-equidimensional-open-local-dimension with Y=O=geometric fibre and n=d. No duplicate in the DAG: lem-trf-field-extension-component-local-dimension carries extra clauses and is not needed. Fault C1, fixed: Step 1 derived 'locally of finite type' (the every-affine-open form of def-weil-finite-type-morphism) from pointwise finite-presentation charts without citing Stacks 01T2. It now cites the Mathlib leaf lem-weil-pbc-lft-pointwise-criterion; proof_deps and the step source were updated and a tool_uses entry added. Accepted tool_uses: lem-sc-fibre-dimension-after-base-change and lem-sbc-equidimensional-open-local-dimension as generic fibre-dimension tools, plus the Mathlib leaves. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricPureFibrePointDimension",
+  "declaration": "AlgebraicGeometry.geometric_pure_fibre_point_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPureFibrePointDimension.lean",
+  "statement": "theorem geometric_pure_fibre_point_dimension {T B : Scheme.{u}} (g : T ⟶ B) [LocallyOfFinitePresentation g] (d : ℕ) (hpure : ∀ (s : B) (Ω : Type u) [Field Ω] [Algebra (B.residueField s) Ω] [IsAlgClosure (B.residueField s) Ω], Nonempty ↥(pullback (g.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField s) Ω)))) → (pullback (g.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField s) Ω)))).IsPureDimension d) (x : T) (Ω : Type u) [Field Ω] [Algebra (B.residueField (g x)) Ω] [IsAlgClosure (B.residueField (g x)) Ω] : (∃ xbar : ↥(pullback (g.fiberToSpecResidueField (g x)) (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField (g x)) Ω)))), pullback.fst (g.fiberToSpecResidueField (g x)) (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField (g x)) Ω))) xbar = g.asFiber x) ∧ (∀ xbar : ↥(pullback (g.fiberToSpecResidueField (g x)) (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField (g x)) Ω)))), pullback.fst (g.fiberToSpecResidueField (g x)) (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField (g x)) Ω))) xbar = g.asFiber x → topologicalKrullDimAt (g.asFiber x) = topologicalKrullDimAt xbar ∧ topologicalKrullDimAt xbar = (d : WithBot ℕ∞)) ∧ topologicalKrullDimAt (g.asFiber x) = (d : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da4c25c00",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Fresh lean record (live lean null). Signature verbatim in file; single sorry. Clauses match node: LocallyOfFinitePresentation only; hpure = nonempty geometric fibre (iterated pullback of fiberToSpecResidueField along Spec Ω, the def-weil-geometric-fibre stated equivalent) → Scheme.IsPureDimension d (components' topologicalKrullDim = d, not hollow), quantified over all IsAlgClosure Ω (equivalent by iso-invariance); conclusion: ∃ lift via pullback.fst to g.asFiber x, ∀ lift dim equality and = d, final topologicalKrullDimAt (g.asFiber x) = d, all topological dimensions. Edge cases (empty T/fibres, d=0, generic point of A^d, nonreduced, universe u) fine. Sources 00P4/02FY(1)/0A21(3),(5) agree; docstrings with source, blueprint and 4 proof steps; IsAlgClosure for record-less def-weil-algebraic-closure as in landed items; proof-dep imports exist in side-live. No compile needed (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T002150-L-63372",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

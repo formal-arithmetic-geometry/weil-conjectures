@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-relative-torus-monomorphism-closed",
+ "kind": "statement",
+ "title": "A monic relative torus homomorphism is a closed immersion",
+ "statement": "Let $S$ be any scheme [def-pc-scheme]. An $S$-group scheme means an $S$-scheme with multiplication, identity section and inverse satisfying the group diagrams. Let $P\\to S$ be a torus: a smooth affine commutative $S$-group scheme of finite presentation [def-sbc-smooth-morphisms, def-weil-pbc-scheme-conventions] which is fppf locally isomorphic to $\\mathbf G_{m,S}^r$ for finite locally constant rank $r\\geq0$ [def-pc-fppf-site, def-sc-gm-ga]. Let $G\\to S$ be a separated $S$-group scheme of finite presentation [def-weil-pbc-scheme-conventions], and let $u:P\\to G$ be an $S$-group homomorphism. Suppose that for every $S$-scheme $T$, the map $P(T)\\to G(T)$ induced by $u$ is injective, where $P(T)=\\operatorname{Hom}_S(T,P)$ and likewise for $G$. Then $u$ is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Theorem 5.3.5 and direct proof, printed pp.165–168, specialized to a torus. For the nonaffine target reduction the proof offers Prasad–Yu, Proposition 3.1, as the Raynaud affineness input; no SGA source is used. Original not archived locally."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fppf-site",
+  "def-sc-gm-ga",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-torus"
+ ],
+ "proof": [
+  {
+   "text": "The hypothesis on $T$-points makes $u$ a monomorphism of schemes. Indeed, if $a,b:Z\\to P$ satisfy $ua=ub$, their composites to $S$ agree, so give one $S$-scheme structure on $Z$; injectivity on $P(Z)$ then gives $a=b$. The same argument, or the fibre-product universal property, shows monicity after every base change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.3.5, proof, p.166: monicity and base change; explicit Yoneda argument."
+   }
+  },
+  {
+   "text": "Choose the fppf splitting covering for $P$, refining its members by affine opens on which the rank is constant. Its pullback to $G$ is an fppf covering by [lem-trf-fppf-covering-base-change], hence an fpqc covering by [lem-trf-fppf-covering-is-fpqc]. The morphisms obtained from $u$ are its base changes to that covering of its target. By [lem-pc-fpqc-descend-closed-immersion], it suffices to prove closedness on these pieces. Thus assume $S=\\operatorname{Spec}A$ and $P=\\mathbf G_{m,A}^r$ with a fixed finite $r$, including $r=0$.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021O (lemma-fppf), 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc); descent.tex Tag 02L6 (lemma-descending-property-closed-immersion)."
+   }
+  },
+  {
+   "text": "Use the affine Noetherian approximation [lemma-nagata-noetherian-inverse-system-affine], with $A$ the directed union of its finite-type $\\mathbf Z$-subalgebras $A_i$. By [thm-pd-spreading-out], descend $G$ as a finitely presented scheme to some $S_i=\\operatorname{Spec}A_i$; take $P_i=\\mathbf G_{m,A_i}^r$. The products needed for group laws are the products of these models. The same theorem descends multiplication, identity, inverse, and $u$ to a common stage. Its equality clause makes the finitely many associativity, unit, inverse and homomorphism diagrams commute at a later stage. Explicitly these diagrams have domains among $S_i,G_i,G_i^2,G_i^3,P_i,P_i^2$, with products over $S_i$; their arrows are identities, projections, the descended operations and $u_i$. Thus they give an actual group scheme and group homomorphism, whose base change recovers the given operations and $u$.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), parts (1)–(3); Conrad Theorem 5.3.5, p.166, direct-limit reduction."
+   }
+  },
+  {
+   "text": "Enlarge the stage so that $G_i\\to S_i$ is separated by [lem-weil-pbc-descend-separated], and $u_i$ is a monomorphism by [lem-weil-pbc-descend-monomorphism]. The latter requires local finite type at the starting stage: on affine opens of $P_i$ mapping into an affine open of $G_i$, finite generators over $A_i$ also generate over the target coordinate algebra, so this hypothesis holds. All the schemes in these descent applications are qcqs, being finitely presented over affine $S_i$. By [lem-weil-pbc-finite-type-over-noetherian], $S_i,G_i,P_i$ are Noetherian, since they are of finite type over $\\mathbf Z$. In particular $u_i$ is quasi-compact (every open in its Noetherian source is quasi-compact), so the local finite-type assertion makes $u_i$ finite type. Fix this stage and write $S_0,P_0,G_0,u_0$.",
+   "uses": [
+    "lem-weil-pbc-descend-separated",
+    "lem-weil-pbc-descend-monomorphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZQ (lemma-descend-separated-finite-presentation), 07RQ (lemma-descend-monomorphism); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "It suffices to show $u_0$ proper, since [lem-pc-proper-monomorphism-closed] then makes this monomorphism a closed immersion. Apply [lem-sfb-noetherian-dvr-properness] to the finite-type morphism $u_0:P_0\\to G_0$, whose target is Noetherian by step 4. Fix an arbitrary DVR $R$ with fraction field $K$, a point $b:\\operatorname{Spec}R\\to G_0$, and $a:\\operatorname{Spec}K\\to P_0$ with $u_0a=b|_K$. Pull back the group schemes along the composite $\\operatorname{Spec}R\\to G_0\\to S_0$; denote them $P_R,G_R$ and the homomorphism $u_R$. We will prove $u_R$ is closed and explicitly extend this square. No finiteness or excellence assumption on $R$ is added.",
+   "uses": [
+    "lem-pc-proper-monomorphism-closed",
+    "lem-sfb-noetherian-dvr-properness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), (1) iff (3); etale.tex Tag 04XV (lemma-characterize-closed-immersion)."
+   }
+  },
+  {
+   "text": "The generic map $u_K:P_K\\to G_K$ is a closed immersion by [lem-sfb-algebraic-group-monomorphism-closed-immersion]: both groups are separated of finite type over $K$, and step 1 gives injectivity on all algebra points. Let $C\\hookrightarrow G_R$ be the schematic closure of this closed subgroup supplied by [lem-sfb-dvr-flat-generic-subgroup-closure]. It is separated, flat and finitely presented over $R$, and $C_K=u_K(P_K)$. Apply [lem-sfb-relative-torus-character-reconstruction] to the constant lattice sheaf $\\underline{\\mathbf Z^r}$ over $\\operatorname{Spec}R$: it identifies its constructed smooth torus with $P_R=\\mathbf G_{m,R}^r$. Hence $P_R$ is flat by [lem-pc-smooth-flat]. The flat-source factorization clause of the closure node therefore gives $v:P_R\\to C$ with composite $u_R$. Its compatibility with the group operations follows by composing the required equalities with the monomorphism $C\\hookrightarrow G_R$. Likewise $v$ is monic since $u_R$ is monic.",
+   "uses": [
+    "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+    "lem-sfb-dvr-flat-generic-subgroup-closure",
+    "lem-pc-smooth-flat",
+    "lem-sfb-relative-torus-character-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.3.5, proof, p.166, generic-image schematic closure and factorization; field input from Milne Proposition 5.31(a), Theorem 5.34."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dvr-generic-affine-group-affine] to $C$. Its flatness, separatedness and finite type were supplied in step 6. Its generic fibre is the split torus $P_K$, hence affine. Thus $C$ is affine over $\\operatorname{Spec}R$. This is the point that handles a possibly nonaffine original target $G_R$.",
+   "uses": [
+    "lem-sfb-dvr-generic-affine-group-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/qrg.pdf",
+    "place": "Section 3, Proposition 3.1, PDF p.5; affineness input explicitly offered in Conrad Theorem 5.3.5, p.166."
+   }
+  },
+  {
+   "text": "The torus $P_R$ is of multiplicative type with character group $\\mathbf Z^r$: its coordinate algebra is $R[\\mathbf Z^r]=R[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$ with the stated diagonal comultiplication. Thus [lem-sfb-affine-multiplicative-type-monomorphism-closed] applies to the monic group homomorphism $v:P_R\\to C$, with affine finitely presented target $C$ by steps 6–7. It makes $v$ a closed immersion. Composing with $C\\hookrightarrow G_R$ gives a closed immersion $u_R$ by [lem-weil-pbc-closed-immersion-comp].",
+   "uses": [
+    "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Appendix B, Lemma B.1.3, pp.281–282, after Theorem 5.3.5 nonaffine-target reduction; morphisms.tex Tag 01QS (lemma-composition-closed-immersion)."
+   }
+  },
+  {
+   "text": "Extend the square of step 5 directly. The point $b$ gives a section $\\beta:\\operatorname{Spec}R\\to G_R$. Choose an affine open $U=\\operatorname{Spec}B$ containing its closed-point image. Its inverse image under $\\beta$ contains the closed point of the local scheme $\\operatorname{Spec}R$, hence is all of it. By the affine description in [def-weil-closed-immersion], $u_R^{-1}(U)=\\operatorname{Spec}(B/I)$ for an ideal $I$. The ring map $B\\to R$ of $\\beta$ carries $I$ to zero in $K$, because its generic restriction factors through $P_K$ by $a$. Since $R\\hookrightarrow K$ is injective, it kills $I$ already in $R$, and so defines a map $B/I\\to R$. This gives the desired lift to $P_R$, hence to $P_0$; its restriction is $a$ and its uniqueness follows from monicity. Every square therefore has a unique lift. The criterion [lem-sfb-noetherian-dvr-properness] proves $u_0$ proper, and [lem-pc-proper-monomorphism-closed] proves it closed.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-noetherian-dvr-properness",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), (3) implies (1); affine factorization written out using Morphisms Tag 01QO; etale.tex Tag 04XV."
+   }
+  },
+  {
+   "text": "Base change of $u_0$ along $\\operatorname{Spec}A\\to S_0$ recovers $u$ on the split affine piece, so [lem-weil-pbc-closed-immersion-base-change] makes it a closed immersion. Apply [lem-pc-fpqc-descend-closed-immersion] to the target covering in step 2. This proves the assertion for the original $S,P,G,u$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QR (lemma-base-change-closed-immersion); descent.tex Tag 02L6 (lemma-descending-property-closed-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-separated",
+  "lem-weil-pbc-descend-monomorphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-sfb-noetherian-dvr-properness",
+  "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+  "lem-sfb-dvr-flat-generic-subgroup-closure",
+  "lem-pc-smooth-flat",
+  "lem-sfb-relative-torus-character-reconstruction",
+  "lem-sfb-dvr-generic-affine-group-affine",
+  "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+  "lem-weil-pbc-closed-immersion-comp",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Theorem 5.3.5 proof, p.166, with the torus affine case isolated as Appendix B Lemma B.1.3 and affineness via Prasad–Yu Proposition 3.1. Sources read online; archive missing, WANTED in report. Explicit descent and valuative assembly by N5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torus|reductive|multiplicative.type",
+   "results": "0 hits; ; returned names/files: ; Mathlib/AlgebraicGeometry/ searched",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono and iff_isProper_and_mono additionally require finiteness or properness of the homomorphism. Those properties are the substance of the torus theorem and are not available by a one-line specialization. Separated equalizers and diagonal lemmas do not assert this result. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic homomorphism of reductive group schemes to a separated group of finite presentation is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono and iff_isProper_and_mono additionally require finiteness or properness of the homomorphism. Those properties are the substance of the torus theorem and are not available by a one-line specialization. Separated equalizers and diagonal lemmas do not assert this result. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Mono\", \"IsClosedImmersion\"",
+   "results": "4 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono, AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono and iff_isProper_and_mono additionally require finiteness or properness of the homomorphism. Those properties are the substance of the torus theorem and are not available by a one-line specialization. Separated equalizers and diagonal lemmas do not assert this result. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any monomorphism from a torus over a scheme to a separated group scheme of finite presentation is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated, AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId, AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.isClosedImmersion_equalizer_ι_left",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono and iff_isProper_and_mono additionally require finiteness or properness of the homomorphism. Those properties are the substance of the torus theorem and are not available by a one-line specialization. Separated equalizers and diagonal lemmas do not assert this result. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism from a reductive group scheme into a separated group of finite presentation is proper and hence a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono and iff_isProper_and_mono additionally require finiteness or properness of the homomorphism. Those properties are the substance of the torus theorem and are not available by a one-line specialization. Separated equalizers and diagonal lemmas do not assert this result. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomorphism of a torus over a scheme into a separated group scheme of finite presentation is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite/proper monomorphism characterizations need the finiteness/properness that the torus theorem must prove; the diagonal and topological-group hits do not state the item. The unqualified Loogle query was rejected as an unknown identifier; the qualified query and both semantic searches were also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monomorphism torus group scheme closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated, AlgebraicGeometry.IsPreimmersion.instMonoScheme, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsImmersion.instLiftSchemeId, AlgebraicGeometry.instIsClosedImmersionISchemeOfSubsingletonCarrierCarrierCommRingCat, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.Scheme.Hom.isClosedEmbedding",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite/proper monomorphism characterizations need the finiteness/properness that the torus theorem must prove; the diagonal and topological-group hits do not state the item. The unqualified Loogle query was rejected as an unknown identifier; the qualified query and both semantic searches were also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus injects into a finitely presented separated relative group as a closed subgroup",
+   "results": "8 hits; ; returned names/files: CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed, CategoryTheory.PreGaloisCategory.has_decomp_quotients, Subgroup.instDiscreteTopPeriods, Subgroup.instDiscreteTopStrictPeriods, instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space, Subgroup.quotient_finite_of_isOpen, Subgroup.IsArithmetic.discreteTopology, Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite/proper monomorphism characterizations need the finiteness/properness that the torus theorem must prove; the diagonal and topological-group hits do not state the item. The unqualified Loogle query was rejected as an unknown identifier; the qualified query and both semantic searches were also run."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedImmersion Mono GroupScheme",
+   "results": "0 hits; loogle: Unknown identifier `IsClosedImmersion`; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite/proper monomorphism characterizations need the finiteness/properness that the torus theorem must prove; the diagonal and topological-group hits do not state the item. The unqualified Loogle query was rejected as an unknown identifier; the qualified query and both semantic searches were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|multiplicative.type|IsClosedImmersion",
+   "results": "25 hits; ; returned names/files: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite/proper monomorphism characterizations need the finiteness/properness that the torus theorem must prove; the diagonal and topological-group hits do not state the item. The unqualified Loogle query was rejected as an unknown identifier; the qualified query and both semantic searches were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_isFinite_and_mono|iff_isProper_and_mono",
+   "results": "6 hits; ; returned names/files: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite/proper monomorphism characterizations need the finiteness/properness that the torus theorem must prove; the diagonal and topological-group hits do not state the item. The unqualified Loogle query was rejected as an unknown identifier; the qualified query and both semantic searches were also run."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-hom-generic-closed-rigidity",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-torus-monomorphism-closed",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Checked project Lean and latest blueprint; no exact completed declaration or duplicate. Split via fppf split-affine localization, explicit finite-presentation/group-law/monicity descent, the Noetherian DVR properness test, flat generic subgroup closure, Raynaud affineness, and the affine multiplicative-type lemma; valuation lifts are explicit quotient-ring maps. Three statement-only non-Mathlib inputs, all searched through msearch; all cited statements read and quoted.",
+  "blueprint": "No imported ancestor (blueprint_refs.py ancestor returned None); inherited null ancestor and via chain retained. Supports the generic torus inclusion in the normal-semiabelian quotient branch under direct-image stability, step (3); latest main-20261024 unit and direct-images proof read. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic scheme descent/locality/properness tool used with its stated hypotheses in the torus proof; the unit supplies no replacement, and its direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-descend-separated",
+    "why": "Generic scheme descent/locality/properness tool used with its stated hypotheses in the torus proof; the unit supplies no replacement, and its direct-image route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-weil-pbc-descend-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N5-fbda8c461",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-fbda8c461 (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes and the statements of all 19 cited nodes in full. Checked both sources at the cited places (read-only copies, pdftotext): Conrad, Reductive group schemes, Thm 5.3.5 and its proof pp.165-166 and Def B.1.1/Lemma B.1.3 pp.280-282; Prasad-Yu Prop 3.1 (flat finite type over any DVR, generic fibre affine: affine iff separated). The steps follow Conrad's route: spread out to a Noetherian base, proper mono => closed immersion, DVR criterion with base change to Spec R, flat schematic closure of the generic image, Raynaud affineness. For a torus the GL_n/root-filtration part is replaced by the affine multiplicative-type case B.1.3. Every hypothesis holds where used: the descent and spreading-out clauses at steps 3-4 (qcqs, locally finite type of u_i, Noetherian via finite type over Z); the closed-immersion criterion for u_0 at step 5; the field criterion for u_K and flat-source factorization at step 6; PY 3.1 for C at step 7; B.1.3 with C affine and finitely presented at step 8; the explicit lift via R injecting into K at step 9; fpqc descent at step 10. The closure node is true (kernel ideals are torsion-free hence flat; flat + finite type over a domain gives finite presentation; flat sources factor through C). Tested: trivial H_K, nonflat G, r=0, empty S, mu_p. No duplicates in the snapshot or live DAG; the item is still unsplit live; no cycle; no SGA cited. Batch-5 flags: lem-trf-fppf-covering-base-change and -is-fpqc are Mathlib-leaf site facts; noetherian-dvr-properness reaches only a definition; the algebraic-group mono theorem and the torus character reconstruction reach only generic algebraic-space, descent and lisse lemmas. None is the trace formula, Poincare duality or a step of their proofs, so all are accepted. Accepted tool uses: lem-pc-fpqc-descend-closed-immersion and lem-weil-pbc-descend-separated (declared); thm-pd-spreading-out (Stacks 01ZM, Lean-closed). Advisory only: step 6 could get flatness of G_m^r elementarily instead of from the reconstruction node; the inherited stmt_dep def-sc-gm-ga is field-only."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeTorusMonomorphismClosed",
+  "declaration": "AlgebraicGeometry.relative_torus_monomorphism_closed",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTorusMonomorphismClosed.lean",
+  "statement": "theorem relative_torus_monomorphism_closed {S : Scheme.{u}} (P G : Over S) [GrpObj P] [GrpObj G] [IsCommMonObj P] [Smooth P.hom] [IsAffineHom P.hom] [LocallyOfFinitePresentation P.hom] [QuasiCompact P.hom] [QuasiSeparated P.hom] [IsSeparated G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] [QuasiSeparated G.hom] (hP : IsRelativeTorus P) (u : P ⟶ G) [IsMonHom u] (hu : ∀ (T : Over S), Function.Injective (fun x : T ⟶ P => x ≫ u)) : IsClosedImmersion u.left",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65c1e467d",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read node, all 7 stmt_deps, landed RelativeTorus source, module, report (both sections present). Clause match: S arbitrary; P,G : Over S with GrpObj; IsCommMonObj P; Smooth/IsAffineHom/LFP+QC+QS on P; IsRelativeTorus P (fppf precoverage, per-member ranks incl. 0, GrpCat functor iso using the same GrpObj P); IsSeparated+LFP+QC+QS on G; u with IsMonHom; injectivity on Hom over every T : Over S; conclusion IsClosedImmersion u.left. No extra hypotheses; single universe u. Edge cases: empty S, rank 0, varying ranks, nonreduced test schemes, target QC kept. Only node changes: lean, plus landed def-sfb-relative-torus added to stmt_deps (allowed by §5). Statement verbatim; sorry only; source/blueprint docstrings with 10 steps; imported modules exist and match proof_dep Lean records. No compile (no file changed). Advisory: field-only def-sc-gm-ga still cited in node text; second reading by same worker."
+ }
+}

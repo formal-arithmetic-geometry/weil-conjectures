@@ -17,64 +17,71 @@
  ],
  "proof": [
   {
-   "text": "If $X$ is geometrically reduced over $k$, then the defining all-field-extension condition applies to the particular extension $\\bar k/k$. Therefore the base change $X_{\\bar k}$ is reduced. This implication is valid for the empty scheme as well, since reducedness and the universal condition are both vacuous on an empty open cover.",
+   "text": "Geometric reducedness applied to the extension Ω/k gives reducedness of X_Ω directly, using the chosen pullback square. This direction needs no finiteness or nonemptiness assumption.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 035X, implication (1) to (2), with $L=\\bar k$"
-   }
+   "elementary": true
   },
   {
-   "text": "Assume that $X_{\\bar k}$ is reduced. Let $\\mathcal U=X.affineCover$ be the canonical affine open cover. Base change of each affine open along $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$ is an open subscheme of $X_{\\bar k}$, and these opens cover it. By [lem-trf-reduced-scheme-open-cover], every such base-changed affine open is reduced. If $U=\\operatorname{Spec}A$ is one chart, [lem-weil-pbc-fibre-product-affine-spectra] identifies its base change with $\\operatorname{Spec}(A\\otimes_k\\bar k)$; [lem-weil-pbc-affine-scheme-reduced-iff] therefore says that $A\\otimes_k\\bar k$ is a reduced ring.",
+   "text": "Assume X_Ω is reduced. IsAlgClosure.isAlgClosed makes Ω algebraically closed and hence perfect. Apply the existing, fully proved library theorem AlgebraicGeometry.GeometricallyReduced.of_perfectField to X_Ω → Spec Ω. That theorem proves geometric reducedness by an affine open cover, pullbackSpecIso, reducedness of tensor products over a perfect field, affine_isReduced_iff, and IsReduced.of_openCover. Its statement has no finite-type hypothesis.",
    "uses": [
+    "lem-weil-pbc-perfect-reduced-tensor",
     "lem-trf-reduced-scheme-open-cover",
     "lem-weil-pbc-fibre-product-affine-spectra",
     "lem-weil-pbc-affine-scheme-reduced-iff"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 035X, implication (6) to (7), and Schemes Tags 01I4, 01JQ, 01J2"
+    "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+    "place": "GeometricallyReduced.of_perfectField; Stacks varieties.tex, lemma-perfect-reduced, Tag 020I"
    }
   },
   {
-   "text": "For each chart ring $A$, [lem-trf-reducedness-tensor-chosen-algebraic-closure] transports reducedness from $A\\otimes_k\\bar k$ to $A\\otimes_k\\operatorname{AlgebraicClosure}(k)$. The Mathlib leaf [lem-trf-affine-geometric-reducedness-criterion] then gives that $A$ is geometrically reduced over $k$, i.e. $A\\otimes_kL$ is reduced for every field extension $L/k$.",
-   "uses": [
-    "lem-trf-reducedness-tensor-chosen-algebraic-closure",
-    "lem-trf-affine-geometric-reducedness-criterion"
-   ],
-   "elementary": false,
+   "text": "Fix any extension K/k and put M = AlgebraicClosure K, in the same universe. Since Ω/k is algebraic and M is algebraically closed, IsAlgClosed.lift supplies a k-algebra map Ω → M; use its induced Ω-algebra structure and scalar-tower identity. Geometric reducedness of X_Ω gives reducedness of X_Ω ×_Ω Spec M. Pullback pasting identifies this with X_K ×_K Spec M: the two composites Spec M → Spec k coincide by the scalar-tower equations. The comparison is explicitly the composite of two pullbackLeftPullbackSndIso isomorphisms and pullback.congrHom. Thus the latter scheme is reduced.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 035X, equivalence of affine condition (7) with all-field-extension condition (2), with Mathlib criterion"
+    "document": "lean/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+    "place": "IsAlgClosed.lift, with CategoryTheory.Limits.pullbackLeftPullbackSndIso"
    }
   },
   {
-   "text": "Fix any field extension $L/k$. The base changes of the affine cover $\\mathcal U$ form an open cover of $X_L$. For a chart $U=\\operatorname{Spec}A$, Step 3 gives that $A\\otimes_kL$ is reduced; [lem-weil-pbc-fibre-product-affine-spectra] identifies the corresponding chart of $X_L$ with $\\operatorname{Spec}(A\\otimes_kL)$, and [lem-weil-pbc-affine-scheme-reduced-iff] makes that chart reduced. Applying [lem-trf-reduced-scheme-open-cover] to the cover yields that $X_L$ is reduced. Since $L/k$ was arbitrary, $X$ is geometrically reduced. The empty scheme is covered by the empty family, so this argument includes it.",
+   "text": "The map g:Spec M → Spec K is surjective, since both spectra are nonempty singletons. Its target is reduced, so IsSchemeTheoreticallyDominant.of_isDominant makes g scheme-theoretically dominant. It is quasi-compact because it is a morphism of affine schemes. The map X_K → Spec K is flat by the field-flatness lemma. Flat base change therefore makes q:X_K ×_K Spec M → X_K quasi-compact and scheme-theoretically dominant.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-affine-scheme-reduced-iff",
-    "lem-trf-reduced-scheme-open-cover"
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-pc-flat-field"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 035X, implication (7) to (1), via affine base changes and gluing"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-flat-base-change-scheme-theoretic-image, Tag 081I; Mathlib IsSchemeTheoreticallyDominant.pullbackFst"
+   }
+  },
+  {
+   "text": "Apply Mathlib IsSchemeTheoreticallyDominant.isReduced to q. Explicitly, quasi-compact schematic dominance makes each map on sections injective, and the source section rings are reduced; hence the target section rings are reduced as well. Thus X_K is reduced. The criterion geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms packages this for every K/k into GeometricallyReduced of the original structure map. No point of X is chosen, so this includes X empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-scheme-theoretic-image-reduced, Tag 056B; Mathlib IsSchemeTheoreticallyDominant.isReduced"
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-affine-geometric-reducedness-criterion",
+  "lem-weil-pbc-perfect-reduced-tensor",
   "lem-trf-reduced-scheme-open-cover",
-  "lem-trf-reducedness-tensor-chosen-algebraic-closure",
+  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-affine-scheme-reduced-iff",
-  "lem-weil-pbc-fibre-product-affine-spectra"
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-dense-flat-pullback",
+  "lem-pc-flat-field"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 035X, equivalence (2) and (6), with affine condition (7); scheme gluing via Tags 01I4, 01JQ and Mathlib"
+  "place": "Tag 020I (perfect reduced schemes), with common algebraically closed overfield and schematic-dominance descent (morphisms.tex Tags 081I and 056B); reuses the complete source theorem GeometricallyReduced.of_perfectField. This avoids the missing all-field-extension comparison in the pinned Mathlib algebra criterion."
  },
  "mathlib_searches": [
   {
@@ -187,5 +194,26 @@
   "result": "pass",
   "note": "The delivery only adds the lean record, the module (one sorry theorem) and the report with Worker report and Second reading sections. Each clause matches the node and Stacks 035X (2)<->(6) / 020I: field k, X with Scheme.Over Spec k, arbitrary chosen closure Omega with IsAlgClosure k Omega, GeometricallyReduced of the structure map iff IsReduced of pullback along Spec.map(algebraMap k Omega). No finiteness, nonemptiness or characteristic hypotheses. The shared universe u is harmless and the universe-u field quantification is the accepted dependency reading. Edge cases: empty scheme allowed; probes elaborated at Omega=k for algebraically closed k and at AlgebraicClosure in universe 1. No duplicate in Mathlib or the side lean tree. Docstrings carry the source, blueprint id and all 4 proof steps; sorry only; lean.statement verbatim. nt_compile --json: 3.6 s, no errors or warnings; axioms are propext, sorryAx, choice and Quot.sound. Cosmetic: lean.date 2026-10-17; the second reading is a disclosed self-check."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261023T102741-L-2966503",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

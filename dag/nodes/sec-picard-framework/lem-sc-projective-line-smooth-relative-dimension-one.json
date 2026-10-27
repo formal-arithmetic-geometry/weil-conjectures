@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-projective-line-smooth-relative-dimension-one",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "specialization of regular finite-dimensional duality to the projective line: smooth affine-line charts",
+   "via": [
+    "lem-sc-p1-regular-dimension-one",
+    "lem-sc-p1-ext-coherent-dim-one-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The projective line is smooth of relative dimension one",
+ "statement": "For any scheme S [def-pc-scheme], the structure morphism of the projective line P(ULift(Fin 2); S) [def-nagata-projective-space-base-change] to S is smooth of relative dimension one [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LineSmooth.lean",
+  "place": "ProjectiveLine.smoothOfRelativeDimension_one, lines 35-51; standard affine charts"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing, proved source-library instance ProjectiveLine.smoothOfRelativeDimension_one. Every point lies in a standard open D_+(T_i). Its chart is affine space with variables indexed by the complement of i in ULift(Fin 2), a set of cardinality one. The affine-space projection is smooth of relative dimension one; the property is local on the source, so these charts prove it for the projective line. This includes the empty base (the local condition is vacuous); it requires no field or perfectness hypothesis.",
+   "uses": [
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LineSmooth.lean",
+    "place": "ProjectiveLine.smoothOfRelativeDimension_one, lines 35-51; standard affine charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-standard"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LineSmooth.lean",
+  "place": "ProjectiveLine.smoothOfRelativeDimension_one, lines 35-51; standard affine charts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projective line over a scheme is smooth of relative dimension one",
+   "results": "Eight general smoothness and relative-dimension declarations, including IsSmoothOfRelativeDimension; no theorem on relative projective lines.",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match; existing proved source-library instance used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SmoothOfRelativeDimension\"",
+   "results": "Twelve ring-level standard-smooth declarations, including the multivariate polynomial algebra of relative dimension Nat.card; no projective-line instance.",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveLine|projectiveLine",
+   "results": "msearch Mathlib search found only the topological one-point projective-line import in ModularForms/Cusps. Local source search found ProjectiveLine.smoothOfRelativeDimension_one. DAG and whole blueprint search found no existing attachment or equal statement.",
+   "date": "2026-10-23",
+   "verdict": "existing source-library proof attached"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineRegularDimensionOne",
+  "date": "2026-10-23",
+  "group": "F5"
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.smoothOfRelativeDimension_one",
+  "statement": "instance smoothOfRelativeDimension_one (S : Scheme.{u}) :\n    SmoothOfRelativeDimension 1 (ProjectiveLine S ↘ S)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261023T104958-L-3472528",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261023T104958-L-3472528",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -20,9 +20,25 @@
   "def-weil-pbc-direct-image",
   "def-pur-frame-kummer-class"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The existing cartierRelativeCoefficientBoundary is the canonically reduced etale relative boundary at ell^level and the actual coefficient quotient. Its scalar-adjunction normalization is exactly the boundary normalization that uniquely characterizes the published Cartier family. Its supported comparison gives agreementCartierMap with the same source and roots-projection target charts.",
+   "uses": [
+    "lem-pur-cartier-relative-boundary-realization",
+    "lem-amb-cartier-kummer-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-cartier-relative-boundary-realization",
+  "lem-amb-cartier-kummer-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "blueprint main-20261015",
+  "place": "Canonical scalar adjunct already constructed by cartierRelativeCoefficientBoundary"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -94,10 +110,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-smooth-purity",
@@ -114,7 +134,7 @@
   "by": "NL",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Records the two existing plain definitions, not cartier_class_agreement. agreementCartierEtale chooses the uniquely normalized etale family from Etale.cartier_kummer_map at the actual positive level; agreementCartierMap is functorialCupCompare of its Ext hom. Neither definition uses the agreement theorem. The normalization is the second paragraph of lem-pur-cartier-class-agreement; no declaration is duplicated."
+  "note": "agreementCartierEtale is the existing cartierRelativeCoefficientBoundary, the uniquely normalized coefficient scalar adjunct. agreementCartierMap remains its functorialCupCompare image."
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -131,5 +151,15 @@
   "group": "NL",
   "result": "fix",
   "note": "Re-delivery after e1133fdd H2 RETURN: Lean byte-identical (sha 9c4eb1d2); item stmt_deps = base 15 + new existing:true def node def-pur-cartier-agreement-maps (agreementCartierEtale = .choose of Etale.cartier_kummer_map, agreementCartierMap = functorialCupCompare of it; statement verbatim, check_existing clean); theorem kept in proof_deps. Lean re-read: datum, geometry with base change over B, cl(D)=c^p, DivisorLocalEquations minus sign, SupportedKummerBoundary pin, flat mu_N L_E, supported/source/tau squares with FixedEtaleOriginWitness data, no invertibility; universes and edge cases OK. Finding fixed: new node cited theorem lem-pur-supported-cup-functoriality for plain FunctorialCupH/functorialCupCompare and lacked body owners; fixes/def-pur-cartier-agreement-maps.json swaps to def-pur-supported-class-operations + def-pur-supported-hom-site-comparison, adds def-pur-frame-kummer-class + def-weil-pbc-direct-image (TeX cites updated; check_new_node [] ; no cycle). No compile run (no .lean changed). Advisory: base-era non-stmt_dep owners, unused SfIntrinsicCompactSupport import, self second reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T201433-L-2510229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

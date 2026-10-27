@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-supported-cup-comparison-basic",
+ "kind": "statement",
+ "title": "Basic bijections and source-arrow squares for supported comparison",
+ "statement": "For the native supported Hom models, exact etale-to-pro-etale comparison is bijective on supported, ordinary and open classes. It commutes with forget-support and open restriction, the two maps induced by the source coefficient sequence.",
+ "stmt_deps": [
+  "def-pur-supported-cup-functoriality-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099V, lemma-relative-comparison, through the existing bounded-below finite-coefficient derived comparison theorem thm-weil-pbc-site-comparison. The two coefficient-source squares are the defining normalization squares of the native supported and open comparison isomorphisms; see the supported localization sequence in Stacks Tag 09XP."
+ },
+ "proof": [
+  {
+   "text": "Conjugate the fully faithful exact derived comparison Hom map by the specified single, shift and endpoint isomorphisms. This gives the three bijections. Exact inverse image preserves precomposition. The defining restriction-normalized source comparison and inclusion-normalized open comparison squares then give the two source-arrow equations.",
+   "uses": [
+    "def-pur-supported-cup-functoriality-models",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-supported-cup-functoriality-models",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Native normalized-Hom consequence of thm-weil-pbc-site-comparison; source-arrow squares from the constructions in def-pur-supported-cup-functoriality-models."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedCupFunctoriality",
+  "date": "2026-10-26",
+  "group": "Q8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Step 7: Hom bijections and the two source arrows",
+   "via": [
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedCupComparisonBasic",
+  "file": "lean/Sheaf/Paper/SupportedCupComparisonBasic.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.supportedCupComparisonBasic",
+  "statement": "theorem supportedCupComparisonBasic (P : PurityFiniteSetting.{u}) :\n    P.FunctorialCupComparisonSupportedBijective ∧ P.FunctorialCupComparisonOrdinaryBijective ∧\n      P.FunctorialCupComparisonOpenBijective ∧ P.FunctorialCupComparisonForgetSupport ∧\n      P.FunctorialCupComparisonOpenRestriction",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "supported cup product graded associativity symmetry pullback localization etale proetale comparison",
+   "results": "Eight projective-spectrum pullback results; none is a supported cohomology cup law.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShiftedHom.comp",
+   "results": "Unknown identifier in search index; source search used instead.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedCup|cupComposite|mapShiftedHom_singleδ",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.Ext.Map.ShortComplex.ShortExact.mapShiftedHom_singleδ gives the exact-functor boundary formula. No complete supported-cup calculus.",
+   "date": "2026-10-26",
+   "verdict": "partial match: used for localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image preserves the connecting morphism of a short exact sequence and cup product associativity",
+   "results": "Eight results include CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁ and preservation of images; none states the complete native supported cup calculus. Exact single-delta functoriality is supplied by the separately located Mathlib Ext.Map lemma.",
+   "date": "2026-10-26",
+   "verdict": "partial match for localization only"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40b06",
+  "group": "Q8",
+  "result": "fix",
+  "landing": "20261026T002320-L-75804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40b06",
+  "group": "Q8",
+  "result": "fix",
+  "landing": "20261026T002320-L-75804",
+  "kind": "interface",
+  "note": "independent cc review: supportedCupFunctoriality and the 7 delivered modules vs the published SupportedCupFunctoriality (every moved declaration compared; defeq rfl checks of the instances); 59 importers/users compiled against the sandbox build; nodes vs Lean"
+ }
+}

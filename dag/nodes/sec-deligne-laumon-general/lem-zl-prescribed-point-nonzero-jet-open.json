@@ -1,0 +1,155 @@
+{
+ "id": "lem-zl-prescribed-point-nonzero-jet-open",
+ "kind": "statement",
+ "title": "Nonempty coefficient open avoiding zero at every prescribed jet",
+ "statement": "Let $k$ be algebraically closed and $X$ a smooth finite-type $k$-scheme of pure dimension $d\\geq 2$ [def-weil-pure-dimension]. Let $S$ be a finite set of closed points. Let $f:Y\\to\\operatorname{Spec}k$ and $j:X\\to Y$ with $f\\circ j$ the structure morphism. Let $M$ be invertible on $Y$ with invertible tensor pullback to $X$. For a finite family $s=(s_i)_{i\\in I}$ use the coefficient combinations, jets and coefficient points of [def-zl-prescribed-point-system-data]. Assume every coefficient combination pulls back to a section vanishing on $S$, and the simultaneous map $k^I\\to\\prod_{x\\in S}\\operatorname{PrescribedPointJet}(j^*M,x)$ is surjective. There is a nonempty Zariski open $W\\subseteq\\operatorname{Spec}k[t_i\\mid i\\in I]$ such that every $k$-valued coefficient point landing in $W$ has nonzero jet at each $x\\in S$. The set $S$ may be empty. This asserts no smoothness of the zero schemes and requires no generation or immersion on the complement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 2: nonzero first derivative and smoothness at the prescribed points",
+  "external": [
+   {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, lemma-bertini, proof"
+   },
+   {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00TR (lemma-rank-omega), 00T7 (lemma-standard-smooth)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-zl-prescribed-point-system-data",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field makes X locally Noetherian. If the stalk at a closed x were a field, the stalk dimension/coheight equality of [lem-sc-scheme-stalk-dimension-generalization-chains] would give coheight zero. Thus x has no proper generalization and is generic for an irreducible component. Since x is closed, this component is its singleton, of dimension zero, contradicting positive pure dimension [def-weil-pure-dimension]. Mathlib IsLocalRing.subsingleton_cotangentSpace_iff now gives a nonzero cotangent space. The stalk frame of [lem-weil-pbc-invertible-stalk-linear-equiv], tensor congruence and TensorProduct.rid identify the jet target of [def-zl-prescribed-point-system-data] with this nonzero space. This argument uses only positive pure dimension and local Noetherianity, not smoothness or a differential dimension calculation.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-pure-dimension",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-weil-pbc-invertible-stalk-linear-equiv",
+    "def-zl-prescribed-point-system-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each x form the scalar ring map k to the stalk by composing the map to global sections on Y, pullback along j, and the germ map. The canonical tensor-section unit is semilinear, as follows directly from its module-morphism unit and restriction definition. The framed germ of a coefficient combination is additive and semilinear for this ring map. Vanishing puts it in the maximal ideal: apply the frame to the ideal multiple of the stalk module and use m times R equals m. Map these coefficients through m to m/m^2 and tensor with the frame vector. These linear maps give a k-linear coefficient-to-jet map equal to the concrete prescribedPointJet, including the proof-dependent branch in its definition.",
+   "uses": [
+    "def-zl-prescribed-point-system-data",
+    "lem-weil-pbc-invertible-stalk-linear-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a nonzero vector b_x in each jet target, and use simultaneous surjectivity to lift the tuple to a coefficient a_0. Mathlib Module.Projective.exists_dual_ne_zero over a field gives a k-linear functional detecting b_x. Its composite F_x with the coefficient map is represented by the linear polynomial sum_i C(F_x(single_i(1))) X_i; expansion of a coefficient tuple in the standard basis proves evaluation equals F_x(a). Intersect the finitely many basic opens of these polynomials. The point associated to a_0 lies in each, proving nonemptiness. At any coefficient point in the intersection each F_x(a) is nonzero, hence the jet is nonzero. Empty S gives the empty intersection, the whole coefficient spectrum. This construction does not require finite-dimensional jet targets or identification of their residue fields with k.",
+   "uses": [
+    "def-zl-prescribed-point-system-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-pure-dimension",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-invertible-stalk-linear-equiv",
+  "def-zl-prescribed-point-system-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 2, nonzero first derivative is a nonempty open condition; J3 supplies a direct proof via the cotangent field criterion and detecting linear functionals, avoiding differential dimension comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Surjective maps to nonzero cotangent fibres give a nonempty open of coefficient space avoiding zero in each fibre",
+   "results": "{\"t\": \"2026-10-26T00:18:25Z\", \"tool\": \"leansearch\", \"query\": \"Surjective maps to nonzero cotangent fibres give a nonempty open of coefficient space avoiding zero in each fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.ne_zero_of_surjective\", \"IsHomeomorphicTrivialFiberBundle.surjective_proj\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.Extension.Cotangent.mk_surjective\", \"LinearMap.surjective_iff_ne_zero\", \"Pretrivialization.proj_surjOn_baseSet\", \"isOpenMap_smul₀\", \"Algebra.Generators.CotangentSpace.map_ofComp_surjective\"], \"digest\": \"7384ba1b267786b0\"}",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective simultaneous first jets give a nonempty Zariski open of coefficient tuples with nonzero jets at finitely many closed points",
+   "results": "{\"t\": \"2026-10-26T00:16:58Z\", \"tool\": \"leanfinder\", \"query\": \"Surjective simultaneous first jets give a nonempty Zariski open of coefficient tuples with nonzero jets at finitely many closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"ax_grothendieck_zeroLocus\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"ax_grothendieck_of_locally_finite\", \"FirstOrder.realize_genericPolyMapSurjOnOfInjOn\", \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\"], \"digest\": \"3eb80104c7293e33\"}",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, LinearMap, IsOpen",
+   "results": "{\"t\": \"2026-10-26T00:16:58Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, LinearMap, IsOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jet.*open|nonzero.*jet|jet.*nonzero",
+   "results": "{\"t\": \"2026-10-26T00:16:57Z\", \"tool\": \"grep\", \"query\": \"jet.*open|nonzero.*jet|jet.*nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrescribedPointBertiniOpen",
+  "date": "2026-10-26",
+  "group": "P5"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Paragraph 2: nonzero first derivative at each prescribed point is open; Bertini off the points gives smoothness everywhere",
+   "via": [
+    "lem-zl-prescribed-point-bertini-open",
+    "lem-zl-bertini-prescribed-point-smooth-system"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrescribedPointNonzeroJetOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrescribedPointNonzeroJetOpen.lean",
+  "declaration": "AlgebraicGeometry.exists_open_prescribedPoint_nonzeroJets",
+  "statement": "theorem exists_open_prescribedPoint_nonzeroJets\n    {k : Type u} [Field k] [IsAlgClosed k]\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [Smooth (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    (d : ℕ) (hd : 2 ≤ d) (hdim : X.IsPureDimension d)\n    (S : Finset X) (hclosed : ∀ x ∈ S, IsClosed ({x} : Set X))\n    {Y : Scheme.{u}} (f : Y ⟶ Spec (.of k)) (j : X ⟶ Y)\n    (hover : j ≫ f = X ↘ Spec (.of k))\n    (M : Y.Modules) [M.IsInvertible] [((tensorPullback j).obj M).IsInvertible]\n    {I : Type u} [Fintype I] (s : I → Γ(M, ⊤))\n    (hvan : ∀ a : I → k, prescribedPointVanishes ((tensorPullback j).obj M) S\n      (tensorSectionsUnit j M (prescribedPointCombination f M s a)))\n    (hjet : Function.Surjective (fun a : I → k ↦ fun x : S ↦\n      prescribedPointJet ((tensorPullback j).obj M) x.val\n        (tensorSectionsUnit j M (prescribedPointCombination f M s a)))) :\n    ∃ O : (Spec (CommRingCat.of (MvPolynomial I k))).Opens,\n      (O : Set (Spec (CommRingCat.of (MvPolynomial I k)))).Nonempty ∧\n      ∀ a : I → k, Set.range (bertiniCoefficientPoint (k := k) a) ⊆ (O : Set _) →\n        ∀ x ∈ S, prescribedPointJet ((tensorPullback j).obj M) x\n          (tensorSectionsUnit j M (prescribedPointCombination f M s a)) ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T023716-L-597141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T070023-L-3338535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

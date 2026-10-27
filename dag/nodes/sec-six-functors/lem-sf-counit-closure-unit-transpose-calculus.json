@@ -1,0 +1,275 @@
+{
+ "id": "lem-sf-counit-closure-unit-transpose-calculus",
+ "kind": "statement",
+ "title": "Counit-normalized ambient transpose and closure comparison-unit calculus",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal P,\\mathcal Q$ be categories (with Hom sets and associative unital composition) [def-nagata-category]. Give functors $F_e:\\mathcal A\\to\\mathcal B$, $J_e:\\mathcal B\\to\\mathcal A$, $F_p:\\mathcal P\\to\\mathcal Q$, $J_p:\\mathcal Q\\to\\mathcal P$, $C_S:\\mathcal A\\to\\mathcal P$, $C_T:\\mathcal B\\to\\mathcal Q$ and adjunctions $F_e\\dashv J_e$, $F_p\\dashv J_p$, with counits $\\epsilon^e,\\epsilon^p$ [lem-weil-pbc-adjunction-of-natural-bijection]. Let $\\mathcal A_0\\subseteq\\mathcal A$, $\\mathcal B_0\\subseteq\\mathcal B$, $\\mathcal Q_0\\subseteq\\mathcal Q$ be full subcategories with $C_T(\\mathcal B_0)\\subseteq\\mathcal Q_0$; assume $F_e(\\mathcal A_0)\\subseteq\\mathcal B_0$ and $C_T$ induces bijections on Hom sets between objects of $\\mathcal B_0$. Give a functor $U:\\mathcal Q_0\\to\\mathcal B$ and a natural transformation $\\eta:1_{\\mathcal B_0}\\to UC_T|_{\\mathcal B_0}$ (for instance the unit of an adjunction $C_T\\dashv U$, restricted to $\\mathcal B_0$); no adjunction $C_T\\dashv U$ on all of $\\mathcal B,\\mathcal Q$ is assumed. Fix $M\\in\\mathcal B_0$ with $H=J_eM\\in\\mathcal A_0$ and invertible $\\eta_M$. Give a natural isomorphism $\\Delta:C_TF_e|_{\\mathcal A_0}\\xrightarrow{\\sim}F_pC_S|_{\\mathcal A_0}$ and an isomorphism $\\gamma:C_SH\\xrightarrow{\\sim}J_pC_TM$ satisfying\n$$\\epsilon^p_{C_TM}F_p(\\gamma)\\Delta_H=C_T(\\epsilon^e_M).$$\nGive functors $E_e:\\mathcal A\\to\\mathcal B$, $E_p:\\mathcal P\\to\\mathcal Q$ with $E_e(\\mathcal A_0)\\subseteq\\mathcal B_0$ and natural isomorphisms $q_e:F_e\\xrightarrow{\\sim}E_e$, $q_p:F_p\\xrightarrow{\\sim}E_p$. Equip $E_e\\dashv J_e$ with the adjunction transported along $q_e$, so its transpose sends $a:E_eL\\to N$ to $\\operatorname{adj}_e(aq_{e,L})$ [def-weil-pbc-adjunction-conjugate]. Give a natural isomorphism $B:C_TE_e|_{\\mathcal A_0}\\xrightarrow{\\sim}E_pC_S|_{\\mathcal A_0}$ with $q_{p,C_SL}\\Delta_L=B_LC_T(q_{e,L})$. For $z:E_pC_SL\\to C_TM$ define\n$$\\Phi_{L,C_TM}(z)=C_S\\!\\left(\\operatorname{adj}_{E_e\\dashv J_e}(U(zB_L)\\eta_{E_eL})\\right),\\qquad \\rho=C_SJ_e(\\eta_M).$$\nThen every $h:F_pC_SL\\to C_TM$, $L\\in\\mathcal A_0$, has a unique lift $h_0:F_eL\\to M$ with $h\\Delta_L=C_T(h_0)$. With $g_0=\\operatorname{adj}_e(h_0)$, $z=hq_{p,C_SL}^{-1}$ and $a=h_0q_{e,L}^{-1}$ one has\n$$zB_L=C_T(a),\\quad \\operatorname{adj}_{E_e\\dashv J_e}(a)=g_0,\\quad U(zB_L)\\eta_{E_eL}=\\eta_Ma,$$\n$$\\operatorname{adj}_p(h)=\\gamma C_S(g_0),\\qquad \\Phi_{L,C_TM}(z)=\\rho C_S(g_0).$$\nThe map $\\rho:C_SH\\to C_SJ_eUC_TM$ is invertible. These formulas are natural in $L$, and in any full subcategory of choices of $M$ for which the stated hypotheses hold and $\\gamma$ is natural. Composition is read right to left. No full faithfulness outside $\\mathcal B_0$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "Second paragraph: locally closed exceptional comparison; returned expanded Steps 2–5 (unique lift, ambient counit, closure conjugation and comparison unit). Agent-formulated categorical consequence of Stacks categories.tex, Tag 0037 (definition-adjoint) and Tag 0B65 (lemma-transformation-between-functors-and-adjoints)."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [
+  {
+   "text": "Both $F_eL$ and $M$ belong to $\\mathcal B_0$. Apply the assumed bijection $\\operatorname{Hom}_{\\mathcal B}(F_eL,M)\\to\\operatorname{Hom}_{\\mathcal Q}(C_TF_eL,C_TM)$ to $h\\Delta_L$. Its unique preimage is $h_0$, giving exactly $C_T(h_0)=h\\Delta_L$. This uses full faithfulness only on these two objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  },
+  {
+   "text": "Put $g_0=\\operatorname{adj}_e(h_0):L\\to H$. The inverse-transpose formula of [lem-weil-pbc-adjunction-of-natural-bijection] gives $h_0=\\epsilon^e_M F_e(g_0)$. Fullness of $\\mathcal A_0$ makes $g_0$ a morphism of $\\mathcal A_0$, since both $L$ and $H$ are in it; thus naturality of $\\Delta$ applies to this morphism.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  },
+  {
+   "text": "Use the inverse-transpose formula for $F_p\\dashv J_p$ on $\\gamma C_S(g_0)$. After precomposing with $\\Delta_L$, its value is\n$$\\epsilon^p_{C_TM}F_p(\\gamma)F_pC_S(g_0)\\Delta_L\n=\\epsilon^p_{C_TM}F_p(\\gamma)\\Delta_H C_TF_e(g_0)\n=C_T(\\epsilon^e_M)C_TF_e(g_0)\n=C_T(h_0)=h\\Delta_L.$$\nThe first equality is naturality of $\\Delta$ at $g_0$ and the second is the assumed counit equation. Cancel the invertible $\\Delta_L$; bijectivity of the adjunction transpose now gives $\\operatorname{adj}_p(h)=\\gamma C_S(g_0)$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  },
+  {
+   "text": "The compatibility of $B$ with $q_e,q_p$ implies\n$$q_{p,C_SL}^{-1}B_L=\\Delta_L C_T(q_{e,L}^{-1}).$$\nIndeed multiply $q_{p,C_SL}\\Delta_L=B_LC_T(q_{e,L})$ on the left by $q_{p,C_SL}^{-1}$ and on the right by $C_T(q_{e,L}^{-1})$. Hence, with the specified $z,a$,\n$$zB_L=h\\Delta_L C_T(q_{e,L}^{-1})=C_T(h_0q_{e,L}^{-1})=C_T(a).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  },
+  {
+   "text": "By the transported-adjunction formula assumed in the statement,\n$$\\operatorname{adj}_{E_e\\dashv J_e}(a)=\\operatorname{adj}_e(aq_{e,L})=\\operatorname{adj}_e(h_0)=g_0.$$\nHere $a:E_eL\\to M$ has both objects in $\\mathcal B_0$. Naturality of the given $\\eta$ at $a$, and the preceding equality $zB_L=C_T(a)$, give\n$$U(zB_L)\\eta_{E_eL}=UC_T(a)\\eta_{E_eL}=\\eta_Ma.$$\nAll applications of $U$ are to morphisms between objects of $\\mathcal Q_0$, since it is full and contains $C_T(\\mathcal B_0)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  },
+  {
+   "text": "Apply right-variable naturality of the adjunction Hom bijection [lem-weil-pbc-adjunction-of-natural-bijection] to $a:E_eL\\to M$ followed by $\\eta_M:M\\to UC_TM$. It says\n$$\\operatorname{adj}_{E_e\\dashv J_e}(\\eta_Ma)=J_e(\\eta_M)\\operatorname{adj}_{E_e\\dashv J_e}(a)=J_e(\\eta_M)g_0.$$\nThe definition of $\\Phi$ and Step 5 therefore give\n$$\\Phi_{L,C_TM}(z)=C_S(J_e(\\eta_M)g_0)=\\rho C_S(g_0).$$\nNo membership assumption on $UC_TM$ in $\\mathcal B_0$ is needed: this adjunction is defined on all of $\\mathcal B$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  },
+  {
+   "text": "Let $t:UC_TM\\to M$ be the inverse of $\\eta_M$. The morphism $C_SJ_e(t)$ is a two-sided inverse of $\\rho=C_SJ_e(\\eta_M)$: the two composites are $C_SJ_e(t\\eta_M)=C_SJ_e(1_M)=1_{C_SH}$ and $C_SJ_e(\\eta_Mt)=C_SJ_e(1_{UC_TM})=1_{C_SJ_eUC_TM}$. These equalities use functoriality and the identity and composition laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  },
+  {
+   "text": "For $l:L'\\to L$ in $\\mathcal A_0$ put $h'=hF_pC_S(l)$. Naturality of $\\Delta$ gives $h'\\Delta_{L'}=h\\Delta_L C_TF_e(l)=C_T(h_0F_e(l))$, so uniqueness of the lift gives $h'_0=h_0F_e(l)$. Left-variable naturality in [lem-weil-pbc-adjunction-of-natural-bijection] gives $g'_0=g_0l$. Naturality of $q_p$ and $q_e$ then gives $z'=zE_pC_S(l)$ and $a'=aE_e(l)$. Thus all three equalities of Step 5 precompose by the indicated maps. The two final transpose formulas precompose by $C_S(l)$, since $\\gamma C_S(g'_0)=\\gamma C_S(g_0)C_S(l)$ and $\\rho C_S(g'_0)=\\rho C_S(g_0)C_S(l)$. This proves naturality in $L$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  },
+  {
+   "text": "For $m:M\\to M'$ between any two allowed choices, put $h'=C_T(m)h$. The lift is $h'_0=mh_0$, since $h'\\Delta_L=C_T(mh_0)$; right-variable naturality in [lem-weil-pbc-adjunction-of-natural-bijection] gives $g'_0=J_e(m)g_0$. Also $z'=C_T(m)z$ and $a'=ma$. The assumed naturality of $\\gamma$ gives $\\gamma_{M'}C_SJ_e(m)=J_pC_T(m)\\gamma_M$. Naturality of $\\eta$ at $m$ gives\n$$\\rho_{M'}C_SJ_e(m)=C_SJ_e(\\eta_{M'}m)=C_SJ_e(UC_T(m)\\eta_M)=C_SJ_eUC_T(m)\\rho_M.$$\nSubstitute these two equations and the formulas for $g'_0,z',a'$ into Steps 3–6. They show precisely that the ambient transpose is postcomposed by $J_pC_T(m)$, and $\\Phi$ by $C_SJ_eUC_T(m)$; the three intermediate identities are postcomposed by $C_T(m)$, $J_e(m)$ and $UC_T(m)$ respectively. This proves the stated naturality in $M$, using only morphisms in the specified full subcategory.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation for the locally closed comparison in the second paragraph of lem-weil-finite-duality-site-comparison.proof.md"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "Second paragraph: locally closed exceptional comparison, expanded Hom and comparison-unit calculation; Stacks Tag 0037 supplies the adjunction formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two adjunction transposes are related by a counit normalized natural isomorphism and a fully faithful comparison; a conjugate left adjoint isomorphism and comparison unit compute the closure transpose",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂]\\n  {F₀₁ : CategoryTheory.Functor C₀ C₁} {F₁₂ : CategoryTheory.Functor C₁ C₂} {F₀₂ : CategoryTheory.Funct\", \"doc\": \"Let $F_{01} \\\\dashv G_{10}$, $F_{12} \\\\dashv G_{21}$, and $F_{02} \\\\dashv G_{20}$ be three adjunctions between categories $\\\\mathcal{C}_0, \\\\mathcal{C}_1, \\\\mathcal{C}_2$. The composition of the first two g\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} {C₃ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} C₃] {F₀₁ : CategoryTheory.Functor C₀ C₁}\", \"doc\": \"For adjunctions $F_{01} ⊣ G_{01}$, $F_{12} ⊣ G_{12}$, and $F_{13} ⊣ G_{13}$, the composition of whiskering a natural transformation $\\\\tau_{123}$ on the left with $\\\\text{leftAdjointCompNatTrans}$ and t\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} {C₃ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} C₃] {F₀₁ : CategoryTheory.Functor C₀ C₁}\", \"doc\": \"Given adjunctions $F_{01} ⊣ G_{01}$, $F_{12} ⊣ G_{12}$, and $F_{02} ⊣ G_{02}$, the equality establishes that the composition of the associator inverse, whiskered natural transformation, and left adjoi\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompIso\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"{C₀ : Type u_1} →\\n  {C₁ : Type u_2} →\\n    {C₂ : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C₀] →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] →\\n          [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂] →\\n            {F₀₁ : CategoryTheory.Functor C₀ C₁} →\\n              \", \"doc\": \"Given adjunctions $ F₀₁ ⊣ G₁₀ $ between $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, $ F₁₂ ⊣ G₂₁ $ between $ \\\\mathcal{D} $ and $ \\\\mathcal{E} $, and an isomorphism $ G₂₁ \\\\circ G₁₀ ≅ G₂₀ $ between the composed \"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_comm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\\n  {α : L₂ ⟶ L₁} {β : L₁ ⟶ L₂},\\n  CategoryTheory.CategoryStruct.comp β \", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, if natural transformations $ \\\\alpha: L₂ \\\\to L₁ $ and $ \\\\beta: L₁ \\\\to L₂ $ satisfy $ \\\\beta \\\\circ \\\\alpha = \\\\text{id} $, then the composition of the conjuga\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {L₁ L₂ : CategoryTheory.Functor C D} →\\n          {R₁ R₂ : CategoryTheory.Functor D C} → (L₁ ⊣ R₁) → (L₂ ⊣ R₂) → (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂)\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, this establishes a natural equivalence between the hom-set of natural transformations $ L₂ \\to L₁ $ and the hom-set $ R₁ \\to R₂ $. The equivalence is const\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompIso_hom\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂]\\n  {F₀₁ : CategoryTheory.Functor C₀ C₁} {F₁₂ : CategoryTheory.Functor C₁ C₂} {F₀₂ : CategoryTheory.Funct\", \"doc\": \"Given adjunctions $ F₀₁ ⊣ G₁₀ $ between categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, $ F₁₂ ⊣ G₂₁ $ between $ \\\\mathcal{D} $ and $ \\\\mathcal{E} $, and an isomorphism $ G₂₁ \\\\circ G₁₀ ≅ G₂₀ $ between th\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_apply_app\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\\n  (a : L₂ ⟶ L₁) (X : D),\\n  ((CategoryTheory.conjugateEquiv adj₁ adj₂) \", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $ between categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, there exists a natural equivalence between the hom-set of natural transformations $ L₂ \\\\Rightarrow\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.counit",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) (Y : D) (g : X ⟶ G.obj Y) : (adj.homEquiv X Y).symm g = CategoryTheory.CategoryStruct.comp (F.map g) (adj.cou\", \"doc\": \"**Alias** of `CategoryTheory.Adjunction.homEquiv_symm_apply`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_symm_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) (Y : D) (g : X ⟶ G.obj Y) : (adj.homEquiv X Y).symm g = CategoryTheory.CategoryStruct.comp (F.map g) (adj.cou\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_symm_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : D) : (adj.homEquiv (G.obj X) X).symm (CategoryTheory.CategoryStruct.id (G.obj X)) = adj.counit.app X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.OplaxMonoidal] (X Y : D) : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Unique\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G G' : CategoryTheory.Functor D C} (adj1 : F ⊣ G) (adj2 : F ⊣ G') (x : D) : (adj2.homEquiv (G.obj x) x).symm ((adj1.rightAdjointUniq adj2).hom.app x) = adj1.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M\", \"doc\": \"Suppose we have a monoidal equivalence `F : C ≌ D`, with `D` monoidal closed. We can pull the\\nmonoidal closed instance back along the equivalence. For `X, Y, Z : C`, this lemma describes the\\nresulting\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M\", \"doc\": \"Suppose we have a monoidal equivalence `F : C ≌ D`, with `D` monoidal closed. We can pull the\\nmonoidal closed instance back along the equivalence. For `X, Y, Z : C`, this lemma describes the\\nresulting\"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₁, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {adj : F ⊣ G} [∀ (A : adj.toComonad.Coalgebra), CategoryTheory.Limits.HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] (A : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Left\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] {U : CategoryTheory.Functor B C} {F : CategoryTheory.Functor C B} (R : CategoryTheory.Functor A B) (F' : CategoryTheory.Functor C A) (adj₁ : F ⊣ U\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_symm_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Left\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] {U : CategoryTheory.Functor B C} {F : CategoryTheory.Functor C B} (R : CategoryTheory.Functor A B) (F' : CategoryTheory.Functor C A) (adj₁ : F ⊣ U\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_unit_f_aux\", \"module\": \"Mathlib.CategoryTheory.Monad.Monadicity\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₁, u₂} D] {G : CategoryTheory.Functor D C} {F : CategoryTheory.Functor C D} {adj : F ⊣ G} [∀ (A : adj.toMonad.Algebra), CategoryTheory.Limits.HasCoequalizer (F.map A.a) (adj.counit.app (F.obj A.A))] (A : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Monad.MonadicityInternal.comparisonLeftAdjointHomEquiv_apply_f\", \"module\": \"Mathlib.CategoryTheory.Monad.Monadicity\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₁, u₂} D] {G : CategoryTheory.Functor D C} {F : CategoryTheory.Functor C D} (adj : F ⊣ G) (A : adj.toMonad.Algebra) (B : D) [CategoryTheory.Limits.HasCoequalizer (F.map A.a) (adj.counit.app (F.obj A.A))] (a✝\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*(counit|ofNatIsoLeft)|ofNatIsoLeft.*homEquiv",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"33\", \"text\": \"attribute [local simp] homEquiv_unit homEquiv_counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"107\", \"text\": \"    (adj2.homEquiv _ _).symm ((rightAdjointUniq adj1 adj2).hom.app x) = adj1.counit.app x := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"line\": \"34\", \"text\": \"attribute [local simp] homEquiv_unit homEquiv_counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"line\": \"19\", \"text\": \"  transformations together with proofs of the equalities `homEquiv_unit` and `homEquiv_counit`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"line\": \"99\", \"text\": \"together with proofs of the equalities `homEquiv_unit` and `homEquiv_counit` relating them to each\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"line\": \"182\", \"text\": \"@[to_dual none] alias homEquiv_counit := homEquiv_symm_apply\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"line\": \"186\", \"text\": \"-- do not want `dsimp` to apply `homEquiv_unit` or `homEquiv_counit`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"line\": \"189\", \"text\": \"attribute [local simp] Adjunction.homEquiv_unit Adjunction.homEquiv_counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"line\": \"145\", \"text\": \"        adj₂.homEquiv_counit]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"line\": \"166\", \"text\": \"  simp only [Adjunction.homEquiv_counit]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"line\": \"317\", \"text\": \"attribute [local simp] homEquiv_unit homEquiv_counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"149\", \"text\": \"        otherMap, assoc, adj₂.homEquiv_naturality_left, ← adj₂.counit_naturality,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"158\", \"text\": \"      rw [← (adj₁.homEquiv _ _).symm.injective.eq_iff, adj₁.homEquiv_counit,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"159\", \"text\": \"        adj₁.homEquiv_counit, adj₁.homEquiv_counit, F.map_comp, assoc, U.map_comp, F.map_comp,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"164\", \"text\": \"attribute [local simp] Adjunction.homEquiv_counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"line\": \"39\", \"text\": \"  map_add {X Y} f g := (adj.homEquiv _ _).symm.injective (by simp [homEquiv_counit])\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"line\": \"34\", \"text\": \"attribute [local simp] homEquiv_unit homEquiv_counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"line\": \"47\", \"text\": \"attribute [local simp] Adjunction.homEquiv_unit Adjunction.homEquiv_counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"line\": \"53\", \"text\": \"attribute [local simp] homEquiv_unit homEquiv_counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Comma.lean\", \"line\": \"135\", \"text\": \"attribute [local simp] Adjunction.homEquiv_unit Adjunction.homEquiv_counit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute an adjunction transpose from a compatible counit square and compare it with the transpose obtained by a fully faithful functor and its unit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {C' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{C}', \\\\mathcal{D}'$ with fully faithful functors $i_\\\\mathcal{C}: \\\\mathcal{C} \\\\to \\\\mathcal{C}'$ and $i_\\\\mathcal{D}: \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, an\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \"(X : C) :\\n  iC.map ((adj.restrictFullyFaithful hiC hiD comm1 comm2).unit.app X) =\\n    adj.unit.app (iC.obj X) ≫ R'.map (comm1.hom.app X) ≫ comm2.hom.app (L.obj X)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{C}', \\\\mathcal{D}'$ with fully faithful functors $i_\\\\mathcal{C}: \\\\mathcal{C} \\\\to \\\\mathcal{C}'$ and $i_\\\\mathcal{D}: \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, an\"}\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \": L ⊣ R\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{C}', \\\\mathcal{D}'$ with fully faithful functors $i_\\\\mathcal{C}: \\\\mathcal{C} \\\\to \\\\mathcal{C}'$ and $i_\\\\mathcal{D}: \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, an\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"[R.Faithful] [R.Full] {Y : D} : IsIso (h.unit.app (R.obj Y))\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and an adjunction $F \\\\dashv G$, if the functor $R : \\\\mathcal{C} \\\\to \"}\n  {\"name\": \"CategoryTheory.Adjunction.whiskerRight_counit_iso_of_L_fully_faithful\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"[L.Full] [L.Faithful] : IsIso (whiskerRight h.counit R)\", \"doc\": \"Given an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, if the left adjoint $ F $ is fully faithful, then whiskering the counit natural transf\"}\n  {\"name\": \"CategoryTheory.Adjunction.unitSplitEpiOfLFull\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"[L.Full] (X : C) : SplitEpi (h.unit.app X)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functors $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $R : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adjunction $L \\\\dashv R$, if $L$ is fully faithful, then fo\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {C' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{C}', \\\\mathcal{D}'$ with fully faithful functors $i_\\\\mathcal{C}: \\\\mathcal{C} \\\\to \\\\mathcal{C}'$ and $i_\\\\mathcal{D}: \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, an\"}\n  {\"name\": \"CategoryTheory.Adjunction.whiskerLeft_unit_iso_of_R_fully_faithful\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"[R.Full] [R.Faithful] : IsIso (whiskerLeft R h.unit)\", \"doc\": \"If a functor $ R $ in an adjunction is fully faithful, then the natural transformation obtained by left whiskering $ R $ with the unit of the adjunction is an isomorphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of adjoint functors with compatible counits determines the hom equivalence after conjugating the left adjoints",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CommSq.left_adjoint\", \"module\": \"Mathlib/CategoryTheory/LiftingProperties/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {F : CategoryTheory.Functor D C}\\n  {A B : C} {X Y : D} {i : A ⟶ B} {p : X ⟶ Y} {u : A ⟶ F.obj X} {v : B ⟶ F.obj Y},\\n  CategoryTheory.CommSq\", \"doc\": \"Given a commutative square in category $\\\\mathcal{D}$ involving morphisms from functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and an adjunction $G \\\\dashv F$, applying the inverse of the adjunction's hom-equ\"}\n  {\"name\": \"CategoryTheory.CommSq.right_adjoint\", \"module\": \"Mathlib/CategoryTheory/LiftingProperties/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {F : CategoryTheory.Functor D C}\\n  {A B : C} {X Y : D} {i : A ⟶ B} {p : X ⟶ Y} {u : G.obj A ⟶ X} {v : G.obj B ⟶ Y},\\n  CategoryTheory.CommSq\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, a commutative square in $ \\\\mathcal{D} $ involving the right adjoint $ G $ translates via the adjunct\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_naturality_right_square_assoc\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {X' X : C} {Y Y' : D} (f : X' ⟶ X)\\n  (g : X ⟶ G.obj Y') (h : X' ⟶ G.obj Y) (k : Y ⟶ Y'),\\n  Categor\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the hom-set equivalence $ \\\\text{Hom}_{\\\\mathcal{D}}(F(X), Y) \\\\simeq \\\\text{Hom}_{\\\\mathcal{C}}(X, G(Y))\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {X' X : C} {Y Y' : D} (f : X' ⟶ X)\\n  (g : X ⟶ G.obj Y') (h : X' ⟶ G.obj Y) (k : Y ⟶ Y'),\\n  Categor\", \"doc\": \"For an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the natural isomorphism $ \\\\text{Hom}(F(X), Y) \\\\cong \\\\text{Hom}(X, G(Y)) $ satisfies the \"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {X' X : C} {Y Y' : D} (f : X' ⟶ X)\\n  (g : F.obj X ⟶ Y') (h : F.obj X' ⟶ Y) (k : Y ⟶ Y'),\\n  Categor\", \"doc\": \"For an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the natural isomorphism $ \\\\text{Hom}(F(X), Y) \\\\simeq \\\\text{Hom}(X, G(Y)) $ satisfies the\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {X' X : C} {Y Y' : D} (f : X' ⟶ X)\\n  (g : F.obj X ⟶ Y') (h : F.obj X' ⟶ Y) (k : Y ⟶ Y'),\\n  Categor\", \"doc\": \"For adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the natural bijection $ \\\\text{Hom}_{\\\\mathcal{D}}(F(X), Y) \\\\simeq \\\\text{Hom}_{\\\\mathcal{C}}(X, G(Y)) $ i\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {L₁ L₂ : CategoryTheory.Functor C D} →\\n          {R₁ R₂ : CategoryTheory.Functor D C} → (L₁ ⊣ R₁) → (L₂ ⊣ R₂) → (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂)\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, this establishes a natural equivalence between the hom-set of natural transformations $ L₂ \\to L₁ $ and the hom-set $ R₁ \\to R₂ $. The equivalence is const\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_naturality_right_square\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {X' X : C} {Y Y' : D} (f : X' ⟶ X)\\n  (g : X ⟶ G.obj Y') (h : X' ⟶ G.obj Y) (k : Y ⟶ Y'),\\n  Categor\", \"doc\": \"Given an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the hom-set equivalence $ \\\\text{Hom}(F(X), Y) \\\\simeq \\\\text{Hom}(X, G(Y)) $ is natural \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_(naturality|symm)|homEquiv.*counit|counit.*homEquiv",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; inspected Basic.lean 160–174, 226–245, 497–518 and Restrict.lean 36–95. These give component identities, not the complete assertion with restricted full faithfulness, arbitrary natural eta and closure compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transpose comparison through a fully faithful functor with conjugate left adjoints and a natural transformation unit",
+   "results": "CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull, CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful, CategoryTheory.Adjunction.unitSplitEpiOfLFull, CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful, CategoryTheory.Adjunction.instIsIsoMapAppUnitOfFaithfulOfFull, CategoryTheory.Adjunction.whiskerLeft_unit_iso_of_R_fully_faithful, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.unit_isSplitEpi_of_L_full; inspected Basic.lean 160–174, 226–245, 497–518 and Restrict.lean 36–95. These give component identities, not the complete assertion with restricted full faithfulness, arbitrary natural eta and closure compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Functor.map",
+   "results": "CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit, CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.homEquiv_symm_apply, CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_right, CategoryTheory.Adjunction.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.homEquiv_naturality_right_symm; inspected Basic.lean 160–174, 226–245, 497–518 and Restrict.lean 36–95. These give component identities, not the complete assertion with restricted full faithfulness, arbitrary natural eta and closure compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transpose through a fully faithful comparison functor with a counit normalized right adjoint isomorphism and a natural comparison unit",
+   "results": "CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.Triple.rightToLeft, CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.Triple.map_rightToLeft_app, CategoryTheory.LiftLeftAdjoint.otherMap; inspected Basic.lean 160–174, 226–245, 497–518 and Restrict.lean 36–95. These give component identities, not the complete assertion with restricted full faithfulness, arbitrary natural eta and closure compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction hom equivalences in both variables and the inverse formula using counit; transporting adjunction along an isomorphism of left adjoints",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_right_symm, CategoryTheory.Adjunction.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right_symm, CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff, CategoryTheory.Adjunction.homEquiv_naturality_right_square; inspected Basic.lean 160–174, 226–245, 497–518 and Restrict.lean 36–95. These give component identities, not the complete assertion with restricted full faithfulness, arbitrary natural eta and closure compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-locally-closed-relative-transpose-normalization",
+  "date": "2026-10-22",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Second paragraph: locally closed exceptional comparison; returned expanded Steps 2–5 (unique lift, ambient counit, closure conjugation and comparison unit).",
+   "via": [
+    "lem-sf-locally-closed-relative-transpose-normalization",
+    "lem-weil-finite-duality-locally-closed-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-counit-closure-unit-transpose-calculus",
+  "worker": "stage1",
+  "summary": "Wrote the unique-lift, counit cancellation, closure conjugation, comparison-unit and two-variable naturality calculations explicitly. Reused the existing Mathlib adjunction node; no new nodes or statement changes. Checked restricted full faithfulness and every domain of U; no ambient comparison adjunction is assumed.",
+  "blueprint": "Realizes the second paragraph of lem-weil-finite-duality-site-comparison.proof.md, the locally closed exceptional comparison, through the returned expanded Steps 2–5 specified in blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-7a0a23599",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-7a0a23599 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit: the item plus its report. There are no new nodes. Statement, stmt_deps, source and blueprint are unchanged against clones/live, where the item is still unsplit, so nothing is superseded and there is no re-split note. I recomputed all nine steps. The unique lift h_0 comes from Hom-bijectivity of C_T on B_0, with F_eL and M in B_0. Steps 2-3 use the cited Psi^{-1}=eps F(-), naturality of Delta at g_0 (A_0 is full and H is in A_0) and the counit hypothesis to give adj_p(h)=gamma C_S(g_0). Step 4 gives q_p^{-1}B_L=Delta_L C_T(q_e)^{-1}, so zB_L=C_T(a). Step 5 uses the transport formula and eta naturality at a, which is in B_0 because E_e(A_0) is in B_0; U is applied only to Q_0 maps. Step 6 is right naturality via Psi=G(-)eta, giving Phi=rho C_S(g_0). Step 7 inverts rho. Steps 8-9 check naturality in L and in M, the latter using gamma naturality and eta at m. Every hypothesis is used, and no faithfulness or adjunction is assumed outside B_0. I also tested the one-object (Z,+) case with arbitrary delta, q_e, q_p and t; all formulas hold. The source is agent-formulated: I read the second paragraph of the main-20261015 lem-weil-finite-duality-site-comparison proof and Stacks 0037 definition-adjoint (equivalence 1<=>3). No SGA is cited. Both proof deps are Mathlib leaves, so there is no route issue and no tool_uses entry. rg found no duplicate abstract node. The searches cover all three kinds, and the parent's Step 2 instantiation matches the conclusions."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CounitClosureUnitTransposeCalculus",
+  "declaration": "CategoryTheory.CounitClosureTransposeData.calculus",
+  "declarations": [
+   "CategoryTheory.CounitClosureTransposeData",
+   "CategoryTheory.CounitClosureTransposeData.comparison",
+   "CategoryTheory.CounitClosureTransposeData.comparisonHom",
+   "CategoryTheory.CounitClosureTransposeData.closureInput",
+   "CategoryTheory.CounitClosureTransposeData.phi",
+   "CategoryTheory.CounitClosureTransposeData.rho",
+   "CategoryTheory.CounitClosureTransposeData.Target",
+   "CategoryTheory.CounitClosureTransposeData.calculus",
+   "CategoryTheory.CounitClosureTransposeData.naturality_left",
+   "CategoryTheory.CounitClosureTransposeData.naturality_right"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CounitClosureUnitTransposeCalculus.lean",
+  "statement": "theorem calculus (T : D.Target) : IsIso (D.rho T.M) ∧ (∀ (L : D.A₀.FullSubcategory) (h : D.Fp.obj (D.CS.obj L.obj) ⟶ D.CT.obj T.M.obj), ∃! h₀ : D.Fe.obj L.obj ⟶ T.M.obj, D.delta.hom.app L ≫ h = D.CT.map h₀) ∧ (∀ (L : D.A₀.FullSubcategory) (h : D.Fp.obj (D.CS.obj L.obj) ⟶ D.CT.obj T.M.obj) (h₀ : D.Fe.obj L.obj ⟶ T.M.obj), D.delta.hom.app L ≫ h = D.CT.map h₀ → D.closure.hom.app L ≫ (D.qp.inv.app (D.CS.obj L.obj) ≫ h) = D.CT.map (D.qe.inv.app L.obj ≫ h₀) ∧ (D.adjE.ofNatIsoLeft D.qe).homEquiv L.obj T.M.obj (D.qe.inv.app L.obj ≫ h₀) = D.adjE.homEquiv L.obj T.M.obj h₀ ∧ D.closureInput L T.M (D.qp.inv.app (D.CS.obj L.obj) ≫ h) = (D.qe.inv.app L.obj ≫ h₀) ≫ D.eta.app T.M ∧ D.adjP.homEquiv (D.CS.obj L.obj) (D.CT.obj T.M.obj) h = D.CS.map (D.adjE.homEquiv L.obj T.M.obj h₀) ≫ T.gamma.hom ∧ D.phi L T.M (D.qp.inv.app (D.CS.obj L.obj) ≫ h) = D.CS.map (D.adjE.homEquiv L.obj T.M.obj h₀) ≫ D.rho T.M)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The data and Target records only bundle the node hypotheses. comparison, comparisonHom and closureInput supply the specified full-subcategory typing; phi and rho are the displayed canonical constructions. calculus states all pointwise clauses, and naturality_left/naturality_right state the two naturality clauses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f53a7a7e",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Only the item's lean record changed against side-live; no new nodes and no dependency modules. Every hypothesis has a matching field and nothing stronger: Hom bijection only on B_0, U on Q_0, no C_T⊣U adjunction, independent universes, counit equation and compatibility square in correct order. The transported adjunction is Mathlib ofNatIsoLeft, whose transpose is adj_e(q_e≫a) as the node says (advisory: conjugateEquiv is cited but not used directly). All conclusions are present (unique lift, three intermediate identities, both transpose formulas, ρ invertible, naturality in L and M with γ naturality as a hypothesis); Steps 1–7 recomputed and naturality clauses checked by hand. lean.statement verbatim; docstrings carry source, blueprint tag and proof steps; proofs are sorry; Mathlib imports only; no pro-etale substitute; report has both sections. No compile run by me (no FIX); the worker and second reader report a clean server compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261023T090729-L-715491",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.CounitClosureTransposeData.calculus",
+   "CategoryTheory.CounitClosureTransposeData.naturality_left",
+   "CategoryTheory.CounitClosureTransposeData.naturality_right"
+  ],
+  "sorry_after": []
+ }
+}

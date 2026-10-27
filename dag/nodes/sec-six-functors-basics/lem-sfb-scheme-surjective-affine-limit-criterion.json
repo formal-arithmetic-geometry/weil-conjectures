@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-scheme-surjective-affine-limit-criterion",
+ "kind": "statement",
+ "title": "Surjectivity of affine-limit points detects local finite presentation for schemes",
+ "statement": "Let $B$ and $U$ be schemes [def-pc-scheme], let $g:U\\to B$ be a morphism, and use the universes of [def-weil-size-convention]. Suppose that for every small nonempty directed set $I$ and every inverse system of affine $B$-schemes $(T_i)_{i\\in I}$ with limit $T=\\varprojlim_iT_i$ [lem-weil-pbc-limit-affine-transition], the canonical map of sets $$\\operatorname{colim}_{i\\in I}\\operatorname{Mor}_B(T_i,U)\\longrightarrow\\operatorname{Mor}_B(T,U)$$ is surjective. Here the colimit is a filtered colimit of sets [def-weil-pbc-category-colimit]. Then $g$ is locally of finite presentation [def-sbc-locally-finite-presentation]. No injectivity of the comparison map, quasi-compactness, or quasi-separatedness of $B$ or $U$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CM0 (lemma-surjection-is-enough)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix affine opens $W=\\operatorname{Spec}C\\subseteq U$ and $V=\\operatorname{Spec}R\\subseteq B$ with $g(W)\\subseteq V$. For an arbitrary small nonempty directed system of $R$-algebras $A_i$, put $A=\\operatorname{colim}_i A_i$. Given an $R$-map $h:C\\to A$, the spectrum correspondence gives a $V$-map $a:T=\\operatorname{Spec}A\\to W$. The spectrum-colimit lemma identifies $T$ with the limit of $T_i=\\operatorname{Spec}A_i$ and makes all transitions affine. Compose their $V$-structures with $V\\hookrightarrow B$ to obtain an affine $B$-test system.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM0 (lemma-surjection-is-enough), first two paragraphs: affine charts and the directed algebra system"
+   }
+  },
+  {
+   "text": "Apply the assumed surjectivity to the composite $T\\xrightarrow{a}W\\hookrightarrow U$. Every element of a filtered colimit of sets has a stage representative, so there are $i$ and a $B$-map $b_i:T_i\\to U$ with $b_i\\circ p_i=(W\\hookrightarrow U)\\circ a$, where $p_i:T\\to T_i$ is the limit projection.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM0 (lemma-surjection-is-enough), third paragraph: descend the composite map into the whole scheme"
+   }
+  },
+  {
+   "text": "Let $O_i=b_i^{-1}(W)\\subseteq T_i$. The equality in Step 2 gives $p_i^{-1}(O_i)=T$. Each $T_k$ is quasi-compact because it is affine; Step 1 supplies affine transitions. Apply the eventual-open-containment lemma to this limit cone and $O_i$: there is $j\\geq i$ such that $t_{ji}^{-1}(O_i)=T_j$. Thus $b_i\\circ t_{ji}$ has image in $W$. The lemma requires no quasi-compactness of $O_i$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-limit-image-contained-in-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM0 (lemma-surjection-is-enough), last paragraph: closed-complement compactness argument, via its existing eventual-open-containment consequence"
+   }
+  },
+  {
+   "text": "Restrict the continuous map and structure-sheaf map of $b_i\\circ t_{ji}$ to the open subscheme $W$. This gives $a_j:T_j\\to W$ with $(W\\hookrightarrow U)\\circ a_j=b_i\\circ t_{ji}$. Both $T_j\\to V$ obtained from this equality agree after $V\\hookrightarrow B$, hence agree: an open-subscheme inclusion is injective on maps, by restriction of the same space and sheaf maps. Thus $a_j$ is a $V$-map. Likewise its pullback to $T$ equals $a$, since these maps agree after $W\\hookrightarrow U$. By the spectrum correspondence the $R$-map $h_j:C\\to A_j$ associated to $a_j$ therefore satisfies $(A_j\\to A)\\circ h_j=h$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM0 (lemma-surjection-is-enough), middle and last paragraphs: restrict into the open and recover the algebra homomorphism"
+   }
+  },
+  {
+   "text": "Steps 1--4 factor every $R$-map $C\\to\\operatorname{colim}_i A_i$ through some $A_j$. Apply the directed-Hom algebra criterion (Tag 00QO) to conclude that $C$ is finitely presented over $R$. For any $u\\in U$, choose an affine neighbourhood $V$ of $g(u)$ and then an affine neighbourhood $W$ of $u$ inside $g^{-1}(V)$, using the affine-open basis of a scheme. The finite presentation just proved witnesses finite presentation at $u$. The definition therefore makes $g$ locally of finite presentation.",
+   "uses": [
+    "lem-sfb-algebra-directed-hom-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM0 (lemma-surjection-is-enough), first paragraph and conclusion: Algebra Tag 00QO and the affine-local definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-limit-image-contained-in-open",
+  "def-weil-open-immersion",
+  "lem-sfb-algebra-directed-hom-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CM0 (lemma-surjection-is-enough), proof; Algebra Tag 00QO (lemma-characterize-finite-presentation), (3) implies (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surjection_is_enough|locallyOfFinitePresentation.*[Ii]ff|[Ff]initePresentation.*[Ss]urject",
+   "results": "OK 7 hits: Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Noetherian.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105. The hits give the scheme affine-open definition, forward finite-presentation consequences, or flat descent, not the surjective affine-limit converse for arbitrary scheme morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\", \"Surjective\"",
+   "results": "OK 4 hits: AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact, AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105. The hits give the scheme affine-open definition, forward finite-presentation consequences, or flat descent, not the surjective affine-limit converse for arbitrary scheme morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is locally of finite presentation if every map from a directed inverse limit of affine schemes over the base factors through a finite stage, assuming only surjectivity and not uniqueness",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105. The hits give the scheme affine-open definition, forward finite-presentation consequences, or flat descent, not the surjective affine-limit converse for arbitrary scheme morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is locally finitely presented if its functor of points sends directed affine inverse limits to surjections from the colimit of stage points",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, CategoryTheory.MorphismProperty.isFinitelyPresentable, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.rec, AlgebraicGeometry.locallyOfFinitePresentation_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105. The hits give the scheme affine-open definition, forward finite-presentation consequences, or flat descent, not the surjective affine-limit converse for arbitrary scheme morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of the comparison from the filtered colimit of Hom into a scheme to Hom from the inverse limit of affine base schemes characterizes local finite presentation",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105. The hits give the scheme affine-open definition, forward finite-presentation consequences, or flat descent, not the surjective affine-limit converse for arbitrary scheme morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "surjection_is_enough|locallyOfFinitePresentation.*[Ll]imit|[Ff]initePresentation.*[Ss]urject",
+   "results": "OK 4 hits: Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105 and AffineTransitionLimit.lean:182-197. Hits give affine-local definitions, descent along flat covers, or eventual equality of maps, not the surjectivity-only converse."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity on affine inverse limit points implies a scheme morphism is locally finitely presented",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.Surjective.mk, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105 and AffineTransitionLimit.lean:182-197. Hits give affine-local definitions, descent along flat covers, or eventual equality of maps, not the surjectivity-only converse."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\", \"Surjective\"",
+   "results": "OK 4 hits: AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact, AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105 and AffineTransitionLimit.lean:182-197. Hits give affine-local definitions, descent along flat covers, or eventual equality of maps, not the surjectivity-only converse."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is locally of finite presentation if all maps from directed limits of affine schemes factor through a stage, without uniqueness",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105 and AffineTransitionLimit.lean:182-197. Hits give affine-local definitions, descent along flat covers, or eventual equality of maps, not the surjectivity-only converse."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of schemes detected by existence of factorization through stages of every directed affine inverse system",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105 and AffineTransitionLimit.lean:182-197. Hits give affine-local definitions, descent along flat covers, or eventual equality of maps, not the surjectivity-only converse."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-surjective-affine-limit-criterion",
+  "date": "2026-10-23",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the local finite presentation input in the first paragraph, obtained from the existing curve limit-preservation theorem rather than duplicated as a curve-specific lemma. Substep: Relative object descent characterizes representable local finite presentation. Geometric input to the reverse implication: Stacks 0CM6, surjectivity of the relative affine-limit comparison for algebraic spaces. Scheme input to the atlas reduction in Tag 0CM6: limits.tex Tag 0CM0 (lemma-surjection-is-enough).",
+   "via": [
+    "lem-sfb-space-surjective-affine-limit-criterion",
+    "lem-sfb-representable-lfp-object-limit-test",
+    "lem-sfb-stack-limit-preserving-lfp",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-surjective-affine-limit-criterion",
+  "worker": "stage1",
+  "summary": "Wrote the affine-chart proof of Stacks 0CM0 using existing spectrum/colimit, set-colimit representative, eventual-open-containment and algebra-surjectivity nodes. No new nodes or statement changes. Checked arbitrary opens, base compatibility, empty schemes and all cited statements.",
+  "blueprint": "Realizes the existing blueprint.from.place chain at its final scheme input (Tag 0CM0) to the atlas reduction in Tag 0CM6. The latest det-thm-sf-ctf-stability-direct-images proof (3) gives the parent direct-image route. The inherited created.item chain has no recognized blueprint ancestor (blueprint_refs.py ancestor returns None); its null ancestor and detailed place are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-1c777f352",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-1c777f352 (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes. The statement is byte-identical to the live unsplit statement and agrees hypothesis by hypothesis with Stacks limits.tex Tag 0CM0 (l.1463), with surjectivity only and no qc/qs assumed. The five steps follow the 0CM0 proof (l.1475-1522): (1) the affine charts and Spec of the directed R-algebra colimit are the limit in schemes with affine transitions (def-weil-affine-spectrum, lem-weil-pbc-spec-colimit-limit); (2) a stage representative comes from clause (1) of lem-weil-pbc-filtered-colimit-sets-elementwise; (3) eventual containment in the open W uses lem-weil-pbc-limit-image-contained-in-open (exists_map_eq_top), the open form of the 01Z3 argument, with every hypothesis checked: stages quasi-compact by lem-weil-pbc-affine-scheme-qcqs, transitions affine by step 1, O_i need not be quasi-compact; (4) the elementary restriction to W gives the V-map and h_j through full faithfulness of Spec; (5) the 00QO (3)⇒(1) node in the same unit, then the pointwise definition of lfp through the affine basis. Edge cases checked: empty U, zero rings, constant system, nonempty directed I. No duplicate: lem-sfb-scheme-affine-limit-lfp-criterion needs the stronger bijective hypothesis. No SGA citation, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyFinitePresentationOfAffineLimitSurjective",
+  "declaration": "AlgebraicGeometry.locallyOfFinitePresentation_of_affine_limit_hom_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFinitePresentationOfAffineLimitSurjective.lean",
+  "statement": "theorem locallyOfFinitePresentation_of_affine_limit_hom_surjective {B U : Scheme.{u}} (g : U ⟶ B) (hsurj : ∀ (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over B), (∀ i : Iᵒᵖ, IsAffine (D.obj i).left) → ∀ c : Cone D, IsLimit c → Function.Surjective (colimit.desc (D.rightOp ⋙ yoneda.obj (Over.mk g)) ((yoneda.obj (Over.mk g)).mapCocone (coconeRightOpOfCone c)))) : LocallyOfFinitePresentation g",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd25b9d8e",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Only the item lean field changed vs side-live; no new nodes. Statement matches Stacks 0CM0 (limits.tex l.1463) clause by clause: Scheme.{u} B,U,g; I : Type u nonempty directed preorder (Stacks directed set = preorder); D : Iᵒᵖ ⥤ Over B with IsAffine stages, no transition conditions; any IsLimit cone in Over B (= scheme limit for connected I); canonical colimit.desc of the Yoneda cocone, the same construction as the landed bijective neighbour locallyOfFinitePresentation_iff_affine_limit_hom_bijective (01ZC), so no duplicate; surjectivity only; conclusion Mathlib LocallyOfFinitePresentation g; no qc/qs. Dep records and the 00QO algebra criterion universes are compatible. Edge cases (empty U/B, empty stages and limits, singleton I) are covered. Docstrings carry source, blueprint id and the 5 proof steps; lean.statement matches the file signature exactly; sorry only; report has Worker report and Second reading by Q29. Not recompiled (no change)."
+ }
+}

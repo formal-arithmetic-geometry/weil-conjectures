@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-space-descend-closed-immersion",
+ "kind": "statement",
+ "title": "Closed immersions of algebraic spaces descend along affine inverse limits",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$, with schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a representable surjective etale map from a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme]. A morphism $a:A\\to B$ is quasi-compact if $A\\times_BC$ is quasi-compact for every quasi-compact algebraic space $C\\to B$; it is quasi-separated if its diagonal is quasi-compact. A space is quasi-separated if its structure morphism to $\\operatorname{Spec}\\mathbf Z$ is quasi-separated. Let $I$ be a small nonempty directed set, $(T_i)_{i\\in I}$ an inverse system of affine schemes with affine transition maps [def-weil-affine-spectrum], and $T=\\varprojlim_iT_i$. Fix $i_0\\in I$. Let $U_0,V_0$ be quasi-compact and quasi-separated algebraic spaces over $T_{i_0}$, and let $h_0:U_0\\to V_0$ be a $T_{i_0}$-morphism which is locally of finite type on etale scheme charts [def-weil-finite-type-morphism]. Write $U_i=U_0\\times_{T_{i_0}}T_i$, $V_i=V_0\\times_{T_{i_0}}T_i$, and $h_i:U_i\\to V_i$ for $i\\ge i_0$, and $U=U_0\\times_{T_{i_0}}T$, $V=V_0\\times_{T_{i_0}}T$, $h:U\\to V$ for the limit base change. A closed immersion of algebraic spaces means a representable morphism whose every base change to a scheme is a closed immersion of schemes [def-weil-closed-immersion]. If $h$ is a closed immersion, there is $i\\ge i_0$ such that $h_i$ is a closed immersion.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0850 (lemma-descend-closed-immersion), in Situation 084W (situation-descent-property), specialized to affine scheme bases."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-space-qc-finite-affine-atlas-refinement], choose an affine scheme $C_0$ and a representable surjective etale map $p_0:C_0\\to V_0$. Put $C_i=C_0\\times_{T_{i_0}}T_i$, $C=C_0\\times_{T_{i_0}}T$, $W_i=U_i\\times_{V_i}C_i$, and $W=U\\times_V C$. By [lem-weil-pbc-limit-affine-transition], $T$ is affine. Since $C_0,T_i,T_{i_0},T$ are affine, [lem-weil-pbc-morphism-affine-schemes-affine] and [lem-weil-pbc-affine-morphism-permanence] show that $C_i,C$ are affine schemes. The maps $p_i:C_i\\to V_i$ and $p:C\\to V$ are base changes of $p_0$, hence representable surjective etale by [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0850 (lemma-descend-closed-immersion), proof in Situation 084W (situation-descent-property)"
+   }
+  },
+  {
+   "text": "Let $W_0=U_0\\times_{V_0}C_0$. Affine schemes are quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Therefore [lem-sfb-space-qcqs-source-products] shows that $W_0$ and every $W_i=W_0\\times_{T_{i_0}}T_i$ are quasi-compact and quasi-separated. For $j\\ge i\\ge i_0$, the transition $W_j\\to W_i$ is the base change of $T_j\\to T_i$, so it is affine by [lem-sfb-space-affine-locality]. The base-change/limit clause of [lem-sfb-space-affine-limits-schematic-stages], applied to the sheaf limit of the $T_i$ and the map $W_0\\to T_{i_0}$, identifies $W$ with $\\varprojlim_{i\\ge i_0}W_i$. The identification uses only fibre-product associativity: on a test scheme both sides are a section of $U_0$, a section of $C_0$, and a compatible family of sections of $T_i$, with the same images in $V_0$ and $T_{i_0}$. Likewise $C=\\varprojlim C_i$. The index tail is small, nonempty and directed; it is cofinal since an upper bound of $i_0$ and any given index belongs to it.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-limits-schematic-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0850 (lemma-descend-closed-immersion), proof in Situation 084W (situation-descent-property)"
+   }
+  },
+  {
+   "text": "The scheme test $C\\to V$ of the assumed closed immersion $h$ makes $W\\to C$ a closed immersion of schemes. Since $C$ is affine, the affine-quotient characterization in [def-weil-closed-immersion] makes $W$ affine. Apply the eventual-affineness clause of [lem-sfb-space-affine-limits-schematic-stages] to the system $(W_i)_{i\\ge i_0}$ of step 2. It gives $k\\ge i_0$ for which $W_k$ is an affine scheme, and the same holds at every later stage.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-space-affine-limits-schematic-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0850 (lemma-descend-closed-immersion), proof in Situation 084W (situation-descent-property)"
+   }
+  },
+  {
+   "text": "The map $g_k:W_k\\to C_k$ is the base change of $h_0$ along $C_k\\to V_0$. The arbitrary-base-change clause and the algebraic-space compatibility clause of [lem-sfb-stack-finite-type-calculus] show that $g_k$ is locally of finite type as a scheme morphism. Apply [lem-weil-pbc-descend-closed-immersion] to $g_k$ over the inverse system $(T_i)_{i\\ge k}$. Its stage base $T_k$ and source and target $W_k,C_k$ are affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Its base change to $T$ is the closed immersion $W\\to C$, and its base change to $T_i$ is $g_i:W_i\\to C_i$: both identifications retain the same entries in the fibre products. All the scheme descent hypotheses therefore hold. We obtain $j\\ge k$ for which $g_j$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0850 (lemma-descend-closed-immersion), proof in Situation 084W (situation-descent-property)"
+   }
+  },
+  {
+   "text": "The affine schemes $W_j,C_j$ give an affine morphism $g_j$ by [lem-weil-pbc-morphism-affine-schemes-affine]. Since $p_j:C_j\\to V_j$ is surjective etale, [lem-sfb-space-affine-locality] implies that $h_j$ is affine and in particular representable. Apply [lem-trf-space-closed-immersion-cover-descent] with $E=U_j$, $B=Y=V_j$, $b=\\mathrm{id}$ and the singleton cover $p_j$. Its pulled-back morphism is $g_j$, a closed immersion; every further scheme test is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Thus $h_j$ is a closed immersion, as required. This application uses representability already proved here, rather than assuming it from the limit.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-sfb-space-affine-locality",
+    "lem-trf-space-closed-immersion-cover-descent",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0850 (lemma-descend-closed-immersion), proof in Situation 084W (situation-descent-property)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "def-weil-closed-immersion",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-trf-space-closed-immersion-cover-descent",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0850 (lemma-descend-closed-immersion), proof in Situation 084W (situation-descent-property)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of quasi compact quasi separated algebraic spaces becomes a closed immersion at a finite stage if its affine inverse limit base change is a closed immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsClosedImmersion fun X x f [AlgebraicGeometry.IsAffine x] =>\\n  AlgebraicGeometry.IsAffine X ∧\\n    Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Every closed immersion of schemes has the affine property, meaning that the domain scheme is affine and the induced morphism on global sections is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsPreimmersion f],\\n  IsClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsOpenImmersion g₁ ∧\\n        AlgebraicGeometry.IsClosedImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f)) →\\n    AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If $ X $ and $ Y $ are affine schemes and the morphism $ f : X \\to Y $ induces a surjective map on global sections, then $ f $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsClosedImmersion f ↔ AlgebraicGeometry.IsFinite f ∧ CategoryTheory.Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: all algebraic-geometry hits are for schemes, not algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:40-46, FiniteType.lean:37-44, QuasiSeparated.lean:155-159 and FormallyUnramified.lean:126-127; none specializes in one line to algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions of algebraic spaces descend through directed limits with affine transition maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsOpenImmersionι\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [inst_3 : Quiver.IsThin J]\\n  [ins\", \"doc\": \"For any categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, and a locally directed functor $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, the colimit of $F$ exists. This instance asserts that functors satisfying the loca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"{X : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.Cover.LocallyDirected X.directedAffineCover\", \"doc\": \"For any scheme $X$, the directed affine cover (consisting of all affine open subsets with inclusion morphisms) is equipped with a locally directed structure. This follows because the affine open subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n         \", \"doc\": \"Given a small thin category $ J $ and a functor $ F : J \\to \\text{Sch} $ (the category of schemes) such that: (1) every morphism in $ J $ is mapped by $ F $ to an open immersion of schemes, (2) the comp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsLocallyDirectedWidePushoutShapeCompForgetOfIsOpenImmersionMap\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} (F : CategoryTheory.Functor (CategoryTheory.Limits.WidePushoutShape J) AlgebraicGeometry.Scheme)\\n  [∀ {i j : CategoryTheory.Limits.WidePushoutShape J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)],\\n  (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected\", \"doc\": \"Given a wide pushout shape diagram $ F: J \\to \\text{Sch} $ of schemes where every morphism $ F(f) $ is an open immersion, the composition of $ F $ with the forgetful functor from schemes to sets forms a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [Quiver.IsThin J] [Small.{u, w} J],\\n  CategoryTheor\", \"doc\": \"For any categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, and a locally directed functor $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, the colimit of $F$ exists. This instance asserts that functors satisfying the loca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  AlgebraicGeometry.Scheme.Cover.LocallyDirected (AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover X)\", \"doc\": \"For any scheme $X$, the directed affine Zariski cover of $X$ satisfies the locally directed condition: it forms a directed system of affine open subsets with inclusion morphisms that are open immersio\"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverScheme\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (CategoryTheory.Over S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f).left]\\n  [(F.comp ((CategoryTheory.Over.forget S).comp AlgebraicGeometry.Schem\", \"doc\": \"The category of schemes admits colimits for functors defined on small categories.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n         \", \"doc\": \"The forgetful functor from schemes to locally ringed spaces preserves colimits of directed gluing diagrams: given a small thin category $ J $ and a locally directed functor $ F: J \\to \\text{Scheme} $ wi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: all algebraic-geometry hits are for schemes, not algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:40-46, FiniteType.lean:37-44, QuasiSeparated.lean:155-159 and FormallyUnramified.lean:126-127; none specializes in one line to algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: all algebraic-geometry hits are for schemes, not algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:40-46, FiniteType.lean:37-44, QuasiSeparated.lean:155-159 and FormallyUnramified.lean:126-127; none specializes in one line to algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isClosedImmersion|descend.*closed|AlgebraicSpace",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"20\", \"text\": \"  (`AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"48\", \"text\": \"instance descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"49\", \"text\": \"    DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: all algebraic-geometry hits are for schemes, not algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:40-46, FiniteType.lean:37-44, QuasiSeparated.lean:155-159 and FormallyUnramified.lean:126-127; none specializes in one line to algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion descent to a finite stage for algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsPreimmersion f] (hf : IsClosed (Set.range f)) : IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsClosedImmersion f → Sort u} →\\n      (t : AlgebraicGeometry.IsClosedImmersion f) →\\n        ([toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f] →\\n            (isClosedEmbedding : Topology.IsClosedEmbeddin\", \"doc\": \"Given a property $ P $ of closed immersions $ f: X \\to Y $, if $ P $ holds for any closed immersion constructed from a closed embedding of topological spaces and surjective maps on stalks, then $ P $ h\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsImmersion f\", \"doc\": \"Any closed immersion between schemes is an immersion. Specifically, if $ f: X \\to Y $ is a closed immersion of schemes (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with a su\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsIntegralHom f\", \"doc\": \"Every closed immersion of schemes is an integral morphism of schemes.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: all algebraic-geometry hits are for schemes, not algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:40-46, FiniteType.lean:37-44, QuasiSeparated.lean:155-159 and FormallyUnramified.lean:126-127; none specializes in one line to algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descend.*[Cc]losed[Ii]mmersion|eventually.*[Cc]losed",
+   "results": {
+    "t": "2026-10-23T12:00:17Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|descend.*[Cc]losed[Ii]mmersion|eventually.*[Cc]losed",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme closed-immersion properties or open-immersion gluing colimits, not algebraic-space descent along inverse limits; ClosedImmersion.lean:44-46 binds X,Y to Scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersions of algebraic spaces descend to a finite stage of an affine inverse limit",
+   "results": {
+    "t": "2026-10-23T12:00:17Z",
+    "tool": "leansearch",
+    "query": "Closed immersions of algebraic spaces descend to a finite stage of an affine inverse limit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion",
+     "AlgebraicGeometry.IsClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.mk",
+     "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange",
+     "AlgebraicGeometry.IsFinite.instOfIsClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+     "AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+     "AlgebraicGeometry.IsClosedImmersion.casesOn"
+    ],
+    "digest": "13b347692098f6de"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme closed-immersion properties or open-immersion gluing colimits, not algebraic-space descent along inverse limits; ClosedImmersion.lean:44-46 binds X,Y to Scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"limit\"",
+   "results": {
+    "t": "2026-10-23T12:00:17Z",
+    "tool": "loogle",
+    "query": "\"IsClosedImmersion\", \"limit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme closed-immersion properties or open-immersion gluing colimits, not algebraic-space descent along inverse limits; ClosedImmersion.lean:44-46 binds X,Y to Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions of algebraic spaces descend through directed inverse limits with affine transitions",
+   "results": {
+    "t": "2026-10-23T12:00:27Z",
+    "tool": "leanfinder",
+    "query": "Closed immersions of algebraic spaces descend through directed inverse limits with affine transitions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit",
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit",
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.instIsOpenImmersionι",
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.glueData",
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.t",
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V",
+     "AlgebraicGeometry.instHasColimitOverScheme",
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace"
+    ],
+    "digest": "20cd34ed55d54898"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme closed-immersion properties or open-immersion gluing colimits, not algebraic-space descent along inverse limits; ClosedImmersion.lean:44-46 binds X,Y to Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of quasi compact quasi separated algebraic spaces that is a closed immersion after an affine inverse limit base change is a closed immersion at some stage",
+   "results": {
+    "t": "2026-10-23T12:00:27Z",
+    "tool": "leanfinder",
+    "query": "A locally finite type morphism of quasi compact quasi separated algebraic spaces that is a closed immersion after an affine inverse limit base change is a closed immersion at some stage",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion",
+     "AlgebraicGeometry.IsFinite.instOfIsClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.hasAffineProperty",
+     "AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+     "AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine",
+     "AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine",
+     "AlgebraicGeometry.isClosedImmersion_iff_isAffineHom"
+    ],
+    "digest": "62ac5ed760fb7153"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme closed-immersion properties or open-immersion gluing colimits, not algebraic-space descent along inverse limits; ClosedImmersion.lean:44-46 binds X,Y to Scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-descend-separated",
+  "date": "2026-10-23",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 0851 (lemma-descend-separated-morphism), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence by spaces-morphisms.tex Tag 03KL (lemma-base-change-separated). Supporting input: Tag 0850 (lemma-descend-closed-immersion), in Situation 084W (situation-descent-property), specialized to affine scheme bases. Split realizes Tag 0850 proof: affine etale target atlas; eventual affineness of its pulled-back source; scheme closed-immersion descent; descent back to the target space. Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3): supporting limit input in the inherited direct-image finiteness route.",
+   "via": [
+    "lem-sfb-space-descend-separated",
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-descend-closed-immersion",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0850 through an affine target atlas, eventual affineness 07SQ, scheme descent 01ZP, and etale descent after establishing representability. Reused existing DAG statements throughout; no new nodes and no statement change. Checked each citation against its actual statement.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), direct-image finiteness support. The latest proof (3) assembles proper and open direct images through a compactification; this node supplies the inherited supporting inverse-limit input. At this node the four sentences of Stacks 0850 are realized by steps 1, 2-3, 4, and 5.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic finite affine atlas refinement, needed for Tag 0850; no separate atlas construction is needed in this unit."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and etale-cover base change used by the atlas construction."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Scheme affine inverse-limit existence and affine-limit formula, used to identify the given base limit."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "The exact scheme descent theorem 01ZP explicitly used by the proof of spaces Tag 0850."
+   },
+   {
+    "node": "lem-trf-space-closed-immersion-cover-descent",
+    "why": "Generic representable closed-immersion descent along an etale target cover, applied only after affineness establishes representability."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-trf-space-closed-immersion-cover-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-91f412c09",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-91f412c09 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to live and matches Stacks 0850 in Situation 084W (spaces-limits.tex l.1449, l.1670-1691), with affine scheme bases: qcqs U_0 and V_0, h_0 locally of finite type, nonempty directed index, no added hypothesis. There are no new nodes; the item is unsplit on live and side-live, there is no repair note and no SGA. The 5 steps follow the Stacks proof and I checked each against the cited statements. (1) An affine atlas C_0 (03H6 node); C_i and C are affine by 01SH plus permanence (1),(2); p_i is a base change of p_0, so surjective etale (02X2 node). (2) W_0 and W_i are qcqs by the product clause; transition maps are affine by space affine base change; W = lim W_i by the last clause of the affine-limits node; the scheme limit T equals the sheaf limit by Yoneda. (3) W -> C is a closed immersion of schemes, so W is affine by the 01QO clause; the eventual-affine clause gives an affine W_k. (4) g_k is locally of finite type by the finite-type calculus node (base change plus agreement for spaces); 01ZP applies to the qcqs affine T_k, W_k, C_k, and its base changes are the W_i and W. (5) g_j is affine (01SH), so h_j is affine and hence representable by affine-locality; 03KD cover descent with B=Y=V_j, b=id and the single map p_j, together with 01QR, gives that h_j is a closed immersion. This last step replaces Stacks' integral-local citation and is valid. Q115's qcqs-base-descend-closed-immersion assumes finite presentation, so it is not a duplicate. I accept tool_uses 03H6, 02X2, 01YX, 01ZP and 03KD. Batch-5: the trf atlas node (03H6) and closed-immersion-cover-descent (03KD) are generic algebraic-space foundations, not steps of the trace formula or of Poincare duality. affine-limits-schematic-stages and stack-finite-type-calculus reach the trace-formula chapter only through the general definition def-trf-algebraic-space. All four are accepted. Edge cases checked: empty spaces (Spec 0 atlas), a constant system, non-Noetherian bases."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDescendClosedImmersion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_isClosedImmersion_affine_stage",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDescendClosedImmersion.lean",
+  "statement": "theorem exists_isClosedImmersion_affine_stage {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Over (Spec (.of (ULift.{u} ℤ)))) (haff : ∀ i : Iᵒᵖ, IsAffine (D.obj i).left) (htransition : ∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a).left) (c : Cone D) (hc : IsLimit c) (i₀ : I) (U₀ V₀ : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (h₀ : U₀ ⟶ V₀) (v₀ : V₀.obj.obj ⟶ yoneda.obj (D.obj (op i₀))) (hUqc : IsQuasiCompact U₀.obj) (hUqs : IsAbsolutelyQuasiSeparated U₀) (hVqc : IsQuasiCompact V₀.obj) (hVqs : IsAbsolutelyQuasiSeparated V₀) (hlft : MapIsLocally (@LocallyOfFiniteType) h₀) (hclosed : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (((Over.pullback (yoneda.map (c.π.app (op i₀)))).map (Over.homMk (U := Over.mk (h₀.hom.hom ≫ v₀)) (V := Over.mk v₀) h₀.hom.hom rfl)).left)) : ∃ (i : I) (hi : i₀ ≤ i), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (((Over.pullback (yoneda.map (D.map (homOfLE hi).op))).map (Over.homMk (U := Over.mk (h₀.hom.hom ≫ v₀)) (V := Over.mk v₀) h₀.hom.hom rfl)).left)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78e6cfe6b",
+  "group": "NC",
+  "result": "pass",
+  "note": "Statement matches Stacks 0850 / Situation 084W specialized to affine bases. Spec (ULift ℤ) base in universe u (project convention); small nonempty directed I; affine stages with affine transitions; limit cone in Over SpecZ (connected, so the scheme limit); qcqs U0,V0 via IsQuasiCompact and IsAbsolutelyQuasiSeparated; T_i0-morphism via v0 with structure map h0≫v0; MapIsLocally LocallyOfFiniteType; h and h_i as canonical Over.pullback(yoneda.map …).map(Over.homMk …).left; closed immersion as IsRepresentableWith (IsClosedImmersion p.left), as in the landed MapIsSeparated; conclusion ∃ i ≥ i0, same strength as the source. Node differs from live only in lean plus 3 added landed definition stmt_deps that own the predicates used; lean.statement verbatim; no collision; SpaceEventualClosedImmersion (0828(1)) is a different lemma. Single sorry theorem; source and blueprint docstrings; 5 proof steps; report has both sections. No change made, so no compile. Advisory: IsAffineHom owner pqf-def-affine-morphism not in stmt_deps; the hypothesis is implied by haff."
+ }
+}

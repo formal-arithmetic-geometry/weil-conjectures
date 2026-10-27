@@ -1,0 +1,386 @@
+{
+ "id": "lem-trf-norming-maps-cartesian-criterion",
+ "kind": "statement",
+ "title": "Contractive norm-attaining maps to finite cartesian spaces",
+ "statement": "Let $k$ be a field [def-weil-field] with a real-valued multiplicative nonarchimedean absolute value. A norm on a $k$-vector space means a definite function $N$ with $N(x+y)\\le\\max(N(x),N(y))$ and $N(cx)=|c|N(x)$. A finite basis $(w_i)$ is orthogonal when $N(\\sum_i c_iw_i)=\\max_i|c_i|N(w_i)$. Let $U$ be a normed $k$-vector space. Suppose that for every nonzero $u\\in U$ there exist a finite-dimensional normed $k$-vector space $(W_u,N_u)$ having an orthogonal basis and a $k$-linear map $f_u:U\\to W_u$ satisfying $$N_u(f_u(v))\\le N(v)\\quad(v\\in U),\\qquad N_u(f_u(u))=N(u).$$ Then every finite-dimensional $k$-linear subspace $V\\subseteq U$, with its restricted norm, has an orthogonal $k$-basis. The zero space and empty basis are included, with empty maximum zero. No completeness, spherical completeness, stability of $k$, or algebra structure on $U$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.8.1/10 proof, printed p.174 (scan PDF p.182), abstracted to its norming linear maps; the proof splits each line using the attaining evaluation and its finite cartesian target. This generalization is an agent formulation of the argument, not the literal proposition. Primary scan read 2026-10-25; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Induct on $n$, with the claim quantified over all subspaces $V\\subseteq U$ possessing an algebraic basis of length $n$. For $n=0$, $V=0$ and the empty basis has the required formula. For $n>0$ fix such a basis $e_1,\\ldots,e_n$ and set $u=e_1\\ne0$. Choose the hypothesized map $f=f_u$ and an orthogonal basis $w_1,\\ldots,w_m$ of its target. Write $f(v)=\\sum_i c_i(v)w_i$; each $c_i:U\\to k$ is linear by uniqueness of basis expansions. Since $N_u(f(u))=N(u)>0$, $m>0$ and some $j$ satisfies $|c_j(u)|N_u(w_j)=N(u)$; in particular $c_j(u)\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent coordinate-functional proof of the abstract norming criterion suggested by BGR Proposition 3.8.1/10; archival BGR copy unavailable (WANTED in report). No unverified assertion from BGR is used. Step 1."
+   }
+  },
+  {
+   "text": "By [def-weil-field], $c_j(u)$ is invertible. Define $\\lambda(v)=c_j(v)/c_j(u)$. It is linear and $\\lambda(u)=1$. The coordinate norm formula and contractivity give $$|\\lambda(v)|N(u)=|c_j(v)|N_u(w_j)\\le N_u(f(v))\\le N(v)\\qquad(v\\in U).$$ The first equality uses multiplicativity of the absolute value and the choice of $j$. Thus this scalar functional controls the component along $u$ with constant exactly one.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent coordinate-functional proof of the abstract norming criterion suggested by BGR Proposition 3.8.1/10; archival BGR copy unavailable (WANTED in report). No unverified assertion from BGR is used. Step 2."
+   }
+  },
+  {
+   "text": "Put $H=\\{v\\in V:\\lambda(v)=0\\}$. It is a linear subspace by linearity of $\\lambda$. Every $v\\in V$ has the unique decomposition $v=au+h$, where $a=\\lambda(v)$ and $h=v-au\\in H$; uniqueness follows by applying $\\lambda$. For $a\\in k$, $h\\in H$, put $z=au+h$. Step 2 gives $N(au)=|\\lambda(z)|N(u)\\le N(z)$. Also $N(h)=N(z-au)\\le\\max(N(z),N(-au))\\le N(z)$, since $N(-au)=N(au)$. The ultrametric inequality gives the reverse bound, so $$N(au+h)=\\max(|a|N(u),N(h)).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent coordinate-functional proof of the abstract norming criterion suggested by BGR Proposition 3.8.1/10; archival BGR copy unavailable (WANTED in report). No unverified assertion from BGR is used. Step 3."
+   }
+  },
+  {
+   "text": "For $2\\le i\\le n$ set $h_i=e_i-\\lambda(e_i)u\\in H$. These $n-1$ vectors form an algebraic basis of $H$: if $h=\\sum_i a_i e_i\\in H$, then $0=\\lambda(h)=a_1+\\sum_{i\\ge2}a_i\\lambda(e_i)$ and hence $h=\\sum_{i\\ge2}a_i h_i$. If $\\sum_{i\\ge2}b_i h_i=0$, comparison of the $e_i$ coefficients for $i\\ge2$ gives every $b_i=0$. This also proves $H=0$ for $n=1$, when the displayed family is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent coordinate-functional proof of the abstract norming criterion suggested by BGR Proposition 3.8.1/10; archival BGR copy unavailable (WANTED in report). No unverified assertion from BGR is used. Step 4."
+   }
+  },
+  {
+   "text": "Apply the induction hypothesis to $H\\subseteq U$ and its basis of length $n-1$, obtaining a finite orthogonal basis $q_1,\\ldots,q_r$ for its restricted norm. All norming maps remain available on $U$; no assertion about a quotient norm is required. The unique decomposition in Step 3 shows that $(u,q_1,\\ldots,q_r)$ is a basis of $V$. For arbitrary coefficients, Step 3 and orthogonality on $H$ give $$N\\left(au+\\sum_i b_iq_i\\right)=\\max\\left(|a|N(u),\\max_i|b_i|N(q_i)\\right).$$ Empty maxima are zero, so this includes $H=0$ and completes the induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent coordinate-functional proof of the abstract norming criterion suggested by BGR Proposition 3.8.1/10; archival BGR copy unavailable (WANTED in report). No unverified assertion from BGR is used. Step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Independent coordinate-functional proof of the abstract norming criterion suggested by BGR Proposition 3.8.1/10; archival BGR copy unavailable (WANTED in report). No unverified assertion from BGR is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "norming|cartesian.*norm|orthogonal.*nonarchimedean",
+   "results": {
+    "t": "2026-10-24T16:38:20Z",
+    "tool": "grep",
+    "query": "norming|cartesian.*norm|orthogonal.*nonarchimedean",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Module.Basis.norm_isNonarchimedean proves an inequality for a preselected coordinate norm, not existence of a basis for a given norm. Inner-product orthonormal-basis results require RCLike and an inner product; finite-dimensional norm equivalence does not give exact orthogonality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Norming linear evaluations into cartesian finite valued field extensions imply a nonarchimedean normed vector space is cartesian",
+   "results": {
+    "t": "2026-10-24T16:38:21Z",
+    "tool": "leansearch",
+    "query": "Norming linear evaluations into cartesian finite valued field extensions imply a nonarchimedean normed vector space is cartesian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Valued.isNonarchimedean_norm",
+     "IsUltrametricDist.isNonarchimedean_algNormOfAlgEquiv",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "IsUltrametricDist.invariantExtension",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "Valued.norm",
+     "IsUltrametricDist.algNormOfAlgEquiv"
+    ],
+    "digest": "a02068ea0cb652a6"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Module.Basis.norm_isNonarchimedean proves an inequality for a preselected coordinate norm, not existence of a basis for a given norm. Inner-product orthonormal-basis results require RCLike and an inner product; finite-dimensional norm equivalence does not give exact orthogonality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNonarchimedean\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T16:38:21Z",
+    "tool": "loogle",
+    "query": "\"IsNonarchimedean\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean"
+    ],
+    "digest": "1963a01e45080c8c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Module.Basis.norm_isNonarchimedean proves an inequality for a preselected coordinate norm, not existence of a basis for a given norm. Inner-product orthonormal-basis results require RCLike and an inner product; finite-dimensional norm equivalence does not give exact orthogonality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a stable complete nonarchimedean field a normed vector space with contractive linear maps to finite field extensions attaining each vector norm has orthogonal bases on finite dimensional subspaces",
+   "results": {
+    "t": "2026-10-24T16:38:22Z",
+    "tool": "leanfinder",
+    "query": "Over a stable complete nonarchimedean field a normed vector space with contractive linear maps to finite field extensions attaining each vector norm has orthogonal bases on finite dimensional subspaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_orthonormalBasis",
+     "exists_hilbertBasis",
+     "DirectSum.IsInternal.subordinateOrthonormalBasisIndex",
+     "stdOrthonormalBasis_def",
+     "spectralNorm.completeSpace",
+     "Orthonormal.exists_orthonormalBasis_extension_of_card_eq",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis_subordinate",
+     "Module.Basis.exists_opNorm_le"
+    ],
+    "digest": "1608ab06110adb03"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Module.Basis.norm_isNonarchimedean proves an inequality for a preselected coordinate norm, not existence of a basis for a given norm. Inner-product orthonormal-basis results require RCLike and an inner product; finite-dimensional norm equivalence does not give exact orthogonality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of exact orthogonal bases from norm attaining contractive evaluation maps to finite extensions of a stable valued field",
+   "results": {
+    "t": "2026-10-24T16:38:23Z",
+    "tool": "leanfinder",
+    "query": "Existence of exact orthogonal bases from norm attaining contractive evaluation maps to finite extensions of a stable valued field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_extends",
+     "NumberField.mixedEmbedding.euclidean.stdOrthonormalBasis",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "exists_seq_norm_le_one_le_norm_sub'",
+     "LinearMap.exists_basis_basis_of_span_eq_top_of_mem_algebraMap",
+     "Module.Basis.exists_opNNNorm_le",
+     "Module.Basis.exists_opNorm_le",
+     "Field.Emb.Cardinal.wellOrderedBasis"
+    ],
+    "digest": "5bf8477cd152418f"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Module.Basis.norm_isNonarchimedean proves an inequality for a preselected coordinate norm, not existence of a basis for a given norm. Inner-product orthonormal-basis results require RCLike and an inner product; finite-dimensional norm equivalence does not give exact orthogonality."
+  },
+  {
+   "tool": "grep",
+   "query": "norming|orthogonal.*[Bb]asis|cartesian.*norm",
+   "results": {
+    "t": "2026-10-24T17:09:10Z",
+    "tool": "grep",
+    "query": "norming|orthogonal.*[Bb]asis|cartesian.*norm",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/InnerProductSpace/PiL2.lean",
+     "Mathlib/Analysis/InnerProductSpace/PiL2.lean",
+     "Mathlib/Analysis/InnerProductSpace/TwoDim.lean",
+     "Mathlib/Analysis/InnerProductSpace/l2Space.lean",
+     "Mathlib/Analysis/InnerProductSpace/l2Space.lean"
+    ],
+    "digest": "482c059a0653f16f"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: source hits concern inner-product bases or the coordinate norm inequality and operator-norm bounds; none states this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite dimensional subspace has an orthogonal basis when contractive linear maps to finite orthogonal normed spaces attain each vector norm",
+   "results": {
+    "t": "2026-10-24T17:09:11Z",
+    "tool": "leansearch",
+    "query": "Every finite dimensional subspace has an orthogonal basis when contractive linear maps to finite orthogonal normed spaces attain each vector norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InnerProductSpace.gramSchmidtOrthonormalBasis",
+     "OrthonormalBasis.mk",
+     "OrthonormalBasis",
+     "stdOrthonormalBasis",
+     "HilbertBasis.toOrthonormalBasis",
+     "OrthonormalBasis.ofRepr",
+     "OrthonormalBasis.span",
+     "InnerProductSpace.gramSchmidt_def"
+    ],
+    "digest": "694ffd9f70dc79b9"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: inner-product orthonormal bases require RCLike scalars and an inner product. Module.Basis.exists_opNorm_le (FiniteDimension.lean:400, source read) gives norm bounds with an unspecified constant, not exact ultrametric orthogonality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNonarchimedean\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T17:09:11Z",
+    "tool": "loogle",
+    "query": "\"IsNonarchimedean\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean"
+    ],
+    "digest": "1963a01e45080c8c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Module.Basis.norm_isNonarchimedean (FiniteExtension.lean:90, source read) verifies the ultrametric inequality for a constructed coordinate norm, not existence of an orthogonal basis for a given norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonarchimedean normed vector space has orthogonal bases on finite dimensional subspaces if each vector admits a norm attaining contractive linear map into a finite space with an orthogonal basis",
+   "results": {
+    "t": "2026-10-24T17:09:12Z",
+    "tool": "leanfinder",
+    "query": "A nonarchimedean normed vector space has orthogonal bases on finite dimensional subspaces if each vector admits a norm attaining contractive linear map into a finite space with an orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_orthonormalBasis",
+     "stdOrthonormalBasis",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis",
+     "exists_hilbertBasis",
+     "DirectSum.IsInternal.subordinateOrthonormalBasisIndex",
+     "Orthonormal.exists_orthonormalBasis_extension",
+     "Module.Basis.exists_opNorm_le",
+     "Module.Basis.exists_opNNNorm_le"
+    ],
+    "digest": "98c96ab74ee62e0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: inner-product orthonormal bases require RCLike scalars and an inner product. Module.Basis.exists_opNorm_le (FiniteDimension.lean:400, source read) gives norm bounds with an unspecified constant, not exact ultrametric orthogonality."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_isNonarchimedean|exists_opNorm_le|orthogonal.*[Nn]onarchimedean|[Nn]onarchimedean.*[Bb]asis",
+   "results": {
+    "t": "2026-10-24T17:10:03Z",
+    "tool": "grep",
+    "query": "norm_isNonarchimedean|exists_opNorm_le|orthogonal.*[Nn]onarchimedean|[Nn]onarchimedean.*[Bb]asis",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/FiniteDimension.lean",
+     "Mathlib/Analysis/Normed/Unbundled/FiniteExtension.lean",
+     "Mathlib/Analysis/Normed/Unbundled/FiniteExtension.lean"
+    ],
+    "digest": "3eb70fd9ef1cac38"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: source hits concern inner-product bases or the coordinate norm inequality and operator-norm bounds; none states this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A contractive linear functional attaining the norm at a nonzero vector gives an orthogonal direct sum with its kernel over a nonarchimedean field",
+   "results": {
+    "t": "2026-10-24T17:10:04Z",
+    "tool": "leanfinder",
+    "query": "A contractive linear functional attaining the norm at a nonzero vector gives an orthogonal direct sum with its kernel over a nonarchimedean field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.span_singleton_sup_ker_eq_top",
+     "Module.Dual.isCompl_ker_of_disjoint_of_ne_bot",
+     "RootPairing.isCompl_rootSpan_ker_rootForm",
+     "RootPairing.isCompl_corootSpan_ker_corootForm",
+     "LinearMap.isCompl_span_singleton_orthogonal",
+     "LinearMap.span_singleton_sup_orthogonal_eq_top",
+     "Submodule.exists_add_mem_mem_orthogonal",
+     "Submodule.isHilbertSumOrthogonal"
+    ],
+    "digest": "13b4bea183ae7e24"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: LinearMap.span_singleton_sup_ker_eq_top is only the algebraic decomposition, which Step 3 proves explicitly. Bilinear orthogonality and Hilbert-space projection hits do not give the ultrametric max equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-spectral-coefficient-cartesian",
+  "date": "2026-10-25",
+  "group": "O2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Proposition 5.3.3/2, printed pp.214–215 (scan PDF pp.220–221). Supporting input for Proposition 5.3.3/2: Proposition 3.8.1/10 proof, printed p.174 (scan PDF p.182), abstracted to its norming linear maps; the proof splits each line using the attaining evaluation and its finite cartesian target. This generalization is an agent formulation of the argument, not the literal proposition.",
+   "via": [
+    "lem-trf-gauss-spectral-coefficient-cartesian",
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-norming-maps-cartesian-criterion",
+  "worker": "stage1",
+  "summary": "NN proves the unchanged abstract criterion directly by a maximum target coordinate, its normalized pullback functional, an explicit orthogonal kernel decomposition, and induction on the length of a finite algebraic basis. All five short steps are elementary calculations; no new support node, unsupported projection theorem, or completeness hypothesis is introduced. Mathlib searches checked and recorded; BGR archival copy WANTED.",
+  "blueprint": "Historical analytic support below lem-trf-local-term-locality, through lem-trf-gauss-spectral-coefficient-cartesian Step 3 and BGR 3.8.1/10. Steps 1-2 expand the norm-attaining evaluation into a scalar coordinate, Step 3 splits the line, and Steps 4-5 give the finite induction. The current latest blueprint uses contracting correspondences at the ancestor, so this split of an existing analytic descendant does not replace the unit route. Whole-blueprint searches for orthogonal, cartesian, norming and nonarchimedean found no matching criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-3481219b8",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-3481219b8 (reviewer sub-agent of L); spot-checked: I read the item and the full proof. The delivery has no new nodes and leaves the statement unchanged. The statement (for each nonzero u, contractive norm-attaining maps into finite normed spaces with an orthogonal basis imply that every finite-dimensional subspace has an orthogonal basis) is true as written over any valued field; completeness is not needed. Step 1: the induction claim covers every subspace with a basis of length n. N_u(f u)=N(u)>0 gives a target coordinate j that attains the maximum and has c_j(u)≠0. Step 2: def-weil-field gives exactly the inverse that is needed. lambda=c_j/c_j(u) satisfies |lambda(v)|N(u)=|c_j(v)|N_u(w_j)≤N_u(f v)≤N(v). Step 3: H=ker(lambda) inside V, and N(au+h)=max(|a|N(u),N(h)) holds in both directions, including when the two norms are equal. Step 4: h_i=e_i-lambda(e_i)u span H (the difference is lambda(h)u=0) and are independent by their e_i coefficients; n=1 gives H=0. Step 5: the induction hypothesis applies to H with the restricted norm; the decomposition from Step 3 and orthogonality of the basis of H give the formula. Edge cases checked: V=0, dimension 1, trivial absolute value, several attaining coordinates, incomplete k; the non-cartesian norm |a+b xi| with xi in k-hat minus k admits no norming maps, so it is not a counterexample. The only citer, lem-trf-gauss-spectral-coefficient-cartesian step 3, applies the statement literally with W=k_a. This is not a duplicate of lem-trf-cartesian-subspace or lem-trf-cartesian-subspace-scalar-tower, which assume a finite orthogonal ambient space or a scalar tower. The only citation is a definition, so there is no route or tool_uses issue and no cycle. proof_deps equals the union of the uses, and all four search kinds are recorded. BGR is not in literature/, so the proof is correctly marked proof_origin.by=agent and the report lists BGR as WANTED. Advisory: source.place says 'Primary scan read 2026-10-25', which contradicts the report; no step relies on BGR. No fixes."
+ }
+}

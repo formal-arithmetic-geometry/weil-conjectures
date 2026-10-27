@@ -1,0 +1,220 @@
+{
+ "id": "lem-trf-exchange-transport-composition-conjugation",
+ "kind": "statement",
+ "title": "Exchange followed by point transport: composition and change of representative",
+ "statement": "Let $\\mathcal C,\\mathcal B,\\mathcal D$ be categories [def-nagata-category], $F:\\mathcal C\\to\\mathcal B$ and $V:\\mathcal B\\to\\mathcal D$ functors. For integers $r\\geq1$ let $P_r$ and $Q_r$ be endofunctors of $\\mathcal C$ and $\\mathcal B$, respectively. For $m\\geq1$ supply natural isomorphisms $c_m:P_1P_m\\xrightarrow{\\sim}P_{m+1}$ and $t_m:Q_1Q_m\\xrightarrow{\\sim}Q_{m+1}$. Here juxtaposition of functors means composition, the rightmost acting first.\n\nSupply natural transformations $\\iota^{(r)}:V\\to VQ_r$ such that for every $N\\in\\mathcal B$ and $m\\geq1$,\n$$\\iota_N^{(m+1)}=V(t_{m,N})\\circ\\iota_{Q_mN}^{(1)}\\circ\\iota_N^{(m)}.$$\nSupply natural transformations $e_r:Q_rF\\to FP_r$ satisfying, for all $M\\in\\mathcal C$ and $m\\geq1$,\n$$e_{m+1,M}\\circ t_{m,FM}=F(c_{m,M})\\circ e_{1,P_mM}\\circ Q_1(e_{m,M}).$$\nSet $H=VF$ and $\\tau^F_{r,M}=V(e_{r,M})\\circ\\iota^{(r)}_{FM}:H(M)\\to H(P_rM)$. Then $\\tau^F_r$ is natural in $M$, and\n$$\\tau^F_{m+1,M}=H(c_{m,M})\\circ\\tau^F_{1,P_mM}\\circ\\tau^F_{m,M}.$$\n\nMoreover, for any functor $F_d:\\mathcal C\\to\\mathcal B$ and specified natural isomorphism $C:F_d\\xrightarrow{\\sim}F$, define\n$$e^d_{r,M}=C_{P_rM}^{-1}\\circ e_{r,M}\\circ Q_r(C_M),\\qquad \\tau^d_{r,M}=V(e^d_{r,M})\\circ\\iota^{(r)}_{F_dM}.$$\nThen\n$$\\tau^d_{r,M}=V(C_{P_rM}^{-1})\\circ\\tau^F_{r,M}\\circ V(C_M),$$\nand these maps satisfy\n$$\\tau^d_{m+1,M}=(VF_d)(c_{m,M})\\circ\\tau^d_{1,P_mM}\\circ\\tau^d_{m,M}.$$\nNo invertibility of $e_r$ or $\\iota^{(r)}$ and no morphism $P_1M\\to M$ is assumed.\n\nA functor preserves identities and composition. A natural transformation is a family of component maps commuting with every morphism; a natural isomorphism is such a family with invertible components.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "m-th-iterate transport statement: agent-formulated categorical interface for the final naturality calculation and change of compact-support representative, former item steps 3, 6 and 7. The point composition equation is an explicit hypothesis, not a new geometric assertion."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $r\\geq1$ and $f:M\\to N$. Naturality of $e_r$ gives $F(P_r f)\\circ e_{r,M}=e_{r,N}\\circ Q_r(Ff)$; naturality of $\\iota^{(r)}$ gives $V(Q_r(Ff))\\circ\\iota^{(r)}_{FM}=\\iota^{(r)}_{FN}\\circ V(Ff)$. Apply $V$ to the first equality and compose with the second. Functoriality and associativity [def-nagata-category] give $H(P_rf)\\circ\\tau^F_{r,M}=\\tau^F_{r,N}\\circ H(f)$, proving naturality.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "m-th-iterate transport statement: agent-formulated categorical interface for the final naturality calculation and change of compact-support representative, former item steps 3, 6 and 7. The point composition equation is an explicit hypothesis, not a new geometric assertion."
+   }
+  },
+  {
+   "text": "Fix $m\\geq1$ and $M$. Substitute the assumed point composition law into the definition of $\\tau^F_{m+1,M}$, combine the first two factors using functoriality of $V$, and substitute the assumed exchange law. This gives\n$$\\tau^F_{m+1,M}=H(c_{m,M})\\circ V(e_{1,P_mM})\\circ V(Q_1(e_{m,M}))\\circ\\iota^{(1)}_{Q_mFM}\\circ\\iota^{(m)}_{FM}.$$\nNaturality of $\\iota^{(1)}$ at the actual morphism $e_{m,M}:Q_mFM\\to FP_mM$ says\n$$V(Q_1(e_{m,M}))\\circ\\iota^{(1)}_{Q_mFM}=\\iota^{(1)}_{FP_mM}\\circ V(e_{m,M}).$$\nInsert this equality and reassociate [def-nagata-category]. The two adjacent pairs are exactly $\\tau^F_{1,P_mM}$ and $\\tau^F_{m,M}$, yielding the required recurrence.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "m-th-iterate transport statement: agent-formulated categorical interface for the final naturality calculation and change of compact-support representative, former item steps 3, 6 and 7. The point composition equation is an explicit hypothesis, not a new geometric assertion."
+   }
+  },
+  {
+   "text": "For the supplied natural isomorphism $C:F_d\\xrightarrow{\\sim}F$, naturality of $\\iota^{(r)}$ at $C_M:F_dM\\to FM$ is\n$$V(Q_r(C_M))\\circ\\iota^{(r)}_{F_dM}=\\iota^{(r)}_{FM}\\circ V(C_M).$$\nExpand $e^d_{r,M}$ in $\\tau^d_{r,M}$, distribute $V$ over the three-factor composite, and insert this equality. Associativity [def-nagata-category] and the definition of $\\tau^F$ give\n$$\\tau^d_{r,M}=V(C_{P_rM}^{-1})\\circ\\tau^F_{r,M}\\circ V(C_M).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "m-th-iterate transport statement: agent-formulated categorical interface for the final naturality calculation and change of compact-support representative, former item steps 3, 6 and 7. The point composition equation is an explicit hypothesis, not a new geometric assertion."
+   }
+  },
+  {
+   "text": "Put $A_T=V(C_T)$ and $H_d=VF_d$. Functoriality gives $A_T^{-1}=V(C_T^{-1})$ by applying $V$ to both inverse identities. Naturality of $C$ at $c_{m,M}:P_1P_mM\\to P_{m+1}M$ gives\n$$H_d(c_{m,M})\\circ A_{P_1P_mM}^{-1}=A_{P_{m+1}M}^{-1}\\circ H(c_{m,M}).$$\nUsing step 3 twice and cancelling only $A_{P_mM}\\circ A_{P_mM}^{-1}$, associativity [def-nagata-category] gives\n$$H_d(c_{m,M})\\circ\\tau^d_{1,P_mM}\\circ\\tau^d_{m,M}=A_{P_{m+1}M}^{-1}\\circ H(c_{m,M})\\circ\\tau^F_{1,P_mM}\\circ\\tau^F_{m,M}\\circ A_M.$$\nBy step 2 this is $A_{P_{m+1}M}^{-1}\\circ\\tau^F_{m+1,M}\\circ A_M$, which is $\\tau^d_{m+1,M}$ by step 3. All cancellations used components of $C$ alone; $e_r$ and $\\iota^{(r)}$ were used only as morphisms.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "m-th-iterate transport statement: agent-formulated categorical interface for the final naturality calculation and change of compact-support representative, former item steps 3, 6 and 7. The point composition equation is an explicit hypothesis, not a new geometric assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "m-th-iterate transport statement: agent-formulated categorical interface for the final naturality calculation and change of compact-support representative, former item steps 3, 6 and 7. The point composition equation is an explicit hypothesis, not a new geometric assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor with coherent exchange transformations induces coherent transport maps by composition with a natural point transport and this construction is invariant under conjugation by a natural isomorphism",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits:",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given natural transformations iota from V to V Q and e from Q F to F P satisfying composition laws, the maps V(e) iota satisfy the induced composition law and conjugate under replacement of F",
+   "results": "8 hits: CategoryTheory.Quotient.comp_natTransLift, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, CategoryTheory.MorphismProperty.FunctorialFactorizationData.mapZ_comp, AlgebraicTopology.DoldKan.Compatibility.υ_hom_app, CategoryTheory.ReflQuiv.adj.homEquiv_naturality_right, CategoryTheory.conjugateEquiv_comm, CategoryTheory.conjugateEquiv_comp, CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.NatIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'; 0 hits:",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "grep",
+   "query": "transport.*comp|conjug.*natur|equivariant|intertwine",
+   "results": "24 hits: Mathlib/CategoryTheory/Action/Basic.lean, Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Preadditive/HomOrthogonal.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composing a natural transformation V to VQ with an exchange QF to FP preserves the power cocycle and changing F by a natural isomorphism conjugates the resulting maps",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Compatibility.τ₁, AlgebraicTopology.DoldKan.Compatibility.υ, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, AlgebraicTopology.DoldKan.Compatibility.υ_hom_app, AlgebraicTopology.DoldKan.Compatibility.τ₀, AlgebraicTopology.DoldKan.Compatibility.υ_inv_app, CategoryTheory.Quotient.comp_natTransLift, CategoryTheory.Quotient.comp_natTransLift_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "grep",
+   "query": "transport.*comp|conjug.*natur|NatTrans.*comp",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality/interchange ingredients or different constructions, not all clauses of the present statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality/interchange ingredients or different constructions, not all clauses of the present statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition laws for natural exchange and point transport transformations and invariance under conjugation by a natural isomorphism",
+   "results": "8 hits; CategoryTheory.NatTrans.exchange, CategoryTheory.NatTrans.naturality_2, CategoryTheory.NatTrans.naturality_1_assoc, CategoryTheory.NatTrans.naturality_2_assoc, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.NatTrans.naturality_1, CategoryTheory.Functor.Monoidal.transport, CategoryTheory.Cat.Hom.hom_inv_id_toNatTrans_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality/interchange ingredients or different constructions, not all clauses of the present statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations V to V Q_r and Q_r F to F P_r with coherent composition induce coherent transports V F to V F P_r and conjugate under a natural isomorphism F_d to F",
+   "results": "8 hits; AlgebraicTopology.DoldKan.Compatibility.τ₁, AlgebraicTopology.DoldKan.Compatibility.υ, AlgebraicTopology.DoldKan.Compatibility.τ₀, CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, CategoryTheory.Quotient.comp_natTransLift, localCohomology.diagramComp, CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransComp",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality/interchange ingredients or different constructions, not all clauses of the present statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural point transformation followed by a functorial exchange map satisfies a cocycle identity, preserved by natural change of functor",
+   "results": "8 hits; CategoryTheory.PresheafOfGroups.OneCochain.ev_precomp, TopCat.GlueData.MkCore.cocycle, CategoryTheory.PresheafOfGroups.OneCocycle.ev_trans, CategoryTheory.GlueData'.cocycle, CategoryTheory.GlueData.cocycle_assoc, CategoryTheory.GlueData.cocycle, CategoryTheory.GlueData'.cocycle_assoc, CategoryTheory.GlueData.mapGlueData_t",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality/interchange ingredients or different constructions, not all clauses of the present statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-compact-frobenius-transport-composition",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "m-th-iterate compact-support action: naturality at the exchange and conjugation by the specified representative comparison; former item steps 3, 6 and 7",
+   "via": [
+    "lem-trf-compact-frobenius-transport-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-exchange-transport-composition-conjugation",
+  "worker": "stage1",
+  "summary": "Checked all types and assumptions; wrote four explicit elementary naturality and composition calculations. The power recurrence follows from the two supplied composition laws and naturality at e_m. Representative change follows from naturality at C_M; the final recurrence cancels only comparison components. No new nodes or stronger hypotheses. Statement unchanged.",
+  "blueprint": "Realizes the final transport identification in lem-trf-frobenius-operator-compact-description.proof.md through its descendant lem-trf-compact-frobenius-transport-composition: the categorical naturality and change-of-representative calculations formerly labelled steps 3, 6 and 7. The ancestor source itself contains no standalone categorical lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-de9a5c057",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-de9a5c057 (reviewer sub-agent of L); spot-checked: I read the full item (0 new nodes). Live has the item unsplit with no repair note, so this is not a re-split order, and it is not a dropped item. Statement, stmt_deps and blueprint are unchanged from live; only the proof, searches, proof_origin, split_report and status were added. I recomputed all four steps. Step 1: naturality of tau from naturality of e_r at f and of iota^(r) at Ff. Step 2: substitute the iota-law and the e-law, then apply naturality of iota^(1) at e_{m,M}:Q_mFM->FP_mM (the component FP_mM is correct), which gives H(c)tau_1 tau_m. Step 3: naturality of iota^(r) at C_M gives tau^d=V(C^-1)tau V(C). Step 4: naturality of C at c_m gives H_d(c)A^-1=A^-1 H(c), and with steps 2 and 3 this gives the H_d recurrence. All four are correct and genuinely elementary. Typing checks out, including m=1. In the Vect/identity case the identity reduces to commuting central scalars, and it also holds with non-invertible e. The statement matches its use in the parent lem-trf-compact-frobenius-transport-composition steps 3-4. The only citation is def-nagata-category (mathlib, Stacks 0014); it was already the base stmt_dep and is used only for associativity and identities. proof_origin=agent with the blueprint proof file, which has no categorical lemma. No SGA. The DAG has no duplicate of this abstract interface. All three Mathlib search kinds are recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExchangeTransportCompositionConjugation",
+  "declaration": "CategoryTheory.exchange_transport_composition_conjugation",
+  "declarations": [
+   "CategoryTheory.exchangePointTransport",
+   "CategoryTheory.conjugatedExchange",
+   "CategoryTheory.exchange_transport_composition_conjugation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExchangeTransportCompositionConjugation.lean",
+  "statement": "theorem exchange_transport_composition_conjugation (F : C ⥤ B) (V : B ⥤ D) (P : ℕ+ → C ⥤ C) (Q : ℕ+ → B ⥤ B) (c : ∀ m : ℕ+, P m ⋙ P 1 ≅ P (m + 1)) (t : ∀ m : ℕ+, Q m ⋙ Q 1 ≅ Q (m + 1)) (ι : ∀ r : ℕ+, V ⟶ Q r ⋙ V) (e : ∀ r : ℕ+, F ⋙ Q r ⟶ P r ⋙ F) (hι : ∀ (m : ℕ+) (N : B), (ι (m + 1)).app N = (ι m).app N ≫ (ι 1).app ((Q m).obj N) ≫ V.map ((t m).hom.app N)) (he : ∀ (m : ℕ+) (M : C), (t m).hom.app (F.obj M) ≫ (e (m + 1)).app M = (Q 1).map ((e m).app M) ≫ (e 1).app ((P m).obj M) ≫ F.map ((c m).hom.app M)) : (∀ (m : ℕ+) (M : C), (exchangePointTransport F V (ι (m + 1)) (e (m + 1))).app M = (exchangePointTransport F V (ι m) (e m)).app M ≫ (exchangePointTransport F V (ι 1) (e 1)).app ((P m).obj M) ≫ (F ⋙ V).map ((c m).hom.app M)) ∧ (∀ (Fd : C ⥤ B) (a : Fd ≅ F), (∀ (r : ℕ+) (M : C), (exchangePointTransport Fd V (ι r) (conjugatedExchange a (e r))).app M = V.map (a.hom.app M) ≫ (exchangePointTransport F V (ι r) (e r)).app M ≫ V.map (a.inv.app ((P r).obj M))) ∧ (∀ (m : ℕ+) (M : C), (exchangePointTransport Fd V (ι (m + 1)) (conjugatedExchange a (e (m + 1)))).app M = (exchangePointTransport Fd V (ι m) (conjugatedExchange a (e m))).app M ≫ (exchangePointTransport Fd V (ι 1) (conjugatedExchange a (e 1))).app ((P m).obj M) ≫ (Fd ⋙ V).map ((c m).hom.app M)))",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two auxiliary definitions give the actual natural transport and conjugated exchange maps. Naturality of the transport is built into its NatTrans type; the theorem states both recurrence laws and representative conjugacy. Positive indices are PNat, with no degree-zero datum."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e94e265ed",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Node diff vs live = lean only; live had no lean record or module, no repair note. Clause-by-clause match: three categories with six independent universes, F, V, ℕ+-indexed P/Q, c/t as P m ⋙ P 1 ≅ P (m+1), ι : V ⟶ Q r ⋙ V, e : F ⋙ Q r ⟶ P r ⋙ F, hι and he typed and in the node's direction. τ^F = whiskerLeft F ι ≫ whiskerRight e V (component ι_{FM} ≫ V e_M), naturality via the NatTrans type of a real composite. τ^F recurrence ends in (F⋙V).map c. ∀ Fd and ∀ a : Fd ≅ F; conjugatedExchange = Q(a.hom) ≫ e ≫ a.inv_{P M}; conjugation and the τ^d recurrence (Fd⋙V).map c are correct. Statement true by naturality of ι at a.hom and at e_m. No IsIso or extra hypotheses; edge cases m=1, empty C, identity comparison, non-invertible e all fine. lean.statement verbatim; docstrings carry source, blueprint id and the four proof steps; lines ≤100; imports used; autoImplicit false; no name collisions in Mathlib or side-live; defs non-hollow; theorem proof sorry. Report has Worker report and Second reading by Q122. No fix, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261022T142839-L-867696",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.exchange_transport_composition_conjugation"
+  ],
+  "sorry_after": []
+ }
+}

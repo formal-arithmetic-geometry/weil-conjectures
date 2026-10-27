@@ -1,0 +1,306 @@
+{
+ "id": "lem-trf-double-evaluation-finite-components",
+ "kind": "statement",
+ "title": "Finite-support components and inverses for double evaluation",
+ "statement": "Let $R$ be a commutative ring, and let $P,J,I$ be cochain complexes of $R$-modules [def-weil-abstract-derived-category]. Suppose every $P^s$ is finite free (has a finite basis [def-weil-pbc-free-module]), and fix integers $u,\\ell,a,b$ with $a\\le b$, $P^s=0$ for $s>u$, $J^j=0$ for $j<\\ell$, and $I^p=0$ for $p\\notin[a,b]$. No injectivity assumption on $I$ or $J$ is imposed. Use the product total Hom of [def-sc-module-total-hom-complex] and direct-sum tensor totalization of [def-pc-tensor-complex-sheaves], specialized to ordinary modules, with the module tensor product of [def-weil-pbc-module-tensor-product]. Put $H=\\operatorname{Hom}_R^\\bullet(J,I)$, $A=\\operatorname{Hom}_R^\\bullet(P,J)$, $T=\\operatorname{Tot}(H\\otimes_R P)$ and $B=\\operatorname{Hom}_R^\\bullet(A,I)$. For every integer $n$, let $S_n=\\{(p,r,s)\\in\\mathbf Z^3:p+r+s=n,\\ a\\le p\\le b,\\ r\\le-\\ell,\\ s\\le u\\}$. Then $S_n$ is finite, with $n-b+\\ell\\le s\\le u$ and $n-b-u\\le r\\le-\\ell$. The product defining $A^k$ has only $\\ell-k\\le s\\le u$ potentially nonzero factors. The canonical component projections and inclusions give module isomorphisms\n$$T^n\\cong\\bigoplus_{(p,r,s)\\in S_n}\\operatorname{Hom}_R(J^{-r},I^p)\\otimes_R P^s,\\qquad B^n\\cong\\bigoplus_{(p,r,s)\\in S_n}\\operatorname{Hom}_R(\\operatorname{Hom}_R(P^s,J^{-r}),I^p).$$\nUnder these identifications the degree-$n$ signed evaluation map is an isomorphism: its $(p,r,s)$ component is\n$$g\\otimes x\\longmapsto\\bigl(f\\longmapsto(-1)^{s(r+1)}g(f(x))\\bigr).$$\nFor a finite basis $(e_i)$ of $P^s$, define $\\iota_i:J^{-r}\\to\\operatorname{Hom}_R(P^s,J^{-r})$ by $\\iota_i(v)(e_j)=\\delta_{ij}v$. The inverse component sends $\\beta$ to $(-1)^{s(r+1)}\\sum_i(\\beta\\circ\\iota_i)\\otimes e_i$. This asserts invertibility of the specified maps of modules; it makes no assertion about compatibility with differentials or derived morphisms.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n$. For $(p,r,s)\\in S_n$, $s=n-p-r\\ge n-b+\\ell$ and $r=n-p-s\\ge n-b-u$. Hence $S_n$ is a subset of the finite integer box $[a,b]\\times[n-b-u,-\\ell]\\times[n-b+\\ell,u]$. An empty interval gives the empty set; thus this argument also covers degrees with no potentially nonzero term.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  },
+  {
+   "text": "By the total Hom definition, $A^k=\\prod_s\\operatorname{Hom}_R(P^s,J^{s+k})$. A factor is zero if $s>u$ or $s+k<\\ell$. Projection onto $\\ell-k\\le s\\le u$ and extension by zero are mutually inverse linear maps: each omitted coordinate belongs to a zero module. Thus $A^k$ is the finite product over that interval. For any finite family $(M_i)$ the product identifies with its direct sum: $(m_i)\\mapsto\\sum_i\\mathrm{in}_i(m_i)$ and $\\sum_i\\mathrm{in}_i(m_i)\\mapsto(m_i)$ are inverse, coordinate by coordinate.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  },
+  {
+   "text": "Write $h=n-s$. The total Hom definition gives $H^h=\\prod_{p+r=h}\\operatorname{Hom}_R(J^{-r},I^p)$. Projection and zero extension restrict this product to $a\\le p\\le b$, $r\\le-\\ell$; this is finite since $r=h-p$. Apply the cited finite-product tensor isomorphism with $N=P^s$ and these Hom modules (including the empty family). It sends $g\\otimes x$ to $(g_{p,r}\\otimes x)_{p,r}$. The tensor totalization has $T^n=\\bigoplus_{h+s=n}H^h\\otimes_RP^s$. Its nonzero summands require $s\\le u$ and $n-s=h\\le b-\\ell$, hence $s\\ge n-b+\\ell$. Reindex the resulting finite pairs by $(p,r,s)\\in S_n$ and identify finite products with sums by step 2. This gives exactly the asserted isomorphism for $T^n$; all maps are the specified component maps.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  },
+  {
+   "text": "The total Hom definition gives $B^n=\\prod_p\\operatorname{Hom}_R(A^{p-n},I^p)$, with only $a\\le p\\le b$ contributing. In step 2 take $k=p-n$. Denote the projection and zero-coordinate inclusion for its finite factors by $\\pi_s$ and $j_s$. A linear map $\\beta:A^k\\to I^p$ corresponds to $(\\beta\\circ j_s)_s$, with inverse $(\\beta_s)_s\\mapsto\\sum_s\\beta_s\\circ\\pi_s$, since $\\sum_sj_s\\pi_s=1$ and $\\pi_sj_t=\\delta_{st}$. Set $r=n-p-s$. The condition $\\ell-k\\le s\\le u$ is precisely $r\\le-\\ell$, $s\\le u$, and $s+k=-r$. This reindexes the finite family as $S_n$ and yields the stated isomorphism for $B^n$. No interchange of Hom with an infinite product is used.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  },
+  {
+   "text": "Fix a triple in $S_n$ and abbreviate $V=P^s$, $W=J^{-r}$, $U=I^p$, and $\\epsilon=(-1)^{s(r+1)}$. The assignment $(g,x)\\mapsto(f\\mapsto\\epsilon g(f(x)))$ is $R$-bilinear in $(g,x)$, and its value is an $R$-linear map in $f$, by linearity of evaluation and commutativity of $R$. The tensor universal property therefore defines a linear map $C:\\operatorname{Hom}_R(W,U)\\otimes_R V\\to\\operatorname{Hom}_R(\\operatorname{Hom}_R(V,W),U)$ with the asserted formula on pure tensors.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  },
+  {
+   "text": "Choose a finite basis $(e_i)$ of $V$, and write $\\lambda_i:V\\to R$ for its coordinate linear maps, so $x=\\sum_i\\lambda_i(x)e_i$. Define $\\iota_i(v)(x)=\\lambda_i(x)v$; this is linear in $v$ and $x$, and on $e_j$ it is $\\delta_{ij}v$. Consequently $D(\\beta)=\\epsilon\\sum_i(\\beta\\circ\\iota_i)\\otimes e_i$ is a well-defined linear map in $\\beta$, with the stated inverse formula.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  },
+  {
+   "text": "For every $f:V\\to W$, the basis expansion gives $f=\\sum_i\\iota_i(f(e_i))$: evaluating at $x$ gives $\\sum_i\\lambda_i(x)f(e_i)=f(x)$. Hence $C(D(\\beta))(f)=\\epsilon^2\\sum_i\\beta(\\iota_i(f(e_i)))=\\beta(f)$, since $\\epsilon^2=1$ and $\\beta$ is linear. This proves $CD=1$, including an empty basis.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  },
+  {
+   "text": "It remains to check $DC=1$ on pure tensors, which generate the tensor product. For $g:W\\to U$ and $x\\in V$, one has $(C(g\\otimes x)\\circ\\iota_i)(v)=\\epsilon\\lambda_i(x)g(v)$. Therefore $D(C(g\\otimes x))=\\epsilon^2\\sum_i(\\lambda_i(x)g)\\otimes e_i=\\sum_i g\\otimes\\lambda_i(x)e_i=g\\otimes x$, using the balancing relation and the basis expansion. Linearity gives $DC=1$ everywhere.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  },
+  {
+   "text": "Take the direct sum of the component maps $C$ and their inverses $D$ over the finite set $S_n$, and compose with the two identifications from steps 3 and 4. The two compositions are the identity on each coordinate, hence on the whole direct sum. This is the specified signed degree-$n$ evaluation isomorphism with the specified inverse. If $S_n$ is empty both sides are zero. Since $n$ was arbitrary, every asserted degree is covered; neither injectivity nor any calculation with differentials was needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-tensor-finite-product",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "double.*Hom|Hom.*Hom.*tensor|evaluate.*isomorphism",
+   "results": "5 hits; top=['Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean']; subdirectory=Algebra/Homology; note=; digest=33958d91235d256f",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor totalization, ordinary dual-tensor-Hom and evaluation infrastructure do not give this full comparison with its specified map and hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded above finite free P bounded below J bounded I give finite sums of Hom(J,I) tensor P isomorphic to Hom(Hom(P,J),I) in every degree",
+   "results": "0 hits; top=[]; subdirectory=; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"tensor\"",
+   "results": "12 hits; top=['HomologicalComplex.tensorUnit', 'HomologicalComplex.HasGoodTensor₁₂', 'HomologicalComplex.HasGoodTensor₂₃', 'HomologicalComplex.tensorUnitIso', 'HomologicalComplex.HasTensor', 'HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX', 'HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X', 'HomologicalComplex.instHasTensorXTensorUnit_1']; subdirectory=; note=; digest=f561e72761fe3f34",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor totalization, ordinary dual-tensor-Hom and evaluation infrastructure do not give this full comparison with its specified map and hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded above finite free complex P, bounded below complex J and bounded complex I, each degree of total Hom(J,I) tensor P is isomorphic to double Hom(P,J),I by signed evaluation",
+   "results": "8 hits; top=['HomologicalComplex.HasGoodTensor₁₂', 'HomologicalComplex.tensorHom', 'HomologicalComplex.HasGoodTensor₂₃', 'HomologicalComplex.ιTensorObj', 'HomologicalComplex.HasTensor', 'HomologicalComplex.tensorObj', 'HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX', 'HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X']; subdirectory=; note=; digest=87c66eb7fbc5e41a",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor totalization, ordinary dual-tensor-Hom and evaluation infrastructure do not give this full comparison with its specified map and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|lTensorHomEquivHomLTensor",
+   "results": "11 hits; top=['Mathlib/LinearAlgebra/Contraction.lean', 'Mathlib/LinearAlgebra/Contraction.lean', 'Mathlib/LinearAlgebra/Contraction.lean', 'Mathlib/LinearAlgebra/Contraction.lean', 'Mathlib/LinearAlgebra/Contraction.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean']; subdirectory=LinearAlgebra; note=; digest=77117b9c8ac87715",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor totalization, ordinary dual-tensor-Hom and evaluation infrastructure do not give this full comparison with its specified map and hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap\", \"dualTensorHom\"",
+   "results": "2 hits; top=['dualTensorHomEquivOfBasis_toLinearMap', 'toLinearMap_dualTensorHomEquiv']; subdirectory=; note=; digest=493bc05355db6469",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor totalization, ordinary dual-tensor-Hom and evaluation infrastructure do not give this full comparison with its specified map and hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagonal support for double Hom complexes gives invertibility of degreewise double evaluation with finite free terms and explicit finite basis inverse",
+   "results": "8 hits; top=['HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply', 'HomologicalComplex₂.XXIsoOfEq_inv_ιTotal', 'HomologicalComplex.doubleXIso₁', 'HomologicalComplex₂.ofGradedObject_toGradedObject', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'HomologicalComplex.singleMapHomologicalComplex_inv_app_ne', 'HomologicalComplex₂.XXIsoOfEq_hom_ιTotal']; subdirectory=; note=; digest=baf186e4b47852d0",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor totalization, ordinary dual-tensor-Hom and evaluation infrastructure do not give this full comparison with its specified map and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "double.*Hom|Hom.*Hom.*tensor|evaluate.*isomorphism",
+   "results": "5 hits; top=['Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean']; subdirectory=Algebra/Homology; note=; digest=33958d91235d256f",
+   "date": "2026-10-22",
+   "verdict": "no match: returned totalization infrastructure, two-term corepresentability, and ordinary dual-tensor-Hom do not state the finite-support double-evaluation comparison with the specified map and inverse"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite support double Hom complex evaluation finite free terms explicit basis inverse",
+   "results": "8 hits; top=['HomologicalComplex.Hom.isoOfComponents_inv_f', 'Module.DualBases.basis_repr_symm_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'PiTensorProduct.dualDistribEquivOfBasis_symm_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply', 'dualTensorHomEquivOfBasis', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'TensorProduct.dualDistribEquivOfBasis_symm_apply']; subdirectory=; note=; digest=3eca1d8f0dc5d693",
+   "date": "2026-10-22",
+   "verdict": "no match: returned totalization infrastructure, two-term corepresentability, and ordinary dual-tensor-Hom do not state the finite-support double-evaluation comparison with the specified map and inverse"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"tensor\"",
+   "results": "12 hits; top=['HomologicalComplex.tensorUnit', 'HomologicalComplex.HasGoodTensor₁₂', 'HomologicalComplex.HasGoodTensor₂₃', 'HomologicalComplex.tensorUnitIso', 'HomologicalComplex.HasTensor', 'HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX', 'HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X', 'HomologicalComplex.instHasTensorXTensorUnit_1']; subdirectory=; note=; digest=f561e72761fe3f34",
+   "date": "2026-10-22",
+   "verdict": "no match: returned totalization infrastructure, two-term corepresentability, and ordinary dual-tensor-Hom do not state the finite-support double-evaluation comparison with the specified map and inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|lTensorHomEquivHomLTensor",
+   "results": "11 hits; top=['Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/TensorProduct/Associator.lean', 'Mathlib/LinearAlgebra/Contraction.lean', 'Mathlib/LinearAlgebra/Contraction.lean']; subdirectory=LinearAlgebra; note=; digest=6623e53071a1f753",
+   "date": "2026-10-22",
+   "verdict": "no match: returned totalization infrastructure, two-term corepresentability, and ordinary dual-tensor-Hom do not state the finite-support double-evaluation comparison with the specified map and inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded above finite free complex P bounded below J bounded I degreewise Hom(J,I) tensor P isomorphic to Hom(Hom(P,J),I)",
+   "results": "8 hits; top=['HomologicalComplex.HasGoodTensor₁₂', 'HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX', 'HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X', 'HomologicalComplex.HasGoodTensor₂₃', 'HomologicalComplex.ιTensorObj', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'HomologicalComplex.HasTensor', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply']; subdirectory=; note=; digest=a75ce618acb0cfc4",
+   "date": "2026-10-22",
+   "verdict": "no match: returned totalization infrastructure, two-term corepresentability, and ordinary dual-tensor-Hom do not state the finite-support double-evaluation comparison with the specified map and inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagonal support for double Hom complexes gives invertibility of degreewise double evaluation with finite free terms and explicit finite basis inverse",
+   "results": "8 hits; top=['HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply', 'HomologicalComplex₂.XXIsoOfEq_inv_ιTotal', 'HomologicalComplex.doubleXIso₁', 'HomologicalComplex₂.ofGradedObject_toGradedObject', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'HomologicalComplex.singleMapHomologicalComplex_inv_app_ne', 'HomologicalComplex₂.XXIsoOfEq_hom_ιTotal']; subdirectory=; note=; digest=baf186e4b47852d0",
+   "date": "2026-10-22",
+   "verdict": "no match: returned totalization infrastructure, two-term corepresentability, and ordinary dual-tensor-Hom do not state the finite-support double-evaluation comparison with the specified map and inverse"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-evaluation-pseudocoherent",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting bounded case: Tag 0A68 (2), applied to each pseudo-coherent truncation in the proof of Tag 0A69. Extracted auxiliary argument: Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse",
+   "via": [
+    "lem-trf-derived-evaluation-pseudocoherent",
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-double-evaluation-finite-components",
+  "worker": "stage1",
+  "summary": "Expanded Tag 0A68 case (2) into explicit finite-support bounds, projection/zero-extension identifications, finite-product tensor distribution, and two basis calculations proving that the specified signed component maps and inverses compose to the identity. No new node, injectivity assumption, differential assertion, or derived identification is required.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting bounded case: Tag 0A68 (2), applied to each pseudo-coherent truncation in the proof of Tag 0A69. Extracted auxiliary argument: Tag 0A68, lemma-internal-hom-evaluate-isomorphism, proof of case (2): finite-support ranges and maps c_{p,r,s}; finite-free specialization with explicit component inverse; steps 1--4 realize the finite-support argument, and steps 5--9 expand the finite-free component isomorphisms. No change of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-70daec5b6",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-70daec5b6 (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes. Live and side-live both still have it unsplit with an empty proof, and there is no repair note for this item (the re-split note is for the parent, O4 pseudocoherent), so nothing supersedes the delivery. The statement matches base except for two added citations, def-weil-pbc-free-module and def-weil-pbc-module-tensor-product, which are now in stmt_deps; no target is weakened. Source: I read Stacks more-algebra.tex lemma-internal-hom-evaluate-isomorphism (0A68), proof of case (2), with its product identification, components c_{p,r,s} and finite-s argument; the item is its finite-free specialization with explicit inverses. The sign (-1)^{s(r+1)} agrees with lem-trf-double-evaluation-signed-derived-model, since (-1)^{ks} with k=-r-s equals (-1)^{s(r+1)}. Steps: (1) the S_n bounds s>=n-b+l and r>=n-b-u are correct. (2) A^k is nonzero only for l-k<=s<=u, and a finite product equals the direct sum. (3) H^h=prod_{p+r=h}Hom(J^{-r},I^p) is finite for fixed h; lem-weil-pbc-tensor-finite-product applies, including t=0; T^n is bounded by h<=b-l and s<=u. (4) B^n=prod_p Hom(A^{p-n},I^p) with k=p-n; s+k=-r, and s>=l-k is equivalent to r<=-l; only finite Hom/product exchanges are used. (5)-(8) I recomputed CD(beta)=beta using f=sum iota_i(f(e_i)), and DC(g(x)x)=g(x)x using C(g(x)x)o iota_i=eps*lambda_i(x)g plus balancing; eps^2=1. (9) Assembly over the finite S_n is correct. Edge cases checked: R=0, rank 0, I=0 or J=0, empty S_n, a=b, characteristic 2, and the rank-one classical case. Duplicate search: rg -L for Hom(Hom, 0A68, evaluate-isomorphism and dualTensorHom found no node stating the item or the finite-free component iso (zl/ag dual-pairing nodes are different statements). The basis calculations are rightly elementary steps. proof_deps equals the union of the uses. Blueprint from/via and same_as=[] are fine, no SGA is cited, and no tool_uses are needed: the only lemma cited is a Mathlib-status leaf. lean_audit was already absent on base, so it is not a fault of this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DoubleEvaluationFiniteComponents",
+  "declaration": "CochainComplex.DoubleEvaluation.finite_components",
+  "declarations": [
+   "CochainComplex.moduleHom_shapeOfUniverses",
+   "CochainComplex.moduleHom_squareOfUniverses",
+   "CochainComplex.moduleHomComplexOfUniverses",
+   "CochainComplex.DoubleEvaluation.support",
+   "CochainComplex.DoubleEvaluation.tensor",
+   "CochainComplex.DoubleEvaluation.tensor_preservesZeroMorphisms",
+   "CochainComplex.DoubleEvaluation.tensor_obj_preservesZeroMorphisms",
+   "CochainComplex.DoubleEvaluation.sourceComponent",
+   "CochainComplex.DoubleEvaluation.targetComponent",
+   "CochainComplex.DoubleEvaluation.finite_components"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DoubleEvaluationFiniteComponents.lean",
+  "statement": "theorem finite_components (P J I : CochainComplex (ModuleCat.{v} R) ℤ) (u ℓ a b : ℤ) (hab : a ≤ b) (hfree : ∀ s : ℤ, ∃ m : ℕ, Nonempty (Module.Basis (Fin m) R (P.X s))) (hP : ∀ s : ℤ, u < s → Subsingleton (P.X s)) (hJ : ∀ j : ℤ, j < ℓ → Subsingleton (J.X j)) (hI : ∀ p : ℤ, p < a ∨ b < p → Subsingleton (I.X p)) (n : ℤ) : (support u ℓ a b n).Finite ∧ (∀ t : support u ℓ a b n, n - b + ℓ ≤ t.val.2.2 ∧ t.val.2.2 ≤ u ∧ n - b - u ≤ t.val.2.1 ∧ t.val.2.1 ≤ -ℓ) ∧ (∀ k s : ℤ, s < ℓ - k ∨ u < s → Subsingleton (P.X s →ₗ[R] J.X (s + k))) ∧ ∃ eT : (mapBifunctor (moduleHomComplexOfUniverses J I) P (tensor (R := R))).X n ≃ₗ[R] ⨁ t : support u ℓ a b n, sourceComponent P J I t.val, ∃ eB : (moduleHomComplexOfUniverses (moduleHomComplexOfUniverses P J) I).X n ≃ₗ[R] ⨁ t : support u ℓ a b n, targetComponent P J I t.val, ∃ c : ∀ t : support u ℓ a b n, sourceComponent P J I t.val ≃ₗ[R] targetComponent P J I t.val, ∃ E : (mapBifunctor (moduleHomComplexOfUniverses J I) P (tensor (R := R))).X n ≃ₗ[R] (moduleHomComplexOfUniverses (moduleHomComplexOfUniverses P J) I).X n, (∀ (t : support u ℓ a b n) (g : J.X (-t.val.2.1) →ₗ[R] I.X t.val.1) (x : P.X t.val.2.2), eT.symm (DirectSum.lof R _ _ t (g ⊗ₜ[R] x)) = (ιMapBifunctor (moduleHomComplexOfUniverses J I) P (tensor (R := R)) (t.val.1 + t.val.2.1) t.val.2.2 n t.property.1).hom (HomComplex.Cochain.single (ModuleCat.ofHom g) (t.val.1 + t.val.2.1) ⊗ₜ[R] x)) ∧ (∀ (β : (moduleHomComplexOfUniverses (moduleHomComplexOfUniverses P J) I).X n) (t : support u ℓ a b n) (f : P.X t.val.2.2 →ₗ[R] J.X (-t.val.2.1)), (eB β t) f = (β.v (t.val.1 - n) t.val.1 (by omega)).hom (HomComplex.Cochain.single (ModuleCat.ofHom f) (t.val.1 - n))) ∧ (∀ (t : support u ℓ a b n) (g : J.X (-t.val.2.1) →ₗ[R] I.X t.val.1) (x : P.X t.val.2.2) (f : P.X t.val.2.2 →ₗ[R] J.X (-t.val.2.1)), c t (g ⊗ₜ[R] x) f = (t.val.2.2 * (t.val.2.1 + 1)).negOnePow • g (f x)) ∧ (∀ (t : support u ℓ a b n) (ι : Type w) [Fintype ι] (e : Module.Basis ι R (P.X t.val.2.2)), ∃ ιe : ι → J.X (-t.val.2.1) →ₗ[R] (P.X t.val.2.2 →ₗ[R] J.X (-t.val.2.1)), (∀ (i : ι) (v : J.X (-t.val.2.1)) (x : P.X t.val.2.2), ιe i v x = e.repr x i • v) ∧ (∀ β : targetComponent P J I t.val, (c t).symm β = (t.val.2.2 * (t.val.2.1 + 1)).negOnePow • ∑ i : ι, (β.comp (ιe i)) ⊗ₜ[R] e i)) ∧ (∀ (z : (mapBifunctor (moduleHomComplexOfUniverses J I) P (tensor (R := R))).X n) (t : support u ℓ a b n), eB (E z) t = c t (eT z t))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical degreewise linear equivalences are characterized by the source single-cochain inclusions, target coordinate restrictions, signed evaluation, arbitrary finite-basis inverse, and assembly. The explicit tensor bifunctor supplies the ordinary-module specialization of mapBifunctor in independent universes. This node asserts only invertibility of module maps, without differential or derived compatibility. The independent-universe total-Hom helpers are owned by this item module; the proved dependency record and its primary moduleHomComplex declaration are preserved byte-identically to live."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1fa57a27f",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN f8a73d4a. dep def-sc-module-total-hom-complex record is byte-identical to live (proved moduleHomComplex/shape/square kept); the item node differs from live only by the lean field. moduleHom_shapeOfUniverses/squareOfUniverses/moduleHomComplexOfUniverses were moved verbatim into the item module (listed in declarations, docstrings name def-sc-module-total-hom-complex and Tag 0A8H; same Cochain and δ_hom as the live module, universe-generalized only); ModuleHomComplexOfUniverses module dropped (never landed). finite_components signature and docstring unchanged; statement verbatim; 10 declarations match the file; 3 sorry. Re-checked: support = S_n, bounds, A^k vanishing, single-cochain degrees (-r+(p+r)=p, s+(p-n)=-r against Cochain.single being 0 off-degree), sign (s*(r+1)).negOnePow, inverse for every finite basis, E pinned; edge cases covered. No name clash in live. No compile (no file changed)."
+ }
+}

@@ -208,22 +208,39 @@
  },
  "lean": {
   "module": "Sheaf.RingTheory.PartialParametersQuotientDimension",
-  "declaration": "ringKrullDim_quotient_span_initial_parameters",
+  "declaration": "IsLocalRing.ringKrullDim_quotient_initial_parameters",
   "file": "lean/Sheaf/RingTheory/PartialParametersQuotientDimension.lean",
-  "statement": "theorem ringKrullDim_quotient_span_initial_parameters (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (d : ℕ) (hdim : ringKrullDim A = (d : WithBot ℕ∞)) (a : Fin d → A) (ha : ∀ j : Fin d, a j ∈ IsLocalRing.maximalIdeal A) (hrad : (Ideal.span (Set.range a)).radical = IsLocalRing.maximalIdeal A) (i : ℕ) (hi : 1 ≤ i) (hid : i ≤ d) : ringKrullDim (A ⧸ Ideal.span (a '' {j : Fin d | j.val < i})) = ((d - i : ℕ) : WithBot ℕ∞)",
+  "statement": "theorem ringKrullDim_quotient_initial_parameters (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (d : ℕ) (hd : ringKrullDim A = (d : WithBot ℕ∞)) (a : Fin d → A) (ha : ∀ j : Fin d, a j ∈ maximalIdeal A) (hrad : (Ideal.span (Set.range a)).radical = maximalIdeal A) : ∀ (i : ℕ), 1 ≤ i → i ≤ d → ringKrullDim (A ⧸ Ideal.span (a '' {j : Fin d | j.val < i})) = ((d - i : ℕ) : WithBot ℕ∞)",
   "branch": "newtargets-dag",
-  "by": "Q145",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.PartialParametersQuotientDimension deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8130ea229",
-  "group": "Q145",
+  "reviewer": "NT-stage2-cc-89e384bde",
+  "group": "Q72",
   "result": "pass",
-  "note": "Node diff vs side-live is lean only; the 3 stmt_dep copies are unchanged. Clause check vs Stacks 02IE/07DU: Noetherian local nonzero ring (IsLocalRing gives Nontrivial), ringKrullDim A = d, a : Fin d → A in m, radical of span(range a) = m (exponent-0 convention equivalent since J is proper), 1 ≤ i ≤ d, ringKrullDim(A ⧸ span(first i)) = d - i with exact ℕ subtraction. No extra hypotheses or universe restriction; d=0 vacuous. Dep algebra-hom-quotient has status mathlib and no lean record; the tool treats it as stated. No duplicate in Mathlib (regular-sequence equality only) or side-live Sheaf. Docstrings give source places, blueprint id and all 5 proof steps; body is sorry; statement verbatim. nt_compile --json clean, 1.6 s. Advisory: proof-only KrullsHeightTheorem import."
+  "note": "Lean-only re-delivery: the earlier Q145 record was pruned as dead and is restated as IsLocalRing.ringKrullDim_quotient_initial_parameters. Checked clause by clause against Stacks 02IE/07DU and the node: Noetherian, IsLocalRing (nonzero), ringKrullDim A = d, a : Fin d → A in m, radical(span range a) = m (exponent 0 impossible since J ⊆ m), ∀ i with 1 ≤ i ≤ d, ringKrullDim(A ⧸ span(first i)) = d − i (exact natural-number subtraction). No extra hypotheses or universe restriction; d=0 vacuous. No Mathlib or project duplicate (the regular-sequence equality is a different statement); no name collision. Statement verbatim, sorry-only, docstrings give source, blueprint id and 5 proof steps; report sections present. Not recompiled (no FIX). Advisory: proof-only KrullsHeightTheorem import; possible re-pruning if still unreachable."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/PartialParametersQuotientDimension.lean",
+  "module": "Sheaf.RingTheory.PartialParametersQuotientDimension",
+  "declaration": "ringKrullDim_quotient_span_initial_parameters",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

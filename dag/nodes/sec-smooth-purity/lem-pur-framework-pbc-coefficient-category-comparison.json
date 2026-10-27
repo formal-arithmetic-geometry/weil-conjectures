@@ -1,0 +1,316 @@
+{
+ "id": "lem-pur-framework-pbc-coefficient-category-comparison",
+ "kind": "statement",
+ "title": "Framework–PBC coefficient equivalence before smooth purity transport",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. Let $W$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. For each finite intermediate field $E$ of $\\Omega/\\mathbf Q_\\ell$, let $\\mathcal C^s_E(W)$ be the raw rationalization [def-weil-rationalization-karoubi] and $\\mathcal C^p_E(W)$ the raw rationalization [def-weil-pbc-rational-category]. Write $S_{F/E,W}$ for strict-tower scalar extension in the former and $T_{F/E,W}$ for ordinary completed-ring scalar extension followed by rationalization in the latter [prop-weil-pbc-scalar-extension].\n\nThere are canonical exact $E$-linear equivalences $J_{W,E}:\\mathcal C^s_E(W)\\simeq\\mathcal C^p_E(W)$. After the quotient-normalized completed-coefficient presentation identification [def-pur-completed-coefficient-presentation-transport], they are induced by the identity of the common full integral subcategory of [lem-weil-pbc-integral-stratified-perfect-characterization], and send an integral object to itself and $u\\otimes e$ to $u\\otimes e$. Their inverses have the same formulas in that common presentation. Their shift comparisons are induced by the identity of ambient complexes.\n\nThe specified completion maps $\\chi_{F/E}$ of [lem-weil-finite-free-completed-scalar-comparison], together with the ordinary balanced coefficient-presentation comparisons, give exact natural isomorphisms\n$$j_{W,F/E}:J_{W,F}S_{F/E,W}\\xrightarrow{\\sim}T_{F/E,W}J_{W,E},\\qquad j=Q_F(\\chi^{-1})$$\nin the common intrinsic presentation. Here $Q_F$ denotes raw scalar localization. With $a^s$ the specified framework associator [lem-weil-scalar-extension-composition], normalized by the quotient-cocone equation of [lem-fix-scalar-completion-associator], and $a^p$ the tensor associator [prop-weil-pbc-scalar-extension], these maps satisfy\n$$a^p_{M,F,E}\\circ T_{M/F,W}(j_{W,F/E})\\circ j_{W,M/F,S_{F/E,W}K}=j_{W,M/E}\\circ J_{W,M}(a^s_{M,F,E}).$$\nThey respect the specified shift comparisons, the four-field pentagon and the unit comparisons. In particular $S_{E/E,W}$ is identified with the identity by the rationalized inverse completeness map, rather than taken literally to equal the identity; its transport through $J_{W,E}$ is $j_{W,E/E}$, since $T_{E/E,W}=1$.\n\nOn $\\mathcal C_W$ of [def-weil-algebraically-closed-coefficients] and $\\mathcal P_W$ of [def-weil-pbc-qbar-category] there is a canonical exact $\\Omega$-linear equivalence\n$$J_W:\\mathcal C_W\\xrightarrow{\\sim}\\mathcal P_W.$$\nIts object formula is $J_W(E,K)=(E,J_{W,E}K)$. If $u:S_{M/E,W}K\\to S_{M/F,W}L$ represents a morphism, its arrow formula is\n$$J_W[M,u]=[M,j_{W,M/F,L}\\circ J_{W,M}(u)\\circ j_{W,M/E,K}^{-1}].$$\nAt each common field this is a bijection of Hom groups, commuting with further scalar transport; it and its inverse induce inverse maps on the Hom colimits. The equivalence and its inverse preserve finite-stage inclusions up to their specified unit comparisons, shifts and the common-stage distinguished triangles [def-weil-pbc-common-stage-cones]. No Karoubi completion is taken.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+  "place": "Step 2: coefficient-category comparison needed before transporting finite-stage purity; explicit agent-written repair of the framework/PBC interface"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition",
+  "lem-fix-scalar-completion-associator",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-common-stage-cones",
+  "def-fd-coefficient-comparison-datum",
+  "def-pur-inverse-scalar-coherence",
+  "def-pur-hom-linear-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type morphism to Spec k makes W locally Noetherian and compact, hence Noetherian. Apply exists_topologicalKrullDim_le. The cardinality of k0 identifies its characteristic with p, hence so does k; the prime ell distinct from p is nonzero in k. Map this field unit through GammaSpecIso, the structure morphism, and the germ to every stalk. This works also for empty W.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, normalized coefficient comparison before purity transport"
+   }
+  },
+  {
+   "text": "For each E use fdIntegralIdentityRationalEquivalence, retaining its inverse object, tensor, scalar and shift formulas. Uniqueness identifies its CommRing coefficient lift with purCoefficientIso.",
+   "uses": [
+    "lem-fd-integral-identity-rational-equivalence",
+    "def-pur-completed-coefficient-presentation-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, normalized coefficient comparison before purity transport"
+   }
+  },
+  {
+   "text": "Apply fdCompletionInverseScalarCoherence to exactly those stages. Its integral data and scalar lifts form FdFiniteCoefficientComparison. Apply fdNormalizedCommonStageDescent, retaining the equalities of stage and family, and thereby the inverse cocycle, four-field equations, unit and specified chi normalization.",
+   "uses": [
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-common-stage-comparison-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, normalized coefficient comparison before purity transport"
+   }
+  },
+  {
+   "text": "Finite-field linearity is lem-pur-completion-finite-stage-linear. Invert the scalar unit comparison to obtain the forward beta unit. Exactness supplies finite additivity; transport the finite equivalence through finite_functor. Apply fdHomLinearEquivalence to obtain the prescribed Hom-colimit bijections and pair linearity; Mathlib makes the inverse additive and linear.",
+   "uses": [
+    "lem-fd-hom-linear-equivalence",
+    "lem-pur-completion-finite-stage-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, normalized coefficient comparison before purity transport"
+   }
+  },
+  {
+   "text": "Keep the descended forward shift and exactness, and choose the adjunction-induced inverse shift. Mathlib proves exactness of this inverse. Full faithfulness and forward exactness give map_distinguished_iff on precisely the existing common-stage pretriangulations. No Karoubi envelope is used.",
+   "uses": [
+    "lem-fd-common-stage-comparison-descent",
+    "def-weil-pbc-common-stage-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, normalized coefficient comparison before purity transport"
+   }
+  },
+  {
+   "text": "The stage morphism inclusion isomorphism has identity components after the pair-functor equality. Transport the finite rational equivalence through the equality of its source coefficient type, field, algebra and cached category; abstract equality elimination avoids expanding field operations. Compose the included finite counit with the forward inclusion comparison, then cancel the fully faithful pair functor to obtain the inverse inclusion isomorphism. The defining cancellation equation is exactly the required pair counit equation. The forward comparison components are equality transports, so their composite with the included finite counit is heterogeneously that counit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, normalized coefficient comparison before purity transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-fd-integral-identity-rational-equivalence",
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-fd-completion-inverse-scalar-coherence",
+  "lem-fd-common-stage-comparison-descent",
+  "lem-fd-hom-linear-equivalence",
+  "lem-pur-completion-finite-stage-linear",
+  "def-weil-pbc-common-stage-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2 and 4, normalized coefficient comparison before purity transport",
+  "note": "M4: assembly from normalized finite/scalar/common-stage interfaces; proved private categorical inclusion helpers; finite-field linearity split off as a strictly smaller statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completed.*[Ss]calar|[Ss]calar.*completed|[Pp]airCategory|[Ss]tageSystem",
+   "results": "0 hits: ; scope CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completion and ordinary equivalence infrastructure do not compare these two specified derived coefficient diagrams and their common-stage categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free completed coefficient extension compared with ordinary tensor gives an equivalence of algebraically closed coefficient pair categories",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, Algebra.TensorProduct.liftEquiv, AdicCompletion.ofTensorProductEquivOfPiFintype, Algebra.TensorProduct.basisAux",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completion and ordinary equivalence infrastructure do not compare these two specified derived coefficient diagrams and their common-stage categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity between integral constructible complete categories rationalizes to equivalences and inverse finite free completion maps induce a coherent equivalence between strict tower and ordinary scalar common stage categories",
+   "results": "8 hits: instIsEquivalenceFGModuleCatUlift, ModuleCat.extendScalarsComp, FGModuleRepr.instIsEquivalenceFGModuleCatEmbed, TensorProduct.toIntegralClosure_bijective_of_tower, FGAlgCat.fullyFaithfulUliftFunctor, ModuleCat.homEquiv_extendScalarsComp, FGModuleCat.fullyFaithfulULift, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completion and ordinary equivalence infrastructure do not compare these two specified derived coefficient diagrams and their common-stage categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Equivalence.functor, CategoryTheory.Equivalence.inverse, CategoryTheory.Functor.asEquivalence, CategoryTheory.Equivalence.functorFunctor, CategoryTheory.Equivalence.symm_functor, CategoryTheory.Equivalence.symm_inverse, CategoryTheory.Equivalence.congrLeft, CategoryTheory.Equivalence.congrRight",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completion and ordinary equivalence infrastructure do not compare these two specified derived coefficient diagrams and their common-stage categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse completion maps with scalar associators induce exact linear equivalences on filtered common field categories of constructible adic complexes",
+   "results": "8 hits: AdicCompletion.map_exact, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.congr_symm_apply, AdicCompletion.ofLinearEquiv_symm_of, AdicCompletion.ofLinearEquiv, AdicCompletion.congr, AdicCompletion.congr_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completion and ordinary equivalence infrastructure do not compare these two specified derived coefficient diagrams and their common-stage categories"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProductEquivOfFiniteNoetherian|def ofLinearEquiv",
+   "results": "6 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean; scope RingTheory/AdicCompletion",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completion and ordinary equivalence infrastructure do not compare these two specified derived coefficient diagrams and their common-stage categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An identity of integral constructible categories rationalizes to an exact equivalence and coherent inverse completion maps induce an equivalence of common finite coefficient pair categories",
+   "results": "{\"t\": \"2026-10-23T10:32:50Z\", \"tool\": \"leanfinder\", \"query\": \"An identity of integral constructible categories rationalizes to an exact equivalence and coherent inverse completion maps induce an equivalence of common finite coefficient pair categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsEquivalenceLightDiagramLightProfiniteLightDiagramToLightProfinite\", \"instIsEquivalenceLightProfiniteLightDiagramLightProfiniteToLightDiagram\", \"Condensed.profiniteSolidCounit\", \"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁\", \"AlgebraicTopology.DoldKan.Compatibility.τ₀\", \"AlgebraicTopology.DoldKan.Compatibility.υ\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\"], \"digest\": \"b00ad1a2f3ba42fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic equivalence/filtering APIs and ordinary finite-module adic completion do not state the normalized comparison of these derived coefficient systems and their literal pair categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-23T10:32:51Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Equivalence, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.functor\", \"CategoryTheory.Equivalence.inverse\", \"CategoryTheory.Functor.asEquivalence\", \"CategoryTheory.Equivalence.functorFunctor\", \"CategoryTheory.Equivalence.symm_functor\", \"CategoryTheory.Equivalence.symm_inverse\", \"CategoryTheory.Equivalence.congrLeft\", \"CategoryTheory.Equivalence.congrRight\"], \"digest\": \"cb7da5191ba03e4a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic equivalence/filtering APIs and ordinary finite-module adic completion do not state the normalized comparison of these derived coefficient systems and their literal pair categories"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*scalar|scalar.*completed|pseudonatural|PairCategory",
+   "results": "{\"t\": \"2026-10-23T10:32:51Z\", \"tool\": \"grep\", \"query\": \"completed.*scalar|scalar.*completed|pseudonatural|PairCategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Core.lean\", \"Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean\"], \"digest\": \"19a5b585506e9880\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic equivalence/filtering APIs and ordinary finite-module adic completion do not state the normalized comparison of these derived coefficient systems and their literal pair categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent family of equivalences between finite coefficient categories induces an exact equivalence on the filtered common stage category",
+   "results": "{\"t\": \"2026-10-23T10:32:52Z\", \"tool\": \"leansearch\", \"query\": \"A coherent family of equivalences between finite coefficient categories induces an exact equivalence on the filtered common stage category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.precoherent\", \"CategoryTheory.IsFiltered.of_equivalence\", \"CategoryTheory.IsSifted.isSifted_of_equiv\", \"CategoryTheory.IsCardinalFiltered.of_equivalence\", \"CategoryTheory.effectiveEpiFamilyStructOfEquivalence_aux\", \"CategoryTheory.IsFilteredOrEmpty.of_equivalence\", \"CategoryTheory.Functor.instReflectsEffectiveEpiFamiliesOfIsEquivalence\", \"CategoryTheory.precoherentEffectiveEpiFamilyCompEffectiveEpis\"], \"digest\": \"fb0c10c053fcaeb7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic equivalence/filtering APIs and ordinary finite-module adic completion do not state the normalized comparison of these derived coefficient systems and their literal pair categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse maps from derived completion compare ordinary finite free coefficient tensor extension to completed strict tower scalar extension compatibly with associators and units",
+   "results": "{\"t\": \"2026-10-23T10:37:31Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse maps from derived completion compare ordinary finite free coefficient tensor extension to completed strict tower scalar extension compatibly with associators and units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_naturality\", \"AdicCompletion.ofTensorProduct_tmul\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"b35922122ea16a1a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic equivalence/filtering APIs and ordinary finite-module adic completion do not state the normalized comparison of these derived coefficient systems and their literal pair categories"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProductEquivOfFiniteNoetherian|extendScalarsComp",
+   "results": "{\"t\": \"2026-10-23T10:37:31Z\", \"tool\": \"grep\", \"query\": \"ofTensorProductEquivOfFiniteNoetherian|extendScalarsComp\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\"], \"digest\": \"66ffbdc7fe81eb7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic equivalence/filtering APIs and ordinary finite-module adic completion do not state the normalized comparison of these derived coefficient systems and their literal pair categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-common-stage-smooth-operation-identification",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Step 2: before transporting the E-stage purity isomorphism, compare the strict-tower framework coefficient pair category with the ordinary-tensor PBC pair category",
+   "via": [
+    "lem-pur-common-stage-smooth-operation-identification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-framework-pbc-coefficient-category-comparison",
+  "worker": "stage1",
+  "summary": "Reused the existing normalized integral identity/rational equivalence, inverse completion coherence, Hom-colimit equivalence and triangle-reflection nodes. Checked allowed-scheme hypotheses, the quotient-cocone associator normalization, nonliteral strict-tower units, localized naturality and reverse exactness. No statement change and no new nodes.",
+  "blueprint": "Ancestor thm-pur-rational-and-qbar-purity, Step 2 coefficient-category identification before finite-stage purity transport, as retained in blueprint.from. Current latest sk-thm-purity-transport proof Steps 2 and 4 provide the corresponding integral-model/rational/finite-field compatibility interface.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian permanence, used only to verify the domain of the coefficient comparison; the purity unit does not supply this geometric tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-type dimension bound, used only to verify the common integral-category hypotheses."
+   },
+   {
+    "node": "lem-fd-integral-identity-rational-equivalence",
+    "why": "Generic normalized comparison of the same two coefficient categories, independent of Fourier operations; supplies the integral and rational equivalences needed before purity transport."
+   },
+   {
+    "node": "lem-fd-completion-inverse-scalar-coherence",
+    "why": "Generic inverse-completion scalar cocycle for these coefficient systems, independent of Fourier operations; reused instead of creating a duplicate purity-specific node."
+   },
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "Generic quotient-cocone normalization of strict-tower scalar associativity, required to use the actual associator named by the item."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic extension of semilinear functors, comparison equations and exactness under raw scalar localization."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic natural finite-free completion comparison, used for the actual equal-field completeness map."
+   },
+   {
+    "node": "lem-fd-normalized-integral-completion-comparison",
+    "why": "Generic exact shift-compatible normalized completion comparison, including every integer shift and the actual quotient-cocone map; no Fourier operation is used."
+   },
+   {
+    "node": "lem-fd-hom-linear-equivalence",
+    "why": "Generic Hom-colimit comparison for the literal two coefficient pair categories with a supplied coherent finite-stage equivalence; no purity route is replaced."
+   },
+   {
+    "node": "lem-fd-shift-triangle-reflection",
+    "why": "Generic descent of shifts and triangle reflection for the same coefficient pair categories; supplies reverse exactness without a duplicate node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-fd-integral-identity-rational-equivalence",
+  "lem-fd-completion-inverse-scalar-coherence",
+  "lem-fd-hom-linear-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-013ae9ed2",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-013ae9ed2 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full. There are no new nodes, and the statement and stmt_deps are unchanged against live, which is still unsplit; this is not a re-split and not superseded. Step 1: finite-type-over-Noetherian plus the finite-type dimension node, with Spec k Noetherian and ℓ a unit, make W allowed. Step 2: lem-fd-integral-identity-rational-equivalence's statement gives J_{W,E}, the K↦K and u⊗x formulas, the inverse formulas, the identity shifts, and the quotient-normalized presentation. Step 3: lem-fix-scalar-completion-associator's equation is the same χ-conjugation normalization that lem-fd-completion-inverse-scalar-coherence assumes; I rechecked the rearrangement and the naturality move. That node gives j=Q(χ⁻¹), the item's exact three-field cocycle, the four-field and unit equations, and shifts. Step 4: χ_{E/E} is the completeness unit, with shift equations in all degrees. Steps 5–6: the fd Hom-linear and shift-triangle-reflection hypotheses are met; they give the arrow formula verbatim, the Hom-colimit bijections, essential surjectivity, Ω-linearity, inclusions, and triangle preservation and reflection with the common-stage cone third arrow. No cycle. Batch-5: all three flagged fd citations reach only lem-pod-derived-exact-square-composition, a generic abstract derived exact-square coherence lemma that is no step of Poincaré duality or the trace formula, so they are accepted. Ten tool_uses accepted; no SGA. Advisory: the pre-existing item restates paragraphs 1–3 of lem-fd-rational-coefficient-category-comparison for T=W."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurFrameworkPbcCoefficientCategoryComparison",
+  "declaration": "WeilConjectures.purFrameworkPbcCoefficientCategoryComparison",
+  "file": "lean/Sheaf/Paper/PurFrameworkPbcCoefficientCategoryComparison.lean",
+  "statement": "theorem purFrameworkPbcCoefficientCategoryComparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (W : Over (Spec (.of D.k))) [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom] : ∃ (hN : IsNoetherian W.left) (hD : Fact (∃ n : ℕ, topologicalKrullDim W.left ≤ n)) (hI : Fact (∀ x : W.left, IsUnit (l : W.left.presheaf.stalk x))), (fun [nW : IsNoetherian W.left] [dW : Fact (∃ n : ℕ, topologicalKrullDim W.left ≤ n)] [iW : Fact (∀ x : W.left, IsUnit (l : W.left.presheaf.stalk x))] ↦ ∃ C : FdCoefficientComparison l Ω W.left, (∀ E : Padic.FiniteCoefficientFields l Ω, (∀ K : pbcStageCategory l Ω W.left E, (C.stage E).rational.inverse.obj K = ⟨(C.stage E).integral.inverse.obj K.obj⟩) ∧ (∀ (K H : pbcIntegralStage l Ω W.left E) (a : Localization.Away (pbcStageUniformizer.{u} l Ω E)) (f : K ⟶ H), HEq ((C.stage E).rational.inverse.map (fdRawTensor (pbcStageUniformizer.{u} l Ω E) a f)) (fdRawTensor (Padic.coefficientExtensionUniformizer l (pbcFiniteField.{u} l Ω E)) ((sfRationalCoefficientEquiv l (pbcFiniteField.{u} l Ω E)).symm (pbcRationalCoefficientEquiv l (pbcFiniteField.{u} l Ω E) a)) ((C.stage E).integral.inverse.map f))) ∧ (∀ (K H : pbcStageCategory l Ω W.left E) (a : Localization.Away (pbcStageUniformizer.{u} l Ω E)) (f : K ⟶ H), (C.stage E).rational.inverse.map (fdRawScale (pbcStageUniformizer.{u} l Ω E) a f) = fdRawScale (Padic.coefficientExtensionUniformizer l (pbcFiniteField.{u} l Ω E)) ((sfRationalCoefficientEquiv l (pbcFiniteField.{u} l Ω E)).symm (pbcRationalCoefficientEquiv l (pbcFiniteField.{u} l Ω E) a)) ((C.stage E).rational.inverse.map f)) ∧ (∃ si : (C.stage E).integral.inverse.CommShift ℤ, (fun [inverseIntegralShift : (C.stage E).integral.inverse.CommShift ℤ] [inverseRationalShift : (C.stage E).rational.inverse.CommShift ℤ] ↦ (∀ (n : ℤ) (K : pbcIntegralStage l Ω W.left E), HEq ((C.stage E).rational.inverse.map (((pbcStageLocalization l Ω W.left E).commShiftIso n).hom.app K) ≫ ((C.stage E).rational.inverse.commShiftIso n).hom.app ((pbcStageLocalization l Ω W.left E).obj K)) ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) W.left).map (((C.stage E).integral.inverse.commShiftIso n).hom.app K) ≫ ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) W.left).commShiftIso n).hom.app ((C.stage E).integral.inverse.obj K))) ∧ (∀ (n : ℤ) (K : pbcIntegralStage l Ω W.left E), HEq ((sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) W.left).ι.map (((C.stage E).integral.inverse.commShiftIso n).hom.app K) ≫ ((sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) W.left).ι.commShiftIso n).hom.app ((C.stage E).integral.inverse.obj K)) ((pbcDerivedRestrict (purCoefficientIso l (pbcFiniteField.{u} l Ω E) W.left).inv).map (((pbcStageInclusion l Ω W.left E).commShiftIso n).hom.app K) ≫ (((pbcRestrict (purCoefficientIso l (pbcFiniteField.{u} l Ω E) W.left).inv) |>.mapDerivedCategory).commShiftIso n).hom.app K.obj))) (inverseIntegralShift := si) (inverseRationalShift := (C.stage E).inverse_exact)) ∧ (C.stage E).integral.inverse ⋙ (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) W.left).ι = pbcStageInclusion l Ω W.left E ⋙ pbcDerivedRestrict (purCoefficientIso l (pbcFiniteField.{u} l Ω E) W.left).inv) ∧ (∀ E, (C.family.Φ E).Linear E.val) ∧ FdInverseScalarCoherence C.family ∧ (∀ (E : Padic.FiniteCoefficientFields l Ω) (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω W.left E), HEq ((C.family.β (le_refl E)).inv.app K) ((C.family.Φ E).map ((GeneralAlgebraicallyClosedCoefficients.unitor l Ω W.left E).hom.app K))) ∧ C.equivalence.functor.Linear Ω ∧ C.equivalence.inverse.Linear Ω ∧ C.equivalence.inverse.Additive ∧ (fun [inversePairShift : C.equivalence.inverse.CommShift ℤ] ↦ C.equivalence.toAdjunction.CommShift ℤ) (inversePairShift := C.pair_inverse_shift) ∧ (∀ A : Triangle (generalAlgebraicallyClosedConstructibleCategory l Ω W.left), C.equivalence.functor.mapTriangle.obj A ∈ distTriang (pbcQbarCategory l Ω W.left) ↔ A ∈ distTriang (generalAlgebraicallyClosedConstructibleCategory l Ω W.left)) ∧ (∃ he : ∀ E, (C.family.Φ E).IsEquivalence, (fun [eqv : ∀ E, (C.family.Φ E).IsEquivalence] ↦ FdHomLinearEquivalence l Ω W.left C.family) (eqv := he)) ∧ (∀ E, ∃ R : pbcStageCategory l Ω W.left E ⥤ GeneralAlgebraicallyClosedCoefficients.Stage l Ω W.left E, HEq R (C.stage E).rational.inverse ∧ ∃ α : (pbcScalarSystem l Ω W.left dW.out iW.out).ι E ⋙ C.equivalence.inverse ≅ R ⋙ (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω W.left).ι E, ∀ K, ∃ ε : C.equivalence.functor.obj (((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω W.left).ι E).obj (R.obj K)) ≅ ((pbcScalarSystem l Ω W.left dW.out iW.out).ι E).obj K, HEq ε.hom (((pbcScalarSystem l Ω W.left dW.out iW.out).ι E).map ((C.stage E).rational.counitIso.hom.app K)) ∧ C.equivalence.functor.map (α.hom.app K) ≫ ε.hom = C.equivalence.counitIso.hom.app (((pbcScalarSystem l Ω W.left dW.out iW.out).ι E).obj K))) (nW := hN) (dW := hD) (iW := hI)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Specializes the existing normalized raw coefficient comparison to separated finite-type schemes over the geometric base field. Repair of return L at 56794a1fe72f: the item module is byte-identical to the returned version. The two plain Prop definitions have new definition-node records with existing:true on their unchanged published modules; the corresponding theorem nodes occur only in proof_deps. No declaration is moved, duplicated or renamed, and no hypothesis or conclusion changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eedbeeebe",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Re-delivery after return 5679 (H2). Item Lean byte-identical (sha a54a…). stmt_deps now cite new def nodes def-pur-inverse-scalar-coherence and def-pur-hom-linear-equivalence (existing:true on unchanged FdCompletionInverseScalarCoherence.lean:48 and FdHomLinearEquivalence.lean:64; both statements verbatim). Theorem nodes stay in proof_deps. Both predicate bodies checked clause by clause against the node statements (three-field cocycle, both four-field contractions; mapAt/preimage formulas, transport, Ω-linear Hom maps, essential surjectivity, equivalence and counit for every choice of preimages, inclusions). No other owner in live. Source file exists. Item re-read: hypotheses not stronger, j=Q(χ⁻¹) pinned via datum, unitor HEq, triangle iff, counit-normalized inclusions, no Karoubi, single sorry, docstrings and report sections present. No compile needed (no change). Advisory: base-era decls from nodes outside stmt_deps (pbcScalarSystem, pbcRationalCoefficientEquiv, purCoefficientIso); predicate docstrings keep lem-fd blueprint tags; item restates lem-fd-rational-coefficient-category-comparison at T=W."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T002021-L-50065",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

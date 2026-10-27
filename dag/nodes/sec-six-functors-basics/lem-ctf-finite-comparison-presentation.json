@@ -64,12 +64,13 @@
    "elementary": false
   },
   {
-   "text": "Build the strong monoidal structure with Mathlib's CoreMonoidal.mk' constructor from the normalized tensor and unit isomorphisms and coherence of the proved public section-tensor-comparison theorem. First prove existence of the coherent ordinary monoidal structure in a private lemma, then select it through that small interface. Only existence of the strong monoidal structure is needed for finite-Tor transport. Compose it with normalized ring-isomorphism tensor transport and constant scalar restriction. Equivalence preserves and reflects flatness, so the coefficient-model flat-complex criterion and the derived tensor transport identify the same finite Tor intervals.",
+   "text": "Build the strong monoidal structure with Mathlib's CoreMonoidal.mk' constructor from the normalized tensor and unit isomorphisms and coherence of the proved public section-tensor-comparison theorem. First prove existence of the coherent ordinary monoidal structure in a private lemma, then select it through that small interface. Only existence of the strong monoidal structure is needed for finite-Tor transport. Compose it with normalized ring-isomorphism tensor transport and constant scalar restriction. Equivalence preserves and reflects flatness, so the coefficient-model flat-complex criterion and the derived tensor transport identify the same finite Tor intervals. Fix EssentiallySmall at universe u+1 explicitly in the private pro-etale site-monoidal helper. A private local canonical site-size instance supplies this coefficient universe throughout the private proofs and is enabled locally for the final theorem. This avoids the unconstrained maximum in the imported scalarReductionSiteSmall instance without changing its registration. Retain the integral-operations import so existing import-all consumers keep their instance names. The completed general helper proofs are separated into FiniteComparisonPresentationSupport; the section-monoidal existence witness is its proved public lemma lem-ctf-section-monoidal-exists. The item retains the five private helper entry points used by existing consumers.",
    "uses": [
     "lem-pe-internal-section-tensor-comparison",
     "lem-sfb-ring-isomorphism-tensor-transport",
     "lem-sfb-constant-scalar-restriction-tensor",
-    "lem-pe-coefficient-tor-flat-model"
+    "lem-pe-coefficient-tor-flat-model",
+    "lem-ctf-section-monoidal-exists"
    ],
    "elementary": false
   },
@@ -97,12 +98,13 @@
   "lem-sfb-ring-isomorphism-tensor-transport",
   "lem-sfb-constant-scalar-restriction-tensor",
   "lem-pe-coefficient-tor-flat-model",
-  "det-def-sfb-constructible-local-model"
+  "det-def-sfb-constructible-local-model",
+  "lem-ctf-section-monoidal-exists"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
-  "place": "opening coefficient-presentation paragraph; explicit equivalences, direct covering-sieve comparison, finite presentations and tensor transport by J9"
+  "place": "opening coefficient-presentation paragraph; explicit equivalences, direct covering-sieve comparison, finite presentations and tensor transport by J9; E3 restores the quarantined proof and specializes site size with a private local canonical instance; completed general helpers are separated into FiniteComparisonPresentationSupport"
  },
  "mathlib_searches": [
   {
@@ -211,14 +213,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J9",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261022T013423-L-3571527",
+  "landing": "20261026T152357-L-1102031",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

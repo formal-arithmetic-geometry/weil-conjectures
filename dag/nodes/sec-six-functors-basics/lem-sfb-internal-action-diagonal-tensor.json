@@ -1,0 +1,163 @@
+{
+ "id": "lem-sfb-internal-action-diagonal-tensor",
+ "kind": "statement",
+ "title": "Diagonal tensor under an internal action-site presentation",
+ "statement": "Let (C,J) be a small site with finite limits, K a sheaf of groups, R a commutative ring sheaf, and P a Presentation K J hJ R [lem-sfb-internal-action-site-presentation]. For every two equivariant module sheaves M and N [def-sfb-equivariant-module-sheaves], their tensor corresponds under P to the base module sheaf tensor [def-pur-sheaf-tensor-product] with action a(x tensor y) = ax tensor ay. Both the underlying tensor identification and the action-site tensor identification commute with the actual sheafification images of pure tensors. Precisely, InternalDiagonalTensor J hJ K R P [def-sfb-internal-restriction-module-tensor-data] holds.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+ },
+ "stmt_deps": [
+  "lem-sfb-internal-action-site-presentation",
+  "def-sfb-equivariant-module-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-internal-restriction-module-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "For $K$-equivariant modules form the presheaf $P(U)=M(U)\\otimes_{R(U)}N(U)$ and define $a(x\\otimes y)=ax\\otimes ay$. Linearity of each group operation makes this well defined on the balancing relations; its inverse is the operation of $a^{-1}$. Identity and composition follow on pure tensors, which generate [def-weil-pbc-module-tensor-product]. Along $(f,a):V\\to U$ in the action site the tensor restriction is therefore $x\\otimes y\\mapsto(a f^*x)\\otimes(a f^*y)$. By [def-pur-sheaf-tensor-product] the action-site tensor is the module sheafification of exactly this presheaf. The sheafification assertion of [lem-sfb-internal-action-site-presentation] identifies its underlying sheaf with the base tensor sheaf and its action with the induced diagonal action. This also applies to $L$ and to trivial actions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+   }
+  },
+  {
+   "text": "The baseComparison and siteComparison of P commute with the respective sheafification units. Consequently the two induced tensor isomorphisms carry the displayed presheaf pure tensors to the specified sheaf pure tensors. These unit equations give both clauses of InternalDiagonalTensor, including the exact section map internalPresentationSection.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "def-sfb-internal-restriction-module-tensor-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-internal-action-site-presentation",
+  "def-sfb-internal-restriction-module-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module sheaf tensor product with diagonal internal group action and action-site sheafification",
+   "results": "PresheafOfModules.Monoidal.tensorObj; PresheafOfModules.sheafify; PresheafOfModules.sheafification; Cartesian sheaf tensor is a different tensor.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal tensor product on sheaves of modules with natural internal group sheaf actions",
+   "results": "PresheafOfModules.Monoidal.tensorObj and tensorObj_obj; LightCondensed monoidal sheafification, not the arbitrary internal-action site comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj|tensorObj_map_tmul in Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; InternalDiagonalTensor in lean/Sheaf and lean/WeilConjectures",
+   "results": "Sectionwise tensor maps and their pure-tensor equations exist in Mathlib. The diagonal action comparison for Presentation is only specified in the assigned item, not proved elsewhere.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalRestrictionModuleTensor",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor. Diagonal tensor under an internal action-site presentation.",
+   "via": [
+    "lem-sfb-internal-restriction-module-tensor",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalActionDiagonalTensor",
+  "file": "lean/Sheaf/CategoryTheory/InternalActionDiagonalTensor.lean",
+  "declaration": "CategoryTheory.InternalActionSite.internalActionDiagonalTensor",
+  "statement": "theorem internalActionDiagonalTensor [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (K : Cᵒᵖ ⥤ GrpCat.{u}) (hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u})) (R : Sheaf J.toGrothendieck CommRingCat.{u}) (P : Presentation K J hJ R) : InternalDiagonalTensor J hJ K R P",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-internal-action-diagonal-tensor",
+  "worker": "stage3",
+  "summary": "Strict subargument extracted from the assigned six-step proof, with a matching standalone Lean theorem and complete source proof.",
+  "blueprint": "Agent-written internal-action infrastructure for direct-image paragraph (3), as recorded by lem-sfb-internal-restriction-module-tensor.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-module-tensor-product",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd0c6",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T081855-L-2094745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd0c6",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T081855-L-2094745",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); 7 extracted defs vs clone item (verbatim); 3 sorry statements vs their nodes and the item plan steps 1-6; Presentation.inverse_morphisms vs node lem-sfb-internal-action-site-presentation and its importers"
+ }
+}

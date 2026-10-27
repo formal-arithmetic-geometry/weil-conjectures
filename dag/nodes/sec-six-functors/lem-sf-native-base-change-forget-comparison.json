@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-native-base-change-forget-comparison",
+ "kind": "statement",
+ "title": "Forgetting the specified native derived base-change mate",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell$, and the native adic and Weil module categories of [def-sf-native-weil-derived-framework]. For a commutative square of $k_0$-morphisms $v:Z'\\to Z$, $p':Z'\\to T'$, $p:Z\\to T$, $g:T'\\to T$, with $vp=p'g$ in diagrammatic notation, let $\\beta^W:g^*Rp_*\\to Rp'_*v^*$ be the mate [def-weil-pbc-adjunction-mate] of the native pullback composition isomorphism in the ordinary derived categories. Let $\\beta^A$ be the corresponding geometric native mate, constructed in [lem-sf-geometric-native-proper-base-change], on the square after base change to the fixed algebraic closure. Write $U_S$ for derived forgetting, $c_s:U_{T'}g^*Rp_*\\cong\\bar g^*R\\bar p_*U_Z$ and $c_t:U_{T'}Rp'_*v^*\\cong R\\bar p'_*\\bar v^*U_Z$ for the comparisons assembled from exact pullback forgetting and the unit-normalized right-derived forgetting isomorphism. Then for every $K\\in D(\\mathcal W_Z)$,\n$$U_{T'}(\\beta^W_K)=c_{t,K}^{-1}\\,\\beta^A_{U_ZK}\\,c_{s,K}.$$\nThe two adjunctions are the existing derived adjunctions of the actual native abelian operations; the square map is the localized native compositor. No properness, Cartesian condition, constructibility, boundedness or separatedness hypothesis occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Forgetting the Weil structure; parent native natural base change, steps 1--4"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-geometric-native-proper-base-change"
+ ],
+ "proof": [
+  {
+   "text": "For a single morphism, the actual abelian forgetting comparisons are identity on carriers, and the native counit is the geometric counit. Adjunction transposition proves that the direct-image comparison is the mate of the inverse pullback comparison. Apply the canonical right-derived exact-forgetting mate theorem; the native derived direct-image comparison has exactly its four-factor normalization.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-fixed-pair-adjunction-lift",
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-sf-derived-exact-forget-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep the four canonical abelian pullback-forgetting comparisons as explicit faces. For abstract iso-algebra transport, the two composition identities follow from the identity composition laws. Specialize these natural-transformation identities to native pullback; congruence is equality transport. The geometricFiberMap composition comparisons paste to the geometric square comparison, by functoriality of equality transport and proof irrelevance. Pasting these identities gives the abelian cube. Apply exactCube localization; its six faces are the four pullback-forgetting comparisons, the native pullback square and the geometric pullback square. The localization conversion is proved abstractly, including symmetry of localized square isomorphisms, before specializing to the native categories. Its input is the natural-transformation cube, so no evaluation of the native sheaf constructions is required. Construction equalities identify its faces with the unchanged public comparisons.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-fix-site-open-exchange-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved exchange mate cube to the four specified derived adjunctions and the commuting localized pullback cube. Replace the two vertical mates by their canonical pushForget comparisons using step 1. Expand sourceComparison and targetComparison and cancel the invertible targetComparison. This is the asserted equality of components for arbitrary K.",
+   "uses": [
+    "lem-weil-pbc-exchange-mate-cube",
+    "lem-sf-geometric-native-proper-base-change",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-sf-derived-exact-forget-mate",
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "lem-fix-site-open-exchange-localization",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-sf-geometric-native-proper-base-change",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Forgetting the Weil structure; W2 reduction to a single-morphism derived mate theorem and proved exact/mate cube calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting Frobenius equivariance carries the canonical unbounded derived base change mate to the underlying sheaf base change mate",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism_mate, SheafOfModules.forget_map and other ordinary forgetful-functor facts; no derived fixed-pair mate comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryRightDerivedAdjunction\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adicDerivedBaseChange|forget_mate|geometric_proper_baseChange",
+   "results": "0 hits in Mathlib. Separate rg searches read the native source adjunction and composition constructions and found no derived native base-change theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeProperNaturalBaseChange",
+  "date": "2026-10-26",
+  "group": "M1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Forgetting the Weil structure; parent native natural base change, steps 1--4; blueprint_refs search for forgetting Weil and native proper found no matching node.",
+   "via": [
+    "lem-sf-native-weil-proper-natural-base-change",
+    "lem-sf-native-weil-compact-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeBaseChangeForgetComparison",
+  "file": "lean/Sheaf/WeilSheaf/NativeBaseChangeForgetComparison.lean",
+  "declaration": "AlgebraicGeometry.NativeBaseChange.forget_mate",
+  "statement": "theorem forget_mate (sq : CommSq v p' p g) (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) : (forget k₀ l T').map ((mate k₀ l sq).app K) = (sourceComparison k₀ l p g).hom.app K ≫ (ProEtale.adicDerivedBaseChange l (geometricSquare k₀ sq)).app ((forget k₀ l Z).obj K) ≫ (targetComparison k₀ l v p').inv.app K",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.NativeBaseChange.forget",
+   "AlgebraicGeometry.NativeBaseChange.pullSquare",
+   "AlgebraicGeometry.NativeBaseChange.mate",
+   "AlgebraicGeometry.NativeBaseChange.pullForget",
+   "AlgebraicGeometry.NativeBaseChange.pushForget",
+   "AlgebraicGeometry.NativeBaseChange.sourceComparison",
+   "AlgebraicGeometry.NativeBaseChange.targetComparison",
+   "AlgebraicGeometry.NativeBaseChange.forget_mate"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T222737-L-689151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261027T034802-L-3686492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

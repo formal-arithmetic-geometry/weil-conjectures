@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+ "kind": "statement",
+ "title": "Fibre Euler characteristic of a flat finitely presented sheaf in a proper family",
+ "statement": "Let $f:X\\to S$ be a proper morphism of finite presentation of schemes [def-pc-scheme, def-weil-proper-morphism, def-sbc-locally-finite-presentation]. Let $\\mathcal F$ be an $\\mathcal O_X$-module of finite presentation [def-weil-pbc-module-finite-type-presentation], flat over $S$: for every $x\\in X$, the stalk $\\mathcal F_x$ is flat as an $\\mathcal O_{S,f(x)}$-module [def-weil-pbc-flat-ring-map]. For $s\\in S$, set $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ and $\\mathcal F_s=\\mathcal F|_{X_s}$, where restriction denotes module pullback [def-weil-residue-field, def-pc-fibre-product, def-pc-module-pullback]. Then the integer-valued function $s\\mapsto\\chi(X_s,\\mathcal F_s)$ [def-pc-euler-characteristic] is locally constant: every point of $S$ has an open neighbourhood on which this function is constant. For any morphism $g:S'\\to S$, put $X'=X\\times_SS'$, let $g':X'\\to X$ be the projection, and put $\\mathcal F'=g'^*\\mathcal F$. For every $s'\\in S'$ one has $\\chi(X'_{s'},\\mathcal F'_{s'})=\\chi(X_{g(s')},\\mathcal F_{g(s')})$. No Noetherian or reducedness hypothesis on $S$ is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0B9T, lemma-chi-locally-constant-geometric, statement and base-change clause, lines 7961--7972."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t\\in S$. Apply [lem-pc-universal-finite-free-complex] to $f$ and $\\mathcal F$: its hypotheses are exactly properness and finite presentation of $f$, finite presentation of $\\mathcal F$, and flatness of $\\mathcal F$ over $S$ (flatness of $f$ is not required). Obtain an open $V\\ni t$, a complex $P$ supported in $[0,d]$, and finite ranks $r_i$ with $P^i\\cong\\mathcal O_V^{r_i}$. Keep its comparison for every cartesian base change along every map to $V$. Only existence of the cohomology isomorphisms is needed, not their canonicity or functoriality.",
+   "uses": [
+    "lem-pc-universal-finite-free-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T, lemma-chi-locally-constant-geometric, proof; local finite-free computation in Tag 0BDJ, lemma-chi-locally-constant, proof."
+   }
+  },
+  {
+   "text": "Let $L$ be any field and $a:\\operatorname{Spec}L\\to V$ any morphism. Put $Y=X\\times_S\\operatorname{Spec}L$ and let $\\mathcal G$ be the pullback of $\\mathcal F$. By [lem-pc-universal-finite-free-complex], $H^i(a^*P)\\cong R^i(Y\\to\\operatorname{Spec}L)_*\\mathcal G$. The Zariski space $\\operatorname{Spec}L$ has one point: a module sheaf is just its $L$-vector space of sections, so taking sections preserves kernels and quotients. Thus these are isomorphisms of cohomology vector spaces. By the tensor formula in [def-pc-module-pullback], the resulting complex $C$ has $C^i=L^{r_i}$ and is zero outside $[0,d]$. Set $b_i=\\dim_L\\operatorname{im}(d_C^i)$, with $b_{-1}=b_d=0$. Rank-nullity gives $\\dim\\ker(d_C^i)=r_i-b_i$, and quotienting by $\\operatorname{im}(d_C^{i-1})\\subseteq\\ker(d_C^i)$ gives $\\dim H^i(C)=r_i-b_i-b_{i-1}$. All these dimensions are finite and the cohomology vanishes outside $[0,d]$. In the alternating sum the $b_i$ terms cancel in consecutive degrees, including the zero boundary terms. By [def-pc-euler-characteristic], therefore $\\chi(Y,\\mathcal G)=\\sum_{i=0}^d(-1)^i r_i$. This calculation uses no hypothesis on $L$ or on the map $a$.",
+   "uses": [
+    "lem-pc-universal-finite-free-complex",
+    "def-pc-module-pullback",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T, lemma-chi-locally-constant-geometric, proof; local finite-free computation in Tag 0BDJ, lemma-chi-locally-constant, proof."
+   }
+  },
+  {
+   "text": "For each $s\\in V$, take $L=\\kappa(s)$ and $a:\\operatorname{Spec}\\kappa(s)\\to V$ the canonical morphism. The calculation in step 2 gives $\\chi(X_s,\\mathcal F_s)=\\sum_{i=0}^d(-1)^i r_i$, independent of $s$. Thus the function is constant on the open neighbourhood $V$ of $t$. Since $t$ was arbitrary, it is locally constant.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T, lemma-chi-locally-constant-geometric, proof; local finite-free computation in Tag 0BDJ, lemma-chi-locally-constant, proof."
+   }
+  },
+  {
+   "text": "Now let $g:S^{\\prime}\\to S$ and $s^{\\prime}\\in S^{\\prime}$, and choose the model of step 1 at $t=g(s^{\\prime})$. The composite $\\operatorname{Spec}\\kappa(s^{\\prime})\\to S^{\\prime}\\to S$ factors through $V$, since its one-point image is $t\\in V$; denote this factor by $a$. The universal property in [def-pc-fibre-product] identifies $(X\\times_S S^{\\prime})\\times_{S^{\\prime}}\\operatorname{Spec}\\kappa(s^{\\prime})$ with $X\\times_S\\operatorname{Spec}\\kappa(s^{\\prime})$: maps into either side are exactly compatible maps into $X$ and $\\operatorname{Spec}\\kappa(s^{\\prime})$. The composite-pullback isomorphism in [def-pc-module-pullback] identifies $\\mathcal F^{\\prime}_{s^{\\prime}}$ with the pullback of $\\mathcal F$ in this square. Apply the universal comparison of [lem-pc-universal-finite-free-complex] to this map $a$. The calculation of step 2 gives $\\chi(X^{\\prime}_{s^{\\prime}},\\mathcal F^{\\prime}_{s^{\\prime}})=\\sum_{i=0}^d(-1)^i r_i$, which equals $\\chi(X_t,\\mathcal F_t)$ by step 3. This proves the asserted pointwise equality for every base change. Neither the local model nor the calculation imposed Noetherianity or reducedness on $S$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-module-pullback",
+    "lem-pc-universal-finite-free-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T, lemma-chi-locally-constant-geometric, proof; local finite-free computation in Tag 0BDJ, lemma-chi-locally-constant, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-universal-finite-free-complex",
+  "def-pc-module-pullback",
+  "def-pc-euler-characteristic",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0B9T, lemma-chi-locally-constant-geometric, proof, expanding its reduction to the local finite-free calculation in Tag 0BDJ, lemma-chi-locally-constant."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented morphism and an invertible sheaf the Euler characteristic of each fibre is locally constant and commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:04:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper flat finitely presented morphism and an invertible sheaf the Euler characteristic of each fibre is locally constant and commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\"], \"digest\": \"dbb680d188343849\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module rank local constancy and flat base-change permanence do not state proper coherent cohomology or its Euler characteristic. Project declarations give this fact; attachment recorded separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Euler\", \"IsLocallyConstant\"",
+   "results": "{\"t\": \"2026-10-22T04:04:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Euler\\\", \\\"IsLocallyConstant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module rank local constancy and flat base-change permanence do not state proper coherent cohomology or its Euler characteristic. Project declarations give this fact; attachment recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "eulerCharFiber|eulerChar.*[Ll]ocally|[Ll]ocally.*eulerChar",
+   "results": "{\"t\": \"2026-10-22T04:04:35Z\", \"tool\": \"grep\", \"query\": \"eulerCharFiber|eulerChar.*[Ll]ocally|[Ll]ocally.*eulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module rank local constancy and flat base-change permanence do not state proper coherent cohomology or its Euler characteristic. Project declarations give this fact; attachment recorded separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic of a finitely presented flat sheaf in a proper family is locally constant",
+   "results": "{\"t\": \"2026-10-22T04:04:36Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristic of a finitely presented flat sheaf in a proper family is locally constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"SheafOfModules.IsFinitePresentation.mk\", \"CompHausLike.LocallyConstant.functor_map_val\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"CompHausLike.LocallyConstant.counit_app_val\", \"CompHausLike.LocallyConstant.functor_obj_val\"], \"digest\": \"689973c0570fac76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module rank local constancy and flat base-change permanence do not state proper coherent cohomology or its Euler characteristic. Project declarations give this fact; attachment recorded separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat proper families have a locally constant fibre Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:04:38Z\", \"tool\": \"leanfinder\", \"query\": \"Flat proper families have a locally constant fibre Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"ChevalleyThm.chevalley_mvPolynomialC\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"30e85af650eb3607\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module rank local constancy and flat base-change permanence do not state proper coherent cohomology or its Euler characteristic. Project declarations give this fact; attachment recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "eulerCharFiber|eulerChar.*[Ll]ocally|[Ll]ocally.*eulerChar",
+   "results": "{\"t\": \"2026-10-22T04:24:43Z\", \"tool\": \"grep\", \"query\": \"eulerCharFiber|eulerChar.*[Ll]ocally|[Ll]ocally.*eulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned rank-local-constancy, flat-morphism permanence and locally constant topology results do not supply coherent fibre cohomology or its Euler characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic of fibre cohomology of a flat finitely presented sheaf in a proper family is locally constant",
+   "results": "{\"t\": \"2026-10-22T04:24:43Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristic of fibre cohomology of a flat finitely presented sheaf in a proper family is locally constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"IsLocallyConstant.iff_isOpen_fiber_apply\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"IsLocallyConstant.iff_isOpen_fiber\", \"CompHausLike.LocallyConstant.counit_app_val\", \"IsLocallyConstant.isOpen_fiber\", \"CompHausLike.LocallyConstant.functor_obj_val\"], \"digest\": \"d38a7fdfb790dfe8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned rank-local-constancy, flat-morphism permanence and locally constant topology results do not supply coherent fibre cohomology or its Euler characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"euler\", \"IsLocallyConstant\"",
+   "results": "{\"t\": \"2026-10-22T04:24:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"euler\\\", \\\"IsLocallyConstant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned rank-local-constancy, flat-morphism permanence and locally constant topology results do not supply coherent fibre cohomology or its Euler characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper finitely presented morphism and a finitely presented sheaf flat over the base the Euler characteristics of the fibres are locally constant and invariant under arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:24:45Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper finitely presented morphism and a finitely presented sheaf flat over the base the Euler characteristics of the fibres are locally constant and invariant under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.isLocallyConstant_rankAtStalk\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"9d7d9b6bf8e17f84\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned rank-local-constancy, flat-morphism permanence and locally constant topology results do not supply coherent fibre cohomology or its Euler characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler Poincare formula locally constant alternating sum of ranks of a finite free complex computing coherent cohomology in proper families",
+   "results": "{\"t\": \"2026-10-22T04:24:54Z\", \"tool\": \"leanfinder\", \"query\": \"Euler Poincare formula locally constant alternating sum of ranks of a finite free complex computing coherent cohomology in proper families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"Profinite.NobelingProof.Nobeling_aux\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.isLocallyConstant_rankAtStalk\", \"Profinite.NobelingProof.succ_exact\", \"LocallyConstant.freeOfProfinite\", \"Profinite.NobelingProof.CC_comp_zero\", \"Profinite.exists_locallyConstant_finite_aux\"], \"digest\": \"5a4d915d7dbc8c49\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned rank-local-constancy, flat-morphism permanence and locally constant topology results do not supply coherent fibre cohomology or its Euler characteristic."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-curve-isom-graphs",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: locally constant Euler characteristics of the two polarizations and the structure sheaves",
+   "via": [
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+  "worker": "stage1",
+  "summary": "Read Stacks 0B9T and its perfect-complex reduction 0BDJ, and reused the existing universal local finite-free model instead of creating a duplicate. Proved Euler cancellation explicitly and applied the same model to both residue-field morphisms to obtain arbitrary base-change invariance. The statement and its hypotheses are unchanged. The earlier rejected Lean attachment is not treated as closed. No new nodes.",
+  "blueprint": "The inherited from.place locates this numerical input in det-thm-sf-ctf-stability-direct-images, proof (3), through the projective-curve Isom-graph prerequisite. Steps 1–3 supply the locally constant fibre Euler characteristics used for that boundedness argument; step 4 supplies their base-change invariance. The statement is not itself imported, and the existing nearest-ancestor field is null; ancestor search confirms this. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-universal-finite-free-complex",
+    "why": "The Picard coherence unit supplies a generic local model for any proper finitely presented morphism and relatively flat finitely presented module, with arbitrary base-change cohomology comparisons. It is a numerical coherent-cohomology tool for the Isom-graph boundedness prerequisite; no node in this six-functors unit supplies this general model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-universal-finite-free-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-2e9a1bf9c",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-2e9a1bf9c (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit with the item and its report, no new nodes. The statement is byte-identical to live (unsplit there; not a re-split, not dropped, not superseded). It matches Stacks 0B9T (perfect.tex 7961-7972): f proper and of finite presentation, F finitely presented and flat over S, χ locally constant and invariant under base change, no Noetherian hypothesis. The proof follows the source's route, 0B91(2) then 0BDJ (lines 7778-7795). Step 1 cites lem-pc-universal-finite-free-complex; its hypotheses match the item's exactly, and the bound Lean IsFiniteFreeComplex (FiniteFreeComplex.lean:35) makes each term globally ≅ O_V^r, so the ranks are constant on V. Step 2 computes over any field L via the tensor formula of def-pc-module-pullback and rank-nullity; I re-checked that Σ(-1)^i(r_i-b_i-b_{i-1}) = Σ(-1)^i r_i with b_{-1}=b_d=0 on the cases d=0 and a two-term complex. Step 3 takes L=κ(s), which gives local constancy. Step 4 factors Spec κ(s')→S through the open V, identifies the fibres by fibre-product pasting (def-pc-fibre-product) and the composite pullback (def-pc-module-pullback), and applies the model to a. proof_deps equals the union of uses, there is no cycle, and the searches cover all three kinds. The DAG search found no duplicate: the Hilbert-polynomial, Picard-degree and pd-degree nodes are narrower. I accept the tool_use of lem-pc-universal-finite-free-complex as a generic coherent local model that no sfb node gives. No SGA is used. Advisory only: applying χ to the fibres presupposes that X_s is proper and F_s coherent; this is a presupposition of the unchanged statement, and step 2 proves the dimensions finite. No changes."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isLocallyConstant_eulerCharFiber",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.isLocallyConstant_eulerCharFiber",
+   "AlgebraicGeometry.Scheme.Modules.eulerCharFiber_pullback_of_isPullback"
+  ],
+  "statement": "theorem isLocallyConstant_eulerCharFiber (hℱ : ℱ.IsFlatOver f) :\n    IsLocallyConstant (ℱ.eulerCharFiber f)",
+  "branch": "slopmaster2",
+  "by": "N6",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing upstream statements jointly give both clauses of Stacks 0B9T. The main declaration states local constancy for a finitely presented module flat over a proper locally finitely presented morphism. QuasiCompact follows from properness, and injective resolutions exist for every scheme module category by isGrothendieckAbelian. The second declaration gives the pointwise equality for every cartesian base-change square; specialize to pullback.fst and pullback.snd. It already holds without the flatness and local-finite-presentation hypotheses, so applies to all the objects of this node. IsFlatOver is the affine-local equivalent of stalkwise relative flatness for this quasi-coherent module. No new module or definition is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf06b9c36",
+  "group": "N6",
+  "result": "pass",
+  "note": "existing:true binding to upstream isLocallyConstant_eulerCharFiber + eulerCharFiber_pullback_of_isPullback (DirectImage/BaseChange.lean, identical in slopmaster2, live and side-live); only the item lean record and report changed. Matches Stacks 0B9T (perfect.tex 7961-7972) clause by clause: IsProper+LFP (QuasiCompact implied), IsFinitePresentation, IsFlatOver (affine-local = stalkwise for qcoh), HasInjectiveResolutions holds for all X via isGrothendieckAbelian, fibre = pullback f fromSpecResidueField, eulerCharFiber unfolds to the recorded eulerChar over κ(t), Mathlib Modules.pullback ≅ the recorded tensorPullback (both left adjoint to the same pushforward; χ iso-invariant), base change for any g and any IsPullback square, no Noetherian/reduced hypothesis; statement field verbatim. Edge cases OK; no duplicate node. Advisory: IsFlatOver/Hom.fiber are owned by def-pc-scheme-module-flat-over/def-pc-scheme-fibre, not in stmt_deps (same notions, stage-1 fixed); upstream finite-free-complex proof still has sorry."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.isLocallyConstant_eulerCharFiber",
+    "AlgebraicGeometry.Scheme.Modules.eulerCharFiber_pullback_of_isPullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isLocallyConstant_eulerCharFiber",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange",
+     "lines": [
+      101,
+      169
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.eulerCharFiber_pullback_of_isPullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange",
+     "lines": [
+      94,
+      99
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
+}

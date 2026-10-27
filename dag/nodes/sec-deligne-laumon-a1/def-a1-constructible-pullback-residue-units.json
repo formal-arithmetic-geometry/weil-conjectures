@@ -3,19 +3,32 @@
  "kind": "definition",
  "title": "Residue-field inverses for finite-field constructible pullback",
  "status": "split",
- "statement": "Fix the finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite-type $k$-scheme $Y$ [def-weil-pbc-scheme-conventions]. For each $y\\in Y$, define the residue-field inverse structure to be the unique inverse of $\\ell\\in\\kappa(y)$. In the recorded constructible-truncation interface [prop-constructible-truncations], these structures are extracted from its residue-invertibility component, with algebraic closure $\\overline{\\mathbf Q}_\\ell=\\operatorname{AlgebraicClosure}(\\mathbf Q_\\ell)$. Inverse structures are subsingletons, so this extraction specifies the same inverse as the finite-field characteristic calculation and adds no choice of a different coefficient object.",
+ "statement": "Fix the finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite-type $k$-scheme $Y$ [def-weil-pbc-scheme-conventions]. For each $y\\in Y$, define the residue-field inverse structure to be the unique inverse of $\\ell\\in\\kappa(y)$. Construct it from the characteristic calculation in the finite base field and the ring map to the residue field. Inverse structures are subsingletons, so it equals the former structure extracted from constructible truncations and adds no choice of coefficient object.",
  "stmt_deps": [
   "def-weil-finite-field-fiber",
-  "def-weil-pbc-scheme-conventions",
-  "prop-constructible-truncations"
+  "def-weil-pbc-scheme-conventions"
  ],
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Propositions 6.8.4 and 6.8.14, Remark 6.8.15; the normalized intrinsic coefficient presentation in the cited existing Lean module"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use lem-a4-constructible-residue-prime-unit to prove the prime is a unit at each residue field, and apply IsUnit.invertible. Invertible is a subsingleton, hence this is the same structure as the former truncation-package extraction.",
+   "uses": [
+    "lem-a4-constructible-residue-prime-unit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-a4-constructible-residue-prime-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Finite-field coefficient convention; elementary characteristic calculation, not a new assertion quoted from the paper."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -64,7 +77,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-l-dl-a1-endpoints",
  "lean": {
@@ -73,7 +97,7 @@
   "declarations": [
    "WeilConjectures.constructiblePullbackResidueUnits"
   ],
-  "statement": "abbrev constructiblePullbackResidueUnits (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] : ∀ y : Y, Invertible (l : Y.residueField y)",
+  "statement": "def constructiblePullbackResidueUnits (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] : ∀ y : Y, Invertible (l : Y.residueField y)",
   "branch": "newtargets-dag",
   "by": "Q75",
   "date": "2026-10-18",
@@ -97,23 +121,42 @@
   "note": "Re-delivery after RETURN H2 at 777f546ea33b; Lean byte-identical (sha 0fc71f20…). stmt_deps now cite existing:true def-a1-constructible-pullback-residue-units, def-a1-common-stage-coefficient-unit (25 DerivedPullbackTensorIso unit decls), def-a1-intrinsic-adic-fibre-specification and def-weil-derived-pullback-tensor-hom in place of the three theorem nodes. Every owner-module decl used is listed; statements verbatim; new-node deps exist (prop-constructible-truncations genuine, residue units are .choose of constructibleTruncations_exists); no theorem stmt_dep added vs live; no cycle. Substance re-read: hypotheses exact, comparison pinned to the j_!→j_* mate on integral models, injective/proper support/open restriction/lisse clauses present, no hollow defs, edge cases covered. nt_compile --json clean 27.2 s/60 s. Maintainer note: stage 3 needs lem-pur-derived-pullback-tensor-iso in proof_deps for helper a1ConstructibleRestrictionUnit_spec."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X8",
+  "reviewer": "C-25bc0",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261021T144027-L-38308",
+  "landing": "20261025T033830-L-104915",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.constructible_point_scalar_compatibility",
-   "WeilConjectures.constructible_pullback_point_fibre",
-   "WeilConjectures.constructible_pullback_scalar_compatibility",
-   "WeilConjectures.constructible_pullback_t_exact"
+  "note": "independent cc review: constructiblePullbackResidueUnits abbrev→def via proved char-p lemma constructiblePullbackResidue_isUnit against def-a1-constructible-pullback-residue-units (statement_change + change record) and new node lem-a4-constructible-residue-prime-unit; axioms clean; all 14 direct importers + SfCommonStageDirectImage/WeilCohomology compile"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "A4 stage 2",
+  "old_statement": "Fix the finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite-type $k$-scheme $Y$ [def-weil-pbc-scheme-conventions]. For each $y\\in Y$, define the residue-field inverse structure to be the unique inverse of $\\ell\\in\\kappa(y)$. In the recorded constructible-truncation interface [prop-constructible-truncations], these structures are extracted from its residue-invertibility component, with algebraic closure $\\overline{\\mathbf Q}_\\ell=\\operatorname{AlgebraicClosure}(\\mathbf Q_\\ell)$. Inverse structures are subsingletons, so this extraction specifies the same inverse as the finite-field characteristic calculation and adds no choice of a different coefficient object.",
+  "what": "The inverse was defined by projecting a large truncation existence witness. This elementary coefficient inverse now has a direct proved construction; its value is unchanged by uniqueness, but the recorded construction and dependency must follow the implementation.",
+  "source": {
+   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+   "place": "Propositions 6.8.4 and 6.8.14, Remark 6.8.15; the normalized intrinsic coefficient presentation in the cited existing Lean module"
+  },
+  "citers": [
+   {
+    "id": "lem-a1-constructible-degree-zero-proper-support",
+    "holds": true,
+    "note": "The inverse structure and its binders are unchanged; Invertible is a subsingleton. Only its construction no longer extracts the truncation package."
+   },
+   {
+    "id": "lem-zl-finite-rational-heart-comparison",
+    "holds": true,
+    "note": "The inverse structure and its binders are unchanged; Invertible is a subsingleton. Only its construction no longer extracts the truncation package."
+   }
   ],
-  "sorry_after": [
-   "WeilConjectures.constructible_point_scalar_compatibility",
-   "WeilConjectures.constructible_pullback_scalar_compatibility"
-  ]
+  "old_stmt_deps": [
+   "def-weil-finite-field-fiber",
+   "def-weil-pbc-scheme-conventions",
+   "prop-constructible-truncations"
+  ],
+  "old_proof": [],
+  "old_proof_deps": []
  }
 }

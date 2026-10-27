@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-low-rank-universal-root-coordinates",
+ "kind": "statement",
+ "title": "Universal root coordinates and normalizer relators in semisimple rank at most two",
+ "statement": "Let $A$ be a nonzero commutative ring and $P=(G,T=D_A(M),\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ a pinned split realization [def-sfb-pinned-split-root-realization], with $|\\Delta|\\leq2$. Write $\\mathbf G_a(R)=(R,+)$ and $\\mathbf G_m(R)=R^\\times$ for every commutative $A$-algebra $R$. For every root $\\gamma$ and every generator $Y$ of its tangent root module there is a unique $T$-equivariant closed group homomorphism $x_{\\gamma,Y}:\\mathbf G_a\\to G$ whose differential sends $1$ to $Y$, where $t\\in T(R)$ acts on $R$ by multiplication by the full character $\\gamma(t)$. Write $U_\\gamma$ for its image, independent of $Y$.\n\nFor each simple root $\\alpha$, the pinning determines an opposite generator $X_{-\\alpha}$ such that there is a homomorphism $v_\\alpha:\\operatorname{SL}_{2,A}\\to G$ carrying $I+zE_{12}$ to $x_\\alpha(z)=x_{\\alpha,X_\\alpha}(z)$, $I+zE_{21}$ to $x_{-\\alpha}(z)=x_{-\\alpha,X_{-\\alpha}}(z)$, and $\\operatorname{diag}(z,z^{-1})$ to $\\alpha^\\vee(z)$. Here $\\operatorname{SL}_{2,A}(R)$ consists of determinant-one $2$ by $2$ matrices and $E_{ij}$ is the elementary matrix. Put $n_\\alpha=x_\\alpha(1)x_{-\\alpha}(-1)x_\\alpha(1)$. It normalizes $T$, acts on its character lattice by $s_\\alpha(m)=m-\\langle m,\\alpha^\\vee\\rangle\\alpha$, and satisfies\n$$n_\\alpha^2=\\alpha^\\vee(-1),\\qquad(n_\\alpha x_\\alpha(1))^3=1.$$\nThe maps $x_{\\pm\\alpha}$ and $n_\\alpha$ are unchanged under inclusion of the full-torus simple-root centralizer containing them in [lem-sfb-small-centralizer-hom-amalgamation].\n\nChoose an enumeration of $\\Delta$ (short root first when lengths differ). There is a choice, depending only on the enumerated abstract based root system, of a signed word in the $n_\\alpha$ transporting a simple-root generator to a generator $X_\\gamma$ of each positive-root module. It agrees with the given pinning at simple roots. Set $x_\\gamma=x_{\\gamma,X_\\gamma}$. For every ordering of $\\Phi^+$, multiplication identifies $\\prod_{\\gamma\\in\\Phi^+}\\mathbf G_a$ with a closed subgroup $U^+\\subseteq G$ by $(z_\\gamma)\\mapsto\\prod_\\gamma x_\\gamma(z_\\gamma)$. For distinct positive roots $\\gamma,\\eta$, in a fixed order on roots $i\\gamma+j\\eta$ with $i,j>0$, the interchange law has the form\n$$x_\\eta(y)x_\\gamma(x)=x_\\gamma(x)x_\\eta(y)\\prod_{i,j>0,\\ i\\gamma+j\\eta\\in\\Phi}x_{i\\gamma+j\\eta}(C_{i,j,\\gamma,\\eta}x^iy^j),\\qquad C_{i,j,\\gamma,\\eta}\\in\\mathbf Z.$$\nFor $\\alpha\\in\\Delta$ and $\\gamma\\in\\Phi^+\\setminus\\{\\alpha\\}$ there are signs $u_{\\alpha,\\gamma}\\in\\{1,-1\\}$ with\n$$n_\\alpha x_\\gamma(z)n_\\alpha^{-1}=x_{s_\\alpha\\gamma}(u_{\\alpha,\\gamma}z).$$\nThe constants $C$ and $u$ depend only on the enumerated abstract based root system, not on $A$, $M$, or the realization. In rank two, for the two distinct simple roots $\\alpha,\\beta$, let $m_{\\alpha\\beta}$ be the order of $s_\\alpha s_\\beta$. Then\n$$(n_\\alpha n_\\beta)^{m_{\\alpha\\beta}}=\\prod_{\\gamma\\in\\Phi^+}\\gamma^\\vee(-1).$$\nAll assertions are scheme-theoretic, hold after arbitrary ring base change, and impose no characteristic or Noetherian hypothesis. In rank zero $U^+=1$ and all root-indexed assertions are empty.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 4.1.4 (canonical root groups), Theorem 4.2.6 (opposite-root pairing), Theorem 5.1.8 (rank-one structure), Corollary 5.1.9 and Remark 5.1.10 (rank-one Weyl representatives), Proposition 5.1.16 (positive ordered products), and Lemma 6.2.8 with Steps 2--4 of the Isogeny Theorem, printed pp.205--209 (universal rank-two constants). The last Weyl-word formula is an agent-explicit formulation of the normalizer relator (6.2.3) required in Step 4, using the coroot word for the square of a longest Weyl representative; it is not asserted to be a quotation of Lemma 6.2.8 Read online; local PDF WANTED. This is Conrad, Reductive Group Schemes, not an invocation of any SGA source. No Stacks tag states this group-theoretic input."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-small-centralizer-hom-amalgamation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-split-root-subgroup-weyl-calculus] to $P$. Identify the additive group of $\\mathfrak g_\\gamma$ with $\\mathbf G_a$ using $z\\mapsto zY$. Composing with $\\exp_\\gamma$ gives $x_{\\gamma,Y}$. Conversely any homomorphism in the statement precomposed with the inverse of this identification has tangent inclusion and is $T$-equivariant, so the cited uniqueness applies. If $Y'=cY$ for a unit $c$, the new map is $x_{\\gamma,Y}(cz)$; hence its closed image is the same $U_\\gamma$. Equivariance uses the full character, exactly as in the cited statement, and uniqueness remains true after any base change.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4; change of basis in the free root line"
+   }
+  },
+  {
+   "text": "For a simple root $\\alpha$, [lem-sfb-small-centralizer-hom-amalgamation] supplies the full-torus centralizer $H=G_{\\{\\alpha\\}}$ with just the roots $\\pm\\alpha$ and the original coroot. Choose any negative root-line generator. Apply [lem-sfb-reductive-framed-noetherian-descent] to this framed rank-one group: it descends to a nonzero Noetherian subring $A_0$ with the same two free root lines. Choose a lattice basis for $M$ and apply [lem-sfb-relative-rank-one-local-matrix-model] over $A_0$. Pull its affine open cover and its matrix-pair isomorphisms back to $A$. On each resulting open $\\operatorname{Spec}C$, $H$ is a central torus times $\\operatorname{SL}_2$, $\\operatorname{PGL}_2$ or $\\operatorname{GL}_2$, and $\\alpha$ is the ratio character. The positive vector is $cE_{12}$ for a unit $c\\in C^\\times$. Define a local map from $\\operatorname{SL}_2$ by $g\\mapsto\\operatorname{diag}(c,1)g\\operatorname{diag}(c^{-1},1)$ in the matrix factor, followed by the projective quotient if needed, and the identity point in the central torus.",
+   "uses": [
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-reductive-framed-noetherian-descent",
+    "lem-sfb-relative-rank-one-local-matrix-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.1.8, rank-one local matrix reduction"
+   }
+  },
+  {
+   "text": "The local maps in step 2 have upper and lower restrictions $z\\mapsto I+czE_{12}$ and $z\\mapsto I+c^{-1}zE_{21}$. The canonical-exponential uniqueness in [lem-sfb-split-root-subgroup-weyl-calculus] identifies their upper restrictions with $x_\\alpha$ and their lower restrictions with the exponentials of $c^{-1}E_{21}$. The image of $\\left(\\begin{smallmatrix}0&1\\\\-1&0\\end{smallmatrix}\\right)$ normalizes the whole torus in each model. Thus its negative tangent vector is the unique linked vector of the same cited node; these negative vectors agree on overlaps. On the diagonal the local map is $z\\mapsto\\operatorname{diag}(z,z^{-1})$ in the matrix factor. On every geometric fibre this is the canonical coroot, hence the original $\\alpha^\\vee$. The geometric-fibre equality criterion for maps of split diagonalizable groups in [lem-sfb-relative-diagonalizable-character-duality] proves equality of these torus morphisms over the whole open, including nilpotents.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-relative-diagonalizable-character-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 5.1.9 and rank-one matrix models; equality of torus maps"
+   }
+  },
+  {
+   "text": "The local maps therefore agree on both elementary unipotents and on the diagonal. These restrictions determine a map out of $\\operatorname{SL}_2$: for $g=\\left(\\begin{smallmatrix}p&q\\\\ r&s\\end{smallmatrix}\\right)$, on $D(p)$ one has $g=L(r/p)\\operatorname{diag}(p,p^{-1})U(q/p)$. On $D(r)$ the same factorization applies to $w^{-1}g$, where $w=U(1)L(-1)U(1)$, since its upper-left entry is $-r$. The opens cover because $ps-qr=1$. Thus the local morphisms agree everywhere on overlaps. The open cover of the affine base is an etale covering, hence fpqc by [lem-weil-pbc-fpqc-finer-than-etale]; its pullback to $\\operatorname{SL}_2$ and to its square is fpqc by [lem-galois-fpqc-covering-base-change]. Use [lem-weil-pbc-fpqc-representable-descent] to glue the maps and detect their multiplication equality on the square. This constructs $v_\\alpha$ and its required three restrictions.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.1.8; explicit two-chart gluing of the rank-one homomorphism"
+   }
+  },
+  {
+   "text": "In $\\operatorname{SL}_2$ one computes $w=U(1)L(-1)U(1)=\\left(\\begin{smallmatrix}0&1\\\\-1&0\\end{smallmatrix}\\right)$, $w^2=-I$, and $(wU(1))^3=I$. Applying $v_\\alpha$ proves the two rank-one identities. The normalizer action, its reflection on $M$, and compatibility of the linked vector and $n_\\alpha$ under the inclusions $G_{\\{\\alpha\\}}\\subseteq G$ are exactly the subgroup-compatibility assertions of [lem-sfb-split-root-subgroup-weyl-calculus], applied to the centralizers from [lem-sfb-small-centralizer-hom-amalgamation]. Hence all rank-one data here agree with the constructions in those centralizers.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-small-centralizer-hom-amalgamation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 5.1.9 and Remark 5.1.10; explicit SL2 matrices"
+   }
+  },
+  {
+   "text": "In rank two take the four positive-root lists and the signed transport words of [lem-sfb-rank-two-root-string-seed-calculus]. They use only the enumerated abstract root system; each transported vector is in the specified root module and is a generator, since conjugation by a normalizer element is an isomorphism of root modules. In rank one retain its given positive simple vector. The assertion of [lem-sfb-split-root-subgroup-weyl-calculus] for a closed subset $\\Psi$ applies to $\\Psi=\\Phi^+$: a sum of positive roots which is a root remains positive. It proves the multiplication isomorphism onto a closed subgroup, in every ordering, with image independent of the ordering. Using $z\\mapsto zX_\\gamma$ gives the claimed affine coordinates on $U^+$.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Isogeny Theorem Step 2; Proposition 5.1.16"
+   }
+  },
+  {
+   "text": "We will use the following elementary weight comparison. If independent roots $r,s$ have no root $ir+js$ with $i,j>0$, their set is closed. The product-coordinate theorem of [lem-sfb-split-root-subgroup-weyl-calculus] puts $x_s(y)x_r(x)$ in $U_{\\{r,s\\}}$, with polynomial coordinates $F(x,y),H(x,y)$. Torus equivariance makes their monomials have respective weights $r,s$ in $A[M][x,y]$. Independence of $r,s$ forces $F=cx$, $H=dy$; setting one variable zero gives $c=d=1$. Thus these root groups commute as schemes over every ring. This also applies to pairs with a negative root when the same no-positive-combination condition holds. It uses Laurent monomials $e^m$ as an $A$-basis, not differentiated weights, so remains valid in small characteristic and over nonreduced rings.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.16, two-root closed sets; explicit weight comparison"
+   }
+  },
+  {
+   "text": "Here are all the simple-reflection signs, derived from the transport words. Write $c,d,e,f$ as in step 6, and list only the positive roots different from the acting simple root. In $A_2$, the $n_a$ images of $(X_b,X_c)$ are $(-X_c,X_b)$, and the $n_b$ images of $(X_a,X_c)$ are $(X_c,-X_a)$. In $B_2$, the $n_a$ images of $(X_b,X_c,X_d)$ are $(X_d,-X_c,X_b)$, and the $n_b$ images of $(X_a,X_c,X_d)$ are $(X_c,-X_a,X_d)$. In $G_2$, the $n_a$ images of $(X_b,X_c,X_d,X_e,X_f)$ are $(-X_e,X_d,-X_c,X_b,X_f)$, and the $n_b$ images of $(X_a,X_c,X_d,X_e,X_f)$ are $(X_c,-X_a,X_d,X_f,-X_e)$. To verify these lists, the forward arrows are the defining words, the A2 cross arrow and B2 middle arrow are the two isolated tangent identities in [lem-sfb-rank-two-root-string-seed-calculus], and the reverse arrows follow from $n_i^2=i^\\vee(-1)$ and its action $(-1)^{\\langle r,i^\\vee\\rangle}$ on the $r$-root module from [lem-sfb-split-root-subgroup-weyl-calculus]. The fixed arrows for $(b,d)$ in B2 and G2 and $(a,f)$ in G2 follow from step 7 for both $\\pm b,d$ or $\\pm a,f$: each of the three factors of $n_i$ commutes with that root group. In $A_1\\times A_1$, the same argument gives both signs $+1$. The unique exponential with a given tangent vector then turns each listed tangent equality into the asserted conjugation equality for all parameters.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.2.8 and Example 6.2.9; calculation of every conjugation sign"
+   }
+  },
+  {
+   "text": "Apply the simple-root interchange seeds of [lem-sfb-rank-two-root-string-seed-calculus]. The root lists there show that every unordered positive pair admitting a positive combination root is a listed seed, except $(c,d)$ in $G_2$. For that pair conjugate the seed $x_d(y)x_a(x)=x_a(x)x_d(y)x_e(kxy)$ by $n_b$. Step 8 sends $a,d,e$ to $c,d,f$, with sign $+1$ in each case, so it gives $x_d(y)x_c(x)=x_c(x)x_d(y)x_f(kxy)$ with the same integer $k$. Every other unordered pair commutes by step 7. Thus there is an integer interchange rule for every unordered pair. All transports just substitute signed parameters and move root labels by a reflection; they introduce neither division nor a choice depending on the realization.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.2.8 and Example 6.2.9; the remaining nonsimple pair"
+   }
+  },
+  {
+   "text": "For completeness this determines reversed orientations and arbitrary factor orders integrally. Assign to a positive root its height, the sum of its simple coefficients. Every correction factor in step 9 has height strictly larger than either input height. In a collecting calculation, swap adjacent inverted factors by a rule of step 9, combine equal root factors by $x_r(u)x_r(v)=x_r(u+v)$, and proceed in increasing height. At any fixed height there are finitely many root positions and swaps; new correction terms have strictly larger height, so the calculation terminates at the largest root height. The inverse coordinate change is solved in the same increasing-height order: its coordinate at height $h$ is the old one plus a polynomial in lower-height coordinates, so inversion only subtracts that polynomial. This supplies swaps in the reversed orientation as well. Applying these changes to the seed identities yields an ordered product with polynomial coefficients in $\\mathbf Z[x,y]$ for any prescribed root order. The product is unique by [lem-sfb-split-root-subgroup-weyl-calculus]. Its coordinate at $i\\gamma+j\\eta$ has weight $i\\gamma+j\\eta$, hence is a single integer multiple of $x^iy^j$ by the Laurent-monomial comparison of step 7; both inputs are independent positive roots. Vanishing on $x=0$ and $y=0$ excludes $i=0$ or $j=0$ from correction factors. This proves the precise form of every $C$ and its universality.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-rank-two-root-string-seed-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.16 and Lemma 6.2.8; integral triangular collection"
+   }
+  },
+  {
+   "text": "Let $m=m_{ab}$ in rank two, and let $Q=A_m$ be the alternating word in $n_a,n_b$ starting with $n_a$. By [lem-sfb-rank-two-pinned-braid], $A_m=B_m$. Reversing $Q$ gives $B_m$ if $m$ is even and $A_m$ if $m$ is odd, so $Q^{\\mathrm{rev}}=Q$. Also $(n_an_b)^m=Q^2$: for even $m$ this is the definition of $Q$, and for odd $m$ the product $A_mB_m$ is the alternating word of length $2m$ starting with $n_a$. Thus $(n_an_b)^m=Q Q^{\\mathrm{rev}}$. Write $Q=q_1\\cdots q_m$, with $q_j=n_{i_j}$. Cancel symmetrically from the middle, replacing $q_j^2$ by $i_j^\\vee(-1)$ and conjugating it past the preceding $q_1\\cdots q_{j-1}$. By the reflection action on the torus in [lem-sfb-split-root-subgroup-weyl-calculus], this gives\n$$Q Q^{\\mathrm{rev}}=\\prod_{j=1}^m (s_{i_1}\\cdots s_{i_{j-1}}i_j)^\\vee(-1).$$\nThe factors are in the commutative torus, so their order is immaterial.",
+   "uses": [
+    "lem-sfb-rank-two-pinned-braid",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Normalizer relations (6.2.3); explicit symmetric cancellation of the braid word"
+   }
+  },
+  {
+   "text": "The root lists of [lem-sfb-rank-two-root-string-seed-calculus] check the last product without any further Weyl-group theorem. For the alternating word starting with $a$, the successive roots $s_{i_1}\\cdots s_{i_{j-1}}i_j$ are $(a,b)$ in $A_1\\times A_1$, $(a,a+b,b)$ in $A_2$, $(a,2a+b,a+b,b)$ in $B_2$, and $(a,3a+b,2a+b,3a+2b,a+b,b)$ in $G_2$. These lists follow by substituting the respective Cartan pairs $(\\langle b,a^\\vee\\rangle,\\langle a,b^\\vee\\rangle)=(0,0),(-1,-1),(-2,-1),(-3,-1)$, into $s_i(r)=r-\\langle r,i^\\vee\\rangle i$ (in nonsimply-laced types $\\langle b,a^\\vee\\rangle=-2$ or $-3$ and $\\langle a,b^\\vee\\rangle=-1$). In each case it is exactly $\\Phi^+$ once. Here $m=m_{ab}$ is $2,3,4,6$ respectively: on $\\operatorname{span}_{\\mathbf Q}(a,b)$ the matrix of $s_as_b$ has determinant $1$ and trace $\\langle b,a^\\vee\\rangle\\langle a,b^\\vee\\rangle-2=-2,-1,0,1$, and $s_as_b$ is the identity on the common kernel of $a^\\vee,b^\\vee$ in $M\\otimes_{\\mathbf Z}\\mathbf Q$, a complement of that span because the Cartan matrix is invertible. Thus step 11 gives the claimed product of all positive coroots evaluated at $-1$. For the other order of the two simple roots, $(n_bn_a)^m=n_b(n_an_b)^mn_b^{-1}$ is the image of this torus element under $s_b$ by the reflection action of [lem-sfb-split-root-subgroup-weyl-calculus]; since $s_b$ permutes $\\Phi^+\\setminus\\{b\\}$ (the lists of step 8) and $(s_bb)^\\vee(-1)=b^\\vee(-1)^{-1}=b^\\vee(-1)$, it is the same product.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Finite rank-two lists in Isogeny Theorem Step 2; explicit inversion-root enumeration"
+   }
+  },
+  {
+   "text": "For rank zero, [lem-sfb-split-root-subgroup-weyl-calculus] applied to the empty closed root set gives the identity subgroup as the empty product, and every indexed assertion is empty. In rank one there is one positive root, so there are no distinct-positive-root or rank-two-pair assertions; the remaining statements were proved in steps 1--6. For arbitrary base change, canonical exponentials and the linked normalizer data commute with it by the same cited node. The local matrix maps of steps 2--4, after pullback, agree with the new maps on the two unipotents and the diagonal and hence everywhere by the explicit two-chart uniqueness in step 4. Transport words, integer polynomial identities and the word cancellation in steps 6--12 pull back literally. All claims are therefore scheme-theoretic and compatible with arbitrary and successive base change. If the target ring is zero its base scheme is empty and all comparisons hold uniquely.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Arbitrary-base-change clauses of canonical root calculus; empty root set"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-split-root-subgroup-weyl-calculus",
+  "lem-sfb-small-centralizer-hom-amalgamation",
+  "lem-sfb-reductive-framed-noetherian-descent",
+  "lem-sfb-relative-rank-one-local-matrix-model",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-rank-two-root-string-seed-calculus",
+  "lem-sfb-rank-two-pinned-braid"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Agent assembly of the cited structural results and the finite seed and braid inputs; printed pp.110--148,201,205--209,230--231"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal integral Chevalley commutator constants and Weyl representatives for pinned rank two reductive group schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.h'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the element $ h'(i) $ is the matrix $ h(i) $ constructed from $ P $, which belongs to the Cartan subalg\"}\n  {\"name\": \"RootPairing.IsG2.toEmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → [P.IsG2] → P.EmbeddedG\", \"doc\": \"Given a root pairing $ P $ satisfying the G2 root system axioms, this constructs the corresponding embedded $ G_2 $ root system by selecting two roots $ \\\\text{long} $ and $ \\\\text{short} $ such that th\"}\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.GeckConstruction.isSl2Triple\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Relations\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Finite ι] [inst_1 : CommRing R]\\n  [inst_2 : IsDomain R] [inst_3 : CharZero R] [inst_4 : AddCommGroup M] [inst_5 : Module R M] [inst_6 : AddCommGroup N]\\n  [inst_7 : Module R N] {P : RootPairing ι R M N} [inst_8 : P.IsCrystallograph\", \"doc\": \"For a root pairing $P$ with base structure $b$ and index $i$ in the finite support set, the matrices $h(i)$, $e(i)$, and $f(i)$ constructed via the Geck method satisfy the $\\\\mathfrak{sl}_2$-triple rel\"}\n  {\"name\": \"RootPairing.EmbeddedG2.ofPairingInThree\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  (P : RootPairing\", \"doc\": \"Given a commutative ring $ R $ of characteristic zero, a crystallographic and reduced root pairing $ P $ between $ R $-modules $ M $ and $ N $, and indices $ \\texttt{long}, \\texttt{short} $ where $ P(\\te\"}\n  {\"name\": \"RootPairing.EmbeddedG2.toIsReduced\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.EmbeddedG2],\\n  P.IsReduced\", \"doc\": \"An embedded G2 root system in a root pairing implies that the root pairing satisfies the reducedness condition.\"}\n  {\"name\": \"RootPairing.IsG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Prop\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this proposition asserts that the pairing satisfies the axioms defining a G2 root system.\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For any matrix $ x $ in the Geck construction Lie algebra associated with a root pairing $ P $, the conjugation of $ x $ by the block matrix $ \\\\omega = \\\\begin{bmatrix} I_S & 0 \\\\\\\\ 0 & P \\\\end{bmatrix} $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"structureConstants\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley.*commutat|pinned.*root|root.*subgroup|Tits.*representative",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"322\", \"text\": \"lemma _root_.Subgroup.IsArithmetic.conj (𝒢 : Subgroup (GL (Fin 2) ℝ)) [𝒢.IsArithmetic]\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"145\", \"text\": \"def _root_.AddSubgroup.upperCentralSeriesAux (G : Type*) [AddGroup G] :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"199\", \"text\": \"theorem _root_.AddSubgroup.upperCentralSeries_one (G : Type*) [AddGroup G] :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"401\", \"text\": \"def _root_.AddSubgroup.lowerCentralSeries {G : Type*} [AddGroup G] (S : AddSubgroup G) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"422\", \"text\": \"alias _root_.AddSubgroup.lowerCentralSeries_one := AddSubgroup.top_lowerCentralSeries_one\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"19\", \"text\": \"Chevalley's theorem states that if `f : R → S` is a finitely presented ring hom between commutative\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Operations.lean\", \"line\": \"56\", \"text\": \"@[simp] lemma _root_.Ideal.span_singleton_toAddSubgroup_eq_zmultiples (a : ℤ) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"line\": \"453\", \"text\": \"  rw [_root_.commutator_def, Subgroup.map_commutator]\"}\n  {\"file\": \"Mathlib/GroupTheory/Perm/MaximalSubgroups.lean\", \"line\": \"203\", \"text\": \"lemma _root_.Subgroup.isPretransitive_of_stabilizer_lt\"}\n  {\"file\": \"Mathlib/GroupTheory/IsPerfect.lean\", \"line\": \"50\", \"text\": \"lemma _root_.Subgroup.isPerfect_iff : IsPerfect H ↔ ⁅H, H⁆ = H := by\"}\n  {\"file\": \"Mathlib/GroupTheory/IsPerfect.lean\", \"line\": \"54\", \"text\": \"lemma _root_.Subgroup.commutator_eq_self [hH : IsPerfect H] : ⁅H, H⁆ = H :=\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"85\", \"text\": \"def _root_.IsPGroup.toSylow [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"98\", \"text\": \"@[simp] theorem _root_.IsPGroup.toSylow_coe [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"102\", \"text\": \"@[simp] theorem _root_.IsPGroup.mem_toSylow [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"106\", \"text\": \"theorem _root_.IsPGroup.le_sylow_of_normal {N : Subgroup G} [N.Normal] (h : IsPGroup p N)\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"line\": \"159\", \"text\": \"private lemma _root_.AddHom.map_smul_top_toAddSubgroup_of_surjective\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"410\", \"text\": \"theorem _root_.Subgroup.Characteristic.comap_quotient_mk {H : Subgroup G} [hH : H.Characteristic]\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"425\", \"text\": \"def _root_.MonoidHom.domRestrictHomKerEquiv (A : Type*) [CommGroup A] (H : Subgroup G) [H.Normal] :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"435\", \"text\": \"theorem _root_.MonoidHom.domRestrictHomKerEquiv_apply_coe (A : Type*) [CommGroup A] (H : Subgroup G)\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"189\", \"text\": \"protected def _root_.Con.subgroup (c : Con G) : Subgroup G where\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"196\", \"text\": \"theorem _root_.Con.mem_subgroup_iff {c : Con G} {x : G} :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"204\", \"text\": \"theorem _root_.Con.subgroup_quotientGroupCon (H : Subgroup G) [H.Normal] :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"222\", \"text\": \"def _root_.Subgroup.orderIsoCon :\"}\n  {\"file\": \"Mathlib/GroupTheory/IsSubnormal.lean\", \"line\": \"85\", \"text\": \"inductive _root_.AddSubgroup.IsSubnormal {G : Type*} [AddGroup G] : AddSubgroup G → Prop where\"}\n  {\"file\": \"Mathlib/Algebra/Star/Unitary.lean\", \"line\": \"362\", \"text\": \"def _root_.unitarySubgroupUnitsEquiv {M : Type*} [Monoid M] [StarMul M] :\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root subgroup coordinates positive unipotent radical universal integral structure constants rank two",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairing.Base.cartanMatrixIn_apply_same\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.CartanMatrix\", \"type\": \"[FaithfulSMul S R] (i : b.support) : b.cartanMatrixIn S i i = 2\", \"doc\": \"Given a faithful scalar multiplication from $ S $ to $ R $, for each index $ i $ in the finite support set of the base structure $ b $, the $(i,i)$-entry of the Cartan matrix associated with the root \"}\n  {\"name\": \"RootPairing.posRootForm_eq\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.CanonicalBilinear\", \"type\": \": (P.posRootForm S).posForm = P.RootFormIn S\", \"doc\": \"The positive root bilinear form associated with the root pairing $ P $ in the ordered ring $ S $ coincides with the bilinear form defined on the root span via coroots. This equality arises from the fa\"}\n  {\"name\": \"RootPairing.pairing_same\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \": P.pairing i i = 2\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, the pairing of an index $ i $ with itself satisfies $ \\\\langle \\\\text{root}(i), \\\\text{coroot}(i) \\\\rangle = 2 $.\"}\n  {\"name\": \"RootPairing.posRootForm_posForm_apply_apply\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.CanonicalBilinear\", \"type\": \"(x y : P.rootSpan S) : (P.posRootForm S).posForm x y = ∑ i, P.coroot'In S i x * P.coroot'In S i y\", \"doc\": \"For any $x, y$ in the span of roots, the positive root bilinear form $B(x, y)$ equals the sum over all indices $i$ of the product of the coroot functionals evaluated at $x$ and $y$, i.e., $B(x, y) = \\\\\"}\n  {\"name\": \"RootPairing.root_coroot_two\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (self : RootPairing ι R M N) (i : ι),\\n  (self.toLinearMap (self.root i)) (self.coroot i) = 2\", \"doc\": \"For any root pairing between $ R $-modules $ M $ and $ N $, and for each index $ i $, the evaluation of the linear functional associated with the root $ \\\\alpha_i $ (via the pairing) on the coroot $ \\\\a\"}\n  {\"name\": \"RootPairing.posRootForm\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.CanonicalBilinear\", \"type\": \": P.RootPositiveForm S\", \"doc\": \"The root pairing $ P $ defines a symmetric bilinear form on the $ R $-module $ M $ valued in the ordered ring $ S $, which is invariant under reflections and satisfies $ B(P.\\\\text{root}(i), P.\\\\text{ro\"}\n  {\"name\": \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseExists\", \"type\": \"(f : M →+ ℚ) (hf : ∀ i, f (P.root i) ≠ 0) (g : N →+ ℚ) (hg : ∀ i, g (P.coroot i) ≠ 0)\\n  (hfg : ∀ i, 0 < f (P.root i) ↔ 0 < g (P.coroot i)) : baseOf P.root f = baseOf P.coroot (g : N →+ ℚ)\", \"doc\": \"Given a root pairing $ P $ between $ R $-modules $ M $ and $ N $, additive monoid homomorphisms $ f : M → ℚ $ and $ g : N → ℚ $ that are non-vanishing on all roots $ P.\\text{root}(i) $ and coroots $ P.\"}\n  {\"name\": \"RootPairing.EmbeddedG2.allCoeffs\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.G2\", \"type\": \": List (Fin 2 → ℤ)\", \"doc\": \"The list of 12 coefficient vectors in $\\\\mathbb{Z}^2$ representing the roots of the finite $G_2$ root system in Lie theory. These include both positive and negative roots with integer coordinates such \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root group parametrizations and universal signs of simple reflection conjugation over arbitrary commutative rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.Base.IsPos.reflectionPerm\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Base\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} {b : P.Base}\\n  [inst_5 : CharZero R] [Finite ι] [IsDomain R] [P.IsCrystallographic] [P.IsReduc\", \"doc\": \"For indices $i,j$ in the indexing set $\\\\iota$ of a root pairing base $b$, if $i$ is a positive root ($b.\\\\text{IsPos}(i)$), $j$ lies in the finite support of $b$, and $i \\\\neq j$, then the reflection of\"}\n  {\"name\": \"RootPairing.root_eq_neg_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) {i j : ι},\\n  P.root i = -P.root j ↔ i = (P.reflectionPerm j) j\", \"doc\": \"For a root pairing $ P $, the root at index $ i $ is equal to the negative of the root at index $ j $ if and only if $ i $ is equal to the result of applying the reflection permutation associated with\"}\n  {\"name\": \"RootPairing.pairingIn_reflectionPerm_self_right\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (S : Type u_6)\\n  [inst_5 : CommRing S] [inst_6 : Algebra S R] [FaithfulSMul S R] [inst_8 : P.I\", \"doc\": \"For any indices $i$ and $j$, the pairing of $i$ with the reflection of $j$ (applied to $j$ itself) is equal to the negative of the original pairing between $i$ and $j$, i.e., $P(i, \\text{reflection}_j(\"}\n  {\"name\": \"RootPairing.pairingIn_reflectionPerm_self_left\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (S : Type u_6)\\n  [inst_5 : CommRing S] [inst_6 : Algebra S R] [FaithfulSMul S R] [inst_8 : P.I\", \"doc\": \"For a root pairing $ P $ valued in a commutative ring $ S $, and indices $ i, j $, applying the reflection permutation associated with $ i $ to the first argument of the pairing results in negation: $\"}\n  {\"name\": \"RootPairing.weylGroup.ofIdx\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → ι → ↥P.weylGroup\", \"doc\": \"For each index $i$, this function maps $i$ to the reflection automorphism associated with $i$ as an element of the Weyl group of the root pairing $P$, leveraging the fact that such reflections are gua\"}\n  {\"name\": \"RootPairing.weylGroup_apply_root\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (g : ↥P.weylGroup)\\n  (i : ι), g • P.root i = P.root ((P.weylGroupToPerm g) i)\", \"doc\": \"For any element $ g $ of the Weyl group of a root pairing $ P $ and any index $ i $, the action of $ g $ on the root $ \\\\alpha_i $ satisfies $ g \\\\cdot \\\\alpha_i = \\\\alpha_{\\\\sigma(i)} $, where $ \\\\sigma $ \"}\n  {\"name\": \"RootPairing.Base.IsPos.or_neg\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Base\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} (b : P.Base)\\n  [inst_5 : CharZero R] (i : ι), b.IsPos i ∨ b.IsPos (-i)\", \"doc\": \"For any index $i$ in the indexing set $\\\\iota$ of a root system, either the root $\\\\Phi(i)$ is positive or the root $\\\\Phi(-i)$ is positive, where $-i$ denotes the involutive negation of the index induce\"}\n  {\"name\": \"RootPairing.Base.induction_reflect\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Base\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} {b : P.Base}\\n  [CharZero R] [Finite ι] [IsDomain R] [P.IsCrystallographic] [P.IsReduced] (i : \", \"doc\": \"Given a root pairing base indexed by $\\\\iota$ with finite support, if a property $p$ holds for all elements in the support and is preserved under reflection permutations (both individual reflections an\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley.*commutat|pinned.{0,20}root|root[ _-]subgroup|Tits.*representative",
+   "results": "[grep] OK 0 hit(s)\nDirectory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal root subgroup coordinates and rank two normalizer relators for pinned reductive group schemes",
+   "results": "RootPairing.EmbeddedG2, RootPairing.EmbeddedG2.setOf_index_eq_univ, RootPairing.IsG2.toEmbeddedG2, RootPairing.GeckConstruction.h', RootPairing.EmbeddedG2.long, RootPairing.EmbeddedG2.short, RootPairing.GeckConstruction.isSl2Triple, CartanMatrix.Generators",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pinned.{0,25}root|root[ _-]subgroup|Chevalley.*commutat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-low-rank-pinned-root-hom",
+  "date": "2026-10-24",
+  "group": "Q129"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Normalized root homomorphisms in semisimple rank at most two. Supporting input: Theorem 4.1.4 (canonical root groups), Corollary 5.1.9 and Remark 5.1.10 (rank-one Weyl representatives), Proposition 5.1.16 (positive ordered products), and Lemma 6.2.8 with Steps 2--4 of the Isogeny Theorem, printed pp.205--209 (universal rank-two constants). The last Weyl-word formula is an agent-explicit formulation of the normalizer relator (6.2.3) required in Step 4, using the coroot word for the square of a longest Weyl representative; it is not asserted to be a quotation of Lemma 6.2.8",
+   "via": [
+    "lem-sfb-low-rank-pinned-root-hom",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-low-rank-universal-root-coordinates",
+  "worker": "stage1",
+  "summary": "Reuse the existing arbitrary-base root calculus. Construct SL2 maps in descended rank-one matrix charts; derive all signs from explicit signed transport words and two finite root-string signs, collect all pair laws from the simple-root seeds, and compute the torus relator by symmetric cancellation of a braid word.",
+  "blueprint": "The latest det-thm-sf-ctf-stability-direct-images proof (3), compactification/direct-image route, through the inherited alteration, invariant-theory and integral root-model chain. At the current item the places realized are Conrad 4.1.4, 5.1.8--5.1.16 and Isogeny Theorem Steps 2--4. blueprint_refs.py ancestor returns None because the imported ancestor chain is broken; the inherited from.node=null and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-2ecfb8b82",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-2ecfb8b82 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all 9 cited statements, and Conrad, Reductive Group Schemes (text copy /tmp/conradtxt/c.txt: §6.2 (6.2.2)-(6.2.6) p.201, Isogeny Theorem Steps 2-3, Lemma 6.2.8, Example 6.2.9 pp.205-209, Cor 5.1.9/Rem 5.1.10/Thm 5.1.8). Ordinary split: the statement is byte-identical to the Q129 base and the item was unsplit with no proof before. Steps 2-4: framed Noetherian descent supplies every hypothesis of the rank-one matrix model. Checked X_alpha=cE12, the linked generator c^{-1}E21 through the normalizing image of w, the coroot through the reflection plus the geometric-fibre criterion, and the D(p)/D(r) factorization identities. Step 8: recomputed every A2/B2/G2 sign list from the transport words and n_i^2. The G2 signs agree with Conrad Example 6.2.9. Both seed tangent signs (A2 Ad(n_a)X_b=-X_c, B2 Ad(n_a)X_c=-X_c) and the relators (SL3 (n_a n_b)^3=I, Sp4 (n_a n_b)^4=-I=prod gamma^vee(-1)) were checked numerically with integer matrices. Step 9: enumerated all positive pairs; only G2 (c,d) is missing from the seeds and it is correctly obtained by n_b-conjugating the (a,d) seed. Step 12: inversion lists recomputed and correct. New nodes are true (the braid node is Tits' relation), smaller than the item and not clauses of it; rg -L found no duplicates (braid hits are categorical; Bruhat and Chevalley-basis nodes are field or Lie-algebra statements). FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-low-rank-universal-root-coordinates.json: step 12 now derives m=2,3,4,6 (trace pq-2 on the span, identity on the common kernel) and proves the relator for the n_b-first order ((n_b n_a)^m = n_b(n_a n_b)^m n_b^{-1}, s_b permutes Phi+ minus b, b^vee(-1) self-inverse). Step 12 also now cites weyl-calculus. Accepted tool_use: step 4 lem-weil-pbc-fpqc-finer-than-etale (sk-thm-p1), a generic fact that a Zariski cover is fpqc; the other two fpqc nodes are mathlib leaves. Batch-5 flags: lem-trf-fppf-covering-is-fpqc (via the rank-one model and character duality) and lem-trf-smooth-fpqc-base-descent (via the pinned-realization definition) are generic fpqc descent facts, neither given by nor part of the proofs of the trace-formula or Poincare-duality assumptions, so all citations are kept. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ }
+}

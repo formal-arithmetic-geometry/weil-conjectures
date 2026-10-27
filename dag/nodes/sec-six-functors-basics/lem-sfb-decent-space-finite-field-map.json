@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-decent-space-finite-field-map",
+ "kind": "statement",
+ "title": "Finite residue extensions give finite maps to decent spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Call an algebraic space $X$ decent if every morphism $\\operatorname{Spec}L\\to X$ from a field spectrum is quasi-compact: for every affine scheme $U\\to X$, the scheme $U\\times_X\\operatorname{Spec}L$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. Suppose $X$ is decent. Let $L$ be a field [def-weil-field] and $a:\\operatorname{Spec}L\\to X$ a morphism [def-weil-affine-spectrum]. Suppose its composite to $S$ has image a closed point $s\\in S$ and the induced field extension $L/\\kappa(s)$ is finite, meaning that $L$ is finite-dimensional over the residue field $\\kappa(s)=\\mathcal O_{S,s}/\\mathfrak m_s$. Then $a$ is representable and finite: for every scheme $T\\to X$, $T\\times_X\\operatorname{Spec}L$ is a scheme and its projection to $T$ is finite [def-weil-finite-integral-morphism].",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 08AL (lemma-finite-residue-field-extension-finite), finite-morphism assertion only. Decency is Tag 03I8 (definition-very-reasonable), equivalently Tag 03JV (lemma-UR-finite-above-x) condition (6)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-decent-quasicompact-monomorphic-points], every point of $X$ has a quasi-compact monomorphic field representative. Its affine-test quasi-compactness gives the scheme-test quasi-compactness assumed in [lem-sfb-decent-algebraic-field-image-closed]: for a scheme $T\\to X$ and a quasi-compact open $V\\subseteq T$, cover $V$ by finitely many affine opens $V_1,\\dots,V_n$; the inverse image of $V$ in $T\\times_X\\operatorname{Spec}F$ is the union of the open subschemes $V_i\\times_X\\operatorname{Spec}F$, each quasi-compact by the affine test, hence is quasi-compact. The finite extension $L/\\kappa(s)$ is algebraic: powers of any element are linearly dependent in the finite-dimensional vector space $L$. Thus [lem-sfb-decent-algebraic-field-image-closed] applies, since $s$ is closed, and gives a closed singleton $\\{x\\}=\\operatorname{im}(a)$.",
+   "uses": [
+    "lem-sfb-decent-quasicompact-monomorphic-points",
+    "lem-sfb-decent-algebraic-field-image-closed",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 08AL, first sentence; Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-decent-closed-point-field-immersion] to this closed point $x$. Obtain $i:\\operatorname{Spec}K\\to X$ with image $\\{x\\}$, a representable closed immersion. Its scheme tests are closed immersions, without any assumption that $X$ is a scheme.",
+   "uses": [
+    "lem-sfb-decent-closed-point-field-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0AHB (lemma-decent-space-closed-point), used for the closed field subspace in Tag 08AL"
+   }
+  },
+  {
+   "text": "Form $P=\\operatorname{Spec}L\\times_X\\operatorname{Spec}K$. By the scheme-test assertion for $i$, its projection $p:P\\to\\operatorname{Spec}L$ is a closed immersion. It is nonempty: the maps $a$ and $i$ represent the same point, so they agree after a common field extension, which supplies a field-valued point of $P$. By the affine description of closed immersions, $P=\\operatorname{Spec}(L/I)$ for a proper ideal $I$ of the field $L$; hence $I=0$ and $p$ is an isomorphism. Composing its inverse with the other projection gives $b:\\operatorname{Spec}L\\to\\operatorname{Spec}K$ with $a=i\\circ b$.",
+   "uses": [
+    "lem-sfb-decent-closed-point-field-immersion",
+    "def-a1-algebraic-space-point-classes",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 08AL, field-subspace factorization; explicit pullback argument using the affine closed-immersion description"
+   }
+  },
+  {
+   "text": "The maps of residue fields along $\\operatorname{Spec}L\\xrightarrow{b}\\operatorname{Spec}K\\to S$ give compatible inclusions $\\kappa(s)\\subseteq K\\subseteq L$. A finite $\\kappa(s)$-spanning set for $L$ also spans $L$ over $K$, so $L$ is a finite $K$-module. Apply [lem-weil-pbc-spec-finite-ring-map-finite] to $K\\hookrightarrow L$ to conclude that $b$ is finite.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-spec-finite-ring-map-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 08AL, sentence beginning Of course and finiteness of the field-spectrum map"
+   }
+  },
+  {
+   "text": "For any scheme $T\\to X$, the scheme $W=T\\times_X\\operatorname{Spec}K$ is a closed subscheme of $T$ by the assertion for $i$. The scheme $V=W\\times_{\\operatorname{Spec}K}\\operatorname{Spec}L$ represents $T\\times_X\\operatorname{Spec}L$ by the fibre-product universal property and $a=i\\circ b$. The map $V\\to W$ is finite by base change of $b$, using [lem-trf-finite-radicial-basechange]. The map $W\\to T$ is finite by [lem-weil-pbc-closed-immersion-finite]. Their composite is finite by [lem-weil-pbc-finite-composition]. This proves representability and the required finiteness for every $T$; radiciality is not used.",
+   "uses": [
+    "lem-sfb-decent-closed-point-field-immersion",
+    "def-pc-fibre-product",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 08AL, final finite-composition argument; spaces-morphisms.tex Tag 03ZR (lemma-composition-integral), implemented on scheme tests"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-decent-quasicompact-monomorphic-points",
+  "lem-sfb-decent-algebraic-field-image-closed",
+  "lem-sfb-decent-closed-point-field-immersion",
+  "def-a1-algebraic-space-point-classes",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "def-pc-fibre-product",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 08AL proof, with Tag 0AHB for its closed field subspace; explicit field-point factorization and scheme tests"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a decent algebraic space over a scheme field points over closed base points with finite residue extension define finite morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite) →\\n    AlgebraicGeometry.IsFinite f\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes. If for every affine open subset $U \\\\subseteq Y$, the ring of sections $\\\\Gamma(f^{-1}(U), \\\\mathcal{O}_X)$ is a finitely generated module over $\\\\Gamma(\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": HasAffineProperty @IsFinite (fun X _ f _ ↦ IsAffine X ∧ RingHom.Finite (f.appTop).hom)\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|finite_residue_field",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic residue field points of decent algebraic spaces are closed and finite residue field points give representable finite morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue map $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ \"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (K : Type u) [inst : Field K] (X : AlgebraicGeometry.Scheme)\\n  (f : AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map\\n        (AlgebraicGeometry.Scheme.descResidueField (AlgebraicGeom\", \"doc\": \"For a field $ K $, a scheme $ X $, and a morphism $ f : \\\\operatorname{Spec}(K) \\\\to X $, the composition of the morphism induced by the residue field at the closed point of $ \\\\operatorname{Spec}(K) $ a\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(k(x)) \\\\to X$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a preimmersion, where $k(x)$ denotes the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).Over X\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, there is a canonical morphism of schemes from the spectrum of the residue field at $x$, denoted $\\\\operatorname{Spec}(k(x))$, to the scheme $X$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|finite_residue_field",
+   "results": "1 hits: Mathlib/Data/Ordmap/Ordset.lean. The grep hit in Ordset.lean is an unrelated English use of decent.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphisms or unrelated topology/data structures, not the assertion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite morphisms from spectra of finite residue extensions to decent algebraic spaces over closed base points",
+   "results": "8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.SpecMap_iff, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphisms or unrelated topology/data structures, not the assertion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsFinite\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphisms or unrelated topology/data structures, not the assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite residue field extension over a closed base point gives a finite morphism from a field spectrum to a decent algebraic space",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphisms or unrelated topology/data structures, not the assertion for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-rational-point-closed-immersion",
+  "date": "2026-10-23",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: Finiteness for field-valued maps over closed base points, before using the rational section identity.",
+   "via": [
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-decent-space-finite-field-map",
+  "worker": "stage1",
+  "summary": "Checked Tag 08AL against the imported finite assertion, supplied the decency characterization and closed field-subspace input as two statement-only nodes, and gave the factorization and finite scheme-test argument. Reused existing image-closed and finite scheme calculus nodes. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: Finiteness for field-valued maps over closed base points, before using the rational section identity.",
+  "tool_uses": [
+   {
+    "node": "def-a1-algebraic-space-point-classes",
+    "why": "Generic scheme finiteness or point-class tool used on the finite field-subspace factorization; this unit supplies no replacement."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic scheme finiteness or point-class tool used on the finite field-subspace factorization; this unit supplies no replacement."
+   },
+   {
+    "node": "def-weil-residue-field",
+    "why": "Generic scheme finiteness or point-class tool used on the finite field-subspace factorization; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-ring-map-finite",
+    "why": "Generic scheme finiteness or point-class tool used on the finite field-subspace factorization; this unit supplies no replacement."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic scheme finiteness or point-class tool used on the finite field-subspace factorization; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-trf-finite-radicial-basechange",
+    "why": "Generic scheme finiteness or point-class tool used on the finite field-subspace factorization; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic scheme finiteness or point-class tool used on the finite field-subspace factorization; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Generic scheme finiteness or point-class tool used on the finite field-subspace factorization; this unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-a1-algebraic-space-point-classes",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "def-pc-fibre-product",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-e0919c210",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-e0919c210 (reviewer sub-agent of L); spot-checked: Read decent-spaces.tex 08AL (statement and proof), 0AHB, 03JV, 03I8 and 07U5; tags checked against the tags file. Item statement unchanged and true; it is the finiteness assertion of 08AL. Live and side-live still hold the item unsplit, so it is not superseded, and there is no re-split note. New node lem-sfb-decent-quasicompact-monomorphic-points = 03JV (6)=>(4) pointwise: true, statement-only, self-contained. New node lem-sfb-decent-closed-point-field-immersion = 0AHB: true, statement-only, closed immersion spelled out as representable with closed-immersion scheme tests. Neither node restates the item or one of its clauses. DAG grep (03JV/0AHB/08AL/07U5/decent) found no duplicate: qs-space-field-monomorphism needs a qc diagonal; reduced-singleton-field-factorization and locally-separated-* are different statements. Steps: 1 image-closed node, needs algebraic L/kappa(s), closed s and qc monomorphic representatives; 2 is 0AHB; 3 the fibre product with Spec L is a closed subscheme of Spec L, nonempty because a and i are the same point class, so it is Spec(L/0) and a=i∘b, with no image-containment shortcut; 4 kappa(s)⊆K⊆L, so L is finite over K and Spec of K→L is finite; 5 W→T closed immersion, V=W×_K L by pasting, base change + 035C + 01WK, all on schemes. Edge cases checked: empty T or X, L=kappa(s), purely inseparable L/kappa(s), nonreduced T, no Noetherian or separatedness hypotheses. FIX (C3/C4-type, small): step 1 applied the image-closed node, whose quasi-compactness is the scheme-test form (inverse images of qc opens are qc), to the new node's affine-test form without a bridge. I added the finite-affine-cover argument and cited def-weil-pbc-quasi-compact-scheme (already a stmt_dep). Batch-5 flags: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, def-a1-space-point-topology and def-a1-algebraic-space-point-classes are general definitions or foundational fibre-product facts. They are not steps of the trace formula or of Poincaré duality, so accepted. The tool_uses (generic scheme finiteness, closed-immersion and residue-field nodes) are accepted. No SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DecentSpaceFiniteFieldMap",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_of_decent_of_finite_residueField",
+  "file": "lean/Sheaf/AlgebraicGeometry/DecentSpaceFiniteFieldMap.lean",
+  "statement": "theorem finite_of_decent_of_finite_residueField {S : Scheme.{u}} (X : AlgebraicSpace S) (hdecent : ∀ (K : Type u) [Field K] (b : Spec (CommRingCat.of K) ⟶ S) (c : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (U : Over S), IsAffine U.left → ∀ t : yoneda.obj U ⟶ X.obj.obj, ∃ (V : Over S) (p : V ⟶ U) (q : yoneda.obj V ⟶ yoneda.obj (Over.mk b)), IsPullback q (yoneda.map p) c t ∧ CompactSpace V.left) (L : Type u) [Field L] (b : Spec (CommRingCat.of L) ⟶ S) (a : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (hs : IsClosed ({b (IsLocalRing.closedPoint L)} : Set S)) (hfinite : (S.descResidueField (Scheme.stalkClosedPointTo b)).hom.Finite) : IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) a",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a00153d80",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against the node and Stacks 08AL/03JV(6): hdecent is the affine quasi-compactness test (pullback is a scheme by the representable diagonal; quasi-compactness is iso-invariant), the closed image point is b(closedPoint L), hfinite is RingHom.Finite of the canonical descResidueField map, and the conclusion is IsRepresentableWith (IsFinite p.left) over all scheme tests; the closed-immersion clause is correctly excluded. No extra hypotheses or universe restriction; edge cases (empty X or T, L=κ(s), purely inseparable, non-reduced) covered. Node differs from side-live only in lean; lean.statement is verbatim in the file; item not superseded (live and side-live split, no lean). No definitions, sorry body, source/blueprint docstrings and 5 proof steps present; plain imports serve proof_deps; no pro-etale substitute or SGA source. Advisory only: decency is expanded inline (MapIsQuasiCompact belongs to def-sfb-proper-curve-moduli, not a stmt_dep); κ(s) uses Mathlib residueField. Not recompiled per the 2026-10-21 rule; no files changed."
+ }
+}

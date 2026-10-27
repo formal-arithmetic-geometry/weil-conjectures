@@ -1,0 +1,390 @@
+{
+ "id": "lem-sfb-abelian-hom-image-dimension",
+ "kind": "statement",
+ "title": "Abelian images and the kernel dimension formula",
+ "statement": "Let $k$ be a field [def-weil-field], let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety], and let $f:A\\to B$ be a $k$-group-scheme homomorphism [def-sc-group-scheme]. Its scheme-theoretic image $I\\hookrightarrow B$ (the closed subscheme defined by the kernel of $\\mathcal O_B\\to f_*\\mathcal O_A$, as in [lem-sc-image-subgroup]) is an abelian variety over $k$. Writing $K=\\ker f$ for the scheme-theoretic kernel, one has $\\dim A=\\dim I+\\dim K$. These are dimensions of finite-type $k$-schemes; no perfectness or separability hypothesis on $k$ or $f$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 1.72 and its proof, printed pp.28–29 (geometrically reduced image from a smooth source); Theorem 5.39 and Remark 5.42, printed pp.108–109 (kernel dimension formula). For proper source the image is proper and connected. Compare Milne AV I Proposition 7.1, printed p.32."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "lem-sc-image-subgroup",
+  "def-kun-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $j:I\\hookrightarrow B$ and $q:A\\to I$. By [lem-sc-image-subgroup], $I$ is a finite-type closed subgroup of $B$ and $q$ is surjective. Since $A$ is proper and $B$ separated and finite type, [pqf-lem-image-proper] gives that $I$ is proper and $q$ is proper, in particular quasi-compact. The map $q$ is a homomorphism: composing its multiplication compatibility with the monomorphism $j$ gives the compatibility for $f$, so the two maps to $I$ agree.",
+   "uses": [
+    "lem-sc-image-subgroup",
+    "pqf-lem-image-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 1.72; proper-source specialization"
+   }
+  },
+  {
+   "text": "The source $A$ is geometrically reduced by [sbc-lem-smooth-geometrically-reduced]. The injection $\\mathcal O_I\\to q_*\\mathcal O_A$ supplied by [lemma-nagata-scheme-image-ideal-qc] makes $q$ scheme-theoretically dominant. Applying [lem-sbc-geometrically-reduced-dominant-descent] to this quasi-compact map shows that $I$ is geometrically reduced. Thus [lem-sfb-geometrically-reduced-group-smooth] makes $I$ smooth. Also $I$ is connected: a nontrivial clopen partition of $I$ would pull back under the continuous surjection $q$ to a nontrivial clopen partition of connected $A$. Properness, smoothness and connectedness give an abelian variety by [def-sc-abelian-variety].",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sbc-geometrically-reduced-dominant-descent",
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 1.72 proof, geometric reducedness; Proposition 1.26(b)"
+   }
+  },
+  {
+   "text": "Both $A$ and $I$ are proper by step 1, hence separated and of finite type [def-weil-proper-morphism], so [lem-sfb-algebraic-group-homomorphism-factorization] applies to the homomorphism $q:A\\to I$: $q=i'\\circ q'$ with $q':A\\to I'$ faithfully flat and $i':I'\\to I$ a closed immersion. Since $q$ is surjective, so is $i'$. The scheme $I$ is reduced: take $L=k$ in the geometric reducedness [def-pc-geometrically-irreducible] of step 2. By [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], $\\mathrm{id}_I$ factors as $i'\\circ s$; then $i'\\circ s\\circ i'=i'$, and as the closed immersion $i'$ is a monomorphism, $s\\circ i'=\\mathrm{id}_{I'}$, so $i'$ is an isomorphism. Consequently $q=i'\\circ q'$ is flat. Let $e_A,e_I$ denote the identity points. The fibre of $q$ over $e_I:\\operatorname{Spec}k\\to I$ is $K=\\ker f$: since $j$ is a monomorphism and $j e_I=e_B$, a map $t:T\\to A$ satisfies $qt=e_I$ if and only if $ft=e_B$. This identifies the two fibre products with their identity sections. By [lem-sc-kernel-subgroup], $K$ is a closed subgroup scheme of $A$, hence finite type over $k$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-sc-kernel-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 (homomorphism theorem), printed p.108, and Proposition 1.70, printed p.28; Remark 5.42 (scheme-theoretic kernel)"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-flat-composite-fibre-dimension-at-point] to $A\\xrightarrow{q}I\\to\\operatorname{Spec}k$ at $e_A$. The first morphism is flat by step 3, and both morphisms are locally of finite type since $q$ is proper and $I$ is finite type. The fibres over the sole base point are $A$ and $I$, while the fibre of $q$ over $e_I$ is $K$. Thus, with dimension at a point meaning the minimum of dimensions of its open neighbourhoods, $\\dim_{e_A}A=\\dim_{e_K}K+\\dim_{e_I}I$.",
+   "uses": [
+    "lem-sbc-flat-composite-fibre-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 5.42, dimension calculation; Stacks Tag 02JS, lemma-dimension-fibre-at-a-point-additive"
+   }
+  },
+  {
+   "text": "For each $G\\in\\{A,I,K\\}$ the identity is $k$-rational, so its residue field is $k$ and has transcendence degree zero over $k$. The formula [lem-kun-dimension-formula] therefore gives $\\dim_{e_G}G=\\dim\\mathcal O_{G,e_G}$. By [lem-ag-group-identity-local-dimension] this equals $\\dim G$. These lemmas apply to all three finite-type group schemes, including the possibly nonreduced $K$. Substitution in step 4 yields $\\dim A=\\dim K+\\dim I=\\dim I+\\dim K$, as required.",
+   "uses": [
+    "lem-kun-dimension-formula",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 5.42; Stacks Tag 02FX, lemma-dimension-fibre-at-a-point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-image-subgroup",
+  "pqf-lem-image-proper",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sbc-geometrically-reduced-dominant-descent",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "def-sc-abelian-variety",
+  "def-weil-proper-morphism",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sc-kernel-subgroup",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-kun-dimension-formula",
+  "lem-ag-group-identity-local-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 1.72 and Remark 5.42, with the dimension calculation expanded at the identity using Stacks 02JS and 02FX and the existing group identity dimension theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "image.*smooth|smooth.*image|dim.*[Kk]ernel",
+   "results": "1 hits; ; logged results: Mathlib/AlgebraicGeometry/Group/Smooth.lean; Mathlib/AlgebraicGeometry/Group",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and abstract group ranges do not establish the smooth proper image or the algebraic kernel dimension formula; smooth_of_grpObj requires geometric reducedness separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Image of a homomorphism between abelian varieties is smooth connected proper",
+   "results": "8 hits; ; logged results: CategoryTheory.Abelian.image, AddCommGrpCat.image, AddMonoidHom.range, ModuleCat.image, MonoidHom.mrange, CategoryTheory.Abelian.image.ι, AlgebraicGeometry.Scheme.Hom.image, ModuleCat.factorThruImage",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and abstract group ranges do not establish the smooth proper image or the algebraic kernel dimension formula; smooth_of_grpObj requires geometric reducedness separately"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"image\", \"Smooth\"",
+   "results": "1 hits; ; logged results: AlgebraicGeometry.Scheme.Hom.preimage_smoothLocus_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and abstract group ranges do not establish the smooth proper image or the algebraic kernel dimension formula; smooth_of_grpObj requires geometric reducedness separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic image of a homomorphism of abelian varieties is an abelian variety and dimension of source equals image plus kernel",
+   "results": "8 hits; ; logged results: AlgebraicGeometry.Scheme.Hom.toImage_app, AddGroup.rank_range_le, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AddCommGrpCat.isImage, CategoryTheory.Abelian.OfCoimageImageComparisonIsIso.hasImages, AlgebraicGeometry.Scheme.Hom.ker_comp, AddCommGrpCat.imageIsoRange, AddCommGrpCat.image",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and abstract group ranges do not establish the smooth proper image or the algebraic kernel dimension formula; smooth_of_grpObj requires geometric reducedness separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic group homomorphism dimension source equals dimension image plus dimension kernel",
+   "results": "8 hits; ; logged results: LinearMap.lift_rank_range_add_rank_ker, LinearMap.finrank_range_add_finrank_ker, LinearMap.rank_range_add_rank_ker, Module.Dual.finrank_ker_add_one_of_ne_zero, LinearMap.lift_rank_eq_of_surjective, AddGroup.rank_range_le, Algebra.lift_rank_le_of_surjective_injective, LinearMap.rank_eq_of_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and abstract group ranges do not establish the smooth proper image or the algebraic kernel dimension formula; smooth_of_grpObj requires geometric reducedness separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic image of a homomorphism of abelian varieties is an abelian variety and dimension source equals dimension image plus dimension kernel",
+   "results": "{\"t\": \"2026-10-23T11:33:56Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme theoretic image of a homomorphism of abelian varieties is an abelian variety and dimension source equals dimension image plus dimension kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"AlgebraicGeometry.Scheme.Hom.le_ker_comp\", \"AlgebraicGeometry.Scheme.Hom.ker_comp\", \"AlgebraicGeometry.Scheme.Pullback.range_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_ker\", \"CategoryTheory.Abelian.imageIsoImage_hom_comp_image_ι\", \"AddCommGrpCat.isImage\"], \"digest\": \"74f510744e051214\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "74f510744e051214"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian variety homomorphism has smooth proper connected scheme theoretic image and dimension source equals dimension image plus dimension kernel",
+   "results": "{\"t\": \"2026-10-23T11:34:39Z\", \"tool\": \"leansearch\", \"query\": \"An abelian variety homomorphism has smooth proper connected scheme theoretic image and dimension source equals dimension image plus dimension kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toImage\", \"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"AlgebraicGeometry.Scheme.Hom.imageι\", \"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.specTargetImageIdeal\", \"AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso\"], \"digest\": \"c25fef58bea653a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "c25fef58bea653a1"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*(add|flat)|dim.*eq.*add|smooth_of_grpObj",
+   "results": "{\"t\": \"2026-10-23T11:39:26Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*(add|flat)|dim.*eq.*add|smooth_of_grpObj\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"5359d665a336187a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "5359d665a336187a"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*(flat|Flat)|[Ff]lat.*ringKrullDim|ringKrullDim_eq.*add",
+   "results": "{\"t\": \"2026-10-23T11:41:48Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*(flat|Flat)|[Ff]lat.*ringKrullDim|ringKrullDim_eq.*add\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Basic.lean\"], \"digest\": \"444ae362be20b0de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "444ae362be20b0de"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of a flat local homomorphism of Noetherian local rings equals dimension of base plus dimension of closed fibre",
+   "results": "{\"t\": \"2026-10-23T11:41:50Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension of a flat local homomorphism of Noetherian local rings equals dimension of base plus dimension of closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\"], \"digest\": \"916eb280ee564016\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "916eb280ee564016"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth_of_grpObj|[Ff]lat.*[Ss]urjective|[Ss]urjective.*[Ff]lat",
+   "results": "{\"t\": \"2026-10-23T11:46:36Z\", \"tool\": \"grep\", \"query\": \"smooth_of_grpObj|[Ff]lat.*[Ss]urjective|[Ss]urjective.*[Ff]lat\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"a5d985bb87f187a0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "a5d985bb87f187a0"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometrically reduced group scheme locally of finite type over a field is smooth",
+   "results": "{\"t\": \"2026-10-23T11:50:28Z\", \"tool\": \"leansearch\", \"query\": \"A geometrically reduced group scheme locally of finite type over a field is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.IsGeometricallyReduced.casesOn\"], \"digest\": \"3de49e383ab10cf1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "3de49e383ab10cf1"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective homomorphism of algebraic group schemes to a reduced group scheme is faithfully flat",
+   "results": "{\"t\": \"2026-10-23T11:50:28Z\", \"tool\": \"leansearch\", \"query\": \"A surjective homomorphism of algebraic group schemes to a reduced group scheme is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"RingHom.FaithfullyFlat\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"Module.FaithfullyFlat.of_specComap_surjective\", \"Module.FaithfullyFlat.surjective_of_tensorProduct\", \"Module.FaithfullyFlat.of_comap_surjective\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"RingHom.FaithfullyFlat.injective\"], \"digest\": \"e5ebee72df014b50\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "e5ebee72df014b50"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.smooth_of_grpObj",
+   "results": "{\"t\": \"2026-10-23T11:50:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.smooth_of_grpObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.smooth_of_grpObj\"], \"digest\": \"140d34b9709af438\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "140d34b9709af438"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Flat\", \"IsMonHom\"",
+   "results": "{\"t\": \"2026-10-23T11:50:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Flat\\\", \\\"IsMonHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of finite type group schemes over a field with reduced target is flat",
+   "results": "{\"t\": \"2026-10-23T11:50:29Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism of finite type group schemes over a field with reduced target is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"5b5fda56a820e7a0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "5b5fda56a820e7a0"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically reduced group scheme locally of finite type over a field is smooth",
+   "results": "{\"t\": \"2026-10-23T11:50:30Z\", \"tool\": \"leanfinder\", \"query\": \"A geometrically reduced group scheme locally of finite type over a field is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"e2f9598b1aebf9c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "e2f9598b1aebf9c6"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMonHom|[Ff]lat",
+   "results": "{\"t\": \"2026-10-23T11:51:11Z\", \"tool\": \"grep\", \"query\": \"IsMonHom|[Ff]lat\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"0daf890f0ad92720\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "0daf890f0ad92720"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic flatness and translation show that a surjective morphism of algebraic groups to a reduced target is flat everywhere",
+   "results": "{\"t\": \"2026-10-23T11:51:11Z\", \"tool\": \"leanfinder\", \"query\": \"Generic flatness and translation show that a surjective morphism of algebraic groups to a reduced target is flat everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"7e60f3034b49b375\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "7e60f3034b49b375"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Gg]roup|[Gg]roup.*flat|flat_of.*[Ss]urjective",
+   "results": "{\"t\": \"2026-10-23T11:55:41Z\", \"tool\": \"grep\", \"query\": \"flat.*[Gg]roup|[Gg]roup.*flat|flat_of.*[Ss]urjective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"d44b27df9321afd7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "d44b27df9321afd7"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth_of_grpObj",
+   "results": "{\"t\": \"2026-10-23T11:56:54Z\", \"tool\": \"grep\", \"query\": \"smooth_of_grpObj\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"5359d665a336187a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "5359d665a336187a"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*([Ii]sMonHom|[Gg]rpObj)|([Ii]sMonHom|[Gg]rpObj).*flat",
+   "results": "{\"t\": \"2026-10-23T11:59:09Z\", \"tool\": \"grep\", \"query\": \"flat.*([Ii]sMonHom|[Gg]rpObj)|([Ii]sMonHom|[Gg]rpObj).*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism between finite type group schemes with geometrically reduced target is a flat morphism",
+   "results": "{\"t\": \"2026-10-23T11:59:13Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism between finite type group schemes with geometrically reduced target is a flat morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"51383412712ee954\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: image constructors, abstract rank-nullity, smoothness of geometrically reduced groups, and flatness APIs do not state both abelian-image and scheme-kernel dimension conclusions",
+   "digest": "51383412712ee954"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simple-isogeny-decomposition",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: Abelian images and the kernel dimension formula.",
+   "via": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-hom-image-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement over arbitrary fields. Reused the existing geometric-reduced group smoothness Mathlib leaf. Split off only surjective-homomorphism flatness; gave the abelian-image argument and expanded dimension additivity at the rational identities, keeping scheme-theoretic nonreduced kernels. Review FIX (Q102 reader): flatness of q now comes from the existing same-unit factorization node (Milne 5.39) and reducedness of I; the delivered statement-only flatness node is dropped as redundant.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) auxiliary abelian-image/kernel-dimension input to simple isogeny decomposition and level rigidity. Current latest blueprint direct-image route read; this split only refines the existing algebraic-group prerequisite.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-image-proper",
+    "why": "Properness and surjectivity for the scheme-theoretic image of a proper source; a general scheme tool, no replacement of a unit step."
+   },
+   {
+    "node": "lem-sbc-geometrically-reduced-dominant-descent",
+    "why": "Descent of geometric reducedness through the quasi-compact map onto its schematic image; a general scheme tool absent from this unit."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Pointwise dimension additivity for a flat first morphism, applied at the identity; a general dimension tool absent from this unit."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Converts dimension at a rational point to the dimension of its local ring; a general finite-type dimension tool absent from this unit."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Identifies global group dimension with local-ring dimension at the identity, without requiring smoothness of the kernel; a general group tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "A surjective closed immersion into the reduced image is an isomorphism (the identity of a reduced scheme factors through it); a general scheme tool absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-image-proper",
+  "lem-sbc-geometrically-reduced-dominant-descent",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-kun-dimension-formula",
+  "lem-ag-group-identity-local-dimension",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-1a3cd66bc",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-1a3cd66bc (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the Milne iAG sources: Prop 1.70 (p.28), Thm 1.72 (p.29), Thm 5.39 and Rem 5.42 (pp.108-109). The item is correct over any field and is not weakened. Step 1: lem-sc-image-subgroup and pqf-lem-image-proper give I proper of finite type and q proper surjective; q is a homomorphism because j is a monomorphism. Step 2: A is geometrically reduced; O_I injects into q_*O_A because f is quasi-compact; the descent node then shows I is geometrically reduced; smooth_of_grpObj gives I smooth; I is connected as the image of A; so I is an abelian variety. Step 3: the fibre of q over e_I is K, which is correct. Step 4: the 02JS node applied at e_A with q flat gives dim_{e_A}A = dim_{e_K}K + dim_{e_I}I. Step 5: 02FX with rational identities (trdeg 0) and the identity-local-dimension node, which has no reducedness hypothesis, give dim A = dim I + dim K. Test cases checked: zero map, identity, projection, Frobenius. The new node lem-sfb-surjective-group-hom-flat is true (Milne 1.70 with a stronger hypothesis) but redundant (C5): the same-unit base node lem-sfb-algebraic-group-homomorphism-factorization (Milne 5.39) gives q = i'∘q' with q' faithfully flat and i' a closed immersion. Since q is surjective and I is reduced, lem-weil-pbc-reduced-source-factors-through-closed-subscheme makes i' an isomorphism, so q is flat. FIX: step 3 rewritten this way, proof_deps set to the union of the step uses, the pbc lemma's tool_use added to split_report, and the new node dropped. No other node cites it, and the change adds no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.HomImageDimension",
+  "declaration": "AlgebraicGeometry.isAbelianVariety_image_and_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/HomImageDimension.lean",
+  "statement": "theorem isAbelianVariety_image_and_dimension {k : Type u} [Field k] {A B : Over (Spec (.of k))} [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] (f : A ⟶ B) [IsMonHom f] : IsAbelianVariety (Over.mk (f.left.imageι ≫ B.hom)) ∧ topologicalKrullDim A.left = topologicalKrullDim f.left.image + topologicalKrullDim (GrpObj.ker f).left",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cd396534",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Statement isAbelianVariety_image_and_dimension matches node clause by clause: k Field Type u; A B : Over (Spec k) with GrpObj + IsAbelianVariety (proper, smooth, ConnectedSpace); f with IsMonHom; actual scheme-theoretic image f.left.image (group structure via exists_isMonHom_imageι, unique as imageι is mono); kernel GrpObj.ker f = pullback f η[B] (nonreduced kept); topologicalKrullDim (def-kun-dimension) dim A = dim I + dim K in node order; no extra hypotheses. Edge cases (zero map, identity, dim 0, Frobenius kernel, imperfect k, WithBot sum on nonempty finite-type schemes) fine. lean.statement verbatim; non-lean node fields equal live; no existing decl/module; all imports exist and match proof_dep records (factorization node has no record); docstrings carry source place, blueprint tag and 5-step proof; sorry only; report has Worker report and Second reading sections. No compile needed (no file changed)."
+ }
+}

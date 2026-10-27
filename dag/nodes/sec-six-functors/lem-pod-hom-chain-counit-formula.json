@@ -18,93 +18,57 @@
  ],
  "proof": [
   {
-   "text": "Work in the chosen coefficient-stage categories of the statement. First the domains. The supplied finite-Tor exceptional adjunction of [fix-prop-adjunctions](2) puts $C=Rf_!M$ and $Rf^!N$ in their finite-Tor categories. At finite coefficients [thm-sf-ctf-stability](i)–(iii) put $Lf^*T$, $M\\otimes^LLf^*T$, $L_N=R\\mathcal Hom_X(M,Rf^!N)$, $B_N=R\\mathcal Hom_Y(C,N)$ and $A_N=Rf_*L_N$ in $D^b_{ctf}$. Integrally, clause (vii) gives $D^b_c=D^b_{ctf}$ and internal-Hom preservation, the completed pullback and tensor preserve $D^b_c$ by [def-weil-derived-pullback-tensor-hom], and [lem-sf-integral-direct-image-constructible] puts $A_N$ in $D^b_c(Y,\\mathcal O_E)$; the coefficient-passage clause of (vii) gives the same memberships at $E$ and $\\Qlb$. In particular $A_N$ is a legitimate second input of the projection map $P_{A_N}$ in $p_N$. On these objects the ordinary adjunction of [fix-prop-adjunctions](1) and the supplied exceptional adjunction give the first and third bijections; the restricted tensor–Hom adjunction [det-thm-sf-ctf-stability-adjunctions] named in the statement, in the chosen form with $M$ (resp. $C$) as left tensor factor, gives the second and fifth. The projection isomorphism [fix-prop-projection-formula], at $(M,T)$, gives the fourth by precomposition with $P_T$, in precisely the direction in the statement. Hence all five maps are bijections. The argument is internal to the supplied operations at each stage: integral pullback and tensor are completed, the field operations are the specified rationalized/common-stage ones, and no reduction of a rational object to finite coefficients is used.",
-   "uses": [
-    "det-thm-sf-ctf-stability-adjunctions",
-    "fix-prop-adjunctions",
-    "fix-prop-projection-formula",
-    "thm-sf-ctf-stability",
-    "lem-sf-integral-direct-image-constructible",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-    "place": "Step 1, domains and directions in the reversed Hom chain"
-   }
-  },
-  {
-   "text": "Fix $t:T\\to A_N$ and put $q_N=\\operatorname{ev}_{M,Rf^!N}\\circ(1_M\\otimes\\varepsilon_{L_N})$, so $q_N:M\\otimes^LLf^*A_N\\to Rf^!N$. Apply the inverse-adjunction formula $\\Psi^{-1}(b)=\\varepsilon\\circ F(b)$ from [lem-weil-pbc-adjunction-of-natural-bijection] to $Lf^*\\dashv Rf_*$: the first bijection sends $t$ to $\\varepsilon_{L_N}\\circ Lf^*t$. The evaluation formula in [lem-pod-closed-uncurry-laws] sends this to\n$$v_t=\\operatorname{ev}_{M,Rf^!N}\\circ(1_M\\otimes(\\varepsilon_{L_N}\\circ Lf^*t))=q_N\\circ(1_M\\otimes Lf^*t).$$\nThe equality is tensor functoriality and associativity of composition.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-    "place": "Step 1, first two arrows of the reversed chain, counit and evaluation"
-   }
-  },
-  {
-   "text": "The same inverse-adjunction formula [lem-weil-pbc-adjunction-of-natural-bijection], now for $Rf_!\\dashv Rf^!$, sends $v_t$ to $\\mu_N\\circ Rf_!(v_t)$. Thus after the fourth bijection the map is $w_t=\\mu_N\\circ Rf_!(v_t)\\circ P_T$. Naturality in the second input of [fix-prop-projection-formula], applied to $t:T\\to A_N$, says\n$$Rf_!(1_M\\otimes Lf^*t)\\circ P_T=P_{A_N}\\circ(1_C\\otimes t).$$\nSubstitute the expression for $v_t$ from step 2 and use functoriality of $Rf_!$ to obtain\n$$w_t=\\mu_N\\circ Rf_!(q_N)\\circ P_{A_N}\\circ(1_C\\otimes t)=p_N\\circ(1_C\\otimes t).$$",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "fix-prop-projection-formula"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-    "place": "Step 1, exceptional counit and projection naturality in the reversed chain"
-   }
-  },
-  {
-   "text": "Set $k_N=\\operatorname{curry}(p_N):A_N\\to B_N$. By [lem-pod-closed-uncurry-laws], $\\operatorname{uncurry}(k_N)=p_N$ and\n$$\\operatorname{uncurry}(k_N\\circ t)=\\operatorname{uncurry}(k_N)\\circ(1_C\\otimes t)=p_N\\circ(1_C\\otimes t)=w_t.$$\nThe last bijection of the chain is currying. Since uncurry is a bijection, it follows that $\\Phi_T^N(t)=k_N\\circ t$, which is the asserted formula.",
-   "uses": [
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-    "place": "Step 1, final currying; the representing counit composite"
-   }
-  },
-  {
-   "text": "For $s:T'\\to T$, the formula just proved gives\n$$\\Phi_{T'}^N(t\\circ s)=k_N\\circ t\\circ s=\\Phi_T^N(t)\\circ s.$$\nBefore currying the corresponding identity is $w_{t\\circ s}=w_t\\circ(1_C\\otimes s)$, by the formula of step 3 and tensor functoriality. These equations give naturality in $T$, both for the uncurried formula and for the displayed Hom bijection.",
+   "text": "The supplied PodCtfAdjunctionData R already constructs the restricted functors and all four adjunctions on the full finite-Tor domains. Every intermediate object and the projection isomorphism are therefore well typed by construction; no separate invocation of lem-pod-hom-chain-ctf-domains is needed.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-    "place": "Step 1, naturality in the test object"
+    "place": "Step 1, assembly: domains and directions"
    }
   },
   {
-   "text": "For $r:N\\to N'$, put $h=R\\mathcal Hom_X(M,Rf^!r):L_N\\to L_{N'}$, $a=Rf_*h:A_N\\to A_{N'}$, and $b=R\\mathcal Hom_Y(C,r):B_N\\to B_{N'}$. Counit naturality [lem-weil-pbc-adjunction-of-natural-bijection] gives\n$$\\varepsilon_{L_{N'}}\\circ Lf^*a=h\\circ\\varepsilon_{L_N},\\qquad \\mu_{N'}\\circ Rf_!Rf^!r=r\\circ\\mu_N.$$\nNaturality in the target of the chosen tensor–Hom bijection [lem-pod-closed-uncurry-laws], applied to the identity of $L_N$, gives evaluation naturality\n$$\\operatorname{ev}_{M,Rf^!N'}\\circ(1_M\\otimes h)=Rf^!r\\circ\\operatorname{ev}_{M,Rf^!N}.$$\nSubstitution yields $q_{N'}\\circ(1_M\\otimes Lf^*a)=Rf^!r\\circ q_N$. Applying $Rf_!$, using the exceptional-counit equation and projection naturality [fix-prop-projection-formula] at $a$, gives\n$$p_{N'}\\circ(1_C\\otimes a)=r\\circ p_N.$$\nCurrying this equality, using naturality in source and target of the chosen adjunction [lem-pod-closed-uncurry-laws], gives $k_{N'}\\circ a=b\\circ k_N$. Composing with $t$ proves $\\Phi_T^{N'}(a\\circ t)=b\\circ\\Phi_T^N(t)$. This proves naturality in $N$; all equations use the actual natural transformations at the chosen coefficient stage.",
+   "text": "By [lem-pod-hom-chain-uncurried-transport], the first four arrows send $t$ to $w_t=p_N\\circ(1_C\\otimes t)$. Put $k_N=\\operatorname{curry}(p_N)$. The inverse and source-naturality laws of [lem-pod-closed-uncurry-laws] give\n$$\\operatorname{uncurry}(k_N\\circ t)=\\operatorname{uncurry}(k_N)\\circ(1_C\\otimes t)=p_N\\circ(1_C\\otimes t)=w_t.$$\nThe fifth arrow is currying, inverse to uncurry, hence $\\Phi_T^N(t)=k_N\\circ t$.",
    "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "lem-pod-closed-uncurry-laws",
-    "fix-prop-projection-formula"
+    "lem-pod-hom-chain-uncurried-transport",
+    "lem-pod-closed-uncurry-laws"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-    "place": "Step 1, naturality in the target, written as counit and evaluation equations"
+    "place": "Step 1, assembly: final currying"
+   }
+  },
+  {
+   "text": "For $s:T'\\to T$, associativity gives $\\Phi_{T'}^N(t\\circ s)=k_N\\circ t\\circ s=\\Phi_T^N(t)\\circ s$. The uncurried formula of step 2 and tensor functoriality give $w_{t\\circ s}=w_t\\circ(1_C\\otimes s)$. These are the claimed naturality equations in $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, assembly: naturality in T"
+   }
+  },
+  {
+   "text": "For $r:N\\to N'$, put $h=R\\mathcal Hom_X(M,Rf^!r)$, $a=Rf_*h$ and $b=R\\mathcal Hom_Y(C,r)$. Apply [lem-pod-hom-chain-pairing-naturality]: its ordinary-counit, evaluation, exceptional-counit and projection squares give\n$$p_{N'}\\circ(1_C\\otimes a)=r\\circ p_N.$$\nCurrying, using source and target naturality of the chosen bijection [lem-pod-closed-uncurry-laws], gives $k_{N'}\\circ a=b\\circ k_N$. Composing with $t$ and using step 2 yields $\\Phi_T^{N'}(a\\circ t)=b\\circ\\Phi_T^N(t)$, proving naturality in $N$ at each of the four stages.",
+   "uses": [
+    "lem-pod-hom-chain-pairing-naturality",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, assembly: naturality in N"
    }
   }
  ],
  "proof_deps": [
-  "det-thm-sf-ctf-stability-adjunctions",
-  "fix-prop-adjunctions",
-  "fix-prop-projection-formula",
-  "thm-sf-ctf-stability",
-  "lem-sf-integral-direct-image-constructible",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-pod-closed-uncurry-laws"
+  "lem-pod-hom-chain-uncurried-transport",
+  "lem-pod-closed-uncurry-laws",
+  "lem-pod-hom-chain-pairing-naturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-  "place": "Step 1 read right to left; explicit formal calculation using Stacks Tag 0037 and the chosen closed adjunction laws"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1 read right to left: Lean assembly from uncurried_transport and pairing_naturality with the chosen adjunction source/target naturality; full-domain typing is built into R."
  },
  "mathlib_searches": [
   {
@@ -200,25 +164,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pod-hom-chain-counit-formula",
   "worker": "stage1",
-  "summary": "Kept the statement. Expanded the reversed Hom chain into its ordinary counit, evaluation, exceptional counit and projection components, and used projection naturality to factor out the input morphism. Proved naturality in both variables by explicit equations at each chosen coefficient stage. Reused existing adjunction and uncurry nodes; created no nodes. Read all cited statements and sources; no exact project attachment or single Mathlib declaration states the full formula.",
-  "blueprint": "Realizes thm-pod-identification-of-the-comparison.proof.md third paragraph, the representative of the reverse adjunction chain and its global-duality identification, through the creating item lem-pod-global-duality-map-identification. The chain itself is fix-lem-tensor-adjunction.proof.md Step 1 read right to left. No detection, purity or isomorphism-of-comparison argument is imported into this formal formula.",
-  "tool_uses": [
-   {
-    "node": "det-thm-sf-ctf-stability-adjunctions",
-    "why": "Supplies the restricted ordinary, exceptional and tensor–Hom adjunctions on the finite-Tor subcategories; used as the domain/adjunction interface already named in the item, not as a replacement route."
-   },
-   {
-    "node": "fix-prop-adjunctions",
-    "why": "Specifies the ordinary and supplied exceptional adjunctions and their actual counits at all four stages; the package unit uses the mate unit, and no local statement gives these interfaces."
-   },
-   {
-    "node": "fix-prop-projection-formula",
-    "why": "Supplies invertibility and naturality of the specified projection transformation on these domains, an existing package input. The proof only evaluates this naturality at t and a."
-   }
-  ]
+  "summary": "Repair of the 2026-10-22 re-split return. Statement unchanged. Distributed the former domain/coefficient argument, four-arrow uncurried calculation, and target counit/evaluation naturality calculation among three self-contained statement-only unsplit nodes, with actual logged Mathlib searches. The item retains final currying and elementary source/target naturality assembly; every former equation is retained in a child statement or the assembly.",
+  "blueprint": "Third paragraph of thm-pod-identification-of-the-comparison.proof.md: the representative of the reverse adjunction/evaluation chain. The three children distribute former steps 1, 2–3 and 6. Final currying and test-object naturality (former steps 4–5) remain here. All five arrows follow fix-lem-tensor-adjunction.proof.md Step 1 in reverse.",
+  "tool_uses": []
  },
  "tool_uses": [
   "det-thm-sf-ctf-stability-adjunctions",
@@ -226,12 +177,66 @@
   "fix-prop-projection-formula"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q80-475e59bf9",
-  "group": "Q80",
+  "reviewer": "NT-cc-Q02-8f03574b2",
+  "group": "Q02",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-475e59bf9 (reviewer sub-agent of L); spot-checked: I read the whole item, its six steps and every cited statement. Sources checked: blueprint main-20261015 fix-lem-tensor-adjunction.proof.md Step 1 (the chain read right to left), sk-thm-sf-ctf-stability-adjunctions .md and .proof.md, Stacks 0037 (categories.tex, definition-adjoint and the paragraph after it), and Mathlib Monoidal/Closed/Basic.lean lines 140-200. I recomputed every step. Step 2: the inverse-adjunction formula gives eps∘Lf^*t, and uncurry_eq gives v_t=q_N(1⊗Lf^*t). Step 3: projection naturality at t gives w_t=p_N(1⊗t). Step 4: uncurry injectivity gives Phi(t)=curry(p_N)t. Step 5: naturality in T is elementary. Step 6: the eps/mu counit naturality, evaluation naturality from curry naturality in the target, and projection naturality at a give p_{N'}(1⊗a)=r p_N, hence k_{N'}a=b k_N. Small cases: f=id, T/M/N=0, empty X and shifts, with no sign issue. The statement is unchanged and true, and the conditional exceptional adjunction is kept as a hypothesis. No new nodes, no restated clauses, no SGA. One fault (E1/C4 coefficient category): step 1 took the finite-Tor memberships of C, L_N, A_N, B_N from det-thm-sf-ctf-stability-adjunctions, which is stated for the new notes' admissible-Lambda categories, not for the def-fix four-stage operations. A_N must be finite-Tor because p_N uses P_{A_N}. Fixed by citing fix-prop-adjunctions(2), thm-sf-ctf-stability (i)-(iii) and (vii), def-weil-derived-pullback-tensor-hom and lem-sf-integral-direct-image-constructible, matching the reviewed parent's step 1. Both new citations are on the unit route and create no cycle; proof_deps was recomputed. The declared tool_uses (det-thm adjunctions, fix-prop-adjunctions, fix-prop-projection-formula) are accepted as interface uses. Details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-8f03574b2 (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 (note released 2026-10-22, old proof 4644 characters) done correctly. The item statement is byte-identical to the side-live base and its stmt_deps are unchanged. The new proof is a 4-step assembly of 1585 characters, and proof_deps equals the union of the step uses. Every old argument now sits in a self-contained, statement-only unsplit node of comparable size: old step 1 (domains at four stages, legitimacy of P_{A_N}, directions of the five bijections) is lem-pod-hom-chain-ctf-domains; old steps 2-3 (u_t, v_t, z_t, w_t and the projection square at t) are lem-pod-hom-chain-uncurried-transport; old step 6 (ordinary counit, exceptional counit, evaluation, q and projection squares, and p_{N'}(1⊗a)=r p_N) is lem-pod-hom-chain-pairing-naturality. Old steps 4-5 and the final currying stay as elementary assembly. No node restates the item. I recomputed every identity: the inverse-adjunction formula ε∘Lf^*t, uncurry=(1⊗v);ev, μ∘Rf_!(v), and PF naturality in L at t and at a, all with matching domains. The ctf memberships follow from ctf-stability (i)-(v), (vii), lem-sf-integral-direct-image-constructible and def-weil-derived-pullback-tensor-hom, so the statement is true. Edge cases checked: f=id, X empty, M=0 or N=0, r=id, composites, shifts. Sources read: main-20261015 fix-lem-tensor-adjunction.proof.md Step 1 and thm-pod-identification-of-the-comparison.proof.md third paragraph. Each new node records LeanSearch, Loogle, LeanFinder and grep searches with real outputs and no match; the rg and blueprint_refs duplicate searches found nothing. Route unchanged: the accepted tool_uses are unchanged and no SGA is cited. Batch 5: lem-pod-closed-uncurry-laws is a general closed-monoidal Mathlib leaf, and det-thm-sf-ctf-stability-adjunctions gives general ctf-restricted adjunctions (its closure reaches only a general module dictionary). Both are foundations outside the PD and trace-formula assumptions, and both were already cited by the base item, so I accept them. The item is also reached through Künneth. Missing lean_audit on the new nodes is a maintainer field, not a fault."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodHomChainCounitFormula",
+  "declaration": "WeilConjectures.PodHomChain.counit_formula",
+  "declarations": [
+   "WeilConjectures.PodHomChain.rawProjection",
+   "WeilConjectures.PodHomChain.rawProjectionIso",
+   "WeilConjectures.PodHomChain.projectionIso",
+   "WeilConjectures.PodHomChain.projection",
+   "WeilConjectures.PodHomChain.homX",
+   "WeilConjectures.PodHomChain.homY",
+   "WeilConjectures.PodHomChain.sourceFunctor",
+   "WeilConjectures.PodHomChain.targetFunctor",
+   "WeilConjectures.PodHomChain.pairing",
+   "WeilConjectures.PodHomChain.curriedPairing",
+   "WeilConjectures.PodHomChain.uncurriedChain",
+   "WeilConjectures.PodHomChain.homEquiv",
+   "WeilConjectures.PodHomChain.counit_formula"
+  ],
+  "file": "lean/Sheaf/Paper/PodHomChainCounitFormula.lean",
+  "statement": "theorem counit_formula (M : (PodCoefficientStage.domain S s X).FullSubcategory) : (∀ (N T : (PodCoefficientStage.domain S s Y).FullSubcategory) (t : T ⟶ (sourceFunctor S s f c R M).obj N), homEquiv S s f c R M N T t = t ≫ curriedPairing S s f c R M N) ∧ (∀ (N T T' : (PodCoefficientStage.domain S s Y).FullSubcategory) (a : T' ⟶ T) (t : T ⟶ (sourceFunctor S s f c R M).obj N), homEquiv S s f c R M N T' (a ≫ t) = a ≫ homEquiv S s f c R M N T t) ∧ (∀ (N N' T : (PodCoefficientStage.domain S s Y).FullSubcategory) (r : N ⟶ N') (t : T ⟶ (sourceFunctor S s f c R M).obj N), homEquiv S s f c R M N' T (t ≫ (sourceFunctor S s f c R M).map r) = homEquiv S s f c R M N T t ≫ (targetFunctor S s f c R M).map r)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdbf7370a",
+  "group": "Q47",
+  "result": "fix",
+  "note": "Item lem-pod-hom-chain-counit-formula correct: clauses, directions (inverse ordinary/tensor/exceptional, forward projection, curry), naturality in T and N and the counit formula recomputed; R's free closed data is universally quantified, the conclusion is formal, accepted. Statements verbatim, universes bound, sorry only. H4 in the §1(B) repair of det-thm-sf-ctf-stability-adjunctions (PodCtfAdjunctions): the report wrongly calls LocalizingExceptionalAdjoint and RationalExceptionalRestriction retired; both are live in weil-conjectures-sheaf/lean and the live DAG. podLocalizingLowerShriek duplicated localizingLowerShriek (def-sf-localizing-lower-shriek), podCtfToLocalizing duplicated constantModelFiniteTorToLocalizing, podCtfRestrict duplicated sixFunctorDomainChange. FIX fixes/PodCtfAdjunctions.lean: import LocalizingExceptionalAdjoint, inline ObjectProperty.ιOfLE inclusion, use sixFunctorDomainChange, drop the three copies; no mathematical change. nt_compile --json: fixed dep clean 58.4 s and item clean 22.6 s against it; fixed dep timed out twice at load >=108, delivered dep took 38-56 s, same hot spot (podGeneralCtfAdjunctions kernel+lint ~25 s), so a landing-time risk under heavy load. Maintainer notes: dep lean.note now stale; podCtfAdjunctions_exists is an unused sorried four-stage theorem with no node, advisory."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f0968",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T202144-L-2681991",
+  "kind": "interface",
+  "note": "independent cc review: counit_formula proof vs node steps 2–4 (uncurried_transport conj.5 + pairing_naturality conj.6 + adjunction naturality); child adaptation PodCtfPairing.{rawProjection,rawProjectionIso,projection,homX} vs parent copies (identical bodies) and directHomObject vs sourceFunctor unfolding; node records vs Lean; sandbox compile + #print axioms (sorryAx only from upstream sorried statements)"
+ }
 }

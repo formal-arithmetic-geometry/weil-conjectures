@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-system-clopen-alpha-tensor-square",
+ "kind": "statement",
+ "title": "Tensor square for the localized system clopen arrow before proper mates",
+ "statement": "Fix a finite-field datum $K$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}(K.k)$ and a finite extension $E/\\mathbf Q_\\ell$. For every scheme $W$, use the strict quotient-semilinear system category and its ordinary unbounded derived category $D_W$ of [def-pur-system-tensor-mate-arrows], with quotient exponent $n+1$, and any normalized tensor operations $o$ of that node. Let $A,B,C,F$ be separated finite-type $K.k$-schemes, $k:A\\to B$ and $i:C\\to F$ quasi-compact open immersions, $r:A\\to C$ and $p:B\\to F$ proper, all morphisms over $K.k$, with $p\\circ k=i\\circ r$. Write $P,J,T,\\mu,\\delta,\\alpha$ for the specified pullback, exact open extension, tensor, tensor pullback comparison, open tensor comparison and localized clopen arrow of that node. Let $c:P_kP_p\\cong P_rP_i$ be its canonical square comparison. For every $G\\in D_C$, $Q\\in D_F$, the following equality holds in $D_B$, before evaluation: $P_p(\\delta_{i;G,Q});\\alpha_{T_C(G,P_iQ)};J_k(\\mu_{r;G,P_iQ}) = \\mu_{p;J_iG,Q};T_B(\\alpha_G,1);\\delta_{k;P_rG,P_pQ};J_k(T_A(1,c_Q))$. Both sides have source $P_pT_F(J_iG,Q)$ and target $J_kT_A(P_rG,P_rP_iQ)$. Semicolons denote composition in displayed order. The square need not be cartesian; no boundedness, Tor, coefficient flatness or cartesianness condition on the systems is assumed. This statement involves no proper-adjunction mate or projection morphism.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B open case; agent-formulated tensor refinement, precisely Steps 2--3 of lem-sf-proper-open-projection-mate. Tensor normalizations from sites-modules.tex 0E8I and sites-cohomology.tex 0B56, 0GL1."
+ },
+ "stmt_deps": [
+  "def-pur-system-tensor-mate-arrows",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pur-system-tensor-presentation-identification] to identify the canonical ringed-sequence tensor, pullback, open extension and their unit/counit-normalized comparisons with the supplied operations o. Its representative normalization fixes mu, delta and the pullback compositors on whole systems, rather than only after evaluation.",
+   "uses": [
+    "lem-pur-system-tensor-presentation-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-system-clopen-mate-identification] to identify o.alpha with open base change beta, b_! of the identity/zero projector for s=(k,r):A→B×[F]C, and the canonical open/pullback compositors. Only its alpha identification is needed, not its proper-mate clause.",
+   "uses": [
+    "lem-pur-system-clopen-mate-identification",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the full tensor-comparison identity of [lem-sf-clopen-comparison-tensor-square] in systems mode for this clopen word. Its Cartesian beta square follows by fully faithful open restriction and open-unit normalization. Its clopen square is the (identity,zero) projector tensor identity; its composite-open identity identifies delta_b followed by b_!delta_s with delta_k. Substituting the comparisons of the first two steps gives the displayed identity, with c:P_kP_p→P_rP_i on the right. All localizations and representative comparisons are on whole unbounded systems.",
+   "uses": [
+    "lem-sf-clopen-comparison-tensor-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-pur-system-clopen-mate-identification",
+  "lem-pur-system-tensor-presentation-identification",
+  "lem-sf-clopen-comparison-tensor-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B open case; tensor refinement in Steps 2--5 of lem-sf-proper-open-projection-mate. Direct alpha square followed by the counit/mate calculation in the same system categories."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor compatibility of clopen projection and open base change before taking adjunction mates",
+   "results": "8 hits: LinearMap.rTensor_baseChange; TensorProduct.isBaseChange; IsLocalization.algebraTensorEquiv; IsBaseChange; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; IsBaseChange.tensorEquiv; IsOpenMap.adjunction.",
+   "date": "2026-10-26",
+   "verdict": "No match for the normalized derived clopen tensor square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor compatibility of clopen projection and open base change before taking adjunction mates",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction_left_triangle; LightCondensed.ihomPoints_symm_comp; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; CategoryTheory.frobeniusMorphism; CategoryTheory.frobeniusMorphism_mate; CategoryTheory.coev_expComparison; CategoryTheory.bijection.",
+   "date": "2026-10-26",
+   "verdict": "No match. Generic adjunction formulas do not identify the geometric clopen arrow."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*tensor|tensor.*clopen|open.*baseChange.*tensor",
+   "results": "Mathlib CategoryTheory has no clopen tensor square; adopted source ProjectionMapCompat and ProjectionTensorMap supply generic mate calculations only. Existing Sheaf ClopenComparisonTensorSquare is the ringed-site statement with independently normalized data; SystemClopenMateIdentification and SystemTensorPresentationIdentification compare the two presentations. No existing declaration has the displayed SystemTensorMate alpha square. Blueprint search clopen tensor returned zero nodes.",
+   "date": "2026-10-26",
+   "verdict": "New interface-specific step; existing ringed-site square retained as its dependency."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemClopenTensorCompatibility",
+  "date": "2026-10-26",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Projection-composition equality in prop-pur-adic-reconstruction-trace-coherence; pre-mate alpha tensor square of Steps 2--3 of lem-sf-proper-open-projection-mate.",
+   "via": [
+    "lem-pur-system-clopen-tensor-compatibility",
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemClopenAlphaTensorSquare",
+  "file": "lean/Sheaf/Paper/SystemClopenAlphaTensorSquare.lean",
+  "declaration": "WeilConjectures.SystemTensorMate.system_clopen_alpha_tensor_square",
+  "statement": "theorem system_clopen_alpha_tensor_square\n    (K : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ K.p)\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (o : TensorOperations l E)\n    {A B C F : Scheme.{u}}\n    [A.Over (Spec (.of K.k))] [B.Over (Spec (.of K.k))]\n    [C.Over (Spec (.of K.k))] [F.Over (Spec (.of K.k))]\n    [IsSeparated (A ↘ Spec (.of K.k))] [LocallyOfFiniteType (A ↘ Spec (.of K.k))]\n    [QuasiCompact (A ↘ Spec (.of K.k))]\n    [IsSeparated (B ↘ Spec (.of K.k))] [LocallyOfFiniteType (B ↘ Spec (.of K.k))]\n    [QuasiCompact (B ↘ Spec (.of K.k))]\n    [IsSeparated (C ↘ Spec (.of K.k))] [LocallyOfFiniteType (C ↘ Spec (.of K.k))]\n    [QuasiCompact (C ↘ Spec (.of K.k))]\n    [IsSeparated (F ↘ Spec (.of K.k))] [LocallyOfFiniteType (F ↘ Spec (.of K.k))]\n    [QuasiCompact (F ↘ Spec (.of K.k))]\n    (k : A ⟶ B) (r : A ⟶ C) (p : B ⟶ F) (i : C ⟶ F)\n    [k.IsOver (Spec (.of K.k))] [r.IsOver (Spec (.of K.k))]\n    [p.IsOver (Spec (.of K.k))] [i.IsOver (Spec (.of K.k))]\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)\n    (G : D l E C) (Q : D l E F) :\n    (o.P p).map ((o.delta i G Q).hom) ≫\n        (o.alpha k r p i h).app ((o.T C).obj (G, (o.P i).obj Q)) ≫\n        (o.J k).map ((o.mu r).hom.app (G, (o.P i).obj Q)) =\n      (o.mu p).hom.app ((o.J i).obj G, Q) ≫\n        (o.T B).map (Prod.mkHom ((o.alpha k r p i h).app G) (𝟙 ((o.P p).obj Q))) ≫\n        (o.delta k ((o.P r).obj G) ((o.P p).obj Q)).hom ≫\n        (o.J k).map ((o.T A).map\n          (Prod.mkHom (𝟙 ((o.P r).obj G)) ((o.square k r p i h).hom.app Q)))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T204416-L-2952033",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T204416-L-2952033",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

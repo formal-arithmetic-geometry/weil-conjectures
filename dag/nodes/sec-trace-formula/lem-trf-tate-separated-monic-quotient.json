@@ -1,0 +1,408 @@
+{
+ "id": "lem-trf-tate-separated-monic-quotient",
+ "kind": "statement",
+ "title": "Separate bounded monic relations commute with adjoining restricted series",
+ "statement": "Let $K$ be a field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. For integers $r,s\\ge0$ put $T=K\\langle X_1,\\ldots,X_r\\rangle$ and $D=K\\langle X_1,\\ldots,X_r,Y_1,\\ldots,Y_s\\rangle$, the restricted-series rings [def-trf-restricted-series-presentation], with Gauss norm $\\|\\sum a_\\nu X^\\nu\\|_G=\\sup_\\nu|a_\\nu|$. Let $P=T[Y_1,\\ldots,Y_s]$ be the ordinary polynomial ring [def-weil-pbc-mv-polynomial-ring], included in $D$ by its coefficients. For each $1\\le i\\le s$ choose $d_i\\ge1$ and coefficients $a_{ij}\\in T$ for $0\\le j<d_i$, with $\\|a_{ij}\\|_G\\le1$, and set $f_i=Y_i^{d_i}+\\sum_{j<d_i}a_{ij}Y_i^j$. Write $J_P=(f_1,\\ldots,f_s)\\subset P$ and $J_D=(f_1,\\ldots,f_s)\\subset D$ for the generated ideals, and use quotient algebras [def-weil-pbc-algebra-hom-quotient]. The canonical map $P/J_P\\longrightarrow D/J_D$ induced by $P\\hookrightarrow D$ is an isomorphism of $T$-algebras. The empty family $s=0$ and $r=0$ are included; the $f_i$ may have repeated roots.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+  "place": "Section 1.2 Theorem 8 (Weierstrass Division), printed pp.12–13, and Proposition 14 proof, printed pp.15–16, polynomial/Tate quotient comparison for a Weierstrass polynomial. This is the agent-formulated extension to several separate monic relations. Primary PDF read online 2026-10-24; local archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-trf-restricted-series-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "For each $i$, put $A_i=K\\langle X_1,\\ldots,X_r,Y_1,\\ldots,\\widehat{Y_i},\\ldots,Y_s\\rangle$. Relabel the exponent coordinates to put $Y_i$ last; this preserves the cofinite decay condition, every finite Cauchy-product coefficient, and the Gauss norm. The regrouping in [lem-trf-restricted-series-gauss-completion] therefore identifies $D$ with restricted series in $Y_i$ over $A_i$. Apply [lem-trf-tate-weierstrass-norm-division] to $g=f_i$: its leading coefficient is $1$, its lower coefficients have norm at most $1$ even in $A_i$, and its upper tail is zero. Denote the unique decomposition by $h=Q_i(h)f_i+R_i(h)$, where $R_i(h)\\in A_i[Y_i]$ has $Y_i$-degree less than $d_i$. Uniqueness applied to sums and to multiplication by an element of $A_i$ proves that $Q_i,R_i$ are additive and $A_i$-linear. It also gives $R_i(f_i h)=0$, by comparing with the decomposition having quotient $h$ and remainder zero.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-tate-weierstrass-norm-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, Theorem 8, printed pp.12–13: unique division, specialized to the bounded monic polynomial; coordinate relabelling and linearity written explicitly."
+   }
+  },
+  {
+   "text": "The operation $R_i$ preserves a previously imposed bound $\\deg_{Y_j}<d_j$ when $j\\ne i$. Indeed write such an input as the finite sum $\\sum_{k<d_j}Y_j^k h_k$ with $h_k\\in B=K\\langle X,Y_\\ell:\\ell\\ne j\\rangle$. Extracting one $Y_j$-coefficient preserves restrictedness, directly from the cofinite decay definition. The polynomial $f_i$ belongs to $B$ because all its coefficients belong to $T$. Apply [lem-trf-tate-weierstrass-norm-division] in $B$, with $Y_i$ last, to each $h_k$: write $h_k=q_k f_i+r_k$ with $\\deg_{Y_i}r_k<d_i$. Substitution gives a decomposition of the original input in $D$, with quotient $\\sum_{k<d_j}Y_j^k q_k$ and remainder $\\sum_{k<d_j}Y_j^k r_k$. Uniqueness of division in $D$ identifies this last sum with $R_i(h)$. Its $Y_j$-degree is still less than $d_j$. For any $j\\ne i$ we also have $R_i(f_j h)=f_jR_i(h)$: here $f_j\\in A_i$, so this is exactly the $A_i$-linearity established in step 1.",
+   "uses": [
+    "lem-trf-tate-weierstrass-norm-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent finite-coordinate argument using Section 1.2, Theorem 8, printed pp.12–13; this is why the separate-variable hypothesis is required."
+   }
+  },
+  {
+   "text": "Set $h_0=h$ and $h_i=R_i(h_{i-1})$ for $1\\le i\\le s$, and put $N(h)=h_s$. Step 2 inductively shows that $N(h)$ is supported in the finite box $0\\le\\alpha_i<d_i$ in the $Y$-exponents. Grouping this finite box gives $N(h)\\in T[Y_1,\\ldots,Y_s]=P$. Telescoping the equations from step 1 gives $h-N(h)=\\sum_{i=1}^s Q_i(h_{i-1})f_i\\in J_D$. Moreover $N(f_jh)=0$ for each $j$: reductions with index $i<j$ retain the factor $f_j$ by step 2, reduction with index $j$ kills it by step 1, and later reductions preserve zero. Additivity then gives $N(J_D)=0$, since the generated ideal consists of finite sums $\\sum_j f_jb_j$. Thus every class modulo $J_D$ has a representative in $P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent finite iteration of Theorem 8; several-variable extension of the quotient comparison in Section 1.2, Proposition 14 proof, printed pp.15–16."
+   }
+  },
+  {
+   "text": "For a polynomial input $p\\in P$, each division in step 1 actually has polynomial quotient as well as polynomial remainder. To see this without invoking an additional division theorem, view $p$ as a polynomial in $Y_i$ over $T[Y_j:j\\ne i]$, using [def-weil-pbc-mv-polynomial-ring]. If its degree is $n\\ge d_i$ and its leading coefficient is $b$, replace it by $p-bY_i^{n-d_i}f_i$. The leading term cancels, and the degree strictly decreases. Iterating ends with a polynomial remainder of $Y_i$-degree less than $d_i$, and the subtracted terms record a polynomial quotient. If the input is zero or has degree less than $d_i$, take quotient zero. These finite polynomial decompositions are also decompositions in $D$, so uniqueness in [lem-trf-tate-weierstrass-norm-division] identifies them with $Q_i(p),R_i(p)$. Induction through the reductions therefore gives $p-N(p)\\in J_P$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-tate-weierstrass-norm-division"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Elementary descending-degree polynomial algorithm and Theorem 8 uniqueness; compare Section 1.2, Proposition 14 proof, printed pp.15–16."
+   }
+  },
+  {
+   "text": "The inclusion $P\\hookrightarrow D$ sends every $f_i$ to the corresponding generator, hence induces the stated $T$-algebra homomorphism $\\phi:P/J_P\\to D/J_D$ with the quotient convention [def-weil-pbc-algebra-hom-quotient]. It is surjective by step 3. For injectivity, if $\\phi([p])=0$, the quotient-kernel description gives $p\\in J_D$ and hence $N(p)=0$ by step 3. Step 4 then gives $p=p-N(p)\\in J_P$, so $[p]=0$. An explicit inverse on classes is $[h]\\mapsto[N(h)]$: additivity and $N(J_D)=0$ give independence of the representative, while steps 3–4 give both inverse identities. This inverse preserves multiplication and scalars because $\\phi$ does and is injective: apply $\\phi$ to each required identity and cancel. If $s=0$, the reduction is the identity, $P=D=T$ and both ideals are zero. If $r=0$, $T=K$ and every division above still applies. No step uses distinct roots, separability, or reducedness.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent assembly of the quotient isomorphism; Section 1.2, Proposition 14 proof, printed pp.15–16, extended to separate monic relations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-weierstrass-norm-division",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Explicit several-variable extension of Bosch (April 2008), Section 1.2 Theorem 8 and Proposition 14 proof, printed pp.12–13 and 15–16, read online at the primary source URL in source.url; local archival PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a complete nonarchimedean normed algebra by finitely many monic polynomials with norm at most one coefficients is finite free and complete with the maximum coefficient norm",
+   "results": {
+    "t": "2026-10-24T13:57:54Z",
+    "tool": "leanfinder",
+    "query": "A quotient of a complete nonarchimedean normed algebra by finitely many monic polynomials with norm at most one coefficients is finite free and complete with the maximum coefficient norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "Polynomial.Monic.finite_quotient",
+     "spectralNorm.normedSpace",
+     "spectralNorm.normedField",
+     "spectralNorm.normedAddCommGroup",
+     "spectralNorm.nontriviallyNormedField",
+     "Polynomial.Monic.free_quotient",
+     "spectralNorm.seminormedAddCommGroup"
+    ],
+    "digest": "1a293dc5fed3bf77"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Polynomial.IsDistinguishedAt.algEquivQuotient in Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 concerns formal power series and adic completeness, not Tate restricted series. Monic.free_quotient and Monic.finite_quotient concern ordinary polynomials only. Read these hits and MvPowerSeries/Restricted.lean; no analytic polynomial/Tate quotient comparison is present."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For Tate algebra coefficients, the quotient of the polynomial ring by separate monic polynomials with Gauss norm bounded coefficients equals the corresponding quotient of the restricted power series ring",
+   "results": {
+    "t": "2026-10-24T13:58:23Z",
+    "tool": "leanfinder",
+    "query": "For Tate algebra coefficients, the quotient of the polynomial ring by separate monic polynomials with Gauss norm bounded coefficients equals the corresponding quotient of the restricted power series ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.IsDistinguishedAt.algEquivQuotient_apply",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient",
+     "PowerSeries.algEquivQuotientWeierstrassDistinguished",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply",
+     "PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod"
+    ],
+    "digest": "f2833d5a7ca5a360"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Polynomial.IsDistinguishedAt.algEquivQuotient in Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 concerns formal power series and adic completeness, not Tate restricted series. Monic.free_quotient and Monic.finite_quotient concern ordinary polynomials only. Read these hits and MvPowerSeries/Restricted.lean; no analytic polynomial/Tate quotient comparison is present."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRestricted\", \"Monic\"",
+   "results": {
+    "t": "2026-10-24T13:58:20Z",
+    "tool": "loogle",
+    "query": "\"IsRestricted\", \"Monic\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Polynomial.IsDistinguishedAt.algEquivQuotient in Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 concerns formal power series and adic completeness, not Tate restricted series. Monic.free_quotient and Monic.finite_quotient concern ordinary polynomials only. Read these hits and MvPowerSeries/Restricted.lean; no analytic polynomial/Tate quotient comparison is present."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of restricted power series by a monic polynomial with bounded coefficients agrees with the polynomial quotient",
+   "results": {
+    "t": "2026-10-24T13:58:20Z",
+    "tool": "leansearch",
+    "query": "The quotient of restricted power series by a monic polynomial with bounded coefficients agrees with the polynomial quotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.IsDistinguishedAt.algEquivQuotient",
+     "Polynomial.divByMonic_eq_div",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient",
+     "Polynomial.divByMonic",
+     "Polynomial.divModByMonicAux",
+     "Polynomial.divByMonic_eq_of_not_monic",
+     "Polynomial.modByMonic_add_div",
+     "AdjoinRoot.modByMonicHom"
+    ],
+    "digest": "47e194fb465954dd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Polynomial.IsDistinguishedAt.algEquivQuotient in Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 concerns formal power series and adic completeness, not Tate restricted series. Monic.free_quotient and Monic.finite_quotient concern ordinary polynomials only. Read these hits and MvPowerSeries/Restricted.lean; no analytic polynomial/Tate quotient comparison is present."
+  },
+  {
+   "tool": "grep",
+   "query": "algEquivQuotient|IsRestricted.*[Mm]onic|[Mm]onic.*IsRestricted",
+   "results": {
+    "t": "2026-10-24T13:58:20Z",
+    "tool": "grep",
+    "query": "algEquivQuotient|IsRestricted.*[Mm]onic|[Mm]onic.*IsRestricted",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/RamificationInertia/Basic.lean",
+     "Mathlib/RingTheory/RamificationInertia/Ramification.lean",
+     "Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+     "Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+     "Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+     "Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean"
+    ],
+    "digest": "5d73a357c8b3b8bb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Polynomial.IsDistinguishedAt.algEquivQuotient in Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 concerns formal power series and adic completeness, not Tate restricted series. Monic.free_quotient and Monic.finite_quotient concern ordinary polynomials only. Read these hits and MvPowerSeries/Restricted.lean; no analytic polynomial/Tate quotient comparison is present."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRestricted\", \"Monic\"",
+   "results": {
+    "t": "2026-10-24T14:24:23Z",
+    "tool": "loogle",
+    "query": "\"IsRestricted\", \"Monic\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Polynomial.IsDistinguishedAt.algEquivQuotient at Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 (formal power series, with adic completeness and distinguished-at-an-ideal hypotheses). This is not the restricted-series Gauss-norm statement. Monic.free_quotient and finite_quotient at RingTheory/AdjoinRoot.lean:655,660 are polynomial-only. MvPowerSeries/Restricted.lean:33,107 defines the restricted subring but gives no analytic quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weierstrass division in a Tate algebra by a monic polynomial with coefficients of Gauss norm at most one gives a unique bounded remainder and quotient",
+   "results": {
+    "t": "2026-10-24T14:24:24Z",
+    "tool": "leanfinder",
+    "query": "Weierstrass division in a Tate algebra by a monic polynomial with coefficients of Gauss norm at most one gives a unique bounded remainder and quotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.weierstrassDiv",
+     "PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod",
+     "PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod",
+     "PowerSeries.IsWeierstrassDivision.unique",
+     "PowerSeries.exists_isWeierstrassDivision",
+     "PowerSeries.weierstrassMod",
+     "PowerSeries.IsWeierstrassDivision",
+     "PowerSeries.IsWeierstrassFactorization.isWeierstrassDivision"
+    ],
+    "digest": "bd2c88dd2905475c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Polynomial.IsDistinguishedAt.algEquivQuotient at Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 (formal power series, with adic completeness and distinguished-at-an-ideal hypotheses). This is not the restricted-series Gauss-norm statement. Monic.free_quotient and finite_quotient at RingTheory/AdjoinRoot.lean:655,660 are polynomial-only. MvPowerSeries/Restricted.lean:33,107 defines the restricted subring but gives no analytic quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "algEquivQuotient|IsRestricted.*[Mm]onic|[Mm]onic.*IsRestricted",
+   "results": {
+    "t": "2026-10-24T14:25:14Z",
+    "tool": "grep",
+    "query": "algEquivQuotient|IsRestricted.*[Mm]onic|[Mm]onic.*IsRestricted",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/RamificationInertia/Basic.lean",
+     "Mathlib/RingTheory/RamificationInertia/Ramification.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean"
+    ],
+    "digest": "2b36e8cf5985466c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Polynomial.IsDistinguishedAt.algEquivQuotient at Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 (formal power series, with adic completeness and distinguished-at-an-ideal hypotheses). This is not the restricted-series Gauss-norm statement. Monic.free_quotient and finite_quotient at RingTheory/AdjoinRoot.lean:655,660 are polynomial-only. MvPowerSeries/Restricted.lean:33,107 defines the restricted subring but gives no analytic quotient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The polynomial quotient by separate bounded monic relations equals its Tate algebra quotient",
+   "results": {
+    "t": "2026-10-24T14:25:15Z",
+    "tool": "leansearch",
+    "query": "The polynomial quotient by separate bounded monic relations equals its Tate algebra quotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.Monic.free_quotient",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient",
+     "Polynomial.Monic.finite_quotient",
+     "MvPolynomial.quotientEquivQuotientMvPolynomial",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient",
+     "Polynomial.div_eq_quo_add_rem_div",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient_apply",
+     "AdjoinRoot.isAdjoinRootMonic.congr_simp"
+    ],
+    "digest": "920ff5732ae5e380"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Polynomial.IsDistinguishedAt.algEquivQuotient at Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 (formal power series, with adic completeness and distinguished-at-an-ideal hypotheses). This is not the restricted-series Gauss-norm statement. Monic.free_quotient and finite_quotient at RingTheory/AdjoinRoot.lean:655,660 are polynomial-only. MvPowerSeries/Restricted.lean:33,107 defines the restricted subring but gives no analytic quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial ring quotient is isomorphic to restricted power series quotient by separate monic polynomials with coefficients of norm at most one",
+   "results": {
+    "t": "2026-10-24T14:25:16Z",
+    "tool": "leanfinder",
+    "query": "Polynomial ring quotient is isomorphic to restricted power series quotient by separate monic polynomials with coefficients of norm at most one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient_apply",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply",
+     "AdjoinRoot.Polynomial.quotQuotEquivComm",
+     "AdjoinRoot.Polynomial.quotQuotEquivComm_mk"
+    ],
+    "digest": "1b7a75b83b3f5d18"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Polynomial.IsDistinguishedAt.algEquivQuotient at Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:458 (formal power series, with adic completeness and distinguished-at-an-ideal hypotheses). This is not the restricted-series Gauss-norm statement. Monic.free_quotient and finite_quotient at RingTheory/AdjoinRoot.lean:655,660 are polynomial-only. MvPowerSeries/Restricted.lean:33,107 defines the restricted subring but gives no analytic quotient comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-algebra-affinoid-presentation",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic prerequisite under lem-trf-local-term-locality, via the finite-affinoid-algebra step of the normalization chain: polynomial/Tate quotient comparison used to turn finitely many scaled integral generators into a Tate presentation. It does not replace any step of the current contracting-correspondence unit proof.",
+   "via": [
+    "lem-trf-finite-algebra-affinoid-presentation",
+    "lem-trf-affinoid-finite-galois-envelope",
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-separated-monic-quotient",
+  "worker": "stage1",
+  "summary": "Reuse existing norm-controlled Weierstrass division and Gauss regrouping; prove bounded successive remainders, preservation of earlier bounds and annihilation of the generated ideal, then compare the same algorithm on polynomials. No new nodes; unchanged statement, including zero variable counts and repeated roots.",
+  "blueprint": "Historical analytic supporting chain from lem-trf-local-term-locality through lem-trf-finite-algebra-affinoid-presentation, as recorded in blueprint.from.place. The newest contracting-correspondence proof has no analytic quotient clause; this auxiliary split does not change that unit route. The steps realize the finite-affinoid-presentation use of separate scaled integral relations, via Bosch Section 1.2 Theorem 8 and Proposition 14."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-baf0e0663",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-baf0e0663 (reviewer sub-agent of L); spot-checked: I read the item, the report and all six cited statements in full. The delivery is one commit with no new nodes. The statement is unchanged and true; the parent cites it with the same hypotheses. I tested it on: s=0 and r=0; d_i=1; f_i=Y_i^d; repeated roots (Y-a)^d with |a|<=1. Y-p^{-1} over Q_p shows the coefficient norm bound is needed. Step 1: lem-trf-tate-weierstrass-norm-division applies over A_i (tail zero, lower coefficients of norm <=1 in T, contained in A_i). It is complemented by the regrouping in lem-trf-restricted-series-gauss-completion. Uniqueness gives additivity, A_i-linearity and R_i(f_i h)=0. Step 2: f_i lies in B because its coefficients are in T. Division in B followed by uniqueness in D correctly keeps Y_j-degree < d_j, and f_j in A_i gives R_i(f_j h)=f_j R_i(h). Step 3: the box representative, the telescoping into J_D, and N(J_D)=0 by finite sums are all correct. Step 4: monic long division over T[Y_j, j≠i] terminates and, by uniqueness, matches R_i on P, so p-N(p) is in J_P. Step 5: the map is well defined, surjective and injective, and a T-algebra map. Route: both lemmas are in unit sk-i-curve-zero; the rest are definitions, so no tool_uses are needed. Duplicates: I read the closest candidates, including tate-convergent-division, affinoid-polynomial-closed-point-comparison, tate-unit-ball-polynomial-reduction and per-tate-triangular-distinguished-coordinate; none states this. Mathlib: LeanFinder, Loogle, LeanSearch and grep were all run. IsDistinguishedAt.algEquivQuotient covers formal power series only, so there is no leaf. Sources: Bosch §1.2 Thm 8 / Prop 14 is WANTED and not available locally. The proof is marked as an agent proof and I checked the mathematics independently. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateSeparatedMonicQuotient",
+  "declaration": "RestrictedSeries.tate_separated_monic_quotient",
+  "declarations": [
+   "RestrictedSeries.separatedMonicRelation",
+   "RestrictedSeries.separatedMonicIdeal",
+   "RestrictedSeries.tate_separated_monic_quotient"
+  ],
+  "file": "lean/Sheaf/RingTheory/TateSeparatedMonicQuotient.lean",
+  "statement": "theorem tate_separated_monic_quotient (K : Type u) [NormedField K] [IsUltrametricDist K] [CompleteSpace K] (hK : ∃ x : K, x ≠ 0 ∧ ‖x‖ ≠ 1) (r s : ℕ) (d : Fin s → ℕ) (hd : ∀ i : Fin s, 1 ≤ d i) (a : (i : Fin s) → Fin (d i) → MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) (ha : ∀ (i : Fin s) (j : Fin (d i)), MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (a i j).val ≤ 1) : Function.Bijective (coefficientPolynomialQuotientMap K r s (separatedMonicIdeal K r s d a))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de2d61a66",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Item stmt/proof/proof_deps identical to side-live; only stmt_deps+lean added; lean.statement verbatim in both files. Clause check: NormedField+IsUltrametricDist+CompleteSpace+hK(∃x≠0,‖x‖≠1) = complete nontrivial nonarch field; T,D = Mathlib IsRestricted.subring unit radius on Fin r / Fin (r+s); gaussNorm norm 1 = sup coeff; P=MvPolynomial (Fin s) T with aeval at X(natAdd r i) over rename(castAdd) coefficient map; d,hd,a (dependent Fin (d i)),ha exact; f_i literal monic; J_D = J_P.map η = generated ideal; conclusion Bijective of bundled T-AlgHom quotientMapₐ = T-algebra iso. Edge cases s=0, r=0, d_i=1, Y^d repeated roots, |a|=1 covered; math of steps 1-5 sound. New def node def-trf-restricted-series-coefficient-extension: real data (rename/codRestrict, toAlgebra, aeval, quotientMapₐ), restrictedness sorry is a true obligation, no duplicate in Mathlib/side-live (MvPowerSeries.coefficientExtensionInl is a different notion). Docstrings/source/blueprint/proof present; only sorries. Advisory: global Algebra T_r T_{r+s} instance would give a non-defeq Algebra T T at literal s=0. Not recompiled (no change); worker reports clean scompile."
+ }
+}

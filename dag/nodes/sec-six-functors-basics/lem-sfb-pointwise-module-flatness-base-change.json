@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-pointwise-module-flatness-base-change",
+ "kind": "statement",
+ "title": "Pointwise ascent and flat-base-change reflection for module sheaves",
+ "statement": "Let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of schemes [def-pc-scheme]. Put $X'=X\\times_Y Y'$ with projections $b:X'\\to X$ and $f':X'\\to Y'$ [def-pc-fibre-product]. Let $\\mathcal F$ be any quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], and put $\\mathcal F'=b^*\\mathcal F$ [def-pc-module-pullback]. Fix $x'\\in X'$, $x=b(x')$, $y'=f'(x')$ and $y=f(x)=g(y')$. Using module stalks [def-weil-pbc-module-stalk] and the scalar maps induced by the scheme morphisms, the following hold:\n(1) If $\\mathcal F_x$ is flat over $\\mathcal O_{Y,y}$, then $\\mathcal F'_{x'}$ is flat over $\\mathcal O_{Y',y'}$.\n(2) If $g$ is flat at $y'$ [def-weil-flat-morphism] and $\\mathcal F'_{x'}$ is flat over $\\mathcal O_{Y',y'}$, then $\\mathcal F_x$ is flat over $\\mathcal O_{Y,y}$.\nModule flatness means that tensoring with the module preserves exact sequences. No finite-type, finite-presentation, nonzero-stalk, surjectivity or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 047C, lemma-flat-locus-base-change, clauses (1) and (2) for arbitrary quasi-coherent modules."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_{Y,y}$, $A=\\mathcal O_{X,x}$, $B=\\mathcal O_{Y\\prime,y\\prime}$, $C=\\mathcal O_{X\\prime,x\\prime}$ and $M=\\mathcal F_x$. The projection equation gives $f(x)=g(y\\prime)$, so the actual stalk maps give a commutative square $R\\to A$, $R\\to B$, $A\\to C$, $B\\to C$. They are local homomorphisms by [def-weil-flat-morphism]. By [lem-weil-pbc-module-stalk-pullback], $\\mathcal F\\prime_{x\\prime}\\cong M\\otimes_A C$. The balanced flip $m\\otimes c\\mapsto c\\otimes m$, with inverse $c\\otimes m\\mapsto m\\otimes c$, identifies this with $N=C\\otimes_A M$, including its $B$-action through the projection stalk map. We use this identification throughout.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, lemma-flat-locus-base-change, proof; algebra.tex Tag 00MQ, lemma-base-change-flat-up-down."
+   }
+  },
+  {
+   "text": "For (1), assume $M$ is flat over $R$. Apply [lem-pc-pullback-stalk-relative-flat-extension] to $f:X\\to Y$, $g:Y\\prime\\to Y$, $z=x\\prime$ and the $A$-module $M$. Its conclusion is exactly that $N=C\\otimes_A M$ is flat over $B$ for the projection stalk action. Step 1 identifies this with flatness of $\\mathcal F\\prime_{x\\prime}$ over $B$, proving (1).",
+   "uses": [
+    "lem-pc-pullback-stalk-relative-flat-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, lemma-flat-locus-base-change, proof; algebra.tex Tag 00MQ, lemma-base-change-flat-up-down."
+   }
+  },
+  {
+   "text": "For (2), suppose $g$ is flat at $y\\prime$. Apply clause (1) of [lem-sfb-pointwise-flatness-base-change] to $g:Y\\prime\\to Y$ and its base change along $f:X\\to Y$. The same cartesian square with the two factors interchanged has projection $b:X\\prime\\to X$ as the base-changed morphism: the universal property is symmetric in the two projections. Thus $b$ is flat at $x\\prime$. By [def-weil-flat-morphism], the actual local homomorphism $A\\to C$ is flat. By [lem-weil-pbc-flat-local-hom-faithfully-flat], $C$ is faithfully flat over $A$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-pointwise-flatness-base-change",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, lemma-flat-locus-base-change, proof; algebra.tex Tag 00MQ, lemma-base-change-flat-up-down."
+   }
+  },
+  {
+   "text": "The remaining hypothesis of (2) says that $N$ is flat over $B$. Since $g$ is flat at $y\\prime$, $B$ is flat over $R$ by [def-weil-flat-morphism]. Apply [lem-pc-module-flat-transitive] to $R\\to B$ and $N$: it is flat over $R$. The $R$-action through $B\\to C$ equals the one through $A\\to C$, by the commutative stalk square in step 1.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, lemma-flat-locus-base-change, proof; algebra.tex Tag 00MQ, lemma-base-change-flat-up-down."
+   }
+  },
+  {
+   "text": "Let $L_1\\to L_2\\to L_3$ be any exact sequence of $R$-modules. Regard $M\\otimes_R L_\\bullet$ as a complex of $A$-modules, with $A$ acting on $M$. For each $R$-module $L$ the balanced isomorphism $C\\otimes_A(M\\otimes_R L)\\cong (C\\otimes_A M)\\otimes_R L=N\\otimes_R L$ sends $c\\otimes(m\\otimes l)$ to $(c\\otimes m)\\otimes l$; the inverse uses the reverse formula. The $A$- and $R$-balancing relations are identical on both sides, and both composites fix pure tensors. These formulas commute with each $L_i\\to L_{i+1}$. By step 4 and [lem-weil-pbc-flat-tensor-exact], $N\\otimes_R L_\\bullet$ is exact. Exactness is the equality of kernel and image as sets, so it is also exact as a complex of $A$-modules. Since $C$ is faithfully flat over $A$ by step 3, the exactness-reflection definition [def-weil-pbc-faithfully-flat-ring-map] makes $M\\otimes_R L_\\bullet$ exact. Hence $M$ is flat over $R$, proving (2).",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, lemma-flat-locus-base-change, proof; algebra.tex Tag 00MQ, lemma-base-change-flat-up-down."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-pullback-stalk-relative-flat-extension",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 047C, lemma-flat-locus-base-change, proof; algebra.tex Tag 00MQ, lemma-base-change-flat-up-down."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "iff.*flat|flat.*iff|faithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T14:51:41Z\", \"tool\": \"grep\", \"query\": \"iff.*flat|flat.*iff|faithfullyFlat\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Stability.lean\", \"Mathlib/RingTheory/Flat/Stability.lean\", \"Mathlib/RingTheory/Flat/Stability.lean\", \"Mathlib/RingTheory/Flat/Stability.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\"], \"digest\": \"e4d000f5946f22f5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has algebraic faithfully flat tensor descent (FaithfullyFlat/Basic.lean:588-603) and flat-morphism base change, but neither states the pointwise module-sheaf result with a localized fibre-product stalk; deriving that comparison takes more than a one-line specialization. The unqualified FaithfullyFlat query returned an unknown-identifier error, repaired by Module.FaithfullyFlat."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T14:51:41Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'FaithfullyFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has algebraic faithfully flat tensor descent (FaithfullyFlat/Basic.lean:588-603) and flat-morphism base change, but neither states the pointwise module-sheaf result with a localized fibre-product stalk; deriving that comparison takes more than a one-line specialization. The unqualified FaithfullyFlat query returned an unknown-identifier error, repaired by Module.FaithfullyFlat."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise flatness of quasi coherent module sheaves ascends along arbitrary cartesian base change and descends along flat base change",
+   "results": "{\"t\": \"2026-10-23T14:51:41Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise flatness of quasi coherent module sheaves ascends along arbitrary cartesian base change and descends along flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.isBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.localizedModule\", \"Module.flat_iff_of_isLocalization\"], \"digest\": \"a28cb5eb5b1bc75e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has algebraic faithfully flat tensor descent (FaithfullyFlat/Basic.lean:588-603) and flat-morphism base change, but neither states the pointwise module-sheaf result with a localized fibre-product stalk; deriving that comparison takes more than a one-line specialization. The unqualified FaithfullyFlat query returned an unknown-identifier error, repaired by Module.FaithfullyFlat."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent sheaf on a scheme is flat at a point over the base if and only if its pullback is flat at a point lying over it under a flat base change",
+   "results": "{\"t\": \"2026-10-23T14:51:50Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi coherent sheaf on a scheme is flat at a point over the base if and only if its pullback is flat at a point lying over it under a flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.instSndScheme\"], \"digest\": \"33665e3189548f64\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has algebraic faithfully flat tensor descent (FaithfullyFlat/Basic.lean:588-603) and flat-morphism base change, but neither states the pointwise module-sheaf result with a localized fibre-product stalk; deriving that comparison takes more than a one-line specialization. The unqualified FaithfullyFlat query returned an unknown-identifier error, repaired by Module.FaithfullyFlat."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T14:53:00Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Module.FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.toFlat\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_faithful\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_reflects_triviality\", \"Module.FaithfullyFlat.iff_flat_and_rTensor_faithful\", \"Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.FaithfullyFlat.mk\"], \"digest\": \"e0ab78a721131cd3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has algebraic faithfully flat tensor descent (FaithfullyFlat/Basic.lean:588-603) and flat-morphism base change, but neither states the pointwise module-sheaf result with a localized fibre-product stalk; deriving that comparison takes more than a one-line specialization. The unqualified FaithfullyFlat query returned an unknown-identifier error, repaired by Module.FaithfullyFlat."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over a cartesian tensor product of local rings localized at a prime is flat over the base local ring exactly when the original module is flat provided the base extension is flat",
+   "results": "{\"t\": \"2026-10-23T14:56:17Z\", \"tool\": \"leanfinder\", \"query\": \"A module over a cartesian tensor product of local rings localized at a prime is flat over the base local ring exactly when the original module is flat provided the base extension is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFlatAtPrime\", \"Module.flat_iff_of_isLocalization\", \"Module.flat_of_isLocalized_maximal\", \"Module.Flat.of_isLocalizedModule\", \"Module.flat_of_localized_maximal\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat.localRingHom\", \"Module.Flat.iff_flat_tensorProduct\"], \"digest\": \"6910d44571972c3d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has algebraic faithfully flat tensor descent (FaithfullyFlat/Basic.lean:588-603) and flat-morphism base change, but neither states the pointwise module-sheaf result with a localized fibre-product stalk; deriving that comparison takes more than a one-line specialization. The unqualified FaithfullyFlat query returned an unknown-identifier error, repaired by Module.FaithfullyFlat."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise flatness of a quasi coherent module sheaf ascends under arbitrary scheme base change and is reflected by flat base change",
+   "results": "{\"t\": \"2026-10-23T19:16:26Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise flatness of a quasi coherent module sheaf ascends under arbitrary scheme base change and is reflected by flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\"], \"digest\": \"5bc6be98357ae1a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme-morphism flatness or ring/module flatness calculus, not both clauses for a module sheaf at a chosen point with its fibre-product stalk action. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:62-106, RingTheory/Flat/Stability.lean:54-70 and RingTheory/Flat/FaithfullyFlat/Basic.lean:424-433,588-603. The tensor in the latter descent theorem is over the original base, whereas here it is over the source stalk."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(pullback|stalk)|Flat.*(pullback|stalk)",
+   "results": "{\"t\": \"2026-10-23T19:16:52Z\", \"tool\": \"grep\", \"query\": \"flat.*(pullback|stalk)|Flat.*(pullback|stalk)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"1cb7f22ff42669d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme-morphism flatness or ring/module flatness calculus, not both clauses for a module sheaf at a chosen point with its fibre-product stalk action. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:62-106, RingTheory/Flat/Stability.lean:54-70 and RingTheory/Flat/FaithfullyFlat/Basic.lean:424-433,588-603. The tensor in the latter descent theorem is over the original base, whereas here it is over the source stalk."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent module is flat at a point over the base if its pullback at a point above it is flat over a flat base extension",
+   "results": "{\"t\": \"2026-10-23T19:16:52Z\", \"tool\": \"leansearch\", \"query\": \"A quasi coherent module is flat at a point over the base if its pullback at a point above it is flat over a flat base extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"SheafOfModules.IsQuasicoherent.mk\", \"Module.flat_of_isLocalized_maximal\", \"SheafOfModules.IsQuasicoherent\", \"Module.Flat.isBaseChange\", \"SheafOfModules.isQuasicoherent\", \"Module.flat_iff_of_isLocalization\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"34c790ca5c6e45e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme-morphism flatness or ring/module flatness calculus, not both clauses for a module sheaf at a chosen point with its fibre-product stalk action. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:62-106, RingTheory/Flat/Stability.lean:54-70 and RingTheory/Flat/FaithfullyFlat/Basic.lean:424-433,588-603. The tensor in the latter descent theorem is over the original base, whereas here it is over the source stalk."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T19:16:52Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Module.FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.toFlat\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_faithful\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_reflects_triviality\", \"Module.FaithfullyFlat.iff_flat_and_rTensor_faithful\", \"Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.FaithfullyFlat.mk\"], \"digest\": \"e0ab78a721131cd3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme-morphism flatness or ring/module flatness calculus, not both clauses for a module sheaf at a chosen point with its fibre-product stalk action. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:62-106, RingTheory/Flat/Stability.lean:54-70 and RingTheory/Flat/FaithfullyFlat/Basic.lean:424-433,588-603. The tensor in the latter descent theorem is over the original base, whereas here it is over the source stalk."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative square of local rings R A B C with C flat over A tensor R B, an A module M flat over R extends to a B flat C module; if R to B is flat, B flatness of C tensor A M implies R flatness of M",
+   "results": "{\"t\": \"2026-10-23T19:17:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative square of local rings R A B C with C flat over A tensor R B, an A module M flat over R extends to a B flat C module; if R to B is flat, B flatness of C tensor A M implies R flatness of M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_flat_tensorProduct\", \"RingHom.Flat.propertyIsLocal\", \"Module.Flat.trans\", \"Module.flat_iff_of_isLocalization\", \"Module.Flat.isBaseChange\", \"Module.Flat.baseChange\", \"RingHom.Flat.isStableUnderBaseChange\"], \"digest\": \"ddc2a64d471edb8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme-morphism flatness or ring/module flatness calculus, not both clauses for a module sheaf at a chosen point with its fibre-product stalk action. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:62-106, RingTheory/Flat/Stability.lean:54-70 and RingTheory/Flat/FaithfullyFlat/Basic.lean:424-433,588-603. The tensor in the latter descent theorem is over the original base, whereas here it is over the source stalk."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-module-flat-locus-base-change",
+  "date": "2026-10-23",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Algebraicity part: inclusion of line bundles into the ambient coherent stack. Supporting source-local input: Stacks 0D03 proof, the sentence invoking finite-free-open (0CZT); scheme version 0CZR. In the 0CZR proof, final sentence: apply the module flat-locus theorem 05VJ to the identity morphism of Y over T.; lemma-flat-locus-base-change, clauses (1) and (2) for arbitrary quasi-coherent modules",
+   "via": [
+    "lem-sfb-relative-module-flat-locus-base-change",
+    "lem-sfb-relative-finite-free-locus-base-change",
+    "lem-sfb-invertible-open-in-coherent-stack",
+    "lem-sfb-picard-stack-curve-geometry",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pointwise-module-flatness-base-change",
+  "worker": "stage1",
+  "summary": "Checked Stacks 047C and its algebra input 00MQ; reused existing pullback-stalk and relative-flat-extension nodes for ascent. Reflection uses pointwise scheme-flatness ascent for the other projection, local faithful flatness, transitivity and explicit tensor reassociation to reflect exactness. No new nodes or additional hypotheses. Corrected doubled TeX escapes in the statement without changing its mathematical content.",
+  "blueprint": "Realizes the inherited from.place: the 05VJ/0CZR flat-locus input in the Picard-stack branch below det-thm-sf-ctf-stability-direct-images, by proving both pointwise clauses of Stacks 047C. Whole-blueprint searches for module flat, pullback stalk, faithfully flat and flat base change found no equivalent blueprint statement; the scheme-only pointwise lemma is a proper specialization, not an equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic Zariski module-pullback stalk formula; this unit has no replacement for the identification with extension of scalars."
+   },
+   {
+    "node": "lem-pc-pullback-stalk-relative-flat-extension",
+    "why": "Generic arbitrary-module flat extension to a fibre-product stalk; used as an algebraic tool after the sheaf-stalk identification."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic exactness of tensoring with a flat module, used over the base local ring in the faithful-flatness reflection argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-pullback-stalk-relative-flat-extension",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-c9a53901a",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-c9a53901a (reviewer sub-agent of L); spot-checked: The item statement matches Stacks 047C (1)-(2) (more-morphisms.tex l.4468) hypothesis by hypothesis; the dropped lfp hypotheses belong only to the 'in particular' clause, which the item does not claim. The statement is identical to the live text, so only the escapes changed. There are no new nodes and no repair note; live and side-live still have the item unsplit. Step 1: lem-weil-pbc-module-stalk-pullback applied to b gives F'_{x'} = M⊗_A C as a C-linear map, so the B-action is transported, and the flip is elementary. Step 2: lem-pc-pullback-stalk-relative-flat-extension with S=Y, T=Y', z=x' is exactly clause (1). Step 3: lem-sfb-pointwise-flatness-base-change(1) applied to the swapped square makes A→C flat; this is the source's northwest-diagonal reflection, and the swap of chosen fibre products is a canonical one-line transport. lem-weil-pbc-flat-local-hom-faithfully-flat then makes A→C faithfully flat. The item's transitive closure (69 nodes) has no cycle. Step 4: B is flat over R and N is flat over B, so lem-pc-module-flat-transitive makes N flat over R; the actions agree via the stalk square. Step 5: the reassociation C⊗_A(M⊗_R L)=N⊗_R L is written out; lem-weil-pbc-flat-tensor-exact makes it exact, and def-weil-pbc-faithfully-flat-ring-map reflects exactness, so M is flat over R. This route differs from the 00MQ ideal-criterion route but is complete and correct. Edge cases checked: F_x=0, g=id, (1) with g not flat; (2) is false without g flat (fibre example), so that hypothesis is used. No duplicate of the reflection clause exists in the DAG; lem-trf-base-change-fibre-flat-qcoherent and the pc stalk-flat nodes differ. Tool uses accepted as generic: module-stalk-pullback, relative-flat-extension, flat-tensor-exact. No SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointwiseModuleFlatnessBaseChange",
+  "declaration": "AlgebraicGeometry.pointwise_module_flatness_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointwiseModuleFlatnessBaseChange.lean",
+  "statement": "theorem pointwise_module_flatness_base_change {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y) (F : X.Modules) [SheafOfModules.IsQuasicoherent.{u} F] (x' : ↥(pullback f g)) : (Module.Flat (Y.presheaf.stalk (f ((pullback.fst f g) x'))) ((ModuleCat.restrictScalars (f.stalkMap ((pullback.fst f g) x')).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace ((pullback.fst f g) x')).obj F)) → Module.Flat (Y'.presheaf.stalk ((pullback.snd f g) x')) ((ModuleCat.restrictScalars ((pullback.snd f g).stalkMap x').hom).obj ((RingedSpace.moduleStalkFunctor (pullback f g).toRingedSpace x').obj ((Scheme.Modules.tensorPullback (pullback.fst f g)).obj F)))) ∧ ((g.stalkMap ((pullback.snd f g) x')).hom.Flat → Module.Flat (Y'.presheaf.stalk ((pullback.snd f g) x')) ((ModuleCat.restrictScalars ((pullback.snd f g).stalkMap x').hom).obj ((RingedSpace.moduleStalkFunctor (pullback f g).toRingedSpace x').obj ((Scheme.Modules.tensorPullback (pullback.fst f g)).obj F))) → Module.Flat (Y.presheaf.stalk (f ((pullback.fst f g) x'))) ((ModuleCat.restrictScalars (f.stalkMap ((pullback.fst f g) x')).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace ((pullback.fst f g) x')).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82b8cf518",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Q69 lem-sfb-pointwise-module-flatness-base-change 82b8cf51: statement matches node and Stacks 047C (1)-(2) clause by clause. pullback f g with fst/snd; arbitrary F with Mathlib IsQuasicoherent (QC conjunct of the pqf-def-coherent record, no finite type; .{u} restricts nothing since all levels are fixed by F); F' = tensorPullback fst; Module.Flat over O_{Y,f(x)} via f.stalkMap and over O_{Y',y'} via snd.stalkMap; clause (2) premise (g.stalkMap y').hom.Flat = flat at y'. No extra hypotheses. RingedSpace.moduleStalkFunctor follows the def-weil-pbc-module-stalk record note (rfl carrier, ~92 landed uses). No pointwise flat-at node exists (IsFlatOver is global), so the inline form is correct. Item still split in side-live, not superseded. Statement field verbatim, sorry only, docstrings carry the source place, blueprint id and 5 steps; no new defs or dep repairs. Not recompiled per the 2026-10-21 rule; no files changed."
+ }
+}

@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-galois-clopen-component-cover",
+ "kind": "statement",
+ "title": "Galois clopen component covers and geometric-fibre stabilizer orbits",
+ "statement": "Let $e$ be a field [def-weil-field], let $e_0/e$ be a finite Galois extension [def-pc-field-extension] [def-pc-field-tower] (finite-dimensional, separable [def-weil-pbc-separable-algebraic-extension], and normal: every irreducible polynomial over $e$ with a root in $e_0$ splits over $e_0$), and let $B$ be a nonempty integral $e$-scheme [def-pc-integral-scheme]. Put $Y=B\\times_e\\operatorname{Spec}e_0$ and let $p:Y\\to B$ be its projection [def-pc-fibre-product]. Suppose that the irreducible components [def-weil-irreducible-components] of $Y$ form a finite disjoint covering by nonempty open and closed subschemes $X_i$, each with its induced open subscheme structure. Put $A=\\operatorname{Aut}_e(e_0)$ and use its canonical left action $a\\mapsto\\operatorname{id}_B\\times\\operatorname{Spec}(a^{-1})$ on $Y$. For every geometric point $\\bar b:\\operatorname{Spec}\\Omega\\to B$, where $\\Omega$ is algebraically closed [def-weil-algebraic-closure], the geometric fibre $Y_{\\bar b}=Y\\times_B\\operatorname{Spec}\\Omega$ [def-weil-geometric-fibre] (formed along $\\bar b$) is a nonempty finite disjoint union of copies of $\\operatorname{Spec}\\Omega$ and $A$ acts simply transitively on its geometric points, with their residue-field embeddings retained. The action of $A$ on the components $X_i$ is transitive. For each component $X_i$, put $H_i=\\{a\\in A:aX_i=X_i\\}$, with its restricted action on $X_i$, and $u_i=p|_{X_i}$. Then $u_i$ is finite, etale and surjective [def-weil-finite-integral-morphism] [def-weil-etale-morphism] [def-weil-surjective-morphism], and every geometric fibre of $u_i$ is nonempty and is a single $H_i$-orbit. Equivalently, any two maps $x,y:\\operatorname{Spec}\\Omega\\to X_i$ over the same geometric point of $B$ satisfy $y=h\\circ x$ for some $h\\in H_i$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X 2.3 Step 2, printed p.150: G transitively permutes the components of X_0, and H is the decomposition subgroup of Y_0. Extracts returned item proof steps 6--8 for an already given Galois extension and clopen component decomposition. Stacks pione.tex Tag 03SF, section-finite-etale-under-galois: geometric-fibre description of Galois covers; the full scalar-extension fibre is computed explicitly by the Galois tensor decomposition."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-pc-integral-scheme",
+  "def-pc-fibre-product",
+  "def-weil-irreducible-components",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-fibre",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\pi:\\operatorname{Spec}e_0\\to\\operatorname{Spec}e$. A finite $e$-basis of $e_0$ generates it as an $e$-module, so the finite-spectrum equivalence [lem-weil-pbc-spec-finite-ring-map-finite], now recorded as the Mathlib leaf AlgebraicGeometry.IsFinite.SpecMap_iff, makes $\\pi$ finite. Separability gives etaleness by [lem-weil-pbc-finite-separable-extension-etale]. Both field spectra have exactly one point by [def-weil-affine-spectrum], so $\\pi$ is surjective. The projection $p$ is its base change along $B\\to\\operatorname{Spec}e$; apply [lem-weil-pbc-finite-morphism-permanence], [lem-weil-pbc-etale-scheme-base-change] and [lem-weil-pbc-surjective-base-change] to conclude that $p$ is finite, etale and surjective. These base-change results impose no finiteness assumption on $B$.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 02GO (lemma-base-change-etale), 01S1 (lemma-base-change-surjective), and 02GL (lemma-etale-over-field)."
+   }
+  },
+  {
+   "text": "Fix $\\bar b:\\operatorname{Spec}\\Omega\\to B$. Apply [lem-galois-geometric-fibre] to $p$ to obtain a finite disjoint union of copies of $\\operatorname{Spec}\\Omega$ over $\\Omega$. Its set of components is nonempty, because [lem-weil-pbc-surjective-base-change] makes $Y_{\\bar b}\\to\\operatorname{Spec}\\Omega$ surjective. Each copy has a unique $\\Omega$-section, so its underlying point and its $\\Omega$-valued geometric lift agree. By the universal property [def-pc-fibre-product], maps $x:\\operatorname{Spec}\\Omega\\to Y$ with $p x=\\bar b$ correspond to maps $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}e_0$ over $\\operatorname{Spec}e$. By [def-weil-affine-spectrum], these correspond bijectively to $e$-embeddings $\\tau:e_0\\hookrightarrow\\Omega$. We retain these actual embeddings, rather than just their prime-ideal kernels.",
+   "uses": [
+    "lem-galois-geometric-fibre",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), with Tag 01S1 (lemma-base-change-surjective); geometric lifts are identified by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "Under Step 2 the automorphism $\\operatorname{id}_B\\times\\operatorname{Spec}(a^{-1})$ sends $\\tau$ to $\\tau\\circ a^{-1}$, by contravariance of $\\operatorname{Spec}$ [def-weil-affine-spectrum] and the functoriality in [def-pc-fibre-product]. The identity acts identically, and applying $b$ then $a$ sends $\\tau$ to $\\tau\\circ b^{-1}\\circ a^{-1}=\\tau\\circ(ab)^{-1}$, proving the left-action law. Finite dimensionality makes $e_0/e$ algebraic, and normality is assumed, so [lem-sfb-normal-embeddings-automorphism-transitive] says any embedding $\\rho$ has the form $\\tau\\circ\\sigma$ for some $\\sigma\\in A$. Taking $a=\\sigma^{-1}$ proves transitivity. If $\\tau\\circ a^{-1}=\\tau\\circ b^{-1}$, injectivity of $\\tau$ gives $a^{-1}=b^{-1}$ and hence $a=b$. Thus the action is simply transitive on the full geometric fibre, including its residue-field embeddings.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-sfb-normal-embeddings-automorphism-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BR4 (lemma-normal-embeddings-differ-by-aut), together with the inverse convention for the left action."
+   }
+  },
+  {
+   "text": "The integral scheme $B$ is irreducible by [def-pc-integral-scheme]. Each $X_i$ is nonempty and clopen with its open subscheme structure, exactly the hypotheses of [lem-sfb-finite-etale-clopen-restriction] for $p$. Therefore $u_i$ is finite, etale and surjective. Its base change along any $\\bar b$ is surjective by [lem-weil-pbc-surjective-base-change], hence nonempty. Applying [lem-galois-geometric-fibre] to $u_i$ also shows that this fibre is a finite disjoint union of copies of $\\operatorname{Spec}\\Omega$; in particular it has an $\\Omega$-valued lift. No assumption that $B$ is normal, proper, Noetherian or of finite type was used.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sfb-finite-etale-clopen-restriction",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-galois-geometric-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035C (lemma-closed-immersion-finite), 01WK (lemma-composition-finite), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), 01WN (lemma-finite-proper), 03WT (lemma-etale-open), 01S1 (lemma-base-change-surjective), and 02GL (lemma-etale-over-field); apply the already stated clopen restriction result."
+   }
+  },
+  {
+   "text": "Every $a\\in A$ induces a homeomorphism of $Y$. A homeomorphism sends irreducible subsets to irreducible subsets, and applying its inverse shows that maximal such subsets remain maximal; thus it permutes the components [def-weil-irreducible-components]. Choose $b\\in B$ and an algebraic closure $\\Omega$ of $\\kappa(b)$ [def-weil-algebraic-closure]; the residue-field description in [def-weil-geometric-point] gives a geometric point $\\bar b$. For any $i,j$, Step 4 gives lifts $x$ into $X_i$ and $y$ into $X_j$ over this same $\\bar b$. Step 3 gives $a\\in A$ with $y=a\\circ x$. Consequently $aX_i$ and $X_j$ share the image point of $y$. Distinct components are disjoint by hypothesis, so $aX_i=X_j$. This proves transitivity on components.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150: G transitively permutes the components of X_0; elementary component argument using the established fibre transitivity."
+   }
+  },
+  {
+   "text": "Fix $i$ and $\\bar b$, and let $x,y:\\operatorname{Spec}\\Omega\\to X_i$ lie over $\\bar b$. View them as lifts into $Y$. By Step 3 there is $a\\in A$ carrying $x$ to $y$. The components $aX_i$ and $X_i$ share the image of $y$, so Step 5 and disjointness force $aX_i=X_i$, that is, $a\\in H_i$. Restricting the automorphism to the invariant open subscheme $X_i$ gives $h\\in H_i$ with $y=h\\circ x$ as morphisms: equality into $Y$ implies equality into its open subscheme. The stabilizer is a subgroup since products and inverses preserve $X_i$. Each such automorphism is over $B$, so this is an action on every geometric fibre. Those fibres are nonempty by Step 4, and the displayed equality proves that each is a single $H_i$-orbit. Conversely a single orbit is precisely this equality for any two lifts.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150: H is the decomposition subgroup of a component; explicit stabilizer argument from Steps 3--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-galois-geometric-fibre",
+  "def-pc-fibre-product",
+  "lem-sfb-normal-embeddings-automorphism-transitive",
+  "def-pc-integral-scheme",
+  "lem-sfb-finite-etale-clopen-restriction",
+  "def-weil-irreducible-components",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.150; detailed proof of the Galois component assertion using Stacks Tags 0BR4, 02GL, 01WL, 02GO, 01S1 and the existing clopen restriction lemma. The source states component transitivity but does not write this full argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Galois field extension L over k and an integral k scheme B whose base change has clopen irreducible components, every component maps finite etale surjectively to B and its stabilizer acts transitively on each geometric fibre",
+   "results": "OK 8 hits: Ideal.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, Ideal.isPretransitive_of_isGaloisGroup, Ideal.exists_map_eq_of_isGalois, IsFractionRing.stabilizerHom_surjective, Ideal.exists_smul_eq_of_isGaloisGroup, Ideal.Quotient.stabilizerHom_surjective_of_profinite, IsGaloisGroup.iff_isFractionRing",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give prime-ideal transitivity for Galois ring extensions, finite etale algebra classification or fraction-field criteria; none states the clopen component cover and its geometric-lift orbit assertions for an arbitrary integral scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Galois\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give prime-ideal transitivity for Galois ring extensions, finite etale algebra classification or fraction-field criteria; none states the clopen component cover and its geometric-lift orbit assertions for an arbitrary integral scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "Galois.*([Cc]omponent|[Ff]ibre|[Ff]iber)|([Cc]omponent|[Ff]ibre|[Ff]iber).*Galois",
+   "results": "OK 0 hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give prime-ideal transitivity for Galois ring extensions, finite etale algebra classification or fraction-field criteria; none states the clopen component cover and its geometric-lift orbit assertions for an arbitrary integral scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Galois group acts simply transitively on geometric fibres of a finite Galois base change; its component stabilizer acts transitively on the fibres of a clopen component",
+   "results": "UNAVAILABLE 0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A clopen irreducible component in a Galois scalar extension of an integral scheme is a finite etale cover with decomposition subgroup transitive on geometric lifts",
+   "results": "OK 8 hits: Algebra.Etale.iff_exists_algEquiv_prod, IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.of_isFractionRing, Ideal.isPretransitive_of_isGalois, instTotallySeparatedSpaceAlgEquivOfIsIntegral, IsGaloisGroup.to_isFractionRing, Ideal.exists_map_eq_of_isGalois, Ideal.isPretransitive_of_isGaloisGroup",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give prime-ideal transitivity for Galois ring extensions, finite etale algebra classification or fraction-field criteria; none states the clopen component cover and its geometric-lift orbit assertions for an arbitrary integral scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "isPretransitive_of_isGalois|exists.*[Gg]alois|stabilizerHom_surjective",
+   "results": "OK 5 hits: 127, 132, 135, 142, 149; Mathlib/NumberTheory/RamificationInertia/Galois.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give prime-ideal transitivity for Galois ring extensions, finite etale algebra classification or fraction-field criteria; none states the clopen component cover and its geometric-lift orbit assertions for an arbitrary integral scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Galois extension L over k and a connected k scheme, stabilizers of clopen components of its scalar extension act transitively on geometric fibres",
+   "results": "OK 8 hits: CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois, CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive, Ideal.isPretransitive_of_isGalois, Ideal.isPretransitive_of_isGaloisGroup",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the entire component-cover assertion for an arbitrary integral base; the relevant normal-embedding result is reused through existing node lem-sfb-normal-embeddings-automorphism-transitive, and the base-change results through existing Mathlib nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, AlgHom",
+   "results": "OK 2 hits: FiniteGaloisIntermediateField.adjoin_map, FiniteGaloisIntermediateField.adjoin_simple_map_algHom",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the entire component-cover assertion for an arbitrary integral base; the relevant normal-embedding result is reused through existing node lem-sfb-normal-embeddings-automorphism-transitive, and the base-change results through existing Mathlib nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "Galois.*([Cc]omponent|[Ff]ib[er]+)|([Cc]omponent|[Ff]ib[er]+).*Galois",
+   "results": "OK 0 hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the entire component-cover assertion for an arbitrary integral base; the relevant normal-embedding result is reused through existing node lem-sfb-normal-embeddings-automorphism-transitive, and the base-change results through existing Mathlib nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite Galois extension base changed to a connected scheme has clopen components that are finite etale covers with stabilizer transitive on fibres",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, IsGalois.fixedField_top, InfiniteGalois.fixingSubgroup_isClosed, CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive, InfiniteGalois.isOpen_iff_finite, FiniteGaloisIntermediateField.isGalois",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the entire component-cover assertion for an arbitrary integral base; the relevant normal-embedding result is reused through existing node lem-sfb-normal-embeddings-automorphism-transitive, and the base-change results through existing Mathlib nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric points of a finite normal separable field extension form a torsor under its Galois group, after tensoring with any algebraically closed overfield",
+   "results": "OK 8 hits: IsGaloisGroup.of_isFractionRing, IsGaloisGroup.to_isFractionRing, IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.of_isGalois, galRestrict, Field.absoluteGaloisGroup, finGaloisGroupMap, Normal.algHomEquivAut",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the entire component-cover assertion for an arbitrary integral base; the relevant normal-embedding result is reused through existing node lem-sfb-normal-embeddings-automorphism-transitive, and the base-change results through existing Mathlib nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "isStableUnderBaseChange|IsStableUnderBaseChange|isEtale",
+   "results": "OK 3 hits: 48, 74, 75; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the entire component-cover assertion for an arbitrary integral base; the relevant normal-embedding result is reused through existing node lem-sfb-normal-embeddings-automorphism-transitive, and the base-change results through existing Mathlib nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "algHomEquivAut",
+   "results": "OK 1 hits: 207; Mathlib/FieldTheory/Normal/Defs.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the entire component-cover assertion for an arbitrary integral base; the relevant normal-embedding result is reused through existing node lem-sfb-normal-embeddings-automorphism-transitive, and the base-change results through existing Mathlib nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-galois-component-presentation",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X 2.3 Step 2, printed p.150: G transitively permutes the components of X_0, and H is the decomposition subgroup of Y_0. Extracts returned item proof steps 6--8 for an already given Galois extension and clopen component decomposition. Stacks pione.tex Tag 03SF, section-finite-etale-under-galois: geometric-fibre description of Galois covers; the full scalar-extension fibre is computed explicitly by the Galois tensor decomposition.",
+   "via": [
+    "lem-sfb-galois-component-presentation",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-galois-clopen-component-cover",
+  "worker": "stage1",
+  "summary": "Proved the full scalar-extension fibre is a nonempty finite discrete scheme, identified actual geometric lifts with field embeddings and computed the inverse left action. Reused normal embedding transitivity and the existing clopen finite etale restriction lemma. Proved component transitivity and stabilizer fibre transitivity by the disjoint-component intersection argument. No statement correction and no new node. Repair of returned head d4148ae0d31: re-read all current cited statements and validated all 20 retained quotations; updated Step 1 to the now-Mathlib finite-spectrum equivalence and removed its obsolete unfinished-tool request. Made the algebraicity hypothesis explicit in Step 3. Retained the statement, route, searches and provenance.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs.py ancestor reports None). Realizes the supplied source place: det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction via ILO X 2.3 Step 2, p.150: transitive G-components and the decomposition subgroup H. Searches of the whole blueprint for Galois, finite Galois, clopen, stabilizer and geometric fibre found no node stating this entire item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-951bf0772",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-951bf0772 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full; the delivery has no new nodes. It is a re-delivery of d4148ae0d31, which was refused at landing over a side-to-live promotion, not over content. Diff against that head: Step 1 now names the Mathlib leaf IsFinite.SpecMap_iff (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:72-76, which I read); Step 3 now derives algebraicity from finite dimension; tool_uses is now [], which is right because lem-weil-pbc-spec-finite-ring-map-finite now has status mathlib. Source: ILO X 2.3 Step 2, printed p.150, says 'G transitively permutes the components of X0' and defines the decomposition subgroup H. I also read Stacks 03SF and 0BR4; no SGA source is used. Step 1: finiteness, etaleness and surjectivity of Spec e0 -> Spec e, then base change by the three mathlib nodes, which allow any base. Step 2: lem-galois-geometric-fibre applies since p is in FEt(B), and lifts correspond to e-embeddings by the fibre-product and Spec universal properties. Step 3: I checked the left-action order tau∘(ab)^-1; the normal-embedding node needs only algebraic and normal, and its 'minimal polynomial splits' agrees with the item's normality wording; freeness follows from injectivity of tau. Step 4: integral B is irreducible, which is exactly the hypothesis of the same-unit unsplit lem-sfb-finite-etale-clopen-restriction; nonempty fibres come from surjective base change. Steps 5-6 are elementary: components are permuted, and the disjointness intersection argument gives transitivity on components and the single H_i-orbits. Edge cases e0=e, B=Spec e0 (trivial stabilizers), geometrically integral B and characteristic p are consistent. The parent lem-sfb-galois-component-presentation uses the item for exactly these assertions; I found no duplicate in the DAG. The item is still unsplit in live and side-live. Maintainer note: the earlier refusal was about promotion, which is L's job; this head is a content-equivalent, revalidated split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GaloisClopenComponentCover",
+  "declaration": "AlgebraicGeometry.galois_clopen_component_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisClopenComponentCover.lean",
+  "statement": "theorem galois_clopen_component_cover (e L : Type u) [Field e] [Field L] [Algebra e L] [Module.Finite e L] [Algebra.IsSeparable e L] [Normal e L] (B : Scheme.{u}) [IsIntegral B] (b : B ⟶ Spec (.of e)) (Y : Scheme.{u}) (p : Y ⟶ B) (q : Y ⟶ Spec (.of L)) (hY : IsPullback p q b (Spec.map (CommRingCat.ofHom (algebraMap e L)))) (I : Type v) [Finite I] (U : I → Y.Opens) (hcomp : ∀ i : I, (U i : Set Y) ∈ irreducibleComponents Y) (hclosed : ∀ i : I, IsClosed (U i : Set Y)) (hdisjoint : Pairwise (fun i j : I ↦ Disjoint (U i) (U j))) (hcover : iSup U = ⊤) : ∃ a : (L ≃ₐ[e] L) →* Aut Y, (∀ g : L ≃ₐ[e] L, (a g).hom ≫ p = p ∧ (a g).hom ≫ q = q ≫ Spec.map (CommRingCat.ofHom g.symm.toRingHom)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ B), (∃ (J : Type u) (_ : Finite J) (_ : Nonempty J), Nonempty (Over.mk (pullback.snd p t) ≅ Over.mk (Sigma.desc fun _ : J ↦ 𝟙 (Spec (.of Ω))))) ∧ (∃ x : Spec (.of Ω) ⟶ Y, x ≫ p = t) ∧ ∀ (x y : Spec (.of Ω) ⟶ Y), x ≫ p = t → y ≫ p = t → ∃! g : L ≃ₐ[e] L, x ≫ (a g).hom = y) ∧ (∀ i j : I, ∃ g : L ≃ₐ[e] L, (a g).hom '' (U i : Set Y) = (U j : Set Y)) ∧ ∀ i : I, ∃ (H : Subgroup (L ≃ₐ[e] L)) (r : H →* Aut (U i).toScheme), (∀ g : L ≃ₐ[e] L, g ∈ H ↔ (a g).hom '' (U i : Set Y) = (U i : Set Y)) ∧ (∀ h : H, (r h).hom ≫ (U i).ι = (U i).ι ≫ (a h.val).hom) ∧ IsFinite ((U i).ι ≫ p) ∧ Etale ((U i).ι ≫ p) ∧ Surjective ((U i).ι ≫ p) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ B), (∃ x : Spec (.of Ω) ⟶ (U i).toScheme, x ≫ (U i).ι ≫ p = t) ∧ ∀ (x y : Spec (.of Ω) ⟶ (U i).toScheme), x ≫ (U i).ι ≫ p = t → y ≫ (U i).ι ≫ p = t → ∃ h : H, x ≫ (r h).hom = y",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9d764628",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read node, 12 stmt_dep records, module and report (Worker report + Second reading by Q27 present). Hypotheses match: Module.Finite/IsSeparable/Normal = finite Galois; IsIntegral includes nonempty; Y given by IsPullback (full universal property); finite clopen component family covers all components. Action a pinned by p- and q-equations (unique), and it is a homomorphism given Aut mul x*y = y≪≫x and Spec contravariance. Geometric fibre is an Over(Spec Ω) iso to a finite nonempty coproduct (same form as FiberDegree exists_overIso_sigma_of_isSepClosed); simple transitivity is ∃! on morphisms; component transitivity; H given by an iff; restriction r fixed by ι mono; u_i finite/etale/surjective; single-orbit lifts. Edge cases L=e, split extension, nonempty I implicit, any characteristic, non-Noetherian B: all fine. Universes u,v bound; Ω in u by Scheme.{u}. lean.statement verbatim, proof is sorry only, docstrings with source and blueprint id and 6 steps, node changes only in lean, no H4 duplicate or name clash. No compile (no file changed)."
+ }
+}

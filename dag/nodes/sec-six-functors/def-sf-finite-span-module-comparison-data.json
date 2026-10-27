@@ -1,0 +1,162 @@
+{
+ "id": "def-sf-finite-span-module-comparison-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 1--7 of lem-sf-finite-span-module-derived-comparison; its data and scalar transport construction, separate from the exchange argument in step 8.",
+   "via": [
+    "lem-sf-finite-span-module-derived-comparison",
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Data and normalizations for finite-span module comparisons",
+ "statement": "For a prime l, nativeAb is the native locally finite-function abelian sheaf, ring is its reconstructed section ring, and internal is the category of internal modules over the pulled-back condensed coefficient. For a ring isomorphism theta, equivalence is restriction along theta inverse followed by the fixed sectionModuleEquivalence. The ordinary direct and inverse images are the ringed-site pushforward and sheafified tensor pullback. Data stores these specified coefficient maps, ordinary comparisons, exactness and derived comparison; Properties is the original seventeen-clause normalization predicate, and ExchangeProperty is the original comparison of the specified exchange maps. The original declarations retain their signatures, attributes and mathematical definitions; no new mathematical object is selected. The field-normalization and exchange formulas are factored as DerivedNormalization and ExchangeEquation before their field binders; the formulas and every binder are retained. The two canonical derived adjunctions are shared abbreviations, used by the exchange and normalization formulas, with their original defining expressions. DerivedComparisonFrame and derivedComparisonFrame bundle the same canonical categories, functors, compositors, comparisons and adjunctions. The mate-normalization and exchange formulas use projections of this one bundle, without changing their expanded formulas; the exchange object binder uses its literal internal derived category field. MateCondition and ExchangeCondition state the two equations over an abstract bundle, so their concrete specializations keep its exact category instances. Frame projection instances are local to elaboration and introduce no exported instance attributes. PullbackExchangeCondition extracts the commutative square at an abstract bundle; ExchangeEquation specializes this wrapper on the original pullback square. This moves no hypothesis and changes no equation. The bundle is universe-specialized to its actual derived category sizes: object universe u+2 and morphism universe u+1; only the scheme universe u is a parameter.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1, 6.8.3; Lemma 6.8.2; Remark 6.8.15. Agent expansion of returned proof steps 1--3 and the comparison part of step 8, using the finite-subextension convention and the existing ring-realization and module/ringed-topos comparison nodes. This source is not a claim that all of these comparison equalities are literal statements of the paper."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pur-kinjective-complex",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6, 03D7 and lemma-push-pull-composition-modules; derived.tex Tags 070I, 070Y and 09T5; assembly with the existing internal/section derived normalization and finite-span ring realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact scalar restriction equivalence for isomorphic ring sheaves preserves derived pushforward adjunction mates and exchange maps",
+   "results": "SheafOfModules.pushforwardCongr; pushforwardPushforwardAdj; pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; pushforwardSections_unitHomEquiv; pushforwardPushforwardAdj_unit_app_val_app; pushforwardPushforwardAdj_counit_app_val_app; pushforwardNatIso",
+   "date": "2026-10-26",
+   "verdict": "Ordinary ringed-site interfaces; no theorem constructs the specified finite-span normalized scalar transport data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv; mateEquiv_counit; unit_mateEquiv; mateEquiv_vcomp; mateEquiv_hcomp and iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-26",
+   "verdict": "Use the already proved exchangeMate_cube for the exchange step; these do not construct scalar transport data."
+  },
+  {
+   "tool": "grep",
+   "query": "comapEquivalenceOfIsIso|FiniteSpanComparison|scalar.*[Tt]ransport|mapDerivedCategorySquareIso_comp|exchangeMate_cube",
+   "results": "Local rg found the existing comap equivalence, InternalModuleOperationsTransport, DerivedExactSquareComposition.mapDerivedCategorySquareIso_comp, CompatibleSquareComponents.square_pasting and ExchangeMateCube.exchangeMate_cube. msearch grep returned no Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "Reuse all three proved categorical pasting lemmas. The supplied-theta scalar transport construction still needs a dedicated intermediate statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module categories induced by ring isomorphisms preserves K injective resolutions and derived adjunctions",
+   "results": "ModuleCat.restrictScalarsEquivalenceOfRingEquiv; Functor.preservesInjectiveObjects_of_isEquivalence; ModuleCat.restrictScalars_isEquivalence_of_ringEquiv; ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive; Iso.ringCatIsoToRingEquiv; MoritaEquivalence.mk; instIsIsoAppToRightDerivedZeroOfInjective",
+   "date": "2026-10-27",
+   "verdict": "No normalized sheaf scalar transport construction. Use the existing restriction equivalence and K-injective/derived comparison lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSpanModuleDerivedComparison",
+  "date": "2026-10-26",
+  "group": "C8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSpanModuleComparisonData",
+  "file": "lean/Sheaf/Paper/FiniteSpanModuleComparisonData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteSpanComparison.Data",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.nativeAb",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.nativeMon",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.ring",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.modules",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.internal",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.nativeEquivalence",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.equivalence",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.direct",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.inverse",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.adjunction",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.rho",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.Data",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.derivedEquivalence",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.nativePull",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.nativePush",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.internalPull",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.internalPush",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.derivedPullComparison",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.nativePullComp",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.internalPullComp",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.square",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.internalExchange",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.nativeExchange",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.DerivedNormalization",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.ExchangeEquation",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.Properties",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.ExchangeProperty",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.internalDerivedAdjunction",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.nativeDerivedAdjunction",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.DerivedComparisonFrame",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.derivedComparisonFrame",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.DerivedComparisonFrame.MateCondition",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.DerivedComparisonFrame.ExchangeCondition",
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.DerivedComparisonFrame.PullbackExchangeCondition"
+  ],
+  "statement": "class Data (l : ℕ) [Fact l.Prime]",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e73a5",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T222606-L-671605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e73a5",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T222606-L-671605",
+  "kind": "interface",
+  "note": "independent cc review: Item finiteSpanModuleDerivedComparison (statement unchanged) and the new hole finiteSpanScalarTransport against node lem-sf-finite-span-module-derived-comparison, the new nodes and the change record; moved data module diffed against the clone; DerivedNormalization equal to the original by Iff.rfl, ExchangeEquation equal after delta (elaborator; kernel timeout on instance terms); delivered set and all 3 direct importers compiled OK in a sandbox; axioms only propext/Classical.choice/Quot.sound plus sorryAx from the named hole"
+ }
+}

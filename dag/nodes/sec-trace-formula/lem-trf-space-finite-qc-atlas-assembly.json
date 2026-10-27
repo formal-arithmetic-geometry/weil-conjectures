@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-space-finite-qc-atlas-assembly",
+ "kind": "statement",
+ "title": "Assembly of finitely many local quasi-compact atlases",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Z$ be an $S$-scheme, let $A$ be an algebraic space over $S$ [def-trf-algebraic-space], and fix $A\\to h_Z$. Let $J$ be a finite set and let $(p_j:W_j\\to Z)_{j\\in J}$ be etale morphisms of schemes [def-weil-etale-morphism] whose images cover $Z$. For each $j$ let $U_j$ be a quasi-compact $S$-scheme [def-weil-pbc-quasi-compact-scheme] and let $q_j:h_{U_j}\\to A\\times_ZW_j$ be a representable surjective etale morphism. Fibre products are sheaf fibre products [def-pc-fibre-product]. Then the induced morphism $$q:h_U\\longrightarrow A,\\qquad U=\\coprod_{j\\in J}U_j,$$ whose restriction to $U_j$ is $h_{U_j}\\xrightarrow{q_j}A\\times_ZW_j\\to A$, is representable, surjective and etale. The scheme $U$ is quasi-compact. In particular $A$ admits a quasi-compact scheme atlas. The empty finite set $J$ is allowed when $Z$ is empty; no affineness hypothesis on $Z$ or $W_j$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03E3 (definition-quasi-compact) and Tag 040T (lemma-finite-disjoint-quasi-compact), scheme-atlas construction combined with topologies.tex Tag 0217 (lemma-etale), (2) and (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Form the coproduct in schemes over S and transfer its colimit cocone to schemes using the colimit-preserving forgetful functor. Its inclusions are disjoint open immersions and cover. Their sieve is fppf covering since it is Zariski covering. The initial scheme has empty covering; any scheme mapping to two distinct summands is initial. Mathlib GrothendieckTopology.isColimitCofanMkYoneda therefore makes the represented coproduct a coproduct in fppf sheaves. Apply its descent and uniqueness operations to the composites a_j=q_j followed by the pullback projection. This constructs q and proves exactly the displayed restriction iff uniqueness assertion, including the empty family.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB/01JC; fppf sheaf gluing, with Mathlib Sites/Subcanonical.isColimitCofanMkYoneda."
+   }
+  },
+  {
+   "text": "Use the scheme-source representability clause of representable_etale_scheme_tests for q. For each test t:h_T to A, obtain a representing pullback V with projections v:V to T and r:V to the coproduct U, using full faithfulness of Yoneda to recover r as a scheme map. The relative morphism-property API identifies the scheme-test definition of etaleness with the relative property of Etale on Over S. Since p_j is etale, the projection A times_Z W_j to A is representable etale by base change; composition with q_j proves every a_j representable etale.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-trf-algebraic-space",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025W and scheme-test properties preceding 025Y; Mathlib MorphismProperty.relative."
+   }
+  },
+  {
+   "text": "Let D_j=V times_U U_j. Base-changing the Zariski cover of U by r gives an open cover of V. Pasting its represented pullback squares with the square defining V gives D_j as the test of a_j over t, with projection D_j to V to T. Step 2 makes each projection etale. Etaleness local on the source now proves v etale. No identification of V with a coproduct of new test schemes is needed.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source",
+    "def-trf-algebraic-space",
+    "lem-pc-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GJ; schemes.tex Tags 01JB/01JC after base change."
+   }
+  },
+  {
+   "text": "Recover T to Z from t followed by a using Yoneda. Let B_j=T times_Z W_j. Their projections b_j to T form an etale cover. The two projections of B_j determine c_j:h_(B_j) to A times_Z W_j. Apply the surjectivity scheme test of q_j to c_j to obtain L_j to B_j surjective, together with a map h_(L_j) to h_(U_j). Its composite to h_U and its projection to h_T agree in A by the given restriction equation for q. The universal property of V and full faithfulness of Yoneda give L_j to V whose composite with v is L_j to B_j to T. Every point of T lifts to some B_j and then to L_j, so it lifts to V. This directly proves v surjective, without comparing D_j to L_j or invoking composition of covering families. The argument also handles empty J, since the base-changed cover then has no points to lift.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-trf-algebraic-space",
+    "lem-pc-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0217(3), followed by the pullback universal property and pointwise lifting."
+   }
+  },
+  {
+   "text": "Steps 2-4 supply for every t a single representing square with projection both surjective and etale. These witnesses prove IsSurjective q and IsEtale q, while scheme-source representability gives IsRepresentable q. Transport the open cover of the scheme coproduct to the underlying scheme of the coproduct in Over S. Its index type is finite and each member is compact by hypothesis, so Scheme.OpenCover.compactSpace proves CompactSpace U. Return this compactness together with q and its uniqueness and scheme-test properties. No affineness assumption is used.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E3; finite compact open-cover argument underlying Tag 040T."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-yoneda",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Atlas construction in Tag 03E3, sheaf gluing via schemes.tex Tags 01JB/01JC, source-local etaleness via morphisms.tex Tag 02GJ, and pointwise lifting over topologies.tex Tag 0217(3). K6 formalization uses Mathlib sheaf coproduct and relative morphism-property APIs; it omits the original coproduct-distributivity and D_j/E_j comparison steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite etale scheme cover of a base and quasi compact scheme atlases of an algebraic space over each member, their disjoint union is a quasi compact etale surjective atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (CategoryTheory.PreZeroHypercover.singleton f)\", \"doc\": \"A singleton pre-zero hypercover of a scheme $ S $, constructed from a surjective and quasi-compact morphism $ f: X \\to S $, satisfies the quasi-compactness predicate.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.inst\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : S.OpenCover), AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"Any open cover of a scheme, defined as a collection of open immersion morphisms whose images form a jointly surjective family, satisfies the quasi-compactness condition for pre-zero hypercovers.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ (S : AlgebraicGeometry.Scheme) (𝒰 : CategoryTheory.PreZeroHypercover S),\\n  S.quasiCompactCover 𝒰 ↔ AlgebraicGeometry.QuasiCompactCover 𝒰\", \"doc\": \"For a scheme $ S $ and a pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, the quasi-compact cover property defined by $ S $ is equivalent to the general quasi-compact cover predicate applied to $ \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_isOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K],\\n  (∀ (i : 𝒰.I₀), IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f i).base)) →\\n    AlgebraicGeometry.QuasiCompactCo\", \"doc\": \"If $ S $ is a scheme equipped with a jointly surjective precoverage $ K $, and $ \\\\mathcal{U} $ is a $ K $-cover of $ S $ such that every morphism $ \\\\mathcal{U}.f(i) $ in the cover is an open map, then\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of quasi compact scheme atlases over an etale cover assembles to a quasi compact scheme atlas of an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"{𝒰 : S.Cover K} [Scheme.JointlySurjective K] [∀ i, AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀] :\\n  QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(S : Scheme.{u}) : ObjectProperty (PreZeroHypercover.{v} S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{I : Type*} (U : I → X.Opens) (hU : IsOpenCover U) (hU₁ : ∀ i, IsAffineOpen (U i))\\n  (hU₂ : ∀ i j, IsCompact (X := X) (U i ∩ U j)) : QuasiSeparatedSpace X\", \"doc\": \"If a scheme $X$ has an open cover consisting of affine open subsets such that the intersection of any two elements of the cover is quasi-compact, then $X$ is a quasi-separated space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(S : Scheme.{u}) (𝒰 : PreZeroHypercover.{v} S) : S.quasiCompactCover 𝒰 ↔ QuasiCompactCover 𝒰\", \"doc\": \"For a scheme $ S $ and a pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, the quasi-compact cover property defined by $ S $ is equivalent to the general quasi-compact cover predicate applied to $ \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.OpenCover) [Finite 𝒰.I₀] [H : ∀ i, CompactSpace (𝒰.X i)] : CompactSpace X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that the index set is finite and each open subscheme $U_i$ is compact, then $X$ itself is a compact topological space.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.inst\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(𝒰 : S.OpenCover) : QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"Any open cover of a scheme, defined as a collection of open immersion morphisms whose images form a jointly surjective family, satisfies the quasi-compactness condition for pre-zero hypercovers.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} [self : AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"For a scheme $ S $ and a quasi-compact pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, if $ U $ is an affine open subset of $ S $, then $ U $ is covered by the images of finitely many compact open subse\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.?compact.*atlas|atlas.*quasi.?compact",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of etale covering families and finite coproduct of compact schemes produce a surjective etale morphism onto an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X),\\n  AlgebraicGeometry.Surjective (CategoryTheory.Limits.Sigma.desc fun i => 𝒰.f i)\", \"doc\": \"For any scheme $ X $ and a cover $ \\\\mathcal{U} $ of $ X $ defined by a precoverage $ P $, the morphism obtained by taking the coproduct (disjoint union) of the morphisms $ \\\\mathcal{U}.f(i) $ in the co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X},\\n  ⋃ i, Set.range ⇑(CategoryTheory.ConcreteCategory.hom (f i).base) = Set.univ →\\n    AlgebraicGeometry.Surjective (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$, an index type $\\\\iota$, and a family of schemes $Y_i$ with morphisms $f_i : Y_i \\\\to X$, if the union of the images of the $f_i$ covers the entire underlying topological space of $X$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.JointlySurjective\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on precoverages of the category of schemes, asserting that for every scheme $X$, the covering sieves assigned to $X$ consist of families of morphisms with codomain $X$ whose images cover $\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*quasi.?compact|quasi.?compact.*atlas",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level covering or gluing results do not state the algebraic-space atlas assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"etale\"",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level covering or gluing results do not state the algebraic-space atlas assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of quasi compact scheme atlases over an etale cover of a scheme assembles into an etale surjective atlas of an algebraic space",
+   "results": "Logged 8 hits: AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.QuasiCompactCover.homCover, AlgebraicGeometry.QuasiCompactCover.singleton, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.quasiCompactCover_iff, AlgebraicGeometry.Scheme.JointlySurjective",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level covering or gluing results do not state the algebraic-space atlas assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite disjoint union of local etale surjective atlases is a quasi compact scheme atlas of an algebraic space",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.QuasiCompactCover.homCover",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level covering or gluing results do not state the algebraic-space atlas assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from disjoint unions of schemes to sheaves glue uniquely and etale covering families compose",
+   "results": "Logged 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.Scheme.Cover.glueMorphisms, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J, AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms, AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOverOfLocallyDirected_left",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level covering or gluing results do not state the algebraic-space atlas assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-qc-separated-etale-local",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Auxiliary polarized-descent locality input in the ancestry of lem-trf-local-term-locality: returned proof of lem-trf-space-qc-separated-etale-local, step 4, composition on each scheme test and the finite disjoint-union atlas.",
+   "via": [
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-finite-qc-atlas-assembly",
+  "worker": "stage1",
+  "summary": "Constructed the atlas map by the sheaf equalizer axiom; proved representability and the surjective-etale scheme tests by existing DAG lemmas, with an explicit compatible-pair identification of the test pieces; proved quasi-compactness by finite subcovers. No new nodes and no statement changes. Checked all cited statements, empty index and empty-space cases, nonaffine and nonseparated bases.",
+  "blueprint": "Historical polarized-descent helper in the ancestry of lem-trf-local-term-locality: atlas assembly extracted from lem-trf-space-qc-separated-etale-local, step 4. Steps 1-5 give the composed scheme-test covering and disjoint-union atlas; step 6 gives quasi-compactness. The current latest blueprint uses the contracting-correspondence route; this historical auxiliary descent node does not replace its unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Only the defining sheaf equalizer axiom is used to glue sections on disjoint Zariski pieces; this is a generic definition, not a different route."
+   },
+   {
+    "node": "lem-pc-yoneda",
+    "why": "Full Yoneda converts maps and natural isomorphisms of scheme representables into scheme morphisms and isomorphisms. The local-term unit supplies no replacement for this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-yoneda"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-8d00636e9",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-8d00636e9 (reviewer sub-agent of L); spot-checked: Read the full six-step proof against each cited statement. No new nodes, no repair note, and the statement and stmt_deps are unchanged and still match the use in step 4 of the parent lem-trf-space-qc-separated-etale-local. Checked the Stacks tags 03E3, 040T, 0217, 01JB, 01JC, 021N, 00VM and 025W in the tag table and read topologies 0217 (1)-(3). Step 1: q is glued by the fppf sheaf axiom over the Zariski cover f^{-1}(U_j); overlaps are empty, and def-pc-fppf-site makes the empty family an fppf covering of the empty scheme, so A of the empty scheme is a singleton. Step 2: representable by the scheme-source clause of lem-trf-space-representable-etale-scheme-tests. Step 3: etale-covering-base-change and etale-covering-composition (singleton inner families) make the e_j : E_j -> T etale and jointly surjective. Step 4: I recomputed the R-points; the W_j-coordinate is forced by w = (U_j->W_j)u, and the Z-equation follows by applying A->h_Z to tx = a_j u. With the finite-coproduct base-change lemma (J finite) this gives V = coproduct of the E_j over T. Steps 5-6: locality on the source, surjectivity and finite subcovers are correct. Edge cases tested: empty J (forces Z empty and every test T empty), empty U_j, nonaffine or nonseparated data, and infinite J as a negative control. proof_deps equals the union of the step uses. Tool uses for def-weil-pbc-sites-and-cohomology and lem-pc-yoneda accepted. No SGA source cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFiniteQcAtlasAssembly",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_qc_atlas_assembly",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFiniteQcAtlasAssembly.lean",
+  "statement": "theorem finite_qc_atlas_assembly {S : Scheme.{u}} (Z : Over S) (A : AlgebraicSpace S) (a : A.obj.obj ⟶ yoneda.obj Z) {J : Type v} [Finite J] (W : J → Over S) (p : ∀ j : J, W j ⟶ Z) (hp : ∀ j : J, Etale (p j).left) (hcover : ∀ z : Z.left, ∃ (j : J) (w : (W j).left), (p j).left w = z) (U : J → Over S) (hU : ∀ j : J, CompactSpace (U j).left) (qj : ∀ j : J, yoneda.obj (U j) ⟶ Limits.pullback a (yoneda.map (p j))) (hqjEt : ∀ j : J, IsEtale (qj j)) (hqjSurj : ∀ j : J, IsSurjective (qj j)) : CompactSpace (∐ U).left ∧ ∃ q : yoneda.obj (∐ U) ⟶ A.obj.obj, (∀ q' : yoneda.obj (∐ U) ⟶ A.obj.obj, (∀ j : J, yoneda.map (Sigma.ι U j) ≫ q' = qj j ≫ Limits.pullback.fst a (yoneda.map (p j))) ↔ q' = q) ∧ IsRepresentable q ∧ IsSurjective q ∧ IsEtale q",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coproduct in Over S has underlying scheme the scheme coproduct, since Over.forget creates colimits. The atlas map is the unique map with the prescribed restrictions to the summands (iff form, so uniqueness does not depend on the atlas properties). Compactness and the three scheme-test properties give the stated quasi-compact scheme atlas; finite indices may be empty and live in an arbitrary universe.",
+  "fixed_by": "NT-stage2-cc-551c75287"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-551c75287",
+  "group": "Q61",
+  "result": "fix",
+  "note": "H3: delivered `∃! q, restrictions ∧ IsRepresentable ∧ IsSurjective ∧ IsEtale` makes q unique only among maps with the atlas properties; the node's 'induced morphism' needs uniqueness from the restrictions alone (sheaf gluing, step 1). Fixed to iff form `∃ q, (∀ q', restrictions q' ↔ q' = q) ∧ Rep ∧ Surj ∧ Et`; fixes/SpaceFiniteQcAtlasAssembly.lean plus lean-record.json with the verbatim statement; nt_compile --json clean in 4.8 s. Everything else checked: Z, A, a : A→h_Z, finite J in universe v (empty allowed), Etale p_j, joint-cover hcover, CompactSpace U_j, q_j into pullback a (yoneda.map p_j) with scheme-test IsEtale/IsSurjective (representability included), ∐U in Over S equal to the scheme coproduct; dependency declarations (AlgebraicSpace.*, Mathlib Etale, CompactSpace, pullback) match their records; no extra hypotheses; sorry-only proof; source/blueprint docstrings; no new nodes; no citers in side-live."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T082408-L-2169913",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

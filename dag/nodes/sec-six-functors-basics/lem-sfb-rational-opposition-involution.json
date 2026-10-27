@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-rational-opposition-involution",
+ "kind": "statement",
+ "title": "Rational opposition involution for a prescribed simple-root pinning",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional semisimple $\\mathbf Q$-Lie algebra [def-wf-lie-algebra], [def-wf-semisimple-lie-algebra]. Let $\\mathfrak h\\subseteq\\mathfrak g$ be a maximal abelian subalgebra acting diagonally over $\\mathbf Q$, with root decomposition $\\mathfrak g=\\mathfrak h\\oplus\\bigoplus_{\\alpha\\in R}\\mathfrak g_\\alpha$, where $R\\subset\\mathfrak h^\\vee\\setminus\\{0\\}$ is its reduced crystallographic root system and $\\mathfrak g_\\alpha=\\{z:[h,z]=\\alpha(h)z\\text{ for every }h\\in\\mathfrak h\\}$ is one-dimensional. For $\\alpha\\in R$, let $h_\\alpha\\in[\\mathfrak g_\\alpha,\\mathfrak g_{-\\alpha}]\\subseteq\\mathfrak h$ be the coroot with $\\alpha(h_\\alpha)=2$. Fix a base $\\Delta\\subseteq R$, meaning a basis of $\\mathfrak h^\\vee$ such that every root has integral coordinates of one sign, and nonzero $x_\\delta\\in\\mathfrak g_\\delta$ for $\\delta\\in\\Delta$. There is a $\\mathbf Q$-linear Lie automorphism $\\theta:\\mathfrak g\\to\\mathfrak g$ with $\\theta^2=1$, $\\theta(h)=-h$ for $h\\in\\mathfrak h$, and $\\theta(\\mathfrak g_\\alpha)=\\mathfrak g_{-\\alpha}$ for every root, such that $[x_\\delta,-\\theta(x_\\delta)]=h_\\delta$ for every $\\delta\\in\\Delta$. The assertion includes $\\Delta=\\varnothing$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed p.508, opposition involution following the normalized simple-root triples; rational descent of this involution is an agent-stated supporting assertion, using the generator relations on pp.503--504, not a quotation of a rational-field theorem."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Enumerate $\\Delta=\\{\\alpha_i:i\\in I\\}$ and put $e_i=x_{\\alpha_i}$. The split root-decomposition theorem gives rational $f_i\\in\\mathfrak g_{-\\alpha_i}$ with $[e_i,f_i]=h_i:=h_{\\alpha_i}$ and gives the spanning, integral and reflection-compatible root/coroot pairing for evaluation $\\mathfrak h^\\vee\\times\\mathfrak h\\to\\mathbf Q$. Apply the rational root-base theorem to this pairing and the given base: the $h_i$ form a basis of $\\mathfrak h$. These hypotheses hold because the given $\\mathfrak g$ is finite-dimensional semisimple and $\\mathfrak h$ is maximal abelian and acts diagonally over $\\mathbf Q$. If $I=\\varnothing$, the given base forces $\\mathfrak h^\\vee=0$, hence $\\mathfrak h=0$, $R=\\varnothing$ and $\\mathfrak g=0$ by the given decomposition; take its identity automorphism. Below assume $I\\ne\\varnothing$.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-root-base-rational-integral-spans"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503--504 and p.508; rational generator-relations argument, with automorphism signs as in this item."
+   }
+  },
+  {
+   "text": "Put $a_{ij}=\\alpha_j(h_i)$. The pinned Serre-presentation lemma applies to the same split rational algebra, base and normalized pairs $e_i,f_i$. It supplies $\\phi:\\mathfrak s(A)\\xrightarrow{\\sim}\\mathfrak g$ sending $H_i,E_i,F_i$ to $h_i,e_i,f_i$, respectively. In particular every generator relation displayed in that lemma holds in $\\mathfrak s(A)$, and $\\mathfrak s(A)$ is the stated quotient of a free rational Lie algebra.",
+   "uses": [
+    "lem-sfb-pinned-serre-presentation-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503--504 and p.508; rational generator-relations argument, with automorphism signs as in this item."
+   }
+  },
+  {
+   "text": "On the free algebra set $T(H_i)=-H_i$, $T(E_i)=-F_i$, $T(F_i)=-E_i$ and extend by its defining universal property. Write $r^{EF}_{ij}=[E_i,F_j]-\\delta_{ij}H_i$, $r^{HE}_{ij}=[H_i,E_j]-a_{ij}E_j$ and $r^{HF}_{ij}=[H_i,F_j]+a_{ij}F_j$. Bilinearity and skew-symmetry give $T([H_i,H_j])=[H_i,H_j]$, $T(r^{EF}_{ij})=-r^{EF}_{ji}$, $T(r^{HE}_{ij})=r^{HF}_{ij}$ and $T(r^{HF}_{ij})=r^{HE}_{ij}$. For $n=1-a_{ij}$, induction on the nested bracket gives\n$$T((\\operatorname{ad}E_i)^nE_j)=(-1)^{n+1}(\\operatorname{ad}F_i)^nF_j,$$\nand the same formula with $E,F$ exchanged. Thus $T$ sends each generating relator into the relator ideal $J$. The inverse image $T^{-1}(J)$ is an ideal containing those relators, so it contains $J$; hence $T$ descends to a rational Lie endomorphism $\\tau$ of the quotient. Its square fixes every generator and therefore every rational linear combination of bracket words, so $\\tau^2=1$.",
+   "uses": [
+    "lem-sfb-pinned-serre-presentation-isomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503--504 and p.508; rational generator-relations argument, with automorphism signs as in this item."
+   }
+  },
+  {
+   "text": "Define $\\theta=\\phi\\tau\\phi^{-1}$. Then $\\theta$ is a rational Lie automorphism, $\\theta^2=1$, $\\theta(e_i)=-f_i$ and $\\theta(h_i)=-h_i$. Since the $h_i$ are a basis, $\\theta(h)=-h$ on all of $\\mathfrak h$. For $z\\in\\mathfrak g_\\alpha$, applying $\\theta$ to $[h,z]=\\alpha(h)z$ gives $[-h,\\theta z]=\\alpha(h)\\theta z$, or $[h,\\theta z]=-\\alpha(h)\\theta z$. Hence $\\theta(\\mathfrak g_\\alpha)\\subseteq\\mathfrak g_{-\\alpha}$, and applying the same calculation to $-\\alpha$ and using $\\theta^2=1$ gives equality. Finally $[x_{\\alpha_i},-\\theta(x_{\\alpha_i})]=[e_i,f_i]=h_i$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503--504 and p.508; rational generator-relations argument, with automorphism signs as in this item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-semisimple-root-decomposition",
+  "lem-sfb-root-base-rational-integral-spans",
+  "lem-sfb-pinned-serre-presentation-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, pp.503--504 and p.508; rational construction from the Serre presentation, using the printed opposition automorphism signs verified visually on p.508."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split semisimple rational Lie algebra has a Cartan involution reversing root spaces with positive definite negative Killing form and any prescribed simple root vectors",
+   "results": "{\"t\": \"2026-10-23T22:15:14Z\", \"tool\": \"leanfinder\", \"query\": \"A split semisimple rational Lie algebra has a Cartan involution reversing root spaces with positive definite negative Killing form and any prescribed simple root vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.lieAlgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieAlgebra.IsKilling.rootSystem\"], \"digest\": \"d7b2ca39dc24c235\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Chevalley involution of a split semisimple Lie algebra fixes the negative of each Cartan element and sends each simple positive generator to its negative opposite generator",
+   "results": "{\"t\": \"2026-10-23T22:17:09Z\", \"tool\": \"leanfinder\", \"query\": \"The Chevalley involution of a split semisimple Lie algebra fixes the negative of each Cartan element and sends each simple positive generator to its negative opposite generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.instInvolutiveNegSubtypeMemLieSubalgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.lieAlgebra\", \"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\"], \"digest\": \"dc720685fd1e2224\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposition involution of a split semisimple Lie algebra exchanges the positive and negative simple root generators",
+   "results": "{\"t\": \"2026-10-23T22:17:08Z\", \"tool\": \"leansearch\", \"query\": \"Opposition involution of a split semisimple Lie algebra exchanges the positive and negative simple root generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.coreflection_inv\", \"RootPairing.Equiv.reflection_inv\", \"RootPairing.reflectionPerm_symm\", \"RootPairing.reflectionPerm_inv\", \"RootPairing.indexNeg\", \"RootPairing.reflection_inv\", \"LieAlgebra.IsKilling.reflectRoot\", \"LieModule.Weight.instInvolutiveNegSubtypeMemLieSubalgebra\"], \"digest\": \"3168d97211ac4507\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Lie algebra involution sending h to minus h and each simple root vector to its negative normalized opposite exists over the rational numbers",
+   "results": "{\"t\": \"2026-10-23T22:19:00Z\", \"tool\": \"leansearch\", \"query\": \"A Lie algebra involution sending h to minus h and each simple root vector to its negative normalized opposite exists over the rational numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.instInvolutiveNegSubtypeMemLieSubalgebra\", \"RootPairing.Equiv.reflection_inv\", \"instSubsingletonLieAlgebraRat\", \"LieModule.Weight.coe_neg\", \"LieModule.Weight.toLinear_neg\", \"LieModule.Weight.instInvolutiveNegSubtypeMemLieSubalgebra.congr_simp\", \"RootPairing.reflection_inv\", \"CliffordAlgebra.involute\"], \"digest\": \"77380c13757ec613\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.Basis.symm",
+   "results": "{\"t\": \"2026-10-23T22:17:08Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.Basis.symm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.Basis.symm\", \"LieAlgebra.Basis.symm_symm\", \"LieAlgebra.Basis.symm_e\", \"LieAlgebra.Basis.symm_f\", \"LieAlgebra.Basis.symm_A\", \"LieAlgebra.Basis.symm_h\", \"LieAlgebra.Basis.symm_h'\", \"LieAlgebra.Basis.symm_baseSupp\"], \"digest\": \"f7ccbee919e426bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "opposition|involut|def symm|lemma symm",
+   "results": "{\"t\": \"2026-10-23T22:17:07Z\", \"tool\": \"grep\", \"query\": \"opposition|involut|def symm|lemma symm\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Basic.lean\", \"Mathlib/Algebra/Lie/Basic.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\"], \"digest\": \"2ac680993f70c5a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|lift|opposition|involut",
+   "results": "{\"t\": \"2026-10-23T23:30:15Z\", \"tool\": \"grep\", \"query\": \"Serre|lift|opposition|involut\", \"sub\": \"Algebra/Lie/SerreConstruction.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"13\", \"15\", \"17\", \"32\", \"52\"], \"digest\": \"93ed82be66daabcc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley involution of a split semisimple Lie algebra over the rational numbers",
+   "results": "{\"t\": \"2026-10-23T23:30:15Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley involution of a split semisimple Lie algebra over the rational numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Equiv.reflection_inv\", \"CliffordAlgebra.involute_involute\", \"CliffordAlgebra.toBaseChange_comp_involute\", \"CliffordAlgebraComplex.toComplex_involute\", \"instSubsingletonLieAlgebraRat\", \"CliffordAlgebra.involute\", \"ConjRootClass.instInvolutiveNeg\", \"CliffordAlgebra.involuteEquiv_symm_apply\"], \"digest\": \"eca7d0afc9d5da32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CartanMatrix.ToLieAlgebra",
+   "results": "{\"t\": \"2026-10-23T23:30:15Z\", \"tool\": \"loogle\", \"query\": \"CartanMatrix.ToLieAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CartanMatrix.ToLieAlgebra'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split semisimple rational Lie algebra admits a Chevalley opposition involution exchanging normalized simple positive and negative root vectors",
+   "results": "{\"t\": \"2026-10-23T23:30:16Z\", \"tool\": \"leanfinder\", \"query\": \"A split semisimple rational Lie algebra admits a Chevalley opposition involution exchanging normalized simple positive and negative root vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.h'\", \"LieAlgebra.IsKilling.rootSystem\", \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieModule.Weight.instInvolutiveNegSubtypeMemLieSubalgebra\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\"], \"digest\": \"713522a5ec6a40cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.ToLieAlgebra",
+   "results": "{\"t\": \"2026-10-23T23:31:34Z\", \"tool\": \"loogle\", \"query\": \"Matrix.ToLieAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Matrix.ToLieAlgebra\", \"Matrix.instInhabitedToLieAlgebra\", \"Matrix.instLieRingToLieAlgebra\", \"Matrix.instLieAlgebraToLieAlgebra\"], \"digest\": \"cf1ea74f67e5ad6d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maps H_i to minus H_i, E_i to minus F_i, F_i to minus E_i preserve the Serre relations",
+   "results": "{\"t\": \"2026-10-23T23:31:35Z\", \"tool\": \"leanfinder\", \"query\": \"The maps H_i to minus H_i, E_i to minus F_i, F_i to minus E_i preserve the Serre relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ω_mul_h\", \"IsSl2Triple.symm\", \"CartanMatrix.Relations.HF\", \"CartanMatrix.Relations.HH\", \"CartanMatrix.Relations.adF\", \"CartanMatrix.Relations.HE\", \"CartanMatrix.Relations.adE\", \"RootPairing.GeckConstruction.isSl2Triple\"], \"digest\": \"47c6fdb03828bede\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|theorem.*lift|hom_ext|lieSpan_le",
+   "results": "{\"t\": \"2026-10-23T23:32:30Z\", \"tool\": \"grep\", \"query\": \"def lift|theorem.*lift|hom_ext|lieSpan_le\", \"sub\": \"Algebra/Lie/Quotient.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"205\"], \"digest\": \"9ef949301c04b089\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieIdeal.Quotient.lift",
+   "results": "{\"t\": \"2026-10-23T23:32:30Z\", \"tool\": \"loogle\", \"query\": \"LieIdeal.Quotient.lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'LieIdeal.Quotient.lift'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|presentation|ToLieAlgebra|equiv|isomorph",
+   "results": "{\"t\": \"2026-10-23T23:33:18Z\", \"tool\": \"grep\", \"query\": \"Serre|presentation|ToLieAlgebra|equiv|isomorph\", \"sub\": \"Algebra/Lie/SerreConstruction.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"13\", \"15\", \"17\", \"32\", \"45\"], \"digest\": \"a4d7d4b6ad1e1773\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple root vectors and normalized negative root vectors give a presentation by Serre relations of any split semisimple Lie algebra in characteristic zero",
+   "results": "{\"t\": \"2026-10-23T23:33:18Z\", \"tool\": \"leansearch\", \"query\": \"Simple root vectors and normalized negative root vectors give a presentation by Serre relations of any split semisimple Lie algebra in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Generators.ctorElimType\", \"CartanMatrix.Relations.HE\", \"CartanMatrix.Relations.EF\", \"CartanMatrix.Generators.casesOn\", \"CartanMatrix.Generators.noConfusionType\", \"Matrix.instLieAlgebraToLieAlgebra\", \"Matrix.ToLieAlgebra\", \"CartanMatrix.Relations.toSet\"], \"digest\": \"c3247d2d10d983ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.ToLieAlgebra, LieEquiv",
+   "results": "{\"t\": \"2026-10-23T23:33:19Z\", \"tool\": \"loogle\", \"query\": \"Matrix.ToLieAlgebra, LieEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional split semisimple Lie algebra is isomorphic to the Serre presentation for its Cartan matrix via prescribed normalized simple root vectors",
+   "results": "{\"t\": \"2026-10-23T23:33:20Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional split semisimple Lie algebra is isomorphic to the Serre presentation for its Cartan matrix via prescribed normalized simple root vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.lieAlgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"CartanMatrix.Generators\", \"Matrix.ToLieAlgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra_eq_lieSpan\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\"], \"digest\": \"c08df9563da0d31e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|serre|ad_nilpotent|exists.*pow.*zero|chainTopCoeff",
+   "results": "{\"t\": \"2026-10-23T23:34:14Z\", \"tool\": \"grep\", \"query\": \"Serre|serre|ad_nilpotent|exists.*pow.*zero|chainTopCoeff\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\"], \"digest\": \"3456e7b9dbc35ec1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The simple root vectors in a split semisimple Lie algebra satisfy the Serre relations for their Cartan matrix",
+   "results": "{\"t\": \"2026-10-23T23:34:14Z\", \"tool\": \"leansearch\", \"query\": \"The simple root vectors in a split semisimple Lie algebra satisfy the Serre relations for their Cartan matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Relations.HE\", \"CartanMatrix.Relations.EF\", \"CartanMatrix.Generators.ctorElimType\", \"CartanMatrix.Relations.toSet\", \"CartanMatrix.Generators.casesOn\", \"CartanMatrix.Relations.toIdeal\", \"Matrix.ToLieAlgebra\", \"CartanMatrix.Relations.HF\"], \"digest\": \"d71523b1b9665ad2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.Basis, LieAlgebra.ad",
+   "results": "{\"t\": \"2026-10-23T23:34:14Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.Basis, LieAlgebra.ad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For simple roots i and j of a split semisimple rational Lie algebra, normalized simple root vectors satisfy ad(e_i) to the power 1 minus the Cartan entry applied to e_j equals zero, and the analogous negative root relation",
+   "results": "{\"t\": \"2026-10-23T23:34:17Z\", \"tool\": \"leanfinder\", \"query\": \"For simple roots i and j of a split semisimple rational Lie algebra, normalized simple root vectors satisfy ad(e_i) to the power 1 minus the Cartan entry applied to e_j equals zero, and the analogous negative root relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Relations.adE\", \"CartanMatrix.Relations.adF\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.lie_h_e\", \"RootPairing.GeckConstruction.lie_e_f_ne\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.e_lie_u\"], \"digest\": \"1122440358f722a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley Serre isomorphism theorem identifies an arbitrary split semisimple Lie algebra with the free Lie algebra quotient on its simple root sl2 triples",
+   "results": "{\"t\": \"2026-10-23T23:34:47Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley Serre isomorphism theorem identifies an arbitrary split semisimple Lie algebra with the free Lie algebra quotient on its simple root sl2 triples\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieAlgebra.IsKilling.sl2SubalgebraOfRoot\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"RootPairing.GeckConstruction.lieAlgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\"], \"digest\": \"9115750c5ea6ec97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected SerreConstruction.lean:73--157 and Basis/Basic.lean:51--117. The former defines relations and the quotient, the latter exchanges basis data; neither gives a Lie automorphism of an arbitrary prescribed split rational algebra. Root reflections, negation of weights, rank-one triples and Clifford-algebra involutions are different assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-root-normalization",
+  "date": "2026-10-24",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, Chevalley bases, printed pp.508--509, especially Theorem 23.71; extending the prescribed simple-root pinning, with rationality from bracket construction over the split rational form. Supporting input: Section 23h, printed p.508, opposition involution following the normalized simple-root triples; rational descent of this involution is an agent-stated supporting assertion, using the generator relations on pp.503--504, not a quotation of a rational-field theorem.",
+   "via": [
+    "lem-sfb-chevalley-root-normalization",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-opposition-involution",
+  "worker": "stage1",
+  "summary": "Kept the statement, including the empty base. Reused split root decomposition and the simple-coroot basis theorem, isolated the canonical isomorphism from a pinned Serre quotient to the given rational algebra, and checked every generator relation under H -> -H, E -> -F, F -> -E. Rationality, involutivity, reversal of every root space and the prescribed normalization are explicit. No SGA route and no Lean writing or compilation.",
+  "blueprint": "Supports the existing Chevalley-normalization prerequisite in the inherited chain below det-thm-sf-ctf-stability-direct-images proof (3). Read the latest blueprint via literature/blueprint/latest; the new node serves the rational generator-relations construction on Milne pp.503--504 and p.508. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-6a0a41585",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-6a0a41585 (reviewer sub-agent of L); spot-checked: I read all of it. The item's statement and stmt_deps are byte-identical to live (status unsplit in live and side-live, no repair note), so nothing is weakened and the delivery is not superseded. Source checked: Milne iAG2017 §23h. Printed pp.503-504 give the 23.63 Serre presentation (the typos [X_i,X_i]→[X_i,Y_i] and J_j→Y_j are noted correctly). Printed p.508 gives the opposition θ(e_α)=-e_{-α}, θ|t=-1, which matches [x_δ,-θx_δ]=h_δ. proof_origin is agent. Step 1: the split-root-decomposition node gives f_i, and the root-base leaf (V=h^∨, W=h, evaluation pairing, J=Δ) gives that the h_i form a basis of h; the empty base gives h^∨=0, hence g=0, and the identity works. Step 2: the new node is applied to exactly its own data. Step 3: I recomputed every relator under T(H)=-H, T(E)=-F, T(F)=-E: [H,H]↦itself, r^EF_ij↦-r^EF_ji, r^HE↔r^HF, Serre relators↦(-1)^{n+1} times their opposites. T^{-1}(J) is an ideal and T²=id by the universal property; the elementary mark is right. Step 4: conjugation gives θ=-1 on h, equality of root spaces via θ²=1, and the normalization. New node lem-sfb-pinned-serre-presentation-isomorphism is Serre's theorem for a prescribed rational pinning. It is true; tested on rank 0, sl2 with e=tE, A1×A1, and the A2 exponent 2; in general p=0 and q=-a_ij, so the relators hold in g. It is self-contained, statement-only, and cites both def nodes. It is not a duplicate of serre-rational-presentation (model existence), serre-graded-triangular-quotient, split-root-decomposition, chevalley-root-normalization, the sl2-reflection/adjoint-Weyl-sign nodes or opposition-root-bracket-norm; an rg -L over dag/nodes found nothing else. Mathlib has only Matrix.ToLieAlgebra (SerreConstruction.lean), with no comparison isomorphism; all three search kinds are recorded. The node is not a restatement of the item: it does not mention θ, the item's own argument stays in steps 3-4, and there is no cycle. All cited nodes are in unit sk-thm-sf-ctf-stability, so no tool_uses. No SGA citation. blueprint.from.node=null is inherited from the base chain. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.RationalOppositionInvolution",
+  "declaration": "LieAlgebra.exists_rational_opposition_involution",
+  "file": "lean/Sheaf/Algebra/Lie/RationalOppositionInvolution.lean",
+  "statement": "theorem exists_rational_opposition_involution (L : Type u) [LieRing L] [LieAlgebra ℚ L] [FiniteDimensional ℚ L] [HasTrivialRadical ℚ L] (H : LieSubalgebra ℚ L) [IsLieAbelian H] (hmax : ∀ A : LieSubalgebra ℚ L, H ≤ A → IsLieAbelian A → A = H) (hsplit : ∀ h : H, (⨆ a : ℚ, (ad ℚ L (h : L)).eigenspace a) = ⊤) (I : Type v) [Finite I] (P : RootPairing I ℚ (Module.Dual ℚ H) H) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (heval : ∀ (α : Module.Dual ℚ H) (h : H), P.toLinearMap α h = α h) (hdecomp : DirectSum.IsInternal (Sum.elim (fun _ : Unit ↦ H.toSubmodule) (fun i : I ↦ (LieModule.weightSpace L (P.root i)).toSubmodule))) (hdim : ∀ i : I, Module.finrank ℚ (LieModule.weightSpace L (P.root i)) = 1) (hcoroot : ∀ i : I, (P.coroot i : L) ∈ Submodule.span ℚ {z : L | ∃ a ∈ LieModule.weightSpace L (P.root i), ∃ b ∈ LieModule.weightSpace L (-P.root i), ⁅a, b⁆ = z}) (Δ : Set I) (b : Module.Basis Δ ℚ (Module.Dual ℚ H)) (hb : ∀ i : Δ, b i = P.root i) (hsign : ∀ i : I, P.root i ∈ AddSubmonoid.closure (P.root '' Δ) ∨ -P.root i ∈ AddSubmonoid.closure (P.root '' Δ)) (x : Δ → L) (hx : ∀ i : Δ, x i ∈ LieModule.weightSpace L (P.root i)) (hxne : ∀ i : Δ, x i ≠ 0) : ∃ θ : L ≃ₗ⁅ℚ⁆ L, Function.Involutive θ ∧ (∀ h : H, θ (h : L) = -(h : L)) ∧ (∀ i : I, Submodule.map θ.toLinearEquiv.toLinearMap (LieModule.weightSpace L (P.root i)).toSubmodule = (LieModule.weightSpace L (-P.root i)).toSubmodule) ∧ (∀ i : Δ, ⁅x i, -θ (x i)⁆ = (P.coroot i : L))",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b49700f3e",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause check of LieAlgebra.exists_rational_opposition_involution against the node: finite-dim. HasTrivialRadical ℚ-Lie algebra; H maximal abelian (hmax) and ℚ-diagonal (hsplit); RootPairing with evaluation pairing (heval) and hdecomp/hdim forcing range P.root = the nonzero weights; hcoroot gives h_α in [g_α,g_-α] with α(h_α)=2 by root_coroot_two; base = basis b with hb + AddSubmonoid.closure sign condition; nonzero x_δ; conclusion: LieEquiv, Involutive, θ=-1 on H, Submodule.map equality g_α→g_-α, ⁅x,-θx⁆=coroot (Milne p.508 sign). Δ=∅ and L=0 covered, universes u v independent, no extra instances. Hypotheses identical to landed consumer exists_chevalley_basis_of_pinning plus the node's hsplit. Node differs from side-live only in lean; statement verbatim; existing:false; sorry-only theorem, docstrings with source/blueprint and proof plan; report has Worker report and Second reading sections. No Mathlib/project duplicate (Basis.symm, Matrix.ToLieAlgebra not matches). No compile needed (no change); worker reports clean scompile. No findings."
+ }
+}

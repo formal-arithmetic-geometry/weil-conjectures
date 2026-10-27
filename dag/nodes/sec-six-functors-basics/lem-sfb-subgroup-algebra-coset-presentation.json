@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-subgroup-algebra-coset-presentation",
+ "kind": "statement",
+ "title": "Coset basis and finite presentation for subgroup group algebras",
+ "statement": "Let $R$ be a commutative ring, $M$ an additive abelian group, and $L\\subseteq M$ a subgroup. Use the group algebras of [def-sfb-ring-diagonalizable-group], so $R[M]$ is the free $R$-module on $e_m$ with $e_me_n=e_{m+n}$. The inclusion $j:R[L]\\to R[M]$, $e_l\\mapsto e_l$, is injective. For any representatives $t_c\\in M$ of the cosets $c\\in M/L$, the elements $(e_{t_c})_{c\\in M/L}$ are an $R[L]$-basis of $R[M]$ [def-weil-pbc-free-module]. Suppose $M/L$ is finitely generated. Choose a decomposition $M/L\\cong\\mathbf Z^r\\oplus\\bigoplus_{j=1}^s\\mathbf Z/d_j\\mathbf Z$ with $r,s\\geq0$ and $d_j\\geq2$, lifts $a_i,b_j\\in M$ of the indicated free and cyclic generators, and put $l_j=d_jb_j\\in L$. Then the homomorphism\n$$R[L][X_1^{\\pm1},\\ldots,X_r^{\\pm1},Y_1^{\\pm1},\\ldots,Y_s^{\\pm1}]/(Y_j^{d_j}-e_{l_j}:1\\leq j\\leq s)\\longrightarrow R[M],\\quad X_i\\longmapsto e_{a_i},\\ Y_j\\longmapsto e_{b_j},$$\nwhich is $j$ on coefficients, is an isomorphism. Here a Laurent polynomial ring means finite sums of monomials with integer exponents, and adjoining $Z^{\\pm1}$ means adjoining $Z,W$ subject to $ZW=1$. In particular $R[M]$ is a finitely presented $R[L]$-algebra [def-weil-pbc-finitely-presented-algebra]. The displayed homomorphism remains an isomorphism after any homomorphism of base rings $R\\to R'$, with every $e_m$ sent to the same indexed basis element. The zero ring, $L=M$, $L=0$, and torsion in $M$ are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.9(b), printed pp.233-234, group-algebra injection and quotient calculation; relative algebra strengthening and explicit coset/Laurent normal form written by Q96. Conrad Appendix B.1, printed p.280, is the relative motivation; no Stacks tag states this subgroup-algebra presentation."
+ },
+ "stmt_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=R[L]$. The finitely supported map $j$ sends $\\sum_{l\\in L}r_le_l$ to the same sum indexed by the distinct elements $l\\in M$. The coefficient of $e_l$ in its image is $r_l$, so its kernel is zero. It respects multiplication because $e_{l+l\\prime}=e_le_{l\\prime}$, and sends the unit $e_0$ to $e_0$. Thus it gives the specified injective ring map and the $A$-algebra structure on $R[M]$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(b), printed pp.233-234; agent relative-ring strengthening: explicit coset and Laurent normal forms."
+   }
+  },
+  {
+   "text": "For any chosen representatives, the function $L\\times(M/L)\\to M$, $(l,c)\\mapsto l+t_c$, is a bijection: for $m\\in M$ its inverse is $(m-t_{\\bar m},\\bar m)$. Consequently regrouping a finite sum by $c$ gives $\\sum_mr_me_m=\\sum_c(\\sum_lr_{l+t_c}e_l)e_{t_c}$. Its coefficients in $A$ are unique, since equality of two such sums gives equality at each $e_{l+t_c}$. This is exactly the asserted $A$-basis, with no finiteness restriction on $M/L$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(b), printed pp.233-234; agent relative-ring strengthening: explicit coset and Laurent normal forms."
+   }
+  },
+  {
+   "text": "When $M/L$ is finitely generated, apply the cited abelian-group structure theorem to $M/L$. Delete factors with exponent zero, whose cyclic group is $\\mathbf Z/1\\mathbf Z=0$, and enumerate the remaining finite index set. Finite-support functions on a finite set are ordinary tuples. This gives a decomposition of the stated form with $d_j\\geq2$. The argument below works for any such chosen decomposition, not only the prime-power decomposition furnished by the theorem. Lift its generators along $M\\twoheadrightarrow M/L$. Then $l_j=d_jb_j\\in L$, and the elements $t_{n,q}=\\sum_i n_ia_i+\\sum_jq_jb_j$, where $n\\in\\mathbf Z^r$ and $0\\leq q_j<d_j$, are exactly one representative per coset.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/GroupTheory/FiniteAbelian/Basic.lean",
+    "place": "AddCommGroup.equiv_free_prod_directSum_zmod, lines 119-132; elementary deletion of trivial cyclic summands."
+   }
+  },
+  {
+   "text": "First handle $R=0$: all the rings in the presentation are zero rings, their underlying modules have unique coefficient families, and all asserted maps are the unique isomorphisms. Henceforth suppose $R\\ne0$. Set $B=A[X_1^{\\pm1},\\ldots,X_r^{\\pm1}]$, $C_0=B$ and $C_j=C_{j-1}[Y_j]/(Y_j^{d_j}-e_{l_j})$. In each step the polynomial is monic of degree $d_j$, so the cited monic-quotient basis gives a unique expression $\\sum_{q_j<d_j}c_{q_j}y_j^{q_j}$ over $C_{j-1}$. Induction starting at $C_0=B$ therefore gives a unique expression $\\sum_q c_qy_1^{q_1}\\cdots y_s^{q_s}$ in $C_s$ with $c_q\\in B$. The coefficient rings remain nonzero: the power-basis expression of a nonzero constant cannot be zero. Expanding each $c_q$ into its finite Laurent sum shows that $C_s$ has $A$-basis $X^ny^q$, with $n\\in\\mathbf Z^r$ and $0\\leq q_j<d_j$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), monic-quotient freeness used in its proof; power-basis form in AdjoinRoot.powerBasis', Mathlib/RingTheory/AdjoinRoot.lean:633; finite iteration and Laurent expansion written here."
+   }
+  },
+  {
+   "text": "Let $P$ denote the Laurent quotient displayed in the statement. In $C_s$ the element $e_{l_j}$ is a unit with inverse $e_{-l_j}$, and $y_j^{-1}=e_{-l_j}y_j^{d_j-1}$, since their product is $e_{-l_j}y_j^{d_j}=1$. Evaluating Laurent monomials at these units defines $P\\to C_s$. Conversely the successive polynomial-quotient maps sending $y_j$ to the class of $Y_j$ define $C_s\\to P$. Both composites fix coefficients, all $X_i^{\\pm1}$, and all $y_j$ or $Y_j^{\\pm1}$, respectively, so they are identity maps on all finite monomial sums. This identifies $P$ with $C_s$ and its basis with the monomials $X^nY^q$ of the preceding step.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(b), printed pp.233-234; agent relative-ring strengthening: explicit coset and Laurent normal forms."
+   }
+  },
+  {
+   "text": "Each $e_{a_i}$ and $e_{b_j}$ is a unit, with inverse given by negating its index, and $(e_{b_j})^{d_j}=e_{l_j}$. Thus evaluation defines the displayed $A$-algebra homomorphism $P\\to R[M]$. It sends $X^nY^q$ to $e_{t_{n,q}}$. Step 3 says that these $t_{n,q}$ are coset representatives; Step 2 says their images are an $A$-basis of $R[M]$. Together with Steps 4-5 this proves bijectivity: expand an element uniquely in the respective basis, and keep the same coefficients in the other basis to obtain the inverse. A bijective algebra homomorphism is an algebra isomorphism, as applying the homomorphism to both sides of each algebra law verifies that its inverse preserves that law.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(b), printed pp.233-234; agent relative-ring strengthening: explicit coset and Laurent normal forms."
+   }
+  },
+  {
+   "text": "Replace the $r+s$ Laurent variables by pairs of ordinary polynomial variables $X_i,U_i$ and $Y_j,V_j$, with relations $X_iU_i-1$, $Y_jV_j-1$, and $Y_j^{d_j}-e_{l_j}$. The map to $P$ sends $U_i$ to $X_i^{-1}$ and $V_j$ to $Y_j^{-1}$. The inverse sends every negative power to the corresponding power of $U_i$ or $V_j$; the product-one relations make these assignments inverse. This is a presentation with $2(r+s)$ variables and $r+2s$ relations over $A$, so the definition of finite presentation applies. For $r=s=0$ it is the presentation $A\\cong A$ with no variables or relations.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(b), printed pp.233-234; agent relative-ring strengthening: explicit coset and Laurent normal forms."
+   }
+  },
+  {
+   "text": "For any ring homomorphism $f:R\\to R\\prime$, the coefficient map on group algebras is $\\sum_mr_me_m\\mapsto\\sum_mf(r_m)e_m$; on Laurent polynomials apply $f$ to each coefficient in $A=R[L]$ and fix the variables. It sends every relation $Y_j^{d_j}-e_{l_j}$ to the identically indexed relation over $R\\prime$, and commutes with evaluation on coefficients and on every variable and inverse variable. The same coset decomposition, unit formula and normal forms in Steps 1-7 over $R\\prime$ prove that the resulting displayed map is an isomorphism, including when $R\\prime=0$. Its inverse likewise keeps the indices $t_{n,q}$ and applies $f$ only to coefficients. Thus the isomorphism has exactly the stated compatibility with every base-ring homomorphism. No torsion element was cancelled and no integer $d_j$ was inverted anywhere.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(b), printed pp.233-234; agent relative-ring strengthening: explicit coset and Laurent normal forms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-free-module",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.9(b), printed pp.233-234; agent relative-ring strengthening: explicit coset and Laurent normal forms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coset|FinitePresentation|finitePresentation|faithfullyFlat",
+   "subdirectory": "Algebra/MonoidAlgebra",
+   "results": "{\"t\": \"2026-10-24T07:54:22Z\", \"tool\": \"grep\", \"query\": \"coset|FinitePresentation|finitePresentation|faithfullyFlat\", \"sub\": \"Algebra/MonoidAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. No hits. None gives the relative subgroup-algebra coset basis and finite Laurent presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group ring is a free finitely presented algebra over the group ring of a subgroup when the quotient is a finitely generated abelian group",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T07:54:23Z\", \"tool\": \"leansearch\", \"query\": \"A group ring is a free finitely presented algebra over the group ring of a subgroup when the quotient is a finitely generated abelian group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FinitePresentation\", \"Module.Finite.exists_free_surjective\", \"Algebra.FiniteType.quotient\", \"AddMonoidAlgebra.finiteType_iff_group_fg\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"Algebra.FinitePresentation.quotient\", \"Algebra.Presentation.instFinitePresentationQuotientOfFinite\", \"RingHom.FinitePresentation.of_surjective\"], \"digest\": \"0b1ab3c019755f5e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. RingHom.FinitePresentation, Module.Finite.exists_free_surjective, Algebra.FiniteType.quotient, AddMonoidAlgebra.finiteType_iff_group_fg, Algebra.FinitePresentation.iff_quotient_mvPolynomial', Algebra.FinitePresentation.quotient, Algebra.Presentation.instFinitePresentationQuotientOfFinite, RingHom.FinitePresentation.of_surjective None gives the relative subgroup-algebra coset basis and finite Laurent presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, Module.Free",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T07:54:23Z\", \"tool\": \"loogle\", \"query\": \"MonoidAlgebra, Module.Free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MonoidAlgebra.instFree\", \"Representation.free_asModule_free\"], \"digest\": \"716b25116c92f3de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. MonoidAlgebra.instFree, Representation.free_asModule_free None gives the relative subgroup-algebra coset basis and finite Laurent presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a subgroup L of an abelian group M with finitely generated quotient, the group algebra R[M] is free with coset basis and finitely presented over R[L]",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T07:54:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a subgroup L of an abelian group M with finitely generated quotient, the group algebra R[M] is free with coset basis and finitely presented over R[L]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.finiteType_iff_group_fg\", \"MonoidAlgebra.finiteType_iff_group_fg\", \"Representation.free_asModule_free\", \"Algebra.Presentation.instFinitePresentationQuotientOfFinite\", \"instFinitePresentationFinsupp\", \"FGModuleRepr.ofFinite\", \"AddMonoidAlgebra.moduleFinite\", \"Module.Finite.exists_fin_quot_equiv\"], \"digest\": \"181d773c730ccc9c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. AddMonoidAlgebra.finiteType_iff_group_fg, MonoidAlgebra.finiteType_iff_group_fg, Representation.free_asModule_free, Algebra.Presentation.instFinitePresentationQuotientOfFinite, instFinitePresentationFinsupp, FGModuleRepr.ofFinite, AddMonoidAlgebra.moduleFinite, Module.Finite.exists_fin_quot_equiv None gives the relative subgroup-algebra coset basis and finite Laurent presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The group algebra of an abelian group is a free algebra module over a subgroup ring, with basis indexed by cosets and Laurent polynomial binomial relations",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T07:55:32Z\", \"tool\": \"leanfinder\", \"query\": \"The group algebra of an abelian group is a free algebra module over a subgroup ring, with basis indexed by cosets and Laurent polynomial binomial relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.free_asModule_free\", \"Representation.freeAsModuleBasis\", \"Rep.free\", \"MonoidAlgebra.instFree\", \"FreeAbelianGroup.ring\", \"Representation.free\", \"Representation.finsuppLEquivFreeAsModule\", \"AddMonoidAlgebra.instFree\"], \"digest\": \"64f9c01458fc38e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. Representation.free_asModule_free, Representation.freeAsModuleBasis, Rep.free, MonoidAlgebra.instFree, FreeAbelianGroup.ring, Representation.free, Representation.finsuppLEquivFreeAsModule, AddMonoidAlgebra.instFree None gives the relative subgroup-algebra coset basis and finite Laurent presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "coset|[Ss]ubgroup|[Ff]ree|[Ff]inite[Pp]resentation",
+   "subdirectory": "RingTheory/MonoidAlgebra",
+   "results": "{\"t\": \"2026-10-24T08:04:19Z\", \"tool\": \"grep\", \"query\": \"coset|[Ss]ubgroup|[Ff]ree|[Ff]inite[Pp]resentation\", \"sub\": \"RingTheory/MonoidAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. No hits. None gives the relative subgroup-algebra coset basis and finite Laurent presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "subgroup group algebra free coset basis Laurent polynomial presentation of finitely generated abelian quotient",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T08:25:18Z\", \"tool\": \"leansearch\", \"query\": \"subgroup group algebra free coset basis Laurent polynomial presentation of finitely generated abelian quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.fg\", \"Algebra.Presentation.instFinitePresentationQuotientOfFinite\", \"AddMonoidAlgebra.finiteType_iff_group_fg\", \"QuotientAddGroup.fg\", \"PresentedGroup.instGroup\", \"QuotientGroup.Quotient.commGroup\", \"PresentedGroup.instInhabited\", \"PresentedGroup\"], \"digest\": \"990bc668d554ad0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none gives the complete relative subgroup-algebra presentation; free representation results require identifying the restricted regular module, scalar free-module instances are over the base ring, and finite-type results do not give the relative finite presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "coset|[Ss]ubgroup|[Ff]inite[Pp]resentation",
+   "subdirectory": "Algebra/MonoidAlgebra",
+   "results": "{\"t\": \"2026-10-24T08:26:09Z\", \"tool\": \"grep\", \"query\": \"coset|[Ss]ubgroup|[Ff]inite[Pp]resentation\", \"sub\": \"Algebra/MonoidAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none gives the complete relative subgroup-algebra presentation; free representation results require identifying the restricted regular module, scalar free-module instances are over the base ring, and finite-type results do not give the relative finite presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, Module.Free",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T08:26:10Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra, Module.Free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.instFree\"], \"digest\": \"a91fa490ada65c42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none gives the complete relative subgroup-algebra presentation; free representation results require identifying the restricted regular module, scalar free-module instances are over the base ring, and finite-type results do not give the relative finite presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a subgroup of an abelian group the group algebra is free over the subgroup algebra on a set of coset representatives with Laurent binomial presentation if the quotient is finitely generated",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T08:26:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a subgroup of an abelian group the group algebra is free over the subgroup algebra on a set of coset representatives with Laurent binomial presentation if the quotient is finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.free_asModule_free\", \"Representation.freeAsModuleBasis\", \"AddMonoidAlgebra.finiteType_iff_group_fg\", \"MonoidAlgebra.finiteType_iff_group_fg\", \"Representation.free\", \"MonoidAlgebra.instFree\", \"AddMonoidAlgebra.instFree\", \"Rep.free\"], \"digest\": \"2caa7af47b5e3057\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none gives the complete relative subgroup-algebra presentation; free representation results require identifying the restricted regular module, scalar free-module instances are over the base ring, and finite-type results do not give the relative finite presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "equiv.*[Zz][Mm]od|[Zz][Mm]od.*equiv|[Zz][Mm]od|equiv.*[Dd]irect[Ss]um",
+   "subdirectory": "GroupTheory/FiniteAbelian",
+   "results": "{\"t\": \"2026-10-24T08:26:48Z\", \"tool\": \"grep\", \"query\": \"equiv.*[Zz][Mm]od|[Zz][Mm]od.*equiv|[Zz][Mm]od|equiv.*[Dd]irect[Ss]um\", \"sub\": \"GroupTheory/FiniteAbelian\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Basic.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Basic.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Basic.lean\"], \"digest\": \"9515cfc2e96b289d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: identifies the existing structure-theorem leaf lem-sbc-finitely-generated-abelian-group-structure; not the entire item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finitely generated abelian group is a direct sum of a finite rank free abelian group and finitely many finite cyclic groups",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T08:26:49Z\", \"tool\": \"leanfinder\", \"query\": \"Every finitely generated abelian group is a direct sum of a finite rank free abelian group and finitely many finite cyclic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoid.FG.to_moduleFinite_int\", \"Module.Finite.iff_addGroup_fg\", \"AddGroup.rank\", \"AddGroup.rank_spec\", \"AddGroup.FG.out\", \"FreeAbelianGroup.instFG\", \"AddGroup.fg_iff_exists_freeAddGroup_hom_surjective\", \"AddGroup.FG\"], \"digest\": \"07bb728b19959084\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern finite generation; the structure theorem itself is supplied by the existing DAG Mathlib leaf, not a new node."
+  },
+  {
+   "tool": "grep",
+   "query": "freeAsModuleBasis|free_asModule_free|instFree|finiteType_iff_group_fg|instFinitePresentationQuotientOfFinite",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T08:27:47Z\", \"tool\": \"grep\", \"query\": \"freeAsModuleBasis|free_asModule_free|instFree|finiteType_iff_group_fg|instFinitePresentationQuotientOfFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/ExteriorPower/Basis.lean\", \"Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\", \"Mathlib/RepresentationTheory/Basic.lean\", \"Mathlib/RepresentationTheory/Basic.lean\", \"Mathlib/RepresentationTheory/Basic.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RingTheory/TensorProduct/Free.lean\"], \"digest\": \"ef3a43246240c296\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none gives the complete relative subgroup-algebra presentation; free representation results require identifying the restricted regular module, scalar free-module instances are over the base ring, and finite-type results do not give the relative finite presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of a subgroup ring admits a basis indexed by quotient cosets and a finite presentation by invertible generators and binomial relations",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T08:29:45Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of a subgroup ring admits a basis indexed by quotient cosets and a finite presentation by invertible generators and binomial relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.basis\", \"Algebra.Presentation.instFinitePresentationQuotientOfFinite\", \"ModN.basis\", \"IsLocalRing.basisQuotient_apply\", \"ModN.basis_apply_eq_mkQ\", \"IsLocalRing.basisQuotient\", \"IsLocalRing.basisQuotient_repr\", \"Algebra.Generators.exists_presentation_of_basis_cotangent\"], \"digest\": \"949830ae104c99a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none gives the complete relative subgroup-algebra presentation; free representation results require identifying the restricted regular module, scalar free-module instances are over the base ring, and finite-type results do not give the relative finite presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-diagonalizable-character-duality",
+  "date": "2026-10-24",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: character duality over rings, needed for the graph of mu2 and its lattice normalization. Algebra input for the quotient clause: subgroup group-algebra coset basis and finite presentation, allowing torsion and arbitrary base rings.",
+   "via": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-subgroup-algebra-coset-presentation",
+  "worker": "stage1",
+  "summary": "Proved injectivity and the coset basis by explicit regrouping, used the existing finite-abelian-group structure leaf and monic-quotient power-basis leaf, identified the polynomial tower with the Laurent quotient via explicit inverse units, and checked finite presentation and arbitrary coefficient maps. No new nodes; no Lean attachment. Statement preserved.",
+  "blueprint": "No imported ancestor (blueprint_refs.py ancestor returns None). Realizes the relative diagonalizable character-duality quotient prerequisite recorded in blueprint.from.place; latest sk-thm-sf-ctf-stability-direct-images proof (3) read for context, without changing its route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-61d7a9511",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-61d7a9511 (reviewer sub-agent of L); spot-checked: PASS, no changes. The item is a first split with no repair note, so the re-split rule does not apply. The delivery has 8 proof steps and no new nodes. The statement and its three stmt_deps are unchanged as far as I could tell: no base copy was available, so this rests on the worker's report and the diff size. I read Milne iAG2017 Thm 12.9(b) at PDF pp.245-246. It covers only the field case: injectivity and the augmentation-ideal kernel. The relative-ring strengthening is therefore written by the agent, and proof_origin.by=agent records this correctly. I read every cited statement. def-sfb-ring-diagonalizable-group allows any R and any M, with basis e_m. AddCommGroup.equiv_free_prod_directSum_zmod allows zero exponents, which step 3 removes to get d_j>=2. AdjoinRoot.powerBasis' supports step 4: the relation Y^{d_j}-e_{l_j} is monic of degree d_j, R=0 is handled separately first, and the rings stay nonzero. The free-module and finitely-presented-algebra definitions support steps 2/6 and 7. Step 2's bijection (l,c)->l+t_c works for any choice of representatives. Step 5 is correct: y_j has inverse e_{-l_j}y_j^{d_j-1}. In step 6 the map sends the basis X^nY^q onto the basis e_{t_{n,q}}, so it is bijective. Step 7 gives 2(r+s) variables and r+2s relations, and r=s=0 is allowed. Step 8 reruns the argument over R', including R'=0. I tested M=Z with L=2Z, M=Z/4 with L=2Z/4, L=M, L=0, R=0 and characteristic 2; all agree with the statement. Every cited node is in the same unit, a Mathlib leaf or a Mathlib definition, so there is no route departure and no tool_uses are needed. A whole-DAG rg -L search found no duplicate: lattice-torus-coordinates and monoid-algebra-domain-fraction are field-only cases. The only node citing the item is relative-diagonalizable-character-duality step 5, which uses exactly the free coset basis and the finite presentation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SubgroupAlgebraCosetPresentation",
+  "declaration": "AddMonoidAlgebra.subgroup_algebra_coset_presentation",
+  "declarations": [
+   "AddMonoidAlgebra.subgroupAlgebra",
+   "AddMonoidAlgebra.subgroupLaurentRing",
+   "AddMonoidAlgebra.subgroupLaurentRelations",
+   "AddMonoidAlgebra.subgroupLaurentQuotient",
+   "AddMonoidAlgebra.IsSubgroupLaurentEvaluation",
+   "AddMonoidAlgebra.IsSubgroupLaurentBaseChange",
+   "AddMonoidAlgebra.subgroup_algebra_coset_presentation"
+  ],
+  "file": "lean/Sheaf/RingTheory/SubgroupAlgebraCosetPresentation.lean",
+  "statement": "theorem subgroup_algebra_coset_presentation (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] (L : AddSubgroup M) : Function.Injective (mapDomainRingHom R L.subtype) ∧ (∀ (t : M ⧸ L → M), (∀ c : M ⧸ L, (t c : M ⧸ L) = c) → ∃ B : Module.Basis (M ⧸ L) (AddMonoidAlgebra R L) (AddMonoidAlgebra R M), ∀ c : M ⧸ L, B c = single (t c) 1) ∧ (AddGroup.FG (M ⧸ L) → Algebra.FinitePresentation (AddMonoidAlgebra R L) (AddMonoidAlgebra R M) ∧ ∀ (r s : ℕ) (d : Fin s → ℕ), (∀ j : Fin s, 2 ≤ d j) → ∀ (D : (M ⧸ L) ≃+ ((Fin r → ℤ) × ((j : Fin s) → ZMod (d j)))) (a : Fin r → M) (b : Fin s → M), (∀ i : Fin r, D (a i : M ⧸ L) = (Pi.single i 1, 0)) → (∀ j : Fin s, D (b j : M ⧸ L) = (0, Pi.single j 1)) → ∀ l : Fin s → L, (∀ j : Fin s, (l j : M) = d j • b j) → ∃ e : subgroupLaurentQuotient R L r s d l ≃ₐ[AddMonoidAlgebra R L] AddMonoidAlgebra R M, IsSubgroupLaurentEvaluation L r s d l a b e ∧ ∀ (R' : Type w) [CommRing R'] (f : R →+* R'), ∃ e' : subgroupLaurentQuotient R' L r s d l ≃ₐ[AddMonoidAlgebra R' L] AddMonoidAlgebra R' M, IsSubgroupLaurentEvaluation L r s d l a b e' ∧ ∃ g : subgroupLaurentQuotient R L r s d l →+* subgroupLaurentQuotient R' L r s d l, IsSubgroupLaurentBaseChange L r s d l f g ∧ ∀ x : subgroupLaurentQuotient R L r s d l, e' (g x) = mapRingHom M f (e x))",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-267b816fc",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Only the item's lean field changed (no lean on live; 3 stmt_deps byte-identical); lean.statement verbatim. Clauses match the node: injectivity of mapDomainRingHom R L.subtype; Module.Basis (M⧸L) from arbitrary representatives without FG; FG → Algebra.FinitePresentation R[L] R[M]; any D : M⧸L ≃+ ℤ^r × Π ZMod d_j with d_j≥2, lifts a,b, l_j=d_j•b_j; Laurent ring = AddMonoidAlgebra R[L] ((Fin r⊕Fin s)→ℤ), literal binomial ideal; the AlgEquiv is pinned to the displayed evaluation on every monomial; base change ∀ R':Type w with the same normalization, coefficient map g and commuting square via mapRingHom. Universes u,v,w free. Edge cases R=0, L=M, L=0, r=s=0, torsion covered. No hollow defs, sorry only, docstrings with source/blueprint and steps 1-8, lines ≤100, no duplicate in Mathlib/Sheaf. No compile (no file changed). Advisory: global subgroupAlgebra instance (no diamond); FG hypothesis redundant given D but literal."
+ }
+}

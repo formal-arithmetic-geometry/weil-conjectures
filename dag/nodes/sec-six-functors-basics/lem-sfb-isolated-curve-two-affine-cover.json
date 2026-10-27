@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-isolated-curve-two-affine-cover",
+ "kind": "statement",
+ "title": "Two-affine cover separating a finite set on a curve",
+ "statement": "Let $k$ be a field [def-weil-field] and let $X$ be a separated finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism] of topological Krull dimension at most one [def-kun-topological-krull-dimension]. Let $P\\subseteq |X|$ be a finite set of closed points, and suppose that $X\\to\\operatorname{Spec}k$ is smooth [def-sbc-smooth-morphisms] on $X\\setminus P$. There are affine open subschemes $U,V\\subseteq X$ [def-pc-scheme] such that $X=U\\cup V$, $P\\subseteq V$, $U\\cap P=\\varnothing$, and $U\\cap V$ is affine. Each of $U,V,U\\cap V$ is of finite type over $k$, and both $U$ and $U\\cap V$ are smooth over $k$. The empty scheme and $P=\\varnothing$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZP, lemma-curve-isolated, proof, first paragraph: choice of U_2 containing the marked points and component generic points, followed by U_1 avoiding the marked points; affineness of the intersection uses separatedness."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $0$ and $k$, so every ideal is finitely generated [def-weil-pbc-noetherian-ring]. The one-point scheme $\\operatorname{Spec}k$ [def-weil-affine-spectrum] is quasi-compact and locally Noetherian [pqf-def-locnoeth]. Applying [lem-weil-pbc-finite-type-over-noetherian] to the given finite-type structure morphism shows that $X$ is Noetherian.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP (lemma-curve-isolated), proof, first paragraph; Noetherian input: morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-finitely-many-components], $X$ has finitely many irreducible components. By [lem-sc-scheme-sober] each has a unique generic point; let $G$ be this finite set. The separatedness, finite-type and dimension hypotheses are exactly those of [lem-sc-dim-one-ample-invertible], which supplies an ample invertible sheaf $\\mathcal L$ on $X$. Apply [lem-sc-ample-finite-set-affine] to $P\\cup G$ to obtain an affine open $V$ containing $P$ and every component generic point.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-scheme-sober",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-ample-finite-set-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP (lemma-curve-isolated), proof, first two sentences; varieties.tex Tag 0A25 (lemma-dim-1-quasi-projective), proof, ample-sheaf input; properties.tex Tag 01ZY (lemma-ample-finite-set-in-affine)."
+   }
+  },
+  {
+   "text": "Put $F=X\\setminus V$, a closed subset. Its dimension is at most zero: otherwise it contains a strict chain $A\\subsetneq B$ of nonempty irreducible closed subsets [def-kun-topological-krull-dimension]. Since $F$ is closed these are closed in $X$. By [lem-sc-irreducible-components-cover], $B$ lies in an irreducible component $C$ of $X$. By [lem-sc-scheme-sober], the generic point $\\xi_C$ lies in $C$; step 2 placed it in $V$, hence outside $F$. Thus $B\\subseteq F$ cannot equal $C$, so $B\\subsetneq C$. The chain $A\\subsetneq B\\subsetneq C$ contradicts $\\dim X\\leq1$. Now [lem-sc-dim0-finite], applied to the original finite-type $k$-scheme $X$ and the closed subset $F$, shows that $F$ is a finite set of closed points.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-dim0-finite",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP (lemma-curve-isolated), proof, sentence \"Then X minus U_2 is finite\"; the dimension-zero finiteness input is the statement of lem-sc-dim0-finite."
+   }
+  },
+  {
+   "text": "Because every point of the finite set $P$ is closed, $W=X\\setminus P$ is open. Also $F\\subseteq W$, since $P\\subseteq V$. If $F=\\varnothing$, take $U=\\varnothing$, which is affine: the zero ring has no proper prime ideal, so its spectrum [def-weil-affine-spectrum] is empty; by the definition of an affine scheme [def-pc-scheme] this makes the empty open affine. If $F\\ne\\varnothing$, apply [lem-sc-ample-finite-principal-affine] to the ample invertible sheaf $\\mathcal L$ on $X$, the finite set $E=F$, and the open $W$. It gives an affine open $U=X_s$ with $F\\subseteq U\\subseteq W$. In both cases $U\\cap P=\\varnothing$ and $X=U\\cup V$, because every point outside $V$ lies in $F\\subseteq U$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-scheme",
+    "lem-sc-ample-finite-principal-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP (lemma-curve-isolated), proof, choice of U_1 inside the complement of the marked points; properties.tex Tag 09NV (lemma-ample-finite-set-in-principal-affine) supplies an affine neighbourhood inside the prescribed open."
+   }
+  },
+  {
+   "text": "The structure map $X\\to\\operatorname{Spec}k$ is separated, its base is affine, and $U,V$ are affine opens. Therefore [lem-weil-pbc-separated-affine-open-intersection] makes $U\\cap V$ affine. This checks separatedness over the original affine base, rather than assuming intersections affine from quasi-separatedness.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP (lemma-curve-isolated), proof, definition of U_12; schemes.tex Tag 01KP (lemma-characterize-separated), (1)(a)."
+   }
+  },
+  {
+   "text": "For any $T\\in\\{U,V,U\\cap V\\}$, affineness implies quasi-compactness by [lem-weil-pbc-affine-scheme-qcqs]. The map $T\\to\\operatorname{Spec}k$ is quasi-compact: the affine base has just the empty and whole open subsets, whose preimages are empty and $T$. The structure morphism $X\\to\\operatorname{Spec}k$ is quasi-separated by [lem-pc-separated-quasi-separated]. Apply [lemma-nagata-open-immersion-qc-over-separated-target] to $T\\hookrightarrow X\\to\\operatorname{Spec}k$ to see that the open immersion $T\\hookrightarrow X$ is quasi-compact. It is of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Composing with $X\\to\\operatorname{Spec}k$ and using [lem-sfb-finite-type-composition-base-change](1) proves that each $T$ is of finite type over $k$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-pc-separated-quasi-separated",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP (lemma-curve-isolated), proof, finite-type affine opens; morphisms.tex Tags 01T0/01T2 (finite type), 01T3 (lemma-composition-finite-type); schemes.tex Tag 01KZ (quasi-compactness in a triangle)."
+   }
+  },
+  {
+   "text": "The restricted structure morphism $W=X\\setminus P\\to\\operatorname{Spec}k$ is smooth by hypothesis. The inclusions $U\\hookrightarrow W$ and $U\\cap V\\hookrightarrow W$ are open immersions, because these open subsets of $X$ lie in $W$. Applying [lem-pc-open-immersion-smooth-composition] to each inclusion and the smooth morphism from $W$ proves that both $U$ and $U\\cap V$ are smooth over $k$. Together with the preceding steps this proves every required clause. The argument permits empty finite sets in both affine-neighbourhood applications; in particular it applies when $P=\\varnothing$ or $X=\\varnothing$.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP (lemma-curve-isolated), proof, sentence \"Then U_1 and U_12 are smooth affine schemes over k\"; morphisms.tex Tags 01VC and 01VA (open immersions smooth; composition smooth)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-sober",
+  "lem-sc-dim-one-ample-invertible",
+  "lem-sc-ample-finite-set-affine",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-dim0-finite",
+  "def-pc-scheme",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pc-separated-quasi-separated",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pc-open-immersion-smooth-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZP (lemma-curve-isolated), proof, first paragraph, with its cited 0A25 and 01ZY; the prescribed-open version 09NV makes the second neighbourhood choice explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type scheme of dimension at most one over a field has a cover by two affine opens with one containing a prescribed finite set of closed points and the other avoiding it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(R : CommRingCat) → (AlgebraicGeometry.Spec R).OpenCover\", \"doc\": \"For any commutative ring $ R $, this constructs the open cover of the scheme $ \\\\operatorname{Spec}(R) $ by the standard affine open immersions $ \\\\operatorname{Spec}(R_r) \\\\to \\\\operatorname{Spec}(R) $, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For any scheme $X$, this constructs an open cover by affine open immersions obtained by taking the standard affine open subsets (localizations at elements) of each affine open subscheme in $X$'s affin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: arbitrary affine covers and affine bases do not supply two affine opens with the required finite-point avoidance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cover a quasiprojective curve by an affine neighbourhood of finitely many points and a smooth affine complement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [X.IsQuasiAffine] → X.OpenCover\", \"doc\": \"Given a quasi-affine scheme $X$, this function constructs an open cover of $X$ consisting of basic open subsets $X_f$ (for sections $f$ of the structure sheaf) that collectively cover the entire topol\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: arbitrary affine covers and affine bases do not supply two affine opens with the required finite-point avoidance"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} (U : X.Opens) : Prop\", \"doc\": \"An open subset of a scheme is affine if the open subscheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.Spec_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {R : CommRingCat} (f : ↑R) : AlgebraicGeometry.IsAffineOpen (PrimeSpectrum.basicOpen f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isAffineOpen_opensRange\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.IsAffineOpen (AlgebraicGeometry.Scheme.Hom.opensRange f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isCompact\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) : IsCompact ↑U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.IsAffineOpen ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U : X.Opens} : AlgebraicGeometry.IsAffineOpen ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U) ↔ AlgebraicGeometry.IsAffineOpen U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isAffineOpen_top\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] : AlgebraicGeometry.IsAffineOpen ⊤\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.preimage_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {U : Y.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) (f : ↑(X.presheaf.obj (Opposite.op U))) : AlgebraicGeometry.IsAffineOpen (X.basicOpen f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) : AlgebraicGeometry.IsOpenImmersion hU.fromSpec\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isoSpec\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) : ↑U ≅ AlgebraicGeometry.Spec (X.presheaf.obj (Opposite.op U))\", \"doc\": \"The isomorphism `U ≅ Spec Γ(X, U)` for an affine `U`.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) : AlgebraicGeometry.Spec (X.presheaf.obj (Opposite.op U)) ⟶ X\", \"doc\": \"The open immersion `Spec Γ(X, U) ⟶ X` for an affine `U`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: arbitrary affine covers and affine bases do not supply two affine opens with the required finite-point avoidance"
+  },
+  {
+   "tool": "grep",
+   "query": "two.affine|affine.{0,30}cover.{0,30}curve|curve.{0,30}affine",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Height/EllipticCurve.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EllipticCurve.Affine.AddSubMap\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Angle/Bisector.lean\", \"line\": \"73\", \"text\": \"/-- A point `p` is equidistant to two affine subspaces if and only if the angles at a point `p'`\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Angle/Bisector.lean\", \"line\": \"117\", \"text\": \"/-- A point `p` is equidistant to two affine subspaces (typically lines, for this version of the\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Angle/Bisector.lean\", \"line\": \"135\", \"text\": \"projections onto two affine subspaces (typically lines, for this version of the lemma) are equal\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Angle/Bisector.lean\", \"line\": \"191\", \"text\": \"/-- A point `p` is equidistant to two affine subspaces (typically lines, for this version of the\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Angle/Bisector.lean\", \"line\": \"206\", \"text\": \"/-- A point `p` is equidistant to two affine subspaces (typically lines, for this version of the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean\", \"line\": \"41\", \"text\": \"/-- A continuous affine equivalence, denoted `P₁ ≃ᴬ[k] P₂`, between two affine topological spaces\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/AffineEquiv.lean\", \"line\": \"382\", \"text\": \"/-- Product of two affine equivalences. The map comes from `Equiv.prodCongr` -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"35\", \"text\": \"coordinates will be defined in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"39\", \"text\": \"* `WeierstrassCurve.Affine.negY`: the `Y`-coordinate of `-P`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"40\", \"text\": \"* `WeierstrassCurve.Affine.addX`: the `X`-coordinate of `P + Q`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"41\", \"text\": \"* `WeierstrassCurve.Affine.negAddY`: the `Y`-coordinate of `-(P + Q)`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"21\", \"text\": \"will be defined in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean`, based on the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"22\", \"text\": \"formulae for group operations in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"26\", \"text\": \"* `WeierstrassCurve.Affine.Equation`: the Weierstrass equation in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"27\", \"text\": \"* `WeierstrassCurve.Affine.Nonsingular`: the nonsingular condition in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"31\", \"text\": \"* `WeierstrassCurve.Affine.equation_iff_nonsingular`: an elliptic curve in affine coordinates is\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Formula\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"20\", \"text\": \"in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"26\", \"text\": \"reduces to equalities of ideals checked in `WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"27\", \"text\": \"and in `WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal` via explicit ideal computations.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"31\", \"text\": \"ways, which is done in `WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis` and in the\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/Independent.lean\", \"line\": \"269\", \"text\": \"/-- Given an affinely independent family of points, two affine combinations (with sum of weights 1)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: arbitrary affine covers and affine bases do not supply two affine opens with the required finite-point avoidance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated algebraic curve is covered by two affine opens avoiding a finite set",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \": Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : X.AffineOpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) : Opens.IsBasis X.affineOpens\", \"doc\": \"For any scheme $X$, the collection of affine open subsets of $X$ forms a basis for the topology on $X$. This means: (1) Every point of $X$ is contained in at least one affine open subset; (2) The inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.AffineOpenCover) : X.OpenCover\", \"doc\": \"Given an affine open cover $\\\\mathcal{U}$ of a scheme $X$, this function constructs the corresponding open cover of $X$ by considering the same collection of affine open immersions as an open cover in \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, QuasiSeparatedSpace ↥X ↔ ∀ (U V : ↑X.affineOpens), IsCompact (↑↑U ∩ ↑↑V)\", \"doc\": \"A scheme $X$ has a quasi-separated underlying topological space if and only if the intersection of any two affine open subsets $U$ and $V$ of $X$ is a compact set.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(R : CommRingCat.{u}) : OpenCover (Spec R)\", \"doc\": \"For any commutative ring $ R $, this constructs the open cover of the scheme $ \\\\operatorname{Spec}(R) $ by the standard affine open immersions $ \\\\operatorname{Spec}(R_r) \\\\to \\\\operatorname{Spec}(R) $, \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme} : QuasiSeparatedSpace X ↔ ∀ U V : X.affineOpens, IsCompact (U ∩ V : Set X)\", \"doc\": \"A scheme $X$ is quasi-separated if and only if for every pair of affine open subsets $U$ and $V$ of $X$, their intersection $U \\\\cap V$ is a quasi-compact subset of $X$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: arbitrary affine covers and affine bases do not supply two affine opens with the required finite-point avoidance"
+  },
+  {
+   "tool": "grep",
+   "query": "two.{0,30}affine|affine.{0,50}finite.{0,30}set|quasiProjective|QuasiProjective",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"18\", \"text\": \"* Given two nonsingular affine points `P` and `Q`, their *addition* `P + Q` is defined to be the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"166\", \"text\": \"/-- The slope of the line through two nonsingular affine points `(x₁, y₁)` and `(x₂, y₂)` on a\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"240\", \"text\": \"/-- The `X`-coordinate of `(x₁, y₁) + (x₂, y₂)` for two nonsingular affine points `(x₁, y₁)` and\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"249\", \"text\": \"/-- The `Y`-coordinate of `-((x₁, y₁) + (x₂, y₂))` for two nonsingular affine points `(x₁, y₁)` and\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"258\", \"text\": \"/-- The `Y`-coordinate of `(x₁, y₁) + (x₂, y₂)` for two nonsingular affine points `(x₁, y₁)` and\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"19\", \"text\": \"  `P.diagonal f` holds if `P (pullback.mapDesc f₁ f₂ f)` holds for two affine open\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"20\", \"text\": \"A scheme is quasi-separated if the intersections of any two affine open sets is quasi-compact.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: arbitrary affine covers and affine bases do not supply two affine opens with the required finite-point avoidance",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated scheme of finite type of dimension at most one over a field has two affine open subsets covering it and separating a finite set of closed points",
+   "results": "8 hits; AlgebraicGeometry.Scheme.affineOpenCover; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.Scheme.affineOpens; AlgebraicGeometry.Scheme.instInhabitedOpenCover; AlgebraicGeometry.IsAffineOpen.isQuasiSeparated; AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift; AlgebraicGeometry.IsSeparated.of_isAffineHom; AlgebraicGeometry.Scheme.isBasis_affineOpens",
+   "date": "2026-10-22",
+   "verdict": "no match: affine open covers and affine-open properties do not give this two-open cover with prescribed point containment and avoidance"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-curve-formal-lifting",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Supporting geometry of the formal-lifting input: first paragraph of the proof of Stacks 0DZP.",
+   "via": [
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-isolated-curve-two-affine-cover",
+  "worker": "stage1",
+  "summary": "Realized the first paragraph of Stacks 0DZP using existing DAG geometry nodes only: ampleness yields an affine neighbourhood of the marked and component-generic points, its complement is finite by dimension, and a second affine neighbourhood inside the smooth locus completes the cover. Wrote out affineness of the intersection, finite type and smoothness. For the return of head e5a321d1260, rebased through the prescribed delivery tool, re-read every current cited statement, and repaired the missing definition citations in the empty-complement case. The statement and source route are unchanged; no new nodes.",
+  "blueprint": "The inherited blueprint.from.place records the alteration/dimension-induction chain ending at the formal-lifting input. This split realizes the supporting geometry in the first paragraph of Stacks 0DZP: U_2 contains marked points and component generic points, U_1 avoids marked points and covers the finite complement, and U_12 is smooth affine. The inherited nearest blueprint ancestor is null; blueprint_refs.py ancestor confirms the broken upstream ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-dim-one-ample-invertible",
+    "why": "Generic curve/ample-sheaf geometry used as a black box exactly for the affine-neighbourhood route of Stacks 0DZP; the constructible-finite-Tor unit has no internal statement supplying this geometric input."
+   },
+   {
+    "node": "lem-sc-ample-finite-set-affine",
+    "why": "Generic curve/ample-sheaf geometry used as a black box exactly for the affine-neighbourhood route of Stacks 0DZP; the constructible-finite-Tor unit has no internal statement supplying this geometric input."
+   },
+   {
+    "node": "lem-sc-ample-finite-principal-affine",
+    "why": "Generic curve/ample-sheaf geometry used as a black box exactly for the affine-neighbourhood route of Stacks 0DZP; the constructible-finite-Tor unit has no internal statement supplying this geometric input."
+   },
+   {
+    "node": "lem-sc-dim0-finite",
+    "why": "Generic curve/ample-sheaf geometry used as a black box exactly for the affine-neighbourhood route of Stacks 0DZP; the constructible-finite-Tor unit has no internal statement supplying this geometric input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-dim-one-ample-invertible",
+  "lem-sc-ample-finite-set-affine",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-dim0-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-ee04b786b",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-ee04b786b (reviewer sub-agent of L); spot-checked: PASS. This is the 5th delivery (dd9a, 45eb, 5c7e and e5a3 were all PASSed; each landing was refused as 'not in the live DAG'). There are no new nodes. The statement, stmt_deps, source and blueprint are unchanged. Compared with e5a3, the only change is in step 4: the empty-F case now cites def-weil-affine-spectrum and def-pc-scheme for 'Spec 0 = ∅ is affine', and def-pc-scheme is added to proof_deps. Both citations are correct. Compared with dd9a there is also the step-3 citation of lem-sc-scheme-sober for the generic point. I read the whole item against Stacks 0DZP (examples-defos.tex:2814-2852, first proof paragraph) and re-read all 20 proof_deps and 6 stmt_deps. Step 1: Spec k is Noetherian, so X is Noetherian. Step 2: finitely many generic points; dim-one ampleness; affine V ⊇ P∪G. Step 3: a chain A⊊B in F with B⊊C would contradict dim ≤ 1, so dim F ≤ 0 and lem-sc-dim0-finite applies. Step 4: W = X∖P is open and F ⊆ W; U = ∅ if F = ∅, otherwise an X_s with F ⊆ X_s ⊆ W. Step 5: separated over affine Spec k, so U∩V is affine. Step 6: qc via the Nagata triangle, then qc open immersion of finite type, then composition. Step 7: open immersions into the smooth W. Edge cases checked: X = ∅, P = ∅, dim 0 with P = X, nonreduced or disconnected X, finite k. The four declared generic tools (dim-one ample, ample-finite-set-affine, ample-finite-principal-affine, dim0-finite) are exactly 0DZP's Varieties/Properties inputs; accepted. No SGA source is cited and no re-split note exists. Maintainer note: this is a promotion loop. The side completion needs promoting to the live DAG; re-delivering will not help."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsolatedCurveTwoAffineCover",
+  "declaration": "AlgebraicGeometry.exists_isolated_curve_two_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsolatedCurveTwoAffineCover.lean",
+  "statement": "theorem exists_isolated_curve_two_affine_cover (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : topologicalKrullDim X ≤ 1) (P : Set X) (hP : P.Finite) (hclosed : ∀ x ∈ P, IsClosed ({x} : Set X)) (hsmooth : ∀ x ∉ P, ∃ W : X.Opens, x ∈ W ∧ Smooth (W.ι ≫ f)) : ∃ U V : X.Opens, IsAffineOpen U ∧ IsAffineOpen V ∧ U ⊔ V = ⊤ ∧ P ⊆ (V : Set X) ∧ Disjoint (U : Set X) P ∧ IsAffineOpen (U ⊓ V) ∧ LocallyOfFiniteType (U.ι ≫ f) ∧ QuasiCompact (U.ι ≫ f) ∧ LocallyOfFiniteType (V.ι ≫ f) ∧ QuasiCompact (V.ι ≫ f) ∧ LocallyOfFiniteType ((U ⊓ V).ι ≫ f) ∧ QuasiCompact ((U ⊓ V).ι ≫ f) ∧ Smooth (U.ι ≫ f) ∧ Smooth ((U ⊓ V).ι ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c1a595ae",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0DZP proof para 1: Field k, IsSeparated f, LocallyOfFiniteType∧QuasiCompact f (recorded finite-type conjunction), topologicalKrullDim X ≤ 1, P finite closed points, local smoothness off P (equivalent since P closed); conclusion affine U,V,U⊓V, U⊔V=⊤, P⊆V, U∩P=∅, finite type of all three, smooth U and U⊓V, V not asserted smooth. Edge cases (empty X, P=∅, dim 0 with P=X) covered. Node differs from live only in lean; lean.statement verbatim; dep records read; imports exist in side-live; no defs, sorry only, docstrings with source/blueprint and 7 proof steps; report has Worker report and Second reading sections. No findings."
+ }
+}

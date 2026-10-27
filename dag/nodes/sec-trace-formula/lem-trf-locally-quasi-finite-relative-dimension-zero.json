@@ -16,97 +16,92 @@
  ],
  "proof": [
   {
-   "text": "Fix $x\\in X$, put $s=f(x)$, and write $\\xi$ for the point of $X_s$ over $x$. Affine opens $V=\\operatorname{Spec}R\\subset S$ and $U=\\operatorname{Spec}A\\subset X$ with $s\\in V$, $x\\in U$ and $f(U)\\subset V$ exist: apply [lem-weil-pbc-affine-opens-basis] first to $s\\in S$, then to $x\\in f^{-1}(V)$. Use the canonical chart maps of [lem-weil-pbc-affine-open-spec-points]. For any such pair let $\\varphi:R\\to A$ be the induced ring map and let $\\mathfrak q\\subset A$ and $\\mathfrak p\\subset R$ represent $x$ and $s$. The description of spectrum morphisms [def-weil-affine-spectrum] gives $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Since $f$ is locally of finite type, [lem-weil-pbc-lft-affine-pairs] says that $\\varphi$ is of finite type for every such pair.",
+   "text": "For each source point x, quasi-finiteness at x is equivalent to openness of the singleton {f.asFiber x} in the scheme-theoretic fibre. The forward implication is [lem-weil-pbc-quasi-finite-at-point-isolated]. For the converse choose affine neighbourhoods U,V with x in U and f(U) contained in V, using [lem-weil-pbc-affine-opens-basis] twice. Apply [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] to these opens and use its finite-type and quasi-finite-at-prime witnesses in [pqf-def-quasifinite]. This is the local hpoint equivalence in the Lean proof.",
    "uses": [
     "def-pc-scheme-fibre",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
     "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-lft-affine-pairs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0: affine-local reduction; Tag 01T2, lemma-locally-finite-type-characterize; Schemes Tag 01IT, lemma-basis-affine-opens."
-   }
-  },
-  {
-   "text": "For any affine pair in step 1, [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{S,s}$ with $R_{\\mathfrak p}$; taking quotients by the maximal ideals identifies $\\kappa(s)$ with $\\kappa(\\mathfrak p)$ by [def-weil-residue-field]. Put $F=A\\otimes_R\\kappa(\\mathfrak p)$. The fibre of $U\\to V$ at $s$ is $\\operatorname{Spec}F$ by [def-pc-scheme-fibre] and [lem-weil-pbc-fibre-product-affine-spectra], with first projection induced by $a\\mapsto a\\otimes1$. Its point over $\\mathfrak q$ is the prime $\\overline{\\mathfrak q}$ of [lem-weil-pbc-fibre-ring-primes-bijection]. The homeomorphism clause of [def-pc-scheme-fibre], applied both to $U\\to V$ and to $X\\to S$, identifies $|\\operatorname{Spec}F|$ with the open subspace $O=\\{z\\in X_s:p(z)\\in U\\}$ of $X_s$, carrying $\\overline{\\mathfrak q}$ to $\\xi$. Indeed both spaces identify with $U\\cap f^{-1}(s)$ with its subspace topology; this is open in $f^{-1}(s)$ because $U$ is open in $X$. Under this homeomorphism the open neighbourhoods of the specified points correspond bijectively, and corresponding neighbourhoods have equal Krull dimension by [lem-weil-pbc-homeomorphism-krull-dimension]. Taking their minima as in [def-kun-topological-dimension-at-point], then using [lem-weil-pbc-dimension-at-point-open-subspace] for $O\\subset X_s$, gives $\\dim_{\\overline{\\mathfrak q}}\\operatorname{Spec}F=\\dim_\\xi X_s$.",
-   "uses": [
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "def-weil-residue-field",
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "lem-weil-pbc-homeomorphism-krull-dimension",
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-dimension-at-point-open-subspace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01I4 and 01JQ, lemma-fibre-product-affine-schemes and lemma-fibre-product-affines; Tag 01HV, lemma-spec-sheaves; Topology Tag 0055, definition-Krull (4), neighbourhood-minimum comparison."
-   }
-  },
-  {
-   "text": "Suppose $f$ is locally quasi-finite. By [pqf-def-quasifinite] it is quasi-finite at our chosen $x$, so there are affine opens $U,V$ as in step 1 for which $\\varphi:R\\to A$ is of finite type and quasi-finite at $\\mathfrak q$. Use these witnessing opens in step 2. The ring-level notion of quasi-finiteness at a prime in [pqf-def-quasifinite] is that of [def-weil-pbc-ring-map-quasi-finite-at-prime]: $\\overline{\\mathfrak q}$ is isolated in $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$. Apply the forward implication of [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] to this finite type ring map and this prime: it gives $\\dim_{\\overline{\\mathfrak q}}\\operatorname{Spec}F=0$. The equality in step 2 therefore gives $\\dim_\\xi X_s=0$. Since $x$ was arbitrary, the required fibre dimension vanishes at every point of $X$.",
-   "uses": [
-    "pqf-def-quasifinite",
-    "def-weil-pbc-ring-map-quasi-finite-at-prime",
-    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, forward implication; affine form of its second proof."
-   }
-  },
-  {
-   "text": "Conversely, suppose $\\dim_\\xi X_{f(x)}=0$ for every $x\\in X$. Fix $x$ and choose affine opens as in step 1. The map $\\varphi:R\\to A$ is of finite type by step 1, and step 2 gives $\\dim_{\\overline{\\mathfrak q}}\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))=0$. The reverse implication of [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] now says that $\\varphi$ is quasi-finite at $\\mathfrak q$ in the sense of [def-weil-pbc-ring-map-quasi-finite-at-prime], which is the ring-level condition of [pqf-def-quasifinite]. These particular $U,V$ and $\\varphi$ witness that $f$ is quasi-finite at $x$ in [pqf-def-quasifinite]. This holds for every $x$, so $f$ is locally quasi-finite by the same definition.",
-   "uses": [
-    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
     "pqf-def-quasifinite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, reverse implication and final assertion; Definition 01TD, definition-quasi-finite."
+    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, second proof; Tag 01TH, lemma-quasi-finite-at-point-characterize."
    }
   },
   {
-   "text": "Steps 3 and 4 prove the two implications. The phrase relative dimension zero in the statement means exactly the displayed equality at every point. If $X$ is empty, both universal conditions are vacuous, so the equivalence also holds in that case.",
+   "text": "An open singleton has topological Krull dimension at most zero, since its subspace is discrete. It is an open neighbourhood of its point, so [def-kun-topological-dimension-at-point] gives local dimension at most zero. Every neighbourhood of the point is nonempty and has the irreducible closed subset given by the closure of the point, so its dimension is at least zero. Taking the infimum gives local dimension exactly zero.",
+   "uses": [
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0H7C, lemma-isolated-dim-0-locally-noetherian, forward implication."
+   }
+  },
+  {
+   "text": "Conversely fix x and put Y=X_{f(x)}, y=f.asFiber x. The morphism Y to Spec of the residue field of f(x) is locally of finite type by base change. Its target is locally Noetherian because a field is Noetherian, and [pqf-lem-locnoeth-lft] makes Y locally Noetherian. Choose an affine open neighbourhood W of y by [lem-weil-pbc-affine-opens-basis]. Local Noetherianity gives a Noetherian ring of sections on W, and the spectrum homeomorphism makes W a Noetherian topological space (Mathlib noetherianSpace_of_isAffineOpen). By [lem-weil-pbc-dimension-at-point-open-subspace], dimension at w=(y in W) is zero.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-finite-type-morphism",
+    "def-weil-residue-field",
+    "pqf-lem-locnoeth-lft",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0397, second proof; Tag 01T6, lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "Unfold the infimum defining local dimension on W. Since its value is zero, it is less than one, so some open neighbourhood V of w has dimension less than one and therefore at most zero. V is Noetherian as a subspace of W and T0 as a scheme subspace. Apply [lem-sc-zero-dim-noetherian-closed-finite] to the whole closed subset of V, transporting across the homeomorphism between the universal subtype and V. Thus V is finite and every singleton in V is closed. A finite T1 space is discrete, so the singleton of w is open in V. The open inclusions V into W and W into Y carry this singleton to the open singleton {y} in Y.",
+   "uses": [
+    "def-kun-topological-dimension-at-point",
+    "lem-sc-zero-dim-noetherian-closed-finite",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0H7C, lemma-isolated-dim-0-locally-noetherian, converse proof; Tag 0AAX, lemma-locally-Noetherian-dimension-0."
+   }
+  },
+  {
+   "text": "Replace pointwise quasi-finiteness by the equivalence of step 1. Steps 2 and 3-4 give the two implications pointwise. Quantifying over all source points is exactly local quasi-finiteness by [pqf-def-quasifinite]. No source point is chosen globally, so the empty-source case is vacuous on both sides.",
    "uses": [
     "pqf-def-quasifinite"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, final assertion."
+    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, second proof; Tag 01TH, lemma-quasi-finite-at-point-characterize."
    }
   }
  ],
  "proof_deps": [
   "def-pc-scheme-fibre",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
   "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-lft-affine-pairs",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "def-weil-residue-field",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-fibre-ring-primes-bijection",
-  "lem-weil-pbc-homeomorphism-krull-dimension",
-  "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
   "pqf-def-quasifinite",
-  "def-weil-pbc-ring-map-quasi-finite-at-prime",
-  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension"
+  "def-kun-topological-dimension-at-point",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "pqf-lem-locnoeth-lft",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "lem-weil-pbc-homeomorphism-krull-dimension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0: affine-chart reconstruction of the second proof, reusing the reviewed affine ring version lem-weil-pbc-ring-quasifinite-zero-fibre-dimension (whose proof follows 0H7C/0AAX)."
+  "place": "Tag 0397, second proof, implemented directly using pointwise isolation, Mathlib local Noetherianity, and the proved zero-dimensional Noetherian-space finiteness theorem (Properties Tags 0H7C and 0AAX)."
  },
  "mathlib_searches": [
   {
@@ -220,9 +215,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -249,5 +242,26 @@
   "result": "pass",
   "note": "Statement matches node and Stacks 0397 (global form). The only hypothesis is LocallyOfFiniteType f. The left side is the project's Stacks IsLocallyQuasiFinite (01TD, carries the finite-type witness). The right side is ∀ x, topologicalKrullDimAt (f.asFiber x) = 0, using the recorded neighbourhood-minimum definition and the canonical fibre point. No stronger assumptions and no extra universe restriction. Edge cases checked: empty X, affine line, generic and non-closed points, immersions, k(t)/k excluded by the hypothesis. No duplicate in Sheaf or Mathlib. The node diff is only the lean field, and lean.statement is verbatim the file signature. Body is just sorry. Docstrings give the source place and blueprint id with the proof summary. Report has both sections; the second reading is brief but adequate. nt_compile.py --json on the snapshot file compiled clean in 3.6 s; axioms are propext, sorryAx, Classical.choice, Quot.sound."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261023T123415-L-1184644",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,97 @@
+{
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 10: support and resolution subarguments for the coefficient transport comparisons.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarProofs",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarProofs.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.scalarSitePushforward_additive",
+  "statement": "theorem scalarSitePushforward_additive\n    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}\n    (F : C ⥤ D) [F.IsContinuous JC JD]\n    {R : Sheaf JD RingCat.{u + 1}} {S : Sheaf JC RingCat.{u + 1}}\n    (b : S ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1} JC JD).obj R) :\n    (SheafOfModules.pushforward.{u + 1} b).Additive",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "id": "lem-pur-scalar-site-pushforward-additive",
+ "kind": "statement",
+ "title": "Continuous module direct image is additive",
+ "statement": "Let C and D be sites, F : C → D a continuous functor, R a sheaf of rings on D, S a sheaf of rings on C, and b : S → F_*R. The induced continuous sheaf-of-modules pushforward from R-modules to S-modules is additive on morphisms.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 0D6E; already proved generic subargument of blueprint sk-thm-purity-transport Step 10, moved from the assigned module for compile performance."
+ },
+ "proof": [
+  {
+   "text": "The pushforward of a morphism is the same sectionwise linear map at each pulled-back object. On each section its value on the sum of morphisms is therefore the sum of their values. Extensionality for module sheaves proves preservation of addition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": "K3 proved the sectionwise formula as a private instance. K1 exposes the proved additivity statement and registers it only locally, so that the public resolution theorem has no private instance in its type.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous pushforward of sheaves of modules is an additive functor",
+   "results": "Scheme.Modules.instAdditivePushforward is for scheme structure sheaves; SheafOfModules.pushforward and pushforward_map_val provide the generic direct-image construction and component formula.",
+   "date": "2026-10-27",
+   "verdict": "The generic sectionwise proof is immediate, but the scheme-specific instance does not apply to arbitrary ringed sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "The generic pushforward API was queried; componentwise behavior and the existing construction suffice for the proof.",
+   "date": "2026-10-27",
+   "verdict": "Use the direct sectionwise proof."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*Additive|Additive.*pushforward",
+   "results": "Six hits, including only the scheme structure-sheaf pushforward additive instance; no arbitrary continuous ringed-site instance.",
+   "date": "2026-10-27",
+   "verdict": "No exact generic match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone/published item (verbatim move by diff; only systemRestrictionPullInv_isIso newly proved), 8 node JSONs vs Lean signatures, 4 direct importers compiled against the delivery and against the published build"
+ }
+}

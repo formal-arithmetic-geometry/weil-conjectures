@@ -48,7 +48,92 @@
   "def-pc-picard-presheaf",
   "def-pc-smooth-projective-curve"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.picardDegree"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.picardDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
+     "lines": [
+      221,
+      230
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.locallyConstantIntPresheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.DegreeMorphism",
+     "lines": [
+      54,
+      63
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.locallyConstantIntSheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.DegreeMorphism",
+     "lines": [
+      128,
+      133
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardDegreeMorphism",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.DegreeMorphism",
+     "lines": [
+      141,
+      152
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardDegreeSubfunctor",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.DegreeMorphism",
+     "lines": [
+      160,
+      171
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.range_picardFunctorDegreeι",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.DegreeMorphism",
+     "lines": [
+      198,
+      231
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardFunctorDegreeIsoSubfunctor",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.DegreeMorphism",
+     "lines": [
+      244,
+      251
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-picard-degree-decomposition",
  "lean": {
@@ -61,5 +146,15 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $S$ be a scheme. The *constant sheaf* $\\underline{\\Z}$ on the fppf\nsite $(\\mathit{Sch}/S)_{fppf}$ of [def-pc-fppf-site] is the presheaf whose\nvalue on $T$ is the group of locally constant functions $T\\to\\Z$, with\nrestriction along $g:T'\\to T$ given by composition with $g$. It is an fppf\nsheaf: the members of an fppf covering $\\{T_i\\to T\\}$ are open maps and jointly\nsurjective, so compatible locally constant functions on the $T_i$ come from a\nunique function on $T$, and this function is locally constant.\n\nLet now $f:X\\to S$ be a morphism which is proper, flat and locally of finite\npresentation, and let $\\operatorname{Pic}_{X/S}$ be the\nPicard functor. The *degree morphism*\n\n$$\n\\deg:\\operatorname{Pic}_{X/S}\\longrightarrow\\underline{\\Z}\n$$\n\nis the morphism of fppf sheaves defined as follows. Let $T$ be an $S$-scheme,\n$x\\in\\operatorname{Pic}_{X/S}(T)$ and $t\\in T$. Since\n$\\operatorname{Pic}_{X/S}$ is the fppf sheafification of the\nPicard presheaf, there are a flat morphism\n$g:Z\\to T$ locally of finite presentation, a point $z\\in Z$ with $g(z)=t$ and\nan invertible $\\mathcal{O}_{X_Z}$-module $\\mathcal{L}$ whose class in\n$\\operatorname{Pic}_{X/S}(Z)$ is the pullback $g^*x$; put\n$\\deg(x)(t):=\\deg_Z(\\mathcal{L})(z)$, the fibrewise degree of\n[def-pd-fibrewise-degree]. This is independent of the choices: for a second\nchoice $(g',z',\\mathcal{L}')$ pick a point $w$ of $Z\\times_TZ'$ over $z$ and $z'$;\nthe pullbacks of $\\mathcal{L}$ and $\\mathcal{L}'$ to $X_{Z\\times_TZ'}$ have the\nsame image in $\\operatorname{Pic}_{X/S}$, so they become isomorphic after\npullback along an fppf covering of $Z\\times_TZ'$, and evaluating at a point over\n$w$ the two values agree by [lem-pd-degree-locally-constant](3). The function\n$\\deg(x):T\\to\\Z$ is locally constant by [lem-pd-degree-locally-constant](1),\nas $g$ is open; for $h:T'\\to T$ one has $\\deg(h^*x)=\\deg(x)\\circ h$; and for\nthe class $x$ of an invertible module $\\mathcal{L}$ on $X_T$ one has\n$\\deg(x)=\\deg_T(\\mathcal{L})$. So $\\deg(x)\\in\\underline{\\Z}(T)$ and $\\deg$ is a\nmorphism of sheaves.\n\nFor $d\\in\\Z$ the subfunctor\n$\\operatorname{Pic}^d_{X/S}\\subseteq\\operatorname{Pic}_{X/S}$, in the sense of\n[def-pc-subfunctor], consists of the classes whose degree function is\nidentically $d$. The *degree-zero part* of the Picard functor is\n\n$$\n\\operatorname{Pic}^0_{X/S}:=\\ker(\\deg)\\subseteq\\operatorname{Pic}_{X/S} .\n$$\n\nIf $S=\\Spec(k)$ for a field $k$, these agree with the functors of\n[def-sc-picard-functor] (with $X$ in place of $C$): the canonical morphism\nfrom the fppf sheafification of the subpresheaf of classes of fibrewise\ndegree $d$ to $\\operatorname{Pic}_{X/k}$ is a monomorphism whose image is\n$\\operatorname{Pic}^d_{X/k}$. Indeed, by [lem-pd-degree-locally-constant](4) an\ninvertible module $\\mathcal{L}$ on $X_T$ has degree $d$ after pullback along\nevery $k$-morphism $\\Spec(K)\\to T$ from a field if and only if\n$\\deg_T(\\mathcal{L})$ is identically $d$; sheafification preserves\nmonomorphisms, and membership in $\\operatorname{Pic}^d_{X/k}$ is fppf local.\nIn particular $\\operatorname{Pic}^0_{X/k}=\\ker(\\deg)$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

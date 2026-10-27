@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-graph-compactification-unit",
+ "kind": "statement",
+ "title": "Homotopy normalization of the inverse graph comparison",
+ "statement": "Let A be a finite commutative ring, b:W to Z a separated etale map of Noetherian schemes, and c a compactification of b. The inverse canonical graph comparison [lem-asd-compact-support-graph-derived-isomorphism] on Qh(J) is the exact sum-extension descent isomorphism followed by Qh of the degreewise sheaf graph map and then the canonical right-derived unit for open extension c.i_! followed by c.g_* [def-weil-pbc-derived-categories]. This is an equality on every homotopy complex J, with the precise factors in the recorded Lean statement.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+ },
+ "stmt_deps": [
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Unfold canonicalEtaleCompactSupportComparison: its inverse is the explicit compactSupportDerivedComparison. Apply compactSupportDerivedComparison_app and expand compactSupportComparisonOnHomotopy, normalizationHomotopyComponent and the canonical exact-left composite unit. The resulting expressions are identical. This is a complete Lean proof on arbitrary homotopy objects.",
+   "uses": [
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor composition with exact functors determined by unit on injective complexes",
+   "results": "Eight hits, including mapDerivedCategoryFactorsh and generic derived natural transformations. No proper-first compactification normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing unit APIs; no geometric replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctor",
+   "results": "No hit; the endpoint does not know this project declaration. Local source reads find the canonical right-derived unit and composition APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use local project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport.*composition|rightDerivedFunctor.*unit",
+   "results": "Seven Mathlib hits for general right-derived units. Local project searches found properSupportSheafComposition, graph normalization, proper postcomposition and exactCompactificationUnit_tower; the last requires both sheaf functors exact, which does not cover q_*.",
+   "date": "2026-10-27",
+   "verdict": "Proper-first normalization with nonexact q_* remains a separate geometric step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperSupportUnit",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-graph-proper-support-unit",
+   "place": "Etale-first graph comparison expansion in proof step 3."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphCompactificationUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphCompactificationUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.graph_compactification_unit",
+  "statement": "theorem graph_compactification_unit\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {W Z : Scheme.{u}} [IsNoetherian W] [IsNoetherian Z]\n    (b : W ⟶ Z) [Etale b] [IsSeparated b] (c : Compactification b)\n    (J : HomotopyCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)) :\n    (canonicalEtaleCompactSupportComparison A b c).inv.app (DerivedCategory.Qh.obj J) =\n      (Functor.mapDerivedCategoryFactorsh\n        (etaleLowerShriek (ModuleCat.{u + 1} A) b inferInstance)).hom.app J ≫\n      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory\n        (etaleCompactificationGraphMap A b c) (.up ℤ)).app J) ≫\n      (Functor.mapDerivedCategoryCompRightDerivedFunctorUnit\n        (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)\n        (lowerStar (ModuleCat.{u + 1} A) c.g)).app J",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094341-L-217201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094341-L-217201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

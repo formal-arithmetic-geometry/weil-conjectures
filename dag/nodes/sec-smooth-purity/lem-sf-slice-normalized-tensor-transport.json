@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-slice-normalized-tensor-transport",
+ "kind": "statement",
+ "title": "SliceNormalizedTensorTransport",
+ "statement": "Let C be an arbitrary site and R a commutative ring sheaf, with module sheafification and locally-bijective compatibility in the stated universes. With the actual scalar extension and ordinary tensor of [def-sf-slice-tensor-generator-interfaces], there exists, simultaneously for every unital R-algebra sheaf A, a natural isomorphism t_A: (- tensor_R A) ≅ extend(A.hom) ⋙ Res_A, such that t_A sends the original sheafified pure tensor m tensor s to scalarExtensionSection(A.hom,M,W,s,m). This holds on an arbitrary site, so applies also to every slice site satisfying the same instances.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03CY, 03EK and 0E8I; extraction of the scalar, tensor transport and strict tower steps of lem-sf-cbc-slice-tensor-generator-coherence."
+ },
+ "stmt_deps": [
+  "def-sf-slice-tensor-generator-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "On presheaves use tensor symmetry to identify M tensor S with the underlying R-module of S tensor M. The balanced relations are precisely those of scalar extension. This identification commutes with restriction maps and with maps of M. Sheafification commutes with scalar restriction: both have the same underlying abelian sheafification and the same uniquely extended action. Sheafify the presheaf identification and compose with this comparison. The sheafification-unit equations give the displayed formula on pure tensors. Naturality follows by comparing these formulas, since pure tensors generate before sheafification and the adjunction detects maps after sheafification. This argument applies to any site, including the slice site.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sp-scalar-extension-binary-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Generator normalization and strict coherence refinement of Tags 03DI, 03CY, 03EK and 0E8I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars and scalar extension commute with extension by zero on a slice site with generators",
+   "results": "SheafOfModules.Presentation.mapGenerators; PresheafOfModules.restrictScalarsCompToPresheaf; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-25",
+   "verdict": "No normalized slice, scalar/tensor or strict-tower comparison in these results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, tensorObj_obj, tensorHom, tensorHom_app and tensorObj_map_tmul.",
+   "date": "2026-10-25",
+   "verdict": "Sectionwise presheaf tensors, not the needed normalized natural comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of tensor with an algebra is extension of scalars followed by restriction of scalars, natural in module sheaves",
+   "results": "PresheafOfModules.restrictScalarsObj; PresheafOfModules.toSheafify; PresheafOfModules.sheafifyMap; SheafOfModules.restrictScalars.",
+   "date": "2026-10-25",
+   "verdict": "These supply restriction and sheafification, not the generator-normalized scalar/tower comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension.*(hom_ext|map_tmul)|tensor.*sheafification",
+   "results": "msearch: 0 hits. Repository searches locate ScalarExtensionBinaryCoherence, RingedSliceTensorGenerators, SemilinearSliceScalarGenerators, StrictScalarHomChain and ScalarHomOrdinaryTensorComparison.",
+   "date": "2026-10-25",
+   "verdict": "Existing scalar and ordinary generators are useful proof inputs; their tensor representations differ, so the extracted interface and comparison steps are still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SliceTensorGeneratorCoherence",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 1–2, through the parent generator-coherence refinement",
+   "via": [
+    "lem-sf-cbc-slice-tensor-generator-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SliceNormalizedTensorTransport",
+  "file": "lean/Sheaf/CategoryTheory/SliceNormalizedTensorTransport.lean",
+  "declaration": "SheafOfModules.SliceTensorGenerator.tensorTransport_exists",
+  "statement": "theorem tensorTransport_exists :\n    ∃ t : ∀ A : Under R, TensorLift.{c, v, r} R A,\n      ∀ A, TensorLiftNormalized.{c, v, r} R A (t A)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fe40f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T101330-L-3683306",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fe40f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T101330-L-3683306",
+  "kind": "interface",
+  "note": "independent cc review: coherence_exists assembly vs node proof/proof_deps; Coherence/onComplexes vs clone (identical); 3 new sorried lemmas vs their nodes and docstrings (true, not restatements); moved interface defs vs change record; sandbox compile of 5 delivered modules + 3 direct importers (all compile, exit 0); #print axioms coherence_exists = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

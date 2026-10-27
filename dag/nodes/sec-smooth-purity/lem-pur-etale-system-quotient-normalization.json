@@ -1,0 +1,285 @@
+{
+ "id": "lem-pur-etale-system-quotient-normalization",
+ "kind": "statement",
+ "title": "Nonflat coefficient mates and normalization for ordinary etale adjoints",
+ "statement": "Let $k=\\overline{\\mathbf F}_q$ have characteristic $p$ and let $\\ell\\ne p$ be prime [def-weil-finite-field-fiber]. Let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes, with no separatedness assumption on $Y$, and fix a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p_f}Y$ [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. \nFor a homomorphism $C\\to D$ of finite commutative rings annihilated by powers of $\\ell$, put $F_C=Rp_{f,*,C}j_!$ and $F_D=Rp_{f,*,D}j_!$ on the ordinary unbounded etale derived categories. Fix adjunctions $F_C\\dashv g_C$, $F_D\\dashv g_D$ [thm-amb-etale-exceptional-adjoint]. Use derived scalar extension $T^W=-\\otimes_C^LD$ and exact restriction $U^W$ with their canonical adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction], and the projection $q:T^YF_C\\cong F_DT^X$ of [lem-pur-etale-system-coefficient-projection]. There is a canonical natural isomorphism $U^Xg_D\\cong g_CU^Y$. The natural transformation $b:T^Xg_C\\to g_DT^Y$ specified by\n$$\\epsilon_D\\circ F_Db=T^Y\\epsilon_C\\circ q_{g_C}^{-1}$$\nis an isomorphism, including when $C\\to D$ is a nonflat quotient. Under the restriction identification, $Ub$ is the constant-tensor map $D\\otimes_C^Lg_CM\\to g_C(D\\otimes_C^LM)$, with the counit normalization of [lem-pur-etale-exceptional-constant-tensor]. These statements are natural on the whole unbounded categories and independent of resolutions.\n\nFor a finite extension $E/\\mathbf Q_\\ell$, $O=\\mathcal O_E$, a nonzero nonunit $t\\in O$, and $A_n=O/(t^n)$, let $F_A=Rp_{f,A,*}j_{!,A}\\dashv G_A$ be an adjunction on strict systems. Suppose it has the evaluated adjunction and transition identifications of [lem-pur-etale-system-evaluation-bound]. If $M$ is normalized, meaning every $M_m\\otimes^L_{A_m}A_n\\to M_n$ is invertible, then $G_AM$ is normalized in this same sense [lem-pur-coefficient-system-derived-comparison]. This assertion uses the actual reduction mates $b_{m,n}$ and imposes no false flatness hypothesis on the quotient maps.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Proposition 2.29(2), Lemma 5.22 and Proposition 5.24, with bounded-below normalization terminology in Lemma 4.13 (printed pp. 16, 24, 36–37); agent extraction of returned item step 6, retaining both the restriction Hom calculation and the nonflat tensor-mate argument."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-etale-system-coefficient-projection",
+  "lem-pur-etale-exceptional-constant-tensor",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-system-evaluation-bound"
+ ],
+ "proof": [
+  {
+   "text": "Write $r:U^YF_D\\xrightarrow{\\sim}F_CU^X$ for the single-ring restriction comparison. For $H\\in D(Y_{\\mathrm{et}},D)$ and $K\\in D(X_{\\mathrm{et}},C)$ the given adjunctions and $q_K$ give natural bijections\n$$\\operatorname{Hom}_C(K,U^Xg_DH)\\cong\\operatorname{Hom}_D(T^XK,g_DH)\\cong\\operatorname{Hom}_D(F_DT^XK,H)\\cong\\operatorname{Hom}_D(T^YF_CK,H)\\cong\\operatorname{Hom}_C(F_CK,U^YH)\\cong\\operatorname{Hom}_C(K,g_CU^YH).$$\nLet $\\rho_H:U^Xg_DH\\to g_CU^YH$ be the image of the identity under this bijection at $K=U^Xg_DH$. The inverse bijection applied to the other identity gives an inverse: naturality in $K$ identifies the two composites with identities. Naturality in $H$ gives a natural isomorphism $\\rho$. The scalar-unit normalization of $q$ says its coefficient transpose is $r^{-1}\\circ F_C(\\eta^X)$, where $\\eta^W$ is the scalar-extension unit. Consequently the displayed Hom bijection sends $a:K\\to U^Xg_DH$ to the $F_C\\dashv g_C$ adjunct of $U^Y\\epsilon_{D,H}\\circ r_{g_DH}^{-1}\\circ F_C(a)$. Indeed scalar-transposing $\\epsilon_D\\circ F_D(a^\\sharp)\\circ q_K$ gives this composite: use $U(a^\\sharp)\\eta^X_K=a$ and naturality of $r$. At $a=1$ this proves\n$$\\epsilon_{C,U^YH}\\circ F_C(\\rho_H)=U^Y\\epsilon_{D,H}\\circ r_{g_DH}^{-1}.$$ Lean implementation: conjugateIsoEquiv for the composite scalar/geometric adjunctions gives rho; iterated_mateEquiv_conjugateEquiv and the single-ring scalar-unit normalization prove its counit identity.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-etale-single-coefficient-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Lemma 5.22; formal extension/restriction Hom calculation using the scalar-unit-normalized projection"
+   }
+  },
+  {
+   "text": "Apply lem-pur-etale-quotient-tensor-projection to the explicitly normalized quotientConstantTensorIso. Cancel the invertible coefficient and restriction maps to obtain its inverse form. Proper scalar-mate invertibility follows from the finite-ring proper projection formula and conservative scalar restriction; the open scalar map is already an isomorphism.",
+   "uses": [
+    "lem-pur-etale-quotient-tensor-projection",
+    "lem-fix-etale-proper-coefficient-tensor-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Proposition 2.29(2) and Construction 2.26; identify the restricted coefficient projection with its constant-tensor map"
+   }
+  },
+  {
+   "text": "Define $b_M$ by the displayed $F_D\\dashv g_D$ transpose in the statement, equivalently by the mate construction. Put $w_M=\\rho_{T^YM}\\circ U^X(b_M)$. Apply $F_C$ and the $C$-counit. The counit equation for $\\rho$ from step 1, naturality of $r$ at $b_M$, and the defining transpose equation for $b_M$ give, in order,\n$$\\begin{aligned}\n\\epsilon_C\\circ F_C(w_M)\n&=U^Y\\epsilon_D\\circ r_{g_DT^YM}^{-1}\\circ F_CU^X(b_M)\\\\\n&=U^Y(\\epsilon_D\\circ F_D(b_M))\\circ r_{T^Xg_CM}^{-1}\\\\\n&=U^Y(T^Y\\epsilon_{C,M})\\circ U^Y(q_{g_CM}^{-1})\\circ r_{T^Xg_CM}^{-1}\\\\\n&=(D_Y\\otimes_C^L\\epsilon_{C,M})\\circ P_{g_CM}^{-1}.\n\\end{aligned}$$\nThe last equality uses step 2 and naturality of its tensor identification. This last expression is exactly the counit transpose specifying the constant-tensor map $c_M:D_X\\otimes_C^Lg_CM\\to g_C(D_Y\\otimes_C^LM)$. Injectivity of the adjunction Hom bijection gives $w_M=c_M$, proving the asserted map normalization.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-etale-exceptional-constant-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 2.26, equation (2.26.1), and Proposition 2.29(2); explicit counit calculation"
+   }
+  },
+  {
+   "text": "The constant-tensor theorem applies with $V=D\\in D(C\\text{-}\\mathrm{Mod})$, without any finite-projective-dimension assumption, so $c_M$ is invertible. Since $\\rho$ is invertible, step 3 implies $U^X(b_M)$ is invertible. Restriction is conservative here directly from its definition: the underlying abelian sheaf of each cohomology of the cone of $b_M$ is unchanged by scalar restriction. If the restricted cone is acyclic, these same cohomology sheaves are zero before restriction, so $b_M$ is an isomorphism. This uses no flatness of $C\\to D$. The adjunctions, projection and tensor comparisons used above are natural transformations on unbounded derived categories; their transposes and composites are therefore natural there and independent of resolutions. In particular this is not an inference that the mate of an arbitrary isomorphism is invertible.",
+   "uses": [
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Proposition 2.29(2); apply constant tensor and exact conservative scalar restriction"
+   }
+  },
+  {
+   "text": "For $m\\ge n\\ge1$ apply the single-ring result with $C=A_m$ and $D=A_n$. Choose the uniformizer $\\varpi$ of the coefficient datum: $t=u\\varpi^r$ for a unit $u$ and $r>0$, so $A_m=O/(\\varpi^{rm})$ is finite. Also $|\\ell|_E<1$, whence $\\ell=v\\varpi^e$ with $e>0$; any $s$ with $es\\ge rm$ gives $\\ell^s=0$ in $A_m$. Thus the single-ring hypotheses hold even when $t$ is not a uniformizer. The assumed evaluated adjunction and transition identifications give $(G_AM)_n\\cong g_nM_n$ and identify its actual adjoint transition with\n$$T^X_{m,n}g_mM_m\\xrightarrow{b_{m,n}}g_nT^Y_{m,n}M_m\\xrightarrow{g_n(t^M_{m,n})}g_nM_n.$$\nThe first arrow is invertible by step 4; the second is invertible because normalization of $M$ means $t^M_{m,n}$ is invertible, and functors preserve inverses. Hence every adjoint transition of $G_AM$ is invertible, which is precisely the stated definition of normalized. The evaluation statement already identifies these actual transitions compatibly with three indices, so no passage from isolated level objects to an unspecified system is involved. The case $m=n$ is included, as are zero input and empty schemes. Lean implements the actual Brown quotient mate by the evaluated exchange-mate cube, using the private helpers already proved in EtaleCoefficientSystemAdjoint, then cancels the evaluated adjoint isomorphism in the transition equation.",
+   "uses": [
+    "lem-pur-etale-system-evaluation-bound",
+    "lem-pur-coefficient-system-derived-comparison",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-pur-nonunit-coefficient-stages",
+    "lem-weil-mate-iso-along-equivalences",
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Lemma 5.22 and the sentence immediately following it; Proposition 5.24 and Lemma 4.13 for the bounded-below terminology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-etale-single-coefficient-projection",
+  "lem-pur-etale-quotient-tensor-projection",
+  "lem-fix-etale-proper-coefficient-tensor-unit",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-etale-exceptional-constant-tensor",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-etale-system-evaluation-bound",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-nonunit-coefficient-stages",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-pbc-exchange-mate-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Conjugate composite adjunctions and explicit tensor-mate cancellation; system transitions by the evaluated Brown exchange cube. The geometric tensor projection identity is isolated as lem-pur-etale-quotient-tensor-projection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale compact-support right adjoints commute with derived finite nonflat coefficient quotients, so their adjunction mates preserve normalized inverse coefficient systems",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S), P.toSubmersivePresentation.toPresentation = P.toPresentation\", \"doc\": \"For any standard étale presentation $ P $ of an $ R $-algebra $ S $, converting $ P $ to a submersive presentation, then to a pre-submersive presentation, and finally to an algebra presentation yields\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of coefficients commutes with exceptional inverse image and preserves cartesian complexes of modules over a ring tower",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"For algebra extensions $ P $ and $ P' $ generated by different index sets over a commutative ring $ R $, the composition of the connecting homomorphism $ \\\\delta_{Q,P} $ with the linear equivalence $ (\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux_ofComp\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $x$ in the composed algebra $(Q \\\\circ P).\\\\text{Ring}$, the auxiliary differential map $\\\\delta_{\\\\text{Aux}}^{R,Q}$ applied to the algebra homomorphism $(Q.\\\\text{ofComp} \\\\, P).\\\\text{toAl\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For algebra extensions $ P $ and $ Q $, the composition of the base-changed cotangent complex map with the lifted base change of the cotangent space homomorphism induced by $ Q \\\\circ P $ equals the co\"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the cotangent modules of algebra extensions induced by composition of generators is exact, meaning the image of the first cotangent map equals the kernel of the second cotangent\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given a homomorphism $ f $ between algebras $ P $ and $ P' $ with generators, this constructs the canonical homomorphism between their algebra extensions $ P.\\\\text{toExtension} $ and $ P'.\\\\text{toExte\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.compEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [inst_6 : IsScala\", \"doc\": \"There is a linear equivalence between the cotangent space of the composed algebra extension $ (Q \\\\circ P) $ and the product of the cotangent space of $ Q $ with the tensor product $ T \\\\otimes_S $ the \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Adjunction",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Adjunction'",
+   "date": "2026-10-22",
+   "verdict": "query rejected (unknown identifier); not evidence of absence; corrected named query recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*system|cartesian.*complex|exceptional|upperShriek",
+   "results": "[grep] OK 0 hit(s) Searched Mathlib/CategoryTheory/",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonflat derived coefficient reduction mates for etale exceptional adjoints preserve normalization",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendRestrictScalarsAdj",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"Given commutative rings `R, S` and a ring hom `f : R →+* S`, the extension and restriction of\\nscalars by `f` are adjoint to each other.\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) (M : ModuleCat R) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendRestrictScalarsAdj f).unit.app M)) m = 1 ⊗ₜ[R] m\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_counit_app_apply_one_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) (M : ModuleCat S) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendRestrictScalarsAdj f).counit.app M)) (1 ⊗ₜ[R] m) = m\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} [CommRing R] (M : ModuleCat R) : ((ModuleCat.extendRestrictScalarsAdj (RingHom.id R)).homEquiv M ((CategoryTheory.Functor.id (ModuleCat R)).obj M)) ((ModuleCat.extendScalarsId R).hom.app M) = (ModuleCat.restrictScalarsId R).inv.app M\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] {f : R →+* S} {M : ModuleCat R} {N : ModuleCat S} (φ : (ModuleCat.extendScalars f).obj M ⟶ N) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom (((ModuleCat.extendRestrictScalarsAdj f).homEquiv M N) φ)) m = (CategoryTheory.ConcreteCategory.hom φ) \", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R₁ R₂ R₃ : Type u₁} [CommRing R₁] [CommRing R₂] [CommRing R₃] (f₁₂ : R₁ →+* R₂) (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁) : ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M)) ((ModuleCat.extendScalarsComp f₁₂ f₂₃).\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module declarations or unrelated hits; none states the specified etale derived-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*(coefficient|system)|cartesian.*(complex|module)|upperShriek",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Algebra/Vertex/VertexOperator.lean\", \"line\": \"60\", \"text\": \"/-- In the literature, the `n`th normalized coefficient of a vertex operator `A` is written as\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"line\": \"693\", \"text\": \"The normalized factors of a polynomial over a field times its leading coefficient give\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"line\": \"20\", \"text\": \"Similarly, bicartesian squares in the lattice `Subcomplex X` give pushout\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"line\": \"83\", \"text\": \"/-- Abbreviation for bicartesian squares in the lattice of subcomplexes of a simplicial set. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"line\": \"39\", \"text\": \"/-- The normalized chain complex of a simplicial set `X` with coefficients in `R`.\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"119\", \"text\": \"/-- Normalized trace defined purely in terms of the degree and the next coefficient of the minimal\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module declarations or unrelated hits; none states the specified etale derived-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image commutes with nonflat derived extension of finite coefficients and preserves normalized inverse systems",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"InverseSystem.globalEquiv_naturality\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} [inst : LinearOrder ι] {f : ⦃i j : ι⦄ → i ≤ j → F j → F i}\\n  [inst_1 : WellFoundedLT ι] [inst_2 : SuccOrder ι] [inst_3 : InverseSystem f]\\n  (equivSucc : (i : ι) → ¬IsMax i → { e // ∀ (x : F (Order.succ i)), (e x).1 = f ⋯ x })\\n  (equivLim : (i : \", \"doc\": \"For a directed inverse system indexed by a linearly ordered type with successor structure, the global equivalence between $F_i$ and the product $\\\\prod_{j < i} X_j$ commutes with transition maps: for a\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $. This est\"}\n  {\"name\": \"InverseSystem.globalEquiv_compatibility\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} [inst : LinearOrder ι] {f : ⦃i j : ι⦄ → i ≤ j → F j → F i}\\n  [inst_1 : WellFoundedLT ι] [inst_2 : SuccOrder ι] [inst_3 : InverseSystem f]\\n  (equivSucc : (i : ι) → ¬IsMax i → { e // ∀ (x : F (Order.succ i)), (e x).1 = f ⋯ x })\\n  (equivLim : (i : \", \"doc\": \"For a directed inverse system indexed by a linearly ordered type with successor structure, the global equivalence between the system's object at index $i$ and the product over all strictly smaller ind\"}\n  {\"name\": \"InverseSystem.invLimEquiv_symm_apply_coe\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} {i : ι} [inst : LinearOrder ι]\\n  {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} {equiv : (j : ↑(Set.Iio i)) → F ↑j ≃ InverseSystem.piLT X ↑j}\\n  (nat : InverseSystem.IsNatEquiv f equiv) (t : ↑(InverseSystem.limit InverseSystem.piLTProj i)) (l : ↑(Set.Iio i)\", \"doc\": \"For an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, and equivalences $F_j \\\\simeq \\\\prod_{l < j} X_l$ satisfying naturality, the inverse of t\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the canonical factor map $M/I^nM \\\\to M/I^mM$ (induced by $I^nM \\\\subseteq I^mM$) with the linear map $f_n$ equals the linear map $f_m$, where $I$ is a\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n), AdicCompletion.transitionMap I M hmn ∘ₗ AdicCompletion.eval I M n = AdicCompletion.eval I M m\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the transition map $M/I^nM \\\\to M/I^mM$ with the evaluation map at level $n$ equals the evaluation map at level $m$. In other words, projecting an ele\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n) (x : AdicCompletion I M), (AdicCompletion.transitionMap I M hmn) (↑x n) = ↑x m\", \"doc\": \"For natural numbers $ m \\\\leq n $ and any element $ x $ in the $ I $-adic completion of an $ R $-module $ M $, applying the transition map from $ M/I^nM $ to $ M/I^mM $ to the $ n $-th component of $ x\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated algebraic normalization/inverse systems, generic adjunctions or scheme-module pushforward; no whole-item etale exceptional derived coefficient result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to etale compact support direct image commutes with scalar extension and reduction modulo powers of a uniformizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated algebraic normalization/inverse systems, generic adjunctions or scheme-module pushforward; no whole-item etale exceptional derived coefficient result"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mateEquiv",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Adjunction.mateEquiv'",
+   "date": "2026-10-22",
+   "verdict": "query rejected (unknown identifier); corrected CategoryTheory.mateEquiv query also executed; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*system|exceptional.*(scalar|coefficient)|upperShriek",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated algebraic normalization/inverse systems, generic adjunctions or scheme-module pushforward; no whole-item etale exceptional derived coefficient result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonflat derived coefficient reduction for exceptional inverse image preserves normalized systems",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Mathlib.Tactic.Module.reduceCoefficientwise\", \"module\": \"Mathlib.Tactic.Module\", \"type\": \"{R : Q(Type u)} {_ : Q(AddCommMonoid $M)} {_ : Q(Semiring $R)} (iRM : Q(Module $R $M)) (l₁ l₂ : qNF R M) :\\n  MetaM (List MVarId × Q(NF.eval $(l₁.toNF) = NF.eval $(l₂.toNF)))\", \"doc\": \"A tactic that takes two quasi-normal forms $ l_1 $ and $ l_2 $ in a module context over a semiring $ R $, and returns a list of metavariables along with the equality assertion $ \\\\text{NF}(l_1) = \\\\text\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) :\\n  let := (f.app U.1).hom.toAlgebra\\n  f.toNormalization.app (f.fromNormalization ⁻¹ᵁ ↑U) =\\n    f.normalization.presheaf.map (eqToHom (by simp [fromNormalization_preimage])).op ≫\\n      ((f.normalizationOpenCover.f U).appIso _).hom ≫\\n        (Scheme.ΓSpecIso _).hom ≫\\n          Com\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": PreservesLocalization _ ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap)\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsReduced X] : IsReduced f.normalization\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated algebraic normalization/inverse systems, generic adjunctions or scheme-module pushforward; no whole-item etale exceptional derived coefficient result"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv and its counit, unit and pasting identities in Mathlib.CategoryTheory.Adjunction.Mates. Read Mates.lean:74–100: the general mate correspondence explicitly does not imply preservation of isomorphisms. This is the already-existing Mathlib definition node def-weil-pbc-adjunction-mate, not the whole etale assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match for item; general mate construction already cited through existing node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-coefficient-system-adjoint",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors before derived inverse limit; Proposition 2.29(2), Lemma 5.22 and Proposition 5.24, with bounded-below normalization terminology in Lemma 4.13 (printed pp. 16, 24, 36–37); agent extraction of returned item step 6, retaining both the restriction Hom calculation and the nonflat tensor-mate argument.",
+   "via": [
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-system-quotient-normalization",
+  "worker": "stage1",
+  "summary": "No matching whole-item Lean declaration. Reuse the existing nonflat coefficient projection, scalar adjunction, constant-tensor and evaluation/transition statements; construct restriction comparison by Hom and prove the exact mate identification by its counit transpose. Conclude invertibility by constant tensor and cohomology-conservative restriction, then normalization by the actual evaluated transitions. No new nodes and no statement change.",
+  "blueprint": "def-weil-exceptional-inverse-image, adic-stage paragraph: finite-reduction compatibility makes the levelwise exceptional inverse image a normalized system. Realized here before inverse limit, under the existing evaluated-transition hypothesis.",
+  "tool_uses": [
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "The statement already uses the coefficient datum; step 5 uses its uniformizer decomposition and finite coefficient quotients to check the finite-ring hypotheses for general nonzero nonunit t. This is generic coefficient arithmetic, not an alternative exceptional-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-8c444cb1f",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-8c444cb1f (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, the statement of every cited node and the parent lem-pur-etale-coefficient-system-adjoint in full. I also checked Zheng 1006.3810: Prop 2.29(2) (N⊗^L Rf^!M ≅ Rf^!(N⊗^L M) for all N∈D(Λ)), Lemma 4.13, Lemma 5.22 with the sentence after it (Rf^{N!} preserves weakly normalized complexes via 2.29(2)), and Prop 5.24. The item's 'normalized' is defined explicitly as the transition condition, which is Zheng's weak normalization, so the unbounded scope does not overclaim. Step 1: I re-derived the six-Hom Yoneda iso ρ and its counit equation ε_C F_C(ρ)=U^Yε_D∘r^{-1}. The derivation uses the scalar-unit transpose clause of the projection node and naturality of r, and it is correct. Step 2: the identification U T K ≅ D⊗^L K on flat K-flat representatives comes from the change-of-rings tensor comparison together with derived change of rings. r∘U(q)=P is read off the single-ring clause of the projection node, which is acceptable. Step 3: I recomputed the four-line counit chase; it matches the transpose that defines c_M in the constant-tensor node, so U(b) corresponds to c under ρ. Step 4: the constant-tensor node takes V=D with no perfectness and allows unbounded input, non-separated Y and k=F̄_q, so c_M is an iso. Restriction is conservative because cohomology sheaves are unchanged under scalar restriction; no flatness is used. Step 5: t=uϖ^r makes A_m=O/ϖ^{rm} finite and ℓ-power torsion. Evaluation-bound identifies the actual adjoint transition as g_n(t^M)∘b_{m,n}, and both factors are invertible. There are no new nodes. There is no cycle: the transitive dependency closure does not contain the item. All cited statements are in unit sk-def-sf-operations or are definitions or Mathlib leaves. The declared tool use of def-weil-l-adic-coefficient-extension is a definition and is accepted. Duplicate search: lem-pur-finite-coefficient-adjoint-comparisons covers only pro-étale D^b_ctf on separated schemes, and lem-pur-etale-system-scalar-mate-coherence is a citer of this item; neither is a duplicate. No SGA is used. Small cases checked: identity coefficient map, Z/ℓ²→Z/ℓ (nonflat), D=0, X=∅, m=n. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSystemQuotientNormalization",
+  "declaration": "AlgebraicGeometry.etaleSystemQuotientNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.quotientCoefficientComplex",
+   "AlgebraicGeometry.Etale.quotientConstantTensorIso",
+   "AlgebraicGeometry.Etale.quotientRestrictionHomChain",
+   "AlgebraicGeometry.Etale.etaleCoefficientQuotientMate",
+   "AlgebraicGeometry.Etale.etaleCoefficientQuotientNormalization",
+   "AlgebraicGeometry.etaleSystemQuotientNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleSystemQuotientNormalization.lean",
+  "statement": "theorem etaleSystemQuotientNormalization (k : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ k.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (t : Padic.coefficientExtensionIntegers l E) (_ht : t ≠ 0) (_hunit : ¬ IsUnit t) {X Y : Scheme.{u}} [X.Over (Spec (.of k.k))] [Y.Over (Spec (.of k.k))] [LocallyOfFiniteType (X ↘ Spec (.of k.k))] [QuasiCompact (X ↘ Spec (.of k.k))] [LocallyOfFiniteType (Y ↘ Spec (.of k.k))] [QuasiCompact (Y ↘ Spec (.of k.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) t c) (B : StrictEtaleBrownConstruction _ _ c S) (G : DerivedCategory (strictEtaleCoefficientSystem Y (Padic.coefficientExtensionIntegers l E) t) ⥤ DerivedCategory (strictEtaleCoefficientSystem X (Padic.coefficientExtensionIntegers l E) t)) (adj : S.functor ⊣ G) (g : ∀ n : ℕ, DerivedCategory (strictEtaleLevel Y (Padic.coefficientExtensionIntegers l E) t n) ⥤ DerivedCategory (strictEtaleLevel X (Padic.coefficientExtensionIntegers l E) t n)) (adjN : ∀ n : ℕ, S.levelFunctor n ⊣ g n) (_H : StrictEtaleEvaluationBound B adj adjN) (M : DerivedCategory (strictEtaleCoefficientSystem Y (Padic.coefficientExtensionIntegers l E) t)) (_hM : IsNormalizedCoefficientSystem.{u + 1, u, u + 1, u + 2} (Padic.coefficientExtensionIntegers l E) t S.PY M) : IsNormalizedCoefficientSystem.{u + 1, u, u + 1, u + 2} (Padic.coefficientExtensionIntegers l E) t S.PX (G.obj M)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Two theorem statements cover respectively the finite-ring mate and strict-system normalization clauses. The four helper definitions compose existing canonical constructions with real data. The restriction iso is fixed by the six Hom bijections; the coefficient iso is the actual mate with its counit equation; its restriction is identified with the constant-tensor counit transpose. Systems use the recorded evaluation-bound package and existing normalization predicate, with n denoting exponent n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b62f8f832",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read node, Zheng source place, module, report and every stmt_dep record. Thm 1: q pinned to compactScalarMap, r to singleRestriction (projection node single-ring clause); rho fixed by Yoneda via the six-bijection chain (order and homCongr direction checked) plus the counit equation; b = mateEquiv adjC adjD q.inv (TwoSquare orientation checked), with the counit formula = mateEquiv_counit, invertible for arbitrary (nonflat) a; final U(b) equation = the constant-tensor node's A.hom.app M .app D[0] counit transpose, P pinned to exceptionalConstantProjectionMap, quotientConstantTensorIso built from canonical scalarTensorIso/constantCommuteCompose/single/derivedTensorSymmetry. Thm 2: recorded StrictEtaleCompactSupport/Brown/StrictEtaleEvaluationBound interface (dep proves Nonempty, so not extra), IsNormalizedCoefficientSystem with PY on M and PX on G M; levels n+1 cover node's n>=1; no flatness/Tor/bounds. Statement verbatim; 6 declarations present, no live name clash; only the item lean record changed, dep records = live; real helpers, sorry proofs, docstrings with source and blueprint. Advisories: scalarTensorIso module unrecorded but tagged to cited lem-pur-derived-change-of-rings; derivedTensorSymmetry owned by non-stmt_dep lem-kun-tensor-sym but already used by the cited constant-tensor dep. No changes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T095109-L-3292941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

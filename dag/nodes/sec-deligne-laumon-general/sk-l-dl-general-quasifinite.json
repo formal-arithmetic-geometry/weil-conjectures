@@ -165,7 +165,133 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-l-dl-general-quasifinite",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+    "AlgebraicGeometry.LAdicWeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing",
+     "lines": [
+      147,
+      178
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+     "lines": [
+      680,
+      688
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.HasDirectImageWeightBound.of_locallyQuasiFinite",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+     "lines": [
+      691,
+      700
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights",
+     "lines": [
+      95,
+      108
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+    "AlgebraicGeometry.LAdicWeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite"
+   ],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      184,
+      200
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-native-weil-shriek-composition",
+      "prop-functor-package"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      149,
+      161
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      218,
+      243
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "prop-functor-package",
+      "lem-zl-morphism-open-closed-reduction"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekOperations",
+     "lines": [
+      95,
+      114
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "sk-l-dl-general-quasifinite",
@@ -317,5 +443,34 @@
   "landing": "20261020T051507-L-1696332",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $g:Z_0\\to Y_0$ be separated and quasi-finite. Then $Rg_!$ is\nexact on sheaves and carries mixed sheaves of weights at most $w$ to\nmixed sheaves of weights at most $w$. It also carries\n$D_{\\leq w}(Z_0)$ into $D_{\\leq w}(Y_0)$.\nFor a finite map, direct image carries a pure sheaf of weight $w$\nto a pure sheaf of weight $w$.\n\n*Complement.* Here $g$ is a separated, quasi-finite morphism of finite\ntype of $k_0$-schemes, with $Y_0$ quasi-separated of finite type over\n$k_0$; thus $R^ig_!F=0$ for every Weil sheaf $F$ and every $i>0$. If\nevery local Frobenius eigenvalue of $F$ has weight at most $w$ (a\npunctual bound at most $w$ in the sense of [sk-d-real-weights]), then\nthe same holds for $g_!F=R^0g_!F$.",
+  "proof": [
+   {
+    "text": "For a finite map, exactness follows from [sk-lem-pbc-finite]\nand the comparison of coefficients. The stalk at a closed point $y$ is\nthe direct sum of the stalks at the points of its geometric fibre, and\nFrobenius permutes these summands. For a point $z$ of residue degree\n$e=[\\kappa(z):\\kappa(y)]$, Frobenius cycles through $e$ summands, and\nits $e$th power on each of them is conjugate to the local Frobenius at\n$z$. Hence each eigenvalue $\\beta$ on this cycle satisfies\n$\\beta^e=\\alpha$ for an eigenvalue $\\alpha$ at $z$. If the input has\nweight $w$, then\n\n$$\n |\\iota(\\beta)|^e=q_z^{w/2}=q_y^{ew/2}.\n$$",
+    "uses": [
+     "sk-lem-pbc-finite"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "This proves that finite direct image preserves purity. A nonreduced\nfibre causes no trouble, since nilpotents do not change the category\nof sheaves.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "By Zariski's main theorem, in the form\n[Stacks, Tag 05K0](https://stacks.math.columbia.edu/tag/05K0), which\napplies because $Y_0$ is Noetherian and hence quasi-compact and\nquasi-separated, $g$ factors as an open immersion\n$j:Z_0\\hookrightarrow\\overline Z_0$ followed by a finite map\n$\\bar g:\\overline Z_0\\to Y_0$. By [sk-thm-sf-comp-composition],\n$Rg_!=\\bar g_*j_!$, and both functors are exact. Extension by zero\npreserves purity, since its other stalks are zero. Applying these\nexact functors to a finite mixed filtration proves the assertion on\nsheaves, and taking the cohomology sheaves of a complex proves the\nassertion on $D_{\\leq w}$. The factorization and the composition maps\nare defined over $k_0$, so the resulting filtrations are\nWeil-equivariant.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

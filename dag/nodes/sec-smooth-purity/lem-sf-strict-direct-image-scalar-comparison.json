@@ -1,0 +1,262 @@
+{
+ "id": "lem-sf-strict-direct-image-scalar-comparison",
+ "kind": "statement",
+ "title": "Scalar compatibility of the specified strict-tower direct image",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a morphism $f:Z\\to X$ of separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. For each finite subextension $E\\subset\\Omega$ let $R_E=\\mathcal O_E$, choose a uniformizer $t_E$, and put $A_{E,n}=R_E/t_E^n$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale sites use the completed coefficient sheaf $\\widehat R_{E,W}=\\varprojlim_n(A_{E,n})_W$ [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients]. Let $\\mathcal C_E(W)=D^b_c(W,R_E)$ be the derived-complete category [def-weil-derived-complete-integral-detailed], and let $I_E:\\mathcal C_E(Z)\\to\\mathcal C_E(X)$ be the specified strict-reduction-tower direct image\n$$I_EK=R\\varprojlim_n\\operatorname{Res}_{X,n}Rf_{*,A_{E,n}}K_n$$\nof [def-weil-derived-direct-image], with its functorial strict-diagram realization [lem-weil-derived-direct-image-composition]. Here $K_n=K\\otimes^L_{\\widehat R_{E,Z}}(A_{E,n})_Z$ and $\\operatorname{Res}_{X,n}$ restricts along the completed coefficient projection. Its bounded constructible values and actual reduction maps are those of [lem-sf-integral-direct-image-constructible]. Let $F_E$ be ordinary total derived direct image over $\\widehat R_E$ [def-weil-pbc-proetale-operations], and let $\\psi_E:F_EK\\xrightarrow{\\sim}I_EK$ be the normalized reconstruction comparison of [lem-pur-completed-coefficient-pushforward-comparison].\n\nThe functor $I_E$ is $R_E$-linear for the scalar actions of [lem-weil-integral-constructible-linear], and $\\psi_E$ respects multiplication by every constant scalar. For $E\\subset L$ let $S^W_{L/E}$ be the specified strict-tower integral scalar extension [def-weil-integral-scalar-extension]. The inverse of the ambient scalar/direct-image comparison of [prop-weil-pbc-scalar-extension], transported through $\\psi_E,\\psi_L$ and the canonical finite-free completed scalar comparisons $\\chi_{L/E}$ of [lem-weil-finite-free-completed-scalar-comparison], gives natural isomorphisms\n$$I_LS^Z_{L/E}\\xrightarrow{\\sim}S^X_{L/E}I_E.$$\nTheir raw rationalizations, with no Karoubi completion [def-weil-rationalization-karoubi], give natural shift-compatible isomorphisms\n$$\\theta_{L/E}:I_L^{\\mathrm{rat}}T^Z_{L/E}\\xrightarrow{\\sim}T^X_{L/E}I_E^{\\mathrm{rat}}.$$\nHere $T^W_{L/E}$ is the scalar extension on $D^b_c(W,E)$ specified by that raw rationalization. For $L=E$ the comparisons are identities under the prescribed unit identifications. For $E\\subset L\\subset M$, with the scalar associators $a^W$ of [lem-weil-scalar-extension-composition], they satisfy\n$$a^X\\circ T^X_{M/L}(\\theta_{L/E})\\circ\\theta_{M/L,T^Z_{L/E}K}\n=\\theta_{M/E,K}\\circ I_M^{\\mathrm{rat}}(a^Z_K).$$\nThese statements assert compatibility for the specified strict-tower functors and the indicated normalized comparisons; no full faithfulness assertion is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+  "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "lem-weil-derived-direct-image-composition",
+  "lem-sf-integral-direct-image-constructible",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-weil-integral-constructible-linear",
+  "def-weil-integral-scalar-extension",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "At each finite coefficient subextension apply the single-field strict-model theorem. Choose witnesses inside this existential proof (no public definition chooses unspecified data).",
+   "uses": [
+    "lem-sf-strict-direct-image-integral-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the integral comparison construction to that supplied family, obtaining ambient data, integral comparisons, normalization, unit, shift and cocycle laws. Assemble IntegralComparisons from those three fields.",
+   "uses": [
+    "lem-sf-strict-direct-image-integral-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the rational assembly theorem to these integral data and their two law predicates. Pair its Comparisons and HasComparisonLaws with the integral data and HasIntegralLaws to obtain the original nested existential conclusion.",
+   "uses": [
+    "lem-sf-strict-direct-image-rational-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-strict-direct-image-integral-models",
+  "lem-sf-strict-direct-image-integral-comparisons",
+  "lem-sf-strict-direct-image-rational-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "report.md",
+  "place": "Y8: single-field strict models, integral comparison conjugation, explicit rational tensor-Hom construction and coherence descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived direct image on strict reduction towers commutes coherently with finite extension of completed integral coefficient rings and rational scalar localization",
+   "results": "[leanfinder] OK 8 hit(s); galLift_comp, galRestrict'_comp, galLift, galRestrict'_galLift, IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower', galRestrict', galLift_galRestrict', IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic-completion maps and general linear functors do not state comparison of the specified pro-etale strict-tower direct image with completed coefficient extension and its scalar cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Functor.instLinearId, CategoryTheory.Functor.Linear, CategoryTheory.Functor.intLinear, CategoryTheory.Functor.natLinear, CategoryTheory.Functor.ratLinear, CategoryTheory.Functor.fullSubcategoryInclusionLinear, CategoryTheory.Functor.inducedFunctorLinear, CategoryTheory.Equivalence.inverseLinear, CategoryTheory.Functor.linear_of_iso, CategoryTheory.Functor.instLinearComp, CategoryTheory.Functor.linear_of_full_essSurj_comp, CategoryTheory.Functor.linear_comp_iff_of_full_of_essSurj",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic-completion maps and general linear functors do not state comparison of the specified pro-etale strict-tower direct image with completed coefficient extension and its scalar cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*scalar|scalar.*completed|proetale.*direct",
+   "results": "[grep] OK 0 hit(s); no declarations returned",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic-completion maps and general linear functors do not state comparison of the specified pro-etale strict-tower direct image with completed coefficient extension and its scalar cocycle",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent scalar extension comparison for specified strict tower direct image and its rationalization",
+   "results": "[leansearch] OK 8 hit(s); IntermediateField.extendScalars.orderIso, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, Valuation.HasExtension.instIsScalarTowerInteger, LinearMap.coeIsScalarTower, IsScalarTower.rat, Algebra.Extension.instIsScalarTowerRing, IntermediateField.coe_restrictScalars, IntermediateField.coe_extendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic-completion maps and general linear functors do not state comparison of the specified pro-etale strict-tower direct image with completed coefficient extension and its scalar cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adic direct image defined by derived inverse limit of finite reductions is linear and its finite coefficient field extension comparison satisfies the scalar associator cocycle",
+   "results": "[leanfinder] OK 8 hit(s); AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap, AdicCompletion.transitionMap_ideal_mk, AdicCompletion.map_val_apply, AdicCompletion.transitionMapₐ, AdicCompletion.eval_comp_of, AdicCompletion.of_apply, AdicCompletion.transitionMap_comp_eval_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic-completion maps and general linear functors do not state comparison of the specified pro-etale strict-tower direct image with completed coefficient extension and its scalar cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|derivedComplete|rationalization|scalarExtension",
+   "results": "[grep] OK 10 hit(s); Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:11, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:39, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:61, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:65, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:66, Mathlib/AlgebraicGeometry/Sites/Proetale.lean:34, Mathlib/AlgebraicGeometry/Sites/Proetale.lean:50, Mathlib/AlgebraicGeometry/Sites/Proetale.lean:52, Mathlib/AlgebraicGeometry/Sites/Proetale.lean:57, Mathlib/AlgebraicGeometry/Sites/Proetale.lean:58",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic-completion maps and general linear functors do not state comparison of the specified pro-etale strict-tower direct image with completed coefficient extension and its scalar cocycle",
+   "directory": "AlgebraicGeometry/Sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural comparison of adic derived direct image and finite coefficient extension satisfies scalar associativity",
+   "results": "8 hits; PadicComplex.instIsScalarTowerPadicPadicAlgCl, Valuation.HasExtension.instIsScalarTowerInteger, IsDedekindDomain.FiniteAdeleRing.instIsScalarTower, AdicCompletion.smul_mk, Derivation.instIsScalarTower, AdicCompletion.instIsScalarTower_1, SchwartzMap.instIsScalarTower, AdicCompletion.smul_eval",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary linear functors, algebraic adic completion, cotangent complexes, or the pro-etale site, not the specified strict-tower direct image and its normalized scalar cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image defined by a strict reduction tower is linear and commutes coherently with completed integral scalar extension and raw rationalization",
+   "results": "8 hits; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.Generators.H1Cotangent.δAux_ofComp, CommRingCat.KaehlerDifferential.map, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, Algebra.Extension.CotangentSpace.map_comp_cotangentComplex, Algebra.Extension.H1Cotangent.map_comp, Algebra.Extension.CotangentSpace.map_comp, Algebra.Extension.CotangentSpace.map_comp_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary linear functors, algebraic adic completion, cotangent complexes, or the pro-etale site, not the specified strict-tower direct image and its normalized scalar cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of a linear derived direct image with finite free coefficient change has a natural associative comparison on strict adic towers",
+   "results": "8 hits; IsAdicComplete.StrictMono.mkQ_comp_lift, AdicCompletion.transitionMap_comp_reduceModIdeal, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.mkQ_comp_lift, AdicCompletion.map_comp, IsAdicComplete.of_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary linear functors, algebraic adic completion, cotangent complexes, or the pro-etale site, not the specified strict-tower direct image and its normalized scalar cocycle"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-closed-unit-all-stages",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-closed-unit-all-stages",
+   "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-strict-direct-image-scalar-comparison",
+  "worker": "stage1",
+  "summary": "Eight-step split using existing DAG tools only. Checked the actual strict-diagram reconstruction comparison, transferred ambient linearity by naturality, defined the scalar comparison by its full conjugation formula, proved integral coherence by cancellation with the normalized chi associator, checked native shifts on the normalized augmentation and K-injective composition representatives, and localized to the raw rational categories. Statement unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "prop-sf-closed-unit-all-stages: rational-stage paragraph (linearity and raw rationalization) and algebraically closed-stage paragraph (finite-field-extension compatibility); explicit normalization of the previously extracted scalar-comparison subproblem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Finitely generated algebras over Noetherian rings are Noetherian used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic Compatibility with finite scalar extension used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic The integral derived direct image of a constructible complex along a finite-type morphism is constructible used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Generic Completed-coefficient pushforward restriction and strict reduction towers used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-sbc-completed-operations-linear-natural-exchange",
+    "why": "Generic Linearity and naturality of completed pullback, direct image, and exchange used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "Generic Tensor-associator normalization of the strict-tower scalar completion comparison used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-pur-completed-line-tensor-coherence",
+    "why": "Generic Completed scalar extension commutes coherently with compatible coefficient lines used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-trf-completion-unit-strict-quotient-model",
+    "why": "Generic Actual completion unit on a strict K-flat quotient cone used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-roos-comm-shift",
+    "why": "Generic Coherent shifts of the native strict Roos functor used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-shift",
+    "why": "Generic A shift of a K-injective complex is K-injective used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-completed-scalar-chain-shift",
+    "why": "Generic Signed coherent shifts and the strict completed scalar comparison used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Generic Composites and whiskerings of shift-compatible natural transformations are shift-compatible used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic Semilinear functors and comparison equations under raw scalar localization used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used for the normalized strict-tower comparison and scalar-localization assembly; the closed-unit unit has no separate statement supplying this tool."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-122b2b2f5",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-122b2b2f5 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and every cited statement. There are no new nodes; the statement and stmt_deps are unchanged; no repair note applies and no SGA source is used. The source paragraphs exist in main-20261015 prop-sf-closed-unit-all-stages.proof.md (Rational stage l.25, Algebraically closed stage l.29), and that proof cites prop-weil-pbc-scalar-extension, which Step 3 uses. Step 1: hypotheses of the scalar proposition, constructibility of the direct image and ψ verified; ψ = limitComparison∘F(augmentation), confirmed by the cited node's own proof. Step 2: linearity by conjugation, correct. Step 3: domains and directions of N and d checked; χ is invertible on complete inputs. Step 4: I redid the cancellation (naturality of N_b and χ_b, A_S h=χ_c A_C from lem-fix-scalar-completion-associator); it reduces exactly to the inverted β cocycle. lem-pur-completed-line-tensor-coherence identifies the rationalized associator with a^W; units handled via the completeness map. Step 5: cocycle algebra verified. Step 6: Roos zero-second-coordinate lemma plus g_*(j[r])=(g_*j)[r] with signs; accepted. Step 7: formal. Step 8: semilinear localization with t_E=u t_L^e invertible; raw rationalization, no Karoubi completion. Batch 5: lem-trf-completion-unit-strict-quotient-model is a general unit formula for the derived reduction/limit adjunction. Its 851-node closure contains only 3 other trace-formula-chapter nodes, all generic (completion-unit models, localization essentially surjective). It is neither the trace formula nor Poincaré duality nor part of their proofs, so the citation is accepted. The 16 off-route tool_uses are generic and accepted. Duplicate candidates read (direct-image-scalar-restriction-cocycle, sp-finite-free-direct-image-coherence, cbc-strict-tower-direct-image-coherence, etale-system-scalar-mate-coherence, a1-rational-direct-image-realization): none states this. Maintainer note: the inherited stmt_deps are phrased with the global datum's ℓ≠p while the item takes an arbitrary field k; this framing predates the delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfStrictDirectImageScalarComparison",
+  "declaration": "WeilConjectures.SfStrictDirectImageScalar.strictDirectImageScalarComparison",
+  "declarations": [
+   "WeilConjectures.SfStrictDirectImageScalar.strictDirectImageScalarComparison"
+  ],
+  "file": "lean/Sheaf/Paper/SfStrictDirectImageScalarComparison.lean",
+  "statement": "theorem strictDirectImageScalarComparison (k : Type u) [Field k] (hl : IsUnit (l : k)) {Z X : Scheme.{u}} [Z.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (f : Z ⟶ X) [f.IsOver (Spec (.of k))] : ∃ D : IntegralComparisons l Ω f, HasIntegralLaws l Ω f D ∧ ∃ R : Comparisons l Ω f D, HasComparisonLaws l Ω f D R",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The fully normalized strict-diagram direct image, ambient tensor/unit-counit normalization, integral conjugation, literal raw rationalization and prescribed unit/cocycle equations are retained as owning-node helper data and law predicates. Added the landed algebraically closed coefficient node for its independent-universe small field models and normalized transitions. No source statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-766f2ea76",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read the node, all 17 stmt_deps and the 447-line module. Node diff vs base: only lean added, plus landed stmt_dep def-weil-algebraically-closed-coefficients (allowed by brief-stage2 l.177); statement verbatim; 17 declarations present; only the main theorem is sorry. All hypotheses (field, prime, l invertible, IsAlgClosure Ω in independent universe v, LFT+QC+IsSeparated, f.IsOver) and all clauses match: linear/additive/scalars; d = S(ψ_E)∘χ∘β⁻¹∘F_L(χ)⁻¹∘ψ_L⁻¹ before cancelling χ_Z; integral and rational unit clauses; raw Stage (no Karoubi) with objects and pure-tensor maps pinned and localization the identity; θ components = localized d; CommShift clauses; cocycle in diagrammatic order with associator = sfRationalScalarComp. β is pinned uniquely by its unit/counit square (finite-free counit invertible, unit invertible on K-injectives); I_E/ψ_E existential is a genuine transport (reconstruction pinned to augmentation ≫ limitComparison); θ shift clauses keep content via β and χ. p=0 is a redundant parameter (rfl independence). Functorial I_E and β are permitted owning-node helpers absent from the recorded dependencies. Docstrings, source places and 8 proof steps present; Mathlib ProEt site; instance attributes restored with original priorities. Advisory: abbrev scalar unused; second reading by the same worker. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-46419",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T124514-L-2044117",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations, diffed against the published item module (byte-identical, re-exported by public import); the three new sorry statements read against their nodes and the published rational associator/unitor; all 7 delivered modules and the 5 direct importers compiled in a sandbox; axioms traced to upstream sorryAx"
+ }
+}

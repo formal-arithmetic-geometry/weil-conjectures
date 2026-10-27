@@ -261,23 +261,41 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-b42d9bac7 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item only, with no new nodes or unit changes. Read Stacks morphisms.tex Tag 0C4Q lemma-projective-permanence (l.10824), statement and proof, and every cited statement. The statement is unchanged from Q75's unsplit node and is the H-projective case of 0C4Q, where E=O^{n+1} pulls back to a free module of the same rank, so the same n is right. Step 1: change-of-base closed immersion with X=Z, Y=T, h=g gives Z×_T T→Z×_B T, identified with the graph (id,f); correct, and only g needs to be separated (01KS). Step 2: k is the base change of i along P^n_B×_B T→P^n_B, with explicit inverse maps; no flatness used. Step 3: the composite closed immersion has components i and f, so it lies over T. Step 4: lemma-nagata-projective-space-base-change-pullback with I={0..n} plus the factor swap; def-kun-projective defines P^N as P({0..N}), so n does not shift. All inputs are statements of Mathlib leaves, definitions or the Lean-closed isPullback_map, so no route departure and no tool_uses are needed, and there is no cycle. Duplicate search (0C4Q, permanence, H-projective): lem-weil-pbc-finite-separable-base-refinement covers only the field case, det-chow clause 2 is one specific π, and trf-h-projective-composition is composition; none duplicates the item. Edge cases Z=∅, n=0, g=id, f=id and non-reduced T all hold. Inherited blueprint from.place is kept and the report discloses the changed ancestor text. No changes."
  },
  "lean": {
-  "module": "Sheaf.DeligneLaumon.HProjectivePermanence",
+  "module": "Sheaf.AlgebraicGeometry.HProjectivePermanence",
   "declaration": "AlgebraicGeometry.isHProjective_of_comp_of_isSeparated",
-  "file": "lean/Sheaf/DeligneLaumon/HProjectivePermanence.lean",
+  "file": "lean/Sheaf/AlgebraicGeometry/HProjectivePermanence.lean",
   "statement": "theorem isHProjective_of_comp_of_isSeparated {Z T B : Scheme.{u}} (f : Z ⟶ T) (g : T ⟶ B) [IsSeparated g] (n : ℕ) (i : Z ⟶ ℙ(ULift.{u} (Fin (n + 1)); B)) (hi : IsClosedImmersion i) (hif : i ≫ (ℙ(ULift.{u} (Fin (n + 1)); B) ↘ B) = f ≫ g) : ∃ j : Z ⟶ ℙ(ULift.{u} (Fin (n + 1)); T), IsClosedImmersion j ∧ j ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T) = f",
   "branch": "newtargets-dag",
-  "by": "NW",
-  "date": "2026-10-18",
+  "by": "Q147",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.DeligneLaumon.HProjectivePermanence deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Restores the same-n finite projective-space permanence statement after the former Sheaf.DeligneLaumon.HProjectivePermanence module was deleted; uses the canonical upstream projectivity and projective-space definitions."
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/DeligneLaumon/HProjectivePermanence.lean",
+  "module": "Sheaf.DeligneLaumon.HProjectivePermanence",
+  "declaration": "AlgebraicGeometry.isHProjective_of_comp_of_isSeparated",
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-4be664948",
-  "group": "NW",
+  "reviewer": "NT-stage2-cc-e9f912209",
+  "group": "Q147",
   "result": "pass",
-  "note": "Clause-by-clause match to node and Stacks 0C4Q: Z T B : Scheme.{u}, [IsSeparated g], n : ℕ, closed immersion i into ℙ(ULift (Fin (n+1)); B) with i ≫ structure map = f ≫ g; conclusion ∃ j closed immersion into ℙ(ULift (Fin (n+1)); T) over f, same n, no extra hypotheses. Edge cases n=0, empty Z, identity maps, non-reduced or empty schemes covered; one universe u, no forced universe equality. Item differs from live only in lean; dep nodes byte-identical; lean.statement verbatim. Docstrings give source places and the 4 proof steps; only proof is sorry; no lines over 100 chars; nt_compile --json clean (15.0 s, exit 0). Advisory maintainer note: upstream ProjectiveSpace.isClosedImmersion_liftBaseChange plus liftBaseChange_over proves the item in one line (probe compiled clean); it is not the same statement, so no existing:true, but stage 3 should use it."
+  "note": "Lean-only restoration of the deleted Sheaf.DeligneLaumon.HProjectivePermanence at Sheaf.AlgebraicGeometry.HProjectivePermanence; the node is needed again as a proof_dep of lem-sfb-snc-projective-semilinear-induction. Only the lean field, the module and the report differ from live. Clause by clause it matches the node and Stacks 0C4Q: Scheme.{u} f g, [IsSeparated g], explicit n with i into ℙ(ULift (Fin (n+1)); B), closed immersion, i≫↘B = f≫g; ∃ j into ℙ(...;T), closed immersion, over f, same n. No extra hypotheses, one universe, canonical upstream ProjectiveSpace and IsHProjective records. lean.statement is verbatim and identical to NW's PASSed statement of 2026-10-19. Docstrings carry source places and the 4 steps; only sorry; no lines over 100 chars; report has both sections; no name clash live. Advisory: IsClosedImmersion is not in stmt_deps (as in the earlier PASS); plain imports are proof-dep modules. Not recompiled: no file changed, and the earlier compile was clean."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

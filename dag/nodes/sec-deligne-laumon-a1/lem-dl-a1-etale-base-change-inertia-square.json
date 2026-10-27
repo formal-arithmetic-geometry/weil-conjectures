@@ -1,0 +1,239 @@
+{
+ "id": "lem-dl-a1-etale-base-change-inertia-square",
+ "kind": "statement",
+ "title": "Etale scalar extension preserves inertia and the invariant square",
+ "statement": "Let $G$ be a finite group acting by ring automorphisms on a commutative ring $R$. For $H\\leq G$ put $R^H=\\{r\\in R:h(r)=r\\text{ for all }h\\in H\\}$. Put $A=R^G$, let $\\mathfrak q\\subset R$ be prime, and let $I=\\{g:g\\mathfrak q=\\mathfrak q,\\ g|_{\\kappa(\\mathfrak q)}=1\\}$, where $\\kappa(\\mathfrak q)=\\operatorname{Frac}(R/\\mathfrak q)$. Let $B$ be an etale $A$-algebra [def-weil-etale-morphism], put $S=B\\otimes_A R$ [def-weil-pbc-module-tensor-product], and act by $g(b\\otimes r)=b\\otimes g(r)$. Let $\\mathfrak Q\\subset S$ be prime with contraction $\\mathfrak q$ to $R$. Then its inertia subgroup $\\{g:g\\mathfrak Q=\\mathfrak Q,\\ g|_{\\operatorname{Frac}(S/\\mathfrak Q)}=1\\}$ is $I$. The canonical maps $B\\longrightarrow S^G$ and $B\\otimes_A R^I\\longrightarrow S^I$ are isomorphisms of $B$-algebras. Consequently the square with vertices $\\operatorname{Spec}S^I,\\operatorname{Spec}R^I,\\operatorname{Spec}B,\\operatorname{Spec}A$ and arrows induced by the canonical ring maps is cartesian [def-pc-fibre-product], and both horizontal morphisms are etale. Here spectra are as in [def-weil-affine-spectrum]. The point $\\mathfrak Q\\cap S^I$ maps to $\\mathfrak q\\cap R^I$. These assertions also apply with $B_b,S_b,\\mathfrak Q S_b$ in place of $B,S,\\mathfrak Q$ for every $b\\in B\\setminus(\\mathfrak Q\\cap B)$. No finiteness of $R$ as an $A$-module or invertibility of $|G|$ is required.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BST, lemma-inertia-invariants-etale, first two reduction paragraphs, together with Tag 0BSS, lemma-inertia-base-change."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "For an automorphism $g$ of a ring $T$ and a prime $P$, belonging to inertia is equivalent to $g(t)-t\\in P$ for every $t\\in T$: this condition gives $g(P)\\subseteq P$, and here the finite order of $g$ gives equality; the induced identity on $T/P$ extends to its fraction field. Conversely the inclusion $T/P\\hookrightarrow\\operatorname{Frac}(T/P)$ gives the condition. Thus an inertia element at $\\mathfrak Q$ satisfies $1\\otimes(g(r)-r)\\in\\mathfrak Q$ for every $r$, whence $g(r)-r\\in\\mathfrak q$ by contraction and $g\\in I$. Conversely, for $g\\in I$ and $s=\\sum_j b_j\\otimes r_j$, tensor generation gives $g(s)-s=\\sum_j(b_j\\otimes1)(1\\otimes(g(r_j)-r_j))\\in\\mathfrak Q$. The same criterion now puts $g$ in the inertia at $\\mathfrak Q$. This proves equality as subgroups of the given $G$, without any flatness assumption.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSS, lemma-inertia-base-change, proof; expanded using the difference criterion on tensor generators"
+   }
+  },
+  {
+   "text": "By the etale-algebra flatness lemma $B$ is flat over $A$. For $H=G$ and for $H=I$, each $h$ fixes $A=R^G$, so the given action on $R$ is by $A$-algebra automorphisms. Both groups are finite. Apply the flat-invariants comparison with base ring $A$, algebra $D=R$ and scalar algebra $B$. It gives the canonical $B$-algebra isomorphisms $B\\otimes_A R^G\\simeq S^G$ and $B\\otimes_A R^I\\simeq S^I$. Since $R^G=A$, the first source is canonically $B$, by $b\\otimes a\\mapsto ba$, with inverse $b\\mapsto b\\otimes1$. Hence its composite is precisely the asserted map $B\\to S^G$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-dl-a1-flat-base-change-finite-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, second proof paragraph; More on Algebra Tag 0BRH, lemma-base-change-invariants, flat case"
+   }
+  },
+  {
+   "text": "Apply the affine fibre-product formula to the two $A$-algebras $B$ and $R^I$. Its specified projections identify $\\operatorname{Spec}(B\\otimes_A R^I)$ with $\\operatorname{Spec}B\\times_{\\operatorname{Spec}A}\\operatorname{Spec}R^I$. The comparison of step 2 sends $b\\otimes x$ to the same tensor in $S$. Therefore the maps out of $B$ and $R^I$ are exactly the canonical maps defining the square in the statement. Replacing $B\\otimes_A R^I$ by $S^I$ through this isomorphism proves that this square is cartesian.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, displayed cartesian square in the second proof paragraph; Schemes Tag 01JQ, lemma-fibre-product-affines"
+   }
+  },
+  {
+   "text": "The bottom horizontal map $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale by hypothesis. The top horizontal map is its base change along $\\operatorname{Spec}R^I\\to\\operatorname{Spec}A$, by step 3. Stability of etale morphisms under arbitrary base change makes it etale.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, second proof paragraph; Morphisms Tag 02GO, lemma-base-change-etale"
+   }
+  },
+  {
+   "text": "For $x\\in R^I$ the image of $x$ in $S^I$ belongs to $\\mathfrak Q\\cap S^I$ exactly when $1\\otimes x\\in\\mathfrak Q$, equivalently $x\\in\\mathfrak q$. Thus the inverse image of $\\mathfrak Q\\cap S^I$ is $\\mathfrak q\\cap R^I$, proving the assertion about the point under the induced spectrum map.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, second proof paragraph, the points in the cartesian square"
+   }
+  },
+  {
+   "text": "Fix $b\\notin\\mathfrak Q\\cap B$. The localization lemma makes $B_b$ etale over $A$. The canonical isomorphism $B_b\\otimes_A R\\simeq S_b$ sends $(c/b^n)\\otimes r$ to $(c\\otimes r)/b^n$; its inverse sends $(\\sum_j c_j\\otimes r_j)/b^n$ to $\\sum_j(c_j/b^n)\\otimes r_j$. Tensor relations and the fraction relation make these inverse ring maps, and they commute with $G$ because $G$ fixes $b$. The extended ideal $\\mathfrak Q S_b$ consists exactly of fractions $s/b^n$ with $s\\in\\mathfrak Q$: its quotient is $(S/\\mathfrak Q)[1/\\bar b]$, a nonzero domain since $\\bar b\\ne0$. It is therefore prime and contracts to $\\mathfrak Q$, since $b^n s\\in\\mathfrak Q$ and $b\\notin\\mathfrak Q$ imply $s\\in\\mathfrak Q$. In particular its contraction to $R$ is $\\mathfrak q$. Repeat steps 1--5 with $B_b$ and this prime; all their hypotheses have now been verified. They give every localized assertion. Throughout, only finite-group invariants and flatness of the etale algebra were used; neither module-finiteness of $R/A$ nor division by $|G|$ occurred.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, etale-localization reduction; Algebra Tag 00U2, lemma-etale (1),(2); explicit fraction calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-dl-a1-flat-base-change-finite-invariants",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BSS (lemma-inertia-base-change) and 0BST (lemma-inertia-invariants-etale), first two reduction paragraphs, with localization maps written explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change of a ring with a finite group action preserves inertia groups at primes and gives a cartesian square of invariant rings",
+   "results": "[leanfinder] OK 8 hit(s); Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDegIn_eq_inertiaDeg, arithFrobAt, Ideal.exists_smul_eq_of_isGaloisGroup, Ideal.exists_map_eq_of_isGalois, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank. Hits concern inertia degrees, orbit transitivity, or scalar extension in general; none identifies inertia groups and both invariant rings in this arbitrary-ring etale square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat scalar extension commutes with finite group fixed subrings and inertia of a prime in a tensor product equals inertia at its contraction",
+   "results": "[leanfinder] OK 8 hit(s); Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDeg_algebra_tower, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, arithFrobAt, Ideal.coe_smul_primesOver_mk_eq_map_galRestrict. Hits concern inertia degrees, orbit transitivity, or scalar extension in general; none identifies inertia groups and both invariant rings in this arbitrary-ring etale square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.inertia, TensorProduct",
+   "results": "[loogle] OK 0 hit(s); . Hits concern inertia degrees, orbit transitivity, or scalar extension in general; none identifies inertia groups and both invariant rings in this arbitrary-ring etale square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia.*(baseChange|tensor|map)|fixedPoints.*(tensor|baseChange)|invariants.*flat",
+   "results": "[grep] OK 20 hit(s); Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/Inertia.lean, Mathlib/NumberTheory/RamificationInertia/Inertia.lean, Mathlib/NumberTheory/RamificationInertia/Inertia.lean. Hits concern inertia degrees, orbit transitivity, or scalar extension in general; none identifies inertia groups and both invariant rings in this arbitrary-ring etale square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inertia groups of primes are unchanged under base change over the fixed ring and flat base change commutes with invariants",
+   "results": "[leansearch] OK 8 hit(s); RingHom.IsStableUnderBaseChange, Ideal.inertiaDeg_map_eq, IsGaloisGroup.of_isFractionRing, Ideal.inertiaDegIn, IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg, Ideal.inertiaDeg_comap_eq, Algebra.Unramified.baseChange, Ideal.card_inertia_eq_ramificationIdxIn. Hits concern inertia degrees, orbit transitivity, or scalar extension in general; none identifies inertia groups and both invariant rings in this arbitrary-ring etale square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia.*(baseChange|tensor)|fixedPoints.*baseChange",
+   "results": "0 hits: . No match for the complete inertia and invariant-square statement; returned inertia-degree and etale-permanence results supply only separate background facts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inertia groups are unchanged by etale base change over a finite group fixed ring",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.baseChange, Ideal.inertiaDeg_map_eq, RingHom.Etale.isStableUnderBaseChange, IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg, AddSubgroup.inertia, Ideal.inertiaDeg_comap_eq, Ideal.inertiaDegIn_eq_inertiaDeg. No match for the complete inertia and invariant-square statement; returned inertia-degree and etale-permanence results supply only separate background facts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.inertia, TensorProduct",
+   "results": "0 hits: . No match for the complete inertia and invariant-square statement; returned inertia-degree and etale-permanence results supply only separate background facts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale scalar extension of a ring with a finite group action preserves inertia groups at primes and commutes with invariant subrings",
+   "results": "8 hits: Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.inertiaDeg_eq_of_isGalois, arithFrobAt, IsArithFrobAt.arithFrobAt, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, IsArithFrobAt.exists_of_isInvariant. No match for the complete inertia and invariant-square statement; returned inertia-degree and etale-permanence results supply only separate background facts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed subrings commute with flat tensor extension and inertia of primes in tensor products over invariants is unchanged",
+   "results": "8 hits: Ideal.inertiaDegIn_mul_inertiaDegIn, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux, TensorProduct.toIntegralClosure_bijective_of_tower, PrimeSpectrum.nontrivial_iff_mem_rangeComap, Ideal.Fiber.exists_smul_eq_one_tmul, Ideal.comap_fiberIsoOfBijectiveResidueField_symm, Ideal.comap_fiberIsoOfBijectiveResidueField_apply. No match for the complete inertia and invariant-square statement; returned inertia-degree and etale-permanence results supply only separate background facts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-finite-group-inertia-invariants-etale",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph of rem-dl-a1-conventions, equivalence between lisse extension across infinity and trivial inertia, via lem-dl-a1-lisse-extension-inertia and lem-dl-a1-weil-kernel-inertia; finite-quotient argument of Stacks 0BTD. Specific argument: Tag 0BST, lemma-inertia-invariants-etale, first two reduction paragraphs, together with Tag 0BSS, lemma-inertia-base-change.",
+   "via": [
+    "lem-dl-a1-finite-group-inertia-invariants-etale",
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-dl-a1-etale-base-change-inertia-square",
+  "worker": "stage1",
+  "summary": "Q158 repair of the landing refusal: retained the independently approved six-step proof and rebased its delivery onto the current server DAG through deliver.py. Reopened all eight cited statements and verified all nine citation quotes; their present statements still give exactly the facts used, including the arbitrary A-algebra flat-invariants comparison and the localization clause. The item statement, source and blueprint ancestry agree with the current read clone. Retained every prior search and added no node. No Lean writing or compilation.",
+  "blueprint": "Realizes the etale-local reduction of the finite-quotient inertia argument underlying the second paragraph of rem-dl-a1-conventions (lisse extension across infinity iff trivial inertia), through the existing normal-scheme inertia presentation and Tag 0BST. The item is not the unit key node; the unit has no proof steps. Whole-blueprint searches for inertia, flat invariants and base change etale found no duplicate of the item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-40f21bada",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-40f21bada (reviewer sub-agent of L); spot-checked: Rebase after the side-promotion landing refusal. Apart from split_report, the item JSON is identical to head f1124b23 (diffed); there are no new nodes and the statement is unchanged; stmt_deps adds only def-weil-ring-localization-away, which the B_b clause needs. I re-read the mathematics in full against pione 0BSS/0BST (the claim paragraph and the principal-localization step) and 0BRH. Step 1 (elementary) proves the inertia criterion: g(t)-t in P plus finite order gives gP=P. Contraction gives I_Q in I, and pure-tensor generation gives I in I_Q, with no flatness used. Step 2: lem-weil-pbc-etale-algebra-flat gives B flat over A, and the same-unit node lem-dl-a1-flat-base-change-finite-invariants (arbitrary base A) applies to D=R with H=G and with H=I, since both fix A=R^G; B tensor_A A=B gives the canonical map b to b tensor 1. Step 3: the affine fibre-product leaf with its specified projections gives the canonical cartesian square. Step 4: the 02GO leaf (arbitrary base change) makes the top arrow etale. Step 5: the preimage of Q cap S^I is q cap R^I. Step 6: clause (2) of the 00U2 leaf gives B_b etale over A; the explicit G-equivariant inverse maps give B_b tensor R = S_b; QS_b is prime since S_b/QS_b=(S/Q)[1/b], and it contracts to Q and then to q. Edge cases checked: G or I trivial, I=G, B=0 (vacuous), |G| not invertible, R not finite over A, b=1, non-faithful action. rg -L found no duplicate in the DAG: the parent cites this item and is not cited, so there is no cycle, and lem-per-tame-invariants needs |G| invertible. No SGA is cited and there are no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleBaseChangeInertiaSquare",
+  "declaration": "AlgebraicGeometry.etale_baseChange_inertia_square",
+  "declarations": [
+   "AlgebraicGeometry.inertiaSquareAction",
+   "AlgebraicGeometry.inertiaSquareRestrictedAction",
+   "AlgebraicGeometry.inertiaSquareRightMap",
+   "AlgebraicGeometry.InertiaSquareAssertions",
+   "AlgebraicGeometry.inertiaSquareLocalizationMap",
+   "AlgebraicGeometry.etale_baseChange_inertia_square"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleBaseChangeInertiaSquare.lean",
+  "statement": "theorem etale_baseChange_inertia_square [Finite G] [Algebra.Etale (FixedPoints.subring R G) B] (q : Ideal R) [q.IsPrime] (Q : Ideal (B ⊗[FixedPoints.subring R G] R)) [Q.IsPrime] (hQ : Ideal.comap Algebra.TensorProduct.includeRight.toRingHom Q = q) : InertiaSquareAssertions G R B q Q ∧ ∀ b : B, algebraMap B (B ⊗[FixedPoints.subring R G] R) b ∉ Q → (∃ e : Localization.Away (algebraMap B (B ⊗[FixedPoints.subring R G] R) b) ≃+* (Localization.Away b ⊗[FixedPoints.subring R G] R), ∀ s : B ⊗[FixedPoints.subring R G] R, e (algebraMap _ _ s) = inertiaSquareLocalizationMap G R B b s) ∧ (Ideal.map (inertiaSquareLocalizationMap G R B b) Q).IsPrime ∧ Ideal.comap Algebra.TensorProduct.includeRight.toRingHom (Ideal.map (inertiaSquareLocalizationMap G R B b) Q) = q ∧ InertiaSquareAssertions G R (Localization.Away b) q (Ideal.map (inertiaSquareLocalizationMap G R B b) Q)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b19f9681",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records, pione 0BSS/0BST, module, report (Worker report + Second reading present), upstream AlgHom.fixedPoints/baseChangeFamily (TotallySplit) and Mathlib Ideal.inertia. Clauses match: inertia equality via the same difference criterion on S and R (q.inertia G); B≃ₐ[B]S^G is necessarily algebraMap; B⊗R^I≃ₐ[B]S^I pinned on all pure tensors; IsPullback orientation equals the 0BST square (top Spec S^I→Spec R^I, bottom Spec B→Spec A), both horizontals Etale; point clause comap(Q∩S^I)=q∩R^I; for every b∉Q∩B, the iso S_b≃B_b⊗R is pinned on S (canonical, G-equivariant), prime = map of Q, plus primality/contraction and full assertions over B_b. No finiteness, no |G| invertibility or faithfulness assumption; [q.IsPrime] redundant. B in R's universe forced by Scheme.{u} pullback, harmless for étale algebras. Statement verbatim; node differs from live only in lean; sorry only; docstrings/source/blueprint/proof steps present; no hollow defs; no duplicate found. Advisory: upstream fixedPoints helpers unowned by any node (R^H defined inline), proof-only imports. No recompile (no change)."
+ }
+}

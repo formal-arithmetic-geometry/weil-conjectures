@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-flat-epimorphism-polynomial-dual",
+ "kind": "statement",
+ "title": "Polynomial dualizing objects for flat ring epimorphisms",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings, flat as in [def-weil-pbc-flat-ring-map], such that multiplication $A\\otimes_R A\\to A$ is an isomorphism of rings. Let $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$, $n\\geq0$, be a polynomial presentation [def-weil-pbc-mv-polynomial-ring], and suppose $A[0]$ is perfect over $P$, meaning it is isomorphic to a bounded complex of finitely generated projective $P$-modules [def-pc-perfect-ring-complex]. In ordinary module derived categories [def-weil-abstract-derived-category], write $C_B^T$ for the derived coinduction of [def-trf-derived-coinduction]. Put $P_A=P\\otimes_R A=A[x_1,\\ldots,x_n]$, let $a_i$ be the image of $x_i$ in $A$, and give $A$ the $P_A$-algebra structure by $x_i\\mapsto a_i$. There are isomorphisms in $D(A)$\n$$C_A^{P_A}(P_A)\\cong A[-n],\\qquad C_A^P(P)[n]\\cong A[0].$$\nThe first identification on top cohomology is the dual Koszul identification [def-sc-koszul-dual-complex] for the ordered sequence $x_1-a_1,\\ldots,x_n-a_n$, with its conormal basis in that order. The second identification is $A$-linear for the original coinduction action. The assertions include $A=0$ and $n=0$ and require no Noetherian or regular-base hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0C0H (lemma-upper-shriek-localize), self-base-change calculation, expanded using the perfect polynomial model and the ordered graph Koszul complex; the hypotheses are stated algebraically as flatness, multiplication being an isomorphism, and polynomial perfectness."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "def-trf-derived-coinduction",
+  "def-sc-koszul-dual-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=P_A=A[x_1,\\ldots,x_n]$ and $t_i=x_i-a_i$. Successively substituting $x_j=a_j$ gives $S/(t_1,\\ldots,t_i)=A[x_{i+1},\\ldots,x_n]$: the inverse sends a remaining variable to its class, and the two composites fix every coefficient and variable. Thus $S/(t_1,\\ldots,t_n)=A$. Multiplication by $t_i$ on the preceding quotient is injective: regard a nonzero polynomial as a polynomial in $x_i$; its highest nonzero coefficient remains the coefficient of the next power after multiplication by the monic polynomial $x_i-a_i$. This proves precisely the successive injectivity hypothesis, without requiring a proper ideal or a nonzero coefficient ring.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0C0H (lemma-upper-shriek-localize), self-base-change graph calculation expanded by polynomial substitution."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-sequence-koszul-regular] to $S$, $M=S$ and the ordered list $t_1,\\ldots,t_n$, using the injectivity just proved. Its Koszul complex $K$ resolves $A$. By [lem-sc-koszul-conormal-basis] the classes of these $t_i$ give the ordered $A$-basis of $I/I^2$, where $I=(t_1,\\ldots,t_n)$. Apply [lem-sc-koszul-regular-sequence-dual-complex] over $S$: $\\operatorname{Hom}_S^\\bullet(K,S)$ has cohomology only in degree $n$, equal to $\\bigwedge_A^n\\operatorname{Hom}_A(I/I^2,A)$. Evaluation on the ordered conormal basis identifies this determinant with $A$, sending the wedge of the dual basis to $1$. This is the ordered dual Koszul identification, with the differential convention of [def-sc-koszul-dual-complex].",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "def-sc-koszul-dual-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ (lemma-regular-immersion-ext), local dual Koszul calculation; More on Algebra Tags 062F, 062I and 0CEM."
+   }
+  },
+  {
+   "text": "Write $E=C_A^S(S)$. Its scalar restriction is $R\\operatorname{Hom}_S(A,S)$ by [lem-trf-derived-coinduction-adjunction]. The bounded finite-free resolution $K\\to A[0]$ computes this derived Hom by [lem-sc-derived-hom-projective-resolution]. Consequently the preceding calculation gives $H^i(E)=0$ for $i\\ne n$ and $H^n(E)\\cong A$. This last identification is $A$-linear for the coinduction action: if $b\\in A$ and $s\\in S$ lifts $b$, then on $\\operatorname{Hom}_S(A,J)$ for a K-injective $J$ one has $(b h)(a)=h(ab)=h(sa)=s h(a)$. Thus precomposition acts on cohomology by the same scalar as the Koszul calculation. Apply [lem-sf-derived-concentrated-single] in the abelian category of $A$-modules and use this top-cohomology identification to obtain $E\\cong A[-n]$ in $D(A)$, with the specified normalization.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-sc-derived-hom-projective-resolution",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext), together with Tag 0BQZ and Derived Categories Tag 08J5 (remark-truncation-distinguished-triangle)."
+   }
+  },
+  {
+   "text": "Flatness of $A/R$ and [lem-weil-pbc-flat-tensor-exact] imply that termwise tensor with $A$ preserves acyclic complexes and quasi-isomorphisms: tensor the exact cycle-boundary sequences. Hence ordinary tensor with $A$ computes derived tensor, by applying it to any resolving quasi-isomorphism. The same applies to $S/P$, since $N\\otimes_P S=N\\otimes_R A$ for every $P$-module $N$. Multiplication identifies $A\\otimes_P S=A\\otimes_R A$ with $A$; under this identification $x_i$ acts by $a_i$. For every complex $V$ of $A$-modules, the map $V\\to V\\otimes_R A$, $v\\mapsto v\\otimes1$, is an isomorphism: use $V\\otimes_R A=V\\otimes_A(A\\otimes_R A)$ and the assumed multiplication isomorphism. On pure tensors the associativity map sends $v\\otimes(a\\otimes b)$ to $av\\otimes b$, and multiplication gives its inverse identification with $V$. In particular $v\\otimes b=bv\\otimes1$. These maps commute with differentials.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A (lemma-base-change-RHom), flat specialization; Algebra Tag 00HD (lemma-flat)."
+   }
+  },
+  {
+   "text": "Put $D=C_A^P(P)$ and $U D=R\\operatorname{Hom}_P(A,P)$, using [lem-trf-derived-coinduction-adjunction]. Apply [lem-pc-base-change-rhom-perfect] to $P\\to S$, the perfect $P$-object $A[0]$ of the hypothesis, and $P[0]$. This gives an isomorphism in $D(S)$\n$$ (U D)\\otimes_P^{\\mathbf L}S\\ \\cong\\ R\\operatorname{Hom}_S(A\\otimes_P^{\\mathbf L}S,S). $$\nStep 4 identifies its right side with $R\\operatorname{Hom}_S(A,S)$ and identifies its left side, after restriction to $P$, with $U D$: on a representative of $D$ by $A$-modules the latter identification is $v\\mapsto v\\otimes1$, with inverse multiplication. Thus there is a $P$-linear cohomology isomorphism $H^i(D)\\cong H^i(E)$ for every $i$. This application uses perfectness exactly as stated, and no Noetherian hypothesis; flatness justifies both ordinary base-change identifications.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pc-base-change-rhom-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A (lemma-base-change-RHom), clause (1), with Equation 0E1X and the flat self-base-change of Tag 0C0H."
+   }
+  },
+  {
+   "text": "For $b\\in A$ choose a lift $p\\in P$ along the given surjection. On $\\operatorname{Hom}_P(A,J)$ its original coinduction action equals multiplication by $p$, since $h(ab)=h(pa)=p h(a)$. On $\\operatorname{Hom}_S(A,J')$ it likewise equals multiplication by the image of $p$ in $S$; this image evaluates to $b$. Consequently the $P$-linear cohomology comparison of step 5 is $A$-linear for these original actions: apply $P$-linearity to a lift of each $b$. From step 3 it follows that $H^i(D)=0$ for $i\\ne n$ and $H^n(D)\\cong A$ as $A$-modules. Now [lem-sf-derived-concentrated-single], applied in $D(A)$, gives $D\\cong A[-n]$ and hence $D[n]\\cong A[0]$. This establishes an isomorphism in $D(A)$ without assuming that an isomorphism after restriction lifts there. For $n=0$ the Koszul complex and its dual each have the single term $A$, and the empty determinant basis gives $1$; all steps still apply. If $A=0$, both coinduced complexes are zero by [def-trf-derived-coinduction], so both assertions hold in the zero category $D(0)$.",
+   "uses": [
+    "def-trf-derived-coinduction",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0C0H (lemma-upper-shriek-localize), self-base-change argument made algebra-linear; Tags 0A70, 0A71 and Derived Categories Tag 08J5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-dual-complex",
+  "def-trf-derived-coinduction",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-sc-derived-hom-projective-resolution",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "lem-sf-derived-concentrated-single",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0C0H (lemma-upper-shriek-localize), self-base-change idea generalized under the explicit perfect polynomial hypothesis, using More on Algebra Tag 0A6A(1) and Duality Tag 0BQZ; the non-Noetherian and action checks are written here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat ring epimorphism R to A the shifted polynomial dualizing complex RHom P A P is A",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.iff_characterModule_injective\", \"module\": \"Mathlib/RingTheory/Flat/Tensor\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v, u} R],\\n  Module.Flat R M ↔ Module.Injective R (CharacterModule M)\", \"doc\": \"For a small commutative semiring $ R $ and an $ R $-module $ M $, the module $ M $ is flat over $ R $ if and only if the character module of $ M $ is an injective $ R $-module. The character module is\"}\n  {\"name\": \"Module.Flat.iff_characterModule_baer\", \"module\": \"Mathlib/RingTheory/Flat/Tensor\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.Flat R M ↔ Module.Baer R (CharacterModule M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if its character module (the additive group of homomorphisms from $ M $ to $ \\\\mathbb{Q}/\\\\mathbb{Z} $) satisfies the Baer condition,\"}\n  {\"name\": \"HomologicalComplex.dgoEquivHomologicalComplex_counitIso\", \"module\": \"Mathlib/Algebra/Homology/DifferentialObject\", \"type\": \"∀ {β : Type u_1} [inst : AddCommGroup β] (b : β) (V : Type u_2) [inst_1 : CategoryTheory.Category.{v_1, u_2} V]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms V],\\n  (HomologicalComplex.dgoEquivHomologicalComplex b V).counitIso =\\n    HomologicalComplex.dgoEquivHomologicalComplexCounitIso b V\", \"doc\": \"The counit isomorphism of the categorical equivalence between differential objects in ℤ-graded objects with shift $ b $ and homological complexes with shape $ \\\\text{ComplexShape.up'}(b) $. This is a n\"}\n  {\"name\": \"RingHom.Flat.id\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R], (RingHom.id R).Flat\", \"doc\": \"For any commutative ring $ R $, the identity ring homomorphism from $ R $ to itself is flat.\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"{R : Type t} →\\n  [inst : Ring R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.HasExt C] →\\n              {X Y : C} →\\n                {n : ℕ} \", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the equivalence between the Ext group $\\\\operatorname{Ext}^n(X, Y)$ and the hom-set $\\\\operatorname{Hom}_{D(\\\\mathcal{C})}(X[\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"RingHom.Flat.containsIdentities\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.ContainsIdentities fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For every commutative ring $ R $, the identity ring homomorphism $ \\\\id_R : R \\\\to R $ satisfies the flatness property. This means that $ R $ is a flat $ R $-module under the identity map's induced alge\"}\n  {\"name\": \"comonadicExtendScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"{A B : Type u} →\\n  [inst : CommRing A] →\\n    [inst_1 : CommRing B] →\\n      {f : A →+* B} → f.FaithfullyFlat → CategoryTheory.ComonadicLeftAdjoint (ModuleCat.extendScalars f)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a faithfully flat ring homomorphism $ f : R → S $, the extension of scalars functor from the category of $ R $-modules to $ S $-modules is comonadic. This me\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\", \"dual\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul.*[Dd]ual|[Dd]ual.*[Kk]oszul|[Dd]ualizing",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial graph regular sequence x i minus a i dual Koszul resolution gives A shifted minus n",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingTheory.Sequence.IsRegular\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} → (M : Type u_3) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → List R → Prop\", \"doc\": \"A predicate indicating that a sequence of elements in a commutative ring $ R $ is regular on an $ R $-module $ M $, meaning each element in the sequence is a non-zerodivisor on the quotient of $ M $ b\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.recOn\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {rs : List R} →\\n            {motive : RingTheory.Sequence.IsRegular M rs → Sort u} →\\n              (t : RingTheory.Sequence.IsRegular M rs) →\\n                ((to\", \"doc\": \"Given a property $ P $ of regular sequences on an $ R $-module $ M $, if $ P $ holds for sequences constructed from weak regularity and the condition that the ideal generated by the sequence does not \"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.recIterModByRegular\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{motive : (M : Type v) → [AddCommGroup M] → [Module R M] → (rs : List R) → IsRegular M rs → Sort*}\\n  (nil : (M : Type v) → [AddCommGroup M] → [Module R M] → [Nontrivial M] → motive M [] (nil R M))\\n  (cons :\\n    {M : Type v} →\\n      [AddCommGroup M] →\\n        [Module R M] →\\n          (r : R) →\\n      \", \"doc\": \"A recursive function that constructs proofs or structures for regular sequences in a module over a commutative ring by induction. For the base case, the empty sequence is regular if the module is non-\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.mk\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {rs : List R},\\n  (∀ (i : ℕ) (h : i < rs.length), IsSMulRegular (M ⧸ Ideal.ofList (List.take i rs) • ⊤) rs[i]) →\\n    RingTheory.Sequence.IsWeaklyRegular M rs\", \"doc\": \"Given a commutative ring $ R $, an $ R $-module $ M $, and a list $ rs $ of elements in $ R $, if for every index $ i $ the element $ rs_i $ is injective in scalar multiplication on the quotient modul\"}\n  {\"name\": \"RingTheory.Sequence.isWeaklyRegular_iff\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"∀ {R : Type u_1} (M : Type u_3) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (rs : List R),\\n  RingTheory.Sequence.IsWeaklyRegular M rs ↔\\n    ∀ (i : ℕ) (h : i < rs.length), IsSMulRegular (M ⧸ Ideal.ofList (List.take i rs) • ⊤) rs[i]\", \"doc\": \"A sequence of elements in a commutative ring $ R $ is a weakly regular sequence on the module $ M $ if and only if, for every index $ i $, the $ i $-th element is a non-zero divisor on the quotient mo\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.rec\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {rs : List R} →\\n            {motive : RingTheory.Sequence.IsRegular M rs → Sort u} →\\n              ((toIsWeaklyRegular : RingTheory.Sequence.IsWeaklyRegular M rs)\", \"doc\": \"Given a property $ P $ of regular sequences on an $ R $-module $ M $, if $ P $ holds for a sequence constructed from weak regularity and the condition that the ideal generated by the sequence does not\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{motive : (M : Type v) → [AddCommGroup M] → [Module R M] → (rs : List R) → Sort*}\\n  (nil : (M : Type v) → [AddCommGroup M] → [Module R M] → [Nontrivial M] → motive M [])\\n  (cons :\\n    {M : Type v} →\\n      [AddCommGroup M] →\\n        [Module R M] →\\n          (r : R) →\\n            (rs : List R) →\\n     \", \"doc\": \"A non-dependent recursive function that constructs proofs or structures for regular sequences in a module over a commutative ring by induction. For the base case, the empty sequence is regular if the \"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.casesOn\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {rs : List R} →\\n            {motive : RingTheory.Sequence.IsRegular M rs → Sort u} →\\n              (t : RingTheory.Sequence.IsRegular M rs) →\\n                ((to\", \"doc\": \"Given a property $ P $ of regular sequences on an $ R $-module $ M $, if $ P $ holds for sequences constructed from weak regularity and the condition that the ideal generated by the sequence does not \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat epimorphism trivializes relative dualizing object via perfect derived Hom base change and polynomial graph Koszul complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.iff_characterModule_baer\", \"module\": \"Mathlib/RingTheory/Flat/Tensor\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.Flat R M ↔ Module.Baer R (CharacterModule M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if its character module (the additive group of homomorphisms from $ M $ to $ \\\\mathbb{Q}/\\\\mathbb{Z} $) satisfies the Baer condition,\"}\n  {\"name\": \"Module.Flat.iff_characterModule_injective\", \"module\": \"Mathlib/RingTheory/Flat/Tensor\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v, u} R],\\n  Module.Flat R M ↔ Module.Injective R (CharacterModule M)\", \"doc\": \"For a small commutative semiring $ R $ and an $ R $-module $ M $, the module $ M $ is flat over $ R $ if and only if the character module of $ M $ is an injective $ R $-module. The character module is\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if for any $ R $-linear maps $ l_{12}: N_1 \\\\to N_2 $ and $ l_{23}: N_2 \\\\to N_3 $ between $ R $-modules, the sequence $ N_1 \\\\\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if for every sequence of $ R $-modules $ N_1 \\\\xrightarrow{f} N_2 \\\\xrightarrow{g} N_3 $, the sequence is exact if and only if\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect module over a polynomial ring a flat epimorphism has derived dual the base algebra shifted by the number of variables",
+   "results": "OK; 8 hits: Algebra.Smooth.flat, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.FormallySmooth.projective_kaehlerDifferential, Module.Flat.tfae_equational_criterion, Module.Flat.iff_characterModule_injective, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_characterModule_baer, Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary polynomial algebra, flat-module, dual-module or smoothness declarations; none states the derived polynomial dual and its A-linear comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul.*[Dd]ual|[Dd]ual.*[Kk]oszul|[Dd]ualizing",
+   "results": "OK; 10 hits: Mathlib/Tactic/Translate/ToDual.lean, Mathlib/Data/Set/Defs.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary polynomial algebra, flat-module, dual-module or smoothness declarations; none states the derived polynomial dual and its A-linear comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived dual of a perfect quotient of a polynomial ring under a flat ring epimorphism is the quotient shifted by the number of variables",
+   "results": "OK; 8 hits: Subspace.dualQuotDistrib, LinearMap.IsPerfPair.dualEval, KaehlerDifferential.polynomialEquiv, LinearMap.IsPerfPair.flip, MvPolynomial.quotientEquivQuotientMvPolynomial, Module.dual_projective, Polynomial.fiberEquivQuotient, Module.dual_free",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary polynomial algebra, flat-module, dual-module or smoothness declarations; none states the derived polynomial dual and its A-linear comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsEpi, MvPolynomial",
+   "results": "OK; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary polynomial algebra, flat-module, dual-module or smoothness declarations; none states the derived polynomial dual and its A-linear comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "RHom of the evaluation quotient A of A x1 xn with polynomial ring coefficients is A in degree n via the ordered Koszul resolution",
+   "results": "OK; 8 hits: MvPolynomial.ACounit, MvPolynomial.quotientEquivQuotientMvPolynomial_leftInverse, MvPolynomial.quotientEquivQuotientMvPolynomial_rightInverse, Algebra.mvPolynomial, Algebra.Generators.σ, Algebra.PreSubmersivePresentation.naive, Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary polynomial algebra, flat-module, dual-module or smoothness declarations; none states the derived polynomial dual and its A-linear comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-shriek-calculus",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Re-split task: old steps 11--12, graph Koszul calculation and A-linear descent of the polynomial dualizing object.",
+   "via": [
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-epimorphism-polynomial-dual",
+  "worker": "stage1",
+  "summary": "Reused existing general Koszul, projective-RHom, perfect base-change and single-degree reconstruction nodes. Expanded the graph-sequence injectivity, flat-epimorphism tensor-unit identity and original coinduction-action checks; retained all hypotheses and edge cases. No new nodes or statement changes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Re-split task: old steps 11--12, graph Koszul calculation and A-linear descent of the polynomial dualizing object. Steps 1--3 supply the ordered graph dual and steps 4--6 the perfect self-base-change and A-linear reconstruction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Successive injectivity implies Koszul acyclicity over arbitrary rings, the algebraic tool for the graph sequence. No node of the item's unit supplies this general algebraic statement."
+   },
+   {
+    "node": "lem-sc-koszul-conormal-basis",
+    "why": "The ordered graph equations form the conormal basis needed for the determinant normalization. No node of the item's unit supplies this general algebraic statement."
+   },
+   {
+    "node": "lem-sc-koszul-regular-sequence-dual-complex",
+    "why": "Computes the dual of the finite Koszul resolution for an arbitrary Koszul-regular quotient. No node of the item's unit supplies this general algebraic statement."
+   },
+   {
+    "node": "lem-sc-derived-hom-projective-resolution",
+    "why": "Computes ordinary module derived Hom from the bounded finite-free graph resolution. No node of the item's unit supplies this general algebraic statement."
+   },
+   {
+    "node": "lem-pc-base-change-rhom-perfect",
+    "why": "Perfect derived-Hom base change over arbitrary commutative rings; the Noetherian quotient comparison in this unit does not cover the item. No node of the item's unit supplies this general algebraic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "lem-sc-derived-hom-projective-resolution",
+  "lem-pc-base-change-rhom-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-de99ce5a4",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-de99ce5a4 (reviewer sub-agent of L); spot-checked: PASS with no changes. The delivery is a 6-step split of a node that is still unsplit in live; the statement and stmt_deps are byte-identical to live, there are no new nodes, and there is no repair note for this item. The new steps carry every argument of the parent lem-trf-algebraic-shriek-calculus's old steps 11–12 (from the Q07 4eb1155e appendix), so nothing was dropped. Steps 1–3: t_i=x_i−a_i satisfies successive injectivity, because each difference is monic over an arbitrary ring; this is exactly the hypothesis of lem-weil-pbc-regular-sequence-koszul-regular, and the conormal basis and dual-Koszul lemmas then give H^n=A, normalized by the ordered basis. A lift s of b acts as b, since (bh)(a)=h(sa)=s·h(a); concentration in Mod(A) gives E≅A[-n]. Steps 4–6: S=P⊗_R A is P-flat, A⊗_P S=A⊗_R A≅A with x_i acting as a_i, and V⊗_R A≅V for A-module complexes. Perfect RHom base change (matching 0A6A(1)) with E=A[0] and K=P[0] gives a P-linear isomorphism H^i(D)≅H^i(E); lifting each b to p∈P makes it A-linear, and concentration gives D[n]≅A without lifting a restricted isomorphism. I tested R→R_f via fx−1, an idempotent quotient with n=0, A=0, and non-flat k[t]→k (flatness is genuinely needed). Source: 0C0H (dualizing.tex l.4648, 'Details omitted'), correctly marked agent-written; I checked tags 0A6A, 0E1X, 0BQZ, 0A70, 0A71, 08J5 and 00HD. No SGA source. I accept the five generic algebra tool_uses (koszul-regular, conormal basis, dual Koszul complex, projective-resolution RHom, perfect RHom base change); three of them were already accepted on the parent. Not duplicates: derived-self-tensor assumes a surjective ring map, and flat-quotient-base-change needs Noetherian P. Advisory: clause 1 overlaps clause 2 of the sibling coinduction-polynomial-refinement, but that node disclaims any normalization and this item pins the ordered Koszul one."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatEpimorphismPolynomialDual",
+  "declaration": "ModuleCat.exists_flatEpimorphism_polynomialDual_iso",
+  "declarations": [
+   "ModuleCat.polynomialDualGraphSequence",
+   "ModuleCat.polynomialDualGraphKoszul",
+   "ModuleCat.IsOrderedPolynomialDualGraphIso",
+   "ModuleCat.exists_flatEpimorphism_polynomialDual_iso"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatEpimorphismPolynomialDual.lean",
+  "statement": "theorem exists_flatEpimorphism_polynomialDual_iso {R A : Type u} [CommRing R] [CommRing A] [Algebra R A] (hflat : (algebraMap R A).Flat) (hmul : Function.Bijective (Algebra.TensorProduct.lmul' R : A ⊗[R] A →ₐ[R] A)) (n : ℕ) (p : MvPolynomial (Fin n) R →ₐ[R] A) (hp : Function.Surjective p) [HasDerivedCategory.{wP} (ModuleCat.{u} (MvPolynomial (Fin n) R))] [HasDerivedCategory.{wS} (ModuleCat.{u} (MvPolynomial (Fin n) A))] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] (hperfect : DerivedCategory.IsPerfectRingComplex ((restrictScalars p.toRingHom).mapDerivedCategory.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A)))) : (∃ e : (derivedCoinduction (MvPolynomial.eval (fun i ↦ p (MvPolynomial.X i)))).obj ((DerivedCategory.singleFunctor (ModuleCat.{u} (MvPolynomial (Fin n) A)) 0).obj (ModuleCat.of (MvPolynomial (Fin n) A) (MvPolynomial (Fin n) A))) ≅ (DerivedCategory.singleFunctor (ModuleCat.{u} A) (n : ℤ)).obj (ModuleCat.of A A), IsOrderedPolynomialDualGraphIso n (fun i ↦ p (MvPolynomial.X i)) e) ∧ Nonempty (((derivedCoinduction p.toRingHom).obj ((DerivedCategory.singleFunctor (ModuleCat.{u} (MvPolynomial (Fin n) R)) 0).obj (ModuleCat.of (MvPolynomial (Fin n) R) (MvPolynomial (Fin n) R))))⟦(n : ℤ)⟧ ≅ (DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A))",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-7dd37264f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dd37264f",
+  "group": "Q116",
+  "result": "fix",
+  "note": "Read node, 6 stmt_deps, DerivedCoinductionAdjunction/KoszulDualComplex/KoszulConormalComparison/KoszulRegularSequenceDualComplex sources, 0C0H. Hypotheses (RingHom.Flat, bijective lmul', surjective R-alg presentation p, IsPerfectRingComplex of restricted A[0]), both D(A) conclusions via derivedCoinduction, n=0/A=0, no Noetherian binders, universes (common u forced by recorded derivedCoinduction/IsPerfectRingComplex) all OK; predicate pins e uniquely via adjunction mate + Koszul roof. Finding: the node (step 2) normalizes via the canonical comparison of lem-sc-koszul-regular-sequence-dual-complex (IsKoszulConormalComparison, sign (-1)^(n(n-1)/2)) sending the dual conormal wedge to 1, so the top cocycle must evaluate to (-1)^(n(n-1)/2) on e0∧…∧e_{n-1} (as KoszulOrientation records); the delivery demanded =1 (wrong sign for n≡2,3 mod 4). FIX: fixes/FlatEpimorphismPolynomialDual.lean sets `= (-1 : A) ^ (n * (n - 1) / 2)` and updates docstrings; theorem signature/lean.statement unchanged. nt_compile --json of the fixed file: 15.7 s, exit 0, clean. Advisory: koszulComplex is used directly but cited only through def-sc-koszul-dual-complex; left unchanged."
+ }
+}

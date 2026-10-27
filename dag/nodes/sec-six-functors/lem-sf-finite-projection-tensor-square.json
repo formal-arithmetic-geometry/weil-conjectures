@@ -1,0 +1,193 @@
+{
+ "id": "lem-sf-finite-projection-tensor-square",
+ "kind": "statement",
+ "title": "Tensor compatibility of the published finite pullback square",
+ "statement": "For an arbitrary commutative scheme square (h,p',p,g), a finite commutative coefficient ring A, and arbitrary N,L in the unbounded fixed-scalar derived category of Y, the composite p'*mu_g; mu_p'; (theta_N tensor theta_L) equals theta_(N tensor L); h*mu_p; mu_h. All comparisons are the published fixed-scalar ones of [def-sf-finite-projection-exchange-coordinates].",
+ "stmt_deps": [
+  "def-sf-finite-projection-exchange-coordinates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Original item proof steps 1"
+ },
+ "proof": [
+  {
+   "text": "Apply properOpenPullTensorComposition to (p', g) and (h, p), with coefficient category ModuleCat A. Its uncurry tensor map is tensorMap by the definitions of uncurry and tensorMap. Reverse the first equation by cancelling the invertible compositor at N tensor L, and then cancel its tensor of hom/inv pairs.",
+   "uses": [
+    "lem-sf-proper-open-pull-tensor-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transport leftDerivedUpperStarCongr associated to the equality p' ≫ g = h ≫ p preserves the tensor comparison: eliminate the equality, where the transport is the identity and the equation follows from the tensor of identity maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand theta as the inverse (p', g) compositor, equality transport, and (h, p) compositor. Expand the tensor of these composites using bifunctoriality. Substitute the inverse composition equation, the equality-transport equation, and the second composition equation; associativity identifies the resulting word with the required right-hand side.",
+   "uses": [
+    "lem-sf-proper-open-pull-tensor-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proper-open-pull-tensor-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proper-factor paragraph: canonical monoidality calculation, using the existing fixed-scalar pullback compositor tensor theorem twice and equality induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula base change compatibility adjunction mates monoidal natural transformation",
+   "results": {
+    "t": "2026-10-25T09:46:12Z",
+    "tool": "leansearch",
+    "query": "Projection formula base change compatibility adjunction mates monoidal natural transformation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.NatTrans.IsMonoidal.mk",
+     "CategoryTheory.NatTrans.IsMonoidal.tensor",
+     "CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory",
+     "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+     "CategoryTheory.leftAdjointMate",
+     "CategoryTheory.NatTrans.IsMonoidal",
+     "CategoryTheory.rightAdjointMate",
+     "CategoryTheory.frobeniusMorphism_mate"
+    ],
+    "digest": "b4966417fc368ec8"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": {
+    "t": "2026-10-25T09:35:43Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.mkOfHomEquiv",
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.homEquiv'",
+     "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_apply",
+     "CategoryTheory.Adjunction.homEquiv_unit"
+    ],
+    "digest": "d4686c3e2e7585d2"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection",
+   "results": {
+    "t": "2026-10-25T09:35:42Z",
+    "tool": "grep",
+    "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor comparison for inverse image is compatible with composition and commutative squares, projection formula base change and open extension by zero",
+   "results": {
+    "t": "2026-10-25T10:43:32Z",
+    "tool": "leanfinder",
+    "query": "Canonical derived tensor comparison for inverse image is compatible with composition and commutative squares, projection formula base change and open extension by zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.pullbackComp",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackObjFreeIso"
+    ],
+    "digest": "049b3b17bd770b00"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match; the returned generic or unrelated declarations do not state this fixed-scalar normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionExchangeTransposes",
+  "date": "2026-10-25",
+  "group": "C9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Projection diamonds sentence, via finite open/proper factor calculation",
+   "via": [
+    "lem-sf-finite-projection-exchange-transposes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionTensorSquare",
+  "file": "lean/Sheaf/Paper/FiniteProjectionTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteProjectionExchange.tensor_square",
+  "statement": "theorem tensor_square {B' B Y' Y : Scheme.{u}} {h : B' ⟶ B} {p' : B' ⟶ Y'} {p : B ⟶ Y} {g : Y' ⟶ Y} (s : CommSq h p' p g) (N L : Dcat A Y) : (pull A p').map (mu A g N L).hom ≫ (mu A p' ((pull A g).obj N) ((pull A g).obj L)).hom ≫ tensorMap A ((theta A s).hom.app N) ((theta A s).hom.app L) = (theta A s).hom.app (tensor A Y N L) ≫ (pull A h).map (mu A p N L).hom ≫ (mu A h ((pull A p).obj N) ((pull A p).obj L)).hom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteProjectionExchange.tensor_square"
+  ],
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-97c08",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T122658-L-1795676",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261027T012948-L-2352400",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

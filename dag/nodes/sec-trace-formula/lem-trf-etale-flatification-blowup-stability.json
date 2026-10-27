@@ -1,0 +1,331 @@
+{
+ "id": "lem-trf-etale-flatification-blowup-stability",
+ "kind": "statement",
+ "title": "Etale local module flatifications survive an earlier admissible blowup",
+ "statement": "Let $S$ be a quasi-compact and quasi-separated scheme, $U\\subset S$ a quasi-compact open, $f:X\\to S$ a morphism of schemes, and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module. Fix a finite family of commutative diagrams $e_i g_i=fj_i$ with $g_i:X_i\\to S_i$, $e_i:S_i\\to S$, and $j_i:X_i\\to X$. Assume each $S_i$ is qcqs, $e_i$ is quasi-compact and etale, and $j_i$ is etale. Let $\\mathcal J_i\\subset\\mathcal O_{S_i}$ be finite-type quasi-coherent ideals equal to the unit ideal on $e_i^{-1}U$ and suppose the strict transform of $j_i^*\\mathcal F$ on $X_i\\times_{S_i}\\operatorname{Bl}_{\\mathcal J_i}S_i$ is flat over $\\operatorname{Bl}_{\\mathcal J_i}S_i$.\n\nFor any $U$-admissible blowup $b:S_1=\\operatorname{Bl}_{\\mathcal I}S\\to S$, put $U_1=b^{-1}U$, $X_1=X\\times_SS_1$, $T_i=S_i\\times_SS_1$, $Y_i=X_i\\times_SS_1$, and let $\\mathcal F_1$ be the strict transform of $\\mathcal F$ for $\\mathcal I$. The base $S_1$ and every $T_i$ are qcqs, $U_1$ is quasi-compact and $\\mathcal F_1$ is quasi-coherent. The induced $T_i\\to S_1$ are quasi-compact etale maps, and $Y_i\\to X_1$ are etale maps; either family is jointly surjective whenever the corresponding original family is. With\n$$T_i^*=\\operatorname{Bl}_{\\mathcal J_i\\mathcal O_{T_i}}T_i,$$\nthe morphism $T_i^*\\to T_i$ is admissible relative to the inverse image of $U_1$, and the module strict transform of $(Y_i\\to X_1)^*\\mathcal F_1$ is flat over $T_i^*$. There are canonical identifications\n$$T_i\\cong\\operatorname{Bl}_{\\mathcal I\\mathcal O_{S_i}}S_i,\\qquad T_i^*\\cong\\operatorname{Bl}_{(\\mathcal I\\mathcal O_{S_i})\\mathcal J_i}S_i,$$\nunder which this final module is the successive strict transform obtained by first blowing up $\\mathcal J_i$ and then the extension of $\\mathcal I$. The identifications commute with the quotient maps from the ordinary pullback of $j_i^*\\mathcal F$; the composite centre has zero set $V(\\mathcal I\\mathcal O_{S_i})\\cup V(\\mathcal J_i)$. Schemes, qcqs conventions, quasi-coherence, relative module flatness, admissible blowups, module strict transforms, fibre products and module pullbacks are as in [def-pc-scheme], [def-weil-pbc-scheme-conventions], [pqf-def-coherent], [def-pc-scheme-module-flat-over], [def-nagata-admissible-blowup], [def-trf-module-strict-transform], [def-pc-fibre-product] and [def-pc-module-pullback]. Etale morphisms are as in [def-weil-etale-morphism]. Blowups themselves are those of [def-nagata-global-blowup].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1: preservation of the hypotheses under an admissible blowup and comparison of the two blowup orders. Returned proof steps 2 and 3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-nagata-global-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-module-admissible-blowup-calculus] (2) to $b$: $S_1$ is qcqs and $\\mathcal F_1$ is quasi-coherent. By [lemma-nagata-admissible-blowup-over-open], $U_1\\to U$ is an isomorphism, so $U_1$ is quasi-compact. This uses no quasi-compactness or finiteness assumption on $X$ or $\\mathcal F$.",
+   "uses": [
+    "lem-trf-module-admissible-blowup-calculus",
+    "lemma-nagata-admissible-blowup-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 080D, 080F, 080K; definition-admissible-blowup and lemma-strict-transform-flat (2)."
+   }
+  },
+  {
+   "text": "Write $A_i=\\mathcal I\\mathcal O_{S_i}$, $B_i=\\mathcal J_i$, and $W_i=e_i^{-1}U$. Quasi-compactness of $e_i$ makes $W_i$ quasi-compact. Etale maps are flat by [def-weil-etale-morphism]. Thus [thm-nagata-blowup-flat-base-change], with the comparison of [def-nagata-blowup-flat-base-change-map], identifies $T_i=S_i\\times_SS_1$ with $\\operatorname{Bl}_{A_i}S_i$. The ideal $A_i$ is finite type and quasi-coherent and is the unit ideal on $W_i$: on affine inverse-image charts extension sends a finite generating list to its images and commutes with localization, by [def-nagata-extended-ideal] and [pqf-def-coherent]. Hence this is a $W_i$-admissible blowup, and [lem-trf-module-admissible-blowup-calculus] (2), applied over $S_i$, makes $T_i$ qcqs.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "def-nagata-extended-ideal",
+    "pqf-def-coherent",
+    "def-nagata-admissible-blowup",
+    "lem-trf-module-admissible-blowup-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; Tag 080K, definition-admissible-blowup."
+   }
+  },
+  {
+   "text": "The maps $T_i\\to S_1$ are base changes of $e_i$, and, by the fibre-product universal property, $Y_i\\cong X_i\\times_X X_1$ over $X_1$. Apply [lem-weil-pbc-etale-scheme-base-change] to $e_i$ and $j_i$, and [lem-pc-quasi-compact-base-change] to $e_i$. They give the asserted etaleness and quasi-compactness. Whenever an original family covers, [lem-weil-pbc-etale-covering-base-change] gives joint surjectivity of that base-changed family. No covering hypothesis is needed for any other conclusion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1: conditions (1) and (2)."
+   }
+  },
+  {
+   "text": "Let $d_i:T_i\\to S_i$ be the projection. The inverse image $d_i^{-1}W_i$ equals the inverse image of $U_1$ under $T_i\\to S_1$, by commutativity. It is quasi-compact because $T_i\\to S_1$ is quasi-compact. The extended ideal $B_i\\mathcal O_{T_i}$ is finite type and quasi-coherent: on affine charts it is generated by the images of generators of $B_i$, and these descriptions localize. It is the unit ideal on $d_i^{-1}W_i$. Thus its specified blowup $T_i^*\\to T_i$ is admissible for this open, by [def-nagata-admissible-blowup]. Also $A_iB_i$ is finite type quasi-coherent: pairwise products of finite local generating lists generate it and localize; the product is the unit ideal on $W_i$.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "pqf-def-coherent",
+    "def-nagata-admissible-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080K, definition-admissible-blowup; Tag 080A, lemma-blowing-up-two-ideals."
+   }
+  },
+  {
+   "text": "Apply [thm-nagata-blowup-product-ideal] with its construction [def-nagata-blowup-product-comparison] over $S_i$, first to $(A_i,B_i)$ and then to $(B_i,A_i)$. Commutativity $A_iB_i=B_iA_i$ gives canonical identifications of $T_i^*$ with $\\operatorname{Bl}_{A_iB_i}S_i$ and with the blowup of $S_i^*=\\operatorname{Bl}_{B_i}S_i$ in $A_i\\mathcal O_{S_i^*}$. The required composite-centre supports hold in both orders. Indeed $V(A_iB_i)=V(A_i)\\cup V(B_i)$ by the prime-ideal criterion for a product. Moreover $V(B_i\\mathcal O_{T_i})=d_i^{-1}V(B_i)$, so its image is contained in $V(B_i)$. Every point of $V(B_i)\\setminus V(A_i)$ has a unique lift in this zero set, since $d_i$ is an isomorphism off $V(A_i)$ by [thm-nagata-global-blowup-complement]. Therefore $V(A_i)\\cup d_i(V(B_i\\mathcal O_{T_i}))=V(A_iB_i)$. Interchanging $A_i,B_i$ proves the other support equality.",
+   "uses": [
+    "thm-nagata-blowup-product-ideal",
+    "def-nagata-blowup-product-comparison",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080A, lemma-blowing-up-two-ideals; Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor (3), complement isomorphism."
+   }
+  },
+  {
+   "text": "Put $H_i=j_i^*\\mathcal F$, which is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Apply [lem-trf-module-strict-transform-flat-pullback] to $(f,e_i,g_i,j_i,\\mathcal I,\\mathcal F)$: both $e_i$ and $j_i$ are flat by their etaleness. It identifies $(Y_i\\to X_1)^*\\mathcal F_1$ with the $A_i$-strict transform of $H_i$ on $Y_i=X_i\\times_{S_i}T_i$, commuting with the quotient maps from ordinary pullback. All identifications of these ambient fibre products are the projection-preserving ones from [def-pc-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-trf-module-strict-transform-flat-pullback",
+    "def-weil-etale-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1; flat pullback of the defining supported-section quotient."
+   }
+  },
+  {
+   "text": "We compare module transforms, not just scheme transforms. Apply [lem-trf-strict-transform-comparison-epimorphism] over $S_i$ to the first blowup $d_i$ and the second blowup in $B_i\\mathcal O_{T_i}$, with specified composite ideal $K=A_iB_i$. Step 5 verifies precisely its centre-support hypothesis. It gives an epimorphism $\\theta:N\\twoheadrightarrow G$, where $N$ is the successive transform of $H_i$ and $G$ its $K$-strict transform, with $\\theta\\alpha=\\beta$ for their quotient maps from ordinary pullback; its kernel is supported on the inverse image of $V(K)$. By [lem-trf-iterated-transform-exceptional-support], $N$ has no nonzero local sections supported there, using the support equality in that node. Consequently every section of $\\ker\\theta$ is zero, so $\\theta$ is an isomorphism. Repeat these same two cited statements for the order $(B_i,A_i)$, with $K=B_iA_i$ and the second support equality of step 5. Both successive transforms are thus canonically $G$, and their comparison commutes with the ordinary-pullback quotient maps because each isomorphism satisfies $\\theta\\alpha=\\beta$. Together with step 6, this identifies the module asked for in the item with the successive transform in the reverse order.",
+   "uses": [
+    "lem-trf-strict-transform-comparison-epimorphism",
+    "lem-trf-iterated-transform-exceptional-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups (1); its proof comparing the quotient maps and supported kernels."
+   }
+  },
+  {
+   "text": "By hypothesis, the first transform $H_i^{B_i}$ in the reverse order is flat over $S_i^*$. This base is qcqs by [lem-trf-module-admissible-blowup-calculus] (2), and the inverse image of $W_i$ is quasi-compact by [lemma-nagata-admissible-blowup-over-open]. The second centre $A_i\\mathcal O_{S_i^*}$ is finite type quasi-coherent and unit on that open, by the same local-generator argument as step 4. Apply [lem-trf-module-admissible-blowup-calculus] (2) to this second admissible blowup and $H_i^{B_i}$. Its strict transform is its ordinary pullback and is flat over $T_i^*$. Step 7 gives the required flatness in the original order. The asserted identification respects the quotient maps throughout, as established in steps 6 and 7; the centre zero set was computed in step 5.",
+   "uses": [
+    "lem-trf-module-admissible-blowup-calculus",
+    "lemma-nagata-admissible-blowup-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080F, lemma-strict-transform-flat (2); Tag 0814 proof paragraph 1 and Morphisms lemma-base-change-module-flat."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-blowup-product-comparison",
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "lem-pc-quasi-compact-base-change",
+  "lem-trf-iterated-transform-exceptional-support",
+  "lem-trf-module-admissible-blowup-calculus",
+  "lem-trf-module-strict-transform-flat-pullback",
+  "lem-trf-strict-transform-comparison-epimorphism",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lemma-nagata-admissible-blowup-over-open",
+  "pqf-def-coherent",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-blowup-product-ideal",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1, expanded using divisors.tex Tags 0805, 080A, 080F, 080I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale local flatification hypotheses for a quasi coherent module are preserved by an admissible blowup and strict transform",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare two orders of blowups in product ideals to preserve local module flattening after modification of the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_forall_le\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M}, F.Stable → F.N 0 ≤ F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ and another filtration $\\\\{I'^n M\\\\}$ with $I^0 M \\\\subseteq I'^0 M$, there exists an integer $n_0$ such that for all $n \\\\geq 0$, the inclusion $I\"}\n  {\"name\": \"Ideal.Filtration.Stable.bounded_difference\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M},\\n  F.Stable → F'.Stable → F.N 0 = F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n ∧ F'.N (n + n₀) ≤ F.N n\", \"doc\": \"Given two stable filtrations $\\\\{I^n M\\\\}$ and $\\\\{I'^n M\\\\}$ of an $R$-module $M$ by powers of ideals $I$ and $I'$, if their initial submodules $I^0 M = I'^0 M$ coincide, then there exists an integer $n_\"}\n  {\"name\": \"Ideal.Filtration.pow_smul_le_pow_smul\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  (F : I.Filtration M) (i j k : ℕ), I ^ (i + k) • F.N j ≤ I ^ k • F.N (i + j)\", \"doc\": \"For any natural numbers $i, j, k$, the submodule generated by multiplying $I^{i + k}$ with the $j$-th term $I^j M$ of the filtration is contained within the submodule generated by multiplying $I^k$ wi\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] (s : Set S),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₛ : ↑s → Type u_5) [inst_7 : (r : ↑s) → Add\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.flat_of_localized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ (S : Type u_2) [inst : CommSemiring S] (M : Type u_3) [inst_1 : AddCommMonoid M] [inst_2 : Module S M] (s : Set S),\\n  Ideal.span s = ⊤ → (∀ (r : ↑s), Module.Flat S (LocalizedModule.Away (↑r) M)) → Module.Flat S M\", \"doc\": \"If for every element $ r $ in a subset $ S $, the localization of the module $ M $ at the multiplicative set generated by all powers of $ r $ is flat over $ S $, then $ M $ itself is flat over $ S $.\"}\n  {\"name\": \"Ideal.Filtration.mono\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (self : I.Filtration M) (i : ℕ), self.N (i + 1) ≤ self.N i\", \"doc\": \"For any commutative ring $ R $, ideal $ I $ of $ R $, and $ R $-module $ M $, the filtration of $ M $ by powers of $ I $ satisfies $ I^{i+1}M \\\\subseteq I^i M $ for all natural numbers $ i $. This esta\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local flatification hypotheses for a quasi coherent module are preserved by an admissible blowup and strict transform",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R S] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Unramified.Finite\", \"type\": \"[Module.Flat R M] : Module.Flat S M\", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationPrime\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": OfLocalizationPrime Flat\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, if for every prime ideal $ J ⊆ S $ the localized homomorphism $ R_{f^{-1}(J)} → S_J $ is flat, then $ f $ itself is flat. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*(flat|strict)|strict.*blowup|flatten.*blow",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"Flat\"",
+   "results": "0 hits: . Scheme flatness, localization and ideal filtrations do not state a module strict-transform comparison under the two blowup orders.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*(flat|strict)|strict.*blowup|flatten.*blow",
+   "results": "0 hits: . Scheme flatness, localization and ideal filtrations do not state a module strict-transform comparison under the two blowup orders.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local flatification hypotheses for a quasi coherent module are preserved by an admissible blowup and strict transform",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.of_stalkMap, Module.flat_of_isLocalized_span, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.Flat.flat_appLE. Scheme flatness, localization and ideal filtrations do not state a module strict-transform comparison under the two blowup orders.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local flatification hypotheses for a quasi coherent module are preserved by an admissible blowup and strict transform",
+   "results": "8 hits: Module.Flat.of_isLocalizedModule, Module.Flat.localizedModule, Module.Flat.isBaseChange, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.localization_map, Algebra.FormallyUnramified.flat_of_restrictScalars, RingHom.Flat.ofLocalizationPrime. Scheme flatness, localization and ideal filtrations do not state a module strict-transform comparison under the two blowup orders.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare two orders of blowups in product ideals to preserve local module flattening after modification of the base",
+   "results": "8 hits: Algebra.HasGoingDown.of_flat, Module.flat_of_isLocalized_span, Ideal.Filtration.Stable.exists_forall_le, Module.flat_of_localized_span, Ideal.Filtration.Stable.of_le, Ideal.Filtration.pow_smul_le_pow_smul, Ideal.Filtration.Stable.bounded_difference, localCohomology.ideal_powers_initial. Scheme flatness, localization and ideal filtrations do not state a module strict-transform comparison under the two blowup orders.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-flattening-descent",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Expanded 0814 argument: Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1: preservation of the hypotheses under an admissible blowup and comparison of the two blowup orders. Returned proof steps 2 and 3.",
+   "via": [
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-flatification-blowup-stability",
+  "worker": "stage1",
+  "summary": "Expanded the stability paragraph of Stacks 0814 using existing flat-base-change, product-blowup and module quotient/support nodes. Verified both composite-centre support equalities, all qcqs and covering hypotheses, and compatibility with ordinary-pullback quotient maps. No new nodes and no statement change.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Expanded 0814 argument: Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1: preservation of the hypotheses under an admissible blowup and comparison of the two blowup orders. Returned proof steps 2 and 3.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic flat base-change comparison for blowups used by Stacks 0814; the trace-formula unit has no replacement."
+   },
+   {
+    "node": "thm-nagata-blowup-product-ideal",
+    "why": "Generic product-ideal blowup comparison explicitly used by Stacks 0814."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic blowup complement isomorphism needed to verify the composite-centre support hypothesis."
+   },
+   {
+    "node": "lemma-nagata-admissible-blowup-over-open",
+    "why": "Generic admissible-blowup isomorphism over the preserved open; establishes quasi-compactness of that open."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-blowup-product-ideal",
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-admissible-blowup-over-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-d1cde7a26",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-d1cde7a26 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The split has no new nodes and keeps the statement unchanged; it matches Stacks 0814 proof paragraph 1 (flat.tex lemma-flatten-module-etale-localize), which I read against 080A, 080F and 080I. Steps 1-2: calculus (2) and admissible-over-open give qcqs of S_1, quasi-coherence of F_1 and quasi-compactness of U_1. Flat base change (thm-nagata-blowup-flat-base-change) gives T_i≅Bl_{IO}S_i, and T_i is qcqs by calculus (2) over S_i. Step 3: the étale, quasi-compact and covering base-change lemmas apply, and joint surjectivity is claimed only when the original family covers. Step 4 (marked elementary) checks admissibility on d_i^{-1}W_i; that open is quasi-compact because T_i→S_1 is quasi-compact, and T_i is qs. Step 5: thm-nagata-blowup-product-ideal identifies both blowup orders with Bl_{A_iB_i}. The support equality V(A)∪d(V(BO))=V(AB) is proved correctly using the complement isomorphism. Step 6: the hypotheses of lem-trf-module-strict-transform-flat-pullback hold (fj=eg, e and j étale hence flat). Step 7: the comparison epimorphism plus exceptional support gives ker θ=0; this is 080I(1) in module form, taken from the cited statements and compatible with the quotient maps. Step 8: calculus (2) on the admissible blowup of S_i^* in A_iO gives the ordinary pullback, which is flat. Advisory: the quasi-coherence of H_i^{B_i} needed in step 8 is left implicit, but it follows from the same calculus (2), which the step cites. Edge cases checked: unit centres, the empty family, F=0, and Spec k[t] with a t-torsion module. The four Nagata generic blowup tool_uses are accepted. A grep of the whole DAG for 0814 found no duplicate. There is no SGA citation and no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFlatificationBlowupStability",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleFlatification_blowup_stability",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.base",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.source",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.structureMap",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.sourceMap",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.finalSpace",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.finalProjection",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.originalProjection",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.finalModule",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.finalQuotient",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatification.ChartConclusion",
+   "AlgebraicGeometry.Scheme.Modules.etaleFlatification_blowup_stability"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFlatificationBlowupStability.lean",
+  "statement": "theorem etaleFlatification_blowup_stability {X S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (U : S.Opens) (_hU : IsCompact (U : Set S)) (f : X ⟶ S) (F : X.Modules) [hF : F.IsQuasicoherent] (ι : Type v) [Finite ι] (T V : ι → Scheme.{u}) [∀ i : ι, CompactSpace (T i)] [∀ i : ι, QuasiSeparatedSpace (T i)] (e : ∀ i : ι, T i ⟶ S) [∀ i : ι, QuasiCompact (e i)] [∀ i : ι, Etale (e i)] (g : ∀ i : ι, V i ⟶ T i) (j : ∀ i : ι, V i ⟶ X) [∀ i : ι, Etale (j i)] (h : ∀ i : ι, j i ≫ f = g i ≫ e i) (J : ∀ i : ι, (T i).IdealSheafData) [∀ i : ι, (J i).toModules.IsFiniteType] (_hJ : ∀ i : ι, Disjoint ((e i ⁻¹ᵁ U) : Set (T i)) ((J i).support : Set (T i))) (_hflat : ∀ i : ι, (cokernel (kernel.ι (moduleStrictTransformRestriction (g i) (J i) ((tensorPullback (j i)).obj F)))).IsFlatOver (pullback.snd (g i) (J i).blowupMap)) (B : IsAdmissible S U) : ∃ hI : B.I.toModules.IsFiniteType, CompactSpace B.I.blowup ∧ QuasiSeparatedSpace B.I.blowup ∧ IsCompact ((B.I.blowupMap ⁻¹ᵁ U) : Set B.I.blowup) ∧ (@moduleStrictTransform _ _ f B.I hI F hF).IsQuasicoherent ∧ (∀ i : ι, CompactSpace (EtaleFlatification.base (e i) B.I) ∧ QuasiSeparatedSpace (EtaleFlatification.base (e i) B.I) ∧ QuasiCompact (pullback.snd (e i) B.I.blowupMap) ∧ Etale (pullback.snd (e i) B.I.blowupMap) ∧ Etale (EtaleFlatification.sourceMap f (e i) (g i) (j i) (h i) B.I)) ∧ ((∀ s : S, ∃ i : ι, ∃ t : T i, e i t = s) → ∀ s : B.I.blowup, ∃ i : ι, ∃ t : EtaleFlatification.base (e i) B.I, pullback.snd (e i) B.I.blowupMap t = s) ∧ ((∀ x : X, ∃ i : ι, ∃ y : V i, j i y = x) → ∀ x : ↥(Limits.pullback (C := Scheme.{u}) f B.I.blowupMap), ∃ i : ι, ∃ y : EtaleFlatification.source (e i) (g i) B.I, EtaleFlatification.sourceMap f (e i) (g i) (j i) (h i) B.I y = x) ∧ ∀ i : ι, @EtaleFlatification.ChartConclusion _ _ _ _ U f (e i) (g i) (j i) (h i) B.I hI (J i) inferInstance F hF",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer FIX (stage-2 second reader, 2026-10-24): the statement used declarations owned by nodes outside stmt_deps (successiveModuleStrictTransform/π of theorem node lem-trf-strict-transform-comparison-epimorphism, moduleStrictTransformπ of theorem node lem-trf-strict-transform-sheaf-kernel, blowupFlatBaseChangeIso of thm-nagata-blowup-flat-base-change, tensorPullbackCompositionIso of uncited def-pc-tensor-pullback-composition-iso). Re-expressed through cited definitions only: the strict-transform cokernel bodies (def-trf-module-strict-transform), tensorPullbackSectionComp (def-pc-module-pullback) transported by eqToHom along the stated morphism equalities; the redundant t-equation with blowupFlatBaseChangeIso dropped (t over S_i is unique by the blowup universal property, Tag 0806); the unused [Etale e] binder of ChartConclusion removed. Same mathematical statement.",
+  "fixed_by": "NT-stage2-cc-7b1f20e1c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b1f20e1c",
+  "group": "NI",
+  "result": "fix",
+  "note": "Maths faithful to node and Stacks 0814 p1: all hypotheses (qcqs S/S_i, qc etale e_i, etale j_i, finite-type J_i disjoint from e_i^-1 U, unfolded J-strict-transform flatness, IsAdmissible B) and all conclusions (qcqs, qc U_1, qcoh F_1, qc/etale base changes, conditional joint surjectivity, admissibility of J.comap d, flatness of final module, t/c/r over S_i (unique by Tag 0806), support union, m pinned by projections + IsIso, unique theta with quotient square) checked; edge cases (empty family, empty schemes, F=0, unit centres, torsion) and universes (u, independent v) fine; record statement verbatim. H2/H4 fault fixed: statement used declarations of nodes outside stmt_deps (successiveModuleStrictTransform/pi of theorem node lem-trf-strict-transform-comparison-epimorphism, moduleStrictTransformpi of theorem node lem-trf-strict-transform-sheaf-kernel, blowupFlatBaseChangeIso of thm-nagata-blowup-flat-base-change, tensorPullbackCompositionIso of uncited def-pc-tensor-pullback-composition-iso). FIX inlines the strict-transform cokernel bodies (def-trf-module-strict-transform), uses tensorPullbackSectionComp (def-pc-module-pullback) with eqToHom along the same morphism equalities, drops the redundant t = flat-base-change equation, removes the unused [Etale e] binder of ChartConclusion and updates the lean record statement verbatim. Fixed file compiled once via nt_compile --json: 17.0 s, exit 0, no errors or warnings."
+ }
+}

@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-scheme-cotangent-transitivity",
+ "kind": "statement",
+ "title": "Functoriality and transitivity triangle for cotangent complexes of schemes",
+ "statement": "Let $X\\xrightarrow{a}Y\\xrightarrow{b}Z$ be arbitrary morphisms of schemes [def-pc-scheme]. Use the intrinsic cotangent complexes $L_{X/Y}$, $L_{Y/Z}$ and $L_{X/Z}$ of [lem-trf-lci-cotangent-presentation], defined without any lci hypothesis by the standard polynomial-resolution construction. In $D(\\mathcal O_X)$ [def-pc-derived-category] there is a canonical distinguished triangle\n$$La^*L_{Y/Z}\\xrightarrow{u_{a,b}}L_{X/Z}\\longrightarrow L_{X/Y}\\longrightarrow (La^*L_{Y/Z})[1].$$\nHere $La^*$ is the derived module pullback, computed by flat resolutions before tensoring, and ordinary module pullback is [def-pc-module-pullback]. The arrow $u_{a,b}$ is the canonical cotangent functoriality arrow. These arrows commute with restriction to open subschemes. For any further morphism $c:W\\to X$, after the canonical derived pullback composition identification,\n$$u_{a\\circ c,b}=u_{c,b\\circ a}\\circ Lc^*(u_{a,b}).$$\nThe arrow for an identity source map is the identity. The canonical augmentations $L_{Y/Z}\\to\\Omega^1_{Y/Z}[0]$ and $L_{X/Z}\\to\\Omega^1_{X/Z}[0]$ induce $H^0(L_{Y/Z})=\\Omega^1_{Y/Z}$ and $H^0(L_{X/Z})=\\Omega^1_{X/Z}$, with differentials [def-weil-pbc-kahler-differentials]. They commute with $u_{a,b}$ and the differential map: if $a$ is flat [def-weil-flat-morphism], then $H^0(u_{a,b})$ is exactly $a^*\\Omega^1_{Y/Z}\\to\\Omega^1_{X/Z}$, locally $r\\otimes\\mathrm ds\\mapsto r\\,\\mathrm d(a^\\sharp s)$. No separation, finite type, Noetherianity, smoothness or etaleness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08T4 (lemma-triangle-ringed-spaces), applied to schemes as in Tag 08T2 (definition-cotangent-morphism-schemes); Tag 08UV (lemma-H0-L-morphism-ringed-spaces); the canonical functorial maps of Tag 08QL (section-functoriality) and the sheaf standard-resolution construction in Tags 08SR, 08SS, 08SV. The composition and augmentation clauses spell out functoriality of this construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-trf-lci-cotangent-presentation",
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-flat-morphism",
+  "def-a1-relative-differentials-pullback-map",
+  "def-pc-derived-pullback",
+  "lem-pc-recorded-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use the flat K-flat models and canonical maps of [lem-sfb-standard-sheaf-cotangent-flat-functorial-model]. For injective $\\mathcal B\\to\\mathcal C$, [lem-sfb-injective-sheaf-cotangent-sequence-roof] gives a short exact sequence and a canonical roof identifying its quotient with $L_{\\mathcal C/\\mathcal B}$, including its arrow. Apply [lem-weil-pbc-complex-ses-triangle]; [lem-pur-derived-change-of-rings] identifies the first term with derived scalar extension. This gives the required triangle of ring sheaves in the injective case.",
+   "uses": [
+    "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+    "lem-sfb-injective-sheaf-cotangent-sequence-roof",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SZ (lemma-triangle-sheaves-rings), injective case, displayed differential sequence and canonical roof; Tags 08SD (remark-triangle) and 08SE (remark-explicit-map)."
+   }
+  },
+  {
+   "text": "For arbitrary $j:\\mathcal B\\to\\mathcal C$, apply Step 1 to $\\mathcal A\\to\\mathcal B\\to\\mathcal D=\\mathcal B\\times\\mathcal C$ via the injective graph $b\\mapsto(b,jb)$, then $-\\otimes^{\\mathbf L}_{\\mathcal D}\\mathcal C$ [lem-pur-derived-change-of-rings] on the K-flat models of [lem-sfb-standard-sheaf-cotangent-flat-functorial-model]. On sections $D\\to C$ is localization at $e=(0,1)$: $d/e^n\\mapsto\\operatorname{pr}_C(d)$, inverse $c\\mapsto(0,c)/e$. The localization clause of [lem-trf-affine-cotangent-comparison] (source set $\\{1\\}$) for $A\\to D$ and $B\\to D$, with [lem-weil-pbc-ringed-site-module-sheafification-exact, lem-pc-sites-module-sheafification-tensor], identifies the last two terms with $L_{\\mathcal C/\\mathcal A}$, $L_{\\mathcal C/\\mathcal B}$; the first by $(v\\otimes d)\\otimes c\\mapsto v\\otimes\\operatorname{pr}_C(d)c$. These comparisons are standard maps for squares through $\\operatorname{pr}_C$, so by strict composition both arrows become the standard ones for $\\mathcal A\\to\\mathcal B\\to\\mathcal C$, compatibly with open restriction.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-sfb-standard-sheaf-cotangent-flat-functorial-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SZ (lemma-triangle-sheaves-rings), final reduction; Tag 08SF (lemma-localize)."
+   }
+  },
+  {
+   "text": "On $X$ set $\\mathcal A=(ba)^{-1}\\mathcal O_Z$, $\\mathcal B=a^{-1}\\mathcal O_Y$, $\\mathcal C=\\mathcal O_X$. By [lem-trf-lci-cotangent-presentation, lem-cbc-normalized-alternating-homotopy-equivalence] the three intrinsic complexes are these standard sheaf complexes, and the inverse-image clause of [lem-trf-affine-cotangent-comparison] gives $a^{-1}L_{Y/Z}=L_{\\mathcal B/\\mathcal A}$, flat K-flat; so [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives $La^*L_{Y/Z}=L_{\\mathcal B/\\mathcal A}\\otimes_{\\mathcal B}\\mathcal O_X$ and Step 2 is the scheme triangle with first arrow $u_{a,b}$. For $c:W\\to X$, $Lc^*$ is computed on these models, which stay flat K-flat. By the inverse-image and consecutive-map clauses of [lem-sfb-standard-sheaf-cotangent-flat-functorial-model] and $s\\otimes(r\\otimes v)\\mapsto s\\,c^\\sharp(r)\\otimes v$, both sides of the composition law send $s\\otimes\\mathrm dp$ to $s\\,\\mathrm d((ac)^\\sharp p)$; identity maps give identities.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-cbc-normalized-alternating-homotopy-equivalence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-standard-sheaf-cotangent-flat-functorial-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08T2 (definition-cotangent-morphism-schemes), 08T4 (lemma-triangle-ringed-spaces), 08SS and 08SV."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-standard-sheaf-cotangent-augmentation] to the two structure-ring maps. [lem-trf-topos-inverse-image-differentials] identifies inverse-image differentials; the natural augmentation square gives the claimed formula. For flat $a$, [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective] makes $a^*$ exact, so it commutes with $H^0$ and $H^0(La^*L_{Y/Z})=a^*\\Omega^1_{Y/Z}$. No other geometric hypothesis was used.",
+   "uses": [
+    "lem-sfb-standard-sheaf-cotangent-augmentation",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QF (lemma-identify-H0), 08UR (lemma-H0-L-morphism-sheaves-rings), and 08UV (lemma-H0-L-morphism-ringed-spaces), with the standard face calculation of Tag 08PN (definition-cotangent-complex-ring-map); sites-modules.tex Tags 08TP (lemma-differentials-sheafify) and 08TQ (lemma-pullback-differentials)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+  "lem-sfb-injective-sheaf-cotangent-sequence-roof",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-cbc-normalized-alternating-homotopy-equivalence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-standard-sheaf-cotangent-augmentation",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08SZ and 08T4, proofs of lemma-triangle-sheaves-rings and lemma-triangle-ringed-spaces, via the injective standard-resolution construction of Tags 08SD/08SE; Tag 08SS functoriality. The generators-and-relations verification of the canonical H0 augmentation is written out in Step 10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cotangent.*transitiv|transitiv.*cotangent|cotangent.*triangle|triangle.*cotangent",
+   "results": "{\"t\": \"2026-10-22T04:38:28Z\", \"tool\": \"grep\", \"query\": \"cotangent.*transitiv|transitiv.*cotangent|cotangent.*triangle|triangle.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern naive cotangent modules or abstract distinguished triangles, not the full scheme cotangent complex and its canonical transitivity triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"triangle\"",
+   "results": "{\"t\": \"2026-10-22T04:38:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"cotangent\\\", \\\"triangle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern naive cotangent modules or abstract distinguished triangles, not the full scheme cotangent complex and its canonical transitivity triangle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitivity distinguished triangle of full cotangent complexes for morphisms of schemes",
+   "results": "{\"t\": \"2026-10-22T04:38:29Z\", \"tool\": \"leansearch\", \"query\": \"Transitivity distinguished triangle of full cotangent complexes for morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_iff\", \"CochainComplex.mappingConeCompTriangle\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished\", \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"DerivedCategory.triangleOfSES_distinguished\", \"CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism\", \"HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism\", \"HomotopyCategory.Pretriangulated.rotate_distinguished_triangle\"], \"digest\": \"f72cae085d43fb89\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern naive cotangent modules or abstract distinguished triangles, not the full scheme cotangent complex and its canonical transitivity triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cotangent complex functoriality for ringed spaces gives a derived pullback map and the relative cotangent complex is its cone",
+   "results": "{\"t\": \"2026-10-22T04:38:31Z\", \"tool\": \"leanfinder\", \"query\": \"Cotangent complex functoriality for ringed spaces gives a derived pullback map and the relative cotangent complex is its cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"Algebra.H1Cotangent.map\", \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"Algebra.Extension.Cotangent.map\", \"Algebra.Extension.H1Cotangent.map\", \"Algebra.Extension.CotangentSpace.map\"], \"digest\": \"27c759e8fc3c971d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern naive cotangent modules or abstract distinguished triangles, not the full scheme cotangent complex and its canonical transitivity triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable morphisms of schemes the cotangent complexes form the canonical transitivity distinguished triangle, naturally and compatibly with composition of source maps",
+   "results": "{\"t\": \"2026-10-22T04:38:32Z\", \"tool\": \"leanfinder\", \"query\": \"For composable morphisms of schemes the cotangent complexes form the canonical transitivity distinguished triangle, naturally and compatibly with composition of source maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"Algebra.Extension.Cotangent.map_comp\", \"Algebra.Extension.CotangentSpace.map_comp\", \"Algebra.Extension.CotangentSpace.map_comp_apply\", \"Algebra.Extension.H1Cotangent.map_comp\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"Algebra.Generators.Cotangent.exact\"], \"digest\": \"ffc8b626cff2df61\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern naive cotangent modules or abstract distinguished triangles, not the full scheme cotangent complex and its canonical transitivity triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cotangent complexes of schemes have a canonical transitivity distinguished triangle compatible with source composition and differential augmentation",
+   "results": "{\"t\": \"2026-10-22T05:01:22Z\", \"tool\": \"leanfinder\", \"query\": \"Cotangent complexes of schemes have a canonical transitivity distinguished triangle compatible with source composition and differential augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"Algebra.H1Cotangent.map\", \"Algebra.Extension.Cotangent.map_comp\", \"Algebra.Extension.CotangentSpace.map_comp\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"Algebra.Extension.H1Cotangent.map_comp\", \"Algebra.Extension.CotangentSpace.map_comp_apply\"], \"digest\": \"1f4233e132d6d277\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the full scheme cotangent-complex statement is not provided by naive cotangent modules, representation resolutions or abstract distinguished-triangle lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*transitiv|transitiv.*cotangent|cotangent.*triangle|triangle.*cotangent",
+   "results": "{\"t\": \"2026-10-22T05:01:28Z\", \"tool\": \"grep\", \"query\": \"cotangent.*transitiv|transitiv.*cotangent|cotangent.*triangle|triangle.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the full scheme cotangent-complex statement is not provided by naive cotangent modules, representation resolutions or abstract distinguished-triangle lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"triangle\"",
+   "results": "{\"t\": \"2026-10-22T05:01:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"cotangent\\\", \\\"triangle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the full scheme cotangent-complex statement is not provided by naive cotangent modules, representation resolutions or abstract distinguished-triangle lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitivity distinguished triangle for cotangent complexes of morphisms of schemes",
+   "results": "{\"t\": \"2026-10-22T05:01:39Z\", \"tool\": \"leansearch\", \"query\": \"Transitivity distinguished triangle for cotangent complexes of morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingConeCompTriangle\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished\", \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.triangleOfSES_distinguished\", \"HomotopyCategory.Pretriangulated.distinguishedTriangles\", \"HomotopyCategory.Pretriangulated.rotate_distinguished_triangle\", \"DerivedCategory.mem_distTriang_iff\"], \"digest\": \"64952d27f6ff22de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the full scheme cotangent-complex statement is not provided by naive cotangent modules, representation resolutions or abstract distinguished-triangle lemmas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full cotangent complex for ringed spaces, derived pullback, transitivity exact triangle and zeroth cohomology equal to relative differentials",
+   "results": "{\"t\": \"2026-10-22T05:02:31Z\", \"tool\": \"leanfinder\", \"query\": \"Full cotangent complex for ringed spaces, derived pullback, transitivity exact triangle and zeroth cohomology equal to relative differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.δ\", \"Algebra.Generators.H1Cotangent.δ\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"Algebra.Extension.H1Cotangent.map\", \"Algebra.Extension.toKaehler\"], \"digest\": \"a56f2e8271fbaf28\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the full scheme cotangent-complex statement is not provided by naive cotangent modules, representation resolutions or abstract distinguished-triangle lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-source-adjunction-line",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; etale source locality of the adjunction line used in the codimension-one differential calculation of the regular-pullback input; general scheme cotangent transitivity supporting the source-etale determinant comparison",
+   "via": [
+    "lem-sfb-etale-source-adjunction-line",
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-scheme-cotangent-transitivity",
+  "worker": "stage1",
+  "summary": "Finer split authorized by the released maintainer repair note dated 2026-10-22: retain the exact scheme statement and route, extract three statement-only sheaf-level supporting arguments, and assemble the triangle, composition law and H0 description in four steps under 3000 characters. Existing NS quotient-resolution lemma remains available; its sheaf use and canonical comparison are in the new sequence-roof statement. Preserved all earlier proof text in the report and sandbox archive, with all existing searches and provenance.",
+  "blueprint": "Inherited detailed from.place and via are retained (ancestor remains None). Old Steps 1,2,9 are carried by the new flat-functorial-model node; old Steps 3-5 by the new injective-sequence-roof node; old Steps 10-11 by the new augmentation node. Old Steps 6-8 remain as the explicit triangle assembly, graph/localization reduction and scheme substitution; the normalized/alternating comparison is still cited.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-affine-cotangent-comparison",
+    "why": "Generic Sheaf cotangent stalks, section maps and ring localization used for the intrinsic cotangent construction and its sheaf/derived computations; it does not replace the unit-level constructibility-stability route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used for the intrinsic cotangent construction and its sheaf/derived computations; it does not replace the unit-level constructibility-stability route."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic Tensor and sheafification for modules over a presheaf of rings used for the intrinsic cotangent construction and its sheaf/derived computations; it does not replace the unit-level constructibility-stability route."
+   },
+   {
+    "node": "lem-trf-lci-cotangent-presentation",
+    "why": "Generic Intrinsic cotangent complex: lci models, Tor-independent base change and smooth specialization used for the intrinsic cotangent construction and its sheaf/derived computations; it does not replace the unit-level constructibility-stability route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used for the intrinsic cotangent construction and its sheaf/derived computations; it does not replace the unit-level constructibility-stability route."
+   },
+   {
+    "node": "lem-trf-topos-inverse-image-differentials",
+    "why": "Generic Inverse image preserves sheaf differentials used for the intrinsic cotangent construction and its sheaf/derived computations; it does not replace the unit-level constructibility-stability route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Only exactness of Zariski module pullback for a flat scheme morphism is used to commute pullback with H0; no unit-level route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-affine-cotangent-comparison",
+  "lem-pc-stalk-tensor-complex",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-16df3949c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-16df3949c (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every cited statement and Stacks cotangent.tex 08SZ in full; tags 08SR/08SS/08SV/08T2/08T4/08SD/08SE/08SF/08QF/08PN/08UR/08UV/08TP/08TQ/06YQ match tags/tags. Re-split: the released 2026-10-22 note (>=3 nodes, assembly <=3000 characters) is answered, and the live item still has the old 11-step proof, so nothing supersedes this delivery. Old steps map as follows: 1, 2 and 9 go to the new flat-functorial-model node (free stalks via A_t[B_t], flat, K-flat by 06YQ, strict square maps, consecutive-map and inverse-image clauses; all true). Steps 3-5 go to the new injective sequence-roof node, which matches 08SZ line by line: injective on sections, quotient-resolution lemma applied twice, old/complementary variable SES with Kahler base change, alpha/beta quasi-isos, and Q->Qbar->Rbar = Q->R->Rbar gives the equality of arrows; B=C was tested. Steps 10-11 go to the new augmentation node: faces of [p] give delta_{eps p} = sum eps(dp/dx_b) delta_b, additivity/Leibniz/A-vanishing are equivalent to these relations, tested on Z->F_2, B=0 and A=B. Steps 6-8 stay as assembly. Old step 7 (graph B->BxC, localization at e=(0,1)) stays inline as a short application of the localization clause of lem-trf-affine-cotangent-comparison; I accept that. Step 4 replaces the stalk argument by lem-weil-pbc-flat-module-pullback-exact-pushforward-injective, whose hypothesis is exactly flat a. No new node restates the item, and none duplicates an existing node: lem-trf-cotangent-transitivity-triangle is ring-level with a different route, and the naive-cotangent cokernel node is a different presentation. Fixes: (1) B3: the augmentation node cited lem-trf-sheafified-module-differentials-cokernel and def-weil-pbc-kahler-differentials in its statement without them in stmt_deps; added. (2) E5: item steps 2-3 had blurred old steps 7-9. I restored 'apply Step 1 to A->B->D', the FFM K-flat models, the reason both arrows are the standard ones (the localization maps are standard maps for squares through pr_C, plus strict composition), a^{-1}L_{Y/Z}=L_{B/A}, Lc^* on pulled-back flat K-flat models, the associator formula and the identity case. The assembly is now 2982 characters. Batch-5: lem-trf-cotangent-resolution-coherence (roof node) and lem-trf-affine-cotangent-comparison (flat-model node) have trf closures made only of simplicial, derived and cotangent foundations, with no trace-formula or Poincare content, and the base item already cited both, so I accept them. My added lem-trf-sheafified-module-differentials-cokernel is generic, and its only trf node is itself. The split_report tool_uses are generic and accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeCotangentTransitivity",
+  "declaration": "AlgebraicGeometry.CotangentPresentation.exists_schemeCotangentTransitivity",
+  "declarations": [
+   "AlgebraicGeometry.CotangentPresentation.sourceArrow",
+   "AlgebraicGeometry.CotangentPresentation.identityComplexIso",
+   "AlgebraicGeometry.CotangentPresentation.relativeArrow",
+   "AlgebraicGeometry.CotangentPresentation.sourceIdentity",
+   "AlgebraicGeometry.CotangentPresentation.singleH0Iso",
+   "AlgebraicGeometry.CotangentPresentation.augmentationH0",
+   "AlgebraicGeometry.CotangentPresentation.pullbackSingleIso",
+   "AlgebraicGeometry.CotangentPresentation.pullbackSingleComparison",
+   "AlgebraicGeometry.CotangentPresentation.pullbackAugmentationH0",
+   "AlgebraicGeometry.CotangentPresentation.sourceRestriction",
+   "AlgebraicGeometry.CotangentPresentation.PullbackShiftCompatibility",
+   "AlgebraicGeometry.CotangentPresentation.pullbackShiftHom",
+   "AlgebraicGeometry.CotangentPresentation.TransitivityProperties",
+   "AlgebraicGeometry.CotangentPresentation.exists_schemeCotangentTransitivity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeCotangentTransitivity.lean",
+  "statement": "theorem exists_schemeCotangentTransitivity (C : Coherence.{u}) (κ : Naive.Comparison C) : ∃ (D : System C) (F : AffineIdentifications D) (E : LciIdentifications D F κ) (σ : ∀ {X Y : Scheme.{u}} (a : X ⟶ Y), (derivedPullback.{u, w} a).CommShift ℤ) (δ : ∀ {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z), cotangent (D.model a) ⟶ ((derivedPullback a).obj (cotangent (D.model b)))⟦(1 : ℤ)⟧), Properties D F κ E ∧ TransitivityProperties D σ δ",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded intrinsic standard-resolution System, model, change and augmentation, with the same existential construction data and Properties as the lci presentation dependency. The explicit sourceArrow and relativeArrow fix the first two triangle maps; no arbitrary derived map is assumed. Helpers retain the recorded pullback counit/composition comparison and canonical augmentation-induced H0 maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca07f91f8",
+  "group": "O1",
+  "result": "pass",
+  "note": "Every clause of the node is rendered: the 08T4 triangle with sourceArrow = derivedChange of the D.square (b, a≫b, a, 𝟙) square and relativeArrow = the standard change after the identity-pullback iso, with δ existential; source, relative and boundary open-restriction squares, the shift σ pinned by NatTrans.CommShift of the retained counit; the composition law in the right direction (recordedDerivedPullbackComposition c a .inv : L(c≫a)→Lc La); identity via sourceIdentity plus IsIso; IsIso of the augmentation-induced H0; the augmentation square through relativeDifferentialsPullbackMap; Flat-only flat_identification, flat_H0 and the pure-tensor generator formula. No extra hypotheses; universes u and w as in the dependency. The re-existentialised System is pinned by Properties.laws. Mechanical finding: the lem-pc-recorded-pullback-composition stmt_dep is genuine (recordedDerivedPullbackComposition = asIso of the lift whose IsIso is that theorem). Records: node differs from live only in lean and stmt_deps, no base stmt_dep dropped, lean.statement verbatim, docstrings and the 4-step proof present, nothing hollow, only sorry, imports exist. Advisory: the base theorem stmt_dep lem-trf-lci-cotangent-presentation owns the plain System API; an existing:true def node would be cleaner. No compile: no file changed."
+ }
+}

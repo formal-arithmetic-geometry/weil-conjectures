@@ -47,12 +47,14 @@
    }
   },
   {
-   "text": "Test the Tor-amplitude assertion of step 2 against the $B_n$-module sheaf $B_n$ placed in degree zero [def-weil-proetale-tor-amplitude]. The derived tensor in this test is $T_n\\otimes^L_{B_n}B_n\\cong T_n$: with the K-flat representative $P$ used in [def-weil-derived-tensor], the termwise maps $P\\otimes_{B_n}B_n\\to P$, $x\\otimes r\\mapsto rx$, and $P\\to P\\otimes_{B_n}B_n$, $x\\mapsto x\\otimes1$, are inverse chain maps by the tensor balancing relation and $B_n$-linearity of the differential. Thus $\\mathcal H^i(T_n)=0$ for $i\\notin I$. This argument applies to every $n\\geq1$.",
+   "text": "Choose a cochain representative L of T_n using essential surjectivity of the derived localization, and choose a K-flat resolution f:P to L by [lem-pc-kflat-resolution]. Test the Tor-amplitude assertion of step 2 against the coefficient sheaf B_n in degree zero [def-weil-proetale-tor-amplitude]. The intrinsic representative-level derivedTensor is Q(Tot(P tensor B_n[0])). The additive sheaf tensor structure (the tensorPreadditive lemma in [lem-weil-pbc-independent-bounded-flat-kflat]) permits the ordinary complex right unitor. Localizing this unitor and composing with Q(f) and Q(L) isomorphic to T_n identifies the test object with T_n. Transport the vanishing of its ith cohomology across this isomorphism for every i outside I. This proves the support inclusion for every n without changing either interval endpoint.",
    "uses": [
     "def-weil-proetale-tor-amplitude",
-    "def-weil-derived-tensor"
+    "def-weil-derived-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
     "place": "Final sentence: the uniform cohomological-support condition follows by the tensor-unit test"
@@ -65,12 +67,16 @@
   "def-weil-finite-tor-amplitude",
   "cor-weil-finite-constructible-hom",
   "def-weil-proetale-tor-amplitude",
-  "def-weil-derived-tensor"
+  "def-weil-derived-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "M3",
+  "date": "2026-10-22",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
-  "place": "Sentences 2–4: residue-Tor control followed by finite internal Hom; tensor-unit calculation written out"
+  "place": "Sentences 2–4, implemented from integral_residue_tor and finite_constructible_derivedHom_proEtale; the cohomological-support step is proved by the K-flat resolution theorem and the localized complex right unitor."
  },
  "mathlib_searches": [
   {
@@ -221,5 +227,27 @@
   "group": "Q18",
   "result": "pass",
   "note": "Each node clause maps to the Lean. ℓ≠p is l ≠ D.p. X is separated with LocallyOfFiniteType and QuasiCompact over Spec D.k. dim X ≤ d is topologicalKrullDim. K,L use sfIntegralConstructible on scalarReductionSource. The residue bounds are support inclusions at reduction index 0. T_n is derivedInternalHomOfUniverses.{u+1,u,u} over proEtaleConstantRing X A_{n+1} at (op K_n, L_n), identical to cor-weil-finite-constructible-hom's Lean. The conclusions are intrinsicFiniteTorsionConstructible, HasProEtaleTorAmplitude and support ⊆ Icc, all on [c-b-2d, e-a+2d] with no dependence on n. Checked in source: scalarReductionTarget n is the constant A_{n+1} sheaf, so ∀ n covers all levels ≥ 1. No extra hypotheses; the universe convention matches the recorded APIs. The node without its lean field equals side-live, the dependency nodes are byte-identical, the statement is verbatim and there are no name collisions. The helper has real data. Docstrings carry the source, blueprint id and the 3 proof steps; the proof is sorry only. Both report sections are present. Edge cases checked: n=1, d=0, empty X, zero complexes, R/ϖ over a point. Nothing compiled because nothing was changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-63e60",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261022T145625-L-2028086",
+  "kind": "proof",
+  "note": "independent cc review: delivered ResidueControlledFiniteHoms.lean vs live clone (signature identical, 0 importers, only plain imports removed); node proof fields vs Lean; unit sk-prop-sf-biduality-general realized empty; #print axioms in scratch copy"
  }
 }

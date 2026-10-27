@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-etale-cofinal-support-realization",
+ "kind": "statement",
+ "title": "Geometric realization of normalized cofinal support",
+ "statement": "Let k be a finite-field datum of characteristic p [def-weil-finite-field-fiber], let $\\ell\\ne p$ be prime, and let $f:X\\to Y$ be a separated finite-type morphism of finite-type k-schemes with fixed compactification c [def-weil-compactifications-refinements]. There exists a CofinalSupport t with all the ordinary, derived, factorization, section and evaluation normalizations of [def-pur-etale-system-cofinal-data]. Its projection data additionally satisfy: every $q_a$ is invertible and $q_{a\\circ b}$ is the successive coefficient-projection path, under the canonical balanced scalar associators [lem-pur-etale-system-coefficient-projection]. This is solely the geometric realization; it asserts no formula involving a chosen compact-support right adjoint.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, printed pp. 21--23; finite-block generalization already in parent proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-cofinal-data",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-field-fiber",
+  "lem-pur-etale-system-coefficient-projection"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "let t(m) be the least i with m ≤ r(i). It is monotone, onto, and its fibers\nare nonempty finite intervals: t(r(i))=i and t(m)=i implies m≤r(i). Apply the block\nrepetition theorem on each small etale site to obtain the exact repetition functors,\ntheir endpoint adjunctions, and preservation of K-injective complexes. Normalize the\nordinary proper comparison on sections, and the open comparison by the extension by\nzero adjunction. Their derived composite is exactly CofinalRepeatSupport.kappa.\nTransport the selected ordinary extension through strictSystemSequenceEquivalence.\nIt has at m the tensor C_m ⊗_{C_{r(t(m))}} N_{t(m)}, with transitions given by the\noriginal system transition followed by the tensor associator. Its unit has component\nx↦1⊗x at a selected index. The ordinary selected-extension theorem proves its\nadjunction to the actual sectionwise cofinalRestriction, not just to an isomorphic\nunrecorded restriction. Derive this adjunction using flat-term K-flat representatives\non the sequence site. Evaluation is an exact ringed-topos inverse image and takes\nthese representatives to level K-flat representatives. The normalized derived-mate\ncomparison therefore supplies the recorded level isomorphism and its representative\nnormalization. Transport through a flat-term K-flat resolution also proves computation\non every K-flat representative, by the acyclic K-flat cone criterion.\nThe ordinary extension is repetition followed by change of coefficients for the actual\nmap D_m=C_{r(t(m))}→C_m. Identify those left adjoints by equality of their units. On\nsimultaneously level K-flat representatives both compute the same ordinary strict\ncomplex, including transitions; universal left-derived uniqueness supplies the\nfactorization and exactly its displayed counit normalization.\nUse etaleSystemCoefficientProjection for the fixed compactification. Its q for D→C\nis invertible. Define h by the X factorization, the inverse of q on repeated systems,\nthe derived repetition comparison kappa, and the inverse Y factorization. Cancellation\nof these four factors proves the support normalization. Evaluate the same word at m.\nThe normalized cochain comparisons identify repetition with evaluation at t(m), and\ncoefficient projection evaluation is compactScalarMap for C_{r(t(m))}→C_m. Cancel the\nordinary/derived factorization isomorphisms to obtain precisely CofinalSupport.evaluation.\nChoose the ordinary restriction compositors to be identity on selected sections and\nlocalize them. These constructions give every field of CofinalSupport. No right adjoint\nto compact support, counit formula for such a right adjoint, or subsequence coherence\nis used in this construction.",
+   "uses": [
+    "lem-pur-system-block-repetition",
+    "lem-pur-system-evaluation-kflat",
+    "lem-pur-system-selected-derived-extension",
+    "lem-pur-system-ordinary-selected-extension",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-etale-system-coefficient-projection",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-block-repetition",
+  "lem-pur-system-evaluation-kflat",
+  "lem-pur-system-selected-derived-extension",
+  "lem-pur-system-ordinary-selected-extension",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-etale-system-coefficient-projection",
+  "lem-pur-system-level-left-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, printed pp. 21--23; finite-block generalization already in parent proof steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal selected extension of inverse systems is repetition followed by derived extension of coefficients, commuting with compact support",
+   "date": "2026-10-25",
+   "results": "Eight inverse-system results; none states this geometric comparison.",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-25",
+   "results": "Adjunction.leftAdjointUniq and its unit, counit and composition API.",
+   "verdict": "Used for the proved mate calculation, not a geometric realization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleCofinalSupport|CofinalSupport|systemNextSelected_trans|blockDerivedComparison_comp",
+   "date": "2026-10-25",
+   "results": "msearch: no hits. Local rg: existing cofinal interface, systemNextSelected_trans, blockDerivedComparison_comp and coefficient projection; no realization/coherence theorem.",
+   "verdict": "Reuse stated geometric dependencies; isolate the two remaining geometric steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived extension of coefficient systems along a cofinal subsequence and compact support projection formula",
+   "results": "Eight returned hits were read: Profinite.NobelingProof.πJ; Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization and its assoc variant; FirstOrder.Language.IsExtensionPair.definedAtRight; Condensed.lanCondensedSet; ContDiffMapSupportedIn.coe_coeHom; two Scheme.Hom.toNormalization normalization-coproduct equations. None concerns derived strict coefficient systems or compact-support projection.",
+   "date": "2026-10-25",
+   "verdict": "No matching mathematical statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemCofinalMate",
+  "date": "2026-10-25",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-system-cofinal-mate",
+   "place": "Separate geometric part of the parent argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCofinalSupportRealization",
+  "file": "lean/Sheaf/Paper/EtaleCofinalSupportRealization.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleCofinalSupport_realization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SystemProjection.etaleCofinalSupport_realization"
+  ],
+  "statement": "theorem etaleCofinalSupport_realization\n    (k : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) (hl : l.Prime) (hlp : l ≠ k.p)\n    (X Y : Over (Spec (CommRingCat.of k.k)))\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left]\n    (c : Compactification f.left) :\n    ∃ t : CofinalSupport c l,\n      (∀ (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings),\n        IsIso (t.projection.q a)) ∧\n      (∀ (B C D : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (b : C.rings ⟶ D.rings),\n        t.projection.q (a ≫ b) = t.projection.path a b)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6819f",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T060753-L-2371545",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6819f",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T060753-L-2371545",
+  "kind": "interface",
+  "note": "independent cc review: EtaleSystemCofinalData vs the clone's old EtaleSystemCofinalMate lines 1-617 (byte-identical); item statement vs the clone (only sorry→proof); two new sorry statements vs their nodes and the published coefficient-projection theorem; both direct importers compiled against the delivered modules"
+ }
+}

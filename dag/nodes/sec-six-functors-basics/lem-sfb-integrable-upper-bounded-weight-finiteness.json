@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-integrable-upper-bounded-weight-finiteness",
+ "kind": "statement",
+ "title": "Finiteness of upper bounded integrable rational weight modules",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional split semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra, def-wf-semisimple-lie-algebra], with splitting maximal abelian subalgebra $\\mathfrak h$, roots $R$, coroots $h_\\alpha$ and simple-root base $\\Delta=\\{\\alpha_1,\\ldots,\\alpha_r\\}$ as in [lem-sfb-split-semisimple-root-decomposition]. Choose nonzero $e_i\\in\\mathfrak g_{\\alpha_i}$ and $f_i\\in\\mathfrak g_{-\\alpha_i}$ with $[e_i,f_i]=h_{\\alpha_i}$. Let $M$ be any rational representation of $\\mathfrak g$, not assumed finite-dimensional or cyclic, having an ordinary weight decomposition $$M=\\bigoplus_{\\mu\\in\\mathfrak h^\\vee}M_\\mu,\\qquad M_\\mu=\\{v:hv=\\mu(h)v\\ \\forall h\\in\\mathfrak h\\},$$ with every $M_\\mu$ finite-dimensional. Suppose there is a finite set $A\\subset\\mathfrak h^\\vee$ such that $$\\{\\mu:M_\\mu\\ne0\\}\\subseteq\\bigcup_{\\eta\\in A}(\\eta-\\mathbf Z_{\\ge0}\\Delta).$$ Assume that each of the operators $e_i$ and $f_i$ is locally nilpotent on $M$, meaning that for every $v\\in M$ some positive power of that operator kills $v$. Then only finitely many $M_\\mu$ are nonzero, and $M$ is finite-dimensional over $\\mathbf Q$. Empty $A$ and the zero Lie algebra are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed p.508 (weight gradation) and p.511, proof of Corollary 23.73 (highest-weight background). WANTED: Serre, Complex Semisimple Lie Algebras, Chapter VII, finite-dimensionality argument for integrable highest-weight quotients. The stated general weight-module criterion is the agent formulation of that argument; it assumes no finite-dimensional ambient module."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "lem-sfb-split-semisimple-root-decomposition"
+ ],
+ "proof": [
+  {
+   "text": "If $A=\\varnothing$, the support is empty, so the assumed direct-sum decomposition gives $M=0$. If $r=0$, the simple-root basis in the hypotheses is empty, hence $\\mathfrak h^\\vee=0$; there is at most the weight $0$, and $M=M_0$ is finite-dimensional by hypothesis. Henceforth assume $A\\ne\\varnothing$ and $r>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent argument for the general criterion supporting Section 23h, printed pp.508 and 511; the general infinite-dimensional criterion is not asserted in Milne."
+   }
+  },
+  {
+   "text": "Write $xv$ for the given action. On $L=\\mathfrak g\\oplus M$ put $[(x,u),(y,v)]=([x,y],xv-yu)$, and identify $\\mathfrak h$ with $\\mathfrak h\\oplus0$. This is a Lie algebra by [def-wf-lie-algebra]: the bracket is bilinear and alternating; for three pairs $(x,u),(y,v),(z,w)$, its Jacobi identity has first component the Jacobi identity of $\\mathfrak g$ and second component the cyclic sum of $x(yw)-y(xw)-[x,y]w$, which vanishes by the representation identity. Thus $0\\oplus M$ is an abelian ideal and $[(h,0),(0,v)]=(0,hv)$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent argument for the general criterion supporting Section 23h, printed pp.508 and 511; the general infinite-dimensional criterion is not asserted in Milne."
+   }
+  },
+  {
+   "text": "Fix $i$ and put $E_i=(e_i,0)$, $F_i=(f_i,0)$, $H_i=(h_{\\alpha_i},0)$. The normalized triples and root brackets of [lem-sfb-split-semisimple-root-decomposition] give all the bracket hypotheses of [lem-sfb-integrable-sl2-reflection-automorphism]. On $L$, $\\operatorname{ad}E_i$ is the direct sum of $\\operatorname{ad}e_i$ on $\\mathfrak g$ and $e_i$ on $M$; the first is nilpotent by the root-decomposition node and the second locally nilpotent by hypothesis. Taking the larger of the two annihilating exponents proves local nilpotence on each pair. The same holds for $F_i$. Apply the cited reflection theorem with $\\mathfrak t=\\mathfrak h\\oplus0$ and $\\alpha=\\alpha_i$. Each exponential and its inverse preserves $0\\oplus M$, since every power of its defining adjoint operator does; consequently their product restricts to an invertible linear map on $M$. Intersecting the weight-space isomorphism in the reflection theorem with this invariant ideal gives $M_\\mu\\simeq M_{s_i\\mu}$, where $s_i\\mu=\\mu-\\mu(h_{\\alpha_i})\\alpha_i$. In particular $M_\\mu\\ne0$ if and only if $M_{s_i\\mu}\\ne0$.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-integrable-sl2-reflection-automorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent argument for the general criterion supporting Section 23h, printed pp.508 and 511; the general infinite-dimensional criterion is not asserted in Milne."
+   }
+  },
+  {
+   "text": "Let $W$ be the subgroup of $\\operatorname{GL}(\\mathfrak h^\\vee)$ generated by these simple reflections. It is a subgroup of the finite group generated by all root reflections in [lem-sfb-split-semisimple-root-decomposition], so it is finite; put $d=|W|\\ge1$. Step 3 shows that $w\\mu$ is a weight for every weight $\\mu$ and every $w\\in W$: apply its equivalence successively along a word in the generators, whose inverses equal themselves. Define the rational linear functional $\\ell$ by $\\ell(\\alpha_i)=1$ on the simple-root basis. Put $C=\\max(\\{0\\}\\cup\\{\\ell(\\eta):\\eta\\in A\\})$. The upper-cone hypothesis implies $\\ell(\\nu)\\le C$ for every weight $\\nu$, because $\\nu=\\eta-\\sum_i n_i\\alpha_i$ with $n_i\\ge0$ gives $\\ell(\\nu)=\\ell(\\eta)-\\sum_i n_i$.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent argument for the general criterion supporting Section 23h, printed pp.508 and 511; the general infinite-dimensional criterion is not asserted in Milne."
+   }
+  },
+  {
+   "text": "The linear functional $B(x)=\\sum_{w\\in W}\\ell(wx)$ is invariant under each $s_i$, since $w\\mapsto ws_i$ permutes $W$. As $\\alpha_i(h_{\\alpha_i})=2$, we have $s_i\\alpha_i=-\\alpha_i$; hence $B(\\alpha_i)=B(-\\alpha_i)=-B(\\alpha_i)$ and $B(\\alpha_i)=0$ over $\\mathbf Q$. The $\\alpha_i$ are a basis, so $B=0$. For a weight $\\mu$, every $w\\mu$ is a weight, and therefore $0=\\sum_w\\ell(w\\mu)\\le\\ell(\\mu)+(d-1)C$. Thus $\\ell(\\mu)\\ge-(d-1)C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent argument for the general criterion supporting Section 23h, printed pp.508 and 511; the general infinite-dimensional criterion is not asserted in Milne."
+   }
+  },
+  {
+   "text": "For every weight choose a presentation $\\mu=\\eta-\\sum_i n_i\\alpha_i$ with $\\eta\\in A$ and $n_i\\in\\mathbf Z_{\\ge0}$. The preceding inequality gives $\\sum_i n_i=\\ell(\\eta)-\\ell(\\mu)\\le\\ell(\\eta)+(d-1)C\\le dC$. Choose an integer $N\\ge dC$. Every $n_i$ belongs to the finite set $\\{0,\\ldots,N\\}$. Hence the support is contained in the image of the finite set $A\\times\\{0,\\ldots,N\\}^r$ under $(\\eta,(n_i))\\mapsto\\eta-\\sum_i n_i\\alpha_i$. It is finite. This uses the integral, rather than merely real, cone in the hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent argument for the general criterion supporting Section 23h, printed pp.508 and 511; the general infinite-dimensional criterion is not asserted in Milne."
+   }
+  },
+  {
+   "text": "Take a finite basis of each nonzero $M_\\mu$. There are only finitely many such spaces by step 6, so the union of these bases is finite. It spans $M$ by the assumed ordinary direct-sum decomposition. Thus $M$ is finite-dimensional over $\\mathbf Q$, and both conclusions follow.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent argument for the general criterion supporting Section 23h, printed pp.508 and 511; the general infinite-dimensional criterion is not asserted in Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra",
+  "lem-sfb-split-semisimple-root-decomposition",
+  "lem-sfb-integrable-sl2-reflection-automorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent argument for the general criterion supporting Section 23h, printed pp.508 and 511; the general infinite-dimensional criterion is not asserted in Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integrable|locally.nilpotent|weight.*finite|finite.*weight|weyl",
+   "results": "{\"t\": \"2026-10-23T22:25:12Z\", \"tool\": \"grep\", \"query\": \"integrable|locally.nilpotent|weight.*finite|finite.*weight|weyl\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/IsSimple.lean\"], \"digest\": \"f18014438a6431cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.finite_genWeightSpace_ne_bot and Weight.instFinite in Mathlib/Algebra/Lie/Weights/Basic.lean:686-700 (read) assume IsNoetherian R M. Over Q that already asserts the finite dimensionality to be proved here. The generalized root-chain results have the same Noetherian limitation. LieModule.IsIrreducible in Semisimple/Defs.lean:33-39 (read) is a definition, not an integrability criterion; GeckConstruction.instIsIrreducible concerns one specific matrix module."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieModule.IsIrreducible",
+   "results": "{\"t\": \"2026-10-23T22:25:12Z\", \"tool\": \"loogle\", \"query\": \"LieModule.IsIrreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.IsIrreducible\", \"LieModule.IsIrreducible.mk\", \"LieSubmodule.eq_top_of_isIrreducible\", \"LieAlgebra.IsSimple.instIsIrreducible\", \"LieModule.nontrivial_of_isIrreducible\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"RootPairing.GeckConstruction.instIsIrreducible\"], \"digest\": \"763b48c9013e593d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.finite_genWeightSpace_ne_bot and Weight.instFinite in Mathlib/Algebra/Lie/Weights/Basic.lean:686-700 (read) assume IsNoetherian R M. Over Q that already asserts the finite dimensionality to be proved here. The generalized root-chain results have the same Noetherian limitation. LieModule.IsIrreducible in Semisimple/Defs.lean:33-39 (read) is a definition, not an integrability criterion; GeckConstruction.instIsIrreducible concerns one specific matrix module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integrable weight module for a split semisimple Lie algebra with finite weight spaces and weights bounded above is finite dimensional",
+   "results": "{\"t\": \"2026-10-23T22:25:18Z\", \"tool\": \"leanfinder\", \"query\": \"An integrable weight module for a split semisimple Lie algebra with finite weight spaces and weights bounded above is finite dimensional\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.instFinite\", \"LieModule.Weight.instFintype\", \"LieModule.finite_genWeightSpace_ne_bot\", \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"LieModule.iSup_genWeightSpace_eq_top\", \"LieModule.iSup_genWeightSpace_eq_top'\", \"LieModule.zero_lt_finrank_genWeightSpace\", \"LieModule.exists_nontrivial_weightSpace_of_isNilpotent\"], \"digest\": \"9a12ea548a1c090d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.finite_genWeightSpace_ne_bot and Weight.instFinite in Mathlib/Algebra/Lie/Weights/Basic.lean:686-700 (read) assume IsNoetherian R M. Over Q that already asserts the finite dimensionality to be proved here. The generalized root-chain results have the same Noetherian limitation. LieModule.IsIrreducible in Semisimple/Defs.lean:33-39 (read) is a definition, not an integrability criterion; GeckConstruction.instIsIrreducible concerns one specific matrix module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integrable modules in category O for a finite dimensional semisimple Lie algebra are finite dimensional",
+   "results": "{\"t\": \"2026-10-23T22:26:24Z\", \"tool\": \"leansearch\", \"query\": \"Integrable modules in category O for a finite dimensional semisimple Lie algebra are finite dimensional\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.IsTriangularizable\", \"instFiniteCarrierObjModuleCatIsFG\", \"LieAlgebra.IsKilling.instSemisimple\", \"Submodule.finiteDimensional_finset_sup\", \"LieModule.Weight.instFintype.congr_simp\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.Weight.instFinite\", \"LieModule.iSup_genWeightSpace_eq_top\"], \"digest\": \"073eb6dbfce44e3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.finite_genWeightSpace_ne_bot and Weight.instFinite in Mathlib/Algebra/Lie/Weights/Basic.lean:686-700 (read) assume IsNoetherian R M. Over Q that already asserts the finite dimensionality to be proved here. The generalized root-chain results have the same Noetherian limitation. LieModule.IsIrreducible in Semisimple/Defs.lean:33-39 (read) is a definition, not an integrability criterion; GeckConstruction.instIsIrreducible concerns one specific matrix module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all simple root raising and lowering operators are locally nilpotent then an upper bounded weight module with finite dimensional weight spaces has only finitely many weights",
+   "results": "{\"t\": \"2026-10-23T22:26:29Z\", \"tool\": \"leanfinder\", \"query\": \"If all simple root raising and lowering operators are locally nilpotent then an upper bounded weight module with finite dimensional weight spaces has only finitely many weights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.instFinite\", \"LieModule.Weight.instFintype\", \"LieModule.finite_genWeightSpace_ne_bot\", \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"LieModule.iSup_genWeightSpace_eq_top'\", \"LieModule.exists_nontrivial_weightSpace_of_isNilpotent\", \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\"], \"digest\": \"a649252b1dc952bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.finite_genWeightSpace_ne_bot and Weight.instFinite in Mathlib/Algebra/Lie/Weights/Basic.lean:686-700 (read) assume IsNoetherian R M. Over Q that already asserts the finite dimensionality to be proved here. The generalized root-chain results have the same Noetherian limitation. LieModule.IsIrreducible in Semisimple/Defs.lean:33-39 (read) is a definition, not an integrability criterion; GeckConstruction.instIsIrreducible concerns one specific matrix module."
+  },
+  {
+   "tool": "grep",
+   "query": "integrable|locally.nilpotent|finite_genWeightSpace|instFinite",
+   "results": "{\"t\": \"2026-10-23T23:25:16Z\", \"tool\": \"grep\", \"query\": \"integrable|locally.nilpotent|finite_genWeightSpace|instFinite\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/TraceForm.lean\", \"Mathlib/Algebra/Lie/TraceForm.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Chain.lean\"], \"digest\": \"5ad090f241d54828\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the weight finiteness hits require IsNoetherian R M (read Basic.lean:686-698), which over Q already implies the conclusion; the decomposition and linearity hits also assume ambient finite dimension. Loogle returned no hits. The second semantic search gives root-system root-chain and orbit-span results, not finiteness of the support of an arbitrary module."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieModule.Weight, Module.Finite",
+   "results": "{\"t\": \"2026-10-23T23:25:16Z\", \"tool\": \"loogle\", \"query\": \"LieModule.Weight, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the weight finiteness hits require IsNoetherian R M (read Basic.lean:686-698), which over Q already implies the conclusion; the decomposition and linearity hits also assume ambient finite dimension. Loogle returned no hits. The second semantic search gives root-system root-chain and orbit-span results, not finiteness of the support of an arbitrary module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integrable upper bounded weight module for a finite dimensional split semisimple rational Lie algebra with finite weight spaces is finite dimensional",
+   "results": "{\"t\": \"2026-10-23T23:25:17Z\", \"tool\": \"leanfinder\", \"query\": \"An integrable upper bounded weight module for a finite dimensional split semisimple rational Lie algebra with finite weight spaces is finite dimensional\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.instFinite\", \"LieModule.Weight.instFintype\", \"LieModule.finite_genWeightSpace_ne_bot\", \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"LieModule.iSup_genWeightSpace_eq_top\", \"LieModule.iSup_genWeightSpace_eq_top'\", \"LieModule.zero_lt_finrank_genWeightSpace\", \"LieModule.instLinearWeightsOfCharZero\"], \"digest\": \"449d1c2d97d37be3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the weight finiteness hits require IsNoetherian R M (read Basic.lean:686-698), which over Q already implies the conclusion; the decomposition and linearity hits also assume ambient finite dimension. Loogle returned no hits. The second semantic search gives root-system root-chain and orbit-span results, not finiteness of the support of an arbitrary module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weight representation with locally nilpotent simple raising and lowering operators and weights in finitely many downward root cones has finite dimension",
+   "results": "{\"t\": \"2026-10-23T23:25:59Z\", \"tool\": \"leansearch\", \"query\": \"A weight representation with locally nilpotent simple raising and lowering operators and weights in finitely many downward root cones has finite dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.instFintype\", \"LieModule.shiftedGenWeightSpace\", \"LieModule.Weight.mk.sizeOf_spec\", \"LieModule.Weight.instFinite\", \"LieModule.genWeightSpace\", \"LieModule.Weight.instFintype.congr_simp\", \"LieModule.Weight.casesOn\", \"LieModule.finite_genWeightSpace_ne_bot\"], \"digest\": \"be8c7f23e6d44f8b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the weight finiteness hits require IsNoetherian R M (read Basic.lean:686-698), which over Q already implies the conclusion; the decomposition and linearity hits also assume ambient finite dimension. Loogle returned no hits. The second semantic search gives root-system root-chain and orbit-span results, not finiteness of the support of an arbitrary module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Weyl invariant set of weights contained in finitely many translates of the negative simple root cone is finite",
+   "results": "{\"t\": \"2026-10-23T23:26:00Z\", \"tool\": \"leanfinder\", \"query\": \"A Weyl invariant set of weights contained in finitely many translates of the negative simple root cone is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.coxeterWeightIn_mem_set_of_isCrystallographic\", \"RootPairing.Iic_chainBotCoeff_eq\", \"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"RootPairing.Iic_chainTopCoeff_eq\", \"RootPairing.infinite_of_linearIndependent_coxeterWeight_four\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.baseOf_pairwise_pairing_le_zero\"], \"digest\": \"84d589871d0a3f5a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the weight finiteness hits require IsNoetherian R M (read Basic.lean:686-698), which over Q already implies the conclusion; the decomposition and linearity hits also assume ambient finite dimension. Loogle returned no hits. The second semantic search gives root-system root-chain and orbit-span results, not finiteness of the support of an arbitrary module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-highest-weight-modules",
+  "date": "2026-10-24",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.508 (split Cartan weight gradation on rational representations), p.511, proof of Corollary 23.73 (fundamental-weight choice); underlying highest-weight theorem: Serre, Complex Semisimple Lie Algebras, Chapter VII, with split rational-field form, WANTED. This input does not assert that Lemma 22.24 alone supplies fundamental weights. Supporting step: Finiteness criterion applied after imposing the dominant simple-root relations.",
+   "via": [
+    "lem-sfb-rational-highest-weight-modules",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integrable-upper-bounded-weight-finiteness",
+  "worker": "stage1",
+  "summary": "Retained the statement and all inherited metadata. Applied the existing locally nilpotent reflection theorem to the explicitly constructed semidirect Lie algebra, then used a finite-group average of simple-root height to give a uniform integral-coordinate bound on every weight. Finite weight-space bases finish the proof. No new nodes. Checked the empty upper set, rank zero, arbitrary rational upper weights and noncyclic modules.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited supporting chain through the rational-highest-weight input, specifically its finiteness step after imposing the dominant simple-root relations. The whole-blueprint searches for integrable, weight and Weyl found no equivalent statement. blueprint_refs.py ancestor returns None; inherited from.node=null, from.place and via are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-c95f6860e",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-c95f6860e (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full. There are no new nodes. Step 2: I recomputed the Jacobi identity of g⋉M; its second component vanishes by the representation identity in def-wf-lie-algebra. Step 3: ad(e_i,0) acts as ad e_i ⊕ e_i, which is nilpotent plus locally nilpotent (root-decomposition node and the item's hypothesis). L_β = g_β ⊕ M_β, and w and w^{-1} preserve the ideal M, so the reflection node's iso L_β ≅ L_{s_iβ} restricts to M_β ≅ M_{s_iβ}. This uses that node's statement exactly as written. Step 4: W lies inside the finite group generated by the s_α (cited node), each s_i squares to 1, and ℓ ≤ C with C ≥ 0. Steps 5–6: averaging over W gives ℓ(μ) ≥ −(d−1)C, so Σn_i ≤ dC and the support lies in the image of the finite set A×{0..N}^r. Step 7: a finite union of bases spans M. Tested cases: sl2 L(m) (the bound is sharp), Verma (excluded by local nilpotence), infinitely many trivial summands (excluded by dim M_0 < ∞), all ℓ(η) < 0 (forces M=0), non-integral η, and A empty or r=0. I found no duplicate in the DAG. Its only citer is rational-highest-weight-modules. Everything stays in the unit except the mathlib def; there are no SGA sources and no tool_uses. proof_deps equals the union of the uses. Milne's printed pp.508 and 511 are background only, and proof_origin=agent is honest. The null blueprint from.node is inherited."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.IntegrableUpperBoundedWeightFiniteness",
+  "declaration": "LieAlgebra.finite_weights_and_finiteDimensional_of_integrable_upperBounded",
+  "file": "lean/Sheaf/Algebra/Lie/IntegrableUpperBoundedWeightFiniteness.lean",
+  "statement": "theorem finite_weights_and_finiteDimensional_of_integrable_upperBounded (g : Type u) [LieRing g] [LieAlgebra ℚ g] [FiniteDimensional ℚ g] [HasTrivialRadical ℚ g] (H : LieSubalgebra ℚ g) [IsLieAbelian H] (hmax : ∀ B : LieSubalgebra ℚ g, H ≤ B → IsLieAbelian B → B = H) (hsplit : ∀ h : H, (⨆ a : ℚ, (ad ℚ g (h : g)).eigenspace a) = ⊤) (R : Set (Module.Dual ℚ H)) (hR : ∀ α : Module.Dual ℚ H, α ∈ R ↔ α ≠ 0 ∧ LieModule.weightSpace g (α : H → ℚ) ≠ ⊥) (c : R → H) (hc : ∀ α : R, (c α : g) ∈ Submodule.span ℚ {z : g | ∃ x y : g, x ∈ LieModule.weightSpace g (α.1 : H → ℚ) ∧ y ∈ LieModule.weightSpace g ((-α.1) : H → ℚ) ∧ ⁅x, y⁆ = z} ∧ α.1 (c α) = 2) (Δ : Finset R) (b : Module.Basis Δ ℚ (Module.Dual ℚ H)) (hb : ∀ i : Δ, b i = i.1.1) (hcoords : ∀ α : R, (∃ n : Δ → ℕ, α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1) ∨ (∃ n : Δ → ℕ, -α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1)) (e f : Δ → g) (he : ∀ i : Δ, e i ∈ LieModule.weightSpace g (i.1.1 : H → ℚ) ∧ e i ≠ 0) (hf : ∀ i : Δ, f i ∈ LieModule.weightSpace g ((-i.1.1) : H → ℚ) ∧ f i ≠ 0) (hef : ∀ i : Δ, ⁅e i, f i⁆ = (c i.1 : g)) (M : Type v) [AddCommGroup M] [Module ℚ M] [LieRingModule g M] [LieModule ℚ g M] (hdecomp : DirectSum.IsInternal (fun μ : Module.Dual ℚ H ↦ (LieModule.weightSpace M (μ : H → ℚ)).toSubmodule)) (hfinite : ∀ μ : Module.Dual ℚ H, FiniteDimensional ℚ (LieModule.weightSpace M (μ : H → ℚ))) (A : Finset (Module.Dual ℚ H)) (hupper : ∀ μ : Module.Dual ℚ H, LieModule.weightSpace M (μ : H → ℚ) ≠ ⊥ → ∃ η ∈ A, ∃ n : Δ → ℕ, μ = η - ∑ i : Δ, (n i : ℚ) • i.1.1) (he_nil : ∀ (i : Δ) (m : M), ∃ n : ℕ, 0 < n ∧ (LieModule.toEnd ℚ g M (e i) ^ n) m = 0) (hf_nil : ∀ (i : Δ) (m : M), ∃ n : ℕ, 0 < n ∧ (LieModule.toEnd ℚ g M (f i) ^ n) m = 0) : {μ : Module.Dual ℚ H | LieModule.weightSpace M (μ : H → ℚ) ≠ ⊥}.Finite ∧ FiniteDimensional ℚ M",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dbc97f30",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in lean (first stage-2 delivery); lean.statement verbatim equals the file signature; one sorry theorem, no defs, source and blueprint docstrings with all 7 steps. Every node clause matches: HasTrivialRadical + FiniteDimensional; H maximal abelian split (hmax/hsplit as in exists_splitSemisimple_rootDecomposition); R by hR; coroots c fixed by span[g_α,g_-α] and α(c)=2 (unique by the dep); Δ ⊆ R basis with sign-coherent ℕ-coordinates (equivalent to the dep's AddSubmonoid.closure form); e,f nonzero with [e,f]=c; arbitrary M : Type v; ordinary weightSpace IsInternal over all of Dual ℚ H; hfinite; Finset A with integral cone; pointwise local nilpotence with 0<n; conclusion support.Finite ∧ FiniteDimensional ℚ M. Edge cases A=∅, rank 0, zero module covered. No Mathlib or project duplicate (Mathlib finiteness needs IsNoetherian M). No stronger assumptions or universe restriction. No compile (no file changed)."
+ }
+}

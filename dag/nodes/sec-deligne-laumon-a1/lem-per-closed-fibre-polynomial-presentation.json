@@ -232,20 +232,37 @@
   "module": "Sheaf.RingTheory.ClosedFibrePolynomialPresentation",
   "declaration": "Algebra.EssFiniteType.exists_polynomial_maximal_localization_quotient",
   "file": "lean/Sheaf/RingTheory/ClosedFibrePolynomialPresentation.lean",
-  "statement": "theorem exists_polynomial_maximal_localization_quotient (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [IsLocalRing R] [IsLocalRing S] [Algebra.EssFiniteType R S] : ∃ (n : ℕ) (m : MaximalSpectrum (MvPolynomial (Fin n) R)), m.asIdeal.comap (algebraMap R (MvPolynomial (Fin n) R)) = IsLocalRing.maximalIdeal R ∧ ∃ (I : Ideal (Localization.AtPrime m.asIdeal)) (T : Submonoid (Localization.AtPrime m.asIdeal ⧸ I)), Nonempty (Localization T ≃ₐ[R] S)",
+  "statement": "theorem exists_polynomial_maximal_localization_quotient (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [IsLocalRing R] [IsLocalRing S] [Algebra.EssFiniteType R S] : ∃ (n : ℕ) (m : MaximalSpectrum (MvPolynomial (Fin n) R)), Ideal.comap (algebraMap R (MvPolynomial (Fin n) R)) m.asIdeal = IsLocalRing.maximalIdeal R ∧ ∃ (I : Ideal (Localization.AtPrime m.asIdeal)) (T : Submonoid (Localization.AtPrime m.asIdeal ⧸ I)), Nonempty (Localization T ≃ₐ[R] S)",
   "branch": "newtargets-dag",
-  "by": "NB",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.ClosedFibrePolynomialPresentation deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-72e57ddbc",
-  "group": "NB",
+  "reviewer": "NT-stage2-cc-68eb07493",
+  "group": "Q59",
   "result": "pass",
-  "note": "Stacks 0AUG read: Lean matches node clause by clause (EssFiniteType, IsLocalRing R/S without IsLocalHom, ∃ n, MaximalSpectrum of MvPolynomial (Fin n) R with comap = maximalIdeal R, ∃ I and T : Submonoid, Nonempty (Localization T ≃ₐ[R] S)); independent universes; n=0, fields, non-local map, zero ring checked. Node copy differs from live only in lean; statement verbatim once. Docstrings carry source, blueprint and all 7 steps. Public imports used; plain imports = recorded proof-dep modules. No line >100 chars, no defs, sorry only. nt_compile --json clean 1.2 s; #print axioms only sorryAx beyond standard. No findings, no fixes."
+  "note": "Node diff vs live/side-live is lean-only; single new module, fresh after the earlier dead-module removal (still cited by lem-per-ratliff-formal-catenarity). Lean matches Stacks 0AUG clause by clause: EssFiniteType, IsLocalRing R/S without IsLocalHom, ∃ n, MaximalSpectrum (MvPolynomial (Fin n) R) with comap = maximalIdeal R, ∃ I and T : Submonoid, Nonempty (Localization T ≃ₐ[R] S); independent universes u v. Edge cases n=0, R a field, non-local map k[t]_(t)→k(t), zero divisors/nilpotents, zero ring excluded by IsLocalRing. No defs, sorry only; docstrings carry source, blueprint and all 7 steps; statement verbatim; imports = stmt_dep (public) + proof-dep modules (plain, WeilConjectures LocalSubring present in live). No existing duplicate (rg Sheaf/WeilConjectures). Report has Worker report + Second reading sections. Not recompiled (no change). No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/ClosedFibrePolynomialPresentation.lean",
+  "module": "Sheaf.RingTheory.ClosedFibrePolynomialPresentation",
+  "declaration": "Algebra.EssFiniteType.exists_polynomial_maximal_localization_quotient",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

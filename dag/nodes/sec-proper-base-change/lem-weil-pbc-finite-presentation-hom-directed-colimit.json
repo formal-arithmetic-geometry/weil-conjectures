@@ -12,7 +12,7 @@
     "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Maps from a module of finite presentation into a directed colimit factor through a stage, on a qcqs scheme (Stacks 01BS)",
@@ -29,79 +29,73 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the Hom sheaves).* For each $i$ let $\\mathcal H_i=\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F_i)$ and let $\\mathcal H=\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$ be the sheaf Homs on the opens of $X$ [def-pur-sheaf-hom]: $\\mathcal H_i(U)=\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal G|_U,\\mathcal F_i|_U)$, sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For $i\\le i'$ let $\\mathcal H_i\\to\\mathcal H_{i'}$ be $\\psi\\mapsto\\varphi_{i'i}|_U\\circ\\psi$ and let $\\gamma_i:\\mathcal H_i\\to\\mathcal H$ be $\\psi\\mapsto c_i|_U\\circ\\psi$ ($\\psi\\in\\mathcal H_i(U)$). These are $\\mathcal O_X$-linear maps of sheaves (postcomposition with an $\\mathcal O_U$-linear map is $\\mathcal O_X(U)$-linear for the module structure of [def-pur-sheaf-hom] and commutes with restriction to smaller opens), $(\\mathcal H_i)$ is a system over $I$ because $\\varphi_{ii}=\\mathrm{id}$ and $\\varphi_{i''i'}\\varphi_{i'i}=\\varphi_{i''i}$, and $\\gamma_{i'}\\circ(\\mathcal H_i\\to\\mathcal H_{i'})=\\gamma_i$ because $c_{i'}\\varphi_{i'i}=c_i$. On global sections, $\\mathcal H_i(X)=\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal G,\\mathcal F_i)$ and $\\mathcal H(X)=\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$ ('by construction', Stacks), the transition maps are $g\\mapsto\\varphi_{i'i}\\circ g$ and $\\gamma_{i,X}$ is $g\\mapsto c_i\\circ g$. So the map of the statement is the map $\\varinjlim_i\\mathcal H_i(X)\\to\\mathcal H(X)$ induced by the $\\gamma_{i,X}$.",
+   "text": "Fix $h:\\mathcal G\\to\\mathcal F$. Near each point choose an open $W$ with a presentation $\\mathcal O^{\\oplus m}\\xrightarrow{A}\\mathcal O^{\\oplus n}\\xrightarrow{b}\\mathcal G\\to0$ [def-weil-pbc-module-finite-type-presentation]. Write $A(e_\\ell)=\\sum_r a_{r\\ell}e_r$. By [lem-weil-pbc-sheaf-hom-finite-presentation-kernel](2), the tuple $s_r=h(b(e_r))$ satisfies $\\sum_r a_{r\\ell}s_r=0$. Apply [lem-weil-pbc-module-colimit-finite-linear-system-local-lift] on $W$, with its row coefficients $a_{\\ell r}=a_{r\\ell}$, to obtain a solution $t_r$ on $V$ at one stage $i$, with $c_i(t_r)=s_r|_V$. The same kernel formula identifies this solution with a section of sheaf Hom, hence a map $g:\\mathcal G|_V\\to\\mathcal F_i|_V$: kernels of module sheaves are sectionwise [def-weil-sheaf-of-modules-category]. Since $c_i g$ and $h|_V$ agree on all $b(e_r)$, they agree after precomposing with $b$, and cancellation of this epimorphism gives $c_i g=h|_V$. Thus local lifts cover $X$.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+    "lem-weil-pbc-module-colimit-finite-linear-system-local-lift",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BS (lemma-finite-presentation-quasi-compact-colimit), proof via Tag 0GMV and Sheaves Tag 009F; finite-data local lifting, finite-cover descent, and assembly as detailed in report.md"
+   }
+  },
+  {
+   "text": "Refine that cover by a finite affine cover $(U_a)_{a\\in A}$ with quasi-compact pairwise intersections, using [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings]. Restrict the local lifts to obtain $g_a:\\mathcal G|_{U_a}\\to\\mathcal F_{i_a}|_{U_a}$. Choose a common upper bound $i$ and postcompose each $g_a$ with $\\varphi_{i i_a}$. The cocone identities preserve $c_i g_a=h|_{U_a}$. This also handles an empty cover by choosing any $i\\in I$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BS (lemma-finite-presentation-quasi-compact-colimit, line 3818), proof, first sentences ('Set H = Hom(G, colim F_i) and H_i = Hom(G, F_i). Recall that Hom_X(G,F) = Γ(X,H) ... by construction'); Section 01CM (section-internal-hom), the definition of the sheaf Hom (line 3504)"
+    "place": "Tag 01BS (lemma-finite-presentation-quasi-compact-colimit), proof via Tag 0GMV and Sheaves Tag 009F; finite-data local lifting, finite-cover descent, and assembly as detailed in report.md"
    }
   },
   {
-   "text": "*Step 2 ($\\mathcal H=\\varinjlim\\mathcal H_i$).* Since $\\mathcal G$ is of finite presentation and $(\\mathcal F,(c_i))$ is a colimit of the $\\mathcal F_i$ in $\\Mod(\\mathcal O_X)$, the system $(\\mathcal H_i)_{i\\in I}$ has a colimit $(\\mathcal H',(d_i)_i)$ in $\\Mod(\\mathcal O_X)$ and the unique $\\mathcal O_X$-linear $u:\\mathcal H'\\to\\mathcal H$ with $u\\circ d_i=\\gamma_i$ is an isomorphism [lem-weil-pbc-sheaf-hom-finite-presentation-colimit] (Stacks: 'By Lemma 0GMV we have H = colim H_i').",
+   "text": "Finite presentation gives finite type directly from the displayed local epimorphisms. Both maps have composite $h$ on their overlap. On each quasi-compact $U_a\\cap U_b$, [lem-weil-pbc-finite-type-hom-colimit-qc-equality] makes the restrictions of $g_a,g_b$ equal at some stage $k_{ab}\\ge i$. Choose one $k$ above $i$ and all the finitely many $k_{ab}$. The transported maps now agree on every overlap. Since $\\mathcal Hom(\\mathcal G,\\mathcal F_k)$ is a sheaf [def-pur-sheaf-hom], they glue to $g:\\mathcal G\\to\\mathcal F_k$. The equalities $c_k g=h$ hold on the cover, so hold globally by the same sheaf property. This proves factorization.",
    "uses": [
-    "lem-weil-pbc-sheaf-hom-finite-presentation-colimit",
+    "lem-weil-pbc-finite-type-hom-colimit-qc-equality",
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BS (lemma-finite-presentation-quasi-compact-colimit), proof via Tag 0GMV and Sheaves Tag 009F; finite-data local lifting, finite-cover descent, and assembly as detailed in report.md"
+   }
+  },
+  {
+   "text": "For two maps with equal colimit composites, apply [lem-weil-pbc-finite-type-hom-colimit-qc-equality] with $U=X$ to obtain exactly the required common-stage equality. Finally [lem-weil-pbc-filtered-colimit-sets-elementwise](1),(2) identifies elements of the directed Hom-set colimit with stage representatives modulo eventual equality. Factorization therefore gives surjectivity of the canonical map, and the common-stage equality gives injectivity; its value on the $i$-th representative is $c_i\\circ g$ by the cocone universal property.",
+   "uses": [
+    "lem-weil-pbc-finite-type-hom-colimit-qc-equality",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BS (lemma-finite-presentation-quasi-compact-colimit, line 3818), proof ('By Lemma lemma-hom-finite-presentation-colimit we have H = colim H_i')"
-   }
-  },
-  {
-   "text": "*Step 3 (the covering hypothesis of 01BS holds on $X$).* Since $X$ is quasi-compact and quasi-separated, $X$ has a cofinal system of open coverings $X=\\bigcup_{j\\in J}U_j$ with $J$ finite and all $U_j\\cap U_{j'}$ quasi-compact, namely its finite affine open coverings [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings]. This is hypothesis (3) of Stacks 01BS, which is how the qcqs hypothesis of the statement enters (Stacks, Remark 01BT/Sheaves Example 009G: quasi-compactness of $X$ alone does not suffice).",
-   "uses": [
-    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BS, hypothesis (3), and Remark remark-condition-necessary after it; Schemes, Lemmas 01IT and 01KO"
-   }
-  },
-  {
-   "text": "*Step 4 (global sections of the colimit, Sheaves 009F).* By [lem-weil-pbc-module-directed-colimit-underlying-sets], the underlying sheaf of sets of $\\mathcal H'$ with the maps $d_i$ is a colimit of the underlying sheaves of sets of the $\\mathcal H_i$ in the category of sheaves of sets on $X$. By Step 3 the open $U=X$ satisfies the hypothesis of [lem-weil-pbc-sheaves-directed-colimit-sections](2), so the map $\\Psi_X:\\varinjlim_i\\mathcal H_i(X)\\to\\mathcal H'(X)$ induced by the $d_{i,X}$ is bijective. Since $u$ is an isomorphism (Step 2), $u_X:\\mathcal H'(X)\\to\\mathcal H(X)$ is bijective, and $u_X\\circ\\Psi_X$ is the map induced by the $u_X\\circ d_{i,X}=\\gamma_{i,X}$, i.e. by Step 1 the canonical map $\\varinjlim_i\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal G,\\mathcal F_i)\\to\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$, $g\\mapsto c_i\\circ g$. It is therefore bijective.",
-   "uses": [
-    "lem-weil-pbc-module-directed-colimit-underlying-sets",
-    "lem-weil-pbc-sheaves-directed-colimit-sections",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BS (lemma-finite-presentation-quasi-compact-colimit, line 3818), proof ('Thus the lemma follows from Sheaves, Lemma 009F'); literature/stacks-project/sheaves.tex Lemma 009F (4)"
-   }
-  },
-  {
-   "text": "*Step 5 (the two explicit clauses).* The directed colimit of the sets $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal G,\\mathcal F_i)$ is the disjoint union of these sets modulo $(i,g)\\sim(i',g')$ iff $\\varphi_{i''i}\\circ g=\\varphi_{i''i'}\\circ g'$ for some $i''\\ge i,i'$ (an equivalence relation since $I$ is directed), with the coprojections $g\\mapsto[(i,g)]$ [def-weil-pbc-category-colimit]. Surjectivity of the map of Step 4 says every $h$ is $c_i\\circ g$ for some $i$ and $g$; injectivity says that $c_i\\circ g=c_{i'}\\circ g'$ implies $[(i,g)]=[(i',g')]$, i.e. $\\varphi_{i''i}\\circ g=\\varphi_{i''i'}\\circ g'$ for some $i''\\ge i,i'$.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BS, statement (the equality colim_i Hom_X(G,F_i) = Hom_X(G, colim F_i) unpacked); Categories, Section 04AX (section-directed-colimits) and Section 002Z (section-posets-limits)"
+    "place": "Tag 01BS (lemma-finite-presentation-quasi-compact-colimit), proof via Tag 0GMV and Sheaves Tag 009F; finite-data local lifting, finite-cover descent, and assembly as detailed in report.md"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+  "lem-weil-pbc-module-colimit-finite-linear-system-local-lift",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-sheaf-hom-finite-presentation-colimit",
   "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
-  "lem-weil-pbc-module-directed-colimit-underlying-sets",
-  "lem-weil-pbc-sheaves-directed-colimit-sections"
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-finite-type-hom-colimit-qc-equality",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BS (lemma-finite-presentation-quasi-compact-colimit, line 3818) and its proof; ingredients Modules 0GMV (line 3759), Sheaves 009F (sheaves.tex line 3444)"
+  "place": "Tags 01BS and 0GMV and Sheaves Tag 009F: finite-generator/finite-relation expansion of the same sheaf-Hom and finite-cover descent argument"
  },
  "mathlib_searches": [
   {
@@ -131,6 +125,55 @@
    "results": "source repository: only AlgebraicGeometry.Etale.isFinitelyPresentable_of_isConstructibleSheaf (ConstructibleSheaf/FinitePushforward.lean:94, own sorry; etale sheaves of Λ-modules, belongs to lem-weil-pbc-constructible-finitely-presented, not this node); Mathlib: no sheaf Hom of sheaves of modules, no IsFinitePresentation-colimit result (SheafOfModules.IsFinitePresentation is a definition only)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitePresentation|isFinitelyPresentable|[Hh]om.*[Cc]olimit",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; searched Mathlib/Algebra/Category/ModuleCat/Sheaf; definitions/presentations or general colimit existence only; no locally-finitely-presented-sheaf to categorical-finite-presentability theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented sheaf of modules on a qcqs scheme is a finitely presentable object of its category of module sheaves",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.Presentation.IsFinite; AlgebraicGeometry.Scheme.Modules; definitions/presentations or general colimit existence only; no locally-finitely-presented-sheaf to categorical-finite-presentability theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, PreservesFilteredColimits",
+   "results": "loogle: unknown identifier 'PreservesFilteredColimits'",
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: unknown unqualified identifier; superseded by the successful CategoryTheory.IsFinitelyPresentable query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a locally finitely presented sheaf of modules on a quasi-compact quasi-separated scheme commutes with directed colimits",
+   "results": "SheafOfModules.Presentation.isColimit; SheafOfModules.Presentation.map_π_eq; AlgebraicGeometry.Scheme.Modules.instHasColimits; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.Presentation.map; SheafOfModules.isFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; definitions/presentations or general colimit existence only; no locally-finitely-presented-sheaf to categorical-finite-presentability theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitelyPresentable|[Ff]inite[Pp]resentation.*[Cc]olimit|[Cc]olimit.*[Ff]inite[Pp]resentation",
+   "results": "No hits.; searched Mathlib/AlgebraicGeometry/Modules",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFinitelyPresentable",
+   "results": "CategoryTheory.IsFinitelyPresentable; CategoryTheory.instIsFinitelyPresentableObjFullSubcategoryIsFinitelyPresentableι; CategoryTheory.instPreservesFilteredColimitsOfSizeObjOppositeFunctorTypeCoyonedaOpOfIsFinitelyPresentable; CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits; CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimitsOfSize; CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under; inspected Mathlib/CategoryTheory/Presentable/Finite.lean:53-105; assumes categorical finite presentability, which is the missing assertion for these sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorically finitely presentable objects in the category of sheaves of modules on a coherent topological space; factorization and eventual equality of maps into a filtered colimit",
+   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.Presentation.map; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; definitions/presentations or general colimit existence only; no locally-finitely-presented-sheaf to categorical-finite-presentability theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -141,20 +184,34 @@
   "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "by": "L",
-  "result": "accepted",
-  "note": "Five steps along Stacks Modules 01BS (via sheaf Hom and 0GMV, then Sheaves 009F (4)): the Hom sheaves and their system, H = colim H_i (0GMV as the new unsplit node lem-weil-pbc-sheaf-hom-finite-presentation-colimit, which also asserts the existence of the colimit), the covering hypothesis (3) of 01BS on a qcqs scheme (new unsplit node lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings, a few lines from Mathlib), global sections of a directed colimit of sheaves of sets (009F (2),(4) as the new unsplit node lem-weil-pbc-sheaves-directed-colimit-sections) applied through the new node lem-weil-pbc-module-directed-colimit-underlying-sets, and the unpacking. Checked. Stage-3: pqf-lem-qs-intersection-qc (imported) is a Mathlib leaf per the worker."
+  "reviewer": "NT-cc-Q37-e98e4f28b",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-e98e4f28b (reviewer sub-agent of L); spot-checked: Landing-return redelivery of the re-split (released stage-1 note 2026-10-22, at least 2 new nodes, keep_plan). Compared with earlier heads 5d2bf30d and b9c3f4fb: both new nodes are byte-identical, and the item changes only in wording (Step 1 names the open W and transposes coefficients a_{lr}=a_{rl}; Step 3 notes that both overlap composites are h) plus its summary. The statement and stmt_deps are unchanged. In the live and side-live clones the item is still the old 5-step split and neither new id exists, so nothing supersedes this delivery. Sources read: Stacks modules.tex 01BS (l.3818) and 0GMV (l.3759) with proofs, 01BN, finite type (l.810), and sheaves.tex 009F (l.3444) with the full proof of (1)-(4). The route is 01BS = 0GMV + 009F(4) unpacked into finite data. Step 1: the presentation definition (2) plus kernel node (2) on (W,O|_W), with conventions matching, give Sum a s = 0. The local-lift node gives t_r. Sectionwise kernels give psi. Agreement on the basis and cancelling the epi b give c_i psi = h|_V. Step 2: the qcqs covering node refines every cover; nonempty I covers empty X. Step 3: finite type on qc overlaps, which are not assumed affine; the equality node gives k_ab; gluing and separatedness come from def-pur-sheaf-hom. Step 4: the equality node with U=X plus filtered-colimit-sets-elementwise (1),(2) give bijectivity of the canonical map. Both new nodes are true and self-contained, statement-only, with 6 searches of all kinds and correct blueprint.from/via. Tested: n=0 or m=0, empty W or U, G=0, a one-point space with R/J and J not finitely generated, and non-injective transitions. A live-DAG duplicate search (0GMV node, site internal-hom-colimit, 009F sections, pc ring-colimit map equality, finite-presentation-pairs-filtered) found no duplicate. No SGA, no cycle, no tool_uses, no fixes. Maintainer note: sheaf-hom-finite-presentation-colimit and module-directed-colimit-underlying-sets may lose their only citer after landing."
  },
  "split_report": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "item": "lem-weil-pbc-finite-presentation-hom-directed-colimit",
   "worker": "stage1",
-  "summary": "Read Stacks Modules 01BS and its proof (literature/stacks-project/modules.tex line 3818), Modules 0GMV (line 3759) and Sheaves 009F (sheaves.tex line 3444). 01BS is stated for a ringed space with hypothesis (3) (cofinal finite coverings with quasi-compact pairwise intersections); its proof identifies Hom(G,F_i), Hom(G,F) with global sections of the sheaf Homs H_i, H, uses 0GMV for H = colim H_i and concludes by 009F (4) for U = X. The proof is written in five steps following it: Step 1 the Hom sheaves (def-pur-sheaf-hom, elementary), Step 2 0GMV (new node lem-weil-pbc-sheaf-hom-finite-presentation-colimit, which also states the existence of the colimit of the H_i, Modules 01AH (2)), Step 3 hypothesis (3) on a qcqs scheme (new node lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings, Schemes 01IT/01KO, Algebra 00E8), Step 4 009F (new node lem-weil-pbc-sheaves-directed-colimit-sections, stated for sheaves of sets as in Stacks) applied through the step Stacks leaves silent, that the underlying sheaf of sets of a directed colimit of O_X-modules is the colimit of sheaves of sets (new node lem-weil-pbc-module-directed-colimit-underlying-sets, Modules 01AH(2), Sheaves 007O(7), 0087(1)), Step 5 unpacking of the directed colimit of sets (elementary). Statement kept (correct against 01BS specialized to qcqs schemes and directed sets). Mathlib searched (leansearch, leanfinder, loogle, grep): no sheaf Hom of sheaves of modules, no sections-of-colimits over compact opens; all four new nodes unsplit."
+  "summary": "Q37 repairs the returned re-split with two statement-only unsplit nodes of comparable finite-data descent content: local lifting of a finite linear system, and eventual equality of maps from a finite-type module over a quasi-compact open. The original statement and metadata/searches remain; the proof is now a short finite-presentation/finite-cover assembly. All old arguments and prior report/search results are retained and mapped to the two new tasks in report.md. Each new statement was searched with LeanSearch, Loogle, LeanFinder (two phrasings), and source grep, with no exact or one-line match. Every proof citation has a verbatim statement quotation. Landing-return repair (2026-10-22, returned head 5d2bf30d9ef): rebased split-owned fields onto the current read-clone node, preserving all current maintainer metadata; reread every statement used by the assembly and verified all twelve existing literal citation quotations. Clarified the relation matrix and the sectionwise-kernel argument in Step 1. The two new statements and their logged searches are retained unchanged. Current retry: reconstructed the item from the current read-clone node again, retaining only split-owned changes; made the presentation open and the transpose of the relation coefficients explicit, and recorded that both overlap composites equal h before applying eventual equality. Initial retry dry run passed at d4d8c06e145; all cited current statements were reread.",
+  "blueprint": "Realizes the finite-presentation Hom tool below step 4 of lemma-weil-pbc-h1-constructible-representation through the retained via chain. Local finite equations expand the Hom-sheaf comparison; finite-type eventual equality supplies the overlap and global injectivity arguments; the parent assembles these by the existing qcqs covering and sheaf-Hom gluing nodes. The chapter/unit route is unchanged."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FinitePresentationHomDirectedColimit",

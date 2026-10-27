@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenFunctions
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 
 /-!
 # Lisse `ℓ`-adic sheaves extend uniquely over a dense open
@@ -44,23 +45,6 @@ universe u
 open CategoryTheory Limits Opposite
 
 attribute [local instance] Abelian.hasFiniteBiproducts
-
-/-- A natural transformation between additive functors is invertible at a finite biproduct if it
-is invertible at the summands. -/
-lemma CategoryTheory.NatTrans.isIso_app_biproduct {C D : Type*} [Category C] [Category D]
-    [Preadditive C] [Preadditive D] {F G : C ⥤ D} [F.Additive] [G.Additive] (α : F ⟶ G)
-    {J : Type} [Finite J] (f : J → C) [HasBiproduct f] (h : ∀ j, IsIso (α.app (f j))) :
-    IsIso (α.app (⨁ f)) := by
-  have := Fintype.ofFinite J
-  refine ⟨∑ j, G.map (biproduct.π f j) ≫ inv (α.app (f j)) ≫ F.map (biproduct.ι f j), ?_, ?_⟩
-  · simp only [Preadditive.comp_sum, ← NatTrans.naturality_assoc, IsIso.hom_inv_id_assoc,
-      ← Functor.map_comp, ← Functor.map_sum]
-    convert F.map_id _
-    exact biproduct.total
-  · simp only [Preadditive.sum_comp, Category.assoc, NatTrans.naturality, IsIso.inv_hom_id_assoc,
-      ← Functor.map_comp, ← Functor.map_sum]
-    convert G.map_id _
-    exact biproduct.total
 
 namespace AlgebraicGeometry.ProEtale
 

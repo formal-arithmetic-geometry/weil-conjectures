@@ -216,22 +216,39 @@
  },
  "lean": {
   "module": "Sheaf.RingTheory.OneDimensionalComponentConormal",
-  "declaration": "Ideal.exists_pow_conormal_torsion_of_one_dimensional_component",
+  "declaration": "AdicCompletion.exists_pow_minimalPrime_localization_eq_bot_and_cotangent_annihilated",
   "file": "lean/Sheaf/RingTheory/OneDimensionalComponentConormal.lean",
-  "statement": "theorem exists_pow_conormal_torsion_of_one_dimensional_component {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] (q : Ideal (AdicCompletion (IsLocalRing.maximalIdeal A) A)) [q.IsPrime] (hq : q ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (hdim : ringKrullDim ((AdicCompletion (IsLocalRing.maximalIdeal A) A) ⧸ q) = 1) : ∃ n c : ℕ, 1 ≤ n ∧ 1 ≤ c ∧ (q ^ n).map (algebraMap (AdicCompletion (IsLocalRing.maximalIdeal A) A) (Localization.AtPrime q)) = ⊥ ∧ ((IsLocalRing.maximalIdeal A).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))) ^ c ≤ Module.annihilator (AdicCompletion (IsLocalRing.maximalIdeal A) A) (q ^ n).Cotangent",
-  "branch": "newtargets-dag",
-  "by": "Q93",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.OneDimensionalComponentConormal deleted (dead: no target reaches it); this node is not reached either."
+  "statement": "theorem exists_pow_minimalPrime_localization_eq_bot_and_cotangent_annihilated (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] (q : Ideal (AdicCompletion (IsLocalRing.maximalIdeal A) A)) [q.IsPrime] (hq : q ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (hdim : ringKrullDim ((AdicCompletion (IsLocalRing.maximalIdeal A) A) ⧸ q) = 1) : ∃ n c : ℕ, 1 ≤ n ∧ 1 ≤ c ∧ (q ^ n).map (algebraMap (AdicCompletion (IsLocalRing.maximalIdeal A) A) (Localization.AtPrime q)) = ⊥ ∧ ((IsLocalRing.maximalIdeal A).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))) ^ c ≤ Module.annihilator (AdicCompletion (IsLocalRing.maximalIdeal A) A) (q ^ n).Cotangent",
+  "branch": "sheaf-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ba1c4d6bd",
-  "group": "Q93",
+  "reviewer": "NT-stage2-cc-07f6cd8ca",
+  "group": "Q132",
   "result": "pass",
-  "note": "Statement matches node and Stacks 0AW3 d=1 paragraph clause by clause: Noetherian local domain A, B=AdicCompletion (maximalIdeal A) A, q in minimalPrimes B (the IsPrime instance follows from it), ringKrullDim (B/q)=1, exists n c >= 1 with (q^n).map to Localization.AtPrime q = bottom and (mB)^c <= annihilator of (q^n).Cotangent (equivalent to (mB)^c(J/J^2)=0). No extra hypotheses or universe restriction. Edge cases q=0, A a field, nonreduced B, J/J^2=0 and several components all correct. No duplicate in Mathlib or side lean; only citer is ratliff-formal-catenarity Step 3. Node differs from live only in lean; lean.statement verbatim; docstrings carry source place, blueprint id and 4 proof steps; sorry-only; no line over 100; imports are statement plus proof-plan modules. nt_compile --json clean, 2.2 s, no warnings. No findings."
+  "note": "Matches node and Stacks 0AW3 d=1 clause by clause: Noetherian local domain A, B = AdicCompletion (maximalIdeal A) A, q ∈ minimalPrimes B ([q.IsPrime] implied, needed for Localization.AtPrime), ringKrullDim (B⧸q) = 1; ∃ n c ≥ 1 with (q^n).map to Localization.AtPrime q = ⊥ and (mB)^c ≤ Module.annihilator B (q^n).Cotangent (Ideal.Cotangent = J/(J•⊤) = J/J²). Same n in both clauses; no extra assumptions or universe restriction. Edge cases (A a field: vacuous; q = 0; J = 0; nonreduced B; several components) fine. Re-delivery after lean_removed, not a rebind: node differs from side-live only in the lean record; module and declaration absent on live. lean.statement verbatim; sorry only; docstrings carry source place, blueprint id and 4 proof steps; lines ≤ 86; all imports exist; stmt_deps are Mathlib definition records; report has both sections. No compile (no changes); worker compile clean. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/OneDimensionalComponentConormal.lean",
+  "module": "Sheaf.RingTheory.OneDimensionalComponentConormal",
+  "declaration": "Ideal.exists_pow_conormal_torsion_of_one_dimensional_component",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

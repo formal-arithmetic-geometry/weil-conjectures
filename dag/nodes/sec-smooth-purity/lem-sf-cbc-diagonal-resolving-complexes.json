@@ -1,0 +1,318 @@
+{
+ "id": "lem-sf-cbc-diagonal-resolving-complexes",
+ "kind": "statement",
+ "title": "Constant diagrams preserve flat-term K-flat complexes with evaluated tensor normalization",
+ "statement": "Let $\\mathcal C$ be a small Grothendieck site, $R$ a sheaf of commutative rings, and $J$ a small category. Use module sheaves [def-weil-sheaf-of-modules-category] and the ringed diagram site $\\mathcal D=J^{\\mathrm{op}}\\times\\mathcal C$ with ring $\\Delta R$, constant-diagram functor $\\Delta$, and exact evaluations $e_j$ [lem-weil-pbc-diagram-site-realization]. For any unbounded cochain complex $P$ of $R$-modules that is K-flat [def-pc-kflat-complex] with flat terms [def-pc-flat-sheaf-modules], $\\Delta P$ is K-flat over $\\Delta R$ and has flat terms. More precisely, for any complex $A$ of $\\Delta R$-modules there are natural cochain isomorphisms\n$$e_j\\operatorname{Tot}(A\\otimes_{\\Delta R}\\Delta P)\\cong\\operatorname{Tot}(e_jA\\otimes_RP),$$\nwith the actual direct-sum total differentials [def-pc-tensor-complex-sheaves], taking each local pure tensor $x\\otimes p$ to $x\\otimes p$. They are natural in $A$ and $P$. If $A$ is acyclic, these evaluated total tensors and the diagram total tensor are acyclic. The same normalization identifies evaluation of tensor by $\\Delta P^i$ with tensor by $P^i$ on every exact sequence of diagrams. These assertions apply to every small site and every such $P$, including a localized site and an extended complex, without boundedness or a constant coefficient-ring hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN (definition-K-flat), 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor): agent-stated diagram-evaluation K-flat test, returned proof Step 2."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-diagram-site-realization"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-diagram-site-realization] to work in $\\operatorname{Fun}(J,\\operatorname{Mod}(R))$. Each $e_j$ is additive and exact. A diagram $M$ is zero if and only if every $M(j)$ is zero: if all components vanish, the unique component maps $M(j)\\to0$ and $0\\to M(j)$ give inverse natural transformations. This also holds when $J$ is empty, since there is exactly one empty diagram and one morphism between any two empty diagrams. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to obtain $e_jH^n(B)\\cong H^n(e_jB)$ for every complex $B$ and integer $n$. Thus $B$ is acyclic if and only if every $e_jB$ is acyclic. Exactness of a sequence of diagrams is likewise detected by evaluations, by applying the same cohomology comparison to the three-term complex of that sequence.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor); agent application to the exact evaluations and zero detection of the diagram-site realization"
+   }
+  },
+  {
+   "text": "Evaluation preserves the direct sums needed below. Indeed, for any small family of diagrams $M_a$, form $S(j)=\\bigoplus_aM_a(j)$ in $\\operatorname{Mod}(R)$, with $S(\\alpha)$ the unique map satisfying $S(\\alpha)\\iota_a=\\iota_aM_a(\\alpha)$. Identity and composition follow by equality on the coproduct inclusions. A family of natural transformations $M_a\\to N$ induces unique maps $S(j)\\to N(j)$; their naturality follows by equality on each $\\iota_a$. This is exactly the coproduct universal property in the diagram category, and its evaluation is the coproduct universal property in $\\operatorname{Mod}(R)$. Transport this construction through [lem-weil-pbc-diagram-site-realization]. In particular the comparison $e_j(\\bigoplus_{r+s=n}M_{r,s})\\cong\\bigoplus_{r+s=n}e_jM_{r,s}$ is the one preserving all the specified inclusions. The sums exist as in [def-pc-tensor-complex-sheaves].",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits); explicit coproduct universal-property argument in the diagram category"
+   }
+  },
+  {
+   "text": "For each $j$, the inverse image on sets in [lem-weil-pbc-diagram-site-realization] is evaluation and preserves finite limits; it is a left adjoint by the stated evaluation adjunction. The module evaluation with ring identification $e_j\\Delta R=R$ is an algebraic inverse-image presentation [def-weil-pbc-algebraic-inverse-image]: all its operation comparisons are identities on the component ring and module operations. Apply [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] to this presentation. For arbitrary module diagrams $M,N$ this gives natural isomorphisms $\\tau_{j,M,N}:e_j(M\\otimes_{\\Delta R}N)\\xrightarrow{\\sim}e_jM\\otimes_Re_jN$ carrying an evaluated sheafified pure tensor to the pure tensor of its evaluated factors. These are the actual pairings of [def-weil-pbc-ringed-tensor-section-calculus]. Specializing $N=\\Delta Q$, with $e_j\\Delta Q=Q$ on objects and morphisms, gives $e_j(M\\otimes_{\\Delta R}\\Delta Q)\\cong(e_jM)\\otimes_RQ$ with local formula $x\\otimes q\\mapsto x\\otimes q$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), algebraic inverse-image part; specialization to the evaluation geometric morphism"
+   }
+  },
+  {
+   "text": "In total degree $n$, combine Step 2 with the direct sum of the Step 3 comparisons for $(M,Q)=(A^r,P^s)$, $r+s=n$. This gives the required degreewise isomorphism. By [def-pc-tensor-complex-sheaves] the differential on the $(r,s)$ summand is $d_A^r\\otimes1+(-1)^r1\\otimes d_P^s$. Naturality of $\\tau$ in the two module variables identifies its two images respectively with $d_{e_jA}^r\\otimes1$ and $(-1)^r1\\otimes d_P^s$; evaluation preserves the sum and the integer sign because it is additive. Thus the degreewise isomorphisms commute with the actual total differentials and constitute a cochain isomorphism. Its inverse also commutes with differentials, by multiplying this cochain equation by the degreewise inverses. All comparisons preserve the $(r,s)$ inclusions and send $x\\otimes p$ to $x\\otimes p$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YL (section-flat), total tensor convention before Definition 06YN; homology.tex Tag 012Z (definition-associated-simple-complex); explicit signed differential calculation"
+   }
+  },
+  {
+   "text": "For cochain maps $a:A\\to A^{\\prime}$ and $b:P\\to P^{\\prime}$, on the $(r,s)$ coproduct inclusion the naturality square of Step 4 is precisely the naturality square of $\\tau_{j,A^r,\\Delta P^s}$ for $(a^r,\\Delta b^s)$. Hence the square commutes by Step 3 and equality on coproduct inclusions. Its local formula is $x\\otimes p\\mapsto a^r(x)\\otimes b^s(p)$ on either path, with no degree permutation or additional sign. The same module comparison, with $Q=P^i$, is natural for every arrow of an exact sequence of diagrams; it therefore identifies the evaluated tensor sequence with that sequence evaluated first and tensored with $P^i$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), functoriality; homology.tex Tag 012Z (definition-associated-simple-complex), maps on total summands"
+   }
+  },
+  {
+   "text": "Let $0\\to M^{\\prime}\\to M\\to M^{\\prime\\prime}\\to0$ be any short exact sequence of $\\Delta R$-module diagrams. For each $j$ its evaluation is short exact, and tensoring that evaluated sequence with $P^i$ is exact by the assumed flatness of $P^i$ and [def-pc-flat-sheaf-modules]. Step 5 identifies it with evaluation of the original sequence tensored with $\\Delta P^i$. Detection of exactness from Step 1 shows that the latter sequence is exact before evaluation as well. Since the sequence was arbitrary, [def-pc-flat-sheaf-modules] says exactly that $\\Delta P^i$ is flat, for every $i$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER (definition-flat), item (3); elementary exactness test through the normalized evaluation comparisons"
+   }
+  },
+  {
+   "text": "Let $A$ be an arbitrary acyclic complex of $\\Delta R$-modules. Step 1 makes $e_jA$ acyclic. Since $P$ is K-flat, [def-pc-kflat-complex] makes $\\operatorname{Tot}(e_jA\\otimes_RP)$ acyclic. The cochain isomorphism of Step 4 and the cohomology comparison in Step 1 imply that every evaluation of $\\operatorname{Tot}(A\\otimes_{\\Delta R}\\Delta P)$ is acyclic, hence that the total complex itself is acyclic. This is K-flatness of $\\Delta P$ by the same definition, and also proves the more precise acyclicity assertion. There was no boundedness assumption: degree $n$ used the entire small coproduct indexed by $r+s=n$, rather than a finite sum or a product. The argument applies anew to any small localized site with its ring sheaf and any extended complex satisfying the two stated assumptions; it uses neither constant coefficients on the original site nor a preservation theorem for localization or extension.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); agent evaluation criterion for the arbitrary acyclic test complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL (lemma-tensor-product-pullback), 03DB (lemma-limits-colimits), 03ER (definition-flat), combined with homology.tex Tag 010N (lemma-exact-functor) and sites-cohomology.tex Tag 06YN (definition-K-flat): explicit diagram-evaluation argument, not a theorem asserted by those tags"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(constant|diagonal|extensionByZero|lowerShriek).*(KFlat|K.flat)|KFlat.*(constant|diagonal|extensionByZero)",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary flat modules, evaluation preserving limits, or representably flat functors; no ringed diagram K-flat assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(KFlat|K.flat).*(NatIso|descen|linear)|(descen|linear).*(KFlat|K.flat)",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary flat modules, evaluation preserving limits, or representably flat functors; no ringed diagram K-flat assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constant diagram of a K-flat complex of sheaves is K-flat by exact evaluation",
+   "results": "SheafOfModules.evaluationPreservesLimit; Module.Flat.rTensor_shortComplex_exact; HomologicalComplex.instPreservesLimitsOfShapeEvalOfHasLimitsOfShape; SheafOfModules.evaluationPreservesLimitsOfShape; HomologicalComplex.instPreservesLimitEval; CategoryTheory.Limits.evaluation_preservesLimitsOfShape; CategoryTheory.Limits.evaluationPreservesLimits; Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary flat modules, evaluation preserving limits, or representably flat functors; no ringed diagram K-flat assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"Functor\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary flat modules, evaluation preserving limits, or representably flat functors; no ringed diagram K-flat assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary flat modules, evaluation preserving limits, or representably flat functors; no ringed diagram K-flat assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat complexes of sheaves remain K-flat under exact extension by zero and constant inverse diagrams",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact slice extension and constant diagrams preserve flat term K-flat complexes on small ringed sites",
+   "results": "CategoryTheory.lan_flat_of_flat; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; CategoryTheory.compatiblePreservingOfFlat; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.FaithfullyFlat.iff_exact_iff_lTensor_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary flat modules, evaluation preserving limits, or representably flat functors; no ringed diagram K-flat assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsKFlat|KFlat|K.flat).*(constant|diagonal|evaluation)|(constant|diagonal|evaluation).*(IsKFlat|KFlat|K.flat)",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary flatness, condensed monoidal structures, or complex/evaluation constructions; none states the ringed diagram K-flat assertion with normalized total tensor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a total tensor product of diagram complexes is the total tensor product of the evaluated complexes, so constant diagrams preserve K-flat complexes",
+   "results": "HomologicalComplex.tensorObj; HomologicalComplex.instPreservesColimitEval; Module.Flat.rTensor_shortComplex_exact; HomologicalComplex₂.total.mapIso; CategoryTheory.Limits.evaluationPreservesLimits; HomologicalComplex.tensorHom; CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary flatness, condensed monoidal structures, or complex/evaluation constructions; none states the ringed diagram K-flat assertion with normalized total tensor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlat\", \"Functor\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary flatness, condensed monoidal structures, or complex/evaluation constructions; none states the ringed diagram K-flat assertion with normalized total tensor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant diagram of an unbounded K-flat complex of sheaves of modules is K-flat, because evaluation preserves direct-sum total tensor products",
+   "results": "CategoryTheory.lan_flat_of_flat; CategoryTheory.compatiblePreservingOfFlat; Module.Flat.of_flat_tensorProduct; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; Module.Flat.directSum_iff; Module.flat_of_isLocalized_span; Module.Flat.dfinsupp_iff; Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary flatness, condensed monoidal structures, or complex/evaluation constructions; none states the ringed diagram K-flat assertion with normalized total tensor"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary flatness, condensed monoidal structures, or complex/evaluation constructions; none states the ringed diagram K-flat assertion with normalized total tensor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal exact evaluation functor from diagrams of sheaf modules preserves coproduct tensor total complexes and detects acyclicity pointwise",
+   "results": "Condensed.hasExactColimitsOfShape; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; Condensed.instAB4StarCondensedMod; Condensed.instAB4CondensedMod; CategoryTheory.Tor'; CategoryTheory.Tor",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary flatness, condensed monoidal structures, or complex/evaluation constructions; none states the ringed diagram K-flat assertion with normalized total tensor"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-localized-strict-tensor-descent",
+  "date": "2026-10-22",
+  "group": "NG"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 1–2: extension-by-zero identification and coefficient naturality; localized strict-tensor refinement, returned descent proof Steps 2",
+   "via": [
+    "lem-sf-cbc-localized-strict-tensor-descent",
+    "lem-sf-cbc-extension-zero-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cbc-diagonal-resolving-complexes",
+  "worker": "stage1",
+  "summary": "Preserved the full unbounded ringed-site statement and all inherited search history. Proved the result through the existing exact diagram realization, normalized algebraic inverse-image tensor comparison and exact-functor cohomology theorem. Wrote the coproduct universal property, signed total differential, simultaneous naturality, flat-term test and arbitrary acyclic-complex test explicitly. No new nodes. Removed the unused abstract-derived-category statement dependency.",
+  "blueprint": "fix-lem-exchanges proof Steps 1–2: the extension-by-zero identification and coefficient naturality; realizes the constant-diagram resolving-class ingredient of the localized strict-tensor refinement through the two retained intermediate ancestors.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic realization of strict diagrams as sheaves with exact evaluations; supplies the small ringed site used in the statement, with no replacement of compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Generic normalized tensor comparison for a geometric inverse image; used only for evaluation on arbitrary ringed diagram sites, not supplied by this compact-support unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O3-ddec5f7ba",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-ddec5f7ba (reviewer sub-agent of L); spot-checked: I read the whole item and all 7 steps; there are no new nodes. The statement is byte-identical to the base. Dropping def-weil-abstract-derived-category from stmt_deps is correct, since the statement asserts only cochain isomorphisms. The item is unsplit live, has no repair note, is not in the drop list, and its only citer is localized-strict-tensor-descent Step 1. Cited statements checked: diagram-site-realization gives the exact module equivalence, e_j as the inverse image of a morphism of topoi, and e_j^{-1}O_D=O. The tensor-comparison lemma's left-exact geometric hypothesis holds for e_j, and the algebraic presentation is all identities, so e_j(M⊗ΔQ)≅e_jM⊗Q with x⊗q↦x⊗q. I confirmed this independently: D's sheafification runs only along C-covers with id_j, so it is computed componentwise in j. Step 1 detects zero and acyclicity through exact e_j and the H^n comparison (a Mathlib leaf). Step 2 gives pointwise infinite coproducts, so unbounded complexes are covered. Step 4 keeps the sign (−1)^r of def-pc-tensor-complex-sheaves. Step 6 proves flatness from the flat-module definition on the same side of the tensor. Step 7 proves K-flatness from the def-pc-kflat-complex quantifier. Edge cases tested: J empty, J a singleton, R=0, unbounded A and P. Stacks tags 03EL, 06YN, 03DB, 03ER, 010N, 012Z and 06YL were checked in the local source. There is no duplicate: diagram-kflat-replacements gives objectwise replacements, and strict-tensor-model-evaluation is a consumer. The two pbc tool uses (diagram-site-realization and inverse-image tensor comparison) are generic and accepted. No SGA anywhere. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalResolvingComplexes",
+  "declaration": "CategoryTheory.DiagonalResolving.exists_diagonal_resolving_comparisons",
+  "declarations": [
+   "CategoryTheory.DiagonalResolving.coefficient",
+   "CategoryTheory.DiagonalResolving.evaluate",
+   "CategoryTheory.DiagonalResolving.diagonal",
+   "CategoryTheory.DiagonalResolving.evaluate_additive",
+   "CategoryTheory.DiagonalResolving.diagonal_additive",
+   "CategoryTheory.DiagonalResolving.totalTensor",
+   "CategoryTheory.DiagonalResolving.totalTensorMap",
+   "CategoryTheory.DiagonalResolving.totalInclusion",
+   "CategoryTheory.DiagonalResolving.diagonalComplex",
+   "CategoryTheory.DiagonalResolving.evaluateComplex",
+   "CategoryTheory.DiagonalResolving.tensor",
+   "CategoryTheory.DiagonalResolving.tensorMap",
+   "CategoryTheory.DiagonalResolving.derivedQ",
+   "CategoryTheory.DiagonalResolving.exists_diagonal_resolving_comparisons"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalResolvingComplexes.lean",
+  "statement": "theorem exists_diagonal_resolving_comparisons : ∃ (τ : ∀ (j : J) (M : ringedSiteModules.{u} (ringSheaf (coefficient (J := J) K R))) (Q : ringedSiteModules.{u} (ringSheaf R)), (evaluate K R j).obj (tensor _ (coefficient K R) M ((diagonal K R).obj Q)) ≅ tensor K R ((evaluate K R j).obj M) Q) (e : ∀ (j : J) (A : CochainComplex (ringedSiteModules.{u} (ringSheaf (coefficient (J := J) K R))) ℤ) (P : CochainComplex (ringedSiteModules.{u} (ringSheaf R)) ℤ), (evaluateComplex K R j).obj (totalTensor _ (coefficient K R) A ((diagonalComplex K R).obj P)) ≅ totalTensor K R ((evaluateComplex K R j).obj A) P), (∀ (j : J) (M : ringedSiteModules.{u} (ringSheaf (coefficient (J := J) K R))) (Q : ringedSiteModules.{u} (ringSheaf R)) (U : Cᵒᵖ) (x : M.val.obj (op (op j, U.unop))) (q : Q.val.obj U), (τ j M Q).hom.val.app U (pure (coefficient K R) M ((diagonal K R).obj Q) (op (op j, U.unop)) x q) = pure R ((evaluate K R j).obj M) Q U x q) ∧ (∀ (j : J) {M M' : ringedSiteModules.{u} (ringSheaf (coefficient (J := J) K R))} {Q Q' : ringedSiteModules.{u} (ringSheaf R)} (f : M ⟶ M') (g : Q ⟶ Q'), (evaluate K R j).map (tensorMap _ (coefficient K R) f ((diagonal K R).map g)) ≫ (τ j M' Q').hom = (τ j M Q).hom ≫ tensorMap K R ((evaluate K R j).map f) g) ∧ (∀ (j : J) (A : CochainComplex (ringedSiteModules.{u} (ringSheaf (coefficient (J := J) K R))) ℤ) (P : CochainComplex (ringedSiteModules.{u} (ringSheaf R)) ℤ) (r s n : ℤ) (h : r + s = n), (evaluate K R j).map (totalInclusion _ (coefficient K R) A ((diagonalComplex K R).obj P) r s n h) ≫ (e j A P).hom.f n = (τ j (A.X r) (P.X s)).hom ≫ totalInclusion K R ((evaluateComplex K R j).obj A) P r s n h) ∧ (∀ (j : J) {A A' : CochainComplex (ringedSiteModules.{u} (ringSheaf (coefficient (J := J) K R))) ℤ} {P P' : CochainComplex (ringedSiteModules.{u} (ringSheaf R)) ℤ} (a : A ⟶ A') (b : P ⟶ P'), (evaluateComplex K R j).map (totalTensorMap _ (coefficient K R) a ((diagonalComplex K R).map b)) ≫ (e j A' P').hom = (e j A P).hom ≫ totalTensorMap K R ((evaluateComplex K R j).map a) b) ∧ (∀ (P : CochainComplex (ringedSiteModules.{u} (ringSheaf R)) ℤ), CochainComplex.IsKFlatIndependentCoefficients (R := R) P → (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u, u, u, u} (R := R) (P.X i)) → CochainComplex.IsKFlatIndependentCoefficients (R := coefficient (J := J) K R) ((diagonalComplex K R).obj P) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u, u, u, u} (R := coefficient (J := J) K R) (((diagonalComplex (J := J) K R).obj P).X i)) ∧ (∀ (A : CochainComplex (ringedSiteModules.{u} (ringSheaf (coefficient (J := J) K R))) ℤ), A.Acyclic → (totalTensor _ (coefficient K R) A ((diagonalComplex K R).obj P)).Acyclic ∧ ∀ j : J, ((evaluateComplex K R j).obj (totalTensor _ (coefficient K R) A ((diagonalComplex K R).obj P))).Acyclic ∧ (totalTensor K R ((evaluateComplex K R j).obj A) P).Acyclic)) ∧ (∀ (j : J) (A : CochainComplex (ringedSiteModules.{u} (ringSheaf (coefficient (J := J) K R))) ℤ) (P : CochainComplex (ringedSiteModules.{u} (ringSheaf R)) ℤ), Nonempty ((derivedQ K R).obj ((evaluateComplex K R j).obj (totalTensor _ (coefficient K R) A ((diagonalComplex K R).obj P))) ≅ (derivedQ K R).obj (totalTensor K R ((evaluateComplex K R j).obj A) P)))",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-815f2c73d",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Lean statement matches the node and is verbatim in the file; only the node's lean field changed; the 14 declarations are exact, the theorem is the only sorry, docstrings carry the Stacks tags, blueprint id and 7 proof steps. Diagram-site ring, Δ and e_j are the recorded constructions; K-flat and flatness use the dependency predicates. τ is fixed on pure tensors x⊗q↦x⊗q and e on every summand inclusion, so neither is existence-only. Naturality in A and P, the three acyclicity conclusions, ΔP K-flat with flat terms and the exact-sequence identification (via τ naturality) are all rendered. The extra derived-category clause follows from the cochain isomorphism (2026-10-21 convention). Edge cases checked: empty J, single-object J, R=0, unbounded complexes, universes inherited from the dependency. No duplicate found. Advisory: diagramSiteModuleEquivalence, diagramSiteTopology/diagramSiteRing/diagramSite_isSheaf_iff and ringSheaf/pure belong to nodes not in stmt_deps; stmt_deps are unchanged from stage 1, so this is a maintainer note, not a RETURN. No file changed, so no compile; worker reports a clean compile in 4.9 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261024T184620-L-3079841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.DiagonalResolving.exists_diagonal_resolving_comparisons"
+  ],
+  "sorry_after": []
+ }
+}

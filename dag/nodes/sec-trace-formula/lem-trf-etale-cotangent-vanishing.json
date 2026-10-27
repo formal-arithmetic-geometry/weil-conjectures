@@ -21,9 +21,8 @@
    }
   },
   {
-   "text": "Because $\\mu$ is surjective (every $c\\in C$ is the image of $c\\otimes1$) and flat by Step 1, [lem-trf-flat-epimorphism-derived-self-tensor] identifies $C\\otimes_{C\\otimes_R C}^{\\mathbf L}C$ with $C[0]$. Applying [lem-trf-derived-diagonal-cotangent-vanishing] to $C\\otimes_R C\\to C$ therefore gives $L_{C/(C\\otimes_R C)}=0$.",
+   "text": "Multiplication μ : C ⊗_R C → C is surjective since μ(c ⊗ 1) = c, and is flat by Step 1. Compute its canonical derived multiplication using the projective-resolution model already used by lem-trf-derived-diagonal-cotangent-vanishing. Flat scalar extension preserves the quasi-isomorphic augmentation. Ordinary multiplication is bijective by LinearMap.mul'_bijective_of_surjective; its single-complex map and the standard single/map comparison are isomorphisms. Extension from nonnegative chain degree to nonpositive cochain degree preserves quasi-isomorphisms, and localization inverts them. Thus the exact derived multiplication required by lem-trf-derived-diagonal-cotangent-vanishing is invertible, so L_{C/(C ⊗_R C)} = 0. This is proved in the private helper flat_surjection_diagonal, without a comparison to a second derived-tensor construction.",
    "uses": [
-    "lem-trf-flat-epimorphism-derived-self-tensor",
     "lem-trf-derived-diagonal-cotangent-vanishing"
    ],
    "elementary": false,
@@ -33,7 +32,7 @@
    }
   },
   {
-   "text": "Flatness of $C$ over $R$ makes $\\operatorname{Tor}^R_i(C,C)=0$ for every $i>0$. Together with the vanishing of $L_{C/(C\\otimes_R C)}$ from Step 2, [lem-trf-cotangent-bootstrap] applies and yields $L_{C/R}=0$. The cohomology formulation follows from the definition of the derived category.",
+   "text": "Flatness of C over R implies vanishing of positive Tor: choose a projective resolution of the restricted R-module C, compute Tor prime by ProjectiveResolution.isoLeftDerivedObj, and apply Module.Flat.rTensor_shortComplex_exact to its exact positive-degree short complexes. This is the private proved helper flat_tor_vanishing. Apply lem-trf-cotangent-bootstrap with this Tor vanishing and the diagonal vanishing from Step 2. Finally apply Functor.map_isZero for every integer-indexed derived homology functor.",
    "uses": [
     "lem-trf-cotangent-bootstrap"
    ],
@@ -46,7 +45,6 @@
  ],
  "proof_deps": [
   "lem-trf-etale-ring-map-weakly-etale",
-  "lem-trf-flat-epimorphism-derived-self-tensor",
   "lem-trf-derived-diagonal-cotangent-vanishing",
   "lem-trf-cotangent-bootstrap"
  ],
@@ -161,5 +159,26 @@
   "result": "pass",
   "note": "Every hypothesis and conclusion matches node lem-trf-etale-cotangent-vanishing and Stacks 08R2(5): bundled R C with algebraMap; [FinitePresentation R C] = def-weil-pbc-finitely-presented-algebra; explicit square-zero lifting bijectivity with D : Type u, which per Mathlib FormallyEtale.iff_comp_bijective (Etale/Basic.lean:86, test universe max u v = u) makes it equivalent to Algebra.Etale R C, so not stronger and not vacuous; conclusion IsZero(cotangentComplex κ ...) in DerivedCategory(ModuleCat C) plus vanishing of homologyFunctor in every degree i : ℤ. The Coherence parameter is not hollow: IsStandard and DifferentialModel termIso/operator pin the standard resolution and its differential module, so IsZero does not depend on κ; the HasDerivedCategory.{u+1} family matches the dependency interface. Node differs from live only in lean; statement verbatim in file. Edge cases C=0, identity map, J=0, all degrees covered; no extra hypotheses. No duplicate in Mathlib (only conormal/H1/Kähler results) or in side Sheaf. Docstrings carry source place, blueprint tag and the 3 proof steps; proof is sorry only; report has both sections. nt_compile --json on the snapshot file: 2.3 s, exit 0, clean. Advisory: the non-public proof-plan import FlatSurjectionDerivedSelfTensor is unused by the statement."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261023T123600-L-1216571",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

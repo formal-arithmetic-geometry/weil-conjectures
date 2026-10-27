@@ -1,0 +1,168 @@
+{
+ "id": "lem-sfb-adic-residue-local-homology-comparison",
+ "kind": "statement",
+ "title": "Local derived residue comparison for a specified completed perfect model",
+ "statement": "Let $X,S$ be schemes [def-pc-scheme], $i:S\\hookrightarrow X$ a locally closed immersion, $A$ a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and $I\\subset A$ a maximal ideal such that $A$ is $I$-adically complete [def-weil-pbc-adically-complete-ring]. Let $K$ be in the derived category of modules over the completed constant $A$-ring on $X$, let $U$ be an object of $S_{\\mathrm{proet}}$, and let $P$ be a bounded cochain complex of finitely generated projective $A$-modules [def-pc-perfect-ring-complex]. Assume an isomorphism between the local restrictions to $U$ of $K$ and $\\operatorname{sfbCompletedModel}(X,I,P)$, with exactly the constructions of [def-sfb-adic-stratified-perfect-data] and localized sites of [def-pur-localized-ringed-site]. Put $k=A/I$ and $L=(-)|_U\\circ i^{-1}$ in fixed $k$-scalars. There is an isomorphism in the unbounded derived category\n$$L\\bigl(Q(\\operatorname{sfbResidueComplex}(X,I,K))\\bigr)\\simeq Q\\bigl((k\\otimes_A P)_{S_{\\mathrm{proet}}/U}\\bigr),$$\nwhere the right side is the termwise constant sheaf of the ordinary algebraic residue complex used in [lem-sfb-adic-perfect-model-complete-reduction]. There is no global stratification, finiteness-of-homology or etale-origin conclusion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, reverse implication, the sentence that K_1 is locally constant with perfect value L_1; explicit local reduction comparison, before Lemma 6.3.13."
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-perfect-ring-complex",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-adic-perfect-model-complete-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Apply proEtaleLocalScalarDerivedIso to the local isomorphism e, the actual completed ring and its first finite projection. This identifies the local fixed-scalar derived residues of K and sfbCompletedModel X I P. No normalization of the completed inverse-image ring is needed in the model calculation.",
+   "uses": [
+    "lem-sfb-proetale-local-scalar-derived-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bounded-above completed constant realization of P is K-flat: projectivity gives flatness of the constant realization and its scalar extension, and the independent-universe bounded-flat criterion applies. Therefore its derived residue is ordinary scalar extension. Scalar-extension adjunctions and pbcRestrictComp identify successive scalar extensions with extension along their composite. CompletedConstantReduction.base_exists identifies this composite with the constant quotient map. ConstantScalarRealization.complexComparison is invertible termwise and identifies the result with the commutative constant realization of algebraicResidue I P.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-sfb-flat-scalar-realization-flat",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify sfbFixedScalarRestriction with the existing normalized constant-ring restriction by the identity on additive sections and restriction_smul. Its composite with commutative constant realization is the fixed-scalar constant sheaf functor. Exact restriction and the localization representative isomorphisms give the global derived residue calculation. Apply the exact fixed-scalar inverse image and slice restriction. Their constant-sheaf comparisons identify the result with the constant algebraic residue complex on the slice, and compose with step 1.",
+   "uses": [
+    "lem-weil-pbc-constant-derived-normalization-universal",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proetale-local-scalar-derived-iso",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-sfb-flat-scalar-realization-flat",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "lem-weil-pbc-constant-derived-normalization-universal",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 reverse implication; G6 calculates the global model directly by bounded-flat K-flatness, scalar-extension associativity and constant scalar normalization, then applies fixed-scalar restriction. Only the generic locality step is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived residue of a locally completed constant bounded projective complex commutes with restriction to an immersed stratum and localized pro-etale site",
+   "results": "Eight results concern local-ring residue maps, scheme residue fields and structure-sheaf restriction; none states a derived module comparison.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image and scalar extension commute with reduction of completed constant perfect complexes to a quotient ring",
+   "results": "Eight results concern algebraic AdicCompletion maps, BDeRhamPlus and formal smoothness; none concerns module sheaves or the specified local derived comparison.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructibleSheaf\"",
+   "results": "Zero hits.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|mapHomologyIso|DerivedCategory.*changeOfRings",
+   "results": "Generic ShortComplex.mapHomologyIso and its uses only. Local repository search additionally found adicPerfectModel_complete_reduction (the coefficient-sized calculation), but no comparison to sfbLocalRestriction and sfbResidueComplex.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; use the existing residue calculation in the proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectModelsResidueHomology",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Constructibility conditions agree by pro-etale/etale comparison, with the local residue identification from Bhatt--Scholze Proposition 6.6.11, reverse implication.",
+   "via": [
+    "lem-sfb-adic-perfect-models-residue-homology",
+    "lem-sfb-adic-perfect-models-residue-origin",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueLocalHomologyComparison",
+  "file": "lean/Sheaf/Paper/AdicResidueLocalHomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_localModelComparison",
+  "statement": "theorem adicResidue_localModelComparison\n    {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]\n    (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (hI : I.IsMaximal) [IsAdicComplete I A]\n    (K : DerivedCategory.{u + 2, u + 1, u + 2} (proEtaleRingModules X (adicLisseCompletedRing X I)))\n    (U : S.ProEt) (P : CochainComplex (ModuleCat.{u + 1, u + 1} A) ℤ) (a b : ℤ)\n    (hbounded : ∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q))\n    (hP : ∀ q : ℤ, Module.Finite A (P.X q) ∧ Module.Projective A (P.X q))\n    (e : Nonempty (sfbLocalRestriction.{u} i (adicLisseCompletedRing X I) U K ≅\n      sfbLocalRestriction.{u} i (adicLisseCompletedRing X I) U (sfbCompletedModel.{u} X I P)))\n    :\n    let L := ProEtale.upperStar (ModuleCat.{u + 1, u + 1} (A ⧸ I ^ (0 + 1))) i ⋙\n      (ProEt.topology S).overPullback (ModuleCat.{u + 1, u + 1} (A ⧸ I ^ (0 + 1))) U\n    letI : L.Additive := Functor.additive_of_preserves_binary_products L\n    let C := constantSheaf ((ProEt.topology S).over U)\n      (ModuleCat.{u + 1, u + 1} (A ⧸ I ^ (0 + 1)))\n    letI : C.Additive := Functor.additive_of_preserves_binary_products C\n    Nonempty (L.mapDerivedCategory.obj\n      (DerivedCategory.Q.obj (sfbResidueComplex.{u} X I K)) ≅\n      DerivedCategory.Q.obj\n        ((C.mapHomologicalComplex (.up ℤ)).obj (AdicPerfectModel.algebraicResidue I P)))",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "blueprint": "The local residue identification in Bhatt--Scholze Proposition 6.6.11, reverse implication, is the scalar/restriction calculation required by the integral criterion in det-lem-integral-models-stacks. It leaves the unit route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Use exact inverse image and preservation of the completed coefficient limit; this is a site-level tool, not a replacement for an integral-model step."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Use exact restriction to one localized site to transport the specified model."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Use derived scalar extension and its K-flat calculation in the canonical tensor base-change comparison."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Use the actual constant-section finite reduction comparison for the explicit completed model."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T201606-L-2583266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T001653-L-20776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

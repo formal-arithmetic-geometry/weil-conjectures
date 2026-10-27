@@ -1,0 +1,116 @@
+{
+ "id": "def-sf-etale-open-scalar-data",
+ "kind": "definition",
+ "title": "Canonical ordinary and derived open scalar comparison data",
+ "status": "split",
+ "statement": "Let $A,B$ be commutative rings, $\\varphi:A\\to B$ a ring homomorphism, and $j:U\\hookrightarrow Y$ an open immersion of schemes. Use small etale module derived categories [def-weil-pbc-derived-categories], open extension by zero [def-weil-pbc-extension-by-zero] and exact inverse image [prop-weil-pbc-inverse-image-modules-exact]. Write $J_A=j_A^*$ and $K_A=j_{!,A}$, with their specified ordinary and degreewise derived adjunctions [lem-weil-pbc-extension-by-zero-adjunction], and similarly for $B$. Define derivedRestriction and derivedExtension as the exact degreewise derived functors of $J_A$ and $K_A$. Let $E_T$ be ordinary scalar extension with its specified adjunction [def-sf-etale-sheaf-scalar-extension], $R_T$ ordinary restriction of scalars, $T_T$ the fixed derived scalar left adjoint [def-weil-pbc-witness-compatibility], and $DR_T$ its exact derived right adjoint. Define openRestrictScalarsIso $J_B R_U\\cong R_Y J_A$ by transporting the sectionwise identity through the canonical open restriction identification. Define openScalarRestrictionZero $J_A E_U\\cong E_Y J_B$ by uniqueness of left adjoints to the common composite scalar-restriction/direct-image right adjoint. Define openScalarExtensionZero $K_A E_Y\\cong E_U K_B$ by uniqueness of composite left adjoints, using openRestrictScalarsIso on their right adjoints. Define openDerivedRestrictScalarsIso $DJ_B DR_U\\cong DR_Y DJ_A$ by exact derived descent of openRestrictScalarsIso. Define openScalarExtension $DK_A T_Y\\cong T_U DK_B$ by uniqueness of composite scalar/open derived left adjoints using openDerivedRestrictScalarsIso. Finally, define openScalarRestrictionMap $DJ_A T_U\\to T_Y DJ_B$ as the inverse scalar-adjunction mate of the inverse of openDerivedRestrictScalarsIso. Here adjacent functors are composed from left to right. These definitions use the actual specified adjunctions; the last map is defined without any assertion of its invertibility.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-sf-etale-sheaf-scalar-extension",
+  "def-weil-pbc-witness-compatibility"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK, 03EL and 0E8I; exact derived descent: sites-cohomology.tex Tags 08FJ and 06YY. Canonical constructions used in lem-coef-finite-dualizing.proof.md, paragraphs 2-3."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical ordinary and derived scalar extension for module sheaves on small etale sites and open immersion extension by zero scalar comparison",
+   "results": "{\"t\": \"2026-10-22T11:02:56Z\", \"tool\": \"leansearch\", \"query\": \"Canonical ordinary and derived scalar extension for module sheaves on small etale sites and open immersion extension by zero scalar comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"PresheafOfModules.Sheafify.smul.congr_simp\", \"ModuleCat.extendRestrictScalarsAdj\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"PresheafOfModules.Sheafify.smulCandidate\", \"PresheafOfModules.Sheafify.SMulCandidate.ctorIdx\", \"PresheafOfModules.Sheafify.SMulCandidate.h\", \"SheafOfModules.restrictScalars\"], \"digest\": \"08c532eadb11af26\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides general scalar-extension and adjunction ingredients, not these small-etale constructions; reuse published project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-22T11:02:56Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides general scalar-extension and adjunction ingredients, not these small-etale constructions; reuse published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleSheafExtendScalars|openScalarRestrictionMap|openScalarExtension|openRestrictScalarsIso",
+   "results": "{\"t\": \"2026-10-22T11:02:56Z\", \"tool\": \"grep\", \"query\": \"etaleSheafExtendScalars|openScalarRestrictionMap|openScalarExtension|openRestrictScalarsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides general scalar-extension and adjunction ingredients, not these small-etale constructions; reuse published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l etaleSheafExtendScalars|openScalarRestrictionMap|openScalarExtension|openRestrictScalarsIso dag/nodes; rg in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search open coefficient; blueprint_refs.py search scalar extension",
+   "results": "Existing definitions: WeilConjectures/SixFunctors/ProEtale/ScalarExtension.lean:79,85, and Sheaf/SixFunctors/EtaleOpenTensorDefs.lean:48-155. DAG definition records have no ownership of these declarations: def-pur-scalar-pullback-representative-data owns scalarSheafPullbackIso, not etaleSheafExtendScalars. The open constructions occur in the theorem record lem-coef-etale-open-comparison-data. def-sp-etale-kflat-realization already owns etaleKFlat; def-weil-pbc-witness-compatibility already owns pbcFixedScalarExtension, and are cited rather than re-owned. Blueprint search open coefficient: 0; scalar extension: 71 broader matches, no definition of these exact constructions.",
+   "date": "2026-10-22",
+   "verdict": "Add ownership records only, with existing:true; no new Lean definition or module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dualizing-open-tensor",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Proof paragraphs 2-3: canonical coefficient/open maps used in the open-locality tensor and evaluation calculation.",
+   "via": [
+    "lem-coef-dualizing-open-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleOpenTensorDefs",
+  "declaration": "AlgebraicGeometry.Etale.openScalarRestrictionMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedRestriction",
+   "AlgebraicGeometry.Etale.derivedExtension",
+   "AlgebraicGeometry.Etale.openRestrictScalarsIso",
+   "AlgebraicGeometry.Etale.openScalarRestrictionZero",
+   "AlgebraicGeometry.Etale.openScalarExtensionZero",
+   "AlgebraicGeometry.Etale.openDerivedRestrictScalarsIso",
+   "AlgebraicGeometry.Etale.openScalarExtension",
+   "AlgebraicGeometry.Etale.openScalarRestrictionMap"
+  ],
+  "statement": "def openScalarRestrictionMap {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    derivedRestriction (A := A) j ⋙ scalarExtension φ U ⟶\n      scalarExtension φ X ⋙ derivedRestriction (A := B) j",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership only, on the unchanged published module. These eight are plain definitions, not choices from the conclusion of lem-coef-etale-open-comparison-data. Invertibility of openScalarRestrictionMap, openScalarRestriction, K-flatness and normalization laws are not owned by this node. The abbreviation Etale.scalarExtension unfolds to the pbcFixedScalarExtension owned by def-weil-pbc-witness-compatibility."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf356c1a7",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf356c1a7",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 499e163e4002; both return points fixed. F1: new def-sf-etale-open-scalar-data (existing:true on unchanged EtaleOpenTensorDefs) owns derivedRestriction, derivedExtension, openRestrictScalarsIso, openScalarRestrictionZero/ExtensionZero, openDerivedRestrictScalarsIso, openScalarExtension, openScalarRestrictionMap; its statement matches the leftAdjointUniq/mateEquiv constructions; record statement verbatim. evaluation now uses openScalarRestrictionMap (defeq to the old asIso.hom), so the isIso theorem is not needed; lem-coef-etale-open-comparison-data dropped; etaleKFlat cited via def-sp-etale-kflat-realization. F2: T_Y=Etale.scalarExtension (abbrev of pbcFixedScalarExtension) cites def-weil-pbc-witness-compatibility; new def-sf-etale-sheaf-scalar-extension owns small-etale etaleSheafExtendScalars and its adjunction (Stacks 03EK, verbatim lines 79-81). No duplicates: def-sp-open-scalar-operations is pro-etale. Only Lean change is that one term; changed dep records equal side-live. Clauses, edge cases (U empty, U=Y, m=n, non-flat Z/l^2->Z/l, a=b), docstrings and the single sorry checked. Advisory: small-etale extension-by-zero adjunctions are owned only by theorem nodes (base-era gap, maintainer note). No compile (no file changed)."
+ }
+}

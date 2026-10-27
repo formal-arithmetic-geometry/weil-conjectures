@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-open-dvr-scalar-unit-formula",
+ "kind": "statement",
+ "title": "Ordinary adjunct formula for the total derived scalar limit",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme T, an ordinary tensor/limit model M of [def-trf-completion-unit-models], and a coefficient derived system calculus S of [lem-coef-derived-system-evaluation-calculus]. Define a_Q as the ordinary constant/limit adjunct of the complexified M.adjunction unit, including the composite-functor comparison. Suppose c identifies termwise limit with roosLimitFunctor preserving ordinary projections, and eta is a natural map from the localized Roos complex to total derived limit such that Q(c) followed by eta is the universal derived-limit comparison. For a morphism f from S.reduction(Q(Q)) to Q(M.quotient(Q)), assume its S-adjunction transpose is the localized M-unit followed by systemLimitUnit(M,eta). Then S.unit followed by total derived limit of the restricted f and its exact localization factor equals localization of the ordinary constant/limit unit followed by termwise limit of a_Q, followed by the universal derived-limit comparison. No flatness or invertibility of f is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (adjunction), 0D6E (derived comparison) and 0941 (derived limit)."
+ },
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-derived-adjunction-comparison",
+  "def-weil-pbc-derived-reduction-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct a_Q explicitly with the inverse ordinary constant/limit Hom equivalence applied to M.adjunction.unit followed by the composite-functor comparison. Expand the given S-adjunction Hom equality using homEquiv_unit. Compose with the right-derived limit of the exact restriction localization factor; its inverse inside systemLimitUnit cancels. Ordinary limit projections identify M.limitComparison with the composite-functor comparison followed by c. The ordinary constant/limit Hom equivalence takes a_Q to that model unit. Finally substitute the assumed normalization of eta. This gives the claimed total derived-limit formula. For the canonical c and eta used in the parent, their normalization follows by unfolding the canonical eta, cancelling c with its inverse and retaining the universal localization comparison.",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "lem-trf-completion-unit-derived-adjunction-comparison",
+    "def-weil-pbc-derived-reduction-model-data",
+    "lem-trf-completion-unit-canonical-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-completion-unit-models",
+  "lem-trf-completion-unit-derived-adjunction-comparison",
+  "def-weil-pbc-derived-reduction-model-data",
+  "lem-trf-completion-unit-canonical-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (adjunction), 0D6E (derived comparison) and 0941 (derived limit). Q8: cancellation of exact localization factors and ordinary adjunction identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedLimitComplexComparison|mapHomologicalComplex_unit_app_f",
+   "results": "{\"t\": \"2026-10-27T01:12:45Z\", \"tool\": \"grep\", \"query\": \"derivedLimitComplexComparison|mapHomologicalComplex_unit_app_f\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "Adjunction.homEquiv_unit supplies the abstract transpose identity. No result directly gives this normalized total-limit equality; it is proved by ordinary adjunction and localization-factor cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv_unit\"",
+   "results": "{\"t\": \"2026-10-27T01:12:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction.homEquiv_unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"f7a59756025fbb96\"}",
+   "date": "2026-10-27",
+   "verdict": "Adjunction.homEquiv_unit supplies the abstract transpose identity. No result directly gives this normalized total-limit equality; it is proved by ordinary adjunction and localization-factor cancellation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived adjunction unit on a complex is its ordinary constant limit adjunct followed by the total right derived comparison",
+   "results": "{\"t\": \"2026-10-27T01:12:47Z\", \"tool\": \"leanfinder\", \"query\": \"The derived adjunction unit on a complex is its ordinary constant limit adjunct followed by the total right derived comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived\\u03b7\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derived\\u03b5\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived\\u03b7_fac_app\"], \"digest\": \"7fb910d2890c50d7\"}",
+   "date": "2026-10-27",
+   "verdict": "Adjunction.homEquiv_unit supplies the abstract transpose identity. No result directly gives this normalized total-limit equality; it is proved by ordinary adjunction and localization-factor cancellation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenDvrStrictReductionComparison",
+  "date": "2026-10-27",
+  "group": "Q8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Total-limit unit normalization step of the strict DVR quotient comparison; ordinary adjunct and exact localization factors.",
+   "via": [
+    "lem-sf-open-dvr-strict-reduction-comparison",
+    "lem-sf-open-dvr-augmented-reduction-comparison",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrScalarUnitFormula",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrScalarUnitFormula.lean",
+  "declaration": "WeilConjectures.openDvrScalarUnitFormula",
+  "declarations": [
+   "WeilConjectures.openDvrScalarUnitFormula",
+   "WeilConjectures.openScalarComplexAugmentation"
+  ],
+  "statement": "theorem openDvrScalarUnitFormula (T : Scheme.{u})\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E T)\n    (M : CompletionUnit.OrdinaryModel l E T)\n    (Q : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ)\n    (c : (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ⥤ _).mapHomologicalComplex\n      (.up ℤ) ≅ roosLimitFunctor)\n    (hc : ∀ (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ℤ)\n      (n : ℕ) (i : ℤ),\n      (c.hom.app Z ≫ limit.π Z.asFunctor (op n)).f i = limit.π (Z.X i) (op n))\n    (η : roosLimitFunctor ⋙\n        (DerivedCategory.Q (C := scalarReductionSource.{u, u} l E T)) ⟶\n      (DerivedCategory.Q (C := ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T)) ⋙\n        coefficientConstantTowerLimit.{u, u} l E T)\n    (hη : ∀ Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ℤ,\n      DerivedCategory.Q.map (c.hom.app Z) ≫ η.app Z =\n        derivedLimitComplexComparison\n          (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ⥤ _)\n          (coefficientConstantTowerLimit.{u, u} l E T)\n          (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ⥤ _).rightDerivedFunctorUnit Z)\n    (f : S.reduction.obj (DerivedCategory.Q.obj Q) ⟶\n      DerivedCategory.Q.obj ((M.quotient l E T).obj Q))\n    (he : S.adjunction.homEquiv _ _ f =\n      DerivedCategory.Q.map ((M.adjunction.mapHomologicalComplex (.up ℤ)).unit.app Q) ≫\n        (CompletionUnit.systemLimitUnit l E T M\n          η).app ((M.quotient l E T).obj Q)) :\n    S.adjunction.unit.app (DerivedCategory.Q.obj Q) ≫\n        (coefficientConstantTowerLimit.{u, u} l E T).map\n          ((coefficientSequenceDerivedRestriction.{u, u} l E T).map f ≫\n            (Functor.mapDerivedCategoryFactors.{u+2, u+2, u+1, u+1, u+2, u+2}\n              (coefficientSequenceRestriction.{u, u} l E T)).hom.app\n                ((M.quotient l E T).obj Q)) =\n      DerivedCategory.Q.map\n        (((constLimAdj : (Functor.const ℕᵒᵖ : scalarReductionSource.{u, u} l E T ⥤ _) ⊣\n          lim).mapHomologicalComplex (.up ℤ)).unit.app Q ≫\n            ((lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ⥤ _).mapHomologicalComplex\n              (.up ℤ)).map (openScalarComplexAugmentation l E T M Q)) ≫\n        derivedLimitComplexComparison\n          (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ⥤ _)\n          (coefficientConstantTowerLimit.{u, u} l E T)\n          (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ⥤ _).rightDerivedFunctorUnit\n          ((CompletionUnit.tower l E T).obj ((M.quotient l E T).obj Q))",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T021353-L-2762671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T021353-L-2762671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

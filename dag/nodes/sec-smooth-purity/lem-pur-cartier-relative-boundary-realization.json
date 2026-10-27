@@ -1,0 +1,293 @@
+{
+ "id": "lem-pur-cartier-relative-boundary-realization",
+ "kind": "statement",
+ "title": "Signed relative Cartier Kummer boundary and its module realization",
+ "statement": "Fix $k,\\ell,E,n\\geq1,A=A_{E,n}$ as in [def-pur-conventions], and the twist of [def-coefficient-twists-detailed]. Let $T$ be a separated finite-type $k$-scheme and $i:D\\hookrightarrow T$ an effective Cartier divisor [def-pc-divisor-line-bundle], with $W=T\\setminus D$. Put $N=\\ell^n$, $R=\\mathbf Z/N\\mathbf Z$ and $M=\\mu^{\\mathrm{et}}_{N,T}$, with the exact Kummer sequence of [lem-amb-kummer-any-base]. Use the relative cohomology and torsor-with-section classification of [lem-amb-relative-torsor-cohomology]. Let $L=\\mathcal I_D^\\vee$, let $s_D$ be the section dual to $\\mathcal I_D\\hookrightarrow\\mathcal O_T$, and let $P_D=\\underline{\\operatorname{Isom}}(\\mathcal O_T,L)$ be its frame torsor [lem-sc-line-bundle-torsor]. Set\n$$\\alpha_D=[P_D,s_D|_W]\\in H^1(T,W;\\mathbf G_m),\\qquad \\beta_D=\\delta_{T,W}(\\alpha_D)\\in H^2(T,W;M).$$\nHere $N$ is invertible on $T$ and $NA=0$. Form both relative derived section cones, for $R_T$-module sheaves [def-weil-pbc-derived-categories] and for underlying abelian sheaves, of restriction from $T$ to $W$. The canonical comparison obtained by deriving coefficient forgetting is an isomorphism between these cones in $D(\\mathbf{Ab})$. It commutes with their maps to absolute derived sections and with the signed supported realization of [lem-pur-divisor-relative-cone], whose model has differential $D(a,b)=(da,r(a)-db)$ and kernel map $k\\mapsto(k,0)$. Consequently $\\beta_D$ has a canonical realization\n$$b_D:i_*R_D\\longrightarrow M[2]$$\nin $D(T_{\\mathrm{et}},R)$ via [lem-amb-closed-support-hom]; its underlying relative class is exactly $\\beta_D$, with that sign and specified trivialization. Let $\\nu:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be [def-weil-pbc-site-comparison-morphism], and put $t=\\sigma_T\\rho_T:\\nu^{-1}M\\to A(1)_T$ using exactly the roots-projection coefficient map of [def-pur-frame-class]. For the general Cartier class of [lem-pur-divisor-class],\n$$\\operatorname{cl}(D)=t_*\\nu^*\\beta_D\\quad\\text{in }H_D^2(T_{\\mathrm{proet}},A(1)),$$\nwhere $\\nu^*\\beta_D$ is read through the same signed relative-to-supported comparison. This is an identity of the global relative classes, including their lift and trivialization, rather than just of their local restrictions or their images after forgetting support. No smoothness of $T$ or $D$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Parent Step 4 (L1), rank-one Kummer construction; Cartier-map proof paragraphs 1-3; extracted agreement proof steps 1-3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pc-divisor-line-bundle",
+  "lem-amb-kummer-any-base",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-sc-line-bundle-torsor",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-divisor-relative-cone",
+  "lem-amb-closed-support-hom",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pur-frame-class",
+  "lem-pur-divisor-class",
+  "def-sfb-cartier-reduction-data",
+  "def-sp-cartier-pole-boundary",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "def-amb-relative-etale-cohomology",
+  "def-asd-finite-etale-tate-twist",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-pur-supported-hom-site-comparison",
+  "def-pur-supported-class-operations"
+ ],
+ "proof": [
+  {
+   "text": "Retain the existing cartierPoleBoundary with its specified complementary frame and define beta by composing it with the Kummer extension. The existing cartierReducedEtale is the uniquely normalized scalar adjunct, and reducedEtale_boundary of [lem-sp-cartier-reduction-site-comparison] proves SupportedKummerBoundary for both R=ULift(Z/(ell^n)) and A. Positivity, invertibility and coefficient annihilation are the unchanged PurityFiniteSetting constructions. No new choice of relative lift is made.",
+   "uses": [
+    "def-sp-cartier-pole-boundary",
+    "lem-amb-kummer-any-base",
+    "lem-sp-cartier-reduction-site-comparison",
+    "def-pur-frame-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact scalar forgetting to the nonnegative module resolution and its augmentation. InjectiveResolution.descOfQuasiIso lifts the identity to the abelian injective resolution J; its augmentation identity and quasi-isomorphism instance give q. For each etale object V, [lem-sbc-injective-module-forget-evaluation-acyclic] says each forgotten injective module term is evaluation-acyclic, while the terms of J are evaluation-acyclic by injectivity. The nonnegative version of [lem-weil-pbc-leray-acyclicity-quasi-iso], followed by extension by zero, makes both evaluated chain maps quasi-isomorphisms. Applying the mapping-cone triangle and the two-out-of-three lemma for a morphism of distinguished triangles makes the actual shifted cone map a quasi-isomorphism. The two cone-map encodings agree on both summand inclusions.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sbc-injective-module-forget-evaluation-acyclic",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "lem-pur-divisor-relative-cone",
+    "lem-amb-relative-torsor-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For module restriction surjectivity, exact sheafification makes an injective module sheaf injective as a presheaf. Use free R-modules on universe-lifted representables. Monicity of W to T makes their induced map monic; injectivity extends the morphism representing any section on W, giving its lift on T. Abelian restriction surjectivity is [lem-weil-pbc-injective-sheaf-mono-restriction]. Extend by zero, including negative degrees, and apply [lem-weil-degreewise-epi-kernel-cocone-qis] to both restriction maps. The resulting maps have exactly CartierKernelNormalization. Use kernel.map for the kernel comparison; its inclusion equation and both cone-coordinate equations prove the strict kernel square. The projection and boundary squares are triangleSquare from [lem-pur-divisor-relative-cone]. Two identity-augmented lifts are homotopic by CochainComplex.homotopyOfQuasiIso. The sectionMap_homotopy construction of [lem-amb-relative-torsor-cohomology] and Q_map_eq_of_homotopy give equality in the derived category.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-injective-sheaf-mono-restriction",
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "lem-pur-divisor-relative-cone",
+    "lem-amb-relative-torsor-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue root map is invertible by [lem-sp-residue-finite-root-map-iso]. For either coefficient ring, the defining property of cartierReducedEtale supplied by [lem-sp-cartier-reduction-site-comparison] is its full supported scalar boundary equation. Unfold CartierEtaleReductionSpec and cartierEtaleKummerUnit, then reassociate Yoneda composition to obtain exactly beta followed by the specified ordinaryFiniteRootMap. This is an equality on supported Ext, retaining the sign and complement section.",
+   "uses": [
+    "lem-sp-residue-finite-root-map-iso",
+    "lem-sp-cartier-reduction-site-comparison",
+    "def-sp-cartier-pole-boundary",
+    "lem-amb-kummer-any-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen generalDivisorEtaleClasses satisfies DivisorEtaleNormalized by its defining existsUnique_generalDivisorEtaleClasses theorem [lem-pur-divisor-class]. reducedEtale_eq_of_boundary of [lem-sp-cartier-reduction-site-comparison] identifies its Ext class with cartierRelativeCoefficientBoundary. The realizes field identifies its Hom representative with Ext.hom. Apply the unchanged functorialCupCompare, which is the definition of generalDivisorClass. This uses the general Cartier family and does not assume smoothness.",
+   "uses": [
+    "lem-pur-divisor-class",
+    "lem-sp-cartier-reduction-site-comparison",
+    "def-pur-supported-hom-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartier-pole-boundary",
+  "lem-amb-kummer-any-base",
+  "lem-sp-cartier-reduction-site-comparison",
+  "def-pur-frame-class",
+  "def-sp-injective-resolutions",
+  "lem-sbc-injective-module-forget-evaluation-acyclic",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "lem-pur-divisor-relative-cone",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-weil-pbc-injective-sheaf-mono-restriction",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-sp-residue-finite-root-map-iso",
+  "lem-pur-divisor-class",
+  "def-pur-supported-hom-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent H3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Paragraphs 1-3; existing normalized scalar adjunct and divisor-family uniqueness; explicit augmented-resolution, cone and kernel comparison proved in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The relative Kummer boundary of a Cartier line bundle with its specified frame on the complement has the same signed supported cohomology realization in abelian sheaves and module sheaves",
+   "results": "Hits read: groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.H1, ModuleCat.instAddCommGroupObjOppositeOpensCarrierTopValTildeInType, CategoryTheory.Sheaf.instAddCommGroupH, ModuleCat.Tilde.exists_const, CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.instOneH1. Available; none states the signed relative Cartier realization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CartierDivisor|EffectiveCartier|relative.*Kummer|Kummer.*relative",
+   "results": "No hits. Available; none states the signed relative Cartier realization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Sheaf\"",
+   "results": "No hits. Available; none states the signed relative Cartier realization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier divisor class relative torsor Kummer boundary signed cone module abelian comparison",
+   "results": "Hits read: Submodule.unitsQuotEquivRelPic_symm_apply, Submodule.unitsQuotEquivRelPic_apply_coe, Submodule.unitsQuotEquivRelPic, CommRing.relPic, CommRing.Pic.AsModule, WeierstrassCurve.Affine.Point.toClass_some, Algebra.Extension.cotangentComplex_mk, Algebra.Generators.CotangentSpace.fst_compEquiv_apply. Available; none states the signed relative Cartier realization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle trivialized off a closed divisor defines a global relative cohomology class whose connecting image is represented by a morphism from the supported constant sheaf to roots of unity shifted by two",
+   "results": "Hits read: CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.OneCocycle.class, CochainComplex.HomComplex.leftHomologyData'_H_coe, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units. Available; none states the signed relative Cartier realization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*Kummer|Kummer.*relative|CartierDivisor|EffectiveCartier",
+   "results": "Available: zero hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerived\"",
+   "results": "Available: zero hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Kummer boundary of a line bundle with specified trivialization is its supported divisor class",
+   "results": "Read hits: CommRing.relPic, Bundle.Trivial.symmₗ_trivialization, Submodule.unitsQuotEquivRelPic, groupCohomology.d₀₁_eq_zero, MeromorphicNFOn.zero_set_eq_divisor_support, Algebra.unramifiedLocus_eq_compl_support, MeromorphicOn.divisor_zpow, Bundle.Trivial.symmL_trivialization. None states the signed global relative Cartier realization or its full module/abelian comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of modules the derived comparison with underlying abelian sheaves identifies relative section cones and their support kernel maps",
+   "results": "Read hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.map, SheafOfModules.instAbelian, CategoryTheory.Sheaf.H, CategoryTheory.sheafIsAbelian, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g. None states the signed global relative Cartier realization or its full module/abelian comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Kummer connecting image of a line bundle with a section on an open complement represents a morphism from the supported constant sheaf to roots of unity shifted by two",
+   "results": "Read hits: AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, ModuleCat.Tilde.res_const, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply, ModuleCat.Tilde.exists_const, CategoryTheory.Sheaf.H, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, SheafOfModules.unitHomEquiv. None states the signed global relative Cartier realization or its full module/abelian comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-cartier-class-agreement",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-localized-top-chern",
+   "place": "Parent Step 4 (L1), rank-one Kummer construction; Cartier-map proof paragraphs 1-3; extracted agreement proof steps 1-3",
+   "via": [
+    "lem-pur-cartier-class-agreement"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-cartier-relative-boundary-realization",
+  "worker": "stage1",
+  "summary": "Split the signed relative realization using existing global torsor classification, module restriction-kernel comparison, degreewise-epimorphism kernel/cone comparison, normalized supported Hom and general Cartier construction. Explicit chain coordinates identify the full cones and their support maps. Kept the canonical Ext-normalized torsor class distinct from the negative raw cocycle. No statement change, no new nodes, no Mathlib leaves.",
+  "blueprint": "thm-pur-localized-top-chern, Step 4 (L1), rank-one Cartier Kummer construction, through lem-pur-cartier-class-agreement; realizes paragraphs 1-3 of the Cartier-map proof, including its specified trivialization and signed supported realization.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Converts the given invertible module and its section into the frame torsor; generic classification tool. No other statement of sk-prop-an supplies this general tool."
+   },
+   {
+    "node": "lem-amb-relative-torsor-cohomology",
+    "why": "Classifies torsors with specified complement section and supplies the relative Kummer connecting map; generic relative-cohomology tool. No other statement of sk-prop-an supplies this general tool."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Exact Kummer sequence for an invertible exponent on an arbitrary scheme. No other statement of sk-prop-an supplies this general tool."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Compares module and abelian restriction kernels and both evaluations; generic coefficient-comparison tool. No other statement of sk-prop-an supplies this general tool."
+   },
+   {
+    "node": "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "why": "Kernel-to-shifted-cone quasi-isomorphism for a degreewise epimorphism, used in both coefficient categories. No other statement of sk-prop-an supplies this general tool."
+   },
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Identifies the module relative cone with derived Hom from the supported constant sheaf. No other statement of sk-prop-an supplies this general tool."
+   },
+   {
+    "node": "lem-asd-supported-kummer-support-hom-naturality",
+    "why": "Fixes the constant-generator normalization of the supported Hom/cone comparison. No other statement of sk-prop-an supplies this general tool."
+   },
+   {
+    "node": "lem-amb-relative-torsor-forget-normalization",
+    "why": "Distinguishes the canonical relative torsor class from its negative raw cocycle and prevents a sign substitution. No other statement of sk-prop-an supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-relative-torsor-cohomology",
+  "lem-amb-kummer-any-base",
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N0-e98ea104e",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-e98ea104e (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is an ordinary split (no repair note on this item; the Q122 note on the parent is resolved). Statement and stmt_deps are byte-identical to side-live, there are no new nodes, and neither the item nor any of its 14 citations is on the drop list. Sources: main-20261015 lem-amb-cartier-kummer-map.proof.md paragraphs 1-3; no SGA. Checks: Step 1: s_D=f_a e_a is independent of the chart (e_b=u^{-1}e_a) and is a frame on W, so alpha_D is defined; N=ell^n is invertible on T; NA=0 because ell is in (varpi_E). Step 3: I recomputed the change from Cone(f)[-1] coordinates (y,x) to (a,b)=(x,-y); the differential becomes (da, r(a)-db) and the kernel map becomes (k,0). Q is a chain map, Q kappa_I = kappa_J ker(q), and 2-out-of-3 makes Q a quasi-isomorphism. Q also preserves the projection and the boundary (0,-b). Step 4: the constant-generator normalization is (k,0), and b_D = Phi^{-1}(Q^{-1} beta_D). Step 5: the second paragraph of lem-pur-divisor-class gives cl(D) = t_* nu^* beta_D for the same global pair. The sign is consistent with the cited statement's Yoneda reading, and the raw cocycle is not used. Two E1-type gaps fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-cartier-relative-boundary-realization.json: (1) step 2 claimed degreewise surjectivity for the injective abelian resolution J, but the kernel-comparison lemma states it only for injective module sheaves; I now apply the same lemma with ring Z. (2) step 5 applied lem-pur-divisor-class, which is stated for T smooth over B, to an arbitrary separated finite-type T without checking that hypothesis; I instantiate it with B=T, the identity morphism and the empty subfamily, whose second paragraph then covers every effective Cartier divisor. Edge cases checked: D empty, T empty, non-reduced D, n=1 and ramified E. Not a duplicate of lem-pur-cartier-relative-kummer-realization (scalar-extended, smooth case) or of the per-degree module comparison. I accepted the 8 tool_uses (only lem-sc-line-bundle-torsor is actually off-route).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartierRelativeBoundaryRealization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.cartier_relative_boundary_realization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.cartierRelativeBoundary",
+   "WeilConjectures.PurityFiniteSetting.cartierRelativeModuleBoundary",
+   "WeilConjectures.PurityFiniteSetting.cartierRelativeCoefficientBoundary",
+   "WeilConjectures.PurityFiniteSetting.cartierUnderlyingResolution",
+   "WeilConjectures.PurityFiniteSetting.cartierSectionComparison",
+   "WeilConjectures.PurityFiniteSetting.CartierKernelNormalization",
+   "WeilConjectures.PurityFiniteSetting.CartierRelativeConeComparison",
+   "WeilConjectures.PurityFiniteSetting.cartier_relative_boundary_realization"
+  ],
+  "file": "lean/Sheaf/Paper/CartierRelativeBoundaryRealization.lean",
+  "statement": "theorem cartier_relative_boundary_realization (P : PurityFiniteSetting.{u}) {D T : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible) : (∀ (I : InjectiveResolution (Scheme.finiteEtaleTateLine T P.diagonalExponent (ProEtale.cartierResidueRing.{u} P.coefficients.l P.level) (ProEtale.cartierResidue_cast P.coefficients.l P.level))) (J : InjectiveResolution ((RawModuleScalarComparison.forget (ProEtale.cartierResidueRing.{u} P.coefficients.l P.level) T).obj (Scheme.finiteEtaleTateLine T P.diagonalExponent (ProEtale.cartierResidueRing.{u} P.coefficients.l P.level) (ProEtale.cartierResidue_cast P.coefficients.l P.level)))), ∃ q : cartierUnderlyingResolution _ T I ⟶ J.cocomplex, (RawModuleScalarComparison.forget _ T).map (I.ι.f 0) ≫ q.f 0 = J.ι.f 0 ∧ CartierRelativeConeComparison T i.openComplement (cartierUnderlyingResolution _ T I) J.cocomplex q ∧ ∀ q' : cartierUnderlyingResolution _ T I ⟶ J.cocomplex, (RawModuleScalarComparison.forget _ T).map (I.ι.f 0) ≫ q'.f 0 = J.ι.f 0 → DerivedCategory.Q.map (relativeSectionMap T (Scheme.Etale.mk i.openComplement.ι) q') = DerivedCategory.Q.map (relativeSectionMap T (Scheme.Etale.mk i.openComplement.ι) q)) ∧ IsIso (ordinaryFiniteRootMap (ProEtale.cartierResidueRing.{u} P.coefficients.l P.level) P.diagonalExponent (ProEtale.cartierResidue_cast P.coefficients.l P.level) T) ∧ SupportedKummerBoundary (ProEtale.cartierResidueRing.{u} P.coefficients.l P.level) P.diagonalExponent (ProEtale.cartierResidue_cast P.coefficients.l P.level) i hI (P.diagonalExponent_isUnit a) (P.cartierRelativeModuleBoundary a i hI) ∧ ((Ext.mk₀ (supportedIntegralGenerator (ProEtale.cartierResidueRing.{u} P.coefficients.l P.level) i)).comp ((P.cartierRelativeModuleBoundary a i hI).mapExactFunctor (RawModuleScalarComparison.forget (ProEtale.cartierResidueRing.{u} P.coefficients.l P.level) T)) (zero_add 2) = (P.cartierRelativeBoundary a i hI).comp (Ext.mk₀ (ordinaryFiniteRootMap (ProEtale.cartierResidueRing.{u} P.coefficients.l P.level) P.diagonalExponent (ProEtale.cartierResidue_cast P.coefficients.l P.level) T)) (add_zero 2)) ∧ ((Ext.mk₀ (supportedIntegralGenerator P.Coefficient i)).comp ((P.cartierRelativeCoefficientBoundary a i hI).mapExactFunctor (RawModuleScalarComparison.forget P.Coefficient T)) (zero_add 2) = (P.cartierRelativeBoundary a i hI).comp (Ext.mk₀ (ordinaryFiniteRootMap P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates T)) (add_zero 2)) ∧ P.generalDivisorClass a i hI = P.functorialCupCompare i 2 1 (P.cartierRelativeCoefficientBoundary a i hI).hom",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing normalized supported integral Ext model of the relative torsor class, including its specified complement section. The finite R-root line is the canonical tensor-with-R chart; the theorem states that its actual root map is invertible. The full cone comparison is an isomorphism in D(Ab), with the actual localized diagonal map, projection, boundary, normalized kernel inclusions and their square. No smoothness, coefficient flatness or ramification-divisibility restriction is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb4936d2f",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery resolves the b381a1ace9c9 H2 RETURN: stmt_deps swap lem-pur-supported-cup-functoriality for the def owners def-pur-supported-hom-site-comparison (functorialCupCompare) and def-pur-supported-class-operations (functorialCupSource/Twist), both checked in live; Lean byte-identical (sha 03eedfc6); only the item node and the new module differ from live; all imports resolve. Independent clause check: P setting; separated finite-type T, Cartier D, no smoothness; N=diagonalExponent with derived invertibility and annihilation; actual root chart IsIso; alpha_D = cartierPoleBoundary (frame torsor, full complement section, +1 normalized Ext, not the raw cocycle) composed with the Kummer extClass = beta_D; cone comparison for all I and J, iso.hom = Q.map of the diagonal map, lift-independent, projection, boundary (0,-b), kernel (k,0) pinned, square; b_D = unique scalar adjunct with SupportedKummerBoundary and the underlying-class Ext equality; generalDivisorClass = functorialCupCompare of the A-adjunct on full supported classes. Edge cases D or T empty, nonreduced, n=1, ramified E included. Statement verbatim, one sorry, no hollow defs, docstrings present. No compile (no FIX). Advisory: global attribute [instance] on 4 owner lemmas; the Ext-equality conjuncts are near the defining spec, acceptable since the node defines b_D that way."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8dadc",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261025T123042-L-1827891",
+  "kind": "interface",
+  "note": "independent cc review: delivered CartierRelativeBoundaryRealization.lean, node lem-pur-cartier-relative-boundary-realization and change record vs clone sources (functorialCupSource/Twist false ≡ native lowerStar/frameTwistEtale), unit sk-prop-an, axioms of a scratch compile"
+ }
+}

@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-space-etaleness-eventual-stage",
+ "kind": "statement",
+ "title": "Etaleness descends to a stage over an affine limit of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine source after every affine scheme test. Local finite presentation and local finite type are tested on compatible etale scheme charts [def-sfb-space-morphism-properties]; finite presentation means local finite presentation, quasi-compactness and quasi-separatedness.  An open subspace is represented on each scheme test by an open subscheme [def-a1-space-open-subspace]; a closed immersion is represented on each scheme test by a closed immersion [def-weil-closed-immersion]. Etale morphisms are tested on etale scheme charts [def-weil-etale-morphism]. Let $I$ be a small nonempty directed set, $(B_i)$ an inverse system with affine transitions and limit $B$, and fix $i_0\\in I$. Assume $B_{i_0}$ is quasi-compact and quasi-separated. Let $f_{i_0}:X_{i_0}\\to Y_{i_0}$ be a locally finitely presented morphism over $B_{i_0}$, with $X_{i_0}$ and $Y_{i_0}$ quasi-compact and quasi-separated. For $i\\geq i_0$, write $f_i:X_{i_0}\\times_{B_{i_0}}B_i\\to Y_{i_0}\\times_{B_{i_0}}B_i$ for its base change, and let $f$ be its base change to $B$. If $f$ is etale, there is $i\\geq i_0$ such that $f_i$ is etale. No scheme hypothesis is imposed on the bases or the spaces.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SL (lemma-descend-etale), with Situation 084W (situation-descent-property)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-open-subspace",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-space-qcqs-permanence], the map $f_{i_0}$ is quasi-compact: its source is quasi-compact and its target is quasi-separated. Choose an affine scheme $V_0$ and a representable surjective etale map $b_0:V_0\\to Y_{i_0}$ by [lem-sfb-qc-space-affine-etale-atlas]. The definition of quasi-compactness applied to this affine test gives that $P_0=X_{i_0}\\times_{Y_{i_0}}V_0$ is quasi-compact. Apply the same affine-atlas lemma to $P_0$ to obtain an affine scheme $U_0$ and a representable surjective etale map $U_0\\to P_0$. Thus no scheme hypothesis on $X_{i_0}$ or $Y_{i_0}$ has been used.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-qc-space-affine-etale-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SL (lemma-descend-etale), proof, choice of the two affine charts; Tag 073B (lemma-quasi-compact-quasi-separated-permanence), part (1), and Tag 03H6 (lemma-quasi-compact-affine-cover)."
+   }
+  },
+  {
+   "text": "The composite $a_0:U_0\\to P_0\\to X_{i_0}$ is surjective etale: the second map is the base change of $b_0$, and etale coverings are preserved by base change and composition [lem-trf-space-chartwise-etale-permanence]. Write $h_0:U_0\\to V_0$ for the resulting map. Its square with $f_{i_0}$ commutes. Since $f_{i_0}$ is locally of finite presentation, the chart criterion [lem-sfb-space-local-properties-chart-test] gives that $h_0$ is locally of finite presentation. For every $i\\geq i_0$, and for the limit base, base change of this diagram gives schemes $U_i,V_i$ (respectively $U,V$) and surjective etale vertical maps, again by permanence of etale coverings.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SL (lemma-descend-etale), proof, chart square and its base changes; Tags 03FT/03FU/041F and 0410 (lemma-finite-presentation-local)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-affine-limits-schematic-stages] to the system $(B_i)$. Each $B_i\\to B_{i_0}$ for $i\\geq i_0$, and $B\\to B_{i_0}$, is affine. Their pullbacks to the affine schemes $U_0$ and $V_0$ are affine morphisms by [lem-sfb-space-affine-locality], so all $U_i,V_i,U,V$ are affine schemes. The last clause of the limit lemma gives $U=\\varprojlim_{i\\geq i_0}U_i$ and $V=\\varprojlim_{i\\geq i_0}V_i$. Its isomorphisms commute with the maps induced by $h_0$: both composites have the same projections to $U_0$, $V_0$ and each $B_i$, so the fibre-product and limit universal properties identify them. The transitions of $(V_i)$ are affine by base change of those of $(B_i)$.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SL (lemma-descend-etale), proof, affineness and limit of the chart morphisms; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2), and Tag 03WI (lemma-base-change-affine)."
+   }
+  },
+  {
+   "text": "The limit chart map $h:U\\to V$ is etale: it is the compatible chart of the etale map $f$, so apply [lem-sfb-unramified-etale-compatible-charts]. Now use the scheme result [lem-weil-pbc-descend-etale] with base system $(V_i)_{i\\geq i_0}$ and initial morphism $h_0:U_0\\to V_0$ over $V_0$. Its initial base, source and target are affine and hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]; $h_0$ is locally of finite presentation by step 2, and the limit base is $V$ by step 3. The base change $U_0\\times_{V_0}V_i$ identifies with $U_i=U_0\\times_{B_{i_0}}B_i$: a pair $(u,(v,b))$ satisfying $h_0(u)=v$ is exactly a pair $(u,b)$ over $B_{i_0}$. The same formula holds over $B$. Thus the scheme lemma produces $i\\geq i_0$ with $h_i:U_i\\to V_i$ etale.",
+   "uses": [
+    "lem-sfb-unramified-etale-compatible-charts",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SL (lemma-descend-etale), proof, reduction to Limits Tag 07RP (lemma-descend-etale), in Situation 081D; Tag 03XT (lemma-etale-local), clause (7)."
+   }
+  },
+  {
+   "text": "For this index $i$, the diagram $U_i\\to V_i$ above $X_i\\to Y_i$ has etale vertical maps and $U_i\\to X_i$ is surjective by step 2. The single-compatible-chart criterion [lem-sfb-unramified-etale-compatible-charts] applied to the etale scheme morphism $h_i$ therefore shows that $f_i$ is etale, proving the assertion.",
+   "uses": [
+    "lem-sfb-unramified-etale-compatible-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SL (lemma-descend-etale), last inference, via Tag 03XT (lemma-etale-local), clause (8)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SL (lemma-descend-etale), entire proof, in Situation 084W (situation-descent-property). Affine-chart reduction followed by Limits Tag 07RP; chart detection is Tag 03XT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*(limit|descend)|exists.*[Ee]tale",
+   "results": "Actual logged search: 7 hits; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean. Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Etale permanence and ring etale-locus declarations do not give eventual etaleness for algebraic spaces over algebraic-space bases; read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:60-76 and ZariskisMainTheorem.lean:49-54"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etaleness of a finitely presented morphism of algebraic spaces descends to a stage of an affine inverse limit",
+   "results": "Actual logged search: 8 hits; Algebra.Etale.finitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsEtale, Algebra.Etale.mk, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, RingHom.Etale, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, RingHom.FormallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Etale permanence and ring etale-locus declarations do not give eventual etaleness for algebraic spaces over algebraic-space bases; read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:60-76 and ZariskisMainTheorem.lean:49-54"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsLimit\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Etale permanence and ring etale-locus declarations do not give eventual etaleness for algebraic spaces over algebraic-space bases; read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:60-76 and ZariskisMainTheorem.lean:49-54"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Being etale eventually holds for base changes of a locally finitely presented map of qcqs algebraic spaces when it holds over their inverse limit",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, RingHom.Etale.propertyIsLocal, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Etale permanence and ring etale-locus declarations do not give eventual etaleness for algebraic spaces over algebraic-space bases; read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:60-76 and ZariskisMainTheorem.lean:49-54"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finitely presented algebraic spaces over an affine inverse limit of qcqs spaces which is etale on the limit is etale at some finite stage",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.isOpen_etaleLocus, Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.finitePresentation, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Etale permanence and ring etale-locus declarations do not give eventual etaleness for algebraic spaces over algebraic-space bases; read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:60-76 and ZariskisMainTheorem.lean:49-54"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*(limit|descend)|exists.*[Ee]tale",
+   "results": {
+    "t": "2026-10-23T14:36:15Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|[Ee]tale.*(limit|descend)|exists.*[Ee]tale",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+     "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+     "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean"
+    ],
+    "digest": "3815b91b0e99ec62"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etale permanence, etale loci or ring properties; none gives eventual etaleness over algebraic-space bases. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:55-95, LocalFlatDescent.lean:35-48, and ZariskisMainTheorem.lean:49-54."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsLimit\"",
+   "results": {
+    "t": "2026-10-23T14:36:16Z",
+    "tool": "loogle",
+    "query": "\"IsEtale\", \"IsLimit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etale permanence, etale loci or ring properties; none gives eventual etaleness over algebraic-space bases. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:55-95, LocalFlatDescent.lean:35-48, and ZariskisMainTheorem.lean:49-54."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a morphism of algebraic spaces becomes etale over an affine inverse limit then it is etale after some finite stage",
+   "results": {
+    "t": "2026-10-23T14:36:16Z",
+    "tool": "leansearch",
+    "query": "If a morphism of algebraic spaces becomes etale over an affine inverse limit then it is etale after some finite stage",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "Algebra.Etale.formallyEtale",
+     "RingHom.Etale",
+     "Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme"
+    ],
+    "digest": "2b8074f9064c1a86"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etale permanence, etale loci or ring properties; none gives eventual etaleness over algebraic-space bases. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:55-95, LocalFlatDescent.lean:35-48, and ZariskisMainTheorem.lean:49-54."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etaleness of a locally finitely presented morphism of qcqs algebraic spaces over an inverse limit with affine transitions descends to a finite stage",
+   "results": {
+    "t": "2026-10-23T14:36:17Z",
+    "tool": "leanfinder",
+    "query": "Etaleness of a locally finitely presented morphism of qcqs algebraic spaces over an inverse limit with affine transitions descends to a finite stage",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "Algebra.Etale.finitePresentation",
+     "AlgebraicGeometry.Scheme.Etale",
+     "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+     "Algebra.etaleLocus_eq_univ_iff_etale"
+    ],
+    "digest": "4207d2ff86b726a5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etale permanence, etale loci or ring properties; none gives eventual etaleness over algebraic-space bases. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:55-95, LocalFlatDescent.lean:35-48, and ZariskisMainTheorem.lean:49-54."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces that is etale after base change to a cofiltered limit is already etale at some index if it is locally finitely presented and all spaces are qcqs",
+   "results": {
+    "t": "2026-10-23T14:37:09Z",
+    "tool": "leanfinder",
+    "query": "A morphism of algebraic spaces that is etale after base change to a cofiltered limit is already etale at some index if it is locally finitely presented and all spaces are qcqs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.Scheme.Etale",
+     "RingHom.Etale.propertyIsLocal"
+    ],
+    "digest": "1971c953c0027f02"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etale permanence, etale loci or ring properties; none gives eventual etaleness over algebraic-space bases. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:55-95, LocalFlatDescent.lean:35-48, and ZariskisMainTheorem.lean:49-54."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-absolute-noetherian-approximation",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07SL (lemma-descend-etale), with Situation 084W (situation-descent-property)",
+   "via": [
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-etaleness-eventual-stage",
+  "worker": "stage1",
+  "summary": "Kept the statement and all statement dependencies. Split Tag 07SL along its two affine charts, checked their quasi-compact existence, local finite presentation, affine pullbacks and limit compatibility, applied the existing scheme-stage lemma with the V_i as bases, and detected etaleness back on the spaces. Every supporting fact already has a node, so no new nodes are needed.",
+  "blueprint": "The existing from.place identifies det-thm-sf-ctf-stability-direct-images proof (3), through absolute Noetherian approximation: the supporting Tag 07SL argument needed to descend etale charts. Steps 1-5 realize precisely that supporting input, preserving the unit route. The ancestor command prints None for this pre-existing ancestry; its from record is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic base change and composition of etale coverings are needed for the chart squares; no replacement of a unit step is involved."
+   },
+   {
+    "node": "lem-weil-pbc-descend-etale",
+    "why": "This is the scheme inverse-limit descent lemma explicitly used by Tag 07SL after passage to affine charts; the present item extends it to algebraic-space bases."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine-scheme quasi-compactness and quasi-separatedness verify the hypotheses of the scheme lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-2d8ad047b",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-2d8ad047b (reviewer sub-agent of L); spot-checked: Read the whole proof against spaces-limits.tex Situation 084W and Tag 07SL. The statement is identical to live and agrees with the source; the item is still unsplit in live, so no other group has done this split. There are 0 new nodes. Step 1: qcqs-permanence makes f_{i0} quasi-compact, so P_0 = X x_Y V_0 is qc; the qc atlas lemma then gives affine V_0 and U_0, with no separatedness or scheme hypothesis used. Step 2: trf chartwise-etale permanence gives a surjective representable etale a_0 and the base-changed charts; the chart test gives h_0 locally of finite presentation. Step 3: the projections and transitions of the limit lemma are affine, affine-locality makes U_i, V_i, U, V affine, and its last clause gives U = lim U_i and V = lim V_i (no qcqs needed). Step 4: lem-weil-pbc-descend-etale applies with base system V_i, source U_0 and target V_0 (all affine, hence qcqs). I checked that U_0 x_{V_0} V_i equals U_0 x_{B_{i0}} B_i. Step 5: the single-compatible-chart criterion of 03XT (lem-sfb-unramified-etale-compatible-charts) applies. No dependency cycle and no duplicate in the DAG. No SGA. The tool_uses are generic and accepted. All 7 batch-5 flags reach only def-trf-algebraic-space and space-foundation trf/pod nodes, never trace-formula or Poincare-duality proof nodes or the assumption leaves, and the item already has def-trf-algebraic-space as a stmt_dep, so all are accepted as generic."
+ }
+}

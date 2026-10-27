@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-geometric-component-finite-preimage",
+ "kind": "statement",
+ "title": "Finite geometric decomposition above a single irreducible component",
+ "statement": "Let $k$ be a field [def-weil-field], let $K/k$ be an algebraic closure [def-weil-algebraic-closure], and let $X$ be a scheme [def-pc-scheme] locally of finite type over $k$ [def-weil-finite-type-morphism]. Put $W=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ and let $r:W\\to X$ be the projection [def-weil-affine-spectrum, def-pc-fibre-product]. For every irreducible component $T\\subseteq |X|$ [def-weil-irreducible-components], there are finitely many irreducible components $C_1,\\ldots,C_n$ of $W$, with $n\\geq1$, such that $r^{-1}(T)=C_1\\cup\\cdots\\cup C_n$. No connectedness, reducedness, quasi-compactness, or finiteness of the set of irreducible components of $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04KZ (lemma-galois-action-irreducible-components-locally-finite-type), assertion (3); Tag 038H (lemma-separably-closed-field-irreducible-components), comparison from a separable closure to its algebraic closure; used together in Tag 04L7 (proposition-units-general), first proof paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Choose $t\\in T$. By [def-weil-finite-type-morphism] choose an affine chart $U=\\operatorname{Spec}A\\subseteq X$ containing $t$, with $A$ a finitely generated $k$-algebra. Put $V=r^{-1}(U)$. The fibre-product universal property identifies $U\\times_k K$ with the pullback of $U\\hookrightarrow X$ along $r$; [lem-weil-pbc-open-immersion-base-change, def-weil-open-immersion] identify its underlying space with the open subspace $V$. By [lem-weil-pbc-fibre-product-affine-spectra], this scheme is $\\operatorname{Spec}(A\\otimes_k K)$. If $a_1,\\ldots,a_s$ generate $A$ over $k$, then $a_i\\otimes1$ generate $A\\otimes_k K$ over $K$: every tensor is a finite sum of $a\\otimes\\lambda$, and writing $a$ as a polynomial in the $a_i$ writes that tensor as the same polynomial in $a_i\\otimes1$ with coefficients in $K$. Thus [lem-wf-affine-noetherian-components] gives finitely many irreducible components of $V$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KZ (lemma-galois-action-irreducible-components-locally-finite-type), first proof paragraph: finite-type affine chart and Noetherian scalar extension; Schemes Tags 01JY, 01I4 and 01JQ"
+   }
+  },
+  {
+   "text": "Let $\\mathcal S$ be the set of irreducible components $C$ of $W$ contained in $r^{-1}(T)$. By [lem-sfb-field-extension-irreducible-components], $r^{-1}(T)$ is nonempty and is a union of components of $W$, hence equals $\\bigcup_{C\\in\\mathcal S}C$ and $\\mathcal S$ is nonempty. For each $C\\in\\mathcal S$, the same node says that the actual image $r(C)$ is a component of $X$. It is contained in $T$, so maximality gives $r(C)=T$. In particular $t\\in r(C)$, and $C\\cap V\\ne\\emptyset$.",
+   "uses": [
+    "lem-sfb-field-extension-irreducible-components",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 04KW (lemma-inverse-image-irreducible) and 04KX (lemma-image-irreducible), applied directly to K/k; affine-local finiteness argument for 04KZ(3)"
+   }
+  },
+  {
+   "text": "For $C\\in\\mathcal S$, apply [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] to the open $V\\subseteq W$. It makes $C\\cap V$ irreducible closed in $V$, with closure $C$ in $W$. It is maximal: if an irreducible closed subset $E$ of $V$ contains $C\\cap V$, its corresponding closure in $W$ contains $C$, so maximality of $C$ forces that closure to equal $C$, and the inverse correspondence forces $E=C\\cap V$. Thus $C\\cap V$ is a component of $V$. Moreover $C\\cap V=C'\\cap V$ implies $C=C'$ by taking closures. We obtain an injection from $\\mathcal S$ into the finite set of components of $V$, so $\\mathcal S$ is finite.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KZ, first proof paragraph: a geometric component is determined by its nonempty restriction to an affine chart; Topology Tag 0B7I (lemma-dimension-supremum-local-dimensions), open-subspace correspondence"
+   }
+  },
+  {
+   "text": "Enumerate the nonempty finite set $\\mathcal S$ as $C_1,\\ldots,C_n$, with $n\\ge1$. Step 2 gives $r^{-1}(T)=\\bigcup_{C\\in\\mathcal S}C=C_1\\cup\\cdots\\cup C_n$. This used only one finite-type affine chart meeting $T$; neither $X$ nor $T$ was assumed quasi-compact and no finiteness assumption was made on the other components of $X$. If $X$ is empty there is no $T$, so the universal assertion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KZ, assertion (3); finite enumeration after the affine-local argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-wf-affine-noetherian-components",
+  "lem-sfb-field-extension-irreducible-components",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04KZ(3), affine-local finiteness argument using Tags 04KW and 04KX directly over the full algebraic closure. This avoids the separable-closure comparison and Galois-orbit proof, below the unit level."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "galois.*irreducible|irreducible.*galois|finite.*irreducibleComponents|irreducibleComponents.*finite",
+   "results": "Actual search: 11 hits; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean; digest c4398fb2ecc25ab6. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An irreducible component of a locally finite type scheme splits into finitely many components after algebraic extension of the base field",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.instFinitaryExtensiveScheme; digest 0b05e14135bc7373. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"irreducibleComponents\"",
+   "results": "Actual search: 6 hits; AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents, AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv, AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv_apply_coe, AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv_symm_apply_coe, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents; digest 154f7ee7266a450b. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme locally of finite type over a field, the inverse image of each irreducible component after base change to an algebraic closure is a finite union of irreducible components",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; digest bd030ab72aa2c40e. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Galois group acts with finite orbits on geometric irreducible components of a scheme locally of finite type over a field",
+   "results": "Actual search: 8 hits; Ideal.isPretransitive_of_isGaloisGroup, Ideal.isPretransitive_of_isGalois, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, Ideal.exists_smul_eq_of_isGaloisGroup, Polynomial.Gal.galAction_isPretransitive, Ideal.exists_map_eq_of_isGalois, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, IsGaloisGroup.iff_isFractionRing; digest d651e6b7181d2db5. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme locally of finite type over a field each irreducible component has inverse image a finite union of irreducible components after algebraic closure",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.isField_of_universallyClosed; digest 40acfb1c92b149e9.",
+   "date": "2026-10-24",
+   "verdict": "no match: global Noetherian finiteness assumes quasi-compactness; geometrically irreducible component equivalences require irreducible fibres. Neither states this componentwise finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"irreducibleComponents\"",
+   "results": "Actual search: 6 hits; AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents, AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv, AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv_apply_coe, AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv_symm_apply_coe, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents; digest 154f7ee7266a450b.",
+   "date": "2026-10-24",
+   "verdict": "no match: global Noetherian finiteness assumes quasi-compactness; geometrically irreducible component equivalences require irreducible fibres. Neither states this componentwise finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*irreducibleComponents|irreducibleComponents.*finite|preimage_mem_irreducibleComponents",
+   "results": "Actual search: 12 hits; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean; digest 2517428962863022. Source scope: AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: global Noetherian finiteness assumes quasi-compactness; geometrically irreducible component equivalences require irreducible fibres. Neither states this componentwise finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An irreducible component of a scheme locally of finite type over a field has finitely many components over an algebraic closure",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, irreducibleComponents, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, irreducibleComponents_eq_singleton, Algebra.IsGeometricallyReduced.casesOn; digest 203cc4364628a78d.",
+   "date": "2026-10-24",
+   "verdict": "no match: global Noetherian finiteness assumes quasi-compactness; geometrically irreducible component equivalences require irreducible fibres. Neither states this componentwise finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There are finitely many irreducible components above one component under a field base change because they all meet an affine open of finite type",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, RingHom.EssFiniteType.isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.finite_preimage_singleton, RingHom.finiteType_isStableUnderBaseChange; digest e5f5b6931389faa8.",
+   "date": "2026-10-24",
+   "verdict": "no match: global Noetherian finiteness assumes quasi-compactness; geometrically irreducible component equivalences require irreducible fibres. Neither states this componentwise finiteness for arbitrary locally finite type schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-connected-component-surjective",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Dimension input in the field-groupoid calculation: replace the arrow-space dimension by the stabilizer dimension (Stacks 06FF). Supporting input: Stacks 06FF, middle paragraph: identify k_a=k_b inside the global sections of the connected reduced chart T, and use that this ring is a field to inject it into the residue field at v. Supporting algebra input: 04MK, quasi-compact paragraph after replacing each ground field by its integral closure: invoke 04L7 for the quotient of global units. Input for 04L7(1): the geometric connected component and finiteness of its irreducible components. Supporting input: Tag 04KZ(3), finite decomposition of the inverse image of one irreducible component; Tag 038H compares the separable and full algebraic closures.",
+   "via": [
+    "lem-sfb-geometric-connected-component-surjective",
+    "lem-sfb-relatively-closed-constants-units-fg",
+    "lem-sfb-connected-reduced-scalar-field-uniqueness",
+    "lem-sfb-field-groupoid-stabilizer-dimension",
+    "lem-sfb-field-groupoid-identity-finite-relation",
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-component-finite-preimage",
+  "worker": "stage1",
+  "summary": "No exact project attachment found. Statement unchanged. Use the existing unrestricted field-extension component theorem to show every component above T meets one finite-type affine chart; inject those components into the finite component set of its scalar extension. No new nodes. Every cited statement was opened, and quotations are in citations.json.",
+  "blueprint": "Supporting geometric-component input in the existing provenance chain from det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction. The current latest blueprint proof (3) now states the compactification assembly; this auxiliary input retains its assigned DAG provenance. Realizes the single-component finiteness needed by 04L7, through 04KZ(3). blueprint_refs.py ancestor prints None; from.node and via are retained as inherited. Whole-blueprint searches: irreducible component; 04KZ; 038H; component finite; field extension irreducible: no equivalent blueprint node found."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-1a0c70561",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-1a0c70561 (reviewer sub-agent of L); spot-checked: I read the whole item and every node it cites; review.md has the details. The delivery is one commit touching only the item and its report, with no new nodes. There is no re-split note, and the base proof was empty, so no argument was dropped. The statement is unchanged and agrees with Stacks varieties.tex 04KZ(3) (lemma-galois-action-irreducible-components-locally-finite-type), which I read in full: X locally of finite type, nothing else assumed. The proof avoids the Galois-orbit and 038H separable-closure comparison and works affine-locally over K, which is valid. Step 1: an affine chart Spec A ∋ t from def-weil-finite-type-morphism; V=r^{-1}(U)≅Spec(A⊗K) via the open-immersion base change (01JY leaf) and the affine fibre-product leaf; A⊗K is finitely generated over K, so lem-wf-affine-noetherian-components gives finitely many components of V. Step 2: lem-sfb-field-extension-irreducible-components (same unit, reviewed by Q157, no cycle) says r^{-1}(T) is a nonempty union of components and r(C) is a component; maximality gives r(C)=T∋t, so C meets V. Step 3: the open-subspace order correspondence leaf makes C∩V a component of V and C↦C∩V injective; I checked the maximality argument, and the step is fairly marked elementary. Step 4 is elementary. proof_deps equals the union of uses, every off-unit citation is a Mathlib leaf (no tool_uses needed), there is no cycle and no SGA. Small cases checked: empty X, an infinite disjoint union of A¹, a finite separable point (n>1, which the statement allows), a purely inseparable point, nonreduced X, and components that meet. No duplicate: the 04KZ grep found only sbc nodes that assume finite type or finitely many geometric components. The only citer, lem-sfb-geometric-connected-component-surjective, uses exactly this statement. All three kinds of Mathlib search are recorded. Maintainer note: blueprint.from.node is null and the item has no lean_audit field; both come from its creation by Q42 and are not this delivery's fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricComponentFinitePreimage",
+  "declaration": "AlgebraicGeometry.exists_finite_geometric_irreducibleComponents_preimage",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricComponentFinitePreimage.lean",
+  "statement": "theorem exists_finite_geometric_irreducibleComponents_preimage {k K : Type u} [Field k] [Field K] [Algebra k K] [IsAlgClosure k K] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] (T : Set X) (hT : T ∈ irreducibleComponents X) : ∃ n : ℕ, 0 < n ∧ ∃ C : Fin n → Set ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))), (∀ i : Fin n, C i ∈ irreducibleComponents ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))))) ∧ (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⁻¹' T = ⋃ i : Fin n, C i",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-beb3256ad",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 04KZ(3) clause by clause: IsAlgClosure k K (algebraicity kept), LocallyOfFiniteType f only, W = pullback f (Spec.map (algebraMap k K)) with r = pullback.fst, T in irreducibleComponents X, conclusion ∃ n>0, C : Fin n → components of W with r⁻¹'T = ⋃ C i. Universe u shared by k, K, X; not a restriction, since AlgebraicClosure k : Type u. lean.statement matches the file signature verbatim. Node differs from live only in the lean field; stmt_dep records/matches (Field, IsAlgClosure via the AlgebraicClosure match, Scheme, LocallyOfFiniteType, Spec, pullback, irreducibleComponents) checked. H4: no existing declaration (project 04KZ files cover (1),(2) with finiteness assumptions; Mathlib needs geometric irreducibility or Noetherianity). Edge cases: empty X, Spec k, separable point n>1, inseparable, nonreduced, infinite disjoint union. No definitions, sorry-only proof, source/blueprint docstrings, 4-step proof docstring, both report sections present. No files changed, no compile run."
+ }
+}

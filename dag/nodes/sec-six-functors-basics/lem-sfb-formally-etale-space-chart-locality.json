@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-formally-etale-space-chart-locality",
+ "kind": "statement",
+ "title": "Formal etaleness of algebraic spaces is local on compatible etale scheme charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. For any morphism $g:A\\to B$ of algebraic spaces over $S$ (including schemes), write $P(g)$ for the following property: for every first order thickening $j:T_0\\hookrightarrow T$ of affine $S$-schemes [def-sbc-first-order-thickening] and every pair $a_0:T_0\\to A$, $b:T\\to B$ of $S$-morphisms with $g a_0=bj$, there exists exactly one $a:T\\to A$ with $aj=a_0$ and $ga=b$. Then $P(f)$ holds if and only if $P(h)$ holds for every commutative diagram $v h=f u$, where $U,V$ are $S$-schemes, $u:U\\to X$ and $v:V\\to Y$ are representable etale morphisms, and $h:U\\to V$ is an $S$-morphism. Here representable etale means that every base change to a scheme is a scheme with etale projection [def-trf-algebraic-space, def-weil-etale-morphism]. No etaleness, finite presentation, separation, or quasi-compactness hypothesis is imposed on $f$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04GD (lemma-formally-etale), equivalence (1) and (2); formal etaleness is expanded as the affine square-zero lifting property of definition-formally-smooth-etale-unramified."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-first-order-thickening",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First consider any representable etale map $q:A\\to B$ of algebraic spaces. Given a first order thickening $j:T_0\\hookrightarrow T$ of schemes and a lifting square for $q$, the scheme $E=T\\times_B A$ is etale over $T$ by [def-trf-algebraic-space]. The initial lift is a section $s_0:T_0\\to E_0=E\\times_TT_0$. By [lem-sfb-space-thickening-etale-scheme-equivalence], restriction on morphisms between the two etale $T$-schemes $T$ and $E$ is bijective. Thus $s_0$ extends to exactly one $T$-map $T\\to E$, which is a section because its codomain is an object over $T$. Projection to $A$ gives the desired unique lift. This proves $P(q)$, and indeed the same assertion for arbitrary scheme tests. Here first order thickenings are thickenings by [def-sbc-first-order-thickening].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AL, lemma-representable-property-formally-property (2), using Tag 05ZS, lemma-thickening-equivalence"
+   }
+  },
+  {
+   "text": "Suppose $P(f)$ and fix $vh=fu$ as in the statement. For a square $ha_0=bj$ with affine test $j:T_0\\hookrightarrow T$, first lift $ua_0$ uniquely along $f$ over $vb$, obtaining $x:T\\to X$. Step 1 lifts $a_0$ uniquely along $u$ over $x$, obtaining $a:T\\to U$. The maps $ha,b:T\\to V$ have the same restriction $ha_0$ and the same image under $v$; step 1 applied to $v$ therefore gives $ha=b$. Any other lift has the same image $x$ by $P(f)$ and then equals $a$ by step 1 for $u$. Thus $P(h)$ for every diagram. This is the explicit composition and cancellation argument: it does not assert that the given chart square is cartesian.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04GD, lemma-formally-etale, (1) implies (2); composition and Tag 04G5, lemma-formally-permanence (2)"
+   }
+  },
+  {
+   "text": "Conversely suppose $P(h)$ for every compatible diagram. Choose a representable surjective etale scheme atlas $v:V\\to Y$ by [def-trf-algebraic-space]. The last assertion of [lem-sfb-unramified-etale-compatible-charts] supplies a scheme $U$, a representable surjective etale atlas $u:U\\to X$, and $h:U\\to V$ with $vh=fu$. The hypothesis gives $P(h)$. The composite $k=fu=vh$ has $P(k)$: in any affine test square for $k$, first use step 1 for $v$ to lift the initial $V$-map over the prescribed $Y$-map, then $P(h)$ to lift to $U$. Uniqueness follows in the same order, first after applying $h$, then in $U$. Neither $h$ nor $f$ is assumed etale.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-unramified-etale-compatible-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04GD, lemma-formally-etale, choice of diagram (3) and composition in (3) implies (1)"
+   }
+  },
+  {
+   "text": "Fix an affine lifting test $j:T_0\\hookrightarrow T$, $a_0:T_0\\to X$, $b:T\\to Y$ for $f$. The pullback $W_0=T_0\\times_{a_0,X,u}U$ is a scheme surjective etale over $T_0$, with tautological map $c_0:W_0\\to U$, by the scheme-test meaning of $u$ in [def-trf-algebraic-space]. Apply [lem-sfb-space-thickening-etale-scheme-equivalence] to $j$ to obtain an etale scheme $W\\to T$ and an isomorphism $W\\times_TT_0\\cong W_0$. The map $W\\to T$ is surjective: the composite $W_0\\to W\\to T$ is already surjective since $W_0\\to T_0$ and $T_0\\to T$ are. Choose affine opens $W_\\lambda$ covering $W$. Their reductions $W_{0\\lambda}=W_\\lambda\\times_TT_0$ are affine first order thickenings inside $W_\\lambda$: locally their rings are $C/IC$, with $(IC)^2=0$, where $I^2=0$ defines $j$. Thus these are legitimate affine tests for $P(k)$. The family $W_\\lambda\\to T$ is a jointly surjective etale family (open immersions are etale, and etale maps compose), hence an fppf covering by the definitions of etale and fppf covering.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sbc-first-order-thickening",
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CY, lemma-etale-on-top, construction of W and W prime; Tag 05ZS; affine refinement and square-zero base change"
+   }
+  },
+  {
+   "text": "First prove uniqueness of a lift along $f$ for the fixed test. If $x,y:T\\to X$ are two lifts, step 1 for $u$ on $W_{0\\lambda}\\hookrightarrow W_\\lambda$ extends $c_0|_{W_{0\\lambda}}$ to maps $c_x,c_y:W_\\lambda\\to U$ over $x|_{W_\\lambda},y|_{W_\\lambda}$, respectively. Both maps lie over $b|_{W_\\lambda}$ for $k$ and have the same reduction. Since $P(k)$, they are equal; hence $x,y$ agree on every $W_\\lambda$. They are equal on $T$ because $X$ is an fppf sheaf and this family is an fppf covering. Explicitly, the sheaf equalizer of [def-weil-pbc-sites-and-cohomology] makes $X(T)\\to\\prod_\\lambda X(W_\\lambda)$ injective. This proves uniqueness for affine tests. It also proves uniqueness for a first order thickening $Z_0\\hookrightarrow Z$ with arbitrary scheme $Z$: restrict to affine opens of $Z$ (the reductions are affine), apply the just-proved affine uniqueness, and use the same sheaf separatedness on that Zariski, hence fppf, cover.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fppf-site",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CY, lemma-etale-on-top (5), uniqueness, including affine refinement of nonaffine tests"
+   }
+  },
+  {
+   "text": "Now apply $P(k)$ to each $W_{0\\lambda}\\hookrightarrow W_\\lambda$ and $c_0|_{W_{0\\lambda}}$ over $b|_{W_\\lambda}$. Obtain $c_\\lambda:W_\\lambda\\to U$ and put $x_\\lambda=uc_\\lambda$. On each overlap $Z=W_\\lambda\\times_TW_\\mu$, the two maps $x_\\lambda|_Z,x_\\mu|_Z$ lie over $b|_Z$ and reduce to $a_0|_{Z_0}$, where $Z_0=Z\\times_TT_0$. Its ideal is again square zero by the local calculation in step 4. Step 5, which allows nonaffine $Z$, gives equality. The sheaf equalizer for $X$ therefore glues the $x_\\lambda$ to $x:T\\to X$. On the same fppf covering $fx=b$, so sheaf separatedness for $Y$ gives $fx=b$ globally. On its base change $W_{0\\lambda}\\to T_0$, the equality $xj=a_0$ holds, so separatedness for $X$ gives $xj=a_0$. The base-changed family is an fppf covering by the site axioms in [def-weil-pbc-sites-and-cohomology]. Step 5 gives uniqueness of $x$. Thus $P(f)$, completing the reverse implication. No affineness of overlaps or global section of an atlas was assumed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fppf-site",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CY, lemma-etale-on-top (6), omitted gluing details; Tag 04GD, (3) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-space-thickening-etale-scheme-equivalence",
+  "def-sbc-first-order-thickening",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 04GD (lemma-formally-etale), 04AL (lemma-representable-property-formally-property), 04G5 (lemma-formally-permanence), 04CY (lemma-etale-on-top); Tag 05ZS (lemma-thickening-equivalence) supplies the etale thickening equivalence used in the descent proof. Omitted overlap/gluing details are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|FormallyEtale",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal etaleness of a morphism of algebraic spaces is local on etale scheme charts in source and target",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.FormallyEtale.localization_map",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "0b8d44dd88498018"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unique infinitesimal lifting property for a morphism of algebraic spaces can be checked on etale scheme charts",
+   "results": "8 hits: StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, ChartedSpace.LiftPropOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.FormallyEtale, RingHom.FormallyEtale, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq, AlgebraicGeometry.ValuativeCriterion, Algebra.FormallyEtale.of_isSeparable",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "9d51f0e7e4123b89"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique lifting for square zero thickenings is invariant under etale localization of the source and target of an algebraic space morphism",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, RingHom.Etale.propertyIsLocal, Algebra.Etale.formallyEtale, AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "fd17859ffeb96c34"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|FormallyEtale",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme etaleness, ring formal etaleness, or descent of other scheme properties; none states the algebraic-space chart criterion",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique infinitesimal lifting for square zero thickenings descends along a surjective etale scheme atlas",
+   "results": "8 hits: StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, liftOfDerivationToSquareZero, Algebra.FormallyEtale.iff_comp_bijective, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.Etale, RingHom.FormallyEtale, liftOfDerivationToSquareZero_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme etaleness, ring formal etaleness, or descent of other scheme properties; none states the algebraic-space chart criterion",
+   "digest": "5874c5bd942fc1f8"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme etaleness, ring formal etaleness, or descent of other scheme properties; none states the algebraic-space chart criterion",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal etaleness of algebraic spaces is local on etale scheme charts",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme etaleness, ring formal etaleness, or descent of other scheme properties; none states the algebraic-space chart criterion",
+   "digest": "6e2bfc9beae99a8e"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero unique lifting property of algebraic space morphisms is invariant under etale localization of source and target",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.formallyEtale, RingHom.Etale.propertyIsLocal",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme etaleness, ring formal etaleness, or descent of other scheme properties; none states the algebraic-space chart criterion",
+   "digest": "5aaf302f63d4002d"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-space-infinitesimal-lifting",
+  "date": "2026-10-23",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: An effective formal quotient atlas is a completed etale scheme chart. Comparison of the effective formal chart with a completed etale chart: the infinitesimal lifting input, applied after base change of the atlas to a nilpotent test. Structural descent input: unique square-zero lifting is local on compatible etale scheme charts, Stacks 04GD.",
+   "via": [
+    "lem-sfb-etale-space-infinitesimal-lifting",
+    "lem-sfb-effective-formal-chart-completed-atlas",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-formally-etale-space-chart-locality",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved representable etale lifting by the existing equivalence of etale scheme objects across a thickening, then wrote composition/cancellation and atlas descent with explicit uniqueness, nonaffine-overlap comparison, and sheaf gluing. Reused existing nodes throughout; no new nodes. Mathlib and project searches found no attachment or match.",
+  "blueprint": "Supporting formal-chart prerequisite in the inherited det-thm-sf-ctf-stability-direct-images ancestry. Realizes the unique infinitesimal lifting locality input of Stacks 04GD; latest blueprint unit and direct-images proof read. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme fact that open refinements of an etale cover remain etale; no six-functor argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-defec0b20",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-defec0b20 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full; the delivery has no new nodes and no fixes. Statement and stmt_deps are byte-equal to clones/live and side-live, where the item is still unsplit with no proof; there is no repair note, so this is a first split. Sources checked in spaces-more-morphisms.tex: Definition 049S matches P(g); Lemma 04GD (1)<=>(2) matches the item with no hypothesis added on f; the Stacks proof via 04AL, 04G5, 04CY(6) and 05ZS is followed. 05ZS is proved through topological invariance and lemma-thickening-scheme, not through 04GD, so citing it creates no cycle. Step 1: E = T x_B A is etale over T, and the morphism bijection of lem-sfb-space-thickening-etale-scheme-equivalence gives a unique section, for any scheme test. Step 2 (elementary cancellation): every equation checked. Step 3 uses only the last existence clause of lem-sfb-unramified-etale-compatible-charts; P(k) for k = vh is checked in both orders. Step 4: lifted cover W -> T is surjective via W_0 -> T_0 -> T; reductions are square-zero affine; the family is an fppf covering by the Mathlib leaf etale-composition-cancellation (1)-(2) and the etale definition. Steps 5-6: uniqueness through P(k) and the fppf sheaf equalizer, extended to non-affine tests through Zariski covers; non-affine overlaps handled; gluing; f x = b and x j = a_0 by separatedness on the cover and its base change. Edge cases checked: empty X, Y, T; f = id; A^1_k -> Spec k. The proof is not circular (item not in its own proof_deps closure), and no SGA source is used. Batch-5 flag: def-trf-algebraic-space is the general definition of an algebraic space and is already a stmt_dep of the item; the other trf/pod nodes in the closure of compatible-charts are generic foundations (space fibre products, surjective composition, etale descent, fppf base change, smooth composition, separated finite-type base change), not steps of the trace-formula or Poincare-duality proofs, so the citation is accepted. Accepted tool_use: lem-weil-pbc-etale-composition-cancellation (Mathlib leaf). Cosmetic, left unchanged: steps 4-6 list some definition nodes in uses without bracketing them in the text."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormallyEtaleSpaceChartLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.unique_affine_thickening_lifts_iff_on_etale_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormallyEtaleSpaceChartLocality.lean",
+  "statement": "theorem unique_affine_thickening_lifts_iff_on_etale_charts {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) : (∀ (T₀ T : Over S) [IsAffine T₀.left] [IsAffine T.left] (j : T₀ ⟶ T), IsFirstOrderThickening j.left → ∀ (a₀ : yoneda.obj T₀ ⟶ X.obj.obj) (b : yoneda.obj T ⟶ Y.obj.obj), a₀ ≫ f.hom.hom = yoneda.map j ≫ b → ∃! a : yoneda.obj T ⟶ X.obj.obj, yoneda.map j ≫ a = a₀ ∧ a ≫ f.hom.hom = b) ↔ (∀ (U V : Over S) (u : yoneda.obj U ⟶ X.obj.obj) (v : yoneda.obj V ⟶ Y.obj.obj) (h : U ⟶ V), IsEtale u → IsEtale v → u ≫ f.hom.hom = yoneda.map h ≫ v → ∀ (T₀ T : Over S) [IsAffine T₀.left] [IsAffine T.left] (j : T₀ ⟶ T), IsFirstOrderThickening j.left → ∀ (a₀ : T₀ ⟶ U) (b : T ⟶ V), a₀ ≫ h = j ≫ b → ∃! a : T ⟶ U, j ≫ a = a₀ ∧ a ≫ h = b)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3eb49c9e7",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Single module, single sorry theorem. Clause-by-clause check against node and Stacks 04GD/049S: affine first-order thickening tests over S with unique lifts on both sides; charts u,v are any representable étale (IsEtale) maps, h : U ⟶ V, square u ≫ f = yoneda.map h ≫ v (correct direction); the right side states the lifting property for h on scheme maps (same by Yoneda); no extra hypothesis on f; universe u matches the AlgebraicSpace dependency. lean.statement verbatim in the file; only the lean field differs from side-live; no new nodes or dependency records. Inline lifting condition identical to the existing consumer SpaceLfpFormallyEtaleCriterion; no project or Mathlib duplicate. Docstrings carry source, blueprint id and the six proof steps; proof-only imports exist; report has Worker report and Second reading by Q48 sections. No changes, so no compile."
+ }
+}

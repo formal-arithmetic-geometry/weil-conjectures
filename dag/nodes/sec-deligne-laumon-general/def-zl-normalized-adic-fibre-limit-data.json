@@ -1,0 +1,127 @@
+{
+ "id": "def-zl-normalized-adic-fibre-limit-data",
+ "kind": "definition",
+ "title": "Local finite-quotient normalization data for adic fibre comparisons",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, finite extensions of $\\mathbf Q_\\ell$, a normalized realization family and its actual finite-type bases, lattices, charts and geometric fibre functors [def-per-adic-fibre-comparison-data], and a family of finite comparison maps [def-per-adic-fibre-coherence-data]. Define $\\operatorname{modelH0}$ by applying $H^0$ to a specified derived degree-zero presentation and removing the single-object unit. Define the finite etale unit's proetale mate using the canonical site adjunctions [def-weil-pbc-site-comparison-morphism]. Define the positive-power quotient tower of integral scalar extension, its reduction cone map, the finite scalar sheaf and tensor/sheafification unit. A pulled lattice identification must agree on every finite reduction with the pulled system unit and send each rationalized integral section to the same integral image. A scalar lattice identification must similarly agree with every finite tensor unit and its rational balanced section. Define the pullback and scalar chart predicates by the normalized global derived comparisons, actual derived counits and ordinary module units, using the intrinsic $H^0$ normalization. Define the pullback-limit predicate by existence of an adapted refinement through every specified geometric lift, with literally pulled tower and the specified integral stalk-limit comparison; its localized map conjugated by the two chart normalizations equals the recorded fibre comparison. Define the scalar-limit predicate by the finite integral quotient tensor maps, completion reduction-cone map and localization, with the prescribed pure-tensor equation. Define $\\operatorname{LocalLimits}$ as the conjunction of these pullback-limit and scalar-limit predicates. These are formulas and normalization predicates only; they assert no existence of a fibre comparison family.",
+ "stmt_deps": [
+  "def-per-adic-fibre-comparison-data",
+  "def-per-adic-fibre-coherence-data",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Propositions 6.8.4(1),(4) and 6.8.14(2), Remark 6.8.15; blueprint real-mixed-by-curves proof paragraph 1. Definition ownership repair requested in return L for lem-zl-classical-normalized-two-fibre-comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized inverse-limit geometric fibre pullback and scalar comparison through finite lattice quotient projections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ProfiniteGrp.isIso_toLimit\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : IsIso (toLimit P)\", \"doc\": \"For any profinite group $P$, the canonical continuous group homomorphism from $P$ to the inverse limit of its finite quotient groups (indexed by open normal subgroups) is an isomorphism. This establis\"}\n  {\"name\": \"InverseSystem.invLimEquiv_symm_apply_coe\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} {i : ι} [inst : LinearOrder ι]\\n  {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} {equiv : (j : ↑(Set.Iio i)) → F ↑j ≃ InverseSystem.piLT X ↑j}\\n  (nat : InverseSystem.IsNatEquiv f equiv) (t : ↑(InverseSystem.limit InverseSystem.piLTProj i)) (l : ↑(Set.Iio i)\", \"doc\": \"For an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, and equivalences $F_j \\\\simeq \\\\prod_{l < j} X_l$ satisfying naturality, the inverse of t\"}\n  {\"name\": \"CategoryTheory.Limits.limit.isoLimitCone_inv_π\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{F : J ⥤ C} [HasLimit F] (t : LimitCone F) (j : J) : (limit.isoLimitCone t).inv ≫ limit.π F j = t.cone.π.app j\", \"doc\": \"For a functor $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ with a limit and a limit cone $ t $ over $ F $, the inverse of the isomorphism $ \\\\lim F \\\\cong t.\\\\text{pt} $ composed with the projection $ \\\\lim F \\\\to \"}\n  {\"name\": \"InverseSystem.invLimEquiv.congr_simp\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} {i : ι} [inst : LinearOrder ι]\\n  {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} {equiv equiv_1 : (j : ↑(Set.Iio i)) → F ↑j ≃ InverseSystem.piLT X ↑j}\\n  (e_equiv : equiv = equiv_1) (nat : InverseSystem.IsNatEquiv f equiv),\\n  InverseSystem.invLimEquiv nat = \", \"doc\": \"Given an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, if two families of equivalences $\\\\{F_j \\\\simeq \\\\prod_{l < j} X_l\\\\}$ are equal and sati\"}\n  {\"name\": \"Profinite.lim\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": Limits.LimitCone X.diagram\", \"doc\": \"The profinite space $ X $ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to \"}\n  {\"name\": \"InverseSystem.isNatEquiv_piEquivLim\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"[InverseSystem f] (H : ∀ x l, (equivLim x).1 l = f l.2.le x) : IsNatEquiv f (piEquivLim nat equivLim hi)\", \"doc\": \"For a linearly ordered index set $\\\\iota$ and an inverse system $F$ with transition maps satisfying a naturality condition, if $i \\\\in \\\\iota$ is a prelimit element (having no immediate predecessor), the\"}\n  {\"name\": \"InverseSystem.invLimEquiv_apply_coe\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} {i : ι} [inst : LinearOrder ι]\\n  {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} {equiv : (j : ↑(Set.Iio i)) → F ↑j ≃ InverseSystem.piLT X ↑j}\\n  (nat : InverseSystem.IsNatEquiv f equiv) (t : ↑(InverseSystem.limit f i)) (l : ↑(Set.Iio i)) (l_1 : ↑(Set.Iio ↑l\", \"doc\": \"For an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, and a family of equivalences $F_j \\\\simeq \\\\prod_{l < j} X_l$ satisfying the naturality c\"}\n  {\"name\": \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : P ≅ (limit (toFiniteQuotientFunctor P ⋙ forget₂ FiniteGrp ProfiniteGrp))\", \"doc\": \"The canonical isomorphism from a profinite group $ P $ to the inverse limit of its finite quotient groups $ P/H $ (for open normal subgroups $ H $), which is also a homeomorphism. This equivalence map\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project declarations, without a private copy; assign their plain definitions a definition-node owner."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "modelH0 IsPulledLattice IsPullLimitNormalized IsScalarLimitNormalized LocalLimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopModuleCat.isLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    [inst_1 : TopologicalSpace R] →\\n      {J : Type u_2} →\\n        [inst_2 : CategoryTheory.Category.{v_1, u_2} J] →\\n          {F : CategoryTheory.Functor J (TopModuleCat R)} →\\n            {c : CategoryTheory.Limits.Cone (F.comp (CategoryTheory.forget₂ (TopModuleCa\", \"doc\": \"Given a topological ring $ R $, a diagram $ F: J \\to \\text{TopModuleCat}(R) $, and a cone $ c $ over the composition of $ F $ with the forgetful functor to $ \\text{ModuleCat}(R) $ that satisfies the univ\"}\n  {\"name\": \"Profinite.exists_locallyConstant\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1}\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g, f = LocallyConstant.comap (TopC\", \"doc\": \"In the category of profinite spaces, given a cofiltered limit cone $ C $ with apex $ X $ and a locally constant function $ f : X → α $, there exists an object $ j $ in the diagram and a locally consta\"}\n  {\"name\": \"CompHausLike.instHasLimitWalkingCospanCospan\", \"module\": \"Mathlib/Topology/Category/CompHausLike/Limits\", \"type\": \"∀ {P : TopCat → Prop} {X Y B : CompHausLike P} (f : X ⟶ B) (g : Y ⟶ B) [CompHausLike.HasExplicitPullback f g],\\n  CategoryTheory.Limits.HasLimit (CategoryTheory.Limits.cospan f g)\", \"doc\": \"The category of compact Hausdorff-like spaces has pullbacks. For any morphisms $ f: X \\to B $ and $ g: Y \\to B $ in this category, the pullback of $ f $ and $ g $ exists.\"}\n  {\"name\": \"CompHausLike.pullback.isLimit\", \"module\": \"Mathlib/Topology/Category/CompHausLike/Limits\", \"type\": \"{P : TopCat → Prop} →\\n  {X Y B : CompHausLike P} →\\n    (f : X ⟶ B) →\\n      (g : Y ⟶ B) →\\n        [inst : CompHausLike.HasExplicitPullback f g] → CategoryTheory.Limits.IsLimit (CompHausLike.pullback.cone f g)\", \"doc\": \"For morphisms $f: X \\to B$ and $g: Y \\to B$ in the category of compact Hausdorff-like spaces, the pullback cone (the subset of $X \\times Y$ where $f(x) = g(y)$) satisfies the universal property of a pull\"}\n  {\"name\": \"Profinite.NobelingProof.spanCone_isLimit\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  {C : Set (I → Bool)} →\\n    [inst : (s : Finset I) → (i : I) → Decidable (i ∈ s)] →\\n      (hC : IsCompact C) → CategoryTheory.Limits.IsLimit (Profinite.NobelingProof.spanCone hC)\", \"doc\": \"Under decidable membership in finite subsets and compactness of $ C $, the span cone constructed from $ C $ satisfies the universal property of a limit in the category of profinite spaces. This is est\"}\n  {\"name\": \"PresheafOfModules.isLimitLimitCone\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n      {J : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} J] →\\n          (F : CategoryTheory.Functor J (PresheafOfModules R)) →\\n            [inst_2 :\\n                ∀ (X : C\", \"doc\": \"The limit cone for a diagram in the category of presheaves of modules over a presheaf of rings is a limit, as each evaluation at an object in the base category is a limit in the corresponding module c\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"Profinite.exists_locallyConstant_finite_aux\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1} [Finite α]\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g,\\n    LocallyConstant.\", \"doc\": \"Given a finite set $\\\\alpha$, a limit cone $C$ in the category of profinite spaces, and a locally constant function $f : C.\\\\text{apex} \\\\to \\\\alpha$, there exists an index $j$ in the diagram category and\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project declarations, without a private copy; assign their plain definitions a definition-node owner."
+  },
+  {
+   "tool": "grep",
+   "query": "modelH0|IsPulledLattice|IsPullLimitNormalized|IsScalarLimitNormalized|LocalLimits",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project declarations, without a private copy; assign their plain definitions a definition-node owner."
+  },
+  {
+   "tool": "grep",
+   "query": "rg on lean/WeilConjectures, lean/Sheaf and dag/nodes for scalarQuotients, scalarCompletionMap, modelH0, finiteUnitMate, finiteScalarLevel, finiteScalarUnit, IsPulledLattice, IsScalarLattice, IsPullChartMap, IsScalarChartMap, IsPullLimitNormalized, IsScalarLimitNormalized, LocalLimits",
+   "results": "lean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:88:def modelH0 {T : Scheme.{u}} {A : Type u} [Field A] [Algebra ℚ_[l] A]\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:99:def finiteUnitMate {U V : Scheme.{u}} (f : V ⟶ U)\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:165:def IsPulledLattice {U V : Scheme.{u}} (f : V ⟶ U)\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:176:      finiteUnitMate f _ _\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:236:    (modelH0 l e).hom = 𝟙 _ ∧ e'.hom = pullModelMap l R E g F _ e ∧\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:250:            ((modelH0 l e').inv.val.app (op ((proEtaleBaseChange g).obj W))\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:274:    (modelH0 l e).hom = 𝟙 _ ∧ e'.hom = scalarModelMap l R E L i X F _ e ∧\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:280:          ((modelH0 l e').inv.val.app (op W)\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:288:def IsPullLimitNormalized (ω : Fibres (k := k) l R) (c : AllComparisons l R ω) : Prop :=\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:314:      IsPullChartMap l R A g F C D f q ∧ IsPulledLattice l A f N M hsystem η ∧\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:327:def IsScalarLimitNormalized (ω : Fibres (k := k) l R) (c : AllComparisons l R ω) : Prop :=\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:400:structure LocalLimits (ω : Fibres (k := k) l R) (c : AllComparisons l R ω) : Prop where\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:401:  pull : IsPullLimitNormalized l R ω c\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:402:  scalar : IsScalarLimitNormalized l R ω c\nlean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean:468:        Nonempty (Descent l R Ω ω c V) ∧ Nonempty (LocalLimits l R ω c) := by\ndag/nodes/sec-deligne-laumon-a1/lem-per-adic-normalized-fibre-scalar.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-adic-normalized-fibre-comparisons.json\ndag/nodes/sec-deligne-laumon-a1/def-per-adic-fibre-coherence-data.json\ndag/nodes/sec-deligne-laumon-a1/def-per-adic-fibre-comparison-data.json\ndag/nodes/sec-deligne-laumon-a1/def-per-continuous-rational-realization-data.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-adic-stratified-pullback-texact.json\n",
+   "date": "2026-10-24",
+   "verdict": "The definitions exist only in Sheaf.Paper.PerAdicNormalizedFibreComparisons. Existing theorem nodes mention them but no definition node owns them; reuse these exact declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search 'normalized fibre'",
+   "results": "0 blueprint nodes match 'normalized fibre'",
+   "date": "2026-10-24",
+   "verdict": "No duplicate blueprint definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-classical-normalized-two-fibre-comparison",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1: the normalized two-fibre comparison, its finite scalar square and scalar extension to the algebraic closure",
+   "via": [
+    "lem-zl-classical-normalized-two-fibre-comparison",
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "module": "Sheaf.Paper.PerAdicNormalizedFibreComparisons",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.LocalLimits",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.scalarQuotients",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.scalarCompletionMap",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.modelH0",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteUnitMate",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteScalarLevel",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteScalarUnit",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsPulledLattice",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsScalarLattice",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsPullChartMap",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsScalarChartMap",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsPullLimitNormalized",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsScalarLimitNormalized",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.LocalLimits"
+  ],
+  "statement": "structure LocalLimits (ω : Fibres (k := k) l R) (c : AllComparisons l R ω) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair: owns the existing plain definitions in this module by exact re-export, as authorized by return L. No file or duplicate declaration is introduced; the theorem formerly cited for these definitions constructs no object used here."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d0371483",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d0371483",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery of return L (5a28, H2 only). Lean is byte-identical to 5a28 (all 4 modules diffed); only records changed. Item, two-fibre-data and common-data now cite new existing:true owners: def-zl-normalized-adic-fibre-limit-data (PerAdicNormalizedFibreComparisons: modelH0/IsPulledLattice/LocalLimits etc., 13 decls exist, LocalLimits signature matches l.400) and def-zl-constructible-point-realization-data (ConstructiblePullbackTExact constructiblePoint*, 5 decls exist; its lemma stmt_dep supplies fieldScalarTower = .choose of an ∃!). Item statement and proof_deps unchanged. Mechanical theorem-stmt_dep finding: fieldDerivedHomologyIso is .choose of existsUnique_fieldDerivedHomologyIso, an object the theorem constructs, and finiteFieldDatumPrimeUnit is a real theorem (IsUnit l) used for an instance; both genuine, PASS on that point. Every non-existing lean.statement is verbatim in its file. The _he/_hc non-vacuity lemmas exist. Edge cases: empty Y, rank 0/varying, b=0, E≤E, arbitrary x. Advisory: Stage.realization pinned only up to E^× (node says 'isomorphic'). No compile (no file changed)."
+ }
+}

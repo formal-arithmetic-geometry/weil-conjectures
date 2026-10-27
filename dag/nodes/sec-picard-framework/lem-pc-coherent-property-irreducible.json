@@ -32,79 +32,56 @@
  ],
  "proof": [
   {
-   "text": "Property $\\mathcal P$ is invariant under isomorphism, and if a coherent module with support in $T$ has a finite filtration whose successive quotients have $\\mathcal P$, then it has $\\mathcal P$, by induction using the two-out-of-three hypothesis (the zero module is handled by the same hypothesis applied to $0\\to0\\to0\\to0$).",
+   "text": "Choose $G$ from (3). The sequence $0\\to G\\xrightarrow{1}G\\to0\\to0$ and (1) give $\\mathcal P(0)$. If $F\\cong F\\prime$ are coherent and supported in $T$, apply (1) to $0\\to F\\to F\\prime\\to0\\to0$: property transfers in either direction. Thus the zero and isomorphism hypotheses needed below hold.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YH proof, first paragraph (coherent.tex line 3189)"
+    "place": "Tag 01YH, lemma-property-irreducible, first proof paragraph (zero and isomorphism cases made explicit)"
    }
   },
   {
-   "text": "If $\\mathcal F$ is coherent with $\\operatorname{Supp}(\\mathcal F)\\subseteq T$ and $\\xi\\notin\\operatorname{Supp}(\\mathcal F)$, apply [lem-weil-pbc-coherent-filtration-integral-subschemes] to filter $\\mathcal F$ by quotients $(i_j)_*\\mathcal I_j$. For each short exact sequence in the filtration, exactness on stalks shows $\\operatorname{Supp}(\\mathcal F_j/\\mathcal F_{j-1})\\subseteq\\operatorname{Supp}(\\mathcal F)$; the nonzero ideal $\\mathcal I_j$ has nonzero generic stalk by [lem-weil-pbc-integral-scheme-ideal-generic-stalk], so its support is all of the integral $Z_j$, and the quotient support is the proper irreducible closed subset $i_j(Z_j)\\subsetneq T$. Hypothesis (2) gives $\\mathcal P$ for each quotient, and Step 1 gives $\\mathcal P(\\mathcal F)$.",
+   "text": "Apply [lem-pc-coherent-supported-property-devissage] with $S=T\\setminus\\{\\xi\\}$. Any integral closed-subscheme image contained in $S$ is properly contained in $T$, so hypothesis (2) supplies its ideal properties. Extension closure is the middle-term case of (1). We obtain $\\mathcal P(Q)$ for every coherent $Q$ supported in $T$ with $Q_\\xi=0$.",
    "uses": [
-    "lem-weil-pbc-coherent-filtration-integral-subschemes",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+    "lem-pc-coherent-supported-property-devissage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YH proof, second paragraph (coherent.tex lines 3198-3208)"
+    "place": "Tag 01YH, lemma-property-irreducible, second proof paragraph"
    }
   },
   {
-   "text": "Let $i:Z=T_{\\mathrm{red}}\\to X$ be the reduced induced closed subscheme structure on $T$ from [lem-weil-pbc-reduced-induced-closed-subscheme](2); it is a closed immersion with $Z$ reduced and $i(Z)=T$, so $Z$ is homeomorphic to the nonempty irreducible $T$ and hence integral by the definition [def-pc-integral-scheme], with generic point $\\eta$ satisfying $i(\\eta)=\\xi$. Apply [lem-weil-pbc-coherent-generic-point-ideal-inclusion] to this $i$ and the sheaf $\\mathcal G$ in (3). It gives $r\\ge0$, a coherent ideal $\\mathcal I\\subseteq\\mathcal O_Z$, and an injection $\\alpha:i_*(\\mathcal I^{\\oplus r})\\to\\mathcal G$ which is an isomorphism near $\\xi$. Since $\\mathcal G_\\xi$ has dimension one over $\\kappa(\\xi)$ and a nonzero ideal on the integral $Z$ has generic stalk $\\mathcal O_{Z,\\eta}$ by [lem-weil-pbc-integral-scheme-ideal-generic-stalk], the generic stalk comparison forces $r=1$ and $\\mathcal I\\ne0$. Exactness on stalks gives $\\operatorname{Supp}(\\operatorname{coker}\\alpha)\\subseteq T$, while the local isomorphism gives zero stalk at $\\xi$; hence its support is a proper closed subset of $T$. Step 2 gives property $\\mathcal P$ for the cokernel.",
+   "text": "By [lem-weil-pbc-reduced-induced-closed-subscheme](2), give $T$ its reduced induced structure $i:Z\\to X$. It is nonempty, reduced and irreducible, hence integral [def-pc-integral-scheme], and its generic point maps to $\\xi$. Apply [lem-pc-coherent-rank-one-property-ideals] to $i$, $G$ from (3), the two-out-of-three hypothesis (1), and the small-support conclusion of Step 2. It gives $\\mathcal P(i_*J)$ for every quasi-coherent ideal $J$ on $Z$.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+    "def-pc-integral-scheme",
+    "lem-pc-coherent-rank-one-property-ideals"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YH proof, third paragraph (coherent.tex lines 3211-3229)"
+    "place": "Tag 01YH, lemma-property-irreducible, third and fourth proof paragraphs"
    }
   },
   {
-   "text": "For every nonzero quasi-coherent ideal $\\mathcal I'\\subseteq\\mathcal I$, form the composite $i_*\\mathcal I'\\to i_*\\mathcal I\\xrightarrow{\\alpha}\\mathcal G$ and let $\\mathcal Q'$ be its cokernel. At $\\xi$ the map is an isomorphism because both nonzero ideals have generic stalk $\\mathcal O_{Z,\\eta}$, so exactness on stalks gives $\\operatorname{Supp}(\\mathcal Q')\\subseteq T$ and $(\\mathcal Q')_\\xi=0$; thus its support is a proper closed subset of $T$, and Step 2 gives $\\mathcal P(\\mathcal Q')$. The short exact sequence then gives $\\mathcal P(i_*\\mathcal I')$ by (1) and the two-out-of-three property.",
+   "text": "Apply [lem-pc-coherent-supported-property-devissage] with $S=T$. For an integral closed immersion $j:W\\to X$ with $j(W)\\subseteq T$, proper containment gives all its ideal properties by (2). If $j(W)=T$, the reducedness of $W$ and [lem-weil-pbc-reduced-induced-closed-subscheme](3) identify $W$ with $Z$ over $X$. Under this isomorphism a quasi-coherent ideal on $W$ becomes an ideal on $Z$, and their module pushforwards are isomorphic; Step 3 and Step 1 give its property. The devissage lemma now gives the assertion for every coherent $F$ supported in $T$.",
    "uses": [
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YH proof, fourth paragraph (coherent.tex lines 3232-3254)"
-   }
-  },
-  {
-   "text": "For any quasi-coherent ideal $\\mathcal I''\\subseteq\\mathcal O_Z$, if it is zero then its pushforward is the zero module and has $\\mathcal P$. Otherwise $\\mathcal I''\\cap\\mathcal I$ has generic stalk $\\mathcal O_{Z,\\eta}$ (both factors do, by [lem-weil-pbc-integral-scheme-ideal-generic-stalk]), hence is nonzero on the integral scheme $Z$, so Step 4 gives property for its pushforward. The quotient of $i_*\\mathcal I''$ by this intersection has zero generic stalk, and exactness on stalks gives support missing $\\xi$; Step 2 gives property for the quotient and (1) gives property for $i_*\\mathcal I''$. Hence $\\mathcal P$ holds for $i_*\\mathcal I''$ for every quasi-coherent ideal $\\mathcal I''\\subseteq\\mathcal O_Z$.",
-   "uses": [
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YH proof, fifth paragraph (coherent.tex lines 3257-3273)"
-   }
-  },
-  {
-   "text": "Finally, for an arbitrary coherent $\\mathcal F$ supported in $T$, use [lem-weil-pbc-coherent-filtration-integral-subschemes]. As in Step 2, each quotient $(i_j)_*\\mathcal I_j$ has support $i_j(Z_j)$, an irreducible closed subset of $T$. If $i_j(Z_j)\\subsetneq T$ this quotient has $\\mathcal P$ by hypothesis (2). If $i_j(Z_j)=T$, then $Z_j$ is integral, hence reduced, and the uniqueness clause [lem-weil-pbc-reduced-induced-closed-subscheme](3) gives an isomorphism $\\varphi:Z_j\\to Z$ with $i\\circ\\varphi=i_j$; transporting $\\mathcal I_j$ along $\\varphi$ gives a quasi-coherent ideal $\\mathcal I''\\subseteq\\mathcal O_Z$ with $(i_j)_*\\mathcal I_j\\cong i_*\\mathcal I''$, which has $\\mathcal P$ by Step 5. Thus every quotient has $\\mathcal P$, and Step 1 gives $\\mathcal P(\\mathcal F)$.",
-   "uses": [
-    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-pc-coherent-supported-property-devissage",
     "lem-weil-pbc-reduced-induced-closed-subscheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YH proof, final paragraph (coherent.tex lines 3275-3282)"
+    "place": "Tag 01YH, lemma-property-irreducible, final proof paragraph"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-filtration-integral-subschemes",
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-  "lem-weil-pbc-reduced-induced-closed-subscheme"
+  "lem-pc-coherent-supported-property-devissage",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-pc-coherent-rank-one-property-ideals"
  ],
  "proof_origin": {
   "by": "document",
@@ -132,6 +109,34 @@
    "results": "no matching coherent-sheaf devissage declaration",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "irreducible closed support coherent sheaves devissage generic rank one two out of three property",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; Module.rankAtStalk_pos_iff_mem_support; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; Module.rankAtStalk_eq_zero_iff_notMem_support; AlgebraicGeometry.exists_of_res_eq_of_qcqs; Module.isLocallyConstant_rankAtStalk_freeLocus; ModuleCat.Tilde.isLocallyFraction_pred. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian scheme coherent sheaves property devissage on irreducible closed support",
+   "results": "TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible; TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible; AlgebraicGeometry.Scheme.IdealSheafData.support; AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support; TopologicalSpace.NoetherianSpace.exists_finset_irreducible; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; AlgebraicGeometry.IsLocallyNoetherian.rec; AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"devissage\"",
+   "results": "No hits. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "property.irreducible|coherent_property|devissage|dévissage",
+   "results": "No hits. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -144,27 +149,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-coherence",
  "split_report": {
-  "date": "2026-10-11",
+  "date": "2026-10-23",
   "item": "lem-pc-coherent-property-irreducible",
   "worker": "stage1",
-  "summary": "Checked the exact Stacks Lemma 01YH statement and split its proof into filtration, strict-support, generic-stalk comparison, ideal intersection, contradiction, and final filtration steps. Reused the existing 01YF filtration, 01YE generic inclusion, and generic ideal stalk nodes; no duplicate node was created.",
-  "blueprint": "Realizes the property-irreducible comparison and proper-support quotient argument named in the blueprint ancestor lem-pc-coherent-hi.",
+  "summary": "Repair of the released 2026-10-22 re-split order: two independent statement-only tasks, supported filtration devissage (old steps 1,2,6) and rank-one ideal property transfer (old steps 3,4,5). The parent is a short assembly. Its statement and all maintainer-owned fields are retained. The invalid all-zero-sequence justification was replaced using the given good G. Existing rank-one and common-lattice geometric lemmas are reused, not duplicated.",
+  "blueprint": "The blueprint ancestor lem-pc-coherent-hi invokes the general proper-coherence input. Along its existing devissage route, the item realizes Tag 01YH inside lem-pc-coherent-property-devissage; new supported-filtration and rank-one-ideal tasks realize respectively the first/second/final and third/fourth paragraphs of its Stacks proof.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-coherent-filtration-integral-subschemes",
-    "why": "The 01YH proof needs the general finite filtration of a coherent module by integral closed-subscheme ideal quotients."
-   },
-   {
-    "node": "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "why": "The 01YH proof needs the generic-stalk injection of an ideal pushforward into the distinguished coherent module."
-   },
-   {
-    "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-    "why": "The 01YH proof needs the fact that a nonzero ideal on an integral scheme has full generic stalk, to compare dimensions and intersections."
-   },
-   {
     "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "why": "The 01YH proof needs the integral closed subscheme with underlying set T (Z_0 with its reduced induced structure) and its uniqueness to identify filtration quotients with full support T."
+    "why": "Generic construction and uniqueness of the reduced structure on T identify integral closed subschemes with the same underlying closed set; no in-unit node replaces it."
    }
   ]
  },
@@ -179,12 +172,12 @@
   "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "reviewed": {
-  "date": "2026-10-11",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "R-cpi0035",
-  "group": "H1",
+  "reviewer": "NT-cc-Q63-fcf76ade6",
+  "group": "Q63",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpi0035 (reviewer sub-agent of L); spot-checked: Statement vs coherent.tex 01YH clause by clause (agrees; (2) as closed immersion of integral Z with i(Z) strictly in T); citer lem-pc-coherent-property-devissage step 4 uses exactly (1),(2),(3); no duplicate of 01YM node; cited statements checked for hypotheses. FIX more, RETURN less: (C1) Step 3 used an undefined integral Z with generic point over xi: now introduced as T_red via lem-weil-pbc-reduced-induced-closed-subscheme(2), integral by def-pc-integral-scheme; (C1) Step 6 'equality with T is covered by Step 5' needed that an integral Z_j with i_j(Z_j)=T is Z over X: now cites uniqueness clause (3) of the same node and transports the ideal; Step 5 dangling 'failure of goodness' sentence replaced by the conclusion for all ideals. Second reading by H1 missed both.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-fcf76ade6 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, the released 2026-10-22 re-split note and the old 6-step live proof, plus Stacks coherent.tex 01YG (l.3144) and 01YH (l.3179) with their proofs. Not superseded: live still has the 10-11 split and neither new id exists in live or side-live. The item statement and stmt_deps are unchanged (identical to live). Old steps 1, 2 and 6 (filtration induction with support control) go to new node lem-pc-coherent-supported-property-devissage: arbitrary support set S, P(0), iso invariance, extension closure, nonzero integral ideal pushforwards ⇒ P for every coherent module supported in S. It is true via the 01YF filtration node and the generic-stalk node, and it generalizes 01YG, which has no DAG node. Old steps 3 to 5 (01YE inclusion, r=1 from the 1-dimensional generic stalk, the cokernel vanishing at ξ, subideals, the I∩J sequences, J=0) go to new node lem-pc-coherent-rank-one-property-ideals. It is true. It is not a specialization of the 01YL node lem-weil-pbc-coherent-property-integral-ideals-of-small-support, which needs F^{⊕r}-descent and the higher-rank G' hypothesis, and it is not one of the patching nodes. The parent (1643 chars) is an assembly. Step 1 gets P(0) and iso invariance from 0→G→G→0→0, fixing the old all-zero argument. Step 2 applies the devissage node with S=T∖{ξ}: an integral image in S misses ξ, so it is a proper subset of T and (2) applies. Step 3 builds T_red with reduced-induced(2), which is integral by def-pc-integral-scheme, and supplies every hypothesis of the rank-one node from Step 1, (1), Step 2 and (3). Step 4 applies the devissage node with S=T, using reduced-induced(3) to transport the full-support case to Z. The two nodes are comparable in size (about 2:1), statement-only, self-contained, with exact stmt_deps, three kinds of search, correct created/blueprint fields, no cycles and no SGA. Edge cases tested: S empty or not closed, X=Z=Spec k, Spec k[ε], G=i_*I, J=0 and J=O_Z. Accepted tool use: lem-weil-pbc-reduced-induced-closed-subscheme. Cosmetic only, not repaired: F\\prime in step 1, and the new nodes' from.place names 01YH paragraphs."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.CoherentPropertyIrreducible",
@@ -205,5 +198,16 @@
   "result": "fix",
   "note": "Noetherian X, closed irreducible T with generic point, P on X.Modules; (1) two-of-three over ShortExact with coherence+inline support in T on all three; (2) closed immersion of integral Z (same universe) with range ⊂ T, every Z.IdealSheafData pushed forward; (3) coherent G, support = T, m_xi kills G_xi via moduleStalkFunctor, compatible kappa(xi)-structure finrank 1, P G; conclusion every coherent F with support ⊆ T. Added stmt_dep def-pc-module-stalk-functor is used. FIX: ideal sheaves to IdealSheafData (QUASI-COHERENT IDEAL SHEAVES), [IsNoetherian X] (NOETHERIAN SCHEME)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

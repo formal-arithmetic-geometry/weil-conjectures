@@ -1,0 +1,159 @@
+{
+ "id": "lem-sfb-flat-scalar-geometric-coherence",
+ "kind": "statement",
+ "title": "Coherence of flat scalar and geometric comparison maps",
+ "statement": "Let a:R→S be a morphism of commutative condensed ring objects with exact scalar extension on every scheme, and f:X→Y any scheme map. Choose SectionScalarComparisons sX,sY satisfying SectionScalarNormalized. Let theta be the inverse actual CondensedRing.derivedPullIso, and d0 the actual CondensedRing.derivedComapLowerStarIso, expressed using the D,L,F,V interfaces. Then d0.hom equals scalarRestrictionPush, theta satisfies PullNormalized and SectionPullNormalized for sX,sY, and there is a section derived restriction/direct-image comparison d. It is induced by an ordinary comparison fixing each section and satisfies the explicit right-derived computation-unit equation on K-injective complexes. The square comparing d with d0 under the fixed section equivalences and pushforward comparisons commutes on every derived object. The Lean statement spells out the computation-unit equation. The functors and maps are those of [def-sfb-internal-derived-scalar-comparisons], [def-sfb-derived-comap-lower-star-iso], [def-sfb-derived-pull-iso], [def-sfb-scalar-restriction-tensor-comparison-data], [def-sfb-internal-section-scalar-pullback-comparison-data], and [def-sfb-scalar-section-push-comparison-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison; steps 3--5 of lem-sfb-flat-coefficient-square-normalization; Stacks Tags 0D6E, 07A6 and 0B65"
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-pull-iso",
+  "def-sfb-scalar-restriction-tensor-comparison-data",
+  "def-sfb-internal-section-scalar-pullback-comparison-data",
+  "def-sfb-scalar-section-push-comparison-data",
+  "def-pd-section-derived-realization"
+ ],
+ "proof": [
+  {
+   "text": "Compute actual derived restriction/direct image on a K-injective S-complex. Flatness ensures its restriction is K-injective. Every defining derived comparison factor therefore becomes the ordinary restriction/direct-image comparison. The section equivalence preserves those computation units and the ordinary map fixes sections, giving the asserted section comparison and its compatibility square.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-comap-preserves-k-injectives",
+    "def-sfb-comap-lower-star-iso",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary inverse restriction/pullback map has that same direct-image map as mate, by the actual units and counits. Derive the equation using exact pullback and scalar restriction, identifying d0 with scalarRestrictionPush.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the inverse actual theta under the scalar adjunction. Composite-adjunction conjugacy identifies its transpose with inverse restriction/pullback followed by pullback of the scalar unit. The normalized ordinary balancing map has the same transpose, since it inserts 1 on generators. Localize and use injectivity of the scalar Hom bijection to identify theta with normalized balancing.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison-counit equation is now PullNormalized. Transport it through the normalized section scalar models: agreement of ordinary generators and universal computation maps gives SectionPullNormalized.",
+   "uses": [
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-comap-preserves-k-injectives",
+  "def-sfb-comap-lower-star-iso",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-internal-section-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison, as expanded by the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar adjunction unit under tensor normalization and section equivalence",
+   "results": "8 hits, including ModuleCat.extendRestrictScalarsAdj_unit_app_apply and CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "date": "2026-10-23",
+   "verdict": "Ordinary unit and monoidal adjunction formulas; no statement includes the fixed internal/section universal normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "One hit: Mathlib.CategoryTheory.Functor.Derived.Adjunction",
+   "date": "2026-10-23",
+   "verdict": "Useful generic representative unit formula; still requires the tensor and section comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*derived|derived.*conjugateEquiv",
+   "results": "No Mathlib matches. Local rg finds RightDerivedFunctor.CompConjugate and DerivedExactMate.",
+   "date": "2026-10-23",
+   "verdict": "Generic conjugacy tools do not supply the particular scalar section or balanced comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For flat scalar extension of module sheaves, the derived scalar unit under tensor normalization is tensoring with the ring homomorphism, and geometric comparison maps preserve the same section adjunction units",
+   "results": "8 hits, including ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, and ModuleCat.ExtendRestrictScalarsAdj.homEquiv.",
+   "date": "2026-10-23",
+   "verdict": "Ordinary module scalar extension results; no fixed unbounded internal/section comparison normalization or geometric derived coherence statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatCoefficientSquareNormalization",
+  "date": "2026-10-23",
+  "group": "R9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-sfb-flat-coefficient-square-normalization",
+   "place": "steps 3--5",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatScalarGeometricCoherence",
+  "file": "lean/Sheaf/Paper/FlatScalarGeometricCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.flat_scalar_geometric_coherence",
+  "statement": "theorem flat_scalar_geometric_coherence {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (sX : SectionScalarComparison a X) (sY : SectionScalarComparison a Y)\n    (hsX : SectionScalarNormalized a X sX) (hsY : SectionScalarNormalized a Y sY)\n    (theta : D a Y ⋙ L S f ≅ L R f ⋙ D a X)\n    (d0 : F S f ⋙ V a Y ≅ V a X ⋙ F R f)\n    (htheta : theta = by\n      unfold D L CondensedRing.moduleObjectDerivedPullback\n      exact (CondensedRing.derivedPullIso a f).symm)\n    (hd0 : d0 = by\n      unfold F CondensedRing.moduleObjectDerivedPushforward\n      exact CondensedRing.derivedComapLowerStarIso a f) :\n    d0.hom = scalarRestrictionPush a f ∧ PullNormalized a f theta ∧\n      SectionPullNormalized a f sX sY theta ∧\n    ∃ d : ModuleRingedComparison.derivedPushforward S f ⋙\n          SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n            (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n              (Scheme.ProEt.topology Y) (coefficientMap a Y)) ≅\n        SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n            (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n              (Scheme.ProEt.topology X) (coefficientMap a X)) ⋙\n          ModuleRingedComparison.derivedPushforward R f,\n      (∃ r : ModuleRingedComparison.pushforward S f ⋙\n            SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n              (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n                (Scheme.ProEt.topology Y) (coefficientMap a Y)) ≅\n          SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n              (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n                (Scheme.ProEt.topology X) (coefficientMap a X)) ⋙\n            ModuleRingedComparison.pushforward R f,\n        (∀ (N : ModuleRingedComparison.modules S X) (W : Y.ProEtᵒᵖ)\n          (x : ((ModuleRingedComparison.pushforward S f).obj N).val.obj W),\n          (r.hom.app N).val.app W x = x) ∧\n        ∀ (I : CochainComplex (ModuleRingedComparison.modules S X) ℤ), I.IsKInjective →\n          (SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n            (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n              (Scheme.ProEt.topology Y) (coefficientMap a Y))).map\n              ((ModuleRingedComparison.pushforward S f).rightDerivedFunctorUnit.app\n                ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) ≫\n            d.hom.app (DerivedCategory.Q.obj I) ≫\n            (ModuleRingedComparison.derivedPushforward R f).map\n              (((SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n                (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n                  (Scheme.ProEt.topology X)\n                    (coefficientMap a X))).mapHomologicalComplexUpToQuasiIsoFactorsh\n                    (.up ℤ)).hom.app\n                    ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) =\n          ((SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n            (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n              (Scheme.ProEt.topology Y)\n                (coefficientMap a Y))).mapHomologicalComplexUpToQuasiIsoFactorsh\n                    (.up ℤ)).hom.app\n                (((ModuleRingedComparison.pushforward S f).mapHomotopyCategory (.up ℤ)).obj\n                  ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) ≫\n            DerivedCategory.Qh.map\n              ((Functor.mapHomotopyCategoryCompIso r (.up ℤ)).hom.app\n                ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) ≫\n            (ModuleRingedComparison.pushforward R f).rightDerivedFunctorUnit.app\n              (((SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n                (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n                  (Scheme.ProEt.topology X) (coefficientMap a X))).mapHomotopyCategory (.up ℤ)).obj\n                    ((HomotopyCategory.quotient _ (.up ℤ)).obj I))\n      ) ∧\n      ∀ N : DerivedCategory (Modules S X),\n        (ModuleRingedComparison.derivedEquivalence R Y).functor.map\n            (d0.hom.app N) ≫\n          (scalarSectionPushComparison R f).hom.app ((V a X).obj N) ≫\n          (ModuleRingedComparison.derivedPushforward R f).map\n            ((sectionScalarRestriction a X sX).hom.app N) =\n        (sectionScalarRestriction a Y sY).hom.app ((F S f).obj N) ≫\n          (SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n            (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n              (Scheme.ProEt.topology Y) (coefficientMap a Y))).map\n                ((scalarSectionPushComparison S f).hom.app N) ≫\n          d.hom.app ((ModuleRingedComparison.derivedEquivalence S X).functor.obj N)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261024T020139-L-2560514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261024T020139-L-2560514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

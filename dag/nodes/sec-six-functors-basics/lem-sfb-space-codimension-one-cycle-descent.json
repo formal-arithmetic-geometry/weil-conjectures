@@ -1,0 +1,441 @@
+{
+ "id": "lem-sfb-space-codimension-one-cycle-descent",
+ "kind": "statement",
+ "title": "Etale descent of codimension-one cycles and invariance of orders",
+ "statement": "Let $X$ be a regular Noetherian separated algebraic space [def-trf-algebraic-space, def-weil-regular-scheme, pqf-def-locnoeth]: regular means all etale scheme charts are regular; Noetherian means quasi-compact, quasi-separated and locally Noetherian; separated means the diagonal over $\\operatorname{Spec}\\mathbf Z$ is a closed immersion. For any such space or Noetherian etale scheme chart $Y$, let $\\operatorname{Div}^1(Y)$ be the free abelian group on its integral closed subspaces of codimension one; codimension at a point is the dimension of a local ring on an etale scheme chart. For a quasi-compact etale map $v:Y\\to Z$ between these spaces, define\n$$v^*[T]=\\sum_{T'}[T'],$$\nwhere $T'$ runs through the irreducible components of $Y\\times_Z T$, each with its reduced structure. This is a well-defined finite codimension-one cycle, and these pullbacks are compatible with composition. For every quasi-compact surjective etale scheme chart $q:U\\to X$, writing $R=U\\times_X U$ and $p_1,p_2:R\\to U$, pullback is an isomorphism\n$$\\operatorname{Div}^1(X)\\xrightarrow{\\sim}\\{E\\in\\operatorname{Div}^1(U):p_1^*E=p_2^*E\\}.$$\n\nLocal rings at codimension-one points of the regular scheme charts are discrete valuation rings. For an etale map $v:V\\to U$ of Noetherian regular schemes, a codimension-one point $y\\in V$ maps to a codimension-one point $x\\in U$, and the local homomorphism $\\mathcal O_{U,x}\\to\\mathcal O_{V,y}$ takes a uniformizer to a uniformizer. Thus for every invertible meromorphic function $g$ on $U$ (a section of the units of the sheaf of total fractions described in [lem-sfb-space-meromorphic-generic-chart-model]),\n$$v_y(v^*g)=v_x(g),$$\nwhere $v_x,v_y$ are the normalized additive valuations, so the finite cycles of orders of such functions commute with etale pullback. The assertion applies as well to local meromorphic functions on open charts. No relative-dimension or equidimensionality hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 0BAM (lemma-pre-dimension-local-ring), 03IQ (lemma-reduced-closed-subspace), and spaces-chow.tex Tags 0EE1 (lemma-length), 0EPY (lemma-etale-pullback), 0EQ2 (lemma-etale-pullback-principal-divisor). Agent-formulated codimension-one equalizer interface: the pointwise and reduced-subspace arguments of these sources, rather than a use of their global dimension-graded Chow groups."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-space-meromorphic-generic-chart-model",
+  "def-weil-etale-morphism",
+  "def-a1-space-point-topology",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For any space $Z$ in the statement, sobriety [lem-sfb-quasiseparated-space-sober] and unique reduced closed supports [lem-sfb-space-reduced-closed-support] identify integral closed subspaces with closures of individual points: an irreducible closed subset has a unique generic point, and its unique reduced closed structure is integral. Thus $\\operatorname{Div}^1(Z)$ is the group of finitely supported integer coefficient functions on $Z^{(1)}=\\{z:\\delta_Z(z)=1\\}$. The dimension used here is independent of the chart by [lem-sfb-space-local-dimension-chart-invariance]. This also applies to the closed subspaces below: closed subspaces of separated spaces are separated, as is seen by pulling back their diagonals to schemes, and closed subschemes of a Noetherian scheme chart are Noetherian, hence quasi-separated; quasi-compactness of the diagonal is all that the two cited point-topology lemmas need.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-local-dimension-chart-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03IQ (lemma-reduced-closed-subspace), 0BAM (lemma-pre-dimension-local-ring); decent-spaces.tex, Tag 0ED1 (lemma-codimension-local-ring)."
+   }
+  },
+  {
+   "text": "Here is the needed generic-point calculation. Let $T\\subset Z$ be integral with generic point $t$, and let $a:W\\to T$ be an etale scheme chart. By [lem-sfb-quasiseparated-space-etale-specializations], a generic point $w$ of $W$ maps to $t$: lift the specialization $t\\leadsto a(w)$ to $w'\\leadsto w$, forcing $w'=w$. Conversely if $a(w)=t$, every generization $w'$ of $w$ maps to $t$, and the same cited lemma forbids a nontrivial specialization in this fibre. Thus $w$ has no strict generization and is generic. More generally, for an etale map $h:P\\to T$ of spaces with quasi-compact diagonal (closed subspaces of the separated spaces or of the Noetherian scheme charts of the statement), take a scheme chart $W\\to P$. A lift $w$ of $p$ is generic if and only if $p$ is generic: one direction lifts generizations of $p$, the other uses the absence of nontrivial specializations in the fibre of $W\\to P$. Apply the scheme calculation to the composite $W\\to T$. Consequently the generic points of $P$ are precisely $h^{-1}(t)$. All these are statements about generizations and sobriety, so they also cover reducible $P$.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-etale-specializations",
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 03IL (lemma-decent-specialization), 03K5 (lemma-decent-no-specializations-map-to-same-point), 0ABV (lemma-decent-generic-points)."
+   }
+  },
+  {
+   "text": "Apply step 2 to $P=Y\\times_ZT$ for a quasi-compact etale $v:Y\\to Z$. This fibre product is etale over $T$ by [lem-trf-space-chartwise-etale-permanence]. It is reduced: on scheme charts its maps to reduced charts of $T$ are etale, so [etale-proposition-etale-reduced] applies. Choose an affine surjective etale atlas $W\\to Y$ by [lem-sfb-qc-space-affine-etale-atlas]. Since $Y$ is Noetherian, $W$ is locally Noetherian and affine, hence Noetherian. The inverse image $W_T$ is closed in $W$ by [lem-sfb-space-reduced-closed-support], and has finitely many irreducible components by [lem-sc-noetherian-closed-subset-finite-components]. The closures of their images form a finite irreducible closed covering of $P$, hence $P$ has finitely many irreducible components. Their generic points are exactly the points $y$ over $t$ by step 2. A chart of $Y$ at $y$, composed with $v$, is a chart of $Z$ at $t$, so [lem-sfb-space-local-dimension-chart-invariance] gives $\\delta_Y(y)=\\delta_Z(t)$. Thus if $t$ has codimension one, all these components have codimension one in $Y$. Their reduced closed structures exist uniquely by [lem-sfb-space-reduced-closed-support].",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "etale-proposition-etale-reduced",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sfb-space-local-dimension-chart-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-chow.tex",
+    "place": "Tag 0EPY (lemma-etale-pullback), coefficient-one argument; spaces-properties.tex Tag 03IQ; properties.tex Tag 0BA8."
+   }
+  },
+  {
+   "text": "The displayed pullback therefore exists on each generator and extends additively to finite cycles. Write $c_E(z)$ for the coefficient of $\\overline{\\{z\\}}_{\\mathrm{red}}$ in $E$. Step 3 gives the explicit formula $c_{v^*E}(y)=c_E(v(y))$ for every $y\\in Y^{(1)}$: different points of $Z^{(1)}$ have disjoint point fibres, and each generic component in a fibre occurs once. Its support is finite by step 3. For composable quasi-compact etale maps $w,v$, the coefficient at $y$ of $w^*v^*E$ is $c_E(v(w(y)))$, which is also the coefficient of $(v\\circ w)^*E$. The identity has the same formula, proving functoriality without a dimension grading on components.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-chow.tex",
+    "place": "Tag 0EPY (lemma-etale-pullback); elementary coefficient calculation after steps 1–3."
+   }
+  },
+  {
+   "text": "For the specified atlas $q:U\\to X$, $R=U\\times_XU$ is a scheme and its projections are surjective etale by [lem-a1-etale-atlas-presentation]. The map $q$ is quasi-compact by hypothesis, hence its scheme base changes $p_i$ are quasi-compact by the definition on scheme tests. The scheme $U$ is Noetherian: it is locally Noetherian as an etale chart of $X$, and quasi-compact because for the affine atlas $W\\to X$ of [lem-sfb-qc-space-affine-etale-atlas] the base change $U\\times_XW\\to W$ is quasi-compact, so $U\\times_XW$ is quasi-compact and surjects onto $U$. Thus $R$ is quasi-compact over the Noetherian scheme $U$, and is locally Noetherian as an etale chart; it is Noetherian. Its regularity follows from its composite etale chart to $X$. By step 4 and $qp_1=qp_2$, every $q^*D$ satisfies the equalizer condition. Surjectivity of $q$ and chart invariance of dimension ensure each $x\\in X^{(1)}$ has a point $u\\in U^{(1)}$ over it. Step 4 recovers $c_D(x)$ at this $u$, proving injectivity.",
+   "uses": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-sfb-space-local-dimension-chart-invariance",
+    "lem-sfb-qc-space-affine-etale-atlas"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IQ (lemma-reduced-closed-subspace), presentation argument; Tag 0BAM (lemma-pre-dimension-local-ring)."
+   }
+  },
+  {
+   "text": "Now let $E$ satisfy $p_1^*E=p_2^*E$. If $u,u'\\in U^{(1)}$ map to the same $x$, [lem-a1-space-fibre-product-point] gives $r\\in R$ projecting to both. Because $p_i$ are etale, chart invariance gives $\\delta_R(r)=1$. Taking the coefficient at $r$ in the equalizer equality using step 4 yields $c_E(u)=c_E(u')$. Define $a_x$ to be this common value on each nonempty fibre over $x\\in X^{(1)}$. The support of $a$ is contained in the image of the finite support of $E$, so is finite. Step 1 makes $D=\\sum_xa_x[\\overline{\\{x\\}}_{\\mathrm{red}}]$ a cycle on $X$, and step 4 gives $q^*D=E$. Together with step 5 this proves the asserted isomorphism of abelian groups, including negative coefficients and the empty support.",
+   "uses": [
+    "lem-a1-space-fibre-product-point",
+    "lem-sfb-space-local-dimension-chart-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IQ (lemma-reduced-closed-subspace), invariant-support presentation argument, with the coefficientwise construction written out here."
+   }
+  },
+  {
+   "text": "At any codimension-one point of a regular scheme, the stalk is a Noetherian regular local ring of dimension one by [def-weil-regular-scheme]. On a regular affine neighbourhood [lem-weil-pbc-regular-ring-normal] makes every local ring a normal domain; [lem-sc-normal-dim1-dvr] therefore applies to give a discrete valuation ring. This argument works on arbitrary Noetherian regular schemes and does not require them to be separated or globally integral. For an etale map $v:V\\to U$, a point $y$ and its image $x$, apply [lem-sfb-space-local-dimension-chart-invariance] to the identity chart of $U$ and the chart $v$ at $y$; the local dimensions agree. In particular a codimension-one $y$ has codimension-one image $x$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-sc-normal-dim1-dvr",
+    "lem-sfb-space-local-dimension-chart-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0567 (lemma-regular-normal), 00PD (lemma-characterize-dvr), condition (5); spaces-properties.tex Tag 0BAM."
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_{U,x}$ and $B=\\mathcal O_{V,y}$. Choose affine neighbourhoods $\\operatorname{Spec}S\\subset V$, $\\operatorname{Spec}R_0\\subset U$ with the first mapping to the second. Their restriction is etale (open restrictions and composition are covered by [lem-trf-space-chartwise-etale-permanence]). By [lem-weil-pbc-affine-open-stalk-localization], the actual stalk map is $R_{0,\\mathfrak p}\\to S_{\\mathfrak q}$. By [lem-weil-pbc-etale-prime-generates-maximal], $\\mathfrak pS_{\\mathfrak q}=\\mathfrak qS_{\\mathfrak q}$. Inverting $R_0\\setminus\\mathfrak p$ does not change the generated ideal, since its images are units. Hence $\\mathfrak m_AB=\\mathfrak m_B$. If $t$ is a uniformizer of $A$, its image generates $\\mathfrak m_B$ and is nonzero, since $B$ is a dimension-one DVR. It is therefore a uniformizer in precisely the sense of [def-sc-discrete-valuation-ring].",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U4 (lemma-etale-at-prime), part (1); morphisms.tex Tag 02GU (lemma-etale-at-point), condition (6)."
+   }
+  },
+  {
+   "text": "For a nonzero $a\\in A$, [lem-weil-pbc-dvr-unit-times-uniformizer-power] writes $a=ut^m$ with $u\\in A^*$ and $m\\geq0$. The stalk homomorphism sends $u$ to a unit and $t$ to the nonzero uniformizer of step 8, so the image of $a$ is nonzero. Thus it extends to fraction fields. Applying the same factorization to numerator and denominator gives $g=ut^n$ for $n\\in\\mathbf Z$, and its image is $v^*(u)v^*(t)^n$. The normalized additive valuations on the DVR fraction fields are therefore both $n$. For the meromorphic function of the item these are its actual germs: [lem-sfb-space-meromorphic-generic-chart-model] identifies the chart restriction with the usual total-fraction sheaf and makes that identification commute with further etale restrictions. The calculation is local and so applies unchanged to functions specified only on an open chart.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-sfb-space-meromorphic-generic-chart-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final assertion and valuation calculation; spaces-divisors.tex Tag 0ENA (lemma-compute-meromorphic)."
+   }
+  },
+  {
+   "text": "For completeness, the order cycles just used have finite support in the stated Noetherian situation. Regular affine rings are normal by [lem-weil-pbc-regular-ring-normal], and their spectra have finitely many open-and-closed integral components by [lem-trf-normal-topologically-noetherian-components]. We can consequently cover a Noetherian regular scheme by finitely many integral affine opens $\\operatorname{Spec}A_i$. On each, an invertible meromorphic function is a fraction $a_i/b_i$ with both entries nonzero, by the chart model [lem-sfb-space-meromorphic-generic-chart-model] (applied also to the separated affine chart itself). If its valuation at a height-one prime $\\mathfrak p$ is nonzero, then $a_ib_i\\in\\mathfrak p$, since otherwise both are units in $(A_i)_{\\mathfrak p}$. Such a $\\mathfrak p$ is minimal over $(a_ib_i)$: an intermediate prime containing this nonzero element would be a nonzero prime strictly below a height-one prime, which is impossible. The closed subset $V(a_ib_i)$ has finitely many irreducible components by [lem-sc-noetherian-closed-subset-finite-components], hence only finitely many such primes. The union over the finite cover is finite. The same proof works on open charts, which remain Noetherian. Finally the coefficient formula of step 4 and the equality of orders in step 9 give equality of the finite order cycles after pullback. Only local dimensions and finite support entered the proof; no equidimensionality or relative-dimension hypothesis was used.",
+   "uses": [
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-trf-normal-topologically-noetherian-components",
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-chow.tex",
+    "place": "Tag 0EQ2 (lemma-etale-pullback-principal-divisor), pointwise order calculation; properties.tex Tags 0357 and 0BA8; elementary finite-support argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quasiseparated-space-sober",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-local-dimension-chart-invariance",
+  "lem-sfb-quasiseparated-space-etale-specializations",
+  "lem-trf-space-chartwise-etale-permanence",
+  "etale-proposition-etale-reduced",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-space-fibre-product-point",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sfb-space-meromorphic-generic-chart-model",
+  "lem-trf-normal-topologically-noetherian-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-chow.tex",
+  "place": "Codimension-one coefficientwise equalizer proof assembled from Tags 0EPY, 0EQ2, 03IQ, 0BAM, 03IL, 03K5 and 00PD; does not use the global dimension-graded Chow groups."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Codimension one cycles on a Noetherian algebraic space are equalizer of cycles on an etale atlas and its two projections; orders of rational functions commute with etale pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj ↑U).ι\\n      (AlgebraicGeometry.Scheme.Hom.toNormalization f) =\\n\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil divisor coefficients descend along surjective etale maps and principal divisors have unchanged orders in unramified discrete valuation ring extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"module\": \"Mathlib/NumberTheory/KummerDedekind\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {x : S} {I : Ideal R}\\n  [inst_3 : IsDomain R] [inst_4 : IsIntegrallyClosed R] [inst_5 : IsDedekindDomain S]\\n  [inst_6 : Module.IsTorsionFree R S] (hI : I.IsMaximal) (hI' : I ≠ ⊥)\\n  (hx : Ideal.comap (alg\", \"doc\": \"Let $ R \\\\subseteq S $ be rings with $ I $ a maximal nonzero ideal of $ R $, and let $ x \\\\in S $ be integral over $ R $. Suppose the conductor ideal $ (R:x) $ satisfies $ (R:x)^{-1} + I = R $. For any \"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal R} {P : Ideal S}\\n  [inst_3 : P.IsPrime] [IsNoetherianRing S],\\n  Ideal.map (algebraMap R S) p ≤ P →\\n    P ≠ ⊥ →\\n      P.primeCompl ≤ nonZeroDivisors S →\\n        Ideal.map (algebraMap R (Localizatio\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ Noetherian, $ p $ a prime ideal of $ R $, and $ P $ a prime ideal of $ S $. If the image of $ p $ under the ring homomorphism $ R \\to S $ is containe\"}\n  {\"name\": \"not_dvd_differentIdeal_iff\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Different\", \"type\": \"∀ {A : Type u_1} {B : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [inst_3 : IsDomain A]\\n  [IsDedekindDomain A] [inst_5 : IsDedekindDomain B] [inst_6 : Module.IsTorsionFree A B] [Module.Finite A B]\\n  [Algebra.IsSeparable (FractionRing A) (FractionRing B)] {P : Ideal B} \", \"doc\": \"For a Dedekind domain extension $ B $ over $ A $ with separable fraction fields, a prime ideal $ P $ of $ B $ does not divide the different ideal $ \\\\mathfrak{D}_{B/A} $ if and only if the extension is\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsNoetherianRing S] [Algebra.IsUnramifiedAt R p],\\n  p ≠ ⊥ → ∀ [IsDomain S] [Algebra.EssFiniteType R S], Ideal.ramificationIdx (algebraMap R S) (Ideal.under R p) p = \", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"dvd_differentIdeal_iff\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Different\", \"type\": \"∀ {A : Type u_1} {B : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [inst_3 : IsDomain A]\\n  [IsDedekindDomain A] [inst_5 : IsDedekindDomain B] [inst_6 : Module.IsTorsionFree A B] [Module.Finite A B]\\n  [Algebra.IsSeparable (FractionRing A) (FractionRing B)] {P : Ideal B} \", \"doc\": \"For a Dedekind domain extension $ B $ over $ A $, a prime ideal $ P $ of $ B $ divides the different ideal $ \\\\mathfrak{D}_{B/A} $ if and only if the extension is ramified at $ P $. This equivalence ho\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsDedekindDomain S] [Algebra.EssFiniteType R S] [IsDomain R] [Module.Finite ℤ R] [CharZero R]\\n  [Algebra.IsIntegral R S],\\n  p ≠ ⊥ → (Algebra.IsUnramifiedAt R p ↔ Ide\", \"doc\": \"Let $ S $ be a Dedekind domain that is an essentially finite type algebra over a domain $ R $, where $ R $ is finitely generated as a $ \\\\mathbb{Z} $-module, has characteristic zero, and $ S $ is integ\"}\n  {\"name\": \"Ideal.IsDedekindDomain.ramificationIdx_eq_multiplicity\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] {f : R →+* S} {p : Ideal R} {P : Ideal S}\\n  [IsDedekindDomain S], Ideal.map f p ≠ ⊥ → P.IsPrime → Ideal.ramificationIdx f p P = multiplicity P (Ideal.map f p)\", \"doc\": \"In a Dedekind domain, for a ring homomorphism $ f $, if the image of the prime ideal $ p $ under $ f $ is non-trivial and $ P $ is a prime ideal, then the ramification index of $ P $ with respect to $\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilDivisor\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilDivisor|codimension.*[ée]tale|[ée]tale.*codimension|divisor.*[ée]tale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent of cycles of codimension one on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact etale morphism of Noetherian algebraic spaces the points above the generic point of an integral closed subspace are the generic points of its reduced inverse image",
+   "results": {
+    "t": "2026-10-23T14:09:30Z",
+    "tool": "leanfinder",
+    "query": "For a quasi compact etale morphism of Noetherian algebraic spaces the points above the generic point of an integral closed subspace are the generic points of its reduced inverse image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion",
+     "AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+     "AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint",
+     "AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.range_fromSpecStalk",
+     "AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization",
+     "AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization"
+    ],
+    "digest": "1fbd1800ce50fe93"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, generic points, normalization or ring ramification; none gives the algebraic-space cycle equalizer and local order compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilDivisor|codimension.*[ée]tale|[ée]tale.*codimension|divisor.*[ée]tale",
+   "results": {
+    "t": "2026-10-23T14:10:43Z",
+    "tool": "grep",
+    "query": "WeilDivisor|codimension.*[ée]tale|[ée]tale.*codimension|divisor.*[ée]tale",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, generic points, normalization or ring ramification; none gives the algebraic-space cycle equalizer and local order compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent of codimension one cycles on algebraic spaces",
+   "results": {
+    "t": "2026-10-23T14:10:43Z",
+    "tool": "leansearch",
+    "query": "Etale descent of codimension one cycles on algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "Algebra.Etale.exists_subalgebra_fg",
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "Algebra.exists_etale_of_isEtaleAt"
+    ],
+    "digest": "97c7990b018c1716"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, generic points, normalization or ring ramification; none gives the algebraic-space cycle equalizer and local order compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilDivisor\", \"pullback\"",
+   "results": {
+    "t": "2026-10-23T14:10:43Z",
+    "tool": "loogle",
+    "query": "\"WeilDivisor\", \"pullback\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, generic points, normalization or ring ramification; none gives the algebraic-space cycle equalizer and local order compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil divisors on a regular Noetherian algebraic space descend along an etale cover and principal divisor orders are preserved by etale pullback",
+   "results": {
+    "t": "2026-10-23T14:10:44Z",
+    "tool": "leanfinder",
+    "query": "Weil divisors on a regular Noetherian algebraic space descend along an etale cover and principal divisor orders are preserved by etale pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StandardEtalePair.hasMap_X",
+     "Algebra.exists_etale_of_isEtaleAt",
+     "Algebra.basicOpen_subset_etaleLocus_iff",
+     "Algebra.basicOpen_subset_etaleLocus_iff_etale",
+     "KummerDedekind.emultiplicity_factors_map_eq_emultiplicity",
+     "Algebra.mem_etaleLocus_iff",
+     "Algebra.etaleLocus",
+     "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial"
+    ],
+    "digest": "0c38188889b0b2b0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, generic points, normalization or ring ramification; none gives the algebraic-space cycle equalizer and local order compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-space-divisor-line-dictionary",
+  "date": "2026-10-23",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base. Supporting input for the rigidified-line split: Divisors and rationally trivialized lines on a regular algebraic space. Current blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), proper-direct-image input; this live supporting branch retains the regular-base Picard geometry described in its existing provenance.",
+   "via": [
+    "lem-sfb-regular-space-divisor-line-dictionary",
+    "lem-sfb-regular-group-rigidified-line-extension",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-codimension-one-cycle-descent",
+  "worker": "stage1",
+  "summary": "Ten explicit steps identify generators with codimension-one points, derive generic-point behaviour from the existing specialization lifting/no-collapse theorem, construct the coefficientwise equalizer inverse, and calculate orders using the existing maximal-ideal and DVR theorems. No new nodes: every substantive prerequisite already exists. Statement unchanged; no global dimension grading or equidimensionality assumption.",
+  "blueprint": "Current literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), proper-direct-image input. Retains the recorded supporting regular-base Picard/divisor branch in blueprint.from.place. The ancestry tool reports from.node=None across the existing created-node chain, so the inherited null and via list are preserved. Steps 1–6 realize cycle descent in the parent divisor-line dictionary; steps 7–10 realize its etale order compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-prime-generates-maximal",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic algebraic-space presentation, scheme topology, or local commutative algebra input used exactly as its statement supplies in the cited proof step; it does not replace a unit-level argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "etale-proposition-etale-reduced",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-space-fibre-product-point",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-trf-normal-topologically-noetherian-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-32e191011",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-32e191011 (reviewer sub-agent of L); spot-checked: S1 split of the item, no new nodes; the statement is byte-identical to live, which is still unsplit. Added stmt_deps (etale, point topology, components, generic point, Krull dim, closed immersion) are all used in the text. Read the Stacks sources: 0BAM, 03IQ, 0EPY (pullback is the sum of components with coefficient 1, matching step 4) and 0EQ2. Read every cited statement in full. The 10 steps are correct. Steps 1-6: codim-1 points via sobriety and reduced supports; generic points of Y x_Z T are exactly the fibre over t, from the specialization lifting/no-collapse lemma; finitely many components via an affine Noetherian atlas; c_{v*E}(y)=c_E(v(y)); equalizer injective and surjective via a point of R over the given (u,u') and 0BAM. Steps 7-10: DVR from regular => normal and normal-dim1-dvr; m_A B = m_B from pS_q = qS_q, so uniformizers map to uniformizers; v_y(v*g)=v_x(g); finite support from minimal primes of V(ab). Small cases checked: empty, dim 0, mixed-dimension disjoint union, split covers (no residue degree), negative cycles, poles; the ramified s->s^e map shows etaleness is needed. No duplicates in the DAG, no cycle, no SGA. The 11 declared tool_uses are generic black boxes and accepted. Batch-5 check: every listed citation (point topology, sober, 03IQ, 0BAM, etale specializations, chartwise etale permanence, affine atlas, atlas presentation, fibre-product point, normal Noetherian components) is a foundational definition or lemma outside the trace-formula and Poincare-duality proofs, so it is not a return reason. FIX of three small gaps in step texts only: step 1 now covers quasi-separatedness of closed subschemes of non-separated Noetherian charts; step 2 says 'spaces with quasi-compact diagonal' instead of 'separated spaces'; step 5 now justifies that U is Noetherian (quasi-compact via U x_X W -> W over the affine atlas) and cites lem-sfb-qc-space-affine-etale-atlas, already in proof_deps. Statement, stmt_deps and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

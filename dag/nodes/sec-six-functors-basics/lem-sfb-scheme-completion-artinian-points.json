@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-scheme-completion-artinian-points",
+ "kind": "statement",
+ "title": "Completed local rings represent marked Artinian scheme points",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and let $Y\\to\\operatorname{Spec}R$ be a scheme locally of finite type [def-pc-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism], in the universes of [def-weil-size-convention]. Let $y\\in Y$ have residue field $k=\\kappa(y)$ finite as an $R$-module [def-weil-finitely-generated-module, def-weil-field, def-weil-residue-field]. Put $C=\\widehat{\\mathcal O_{Y,y}}=\\varprojlim_{n\\geq1}\\mathcal O_{Y,y}/\\mathfrak m_y^n$ [def-weil-pbc-adic-completion]. A local ring means a ring with a unique maximal ideal, a local homomorphism means one whose inverse image of the target maximal ideal is the source maximal ideal, and an Artinian ring satisfies the descending chain condition on ideals. Then $C$ is a complete Noetherian local $R$-algebra with residue field canonically $k$, and $C/\\mathfrak m_C^n$ is Artinian local with residue field $k$ for each $n\\geq1$. For every Artinian local $R$-algebra $A$ with specified residue field $k$, composition with the canonical map $\\operatorname{Spec}C\\to Y$ gives a bijection\n$$\\{v:C\\to A\\mid v\\text{ is a local }R\\text{-map inducing }1_k\\}\\ \\xrightarrow{\\sim}\\ \\{a:\\operatorname{Spec}A\\to Y\\text{ over }R\\mid a|_{\\operatorname{Spec}k}=y\\},$$\nwhere on the right $y$ denotes the canonical residue-field morphism. Every $v$ on the left kills some $\\mathfrak m_C^n$, and the bijection is natural in local $R$-maps between the test algebras inducing $1_k$. Under it, maps $C\\to C/\\mathfrak m_C^n$ correspond to the canonical infinitesimal neighbourhood maps to $Y$, compatibly with their quotient transition maps.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0CXK (lemma-versality-matches), proof: completion belongs to the category of complete Noetherian local test algebras and the displayed identification of maps from the completion with scheme-valued Artinian points."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-size-convention",
+  "def-weil-field",
+  "def-weil-residue-field",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\mathcal O_{Y,y}$ and $\\mathfrak m=\\mathfrak m_y$. By the definition of locally finite type, choose an affine neighbourhood $U=\\operatorname{Spec}T$ of $y$ with $T$ a finite type $R$-algebra. The finite-type Noetherian theorem makes $T$ Noetherian. The affine-stalk localization theorem identifies $B$ with $T_{\\mathfrak p_y}$, so the localization Noetherian theorem makes $B$ Noetherian. It is local with residue field $k$ by the definition of the scheme residue field. In particular $\\mathfrak m$ is finitely generated, by the definition of Noetherian ring. This uses only locally finite type; no quasi-compactness of $Y$ is assumed.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-residue-field",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXK (lemma-versality-matches), first sentence of proof; Algebra Tag 00FN (lemma-Noetherian-permanence) and Schemes Tag 01J6 (lemma-morphism-from-spec-local-ring), affine-stalk description"
+   }
+  },
+  {
+   "text": "Let $\\iota:B\\to C$ be the completion map and $p_n:C\\to B/\\mathfrak m^n$ its coordinate projection. The local-completion theorem gives that $C$ is local, with maximal ideal $\\mathfrak n=\\mathfrak m C=\\ker p_1$ and canonical residue field $k$. The Noetherian-completion theorem gives that $C$ is Noetherian. Apply the module-completion theorem with base ring $B$, ideal $\\mathfrak m$, and module $M=B$: its completion is the underlying $B$-module of $C$, and it is complete for the submodules $\\mathfrak m^n C$. Since $\\mathfrak n^n=(\\mathfrak m C)^n=\\mathfrak m^n C$ (both are finite sums of products $\\iota(b_1)\\cdots\\iota(b_n)c$), this is precisely completeness for powers of the maximal ideal of $C$. The structure map $R\\to B\\to C$ makes it a complete Noetherian local $R$-algebra.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GI (lemma-radical-completion), 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated)"
+   }
+  },
+  {
+   "text": "For every $n\\geq1$, the same module-completion theorem says that $p_n$ is surjective and $\\ker p_n=\\mathfrak m^n C=\\mathfrak n^n$. It is a ring homomorphism by the componentwise ring operations of the completion. Thus $p_n$ identifies $C/\\mathfrak n^n$ with $B/\\mathfrak m^n$ as rings and as $R$-algebras: $p_n\\iota(b)=b\\bmod\\mathfrak m^n$. These identifications commute with quotient maps because the coordinate at $n$ is the reduction of every higher coordinate. Apply the Noetherian-local quotient theorem to $C$, $K=\\mathfrak n^n$ and $N=n$. Its hypotheses hold since $\\mathfrak n^n\\subseteq\\mathfrak n$ for $n\\geq1$. Hence $C/\\mathfrak n^n$ is Artinian local. Its maximal ideal is $\\mathfrak n/\\mathfrak n^n$, whose quotient is $C/\\mathfrak n=k$, so it has the asserted residue field.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), all positive exponents; Tag 00KH (lemma-Noetherian-dimension-0), applied as in Tag 02HT (lemma-smooth-test-artinian)"
+   }
+  },
+  {
+   "text": "Fix a marked Artinian local $R$-algebra $A$, and write $q_A:A\\to k$ for its specified residue map and $q_B:B\\to k$ for the canonical one. The local-spectrum correspondence identifies maps $a:\\operatorname{Spec}A\\to Y$ whose closed point maps to $y$ with local maps $u:B\\to A$. Fix an affine neighbourhood $U=\\operatorname{Spec}T$ of $y$. Every prime of a local ring lies in its maximal ideal, so if $f\\notin\\mathfrak m_A$ then $f$ lies in no prime of $A$; hence an open subset of $\\operatorname{Spec}A$ containing the closed point is all of $\\operatorname{Spec}A$. Applied to $a^{-1}(U)$, this shows that every such $a$ factors through $U$, and the same argument for the local ring $B$ shows that every morphism $\\operatorname{Spec}B\\to Y$ sending the closed point to $y$ factors through $U$. On $U$, this correspondence is the map $T\\to B\\xrightarrow{u}A$, by the affine-stalk localization description and the uniqueness of the local-spectrum correspondence. The contravariant bijection for affine spectra therefore says that $a$ is over $R$ exactly when $u$ commutes with the structure maps from $R$. Restricting to $\\operatorname{Spec}k$ replaces that ring map by its composite with $q_A$. Consequently the marking condition is exactly $q_Au=q_B$; equality on $T$ implies equality on $B=T_{\\mathfrak p_y}$ because fractions are determined by their numerators and the inverses of their denominators. Thus the right-hand set in the item is identified with local $R$-maps $u:B\\to A$ inducing $1_k$. In particular, applying the correspondence to the identity $B\\to B$ gives the canonical $c:\\operatorname{Spec}B\\to Y$, and the canonical map used in the statement is $c\\circ\\operatorname{Spec}\\iota$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J6 (lemma-morphism-from-spec-local-ring), construction and affine case; Equation 02NA (equation-canonical-morphism); used in artin.tex Tag 0CXK"
+   }
+  },
+  {
+   "text": "By the Artinian-local nilpotence theorem choose $N\\geq1$ with $\\mathfrak m_A^N=0$. If $u:B\\to A$ is local, then $u(\\mathfrak m)\\subseteq\\mathfrak m_A$, so $u(\\mathfrak m^N)=0$. Define $\\bar u:B/\\mathfrak m^N\\to A$ by $\\bar u(b\\bmod\\mathfrak m^N)=u(b)$, and set $\\widetilde u=\\bar u\\,p_N:C\\to A$. This is an $R$-map with $\\widetilde u\\,\\iota=u$. Its composite with $q_A$ is $p_1:C\\to k$, since $q_Au=q_B$ and the coordinates reduce compatibly; hence $\\widetilde u^{-1}(\\mathfrak m_A)=\\ker p_1=\\mathfrak n$, making it local and residue-preserving. Conversely every local $v:C\\to A$ kills $\\mathfrak n^N$, since it takes each factor from $\\mathfrak n$ into $\\mathfrak m_A$. For $x\\in C$ choose $b\\in B$ representing $p_N(x)\\in B/\\mathfrak m^N$. Then $x-\\iota(b)\\in\\ker p_N=\\mathfrak n^N$, so $v(x)=v\\iota(b)$. Therefore restriction along $\\iota$ is injective on these local maps, and the displayed construction is its inverse. This also proves independence of the exponent $N$, without imposing a separate continuity hypothesis on $v$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXK (lemma-versality-matches), displayed identification of Artinian points, with its completion extension argument expanded using Algebra Tags 00J8 and 05GG"
+   }
+  },
+  {
+   "text": "Combine steps 4 and 5. A residue-preserving local $v:C\\to A$ restricts to the local map $v\\iota:B\\to A$ (the residue kernels are $\\mathfrak m$ and $\\mathfrak m_A$). Its corresponding scheme map is $c\\circ\\operatorname{Spec}(v\\iota)=(c\\circ\\operatorname{Spec}\\iota)\\circ\\operatorname{Spec}v$, by functoriality of the affine spectrum and the local-spectrum bijection. This is exactly the map in the statement, so it is bijective. If $h:A\\to A'$ is a local $R$-map inducing $1_k$, then $(hv)\\iota=h(v\\iota)$. Both the ring-map construction and the scheme-map construction therefore send $v$ to $hv$ and $a$ to $a\\circ\\operatorname{Spec}h$, respectively. This gives the required naturality for every such $h$, whether or not $h$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXK (lemma-versality-matches), identification of predeformation categories and its displayed equality of sets"
+   }
+  },
+  {
+   "text": "Take $A=C/\\mathfrak n^n$ with its residue marking and let $v_n:C\\to A$ be the quotient map. By step 3 its composite with $\\iota$ is the canonical quotient $B\\to B/\\mathfrak m^n$, followed by the inverse of the coordinate isomorphism $C/\\mathfrak n^n\\cong B/\\mathfrak m^n$. Step 4 therefore sends $v_n$ to the canonical infinitesimal neighbourhood map $\\operatorname{Spec}(B/\\mathfrak m^n)\\to\\operatorname{Spec}B\\xrightarrow{c}Y$ under this identification. For $r\\geq n\\geq1$ the quotient transition $h_{r,n}:C/\\mathfrak n^r\\to C/\\mathfrak n^n$ satisfies $h_{r,n}v_r=v_n$. By step 6 its corresponding morphisms satisfy $a_n=a_r\\circ\\operatorname{Spec}h_{r,n}$. The identity also holds for $r=n$, proving all the stipulated compatibility clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXK (lemma-versality-matches), formal object from the completed local ring, together with the componentwise quotient definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-residue-field",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0CXK (lemma-versality-matches), proof: expanded scheme-valued Artinian point identification using Schemes 01J6 and Algebra 00FN, 0316, 05GI, 05GG, 00KH and 00J8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*[Hh]om|[Hh]om.*AdicCompletion|completion.*[Aa]rtinian",
+   "results": "{\"t\": \"2026-10-23T12:10:45Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*[Hh]om|[Hh]om.*AdicCompletion|completion.*[Aa]rtinian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"518c41d4d97e15e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecToEquivOfLocalRing classifies maps from spectra of local rings by maps from the uncompleted stalk; AdicCompletion.LocalRing gives ring properties, and liftRingHom constructs maps into completions. No hit gives this natural completed-stalk Artinian-point identification, its finite quotients and compatibility as a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completed local ring of a scheme represents its Artinian deformations at a point",
+   "results": "{\"t\": \"2026-10-23T12:10:45Z\", \"tool\": \"leansearch\", \"query\": \"The completed local ring of a scheme represents its Artinian deformations at a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsArtinianScheme\", \"AlgebraicGeometry.Scheme.isArtinianScheme_Spec\", \"AlgebraicGeometry.Scheme.isLocallyArtinianScheme_Spec\", \"AlgebraicGeometry.IsLocallyArtinian.mk\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\"], \"digest\": \"d3c8d183082c52bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecToEquivOfLocalRing classifies maps from spectra of local rings by maps from the uncompleted stalk; AdicCompletion.LocalRing gives ring properties, and liftRingHom constructs maps into completions. No hit gives this natural completed-stalk Artinian-point identification, its finite quotients and compatibility as a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IsLocalRing",
+   "results": "{\"t\": \"2026-10-23T12:10:45Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdicCompletion.instIsLocalRingMaximalIdealOfIsNoetherianRing\", \"AdicCompletion.isLocalRing_of_fg\", \"AdicCompletion.instIsAdicCompleteMaximalIdeal\", \"AdicCompletion.isAdicComplete_of_fg\", \"AdicCompletion.spanFinrank_maximalIdeal_eq\", \"AdicCompletion.instIsLocalHomMaximalIdealRingHomAlgebraMapOfIsNoetherianRing\", \"AdicCompletion.algebraMap_isLocalHom_of_fg\", \"AdicCompletion.maximalIdeal_eq_map\"], \"digest\": \"13129b5954756c04\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecToEquivOfLocalRing classifies maps from spectra of local rings by maps from the uncompleted stalk; AdicCompletion.LocalRing gives ring properties, and liftRingHom constructs maps into completions. No hit gives this natural completed-stalk Artinian-point identification, its finite quotients and compatibility as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of the local ring at a point of a locally Noetherian scheme represents maps from Artinian local algebras with fixed closed point",
+   "results": "{\"t\": \"2026-10-23T12:10:46Z\", \"tool\": \"leanfinder\", \"query\": \"The completion of the local ring at a point of a locally Noetherian scheme represents maps from Artinian local algebras with fixed closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint\"], \"digest\": \"96aab5a9db884c33\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecToEquivOfLocalRing classifies maps from spectra of local rings by maps from the uncompleted stalk; AdicCompletion.LocalRing gives ring properties, and liftRingHom constructs maps into completions. No hit gives this natural completed-stalk Artinian-point identification, its finite quotients and compatibility as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local algebra maps from a completed stalk into an Artinian local ring correspond naturally to scheme maps with specified residue point",
+   "results": "{\"t\": \"2026-10-23T12:11:32Z\", \"tool\": \"leanfinder\", \"query\": \"Local algebra maps from a completed stalk into an Artinian local ring correspond naturally to scheme maps with specified residue point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.Scheme.over_def\"], \"digest\": \"0b4903fac4ec0cdf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecToEquivOfLocalRing classifies maps from spectra of local rings by maps from the uncompleted stalk; AdicCompletion.LocalRing gives ring properties, and liftRingHom constructs maps into completions. No hit gives this natural completed-stalk Artinian-point identification, its finite quotients and compatibility as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of the local ring at a scheme point represents local Artinian algebra points with fixed residue field",
+   "results": "{\"t\": \"2026-10-23T13:53:45Z\", \"tool\": \"leanfinder\", \"query\": \"The completion of the local ring at a scheme point represents local Artinian algebra points with fixed residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.Scheme.over_def\", \"AlgebraicGeometry.Scheme.fromSpecResidueField_apply\"], \"digest\": \"065bb5c0de4c6133\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: local-spectrum/residue-field correspondences omit completion; local completion and finite-quotient theorems supply separate inputs, not the marked Artinian-point comparison as a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*[Hh]om|[Hh]om.*AdicCompletion|completion.*[Aa]rtinian",
+   "results": "{\"t\": \"2026-10-23T13:54:39Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*[Hh]om|[Hh]om.*AdicCompletion|completion.*[Aa]rtinian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"37ac69f4c6ec369c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: local-spectrum/residue-field correspondences omit completion; local completion and finite-quotient theorems supply separate inputs, not the marked Artinian-point comparison as a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IsLocalRing",
+   "results": "{\"t\": \"2026-10-23T13:54:40Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdicCompletion.instIsLocalRingMaximalIdealOfIsNoetherianRing\", \"AdicCompletion.isLocalRing_of_fg\", \"AdicCompletion.instIsAdicCompleteMaximalIdeal\", \"AdicCompletion.isAdicComplete_of_fg\", \"AdicCompletion.spanFinrank_maximalIdeal_eq\", \"AdicCompletion.instIsLocalHomMaximalIdealRingHomAlgebraMapOfIsNoetherianRing\", \"AdicCompletion.algebraMap_isLocalHom_of_fg\", \"AdicCompletion.maximalIdeal_eq_map\"], \"digest\": \"13129b5954756c04\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: local-spectrum/residue-field correspondences omit completion; local completion and finite-quotient theorems supply separate inputs, not the marked Artinian-point comparison as a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completed local ring of a scheme represents its Artinian deformations at a point",
+   "results": "{\"t\": \"2026-10-23T13:56:08Z\", \"tool\": \"leansearch\", \"query\": \"The completed local ring of a scheme represents its Artinian deformations at a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsArtinianScheme\", \"AlgebraicGeometry.Scheme.isArtinianScheme_Spec\", \"AlgebraicGeometry.Scheme.isLocallyArtinianScheme_Spec\", \"AlgebraicGeometry.IsLocallyArtinian.mk\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\"], \"digest\": \"d3c8d183082c52bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: local-spectrum/residue-field correspondences omit completion; local completion and finite-quotient theorems supply separate inputs, not the marked Artinian-point comparison as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from the spectrum of an Artinian local ring to a scheme correspond to residue preserving local ring homomorphisms from the completion of the stalk",
+   "results": "{\"t\": \"2026-10-23T13:57:14Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms from the spectrum of an Artinian local ring to a scheme correspond to residue preserving local ring homomorphisms from the completion of the stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.over_def\"], \"digest\": \"a4c0c6dd023457da\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: local-spectrum/residue-field correspondences omit completion; local completion and finite-quotient theorems supply separate inputs, not the marked Artinian-point comparison as a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-atlas-versal-completion",
+  "date": "2026-10-23",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Smooth atlas lift and its versal completed local ring. Scheme input: the identification of Artinian-valued points with maps out of the completed local ring in artin.tex, lemma-versality-matches.",
+   "via": [
+    "lem-sfb-stack-atlas-versal-completion",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-completion-artinian-points",
+  "worker": "stage1",
+  "summary": "Kept all hypotheses and conclusions, adding only the existing finite-module definition reference. Seven proof steps assemble existing Noetherianity, local-completion, all-exponent module-completion, Artinian quotient, local-spectrum and nilpotence results. Wrote the extension formula and its uniqueness, base and residue marking restrictions, naturality and quotient transitions. No new nodes or Mathlib leaves.",
+  "blueprint": "The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the inherited atlas/versal-completion dependency chain in blueprint.from.place: supplies exactly the scheme-only Artinian-point identification used by lem-sfb-stack-atlas-versal-completion step 3. No route change; no nearest imported ancestor id is supplied by blueprint_refs.py (prints None), so the existing null from.node is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "General commutative-algebra completion Noetherianity (0316); no same-unit node supplies it, and it is used as a tool below the atlas route, not to replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-58c2a9503",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-58c2a9503 (reviewer sub-agent of L); spot-checked: Read the item and all seven steps in full (zero new nodes). The statement matches Stacks artin.tex 0CXK (lines 1699-1731): the display Mor(R^,A) = {φ: Spec A→U over S | φ|Spec k = u0}; the k-finite hypothesis is kept. Checked each cited statement: 00FN finite-type and localization Noetherian, affine-stalk (c), 05GI local-completion (maximal ideal mC = ker p1, residue iso), 0316 (split, sk-thm-p1, generic tool_use accepted), 05GG for M=B with (1) completeness and (2) p_n surjective with ker = m^nC for all n (with (mC)^n = m^nC checked), quotient-Artinian with K=n^n and N=n, 00J8 nilpotence, 01J6 bijection, uniqueness and functoriality of affine spectra. Steps 1-3 and 5-7 are correct: ũ = ū p_N gives locality and residue preservation, uniqueness via x−ι(b) ∈ n^N, naturality without surjectivity of h, and quotient/infinitesimal-neighbourhood compatibility. Edge cases checked: B=k, DVR with A=k[ε], already-complete Artinian B, mixed characteristic, empty Y. The duplicate search found only lem-sfb-artin-completed-polynomial-test-ring (polynomial ring, not the scheme statement), so no duplicate. No SGA. The parent lem-sfb-stack-atlas-versal-completion uses exactly these clauses. FIX: step 4 used, without argument, that a: Spec A→Y and maps Spec B→Y factor through the affine chart U. I added the sentence from the proof of Stacks 01J6: an open subset of Spec of a local ring containing the closed point is everything. Whole item file is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-scheme-completion-artinian-points.json; only step-4 text changed, uses unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompletedStalkArtinianPoints",
+  "declaration": "AlgebraicGeometry.Scheme.completedStalk_markedArtinianPoints",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedStalkToScheme",
+   "AlgebraicGeometry.Scheme.completedStalkResidueMap",
+   "AlgebraicGeometry.Scheme.stalkBaseRingMap",
+   "AlgebraicGeometry.Scheme.completedStalkPointMap",
+   "AlgebraicGeometry.Scheme.markedCompletedStalkMaps",
+   "AlgebraicGeometry.Scheme.completedStalk_properties",
+   "AlgebraicGeometry.Scheme.completedStalk_markedArtinianPoints",
+   "AlgebraicGeometry.Scheme.completedStalk_markedArtinianPoints_naturality",
+   "AlgebraicGeometry.Scheme.completedStalk_artinianQuotients",
+   "AlgebraicGeometry.Scheme.completedStalk_artinianQuotients_transition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletedStalkArtinianPoints.lean",
+  "statement": "theorem completedStalk_markedArtinianPoints {R : Type u} [CommRing R] [IsNoetherianRing R] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of R)) [LocallyOfFiniteType f] (y : Y) (hfinite : @Module.Finite R (Y.residueField y) _ _ (((Y.residue y).hom.comp (stalkBaseRingMap f y)).toAlgebra.toModule)) (A : Type u) [CommRing A] [IsLocalRing A] [IsArtinianRing A] [Algebra R A] (q : A →+* Y.residueField y) (hq : Function.Surjective q) (hkernel : ∀ a, q a = 0 ↔ ¬ IsUnit a) (hbase : q.comp (algebraMap R A) = (Y.residue y).hom.comp (stalkBaseRingMap f y)) : Set.BijOn (Y.completedStalkPointMap y) (markedCompletedStalkMaps f y q) {a | a ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A)) ∧ Spec.map (CommRingCat.ofHom q) ≫ a = Y.fromSpecResidueField y} ∧ (∀ v ∈ markedCompletedStalkMaps f y q, ∃ n : ℕ, 0 < n ∧ RingHom.ker (Y.completedStalkResidueMap y) ^ n ≤ RingHom.ker v)",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Five theorems jointly state all clauses of this node; the five helper definitions construct its canonical maps and its displayed left-hand set. The maximal ideal of the completion is expressed as the kernel of its canonical first-coordinate residue map, identified with the nonunits by completedStalk_properties."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17837b8fa",
+  "group": "NS",
+  "result": "fix",
+  "note": "Lean and records correct against node and Stacks 0CXK/01J6: Noetherian R, LocallyOfFiniteType f, residue field finite over R via the canonical R→O_{Y,y} composite, C = Mathlib AdicCompletion of the stalk (recorded completion declaration). C Noetherian, local and complete, with evalOneₐ surjective and kernel = nonunits. Main bijection is a BijOn of the actual composition with Spec C→Y between local R-maps inducing 1_k and morphisms over R restricting to y. Some m_C^n is killed. Naturality for all local residue-preserving R-maps h, no surjectivity. C/m^n Artinian local for n>0, with the iso to O/m^n pinned by its formula on stalk elements, plus the infinitesimal-neighbourhood point and all r≥n transitions. hbase is not stronger (both sets are empty without it). One universe u is forced by Spec A→Y. lean.statement matches the file verbatim, helper definitions have real data, all theorems sorry with source and proof docstrings, no name clash or duplicate owner. Sole fault H11: the second reading is an author self-check. FIX: fixes/<item>.report.md = worker report verbatim + independent clause-by-clause second reading. No Lean change, so no compile."
+ }
+}

@@ -1,0 +1,408 @@
+{
+ "id": "lem-sp-etale-chart-comparison-isos",
+ "kind": "statement",
+ "title": "Canonical site comparisons for scalar and chart operations",
+ "statement": "Fix a field $k$ of characteristic $p>0$, a prime $\\ell\\ne p$, separated finite-type $k$-schemes $T,T'$, and a $k$-morphism $u:T'\\to T$ [sk-def-sfb-dc-setting]. Let $A\\to B$ be a unital map of finite commutative rings and let $N=\\ell^n\\ge1$ annihilate both. On the small etale and pro-etale sites use ordinary derived categories of constant-ring module sheaves [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], their comparison inverse images $\\nu_{T,R}^*$ [def-weil-pbc-site-comparison-morphism], coefficient extension $(-)_B=-\\otimes^L_{A_T}B_T$ [lem-pur-derived-change-of-rings], and scheme inverse images [def-weil-pbc-inverse-image, def-weil-proetale-inverse-image]. For $R=A,B$ and either site $\\tau$, put $R_{T,\\tau}(1)=\\mu_{N,T}^{\\tau}\\otimes_{(\\mathbf Z/N)_{T,\\tau}}R_{T,\\tau}$, where $\\mu_N$ is the sheaf of units $z$ with $z^N=1$; define $R_{T,\\tau}(c)$ by $c$ tensor powers, with unit for $c=0$, and $K(c)=K\\otimes^L R_{T,\\tau}(c)$ [lem-asd-finite-etale-twist-line, lem-amb-finite-root-site-comparison]. For every bounded constructible etale $A$-complex $K$ of finite Tor amplitude [def-weil-pbc-etale-constructible-sheaf, def-kun-tor-amplitude], there is a canonical natural $B$-linear isomorphism\n$$\\nu_{T,B}^*(K_B)\\simeq(\\nu_{T,A}^*K)_B.$$\nFor $R=A,B$ and every bounded constructible etale $R$-complex $L$ of finite Tor amplitude, every $c\\ge0$, and every $s\\in\\mathbf Z$, there are canonical natural isomorphisms\n$$\\nu_{T',R}^*(u_{\\mathrm{et}}^*L)\\simeq u_{\\mathrm{proet}}^*(\\nu_{T,R}^*L),\\qquad\n\\nu_{T,R}^*(L(c))\\simeq(\\nu_{T,R}^*L)(c),\\qquad\n\\nu_{T,R}^*(L[s])\\simeq(\\nu_{T,R}^*L)[s].$$\nThe scalar isomorphism is induced on any flat-term K-flat representative by the ordinary balanced-tensor inverse-image comparison, with $B$ acting on the second factor [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. The scheme comparison is the exact localization of the usual site inverse-image square and respects identities and composites. The twist comparison is the iterated canonical tensor comparison followed by the root comparison sending each root to the same unit; it is compatible with scheme pullback, and its $c=0$ component is the constant unit identification. The shift comparison is induced by termwise inverse image and the signed differential of cochain shift. These describe the specified canonical maps, as isomorphisms in the derived categories.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; canonical coefficient, inverse-image, finite-root tensor and shift comparisons in retained Steps 8--10; sites-cohomology.tex Tag 07A4, lemma-pullback-tensor-product"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-kun-tor-amplitude",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "lem-asd-finite-etale-twist-line",
+  "lem-amb-finite-root-site-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Completed lower Lean obligations: sheafified scalar extension followed by exact faithful restriction is tensoring with the constant new coefficient module. K-flat tensor acyclicity proves preservation of K-flat quasi-isomorphisms; the resolving-class derived adjunction gives pointwise left derivability. The three tensor source and target identities are reflexive and their canonical maps are invertible by the proved source-library monoidal theorem. A prime distinct from the characteristic is a unit in the field; map each power to global sections to prove modulus_isUnit. The remaining steps retain the plan for the original, still unfinished upper coherence theorem.",
+   "uses": [
+    "lem-pur-resolving-class-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YT, 06YY and 07A4; the characteristic calculation and structural global-sections map."
+   }
+  },
+  {
+   "text": "Use compatible small site presentations in the coefficient universe. By [lem-sf-comparison-pullback-exact], for each finite ring $R$, $\\nu_{T,R}^*$ is exact and its structural map identifies the inverse image of the constant ring with the constant ring, preserving scalar sections. The analogous assertions for scheme inverse images follow from [lem-pe-constant-left-module-inverse-image], applied to the geometric morphisms defining $u_{\\mathrm{et}}$ and $u_{\\mathrm{proet}}$. Thus these functors act termwise and preserve quasi-isomorphisms. Choose a flat-term K-flat representative $P\\to K$ using [lem-pc-kflat-resolution]. The preservation assertion in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] shows that $\\nu_{T,A}^*P$ is again flat-term K-flat. These choices compute the ordinary unbounded derived operations; bounded constructibility and finite Tor amplitude impose no further restriction on this argument.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat); sites-modules.tex Tag 04JC (lemma-flat-pullback-exact); sites.tex Tag 00YV (proposition-functoriality-algebraic-structures-topoi)"
+   }
+  },
+  {
+   "text": "Let $i_\\tau:(\\operatorname{Sh}(T_\\tau),B_T)\\to(\\operatorname{Sh}(T_\\tau),A_T)$ have identity underlying topos and structural map $A_T\\to B_T$. Its derived pullback is coefficient extension by [lem-pur-derived-change-of-rings]. The ringed composites $i_{\\mathrm{et}}\\nu_{T,B}$ and $\\nu_{T,A}i_{\\mathrm{proet}}$ have the same underlying geometric inverse image and the same structural map: both send a constant $a$ to its image in $B$. The constant-ring normalization in [lem-sf-comparison-pullback-exact] identifies these maps. Apply the composition and specified 2-isomorphism comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] to these two paths. This gives $\\nu_{T,B}^*Li_{\\mathrm{et}}^*\\simeq Li_{\\mathrm{proet}}^*\\nu_{T,A}^*$ in $D(B_{T,\\mathrm{proet}})$, naturally in $K$. On the representative $P$ from Step 1 it is the ordinary map $\\nu_{T,B}^*(P\\otimes_{A_T}B_T)\\to(\\nu_{T,A}^*P)\\otimes_{A_T}B_T$, sending the inverse image of a local tensor $x\\otimes b$ to the inverse image of $x$ tensored with the same $b$. The inverse uses the reverse balanced-tensor comparison. Multiplication by $b'$ acts as $x\\otimes b\\mapsto x\\otimes bb'$ on both sides, proving the required $B$-linearity. The cited composition comparison is computed on flat-term K-flat representatives, so it identifies this very map, independently of $P$, with the derived isomorphism, without requiring $B$ flat over $A$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-comparison-pullback] to $u:T'\\to T$. Its natural sheaf isomorphism is the usual site inverse-image square; its statement includes the identity and composition laws. The constant-module lift of [lem-pe-constant-left-module-inverse-image] preserves the underlying sheaf maps and their scalar operations and is exact. Hence the square acts on $R$-module complexes termwise. Naturality makes its components chain maps, and their termwise inverses are inverse chain maps. Localizing at quasi-isomorphisms gives precisely $\\nu_{T',R}^*u_{\\mathrm{et}}^*L\\simeq u_{\\mathrm{proet}}^*\\nu_{T,R}^*L$. The identity and composition equations hold degree by degree before localization, hence after it. This constructs the specified comparison in the derived category, for either $R=A$ or $B$.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ (lemma-describe-pullback-from-etale); canonical inverse-image square as proved in literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.proof.md"
+   }
+  },
+  {
+   "text": "Since $\\ell\\ne p$, $N=\\ell^n$ is invertible on both schemes. For each $R$, [lem-asd-finite-etale-twist-line] gives flat etale sheaves $R_{T,\\mathrm{et}}(c)$. The isomorphism $\\sigma_{N,T}$ of [lem-amb-finite-root-site-comparison] identifies $\\nu_{T,R}^*R_{T,\\mathrm{et}}(1)$ with $R_{T,\\mathrm{proet}}(1)$, sending each root to the same unit. Use the tensor and unit comparisons of [lem-sfb-ringed-derived-monoidal-comparisons]. Set $\\sigma_0$ equal to its constant-ring unit map. Given $\\sigma_c$, define $\\sigma_{c+1}$ as the tensor comparison on $R(c)\\otimes_R R(1)$ followed by $\\sigma_c\\otimes\\sigma_1$. For a flat sheaf placed in degree zero, tensor is an exact termwise functor; [lem-weil-pbc-exact-functor-complex-cohomology] shows it carries acyclic complexes to acyclic complexes, so this degree-zero complex is K-flat. Hence flatness makes each etale tensor in this recursion ordinary; preservation of flat-term K-flat complexes in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to these degree-zero flat complexes, makes the pro-etale tensors ordinary as well. This inductively gives $\\sigma_c:\\nu_{T,R}^*R_{T,\\mathrm{et}}(c)\\simeq R_{T,\\mathrm{proet}}(c)$ as derived isomorphisms. Finally compose the derived tensor comparison on $L\\otimes_R^L R(c)$ with $1\\otimes\\sigma_c$. This is the specified natural twist isomorphism, including its unit component at $c=0$.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-amb-finite-root-site-comparison",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); proetale.tex Tag 0GLZ (lemma-describe-pullback-from-etale), root comparison and tensor-power induction"
+   }
+  },
+  {
+   "text": "For $c=1$ the scheme-pullback square for $\\sigma_1$ is exactly the displayed $d^u_N,u^*\\sigma,\\sigma\\nu^*e^u_N,\\kappa_u$ equation in [lem-amb-finite-root-site-comparison]. At $c=0$ it is the unit equation for the scheme/site comparison. More explicitly, Step 3's square is a specified 2-isomorphism of ringed topoi: its module lift respects the constant structural ring maps, since both composites keep each constant scalar fixed. Thus [lem-sfb-ringed-derived-monoidal-comparisons] makes that square monoidal, including its unit equation. If the square commutes for $c$, tensor it with the square for $1$, and apply this monoidality equation to the recursive definition of $\\sigma_{c+1}$ in Step 4. The result is the square for $c+1$. Induction proves compatibility for every $c\\ge0$. Tensoring that square with the natural square for $L$, and applying the same monoidality equation, proves the claimed scheme-pullback compatibility for $L(c)$. The root maps used are the specified pullback-of-units maps, so this argument retains the normalization rather than choosing an arbitrary trivialization of a Tate line.",
+   "uses": [
+    "lem-amb-finite-root-site-comparison",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback); natural root comparison of proetale.tex Tag 0GLZ"
+   }
+  },
+  {
+   "text": "For a complex $C$, $(C[s])^i=C^{i+s}$ and $d_{C[s]}^i=(-1)^s d_C^{i+s}$, with the shift convention of [def-weil-abstract-derived-category]. Additivity and exactness of $\\nu_{T,R}^*$ are supplied by [lem-sf-comparison-pullback-exact]. Consequently $\\nu^*((-1)^sd)=(-1)^s\\nu^*(d)$. The identity on each object $\\nu^*C^{i+s}$ therefore gives a natural chain isomorphism $\\nu^*(C[s])\\simeq(\\nu^*C)[s]$. Its localization is the required shift comparison for every integer $s$, since $\\nu^*$ preserves quasi-isomorphisms. All comparisons above were constructed before localization or through the canonical derived pullback comparisons, so their components are isomorphisms in the indicated ordinary derived categories.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-derived-category), shift induced from homology.tex shift convention; sites-modules.tex Tag 04JC (lemma-flat-pullback-exact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-comparison-pullback-exact",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-amb-finite-root-site-comparison",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-pur-resolving-class-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "J4",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Partial Lean proof: pointwise scalar derivability (06YS, 06YT, 06YY), canonical derived tensor comparison (07A4), and modulus invertibility. Original plan retained for the upper coherence theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale comparison commutes canonically with derived coefficient extension scheme inverse image roots of unity Tate twists and shifts",
+   "results": "{\"t\": \"2026-10-22T05:56:08Z\", \"tool\": \"leanfinder\", \"query\": \"Etale proetale comparison commutes canonically with derived coefficient extension scheme inverse image roots of unity Tate twists and shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.HasMap.map\", \"Algebra.Etale.comp\", \"AlgebraicGeometry.IsEtale.of_comp\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.FormallyEtale.comp\"], \"digest\": \"88de6c8a566fbe35\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary etale ring maps, proetale topologies, or underived pushforward congruence, not these canonical derived module and finite-root comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical B linear tensor comparison for etale to proetale pullback identifies coefficient change and finite root tensor powers",
+   "results": "{\"t\": \"2026-10-22T05:56:08Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical B linear tensor comparison for etale to proetale pullback identifies coefficient change and finite root tensor powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.Extension.tensorCotangentSpace\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"1aeebc48f068e567\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary etale ring maps, proetale topologies, or underived pushforward congruence, not these canonical derived module and finite-root comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\"",
+   "results": "{\"t\": \"2026-10-22T05:56:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"proetale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.proetalePrecoverage\", \"AlgebraicGeometry.Scheme.proetaleTopology\", \"AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology\", \"AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology\", \"AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology\"], \"digest\": \"8e5526d886051cd2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary etale ring maps, proetale topologies, or underived pushforward congruence, not these canonical derived module and finite-root comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|[Cc]omparisonUpperStar|[Tt]ate[Tt]wist",
+   "results": "{\"t\": \"2026-10-22T05:56:07Z\", \"tool\": \"grep\", \"query\": \"proetale|[Cc]omparisonUpperStar|[Tt]ate[Tt]wist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary etale ring maps, proetale topologies, or underived pushforward congruence, not these canonical derived module and finite-root comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived etale proetale comparison has natural tensor and inverse image isomorphisms preserving finite Tate twists",
+   "results": "{\"t\": \"2026-10-22T05:56:07Z\", \"tool\": \"leansearch\", \"query\": \"The derived etale proetale comparison has natural tensor and inverse image isomorphisms preserving finite Tate twists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instTensorProduct\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"Algebra.Etale.formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"SheafOfModules.pushforwardCongr\", \"Algebra.Etale.comp\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"a931cab57242e737\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary etale ring maps, proetale topologies, or underived pushforward congruence, not these canonical derived module and finite-root comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|[Cc]omparisonUpperStar|[Tt]ate[Tt]wist",
+   "results": "{\"t\": \"2026-10-22T06:50:28Z\", \"tool\": \"grep\", \"query\": \"proetale|[Cc]omparisonUpperStar|[Tt]ate[Tt]wist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring/module scalar extension, ordinary module pullback composition, or proetale topology; none states all canonical derived site, scalar, root-tensor and shift comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact ringed topos inverse image derived scalar extension commutation as B module objects",
+   "results": "{\"t\": \"2026-10-22T06:50:28Z\", \"tool\": \"leansearch\", \"query\": \"Exact ringed topos inverse image derived scalar extension commutation as B module objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalarsId_inv_app_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.extendScalars\", \"PresheafOfModules.pullback\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.extendRestrictScalarsAdj\", \"PresheafOfModules.restrictScalarsObj\"], \"digest\": \"0b654694cd9816ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring/module scalar extension, ordinary module pullback composition, or proetale topology; none states all canonical derived site, scalar, root-tensor and shift comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\"",
+   "results": "{\"t\": \"2026-10-22T06:50:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"proetale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.proetalePrecoverage\", \"AlgebraicGeometry.Scheme.proetaleTopology\", \"AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology\", \"AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology\", \"AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology\"], \"digest\": \"8e5526d886051cd2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring/module scalar extension, ordinary module pullback composition, or proetale topology; none states all canonical derived site, scalar, root-tensor and shift comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale inverse image commutes with derived coefficient extension Tate twists shifts and scheme pullback",
+   "results": "{\"t\": \"2026-10-22T06:50:39Z\", \"tool\": \"leanfinder\", \"query\": \"Etale proetale inverse image commutes with derived coefficient extension Tate twists shifts and scheme pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv_symm_apply\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"StandardEtalePair.homEquiv\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"StandardEtalePair.homEquiv_apply_coe\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"769dd74aff62b761\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring/module scalar extension, ordinary module pullback composition, or proetale topology; none states all canonical derived site, scalar, root-tensor and shift comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|pullbackComp",
+   "results": "{\"t\": \"2026-10-22T06:51:39Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Tt]ensor|[Tt]ensor.*pullback|pullbackComp\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"a18c612d8ed23f4c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring/module scalar extension, ordinary module pullback composition, or proetale topology; none states all canonical derived site, scalar, root-tensor and shift comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image on constant ring module sheaves commutes with change of scalars in unbounded derived categories",
+   "results": "{\"t\": \"2026-10-22T06:51:49Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric inverse image on constant ring module sheaves commutes with change of scalars in unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pushforwardCongr\"], \"digest\": \"e6633d0a04ae78f6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring/module scalar extension, ordinary module pullback composition, or proetale topology; none states all canonical derived site, scalar, root-tensor and shift comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-etale-ctf-chart-domain",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: the canonical isomorphism $(e^*p_d^*K(d)[2d])_B ≃ e^*p_d^*(K_B)(d)[2d]$; Canonical site comparisons for scalar and chart operations (retained chart-domain Steps 8,9,10)",
+   "via": [
+    "lem-sp-etale-ctf-chart-domain"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-etale-chart-comparison-isos",
+  "worker": "stage1",
+  "summary": "N9 splits the four canonical derived site comparisons into six steps, reusing existing generic exact inverse-image, K-flat, ringed composition/monoidal, and finite-root statements. No new nodes, no statement changes, no Lean attachment. Scalar comparison is constructed in D(B), not merely after forgetting scalars; scheme and twist coherence are explicit. Checked empty schemes, zero rings, N=1, c=0 and negative shifts.",
+  "blueprint": "det-sp-reduction-exceptional.proof.md Charts paragraph: canonical scalar/chart tensor isomorphism; expands retained chart-domain Steps 8--10. Steps 1--2 give scalar site comparison, Step 3 the coherent inverse-image square, Steps 4--5 finite Tate powers and their pullback compatibility, Step 6 shifts. The unit route and target statement are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic exact constant-ring comparison pullback; the reduction unit has no replacement for this site fact."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic exact lift of geometric inverse image to constant-ring modules, used on both scheme sites."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolution existence, used to identify the specified scalar representative."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor comparison and flat-term K-flat preservation for ringed-topos pullback."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic coefficient-extension computation by K-flat resolutions; identifies the identity-topos structural ring change."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic normalized derived tensor, unit, composition and 2-isomorphism comparisons; needed to retain B-linearity and scheme-pullback compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic coherent etale/proetale sheaf inverse-image square for an arbitrary scheme map."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic finite-root tensor line flatness for an arbitrary finite ring annihilated by N."
+   },
+   {
+    "node": "lem-amb-finite-root-site-comparison",
+    "why": "Generic same-unit root comparison and its explicit arbitrary-scheme-pullback square."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact functor cohomology calculation, used to check directly that a flat sheaf in degree zero is K-flat."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-comparison-pullback-exact",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-amb-finite-root-site-comparison",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N9-c3b1250d0",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-c3b1250d0 (reviewer sub-agent of L); spot-checked: N9 split of lem-sp-etale-chart-comparison-isos (c3b1250d), which Q03's chart-domain re-split created on 2026-10-22. There are no new nodes, and the statement, stmt_deps, blueprint and source are byte-identical to the base. The item is not on the 2026-10-19 drop list and is still unsplit in live and side-live. No re-split note applies and no SGA is cited. proof_deps equals the union of the step uses. I read every cited statement, and each one gives what its step takes. Step 1: lem-sf-comparison-pullback-exact (1)-(3) gives ν⁻¹Λ≅Λ and exactness; lem-pe gives the same for u_et and u_proet; lem-pc-kflat-resolution gives a flat-term K-flat P; and the tensor-pullback node preserves flat-term K-flat complexes. Step 2: Li^* is −⊗^L B by lem-pur-derived-change-of-rings. The two ringed paths (proet,B)→(et,A) have the same morphism ν and the same constant-determined ring map, so c_{f,g} of lem-sfb gives an isomorphism in D(B_proet). This makes it B-linear by construction, and B need not be flat over A (Z/ℓ²→Z/ℓ checked). Step 3: lem-weil-pbc-comparison-pullback plus lem-pe's exact lift, applied termwise and localized. Step 4: N=ℓⁿ is invertible since ℓ≠p, so lem-asd gives flat R_et(c) and lem-amb (m=N) gives σ as the same-unit root map. A flat sheaf in degree 0 is K-flat through the exact-functor cohomology leaf. The induction σ_{c+1}=(σ_c⊗σ_1)∘t is set up explicitly, with base σ_0 the unit. Step 5: c=1 is lem-amb's displayed d^v σ=σν^*(e^v)κ_v equation, and the induction step uses lem-sfb's monoidal 2-iso and composition clauses. Advisory only: identifying Step 3's square with lem-sfb's induced square takes one sentence, but both are module pullback on flat representatives. Step 6: the shift sign (−1)^s from def-weil-abstract-derived-category, with additivity, covers every s∈ℤ. The source checks against the tags table were 07A4, 0D6D, 0G7E, 06YS, 06YY, 03EL, 04JC, 00YV, 05RU and 0GLZ (read at proetale.tex:3760). The split matches the blueprint main-20261015 sk-lem-sp-reduction-exceptional Charts paragraph and parent Step 4. Edge cases checked: empty T, zero rings with N=1, c=0, s=0 or negative, and u=id or a composite. I accept the 10 declared generic tool uses; def-weil-abstract-derived-category is a Mathlib leaf. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartComparisonIsos",
+  "declaration": "AlgebraicGeometry.ProEtale.EtaleChartComparison.etale_chart_comparison_isos",
+  "declarations": [
+   "CategoryTheory.fixedCoefficientScalarExtension",
+   "CategoryTheory.fixedCoefficientScalarExtension_additive",
+   "CategoryTheory.fixedCoefficientScalarExtension_hasPointwiseLeftDerivedFunctor",
+   "CategoryTheory.fixedCoefficientDerivedExtension",
+   "CategoryTheory.fixedCoefficientDerivedExtensionCounit",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.Et",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.Pro",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etSheafify",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proSheafify",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etWeakSheafify",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proWeakSheafify",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etSmallColimits",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proSmallColimits",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etAbelian",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proAbelian",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etGroth",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proGroth",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etMonoidalPreadditive",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proMonoidalPreadditive",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etSymmetricCategory",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proSymmetricCategory",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etMonoidalClosed",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proMonoidalClosed",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etHasFunctorialFlatResolution",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proHasFunctorialFlatResolution",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.nu",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etPull",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proPull",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.scalarSheafIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.schemeSheafIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.schemeIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.rootIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proTwist",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.twistSheafIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.twistLineIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.nuTensorRaw",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.nuTensor_source",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.nuTensor_target",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.nuTensor",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.nuTensor_isIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.twistIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.shiftIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etTwistSheafPullback",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proTwistSheafPullback",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etTensorRaw",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etTensor_source",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etTensor_target",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etTensor",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etTensor_isIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proPreservesFlat",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proTensorRaw",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proTensor_source",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proTensor_target",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proTensor",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proTensor_isIso",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etTwistPullback",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proTwistPullback",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.nuQFactor",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.ScalarModel",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.TwistNatural",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.TwistPullbackLaw",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.modulus_isUnit",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etId",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proId",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etComp",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proComp",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.SchemeCoherent",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.RootPullbackNormalized",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etale_chart_comparison_isos",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.nuSingle",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.etSingle",
+   "AlgebraicGeometry.ProEtale.EtaleChartComparison.proSingle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartComparisonIsos.lean",
+  "statement": "theorem etale_chart_comparison_isos (k : Type u) [Field k] (p ell : ℕ) [CharP k p] (hp : 0 < p) (hell : ell.Prime) (hne : ell ≠ p) (T T' : Over (Spec (CommRingCat.of k))) [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom] [LocallyOfFiniteType T'.hom] [QuasiCompact T'.hom] [IsSeparated T'.hom] (v : T' ⟶ T) (A B : Type (u + 1)) [CommRing A] [Finite A] [CommRing B] [Finite B] (f : A →+* B) (n : ℕ) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0) : (∃ alpha : fixedCoefficientDerivedExtension T.left.smallEtaleTopology f ⋙ nu B T.left ⟶ nu A T.left ⋙ fixedCoefficientDerivedExtension (Scheme.ProEt.topology T.left) f, (∀ K : DerivedCategory (Et A T.left), Etale.DerivedCategory.boundedConstructibleFiniteTor A T.left K → IsIso (alpha.app K)) ∧ ScalarModel f T.left alpha) ∧ SchemeCoherent A k ∧ SchemeCoherent B k ∧ TwistNatural A (ell ^ n) (Nat.pow_pos hell.pos) hA T.left (modulus_isUnit k p ell hp hell hne n T) ∧ TwistNatural B (ell ^ n) (Nat.pow_pos hell.pos) hB T.left (modulus_isUnit k p ell hp hell hne n T) ∧ RootPullbackNormalized A (ell ^ n) (Nat.pow_pos hell.pos) hA v.left (modulus_isUnit k p ell hp hell hne n T) (modulus_isUnit k p ell hp hell hne n T') ∧ RootPullbackNormalized B (ell ^ n) (Nat.pow_pos hell.pos) hB v.left (modulus_isUnit k p ell hp hell hne n T) (modulus_isUnit k p ell hp hell hne n T') ∧ TwistPullbackLaw A (ell ^ n) (Nat.pow_pos hell.pos) hA v.left (modulus_isUnit k p ell hp hell hne n T) (modulus_isUnit k p ell hp hell hne n T') ∧ TwistPullbackLaw B (ell ^ n) (Nat.pow_pos hell.pos) hB v.left (modulus_isUnit k p ell hp hell hne n T) (modulus_isUnit k p ell hp hell hne n T')",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The scheme, twist and signed-shift isomorphisms are actual definitions in declarations; the main theorem states the normalized scalar comparison and identity/composition, root-pullback and twist-pullback/naturality laws. All constructions use ordinary unbounded derived module categories. The fixed-coefficient scalar extension, additivity, pointwise derivability, universal derived extension and counit are owned helpers in this item module; no dependency record is replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bde2bd1c",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 63a8053cd94e. H13 repaired: the snapshot's lem-pur-derived-change-of-rings record equals live (Q84 OrdinaryDerivedChangeOfRings), so no dep delta is delivered; FixedCoefficientDerivedChangeOfRings is no longer delivered and its import is dropped; the 5 helpers (fixedCoefficientScalarExtension/_additive/_hasPointwiseLeftDerivedFunctor/fixedCoefficientDerivedExtension/Counit) moved into the item module byte-identically (diffed, apart from the blueprint id) and listed in lean.declarations; the dropped transitive CochainModel import is unused (no SheafOfModules uses); no name collisions in live or side-live; all imports exist. H11 repaired: a real clause-by-clause second reading. Node record delta is only the declarations list and note; lean.statement verbatim; all 69 declarations present. Independent re-read: scalar alpha in D(B_proet), IsIso on bcft K, pinned by ScalarModel via the leftAdjointUniq base-change mate; schemeIso + SchemeCoherent; twistSheafIso (unit/root/mu recursion), TwistNatural, RootPullbackNormalized, TwistPullbackLaw; shiftIso for all s. Edge cases n=0, c=0/1, s<=0, empty T, id/composite, non-flat f fine. Advisory: proof-dep plain imports unused (H9). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-97466",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261024T190125-L-3948416",
+  "kind": "interface",
+  "note": "independent cc review: delivered EtaleChartComparisonIsos vs published module (type/value hash probes of 22 declarations, used-constant diffs, #print axioms), node lem-sp-etale-chart-comparison-isos vs clone, change record vs diff"
+ }
+}

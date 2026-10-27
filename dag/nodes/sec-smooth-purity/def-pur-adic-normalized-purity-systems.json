@@ -1,0 +1,125 @@
+{
+ "id": "def-pur-adic-normalized-purity-systems",
+ "kind": "definition",
+ "title": "Actual source and exceptional systems for normalized purity",
+ "statement": "Fix the global finite-field and coefficient datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ has characteristic $p$, $\\ell\\ne p$ is prime, $E/\\mathbf Q_\\ell$ is finite, $\\mathcal O_E$ is its valuation ring, $\\varpi_E$ is a uniformizer, and $A_n=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $X,Y$ be separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], let $f:X\\to Y$ be smooth separated of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms], and let $K\\in D^b_{ctf}(Y,\\mathcal O_E)$ [def-weil-finite-tor-amplitude, def-weil-derived-complete-integral-detailed]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $R_W=\\widehat{\\mathcal O}_{E,W}=\\lim_n(A_n)_W$ and $B_{n,W}=(A_n)_W$, for $W=X,Y$. Write $K_n=K\\otimes^L_{R_Y}B_{n,Y}$ [def-weil-integral-derived-reduction], and let $f_n$ denote $f$ with coefficients $B_{n,Y},B_{n,X}$. For $m\\geq n\\geq1$ and $W=X,Y$ write $\\operatorname{red}_{m,n,W}=-\\otimes^L_{B_{m,W}}B_{n,W}$ for derived change of rings [lem-pur-derived-change-of-rings, def-pur-finite-reduction-root-charts]. Use integral pullback and completed tensor [def-pur-integral-derived-operations] and the twists [def-coefficient-twists-detailed]. Put $U=Lf^*K(d)[2d]$ and $U_n=Lf_n^*K_n(d)[2d]$.\n\nUse the exceptional inverse image of [def-weil-exceptional-inverse-image], the specified finite smooth-purity maps [def-pur-smooth-purity-map], the canonical maps $b^U_n$ of [def-pur-adic-source-reduction], and the strict reduction tower of $U$ [def-weil-integral-reduction-tower]. Put $V_n=Rf_n^!K_n$ and $g_n=\\gamma_{f,K_n}:U_n\\to V_n$. \nUse the real canonical coefficient sequences and maps of the following exact Lean interface. These are the existing definitions, moved verbatim from the normalized-purity-lift module; they assert no purity or normalization theorem.\n\nThe source sequence is the coherent reduction of U=Lf* K(d)[2d], and the target sequence is the actual integralExceptionalSystem of K. Their strict derived completed-coefficient towers are obtained by coefficientSequenceDerivedRestriction. Source evaluation is the canonical restricted evaluation followed by reductionEvaluation and b^U; target evaluation is the canonical restricted evaluation followed by purAdicExceptionalEvaluation. The exceptional normalization is finiteReductionExceptionalComparison followed by the finite exceptional functor on the canonical input quotient normalization. The exceptional transition is the actual coefficient-sequence transition conjugated by purAdicExceptionalEvaluation. The restricted transitions apply completed scalar restriction and its canonical composition isomorphism.\nThe source and target sequences and their restricted towers are defined for every integral derived object K. The finite-arrow evaluations and transition comparisons use a proof hK of finite-Tor integral constructibility. No boundedness or normalization hypothesis is added to the sequence definitions themselves.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-integral-derived-reduction",
+  "def-pur-integral-derived-operations",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-smooth-purity-map",
+  "def-pur-adic-source-reduction",
+  "def-weil-integral-reduction-tower",
+  "def-coef-normalized-dvr-tower",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-adic-exceptional-reduction",
+  "def-pur-adic-purity-objects",
+  "def-pur-adic-finite-source-normalization",
+  "def-coef-ringed-sequence-site",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-adic-exceptional-system-realization",
+  "def-pur-composition-comparisons"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible finite coefficient purity maps lift to a morphism of strict derived inverse towers",
+   "date": "2026-10-25",
+   "results": "8 hits: IsAdicComplete.StrictMono.lift, IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.StrictMono.mk_lift, IsAdicComplete.StrictMono.lift.congr_simp, IsAdicComplete.lift, WittVector.lift, AdicCompletion.lift, IsAdicComplete.liftAlgHom",
+   "verdict": "No duplicate of the actual canonical coefficient-system interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite coefficient purity maps lift to a morphism of strict derived inverse towers",
+   "date": "2026-10-25",
+   "results": "8 hits: IsAdicComplete.StrictMono.lift, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.StrictMono.mk_lift, IsAdicComplete.StrictMono.of_lift, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', IsAdicComplete.StrictMono.mk_comp_liftRingHom, IsAdicComplete.of_comp_lift",
+   "verdict": "No duplicate of the actual canonical coefficient-system interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*[Tt]ower|[Tt]ower.*purity",
+   "date": "2026-10-25",
+   "results": "0 hits: ",
+   "verdict": "No duplicate of the actual canonical coefficient-system interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedPurityLift",
+  "date": "2026-10-25",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3.",
+   "via": [
+    "lem-pur-adic-normalized-purity-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicNormalizedPuritySystems",
+  "file": "lean/Sheaf/Paper/AdicNormalizedPuritySystems.lean",
+  "declaration": "WeilConjectures.AdicNormalizedPurity.sourceSequence",
+  "declarations": [
+   "WeilConjectures.AdicNormalizedPurity.sourceSequence",
+   "WeilConjectures.AdicNormalizedPurity.targetSequence",
+   "WeilConjectures.AdicNormalizedPurity.sourceTower",
+   "WeilConjectures.AdicNormalizedPurity.targetTower",
+   "WeilConjectures.AdicNormalizedPurity.sourceEvaluation",
+   "WeilConjectures.AdicNormalizedPurity.targetEvaluation",
+   "WeilConjectures.AdicNormalizedPurity.exceptionalNormalization",
+   "WeilConjectures.AdicNormalizedPurity.exceptionalTransition",
+   "WeilConjectures.AdicNormalizedPurity.sourceRestrictedTransition",
+   "WeilConjectures.AdicNormalizedPurity.targetRestrictedTransition"
+  ],
+  "statement": "def sourceSequence (K : DerivedCategory (scalarReductionSource C.l E Y))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (identical); 10 moved defs vs old item bodies (identical); 2 new sorry lemmas vs item clauses 2.3 and 3 (verbatim); tower-full copy vs SequentialTowerEvaluationFull (universe-general re-proof, axioms clean)"
+ }
+}

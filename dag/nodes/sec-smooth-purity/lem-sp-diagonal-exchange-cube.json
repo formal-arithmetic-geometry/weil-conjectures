@@ -1,0 +1,339 @@
+{
+ "id": "lem-sp-diagonal-exchange-cube",
+ "kind": "statement",
+ "title": "The counit-defined diagonal comparison in a base-change cube",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. All schemes in this statement are separated and of finite type over $k$, and all morphisms are $k$-morphisms [def-weil-scheme-morphism-properties]. Use the ordinary uncompleted constant-coefficient pro-etale module derived categories and their bounded constructible finite-Tor subcategories [def-weil-pbc-proetale-modules, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Pullbacks and tensor products are the ordinary derived operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor].\n\nLet $f:X\\to Y$ be smooth separated of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms], let $v:Y'\\to Y$ be arbitrary, and put $X'=X\\times_Y Y'$ with projections $u:X'\\to X$ and $f':X'\\to Y'$ [def-pc-base-change].\nPut $R=\\mathbf Z/\\ell^r$, $r\\ge1$, and use the constructible adjunctions $F_h=Rh_{!,R}\\dashv G_h=h_R^!$ [def-pur-co-smoothness]. For each Cartesian square with smooth vertical arrow $h$, define its exceptional exchange as the adjoint transpose of the pulled-back counit composed with inverse compact-support exchange [def-weil-pbc-adjunction-mate, def-exchange-projection]. Write $\\omega_h=G_hR_{\\operatorname{cod}(h)}$. Put $W=X\\times_Y X$, with projections $p_1,p_2$ and diagonal $\\Delta$, and put $W'=X'\\times_{Y'}X'$, with projections $p'_1,p'_2$, diagonal $\\Delta'$ and induced $q:W'\\to W$. Write\n$$b_f:p_2^*\\omega_f\\xrightarrow{\\sim}\\omega_{p_1},\\quad b_{f'}:p_2'^*\\omega_{f'}\\xrightarrow{\\sim}\\omega_{p'_1},\\quad b_{p_1}:q^*\\omega_{p_1}\\xrightarrow{\\sim}\\omega_{p'_1},\\quad e_1:u^*\\omega_f\\xrightarrow{\\sim}\\omega_{f'}$$\nfor these specified exchanges. The section invariant is $C(h,s)=s^*\\omega_h$ [def-pur-section-invariant]. Define $\\kappa_f=\\Delta^*b_f^{-1}:C(p_1,\\Delta)\\to\\omega_f$ using $p_2\\Delta=1$, and similarly $\\kappa_{f'}$, with the canonical pullback composition and identity isomorphisms [def-weil-derived-pullback-tensor-hom].\n\nThe pair $(W',p_1',\\Delta')$ is canonically the pullback of $(W,p_1,\\Delta)$ along $u$; both projections are smooth of pure relative dimension $d$, and the diagonals are regular closed sections of codimension $d$. Every constructible finite-Tor object used in these comparisons has an etale-origin representative on which the compact-support exchanges are the witnessed exchanges of [fix-lem-exchanges], using the explicit transport construction [def-pur-compact-exchange-witness-transport]. Under canonical pullback compositors the following equalities hold in the derived categories:\n$$b_{p_1}\\circ q^*b_f=b_{f'}\\circ p_2'^*e_1,$$\n$$\\kappa_{f'}\\circ\\Delta'^*b_{p_1}=e_1\\circ u^*\\kappa_f.$$\nThey include identity base change and relative dimension zero, and require no flatness of $v$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), diagonal base change and the first comparison arrow; old split step 1; agent-extracted self-contained interface, not a theorem quoted verbatim from the blueprint. Retained expanded argument: report.md, Appendix: inherited argument, old step(s) 1."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-pur-co-smoothness",
+  "def-weil-pbc-adjunction-mate",
+  "def-exchange-projection",
+  "def-pur-section-invariant",
+  "fix-lem-exchanges",
+  "lem-pur-diagonal-regular-immersion",
+  "sk-def-purity-conv",
+  "def-pur-compact-exchange-witness-transport"
+ ],
+ "proof": [
+  {
+   "text": "The fibre-product universal property identifies $W'$ with $W\\times_{X,p_1}X'$. Explicitly, on maps from any scheme $T$, an element of the latter is $((x_1,x_2),(x_1,y'))$ with $f(x_1)=f(x_2)=v(y')$; it corresponds to $((x_1,y'),(x_2,y'))\\in W'(T)$. These assignments are inverse and natural in $T$. They carry $p'_1$ to the projection to $X'$ and $q$ to the projection to $W$. They carry $\\Delta'$ to the pulled-back section: $q\\Delta'=\\Delta u$. They also give $p_2q=up'_2$ and $p'_2\\Delta'=1$. Thus this is an identification of the pairs with their specified sections, without a flatness assumption.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), diagonal base change; fibre-product identification with sections"
+   }
+  },
+  {
+   "text": "Smooth relative dimension, separatedness and quasi-compact finite type persist under the three pullbacks. Use the proved source-library isRegularImmersion_diagonal at positive dimension; its affine weakly regular generators are a proper regular sequence at points of the diagonal because their ideal is the kernel and its zero locus contains that point. At dimension zero the morphism is etale, its diagonal is open and closed, and on an affine open inside its image the ideal is zero and the empty sequence is regular. This proves the exact affine-local IsRegularOfPureCodimension predicate of PurityConventions for both diagonals.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pod-separated-finite-type-base-change",
+    "sk-lem-diag-reg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), smooth projections and regular closed diagonal sections; Stacks Tags 01VB, 02NK and 067R"
+   }
+  },
+  {
+   "text": "Finite type over the given field gives Noetherian schemes and Nagata compactifications. The prime ell is nonzero in the characteristic-p field, so ell^r is invertible on every scheme in the diagram, including empty schemes. Apply the proved source smooth exceptional-base-change isomorphism to the four squares and specialize to the coefficient unit. For each intrinsic fixed-module constructible input, its finite stratification and fixed lisse pieces give finite models, hence constructible etale-origin cohomology sheaves. The source boundedConstructible_of_homology theorem assembles the bounded etale-origin complex. Its bounded-below witness makes the raw pro-etale compact-support exchange invertible by the source finite-coefficient base-change theorem, and compactSupport_exchange_transport identifies its specified transport with that same raw map. This works directly for ULift(ZMod(ell^r)); no coefficient-extension-ring identification is needed.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-pur-co-smooth-exchange-transport",
+    "def-weil-pbc-etale-origin-witness",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), domains and normalization of the finite diagonal comparisons"
+   }
+  },
+  {
+   "text": "Use affineLinearExchange_paste for the ordinary etale compact-support exchange maps. Cancel the pullback compositors to express the outer exchange as the composite of the two successive exchanges. Take inverse isomorphisms. The corresponding TwoSquare is the horizontal composite of the inverse squares whiskered by the upper and lower compositors. Apply mateEquiv_whiskerTop_whiskerBottom and mateEquiv_vcomp for the specified rightDerivedUpperShriekAdjunctions. By definition their mates are rightDerivedUpperShriekBaseChangeMap. This proves the full exceptional pasting formula at an arbitrary object.",
+   "uses": [
+    "lem-amb-affine-linear-exchange-coherence",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), counit calculation for two successive base changes; Stacks Tag 0E47 (remark-compose-base-change-horizontal) and general mate pasting"
+   }
+  },
+  {
+   "text": "Specialize exceptional pasting at the coefficient unit. Naturality of the second exceptional exchange and the unit clause of canonicalDerivedPullbackCompositionMonoidal combine the unit comparisons into the outer unit comparison, giving dualizingComplexBaseChangeMap pasting. Apply it first to f followed by u and then to v followed by f-prime. The two outer maps are identified by the second projection square and pullback.condition; proof irrelevance identifies the pullback-square witnesses. Cancel the common first compositor. The result is precisely the first displayed diagonalCubePullbackIso equation, and applying comparison inverse image gives its stated pro-etale image.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), the two decompositions of the diagonal base-change cube"
+   }
+  },
+  {
+   "text": "Pull the first equation back along the primed diagonal and use naturality of diagonalCubePullbackIso at b_f. Cancel the adjacent pullbacks of b_f-prime and its inverse, and use naturality of the section compositor at e_1. The proved source leftDerivedUpperStar_map_comp_compSectionIso identifies the remaining section/pullback-compositor chain with the inverse diagonalCubePullbackIso followed by the pulled-back section compositor. Changing its common composite morphism is proved by equality elimination. Cancel this inverse compositor and the pullbacks of b_f and its inverse. This gives exactly the second equation with both kappas expanded as in the original statement; finally apply comparison inverse image. No positivity or flatness is used.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), inversion of diagonal comparison and pullback along the diagonal"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "sk-lem-diag-reg",
+  "prop-asd-smooth-base-change",
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-pur-co-smooth-exchange-transport",
+  "def-weil-pbc-etale-origin-witness",
+  "thm-cbc-finite-level-proetale",
+  "lem-amb-affine-linear-exchange-coherence",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-mate",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "H4 stage 3 worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), implemented in canonical etale-origin coordinates using the adopted source diagonal, finite constructible-origin and smooth base-change theorems, ordinary compact-support exchange pasting, mate pasting and section coherence. The unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal section dualizing comparison commutes with counit-defined exceptional base change by pasting the Cartesian cube",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsPullback",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(exchange|dualizing)|dualizing.*diagonal",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the diagonal section dualizing comparison under base change",
+   "results": "8 hits: IsBaseChange.dual, IsBaseChange.toDualBaseChange, CategoryTheory.Limits.prodComparison_inv_natural_assoc, CategoryTheory.Limits.prod.diag_map, IsBaseChange.toDual_apply, Module.Dual.baseChange, CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans, CategoryTheory.Sheaf.ΓObjEquivSections_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting inverse compact support exchanges identifies the two smooth exceptional comparisons on a base changed diagonal",
+   "results": "8 hits: CategoryTheory.GlueData.t'_inv, CategoryTheory.GlueData.t'_comp_eq_pullbackSymmetry, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, CategoryTheory.GlueData.t'_comp_eq_pullbackSymmetry_assoc, AlgebraicGeometry.PresheafedSpace.GlueData.f_invApp_f_app, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app', AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal section dualizing comparison commutes with counit-defined exceptional base change by pasting the Cartesian cube",
+   "results": "8 hits: CategoryTheory.coev_expComparison, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.Limits.pullback.diagonal_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the finite pro-etale diagonal dualizing comparison and its witnessed exceptional-exchange normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(exchange|dualizing)|dualizing.*diagonal",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the finite pro-etale diagonal dualizing comparison and its witnessed exceptional-exchange normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsPullback",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the finite pro-etale diagonal dualizing comparison and its witnessed exceptional-exchange normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the diagonal section dualizing comparison under base change",
+   "results": "8 hits: IsBaseChange.dual, IsBaseChange.toDualBaseChange, CategoryTheory.Limits.prodComparison_inv_natural_assoc, CategoryTheory.Limits.prod.diag_map, IsBaseChange.toDual_apply, Module.Dual.baseChange, CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans, CategoryTheory.Sheaf.ΓObjEquivSections_naturality",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the finite pro-etale diagonal dualizing comparison and its witnessed exceptional-exchange normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting inverse compact support exchanges identifies the two smooth exceptional comparisons on a base changed diagonal",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app', AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst, AlgebraicGeometry.PresheafedSpace.GlueData.f_invApp_f_app, AlgebraicGeometry.Scheme.Pullback.t'_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the finite pro-etale diagonal dualizing comparison and its witnessed exceptional-exchange normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-purity-bc-factors",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), first sentence: diagonal base change; naturality of the first diagonal-dualizing comparison in the orientation calculation",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-diagonal-exchange-cube",
+  "worker": "stage1",
+  "summary": "Split the finite diagonal cube into a universal-property identification, geometric and witnessed-domain checks, compact-support/inverse-mate pasting along the two factorizations fu=vf′, and the explicit diagonal cancellation. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "Realizes det-sp-purity-bc-factors.proof.md (1), the diagonal base-change and first dualizing comparison needed before the DNC orientation square.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic smooth base-change and dimension permanence used for the two projections; does not replace the orientation route."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic separated finite-type base-change permanence for the projection squares."
+   },
+   {
+    "node": "lem-pur-diagonal-regular-immersion",
+    "why": "The regular diagonal of a smooth separated map is needed to type the closed-section invariant; the same smooth-purity chapter route supplies it."
+   },
+   {
+    "node": "lem-pur-finite-setting-comparison-hypotheses",
+    "why": "Supplies finite-coefficient compactifications and comparison hypotheses, with E=Q_ell and n=r."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies etale-origin witnesses for intrinsic constructible inputs, required by the finite compact-support comparison."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic pullback composition isomorphisms for the two identifications of the same rectangle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-1b8f48b6e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-1b8f48b6e (reviewer sub-agent of L); spot-checked: I read all six steps against the full statements of every cited node. Step 1: the T-point identification W'≅W×_{X,p1}X' gives p1q=up1', p2q=up2', qΔ'=Δu and p2'Δ'=1; these are correct and need no flatness. Step 2: smooth permanence (1) holds for arbitrary base maps, and the regular-immersion lemma is applied separately to f and to f', not by base change of a regular immersion. Step 3: thm-pur-cohomological-smoothness (3) with the def-pur-co-smoothness (3) counit normalization makes b_f, b_{f'}, b_{p1} and e1 invertible. Constructible-origin (ii) and thm-cbc-finite-level-proetale give the witnessed Ex_!, and fix-lem-exchanges types it on that domain. Step 4: fix-lem-exchanges (2) horizontal Ex_{gh}=(Ex_h g'*)(h*Ex_g), inverted, is γ=(H2α)(βG) of mate-pasting (1), so E_{h,ab}=(E_{h_a,b}a*)∘b_X*E_{h,a}; I checked the order and direction. Step 5: (a,b)=(f,u) and (v,f') give the same outer Cartesian square (W', top p2q=up2', bottom fu=vf'), so b_{p1}∘q*b_f=b_{f'}∘p2'*e1. Step 6: applying Δ'* and cancelling gives κ_{f'}Δ'*b_{p1}=e1u*κ_f, with types checked. Edge cases d=0, v=1, empty schemes and non-flat v (Y'={0}→A¹) all hold. There are no new nodes and the statement is unchanged; it is the item's first split, with no re-split note. The route is the blueprint main-20261015 factors proof (1), first sentence, and no SGA is used. I accept the tool_uses: smooth permanence, the regular diagonal, the finite-setting hypotheses, constructible origin and pullback composition. Advisory: lem-pur-smooth-exceptional-tensor-pasting (Q95) already states step 4's composition law; the two-line derivation in step 4 is valid, so this is not a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalExchangeCube",
+  "declaration": "WeilConjectures.diagonalExchangeCube",
+  "declarations": [
+   "WeilConjectures.diagonalCubeMap",
+   "WeilConjectures.diagonalCubePullbackIso",
+   "WeilConjectures.diagonalCubeWitnessed",
+   "WeilConjectures.diagonalCubeComparisons",
+   "WeilConjectures.diagonalExchangeCubeStatement",
+   "WeilConjectures.diagonalExchangeCube"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalExchangeCube.lean",
+  "statement": "theorem diagonalExchangeCube (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (r : ℕ) (hr : 1 ≤ r) (d : ℕ) {X Y Y' : Scheme.{u}} (aY : Y ⟶ Spec (.of D.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [QuasiCompact f] [SmoothOfRelativeDimension d f] (v : Y' ⟶ Y) (aY' : Y' ⟶ Spec (.of D.k)) [IsSeparated aY'] [LocallyOfFiniteType aY'] [QuasiCompact aY'] (hv : v ≫ aY = aY') : diagonalExchangeCubeStatement D C r d aY f v",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical finite ZMod coefficients, intrinsic fixed-module constructibility and Tor predicates, witnessed compact-support exchange, specified exceptional mates and both comparison-image equations. Compactification follows from the finite-type field setting. The published empty-sequence regularity predicate retains dimension zero; no flatness or orientation is imposed. Repair of return L at 4a097ac96061: reuse landed def-pur-compact-exchange-witness-transport and publicly import its recorded module Sheaf.Paper.CompactSupportExchangeTransport; no transport definition or dependency module is added or modified. Both kappas remain expanded literally as mapIso b.symm followed by leftDerivedUpperStarCompSectionIso. PurityDiagonalBaseChangeCompared is only a plain proof import."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ddd6bebbf",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 4a097ac96061 (H12/H4). The snapshot holds only the item module, node and report: dup node def-sp-compact-exchange-transport, module CompactExchangeTransportDefinitions and the modified dependency copies are all gone, with no leftover references. Module diff vs 4a09: imports only (public import Sheaf.Paper.CompactSupportExchangeTransport); bodies, inlined kappa chains, four dualizingComplexBaseChangeMap pins, both equations and signature byte-identical. Node: one citation swap in statement text and stmt_deps to the landed def-pur-compact-exchange-witness-transport (existing:true, Q55); lean.statement verbatim in file, declarations unchanged, statement_change differs only in what. Owner's compactExchangeTransportAtWitness signature matches the call; no import cycle. Mathematics re-read: squares, equations, kappa, d=0, v=id, empty schemes, r=1, universes OK. No hollow defs, one sorry, docstrings present; citer det-sp-purity-bc-factors holds. No file changed, so no compile. Advisory: self second reading; fix-lem-exchanges and lem-pur-diagonal-regular-immersion are stmt_deps used only through proof imports, as accepted before.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q116 stage 2",
+  "old_statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. All schemes in this statement are separated and of finite type over $k$, and all morphisms are $k$-morphisms [def-weil-scheme-morphism-properties]. Use the ordinary uncompleted constant-coefficient pro-etale module derived categories and their bounded constructible finite-Tor subcategories [def-weil-pbc-proetale-modules, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Pullbacks and tensor products are the ordinary derived operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor].\n\nLet $f:X\\to Y$ be smooth separated of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms], let $v:Y'\\to Y$ be arbitrary, and put $X'=X\\times_Y Y'$ with projections $u:X'\\to X$ and $f':X'\\to Y'$ [def-pc-base-change].\nPut $R=\\mathbf Z/\\ell^r$, $r\\ge1$, and use the constructible adjunctions $F_h=Rh_{!,R}\\dashv G_h=h_R^!$ [def-pur-co-smoothness]. For each Cartesian square with smooth vertical arrow $h$, define its exceptional exchange as the adjoint transpose of the pulled-back counit composed with inverse compact-support exchange [def-weil-pbc-adjunction-mate, def-exchange-projection]. Write $\\omega_h=G_hR_{\\operatorname{cod}(h)}$. Put $W=X\\times_Y X$, with projections $p_1,p_2$ and diagonal $\\Delta$, and put $W'=X'\\times_{Y'}X'$, with projections $p'_1,p'_2$, diagonal $\\Delta'$ and induced $q:W'\\to W$. Write\n$$b_f:p_2^*\\omega_f\\xrightarrow{\\sim}\\omega_{p_1},\\quad b_{f'}:p_2'^*\\omega_{f'}\\xrightarrow{\\sim}\\omega_{p'_1},\\quad b_{p_1}:q^*\\omega_{p_1}\\xrightarrow{\\sim}\\omega_{p'_1},\\quad e_1:u^*\\omega_f\\xrightarrow{\\sim}\\omega_{f'}$$\nfor these specified exchanges. The section invariant is $C(h,s)=s^*\\omega_h$ [def-pur-section-invariant]. Define $\\kappa_f=\\Delta^*b_f^{-1}:C(p_1,\\Delta)\\to\\omega_f$ using $p_2\\Delta=1$, and similarly $\\kappa_{f'}$ [lem-pur-diagonal-base-change].\n\nThe pair $(W',p_1',\\Delta')$ is canonically the pullback of $(W,p_1,\\Delta)$ along $u$; both projections are smooth of pure relative dimension $d$, and the diagonals are regular closed sections of codimension $d$. Every constructible finite-Tor object used in these comparisons has an etale-origin representative on which the compact-support exchanges are the witnessed exchanges of [fix-lem-exchanges]. Under canonical pullback compositors the following equalities hold in the derived categories:\n$$b_{p_1}\\circ q^*b_f=b_{f'}\\circ p_2'^*e_1,$$\n$$\\kappa_{f'}\\circ\\Delta'^*b_{p_1}=e_1\\circ u^*\\kappa_f.$$\nThey include identity base change and relative dimension zero, and require no flatness of $v$.",
+  "what": "Maintainer returns L at 1d6ef317e211 and 4a097ac96061: the statement needs definition data, not the transport-identification or diagonal-base-change theorem conclusions. Cite the already landed def-pur-compact-exchange-witness-transport (Q55, c3276c46f03), whose existing:true record owns compactExchangeTransportComparison/Source/Target/AtWitness in Sheaf.Paper.CompactSupportExchangeTransport. No duplicate definition node, new transport module or dependency repair is delivered. Kappa is inlined as diagonal pullback of the inverse mate followed by the canonical section compositor; lem-pur-diagonal-base-change remains only a proof dependency. Only definitional citations and statement-dependency ownership change; every mathematical hypothesis and conclusion is unchanged.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+   "place": "Proof (1), diagonal base change and the first comparison arrow; old split step 1; agent-extracted self-contained interface, not a theorem quoted verbatim from the blueprint. Retained expanded argument: report.md, Appendix: inherited argument, old step(s) 1."
+  },
+  "citers": [
+   {
+    "id": "det-sp-purity-bc-factors",
+    "holds": true,
+    "note": "Only definition ownership and citations change; the diagonal-cube hypotheses and both equations are identical, so the use remains valid."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-finite-field-fiber",
+   "def-weil-scheme-morphism-properties",
+   "def-weil-pbc-proetale-modules",
+   "def-weil-proetale-constructible-sheaf",
+   "def-weil-proetale-tor-amplitude",
+   "def-weil-derived-pullback-tensor-hom",
+   "def-weil-derived-tensor",
+   "def-sbc-smooth-morphisms",
+   "def-pc-base-change",
+   "def-pur-co-smoothness",
+   "def-weil-pbc-adjunction-mate",
+   "def-exchange-projection",
+   "def-pur-section-invariant",
+   "lem-pur-diagonal-base-change",
+   "fix-lem-exchanges",
+   "lem-pur-diagonal-regular-immersion"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261025T163649-L-758120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

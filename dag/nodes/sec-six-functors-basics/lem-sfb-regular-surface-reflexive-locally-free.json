@@ -1,0 +1,396 @@
+{
+ "id": "lem-sfb-regular-surface-reflexive-locally-free",
+ "kind": "statement",
+ "title": "Coherent reflexive sheaves on regular schemes of dimension at most two are finite locally free",
+ "statement": "Let $X$ be a regular scheme [def-weil-regular-scheme] of topological Krull dimension at most two [def-kun-topological-krull-dimension], and let $F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Put $F^\\vee=\\mathcal Hom_{\\mathcal O_X}(F,\\mathcal O_X)$ [def-pur-sheaf-hom]. Call $F$ reflexive if the evaluation morphism $F\\to F^{\\vee\\vee}$, sending a local section $s$ to the functional $\\lambda\\mapsto\\lambda(s)$, is an isomorphism. Then $F$ is reflexive if and only if $F$ is finite locally free [def-sc-finite-locally-free-sheaf].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0B3N (divisors-lemma-reflexive-over-regular-dim-2)."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "pqf-def-coherent",
+  "def-pur-sheaf-hom",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-regular-scheme], $X$ is locally Noetherian and $R=\\mathcal O_{X,x}$ is a Noetherian regular local ring for every $x\\in X$. By [lem-sc-scheme-stalk-dimension-generalization-chains], $\\dim R$ is the supremum of the lengths of chains of generalizations of $x$. Taking closures gives chains of irreducible closed subsets of $X$, so [def-kun-topological-krull-dimension] and $\\dim X\\le2$ give $d=\\dim R\\in\\{0,1,2\\}$. No connectedness or integrality of $X$ is being assumed.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0B3N, divisors-lemma-reflexive-over-regular-dim-2, proof."
+   }
+  },
+  {
+   "text": "The structure module $\\mathcal O_X$ is quasi-coherent of finite type (on an affine chart it is the associated module of the coordinate ring, with generator $1$), hence is coherent by [pqf-lem-coherent-ft-locnoeth]. Thus [lem-weil-pbc-coherent-sheaf-hom-coherent] makes $F^\\vee$ coherent as well. A coherent module is locally finitely presented: choose a finite set of local generators, then finite local generators for the kernel, which is of finite type by the definition [pqf-def-coherent]. Applying [lem-weil-pbc-finite-presentation-source-stalk] separately to $F$ and $F^\\vee$ gives finite presentations of $M=F_x$ and $N=(F^\\vee)_x$ over $R$; in particular both are finite.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "pqf-def-coherent",
+    "lem-weil-pbc-finite-presentation-source-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0B3N, divisors-lemma-reflexive-over-regular-dim-2, proof."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-stalk-internal-hom-finite-presentation] first to $(F,\\mathcal O_X)$ and then to $(F^\\vee,\\mathcal O_X)$, using step 2. This identifies $N$ with $M^*=\\operatorname{Hom}_R(M,R)$ and $(F^{\\vee\\vee})_x$ with $\\operatorname{Hom}_R(N,R)=M^{**}$. The evaluation formula in [lem-weil-pbc-stalk-internal-hom-evaluation] shows that the stalk of the sheaf evaluation is precisely $m\\mapsto(\\lambda\\mapsto\\lambda(m))$: a local functional applied to a section has germ equal to its stalk map applied to the section germ. Consequently if $F$ is reflexive, this algebraic evaluation $M\\to M^{**}$ is an isomorphism for every $x$.",
+   "uses": [
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-stalk-internal-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CP, modules-lemma-stalk-internal-hom, statement and evaluation formula in its proof; applied twice, as in divisors Tag 0AY3."
+   }
+  },
+  {
+   "text": "If $F$ is finite locally free, take the trivializing open cover and finite ranks of [def-sc-finite-locally-free-sheaf]. Apply [lem-sf-locally-free-sheaf-evaluation-biduality] on the Zariski site with $R=\\mathcal O_X$ and $M=F$; an open cover has the covering-sieve property in that statement. Its evaluation $\\delta_F$ is the evaluation in the item, since both send $s$ to the local functional $\\lambda\\mapsto\\lambda(s)$. The cited lemma therefore gives its invertibility, including rank zero and varying ranks. This proves the finite-locally-free-to-reflexive implication.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "lem-sf-locally-free-sheaf-evaluation-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0B3N, divisors-lemma-reflexive-over-regular-dim-2, proof."
+   }
+  },
+  {
+   "text": "For the converse suppose $F$ is reflexive and fix $x$. If $d=0$, regularity says that the maximal ideal of $R$ has zero generators and is therefore zero. A nonzero element of this local ring is outside its maximal ideal, hence a unit; thus $R$ is a field. By [lem-weil-pbc-vector-space-free], $M$ is free. It is already finite by step 2, so a basis is finite: a finite generating set uses only finitely many basis vectors and spans $M$, forcing every basis vector to be among them.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0B3N, divisors-lemma-reflexive-over-regular-dim-2, proof."
+   }
+  },
+  {
+   "text": "If $d=1$, [lem-sc-regular-dim1-dvr] makes $R$ a discrete valuation ring, in particular a domain. The module $M$ is torsion free: if $0\\ne a\\in R$ and $am=0$, then for every $\\lambda\\in M^*$, $a\\lambda(m)=\\lambda(am)=0$, hence $\\lambda(m)=0$. Therefore evaluation sends $m$ to zero, and its injectivity from step 3 gives $m=0$. Now [lem-sc-dvr-fg-torsionfree-free] applies to the finite module $M$ from step 2 and gives that it is finite free.",
+   "uses": [
+    "lem-sc-regular-dim1-dvr",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0B3N, divisors-lemma-reflexive-over-regular-dim-2, proof."
+   }
+  },
+  {
+   "text": "If $d=2$, choose two generators $a,b$ of the maximal ideal, as allowed by regularity. By [lem-weil-pbc-regular-local-generators-regular-sequence], they form an $R$-regular sequence in the maximal ideal, so [def-weil-pbc-depth] gives $\\operatorname{depth}R\\ge2$. Apply [new-local-dual-depth-two] to the finite module $N=(F^\\vee)_x$ from step 2. It yields $\\operatorname{depth}\\operatorname{Hom}_R(N,R)\\ge2$. By step 3 and reflexivity this module is isomorphic to $M$; linear isomorphisms preserve multiplication, quotients by each parameter and their injectivity, hence preserve regular sequences and depth. If $M=0$, it is free of rank zero. Otherwise [lem-weil-pbc-depth-le-support-dimension] gives $\\operatorname{depth}M\\le\\dim\\operatorname{Supp}M\\le\\dim R=2$; the second inequality holds because every chain of primes in the support is a chain in $\\operatorname{Spec}R$. Hence $\\operatorname{depth}M=2$, and [lem-weil-pbc-regular-local-mcm-free] makes the finite module $M$ finite free. The zero-module case was separated because its depth is infinity, not two.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-depth",
+    "new-local-dual-depth-two",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "lem-weil-pbc-regular-local-mcm-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0B3N, dimension-two paragraph; its depth input expanded with more-algebra Tag 0AV5(2), lemma-hom-into-depth, and algebra Tags 00NQ, 00LK, 00NT."
+   }
+  },
+  {
+   "text": "Steps 5--7 give a finite free stalk $F_x$ at every point. Since $X$ is locally Noetherian and $F$ is coherent, [lem-sc-coherent-free-stalks-locally-free] applies and proves that $F$ is finite locally free. Together with step 4 this proves the equivalence. If $X$ is empty, the stalk condition is vacuous and the same criterion applies, equivalently the empty trivializing cover suffices.",
+   "uses": [
+    "lem-sc-coherent-free-stalks-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0B3N, divisors-lemma-reflexive-over-regular-dim-2, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "pqf-def-coherent",
+  "lem-weil-pbc-finite-presentation-source-stalk",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "lem-weil-pbc-stalk-internal-hom-evaluation",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-sf-locally-free-sheaf-evaluation-biduality",
+  "lem-weil-pbc-vector-space-free",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-pbc-depth",
+  "new-local-dual-depth-two",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-regular-local-mcm-free",
+  "lem-sc-coherent-free-stalks-locally-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0B3N, divisors-lemma-reflexive-over-regular-dim-2, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every coherent reflexive sheaf on a regular scheme of dimension at most two is finite locally free",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType.finite",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-type and finite-presentation definitions do not imply local freeness of a reflexive coherent sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReflexive\", \"IsRegular\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits for the reflexivity/regularity combination."
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|reflexivity|Hartogs",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: ",
+   "date": "2026-10-24",
+   "verdict": "no match: no such declaration in AlgebraicGeometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent reflexive sheaves are finite locally free on a regular scheme of dimension at most two",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation, Module.IsReflexive.of_finite_of_free, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.isQuasicoherent, SheafOfModules.IsFiniteType.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.IsReflexive.of_finite_of_free proves only the converse algebraic implication, not local freeness of coherent reflexive sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a regular Noetherian scheme of Krull dimension zero one or two every reflexive coherent module is a vector bundle",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, AlgebraicGeometry.Scheme.Modules.isSheaf, AlgebraicGeometry.Scheme.Modules.instAbelian, Module.instIsReflexiveOfFiniteOfProjective, Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus, AlgebraicGeometry.isReduced_of_isAffine_isReduced, SheafOfModules.IsFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.instIsReflexiveOfFiniteOfProjective again proves projective implies reflexive; rank-local-constancy results assume flatness or restrict to the free locus."
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|of_finite_of_free|instIsReflexiveOfFiniteOfProjective",
+   "results": "10 hits in Mathlib/LinearAlgebra/Dual: Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/LinearAlgebra/Dual/Lemmas.lean lines 251-262; this is finite free implies reflexive, whereas the substantive direction needed here is reflexive implies locally free on a regular surface."
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|IsReflexive",
+   "results": "{\"t\": \"2026-10-24T05:19:00Z\", \"tool\": \"grep\", \"query\": \"reflexive|IsReflexive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: finite free/projective implies reflexive, PID torsion-free freeness, local flat freeness and sheaf finite-presentation notions do not state reflexive implies locally free on regular schemes. Dual/Lemmas.lean:259-269 was read.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reflexive coherent modules on a regular surface are locally free",
+   "results": "{\"t\": \"2026-10-24T05:19:00Z\", \"tool\": \"leansearch\", \"query\": \"Reflexive coherent modules on a regular surface are locally free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive.of_split\", \"Module.free_of_flat_of_isLocalRing\", \"Module.IsReflexive.to_isTorsionFree\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.mem_freeLocus_of_isLocalization\", \"Module.freeLocus\"], \"digest\": \"0d7c24ac314309f9\"}; Read the returned types: finite free/projective implies reflexive, PID torsion-free freeness, local flat freeness and sheaf finite-presentation notions do not state reflexive implies locally free on regular schemes. Dual/Lemmas.lean:259-269 was read.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, Module.Free",
+   "results": "{\"t\": \"2026-10-24T05:19:00Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive, Module.Free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.IsReflexive.of_finite_of_free\"], \"digest\": \"691486519d60ae7b\"}; Read the returned types: finite free/projective implies reflexive, PID torsion-free freeness, local flat freeness and sheaf finite-presentation notions do not state reflexive implies locally free on regular schemes. Dual/Lemmas.lean:259-269 was read.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent reflexive sheaf on a regular scheme of dimension at most two is finite locally free",
+   "results": "{\"t\": \"2026-10-24T05:19:01Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent reflexive sheaf on a regular scheme of dimension at most two is finite locally free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"4637fc789e1e84f8\"}; Read the returned types: finite free/projective implies reflexive, PID torsion-free freeness, local flat freeness and sheaf finite-presentation notions do not state reflexive implies locally free on regular schemes. Dual/Lemmas.lean:259-269 was read.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_finite_of_free|instIsReflexiveOfFiniteOfProjective",
+   "results": "{\"t\": \"2026-10-24T05:19:31Z\", \"tool\": \"grep\", \"query\": \"of_finite_of_free|instIsReflexiveOfFiniteOfProjective\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"e851489bb0f0fa57\"}; Read the returned types: finite free/projective implies reflexive, PID torsion-free freeness, local flat freeness and sheaf finite-presentation notions do not state reflexive implies locally free on regular schemes. Dual/Lemmas.lean:259-269 was read.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflexive finite modules over regular local rings of Krull dimension two are free",
+   "results": "{\"t\": \"2026-10-24T05:19:32Z\", \"tool\": \"leanfinder\", \"query\": \"Reflexive finite modules over regular local rings of Krull dimension two are free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.IsReflexive.of_finite_of_free\", \"Module.free_of_flat_of_isLocalRing\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.free_of_flat_of_finrank_eq\", \"Module.free_of_finite_type_torsion_free\", \"Module.free_iff_isTorsionFree\", \"Module.free_of_maximalIdeal_rTensor_injective\"], \"digest\": \"2e5fee105e4f6069\"}; Read the returned types: finite free/projective implies reflexive, PID torsion-free freeness, local flat freeness and sheaf finite-presentation notions do not state reflexive implies locally free on regular schemes. Dual/Lemmas.lean:259-269 was read.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-surface-vector-bundle-extension",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: replace the punctured-surface general linear torsor by its finite locally free sheaf and extend by direct image. Supporting criterion before this extension: identify coherent reflexive sheaves with finite locally free sheaves on the regular surface and on its open subscheme (Stacks 0B3N).",
+   "via": [
+    "lem-sfb-regular-surface-vector-bundle-extension",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-regular-surface-reflexive-locally-free",
+  "worker": "stage1",
+  "summary": "Kept the statement of Stacks 0B3N, and proved both implications by local biduality and the dimension 0/1/2 stalk argument. All ingredients already have DAG nodes; no new nodes. Expanded the dimension-two depth implication through the existing general dual-depth theorem, checked finite presentation for both Hom-stalk comparisons, and separated zero modules before the nonzero depth bound.",
+  "blueprint": "Inherited supporting criterion in the alteration/torsor-extension lineage under det-thm-sf-ctf-stability-direct-images (3). Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) uses sk-cor-sf-direct-image-ctf / sk-prop-open-coefficients; the inherited refinement passes through the regular-surface vector-bundle extension. This split supplies its regular-surface reflexive/local-freeness criterion, following Stacks 0B3N, without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Generic Dimension of a local ring of a scheme by chains of generalizations: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic Coherence on locally Noetherian schemes: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "why": "Generic The sheaf Hom between coherent modules is coherent: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-source-stalk",
+    "why": "Generic Finite local presentation transported to the source stalk: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "why": "Generic Stalk of internal Hom for a finitely presented module: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-stalk-internal-hom-evaluation",
+    "why": "Generic Canonical linear evaluation of internal Hom on stalks: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-sf-locally-free-sheaf-evaluation-biduality",
+    "why": "Generic Ordinary locally finite-free sheaf evaluation and biduality: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-vector-space-free",
+    "why": "Generic Every vector space is a free module: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Generic One-dimensional regular local rings: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Generic Finite torsion-free modules over a DVR are free: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic A regular system of parameters is a regular sequence: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "new-local-dual-depth-two",
+    "why": "Generic Depth two for a finite local dual: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic The depth of a nonzero finite module over a Noetherian local ring is at most the dimension of its support: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-mcm-free",
+    "why": "Generic A maximal Cohen–Macaulay module over a regular local ring is free: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   },
+   {
+    "node": "lem-sc-coherent-free-stalks-locally-free",
+    "why": "Generic Coherent sheaves with free stalks are locally free: used in the regular-surface stalk proof; this six-functor unit supplies no replacement for this algebraic or module-sheaf input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-finite-presentation-source-stalk",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "lem-weil-pbc-stalk-internal-hom-evaluation",
+  "lem-sf-locally-free-sheaf-evaluation-biduality",
+  "lem-weil-pbc-vector-space-free",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "new-local-dual-depth-two",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-regular-local-mcm-free",
+  "lem-sc-coherent-free-stalks-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-81b56c7d5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-81b56c7d5 (reviewer sub-agent of L); spot-checked: Read Stacks divisors.tex Tag 0B3N (l.2337-2368) and More on Algebra lemma-reflexive-over-normal. The item's statement, stmt_deps and blueprint are unchanged from base (the base node was unsplit with an empty proof) and match 0B3N. There are no new nodes. I checked all 8 steps against the statements of the 20 cited nodes. Step 1: stalk dimension is at most 2 by the generalization-chain lemma and the topological dimension. Step 2: O_X and F^vee are coherent, hence finitely presented (an elementary step from pqf-def-coherent), so the stalks are finite. Step 3: the 01CP Hom-stalk comparison is applied twice and the evaluation formula identifies the stalk of the sheaf evaluation with M->M** (I recomputed it). Step 4: the locally-free biduality lemma applies on the Zariski site with an open cover. Step 5: dimension 0 gives a field and a finite basis. Step 6: dimension 1 gives a DVR; torsion-freeness comes from injective evaluation, then 0AUW(3). Step 7: dimension 2 uses depth R>=2 from 00NQ, then new-local-dual-depth-two on N=(F^vee)_x, with Hom(N,R)~M; M=0 is split off, and 00LK and 00NT give a free module. This replaces Stacks' normal-domain lemma with its 0AV5(2) core and is correct. Step 8: 0GWM free stalks give local freeness; empty X is fine. Edge cases tested: the empty scheme, Spec k, varying ranks, the zero module, the DVR residue field (not reflexive), and the maximal ideal (x,y) (its double dual is R). Duplicate search found no other node stating 0B3N. The tool_uses list 15 generic cross-unit lemmas, all used as black boxes; I accept them. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularSurfaceReflexiveLocallyFree",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_bidual_iff_isFiniteLocallyFree_of_isRegularScheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSurfaceReflexiveLocallyFree.lean",
+  "statement": "theorem isIso_bidual_iff_isFiniteLocallyFree_of_isRegularScheme (X : Scheme.{u}) (hX : IsRegularScheme X) (hdim : topologicalKrullDim X ≤ 2) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) : IsIso (SheafOfModules.bidual (R := X.sheaf) F) ↔ SheafOfModules.IsFiniteLocallyFree F",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2ad37057",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Theorem isIso_bidual_iff_isFiniteLocallyFree_of_isRegularScheme matches node and Stacks 0B3N clause by clause: hypotheses are IsRegularScheme (locally Noetherian, stalks regular local), topologicalKrullDim X ≤ 2 and RingedSpace.IsCoherent (finite type + finite-type kernels, listed in the pqf-def-coherent record). Reflexivity is IsIso of the canonical SheafOfModules.bidual into the recorded homObj(homObj F O, O); bidual_app_app_apply gives λ(s). The right side is variable-rank IsFiniteLocallyFree. No extra assumptions; single universe u, none unbound. Edge cases covered: empty X, zero sheaf, local dims 0/1, disconnected X with varying rank, any characteristic. Only the item lean record changed vs live; dependency nodes are identical; statement verbatim; one by-sorry theorem; source/blueprint docstrings with all 8 steps; all imports resolve; report has Worker report and Second reading by Q18. No duplicate found. No file changed, so no compile."
+ }
+}

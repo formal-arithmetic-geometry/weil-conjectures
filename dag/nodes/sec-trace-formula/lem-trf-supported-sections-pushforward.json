@@ -1,0 +1,228 @@
+{
+ "id": "lem-trf-supported-sections-pushforward",
+ "kind": "statement",
+ "title": "Pushforward of quasi-coherent sections supported on a closed subset",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme, def-weil-quasi-separated-morphism], where quasi-compact means that inverse images of affine opens are quasi-compact. Let $Z\\subseteq Y$ be a closed subset such that $Y\\setminus Z$ is retrocompact, meaning its intersection with every affine open of $Y$ is quasi-compact. Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Define subsheaves of modules [def-weil-sheaf-of-modules-category] by $\\mathcal K_X(W)=\\{s\\in\\mathcal F(W):s|_{W\\setminus f^{-1}Z}=0\\}$ for open $W\\subseteq X$ and $\\mathcal K_Y(U)=\\{t\\in(f_*\\mathcal F)(U):t|_{U\\setminus Z}=0\\}$ for open $U\\subseteq Y$, where $(f_*\\mathcal F)(U)=\\mathcal F(f^{-1}U)$ with its induced $\\mathcal O_Y(U)$-action. Then $X\\setminus f^{-1}Z$ is retrocompact, $\\mathcal K_X$, $f_*\\mathcal F$ and $\\mathcal K_Y$ are quasi-coherent, and $f_*\\mathcal K_X=\\mathcal K_Y$ as actual submodules of $f_*\\mathcal F$. If $\\beta:\\mathcal H\\xrightarrow{\\sim}f_*\\mathcal F$ is an isomorphism of module sheaves on $Y$, then $\\beta$ identifies the subsheaf of sections of $\\mathcal H$ zero off $Z$ with $f_*\\mathcal K_X$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 07ZQ, lemma-push-sections-supported-on-closed-subset, statement and hint (3904--3923); quasi-coherence via Tag 07ZP."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $V=Y\\setminus Z$ and $j:V\\hookrightarrow Y$. By the stated definition of retrocompactness, $j^{-1}(U)=V\\cap U$ is quasi-compact for every affine open $U\\subseteq Y$, so $j$ is quasi-compact. Its base change along $f$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](3). This base change is the open inclusion $j_X:f^{-1}V\\hookrightarrow X$: a map to $X$ factors through this open precisely when its composite to $Y$ factors through $V$, which is the fibre-product universal property. Consequently $W\\cap f^{-1}V=j_X^{-1}(W)$ is quasi-compact for every affine open $W\\subseteq X$. Since $f^{-1}V=X\\setminus f^{-1}Z$, this proves retrocompactness of the required complement. Continuity of $f$ makes $f^{-1}Z$ closed.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZQ, lemma-push-sections-supported-on-closed-subset, first sentence of proof hint; Schemes Tag 01K5, lemma-quasi-compact-preserved-base-change"
+   }
+  },
+  {
+   "text": "Restriction along an open immersion preserves quasi-coherence. For each of the quasi-compact open inclusions j_X and j_Y constructed in Step 1, apply [pqf-lem-pushforward-qcoh] to the restriction of the relevant quasi-coherent module. Its direct image is quasi-coherent because an open immersion is separated. The actual supportedModuleKernel is the kernel of the canonical restriction unit, so [lem-weil-pbc-quasi-coherent-module-kernel] proves its quasi-coherence. Apply [pqf-lem-pushforward-qcoh] also to f and F for the middle clause. This is exactly the kernel argument in Stacks 07ZP(3), avoiding its additional finite-generation and ideal-power conclusions.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZQ, lemma-push-sections-supported-on-closed-subset, proof hint; Tag 07ZP, lemma-sections-supported-on-closed-subset(3); Schemes Tag 01LC, lemma-push-forward-quasi-coherent"
+   }
+  },
+  {
+   "text": "The proved source-library theorem range_map_kernelι computes the sectionwise image of each categorical kernel inclusion as the kernel of its component. The component of the restriction unit is restriction from U to U intersect V, by restrictAdjunction_unit_app_app and the image/preimage formula for an open inclusion. After pushforward, sections and the inclusion are those over f inverse U. Thus both sectionwise ranges consist of sections of F(f inverse U) restricting to zero on f inverse (U intersect Z complement). Equality of their underlying sets gives equality of the actual linear submodules, with their given scalar actions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZQ, lemma-push-sections-supported-on-closed-subset, final sentence of proof hint: match the sheaves directly"
+   }
+  },
+  {
+   "text": "Let $\\beta:\\mathcal H\\xrightarrow{\\sim}f_*\\mathcal F$ be the given module-sheaf isomorphism. For any open $U\\subseteq Y$ and $h\\in\\mathcal H(U)$, naturality gives $\\beta_U(h)|_{U\\setminus Z}=\\beta_{U\\setminus Z}(h|_{U\\setminus Z})$. Since $\\beta_{U\\setminus Z}$ is an injective linear isomorphism, the left side vanishes if and only if $h|_{U\\setminus Z}=0$. Thus the componentwise linear bijections $\\beta_U$ and their inverses restrict to bijections between the supported submodule of $\\mathcal H(U)$ and $\\mathcal K_Y(U)$. Their naturality is inherited from $\\beta$ and $\\beta^{-1}$. Step 3 identifies this latter subsheaf with $f_*\\mathcal K_X$, proving the final assertion.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZQ, lemma-push-sections-supported-on-closed-subset, equality of supported submodules; elementary naturality consequence for an isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-open-immersion",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tags 07ZQ and 07ZP(3): base change of the retrocompact inclusion, quasi-coherence directly from restriction, qcqs pushforward and kernels, sectionwise kernel comparison, and naturality under the given isomorphism. Formalized by E8, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine morphism of schemes pushforward commutes with the subsheaf of sections supported on a closed subset with retrocompact complement",
+   "date": "2026-10-22",
+   "results": "8 hits; ; AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal', AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal, AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap, AlgebraicGeometry.Scheme.IdealSheafData.opensRange_subschemeCover_map, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal. No match for supported submodules of arbitrary quasi-coherent modules. IdealSheafData.support_map concerns the closed subscheme defined by an ideal, and the pushforward section formulas alone do not state this support comparison with its quasi-coherence hypotheses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of sections vanishing outside the inverse image of a closed subset equals the sections of the direct image vanishing outside that closed subset",
+   "date": "2026-10-22",
+   "results": "8 hits; ; AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.Scheme.image_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Scheme.preimage_zeroLocus, AlgebraicGeometry.Scheme.basicOpen_appLE, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap, AlgebraicGeometry.Scheme.Opens.toSpecΓ_preimage_zeroLocus. No match for supported submodules of arbitrary quasi-coherent modules. IdealSheafData.support_map concerns the closed subscheme defined by an ideal, and the pushforward section formulas alone do not state this support comparison with its quasi-coherence hypotheses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Limits.kernel",
+   "date": "2026-10-22",
+   "results": "0 hits; ; . No match for supported submodules of arbitrary quasi-coherent modules. IdealSheafData.support_map concerns the closed subscheme defined by an ideal, and the pushforward section formulas alone do not state this support comparison with its quasi-coherence hypotheses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*(support|kernel)|(support|kernel).*pushforward",
+   "date": "2026-10-22",
+   "results": "0 hits; ; . No match for supported submodules of arbitrary quasi-coherent modules. IdealSheafData.support_map concerns the closed subscheme defined by an ideal, and the pushforward section formulas alone do not state this support comparison with its quasi-coherence hypotheses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of a quasi coherent subsheaf of sections supported in an inverse image equals sections of the pushforward supported in the closed subset",
+   "date": "2026-10-22",
+   "results": "8 hits; ; TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, TopCat.Sheaf.pushforward_obj_val, SheafOfModules.pushforward, SheafOfModules.pushforwardSections. No match for supported submodules of arbitrary quasi-coherent modules. IdealSheafData.support_map concerns the closed subscheme defined by an ideal, and the pushforward section formulas alone do not state this support comparison with its quasi-coherence hypotheses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of a quasi coherent module commutes with the subsheaf of sections vanishing outside a closed subset with retrocompact complement",
+   "date": "2026-10-23",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap.  Read the returned types: ideal-sheaf kernels and structure-sheaf localization do not give the supported-submodule comparison for arbitrary quasi-coherent modules; general direct-image definitions do not give all the quasi-coherence clauses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Limits.kernel",
+   "date": "2026-10-23",
+   "results": "0 hits: .  Read the returned types: ideal-sheaf kernels and structure-sheaf localization do not give the supported-submodule comparison for arbitrary quasi-coherent modules; general direct-image definitions do not give all the quasi-coherence clauses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*(support|kernel)|(support|kernel).*pushforward",
+   "date": "2026-10-23",
+   "results": "0 hits: .  Read the returned types: ideal-sheaf kernels and structure-sheaf localization do not give the supported-submodule comparison for arbitrary quasi-coherent modules; general direct-image definitions do not give all the quasi-coherence clauses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward commutes with subsheaves of sections supported on a closed subset for quasicoherent modules",
+   "date": "2026-10-23",
+   "results": "8 hits: SheafOfModules.pushforwardSections, SheafOfModules.pushforward_map_val, TopCat.Sheaf.pushforward, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardSections_unitHomEquiv, TopCat.Sheaf.pushforward_sheaf_of_sheaf, AlgebraicGeometry.Scheme.Modules.pushforward_map_app.  Read the returned types: ideal-sheaf kernels and structure-sheaf localization do not give the supported-submodule comparison for arbitrary quasi-coherent modules; general direct-image definitions do not give all the quasi-coherence clauses.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image of the kernel of restriction to the open complement is the kernel of restriction of the direct image, and these sheaves are quasicoherent",
+   "date": "2026-10-23",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.IdealSheafData.map_ker, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.kerFunctor_map.  Read the returned types: ideal-sheaf kernels and structure-sheaf localization do not give the supported-submodule comparison for arbitrary quasi-coherent modules; general direct-image definitions do not give all the quasi-coherence clauses.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-affine-pushforward",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-cycle/semistable-alteration input through ILO X Theorem 3.4 proof Step 2: the Raynaud--Gruson flattening modification and proper transform, expanded via Stacks 081R. Affine-pushforward comparison in the last paragraph of Stacks 081R. Extracts old step 4 of the affine-pushforward argument: Pushforward of quasi-coherent sections supported on a closed subset.",
+   "via": [
+    "lem-trf-strict-transform-affine-pushforward",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-supported-sections-pushforward",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 07ZQ proof hint: base change of the retrocompact open inclusion, supported-section quasi-coherence via existing 07ZP node and qcqs pushforward via existing 01LC node, sectionwise equality with scalar and restriction compatibility, and naturality under the given isomorphism. No new nodes or statement changes. Searched project Lean, DAG, whole blueprint and Mathlib.",
+  "blueprint": "Serves the existing ancestor lem-trf-local-term-locality proof (1)--(2) through the recorded flattening/strict-transform chain, specifically the supported-submodule comparison in the affine-pushforward argument (Stacks 081R/080G). The current ancestor itself does not state this auxiliary scheme lemma; no unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-30dd4bcd0",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-30dd4bcd0 (reviewer sub-agent of L); spot-checked: Read the whole item, all 4 steps, every cited statement, and Stacks properties.tex 07ZP and 07ZQ (statement plus the 'Omitted (Hint)' proof) and schemes.tex 01K5 and 01LC. The delivery is one commit, with no new nodes, no re-split note and no SGA citation. The statement is the 07ZQ statement with the hint's quasi-coherence clauses and a β-transport clause added, which is what the parent strict-transform-affine-pushforward step 4 uses; it is not weakened. Stacks defines support through stalks and the item through zero restriction to the open complement; for a sheaf these agree. Step 1: j: Y∖Z→Y is quasi-compact because Y∖Z is retrocompact. Its base change along f is the open inclusion f⁻¹V→X, which is quasi-compact by clause (3) of lem-weil-pbc-qcqs-morphism-permanence (a Mathlib leaf, same affine-open notion of quasi-compact). So X∖f⁻¹Z is retrocompact, and the step avoids the false general claim about inverse images of retrocompact opens. Step 2: lem-trf-supported-sections-quasi-coherent (same unit, same zero-restriction definition) is applied twice with its hypotheses checked. pqf-lem-pushforward-qcoh (01LC) is Lean-closed with no sorry in QuasicoherentPushforwardQcqs.lean, so it is a tool and no tool_uses entry is needed. Step 3: the sets are equal because f⁻¹(U∖Z)=f⁻¹U∖f⁻¹Z, with the same module action and restriction maps; rightly elementary. Step 4: naturality plus injectivity of β_{U∖Z}; elementary. proof_deps equals the union of the step uses. Edge cases Z=∅, Z=Y, X=∅ and f an open immersion with Z its complement all check out. The DAG search for 07ZQ/07ZP and 'sections supported' finds no duplicate: the other 07ZQ citers, flattening-closed-immersion-transfer and supported-quotient-saturation, state different facts. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedSectionsPushforward",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.supportedSections_pushforward",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.supportedModuleRestriction",
+   "AlgebraicGeometry.Scheme.Modules.supportedModuleKernel",
+   "AlgebraicGeometry.Scheme.Modules.supportedModuleInclusion",
+   "AlgebraicGeometry.Scheme.Modules.supportedSections_pushforward"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedSectionsPushforward.lean",
+  "statement": "theorem supportedSections_pushforward {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (Z : TopologicalSpace.Closeds Y) (hZ : ∀ U : Y.affineOpens, IsCompact ((U : Y.Opens) ⊓ Z.compl : Set Y)) (F : X.Modules) [F.IsQuasicoherent] : (∀ W : X.affineOpens, IsCompact ((W : X.Opens) ⊓ (f ⁻¹ᵁ Z.compl) : Set X)) ∧ (supportedModuleKernel F (f ⁻¹ᵁ Z.compl)).IsQuasicoherent ∧ ((pushforward f).obj F).IsQuasicoherent ∧ (supportedModuleKernel ((pushforward f).obj F) Z.compl).IsQuasicoherent ∧ (∀ U : Y.Opens, LinearMap.range ((((pushforward f).map (supportedModuleInclusion F (f ⁻¹ᵁ Z.compl))).val.app (op U)).hom) = LinearMap.range (((supportedModuleInclusion ((pushforward f).obj F) Z.compl).val.app (op U)).hom)) ∧ (∀ (H : Y.Modules) (β : H ≅ (pushforward f).obj F) (U : Y.Opens), LinearMap.range ((((supportedModuleInclusion H Z.compl) ≫ β.hom).val.app (op U)).hom) = LinearMap.range ((((pushforward f).map (supportedModuleInclusion F (f ⁻¹ᵁ Z.compl))).val.app (op U)).hom))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62bd7ad2e",
+  "group": "N9",
+  "result": "pass",
+  "note": "Node differs from live only in lean; lean.statement verbatim in file. Hypotheses = node's (qc+qs f, Closeds Z with affine-retrocompact complement, F qcoh only; no qc of Y). K_X/K_Y = kernel of restrictAdjunction unit (Mathlib unit_app_app: restriction W→W∩V; kernels sectionwise) = node's subsheaves; real data helpers with source/blueprint docstrings. Six conjuncts: retrocompactness on affine opens of X, qcoh of K_X, f_*F, K_Y, sectionwise equality of LinearMap.range in the same (f_*F)(U), β-clause for arbitrary H. Edge cases Z=∅, Z=Y, X=∅ covered. No existing Zariski supported-kernel decl (Etale.supportedKernel is étale); 07ZP siblings have no Lean yet (advisory: reuse supportedModuleKernel). Proof docstring has 4 steps; only sorry; universes bound; no pro-étale. No files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T091437-L-3342656",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-per-smooth-parameter-quotient-diagram",
+ "kind": "statement",
+ "title": "Parameter quotient diagram and its residue colimit",
+ "statement": "Let k be a field, B a commutative local k-algebra and t:Fin d→B a tuple generating its maximal ideal. Let I be a nonempty directed partial order, C:I→CommAlgCat k a diagram, τ a natural family k[X_i]→C_a and β a natural family C_a→B whose composites are evaluation at t. Assume every τ_a is smooth on affine spectra and β is a colimit cocone in commutative rings. Then each C_a is nonzero regular Noetherian with τ_a(X_i) a regular sequence. There is a compatible diagram D of the actual parameter quotients (with equivalences identifying q_a with their quotient projections), maps q:C→D and γ:D→B/n, every D_a is nonzero regular Noetherian smooth over k, and each Spec(q_a) is a regular closed immersion of codimension d. The cocone γ is a ring colimit and γ_a∘q_a=residue∘β_a. No regularity or completeness of B and no prime-field condition on k is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-sequence",
+  "def-per-regular-closed-immersion-codimension",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/divisors.tex",
+  "place": "Algebra, Tags 00T4 and 00TA; Algebra, Tag 07NF; quotient universal properties; original node steps 7–9."
+ },
+ "proof": [
+  {
+   "text": "For each stage define K_a as the span of τ_a(X_i). Naturality of τ makes transitions preserve K_a, so quotient maps construct a functor D_a=C_a/K_a and the natural quotient q. Compatibility of β with evaluation and generation of the maximal ideal show that residue∘β_a kills K_a; quotient lifts construct γ and its naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The maps γ_a to the nonzero residue field make D_a nonzero. Apply the single-stage smooth polynomial parameter lemma to obtain regularity, the stage sequence, smoothness of D_a over the base, and the codimension-d quotient immersion. The normalization equivalence is the identity.",
+   "uses": [
+    "lem-per-smooth-polynomial-parameter-stage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given a cocone on D with vertex R, compose its legs with q. The supplied colimit property gives a unique ring map g:B→R. For any one stage a, evaluating its colimit factorization on τ_a(X_i) shows g(t_i)=0. Thus g kills the maximal ideal and has a unique quotient lift from the residue field. The factorization equations follow from the colimit equations before quotienting, and uniqueness follows by the original colimit hom-ext principle and surjectivity of the residue projection. The displayed commuting square holds by construction.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-per-smooth-polynomial-parameter-stage",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/divisors.tex",
+  "place": "Algebra, Tags 00T4 and 00TA; Algebra, Tag 07NF; quotient universal properties; original node steps 7–9."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PrimeLocalSmoothParameterModels",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof of lem-per-prime-local-smooth-parameter-models: Algebra, Tags 00T4 and 00TA; More on Algebra, Tag 07NF; quotient universal properties; original node steps 7–9.",
+   "via": [
+    "lem-per-prime-local-smooth-parameter-models",
+    "lem-per-trait-test-prime-field-local-input",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Taking quotients by a compatible finite family of elements preserves a colimit of commutative rings",
+   "results": "Found generic CommRingCat colimit constructions, not the normalized quotient diagram.",
+   "date": "2026-10-26",
+   "verdict": "No exact packaged result; reuse the listed algebraic and categorical primitives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking quotients by compatible ideals commutes with a colimit of commutative rings",
+   "results": "Found double-quotient equivalences and their equations, no diagram statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact packaged result; reuse the listed algebraic and categorical primitives."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Cc]olimit|[Cc]olimit.*quotient",
+   "results": "Mathlib hits are generic colimit constructions. Project LocalColimitResidueField requires local stages and local transitions, not supplied here.",
+   "date": "2026-10-26",
+   "verdict": "No exact packaged result; reuse the listed algebraic and categorical primitives."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothParameterQuotientDiagram",
+  "file": "lean/Sheaf/RingTheory/SmoothParameterQuotientDiagram.lean",
+  "declaration": "IsLocalRing.smooth_parameter_quotient_diagram",
+  "statement": "theorem smooth_parameter_quotient_diagram (k₀ B : Type u) [Field k₀] [CommRing B] [Algebra k₀ B] [IsLocalRing B] (d : ℕ) (t : Fin d → B) (hgen : Ideal.span (Set.range t) = maximalIdeal B) (I : Type u) [PartialOrder I] [IsDirected I (· ≤ ·)] [Nonempty I] (C : I ⥤ CommAlgCat.{u} k₀) (τ : (Functor.const I).obj (CommAlgCat.of k₀ (MvPolynomial (Fin d) k₀)) ⟶ C) (β : C ⟶ (Functor.const I).obj (CommAlgCat.of k₀ B)) (hcompat : ∀ a : I, (β.app a).hom.comp (τ.app a).hom = MvPolynomial.aeval t) (hsmooth : ∀ a : I, Smooth (Spec.map (CommRingCat.ofHom (τ.app a).hom.toRingHom))) (hcolim : Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} k₀) CommRingCat.{u}).mapCocone { pt := CommAlgCat.of k₀ B, ι := β }))) : (∀ a : I, Nontrivial (C.obj a) ∧ IsRegularRing (C.obj a) ∧ RingTheory.Sequence.IsRegular (C.obj a) (List.ofFn fun i : Fin d ↦ (τ.app a).hom (MvPolynomial.X i))) ∧ ∃ (D : I ⥤ CommAlgCat.{u} k₀) (q : C ⟶ D) (γ : D ⟶ (Functor.const I).obj (CommAlgCat.of k₀ (ResidueField B))), (∀ a : I, ∃ e : (C.obj a ⧸ Ideal.span (Set.range fun i : Fin d ↦ (τ.app a).hom (MvPolynomial.X i))) ≃ₐ[k₀] D.obj a, ∀ x : C.obj a, e (Ideal.Quotient.mk (Ideal.span (Set.range fun i : Fin d ↦ (τ.app a).hom (MvPolynomial.X i))) x) = (q.app a).hom x) ∧ (∀ a : I, Nontrivial (D.obj a) ∧ IsRegularRing (D.obj a) ∧ Smooth (Spec.map (CommRingCat.ofHom (algebraMap k₀ (D.obj a)))) ∧ IsRegularClosedImmersionWithCodimension (Spec.map (CommRingCat.ofHom (q.app a).hom.toRingHom)) (fun _ ↦ d)) ∧ Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} k₀) CommRingCat.{u}).mapCocone { pt := CommAlgCat.of k₀ (ResidueField B), ι := γ })) ∧ (∀ a : I, (γ.app a).hom.toRingHom.comp (q.app a).hom.toRingHom = (residue B).comp (β.app a).hom.toRingHom)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T082508-L-2182808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T082508-L-2182808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

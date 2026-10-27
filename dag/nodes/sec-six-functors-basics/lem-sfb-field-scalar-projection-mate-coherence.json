@@ -1,0 +1,555 @@
+{
+ "id": "lem-sfb-field-scalar-projection-mate-coherence",
+ "kind": "statement",
+ "title": "Scalar projection mates and coherence for field geometric sections",
+ "statement": "Let $k$ be a field, $k^s/k$ a separable closure, $s=\\operatorname{Spec}k$, $\\bar s=\\operatorname{Spec}k^s$, and $G=\\operatorname{Aut}_k(k^s)$ with its Krull topology. Work on sites small in compatible coefficient universes [def-weil-size-convention, def-weil-pbc-proetale-site]. Put $\\underline G(P)=C(P,G)$ for profinite $P$, and $T[P]=\\varprojlim_i\\coprod_{P_i}T$ over finite quotients [lem-weil-pbc-profinite-test-object-functor]. For a commutative condensed ring $R$ put $R_T=p_T^*R$, use internal module categories and ordinary unbounded derived categories, and write $\\mathcal A_G(R)$ for internal $R$-modules with $\\underline G$-action [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-categories, def-sfb-condensed-action-module].\n\nLet $a:X\\to s$ be the structure morphism of a qcqs $k$-scheme, $X^s=X\\times_k k^s$ with projection $u$, and $\\varphi:R\\to R'$ any condensed ring map. Suppose given field data $E_R,E_{R'}$, their normalized scalar adjunction data, and the ordinary and derived geometric section identifications of [def-sfb-field-action-transport-data, def-sfb-field-action-scalar-transport-data, def-sfb-field-action-geometric-transport-data]. Use $\\mathcal K_R$ as in [lem-sfb-condensed-galois-global-descent] and assume the geometric and scheme scalar-restriction comparisons $\\rho$ are the canonical derived composition comparisons with identity ordinary section maps. For every $M\\in D(R_X)$ put $S_T=R'_T\\otimes^L_{R_T}-$, $S_G=R'\\otimes_R^L-$ and let $\\eta$ be the scalar unit. Define\n$$\\beta_M:S_G\\mathcal K_R(M)\\longrightarrow\\mathcal K_{R'}(S_XM)$$\nto be the scalar-adjunction transpose of $\\mathcal K_R(M)\\xrightarrow{\\mathcal K_R(\\eta_M)}\\mathcal K_R(\\operatorname{Res}_X S_XM)\\xrightarrow{\\rho}\\operatorname{Res}_G\\mathcal K_{R'}(S_XM)$.\n\nThen the corresponding field-side transpose $\\chi_M:S_sRa_{*,R}M\\to Ra_{*,R'}S_XM$ is exactly the coefficient projection whose adjunct under $a_{R'}^*\\dashv Ra_{*,R'}$ is\n$$a_{R'}^*S_sRa_{*,R}M\\cong S_Xa_R^*Ra_{*,R}M\\xrightarrow{S_X\\varepsilon_M}S_XM.$$\nThe direct-image comparison $\\rho$ is conjugate to the derived pullback comparison $a_{R'}^*S_s\\cong S_Xa_R^*$; the conjugacy counit equation and the two adjunction triangle identities identify the scalar transpose with this displayed adjunct even when $\\varphi$ is non-flat. Under $D(E_{R'})Ra_{*,R'}\\cong\\mathcal K_{R'}$ and the normalized scalar-extension comparison, $D(E_{R'})(\\chi_M)=\\beta_M$.\n\nAfter restricting to the slices at $\\bar s$ and $X^s$ and using $p_{X^s}=p_{\\bar s}a_s$, the forgotten $\\beta_M$ is precisely\n$$R'\\otimes_R^LRp_{X^s*}u^*M\\longrightarrow Rp_{X^s*}(R'_{X^s}\\otimes^L_{R_{X^s}}u^*M).$$\nIts adjunct under the $R'$-linear point adjunction is scalar extension of the point counit after the canonical pullback/scalar-tensor exchange. Its $R$-linear form is the projection mate for $p_{X^s}$ with tensor argument $R'$. These are the same morphism under scalar adjunction, using the conjugacy equation for the coefficient/geometric square. Thus the object identifications and the projections give coefficient data of [def-sfb-field-action-coefficient-transport-data].\n\nAll these object comparisons and specified morphisms are natural in input morphisms, compatible with scalar restriction, and commute with canonical integer shifts. The coefficient-restriction squares use the cocycle of the normalized direct-image composition, and the shift structures are the canonical right-derived and adjoint unit/counit-compatible ones. In particular the projection commutes with shifts in $M$, not just in its scalar tensor argument. Exactness of geometric coefficient pullbacks and of the separably closed field presentation suffices for the composition-adjunction normalization; scalar extension itself is not assumed exact.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10; Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; extracted returned field-action proof steps 11, 12, 13. Agent formulation; complete inherited argument and citation mapping retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-action-module",
+  "def-sfb-field-action-transport-data",
+  "def-sfb-field-action-scalar-transport-data",
+  "def-sfb-field-action-geometric-transport-data",
+  "def-sfb-field-action-coefficient-transport-data",
+  "lem-sfb-condensed-galois-global-descent"
+ ],
+ "proof": [
+  {
+   "text": "Write $L=a_R^*$, $F=Ra_{*,R}$, $L'=a_{R'}^*$, $F'=Ra_{*,R'}$, and $V_T=\\operatorname{Res}_T$. All products denote functional composition. By [lem-sfb-internal-scalar-pullback-normalization] the specified internal scalar/pullback comparison is the natural isomorphism $\\lambda:L'S_s\\cong S_XL$, normalized on K-flat tensors and on the actual geometric adjunctions. It requires no flatness. By [lem-weil-pbc-ring-sheaf-change-adjunction], the coefficient square also has an adjunction-compatible comparison $b:LV_s\\cong V_XL'$ (the inverse of that lemma's $b$). Its right comparison is the given $\\rho:F V_X\\cong V_sF'$, with the inverse orientation to that lemma's $d$. The hypotheses hold because $a^{-1}R_s\\cong R_X$ and $a^{-1}R'_s\\cong R'_X$ are the cartesian coefficients pulled from the point, and their ring-map square commutes. That lemma is stated for the adjunctions $Lu^*\\dashv Ru_*$ of [def-weil-pbc-proetale-operations] with $u=a$ and $c$ the coefficient identifications from the point, while the internal normalization lands in the ringed derived pullback and K-injective direct image of the section model [lem-pd-section-derived-pushpull-normalization]. These coincide: the section-model inverse image is the same tensor-formula pullback $a^{-1}(-)\\otimes_{a^{-1}R_s,c}R_X$ with the same ordinary module adjunction, exact because $c$ is invertible, so its derived functor is termwise on every complex, and both direct images are computed on K-injective resolutions. Hence both derived adjunctions are the unique bijection of [lem-pc-pre-derived-adjoint-functors-general] induced by that one ordinary adjunction, over $R$ and over $R'$. Thus these are the canonical composition comparisons, rather than a new choice of isomorphisms.",
+   "uses": [
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations",
+    "lem-pd-section-derived-pushpull-normalization",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint); internal normalization via the cited lemmas"
+   }
+  },
+  {
+   "text": "The comparison $\\rho$ is conjugate to $\\lambda$ for the composite adjunctions $L'S_s\\dashv V_sF'$ and $S_XL\\dashv FV_X$: apply [lem-sfb-ringed-comparison-tensor-adjunction] to the two routes from $(X,R'_X)$ to $(s,R_s)$, one changing coefficients at $X$, the other at $s$. Identity-underlying-topos coefficient morphisms have left derived functors $S_T$ and exact right adjoints $V_T$. Its conjugacy counit equation applies with no exactness assumption on $S_T$. The same comparison's geometric-restriction form, or directly step 1's transpose equation, gives, for every $N\\in D(R'_X)$,\n$$V_X(\\varepsilon'_N)\\,b_{F'N}\\,L(\\rho_N)=\\varepsilon_{V_XN}.$$\nLet $\\eta^T$ be the scalar units. Scalar-adjunction normalization of the pullback exchange says\n$$V_X(\\lambda_A^{-1})\\,\\eta^X_{LA}=b_{S_sA}\\,L(\\eta^s_A).$$\nIndeed the inverse scalar mate of $b$ is $\\lambda^{-1}$: on flat-term K-flat representatives both send the inverse image of $m\\otimes r'$ to the same balanced tensor, with unit $m\\mapsto1\\otimes m$, by [lem-sfb-kflat-scalar-comparison-normalization]. These two equations specify the directions of all comparisons used below.",
+   "uses": [
+    "lem-sfb-ringed-comparison-tensor-adjunction",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D, 0D6E, 07A6; agent application of conjugacy to the coefficient square and its normalized scalar mate"
+   }
+  },
+  {
+   "text": "Set $A=FM$, $N=S_XM$, and let $\\chi:S_sA\\to F'N$ be the scalar transpose of $\\rho_NF(\\eta^X_M)$. Its geometric adjunct is $t=\\varepsilon'_N L'(\\chi)$. Compute the scalar transpose of $t\\lambda_A^{-1}:S_XLA\\to N$, using step 2 and naturality of $b$:\n$$\\begin{aligned}\nV_X(t\\lambda_A^{-1})\\eta^X_{LA}\n&=V_X(\\varepsilon'_N)b_{F'N}L\\bigl(V_s(\\chi)\\eta^s_A\\bigr)\\\\\n&=V_X(\\varepsilon'_N)b_{F'N}L(\\rho_N)LF(\\eta^X_M)\\\\\n&=\\varepsilon_{V_XN}LF(\\eta^X_M)\n=\\eta^X_M\\varepsilon_M.\n\\end{aligned}$$\nThe last equality is naturality of the geometric counit. The scalar transpose of $S_X(\\varepsilon_M)$ is also $\\eta^X_M\\varepsilon_M$, by naturality of the scalar unit. Injectivity of the adjunction bijection therefore gives $t=S_X(\\varepsilon_M)\\lambda_{FM}$, exactly the displayed adjunct of the item. The unit/counit transpose formulas are [def-weil-pbc-adjunction-mate]; their inverse property is the two triangle identities. Thus this calculation compares the actual arrows, without assuming any scalar extension is exact.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0B56 (equation-projection-formula-map); explicit two-adjunction computation"
+   }
+  },
+  {
+   "text": "Transport the scalar transpose defining $\\chi$ through $D(E_R)$ and $D(E_{R'})$. The scalar squares in [def-sfb-field-action-scalar-transport-data] preserve every Hom transpose, including its units. The geometric identifications of [def-sfb-field-action-geometric-transport-data] are normalized by the identity ordinary section maps and the total-derived units. The scheme and geometric restriction comparisons in the hypothesis have the same normalization. Their square therefore commutes: its two routes are the direct-image composition comparisons for the same ringed composite, with the identity ordinary section map, and the cocycle [lem-pur-ringed-derived-composition-cocycle] equates these routes. Consequently the transported untransposed arrow is exactly $\\mathcal K_R(\\eta_M)$ followed by the stipulated geometric $\\rho$. Since its scalar transpose is the definition of $\\beta_M$, we get $D(E_{R'})(\\chi_M)=\\beta_M$ under the specified object and scalar-extension identifications.",
+   "uses": [
+    "def-sfb-field-action-scalar-transport-data",
+    "def-sfb-field-action-geometric-transport-data",
+    "lem-pur-ringed-derived-composition-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition); agent pasting of the normalized field and coefficient squares"
+   }
+  },
+  {
+   "text": "Put $v:\\bar s\\to s$, $a_s:X^s\\to\\bar s$. Use [lem-sfb-field-free-orbit-derived-slice-sections]: the slice at $h_{\\bar s}$ is forgetting the action, and $v^*FM\\cong Ra_{s*}u^*M$ uses precisely the given section normalization. Its final clause preserves the actual geometric counit and K-flat scalar comparison. More explicitly, [lem-sbc-ringed-topos-sheaf-slice-derived-comparison], with $f=a$ and target sheaf $h_{\\bar s}$, gives source sheaf $a^{-1}h_{\\bar s}=h_{X^s}$ and the equation $u^*(\\varepsilon_M)\\theta_{FM}=\\varepsilon^{a_s}_{u^*M}a_s^*(\\beta^{\\rm slice}_M)$. Apply this to the adjunct computed in step 3; K-flat scalar exchange restricts to the exchange for the restricted rings. Thus its restriction is exactly the scalar extension of the $a_s$-counit, preceded by the restricted pullback/scalar comparison. This uses arbitrary sheaf slices, so does not assume $\\bar s\\to s$ is an object of an affine small-site presentation.",
+   "uses": [
+    "lem-sfb-field-free-orbit-derived-slice-sections",
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites Tag 04IF (lemma-localize-morphism-ringed-topoi); normalized unbounded slice counit equation"
+   }
+  },
+  {
+   "text": "Identify the pro-etale topos of $\\bar s$ with the condensed topos, as in the stipulated field presentation, and use $p_{X^s}=p_{\\bar s}a_s$. The left adjoints $a_s^*$ and the coefficient pullback $p_{\\bar s}^*$ are exact; the latter is an equivalence. Apply [lem-sfb-derived-composition-adjunction-normalization] to this composite, separately over $R$ and $R'$. Its normalized counit is the composite counit\n$$\\varepsilon^p_H=\\varepsilon^{a_s}_H\\circ a_s^*(\\varepsilon^{p_{\\bar s}}_{Ra_{s*}H}),\\qquad H=u^*M.$$\nThe normalized scalar square for $p_{\\bar s}$ is part of the given scalar data [def-sfb-field-action-scalar-transport-data]. Paste this square with step 5's restricted square. Expanding the two geometric adjuncts gives $S_{X^s}(\\varepsilon^{a_s}_H)\\circ S_{X^s}a_s^*(\\varepsilon^{p_{\\bar s}}_{Ra_{s*}H})$ after their pullback/scalar exchanges. Naturality of those exchanges moves the second counit through them; the displayed composite is $S_{X^s}(\\varepsilon^p_H)$. The adjunction bijection then identifies the forgotten $\\beta_M$ with\n$$R'\\otimes_R^LRp_{X^s*}H\\longrightarrow Rp_{X^s*}(R'_{X^s}\\otimes^L_{R_{X^s}}H),$$\nwhose $R'$-linear point adjunct is the prescribed scalar extension of $\\varepsilon^p_H$. This is equality in the derived category, not only after cohomology.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-sfb-field-action-scalar-transport-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories Tag 09T5 (lemma-derived-adjoint-functors); Tag 0D6E, exact-left-adjoint composition and its composite counit"
+   }
+  },
+  {
+   "text": "For the $R$-linear form at $p=p_{X^s}$, use [lem-sfb-internal-section-scalar-adjunction] on both the condensed site and $X^s_{\\rm proet}$ to identify internal and ring-sheaf scalar adjunctions. No flatness is needed. Apply [lem-sfb-ringed-comparison-tensor-adjunction] to the two coefficient/geometric routes over $p$; its conjugacy equation changes the $R'$-linear point adjunct of step 6 to the $R$-linear adjunct\n$$p_R^*(R'\\otimes_R^LRp_*H)\\cong R'_{X^s}\\otimes^L_{R_{X^s}}p_R^*Rp_*H\\xrightarrow{1\\otimes\\varepsilon^p_H}R'_{X^s}\\otimes^L_{R_{X^s}}H.$$\nTo see this is the specified exchange, [lem-sfb-kflat-scalar-comparison-normalization] sends $p^{-1}(r'\\otimes m)$ to $p^{-1}r'\\otimes p^{-1}m$, with the same scalar unit. This is exactly the symmetric version of the projection mate for tensor argument $R'$ in [lem-weil-pbc-ringed-projection-mate-exact]. Hence the two linear forms agree under scalar adjunction, with the given conjugacy normalization.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-ringed-comparison-tensor-adjunction",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0B56; scalar/geometric conjugacy on the point morphism and its counit-transpose projection"
+   }
+  },
+  {
+   "text": "All displayed constructions use natural transformations and adjunction bijections natural in both variables, so substitution of $M\\to N$ gives the required input squares. For coefficient restriction, regard each restriction as direct image on an identity-underlying-topos ring morphism. The two routes through a successive restriction and a geometric direct image are the two parenthesizations of one triple composite; [lem-pur-ringed-derived-composition-cocycle] equates them. Pasting with the normalized scalar squares preserves their Hom transposes. Thus the coefficient-restriction squares commute for $\\chi$ and $\\beta$, and also after the slice/point identifications of steps 5–7. For successive extension maps the specified projections obey the cocycle of [lem-pur-ringed-coefficient-projection-cocycle]; its identity and commutative-coefficient-square clauses ensure that these are the canonical coefficient comparisons, with no invertibility of projection assumed.",
+   "uses": [
+    "lem-pur-ringed-derived-composition-cocycle",
+    "lem-pur-ringed-coefficient-projection-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, normalized composition cocycle; Tag 0E47 (remark-compose-base-change-horizontal), coefficient projection cocycle"
+   }
+  },
+  {
+   "text": "For shifts, [lem-weil-pbc-derived-adjunction-shift] gives the canonical unit/counit-compatible shifts on the geometric adjunctions, and also on each scalar adjunction viewed as the derived adjunction of an identity-underlying-topos coefficient morphism. The given scalar and geometric data preserve these shifts. The K-flat tensor/pullback exchanges have the canonical signed total-tensor shift comparison [lem-weil-pbc-ringed-projection-mate-exact]. Therefore shifting the defining adjunct $S_X(\\varepsilon_M)\\lambda_{FM}$ gives exactly its counterpart at $M[n]$; the shift-compatible adjunction bijection gives the same equation for $\\chi$. Step 4 transfers it to $\\beta$; steps 5–7 transfer it to the point projection. In its $R$-linear form the required first-input shift equation is stated explicitly by [lem-sfb-ringed-projection-first-shift], applied to $p_{X^s}$ with fixed tensor factor $R'$. Thus the assertion includes shifts in $M$, not only shifts of the scalar factor. Finally the natural comparisons, restriction equations, field projection equality and point projection equality established above are precisely the fields required by [def-sfb-field-action-coefficient-transport-data]. They supply that coefficient datum, with no exactness assertion about $S_T$.",
+   "uses": [
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-ringed-projection-first-shift",
+    "def-sfb-field-action-coefficient-transport-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6, 07A4, 0B56; Derived Categories Tag 0A8D (lemma-adjoint-is-exact); canonical first-input shift equation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-field-action-coefficient-transport-data",
+  "def-sfb-field-action-geometric-transport-data",
+  "def-sfb-field-action-scalar-transport-data",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-proetale-operations",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sfb-field-free-orbit-derived-slice-sections",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-sfb-ringed-projection-first-shift",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6E, 07A4, 0B56; explicit two-adjunction calculation and normalized field/slice transport, expanding inherited field-action proof steps 11–13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Under field action equivalence coefficient projection is the scalar adjunction transpose and forgetting action preserves the counit projection map",
+   "results": {
+    "t": "2026-10-22T06:05:51Z",
+    "tool": "leanfinder",
+    "query": "Under field action equivalence coefficient projection is the scalar adjunction transpose and forgetting action preserves the counit projection map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Field.Emb.Cardinal.succEquiv_coherence",
+     "Algebra.Generators.CotangentSpace.compEquiv_symm_inr",
+     "MvPolynomial.ACounit_X",
+     "Algebra.Generators.toExtension_σ",
+     "ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+     "Algebra.Extension.algebraMap_σ",
+     "InfiniteGalois.toAlgEquivAux_eq_proj_of_mem",
+     "ModuleCat.RestrictionCoextensionAdj.counit'_app"
+    ],
+    "digest": "598c38030b3bea86"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Module scalar formulas and discrete condensed counits do not identify these field and point derived projection mates and shift squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient projection for derived geometric sections commutes with scalar restriction and shifts by conjugate adjunction comparisons",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "leanfinder",
+    "query": "Coefficient projection for derived geometric sections commutes with scalar restriction and shifts by conjugate adjunction comparisons",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.unitHomEquiv_symm_comp",
+     "SheafOfModules.unitHomEquiv_comp_apply",
+     "ModuleCat.restrictScalarsComp'App_inv_naturality",
+     "ModuleCat.restrictScalarsComp'App_inv_naturality_assoc",
+     "CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp",
+     "ModuleCat.homEquiv_extendScalarsComp",
+     "ModuleCat.restrictScalarsComp'App_hom_naturality",
+     "CategoryTheory.Sheaf.ΓRes_map"
+    ],
+    "digest": "d96a920da8c93d6b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Module scalar formulas and discrete condensed counits do not identify these field and point derived projection mates and shift squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"projection\"",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"projection\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Module scalar formulas and discrete condensed counits do not identify these field and point derived projection mates and shift squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived ringed topos coefficient projection scalar adjunction mate naturality shift compatibility",
+   "results": {
+    "t": "2026-10-22T06:06:09Z",
+    "tool": "leansearch",
+    "query": "Derived ringed topos coefficient projection scalar adjunction mate naturality shift compatibility",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Proetale).*(projection|Projection|counit)|(projection|Projection).*Galois",
+   "results": {
+    "t": "2026-10-22T06:06:09Z",
+    "tool": "grep",
+    "query": "(Condensed|Proetale).*(projection|Projection|counit)|(projection|Projection).*Galois",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/SetTheory/Cardinal/ENat.lean",
+     "Mathlib/Condensed/Discrete/Characterization.lean",
+     "Mathlib/Condensed/Discrete/Characterization.lean",
+     "Mathlib/Condensed/Discrete/Characterization.lean",
+     "Mathlib/Condensed/Discrete/Characterization.lean",
+     "Mathlib/Condensed/Discrete/Characterization.lean",
+     "Mathlib/Condensed/Light/Sequence.lean",
+     "Mathlib/Condensed/TopCatAdjunction.lean"
+    ],
+    "digest": "a18a06ebf7c4ec15"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Module scalar formulas and discrete condensed counits do not identify these field and point derived projection mates and shift squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient projection is the scalar extension adjunction transpose of direct image of the scalar unit and commutes with shifts",
+   "results": {
+    "t": "2026-10-23T04:28:06Z",
+    "tool": "leanfinder",
+    "query": "Derived coefficient projection is the scalar extension adjunction transpose of direct image of the scalar unit and commutes with shifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Abelian.Ext.homLinearEquiv",
+     "CategoryTheory.Adjunction.derivedη_fac_app",
+     "DerivedCategory.instLinearSingleFunctor",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift"
+    ],
+    "digest": "195d9af146c0e9ed"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give generic adjunction/shift calculus or scheme module formulas, not the full normalized field/action/slice coefficient projection assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarProjection|pointProjection|conjugateEquiv|derived_counit",
+   "results": {
+    "t": "2026-10-23T04:29:38Z",
+    "tool": "grep",
+    "query": "scalarProjection|pointProjection|conjugateEquiv|derived_counit",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean"
+    ],
+    "digest": "d7e09111efcd828a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give generic adjunction/shift calculus or scheme module formulas, not the full normalized field/action/slice coefficient projection assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient projection for geometric sections is the scalar adjunction transpose and respects integer shifts",
+   "results": {
+    "t": "2026-10-23T04:29:38Z",
+    "tool": "leansearch",
+    "query": "Derived coefficient projection for geometric sections is the scalar adjunction transpose and respects integer shifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+     "CategoryTheory.Adjunction.derivedη",
+     "IsLocalFrameOn.coeff",
+     "FormalMultilinearSeries.coeff_fslope",
+     "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+     "MvPowerSeries.coeff",
+     "CochainComplex.shiftEval",
+     "DerivedCategory.instCommShiftCochainComplexIntQ"
+    ],
+    "digest": "b690933e20d5892c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give generic adjunction/shift calculus or scheme module formulas, not the full normalized field/action/slice coefficient projection assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.conjugateEquiv",
+   "results": {
+    "t": "2026-10-23T04:29:38Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction, CategoryTheory.conjugateEquiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.conjugateEquiv",
+     "CategoryTheory.conjugateEquiv_id",
+     "CategoryTheory.conjugateEquiv_iso",
+     "CategoryTheory.conjugateEquiv_of_iso",
+     "CategoryTheory.conjugateEquiv_symm_id",
+     "CategoryTheory.conjugateEquiv_symm_iso",
+     "CategoryTheory.conjugateEquiv_symm_of_iso",
+     "CategoryTheory.conjugateEquiv_adjunction_id"
+    ],
+    "digest": "ba8c03cd98cda1e3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give generic adjunction/shift calculus or scheme module formulas, not the full normalized field/action/slice coefficient projection assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing rings and taking geometric derived sections compare by conjugate pullback adjunction squares including forgotten Galois action",
+   "results": {
+    "t": "2026-10-23T04:29:39Z",
+    "tool": "leanfinder",
+    "query": "Changing rings and taking geometric derived sections compare by conjugate pullback adjunction squares including forgotten Galois action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app",
+     "AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply",
+     "AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq",
+     "AlgebraicGeometry.Spec_Γ_naturality_assoc",
+     "AlgebraicGeometry.ΓSpec.adjunction",
+     "AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv"
+    ],
+    "digest": "dfc4f168c100557d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give generic adjunction/shift calculus or scheme module formulas, not the full normalized field/action/slice coefficient projection assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-action-derived-section-transport",
+  "date": "2026-10-22",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; extracted returned field-action proof steps 11, 12, 13.",
+   "via": [
+    "lem-sfb-field-action-derived-section-transport",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-scalar-projection-mate-coherence",
+  "worker": "stage1",
+  "summary": "Kept the statement and its coefficient universes and non-flat scope. Expanded the scalar/geometric conjugacy into a typed two-adjunction calculation, then restricted its actual counit formula to the free-orbit slice, composed to the point, and checked scalar restriction and first-input shifts. Reused existing general normalization lemmas; no new nodes.",
+  "blueprint": "Expands the extracted field-action proof steps 11, 12, 13 in Paragraph (3) beneath lem-sfb-geometric-condensed-finite-scalar-model. The existing ancestor command reports from.node=None; retained that recorded ancestry and concrete from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-pur-ringed-derived-composition-cocycle",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-internal-scalar-pullback-normalization",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-first-shift",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic normalized adjunction, tensor, slice or derived-composition tool used in the indicated proof step; the field-action unit supplies no replacement for this general comparison theorem."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic uniqueness of the derived adjunction bijection induced by one ordinary adjunction; identifies the section-model and def-weil-pbc-proetale-operations derived adjunctions in step 1 (bridge added by the Q112 maintainer reader)."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic section-model derived push-pull adjunction normalization; names the adjunctions the internal normalization identifies, for the step 1 bridge (Q112 maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-sfb-ringed-projection-first-shift",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pd-section-derived-pushpull-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-a7c375668",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-a7c375668 (reviewer sub-agent of L); spot-checked: Read the item in full. It has 0 new nodes. Statement and stmt_deps are byte-identical to the live/side-live unsplit node, and no target is weakened. There is no repair note for this item: the 10-21 re-split note belongs to its parent, lem-sfb-field-action-derived-section-transport. One fault, C3/E1, repaired: step 1 applies lem-weil-pbc-ring-sheaf-change-adjunction, which is stated for the adjunctions of def-weil-pbc-proetale-operations, to the internal adjunctions. lem-sfb-internal-scalar-pullback-normalization identifies those only with the section-model ringed adjunctions of lem-pd-section-derived-pushpull-normalization. This is the same gap as Q03 3ed0 and Q84 d920. I added the bridge: both models use the same tensor-formula pullback a^{-1}(-)⊗_{a^{-1}R_s,c}R_X with the same ordinary adjunction, exact because c is invertible; both direct images use K-injective resolutions; so both derived adjunctions are the unique bijection of lem-pc-pre-derived-adjoint-functors-general. Added 3 uses and proof_deps (all already in the closure) and 2 tool_uses. Remaining steps, checked by hand. Step 2: the first equation, V_X(ε'_N)b_{F'N}L(ρ_N)=ε_{V_XN}, follows from the ring-sheaf compatibility with t=ε'_N and t♯=id, using b=b_lemma⁻¹ and ρ=d⁻¹. The second says λ⁻¹ is the inverse scalar mate of b; this is lem-sfb-kflat-scalar-comparison-normalization (θ_h=χ_h⁻¹ is the mate of the action identification). The ringed-comparison conjugacy fits with W=(X,R'), X1=(X,R), X2=(s,R'), Y=(s,R). Step 3: recomputed the whole transpose chain; it gives t=S_X(ε_M)λ_{FM}. Step 4: transport via the scalar/geometric data plus the composition cocycle, whose identity-topos clause applies. Step 5: the slice lemma with A=h_s̄ gives B=h_{X^s} and the counit equation. Step 6: composition-adjunction normalization applies because a_s^* and p_s̄^* are exact; it is not applied to S. Step 7: the R-linear form is α of ringed-projection-mate-exact with E=H, P=R'. Step 8: the direct-image cocycle and the coefficient-projection cocycle are used separately. Step 9: the first-shift node gives the shift in M. Edge cases tested: φ=id, Z→Z/n, X=s, k separably closed, M=0, unbounded M. Stacks tags 07A4/0D6D/0D6E/07A6/0B56/0E47/04IF/09T5/0A8D match their labels. No SGA. No duplicate in the DAG. Batch-5 flags: def-pd-section-module-operations-data is only a definition of section-module operations data, and lem-pod-derived-exact-square-composition is an abstract identity for derived squares of exact functors. Both are generic and lie outside the trace-formula and Poincaré-duality assumptions and their proofs, so both are accepted. The 12 declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldScalarProjectionMateCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldActionTransport.field_scalar_projection_mate_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.fieldScalarProjectionPushAdditive",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.condensedScalarProjectionCommShift",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.field_scalar_projection_mate_coherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldScalarProjectionMateCoherence.lean",
+  "statement": "theorem field_scalar_projection_mate_coherence [CompactSpace X] [QuasiSeparatedSpace X] (arithmeticRestriction : CoefficientComparison.{u} (restrictX φ X) (restrictX φ (Spec (.of k))) (CondensedRing.lowerStar.{u} R.X a) (CondensedRing.lowerStar.{u} R'.X a)) (arithmetic_identity : ∀ N : Modules R'.toMon X, (arithmeticRestriction.ordinary.hom.app N).hom = 𝟙 _) (restriction : CoefficientComparison.{u} (restrictX φ X) c.restriction.functor d.geometric.functor d'.geometric.functor) (section_identity : ∀ (N : Modules R'.toMon X) (P : Profinite.{u}) (x : Profinite.CondensedAction.sectionModule R.toMon (d.geometric.functor.obj ((restrictX φ X).obj N)).module P), ((d'.geometric.sections.hom.app N).app (op P)).hom (((c.restriction.underlying.hom.app (d'.geometric.functor.obj N)).hom.hom.app (op P)).hom ((((restriction.ordinary.hom.app N).val).hom.hom.app (op P)).hom x)) = ((d.geometric.sections.hom.app ((restrictX φ X).obj N)).app (op P)).hom x) : ∃ t : CoefficientTransport.{u} k ks X a φ e e' c d d' g g', t.arithmetic.direct = arithmeticRestriction ∧ t.restriction = restriction ∧ NatTrans.CommShift t.arithmetic.direct.derived.hom ℤ ∧ NatTrans.CommShift t.geometric.direct.derived.hom ℤ ∧ NatTrans.CommShift t.pointRestriction.derived.hom ℤ ∧ NatTrans.CommShift t.arithmetic.pullExtension.extension.hom ℤ ∧ NatTrans.CommShift t.geometric.pullExtension.extension.hom ℤ ∧ NatTrans.CommShift t.pointScalars.square.extension.hom ℤ ∧ ∃ (χ : push R a ⋙ derivedExtend φ (Spec (.of k)) ⟶ derivedExtend φ X ⋙ push R' a) (β : d.geometric.functor.rightDerivedFunctor ⋙ c.derivedExtension ⟶ derivedExtend φ X ⋙ d'.geometric.functor.rightDerivedFunctor) (π : (pointModules.{u} R.toMon (geometricScheme.{u} k ks X a)).rightDerivedFunctor ⋙ condensedDerivedExtend φ ⟶ derivedExtend φ (geometricScheme.{u} k ks X a) ⋙ (pointModules.{u} R'.toMon (geometricScheme.{u} k ks X a)).rightDerivedFunctor), (∀ M : DerivedCategory (Modules R.toMon X), χ.app M = scalarProjection (scalarDerivedAdjunction φ X) (scalarDerivedAdjunction φ (Spec (.of k))) (push R a) (push R' a) arithmeticRestriction.derived M) ∧ (∀ M : DerivedCategory (Modules R.toMon X), β.app M = scalarProjection (scalarDerivedAdjunction φ X) c.derivedAdjunction d.geometric.functor.rightDerivedFunctor d'.geometric.functor.rightDerivedFunctor restriction.derived M) ∧ (∀ H : DerivedCategory (Modules R.toMon (geometricScheme.{u} k ks X a)), π.app H = pointProjection φ (geometricScheme.{u} k ks X a) t.pointScalars H) ∧ NatTrans.CommShift χ ℤ ∧ NatTrans.CommShift β ℤ ∧ NatTrans.CommShift π ℤ ∧ (∀ M : DerivedCategory (Modules R.toMon X), ((pointDerivedAdjunction (R := R) (Y := geometricScheme.{u} k ks X a)).homEquiv _ _).symm ((restrictCondensed φ).mapDerivedCategory.map (π.app ((pull R (geometricProjection.{u} k ks X a)).obj M)) ≫ t.pointRestriction.derived.inv.app ((derivedExtend φ (geometricScheme.{u} k ks X a)).obj ((pull R (geometricProjection.{u} k ks X a)).obj M))) = t.pointScalars.square.restriction.hom.app ((condensedDerivedExtend φ).obj ((pointModules.{u} R.toMon (geometricScheme.{u} k ks X a)).rightDerivedFunctor.obj ((pull R (geometricProjection.{u} k ks X a)).obj M))) ≫ (restrictX φ (geometricScheme.{u} k ks X a)).mapDerivedCategory.map (t.pointScalars.square.extension.hom.app ((pointModules.{u} R.toMon (geometricScheme.{u} k ks X a)).rightDerivedFunctor.obj ((pull R (geometricProjection.{u} k ks X a)).obj M)) ≫ (derivedExtend φ (geometricScheme.{u} k ks X a)).map ((pointDerivedAdjunction (R := R) (Y := geometricScheme.{u} k ks X a)).counit.app ((pull R (geometricProjection.{u} k ks X a)).obj M))))",
+  "branch": "sheaf-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The given normalized arithmetic and geometric restriction comparisons are retained by equality. The conclusion supplies CoefficientTransport and the actual field, action and point projection natural transformations, each with its prescribed components and canonical integer shifts. The final equation states the R-linear adjunct of the restricted point map. Two transparent instance adapters reuse existing additivity and the canonical adjoint shift; no new mathematical assumption or scalar exactness is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d90a3040",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Delivery = new FieldScalarProjectionMateCoherence.lean + item lean record only (rest of node byte-identical to live; lean.statement verbatim; imports exist). Hypotheses match the node: arithmetic/geometric ρ given as CoefficientComparison with unit normalization + identity ordinary/section maps (section_identity = CoefficientTransport.sections verbatim); qcqs X; arbitrary φ; no flatness/exactness/boundedness/universe extras. ∃ t: every component pinned (MorphismScalar direct by unit+identity, pull squares by direct_normalization/restriction_normalization + transpose; PointScalar by normalization; pointRestriction by unit+point_identity), so no arbitrary comparison. Clauses: χ adjunct (arithmetic_counit, λ orientation checked), ρ/λ conjugacy, D(E')χ=β (projection), forgotten β = pointProjection, R-linear projection-mate equation at H=u*M (types and conjugacy checked), naturality via NatTrans χ/β/π, restriction squares, canonical CommShift incl. shifts in M. Instances: existing coefficientPushAdditive with ascriptions; canonical leftAdjointCommShift for condensedDerivedExtend mirroring derivedExtendCommShift; both docstringed and recorded. sorry only; 9-step proof docstring; report has Worker report and Second reading by Q47. CoefficientComparison/geometricScheme come from stmt_dep theorem lem-sfb-condensed-galois-global-descent and are recorded there and used by the landed def nodes: accepted. Edge cases φ=id/non-flat, X empty/Spec k, k sep closed, M=0/unbounded, shifts of any sign. No compile (no file changed)."
+ }
+}

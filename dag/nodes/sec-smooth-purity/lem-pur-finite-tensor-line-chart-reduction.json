@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-finite-tensor-line-chart-reduction",
+ "kind": "lemma",
+ "title": "Scalar reduction preserves the unshifted positive root charts",
+ "statement": "Use the coefficient setting and levels 1 <= m <= n of [def-pur-finite-tensor-reduction-data], the canonical scalar functor F and its normalized monoidal core of [def-pur-finite-signed-reduction-comparisons], and the positive charts of [def-pur-finite-positive-root-charts]. Let T be a k-scheme, d a natural number, zeta a primitive ell^n-th root and eta a primitive ell^m-th root with eta = zeta^(ell^(n-m)). Put A_d = finiteTensorFixedLine over the level-n coefficient ring and B_d its level-m version. Let lambda_d : F(A_d) -> B_d be the canonical derived line comparison, chi_A : A_d -> 1_A and chi_B : B_d -> 1_B the positive root charts, and epsilon^{-1} : F(1_A) -> 1_B the inverse unit comparison. Then lambda_d followed by chi_B equals F(chi_A) followed by epsilon^{-1}. This unshifted equality holds also for d=0, m=n, the empty scheme, and ramified coefficients, with no flatness assumption on the quotient.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, compatibility with invertible coefficient twists; parent lem-pur-finite-tensor-presentation-reduction, proof Step 8, unshifted positive root-chart normalization"
+ },
+ "stmt_deps": [
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-signed-reduction-comparisons",
+  "def-pur-finite-positive-root-charts"
+ ],
+ "proof": [
+  {
+   "text": "Choose a compatible sequence of primitive ell-power roots lifting zeta at level n. Its m-th coordinate is eta by the stated power relation. Trivialize the integral rank-one line by this sequence. The normalized ordinary semilinear degree-one comparison is balanced scalar reduction, so it sends the A-basis to the B-basis. The ordinary positive root charts send their respective basis elements to 1. This assertion concerns ordinary sheaf maps, not arbitrary derived arrows.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-pur-finite-reduction-root-charts",
+    "def-pur-finite-tensor-reduction-data",
+    "def-pur-finite-positive-root-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the ordered positive power d. The positive recursion clause of FiniteTensorLineMapsNormalized sends each ordered tensor of basis elements to its reduced tensor. The normalized ordinary charts send both such tensors to 1, proving commutativity on local generators and hence as sheaf maps. At d=0 the section map is the coefficient ring map. The normalized scalar-first tensorator and its unit axiom identify the core unit inverse with scalar multiplication, giving the same equation. This also treats m=n and does not impose quotient flatness or a ramification divisibility condition.",
+   "uses": [
+    "def-pur-finite-tensor-reduction-data",
+    "def-pur-finite-positive-root-charts",
+    "def-pur-finite-signed-reduction-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact single-complex functor and take scalar-adjunction transposes. The recorded normalization of finiteTensorLineComparison identifies its transpose with the single-complex realization of the semilinear sheaf map. Naturality identifies the transpose after the B-chart with the same ordinary chart composite as scalar reduction of the A-chart followed by the core unit inverse. Injectivity of the adjunction hom equivalence proves the claimed equality. Changing the integral lift fixes the n-th finite basis and therefore its m-th image, so this proof is independent of the lift. On the empty scheme the same sheaf-map argument applies.",
+   "uses": [
+    "def-pur-finite-signed-reduction-comparisons",
+    "def-pur-finite-tensor-reduction-data",
+    "def-pur-finite-positive-root-charts"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-positive-root-charts",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-finite-signed-reduction-comparisons",
+  "def-pur-finite-tensor-reduction-data",
+  "lem-pur-twist-sheaf-locally-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, compatibility with invertible coefficient twists; parent lem-pur-finite-tensor-presentation-reduction, proof Step 8, unshifted positive root-chart normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar reduction of positive Tate line charts normalized by compatible primitive roots commutes with the coefficient unit",
+   "results": "8 hits, all inspected: elliptic-curve projective/Jacobian unit scaling and number-field mixed-embedding unit actions. None concerns sheaf scalar reduction or root-normalized Tate line charts.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsPrimitiveRoot\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(changeOfRings|extendScalars).*(root|[Cc]hart)|(root|[Cc]hart).*(changeOfRings|extendScalars)",
+   "results": "0 hits. Project rg finds no existing unshifted comparison statement; FiniteReductionPositiveLineComparison is a downstream statement involving the full shifted positive presentation, so it cannot supply this argument.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorPresentationReduction",
+  "date": "2026-10-26",
+  "group": "M7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-tensor-presentation-reduction",
+   "place": "Proof Step 8: compatibility of positive-power bases before shifting and changing the published presentation",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorLineChartReduction",
+  "file": "lean/Sheaf/Paper/FiniteTensorLineChartReduction.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTensorLineChart_reduction",
+  "statement": "theorem finiteTensorLineChart_reduction (P : PurityFiniteSetting.{u}) (m : ℕ)\n    (hm : 1 ≤ m) (hmn : m ≤ P.level) (T : Scheme.{u})\n    [T.Over (Spec (.of P.field.k))] (d : ℕ) (ζ : P.field.k)\n    (hζ : IsPrimitiveRoot ζ P.diagonalExponent) (η : P.field.k)\n    (hη : IsPrimitiveRoot η (P.finiteReductionSetting m hm).diagonalExponent)\n    (hroot : η = ζ ^ (P.coefficients.l ^ (P.level - m))) :\n    (P.finiteTensorLineComparison m hm hmn T d).hom ≫\n        ((P.finiteReductionSetting m hm).finiteTensorPositiveChart T η hη d).hom =\n      (P.finiteTensorReduction m hm hmn T).map\n          (P.finiteTensorPositiveChart T ζ hζ d).hom ≫\n        (P.finiteTensorCore m hm hmn T).εIso.inv",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261026T002034-L-51579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261026T002034-L-51579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,7 @@ Authors: SHEAF group Q16
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
+import Sheaf.Paper.StrictTowerOperations
 
 /-!
 # The section-normalized ordinary pro-etale pullback comparison
@@ -60,7 +61,7 @@ theorem existsUnique_composition {Z : Scheme.{u}} (k : Z ⟶ Y)
             (proEtaleRingCompositeCoefficients k h R S T c d)) a).hom.app N).val.app
               (op W) m =
           N.val.map ((MorphismProperty.Over.pullbackComp k h).hom.app W).op m := by
-  sorry
+  exact exchangeModuleComposition_existsUnique k h R S T c d
 
 /-- The ordinary coefficient comparison fixed by the section-normalized mate equation.
 Source: Stacks, Tags 03D8 and 0D6D

@@ -1,0 +1,158 @@
+{
+ "id": "lem-real-integral-pullback-normalization",
+ "kind": "statement",
+ "title": "Integral naturality of the normalized lisse pullback square",
+ "statement": "Fix D,l,E as in [def-real-tensor-pullback-comparison-data]. Let f:X to Y be any scheme morphism between finite-type schemes, without separatedness or base-field linearity. Given normalized realizations aX,aY [def-real-lisse-realization-data], there exist b:Along f aX aY and n:PullNormalized f aX aY b [def-real-lisse-pullback-normalization]. For every integral constructible arrow g:K to L, the naturality equation F(Q g) composed with n.comparison L equals n.comparison K composed with G(Q g), where Q is raw rationalization, F is raw completed pullback followed by aX.J and G is aY.J followed by ordinary rational derived pullback. Naturality on arbitrary rational morphisms and a raw natural isomorphism are deliberately not asserted here.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt-Scholze Lemma 6.5.9 and Remark 6.8.15; Stacks 0D6D, 07A4; original pullback steps 1, 5-6 and 8, before raw descent"
+ },
+ "stmt_deps": [
+  "def-real-lisse-pullback-normalization",
+  "def-real-lisse-realization-data",
+  "def-real-tensor-pullback-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Check the finite-type noetherian qcqs finite-dimensional hypotheses. Apply the specified ordinary-completed integral pullback comparison eta; it is invertible, natural in integral arrows, and on good models has quotient augmentation and zero shifted coordinate.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-kun-dimension-finite-type",
+    "lem-tw-ordinary-completed-integral-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use inverse-image localization coherence to identify the coefficient square. The ordinary balanced square flattens a tensor (b tensor m) to ab tensor m and inserts one in its inverse; it carries the actual integral adjunction unit to the rational unit with scalar one. Derive the square using the ringed-topos composition and geometric two-isomorphism comparisons, retaining their counit equations. Compose aX.integral, scalar extension of eta inverse, this square and the image of aY.integral inverse. All factors are integral-natural, giving the asserted equation.",
+   "uses": [
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-tw-ordinary-completed-integral-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite locally free singles are K-flat. On each free chart the inverse eta and scalar square take the pulled-back basis vector to the same vector with coefficient one. Their ordinary balanced inverse defines b.balance. Local bases prove b.preserves, and the same derived square proves naturality. Take H0 using the identity-normalized single identification to obtain b.comparison and n.heart, with the prescribed ordinary and derived unit/counit equations. This includes empty schemes, rank zero, varying ranks and non-base-linear morphisms.",
+   "uses": [
+    "lem-tw-lisse-localization-restriction",
+    "lem-fd-ringed-flat-single-tensor-cohomology",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-amb-derived-degree-zero-normalization",
+    "def-real-lisse-pullback-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-real-lisse-pullback-normalization",
+  "lem-amb-derived-degree-zero-normalization",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-kun-dimension-finite-type",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-tw-lisse-localization-restriction",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-wf-affine-noetherian-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt-Scholze Lemma 6.5.9 and Remark 6.8.15; Stacks 0D6D, 07A4; original pullback steps 1, 5-6 and 8, before raw descent"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension realization of lisse sheaves preserves tensor products and pullback with normalized derived counits",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits: CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app, CategoryTheory.opOpEquivalence_counitIso, CategoryTheory.opOpEquivalence_unitIso, CategoryTheory.Functor.opUnopEquiv_unitIso, CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*naturality|naturality.*localization|ScalarLocalization.*NatIso",
+   "results": "8 hits: Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between functors on a scalar localized category is determined by its restriction to integral objects",
+   "results": "8 hits: ModuleCat.restrictScalarsCongr, CategoryTheory.Localization.isoUniqFunctor, ModuleCat.restrictScalarsId, CategoryTheory.Localization.liftNatIso, ModuleCat.restrictScalarsId'App_hom_naturality, ModuleCat.restrictScalarsId', CategoryTheory.NatIso.isIso_app_of_isIso, CategoryTheory.Codiscrete.natIsoFunctor",
+   "date": "2026-10-25",
+   "verdict": "Localization.liftNatIso and fully faithful precomposition give the raw descent argument, which is proved in Lean in this delivery."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of completed constructible tensor products and its degree zero specialization to locally free sheaves",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', LinearEquiv.extendScalarsOfIsLocalizationEquiv, Algebra.TensorProduct.basisAux, Algebra.TensorProduct.instFree, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, comonadicExtendScalars, AdicCompletion.instSMul, PiTensorProduct.instIsScalarTower",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTensorPullbackRealization",
+  "date": "2026-10-25",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Bhatt-Scholze Lemma 6.5.9 and Remark 6.8.15; Stacks 0D6D, 07A4; original pullback steps 1, 5-6 and 8, before raw descent",
+   "via": [
+    "lem-tw-lisse-tensor-pullback-realization",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralLissePullbackNormalization",
+  "file": "lean/Sheaf/Paper/IntegralLissePullbackNormalization.lean",
+  "declaration": "WeilConjectures.LisseRealization.integral_pullback_normalization",
+  "declarations": [
+   "WeilConjectures.LisseRealization.integral_pullback_normalization"
+  ],
+  "statement": "theorem integral_pullback_normalization {X Y : Base D l hl} (f : X.scheme ⟶ Y.scheme) (aX : At D l hl E X) (aY : At D l hl E Y) : ∃ (b : Along D l hl E f aX aY) (n : PullNormalized D l hl E f aX aY b), ∀ (K L : sfIntegralConstructibleCategory l E Y.scheme) (g : K ⟶ L), (pull D l hl E f ⋙ aX.J).map ((sfRationalConstructibleLocalization l E Y.scheme).map g) ≫ (n.comparison L).hom = (n.comparison K).hom ≫ (aY.J ⋙ ContinuousRational.derivedPull f (coefficientPull l E f)).map ((sfRationalConstructibleLocalization l E Y.scheme).map g)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ec16d",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T122527-L-1780869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ec16d",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T122527-L-1780869",
+  "kind": "interface",
+  "note": "independent cc review: item theorem lisse_tensor_pullback_realization (signature unchanged) against node lem-tw-lisse-tensor-pullback-realization; 3 new sorried split statements + proved naturalIso_of_integral against their new nodes; moved data block byte-identical to old item; importer LissePointSectionsRealization compiled against delivered modules (exit 0); axioms checked"
+ }
+}

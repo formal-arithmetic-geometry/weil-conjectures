@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-ordinary-ambient-proper-open-laws",
+ "kind": "statement",
+ "title": "Ordinary ambient proper/open laws",
+ "statement": "For every positive finite coefficient level, the canonical ordinary calculus satisfies all twelve Laws equations, including both geometric pasting directions and identities. No cartesian-square hypothesis is imposed. [def-sf-ambient-proper-open-calculus] ",
+ "stmt_deps": [
+  "def-sf-ambient-proper-open-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7D; sites-modules.tex Tags 03D3 and 03EL; sites-cohomology.tex Tags 07A4 and 07A7."
+ },
+ "proof": [
+  {
+   "text": "Use the proved source-library leftDerivedUpperStarComp_assoc_app and the two leftDerivedUpperStarComp_id_*_app equations, transporting equalities from Spaces to scheme maps. Package their iso forms as private PullCoherence. Apply generic conjugate and leftAdjointCompIso associativity and unit formulas to obtain all six pullback, pushforward and open-extension coherence laws.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+   }
+  },
+  {
+   "text": "Insert the two localized alpha-pasting equations and the two localized alpha identity-square equations. These are strictly the non-mate geometric parts of the argument.",
+   "uses": [
+    "lem-sf-ordinary-ambient-alpha-pasting",
+    "lem-sf-ordinary-ambient-alpha-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+   }
+  },
+  {
+   "text": "Apply mateEquiv_hcomp to vertical alpha pasting and mateEquiv_vcomp to horizontal alpha pasting, using the two conjugate/whiskering compatibilities to retain exactly Calculus.sComp and Calculus.jComp. Apply the generic identity-mate calculations to the alpha identity equations. Assemble these four gamma equations with the six compositor laws and the two alpha-pasting equations into Laws.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-ordinary-ambient-alpha-pasting",
+  "lem-sf-ordinary-ambient-alpha-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7. Native pullback coherence, generic conjugation, and explicit mate-pasting calculations; T3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of derived inverse image tensor comparison and uniqueness of tensor comparison on K-flat representatives",
+   "results": "8 hits, including CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app and LocalizerMorphism.rightDerivedFunctorComparison_fac; none identifies the prescribed comparisons.",
+   "date": "2026-10-26",
+   "verdict": "The exact-localization API is useful, but the tensor normalization needs the source-library comparison law and representative faithfulness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp, Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-26",
+   "verdict": "Used in the parent to recover intrinsic alpha pasting from the canonical system mate law."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison|map_leftDerivedTensorComparison_app_app_comp",
+   "results": "No Mathlib hits from msearch; repository rg finds the generic source-library theorem in WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal.",
+   "date": "2026-10-26",
+   "verdict": "The source-library theorem supplies the generic tensor composition proof; no Mathlib geometric pasting theorem replaces it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AmbientProperOpenPasting",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ambient-proper-open-pasting",
+   "place": "Ordinary ambient proper/open laws",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryAmbientProperOpenLaws",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryAmbientProperOpenLaws.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.ordinaryAmbientProperOpenLaws",
+  "statement": "theorem ordinaryAmbientProperOpenLaws (F : WeilConjectures.FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ F.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :\n    Laws (ordinary F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7fc7a",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261026T023306-L-540907",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T201834-L-3417937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

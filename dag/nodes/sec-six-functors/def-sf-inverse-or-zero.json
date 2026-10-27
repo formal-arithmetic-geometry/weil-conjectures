@@ -1,0 +1,115 @@
+{
+ "id": "def-sf-inverse-or-zero",
+ "kind": "definition",
+ "title": "Inverse on isomorphisms with zero value elsewhere",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\mathcal C$ be any category with zero morphisms, let $X,Y$ be objects, and let $a:X\\to Y$ be a morphism. Define $\\operatorname{inverseOrZero}(a):Y\\to X$ by classical case distinction: it is the categorical inverse of $a$ if $a$ is an isomorphism, and the zero morphism otherwise. There is no invertibility hypothesis and no property assertion; the definition is total, including on the zero morphism and in the zero category.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B–0F7D: notation for inversion of the canonical comparison on its invertible domain; blueprint proper/open coherence argument, complete restriction convention."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse of a categorical morphism if it is an isomorphism and zero otherwise",
+   "results": "{\"t\": \"2026-10-24T19:34:58Z\", \"tool\": \"leansearch\", \"query\": \"Inverse of a categorical morphism if it is an isomorphism and zero otherwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.inv\", \"CategoryTheory.IsIso.inv_isIso\", \"CategoryTheory.asIso_inv\", \"CategoryTheory.IsIso.Iso.inv_hom\", \"CategoryTheory.Iso.inv\", \"CategoryTheory.IsIso.inv_inv\", \"CategoryTheory.IsIso.hom_inv_id\", \"CategoryTheory.IsIso.inv_eq_of_inv_hom_id\"], \"digest\": \"2ff649c8d658ec50\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for this construction; reuse the published project declaration with existing:true."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse categorical morphism if isomorphism zero otherwise",
+   "results": "{\"t\": \"2026-10-24T19:35:00Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse categorical morphism if isomorphism zero otherwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.inv\", \"CategoryTheory.Iso.inv\", \"CategoryTheory.asIso_inv\", \"CategoryTheory.IsIso.inv_isIso\", \"CategoryTheory.IsIso.Iso.inv_hom\", \"CategoryTheory.asIso\", \"CategoryTheory.Iso.symm\", \"CategoryTheory.IsIso.out\"], \"digest\": \"8e4577410c7c8941\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for this construction; reuse the published project declaration with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "completedShriekF|completedShriekRefinement|refinementDiagramWords|refinementRestriction|finiteTorIntegralInclusion|coefficientPrimeUnit|inverseOrZero",
+   "results": "{\"t\": \"2026-10-24T19:34:58Z\", \"tool\": \"grep\", \"query\": \"completedShriekF|completedShriekRefinement|refinementDiagramWords|refinementRestriction|finiteTorIntegralInclusion|coefficientPrimeUnit|inverseOrZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for this construction; reuse the published project declaration with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"^(def|theorem) (inverseOrZero)\\b\" lean/WeilConjectures lean/Sheaf; scan dag/nodes lean records; blueprint_refs.py search inverseOrZero",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/SixFunctors/GeneratorReductionStatement.lean:348:def inverseOrZero {C : Type v} [Category.{w} C] [HasZeroMorphisms C]\nNo upstream definition. Existing theorem-node declaration lists contain the helpers, but no definition node owns them. Blueprint exact-name search: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "Register the existing declarations requested by returned H2, without copying or changing Lean code."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-normalized-refinement-pasting",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Existing explicit route: sk-thm-sf-tensor-hom. Proof, third Hom bijection Rf_! dashv Rf^!, and the final assertion of compatibility with finite reduction, scalar extension and shifts; constructible adjunction only, not the optional ambient datum. Extracted old coefficient-coherence proof steps 10. Definition interface: Inverse on isomorphisms with zero value elsewhere.",
+   "via": [
+    "lem-sf-integral-normalized-refinement-pasting",
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.GeneratorReductionData",
+  "declaration": "WeilConjectures.GeneratorReduction.inverseOrZero",
+  "declarations": [
+   "WeilConjectures.GeneratorReduction.inverseOrZero"
+  ],
+  "statement": "def inverseOrZero {C : Type v} [Category.{w} C] [HasZeroMorphisms C]\n    {X Y : C} (f : X ⟶ Y) : Y ⟶ X",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Returned H2 repair: definition ownership for exactly the listed published declarations. No theorem conclusion from the containing theorem node is used. The source and constructions are unchanged.",
+  "file": "lean/Sheaf/SixFunctors/GeneratorReductionData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e37cfac7",
+  "group": "Q58",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e37cfac7",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after the e923 H2 RETURN. The item module is byte-identical to e923, whose mathematics was reviewed in full and found correct. The item record changes only stmt_deps (plus the new lean record). The 4 theorem stmt_deps are replaced by 4 new existing:true def owners: def-sf-completed-shriek-refinement-maps (completedShriekF, completedShriekRefinement), def-sf-refinement-diagram-words (refinementDiagramWords), def-sf-integral-refinement-normalization-data (refinementRestriction, finiteTorIntegralInclusion, coefficientPrimeUnit, proved) and def-sf-inverse-or-zero (inverseOrZero). Signatures and prose match the side-live source; none is hollow; no duplicate owner on live; no cycle; brief §5 fields present. Every other identifier in the statement is owned by a def node in the stmt_dep closure. Advisory: sfCompactSupportFiniteIntegralFunctor is reached through def-weil-integral-rational-qbar-compact-support, as in five landed citers; the def-sf-refinement-diagram-words lean.statement overruns into the next declaration, an extractor artefact that is cosmetic. No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f911a",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T144114-L-1185107",
+  "kind": "interface",
+  "note": "independent cc review: published GeneratorReductionStatement vs delivered GeneratorReductionData+GeneratorReductionStatement (definitions moved verbatim, re-exported); completionMap_isIso induction vs new nodes lem-sf-completion-map-is-iso/primitive-completion-effectivity/short-word-integral-domain; 14 direct importers compiled against the sandbox modules"
+ }
+}

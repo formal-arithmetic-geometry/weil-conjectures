@@ -5,6 +5,7 @@ Authors: SHEAF group NK
 -/
 module
 
+public import Sheaf.Paper.SmoothPurityCompletedTowerRoos
 public import Sheaf.Paper.SmoothPurityReductionTowerNormalized
 public import Sheaf.Paper.SmoothPurityTowerReconstruction
 public import Sheaf.Paper.DerivedCompleteOnSlices
@@ -25,25 +26,12 @@ public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.Paper.CompletedDerivedInverseLimit
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.CategoryTheory.SystemLevelLeftExtension
-import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Limits.Final
-import Mathlib.CategoryTheory.IsConnected
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Paper.NormalizedDVRTower
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.Paper.ProEtaleConstructibleSheaf
-import Sheaf.Paper.IntegralResidueTor
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import Sheaf.Paper.IntegralOperationsWellDefined
+import Sheaf.Paper.SfDerivedCompleteLegacyComparison
+import Sheaf.Paper.SmoothPurityCompletedReductionAdjunction
+import Sheaf.Paper.SmoothPurityCompletedReductionConstructible
 
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.FiniteFieldFiber
 /-!
 # Normalized coefficient towers and derived-complete integral complexes
 
@@ -73,72 +61,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
-
-/-- Forget the finite-level actions to completed coefficients, retaining all strict
-transitions. Source: blueprint, definition of L_T (blueprint: det-sp-normalized-equivalence). -/
-def spCompletedStrictTower (D : SpCoefficientTowersAbelian l E T) :
-    spCoefficientTowers l E T ⥤
-      (ℕᵒᵖ ⥤ WeilConjectures.scalarReductionSource.{u, u} l E T) :=
-  (Functor.ofOpSequence (spCompletedTransition l E T D)).flip
-
-/-- The coefficient-ring identification transports the existing reduction functor
-from section modules to modules over the completed ring. Source: blueprint, r_T
-(blueprint: det-sp-normalized-equivalence). -/
-def spCompletedReduction (D : SpCoefficientTowersAbelian l E T)
-    (R : SpReductionTower l E T D) :
-    DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T) ⥤
-      spDerivedCoefficientTowers l E T D :=
-  (restrictScalars.{u + 1}
-    ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-      R.coefficient.hom)).mapDerivedCategory ⋙ R.red
-
-/-- Total derived inverse limit after the exact scalar-forgetting functor. The
-fixed-ring limit is the existing K-injective total derived inverse limit, including its
-resolution-normalized projections. Source: blueprint, L_T; Stacks 0941
-(blueprint: det-sp-normalized-equivalence). -/
-def spCompletedTotalLimit (D : SpCoefficientTowersAbelian l E T)
-    [(spCompletedStrictTower l E T D).Additive]
-    [PreservesFiniteLimits (spCompletedStrictTower l E T D)]
-    [PreservesFiniteColimits (spCompletedStrictTower l E T D)] :
-    spDerivedCoefficientTowers l E T D ⥤
-      DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T) :=
-  letI := D.hasDerived
-  (spCompletedStrictTower l E T D).mapDerivedCategory ⋙
-    WeilConjectures.coefficientConstantTowerLimit l E T
-
-/-- Exact evaluation commutes with forgetting the finite-level coefficient actions.
-The comparison is the canonical localization comparison for the two exact composites.
-Source: blueprint, definition of L_T (blueprint: det-sp-normalized-equivalence). -/
-def spCompletedForgettingEvaluationIso (D : SpCoefficientTowersAbelian l E T)
-    [(spCompletedStrictTower l E T D).Additive]
-    [PreservesFiniteLimits (spCompletedStrictTower l E T D)]
-    [PreservesFiniteColimits (spCompletedStrictTower l E T D)] (n : ℕ) :
-    @Functor.mapDerivedCategory _ _ _ D.hasDerived _ _ _
-        (HasDerivedCategory.standard _) (spCompletedStrictTower l E T D) _ _ _ ⋙
-      WeilConjectures.coefficientConstantTowerEvaluation l E T n ≅
-        spDerivedCompletedEvaluation l E T D n :=
-  letI := D.hasDerived
-  letI := D.evaluationLimits n
-  letI := D.evaluationColimits n
-  letI : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
-    Functor.additive_of_preserves_binary_products _
-  (Functor.mapDerivedCategoryCompIso (spCompletedStrictTower l E T D)
-    ((evaluation ℕᵒᵖ (WeilConjectures.scalarReductionSource l E T)).obj (op n))).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (spCoefficientEvaluation l E T D.equivalence n)
-      (spCompletedEllRestriction l E T n)
-
-/-- The actual total-limit projection to each completed-coefficient level. Its
-normalization comes from the existing projection on simultaneous K-injective towers.
-Source: blueprint, total limit and its counit (blueprint: det-sp-normalized-equivalence). -/
-def spCompletedTotalProjection (D : SpCoefficientTowersAbelian l E T)
-    [(spCompletedStrictTower l E T D).Additive]
-    [PreservesFiniteLimits (spCompletedStrictTower l E T D)]
-    [PreservesFiniteColimits (spCompletedStrictTower l E T D)] (n : ℕ) :
-    spCompletedTotalLimit l E T D ⟶ spDerivedCompletedEvaluation l E T D n :=
-  letI := D.hasDerived
-  Functor.whiskerLeft (spCompletedStrictTower l E T D).mapDerivedCategory
-    (WeilConjectures.coefficientConstantTowerProjection l E T n) ≫
-      (spCompletedForgettingEvaluationIso l E T D n).hom
 
 /-- The ambient reduction/total-limit adjunction, its isomorphisms on complete and
 normalized objects, and its restriction to the recorded constructible categories.
@@ -188,6 +110,25 @@ structure SpNormalizedEquivalence (D : SpCoefficientTowersAbelian l E T)
       e.inverse ⋙ (WeilConjectures.sfIntegralConstructible l E T).ι =
         (spNormalizedConstructibleTorTowers l E T D).ι ⋙ spCompletedTotalLimit l E T D
 
+private theorem integralConstructible_complete
+    (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T))
+    (hM : WeilConjectures.sfIntegralConstructible l E T M) :
+    WeilConjectures.IntegralOnSlice.IsComplete l E T none M := by
+  obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
+  let : Fact p.Prime := ⟨hprime⟩
+  let F : WeilConjectures.FiniteFieldDatum.{0} :=
+    { p := p
+      a := 1
+      q := p
+      prime := hprime
+      exponent_pos := by decide
+      cardinality_eq := by simp
+      k₀ := ZMod p
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+  have hl : l ≠ F.p := by change l ≠ p; omega
+  exact ⟨F, hl, (WeilConjectures.sfDerivedComplete_iff_legacy l E T F hl M).mp hM.1⟩
+
 /-- Reduction is left adjoint to total derived inverse limit, its unit is invertible
 on derived-complete objects, and its counit on all normalized towers. On a Noetherian
 scheme this restricts to the mutually inverse constructible equivalences.
@@ -235,6 +176,62 @@ theorem sp_normalized_equivalence
     [∀ x : T, Invertible (l : T.residueField x)]
     (D : SpCoefficientTowersAbelian l E T) (R : SpReductionTower l E T D) :
     Nonempty (SpNormalizedEquivalence l E T D R) := by
-  sorry
+  let := D.hasDerived
+  let products := WeilConjectures.integralOperationsDerivedCountableProducts l E T
+  let := products
+  obtain ⟨adj, hu, hc⟩ := spCompletedReduction_limitAdjunction l E T D R
+  refine ⟨{ limit_triangulated := spCompletedTotalLimit_triangulated l E T D
+            roos := spCompletedTotalLimit_roos l E T D
+            adjunction := adj
+            unit_isIso := hu
+            counit_isIso := hc
+            restriction := ?_ }⟩
+  intro hT
+  let := hT
+  let P := WeilConjectures.sfIntegralConstructible l E T
+  let Q := spNormalizedConstructibleTorTowers l E T D
+  let F : P.FullSubcategory ⥤ Q.FullSubcategory := Q.lift
+    (P.ι ⋙ spCompletedReduction l E T D R)
+    (fun K ↦ spCompletedReduction_constructible l E T D R K.obj K.property)
+  have hG (C : Q.FullSubcategory) :
+      P ((spCompletedTotalLimit l E T D).obj C.obj) := by
+    obtain ⟨δ, hδ⟩ := spCompletedTotalLimit_roos l E T D C.obj
+    exact (spTower_reconstruction l E T D C.obj C.property.1 C.property.2
+      ((spCompletedTotalLimit l E T D).obj C.obj)
+      (Pi.lift (fun n : ℕ ↦ (spCompletedTotalProjection l E T D n).app C.obj)) δ hδ).1
+  let G : Q.FullSubcategory ⥤ P.FullSubcategory := P.lift
+    (Q.ι ⋙ spCompletedTotalLimit l E T D) hG
+  let a : F ⊣ G := adj.restrictFullyFaithful P.fullyFaithfulι Q.fullyFaithfulι
+    (Iso.refl _) (Iso.refl _)
+  have hunit (K : P.FullSubcategory) : (a.unit.app K).hom = adj.unit.app K.obj := by
+    change P.ι.map (a.unit.app K) = _
+    dsimp only [a]
+    rw [Adjunction.map_restrictFullyFaithful_unit_app]
+    change adj.unit.app K.obj ≫ (spCompletedTotalLimit l E T D).map (𝟙 _) ≫ 𝟙 _ = _
+    rw [CategoryTheory.Functor.map_id]
+    exact Category.comp_id _
+  have hcounit (C : Q.FullSubcategory) : (a.counit.app C).hom =
+      adj.counit.app C.obj := by
+    change Q.ι.map (a.counit.app C) = _
+    dsimp only [a]
+    rw [Adjunction.map_restrictFullyFaithful_counit_app]
+    change 𝟙 _ ≫ (spCompletedReduction l E T D R).map (𝟙 _) ≫
+      adj.counit.app C.obj = _
+    simp only [CategoryTheory.Functor.map_id, CategoryTheory.Category.id_comp]
+  have hunitIso (K : P.FullSubcategory) : IsIso (a.unit.app K) := by
+    have := hu K.obj (integralConstructible_complete l E T K.obj K.property)
+    have : IsIso (P.ι.map (a.unit.app K)) := by
+      change IsIso ((a.unit.app K).hom)
+      rw [hunit]
+      infer_instance
+    exact isIso_of_reflects_iso _ P.ι
+  have hcounitIso (C : Q.FullSubcategory) : IsIso (a.counit.app C) := by
+    have := hc C.obj C.property.2
+    have : IsIso (Q.ι.map (a.counit.app C)) := by
+      change IsIso ((a.counit.app C).hom)
+      rw [hcounit]
+      infer_instance
+    exact isIso_of_reflects_iso _ Q.ι
+  exact ⟨a.toEquivalence, rfl, rfl⟩
 
 end AlgebraicGeometry.ProEtale

@@ -1,0 +1,287 @@
+{
+ "id": "lem-tw-integral-comparison-descent",
+ "kind": "statement",
+ "title": "Counit-normalized descent of the ordinary integral completion map",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$ and a uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a morphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. On their small pro-etale sites [def-weil-pbc-proetale-site] set $C_{W,n}=(R/t^n)_W$ for $n\\geq1$, $B_W=\\varprojlim_n C_{W,n}$, with quotient projections $\\pi_{W,n}$ [def-weil-completed-integral-coefficients]. Let $c_f:f^{-1}B_Y\\to B_X$ be the adjoint of the limit map $B_Y\\to f_*B_X$ whose $n$-th projection is the constant-section map after $\\pi_{Y,n}$ [def-weil-proetale-inverse-image]. Use module sheaves, sheaf tensor and unbounded derived categories [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category]. Put $f_B^*M=B_X\\otimes_{f^{-1}B_Y}f^{-1}M$, with its ordinary module adjunction [def-sf-ordinary-integral-pullback-construction].\n\nLet $q_W$ denote localization of cochain complexes in $D(B_W)$, and let $P_f=Lf_B^*$ with its canonical computation counit $\\epsilon_Q:P_f(q_YQ)\\to q_X(f_B^*Q)$ [lem-weil-pbc-ringed-topoi-derived-pullback]. Let $\\mathcal G_Y$ be the full category of flat-term K-flat cochain complexes [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. For $Q\\in\\mathcal G_Y$ form the strict tower $T_f(Q)_n=\\operatorname{Res}_{\\pi_{X,n}}f_n^*(Q\\otimes_{B_Y}C_{Y,n})$ with its actual quotient transitions, and put $H_f(Q)=\\operatorname{Cone}(1-s)[-1]$ [def-pur-integral-derived-operations, def-weil-derived-limit]. Write $\\lambda_Q:\\widehat P_f(q_YQ)\\xrightarrow{\\sim}q_XH_f(Q)$ for the canonical representative comparison of the completed pullback [lem-pur-integral-operations-well-defined]. Let $\\alpha_Q:f_B^*Q\\to H_f(Q)$ be the chain map with quotient-generator formula $b\\otimes q\\mapsto1\\otimes(q\\otimes\\pi_{X,n}(b))$ in every unshifted product projection and zero shifted product coordinate [def-sf-ordinary-integral-pullback-construction].\n\nThere exists a unique natural transformation $\\eta:P_f\\to\\widehat P_f$ such that for every $Q\\in\\mathcal G_Y$ the following equality holds in $D(B_X)$:\n$$\\lambda_Q\\circ\\eta_{q_YQ}=q_X(\\alpha_Q)\\circ\\epsilon_Q.$$\nFor every quasi-isomorphism $p:Q\\to A$ with $Q\\in\\mathcal G_Y$, its component on $q_YA$ is exactly\n$$\\eta_{q_YA}=\\widehat P_f(q_Yp)\\circ\\lambda_Q^{-1}\\circ q_X(\\alpha_Q)\\circ\\epsilon_Q\\circ P_f(q_Yp)^{-1}.$$\nThese formulas agree for all such resolutions under the canonical comparisons and for morphisms represented by roofs of quasi-isomorphisms between good complexes. The strict zero shifted-product coordinate is retained in the normalization. This statement asserts a morphism on arbitrary ambient derived objects; it makes no assertion that $P_f$ preserves constructibility or that $\\eta$ is invertible.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(4) and Remark 6.8.15; agent extraction of the strict quotient augmentation and resolving-class normalization, specified in Sheaf.Paper.OrdinaryCompletedIntegralPullback. Theorem ordinaryIntegralCompletionComparison_existsUnique, lines 495-530; its universal cochain-counit normalization, not the constructibility theorem."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Work in a common universe in which the small pro-etale sites are small relative to the module categories. Let $\\mathcal P_Y$ be the full subcategory of the homotopy category on the flat-term K-flat complexes, let $W$ be its quasi-isomorphisms, and write $L:\\mathcal P_Y\\to D(B_Y)$ for the restriction of localization. The resolving-class theorem identifies $\\mathcal P_Y[W^{-1}]\\to D(B_Y)$ as an equivalence, so $L$ is a localization at $W$ (compose the localization universal property with this equivalence). Every complex $A$ admits a quasi-isomorphism $Q\\to A$ with $Q$ in this class by the K-flat resolution theorem. These assertions apply to the actual sheaf of rings $B_Y$; they do not require it to be a constant discrete ring or impose boundedness on $A$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat); resolving-class localization in the construction preceding Tag 06YU and the proof of Tag 06YY (lemma-derived-base-change)."
+   }
+  },
+  {
+   "text": "Apply the strict quotient augmentation theorem to the ring map $c_f$ and to the actual quotient transitions specified in the statement. It gives the chain map $\\alpha_Q=(a_Q,0)$ and, for every chain map $v:Q\\to Q'$, the equality $H_f(v)\\alpha_Q=\\alpha_{Q'}f_B^*(v)$ as chain maps. In particular the second coordinate is zero in this equality, not merely invisible under the projections to the unshifted product. Restrict this natural chain map to the good complexes. No completeness or constructibility hypothesis on $Q$ is used.",
+   "uses": [
+    "lem-tw-integral-quotient-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit); agent argument with the prescribed strict cone, following Sheaf.Paper.OrdinaryCompletedIntegralPullback, ordinaryIntegralCompletionChain_natural and ordinaryIntegralComparisonOnGood, lines 407-490."
+   }
+  },
+  {
+   "text": "For each good $Q$ set $\\gamma_Q=\\lambda_Q^{-1}q_X(\\alpha_Q)\\epsilon_Q$. The ordinary derived-pullback theorem provides the natural canonical counit $\\epsilon$, and the well-definedness theorem for completed operations provides the natural representative isomorphism $\\lambda$. For a chain map $v:Q\\to Q'$ between good complexes their naturality and Step 2 give\n$$q_X(f_B^*v)\\epsilon_Q=\\epsilon_{Q'}P_f(q_Yv),\\qquad q_XH_f(v)\\lambda_Q=\\lambda_{Q'}\\widehat P_f(q_Yv),$$\n$$q_XH_f(v)q_X\\alpha_Q=q_X\\alpha_{Q'}q_X(f_B^*v).$$\nSubstitution and cancellation of $\\lambda_{Q'}$ yield $\\widehat P_f(q_Yv)\\gamma_Q=\\gamma_{Q'}P_f(q_Yv)$. Every morphism of $\\mathcal P_Y$ is represented by such a chain map. Since $q_Yv$ depends only on its homotopy class, the displayed equality proves that $\\gamma$ is a natural transformation $P_fL\\to\\widehat P_fL$ on $\\mathcal P_Y$. Thus no choice of a homotopy representative affects this assertion.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-integral-operations-well-defined",
+    "lem-tw-integral-quotient-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit); agent argument with the prescribed strict cone, following Sheaf.Paper.OrdinaryCompletedIntegralPullback, ordinaryIntegralCompletionChain_natural and ordinaryIntegralComparisonOnGood, lines 407-490."
+   }
+  },
+  {
+   "text": "Both functors $P_fL$ and $\\widehat P_fL$ invert $W$, since $L$ does and they are functors on $D(B_Y)$. Apply the natural-transformation part of the localization universal property to the localization $L$ established in Step 1, with these two functors, their existing lifts $P_f,\\widehat P_f$, and identity lifting comparisons. It gives a unique natural transformation $\\eta:P_f\\to\\widehat P_f$ whose restriction is $\\gamma$. On a good $Q$ this says $\\eta_{q_YQ}=\\lambda_Q^{-1}q_X(\\alpha_Q)\\epsilon_Q$, and multiplication by $\\lambda_Q$ is precisely the required counit-normalized equality.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG (lemma-properties-left-localization), 04VK (right localization); natural-transformation universal property as stated by lem-weil-pbc-localization-universal-property, with Mathlib CategoryTheory.Localization.fullyFaithfulWhiskeringLeft and liftNatTrans (Predicate.lean:278,326)."
+   }
+  },
+  {
+   "text": "If $\\eta'$ satisfies the prescribed equality, cancellation of the isomorphism $\\lambda_Q$ gives $\\eta'_{q_YQ}=\\gamma_Q$ for every good $Q$. The faithfulness assertion for natural transformations under restriction along the localization $L$ then gives $\\eta'=\\eta$. In particular uniqueness concerns the actual canonical counit and the chosen representative comparison; it does not permit replacing either by a conjugate comparison.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG (lemma-properties-left-localization), 04VK (right localization); natural-transformation universal property as stated by lem-weil-pbc-localization-universal-property, with Mathlib CategoryTheory.Localization.fullyFaithfulWhiskeringLeft and liftNatTrans (Predicate.lean:278,326)."
+   }
+  },
+  {
+   "text": "For any quasi-isomorphism $p:Q\\to A$ with $Q$ good, $q_Yp$ is invertible. Naturality of the transformation constructed in Step 4 gives\n$$\\eta_{q_YA}P_f(q_Yp)=\\widehat P_f(q_Yp)\\eta_{q_YQ}.$$\nMultiply on the right by $P_f(q_Yp)^{-1}$ and insert the good-complex formula from Step 4. The result is exactly\n$$\\eta_{q_YA}=\\widehat P_f(q_Yp)\\lambda_Q^{-1}q_X(\\alpha_Q)\\epsilon_QP_f(q_Yp)^{-1}.$$\nIf $p':Q'\\to A$ is another resolution, its expression also equals this same component $\\eta_{q_YA}$. More explicitly, for the canonical derived comparison $u=(q_Yp')^{-1}q_Yp$, naturality gives $\\widehat P_f(u)\\gamma_Q=\\gamma_{Q'}P_f(u)$; hence the two displayed resolution expressions agree under the canonical comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG (lemma-properties-left-localization), 04VK (right localization); natural-transformation universal property as stated by lem-weil-pbc-localization-universal-property, with Mathlib CategoryTheory.Localization.fullyFaithfulWhiskeringLeft and liftNatTrans (Predicate.lean:278,326)."
+   }
+  },
+  {
+   "text": "For a roof $Q\\xleftarrow{s}R\\xrightarrow{v}Q'$ between good complexes, with $s$ a quasi-isomorphism, put $h=(q_Yv)(q_Ys)^{-1}$. Naturality on its two arrows yields\n$$\\widehat P_f(q_Yv)\\gamma_R=\\gamma_{Q'}P_f(q_Yv),\\qquad \\widehat P_f(q_Ys)\\gamma_R=\\gamma_QP_f(q_Ys).$$\nInvert the functor images of $q_Ys$ in the second equality and substitute into the first to obtain $\\widehat P_f(h)\\gamma_Q=\\gamma_{Q'}P_f(h)$. Thus the formulas are compatible with roofs, including changes of a roof representing the same derived morphism. The restriction of $\\eta$ is still represented by the original $(a_Q,0)$ after the specified counit and $\\lambda_Q$; descent introduced no nonzero shifted coordinate. None of these cancellations asserts that $\\eta$ is invertible or that ordinary pullback preserves constructibility.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG (lemma-properties-left-localization), 04VK (right localization); natural-transformation universal property as stated by lem-weil-pbc-localization-universal-property, with Mathlib CategoryTheory.Localization.fullyFaithfulWhiskeringLeft and liftNatTrans (Predicate.lean:278,326)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-tw-integral-quotient-augmentation",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(4), Remark 6.8.15 as context only; explicit normalized descent reconstructed from Stacks 06YS, 0G7D, 06YY, 08TC and localization universal property; matches Sheaf.Paper.OrdinaryCompletedIntegralPullback lines 407-530."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|whiskeringLeft.*[Ff]ull|totalLeftDerivedCounit",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean.  Read Mathlib/CategoryTheory/Localization/Predicate.lean:280-345 and Functor/Derived/LeftDerived.lean:180-210. liftNatTrans assumes a localization and supplied lifting isomorphisms: it does not construct the natural strict Roos comparison on the actual good class or verify its canonical ordinary counit formula. Abelian nth-derived results have other domains.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between total derived functors is uniquely determined on K-flat resolutions and is independent of the chosen resolution",
+   "results": "8 hits: CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq, CategoryTheory.Functor.leftDerived_ext, CategoryTheory.NatTrans.leftDerived, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory.  Read Mathlib/CategoryTheory/Localization/Predicate.lean:280-345 and Functor/Derived/LeftDerived.lean:180-210. liftNatTrans assumes a localization and supplied lifting isomorphisms: it does not construct the natural strict Roos comparison on the actual good class or verify its canonical ordinary counit formula. Abelian nth-derived results have other domains.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "10 hits: CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.liftNatTrans_id, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.comp_liftNatTrans, CategoryTheory.Localization.comp_liftNatTrans_assoc, CategoryTheory.Localization.liftNatTrans_app, CategoryTheory.NatTrans.CommShift.liftNatTrans.  Read Mathlib/CategoryTheory/Localization/Predicate.lean:280-345 and Functor/Derived/LeftDerived.lean:180-210. liftNatTrans assumes a localization and supplied lifting isomorphisms: it does not construct the natural strict Roos comparison on the actual good class or verify its canonical ordinary counit formula. Abelian nth-derived results have other domains.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between total derived functors is uniquely determined on K-flat resolutions and is independent of the chosen resolution",
+   "results": "8 hits: CategoryTheory.Functor.leftDerived_ext, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerived, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_ext, CategoryTheory.NatTrans.leftDerived, CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app.  Read Mathlib/CategoryTheory/Localization/Predicate.lean:280-345 and Functor/Derived/LeftDerived.lean:180-210. liftNatTrans assumes a localization and supplied lifting isomorphisms: it does not construct the natural strict Roos comparison on the actual good class or verify its canonical ordinary counit formula. Abelian nth-derived results have other domains.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural chain map from ordinary ringed pullback to the Roos cone of finite coefficient pullbacks descends uniquely through localization of flat K-flat complexes with the canonical derived counit",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'.  Read Mathlib/CategoryTheory/Localization/Predicate.lean:280-345 and Functor/Derived/LeftDerived.lean:180-210. liftNatTrans assumes a localization and supplied lifting isomorphisms: it does not construct the natural strict Roos comparison on the actual good class or verify its canonical ordinary counit formula. Abelian nth-derived results have other domains.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|fullyFaithfulWhiskeringLeft",
+   "results": "22 hits: Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Preadditive.lean, Mathlib/CategoryTheory/Localization/Preadditive.lean, Mathlib/CategoryTheory/Localization/Preadditive.lean, Mathlib/CategoryTheory/Localization/Preadditive.lean; Read Mathlib/CategoryTheory/Localization/Predicate.lean:260-342. Generic localization lift and total-derived counit require the actual good-class localization and natural strict quotient chain map; they do not state the prescribed sheaf comparison. Projective-resolution hits have a different domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations on K-flat complexes extend uniquely to the derived category with prescribed comparison counit",
+   "results": "8 hits: CategoryTheory.Functor.rightKanExtension_hom_ext, CategoryTheory.Localization.Construction.natTransExtension, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Quotient.natTrans_ext, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory, CategoryTheory.NatTrans.rightDerived; Read Mathlib/CategoryTheory/Localization/Predicate.lean:260-342. Generic localization lift and total-derived counit require the actual good-class localization and natural strict quotient chain map; they do not state the prescribed sheaf comparison. Projective-resolution hits have a different domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "10 hits: CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.liftNatTrans_id, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.comp_liftNatTrans, CategoryTheory.Localization.comp_liftNatTrans_assoc, CategoryTheory.Localization.liftNatTrans_app, CategoryTheory.NatTrans.CommShift.liftNatTrans; Read Mathlib/CategoryTheory/Localization/Predicate.lean:260-342. Generic localization lift and total-derived counit require the actual good-class localization and natural strict quotient chain map; they do not state the prescribed sheaf comparison. Projective-resolution hits have a different domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map from a complex to the homotopy inverse limit of its finite coefficient pullbacks is natural and independent of resolutions",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.iso_hom_naturality_assoc; Read Mathlib/CategoryTheory/Localization/Predicate.lean:260-342. Generic localization lift and total-derived counit require the actual good-class localization and natural strict quotient chain map; they do not state the prescribed sheaf comparison. Projective-resolution hits have a different domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between ordinary derived ringed pullback and completed pullback descends uniquely from the strict quotient augmentation on flat K-flat complexes",
+   "results": "8 hits: PresheafOfModules.Derivation.Universal.fac, PresheafOfModules.Derivation.Universal.desc, PresheafOfModules.DifferentialsConstruction.isUniversal', CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.Derivation.Universal; Read Mathlib/CategoryTheory/Localization/Predicate.lean:260-342. Generic localization lift and total-derived counit require the actual good-class localization and natural strict quotient chain map; they do not state the prescribed sheaf comparison. Projective-resolution hits have a different domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-ordinary-completed-integral-pullback",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. Integral ordinary/completed pullback comparison needed to identify the coefficient realization of a geometric fibre, including non-linear point automorphisms. Descent of the ordinary-to-completed chain map with its canonical counit, preceding the dual-stalk realization.",
+   "via": [
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-tw-integral-comparison-descent",
+  "worker": "stage1",
+  "summary": "Constructed the natural comparison on good representatives from the strict quotient augmentation, canonical ordinary counit and completed representative comparison; descended it through the existing resolving-class localization; proved normalization, uniqueness, resolution independence and roof compatibility by explicit equations. All dependencies reused; no new nodes and no statement change. Mathlib generic localization results are already represented by an existing leaf, but do not alone state this normalized sheaf comparison.",
+  "blueprint": "Realizes the coefficient-realization infrastructure underneath lem-tw-dual-negation, proof first sentence: the dual stalk is the dual representation; specifically the ordinary/completed integral pullback comparison preceding dual-stalk realization, as recorded in blueprint.from.place. This item is not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Canonical computation counit and good-complex comparison for ordinary ringed pullback; the weight unit has no ringed-topos derived-pullback construction."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Natural representative comparison for the strict finite-pullback Roos functor; the weight unit has no completion model theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Localization equivalence for the full homotopy subcategory of flat-term K-flat module complexes; this is a generic resolving-class tool, not a replacement for the weight-unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions for arbitrary complexes of modules over a ringed site; used to evaluate the ambient comparison on every object."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-8370dd456",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-8370dd456 (reviewer sub-agent of L); spot-checked: I read the item in full and made no fixes. Delivery: one commit; statement and stmt_deps are identical to side-live; live and side-live are unsplit and unreviewed; no repair note, so not a re-split; not on the dropped list; no new nodes. Step 1: the site-derived-tensor-descent node gives the equivalence W^{-1}P_Y -> D(B_Y) (its unary first clause only), so L is a localization; kflat-resolution supplies resolutions. Step 2: the quotient-augmentation node (same unit) gives H_f(v)alpha_Q = alpha_Q' f_B^*(v) as chain maps, with the zero shifted coordinate kept. Step 3: naturality of epsilon (ringed-topoi node, on K(R)), of lambda (integral-operations-well-defined (2)) and of alpha gives naturality of gamma; the identity involves only q_Y v, so it does not depend on the homotopy representative. Steps 4-5: the localization leaf's clauses (2) and (3) give existence and uniqueness; I checked them against Mathlib Predicate.lean liftNatTrans_app l.332 and natTrans_ext l.286. Steps 6-7 are correct elementary cancellations; the resolution formula comes out exactly as stated and needs no fullness of L. The coefficient category D(B_W) and the morphism P_f = B_X (x)^L f^{-1}(-) vs completed P_f agree with the parent lem-tw-ordinary-completed-integral-pullback, which cites the existence and uniqueness parts correctly. Edge cases checked: Q=0, p=id, identity roofs, f=id (no invertibility claimed), empty schemes, unbounded complexes. The route matches the project Lean Sheaf/Paper/OrdinaryCompletedIntegralPullback.lean:441-530 (guidance only, not attached). Duplicate search over all node statements found nothing: the def-sf-ordinary-integral-pullback-construction node defines only the chain map. The 10 searches (grep, leansearch, loogle, leanfinder) are real. No SGA; Stacks 06YS/0G7D/06YY/08TC/04VG checked. I accept the 4 declared tool_uses (ringed-topoi derived pullback, integral-operations-well-defined, site-derived-tensor-descent, kflat-resolution) as generic tools. Maintainer note: the unsplit lem-tw-integral-quotient-augmentation repeats the augmentation data of def-sf-ordinary-integral-pullback-construction and should cite that node when it is split."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryIntegralPullbackConstruction",
+  "declaration": "WeilConjectures.ordinaryIntegralCompletionComparison_existsUnique",
+  "statement": "theorem ordinaryIntegralCompletionComparison_existsUnique :\n    ∃! η : ordinaryIntegralDerivedPull l E f ⟶ integralDerivedPullback l E f,\n      ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        η.app (DerivedCategory.Q.obj P.obj) ≫\n            (integralDerivedPullbackComparison l E f).hom.app P =\n          ordinaryIntegralPullComplexCounit l E f P.obj ≫\n            DerivedCategory.Q.map (ordinaryIntegralCompletionChain l E f P.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing public theorem at the exact source place named by this node. Its unique natural transformation has the stated normalization using the actual ordinary cochain counit and strict (quotients, zero) Roos chain map. Naturality and inversion of the localized resolution arrow give the displayed arbitrary-resolution formula, independence of resolution, and compatibility with roofs; see report for the equations. The theorem is valid for every scheme morphism, so specializes to schemes where l is invertible (the more-general-existing-theorem ruling). It asserts neither constructibility nor invertibility of eta. No construction or theorem is restated.",
+  "file": "lean/Sheaf/Paper/OrdinaryIntegralPullbackConstruction.lean",
+  "declarations": [
+   "WeilConjectures.ordinaryIntegralCompletionComparison_existsUnique",
+   "WeilConjectures.ordinaryIntegralCompletionComparison"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-021eacc02",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Existing:true binding to WeilConjectures.ordinaryIntegralCompletionComparison_existsUnique (side-live Sheaf/Paper/OrdinaryCompletedIntegralPullback.lean:496-530). Only the lean field changed (node otherwise identical to side-live); the statement is verbatim (1 occurrence); live and side-live lean are null. Clause check: P_f = Mathlib totalLeftDerived of the def-sf ordinary module pullback, with the actual totalLeftDerivedCounit; good class = IsKFlatIndependentCoefficients ∧ termwise flat; λ = integralDerivedPullbackComparison.hom (GoodLocalization⋙F ≅ PullbackOnGood); α = mappingCocone.lift(1-s, quotient augmentation, 0). The ∃! normalization is exact; the resolution/roof formulas follow from naturality, so the conclusion is equivalent. Dropped ℓ-invertible hypothesis = more general, allowed. The E/scheme common universe u is inherited from the def-sf record. Edge cases: 0, empty scheme, f=id, n=1, ℓ=2, unbounded. No new definitions, proofs or builds; nothing compiled (no file changed). Advisories: ordinaryIntegralDerivedPull/PullCounit/PullComplexCounit and the sorried hasLeftDerived instance are owned only by the citing parent theorem node lem-tw-ordinary-completed-integral-pullback (no stmt_dep owns them; base-era) → move to a def node; the docstring carries the parent's blueprint tag."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0c664",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261025T101620-L-3714355",
+  "kind": "interface",
+  "note": "independent cc review: item proof (characterization + new integralStratifiedPerfect_pullback + existing sorried strict-model comparison + actual-tower unit) against lem-tw-ordinary-completed-integral-pullback; construction module vs live item (verbatim move + local irreducible/private helpers); adapted modules and node stmt_deps/lean records vs clone; sandbox --all compile incl. importer ProperIntegralOrdinaryInputs"
+ }
+}

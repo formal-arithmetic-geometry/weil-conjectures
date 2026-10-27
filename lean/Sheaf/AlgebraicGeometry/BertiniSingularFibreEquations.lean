@@ -11,12 +11,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import WeilConjectures.ZetaSeries
-import Sheaf.AlgebraicGeometry.ConormalSequenceSmoothImmersion
-import Sheaf.AlgebraicGeometry.HypersurfaceNonzeroRelativeDifferential
-import Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension
-import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
-import WeilConjectures.AlgebraicGeometry.Modules.Differentials
-import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import Sheaf.AlgebraicGeometry.BertiniSingularFibrePolynomialEquations
+import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
+import Mathlib.LinearAlgebra.Dual.Basis
 
 /-!
 # First-order equations vanish on a Bertini singular fibre
@@ -105,7 +102,69 @@ theorem bertini_singular_fibre_equations
     (bertiniSingularToSource f L s ∣_ U).fiberι z ≫
                 ((bertiniSingularToSource f L s) ⁻¹ᵁ U).ι ≫
                 (bertiniSingularIdeal f L s).subschemeι ≫ bertiniUniversalProjection f L s := by
-  sorry
+  classical
+  obtain ⟨W, hz, e₀, he₀, b, hspan⟩ :=
+    exists_bertiniLocalFirstJets f L r s hgen U d z
+  let K := (U : Scheme).residueField z
+  let V := Fin (r + 1) → K
+  let J : Fin (r + 1) → K × bertiniCotangentFibre f U z := fun i ↦
+    bertiniLocalFirstJet f U z W hz
+      (he₀.coeff (L.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op (s ⟨i⟩)))
+  let T := (LinearEquiv.refl K K).prodCongr b
+  let E : V →ₗ[K] K × (Fin d → K) :=
+    T.toLinearMap.comp (Fintype.linearCombination K J)
+  have hE : Function.Surjective E := T.surjective.comp
+    ((span_range_eq_top_iff_surjective_fintypeLinearCombination K J).mp hspan)
+  obtain ⟨A, hA, hKA, e, q, hq, hzero, hcoef⟩ :=
+    bertini_singular_fibre_polynomial_equations f L s U z W hz e₀ he₀
+  let := hA
+  let := hKA
+  let B := (Pi.basisFun K (Fin (r + 1))).dualBasis.reindex Equiv.ulift.symm
+  let P := SymmetricAlgebra.equivMvPolynomial B
+  have hB (i : ULift.{u} (Fin (r + 1))) : B i = LinearMap.proj i.down := by
+    ext v
+    simp [B, Module.Basis.reindex_apply]
+  have hP (ψ : Module.Dual K V) :
+      P (SymmetricAlgebra.ι K (Module.Dual K V) ψ) =
+        ∑ i : ULift.{u} (Fin (r + 1)),
+          MvPolynomial.C (ψ ((Pi.basisFun K (Fin (r + 1))) i.down)) *
+            MvPolynomial.X i := by
+    conv_lhs => rw [← B.sum_repr ψ]
+    simp only [map_sum, map_smul, Algebra.smul_def]
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [map_mul, AlgEquiv.commutes,
+      SymmetricAlgebra.equivMvPolynomial_ι_apply, MvPolynomial.algebraMap_eq,
+      Module.Basis.repr_reindex_apply, Module.Basis.dualBasis_repr]
+    rfl
+  have hcol (i : Fin (r + 1)) :
+      E ((Pi.basisFun K (Fin (r + 1))) i) = T (J i) := by
+    change T (Fintype.linearCombination K J ((Pi.basisFun K (Fin (r + 1))) i)) = _
+    rw [Pi.basisFun_apply, Fintype.linearCombination_apply_single, one_smul]
+  let H : SymmetricAlgebra K (Module.Dual K V) →ₐ[K] A := q.comp P.toAlgHom
+  refine ⟨E, hE, A, hA, hKA, e, H, hq.comp P.surjective, ?_, ?_⟩
+  · intro φ
+    change q (P (SymmetricAlgebra.ι K (Module.Dual K V) (E.dualMap φ))) = 0
+    rw [hP]
+    have hrel := hzero (φ.comp T.toLinearMap)
+    convert hrel using 1
+    apply congrArg q
+    apply Finset.sum_congr rfl
+    intro i _
+    congr 2
+    change φ (E ((Pi.basisFun K (Fin (r + 1))) i.down)) = φ (T (J i.down))
+    rw [hcol]
+  · have hgenP (i : ULift.{u} (Fin (r + 1))) :
+        H (SymmetricAlgebra.ι K (Module.Dual K V) (LinearMap.proj i.down)) =
+          q (MvPolynomial.X i) := by
+      change q (P (SymmetricAlgebra.ι K (Module.Dual K V) _)) = _
+      rw [← hB i, SymmetricAlgebra.equivMvPolynomial_ι_apply]
+    change e.hom ≫ Spec.map (CommRingCat.ofHom (MvPolynomial.eval₂Hom
+      ((algebraMap K A).comp ((U.ι ≫ f).residueFieldAlgebraMap z))
+      (fun i : ULift.{u} (Fin (r + 1)) ↦
+        H (SymmetricAlgebra.ι K (Module.Dual K V) (LinearMap.proj i.down))))) = _
+    simp_rw [hgenP]
+    exact hcoef
 
 end
 

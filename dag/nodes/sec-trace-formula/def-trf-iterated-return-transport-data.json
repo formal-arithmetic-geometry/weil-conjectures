@@ -1,0 +1,157 @@
+{
+ "id": "def-trf-iterated-return-transport-data",
+ "kind": "definition",
+ "title": "The specified iteration, return words and scalar-calculus predicates",
+ "statement": "For the finite-field and coefficient data of the scalar-calculus statement, use the exact recursive functors, point maps, power compositors and scalar comparisons in the attached Lean definitions. iterate has zero term identity and successor iterate followed by U; pointIterate has zero identity and successor followed by iota; scalarIterate has zero identity and successor alpha followed by the image of its preceding term. finiteReturn, integralReturn and rationalReturn are the two normalized compositor words joined by the specified equality of scheme maps. Their point transports compose the point iteration with fibre of this return comparison. The predicates collect naturality, the return scalar square, the point scalar square, and actual identity and coefficient-tower laws. These are the existing definitions of the assigned node, moved verbatim into a definition-only module so lower statements can mention them without a cyclic import.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-local-frobenius-trace",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "def-trf-finite-pullback-presentation-comparison",
+  "def-trf-realized-pullback-comparisons",
+  "def-sf-integral-comparison-system-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9. Explicit specialization and Lean induction by H3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Frobenius.*(scalar|transport)|return.*pullback",
+   "results": "{\"hits\": 0, \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point Frobenius transport scalar compatibility and the unit and associator laws for rationalized pullback",
+   "results": "{\"hits\": 8, \"top\": [\"VectorField.mpullback_smul_apply\", \"VectorField.mpullback_smul\", \"LinearMap.frobenius\", \"CategoryTheory.Monad.transport\", \"VectorField.mpullbackWithin_smul\", \"VectorField.mpullbackWithin_smul_apply\", \"CategoryTheory.Functor.map_units_smul\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport\"]}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"hits\": 9, \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"]}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IteratedReturnTransportScalarCalculus",
+  "date": "2026-10-25",
+  "group": "H3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final sentence, local transport normalization, The specified iteration, return words and scalar-calculus predicates",
+   "via": [
+    "lem-trf-iterated-return-transport-scalar-calculus",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IteratedReturnTransportData",
+  "file": "lean/Sheaf/Paper/IteratedReturnTransportData.lean",
+  "declaration": "WeilConjectures.IteratedReturnTransport.Properties",
+  "statement": "def Properties (r : ℕ)\n    (z : Spec (.of D.k) ⟶ (D.geometricFiber X₀).left)\n    (w : ((End.of (frobeniusPointIso D).hom) ^ (r + 1)) ≫ z =\n      z ≫ ((End.of (D.geometricFrobenius X₀).hom) ^ (r + 1))) : Prop",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.IteratedReturnTransport.iterate",
+   "WeilConjectures.IteratedReturnTransport.pointIterate",
+   "WeilConjectures.IteratedReturnTransport.powerComparison",
+   "WeilConjectures.IteratedReturnTransport.scalarIterate",
+   "WeilConjectures.IteratedReturnTransport.finiteComposition",
+   "WeilConjectures.IteratedReturnTransport.finiteReturn",
+   "WeilConjectures.IteratedReturnTransport.integralReturn",
+   "WeilConjectures.IteratedReturnTransport.rationalReturn",
+   "WeilConjectures.IteratedReturnTransport.finiteI",
+   "WeilConjectures.IteratedReturnTransport.integralI",
+   "WeilConjectures.IteratedReturnTransport.rationalI",
+   "WeilConjectures.IteratedReturnTransport.finiteTransport",
+   "WeilConjectures.IteratedReturnTransport.integralTransport",
+   "WeilConjectures.IteratedReturnTransport.rationalTransport",
+   "WeilConjectures.IteratedReturnTransport.FiniteNaturality",
+   "WeilConjectures.IteratedReturnTransport.IntegralNaturality",
+   "WeilConjectures.IteratedReturnTransport.RationalNaturality",
+   "WeilConjectures.IteratedReturnTransport.systemReturn",
+   "WeilConjectures.IteratedReturnTransport.systemPowerScalar",
+   "WeilConjectures.IteratedReturnTransport.integralPowerScalar",
+   "WeilConjectures.IteratedReturnTransport.rationalPowerScalar",
+   "WeilConjectures.IteratedReturnTransport.ReturnScalarEquation",
+   "WeilConjectures.IteratedReturnTransport.PointScalarEquation",
+   "WeilConjectures.IteratedReturnTransport.SystemScalarEquation",
+   "WeilConjectures.IteratedReturnTransport.IntegralScalarEquation",
+   "WeilConjectures.IteratedReturnTransport.RationalScalarEquation",
+   "WeilConjectures.IteratedReturnTransport.RationalPointScalarEquation",
+   "WeilConjectures.IteratedReturnTransport.PowerScalarUnit",
+   "WeilConjectures.IteratedReturnTransport.PowerScalarTower",
+   "WeilConjectures.IteratedReturnTransport.SystemPowerNormalization",
+   "WeilConjectures.IteratedReturnTransport.IntegralPowerNormalization",
+   "WeilConjectures.IteratedReturnTransport.RationalPowerNormalization",
+   "WeilConjectures.IteratedReturnTransport.PointScalarNormalization",
+   "WeilConjectures.IteratedReturnTransport.ScalarEquations",
+   "WeilConjectures.IteratedReturnTransport.Properties"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.IteratedReturnTransportScalarCalculus",
+  "worker": "H3",
+  "summary": "Strict subargument of the assigned six-step scalar-calculus proof, or ownership of its unchanged definitions.",
+  "blueprint": "Final sentence, local transport normalization, The specified iteration, return words and scalar-calculus predicates"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70682",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261025T163644-L-752613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70682",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261025T163644-L-752613",
+  "kind": "interface",
+  "note": "independent cc review: Moved data module vs old item block (verbatim except finiteComposition ascription, isDefEq true); item theorem proof vs node proof steps; three lower sorry statements vs item clauses (return scalar squares, r=0 point square + PointScalarNormalization, one-step rational unit/tower); importer RationalReturnBlockPower compiled against delivered modules (exit 0); #print axioms item = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

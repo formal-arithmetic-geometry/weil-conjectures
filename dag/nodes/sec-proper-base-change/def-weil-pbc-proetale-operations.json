@@ -134,7 +134,18 @@
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-proetale-site"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -153,12 +164,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-a8bb0138a (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. Replaced the ill-typed derived-adjunction citation with the existing correctly typed general lemma; corrected JSON and review.md are written. No new nodes. Master condensed coefficients and base-change orientation checked; no comparison theorem assumed. Inherited DAG cycles are documented separately.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-cc-29192ad74",
-  "group": "Q36",
-  "result": "pass",
-  "note": "Read the item node (statement, 7 proof steps, proof_deps), both delivered modules, the report (Worker report and Second reading by Q36 present), all 5 stmt_deps and their declarations, plus side ProEtaleInverseImage, ProEtaleCanonicalPullbackComposition, prop-weil-pbc-proetale-constant-ring-map, Mathlib Over.pullbackComp/pullbackId, Stacks 0F6W. Item: arbitrary Scheme.{u}, IsCharacteristic p with Nat.Prime, arbitrary CommRing A : Type u, X.ProEt, iterateFrobenius for all n. r is pinned to (F_V^n, v) by its projections; tau is unique by the unit equation; the derived iso is real exact descent; the comp comparisons are fixed by the published pullbackComp normalization under conjugateIsoEquiv. The open-restriction square type-checks; the iterate equation equals the node's by naturality of tau_a; n=0 is pinned to pullbackId. No added hypotheses or universe restriction. Dependency §1(B) repair is justified (old record needs [Finite A]): re-export plus specialization of the published ring-sheaf operations with c = asIso of c^f_A; its IsIso sorry instance is a definition-needed instance, true for every f and A, not a duplicate (existing proofs are finite-only). Only lean fields changed (diffed against side clone); statements verbatim; lines <=100; imports of stated proof-dep modules present. nt_compile --json of both files in dependency order: exit 0, no errors, no warnings. Notes, not faults: the dependency record drops the old sfIntrinsic* names from declarations (still re-exported); finite-A constant pullback now has two constructions, to be compared in stage 3."
+  "reviewer": "NT-stage2-cc-567232715",
+  "group": "Q52",
+  "result": "fix",
+  "note": "Mathematics correct: all hypotheses/clauses match the node (qcqs f, arbitrary R_Y with c, flat B/LB, C∈D^+, actual cocone legs, every finite free presentation incl. d=0); δ_P = homEquiv(canonical ∃!-characterized tensor comparison ≫ 1⊗ε_C), P-first; δ_B/δ_{P_i} IsIso; cocone equation via projection_naturality; canonical λ_q/ρ_q colimit.desc IsIso and λ_q≫H^qδ_B = colimMap(H^qδ)≫ρ_q; uniform-bound strict K clause. HRS 5.3(1)/(5.4) checked. §1(B) dep records for def-weil-pbc-proetale-operations and lem-weil-pbc-ringed-topoi-derived-tensor-pullback are supersets via public imports, live unchanged since base, statement verbatim. FIX F1: item lean.declarations listed `projection` twice and omitted `projection_naturality` (the cocone-equation theorem) -> fixes/lem-sfb-filtered-finite-free-projection.lean-record.json with the 9 declarations, statement verbatim (refit_record clean); no Lean change, no compile. Advisories: existential unit identifications eA/eC in finiteFreeNormalization (linked by δ_R≫G eC=eA; no unitor API for ProEtaleTensorModel); existential eta/eB in the strict clause (canonical ρ_q stated directly); maintainer: an existing:true def node for ProEtaleTensorModel/proEtaleOrdinaryTensor."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations",
@@ -169,15 +180,21 @@
    "AlgebraicGeometry.Scheme.proEtaleConstantRingPullback",
    "AlgebraicGeometry.Scheme.proEtaleConstantRingPushforward",
    "AlgebraicGeometry.Scheme.proEtaleConstantRingAdjunction",
-   "AlgebraicGeometry.Scheme.proEtaleConstantRingDerivedPullback"
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingDerivedPullback",
+   "AlgebraicGeometry.Scheme.proEtaleRingModules",
+   "AlgebraicGeometry.Scheme.proEtaleRingModulePullback",
+   "AlgebraicGeometry.Scheme.proEtaleRingModuleDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullback",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedAdjunction",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullbackFactors"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantRingOperations.lean",
   "statement": "abbrev proEtaleConstantRingDerivedPullback (A : Type u) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A",
   "branch": "newtargets-dag",
-  "by": "Q36",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "§1(B): The recorded sfIntrinsicDerivedPullback requires [Finite A], while this node states ordinary identified-coefficient operations and the consuming Frobenius statement allows arbitrary commutative A. Reexport that published finite interface and the full arbitrary-ring-sheaf operations, then specialize the latter using the actual constant-section coefficient comparison. Its invertibility is a named construction theorem, and the comparison is asIso of that exact map. Module pullback, direct image, the tensor-unit-normalized adjunction and exact termwise derived pullback are the published constructions, with no replacement module category, arbitrary coefficient identification, completion, torsion, or finiteness assumption."
+  "by": "Q52",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "§1(B): The recorded sfIntrinsicDerivedPullback requires [Finite A], while this node states ordinary identified-coefficient operations and the consuming Frobenius statement allows arbitrary commutative A. Reexport that published finite interface and the full arbitrary-ring-sheaf operations, then specialize the latter using the actual constant-section coefficient comparison. Its invertibility is a named construction theorem, and the comparison is asIso of that exact map. Module pullback, direct image, the tensor-unit-normalized adjunction and exact termwise derived pullback are the published constructions, with no replacement module category, arbitrary coefficient identification, completion, torsion, or finiteness assumption. Section 1(B), Q52: the old declarations listed only constant-ring specializations, while the node and this consumer require an arbitrary commutative ring sheaf. Retain the existing public-import module, primary declaration and constant specializations, and additionally record its already-exported arbitrary-ring module and derived operations and its uniquely normalized derived adjunction. They are defined in ProEtaleOperations and ProEtaleOperationsCanonicalAdjunction, both publicly reexported by this module. No construction is replaced, no ring is assumed constant, and no source file is changed."
  },
  "reviewed_proof": {
   "date": "2026-10-19",
@@ -188,5 +205,15 @@
   "landing": "20261019T002606-L-2157298",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring, and for a scheme $T$ let\n$\\Lambda_T$ be its pullback to the small pro-etale site of $T$ along the\ncanonical morphism from $T_{\\Proet}$ to the point. Let $u:U\\to V$ be a\nmorphism; the canonical coefficient morphism\n$\\alpha_u:u^{-1}\\Lambda_V\\to\\Lambda_U$ is an isomorphism of ring sheaves. The\nmodule inverse image is\n\n$$\n u^*F=\\Lambda_U\\otimes_{u^{-1}\\Lambda_V}u^{-1}F,\n$$\n\nthe module direct image $u_*G$ is the sheaf direct image with $\\Lambda_V$ acting\nthrough the mate $\\Lambda_V\\to u_*\\Lambda_U$ of $\\alpha_u$, and\n$u^*\\dashv u_*$ on module sheaves. Their total derived functors, computed\non K-flat and on K-injective resolutions [def-sp-kinjective-bridge],\nare triangulated functors\n\n$$\n Lu^*:D(V_{\\Proet},\\Lambda_V)\\longrightarrow D(U_{\\Proet},\\Lambda_U),\n \\qquad\n Ru_*:D(U_{\\Proet},\\Lambda_U)\\longrightarrow D(V_{\\Proet},\\Lambda_V),\n$$\n\nwith $Lu^*\\dashv Ru_*$. For a finite discrete ring $\\Lambda$, $\\Lambda_T$ is the\nconstant coefficient sheaf of [def-weil-pbc-proetale-modules].",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

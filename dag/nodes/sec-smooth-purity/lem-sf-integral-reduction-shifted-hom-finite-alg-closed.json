@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-integral-reduction-shifted-hom-finite-alg-closed",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Generic private etale_hom_finite proof, lines 40-89, and intrinsic_hom_finite transport, lines 133-183; SGA 4½, Th. finitude; additional proved part of torsion-input detection; inherited source ancestor: def-weil-integral-rational-qbar-compact-support",
+   "via": [
+    "lem-qcqs-compact-support-torsion-input-detection",
+    "lem-qcqs-compact-support-reduction-rigidity",
+    "lem-qcqs-compact-support-normalized-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite shifted Hom into integral reductions over algebraically closed fields",
+ "statement": "Let k be any algebraically closed field, l a prime invertible in k, E a finite extension of Q_l, and X a finite-type quasi-compact k-scheme. For any two bounded constructible derived-complete integral objects K,M and every n >= 0, the set Hom(K[1], Res_n Red_n M) is finite. Index n denotes exponent n+1. No separatedness assumption is made on X -> Spec k, and k need not be an algebraic closure of a finite field.",
+ "source": {
+  "document": "lean/Sheaf/Paper/CompactSupportTermHomFinite.lean",
+  "place": "Generic private etale_hom_finite proof, lines 40-89, and intrinsic_hom_finite transport, lines 133-183; SGA 4½, Th. finitude",
+  "note": "Proved partial result of the assigned detection argument; no new sorry."
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Shift K inside the integral constructible category. The two residue cohomological support intervals give finite Tor intervals for every finite reduction by integral_residue_tor. Its auxiliary FiniteFieldDatum has no relation to the geometric base: construct it from an unrelated prime p > l, with base ULift(ZMod p) and its algebraic closure. Invertibility of l in every residue field follows from its invertibility in k.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite-ring derived etale origin for both finite reductions. The comparison reflects their Tor intervals, using the same unrelated auxiliary datum. Convert the explicit bounded constructibility predicates to the adopted source convention.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-sf-comparison-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved generic private source lemma etale_hom_finite in CompactSupportTermHomFinite, whose k parameter is any algebraically closed field. This reuses its complete proof, not the narrower finite-field assertion of that module: the adopted boundedConstructible_derivedHom theorem makes RHom bounded constructible for finite-Tor inputs; finite-type direct-image finiteness sends it to a bounded constructible complex on Spec k. Exact point sections identify its zeroth cohomology with a finite module over the finite coefficient ring. The internal-Hom and direct-image adjunctions identify that finite group with the etale Hom set. This is precisely the general algebraically closed scope of the adopted source declarations, with no absolute separatedness assumption.",
+   "uses": [
+    "sbc-thm-finiteness-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport finiteness through the fully faithful etale/pro-etale comparison and the actual scalar extension/restriction adjunction. This gives the displayed shifted Hom set, including index zero, zero objects and empty schemes.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "sbc-thm-finiteness-finite-type",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H2",
+  "document": "lean/Sheaf/Paper/CompactSupportTermHomFinite.lean",
+  "place": "Generic private etale_hom_finite proof, lines 40-89, and intrinsic_hom_finite transport, lines 133-183; SGA 4½, Th. finitude"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations on derived complete integral constructible sheaves determined by torsion inputs",
+   "results": "Only general sheaf and natural-transformation extensionality; no geometric detection theorem. Local adopted source has the finite shifted-Hom Milnor theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the adopted source Milnor argument with its precise hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finite (_ ⟶ _)",
+   "results": "FintypeCat, SimplexCategory and connected objects in a Galois category only.",
+   "date": "2026-10-27",
+   "verdict": "No derived geometric Hom finiteness result in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_milnorMap|integralReduction_shiftedHom_finite_qcqs",
+   "results": "The Mathlib search has no hit. Local rg found the source IsHomotopyLimit.bijective_milnorMap and the project finite-field shifted-Hom proof. The private etale_hom_finite used by that proof quantifies over any algebraically closed field.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the source Milnor theorem and the existing generic finite-coefficient Hom proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between bounded constructible derived etale complexes with finite coefficients over an algebraically closed field are finite",
+   "results": "Eight results about finite scheme morphisms, not finiteness of derived Hom groups.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing generic private finite-coefficient Hom proof in the project."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportTorsionInputDetection",
+  "date": "2026-10-27",
+  "group": "H2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionShiftedHomFiniteAlgClosed",
+  "file": "lean/Sheaf/Paper/IntegralReductionShiftedHomFiniteAlgClosed.lean",
+  "declaration": "WeilConjectures.integralReduction_shiftedHom_finite_algClosed",
+  "statement": "theorem integralReduction_shiftedHom_finite_algClosed\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E]\n    (K₀ : Type u) [Field K₀] [IsAlgClosed K₀] (hl : IsUnit (l : K₀))\n    (X : Scheme.{u}) [X.Over (Spec (.of K₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]\n    (K M : sfIntegralConstructibleCategory l E X) (n : ℕ) :\n    Finite (K.obj⟦(1 : ℤ)⟧ ⟶\n      (sfDerivedReductionRestricted l E X n).obj M.obj)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T094415-L-223111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T094415-L-223111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

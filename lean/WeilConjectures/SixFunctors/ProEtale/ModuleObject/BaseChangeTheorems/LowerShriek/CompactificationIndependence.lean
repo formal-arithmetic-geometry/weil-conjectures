@@ -97,14 +97,10 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-private theorem openUnitIsIso
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] {U V : Scheme.{u}}
-    (j : U ⟶ V) [IsOpenImmersion j] :
-    IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j).unit := by
-  infer_instance
-
-private theorem linearCounitOfAbelian
+/-- For an open immersion `j : U ⟶ X` and a module object `M` on `X`, the counit of the
+`Λ`-linear adjunction `j_! ⊣ j^*` at `M` is an isomorphism if the counit of the abelian-sheaf
+adjunction `j_! ⊣ j^*` is an isomorphism at the underlying sheaf of `M`. -/
+private theorem isIso_linearOpenImmersionLowerShriekAdjunction_counit_app_of_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j]
@@ -120,7 +116,11 @@ private theorem linearCounitOfAbelian
     exact h
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
-private theorem moduleCounitOfLinear
+/-- For an open immersion `j : U ⟶ X` and a module object `M` on `X`, the counit of the
+module-object adjunction `j_! ⊣ j^*` at `M` is an isomorphism if the counit of the `Λ`-linear
+adjunction is: the two differ by the counit of a change of scalars along an isomorphism of
+condensed rings. -/
+private theorem isIso_openImmersionLowerShriekUpperStarAdjunction_counit_app_of_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j]
@@ -140,7 +140,16 @@ private theorem moduleCounitOfLinear
     Adjunction.comp_counit_app]
   infer_instance
 
-private theorem cartesianModuleCounit
+/-- For a cartesian square of schemes
+```
+X' --j'--> Z'
+|g'        |g
+v          v
+X  --j---> Z
+```
+with `j` and `j'` open immersions, and a module object `M` on `X`, the counit of `j'_! ⊣ j'^*`
+at `g^* j_! M` is an isomorphism: `g^* j_! M` is an extension by zero along `j'`. -/
+private theorem isIso_counit_app_upperStar_obj_openImmersionLowerShriek
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Z X' Z' : Scheme.{u}}
     {j : X ⟶ Z} {g : Z' ⟶ Z} {j' : X' ⟶ Z'} {g' : X' ⟶ X}
@@ -152,9 +161,13 @@ private theorem cartesianModuleCounit
     ((ProEtale.openImmersionLowerShriekBaseChangeIso Ab.{u + 1} sq).app M.X).symm
   have hAb := (ProEtale.openImmersionLowerShriekUpperStarAdjunction
     Ab.{u + 1} j').isIso_counit_app_of_iso e
-  exact moduleCounitOfLinear Λ j' _ (linearCounitOfAbelian Λ j' _ hAb)
+  exact isIso_openImmersionLowerShriekUpperStarAdjunction_counit_app_of_isIso Λ j' _
+    (isIso_linearOpenImmersionLowerShriekAdjunction_counit_app_of_isIso Λ j' _ hAb)
 
-private theorem cartesianDerivedCounit
+/-- The derived version of `isIso_counit_app_upperStar_obj_openImmersionLowerShriek`: for a
+cartesian square as there, the counit of the derived adjunction `j'_! ⊣ j'^*` at
+`D(j_! ⋙ g^*) K` is an isomorphism. -/
+private theorem isIso_derivedCounit_app_upperStar_obj_openImmersionLowerShriek
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Z X' Z' : Scheme.{u}}
     {j : X ⟶ Z} {g : Z' ⟶ Z} {j' : X' ⟶ Z'} {g' : X' ⟶ X}
@@ -167,14 +180,15 @@ private theorem cartesianDerivedCounit
   let L := openImmersionLowerShriek Λ j'
   let R := upperStar Λ j'
   let adj := openImmersionLowerShriekUpperStarAdjunction Λ j'
-  have : IsIso adj.unit := openUnitIsIso Λ j'
+  have : IsIso adj.unit := inferInstance
   have ff := adj.mapDerivedCategoryAdjunction.fullyFaithfulLOfIsIsoUnit
   have := ff.full
   have := ff.faithful
   let α : F ⋙ (R ⋙ L) ⟶ F :=
     Functor.whiskerLeft F adj.counit ≫ (Functor.rightUnitor F).hom
   have hαapp (M) : IsIso (α.app M) := by
-    have : IsIso (adj.counit.app (F.obj M)) := cartesianModuleCounit Λ sq M
+    have : IsIso (adj.counit.app (F.obj M)) :=
+      isIso_counit_app_upperStar_obj_openImmersionLowerShriek Λ sq M
     dsimp only [α, NatTrans.comp_app, Functor.whiskerLeft_app]
     infer_instance
   have : IsIso α := NatIso.isIso_of_isIso_app α
@@ -200,7 +214,12 @@ variable {X Z X' Z' : Over (Spec (.of k))}
 
 variable {j g j' g'}
 
-private theorem boundedCartesianCounit (sq : IsPullback g' j' j g)
+/-- The bounded constructible version of
+`isIso_counit_app_upperStar_obj_openImmersionLowerShriek`: for a cartesian square of open
+immersions `j`, `j'` and morphisms `g`, `g'` over `Spec k`, the counit of `j'_! ⊣ Lj'^*` at
+`Lg^* j_! K` is an isomorphism. -/
+private theorem isIso_boundedConstructibleCounit_app_upperStar_obj_openImmersionLowerShriek
+    (sq : IsPullback g' j' j g)
     (K : Dᵇc(X.left)⟦Λ⟧) :
     IsIso ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j').counit.app
       ((boundedConstructibleUpperStar Λ ℓ g).obj
@@ -215,7 +234,7 @@ private theorem boundedCartesianCounit (sq : IsPullback g' j' j g)
         ((boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j).app K) ≪≫
       (Functor.mapDerivedCategoryCompIso
         (openImmersionLowerShriek Λ j.left) (upperStar Λ g.left)).symm.app K.obj
-  have hder := cartesianDerivedCounit Λ sq.overLeft K.obj
+  have hder := isIso_derivedCounit_app_upperStar_obj_openImmersionLowerShriek Λ sq.overLeft K.obj
   have hB : IsIso
       ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j'.left).counit.app B.obj) :=
     (NatTrans.isIso_app_iff_of_iso _ e).mpr hder
@@ -246,7 +265,6 @@ section Refinement
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [IsFinitenessCoefficient ℓ Λ]
   {X Z Z₁ : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom]
@@ -325,15 +343,15 @@ X --i--> Z
 v        v
 X --i₁-> Z₁
 ```
-is cartesian: since `h⁻¹(X) = X`, on stalks at points of `Z_proét` both sides are the stalk of
-`K` at points of `X` and vanish outside `X`. -/
+is cartesian: then `Lh^* i₁_! K` is the extension by zero of `K` along `i`, so the counit of
+`i_! ⊣ Li^*` is an isomorphism at it, and the unit of `i₁_! ⊣ Li₁^*` is an isomorphism since
+`i₁_!` is fully faithful. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ
       sq.toCommSq.snd_comp_eq_of_fst_eq_id) := by
   have hunit : IsIso
       (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁).unit := by
-    have := openUnitIsIso Λ i₁.left
     have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ i₁.left).unit :=
       Adjunction.isIso_mapDerivedCategoryAdjunction_unit
         (openImmersionLowerShriekUpperStarAdjunction Λ i₁.left)
@@ -350,7 +368,7 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
     exact Adjunction.unit_isIso_of_L_fully_faithful _
   rw [NatTrans.isIso_iff_isIso_app]
   intro K
-  have hc := boundedCartesianCounit Λ ℓ sq K
+  have hc := isIso_boundedConstructibleCounit_app_upperStar_obj_openImmersionLowerShriek Λ ℓ sq K
   have hu : IsIso ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       Λ ℓ i₁).unit.app K) := inferInstance
   let e := ((Functor.leftUnitor
@@ -375,7 +393,6 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
     NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.comp_obj, Category.assoc] using e.isIso_hom
 
-
 /-- The *pushforward comparison* `i₁_! ⟶ i_! ⋙ Rh_*` on bounded constructible complexes for a
 cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
 `isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`: the unit of `Lh^* ⊣ Rh_*`
@@ -392,8 +409,11 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforw
     Functor.whiskerRight (inv (boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ
       sq.toCommSq.snd_comp_eq_of_fst_eq_id)) _
 
-private theorem refinementPushforwardIsIsoOfExchange
-    (sq : IsPullback (𝟙 X) i i₁ h)
+/-- The pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism if the proper interchange
+`boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'` of the cartesian square is: its
+other factors are isomorphisms, so the unit of `Lh^* ⊣ Rh_*` is an isomorphism on `i₁_! K`. -/
+private theorem isIso_refinementPushforward_of_isIso_lowerStarOpenImmersionLowerShriekExchange
+    [IsFinitenessCoefficient ℓ Λ] (sq : IsPullback (𝟙 X) i i₁ h)
     (he : IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq) := by
   let aid := boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X)
@@ -476,7 +496,7 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
       (Profinite.continuousMapRingObj E) ℓ sq) := by
-  exact refinementPushforwardIsIsoOfExchange _ ℓ sq
+  exact isIso_refinementPushforward_of_isIso_lowerStarOpenImmersionLowerShriekExchange _ ℓ sq
     (isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ E sq)
 
 /-- For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
@@ -485,7 +505,7 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
       (Profinite.padicAlgClRingObj ℓ) ℓ sq) := by
-  exact refinementPushforwardIsIsoOfExchange _ ℓ sq
+  exact isIso_refinementPushforward_of_isIso_lowerStarOpenImmersionLowerShriekExchange _ ℓ sq
     (isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ sq)
 
 end Pushforward

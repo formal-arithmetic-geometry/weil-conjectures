@@ -10,10 +10,8 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
-import WeilConjectures.AlgebraicGeometry.Descent
-import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Sheaf.AlgebraicGeometry.FpqcCartierIdealReflection
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
@@ -70,6 +68,53 @@ theorem etale_reduced_cartier_descent
       ((Scheme.IdealSheafData.vanishingIdeal Z).IsInvertible ↔
         ∀ i, (Scheme.IdealSheafData.vanishingIdeal
           (Z.preimage (v i).continuous)).IsInvertible)) := by
-  sorry
+  have : IsReduced (Scheme.IdealSheafData.vanishingIdeal Z).subscheme :=
+    (Scheme.IdealSheafData.reduced_induced_closed_subscheme X Z).2.2.2.1
+  have hlocal (W : Scheme.{u}) (v : W ⟶ X) [Etale v] :
+      (pullback.fst v (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι).ker =
+          Scheme.IdealSheafData.vanishingIdeal (Z.preimage v.continuous) ∧
+      ∃ e : pullback v (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι ≅
+          (Scheme.IdealSheafData.vanishingIdeal (Z.preimage v.continuous)).subscheme,
+        e.hom ≫ (Scheme.IdealSheafData.vanishingIdeal
+          (Z.preimage v.continuous)).subschemeι =
+            pullback.fst v (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι := by
+    have : IsReduced (pullback v (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι) :=
+      isReduced_of_etale (pullback.snd v _)
+    obtain ⟨_, _, _, _, _, _, _, huniq⟩ :=
+      Scheme.IdealSheafData.reduced_induced_closed_subscheme W (Z.preimage v.continuous)
+    have hrange : Set.range
+        (pullback.fst v (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι) =
+          (Z.preimage v.continuous : Set W) := by
+      rw [Scheme.Pullback.range_fst]
+      simp
+    obtain ⟨hk, e, he, _⟩ := huniq _ (pullback.fst v _) hrange
+    exact ⟨hk, e, he⟩
+  refine ⟨fun W v _ ↦ (hlocal W v).2, ?_⟩
+  intro ι W v _ hcover
+  constructor
+  · intro h i
+    have hflat := h.comap_of_flat (v i)
+    change (pullback.fst (v i)
+      (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι).ker.IsInvertible at hflat
+    rwa [(hlocal (W i) (v i)).1] at hflat
+  · intro h
+    have hfpqc : Presieve.ofArrows W v ∈ Scheme.fpqcPrecoverage X := by
+      apply Scheme.fppfPrecoverage_le_fpqcPrecoverage
+      apply (Scheme.ofArrows_mem_precoverage_iff _).mpr
+      refine ⟨?_, fun i ↦ ⟨inferInstance, inferInstance⟩⟩
+      intro x
+      have hx : x ∈ (Set.univ : Set X) := Set.mem_univ x
+      rw [← hcover] at hx
+      exact Set.mem_iUnion.mp hx
+    have hJ (i : ι) :
+        (pullback.snd (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι
+          (v i)).ker.IsInvertible := by
+      rw [← Scheme.Hom.ker_comp_of_isIso
+        (pullbackSymmetry (v i)
+          (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι).hom]
+      simpa only [pullbackSymmetry_hom_comp_snd, (hlocal (W i) (v i)).1] using h i
+    have hdesc := (fpqc_cartier_ideal_reflection
+      (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι W v hfpqc hJ).2.2
+    simpa only [Scheme.IdealSheafData.ker_subschemeι] using hdesc
 
 end AlgebraicGeometry

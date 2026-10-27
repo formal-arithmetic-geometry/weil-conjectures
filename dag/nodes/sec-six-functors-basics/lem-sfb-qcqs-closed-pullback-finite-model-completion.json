@@ -1,0 +1,382 @@
+{
+ "id": "lem-sfb-qcqs-closed-pullback-finite-model-completion",
+ "kind": "statement",
+ "title": "Constructible closed inverse image preserves finite scalar models, Tor bounds and adic completion",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and let $i:Z\\hookrightarrow V$ be a closed immersion of qcqs schemes with quasi-compact complementary open [def-weil-closed-immersion, def-weil-open-immersion]. Put $\\Lambda_T=p_T^*\\Lambda$ and use ordinary unbounded derived internal module categories [sk-def-sfb-module-derived-pushpull, def-weil-size-convention]. Constructibility and Tor intervals mean [sk-def-sfb-constructible]. The exact inverse image $i^*$ sends finite constant scalar models to the same scalar models on the pulled-back pro-etale covers, sends constructible sheaves to constructible sheaves, and sends $D_{\\mathrm{ctf}}(V,\\Lambda)$ to $D_{\\mathrm{ctf}}(Z,\\Lambda)$ without enlarging any Tor interval. For every $K$ and every module sheaf $N$ on $Z$ the canonical tensor comparison and closed counit give\n$$i^*(K\\otimes^L_{\\Lambda_V}i_*N)\\cong i^*K\\otimes^L_{\\Lambda_Z}N.$$\nHere $i_*N$ in the left side is the ordinary module sheaf in degree zero.\nIn addition fix a prime $\\ell$, a finite extension $H/\\mathbf Q_\\ell$, $A=\\mathcal O_H$ with its norm topology and uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension], and set $P_{n,T}=(A/\\pi^n)_T$. For every derived $\\pi$-complete $K\\in D(\\operatorname{Mod}_{A_V})$, $i^*K$ is derived complete [sk-def-pe-derived-completion]. More precisely there is a canonical isomorphism\n$$i^*R\\varprojlim_n\\operatorname{Res}_n(K\\otimes^L_{A_V}P_{n,V})\\cong R\\varprojlim_n\\operatorname{Res}_n(i^*K\\otimes^L_{A_Z}P_{n,Z})$$\ncarrying $i^*$ of the completion unit to the completion unit of $i^*K$. On strict quotient towers its Roos representative is the product comparison in both coordinates of $\\operatorname{Cone}(1-T)[-1]$, preserving the augmentation with zero second coordinate and the two-term resolutions $[A\\xrightarrow{\\pi^n}A]$. No boundedness of the complete $K$ is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BL (lemma-closed-immersion-affines-apply), 099M (lemma-naive-completion); agent extraction of the constructible/Tor and normalized strict-Roos consequences."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-constructible",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-pe-derived-completion",
+  "def-weil-derived-limit",
+  "def-weil-tower-transition-endomorphism",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "For the finite-model and Tor assertions work directly in internal modules: the coefficient isomorphism alpha_i makes ordinary inverse image exact, and exact-functor localization represents the unbounded derived pullback termwise. For the still postponed strict-completion assertion, retain the internal/section equivalence and its tensor comparison, the immersion-limit theorem, and their product-preservation argument.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-alpha-iso",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BL (lemma-closed-immersion-affines-apply); agent coefficient/derived assembly"
+   }
+  },
+  {
+   "text": "The existing comparison CondensedRing.upperStarFromPointModComp identifies pullback of every point-module with the same point-module. Compose it with the module inverse-image composition isomorphisms around a commutative square. On the specified base-changed pro-etale cover this gives the identical modules P_a, preserving finite presentation without a matrix calculation. Apply the same comparison on the actual base-changed strata Scheme.Stratification.pullback; their finite local models give constructibility. All square comparisons are first established for abstract schemes and arrows, keeping concrete scheme pullback constructions out of coefficient reduction.",
+   "uses": [
+    "lem-zl-condensed-point-module-comparison",
+    "lemma-constructible-pullback-stratification",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-constructible",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Constructible complexes paragraph; finite scalar matrix refinement; Stacks Tag 054I, morphisms.tex lemma-inverse-image-constructible"
+   }
+  },
+  {
+   "text": "Lift the proved abelian closed counit to internal modules through the module-adjunction counit formula: forgetting modules reflects isomorphisms. The scalar extension/restriction counit is invertible because the coefficient map is an isomorphism. Composition and right-adjoint isomorphism transport give invertibility of the actual internal-module counit. Combine this with the existing derived tensor comparison and the exact degree-zero comparison to obtain the specified tensor/counit isomorphism for the ordinary sheaf i_*N. Test the Tor interval on i_*N, preserve it by exact derived pullback, and transport along this isomorphism. The exact-functor homology comparison and preservation of stratified finite models also preserve bounded constructibility, proving D_ctf preservation with unchanged interval.",
+   "uses": [
+    "lem-sfb-derived-pullback-tensor-comparison-iso",
+    "lem-weil-pbc-proetale-abelian-closed-counit",
+    "lem-sfb-alpha-iso",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BL (lemma-closed-immersion-affines-apply); agent coefficient/derived assembly"
+   }
+  },
+  {
+   "text": "Countable products of module sheaves on both pro-etale sites are exact. Apply the exact-product-functor strict-limit theorem with $F=i^*$, using step 1 and the fixed small site universes. For every strict tower $M$, it gives $i^*R\\varprojlim M\\cong R\\varprojlim i^*M$. This is the specified canonical comparison: on $\\operatorname{Cone}(1-T)[-1]$ it is the canonical product comparison in both coordinates, and it carries every augmented map $(\\gamma,0)$ to $(i^*\\gamma,0)$. Its normalization is independent of resolutions.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, lemma-derived-limit-is-ok; normalized exact-product comparison as stated in lem-cbc-exact-product-functor-strict-limit"
+   }
+  },
+  {
+   "text": "For the integral coefficient ring, use the exact resolution $[A_T\\xrightarrow{\\pi^n}A_T]\\to P_{n,T}$. The scalar-matrix comparison identifies its inverse image with the same resolution on $Z$. The principal-reduction normalization computes $\\operatorname{Res}_n(K\\otimes^LP_{n,V})$ by the scalar cone of $\\pi^n$ on any representing complex, with transition $(\\pi,\\mathrm{id})$ and augmentation the cone inclusion. Exact termwise $i^*$ preserves that cone, its scalar differential, transition and inclusion. The cited normalization identifies these with the actual quotient transition and derived scalar-extension unit on $Z$, not just isomorphic objects. Apply step 4 to this augmented strict tower. This is the asserted completion isomorphism and it carries $i^*$ of the completion unit to the actual completion unit of $i^*K$. This also proves the stated two-term-resolution and zero-second-coordinate normalization. All arguments apply to unbounded complexes.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "lem-pe-principal-reduction-derived-normalization",
+    "lem-sfb-scalar-matrix-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: free rank-one quotient resolution; combined with Stacks proetale.tex Tag 099M, lemma-naive-completion, and the normalized Roos comparison of step 4"
+   }
+  },
+  {
+   "text": "If $K$ is derived complete, its completion unit is invertible. Applying $i^*$ preserves its inverse; step 5 identifies the resulting map with the completion unit of $i^*K$. Hence that unit is invertible, which is precisely derived completeness.",
+   "uses": [
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BL (lemma-closed-immersion-affines-apply); agent coefficient/derived assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-zl-condensed-point-module-comparison",
+  "lemma-constructible-pullback-stratification",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-constructible",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-sfb-derived-pullback-tensor-comparison-iso",
+  "lem-weil-pbc-proetale-abelian-closed-counit",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "det-pe-derived-nakayama-resolution",
+  "lem-pe-principal-reduction-derived-normalization",
+  "lem-sfb-scalar-matrix-inverse-image",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Z8: direct internal-module point-model and stratification pullback; abelian closed counit lifted through module and scalar adjunctions; exact derived Tor/cohomology assembly. The strict completion proof remains postponed with its existing steps 4--6 and product-transport inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion inverse image preserves constructible finite Tor amplitude complexes and derived adic completeness on proetale sites",
+   "results": "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono; AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion; AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion; Topology.IsConstructible.preimage_of_isClosedEmbedding; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.IsFinite.instOfIsClosedImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern closed scheme embeddings, structure sheaves, or ordinary adic completion, not this pro-etale derived finite-model/completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact product preserving inverse image preserves derived completion and finite constant constructible local models",
+   "results": "writtenInExtChart_prod; extChartAt_prod; OpenPartialHomeomorph.extend_prod; Manifold.LiftSourceTargetPropertyAt.prodMap; modelWithCorners_prod_coe_symm; ContMDiffFiberwiseLinear.locality_aux₂; ContMDiffFiberwiseLinear.locality_aux₁; ModelWithCorners.prod",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern closed scheme embeddings, structure sheaves, or ordinary adic completion, not this pro-etale derived finite-model/completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a constructible module complex along a constructible closed immersion preserves Tor bounds and adic completion",
+   "results": "localCohomology.diagram; AdicCompletion.map_exact; CondensedMod.IsSolid; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullback; localCohomology; AlgebraicGeometry.Scheme.Modules.instHasLimits; AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern closed scheme embeddings, structure sheaves, or ordinary adic completion, not this pro-etale derived finite-model/completion comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, DerivedCategory",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern closed scheme embeddings, structure sheaves, or ordinary adic completion, not this pro-etale derived finite-model/completion comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(pullback|inverse.image)|complete.*(pullback|inverse.image)|Roos",
+   "results": "[grep] OK 0 hit(s) | directory AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern closed scheme embeddings, structure sheaves, or ordinary adic completion, not this pro-etale derived finite-model/completion comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*pullback|pullback.*completion|Roos",
+   "results": "0 hits in AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: closed immersion geometry, generic exact derived functors, and ordinary adic completion do not state the pro-etale finite-scalar-model and normalized derived completion assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion inverse image preserves constructible condensed scalar module models and derived adic completion",
+   "results": "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage; AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion; AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion; Topology.IsConstructible.preimage_of_isClosedEmbedding; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.IsClosedImmersion.casesOn; AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion; AlgebraicGeometry.IsClosedImmersion.recOn",
+   "date": "2026-10-22",
+   "verdict": "no match: closed immersion geometry, generic exact derived functors, and ordinary adic completion do not state the pro-etale finite-scalar-model and normalized derived completion assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, DerivedCategory",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: closed immersion geometry, generic exact derived functors, and ordinary adic completion do not state the pro-etale finite-scalar-model and normalized derived completion assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along a closed immersion preserves unbounded derived completion and finite Tor amplitude",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-22",
+   "verdict": "no match: closed immersion geometry, generic exact derived functors, and ordinary adic completion do not state the pro-etale finite-scalar-model and normalized derived completion assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserving products commutes with derived inverse limits and the completion unit of a module complex",
+   "results": "AdicCompletion.map_exact; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; Profinite.NobelingProof.succ_exact; Condensed.instAB4StarCondensedMod; LightCondensed.instPreservesEpimorphismsFunctorDiscreteNatLightCondModLim; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; LightCondensed.instCountableAB4StarLightCondMod; localCohomology.diagramComp",
+   "date": "2026-10-22",
+   "verdict": "no match: closed immersion geometry, generic exact derived functors, and ordinary adic completion do not state the pro-etale finite-scalar-model and normalized derived completion assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-proper-constructible-closed-base-change",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms via det-sf-comp-coherence-refinement (2), closed-complement coefficient devissage: returned steps 1 (closed input preservation) and 2 (closed inverse image of the completion tower).",
+   "via": [
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qcqs-closed-pullback-finite-model-completion",
+  "worker": "stage1",
+  "summary": "Q153 preserves the statement and all its coefficient/unbounded scope. Existing scalar-matrix, ringed closed counit, monoidal derived pullback, exact-product strict-limit and principal-reduction normalization nodes supply every non-elementary ingredient. Six explicit steps assemble constructibility, the ordinary-sheaf Tor test, the two-coordinate Roos comparison and the actual completion unit; no new nodes.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms via det-sf-comp-coherence-refinement (2), proper base change along the closed complement: supplies its constructible input/Tor and integral completion preservation, following the parent extraction. No change to the compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic Internal and sectionwise module operations agree used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic Relative tensor and K-flatness under the internal-to-sectionwise module equivalence used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic $\\alpha_f$ is an isomorphism for every $f$ used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic Inverse images along immersions preserve pro-etale limits used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-pur-scheme-constructible-preimage",
+    "why": "Generic Constructible preimages under arbitrary scheme morphisms used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic An fpqc covering remains an fpqc covering after base change used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic Composition and base change of weakly etale morphisms used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-sfb-scalar-matrix-inverse-image",
+    "why": "Generic Inverse image preserves scalar matrices and their cokernels used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-sfb-derived-pullback-tensor-comparison-iso",
+    "why": "Generic The derived pullback commutes with the derived tensor product used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-closed-counit",
+    "why": "Generic Closed ringed counit is invertible used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic An exact functor commutes with cohomology of cochain complexes used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic Canonical strict derived-limit comparison for exact product-preserving module functors used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "Generic The two-term resolution of the finite coefficient sheaves used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-pe-principal-reduction-derived-normalization",
+    "why": "Generic Normalized comparison of principal scalar cones with canonical derived quotients used in the closed-complement coefficient calculation exactly through its statement; this unit supplies no replacement and its compactification/refinement route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions used to base-change the constructible strata in the fixed closed-complement calculation, without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic Base change of an open immersion is an open immersion (Stacks 01JY) used to base-change the constructible strata in the fixed closed-complement calculation, without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-sfb-scalar-matrix-inverse-image",
+  "lem-sfb-derived-pullback-tensor-comparison-iso",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "det-pe-derived-nakayama-resolution",
+  "lem-pe-principal-reduction-derived-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-33ac64b70",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-33ac64b70 (reviewer sub-agent of L); spot-checked: Statement-only item, split with no new nodes. The statement is identical to the base (checked against sibling Q153 base snapshots); the only stmt_dep added is sk-def-sfb-derived-tensor-hom, which the statement's derived tensor requires. Source check: Stacks proetale 09BL (l.4852), 09AA (l.4945) and 099M (l.4305) say what the item cites them for. No SGA. Step 1: the immersion-limit lemma applies with coefficient map c = alpha_i, which lem-sfb-alpha-iso makes an isomorphism; the internal/sectionwise equivalences are exact. Step 2: constructible preimage, immersion base change, fpqc and weakly-etale base change, and the scalar-matrix lemma give the same finitely presented models on Z_a, which is exactly the definition in sk-def-sfb-constructible. Step 3: the derived-pullback tensor iso (any morphism, unbounded complexes) plus the ringed closed counit for i_*N in degree 0 give the tensor iso. The Tor test in the definition runs over all module sheaves N, so the interval is preserved. Step 4: every hypothesis of lem-cbc-exact-product-functor-strict-limit holds (exact countable products on both sites, exact product-preserving F). Step 5: the principal-reduction normalization has a_n = pi^{n+1}, covering every level n >= 1; transition (pi,id) and the cone inclusion are preserved strictly by termwise i^*, so the units correspond. Step 6 is elementary. Small cases (i = id, empty Z, K = 0) behave correctly. lem-sfb-pullback-constant-model-constructible covers clause 2 only for admissible rings and lem-sf-immersion-completed-pullback-comparison works over a different ring (lim A_n), so neither duplicates the item. The declared tool_uses are accepted. Batch-5 flag: lem-trf-localization-essentially-surjective is a mathlib-status category-theory fact (localizations are essentially surjective) and derived-pullback monoidality is general, so neither is part of the trace-formula or Poincare-duality proofs; I accepted the citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsClosedPullbackFiniteModelCompletion",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsClosedPullbackFiniteModelCompletion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QcqsClosedPullback.finite_models_constructible_tor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.Modules",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.Derived",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.finite_models_constructible_tor",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.integralPull",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.integralPull_additive",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.integralPull_finiteLimits",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.integralPull_finiteColimits",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.integralPull_monoidal",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.integralPullComplex",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.roosFirst",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.roosSecond",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.roosFirstEvaluation",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.roosSecondEvaluation",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.integralRegularComparison",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.normalized_strict_completion",
+   "AlgebraicGeometry.ProEtale.QcqsClosedPullback.derived_completion"
+  ],
+  "statement": "theorem finite_models_constructible_tor [IsClosedImmersion i] [CompactSpace V] [QuasiSeparatedSpace V] [CompactSpace Z] [QuasiSeparatedSpace Z] (_hc : IsCompact (Set.range i)ᶜ) : (∀ (M : Modules Λ V) (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage V) (P : 𝒰.I₀ → Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ), (∀ a : 𝒰.I₀, Mod.IsFinitelyPresented Λ (P a)) → (∀ a : 𝒰.I₀, Nonempty ((CondensedRing.upperStar Λ (𝒰.f a)).obj M ≅ ((upperStarFromPoint (𝒰.X a)).mapMod Λ).obj (P a))) → ∀ a : 𝒰.I₀, Nonempty ((CondensedRing.upperStar Λ ((𝒰.pullback₁ i).f a)).obj ((CondensedRing.upperStar Λ i).obj M) ≅ ((upperStarFromPoint ((𝒰.pullback₁ i).X a)).mapMod Λ).obj (P a))) ∧ (∀ M : Modules Λ V, IsConstantModelConstructible Λ V M → IsConstantModelConstructible Λ Z ((CondensedRing.upperStar Λ i).obj M)) ∧ (∀ K : Derived Λ V, (constantModelBoundedConstructible Λ V K ∧ DerivedCategory.finiteTorAmplitude _ K) → constantModelBoundedConstructible Λ Z ((CondensedRing.moduleObjectDerivedPullback Λ i).obj K) ∧ DerivedCategory.finiteTorAmplitude _ ((CondensedRing.moduleObjectDerivedPullback Λ i).obj K)) ∧ (∀ (a b : ℤ) (K : Derived Λ V), DerivedCategory.torAmplitudeIn _ a b K → DerivedCategory.torAmplitudeIn _ a b ((CondensedRing.moduleObjectDerivedPullback Λ i).obj K)) ∧ (∀ (K : Derived Λ V) (N : Modules Λ Z), IsIso ((((CondensedRing.leftDerivedUpperStarTensor Λ i).app K).app ((DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.lowerStar Λ i).obj N))) ≫ (((CondensedRing.moduleObjectDerivedPullback Λ i).obj K) ◁ ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ i).hom.app _ ≫ ((CondensedRing.upperStar Λ i).mapDerivedCategorySingleFunctor 0).hom.app _ ≫ (DerivedCategory.singleFunctor _ 0).map ((CondensedRing.upperStarLowerStarAdjunction Λ i).counit.app N)))))",
+  "branch": "sheaf-dag",
+  "by": "Q89",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The three theorem signatures jointly state the node: finite_models_constructible_tor gives finite models on the specified base-changed cover, constructibility, D_ctf, unchanged Tor intervals and invertibility of the actual tensor/counit composite; normalized_strict_completion fixes the coefficient comparison, strict quotient transition/unit, both Roos coordinates, the two-term scalar resolution, and its localized completion comparison with the actual unit; derived_completion states the unbounded completeness consequence. All helper data reuses existing functors and Roos coordinates; no independent coefficient/completion construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97be74255",
+  "group": "Q89",
+  "result": "pass",
+  "note": "First stage-2 delivery; only the item's lean record changes; statement verbatim; 16/16 declarations present; 3 sorry theorems; docstrings carry source, blueprint id and proof steps; both report sections present. Clauses match the node: same finite scalar models P on 𝒰.pullback₁ i, IsConstantModelConstructible, D_ctf, unchanged torAmplitudeIn a b, IsIso of the actual tensor-comparison/closed-counit composite with ordinary i_*N in degree 0. normalized_strict_completion pins c, b (μIso.inv ≫ ◁c), levelStep/levelUnit, both Roos coordinates, (unit,0), π^n resolution, K-flat pullback, aZ/c localization and the completionMap compatibility; derived_completion for unbounded K. No extra hypotheses or universe restrictions; edge cases fine. Advisories: theorem-owned or non-stmt_dep declarations (scalarMatrixRegularPullbackIso, DerivedNakayama.*, profinitePointModuleForgetPullbackIso, upperStar family) are used while stmt_deps are unchanged from S1; compile 49.2 s, near the 60 s limit. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261025T144445-L-1244080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

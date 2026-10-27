@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-strict-finite-free-hom-colimit-formula",
+ "kind": "statement",
+ "title": "Strict finite-free internal Hom formula at a prescribed colimit cocone",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "Let C be a category with objects in universe u+1 and morphisms in u, let J be a Grothendieck topology with sheafification of abelian groups in u+1 whose local equivalences are the locally bijective maps, and let R be a sheaf of commutative rings in u+1. Use module sheaves and complexes [def-weil-sheaf-of-modules-category, def-pc-cochain-complex-modules], the fixed strict tensor and K-injective Hom models [def-sfb-internal-hom-strict-models], and the canonical normalized comparison a and augmentation denominator v [def-sfb-internal-hom-strict-roof]. Let I be a small filtered category in u+1, T:I -> Mod_R a diagram with each T_i isomorphic to a finite power of the unit module (including power zero), and c a specified colimit cocone [def-weil-pbc-category-colimit]. Let P be K-flat [def-pc-kflat-complex], suppose Continuous(P) for I, and let L be a complex with L^n=0 for all n below one integer b.\n\nWrite F=homFixed(P), G_B=tensorFixed(B), and I(L) for the fixed K-injective replacement. Then c is a colimit, colim_i a_(T_i) is a quasi-isomorphism, and a is evaluation-normalized. The separate Hom postcomparison colim_i F(T_i tensor I(L)) -> F(colim_i(T_i tensor I(L))) is a quasi-isomorphism, and colim_i(T_i tensor F(L)) -> (colim_i T_i) tensor F(L) is an isomorphism. Every stage numerator a_(T_i) and denominator v_(T_i), and both maps at the specified vertex c.pt, are quasi-isomorphisms. The canonical colimit square post(T,G_(F(L))) followed by a_(colim T) equals colim_i a_(T_i) followed by post(T,G_(I(L)) composed with F). Finally, for every c-leg T_i -> c.pt, its image under tensor(-,L) and then F followed by v_(c.pt) equals v_(T_i) followed by its image under tensor(-,I(L)) and F. No bound on I(L) or F(L) is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15 motivate the conditional continuity argument. Agent formulation of the strict colimit step of lem-sfb-qlbar-internal-hom-coefficient-comparison; exactness and tensor colimits use Stacks 03DB, 03CO and 03EP."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-sfb-internal-hom-strict-models",
+  "def-sfb-internal-hom-strict-roof",
+  "def-weil-pbc-category-colimit",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "The faithful module-sheaf forgetful functor is exact and preserves filtered colimits. Transfer exact filtered colimits from abelian sheaves and apply the existing filteredColimit_comparison to T,P,L. This gives the stage and canonical vertex numerator and denominator quasi-isomorphisms, the tensor postcomparison isomorphism, and the colimit square. Exact filtered colimits preserve the diagram of stage numerator quasi-isomorphisms. comparison_existsUnique supplies evaluation normalization.",
+   "uses": [
+    "lem-sfb-dc-hom-filtered-colimit",
+    "lem-sfb-internal-hom-comparison-exists",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "internalHom_filtered_continuity gives the combined tensor-Hom postcomparison. Tensor by a fixed complex preserves coefficient-sized colimits: use the independent-universe tensor colimit and additive API, the degree-zero single functor, and the total bifunctor colimit instances. Apply colimit.post_post and two-out-of-three to cancel the Hom image of the tensor postcomparison, obtaining the separate Hom postcomparison. No lower bound on the K-injective replacement or on Hom is used.",
+   "uses": [
+    "lem-sfb-internal-hom-filtered-continuity",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unique colimit-point isomorphism colimit T -> c.pt transports the numerator quasi-isomorphism by naturality. Express the denominators as the components of the natural transformation obtained by applying the strict Hom functor to tensor(-,eta_L). The same naturality transports the denominator quasi-isomorphism and gives its square for every specified c-leg. Assemble these clauses with the unchanged colimit square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dc-hom-filtered-colimit",
+  "lem-sfb-internal-hom-filtered-continuity",
+  "lem-sfb-internal-hom-comparison-exists",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P4",
+  "date": "2026-10-26",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proved generic strict-cocone assembly extracted from the parent algebraic-closure coefficient proof, using its existing finite-free comparison and continuity dependencies."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimit of finite free sheaf modules commutes with derived internal Hom by a strict evaluation normalized comparison",
+   "results": "SheafOfModules.mapFree; SheafOfModules.map_ιFree_mapFree_hom; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.isColimitFreeCofan; SheafOfModules.ιFree_mapFree_inv_assoc; LightCondensed.ihomPoints_symm_comp; LightCondensed.ihomPoints",
+   "date": "2026-10-26",
+   "verdict": "No complete strict cocone formula in Mathlib. Use the existing project finite-free comparison and continuity theorems; colimit.post_post supplies the composition identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimit.post_post",
+   "results": "CategoryTheory.Limits.colimit.post_post",
+   "date": "2026-10-26",
+   "verdict": "No complete strict cocone formula in Mathlib. Use the existing project finite-free comparison and continuity theorems; colimit.post_post supplies the composition identity."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.post_post|quasiIso_natTrans_of_iso",
+   "results": "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+   "date": "2026-10-26",
+   "verdict": "No complete strict cocone formula in Mathlib. Use the existing project finite-free comparison and continuity theorems; colimit.post_post supplies the composition identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QlbarInternalHomCoefficientComparison",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sfb-dc-hom-preserves, algebraic-closure paragraph: finite-free coefficient stages and the strict filtered passage; the parent coefficient-comparison node strict-colimit step.",
+   "via": [
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictFiniteFreeInternalHomColimit",
+  "file": "lean/Sheaf/Paper/StrictFiniteFreeInternalHomColimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QlbarInternalHom.strictColimitFormula_of_finiteFree",
+  "statement": "theorem strictColimitFormula_of_finiteFree\n    (R : Sheaf J CommRingCat.{u + 1})\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (T : I ⥤ WeilConjectures.SfbHomFilteredColimit.Modules.{u + 1, u, u}\n      J R) (c : Cocone T)\n    (hc : Nonempty (IsColimit c))\n    (hfree : ∀ i : I, ∃ d : ℕ, Nonempty\n      (T.obj i ≅ limit (Discrete.functor (fun _ : Fin d ↦\n        SheafOfModules.unit ((sheafCompose J\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)))))\n    (P L : CochainComplex (WeilConjectures.SfbHomFilteredColimit.Modules.{u + 1, u, u}\n      J R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (J := J) (R := R) P)\n    (hcont : WeilConjectures.SfbHomFilteredColimit.Continuous.{u + 1, u, u}\n      J R (I := I) P)\n    (hL : ∃ b : ℤ, ∀ n : ℤ, n < b → IsZero (L.X n)) :\n    Nonempty (IsColimit c) ∧\n    QuasiIso (colimMap (Functor.whiskerLeft T\n      (WeilConjectures.SfbHomFilteredColimit.comparison.{u + 1, u, u} J R P L))) ∧\n    WeilConjectures.SfbHomFilteredColimit.Normalized.{u + 1, u, u} J R P L\n      (WeilConjectures.SfbHomFilteredColimit.comparison.{u + 1, u, u} J R P L) ∧\n    QuasiIso (colimit.post\n      (T ⋙ WeilConjectures.SfbHomFilteredColimit.tensorFixed.{u + 1, u, u} J R\n        ((WeilConjectures.coefficientHomResolution.{u, u + 1, u} J R).obj L))\n      (WeilConjectures.SfbHomFilteredColimit.homFixed.{u + 1, u, u} J R P)) ∧\n    IsIso (colimit.post T\n      (WeilConjectures.SfbHomFilteredColimit.tensorFixed.{u + 1, u, u} J R\n        ((WeilConjectures.SfbHomFilteredColimit.homFixed.{u + 1, u, u} J R P).obj L))) ∧\n    (∀ i, QuasiIso\n      ((WeilConjectures.SfbHomFilteredColimit.comparison.{u + 1, u, u} J R P L).app\n        (T.obj i))) ∧\n    (∀ i, QuasiIso\n      (WeilConjectures.SfbHomFilteredColimit.roofDenominator.{u + 1, u, u} J R P L\n        (T.obj i))) ∧\n    QuasiIso\n      ((WeilConjectures.SfbHomFilteredColimit.comparison.{u + 1, u, u} J R P L).app c.pt) ∧\n    QuasiIso\n      (WeilConjectures.SfbHomFilteredColimit.roofDenominator.{u + 1, u, u} J R P L c.pt) ∧\n    (colimit.post T\n        (WeilConjectures.SfbHomFilteredColimit.tensorFixed.{u + 1, u, u} J R\n          ((WeilConjectures.SfbHomFilteredColimit.homFixed.{u + 1, u, u} J R P).obj L)) ≫\n          (WeilConjectures.SfbHomFilteredColimit.comparison.{u + 1, u, u} J R P L).app\n            (colimit T) =\n      colimMap (Functor.whiskerLeft T\n        (WeilConjectures.SfbHomFilteredColimit.comparison.{u + 1, u, u} J R P L)) ≫\n          colimit.post T\n            (WeilConjectures.SfbHomFilteredColimit.tensorFixed.{u + 1, u, u} J R\n              ((WeilConjectures.coefficientHomResolution.{u, u + 1, u} J R).obj L) ⋙\n                WeilConjectures.SfbHomFilteredColimit.homFixed.{u + 1, u, u} J R P)) ∧\n    (∀ i,\n      (WeilConjectures.SfbHomFilteredColimit.homFixed.{u + 1, u, u} J R P).map\n          ((WeilConjectures.SfbHomFilteredColimit.tensor.{u + 1, u, u} J R).map\n            (c.ι.app i, 𝟙 L)) ≫\n        WeilConjectures.SfbHomFilteredColimit.roofDenominator.{u + 1, u, u} J R P L c.pt =\n      WeilConjectures.SfbHomFilteredColimit.roofDenominator.{u + 1, u, u} J R P L\n          (T.obj i) ≫\n        (WeilConjectures.SfbHomFilteredColimit.homFixed.{u + 1, u, u} J R P).map\n          ((WeilConjectures.SfbHomFilteredColimit.tensor.{u + 1, u, u} J R).map\n            (c.ι.app i,\n              𝟙 ((WeilConjectures.coefficientHomResolution.{u, u + 1, u} J R).obj L))))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-154e1",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T070455-L-3593981",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-154e1",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T070455-L-3593981",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, Data and StrictFiniteFree modules against the published item (clone ad190c2) by diff, nodes lem-sfb-qlbar-internal-hom-coefficient-comparison/def-sfb-qlbar-coefficient-module-cocone/lem-sfb-strict-finite-free-hom-colimit-formula against the Lean, 3 direct importers compiled against the delivered files, #print axioms"
+ }
+}

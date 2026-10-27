@@ -1,0 +1,293 @@
+{
+ "id": "lem-trf-local-quotient-evaluation",
+ "kind": "statement",
+ "title": "Evaluation and adjoint factorizations from local projective quotients",
+ "statement": "Let $g:Z\\to X$ be a quasi-compact morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], and let $N$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module]. Let $(V_j)_{j\\in J}$ be an open covering of $X$, set $Z_j=g^{-1}(V_j)$ and $g_j=g|_{Z_j}$, and suppose that for every $j$ there are a quasi-coherent $\\mathcal O_{V_j}$-module $E_j$ [pqf-def-coherent], an immersion $i_j:Z_j\\to\\mathbf P_{V_j}(E_j)$ over $V_j$ [def-weil-closed-immersion], and a chosen isomorphism $i_j^*\\mathcal O(1)\\cong N|_{Z_j}$. Projective bundles, twists and their tautological quotients are as in [lem-trf-projective-bundle-quotient-geometry, def-per-projective-bundle-quotient-data], and pullback is tensor pullback [def-pc-module-pullback]. Write $q_j:g_j^*E_j\\twoheadrightarrow N|_{Z_j}$ for the pulled tautological quotient using the chosen isomorphism. Define $F=g_*N$ by $F(V)=N(g^{-1}V)$ and let $\\varepsilon:g^*F\\to N$ be the counit of module pullback/direct-image adjunction [lem-pc-module-pullback-adjunction]. Then $g$ is separated [def-weil-proper-morphism] and quasi-separated [def-weil-quasi-separated-morphism], $F$ is quasi-coherent, and $\\varepsilon$ is surjective. Under the sectionwise identification $(g_j)_*(N|_{Z_j})=F|_{V_j}$, the adjoint $\\alpha_j:E_j\\to F|_{V_j}$ of $q_j$ satisfies $q_j=\\varepsilon|_{Z_j}\\circ g_j^*\\alpha_j$. There is a unique classifying morphism $r:Z\\to\\mathbf P_X(F)$ over $X$ for the quotient $(N,\\varepsilon)$, with a quotient-compatible isomorphism $r^*\\mathcal O(1)\\cong N$. No finite-type or local-freeness assumption on $E_j$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01VR (lemma-relatively-very-ample), proof (2) implies (4), separatedness and evaluation-factorization paragraphs, before the immersion comparison; 01VQ (lemma-relatively-very-ample-separated)."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-per-projective-bundle-quotient-data",
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-pc-module-pullback-adjunction",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "For each $j$, the projection $p_j:\\mathbf P_{V_j}(E_j)\\to V_j$ is separated by [lem-trf-projective-bundle-quotient-geometry], which allows arbitrary quasi-coherent $E_j$. Since $i_j$ is an immersion, [lem-trf-immersion-over-separated-base] gives separatedness of $g_j=p_j\\circ i_j$. Applying the separatedness clause of [lem-sfb-separated-lfp-target-open-locality] to the given open cover $(V_j)$ proves that $g$ is separated. The cover need not be finite and $X$ need not be quasi-compact.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-immersion-over-separated-base",
+    "lem-sfb-separated-lfp-target-open-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VQ (lemma-relatively-very-ample-separated), proof, and 01VR (lemma-relatively-very-ample), proof (2) implies (4)"
+   }
+  },
+  {
+   "text": "By [lem-pc-separated-quasi-separated], $g$ is quasi-separated. By [def-sc-invertible-module], $N$ is quasi-coherent. Quasi-compactness of $g$ is a hypothesis of the item, so the two morphism hypotheses of [pqf-lem-pushforward-qcoh] now hold; that theorem gives quasi-coherence of $F=g_*N$. Its direct image is the sectionwise module direct image of [lem-pc-module-pullback-adjunction]. No coherence or finite-type conclusion is used.",
+   "uses": [
+    "lem-pc-separated-quasi-separated",
+    "def-sc-invertible-module",
+    "pqf-lem-pushforward-qcoh",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR, lemma-relatively-very-ample, proof (2) implies (4), before the immersion comparison"
+   }
+  },
+  {
+   "text": "Write $t_j:p_j^*E_j\\twoheadrightarrow\\mathcal O(1)$ for the tautological quotient of [lem-trf-projective-bundle-quotient-geometry]. Pullback preserves epimorphisms by [lem-weil-pbc-module-pullback-epi-direct-sum]. Using the composition isomorphism of [lem-pc-module-pullback-identity-composition] to identify $i_j^*p_j^*E_j$ with $g_j^*E_j$, and the chosen isomorphism $i_j^*\\mathcal O(1)\\cong N|_{Z_j}$, the pullback $i_j^*t_j$ is the surjective quotient $q_j$ in the statement.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-module-pullback-epi-direct-sum",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR, lemma-relatively-very-ample, proof (2) implies (4), before the immersion comparison"
+   }
+  },
+  {
+   "text": "For every open $W\\subseteq V_j$, both $((g_j)_*(N|_{Z_j}))(W)$ and $(F|_{V_j})(W)$ equal $N(g^{-1}W)$, with the same restrictions and scalar action. This gives the claimed sectionwise identification. Apply [lem-pc-module-pullback-adjunction] to $g_j$ and $q_j$ to obtain its unique adjoint $\\alpha_j:E_j\\to F|_{V_j}$. For any adjunction $L\\dashv R$, the inverse adjunction bijection sends $a:A\\to RB$ to $\\varepsilon_B\\circ L(a)$; this is the defining counit formula (or follows from naturality and the triangle identity). Consequently $q_j=\\varepsilon^{(j)}\\circ g_j^*\\alpha_j$, where $\\varepsilon^{(j)}$ is the counit for $g_j$. Open pullback is restriction by [lem-weil-pbc-open-immersion-module-pullback-restriction]; its composition comparison is [lem-pc-module-pullback-identity-composition]. Under these identifications $\\varepsilon^{(j)}=\\varepsilon|_{Z_j}$: both maps send a tensor germ $a\\otimes s$ to $a s$ in $N_z$, where $s$ is represented by a section of $N$ over $g^{-1}W$, $W\\subseteq V_j$. This proves the specified factorization with the actual counit.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR, lemma-relatively-very-ample, proof (2) implies (4), before the immersion comparison"
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$ and choose $j$ with $g(z)\\in V_j$. Given a germ $n\\in N_z$, the surjectivity of $q_j$ from Step 3 supplies a germ $e\\in(g_j^*E_j)_z$ with $(q_j)_z(e)=n$. By Step 4, $n=\\varepsilon_z((g_j^*\\alpha_j)_z(e))$. Thus every stalk map $\\varepsilon_z$ is surjective, which is precisely surjectivity of this module-sheaf map. Equivalently, local lifts along $q_j$ give local lifts along $\\varepsilon$ on the covering $(Z_j)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR, lemma-relatively-very-ample, proof (2) implies (4), before the immersion comparison"
+   }
+  },
+  {
+   "text": "Apply the quotient classification in [lem-trf-projective-bundle-quotient-geometry] with base $X$, quasi-coherent module $F$ (Step 2), $T=Z$, $h=g$, and the invertible quotient $(N,\\varepsilon)$ (Step 5). The bijection gives an $X$-morphism $r:Z\\to\\mathbf P_X(F)$ and a quotient-compatible isomorphism $r^*\\mathcal O(1)\\cong N$. Injectivity of the same bijection makes $r$ unique among morphisms classifying this quotient. This uses neither finite type nor local freeness of $F$ or of any $E_j$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR, lemma-relatively-very-ample, proof (2) implies (4), before the immersion comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-trf-immersion-over-separated-base",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-module-pullback-epi-direct-sum",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VR, lemma-relatively-very-ample, proof (2) implies (4), before the immersion comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact morphism with local immersions into projective bundles has quasi coherent pushforward of the tautological line and surjective evaluation factoring each local quotient through its adjoint",
+   "results": "{\"hits\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.awayι_toSpecZero_assoc\"], \"n_hits\": 8, \"note\": \"\", \"assessment\": \"Proj construction, underlying scheme surjectivity, smooth-manifold evaluation and sheaf epimorphism criteria do not give the local projective quotient evaluation and quasi-coherence theorem.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the global evaluation map onto a line bundle is surjective if local projective embedding quotients factor through it",
+   "results": "{\"hits\": [\"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\"], \"n_hits\": 8, \"note\": \"\", \"assessment\": \"Proj construction, underlying scheme surjectivity, smooth-manifold evaluation and sheaf epimorphism criteria do not give the local projective quotient evaluation and quasi-coherence theorem.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, evaluation",
+   "results": "{\"hits\": [], \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'evaluation'\", \"assessment\": \"Proj construction, underlying scheme surjectivity, smooth-manifold evaluation and sheaf epimorphism criteria do not give the local projective quotient evaluation and quasi-coherence theorem.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, Epi",
+   "results": "{\"hits\": [], \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Epi'\", \"assessment\": \"Proj construction, underlying scheme surjectivity, smooth-manifold evaluation and sheaf epimorphism criteria do not give the local projective quotient evaluation and quasi-coherence theorem.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRelativelyVeryAmple|IsVeryAmple|evaluation.*[Ss]urject|[Ss]urject.*evaluation",
+   "results": "{\"hits\": [], \"n_hits\": 0, \"note\": \"\", \"assessment\": \"Proj construction, underlying scheme surjectivity, smooth-manifold evaluation and sheaf epimorphism criteria do not give the local projective quotient evaluation and quasi-coherence theorem.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local projective bundle immersion witnesses imply surjectivity of the evaluation counit for an invertible sheaf",
+   "results": "{\"hits\": [\"smoothSheaf.eval_surjective\", \"smoothSheafCommRing.eval_surjective\", \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"AlgebraicGeometry.IsImmersion.mk\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"AlgebraicGeometry.IsPreimmersion.toSurjectiveOnStalks\", \"smoothSheaf.evalHom\", \"Module.comap_eval_surjective\"], \"n_hits\": 8, \"note\": \"\", \"assessment\": \"Proj construction, underlying scheme surjectivity, smooth-manifold evaluation and sheaf epimorphism criteria do not give the local projective quotient evaluation and quasi-coherence theorem.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*[Ee]pi|[Ee]pi.*counit|evaluation|eval",
+   "results": "{\"hits\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"n_hits\": 1, \"note\": \"\", \"assessment\": \"Proj construction, underlying scheme surjectivity, smooth-manifold evaluation and sheaf epimorphism criteria do not give the local projective quotient evaluation and quasi-coherence theorem.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact morphism with local immersions into projective bundles has quasi coherent pushforward of the tautological line and surjective evaluation factoring each local quotient through its adjoint",
+   "results": "{\"t\": \"2026-10-23T04:08:47Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact morphism with local immersions into projective bundles has quasi coherent pushforward of the tautological line and surjective evaluation factoring each local quotient through its adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\"], \"digest\": \"46d529f8806d79d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction and underlying-scheme surjectivity or smooth-manifold evaluation do not state the arbitrary quasi-coherent local quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the global evaluation map onto a line bundle is surjective if local projective embedding quotients factor through it",
+   "results": "{\"t\": \"2026-10-23T04:12:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of schemes the global evaluation map onto a line bundle is surjective if local projective embedding quotients factor through it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\"], \"digest\": \"546aa2019cc14f86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction and underlying-scheme surjectivity or smooth-manifold evaluation do not state the arbitrary quasi-coherent local quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local projective bundle immersion witnesses imply surjectivity of the evaluation counit for an invertible sheaf",
+   "results": "{\"t\": \"2026-10-23T04:09:28Z\", \"tool\": \"leansearch\", \"query\": \"Local projective bundle immersion witnesses imply surjectivity of the evaluation counit for an invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheaf.eval_surjective\", \"smoothSheafCommRing.eval_surjective\", \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"AlgebraicGeometry.IsImmersion.mk\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"AlgebraicGeometry.IsPreimmersion.toSurjectiveOnStalks\", \"smoothSheaf.evalHom\", \"Module.comap_eval_surjective\"], \"digest\": \"2ec8973ddbd2c4fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction and underlying-scheme surjectivity or smooth-manifold evaluation do not state the arbitrary quasi-coherent local quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRelativelyVeryAmple|IsVeryAmple|evaluation.*[Ss]urject|[Ss]urject.*evaluation",
+   "results": "{\"t\": \"2026-10-23T04:12:12Z\", \"tool\": \"grep\", \"query\": \"IsRelativelyVeryAmple|IsVeryAmple|evaluation.*[Ss]urject|[Ss]urject.*evaluation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction and underlying-scheme surjectivity or smooth-manifold evaluation do not state the arbitrary quasi-coherent local quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-ample-very-ample",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Auxiliary relative-ampleness argument: returned proof of lem-trf-relative-ample-very-ample, old steps 1, 2. Evaluation and adjoint factorizations from local projective quotients.",
+   "via": [
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-local-quotient-evaluation",
+  "worker": "stage1",
+  "summary": "Followed Stacks 01VQ and the initial (2) implies (4) argument of 01VR, retaining the statement. Reused the existing target-locality, separated-to-quasi-separated, qcqs pushforward, pullback and projective quotient nodes. Added one Mathlib leaf for immersions over separated bases. Wrote the adjunction counit restriction on tensor germs and the surjectivity cancellation explicitly. No finite-generation hypothesis introduced.",
+  "blueprint": "Auxiliary projectivity branch from lem-trf-local-term-locality through lem-trf-relative-ample-very-ample: local projective witnesses, separatedness, qcqs pushforward and evaluation before the immersion comparison. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "General qcqs direct-image preservation of quasi-coherence, needed after separatedness; the trace-formula unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "General tensor pullback/direct-image adjunction defines the actual evaluation counit and adjoints of the local quotients; this is a module tool, not a replacement for the trace-formula route."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "General composition comparison identifies tensor pullbacks for the local quotient and restriction of the counit."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-epi-direct-sum",
+    "why": "Only the generic epimorphism-preservation clause is used to pull back the tautological quotient."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "why": "Identifies open tensor pullback with restriction for the actual counit; a generic module-sheaf identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-module-pullback-epi-direct-sum",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-094acb1c7",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-094acb1c7 (reviewer sub-agent of L); spot-checked: I read Stacks 01VR (2)⇒(4) up to the immersion comparison, plus 01VQ, 01LC and 01L8 (schemes.tex). The item statement matches the source hypothesis by hypothesis and is unchanged; the citer lem-trf-relative-ample-very-ample step 1 takes exactly F, the surjectivity of ε, α_j and the factorization. Step 1: the geometry node states p separated for any quasi-coherent E; the new leaf gives g_j separated; lem-sfb-separated-lfp-target-open-locality gives target locality over a set-indexed cover, so g is separated. Step 2: separated⇒qs (lem-pc-separated-quasi-separated), N is quasi-coherent by definition, and pqf-lem-pushforward-qcoh applies because g is qc and qs. Step 3: pullback preserves epis (epi-direct-sum (1)) and the composition isomorphism plus the chosen twist isomorphism give q_j. Step 4: the sectionwise identification holds because g^{-1}W⊆Z_j; the adjoint comes from lem-pc-module-pullback-adjunction; ε^{(j)}=ε| follows from the open-pullback restriction, checked on germs a⊗s↦as; elementary is acceptable. Step 5: stalkwise cancellation is correct. Step 6: the bijection of the geometry node with base X, E=F, T=Z, quotient (N,ε) gives r, and its injectivity gives uniqueness. New leaf lem-trf-immersion-over-separated-base: Mathlib Separated.lean:75 IsSeparated.instCompScheme (name confirmed in the .ilean), :61 isSeparated_of_mono, Preimmersion.lean:65 Mono, Immersion.lean:45 IsImmersion extends IsPreimmersion; this is a one-line specialization with inferred instances. Duplicate scan: lem-weil-pbc-separated-cancellation(a) and lem-trf-scheme-monomorphism-separated cover only the immersion/monomorphism half; no node states that separated morphisms are stable under composition; so it is not a duplicate and not a clause of the item. Tested on Z=∅, i=id, a closed immersion and a non-quasi-compact open immersion; the item on E_j=0, an infinite cover and O^{r+1} on a one-member cover. No SGA is cited. The generic tool uses (qcqs pushforward, pullback adjunction and composition, pbc module identifications) are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalQuotientEvaluation",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.local_quotient_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.localQuotientPullbackRestrictionIso",
+   "AlgebraicGeometry.Scheme.Modules.localQuotientPushforwardRestrictionMap",
+   "AlgebraicGeometry.Scheme.Modules.localProjectiveQuotient",
+   "AlgebraicGeometry.Scheme.Modules.local_quotient_evaluation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalQuotientEvaluation.lean",
+  "statement": "theorem local_quotient_evaluation {Z X : Scheme.{u}} (g : Z ⟶ X) [QuasiCompact g] (N : Z.Modules) [N.IsInvertible] (J : Type v) (V : J → X.Opens) (hV : iSup V = ⊤) (E : ∀ j : J, (V j).toScheme.Modules) [hE : ∀ j : J, (E j).IsQuasicoherent] (D : ∀ j : J, ProjectiveBundleQuotientGeometry.TautologicalQuotient (E j)) (i : ∀ j : J, (g ⁻¹ᵁ V j).toScheme ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData (E j)).relProj) (hi : ∀ j : J, i j ≫ (SymmetricAlgebraSheaf.gradedAlgebraData (E j)).relProjHom = g ∣_ V j) (himm : ∀ j : J, IsImmersion (i j)) (e : ∀ j : J, (tensorPullback (i j)).obj (D j).line ≅ N.restrict (g ⁻¹ᵁ V j).ι) : IsSeparated g ∧ QuasiSeparated g ∧ Epi ((tensorPullbackSectionAdjunction g).counit.app N) ∧ (∀ j : J, ∃ b : ((pushforward g).obj N).restrict (V j).ι ≅ (pushforward (g ∣_ V j)).obj (N.restrict (g ⁻¹ᵁ V j).ι), b.hom = localQuotientPushforwardRestrictionMap g N (V j) ∧ ∃ α : E j ⟶ ((pushforward g).obj N).restrict (V j).ι, α = (tensorPullbackSectionAdjunction (g ∣_ V j)).homEquiv _ _ (localProjectiveQuotient g N (V j) (E j) (D j) (i j) (hi j) (e j)) ≫ b.inv ∧ localProjectiveQuotient g N (V j) (E j) (D j) (i j) (hi j) (e j) = (tensorPullback (g ∣_ V j)).map α ≫ (localQuotientPullbackRestrictionIso g (V j) ((pushforward g).obj N)).hom ≫ (restrictFunctor (g ⁻¹ᵁ V j).ι).map ((tensorPullbackSectionAdjunction g).counit.app N)) ∧ ∃ hF : ((pushforward g).obj N).IsQuasicoherent, ∃ DF : @ProjectiveBundleQuotientGeometry.TautologicalQuotient X ((pushforward g).obj N) hF, ∃! r : Z ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData X ((pushforward g).obj N) hF).relProj, @ProjectiveBundleQuotientGeometry.Classifies X ((pushforward g).obj N) hF DF Z g N ((tensorPullbackSectionAdjunction g).counit.app N) r",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-620c5615f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-620c5615f",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Statement matches node/Stacks 01VR(2)=>(4)+01VQ clause by clause (qc g, invertible N, arbitrary Type v cover with iSup=⊤, qcoh E_j, immersion over V_j, twist iso data; separated, quasi-separated, ∃ hF qcoh g_*N, Epi of normalized counit, canonical-map-pinned b, α_j = homEquiv q ≫ b.inv with factorization through the restricted global ε, ∃ DF ∃! r Classifies); D j hypothesis and ∃ DF are sound because normalized TautologicalQuotient data are unique up to unique quotient-compatible iso; edge cases J empty, E_j=0, Z empty, infinite cover OK; 11 stmt_dep records identical to live; node changes only lean. F1 H2: helper localQuotientPullbackRestrictionIso used restrictFunctorIsoTensorPullback, a def owned by theorem node lem-weil-pbc-open-immersion-module-pullback-restriction (not a stmt_dep). FIX inlines (restrictAdjunction f).leftAdjointUniq (tensorPullbackSectionAdjunction f), provably the same map by uniqueness of the normalized adjunction; import swapped to Mathlib Adjunction.Unique/Modules.Sheaf. Signature, declarations and lean record unchanged. fixes/LocalQuotientEvaluation.lean compiled once via nt_compile --json: 17.6 s, exit 0, clean. Advisories: b pinned as transposed restricted counit rather than sectionwise (canonical, acceptable); relProj owners only reached via def-per-projective-bundle-quotient-data."
+ }
+}

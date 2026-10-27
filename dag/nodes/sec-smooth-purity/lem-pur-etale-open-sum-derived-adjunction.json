@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-etale-open-sum-derived-adjunction",
+ "kind": "statement",
+ "title": "Open and etale sum derived adjunctions agree",
+ "statement": "For a commutative ring A and an open immersion j:X to Y, derivedOpenImmersionLowerShriekUpperStarAdjunction on ModuleCat A equals derivedEtaleLowerShriekUpperStarAdjunction on ModuleCat A. Open extension and etale sum extension along j are the same constructed functor; the conclusion identifies their specified adjunction structures, not merely their functors.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 and 03S5, extension by zero and its adjunction; derived.tex Tag 0FND, derived adjunction compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Use Adjunction.ext and localization to compare the units on complex representatives. Expand the homotopy exact-factorization map on a quotient complex; its quotient comparison components are identities, so it equals the cochain exact factorization.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit factorization for the open derived adjunction and the localization unit formula for the etale sum adjunction now give the same degreewise ordinary unit followed by the inverse exact factorizations. Cancel those invertible factors and use naturality of quotientCompQhIso to identify the two localization maps. This proves equality on all derived objects.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 and 03S5, extension by zero and its adjunction; derived.tex Tag 0FND, derived adjunction compatibility.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion the etale sum derived adjunction equals the open extension adjunction and its graph comparison removes the identity direct image",
+   "results": "Eight matches on scheme modules and open immersions, including restrictAdjunction and its counit; none concerns this specified etale graph or derived adjunction normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ext",
+   "results": "Adjunction.ext determines an adjunction from its unit. It is used for the adjunction identification but does not supply either normalization.",
+   "date": "2026-10-27",
+   "verdict": "General categorical tool only."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*Adjunction|compactSupport.*[Cc]omparison",
+   "results": "No Mathlib matches. Local project searches found the graph-normalization, exact-factorization and localization-unit APIs used in the proofs.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphOpenEtaleComposition",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-graph-open-etale-composition",
+   "place": "The equality of derived adjunctions in Step 3."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenSumDerivedAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenSumDerivedAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenSumDerivedAdjunction",
+  "statement": "theorem etaleOpenSumDerivedAdjunction\n    (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :\n    derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j =\n      derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j inferInstance",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T065845-L-2480882",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T065845-L-2480882",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

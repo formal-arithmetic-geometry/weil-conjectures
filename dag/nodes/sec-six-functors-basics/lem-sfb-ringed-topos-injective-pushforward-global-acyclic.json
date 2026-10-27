@@ -1,0 +1,177 @@
+{
+ "id": "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+ "kind": "statement",
+ "title": "Global-sections acyclicity of injective pushforwards on ringed topoi",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to a common coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and let $\\mathcal O_{\\mathcal C},\\mathcal O_{\\mathcal D}$ be sheaves of commutative rings. Let $f:(\\operatorname{Sh}(\\mathcal C),\\mathcal O_{\\mathcal C})\\to(\\operatorname{Sh}(\\mathcal D),\\mathcal O_{\\mathcal D})$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism]. Its module direct image is the underlying abelian direct image with the scalar action induced by the structural ring map. For every injective $\\mathcal O_{\\mathcal C}$-module sheaf $I$ [def-weil-sheaf-of-modules-category, def-sp-injective-resolutions] and every integer $p>0$,\n$$R^p\\Gamma(\\mathcal D,-)(f_*I)=0.$$\nHere $\\Gamma(\\mathcal D,M)=\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal D)}(1,M_{\\mathrm{sets}})$ with its induced abelian-group structure, and its right derived functors are computed by injective resolutions in $\\operatorname{Mod}(\\mathcal O_{\\mathcal D})$ [def-sp-left-exact-additive]. The geometric morphism need not be induced by a functor between the given sites, and no flatness of $f^{-1}\\mathcal O_{\\mathcal D}\\to\\mathcal O_{\\mathcal C}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072Z, lemma-direct-image-injective-sheaf, followed by Tag 0731(3), lemma-limp-acyclic: total acyclicity implies acyclicity for module global sections."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-injective-pushforward-totally-acyclic] to $f$ and $I$, with $K=1$ the terminal sheaf of sets on $\\mathcal D$. Its hypotheses are exactly those of the statement: the same sites small in the common coefficient universe, the same sheaves of commutative rings, the same morphism of ringed topoi with its induced module direct image, an injective $\\mathcal O_{\\mathcal C}$-module $I$, no flatness, and no presentation of $f$ by a functor between the given sites. Its functor $\\Gamma(1,N)=\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal D)}(1,N_{\\mathrm{sets}})$ with pointwise operations is the functor $\\Gamma(\\mathcal D,N)$ of the statement: the pointwise sum of $x,y:1\\to N_{\\mathrm{sets}}$ is the composite of $(x,y):1\\to N\\times N$ with the addition of $N$, which is the induced abelian-group structure. Both derived functors are computed by injective resolutions in $\\operatorname{Mod}(\\mathcal O_{\\mathcal D})$ [def-sp-left-exact-additive], so $R^p\\Gamma(\\mathcal D,-)(f_*I)=H^p(1,f_*I)=0$ for every $p>0$.",
+   "uses": [
+    "lem-sfb-injective-pushforward-totally-acyclic",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0731 (lemma-limp-acyclic), proof of part (3): the special case K = e (final object) of total acyclicity; total acyclicity of f_*I is Tag 072Z (lemma-direct-image-injective-sheaf)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-left-exact-additive",
+  "lem-sfb-injective-pushforward-totally-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0731 (lemma-limp-acyclic), part (3): special case K = e of Tag 072Z (lemma-direct-image-injective-sheaf)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of ringed topoi, the direct image of an injective sheaf of modules is acyclic for global sections without a flatness assumption",
+   "results": "8 hits; PresheafOfModules.instIsLocallyInjectiveToSheafify, PresheafOfModules.IsLocallyInjective, CategoryTheory.Sheaf.isLocallyInjective_forget, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, SheafOfModules.instAbelian, CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff, CochainComplex.isKInjective_of_injective, CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: local injectivity and vanishing on an injective input do not prove acyclicity of the non-injective module pushforward; no flatness is assumed"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAcyclic|[Tt]otally[Aa]cyclic|[Ll]imp|pushforward.*[Ii]njective|[Ii]njective.*pushforward",
+   "results": "0 hits; ; searched Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: local injectivity and vanishing on an injective input do not prove acyclicity of the non-injective module pushforward; no flatness is assumed"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, Injective",
+   "results": "0 hits; ; loogle: unknown identifier 'Injective'",
+   "date": "2026-10-23",
+   "verdict": "no usable match: loogle: unknown identifier 'Injective'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image of an injective sheaf of modules on ringed topoi is acyclic for global sections",
+   "results": "8 hits; TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, SheafOfModules.GeneratingSections.ofEpi_s, SheafOfModules.Presentation.mk.inj, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, AlgebraicGeometry.specTargetImageFactorization_app_injective, SheafOfModules.GeneratingSections.mk.inj, CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff, SheafOfModules.GeneratingSections.mk.injEq",
+   "date": "2026-10-23",
+   "verdict": "no match: local injectivity and vanishing on an injective input do not prove acyclicity of the non-injective module pushforward; no flatness is assumed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of an injective module on a ringed topos is totally acyclic and has zero higher sheaf cohomology on every sheaf of sets",
+   "results": "8 hits; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, PresheafOfModules.instIsLocallyInjectiveToSheafify, CochainComplex.isKInjective_of_injective, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CochainComplex.cm5b.I_X, CochainComplex.isKInjective_of_injective_aux, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+   "date": "2026-10-23",
+   "verdict": "no match: local injectivity and vanishing on an injective input do not prove acyclicity of the non-injective module pushforward; no flatness is assumed"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Injective",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: local injectivity and vanishing on an injective input do not prove acyclicity of the non-injective module pushforward; no flatness is assumed"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAcyclic|[Tt]otally[Aa]cyclic|[Ll]imp|pushforward.*[Ii]njective|[Ii]njective.*pushforward",
+   "results": "{\"t\": \"2026-10-23T13:45:04Z\", \"tool\": \"grep\", \"query\": \"rightAcyclic|[Tt]otally[Aa]cyclic|[Ll]imp|pushforward.*[Ii]njective|[Ii]njective.*pushforward\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary pushforward, local injectivity, or derived vanishing on an injective input; none proves global-section acyclicity of a non-flat module direct image on arbitrary ringed topoi"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of an injective sheaf of modules is acyclic for global sections on an arbitrary ringed topos",
+   "results": "{\"t\": \"2026-10-23T13:45:04Z\", \"tool\": \"leansearch\", \"query\": \"Pushforward of an injective sheaf of modules is acyclic for global sections on an arbitrary ringed topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pushforward\", \"PresheafOfModules.pushforward₀\", \"SheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀_obj\", \"SheafOfModules.pushforward_map_val\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"SheafOfModules.pushforwardSections\"], \"digest\": \"e3faebecba043a1a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary pushforward, local injectivity, or derived vanishing on an injective input; none proves global-section acyclicity of a non-flat module direct image on arbitrary ringed topoi"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Functor.rightDerived",
+   "results": "{\"t\": \"2026-10-23T13:45:05Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforward, CategoryTheory.Functor.rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary pushforward, local injectivity, or derived vanishing on an injective input; none proves global-section acyclicity of a non-flat module direct image on arbitrary ringed topoi"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-leray-spectral-sequence",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: affine-base global vanishing after repeating the relative argument for an arbitrary base-changed module. Supporting input for the affine-base Leray argument: Natural Leray spectral sequence for module sheaves on ringed sites. Prerequisite for the Leray composition: acyclicity of direct images of injective modules for target global sections (Stacks 072Z and 0731(3)).",
+   "via": [
+    "lem-sfb-ringed-site-leray-spectral-sequence",
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+  "worker": "stage1",
+  "summary": "Statement unchanged. The item is the case K = terminal sheaf of the existing same-unit node lem-sfb-injective-pushforward-totally-acyclic (Stacks 072Z), exactly as Stacks 0731(3) derives it; one step. Reviewer FIX (Q24 stage-1 review of 6e09fe9d): the delivered five-step reproof of this special case through the 03CR presentation was replaced by the citation of the existing generalization. No new nodes or Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: affine-base global vanishing after repeating the relative argument for an arbitrary base-changed module. Supporting input for the affine-base Leray argument: Natural Leray spectral sequence for module sheaves on ringed sites. Prerequisite for the Leray composition: acyclicity of direct images of injective modules for target global sections (Stacks 072Z and 0731(3)). Step 1 gives the global-sections-acyclicity prerequisite of the ringed-site Leray composition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-6e09fe9d0",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-6e09fe9d0 (reviewer sub-agent of L); spot-checked: Read the item, all eight cited statements, Stacks 072Z (sites-cohomology l.2211) and 0731 (l.2272), and the report. The item statement is unchanged and correct. Checked cases: identity, point topoi with the non-flat map Z->Z/2, and the zero ring. The delivered steps 1-5 are mathematically correct. They use the 03CR presentation with swapped letters, the exact module equivalence (which preserves injectives), the reviewed ringed-site evaluation acyclicity at the terminal object T of D' (h_T is the terminal sheaf, so Gamma = evaluation at T), and an additive isomorphism of the global-section complexes. Fault (C5/duplicate): the base DAG already has lem-sfb-injective-pushforward-totally-acyclic (same unit, Q78, Tag 072Z) with identical hypotheses. It gives H^q(K,f_*I)=0 for every sheaf of sets K, with Gamma(K,N)=Hom(K,N_sets) and pointwise operations. Taking K=1 gives the item exactly, which is how Stacks proves 0731(3) ('special case of (2) with K = e'). That node must be proved anyway for the relative Leray proof, so the five-step reproof was duplicate work. FIX: the proof is now one step citing it with K=1, with the identification Gamma(1,-)=Gamma(D,-) written out and def-sp-left-exact-additive cited. proof_deps, proof_origin and the split_report summary/blueprint are updated, and tool_uses is now []. There is no cycle because the cited node is unsplit and has no proof_deps. No new nodes, no drops, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedToposInjectivePushforwardGlobalAcyclic",
+  "declaration": "CategoryTheory.RingedToposMorphism.isZero_rightDerived_globalSections_obj_injective",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposInjectivePushforwardGlobalAcyclic.lean",
+  "statement": "theorem isZero_rightDerived_globalSections_obj_injective {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) (I : ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) [Injective I] (p : ℕ) (hp : 0 < p) : IsZero (((SheafOfModules.toSheaf ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B) ⋙ Sheaf.Γ K AddCommGrpCat.{u}).rightDerived p).obj (f.modules.obj I))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1fc7bd673",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Clause-by-clause check against Stacks 072Z/0731(3) and the node: same small sites in one universe u, commutative ring sheaves through forget₂, the recorded RingedToposMorphism f (no flatness, no site functor), I with [Injective I], p : ℕ with 0 < p, global sections toSheaf ⋙ Sheaf.Γ K AddCommGrpCat.{u}, rightDerived taken on Mod(O_D), conclusion IsZero of the value at f.modules.obj I. Edge cases (p=0 excluded, site without terminal object, identity, zero ring, non-flat Z→Z/2) are covered with no stronger assumptions. The global-sections composite is definitionally the landed coefficientSections abbrev (def-sfb-coefficient-module-global-sections); no duplicate definition, note only. The attribute [instance] isGrothendieckAbelian line follows the landed Leray module. No definitions, sorry only. Docstrings carry the source place, blueprint id and the proof step. lean.statement is verbatim in the file. stmt_deps unchanged. Worker report and Second reading sections present. No compile run because no file was changed."
+ }
+}

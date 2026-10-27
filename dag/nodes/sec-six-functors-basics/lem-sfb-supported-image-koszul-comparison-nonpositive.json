@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-supported-image-koszul-comparison-nonpositive",
+ "kind": "statement",
+ "title": "Relative nonpositivity of the supported integral-image Koszul complex",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme]. Use the small étale and pro-étale sites in a common indexing universe [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention]. Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its norm-topological valuation ring $B=\\mathcal O_E$, and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. On every scheme $T$ put $B_T=p_T^*C(-,B)$ and use internal $B_T$-module objects [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. Let $S=T_r\\xrightarrow{a_r}\\cdots\\xrightarrow{a_1}T_0=X$ be any finite chain whose arrows are quasi-compact open immersions or closed immersions with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. Set $J=J_1\\circ\\cdots\\circ J_r$, where $J_t=(a_t)_!$ for an open arrow and $J_t=(a_t)_*$ for a closed arrow [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]; for $r=0$ set $J=\\mathrm{id}$. Assume that the source $S$ of the chain is Noetherian, meaning quasi-compact and locally Noetherian [def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth]. Let $f:L\\to M$ be any morphism of internal $B_S$-modules such that, separately on some pro-étale covering for each of $L,M$, the module is $B_S\\otimes_{\\underline B_S}\\underline P$ for a finitely presented abstract $B$-module $P$ (a cokernel of a map between finite free modules); these are the finite scalar local models of [sk-def-sfb-constructible]. Take the actual abelian image $I=\\operatorname{im}f$, with no topological closure. For any affine pro-étale object $v:U\\to X$ [sk-def-pe-morphisms], put $N=v^*J(I)$ using module pullback [def-sfb-module-upper-star]. Let $n\\ge1$ and let $C_n(N)$ be the complex of underlying abelian sheaves on $U_{\\mathrm{proét}}$ with $N$ in degrees $-1,0$, differential $\\pi^n:N\\to N$, and zero elsewhere. For the comparison morphism $\\nu_U:U_{\\mathrm{proét}}\\to U_{\\mathrm{ét}}$ [def-weil-pbc-site-comparison-morphism], the ordinary derived abelian direct image satisfies\n$$R\\nu_{U,*}C_n(N)\\in D^{\\le0}(\\operatorname{Ab}(U_{\\mathrm{ét}})),\\qquad\\mathcal H^q(R\\nu_{U,*}C_n(N))=0\\quad(q>0).$$\nDerived categories are ordinary localizations at quasi-isomorphisms [def-weil-abstract-derived-category]. No cohomological-dimension bound on $X$ or its étale objects is assumed. No classicality, derived completeness, locally constant rank, or locally constant elementary-divisor type of $I$ or of its reductions is assumed. Empty schemes, empty chains and zero maps are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "WANTED: an independent proof/reference for this local relative-comparison theorem for arbitrary supported finite-scalar-model images. Section 8, condition (8.1), and Lemma 8.6 motivate the global application, but do not state this local theorem. Agent-created prerequisite, not a quotation of Lemma 8.6 or of classical comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-constructible",
+  "sk-def-pe-morphisms",
+  "def-sfb-module-upper-star",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-sfb-qcqs-open-closed-tree",
+  "det-pe-derived-nakayama-resolution"
+ ],
+ "proof": [
+  {
+   "text": "The source-image classicality theorem gives etale antecedents for all homology sheaves of C_n(image f). Apply preservation along the actual support path and the actual module pullback to get classical abelian homology of C_n(N).",
+   "uses": [
+    "lem-sfb-integral-image-koszul-classical",
+    "lem-sfb-support-pullback-koszul-classical"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The literal double complex has zero terms below -1 and above 0, by HomologicalComplex.isZero_double_X. Hence its derived image is in D^{>=-1} and D^{<=0}. Regard it as a D+ object and transport the classicality witnesses across homologyFunctorFactors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the bounded classical abelian counit. For q>0 the homology of C_n(N) is zero by its upper bound. Mapping the counit isomorphism by H^q gives zero homology of nu^* Rnu_* C_n(N). Exact faithful inverse image reflects zero homology, using isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj. Membership in D^{<=0} follows by DerivedCategory.isLE_iff.",
+   "uses": [
+    "lem-sfb-bounded-classical-abelian-counit",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-comparison-grothendieck-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-image-koszul-classical",
+  "lem-sfb-support-pullback-koszul-classical",
+  "lem-sfb-bounded-classical-abelian-counit",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-comparison-grothendieck-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "099V and the reviewed local proof: source classicality and support preservation split as separate items; bounded abelian counit, bounds and faithful reflection implemented in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"cohomology\"",
+   "results": "{\"t\": \"2026-10-23T21:57:46Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"535007201ce76bdc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern algebraic etale loci, generic sheaf constructions, scalar algebra, or definitions of scheme cohomology; none supplies the supported-image relative comparison amplitude."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(torsion|image)|torsion.*cohomolog",
+   "results": "{\"t\": \"2026-10-23T21:57:46Z\", \"tool\": \"grep\", \"query\": \"proetale.*(torsion|image)|torsion.*cohomolog\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern algebraic etale loci, generic sheaf constructions, scalar algebra, or definitions of scheme cohomology; none supplies the supported-image relative comparison amplitude."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images from pro etale to etale of cohomology of derived reductions of images of continuous integral matrices vanish in positive degrees",
+   "results": "{\"t\": \"2026-10-23T22:12:28Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images from pro etale to etale of cohomology of derived reductions of images of continuous integral matrices vanish in positive degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.formallyEtale_iff\", \"Algebra.FormallyEtale.comp\", \"Algebra.FormallyEtale.instForallOfFinite\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"1ba2d46a6b3fe6a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern algebraic etale loci, generic sheaf constructions, scalar algebra, or definitions of scheme cohomology; none supplies the supported-image relative comparison amplitude."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"image\"",
+   "results": "{\"t\": \"2026-10-23T22:12:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, \\\"image\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"CategoryTheory.instHasImagesSheafType\", \"CategoryTheory.Sheaf.image\", \"CategoryTheory.imageFactorization\", \"CategoryTheory.imageMonoFactorization\", \"CategoryTheory.instEpiSheafTypeToImage\", \"CategoryTheory.instMonoSheafTypeImageι\"], \"digest\": \"1549b790d49c0301\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern algebraic etale loci, generic sheaf constructions, scalar algebra, or definitions of scheme cohomology; none supplies the supported-image relative comparison amplitude."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|etale.*cohomolog|cohomolog.*etale",
+   "results": "{\"t\": \"2026-10-23T22:12:29Z\", \"tool\": \"grep\", \"query\": \"proetale|pro.etale|etale.*cohomolog|cohomolog.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern algebraic etale loci, generic sheaf constructions, scalar algebra, or definitions of scheme cohomology; none supplies the supported-image relative comparison amplitude."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local effacement of pro etale cohomology for torsion quotients of image sheaves over the ring of ell adic integers",
+   "results": "{\"t\": \"2026-10-23T22:12:29Z\", \"tool\": \"leanfinder\", \"query\": \"Etale local effacement of pro etale cohomology for torsion quotients of image sheaves over the ring of ell adic integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"Algebra.etaleLocus_eq_compl_support\", \"instCommRingBDeRhamPlus\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.FormallyEtale.comp_bijective\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\"], \"digest\": \"d5c518e40bbe6fda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern algebraic etale loci, generic sheaf constructions, scalar algebra, or definitions of scheme cohomology; none supplies the supported-image relative comparison amplitude."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher comparison direct images vanish for uniformizer reductions of integral image sheaves",
+   "results": "{\"t\": \"2026-10-23T22:12:30Z\", \"tool\": \"leansearch\", \"query\": \"Higher comparison direct images vanish for uniformizer reductions of integral image sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.Uniformizer.val\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"081ad6cd03d79e7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern algebraic etale loci, generic sheaf constructions, scalar algebra, or definitions of scheme cohomology; none supplies the supported-image relative comparison amplitude."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo a uniformizer of a constructible integral adic sheaf has classical finite torsion kernel and cokernel",
+   "results": "{\"t\": \"2026-10-23T23:02:00Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction modulo a uniformizer of a constructible integral adic sheaf has classical finite torsion kernel and cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"AdicCompletion.map_exact\", \"BDeRhamPlus\", \"AdicCompletion.eval\", \"IsAdicComplete\", \"AdicCompletion.eval_of\"], \"digest\": \"64fa7731ef0c2f75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are ordinary adic completion, scheme/site definitions, valuation facts or sheaf cohomology definitions; none gives comparison nonpositivity for supported images."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(image|reduction)|classical.*(torsion|constructible)",
+   "results": "{\"t\": \"2026-10-23T23:04:59Z\", \"tool\": \"grep\", \"query\": \"proetale.*(image|reduction)|classical.*(torsion|constructible)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are ordinary adic completion, scheme/site definitions, valuation facts or sheaf cohomology definitions; none gives comparison nonpositivity for supported images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive higher direct images vanish for derived uniformizer reductions of constructible integral sheaves on a Noetherian scheme",
+   "results": "{\"t\": \"2026-10-23T23:04:59Z\", \"tool\": \"leansearch\", \"query\": \"Positive higher direct images vanish for derived uniformizer reductions of constructible integral sheaves on a Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"Valuation.IsUniformizer.val_pos\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.IsReduced.component_reduced\"], \"digest\": \"7cd50c7f6d32cb5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are ordinary adic completion, scheme/site definitions, valuation facts or sheaf cohomology definitions; none gives comparison nonpositivity for supported images."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"cohomology\"",
+   "results": "{\"t\": \"2026-10-23T23:04:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"535007201ce76bdc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are ordinary adic completion, scheme/site definitions, valuation facts or sheaf cohomology definitions; none gives comparison nonpositivity for supported images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to proetale comparison of bounded complexes with classical cohomology sheaves",
+   "results": "{\"t\": \"2026-10-23T23:05:00Z\", \"tool\": \"leanfinder\", \"query\": \"Etale to proetale comparison of bounded complexes with classical cohomology sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"LightCondAb.ofSheafLightProfinite\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"Algebra.Etale.comp\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.FormallyEtale.comp\"], \"digest\": \"9a1db8f8ea718de3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are ordinary adic completion, scheme/site definitions, valuation facts or sheaf cohomology definitions; none gives comparison nonpositivity for supported images."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|etale.*cohomolog|cohomolog.*etale",
+   "results": "{\"t\": \"2026-10-23T23:06:54Z\", \"tool\": \"grep\", \"query\": \"proetale|pro.etale|etale.*cohomolog|cohomolog.*etale\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are ordinary adic completion, scheme/site definitions, valuation facts or sheaf cohomology definitions; none gives comparison nonpositivity for supported images."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-image-torsion-reductions-cd",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph, direct-sum preservation: local comparison input for the descendant affine supported-image torsion estimate. The blueprint does not state this relative nonpositivity theorem.",
+   "via": [
+    "lem-sfb-supported-image-torsion-reductions-cd",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-supported-image-koszul-comparison-nonpositive",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the unrestricted comparison claim is false for an accumulating-component continuous integral map. Added Noetherianity only on the source S, retaining arbitrary X and pro-etale U. Existing constructible-heart, finite-reduction, support comparison and bounded classical derived comparison nodes give a complete split with no new nodes. The parent lem-sfb-supported-image-torsion-reductions-cd no longer has its unrestricted integral branch justified.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph on direct-sum preservation: corrected local input for its descendant heart-bound route. The blueprint does not state the original unrestricted comparison theorem.",
+  "statement_correction": {
+   "old_statement": "Let $X$ be an affine scheme [def-pc-scheme]. Use the small étale and pro-étale sites in a common indexing universe [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention]. Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its norm-topological valuation ring $B=\\mathcal O_E$, and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. On every scheme $T$ put $B_T=p_T^*C(-,B)$ and use internal $B_T$-module objects [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. Let $S=T_r\\xrightarrow{a_r}\\cdots\\xrightarrow{a_1}T_0=X$ be any finite chain whose arrows are quasi-compact open immersions or closed immersions with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. Set $J=J_1\\circ\\cdots\\circ J_r$, where $J_t=(a_t)_!$ for an open arrow and $J_t=(a_t)_*$ for a closed arrow [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]; for $r=0$ set $J=\\mathrm{id}$. Let $f:L\\to M$ be any morphism of internal $B_S$-modules such that, separately on some pro-étale covering for each of $L,M$, the module is $B_S\\otimes_{\\underline B_S}\\underline P$ for a finitely presented abstract $B$-module $P$ (a cokernel of a map between finite free modules); these are the finite scalar local models of [sk-def-sfb-constructible]. Take the actual abelian image $I=\\operatorname{im}f$, with no topological closure. For any affine pro-étale object $v:U\\to X$ [sk-def-pe-morphisms], put $N=v^*J(I)$ using module pullback [def-sfb-module-upper-star]. Let $n\\ge1$ and let $C_n(N)$ be the complex of underlying abelian sheaves on $U_{\\mathrm{proét}}$ with $N$ in degrees $-1,0$, differential $\\pi^n:N\\to N$, and zero elsewhere. For the comparison morphism $\\nu_U:U_{\\mathrm{proét}}\\to U_{\\mathrm{ét}}$ [def-weil-pbc-site-comparison-morphism], the ordinary derived abelian direct image satisfies\n$$R\\nu_{U,*}C_n(N)\\in D^{\\le0}(\\operatorname{Ab}(U_{\\mathrm{ét}})),\\qquad\\mathcal H^q(R\\nu_{U,*}C_n(N))=0\\quad(q>0).$$\nDerived categories are ordinary localizations at quasi-isomorphisms [def-weil-abstract-derived-category]. No cohomological-dimension bound on $X$ or its étale objects is assumed. No classicality, derived completeness, locally constant rank, or locally constant elementary-divisor type of $I$ or of its reductions is assumed. Empty schemes, empty chains and zero maps are included.",
+   "what": "Added: S is quasi-compact and locally Noetherian. This is a necessary repair of a false agent-created strengthening, not a hypothesis present in the old obligation.",
+   "source": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf Theorem 6.2(3), Section 7.1.1; report.md gives an explicit counterexample to the removed generality.",
+   "citers": [
+    {
+     "id": "lem-sfb-supported-image-torsion-reductions-cd",
+     "holds": false,
+     "note": "Its step 5 applies the old lemma with arbitrary non-Noetherian S. The corrected lemma does not discharge that integral branch; maintainer must reopen it."
+    }
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "lem-pe-principal-reduction-cone-calculus",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "det-pe-classical-derived-equivalence",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "sk-thm-pe-classical-sheaves",
+    "why": "Generic exactness, finite-coefficient or classical comparison input, applied with its stated hypotheses; no replacement of the compactification unit route."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Affine quotient and diagonal criteria verify the qcqs hypothesis for a closed immersion before applying the generic comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Affine quotient and diagonal criteria verify the qcqs hypothesis for a closed immersion before applying the generic comparison theorem."
+   },
+   {
+    "node": "def-weil-quasi-separated-morphism",
+    "why": "Affine quotient and diagonal criteria verify the qcqs hypothesis for a closed immersion before applying the generic comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-c3d89c88c",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-c3d89c88c (reviewer sub-agent of L); spot-checked: I read the item, the report, every cited statement, the only citer lem-sfb-supported-image-torsion-reductions-cd, and HRS Theorem 6.2 and Remark 6.4 in the local PDF; coord/dag-sync.md is not in the snapshot. The delivery has no new nodes. Its only statement change from the base is the added hypothesis that the source S is Noetherian; the new stmt_deps (quasi-compact scheme, locally Noetherian) are exactly what that sentence uses, and proof_deps equals the union of the step uses. I checked the counterexample to the old unrestricted statement myself and it holds. On Spec of the eventually-constant Q-sequences (points N ∪ {∞}), take multiplication by a=(2^m,0) on free B=Z_2 with n=1. The image is torsion-free, so C_1(I) is I/2I. On w-contractible V, extremal disconnectedness gives I/2I = j_*F_2, so Rν_* C_1 = Rj_et,* F_2. R^1j_et,*F_2 is nonzero at ∞ via the quadratic characters Q(√p_m): each finite K kills only finitely many of them. So the old statement is false (E7, reported under Source error with statement_correction and the citer marked holds:false). The Noetherian repair is minimal and matches HRS 6.2(3) and Remark 6.4. Steps: (1) the Noetherian constructible-heart theorem with Λ=O_E makes I = ker(M→coker f) constructible; this is the only use of Noetherianity. (2) S is qcqs; the finite-model quotient theorem (qcqs only) puts cohomology in [-1,0] and makes it constructible; the cone calculus identifies the reduction with [I→π^n I]; constructible comparison over the discrete Noetherian B/π^n gives classicality. (3) Open arrows use the finite-ring j_! comparison. Closed immersions are qcqs, so direct-image comparison applies in degree 0. j_! and i_* are exact under the chain hypothesis, and operations transport identifies the internal and sectionwise functors. (4) v^* is exact and the pullback square needs no qcqs on v, so H^t C_n(N) ≅ v^*J H^t C_n(I) are classical. (5) The bounded-below unit and the classical derived equivalence give the counit iso; ν^* is exact and faithful, so positive Rν_* cohomology vanishes. (6) Edge cases checked: empty scheme and chain, zero map, identity over a field. Batch-5 flag: lem-trf-geometric-inverse-image-exact (reached via the zl dualizable-model chain) is the generic exactness of geometric-morphism inverse images. It is neither a step of the trace formula nor of Poincaré duality, and the HRS constructible heart is outside both assumptions, so I accept it. The declared tool_uses are generic and accepted. No fixes. Maintainer: record the source error in HUMAN.md and reopen lem-sfb-supported-image-torsion-reductions-cd, whose step 5 used the unrestricted form for arbitrary S. Its own integral claim is not refuted by this example; only its route through this lemma fails."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedImageKoszulComparisonNonpositive",
+  "declaration": "AlgebraicGeometry.ProEtale.supported_image_koszul_comparison_nonpositive",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportedImageKoszulComplex",
+   "AlgebraicGeometry.ProEtale.supportedImageKoszulComparison",
+   "AlgebraicGeometry.ProEtale.supported_image_koszul_comparison_nonpositive"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedImageKoszulComparisonNonpositive.lean",
+  "statement": "theorem supported_image_koszul_comparison_nonpositive (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u}) [IsAffine X] {S : Scheme.{u}} [CompactSpace S] [IsLocallyNoetherian S] (tree : QcqsOpenClosedTree X) (p : tree.Path S) (L M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (DerivedNakayama.integerRing ℓ E) S)) (f : L ⟶ M) (_hL : HasFiniteConstantLocalModel (DerivedNakayama.integerRing ℓ E) S L) (_hM : HasFiniteConstantLocalModel (DerivedNakayama.integerRing ℓ E) S M) (U : Scheme.{u}) (v : U ⟶ X) (_hv : proAffineEtale v) (n : ℕ) (_hn : 1 ≤ n) : (supportedImageKoszulComparison ℓ E p f v n).IsLE 0 ∧ ∀ q : ℤ, 0 < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (supportedImageKoszulComparison ℓ E p f v n))",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the published finite qcqs open-closed tree paths to encode exactly the allowed support chains, and the published continuous integral coefficient ring and uniquely characterized scalar from the derived Nakayama resolution. The two helper definitions implement the literal abelian two-term complex and its ordinary derived comparison pushforward. Retains the accepted stage-1 Noetherian hypothesis on the source S; no mathematical statement or proof change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37e288314",
+  "group": "NU",
+  "result": "pass",
+  "note": "Clause-by-clause match: affine X; tree path p encodes the qc-open/closed-with-qc-complement chains with root = identity (as accepted for the torsion-reductions-cd and derived-completeness siblings); S has CompactSpace + IsLocallyNoetherian only; separate HasFiniteConstantLocalModel hypotheses for L and M; actual image f; N = upperStar v of p.extension (image f); C_n(N) = HomologicalComplex.double of the underlying π^n in degrees -1,0, n>=1 literal; ordinary (comparisonLowerStar Ab).rightDerivedFunctor; both IsLE 0 and the H^q=0 for q>0 clauses. Item node differs from live only in lean and stmt_deps; statement verbatim in the file; imports exist; helpers carry real data with docstrings; sorry only; report sections present. Theorem stmt_dep det-pe-derived-nakayama-resolution: the statement uses derived_nakayama_resolution.choose (π endomorphism pinned sectionwise, unique by uniformizer_end_unique) as well as plain integerRing/scalarOnModules, so it genuinely depends on a theorem-constructed object: PASS on that point. Advisory: a def node for the integral ring and uniformizer endomorphism is missing project-wide. No files changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T095316-L-3353513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

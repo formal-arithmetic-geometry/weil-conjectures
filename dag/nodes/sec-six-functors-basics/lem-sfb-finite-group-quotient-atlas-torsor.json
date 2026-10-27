@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-finite-group-quotient-atlas-torsor",
+ "kind": "statement",
+ "title": "Finite-group quotient atlas pullbacks are the defining torsors",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $H$ be a finite abstract group acting by $S$-automorphisms on an $S$-scheme $Z$, and put $H_T=\\coprod_{h\\in H}T$ with its constant group law for every $S$-scheme $T$. Define $[Z/H](T)$ to be the groupoid of pairs $(P,v)$, where $P$ is a sheaf on the big fppf site of $T$ [def-pc-fppf-site], with an $H_T$-action which becomes the translation action on $H_T$ after an fppf covering, and $v:P\\to Z$ is equivariant; arrows are equivariant isomorphisms commuting with $v$. Let $q:Z\\to[Z/H]$ send $z:T\\to Z$ to the trivial torsor with map $(h,t)\\mapsto h\\cdot z(t)$. For every object $\\xi=(P,v)\\in[Z/H](T)$, the $2$-fibre product $Z\\times_{[Z/H],\\xi}T$ is canonically represented by the torsor $P$, which is a finite etale surjective $T$-scheme [def-weil-finite-integral-morphism, def-weil-etale-morphism, def-weil-surjective-morphism]. Here the $2$-fibre product has pairs of objects with a specified isomorphism as in [def-sfb-stable-pointed-moduli-groupoids]. Its sections over $T$ correspond exactly to pairs $(z,\\eta)$ with $z:T\\to Z$ and $\\eta:q(z)\\xrightarrow{\\sim}\\xi$; all these identifications commute with base change in $T$. No freeness of the action on $Z$, invertibility of $|H|$, or finite-type hypothesis on $Z$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 04WM (proposition-equal-quotient-stacks), Tag 0371 (remark-X-mod-G-group), and Tag 0BLZ (lemma-finite-etale-stack); spaces-groupoids.tex Tag 04M9 (lemma-quotient-stack-2-cartesian). The finite constant group specialization uses fppf descent of finite etale schemes, not invertibility of the group order."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-constant-group-sheaf-quotient"
+ ],
+ "proof": [
+  {
+   "text": "For a test scheme $a:U\\to T$, the 2-fibre product has objects $(z,\\eta)$ with $z:U\\to Z$ and $\\eta:q(z)\\simeq\\xi|_U$. Its arrows over $U$ are identities: the two scheme factors are discrete, and their identity arrows force equality of $\\eta$. Send $(z,\\eta)$ to $p=\\eta(1)\\in P(U)$. Equivariance forces $\\eta(h)=h\\cdot p$ as a map of sheaves, and compatibility with $v$ gives $z=v(p)$. This uses the fibrewise 2-product definition of [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0371 (remark-X-mod-G-group), explicit trivial torsor functor of Tag 04WM (proposition-equal-quotient-stacks)"
+   }
+  },
+  {
+   "text": "Conversely, given $p\\in P(U)$, set $z=v(p)$ and $\\eta_p(h)=h\\cdot p$. Then $v(\\eta_p(h))=h\\cdot z$, so it commutes with the maps to $Z$. It is an isomorphism: on a covering trivializing $P$, write $p=k$ in $H_U$; the map is right multiplication by $k$, with inverse right multiplication by $k^{-1}$. These inverses agree on overlaps because they invert the same map, and hence glue by the sheaf axiom [def-weil-pbc-sites-and-cohomology]. Evaluation at $1$ and this construction are mutually inverse, since every equivariant map out of $H_U$ has $\\eta(h)=h\\eta(1)$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0371 (remark-X-mod-G-group), torsor description and Tag 04WM trivial-object functor"
+   }
+  },
+  {
+   "text": "Choose an fppf trivializing cover $\\{T_i\\to T\\}$ of $P$. Locally the representing scheme is $X_i=\\coprod_{h\\in H}T_i$, by [lem-weil-pbc-scheme-coproduct-family]. It is finite: over $\\operatorname{Spec}A\\subset T_i$, [lem-weil-pbc-finite-affine-coproduct-spectrum] identifies it with $\\operatorname{Spec}(A^H)$, and the finitely many coordinate vectors generate $A^H$ as an $A$-module, exactly the finite-morphism definition [def-weil-finite-integral-morphism]. Each summand maps by the identity, which is etale from its definition, so [lem-sc-etale-coproduct-etale] gives etaleness.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "lem-sc-etale-coproduct-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0BLZ (lemma-finite-etale-stack), input finite etale local schemes; finite constant-group specialization"
+   }
+  },
+  {
+   "text": "The sheaf $P$ with its local representations $X_i$ gives overlap scheme isomorphisms satisfying the cocycle by [lem-trf-fppf-sheaf-representability-descent-data]. Apply [lem-sfb-finite-etale-fppf-descent] to obtain a finite etale $T$-scheme $X$ inducing that datum. The representability/effectivity assertion of [lem-trf-fppf-sheaf-representability-descent-data] then identifies $h_X$ with the original sheaf $P$, inducing the chosen local trivializations. With Steps 1–2 this represents the 2-fibre product; its map to $Z$ is $v$.",
+   "uses": [
+    "lem-trf-fppf-sheaf-representability-descent-data",
+    "lem-sfb-finite-etale-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0BLZ (lemma-finite-etale-stack); descent.tex Tag 02W5 (lemma-descent-data-sheaves)"
+   }
+  },
+  {
+   "text": "The map $X\\to T$ is surjective: for $t\\in T$, choose $t_i\\in T_i$ above it using joint surjectivity of the trivializing fppf cover [def-pc-fppf-site]; the identity summand of $X\\times_TT_i\\simeq H_{T_i}$ supplies a point of $X$ above $t$. For $b:U'\\to U$, restriction sends $\\eta(1)$ to $(b^*\\eta)(1)$ and sends $h\\cdot p$ to $h\\cdot b^*p$. Thus both inverse identifications commute with every base change and their composites. Representability and the fibre-product universal property [def-pc-fibre-product] identify the pulled-back representing scheme with $X\\times_TT'$. At $U=T$ the same bijection gives precisely the asserted sections. The argument uses neither freeness on $Z$ nor division by $|H|$ nor finite type of $Z$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-pc-fibre-product",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tags 0371 and 04WM, pullback conventions; finite constant-group specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-sc-etale-coproduct-etale",
+  "lem-trf-fppf-sheaf-representability-descent-data",
+  "lem-sfb-finite-etale-fppf-descent",
+  "def-pc-fibre-product",
+  "def-weil-surjective-morphism",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tags 0371, 04WM and 0BLZ: explicit evaluation-at-identity proof in the stated left-torsor convention, with descent.tex Tag 02W5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite constant group acting on a scheme the canonical map to its quotient stack is a finite etale torsor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of a group $ G $ on the category of finite types is equipped with a pre-Galois category structure. This means that for any group $ G $, the category whose objects are $ G $-act\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory.FiberFunctor (Action.forget FintypeCat G)\", \"doc\": \"The forgetful functor from the category of $G$-actions on finite types to the category of finite types is a fiber functor. This means it satisfies the defining properties of a fiber functor: it is fai\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.GaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of the finite type category on a group $G$ is equipped with a Galois category structure. This means that the category satisfies the axioms defining a Galois category, including\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    {F : CategoryTheory.Functor C FintypeCat} →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        [CategoryTheory.PreGaloisCategory.FiberFunctor F] →\\n          (X : C) →\\n            [CategoryTheory.PreGaloisCategory.IsConnected\", \"doc\": \"For a connected object $ X $ in a pre-Galois category $\\\\mathcal{C}$ with fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, and for any element $ x $ in the finite type $ F(X) $, there exists an\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"MulAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ {α : Type u} (β : Type v) [inst : Group α] [inst_1 : MulAction α β] [MulAction.IsPretransitive α β] {H : Subgroup α}\\n  [Finite (α ⧸ H)], Finite (MulAction.orbitRel.Quotient (↥H) β)\", \"doc\": \"If a group $G$ acts pretransitively on a set $\\\\alpha$ and the quotient group $G/H$ by a subgroup $H$ is finite, then the quotient of $\\\\alpha$ by the orbit equivalence relation induced by the action is\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} [self : CategoryTheory.PreGaloisCategory C] (G : Type u₂)\\n  [inst_1 : Group G] [Finite G], CategoryTheory.Limits.HasColimitsOfShape (CategoryTheory.SingleObj G) C\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, for every finite group $G$, the category $\\\\mathcal{C}$ admits all colimits of diagrams shaped like the single-object category associated to $G$. This means that\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois categories, set actions and scheme base-change properties do not identify the quotient-stack atlas pullback with a finite etale torsor",
+   "digest": "deaef09591a50bb6"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois categories, set actions and scheme base-change properties do not identify the quotient-stack atlas pullback with a finite etale torsor",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|QuotientStack|finite.*etale.*torsor|torsor.*finite.*etale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois categories, set actions and scheme base-change properties do not identify the quotient-stack atlas pullback with a finite etale torsor",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of the canonical atlas to a quotient stack is the torsor defining the object",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.baseChange\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Submersive\", \"type\": \": SubmersivePresentation T (T ⊗[R] S) ι σ\", \"doc\": \"Given commutative rings $R$ and $S$ with an $R$-algebra structure, and a commutative ring $T$ with an $R$-algebra structure, if $S$ admits a submersive presentation with finite generating set $\\\\sigma$\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": IsStableUnderBaseChange F.relativelyRepresentable\", \"doc\": \"The property of being relatively representable with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is stable under base change. That is, if a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{D} $ is r\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Pretopology\", \"type\": \": jointlySurjectivePrecoverage.IsStableUnderBaseChange\", \"doc\": \"The jointly surjective precoverage on the category of schemes is stable under base change. Specifically, if a family of morphisms of schemes has images that jointly cover the target scheme, then the p\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"KaehlerDifferential.mapBaseChange\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A : Type u_2) →\\n      (B : Type u_3) →\\n        [inst_1 : CommRing A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra A B] →\\n                [inst_5 : Algebra R B] → [IsScalarTower R A B] → TensorProd\", \"doc\": \"Given commutative rings $ R $, $ A $, and $ B $ with $ A $ an $ R $-algebra, $ B $ an $ A $-algebra, and $ B $ an $ R $-algebra via the scalar tower $ R \\\\to A \\\\to B $, this defines the $ B $-linear is\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois categories, set actions and scheme base-change properties do not identify the quotient-stack atlas pullback with a finite etale torsor",
+   "digest": "8bdc7f962a76f36d"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fiber product of a scheme with its quotient stack by a finite group is a finite etale cover even when group order is not invertible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsFinite g],\\n  AlgebraicGeometry.IsFinite (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a finite morphism of schemes, then the first projection morphism from the pullback of $ f : X \\to Z $ and $ g $ is also finite.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsFinite f],\\n  AlgebraicGeometry.IsFinite (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback $ X \\\\times_Z Y $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.diagonalCover\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (𝒰 : Y.OpenCover) →\\n      ((i : (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰).I₀) →\\n          ((CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰).X i).OpenCover) →\\n        (CategoryTheory.Limits.pullback.diagonalObj f).OpenCov\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $Z$ and a morphism $f: X \\\\to Z$, this constructs an open cover of the diagonal pullback scheme $X \\\\times_Z X$ by first taking the base pullback cover of $\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyQuasiFinite g],\\n  AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"Given schemes $X, Y, S$ and morphisms $f : X \\\\to S$ and $g : Y \\\\to S$, if $g$ is locally quasi-finite, then the first projection morphism $\\\\mathrm{pullback.fst}(f, g) : X \\\\times_S Y \\\\to X$ from the pu\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois categories, set actions and scheme base-change properties do not identify the quotient-stack atlas pullback with a finite etale torsor",
+   "digest": "5e9f92fdacb5f0c5"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite constant group acting on a scheme the pullback of the quotient stack atlas along an object is its defining torsor, a finite etale surjective scheme",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'_f, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, AlgebraicGeometry.Scheme.Pullback.openCoverOfRight, AlgebraicGeometry.Scheme.Pullback.openCoverOfRight_f, AlgebraicGeometry.Scheme.Pullback.openCoverOfLeft, AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_f, AlgebraicGeometry.Scheme.Pullback.openCoverOfLeft_f.",
+   "date": "2026-10-23",
+   "verdict": "no match: no quotient-stack atlas theorem",
+   "digest": "f354e2af5e193ea3"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|QuotientStack|finite.*etale.*torsor|torsor.*finite.*etale",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: no quotient-stack atlas theorem",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fiber of the atlas of a quotient stack over a test scheme is the torsor defining the test object",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.fiber, CategoryTheory.Functor.Fiber, CategoryTheory.Pseudofunctor.Grothendieck.fiber, memTrivializationAtlas_iff, FiberBundle.trivialization_mem_atlas', FiberPrebundle.pretrivialization_mem_atlas, FiberBundle.trivializationAtlas', AlgebraicGeometry.instCanonicallyOverFiber.",
+   "date": "2026-10-23",
+   "verdict": "no match: no quotient-stack atlas theorem",
+   "digest": "c10cc7d2d228bb68"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Etale\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: no quotient-stack atlas theorem",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-effective-formal-chart-completed-atlas",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: An effective formal quotient atlas is a completed etale scheme chart. Comparison of the effective formal chart with a completed etale chart: the quotient atlas over each finite thickening is the finite constant-group torsor of its test object.",
+   "via": [
+    "lem-sfb-effective-formal-chart-completed-atlas",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-group-quotient-atlas-torsor",
+  "worker": "stage1",
+  "summary": "Explicit inverse maps identify the discrete pullback with the torsor sheaf; finite etale local models descend via one general fppf descent node; base change and surjectivity are written out. Statement unchanged.",
+  "blueprint": "Supporting torsor-pullback computation under the inherited effective-formal-chart chain, originating at det-thm-sf-ctf-stability-direct-images proof (3). The current latest blueprint has revised that higher route; this split changes no unit or chapter and handles only the existing local prerequisite. Inherited from.node is null, as blueprint_refs.py ancestor reports; retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme coproduct or fppf descent tool for local torsor models; the unit has no replacement for this scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "why": "Generic scheme coproduct or fppf descent tool for local torsor models; the unit has no replacement for this scheme-theoretic input."
+   },
+   {
+    "node": "lem-sc-etale-coproduct-etale",
+    "why": "Generic scheme coproduct or fppf descent tool for local torsor models; the unit has no replacement for this scheme-theoretic input."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-representability-descent-data",
+    "why": "Generic scheme coproduct or fppf descent tool for local torsor models; the unit has no replacement for this scheme-theoretic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-sc-etale-coproduct-etale",
+  "lem-trf-fppf-sheaf-representability-descent-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-14e364d72",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-14e364d72 (reviewer sub-agent of L); spot-checked: Read in full: the item (5 steps), the new node lem-sfb-finite-etale-fppf-descent and every cited statement, plus Stacks 0BLZ (lemma-finite-etale-stack, section-finite-etale) and 0371 (remark-X-mod-G-group). Step 1: in the 2-fibre product of def-sfb-stable-pointed-moduli-groupoids both outer fibres are discrete, so the object is a set; evaluating at 1 gives p, with eta(h)=h p and z=v(p). Step 2: the inverse is right multiplication by k, then k^{-1}; this works for nonabelian H, and the local inverses glue by the sheaf axiom. Step 3: the local model is the disjoint union of copies of T_i indexed by H; over Spec A it is Spec A^H, which is finite free; etaleness comes from lem-sc-etale-coproduct-etale with no condition on |H|. Step 4: P lies in the category of lem-trf-fppf-sheaf-representability-descent-data, and its notion of effectivity is the same as the new node's. The equivalence then identifies h_X with P, so the descended scheme is the one representing P. Step 5: surjectivity uses the identity summand and the fact that H is nonempty; base change is checked. New node: statement only, self-contained, exact 0BLZ source, and true (finite etale schemes form an fpqc stack). Empty T, empty X_i and non-constant rank are all fine. It is not a duplicate: lem-galois-descent only covers an etale singleton; lem-trf-separated-lqf-fppf-effective-descent gives existence of objects only, not finite etale or morphisms; lem-sbc-finite-morphism-fpqc-descent needs quasi-compactness. Advisory: its split should reuse these. Batch-5: def-trf-scheme-cover-descent-datum and lem-trf-fppf-sheaf-representability-descent-data are generic descent nodes whose closures (128 and 144 nodes) reach no trace-formula or Poincare node, so both are accepted. The declared tool_uses are accepted. The item is unsplit in live and side-live and has no repair note. FIX: Step 5 now cites [def-pc-fppf-site] for joint surjectivity of the trivializing cover (added to uses and proof_deps), and U\\prime and T\\prime are written U' and T'. File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-group-quotient-atlas-torsor.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupQuotientAtlasTorsor",
+  "declaration": "AlgebraicGeometry.ConstantGroupSheafQuotient.finiteGroupQuotientAtlasTorsor",
+  "declarations": [
+   "AlgebraicGeometry.ConstantGroupSheafQuotient.schemeActionSheaf",
+   "AlgebraicGeometry.ConstantGroupSheafQuotient.finiteGroupQuotientAtlasTorsor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupQuotientAtlasTorsor.lean",
+  "statement": "theorem finiteGroupQuotientAtlasTorsor (S : Scheme.{u}) (H : Type (u + 1)) [Group H] [Finite H] (Z : Action (Over S) H) (T : Over S) (xi : Over (schemeActionSheaf Z T)) (hxi : IsLocallyRegular (Scheme.fppfTopology.over T.left) H xi.left) : ∃ X : Over T.left, Nonempty (xi.left.V.obj.RepresentableBy X) ∧ IsFinite X.hom ∧ Etale X.hom ∧ Surjective X.hom ∧ ∃ E : ∀ U : Over T.left, fiberAt (Scheme.fppfTopology.over T.left) (schemeActionSheaf Z T) xi U ≌ Discrete (xi.left.V.obj.obj (op U)), (∀ (U : Over T.left) (L : fiberAt (Scheme.fppfTopology.over T.left) (schemeActionSheaf Z T) xi U), ((E U).functor.obj L).as = evaluateAt (Scheme.fppfTopology.over T.left) (schemeActionSheaf Z T) xi U L ∧ xi.hom.hom.hom.app (op U) (((E U).functor.obj L).as) = L.of.left.as) ∧ (∀ (U V : Over T.left) (b : V ⟶ U) (p : xi.left.V.obj.obj (op U)) (h : H), (comparison ((Scheme.fppfTopology.over T.left).over U) Over.mkIdTerminal (onSlice (Scheme.fppfTopology.over T.left) (schemeActionSheaf Z T) U) ((E U).inverse.obj ⟨p⟩)).hom.hom.app (op (Over.mk b)) (label ((Scheme.fppfTopology.over T.left).over U) H (Over.mk b) h) = (xi.left.ρ h).hom.app (op V) (xi.left.V.obj.map b.op p))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcbabb793",
+  "group": "Q64",
+  "result": "pass",
+  "note": "The Lean statement matches the node clause by clause. Inputs: S : Scheme.{u}; H : Type (u+1), finite group; Z : Action (Over S) H; schemeActionSheaf (lifted Yoneda sheaf of Z, pushed to the big fppf site of T); xi : Over A, with hxi = IsLocallyRegular (local equivariant iso to the sheafified regular H, no global section). Conclusion: exists X : Over T with P.RepresentableBy X, IsFinite, Etale and Surjective (the recorded Mathlib declarations). For every U, E U is an equivalence from fiberAt (GroupoidTwoFiberProduct = Core(Comma) of atlas q with xi|_U) to Discrete P(U). Its functor is pinned to eta(1) with v(eta(1)) = z; its inverse is pinned on all labels after every restriction, which determines eta and z. U = T gives the section clause. No freeness, |H| inverse or finite-type assumption. Edge cases checked: empty T, nonabelian H, char dividing |H|, disconnected U, torsors without a section. New node def-sfb-constant-group-sheaf-quotient is justified under §1(A): the existing torsors are scheme torsors (etaleTorsorGroupoid, AffineActionQuotientStack), small-etale (NonabelianTorsor, EtaleTorsor) or abelian (Mathlib Sheaf.Torsor). Its defs all carry data; the only sorry is the named orbitMap_equivariant theorem, which is true. Statements are verbatim. Node diff against side-live: only lean plus the added stmt_dep. Docstrings and the 5 proof steps are present. Report sections present. Advisory: H : Type (u+1) is forced by the sheaf universe (callers use ULift); the second reading is a declared self-review. No compile: no file changed."
+ }
+}

@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-space-qcoh-groupoid-equivalence",
+ "kind": "statement",
+ "title": "Small-etale quasi-coherent modules and the presentation groupoid",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Locally Noetherian means that every etale scheme chart is locally Noetherian [pqf-def-locnoeth]; Noetherian means locally Noetherian, quasi-compact and quasi-separated, with quasi-separated meaning that the diagonal is quasi-compact on scheme tests. Modules on $X$ are on its small etale ringed site; quasi-coherence is [def-trf-space-quasi-coherent-module]. On a locally Noetherian space a module is coherent if it is quasi-coherent and its pullbacks to etale scheme charts are coherent [pqf-def-coherent]. Let $p:U\\to X$ be a representable surjective etale scheme atlas and let $(U,R,s,t,c,e,i)$ be its relation groupoid, with $R=U\\times_XU$ and $s=\\operatorname{pr}_1,t=\\operatorname{pr}_0$ [def-pc-fibre-product, def-a1-scheme-groupoid-laws]. A groupoid module is a quasi-coherent scheme module $M$ on $U$ [pqf-def-coherent] with an isomorphism $\\alpha:t^*M\\simeq s^*M$ [def-pc-module-pullback], identity along $e$ and satisfying $c^*\\alpha=\\operatorname{pr}_1^*\\alpha\\circ\\operatorname{pr}_0^*\\alpha$ on composable pairs. Morphisms commute with these isomorphisms. Restriction to $U$ followed by the scheme etale/Zariski quasi-coherent identification gives an equivalence $\\operatorname{QCoh}(X)\\simeq\\operatorname{QCoh}(U,R,s,t,c)$, sending $F$ to $(p^*F,\\alpha_F)$ with its canonical pullback datum. If $X$ is locally Noetherian, $F$ is coherent if and only if the underlying scheme module $p^*F$ is coherent.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03M3 (proposition-quasi-coherent); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian), equivalence of coherence with coherence on a surjective etale scheme atlas."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-module-pullback",
+  "def-sfb-scheme-groupoid-module",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-ordinary-etale-identification"
+ ],
+ "proof": [
+  {
+   "text": "Write $F_V$ for the restriction of $F$ to an etale scheme chart, as supplied by the cartesian-chart characterization. Use the scheme etale/Zariski equivalence to regard these as ordinary scheme modules, compatibly with scheme pullbacks. Put $M=F_U$. For $t,s:R\\to U$ the chart transition maps give $c_t:t^*M\\simeq F_R$ and $c_s:s^*M\\simeq F_R$; define $\\alpha_F=c_s^{-1}c_t$. On the diagonal both maps are the same, so $e^*\\alpha_F=1$. On $U\\times_XU\\times_XU$, cancellation of the middle transition gives $\\alpha_{12}\\alpha_{01}=\\alpha_{02}$, which is the stated composition law with $s=\\operatorname{pr}_1$ and $t=\\operatorname{pr}_0$. A module map commutes with the $c_f$, hence with $\\alpha_F$. This constructs the asserted restriction functor $K$.",
+   "uses": [
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M3 (proposition-quasi-coherent), first paragraph of proof; Tag 03LZ (lemma-characterize-quasi-coherent-small-etale)."
+   }
+  },
+  {
+   "text": "Given $(M,\\alpha)$ and any chart $v:V\\to X$, put $E_V=U\\times_XV$, $a_V:E_V\\to U$ and $b_V:E_V\\to V$. Base change of the atlas is a surjective etale morphism of schemes; thus $\\{b_V\\}$ is an etale cover of the scheme $V$ and therefore an fpqc covering. The module $a_V^*M$ is quasi-coherent. On $E_V\\times_VE_V=R\\times_XV$ give it the pullback of $\\alpha$; the identity and triple-overlap laws are exactly those of $\\alpha$. Effective fpqc descent gives a quasi-coherent scheme module $N_V$ and an isomorphism $\\theta_V:b_V^*N_V\\xrightarrow{\\sim}a_V^*M$ identifying the canonical datum with this pulled-back datum. Retain this identification as part of the descent, not merely an abstract isomorphism of underlying modules.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M3 (proposition-quasi-coherent), converse construction through Descent Tag 023T (proposition-fpqc-descent-quasi-coherent)."
+   }
+  },
+  {
+   "text": "For $f:V_1\\to V_2$ over $X$ let $d=1_U\\times f:E_{V_1}\\to E_{V_2}$. Pullback composition and the identities $a_{V_2}d=a_{V_1}$, $b_{V_2}d=fb_{V_1}$ identify $b_{V_1}^*f^*N_{V_2}$ with $d^*b_{V_2}^*N_{V_2}$. On this cover use the isomorphism $\\theta_{V_1}^{-1}d^*\\theta_{V_2}$ to $b_{V_1}^*N_{V_1}$. It commutes with descent data: conjugating by the two $\\theta$'s reduces its overlap square to the same pullback of $\\alpha$ along $R\\times_XV_1\\to R$. Full faithfulness of scheme fpqc descent gives a unique isomorphism $c_f:f^*N_{V_2}\\simeq N_{V_1}$ (its inverse descends by the same square). For $f=1$ the covered map is $\\theta_V^{-1}\\theta_V=1$. For $g:V_0\\to V_1$, the covered composite $c_g\\,g^*c_f$ is $\\theta_{V_0}^{-1}(1_U\\times(fg))^*\\theta_{V_2}$ after cancellation of the middle $\\theta_{V_1}$. Faithfulness gives $c_{fg}=c_g\\,g^*c_f$. These are the transition maps missing from the source's displayed formula.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M3 (proposition-quasi-coherent), omitted verification of transition isomorphisms and composition; expanded using full faithfulness in Descent Tag 023T."
+   }
+  },
+  {
+   "text": "Convert $(N_V,c_f)$ to small-etale scheme modules by the scheme comparison and assemble them into $A(M,\\alpha)$ by the cartesian-chart characterization. If $h:(M,\\alpha)\\to(M',\\alpha')$ is equivariant, the maps $a_V^*h$ commute with overlap data and therefore descend uniquely, using $\\theta_V$ and $\\theta'_V$, to maps $h_V:N_V\\to N'_V$. The transition square for $h_V$ holds after $b_{V_1}^*$ because it is the pullback square for $h$; faithfulness of descent makes it hold on $V_1$. The chart characterization then gives a unique map on $X$. Identity and composition hold after every cover and hence before it, by the same faithfulness. Thus $A$ is a functor.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M3 (proposition-quasi-coherent), construction of the inverse functor; Tag 03LZ; Descent Tag 023T."
+   }
+  },
+  {
+   "text": "For $F$ on $X$, the chart transition maps identify $b_V^*F_V$ with $a_V^*F_U$ on $E_V$, respecting the overlap datum by their composition law. Full faithfulness of scheme descent gives $N_V\\simeq F_V$; uniqueness makes these isomorphisms commute with every $c_f$ and every map $F\\to F'$. The chart characterization assembles a natural isomorphism $AK\\simeq1$. Conversely, at $V=U$ the cover is $s:R\\to U$ and the datum on $t^*M$ is the descent of $M$ via the identification $s^*M\\xrightarrow{\\alpha^{-1}}t^*M$. On $U\\times_XU\\times_XU$ this identification respects the datum precisely because $\\alpha_{12}\\alpha_{01}=\\alpha_{02}$. Descent therefore gives $N_U\\simeq M$. To check equivariance, pull its square on $R$ back to $U\\times_XR$; the construction of $c_s,c_t$ in Step 3 makes the two composites the two sides of that same cocycle equation. Faithfulness of descent on the scheme $R$ gives the square on $R$. Uniqueness also gives naturality in $M$. Hence $KA\\simeq1$ as groupoid-module functors, proving the equivalence.",
+   "uses": [
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M3 (proposition-quasi-coherent), omitted verification of the inverse identities, with full faithfulness of Descent Tag 023T."
+   }
+  },
+  {
+   "text": "Assume now that $X$ is locally Noetherian. If $F$ is coherent, its pullback to $U$ is coherent by the stated chartwise definition. For the converse suppose $M=p^*F$ is coherent. It is of finite type by the locally Noetherian scheme criterion. Fix any etale scheme chart $V\\to X$ and form $E_V$ as above; both $U$ and $V$ are locally Noetherian by the definition for $X$. Under the chart and scheme comparisons, $b_V^*F_V\\simeq a_V^*M$. The right side is of finite type by preservation of finite type under scheme pullback. The left side is the pullback of the quasi-coherent module $F_V$. The cover $b_V$ is fpqc as in Step 2, so finite-type descent gives that $F_V$ is of finite type. The locally Noetherian scheme criterion then makes $F_V$ coherent. This holds for every chart $V$, exactly the definition of coherence on $X$. No quasi-compactness, quasi-separatedness, or Noetherian hypothesis on $X$ was used for the equivalence.",
+   "uses": [
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-sfb-fpqc-finite-type-module-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB (lemma-coherent-Noetherian), equivalence of chart criteria, via scheme Tag 01XZ, Modules Tag 01B6, and Descent Tag 05AZ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcoh-cartesian-chart-family",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-fpqc-descent",
+  "lem-pc-module-pullback-identity-composition",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-sfb-fpqc-finite-type-module-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03M3 (proposition-quasi-coherent), spelling out its omitted compatibility and inverse checks; coherence by spaces-cohomology.tex Tag 07UB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an algebraic space are equivalent to quasi coherent modules on its etale presentation groupoid and coherence is detected on the atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective etale descent of quasi coherent sheaves from a scheme atlas of an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData → AlgebraicGeometry.SheafedSpace.GlueData CommRingCat\", \"doc\": \"The gluing data for sheafed spaces over the category of commutative rings, constructed by applying the forgetful functor from locally ringed spaces to sheafed spaces. This transforms the original glui\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) → AlgebraicGeometry.Scheme.Gl\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coequalizerCofork\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits\", \"type\": \"{X Y : AlgebraicGeometry.LocallyRingedSpace} → (f g : X ⟶ Y) → CategoryTheory.Limits.Cofork f g\", \"doc\": \"Given two morphisms $ f, g : X \\to Y $ in the category of locally ringed spaces, their coequalizer cofork is constructed by first forming the coequalizer in the category of sheafed spaces over commutat\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coequalizer\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits\", \"type\": \"{X Y : AlgebraicGeometry.LocallyRingedSpace} → (X ⟶ Y) → (X ⟶ Y) → AlgebraicGeometry.LocallyRingedSpace\", \"doc\": \"Given two morphisms $ f, g : X \\to Y $ in the category of locally ringed spaces, their coequalizer exists and is constructed as the coequalizer in the category of sheafed spaces over commutative rings,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasicoherent.*[Dd]escent|[Dd]escent.*[Qq]uasicoherent|[Gg]roupoid.*[Ss]heaf",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"29\", \"text\": \"* `StructureGroupoid.LocalInvariantProp.sheaf`: the sheaf-of-types of functions `f : M → M'`\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"79\", \"text\": \"def StructureGroupoid.LocalInvariantProp.sheaf (hG : LocalInvariantProp G G' P) :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"83\", \"text\": \"instance StructureGroupoid.LocalInvariantProp.sheafHasCoeToFun (hG : LocalInvariantProp G G' P)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"19\", \"text\": \"types using the construction `StructureGroupoid.LocalInvariantProp.sheaf` from the file\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on an algebraic space are equivalent to quasi coherent modules on its etale presentation groupoid and coherence is detected on the atlas",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]roupoid.*[Qq]uasi|[Qq]uasi.*[Gg]roupoid|[Dd]escent.*[Qq]uasicoherent",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern local free presentations defining quasi-coherence, not assembly of cartesian families on all etale charts; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-257 read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an algebraic space are equivalent to equivariant modules on the etale atlas relation groupoid",
+   "results": "OK 8 hits: SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.mk.inj, AlgebraicGeometry.Scheme.Modules.instCategory, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern local free presentations defining quasi-coherence, not assembly of cartesian families on all etale charts; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-257 read"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-filtered-union",
+  "date": "2026-10-23",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: the equivalence QCoh(X) = QCoh(U,R,s,t,c) in the second paragraph, with coherence detected on U.",
+   "via": [
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-qcoh-groupoid-equivalence",
+  "worker": "stage1",
+  "summary": "Checked Stacks 03M3 and 07UB, kept the statement, and expanded the inverse transition, morphism, and inverse-functor checks. Reused scheme fpqc descent, scheme etale/Zariski comparison, and finite-type descent; created only the all-chart cartesian-family characterization (03LZ/03LY). Corrected two typographical formulas in the source proof in the argument, not the item statement.",
+  "blueprint": "Inherited creation chain has blueprint.from.node=null (blueprint_refs.py ancestor agrees). The inherited place names det-thm-sf-ctf-stability-direct-images proof (3); latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), proper/open direct-image preservation, is its current locus. This split is the 03M3/07UB input to 07UV in the already recorded algebraic-space coherent-approximation subroute.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Scheme etale/Zariski equivalence and its pullback compatibility identify the module categories throughout; no same-unit node states this dictionary."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Effective descent and full faithfulness on scheme fpqc covers build and compare N_V; this is a generic descent tool, not a replacement for the presentation argument."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Base change of a surjective etale atlas gives scheme covers E_V to V; generic algebraic-space covering calculus."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "The scheme etale cover E_V to V is fpqc, as required by the scheme descent hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Scheme pullback preserves quasi-coherence (Stacks 01BG), needed for a_V^*M in Step 2 and f^*N_{V_2} in Step 3 before scheme fpqc descent applies; generic module tool, no same-unit node states it."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "The scheme pullback composition isomorphisms type the covered transition maps."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherence equals quasi-coherence plus finite type on each locally Noetherian scheme chart."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Finite type is preserved by a_V pullback for the final chartwise coherence argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-fpqc-descent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-ffa8c7be6",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-ffa8c7be6 (reviewer sub-agent of L); spot-checked: Read Stacks 03M3 (spaces-properties l.5727; confirmed the source slips s=pr_0 and the wrongly typed c_f), 03LY l.4446, 03LZ l.5267 and 07UB l.1877, the item's six steps, the new node and every cited statement. New node lem-sfb-space-qcoh-cartesian-chart-family = 03LZ/03LY as a category equivalence over all etale charts: true, self-contained, no proof (B1), not a clause of the item; rg -L over the DAG for 03LZ/03LY/03LX/03M3/cartesian-family found no duplicate. Steps checked: Step 1 alpha=c_s^{-1}c_t has the stated direction, e^*alpha=1, and the cocycle matches def-a1 composition (pr_0,pr_1); Step 2 E_V is a scheme and b_V is surjective etale, hence fpqc with no qc needed, and the 023T equivalence gives effectivity plus theta_V; Step 3 the covered map and uniqueness give c_f with c_fg=c_g g^*c_f; Step 4 the functor A; Step 5 both natural isos (a_U=t, b_U=s, alpha^{-1} datum); Step 6 coherence via 01XZ + 01B6 + 05AZ finite-type descent = 07UB (5)=>(4). Edge cases: empty X, identity atlas, M=0, non-qc atlas. Advisory: the cocycle transport across the Zariski/etale dictionary relies on the mate description in lem-trf-zariski-etale-functor-comparison-square; not a gap. Batch-5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions; lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (03DX/03LC) and lem-trf-space-fibre-products-etale-covers (02X2/041F) are generic foundations. The transitive closures of all four and of the item contain no sec-poincare-duality, sk-thm-trace-transport or nt-* node, so all accepted. No SGA. FIX (item file only; proof_deps, statement and stmt_deps unchanged): Step 2 uses += lem-pc-module-pullback-identity-composition (pulling alpha back to R x_X V); Step 3 uses += lem-weil-pbc-module-pullback-quasi-coherent (f^*N_{V_2} must be quasi-coherent for descent full faithfulness); split_report.tool_uses += lem-weil-pbc-module-pullback-quasi-coherent (cited off-unit but not declared).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQcohGroupoidEquivalence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_qcoh_groupoid_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.groupoidModuleOrdinaryBeta",
+   "AlgebraicGeometry.AlgebraicSpace.space_qcoh_groupoid_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQcohGroupoidEquivalence.lean",
+  "statement": "theorem space_qcoh_groupoid_equivalence {S : Scheme.{u}} (X : AlgebraicSpace S) (U R : X.EtaleSite) (hp : IsSurjective U.obj.hom) (s t : R ⟶ U) (hR : IsPullback (yoneda.map t.hom.left) (yoneda.map s.hom.left) U.obj.hom U.obj.hom) (e : (X.etaleForget.obj U) ⟶ (X.etaleForget.obj R)) (i : (X.etaleForget.obj R) ⟶ (X.etaleForget.obj R)) (c : Limits.pullback (X.etaleForget.map s) (X.etaleForget.map t) ⟶ (X.etaleForget.obj R)) (hG : Scheme.IsGroupoid (X.etaleForget.map s) (X.etaleForget.map t) e i c) : (∃ E : X.QCoh ≌ Scheme.GroupoidModule (X.etaleForget.map s) (X.etaleForget.map t) e i c hG, ∃ a : ∀ F : X.QCoh, OrdinaryEtaleIdentification X U F.obj (E.functor.obj F).moduleObj, (∀ (F : X.QCoh) (T : X.EtaleSite) (r : T ⟶ R) (m : Γ((Scheme.Modules.tensorPullback (X.etaleForget.map (r ≫ t))).obj (E.functor.obj F).moduleObj, ⊤)), (a F).app T (r ≫ s) ((atlasTransitionOn (E.functor.obj F).moduleObj (E.functor.obj F).moduleObj (X.etaleForget.map s) (X.etaleForget.map t) (groupoidModuleOrdinaryBeta (E.functor.obj F)) (X.etaleForget.map r) (X.etaleForget.map (r ≫ s)) (X.etaleForget.map (r ≫ t)) (X.etaleForget.map_comp r s).symm (X.etaleForget.map_comp r t).symm).hom.app ⊤ m) = (a F).app T (r ≫ t) m) ∧ (∀ (F G : X.QCoh) (f : F ⟶ G) (T : X.EtaleSite) (q : T ⟶ U) (m : Γ((Scheme.Modules.tensorPullback (X.etaleForget.map q)).obj (E.functor.obj F).moduleObj, ⊤)), (a G).app T q (((Scheme.Modules.tensorPullback (X.etaleForget.map q)).map (E.functor.map f).val).app ⊤ m) = f.hom.val.app (op T) ((a F).app T q m))) ∧ (∀ (_hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (F : X.QCoh), (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F.obj)) ↔ RingedSpace.IsCoherent (X.etaleForget.obj U).toRingedSpace ((X.schemeRestriction U).obj F.obj))",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of H2/H12: statement uses def-sfb-ordinary-etale-identification for the natural linear restriction identification and canonical overlap transport, rather than citing the invertible-descent theorem. All theorem binders and conclusions remain unchanged. The existing groupoid-module and scheme-restriction definition nodes remain cited."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c69aaf31",
+  "group": "O2",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H12 return of 52152add7c20. Compared with the base, the item JSON differs only in lean and stmt_deps. The theorem node lem-trf-algebraic-space-invertible-descent is replaced by the definition node def-sfb-ordinary-etale-identification, which is already landed (03b9f778) and owns OrdinaryEtaleIdentification, atlasTransitionOn and ordinaryEtaleSectionRestriction. The other added stmt_deps (scheme-groupoid-module, space-module-scheme-restriction) are definition nodes. lean.statement is verbatim in the file and all 12 imports exist on base. Statement re-read against Stacks 03M3/07UB: atlas, relation (t=pr0, s=pr1) and groupoid maps match; the equivalence is pinned to restriction, with beta = c_s^{-1}c_t on every relation chart and E fixed on morphisms; coherence is chartwise RingedSpace.IsCoherent, with chartwise local Noetherianity only in the last conjunct. No extra qc/qs/Noetherian or universe hypotheses. The helper groupoidModuleOrdinaryBeta is M.beta through the irreducible groupoidModulePullback := tensorPullback, real data. Only sorry. Docstrings carry the source, blueprint id and 6 proof steps. Report has the Worker report and Second reading by O2 sections. Advisory: tensorSectionsComp vs tensorPullbackSectionComp must be reconciled in the proof; no effect on the statement. No fix, no compile."
+ }
+}

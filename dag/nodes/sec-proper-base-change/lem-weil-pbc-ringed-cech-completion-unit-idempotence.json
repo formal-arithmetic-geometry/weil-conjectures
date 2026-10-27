@@ -12,39 +12,45 @@
  ],
  "proof": [
   {
-   "text": "1. The term of Cech degree q is a finite sum of the flat localizations S_I at products over q-element subsets I, and the complex is bounded. For nonempty I choose j in I. In K tensor S_I, the j-th factor has invertible localization differential. Its inverse, multiplied on each tensor summand by (-1) to the sum of preceding degrees, contracts this complex: the other differential terms cancel in d h+h d. Cancel the identity ring-term pair in cone(epsilon). Filter the remaining positive Cech complex by Cech degree; its graded pieces are finite sums of shifted S_I with nonempty I. Tensoring with K makes each such graded piece contractible, hence the whole tensor cone acyclic. The tensor/mapping-cone comparison proves that the projection id_K tensor epsilon is a quasi-isomorphism, and symmetry proves the same for epsilon tensor id_K.",
+   "text": "1. The ring complex and each two-term localization factor are K-flat by bounded-above flatness. Localization sheaves are flat by the proved sectionwise localization and sheafification argument in RingedLocalizationModels. Induct on the length of the ordered tensor, using the tensor associator to prove K-flatness of the extended Cech complex.",
    "uses": [
     "def-weil-pbc-ringed-extended-cech",
-    "lem-weil-pbc-ringed-localization-rhom-calculus"
+    "lem-weil-pbc-ringed-localization-complex-models",
+    "lem-pc-bounded-above-flat-kflat-site"
    ],
    "elementary": false
   },
   {
-   "text": "2. Bounded flatness makes K K-flat, so Hom(K,I) is K-injective for a K-injective representative I. Use evaluation at one and the fixed functorial replacement comparison in the definition of derived internal Hom to compute the actual units on representatives. Tensor-Hom currying identifies L(eta_E) with Hom of id_K tensor epsilon, and eta_(L E) with Hom of epsilon tensor id_K, after right and left ring-unit identifications respectively. The K-injective comparison maps intertwine these units by naturality of evaluation and precomposition. Hom into I inverts both projection quasi-isomorphisms, proving both actual maps invertible. Empty lists, zero or invertible generators, and zero rings obey the same formulas; no exactness of infinite products is used.",
+   "text": "2. Apply the tensor-augmentation-cone acyclicity lemma. The tensor/mapping-cone isomorphism makes id_K tensor epsilon a quasi-isomorphism. Naturality of the braiding and cancellation of its quasi-isomorphism give epsilon tensor id_K.",
    "uses": [
-    "lem-sc-derived-hom-tensor-total",
-    "lem-sc-hom-complex-unit-evaluation-naturality",
-    "def-pur-derived-internal-hom",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pur-hom-kflat-into-kinjective"
+    "lem-weil-pbc-ringed-cech-tensor-idempotence",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. For any augmented K-flat complex with these two quasi-isomorphisms, apply naturality of KFlatRHom.curryIso to the morphisms (id,(epsilon.op,id)) and (epsilon.op,(id,id)) in the product of K-flat full subcategories and the derived category. On the tensor side the maps are invertible because Q inverts both quasi-isomorphisms. Cancellation of the components of curryIso makes the corresponding iterated RHom precomposition maps invertible. The specified ringedDerivedHomUnit is invertible: its factors are the ring-Hom evaluation isomorphism, the K-injective replacement quasi-isomorphism under Q, the localization-factorization isomorphism, and the representative isomorphism. The specified completion unit is this isomorphism followed by augmentation precomposition. Functoriality and composition of isomorphisms prove both assertions.",
+   "uses": [
+    "lem-weil-pbc-kflat-rhom-currying",
+    "def-weil-pbc-ringed-completion-unit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ringed-extended-cech",
-  "lem-weil-pbc-ringed-localization-rhom-calculus",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-sc-hom-complex-unit-evaluation-naturality",
-  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-localization-complex-models",
   "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-hom-kflat-into-kinjective"
+  "lem-weil-pbc-ringed-cech-tensor-idempotence",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-weil-pbc-kflat-rhom-currying",
+  "def-weil-pbc-ringed-completion-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "algebraization.tex Tag 099B, proof of lemma-derived-completion",
-  "note": "The two-projection tensor/Hom argument is the remaining analytic part; unit naturality and cancellation are proved separately in the consumer module."
+  "place": "Tag 099B, proof of lemma-derived-completion",
+  "note": "K3: tensor-cone acyclicity is isolated as the sole new hole. K-flatness, the two tensor projections, and naturality/cancellation for both actual unit maps are implemented in Lean; no separate unit-currying coherence assertion is assumed."
  },
  "mathlib_searches": [
   {
@@ -103,7 +109,18 @@
   "by": "C1",
   "date": "2026-10-18"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-19",
   "by": "L",
@@ -115,12 +132,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261019T005258-L-2747351",
+  "landing": "20261025T095545-L-3442664",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

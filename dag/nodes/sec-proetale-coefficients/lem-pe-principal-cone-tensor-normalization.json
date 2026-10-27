@@ -1,0 +1,153 @@
+{
+ "id": "lem-pe-principal-cone-tensor-normalization",
+ "kind": "statement",
+ "title": "Principal scalar cones normalized against derived tensor",
+ "statement": "For the coefficient categories and uniformizer endomorphism d of [det-pe-derived-nakayama-resolution], with the scalar power identity on cochain complexes, there are natural isomorphisms Q Cone(d^(n+1)) ≅ Q followed by right derived tensor with the pulled-back quotient module in degree zero, for each n≥0. They take cone.map(d,id) to tensoring the specified quotientStep of [sk-def-pe-derived-completion], and cone.inr to the right-unitor inverse followed by tensoring ε_Q and Q(single.map(finiteUnit)). With the standard derived tensor shifts of [def-weil-triangulated-category], they intertwine the inverse mappingCone.shiftIso and the shift comparison of Q. This statement makes no identification with derived extension followed by restriction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+ },
+ "stmt_deps": [
+  "det-pe-derived-nakayama-resolution",
+  "sk-def-pe-derived-completion",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Use derived_nakayama_resolution to obtain the exact pulled-back coefficient sequences. The section formula identifies its uniformizer endomorphism with the supplied d by extensionality; its quotient maps agree with quotientUnit by module-morphism extensionality. Transport through regularPullbackIso on the first two objects. Act by endomorphisms of the monoidal unit using the center-induced commutative scalar ring: the left-unitor scalarOnComplex equals scalar times the identity, and conjugated pullback preserves scalar products.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+   }
+  },
+  {
+   "text": "Form κ by the inverse components of the canonical reductionIso for each transported short exact coefficient sequence. reductionIso_hom_naturality assembles the components into a natural isomorphism. Conjugating this naturality equation by the component isomorphisms gives its inverse naturality, with no choices of comparison morphisms.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+   }
+  },
+  {
+   "text": "The quotient units followed by quotientStep agree definitionally on underlying coefficient functions, hence agree as module morphisms. Their pulled-back versions give finiteUnit_step. The scalar power equality and whiskerLeft_reductionIso_hom then give the transition formula after cancellation of the two reductionIso components. reduction_reductionIso_hom, followed by cancellation of one component, gives the exact specified tensor-unit formula for cone.inr.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+   }
+  },
+  {
+   "text": "Apply lem-pe-reduction-iso-signed-shift to the same fixed canonical reductionIso components. scalarOnComplex comes from a termwise natural scalar action, so it commutes definitionally with cochain shifts. Transporting this equality through the cone gives the exact inverse mappingCone.shiftIso square. The right-tensor shift is the standard tensorReductionShift, so no shift structure is chosen or changed.",
+   "uses": [
+    "lem-pe-reduction-iso-signed-shift",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-derived-nakayama-resolution",
+  "sk-def-pe-derived-completion",
+  "def-weil-abstract-derived-category",
+  "lem-pe-reduction-iso-signed-shift",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "C7 Lean assembly: coefficient exactness, canonical inverse reductionIso, quotient transition and unit formulas, and the isolated generic signed-shift compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor comparison with a K-flat scalar mapping cone commutes with signed shifts",
+   "results": "8 hits: CochainComplex.mappingCone.map_δ; CochainComplex.mappingCone.shiftIso; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CochainComplex.mappingCone.shiftTriangleIso; the localizer morphism CommShift instance; Functor.mapCochainComplexShiftIso; mappingCone.shiftTrianglehIso; mapDerivedCategoryFactors CommShift instance.",
+   "date": "2026-10-25",
+   "verdict": "Generic cone and exact-functor shifts only; no comparison normalized simultaneously at quotient transitions and units."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\"",
+   "results": "12 hits: Functor.CommShift.id, CommShift, CommShift.ofIso, NatTrans.CommShift.id, isoRefl_hom, NatTrans.CommShift, Functor.CommShift.comp, NatTrans.CommShiftCore, commShiftIso, isoZero', isoZero, ofHasShiftOfFullyFaithful.",
+   "date": "2026-10-25",
+   "verdict": "Transport along a natural isomorphism is available, but not either principal quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftIso|tensorScalarConeIso|extendForgetTensorIso",
+   "results": "25 hits in Mathlib: generic induced, localized, opposite and quotient shift structures. Project source TensorMappingCone provides reductionIso, reduction_reductionIso_hom and whiskerLeft_reductionIso_hom; InternalKFlatScalarTowerRealization provides objectwise K-flat comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the project comparisons for the cone and extension arguments. Neither the natural scalar-extension identification nor signed normalization is stated by these generic Mathlib hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrincipalReductionDerivedNormalization",
+  "date": "2026-10-25",
+  "group": "S6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-derived-nakayama-first-reduction",
+   "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts.",
+   "via": [
+    "lem-pe-principal-reduction-derived-normalization",
+    "lem-pe-principal-reduction-cone-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-pe-derived-nakayama",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrincipalConeTensorNormalization",
+  "file": "lean/Sheaf/Paper/PrincipalConeTensorNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.PrincipalNormalization.principal_cone_tensor_normalization",
+  "statement": "theorem principal_cone_tensor_normalization\n    (d : End (Mod.regular (DerivedNakayama.integerRing l E)))\n    (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)\n      (s : S.unop), ((d.hom.hom.app S) a).down s =\n        Padic.coefficientExtensionUniformizer l E * a.down s)\n    (hs : ∀ (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),\n      DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1 + 1)) M =\n        DerivedNakayama.scalarOnComplex l E X d M ≫\n          DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M) :\n    ∃ (κ : ∀ n : ℕ, DerivedNakayama.coneFunctor l E X (d ^ (n + 1)) ≅\n        DerivedCategory.Q ⋙ DerivedNakayama.reductionFunctor l E X (n + 1)),\n      (∀ (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),\n        DerivedCategory.Q.map (CochainComplex.mappingCone.map\n          (DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1 + 1)) M)\n          (DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M)\n          (DerivedNakayama.scalarOnComplex l E X d M) (𝟙 M)\n          ((Category.comp_id _).trans (hs n M))) ≫ (κ n).hom.app M =\n            (κ (n + 1)).hom.app M ≫\n              (DerivedNakayama.reductionMap l E X\n                (AdicCompletion.quotientStep l E n)).app (DerivedCategory.Q.obj M)) ∧\n      (∀ (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),\n        DerivedCategory.Q.map (CochainComplex.mappingCone.inr\n          (DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M)) ≫\n            (κ n).hom.app M =\n          (ρ_ (DerivedCategory.Q.obj M)).inv ≫ DerivedCategory.Q.obj M ◁\n            (Functor.LaxMonoidal.ε DerivedCategory.Q ≫ DerivedCategory.Q.map\n              ((HomologicalComplex.single _ (.up ℤ) 0).map\n                (AdicCompletion.finiteUnit l E X n)))) ∧\n      (∀ (n : ℕ) (r : ℤ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),\n        DerivedCategory.Q.map\n            (CochainComplex.mappingCone.shiftIso\n              (DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M) r).inv ≫\n            (DerivedCategory.Q.commShiftIso r).hom.app\n              (CochainComplex.mappingCone\n                (DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M)) ≫\n            ((κ n).hom.app M)⟦r⟧' =\n          (κ n).hom.app (M⟦r⟧) ≫\n            (DerivedNakayama.reductionFunctor l E X (n + 1)).map\n              ((DerivedCategory.Q.commShiftIso r).hom.app M) ≫\n            (Functor.commShiftIso (self := tensorReductionShift l E X n)\n              (DerivedNakayama.reductionFunctor l E X (n + 1)) r).hom.app\n              (DerivedCategory.Q.obj M))",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T095833-L-3490421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T122635-L-1792889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

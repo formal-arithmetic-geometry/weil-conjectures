@@ -1,0 +1,164 @@
+{
+ "id": "lem-sf-common-stage-perfect-evaluation-descent",
+ "kind": "statement",
+ "title": "Descent of perfect evaluation to common coefficient stages",
+ "statement": "Fix a finite-field datum D, coefficient datum C, finite extension E of Q_l, positive finite exponent, six-functor datum S and D-space X as in [def-sf-datum]. Suppose at every finite coefficient subfield of C.Qbar the specified rational closed model has invertible canonical tensor-dual evaluation for every site-perfect first argument and every second argument. Then in the actual common-stage pair category the specified tensor-dual evaluation is invertible for every common-stage site-perfect first argument and every second argument. The site-perfect predicates are those of [def-weil-site-perfect-complex].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md",
+  "place": "Step 14: pass the evaluation isomorphism from finite coefficient fields to the common-stage pair category."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-weil-site-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "descend K and its perfect model to the finite field in hK. Represent M\nat its own finite coefficient field and pass to a common upper field. Exact\ncoefficient extension preserves the bounded local complex and its rational\nfinite-free retractions, hence preserves site-perfectness. Apply hstage at\nthat common field. The datum's coefficient and common-stage closed comparisons\nidentify the image of this evaluation with the specified common-stage arrow:\ntranspose the evaluation square, then use its symmetry equation. Their tensor\nand Hom comparisons are invertible. The stage inverse therefore represents\nan inverse in the filtered pair category. Finally transport in K along the\nisomorphism in hK using naturality of evaluation. This uses actual finite\nstages and imposes no Karoubi completion or uniform global choice of stage.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-site-perfect-complex",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-fix-operation-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, applied to the coefficient-stage argument at Step 14: pass the evaluation isomorphism from finite coefficient fields to the common-stage pair category."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful closed functor reflects dualizability and perfect tensor Hom evaluation",
+   "results": "8 hits including Functor.FullyFaithful.reflectsIsomorphisms, fullyFaithfulOfCoreflective, reflectsIsomorphisms_of_full_and_faithful",
+   "date": "2026-10-25",
+   "verdict": "Only categorical reflection tools; none states normalized closed evaluation transport, ambient rational slice detection, local bounded rational evaluation, or filtered coefficient descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Functor.Faithful",
+   "results": "12 hits including Functor.preimageIso and isIso_of_fully_faithful",
+   "date": "2026-10-25",
+   "verdict": "These reflect isomorphisms after a fully faithful functor, but do not identify the evaluation maps or establish local rational invertibility."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff.*cone|isIso_of_reflects_iso",
+   "results": "25 hits in Mathlib, including Functor.ReflectsIso and sheaf stalk applications",
+   "date": "2026-10-25",
+   "verdict": "No matching statement for normalized coefficient closed structures or rational constructibles on actual slice sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between triangulated categories sends a morphism to an isomorphism if and only if its cone becomes zero",
+   "results": "8 hits including Functor.distTriang_iff, map_distinguished_iff and IsHomological.exact",
+   "date": "2026-10-25",
+   "verdict": "General triangulated tools only; the specialized comparison, bounded rational local calculation and torsion detection remain additional arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SitePerfectDualizableHom",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-dualizable-hom",
+   "place": "Step 14: pass the evaluation isomorphism from finite coefficient fields to the common-stage pair category.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePerfectEvaluationDescent",
+  "file": "lean/Sheaf/Paper/CommonStagePerfectEvaluationDescent.lean",
+  "declaration": "WeilConjectures.commonStage_perfectEvaluation_descent",
+  "statement": "theorem commonStage_perfectEvaluation_descent\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ)\n    (S : SixFunctorDatum D C E (n + 1) (Nat.succ_pos n)) (X : SixFunctorSpace D)\n    (hstage : ∀ (E₀ : Padic.FiniteCoefficientFields C.l C.Qbar)\n      (K M : (⊤ : ObjectProperty (sfRationalConstructibleCategory C.l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀)\n        X.obj.left)).FullSubcategory),\n      IsSfRationalCoefficientSitePerfect C.l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) X.obj.left K.obj →\n      IsIso (ringedSiteDualEvaluationLeft (S.coefficientClosedModels E₀ X).rational.closed\n        (S.coefficientClosedModels E₀ X).rational.symmetric\n        (S.coefficientClosedModels E₀ X).rational.closed.monoidal.tensorUnit\n        (Iso.refl _) K M))\n    (K M : (⊤ : ObjectProperty (generalAlgebraicallyClosedConstructibleCategory\n      C.l C.Qbar X.obj.left)).FullSubcategory)\n    (hK : IsGeneralAlgebraicallyClosedCoefficientSitePerfect C.l C.Qbar X.obj.left K.obj) :\n    IsIso (ringedSiteDualEvaluationLeft (S.commonClosed X).closed\n      (S.commonClosed X).symmetric (S.commonClosed X).closed.monoidal.tensorUnit\n      (Iso.refl _) K M)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sf-common-stage-perfect-evaluation-descent",
+  "worker": "E4",
+  "summary": "Stage-3 reduction; see Lean proof and report.",
+  "blueprint": {
+   "node": "prop-sf-dualizable-hom",
+   "place": "Step 14: pass the evaluation isomorphism from finite coefficient fields to the common-stage pair category.",
+   "via": []
+  },
+  "tool_uses": [
+   {
+    "node": "def-weil-site-perfect-complex",
+    "why": "Generic Perfect complexes on the coefficient site is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Generic Algebraically closed coefficient category is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Generic Derived pullback, tensor product, and internal Hom is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Generic Scalar extension is an exact triangulated functor is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic Basic operations and coefficient reduction is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T100943-L-3642728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T100943-L-3642728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

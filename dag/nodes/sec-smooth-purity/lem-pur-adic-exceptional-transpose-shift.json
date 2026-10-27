@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-adic-exceptional-transpose-shift",
+ "kind": "statement",
+ "title": "Realized integral exceptional transpose shift square",
+ "statement": "Fix the global finite-field datum D, coefficient datum C, a finite extension F of Q_(C.l), separated finite-type k-schemes X,Y and a separated finite-type k-morphism f:X→Y. Let c be a compactification and S the specified constructible exceptional RingSystem of [def-weil-exceptional-inverse-image]. For arbitrary finite-Tor constructible integral objects A₀,A₁ on X and K on Y, an ambient morphism a:A₁→A₀[1], and ambient maps v₀:P_c A₀→K and v₁:P_c A₁→the underlying object of K[1], assume v₁; inclusionShift_K = P_c(a); compactSupportShift_A₀; v₀[1]. Then the actual Hom transpose of [def-pur-adic-projection-trace-data] satisfies transpose(v₁); exceptionalShift_K; inclusionShift_(G K) = a; transpose(v₀)[1]. The exceptional shift is the unique adjoint shift induced by the realized left-adjoint shift. No projection, trace, invertibility, or special tensor presentation is assumed.",
+ "stmt_deps": [
+  "def-weil-exceptional-inverse-image",
+  "def-pur-adic-projection-trace-data",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-operation-shift-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2 integral coefficients and Step 3 uniqueness, expanded unit/counit shift calculation in parent proof Step 4."
+ },
+ "proof": [
+  {
+   "text": "Lift a to the full finite-Tor subcategory by composing with the inverse inclusion shift comparison. The ofComp definition makes S.left shift compatible, so its naturality transports the assumed ambient square to the corresponding left-adjoint square.",
+   "uses": [
+    "def-pur-adic-projection-trace-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write the adjunction transpose as eta followed by G(v). Naturality of eta moves the source map to the left; naturality of the right shift moves the shifted v to the right; the adjunction unit shift equation cancels the intermediate comparisons. Apply the ambient inclusion and its shift naturality, then cancel its source inverse comparison.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-projection-trace-data",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2 integral coefficients and Step 3 uniqueness, expanded unit/counit shift calculation in parent proof Step 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical shifts of a completed tensor pullback, full subcategory inclusion, compact support realization and its right adjoint",
+   "results": "PullbackShift.adjunction and general pullback-shift functors; no realized integral transpose equation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.ofComp",
+   "results": "Functor.CommShift.ofComp and ofComp_compatibility; these supply the left-realization normalization but no full-subcategory transpose equation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*shift|shift.*homEquiv",
+   "results": "13 Mathlib hits for shiftedHom and opposite shift equivalences; none for this realized adjunction transpose.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicProjectionShiftCoherence",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "lem-pur-adic-projection-shift-coherence"
+   ],
+   "place": "Step 2 integral coefficients and Step 3 uniqueness, expanded unit/counit shift calculation in parent proof Step 4."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicExceptionalShiftCoherence",
+  "file": "lean/Sheaf/Paper/AdicExceptionalShiftCoherence.lean",
+  "declaration": "WeilConjectures.adicExceptionalTransposeShift",
+  "statement": "theorem adicExceptionalTransposeShift\n    (A₀ A₁ : finiteTorConstructibleIntegralCategory C.l F X)\n    (K : finiteTorConstructibleIntegralCategory C.l F Y)\n    (a : A₁.obj ⟶ A₀.obj⟦(1 : ℤ)⟧)\n    (v₀ : (PurCompactSupport.image (PurCompactSupport.completed C.l F) c).obj A₀.obj ⟶ K.obj)\n    (v₁ : (PurCompactSupport.image (PurCompactSupport.completed C.l F) c).obj A₁.obj ⟶\n      (K⟦(1 : ℤ)⟧).obj)\n    (hv : v₁ ≫ (adicInputShift C.l F Y K).hom =\n      (PurCompactSupport.image (PurCompactSupport.completed C.l F) c).map a ≫\n        ((PurCompactSupport.image (PurCompactSupport.completed C.l F) c).commShiftIso\n          (1 : ℤ)).hom.app A₀.obj ≫ v₀⟦(1 : ℤ)⟧') :\n    adicTranspose D C F f S c A₁ (K⟦(1 : ℤ)⟧) v₁ ≫\n        ((adicExceptionalShift D C F f S c).hom.app K).hom ≫\n        (adicInputShift C.l F X\n          ((S.operation c (.integral { carrier := F })).G.obj K)).hom =\n      a ≫ (adicTranspose D C F f S c A₀ K v₀)⟦(1 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5ee36",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T101823-L-3740839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5ee36",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T101823-L-3740839",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly vs three new sorried lemma nodes; moved def block vs published module (byte-identical); new node lean.statements vs files; CommShift instance on PurCompactSupport.image vs integralShifts.compactSupport (rfl); importers AdicTraceTransposeData/AdicUnitTraceReductionData compiled against delivered and published item"
+ }
+}

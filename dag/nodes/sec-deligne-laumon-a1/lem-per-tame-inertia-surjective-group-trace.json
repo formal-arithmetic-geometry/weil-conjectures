@@ -216,19 +216,35 @@
   "file": "lean/Sheaf/RingTheory/TameInertiaSurjectiveGroupTrace.lean",
   "statement": "theorem groupTrace_surjective_of_isUnit_inertia (R : Type u) [CommRing R] (G : Type v) [Group G] [Fintype G] [MulSemiringAction G R] (htame : ∀ (p : Ideal R) [p.IsPrime], IsUnit (Nat.card (p.inertia G) : p.ResidueField)) : (∀ b : FixedPoints.subring R G, ∃ a : R, ∑ g : G, g • a = (b : R)) ∧ (∃ a : R, ∑ g : G, g • a = 1)",
   "branch": "newtargets-dag",
-  "by": "N2",
-  "date": "2026-10-19",
-  "existing": false,
-  "fixed_by": "NT-stage2-cc-1c6991e8a",
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.TameInertiaSurjectiveGroupTrace deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-1c6991e8a",
-  "group": "N2",
-  "result": "fix",
-  "note": "Statement matches node clause by clause (Ideal.inertia = residue inertia incl. nonmaximal primes; htame at every prime, no |G| invertibility; both surjectivity and trace-one conclusions; FixedPoints.subring; independent universes; zero ring/trivial action covered); only lean field added, record verbatim; no H4 duplicate. FIX: H8 theorem docstring carried the old localization/Galois-field-trace argument instead of the node's 7 steps (integrality, lying over/prime-over-maximal, R/p≅κ(p) coset count, character independence, CRT with |I_p|u≠0, maximal-ideal lemma) -> rewritten; H9 unused import Mathlib.RingTheory.Ideal.Pointwise dropped. Signature unchanged. nt_compile --json: delivered 1.3 s clean, fixed 1.6 s clean."
+  "reviewer": "NT-stage2-cc-534df30b5",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Only the node's lean field changes. It puts back the module deleted on 2026-10-20 as unreachable; the parent lem-per-tame-admissible-scheme-quotient still cites the item. The signature equals the N2-accepted one apart from whitespace and is verbatim the file's signature. Clause check: CommRing R : Type u; Fintype group G : Type v; MulSemiringAction; FixedPoints.subring = R^G; p.ResidueField = κ(p) via the stmt_dep. Ideal.inertia {σ | ∀x, σx−x∈p} equals the node's I_p (fixes p and is the identity on κ(p) ⊇ R/p) at every prime. The hypothesis is IsUnit of Nat.card of inertia in κ(p), with no |G| condition. The conclusion states both surjectivity onto R^G and trace one. No Noetherian, finite-type, Nontrivial or faithfulness assumption. Edge cases checked: zero ring, trivial G, trivial non-faithful action of Z/2 on F_2, F_2×F_2 with swap. Gates: no H4 duplicate; docstrings carry the source tags, the blueprint tag and the 7 proof steps; public imports are minimal and plain imports are the proof_dep modules; proof is only sorry; report has Worker report and Second reading by Q117. Not recompiled (no file changed); the worker reports a clean compile and the same signature compiled clean at N2."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/TameInertiaSurjectiveGroupTrace.lean",
+  "module": "Sheaf.RingTheory.TameInertiaSurjectiveGroupTrace",
+  "declaration": "MulSemiringAction.groupTrace_surjective_of_isUnit_inertia",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

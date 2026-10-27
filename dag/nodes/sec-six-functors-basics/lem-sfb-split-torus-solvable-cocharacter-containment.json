@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-split-torus-solvable-cocharacter-containment",
+ "kind": "statement",
+ "title": "A solvable subgroup through a split maximal torus lies in a regular limit subgroup",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a reductive $k$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology], and let $T\\subseteq G$ be a split maximal torus [def-sfb-tori-multiplicative-type]. Reductive means smooth affine of finite type, geometrically connected, with no nontrivial smooth connected normal unipotent subgroup after algebraic closure [def-weil-algebraic-closure]; unipotent means that geometric points are unipotent matrices in a faithful representation [def-sfb-solvable-group-structure]. Let $V\\subseteq G$ be a smooth connected solvable closed subgroup containing $T$ [def-sc-group-scheme-subgroup, def-sbc-smooth-morphisms, def-weil-connected-scheme]; solvable means that successive scheme-theoretic commutator subgroups become trivial. No maximality assumption on $V$ is imposed. Put $\\Phi=\\{\\alpha\\ne0:\\operatorname{Lie}(G)_\\alpha\\ne0\\}$, where $\\operatorname{Lie}(G)$ is the tangent space at the identity and the subscript denotes the character-weight summand of the conjugation representation of $T$. A character is a group homomorphism $T\\to\\mathbf G_m$, and a cocharacter is a group homomorphism $\\mathbf G_m\\to T$ [def-sc-gm-ga]. Then there exists a cocharacter $\\lambda$ defined over $k$ such that $\\alpha\\circ\\lambda(t)=t^{n_\\alpha}$ with $n_\\alpha\\ne0$ for every $\\alpha\\in\\Phi$, and\n$$V\\subseteq P_\\lambda$$\nas subgroup functors, where $P_\\lambda(A)$ consists of those $g\\in G(A)$ for which $t\\mapsto\\lambda(t)g\\lambda(t)^{-1}$ extends from $\\mathbf G_{m,A}$ to a morphism $\\mathbf A^1_A\\to G_A$. If $\\Phi=\\varnothing$, the assertion includes $\\lambda=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.32 and Corollary 21.33, printed pp.434-435, together with Proposition 21.29, pp.433-434. Applied to a Borel containing the scalar extension of V to an algebraic closure: all geometric Borels through the split torus descend and are regular cocharacter limit subgroups. This is a containment input without a Borel or maximality hypothesis on V."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-solvable-group-structure",
+  "def-weil-algebraic-closure",
+  "def-sfb-adjoint-character-weight-vectors",
+  "def-sfb-cocharacter-limit-subfunctors",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\bar k$. The field-extension assertions of [lem-sfb-solvable-normal-subgroup-products] make $V_K$ smooth, connected and solvable. The group $G_K$ is reductive by the geometric hypothesis on $G$. By [lem-sfb-maximal-torus-field-extension], $T_K$ is maximal in $G_K$, and $T_K\\subseteq V_K$. Thus all the algebraically closed-field hypotheses needed below hold.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-maximal-torus-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.34--1.36; Section 6e; Theorem 17.82, p.379"
+   }
+  },
+  {
+   "text": "Among the smooth connected solvable closed subgroups of $G_K$ containing $V_K$, choose $B$ with largest dimension. This collection is nonempty (it contains $V_K$), and its dimensions are integers bounded by $\\dim G_K$. A proper smooth connected overgroup of $B$ has strictly larger dimension by [lem-sfb-solvable-normal-subgroup-products]. Consequently $B$ is maximal among smooth connected solvable subgroups, hence is a Borel, and $T_K\\subseteq V_K\\subseteq B$.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 17.6 and the maximum-dimension observation, pp.353--354"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-regular-cocharacter-borel-description] to $(G_K,T_K,B)$. It gives a cocharacter $\\mu:\\mathbf G_{m,K}\\to T_K$ regular for the nonzero character weights of $\\operatorname{Lie}(G_K)$ and $B=P_\\mu$. If there are no such weights, its last clause permits the choice $\\mu=0$ and gives $G_K=T_K=P_0$.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.32 and Corollary 21.33, pp.434--435; Proposition 21.29"
+   }
+  },
+  {
+   "text": "By the antiequivalence and scalar-extension compatibility in [lem-sfb-multiplicative-character-antiduality], homomorphisms between the split tori $\\mathbf G_m$ and $T$ identify with homomorphisms $X^*(T)\\to\\mathbf Z$, over both $k$ and $K$. Their Galois actions are trivial because the tori are split. Hence scalar extension gives a bijection on these Hom sets. The lattice homomorphism $\\mu^*$ therefore defines a $k$-cocharacter $\\lambda$ with $\\lambda_K=\\mu$. It is the zero cocharacter when $\\mu=0$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9 and the split-case paragraph of the proof of Corollary 12.25, pp.233,240"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-relative-tangent-weight-base-change] with $A=k$, $B=K$ and a splitting $T\\simeq\\mathbf G_m^r$. It identifies each geometric character-weight space with $K\\otimes_k\\operatorname{Lie}(G)_\\alpha$. Tensoring a vector space with a field extension preserves and detects nonzeroness, so the nonzero weights are exactly the scalar extensions of $\\Phi$. Character antiduality identifies their pairings with $\\lambda$ and $\\mu$. Thus $n_\\alpha=\\langle\\alpha_K,\\mu\\rangle\\ne0$ for every $\\alpha\\in\\Phi$, with $\\alpha\\circ\\lambda(t)=t^{n_\\alpha}$; if $\\Phi$ is empty, the preceding zero choice applies.",
+   "uses": [
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 13 weight decompositions; Definition 21.26, p.433; split character pairing of Chapter 12"
+   }
+  },
+  {
+   "text": "The field-extension clause of [lem-sfb-reductive-cocharacter-parabolic-geometry] gives a closed subgroup $P_\\lambda\\subseteq G$ and $(P_\\lambda)_K=P_\\mu$. Thus $V_K\\subseteq B=(P_\\lambda)_K$. Write $G=\\operatorname{Spec}R$, $V=\\operatorname{Spec}(R/I)$, and $P_\\lambda=\\operatorname{Spec}(R/J)$. This inclusion says that every element of $J$ maps to zero in $(R/I)\\otimes_k K$. The map $R/I\\to(R/I)\\otimes_k K$ is injective (extend any nonzero vector to a $k$-basis), hence $J\\subseteq I$. The quotient map $R/J\\to R/I$ gives $V\\subseteq P_\\lambda$ as closed subgroup schemes, and therefore on every test algebra, including nonreduced ones.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definitions and field-extension compatibility of limit subgroups, pp.263--266; Corollary 21.33, p.435, descent of the resulting containment"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-sfb-reductive-cocharacter-parabolic-geometry"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 17.6 (pp.353--354), Theorem 21.32 and Corollary 21.33 (pp.434--435), with split Hom invariance from the proof of Corollary 12.25 (p.240). The descent and weight checks are written out explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected solvable subgroup containing a split maximal torus of a reductive algebraic group is contained in a regular cocharacter parabolic subgroup",
+   "results": "{\"t\": \"2026-10-24T05:00:22Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected solvable subgroup containing a split maximal torus of a reductive algebraic group is contained in a regular cocharacter parabolic subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieAlgebra.le_zeroRootSubalgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.toLieSubmodule_le_rootSpace_zero\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.normalizer_eq_self_of_engel_le\"], \"digest\": \"c8c3b8aed43caab6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, abstract root pairings, or general scheme coproducts; none constructs algebraic torus transporter loci or cocharacter containment of algebraic subgroups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"parabolic\"",
+   "results": "{\"t\": \"2026-10-24T05:00:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", \\\"parabolic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, abstract root pairings, or general scheme coproducts; none constructs algebraic torus transporter loci or cocharacter containment of algebraic subgroups."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter.*(Borel|solvable)|Borel.*cocharacter|parabolic.*solvable",
+   "results": "{\"t\": \"2026-10-24T05:00:23Z\", \"tool\": \"grep\", \"query\": \"cocharacter.*(Borel|solvable)|Borel.*cocharacter|parabolic.*solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, abstract root pairings, or general scheme coproducts; none constructs algebraic torus transporter loci or cocharacter containment of algebraic subgroups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A solvable algebraic subgroup containing a split maximal torus is contained in a Borel defined over the ground field",
+   "results": "{\"t\": \"2026-10-24T05:02:42Z\", \"tool\": \"leansearch\", \"query\": \"A solvable algebraic subgroup containing a split maximal torus is contained in a Borel defined over the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isSolvable_of_top_eq_bot\", \"subgroup_solvable_of_solvable\", \"IsSolvable\", \"IsNilpotent.to_isSolvable\", \"IsSolvable.recOn\", \"isSolvable_of_subsingleton\", \"CommGroup.isSolvable\", \"IsSolvable.solvable\"], \"digest\": \"5c0cb438e8a14d2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, abstract root pairings, or general scheme coproducts; none constructs algebraic torus transporter loci or cocharacter containment of algebraic subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reductive group with split maximal torus every solvable connected subgroup through the torus lies in the limit subgroup of a regular cocharacter",
+   "results": "{\"t\": \"2026-10-24T05:02:51Z\", \"tool\": \"leanfinder\", \"query\": \"For a reductive group with split maximal torus every solvable connected subgroup through the torus lies in the limit subgroup of a regular cocharacter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frattini\", \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\", \"frattini_characteristic\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"MulAction.IwasawaStructure.commutator_le\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\"], \"digest\": \"72f37a07f39c613d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, abstract root pairings, or general scheme coproducts; none constructs algebraic torus transporter loci or cocharacter containment of algebraic subgroups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\"",
+   "results": "{\"t\": \"2026-10-24T05:05:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis.borelLower\", \"LieAlgebra.Basis.borelUpper\", \"LieAlgebra.Basis.iSup_cartan_borelLower_borelUpper_eq_top\", \"LieAlgebra.Basis.borelUpper_eq\", \"LieAlgebra.Basis.borelUpper_le_biSup\", \"LieAlgebra.Basis.borelLower_eq\", \"LieAlgebra.Basis.borelLower_le_biSup\", \"Mathlib.Tactic.Borelize.tacticBorelize___\"], \"digest\": \"f6a7c18a77802c4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, abstract root pairings, or general scheme coproducts; none constructs algebraic torus transporter loci or cocharacter containment of algebraic subgroups."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter.*(Borel|solvable)|Borel.*cocharacter|parabolic.*solvable",
+   "results": "{\"t\": \"2026-10-24T07:03:56Z\", \"tool\": \"grep\", \"query\": \"cocharacter.*(Borel|solvable)|Borel.*cocharacter|parabolic.*solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group solvability, Lie-algebra Cartan/root-space or Lie Borel constructions, or measurable Borel instances; none states containment of subgroup schemes in a regular cocharacter limit subgroup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every connected solvable algebraic subgroup through a split maximal torus is contained in a Borel subgroup defined by a regular one parameter subgroup",
+   "results": "{\"t\": \"2026-10-24T07:03:56Z\", \"tool\": \"leansearch\", \"query\": \"Every connected solvable algebraic subgroup through a split maximal torus is contained in a Borel subgroup defined by a regular one parameter subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"subgroup_solvable_of_solvable\", \"isSolvable_of_top_eq_bot\", \"IsSolvable.mk\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"CommGroup.isSolvable\", \"isSolvable_of_subsingleton\", \"LieAlgebra.ofAbelianIsSolvable\"], \"digest\": \"6341098147623438\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group solvability, Lie-algebra Cartan/root-space or Lie Borel constructions, or measurable Borel instances; none states containment of subgroup schemes in a regular cocharacter limit subgroup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"parabolic\"",
+   "results": "{\"t\": \"2026-10-24T07:03:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", \\\"parabolic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group solvability, Lie-algebra Cartan/root-space or Lie Borel constructions, or measurable Borel instances; none states containment of subgroup schemes in a regular cocharacter limit subgroup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected solvable subgroup containing a split maximal torus of a reductive algebraic group lies in a regular cocharacter parabolic",
+   "results": "{\"t\": \"2026-10-24T07:04:07Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected solvable subgroup containing a split maximal torus of a reductive algebraic group lies in a regular cocharacter parabolic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\", \"LieAlgebra.le_zeroRootSubalgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieAlgebra.toLieSubmodule_le_rootSpace_zero\"], \"digest\": \"47979bbf44ef61a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group solvability, Lie-algebra Cartan/root-space or Lie Borel constructions, or measurable Borel instances; none states containment of subgroup schemes in a regular cocharacter limit subgroup."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|BorelSubgroup|IsReductive|parabolic",
+   "results": "{\"t\": \"2026-10-24T07:04:35Z\", \"tool\": \"grep\", \"query\": \"cocharacter|BorelSubgroup|IsReductive|parabolic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group solvability, Lie-algebra Cartan/root-space or Lie Borel constructions, or measurable Borel instances; none states containment of subgroup schemes in a regular cocharacter limit subgroup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\"",
+   "results": "{\"t\": \"2026-10-24T07:04:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis.borelLower\", \"LieAlgebra.Basis.borelUpper\", \"LieAlgebra.Basis.iSup_cartan_borelLower_borelUpper_eq_top\", \"LieAlgebra.Basis.borelUpper_eq\", \"LieAlgebra.Basis.borelUpper_le_biSup\", \"LieAlgebra.Basis.borelLower_eq\", \"LieAlgebra.Basis.borelLower_le_biSup\", \"Mathlib.Tactic.Borelize.tacticBorelize___\"], \"digest\": \"f6a7c18a77802c4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group solvability, Lie-algebra Cartan/root-space or Lie Borel constructions, or measurable Borel instances; none states containment of subgroup schemes in a regular cocharacter limit subgroup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reductive algebraic group with a split maximal torus every Borel subgroup containing the torus is the limit subgroup of a regular cocharacter",
+   "results": "{\"t\": \"2026-10-24T07:04:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a reductive algebraic group with a split maximal torus every Borel subgroup containing the torus is the limit subgroup of a regular cocharacter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.IsKilling.biSup_corootSubmodule_eq_cartan\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\"], \"digest\": \"64f647d33ab8e217\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group solvability, Lie-algebra Cartan/root-space or Lie Borel constructions, or measurable Borel instances; none states containment of subgroup schemes in a regular cocharacter limit subgroup."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-flag-rational-fixed-scheme",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion, On Linearization of Line Bundles, Lemma 2.3 proof, printed p.118, the Pic(G/B) and root-datum paragraph, citing Iversen 1976 Proposition 5.2 and Theorem 5.3. The explicit split Schubert-boundary basis and its scalar-extension form are the geometric input unpacked here; also Milne Lemma 18.21, printed p.392, the split affine-cell argument. The statement concerns split groups over arbitrary fields, not only algebraically closed fields. Supporting geometry: the split Bruhat stratification before the boundary-divisor argument; Milne Theorems 21.73 and 21.80. Supporting input: Chapter 21 standing arbitrary field, printed p.424; Proposition 21.1, p.424 (constant Weyl group and rational representatives); Summary 21.41, p.436; the fixed-scheme paragraph immediately before Proposition 21.70, p.446. Scalar-extension stability of split Borel pairs is used throughout Section 21h. The fixed-scheme assertion is scheme-theoretic, not just a statement about rational points. Supporting substep: Theorem 21.32 and Corollary 21.33, printed pp.434-435, together with Proposition 21.29, pp.433-434. Applied to a Borel containing the scalar extension of V to an algebraic closure: all geometric Borels through the split torus descend and are regular cocharacter limit subgroups. This is a containment input without a Borel or maximality hypothesis on V.",
+   "via": [
+    "lem-sfb-split-flag-rational-fixed-scheme",
+    "lem-sfb-split-bruhat-affine-stratification",
+    "lem-sfb-split-flag-schubert-picard-lattice",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-solvable-cocharacter-containment",
+  "worker": "stage1",
+  "summary": "Q143: split without new nodes using existing geometric Borel/cocharacter, character antiduality, tangent-weight base-change and maximal-torus results. Wrote the maximum-dimension Borel choice and affine-ideal descent explicitly; retained the statement, including arbitrary fields, all test algebras and the empty-root case. No exact finished project declaration found.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited alteration/level-structure supporting chain in blueprint.from.place: the split-flag fixed-scheme proof needs containment for a solvable subgroup through the split torus. Steps 1--3 realize the geometric Borel choice, steps 4--5 its regular k-cocharacter, and step 6 descends containment. Whole-blueprint searches for cocharacter, regular cocharacter, Borel and solvable found no equivalent blueprint statement. No chapter or unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-393cea25c",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-393cea25c (reviewer sub-agent of L); spot-checked: PASS: the delivery is correct and I wrote no fixes. It is one commit containing the item and its report, with no new nodes. The item statement and stmt_deps are identical to the Q115 creation record, and the status went from unsplit to split. Source check: I read Milne iAG2017 Def. 21.26, Prop. 21.29, Thm. 21.32 and Cor. 21.33 (pp. 433-435); the six steps follow that argument, applied to a geometric Borel that contains V_K. Step 1: the field-extension clauses of solvable-normal-subgroup-products and maximal-torus-field-extension give V_K smooth, connected and solvable and T_K maximal; G_K is reductive by hypothesis. The two nodes define solvable differently (derived series versus a normal series), but def-sfb-solvable-group-structure states that the two are equivalent, so this is elementary. Step 2 chooses B of maximum dimension among the overgroups of V_K; the strict-dimension clause shows B is a Borel in the borel-description node's sense. Step 3 applies the converse clause of regular-cocharacter-borel-description over K to get B = P(mu); when Phi is empty, mu = 0 and P(0) = G. Step 4 uses split antiduality with base-change compatibility: scalar extension is a bijection on Hom(G_m, T), so mu = lambda_K for a k-cocharacter lambda into T itself. Step 5 uses relative-tangent-weight-base-change with A = k and B = K: the weights over K are the extensions of Phi, so n_alpha = <alpha_K, mu> is nonzero. Step 6 uses parabolic-geometry: P_lambda is closed and its formation commutes with field extension, and injectivity of R/I -> (R/I) tensor K gives J contained in I, so V lies in P_lambda on all algebras. Edge cases checked: G = T of any rank including 0, V = T, upper and lower Borels of SL_2 (mu must be chosen from B), finite and imperfect fields. There is no cycle: the closure of the cited nodes contains neither the item nor its citer split-flag-rational-fixed-scheme, and all cited nodes are in unit sk-thm-sf-ctf-stability. Batch-5 finding: the paths reach lem-trf-fppf-covering-base-change, def-trf-scheme-cover-descent-datum, lem-trf-smooth-fpqc-base-descent and lem-trf-projective-exterior-scalar-comparisons. These are general fppf, descent and linear-algebra facts that are stored in sec-trace-formula, not steps of the trace formula or of Poincare duality, so they are not a reason to return. No tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusSolvableCocharacterContainment",
+  "declaration": "AlgebraicGeometry.splitTorus_solvable_cocharacter_containment",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusSolvableCocharacterContainment.lean",
+  "statement": "theorem splitTorus_solvable_cocharacter_containment {k : Type u} [Field k] (G T V : Grp (Over (Spec (.of k)))) (hG : ReductiveTorusCentralizer.IsReductive G) (i : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) (hSplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) (j : V ⟶ G) (hV : IsClosedSubgroupScheme j.hom.hom) [Smooth V.X.hom] [ConnectedSpace V.X.left] (hSolvable : SolvableGroupStructure.IsSolvable V) (tV : T ⟶ V) (hTV : tV ≫ j = i) : ∃ lam : Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ T, (∀ chi : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k), chi.hom.hom ≠ 1 → (∃ v : GrpObj.Lie G.X, v ≠ 0 ∧ v ∈ AdjointCharacter.weightVectors i chi) → ∃ n : ℤ, n ≠ 0 ∧ lam.hom.hom ≫ chi.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative k)) ^ n) ∧ (∀ (A : CommAlgCat.{u} k) (v : StandardGroupSchemes.affine k A ⟶ V.X), v ≫ j.hom.hom ∈ CocharacterLimit.parabolicPoints (lam ≫ i) A) ∧ ((¬ ∃ (chi : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k)) (v : GrpObj.Lie G.X), chi.hom.hom ≠ 1 ∧ v ≠ 0 ∧ v ∈ AdjointCharacter.weightVectors i chi) → lam.hom.hom = 1)",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Regularity uses nonzero vectors in the universal adjoint character eigenspace; this retains finite fields and distinguishes characters in positive characteristic. The limit subfunctor reuses CocharacterLimit.parabolicPoints. The last conjunct permits the trivial cocharacter when the root set is empty. No natural-language statement changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d1f29f63",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Re-delivery after the fe9c H2 return. The new existing:true node def-sfb-cocharacter-limit-subfunctors records CocharacterLimit.IsOrbitExtension and parabolicPoints; its signature matches parabolicPoints verbatim and its statement matches the bodies and Milne pp.262-264. The item now cites it instead of theorem node lem-sfb-cocharacter-limit-smooth-structure. def-wf-lie-algebra-derivation was added to the stmt_deps of the item and of def-sfb-adjoint-character-weight-vectors. Both Lean files are byte-identical to fe9c. Re-read: hypotheses match the node and are no stronger; Phi uses the universal adjoint weight equation; conclusion = regular lambda, V in P_lambda on all algebras, lambda trivial when Phi is empty; edge cases OK; lean.statement equals the signature; no hollow definitions; only sorry. No compile, since no file was changed. Race: NP ee38, Q142 a1a5 and Q25 d73a deliver the same node id; Q27 d0c4 and Q141 9aec deliver def-sfb-cocharacter-limit-functors; none has landed. The first lander owns the node; the others drop their copy or rebind."
+ }
+}

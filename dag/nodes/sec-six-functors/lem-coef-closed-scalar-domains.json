@@ -1,0 +1,234 @@
+{
+ "id": "lem-coef-closed-scalar-domains",
+ "kind": "statement",
+ "title": "Finite scalar domains for closed exceptional localization",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ and a prime $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber]. Let $E,L/\\mathbf Q_\\ell$ be finite extensions, $m,n\\ge1$, $A=\\mathcal O_E/\\varpi_E^m$, $B=\\mathcal O_L/\\varpi_L^n$, and $\\varphi:A\\to B$ any unital map [def-weil-l-adic-coefficient-extension]. On each scheme $T$ use constant module sheaves on its small pro-etale site [def-weil-pbc-proetale-site], and write $S_T^{A,B}K=K_B=K\\otimes_A^LB$ for uncompleted derived scalar extension [lem-pur-derived-change-of-rings]. The notation $D^b_{ctf}$ means bounded constructible with finite Tor amplitude [def-weil-finite-tor-amplitude]. All schemes below are separated and finite type over $k$; all scheme maps are $k$-maps [def-weil-scheme-morphism-properties]. Use the constructible exceptional functors and their adjunctions on bounded constructible inputs of etale origin [def-weil-exceptional-inverse-image], and ordinary derived direct images [def-weil-derived-direct-image]. For $K\\in D^b_{ctf}(T,A)$ of Tor amplitude $[a,b]$, with $a\\le b$, $K_B\\in D^b_{ctf}(T,B)$ has Tor amplitude in the same interval. More precisely, for the site comparison $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ [def-weil-pbc-site-comparison-morphism], there is a bounded flat constructible etale $A$-complex $Q$, zero outside $[a,b]$, with $\\nu_T^*Q\\cong K$ and a $B$-linear identification $\\nu_T^*(Q\\otimes_A B)\\cong K_B$. Its scalar-extended terms are flat constructible $B$-modules.\n\nFor a closed immersion $i:Z\\hookrightarrow X$ and $M\\in D^b_{ctf}(X,A)$ of Tor amplitude $[a,b]$, put $N_A=Ri_A^!M$ and $N_B=Ri_B^!M_B$. Choose a finite affine chart family for $i$ as in [thm-sf-preservation-class], put $D=\\max d_U$ and $e=\\dim X$, with $D=e=0$ on empty relevant families or schemes. Then $N_A$, $(N_A)_B$, and $N_B$ are bounded constructible of Tor amplitude in $[a-2D,b+2e+1]$ over their respective coefficient rings. Each bounded constructible complex just mentioned admits a bounded constructible etale origin with the same Tor interval. No flatness or finite projective dimension of $B$ over $A$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+  "place": "Proof paragraph 3, finite-Tor domains; returned proof steps 1–2: flat etale models, scalar extension and separate exceptional-preservation applications over E and L"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "thm-sf-preservation-class"
+ ],
+ "proof": [
+  {
+   "text": "Translate intrinsic bounded constructibility to the fixed-scalar etale-origin property using the proved intrinsic_bc_realization_iff helper of FiniteCompactSupportConstructibility, whose proof applies [lem-weil-pbc-finite-ring-constructible-derived-origin]. Its etale_bc_iff helper translates the finite-stratification constructibility convention using [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. Translate intrinsic Tor amplitude by [lem-exc-intrinsic-tor-amplitude-transport]; the source-library torAmplitudeIn_of_mapDerivedCategory reflects the same interval to the etale origin. Finite type over the field makes T Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-sp-etale-scalar-flat-model] to the etale origin and the lifted coefficient homomorphism: obtain Q with flat constructible terms, zero outside [a,b], and its A-linear representing isomorphism, together with all scalar-extended model properties.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sp-etale-scalar-flat-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved pbcComparisonReduction of [def-weil-pbc-witness-compatibility], inverted at the etale origin and followed by scalar extension of its isomorphism to K. This yields the B-linear identification of the comparison pullback of the derived etale extension with K_B, for an arbitrary coefficient map. Compose it with comparison pullback of the model isomorphism furnished by [lem-sp-etale-scalar-flat-model] to obtain the required displayed identification for Q tensor B. The same theorem gives bounded constructibility and Tor amplitude [a,b] over B. Source-library comparisonUpperStar bounded-constructibility preservation and torAmplitudeIn_mapDerivedCategory give their fixed-scalar pro-etale versions. Transport along the B-linear isomorphism, then use the intrinsic constructibility and Tor bridges from Step 1. For the etale origin required by ClosedScalarDomain, extract any origin from fixed-scalar bounded constructibility and reflect the Tor interval. This proves the scalar assertion and the private closedScalar_fixed_domain helper.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "lem-sp-etale-scalar-flat-model",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-intrinsic-tor-amplitude-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Translate the input finite-Tor constructibility and Tor interval to the fixed-scalar predicates by Step 1. Apply clauses (2) and (3) of [thm-sf-preservation-class] to i and the supplied chart family C over E. Its exceptional functor unfolds to the same composite as sfFiniteExceptionalFixed; proof-valued compactification instances agree by proof irrelevance. The private closedScalar_fixed_domain helper gives the asserted intrinsic domain and an etale origin for N_A in I=[a-2*C.maxDimension,b+2*sfDimension X+1]. This interval is ordered by a<=b and nonnegativity of the two natural numbers. Apply the scalar assertion on Z to N_A, obtaining the domain for (N_A)_B. Apply the scalar assertion on X to M, then repeat preservation and the domain helper over L, with exactly the same i and C, obtaining the domain for N_B. This argument includes empty schemes and empty chart families without extra hypotheses.",
+   "uses": [
+    "thm-sf-preservation-class"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sp-etale-scalar-flat-model",
+  "def-weil-pbc-witness-compatibility",
+  "thm-sf-preservation-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03TT and 0GKB, with the existing finite-ring origin and intrinsic Tor transport; the scalar-adjunction mate pbcComparisonReduction; the supplied sf_preservation_class chart bounds. Proof assembled in Lean by W2 on 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension between finite coefficient rings preserves constructibility and the same Tor interval on the pro-etale site and gives finite Tor domains for closed exceptional inverse images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern etale/flat ring maps, not same-interval finite scalar extension of constructible pro-etale complexes and its exceptional domains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible flat sheaf models remain bounded flat constructible after a nonflat change of finite coefficient rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"RingHom.Flat.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"If $ f : R \\\\to S $ and $ g : S \\\\to T $ are flat ring homomorphisms between commutative rings, then their composition $ g \\\\circ f : R \\\\to T $ is also a flat ring homomorphism.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern etale/flat ring maps, not same-interval finite scalar extension of constructible pro-etale complexes and its exceptional domains."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern etale/flat ring maps, not same-interval finite scalar extension of constructible pro-etale complexes and its exceptional domains."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(extendScalars|baseChange)|torAmplitude.*(baseChange|extendScalars)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern etale/flat ring maps, not same-interval finite scalar extension of constructible pro-etale complexes and its exceptional domains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension between finite coefficient rings preserves constructibility and the same Tor interval on the pro-etale site and gives finite Tor domains for closed exceptional inverse images",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "{\"t\": \"2026-10-22T07:12:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"torAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are general derived cohomological bounds or ordinary module/ring scalar extension, not constructible pro-etale scalar domains and exceptional Tor bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(extendScalars|baseChange)|torAmplitude.*(baseChange|extendScalars)",
+   "results": "{\"t\": \"2026-10-22T07:12:01Z\", \"tool\": \"grep\", \"query\": \"constructible.*(extendScalars|baseChange)|torAmplitude.*(baseChange|extendScalars)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are general derived cohomological bounds or ordinary module/ring scalar extension, not constructible pro-etale scalar domains and exceptional Tor bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient scalar extension preserves Tor amplitude of constructible pro-etale complexes",
+   "results": "{\"t\": \"2026-10-22T07:12:01Z\", \"tool\": \"leansearch\", \"query\": \"Finite coefficient scalar extension preserves Tor amplitude of constructible pro-etale complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"Algebra.Etale.baseChange\", \"comonadicExtendScalars\", \"Algebra.FormallyEtale.instTensorProduct\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\"], \"digest\": \"92d528cb3a3eaa44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are general derived cohomological bounds or ordinary module/ring scalar extension, not constructible pro-etale scalar domains and exceptional Tor bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension preserves the same Tor amplitude interval of bounded constructible sheaf complexes on the pro-etale site, with flat etale models and closed exceptional inverse image bounds",
+   "results": "{\"t\": \"2026-10-22T07:12:05Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension preserves the same Tor amplitude interval of bounded constructible sheaf complexes on the pro-etale site, with flat etale models and closed exceptional inverse image bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\"], \"digest\": \"b439dd1dd5e12f99\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are general derived cohomological bounds or ordinary module/ring scalar extension, not constructible pro-etale scalar domains and exceptional Tor bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of flat constructible sheaves stays in the same degrees after change of finite coefficient rings, even if the ring map is not flat",
+   "results": "{\"t\": \"2026-10-22T07:12:39Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex of flat constructible sheaves stays in the same degrees after change of finite coefficient rings, even if the ring map is not flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"CategoryTheory.compatiblePreservingOfFlat\", \"CondensedMod.IsSolid\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"5078284e843d8765\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are general derived cohomological bounds or ordinary module/ring scalar extension, not constructible pro-etale scalar domains and exceptional Tor bounds"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-closed-shriek",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-closed-shriek",
+   "place": "Proof paragraph 3, finite-Tor domains; returned proof steps 1–2: flat etale models, scalar extension and separate exceptional-preservation applications over E and L",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-closed-scalar-domains",
+  "worker": "stage1",
+  "summary": "Assembled the same-interval scalar and exceptional domains from existing etale model, B-linear site comparison, Tor reflection and finite-stage preservation nodes; no new nodes or statement changes. Checked nonflat scalar maps and empty schemes.",
+  "blueprint": "Realizes finite-Tor-domain paragraph 3 of lem-coef-finite-closed-shriek, using flat etale models and independent preservation over E and L.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic constructible site equivalence used for descent and pullback, not a replacement for the unit biduality route."
+   },
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Generic same-interval Tor comparison across the two small sites."
+   },
+   {
+    "node": "lem-sp-etale-scalar-flat-model",
+    "why": "Generic arbitrary finite-ring scalar extension of an etale flat constructible model; the unit has no such model theorem."
+   },
+   {
+    "node": "lem-sp-etale-chart-comparison-isos",
+    "why": "Only its generic B-linear scalar/site comparison is used; no chart or purity theorem replaces the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian property needed for the flat-model lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-etale-scalar-flat-model",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-58d325c5e",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-58d325c5e (reviewer sub-agent of L); spot-checked: Read in full: the item's 3 steps, the 6 cited statements, the master lem-coef-finite-closed-shriek proof paragraph 3, and Stacks tags 03TT, 0GKB, 09AL, 06YY and 0G7E (all correct). The delivery creates no new nodes. Statement, stmt_deps, source and blueprint are identical to live, where the item is still unsplit in live, clones/live and side-live, so it is not superseded. proof_deps equals the union of the step uses. No cycle: the closure has 13149 nodes and does not contain the item. No SGA. Step 1: lem-sf-proetale-constructible-origin(ii) gives the étale origin K_e. lem-exc-comparison-tor-interval moves [a,b] to K_e, which is bounded and so in D^+; its Tor-amplitude definition matches def-weil-finite-tor-amplitude. T is Noetherian by lem-weil-pbc-finite-type-over-noetherian. lem-sp-etale-scalar-flat-model gives Q, flat constructible in [a,b], with Q⊗B representing (K_e)_B for arbitrary finite A→B. Step 2: the scalar clause of lem-sp-etale-chart-comparison-isos applies (char p ≠ ℓ, T separated finite type, u = id, a common ℓ^N kills both A and B) and gives the B-linear ν_B^*((K_e)_B) ≅ K_B. Constructibility and the interval over B come from the origin and Tor-interval nodes at (L,n). Step 3: thm-sf-preservation-class(2) with Y = X; its e = dim Y is dim X. It is applied separately at (E,m) and (L,n) on the same chart family, which depends only on i, and clause (3) is not misused. (N_A)_B is handled by Steps 1–2 on Z with interval I, which is ordered because D, e ≥ 0. Old Q14 steps 1–2 are fully carried by the existing flat-model and site-comparison nodes plus Step 3; nothing was dropped. Edge cases checked: T empty, a = b, i = id, φ = id, nonflat Z/ℓ²→Z/ℓ, E ≠ L. The 5 tool_uses (origin equivalence, Tor-interval comparison, étale flat model, B-linear site comparison, finite-type Noetherian) are generic and accepted. preservation-class is in a unit the item's unit uses, so it needs no tool_use. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedScalarDomains",
+  "declaration": "WeilConjectures.closedScalarDomains_scalar",
+  "declarations": [
+   "WeilConjectures.closedScalarCoefficient",
+   "WeilConjectures.closedScalarExtension",
+   "WeilConjectures.ClosedScalarDomain",
+   "WeilConjectures.closedScalarDomains_scalar",
+   "WeilConjectures.closedScalarDomains_exceptional"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedScalarDomains.lean",
+  "statement": "theorem closedScalarDomains_scalar (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (m n : ℕ) (φ : closedScalarCoefficient l E m →+* closedScalarCoefficient l L n) (T : Over (Spec (.of D.k))) [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] (a b : ℤ) (_hab : a ≤ b) (K : DerivedCategory (Sheaf (ProEt.topology T.left) (ModuleCat.{u + 1} (ULift.{u + 1, u} (closedScalarCoefficient l E m))))) (_hK : finiteTorConstructibleProEtaleModule l E (m + 1) (Nat.succ_pos m) T.left K) (_hTor : HasProEtaleTorAmplitude T.left (closedScalarCoefficient l E m) ((ProEtale.finiteCoefficientIntrinsicRealization T.left (closedScalarCoefficient l E m)).mapDerivedCategory.obj K) a b) : ClosedScalarDomain l L n T.left a b ((closedScalarExtension φ T.left).obj K) ∧ ∃ Q : CochainComplex (Sheaf T.left.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (closedScalarCoefficient l E m)))) ℤ, (∀ q : ℤ, ObjectProperty.flat (Q.X q)) ∧ (∀ q : ℤ, IsConstructibleEtaleModuleSheaf (Q.X q)) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero (Q.X q)) ∧ Nonempty ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (closedScalarCoefficient l E m))) T.left).mapDerivedCategory.obj (DerivedCategory.Q.obj Q) ≅ K) ∧ (∀ q : ℤ, ObjectProperty.flat ((ProEtale.etaleSheafExtendScalars (φ.ulift.{u + 1, u + 1}) T.left).obj (Q.X q))) ∧ (∀ q : ℤ, IsConstructibleEtaleModuleSheaf ((ProEtale.etaleSheafExtendScalars (φ.ulift.{u + 1, u + 1}) T.left).obj (Q.X q))) ∧ Nonempty ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (closedScalarCoefficient l L n))) T.left).mapDerivedCategory.obj (DerivedCategory.Q.obj (((ProEtale.etaleSheafExtendScalars (φ.ulift.{u + 1, u + 1}) T.left).mapHomologicalComplex (.up ℤ)).obj Q)) ≅ (closedScalarExtension φ T.left).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The scalar and closed-exceptional clauses are two theorems of the same node. Positive levels are indexed by m+1,n+1. Helpers only abbreviate the published coefficient quotient, ordinary derived extension, and conjunction of recorded domain predicates with existence of an etale origin; they introduce no independent mathematical notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-885178b5a",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Node identical to live apart from lean; live is split with lean null, so not superseded. lean.statement verbatim, 5 declarations, no name clashes, report has both sections. Clause check: k=F̄_q via FiniteFieldDatum with l≠p; A,B=coefficientExtensionRing at m+1,n+1 (all positive levels); φ an arbitrary RingHom. K_B = pbcFixedScalarExtension (left adjoint of derived restrictScalars, Stacks 06YY), canonical. D^b_ctf = finiteTorConstructibleProEtaleModule (recorded intrinsic predicate); interval = HasProEtaleTorAmplitude (recorded def-weil-proetale-tor-amplitude); ν^* = comparisonUpperStar (recorded proEtaleSiteComparisonModules). ClosedScalarDomain bundles ctf, the interval and an étale origin (finiteTorConstructibleEtale plus hasTorAmplitudeIn) with ν^*Q≅K. Scalar clause: ∃Q flat, IsConstructibleEtaleModuleSheaf, zero outside [a,b], derived ν^*Q≅K; termwise etaleSheafExtendScalars terms flat and constructible; B-linear derived ν^*(Q⊗B)≅K_B. Exceptional: sfFiniteExceptionalFixed at ofIsProper is literally Rν_*⋙Etale.rightDerivedUpperShriek⋙ν^*, the same composite as thm-sf-preservation-class's sfFiniteExceptionalInverseImage/finiteTypeExceptionalInverseImage and the recorded sfFiniteExceptionalAt. N_A, (N_A)_B and N_B each at [a−2·C.maxDimension, b+2·sfDimension X+1] with C : SfAffineChartPresentation i.left, as in the dependency. No extra hypotheses; _hab is redundant. Edge cases: empty schemes/charts give 0, a=b, φ=id, E≠L, non-flat maps, i=id. No hollow defs, sorry only, source/blueprint docstrings and proof steps present, actual ProEt site. Advisory: pbcFixedScalarExtension is owned by def-weil-pbc-witness-compatibility, outside stmt_deps, but canonical; proof-dep imports unused; master source md absent from the clones (stage-1 Q126 PASS). No compile, since there is no FIX."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261025T101726-L-3728860",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

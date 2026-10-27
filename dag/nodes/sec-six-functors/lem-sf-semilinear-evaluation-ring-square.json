@@ -1,0 +1,256 @@
+{
+ "id": "lem-sf-semilinear-evaluation-ring-square",
+ "kind": "statement",
+ "title": "Constant-coefficient ring square for sequence-site evaluation",
+ "statement": "Let $C_n$ be arbitrary commutative rings with homomorphisms $\\tau_n:C_{n+1}\\to C_n$. For every scheme $T$, put $B_{n,T}=\\underline{C_n}_T$ on its small pro-etale site and $B_{\\bullet,T}(n,H)=B_{n,T}(H)$ on the vertical sequence site. Use the actual constant-coefficient system operations of [def-sp-semilinear-constant-ring-operations] and the vertical restriction $e_{n,T}$ of [def-coef-semilinear-system-models]. For a scheme map $f:X\\to Y$, let $F(H)=H\\times_YX$, $F_\\bullet=1_{\\mathbf N}\\times F$, and $\\iota_{n,T}(H)=(n,H)$. Let $\\Phi_f:B_{\\bullet,Y}\\to F_{\\bullet,*}B_{\\bullet,X}$ be the system structural ring map; let $\\phi_{f,n}:B_{n,Y}\\to F_*B_{n,X}$ be the right-adjoint transpose of the canonical constant-ring structure map $c^f_{C_n}:f^{-1}B_{n,Y}\\to B_{n,X}$ of [def-weil-proetale-inverse-image]. Let $a_T:B_{n,T}\\xrightarrow{\\sim}\\iota_{n,T}^*B_{\\bullet,T}$ be the specified evaluation identification. Under $F_\\bullet\\iota_{n,Y}=\\iota_{n,X}F$, one has\n$$\\iota_{n,Y}^*(\\Phi_f)\\circ a_Y=F_*(a_X)\\circ\\phi_{f,n}.$$\nIn particular there is a unique natural isomorphism\n$$d_{f,n}:e_{n,Y}f_{*,\\bullet}\\xrightarrow{\\sim}f_{*,n}e_{n,X}$$\nwhose hom and inverse are both the identity on each underlying section group $M_n(H\\times_YX)$, with its specified $B_{n,Y}(H)$ action. These identities are natural in $M$, in $H$, and under every transition $C_m\\to C_n$, after restriction of scalars. No finiteness or flatness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), canonical ring-map adjunction; agent-formulated sequence-site coefficient square. Reference argument: Sheaf.SixFunctors.SemilinearProperOpenMatePasting, constant_direct_image_map and level_push_evaluation_normalized, lines 1678-1790."
+ },
+ "stmt_deps": [
+  "def-sp-semilinear-constant-ring-operations",
+  "def-coef-semilinear-system-models",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-module-direct-image",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\rho_{f,n}:B_{n,Y}\\to F_*B_{n,X}$ for the constant-section map: it is the unique extension of $c\\mapsto c$ from the constant presheaf. In the ring-sheaf adjunction of [def-weil-proetale-inverse-image], write $\\theta:\\operatorname{Hom}(f^{-1}B_{n,Y},B_{n,X})\\simeq\\operatorname{Hom}(B_{n,Y},F_*B_{n,X})$. The structure map $c_{f,n}=c^f_{C_n}$ named in the item is defined there as $\\varepsilon_f\\circ f^{-1}(\\rho_{f,n})$, i.e. $c_{f,n}=\\theta^{-1}(\\rho_{f,n})$ (the specified constant-section normalization); whether it is invertible plays no role. Consequently its right transpose is $\\phi_{f,n}=\\theta(c_{f,n})=\\theta(\\theta^{-1}(\\rho_{f,n}))=\\rho_{f,n}$. This is cancellation of an equivalence, and uses no finite-ring constant-map theorem.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-sp-semilinear-constant-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), site inverse-image adjunction and its constant-section normalization; reference calculation in SemilinearProperOpenMatePasting.lean, constant_direct_image_map, lines 1685-1689."
+   }
+  },
+  {
+   "text": "The evaluation of $B_{\\bullet,T}$ at $(n,H)$ is literally $B_{n,T}(H)$, and the specified $a_T$ is the identity on that ring, by [def-coef-semilinear-system-models]. Also $F_\\bullet\\iota_{n,Y}(H)=(n,F(H))=\\iota_{n,X}F(H)$, on arrows as well as objects. The defining structural map in [def-sp-semilinear-constant-ring-operations] has component $(\\Phi_f)_{(n,H)}=(\\rho_{f,n})_H$. Thus the left side of the required square has component $(\\rho_{f,n})_H\\circ\\mathrm{id}$, and the right side has component $\\mathrm{id}\\circ(\\phi_{f,n})_H$. Step 1 identifies these components. Equality at every object is equality of the natural transformations, proving the displayed ring square.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-sp-semilinear-constant-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6 (definition-pushforward), restriction along the structural ring map; reference section calculation in SemilinearProperOpenMatePasting.lean, level_push_evaluation_normalized, lines 1765-1788."
+   }
+  },
+  {
+   "text": "Fix $M$, $H$, $b\\in B_{n,Y}(H)$ and $x\\in M_n(F(H))$. The underlying abelian section group of each composite is $M_n(F(H))$. By the direct-image action formula of [def-weil-proetale-module-direct-image] and the system direct-image definition of [def-sp-semilinear-constant-ring-operations], its scalar action in the first composite is $(\\Phi_f)_{(n,H)}(b)x$ after the identity evaluation identification. In the second it is $(\\phi_{f,n})_H(b)x$. Step 2 makes these equal for every $b,x$. Therefore $x\\mapsto x$ is additive and $B_{n,Y}(H)$-linear in both directions. These maps define module maps on sections without choosing any lift in $C_m$ of an element of $C_n$. In Lean reuse level_push_evaluation_normalized in the recorded operations module: its complete proof composes module pushforward-composition and coefficient-equality isomorphisms, giving these identity maps in both directions. Apply push_eq to the specified system direct image. No new existence statement is introduced.",
+   "uses": [
+    "def-weil-proetale-module-direct-image",
+    "def-sp-semilinear-constant-ring-operations",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6 (definition-pushforward), clause (1), sectionwise action by restriction of scalars."
+   }
+  },
+  {
+   "text": "For $h:H'\\to H$, each composite has the same underlying restriction $M_n(F(h)):M_n(F(H))\\to M_n(F(H'))$; hence its naturality square for the identity maps reads $M_n(F(h))(x)=M_n(F(h))(x)$. For a system morphism $u:M\\to N$, the corresponding square reads $u_n(F(H))(x)=u_n(F(H))(x)$. The sectionwise definition of module-sheaf morphisms in [def-weil-sheaf-of-modules-category] therefore turns the maps of Step 3 into natural transformations in $M$, mutually inverse because their composites are $x\\mapsto x$. This constructs $d_{f,n}$ and its inverse. If $d'$ has the required normalization, its hom agrees with this hom on every $M,H,x$, so the underlying sheaf maps agree, hence the module maps and natural transformations agree. The inverse is forced by the inverse identities, proving uniqueness. The uniqueness clause is proved by Iso.ext, natural-transformation extensionality, and extensionality of the section linear maps, comparing the two identity normalizations.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-proetale-module-direct-image",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW (definition-sheaf-modules), sectionwise morphisms, and Tag 03D6 (definition-pushforward); agent-written identity/naturality calculation."
+   }
+  },
+  {
+   "text": "For m >= n, apply the naturality of the already constructed system coefficient map Phi_f to the horizontal arrow (n,H) -> (m,H). Its components are rho_{f,n} and rho_{f,m} by the specified normalization. The system ring restrictions are exactly the composite coefficient maps t_{m,n}. Thus naturality gives t_{m,n,Y} followed by rho_{f,n} equal to rho_{f,m} followed by F_*(t_{m,n,X}); Step 1 substitutes phi for rho. This reuses the existing constant-section/sheafification construction rather than repeating it. For the module transition, the definition of direct image sends a horizontal restriction to M applied to the image horizontal arrow. The base-change functor is the identity on the index and preserves the identity of H, so this is precisely the horizontal restriction of M at F(H). The normalization of the chosen comparison makes its hom and inverse the identity on sections; composing those identities with the restriction gives both asserted HEq equations. The calculation works uniformly for equality indices and composite transitions, without flatness, surjectivity or finiteness assumptions.",
+   "uses": [
+    "def-sp-semilinear-constant-ring-operations",
+    "def-weil-proetale-inverse-image",
+    "def-coef-semilinear-system-models",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WH (proposition-sheafification-adjoint) and 0H7J (example-constant-sheaf); agent-written coefficient-transition calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D6 (definition-pushforward), with the ring-sheaf adjunction and constant-section normalization of def-weil-proetale-inverse-image; explicit evaluation and coefficient-transition calculations. Reference checked: SemilinearProperOpenMatePasting.lean, lines 1685-1790. J2 stage-3 realization: reuse the proved level_push_evaluation_normalized construction, prove uniqueness sectionwise, and derive the coefficient-transition equation directly from horizontal naturality of coefficientMap."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on a ringed sequence site commutes with scheme base change and the constant coefficient structural ring maps, giving an identity-on-sections module direct image comparison",
+   "results": "AlgebraicGeometry.StructureSheaf.toOpen_comp_comap; AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; AlgebraicGeometry.Scheme.Γevaluation_naturality; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc; ModuleCat.Tilde.toOpen_res",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf ring maps and evaluation on inverse systems commute with direct image under base change",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "constantDirectImage|constant.*[Rr]ing.*[Mm]ap|pushforwardComp",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring sheaf evaluation coefficient square for pro etale semilinear module systems",
+   "results": "StandardEtalePresentation.toPresentation_σ'; StandardEtalePresentation.toPresentation_algebra_smul; StandardEtalePair.instFormallyEtaleRing; StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x; StandardEtalePresentation.toPresentation_val; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.etaleLocus_eq_compl_support; StandardEtalePresentation.hasMap",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforwardCongr",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic compositors require the coefficient-square equality; no constant coefficient sequence-site normalization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Dd]irectImage|proEtaleConstant|coefficientSequence",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic compositors require the coefficient-square equality; no constant coefficient sequence-site normalization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforwardCongr",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean lines 112-129 and 140-154 read for compositors and normalization)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward/evaluation facts do not establish the specified constant-section ring-square equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf coefficient structural ring maps commute with evaluation of semilinear inverse systems of sheaves and direct image",
+   "results": "smoothSheafCommRing.forgetStalk_inv_comp_eval_apply; CategoryTheory.constantCommuteCompose; ModuleCat.semilinearMapAddEquiv_symm_apply_apply; AlgebraicGeometry.StructureSheaf.comap_const; RingHom.toSemilinearMap_apply; LocallyConstant.evalRingHom; LocallyConstant.comapRingHom; SemilinearMapClass.map_smul_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward/evaluation facts do not establish the specified constant-section ring-square equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward/evaluation facts do not establish the specified constant-section ring-square equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a sheaf of modules on a sequence site commutes with direct image by the identity on sections when the coefficient ring square commutes",
+   "results": "SheafOfModules.sectionsMap_id; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.unitHomEquiv_symm_comp; SheafOfModules.pushforwardNatTrans_id; SheafOfModules.unitToPushforwardObjUnit; PresheafOfModules.map_id",
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward/evaluation facts do not establish the specified constant-section ring-square equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars and evaluation of diagrams of ringed sheaves commute with pushforward using identity maps on module section groups",
+   "results": "SheafOfModules.pushforward_comp_id; PresheafOfModules.pushforward_obj_obj; SheafOfModules.pushforward_map_val; PresheafOfModules.pushforward_obj_map_apply'; PresheafOfModules.pushforward_obj_map_apply; PresheafOfModules.pushforward_map_app_apply'; SheafOfModules.pushforwardSections_coe; SheafOfModules.pushforward_id_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward/evaluation facts do not establish the specified constant-section ring-square equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-semilinear-proper-open-mate-pasting",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; intrinsic semilinear proper/open realization, returned proof step 5: Constant-coefficient ring square for sequence-site evaluation",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-semilinear-evaluation-ring-square",
+  "worker": "stage1",
+  "summary": "Checked both coefficient ring maps before comparing module actions. Five explicit elementary steps cancel the ring-sheaf hom equivalence, evaluate the specified maps, construct identity linear maps, check naturality and uniqueness, and compute every transition square. No new nodes; no finite-ring lemma or derived evaluation faithfulness is used. Statement unchanged.",
+  "blueprint": "fix-prop-coherence, coefficient coherence through evaluation and adjunction units/counits, as located by the existing blueprint.from.place; realizes the ring-square substep of lem-sf-semilinear-proper-open-mate-pasting, not a replacement of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-e83de727b",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-e83de727b (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited definition in full: def-weil-proetale-inverse-image, def-weil-proetale-module-direct-image, def-sp-semilinear-constant-ring-operations, def-coef-semilinear-system-models, def-weil-sheaf-of-modules-category, def-weil-pbc-sheafification/constant-sheaf and def-pc-sheaf-restrict-scalars. The delivery is a leaf split with no new nodes. The item was created by NW from the re-split of the mate-pasting parent, has no repair note of its own, and is still unsplit live, so it is not superseded. The mathematics is correct. Step 1: phi is the transpose of c=eps∘f^{-1}(rho), which equals rho by the adjunction bijection. Step 2: a_T is the identity coefficient identification, and Phi_f at (n,V) is the constant-section map. Steps 3-4: the identity-on-sections d is linear and natural, and it is unique. Step 5: both coefficient maps B_m,Y→F_*B_n,X agree by the sheafification universal property applied to the constant presheaf, so both transition paths are x↦q(x). I checked the cases n=0, m=n, f=id, X empty (zero ring), non-flat transitions such as Z/4→Z/2, and infinite rings. No SGA is used. No duplicate exists: the sibling evaluation-ordinary-adjunction is the larger constant-tower statement and the finite-ring pur/pbc nodes concern other comparisons. I repaired three faults in fixes/dag/nodes/sec-six-functors/lem-sf-semilinear-evaluation-ring-square.json. (1) The statement called phi the transpose of the constant-sheaf inverse-image 'isomorphism'. The only DAG proof of that invertibility (prop-weil-pbc-proetale-constant-ring-map) needs a finite ring, while the item allows arbitrary C_n, and the proof never uses invertibility. I reworded it to name the structure map c^f_{C_n} of def-weil-proetale-inverse-image directly, with matching wording in step 1. The equation and the d clause are unchanged, so this is no weakening. (2) The step 4 source cited Tag 03CV, which is the section; I corrected it to 03CW (definition-sheaf-modules), checked against tags/tags. (3) The item source.place described 03D7 as a ring-map adjunction, but 03D7 is the module adjunction; I replaced it with Tag 03D6 clause (1), definition-pushforward.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SemilinearEvaluationRingSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.semilinearEvaluationRingSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evaluationCoefficientIdentification",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evaluationCoefficientDirectImage",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.semilinearEvaluationRingSquare",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evaluationPush_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evaluationPush",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evaluationPush_transition"
+  ],
+  "file": "lean/Sheaf/SixFunctors/SemilinearEvaluationRingSquare.lean",
+  "statement": "theorem semilinearEvaluationRingSquare {X Y : Scheme.{u}} (f : X ⟶ Y) : (∀ n : ℕ, evaluationCoefficientIdentification C τ Y n ≫ ((Prod.sectR n Y.ProEt).sheafPushforwardContinuous RingCat.{u + 1} (ProEt.topology Y) (coefficientSequenceTopology (ProEt.topology Y))).map ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (coefficientMap C τ f)) = (sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (evaluationCoefficientDirectImage C f n) ≫ ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{u + 1} (ProEt.topology Y) (ProEt.topology X)).map (evaluationCoefficientIdentification C τ X n)) ∧ (∀ (m n : ℕ) (h : n ≤ m), evaluationCoefficientDirectImage C f m ≫ (proEtaleSheafDirectImage f CommRingCat.{u + 1}).map (SemilinearSections.coefficientMap (ProEt.topology X) (coefficients C X) (transition C τ X) h) = SemilinearSections.coefficientMap (ProEt.topology Y) (coefficients C Y) (transition C τ Y) h ≫ evaluationCoefficientDirectImage C f n)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1b01997e",
+  "group": "NV",
+  "result": "pass",
+  "note": "Clauses match the node: arbitrary C/τ, no finiteness or flatness assumed anywhere (constantRing_isIso needs only CommRing). Ring square a_Y≫ι^*Φ = φ≫F_*a_X with φ = homEquiv(proEtaleConstantInverseImageMap); the imported private reference lemma proves the same equation. Transition coefficient square holds for all n≤m. ∃! level comparison push⋙evaluation ≅ evaluation⋙StrictTower.moduleDirectImage(C n) f, whose ring map is unit≫G.map(constantRingIso.hom)=φ; hom and inverse are HEq-pinned to the identity on M(n,F H), carriers definitionally equal. evaluationPush is .choose of that ∃!. Transition naturality is stated for hom and inverse, every h:n≤m. lean.statement verbatim; node differs from live only in lean. No public duplicate (evalPushOrdinary_existsUnique has a tower target; the level lemma is private and existence-only). Docstrings, source places and five proof steps present; bodies sorry; universes bound. No compile: delivery unchanged. Advisories: A1 StrictTower.moduleDirectImage owner def-cbc-strict-constant-tower-operations not a stmt_dep (stmt_dep def-weil-proetale-module-direct-image record is Type u, wrong universe); A2 three unused but transitively imported non-public imports; A3 NV second reading is a self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261023T231630-L-3627949",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

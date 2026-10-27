@@ -17,140 +17,83 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-asd-etale-compact-support-normalization",
   "def-weil-pbc-etale-sum-extension",
-  "lem-amb-etale-adjoint-locality"
+  "lem-amb-etale-adjoint-locality",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-pur-open-coefficient-normalizations"
  ],
  "proof": [
   {
-   "text": "First check the input of $\\sigma_e$. The schemes $U,V$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. By [lem-sf-etale-flat-constructible], $K$ has a bounded flat constructible model $R$ supported in some finite interval $[a,b]$. This model is K-flat by [lem-weil-pbc-independent-bounded-flat-kflat]; its pullback is flat termwise by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and supported in $[a,b]$. Tensoring that bounded flat model with any degree-zero module sheaf computes derived tensor and is still supported in $[a,b]$. Thus $e_A^*K$ has finite Tor amplitude. Inverse image is exact [prop-weil-pbc-inverse-image-modules-exact], so $\\mathcal H^i(e_A^*K)=e^{-1}\\mathcal H^i(K)$ and $e_A^*K$ is bounded. Each $F=\\mathcal H^i(K)$ is constructible [def-weil-pbc-etale-constructible-sheaf]: there are a stratification $(\\iota_k:Z_k\\to V)$ with constructible strata $V_k$ and etale coverings $\\{W_{kj}\\to Z_k\\}$ trivializing $\\iota_k^{-1}F$ with finite values $M_{kj}$. The base changes $\\iota'_k:Z'_k=Z_k\\times_VU\\to U$ form a stratification with strata $e^{-1}(V_k)$ [lemma-constructible-pullback-stratification], and these are constructible [lem-pur-scheme-constructible-preimage]. With $h_k:Z'_k\\to Z_k$, one has $\\iota_k'^{-1}e^{-1}F\\cong h_k^{-1}\\iota_k^{-1}F$, as both are inverse images along $e\\iota'_k=\\iota_kh_k$. The base-changed covering $\\{W_{kj}\\times_{Z_k}Z'_k\\to Z'_k\\}$ trivializes it, since inverse image sends the constant sheaf $M_{kj}$ to the constant sheaf $M_{kj}$ [lemma-constructible-pullback-constant]. Hence $e_A^*K$ has constructible cohomology and is an allowed input for $\\sigma_e$ and its compact-support coefficient square.",
+   "text": "Widen a Tor interval [a,b] to [min(a,b),b], so its endpoints are ordered even for the zero object. Apply [lem-sf-etale-flat-model] to obtain a bounded flat representative P with Q(P) isomorphic to K. For e^*K, apply exact inverse image to P: flatness is preserved by the source FlatModuleCat pullback instance, proved by the geometric-flatness criterion [lem-sfb-etale-flat-geometric-fibers], and zero terms stay zero in the same interval. Apply [lem-kun-flat-bounded-tor-amplitude] to this complex, then transport through the exact localization comparison and Q(P) isomorphic to K. For constructibility, convert to the source predicate using [lem-weil-pbc-constructible-etale-module-sheaf-comparison], apply its proved boundedConstructible.mapDerivedCategory_upperStar (exact cohomology comparison and [prop-constructible-pullback]), and convert back. This proves that e^*K is an allowed ctf input without a line tensor or a twist.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sf-etale-flat-constructible",
-    "lem-weil-pbc-independent-bounded-flat-kflat",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-etale-flat-model",
+    "lem-kun-flat-bounded-tor-amplitude",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "prop-constructible-pullback",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lemma-constructible-pullback-stratification",
-    "lem-pur-scheme-constructible-preimage",
-    "lemma-constructible-pullback-constant"
+    "lem-sfb-etale-flat-geometric-fibers"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 095G (lemma-pullback-constructible) and 03TT (lemma-when-ctf); sites-cohomology.tex Tag 06YQ (lemma-bounded-flat-K-flat)"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: integral summation over etale fibres"
    }
   },
   {
-   "text": "Now choose a complex $K_0$ representing $K$ and a quasi-isomorphism $P\\to K_0$ with $P$ K-flat and flat termwise [lem-pc-kflat-resolution]. Exact geometric inverse image computes $e_A^*$ [prop-weil-pbc-inverse-image-modules-exact]; by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $e_A^*P$ is K-flat with flat terms. By [lem-pur-etale-sum-flat-kflat], $e_{\\Sigma!,A}e_A^*P$ is also K-flat with flat terms. Thus [lem-pur-derived-change-of-rings] computes the scalar extensions of $K$, $e_A^*K$ and $E_Ae_A^*K$ by tensoring respectively $P$, $e_A^*P$ and $e_{\\Sigma!,A}e_A^*P$ termwise with the appropriate constant $B$-sheaf. The exact sum-extension adjunction descends degreewise to the whole derived categories [lem-amb-etale-adjoint-locality], so its counits on these representatives are the degreewise sheaf counits. This supplies a common domain and codomain of actual $B$-linear chain maps for the proposed identity, even if $B$ is nonflat over $A$.",
+   "text": "Compare the exact-localization sum adjunction with mapDerivedCategoryAdjunction: both have the same counit on Q(P), as follows from the localization counit formula and the exact functor comparison. Equality follows by localization extensionality. Identify the inverse of properOpenCoefficientPullbackIso with the scalar-adjunction mate of the exact restriction-of-scalars square, using the proved canonical scalarPullback_eq helper of [lem-sfb-etale-proetale-scalar-mate] and transport through leftDerivedUpperStarIsoMapDerivedCategory. The generic scalarOpenInverseMate and uniq_eq_conjugate helpers in [lem-coef-etale-open-tensor] are statements for four arbitrary adjunctions, with no open-immersion hypothesis: their iterated-mate identity identifies the other transpose with sumCoefficientIso.inv. Apply mateEquiv_counit_symm, replace both identifications, precompose with sumCoefficientIso.hom and cancel its inverse. This proves the first clause directly for every K. These proved helpers are the direct mate argument currently also used in the model module; no model theorem, new hypothesis, or separate chain computation is needed.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-etale-sum-flat-kflat",
-    "lem-pur-derived-change-of-rings",
+    "lem-sfb-etale-proetale-scalar-mate",
+    "lem-coef-etale-open-tensor",
+    "def-weil-pbc-adjunction-mate",
     "lem-amb-etale-adjoint-locality"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), using the cited sum-extension K-flat consequence"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: integral summation over etale fibres"
    }
   },
   {
-   "text": "For a coefficient ring $R$ and an $R_V$-module sheaf $F$, identify $(e_R^*F)(W,s)$ with $F(W)$ for each lift $s:W\\to U$ over an etale test object $W\\to V$ [lem-weil-pbc-etale-inverse-image-restriction]. The module action is the same sectionwise action under the canonical constant-ring identification [prop-weil-pbc-inverse-image-modules-exact]. By [def-weil-pbc-etale-sum-extension], the presheaf presenting $e_{\\Sigma!,R}e_R^*F$ is $W\\mapsto\\bigoplus_s F(W)$. Its map to $F$ sends each summand inclusion $i_s(x)$ to $x$, hence sends a finite family to its sum. It commutes with restrictions and induces a unique sheaf map by [def-weil-presheaf-modules-sheafification]. This is the counit: a map from the sum presheaf for a sheaf $H$ to $F$ is a compatible family of maps $H(W,s)\\to F(W)$, exactly a map $H\\to e_R^*F$; the displayed map corresponds to the identity when $H=e_R^*F$. This proves the fold formula directly, without identifying all sections of the sheafification with presheaf sums.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-etale-sum-extension",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S3 (definition-extension-zero), equation-j-p-shriek and the subsequent adjunction exercise; elementary computation of its counit"
-   }
-  },
-  {
-   "text": "On the representatives of Step 2 the comparison $\\sigma_e$ is the summandwise tensor map specified in [lem-sp-et-proet-coefficient-compatibility]: $i_s(x)\\otimes b\\mapsto i_s(x\\otimes b)$. The canonical comparison $a_e$ is represented by the inverse of the ordinary scalar/pullback map normalized in [def-pur-etale-scalar-pullback-iso]; on the restriction description of Step 3 it takes $x\\otimes b$ to that same tensor on $(W,s)$. The tensor on sheaves is the sheafification of the sectionwise tensor [def-pur-sheaf-tensor-product]. For every degree $r$, lift $s$ and pure generator $i_s(x)\\otimes b$, with $x\\in P^r(W)$ and $b\\in B_V(W)$, the three maps on the left therefore give\n$$i_s(x)\\otimes b\\longmapsto i_s(x\\otimes b)\\longmapsto i_s(x\\otimes b)\\longmapsto x\\otimes b.$$\nThe right side, tensoring the fold map of Step 3, gives exactly $x\\otimes b$. Linearity gives equality on finite sums of generators, and the tensor and sum sheafification universal properties [def-weil-presheaf-modules-sheafification] give equality of sheaf maps. The maps are $B$-linear and commute with the differentials (the coefficient factor is in degree zero), so these are equal $B$-linear chain maps.",
-   "uses": [
-    "lem-sp-et-proet-coefficient-compatibility",
-    "def-pur-etale-scalar-pullback-iso",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts, sentence: summation over fibres is defined integrally; expanded as a tensor-generator computation using etale-cohomology.tex Tag 03S3"
-   }
-  },
-  {
-   "text": "Apply localization to the equality of chain maps in Step 4. The localization description in [def-weil-pbc-derived-categories], the K-flat computation and resolution independence in [lem-pur-derived-change-of-rings], and the degreewise descended adjunction in [lem-amb-etale-adjoint-locality] identify its two sides with the two specified derived composites at the image of $P$. The normalizations of $\\sigma_e$ in [lem-sp-et-proet-coefficient-compatibility] and of $a_e$ in [def-pur-etale-scalar-pullback-iso] are precisely the representative maps used in Step 4. Finally use the isomorphism from the image of $P$ to $K$. Naturality of these comparisons and of the counits conjugates the equality to\n$$v_{B,T_VK}\\circ E_B(a_e(K))\\circ\\sigma_e(e_A^*K)=T_V(v_{A,K}).$$\nThis proves equality in $D(V_{\\mathrm{et}},B)$ itself. In particular it applies to the stated $D^b_{ctf}$ inputs; no flatness or finite projective dimension of $B$ over $A$ has entered.",
-   "uses": [
-    "def-weil-pbc-derived-categories",
-    "lem-pur-derived-change-of-rings",
-    "lem-amb-etale-adjoint-locality",
-    "lem-sp-et-proet-coefficient-compatibility",
-    "def-pur-etale-scalar-pullback-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (lemma-derived-base-change), K-flat computation; blueprint Charts, integral summation clause"
-   }
-  },
-  {
-   "text": "Precompose the equality of Step 5 with $\\sigma_e(e_A^*K)^{-1}$. The resulting equation is\n$$v_{B,T_VK}\\circ E_B(a_e(K))=T_V(v_{A,K})\\circ\\sigma_e(e_A^*K)^{-1}.$$\nIn [def-weil-pbc-adjunction-mate] take $L_1=E_A$, $R_1=e_A^*$, $L_2=E_B$, $R_2=e_B^*$, $G=T_U$, $H=T_V$ and $\\alpha=\\sigma_e^{-1}$. The right side is exactly the transpose that defines $\\alpha^\\flat$. Injectivity of the adjunction bijection therefore gives $a_e=(\\sigma_e^{-1})^\\flat$, with the required orientation.",
+   "text": "For the second clause apply injectivity of the inverse B-adjunction hom equivalence. Its two values are E_B(a_e(K)) followed by the B-counit and the counit expression of the mate. The formula mateEquiv_counit from [def-weil-pbc-adjunction-mate] evaluates the latter as sigma.inv at e^*K followed by T_V of the A-counit. Precompose with sigma.hom; cancel hom/inv and apply the first clause.",
    "uses": [
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Existence, uniqueness, naturality and Charts: identify the comparison by its counit transpose"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: integral summation over etale fibres"
    }
   },
   {
-   "text": "For the chosen compactification write $F_R=Re_!^c$ and $C_R:F_R\\xrightarrow{\\sim}E_R$. The schemes $U,V$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since they are finite type over the spectrum of a field. By [lem-asd-etale-compact-support-normalization], after its right-adjoint identification the compact-support counit is $\\epsilon_R^c=v_R\\circ C_R(e_R^*(-))$. Let $\\beta:T_VF_A\\to F_BT_U$ be the specified compact-support coefficient map. The etale clause of [lem-sp-et-proet-coefficient-compatibility] states\n$$C_B(T_UL)\\circ\\beta(L)=\\sigma_e(L)\\circ T_V(C_A(L)).$$\nSet $L=e_A^*K$. Naturality of $C_B$ at $a_e(K)$, then this equation, then Step 5 give\n$$\\begin{aligned}\n\\epsilon_B^c(T_VK)\\circ F_B(a_e(K))\\circ\\beta(L)\n&=v_{B,T_VK}\\circ E_B(a_e(K))\\circ C_B(T_UL)\\circ\\beta(L)\\\\\n&=v_{B,T_VK}\\circ E_B(a_e(K))\\circ\\sigma_e(L)\\circ T_V(C_A(L))\\\\\n&=T_V(v_{A,K})\\circ T_V(C_A(L))=T_V(\\epsilon_A^c(K)).\n\\end{aligned}$$\nThis is the compact-support assertion for the actual coefficient map and the counit-preserving normalization, for every chosen compactification.",
+   "text": "For every compactification c and normalization records N_A,N_B, write C_R=normalizedSumComparison. Naturality of C_B at a_e(K) moves the compact support functor applied to a_e(K) past C_B. Apply the sum coefficient square of [lem-sp-et-proet-coefficient-compatibility] at e^*K, which is allowed by the first step, and reassociate. The first clause now replaces sigma.hom followed by E_B(a_e(K)) and the B-counit with T_V of the A-counit. Functoriality gives T_V(C_A followed by the A-counit). The C_R are exactly the normalized comparisons of [lem-asd-etale-compact-support-normalization] already specified in the theorem; no choice or change of compact counit is made.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-sp-et-proet-coefficient-compatibility"
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-asd-etale-compact-support-normalization"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: sum-extension counit, followed by the counit-preserving compact-support normalization; its coefficient square is the etale clause of lem-sp-et-proet-coefficient-compatibility"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: integral summation over etale fibres"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-etale-scalar-pullback-iso",
-  "def-pur-sheaf-tensor-product",
   "def-weil-pbc-adjunction-mate",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-presheaf-modules-sheafification",
   "lem-amb-etale-adjoint-locality",
   "lem-asd-etale-compact-support-normalization",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-etale-sum-flat-kflat",
-  "lem-pur-scheme-constructible-preimage",
-  "lem-sf-etale-flat-constructible",
+  "lem-coef-etale-open-tensor",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-sf-etale-flat-model",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-sfb-etale-proetale-scalar-mate",
   "lem-sp-et-proet-coefficient-compatibility",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lemma-constructible-pullback-constant",
-  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-pullback",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Charts, summation over etale geometric fibres commutes with coefficients; expanded using Stacks 03S3, 0G7E and 06YY and existing representative-normalized comparisons"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: integral summation over etale fibres; V5 direct canonical iterated-mate proof and bounded flat domain check, 2026-10-25"
  },
  "mathlib_searches": [
   {
@@ -244,16 +187,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-etale-sum-counit-scalar",
   "worker": "stage1",
-  "summary": "Expanded the integral summation claim into a B-linear tensor-generator chain-map calculation on a common K-flat model. Established the derived counit equality and its mate orientation, and wrote out the compact-support transport equation using the existing specified coefficient square. No statement change and no new nodes. Reviewer FIX: the domain check is now its own Step 1, with the constructibility of e^*K written out against the definition of constructible module sheaves (constructible strata included); the K-flat model is Step 2.",
-  "blueprint": "Realizes the Charts sentence that summation over the geometric fibres of e commutes with extension of coefficients, in det-sp-reduction-exceptional; Step 5 identifies its transpose and Step 6 retains the chosen compactification normalization.",
+  "summary": "Repair of the human re-split handoff: unchanged statement, two statement-only nodes isolating the sheaf fold/scalar calculation and the common K-flat representative dictionary. Reuse the existing etale pullback-line model for the domain check. All seven original arguments are retained in the report and assigned explicitly. The item now only assembles the chain equality, mate, and normalized compact-support equation.",
+  "blueprint": "Charts, integral summation over etale fibres: new sheaf node carries original Steps 3–4, new model node carries Steps 2 and 5, existing pullback-line model carries Step 1, and assembly retains Steps 6–7.",
   "tool_uses": [
-   {
-    "node": "lem-amb-etale-adjoint-locality",
-    "why": "Use the exact whole-derived sum-extension adjunction and degreewise counit; this is the ordinary-etale chart tool already named by the item."
-   },
    {
     "node": "lem-asd-etale-compact-support-normalization",
     "why": "Use the specified counit-preserving comparison with the chosen compactification, already named in the statement; no alternate purity route."
@@ -263,44 +202,12 @@
     "why": "Use its representative-normalized sigma and its explicit compact-support coefficient square, both already specified in the item."
    },
    {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Use generic preservation of K-flat flat-term models by pullback and the canonical tensor-pullback comparison."
-   },
-   {
-    "node": "lem-pur-etale-sum-flat-kflat",
-    "why": "Use the existing generic K-flat preservation theorem to compute scalar extension of the sum-extension counit source on one model."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Use the generic K-flat computation and resolution independence for ordinary scalar extension, already in the item statement."
-   },
-   {
     "node": "lem-pc-kflat-resolution",
     "why": "Use a generic flat-term K-flat resolution, not an additional geometric route."
    },
    {
-    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
-    "why": "Use the generic bounded-flat criterion to check the finite-Tor input model."
-   },
-   {
-    "node": "lem-weil-pbc-etale-inverse-image-restriction",
-    "why": "Use the generic restriction description on an etale slice for the explicit summand counit calculation."
-   },
-   {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
     "why": "Check the Noetherian hypothesis on the existing flat-model and compact-support normalization tools."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Use exact constant-ring inverse image, its sectionwise module identification and compatibility with cohomology."
-   },
-   {
-    "node": "lemma-constructible-pullback-stratification",
-    "why": "Base change of a stratification along the etale map e, to check that e_A^*K has constructible cohomology for the coefficient square input."
-   },
-   {
-    "node": "lemma-constructible-pullback-constant",
-    "why": "Inverse image of a constant module sheaf is constant, to check finite local constancy of the pulled-back strata restrictions."
    }
   ]
  },
@@ -308,24 +215,55 @@
   "lem-amb-etale-adjoint-locality",
   "lem-asd-etale-compact-support-normalization",
   "lem-sp-et-proet-coefficient-compatibility",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-etale-sum-flat-kflat",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lemma-constructible-pullback-stratification",
-  "lemma-constructible-pullback-constant"
+  "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q66-81c8fe674",
-  "group": "Q66",
+  "reviewer": "NT-cc-N0-b893f8f4c",
+  "group": "N0",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-81c8fe674 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The statement and stmt_deps are identical to the live node, which is still unsplit there. The item is not on the dropped list and has no re-split note. The dependency closure has no cycle, and the delivery adds no new nodes. There is no duplicate: lem-asd-etale-sum-extension-tensor is a projection formula over one ring, and lem-sp-etale-sum-coefficient-computation is the representative of beta. I checked the types and the mate (def-weil-pbc-adjunction-mate with alpha = sigma_e^{-1}): the transpose is T_V(v_A) sigma^{-1}, so the orientation is correct. Step 4 inverts c_f of def-pur-etale-scalar-pullback-iso correctly. Both sides of the generator calculation send i_s(x)⊗b to x⊗b, and K-flat models carry it, so B need not be flat over A. The compact-support clause follows from lem-asd-etale-compact-support-normalization (eps^c = v∘C(e^*)) and the etale square of lem-sp-et-proet-coefficient-compatibility, by substitution for every compactification. Cases checked: e=id, U empty, disjoint sheets, B=0, and Z/l^2 -> F_l. One fault (C4/C1): step 1 took the constructibility of e^*K from prop-constructible-pullback. That node uses the master definition, which has no constructible-strata condition, so it misses condition (a) of def-weil-pbc-etale-constructible-sheaf (same gap as precedent N5 db05f6aa). Repair: I split step 1 into a domain step and a model step, and wrote the argument out using lemma-constructible-pullback-stratification, lem-pur-scheme-constructible-preimage, iota'^{-1}e^{-1} ≅ h^{-1}iota^{-1}, and lemma-constructible-pullback-constant. I renumbered the later Step references, set proof_deps to the union of all uses, and replaced the prop-constructible-pullback tool use with the two new generic sk-thm-p1 pullback lemmas. I accept the declared generic tool uses.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-b893f8f4c (reviewer sub-agent of L); spot-checked: I read all the mathematics. This delivery answers the 2026-10-22 re-split note. Before the split the proof was 7368 characters in 7 steps; it is now a 4-step assembly of 2297 characters, with 2 new unsplit statement-only nodes of comparable size. The item's statement and stmt_deps are unchanged. The item is not in the dropped list, and no other group has already delivered it. Old Step 1 (showing e_A^*K is in D^b_ctf) now cites the existing node lem-sp-etale-pullback-line-flat-model with E=A_U, r=0. I checked its hypotheses: Noetherian schemes, finite A, and a flat constructible model on [a,b] from lem-sf-etale-flat-constructible. Its outputs are K-flatness, boundedness, constructible strata and the Tor interval. So the old argument is carried by an existing node rather than dropped. Old Steps 2 and 5 go to lem-sp-etale-counit-scalar-model. Its types are consistent, and both representative equations hold: sigma_e is the summandwise map on K-flat representatives, a_e is the inverse of scalarPullbackIso represented by a^0_P, and the counits are degreewise. That node does not assert that the two composites are equal, so it does not restate the item. Old Steps 3 and 4 go to lem-sp-etale-sheaf-fold-scalar. Its adjunction is Stacks 03S3 / equation-j-p-shriek. In the generator check both sides send i_s(x)⊗b to x⊗b. I tested e=id, U empty, two disjoint copies of V, B=0 and the nonflat case Z/ℓ²→F_ℓ. Old Steps 6 and 7 are now Steps 3 and 4: the mate orientation alpha=sigma^{-1} is correct, and the compact-support step is a direct substitution of the etale clause of lem-sp-et-proet-coefficient-compatibility. I found no duplicates among the projection-map, totalization, sum-coefficient, compactification-scalar and chart-transport nodes. Batch-5 flag: lem-sp-et-proet-coefficient-compatibility was already a stmt_dep of the item on base. The closure grows from 13760 to 13763 nodes, and the only additions are the two new nodes and the line-flat-model node. That node is a coefficient-change compatibility, not a step in proving the trace formula or Poincare duality, so I accept it. No SGA is cited. Two advisories: the model node takes v^0, a^0 and rho from the theorem node, so at stage 2 they must go in a def module or be written inline; and the item's tool_uses still lists the old Step-1 lemmas, which is harmless."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSumCounitScalar",
+  "declaration": "AlgebraicGeometry.Etale.etaleSumCounitScalar",
+  "file": "lean/Sheaf/Paper/EtaleSumCounitScalar.lean",
+  "statement": "theorem etaleSumCounitScalar (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (n : ℕ) (_hA : (ell ^ n : A) = 0) (_hB : (ell ^ n : B) = 0) (φ : A →+* B) {U V : Scheme.{u}} [U.Over (Spec (.of k))] [V.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] (e : U ⟶ V) [e.IsOver (Spec (.of k))] [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (K : DerivedCategoryModule A V) (_hK : ProEtale.AdjunctionTransfer.etaleProperty A V K) : ((sumCoefficientIso φ e).hom.app ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K) ≫ (etaleLowerShriek (ModuleCat.{u + 1} B) e inferInstance).mapDerivedCategory.map ((properOpenCoefficientPullbackIso φ e).inv.app K) ≫ (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) e inferInstance).counit.app ((scalarExtension φ V).obj K) = (scalarExtension φ V).map ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app K)) ∧ ((properOpenCoefficientPullbackIso φ e).inv.app K = (mateEquiv (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance) (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) e inferInstance) (TwoSquare.mk _ _ _ _ (sumCoefficientIso φ e).inv)).natTrans.app K) ∧ (∀ (c : Compactification e) (NA : EtaleCompactSupportNormalization A) (NB : EtaleCompactSupportNormalization B), etaleCoefficientMap φ c ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).map ((properOpenCoefficientPullbackIso φ e).inv.app K) ≫ (normalizedSumComparison B k NB e c).hom.app ((upperStar (ModuleCat.{u + 1} B) e).mapDerivedCategory.obj ((scalarExtension φ V).obj K)) ≫ (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) e inferInstance).counit.app ((scalarExtension φ V).obj K) = (scalarExtension φ V).map ((normalizedSumComparison A k NA e c).hom.app ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K) ≫ (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app K))",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded summandwise sumCoefficientIso and its actual compact-support coefficient map. The canonical inverse tensor/pullback comparison is the published properOpenCoefficientPullbackIso.inv, the exact-inverse-image transport of scalarPullbackIso.inv. The mate consequence is stated componentwise on the same Dctf inputs. The final clause expands each counit-preserving normalized compact-support counit as C_R(e_R^*K) followed by the sum/evaluation counit. No arbitrary comparison or adjunction is introduced. The already-landed definition nodes def-pur-etale-scalar-pullback-iso and def-pur-open-coefficient-normalizations are added to stmt_deps to expose the canonical scalar/pullback interface used in the signature. The latter owns the plain definition properOpenCoefficientPullbackIso; no construction or assertion of lem-sf-proper-open-coefficient-refinement is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a13f7e3df",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery of RETURN fe1db9332c76 (H2/H12). The Lean file is byte-identical (sha256 c8b14dde…). The item node differs from the returned head only in stmt_deps (lem-sf-proper-open-coefficient-refinement replaced by the landed definition node def-pur-open-coefficient-normalizations, which owns the plain def properOpenCoefficientPullbackIso, existing:true, record identical to live, no cycle) and in the lean note attribution. Statement, proof, proof_deps and source equal the live node. Re-checked: hypotheses match the node (char-p field, ell≠p, finite rings killed by ell^n, separated finite type, separated etale e, Dctf etaleProperty). Clause 1 σ≫E_B(a_e)≫v_B = T_V(v_A) with a_e = properOpenCoefficientPullbackIso.inv, the canonical transport of scalarPullbackIso. The mateEquiv orientation with σ⁻¹ is correct (G=T_U, H=T_V). The compact clause uses the actual etaleCoefficientMap and NR.comparison pinned by derived_normalization, and is consistent with etaleProEtaleCoefficientCompatibility_sum's ∀ NA NB square. Edge cases e=id, U=∅, zero rings, non-flat map are covered. Docstrings carry the source place, the blueprint tag and all 7 steps. One sorry, imports resolve, no pro-etale substitute. Advisory: the second reading is by the author. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261025T030537-L-2859890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

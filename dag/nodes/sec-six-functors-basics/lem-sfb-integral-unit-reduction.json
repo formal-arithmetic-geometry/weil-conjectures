@@ -1,0 +1,183 @@
+{
+ "id": "lem-sfb-integral-unit-reduction",
+ "kind": "statement",
+ "title": "Derived extension from abelian towers and its normalized integer unit",
+ "statement": "For a scheme T and any system B of commutative ring sheaves on its pro-etale site, with the actual module-system category, forgetful-functor specification and integer generator of [def-sp-tower-class-systems], there exist a Reduction r [def-sp-tower-class-reduction] and an isomorphism from its derived extension of the degree-zero constant integer tower to the degree-zero coefficient unit. The adjunct of this isomorphism, followed by the canonical single-functor comparison for forgetting, is the degree-zero integerGenerator. This asserts no Kummer or root-tower comparison and requires no prime or invertibility hypothesis.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-reduction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+ },
+ "proof": [
+  {
+   "text": "Use the proved ordinary integral-tower scalar presentation to obtain R, phi, the additive equivalence e, its source-unit isomorphism, the literal exact Forget functor, and the normalized ordinary adjunction/unit comparison for every prescribed scalar-extension functor.",
+   "uses": [
+    "lem-sfb-integral-tower-scalar-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous integral reduction; IntegralUnitReduction proof steps 1 and 3, ordinary tensor and integer-unit calculation"
+   }
+  },
+  {
+   "text": "Take the proved independent-universe change-of-rings cochain model for phi, retaining its ordinary functor and preservation of quasi-isomorphisms between K-flat complexes. Define a resolving class of abelian-tower complexes by requiring that its image under e be isomorphic to a K-flat complex. Lift K-flat resolutions through the cochain equivalence; exactness preserves their quasi-isomorphisms. Conjugate a quasi-isomorphism between these models by the chosen isomorphisms and use scalar-extension K-flat invariance. Apply the proved resolving-class derived-adjunction theorem. Its transpose equation, followed by the canonical restriction factor, gives exactly DerivedExtension.transpose.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-sfb-derived-change-of-rings-cochain-model",
+    "lem-pc-kflat-resolution",
+    "lem-pur-resolving-class-derived-adjunction",
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous integral reduction; IntegralUnitReduction proof steps 1 and 3, ordinary tensor and integer-unit calculation"
+   }
+  },
+  {
+   "text": "The ordinary unit module is flat because right tensor with it is naturally isomorphic to the identity. The proved flat-single normalization makes its single complex K-flat. The ordinary source-unit isomorphism therefore places the actual integer single complex in the resolving class, so its derived comparison epsilon is invertible. Compose epsilon with the single-complex ordinary multiplication isomorphism to obtain a. The cochain adjunction on single complexes is the single of the ordinary adjunction, as checked in degree zero and by zero-source uniqueness in every other degree. Apply the retained transpose formula and the canonical exact-forgetting single comparison. The ordinary generator equality from the scalar presentation proves sourceNormalization for precisely integerGenerator.",
+   "uses": [
+    "lem-pur-flat-single-derived-normalization",
+    "lem-sfb-integral-tower-scalar-presentation",
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous integral reduction; IntegralUnitReduction proof steps 1 and 3, ordinary tensor and integer-unit calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-tower-scalar-presentation",
+  "lem-pur-derived-change-of-rings",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-resolving-class-derived-adjunction",
+  "def-sp-tower-class-reduction",
+  "lem-pur-flat-single-derived-normalization",
+  "def-sp-tower-class-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), C9: actual ordinary tower presentation, resolving-class transport, and the degree-zero cochain transpose calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The left adjoint of forgetting sheaves of modules sends the constant integer sheaf to the coefficient ring, including derived extension",
+   "results": "constantSheafΓAdj, constantSheafAdj, PullbackConstruction.adjunction, forgetToSheafModuleCat; no normalized derived extension on abelian towers",
+   "date": "2026-10-27",
+   "verdict": "Ordinary sheaf adjunction APIs only; no match for these tower comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with quotient ring applied to multiplicative units sheaf is Kummer roots of unity shifted by one",
+   "results": "CommRing.Pic.mapAlgebra, CommRing.Pic.mk_tensor, relativeDifferentials_obj and tensorH1CotangentOfIsLocalization; no Kummer-derived-system comparison",
+   "date": "2026-10-27",
+   "verdict": "No match for the unshifted system comparison or the integer source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCommShift",
+   "results": "leftAdjointCommShift, commShift_of_rightAdjoint, leftAdjointCommShift_commShiftIso",
+   "date": "2026-10-27",
+   "verdict": "Used for the proved assembly after the unshifted comparisons; does not supply either existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_normalizedKummerReduction|DerivedExtension|sourceNormalization|targetNormalization|IntegerModules",
+   "results": "TowerClassReduction defines normalizations. ReductionSingleCohomologyNormalization treats one constant exponent on a site. SystemScalarModel supplies normalized derived adjunctions for ringed-site module endpoints. No theorem identifies the present variable-exponent system.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic APIs in the source plan; retain the variable-exponent Kummer step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedKummerReduction",
+  "date": "2026-10-27",
+  "group": "G8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "Derived extension from abelian towers and its normalized integer unit",
+   "via": [
+    "lem-sfb-normalized-kummer-reduction",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralUnitReduction",
+  "file": "lean/Sheaf/Paper/IntegralUnitReduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_integralUnitReduction",
+  "statement": "theorem exists_integralUnitReduction (T : Scheme.{u})\n    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :\n    ∃ (r : Reduction T B)\n      (a : r.derived.obj ((DerivedCategory.singleFunctor (Ab T) 0).obj (integers T)) ≅\n        unit T B),\n      r.model.sourceNormalization a (integerGenerator T B r.forget)",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.NormalizedKummerReduction",
+  "worker": "stage3",
+  "summary": "Derived extension from abelian towers and its normalized integer unit",
+  "blueprint": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The existing K-flat universal pair on the sequence site, preserving its counit."
+   },
+   {
+    "node": "lem-cbc-constant-ring-module-sheaves",
+    "why": "Extend the unique integer action to the constant integer sheaf on the sequence site."
+   },
+   {
+    "node": "lem-pur-system-scalar-model",
+    "why": "The normalized ordinary and derived tensor/restriction adjunctions supply the transpose equation."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T034652-L-3672577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T050545-L-237406",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

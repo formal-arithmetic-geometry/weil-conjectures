@@ -1,0 +1,509 @@
+{
+ "id": "lem-sfb-trait-line-section-order-normalization",
+ "kind": "statement",
+ "title": "Uniform vertical order normalizes a generic line-bundle frame",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $E$ and residue field $k$ [def-sc-discrete-valuation-ring], and let $Z$ be a smooth finite-type scheme over $\\operatorname{Spec}R$ [def-pc-scheme, def-weil-affine-spectrum, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Write $Z_E,Z_k$ for its fibres [def-pc-base-change]. Let $\\mathcal L$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module] and $s_E$ a section generating $\\mathcal L|_{Z_E}$ at every point. At the generic point $\\zeta_i$ of a special-fibre component, suppose the stalk is a discrete valuation ring with uniformizer $\\pi$, and define $n_i\\in\\mathbf Z$ by requiring $\\pi^{-n_i}s_E$ to generate $\\mathcal L_{\\zeta_i}$. If all $n_i$ have the same value $n$, then $\\pi^{-n}s_E$ extends uniquely to a section generating $\\mathcal L$ at every point of $Z$. If $Z_k$ is empty the assertion holds for every integer $n$. In particular, when $Z_k$ is nonempty and irreducible and $a\\in\\Gamma(Z_E,\\mathcal O_{Z_E})^\\times$, there is a unique integer $m$ with $\\pi^{-m}a\\in\\Gamma(Z,\\mathcal O_Z)^\\times$. For every $R$-algebra $A$ which is a discrete valuation ring in which $\\pi$ is a uniformizer, and every $R$-morphism $x:\\operatorname{Spec}A\\to Z$, the normalized valuation $v_A$ on $\\operatorname{Frac}A$ satisfies $v_A(a(x_E))=m$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "4.3, printed p.104 (PDF p.110), paragraphs defining the order of a line section and normalizing a generic unit; extension to equal orders on finitely many components by the same local argument; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Every nonzero element of $R$ is a unit times a nonnegative power of $\\pi$, by the cited DVR factorization. Applying this to a denominator shows $E=R[1/\\pi]$. Also every nonzero prime ideal contains $\\pi$: choose a nonzero element in it and use the factorization and primality. Thus the only primes are $(0)$ and $(\\pi)$, and $R$ is regular: its localizations are the field $E$ and the one-dimensional local ring $R$ with one generator of its maximal ideal. On an affine $R$-chart $V=\\operatorname{Spec}B$ of $Z$, its generic fibre is $D(\\pi)=\\operatorname{Spec}B[1/\\pi]$: ring maps out of $B\\otimes_R R[1/\\pi]$ and $B[1/\\pi]$ are both exactly maps out of $B$ making $\\pi$ invertible.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-regular-scheme",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), last assertion; elementary fraction and affine base-change calculation"
+   }
+  },
+  {
+   "text": "On each affine chart $V=\\operatorname{Spec}B$, the affine smoothness comparison makes $R\\to B$ smooth. Regular ascent therefore makes $B$ regular, so all the stalks $\\mathcal O_{Z,z}$ are regular local rings. Smoothness also makes $B$ flat over $R$. Tensor the injective map $R\\xrightarrow{\\pi}R$ with $B$ using flat-tensor injectivity; under $B\\otimes_R R=B$ the resulting map is multiplication by $\\pi$. Thus $\\pi$ is a nonzerodivisor on $B$, on its localizations, and on every local trivialization of $\\mathcal L$. In particular restriction of such a trivialization from $V$ to $D(\\pi)$ is injective.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 07NF (lemma-regular-goes-up), 00TA (lemma-smooth-syntomic); morphisms.tex Tag 01V6 (lemma-smooth-characterize); flat tensor preserves injections"
+   }
+  },
+  {
+   "text": "Fix $z\\in Z_k$ and put $A=\\mathcal O_{Z,z}$. The fibre-stalk quotient identifies $A/\\pi A$ with $\\mathcal O_{Z_k,z}$. The smooth-fibre regularity theorem, applied on an affine smooth $R$-chart at the closed prime of $R$, makes this quotient regular local. The regular-local-domain theorem applies both to $A$ from Step 2 and to $A/\\pi A$. Hence $A$ is a domain and $(\\pi)\\subset A$ is a nonzero prime ideal. The special fibre has exactly one irreducible component through $z$: on an affine chart, the primes of its local ring are the primes of the chart quotient contained in the point prime; since this local ring is a domain, it has a unique minimal prime. Its generic point is one of the $\\zeta_i$ in the hypothesis. Affine stalk localization identifies $\\mathcal O_{Z,\\zeta_i}$ with $A_{(\\pi)}$: both invert the chart elements outside the prime corresponding to $(\\pi)$, and the iterated localization has the same fractions. This identification sends $\\pi$ to $\\pi$.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-smooth-fibre-regular-local",
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1 (lemma-local-ring-fibre), Tag 01HV (lemma-spec-sheaves); algebra.tex Tags 00T4, 00TT (lemma-characterize-smooth-over-field), 00NP (lemma-regular-domain)"
+   }
+  },
+  {
+   "text": "Choose an affine neighborhood $V=\\operatorname{Spec}B$ of $z$ trivializing $\\mathcal L$, with frame $e$. By the definition of invertibility this is a Zariski neighborhood, not an etale cover. Principal-open sections give $\\Gamma(D(\\pi),\\mathcal O)=B[1/\\pi]$, so $s_E|_{V_E}=fe$ for $f\\in B[1/\\pi]$. This $f$ is a unit: its germ is a unit everywhere because $s_E$ generates, the inverse germs lift to local inverse sections, and these inverses agree and glue. Map $f$ and its inverse to $A[1/\\pi]$; write them $b/\\pi^r$ and $c/\\pi^t$ with $b,c\\in A$ and $r,t\\geq0$. Injectivity of $A\\to A[1/\\pi]$ gives the actual equality $bc=\\pi^{r+t}$ in $A$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), principal-open sections; the local rank-one definition of an invertible module"
+   }
+  },
+  {
+   "text": "For the equality $bc=\\pi^N$ just obtained, induction on $N$ shows $b=u\\pi^j$ for a unit $u\\in A$ and $0\\leq j\\leq N$. For $N=0$, $c$ is an inverse of $b$. For $N>0$, primality of $\\pi$ implies $\\pi\\mid b$ or $\\pi\\mid c$; divide that factor by $\\pi$ and cancel the nonzero $\\pi$ to obtain an equation with exponent $N-1$. Apply the induction hypothesis; dividing $b$ increases its final exponent by one, and dividing $c$ leaves it unchanged. Consequently $f=u\\pi^{j-r}$. In $A_{(\\pi)}=\\mathcal O_{Z,\\zeta_i}$ the frame $e$ and unit $u$ remain generators. Thus the defining uniqueness of the integer $n_i$ gives $j-r=n_i=n$. Therefore the coefficient of $\\pi^{-n}s_E$ in the frame $e$ is the unit $u\\in A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary prime-element induction, also the argument of Mathlib dvd_prime_pow; BLR 4.3, printed p.104, order normalization"
+   }
+  },
+  {
+   "text": "The unit germ $u$ produces a frame on a neighborhood of $z$ which agrees with $\\pi^{-n}s_E$. Explicitly, express $f=d/\\pi^q$ on $V_E$ with $d\\in B$, $q\\geq0$. The equality $u=f\\pi^{-n}$ says $\\pi^a u=\\pi^b d$ in $A$, where $a=\\max(q+n,0)$ and $b=\\max(-q-n,0)$; this follows by multiplying in $A[1/\\pi]$ and then using its injective coefficient map. Represent $u$ and $u^{-1}$ by regular sections on a smaller neighborhood. The identities $u u^{-1}=1$ and $\\pi^a u=\\pi^b d$ are identities of germs, so shrink once more until they hold as sections. Then $ue$ is a frame there, and dividing the second equality by $\\pi^a$ on its generic open gives exactly $ue=\\pi^{-n}s_E$. This is a fraction-and-germ argument; it does not assume that set-theoretic containment of a zero locus gives scheme-theoretic factorization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Elementary stalk representatives and shrinking; BLR 4.3, printed p.104, normalization paragraph"
+   }
+  },
+  {
+   "text": "Together with the prescribed frame $\\pi^{-n}s_E$ on $Z_E$, the neighborhoods in Step 6 cover $Z$. On any overlap, the difference of two proposed sections restricts to zero on its generic part. Cover the overlap by affine opens trivializing $\\mathcal L$; Step 2 makes restriction on each such open injective, since a coefficient killed by localization is killed by a power of the nonzerodivisor $\\pi$. The difference is therefore zero. The sheaf gluing axiom gives a global frame, and the identical injectivity argument proves uniqueness of the extension. No affine-intersection or separatedness assumption is used. If $Z_k=\\varnothing$, then $Z=Z_E$ as open schemes by Step 1; the prescribed frame already exists for every $n\\in\\mathbf Z$, including when $Z$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Sheaf gluing and localization injectivity; BLR 4.3, printed p.104, global normalization paragraph"
+   }
+  },
+  {
+   "text": "Now let $Z_k$ be nonempty and irreducible and take $\\mathcal L=\\mathcal O_Z$, $s_E=a$. At its unique generic point $\\zeta$, the stipulated stalk is a DVR with uniformizer $\\pi$. The nonzero local fraction $a$ has a unique expression $\\pi^m v$ with $m\\in\\mathbf Z$ and $v$ a unit: apply the cited DVR factorization to its numerator and denominator. Two exponents cannot differ, since a positive power of a uniformizer cannot be a unit. There is only this one special-fibre component, so Steps 1--7 give a global unit $u=\\pi^{-m}a$. Any other exponent making a global unit would make a unit at $\\zeta$, and hence equals $m$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), factorization; BLR 4.3, printed p.104, unit normalization"
+   }
+  },
+  {
+   "text": "For the stated $R$-morphism $x:\\operatorname{Spec}A\\to Z$, pull back the global unit $u$ of Step 8. Its image $x^*u$ is a unit of $A$, because a ring map sends an inverse to an inverse. On the generic fibre the equality $a=\\pi^m u$ therefore gives $a(x_E)=\\pi^m(x^*u)$ in $\\operatorname{Frac}A$. By normalized valuation, $v_A(\\pi)=1$ and a unit has value zero; hence $v_A(a(x_E))=m$, for positive, zero, or negative $m$. This uses neither completeness nor an algebraic-closure assumption on the residue field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition of the normalized DVR valuation; BLR 4.3, printed p.104, evaluation on an unramified trait point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-weil-regular-scheme",
+  "def-pc-base-change",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 4.3, printed p.104 (PDF p.110), order and unit normalization paragraphs; local prime-element expansion using the cited Stacks lemmas. Primary scan read online; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nowhere vanishing generic section of an invertible sheaf on a smooth scheme over a discrete valuation ring with equal vertical orders becomes a global generator after scaling by a power of the uniformizer",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+     "AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred",
+     "AlgebraicGeometry.StructureSheaf.exists_const",
+     "AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero",
+     "ModuleCat.Tilde.isUnit_toStalk",
+     "ModuleCat.Tilde.exists_const"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "db5e844a1d7b5290"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the order-of-vanishing lemmas give zero order for an already regular unit, not extension and invertibility of a generic line frame; local-fraction and topological vector-bundle results do not supply the statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsUnit\"",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.basicOpen_of_isUnit",
+     "AlgebraicGeometry.Scheme.Modules.isUnit_algebraMap_end_of_le_basicOpen",
+     "AlgebraicGeometry.Scheme.ord_of_isUnit",
+     "AlgebraicGeometry.Scheme.ordHom_of_isUnit"
+    ],
+    "n_hits": 4,
+    "note": "",
+    "subdirectory": "",
+    "digest": "594a51d1a3a7b03d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the order-of-vanishing lemmas give zero order for an already regular unit, not extension and invertibility of a generic line frame; local-fraction and topological vector-bundle results do not supply the statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible section on the generic fibre of a smooth trait scheme with equal orders on the special components trivializes the line bundle after uniformizer scaling",
+   "results": {
+    "hits": [
+     "Pretrivialization.symmₗ",
+     "ModuleCat.Tilde.const",
+     "Trivialization.continuousLinearMapAt_symmL",
+     "Trivialization.symmₗ",
+     "Bundle.Trivial.symmL_trivialization",
+     "Pretrivialization.symmₗ_apply",
+     "trivialization_linear",
+     "Trivialization.symmL_continuousLinearMapAt"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "0b5e5f9246aebc68"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the order-of-vanishing lemmas give zero order for an already regular unit, not extension and invertibility of a generic line frame; local-fraction and topological vector-bundle results do not supply the statement"
+  },
+  {
+   "tool": "grep",
+   "query": "vertical.*(divisor|section)|order.*(differential|line.bundle)|line.bundle.*uniformizer",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the order-of-vanishing lemmas give zero order for an already regular unit, not extension and invertibility of a generic line frame; local-fraction and topological vector-bundle results do not supply the statement"
+  },
+  {
+   "tool": "grep",
+   "query": "ord_of_isUnit|ordHom_of_isUnit|normalize_finite_fraction_representation",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean",
+     "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean",
+     "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean"
+    ],
+    "n_hits": 3,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "ee503a5ad93607e9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the order-of-vanishing lemmas give zero order for an already regular unit, not extension and invertibility of a generic line frame; local-fraction and topological vector-bundle results do not supply the statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isUnit.*(iff|prime)|prime.*isUnit|isUnit.*away|away.*isUnit",
+   "results": {
+    "hits": [
+     "Mathlib/RingTheory/Localization/Integral.lean",
+     "Mathlib/RingTheory/Localization/Integral.lean",
+     "Mathlib/RingTheory/Localization/LocalizationLocalization.lean",
+     "Mathlib/RingTheory/Localization/LocalizationLocalization.lean",
+     "Mathlib/RingTheory/Localization/Algebra.lean",
+     "Mathlib/RingTheory/Localization/FractionRing.lean",
+     "Mathlib/RingTheory/Localization/FractionRing.lean",
+     "Mathlib/RingTheory/Localization/FractionRing.lean"
+    ],
+    "n_hits": 25,
+    "note": "",
+    "subdirectory": "RingTheory/Localization",
+    "digest": "e6e2d005f8c4d928"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: only local algebra ingredients; the unit-detection and reduced-fraction hits do not state this scheme and line-bundle extension with its evaluation clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, IsUnit",
+   "results": {
+    "hits": [
+     "IsLocalization.atUnit",
+     "IsLocalization.Away.algebraMap_isUnit",
+     "IsLocalization.away_of_isUnit_of_bijective",
+     "IsLocalization.Away.isUnit_of_dvd",
+     "IsLocalization.Away.algebraMap_pow_isUnit",
+     "IsLocalization.Away.lift",
+     "IsLocalization.Away.mul_of_isUnit",
+     "IsLocalization.Away.mul_of_isUnit'"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "843fcf25de5ac7fb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: only local algebra ingredients; the unit-detection and reduced-fraction hits do not state this scheme and line-bundle extension with its evaluation clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unit in the localization of an integral domain away from a prime element is a unit times an integer power of that prime element",
+   "results": {
+    "hits": [
+     "IsLocalization.AtPrime.isUnit_mk'_iff",
+     "IsLocalization.Away.algebraMap_isUnit_iff",
+     "exists_reduced_fraction'",
+     "IsLocalization.AtPrime.isUnit_to_map_iff",
+     "IsLocalization.Away.algebraMap_pow_isUnit",
+     "Algebra.Generators.localizationAway_val",
+     "IsLocalization.Away.isUnit_of_dvd",
+     "IsLocalization.Away.surj"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "3b8195d8caba6715"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: only local algebra ingredients; the unit-detection and reduced-fraction hits do not state this scheme and line-bundle extension with its evaluation clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every invertible element after inverting a prime element in a domain is a unit times an integer power of the prime",
+   "results": {
+    "hits": [
+     "IsLocalization.AtPrime.isUnit_mk'_iff",
+     "IsFractionRing.instAtPrimeFractionRing",
+     "LocalSubring.instAtPrimeSubtypeMemSubringToSubringOfPrime",
+     "IsUnit.not_isPrimePow",
+     "IsPrimePow",
+     "IsLocalization.isDomain_of_local_atPrime",
+     "instIsFractionRingAtPrimeFractionRing",
+     "IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "a2b4fc34f6d6f777"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: only local algebra ingredients; the unit-detection and reduced-fraction hits do not state this scheme and line-bundle extension with its evaluation clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic trivialization of a line bundle on a smooth scheme over a discrete valuation ring extends to a global trivialization if its order is zero at all generic points of the special fibre",
+   "results": {
+    "hits": [
+     "Trivialization.zeroSection",
+     "Trivialization.localFrame_apply_of_notMem",
+     "hom_trivializationAt_target",
+     "hom_trivializationAt_baseSet",
+     "hom_trivializationAt",
+     "VectorBundle.trivialization_linear'",
+     "AlgebraicGeometry.Scheme.germToFunctionField",
+     "ModuleCat.Tilde.isUnit_toStalk"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "55748a23938543ad"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: order of an already regular unit or topological vector bundle results do not give extension of a generic line-bundle frame"
+  },
+  {
+   "tool": "grep",
+   "query": "Prime.*dvd.*pow|dvd.*prime.*pow|associated.*pow|dvd_prime_pow",
+   "results": {
+    "hits": [
+     "Mathlib/Algebra/GroupWithZero/Associated.lean",
+     "Mathlib/Algebra/GroupWithZero/Associated.lean",
+     "Mathlib/Algebra/GroupWithZero/Associated.lean",
+     "Mathlib/Algebra/GroupWithZero/Associated.lean"
+    ],
+    "n_hits": 4,
+    "note": "",
+    "subdirectory": "Algebra/GroupWithZero",
+    "digest": "a622a38fdf04bbaa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: only local algebra ingredients; the unit-detection and reduced-fraction hits do not state this scheme and line-bundle extension with its evaluation clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-model-volume-order-comparison",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 4.3 Lemma 1 proof: 4.3, printed p.104 (PDF p.110), paragraphs defining the order of a line section and normalizing a generic unit; extension to equal orders on finitely many components by the same local argument",
+   "via": [
+    "lem-sfb-smooth-model-volume-order-comparison",
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-line-section-order-normalization",
+  "worker": "stage1",
+  "summary": "NK: preserved the statement, checked BLR p.104, supplied the local prime-power argument, explicit germ shrinking and gluing, and the unique exponent and trait-evaluation clauses. Reused existing algebra and affine-stalk nodes; no new nodes. All searches were run with msearch and logged.",
+  "blueprint": "Created-node chain has no blueprint ancestor (blueprint_refs.py ancestor prints None). Preserved its inherited from/via; steps realize the BLR 4.3 p.104 line-section and generic-unit normalization used by lem-sfb-smooth-model-volume-order-comparison. Current latest blueprint searched for line-bundle frame, vertical order and uniformizer; no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic in a dvr every nonzero element is a unit times a power of a uniformizer, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic a ring map is smooth iff the morphism of spectra is smooth, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic regularity ascends along smooth ring maps, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-flat",
+    "why": "Generic smooth ring maps are flat, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-trf-flat-tensor-preserves-injection",
+    "why": "Generic tensoring with a flat module preserves injective maps, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic the local ring of a scheme-theoretic fibre is a quotient of the local ring, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-fibre-regular-local",
+    "why": "Generic smooth fibres have regular local rings, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic regular local rings are domains, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic stalk of a scheme at a point of an affine open: the canonical open immersion and the localization, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic the quasi-coherent sheaf of a module on spec and its sections over principal opens, used as a local algebra or affine-scheme tool in the BLR normalization argument; no statement in this unit replaces this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-2fc8e7fe9",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-2fc8e7fe9 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. Item statement unchanged; the split has 9 steps and no new nodes. I checked every step against the statements of the cited nodes. Step 1: E=R[1/π], the only primes are (0) and (π), so R is regular; R is Noetherian because every ideal of a DVR is principal, which the step leaves implicit. Step 2: smooth chart → B regular and flat; π⊗B is multiplication by π, hence a nonzerodivisor, so restriction to D(π) is injective. Step 3 (0HA1 fibre-stalk node with m_t=πR; 00T4/00TT fibre regularity; 00NP domain): πA is prime, one special component passes through z, and O_{Z,ζ}=A_(π). Step 4: unit f in B[1/π], and bc=π^{r+t} in A. Step 5: the prime-power induction is correctly set up, and j−r=n_ζ. Step 6: I checked both signs of q+n in π^a u=π^b d. Step 7: gluing without affine intersections or separatedness; uniqueness and the Z_k=∅ case are handled. Steps 8–9: the unique m, and v_A(a(x_E))=m for m of either sign. The statement's 'π^{-n_i}s_E generates L_ζ' is read in L_ζ[1/π]; the wording is inherited and loose but consistent with the proof. BLR §4.3 p.104 is not in the local literature (WANTED), so I checked the mathematics independently and the proof is correctly marked agent-written. Duplicate search over dag/nodes found nothing that states the item; only the parent smooth-model-volume-order-comparison cites it, and the item gives exactly what the parent uses. I accept all 10 tool_uses as generic black-box algebra or affine-scheme facts. Batch-5 flag on lem-trf-flat-tensor-preserves-injection: it is a Mathlib leaf (Module.Flat.lTensor_preserves_injective_linearMap) with empty deps, a general fact about flat modules and not a step of the trace-formula or Poincaré duality proofs, so the citation is acceptable. No changes; no fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitLineSectionOrderNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.trait_line_section_order_normalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.traitUniformizerSection",
+   "AlgebraicGeometry.Scheme.traitGenericOpen",
+   "AlgebraicGeometry.Scheme.traitSpecialFiber",
+   "AlgebraicGeometry.Scheme.traitSpecialFiberι",
+   "AlgebraicGeometry.Scheme.TraitLineSectionNormalizedOn",
+   "AlgebraicGeometry.Scheme.TraitLineSectionHasOrder",
+   "AlgebraicGeometry.Scheme.TraitUnitNormalization",
+   "AlgebraicGeometry.Scheme.traitGenericUnitValue",
+   "AlgebraicGeometry.Scheme.trait_line_section_order_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitLineSectionOrderNormalization.lean",
+  "statement": "theorem trait_line_section_order_normalization (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (π : R) (hπ : Irreducible π) (Z : Scheme.{u}) (f : Z ⟶ Spec (.of R)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f] (hstalk : ∀ z : traitSpecialFiber f, closure ({z} : Set (traitSpecialFiber f)) ∈ irreducibleComponents (traitSpecialFiber f) → ∃ hd : IsDomain (Z.presheaf.stalk (traitSpecialFiberι f z)), @IsDiscreteValuationRing (Z.presheaf.stalk (traitSpecialFiberι f z)) _ hd ∧ Irreducible (Z.presheaf.germ ⊤ (traitSpecialFiberι f z) (by trivial) (traitUniformizerSection f π))) : (∀ (L : Z.Modules) [L.IsInvertible] (s : Γ(L, traitGenericOpen f π)), Modules.IsFreeGenerator s → ∀ n : ℤ, (∀ z : traitSpecialFiber f, closure ({z} : Set (traitSpecialFiber f)) ∈ irreducibleComponents (traitSpecialFiber f) → TraitLineSectionHasOrder f π L s (traitSpecialFiberι f z) n) → ∃ t : Γ(L, ⊤), Modules.IsFreeGenerator t ∧ TraitLineSectionNormalizedOn f π L s n ⊤ t ∧ ∀ t' : Γ(L, ⊤), TraitLineSectionNormalizedOn f π L s n ⊤ t' → t' = t) ∧ (IrreducibleSpace (traitSpecialFiber f) → ∀ a : Γ(Z, traitGenericOpen f π), IsUnit a → ∃ m : ℤ, TraitUnitNormalization f π a m ∧ (∀ m' : ℤ, TraitUnitNormalization f π a m' → m' = m) ∧ ∀ (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [Algebra R A], Irreducible (algebraMap R A π) → ∀ x : Spec (.of A) ⟶ Z, x ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A)) → ∃ h : (⊤ : (Spec (.of (FractionRing A))).Opens) ≤ (Spec.map (CommRingCat.ofHom (algebraMap A (FractionRing A))) ≫ x) ⁻¹ᵁ traitGenericOpen f π, -WithZero.log ((IsDiscreteValuationRing.maximalIdeal A).valuation (FractionRing A) (traitGenericUnitValue f π a x h)) = m)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-26aec601e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26aec601e",
+  "group": "Q92",
+  "result": "fix",
+  "note": "Read node, 7 stmt_deps, module, report, IsFreeGenerator (upstream FreeGenerator.lean), parent citer. All hypotheses match: DVR+irreducible π; Smooth+LFT+QC = smooth finite type; Z_E as D(π) (canonical, E=R[1/π]); Z_k actual pullback to R/m; hstalk DVR with uniformizer π at every special-component generic point; order n as a local frame agreeing with π^{-n}s on V∩D(π), equivalent to generation in L_ζ[1/π]; unit clause with IrreducibleSpace (nonempty included), unique m, -WithZero.log normalized valuation with an R-morphism condition. Edge cases Z=∅/Z_k=∅ (vacuous, every n) and signs of n/m fine; universe u for A forced by Scheme morphisms. Finding (H3): `∃! t, IsFreeGenerator t ∧ Normalized t` gave uniqueness only among frames, but the node and proof step 7 give a unique extension among all sections. FIX: `∃ t, IsFreeGenerator t ∧ Normalized ⊤ t ∧ ∀ t', Normalized ⊤ t' → t' = t`, docstring step 7 updated; complete module + lean-record statement in fixes/; nt_compile --json clean (13.7 s, exit 0)."
+ }
+}

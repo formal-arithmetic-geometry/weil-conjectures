@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-stable-picard-torsion-faithfulness",
+ "kind": "statement",
+ "title": "Stable-curve automorphisms are faithful on invertible level torsion",
+ "statement": "Let $k$ be an algebraically closed field, let $g\\geq2$, and let $C/k$ be a stable unpointed genus-$g$ curve in [def-sfb-stable-pointed-moduli-groupoids], possibly singular or reducible. Let $n\\geq3$ be an integer invertible in $k$. Write $\\operatorname{Pic}^0(C)$ for the group of isomorphism classes of invertible $\\mathcal O_C$-modules having degree zero on each irreducible component; its group law is tensor product [def-sc-invertible-module]. Let $\\operatorname{Pic}^0(C)[n]$ be the subgroup of classes $[L]$ with $L^{\\otimes n}\\simeq\\mathcal O_C$. If $a\\in\\operatorname{Aut}_k(C)$ satisfies $a^*[L]=[L]$ for every $[L]\\in\\operatorname{Pic}^0(C)[n]$, then $a=\\operatorname{id}_C$. No hypothesis that the order of $a$ or the order of $\\operatorname{Aut}_k(C)$ is invertible in $k$ is imposed. Degree on a component means degree after pullback to its normalization. Fields and algebraic closure are [def-weil-field, def-weil-algebraic-closure].",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 3.5.1 and its proof, printed pp.139--140; the lemma includes singular stable curves and arbitrary characteristic prime to n. Local PDF WANTED; primary PDF read online.",
+  "url": "https://numdam.org/item/AST_1985__127__131_0.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sc-invertible-module",
+  "def-weil-algebraic-closure",
+  "def-sfb-stable-fiber-curve",
+  "def-sc-picard-group",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-stable-relative-picard-kummer] to $C\\to\\operatorname{Spec}k$. The field base is locally Noetherian and the curve is a stable unpointed genus-$g$ family with $g\\geq2$. It gives the smooth separated commutative group algebraic space $N=\\operatorname{Pic}^0_{C/k}$ of finite presentation and connected fibres, an extension of an abelian variety by a torus. Its $k$-points are precisely the multidegree-zero line bundle classes in the statement. Since $k$ is algebraically closed, its torus is split. Functoriality for family isomorphisms supplies the group-space automorphism $u=a^*$ of $N$, and its action on $N[n](k)$ is the stated pullback on line bundles. Thus $u(x)=x$ for all $x\\in N[n](k)$.",
+   "uses": [
+    "lem-sfb-stable-relative-picard-kummer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.1 proof, printed pp.139–140; uniform finite-free endomorphism-ring version of the torus/abelian congruence argument, using Milne AV I 10.15 and 14.5. Primary PDF read online; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stable-isom-finite-unramified] to the two families both equal to $C$ over $\\operatorname{Spec}k$. The resulting finite unramified automorphism scheme is affine with a finite-dimensional $k$-algebra $B$. Its distinct $k$-points give distinct maximal ideals of $B$; by the Chinese remainder theorem any $m$ such ideals give a quotient $k^m$, hence $m\\leq\\dim_k B$. Thus the ordinary group $\\operatorname{Aut}_k(C)$ is finite. Among its powers of $a$ two agree; cancellation yields $a^r=\\operatorname{id}_C$ for an integer $r\\geq1$. By the functoriality for family isomorphisms in [lem-sfb-stable-relative-picard-kummer], iterating pullback by this same automorphism gives $u^r=(a^r)^*=(\\operatorname{id}_C)^*=\\operatorname{id}_N$; contravariance reverses order but does not change powers of a single map. This argument does not require $r$ to be invertible in $k$.",
+   "uses": [
+    "lem-sfb-stable-isom-finite-unramified",
+    "lem-sfb-stable-relative-picard-kummer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.1 proof, printed pp.139–140; uniform finite-free endomorphism-ring version of the torus/abelian congruence argument, using Milne AV I 10.15 and 14.5. Primary PDF read online; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The semiabelian space $N$ of step 1 satisfies [lem-sfb-semiabelian-hom-finite-free], applied with $G=H=N$. Consequently $R=\\operatorname{End}_{k\\text{-grp}}(N)$ is a unital associative ring with a finite $\\mathbf Z$-basis for its additive group and identity $1_R=\\operatorname{id}_N$. In this ring put $f=u-1_R$. It is a group-space homomorphism, and step 1 gives $f(x)=u(x)-x=0$ for every $x\\in N[n](k)$.",
+   "uses": [
+    "lem-sfb-semiabelian-hom-finite-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.1 proof, printed pp.139–140; uniform finite-free endomorphism-ring version of the torus/abelian congruence argument, using Milne AV I 10.15 and 14.5. Primary PDF read online; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-semiabelian-torsion-kernel-divisibility] with $G=H=N$, $f=u-1_R$, and the same $n$. The base field is algebraically closed, $N$ is semiabelian, $n\\geq3$ implies $n\\geq1$, and $n$ is invertible in $k$; step 3 verifies vanishing on every required torsion point. Obtain $b\\in R$ with $u-1_R=n b$, so $u=1_R+n b$.",
+   "uses": [
+    "lem-sfb-semiabelian-torsion-kernel-divisibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.1 proof, printed pp.139–140; uniform finite-free endomorphism-ring version of the torus/abelian congruence argument, using Milne AV I 10.15 and 14.5. Primary PDF read online; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-finite-free-ring-congruence-torsion] for $R,u,b,n,r$. Step 3 verifies the finite $\\mathbf Z$-basis hypothesis, step 2 gives $u^r=1_R$ with $r\\geq1$, and step 4 gives $u=1_R+n b$ with $n\\geq3$. Hence $u=1_R=\\operatorname{id}_N$. In particular $a^*[L]=[L]$ for every $[L]\\in\\operatorname{Pic}^0(C)$, without any torsion restriction.",
+   "uses": [
+    "lem-sfb-finite-free-ring-congruence-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.1 proof, printed pp.139–140; uniform finite-free endomorphism-ring version of the torus/abelian congruence argument, using Milne AV I 10.15 and 14.5. Primary PDF read online; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Now [lem-sfb-stable-picard-action-faithful] applies to the original $k,C,g,a$: the field is algebraically closed, $g\\geq2$, $C$ is stable unpointed, and step 5 establishes identity on every multidegree-zero line bundle class. Its conclusion is $a=\\operatorname{id}_C$, as required.",
+   "uses": [
+    "lem-sfb-stable-picard-action-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.1 proof, printed pp.139–140; uniform finite-free endomorphism-ring version of the torus/abelian congruence argument, using Milne AV I 10.15 and 14.5. Primary PDF read online; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stable-relative-picard-kummer",
+  "lem-sfb-stable-isom-finite-unramified",
+  "lem-sfb-semiabelian-hom-finite-free",
+  "lem-sfb-semiabelian-torsion-kernel-divisibility",
+  "lem-sfb-finite-free-ring-congruence-torsion",
+  "lem-sfb-stable-picard-action-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 3.5.1 proof, printed pp.139–140; uniform finite-free endomorphism-ring version of the torus/abelian congruence argument, using Milne AV I 10.15 and 14.5. Primary PDF read online; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a stable curve over an algebraically closed field acting trivially on the n torsion of its generalized Jacobian is identity when n is at least three and invertible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.ofJ_0_of_three_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"∀ {F : Type u_2} [inst : Field F] [inst_1 : DecidableEq F], 3 ≠ 0 → WeierstrassCurve.ofJ 0 = WeierstrassCurve.ofJ0 F\", \"doc\": \"If the field $ F $ has characteristic not equal to 3 (i.e., $ 3 \\neq 0 $ in $ F $), then the Weierstrass curve with $ j $-invariant 0 constructed via the general $ \\\\text{ofJ} $ function coincides with \"}\n  {\"name\": \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [IsSepClosed F] (E E' : WeierstrassCurve F) [inst_2 : E.IsElliptic]\\n  [inst_3 : E'.IsElliptic], E.j = E'.j → ∃ C, C • E = E'\", \"doc\": \"If two elliptic curves over a separably closed field have the same $ j $-invariant, then there exists a variable change (isomorphism) transforming one curve into the other.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_id\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {F : Type u} [inst : CommRing R] [inst_1 : Field F] {W' : WeierstrassCurve.Affine R}\\n  [inst_2 : DecidableEq F] [inst_3 : Algebra R F]\\n  (P : WeierstrassCurve.Affine.Point (WeierstrassCurve.baseChange W' F)),\\n  (WeierstrassCurve.Affine.Point.map (Algebra.ofId F F)) P = P\", \"doc\": \"For any point $ P $ on an affine Weierstrass curve $ W' $ over a field $ F $, applying the identity homomorphism on $ F $ to $ P $ results in $ P $ itself, i.e., $ \\\\text{map}(\\\\text{id}_F, P) = P $.\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instOne\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → One (WeierstrassCurve.VariableChange R)\", \"doc\": \"The set of variable changes for a Weierstrass curve over a commutative ring $ R $ has a multiplicative identity element given by the transformation with coefficients $ (1, 0, 0, 0) $.\"}\n  {\"name\": \"WeierstrassCurve.instMulActionVariableChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → MulAction (WeierstrassCurve.VariableChange R) (WeierstrassCurve R)\", \"doc\": \"For any commutative ring $ R $, the group of variable changes for Weierstrass curves over $ R $ acts on the set of Weierstrass curves over $ R $. This defines a monoid action where the group operation\"}\n  {\"name\": \"modularCyclotomicCharacter.id\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (n : ℕ) [inst_2 : NeZero n],\\n  modularCyclotomicCharacter.toFun n (RingEquiv.refl L) = 1\", \"doc\": \"For the modular cyclotomic character $\\\\chi_0$ associated with the $n$-th roots of unity in a commutative domain ring $L$, evaluating $\\\\chi_0$ at the identity automorphism of $L$ yields $1$ in the ring\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.one_def\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"∀ {R : Type u} [inst : CommRing R], 1 = { u := 1, r := 0, s := 0, t := 0 }\", \"doc\": \"The set of variable changes for a Weierstrass curve over a commutative ring $ R $ has a multiplicative identity element given by the transformation with coefficients $ (1, 0, 0, 0) $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"FaithfulSMul\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "stableCurve|stable_curve|generalizedJacobian|generalisedJacobian|Picard.*torsion",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"361\", \"text\": \"accurate for certain rings whose Picard group has trivial 12-torsion, such as a field or a PID. -/\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deligne stable curve automorphisms act faithfully on Picard zero n torsion for level n at least three, including singular stable curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearEquiv.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Module.Equiv.Basic\", \"type\": \": FaithfulSMul (M ≃ₗ[R] M) M\", \"doc\": \"The action of the automorphism group of a module $ M $ over a semiring $ R $ on $ M $ is faithful. This means that if two automorphisms act identically on every element of $ M $, then they are equal a\"}\n  {\"name\": \"AddAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": FaithfulSMul (AddAut M) M\", \"doc\": \"The action of the additive automorphism group on M is faithful, meaning that if two automorphisms agree on all elements of M, then they are equal.\"}\n  {\"name\": \"RingAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Ring.Action.End\", \"type\": \": FaithfulSMul (RingAut R) R\", \"doc\": \"The action of the group of ring automorphisms on the ring is faithful, meaning that if two automorphisms act identically on all elements of the ring, then they are equal as automorphisms.\"}\n  {\"name\": \"MulAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": FaithfulSMul (MulAut M) M\", \"doc\": \"The action of the multiplicative automorphism group $\\\\text{MulAut}(M)$ on the monoid $M$ is faithful, meaning that if two automorphisms $\\\\varphi, \\\\psi \\\\in \\\\text{MulAut}(M)$ satisfy $\\\\varphi(m) = \\\\psi(\"}\n  {\"name\": \"SlashInvariantForm.T_zpow_width_invariant\", \"module\": \"Mathlib.NumberTheory.ModularForms.Identities\", \"type\": \"(N : ℕ) (k n : ℤ) (f : SlashInvariantForm (Gamma N) k) (z : ℍ) : f (((ModularGroup.T ^ (N * n))) • z) = f z\", \"doc\": \"For any slash-invariant modular form $ f $ of weight $ k $ for the congruence subgroup $ \\\\Gamma(N) $, and for any integer $ n $, the value of $ f $ at $ T^{Nn} \\\\cdot z $ equals $ f(z) $, where $ T = \\\\\"}\n  {\"name\": \"CongruenceSubgroup.instFiniteIndexGamma0\", \"module\": \"Mathlib.NumberTheory.ModularForms.CongruenceSubgroups\", \"type\": \"[NeZero N] : (Gamma0 N).FiniteIndex\", \"doc\": \"For any non-zero integer $N$, the congruence subgroup $\\\\Gamma_0(N)$ of $\\\\mathrm{SL}(2, \\\\mathbb{Z})$ has finite index.\"}\n  {\"name\": \"AddSubgroup.torsionBy\", \"module\": \"Mathlib.Algebra.Module.Torsion.Basic\", \"type\": \": AddSubgroup A\", \"doc\": \"The additive subgroup consisting of all elements $ a \\\\in A $ such that $ n \\\\cdot a = 0 $, where $ n $ is an integer. This is the subset of elements in the additive commutative group $ A $ annihilated \"}\n  {\"name\": \"AddSubgroup.torsionBy.nsmul\", \"module\": \"Mathlib.Algebra.Module.Torsion.Basic\", \"type\": \"(x : A[n]) : n • x = 0\", \"doc\": \"For any element $x$ in the torsion subgroup $A[n]$, it holds that $n \\\\cdot x = 0$, where $n \\\\cdot x$ denotes the scalar multiplication of $x$ by the natural number $n$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfulness of the action of automorphisms of a nodal stable curve on prime level torsion of the semiabelian Picard group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction\", \"module\": \"Mathlib/CategoryTheory/Galois/Action\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (CategoryTheory.PreGaloisCategory.functorToAction F).Faithful\", \"doc\": \"For any pre-Galois category $\\\\mathcal{C}$ with fiber functor $F$, the functor from $\\\\mathcal{C}$ to the category of $\\\\mathrm{Aut}(F)$-actions on finite types is faithful. This means that for any objec\"}\n  {\"name\": \"FaithfulSMul.of_injective\", \"module\": \"Mathlib/GroupTheory/GroupAction/Hom\", \"type\": \"∀ {M' : Type u_1} {X : Type u_5} [inst : SMul M' X] {Y : Type u_6} [inst_1 : SMul M' Y] {F : Type u_8}\\n  [inst_2 : FunLike F X Y] [FaithfulSMul M' X] [MulActionHomClass F M' X Y] (f : F),\\n  Function.Injective ⇑f → FaithfulSMul M' Y\", \"doc\": \"If the scalar multiplication of $ M' $ on $ X $ is faithful and $ f : X \\\\to Y $ is an injective homomorphism preserving scalar multiplication (i.e., $ f(m \\\\cdot x) = m \\\\cdot f(x) $ for all $ m \\\\in M' \"}\n  {\"name\": \"Action.instFaithfulRes\", \"module\": \"Mathlib/CategoryTheory/Action/Basic\", \"type\": \"∀ (V : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} V] {G : Type u_3} {H : Type u_4} [inst_1 : Monoid G]\\n  [inst_2 : Monoid H] (f : G →* H), (Action.res V f).Faithful\", \"doc\": \"For any category $\\\\mathcal{V}$ and monoid homomorphism $f : G \\\\to H$, the restriction functor from the category of $H$-actions on $\\\\mathcal{V}$ to the category of $G$-actions on $\\\\mathcal{V}$ is faith\"}\n  {\"name\": \"IsGaloisGroup.faithful\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} (A : Type u_2) {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], FaithfulSMul G B\", \"doc\": \"If $ G $ is the Galois group of the algebra $ B $ over $ A $, then the scalar multiplication action of $ G $ on $ B $ is faithful. This means that for any two distinct elements $ g_1, g_2 \\\\in G $, the\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_injective_of_non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G],\\n  (∀ (g : G), (∀ (X : C) (x : (F.obj X).carrie\", \"doc\": \"If a group $ G $ acts on a functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $ such that any element $ g \\\\in G $ satisfying $ g \\\\cdot x = x $ for all objects $ X \\\\in \\\\mathcal{C} $ and all $ x \\\\in F(X) $\"}\n  {\"name\": \"DomMulAct.instFaithfulSMulForallOfNontrivial\", \"module\": \"Mathlib/GroupTheory/GroupAction/DomAct/Basic\", \"type\": \"∀ {M : Type u_1} {β : Type u_2} {α : Type u_3} [inst : SMul M α] [FaithfulSMul M α] [Nontrivial β],\\n  FaithfulSMul Mᵈᵐᵃ (α → β)\", \"doc\": \"If the scalar action of a monoid/group $ M $ on a type $ \\\\alpha $ is faithful and the codomain type $ \\\\beta $ is nontrivial, then the induced scalar action of the opposite monoid/group $ M^{\\\\text{op}}\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFaithfulContActionFintypeCatAutFunctorFunctorToContAction\", \"module\": \"Mathlib/CategoryTheory/Galois/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (CategoryTheory.PreGaloisCategory.functorToContAction F).Faithful\", \"doc\": \"The functor from category $\\\\mathcal{C}$ to the category of continuous actions of the automorphism group $\\\\mathrm{Aut}(F)$ on finite types is faithful. This means that for any two objects $X$ and $Y$ i\"}\n  {\"name\": \"DomAddAct.instFaithfulVAddForallOfNontrivial\", \"module\": \"Mathlib/GroupTheory/GroupAction/DomAct/Basic\", \"type\": \"∀ {M : Type u_1} {β : Type u_2} {α : Type u_3} [inst : VAdd M α] [FaithfulVAdd M α] [Nontrivial β],\\n  FaithfulVAdd Mᵈᵃᵃ (α → β)\", \"doc\": \"If a monoid $ M $ has a faithful additive action on a type $ α $ and the codomain type $ β $ is non-trivial, then the additive action of the double dual monoid $ M^{\\\\text{d}^\\\\text{a}} $ on the functio\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"FaithfulSMul\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "stableCurve|stable_curve|generalizedJacobian|Picard.*torsion",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"361\", \"text\": \"accurate for certain rings whose Picard group has trivial 12-torsion, such as a field or a PID. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable curve automorphisms are detected by prime to characteristic Picard n torsion for n greater than two",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsCharTwoNF.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {W : WeierstrassCurve R} {motive : W.IsCharTwoNF → Prop} (t : W.IsCharTwoNF),\\n  (∀ [inst_1 : W.IsCharTwoJNeZeroNF], motive ⋯) → (∀ [inst_1 : W.IsCharTwoJEqZeroNF], motive ⋯) → motive t\", \"doc\": \"A predicate asserting that a Weierstrass curve over a commutative ring of characteristic two satisfies the normal form conditions, either through the zero $ j $-invariant case or the non-zero $ j $-in\"}\n  {\"name\": \"WeierstrassCurve.isCharNeTwoNF_of_isCharThreeNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"[W.IsCharThreeNF] : W.IsCharNeTwoNF\", \"doc\": \"If a Weierstrass curve over a commutative ring is in normal form under the condition that the ring has characteristic three, then it is also in normal form under the condition that the ring's characte\"}\n  {\"name\": \"WeierstrassCurve.a₄_of_isCharTwoJNeZeroNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.a₄ = 0\", \"doc\": \"For a Weierstrass curve over a commutative ring $ R $ in characteristic two with non-zero $ j $-invariant satisfying the normal form conditions, the fourth coefficient $ a_4 $ of the curve is equal to\"}\n  {\"name\": \"nsmulCoprime\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \"{n : ℕ} → {G : Type u_6} → [AddGroup G] → (Nat.card G).Coprime n → G ≃ G\", \"doc\": \"Given an additive group $G$ with finite cardinality $|G|$ and a natural number $n$ such that $\\\\gcd(|G|, n) = 1$, scalar multiplication by $n$ defines a group automorphism $G \\\\to G$, which is an equiva\"}\n  {\"name\": \"WeierstrassCurve.isCharTwoNF_of_isCharTwoJNeZeroNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"[W.IsCharTwoJNeZeroNF] : W.IsCharTwoNF\", \"doc\": \"If a Weierstrass curve over a commutative ring of characteristic two satisfies the normal form conditions for non-zero $j$-invariant, then it is in normal form.\"}\n  {\"name\": \"WeierstrassCurve.toCharNeTwoNF_spec\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": (W.toCharNeTwoNF • W).IsCharNeTwoNF\", \"doc\": \"For a Weierstrass curve over a commutative ring $ R $ with characteristic not equal to two, there exists a variable change transformation defined by the tuple $ (1, 0, -\\\\frac{a_1}{2}, -\\\\frac{a_3}{2}) \"}\n  {\"name\": \"IsPrimitiveRoot.coe_autToPow_apply\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots\", \"type\": \"[NeZero n] (f : S ≃ₐ[R] S) :\\n  (autToPow R hμ f : ZMod n) = ((map_rootsOfUnity_eq_pow_self f hμ.toRootsOfUnity).choose : ZMod n)\", \"doc\": \"For a primitive $ n $-th root of unity $ \\\\mu $ in a commutative ring $ S $, there exists a group homomorphism from the automorphism group $ \\\\text{Aut}_R(S) $ to the multiplicative group of units $ (\\\\m\"}\n  {\"name\": \"IsPrimitiveRoot.associated_map_sub_one_map_sub_one\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.CyclotomicUnits\", \"type\": \"{n : ℕ} [NeZero n] (hζ : IsPrimitiveRoot ζ n) (σ τ : A ≃ₐ[R] A) : Associated (σ (ζ - 1)) (τ (ζ - 1))\", \"doc\": \"For any nonzero natural number $n$ and primitive $n$-th root of unity $\\\\zeta$ in a commutative ring $A$, the images $\\\\sigma(\\\\zeta - 1)$ and $\\\\tau(\\\\zeta - 1)$ are associated elements in $A$ for any $R$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stable nodal curve has no nontrivial automorphism preserving every n torsion line bundle for n at least three",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.ofJ_0_of_three_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"∀ {F : Type u_2} [inst : Field F] [inst_1 : DecidableEq F], 3 ≠ 0 → WeierstrassCurve.ofJ 0 = WeierstrassCurve.ofJ0 F\", \"doc\": \"If the field $ F $ has characteristic not equal to 3 (i.e., $ 3 \\neq 0 $ in $ F $), then the Weierstrass curve with $ j $-invariant 0 constructed via the general $ \\\\text{ofJ} $ function coincides with \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instSubsingleton\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Subsingleton R], Subsingleton W'.CoordinateRing\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $, defined as the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (\"}\n  {\"name\": \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [IsSepClosed F] (E E' : WeierstrassCurve F) [inst_2 : E.IsElliptic]\\n  [inst_3 : E'.IsElliptic], E.j = E'.j → ∃ C, C • E = E'\", \"doc\": \"If two elliptic curves over a separably closed field have the same $ j $-invariant, then there exists a variable change (isomorphism) transforming one curve into the other.\"}\n  {\"name\": \"WeierstrassCurve.ofJ_ne_0_ne_1728\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"∀ {F : Type u_2} [inst : Field F] (j : F) [inst_1 : DecidableEq F],\\n  j ≠ 0 → j ≠ 1728 → WeierstrassCurve.ofJ j = WeierstrassCurve.ofJNe0Or1728 j\", \"doc\": \"For any j-invariant $ j $ in a field $ F $ such that $ j \\neq 0 $ and $ j \\neq 1728 $, the Weierstrass curve constructed via the general $ j $-invariant method coincides with the curve constructed using\"}\n  {\"name\": \"WeierstrassCurve.instIsEllipticOfJ\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"∀ {F : Type u_2} [inst : Field F] (j : F) [inst_1 : DecidableEq F], (WeierstrassCurve.ofJ j).IsElliptic\", \"doc\": \"For any field $ F $ and any j-invariant $ j $, the Weierstrass curve constructed using the $ j $-invariant over $ F $ satisfies the elliptic curve condition. This includes special cases when $ j = 0 $\"}\n  {\"name\": \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"{F : Type u_2} → [inst : Field F] → [DecidableEq F] → Inhabited { W // W.IsElliptic }\", \"doc\": \"For any field $ F $ with decidable equality, there exists an elliptic Weierstrass curve over $ F $ with j-invariant $ 37 $. This curve is constructed explicitly using the standard form for j-invariant\"}\n  {\"name\": \"WeierstrassCurve.ofJ_1728_of_three_eq_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"∀ {F : Type u_2} [inst : Field F] [inst_1 : DecidableEq F],\\n  3 = 0 → WeierstrassCurve.ofJ 1728 = WeierstrassCurve.ofJ1728 F\", \"doc\": \"If the field $ F $ has characteristic 3 (i.e., $ 3 = 0 $ in $ F $), then the Weierstrass curve constructed with j-invariant 1728 via the general $ \\\\text{ofJ} $ function coincides with the specialized \"}\n  {\"name\": \"WeierstrassCurve.ofJ_0_of_three_eq_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"∀ {F : Type u_2} [inst : Field F] [inst_1 : DecidableEq F], 3 = 0 → WeierstrassCurve.ofJ 0 = WeierstrassCurve.ofJ1728 F\", \"doc\": \"For any field $ F $ where $ 3 = 0 $, the Weierstrass curve constructed with $ j $-invariant $ 0 $ coincides with the Weierstrass curve constructed with $ j $-invariant $ 1728 $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a stable nodal curve acting trivially on its Picard group n torsion for n at least three prime to characteristic is the identity",
+   "results": "[leanfinder] OK 8 hit(s); recorded top results: modularCyclotomicCharacter.id, cyclotomicCharacter.spec, cyclotomicCharacter.toFun_spec, modularCyclotomicCharacter'.unique', modularCyclotomicCharacter.unique, modularCyclotomicCharacter.spec, modularCyclotomicCharacter'.spec', modularCyclotomicCharacter.aux",
+   "date": "2026-10-22",
+   "verdict": "no match: all eight hits concern cyclotomic characters of field automorphisms, not automorphisms of stable curves or generalized Picard objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-level-versal-branch-freeness",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion.",
+   "via": [
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stable-picard-torsion-faithfulness",
+  "worker": "stage1",
+  "summary": "Checked Deligne Lemma 3.5.1 and Deligne–Mumford Theorem 1.13 against the singular/reducible and arbitrary-characteristic hypotheses. Kept the exact conclusion and level hypotheses. Reused the stable relative Picard object, finite automorphism scheme and integral congruence theorem. Exposed the general semiabelian finite-free Hom and torsion-divisibility inputs and the full-Picard faithfulness theorem as three statement-only nodes. The proof is the uniform integral endomorphism-ring form of Deligne’s torus/abelian congruence argument. No project attachment or Mathlib match was found. Repair of returned head 127e5a343a4: rebased by the delivery tool onto current origin/sheaf-dag, reread the current cited statements, and retained the reviewed finite-unramified Isom theorem rather than copying its old proof. Step 2 now explicitly cites Picard functoriality and writes the pullback power identity. Current-base repair 2026-10-23: the initial dry run passed at 494bce2d378; reread every current cited statement, checked all seven literal excerpts, and expanded the finite-scheme-to-finite-automorphism-group argument in step 2 using its finite coordinate algebra.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite via ILO X Lemma 2.2, stable-level-versal-branch-freeness: vanishing of the closed-fibre stable-curve automorphism once it fixes its Picard n-torsion. The ancestor tool returns None on the current created-node chain; preserved inherited null root and full via chain. New inputs record their precise supporting sentence. No chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-057a351c5",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-057a351c5 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the three new nodes in full; no fixes. Base status: the item is unsplit in live and side-live with the same statement, now also citing def-weil-algebraic-closure; nothing is weakened. The only citer (lem-sfb-stable-level-versal-branch-freeness, ℓ≥3 prime and invertible) fits the item's hypotheses. No re-split note exists. Against the earlier heads 127e/919d/be34, the only change is in step 2: a CRT bound on the number of k-points of the finite Isom scheme, plus the direct relative-Picard functoriality citation. Both are correct. Steps: (1) relative-picard over Spec k gives a semiabelian N with N(k)=Pic^0(C), split torus, and u=a^*; (2) the Isom scheme over k is finite, so Aut_k(C) is finite, a^r=id and u^r=id, with no condition that r is prime to p; (3) End(N) is finite free with 1=id; (4) divisibility gives u−1=nb; (5) the existing congruence node, whose hypotheses match one for one and which I re-proved via the left regular representation and Milne AV Lemma 14.5 (read locally, p.63), gives u=1; (6) DM 1.13 on all of Pic^0 gives a=id. New nodes: the semiabelian Hom-finite-free node is true (T→A' and A→T' maps vanish, Milne 10.15 read locally) and is not a duplicate, since the existing abelian node needs properness. The semiabelian torsion-divisibility node is true ([n] is finite étale with reduced kernel for invertible n; G_m small case checked) and is a strict generalization of the existing abelian node. The full-Pic^0 faithfulness node has a strictly stronger hypothesis than the item, so it is not a restatement; I tested it on an elliptic tail, two P^1s meeting in three points, and rational components. Deligne Gabber 3.5.1 and DM 1.13 have no local PDFs (WANTED, numdam), so I checked them against the standard statements. n=2 fails (hyperelliptic involution), so n≥3 is necessary. No SGA source. Batch-5: def-trf-algebraic-space and def-trf-projective-bundle-morphism (reached through def-sfb-stable-pointed-moduli-groupoids, also from lem-sfb-stable-isom-finite-unramified) are general definitions, and finiteness of Aut of a stable curve is not part of the trace formula or Poincaré duality, so all four flagged citations are accepted. Maintainer note: this is the 4th push of the same mathematics after side-completion promotion returns; promote the side completion before landing."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StablePicardTorsionFaithfulness",
+  "declaration": "AlgebraicGeometry.StablePointedModuli.picard_torsion_faithfulness",
+  "file": "lean/Sheaf/AlgebraicGeometry/StablePicardTorsionFaithfulness.lean",
+  "statement": "theorem picard_torsion_faithfulness (k : Type u) [Field k] [IsAlgClosed k] (g : ℕ) (hg : 2 ≤ g) (C : Fiber (Spec (.of k)) g 0 (Over.mk (𝟙 (Spec (.of k))))) (n : ℕ) (hn : 3 ≤ n) (hinv : IsUnit (n : k)) (a : Aut (fiberCurve C)) (hfix : ∀ L : (fiberCurve C).left.Pic, (∀ Z : irreducibleComponents (fiberCurve C).left, @Scheme.Modules.degree k _ (((fiberCurve C).left).reducedNormalizationComponent Z).normalization ⟨((fiberCurve C).left).normalizedComponentMap Z ≫ (fiberCurve C).hom⟩ ((Scheme.Modules.pullback (((fiberCurve C).left).normalizedComponentMap Z)).obj ((fromSkeleton (fiberCurve C).left.Modules).obj L.val)) = 0) → L ^ n = 1 → Scheme.Pic.map a.hom.left L = L) : a = 1",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the actual stable-moduli fibre over Spec k, its canonical fiberCurve, existing Picard classes and pullback, and degrees on canonical normalized reduced components. Picard n-torsion is L ^ n = 1; no restriction on automorphism order or smoothness is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2531a9862",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and Deligne Gabber 3.5.1: alg. closed k, g≥2, stable unpointed genus-g fibre over Spec k (r=0) via canonical fiberCurve, n≥3 with IsUnit (n:k), a ∈ Aut in Over (Spec k), multidegree zero per irreducible component on its normalization via Scheme.Modules.degree (χ(L)−χ(O), representative-invariant by degree_congr), L^n=1 in the tensor CommGroup Pic, Pic.map a.hom.left L = L, conclusion a = 1; no order/wildness hypothesis, no universe restriction. def-sc-pic0 is smooth-only so the inline multidegree condition is not a duplicate. lean.statement verbatim; node text unchanged; added def stmt_deps (stable-fiber-curve, picard-group, degree) are on base with matching records; normalization helpers reached through def-sfb-stable-pointed-curve. Docstrings carry source, blueprint and 6-step proof; sorry only; report has Worker report and Second reading. No file changed, so nothing recompiled."
+ }
+}

@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-valued-extension-degree-bound",
+ "kind": "statement",
+ "title": "Residue degree and value-group index are bounded by the valued field degree",
+ "statement": "Let $F\\subseteq H$ be fields [def-weil-field] with compatible real-valued nonarchimedean absolute values: $|x|=0$ exactly when $x=0$, $|xy|=|x||y|$, $|1|=1$, and $|x+y|\\le\\max(|x|,|y|)$. Neither completeness nor a discrete valuation is assumed. For $M=F,H$ put $M^\\circ=\\{x:|x|\\le1\\}$, a valuation ring [def-trf-valuation-ring], $\\mathfrak m_M=\\{x:|x|<1\\}$, $\\widetilde M=M^\\circ/\\mathfrak m_M$, and $\\Gamma_M=|M^\\times|\\subset\\mathbf R_{>0}$. The inclusions give embeddings $\\widetilde F\\hookrightarrow\\widetilde H$ and $\\Gamma_F\\hookrightarrow\\Gamma_H$. Assume $H$ has finite dimension $n\\ge1$ as an $F$-vector space. Then the residue extension has finite dimension $f=[\\widetilde H:\\widetilde F]$, the quotient group $\\Gamma_H/\\Gamma_F$ has a finite number $e=[\\Gamma_H:\\Gamma_F]$ of cosets, and $ef\\le n$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Section 2.1, printed pp. 7–8, the fundamental inequality immediately before Lemma 2.1.2; primary PDF read online, local archival copy WANTED.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-trf-valuation-comap-residue"
+ ],
+ "proof": [
+  {
+   "text": "For $M=F,H$, the absolute-value identities show that $M^\\circ$ is a subring and that $\\mathfrak m_M$ is a proper ideal: sums of two elements of norm $<1$ still have norm $<1$, and multiplication by an element of norm $\\le1$ preserves this inequality. An element of $M^\\circ$ outside this ideal has norm $1$, hence its inverse also belongs to $M^\\circ$; conversely a unit has norm $1$. Thus the quotient is a field. For $x\\ne0$, either $|x|\\le1$ or $|x^{-1}|<1$, giving the valuation-ring condition of [def-trf-valuation-ring]. Every element of $M$ is a fraction of elements of $M^\\circ$: if $|x|>1$, use $x=1/x^{-1}$. Compatibility gives $F^\\circ=F\\cap H^\\circ$ and $\\mathfrak m_F=F\\cap\\mathfrak m_H$, so the induced residue homomorphism is injective. The value groups are subgroups under multiplication, since norms preserve products and inverses, and their inclusion is injective.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof; valuation-ring extension terminology: Tag 0ASG, definition-extension-valuation-rings."
+   }
+  },
+  {
+   "text": "Fix positive integers $r,s$, independent residue classes $\\bar b_1,\\ldots,\\bar b_r\\in\\widetilde H$ over $\\widetilde F$, and $c_1,\\ldots,c_s\\in H^\\times$ whose norms represent distinct cosets modulo $\\Gamma_F$. Lift each $\\bar b_i$ to $b_i\\in H^\\circ$. Each class is nonzero, so $|b_i|=1$. For coefficients $a_{ij}\\in F$ not all zero, choose $(i_0,j_0)$ maximizing $|a_{ij}c_j|$, and put $a_0=a_{i_0j_0}\\ne0$. Divide the putative relation $\\sum_{i,j}a_{ij}b_ic_j=0$ by $a_0c_{j_0}$. Every resulting term has norm at most $1$. If $j\\ne j_0$ and a nonzero term had norm $1$, then $|c_j|/|c_{j_0}|=|a_0/a_{ij}|\\in\\Gamma_F$, contradicting the distinct cosets. Thus every term with $j\\ne j_0$ has norm strictly less than $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof; valuation-ring extension terminology: Tag 0ASG, definition-extension-valuation-rings."
+   }
+  },
+  {
+   "text": "For $j=j_0$ the normalized coefficient is $a_{ij_0}/a_0\\in F^\\circ$, and its value for $i=i_0$ is $1$. Reduce the normalized relation in $H^\\circ/\\mathfrak m_H$. The terms with $j\\ne j_0$ vanish; reduction of the others gives $\\sum_i\\overline{a_{ij_0}/a_0}\\,\\bar b_i=0$, with coefficients in the embedded field $\\widetilde F$ and the $i_0$ coefficient equal to $1$. This contradicts independence of the $\\bar b_i$. Reduction commutes with this finite sum and with its products because it is a quotient-ring homomorphism. Hence the $rs$ elements $b_ic_j$ are linearly independent over $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof; valuation-ring extension terminology: Tag 0ASG, definition-extension-valuation-rings."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-independent-family-card-le-dimension] to the finite independent family $(b_ic_j)_{(i,j)\\in\\{1,\\ldots,r\\}\\times\\{1,\\ldots,s\\}}$ in the $n$-dimensional $F$-vector space $H$. The index set has $rs$ elements, so $rs\\le n$. This holds for every finite residue-independent family and every finite family of distinct value cosets chosen in Step 2.",
+   "uses": [
+    "lem-weil-independent-family-card-le-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, concluding dimension bound; Mathlib LinearIndependent.fintype_card_le_finrank, LinearAlgebra/Dimension/Finite.lean:161–164."
+   }
+  },
+  {
+   "text": "Take $s=1$ and $c_1=1$. Step 4 bounds every finite independent family in $\\widetilde H$ over $\\widetilde F$ by $n$. Start with the empty family and, whenever its span is not all of $\\widetilde H$, append an element outside the span. Independence is preserved: a relation with a nonzero coefficient on the appended element would express it in the old span, and if that coefficient is zero the old independence applies. The process must stop by the $n$th choice, since otherwise it constructs $n+1$ independent elements. It therefore produces a finite basis of size $f$, with $1\\le f\\le n$ because the residue field has $1\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof; valuation-ring extension terminology: Tag 0ASG, definition-extension-valuation-rings."
+   }
+  },
+  {
+   "text": "Take $r=1$ and $\\bar b_1=\\bar1$. If $\\Gamma_H/\\Gamma_F$ contained $n+1$ distinct cosets, choose a representative in $\\Gamma_H$ for each and then an element of $H^\\times$ with that norm. Step 4 would give $n+1\\le n$. Thus the coset set is finite of cardinality $e\\le n$, and $e\\ge1$ because it contains the identity coset. Explicitly, successive choices of a coset outside those already selected terminate after at most $n$ choices, and then exhaust the quotient.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof; valuation-ring extension terminology: Tag 0ASG, definition-extension-valuation-rings."
+   }
+  },
+  {
+   "text": "Choose the residue basis of size $f$ obtained in Step 5 and representatives in $H^\\times$ for all $e$ cosets obtained in Step 6. Apply the finite-family bound of Step 4 with $r=f$ and $s=e$, which are positive. It gives $fe\\le n$, hence $ef\\le n$. Together with Steps 5 and 6 this proves both finiteness assertions and the required inequality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof; valuation-ring extension terminology: Tag 0ASG, definition-extension-valuation-rings."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "lem-weil-independent-family-card-le-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0ASH, lemma-inequality-general, proof; valuation-ring extension terminology: Tag 0ASG, definition-extension-valuation-rings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite extension of nonarchimedean valued fields has finite residue degree and value group index whose product is at most the field degree",
+   "results": "{\"t\": \"2026-10-24T08:39:52Z\", \"tool\": \"leanfinder\", \"query\": \"Finite extension of nonarchimedean valued fields has finite residue degree and value group index whose product is at most the field degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDeg_le_finrank\", \"IsNonarchimedeanLocalField.instIsRankLeOne\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"ArchimedeanClass.FiniteResidueField\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"Valuation.FiniteField.algebraMap_le_one\"], \"digest\": \"3ecb463fa325086e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification/inertia results assume Dedekind rings finite over the base; the present arbitrary real-valued valuations may be nondiscrete and their integer rings need not be finite modules. Other hits concern unrelated linear independence."
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, Module.finrank",
+   "results": "{\"t\": \"2026-10-24T08:39:53Z\", \"tool\": \"loogle\", \"query\": \"Valuation, Module.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Valuation.pow_coeff_zero_ne_zero_of_unit\"], \"digest\": \"f8545c7d29675292\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification/inertia results assume Dedekind rings finite over the base; the present arbitrary real-valued valuations may be nondiscrete and their integer rings need not be finite modules. Other hits concern unrelated linear independence."
+  },
+  {
+   "tool": "grep",
+   "query": "fundamental.*inequality|ramificationIdx.*inertiaDeg|inertiaDeg.*ramificationIdx",
+   "results": "{\"t\": \"2026-10-24T08:39:53Z\", \"tool\": \"grep\", \"query\": \"fundamental.*inequality|ramificationIdx.*inertiaDeg|inertiaDeg.*ramificationIdx\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\"], \"digest\": \"a4582403f5b06424\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification/inertia results assume Dedekind rings finite over the base; the present arbitrary real-valued valuations may be nondiscrete and their integer rings need not be finite modules. Other hits concern unrelated linear independence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite valued field extension residue field degree times value group index is bounded by field extension degree",
+   "results": "{\"t\": \"2026-10-24T08:42:42Z\", \"tool\": \"leansearch\", \"query\": \"Finite valued field extension residue field degree times value group index is bounded by field extension degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.ResidueField\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"AlgEquiv.card_le\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"Field.finSepDegree_dvd_finrank\", \"IntermediateField.finSepDegree_adjoin_simple_le_finrank\", \"minpoly.natDegree_le\"], \"digest\": \"6391c322407e31be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification/inertia results assume Dedekind rings finite over the base; the present arbitrary real-valued valuations may be nondiscrete and their integer rings need not be finite modules. Other hits concern unrelated linear independence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifts of linearly independent residue classes multiplied by elements with distinct values modulo the base value group are linearly independent over the base field",
+   "results": "{\"t\": \"2026-10-24T08:42:44Z\", \"tool\": \"leanfinder\", \"query\": \"Lifts of linearly independent residue classes multiplied by elements with distinct values modulo the base value group are linearly independent over the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.linearIndependent\", \"RootPairing.Base.linearIndependent_pair_of_ne\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval\", \"Profinite.NobelingProof.GoodProducts.linearIndependentSingleton\", \"Profinite.NobelingProof.GoodProducts.linearIndependentAux\", \"RootPairing.linearIndepOn_root_baseOf\", \"Ideal.FinrankQuotientMap.linearIndependent_of_nontrivial\", \"NumberField.mixedEmbedding.fundamentalCone.linearIndependent_completeFamily\"], \"digest\": \"8277d7c56419ec82\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification/inertia results assume Dedekind rings finite over the base; the present arbitrary real-valued valuations may be nondiscrete and their integer rings need not be finite modules. Other hits concern unrelated linear independence."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*(finrank|linearIndependent)|linearIndependent.*(residue|valuation)|valueGroup.*index",
+   "results": "{\"t\": \"2026-10-24T08:42:44Z\", \"tool\": \"grep\", \"query\": \"residue.*(finrank|linearIndependent)|linearIndependent.*(residue|valuation)|valueGroup.*index\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification/inertia results assume Dedekind rings finite over the base; the present arbitrary real-valued valuations may be nondiscrete and their integer rings need not be finite modules. Other hits concern unrelated linear independence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extension of nonarchimedean valued fields residue degree times value group index is at most vector space dimension",
+   "results": "{\"t\": \"2026-10-24T09:04:14Z\", \"tool\": \"leanfinder\", \"query\": \"Finite extension of nonarchimedean valued fields residue degree times value group index is at most vector space dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDeg_le_finrank\", \"Ideal.ramificationIdx_le_finrank\", \"IsNonarchimedeanLocalField.instIsRankLeOne\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.Factors.finrank_pow_ramificationIdx\", \"Valuation.FiniteField.algebraMap_le_one\", \"ArchimedeanClass.FiniteResidueField\"], \"digest\": \"5503b4dea9e64148\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ef and inertia hits require Dedekind rings finite over the base, whereas arbitrary compatible real-valued valuations need not be discrete or module finite; the minpoly, local-field and Profinite hits do not assert this inequality or the residue/value independent-family argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, Module.finrank",
+   "results": "{\"t\": \"2026-10-24T09:04:14Z\", \"tool\": \"loogle\", \"query\": \"Valuation, Module.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Valuation.pow_coeff_zero_ne_zero_of_unit\"], \"digest\": \"f8545c7d29675292\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ef and inertia hits require Dedekind rings finite over the base, whereas arbitrary compatible real-valued valuations need not be discrete or module finite; the minpoly, local-field and Profinite hits do not assert this inequality or the residue/value independent-family argument."
+  },
+  {
+   "tool": "grep",
+   "query": "fundamental.*inequality|ramificationIdx_mul_inertiaDeg|inertiaDeg_le_finrank",
+   "results": "{\"t\": \"2026-10-24T09:04:14Z\", \"tool\": \"grep\", \"query\": \"fundamental.*inequality|ramificationIdx_mul_inertiaDeg|inertiaDeg_le_finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/Analysis/ODE/Gronwall.lean\", \"Mathlib/Analysis/Normed/Module/Multilinear/Basic.lean\", \"Mathlib/MeasureTheory/Integral/Bochner/VitaliCaratheodory.lean\"], \"digest\": \"292a66dac07d82ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ef and inertia hits require Dedekind rings finite over the base, whereas arbitrary compatible real-valued valuations need not be discrete or module finite; the minpoly, local-field and Profinite hits do not assert this inequality or the residue/value independent-family argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue field degree times ramification index bounded by finite extension degree for arbitrary valuation rings",
+   "results": "{\"t\": \"2026-10-24T09:04:15Z\", \"tool\": \"leansearch\", \"query\": \"Residue field degree times ramification index bounded by finite extension degree for arbitrary valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_le_finrank\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Valued.ResidueField\", \"Ideal.inertiaDeg_le_finrank\", \"Ideal.sum_ramification_inertia\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"IsLocalRing.ResidueField.finite_of_finite\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\"], \"digest\": \"50087b0384730fbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ef and inertia hits require Dedekind rings finite over the base, whereas arbitrary compatible real-valued valuations need not be discrete or module finite; the minpoly, local-field and Profinite hits do not assert this inequality or the residue/value independent-family argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearly independent residue lifts multiplied by representatives of distinct value cosets are linearly independent",
+   "results": "{\"t\": \"2026-10-24T09:04:17Z\", \"tool\": \"leanfinder\", \"query\": \"Linearly independent residue lifts multiplied by representatives of distinct value cosets are linearly independent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.linearIndependent\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval\", \"Profinite.NobelingProof.GoodProducts.linearIndependentSingleton\", \"Ideal.FinrankQuotientMap.linearIndependent_of_nontrivial\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_iff_range\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_iff_smaller\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_iff_sum\", \"Profinite.NobelingProof.GoodProducts.linearIndependentEmpty\"], \"digest\": \"7bce0865c9ca7a82\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ef and inertia hits require Dedekind rings finite over the base, whereas arbitrary compatible real-valued valuations need not be discrete or module finite; the minpoly, local-field and Profinite hits do not assert this inequality or the residue/value independent-family argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-type-alternatives",
+  "date": "2026-10-24",
+  "group": "Q116"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: §6.2 opening, printed pp. 41–42, Remark 6.2.2; first paragraph of proof of Theorem 6.3.1, p. 49 (residue separating coordinate and cyclic value coordinate). Supporting input: Section 2.1, finite-extension fundamental inequality, printed pp. 7–8.",
+   "via": [
+    "lem-trf-analytic-type-alternatives",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-valued-extension-degree-bound",
+  "worker": "stage1",
+  "summary": "Checked the original Temkin fundamental inequality and the complete local Stacks proof, Tag 0ASH. Wrote the finite normalization/reduction argument and explicit termination proofs for the residue basis and quotient representatives. Reused the existing independent-family dimension Mathlib leaf, adding no nodes. Mathematical statement unchanged; normalized inherited doubled TeX backslashes.",
+  "blueprint": "Retains the semistable-alteration ancestry of lem-trf-local-term-locality proof (1)–(2), through analytic uniformization. This is the finite-extension residue/value bound used in the analytic-type alternatives; the latest ancestor and unit were read, with no replacement of their geometric route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-f6a6a50a0",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-f6a6a50a0 (reviewer sub-agent of L); spot-checked: Read the full item (7 steps) against Stacks more-algebra.tex Tag 0ASH (lemma-inequality-general, lines 37334-37383) and Tag 0ASG (local extension, value-group map). Temkin's paper is not held locally and the report lists it as WANTED, so proof_origin rightly follows Stacks. The statement is the absolute-value specialization of 0ASH and is unchanged from base apart from TeX normalization: both finiteness claims and ef<=n are kept, and no completeness or discreteness is assumed. Small cases: H=F gives (1,1,1); trivial absolute values give e=1, f=n; Q_p(sqrt p) gives (2,1,2); a defect extension gives a strict inequality. Step checks: Step 1 shows the norm-<=1 ring is a valuation ring in the sense of the cited definition, the quotient is a field, the residue map is injective and Gamma_F is a subgroup of Gamma_H. Steps 2-3 are the 0ASH proof written multiplicatively: the norm-maximizing term gives a nonzero a0; terms with j!=j0 have norm <1 by the distinct-coset argument; reducing the j0 column gives a nontrivial residue relation. Step 4 cites lem-weil-independent-family-card-le-dimension, a Mathlib leaf (LinearIndependent.fintype_card_le_finrank, Finite.lean:161-164, read), so it is not a route departure. Steps 5-6 are greedy termination arguments for the residue basis and the cosets; Step 7 gives ef<=n with no circularity. No new nodes. DAG duplicate search found none: lem-trf-valued-finite-ramification-calculus covers complete fields only and is broader, abhyankar/value-group-torsion state different results. The citers (analytic-type-alternatives, type23-stability) use only the finiteness of e and f. Mathlib searches cover all three kinds and the no-match verdict is justified. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.ValuedExtensionDegreeBound",
+  "declaration": "Valuation.valued_extension_degree_bound",
+  "file": "lean/Sheaf/FieldTheory/ValuedExtensionDegreeBound.lean",
+  "statement": "theorem valued_extension_degree_bound (F : Type u) (H : Type v) [Field F] [Field H] [Algebra F H] [FiniteDimensional F H] (v : Valuation H NNReal) : @Module.Finite (IsLocalRing.ResidueField (v.valuationSubring.comap (algebraMap F H))) (IsLocalRing.ResidueField v.valuationSubring) _ _ (@Algebra.toModule _ _ _ _ (v.valuationSubring.comapResidueAlgebra (algebraMap F H))) ∧ Finite ((Units.map (v : H →* NNReal)).range ⧸ ((Units.map ((v.comap (algebraMap F H)) : F →* NNReal)).range.subgroupOf (Units.map (v : H →* NNReal)).range)) ∧ ((Units.map ((v.comap (algebraMap F H)) : F →* NNReal)).range.relIndex (Units.map (v : H →* NNReal)).range) * @Module.finrank (IsLocalRing.ResidueField (v.valuationSubring.comap (algebraMap F H))) (IsLocalRing.ResidueField v.valuationSubring) _ _ (@Algebra.toModule _ _ _ _ (v.valuationSubring.comapResidueAlgebra (algebraMap F H))) ≤ Module.finrank F H",
+  "branch": "sheaf-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4719bdfc",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: v : Valuation H NNReal with comap restriction gives exactly the compatible pairs (no nontriviality/completeness/discreteness); integer rings via valuationSubring and its comap; canonical residue algebra from the landed def-trf-valuation-comap-residue (comapResidueAlgebra = ResidueField.map of comapInclusion); value groups are Units.map ranges in NNReal units; Module.Finite and Finite(Γ_H/Γ_F) stated separately, plus relIndex*finrank ≤ finrank F H (Mathlib relIndex H K = index of H.subgroupOf K). Node diff vs side-live is only the added stmt_dep (landed 2026-10-17, on base); lean.statement verbatim in file; independent universes u v. Edge cases F=H, trivial v, defect extensions, any characteristic covered. No new defs, proof is sorry only, docstrings carry source/blueprint/7 steps, report has Worker report and Second reading sections. No duplicate in lean/Sheaf. No findings; no files changed, so no compile."
+ }
+}

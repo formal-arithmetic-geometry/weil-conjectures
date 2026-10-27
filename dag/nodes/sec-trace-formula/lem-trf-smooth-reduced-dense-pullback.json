@@ -1,0 +1,316 @@
+{
+ "id": "lem-trf-smooth-reduced-dense-pullback",
+ "kind": "statement",
+ "title": "Reducedness and generic density under smooth pullback",
+ "statement": "Let $S$ be a reduced locally Noetherian scheme [def-pc-reduced-scheme, pqf-def-locnoeth], and let $h:T\\to S$ be a smooth morphism [def-sbc-smooth-morphisms]. Then $T$ is reduced and locally Noetherian. Every generic point of an irreducible component of $T$ maps to a generic point of an irreducible component of $S$ [def-sc-generic-point, def-weil-irreducible-components]. For every dense open subset $U\\subseteq S$, the inverse image $h^{-1}U$ is dense in $T$, and in each irreducible component of $T$. In particular, if $J\\subseteq\\mathcal O_S$ is a quasi-coherent ideal of finite type [pqf-def-coherent] with nowhere dense zero set, its extended ideal $J\\mathcal O_T$ [def-nagata-extended-ideal] also has nowhere dense zero set. Empty schemes and smooth morphisms whose images omit entire components of $S$ are allowed; no surjectivity or separatedness is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose VIII Lemma 2.2.9, printed p.91, reducedness and maximal-domination inputs; density input to 2.2.7--2.2.8 and lem-trf-local-term-locality proof (1)--(2). Stacks Tags 034E (descent.tex, lemma-reduced-local-smooth), 01UA (morphisms.tex, lemma-fppf-open), and 00HS (algebra.tex, lemma-flat-going-down)."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-sbc-smooth-morphisms",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pc-smooth-flat], $h$ is flat and locally of finite presentation. The affine presentations of [def-sbc-locally-finite-presentation] are quotients of polynomial rings in finitely many variables, hence are finitely generated algebras; thus $h$ is locally of finite type in [def-weil-finite-type-morphism]. Apply [pqf-lem-locnoeth-lft] to the locally Noetherian base $S$ to obtain that $T$ is locally Noetherian.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VF (lemma-smooth-flat), 01VE (lemma-smooth-locally-finite-presentation), 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "By [sbc-lem-smooth-geometrically-reduced], $h$ has geometrically reduced fibres. For a field $K$ and a morphism $\\operatorname{Spec}K\\to S$ with image $s$, the morphism factors through $\\operatorname{Spec}\\kappa(s)$, and the universal property of [def-pc-fibre-product] identifies $T\\times_S\\operatorname{Spec}K$ with $T_s\\times_{\\kappa(s)}\\operatorname{Spec}K$, which is reduced because the fibre $T_s$ is geometrically reduced. Together with flatness from step 1 this verifies the hypotheses of [lem-sfb-flat-geometrically-reduced-pullback]. Apply that statement to $h:T\\to S$ and the identity $S\\to S$: its reduced locally Noetherian base-change scheme is the given $S$, and its conclusion says $S\\times_S T$ is reduced. The maps $T\\to S\\times_S T$ given by $(h,\\operatorname{id}_T)$ and the second projection are inverse by the fibre-product universal property [def-pc-fibre-product]. Thus $T$ is reduced.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034E (lemma-reduced-local-smooth), ascent direction; geometric-fibre input: morphisms.tex Tag 01VB (lemma-base-change-smooth), varieties.tex Tag 056T (lemma-smooth-geometrically-normal)."
+   }
+  },
+  {
+   "text": "Let $C$ be an irreducible component of $T$, with generic point $\\xi$, and put $s=h(\\xi)$. By [lem-sc-irreducible-components-cover], choose a component $D$ of $S$ containing $s$, and let $\\eta$ be its generic point, supplied by [lem-sc-scheme-sober]. Then $s\\in\\overline{\\{\\eta\\}}$. Flat generalization lifting [lem-weil-pbc-flat-generalizations-lift] gives $\\xi\\prime$ with $h(\\xi\\prime)=\\eta$ and $\\xi\\in\\overline{\\{\\xi\\prime\\}}$. The irreducible closed set $\\overline{\\{\\xi\\prime\\}}$ contains $C=\\overline{\\{\\xi\\}}$, so maximality of $C$ makes it equal to $C$. Uniqueness of its generic point by [lem-sc-scheme-sober] gives $\\xi\\prime=\\xi$. Consequently $h(\\xi)=\\eta$. Here specialization is explicitly in the direction $\\eta\\rightsquigarrow s$ and $\\xi\\prime\\rightsquigarrow\\xi$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "def-weil-irreducible-components",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HV (lemma-generalizations-lift-flat), equivalently algebra.tex Tag 00HS (lemma-flat-going-down); schemes.tex Tag 01IS (lemma-scheme-sober), topology.tex Tag 004W (lemma-irreducible)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-lfp-open], the flat locally finitely presented $h$ of step 1 is open. Given a nonempty open $W\\subseteq T$, its image $h(W)$ is nonempty and open in $S$. Density of $U$ gives a point of $h(W)\\cap U$, and by the definition of image this point lifts to $W\\cap h^{-1}U$. Hence every nonempty open of $T$ meets $h^{-1}U$, proving density. This argument imposes no surjectivity condition on $h$.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UA (lemma-fppf-open); the density argument is written out from the definition."
+   }
+  },
+  {
+   "text": "We also need density on each component. Every component $D$ of $S$ has generic point $\\eta_D$ by [lem-sc-scheme-sober]. By [lem-sc-locnoeth-components-locally-finite], take an open neighbourhood $N$ of $\\eta_D$ meeting only finitely many components. The point $\\eta_D$ belongs to no component other than $D$: a closed component containing it contains its closure $D$, so equals $D$ by maximality. Remove from $N$ all the other components it meets. The result is a nonempty open subset $N_0$ of $S$, contained in $D$ because the components cover $S$ by [lem-sc-irreducible-components-cover]. Since $U$ is dense, $N_0\\cap U$ is nonempty. An open of $D$ meeting $D=\\overline{\\{\\eta_D\\}}$ contains $\\eta_D$, so $\\eta_D\\in U$. Step 3 now puts every component generic point $\\xi$ of $T$ in $h^{-1}U$. Its closure is its component $C$, so $C\\cap h^{-1}U$ is dense in $C$. The components cover $T$, giving the density in $T$ as well.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-locnoeth-components-locally-finite",
+    "lem-sc-irreducible-components-cover",
+    "def-weil-irreducible-components",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 004V (definition-irreducible-components), 004W (lemma-irreducible), 0052 (lemma-Noetherian), applied locally on S; schemes.tex Tag 01IS (lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "Put $Z=V(J)$, with its defining closed immersion into $S$, and $P=T\\times_S Z$. By [lem-weil-pbc-closed-immersion-base-change], $p:P\\to T$ is a closed immersion. Its kernel ideal is exactly $J\\mathcal O_T$ by [def-nagata-extended-ideal], and [lem-weil-pbc-closed-immersion-image-zero-locus] identifies its zero set with $p(P)$. To identify this set, take affine opens $V=\\operatorname{Spec}A$ of $S$ and $W=\\operatorname{Spec}B\\subseteq h^{-1}V$ of $T$, and set $I=J(V)$. The affine description of a closed immersion in [def-sbc-closed-immersion-ideal-sheaf] gives $Z|_V=\\operatorname{Spec}(A/I)$. By [lem-weil-pbc-fibre-product-affine-spectra], its pullback over $W$ is $\\operatorname{Spec}(B\\otimes_A A/I)$. This algebra is $B/IB$: the inverse homomorphisms send $b\\otimes\\bar a$ to $b h^\\sharp(a)$ modulo $IB$ and $\\bar b$ to $b\\otimes1$; the tensor and quotient relations make both well-defined. A prime $\\mathfrak q$ of $B$ contains $IB$ exactly when its contraction to $A$ contains $I$. Applying the cited image-zero-locus statement on these charts therefore gives $V(J\\mathcal O_T)=h^{-1}V(J)$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-nagata-extended-ideal",
+    "lem-weil-pbc-closed-immersion-image-zero-locus",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IN (lemma-closed-subspace-scheme), 01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines); morphisms.tex Tag 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "The closed set $V(J)$ is nowhere dense by hypothesis, so $U=S\\setminus V(J)$ is dense open. Step 4 makes $h^{-1}U$ dense in $T$, and step 6 identifies its closed complement with $V(J\\mathcal O_T)$. A closed subset with dense complement has empty interior and is nowhere dense, proving the ideal assertion. If $T$ is empty all source conclusions are vacuous; if $S$ is empty then $T$ is empty as well. Every preceding argument is local or concerns points actually in the image; omitted components, nonseparated schemes, and $J=\\mathcal O_S$ cause no exception.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.2.7--2.2.9, printed pp.90--91, preservation of nowhere dense centres under the permitted pullback; assembly from steps 1--6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "pqf-lem-locnoeth-lft",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "def-pc-fibre-product",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-nagata-extended-ideal",
+  "lem-weil-pbc-closed-immersion-image-zero-locus",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of Tags 01VF, 01VE, 01T6, 03HV, 01UA with descent.tex 034E, varieties.tex 056T, topology.tex 004W/0052, schemes.tex 01IS/01IN/01I4; expands the smooth-pullback inputs of ILO VIII 2.2.7--2.2.9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-smooth-reduced-dense-pullback: For a flat open morphism with geometrically reduced fibres the source over a reduced scheme is reduced and the inverse image of a dense open is dense",
+   "results": "8 hits; AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE",
+   "date": "2026-10-22",
+   "verdict": "no full match: the flat geometrically reduced theorem gives reducedness with an additional geometric-reducedness input; it does not state smooth maximal domination and dense-open pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth|flat).*(reduced|generic|dense)|(reduced|generic|dense).*(smooth|flat)",
+   "results": "25 hits; Mathlib/Topology/MetricSpace/HausdorffDimension.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Analysis/Calculus/BumpFunction/SmoothApprox.lean, Mathlib/Analysis/Calculus/BumpFunction/SmoothApprox.lean, Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean, Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean, Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean, Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean",
+   "date": "2026-10-22",
+   "verdict": "no full match: the flat geometrically reduced theorem gives reducedness with an additional geometric-reducedness input; it does not state smooth maximal domination and dense-open pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsReduced",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no full match: the flat geometrically reduced theorem gives reducedness with an additional geometric-reducedness input; it does not state smooth maximal domination and dense-open pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-reduced-dense-pullback: A smooth morphism to a reduced locally noetherian scheme has reduced source and takes generic points to generic points; dense open subsets pull back to dense open subsets",
+   "results": "8 hits; AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no full match: the flat geometrically reduced theorem gives reducedness with an additional geometric-reducedness input; it does not state smooth maximal domination and dense-open pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-reduced-dense-pullback: A smooth scheme morphism over a reduced locally noetherian base has reduced source and its open map preserves density of inverse image of open subsets",
+   "results": "8 hits; AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no full match: the flat geometrically reduced theorem gives reducedness with an additional geometric-reducedness input; it does not state smooth maximal domination and dense-open pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsReduced",
+   "results": "{\"t\": \"2026-10-23T11:09:07Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth|flat).*(reduced|generic|dense)|(reduced|generic|dense).*(smooth|flat)",
+   "results": "{\"t\": \"2026-10-23T11:10:19Z\", \"tool\": \"grep\", \"query\": \"(smooth|flat).*(reduced|generic|dense)|(reduced|generic|dense).*(smooth|flat)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"425f4f3043da7497\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism over a reduced locally Noetherian scheme has reduced source and preserves generic points and inverse images of dense open subsets",
+   "results": "{\"t\": \"2026-10-23T11:10:19Z\", \"tool\": \"leansearch\", \"query\": \"A smooth morphism over a reduced locally Noetherian scheme has reduced source and preserves generic points and inverse images of dense open subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"409ca685af6f7511\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism over a reduced locally Noetherian scheme has reduced locally Noetherian source and takes component generic points to component generic points, with dense inverse images of dense opens",
+   "results": "{\"t\": \"2026-10-23T11:10:20Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism over a reduced locally Noetherian scheme has reduced locally Noetherian source and takes component generic points to component generic points, with dense inverse images of dense opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsPreimmersion\"], \"digest\": \"762ab6a27404762a\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For flat open maps of schemes generic points map to generic points and dense open subsets pull back to dense subsets in each irreducible component",
+   "results": "{\"t\": \"2026-10-23T11:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"For flat open maps of schemes generic points map to generic points and dense open subsets pull back to dense subsets in each irreducible component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.IsDominant.denseRange\"], \"digest\": \"ae27b6d6fe9aa3c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma Flat.generalizingMap|def GeneralizingMap",
+   "results": "{\"t\": \"2026-10-23T11:17:37Z\", \"tool\": \"grep\", \"query\": \"lemma Flat.generalizingMap|def GeneralizingMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/Topology/Inseparable.lean\"], \"digest\": \"cef428bd979fb0d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat morphisms of schemes lift generalizations of points",
+   "results": "{\"t\": \"2026-10-23T11:17:37Z\", \"tool\": \"leansearch\", \"query\": \"Flat morphisms of schemes lift generalizations of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.mk\", \"RingHom.Flat.generalizingMap_comap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"ef67a6f4cd78993b\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat.generalizingMap",
+   "results": "{\"t\": \"2026-10-23T11:17:38Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat.generalizingMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\"], \"digest\": \"0cff4acc9b5241f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat morphisms of schemes lift generalizations: if f(x) lies in the closure of y then x lies in the closure of some x prime with f(x prime) equal to y",
+   "results": "{\"t\": \"2026-10-23T11:17:38Z\", \"tool\": \"leanfinder\", \"query\": \"Flat morphisms of schemes lift generalizations: if f(x) lies in the closure of y then x lies in the closure of some x prime with f(x prime) equal to y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"RingHom.Flat.generalizingMap_comap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"8bb501cbcb34e795\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: hits cover individual inputs already cited as existing DAG nodes, not the complete multi-clause statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalized-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO Expose VIII Lemma 2.2.9, printed p.91, reducedness and maximal-domination inputs; density input to 2.2.7--2.2.8 and lem-trf-local-term-locality proof (1)--(2). Stacks Tags 034E (descent.tex, lemma-reduced-local-smooth), 01UA (morphisms.tex, lemma-fppf-open), and 00HS (algebra.tex, lemma-flat-going-down).",
+   "via": [
+    "lem-trf-normalized-blowup-calculus",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-reduced-dense-pullback",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement with seven explicit steps and no new nodes. Reused the existing flatness, geometric reducedness, reduced pullback, Noetherian ascent, generalization lifting, openness, local finiteness of components, sobriety and affine closed-pullback nodes. Checked specialization direction, density on individual components, and equality of extended-ideal zero sets. No project declaration states the full result.",
+  "blueprint": "Generic geometric input below lem-trf-local-term-locality proof (1)--(2), through the normalized-blowup/desingularization chain: ILO VIII 2.2.7--2.2.9, printed pp.90--91, preservation of reduced schemes, component generic points and nowhere dense centres by smooth pullback. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme tool: smooth fibres are geometrically reduced; the trace unit has no statement of this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Generic topological tool: local finiteness permits isolating an open part of each base component, needed for componentwise density; no trace-unit statement gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-locnoeth-components-locally-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-ebc44f41f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-ebc44f41f (reviewer sub-agent of L); spot-checked: I read the item, all 24 cited nodes in full, the report, and the sources at the cited places: Stacks 034E (descent.tex:4952) and ILO VIII 2.2.7-2.2.9 (PDF pp.96-97). There is no SGA. The delivery adds no new nodes and leaves the statement unchanged; the statement is true. I checked the edge cases: T or S empty, images that miss whole components, J=O_S, J=0 (excluded by the hypothesis), and non-separated schemes. Step-by-step: step 1 is correct (flat, locally of finite presentation, then locally of finite type, then locally Noetherian). Step 2 left a gap: it did not show why 'geometrically reduced fibres' gives the field-point hypothesis T x_S Spec K reduced. I added that by factoring through Spec kappa(s). Step 3 is correct: generalizations lift in the right direction, and maximality plus uniqueness of generic points gives h(xi)=eta. Step 4 is correct (openness gives density). Step 5 is correct: local finiteness isolates an open N_0 inside D, so eta_D is in U, which gives density on each component. Step 6 is correct: B tensor_A A/I = B/IB, the extended ideal is the kernel of p, and V(J O_T)=h^{-1}V(J). Step 7 is elementary. I accept both declared tool_uses: sbc-lem-smooth-geometrically-reduced and lem-sc-locnoeth-components-locally-finite, both generic. No duplicates: lem-trf-flat-generic-component-incidence and lem-sbc-flat-closed-fibre-interior state different things. Mechanical finding, confirmed: step 2 cites lem-per-flat-geometrically-reduced-pullback, a node of the dropped 2026-10-19 Q144 Artin-Gabber route (its via runs through Gabber uniformization and Qbar duality), and the delivery gives no justification. The report even names the replacement lem-sfb-flat-geometrically-reduced-pullback, which has the same statement verbatim, the same Mathlib instance (Reduced.lean:128-130), and an NJ PASS. FIX: step 2 uses and proof_deps now cite the sfb node, with the added hypothesis sentence. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-smooth-reduced-dense-pullback.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothReducedDensePullback",
+  "declaration": "AlgebraicGeometry.smooth_reduced_dense_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothReducedDensePullback.lean",
+  "statement": "theorem smooth_reduced_dense_pullback {S T : Scheme.{u}} [IsReduced S] [IsLocallyNoetherian S] (h : T ⟶ S) [Smooth h] : IsReduced T ∧ IsLocallyNoetherian T ∧ (∀ (C : Set T), C ∈ irreducibleComponents T → ∀ (ξ : T), IsGenericPoint ξ C → ∃ D : Set S, D ∈ irreducibleComponents S ∧ IsGenericPoint (h ξ) D) ∧ (∀ (U : S.Opens), Dense (U : Set S) → Dense (h ⁻¹' (U : Set S)) ∧ ∀ (C : Set T), C ∈ irreducibleComponents T → Dense ((Subtype.val : C → T) ⁻¹' (h ⁻¹' (U : Set S)))) ∧ (∀ (J : S.IdealSheafData), Scheme.Modules.IsQuasiCoherentFiniteType J.toModules → IsNowhereDense (J.support : Set S) → IsNowhereDense ((J.comap h).support : Set T))",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d766e78f5",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Only the node's lean field changed and lean.statement matches the file exactly. Every clause matches the node: reduced, locally Noetherian S; smooth h; T reduced and locally Noetherian; component generic points map to component generic points; dense opens pull back densely in T and in each component (subspace topology); for a quasi-coherent finite-type J (IdealSheafData.toModules is the ideal sheaf) with nowhere dense zero set, J.comap h also has nowhere dense zero set. IdealSheafData.support is the zero locus V(J). Edge cases checked: empty T or S, images missing components, J=top, J=bot. Gates met: no definitions, sorry only, source and blueprint docstrings, all 7 proof steps. def-weil-irreducible-components has no lean record; Mathlib irreducibleComponents matches it. Not recompiled per the 2026-10-21 rule; the worker reports a clean compile and dry run."
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-completed-cech-tensor-transport",
+ "kind": "statement",
+ "title": "Completed coefficient and site transport commute with total tensor and the unit",
+ "statement": "Let X be a scheme, d an adic coefficient datum, C an arbitrary complex of modules over its actual completed coefficient sheaf, P its coefficient presentation and N its small-site transport. Write F for inverse coefficient restriction followed by site equivalence [def-weil-pbc-completed-cech-site-transport], and H=F on complexes. The functor K ↦ H(Tot(P tensor K)) is naturally isomorphic to K ↦ Tot(N tensor H(K)). For each finite exterior Koszul complex K_m and its named degree-zero unit u, the comparison sends the transported (q,0) tensor inclusion c ↦ c tensor u, preceded by the identity-on-sections coefficient round trip, to the (q,0) inclusion c ↦ c tensor F(u), using the transported regular-module section 1. The natural isomorphism is general in K; its unit clause is specialized to K_m. This statement contains no exterior-to-dual identification or tower-transition requirement.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Modules on Sites, Tags 03DA and 03EK, balanced tensors and sheafification; Tag 0A0E, proof of lemma-derived-completion-koszul: tensor with E after the finite coefficient comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-cech-site-transport",
+  "def-weil-pbc-intrinsic-completion",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary module tensor comparison and its normalized right unit from lem-weil-pbc-completed-module-tensor-transport. The coefficient-back functor and completed site functor are equivalences, so their composite preserves all coproducts.",
+   "uses": [
+    "lem-weil-pbc-completed-module-tensor-transport",
+    "def-weil-pbc-completed-cech-site-transport",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply HomologicalComplex.mapBifunctorComparisonNatTrans to the ordinary bifunctor isomorphism; its summand formula map_ιMapBifunctor_mapBifunctorComparisonX provides the total-complex comparison. Map the inverse of the specified intrinsicPresentationRoundTrip degreewise to identify H(P) with N and postcompose with tensoring by this chain isomorphism. Naturality of the round trip proves compatibility with the differential.",
+   "uses": [
+    "lem-weil-pbc-completed-module-tensor-transport",
+    "def-weil-pbc-intrinsic-completion",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the named Koszul unit, expand completedKoszulTensorUnit into the inverse right unitor, tensor of UnitZero, and the (q,0) summand inclusion. The comparison summand equation and naturality in UnitZero reduce this to the ordinary right-unit normalization. Move the inverse round trip past tensoring by whisker exchange and right-unitor naturality, then cancel the round trip with its inverse. This gives exactly the displayed equation.",
+   "uses": [
+    "lem-weil-pbc-completed-module-tensor-transport",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-ringed-koszul-system",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-module-tensor-transport",
+  "def-weil-pbc-completed-cech-site-transport",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Modules on Sites, Tags 03DA and 03EK, balanced tensors and sheafification; Tag 0A0E, proof of lemma-derived-completion-koszul: tensor with E after the finite coefficient comparison.",
+  "note": "F5 implements totalization, the coefficient round trip, and the unit calculation using the adopted source HomologicalComplex comparison API; only the ordinary module comparison is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The exterior Koszul complex on a finite sequence is the dual of the tensor product of two term complexes",
+   "results": "8 hits: tensorObj, PiTensorProduct.dualDistribInvOfBasis, ModuleCat.exteriorPower, PiTensorProduct.dualDistrib, ModuleCat.exteriorPower.iso₀, HasTensor, PiTensorProduct.dualDistribEquiv, ExteriorAlgebra. No comparison of these complex models.",
+   "date": "2026-10-25",
+   "verdict": "No direct theorem; use the existing exterior and tensor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"Iso\"",
+   "results": "10 hits, the degree-zero and degree-one natural isomorphisms only.",
+   "date": "2026-10-25",
+   "verdict": "No finite augmented tower comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(dual|tensor)|Koszul.*(dual|tensor)",
+   "results": "No Mathlib hits. Local source search found completedKoszulPowerSheaf, ringedKoszulDualTower, mapBifunctorComparison and sliceTensorIso; none states the required comparison across both coefficient restriction and this site equivalence.",
+   "date": "2026-10-25",
+   "verdict": "The finite coefficient comparison and the tensor transport are distinct missing ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedKoszulRoosComparison",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Modules on Sites, Tags 03DA and 03EK, balanced tensors and sheafification; Tag 0A0E, proof of lemma-derived-completion-koszul: tensor with E after the finite coefficient comparison.",
+   "via": [
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedTensorTransport",
+  "file": "lean/Sheaf/Paper/WeilCompletedTensorTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedCechTensorTransport",
+  "statement": "theorem completedCechTensorTransport (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) : letI := SheafOfModules.isMonoidal_W_independentCoefficients (adicDatumRing X (intrinsicPresentationDatum d)) letI := SheafOfModules.monoidalCategory (adicDatumRing X (intrinsicPresentationDatum d)) letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients (adicDatumRing X (intrinsicPresentationDatum d)) letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients (adicDatumRing X (intrinsicPresentationDatum d)) let G := (completedCechModulesEquiv X d).functor let F := intrinsicPresentationModulesBack X d ⋙ G let H := F.mapHomologicalComplex (.up ℤ) let P := (intrinsicPresentationComplex X d).obj C let O := completedCechRing X d let N := (G.mapHomologicalComplex (.up ℤ)).obj C let L := ((curriedTensor _).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ)).obj P ⋙ H let R := H ⋙ (ringedKoszulTensor O).obj N ∃ e : L ≅ R, ∀ (r : ℕ) (a : Fin r → A) (m : ℕ) (q : ℤ), G.map ((intrinsicPresentationRoundTrip X d).hom.app (C.X q) ≫ (intrinsicPresentationModulesBack X d).map ((completedKoszulTensorUnit X (intrinsicPresentationDatum d) r a P m).f q)) ≫ (e.hom.app (completedKoszulPowerSheaf X (intrinsicPresentationDatum d) r a m)).f q = letI := SheafOfModules.monoidalCategory O (ρ_ (N.X q)).inv ≫ N.X q ◁ (completedCechCoefficientUnit X d ≫ F.map (completedKoszulSheafUnitZero X (intrinsicPresentationDatum d) r a m)) ≫ HomologicalComplex.ιMapBifunctor N (H.obj (completedKoszulPowerSheaf X (intrinsicPresentationDatum d) r a m)) (curriedTensor _) (.up ℤ) q 0 q (add_zero q)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70624",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T162026-L-211085",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T201940-L-2657199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

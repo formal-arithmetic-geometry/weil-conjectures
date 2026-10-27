@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-open-tensor-scalar-unit-pairing",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "kind": "statement",
+ "title": "Strict scalar-unit pairings before the open projection comparison",
+ "statement": "Under the site, ring, universe and sheafification hypotheses of def-sf-open-tensor-scalar-unit-data, every strict inverse system A of unital commutative R-algebra sheaves admits StrictTotals and natural chain maps cT and cS from the constant source and slice-source towers. Their values on homogeneous pure generators insert the scalar 1 into each of the two scalar-extension factors. The transitions send each of the two coefficient entries through the prescribed coefficient ring map. This asserts neither an open comparison isomorphism nor an augmentation square.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03DI and 0E8I; sites-cohomology.tex Tag 0GL1. Extracted construction from lem-sf-open-tensor-scalar-unit-augmentation."
+ },
+ "stmt_deps": [
+  "def-sf-open-tensor-scalar-unit-data"
+ ],
+ "proof": [
+  {
+   "text": "We use the sheaf tensor universal property and bilinear sheafification uniqueness, not surjectivity on sections. A map from $j_{B!}M\\otimes_BN$ is determined by $[x]_f\\otimes y$: compare the two associated bilinear pairings after precomposition by $P_M\\times N$; the formulas agree on each summand, hence on finite sums, and uniqueness of bilinear extension and the tensor universal property give equality. For the iterated source $((j_{B!}M)\\otimes_B A_n)\\otimes_{A_n}(N\\otimes_B A_n)$, apply the tensor universal property first to the outer tensor, then to each inner tensor, and the same bilinear-extension uniqueness to $P_M$. It suffices to test $([x]_f\\otimes a)\\otimes(y\\otimes b)$ for original sections over each $W$. On the slice the same argument omits $P_M$. These are repeated universal-property applications. Finally a map from a total direct sum is determined by its summand composites. Extension $j_{B!}$ preserves these sums since it is a left adjoint; the discrete indexing sets $\\{(p,q):p+q=d\\}$ are small. Thus these tests apply degreewise also to extended totals.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 0GMW (lemma-sheafification-tensor), uniqueness; categories.tex Tag 0038 (lemma-adjoint-exact), coproduct preservation"
+   }
+  },
+  {
+   "text": "For any $B$-module sheaf $M$, $s\\mapsto s\\otimes1$ is a $B$-linear map to the underlying $B$-module of $M\\otimes_BA_n$: $(cs)\\otimes1=s\\otimes c=c(s\\otimes1)$. It commutes with restrictions. The pairing $(s,y)\\mapsto(s\\otimes1)\\otimes(y\\otimes1)$ is $B$-bilinear, so the sheaf tensor universal property defines the degreewise $c_{T,n}$; use $s=[x]_f$ for the stated formula. The identical construction over $B_V$ defines $c_{S,n}$. The restriction tensor comparison identifies $j^*(y\\otimes1)$ with $j^*y\\otimes1$. For $x$ in degree $p$ and $y$ in degree $q$, both the differential after augmentation and the augmentation after differential are the sum of the terms obtained by replacing $x$ with $dx$ and by replacing $y$ with $dy$, the second multiplied by $(-1)^p$. Thus these maps totalize to chain maps. A transition $q_{m,n}$ takes each inserted $1$ to $1$; hence both components commute with every transition and define the asserted maps out of constant strict towers. Identity and composition of transitions follow from $q_{n,n}=1$ and $q_{l,n}=q_{m,n}q_{l,m}$ on each coefficient factor.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-inverse-system",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar unit; agent signed-total and unital-transition calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-inverse-system",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03DI and 0E8I; sites-cohomology.tex Tag 0GL1. Extracted construction from lem-sf-open-tensor-scalar-unit-augmentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with tensor scalar unit maps in strict coefficient towers of complexes",
+   "results": "Eight hits including SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.unitHomEquiv_comp_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul and ModuleCat.extendRestrictScalarsAdj_unit_app_apply; no strict open total-tensor tower construction.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the sheaf tensor universal properties and totalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "Ten hits on PresheafOfModulesOfCommRing tensor definitions and naturality; no strict scalar-unit tower or normalized open total comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match. Existing project module comparisons are the relevant inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison|scalarUnits|StrictTotals|targetLevel|sliceTargetLevel",
+   "results": "Mathlib search for mapBifunctorComparison returned no hits. Project rg found generic mapBifunctorComparison in the adopted library and the StrictTotals/targetLevel declarations only in the assigned module.",
+   "date": "2026-10-25",
+   "verdict": "Generic totalization can lift natural module pairings; the two required strict constructions are not already stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenTensorScalarUnitAugmentation",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-tensor-scalar-unit-augmentation",
+   "place": "The scalar-unit construction and normalized comparison steps; unchanged unit route."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenTensorScalarUnitPairing",
+  "file": "lean/Sheaf/Algebra/Homology/OpenTensorScalarUnitPairing.lean",
+  "declaration": "SheafOfModules.OpenTensorAugmentation.scalarUnits_exists",
+  "declarations": [
+   "SheafOfModules.OpenTensorAugmentation.ScalarUnits",
+   "SheafOfModules.OpenTensorAugmentation.scalarUnits_exists"
+  ],
+  "statement": "theorem scalarUnits_exists (A : AlgebraTowers.{c, v, r} R) :\n    Nonempty (ScalarUnits.{c, v, r} R V A)",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e7691",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261024T191653-L-461485",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e7691",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261024T191653-L-461485",
+  "kind": "interface",
+  "note": "independent cc review: item augmentation_exists proof vs node lem-sf-open-tensor-scalar-unit-augmentation; relocated OpenTensorScalarUnitData vs clone's OpenTensorScalarUnitAugmentation (diff: tags only); ScalarUnits/NormalizedComparison leaves vs old Augmentation fields and their new nodes"
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-field-localization-tensor-comparison",
+ "kind": "statement",
+ "title": "Localization comparisons in a field tower",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "statement": "Let $k\\to L\\to H$ be a tower of field extensions [def-pc-field-extension], $R$ a commutative $k$-algebra, $S=R\\otimes_kL$, and $T=R\\otimes_kH$. Tensor products have multiplication $(r\\otimes a)(s\\otimes b)=rs\\otimes ab$ [def-weil-pbc-module-tensor-product]. Write $j:S\\to T$ for $r\\otimes l\\mapsto r\\otimes l$. Let $\\mathfrak q$ be a prime ideal of $S$ and $\\mathfrak p$ its inverse image in $R$. Set $A=R_{\\mathfrak p}$, $B=S_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], $V=R\\setminus\\mathfrak p$, and $U=S\\setminus\\mathfrak q$. There are canonical compatible identifications\n$$A\\otimes_kH\\cong V^{-1}T,\\qquad B\\otimes_LH\\cong j(U)^{-1}T.$$\nThe induced map $A\\otimes_kH\\to B\\otimes_LH$ is a localization at the images of $U$ under $S\\to T\\to V^{-1}T$. For every prime ideal $\\mathfrak Q$ of $T$ with $j^{-1}(\\mathfrak Q)=\\mathfrak q$, the canonical map $B\\otimes_LH\\to T_{\\mathfrak Q}$ is a further localization at the images of $T\\setminus\\mathfrak Q$. All maps agree on $T$: the last map sends a fraction $t/j(u)$ to the same fraction in $T_{\\mathfrak Q}$. The identifications respect the structural maps from $R$, $L$, and $H$ wherever defined. No finiteness or Noetherianity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C4Y (lemma-change-fields-flat), proof of (3): factor the local-ring map through scalar extension and then localize; applied to the tower k to L to H."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Identify $S\\otimes_LH$ with $T$ by [lem-weil-pbc-module-base-change-transitive], applied to $k\\to L\\to H$ and $M=R$: $\\theta((r\\otimes l)\\otimes h)=r\\otimes lh$, with inverse $r\\otimes h\\mapsto(r\\otimes1)\\otimes h$. These are ring maps: on two pure tensors the product formula of [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $rs\\otimes ll' hh'$ on both sides, and both maps send $1$ to $1$; additivity then gives multiplicativity on all elements. Under $\\theta$, $s\\otimes1$ maps to $j(s)$.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-transitive",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D2 (lemma-tensor-with-bimodule) and 00CX (lemma-tensor-product); the multiplication is the one in the item."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] to the base ring $k$, algebra and module $R$, multiplicative subset $V$, and module $H$. It gives an additive isomorphism $V^{-1}T\\to A\\otimes_kH$, $(r\\otimes h)/v\\mapsto(r/v)\\otimes h$. Its inverse sends $(r/v)\\otimes h$ to $(r\\otimes h)/(v\\otimes1)$. This inverse preserves products: the product of $(r/v)\\otimes h$ and $(r'/v')\\otimes h'$ goes to $(rr'\\otimes hh')/((vv')\\otimes1)$, the product of their images; it preserves $1$. Fractions generate $A$ additively, so these checks prove the ring identification. Here and below $V^{-1}T$ means localization at $M=\\{v\\otimes1:v\\in V\\}\\subset T$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), combined with 00D2 as in the cited node; fraction multiplication from Section 00CM."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] to the base ring $L$, algebra and module $S$, subset $U$, and module $H$. This identifies $B\\otimes_LH$ with the localization of $S\\otimes_LH$ at $u\\otimes1$ for $u\\in U$. The map is $(s/u)\\otimes h\\mapsto(s\\otimes h)/(u\\otimes1)$; the product of $(s/u)\\otimes h$ and $(s'/u')\\otimes h'$ maps to $(ss'\\otimes hh')/((uu')\\otimes1)$, the product of their images, and $1$ maps to $1$. Additivity extends this to all elements. Transport by $\\theta$ from step 1 gives $B\\otimes_LH\\cong N^{-1}T$ with $N=j(U)$, sending $(s/u)\\otimes h$ to $j(s)(1\\otimes h)/j(u)$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization) and 00D2 (lemma-tensor-with-bimodule); varieties Tag 0C4Y (lemma-change-fields-flat), proof of (3)."
+   }
+  },
+  {
+   "text": "If $v\\in V$, then $v\\otimes1\\notin\\mathfrak q$ by the definition $\\mathfrak p=\\mathfrak q\\cap R$. Thus $M\\subseteq N$. The map $A\\to B$, $r/v\\mapsto(r\\otimes1)/(v\\otimes1)$, exists by [lem-weil-pbc-ring-localization-universal-property]. Together with $H\\to B\\otimes_LH$, it induces $A\\otimes_kH\\to B\\otimes_LH$ by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. The formulas in steps 2 and 3 show that its composite with $T\\to M^{-1}T$ is $T\\to N^{-1}T$: on $r\\otimes h$ both give $(r\\otimes h)/1$. Clause (2) of [lem-weil-pbc-localization-of-localization], with ring $T$ and subsets $M\\subseteq N$, now says this map is localization at the images of $N=j(U)$ in $M^{-1}T$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization); transitivity in Section 00CM, made explicit by the cited localization-of-localization node."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak Q\\subset T$ with $j^{-1}(\\mathfrak Q)=\\mathfrak q$ and set $P=T\\setminus\\mathfrak Q$. Every $u\\in U$ has $j(u)\\notin\\mathfrak Q$, so $N\\subseteq P$. In particular the map $T\\to T_{\\mathfrak Q}$ sends all of $N$ to units. By [lem-weil-pbc-ring-localization-universal-property] it extends uniquely to $N^{-1}T\\to T_{\\mathfrak Q}$, $t/j(u)\\mapsto(t/1)(j(u)/1)^{-1}$. Clause (2) of [lem-weil-pbc-localization-of-localization], now for $N\\subseteq P$, proves that this is localization at the images of $P$, as asserted. Under step 3 this is the canonical map out of $B\\otimes_LH$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization); varieties Tag 0C4Y (lemma-change-fields-flat), proof of (3)."
+   }
+  },
+  {
+   "text": "The displayed maps agree on $T$ by their numerator formulas. Equality on pure tensors gives equality on the whole tensor product by [lem-weil-pbc-algebra-tensor-pushout-universal-property], and equality on $T$ extends uniquely across either denominator set by [lem-weil-pbc-ring-localization-universal-property]. The structural elements from $R$, $L$, and $H$ are respectively $r\\otimes1$, $1\\otimes l$, and $1\\otimes h$ in $T$ (with $l$ mapped into $H$). All formulas preserve these elements and hence all the asserted structural maps. This also proves compatibility of the two identifications with both localization arrows.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization) and the tensor-product universal property, Tag 00CX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-base-change-transitive",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-localization-of-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C4Y (lemma-change-fields-flat), proof of (3); explicit field-tower refinement using algebra.tex Tags 00D2, 00DK, 00CP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localization.*tensor|tensor.*localization|IsLocalization.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T06:45:06Z\", \"tool\": \"grep\", \"query\": \"localization.*tensor|tensor.*localization|IsLocalization.*[Tt]ensor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"370c6dc3d89252ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: IsLocalization.tensor/tensorRight and tensorProduct_tensorProduct in Mathlib/RingTheory/Localization/BaseChange.lean:270,278,358 cover individual base changes. The statement additionally compares the two denominator systems in a field tower and the further localization at a prescribed prime; these compatible identifications are not a single one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a localization of an algebra at a prime along a field extension is a further localization of the base changed local ring",
+   "results": "{\"t\": \"2026-10-22T06:45:06Z\", \"tool\": \"leansearch\", \"query\": \"Base change of a localization of an algebra at a prime along a field extension is a further localization of the base changed local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.tensor\", \"RingHom.IsStableUnderBaseChange.of_isLocalization\", \"IsLocalization.tensorRight\", \"Algebra.Extension.baseChange\", \"IsLocalizedModule.isBaseChange\", \"IsLocalization.Away.tensorRightEquiv\", \"isLocalizedModule_iff_isBaseChange\", \"Localization.AtPrime.instAlgebraOfLiesOver\"], \"digest\": \"8ca149ed2e1db514\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: IsLocalization.tensor/tensorRight and tensorProduct_tensorProduct in Mathlib/RingTheory/Localization/BaseChange.lean:270,278,358 cover individual base changes. The statement additionally compares the two denominator systems in a field tower and the further localization at a prescribed prime; these compatible identifications are not a single one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, Algebra.TensorProduct",
+   "results": "{\"t\": \"2026-10-22T06:45:07Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, Algebra.TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.TensorProduct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: IsLocalization.tensor/tensorRight and tensorProduct_tensorProduct in Mathlib/RingTheory/Localization/BaseChange.lean:270,278,358 cover individual base changes. The statement additionally compares the two denominator systems in a field tower and the further localization at a prescribed prime; these compatible identifications are not a single one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field tower k L H and prime q of R tensor k L the scalar extension of its local ring to H is a localization of R tensor k H and of R_p tensor k H",
+   "results": "{\"t\": \"2026-10-22T06:45:22Z\", \"tool\": \"leanfinder\", \"query\": \"For a field tower k L H and prime q of R tensor k L the scalar extension of its local ring to H is a localization of R tensor k H and of R_p tensor k H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Localization.AtPrime.instAlgebraOfLiesOver\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"IsLocalization.Away.tensor\", \"Localization.AtPrime.instIsScalarTower_1\", \"IsLocalization.tensor\", \"Localization.AtPrime.instIsScalarTower\", \"IsLocalization.Away.tensorEquiv\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\"], \"digest\": \"4e5d027895245395\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: IsLocalization.tensor/tensorRight and tensorProduct_tensorProduct in Mathlib/RingTheory/Localization/BaseChange.lean:270,278,358 cover individual base changes. The statement additionally compares the two denominator systems in a field tower and the further localization at a prescribed prime; these compatible identifications are not a single one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct_tensorProduct|tensorRight|tensor_of|of_isLocalization",
+   "results": "{\"t\": \"2026-10-22T06:45:50Z\", \"tool\": \"grep\", \"query\": \"tensorProduct_tensorProduct|tensorRight|tensor_of|of_isLocalization\", \"sub\": \"RingTheory/Localization/BaseChange.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"169\", \"194\", \"202\", \"278\", \"337\"], \"digest\": \"6311731f698b3fd9\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: IsLocalization.tensor/tensorRight and tensorProduct_tensorProduct in Mathlib/RingTheory/Localization/BaseChange.lean:270,278,358 cover individual base changes. The statement additionally compares the two denominator systems in a field tower and the further localization at a prescribed prime; these compatible identifications are not a single one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated localization comparison for a field tower: (R tensor k L)_q tensor L H is obtained by inverting the image of (R tensor k L) minus q in R_p tensor k H",
+   "results": "{\"t\": \"2026-10-22T06:46:02Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated localization comparison for a field tower: (R tensor k L)_q tensor L H is obtained by inverting the image of (R tensor k L) minus q in R_p tensor k H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.Away.tensorEquiv\", \"IsLocalization.Away.tensorRightEquiv\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.tensor\", \"IsLocalization.Away.tensor\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"IsLocalization.tensorRight\"], \"digest\": \"03c01acf587fd4be\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: IsLocalization.tensor/tensorRight and tensorProduct_tensorProduct in Mathlib/RingTheory/Localization/BaseChange.lean:270,278,358 cover individual base changes. The statement additionally compares the two denominator systems in a field tower and the further localization at a prescribed prime; these compatible identifications are not a single one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization",
+   "results": "{\"t\": \"2026-10-22T06:49:17Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalization\", \"IsLocalization.fintype'\", \"IsLocalization.toLocalizationMap\", \"Localization.isLocalization\", \"IsLocalization.noZeroDivisors\", \"IsLocalization.mk'\", \"IsLocalization.sec\", \"IsLocalization.subsingleton\"], \"digest\": \"28dbf8466a622bac\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: general localization declarations do not state the field-tower comparison with both denominator systems and localization at an upstairs prime."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field tower k L H compare localizations of R tensor k H at the images of R minus p and of R tensor k L minus q, with their canonical maps to a prime localization",
+   "results": "{\"t\": \"2026-10-23T04:31:51Z\", \"tool\": \"leanfinder\", \"query\": \"For a field tower k L H compare localizations of R tensor k H at the images of R minus p and of R tensor k L minus q, with their canonical maps to a prime localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Localization.AtPrime.algebra_localization_localization\", \"instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization\", \"IsLocalization.isLocalization_isLocalization_atPrime_isLocalization\", \"IsLocalization.AtPrime.liesOver_map_of_liesOver\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"Localization.AtPrime.instIsScalarTower_1\", \"Localization.AtPrime.instIsScalarTower\"], \"digest\": \"0607ab2b9d8c2ccb\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inspected IsLocalization.tensorProduct_tensorProduct (BaseChange.lean:358), tensorRight (:278) and isLocalization_of_submonoid_le (LocalizationLocalization.lean:194). They supply individual localization clauses, but the item still requires the field-tower ring identification, the two denominator inclusions, and compatibility of its induced arrows; proof assembled from existing DAG Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.tensorProduct_tensorProduct",
+   "results": "{\"t\": \"2026-10-23T04:32:26Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.tensorProduct_tensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalization.tensorProduct_tensorProduct\"], \"digest\": \"8fa4f6d4e2c31a90\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inspected IsLocalization.tensorProduct_tensorProduct (BaseChange.lean:358), tensorRight (:278) and isLocalization_of_submonoid_le (LocalizationLocalization.lean:194). They supply individual localization clauses, but the item still requires the field-tower ring identification, the two denominator inclusions, and compatibility of its induced arrows; proof assembled from existing DAG Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a commutative algebra commutes with scalar extension, and nested denominator sets give a further localization",
+   "results": "{\"t\": \"2026-10-23T04:32:26Z\", \"tool\": \"leansearch\", \"query\": \"Localizing a commutative algebra commutes with scalar extension, and nested denominator sets give a further localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.tensorRight\", \"IsLocalization.tensor\", \"IsLocalization.commutes\", \"Algebra.Extension.localization\", \"IsLocalization.Away.tensorEquiv\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ\", \"IsLocalizedModule.mapExtendScalars_apply_apply\"], \"digest\": \"a27ba891ce15b914\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inspected IsLocalization.tensorProduct_tensorProduct (BaseChange.lean:358), tensorRight (:278) and isLocalization_of_submonoid_le (LocalizationLocalization.lean:194). They supply individual localization clauses, but the item still requires the field-tower ring identification, the two denominator inclusions, and compatibility of its induced arrows; proof assembled from existing DAG Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a tensor product at the image of a multiplicative subset is canonically the scalar extension of the localized algebra, compatible with further prime localization",
+   "results": "{\"t\": \"2026-10-23T04:32:28Z\", \"tool\": \"leanfinder\", \"query\": \"A localization of a tensor product at the image of a multiplicative subset is canonically the scalar extension of the localized algebra, compatible with further prime localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.tensor\", \"IsLocalization.tensorRight\", \"IsLocalization.Away.tensor\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.Away.tensorRight\", \"IsLocalization.Away.tensorEquiv\", \"IsLocalization.Away.tensorRightEquiv\"], \"digest\": \"c953c6a8c9f6cedc\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inspected IsLocalization.tensorProduct_tensorProduct (BaseChange.lean:358), tensorRight (:278) and isLocalization_of_submonoid_le (LocalizationLocalization.lean:194). They supply individual localization clauses, but the item still requires the field-tower ring identification, the two denominator inclusions, and compatibility of its induced arrows; proof assembled from existing DAG Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct_tensorProduct|tensorRight|isLocalization_of_submonoid_le",
+   "results": "{\"t\": \"2026-10-23T04:34:32Z\", \"tool\": \"grep\", \"query\": \"tensorProduct_tensorProduct|tensorRight|isLocalization_of_submonoid_le\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/LocalizationLocalization.lean\", \"Mathlib/RingTheory/Localization/LocalizationLocalization.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\"], \"digest\": \"58ebb10f11392648\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inspected IsLocalization.tensorProduct_tensorProduct (BaseChange.lean:358), tensorRight (:278) and isLocalization_of_submonoid_le (LocalizationLocalization.lean:194). They supply individual localization clauses, but the item still requires the field-tower ring identification, the two denominator inclusions, and compatibility of its induced arrows; proof assembled from existing DAG Mathlib leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-reducedness-local-base-change",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited Curves 0C4D geometric-point descent branch, expanded by 0384/035W: local-ring localization after extending the common field; old item proof steps 1 and 4.",
+   "via": [
+    "lem-trf-geometric-reducedness-local-base-change",
+    "lem-trf-geometric-field-stalk-descent",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-field-localization-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Expanded both scalar-localization comparisons, checked multiplication and the field-tower tensor map, and used existing Mathlib-leaf nodes for nested denominators and universal properties. No new nodes or changes to the statement; all compatibility maps are given on fractions.",
+  "blueprint": "Retains the inherited Curves 0C4D/0384/035W local-ring branch under lem-trf-local-term-locality: supplies the localization comparisons used by lem-trf-geometric-reducedness-local-base-change, old steps 1 and 4. No replacement of the contracting-correspondence unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-08419f82a",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-08419f82a (reviewer sub-agent of L); spot-checked: The statement, stmt_deps and blueprint are byte-identical to live and side-live (both unsplit, no proof); only the proof, proof_deps, proof_origin, searches and status were added. No new nodes. The only citer is lem-trf-geometric-reducedness-local-base-change (steps 1 and 2), and the unchanged statement gives it both localization claims it uses. Source read: Stacks varieties 0C4Y (lemma-change-fields-flat), proof of (3), lines 262-279; the steps write out its 'details omitted' for the tower k->L->H. Tags 00D2, 00CX, 00DK, 00CP and 00CM checked against their labels. No SGA source. Step checks: (1) the module-base-change-transitive leaf with k->L->H and M=R gives theta, which is multiplicative on pure tensors by pushout (1), and s(x)1 maps to j(s). (2) localization-tensor-over-base with k->R, V, M=R, N=H; module localization at V equals ring localization at {v(x)1}, which the step states. (3) Same leaf over L with S, U, H, transported along theta to j(U)^{-1}T. (4) v outside p gives v(x)1 outside q, so M is contained in N; the composite with T is checked on r(x)h, and clause (2) of localization-of-localization gives exactly the stated localization at the images of U. (5) j^{-1}(Q)=q gives j(U) inside T minus Q; the lift comes from the universal property, and clause (2) gives the further localization. (6) Compatibility comes from the two uniqueness clauses, so 'elementary' is justified. proof_deps equals the union of the step uses; the cited nodes are five generic Mathlib leaves, so no tool_uses are needed. Edge cases checked: k=L=H, R=0 (vacuous), non-reduced R, zero divisors, infinite or inseparable extensions, any prime Q over q."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FieldLocalizationTensorComparison",
+  "declaration": "Algebra.field_localization_tensor_comparison",
+  "declarations": [
+   "Algebra.fieldTowerTensorMap",
+   "Algebra.field_localization_tensor_comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/FieldLocalizationTensorComparison.lean",
+  "statement": "theorem field_localization_tensor_comparison (k : Type u) (L : Type v) (H : Type w) (R : Type z) [Field k] [Field L] [Field H] [CommRing R] [Algebra k L] [Algebra L H] [Algebra k H] [IsScalarTower k L H] [Algebra k R] (q : Ideal (L ⊗[k] R)) [q.IsPrime] (p : Ideal R) [p.IsPrime] (hp : p = q.comap (TensorProduct.includeRight (R := k) (A := L)).toRingHom) : ∃ (eA : H ⊗[k] Localization.AtPrime p ≃+* Localization (p.primeCompl.map (TensorProduct.includeRight (R := k) (A := H)).toRingHom)) (eB : H ⊗[L] Localization.AtPrime q ≃+* Localization (q.primeCompl.map (fieldTowerTensorMap k L H R).toRingHom)) (f : H ⊗[k] Localization.AtPrime p →+* H ⊗[L] Localization.AtPrime q), (∀ (h : H) (r : R) (v : p.primeCompl), eA (h ⊗ₜ[k] Localization.mk r v) = Localization.mk (S := p.primeCompl.map (TensorProduct.includeRight (R := k) (A := H)).toRingHom) (h ⊗ₜ[k] r) ⟨1 ⊗ₜ[k] (v : R), ⟨v, v.property, rfl⟩⟩) ∧ (∀ (h : H) (s : L ⊗[k] R) (u : q.primeCompl), eB (h ⊗ₜ[L] Localization.mk s u) = Localization.mk (S := q.primeCompl.map (fieldTowerTensorMap k L H R).toRingHom) ((h ⊗ₜ[k] (1 : R)) * fieldTowerTensorMap k L H R s) ⟨fieldTowerTensorMap k L H R u, ⟨u, u.property, rfl⟩⟩) ∧ (∀ t : H ⊗[k] R, f (eA.symm (algebraMap _ _ t)) = eB.symm (algebraMap _ _ t)) ∧ @IsLocalization _ _ ((q.primeCompl.map (fieldTowerTensorMap k L H R).toRingHom).map (eA.symm.toRingHom.comp (algebraMap _ _))) _ _ f.toAlgebra ∧ ∀ (Q : Ideal (H ⊗[k] R)) [Q.IsPrime], Q.comap (fieldTowerTensorMap k L H R).toRingHom = q → ∃ g : H ⊗[L] Localization.AtPrime q →+* Localization.AtPrime Q, (∀ t : H ⊗[k] R, g (eB.symm (algebraMap _ _ t)) = algebraMap _ _ t) ∧ @IsLocalization _ _ (Q.primeCompl.map (eB.symm.toRingHom.comp (algebraMap _ _))) _ _ g.toAlgebra ∧ ∀ (t : H ⊗[k] R) (u : q.primeCompl) (d : Q.primeCompl), (d : H ⊗[k] R) = fieldTowerTensorMap k L H R u → g (eB.symm (Localization.mk t ⟨fieldTowerTensorMap k L H R u, ⟨u, u.property, rfl⟩⟩)) = Localization.mk t d",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Tensor factors are written in the canonically equivalent order with the field first; all comparisons have explicit fraction normalizations. The helper fieldTowerTensorMap is the actual tensor map induced by the field tower."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c41b7dd4e",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Clause-by-clause check of the node against Algebra.field_localization_tensor_comparison: the field tower is Field×3 + Algebra + IsScalarTower, R is CommRing+Algebra k with no finiteness; S, T are written field-first (canonical comm), j = fieldTowerTensorMap (genuine TensorProduct.map, definitionally Algebra.TensorProduct.rTensor); p is given by hp = comap includeRight q. eA and eB are pinned on all pure tensors by the node's fraction formulas (eB formula checked L-balanced). f is pinned by agreement on T, and IsLocalization of f is at the image of U under S→T→V⁻¹T. For all primes Q over q, g is pinned on T, IsLocalization at the image of T∖Q, plus the t/j(u) formula. Structural R/L/H compatibility follows by specialisation. Statement verbatim in the file; docstrings with source 0C4Y, blueprint id and 6 steps; sorry only; no clash in side-live; first S2 delivery after NG's S1 landing; report sections present. Edge cases k=L=H, R=0, non-reduced, inseparable, no Q checked. Non-blocking notes: citer uses R⊗L order (comm transport later); helper could be rTensor; Localization/IsLocalization for submonoids are uncited by the node, a stage-1 matter. No compile (no change made)."
+ }
+}

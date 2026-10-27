@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-projective-representation-smooth-lift",
+ "kind": "statement",
+ "title": "Smooth multiplicative cover lifting a projective representation",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and their homomorphisms are as in [def-sc-group-scheme]. All algebraic groups in this statement are affine and of finite type over $F$ [def-pc-scheme, def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $G$ be smooth connected. For a nonzero finite-dimensional $F$-vector space $V$, $\\mathbf P(V)$ is the scheme of one-dimensional quotients of $V$, with tautological quotient line bundle $\\mathcal O_{\\mathbf P(V)}(1)$; $\\operatorname{GL}(V)$ is the group scheme $A\\mapsto\\operatorname{Aut}_A(V\\otimes_F A)$, $\\operatorname{SL}(V)$ is its determinant-one subgroup, and $\\operatorname{PGL}(V)$ is the fppf sheaf quotient of $\\operatorname{GL}(V)$ by its scalar subgroup $\\mathbf G_m$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Given a group-scheme homomorphism $a:G\\to\\operatorname{PGL}(V)$, form the group-scheme fibre product $E=G\\times_{\\operatorname{PGL}(V)}\\operatorname{SL}(V)$ and let $H=(E_{\\mathrm{red}})^\\circ$ be the identity component of its reduced closed subscheme (reduced means nilpotents are removed, and the identity component is the connected component containing the identity). The group law of $E$ restricts to $H$, and $H$ is smooth connected. Its projection $q:H\\to G$ is a multiplicative isogeny. A multiplicative isogeny $q:H\\to G$ means a group-scheme homomorphism for which $F[G]\\to F[H]$ is faithfully flat (extension of scalars is exact and detects zero modules), and whose scheme-theoretic kernel is $D(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$. The group algebra has basis $e^m$, multiplication $e^me^n=e^{m+n}$, comultiplication $e^m\\mapsto e^m\\otimes e^m$, counit $e^m\\mapsto1$ and antipode $e^m\\mapsto e^{-m}$. The second projection restricts to a homomorphism $\\rho:H\\to\\operatorname{SL}(V)$ with $\\overline\\rho=a\\circ q$ in $\\operatorname{PGL}(V)$. Scheme-theoretically, $\\ker q$ is a closed subgroup of the scalar group $\\mu_n=\\operatorname{Spec}F[z,z^{-1}]/(z^n-1)$, $n=\\dim_F V\\geq1$. No prime-to-characteristic assumption on $n$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.22, proof, printed p.393 (pullback of SL(V) to G); Example 5.49, printed p.111 (SL_n to PGL_n has kernel mu_n); Propositions 1.26 and 1.38, Corollary 1.39, printed pp.13,17; the reduced identity-component reduction explicitly used in Proposition 18.6(a), printed p.388; Proposition 5.47, printed pp.110--111."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-sfb-diagonalizable-group",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-scalar-matrix-inclusion"
+ ],
+ "proof": [
+  {
+   "text": "First dispose of $n=1$. In a basis of $V$, $\\operatorname{GL}(V)=\\mathbf G_m$, its scalar quotient $\\operatorname{PGL}(V)$ is trivial, and determinant is the identity on $\\mathbf G_m$, so $\\operatorname{SL}(V)=1$. The fibre-product universal property [def-pc-fibre-product] gives $E=G$. Since $G$ is smooth, it is reduced by [sbc-lem-smooth-geometrically-reduced], and since it is connected its identity component is itself. Thus $H=G$ and $q=\\mathrm{id}_G$. This coordinate map is faithfully flat, its kernel is $1=D(0)=\\mu_1$, and the unique map $\\rho:G\\to1$ has the required projectivization. Henceforth $n\\geq2$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 5.49, printed p.111, rank-one specialization; Proposition 1.26, printed p.13"
+   }
+  },
+  {
+   "text": "Choose a basis $V\\simeq F^n$. The matrix groups are the groups of [lem-sfb-projective-matrix-central-cover]. Its quotient agrees with the fppf quotient in the item: [lem-sfb-projective-frames-pgl] identifies the same determinant-open projective matrix scheme as the Zariski quotient by scalars, so matrices lift Zariski locally and their equality is exactly scalar equality; these also give the universal quotient sheaf for fppf coverings. Write $s:\\operatorname{SL}_n\\to\\operatorname{PGL}_n$. The central-cover node gives that $s$ is finite and surjective, with scalar kernel $\\mu_n$. By [def-pc-fibre-product] the fibre product $E$ exists; multiplication and inverse are componentwise on pairs $(g,u)$ with $a(g)=s(u)$, since $a,s$ are homomorphisms. Their identities follow after either projection by uniqueness in that universal property. By [lem-weil-pbc-fibre-product-affine-spectra], $E$ is affine. Its projection $p:E\\to G$ is finite by [lem-trf-finite-radicial-basechange] and surjective by [lem-weil-pbc-surjective-base-change]. It is of finite type: on affines a finite module algebra is generated as an algebra by any finite set of module generators. Combining these generators with generators of $F[G]$ shows that $E$ is of finite type over $F$.",
+   "uses": [
+    "lem-sfb-projective-matrix-central-cover",
+    "lem-sfb-projective-frames-pgl",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, proof, printed p.393; Example 5.49, printed p.111; finite and surjective base change: Stacks 01WL and 01S1"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-locally-algebraic-group-identity-component] to $E$ over the algebraically closed field $F$. It gives the open and closed subgroup $E^\\circ$ and its smooth connected reduced subgroup $(E^\\circ)_{\\mathrm{red}}$. Reduction does not change underlying spaces and restricts on an open by quotienting its affine rings by their nilradicals [def-weil-pbc-scheme-reduction]. Therefore $(E^\\circ)_{\\mathrm{red}}=(E_{\\mathrm{red}})^\\circ=H$ as closed subschemes of $E$: both are the reduction on the same open and closed identity component. This also identifies their restricted group operations. In particular $H$ is smooth connected and of finite type. Its inclusion $i:H\\hookrightarrow E$ is a closed immersion. A closed subscheme of the affine $E$ is affine by the quotient-ring description in [def-weil-closed-immersion]. Its inclusion is finite by [lem-weil-pbc-closed-immersion-finite]; since $p$ is finite, $q=p\\circ i$ is finite by [lem-trf-finite-radicial-basechange].",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.26 and 1.38, Corollary 1.39, printed pp.13,17--18; Proposition 18.6(a), printed p.388; closed immersions finite: Stacks 035C"
+   }
+  },
+  {
+   "text": "We now prove $q$ surjective, rather than assuming that reduction or passage to a component preserves faithful flatness. By [lem-sfb-group-neutral-component-translates], the finitely many components $C_j$ of $E$ are translates $e_jE^\\circ$ for points $e_j\\in E(F)$. Set $Z=p(|E^\\circ|)$. This is closed in $G$ by [lem-weil-pbc-finite-closed-map-finite-fibres], since $E^\\circ$ is closed and $p$ is finite. Equivariance gives $p(|C_j|)=p(e_j)Z$. These finitely many closed translates cover $G$ because $p$ is surjective. The connected group $G$ is irreducible by [lem-sfb-locally-algebraic-group-identity-component], applied to $G$ whose identity component is all of $G$. An irreducible space cannot be a union of two proper closed subsets; induction gives the same for any finite union. Thus one translate $p(e_j)Z$ equals $G$, and translating back gives $Z=G$. Finally $H$ and $E^\\circ$ have the same underlying space by step 3, so $q(|H|)=Z=G$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.6(a), printed p.388, expanded using Proposition 1.34 and Corollary 1.35, printed pp.16--17; finite maps closed: Stacks 01WN"
+   }
+  },
+  {
+   "text": "For each $g\\in G(F)$, apply [lem-weil-pbc-finite-geometric-point-lift] to the finite surjective map $q$ and the geometric point $g:\\operatorname{Spec}F\\to G$. It produces $h\\in H(F)$ with $q(h)=g$. The affine finite-type groups $H,G$ satisfy the hypotheses of [lem-sfb-affine-group-homomorphism-image], and its target $G$ is smooth by assumption. Hence this surjectivity on $F$-points implies that $F[G]\\to F[H]$ is faithfully flat, exactly in the coordinate-algebra sense required by the item.",
+   "uses": [
+    "lem-weil-pbc-finite-geometric-point-lift",
+    "lem-sfb-affine-group-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.47, printed pp.110--111; lifting finite geometric fibres: Stacks 02NU, 01TG and 09GU"
+   }
+  },
+  {
+   "text": "Compute kernels as fibre products with the identity [def-sc-group-scheme]. By the defining universal property [def-pc-fibre-product], $\\ker p\\simeq\\ker s=\\mu_n$: an element over any $F$-scheme is a pair $(1,u)$ with $s(u)=1$. The identification with the scalar subgroup is the one of [lem-sfb-projective-matrix-central-cover]. Moreover $\\ker q=H\\times_E\\ker p$, so $\\ker q\\hookrightarrow\\mu_n$ is the base change of the closed immersion $H\\hookrightarrow E$, hence closed by [lem-weil-pbc-closed-immersion-base-change]. This computation is on schemes, including nonreduced tests. Its coordinate algebra is a quotient of $F[z,z^{-1}]/(z^n-1)$. Since $z^{-1}=z^{n-1}$ and $z^n=1$, this algebra, and every quotient, is spanned over $F$ by $1,z,\\ldots,z^{n-1}$. Thus $\\ker q$ has finite-dimensional coordinate algebra. Apply [lem-sfb-split-torus-subgroups-diagonalizable] with $r=1$ to the closed subgroup $\\ker q\\subset\\mu_n\\subset\\mathbf G_m$. It yields $\\ker q\\simeq D(M)$ with $M$ finite, and exactly the group-algebra Hopf operations in the item. Together with step 5 this makes $q$ a multiplicative isogeny.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product",
+    "lem-sfb-projective-matrix-central-cover",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-split-torus-subgroups-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 5.49, printed p.111; Theorems 12.8 and 12.9(a),(c), printed pp.233--234; closed base change: Stacks 01QR"
+   }
+  },
+  {
+   "text": "Let $r:E\\to\\operatorname{SL}(V)$ be the second projection and set $\\rho=r\\circ i$. Both projections and $i$ are homomorphisms by steps 2--3. The fibre-product identity [def-pc-fibre-product] gives $s\\circ r=a\\circ p$; precomposing with $i$ gives $\\overline\\rho=a\\circ q$. Steps 3, 5 and 6 establish every other assertion. At no point did we assume $n$ invertible in $F$; in particular the scalar kernel computation retains $\\mu_n$ with its full scheme structure.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, proof, printed p.393"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-projective-matrix-central-cover",
+  "lem-sfb-projective-frames-pgl",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-geometric-point-lift",
+  "lem-sfb-affine-group-homomorphism-image",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-split-torus-subgroups-diagonalizable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.22, proof p.393, with its implicit reduction justified as in Proposition 18.6(a), p.388; component-surjectivity argument expanded from Propositions 1.34 and 5.47."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective representation of a smooth connected affine algebraic group lifts to a special linear representation after a finite diagonalizable isogeny from a smooth connected group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"Rep.instEnoughProjectives\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G], CategoryTheory.EnoughProjectives (Rep k G)\", \"doc\": \"For any commutative ring $ k $ and monoid $ G $, the category $ \\\\text{Rep}(k, G) $ of representations of $ G $ over $ k $ has enough projective objects. Specifically, for every representation $ X $ in\"}\n  {\"name\": \"Rep.instProjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Projective V\", \"doc\": \"Every object $ V $ in the category $ \\\\text{Rep}(k, G) $ of representations of a monoid $ G $ over a ring $ k $ is a projective object. This means that for any epimorphism $ e : A \\\\to B $ in $ \\\\text{Re\"}\n  {\"name\": \"Rep.free_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G α : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.free k G α)\", \"doc\": \"For any commutative ring $k$, group $G$, and type $\\\\alpha$, the free representation $\\\\text{Rep}(k, G)$ constructed on the module of finite support functions $\\\\alpha \\\\to_0 (G \\\\to_0 k)$ is a projective \"}\n  {\"name\": \"Rep.leftRegular_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.leftRegular k G)\", \"doc\": \"For any commutative ring $ k $ and group $ G $, the left regular representation of $ G $ over $ k $ is a projective object in the category $ \\\\text{Rep}(k, G) $ of representations of $ G $ over $ k $.\"}\n  {\"name\": \"FDRep.instProjectiveOfNeZeroCastCard\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : FDRep k G), CategoryTheory.Projective V\", \"doc\": \"Every finitely generated representation of a finite group $ G $ over a field $ k $ is projective in the category of finitely generated representations, provided that the cardinality of $ G $ (interpre\"}\n  {\"name\": \"Rep.trivial_projective_of_subsingleton\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] [Subsingleton G],\\n  CategoryTheory.Projective (Rep.trivial k G k)\", \"doc\": \"If $ G $ is a trivial group (i.e., a subsingleton), then the trivial representation of $ G $ over the commutative ring $ k $ is a projective object in the category of representations $ \\\\text{Rep}(k, G\"}\n  {\"name\": \"SpecialLinearGroup.toLinearEquiv\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : AddCommGroup V] → [inst_2 : Module R V] → SpecialLinearGroup R V →* V ≃ₗ[R] V\", \"doc\": \"The canonical group homomorphism from the special linear group $\\\\text{SL}(V)$ to the general linear group $\\\\text{GL}(V)$, mapping each determinant-1 linear equivalence $A : V \\\\simeq_R V$ to itself as \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract PSL/PGL groups and determinant-one inclusions do not construct a smooth connected finite diagonalizable group-scheme cover; nonreduced kernels are essential"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced identity component of the pullback of SL n to PGL n along a projective representation covers the connected algebraic group with finite multiplicative kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.range_toGL\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"∀ {n : Type u_5} [inst : Fintype n] [inst_1 : DecidableEq n] {A : Type u_11} [inst_2 : CommRing A],\\n  Set.range ⇑Matrix.SpecialLinearGroup.toGL = ⇑Matrix.GeneralLinearGroup.det ⁻¹' {1}\", \"doc\": \"For any commutative ring $A$, the image of the inclusion homomorphism from the special linear group $\\\\text{SL}(n, A)$ to the general linear group $\\\\text{GL}(n, A)$ is equal to the preimage of the set \"}\n  {\"name\": \"FDRep.instProjectiveOfNeZeroCastCard\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : FDRep k G), CategoryTheory.Projective V\", \"doc\": \"Every finitely generated representation of a finite group $ G $ over a field $ k $ is projective in the category of finitely generated representations, provided that the cardinality of $ G $ (interpre\"}\n  {\"name\": \"Subgroup.instIsArithmeticRangeSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGL\", \"module\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups\", \"type\": \"(Matrix.SpecialLinearGroup.mapGL ℝ).range.IsArithmetic\", \"doc\": \"The image of the special linear group $\\\\text{SL}(2, \\\\mathbb{Z})$ under the induced homomorphism to the general linear group $\\\\text{GL}(2, \\\\mathbb{R})$ forms an arithmetic subgroup. This means the subg\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.toGL\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] → {R : Type v} → [inst_2 : CommRing R] → Matrix.SpecialLinearGroup n R →* GL n R\", \"doc\": \"The monoid homomorphism embedding the special linear group $\\\\text{SL}(n, R)$ into the general linear group $\\\\text{GL}(n, R)$, which maps each invertible $n \\\\times n$ matrix with determinant 1 to itsel\"}\n  {\"name\": \"SpecialLinearGroup.mem_range_toGeneralLinearGroup_iff\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  {u : LinearMap.GeneralLinearGroup R V},\\n  u ∈ Set.range ⇑SpecialLinearGroup.toGeneralLinearGroup ↔ LinearEquiv.det u.toLinearEquiv = 1\", \"doc\": \"An element $ u $ of the general linear group $ \\\\text{GL}(V) $ lies in the image of the inclusion map from the special linear group $ \\\\text{SL}(V) $ if and only if its determinant $ \\\\det(u) $ equals 1.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract PSL/PGL groups and determinant-one inclusions do not construct a smooth connected finite diagonalizable group-scheme cover; nonreduced kernels are essential"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"Projective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ProjectiveSpecialLinearGroup\", \"type\": \" (n : Type u) [DecidableEq n] [Fintype n] (R : Type v) [CommRing R] : Type (max (max u v) v u)\", \"doc\": \"A projective special linear group is the quotient of a special linear group by its center.\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup.toPGL\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Projective\", \"type\": \" {n : Type u_1} {R : Type u_2} [Fintype n] [DecidableEq n] [CommRing R] : Matrix.ProjectiveSpecialLinearGroup n R →* Matrix.ProjGenLinGroup n R\", \"doc\": \"The natural inclusion map from `PSL(n, R)` to `PGL(n, R)` induced by the inclusion\\nmap from `SL(n, R)` to `GL(n, R)`.\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup.isoPSLOfAlgClosed\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Projective\", \"type\": \" {n : Type u_1} [Fintype n] [DecidableEq n] {F : Type u_3} [Field F] [IsAlgClosed F] : Matrix.ProjGenLinGroup n F ≃* Matrix.ProjectiveSpecialLinearGroup n F\", \"doc\": \"An isomorphism between `PGL(n, F)` and `PSL(n, F)` in the case of an algebraically closed field\\ninduced from the natural inclusion map where when `n` is empty it gives a junk isomorphism.\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup.isoPSLOfAlgClosedOfNonempty\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Projective\", \"type\": \" {n : Type u_1} [Fintype n] [DecidableEq n] [Nonempty n] {F : Type u_3} [Field F] [IsAlgClosed F] : Matrix.ProjGenLinGroup n F ≃* Matrix.ProjectiveSpecialLinearGroup n F\", \"doc\": \"An isomorphism between `PGL(n, F)` and `PSL(n, F)` in the case of an algebraically closed field\\ninduced from the natural inclusion map.\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup.toPGL_injective\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Projective\", \"type\": \" {n : Type u_1} {R : Type u_2} [Fintype n] [DecidableEq n] [CommRing R] : Function.Injective ⇑Matrix.ProjectiveSpecialLinearGroup.toPGL\", \"doc\": \"\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup.toPGL_surj_of_roots\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Projective\", \"type\": \" {n : Type u_1} {R : Type u_2} [Fintype n] [DecidableEq n] [CommRing R] (hR : ∀ (r : Rˣ), ∃ k, k ^ Fintype.card n = r) : Function.Surjective ⇑Matrix.ProjectiveSpecialLinearGroup.toPGL\", \"doc\": \"\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup.toPGL_surj_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Projective\", \"type\": \" {n : Type u_1} {R : Type u_2} [Fintype n] [DecidableEq n] [CommRing R] [Nonempty n] : Function.Surjective ⇑Matrix.ProjectiveSpecialLinearGroup.toPGL ↔ ∀ (r : Rˣ), ∃ k, k ^ Fintype.card n = r\", \"doc\": \"\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup.toPGL_mk\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Projective\", \"type\": \" {n : Type u_1} {R : Type u_2} [Fintype n] [DecidableEq n] [CommRing R] (g : Matrix.SpecialLinearGroup n R) : Matrix.ProjectiveSpecialLinearGroup.toPGL ↑g = Matrix.ProjGenLinGroup.mk (Matrix.SpecialLinearGroup.toGL g)\", \"doc\": \"\"}\n  {\"name\": \"Projectivization.instMulActionProjectiveSpecialLinearGroupForall\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \" {K : Type u_1} [Field K] {ι : Type u_3} [Fintype ι] [DecidableEq ι] : MulAction (Matrix.ProjectiveSpecialLinearGroup ι K) (Projectivization K (ι → K))\", \"doc\": \"\"}\n  {\"name\": \"Projectivization.instFaithfulSMulProjectiveSpecialLinearGroupForall\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \" {K : Type u_1} [Field K] {ι : Type u_3} [Fintype ι] [DecidableEq ι] : FaithfulSMul (Matrix.ProjectiveSpecialLinearGroup ι K) (Projectivization K (ι → K))\", \"doc\": \"\"}\n  {\"name\": \"Projectivization.instIsPreprimitiveProjectiveSpecialLinearGroupForall\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \" {K : Type u_1} [Field K] {ι : Type u_3} [Fintype ι] [DecidableEq ι] : MulAction.IsPreprimitive (Matrix.ProjectiveSpecialLinearGroup ι K) (Projectivization K (ι → K))\", \"doc\": \"\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup.toPermHom_injective\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \" {K : Type u_1} [Field K] {ι : Type u_3} [Fintype ι] [DecidableEq ι] : Function.Injective ⇑Projectivization.PSLAction.toPermHom\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract PSL/PGL groups and determinant-one inclusions do not construct a smooth connected finite diagonalizable group-scheme cover; nonreduced kernels are essential"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]pecial[Ll]inear.*[Pp]rojective|[Ii]sogen|[Rr]educed.*[Ii]dentity",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Hom.lean\", \"line\": \"46\", \"text\": \"* Special types of morphisms: Isogenies, weight/coweight space embeddings\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract PSL/PGL groups and determinant-one inclusions do not construct a smooth connected finite diagonalizable group-scheme cover; nonreduced kernels are essential"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective representation of a smooth connected affine algebraic group lifts to a special linear representation after a finite diagonalizable isogeny from a smooth connected group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.instProjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Projective V\", \"doc\": \"Every object $ V $ in the category $ \\\\text{Rep}(k, G) $ of representations of a monoid $ G $ over a ring $ k $ is a projective object. This means that for any epimorphism $ e : A \\\\to B $ in $ \\\\text{Re\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.toLin'\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \": SpecialLinearGroup n R →* (n → R) ≃ₗ[R] n → R\", \"doc\": \"The group homomorphism from the special linear group $\\\\mathrm{SL}(n, R)$ to the group of linear equivalences of the free module $R^n$, sending each invertible $n \\\\times n$ matrix with determinant 1 to\"}\n  {\"name\": \"Rep.leftRegular_projective\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.leftRegular k G)\", \"doc\": \"For any commutative ring $ k $ and group $ G $, the left regular representation of $ G $ over $ k $ is a projective object in the category $ \\\\text{Rep}(k, G) $ of representations of $ G $ over $ k $.\"}\n  {\"name\": \"SpecialLinearGroup.instGroup\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \": Group (SpecialLinearGroup R V)\", \"doc\": \"The special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and $ R $-module $ V $ forms a group under composition of linear transformations, with the group operations defined such that th\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ProjectiveSpecialLinearGroup\", \"type\": \": Type _\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"SpecialLinearGroup.toLinearEquiv_apply\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(A : SpecialLinearGroup R V) (v : V) : A.toLinearEquiv v = A v\", \"doc\": \"The canonical group homomorphism from the special linear group $ \\\\text{SL}(V) $ to the general linear group $ \\\\text{GL}(V) $ is the inclusion map, sending each determinant-1 linear equivalence $ A : V\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"SpecialLinearGroup.toGeneralLinearGroup_injective\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \": Function.Injective ⇑(toGeneralLinearGroup (R := R) (V := V))\", \"doc\": \"The canonical group homomorphism from the special linear group $\\\\text{SL}(V)$ to the general linear group $\\\\text{GL}(V)$ is injective, meaning that distinct determinant-1 linear transformations remain\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract PSL/PGL groups and determinant-one inclusions do not construct a smooth connected finite diagonalizable group-scheme cover; nonreduced kernels are essential"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-picard-trivial-multiplicative-cover",
+  "date": "2026-10-23",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7. Supporting Proposition 18.22 input: Proposition 18.22, proof, printed p.393 (pullback of SL(V) to G); Example 5.49, printed p.111 (SL_n to PGL_n has kernel mu_n); Propositions 1.26 and 1.38, Corollary 1.39, printed pp.13,17; the reduced identity-component reduction explicitly used in Proposition 18.6(a), printed p.388; Proposition 5.47, printed pp.110--111.",
+   "via": [
+    "lem-sfb-picard-trivial-multiplicative-cover",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-projective-representation-smooth-lift",
+  "worker": "stage1",
+  "summary": "Q87: seven-step proof with no new nodes. Checked the entire scheme-theoretic kernel and positive-characteristic case. Existing matrix-cover, reduced identity-component, component-translation, finite-morphism and diagonalizable-subgroup nodes supply every non-elementary input; the finite closed-cover argument proves that the reduced identity component still surjects. Existing Mathlib searches are retained verbatim and their hits were read. No finished project declaration states the item.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/GIT prerequisite recorded in blueprint.from.place; this item supplies the SL pullback and reduced identity-component step in Milne 18.22. The inherited created.item chain has no imported ancestor (blueprint_refs.py ancestor returns None), so its null from.node and existing via chain are retained. The current direct-image proof delegates the open-image finiteness input rather than expanding this prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-geometric-point-lift",
+    "why": "Generic lifting of a geometric point along a finite surjective scheme morphism; used to obtain surjectivity on F-points for Milne 5.47, not a proper-base-change argument. No node in this unit states this lifting fact."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Step 1 (n=1) takes only that a smooth morphism G -> Spec F has geometrically reduced fibres, hence G is reduced (Stacks 056T); generic smoothness fact of unit sk-def-smooth, which sk-thm-sf-ctf-stability does not cite; no node of this unit states it. Declared by the maintainer reader (Q87 review)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-geometric-point-lift",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-34c946cc5",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-34c946cc5 (reviewer sub-agent of L); spot-checked: I read the item and all 18 cited statements in full, and checked Milne iAG2017 Prop. 18.22 (p.393, the SL_V pullback along G→PGL_V), Prop. 5.47 and Ex. 5.49. The live node is still unsplit and there is no repair note. The statement, stmt_deps and source are unchanged byte for byte, and proof_deps equals the union of the step uses. Step checks: (1) For n=1, PGL=SL=1, so E=G; G is smooth, hence reduced, so H=G. (2) The matrix-cover node gives SL_r→PGL_r finite flat of rank r with scalar kernel μ_r, and PGL affine. The frames node gives the Zariski quotient by scalars; because it is representable it equals the item's fppf quotient. p is finite and surjective by base change, and E is affine and of finite type. (3) The identity-component node gives (E°)_red smooth and connected with the same space as E°, and (E°)_red=(E_red)°=H, since reduction is local and the identity on spaces. q is finite as a closed immersion composed with p. (4) Surjectivity: E has finitely many components e_jE° (no reducedness assumed), p(E°) is closed because p is finite, and G is irreducible, so one translate p(e_j)p(E°) is all of G and p(E°)=G. (5) A geometric-point lift gives H(F)→G(F) surjective, and Milne 5.47 (target G smooth) then gives faithful flatness. (6) ker q=H×_E ker p is a closed subscheme of μ_n⊂G_m, and the torus node with r=1 gives D(M) with M finite, scheme-theoretically and with no prime-to-p assumption. (7) ρ̄=a∘q comes from the defining square. Tested on n=1, trivial a (E non-reduced and disconnected), a=id (kernel μ_n with char | n), and G_m→PGL_2 via diag(t,1) (H=G_m, q(λ)=λ^{-2}, kernel μ_2, non-reduced in characteristic 2). No duplicate found in the DAG (grepped 18.22, PGL(V), multiplicative isogeny). Batch-5 check: lem-sfb-projective-matrix-central-cover and lem-sfb-projective-frames-pgl both reach lem-trf-projective-bundle-quotient-geometry. That node is general Stacks projective-bundle geometry (01OB/01O4/01OD/01OE), neither the trace formula nor Poincaré duality nor a step of their proofs, so it is genuinely outside the assumptions. lem-weil-pbc-finite-geometric-point-lift is on the unit's route through sk-thm-p1; the delivery declared it as a tool use, which is harmless, and I accept it. FIX: sbc-lem-smooth-geometrically-reduced (unit sk-def-smooth, not on the route) is used undeclared in step 1. It is a generic smooth⇒reduced fact (Stacks 056T), which I accept and have added to split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-projective-representation-smooth-lift.json. No other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveRepresentationSmoothLift",
+  "declaration": "AlgebraicGeometry.ProjectiveRepresentationSmoothLift.smooth_lift",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveRepresentationSmoothLift.spaceRank_neZero",
+   "AlgebraicGeometry.ProjectiveRepresentationSmoothLift.reducedOpen",
+   "AlgebraicGeometry.ProjectiveRepresentationSmoothLift.reducedOpenι",
+   "AlgebraicGeometry.ProjectiveRepresentationSmoothLift.smooth_lift"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveRepresentationSmoothLift.lean",
+  "statement": "theorem smooth_lift [IsAlgClosed F] (V : Type v) [AddCommGroup V] [Module F V] [FiniteDimensional F V] [Nontrivial V] (P : Grp (Over (Spec (.of F)))) [IsAffine P.X.left] [LocallyOfFiniteType P.X.hom] [QuasiCompact P.X.hom] (π : GeneralLinearGroup (LinearGroupSchemes.Index.{u} (Module.finrank F V)) F ⟶ P.X) [IsMonHom π] (hscalar : ∀ (T : Over (Spec (.of F))) (g : T ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} (Module.finrank F V)) F) (z : T ⟶ StandardGroupSchemes.multiplicative F), (g * (z ≫ ProjectiveMatrixCentralCover.scalar F (Module.finrank F V))) ≫ π = g ≫ π) (hquotient : ∀ (S : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u)) (b : yoneda.obj (GeneralLinearGroup (LinearGroupSchemes.Index.{u} (Module.finrank F V)) F) ⟶ S.obj), (∀ (T : Over (Spec (.of F))) (g : T ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} (Module.finrank F V)) F) (z : T ⟶ StandardGroupSchemes.multiplicative F), b.app (op T) (g * (z ≫ ProjectiveMatrixCentralCover.scalar F (Module.finrank F V))) = b.app (op T) g) → ∃! c : yoneda.obj P.X ⟶ S.obj, yoneda.map π ≫ c = b) (G : Over (Spec (.of F))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] (a : G ⟶ P.X) [IsMonHom a] : ∃ (E : Grp (Over (Spec (.of F)))) (p : E.X ⟶ G) (r : E.X ⟶ LinearGroupSchemes.specialLinear F (Module.finrank F V)), IsMonHom p ∧ IsMonHom r ∧ IsAffine E.X.left ∧ LocallyOfFiniteType E.X.hom ∧ QuasiCompact E.X.hom ∧ IsPullback p r a (LinearGroupSchemes.inclusion F (Module.finrank F V) ≫ π) ∧ ∃ U : E.X.left.Opens, (U : Set E.X.left) = connectedComponent (GrpObj.onePoint E.X) ∧ ∃ gH : GrpObj (reducedOpen E.X U), IsMonHom (reducedOpenι E.X U) ∧ IsClosedImmersion (reducedOpenι E.X U).left ∧ IsAffine (reducedOpen E.X U).left ∧ LocallyOfFiniteType (reducedOpen E.X U).hom ∧ QuasiCompact (reducedOpen E.X U).hom ∧ Smooth (reducedOpen E.X U).hom ∧ ConnectedSpace (reducedOpen E.X U).left ∧ ∃ hq : IsMonHom (reducedOpenι E.X U ≫ p), IsMonHom (reducedOpenι E.X U ≫ r) ∧ (reducedOpenι E.X U ≫ p).left.appTop.hom.FaithfullyFlat ∧ (∃ (M : Type u) (_ : AddCommGroup M) (_ : Finite M) (e : GrpObj.ker (reducedOpenι E.X U ≫ p) ≅ (diagonalizableGroup F M).X), IsMonHom e.hom) ∧ ∃ j : GrpObj.ker (reducedOpenι E.X U ≫ p) ⟶ StandardGroupSchemes.roots F (Module.finrank F V), IsClosedSubgroupScheme j ∧ j ≫ StandardGroupSchemes.rootsInclusion F (Module.finrank F V) ≫ ProjectiveMatrixCentralCover.scalar F (Module.finrank F V) = GrpObj.kerι (reducedOpenι E.X U ≫ p) ≫ reducedOpenι E.X U ≫ r ≫ LinearGroupSchemes.inclusion F (Module.finrank F V) ∧ (reducedOpenι E.X U ≫ r) ≫ (LinearGroupSchemes.inclusion F (Module.finrank F V) ≫ π) = (reducedOpenι E.X U ≫ p) ≫ a",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uniform in nonzero finite-dimensional V, including dimension one. P and its quotient morphism are specified by the fppf scalar-orbit sheafification universal property; matrix GL and SL are recorded constructions in rank finrank F V. E is specified by the group-scheme pullback universal property, and H is the actual nilradical reduction of its neutral open component. The closed kernel inclusion is normalized by the existing scalar map. Repair of returns 5462e02911c9 and 241835c2f50d: stmt_deps cites def-sfb-scalar-matrix-inclusion with existing:true, bound directly to the existing ProjectiveMatrixCentralCover.scalar. The central-cover theorem remains only a proof dependency; its module is publicly imported to expose the existing definition. No scalar extraction, duplicate declaration, renamed copy or central-cover module change is delivered."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8af3fd1f2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery after the landing refusal of 241835c2, which redeclared ProjectiveMatrixCentralCover.scalar in ScalarMatrixInclusion. The extraction module and the central-cover change are dropped. New def node def-sfb-scalar-matrix-inclusion is existing:true on the live ProjectiveMatrixCentralCover.scalar: its signature is verbatim and its coordinate formula x_ij->t delta_ij, det^-1->t^-r (Milne Ex. 5.49) matches the evalAlgHom-at-tI body for every r. Its stmt_deps are only definition nodes, it has 3 search kinds, and no other def node or Sheaf declaration owns a Gm->GL map. The item module differs from the reviewed 241835c2 module only in imports (public import of the central-cover module), and lean.statement is verbatim in the file. Compared with side-live, the item node changes only stmt_deps (+4 landed def nodes and the new scalar node; no theorem stmt_dep) and lean. Clause-by-clause recheck passes: fppf quotient P with pi pinned by hscalar/hquotient; IsPullback E with p and r monoid homs; U = identity component with nilradical reduction H, group law pinned by the closed immersion; H smooth, connected, affine, finite type; F[G]->F[H] faithfully flat; ker q iso D(M) with M finite; closed j into mu_n with scalar normalisation; rho-bar = a o q; no prime-to-p assumption. Edge cases n=1, char|n, M=0 and universes are covered. No hollow defs; only sorry; source-place and blueprint docstrings with all 7 steps; report sections present. No compile run because no file was changed. Advisory only: def-sfb-projective-linear-quotient is not cited, and the inline specification is accepted."
+ }
+}

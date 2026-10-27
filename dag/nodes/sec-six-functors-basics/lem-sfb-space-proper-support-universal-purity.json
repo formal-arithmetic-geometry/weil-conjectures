@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-space-proper-support-universal-purity",
+ "kind": "statement",
+ "title": "Proper support prevents every relative impurity",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space] and the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules on small etale ringed sites [def-trf-space-quasi-coherent-module], and tensor pullback and direct image [def-trf-space-etale-module-functors]. Let $Y$ be a scheme and $f:X\\to Y$ a finite type quasi-separated morphism, where the finite type and proper properties are [def-sfb-space-morphism-properties] and quasi-separated means quasi-compact diagonal. Let $M$ be a finite type quasi-coherent $\\mathcal O_X$-module, finite type meaning locally finitely generated on etale scheme charts. Suppose there exist a representable closed immersion $i:Z\\hookrightarrow X$ [def-weil-closed-immersion], a proper morphism $Z\\to Y$, and a finite type quasi-coherent $\\mathcal O_Z$-module $N$ with $i_*N\\simeq M$. This is the proper-support carrier convention of [def-sfb-space-proper-quot-functor]. Then $M$ is universally pure relative to $Y$ [def-sfb-space-universal-relative-purity].",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CVI (lemma-proper-pure), clause (1), with proper support expressed by a carrier; the carrier equivalence is spaces-perfect.tex Tag 0CZI (lemma-module-support-proper-over-base), (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-weil-closed-immersion",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-universal-relative-purity"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=\\operatorname{Supp}_X(M)$. The finite-type support-pullback theorem makes $T$ closed. Since $M\\simeq i_*N$, the closed-pushforward stalk theorem, applied to the underlying abelian sheaf of $N$, makes every geometric stalk of $M$ outside the point image $A=|i|(|Z|)$ zero. Thus $T\\subseteq A$. The closed immersion $i$ is proper; by the definition of properness its point map is closed (take the identity base change), so $A$ is closed in $|X|$.",
+   "uses": [
+    "lem-sfb-space-finite-type-support-pullback",
+    "lem-sfb-space-closed-pushforward-geometric-stalks",
+    "lem-sfb-space-closed-subspace-proper",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CVI (lemma-proper-pure), reduction to a closed carrier; support closed and vanishing outside the carrier: spaces-morphisms.tex Tags 07TZ, 04E5 and 04XZ."
+   }
+  },
+  {
+   "text": "The given closed subspace $Z$ with point set $A$ is proper over $Y$. As $f$ is locally of finite type (it is finite type), the proper-support closed-operations theorem implies first that $A$ is proper over $Y$, and then that its closed subset $T$ is proper over $Y$. Let $j:W\\hookrightarrow X$ be the reduced induced closed subspace on $T$. The same theorem identifies properness of $T$ with properness of $W\\to Y$. No factorization of $M$ through a reduced subspace is asserted or needed.",
+   "uses": [
+    "lem-sfb-space-proper-support-closed-operations",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 0CZC (lemma-closed-proper-over-base) and 0CZE (lemma-closed-closed-proper-over-base), applied to the carrier in Tag 0CVI."
+   }
+  },
+  {
+   "text": "Fix any scheme $B\\to Y$, write $X_B=X\\times_YB$, and let $p:X_B\\to X$ be the projection. Put $W_B=W\\times_YB=W\\times_XX_B$. Proper base change makes $h:W_B\\to B$ proper. The reduced-closed-support theorem identifies $|W_B|$ homeomorphically with the closed subset $|p|^{-1}(T)$ of $|X_B|$, without asserting that $W_B$ is reduced. The support-pullback theorem gives that $M_B=p^*M$ is finite type quasi-coherent and $\\operatorname{Supp}_{X_B}(M_B)=|p|^{-1}(T)$. Thus $|W_B|$ is exactly the support of $M_B$ as a closed subspace of the point space.",
+   "uses": [
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-finite-type-support-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CVI (lemma-proper-pure), universally closed argument; spaces-morphisms.tex Tags 04WP and 07TZ, spaces-properties.tex Tag 03IQ and its inverse-image support formulation."
+   }
+  },
+  {
+   "text": "Consider a specialization $b^{\\prime}\\leadsto b$ in $B$ and $\\xi\\in\\operatorname{Ass}_{X_B/B}(M_B)$ above $b^{\\prime}$, as in the definition of an impurity. That definition gives an etale scheme chart $e:U\\to X_B$ and a relative associated point $u$ of the restricted module $M_U$ mapping to $\\xi$. By the scheme relative-assassin definition, the stalk of $(M_U)_{b^{\\prime}}$ at the corresponding point of the fibre contains a nonzero element whose annihilator is its maximal ideal. Hence $(M_U)_u\\ne0$: if this stalk were zero, tensoring it with the fibre local ring would still be zero. The etale-chart support theorem now gives $\\xi\\in\\operatorname{Supp}_{X_B}(M_B)=|W_B|$.",
+   "uses": [
+    "def-sfb-space-universal-relative-purity",
+    "def-trf-relative-assassin",
+    "lem-sfb-space-etale-chart-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tags 0CV8 (definition-impurity), 0CVD (definition-pure); divisors.tex Tag 05AT (definition-relative-assassin) and spaces-morphisms.tex Tag 07TY (lemma-support-covering)."
+   }
+  },
+  {
+   "text": "Let $w\\in|W_B|$ correspond to $\\xi$ and put $C=\\overline{\\{w\\}}$ in $|W_B|$. Since $h$ is proper, its point map is closed by the definition of universal closedness at the identity base change. Therefore $h(C)$ is closed in $B$ and contains $h(w)=b^{\\prime}$, so it contains $b$. Choose $v\\in C$ with $h(v)=b$, and let $\\theta$ be its image in $|X_B|$. The closed embedding $|W_B|\\hookrightarrow|X_B|$ identifies $C$ with $\\overline{\\{\\xi\\}}$: the closure in a closed subspace equals the ambient closure. Thus $\\theta\\in\\overline{\\{\\xi\\}}$ and $f_B(\\theta)=b$.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CVI (lemma-proper-pure), final paragraph: the closed image of the closure contains the specialization."
+   }
+  },
+  {
+   "text": "The preceding construction works for every scheme $B\\to Y$, every $b^{\\prime}\\leadsto b$, and every relative associated point $\\xi$ over $b^{\\prime}$. It contradicts the missing-specialization condition of every proposed impurity. By the stated definition, $M$ is universally pure relative to $Y$.",
+   "uses": [
+    "def-sfb-space-universal-relative-purity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CVI (lemma-proper-pure), conclusion; Tag 0CVD (definition-pure), clauses (2) and (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-finite-type-support-pullback",
+  "lem-sfb-space-closed-pushforward-geometric-stalks",
+  "lem-sfb-space-closed-subspace-proper",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-proper-base-change",
+  "def-sfb-space-universal-relative-purity",
+  "def-trf-relative-assassin",
+  "lem-sfb-space-etale-chart-support"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CVI (lemma-proper-pure), proof of (1), expanded using support and proper closed subspaces rather than the purity-transport lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent module on an algebraic space with support proper over the base is universally pure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme properness and support-specialization results do not give universal relative purity for modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper support implies relative purity for quasi coherent modules and existence of specializations of relative associated points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.support\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \": Set (PrimeSpectrum R)\", \"doc\": \"The support of a module $ M $ over a commutative semiring $ R $ is the subset of the prime spectrum of $ R $ consisting of all prime ideals $ \\\\mathfrak{p} $ such that the localization of $ M $ at the \"}\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x : PrimeSpectrum R) : x ⤳ closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\n  {\"name\": \"Module.mem_support_mono\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \"{p q : PrimeSpectrum R} (H : p ≤ q) (hp : p ∈ Module.support R M) : q ∈ Module.support R M\", \"doc\": \"For any commutative semiring $ R $ and module $ M $ over $ R $, if a prime ideal $ \\\\mathfrak{p} $ is in the support of $ M $ and $ \\\\mathfrak{p} \\\\subseteq \\\\mathfrak{q} $, then $ \\\\mathfrak{q} $ is also \"}\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \": StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n  {\"name\": \"Module.support_subset_preimage_comap\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \"[IsScalarTower R A M] : Module.support A M ⊆ PrimeSpectrum.comap (algebraMap R A) ⁻¹' Module.support R M\", \"doc\": \"Let $ R $ and $ A $ be commutative semirings with a compatible scalar tower structure, and let $ M $ be an $ A $-module. The support of $ M $ in the prime spectrum of $ A $ is contained within the pre\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": @UniversallyClosed = (topologically @SpecializingMap).universally ⊓ @QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Set X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"Module.isClosed_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \"[Module.Finite R M] : IsClosed (Module.support R M)\", \"doc\": \"For a finitely generated module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is a closed set in the Zariski topology. This means the s\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme properness and support-specialization results do not give universal relative purity for modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] : IsProperMap ⇑f\", \"doc\": \"[Stacks Tag 04XU](https://stacks.math.columbia.edu/tag/04XU)\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is proper if it is separated, universally closed and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme properness and support-specialization results do not give universal relative purity for modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*pure|pure.*proper|support.*specializ",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Module.lean\", \"line\": \"43\", \"text\": \"lemma Module.stableUnderSpecialization_support : StableUnderSpecialization (Module.support R M) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Module.lean\", \"line\": \"44\", \"text\": \"  fun x y e ↦ mem_support_mono <| (PrimeSpectrum.le_iff_specializes x y).mpr e\"}\n  {\"file\": \"Mathlib/Topology/Maps/Proper/UniversallyClosed.lean\", \"line\": \"42\", \"text\": \"  -- Note that, by the properties of the topology on `Filter X`, the function `pure : X → Filter X`\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Skyscraper.lean\", \"line\": \"17\", \"text\": \"where `*` is a terminal object of `C`. In terms of stalks, `𝓕` is supported at all specializations\"}\n  {\"file\": \"Mathlib/Control/Traversable/Basic.lean\", \"line\": \"216\", \"text\": \"number of additional properties.  It must send `pure : α → Id α` to `pure`,\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/PurelyInseparable.lean\", \"line\": \"14\", \"text\": \"In this file we define purely inseparable ring homomorphisms and show their meta properties.\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/PurelyInseparable.lean\", \"line\": \"17\", \"text\": \"general ring hom properties. E.g. we can't prove `StableUnderComposition IsPurelyInseparable`,\"}\n  {\"file\": \"Mathlib/RingTheory/LocalIso.lean\", \"line\": \"25\", \"text\": \"Most results in this file follow purely formally from the corresponding property of\"}\n  {\"file\": \"Mathlib/Analysis/Complex/ValueDistribution/LogCounting/Basic.lean\", \"line\": \"28\", \"text\": \"  support on `𝕜` and then specializes to the setting where the function with locally finite support\"}\n  {\"file\": \"Mathlib/Analysis/Complex/ValueDistribution/LogCounting/Asymptotic.lean\", \"line\": \"24\", \"text\": \"finite support on `𝕜` and then specialize to the setting where the function with locally finite\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme properness and support-specialization results do not give universal relative purity for modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of the support prevents impurities of a sheaf after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"The property of being universally injective for morphisms of schemes is stable under base change, meaning that if a morphism is universally injective, then any base change (pullback) of this morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_comap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y), (I.comap f).support = I.support.preimage ⋯\", \"doc\": \"For a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the support of the inverse image ideal sheaf data $\\\\mathcal{I}.\\\\text{comap}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  (I.map f).support = TopologicalSpace.Closeds.closure (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' ↑I.support)\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a quasi-compact morphism $f: X \\\\to Y$, the support of the ideal sheaf $\\\\mathcal{I}.\\\\text{map}(f)$ on $Y$ is equal to the topological closure of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme properness and support-specialization results do not give universal relative purity for modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent module on an algebraic space supported on a closed subspace proper over the base is universally pure relative to the base",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.LocallyOfFiniteType; AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top.",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, module support or quasicoherence, not universal relative purity of a module on an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper support of a finite type quasi coherent sheaf implies universal relative purity by specialization of associated points",
+   "results": "[leansearch] OK 8 hit(s): Module.stableUnderSpecialization_support; SheafOfModules.IsQuasicoherent.mk; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; AlgebraicGeometry.Scheme.IdealSheafData.support; AlgebraicGeometry.isProper_eq; SheafOfModules.QuasicoherentData.IsFinitePresentation.",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, module support or quasicoherence, not universal relative purity of a module on an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Pure\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, module support or quasicoherence, not universal relative purity of a module on an algebraic space"
+  },
+  {
+   "tool": "grep",
+   "query": "impurit|universally.?pure|relative.?purity",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, module support or quasicoherence, not universal relative purity of a module on an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After any base change every fibrewise associated point of a module whose support is proper specializes over every specialization of its image",
+   "results": "[leanfinder] OK 8 hit(s): Module.stableUnderSpecialization_support; AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget; AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_assoc; Module.mem_support_mono; AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc; AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc; AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf; AlgebraicGeometry.Flat.generalizingMap.",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, module support or quasicoherence, not universal relative purity of a module on an algebraic space"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-support-universal-flattening",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CVI (lemma-proper-pure), clause (1), with proper support expressed by a carrier; the carrier equivalence is spaces-perfect.tex Tag 0CZI (lemma-module-support-proper-over-base), (3).",
+   "via": [
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-support-universal-purity",
+  "worker": "stage1",
+  "summary": "Q51 checked Stacks 0CVI and its carrier convention 0CZI, searched the live Lean source, full DAG, current blueprint and Mathlib, and supplied a six-step support-and-specialization proof using existing nodes only. The proof uses a proper reduced subspace carrying the support topologically, without claiming the module descends to that reduction. Every cited statement was read, every use is quoted in citations.json, and empty support, arbitrary base change, nonreduced carriers and non-flat modules were checked. Statement and statement dependencies are unchanged.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), compactification/direct-image preservation: the inherited alteration/stable-moduli prerequisite chain reaches the proper-support flattening input; this split supplies its proper-support purity input by Stacks 0CVI. Inherited blueprint.from.node is null (ancestor command returned None); its detailed from.place and via chain are retained. Whole-blueprint searches for proper support and relative purity found no node stating this item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-cbff40bcf",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-cbff40bcf (reviewer sub-agent of L); spot-checked: Read Stacks 0CVI with situation-pre-pure (quasi-separated implies decent) and 0CV8, 0CZC/0CZI, the tags in each step (07TZ, 04E5, 04XZ, 04WP, 03IQ, 05AT, 07TY), all 10 cited statements and def-sfb-space-proper-quot-functor (the item's carrier convention). Diffed against the Q49 snapshot: only proof, proof_deps, proof_origin, status, split_report and searches changed; the statement, stmt_deps and blueprint field did not. There is no repair note, the base proof was empty, and there are 0 new nodes. Step 1: Supp M is closed, sits inside |i|(|Z|) by the closed-pushforward stalk vanishing, and |i|(|Z|) is closed because closed immersions are proper. Step 2: closed-operations needs f locally finite type (it holds) and gives proper Z, then proper T, then proper reduced W. Step 3: proper base change has no conditions on B; the reduced-closed-support base-change clause and the support-pullback formula give |W_B| = Supp(M_B). Step 4 (elementary): relative associated point, so the fibre stalk is nonzero, so the chart stalk is nonzero, and etale-chart-support puts ξ in Supp. Step 5 (elementary): the final argument of 0CVI applied to the proper W_B→B; closure in a closed subspace equals the ambient closure. Step 6: definition. Replacing the source's scheme-theoretic reduction (0CVH) by a topological one is valid, since an impurity is topological and no module is placed on W. Edge cases: M=0, Z empty, nonreduced Z, non-flat B and non-proper f all go through. No duplicate (only lem-sfb-space-pure-dimension-flatness-representability is near, and it states 0CX1). Batch-5: the lem-sfb-space-* citations reach sec-trace-formula only through the general definition def-trf-algebraic-space; def-trf-relative-assassin is the general definition of Stacks 05AT. Neither belongs to the assumed trace-formula or Poincaré statements, so both are accepted. All steps stay on the unit's route, tool_uses is empty, and no SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperSupportUniversalPurity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.universallyPureRelativeToScheme_of_properSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperSupportUniversalPurity.lean",
+  "statement": "theorem universallyPureRelativeToScheme_of_properSupport {X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))} (Y : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace Y) (hf : MapIsFiniteType f) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (M : X.QCoh) (hM : SheafOfModules.IsFiniteType M.obj) (hsupport : ∃ (Z : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsProper (i ≫ f) ∧ ∃ N : Z.QCoh, SheafOfModules.IsFiniteType N.obj ∧ Nonempty ((moduleDirectImage i).obj N.obj ≅ M.obj)) : IsUniversallyPureRelativeToScheme Y f hf hqs M hM",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-512f2b1ab",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Every clause matches Stacks 0CVI(1) with the 0CZI(3) carrier, the same convention as the landed ProperQuotient.properSupport: MapIsFiniteType f, MapIsQuasiCompact of the diagonal, M : X.QCoh of finite type, a representable closed immersion i, MapIsProper (i ≫ f), finite-type N : Z.QCoh with Nonempty (moduleDirectImage i N ≅ M). The conclusion is exactly the landed IsUniversallyPureRelativeToScheme with the same arguments and universe u. No extra assumptions; edge cases (empty spaces, M=0, b=b', any base change, non-reduced Z) covered. Item node differs from side-live only in the lean field; lean.statement is verbatim. Proof is sorry only, docstrings give source, blueprint and six proof steps, no pro-etale, no duplicate, private proof-dependency imports exist. Not recompiled because no file changed."
+ }
+}

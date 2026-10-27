@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-finite-tate-etale-power-generation",
+ "kind": "statement",
+ "title": "Finite etale Tate powers are locally spanned by pure root tensors",
+ "status": "split",
+ "statement": "Let T be any scheme, A a commutative ring, m a natural number with mA=0, and d a nonnegative integer. Use the finite etale Tate twist of [def-asd-finite-etale-tate-twist] and the ordered pure root generators of [def-pur-finite-tate-site-comparison]. For every etale object U and every section t of the degree-d twist on U, there is a covering sieve S of U such that, after restriction along each V -> U in S, t lies in the A-linear span of the generators indexed by a scalar a in A and d roots in mu_m(V). This includes d=0 and the zero ring; no invertibility or finiteness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-asd-finite-etale-tate-twist",
+  "def-pur-finite-tate-site-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
+  "place": "Section tensor-product (03EK); lemma sections-sheafification (00WK)."
+ },
+ "proof": [
+  {
+   "text": "Construct the unsheafified ordered tensor powers of the scalar-extension presheaf, taking the constant coefficient presheaf in degree zero. The sheafification units in degrees zero and one and the lax tensor comparison recursively give a map to the finite Tate sheaf. Each such map is inverted by sheafification: use the monoidality of the local equivalences and the unit and tensor comparison for sheafToPresheaf. Hence it is locally surjective.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the exponent to show every section of the unsheafified power belongs to the span of pure root tensors. Degree zero is a scalar, degree one is tensor induction for scalar extension. In degree k+2 use tensor induction in both factors, the induction hypothesis in the first factor, and bilinearity to move the coefficient of the last factor into the scalar multiplying the whole tensor. Fin.snoc assembles the ordered root tuple.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Induction shows that the comparison map carries the raw generators to the specified finiteTateEtalePowerGenerator. Choose the image sieve of the comparison map over the given section. Local surjectivity makes it covering. On each member choose a preimage, apply its span membership, and map the span into the span of the displayed generators.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
+  "place": "Section 03EK and Lemma 00WK; raw tensor induction followed by the locally surjective comparison map. The comparison is a local equivalence by the proved source-library GrothendieckTopology.W_μ_sheafToPresheaf and Mathlib W_adj_unit_app."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of a sheaf tensor power locally belong to the linear span of pure root tensors",
+   "results": "TensorProduct.span_tmul_eq_top and generic tensor constructions; no theorem about the ordered finite Tate generators.",
+   "date": "2026-10-25",
+   "verdict": "Use tensor induction and sheafification local surjectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.span_induction",
+   "results": "Submodule.span_induction supplies the induction over a span used in the tensor step.",
+   "date": "2026-10-25",
+   "verdict": "Useful ingredient, not a match for local generation."
+  },
+  {
+   "tool": "grep",
+   "query": "span_tmul_eq_top|W_μ_sheafToPresheaf|IsLocallySurjective.*toSheafify",
+   "results": "Tensor-product span lemmas, source-library sheafToPresheaf tensor comparison, and sheafification-unit local equivalence.",
+   "date": "2026-10-25",
+   "verdict": "These give a complete local-generation proof; no existing finite Tate local-span declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTateLocalRootTensorsExt",
+  "date": "2026-10-25",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Uniqueness on finite root tensors in the finite twist comparisons.",
+   "via": [
+    "lem-pur-finite-tate-local-root-tensors-ext",
+    "def-pur-adic-root-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTateEtalePowerGeneration",
+  "file": "lean/Sheaf/Paper/FiniteTateEtalePowerGeneration.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteTateEtalePowerGenerator_locally_span",
+  "statement": "theorem finiteTateEtalePowerGenerator_locally_span\n    (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]\n    (m : ℕ) (hA : (m : A) = 0) (d : ℕ) (U : T.Etaleᵒᵖ)\n    (t : (finiteEtaleTateTwist T m A hA d).obj.obj U) :\n    ∃ S : Sieve U.unop, S ∈ T.smallEtaleTopology U.unop ∧\n      ∀ (V : T.Etale) (v : V ⟶ U.unop), S v →\n        (finiteEtaleTateTwist T m A hA d).obj.map v.op t ∈\n          Submodule.span A (Set.range (fun q :\n            A × (Fin d → (T.rootsOfUnitySheaf m).obj.obj (op V)) ↦\n              finiteTateEtalePowerGenerator T A m hA (op V) q.1 d q.2))",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T164959-L-1149589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T164959-L-1149589",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

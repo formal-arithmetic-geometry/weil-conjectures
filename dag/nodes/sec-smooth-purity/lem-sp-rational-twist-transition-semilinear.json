@@ -1,0 +1,204 @@
+{
+ "id": "lem-sp-rational-twist-transition-semilinear",
+ "kind": "statement",
+ "title": "The normalized rational Tate transitions are semilinear",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, and an arbitrary scheme $X$. Use the universe convention [def-weil-size-convention] and the small pro-étale site [def-weil-pbc-proetale-site]. Let $I$ be the poset of finite intermediate fields $\\mathbf Q_\\ell\\subseteq E\\subseteq\\overline{\\mathbf Q}_\\ell$. For a topological ring $R$, write $R_X=p_X^*\\underline R$, with $\\underline R(S)=C(S,R)$ and pulled-back ring structure [sk-def-sfb-condensed-ring, det-def-sfb-pulled-back-coefficients]. For $n\\geq1$, give $B_{E,n}=\\mathcal O_E/\\ell^n\\mathcal O_E$ the discrete topology, where $\\mathcal O_E=\\{a\\in E:|a|\\leq1\\}$, and put\n$$\n T_E=\\varprojlim_{n\\geq1}\\bigl((B_{E,n})_X\\otimes_{\\mathbf Z_X}\\mu_{\\ell^n,X}\\bigr),\\qquad\n M_E=E_X\\otimes_{\\mathcal O_{E,X}}T_E.\n$$\nHere $\\mu_{\\ell^n,X}$ is the root sheaf [def-pur-roots-of-unity-sheaf], tensor and extension of scalars are sheafified tensors [def-pur-sheaf-tensor-product], and the limit is in $\\mathcal O_{E,X}$-modules [def-pur-sheaf-inverse-limit]. The action on each finite term is multiplication on the $B$ factor through the quotient $\\mathcal O_{E,X}\\to(B_{E,n})_X$; its transition is coefficient reduction tensored with $u\\mapsto u^\\ell$. The scalar-extension map $\\mathcal O_{E,X}\\to E_X$ is [def-sfb-integers-to-subfield]. Let $\\alpha_E:E_X\\otimes_{\\mathbf Z_X}M_E\\to M_E$ be its module action [sk-def-sfb-module-objects].\n\nFor $E\\subseteq F$, let $i_{E,F}:E_X\\to F_X$ be the pulled-back coefficient inclusion [def-sfb-qlbar-subextension-map, det-def-sfb-pulled-back-coefficients]. Let $J_{E,F}:T_E\\to T_F$ be the unique abelian-sheaf map whose $n$th projection is induced by $B_{E,n}\\to B_{F,n}$ tensored with the identity on $\\mu_{\\ell^n,X}$ [lem-route-sp-integral-twist-map-exists-unique]. Let $j_{E,F}:M_E\\to M_F$ be the unique abelian-sheaf map with the localization normalization\n$$\n j_{E,F}(b\\otimes t)=i_{E,F}(b)\\otimes J_{E,F}(t),\n$$\nas an equality of maps out of the sheaf tensor $E_X\\otimes_{\\mathbf Z_X}T_E$ before the balanced quotient [lem-route-sp-rational-twist-map-exists-unique]. No invertibility of $\\ell$ on $X$ is assumed.\n\nThen every $j_{E,F}$ is semilinear for $i_{E,F}$, in the following precise sense of equality of abelian-sheaf morphisms:\n$$\n j_{E,F}\\circ\\alpha_E=\\alpha_F\\circ(i_{E,F}\\otimes j_{E,F})\n \\colon E_X\\otimes_{\\mathbf Z_X}M_E\\longrightarrow M_F.\n$$",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Integral inverse limit and rational extension-of-scalars formulas; field-extension transition compatibility needed in the colimit. Exact Lean statement and docstring: lean/Sheaf/Paper/ProEtaleTateTwists.lean, AlgebraicGeometry.ProEtale.spRationalTwistMap_semilinear, lines 376–390 (proof sorry)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "det-def-sfb-pulled-back-coefficients",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-inverse-limit",
+  "def-sfb-integers-to-subfield",
+  "sk-def-sfb-module-objects",
+  "def-sfb-qlbar-subextension-map",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "lem-route-sp-rational-twist-map-exists-unique"
+ ],
+ "proof": [
+  {
+   "text": "Put A=E_X and write q_E:A tensor L_E -> T_E and q_F:F_X tensor L_F -> T_F for the specified extension-of-scalars projections. By [def-sfb-modobj-extension] these projections are coequalizers, and by [sk-def-sfb-sheaf-tensor] tensoring with A preserves them. Thus A tensor q_E is epimorphic, so it suffices to compare the proposed semilinearity arrows after this map. The action characterization of scalar extension rewrites the first composite as alpha^{-1} followed by multiplication on the two A factors and q_E.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Rational scalar-extension construction and compatibility with finite-subfield inclusions."
+   }
+  },
+  {
+   "text": "Write c:A -> F_X for the pulled-back coefficient inclusion [def-sfb-qlbar-subextension-map, det-def-sfb-pulled-back-coefficients], g:L_E -> L_F for the specified integral transition, and f:T_E -> T_F for the rational transition. Its normalization [lem-route-sp-rational-twist-map-exists-unique] is q_E followed by f = (c tensor g) followed by q_F. Substitute this equality. Multiplicativity of c gives mul_A followed by c = (c tensor c) followed by mul_F. Tensor functoriality and naturality of the inverse associator now identify the result with (c tensor (c tensor g)) followed by the free F-action and q_F. The scalar-extension action characterization rewrites this as (c tensor ((c tensor g) followed by q_F)) followed by the F-action. Use the normalization again to replace the inner composite by q_E followed by f. This is exactly the other side after A tensor q_E. Cancel that epimorphism. This categorical calculation applies to every normalized g and needs neither sections of the tensor sheaf nor a separate integral semilinearity argument.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-qlbar-subextension-map",
+    "det-def-sfb-pulled-back-coefficients",
+    "lem-route-sp-rational-twist-map-exists-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Rational scalar-extension construction and compatibility with finite-subfield inclusions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-extension",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-qlbar-subextension-map",
+  "det-def-sfb-pulled-back-coefficients",
+  "lem-route-sp-rational-twist-map-exists-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Rational scalar-extension construction and compatibility with finite-subfield inclusions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The transition between rational Tate twists for finite extensions of the l-adic numbers is semilinear for the coefficient inclusion",
+   "results": "8 hits; PadicComplex.instIsScalarTowerPadicPadicAlgCl, PadicComplex.instAlgebraPadic, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter.toZModPow, cyclotomicCharacter.toFun_apply, PadicInt.algebra, cyclotomicCharacter.continuous, cyclotomicCharacter",
+   "date": "2026-10-25",
+   "verdict": "no match: padic fields, cyclotomic characters, ordinary semilinear maps and adic-completion tensor comparisons do not state semilinearity of these specified sheaf-limit/localization transitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Semilinear\", \"tensor\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no match: padic fields, cyclotomic characters, ordinary semilinear maps and adic-completion tensor comparisons do not state semilinearity of these specified sheaf-limit/localization transitions"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|spRationalTwistMap",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-25",
+   "verdict": "no match: padic fields, cyclotomic characters, ordinary semilinear maps and adic-completion tensor comparisons do not state semilinearity of these specified sheaf-limit/localization transitions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rational Tate twist field extension map semilinear",
+   "results": "8 hits; SemilinearMapClass.semilinearMap, LinearMap.frobenius, RingHom.toSemilinearMap, SemilinearEquivClass.instSemilinearMapClass, LinearMap.semilinearMapClass, DistribMulActionHom.instSemilinearMapClass, IsPurelyInseparable.iterateFrobeniusₛₗ, SemilinearMapClass.instCoeToSemilinearMap",
+   "date": "2026-10-25",
+   "verdict": "no match: padic fields, cyclotomic characters, ordinary semilinear maps and adic-completion tensor comparisons do not state semilinearity of these specified sheaf-limit/localization transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semilinearity of the map on inverse limits of root-of-unity tensor modules followed by localization of coefficient rings",
+   "results": "8 hits; Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProduct, AdicCompletion.map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype",
+   "date": "2026-10-25",
+   "verdict": "no match: padic fields, cyclotomic characters, ordinary semilinear maps and adic-completion tensor comparisons do not state semilinearity of these specified sheaf-limit/localization transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized map from E tensor over O_E T_E to F tensor over O_F T_F preserves scalar multiplication along a sheaf ring inclusion",
+   "results": "{\"t\": \"2026-10-25T07:12:32Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized map from E tensor over O_E T_E to F tensor over O_F T_F preserves scalar multiplication along a sheaf ring inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorCotangentInvFun_smul_mk\", \"KaehlerDifferential.map_liftBaseChange_smul\", \"KaehlerDifferential.mapBaseChange_tmul\", \"AlgebraicGeometry.Scheme.Modules.Hom.app_smul\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"IsBaseChange.map_id_lsmul_eq_lsmul_algebraMap\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Sheafify.SMulCandidate.h\"], \"digest\": \"088ecd1cb138a610\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary module semilinear maps, change-of-rings adjunctions, cotangent maps and adic completions do not state the specified Tate sheaf transition action identity"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|spRationalTwistMap",
+   "results": "{\"t\": \"2026-10-25T07:13:50Z\", \"tool\": \"grep\", \"query\": \"TateTwist|tateTwist|spRationalTwistMap\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary module semilinear maps, change-of-rings adjunctions, cotangent maps and adic completions do not state the specified Tate sheaf transition action identity",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rational Tate twist coefficient transition semilinear map",
+   "results": "{\"t\": \"2026-10-25T07:13:50Z\", \"tool\": \"leansearch\", \"query\": \"rational Tate twist coefficient transition semilinear map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SemilinearMapClass.semilinearMap\", \"SemilinearEquivClass.instSemilinearMapClass\", \"SemilinearMapClass.instCoeToSemilinearMap\", \"LinearMap.semilinearMapClass\", \"DistribMulActionHom.instSemilinearMapClass\", \"SemilinearMapClass.toMulActionSemiHomClass\", \"RingHom.toSemilinearMap\", \"NonUnitalAlgHomClass.instSemilinearMapClassOfNonUnitalAlgSemiHomClassToMonoidHomRingHom\"], \"digest\": \"ae10dfbd1dbf74f5\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary module semilinear maps, change-of-rings adjunctions, cotangent maps and adic completions do not state the specified Tate sheaf transition action identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Semilinear\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-25T07:13:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Semilinear\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary module semilinear maps, change-of-rings adjunctions, cotangent maps and adic completions do not state the specified Tate sheaf transition action identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semilinearity of maps on inverse limits of roots of unity tensor coefficient modules followed by extension of scalars on a site",
+   "results": "{\"t\": \"2026-10-25T07:15:57Z\", \"tool\": \"leanfinder\", \"query\": \"Semilinearity of maps on inverse limits of roots of unity tensor coefficient modules followed by extension of scalars on a site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"AdicCompletion.ofTensorProduct_naturality\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProduct_tmul\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"AdicCompletion.ofTensorProduct\", \"AdicCompletion.transitionMap_comp_eval\"], \"digest\": \"ef0bbf98d8d454b4\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary module semilinear maps, change-of-rings adjunctions, cotangent maps and adic completions do not state the specified Tate sheaf transition action identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-sp-qbar-twist-action-exists-unique",
+  "date": "2026-10-25",
+  "group": "NP"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Proof, 'Rational and algebraic closure': the specified sheafified finite-field colimit of rational twists, with its coefficient action; the transition normalization and scalar-action construction spelled out in sk-def-sp-tate-twist. The scalar compatibility of the rational transitions, before taking their colimit.",
+   "via": [
+    "lem-route-sp-qbar-twist-action-exists-unique"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sp-rational-twist-transition-semilinear",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its statement dependencies. Proved semilinearity directly from the prescribed rational normalization: tensor the balanced coequalizer, detect equality on triple presheaf generators using strong monoidal sheafification, calculate both actions, and cancel. All inputs already have nodes; no new nodes, no Mathlib leaves, no Lean edits or compilation. Repair of returned head 058c9f1c22e: revalidated the rewritten rational-transition existence statement, recorded its precise notation/level correspondence in step 3, and replaced the stale Lean-signature citation with its current displayed normalization.",
+  "blueprint": "Realizes the rational-extension and finite-field-colimit compatibility in sk-def-sp-tate-twist and the Rational and algebraic closure paragraph of det-prop-sfb-cartesian-coefficients-twists. Uses the localization normalization already assumed by this item; the additional integral-semilinearity argument of the Lean docstring belongs to existence of that normalization, not to this consequence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NA-075d19b45",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-075d19b45 (reviewer sub-agent of L); spot-checked: Read in full: the item (4 steps), the report, all 7 nodes cited in the proof and the 2 existence nodes for the transitions. Lean target: spRationalTwistMap_semilinear, with the normalization of spRationalTwistMap_existsUnique, in ProEtaleTateTwists.lean ~345-390. The item's displayed identity is exactly the Lean action identity. The blueprint sk-def-sp-tate-twist gives no explicit transition, so the statement is not weakened. Step 1: q_K is the coequalizer of def-sfb-modobj-extension; E_X⊗- preserves colimits (sk-def-sfb-sheaf-tensor clause 2), so e=1⊗q_E is a coequalizer and can be cancelled. Step 2: write P=E⊗_pre(E⊗_pre T). a(1⊗η) is an isomorphism from a(P) to the triple sheaf tensor, by naturality of strong monoidality (a(η) is an isomorphism). By naturality of η, P→target is the image map. The sheafification universal property plus generation by pure tensors (applied twice) detect equality; I checked this claim. Step 3: the rational node's A_G,K_G,M_G,Q_G,d,u correspond to O_{G,X},G_X,T_G,M_G,i,J, with exponent n≥1; the integral node's index n≥0 has exponent n+1 and agrees. The first-factor action and the normalization reduce both sides to q_F(i(ab)⊗Jt)=q_F(i(a)i(b)⊗Jt), equal because i is a ring-object map (qlbar-subextension-map, with pulled-back coefficients a functor on ring objects). No integral semilinearity is needed, since the normalization is assumed. Step 4 is elementary. Edge cases: E=F, zero sections, empty X, ℓ not invertible. No cycle: the only citer is qbar-twist-action. No duplicate: rg -L for semilinear/twist/spRationalTwistMap. The other units cited are definitions or construction data, so there are no tool_uses. No new nodes and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleTateTwistConstructions",
+  "declaration": "AlgebraicGeometry.ProEtale.spRationalTwistMap_semilinear",
+  "statement": "theorem spRationalTwistMap_semilinear {E F : PadicAlgCl.FiniteIntermediateField ℓ}\n    (h : E ≤ F) :\n    Mod.act (spRationalTwist X ℓ E).X ≫ spRationalTwistMap X ℓ h =\n      (coefficientMap.{u} (Profinite.padicSubfieldRingObjMap ℓ h) X ⊗ₘ\n        spRationalTwistMap X ℓ h) ≫ Mod.act (spRationalTwist X ℓ F).X",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Exact existing statement in the live SHEAF library, checked against server source with scompile.py --source. Surrounding binders are (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime], with explicit universe u. The integral twist is the positive-level module limit (index n has exponent n+1), the rational twist is its specified scalar extension, and spRationalTwistMap is chosen from the recorded uniquely normalized existence theorem. The displayed equality of abelian-sheaf arrows is exactly the node semilinearity identity, with Lean composition written left to right. No invertibility hypothesis is present. Its proof remains sorry; no duplicate module is written.",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistConstructions.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95665e16f",
+  "group": "NL",
+  "result": "pass",
+  "note": "existing:true attachment of AlgebraicGeometry.ProEtale.spRationalTwistMap_semilinear (Sheaf.Paper.ProEtaleTateTwists ~376-390, sorry). The lean.statement matches the source verbatim (side-live = sheaf tree); only the lean field is new. Clause match: binders X:Scheme.{u}, prime ℓ, E≤F (E=F allowed), no invertibility; T_E = limit of spIntegralTwistSystem in O_E,X-modules (index k = exponent k+1, all positive levels); M_E = Mod.extendScalars along padicIntegersToPadicSubfield; α = Mod.act; i = coefficientMap(padicSubfieldRingObjMap h) = p_X^*(field inclusion); J and j are choose of the ∃! theorems with exactly the node's normalizations (not hollow); conclusion act_E≫j = (i⊗ₘj)≫act_F is the node identity. Theorem stmt_deps only define J and j by uniqueness (constructed-data precedent; stage-1 fields unchanged). All 12 dependency records match the declarations used. The source's ℓ-invertibility is needed only for local freeness. Universes u+1/ProEt with explicit small witness. Report sections present. No compile (nothing changed). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

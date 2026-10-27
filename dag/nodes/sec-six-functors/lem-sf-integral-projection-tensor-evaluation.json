@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-integral-projection-tensor-evaluation",
+ "kind": "lemma",
+ "title": "Natural lift of system tensor evaluation to finite constructible objects",
+ "statement": "For d,m as in [def-sf-integral-projection-finite-evaluation-data], invertible coefficient prime hl, and any SystemTensorEvaluation b of [def-sf-integral-projection-evaluation-factors], construct liftedTensorEvaluation d m hl b : TensorComparison d m. For every integral constructible K,L on X, evaluate datumTensorReduction, then b at the reduced systems, then tensor the two reductionEvaluation comparisons. This composite equals reductionEvaluation at the datum tensor followed by the finite inclusion applied to the corresponding liftedTensorEvaluation component. The comparison is natural in both inputs and is constructed from b by cancellation of the full finite inclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+ },
+ "stmt_deps": [
+  "def-sf-integral-projection-evaluation-factors"
+ ],
+ "proof": [
+  {
+   "text": "Whisker the datumTensorReductionIso by evaluation, then compose with b and the product of the two reductionEvaluation isomorphisms. This gives tensorEvaluationComparison as a natural isomorphism of ambient functors.",
+   "uses": [
+    "def-sf-integral-projection-coordinate-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+   }
+  },
+  {
+   "text": "Use the currying counit to identify the included finite partial tensor with the ambient transported tensor. Cancel the full and faithful finite inclusion to construct liftedTensorEvaluation. Its image is the explicit comparison by map_preimage. Cancel the adjacent reductionEvaluation hom and inverse to obtain liftedTensorEvaluation_square. The two partialTensor_map lemmas compute morphisms in either input under inclusion directly from the lift and currying definitions; the main proof can therefore keep partialTensor abstract during elaboration.",
+   "uses": [
+    "def-sf-integral-projection-evaluation-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-projection-coordinate-data",
+  "def-sf-integral-projection-evaluation-factors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars tensor product natural isomorphism projection formula adjunction counit",
+   "results": "8 hits. ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply",
+   "date": "2026-10-27",
+   "verdict": "No specialized finite-evaluation theorem. Use full inclusion, tensor naturality and the explicit project evaluation comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.preimageIso",
+   "results": "0 hits. loogle: unknown identifier 'Functor.preimageIso'",
+   "date": "2026-10-27",
+   "verdict": "No specialized finite-evaluation theorem. Use full inclusion, tensor naturality and the explicit project evaluation comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationTensor|fullyFaithfulCancelRight",
+   "results": "10 hits. Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+   "date": "2026-10-27",
+   "verdict": "No specialized finite-evaluation theorem. Use full inclusion, tensor naturality and the explicit project evaluation comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a tensor comparison evaluates a projection formula defined by an adjunction counit",
+   "results": "8 hits. CategoryTheory.expComparison_ev; CategoryTheory.coev_expComparison; CategoryTheory.tensorRightHomEquiv_naturality; CategoryTheory.tensorLeftHomEquiv_naturality",
+   "date": "2026-10-27",
+   "verdict": "No specialized finite-evaluation theorem. Use full inclusion, tensor naturality and the explicit project evaluation comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor projection map defined by an adjunction counit commutes with evaluation of a coefficient system",
+   "results": "8 hits. CategoryTheory.ihom.ihom_adjunction_counit; CategoryTheory.ihom.ev; TensorProduct.counit_def; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-27",
+   "verdict": "No specialized finite-evaluation theorem. Use full inclusion, tensor naturality and the explicit project evaluation comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionFiniteEvaluation",
+  "date": "2026-10-27",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization",
+   "via": [
+    "lem-sf-integral-projection-finite-evaluation",
+    "lem-sf-integral-projection-reduction-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionTensorEvaluation",
+  "file": "lean/Sheaf/Paper/IntegralProjectionTensorEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.liftedTensorEvaluation_square",
+  "statement": "theorem liftedTensorEvaluation_square (hl : IsUnit (C.l : D.k))\n    (b : SystemTensorEvaluation (C := C) (E := E) m) (X : SixFunctorSpace D)\n    (K L : sfIntegralConstructibleCategory C.l E X.obj.left) :\n    (evaluation (C := C) (E := E) m X).map\n        (FixProjectionCompactification.Coordinates.datumTensorReduction\n          D C E d.higher hl X K L).hom ≫\n      (b X).hom.app ((calculus C.l E X.obj.left).reduction.obj K.obj,\n        (calculus C.l E X.obj.left).reduction.obj L.obj) ≫\n      (evaluatedTensor (C := C) (E := E) m X).map\n        (Prod.mkHom (reductionEvaluation d m X K).hom (reductionEvaluation d m X L).hom) =\n    (reductionEvaluation d m X (((d.higher.integralTensor X).obj K).obj L)).hom ≫\n      (finiteInclusion (C := C) (E := E) m X).map\n        ((tensorCoordinates d m (liftedTensorEvaluation d m hl b)) X K L).hom",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.IntegralProjectionReduction.reductionSystemEvaluation",
+   "WeilConjectures.IntegralProjectionReduction.tensorEvaluationComparison",
+   "WeilConjectures.IntegralProjectionReduction.partialTensorEvaluation",
+   "WeilConjectures.IntegralProjectionReduction.liftedTensorEvaluation",
+   "WeilConjectures.IntegralProjectionReduction.liftedTensorEvaluation_hom",
+   "WeilConjectures.IntegralProjectionReduction.liftedTensorEvaluation_square",
+   "WeilConjectures.IntegralProjectionReduction.partialTensor_map_left",
+   "WeilConjectures.IntegralProjectionReduction.partialTensor_map_right"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261027T012951-L-2353223",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261027T012951-L-2353223",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

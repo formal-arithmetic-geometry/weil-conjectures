@@ -1,0 +1,164 @@
+{
+ "id": "lem-zl-continuous-coefficient-geometric-coherence",
+ "kind": "statement",
+ "title": "Geometric coherence of normalized continuous coefficients",
+ "statement": "Let D be a finite field datum and l a prime. For any family c assigning CoefficientFamily l E to each finite normed Q_l-extension E [def-zl-continuous-constructible-lattice-data], there exists CoefficientGeometry D l c. It consists of normalized integral and rational isomorphisms for locally closed immersions of separated finite-type D.k-schemes, their inverse-image composition equations, finite coefficient embeddings with their integer maps and compatible quotient-power reductions, and commutation of coefficient embeddings with restriction and with composition. This is coefficient data alone, with no constructible module or lattice.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Proposition 6.8.4 and Remark 6.8.15; agent transport between condensed internal and continuous sectionwise modules, expanded from old item steps 4-6 and blueprint paragraph 6."
+ },
+ "stmt_deps": [
+  "def-zl-continuous-constructible-lattice-data"
+ ],
+ "proof": [
+  {
+   "text": "First check the geometric hypotheses for every scheme to which the coefficient and lattice results will be applied. A field is Noetherian since its only ideals are zero and itself, and its spectrum is a quasi-compact single affine open; thus the finite-type-over-Noetherian lemma makes $W$ and $T$ Noetherian. The closed-subsets-minimal lemma gives their Noetherian underlying spaces. Every subspace of a Noetherian space is Noetherian: an ascending chain of relative opens lifts to an ascending chain of ambient opens by taking successive unions. Thus a locally closed subscheme $S$ has quasi-compact underlying space, as do its opens. Its immersion is locally of finite type by the immersion lemma and its composite to $\\operatorname{Spec}k$ is locally of finite type by permanence. Consequently $S$ is finite type over $k$: the source is quasi-compact and the target has one point. It is locally Noetherian by the locally-finite-type lemma and hence Noetherian. An immersion is separated (its relative diagonal is an isomorphism), so permanence also makes $S/k$ separated. These observations apply to successive strata and their reductions.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T5 (lemma-immersion-locally-finite-type), 01T6 (lemma-finite-type-noetherian); properties.tex, Noetherian topology"
+   }
+  },
+  {
+   "text": "For a locally closed $h:Z\\to W$, use the canonical coefficient isomorphisms of the immersion-coefficients theorem. The scheme-naturality lemma says that the condensed chart and the continuous chart commute with the actual pullback maps. Inverse-image composition and coefficient postcomposition commute by the coefficient-pullback-composition lemma, so successive restrictions give the same comparison. On each quotient, the integral comparison of step 2 is reduction; after localization it is the map induced by that reduction. For a finite coefficient extension $E\\subset E'$, naturality of the chart in the continuous maps $A\\to A'$ and $E\\to E'$ gives the extension square as well. Quotients are compared whenever the map descends to the chosen ideals, equivalently after passing to a cofinal compatible pair of uniformizer powers in a ramified extension. Each such comparison sends the residue class of $a$ to the residue class of its image. Equality on these projections proves equality on the limit; equality on coefficients and the inverted uniformizer proves equality on localization. Tensor comparisons are the balanced maps described next.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-continuous-chart-scheme-naturality",
+    "lem-weil-pbc-continuous-coefficient-pullback-composition",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; naturality of continuous functions and quotient/localization universal properties"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-continuous-chart-scheme-naturality",
+  "lem-weil-pbc-continuous-coefficient-pullback-composition",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Definitions 6.8.1 and 6.8.3, Lemma 6.8.2 and Remark 6.8.15; normalized internal/sectionwise assembly from existing DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars under equivalence of internal modules and sheaves of modules preserves tensor generators",
+   "results": "ModuleCat.extendScalars and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; ordinary module results only.",
+   "date": "2026-10-25",
+   "verdict": "No match for the internal sheaf encoding, normalized coefficient family, geometric coherence or reduced embedded lattice refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free rational pro etale sheaves admit integral lattices on reduced finite locally closed refinement of a constructible partition",
+   "results": "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.IsIntegral.component_integral; algebraic localizations and etale loci only.",
+   "date": "2026-10-25",
+   "verdict": "No match; these concern structure sheaves rather than the continuous coefficient rings and encoded internal modules."
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralCoefficient|finiteContinuousCoefficient|stratified.*lattice Mathlib/AlgebraicGeometry Mathlib/Condensed; rg sectionModuleEquivalence|sectionModuleComapIso Mathlib/CategoryTheory Mathlib/Algebra/Category/ModuleCat",
+   "results": "No matching declarations in Mathlib. Repository search finds the existing generic coefficient, encoding and internal stratified-lattice dependencies, but no theorem with the combined normalized interfaces.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; use existing DAG dependencies to prove the separate assembly steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ContinuousConstructibleStratifiedLattices",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 6, normalized coefficient/lattice interpretation; original node proof steps 1, 3.",
+   "via": [
+    "lem-zl-continuous-constructible-stratified-lattices",
+    "lem-zl-raw-heart-adic-lisse-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.ContinuousCoefficientGeometricCoherence",
+  "file": "lean/Sheaf/DeligneLaumon/ContinuousCoefficientGeometricCoherence.lean",
+  "declaration": "WeilConjectures.StratifiedContinuousLattices.continuous_coefficient_geometric_coherence",
+  "statement": "theorem continuous_coefficient_geometric_coherence (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (c : ∀ (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E], CoefficientFamily l E) : Nonempty (CoefficientGeometry D l c)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.StratifiedContinuousLattices.CoefficientGeometry",
+   "WeilConjectures.StratifiedContinuousLattices.continuous_coefficient_geometric_coherence"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-zl-continuous-coefficient-geometric-coherence",
+  "worker": "stage3",
+  "summary": "Isolated the indicated proper part of the existing argument as a named Lean theorem. No statement weakens the original Family conclusion.",
+  "blueprint": "Paragraph 6, normalized coefficient/embedded lattice interpretation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-chart-scheme-naturality",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-pullback-composition",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "independent cc review: 22 interface decls in new ContinuousConstructibleLatticeData vs live item module (verbatim, re-exported publicly); item proof = Family constructor from 4 sorry components vs Family fields; item proof_deps vs the 4 new nodes; importer RawHeartAdicStrataBridge compiled rc 0 against the delivered modules"
+ }
+}

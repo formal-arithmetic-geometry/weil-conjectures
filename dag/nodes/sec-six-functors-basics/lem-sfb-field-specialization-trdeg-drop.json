@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-field-specialization-trdeg-drop",
+ "kind": "statement",
+ "title": "Strict drop of residue transcendence degree under specialization",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a scheme [def-pc-scheme], and let $f:X\\to\\operatorname{Spec}k$ be locally of finite type [def-weil-affine-spectrum, def-weil-finite-type-morphism]. For any distinct points $x,x^{\\prime}\\in X$ with $x^{\\prime}\\in\\overline{\\{x\\}}$, one has $$\\operatorname{trdeg}_k\\kappa(x)>\\operatorname{trdeg}_k\\kappa(x^{\\prime}).$$ The fields $\\kappa(x)$ and $\\kappa(x^{\\prime})$ and their $k$-structures are the residue fields of [def-weil-residue-field], and transcendence degree is [def-kun-transcendence-degree]. Closure is in the Zariski topology. No quasi-compactness, reducedness, or separation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 06RU (lemma-dimension-fibre-specialization), assertion (3), with base Spec k."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of locally finite type, choose an affine member $U=\\operatorname{Spec}A$ of the finite-type affine cover of $f^{-1}(\\operatorname{Spec}k)=X$ containing $x^{\\prime}$. Thus $A$ is a finitely generated $k$-algebra. Since $x^{\\prime}\\in\\overline{\\{x\\}}$, every open containing $x^{\\prime}$ contains $x$: otherwise that open would be disjoint from $\\{x\\}$. In particular $x\\in U$. The affine-open identification gives distinct prime ideals $\\mathfrak p,\\mathfrak q$ of $A$ representing $x,x^{\\prime}$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-dimension-fibre-specialization, affine reduction for assertion (3); locally finite type as in definition-locally-finite-type"
+   }
+  },
+  {
+   "text": "The closed sets of $\\operatorname{Spec}A$ are $V(I)=\\{\\mathfrak r:I\\subseteq\\mathfrak r\\}$. Consequently the closure of the point $\\mathfrak p$ is $V(\\mathfrak p)$: it is closed and contained in every closed set containing $\\mathfrak p$. Restricting closure to the open subspace $U$ therefore gives $\\mathfrak p\\subsetneq\\mathfrak q$. Set $B=A/\\mathfrak p$ and $C=A/\\mathfrak q$. They are nonzero domains since the two ideals are prime, and finite type over $k$ since the images of any finite algebra-generating family for $A$ generate each quotient.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "lemma-tr-deg-specialization, reduction to the two prime quotients; Zariski closed sets defined in section-spectrum"
+   }
+  },
+  {
+   "text": "Apply clauses (1) and (2) of the affine residue-field theorem at both points. They identify $\\kappa_X(x)$ with a fraction field of $B$ and $\\kappa_X(x^{\\prime})$ with a fraction field of $C$, compatibly with the maps from $A$. These identifications respect $k$: in each case the structure map is the composite $k\\to A\\to\\kappa_X(z)$ induced by $f|_U$, and the affine identification commutes with its second arrow. Thus the transcendence degrees in the item are those of these two fraction fields with their induced $k$-structures.",
+   "uses": [
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "def-weil-residue-field",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Local rings, paragraph identifying the residue field at a prime with the fraction field of its quotient; schemes.tex, discussion before lemma-characterize-points"
+   }
+  },
+  {
+   "text": "The finite-type domain dimension theorem applies to $B$ and $C$: both are domains of finite type over the field $k$ by step 2. It gives finite natural numbers $d=\\dim B=\\operatorname{trdeg}_k\\kappa_X(x)$ and $e=\\dim C=\\operatorname{trdeg}_k\\kappa_X(x^{\\prime})$, using the compatible fraction-field identifications of step 3.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P0, lemma-dimension-prime-polynomial-ring, as used in lemma-tr-deg-specialization"
+   }
+  },
+  {
+   "text": "Because $C$ is a nonzero domain and its prime-chain lengths have finite supremum $e$, there is a chain $\\mathfrak r_0\\subsetneq\\cdots\\subsetneq\\mathfrak r_e$ of primes in $C$ (a bounded nonempty subset of $\\mathbf N$ attains its supremum). Take inverse images under the surjection $B\\to C$: they are prime because their quotients are the domains $C/\\mathfrak r_i$, and remain distinct because the map is surjective. Each contains the nonzero prime $\\mathfrak q/\\mathfrak p$ of $B$. Prepending the zero prime of the domain $B$ therefore gives a strict prime chain in $B$ of length $e+1$. By the definition of Krull dimension, $e+1\\le d$, hence $\\operatorname{trdeg}_k\\kappa_X(x^{\\prime})<\\operatorname{trdeg}_k\\kappa_X(x)$ as required.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "lemma-tr-deg-specialization, final dimension inequality, expanded as a prime-chain argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 06RU, lemma-dimension-fibre-specialization (3); the cited Algebra Tag 06RP, lemma-tr-deg-specialization, expanded using existing Tag 00P0 and the definition of prime-chain dimension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial specialization of points of a scheme locally of finite type over a field strictly decreases residue field transcendence degree",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Scheme.descResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type field algebra strict inclusion of prime ideals strictly decreases the transcendence degree of their residue fields",
+   "results": "Actual hits: Ideal.inertiaDeg_le_finrank, trdeg_lt_aleph0, Ideal.inertiaDeg_pos, lift_trdeg_add_le, Ideal.inertiaDeg_ne_zero, trdeg_add_le, Ideal.inertiaDegIn, lift_trdeg_add_eq. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a scheme locally of finite type over a field nontrivial specialization strictly decreases residue transcendence degree",
+   "results": "Actual hits: lift_trdeg_le_of_surjective, AlgebraicGeometry.Scheme.instPreorderCarrierCarrierCommRingCat, IsTranscendenceBasis.lift_cardinalMk_eq_trdeg, Specializes.trans, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, lift_trdeg_add_le, trdeg_le_of_surjective, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trdeg\", \"Specializes\"",
+   "results": "Actual hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "transcendence|trdeg|specializ.*degree|degree.*specializ",
+   "results": "Actual hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|transcendence",
+   "results": "0 actual hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results give residue-field maps, finiteness, non-strict surjective transcendence-degree bounds, or fraction-field rank identities; none asserts strict specialization drop for scheme points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a scheme locally of finite type over a field nontrivial specialization strictly decreases residue transcendence degree",
+   "results": "8 actual hits: lift_trdeg_le_of_surjective, AlgebraicGeometry.Scheme.instPreorderCarrierCarrierCommRingCat, IsTranscendenceBasis.lift_cardinalMk_eq_trdeg, Specializes.trans, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, lift_trdeg_add_le, trdeg_le_of_surjective, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: results give residue-field maps, finiteness, non-strict surjective transcendence-degree bounds, or fraction-field rank identities; none asserts strict specialization drop for scheme points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trdeg\", \"Specializes\"",
+   "results": "0 actual hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results give residue-field maps, finiteness, non-strict surjective transcendence-degree bounds, or fraction-field rank identities; none asserts strict specialization drop for scheme points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial specialization of points of a scheme locally of finite type over a field strictly decreases residue field transcendence degree",
+   "results": "8 actual hits: AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Scheme.descResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: results give residue-field maps, finiteness, non-strict surjective transcendence-degree bounds, or fraction-field rank identities; none asserts strict specialization drop for scheme points."
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg.*[Ll]t|[Ll]t.*trdeg|trdeg_eq_of_ringKrullDim_eq",
+   "results": "7 actual hits: Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean, Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: results give residue-field maps, finiteness, non-strict surjective transcendence-degree bounds, or fraction-field rank identities; none asserts strict specialization drop for scheme points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type field algebra strict inclusion of prime ideals strictly decreases the transcendence degree of their residue fields",
+   "results": "8 actual hits: Ideal.inertiaDeg_le_finrank, trdeg_lt_aleph0, Ideal.inertiaDeg_pos, lift_trdeg_add_le, Ideal.inertiaDeg_ne_zero, trdeg_add_le, Ideal.inertiaDegIn, lift_trdeg_add_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: results give residue-field maps, finiteness, non-strict surjective transcendence-degree bounds, or fraction-field rank identities; none asserts strict specialization drop for scheme points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a domain algebra finite type over a field dimension equals fraction field transcendence degree",
+   "results": "8 actual hits: Algebra.IsAlgebraic.rank_fractionRing, trdeg_lt_aleph0, Algebra.IsAlgebraic.finrank_of_isFractionRing, Algebra.IsAlgebraic.rank_fractionRing_polynomial, Algebra.IsAlgebraic.rank_of_isFractionRing, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, Polynomial.trdeg_of_isDomain, instFiniteDimensionalFractionRingOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: results give residue-field maps, finiteness, non-strict surjective transcendence-degree bounds, or fraction-field rank identities; none asserts strict specialization drop for scheme points."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-field-etale-chart-quasifinite",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Etale presentation test for intrinsic stack local quasi-finiteness. Supporting input for the etale local-quasi-finiteness test: Etale scheme charts of a discrete finite-type DM stack over a field. Supporting input to the 06UC specialization argument: Strict drop of residue transcendence degree under specialization.",
+   "via": [
+    "lem-sfb-dm-field-etale-chart-quasifinite",
+    "lem-sfb-dm-lqf-atlas-test",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-specialization-trdeg-drop",
+  "worker": "stage1",
+  "summary": "Reduced to one finite-type affine chart containing the specialization, identified both residue fields with fraction fields of prime quotients, applied the existing finite-type-domain dimension theorem, and wrote out the strict dimension inequality by prepending the zero prime to a lifted prime chain. No new nodes: all remaining arguments are elementary from the cited statements. No statement or route correction.",
+  "blueprint": "Supporting dimension input beneath the inherited alteration/moduli creation chain; the latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) is the direct-image preservation clause. The inherited blueprint.from.node is null (confirmed by blueprint_refs.py ancestor); its explicit place and via chain are retained. Whole-blueprint searches for transcendence, specialization and 06RP found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic finite-type domain dimension/transcendence theorem (00P0), applied to the two affine prime quotients; the item unit provides no algebraic replacement. This implements the existing 06RU/06RP route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-871aa88ee",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-871aa88ee (reviewer sub-agent of L); spot-checked: Shape: one commit; no new nodes; item statement, stmt_deps and blueprint identical to live, which still has the item unsplit; no repair or re-split note. Source: Stacks morphisms.tex 5529 (06RU) part (3) with base Spec k, and algebra.tex 28201 (06RP), whose proof goes through 00P0; the split follows this route. Step 1: from def-weil-finite-type-morphism, pick a chart U=Spec A of finite type containing x'; the specialization puts x in U; the affine-open Mathlib leaf gives primes p≠q. Step 2: the closure of p is V(p), so p⊊q, and A/p and A/q are domains of finite type over k. Step 3: clauses (1)-(2) of lem-weil-pbc-spec-field-point-residue-field identify κ(x) and κ(x') with fraction fields of B and C compatibly with A, so the k-structures match. Step 4: lem-weil-pbc-finite-type-domain-dimension-trdeg gives d=dim B=trdeg κ(x) and e=dim C=trdeg κ(x'), both finite. Step 5: pull back a length-e chain of C along B→C, put (0) in front (each preimage contains q/p≠0), so e+1≤d. proof_deps equals the union of step uses and the elementary flags are correct. Tested on k[t], k[t,u] and the non-reduced k[t,ε]/(ε²). Searched for duplicates (06RP/06RU, trdeg with specialization, lem-sc-closed-irreducible-dimension-trdeg, lem-zl-image-point-closure-dimension-bound, the sibling nonquasifinite-specialization): none states the strict drop. Accepted tool_use: lem-weil-pbc-finite-type-domain-dimension-trdeg (generic 00P0). The residue-field node is closed in slopmaster2, so it counts as a tool. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldSpecializationTrdegDrop",
+  "declaration": "AlgebraicGeometry.field_specialization_trdeg_drop",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldSpecializationTrdegDrop.lean",
+  "statement": "theorem field_specialization_trdeg_drop {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (x x' : X) (hne : x ≠ x') (hsp : x' ∈ closure ({x} : Set X)) : @Algebra.trdeg k (X.residueField x') _ _ (f.residueFieldAlgebraMap x').toAlgebra < @Algebra.trdeg k (X.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb3f9bfb2",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Only lean field changed vs live (item unstated live, no repair note). Lean renders every clause: Field k (Type u forced by Spec(.of k)/Scheme.{u}), LocallyOfFiniteType f (no qc), x≠x', x'∈closure{x} (correct direction), strict Algebra.trdeg κ(x') < κ(x) in Cardinal.{u}, with k-algebras from the canonical existing Scheme.Hom.residueFieldAlgebraMap (k→κ(f x)≅→κ(x) via residueFieldIso+residueFieldMap). Matches Stacks 06RU(3) over Spec k. No defs, sorry only, docstrings with source/blueprint/5 proof steps, public imports needed by the signature, plain imports = existing proof_dep modules, statement verbatim. Edge cases: empty X/Spec k vacuous; k[t], k[t,u], k[t,ε]/(ε²); non-qc allowed. No compile (no change). Advisory: residueFieldAlgebraMap owned by non-stmt_dep sk-def-zeta; parallel residueFieldHomOfOver exists in SupportDimension."
+ }
+}

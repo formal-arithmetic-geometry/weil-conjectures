@@ -1,0 +1,279 @@
+{
+ "id": "lem-sf-exceptional-finite-operations",
+ "kind": "statement",
+ "title": "Exceptional coefficient construction: finite operations",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ with $k=\\overline{k_0}$, a prime $\\ell\\ne p$, and finite extensions $E/\\mathbf Q_\\ell$ with valuation rings $R_E$, uniformizers $\\varpi_E$, and $A_{E,n}=R_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism; neither $X$ nor $Y$ is assumed separated over $k$ [def-weil-scheme-morphism-properties]. Fix a compactification $c=(X\\xrightarrow j\\overline X\\xrightarrow{p_c}Y)$ [def-weil-compactifications-refinements]. Write $\\mathcal C_{T,A}=D^b_{ctf}(T_{\\mathrm{proet}},A)$ for the actual full category of bounded constructible constant-$A$ complexes with finite Tor amplitude, and $I_{T,A}$ for its full inclusion [def-weil-pbc-proetale-modules, def-weil-finite-tor-amplitude]. Put $F_A=Rp_{c,*}j_!$ and $G_A=\\nu_X^*f^\\times_{c,A}R\\nu_{Y,*}$, using the ordinary etale compact-support right adjoint [def-compact-support-direct-image-detailed, def-weil-exceptional-inverse-image]. There is a choice of additive exact adjunction $F_A\\dashv G_A$ on these full categories, with the displayed ambient realizations, coherent integer shifts and shift-compatible unit and counit. The Hom bijection is the ordinary etale adjunction transported by the site-comparison unit and proper/open comparison. If $d_c\\ge0$ bounds the dimension of the nonempty middle scheme, $F_A$ carries Tor interval $[a,b]$ into $[a,b+2d_c]$. For $G_A$ the constructible cohomological and Tor bounds can also be chosen independently of $E,n$. For an empty middle scheme take $d_c=0$. The right shift structure is the adjoint one for the fixed left shift structure. These choices can be made for every $c,E,n$.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Specific obligation: returned construction steps 1–3, preserved verbatim in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-finite-tor-amplitude",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-constructible-intervals",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sfb-finite-derived-lower-shriek-compactification",
+  "def-sf-intrinsic-compact-support-realization",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-sf-specified-exceptional-hom-chain"
+ ],
+ "proof": [
+  {
+   "text": "Give c.Z its structure map c.g followed by Y to Spec(k). Properness of c.g gives finite type and quasi-compactness of this composite. The identity c.i c.g=f gives the open map its k-compatibility; quasi-compactness of f gives quasi-compactness of c.i.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite-Tor object K, apply finiteStageDerivedExtensionByZero_constructibleFiniteTor to c.i. Apply finiteCoefficientDirectImage_boundedConstructible_torAmplitude to the proper c.g over k, the supplied d, and the same Tor interval. Pair its bounded constructibility and Tor interval to obtain finite-Tor membership of the support value, with interval [a,b+2d].",
+   "uses": [
+    "lem-trf-open-ctf",
+    "cor-sf-direct-image-ctf-proetale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the uniform intrinsic exceptional bounds. Construct the actual F and G using ObjectProperty.lift of the inclusions composed with the two ambient functors. Both inclusion equalities hold definitionally; the lift maps every morphism by the ambient map.",
+   "uses": [
+    "lem-sf-finite-intrinsic-exceptional-bounds"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized restricted-adjunction theorem to these literal F,G and equalities. Install its left additive and exact structures. Choose exactly adj.rightAdjointCommShift as the right shifts; commShift_of_leftAdjoint supplies unit/counit compatibility, right_adjoint_additive supplies additivity, and isTriangulated_rightAdjoint supplies right exactness.",
+   "uses": [
+    "lem-sf-finite-restriction-normalized-adjunction",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Return the realization maps, origins and normalization from the restricted-adjunction theorem and the three bounds from the two preservation arguments. Since the lift objects are definitionally the ambient output objects, the final bounds need no extra transport. All choices are made separately for each coefficient stage, with the uniform constants fixed first.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "cor-sf-direct-image-ctf-proetale",
+  "def-weil-proper-morphism",
+  "lem-sf-finite-intrinsic-exceptional-bounds",
+  "lem-sf-finite-restriction-normalized-adjunction",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-open-ctf",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Same finite-stage route, with extension/direct-image bound proved in Lean; normalized restricted adjunction and intrinsic exceptional bounds split off; Mathlib gives right additivity, adjoint shifts, and triangulated right adjoint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sfFiniteExceptional|constructible.*adjunction|compactSupport.*Tor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport ordinary etale compact support adjunction to constructible finite Tor pro etale categories with shift compatible unit counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an adjunction between the continuous sheaf pushforward functor $ G_*\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the hom-set equivalence in the adjunction between the continuous and cocontin\"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support and exceptional inverse image restrict to an exact adjunction on bounded constructible finite Tor pro etale sheaves with uniform coefficient bounds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((LightCondensed.forget R).map\\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\\n        ((LightCondMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction \"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the hom-set equivalence in the adjunction between the continuous and cocontin\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((Condensed.forget R).map\\n      ((Condensed.discreteUnderlyingAdj (ModuleCat R)).counit.app ((CondensedMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the counit of the adjunction between discrete condensed modules and the underlying category, evaluated at the locally constant condensed module associated to $ M $, be\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support and exceptional inverse image restrict to an exact adjunction on bounded constructible finite Tor pro etale sheaves with uniform coefficient bounds",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \": G.sheafPushforwardContinuous A J K ⊣ G.sheafPushforwardCocontinuous A J K\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an adjunction between the continuous sheaf pushforward functor $ G_*\"}\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : pullback A f ⊣ pushforward A f\", \"doc\": \"For any continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ (mapping sheaves on $ Y $ to sheaves on $ X $) is left adjoint to the sheaf pushforward functor $ f_\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[Functor.IsContinuous.{v₁} G J K] [HasWeakSheafify K A] : sheafPullback G A J K ⊣ G.sheafPushforwardContinuous A J K\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and assuming the existence of weak sheafifications for $ K $, this constructs\"}\n  {\"name\": \"CategoryTheory.constantSheafΓAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : constantSheaf J A ⊣ Γ J A\", \"doc\": \"The constant sheaf functor is left adjoint to the global sections functor, establishing an adjunction between them in the category of sheaves with respect to a Grothendieck topology $J$.\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_unit\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"Under the assumption that effective epimorphisms are surjective, the unit of the adjunction between the functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces and \"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] : functor.{u, w} P hs ⊣ (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩\", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Category.{v_2, u_2} D} {inst✝² : CategoryTheory.Limits.HasZeroObject C} {inst✝³ : CategoryTheory.Limits.HasZeroObject D} {inst✝⁴ : CategoryTheory.Preadditive C} {inst✝⁵ : CategoryTheory.Preadditive\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Category.{v_2, u_2} D} {inst✝² : CategoryTheory.Limits.HasZeroObject C} {inst✝³ : CategoryTheory.Limits.HasZeroObject D} {inst✝⁴ : CategoryTheory.Preadditive C} {inst✝⁵ : CategoryTheory.Preadditive\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Has\", \"doc\": \"The left adjoint of a triangulated functor is triangulated.\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Has\", \"doc\": \"The right adjoint of a triangulated functor is triangulated.\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Has\", \"doc\": \"Constructor for `Adjunction.IsTriangulated`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Has\", \"doc\": \"Constructor for `Adjunction.IsTriangulated`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Has\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support and its exceptional right adjoint on bounded constructible finite Tor pro etale complexes with uniform coefficient bounds and exact shift compatible adjunction",
+   "results": "[leanfinder] OK 8 hit(s): CondensedSet.compactlyGeneratedAdjunction, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, LightCondSet.LocallyConstant.adjunction, LightCondensed.freeForgetAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the geometric finite exceptional construction or its uniform bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(Tor|constructible)|compactSupport.*[Aa]djun|rightDerivedUpperShriek",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the geometric finite exceptional construction or its uniform bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image and compact support form an exact adjunction on bounded constructible finite Tor pro etale sheaves",
+   "results": "[leansearch] OK 8 hit(s): SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionContinuous, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.constantSheafΓAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the geometric finite exceptional construction or its uniform bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "[loogle] OK 7 hit(s): CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk",
+   "date": "2026-10-22",
+   "verdict": "partial: categorical exact-adjoint result only, already cited through lem-sf-triangulated-right-adjoint; no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated morphism of finite type schemes over an algebraically closed field and finite torsion coefficients, extraordinary pullback and proper pushforward extension by zero preserve constructible perfect complexes and form an adjoint pair",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the geometric finite exceptional construction or its uniform bounds"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-constructible-exceptional-coefficient-construction",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-sf-tensor-hom, third Hom bijection and coefficient compatibility; exceptional inverse-image paragraph; returned construction steps 1–3.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exceptional-finite-operations",
+  "worker": "NA stage1",
+  "summary": "Split finite operations using existing open-extension, direct-image, relative exceptional bound, class adjunction and categorical shift interfaces. No new nodes; statement and statement dependencies retained. Checked nonseparated absolute schemes, actual full inclusions, coefficient-independent bounds and the specified adjoint shift.",
+  "blueprint": "sk-thm-sf-tensor-hom, third Hom bijection and exceptional inverse-image construction: parent lem-sf-constructible-exceptional-coefficient-construction retained returned steps 1–3, realized here by Steps 1–2 (left functor and bounds), 3–4 (right preservation and transported adjunction), 5 (adjoint shifts and exactness). Inherited ancestor None is reported.",
+  "tool_uses": [
+   {
+    "node": "cor-pur-general-admissibility-datum",
+    "why": "Uniform finite exceptional cohomological and Tor bounds with only relative separatedness."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Proper direct image preserves finite-Tor constructibility with the explicit 2d bound."
+   },
+   {
+    "node": "lem-compact-support-direct-image-triangulated",
+    "why": "Exactness of the actual ambient left compact-support functor before restricting."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of the compactification middle scheme; a geometric dimension tool, not a replacement of the compatibility-unit route."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Canonical proper/open comparison used to normalize the transported Hom bijections."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Every intrinsic bounded constructible object has an etale-origin witness."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Open extension preserves the same constructible and Tor bounds before applying proper direct image."
+   },
+   {
+    "node": "lem-weil-finite-ctf-triangulated",
+    "why": "The actual full finite-Tor domains are triangulated, allowing restriction of exact structures."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Existence of the ordinary etale right adjoint before site transport."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Witness-independent relative Hom bijections for the precise finite exceptional composite."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Fully faithful bounded-below comparison Hom map and invertible unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-pur-general-admissibility-datum",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-compact-support-direct-image-triangulated",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-open-ctf",
+  "lem-weil-finite-ctf-triangulated",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-sf-ambient-adjoint-class",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-6a6d46d1a",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-6a6d46d1a (reviewer sub-agent of L); spot-checked: Read the item's six steps and the statements of all 17 proof_deps in full; there are no new nodes, no repair note and no change to the statement or stmt_deps. Sources checked: Zheng Cor 2.19 (amplitude [0,2d] and tor-dimension of Rf_!), Prop 2.23 (right adjoint) and Prop 3.16(2) (Rf^! preserves D^b_c); Stacks 0A8D lemma-adjoint-is-exact. Step 1: the finite-type and Noetherian claims on X, Xbar and Y come from the cited nodes, and d_c is finite with the empty case set to 0. Step 2: lem-trf-open-ctf and cor-sf-direct-image-ctf-proetale give the interval [a,b+2d_c] for any separated p_c, and ctf-triangulated lets the exact structure restrict. Step 3: cor-pur-general-admissibility-datum needs only that f is separated (X and Y may be nonseparated); c=2D+2e+1, so both bounds are [a-2D,b+2e+1], which depend only on the geometry and not on E or n. Step 4: thm-sf-ambient-adjoint-class clause 2 gives P_c=F_A and R_c=G_A with a natural bijection on all etale-origin inputs, which constructible-origin covers; adjunction-of-natural-bijection then gives the unit, counit and triangle identities. Step 5: shift-compatibility clause (iii) plus triangulated-right-adjoint make G exact, and I verified the additivity calculation. Step 6: empty cases handled. I found no cycle and no SGA citation, and I accept the tool_uses. Duplicate search: the separated-only nodes lem-pur-finite-coefficient-adjoint-comparisons, lem-sf-finite-exceptional-compositor-coefficients and thm-sf-preservation-class are narrower. Maintainer note: the unsplit lem-sf-package-finite-exceptional-domain (2026-10-22) is the special case of this item for separated X and Y and could later cite it."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalFiniteOperations",
+  "declaration": "WeilConjectures.exists_sfFiniteExceptionalOperations",
+  "declarations": [
+   "WeilConjectures.exists_sfFiniteExceptionalOperations"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalFiniteOperations.lean",
+  "statement": "theorem exists_sfFiniteExceptionalOperations (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (d : ℕ) (hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : ∃ cMinus cPlus : ℤ, ∀ (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+), ∃ (F : finiteTorConstructibleCategory l E.carrier n n.pos X ⥤ finiteTorConstructibleCategory l E.carrier n n.pos Y) (G : finiteTorConstructibleCategory l E.carrier n n.pos Y ⥤ finiteTorConstructibleCategory l E.carrier n n.pos X) (eF : F ⋙ (finiteTorConstructible l E.carrier n n.pos Y).ι = (finiteTorConstructible l E.carrier n n.pos X).ι ⋙ sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E.carrier n)) (eG : G ⋙ (finiteTorConstructible l E.carrier n n.pos X).ι = (finiteTorConstructible l E.carrier n n.pos Y).ι ⋙ sfFiniteOperationsIntrinsicRight l E n c) (_ : F.Additive) (_ : G.Additive) (_ : F.CommShift ℤ) (sG : G.CommShift ℤ) (adj : F ⊣ G), F.IsTriangulated ∧ G.IsTriangulated ∧ adj.unit.CommShift ℤ ∧ adj.counit.CommShift ℤ ∧ sG = adj.rightAdjointCommShift ℤ ∧ ∃ (rF : F ⋙ sfFiniteOperationsRealization l E n Y ≅ sfFiniteOperationsRealization l E n X ⋙ ProEtale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.carrier n))) c) (rG : G ⋙ sfFiniteOperationsRealization l E n X ≅ sfFiniteOperationsRealization l E n Y ⋙ ProEtale.sfFiniteExceptionalAt (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.carrier n)) c) (hX : ∀ K : finiteTorConstructibleCategory l E.carrier n n.pos X, DerivedCategory.TStructure.t.plus ((sfFiniteOperationsRealization l E n X).obj K)) (hY : ∀ L : finiteTorConstructibleCategory l E.carrier n n.pos Y, DerivedCategory.TStructure.t.plus ((sfFiniteOperationsRealization l E n Y).obj L)), rF = sfFiniteOperationsLeftRealization l E n c F eF ∧ rG = sfFiniteOperationsRightRealization l E n c G eG ∧ rF.hom.CommShift ℤ ∧ rG.hom.CommShift ℤ ∧ (∀ K : finiteTorConstructibleCategory l E.carrier n n.pos X, Nonempty (FixedEtaleOriginWitness X (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.carrier n)) ⟨(sfFiniteOperationsRealization l E n X).obj K, hX K⟩)) ∧ (∀ (K : finiteTorConstructibleCategory l E.carrier n n.pos X) (L : finiteTorConstructibleCategory l E.carrier n n.pos Y) (W : FixedEtaleOriginWitness X (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.carrier n)) ⟨(sfFiniteOperationsRealization l E n X).obj K, hX K⟩) (a : F.obj K ⟶ L), (sfFiniteOperationsRealization l E n X).map (adj.homEquiv K L a) ≫ rG.hom.app L = sfFiniteOperationsHomEquiv l E n D.k (Y ↘ Spec (.of D.k)) c ⟨(sfFiniteOperationsRealization l E n X).obj K, hX K⟩ W ⟨(sfFiniteOperationsRealization l E n Y).obj L, hY L⟩ (rF.inv.app K ≫ (sfFiniteOperationsRealization l E n Y).map a)) ∧ (∀ (K : finiteTorConstructibleCategory l E.carrier n n.pos X) (a b : ℤ), HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E.carrier n) K.obj a b → HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E.carrier n) (F.obj K).obj a (b + 2 * (d : ℤ))) ∧ (∀ (L : finiteTorConstructibleCategory l E.carrier n n.pos Y) (a b : ℤ), constructibleInterval l E.carrier n n.pos Y a b L.obj → constructibleInterval l E.carrier n n.pos X (a + cMinus) (b + cPlus) (G.obj L).obj) ∧ (∀ (L : finiteTorConstructibleCategory l E.carrier n n.pos Y) (a b : ℤ), HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E.carrier n) L.obj a b → HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E.carrier n) (G.obj L).obj (a + cMinus) (b + cPlus))",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcc263f03",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 65b3; all faults fixed. H3: eF/eG pin F, G to the restrictions of sfIntrinsicCompactSupport c A and of e_Y⁻¹⋙sfFiniteExceptionalAt c⋙e_X. rF/rG are fixed to canonical maps (sfIntrinsicCompactSupportComparison via inverseCompIso/compInverseIso; compInverseIso(Iso.refl) unit⁻¹), both with CommShift; the realization is fully faithful, so the Hom clause determines adj and the −1 witness no longer works. H4: sfIntrinsicCompactSupport is used. H2: owners added (proetale-tor-amplitude, constructible-intervals, etale-origin-witness, lower-shriek, intrinsic-compact-support-realization, intrinsic-direct-adjunction, new existing:true def-sf-specified-exceptional-hom-chain); no theorem stmt_dep. New node statement checked against the def body and blueprint def-weil-exceptional-inverse-image; lean.statement verbatim; only the theorem node also records the declaration. Hypotheses, universes, n:ℕ+, 2d Tor bound, uniform G bounds before ∀E n, adjoint shift and edge cases OK; item statement verbatim; no dep record changes; no live supersession; only the main theorem is sorry. Advisory: the new node lacks stmt_deps for two body factors (fixedCompactSupportComparisonIso, comparison adjunction); H11 self second reading. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-330ed",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T164918-L-1127780",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs clone (moved 11 decls byte-identical, item statement identical); split sorry statements vs nodes and library (sf_purity_affine_chart_bounds, constructibleInterval); importers ExceptionalRefinementMates + FiniteExceptional compiled against delivered modules (exit 0)"
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-open-coefficient-tensor-pushforward",
+ "kind": "statement",
+ "title": "Tensor pushforward along an invertible coefficient map",
+ "statement": "Let C and D be categories essentially small in the coefficient universe, with Grothendieck topologies J and K admitting the indicated additive sheafifications and locally-bijective criteria. Suppose F:C→D is continuous and cocontinuous, R and S are commutative ring sheaves on the two sites, and a:R→F_*S is an isomorphism. With the module-sheaf conventions of [def-sfb-scalar-hom-comparison-data], the concrete coefficient pushforward P along a admits a two-variable natural isomorphism (P×P)⋙tensor_R ≅ tensor_S⋙P. At every site object its component carries the pure tensor of two sections to the pure tensor of those same sections on D. This makes no assertion about open immersions, scalar reduction or existence of coefficient transports.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; strict generator normalization of the open projection formula."
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-scalar-ordinary-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the presheaf restriction tensor isomorphism along the pointwise invertible coefficient map. Compose its sheafification with restrictionSheafificationMap, which is invertible for the continuous cocontinuous functor.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate by tensorObjIsoSheafification on the two sites. The unit formulas give identity on pure tensors, and tensor-section extensionality proves naturality in both module variables. Package this as a natural isomorphism. For use in the open projection proof, also package the native/site tensor comparison and prove its two-variable naturality by the same pure-section test.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "lem-sfb-scalar-ordinary-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; strict generator normalization of the open projection formula. Substep of lem-sf-open-semilinear-ordinary-comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A continuous cocontinuous site functor transports tensor products of module sheaves along an isomorphic coefficient sheaf",
+   "results": "8 hits: SheafOfModules.pushforward, CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback, CategoryTheory.Functor.sheafPushforwardCocontinuous",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pushforward\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*tensor|tensor.*pushforward",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSemilinearOrdinaryComparison",
+  "date": "2026-10-27",
+  "group": "V4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-semilinear-ordinary-comparison",
+   "place": "Ordinary open comparison: Tensor pushforward along an invertible coefficient map.",
+   "via": [
+    "lem-sf-open-semilinear-ordinary-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenCoefficientTensorPushforward",
+  "file": "lean/Sheaf/SixFunctors/OpenCoefficientTensorPushforward.lean",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.coefficientTensorPushforwardExists",
+  "statement": "theorem coefficientTensorPushforwardExists :\n    let P := SheafOfModules.pushforward.{r} (F := F) (J := J) (K := K)\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map a)\n    ∃ e : P.prod P ⋙ @MonoidalCategory.tensor _ _ (monoidalCategory R) ≅\n        @MonoidalCategory.tensor _ _ (monoidalCategory S) ⋙ P,\n      ∀ (M N : scalarModules K S) (V : Cᵒᵖ)\n        (x : M.val.obj (F.op.obj V)) (y : N.val.obj (F.op.obj V)),\n        (e.hom.app (M, N)).val.app V (pure R (P.obj M) (P.obj N) V x y) =\n          pure S M N (F.op.obj V) x y",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T222804-L-696166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T222804-L-696166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

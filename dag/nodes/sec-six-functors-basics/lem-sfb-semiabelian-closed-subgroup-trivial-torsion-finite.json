@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+ "kind": "statement",
+ "title": "A closed semiabelian subgroup with trivial invertible-prime torsion is finite",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G/k$ be a smooth separated commutative group scheme of finite type [def-pc-scheme, def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism] with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. Let $H\\hookrightarrow G$ be a closed subgroup scheme [def-sc-group-scheme-subgroup]. Let $\\ell$ be a prime integer whose image in $k$ is nonzero. Write $[\\ell]_H:H\\to H$ for addition of $\\ell$ copies of a point, and let $e_H:\\operatorname{Spec}k\\to H$ be the identity section. Define $H[\\ell]=H\\times_{H,[\\ell]_H,e_H}\\operatorname{Spec}k$ [def-pc-fibre-product]. If its identity section $\\operatorname{Spec}k\\to H[\\ell]$ is an isomorphism, then $H\\to\\operatorname{Spec}k$ is finite [def-weil-finite-integral-morphism]. Neither reducedness nor connectedness of $H$ is assumed. Rank zero tori and zero-dimensional abelian quotients are allowed.",
+ "source": {
+  "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+  "place": "Brian Conrad, Semistable reduction for abelian varieties, Corollary 3.3, printed p.8, restricted to algebraically closed k and an invertible prime. Local copy WANTED; read the author PDF online at https://math.stanford.edu/~conrad/DarmonCM/2011Notes/SemistableReduction.pdf . This is the closed-subgroup input of the proof of Theorem 4.4, printed p.13."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "A finite affine cover of $G$ by spectra of finitely generated $k$-algebras restricts under the closed immersion $H\\hookrightarrow G$ to spectra of quotient algebras. These quotients are still finitely generated, so $H$ is of finite type. Apply [lem-sfb-locally-algebraic-group-identity-component] to $H$: the identity component $H^0$ is a clopen subgroup and $B=(H^0)_{\\mathrm{red}}$ is a smooth connected finite-type group with $|B|=|H^0|$. Its inclusion in $G$ is a closed subgroup: reduction is a closed immersion, and the inclusions compose by [lem-weil-pbc-closed-immersion-products].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Corollary 3.3 proof, reduction to the smooth connected reduced identity component; Stacks Tags 0B7R, 047R, 047P and 047N as in the cited existing component node"
+   }
+  },
+  {
+   "text": "Write $j:B\\hookrightarrow H$. On every $k$-algebra $R$, if $b\\in B(R)$ satisfies $[\\ell]b=0$, then $j(b)\\in H[\\ell](R)$, so $j(b)=0$ by the assumed isomorphism $H[\\ell]\\simeq\\operatorname{Spec}k$. Injectivity of $j(R)$ gives $b=0$. Thus the identity identifies $B[\\ell]$ with the trivial group functor, hence with $\\operatorname{Spec}k$.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Corollary 3.3 proof, torsion vanishing inherited by the reduced identity subgroup"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-connected-semiabelian-subgroup] to $B\\hookrightarrow G$, using smoothness and connectedness from step 1. Obtain an exact sequence $1\\to T\\to B\\xrightarrow{q}A\\to1$ of fppf sheaves, where $T=(\\mathbf G_m)^r$ and $A$ is an abelian variety.",
+   "uses": [
+    "lem-sfb-smooth-connected-semiabelian-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Corollary 3.3 proof, semiabelianity of the reduced identity subgroup via Corollary 3.2"
+   }
+  },
+  {
+   "text": "If $r>0$, the nonconstant polynomial $P(X)=1+X+\\cdots+X^{\\ell-1}$ has a root $\\zeta\\in k$ by [def-weil-algebraic-closure]. Since $P(1)=\\ell\\ne0$ and $P(0)=1$, one has $\\zeta\\ne1,0$; the identity $(X-1)P(X)=X^\\ell-1$ gives $\\zeta^\\ell=1$. The point $(\\zeta,1,\\ldots,1)\\in T(k)$ is nonidentity and killed by $\\ell$. The subgroup injection $T(k)\\to B(k)$ contradicts step 2. Therefore $r=0$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-sfb-tori-multiplicative-type"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Corollary 3.3 proof, vanishing of the toric rank; elementary geometric-series calculation replaces the full torus torsion-order formula"
+   }
+  },
+  {
+   "text": "Now $T=1$. Exactness in step 3 makes $q$ injective on sections and locally surjective. Every local lift of a section of $A$ agrees with every other lift on overlaps because their difference belongs to $T=1$; the sheaf gluing axiom gives a unique global lift. Thus $q$ is an isomorphism of represented fppf sheaves, and hence of group schemes (evaluate the inverse natural transformation on the identity of each representing scheme). Consequently $B$ is an abelian variety. By [lem-sc-mult-n-finite-flat], its finite kernel $B[\\ell]$ has order $\\ell^{2g}$ for $g=\\dim B$. Step 2 gives order one; since $\\ell\\geq2$, this forces $g=0$.",
+   "uses": [
+    "lem-sc-mult-n-finite-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Corollary 3.3 proof, the abelian-variety case; Stacks Tag 03RP (proposition-review-abelian-varieties) and Tag 0BFG (lemma-degree-multiplication-by-d) for the existing torsion-order node"
+   }
+  },
+  {
+   "text": "The homeomorphism $|B|=|H^0|$ from step 1 gives $\\dim H^0=0$. By [lem-sfb-group-neutral-component-translates], $H$ has finitely many clopen components and each is isomorphic to $H^0$. Any chain of nonempty irreducible closed subsets lies in one component: an irreducible subset cannot meet a clopen set and its complement. Thus $\\dim H=0$. Apply [lem-pc-zero-dimensional-closed-subscheme-finite] to $H\\hookrightarrow G$, a closed subscheme of a finite-type $k$-scheme with topological dimension zero. Its structure morphism is finite, without requiring $H$ reduced or connected.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-group-neutral-component-translates",
+    "lem-pc-zero-dimensional-closed-subscheme-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Corollary 3.3 proof, justification of the initial reduction and final finiteness; Stacks Tag 06LH (varieties-lemma-algebraic-scheme-dim-0)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-tori-multiplicative-type",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sc-mult-n-finite-flat",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-smooth-connected-semiabelian-subgroup",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+  "place": "Agent expansion of Conrad Corollary 3.3, printed p.8; author PDF read online, local archive WANTED. Expanded the component reduction and replaced the torus order count by a geometric-series root."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of a semiabelian variety over an algebraically closed field whose ell torsion is trivial is finite",
+   "results": "{\"t\": \"2026-10-24T04:32:03Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subgroup scheme of a semiabelian variety over an algebraically closed field whose ell torsion is trivial is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteAddGrp\", \"CommGroup.finite_of_fg_torsion\", \"AddCircle.finite_torsion_of_isSMulRegular\", \"AddCircle.finite_torsion\", \"AddCircle.finite_torsion_of_isSMulRegular_int\", \"AddCommGrpCat.isFinite\", \"AddCommGroup.finite_of_fg_torsion\", \"Module.finite_of_fg_torsion\"], \"digest\": \"1cddbb8c4e91af3a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract finitely generated torsion groups, topological subgroups or number-field units, not closed subgroup schemes of semiabelian varieties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subgroup of a semiabelian algebraic group with no prime-to-characteristic torsion is finite",
+   "results": "{\"t\": \"2026-10-24T04:32:02Z\", \"tool\": \"leansearch\", \"query\": \"A closed subgroup of a semiabelian algebraic group with no prime-to-characteristic torsion is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGroup.finite_of_fg_torsion\", \"Module.finite_of_fg_torsion\", \"ClosedSubgroup.recOn\", \"ClosedSubgroup\", \"ClosedSubgroup.mk\", \"ClosedAddSubgroup\", \"AddSubgroup.instFiniteSubtypeMem\", \"ClosedSubgroup.ctorIdx\"], \"digest\": \"ae47df844d55aa52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract finitely generated torsion groups, topological subgroups or number-field units, not closed subgroup schemes of semiabelian varieties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"semiabelian\", \"torsion\", \"finite\"",
+   "results": "{\"t\": \"2026-10-24T04:32:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"semiabelian\\\", \\\"torsion\\\", \\\"finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract finitely generated torsion groups, topological subgroups or number-field units, not closed subgroup schemes of semiabelian varieties."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|torsion.*finite|finite.*torsion",
+   "results": "{\"t\": \"2026-10-24T04:32:02Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|torsion.*finite|finite.*torsion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract finitely generated torsion groups, topological subgroups or number-field units, not closed subgroup schemes of semiabelian varieties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive dimensional closed subgroup of a semiabelian variety has nontrivial ell torsion for every invertible prime ell",
+   "results": "{\"t\": \"2026-10-24T04:32:04Z\", \"tool\": \"leanfinder\", \"query\": \"A positive dimensional closed subgroup of a semiabelian variety has nontrivial ell torsion for every invertible prime ell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.torsionOrder_ne_zero\", \"NumberField.Units.instNeZeroNatTorsionOrder\", \"NumberField.Units.torsionOrder_pos\", \"AddCircle.finite_torsion\", \"AddCircle.finite_torsion_of_isSMulRegular_int\", \"AddCircle.finite_torsion_of_isSMulRegular\", \"NumberField.Units.torsionOrder\", \"not_isMulTorsionFree_of_isTorsion\"], \"digest\": \"69d10b0e3b790d80\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract finitely generated torsion groups, topological subgroups or number-field units, not closed subgroup schemes of semiabelian varieties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Trait-extension local input, Conrad Theorem 4.4 proof: the sentence reducing finiteness of the special-fibre kernel to vanishing of its prime torsion by Corollary 3.3.",
+   "via": [
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+  "worker": "stage1",
+  "summary": "Expanded Conrad Corollary 3.3 with the existing reduced identity-component and translation statements. One new statement-only node gives semiabelianity of smooth connected closed subgroups. The torus is eliminated by an explicit root of a geometric-series polynomial, and the existing abelian torsion-rank node then forces dimension zero. Existing zero-dimensional closed-subscheme finiteness handles nilpotents and all components. The item statement is unchanged.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). The split realizes its precise inherited Conrad Theorem 4.4 local input, namely Corollary 3.3 on the special-fibre kernel; it keeps the current six-functor constructibility route beneath the unit. Whole-blueprint searches found no equivalent semiabelian subgroup statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-mult-n-finite-flat",
+    "why": "Generic abelian-variety multiplication rank formula used after the torus is eliminated; no node in this unit supplies that formula."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic finiteness criterion for a zero-dimensional closed subscheme of a finite-type k-scheme; preserves the nonreduced subgroup case."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic composition of closed immersions identifies the reduced identity subgroup as a closed subgroup of G."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-mult-n-finite-flat",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-9849841d0",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-9849841d0 (reviewer sub-agent of L); spot-checked: The item statement is unchanged; I tested it on trivial H, constant prime-to-ℓ H, nonreduced μ_p⊂G_m, G_m and an abelian variety, and it holds in each. Step 1: H is of finite type; lem-sfb-locally-algebraic-group-identity-component gives H^0 clopen and B=(H^0)_red smooth and connected with |B|=|H^0|; the reduction is a closed immersion and the composition comes from lem-weil-pbc-closed-immersion-products. That H^0→H is a closed immersion (clopen) is elementary but not written out. Step 2 is an elementary R-point argument through the subgroup injections, so the nonreduced case is covered. Step 3 applies the new node to B. Step 4 takes a root ζ≠1 of 1+X+…+X^{ℓ-1} (P(1)=ℓ≠0); the point (ζ,1,…,1) contradicts step 2, so r=0. Step 5: with trivial kernel, unique local lifts glue, so q is an isomorphism; lem-sc-mult-n-finite-flat gives ℓ^{2g}=1, so g=0. Step 6: lem-sfb-group-neutral-component-translates (finitely many clopen components, each isomorphic to H^0) gives dim H=0, and lem-pc-zero-dimensional-closed-subscheme-finite gives finiteness without reducedness or properness. New node lem-sfb-smooth-connected-semiabelian-subgroup is Conrad Cor. 3.2 over algebraically closed k; it is true, self-contained, statement-only and not a restatement of the item (no torsion hypothesis, no finiteness conclusion). The DAG search over semiabelian/subgroup found no duplicate (geometric-semiabelian-split-quotient, normal-semiabelian-generic-torus-quotient and the subtorus-quotient nodes all assume the semiabelian structure). Conrad is not in the local literature (inherited WANTED); I checked it from knowledge of Cor. 3.2/3.3. Batch-5 flag: lem-sc-mult-n-finite-flat (Stacks 0BFG) reaches lem-trf-rational-sequence-polynomial-forward-difference, which is only Newton-series integration of polynomial-difference sequences (Stacks 00JZ). It is a general algebra lemma that neither the trace formula nor Poincaré duality gives, not a step of their proofs, so the citation is accepted. tool_uses accepted as generic. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianClosedSubgroupTrivialTorsionFinite",
+  "declaration": "AlgebraicGeometry.isFinite_closedSubgroup_of_semiabelian_trivial_prime_torsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianClosedSubgroupTrivialTorsionFinite.lean",
+  "statement": "theorem isFinite_closedSubgroup_of_semiabelian_trivial_prime_torsion (k : Type u) [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (hG : HasSemiabelianGeometricFibres G) (H : Over (Spec (.of k))) [GrpObj H] (i : H ⟶ G.X) [IsClosedSubgroupScheme i] (ℓ : ℕ) (hℓ : ℓ.Prime) (hℓk : (ℓ : k) ≠ 0) (hH : IsIso (GrpObj.ker (𝟙 H ^ ℓ)).hom) : IsFinite H.hom",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c1175f54",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Clause-by-clause match: k alg-closed; G : Grp(Over Spec k) with IsCommMonObj, Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact; HasSemiabelianGeometricFibres G (same universe u); H with GrpObj and IsClosedSubgroupScheme i (IsMonHom, injective on R-points, closed immersion) and nothing extra; ℓ prime with (ℓ:k)≠0; H[ℓ] = GrpObj.ker (𝟙 H ^ ℓ), the pullback along η[H] in Over(Spec k), i.e. the scheme fibre product; IsIso of its structure map ⇔ identity section iso, since e is a section of p; conclusion IsFinite H.hom. Edge cases (rank 0, nonreduced μ_p, disconnected constant H, ℓ = char excluded) all correct. Snapshot node = live except lean; dep records unchanged; lean.statement verbatim; docstrings carry the source, blueprint tag and 6 proof steps; proof only sorry; no new definitions; both report sections present. No compile needed (no changes)."
+ }
+}

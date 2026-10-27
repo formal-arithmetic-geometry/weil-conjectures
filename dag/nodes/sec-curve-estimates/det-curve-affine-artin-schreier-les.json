@@ -58,5 +58,43 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-curve-estimates",
  "unit": "sk-lem-curve-affine-artin-schreier",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $p$ be a prime and $U=\\operatorname{Spec}A$ an affine scheme with $p=0$\nin $A$ (for instance an affine curve over an algebraically closed field of\ncharacteristic $p$), and let $\\wp=F-1:A\\to A$, $\\wp(a)=a^p-a$. Then the\nArtin–Schreier sequence induces\n\n$$\nH^0(U_{\\mathrm{ét}},\\mathbf F_p)=\\ker(\\wp:A\\to A),\\qquad\nH^1(U_{\\mathrm{ét}},\\mathbf F_p)\\cong A/\\wp(A),\\qquad\nH^q(U_{\\mathrm{ét}},\\mathbf F_p)=0\\quad(q\\geq2).\n$$",
+  "proof": [
+   {
+    "text": "The sequence\n\n$$\n0\\longrightarrow\\mathbf F_p\\longrightarrow\\mathbf G_a\n\\xrightarrow{\\ \\wp\\ }\\mathbf G_a\\longrightarrow0\n$$\n\nis exact on $U_{\\mathrm{ét}}$ ([lem-sc-as-sequence]).",
+    "uses": [
+     "lem-sc-as-sequence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Here $\\mathbf G_a$ is the étale sheaf $\\cO_{\\mathrm{ét}}$ associated with the\nquasi-coherent module $\\cO_U$ ([def-sc-etale-qcoherent-module]). Since $U$ is\naffine, $H^q(U_{\\mathrm{ét}},\\mathbf G_a)=0$ for $q>0$\n([lem-sc-etale-affine-qcoherent]), and $H^0(U_{\\mathrm{ét}},\\mathbf G_a)=A$.\nThe long exact cohomology sequence therefore reads\n\n$$\n0\\to H^0(U,\\mathbf F_p)\\to A\\xrightarrow{\\wp}A\\xrightarrow{\\delta}\nH^1(U,\\mathbf F_p)\\to H^1(U,\\mathbf G_a)=0,\n$$\n\nand $0=H^{q-1}(U,\\mathbf G_a)\\to H^q(U,\\mathbf F_p)\\to H^q(U,\\mathbf G_a)=0$\nfor $q\\geq2$. Hence $\\delta$ induces $A/\\wp(A)\\xrightarrow{\\sim}H^1(U,\\mathbf F_p)$\nand the higher groups vanish.",
+    "uses": [
+     "def-sc-etale-qcoherent-module",
+     "lem-sc-etale-affine-qcoherent"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

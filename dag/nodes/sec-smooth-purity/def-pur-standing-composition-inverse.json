@@ -1,0 +1,95 @@
+{
+ "id": "def-pur-standing-composition-inverse",
+ "kind": "definition",
+ "title": "Explicit inverse candidate for the standing exceptional compositor",
+ "statement": "For the finite purity datum P and separated finite-type k-morphisms f:X→Y, g:Y→S of finite-type schemes, and bounded constructible L on S, put V=f!g!L. Let H_h denote the standing Hom bijections of [thm-sf-ambient-adjoint-class], and alpha the canonical compact-support compositor of [thm-sf-comp-composition]. Define b:V→(gf)!L by H_gf(alpha_V^{-1} ≫ H_g^{-1}(H_f^{-1}(id_V))). V is bounded below of etale origin, as are the required compact-support images, so each Hom bijection is on its stated domain. This uses precisely the standing choices of [pur9-def-upper-shriek-composition].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/pur9-def-upper-shriek-composition.md",
+  "place": "The specified counit mate and its inverse-transpose argument in thm-pur-composition-coherence"
+ },
+ "stmt_deps": [
+  "pur9-def-upper-shriek-composition",
+  "thm-sf-comp-composition",
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/pur9-def-upper-shriek-composition.md",
+  "place": "The specified counit mate and its inverse-transpose argument in thm-pur-composition-coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of Hom equivalences implies the two inverse equations for their representing morphisms",
+   "results": "Adjunction.homEquiv_naturality_left_symm/right_symm and related naturality lemmas, Mathlib.CategoryTheory.Adjunction.Basic; no comparison-class compositor statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic adjunction naturality is only a proof ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse of a natural equivalence of represented Hom functors given by two adjunction transposes",
+   "results": "Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm; Adjunction.representableBy_homEquiv; ParametrizedAdjunction naturality. None mentions the standing pro-etale comparison-class functors.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "standingExceptionalCompositionInverse|standingExceptionalComposition_inverse_hom|standingExceptionalComposition_hom_inverse in Mathlib/CategoryTheory; inspect Adjunction/Basic.lean and Iso.lean",
+   "results": "No standing exceptional comparison in Mathlib. Adjunction.homEquiv_naturality_left_symm (Basic.lean:226) and Iso constructor (Iso.lean:53) supply only generic ingredients.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; new specialized declarations needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityCompositionCoherence",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Exceptional compositor invertibility; separate inverse construction and two inverse equations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StandingExceptionalCompositionInverse",
+  "file": "lean/Sheaf/Paper/StandingExceptionalCompositionInverse.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.standingExceptionalCompositionInverse",
+  "statement": "def standingExceptionalCompositionInverse (P : WeilConjectures.PurityFiniteSetting.{u})\n    {X Y S : Scheme.{u}}\n    [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]\n    [S.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]\n    [QuasiCompact (X ↘ Spec (.of P.field.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]\n    [QuasiCompact (Y ↘ Spec (.of P.field.k))]\n    [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))]\n    [QuasiCompact (S ↘ Spec (.of P.field.k))]\n    (f : X ⟶ Y) (g : Y ⟶ S)\n    [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261025T205025-L-3095158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261025T205025-L-3095158",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

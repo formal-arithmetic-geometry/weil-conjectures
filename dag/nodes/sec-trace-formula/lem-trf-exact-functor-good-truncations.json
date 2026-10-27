@@ -1,0 +1,123 @@
+{
+ "id": "lem-trf-exact-functor-good-truncations",
+ "kind": "statement",
+ "title": "Exact additive functors commute with good truncations and their canonical arrows",
+ "statement": "Let A and B be abelian categories and F:A→B an additive functor preserving finite limits and finite colimits. For arbitrary integers p,q there are natural isomorphisms τ≤q followed by F ≅ F followed by τ≤q and τ≥p followed by F ≅ F followed by τ≥p. The first carries the canonical upper inclusion to F of that inclusion; F of the lower projection followed by the second is the canonical lower projection. These are functor isomorphisms on all unbounded cochain complexes. Good truncations mean [def-kun-truncations].",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118, section-truncations; exact functors preserve the boundary kernels and cokernels. Parent proof Step 2."
+ },
+ "stmt_deps": [
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Construct the upper comparison degreewise: identity below q, the canonical preserved-kernel comparison at q, and the unique isomorphism between zero objects above q. The kernel universal property shows compatibility with differentials, complex maps and the upper boundary inclusion.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations; exact functors preserve the boundary kernels and cokernels. Parent proof Step 2."
+   }
+  },
+  {
+   "text": "Construct the lower comparison using identity above p, the preserved-cokernel comparison at p and zero objects below p. The cokernel universal property proves the chain equations, naturality and the lower projection identity. The inverse kernel and cokernel comparisons give inverses in every degree, hence natural isomorphisms. No relation between p and q is needed.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations; exact functors preserve the boundary kernels and cokernels. Parent proof Step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118, section-truncations; exact functors preserve the boundary kernels and cokernels. Parent proof Step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact additive functors between abelian categories commute naturally with canonical good truncations and their boundary arrows",
+   "results": "Functor.exact_tfae, ComplexShape.Embedding.truncLEFunctor and πTruncGENatTrans; no comparison natural isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLEFunctor\"; \"truncGEFunctor\"",
+   "results": "The truncation functors and their obj/map equations only.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "truncLEFunctor|truncGEFunctor; mapHomologicalComplex in Mathlib/Algebra/Homology/Embedding",
+   "results": "Inspected TruncLE, TruncGE and CochainComplex; no natural exact-functor comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TraceBoundedQuotientStalkRealization",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers (b); Tag 0118, section-truncations; exact functors preserve the boundary kernels and cokernels. Parent proof Step 2.",
+   "via": [
+    "lem-trf-bounded-quotient-stalk-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExactFunctorGoodTruncations",
+  "file": "lean/Sheaf/Paper/ExactFunctorGoodTruncations.lean",
+  "declaration": "WeilConjectures.exactFunctorGoodTruncations",
+  "statement": "theorem exactFunctorGoodTruncations {A : Type a} [Category.{b} A] [Abelian A]\n    {B : Type c} [Category.{d} B] [Abelian B] (F : A ⥤ B) [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (p q : ℤ) :\n  ∃ (e : (ComplexShape.embeddingUpIntLE q).truncLEFunctor A ⋙\n        F.mapHomologicalComplex (.up ℤ) ≅ F.mapHomologicalComplex (.up ℤ) ⋙\n          (ComplexShape.embeddingUpIntLE q).truncLEFunctor B)\n    (f : (ComplexShape.embeddingUpIntGE p).truncGEFunctor A ⋙\n        F.mapHomologicalComplex (.up ℤ) ≅ F.mapHomologicalComplex (.up ℤ) ⋙\n          (ComplexShape.embeddingUpIntGE p).truncGEFunctor B),\n    (∀ K : CochainComplex A ℤ,\n      e.hom.app K ≫ CochainComplex.ιTruncLE\n          ((F.mapHomologicalComplex (.up ℤ)).obj K) q =\n        (F.mapHomologicalComplex (.up ℤ)).map (K.ιTruncLE q)) ∧\n    (∀ K : CochainComplex A ℤ,\n      (F.mapHomologicalComplex (.up ℤ)).map (K.πTruncGE p) ≫ f.hom.app K =\n        CochainComplex.πTruncGE ((F.mapHomologicalComplex (.up ℤ)).obj K) p)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T071346-L-3919417",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261026T093129-L-3536257",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.exactFunctorGoodTruncations"
+  ],
+  "sorry_after": []
+ }
+}

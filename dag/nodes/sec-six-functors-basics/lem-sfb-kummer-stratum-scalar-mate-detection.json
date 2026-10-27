@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-kummer-stratum-scalar-mate-detection",
+ "kind": "statement",
+ "title": "Kummer stratum models identify and detect the geometric scalar mate",
+ "statement": "Fix distinct primes $p,\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ with its extended $\\ell$-adic norm topology, and a finite intermediate extension $\\mathbf Q_\\ell\\subseteq E\\subseteq\\Omega$. For $F=E,\\Omega$, put $C_F(S)=C(S,F)$ on profinite sets, using all continuous maps [def-sfb-continuous-map-condensed-ring], and let $C_E\\to C_\\Omega$ be postcomposition with the continuous inclusion [def-sfb-continuous-map-condensed-ring-map]. Use internal module objects [sk-def-sfb-module-objects], ordinary unbounded derived categories [sk-def-sfb-derived-categories], and the unit-normalized adjunction $C_\\Omega\\otimes^L_{C_E}-\\dashv\\operatorname{Res}$ [lem-pur-sheaf-ring-derived-coefficient-adjunction].\n\nLet $k$ have characteristic $p$ and let $Y$ be a regular separated finite-type $k$-scheme [sk-def-sfb-dc-setting, def-weil-regular-scheme] with finite reduced strict normal crossings divisor $D=\\bigcup_{i\\in A}D_i$ [def-trf-strict-normal-crossings-boundary]. Put $W=Y\\setminus D$, with open immersion $a:W\\hookrightarrow Y$ [def-weil-open-immersion], and let $L$ be a finite-rank lisse $C_{E,W}$-module [def-sfb-lisse-coefficient-module]. Set $C_{F,T}=p_T^*C_F$ [sk-def-sfb-pulled-back-coefficients], $L_F=C_{F,W}\\otimes_{C_{E,W}}L$, and $T_T=C_{\\Omega,T}\\otimes^L_{C_{E,T}}-$ [sk-def-sfb-derived-extension-of-scalars]. Direct images are those of the ordinary module derived categories [sk-def-sfb-module-derived-pushpull]. Write $\\iota:T_W(L[0])\\simeq L_\\Omega[0]$ for the scalar-unit-normalized finite-free identification. Define $\\Theta=(Ra_{*,C_\\Omega}\\iota)\\circ\\beta_{a,L[0]}$, where $\\beta$ is the pullback/direct-image counit mate [def-sfb-all-continuous-scalar-mate].\n\nFor $I\\subseteq A$, let $S_I=(\\bigcap_{i\\in I}D_i)\\setminus\\bigcup_{i\\notin I}D_i$ with reduced locally closed structure and inclusion $s_I$; the empty intersection is $Y$. Suppose that on every nonempty stratum there are a pro-etale covering family $u_\\alpha:S_\\alpha\\to S_I$ [def-weil-pbc-proetale-site] and finite-dimensional continuous $E$-representations $M_\\alpha$ of $G_I=(\\prod_{q\\ne p}\\mathbf Z_q)^I$, with finite prime-to-$\\ell$ image of $H_I=(\\prod_{q\\ne p,\\ell}\\mathbf Z_q)^I$. Put $v_\\alpha=s_Iu_\\alpha$ and $M_{\\alpha,F}(S)=C(S,F\\otimes_E M_\\alpha)$. Supply isomorphisms $\\phi_{\\alpha,F}:v_\\alpha^*Ra_{*,C_F}(L_F[0])\\simeq p_{S_\\alpha}^*R\\Gamma_{G_I}(M_{\\alpha,F})$ in the derived module categories, with the following normalization: after scalar restriction, the direct-image map induced by $L\\to\\operatorname{Res}L_\\Omega$ corresponds under $\\phi$ to pullback of the map $R\\Gamma_{G_I}(M_{\\alpha,E})\\to\\operatorname{Res}R\\Gamma_{G_I}(M_{\\alpha,\\Omega})$ induced by the actual coefficient unit. Here $R\\Gamma$ means ordinary derived internal continuous invariants [def-sfb-condensed-derived-invariants]. The isomorphisms are compatible with restriction of the covering family.\n\nLet $\\sigma_\\alpha:C_\\Omega\\otimes^L_{C_E}R\\Gamma_{G_I}(M_{\\alpha,E})\\to R\\Gamma_{G_I}(M_{\\alpha,\\Omega})$ be the scalar adjunct of that invariant map. Then $v_\\alpha^*\\Theta$ is identified with $p_{S_\\alpha}^*\\sigma_\\alpha$ by $\\phi$ and the scalar-unit-preserving pullback/tensor comparisons [lem-sfb-kflat-scalar-comparison-normalization]. In particular, if every $\\sigma_\\alpha$ is invertible, then $\\beta_{a,L[0]}$ is invertible on $Y$. This is a statement about the actual derived morphisms and restrictions on entire strata, including $I=\\varnothing$, with no geometric-stalk conservativity assumption and no constructibility assumption on $Ra_*L_F$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), tame-boundary calculation, returned step 3, geometric mate-identification part of step 6 and step 7: normalized Kummer stratum models, scalar/pullback mate identification, and finite closed-depth detection. Agent-extracted comparison criterion."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "sk-def-sfb-dc-setting",
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-open-immersion",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-all-continuous-scalar-mate",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-condensed-derived-invariants",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-sfb-kummer-stratum-scalar-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the internal/section normalization theorem to perform the calculation in section-ring modules with the specified derived adjunctions. Put $K=L[0]$, $J=L_\\Omega[0]$, $F_R=a_R^*$ and $G_R=Ra_{*,R}$ for $R=E,\\Omega$. Write $r$ for scalar restriction, $\\eta$ for the scalar unit, and $\\epsilon$ for the geometric counit. The ring-change theorem supplies $b:r_WF_\\Omega\\simeq F_Er_Y$ and $d:r_YG_\\Omega\\simeq G_Er_W$, compatible with geometric transposition. Define $e=r_W(\\iota)\\eta_K:K\\to r_WJ$. We claim that the scalar transpose of $\\Theta$ is the actual unit-induced direct image:\n$$d_J\\,r_Y(\\Theta)\\,\\eta_{G_EK}=G_E(e).$$\nHere is the calculation, with the canonical action identifications understood. Let $\\lambda:F_\\Omega T_Y\\simeq T_WF_E$ be the inverse of the normalized scalar-pullback mate. By definition the geometric transpose of $\\Theta$ is $\\iota\\,T_W(\\epsilon_K)\\lambda_{G_EK}$. Transpose the left side of the displayed equation geometrically using $b,d$. Its transpose is\n$$r_W(\\iota)\\,r_WT_W(\\epsilon_K)\\,r_W(\\lambda_{G_EK})\\,b^{-1}_{T_YG_EK}\\,F_E(\\eta_{G_EK}).$$\nThe unit equation for the normalized scalar-pullback mate replaces the last three factors by $\\eta_{F_EG_EK}$. Naturality of $\\eta$ makes the whole composite $e\\epsilon_K$. This is also the geometric transpose of $G_E(e)$, by naturality of the geometric counit. Injectivity of the geometric adjunction bijection proves the claim. The normalization of $\\iota$ makes $e$ precisely the actual coefficient unit on $L$.",
+   "uses": [
+    "def-sfb-all-continuous-scalar-mate",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 07A7 (remark-base-change), 0D6E (lemma-derived-pushforward-composition); agent calculation of the two transposes"
+   }
+  },
+  {
+   "text": "For any $q:S\\to Y$, use the scalar-pullback comparison to regard $q^*\\Theta$ as a map $T_Sq_E^*G_EK\\to q_\\Omega^*G_\\Omega J$. Its scalar transpose is $q_E^*(d_Jr_Y(\\Theta)\\eta_{G_EK})$, after the action identifications. Indeed the transpose of a map $z:T_S A\\to B$ is $r_S(z)\\eta_A$; substituting $q^*\\Theta$ and the comparison gives $q_E^*r_Y(\\Theta)\\,q_E^*\\eta_{G_EK}$ because the comparison preserves the scalar unit. Step 1 identifies this with $q_E^*G_E(e)$. The comparison's composition identity ensures that this calculation for $q=v_\\alpha=s_Iu_\\alpha$ agrees with restriction first to the stratum and then to its covering object.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary calculation, returned step 3, geometric mate-identification part of step 6 and step 7: normalized Kummer stratum models, scalar/pullback mate identification, and finite closed-depth detection. Agent-extracted comparison criterion."
+   }
+  },
+  {
+   "text": "Write $A_\\alpha=R\\Gamma_{G_I}(M_{\\alpha,E})$, $B_\\alpha=R\\Gamma_{G_I}(M_{\\alpha,\\Omega})$, and $\\rho_\\alpha:A_\\alpha\\to rB_\\alpha$ for the map induced by the coefficient unit. Apply step 2 with $q=v_\\alpha$. The assumed normalization of $\\phi_{\\alpha,E},\\phi_{\\alpha,\\Omega}$ says exactly that its scalar transpose becomes $p_{S_\\alpha}^*\\rho_\\alpha$. By definition $\\sigma_\\alpha$ has transpose $\\rho_\\alpha$. Apply the same unit-preserving pullback calculation to $p_{S_\\alpha}$: the transpose of $p_{S_\\alpha}^*\\sigma_\\alpha$ is $p_{S_\\alpha}^*\\rho_\\alpha$. The scalar adjunction is a bijection on these Hom sets, so the two morphisms are equal. Thus the identification concerns the specified derived morphism itself. No claim that isomorphic source and target objects alone determine the arrow is used.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary calculation, returned step 3, geometric mate-identification part of step 6 and step 7: normalized Kummer stratum models, scalar/pullback mate identification, and finite closed-depth detection. Agent-extracted comparison criterion."
+   }
+  },
+  {
+   "text": "The schemes $S_I$ form a finite locally closed stratification of $Y$. For a point $y$ the unique index is $I(y)=\\{i\\in A:y\\in D_i\\}$, proving both disjointness and coverage, and each $S_I$ is open in the closed intersection of its selected components. Discard empty strata and enumerate the remaining finite family. The regularity definition already gives local Noetherianness of $Y$. Finite type over $k$ gives a finite affine cover, hence quasi-compactness, so $Y$ is Noetherian. This verifies the hypotheses of the stratum detection theorem, rather than imposing an extra constructibility hypothesis. Reduced locally closed structures are the actual immersions $s_I$ specified in the statement.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-trf-strict-normal-crossings-boundary",
+    "def-weil-regular-scheme",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary calculation, returned step 3, geometric mate-identification part of step 6 and step 7: normalized Kummer stratum models, scalar/pullback mate identification, and finite closed-depth detection. Agent-extracted comparison criterion."
+   }
+  },
+  {
+   "text": "If all $\\sigma_\\alpha$ are invertible, their inverse images under $p_{S_\\alpha}^*$ are invertible. Step 3 therefore makes every $v_\\alpha^*\\Theta$ invertible. Apply the unbounded module clause of Noetherian stratum detection with ring sheaf $C_{\\Omega,Y}$ and the coverings supplied in the statement; it gives that $\\Theta$ is invertible. The internal/section normalization theorem identifies the ordinary unbounded derived categories and these geometric pullbacks, so the theorem applies to precisely these restrictions. Finally $Ra_{*,C_\\Omega}(\\iota)$ is invertible, since functors preserve inverses, and $\\beta_{a,L[0]}=(Ra_{*,C_\\Omega}\\iota)^{-1}\\Theta$. This proves the conclusion. The empty divisor has the single stratum $S_\\varnothing=Y$; when $Y$ is empty the same detection theorem includes the empty family. Neither this argument nor steps 1–3 use boundedness, constructibility of the direct image, or conservativity of geometric stalks.",
+   "uses": [
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary calculation, returned step 3, geometric mate-identification part of step 6 and step 7: normalized Kummer stratum models, scalar/pullback mate identification, and finite closed-depth detection. Agent-extracted comparison criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-sfb-all-continuous-scalar-mate",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-finite-type-morphism",
+  "def-weil-regular-scheme",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), supplied normalized stratum models: explicit double-transpose calculation and existing Noetherian stratum detection; not a claim that the blueprint supplies the omitted details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer descent models on a finite normal crossing stratification identify the scalar adjunction mate of derived open direct image with the scalar mate of condensed inertia invariants",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.ofRestrict_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski module restriction adjunctions and sectionwise isomorphism tests do not identify the pro-etale derived scalar mate through Kummer descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsIso\", \"stratification\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski module restriction adjunctions and sectionwise isomorphism tests do not identify the pro-etale derived scalar mate through Kummer descent"
+  },
+  {
+   "tool": "grep",
+   "query": "(stratif|Kummer).*(scalar|derived|conserv)|(scalar|derived|conserv).*(stratif|Kummer)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski module restriction adjunctions and sectionwise isomorphism tests do not identify the pro-etale derived scalar mate through Kummer descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of unbounded derived sheaves of modules on a noetherian scheme is an isomorphism if its restrictions to pro etale covers of every normal crossing stratum are isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app; AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf; AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued; TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; TopCat.Presheaf.isIso_of_stalkFunctor_map_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski module restriction adjunctions and sectionwise isomorphism tests do not identify the pro-etale derived scalar mate through Kummer descent"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|stratif).*(mate|conserv)|(mate|conserv).*(Kummer|stratif)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring modules, Zariski sheaves, unrelated Galois restrictions or abstract adjunctions, not normalized Kummer stratum models of the pro-etale derived scalar mate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scalar extension direct image mate is the scalar adjunct of direct image of the coefficient unit",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring modules, Zariski sheaves, unrelated Galois restrictions or abstract adjunctions, not normalized Kummer stratum models of the pro-etale derived scalar mate"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"unit\"",
+   "results": "12 hits: CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoLeft_unit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring modules, Zariski sheaves, unrelated Galois restrictions or abstract adjunctions, not normalized Kummer stratum models of the pro-etale derived scalar mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms in unbounded derived sheaves of modules are detected by inverse images to pro etale covers of all locally closed strata of a finite stratification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, CategoryTheory.Sheaf.isLocallyBijective_iff_isIso, CondensedMod.IsSolid.isIso_solidification_map, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Functor.IsCoverDense.iso_of_restrict_iso, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring modules, Zariski sheaves, unrelated Galois restrictions or abstract adjunctions, not normalized Kummer stratum models of the pro-etale derived scalar mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized Kummer stratum models identify a derived change of scalars direct image mate with the scalar adjunct of continuous inertia invariants and detect isomorphisms",
+   "results": "8 hits: galLiftEquiv_apply, galRestrict'_galLift, galLift_galRestrict', IsArithFrobAt.mul_inv_mem_inertia, InfiniteGalois.toAlgEquivAux_eq_liftNormal, galRestrict, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, InfiniteGalois.mk_toAlgEquivAux",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary ring modules, Zariski sheaves, unrelated Galois restrictions or abstract adjunctions, not normalized Kummer stratum models of the pro-etale derived scalar mate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-algcl-tame-boundary-comparison",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), tame-boundary calculation, returned step 3, geometric mate-identification part of step 6 and step 7: normalized Kummer stratum models, scalar/pullback mate identification, and finite closed-depth detection. Agent-extracted comparison criterion.",
+   "via": [
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-kummer-stratum-scalar-mate-detection",
+  "worker": "stage1",
+  "summary": "Proved the geometric scalar mate is the scalar adjunct of the actual unit-induced direct image by computing its geometric transpose. Pulled this identity to entire stratum covers, used the supplied normalization of the models, and invoked the existing arbitrary-ring unbounded Noetherian stratum detection theorem. No statement correction and no new nodes.",
+  "blueprint": "Paragraph (3) of the current direct-images proof: geometric mate identification and finite closed-depth detection in the extracted tame-boundary criterion. Kummer-model existence and inertia scalar invertibility remain hypotheses here.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "General adjunction-compatible scalar restriction comparisons, needed to compute the actual unit map; no geometric Kummer computation is replaced."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "The normalized unbounded scalar adjunction gives uniqueness from the coefficient-unit transpose without flatness."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Its arbitrary-ring unbounded clause detects the actual morphism on all stratum covers; avoids a geometric-stalk or constructibility assumption."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Unit-preserving scalar pullback comparisons and their composition law are used as generic tools; they do not assume scalar/direct-image commutation."
+   },
+   {
+    "node": "lem-sfb-internal-scalar-pullback-normalization",
+    "why": "Identifies internal and section-ring K-flat constructions and the actual geometric derived adjunctions, without any coefficient flatness hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-internal-scalar-pullback-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-695d022be",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-695d022be (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is a split with no new nodes. The item's statement and stmt_deps are byte-identical to the copy Q25 created (7943ef91), and the item is still unsplit and unreviewed in live and side-live. There is no repair note, so this is not a re-split. The blueprint source is main-20261015 direct-images paragraph (3), which only sketches this step; proof_origin is correctly marked agent. Step 1: I recomputed the double transpose. In def-sfb-all-continuous-scalar-mate, delta is the inverse of the scalar mate (kflat-normalization: chi, which preserves 1⊗p, is inverse to the mate theta). Ring-sheaf-change-adjunction gives the adjunct of r(t)b^-1 as d r(t#), and the mate unit equation r(theta)eta = b^-1 F(eta) together with naturality gives e∘epsilon, the transpose of G_E(e). Unit normalization (1) makes e the map x↦1⊗x on the K-flat L[0]. Steps 2-3: pullback preserves the scalar unit, the composition law covers s_I u_alpha, the phi normalization gives p^*rho, and the Hom bijection makes the actual arrows equal. Step 4: the strata given by I(y) form a finite locally closed stratification by reduced immersions; regular gives locally Noetherian and finite type over k gives quasi-compact. Step 5: the arbitrary-ring unbounded clause of lem-weil-pbc-noetherian-stratum-detection applies with R=C_{Omega,Y}, and Ra_*(iota) is invertible. Edge cases checked: empty divisor, empty Y, the I=∅ stratum, unbounded complexes. An rg -L search found no duplicate. I accept the tool uses ring-sheaf-change, noetherian-stratum-detection, kflat-normalization and internal-scalar-pullback-normalization as generic; lem-pur coefficient adjunction is on-route through sk-def-sf-operations. No SGA is cited. Cosmetic: step 2 leaves d implicit. The review_split 'no such node' errors are the symlink artifact."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KummerStratumScalarMateDetection",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.kummer_stratum_scalar_mate_detection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.KummerScalarStratumModel",
+   "AlgebraicGeometry.ProEtale.CondensedRing.kummerModelTheta",
+   "AlgebraicGeometry.ProEtale.CondensedRing.kummerModelSigma",
+   "AlgebraicGeometry.ProEtale.CondensedRing.kummer_stratum_scalar_mate_detection"
+  ],
+  "file": "lean/Sheaf/Paper/KummerStratumScalarMateDetection.lean",
+  "statement": "theorem kummer_stratum_scalar_mate_detection [Fact p.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (_hY : IsRegularScheme Y) (D : Y.IdealSheafData) (hD : IsStrictNormalCrossingsBoundary D) (L : KummerModules (kummerCoefficientRing.{u} E.1).X (tameBoundaryOpen D).toScheme) (_hL : IsLisseCoefficientModule (kummerCoefficientRing.{u} E.1).X L) (U : ∀ J : Finset (ULift.{u} (Fin hD.2.2.choose)), Scheme.Cover.{u} Scheme.proetalePrecoverage (ParameterStratum (kummerComponents D hD) J)) (m : ∀ (J : Finset (ULift.{u} (Fin hD.2.2.choose))) (j : (U J).I₀), KummerScalarStratumModel ℓ E p J (tameBoundaryOpen D).ι ((U J).f j ≫ parameterStratumInclusion (kummerComponents D hD) J) L) : (∀ (J : Finset (ULift.{u} (Fin hD.2.2.choose))) (j : (U J).I₀), kummerModelTheta ℓ E p J (tameBoundaryOpen D).ι ((U J).f j ≫ parameterStratumInclusion (kummerComponents D hD) J) L (m J j) = kummerModelSigma ℓ E p J (tameBoundaryOpen D).ι ((U J).f j ≫ parameterStratumInclusion (kummerComponents D hD) J) L (m J j)) ∧ ((∀ (J : Finset (ULift.{u} (Fin hD.2.2.choose))) (j : (U J).I₀), IsIso (kummerStratumSigma ℓ E p J (m J j).representation (m J j).coefficients)) → IsIso (kummerGeometricBeta ℓ E (tameBoundaryOpen D).ι L))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1dc13645",
+  "group": "NP",
+  "result": "pass",
+  "note": "Item lean record + new def node def-sfb-kummer-stratum-scalar-maps; statement/proof unchanged vs side-live. Every hypothesis matches the node (primes, PadicAlgCl/finite E, all-continuous C_F, char-p k, separated finite-type regular Y, SNC D via kummerComponents, IsLisseCoefficientModule, G_I = ParameterRootDeckGroup, H_I prime-to-ell image, phi models with actual-unit normalization); conclusions = equality of actual derived arrows kummerModelTheta = kummerModelSigma (K-flat-normalized pullIso, unit-preserving point comparison) and all sigma iso => IsIso beta. New maps are real canonical composites (coefficientMap rho, homEquiv adjunct sigma); no name collisions; not a duplicate of KummerInvariantScalarArrow/KummerStratumChart. Verbatim statements, docstrings, 5-step proof docstring, only sorry. Edge cases I=empty, empty D/Y/strata, rank 0, unbounded. No file changed, so no compile; worker reports clean compiles (46.7/57.7 s). Advisories: unused kummerScalarTheta takes a free beta; item uses five Kummer nodes reached only via the new node's stmt_deps; normalized repeats KummerCoefficientSquare inline; new node omits two transitively covered stmt_deps."
+ }
+}

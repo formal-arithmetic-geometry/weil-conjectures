@@ -1,0 +1,260 @@
+{
+ "id": "lem-weil-boundary-evaluation-currying",
+ "kind": "statement",
+ "title": "Ringed-site exceptional evaluation and opposite currying",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\ge1$. Put $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. All schemes below are $k$-schemes. Use ordinary constant-$A$ module derived categories on small etale sites [def-weil-pbc-derived-categories] and small pro-etale sites [def-weil-pbc-proetale-modules], taken small in a larger universe [def-weil-size-convention]. On either site $D^b_{ctf}$ denotes bounded complexes with constructible cohomology and finite Tor amplitude: tensoring with any degree-zero module sheaf has cohomology in one fixed finite interval [def-weil-pbc-constructible-complexes, def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude].\n\nLet $i:Z\\hookrightarrow T$ be a closed immersion between separated finite-type $k$-schemes [def-weil-closed-immersion, def-weil-finite-type-morphism, def-weil-proper-morphism]. On etale sites write $s=i^*$ for exact constant-coefficient inverse image, $F=Ri_!=Ri_*$ for compact support [def-amb-etale-compact-support], and $G=i^\\times$ for its ambient right adjoint [thm-amb-etale-exceptional-adjoint], with counit $\\mu:FG\\to\\mathrm{id}$. For the structure map $a_T:T\\to\\operatorname{Spec}k$ put $\\omega_T=a_T^\\times A$ and $\\omega_Z=G\\omega_T$. Set $D_W=R\\mathcal Hom_A(-,\\omega_W)$ [def-pur-derived-internal-hom]. Write $\\mathrm{ev}_H:D_WH\\otimes_A^LH\\to\\omega_W$ for evaluation, $\\sigma$ for signed tensor symmetry, and $\\delta_H:H\\to D_WD_WH$ for the transpose of $\\mathrm{ev}_H\\sigma_{H,D_WH}$ [lem-weil-duality-pairing].\n\nAssume $s,G$ and $D_W$ preserve the indicated $D^b_{ctf}$ subcategories. Assume the canonical projection transformation $FB\\otimes_A^LM\\to F(B\\otimes_A^LsM)$ [def-kun-projection-formula-map] is invertible for $B\\in D^b_c(Z_e,A)$ and $M\\in D^b_{ctf}(T_e,A)$.\n\nOn each of these ringed sites there is a natural derived tensor-Hom isomorphism\n$$R\\mathcal Hom(B_0,R\\mathcal Hom(C_0,H))\\cong R\\mathcal Hom(B_0\\otimes_A^LC_0,H)$$\nfor arbitrary $B_0,C_0,H$ in the ordinary derived category. It induces the natural adjunction $\\operatorname{Hom}(B_0,R\\mathcal Hom(C_0,H))\\cong\\operatorname{Hom}(B_0\\otimes_A^LC_0,H)$, whose counit is evaluation. Its tensor symmetry is induced by $x\\otimes y\\mapsto(-1)^{\\deg x\\deg y}y\\otimes x$ and is involutive.\n\nFor $M,N\\in D^b_{ctf}(T_e,A)$ let $q_{M,N}:sM\\otimes_A^LGN\\to G(M\\otimes_A^LN)$ be the exceptional-adjunction transpose of\n$$F(sM\\otimes_A^LGN)\\xrightarrow{\\mathrm{PF}^{-1}}M\\otimes_A^LFGN\\xrightarrow{1\\otimes\\mu_N}M\\otimes_A^LN,$$\nwhere $\\mathrm{PF}$ is the assumed projection map conjugated by the displayed tensor symmetries. Then $q$ is natural in both variables. For $K\\in D^b_{ctf}(T_e,A)$ define\n$$r_K=G(\\mathrm{ev}_K\\sigma_{K,D_TK})q_{K,D_TK}\\sigma_{GD_TK,sK},\\qquad\\alpha_K=\\operatorname{transpose}(r_K):GD_TK\\to D_ZsK.$$\nFor every $L\\in D^b_{ctf}(T_e,A)$ put $P=sD_TL$, $U=GL$, $c_L=\\alpha_{D_TL}G\\delta_L$, and $b_L=G(\\mathrm{ev}_L)q_{D_TL,L}:P\\otimes_A^LU\\to\\omega_Z$. These specified morphisms satisfy\n$$\\mathrm{ev}_P(c_L\\otimes1_P)=b_L\\sigma_{U,P}:U\\otimes_A^LP\\to\\omega_Z.$$\nHere composition is read right to left, and $\\omega_Z=G\\omega_T$ throughout. This identity does not require $\\alpha$ or $\\delta$ to be invertible.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+  "place": "Proof, second paragraph: adjointing back through tensor-Hom and i_* right-adjoint Ri!, both maps correspond to restriction of evaluation (old steps 4--5 and 7--8). Ringed-site foundation: Stacks Tags 08J9 (sites-cohomology lemma-internal-hom) and 08JA (sites-cohomology lemma-section-RHom-over-U)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-size-convention",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "def-kun-projection-formula-map",
+  "def-weil-boundary-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing ordinary derived tensor and its parameterized internal-Hom adjunction on each site. For any test object V, conjugate the tensor-Hom Hom equivalence by the specified signed symmetry to put the tensor argument on the right. Its naturality follows from the adjunction naturality and the naturality of the specified symmetry. Its inverse-transpose formula is tensoring the map with the identity followed by the swapped counit. The canonical derived symmetry is involutive by the already proved derived symmetric-category structure [lem-asd-derived-category-symmetric]. No boundedness or constructibility condition is used.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-sfb-derived-tensor-hom-adjunction-sheaves",
+    "def-kun-derived-tensor",
+    "lem-asd-derived-category-symmetric"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "Second paragraph; formal adjunction calculation, with Stacks sites-cohomology lemma-internal-hom (08J9) and lemma-symmetric-monoidal-derived (0FPT)."
+   }
+  },
+  {
+   "text": "Apply the right-order Hom equivalence twice, precompose by the inverse associator and apply the inverse right-order Hom equivalence for B tensor C. This gives Hom(V,H(B,H(C,W))) equivalent to Hom(V,H(B tensor C,W)). Associator naturality in V proves that this equivalence is natural in V. Yoneda full faithfulness [lem-galois-yoneda-fully-faithful] gives the representing isomorphism. The resulting hom postcomposition equals this explicit equivalence. Applying the same Hom equivalence to the desired parameter squares reduces naturality in B and C to associator naturality in the middle and right arguments, and naturality in W to adjunction naturality. The equivalence definition gives the required arbitrary-test normalization equation. Specialize to each of the two ordinary derived sheaf categories on T and Z.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "Second paragraph; formal adjunction calculation, with Stacks sites-cohomology lemma-internal-hom (08J9) and lemma-symmetric-monoidal-derived (0FPT)."
+   }
+  },
+  {
+   "text": "Use the stored projection_left and projection_right equations in the canonical boundary data [def-weil-boundary-data]. Cancel the invertible projection components to obtain the corresponding inverse-projection equations. Expand q as its exceptional-adjunction transpose. Adjunction naturality, the two symmetry naturalities, inverse-projection naturality and counit naturality prove separately naturality of q in its first and second variable. Composing these equations and using functoriality of G proves the two-variable equation in Conclusions.",
+   "uses": [
+    "def-weil-boundary-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "Second paragraph; formal adjunction calculation, with Stacks sites-cohomology lemma-internal-hom (08J9) and lemma-symmetric-monoidal-derived (0FPT)."
+   }
+  },
+  {
+   "text": "Uncurry alpha using its explicit definition in [def-weil-boundary-data]. The inverse tensor-Hom equivalence cancels its transpose. Cancel the two consecutive source symmetries and the two consecutive target symmetries using the stored involution laws. What remains is q followed by G of the tensor-Hom counit. Put DL=H(L,W) and delta=transpose(evaluation(W,L)). The tensor-Hom counit equation says (identity_DL tensor delta) followed by that counit is evaluation(W,L).",
+   "uses": [
+    "def-weil-boundary-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "Second paragraph; formal adjunction calculation, with Stacks sites-cohomology lemma-internal-hom (08J9) and lemma-symmetric-monoidal-derived (0FPT)."
+   }
+  },
+  {
+   "text": "Apply right-order uncurrying to the left side of OppositeCurrying and use tensor-Hom naturality in the test object. Substitute the alpha formula from the preceding step. Move G(delta) through q by its second-variable naturality from step 3 and combine the two G-maps. The counit equation from step 4 reduces their composite to G(evaluation(W,L)), proving exactly the stated opposite-currying equality. Preservation by G and twice by duality supplies the two invertible projection components. The proof never inverts alpha or delta.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "Second paragraph; formal adjunction calculation, with Stacks sites-cohomology lemma-internal-hom (08J9) and lemma-symmetric-monoidal-derived (0FPT)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sfb-derived-tensor-hom-adjunction-sheaves",
+  "def-kun-derived-tensor",
+  "lem-asd-derived-category-symmetric",
+  "lem-galois-yoneda-fully-faithful",
+  "def-weil-boundary-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Second paragraph, formalized directly from the existing parameterized tensor-Hom adjunctions, Yoneda, the proved canonical derived symmetry and the stored boundary projection naturality. Q9 stage 3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exceptional.*(tensor|evaluation)|costalk|dualizing",
+   "results": "Hits: Mathlib/Tactic/Translate/ToDual.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module tensor-Hom, closed-category curry laws, condensed underived internal Hom, and Cartesian slice adjunctions omit the ringed-site exceptional evaluation and opposite-currying identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"curry\", \"ev\"",
+   "results": "Hits: Filter.Eventually.curry, CategoryTheory.MonoidalClosed.uncurry_id_eq_ev, CategoryTheory.MonoidalClosed.curry_id_eq_coev, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc, CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app, CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app_assoc, Filter.Eventually.curry_nhds",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module tensor-Hom, closed-category curry laws, condensed underived internal Hom, and Cartesian slice adjunctions omit the ringed-site exceptional evaluation and opposite-currying identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom adjunction for ringed sites and natural exceptional restriction evaluation pairing",
+   "results": "Hits: TensorProduct.lTensorHomToHomLTensor_apply, ModuleCat.monoidalClosedHomEquiv, lTensorHomEquivHomLTensor, CategoryTheory.FunctorToTypes.adj, CategoryTheory.Types.tensorProductAdjunction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, TensorProduct.lTensorHomToHomLTensor",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module tensor-Hom, closed-category curry laws, condensed underived internal Hom, and Cartesian slice adjunctions omit the ringed-site exceptional evaluation and opposite-currying identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaves on ringed sites: exceptional tensor comparison and evaluation identify the two opposite currying maps of a pairing",
+   "results": "Hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Tor'_map_app, CategoryTheory.ExponentiableMorphism.coev_ev, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, CategoryTheory.sheafToPresheaf_δ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module tensor-Hom, closed-category curry laws, condensed underived internal Hom, and Cartesian slice adjunctions omit the ringed-site exceptional evaluation and opposite-currying identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor exceptional adjunction transpose and symmetry of derived evaluation for a closed immersion of ringed sites",
+   "results": "Hits: CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, LightCondensed.ihomPoints_symm_comp, CategoryTheory.ExponentiableMorphism.ev_coev",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module tensor-Hom, closed-category curry laws, condensed underived internal Hom, and Cartesian slice adjunctions omit the ringed-site exceptional evaluation and opposite-currying identity."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(tensor|evaluation)|costalk|dualizing",
+   "results": "{\"t\": \"2026-10-22T08:12:20Z\", \"tool\": \"grep\", \"query\": \"exceptional.*(tensor|evaluation)|costalk|dualizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/Data/Set/Defs.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"Mathlib/Tactic/Translate/ToDual.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"f42731276cc8c59c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract curry/evaluation laws, rigid duality, ordinary modules, and underived sheaf adjunctions do not give all clauses for the actual ringed-site exceptional pairing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom adjunction and evaluation for derived sheaves on ringed sites with exceptional inverse image",
+   "results": "{\"t\": \"2026-10-22T08:12:20Z\", \"tool\": \"leansearch\", \"query\": \"Tensor Hom adjunction and evaluation for derived sheaves on ringed sites with exceptional inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"ModuleCat.monoidalClosedHomEquiv\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.exp.ev\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.tensorLeftHomEquiv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"2fe08ca4c297feba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract curry/evaluation laws, rigid duality, ordinary modules, and underived sheaf adjunctions do not give all clauses for the actual ringed-site exceptional pairing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"curry\", \"ev\"",
+   "results": "{\"t\": \"2026-10-22T08:12:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"curry\\\", \\\"ev\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Filter.Eventually.curry\", \"CategoryTheory.MonoidalClosed.uncurry_id_eq_ev\", \"CategoryTheory.MonoidalClosed.curry_id_eq_coev\", \"CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app\", \"CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc\", \"CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app\", \"CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app_assoc\", \"Filter.Eventually.curry_nhds\"], \"digest\": \"a5a99dc817367290\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract curry/evaluation laws, rigid duality, ordinary modules, and underived sheaf adjunctions do not give all clauses for the actual ringed-site exceptional pairing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaves on ringed sites exceptional tensor adjunction opposite currying evaluation biduality",
+   "results": "{\"t\": \"2026-10-22T08:12:22Z\", \"tool\": \"leanfinder\", \"query\": \"Derived sheaves on ringed sites exceptional tensor adjunction opposite currying evaluation biduality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsRightAdjointPushforward\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"f8b93d84c864d1fe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract curry/evaluation laws, rigid duality, ordinary modules, and underived sheaf adjunctions do not give all clauses for the actual ringed-site exceptional pairing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor exceptional adjunction transpose and symmetry of evaluation in a closed symmetric monoidal derived category",
+   "results": "{\"t\": \"2026-10-22T08:12:48Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of tensor exceptional adjunction transpose and symmetry of evaluation in a closed symmetric monoidal derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_symm_naturality\", \"CategoryTheory.tensorLeftHomEquiv_symm_naturality\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv_tensor\"], \"digest\": \"2471af1643c01b96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract curry/evaluation laws, rigid duality, ordinary modules, and underived sheaf adjunctions do not give all clauses for the actual ringed-site exceptional pairing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-weil-boundary-duality-discharge",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Proof, second paragraph: adjointing back through tensor-Hom and i_* right-adjoint Ri!, both maps correspond to restriction of evaluation (old steps 4--5 and 7--8).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-boundary-evaluation-currying",
+  "worker": "stage1",
+  "summary": "Proved all clauses with five steps and no new nodes. Reused the existing ringed-site closed structure and Yoneda for derived internal currying; wrote the projection/counit naturality equation, the defining delta-evaluation equation, and the full opposite-currying calculation. Statement and statement dependencies unchanged.",
+  "blueprint": "cor-weil-boundary-duality-discharge, second proof paragraph: adjointing back through tensor-Hom and the exceptional adjunction, restriction of evaluation, and evaluation identities (old parent steps 4--5 and 7--8).",
+  "tool_uses": [
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic full faithfulness for represented Hom presheaves turns the explicit tensor-Hom Hom-bijections into an internal derived isomorphism; it supplies no geometric duality input."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic bifunctorial inverse-image tensor comparison is used only to verify naturality of the defined projection map; this is foundational functoriality, not a replacement for the unit duality route."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Explicit generic projection-map definition gives naturality by its unit/counit formula; the item assumes invertibility and no projection theorem is invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-37e465c96",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-37e465c96 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The delivery has no new nodes, and the statement and stmt_deps are unchanged from the unsplit base, which Q145 created. Source: master cor-weil-boundary-duality-discharge, proof paragraph 2 (adjointing back through tensor-Hom and the exceptional adjunction to restriction of evaluation); Stacks 08J9 lemma-internal-hom (sites-cohomology l.8896) gives the internal tensor-Hom isomorphism on any ringed site in unbounded D(O). No SGA is cited. Step 1 is lem-sf-ringed-derived-closed-symmetric-monoidal (closed bijection, evaluation counit u->e(u x 1), signed involutive symmetry), applied on sites made small by the size convention. Step 2 gets the internal iso from two Hom chains joined by the associator plus Yoneda between representables (lem-galois-yoneda-fully-faithful); correct. Step 3: PF=Rf_*(alpha)eta with alpha=(eps x 1)c is natural (c bifunctorial by lem-kun-inverse-image-monoidal), so pi^{-1} is natural. I checked (f x g)t_{M,N}=t_{M',N'}F(sf x Gg) and its F-|G transpose. The PF components exist because GN is in D^b_ctf(Z), inside D^b_c. Step 4, checked by hand: ev_{DL}(delta_L x 1)=ev_L sigma, then e_{DL}(1 x delta_L)=ev_L by naturality and involutivity of sigma; correctly marked elementary. Step 5 domains checked: r_{DL}(G delta_L x 1)=G(e_{DL}) q_{DL,DDL}(1 x G delta_L) sigma_{U,P}, then q naturality with g=delta_L, then step 4, giving b_L sigma_{U,P}. DL and DDL are in D^b_ctf because D preserves it. alpha and delta are never inverted. The orientation agrees with the consumers lem-weil-boundary-bidual-transpose (h=id) and lem-weil-boundary-alpha-normalization, which use the same q, r and alpha formulas. A DAG-wide grep finds no duplicate of the opposite-currying identity. Edge cases: i=id, L=0 or Z empty, odd-degree rank one (the Koszul signs cancel), characteristic 2. Maintainer note: step 3 cites thm-amb-etale-exceptional-adjoint (unit sk-prop-sf-cbc, not on the route) without a split_report.tool_uses entry. It is used only for the defining Hom bijection of F-|G, which the statement already fixes, and sibling nodes in the unit record it as a tool use. Record it in tool_uses at merge; this is not a refusal (route notes are recorded per the human, 2026-10-16). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.BoundaryEvaluationCurrying",
+  "declaration": "AlgebraicGeometry.Etale.boundaryEvaluationCurrying",
+  "declarations": [
+   "CategoryTheory.BoundaryEvaluation.TensorHomCurrying",
+   "CategoryTheory.BoundaryEvaluation.sourceEvaluation",
+   "CategoryTheory.BoundaryEvaluation.OppositeCurrying",
+   "AlgebraicGeometry.Etale.BoundarySiteCurrying",
+   "CategoryTheory.BoundaryEvaluation.Conclusions",
+   "AlgebraicGeometry.Etale.boundaryEvaluationCurrying"
+  ],
+  "file": "lean/Sheaf/SixFunctors/BoundaryEvaluationCurrying.lean",
+  "statement": "theorem boundaryEvaluationCurrying (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {Z T : Scheme.{u}} (aT : T ⟶ Spec (.of D.k)) [IsSeparated aT] [LocallyOfFiniteType aT] [QuasiCompact aT] (i : Z ⟶ T) [IsClosedImmersion i] (_hs : ∀ K : DerivedCategoryModule (boundaryCoefficient l E n) T, WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T K → WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z ((L(upperStar (ModuleCat.{u + 1} (boundaryCoefficient l E n)) i)).obj K)) (hG : ∀ K : DerivedCategoryModule (boundaryCoefficient l E n) T, WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T K → WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z ((boundaryG (boundaryCoefficient l E n) i).obj K)) (hD : ∀ K : DerivedCategoryModule (boundaryCoefficient l E n) T, WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T K → WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T ((boundaryDT (boundaryCoefficient l E n) aT).obj (op K))) (_hDZ : ∀ K : DerivedCategoryModule (boundaryCoefficient l E n) Z, WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z K → WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z ((boundaryDZ (boundaryCoefficient l E n) i aT).obj (op K))) (hPF : ∀ B : DerivedCategoryModule (boundaryCoefficient l E n) Z, DerivedCategory.isBoundedConstructible (boundaryCoefficient l E n) Z B → ∀ M : DerivedCategoryModule (boundaryCoefficient l E n) T, WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T M → IsIso (boundaryProjection (boundaryCoefficient l E n) i B M)) : BoundarySiteCurrying (boundaryCoefficient l E n) T ∧ BoundarySiteCurrying (boundaryCoefficient l E n) Z ∧ CategoryTheory.BoundaryEvaluation.Conclusions (boundaryData (boundaryCoefficient l E n) i) (boundaryOmegaT (boundaryCoefficient l E n) aT) (WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) T) (WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) Z) hG hD (fun B hB M hM ↦ hPF B hB.1 M hM)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H7 repair: proof_deps is exactly the unchanged base list. The added statement dependency def-weil-boundary-data records existing definitions in Sheaf.SixFunctors.BoundaryAlphaNormalization; importing that module uses its canonical definitions, not the alpha-isomorphism conclusion. The finite-Tor restriction of hPF is inline, and no alpha/delta invertibility is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72a552beb",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery after H7 RETURN a8964ab6 follows the prescribed recipe exactly. Item record vs live base: only stmt_deps (+def-weil-boundary-data, a new definition node) and lean differ; statement/proof/proof_deps byte-identical (six-entry base proof_deps), so H7 is cleared. Item Lean differs from a8964 only in importing Sheaf.SixFunctors.BoundaryAlphaNormalization, and from 04511dbc only by the inline hPF restriction (hB.1 = bounded-constructible part of finiteTorConstructibleEtale) replacing boundaryPFOnFiniteTor. Maths re-read: TensorHomCurrying (iso, 3 naturalities, evaluation normalization, counit formula, involutivity; etale+proetale, Z and T, unbounded), two-variable q naturality, OppositeCurrying (c_L=G(delta_L)>>alpha_DL, projection components (GL,DL),(GDDL,DL), codomain G omega_T, no alpha/delta invertibility). lean.statement verbatim; single sorry; docstrings with source, blueprint id and 5 proof steps. New node def-weil-boundary-data: kind definition, source cor-weil-boundary-duality-discharge proof para 2; TeX matches live BoundaryData.q/evaluation/r/alpha (alpha = transpose of sigma>>r by rfl); lean existing:true at BoundaryAlphaNormalization, statement verbatim with live line 620; all 29 listed declarations exist as def/abbrev/structure/instance, no theorem listed; lean.note present; theorem stmt_deps supply constructed data (precedent, advisory). No other def-weil-boundary-* node owns these declarations. Edge cases n=0 is level 1, Z empty, L=0, i=id; no universe equality added. Report sections present. No recompile (rules); no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261025T123608-L-1882237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

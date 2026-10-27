@@ -100,5 +100,36 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative local ring with maximal ideal $\\mathfrak m$. If every element of $\\mathfrak m$ is nilpotent, then $R$ is a henselian local ring [def-weil-pbc-henselian-terminology]. In particular every local ring of Krull dimension $0$ (a local ring whose only prime ideal is $\\mathfrak m$, for example an Artinian local ring) is henselian, since then $\\mathfrak m$ is the nilradical of $R$.",
+  "proof": [
+   {
+    "text": "Let $f\\in R[T]$ and $x\\in R$ with $f(x)\\in\\mathfrak m$ and $f'(x)$ a unit. Then $f(x)$ is nilpotent, and Newton iteration $x_{k+1}=x_k-f(x_k)/f'(x_k)$ terminates: the error is squared at each step, and nilpotent corrections keep $f'(x_k)$ a unit, so if $f(x)^N=0$ then after $k$ steps with $2^k\\ge N$ the error vanishes. This gives $a\\in R$ with $f(a)=0$ and $a-x$ nilpotent, hence $a-x\\in\\mathfrak m$. Thus simple roots of monic polynomials modulo $\\mathfrak m$ lift, which is equivalent to henselianity in the sense of [def-weil-pbc-henselian-terminology] by [lem-weil-pbc-henselian-local-root-lifting]. If $R$ has Krull dimension $0$, then $\\mathfrak m$ is the only prime ideal, so it equals the nilradical, and the first part applies.",
+    "uses": [
+     "def-weil-pbc-henselian-terminology",
+     "lem-weil-pbc-henselian-local-root-lifting"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

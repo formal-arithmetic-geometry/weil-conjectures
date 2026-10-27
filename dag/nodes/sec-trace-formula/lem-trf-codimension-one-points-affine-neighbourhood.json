@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-codimension-one-points-affine-neighbourhood",
+ "kind": "statement",
+ "title": "Common affine neighbourhood of finitely many points of local dimension at most one",
+ "statement": "Let $Z$ be a separated scheme [def-pc-scheme, def-weil-proper-morphism] such that every quasi-compact open subscheme of $Z$ has finitely many irreducible components [def-weil-irreducible-components]. Let $z_1,\\ldots,z_r\\in Z$, where $r\\geq0$, and assume that each local ring $\\mathcal O_{Z,z_i}$ is Noetherian [def-weil-pbc-noetherian-ring] and has Krull dimension at most one [def-weil-pbc-krull-dimension-ring]. Then there is an affine open subscheme $U\\subseteq Z$ containing every $z_i$. Affine means isomorphic to the spectrum of a commutative ring [def-weil-affine-spectrum]; for $r=0$ the empty affine open is allowed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NN (proposition-finite-set-of-points-of-codim-1-in-affine), statement, lines 9141--9146."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "If $r=0$, take the empty open, which is $\\operatorname{Spec}(0)$. Otherwise let $T=\\{z_1,\\ldots,z_r\\}$. Choose an affine open $W_i$ about each $z_i$ using the local affineness in the definition of a scheme, and set $W=\\bigcup_i W_i$. Each $W_i$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. A cover of $W$ restricts to a cover of each of these finitely many quasi-compact subsets; the union of the resulting finite subcovers covers $W$. Thus $W$ is a quasi-compact open containing $T$, and the hypothesis supplies finitely many irreducible components of $W$. Neighbourhoods inside $W$ are cofinal among neighbourhoods in $Z$, so restriction identifies $\\mathcal O_{W,z_i}=\\mathcal O_{Z,z_i}$. It suffices to find the required affine open in $W$, since an open of an open is open.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NN (proposition-finite-set-of-points-of-codim-1-in-affine), proof, first sentence."
+   }
+  },
+  {
+   "text": "Let $C_1,\\ldots,C_s$ be the irreducible components of $W$ with their reduced induced closed structures, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Each $C_a$ is nonempty, reduced, and irreducible, hence integral by [def-pc-integral-scheme]. Both $W$ and each $C_a$ are separated: for either inclusion $Y\\hookrightarrow Z$ (the open inclusion $W\\hookrightarrow Z$ or the composite $C_a\\hookrightarrow W\\hookrightarrow Z$), the diagonal $Y\\to Y\\times_{\\operatorname{Spec}\\mathbf Z}Y$ is the pullback of $\\Delta_Z$ along $Y\\times Y\\to Z\\times Z$. Indeed an open inclusion is a monomorphism by restriction of the structure sheaf, and a closed inclusion is a monomorphism because its point map is injective and its sheaf map is surjective. Their composite is therefore a monomorphism. For any test scheme $S$, two maps $a,b:S\\to Y$ have equal composites in $Z$ exactly when $a=b$; this identifies the pullback of $\\Delta_Z$ with $Y$ and its map to $Y\\times Y$ with $\\Delta_Y$. Since $\\Delta_Z$ is closed and closed immersions are preserved by base change, this diagonal is closed.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-irreducible-components",
+    "def-pc-integral-scheme",
+    "def-weil-proper-morphism",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NN, proof, reduction by Tag 09NM; reduced structures from Tag 01J3 (schemes-lemma-reduced-closed-subscheme), and base change from Tag 01JY (schemes-lemma-base-change-immersion)."
+   }
+  },
+  {
+   "text": "Fix $a$ and $z_i\\in C_a$, and write $A=\\mathcal O_{W,z_i}$ and $B=\\mathcal O_{C_a,z_i}$. For the closed immersion $i:C_a\\hookrightarrow W$, the surjection $\\mathcal O_W\\to i_*\\mathcal O_{C_a}$ in [def-weil-closed-immersion] means that a section of the target sheaf lifts on a neighbourhood of each point. Represent an element of its stalk by a section, choose such a lift near $z_i$, and take its germ. Every neighbourhood of $z_i$ in $C_a$ is the intersection with an ambient neighbourhood, so the germ description in [def-weil-pbc-module-stalk] identifies the target stalk with $B$. We obtain a surjective ring map $f:A\\to B$. For any ideal $J\\subseteq B$, choose generators $a_1,\\ldots,a_n$ of $f^{-1}(J)$ in the Noetherian ring $A$. Each $b\\in J$ lifts to this inverse image; expressing a lift as $\\sum c_j a_j$ gives $b=\\sum f(c_j)f(a_j)$. Thus the $f(a_j)$ generate $J$ and $B$ is Noetherian. Preimages of prime ideals are prime. Moreover surjectivity gives $f(f^{-1}(J))=J$, so inverse images preserve strict inclusions. Every strict prime chain in $B$ therefore gives a chain of the same length in $A$, proving $\\dim B\\leq\\dim A\\leq1$. This verifies both hypotheses at every selected point of every component, including points on several components.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NN, proof, componentwise reduction: explicit quotient-ring check of the hypotheses of Tag 09NJ."
+   }
+  },
+  {
+   "text": "For each $a$, the set $T_a=T\\cap C_a$ is finite, $C_a$ is integral and separated by step 2, and its local rings at the points of $T_a$ satisfy the hypotheses by step 3. Apply [lem-trf-integral-codimension-one-affine-neighbourhood] to obtain an affine open $V_a\\subseteq C_a$ containing $T_a$. If $T_a$ is empty one may use the empty affine open.",
+   "uses": [
+    "lem-trf-integral-codimension-one-affine-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NN, proof, last sentence, invoking Tag 09NJ (lemma-finite-set-codim-1-points-in-affine)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-componentwise-finite-set-affine-neighbourhood] to $W$, its finitely many reduced irreducible components $C_a$, and the affine opens $V_a$ from step 4. All its hypotheses are now verified; it gives an affine open $U\\subseteq W$ containing $T$. Its composite open inclusion into $Z$ makes it the affine open required in the statement.",
+   "uses": [
+    "lem-trf-componentwise-finite-set-affine-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NN, proof, second sentence, invoking Tag 09NM (lemma-finite-set-codim-1-points-in-affine-per-component)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-irreducible-components",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-trf-integral-codimension-one-affine-neighbourhood",
+  "lem-trf-componentwise-finite-set-affine-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NN (proposition-finite-set-of-points-of-codim-1-in-affine), proof, with the quotient-ring hypothesis verification written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite sets of points on a separated locally Noetherian scheme with local rings of dimension at most one are contained in an affine open",
+   "results": "{\"t\": \"2026-10-22T05:21:01Z\", \"tool\": \"leanfinder\", \"query\": \"Finite sets of points on a separated locally Noetherian scheme with local rings of dimension at most one are contained in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\"], \"digest\": \"0e48e4734d0c75be\"}; Read returned signatures. Affine-open bases cover one point, and finite unions of disjoint affine opens require disjointness; neither gives a common affine neighbourhood for these possibly intersecting curve branches. The separated/affine morphism lemmas have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine",
+   "results": "{\"t\": \"2026-10-22T05:21:20Z\", \"tool\": \"grep\", \"query\": \"finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"8284f0fed80bd1dc\"}; Read returned signatures. Affine-open bases cover one point, and finite unions of disjoint affine opens require disjointness; neither gives a common affine neighbourhood for these possibly intersecting curve branches. The separated/affine morphism lemmas have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite set of points with local dimension at most one in a separated locally Noetherian scheme has a common affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-22T05:21:20Z\", \"tool\": \"leansearch\", \"query\": \"Every finite set of points with local dimension at most one in a separated locally Noetherian scheme has a common affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.local_affine\"], \"digest\": \"4adc77d85f75bfec\"}; Read returned signatures. Affine-open bases cover one point, and finite unions of disjoint affine opens require disjointness; neither gives a common affine neighbourhood for these possibly intersecting curve branches. The separated/affine morphism lemmas have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, \"affine\"",
+   "results": "{\"t\": \"2026-10-22T05:21:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, \\\"affine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.IsAffineHom.of_comp\"], \"digest\": \"ae23d845bc6cb47e\"}; Read returned signatures. Affine-open bases cover one point, and finite unions of disjoint affine opens require disjointness; neither gives a common affine neighbourhood for these possibly intersecting curve branches. The separated/affine morphism lemmas have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a separated algebraic curve any finitely many closed points are contained in a single affine open subscheme",
+   "results": "{\"t\": \"2026-10-22T05:21:21Z\", \"tool\": \"leanfinder\", \"query\": \"On a separated algebraic curve any finitely many closed points are contained in a single affine open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.local_affine\"], \"digest\": \"4c01acc966237e88\"}; Read returned signatures. Affine-open bases cover one point, and finite unions of disjoint affine opens require disjointness; neither gives a common affine neighbourhood for these possibly intersecting curve branches. The separated/affine morphism lemmas have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine",
+   "results": "{\"t\": \"2026-10-22T06:44:12Z\", \"tool\": \"grep\", \"query\": \"finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"8284f0fed80bd1dc\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(component|[Cc]odim|ringKrullDim).*(affine|Affine)|(affine|Affine).*(component|[Cc]odim|ringKrullDim)",
+   "results": "{\"t\": \"2026-10-22T06:44:28Z\", \"tool\": \"grep\", \"query\": \"(component|[Cc]odim|ringKrullDim).*(affine|Affine)|(affine|Affine).*(component|[Cc]odim|ringKrullDim)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"5ee91cec53cb490c\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many codimension at most one points of a separated scheme have a common affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:45:45Z\", \"tool\": \"leansearch\", \"query\": \"Finitely many codimension at most one points of a separated scheme have a common affine open neighbourhood\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The service was unavailable.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, \"affine\"",
+   "results": "{\"t\": \"2026-10-22T06:45:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, \\\"affine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.IsAffineHom.of_comp\"], \"digest\": \"ae23d845bc6cb47e\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite set of points whose local rings are Noetherian of dimension at most one in a separated scheme with locally finite irreducible components lies in an affine open",
+   "results": "{\"t\": \"2026-10-22T06:45:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite set of points whose local rings are Noetherian of dimension at most one in a separated scheme with locally finite irreducible components lies in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\"], \"digest\": \"a028659c6d6f51cf\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-nodal-point-pinching",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Appendix B contraction paragraph preceding B.3, as recorded in the ancestor chain: the finite pinching needed for complementary subcurve boundaries; affine neighbourhoods are the hypothesis of Stacks 0E25.",
+   "via": [
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-codimension-one-points-affine-neighbourhood",
+  "worker": "stage1",
+  "summary": "Followed Stacks 09NN: finite quasi-compact open reduction, reduced integral components, explicit local quotient Noetherianity and dimension checks, integral 09NJ, and component assembly 09NM. Two source lemmas are new statement-only nodes; no Mathlib match or exact project attachment was found. Statement and original metadata retained. Repair of the returned delivery: rechecked all cited statements against the current live DAG, retained the 09NN route, and made the diagonal pullback identification explicit by its test-scheme property; the delivery tool rebases this split onto current origin/sheaf-dag. On the renewed promotion repair, revalidated the current dependency interfaces and wrote out the stalk-surjection and inverse-image ideal calculations in step 3, retaining all original arguments and source lemmas. Current promotion repair (2026-10-23): compared the retained delivery with the still-unsplit live item, reread all current cited statements, revalidated all seventeen quotes, and expanded the sheaf-surjectivity-to-stalk-surjectivity argument in step 3. The unused quotient-ring isomorphism is removed; the subsequent ideal and prime-chain arguments use only the surjective ring map. The delivery is rebuilt on the current server base.",
+  "blueprint": "The ancestor lem-trf-local-term-locality contraction paragraph reaches the finite-pinching affine-neighbourhood condition through lem-trf-relative-nodal-point-pinching. This item realizes that auxiliary condition by the Stacks 09NN componentwise reduction, not by altering the unit local-term argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-0df9da17d",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-0df9da17d (reviewer sub-agent of L); spot-checked: Pass with no changes. The item is a split of Stacks 09NN (varieties.tex l.9141-9156) into two new nodes and three reduction steps. The new nodes are lem-trf-integral-codimension-one-affine-neighbourhood, which matches 09NJ (l.9016-9058) exactly: integral, separated, finite T, selected local rings Noetherian of dimension at most 1. The other is lem-trf-componentwise-finite-set-affine-neighbourhood, which matches 09NM (l.9083-9136) exactly: finitely many components, each component's share of T inside an affine open of its reduced structure. The tags agree with tags/tags l.12217/12220/12221. Step 1: the finite union of the affine opens around the points is quasi-compact (lem-weil-pbc-affine-scheme-qcqs), so the hypothesis gives finitely many components, and the local rings are unchanged. Step 2: components get the reduced induced structure (lem-weil-pbc-reduced-induced-closed-subscheme (2)) and are integral by def-pc-integral-scheme; they are separated because the inclusions are monomorphisms, so their diagonal is a pullback of Z's closed diagonal and stays closed under base change (lem-weil-pbc-closed-immersion-base-change). Step 3, elementary: the closed immersion gives a surjection of local rings, and Noetherianity and dimension at most 1 pass to the quotient; this holds at intersection points and with nilpotents. Steps 4 and 5 meet exactly the hypotheses of 09NJ and 09NM. Small cases checked: empty selection, a generic point, the spectrum of a discrete valuation ring, two points on P^1, the line with doubled origin (shows separatedness is needed), crossing lines at the crossing point, and nonreduced schemes. Neither new node restates the item. A whole-DAG search for these tags and for 'affine open containing a finite set' statements found no duplicates; the quasi-projective, Hilbert-scheme and generic-point nodes are not equivalent. There is no SGA citation, no repair note for this item, and no tool_uses. This is the fourth identical delivery (after 8a5454, 4a1916 and 13199d); compared with 13199d only the wording of step 3 changed, and both new nodes are unchanged apart from split_report and mathlib_searches. Maintainer note: repeated live-DAG promotion redeliveries of an unchanged split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CodimensionOnePointsAffineNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_containing_codimensionOne_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/CodimensionOnePointsAffineNeighbourhood.lean",
+  "statement": "theorem exists_isAffineOpen_containing_codimensionOne_points (Z : Scheme.{u}) [Z.IsSeparated] (hcomponents : ∀ U : Z.Opens, IsCompact (U : Set Z) → (irreducibleComponents U).Finite) (r : ℕ) (z : Fin r → Z) (hnoetherian : ∀ i : Fin r, IsNoetherianRing (Z.presheaf.stalk (z i))) (hdimension : ∀ i : Fin r, ringKrullDim (Z.presheaf.stalk (z i)) ≤ 1) : ∃ U : Z.Opens, IsAffineOpen U ∧ ∀ i : Fin r, z i ∈ U",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8dd2379ea",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09NN (varieties.tex l.9141-9146) clause by clause: Scheme.{u} with [Z.IsSeparated]; compact opens have finite irreducibleComponents of the subspace; Fin r points with IsNoetherianRing and ringKrullDim ≤ 1 stalks; ∃ IsAffineOpen U containing all points. No extra assumptions; r=0 handled by ⊥ affine. No duplicate (IsQuasiProjective.exists_isAffineOpen_superset needs quasi-projective over a field). Only the lean field differs from the live node; statement verbatim in file; sorry-only proof; docstrings carry source and blueprint; report has Worker report and Second reading by Q31. No files changed, no compile needed."
+ }
+}

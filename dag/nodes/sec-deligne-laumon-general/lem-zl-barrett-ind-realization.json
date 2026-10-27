@@ -1,0 +1,142 @@
+{
+ "id": "lem-zl-barrett-ind-realization",
+ "kind": "statement",
+ "title": "Barrett realization of constructible complexes in the derived ind-heart",
+ "statement": "Fix D, l, hl, Ω and finite-type k₀-schemes X₀,Y₀ as in [def-zl-weil-ind-sheaf-category], with geometric fibres and ordinary common-stage constructible derived categories from [def-weil-weil-sheaf-complex]. For a morphism f:X₀→Y₀, there are fully faithful realizations J_T:D_c^b(T,Ω)→D⁺(Ind(C_T)), where C_T is the specified small ordinary constructible heart. J_X carries each heart object A to y(A)[0], and every cohomology object of J_Y(K) is represented by an object of C_Y. The represented derived objects J_Y(B) detect isomorphisms in D⁺(Ind(C_Y)). Write F_T and U_T for the exact free/forgetful Frobenius functors. There is a natural isomorphism f^*⋙J_X⋙D⁺F_X ≅ J_Y⋙D⁺F_Y⋙D⁺(ind-Weil f^*), using exactly the normalized inverse image of that definition. Independent derived-category localization universes are allowed. This assertion mentions no right-adjoint direct image.",
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "source": {
+  "document": "Owen Barrett, The derived category of the abelian category of constructible sheaves, arXiv:2005.10859; Kashiwara–Schapira, Categories and Sheaves; SGA 4",
+  "place": "Barrett Theorem 1.1 and its proof in §3 via Theorem 1.3; Categories and Sheaves §15.3 (bounded derived full faithfulness of the exact ind embedding); finite open-cover descent. The common-stage and free-induction assembly is written by B5."
+ },
+ "proof": [
+  {
+   "text": "For separated finite-type schemes over the algebraically closed geometric field, apply Barrett Theorem 1.1 at each finite extension E/Q_l: ordinary bounded constructible complexes are the bounded derived category of the constructible heart. The exact Yoneda embedding in the ind-heart is fully faithful on bounded derived categories. A bounded roof and its finitely many arrows and exactness equations descend to a common stage of the filtered ind-presentations. The resulting realization is fully faithful, agrees with Yoneda on heart objects, and its cohomology is Yoneda of the constructible cohomology.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image comparison is induced termwise and fixed on degree-zero objects by the Yoneda Kan unit. Scalar extension has the same termwise comparison, so all data descend to common finite coefficient stages. For nonseparated finite-type schemes choose a finite affine open cover. Its finite intersections are separated and quasi-compact; finite Cech resolutions glue the comparison and full faithfulness. The comparisons agree on overlaps because they come from the same termwise inverse image and its units.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Representables generate the ind-heart: if every map from a representable to an object vanishes, the maps from all members of its filtered presentation vanish, hence its identity vanishes. If a bounded-below derived object is right orthogonal to all shifts of representable heart objects, start at its bottom cohomological degree. The bottom truncation identifies the corresponding Hom groups with maps to bottom cohomology, forcing this to vanish; repeat degree by degree. To test an arrow, use its cone and the long exact Hom sequences. Thus represented derived objects detect isomorphisms.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The free Frobenius functor is the coproduct of all integer Frobenius iterates, which is exact. The specified inverse image commutes with these sums, and its normalized Frobenius square identifies each summand. Applying these operations termwise and localizing gives the free-induction inverse-image comparison. This concerns inverse image only and does not assume any direct-image representability.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-sf-fixed-pair-derived-forget-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-sf-fixed-pair-derived-forget-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Owen Barrett, The derived category of the abelian category of constructible sheaves, arXiv:2005.10859; Kashiwara–Schapira, Categories and Sheaves; SGA 4",
+  "place": "Barrett Theorem 1.1 and its proof in §3 via Theorem 1.3; Categories and Sheaves §15.3 (bounded derived full faithfulness of the exact ind embedding); finite open-cover descent. The common-stage and free-induction assembly is written by B5."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded derived category of constructible sheaves equivalent to derived category of constructible heart and fully faithful ind Yoneda",
+   "results": "8 hits: HasDerivedCategory.standard, HasDerivedCategory, Functor.mapDerivedCategoryFactorsh, DerivedCategory.Q essential surjectivity, exact-functor localization compatibility, Functor.mapDerivedCategoryFactors, DerivedCategory.Qh essential surjectivity, exists_iso_Q_obj_of_isGE_of_isLE.",
+   "date": "2026-10-25",
+   "verdict": "No constructible-heart realization or derived ind full-faithfulness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ind.yoneda",
+   "results": "0 hits; service reports unknown identifier Ind.yoneda. Local source locates Ind.yoneda.fullyFaithful in Mathlib.CategoryTheory.Limits.Indization.Category, an ordinary categorical statement only.",
+   "date": "2026-10-25",
+   "verdict": "No derived comparison found; ordinary full faithfulness is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "Barrett|[Bb]ounded.*[Dd]erived.*Ind|Ind.*[Bb]ounded.*[Dd]erived",
+   "results": "0 Mathlib hits. Whole-project search finds Barrett only in the parent obligation. Blueprint search for constructible derived heart returns no matching blueprint node.",
+   "date": "2026-10-25",
+   "verdict": "No existing statement matching this result."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilIndProperHigherRepresentability",
+  "date": "2026-10-25",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "First proof paragraph: comparison of canonical higher compact-support images; ordinary constructible-heart realization in step 1 of lem-zl-ind-proper-higher-representability.",
+   "via": [
+    "lem-zl-ind-proper-higher-representability",
+    "def-zl-weil-compact-support-cohomology",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BarrettIndRealization",
+  "file": "lean/Sheaf/Paper/BarrettIndRealization.lean",
+  "declaration": "WeilConjectures.zlBarrettIndRealization",
+  "declarations": [
+   "WeilConjectures.zlIndFrobenius_equivalence",
+   "WeilConjectures.zlIndForget_additive",
+   "WeilConjectures.zlIndFree_additive",
+   "WeilConjectures.zlIndFree_preservesFiniteLimits",
+   "WeilConjectures.zlIndDerivedFree",
+   "WeilConjectures.zlIndDerivedForget",
+   "WeilConjectures.zlIndDerivedPull",
+   "WeilConjectures.zlBarrettIndRealization"
+  ],
+  "statement": "theorem zlBarrettIndRealization\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    [HasDerivedCategory.{wX} (Ind (zlSmallHeart D l Ω hl X₀))]\n    [HasDerivedCategory.{wY} (Ind (zlSmallHeart D l Ω hl Y₀))]\n    [HasDerivedCategory.{tX} (zlIndWeilHeart D l hl Ω X₀)]\n    [HasDerivedCategory.{tY} (zlIndWeilHeart D l hl Ω Y₀)] (f : X₀ ⟶ Y₀) :\n    ∃ (JX : generalAlgebraicallyClosedConstructibleCategory l Ω\n        (D.geometricFiber X₀).left ⥤\n        DerivedCategory.Plus (Ind (zlSmallHeart D l Ω hl X₀)))\n      (JY : generalAlgebraicallyClosedConstructibleCategory l Ω\n        (D.geometricFiber Y₀).left ⥤\n        DerivedCategory.Plus (Ind (zlSmallHeart D l Ω hl Y₀))),\n      Nonempty JX.FullyFaithful ∧ Nonempty JY.FullyFaithful ∧\n      (∀ A : zlSmallHeart D l Ω hl X₀,\n        Nonempty (JX.obj (AsSmall.down.obj A).obj ≅\n          (DerivedCategory.Plus.singleFunctor _ 0).obj (Ind.yoneda.obj A))) ∧\n      (∀ (K : generalAlgebraicallyClosedConstructibleCategory l Ω\n          (D.geometricFiber Y₀).left) (n : ℤ),\n        ∃ A : zlSmallHeart D l Ω hl Y₀,\n          Nonempty (Ind.yoneda.obj A ≅\n            (DerivedCategory.Plus.homologyFunctor _ n).obj (JY.obj K))) ∧\n      Nonempty (zlPull D l hl Ω f ⋙ JX ⋙ zlIndDerivedFree D l hl Ω X₀ ≅\n        JY ⋙ zlIndDerivedFree D l hl Ω Y₀ ⋙ zlIndDerivedPull D l hl Ω f) ∧\n      (∀ {M N : DerivedCategory.Plus (Ind (zlSmallHeart D l Ω hl Y₀))} (g : M ⟶ N),\n        (∀ B, Function.Bijective (fun h : JY.obj B ⟶ M ↦ h ≫ g)) → IsIso g)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T041130-L-1016477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T041130-L-1016477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

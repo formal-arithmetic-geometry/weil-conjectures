@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-smooth-affine-group-torsor-representability",
+ "kind": "statement",
+ "title": "Representability and smoothness of torsors under smooth affine groups",
+ "statement": "Let $k$ be a field [def-weil-field] and let $S$ be a $k$-scheme [def-pc-scheme]. Let $G\\to S$ be an affine, smooth, finitely presented group scheme [pqf-def-affine-morphism, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]: its multiplication, inverse and identity are $S$-morphisms satisfying the group axioms. Write $h_G$ for its sheaf of points on $S$-schemes for the fppf topology. Let $F$ be a sheaf of sets on this site with a left $h_G$-action. Assume there is an fppf covering family $\\{S_a\\to S\\}$ [def-pc-fppf-site] and equivariant isomorphisms $F|_{S_a}\\simeq h_{G\\times_SS_a}$ for left translation. Then $F\\simeq h_P$ for a scheme $P$ over $S$, and $P\\to S$ is affine, smooth, surjective, and universally open (every base change is open on underlying spaces). The action is represented and $G\\times_SP\\to P\\times_SP$, $(g,p)\\mapsto(gp,p)$, is an isomorphism. The assertions include the trivial group scheme and arbitrary, possibly nonreduced, $S$. All schemes, sheaves and covering index sets are in the universes of [def-weil-size-convention]; fibre products are as in [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 049C (remark-fun-with-torsors), affirmative answer to (2) for affine groups, via affine descent; descent.tex Tag 02VL (lemma-descending-property-smooth); morphisms.tex Tag 056G (lemma-smooth-open). This statement includes the geometric properties of the descended torsor, not just the torsor definition of Tag 049B."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given equivariant trivializations $t_a:F|_{S_a}\\simeq h_{G_a}$, where $G_a=G\\times_SS_a$. On $S_{ab}=S_a\\times_SS_b$, the natural bijection $t_b t_a^{-1}$ between the two represented restrictions gives by [lem-galois-yoneda-fully-faithful] a unique scheme isomorphism $\\phi_{ab}:G_a\\times_SS_b\\simeq S_a\\times_SG_b$. On triple overlaps $(t_c t_b^{-1})(t_b t_a^{-1})=t_c t_a^{-1}$; faithfulness gives the scheme cocycle. Thus the $G_a$ and $\\phi_{ab}$ form the family descent datum of [def-trf-scheme-cover-descent-datum]. The identity condition follows from $t_a t_a^{-1}=1$. No choice of group-valued transition element is needed.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "def-trf-scheme-cover-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 049C, remark-fun-with-torsors, answer (2); descent datum made explicit as in descent.tex Tags 023U and 023X"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fppf-family-coproduct-descent-encoding] to this family. It supplies $A=\\coprod_aS_a$, $Z=\\coprod_aG_a$, an fpqc singleton $q:A\\to S$, and a descent datum $D$ on $Z/A$. The canonical map $Z\\to G\\times_SA$ is an isomorphism: over the disjoint open component $S_a$ it is the identity of $G_a$; the component inverses glue uniquely, and their composites are identities because they are so on the component cover. The components form a disjoint open cover by [lem-weil-pbc-scheme-coproduct-family]; their inverse images cover the fibre product. Morphism gluing and equality on this open cover are [lem-weil-pbc-scheme-morphism-gluing]. Hence $Z\\to A$ is affine by [lem-weil-pbc-affine-morphism-permanence], being the base change of $G\\to S$. This uses the encoding lemma for arbitrary set-indexed families, not an assumption that $q$ is quasi-compact.",
+   "uses": [
+    "lem-trf-fppf-family-coproduct-descent-encoding",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0245, lemma-affine; Tag 023X, lemma-family-is-one; topologies.tex Tag 022C"
+   }
+  },
+  {
+   "text": "By [lem-galois-fpqc-affine-descent-effective] the affine datum $D$ is effective. The same-scheme clause of [lem-trf-fppf-family-coproduct-descent-encoding] yields a scheme $P/S$ and compatible isomorphisms $P\\times_SS_a\\simeq G_a$ realizing the original $\\phi_{ab}$. For every $T/S$ and $s\\in F(T)$, its restrictions to $T_a=T\\times_SS_a$ give morphisms $T_a\\to P$ via $t_a$ and these isomorphisms. Compatibility is exactly the defining equality for $\\phi_{ab}$. They glue to a unique $T\\to P$ by [lem-trf-fppf-covering-is-fpqc] and [lem-weil-pbc-fpqc-representable-descent]. Conversely, a map $T\\to P$ gives compatible sections of $F(T_a)$, which glue by the assumed sheaf axiom. The two operations are inverse on every $T_a$, hence inverse globally by uniqueness. Uniqueness also proves naturality in $T$. Thus $F\\simeq h_P$. The fact that $h_P$ is an fppf sheaf follows from those same two cited statements; there is no additional representability assumption.",
+   "uses": [
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-trf-fppf-family-coproduct-descent-encoding",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 049C via descent.tex Tag 0245 (lemma-affine), Tag 023Q (lemma-fpqc-universal-effective-epimorphisms); topologies.tex Tag 022C"
+   }
+  },
+  {
+   "text": "Transfer the left $h_G$-action to $h_P$. Since $h_{G\\times_SP}=h_G\\times h_P$ by the fibre-product universal property, [lem-galois-yoneda-fully-faithful] represents it by a morphism $a:G\\times_SP\\to P$. The action equations hold as scheme equations by faithfulness. On $S_a$ the map $\\alpha=(a,\\mathrm{pr}_P)$ is $(g,y)\\mapsto(gy,y)$ on $G_a\\times G_a$ and has inverse $(x,y)\\mapsto(xy^{-1},y)$. For a pair of sections of $P$ on $T$, these local inverses produce the unique local $g$ satisfying $gp_2=p_1$. On overlaps the $g$'s agree by that uniqueness. As $h_G$ is an fppf sheaf by [lem-trf-fppf-covering-is-fpqc] and [lem-weil-pbc-fpqc-representable-descent], they glue to a unique global $g$. This constructs a natural inverse on all test schemes; Yoneda makes it a scheme inverse to $\\alpha$.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0498 (definition-pseudo-torsor) and 0499 (lemma-characterize-trivial-pseudo-torsors); descent.tex Tag 023Q"
+   }
+  },
+  {
+   "text": "The cover $\\{S_a\\to S\\}$ is fpqc by [lem-trf-fppf-covering-is-fpqc]. Each $P\\times_SS_a\\to S_a$ is affine by [lem-weil-pbc-affine-morphism-permanence], since it is isomorphic to the base change $G_a\\to S_a$. Thus [lem-weil-pbc-fpqc-descend-affine] gives that $P\\to S$ is affine. Smoothness of $G_a\\to S_a$ is base-change stability in [lem-sfb-space-smooth-surjective-fppf-locality], specialized to schemes (identity etale charts). Its fppf target-locality clause then gives smoothness of $P\\to S$. For surjectivity, the identity section of $G_a$ gives a section of $P\\times_SS_a\\to S_a$; composition with $P\\times_SS_a\\to P$ shows that the image of $P\\to S$ contains the image of every $S_a\\to S$. These images cover $S$, so $P\\to S$ is surjective. This argument does not assert that $P(T)$ is nonempty for every $T$.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02L5 (lemma-descending-property-affine) and 02VL (lemma-descending-property-smooth); morphisms.tex Tag 01VB"
+   }
+  },
+  {
+   "text": "By [sbc-lem-smooth-criterion], the smooth morphism $P\\to S$ is flat and locally of finite presentation. Apply [lem-weil-pbc-flat-lfp-open]: it is open after every base change, which is the asserted universal openness. Nothing in the preceding arguments assumed $S$ reduced or Noetherian. For the trivial group, each local $P\\times_SS_a$ is $S_a$ and the unique transition is the identity; the section-gluing bijection in Step 3 identifies $F$ with $h_S$. For $S=\\varnothing$, the empty covering and the same sheaf axiom give $P=\\varnothing$.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VE (lemma-smooth-locally-finite-presentation), 01VF (lemma-smooth-flat), 056G (lemma-smooth-open) via 01UA (lemma-fppf-open)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-scheme-cover-descent-datum",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "sbc-lem-smooth-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 049C, remark-fun-with-torsors, affine descent explanation (2), expanded using descent.tex 0245, 023Q, 02L5, 02VL and morphisms.tex 056G; elementary sheaf gluing and group inverse formulas written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf torsor under a smooth affine group scheme over a scheme is represented by a scheme smooth affine surjective over the base",
+   "results": "8 hit(s): AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space projections, smoothness definitions and Zariski local representability do not represent an arbitrary fppf torsor. The generic descent-property theorem requires additional constructions and is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective faithfully flat descent represents torsors for affine algebraic groups by affine schemes",
+   "results": "8 hit(s): AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.instCategoryAffineScheme, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.over",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space projections, smoothness definitions and Zariski local representability do not represent an arbitrary fppf torsor. The generic descent-property theorem requires additional constructions and is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of principal homogeneous spaces under smooth affine group schemes",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.isAffineHom_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space projections, smoothness definitions and Zariski local representability do not represent an arbitrary fppf torsor. The generic descent-property theorem requires additional constructions and is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Scheme\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space projections, smoothness definitions and Zariski local representability do not represent an arbitrary fppf torsor. The generic descent-property theorem requires additional constructions and is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|IsTorsor",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space projections, smoothness definitions and Zariski local representability do not represent an arbitrary fppf torsor. The generic descent-property theorem requires additional constructions and is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf torsor under a smooth affine group scheme is represented by an affine smooth scheme over its base",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.instCategoryAffineScheme, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern affine spaces, smoothness definitions, Zariski representability, or descent of properties; none constructs a general affine group-scheme torsor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Scheme\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern affine spaces, smoothness definitions, Zariski representability, or descent of properties; none constructs a general affine group-scheme torsor."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|IsTorsor",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern affine spaces, smoothness definitions, Zariski representability, or descent of properties; none constructs a general affine group-scheme torsor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of principal homogeneous spaces under smooth affine group schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.isAffineHom_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern affine spaces, smoothness definitions, Zariski representability, or descent of properties; none constructs a general affine group-scheme torsor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective faithfully flat descent represents sheaf torsors for affine algebraic groups by affine schemes",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.AffineScheme.forgetToScheme_faithful, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.instCategoryAffineScheme, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern affine spaces, smoothness definitions, Zariski representability, or descent of properties; none constructs a general affine group-scheme torsor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-normalization-picard-sequence",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Normalization and the gluing-parameter sequence of a nodal curve. Auxiliary input: Effective fppf descent of the gluing-parameter torsor over the product of component Jacobians, including smoothness on arbitrary test schemes.",
+   "via": [
+    "lem-sfb-nodal-normalization-picard-sequence",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-affine-group-torsor-representability",
+  "worker": "Q53",
+  "summary": "Expanded the affine descent construction, sheaf identification and torsor inverse; used existing DAG nodes for all geometric and descent inputs, creating no nodes. Corrected the inconsistent right-translation/left-action convention to the source's left translation; no hypothesis or geometric conclusion changed. Read and quoted each cited statement, checked arbitrary bases and empty/trivial cases, and searched current blueprint and project Lean for duplicates and attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Normalization and the gluing-parameter sequence of a nodal curve. Auxiliary input: Effective fppf descent of the gluing-parameter torsor over the product of component Jacobians, including smoothness on arbitrary test schemes. Steps 1-4 realize the auxiliary effective fppf descent of the gluing-parameter torsor; Steps 5-6 supply affineness, smoothness, surjectivity and universal openness on arbitrary test bases. The newest blueprint direct-image proof was read; no chapter/unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "def-trf-scheme-cover-descent-datum",
+    "why": "Generic descent, sheaf/Yoneda or morphism-property tool in the affine-torsor construction of Stacks 049C; this does not replace the unit's six-functor route."
+   },
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic descent, sheaf/Yoneda or morphism-property tool in the affine-torsor construction of Stacks 049C; this does not replace the unit's six-functor route."
+   },
+   {
+    "node": "lem-trf-fppf-family-coproduct-descent-encoding",
+    "why": "Generic descent, sheaf/Yoneda or morphism-property tool in the affine-torsor construction of Stacks 049C; this does not replace the unit's six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic descent, sheaf/Yoneda or morphism-property tool in the affine-torsor construction of Stacks 049C; this does not replace the unit's six-functor route."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic descent, sheaf/Yoneda or morphism-property tool in the affine-torsor construction of Stacks 049C; this does not replace the unit's six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-scheme-cover-descent-datum",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "sbc-lem-smooth-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-f268f0c0a",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-f268f0c0a (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and every cited statement in full; there are no new nodes. Statement change: 'translation on the right' became left action and left translation. This matches Stacks groupoids Tag 0498 (left action, (g,x)↦(a(g,x),x), trivial = left multiplication). The base text was inconsistent: for constant S_3, x↦xg is not a left action. The right-torsor reading would be equivalent via p·g^{-1}, so nothing is weakened, and the only citer (nodal-normalization-picard-sequence step 6, commutative torus) is unaffected. Step 1: Yoneda on Sch/S_ab gives φ_ab and the cocycle, matching def-trf-scheme-cover-descent-datum. Step 2: the encoding lemma (fppf family, infinite I, no qc) gives A, Z and D; Z≅G×_SA follows from the coproduct and gluing leaves, so Z→A is affine by base change. Step 3: affine fpqc descent (singleton fpqc, affine) plus the same-scheme clause give P with ψ_b=φ_abψ_a; I checked the gluing of sections via fppf⇒fpqc and representable descent, and the inverse via the sheaf axiom of F. Step 4: the local inverse (xy^{-1},y) holds in the noncommutative case, and g glues in h_G. Step 5: 02L5 for affineness; the same-unit space smooth locality node (no qc) for smoothness, since the scheme-level lem-trf-smooth-fpqc-base-descent needs a qc cover; surjectivity via the identity section. Step 6: smooth⇒flat+lfp⇒universally open. Edge cases checked: S empty, trivial group, nonreduced S, a torsor with no S-points. No duplicate found in the DAG. Advisory: lem-trf-fppf-sheaf-representability-descent-data could have shortened Step 3. Declared tool_uses (trf descent datum, encoding, galois affine descent, pbc 02L5, sbc criterion) are generic and accepted. Batch-5: the three trf citations are a general definition, a Mathlib-leaf topology fact and descent bookkeeping, none part of the trace formula or Poincaré duality, so accepted. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAffineGroupTorsorRepresentability",
+  "declaration": "AlgebraicGeometry.smooth_affine_group_torsor_representability",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAffineGroupTorsorRepresentability.lean",
+  "statement": "theorem smooth_affine_group_torsor_representability (k : Type u) [Field k] (S : Scheme.{u}) (_s : S ⟶ Spec (.of k)) (G : Over S) [GrpObj G] [IsAffineHom G.hom] [Smooth G.hom] [LocallyOfFinitePresentation G.hom] (F : Sheaf (Scheme.fppfTopology.over S) (Type (u + 1))) (act : ∀ T : Over S, (T ⟶ G) → F.obj.obj (op T) → F.obj.obj (op T)) (one_act : ∀ (T : Over S) (x : F.obj.obj (op T)), act T 1 x = x) (mul_act : ∀ (T : Over S) (g h : T ⟶ G) (x : F.obj.obj (op T)), act T (g * h) x = act T g (act T h x)) (map_act : ∀ (T T' : Over S) (f : T' ⟶ T) (g : T ⟶ G) (x : F.obj.obj (op T)), F.obj.map f.op (act T g x) = act T' (f ≫ g) (F.obj.map f.op x)) (locally_trivial : ∃ (I : Type (u + 1)) (U : I → Scheme.{u}) (f : ∀ i, U i ⟶ S), Presieve.ofArrows U f ∈ Scheme.fppfPrecoverage S ∧ ∀ i, ∃ e : (Over.map (f i)).op ⋙ F.obj ≅ (Over.map (f i)).op ⋙ uliftYoneda.{u + 1}.obj G, ∀ (T : Over (U i)) (g : (Over.map (f i)).obj T ⟶ G) (x : F.obj.obj (op ((Over.map (f i)).obj T))), (e.hom.app (op T) (act ((Over.map (f i)).obj T) g x)).down = lift g (e.hom.app (op T) x).down ≫ μ[G]) : ∃ (P : Over S) (e : F.obj ≅ uliftYoneda.{u + 1}.obj P) (a : ModObj G P), IsAffineHom P.hom ∧ Smooth P.hom ∧ Surjective P.hom ∧ UniversallyOpen P.hom ∧ (∀ (T : Over S) (g : T ⟶ G) (x : F.obj.obj (op T)), (e.hom.app (op T) (act T g x)).down = lift g (e.hom.app (op T) x).down ≫ a.smul) ∧ IsIso (lift a.smul (snd G P))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbd671b10",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Only the item's lean record changed, plus one module with one sorried theorem; the statement field matches the file exactly. Each hypothesis matches the node and none is stronger: field k and arbitrary k-scheme S; GrpObj G in Over S with IsAffineHom, Smooth and LocallyOfFinitePresentation (affine + LFP = finitely presented); F a sheaf on fppfTopology.over S valued in Type (u+1), which is more general than Type u; an action with one/mul/restriction laws; an fppf cover via fppfPrecoverage with any index set; isomorphisms to h_G on each member that respect left translation. Conclusion matches: P over S, F ≅ uliftYoneda P, affine/smooth/surjective/universally open, a ModObj action tied to the input action through e, and IsIso of lift smul snd (the torsor map). Edge cases covered: trivial group, empty S and empty cover, nonreduced S, noncommutative G, torsor with no global section. All notions are Mathlib and nothing is copied; no existing declaration found (side-live grep shows only docstring citations by downstream modules). Docstrings give the source place, the blueprint id and the six-step proof; proof-dependency imports exist. Not compiled because no file was changed; the worker reports a clean compile. No findings."
+ }
+}

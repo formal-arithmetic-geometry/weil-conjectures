@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-finite-model-sheaf-quotient-constructible",
+ "kind": "statement",
+ "title": "Finite quotient cohomology of constructible integral sheaves with scalar models",
+ "statement": "Fix a prime $\\ell$, a finite extension $F/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_F$ with its induced $\\ell$-adic norm topology, and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$, put $B_T=p_T^*\\underline A$ and $k_{n,T}=(A/\\pi^n)_T$ for $n\\ge1$. Use the small pro-étale sites and universes of [def-weil-size-convention] and the ordinary unbounded derived module categories [sk-def-sfb-module-derived-pushpull]. Write $C_T(K)=R\\varprojlim_{n\\ge1}\\operatorname{Res}_n(K\\otimes^L_{B_T}k_{n,T})$ and $c_{T,K}:K\\to C_T(K)$ for the specified strict-tower completion unit [sk-def-pe-derived-completion, lem-pe-completion-triangle-comparison].\nLet $V$ be qcqs and $M$ a constructible $B_V$-module in the finite constant scalar-model sense [sk-def-sfb-constructible]. Put $M_n=M[0]\\otimes^L_{B_V}k_{n,V}$. Then $A/\\pi^n$ is a finite discrete ring and $H^q(M_n)=0$ for $q\\notin[-1,0]$, uniformly for all $n\\ge1$. Each $M_n$ is bounded constructible both in the internal finite constant scalar-model sense and, under [lem-sf-module-object-ordinary-coefficient-equivalence], as an ordinary pro-étale complex with finite constructible cohomology [def-weil-proetale-constructible-sheaf].\nMore precisely, choose a finite constructible locally closed stratification witnessing constructibility of $M$ and trivializing pro-étale covers of its strata. On any such covering scheme $U$ with $M|_U\\simeq B_U\\otimes_{\\underline A}\\underline P$, any exact scalar resolution $0\\to A^a\\xrightarrow{u}A^b\\to P\\to0$ with $a,b$ finite gives an isomorphism in the derived category of $k_{n,U}$-modules\n$$M_n|_U\\simeq[k_{n,U}^a\\xrightarrow{\\overline u}k_{n,U}^b],$$\nwith terms in degrees $-1,0$. In ordinary finite-coefficient coordinates its cohomology sheaves are the constant sheaves of $\\ker(\\overline u:(A/\\pi^n)^a\\to(A/\\pi^n)^b)$ and $\\operatorname{coker}(\\overline u)$. These scalar modules are finite and finitely presented over $A/\\pi^n$. The isomorphisms use the actual quotient homomorphism $A\\to A/\\pi^n$ and commute with restriction to the stated strata and covers. No geometric condition involving $\\ell$, Noetherianity or completeness hypothesis on $M$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Local models and Locality paragraphs of the finite-model proof; returned proof steps 8--9. Agent finite-quotient matrix calculation and finite-stratification descent; compare Bhatt--Scholze Section 6.3 for classical finite coefficients."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "lem-pe-completion-triangle-comparison",
+  "sk-def-sfb-constructible",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "def-weil-proetale-constructible-sheaf",
+  "def-sfb-finite-constant-model-data"
+ ],
+ "proof": [
+  {
+   "text": "The positive quotient is finite by finite_coefficientExtensionRing. Its recorded topology is discrete by the uniformizer coset neighbourhood basis, transported from spectralNorm.normedField to coefficientExtensionAbsoluteValue.toNormedField via equality of their pseudometric structures. Choose the existing normalized Encoding at every scheme.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-sfb-integers-coset-basis",
+    "lem-sf-finite-discrete-normalized-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the specified chart comparison. The literal double complex has homology kernel in degree -1 and cokernel in degree 0; exact constant realization transports these identifications. The categorical kernel is equivalent to a submodule of a finite power and the cokernel to a quotient of a finite power, so both are finite. Finite modules over the finite ring are finitely presented by Module.finitePresentation_of_finite. This constructs every field of LocalCalculation in Lean.",
+   "uses": [
+    "lem-sfb-finite-model-quotient-chart-comparison",
+    "def-sfb-finite-model-quotient-coordinates",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cohomology descent to this LocalCalculation. Its global vanishing supplies bounds -1 and 0 through DerivedCategory.isGE_iff and isLE_iff. Combine boundedness with the internal constructibility assertions. The termwise exact encoding preserves boundedness, which combined with the fixed intrinsic constructibility assertions gives OrdinaryConclusion. Package these with the local calculation and coefficient facts.",
+   "uses": [
+    "lem-sfb-finite-model-quotient-cohomology-descent",
+    "def-sfb-finite-model-quotient-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-model-quotient-coordinates",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-sfb-finite-model-quotient-chart-comparison",
+  "lem-sfb-finite-model-quotient-cohomology-descent",
+  "lem-sfb-integers-coset-basis",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models, Locality and Strata. Lean decomposition into chart comparison, explicit scalar cohomology/finiteness, and cohomology descent; boundedness and final assembly are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction modulo a uniformizer power of a finite scalar model constructible integral proetale sheaf has finite constructible cohomology in degrees minus one and zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite constant integral module presentation reduces to a two term complex of finite constant quotient modules on each stratum of a qcqs scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Presentation.finitePresentation\", \"module\": \"Mathlib.Algebra.Module.Presentation.Finite\", \"type\": \"[Finite pres.G] [Finite pres.R] : Module.FinitePresentation A M\", \"doc\": \"If a module $ M $ over a ring $ A $ has a presentation with a finite set of generators and a finite set of relations, then $ M $ is finitely presented.\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, this recursor allows defining functions on the property tha\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite.rec\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a finite presentation of a quasicoherent sheaf $ M $ over a ring sheaf $ R $, any property or construction that holds when the generating sections are finitely generated and the relations are fi\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"Module.FinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  (∃ s, Submodule.span R ↑s = ⊤ ∧ (Finsupp.linearCombination R Subtype.val).ker.FG) → Module.FinitePresentation R M\", \"doc\": \"If there exists a finite set $ s $ such that the span of $ s $ equals $ M $ and the kernel of the linear map from the free module on $ s $ to $ M $ is finitely generated, then $ M $ is finitely presen\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"Constructible\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|reduc)|proetale.*(tensor|reduc)|Tor.*constructible",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"697\", \"text\": \"      AlgEquiv.toRingEquiv_toRingHom, Finset.mem_image, BasicConstructibleSetData.map,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented scalar models on constructible strata have bounded constructible finite quotient reductions with finite kernel and cokernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.FinitePresentation.exists_fin\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ (R : Type u) (M : Type u_1) [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [fp : Module.FinitePresentation R M], ∃ n K x, K.FG\", \"doc\": \"For a finitely presented module $ M $ over a semiring $ R $, there exists a natural number $ n $, a finitely generated submodule $ K $ of the free module $ R^n $, and an isomorphism between $ M $ and \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"If the index types $\\\\iota$ and $\\\\sigma$ are finite, then the quotient ring $R₀[\\\\iota]$ modulo the ideal generated by the relations $P.\\\\text{relationOfHasCoeffs}(R₀)$ is finitely presented over $R₀$.\"}\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module and finitely presented as an $ R $-algebra, then $ S $ is finitely presented as an $ R $-module.\"}\n  {\"name\": \"instFinitePresentationForall\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {ι : Type u_2} [Finite ι], Module.FinitePresentation R (ι → R)\", \"doc\": \"The product module $ \\\\prod_{i \\\\in \\\\iota} R $ over a semiring $ R $, indexed by a type $ \\\\iota $, is finitely presented. This means there exists a finite set of generators and a finite set of relations\"}\n  {\"name\": \"instFiniteOfFinitePresentation\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [h : Module.FinitePresentation R M], Module.Finite R M\", \"doc\": \"Every finitely presented module over a semiring $ R $ is finitely generated. That is, if a module $ M $ admits a finite set of generators and a finite set of relations between them, then $ M $ can be \"}\n  {\"name\": \"Module.Finite.exists_fin_quot_equiv\", \"module\": \"Mathlib/RingTheory/Finiteness/Cardinality\", \"type\": \"∀ (R : Type u_3) (M : Type u_4) [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M],\\n  ∃ n S, Nonempty (((Fin n → R) ⧸ S) ≃ₗ[R] M)\", \"doc\": \"For any ring $ R $ and finitely generated $ R $-module $ M $, there exists a natural number $ n $ and a submodule $ S $ of the free module $ R^n $ such that the quotient module $ R^n/S $ is isomorphic\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|reduc)|proetale.*(tensor|reduc)",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: read results concern general finite presentation, scalar module quotients or condensed discrete module constructions, not integral pro-etale finite scalar models and their stratified finite-quotient derived cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction modulo a uniformizer of a finite scalar model sheaf is represented by a two term complex of finite constant modules",
+   "results": "OK 8 hits: ModuleCat.smulShortComplex, ModuleCat.smulShortComplex_exact, ModuleCat.smulShortComplex_X₂, ModuleCat.smulShortComplex_g, LinearMap.reduceModIdeal, AlgebraicGeometry.Scheme.Modules, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: read results concern general finite presentation, scalar module quotients or condensed discrete module constructions, not integral pro-etale finite scalar models and their stratified finite-quotient derived cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"tensor\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: read results concern general finite presentation, scalar module quotients or condensed discrete module constructions, not integral pro-etale finite scalar models and their stratified finite-quotient derived cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a constructible integral proetale module with finite constant scalar models has finite constructible cohomology in degrees minus one and zero",
+   "results": "OK 8 hits: Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.FormallyEtale.instForallOfFinite, Algebra.etaleLocus_eq_compl_support, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.formallySmooth_iff, Algebra.FormallySmooth.iff_subsingleton_and_projective, KaehlerDifferential.finite",
+   "date": "2026-10-22",
+   "verdict": "no match: read results concern general finite presentation, scalar module quotients or condensed discrete module constructions, not integral pro-etale finite scalar models and their stratified finite-quotient derived cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free resolutions of locally constant integral sheaves compute quotient derived tensor and constant kernel cokernel cohomology on a finite stratification",
+   "results": "OK 8 hits: CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor_map_val, CondensedMod.ofSheafProfinite, LightCondensed.free_internallyProjective_iff_tensor_condition', CondensedMod.ofSheafCompHaus, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: read results concern general finite presentation, scalar module quotients or condensed discrete module constructions, not integral pro-etale finite scalar models and their stratified finite-quotient derived cohomology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-integral-finite-model-completeness",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Local models and Locality paragraphs of the finite-model proof; returned proof steps 8--9. Agent finite-quotient matrix calculation and finite-stratification descent; compare Bhatt--Scholze Section 6.3 for classical finite coefficients.",
+   "via": [
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-model-sheaf-quotient-constructible",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing nodes only. Retains the exact item statement and specified quotient homomorphism, computes every chosen scalar presentation in the derived quotient category, writes out finiteness and finite presentation, and descends via qcqs open/closed refinement. No new nodes or Lean changes.",
+  "blueprint": "Serves det-sf-comp-coherence-cocycle Refinement isomorphisms (2), via qcqs proper closed-base-change finite-model inputs; realizes the Local models, Locality and Strata paragraphs of det-def-localizing-closure-ctf-equals-bc with the finite-quotient computation explicit. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "det-prop-integral-criterion-constant-coefficients",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-exc-open-closed-detection",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-fix-constructible-open-closed-refinement",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-pe-finite-discrete-encoding-pullback-fixed",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-pe-finite-discrete-scalar-constant-models",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sfb-integers-coset-basis",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-finite-free-resolution-tensor",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sfb-scalar-inverse-image-tower-diagram",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-model-stalks",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic coefficient, exactness, finite-resolution or cover/refinement tool for the local finite-quotient computation; the compactification-coherence unit does not state this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term resolution existence / exact internal-to-sectionwise transport used for the quotient pullback calculation, with no boundedness or geometric hypotheses; no such statement belongs to the compactification unit."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic flat-term resolution existence / exact internal-to-sectionwise transport used for the quotient pullback calculation, with no boundedness or geometric hypotheses; no such statement belongs to the compactification unit."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Identifies module pullback along a pro-étale cover member with restriction to the localized site, needed to apply the slice-restriction cover lemma and the ordinary locally-constant definition; generic site fact, no node of the compactification-coherence unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-integral-criterion-constant-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-exc-open-closed-detection",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-pe-finite-discrete-encoding-pullback-fixed",
+  "lem-pe-finite-discrete-scalar-constant-models",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-sfb-integers-coset-basis",
+  "lem-sfb-ringed-finite-free-resolution-tensor",
+  "lem-sfb-scalar-inverse-image-tower-diagram",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-756b90f6f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-756b90f6f (reviewer sub-agent of L); spot-checked: I read all seven steps of the item and every cited statement in full. The statement is unchanged and correct. Small cases: P=A/π^r with r≥n gives ū=0, so H^{-1}=H^0=k_n; a=b=0, empty V and non-Noetherian qcqs V are fine. Source checks: Stacks 093M (sites-modules.tex:8261), 093J, 06YQ, 06YY, 0G7E and 09AJ, and the 'Local models / Locality / Strata' paragraphs of main-20261015 sk-def-localizing-closure-ctf-equals-bc.proof.md. No SGA citation. Step 1: DVR, finite quotients, flatness of (O_E)_X→B and R_n≅B/π^nB, B≅p^*O_E. Step 2: flat-term K-flat resolution, K-flat pullback, exact f^* via the Lean-closed cartesian-coefficients node, termwise χ, Lφ^* by K-flat representative. Step 3: DVR free resolution leaf and flat presentation extension, keeping the original matrix. Step 4: two-term K-flat resolution tensor computed in D(k_n) via change of rings. Step 5: exact constant functor gives constant ker/coker, and finite modules over a finite ring are finitely presented (written out). Step 6: cover detection, then the qcqs open/closed refinement tree and open/closed detection, with no Noetherian induction. Step 7: internal models via the encoding nodes, ordinary local constancy plus finite stalks, matching def-weil-proetale-constructible-sheaf. FIX (C4/E5): Steps 6 and 7 apply the cover lemma and the ordinary locally-constant definition, which use localized-site restriction, to the module pullbacks r^* that the witnesses and Step 2 produce. Nothing identified the two. I added [lem-sfb-proetale-object-inverse-image-restriction](3) to both steps, to proof_deps and to split_report.tool_uses (unit sk-lem-proper-heart-bound); a DFS from it reaches neither the item nor its parent, so no cycle. Advisories: det-def-localizing-closure-ctf-equals-bc(1) already gives the vanishing clause (Tor amplitude [-1,0]) but not the matrix form or constructibility, so this is not a duplicate. The item's C_T/c_{T,K} notation and its two stmt_deps date from the node's creation and are unused here. Most tool_uses 'why' lines are copies of one boilerplate sentence, but the uses themselves are generic black-box tools and are accepted. No new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteModelSheafQuotientConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelQuotient.finite_model_sheaf_quotient_constructible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.finite_model_sheaf_quotient_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteModelSheafQuotientConstructible.lean",
+  "statement": "theorem finite_model_sheaf_quotient_constructible (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] (M : AdicCompletion.Modules l E V) (hM : IsConstantModelConstructible (DerivedNakayama.integerRing l E) V M) : ∀ n : ℕ, ∃ hf : Finite (R l E n), @DiscreteTopology (R l E n) (AdicCompletion.finiteTopology l E (n + 1)) ∧ (∀ q : ℤ, q ≠ -1 → q ≠ 0 → IsZero ((DerivedCategory.homologyFunctor _ q).obj (reduction l E V M n))) ∧ constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) V (reduction l E V M n) ∧ (∃ enc : ∀ T : Scheme.{u}, Encoding l E n T, OrdinaryConclusion l E V M n hf (enc V) ∧ LocalCalculation l E V M n enc)",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main signature is unchanged. Coordinate declarations moved unchanged to FiniteModelSheafQuotientData (definition node def-sfb-finite-model-quotient-coordinates). Two strictly smaller argument steps are split off; scalar cohomology and finiteness, boundedness, and assembly are proved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2dc506bc5",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 04509ddc05f6; both findings fixed. (1) H2/H13: stmt_dep lem-sfb-finite-constant-model-two-term-free-resolution replaced by the landed definition node def-sfb-finite-constant-model-data (Q108, existing:true, owns modelFunctor, snapshot record identical to side-live); freeScalars replaced by its definition body ModuleCat.of (A l E) (Fin k → ULift.{u+1} (A l E)) in integralDifferential and in w. (2) The unreferenced restrictChartIso is deleted; lean.note and report say LocalCalculation gives an isomorphism per chart (option allowed by the return). The rest of the module, the theorem signature and lean.statement are unchanged by diff. Independent re-reading: qcqs and IsConstantModelConstructible hypotheses with nothing extra; reduction = derivedReduction of singleFunctor 0 along the actual quotient map into D(k_n); Finite and DiscreteTopology for finiteTopology; vanishing outside degrees -1 and 0 for every n; constantModelBoundedConstructible plus OrdinaryConclusion; LocalCalculation over every stratification, cover, chart, finitely presented P, model iso and exact resolution, with the matrix reduced by Ideal.Quotient.mk and the two-term complex in degrees -1 and 0; constant kernel and cokernel, finite and finitely presented. ∃ enc does not choose anything arbitrary: Encoding functors are fixed and ringIso is pinned by normalization. Edge cases: n=0 is exponent 1, a=b=0, P=A/π^r, empty V, non-Noetherian V, characteristic ℓ. Gates: the theorem proof is the only sorry, no hollow definitions, docstrings carry source and blueprint tag, lean.statement verbatim, all declarations present, not yet landed live. Advisories: the restriction-compatibility sentence is not encoded (allowed by the return; the only citer does not use it); the C_T notation stmt_deps are imported but unused. No compile run: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9ff81",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T101103-L-3656596",
+  "kind": "interface",
+  "note": "independent cc review: item theorem stmt + 13 moved defs byte-identical vs clone; split statements chart_comparison/cohomology_descent read true against nodes and source; both direct importers compiled against delivered modules (exit 0); axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

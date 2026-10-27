@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-p1-projection-trace-transport-true",
+ "kind": "statement",
+ "title": "The fixed-true component of ordinary inverse-exchange trace transport.",
+ "statement": "Let A be a finite commutative ring, N a natural number annihilating A, t normalized finite twist transport, S a scheme with N invertible in global sections, and f:X→S proper with i:X ≅ ProjectiveLine(S) satisfying i.hom ≫ q = f. For any morphism τ:Rq* A_P(1)[2] → A_S, the displayed ordinary inverse-exchange transport equation holds for the fixed projection a = true. This is the second component of the arbitrary-trace transport and has no splitting family, chart trace, trace base-change hypothesis, supported class or diagonal integral.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The paragraphs identifying t_p1 and t_p2 with base change of t_q, using qp1=qp2 and the composite-adjunction counit."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data",
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-sf-p1-chart-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Transport both sides of the fixed-true interface along the proved equality of the Boolean second-projection shriek functor and the explicit second-projection shriek functor, then cancel that isomorphism component. Apply the generic categorical pasting calculation to the entire presentationExchange family before specializing its coefficient object to the shifted line on ProjectiveLine S. This separates the inverse-image square comparison from the supported self-product exchange, forget-supports, direct-image composition, and cancellation along i.",
+   "uses": [
+    "lem-sf-p1-presentation-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use coordinateLineComparison to identify the coefficient correction and inverse first-projection square comparison with the coordinate correction followed by pullback of the inverse line comparison along i. Its proof establishes normalized shifted-line composition, including N=0, directly from uniqueness.",
+   "uses": [
+    "lem-sf-p1-coordinate-line-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ordinaryFiniteUnitPullback_comp and constantUnit_pullback for unit_transport. The latter is proved from the existing cached right-unit compatibility by faithful tensor cancellation, after normalizing the actual constant object. The generic naturality-pasting lemma carries the arbitrary tau across the exchange isomorphisms. The shared trace construction is factored through presentationTrace; its proved associativity equation identifies this construction with the original recorded direct-image formula.",
+   "uses": [
+    "lem-amb-ordinary-finite-unit-pullback-comp",
+    "lem-sf-p1-constant-unit-pullback",
+    "lem-sf-p1-trace-transport-pasting"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-p1-presentation-exchange",
+  "lem-sf-p1-coordinate-line-comparison",
+  "def-sf-p1-integral-transport-data",
+  "lem-amb-ordinary-finite-unit-pullback-comp",
+  "lem-sf-p1-constant-unit-pullback",
+  "lem-sf-p1-trace-transport-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Coefficient-square normalization, monoidal unit compatibility, and a generic naturality-pasting calculation, with the coefficient-independent geometric exchange isolated as presentationExchange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived proper base change exchange under composition and isomorphism, adjunction counit pasting",
+   "results": "Returned generic ExponentiableMorphism.pushforwardComp_hom_counit and derived adjunction epsilon/eta factorization lemmas; none specializes to the finite shifted-line chart and compact-support comparisons.",
+   "date": "2026-10-26",
+   "verdict": "Generic mate ingredients, no exact statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_triangle_components",
+   "results": "One hit: CategoryTheory.Adjunction.left_triangle_components, Mathlib.CategoryTheory.Adjunction.Basic. This cancels an adjunction unit and counit, but does not identify the geometric comparison maps.",
+   "date": "2026-10-26",
+   "verdict": "Ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(cube|paste)|unit_conjugateEquiv",
+   "results": "Four hits, including CategoryTheory.Adjunction.Mates.lean unit_conjugateEquiv and unit_conjugateEquiv_symm. Local rg also found the source derivedBaseChangeMap_cube and derivedBaseChangeMap_paste and inspected their signatures; no existing finite-line chart factorization or isomorphism transport equation.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransport",
+  "date": "2026-10-26",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-p1-projection-trace-transport",
+   "place": "Fixed true Boolean component of the original transport equation.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransportTrue",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ProjectionTraceTransportTrue.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.projectionTraceTransport_true",
+  "statement": "theorem projectionTraceTransport_true\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]\n    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (hS : IsUnit (N : Γ(S, ⊤)))\n    (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S) :\n    middleComparison A N hA t f i hi hS true ≫\n        (ordinaryFinitePullback A i.hom).map (projectionExchange A N hA t S hS true) ≫\n        (ordinaryFinitePullback A i.hom).map\n          ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).map τ ≫\n            (ordinaryFiniteUnitPullback A (ProjectiveLine S ↘ S)).hom) ≫\n        (constantComparison A i).hom =\n      coordinateTrace A N hA t f i hi hS τ true",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261026T104404-L-803090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "independent cc review: item proof + presentationExchange sorry vs nodes lem-sf-p1-projection-trace-transport-true / lem-sf-p1-presentation-exchange; trace refactor vs change record sf-p1-trace-factorization and clone; forced adaptation ProjectiveLineTraceNormalization vs clone diff; all 11 direct importers compiled OK against the delivered set"
+ }
+}

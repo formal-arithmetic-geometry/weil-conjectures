@@ -1,0 +1,359 @@
+{
+ "id": "lem-sf-derived-weil-compact-projection-formula",
+ "kind": "statement",
+ "title": "Compact projection formula for actual derived Weil complexes",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $f_0:X_0\\to Y_0$ be a separated finite-type morphism between separated finite-type $k_0$-schemes. Use the actual derived Weil categories, actual chosen compactification functor $Rf_{0!}$, and module pullback $f^*$ of [def-sf-native-weil-derived-framework], restricted by [lem-sf-native-weil-shriek-triangulated] and [lem-sf-native-weil-pullback-star-preservation], and the tensor of [def-sf-derived-weil-category-and-operations] over $B_X,B_Y$. For every $M\\in\\mathrm{WC}^{\\mathrm{der}}(X_0)$ and $T\\in\\mathrm{WC}^{\\mathrm{der}}(Y_0)$ there is a natural isomorphism in the actual derived Weil category\n$$\\pi_{M,T}:Rf_{0!}M\\otimes^L_{B_Y}T\\xrightarrow{\\sim}Rf_{0!}(M\\otimes^L_{B_X}f^*T).$$\nIt is the compactification projection isomorphism formed from extension by zero and proper derived module pushforward, with all morphisms taken in $D(\\mathcal W_Y)$, restricted to its bounded constructible full subcategory. The formula applies to an arbitrary bounded constructible derived Weil complex $T$, not merely a lisse sheaf in degree zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, second Hom bijection (projection formula); actual derived-Weil realization of the projection ingredient. Live WeilSheaf/ProjectionFormulaLisse/LowerShriek.lean lines 15-35, 157-170 covers only the lisse degree-zero parameter, so does not finish this statement."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-native-weil-pullback-star-preservation",
+  "lem-sf-native-weil-shriek-triangulated",
+  "lem-sf-derived-weil-tensor-hom-adjunction",
+  "def-sf-native-open-tensor-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix the chosen compactification $X_0\\xrightarrow{j_0}Z_0\\xrightarrow{p_0}Y_0$ of the native framework, so $Rf_{0!}=Rp_{0*}j_{0!}$. Put $A=j_{0!}M$. The native basic comparisons give $A$ bounded constructible; explicitly exactness gives $H^r(A)=j_{0!}H^r(M)$, and extending each finite stratification by the closed complement with rank zero preserves constructibility. Since $p_0$ is proper and $Y_0$ finite type, finite-type composition gives $Z_0$ finite type. The diagonal $Z_0\\to Z_0\\times_{k_0}Z_0$ factors through $Z_0\\times_{Y_0}Z_0$: the first factor is closed by properness and the second is the base change of the closed diagonal of $Y_0$. Closed immersions compose, since quotient ring maps compose to quotient by the inverse-image ideal. Thus $Z_0$ is separated, and geometric base change preserves this scheme domain.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-weil-basic-comparisons",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, second Hom bijection: chosen-compactification factorization; scheme-domain check: Stacks 01T3 (finite-type composition), 01QR (closed base change), 01KU (diagonal factorization)"
+   }
+  },
+  {
+   "text": "Apply the native proper comparison to $(A,T)$ and the native open tensor comparison to $(M,p_0^*T)$. Their natural isomorphisms compose as\n$$Rp_{0*}j_{0!}M\\otimes^LT\\xrightarrow{\\alpha^W}Rp_{0*}(j_{0!}M\\otimes^Lp_0^*T)\\xrightarrow{Rp_{0*}\\gamma^W}Rp_{0*}j_{0!}(M\\otimes^Lj_0^*p_0^*T).$$\nUse the balanced equivariant pullback compositor supplied by the open comparison to identify $j_0^*p_0^*T$ with $f_0^*T$. By the definition of $Rf_{0!}$ this is precisely the chosen compactification projection isomorphism. Each arrow and its inverse lies in the actual ambient derived Weil category and is natural in both derived variables.",
+   "uses": [
+    "lem-sf-native-proper-projection-realization",
+    "lem-sf-native-open-derived-tensor",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, second Hom bijection; proper/open projection composite"
+   }
+  },
+  {
+   "text": "Finally, $Rf_{0!}M$ and $Rf_{0!}(M\\otimes^Lf_0^*T)$ belong to $\\mathrm{WC}^{\\mathrm{der}}(Y_0)$: pullback preservation gives $f_0^*T$, tensor closure gives $M\\otimes^Lf_0^*T$, and compact-support preservation applies to both inputs. Tensor closure also gives $Rf_{0!}M\\otimes^LT$ in that subcategory. Since it is full, the ambient isomorphism and its inverse are morphisms in this subcategory, with their same naturality equations. This proves the entire claimed formula for every bounded constructible derived $T$.",
+   "uses": [
+    "lem-sf-native-weil-pullback-star-preservation",
+    "lem-sf-derived-weil-tensor-hom-adjunction",
+    "lem-sf-native-weil-shriek-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, second Hom bijection: restriction to the bounded constructible domain"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-proper-morphism",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sf-derived-weil-tensor-hom-adjunction",
+  "lem-sf-native-open-derived-tensor",
+  "lem-sf-native-proper-projection-realization",
+  "lem-sf-native-weil-basic-comparisons",
+  "lem-sf-native-weil-pullback-star-preservation",
+  "lem-sf-native-weil-shriek-triangulated",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, second Hom bijection; native compactification assembly, using BS Proposition 6.8.14/Remark 6.8.15 and Stacks 0GL1 for the factors"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for compactly supported derived pushforward of complexes of proetale Weil sheaves",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.pushforward_map_val: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.C; SheafOfModules.pushforwardComp_hom_app_val_app: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.C; SheafOfModules.pushforwardComp_inv_app_val_app: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.C; SheafOfModules.pushforwardSections_coe: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.C; SheafOfModules.pushforwardNatIso_hom: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.C; SheafOfModules.pushforwardNatTrans_app_val_app_apply: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.C; SheafOfModules.pushforwardSections: {C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {D : Type u₂} →\n      [inst_1 : ; SheafOfModules.pushforwardNatTrans_app_val_app: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.C",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product with an arbitrary bounded constructible Weil complex commutes with shriek pushforward after pullback",
+   "results": "[leansearch] OK 8 hit(s); HomologicalComplex.tensorObj: (K₁ K₂ : HomologicalComplex C c) [HasTensor K₁ K₂] : HomologicalComplex C c; CategoryTheory.Over.tensorHom_left_fst: {S U : C} {R T : Over X} (fS : S ⟶ X) (fU : U ⟶ X) (f : R ⟶ mk fS) (g : T ⟶ mk fU) :\n  (f ⊗ₘ g).left; Commute.tprod: {a₁ a₂ : Π i, A i} (ha : Commute a₁ a₂) : Commute (tprod R a₁) (tprod R a₂); CategoryTheory.Sheaf.tensorProd_isSheaf: : Presheaf.IsSheaf J (X.val ⊗ Y.val); AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo: (t : ↑(pullback f g)) :\n  Spec.map (ofPointTensor t) ≫ (Triplet.ofPoint t).SpecTensorTo = (pullback ; SheafOfModules.pushforwardComp: :\n  pushforward.{v} ψ ⋙ pushforward.{v} φ ≅\n    pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwar; PresheafOfModules.Monoidal.tensorObj_map_tmul: {X Y : Cᵒᵖ} (f : X ⟶ Y) (m₁ : M₁.obj X) (m₂ : M₂.obj X) :\n  DFunLike.coe (α := (M₁.obj X ⊗ M₂.obj X ; SheafOfModules.pullbackComp: :\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous R",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "[loogle] OK 0 hit(s); No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|lowerShriek|WeilComplex",
+   "results": "[grep] OK 0 hit(s); No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|lowerShriek|WeilComplex",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic underived sheaf direct-image composition does not assert this native derived-Weil compact projection formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for derived shriek pushforward tensor a bounded constructible Weil complex",
+   "results": "OK 8 hits; SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π",
+   "date": "2026-10-22",
+   "verdict": "no match: generic underived sheaf direct-image composition does not assert this native derived-Weil compact projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic underived sheaf direct-image composition does not assert this native derived-Weil compact projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived pushforward of Frobenius equivariant constructible sheaves satisfies the projection formula for an arbitrary constructible complex",
+   "results": "OK 8 hits; SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforward_map_val, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: generic underived sheaf direct-image composition does not assert this native derived-Weil compact projection formula"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|WeilComplex|derivedLowerStar",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image projection formula from adjunction counit for Frobenius equivariant sheaves",
+   "results": "OK 8 hits; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.LiftLeftAdjoint.otherMap, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Limits.coneOfAdj_π, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper morphisms the counit-defined projection map for bounded constructible complexes of native proetale Weil module sheaves is invertible after forgetting Frobenius",
+   "results": "OK 8 hits; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, Condensed.profiniteSolidCounit, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction, CondensedMod.IsSolid.isIso_solidification_map, Condensed.profiniteSolid; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|[Ee]xtension.*[Zz]ero",
+   "results": "OK 0 hits; ; subdirectory=CategoryTheory/Sites",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero|jShriek",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion extension by zero tensor projection isomorphism in the derived category of Weil sheaves",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.IsOpenImmersion.ΓIsoTop, AlgebraicGeometry.IsOpenImmersion.isoRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived tensor products of Frobenius equivariant module sheaves on an open immersion",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|[Pp]rojection",
+   "results": "OK 0 hits; ; subdirectory=Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection; actual compactification formula needed by fix-cor-verdier-exchange.proof.md Steps 1-2. Ancestor is None for the maintainer-seeded root; the original breadcrumb through lem-sf-weil-verdier-exchange is retained.",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-derived-weil-compact-projection-formula",
+  "worker": "stage1",
+  "summary": "Q22 executes released stage-1 re-split repair (at least two new nodes): retain the statement and compactification route, move old Steps 1/3 into the native proper comparison and old Steps 4/5 into the native open tensor/compositor statement. Keep scheme-domain and full-subcategory assembly explicit. All original arguments retained verbatim by node assignment in report.",
+  "blueprint": "fix-lem-tensor-adjunction.proof.md Step 1 second Hom bijection, through its compactification projection formula; also serves fix-cor-verdier-exchange Steps 1-2.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-weil-native-closed-forgetful",
+    "why": "Exact conservative forgetful and tensor comparison for this native category; no replacement of the unit duality route."
+   },
+   {
+    "node": "lem-sf-adic-qbar-constructible-realization",
+    "why": "Coefficient-category equivalence needed to apply the existing field projection theorem to the actual module category."
+   },
+   {
+    "node": "lem-sf-fixed-pair-derived-forget-comparison",
+    "why": "Generic K-injective comparison for fixed-pair categories; preserves the actual resolution-level derived map."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic definition and exactness of the ringed-topos projection morphism."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Existing common-stage field projection theorem for the proper factor only, after the separately stated native coefficient comparison."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic arbitrary-ring sheaf open tensor isomorphism; this is precisely the open factor of the required compactification route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact localized-site extension and restriction used to verify the open factor belongs to the native constructible domain."
+   },
+   {
+    "node": "lem-sf-native-weil-shriek-triangulated",
+    "why": "Native compact-support preservation used solely to restrict the constructed ambient isomorphism."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Scheme-domain check for the proper compactification factor."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Diagonal factorization proves separatedness of the compactification source."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Ensures the geometric fibers satisfy exactly the separated finite-type hypotheses of the coefficient realization."
+   },
+   {
+    "node": "lem-weil-field-tor-amplitude",
+    "why": "Its first clause discharges the field-stage finite-Tor hypothesis of the existing projection theorem."
+   },
+   {
+    "node": "lem-sf-native-weil-basic-comparisons",
+    "why": "Exact equivariant open extension and constructible preservation for the chosen compactification, not a replacement proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "fix-prop-projection-formula",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-native-weil-shriek-triangulated",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-field-tor-amplitude",
+  "lem-sf-native-weil-basic-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-ebb5d27fe",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-ebb5d27fe (reviewer sub-agent of L); spot-checked: This answers the released human re-split note (live and side-live identical; the old proof was 6 steps, 6220 characters). The statement and stmt_deps match live verbatim. The assembly is 3 steps and 1971 characters, citing 2 new nodes of comparable size. Old steps 1+3 (U_V and the coefficient identity finite-span = finite-extension, ρ_V, the α^W counit transpose, the K-injective counit identification, the (a_p,b_p) common-stage realization, invertibility) are fully stated in lem-sf-native-proper-projection-realization. Old step 4 (K-flat Weil representatives, sign d_P⊗1+(-1)^p1⊗d_N, j_!/j^* K-flat preservation, adjunct inverse, Frobenius, U_Z(γ^W)=γ of lem-sf-open-tensor-normalization) and the compositor part of old step 5 are in lem-sf-native-open-derived-tensor. Old step 2's domain checks remain in item step 1: they are elementary hypothesis verification, and lem-sf-native-weil-basic-comparisons (b) is now the exact equivariant citation for bounded-constructible preservation. Old step 6 is item step 3 verbatim. Nothing was summarised away and neither node restates the item. Checked: Z_0 separated through the diagonal factorization (p_0 separated, Δ_{Y0} base change); j_0 is quasi-compact automatically because X_0 is Noetherian (not stated, harmless); the geometric fibres fall in the domain of adic-proper-adjunction-realization. Both new statements are true: Bhatt–Scholze Remark 6.8.15 pp. 61-62 and Stacks 0GL1/0E8I read; edge cases p=id, T=0, U=Z and U=∅ hold; K-flatness follows from j_!P⊗Q≅j_!(P⊗j^*Q). No duplicates among the native-Weil nodes (compact-image-extension-by-zero, open-proper-interchange, compactification-model-comparison, side-live native-adic-open-restrictions). No SGA. Each new node has 4 Mathlib searches of three kinds. Batch-5 flags are all accepted as general tools: geometric inverse-image exactness (through basic-comparisons), a definition already in the base statement, scheme-isomorphism Hom evaluation, and two module-category encoding equivalences. None is a step of the trace formula or of Poincaré duality. The tool_uses are accepted; the split_report keeps stale Q29-era entries, which are harmless. No changes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeCompactProjectionFormula",
+  "declaration": "AlgebraicGeometry.WeilComplex.native_compact_projection_formula",
+  "declarations": [
+   "CategoryTheory.ProjectionTensorSummandNormalization",
+   "CategoryTheory.ProjectionTensorPresentation",
+   "AlgebraicGeometry.WeilComplex.nativeConstructibleTensor",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeProjectionTensorComparison",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeProjectionProperMate",
+   "AlgebraicGeometry.WeilComplex.nativeProjectionCompactification",
+   "AlgebraicGeometry.WeilComplex.nativeProjectionCompactification_locallyOfFiniteType",
+   "AlgebraicGeometry.WeilComplex.nativeProjectionCompactification_quasiCompact",
+   "AlgebraicGeometry.WeilComplex.nativeProjectionCompactification_isSeparated",
+   "AlgebraicGeometry.WeilComplex.nativeCompactProjectionLeft",
+   "AlgebraicGeometry.WeilComplex.nativeCompactProjectionRight",
+   "AlgebraicGeometry.WeilComplex.nativeProjectionPullComp",
+   "AlgebraicGeometry.WeilComplex.native_compact_projection_formula"
+  ],
+  "file": "lean/Sheaf/Paper/NativeCompactProjectionFormula.lean",
+  "statement": "theorem native_compact_projection_formula : ∃ (C : ProEtaleWeilSheaf.NativeProjectionTensorComparison k₀ l (nativeProjectionCompactification k₀ f).g) (s : ProEtaleWeilSheaf.NativeOpenTensorData k₀ l (nativeProjectionCompactification k₀ f).i) (d : ProEtaleWeilSheaf.NativeOpenDerivedTensorData k₀ l (nativeProjectionCompactification k₀ f).i s) (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l X) (ProEtaleWeilSheaf k₀ l (nativeProjectionCompactification k₀ f).Z)) (pi : nativeCompactProjectionLeft k₀ l f ≅ nativeCompactProjectionRight k₀ l f), ProEtaleWeilSheaf.NativeOpenPresentationCompatibility k₀ l (nativeProjectionCompactification k₀ f).i s d c ∧ ∀ (M : WeilComplex k₀ l X) (T : WeilComplex k₀ l Y), (pi.hom.app (M, T)).hom = ProEtaleWeilSheaf.nativeProjectionProperMate k₀ l (nativeProjectionCompactification k₀ f).g C ((ProEtaleWeilSheaf.nativeOpenExtension k₀ l (nativeProjectionCompactification k₀ f).i).obj M.obj) T.obj ≫ (ProEtaleWeilSheaf.lowerStar k₀ l (nativeProjectionCompactification k₀ f).g).rightDerivedFunctor.map (d.gamma.hom.app (M.obj, (ProEtaleWeilSheaf.nativeOpenPull k₀ l (nativeProjectionCompactification k₀ f).g).obj T.obj)) ≫ (ProEtaleWeilSheaf.lowerStar k₀ l (nativeProjectionCompactification k₀ f).g).rightDerivedFunctor.map ((ProEtaleWeilSheaf.nativeOpenExtension k₀ l (nativeProjectionCompactification k₀ f).i).map ((ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X).map (Prod.mkHom (𝟙 M.obj) ((nativeProjectionPullComp k₀ l f).hom.app T.obj))))",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Natural isomorphism on the actual bounded constructible full categories; ambient map is pinned to the chosen compactification, canonical proper counit mate, normalized open tensor isomorphism, and balanced pullback compositor. The proper tensor comparison is fixed on actual sheaf carriers, total summands, and all K-flat representatives. No extra assumption on either derived input."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63985d370",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 (558d). Lean module byte-identical to 558d, whose mathematics was found correct (pinned proper counit mate, then Rp*(gamma), then Rp*j!(1 tensor compositor); C, s, d, c existential and fully pinned; NatIso on WC^der; no extra hypotheses). The item differs from side-live only in lean plus the stmt_deps addition of the new def node; the theorem lem-sf-native-open-derived-tensor stays in proof_deps only. New def-sf-native-open-tensor-presentation-data: existing:true over the landed Sheaf.Paper.NativeOpenDerivedTensor (live = side-live); 22 declarations = all non-theorem decls; statement verbatim to lines 512-515; prose matches the Lean clause by clause; stmt_deps are four existing def nodes; unique owner; same route as def-sfb-space-affine-higher-image-sections-data. No compile needed (no file changed). Advisory only: the module docstrings cite the theorem node."
+ }
+}

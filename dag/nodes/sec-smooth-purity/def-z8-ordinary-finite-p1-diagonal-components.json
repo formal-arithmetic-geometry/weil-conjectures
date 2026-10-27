@@ -1,0 +1,123 @@
+{
+ "id": "def-z8-ordinary-finite-p1-diagonal-components",
+ "kind": "definition",
+ "title": "Canonical supported diagonal component maps",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ndef ordinaryFiniteP1DiagonalTarget (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (S : Scheme.{u}) (a : Bool) :\n    DerivedCategoryModule A (ProjectiveLine S)\n\ndef ordinaryFiniteP1DiagonalSupportedMap (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (S : Scheme.{u}) (a : Bool)\n    (κ : ordinaryFiniteSupportedExt A (pullback.diagonal (ProjectiveLine S ↘ S))\n      (Scheme.finiteEtaleTateLine\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA)) :\n    ordinaryFiniteUnit A (ProjectiveLine S) ⟶ ordinaryFiniteP1DiagonalTarget A N hA S a\n\ndef ordinaryFiniteP1DiagonalChartMap (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    ordinaryFiniteP1DiagonalTarget A N hA S a ⟶\n      (ordinaryFinitePushforward A\n        (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)).obj\n          ((ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧)\n\nThe source Alpha in the supported map is the original canonical pair of supported constant-object units; the cached construction has the proved defining equality projectiveLineDiagonalAlpha_units [lem-z8-projective-line-diagonal-alpha-units].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal class and either projection"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-sp-ordinary-finite-coefficient-records",
+  "def-sp-p1-diagonal-charts",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-z8-projective-line-diagonal-alpha",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-z8-projective-line-diagonal-alpha-units"
+ ],
+ "proof": [
+  {
+   "text": "Retain the current F1 target, supported realization and chart-transport constructors. The proved defining equation projectiveLineDiagonalAlpha_units identifies the cached Alpha with the original pair of supported constant-object units, so the supported-map constructor has exactly its original canonical source comparison. No choice of class, chart or normalization changes.",
+   "uses": [
+    "lem-z8-projective-line-diagonal-alpha-units"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Supported diagonal class and either projection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-projective-line-diagonal-alpha-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Current F1 canonical constructors, with the defining equation for the original Alpha-unit pair"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "supported diagonal projective line component maps",
+   "results": "The existing project constructions are retained verbatim, with separate lower-layer ownership.",
+   "date": "2026-10-25",
+   "verdict": "retain existing definitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map",
+   "results": "The existing project constructions are retained verbatim, with separate lower-layer ownership.",
+   "date": "2026-10-25",
+   "verdict": "retain existing definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryFiniteP1DiagonalSupportedMap",
+   "results": "The existing project constructions are retained verbatim, with separate lower-layer ownership.",
+   "date": "2026-10-25",
+   "verdict": "retain existing definitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "group": "Z8",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-p1-diagonal-kummer-component-formula",
+   "place": "Separate ownership of its unchanged canonical definitions",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1DiagonalComponents.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1DiagonalTarget",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1DiagonalTarget",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1DiagonalSupportedMap",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1DiagonalChartMap"
+  ],
+  "statement": "def ordinaryFiniteP1DiagonalTarget (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (S : Scheme.{u}) (a : Bool) :\n    DerivedCategoryModule A (ProjectiveLine S)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

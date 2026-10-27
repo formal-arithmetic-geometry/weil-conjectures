@@ -1,0 +1,319 @@
+{
+ "id": "lem-trf-resolution-word-finite-history-comparison",
+ "kind": "statement",
+ "title": "Smooth and intrinsic comparison of finite normalized-word histories",
+ "statement": "Over $\\mathbf Q$, consider closed embeddings $X\\hookrightarrow P$ with $X$ reduced and $P$ smooth, separated and of finite type [def-weil-closed-immersion, def-pc-reduced-scheme, def-sbc-smooth-morphisms, def-weil-proper-morphism, def-weil-finite-type-morphism]. Fix the normalized word assignment of [lem-trf-normalized-resolution-word-gluing]: $w_H=\\bot$ on regular points and $w_H(x)=(A_x,t_x)$ on singular points, with normalized head $A_x=(c_x,\\Delta^{q_x}h_x)$ and the tail of the marked-ideal word of a minimal-envelope Hilbert--Samuel presentation. Use its finite admissible histories, retaining the ordered inverse images of earlier center ideals even when the intrinsic blowup is an identity [def-trf-admissible-embedded-history].\n\nHere a smooth ambient pullback starts with a smooth morphism $Q\\to P$, where $Q$ is separated and of finite type over $\\mathbf Q$, and the cartesian pair $Y=X\\times_P Q\\hookrightarrow Q$. For a cartesian smooth ambient pullback of such a finite history, the pulled-back history exists with precisely the empty-center stages deleted. Its ambient schemes are again smooth, separated and of finite type over $\\mathbf Q$, and its strict transforms are reduced. If $y$ corresponds to $x$ at a retained stage, then $w(y)=w(x)$, without a constant-relative-dimension hypothesis. In terms of the local head, if $s$ is the dimension of the local ring of the smooth fibre at $y$, then $h_y=\\Lambda^s h_x$, $q_y=q_x+s$ and $c_y=c_x$; the marked-ideal tails also agree. For any full maximum stratum of the original stage, the extension of its reduced defining ideal to the pulled-back strict transform is the reduced ideal of its inverse-image stratum; this is the unit ideal if that stratum is empty. The same ideal equality holds in the ambient schemes. This statement concerns an individual stratum even when its inverse image is not a maximum stratum of the whole pulled-back scheme.\n\nIf two finite histories have isomorphic strict-transform diagrams over an isomorphism of the initial reduced schemes, preserving all earlier center ideals and their order, hence the induced exceptional birth-stage data, the identified functions $w_H$ agree, in their common value space, and so do the reduced ideals of their maximum strata on the strict transforms. This comparison allows different smooth ambient embeddings. All these equalities commute with open restriction and further smooth pullback of the histories.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.13, p.94 and 2.3.5(i); BMT sections 6.1--6.3 WANTED. Arbitrary-smooth synchronization and intrinsic comparison, old proof steps 5--6. No Stacks tag states this resolution comparison."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-trf-admissible-embedded-history",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-weil-regular-scheme",
+  "lem-trf-normalized-resolution-word-gluing"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the generators of admissible histories in [def-trf-admissible-embedded-history], retaining as inductive assertions that every ambient stage is smooth, separated and finite type over $\\mathbf Q$, every strict transform is reduced, and every actual center is smooth and closed in its ambient stage. The empty history has the given properties. For a maximum extension, [lem-trf-resolution-word-maximum-center-descent] makes the center regular with coherent defining ideals. It is of finite type by [lem-dl-a1-locally-closed-stratum-separated-finite-type], applied with the closed subset of $P_H$ and $U=P_H$; it is smooth over the perfect field $\\mathbf Q$ by [lem-trf-regular-perfect-field-smooth]. Apply [lem-trf-smooth-center-blowup-geometry] to obtain the next ambient scheme and the reduced strict transform. The smooth-comparison generator is handled by the finite base-change construction in step 2. This is induction on the construction of a finite history, not an assumption of termination.",
+   "uses": [
+    "def-trf-admissible-embedded-history",
+    "lem-trf-resolution-word-maximum-center-descent",
+    "lem-trf-regular-perfect-field-smooth",
+    "lem-trf-smooth-center-blowup-geometry",
+    "lem-dl-a1-locally-closed-stratum-separated-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.3.5(i), printed p.92, and 2.3.11--2.3.13, printed pp.93--94; agent-written assembly from the cited finite-history and local presentation statements. Detailed BMT sections 6.1--6.3 WANTED."
+   }
+  },
+  {
+   "text": "For a history satisfying the inductive assertions, pull back its successive stages along $Q\\to P$. Smoothness implies flatness by [lem-pc-smooth-flat]. The comparison of [def-nagata-blowup-flat-base-change-map] is an isomorphism by [thm-nagata-blowup-flat-base-change], so each ambient square is cartesian and each comparison is smooth by [lem-pc-proper-base-change]. The generic-component hypothesis of [lem-trf-strict-transform-flat-etale-base-change] holds: on affine charts flat going down [lem-sc-flat-going-down] implies that a minimal prime upstairs contracts to a minimal prime downstairs (a strictly smaller contracted prime would lift below it). That node therefore identifies the strict transforms scheme-theoretically. Every pulled-back center is smooth over $\\mathbf Q$, by smooth base change and composition [lem-trf-smooth-composition]. The initial $Y$ is reduced: $X$ is finite type over the Noetherian field $\\mathbf Q$, hence locally Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; the smooth map has geometrically reduced fibres by [sbc-lem-smooth-geometrically-reduced], so [lem-sfb-flat-geometrically-reduced-pullback] applies. Starting with this pair in $Q$, apply [lem-trf-smooth-center-blowup-geometry] at each stage, giving all the required geometry and reducedness. If the extended center ideal is the unit ideal, [thm-nagata-global-blowup-complement] makes the entire stage an identity. Delete just those stages; every other center is nonempty. This supplies precisely the smooth-comparison generator of [def-trf-admissible-embedded-history] and completes the induction in step 1.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-pc-proper-base-change",
+    "lem-sc-flat-going-down",
+    "lem-trf-strict-transform-flat-etale-base-change",
+    "lem-trf-smooth-composition",
+    "lem-trf-smooth-center-blowup-geometry",
+    "thm-nagata-global-blowup-complement",
+    "def-trf-admissible-embedded-history",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-flat-geometrically-reduced-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.3.5(i), printed p.92, and 2.3.11--2.3.13, printed pp.93--94; agent-written assembly from the cited finite-history and local presentation statements. Detailed BMT sections 6.1--6.3 WANTED."
+   }
+  },
+  {
+   "text": "At corresponding points $y\\mapsto x$ of any cartesian stage, [lem-trf-hilbert-samuel-smooth-dimension-profile] gives $h_y=\\Lambda^s h_x$, $q_y=q_x+s$ and $c_y=c_x$, where $s$ is the local fibre dimension at this particular $y$. Since $\\Delta\\Lambda f=f$ (subtract successive partial sums, including the value at zero), $\\Delta^{q_y}h_y=\\Delta^{q_x+s}\\Lambda^s h_x=\\Delta^{q_x}h_x$. Thus the heads agree. The same node says the regular head occurs exactly at regular points, so regularity is equivalent at these corresponding points. Both words are then $\\bot$, or both are singular words. No global choice of $s$ or constant relative dimension has been used.",
+   "uses": [
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-normalized-resolution-word-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.3.5(i), printed p.92, and 2.3.11--2.3.13, printed pp.93--94; agent-written assembly from the cited finite-history and local presentation statements. Detailed BMT sections 6.1--6.3 WANTED."
+   }
+  },
+  {
+   "text": "At a singular point choose the maximal-order, codimension-zero minimal-envelope presentation used by [lem-trf-normalized-resolution-word-gluing]. By [lem-trf-hilbert-samuel-local-presentations] its presentation class commutes with local smooth pullback, with the retained Hilbert--Samuel level summed by the local relative dimension. Consequently the pulled-back presentation represents the prescribed level on the pulled-back scheme, even if a different presentation was chosen there. The numerical engine [lem-trf-marked-ideal-numerical-resolution-engine] gives the same word under smooth pullback; its invariance under test equivalence makes it independent of that replacement. Both leading entries are $1$, so deleting them gives $t_y=t_x$. The history is identified by actual extension of the earlier center ideals in step 2, in their original order. An omitted center extends to the unit ideal, hence creates no exceptional component; its original place is still known. Birth stages of all retained components are therefore identified under the deletion map. Earlier centers whose intrinsic blowup is an identity are retained, as required by [def-trf-admissible-embedded-history]. Combining this tail equality with step 3 proves $w(y)=w(x)$ in the fixed common value space.",
+   "uses": [
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.3.5(i), printed p.92, and 2.3.11--2.3.13, printed pp.93--94; agent-written assembly from the cited finite-history and local presentation statements. Detailed BMT sections 6.1--6.3 WANTED."
+   }
+  },
+  {
+   "text": "Now take an intrinsic comparison of two histories. An isomorphism of the local rings preserves their maximal-ideal powers, lengths and dimensions, so it preserves $h_x,q_x,c_x$ and regularity. At a singular point [lem-trf-hilbert-samuel-local-presentations] identifies the test-equivalence classes in the two minimal envelopes using precisely the intrinsic transformed scheme, the retained level and the ordered earlier center ideals. The minimal envelopes have the same support dimension: their cotangent spaces are those of the identified intrinsic germ. The test-equivalence clause of [lem-trf-marked-ideal-numerical-resolution-engine], with these identified ordered histories and equal support dimensions, identifies the tails. [lem-trf-normalized-resolution-word-gluing] permits these local presentation computations to compute the prescribed global words in their common value space. Thus the two words agree everywhere. In particular their maximum loci correspond as subsets, including the empty case. This argument uses no identification of the original ambient schemes and discards no earlier ideal when its blowup happens to be an identity.",
+   "uses": [
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-trf-normalized-resolution-word-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.3.5(i), printed p.92, and 2.3.11--2.3.13, printed pp.93--94; agent-written assembly from the cited finite-history and local presentation statements. Detailed BMT sections 6.1--6.3 WANTED."
+   }
+  },
+  {
+   "text": "Let $T$ be a full maximum stratum at a stage. It is closed by [lem-trf-normalized-resolution-word-gluing]. Its reduced closed subscheme $M$ exists by [lem-weil-pbc-reduced-induced-closed-subscheme]. The closed stratum $M$ is finite type over $\\mathbf Q$ by [lem-dl-a1-locally-closed-stratum-separated-finite-type], with ambient $P_H$ and $U=P_H$, and is locally Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For the smooth comparison $g$ of step 2, smooth morphisms are flat [lem-pc-smooth-flat] and have geometrically reduced fibres [sbc-lem-smooth-geometrically-reduced]. Hence $M\\times g$ is reduced by [lem-sfb-flat-geometrically-reduced-pullback]. Apply [lem-trf-reduced-flat-pullback-recognition] first to $M\\hookrightarrow X_H$ and then to $M\\hookrightarrow P_H$: in both cases the extended ideal is exactly the reduced ideal of the inverse-image subset. This applies to an individual original $T$, irrespective of whether it becomes a full maximum after pullback. If the inverse image is empty its ideal is the unit ideal, by the vanishing-ideal formula. For the intrinsic isomorphism in step 5, uniqueness of the reduced induced structure in [lem-weil-pbc-reduced-induced-closed-subscheme] similarly identifies the intrinsic maximum ideals.",
+   "uses": [
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-smooth-flat",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-trf-reduced-flat-pullback-recognition",
+    "lem-dl-a1-locally-closed-stratum-separated-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.3.5(i), printed p.92, and 2.3.11--2.3.13, printed pp.93--94; agent-written assembly from the cited finite-history and local presentation statements. Detailed BMT sections 6.1--6.3 WANTED."
+   }
+  },
+  {
+   "text": "All value equalities above are pointwise equalities in the one word space, so restriction or a further smooth comparison gives the same equality by transitivity. For ideals, extending an ideal generated locally by sections $a_i$ first along $g$ and then along $h$ gives the ideal generated by $h^*g^*a_i=(g\\circ h)^*a_i$, exactly direct extension. [def-trf-admissible-embedded-history] retains that ordered list under comparisons; successive deletions omit exactly the stages whose final extended ideal is the unit ideal. A stage already omitted remains unit after further extension, and any newly missed center is now omitted. Thus the retained order and birth-stage identifications are the same for composite and successive pullback. Open restriction is a smooth comparison by the same definition. This proves all the claimed compatibility equalities, also for empty schemes, length-zero histories and a pullback missing every center.",
+   "uses": [
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.3.5(i), printed p.92, and 2.3.11--2.3.13, printed pp.93--94; agent-written assembly from the cited finite-history and local presentation statements. Detailed BMT sections 6.1--6.3 WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissible-embedded-history",
+  "lem-trf-resolution-word-maximum-center-descent",
+  "lem-trf-regular-perfect-field-smooth",
+  "lem-trf-smooth-center-blowup-geometry",
+  "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+  "lem-pc-smooth-flat",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-pc-proper-base-change",
+  "lem-sc-flat-going-down",
+  "lem-trf-strict-transform-flat-etale-base-change",
+  "lem-trf-smooth-composition",
+  "thm-nagata-global-blowup-complement",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-trf-hilbert-samuel-smooth-dimension-profile",
+  "lem-trf-normalized-resolution-word-gluing",
+  "lem-trf-hilbert-samuel-local-presentations",
+  "lem-trf-marked-ideal-numerical-resolution-engine",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-trf-reduced-flat-pullback-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 2.3.5(i), printed p.92, and 2.3.11--2.3.13, printed pp.93--94; agent-written assembly from the cited finite-history and local presentation statements. Detailed BMT sections 6.1--6.3 WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Hilbert.Samuel|markedIdeal|resolutionInvariant|desingulari",
+   "results": "{\"t\": \"2026-10-22T06:15:25Z\", \"tool\": \"grep\", \"query\": \"Hilbert.Samuel|markedIdeal|resolutionInvariant|desingulari\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-resolution-word-finite-history-comparison: Smooth functorial resolution of singularities has identical invariant values and reduced maximum center ideals, independently of ambient embedding",
+   "results": "{\"t\": \"2026-10-22T06:15:25Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-resolution-word-finite-history-comparison: Smooth functorial resolution of singularities has identical invariant values and reduced maximum center ideals, independently of ambient embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι.congr_simp\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_of_functorial_resolutions\", \"SmoothBumpCovering.mk.injEq\", \"CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_functorial_right_resolutions\", \"RingHom.FormallySmooth.respectsIso\", \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"f022c33fed378d55\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsReduced",
+   "results": "{\"t\": \"2026-10-22T06:15:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: Loogle index does not recognize the requested smoothness identifier; LeanFinder and source grep were also run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-resolution-word-finite-history-comparison: Dimension corrected Hilbert Samuel desingularization invariant is preserved by arbitrary smooth ambient pullback and intrinsic isomorphisms preserving ordered earlier center ideals",
+   "results": "{\"t\": \"2026-10-22T06:15:33Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-resolution-word-finite-history-comparison: Dimension corrected Hilbert Samuel desingularization invariant is preserved by arbitrary smooth ambient pullback and intrinsic isomorphisms preserving ordered earlier center ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmoothOfRelativeDimension_respectsIso\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\"], \"digest\": \"b9854aa5f261d5ac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\"",
+   "results": "{\"t\": \"2026-10-22T06:17:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Metric.PiNatEmbed.exists_embedding_to_hilbert_cube\", \"HilbertSpace\", \"HilbertSpace.mk\", \"HilbertBasis\", \"HilbertBasis.instFunLike\", \"HilbertBasis.toOrthonormalBasis\", \"HilbertBasis.toSchauderBasis\", \"HilbertBasis.toUnconditionalSchauderBasis\"], \"digest\": \"a29075003a41958e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.Samuel|markedIdeal|resolutionInvariant|desingulari",
+   "results": "{\"t\": \"2026-10-23T09:35:31Z\", \"tool\": \"grep\", \"query\": \"Hilbert.Samuel|markedIdeal|resolutionInvariant|desingulari\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; generic smoothness, standard smooth relative dimensions and regular-sequence dimension do not state normalized resolution words, presentation tails or history comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change preserves desingularization invariant and reduced maximum center ideals on finite embedded blowup histories",
+   "results": "{\"t\": \"2026-10-23T09:35:31Z\", \"tool\": \"leansearch\", \"query\": \"Smooth base change preserves desingularization invariant and reduced maximum center ideals on finite embedded blowup histories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.baseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.IsStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\"], \"digest\": \"4d3b6b721e629258\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; generic smoothness, standard smooth relative dimensions and regular-sequence dimension do not state normalized resolution words, presentation tails or history comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "{\"t\": \"2026-10-23T09:35:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; generic smoothness, standard smooth relative dimensions and regular-sequence dimension do not state normalized resolution words, presentation tails or history comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite histories of resolution of singularities have dimension normalized Hilbert Samuel invariants preserved by smooth pullback and change of embedding",
+   "results": "{\"t\": \"2026-10-23T09:35:41Z\", \"tool\": \"leanfinder\", \"query\": \"Finite histories of resolution of singularities have dimension normalized Hilbert Samuel invariants preserved by smooth pullback and change of embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\"], \"digest\": \"fe3778e0443a7b3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; generic smoothness, standard smooth relative dimensions and regular-sequence dimension do not state normalized resolution words, presentation tails or history comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A desingularization marked ideal numerical word is independent of its minimal smooth ambient envelope and ordered previous blowup centers",
+   "results": "{\"t\": \"2026-10-23T09:37:29Z\", \"tool\": \"leanfinder\", \"query\": \"A desingularization marked ideal numerical word is independent of its minimal smooth ambient envelope and ordered previous blowup centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.hcongr_5\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.mk.inj\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"PowerSeries.IsWeierstrassFactorization.unique\", \"RingHom.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"5d4bea2d976d6d40\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; generic smoothness, standard smooth relative dimensions and regular-sequence dimension do not state normalized resolution words, presentation tails or history comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Re-split: ILO VIII 2.3.13, p.94 and 2.3.5(i); BMT sections 6.1--6.3 WANTED. Arbitrary-smooth synchronization and intrinsic comparison, old proof steps 5--6. No Stacks tag states this resolution comparison.",
+   "via": [
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-resolution-word-finite-history-comparison",
+  "worker": "Q11 stage1",
+  "summary": "Seven-step assembly using existing local presentation, marked-ideal, normalized-head, center-geometry and flat-base-change statements. Proved scheme-theoretic ideal equality via reduced pullback recognition, separately from equality of values. No new nodes. Clarified the finite-type separated domain of smooth ambient pullbacks; report records the counterexamples to unrestricted sources.",
+  "blueprint": "Supports the historical alteration branch of lem-trf-local-term-locality through its recorded ancestor chain: ILO VIII 2.3.13 arbitrary-smooth synchronization and intrinsic comparison, with deletion convention 2.3.5(i). The current latest blueprint uses contracting correspondences; this item does not change that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+    "why": "Generic finite-type property for the reduced closed center; applied to the whole ambient open, not a stratification route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-dl-a1-locally-closed-stratum-separated-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-a8add898b",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-a8add898b (reviewer sub-agent of L); spot-checked: PASS; delivery read in full, no fixes. One commit (item JSON plus report), no new nodes. Item is still unsplit in live and side-live, and there is no repair note. The seven steps carry all of the parent's old steps 5-6 (Q153 292973ab packet lines 141-152) and expand them. Statement change: Q must be separated and of finite type over Q. The report's counterexamples are right (infinite disjoint union of Spec Q; line with doubled origin), and the restriction matches the category already fixed by def-trf-admissible-embedded-history and def-trf-labeled-embedded-resolution and by the only citer's use (parent live steps 2-3). It is a named correction, not a weakening. Step checks: (1) the induction over generators is set up properly; maximum-center-descent hypotheses are exactly the inductive assertions; finite type via lem-dl-a1 with U=P_H, then regular over perfect Q is smooth, then blowup geometry. (2) bc_g is an isomorphism by the constructed-map theorem; comparisons smooth by base change; going-down argument for the generic-component hypothesis checked; initial Y reduced via locally Noetherian X, geometrically reduced fibres and flat pullback; unit ideal gives identity by blowup-complement. (3) dim-profile applies (X_H reduced, finite type; Y_H to X_H smooth); Delta Lambda = id checked with Delta f(0)=f(0); s is taken pointwise. (4) presentation class commutes with smooth pullback; engine invariance and leading entry 1; a deleted centre's exceptional divisor misses every image point, so birth stages match. (5) local-ring isomorphism preserves h, q, c; minimal envelopes have equal dimension; engine test-equivalence clause gives equal tails. (6) M x_{X_H} Y_H = M x_{P_H} Q_H is reduced, so recognition applies in both X_H and P_H; empty inverse image gives the unit ideal. (7) elementary, accepted. Route: all cited statements in the sk-i-curve-zero route except tool use lem-dl-a1-locally-closed-stratum-separated-finite-type, accepted. No cycles; no duplicates found in the DAG. Sources: ILO VIII 2.3.5(i) p.92 and 2.3.13 p.94 checked; BMT WANTED, proof_origin agent; no SGA. Advisory only: finite type of the centre ideals and equality of the reduced structures in X_H and P_H are left implicit (Noetherianity; uniqueness (3))."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ResolutionWordFiniteHistoryComparison",
+  "declaration": "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_finite_history_comparison",
+  "declarations": [
+   "AlgebraicGeometry.EmbeddedResolutionHistory.wordPrefix",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.wordAtStage",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.wordStageBase",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.wordAmbientIdeal",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.WordHistoryGeometry",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.WordSmoothComparison",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.WordIntrinsicComparison",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.SmoothPullback.wordFinalAmbientMap",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.WordPullbackCoherence",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.WordIntrinsicSmoothCoherence",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_finite_history_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionWordFiniteHistoryComparison.lean",
+  "statement": "theorem resolution_word_finite_history_comparison (R : MarkedIdeal.NumericalResolution.{u}) (ν : ValueFamily.{u} HilbertSamuel.ResolutionWord) (hν : ∀ {B : EmbeddedResolutionPair.{u}} {k : ℕ} (G : EmbeddedResolutionHistory B k), Admissible ν G → (∀ x : G.X, ¬ IsRegularLocalRing (G.X.presheaf.stalk x) → Nonempty (ResolutionWordChart R G x)) ∧ (∀ (x : G.X) (C : ResolutionWordChart R G x), (R.value C.history ⟨C.supportPoint, C.cosupport⟩).head? = some (MarkedIdeal.rational 1) ∧ ν G x = C.word) ∧ (Set.range (ν G)).Finite ∧ (∀ v : HilbertSamuel.ResolutionWord, IsClosed {x : G.X | v ≤ ν G x}) ∧ (∀ x : G.X, ν G x = ⊥ ↔ IsRegularLocalRing (G.X.presheaf.stalk x)) ∧ ∀ (D : ℕ) (_hD : topologicalKrullDim G.X ≤ (D : WithBot ℕ∞)) (x y : G.X), (HilbertSamuel.sumResolutionWord D (ν G x) ≤ HilbertSamuel.sumResolutionWord D (ν G y) ↔ ν G x ≤ ν G y) ∧ (HilbertSamuel.sumResolutionWord D (ν G x) = HilbertSamuel.sumResolutionWord D (ν G y) ↔ ν G x = ν G y)) : (∀ {B : EmbeddedResolutionPair.{u}} {n : ℕ} (K : EmbeddedResolutionHistory B n), Admissible ν K → WordHistoryGeometry K) ∧ (∀ (B : EmbeddedResolutionPair.{u}) (Q : Scheme.{u}) (g : Q ⟶ B.P), Smooth g → IsSeparated (g ≫ B.base) → LocallyOfFiniteType (g ≫ B.base) → QuasiCompact (g ≫ B.base) → IsReduced (pullback B.inclusion g)) ∧ (∀ {A B : EmbeddedResolutionPair.{u}} {n : ℕ} (f : EmbeddedResolutionSmoothMap A B) (K : EmbeddedResolutionHistory B n), Admissible ν K → ∃ (m : ℕ) (H : EmbeddedResolutionHistory A m), Nonempty (SmoothPullback f H K)) ∧ (∀ {A B : EmbeddedResolutionPair.{u}} {m n : ℕ} {f : EmbeddedResolutionSmoothMap A B} {H : EmbeddedResolutionHistory A m} {K : EmbeddedResolutionHistory B n} (c : SmoothPullback f H K), Admissible ν K → WordSmoothComparison R ν c) ∧ (∀ {A B : EmbeddedResolutionPair.{u}} {n : ℕ} {e : A.X ≅ B.X} {H : EmbeddedResolutionHistory A n} {K : EmbeddedResolutionHistory B n} (c : IntrinsicComparison e H K), Admissible ν H → Admissible ν K → WordIntrinsicComparison ν c) ∧ WordPullbackCoherence ν ∧ WordIntrinsicSmoothCoherence ν",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper definitions unpack precisely the stagewise comparison clauses of this node. Prefixes are constructed by restricting the actual diagram and center list. No arbitrary invariant, arbitrary comparison map, or terminating tower replaces the fixed numerical-engine prescription."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bab266eb",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read item, module, report (Worker report + Second reading by Q23), and the dependency declarations (EmbeddedResolutionHistory/SmoothPullback/IntrinsicComparison/Admissible, EmbeddedResolutionPair/SmoothMap, normalized_resolution_word_gluing + ResolutionWordChart, smooth_dimension_profile defs, Mathlib IdealSheafData.comap/vanishingIdeal). hν is verbatim the gluing predicate, so ν is pinned. wordPrefix keeps the actual centers/maps by castLE, and prefixes of admissible histories are admissible. All node clauses are present and not stronger than the node: reduced initial pullback; pullback existence with exactly the unit-ideal stages deleted (SmoothPullback.centers); stagewise smooth/separated/finite-type ambients and reduced strict transforms; stagewise word equality for every actual c; pointwise fibre-ring s with h=Λ^s h, q+s, c equal; tails equal; reduced max-stratum ideal extension intrinsic and ambient, ⊤ if the preimage is empty, maximality only downstairs; intrinsic comparison with no ambient relation; repeated-pullback and intrinsic/smooth coherence (true: index forced by the ⊤-test, final maps unique by separatedness and density). No extra hypotheses, single universe u. Edge cases n=0, empty schemes, all centers missed, identity blowups, ⊥ maximum, varying fibre dimension. Real helper bodies, theorem sorry only, docstrings with source/blueprint, statement verbatim, JSON differs only in lean, imports resolve, no name clashes. No compile (no file changed). Advisory: localFunction/summation, minimumComponentDimension/componentDimensionCount and NumericalResolution are reached only through the cited gluing node, not as direct stmt_deps (same pattern as landed profile/gluing); the ReducedInducedClosedSubscheme public import is unnecessary."
+ }
+}

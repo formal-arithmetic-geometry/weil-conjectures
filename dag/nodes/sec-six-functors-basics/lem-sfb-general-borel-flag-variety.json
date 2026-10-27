@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-general-borel-flag-variety",
+ "kind": "statement",
+ "title": "The projective variety of Borel subgroups for a connected affine group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field]. All algebraic groups are affine group schemes [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Solvable groups, unipotent groups and tori have the meanings of [def-sfb-solvable-group-structure]: solvability is termination of successive commutator subgroup schemes, a smooth group is unipotent when its geometric points are unipotent matrices in a faithful representation, and a torus is isomorphic to $(\\mathbf G_m)^r$ for some $r\\geq0$. A Borel subgroup of a smooth connected group is a maximal smooth connected solvable subgroup; a maximal torus is a torus subgroup maximal under inclusion. Let $G$ be smooth and connected. There is a nonempty smooth connected projective finite-type $k$-scheme $X=\\mathcal B(G)$, in particular proper and separated over $k$ [def-pc-scheme, def-kun-projective, def-weil-proper-morphism], with an action $a:G\\times_kX\\to X$ satisfying the unit and multiplication identities, and a bijection $B\\mapsto b_B$ from the Borel subgroups of $G$ to $X(k)$. This bijection identifies $g\\cdot b_B$ with $b_{gBg^{-1}}$ for $g\\in G(k)$, and $G(k)$ acts transitively on $X(k)$. For every Borel $B$, its point has scheme-theoretic stabilizer exactly $B$: for every commutative $k$-algebra $A$, $$\\{g\\in G(A):g\\cdot(b_B)_A=(b_B)_A\\}=B(A).$$ Every torus subgroup of $G$ is contained in a Borel subgroup. For a torus $T\\subseteq G$, the points fixed scheme-theoretically by $T$ are exactly the $b_B$ for which $T\\subseteq B$. Here a point is fixed scheme-theoretically when the action identity holds after every commutative $k$-algebra extension.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.9, printed p.354 (existence, proper quotient and conjugacy); paragraph after Definition 17.12, printed p.355 (containment of tori); Theorem 17.48, printed p.367 (scheme-theoretic normalizer); Section 17f and Lemma 17.52, printed pp.368--369 (smooth projective flag variety and fixed points)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-solvable-group-structure",
+  "def-pc-scheme",
+  "def-kun-projective",
+  "def-weil-proper-morphism",
+  "def-sfb-borel-subgroup-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth connected solvable closed subgroup $B_0\\subseteq G$ of greatest dimension; the identity subgroup makes this collection nonempty. The dimension assertions of [lem-sfb-solvable-normal-subgroup-products] bound the possible dimensions by $\\dim G$ and make a strict inclusion of smooth connected subgroups increase dimension. Hence $B_0$ is maximal and is a Borel subgroup. Solvability by termination of the derived series agrees with solvability by a finite normal series with commutative quotients: a terminating derived series is a normal series with commutative successive quotients, and for any normal series with commutative quotients induction puts the $i$th derived subgroup inside the $i$th member. No normality of $B_0$ in $G$ is needed for the dimension assertion.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9, first sentence of proof, printed p.354; greatest-dimension choice explained before Example 17.7."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-solvable-subgroup-flag-realization] to $B_0$. Obtain a faithful representation on $V$ and a complete flag $\\mathcal F$ with full scheme stabilizer $B_0$ in the projective finite-type scheme $Y=\\operatorname{Fl}(V)$. The representation acts on the flag functor by sending each locally direct-summand submodule to its image; this defines its scheme action, with identities inherited from matrix multiplication. For any $\\mathcal E\\in Y(k)$ its stabilizer $K$ has a smooth connected solvable subgroup $K_{\\mathrm{red}}^\\circ$ of dimension $\\dim K$. Maximality of the dimension of $B_0$ implies $\\dim K\\leq\\dim B_0$. Thus [lem-sfb-smooth-group-orbit-geometry] makes $O=G\\mathcal F$ an orbit of minimum dimension $\\dim G-\\dim B_0$. If its boundary in its closure were nonempty, it would contain a $k$-point: [lem-sc-lft-over-field-jacobson-space] supplies a closed point of $Y$ in this nonempty closed subset, and [lem-weil-pbc-closed-point-residue-field-base] identifies its residue field with $k$. The orbit node would give an orbit there of strictly smaller dimension, contradicting the minimum. Consequently $O$ is closed in $Y$.",
+   "uses": [
+    "lem-sfb-solvable-subgroup-flag-realization",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9, first paragraph of proof, printed p.354; orbit-boundary argument of Corollary 1.66; closed points: Stacks 0478 and 00FV/01TB."
+   }
+  },
+  {
+   "text": "Put $X=O$ with its reduced scheme structure. The orbit node [lem-sfb-smooth-group-orbit-geometry] gives smoothness and a faithfully flat, hence surjective, orbit map $q:G\\to X$. The flag-realization node gives properness and finite type of this closed reduced subscheme. It is nonempty since it contains $\\mathcal F$, and connected since a nontrivial clopen partition would pull back along the continuous surjection $q$ to a nontrivial clopen partition of $G$. Projectivity of $Y$ means it has a closed embedding into some $\\mathbf P^N_k$ [def-kun-projective]; composing $X\\hookrightarrow Y$ with that embedding is a closed immersion by [lem-weil-pbc-closed-immersion-comp], so $X$ is projective in the required convention. The invariant-closure assertion of the orbit node shows that the flag action $G\\times_kY\\to Y$ maps the closed subscheme $G\\times_kX$ set-theoretically into $X$. Since $G\\times_kX\\to X$ is the base change of the smooth $G\\to\\operatorname{Spec}k$ and $X$ is reduced, $G\\times_kX$ is reduced by [lem-sfb-smooth-algebra-over-reduced-ring], applied on affine charts. A morphism from a reduced scheme whose image lies in a closed subset factors uniquely through its reduced closed subscheme, so the action restricts to $G\\times_kX\\to X$; its action identities are the restrictions of those on $Y$, by the same uniqueness. Finally [lem-sfb-homogeneous-orbit-quotient-geometry], applied to $\\mathcal F$, identifies $q$ with $G\\to G/B_0$ and gives separatedness and $X(k)=G(k)/B_0(k)$.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-solvable-subgroup-flag-realization",
+    "def-kun-projective",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-smooth-algebra-over-reduced-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9, first paragraph, printed p.354; Section 17f, printed p.368; Proposition 7.30, printed pp.146--147. Closed-immersion composition: Stacks 01QS (lemma-composition-closed-immersion)."
+   }
+  },
+  {
+   "text": "Let $B$ be any Borel subgroup. Its restricted action on nonempty proper $X$ satisfies the hypotheses of [lem-sfb-solvable-proper-fixed-point], so there is $x\\in X(k)$ fixed scheme-theoretically by $B$. Write $x=g\\mathcal F$ with $g\\in G(k)$, using the rational-point lifting clause of [lem-sfb-homogeneous-orbit-quotient-geometry]. For every $k$-algebra $A$, the equality $h g\\mathcal F_A=g\\mathcal F_A$ is equivalent to $g^{-1}hg\\in B_0(A)$, since the scheme stabilizer of $\\mathcal F$ is $B_0$. Hence $B\\subseteq gB_0g^{-1}$ as subgroup schemes. The latter is smooth connected solvable, so maximality of $B$ forces $B=gB_0g^{-1}$. This proves conjugacy without assuming reductivity.",
+   "uses": [
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9, last paragraph of proof, printed p.354."
+   }
+  },
+  {
+   "text": "For $B=gB_0g^{-1}$ define $b_B=g\\mathcal F\\in X(k)$. If also $B=g'B_0g'^{-1}$, then $g^{-1}g'$ normalizes $B_0$. By [lem-sfb-borel-scheme-normalizer] it belongs to $B_0(k)$, so $g\\mathcal F=g'\\mathcal F$. Conversely that equality puts $g^{-1}g'$ in $B_0(k)$ and implies equality of the conjugate subgroups. Thus the assignment is well-defined and injective. It is surjective since every point of $X(k)$ is $g\\mathcal F$ by [lem-sfb-homogeneous-orbit-quotient-geometry]. For $h\\in G(k)$, $h b_B=hg\\mathcal F=b_{hBh^{-1}}$. Moreover $g' g^{-1}$ sends $g\\mathcal F$ to $g'\\mathcal F$, giving transitivity. Calling this scheme with its labels $\\mathcal B(G)$ produces the requested variety of Borels.",
+   "uses": [
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 17f, printed pp.368--369; Theorem 17.48, printed p.367 (the Section 17f reference to 17.47 is a numbering slip)."
+   }
+  },
+  {
+   "text": "For any $k$-algebra $A$ and $u\\in G(A)$, with $B=gB_0g^{-1}$ as above, compute\n$$u(b_B)_A=(b_B)_A\\quad\\Longleftrightarrow\\quad (g^{-1}ug)\\mathcal F_A=\\mathcal F_A\\quad\\Longleftrightarrow\\quad g^{-1}ug\\in B_0(A)\\quad\\Longleftrightarrow\\quad u\\in B(A).$$\nThe middle equivalence uses the full scheme-theoretic flag stabilizer from [lem-sfb-solvable-subgroup-flag-realization], not just its rational points. This proves the stabilizer assertion even for nonreduced $A$.",
+   "uses": [
+    "lem-sfb-solvable-subgroup-flag-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 17f, printed p.368, with the all-algebras stabilizer interpretation of Theorem 4.27 and Proposition 7.29."
+   }
+  },
+  {
+   "text": "Let $T\\subseteq G$ be any torus, including the rank-zero torus. Since $k$ is algebraically closed, $T\\simeq(\\mathbf G_m)^r=\\operatorname{Spec}k[\\mathbf Z^r]$. By [lem-trf-split-lattice-torus-projection] this scheme is smooth and its coordinate algebra is a domain. Its zero prime is a generic point, so its spectrum is nonempty and irreducible, hence connected. Its group law is commutative, so it is solvable. Choose a smooth connected solvable subgroup containing $T$ with greatest dimension. As in step 1, the strict dimension increase in [lem-sfb-solvable-normal-subgroup-products] makes it maximal among all smooth connected solvable subgroups: any larger subgroup would still contain $T$. This is a Borel containing $T$.",
+   "uses": [
+    "lem-trf-split-lattice-torus-projection",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.10, proof, and paragraph following Definition 17.12, printed p.355; split torus coordinates as in Section 12a."
+   }
+  },
+  {
+   "text": "Every $x\\in X(k)$ is a unique $b_B$. The stabilizer calculation in step 6 shows that $T$ fixes $b_B$ after every commutative $k$-algebra extension if and only if $T(A)\\subseteq B(A)$ for every such algebra $A$. These inclusions are exactly factorization of the subgroup morphism $T\\hookrightarrow G$ through the closed subgroup $B$ (apply them to the universal point of affine $T$, or equivalently Yoneda). Thus the fixed rational points are precisely the $b_B$ with $T\\subseteq B$, in the stipulated scheme-theoretic sense.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.52 and the example following it, printed p.369; all-algebras form follows from the previously proved stabilizer formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-solvable-subgroup-flag-realization",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-kun-projective",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-sfb-borel-scheme-normalizer",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-sfb-smooth-algebra-over-reduced-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.9 proof, printed p.354; Section 17f, printed pp.368--369; paragraph after Definition 17.12, printed p.355. All-algebras stabilizer calculation is written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group has a smooth projective variety of Borel subgroups, transitive conjugation action, and each Borel is its scheme theoretic stabilizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G] (X : Action FintypeCat G) [CategoryTheory.PreGaloisCategory.IsConnected X],\\n  MulAction.IsPretransitive G X.V.carrier\", \"doc\": \"For a group action on the category of finite types, if the underlying object is connected, then the action is pretransitive. That is, for any two elements $x, y$ in the underlying finite type $X.V$, t\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, and a compact topological group $G$ acting continuously on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, if $G$ is the fun\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : TopologicalSpace G] [inst_5 : IsTopologicalGroup G]\\n  [i\", \"doc\": \"In the context of a Galois category $\\\\mathcal{C}$ with a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$ and a compact topological group $G$ equipped with a multiplicative action on each $F(X)$, this con\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a continuous multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.FintypeCat.Action.isConnected_of_transitive\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G] (X : FintypeCat) [inst_1 : MulAction G X.carrier]\\n  [MulAction.IsPretransitive G X.carrier] [h : Nonempty X.carrier],\\n  CategoryTheory.PreGaloisCategory.IsConnected (Action.FintypeCat.ofMulAction G X)\", \"doc\": \"If a group $ G $ acts transitively on a non-empty finite type $ X $, then the corresponding object in the category of finite types is connected in the sense of pre-Galois categories.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flag variety G/B for any connected linear algebraic group is smooth and projective and Borels are self normalizing",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"normalizerCondition_iff_only_full_group_self_normalizing\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \": NormalizerCondition G ↔ ∀ H : Subgroup G, H.normalizer = H → H = ⊤\", \"doc\": \"A group $G$ satisfies the normalizer condition if and only if every subgroup $H$ of $G$ that equals its own normalizer must be the entire group $G$ itself, i.e., $H.\\text{normalizer} = H$ implies $H = \"}\n  {\"name\": \"Algebra.FormallySmooth.comp\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] [FormallySmooth A B] : FormallySmooth R B\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $ and $ B $ is a formally smooth algebra over $ A $, then $ B $ is a formally smooth algebra over $ R $.\"}\n  {\"name\": \"LieGroup\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LieGroup\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              ModelWithCorners 𝕜 E H →\\n                WithTop ℕ∞ → (G : Ty\", \"doc\": \"A Lie group is a group $G$ equipped with a topological space structure and a charted space structure modeled on $H$, such that the group operations (multiplication and inversion) are smooth maps compa\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"Subgroup.inf_subgroupOf_inf_normal_of_right\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"(A B' B : Subgroup G) [hN : (B'.subgroupOf B).Normal] : ((A ⊓ B').subgroupOf (A ⊓ B)).Normal\", \"doc\": \"Let $G$ be a group, and let $A$, $B'$, and $B$ be subgroups of $G$ such that $B'$ is normal in $B$. Then, the intersection $A \\\\cap B'$ is a normal subgroup of $A \\\\cap B$.\"}\n  {\"name\": \"Mathlib.Tactic.Borelize.borelToRefl\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Basic\", \"type\": \"(e : Expr) (i : FVarId) : TacticM Unit\", \"doc\": \"A tactic used in Borel space constructions to handle expressions involving Borel sets, likely applying reflexive properties or simplifications during proof automation.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BorelSubgroup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|flagVariety|FlagVariety|self.normaliz.*Borel",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth affine algebraic group has a projective variety of Borel subgroups with conjugation action and stabilizer B",
+   "results": "Actual msearch output: 8 hits; CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected, MulAction.IwasawaStructure.is_generator, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, CategoryTheory.FintypeCat.Action.isConnected_of_transitive, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial', CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are about topological or abstract groups, Lie algebras or unrelated category theory; none gives a Borel flag scheme for affine algebraic group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BorelSubgroup\"",
+   "results": "Actual msearch output: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are about topological or abstract groups, Lie algebras or unrelated category theory; none gives a Borel flag scheme for affine algebraic group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|flagVariety|FlagVariety|self.normaliz.*Borel",
+   "results": "Actual msearch output: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are about topological or abstract groups, Lie algebras or unrelated category theory; none gives a Borel flag scheme for affine algebraic group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous space G/B for a connected linear algebraic group is smooth projective and Borels are self normalizing",
+   "results": "Actual msearch output: 8 hits; LieSubalgebra.IsCartanSubalgebra.self_normalizing, LibraryNote.Design_choices_about_smooth_algebraic_structures, normalizerCondition_iff_only_full_group_self_normalizing, LieGroup, Subgroup.le_normalizer, QuotientGroup.borelSpace, LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra, NormalizerCondition",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are about topological or abstract groups, Lie algebras or unrelated category theory; none gives a Borel flag scheme for affine algebraic group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*[Ss]ubgroup|[Ff]lag.*[Vv]ariety|[Bb]orel.*[Qq]uotient",
+   "results": "Actual msearch output: 0 hits; ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are about topological or abstract groups, Lie algebras or unrelated category theory; none gives a Borel flag scheme for affine algebraic group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel flag scheme of a connected linear algebraic group parametrizes maximal connected solvable subgroups and torus fixed points are Borels containing it",
+   "results": "Actual msearch output: 8 hits; CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, Field.absoluteGaloisGroup.commutator_closure_isNormal, ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one, InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, Subgroup.connectedComponentOfOne, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are about topological or abstract groups, Lie algebras or unrelated category theory; none gives a Borel flag scheme for affine algebraic group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-borel-intersection",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained. Supporting input: Section 17h, proof of Theorem 17.56: the projective variety of all Borel subgroups, its stabilizers, and its maximal-torus fixed points. No reductivity hypothesis.",
+   "via": [
+    "lem-sfb-chevalley-borel-intersection",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-general-borel-flag-variety",
+  "worker": "stage1",
+  "summary": "Followed Milne 17.9 and Section 17f using existing DAG inputs only. Constructed the minimum-dimensional closed flag orbit, proved conjugacy by the scheme-theoretic fixed point theorem, used the existing Borel normalizer to label rational points, and computed stabilizers on every test algebra. Tori are contained in Borels by greatest dimension. No mathematical change to the statement; normalized inherited doubled TeX backslashes. No new nodes.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite recorded in blueprint.from.place: the projective Borel variety used in Milne Section 17h. Current latest direct-images proof read; this auxiliary group-theory fact is not separately stated in the imported blueprint. The inherited from.node is null (blueprint_refs ancestor reports None), preserved rather than inventing ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Composition of the closed orbit embedding with a finite projective-space embedding; generic scheme calculus. No node specific to the six-functor unit replaces this generic input."
+   },
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Only smoothness of a split torus and integrality of its Laurent coordinate algebra; generic torus algebra, not the trace-formula route. No node specific to the six-functor unit replaces this generic input."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "A nonempty closed orbit boundary in the finite-type flag scheme has a closed point. No node specific to the six-functor unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "That closed point is rational over the algebraically closed base field. No node specific to the six-functor unit replaces this generic input."
+   },
+   {
+    "node": "def-kun-projective",
+    "why": "The stipulated finite-projective-space definition of projectivity. No node specific to the six-functor unit replaces this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-kun-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-920df4e82",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-920df4e82 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps and the 11 cited statements, plus Milne iAG2017 Thm 17.9 proof (p.354), the paragraph after Def 17.12 (p.355), Thm 17.48 (p.367) and §17f/Lemma 17.52 (pp.368-369). The steps follow Milne: a maximal-dimension solvable B_0; flag realization with full scheme stabilizer B_0; the minimal-dimension orbit is closed (Jacobson closed point, residue field k, smaller boundary orbits); conjugacy via the Borel fixed point; labels via the scheme normalizer B=N_G(B) (unsplit, cited as stated, no reductivity; no cycle, because conjugacy does not use it); stabilizers on all test algebras; tori lie in a Borel by maximal dimension; T-fixed points are b_B with T⊆B. The statement matches the Q03 snapshot and clones/live apart from doubled backslashes, so nothing is weakened. Live is still unsplit, there are no new nodes and no duplicate (borel-quotient-proper-geometry, reductive-borel-pair-structure and torus-normalizer-borel-transitivity are narrower). Small cases G=1, a torus, a unipotent group and GL_2 (P^1, T fixes 0 and ∞) agree. Batch 5: three sfb citations reach lem-trf-fppf-covering-base-change, which is generic fppf-covering base change; lem-trf-split-lattice-torus-projection is generic torus smoothness and domain, already cited by 7 sfb nodes. Neither is part of the trace formula or Poincaré duality, so both are accepted. The tool_uses (01QS, torus lemma) are accepted. FIX in step 3: restricting the flag action to the reduced closed orbit needs G×X reduced. I added that it is smooth over the reduced X (cite lem-sfb-smooth-algebra-over-reduced-ring, same unit) and factors uniquely through the reduced closed subscheme, and added that node to the step uses and proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.GeneralBorelFlagVariety",
+  "declaration": "AlgebraicGeometry.exists_general_borel_flag_variety",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/GeneralBorelFlagVariety.lean",
+  "statement": "theorem exists_general_borel_flag_variety {k : Type u} [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) (hG : SolvableGroupStructure.IsAlgebraic G) [Smooth G.X.hom] [ConnectedSpace G.X.left] : ∃ (X : Mod (Over (Spec (.of k))) G.X) (b : {B : Subobject G.X // ∃ h : GrpObj (B : Over (Spec (.of k))), @IsBorelGroupScheme k _ _ G.X (B : Over (Spec (.of k))) G.grp h B.arrow} ≃ (𝟙_ (Over (Spec (.of k))) ⟶ X.X)), Nonempty X.X.left ∧ Smooth X.X.hom ∧ ConnectedSpace X.X.left ∧ IsHProjective X.X.hom ∧ LocallyOfFiniteType X.X.hom ∧ QuasiCompact X.X.hom ∧ IsProper X.X.hom ∧ IsSeparated X.X.hom ∧ (∀ x y : 𝟙_ (Over (Spec (.of k))) ⟶ X.X, ∃ g : 𝟙_ (Over (Spec (.of k))) ⟶ G.X, g • x = y) ∧ (∀ B C, ∀ g : 𝟙_ (Over (Spec (.of k))) ⟶ G.X, b C = g • b B ↔ ∀ (A : Type u) [CommRing A] [Algebra k A] (z : StandardGroupSchemes.affine k A ⟶ G.X), (∃ c : StandardGroupSchemes.affine k A ⟶ (C.val : Over (Spec (.of k))), c ≫ C.val.arrow = z) ↔ ∃ t : StandardGroupSchemes.affine k A ⟶ (B.val : Over (Spec (.of k))), t ≫ B.val.arrow = (toUnit (StandardGroupSchemes.affine k A) ≫ g)⁻¹ * z * (toUnit (StandardGroupSchemes.affine k A) ≫ g)) ∧ (∀ B, ∀ (A : Type u) [CommRing A] [Algebra k A] (g : StandardGroupSchemes.affine k A ⟶ G.X), g • (toUnit (StandardGroupSchemes.affine k A) ≫ b B) = toUnit (StandardGroupSchemes.affine k A) ≫ b B ↔ ∃ t : StandardGroupSchemes.affine k A ⟶ (B.val : Over (Spec (.of k))), t ≫ B.val.arrow = g) ∧ (∀ (T : Grp (Over (Spec (.of k)))) (i : T ⟶ G), IsClosedSubgroupScheme i.hom.hom → SolvableGroupStructure.IsTorus T → ∃ x : 𝟙_ (Over (Spec (.of k))) ⟶ X.X, ∃ j : T.X ⟶ ((b.symm x).val : Over (Spec (.of k))), j ≫ (b.symm x).val.arrow = i.hom.hom) ∧ (∀ (T : Grp (Over (Spec (.of k)))) (i : T ⟶ G), IsClosedSubgroupScheme i.hom.hom → SolvableGroupStructure.IsTorus T → ∀ B, (∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ T.X), (t ≫ i.hom.hom) • (toUnit (StandardGroupSchemes.affine k A) ≫ b B) = toUnit (StandardGroupSchemes.affine k A) ≫ b B) ↔ ∃ j : T.X ⟶ (B.val : Over (Spec (.of k))), j ≫ B.val.arrow = i.hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bce087d1c",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Clause-by-clause check of AlgebraicGeometry.exists_general_borel_flag_variety against the node (Milne 17.9, the paragraph after 17.12, 17.48, 17f/17.52). Matched: algebraically closed k; G = Grp(Over Spec k) with IsAlgebraic (affine+LFT+QC), Smooth, ConnectedSpace; Borels = Subobject G.X with ∃ GrpObj and IsBorelGroupScheme, the landed def reused, group structure forced by IsMonHom+mono; X : Mod G.X (action over k with unit and multiplication identities); Nonempty/Smooth/Connected/IsHProjective/LFT/QC/IsProper/IsSeparated; Equiv from Borels to X(k); conjugation clause oriented correctly (C = gBg⁻¹ on all A); transitivity on k-points; stabilizer equality for all k-algebras A; tori in a Borel; torus-fixed points ↔ factorization. No extra hypotheses; universes bound. Edge cases ok: G = 1, torus, solvable, GL₂, rank-0 torus, A = 0. Statement verbatim; stmt_deps gains only the landed def-sfb-borel-subgroup-scheme (allowed); sorry only; docstrings give the source place and 8 proof steps; the 4 plain imports are proof_dep modules; homogeneous-orbit record landed after base. Advisory only: StandardGroupSchemes.affine is owned by def-sc-gm-ga, which is not a direct stmt_dep. No compile run, no file changed."
+ }
+}

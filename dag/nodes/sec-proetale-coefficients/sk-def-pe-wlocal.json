@@ -181,7 +181,65 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c04ad1d6b (reviewer sub-agent of L); spot-checked: FIX: one missing citation fixed in fixes/; the mathematics is correct. Item sk-def-pe-wlocal matches blueprint main-20261015 sk-def-pe-wlocal/_section.md, Stacks 096A (definition-w-local) and 0982(3) (lemma-w-local-strictly-henselian-extremally-disconnected) in every clause: T^c closed, exactly one closed specialization, R_m strictly henselian for all maximal m, pi0 with the quotient topology extremally disconnected. Edge cases check out: the zero ring satisfies everything vacuously, and a field is w-strictly local exactly when separably closed. The item is a definition with no proof steps, and every stmt_dep supplies what it is cited for. The explanatory paragraph is fully covered: det-pe-wlocal-components clauses 1, 2 and 4 (kept as a pointer to avoid a cycle) plus the two new nodes. New node lem-pe-spectral-components-profinite is Stacks topology 0906 (lemma-spectral-pi0) with spectrality as its only hypothesis, and it is true. It is not a Mathlib leaf: ConnectedComponents.t2 at Regular.lean:780 needs a Hausdorff source. A full-DAG search finds no duplicate; the near candidates assume T^c closed, a w-local spectrum, or only give the clopen-intersection formula. New node lem-pe-closed-specializations-not-closed is Stacks 0969 (example-not-w-local). Stacks does not say outright that its example is spectral, so I checked it myself with T a convergent sequence: a compact-open basis closed under finite intersection, T0, sober (each irreducible closed set lies in one Sierpinski fibre), each point with exactly one closed specialization, and (t,1) in the closure of T^c. The statement is true, and it is a permitted claim extracted from a definition, not a restatement of a clause. Unit record: only realized/realized_by changed, and they cover both paragraphs. No tool_uses, no SGA. FIX (C1/C4): the item asserted that Spec R is quasi-compact and quasi-separated without a citation. It now cites the existing Mathlib leaf lem-weil-pbc-affine-scheme-qcqs in the statement and stmt_deps; this adds no cycle. split_report.blueprint now names Stacks 0982(3). For the maintainer, in fields I cannot fix: add Tag 0982 to the item's source.external (the report claims it was added; it is absent); set import_flags ['unreachable'] on lem-pe-closed-specializations-not-closed (also claimed in the report and absent); and plan a later merge of the existing imported node det-pe-wlocal-strict-contractible, which duplicates the ring definitions.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "IsWContractibleRing",
+    "WLocalSpace",
+    "IsWLocalRing",
+    "IsWStrictlyLocalRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "IsWContractibleRing",
+     "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+     "lines": [
+      38,
+      42
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "WLocalSpace",
+     "module": "WeilConjectures.Topology.SpectralSpace.WLocal.Basic",
+     "lines": [
+      23,
+      34
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "IsWLocalRing",
+     "module": "WeilConjectures.RingTheory.ProEtale.WLocal",
+     "lines": [
+      28,
+      31
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "IsWStrictlyLocalRing",
+     "module": "WeilConjectures.RingTheory.ProEtale.WLocal",
+     "lines": [
+      149,
+      153
+     ],
+     "kind": "structure",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
   "declaration": "IsWContractibleRing",
@@ -205,5 +263,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Delivery only sets the lean record (existing: true, slopmaster2) to WLocalSpace/IsWLocalRing/IsWStrictlyLocalRing/IsWContractibleRing; other node fields equal to base; JSON layout OK; report has Worker report and Second reading by ND. Clause check: WLocalSpace extends SpectralSpace with closedPoints closed and unique closed specialization; existence follows from spectrality (compiled proof via IsClosed.exists_closed_singleton). IsWLocalRing is WLocalSpace (PrimeSpectrum R) (CommSemiring binder is more general, no extra hypothesis). IsWStrictlyLocalRing requires IsStrictlyHenselianLocalRing (Localization.AtPrime m) for all maximal m (the recorded dependency declarations). IsWContractibleRing requires ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R)). Primary statement matches the source verbatim; source files identical in slopmaster2 and the side clone; Type*, Prop, no universe restriction. Edge cases (empty space, zero ring, field, connected Spec) correct. Consistent with existing DAG bindings (det-pe-wlocal-strict-contractible, def-weil-pbc-w-local); no duplicate in Mathlib or Sheaf. Check file compiled with exit 0 via lcompile.py. Cosmetic only: the report names a non-existent lemma exists_isClosed_specializes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "A spectral space $T$ is *w-local* if its set $T^c$ of closed points is closed and every\npoint specializes to exactly one closed point. A ring $R$ is w-local if\n$\\operatorname{Spec}(R)$ is w-local. It is *w-strictly local* if it is w-local and\n$R_{\\mathfrak m}$ is strictly henselian for every maximal ideal $\\mathfrak m$. It is\n*w-contractible* if it is w-strictly local and the profinite space\n$\\pi_0(\\operatorname{Spec}(R))$ is extremally disconnected.\n\nRecall that spectral spaces are quasi-compact and sober, with a basis of quasi-compact\nopens closed under finite intersections, and that the space of connected components of a\nspectral space is profinite. Closedness of $T^c$ does not follow from uniqueness of closed\nspecializations, which is why the definition requires it separately. For a w-local space,\nthe natural map $T^c\\to\\pi_0(T)$ is a homeomorphism, because each component consists of\nthe generalizations of its unique closed point and $T^c$ is compact. For\n$T=\\operatorname{Spec}(R)$, the component of a closed point $\\mathfrak m$ is the image of\n$\\operatorname{Spec}(R_{\\mathfrak m})$. Thus if $R$ is w-strictly local, then every component\nis the spectrum of a strictly henselian local ring, and w-contractibility in addition\ncontrols how choices vary across the profinite set of components. See Stacks, Tags 096A,\n0968 and 0969.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

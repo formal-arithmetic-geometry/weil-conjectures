@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-adequate-geometric-fibres-submersion",
+ "kind": "statement",
+ "title": "Topology and geometric fibres of an adequate moduli space",
+ "statement": "Let $k$ be a field [def-weil-field] and $\\phi:\\mathcal X\\to Y$ an adequate moduli space of an algebraic stack over $k$ [def-sfb-adequate-moduli-space]. Assume, as in Alper's Section 2 conventions, that the diagonals of $\\mathcal X$ and $Y$ over $k$ are quasi-compact and separated: each scheme test of either diagonal is an algebraic space whose structural morphism is quasi-compact and whose relative diagonal is a closed immersion. Then $\\phi$ is universally submersive: after every base change $Y'\\to Y$ by an algebraic space [def-trf-algebraic-space], the map $|\\mathcal X\\times_Y Y'|\\to|Y'|$ is surjective and a subset of $|Y'|$ is open if and only if its inverse image is open. For every algebraically closed extension $\\Omega/k$, the map from isomorphism classes of $\\Omega$-objects of $\\mathcal X$ to $Y(\\Omega)$ is surjective, and $\\phi(x_1)=\\phi(x_2)$ if and only if the closures of $x_1$ and $x_2$ in $|\\mathcal X_\\Omega|$ intersect. Here $\\mathcal X_\\Omega=\\mathcal X\\times_k\\operatorname{Spec}\\Omega$; points and their closures are taken in the usual underlying topological space of the algebraic stack, obtained from a smooth atlas with its quotient topology. No finite-type or reducedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Read arXiv:1005.2398v3 online; local PDF WANTED.",
+  "url": "https://arxiv.org/pdf/1005.2398v3"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-moduli-scheme-base-change",
+  "def-sfb-stack-point-topological-space",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "For any algebraic-space base change $Y'\\to Y$, let $p:|\\mathcal X\\times_Y Y'|\\to|Y'|$. [lem-sfb-adequate-moduli-universally-submersive] states exactly that $p$ is surjective and that a subset $V\\subseteq|Y'|$ is open if and only if $p^{-1}(V)$ is open; that node imposes no diagonal hypothesis on $Y'$, so this proves universal submersiveness for arbitrary $Y'$, including ones without quasi-compact diagonal. Step 3 also uses the surjectivity and the closedness itself: [lem-sfb-adequate-moduli-topological-images] states that $p$ sends closed subsets to closed subsets for every morphism of algebraic spaces $Y'\\to Y$. Neither assertion says that $\\phi_{Y'}$ is adequate.",
+   "uses": [
+    "lem-sfb-adequate-moduli-universally-submersive",
+    "lem-sfb-adequate-moduli-topological-images"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(1)--(3): the closed-surjection argument, carried by the existing universal-submersiveness node."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed extension $\\Omega/k$. Apply [lem-sfb-adequate-flat-base-change] to $Y_\\Omega\\to Y$. This map is flat: on affine charts its ring map is $A\\to A\\otimes_k\\Omega$, and tensoring along it is tensoring the underlying $k$-module with the vector space $\\Omega$, which is exact by [lem-weil-pbc-module-over-field-flat, lem-weil-pbc-flat-tensor-exact]. The diagonal hypotheses persist under this scalar base change. Thus $\\phi_\\Omega:\\mathcal X_\\Omega\\to Y_\\Omega$ is adequate. The identification of its source with $\\mathcal X\\times_k\\operatorname{Spec}\\Omega$ and the correspondence between $k$-morphisms $\\operatorname{Spec}\\Omega\\to\\mathcal X$ and $\\Omega$-objects of this source follow by unpacking the $2$-fibre-product data.",
+   "uses": [
+    "lem-sfb-adequate-flat-base-change",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(1); scalar extension before Theorem 5.3.1(5)."
+   }
+  },
+  {
+   "text": "For $y\\in Y(\\Omega)$, the fibre $\\mathcal F=\\mathcal X\\times_Y\\operatorname{Spec}\\Omega$ is nonempty by Step 1. Quasi-compactness of $\\phi$ gives a quasi-compact smooth atlas of $\\mathcal F$ by the definition [def-sfb-stack-qcqs-morphism]. Its diagonal is the corresponding base change of the relative diagonal of $\\phi$, so is quasi-compact; it is separated because the diagonal of $\\mathcal X/k$ is separated. Step 1's closedness assertion after every further scheme base change supplies the universally closed hypothesis of [lem-sfb-universally-closed-stack-rational-point]. This node gives an object of $\\mathcal F(\\Omega)$; its projection is an object $x$ with $\\phi(x)=y$. Thus the asserted map on isomorphism classes is surjective over this very field.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-universally-closed-stack-rational-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Same-field existence input, with universal closedness supplied by Theorem 5.3.1(2)."
+   }
+  },
+  {
+   "text": "Put $C_i=\\overline{\\{[x_i]\\}}\\subset|\\mathcal X_\\Omega|$. By [lem-sfb-smooth-presentation-closed-subsets] they carry reduced closed substacks $\\mathcal C_i$. By [lem-sfb-qs-space-rational-point-topology] the image point $y_i=\\phi_\\Omega(x_i)$ is closed in $|Y_\\Omega|$, and distinct $\\Omega$-points give distinct underlying points. Continuity gives $\\phi_\\Omega(C_i)\\subseteq\\overline{\\{[y_i]\\}}=\\{[y_i]\\}$; as $x_i\\in C_i$, equality holds. Apply the intersection formula of [lem-sfb-adequate-moduli-topological-images] to $\\phi_\\Omega$ and the two closed substacks. If $y_1=y_2$, the left side of that formula is the nonempty singleton $\\{[y_1]\\}$, hence $C_1\\cap C_2$ is nonempty; here the $2$-fibre-product point surjectivity in the smooth-presentation node identifies the intersection with the image of $|\\mathcal C_1\\times_{\\mathcal X_\\Omega}\\mathcal C_2|$. Conversely a point of $C_1\\cap C_2$ maps to both $[y_1]$ and $[y_2]$, and injectivity in the rational-point node gives $y_1=y_2$ as $\\Omega$-points. This is the claimed equivalence; it also shows closure intersection defines an equivalence relation, since equality of images does.",
+   "uses": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-adequate-moduli-topological-images"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(4) implies (5), expanding the closure argument referred to Alper 2013 Theorem 4.16(iv)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adequate-moduli-universally-submersive",
+  "lem-sfb-adequate-moduli-topological-images",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-sfb-adequate-flat-base-change",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-universally-closed-stack-rational-point",
+  "lem-sfb-qs-space-rational-point-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Theorem 5.3.1(3),(5), Proposition 5.2.9(1), and Section 2 conventions; primary text read online, local PDF WANTED; expanded assembly and explicit same-field lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adequate moduli space is universally submersive and geometric fibres are closure equivalence classes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"@AlgebraicGeometry.UniversallyClosed =\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally ⊓ @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate quotient algebraic stack surjective universally closed orbit closure equivalence geometric points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] [IsDominant f] : Surjective f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.out\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is universally closed, then the underlying continuous map of $ f $ is universally closed in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosedTypeComp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : UniversallyClosed f] [hg : UniversallyClosed g] :\\n  UniversallyClosed (f ≫ g)\", \"doc\": \"Given two universally closed morphisms of schemes $f: X \\\\to Y$ and $g: Y \\\\to Z$, their composition $g \\\\circ f: X \\\\to Z$ is also universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f → AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ of schemes, if for every base change, the induced morphism is a closed map in the topological sense, then $ f $ is universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.of_comp_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [UniversallyClosed (f ≫ g)] [Surjective f] : UniversallyClosed g\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f $ is universally closed and $ f $ is surjective, then $ g $ is universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [UniversallyClosed f] : IsClosedMap f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes that is universally closed is also a closed map, meaning the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": @UniversallyClosed = universally (topologically @IsClosedMap)\", \"doc\": \"The property of a morphism of schemes being universally closed coincides with the property that its underlying continuous map is a closed map and this property is preserved under all base changes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"submersive\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|closureEquivalent|closure_equivalent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adequate moduli space universally submersive and algebraically closed geometric point orbit closure equivalence",
+   "results": "8 hits; AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.universallyClosed_eq_universallySpecializing, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme properness, scheme point descriptions and closed immersion results; no adequate-moduli or stack closure equivalence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adequate moduli morphism is a quotient map and its geometric points are classified by intersecting closures",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Scheme.Hom.isClosedMap, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.UniversallyClosed.mk, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.universallyClosed_eq_universallySpecializing; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme properness, scheme point descriptions and closed immersion results; no adequate-moduli or stack closure equivalence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme properness, scheme point descriptions and closed immersion results; no adequate-moduli or stack closure equivalence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|geometric.*closure.*equiv",
+   "results": "0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme properness, scheme point descriptions and closed immersion results; no adequate-moduli or stack closure equivalence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme properness, scheme point descriptions and closed immersion results; no adequate-moduli or stack closure equivalence theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-locally-separated-universality",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1.",
+   "via": [
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-geometric-fibres-submersion",
+  "worker": "stage1",
+  "summary": "Q148 restored Alper Section 2 diagonal hypotheses after finding a non-quasi-separated algebraic-space counterexample. Reused existing closed-image and intersection nodes. Three statement-only inputs supply flat base change, rational-point topology on quasi-separated spaces, and same-field objects on universally closed stacks. No finite-type or reducedness hypothesis added.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/plurinodal/PGL supporting route, specifically Alper Theorem 5.3.1(3),(5) supplying Proposition 7.1.1 conditions (a),(b). Ancestor tool returns None because the upstream created.item chain is broken; preserve that inherited value and via list.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-over-field-flat",
+    "why": "Generic flat-module exactness used only to check flatness of field scalar extension in Step 2; no adequate-moduli node states this linear algebra."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic flat-module exactness used only to check flatness of field scalar extension in Step 2; no adequate-moduli node states this linear algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-75f7b27aa",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-75f7b27aa (reviewer sub-agent of L); spot-checked: I read the item, its four steps, all three new nodes, every cited statement, Alper arXiv:1005.2398v3 (Section 2 conventions, Prop 5.2.9 with proof, Thm 5.3.1 with proof) and the Stacks labels 03JX, 07U5, 0H1T, 0H1R, 047Z, 0DQQ, 06RC, 06R9, 0DN8 and 01WM. STATEMENT-DISPUTED accepted: the added hypothesis that the diagonals of X and Y over k are quasi-compact and separated is Alper's Section 2 convention, which the project definitions lack. I verified the counterexample: Y=A^1/Z over Qbar with phi=id is an adequate moduli space under the project definition, the points 0 and 1/2 are both dense in |Y|, so their closures meet although the points differ, and the old fibre clause is false. The item is not a target. Step 1 was correct but repeated word for word the whole proof of the existing split node lem-sfb-adequate-moduli-universally-submersive (C5). FIX: Step 1 now cites that node for universal submersiveness and keeps lem-sfb-adequate-moduli-topological-images for the closedness Step 3 needs; proof_deps updated, no cycle (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-adequate-geometric-fibres-submersion.json). Steps 2-4 check out: Y_Omega->Y is flat by the vector-space flatness leaves (tool use accepted); the diagonal hypotheses persist through Spec Omega->Spec(Omega(x)_k Omega), a closed immersion; the fibre's diagonal is a base change of the diagonal of phi, which is quasi-compact and separated; closedness after base change gives universal closedness; the rational-point node applies to Y_Omega. New nodes: flat-base-change is Alper 5.2.9(1) and true; qs-space-rational-point is true (a K-point of a qs space has finitely many closed preimages; residue field equals K) and is not the locally-separated node; universally-closed-stack-rational-point is true (closed point, 06RC gerbe, 06R9 universal homeomorphism, L algebraic so L=K, 0DN8 smooth chart, Nullstellensatz). None restates a clause of the item and none duplicates an existing node. Batch-5 flags: every one reaches sec-trace-formula only through def-trf-algebraic-space and general stack definitions or topology, not part of the trace formula or Poincare duality; accepted. No SGA source. MAINTAINER: the reviewed citer lem-sfb-adequate-locally-separated-universality cites this item in steps 0-1 without supplying the new diagonal hypotheses and needs a repair; blueprint.from.node=null is inherited from a broken created.item chain; the Alper PDF is WANTED in literature/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateGeometricFibresSubmersion",
+  "declaration": "CategoryTheory.adequate_geometricFibres_submersion",
+  "declarations": [
+   "CategoryTheory.moduliScalarPoint",
+   "CategoryTheory.adequate_geometricFibres_submersion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateGeometricFibresSubmersion.lean",
+  "statement": "theorem adequate_geometricFibres_submersion (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (Y : AlgebraicSpace (Spec (.of k))) (φ : BasedFunctor F (discreteModuli Y.obj.obj)) (hφ : IsAdequateModuliSpace F hF Y φ) (hFdiag : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct (moduliBaseStructure F) (moduliBaseStructure F))), ∃ (Z : AlgebraicSpace (Spec (.of k))) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliRelativeDiagonal (moduliBaseStructure F)) T t Z p ∧ AlgebraicSpace.MapIsQuasiCompact p ∧ AlgebraicSpace.MapToSchemeIsSeparated Z T p) (hYdiag : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct (moduliBaseStructure (discreteModuli Y.obj.obj)) (moduliBaseStructure (discreteModuli Y.obj.obj)))), ∃ (Z : AlgebraicSpace (Spec (.of k))) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliRelativeDiagonal (moduliBaseStructure (discreteModuli Y.obj.obj))) T t Z p ∧ AlgebraicSpace.MapIsQuasiCompact p ∧ AlgebraicSpace.MapToSchemeIsSeparated Z T p) : (∀ (Y' : AlgebraicSpace (Spec (.of k))) (g : Y' ⟶ Y), Function.Surjective (moduliPointMap (moduliTwoFiberSnd φ (discreteModuliMap g.hom.hom))) ∧ ∀ V : Set (ModuliPoints (discreteModuli Y'.obj.obj)), IsOpen V ↔ IsOpen (moduliPointMap (moduliTwoFiberSnd φ (discreteModuliMap g.hom.hom)) ⁻¹' V)) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of k)), Function.Surjective ((moduliFiberMap φ (Over.mk g)).mapSkeleton.obj) ∧ ∀ x₁ x₂ : Functor.Fiber F.p (Over.mk g), Nonempty ((moduliFiberMap φ (Over.mk g)).obj x₁ ≅ (moduliFiberMap φ (Over.mk g)).obj x₂) ↔ (closure ({moduliScalarPoint F Ω g x₁}) ∩ closure ({moduliScalarPoint F Ω g x₂})).Nonempty",
+  "branch": "sheaf-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses actual iso-comma scalar extension and the existing smooth-atlas topology. The helper constructs the field-valued point of that scalar extension from the given strict fibre object. Both diagonal hypotheses retain their actual algebraic-space scheme-test projection with quasi-compactness and closed-immersion relative diagonal. Added statement dependencies are existing landed definition nodes; the informal statement and proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-278466de1",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Read item, 11 stmt_dep records and owning Lean decls in side-live (IsAdequateModuliSpace, moduliTwoFiberProduct/Snd, discreteModuli(Map), moduliFiberMap, HasSpaceBaseChange, ModuliPoints/moduliPointMap/moduliRelativeDiagonal, moduliBaseStructure, MapIsQuasiCompact, MapToSchemeIsSeparated, moduliSchemeBaseChange, moduliPointTopologicalSpace). Diagonal hyps = qc + closed-immersion relative diagonal on pinned scheme tests of absolute diagonals of F and Y; no extra hyps, Y' unrestricted. Submersive clause on actual 2-fibre product with smooth-atlas topology; Omega-surjectivity via mapSkeleton (same idiom as IsCoarseModuliScheme); phi(x1)=phi(x2) as iso in discrete fibre = equality in Y(Omega); closures in ModuliPoints(moduliSchemeBaseChange F g) via canonical section helper moduliScalarPoint (real data, no duplicate). Statement verbatim; only stmt_deps (+8 existing def owners, acyclic) and lean changed vs live; imports justified by proof_deps; sorry only; docstrings with source/blueprint/4 steps; no compile needed (no file changed). Maintainer: citer lem-sfb-adequate-locally-separated-universality still needs the diagonal hyps (Q148 note)."
+ }
+}

@@ -1,0 +1,177 @@
+{
+ "id": "lem-sfb-signed-closed-row-maps",
+ "kind": "statement",
+ "title": "Signed ordered refinement maps between specified augmented rows",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion] with quasi-compact complementary open immersion [def-weil-open-immersion, def-weil-finite-type-morphism] and let $A$ be a sheaf of commutative rings on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. For every ordered positive finite closed family $F$ over $i$, suppose a signed row $R_F$ with its specified unit-normalized restrictions, terms, augmentation and support has already been supplied [def-sfb-signed-closed-row-data].\n\nThere is a simultaneous collection of the following row-level maps. Given families $F,G$ of lengths m,n, a function $f:\\operatorname{Fin}(n)\\to\\operatorname{Fin}(m)$, and nonempty factorizations $G_b\\to F_{f(b)}$ over X, there are natural mixed restrictions $c_{s,t}:E_{F_s}\\to E_{G_t}$ for every pair of subsets. For $s\\subseteq f(t)$ they obey $\\eta_{F_s}c_{s,t}=\\eta_{G_t}$. There is a natural chain map $\\rho_f:R_F\\to R_G$. Under the specified term isomorphisms in each nonnegative degree p, its output component at an increasing (p+1)-tuple t is the sum over increasing source tuples s of $\\epsilon_f(s,t)c_{\\operatorname{im}s,\\operatorname{im}t}\\pi_s$, where $\\epsilon_f(s,t)$ is the sum of the signs of all permutations sigma satisfying $s(\\sigma k)=f(tk)$. This is zero for repeated image tuples, and otherwise precisely the sorting-permutation sign from the unique source image tuple. These are the existing finite ordered term and matrix formulas [def-sfb-finite-closed-row-constructions]. Moreover $\\alpha_F\\rho_f=\\alpha_G$, $\\rho_{\\mathrm{id}}=1$, and $\\rho_f\\rho_g=\\rho_{f\\circ g}$ for every composable pair of refinement functions and supplied factorizations. This assertion is about row chain maps only: it constructs neither rows nor any maps between their totals.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+ },
+ "stmt_deps": [
+  "def-sfb-signed-closed-row-data",
+  "def-sfb-finite-closed-row-constructions",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For s contained in f(t), the supplied member factorizations and finite product projections give the arrow from the target t-intersection into the source s-intersection. Push its actual unit to X and identify the composite inverse images by the normalized composition comparison. Put zero for invalid pairs. The composition-unit equation and uniqueness of conjugate comparisons give mixed_unit and all compatibilities with successive restrictions.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-proetale-unit-normalized-adjunction",
+    "lem-sf-proetale-tensor-composition-unit",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+   }
+  },
+  {
+   "text": "The normalized unit at each closed intersection is epimorphic by open-closed localization: complements are finite unions of the given quasi-compact opens. Transport the epimorphic unit across the unique unit-compatible comparison of adjunctions. Precomposition with this unit then shows that the given row restrictions agree with the actual ones used in the calculation. The same argument handles the given maps from Z and singleton augmentations.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-sfb-signed-closed-row-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+   }
+  },
+  {
+   "text": "Transport the signed finite matrix through the specified term isomorphisms. On an injective image tuple use the deleted-face permutation sign identity to identify each term in the chain equation after sorting. On a noninjective tuple there are either no injective faces or exactly two obtained by deleting a single repeated pair. The two latter faces have the same image set and same restriction, and the transposition form of the deleted-face identity makes their signed coefficients negatives, so they cancel in every characteristic. Zero objects handle degrees outside the supports. Naturality gives the natural transformation of row functors.",
+   "uses": [
+    "lem-pc-signed-face-permutation",
+    "def-sfb-finite-closed-row-constructions",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+   }
+  },
+  {
+   "text": "In degree zero the sorting permutation is the identity, so composition of actual units proves the augmentation equation componentwise. In other degrees the source single complex is zero. Identity refinements give the identity matrix. For composition, repeated images give zero on both sides; otherwise the sorting permutation signs multiply, and the unit comparisons compose to the direct restriction. Product projections, the given term isomorphisms and support identify the natural chain maps and prove strict identity and composition.",
+   "uses": [
+    "def-sfb-signed-closed-row-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-proetale-unit-normalized-adjunction",
+  "lem-sf-proetale-tensor-composition-unit",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-sfb-signed-closed-row-data",
+  "lem-pc-signed-face-permutation",
+  "def-sfb-finite-closed-row-constructions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Steps 2 and 4--7 of lem-sfb-closed-restriction-signed-refinements, the signed-refinement deduction below paragraph (3) of det-thm-sf-ctf-stability-direct-images; Stacks 01FG supplies the alternating ordered tuple calculation, not the combined closed-restriction assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite signed alternating complex of restriction functors and ordered refinement chain maps with sorting signs",
+   "results": "AlgebraicTopology.alternatingFaceMapComplex; alternatingCofaceMapComplex; ComplexShape.Embedding.restrictionFunctor; HomologicalComplex.restrictionMap; no unit-normalized finite strictly increasing closed-intersection complex or signed refinement system.",
+   "date": "2026-10-26",
+   "verdict": "The general simplicial complex does not identify the finite ordered terms or provide the sorting-sign refinement matrices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating finite ordered Cech cochain complex refinement maps sorting permutation signs repeated indices zero",
+   "results": "AlgebraicTopology.alternatingCofaceMapComplex, AlternatingCofaceMapComplex.obj and map, and ChainComplex.alternatingConst. Also Loogle query \"alternatingFaceMapComplex\" found the analogous simplicial constructions.",
+   "date": "2026-10-26",
+   "verdict": "No specialized closed-restriction row data or construction; no direct ordered refinement result."
+  },
+  {
+   "tool": "grep",
+   "query": "SignedClosed|finiteClosed|refin.*(alternat|[Cc]ech)|alternat.*refin",
+   "results": "The assigned module alone declares SignedClosedFamily, SignedClosedRow, and SignedClosedRefinementSystem. FiniteClosedRowConstructions provides terms and differential; FiniteClosedCoverResolution defines refinement matrices but its existence theorem assumes a cover. No match in WeilConjectures. Read Mathlib AlgebraicTopology/AlternatingFaceMapComplex and Algebra/Homology/TotalComplex; searched imported blueprint with blueprint_refs.py search \"signed closed\": zero matches.",
+   "date": "2026-10-26",
+   "verdict": "Reuse all existing finiteClosed definitions. Only relocate the existing data; split row existence from row refinement. Totalization is provided by Mathlib and proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedRestrictionSignedRefinements",
+  "date": "2026-10-26",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 2 and 4--7 of lem-sfb-closed-restriction-signed-refinements, the signed-refinement deduction below paragraph (3) of det-thm-sf-ctf-stability-direct-images; Stacks 01FG supplies the alternating ordered tuple calculation, not the combined closed-restriction assertion.",
+   "via": [
+    "lem-sfb-closed-restriction-signed-refinements",
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedRestrictionSignedRowMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedRestrictionSignedRowMaps.lean",
+  "declaration": "AlgebraicGeometry.signedClosedRow_maps",
+  "declarations": [
+   "AlgebraicGeometry.SignedClosedRowMaps",
+   "AlgebraicGeometry.signedClosedRow_maps"
+  ],
+  "statement": "theorem signedClosedRow_maps {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (row : ∀ F : SignedClosedFamily i, SignedClosedRow i F A) : Nonempty (SignedClosedRowMaps i A row)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0260",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T081218-L-1873471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0260",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T081218-L-1873471",
+  "kind": "interface",
+  "note": "independent cc review: the moved SignedClosedFamily/SignedClosedRow against the clone (identical bodies), SignedClosedRowMaps fields against SignedClosedRefinementSystem's row-level fields, finiteClosedRefinementMap's use of mixed against mixed_unit's domain, item node changes against the change record"
+ }
+}

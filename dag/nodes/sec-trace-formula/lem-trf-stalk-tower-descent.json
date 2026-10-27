@@ -1,0 +1,156 @@
+{
+ "id": "lem-trf-stalk-tower-descent",
+ "kind": "statement",
+ "title": "Normalized Roos descent of fixed strict stalk towers",
+ "statement": "Fix ell different from D.p, a coherent integral comparison system I, and already fixed strict data T satisfying [lem-trf-strict-stalk-towers]. There exists full data S extending exactly T, satisfying TrfStalkTowerDescentLaws and TrfStalkCompositorQuotientCompatible. The descent laws assert the strict-cone factor equations for comparison and reparametrization, the canonical two-coordinate section factor equation, integralNormalized, derived reparametrization and identity, and sectionsComposition for the specified entire-system compositor. They do not assert integralCompositor, integralIteration or integralPointUnit: those are derived in the parent by categorical algebra.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0F4F (lemma-point-functor): the combined-colimit identification behind the finite composition germ formula; agent extension to the entire-tower counit realization, original Steps 3, 6, 7; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-stalk-compositor-tower-data",
+  "lem-trf-strict-stalk-towers",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-bounded-quotient-stalk-realization"
+ ],
+ "proof": [
+  {
+   "text": "Exact finite stalks and coefficient restriction preserve levelwise quasi-isomorphisms; exact module products preserve them on both coordinates of the Roos cone. Thus stalk Roos realization inverts system quasi-isomorphisms.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the strict maps c and r and their diagonal cone maps. The localization comparison gives factors, comparisonFactors and reparamFactors; uniqueness descends the strict reparametrization and identity squares.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-trf-strict-stalk-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact point sections preserve the products in the normalized Roos bridge. Compose the bridge, the canonical scalarRoosMap and the cone map of e to obtain sections and sectionsFactors. The strict finiteSections equation gives sectionsComposition after descent.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-strict-stalk-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define integral as point sections of the specified pullback realization followed by sections. This proves integralNormalized by construction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For every simultaneous K-flat presentation, take finite stalks of kappa to construct the strict tower isomorphism z. Its germ formula, finiteUnit and sectionGerm identify the composite with every normalized eP. Substitute the pullback-model normalization and the section factor equation; functoriality of the diagonal cone gives precisely quotient compatibility. The common bounded truncation zigzag identifies this arrow without imposing bounded K-flat terms.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-bounded-quotient-stalk-realization",
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality for chain maps, inversion for quasi-isomorphisms and composition for roofs extend the equations to all derived arrows and representatives.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-trf-strict-stalk-towers",
+  "def-weil-finite-coefficient-point",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-bounded-quotient-stalk-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stacks Tags 0F4F, 05V1 and 0941; strict-diagram and localization argument for Local powers (b)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent strict pro etale stalk comparisons on quotient towers descend through Roos realization to derived natural isomorphisms",
+   "results": "8 hits, including SheafedSpace.IsOpenImmersion.stalk_iso and TopCat.Presheaf.stalkCongr; none is a strict quotient-system or Roos comparison",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.mapHomologicalComplex\"",
+   "results": "3 hits: NatIso.mapHomologicalComplex and its hom_app_f and inv_app_f equations",
+   "date": "2026-10-25",
+   "verdict": "generic degreewise construction only; does not supply transition-compatible stalk maps"
+  },
+  {
+   "tool": "grep",
+   "query": "proEtalePullbackStalkComparison|proEtaleStalkReparam",
+   "results": "0 Mathlib hits; repository search locates the finite comparisons in Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence",
+   "date": "2026-10-25",
+   "verdict": "use the existing finite comparison as a dependency"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TraceStalkCompositorTowerRealization",
+  "date": "2026-10-25",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers, input (b): canonical stalk identifications, natural in M and compatible with composition",
+   "via": [
+    "lem-trf-stalk-compositor-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TraceStalkTowerDescent",
+  "file": "lean/Sheaf/Paper/TraceStalkTowerDescent.lean",
+  "declaration": "WeilConjectures.trfStalkTowerDescent",
+  "statement": "theorem trfStalkTowerDescent (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (I : IntegralComparisonSystem.{u} l)\n    (hI : IntegralComparisonRealizationCoherence l E E (AlgHom.id ℚ_[l] E) I)\n    (T : TrfStrictStalkTowerData l E D) (hT : TrfStrictStalkTowerCoherent l E D T) :\n    ∃ S : TrfStalkCompositorTowerData l E D I,\n      S.toStrict l E = T ∧ TrfStalkTowerDescentLaws l E D I S ∧\n        TrfStalkCompositorQuotientCompatible l E D I S",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.TrfStalkTowerDescentLaws",
+   "WeilConjectures.trfStalkTowerDescent"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c681",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T095605-L-3451337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c681",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T095605-L-3451337",
+  "kind": "interface",
+  "note": "independent cc review: item proof and two new sorry statements (trfStrictStalkTowers, trfStalkTowerDescent) checked against lem-trf-stalk-compositor-tower-realization and the published IntegralComparisonPullbackModel normalization; moved data module diffed against the clone (only docstring tags differ); reader gate: SourceSectionStalkConeComparison compiled against the delivered modules"
+ }
+}

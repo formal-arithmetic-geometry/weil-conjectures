@@ -20,8 +20,74 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
   "place": "the coefficient systems, images, projection and completed/finite data set up before the comparison (the definitions of the lemma's module)"
  },
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Obtain the section-normalized module direct-image composition isomorphism from proEtaleRingDerivedPullbackComposition. Two such isomorphisms have equal components on every section, hence equal homs and are equal. This proves modulePushComposition_existsUnique without choosing unnormalized data.",
+   "uses": [
+    "def-sfb-proetale-composite-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For projectionComparisons_existsUnique, transpose unit tensor identity and the inverse canonical tensor comparison. Adjunction naturality and tensor naturality make these components a natural transformation. Componentwise invertibility is the retained openProjectionInverse_isIso theorem. Whisker its inverse by the proper pullback, compose with geometricPullComposition and the compactification equation, then curry to construct openProjection. Curry the canonical tensor comparison to construct tensorPullback. The displayed component normalizations are definitional, and extensionality proves uniqueness of both natural isomorphisms and of the resulting structure.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sp-intrinsic-open-projection-invertible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient_inverse_image_iso of SfCompleteDirectImageReduction has direct-image adjunct sfCompletedCoefficientMap by coefficient_direct_image_eq. Adjunction injectivity identifies its hom with completedPullMap and transfers invertibility. This only reuses the proved coefficient-normalization helpers, not the module main theorem.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For completedPull_comp, compare the two homs after each positive finite projection. Adjunction naturality and the defining finite-projection normalization of sfCompletedCoefficientMap give completedPull_projection. Apply it twice on the composite side, move the projection through proEtaleRingInverseImageComp by naturality, and use proEtaleConstantComparison_comp. Forget commutativity faithfully and use joint monicity of the RingCat limit projections.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-per-proetale-ring-inverse-image-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For completedChange_square, compare after every target finite projection. Replace both completed coefficient inclusions by their finite quotient maps using completedCoefficientMap_existsUnique. Replace both geometric pullback composites by completedPull_projection. Naturality of proEtaleConstantInverseImageMap in the quotient-ring inclusion identifies the remaining maps. Faithful forgetfulness and joint monicity of the RingCat limit projections prove the equality.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-per-proetale-ring-inverse-image-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For openRestrictionMap_isIso, present both actual extensions as coefficient equivalences followed by slice extension. Subterminality gives invertible units and full faithfulness. The proved RingedOpenScalar.comparison shows that restricting scalars preserves the essential image of slice extension. Transfer through the two presentation isomorphisms, so the counit for the R-extension at the scalar-restricted S-extension is invertible. Unfold the specified mate: it is extension of the scalar restriction of the S-unit, extension of the inverse pullback/restriction square, and this counit. Every factor is invertible. No compatibility between the two chosen coefficient equivalences is needed.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lemma-weil-pbc-projection-formula-open-piece",
+    "lem-cbc-ringed-open-scalar-adjunction",
+    "lem-sp-proetale-open-slice-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ and 0E8I: slice extension, scalar restriction and the adjunction unit/counit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-proetale-ring-inverse-image-comparisons",
+  "def-sfb-proetale-composite-coefficients",
+  "lem-cbc-ringed-open-scalar-adjunction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-sp-intrinsic-open-projection-invertible",
+  "lem-sp-proetale-open-slice-presentation",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-weil-pbc-projection-formula-open-piece"
+ ],
  "mathlib_match": null,
  "mathlib_searches": [],
  "created": {
@@ -52,30 +118,16 @@
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralCompactSupportCoefficientData",
-  "declaration": "WeilConjectures.PurCompactSupport.completed",
+  "declaration": "WeilConjectures.PurCompactSupport.ProjectionComparisons",
   "declarations": [
-   "WeilConjectures.PurCompactSupport.Change",
    "WeilConjectures.PurCompactSupport.ProjectionComparisons",
-   "WeilConjectures.PurCompactSupport.comparison",
-   "WeilConjectures.PurCompactSupport.completed",
    "WeilConjectures.PurCompactSupport.completedChange_square",
-   "WeilConjectures.PurCompactSupport.completedPullMap",
-   "WeilConjectures.PurCompactSupport.completedPullMap_isIso",
-   "WeilConjectures.PurCompactSupport.completedPull_comp",
-   "WeilConjectures.PurCompactSupport.finite",
    "WeilConjectures.PurCompactSupport.geometricPullComposition",
-   "WeilConjectures.PurCompactSupport.image",
    "WeilConjectures.PurCompactSupport.modulePushComposition_existsUnique",
    "WeilConjectures.PurCompactSupport.openProjectionIso",
-   "WeilConjectures.PurCompactSupport.openRestriction",
-   "WeilConjectures.PurCompactSupport.openRestrictionMap",
-   "WeilConjectures.PurCompactSupport.openRestrictionMap_isIso",
-   "WeilConjectures.PurCompactSupport.projection",
    "WeilConjectures.PurCompactSupport.projectionComparisons_existsUnique",
    "WeilConjectures.PurCompactSupport.projectionMap",
    "WeilConjectures.PurCompactSupport.projectionOpenFactor",
-   "WeilConjectures.PurCompactSupport.push",
-   "WeilConjectures.PurCompactSupport.restriction",
    "WeilConjectures.PurCompactSupport.tensorCurried"
   ],
   "file": "lean/Sheaf/Paper/IntegralCompactSupportCoefficientData.lean",
@@ -84,7 +136,7 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "C6: the six general open-adjunction definitions and the existing projection-invertibility theorem are reattached to def-sp-open-coefficient-adjunction-data and lem-sp-intrinsic-open-projection-invertible. Their Lean code is unchanged. All integral/completed coefficient data stays here.",
-  "statement": "def completed : Coefficients.{u}"
+  "statement": "structure ProjectionComparisons (R : Coefficients.{u})\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (a : ProEtaleTensorModel X (R.ring X)) (b : ProEtaleTensorModel c.Z (R.ring c.Z))\n    (d : ProEtaleTensorModel Y (R.ring Y))\n    (hc : R.pull (c.i ≫ c.g) = proEtaleRingCompositeCoefficients c.i c.g\n      (R.ring Y) (R.ring c.Z) (R.ring X) (R.pull c.g) (R.pull c.i))"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -94,15 +146,33 @@
   "result": "fix",
   "note": "Item module and node byte-identical to PASSed 5f0862896f26 (landing return was an unrelated PbcScalarExtension 60 s load timeout); re-checked hypotheses (p≠l, N=m+1≥j=n+1, separated finite-type X0, Over endomorphism h without properness, arbitrary alg. closed Omega, y≫h=y), iota = eqToIso(hy.symm)≪≫sfIntrinsicDerivedPullbackComp with node direction, sigma pinned componentwise (tau ≫ counit-compatible presentation iso ≫ S(mu_y)), final square r(iota_A)≫sigma_{H_A K}≫S_B(mu_h)=sigma_K≫iota_B; gates OK. New DerivedPullbackTensorHom options repair has no effect (back to back live 37.6/35.8 s vs delivered 37.0/35.0 s) and only adds landing risk on a 100+-importer module → FIX fixes/DerivedPullbackTensorHom.lean = current live text (record statement verbatim in it, all declarations present). Dep record def-weil-derived-pullback-tensor-hom note/by rewritten (same declarations; maintainer may --revert-nodes). IntegralCompactSupportCoefficientData line wraps accepted (live gives 2 longLine warnings). EtaleFiniteCoefficientHomArrow repair unchanged, accepted. nt_compile --json: delivery as is rc=0 clean (DPTH 45.0, ICSC 8.4, EFCHA 29.5, item 4.7 s); with fix rc=0 clean (36.4/8.0/27.9/5.3 s). Land at lower load."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-2bbfa",
-  "group": "C6",
+  "reviewer": "COMPILER",
+  "group": "P9",
   "result": "pass",
-  "landing": "20261021T154013-L-2748125",
+  "landing": "20261027T034724-L-3679198",
   "kind": "interface",
-  "note": "independent cc review: OpenScalarTensorData declarations diffed against clone item lines 34-323 (verbatim except blueprint tags); item statement identical; three new sorry lemmas read against their nodes and against the pinning in ScalarHomTensorComparison/ScalarHomModels/Projection.inverse_adjunct; item has 0 direct importers; DAG closure acyclic"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ and 0E8I; open scalar mate proved by essential image and the existing scalar/slice-extension comparison. Other proof steps retain the Y9 proofs."
  }
 }

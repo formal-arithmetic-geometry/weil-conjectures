@@ -90,7 +90,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -135,5 +146,28 @@
   "landing": "20261021T111327-L-74481",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X$ be a Noetherian scheme, $\\Lambda$ a finite commutative ring, and $F$ a constructible sheaf of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-sheaves]. There is a stratification of $X$, i.e. a finite partition $X=\\coprod_{i=1}^m S_i$ into locally closed subsets together with immersions of schemes $S_i\\hookrightarrow X$ with image $S_i$, such that every $S_i$ is irreducible (in particular nonempty) and each inverse image $F|_{S_i}$ is finite locally constant, i.e. locally constant with finite stalks.",
+  "proof": [
+   {
+    "text": "Start with the finite lisse partition supplied by constructibility. A part $S$\nis Noetherian, so [lem-weil-pbc-noetherian-finite-components] lists its\nirreducible components as $C_1,\\ldots,C_r$. Put\n\n$$\n S_i=C_i\\setminus\\bigcup_{j<i}C_j.\n$$",
+    "uses": [
+     "lem-weil-pbc-noetherian-finite-components"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Each $S_i$ is open in $C_i$, and contains its generic point: an irreducible\ncomponent is not contained in the union of the other finitely many\ncomponents. Thus $S_i$ is nonempty and irreducible. These sets are disjoint\nand cover $S$; they are locally closed in $S$, hence in $X$. Give them their\nreduced locally closed scheme structures. Restriction of an etale\ntrivialization shows that $F|_{S_i}$ is still locally constant with finite\nstalks. Performing this construction for the finitely many original parts\ngives the required partition.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

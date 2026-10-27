@@ -1,0 +1,121 @@
+{
+ "id": "lem-asd-presented-projective-line-trace-normalization",
+ "kind": "statement",
+ "title": "Coefficient normalization of the explicit presented projective-line trace",
+ "statement": "For a finite coefficient ring A, a proper projective-line presentation e:X ≅ P¹_Y over q:X → Y, N invertible on Y, and a normalized finite splitting d, there exists an automorphism a of the shifted finite Tate line on X. The composite Rq_!(a) followed by the explicit transported trace SfP1Transport.trace is equal to canonical proper coincidence followed by the prescribed presented trace and the canonical single-complex tensor-unit comparison. This is an equality of trace maps only; no adjunction or triangle is asserted. The definitions and interfaces used here are [lem-asd-derived-trace-adjustment] [def-sf-p1-integral-transport-data] [def-asd-presented-projective-line-trace-model].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "stmt_deps": [
+  "lem-asd-derived-trace-adjustment",
+  "def-sf-p1-integral-transport-data",
+  "def-asd-presented-projective-line-trace-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved explicit projective-line trace adjustment. It specializes the fully-faithful coefficient construction to the shifted Tate line and the actual geometric push-pull comparison. Thus it supplies an actual automorphism and an equality of the two explicit trace composites.",
+   "uses": [
+    "lem-asd-presented-projective-line-raw-trace-adjustment"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The monoidal unit comparison for the constant-sheaf functor is the identity, so its derived constant-complex comparison is the single-functor unit isomorphism. Fold the adjacent ordinary direct-image composition and cancellation maps using presentationTrace_assoc. Unfold the explicit trace formulas and traceComposite, identify their proof arguments by proof irrelevance, and substitute the unit identity. All resulting associativity and congruence proofs are checked by the kernel.",
+   "uses": [
+    "def-asd-presented-projective-line-trace-model",
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-presented-projective-line-raw-trace-adjustment",
+  "def-asd-presented-projective-line-trace-model",
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit. The coefficient-independent presentationTrace_assoc equation regroups the raw composite before structural congruence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparing projection formula counits using symmetry and proper pushforward",
+   "results": "Eight unrelated results on Noebeling, projection of measures and condensed comparisons; no specialized derived proper counit comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the project proper projection coherence and generic category theory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "Five generic constructor and counit/unit formulas for transport through a natural isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "Transport API is useful in the parent adjunction; it does not establish the required equality of actual trace maps."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_inv_naturality_left|projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar",
+   "results": "Mathlib provides generic braiding naturality. The local source library provides projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar.",
+   "date": "2026-10-26",
+   "verdict": "Use these existing generic coherence identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalize the transported projective line trace by an automorphism of its shifted Tate line coefficient",
+   "results": "Algebra.normalizedTrace.congr_simp; Algebra.normalizedTrace; Algebra.normalizedTrace_algebraMap_eq_id; Algebra.normalizedTrace_def; Algebra.normalizedTrace_self; Algebra.normalizedTrace_trans; Algebra.normalizedTrace_comp_algHom; Algebra.normalizedTrace_map",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceAdjunction",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Both diagonal triangle calculations and the actual inverse-projection counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectiveLineTraceNormalization",
+  "file": "lean/Sheaf/SixFunctors/ProjectiveLineTraceNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_presentedFiniteP1TraceNormalization",
+  "statement": "theorem exists_presentedFiniteP1TraceNormalization\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]\n    (e : X ≅ ProjectiveLine Y) (w : e.hom ≫ (ProjectiveLine Y ↘ Y) = q)\n    (hY : IsUnit (N : Γ(Y, ⊤))) (d : ArbitraryBaseFiniteP1Splitting A N hA t Y hY) :\n    ∃ a : (ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧ ≅\n        (ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧,\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q).map a.hom ≫\n          SfP1Transport.trace A N hA t q e w hY d.trace =\n        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) q).hom.app\n          ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧) ≫\n          presentedFiniteP1Trace A N hA t q e w hY d ≫\n          (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) Y).hom",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "independent cc review: item proof + presentationExchange sorry vs nodes lem-sf-p1-projection-trace-transport-true / lem-sf-p1-presentation-exchange; trace refactor vs change record sf-p1-trace-factorization and clone; forced adaptation ProjectiveLineTraceNormalization vs clone diff; all 11 direct importers compiled OK against the delivered set"
+ }
+}

@@ -1,0 +1,572 @@
+{
+ "id": "lem-sfb-free-graded-pd-odd-derivations",
+ "kind": "statement",
+ "title": "Odd derivations on free graded divided-power polynomial algebras",
+ "statement": "Let $S$ be a commutative ring and $P$ a nonnegative strictly graded commutative graded divided-power polynomial $S$-algebra, in the sense of the underlying graded algebra in [def-sfb-divided-power-dga], with a specified set $J_e$ of generators in each degree $e\\geq0$, finite for each $e$. No differential is given on $P$. Given elements $v_j\\in P_{e-1}$ for all generators $j\\in J_e$, with $v_j=0$ when $e=0$, there is a unique $S$-linear map $\\delta:P_i\\to P_{i-1}$ satisfying $\\delta(j)=v_j$, the signed rule $\\delta(xy)=\\delta(x)y+(-1)^{\\deg(x)}x\\delta(y)$ for homogeneous $x,y$, and $\\delta(\\gamma_n(x))=\\delta(x)\\gamma_{n-1}(x)$ for every positive even-degree homogeneous $x$ and $n\\geq1$. No condition $\\delta^2=0$ or $\\delta(v_j)=0$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PS (lemma-get-derivation), proof, first paragraph: the existence of a lift satisfying (1),(2), and the hint to proceed one variable at a time. This is the generatorwise odd-operator construction underlying that hint, without the square-zero constraint on a differential."
+ },
+ "stmt_deps": [
+  "def-sfb-divided-power-dga"
+ ],
+ "proof": [
+  {
+   "text": "Use the polynomial model in [def-sfb-divided-power-dga]: $P$ arises from $P_0=S[J_0]$ by successive adjunctions of sets of variables of one positive degree, in a sequence not necessarily ordered by degree. Fix an ordering of each finite $J_e$, $e>0$, and let $P'$ arise from $S[J_0]$ by adjoining the generators one at a time in these orders by increasing degree; by clauses (3),(4) of [lem-sfb-divided-power-variable-adjunction] this is the set adjunction degree by degree followed by the union. Iterating the free module decompositions of clauses (1)--(4), $P$ and $P'$ are free $S[J_0]$-modules on standard monomials: products of distinct generators, an odd generator with exponent $0$ or $1$, a positive even generator $T$ as $T^{[m]}$, $m\\geq0$, factors in the respective adjunction order. Send a standard monomial of $P'$ to the product in $P$ of the same factors and extend $S[J_0]$-linearly. Reordering factors changes only a sign, so this is a graded isomorphism $\\phi:P'\\to P$. It is multiplicative, since in both algebras products of standard monomials reduce by the same rules: strict graded commutativity, $T^2=0$ for odd $T$, and $T^{[a]}T^{[b]}=\\binom{a+b}{a}T^{[a+b]}$ with $T^{[a]}=\\gamma_a(T)$. So $\\phi$ fixes $S[J_0]$, every generator and every $T^{[a]}$. We construct the operator on $P'$ and transport it by $\\phi$; steps 5--6 use only these values and the divided powers of $P$ itself. Every element uses finitely many generators. The subalgebra of $P'$ on $J_0$ and the generators of degree below $e$ contains $P'_{e-1}$, as degrees are nonnegative, so $v_T$ (read in $P'$ via $\\phi$) is present when $T$ of degree $e$ is adjoined. Begin with the zero operator on $S[J_0]$.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof, omitted operator lift (1),(2), hint: proceed one variable at a time; explicit argument by the worker using Tags 09PH,09PI (example-adjoining-odd/even), 0F4I (remark-adjoining-set-of-variables), and 09PG (definition-divided-powers-graded)."
+   }
+  },
+  {
+   "text": "Suppose a degree $-1$ signed derivation $D_A$ has been constructed on the preceding subalgebra $A$. For the next generator $T$ of degree $e>0$, put $v=v_T\\in A_{e-1}$. Use the free left $A$-module description of [lem-sfb-divided-power-variable-adjunction] to define, for homogeneous $a\\in A_p$, $D(aT^{[m]})=D_A(a)T^{[m]}+(-1)^p avT^{[m-1]}$ for $m\\geq1$, and $D(a)=D_A(a)$. In odd degree only $m=1$ occurs and $T^{[1]}$ means $T$; in even degree all $m\\geq1$ occur. Extend $S$-linearly using the unique normal forms. Both terms have degree $p+me-1$, and $D(T)=v$. This constructs a linear operator independently of any Leibniz or square-zero assertion.",
+   "uses": [
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof, omitted operator lift (1),(2), hint: proceed one variable at a time; explicit argument by the worker using Tags 09PH,09PI (example-adjoining-odd/even), 0F4I (remark-adjoining-set-of-variables), and 09PG (definition-divided-powers-graded)."
+   }
+  },
+  {
+   "text": "For even $e$, verify the signed Leibniz rule on $aT^{[m]},bT^{[n]}$, where $a\\in A_p,b\\in A_q$. By [lem-sfb-divided-power-variable-adjunction] their product is $\\binom{m+n}{m}abT^{[m+n]}$. In differentiating, the $D_A(a),D_A(b)$ terms agree by the inductive Leibniz rule. Since $v$ has odd degree, move it past $b$ with sign $(-1)^q$, using [def-sfb-nonnegative-strict-graded-algebra]. The two remaining coefficients of $(-1)^{p+q}abvT^{[m+n-1]}$ on the Leibniz side are $\\binom{m+n-1}{m-1}$ and $\\binom{m+n-1}{m}$. Their sum is $\\binom{m+n}{m}$ by Pascal's integer identity. If $m=0$ or $n=0$, omit the corresponding derivative term; if both vanish this is exactly the rule in $A$. Bilinearity proves the rule on all homogeneous inputs.",
+   "uses": [
+    "lem-sfb-divided-power-variable-adjunction",
+    "def-sfb-nonnegative-strict-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof, omitted operator lift (1),(2), hint: proceed one variable at a time; explicit argument by the worker using Tags 09PH,09PI (example-adjoining-odd/even), 0F4I (remark-adjoining-set-of-variables), and 09PG (definition-divided-powers-graded)."
+   }
+  },
+  {
+   "text": "For odd $e$, $v$ is even and commutes with $A$ and $T$. Check the four products of module types $a,b$ and $aT,bT$. The first type is the rule in $A$. The mixed types follow by expansion of $D(aT)=D_A(a)T+(-1)^p av$ and $Tb=(-1)^q bT$; in particular $D(Tb)=bv+(-1)^qD_A(b)T=v b-TD_A(b)$, as required. For the product of two $T$ terms the product is zero. Its Leibniz expression has its two terms not containing $T^2$ equal to $(-1)^p abvT$ and $(-1)^{p+1}abvT$, whose sum is zero; the other terms contain $T^2=0$. Here $p=\\deg(a)$ and $q=\\deg(b)$. These are precisely the multiplication and strict sign rules of [lem-sfb-divided-power-variable-adjunction] and [def-sfb-nonnegative-strict-graded-algebra], so no division by $2$ is used.",
+   "uses": [
+    "lem-sfb-divided-power-variable-adjunction",
+    "def-sfb-nonnegative-strict-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof, omitted operator lift (1),(2), hint: proceed one variable at a time; explicit argument by the worker using Tags 09PH,09PI (example-adjoining-odd/even), 0F4I (remark-adjoining-set-of-variables), and 09PG (definition-divided-powers-graded)."
+   }
+  },
+  {
+   "text": "Repeat steps 2--4 on $P'$ using the fixed orders of step 1, and let $P'^{(e)}$ be the algebra after all generators of degrees at most $e$ have been adjoined. Every extension restricts to the preceding operator, so their values agree on overlaps. Clause (4) of [lem-sfb-divided-power-variable-adjunction] identifies $P'$ with the union of these completed degree stages; empty generator sets give identity inclusions. Define $\\delta'$ there by its agreeing restrictions. Any two homogeneous elements and their product occur in a single stage; hence $\\delta'$ is $S$-linear, of degree $-1$, and satisfies the signed Leibniz rule. Put $\\delta=\\phi\\delta'\\phi^{-1}$ on $P$. Since $\\phi$ is an isomorphism of graded algebras fixing every generator, $\\delta$ is $S$-linear of degree $-1$, satisfies the signed Leibniz rule and $\\delta(j)=v_j$. For a positive even generator $T$, [def-sfb-divided-power-dga] gives $\\gamma_m(T)=T^{[m]}=\\phi(T^{[m]})$ in $P$, so $\\delta(\\gamma_m(T))=v_TT^{[m-1]}=\\delta(T)\\gamma_{m-1}(T)$ for every $m\\geq1$ by the defining formula of step 2. All specified degree-zero generators have value zero.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof, omitted operator lift (1),(2), hint: proceed one variable at a time; explicit argument by the worker using Tags 09PH,09PI (example-adjoining-odd/even), 0F4I (remark-adjoining-set-of-variables), and 09PG (definition-divided-powers-graded)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pd-derivation-compatibility-closure] to $(P,\\delta)$ and write $C_\\delta$ for its compatibility locus. Each positive even generator belongs to $C_\\delta$ by step 5, so every $\\gamma_m(T)$ belongs to it by closure under iterated divided powers. Every positive even-degree monomial with no odd generators is an even multiple of one such $\\gamma_m(T)$ and therefore lies in $C_\\delta$. A monomial with odd generators has an even positive number of them; factor off one odd generator and write it as $uv$ with both factors homogeneous odd, so it lies in $C_\\delta$ by the odd-product clause. These monomials span $P_{\\mathrm{even},+}$ by the normal forms of [lem-sfb-divided-power-variable-adjunction]; coefficients in $P_0$ are even multipliers. Closure under sums and $0\\in C_\\delta$ prove $P_{\\mathrm{even},+}=C_\\delta$, which gives the required identity for every homogeneous positive even $x$.",
+   "uses": [
+    "lem-sfb-pd-derivation-compatibility-closure",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof, omitted operator lift (1),(2), hint: proceed one variable at a time; explicit argument by the worker using Tags 09PH,09PI (example-adjoining-odd/even), 0F4I (remark-adjoining-set-of-variables), and 09PG (definition-divided-powers-graded)."
+   }
+  },
+  {
+   "text": "For uniqueness, let $\\delta''$ be a competing operator and transport it to $P'$ by $\\phi$. It is zero on $P_0$, since it has degree $-1$. On an odd generator its value is prescribed, and on the divided powers $\\gamma_m(T)=T^{[m]}$ of a positive even generator its value is forced to be $v_TT^{[m-1]}$ by the required compatibility. The signed Leibniz rule then forces its value on $aT^{[m]}$ to be the formula in step 2, once its restriction to $A$ is fixed. Induct through the stages of $P'$ and use their union to obtain equality everywhere, using the unique module expressions in [lem-sfb-divided-power-variable-adjunction]. None of these equations involves $\\delta(v_T)$ or requires $\\delta^2=0$.",
+   "uses": [
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof, omitted operator lift (1),(2), hint: proceed one variable at a time; explicit argument by the worker using Tags 09PH,09PI (example-adjoining-odd/even), 0F4I (remark-adjoining-set-of-variables), and 09PG (definition-divided-powers-graded)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-divided-power-dga",
+  "lem-sfb-divided-power-variable-adjunction",
+  "def-sfb-nonnegative-strict-graded-algebra",
+  "lem-sfb-pd-derivation-compatibility-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tags 09PS,09PG,09PH,09PI,0F4I; fills the explicit omission in 09PS rather than claiming the source contains this argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "divided.?power.*derivation|derivation.*divided.?power|DividedPowerAlgebra.*[Dd]eriv",
+   "results": {
+    "t": "2026-10-23T23:38:28Z",
+    "tool": "grep",
+    "query": "divided.?power.*derivation|derivation.*divided.?power|DividedPowerAlgebra.*[Dd]eriv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.derivation_ext (Algebra/MvPolynomial/Derivation.lean:81) and mkDerivationEquiv (line 137) concern ordinary unsigned polynomial derivations. ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109) constructs algebra maps, not odd derivations. DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347) is an ordinary divided-power algebra map; the basis comment at lines 250-251 is not a theorem of the required mixed graded calculus. None supplies the mixed exterior/divided-power algebra with a degree -1 divided-power-compatible derivation over an arbitrary ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a degree minus one divided power compatible derivation from generators of a graded exterior divided power polynomial algebra",
+   "results": {
+    "t": "2026-10-23T23:38:28Z",
+    "tool": "leansearch",
+    "query": "Extend a degree minus one divided power compatible derivation from generators of a graded exterior divided power polynomial algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.derivation_ext",
+     "MvPolynomial.derivation_ext",
+     "Derivation.ext_of_adjoin_eq_top",
+     "Derivation.mk",
+     "ExteriorAlgebra.gradedAlgebra",
+     "MvPolynomial.derivation_ext_iff",
+     "Derivation.leibniz_pow",
+     "Polynomial.derivation_ext_iff"
+    ],
+    "digest": "d7a85eb34fd17295"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.derivation_ext (Algebra/MvPolynomial/Derivation.lean:81) and mkDerivationEquiv (line 137) concern ordinary unsigned polynomial derivations. ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109) constructs algebra maps, not odd derivations. DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347) is an ordinary divided-power algebra map; the basis comment at lines 250-251 is not a theorem of the required mixed graded calculus. None supplies the mixed exterior/divided-power algebra with a degree -1 divided-power-compatible derivation over an arbitrary ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowerAlgebra\", \"Derivation\"",
+   "results": {
+    "t": "2026-10-23T23:38:28Z",
+    "tool": "loogle",
+    "query": "\"DividedPowerAlgebra\", \"Derivation\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.derivation_ext (Algebra/MvPolynomial/Derivation.lean:81) and mkDerivationEquiv (line 137) concern ordinary unsigned polynomial derivations. ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109) constructs algebra maps, not odd derivations. DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347) is an ordinary divided-power algebra map; the basis comment at lines 250-251 is not a theorem of the required mixed graded calculus. None supplies the mixed exterior/divided-power algebra with a degree -1 divided-power-compatible derivation over an arbitrary ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degree minus one derivation on a free strictly graded commutative divided power polynomial algebra is uniquely specified by arbitrary images of its generators",
+   "results": {
+    "t": "2026-10-23T23:38:29Z",
+    "tool": "leanfinder",
+    "query": "A degree minus one derivation on a free strictly graded commutative divided power polynomial algebra is uniquely specified by arbitrary images of its generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPolynomial.derivation_ext",
+     "MvPolynomial.derivation_ext_iff",
+     "MvPolynomial.derivation_eq_of_forall_mem_vars",
+     "Polynomial.derivation_ext_iff",
+     "DividedPowers.RatAlgebra.dividedPowers_unique",
+     "MvPolynomial.mkDerivationEquiv",
+     "Polynomial.derivation_ext",
+     "MvPolynomial.mkDerivation"
+    ],
+    "digest": "d9e5521a874ddf71"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.derivation_ext (Algebra/MvPolynomial/Derivation.lean:81) and mkDerivationEquiv (line 137) concern ordinary unsigned polynomial derivations. ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109) constructs algebra maps, not odd derivations. DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347) is an ordinary divided-power algebra map; the basis comment at lines 250-251 is not a theorem of the required mixed graded calculus. None supplies the mixed exterior/divided-power algebra with a degree -1 divided-power-compatible derivation over an arbitrary ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior and divided power graded algebra free generators extend any odd derivation without imposing that its square vanishes",
+   "results": {
+    "t": "2026-10-23T23:38:30Z",
+    "tool": "leanfinder",
+    "query": "Exterior and divided power graded algebra free generators extend any odd derivation without imposing that its square vanishes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ExteriorAlgebra.GradedAlgebra.liftι",
+     "ExteriorAlgebra.gradedAlgebra",
+     "ExteriorAlgebra.GradedAlgebra.ι",
+     "ExteriorAlgebra.lift",
+     "ExteriorAlgebra.toTrivSqZeroExt",
+     "ExteriorAlgebra.GradedAlgebra.ι_sq_zero",
+     "ExteriorAlgebra.GradedAlgebra.ι_apply",
+     "ExteriorAlgebra.comp_ι_sq_zero"
+    ],
+    "digest": "328d0af8517b4c73"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.derivation_ext (Algebra/MvPolynomial/Derivation.lean:81) and mkDerivationEquiv (line 137) concern ordinary unsigned polynomial derivations. ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109) constructs algebra maps, not odd derivations. DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347) is an ordinary divided-power algebra map; the basis comment at lines 250-251 is not a theorem of the required mixed graded calculus. None supplies the mixed exterior/divided-power algebra with a degree -1 divided-power-compatible derivation over an arbitrary ring."
+  },
+  {
+   "tool": "grep",
+   "query": "basis|baseChange",
+   "results": {
+    "t": "2026-10-23T23:42:47Z",
+    "tool": "grep",
+    "query": "basis|baseChange",
+    "sub": "RingTheory/DividedPowerAlgebra",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowerAlgebra/Init.lean",
+     "Mathlib/RingTheory/DividedPowerAlgebra/Init.lean"
+    ],
+    "digest": "0730bae4716056c9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.derivation_ext (Algebra/MvPolynomial/Derivation.lean:81) and mkDerivationEquiv (line 137) concern ordinary unsigned polynomial derivations. ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109) constructs algebra maps, not odd derivations. DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347) is an ordinary divided-power algebra map; the basis comment at lines 250-251 is not a theorem of the required mixed graded calculus. None supplies the mixed exterior/divided-power algebra with a degree -1 divided-power-compatible derivation over an arbitrary ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free graded divided power polynomial algebra has a basis of exterior monomials and divided power monomials and commutes with change of coefficient ring",
+   "results": {
+    "t": "2026-10-23T23:42:48Z",
+    "tool": "leanfinder",
+    "query": "A free graded divided power polynomial algebra has a basis of exterior monomials and divided power monomials and commutes with change of coefficient ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "instFreeMvPolynomialKaehlerDifferential",
+     "Module.Basis.symmetricAlgebra",
+     "KaehlerDifferential.mvPolynomialBasis",
+     "MvPolynomial.instFree",
+     "exteriorPower.presentation_G",
+     "KaehlerDifferential.mvPolynomialBasis_apply",
+     "Algebra.Presentation.differentialsRelations_G"
+    ],
+    "digest": "3546c0b0e28ac591"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.derivation_ext (Algebra/MvPolynomial/Derivation.lean:81) and mkDerivationEquiv (line 137) concern ordinary unsigned polynomial derivations. ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109) constructs algebra maps, not odd derivations. DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347) is an ordinary divided-power algebra map; the basis comment at lines 250-251 is not a theorem of the required mixed graded calculus. None supplies the mixed exterior/divided-power algebra with a degree -1 divided-power-compatible derivation over an arbitrary ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend an odd degree minus one derivation compatible with divided powers from a graded algebra to one adjoined exterior or divided power variable with prescribed image",
+   "results": {
+    "t": "2026-10-24T00:09:37Z",
+    "tool": "leanfinder",
+    "query": "Extend an odd degree minus one derivation compatible with divided powers from a graded algebra to one adjoined exterior or divided power variable with prescribed image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "liftOfDerivationToSquareZero",
+     "derivationToSquareZeroOfLift",
+     "liftOfDerivationToSquareZero_apply",
+     "derivationToSquareZeroEquivLift_apply_coe_apply",
+     "derivationToSquareZeroEquivLift",
+     "Derivation.liftKaehlerDifferential_comp_D",
+     "liftOfDerivationToSquareZero_mk_apply'",
+     "Derivation.liftOfRightInverse"
+    ],
+    "digest": "73e3f7aee345d89e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "divided.?power.*derivation|derivation.*divided.?power|graded.*derivation",
+   "results": {
+    "t": "2026-10-24T00:10:40Z",
+    "tool": "grep",
+    "query": "divided.?power.*derivation|derivation.*divided.?power|graded.*derivation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An odd derivation of a strictly graded commutative algebra compatible with divided powers on two even elements remains compatible on their sum, even scalar multiples and iterated divided powers",
+   "results": {
+    "t": "2026-10-24T00:10:40Z",
+    "tool": "leansearch",
+    "query": "An odd derivation of a strictly graded commutative algebra compatible with divided powers on two even elements remains compatible on their sum, even scalar multiples and iterated divided powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Derivation.instIsScalarTower",
+     "Derivation.map_add",
+     "Derivation.instAddMonoidHomClass",
+     "DividedPowers.dpow_add'",
+     "DividedPowers.dpow_add",
+     "Derivation.coe_add",
+     "Derivation.instAddCommGroup",
+     "Derivation.add_apply"
+    ],
+    "digest": "571c84fe3b576470"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\", \"Derivation\"",
+   "results": {
+    "t": "2026-10-24T00:10:40Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\", \"Derivation\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "dpow_(add|mul|comp)|derivation_ext|mkDerivationEquiv",
+   "results": {
+    "t": "2026-10-24T00:11:44Z",
+    "tool": "grep",
+    "query": "dpow_(add|mul|comp)|derivation_ext|mkDerivationEquiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/WittVector/Compare.lean",
+     "Mathlib/RingTheory/WittVector/Compare.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/Padic.lean"
+    ],
+    "digest": "45296c81e84edda9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided power compatible odd derivation identities are closed under sums, multiplication by even elements and iterated divided powers; they hold on products of odd elements",
+   "results": {
+    "t": "2026-10-24T00:11:45Z",
+    "tool": "leanfinder",
+    "query": "Divided power compatible odd derivation identities are closed under sums, multiplication by even elements and iterated divided powers; they hold on products of odd elements",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_add",
+     "DividedPowers.dpow_add'",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.dpow_sum",
+     "DividedPowers.mul_dpow",
+     "DividedPowers.dpow_mul_right",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.exp_add"
+    ],
+    "digest": "785dc8ab0e57dcc7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free exterior and divided power graded algebra admits a unique signed derivation with any assigned homogeneous images of its generators",
+   "results": {
+    "t": "2026-10-24T00:11:46Z",
+    "tool": "leanfinder",
+    "query": "A free exterior and divided power graded algebra admits a unique signed derivation with any assigned homogeneous images of its generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ExteriorAlgebra.gradedAlgebra",
+     "ExteriorAlgebra.GradedAlgebra.liftι",
+     "ExteriorAlgebra.GradedAlgebra.ι",
+     "ExteriorAlgebra.lift_unique",
+     "ExteriorAlgebra.GradedAlgebra.liftι_eq",
+     "ExteriorAlgebra.GradedAlgebra.ι_apply",
+     "ExteriorAlgebra",
+     "ExteriorAlgebra.lift"
+    ],
+    "digest": "baee4d33475b7387"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "derivation|graded|odd",
+   "results": {
+    "t": "2026-10-24T00:13:12Z",
+    "tool": "grep",
+    "query": "derivation|graded|odd",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers.dpow_comp\"",
+   "results": {
+    "t": "2026-10-24T00:13:13Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers.dpow_comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_comp",
+     "DividedPowers.dpow_comp_from_gens"
+    ],
+    "digest": "ba60bc7a045805da"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a strictly graded commutative divided power algebra an odd derivation compatible with divided powers on x is compatible on a times x and on divided powers of x, and automatically on products of two odd elements",
+   "results": {
+    "t": "2026-10-24T00:13:15Z",
+    "tool": "leanfinder",
+    "query": "In a strictly graded commutative divided power algebra an odd derivation compatible with divided powers on x is compatible on a times x and on divided powers of x, and automatically on products of two odd elements",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_mul",
+     "CliffordAlgebra.odd_induction",
+     "DividedPowers.OfInvertibleFactorial.dpow_mul",
+     "Algebra.Generators.H1Cotangent.δAux_mul",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.mul_dpow",
+     "DividedPowers.dpow_mul_right",
+     "DividedPowers.dpow_smul_right"
+    ],
+    "digest": "410e73a2f0ea767e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary unsigned Derivation, exterior algebra maps, or the divided-power axioms separately. Read MvPolynomial.derivation_ext and mkDerivationEquiv (Algebra/MvPolynomial/Derivation.lean:81,137), ExteriorAlgebra.lift (LinearAlgebra/ExteriorAlgebra/Basic.lean:109), DividedPowerAlgebra.lift (RingTheory/DividedPowerAlgebra/Init.lean:347), and DividedPowers (RingTheory/DividedPowers/Basic.lean:78-96). None extends an odd signed derivation on the mixed graded algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-zero-dga-curvature",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Latest blueprint proof paragraph (3), ordinary direct-image branch and its etale-chart comparison, through the existing local complete-intersection comparison chain to Stacks 09PS (lemma-get-derivation), proof: lift the operator satisfying (1),(2), proceeding one variable at a time. This node supplies the omitted odd-operator extension without a square-zero condition.",
+   "via": [
+    "lem-sfb-square-zero-dga-curvature",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-free-graded-pd-odd-derivations",
+  "worker": "stage1",
+  "summary": "Kept the statement and the retained seven-step normal-form construction. Revalidated every proof citation against the current DAG after the return concerning lem-sfb-divided-power-variable-adjunction. Steps 1 and 5 now explicitly use its divided-power-preserving comparisons for fixed finite orderings and its union of completed degree stages. Refreshed the quotation for step 1 and documented the hypothesis and citation audit; retained the existing smaller compatibility-locus node and actual search log.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), the existing local-complete-intersection support chain below the direct-image etale-chart comparison. Locally this supplies precisely the omitted generatorwise operator-lift argument in Stacks 09PS, proof (1),(2), without imposing a differential. The chapter/unit route is retained; this is not a unit key node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-93cd2f28d",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-93cd2f28d (reviewer sub-agent of L); spot-checked: Read in full: the item's 7 steps, the new node lem-sfb-pd-derivation-compatibility-closure, all cited statements (def-sfb-divided-power-dga, lem-sfb-divided-power-variable-adjunction (1)-(4), def-sfb-nonnegative-strict-graded-algebra, def-sfb-graded-divided-power-structure; their hashes match the report and are identical on live and side-live) and Stacks dpa.tex 09PG/09PH/09PI/0F4I/09PS (proof says 'omit the details'). Live item is still unsplit with the same statement and there is no repair note. One gap, fixed: def-sfb-divided-power-dga lets the adjunctions come in any order, not only by increasing degree (e.g. degree 3 before degree 2). Step 1 silently re-adjoined the generators by increasing degree, but clause (3) only reorders variables of one degree. Fix: step 1 now builds the increasing-degree adjunction P' and an explicit graded isomorphism phi: P' -> P. Both algebras are free S[J_0]-modules on standard monomials, and products reduce by the same rules (strict signs, T^2=0, T^[a]T^[b]=binom(a+b,a)T^[a+b] with T^[a]=gamma_a(T)). Steps 5 and 7 build and compare the operator on P' and transport it by phi, so compatibility of phi with all divided powers is never needed. def-sfb-divided-power-dga is added to step 5's uses (already in proof_deps). Redid steps 3 and 4 by hand: Pascal identity, all four odd types, the (-1)^p/(-1)^{p+1} cancellation, characteristic 2. New node is true, checked clause by clause: sum reindexing, a^n with x gamma_{n-1}(x)=n gamma_n(x), B(n,m)=B(n-1,m)C(nm-1,m-1), odd product via 09PG(5) and v^2=u^2=0. It is statement-only, self-contained, has three search kinds, is not a duplicate (rg -L found none) and does not restate an item clause. Same unit, no tool_uses, no SGA. from.node null is an inherited ancestor-tool fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FreeGradedPDOddDerivations",
+  "declaration": "GradedAlgebra.existsUnique_freeGradedPDOddDerivation",
+  "file": "lean/Sheaf/RingTheory/FreeGradedPDOddDerivations.lean",
+  "statement": "theorem existsUnique_freeGradedPDOddDerivation {S : Type u} {P : Type v} [CommRing S] [Ring P] [Algebra S P] (𝒜 : ℕ → Submodule S P) [GradedAlgebra 𝒜] [IsStrictlyGradedCommutative 𝒜] (γ : GradedDividedPowers 𝒜) (J : ℕ → Type w) [∀ e : ℕ, Finite (J e)] (generator : ∀ e : ℕ, J e → P) (hpolynomial : Nonempty (γ.PolynomialPresentation J generator)) (values : ∀ e : ℕ, J e → integerComponent 𝒜 ((e : ℤ) - 1)) : ∃! δ : P →ₗ[S] P, (∀ (i : ℕ) (x : P), x ∈ 𝒜 i → δ x ∈ integerComponent 𝒜 ((i : ℤ) - 1)) ∧ (∀ (e : ℕ) (j : J e), δ (generator e j) = (values e j : P)) ∧ (∀ (i j : ℕ) (x y : P), x ∈ 𝒜 i → y ∈ 𝒜 j → δ (x * y) = δ x * y + (-1 : P) ^ i * (x * δ y)) ∧ (∀ (i n : ℕ) (x : evenSubalgebra 𝒜), 0 < i → 0 < n → (x : P) ∈ 𝒜 (2 * i) → δ (γ.dpow n x : P) = δ (x : P) * (γ.dpow (n - 1) x : P))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c6a851ec",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Item Lean statement matches node clause by clause: CommRing S, strictly graded P with recorded GradedDividedPowers, per-degree Finite J, specified generators via Nonempty PolynomialPresentation, values in integerComponent (e-1) (⊥ at e=0 gives v_j=0), ∃! S-linear δ with degree -1, generator values, signed Leibniz (-1)^i, PD compatibility for homogeneous positive-even x and n>0; no δ², no δ(v_j). Faithful to Stacks 09PS proof (lift satisfying (1),(2), one variable at a time, d² not required). §1(B) repair of def-sfb-divided-power-dga is a pure append of GradedDividedPowers.PolynomialPresentation (base MvPolynomial (J 0) iso in degree 0, arbitrary-degree SetPresentation steps, SetNormalized, UnionPresentation into P, Preserves γ, bijective positive labels, generator equations): real data, recorded API, independent universes, lean.note present, only lean changed; no name clash, live file is an unchanged prefix. Item node only lean changed, statement verbatim. Maths checked (Pascal identity, odd T²=0 cancellation without 1/2, reordering for v_T, closure lemma step 6, uniqueness needs PD clause). Edge cases: empty J, degree-0 only, zero ring, char 2, n=1. Docstrings/proof steps/sorry-only/report sections OK. Advisory: undocumented structure fields; proof-dep import unused by the statement. No compile (no file changed)."
+ }
+}

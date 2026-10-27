@@ -1,0 +1,151 @@
+{
+ "id": "lem-zl-component-pullback-flat",
+ "kind": "statement",
+ "title": "Component inverse image preserves ordinary flat internal modules",
+ "statement": "Let Λ be a commutative condensed ring [sk-def-sfb-condensed-ring] and T a w-contractible affine scheme [sk-def-pe-wlocal]. Use the actual relative-test inverse image G and internal module functor componentModules of [def-zl-condensed-lisse-evaluation-model]. Assume continuity of componentTests, a braided structure on G, and preservation by G of finite limits and finite colimits. For every coefficient ring-object isomorphism α:G(Λ on π₀(T)) ≅ Λ_T, the ordinary module functor componentModules Λ T α sends each flat internal module to a flat internal module. Flatness means that tensoring on either side preserves finite limits; no complexes, derived tensors, or derived braidings occur in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD, lemma-pullback-flat, especially the finite-relation factorization argument; Hemo--Richarz--Scholbach Construction (4.1) specifies the relative-test inverse image."
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "sk-def-pe-wlocal",
+  "sk-def-sfb-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "The relative-test construction preserves finite limits. Its opposite comma categories are filtered, so left Kan extension followed by sheafification gives a left exact inverse image on sets, with right adjoint precomposition. The abelian inverse image used in componentInverse is its lift to the algebraic operations. Use the same relative-test and Kan construction as in [lem-zl-condensed-component-inverse-image], applied to sets.",
+   "uses": [
+    "lem-zl-condensed-component-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD, lemma-pullback-flat, especially the finite-relation factorization argument; Hemo--Richarz--Scholbach Construction (4.1) specifies the relative-test inverse image."
+   }
+  },
+  {
+   "text": "Use the section-ring sheaf and section-module equivalence for each coefficient ring object. The inverse-image comparison of [lem-sfb-internal-module-inverse-image-comparison] identifies the inverse image of the ring operations and of the module action with the algebraic inverse image on sections. Compare the lifted adjunctions to precomposition and the universal bilinear pairing to obtain the identification with the monoidal module lift in componentModules. The comparison is over the induced ring-sheaf isomorphism.",
+   "uses": [
+    "lem-sfb-internal-module-inverse-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD, lemma-pullback-flat, especially the finite-relation factorization argument; Hemo--Richarz--Scholbach Construction (4.1) specifies the relative-test inverse image."
+   }
+  },
+  {
+   "text": "Internal flatness of M is equivalent to site-flatness of its section module by [lem-c2-internal-section-module-flatness]. Apply [lem-weil-pbc-flat-algebraic-inverse-image-universes] to the set inverse image of Step 1 and the algebraic module lift of Step 2. Its finite-relation proof lifts the finitely many coefficients and sections locally to the left Kan extension, makes their relation zero after a further covering, and uses filteredness to represent them and their relation at one source object. Flatness there supplies a local finite factorization killing the relation. Pulling that cover and its factorization back verifies the local equational criterion in the inverse image.",
+   "uses": [
+    "lem-c2-internal-section-module-flatness",
+    "lem-weil-pbc-flat-algebraic-inverse-image-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD, lemma-pullback-flat, especially the finite-relation factorization argument; Hemo--Richarz--Scholbach Construction (4.1) specifies the relative-test inverse image."
+   }
+  },
+  {
+   "text": "The coefficient ring-object isomorphism α induces a section-ring isomorphism. A finite relation over either ring transports to a finite relation over the other, and the inverse ring map transports any factorization back. Thus restriction along α inverse preserves site-flatness. Transfer through the natural comparison from Step 2 and the reverse implication of [lem-c2-internal-section-module-flatness] to conclude internal flatness of componentModules(M). The proof includes zero coefficients, empty finite relations, the zero ring, and the empty affine scheme.",
+   "uses": [
+    "lem-c2-internal-section-module-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD, lemma-pullback-flat, especially the finite-relation factorization argument; Hemo--Richarz--Scholbach Construction (4.1) specifies the relative-test inverse image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-condensed-component-inverse-image",
+  "lem-sfb-internal-module-inverse-image-comparison",
+  "lem-c2-internal-section-module-flatness",
+  "lem-weil-pbc-flat-algebraic-inverse-image-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD, lemma-pullback-flat. J9 specializes its algebraic inverse-image and local-equational-criterion argument to the component test functor and the internal/sectionwise module equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pullback of a flat sheaf of modules along a morphism of ringed topoi is flat",
+   "results": "SheafOfModules.pullback, pullbackObjFreeIso, and the pullback adjunction; no flatness-preservation declaration.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem for the internal-module component inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image functor on sheaves of modules preserves flat objects",
+   "results": "Module.Flat.of_shrink, flatness of a type-valued functor, representably flat sheaf pullback preserving finite limits, and ModuleCat.preservesFiniteLimits_extendScalars_of_flat.",
+   "date": "2026-10-25",
+   "verdict": "No match. Reuse the existing project algebraic inverse-image flatness and internal-section flatness comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFlat|isFlat.*pullback|flat.*inverseImage (CategoryTheory)",
+   "results": "No matching Mathlib declaration returned by msearch grep. Repository search finds the scheme-specific inverseImageModule_preservesFlat, which does not apply to the component site functor.",
+   "date": "2026-10-25",
+   "verdict": "The component flatness statement is new; the scheme-specific theorem supplies a template but is not a specialization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentDerivedSymmetry",
+  "date": "2026-10-25",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Construction (4.1), Proposition 4.3(3), Remark 3.2; substep: Derived symmetry of component module pullback; ordinary flat-module preservation before passage to K-flat complexes",
+   "via": [
+    "lem-zl-component-derived-symmetry",
+    "lem-zl-condensed-component-pullback-compatibility",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentPullbackFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentPullbackFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_pullback_preservesFlat",
+  "statement": "theorem component_pullback_preservesFlat\n    (α : (componentInverse T).mapMon.obj\n      (Mon.mk (profiniteCoefficient Λ.X (affineComponentSpace T))) ≅\n      Mon.mk (condensedRingObj Λ.X T)) :\n    (componentModules Λ.X T α).PreservesFlat",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T123206-L-1841301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T123206-L-1841301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

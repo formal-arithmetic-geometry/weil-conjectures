@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-pointed-etale-henselization-isomorphism",
+ "kind": "statement",
+ "title": "Pointed etale maps identify ordinary henselizations and their quotients",
+ "statement": "Let $\\varphi:A\\to C$ be an etale homomorphism of commutative rings, let $\\mathfrak q\\subset C$ be prime with preimage $\\mathfrak p\\subset A$, and suppose the induced residue map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ is an isomorphism. For each of the local rings $R=A_{\\mathfrak p}$ and $T=C_{\\mathfrak q}$ an ordinary henselization exists. The pair henselization of $(R,\\mathfrak m_R)$ is a henselian local ring $R^h$ with maximal ideal $\\mathfrak m_RR^h$, unchanged residue field, and the universal property for local maps to henselian local rings; the same holds for $T$. For any such choices, the canonical local map\n$$\\alpha:R^h\\longrightarrow T^h$$\nextending $R\\to T\\to T^h$ is an isomorphism. Its inverse is characterized by extending the unique pointed $A$-algebra map $C\\to R^h$ inducing the inverse of the given residue-field isomorphism. For every ideal $I\\subseteq\\mathfrak p$, $\\alpha$ identifies $IR^h$ with $IC\\,T^h$ and induces an isomorphism\n$$R^h/IR^h\\xrightarrow{\\sim}T^h/IC\\,T^h$$\ncommuting with the structure maps from $A/I$ and $C/IC$. These quotients are ordinary henselizations of $(A/I)_{\\mathfrak p/I}$ and $(C/IC)_{\\mathfrak q/IC}$ respectively. Here an ordinary henselization is specified by the initial local map to a henselian local ring [def-weil-pbc-henselization-at-prime]; pair henselization is the etale pair-colimit construction of [lem-weil-pbc-pair-henselization], henselian terminology is [def-weil-pbc-henselian-terminology], and etaleness, localization and residue fields are as in [def-weil-etale-morphism], [def-weil-pbc-localization-at-prime], [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent universal-property consequence of Tags 08HQ, lemma-map-into-henselian; 04GQ, definition-henselization; 05WQ, lemma-quotient-henselization; more-algebra.tex Tag 0A02, lemma-henselization. Retains old item Step 6: pair existence and locality, pointed lift, inverse by uniqueness, and quotient compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "lem-weil-pbc-pair-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-pair-henselization] to $(R,\\mathfrak m_R)$ and $(T,\\mathfrak m_T)$; for their pair-colimits $H_R,H_T$, [lem-trf-prime-pair-colimit-ind-etale-model] (for $A,\\mathfrak p$ and for $C,\\mathfrak q$) shows that each is a filtered colimit of etale algebras over the base ring, henselian local with maximal ideal $\\mathfrak m_RH_R$, resp. $\\mathfrak m_TH_T$, with local structure map and structural residue-field isomorphism. Ordinary universal property of $H_R$: given a henselian local $S$ and a local map $g:R\\to S$, apply [lem-weil-pbc-map-into-henselian-colimit] over the base $R$ to the filtered etale colimit $H_R$, its prime $\\mathfrak m_RH_R$ (lying over $\\mathfrak m_R=g^{-1}(\\mathfrak m_S)$), and the unique $\\kappa(\\mathfrak m_R)$-map $H_R/\\mathfrak m_RH_R\\cong\\kappa(\\mathfrak m_R)\\to S/\\mathfrak m_S$. Every local $R$-map $H_R\\to S$ has that maximal-ideal preimage and induces that residue map, so uniqueness among local maps follows; likewise for $H_T$. Hence ordinary henselizations exist, and this proves the assertions about the pair constructions. For any other ordinary henselization $R^h$, [lem-trf-initial-henselian-colimit-comparison] (with $C=H_R$, $H=R^h$) gives unique mutually inverse local $R$-maps $H_R\\rightleftarrows R^h$; the same applies to $T^h$. An isomorphism carries the unique maximal ideal to the unique maximal ideal and commutes with the base-ring maps; hence these arbitrary choices have the same maximal-ideal and structural residue-field descriptions.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-trf-prime-pair-colimit-ind-etale-model",
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "lem-trf-initial-henselian-colimit-comparison",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A02 (lemma-henselization), 0A03 (lemma-henselization-local-ring); transfer to arbitrary initial choices by uniqueness"
+   }
+  },
+  {
+   "text": "Write $i:R\\to R^h$ and $j:T\\to T^h$ for the structure maps. The map $r:R\\to T$ sends $a/s$ to $\\varphi(a)/\\varphi(s)$; denominators are outside $\\mathfrak q$, and the maximal-ideal preimage is $\\mathfrak pR$, so $r$ is local. Initiality gives a unique local $\\alpha:R^h\\to T^h$ with $\\alpha i=jr$. Identify the residue field of $R^h$ with $\\kappa(\\mathfrak p)$ using step 1. Apply [lem-weil-pbc-map-into-henselian-colimit] to the single etale $A$-algebra $C$, the henselian local target $R^h$, the prime $\\mathfrak q$ and the inverse $\\kappa(\\mathfrak q)\\to\\kappa(\\mathfrak p)$ of the given residue isomorphism. Its compatibility over $\\kappa(\\mathfrak p)$ is exactly the inverse identity. We obtain a unique pointed $A$-map $f:C\\to R^h$ with $f^{-1}(\\mathfrak m_{R^h})=\\mathfrak q$. Every $c\\notin\\mathfrak q$ maps to a unit, so $b(c/s)=f(c)f(s)^{-1}$ defines a unique local map $b:T\\to R^h$. Its restriction to $R$ is $i$, since both send $a/s$ to $i(a)i(s)^{-1}$. Initiality for $T^h$ now gives a unique local $\\beta:T^h\\to R^h$ with $\\beta j=b$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-henselization-at-prime",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HQ (lemma-map-into-henselian); localization at the specified prime and initial local-map universal properties"
+   }
+  },
+  {
+   "text": "The composite $\\beta\\alpha$ is a local $R$-map on $R^h$, since $\\beta\\alpha i=\\beta jr=br=i$; initiality gives $\\beta\\alpha=1$. For the other composite, compare the two $A$-maps $C\\to T^h$ given by the structural map $C\\to T\\xrightarrow{j}T^h$ and $\\alpha f$. The residue map of $\\alpha$ is the given $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$: reduce $\\alpha i=jr$ modulo maximal ideals and use the structural residue isomorphisms of step 1. Thus both maps have maximal-ideal preimage $\\mathfrak q$ and induce the identity of $\\kappa(\\mathfrak q)$ into the residue field of $T^h$. Uniqueness in [lem-weil-pbc-map-into-henselian-colimit] makes them equal. On fractions this equality gives $\\alpha b=j$, hence $\\alpha\\beta j=j$. Initiality for $T^h$ gives $\\alpha\\beta=1$. Therefore $\\alpha$ is the required isomorphism with inverse $\\beta$, and $\\beta j|_C=f$ is precisely its stated characterization.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HQ (lemma-map-into-henselian), uniqueness; agent inverse-composite argument"
+   }
+  },
+  {
+   "text": "For $a\\in I$, the equality $\\alpha i=jr$ gives $\\alpha(i(a))=j(\\varphi(a))$. Since $\\alpha$ is surjective, it sends all finite sums $\\sum i(a_\\nu)x_\\nu$ onto all sums $\\sum j(\\varphi(a_\\nu))y_\\nu$, so $\\alpha(IR^h)=IC\\,T^h$. Thus $[x]\\mapsto[\\alpha(x)]$ and $[y]\\mapsto[\\beta(y)]$ are well-defined mutually inverse quotient ring maps. On $A/I$ they agree with the structure maps by $\\alpha i=jr$; on $C/IC$ they agree because $\\alpha f$ is the structural map $C\\to T^h$ from step 3. Here the $C/IC$-structure on $R^h/IR^h$ is the one induced by $f$, the pointed map specified in the statement. This explicitly proves both claimed compatibilities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal-extension and quotient computation from steps 2-3"
+   }
+  },
+  {
+   "text": "The extended ideals $IR\\subseteq\\mathfrak m_R$ and $(IC)T\\subseteq\\mathfrak m_T$ satisfy the hypotheses of [lem-trf-henselization-quotient-at-prime]. It identifies $R^h/IR^h$ and $T^h/IC\\,T^h$ as ordinary henselizations of $R/IR$ and $T/(IC)T$. Finally $R/IR\\cong(A/I)_{\\mathfrak p/I}$ by $[a/s]\\mapsto\\bar a/\\bar s$, with inverse $\\bar a/\\bar s\\mapsto[a/s]$, and identically $T/(IC)T\\cong(C/IC)_{\\mathfrak q/IC}$. These fraction formulas are well-defined by the localization equality relation and quotient equality, are inverse, and commute with the quotient base maps. They preserve maximal ideals, since a numerator lies in the corresponding prime exactly when its fraction does. Precomposing an initial local map with either local isomorphism preserves its universal property (compose any test local map with the inverse). This proves the final henselization claims under the stated base identifications.",
+   "uses": [
+    "lem-trf-henselization-quotient-at-prime",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WQ (lemma-quotient-henselization); explicit localization/quotient comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-trf-prime-pair-colimit-ind-etale-model",
+  "lem-trf-initial-henselian-colimit-comparison",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-trf-henselization-quotient-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 08HQ (lemma-map-into-henselian), 04GQ (definition-henselization), 05WQ (lemma-quotient-henselization); more-algebra.tex Tags 0A02 and 0A03 (0A03 via the trace-formula nodes lem-trf-prime-pair-colimit-ind-etale-model and lem-trf-initial-henselian-colimit-comparison; the dropped perverse-route 0A03 node is not cited). Explicit inverse-composite and quotient arguments assembled from existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-pointed-etale-henselization-isomorphism: an etale map with identical residue field induces an isomorphism of ordinary local henselizations compatible with quotients",
+   "results": "{\"t\": \"2026-10-23T12:11:23Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-pointed-etale-henselization-isomorphism: an etale map with identical residue field induces an isomorphism of ordinary local henselizations compatible with quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"RingHom.Etale.respectsIso\", \"Algebra.IsEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.homEquiv\"], \"digest\": \"7e4c4e07c14f47ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "henseli[sz].*(equiv|[eé]tale)|[eé]tale.*henseli[sz]",
+   "results": "{\"t\": \"2026-10-23T12:12:39Z\", \"tool\": \"grep\", \"query\": \"henseli[sz].*(equiv|[eé]tale)|[eé]tale.*henseli[sz]\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Henselization\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T12:12:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Henselization\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-pointed-etale-henselization-isomorphism: canonical map between henselizations of local rings of an etale neighbourhood with equal residue fields is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T12:13:30Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-pointed-etale-henselization-isomorphism: canonical map between henselizations of local rings of an etale neighbourhood with equal residue fields is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc\", \"RingHom.Etale\", \"AlgebraicGeometry.Scheme.residueFieldCongr\", \"HenselianLocalRing.TFAE\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"HenselianLocalRing.toIsLocalRing\", \"RingHom.FormallyEtale\"], \"digest\": \"d4401d1efdc3ab03\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "henseli[sz]ation|henseli[sz]ation.*[Ee]quiv",
+   "results": "{\"t\": \"2026-10-23T12:58:39Z\", \"tool\": \"grep\", \"query\": \"henseli[sz]ation|henseli[sz]ation.*[Ee]quiv\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field congruences, simple-root criteria, standard etale presentations and invariance of etaleness under ring isomorphism do not construct or compare ordinary henselizations; Mathlib RingTheory grep finds no henselization declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local rings of a pointed etale neighbourhood with identical residue fields have canonically isomorphic henselizations",
+   "results": "{\"t\": \"2026-10-23T12:58:39Z\", \"tool\": \"leansearch\", \"query\": \"Local rings of a pointed etale neighbourhood with identical residue fields have canonically isomorphic henselizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc\", \"HenselianLocalRing.toIsLocalRing\", \"IsLocalRing.instCommRingResidueField\", \"IsLocalRing.ResidueField.mapEquiv\", \"HenselianLocalRing.is_henselian\", \"AlgebraicGeometry.Scheme.residueFieldCongr\", \"IsLocalRing.ResidueField.map.congr_simp\", \"HenselianLocalRing.TFAE\"], \"digest\": \"545b20988e8fb53b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field congruences, simple-root criteria, standard etale presentations and invariance of etaleness under ring isomorphism do not construct or compare ordinary henselizations; Mathlib RingTheory grep finds no henselization declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Henselization\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T12:58:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Henselization\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field congruences, simple-root criteria, standard etale presentations and invariance of etaleness under ring isomorphism do not construct or compare ordinary henselizations; Mathlib RingTheory grep finds no henselization declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale ring map inducing an isomorphism on residue fields induces an isomorphism of ordinary henselizations compatible with quotient ideals",
+   "results": "{\"t\": \"2026-10-23T12:58:40Z\", \"tool\": \"leanfinder\", \"query\": \"An etale ring map inducing an isomorphism on residue fields induces an isomorphism of ordinary henselizations compatible with quotient ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.respectsIso\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.IsEtaleAt\", \"StandardEtalePresentation.mapEquiv\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.homEquiv_apply_coe\"], \"digest\": \"0148c34148d19fb3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field congruences, simple-root criteria, standard etale presentations and invariance of etaleness under ring isomorphism do not construct or compare ordinary henselizations; Mathlib RingTheory grep finds no henselization declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-embedding-etale-comparison",
+  "date": "2026-10-23",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Minimal smooth envelopes and etale comparisons; Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2, minimal-embedding paragraph; BM, Desingularization algorithms I (2003), section 6.1.2; comparison argument supplied by agent from smooth local coordinates. No Stacks tag states the full minimal-envelope comparison. Re-split: old Step 6: pair henselization gives ordinary existence; pointed etale lifting gives inverse ambient maps and quotient compatibility.",
+   "via": [
+    "lem-trf-smooth-embedding-etale-comparison",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-pointed-etale-henselization-isomorphism",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Reused pair existence, the on-unit prime pair-colimit model and initial-henselian comparison (reviewer fix: replaces a dropped perverse-route 0A03 node), pointed etale lifting, and ordinary henselization quotients. Wrote both inverse-composite arguments, denominator checks, ideal image equality, and compatibility with both quotient base maps. Searches found no complete project attachment or Mathlib match.",
+  "blueprint": "Historical auxiliary branch of lem-trf-local-term-locality, through the smooth-embedding comparison: realizes former Step 6 (ordinary pair existence, pointed lift, inverse by uniqueness, quotient compatibility). Current latest blueprint locality proof uses contracting correspondences; this assigned lower algebraic item retains its historical supporting role and changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "Generic pair-colimit existence input; no node of this unit constructs the pair-colimit."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic existence and uniqueness of pointed maps from a single etale algebra into a henselian local target, not an alternative trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-3d58bab3b",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-3d58bab3b (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, every cited statement, and the Stacks sources (algebra.tex 08HQ l.42601, 05WQ l.43617, 04GQ; more-algebra.tex 0A02 and 0A03 l.3109). There are no new nodes and the statement and stmt_deps are unchanged. Mechanical finding: step 1 cited lem-per-local-pair-henselization-comparison. That node's blueprint chain runs through lem-per-qbar-arbitrary-field-duality, the arbitrary-field Qbar_l route dropped on 2026-10-19 (Q144). Its Lean module was deleted on 2026-10-20 as dead, and the Q20 and Q88 reviews record it on route-pivot-dropped.txt as not citable. The delivery does not justify the citation, so it is a fault. It was used only for generic Stacks 0A03 content, and the item uses no Qbar, duality, t-structure or Gabber input. FIX: step 1 now cites lem-trf-prime-pair-colimit-ind-etale-model (henselian local pair-colimit, maximal ideal mK, local map, residue iso, ind-etale), lem-weil-pbc-map-into-henselian-colimit (ordinary universal property; uniqueness among local maps checked) and lem-trf-initial-henselian-colimit-comparison (isomorphism to any chosen henselization; hypotheses checked). proof_deps and split_report.tool_uses are updated accordingly, and no cycle results. Steps 2-5 check out: r is local; f comes from 08HQ with preimage p; αf equals the structural map by 08HQ uniqueness, giving βα=1 and αβ=1 by initiality; α(IR^h)=IC·T^h by surjectivity; both quotient compatibilities hold; the 05WQ hypotheses hold because IR⊆m_R and (IC)T⊆m_T. Edge cases checked: A=C, a field, A×A, A_s, I=0, I=p, I not finitely generated. No SGA citation, no duplicates, no weakening of the target, route unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PointedEtaleHenselizationIsomorphism",
+  "declaration": "Algebra.pointedEtale_henselization_isomorphism",
+  "declarations": [
+   "Algebra.ordinaryHenselizationBaseMap",
+   "Algebra.exists_ordinaryHenselization_atPrime",
+   "Algebra.pairColimit_isOrdinaryHenselization",
+   "Algebra.pointedEtale_henselization_isomorphism"
+  ],
+  "file": "lean/Sheaf/RingTheory/PointedEtaleHenselizationIsomorphism.lean",
+  "statement": "theorem pointedEtale_henselization_isomorphism (A : Type u) (C : Type v) [CommRing A] [CommRing C] (φ : A →+* C) (_hφ : φ.Etale) (p : Ideal A) [p.IsPrime] (q : Ideal C) [q.IsPrime] (hp : p = q.comap φ) (hres : Function.Bijective (Ideal.ResidueField.map p q φ hp)) (H : Type w) (K : Type x) [CommRing H] [CommRing K] [Algebra (Localization.AtPrime p) H] [Algebra (Localization.AtPrime q) K] [HenselianLocalRing H] [HenselianLocalRing K] (_hH : IsHenselizationAtPrime' A p H) (_hK : IsHenselizationAtPrime' C q K) : (IsLocalRing.maximalIdeal H = (IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) H)) ∧ (IsLocalRing.maximalIdeal K = (IsLocalRing.maximalIdeal (Localization.AtPrime q)).map (algebraMap (Localization.AtPrime q) K)) ∧ ∃ (eH : p.ResidueField ≃+* IsLocalRing.ResidueField H) (eK : q.ResidueField ≃+* IsLocalRing.ResidueField K), eH.toRingHom.comp (IsLocalRing.residue (Localization.AtPrime p)) = (IsLocalRing.residue H).comp (algebraMap (Localization.AtPrime p) H) ∧ eK.toRingHom.comp (IsLocalRing.residue (Localization.AtPrime q)) = (IsLocalRing.residue K).comp (algebraMap (Localization.AtPrime q) K) ∧ ∃ e : H ≃+* K, IsLocalHom e.toRingHom ∧ e.toRingHom.comp (algebraMap (Localization.AtPrime p) H) = (algebraMap (Localization.AtPrime q) K).comp (Localization.localRingHom p q φ hp) ∧ (∀ α : H →+* K, IsLocalHom α → α.comp (algebraMap (Localization.AtPrime p) H) = (algebraMap (Localization.AtPrime q) K).comp (Localization.localRingHom p q φ hp) → α = e.toRingHom) ∧ ∃ f : C →+* H, f.comp φ = ordinaryHenselizationBaseMap A p H ∧ q = (IsLocalRing.maximalIdeal H).comap f ∧ (IsLocalRing.residue H).comp f = eH.toRingHom.comp ((RingEquiv.ofBijective (Ideal.ResidueField.map p q φ hp) hres).symm.toRingHom.comp (algebraMap C q.ResidueField)) ∧ (∀ f' : C →+* H, f'.comp φ = ordinaryHenselizationBaseMap A p H → q = (IsLocalRing.maximalIdeal H).comap f' → (IsLocalRing.residue H).comp f' = eH.toRingHom.comp ((RingEquiv.ofBijective (Ideal.ResidueField.map p q φ hp) hres).symm.toRingHom.comp (algebraMap C q.ResidueField)) → f' = f) ∧ e.symm.toRingHom.comp (ordinaryHenselizationBaseMap C q K) = f ∧ ∀ (I : Ideal A), I ≤ p → ∃ (JH : Ideal H) (JK : Ideal K), JH = I.map (ordinaryHenselizationBaseMap A p H) ∧ JK = (I.map φ).map (ordinaryHenselizationBaseMap C q K) ∧ JH.map e.toRingHom = JK ∧ ∃ (E : (H ⧸ JH) ≃+* (K ⧸ JK)) (a : (A ⧸ I) →+* (H ⧸ JH)) (b : (C ⧸ I.map φ) →+* (K ⧸ JK)) (c : (C ⧸ I.map φ) →+* (H ⧸ JH)), E.toRingHom.comp (Ideal.Quotient.mk JH) = (Ideal.Quotient.mk JK).comp e.toRingHom ∧ a.comp (Ideal.Quotient.mk I) = (Ideal.Quotient.mk JH).comp (ordinaryHenselizationBaseMap A p H) ∧ b.comp (Ideal.Quotient.mk (I.map φ)) = (Ideal.Quotient.mk JK).comp (ordinaryHenselizationBaseMap C q K) ∧ c.comp (Ideal.Quotient.mk (I.map φ)) = (Ideal.Quotient.mk JH).comp f ∧ E.toRingHom.comp a = b.comp (Ideal.quotientMap (I.map φ) φ Ideal.le_comap_map) ∧ E.toRingHom.comp c = b ∧ ∃ (hpI : (p.map (Ideal.Quotient.mk I)).IsPrime) (hqI : (q.map (Ideal.Quotient.mk (I.map φ))).IsPrime) (aH : Algebra (Localization.AtPrime (p.map (Ideal.Quotient.mk I))) (H ⧸ JH)) (aK : Algebra (Localization.AtPrime (q.map (Ideal.Quotient.mk (I.map φ)))) (K ⧸ JK)) (hQH : HenselianLocalRing (H ⧸ JH)) (hQK : HenselianLocalRing (K ⧸ JK)), @IsHenselizationAtPrime' (A ⧸ I) _ (p.map (Ideal.Quotient.mk I)) (H ⧸ JH) hpI _ aH hQH ∧ @IsHenselizationAtPrime' (C ⧸ I.map φ) _ (q.map (Ideal.Quotient.mk (I.map φ))) (K ⧸ JK) hqI _ aK hQK ∧ (algebraMap (Localization.AtPrime (p.map (Ideal.Quotient.mk I))) (H ⧸ JH)).comp (algebraMap (A ⧸ I) (Localization.AtPrime (p.map (Ideal.Quotient.mk I)))) = a ∧ (algebraMap (Localization.AtPrime (q.map (Ideal.Quotient.mk (I.map φ)))) (K ⧸ JK)).comp (algebraMap (C ⧸ I.map φ) (Localization.AtPrime (q.map (Ideal.Quotient.mk (I.map φ))))) = b",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2699497f6",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Node delta is lean-only; the 6 stmt_dep records are identical to side-live. lean.statement is verbatim in the file and all 4 declarations are present. Read IsHenselizationAtPrime', pair_henselization, Ideal.ResidueField.map, localRingHom and the proof-dep modules. Every clause matches: etale phi, primes with hp, hres on the induced residue map, existence, pair-colimit clause for any colimit cocone, max-ideal equalities, residue isos eH/eK pinned by the residue equations, canonical e (local, extends localRingHom, unique among local maps), f (A-map, preimage q, inverse residue map, unique) with e.symm∘(C→K)=f, and for all I≤p: JH/JK extended ideals, e(JH)=JK, E induced by e, a/b/c pinned, both squares, quotient henselizations with algebra structures pinned to a/b. Independent universes u v w x: still true, since the actual henselization has the universal property in all universes and ULift tests give H≅H0. Edge cases zero ring, I=0, I=p, identity, AxA, field. No hollow def, only sorry, docstrings with source and blueprint, no pro-etale. No file changed, so no compile."
+ }
+}

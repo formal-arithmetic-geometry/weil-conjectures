@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-tower-class-tensor-comparison",
+ "kind": "definition",
+ "title": "Ordinary tensor comparison in explicit site coordinates",
+ "statement": "On any essentially small site, let siteTensorIso be an abbreviation of the existing siteSheafTensorRightIso from the explicit siteSheafTensorRight functor [def-pur-sheaf-tensor-product] to the existing monoidal tensor by sheafifying siteTensorRightIso and composing with tensorObjIsoSheafification inverse. It is natural in the first variable and sends siteSheafTensorTmul to tensorSection. Given a prime l, a finite extension E/Q_l, schemes X,Y, a morphism f:X→Y, Base b and a normalized Geometry g for f [def-sp-tower-shriek-data] and GeometryOrdinaryTensor T [lem-coef-semilinear-geometric-ordinary-tensor] on its ordinary fields, define comparison(g,T) by conjugating T.system with these source and target isomorphisms and transporting along g.coefficients, g.transitions and g.pull_eq. It is a natural isomorphism tensorRight(N) followed by g.pull to g.pull followed by tensorRight(g.pull N), on actual systems [def-sfb-tower-class-tensor-pullback].",
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sp-tower-shriek-data",
+  "lem-coef-semilinear-geometric-ordinary-tensor",
+  "def-sfb-tower-class-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "proof": [
+  {
+   "text": "Use siteSheafTensorRightIso, siteTensorRightIso and tensorRightPresentation, the proved shared comparisons of [lem-weil-pbc-independent-sheaf-tensor-colimits]. The existing siteSheafTensorRightIso identifies the explicit sheafified site tensor with the monoidal tensor. Expand its presentation at a component and combine the two counit tensor factors to identify it with sheafification of siteTensorRightIso followed by tensorObjIsoSheafification inverse. Naturality of the module sheafification unit then proves its pure-section formula. Forget only the derived fields of the normalized generic geometry. T.system_natural yields the natural monoidal comparison with fixed second variable. Conjugate by the two existing bridges and eliminate the specified coefficient, transition and functor equalities.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-coef-semilinear-geometric-ordinary-tensor",
+    "def-sp-tower-shriek-data",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-coef-semilinear-geometric-ordinary-tensor",
+  "def-sp-tower-shriek-data",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "F6",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules preserves the tensor product and its adjunction unit sends pure tensors to pure tensors",
+   "results": "8 hits, including PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.PullbackConstruction.adjunction and the free-unit pullback formulas.",
+   "date": "2026-10-27",
+   "verdict": "No normalized system-coordinate tensor comparison; use the existing local ordinary tensor theorem and sheafification API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of sheaves of modules preserves tensor products with its adjunction unit pure tensor formula",
+   "results": "8 results, including SheafOfModules.pullbackObjUnitToUnit and the pullbackPushforwardAdjunction unit formulas from Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree.",
+   "date": "2026-10-27",
+   "verdict": "Finite unit results only; reuse the existing project ordinary tensor comparison for tensor preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\"",
+   "results": "12 results, including SheafOfModules.pullbackPushforwardAdjunction and its free-unit formulas.",
+   "date": "2026-10-27",
+   "verdict": "No normalized tensor comparison on the actual coefficient system coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification",
+   "results": "0 Mathlib-index hits. Independent local rg finds tensorObjIsoSheafification, siteTensorRightIso, siteSheafTensorRightIso, geometricOrdinaryTensor_exists, GeometryOrdinaryTensor.evaluation and system_natural in the project.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing sheafification presentation, naturality, and ordinary geometric tensor record; add only coordinate transport and its finite normalization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassTensorLevelCoordinates",
+  "date": "2026-10-27",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clause (2), finite tensor comparisons and their adjunction transposes",
+   "via": [
+    "lem-sfb-tower-class-tensor-level-coordinates",
+    "lem-sfb-tower-class-tensor-geometry-existence",
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassTensorComparison",
+  "file": "lean/Sheaf/Paper/TowerClassTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.comparison",
+  "statement": "def comparison {b : SpTowerShriek.Base l E}\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)\n    (T : SemilinearSections.GeometryOrdinaryTensor.{u + 1, u, u + 1}\n      (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y) (SpTowerShriek.tau l E Y)\n      (Scheme.ProEt.topology X)\n      (Scheme.proEtaleSheafInverseImage f (Type (u + 1)))\n      (Scheme.proEtaleSheafDirectImage f (Type (u + 1)))\n      (Scheme.proEtaleSheafAdjunction f (Type (u + 1))) (ordinaryGeometry l E g)) :\n    ∀ N : Systems Y (Arings l E Y),\n      SpTowerClasses.tensorRight l E Y N ⋙ g.pull ≅\n        g.pull ⋙ SpTowerClasses.tensorRight l E X (g.pull.obj N)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.siteTensorIso",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.siteTensorIso_pure",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.ordinaryOfGeometry",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.ordinaryGeometry",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.comparisonOfCoordinates",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.comparison"
+  ]
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T094405-L-221900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T094405-L-221900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

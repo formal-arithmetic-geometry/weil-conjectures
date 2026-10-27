@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-constant-restriction-ordinary-monoidal",
+ "kind": "statement",
+ "title": "Normalized ordinary tensor and unit for constant scalar restriction",
+ "statement": "Let $(C,J)$ be a site small in the coefficient universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], with exact abelian sheafification and the sheafified tensor structures [sk-def-sfb-sheaf-tensor]. Let $B$ be a commutative ring, $B^{\\mathrm{pre}}$ its constant presheaf, $R=\\underline B$ its ring sheafification, and $\\iota:B^{\\mathrm{pre}}\\to R$ its unit [def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification]. Write $\\mathcal M=\\operatorname{Mod}(R)$ for sheaves of $R$-modules [def-weil-sheaf-of-modules-category], and $\\mathcal A=\\operatorname{Sh}(C,\\operatorname{Mod}_B)$. Let $F:\\mathcal M\\to\\mathcal A$ be the actual constant-section restriction [def-sfb-constant-ring-module-restriction], and let $G$ extend the scalar action uniquely on the unchanged abelian sheaf. On $\\mathcal M$ use the sheafified balanced tensor $\\otimes_R$ [def-pur-sheaf-tensor-product], with unit $R$ and the symmetric monoidal constraints induced by those of $R(U)$-modules [lem-pc-sheaf-modules-tensor-closed]; on $\\mathcal A$ use sheafified objectwise $\\otimes_B$, whose unit $\\mathbf1_{\\mathcal A}$ is the module sheafification of $B^{\\mathrm{pre}}$.\nThen $F,G$ are additive exact quasi-inverse equivalences. There are natural inverse isomorphisms\n$$c_{M,N}:F(M\\otimes_RN)\\xrightarrow{\\sim}FM\\otimes_BFN,\\qquad u:FR\\xrightarrow{\\sim}\\mathbf1_{\\mathcal A}.$$\nFor every site object and local sections $m,n$, $c_{M,N}$ and its inverse send the corresponding sheafified pure tensor to the same pure tensor. If $\\eta_B:B^{\\mathrm{pre}}\\to\\mathbf1_{\\mathcal A}$ is the module-sheafification unit, then $u(\\iota(b))=\\eta_B(b)$ for every local constant scalar $b$. The comparisons respect the associators, both unitors, and symmetries of the two specified tensors, so their inverses define a strong symmetric monoidal structure [def-sfb-strong-monoidal-functor] on $F$; $G$ has the inverse comparisons. All assertions hold also for the zero ring and the empty site, without a terminal object or enough points.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, lemma-sheafification-tensor, bilinear-map hint and adjacent tensor constraints; agent-written normalized constant-presheaf specialization including the ordinary unit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-constant-ring-module-restriction",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [
+  {
+   "text": "Retain the existing additive exact equivalence: restriction across constantCommuteCompose is an equivalence by explicit componentwise cancellation, and the constant-ring restriction is the equivalence of [lem-cbc-constant-ring-module-sheaves]. Exactness follows from preservation of limits and colimits by equivalences [lem-galois-equivalence-preserves-limits].",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On module presheaves use the existing PresheafOfModules.restrictScalars lax tensorator and compose it with the constant-module-presheaf-to-functor identification. The latter has identity component tensorators; its coherence is the sectionwise associator and unitor equations. The sectionwise ModuleCat.restrictScalars braiding makes this composite lax braided. Its tensorator sends each B-pure tensor to the corresponding R-pure tensor; its unit is the scalar unit. Naturality and all coherence equations are the sectionwise restriction-of-scalars equations. Compose with the lax braided inclusion of module sheaves (the right adjoint of braided monoidal module sheafification), and with braided monoidal fixed-coefficient sheafification [sk-def-sfb-sheaf-tensor]. The sheafification counit gives a natural isomorphism of this composite with the literal restriction. Transport its lax braided structure across that isomorphism. The adjunction unit, counit and triangle identity show that the original underlying-presheaf identification is monoidal. Its tensor and unit equations give precisely the required pure-tensor and constant-scalar formulas.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-strong-monoidal-functor",
+    "det-def-sfb-sheaf-tensor-structure",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A restriction-compatible B-bilinear pairing between underlying restricted module sheaves is R-bilinear. For a scalar r, use the covering image sieve of the locally surjective scalar unit to write each restriction of r as a constant scalar. On this cover the desired scalar equation is B-linearity and compatibility with restrictions. Separatedness gives it globally, in both variables. Transport the fixed pure pairing through the inverse of the equivalence counit at FM tensor_B FN. Its target is the inverse-equivalence image of that fixed tensor. Upgrade it by this local argument and extend the R-bilinear pairing through the bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal], using the existing independent-universe specialization in CochainInverseComparison. The universal property uniquely determines the chosen map by its values on pure tensors. Apply F and the counit to obtain the inverse comparison. Both composites fix pure tensors; the tensor and sheafification universal properties prove they are identities.",
+   "uses": [
+    "lem-cbc-presheaf-sheafification-epi-local-lifts",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit map is invertible without a separate construction. Choose X with FX isomorphic to the fixed tensor unit. Lax left unitality and invertibility of the tensorator imply that tensoring the unit map on the right by FX is invertible. This tensor functor is isomorphic to the identity and reflects isomorphisms, proving the unit map invertible. Promote the constructed lax braided structure to braided monoidality. The tensor and unit inverse identities give the required formulas for the inverse comparisons. The inverse equivalence inherits the inverse monoidal structure. Every argument uses covering sieves and universal properties and applies unchanged to the zero ring and empty site.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-pc-sites-module-sheafification-interface",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-strong-monoidal-functor",
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-cbc-presheaf-sheafification-epi-local-lifts",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 0GMW, bilinear universal property and constant-presheaf specialization. U9: lax braided structure by composition and transport; local scalar descent constructs the inverse tensorator; lax unitality and essential surjectivity prove unit invertibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*(tensor|monoidal)|(tensor|monoidal).*constant",
+   "results": "{\"t\": \"2026-10-22T05:55:01Z\", \"tool\": \"grep\", \"query\": \"constant.*(tensor|monoidal)|(tensor|monoidal).*constant\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give presheaf/module sheafification, ring-sheaf scalar restriction or light condensed monoidal structures, not the normalized constant-ring restriction tensor and unit with all constraint equations on an arbitrary site"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T05:55:02Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give presheaf/module sheafification, ring-sheaf scalar restriction or light condensed monoidal structures, not the normalized constant-ring restriction tensor and unit with all constraint equations on an arbitrary site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules over the constant ring sheaf are symmetrically monoidally equivalent to module valued sheaves",
+   "results": "{\"t\": \"2026-10-22T05:55:02Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of modules over the constant ring sheaf are symmetrically monoidally equivalent to module valued sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules\", \"SheafOfModules.noConfusionType\", \"SheafOfModules.hom_ext\", \"SheafOfModules.mk\", \"SheafOfModules.mk.inj\", \"ModuleCat.MonoidalCategory.symmetricCategory\", \"SheafOfModules.ιFree\"], \"digest\": \"8dfa5809d058e45f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give presheaf/module sheafification, ring-sheaf scalar restriction or light condensed monoidal structures, not the normalized constant-ring restriction tensor and unit with all constraint equations on an arbitrary site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction equivalence from modules over a constant ring sheaf to sheaves of modules over a ring has a pure tensor normalized symmetric monoidal structure",
+   "results": "{\"t\": \"2026-10-22T05:55:11Z\", \"tool\": \"leanfinder\", \"query\": \"The restriction equivalence from modules over a constant ring sheaf to sheaves of modules over a ring has a pure tensor normalized symmetric monoidal structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"PresheafOfModules.Monoidal.tensorObj\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"PresheafOfModules.monoidalCategoryStruct\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"PresheafOfModules.monoidalCategory\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.Monoidal.tensorObjMap\"], \"digest\": \"cdc9556f4bec7bc5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give presheaf/module sheafification, ring-sheaf scalar restriction or light condensed monoidal structures, not the normalized constant-ring restriction tensor and unit with all constraint equations on an arbitrary site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant scalar balancing compares the tensor product over a constant ring sheaf and sheafified objectwise tensor over its coefficient ring with the normalized unit",
+   "results": "{\"t\": \"2026-10-22T05:55:45Z\", \"tool\": \"leanfinder\", \"query\": \"Locally constant scalar balancing compares the tensor product over a constant ring sheaf and sheafified objectwise tensor over its coefficient ring with the normalized unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.one_smul\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"PresheafOfModules.Sheafify.mul_smul\", \"PresheafOfModules.Sheafify.SMulCandidate.mk'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"PresheafOfModules.Sheafify.map_smul_eq\"], \"digest\": \"a26358c6d4c3d717\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give presheaf/module sheafification, ring-sheaf scalar restriction or light condensed monoidal structures, not the normalized constant-ring restriction tensor and unit with all constraint equations on an arbitrary site"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(equivalence|monoidal)|(equivalence|monoidal).*constant",
+   "results": "{\"t\": \"2026-10-22T06:52:39Z\", \"tool\": \"grep\", \"query\": \"constant.*(equivalence|monoidal)|(equivalence|monoidal).*constant\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: hits give general module sheafification and its adjunction or presheaf monoidal structures; the normalized tensor, unit and coherent equivalence require the argument in this split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction from modules over a constant ring sheaf to module valued sheaves is a symmetric monoidal equivalence",
+   "results": "{\"t\": \"2026-10-22T06:52:39Z\", \"tool\": \"leansearch\", \"query\": \"Restriction from modules over a constant ring sheaf to module valued sheaves is a symmetric monoidal equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"ModuleCat.restrictScalars_isEquivalence_of_ringEquiv\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\", \"ModuleCat.MonoidalCategory.symmetricCategory\", \"SheafOfModules.instAdditiveRestrictScalars\", \"RestrictScalars.addEquiv\"], \"digest\": \"df599d8811a0f64f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: hits give general module sheafification and its adjunction or presheaf monoidal structures; the normalized tensor, unit and coherent equivalence require the argument in this split."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"sheafification\"",
+   "results": "{\"t\": \"2026-10-22T06:52:39Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"sheafification\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafification\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\"], \"digest\": \"7a0142a79099ae2a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: hits give general module sheafification and its adjunction or presheaf monoidal structures; the normalized tensor, unit and coherent equivalence require the argument in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules over the sheafification of a constant ring are equivalent to sheaves valued in modules with the same normalized tensor and unit",
+   "results": "{\"t\": \"2026-10-22T06:52:47Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of modules over the sheafification of a constant ring are equivalent to sheaves valued in modules with the same normalized tensor and unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.Sheafify.module\"], \"digest\": \"c03787c2dd373d33\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: hits give general module sheafification and its adjunction or presheaf monoidal structures; the normalized tensor, unit and coherent equivalence require the argument in this split."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationAdjunction|sheafificationCompToSheaf|monoidal",
+   "results": "{\"t\": \"2026-10-22T06:53:06Z\", \"tool\": \"grep\", \"query\": \"sheafificationAdjunction|sheafificationCompToSheaf|monoidal\", \"sub\": \"Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"72\", \"85\", \"104\", \"114\", \"117\"], \"digest\": \"a368bbcf2860dc05\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: hits give general module sheafification and its adjunction or presheaf monoidal structures; the normalized tensor, unit and coherent equivalence require the argument in this split."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-22T06:53:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"PresheafOfModulesOfCommRing.monoidalCategory\", \"PresheafOfModulesOfCommRing.monoidalCategoryStruct\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul\"], \"digest\": \"e12b13b5c1acdf53\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: hits give general module sheafification and its adjunction or presheaf monoidal structures; the normalized tensor, unit and coherent equivalence require the argument in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal comparison between sheaves of modules over a sheafified presheaf of rings and sheaves of constant coefficient modules",
+   "results": "{\"t\": \"2026-10-22T06:53:14Z\", \"tool\": \"leanfinder\", \"query\": \"Symmetric monoidal comparison between sheaves of modules over a sheafified presheaf of rings and sheaves of constant coefficient modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"PresheafOfModules.sheafificationHomEquiv\"], \"digest\": \"3d784f65ce874562\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: hits give general module sheafification and its adjunction or presheaf monoidal structures; the normalized tensor, unit and coherent equivalence require the argument in this split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constant-scalar-restriction-tensor",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Auxiliary coefficient equivalence serving the fourth blueprint proof paragraph (restriction of the adjunction); retained constant-scalar comparison proof steps 1-3.",
+   "via": [
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-constant-restriction-ordinary-monoidal",
+  "worker": "stage1",
+  "summary": "Constructed the actual unchanged-abelian-sheaf inverse by the existing general module-sheafification interface; constructed both tensor maps via bilinear extension and sheafification, proved they are inverse and natural, identified the ordinary unit via underlying-set sheafification, and checked all constraint equations on local tensor generators. No new nodes and no statement changes. Maintainer-reader FIX (2026-10-22): the R-side constraints are now those of lem-pc-sheaf-modules-tensor-closed, cited in the statement and in Step 8 (no longer marked elementary).",
+  "blueprint": "Auxiliary constant-scalar comparison for the fourth proof paragraph of sk-prop-sf-rf-shriek-preservation (restriction of the adjunction), through lem-sf-module-object-ordinary-coefficient-equivalence and lem-sfb-constant-scalar-restriction-tensor; realizes its ordinary comparison steps 1--3.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "General extension of a presheaf-bilinear map to the sheafified coefficient ring; needed to balance constant scalars over R, and not supplied by the finite-shriek-preservation unit."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "General ringed-site bilinear universal property constructs and detects the two tensor maps; the unit of the item does not state this generic tensor tool."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Uses the stipulated fixed-coefficient sheaf tensor and its unit, already in the item hypotheses."
+   },
+   {
+    "node": "det-def-sfb-sheaf-tensor-structure",
+    "why": "Uses the explicit sheafified constraint formulas for the stipulated fixed-coefficient tensor; this generic construction is not given by the finite-shriek-preservation unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Existing symmetric monoidal structure of sheaves of modules over a sheaf of commutative rings, with sectionwise-induced constraints; it fixes the R-side associator, unitors and symmetry that the item compares, and the finite-shriek-preservation unit gives no such node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "sk-def-sfb-sheaf-tensor",
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NC-467ccfb35",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-467ccfb35 (reviewer sub-agent of L); spot-checked: I read the whole 10-step split, with no new nodes. Sources checked: Stacks sites-modules 03CY, 03EK and 0GMW plus the Bilin display; tags 00YR and 00WK. The item is not on the drop list and the side-live node is still unsplit with an identical statement. Steps 1-7, 9 and 10 are correct. Step 1 builds G from the interface's unique compatible action, using that the unit of the already-sheaf H is invertible. Step 3 shows F(Q^#) has the fixed-B sheafification universal property. Step 4 applies bilinear extension with O=B^pre and H=GV, then the Bilin bijection gives a_{M,N}. Step 5 builds d and checks both inverse equations through the universal properties. Step 6 identifies the unit through the underlying-set sheafifications, so u(iota(b))=eta_B(b). Step 7 gets local lifts from the sieve-form epi leaf. Step 9 checks every equation on generators with the orientation e:1->F1, mu:FX(x)FY->F(X(x)Y). Edge cases B=0 and the empty site are handled. FIX (B3/C1/C2): def-pur-sheaf-tensor-product defines only the object M(x)_R N, so the statement's R-side associators, unitors and symmetry had no node. Step 8 built them itself and was marked elementary, although that needs the sheafified unit maps to be invertible, which Stacks 03EK only asserts follows from 'algebraic counterparts and sheafification'. The existing split node lem-pc-sheaf-modules-tensor-closed states exactly this structure. I cited it in the statement and stmt_deps and in Step 8, set Step 8 to elementary:false, and updated proof_deps and tool_uses. The target is not weakened, and the parent's Step 1 is unaffected. Duplicate search over the citers of def-sfb-constant-ring-module-restriction and the ringed-site monoidal nodes found nothing that states the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantScalarRestrictionTensor",
+  "declaration": "CategoryTheory.ConstantScalarRestriction.ordinary_exists",
+  "declarations": [
+   "CategoryTheory.ConstantScalarRestriction.ordinary_exists",
+   "CategoryTheory.ConstantScalarRestriction.Ordinary",
+   "CategoryTheory.ConstantScalarRestriction.ringPure",
+   "CategoryTheory.ConstantScalarRestriction.fixedPure",
+   "CategoryTheory.ConstantScalarRestriction.fixedUnitScalar",
+   "CategoryTheory.ConstantScalarRestriction.additive",
+   "CategoryTheory.ConstantScalarRestriction.isEquivalence",
+   "CategoryTheory.ConstantScalarRestriction.exact",
+   "CategoryTheory.constant_ring_module_sheaves"
+  ],
+  "statement": "theorem ordinary_exists : Nonempty (Ordinary J B)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing ordinary part of the previously landed constant-scalar restriction package. Ordinary records the normalized inverse tensor maps and unit together with braided monoidality; additive, isEquivalence and exact record the equivalence and exactness clauses. constant_ring_module_sheaves specifies the inverse on the unchanged abelian sheaf and uniqueness of the extended action. The restriction uses the canonical constantCommuteCompose identification of the commutative-ring and ring sheafifications. No duplicate statement or construction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ba37aa4c",
+  "group": "Q52",
+  "result": "pass",
+  "note": "existing:true record for lem-sfb-constant-restriction-ordinary-monoidal → CategoryTheory.ConstantScalarRestriction.ordinary_exists : Nonempty (Ordinary J B) in landed module Sheaf.CategoryTheory.ConstantScalarRestrictionTensor (parent lem-sfb-constant-scalar-restriction-tensor, Q08); statement verbatim; only the lean field differs from side-live. Clause check: C:Type u/Category.{v}, B:Type (max u v), no extra hypotheses (zero ring/empty site ok); ring = constantSheaf CommRingCat, ι = toSheafify const; restriction = restrictScalars along Mathlib constantCommuteCompose.inv ⋙ recorded constantRingModuleRestriction; R-side tensor cochainModulesMonoidal = @SheafOfModules.monoidalCategory, the same def as lem-pc-sheaf-modules-tensor-closed's tensorClosed (only the universes generalized); fixed side = sfbSheafTensorStructure with unit = constant module sheaf (sfbSheafTensor_properties.1). additive/isEquivalence/exact plus constant_ring_module_sheaves cover the equivalence and G; Ordinary.braided gives natural inverse δ/μ, η/ε with associator/unitor/symmetry coherence; tensor_hom/tensor_inv pin both directions on sheafified pure tensors for all U,x,y; unit_hom pins η(ι(b)) = η_B(b). Not hollow (pins determine the data), proofs are sorry only, no duplicate (item id absent from both Lean trees). Advisory: lean.declarations lists constant_ring_module_sheaves from another module; G's inverse comparisons are only formal (Equivalence.inverseMonoidal). No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-984a5",
+  "group": "U9",
+  "result": "fix",
+  "landing": "20261024T234301-L-2549791",
+  "kind": "interface",
+  "note": "independent cc review: ConstantScalarRestrictionTensor (ordinary_exists closed, onDerived abbrev→def, memo/ring instances) against lem-sfb-constant-scalar-restriction-tensor and lem-sfb-constant-restriction-ordinary-monoidal, clone diff, change record; axioms clean; item plus 14 direct importers and the onDerived-user chain compiled in sandbox"
+ }
+}

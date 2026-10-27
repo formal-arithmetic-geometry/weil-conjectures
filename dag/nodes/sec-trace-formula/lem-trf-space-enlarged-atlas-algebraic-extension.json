@@ -1,0 +1,290 @@
+{
+ "id": "lem-trf-space-enlarged-atlas-algebraic-extension",
+ "kind": "statement",
+ "title": "Atlas descent and algebraic structures on enlarged etale sheaves",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with every site small relative to its sheaves. Use chartwise etale morphisms as in [lem-trf-space-chartwise-etale-permanence]: every representable etale scheme chart remains representable etale after composition. For a space $A$, let $\\mathcal C_A$ have objects chartwise etale maps $T\\to A$ from algebraic spaces, arrows all maps over $A$, and coverings jointly surjective chartwise etale families [def-weil-pbc-sites-and-cohomology]. Write $i_A:A_{\\mathrm{et}}\\to\\mathcal C_A$ for the scheme-object inclusion, regarding schemes as their representable sheaves [def-trf-scheme-algebraic-space]. Let $X$ be a space and $F$ a sheaf of sets on $X_{\\mathrm{et}}$. There exists a sheaf $E$ on $\\mathcal C_X$ with a specified isomorphism $e:i_X^*E\\simeq F$. For any two such pairs $(E,e),(E',e')$, there is exactly one isomorphism $a:E\\simeq E'$ with $e'\\circ i_X^*a=e$. For every object $T\\to X$ and every surjective representable etale scheme chart $T_0\\to T$, the overlap $T_1=T_0\\times_TT_0$ [lem-trf-space-fibre-products-etale-covers] is a scheme and restriction, followed by $e$, identifies $E(T)$ with $\\operatorname{Eq}(F(T_0)\\rightrightarrows F(T_1))$. These identifications commute with restriction along every $T'\\to T$, after chart refinement, are independent of the chosen charts, and are natural in $F$. Restriction preserves finite products and terminal objects. It induces an equivalence on sheaves of commutative rings, and for any ring sheaf $R$ on $X_{\\mathrm{et}}$ and any normalized ring-sheaf extension $(\\widetilde R,e_R)$, an equivalence $\\operatorname{Mod}(\\widetilde R)\\simeq\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category]. Under this equivalence the addition, zero, inverse, scalar action, restriction semilinearity and linearity of morphisms are the ones obtained by uniquely extending the corresponding operations on the scheme subsite. In particular $\\mathcal O_X$ has a normalized ring-sheaf extension $\\widetilde{\\mathcal O}_X$, with the same atlas equalizer formula as a ring.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03H7 (remark-explain-equivalence); paragraph after Tag 03G7 (definition-structure-sheaf). Transport of ring and module operations expands this comparison using the sectionwise sheaf definitions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Extract full faithfulness, singleton scheme atlases, finite limits, and cocontinuity from scheme density. The singleton atlases give cover density; cocontinuity and continuity show that covering sieves are reflected and preserved. Since each covering atlas has one member, Mathlib IsOneHypercoverDense.of_hasPullbacks gives one-hypercover density with indexing universe zero. Apply isEquivalence_of_isOneHypercoverDense for every coefficient category with finite limits, including sets and commutative rings. For normalized set extensions use an object preimage, and lift e.hom followed by the inverse normalization by full faithfulness. Lift morphisms in the same way; naturality gives the section formula, and faithfulness proves uniqueness.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G1 (lemma-compare-etale-sites); Tag 03H7 (remark-explain-equivalence), first paragraph."
+   }
+  },
+  {
+   "text": "Use representable etale scheme tests to represent the pullback of a chart against a scheme object. Compose its etale projection with the structure map to obtain a small-site scheme object. Yoneda full faithfulness gives the scheme arrows and reflects the pullback square. Base change of surjectivity gives a surjective first projection. For a surjective etale scheme chart, a field-valued point lifts after extension to the residue field of a point of its nonempty scheme fibre. Thus the chart is a singleton covering of the enlarged site. Apply the singleton-cover sheaf gluing and separation conditions; the pullback square expresses precisely equality of the two overlap restrictions. Transport through the specified normalization to obtain the equalizer bijection, whose formula determines it uniquely.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H7 (remark-explain-equivalence), displayed equalizer and the following sentence; site sheaf condition Tag 00VR (sites.tex)."
+   }
+  },
+  {
+   "text": "For a map between enlarged objects, pull back the original chart against the new scheme chart using the preceding scheme-test construction. Its projection is surjective etale, hence a singleton covering in the small site. The small-site sheaf separation condition makes restriction along this projection injective. Naturality of the normalization and the pullback square give the required formula on the refinement. This proves restriction compatibility and chart independence. The morphism-lifting formula from the first step gives naturality in the sheaf.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H7 (remark-explain-equivalence), equalizer, with the chart-refinement and naturality checks written out."
+   }
+  },
+  {
+   "text": "Restriction on set sheaves is an equivalence by the first step. Every equivalence preserves finite products, including the empty product, so obtain the stated preservation instance directly from Mathlib.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2 (lemma-limit-sheaf); Section 00YR (section-sheaves-algebraic-structures)."
+   }
+  },
+  {
+   "text": "Apply the arbitrary-coefficient comparison from the first step to CommRingCat. Its finite limits are already supplied by Mathlib, so restriction on commutative-ring sheaves is an equivalence without separately constructing ring objects.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Section 00YR (section-sheaves-algebraic-structures), commutative ring objects and the proof of Tag 00YV (proposition-functoriality-algebraic-structures-topoi)."
+   }
+  },
+  {
+   "text": "For the given ring extension first lift an arbitrary small-site module as an abelian-group sheaf using the coefficient comparison for Ab. Lift the scalar action as a map of set sheaves through the fully faithful set restriction. The scalar ring universe is independent of the module universe: lift its underlying sets by ULift, and prove these remain sheaves by identifying ring elements with homomorphisms from the free ring on one generator. Evaluate the lifted action at each scalar and section. All module laws follow after restriction by faithfulness; cover density makes the forgetful functor to underlying set sheaves faithful. Naturality of the action gives linear restrictions. Lift morphisms through the abelian-group equivalence and use the same faithful comparison to prove scalar linearity. This proves full faithfulness and essential surjectivity of module restriction. Finally compose with transport along the specified ring normalization, using Mathlib pushforwardComp and pushforwardPushforwardEquivalence. The displayed addition, inverse, scalar, restriction and morphism formulas follow from the actual pushforward definitions and map_smul. The last hom-set bijection is the set comparison again.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV (definition-sheaf-modules); explicit operation lifting along the equivalence of Tag 03G1 (spaces-properties.tex)."
+   }
+  },
+  {
+   "text": "Forget a commutative-ring extension to sets, lifting the underlying set universe by ULift so the atlas equalizer applies. The restriction followed by normalization is a ring homomorphism into the chart ring. The pullback relation makes its values belong to the equalizer subring. The set equalizer proves this homomorphism bijective, so RingEquiv.ofBijective gives the desired ring isomorphism and formula. For the structure sheaf use its existing normalized restriction isomorphism, whose scheme sections are the actual rings of regular functions.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G7 (definition-structure-sheaf), paragraph identifying the structure ring on the enlarged site; Tag 03H7 (remark-explain-equivalence)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G1, 03H7, paragraph after 03G7; sites.tex singleton sheaf gluing and Section 00YR; sites-modules.tex Tag 03CV. Y9 Lean proof: Mathlib one-hypercover dense comparison, scheme-test pullbacks, singleton gluing, and operation lifting for module descent with independent scalar universe."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on an algebraic space enlarged etale site are computed by scheme atlas equalizers and restriction induces equivalences for rings and module sheaves",
+   "results": "{\"t\": \"2026-10-22T06:48:11Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves on an algebraic space enlarged etale site are computed by scheme atlas equalizers and restriction induces equivalences for rings and module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.Scheme.Modules.isSheaf\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.isoSheafedSpace\", \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\", \"TopCat.Sheaf.objSupIsoProdEqLocus\"], \"digest\": \"2d98fd9ff857c68a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Zariski gluing and topological equalizers do not give normalized extension on an algebraic-space enlarged etale site, its naturality, or module transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of sheaves from scheme etale charts of an algebraic space is unique naturally in atlas and sheaf and extends ring operations and module actions",
+   "results": "{\"t\": \"2026-10-22T06:47:59Z\", \"tool\": \"leansearch\", \"query\": \"Extension of sheaves from scheme etale charts of an algebraic space is unique naturally in atlas and sheaf and extends ring operations and module actions\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsEquivalence\"",
+   "results": "{\"t\": \"2026-10-22T06:47:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"IsEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Zariski gluing and topological equalizers do not give normalized extension on an algebraic-space enlarged etale site, its naturality, or module transport."
+  },
+  {
+   "tool": "grep",
+   "query": "enlargedRestriction|enlargedExtension|algebraic.space.*equalizer",
+   "results": "{\"t\": \"2026-10-22T06:47:59Z\", \"tool\": \"grep\", \"query\": \"enlargedRestriction|enlargedExtension|algebraic.space.*equalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Zariski gluing and topological equalizers do not give normalized extension on an algebraic-space enlarged etale site, its naturality, or module transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique extension of a sheaf from scheme charts to etale algebraic spaces via atlas equalizers with ring and module structure",
+   "results": "{\"t\": \"2026-10-22T06:49:08Z\", \"tool\": \"leanfinder\", \"query\": \"Unique extension of a sheaf from scheme charts to etale algebraic spaces via atlas equalizers with ring and module structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\"], \"digest\": \"5bfcbd35cdd18158\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Zariski gluing and topological equalizers do not give normalized extension on an algebraic-space enlarged etale site, its naturality, or module transport."
+  },
+  {
+   "tool": "grep",
+   "query": "enlargedEtale|enlargedRestriction|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T09:34:38Z\", \"tool\": \"grep\", \"query\": \"enlargedEtale|enlargedRestriction|AlgebraicSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction, the scheme etale forgetful functor, and the module-sheaf-to-presheaf fully faithful forgetful functor do not state this algebraic-space comparison or the normalized ring/module extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves on etale algebraic spaces are determined by scheme charts and restriction gives an equivalence of rings and module sheaves",
+   "results": "{\"t\": \"2026-10-23T09:34:38Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves on etale algebraic spaces are determined by scheme charts and restriction gives an equivalence of rings and module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.sheaf\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.isSheaf\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"SheafOfModules.mk\"], \"digest\": \"8863c2fedcb1ec55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction, the scheme etale forgetful functor, and the module-sheaf-to-presheaf fully faithful forgetful functor do not state this algebraic-space comparison or the normalized ring/module extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsEquivalence\"",
+   "results": "{\"t\": \"2026-10-23T09:34:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"IsEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction, the scheme etale forgetful functor, and the module-sheaf-to-presheaf fully faithful forgetful functor do not state this algebraic-space comparison or the normalized ring/module extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from an algebraic space enlarged etale site to scheme charts extends sheaves by atlas equalizers and gives ring and module equivalences",
+   "results": "{\"t\": \"2026-10-23T09:34:48Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from an algebraic space enlarged etale site to scheme charts extends sheaves by atlas equalizers and gives ring and module equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.SheafedSpace.restrictTopIso\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.SheafedSpace.restrictTopIso_hom\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.SheafedSpace.restrict\"], \"digest\": \"4b88c2c98f75a8e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction, the scheme etale forgetful functor, and the module-sheaf-to-presheaf fully faithful forgetful functor do not state this algebraic-space comparison or the normalized ring/module extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful restriction equivalence of sheaves uniquely lifts addition multiplication and a sheaf of rings module action",
+   "results": "{\"t\": \"2026-10-23T09:34:50Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful restriction equivalence of sheaves uniquely lifts addition multiplication and a sheaf of rings module action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.fullyFaithfulForget\", \"SheafOfModules.fullyFaithfulForget_preimage_val\", \"SheafOfModules.forgetToSheafModuleCat\", \"SheafOfModules.unit\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules\", \"SheafOfModules.instFullPresheafOfModulesValRingCatForget\", \"SheafOfModules\"], \"digest\": \"a3a0d8ca64a23806\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction, the scheme etale forgetful functor, and the module-sheaf-to-presheaf fully faithful forgetful functor do not state this algebraic-space comparison or the normalized ring/module extension."
+  },
+  {
+   "tool": "grep",
+   "query": "def fullyFaithfulForget|def restrictFunctor|def sheafEquiv",
+   "results": "{\"t\": \"2026-10-23T09:38:12Z\", \"tool\": \"grep\", \"query\": \"def fullyFaithfulForget|def restrictFunctor|def sheafEquiv\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf.lean\"], \"digest\": \"ffc13a4bbd0d4ee5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction, the scheme etale forgetful functor, and the module-sheaf-to-presheaf fully faithful forgetful functor do not state this algebraic-space comparison or the normalized ring/module extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-enlarged-etale-ringed-site-model",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Re-split of lem-trf-space-enlarged-etale-ringed-site-model, old proof steps 4–5: Atlas descent and algebraic structures on enlarged etale sheaves.",
+   "via": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-enlarged-atlas-algebraic-extension",
+  "worker": "stage1",
+  "summary": "Reuse the existing scheme-density equivalence and sectionwise algebraic-structure theorem. Write normalized uniqueness, the atlas equalizer and common-refinement naturality, then lift ring and variable-ring module operations through full faithfulness and reflect their equations. No new nodes or attachment; no statement change.",
+  "blueprint": "Historical ancestry through lem-trf-space-enlarged-etale-ringed-site-model, its old steps 4–5 (atlas descent and algebraic structures); the newest lem-trf-local-term-locality text has no atlas paragraph, so ancestry is retained as historical, as recorded in the inherited blueprint.from.place. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "why": "Generic sectionwise products and commutative-ring-object presentation for any site; no theorem of this unit gives that presentation."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-b35a88f4e",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-b35a88f4e (reviewer sub-agent of L); spot-checked: Read all 7 steps in full, with every cited statement and Stacks spaces-properties 03H7 and 03G7 (03G1 through the density node). There are no new nodes, and the statement and stmt_deps are unchanged. The proof carries all of the parent's old steps 4-5 (Q09 re-split report), in more detail. Steps 1, 3-7 are correct. Step 1 gives the normalized unique isomorphism by lifting (e')^{-1}e. Step 3 compares restrictions on W=T'_0 x_T T_0, which is a scheme, using injectivity along an X_et covering. Step 4 holds because products are sectionwise. Step 5 lifts the ring operations and reflects the laws by faithfulness. Step 6 treats the action R x N -> N as a sheaf map by semilinearity and lifts it relative to the given (R~,e_R). Step 7 identifies the equalizer as a subring. One fault, in step 2: it said the singleton chart {T_0->T} is a covering by the density node, but that node only gives the existence of some singleton scheme covering for an arbitrary T. FIX: step 2 now says that p is chartwise etale by the scheme-source clause of chartwise-etale-permanence and jointly surjective because Spec K x_T T_0 is nonempty and a point with residue field L lifts x|_L. It cites def-trf-algebraic-space-jointly-surjective-family, a definition in the same unit, and adds it to uses and proof_deps. No duplicates: rg -L for 03H7, 03G7 and special cocontinuous found only the generic set-sheaf equivalence, pushforward-atlas-equalizer and the parent. No SGA. I accept the tool use of lem-weil-pbc-sheaf-algebraic-structures-objects. Edge cases checked: X a scheme, identity chart, empty T, zero ring.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EnlargedAtlasAlgebraicExtension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.enlargedAtlas_algebraic_extension",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.enlargedAtlas_algebraic_extension",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedAtlas_equalizer",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedAtlas_refinement",
+   "AlgebraicGeometry.AlgebraicSpace.normalizedEnlargedModuleRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.normalizedEnlargedModuleSection",
+   "AlgebraicGeometry.AlgebraicSpace.normalizedEnlargedModuleRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedAtlas_ring_equalizer"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EnlargedAtlasAlgebraicExtension.lean",
+  "statement": "theorem enlargedAtlas_algebraic_extension (X : AlgebraicSpace S) : (∀ F : Sheaf X.etaleTopology (Type (max (u + 1) w)), ∃ E : Sheaf X.enlargedEtaleTopology (Type (max (u + 1) w)), Nonempty ((enlargedRestriction X _).obj E ≅ F)) ∧ (∀ (F : Sheaf X.etaleTopology (Type (max (u + 1) w))) (E E' : Sheaf X.enlargedEtaleTopology (Type (max (u + 1) w))) (e : (enlargedRestriction X _).obj E ≅ F) (e' : (enlargedRestriction X _).obj E' ≅ F), ∃! a : E ≅ E', (enlargedRestriction X _).map a.hom ≫ e'.hom = e.hom) ∧ (∀ (F G : Sheaf X.etaleTopology (Type (max (u + 1) w))) (E H : Sheaf X.enlargedEtaleTopology (Type (max (u + 1) w))) (e : (enlargedRestriction X _).obj E ≅ F) (d : (enlargedRestriction X _).obj H ≅ G) (b : F ⟶ G), ∃! a : E ⟶ H, (enlargedRestriction X _).map a ≫ d.hom = e.hom ≫ b ∧ ∀ (T : X.EnlargedEtaleSite) (U : X.EtaleSite) (p : (enlargedSchemeInclusion X).obj U ⟶ T) (x : E.obj.obj (op T)), d.hom.hom.app (op U) (H.obj.map p.op (a.hom.app (op T) x)) = b.hom.app (op U) (e.hom.hom.app (op U) (E.obj.map p.op x))) ∧ PreservesFiniteProducts (enlargedRestriction X (Type (max (u + 1) w))) ∧ (enlargedRestriction X CommRingCat.{v}).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations jointly render the node: normalized set extensions and natural maps, every atlas overlap and normalized equalizer, common-refinement restriction compatibility and chart independence, finite products including the terminal sheaf, commutative-ring restriction, the canonical module equivalence for each given normalized ring extension with its operations and section formulas, and the ring atlas equalizer for the existing commutative structure-sheaf extension. Helpers use Mathlib pushforward and identity additive equivalences; no new independent notion or choice of an arbitrary map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a888af39b",
+  "group": "Q70",
+  "result": "pass",
+  "note": "First S2 delivery; the node is unchanged apart from lean and lean.statement matches the file verbatim. Every clause checked against the node and existing declarations. Extension and uniqueness: exists, and exactly one normalized iso over all isomorphisms; natural lifts unique with chart formula. Atlas equalizer: scheme overlap exists; every pullback presentation gives an equiv with formula e(a*x). Refinement: W with étale surjective p, commuting square, injective F.map p (singleton surjective étale map is an etalePrecoverage covering), coordinate equation; h=1 gives chart independence. Products: PreservesFiniteProducts includes terminal. Rings: CommRingCat.{v} restriction equivalence for arbitrary v is true (single-chart equalizer extension), more general than parent's universe u, no silent restriction. Modules: SheafOfModules.pushforward e.inv equivalence for every R and normalized (R',e), section formulas definitional, plus unique lift of Type-sheaf maps. Structure sheaf: ≃+* RingHom.eqLocus equalizer and Nonempty(r enlargedCotangentStructure ≅ commStructureSheaf) on existing objects. Edge cases: empty T/chart, X a scheme, identity chart, zero ring, noncommutative R, independent universes u v w. No hollow defs, sorry only, source and blueprint docstrings present, report sections present. Advisory: public import SpaceCotangentRingMap and use of enlarged-site defs owned only by parent theorem lem-trf-space-enlarged-etale-ringed-site-model (split child cannot cite; as Q59 6ff0); commStructureSheaf owner def-sfb-space-quasi-coherent-algebra uncited with stage-1 stmt_deps unchanged. No compile run because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261026T093112-L-3525706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

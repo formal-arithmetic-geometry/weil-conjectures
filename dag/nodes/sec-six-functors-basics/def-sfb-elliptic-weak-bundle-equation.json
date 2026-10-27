@@ -1,0 +1,146 @@
+{
+ "id": "def-sfb-elliptic-weak-bundle-equation",
+ "kind": "definition",
+ "title": "Local weak equations and symbols for real metric bundle differential operators",
+ "status": "split",
+ "statement": "Over $\\mathbf R$ [def-weil-field], use a smooth real $m$-manifold $N$ without boundary [def-sfb-smooth-real-manifold], smooth rank-$q$ real vector bundles [def-sfb-smooth-real-vector-bundle], and their actual smooth sections [def-sfb-smooth-bundle-sections]. Package a metric bundle by these existing bundle structures with smoothly varying positive definite real fibre inner products. An orientation is a covering subatlas of the maximal smooth atlas with positive transition Jacobian determinants. A smooth positive volume is a measure $\\mu$ whose pushforward in each atlas chart $c$ is $\\rho_c\\,dz$ on its target, with $\\rho_c$ smooth and strictly positive. Use the dependent almost-everywhere $L^2$ classes and ordered real multi-index derivatives of [def-sfb-bundle-sobolev-space]; this is the same $L^2$ definition for any specified measure $\\mu$. For metric bundles $G,H$ of rank $q$, put $V_p=c_p(U_p\\cap U^G_p\\cap U^H_p)$, where $c_p$ is the chart at $p$ and $U^G_p,U^H_p$ are its preferred frame domains. For a section $s$, write $s^G_p$ for its coefficients in these coordinates. A smooth differential operator of order at most $k$ consists of a real-linear map $Q:\\Gamma^\\infty(G)\\to\\Gamma^\\infty(H)$ and smooth real matrices $b_{p,\\alpha}$ on $V_p$, for $|\\alpha|\\le k$, such that $(Qs)^H_p=\\sum_{|\\alpha|\\le k} b_{p,\\alpha}\\partial^\\alpha s^G_p$ for every smooth section. Define its degree-$k$ symbol by $\\sigma_k(Q)(p,z,\\xi)=\\sum_{|\\alpha|=k}b_{p,\\alpha}(z)\\xi^\\alpha$, and ellipticity by invertibility for all $p$, $z\\in V_p$ and nonzero real $\\xi$. For $u\\in L^2(G,\\mu)$ and $f\\in\\Gamma^\\infty(H)$ define the weak equation $Qu=f$ by, for every $p$, output component $a$, and compactly supported smooth real test $\\phi$ with closed support inside $V_p$, $$\\int_{V_p} f^H_{p,a}\\phi\\,dz=\\sum_{|\\alpha|\\le k}\\sum_b(-1)^{|\\alpha|}\\int_{V_p}u^G_{p,b}\\,\\partial^\\alpha(b_{p,\\alpha,ab}\\phi)\\,dz.$$ Use the chosen representative of the existing dependent quotient in this identity. Define having a smooth representative by existence of a smooth section equal almost everywhere to that representative. On a smooth positive volume these formulations are independent of the representative and express equality of the corresponding local coefficient distributions; no global distribution or operator map is chosen from an existence theorem.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Demailly VI §1 (1.1)–(1.8), VI §2 preceding (2.1) and weak extension in (2.3), printed pp.287–289; PDF downloaded and read in the worker sandbox. Coordinate-test expansion of the stated distributional extension."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle",
+  "def-sfb-smooth-bundle-sections",
+  "def-sfb-bundle-sobolev-space"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "measurable square integrable vector bundle sections modulo almost everywhere equality and weak differential operator",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MeasureTheory.AEEqFun.mk\", \"module\": \"Mathlib.MeasureTheory.Function.AEEqFun\", \"type\": \"{β : Type*} [TopologicalSpace β] (f : α → β) (hf : AEStronglyMeasurable f μ) : α →ₘ[μ] β\", \"doc\": \"The quotient type of functions $ f : \\\\alpha \\\\to \\\\beta $ under the equivalence relation of being equal almost everywhere with respect to the measure $ \\\\mu $. This construction groups functions that agr\"}\n  {\"name\": \"MeasureTheory.AEEqFun.Integrable\", \"module\": \"Mathlib.MeasureTheory.Function.L1Space.AEEqFun\", \"type\": \"(f : α →ₘ[μ] ε) : Prop\", \"doc\": \"A function in the almost-everywhere equivalence class is integrable if it is almost everywhere strongly measurable and the integral of its norm is finite with respect to the measure $\\\\mu$.\"}\n  {\"name\": \"MeasureTheory.integrable_congr'\", \"module\": \"Mathlib.MeasureTheory.Function.L1Space.Integrable\", \"type\": \"{f : α → β} {g : α → γ} (hf : AEStronglyMeasurable f μ) (hg : AEStronglyMeasurable g μ) (h : ∀ᵐ a ∂μ, ‖f a‖ = ‖g a‖) :\\n  Integrable f μ ↔ Integrable g μ\", \"doc\": \"If functions $f : \\\\alpha \\\\to \\\\beta$ and $g : \\\\alpha \\\\to \\\\gamma$ are both almost everywhere strongly measurable with respect to a measure $\\\\mu$, and if $\\\\|f(a)\\\\| = \\\\|g(a)\\\\|$ holds for $\\\\mu$-almost ever\"}\n  {\"name\": \"MeasureTheory.integrableOn_congr_set_ae\", \"module\": \"Mathlib.MeasureTheory.Integral.IntegrableOn\", \"type\": \"(hst : s =ᵐ[μ] t) : IntegrableOn f s μ ↔ IntegrableOn f t μ\", \"doc\": \"If two sets $ s $ and $ t $ are equal almost everywhere with respect to a measure $ \\\\mu $, then a function $ f $ is integrable on $ s $ if and only if it is integrable on $ t $.\"}\n  {\"name\": \"MeasureTheory.AEEqFun.integrable_mk\", \"module\": \"Mathlib.MeasureTheory.Function.L1Space.AEEqFun\", \"type\": \"{f : α → ε} (hf : AEStronglyMeasurable f μ) : Integrable (mk f hf : α →ₘ[μ] ε) ↔ MeasureTheory.Integrable f μ\", \"doc\": \"For an almost everywhere strongly measurable function $ f : \\\\alpha \\\\to \\\\varepsilon $, the equivalence class $ [f] $ in the space of almost-everywhere equivalent functions is integrable if and only if \"}\n  {\"name\": \"MeasureTheory.Measure.aeEqSetoid\", \"module\": \"Mathlib.MeasureTheory.Function.AEEqFun\", \"type\": \"(μ : Measure α) : Setoid { f : α → β // AEStronglyMeasurable f μ }\", \"doc\": \"The equivalence relation on the set of almost everywhere strongly measurable functions $ f : \\\\alpha \\\\to \\\\beta $ with respect to a measure $ \\\\mu $, where two functions are equivalent if they are equal \"}\n  {\"name\": \"ae_eq_of_integral_smooth_smul_eq\", \"module\": \"Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_2}\\n  [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace ℝ F] [CompleteSpace F] {H : Type u_3}\\n  [inst_6 : TopologicalSpace H] (I : ModelWithCorners ℝ E H) {M : Type u_4} [inst_7 : Topolog\", \"doc\": \"Let $ M $ be a smooth manifold equipped with a measure $ \\\\mu $, and let $ f, f' : M \\\\to F $ be locally integrable functions into a Banach space $ F $. If for every smooth real-valued function $ g $ wi\"}\n  {\"name\": \"MeasureTheory.integrableOn_congr_fun_ae\", \"module\": \"Mathlib.MeasureTheory.Integral.IntegrableOn\", \"type\": \"(hst : f =ᵐ[μ.restrict s] g) : IntegrableOn f s μ ↔ IntegrableOn g s μ\", \"doc\": \"If two functions $ f $ and $ g $ are equal almost everywhere on a measurable set $ s $ with respect to the measure $ \\\\mu $ restricted to $ s $, then $ f $ is integrable on $ s $ if and only if $ g $ i\"}",
+   "date": "2026-10-24",
+   "verdict": "No full weak elliptic-operator interface. Reuse Mathlib smooth bundles/sections/metrics and the newly published BundleSobolev.L2 and BundleSobolev.multiPartial, read with scompile.py --source; no second L2 quotient or multi-index derivative is defined."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local finite order real vector bundle differential operator principal symbol and weak equation against compactly supported smooth coordinate tests",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TestFunction.mkCLM_apply\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"∀ (𝕜 : Type u_1) [inst : NontriviallyNormedField 𝕜] {E : Type u_3} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [inst_3 : NormedAddCommGroup F]\\n  [inst_4 : NormedSpace ℝ F] [inst_5 : NormedSpace 𝕜 F] {n : ℕ∞} {V : Type u_6} [inst_6 : AddC\", \"doc\": \"Given a non-trivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and $F$ over $\\\\mathbb{R}$, a locally convex topological vector space $V$ over $\\\\mathbb{R}$, and compatibility conditions betwe\"}\n  {\"name\": \"TestFunction.mkCLM\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"(𝕜 : Type u_1) →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_3} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace ℝ E] →\\n          {Ω : TopologicalSpace.Opens E} →\\n            {F : Type u_4} →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : \", \"doc\": \"Given a function from the space $\\\\mathcal{D}^n(\\\\Omega, F)$ of $C^n$-smooth test functions with compact support in an open subset $\\\\Omega \\\\subseteq E$ to a module $V$, which is additive, respects scala\"}\n  {\"name\": \"TestFunction.ofSupportedInLM\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"(𝕜 : Type u_1) →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_3} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace ℝ E] →\\n          {Ω : TopologicalSpace.Opens E} →\\n            {F : Type u_4} →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : \", \"doc\": \"Given a compact subset $ K $ contained in an open subset $ \\\\Omega \\\\subseteq E $, this linear map embeds the space $ \\\\mathcal{D}^n_K(E, F) $ of $ C^n $-smooth test functions with support in $ K $ into \"}\n  {\"name\": \"ContDiffMapSupportedIn.structureMapCLM\", \"module\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn\", \"type\": \"(𝕜 : Type u_1) →\\n  {E : Type u_2} →\\n    {F : Type u_3} →\\n      [inst : NontriviallyNormedField 𝕜] →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace ℝ E] →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace ℝ F] →\\n                [inst_5 : Norm\", \"doc\": \"For a given natural number $i$, this is a continuous linear map from the space $\\\\mathcal{D}^n_K(E, F)$ of $C^n$-differentiable maps with compact support in $K \\\\subseteq E$ to the space of bounded cont\"}\n  {\"name\": \"TestFunction.postcompCLM\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_3} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace ℝ E] →\\n          {Ω : TopologicalSpace.Opens E} →\\n            {F : Type u_4} →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : \", \"doc\": \"Given a continuous linear map $ T : F \\\\to F' $, this defines the continuous linear operator $ \\\\Phi $ that maps a test function $ f \\\\in \\\\mathcal{D}^n(\\\\Omega, F) $ to the composition $ T \\\\circ f \\\\in \\\\ma\"}\n  {\"name\": \"ContDiffMapSupportedIn.structureMapLM\", \"module\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn\", \"type\": \"(𝕜 : Type u_1) →\\n  {E : Type u_2} →\\n    {F : Type u_3} →\\n      [inst : NontriviallyNormedField 𝕜] →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace ℝ E] →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace ℝ F] →\\n                [inst_5 : Norm\", \"doc\": \"The linear map sending a $ C^n $ function with support in $ K $ to its $ i $-th derivative, viewed as a bounded continuous function from $ E $ to the space of $ i $-multilinear maps $ E^i \\to F $ over \"}\n  {\"name\": \"exists_contMDiffSection_forall_mem_convex_of_local\", \"module\": \"Mathlib/Geometry/Manifold/PartitionOfUnity\", \"type\": \"∀ {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type uH} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type uM} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [FiniteDimensional ℝ E] [IsManifold I (↑⊤) M] [SigmaCompactSpace M] [T2Space M\", \"doc\": \"Let $ M $ be a manifold with corners modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $, and let $ V \\\\to M $ be a vector bundle with fiber $ F $. Suppose that for each $ x \\\\in M $, there is a \"}\n  {\"name\": \"exists_smooth_section_forall_mem_convex_of_local\", \"module\": \"Mathlib/Geometry/Manifold/PartitionOfUnity\", \"type\": \"∀ {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type uH} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type uM} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [FiniteDimensional ℝ E] [IsManifold I (↑⊤) M] [SigmaCompactSpace M] [T2Space M\", \"doc\": \"Let $ M $ be a finite-dimensional, sigma-compact, Hausdorff manifold with corners modeled on a finite-dimensional normed vector space $ E $ over $ \\\\mathbb{R} $. Let $ V $ be a smooth vector bundle ove\"}",
+   "date": "2026-10-24",
+   "verdict": "No full weak elliptic-operator interface. Reuse Mathlib smooth bundles/sections/metrics and the newly published BundleSobolev.L2 and BundleSobolev.multiPartial, read with scompile.py --source; no second L2 quotient or multi-index derivative is defined."
+  },
+  {
+   "tool": "grep",
+   "query": "elliptic|hypoellipt|Garding|Gårding|principalSymbol|L2Section (Mathlib/Analysis/)",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean\", \"line\": \"59\", \"text\": \"and are the periods of the elliptic functions we shall construct. -/\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"line\": \"46\", \"text\": \"* [W. McLean, *Strongly Elliptic Systems and Boundary Integral Equations*][mclean2000]\"}\n  {\"file\": \"Mathlib/Analysis/Complex/AbelLimit.lean\", \"line\": \"183\", \"text\": \"  -- Third bound, regarding the distance between `l - g z` and the rearranged sum\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"19\", \"text\": \"- if `g` preserves orientation (i.e., has positive determinant) and is an elliptic matrix,\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"121\", \"text\": \"then it's an elliptic matrix. -/\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"122\", \"text\": \"theorem isElliptic_of_exists_smul_eq_self (h : 0 < g.val.det) (hgc : g ∉ Subgroup.center _)\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"123\", \"text\": \"    (hfix : ∃ z : ℍ, g • z = z) : g.IsElliptic := by\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"140\", \"text\": \"/-- The unique fixed point of an orientation-preserving elliptic matrix acting on `ℍ`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"386\", \"text\": \"  when regarding `x` as an element of `L`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"397\", \"text\": \"  of the normal closure of `E` equals its spectral norm when regarding `x` as an element of `L`. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "No full weak elliptic-operator interface. Reuse Mathlib smooth bundles/sections/metrics and the newly published BundleSobolev.L2 and BundleSobolev.multiPartial, read with scompile.py --source; no second L2 quotient or multi-index derivative is defined."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l -i 'elliptic.*operator|weak.*equation|square.integrable.*section|positive.*volume form|oriented.*atlas' dag/nodes/sec-six-functors-basics/def*.json; rg -n 'RiemannianMetric|L2Section|WeakEquation|OrientedAtlas|SmoothVolume|DifferentialOperator' lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search 'weak elliptic'; tools/blueprint_refs.py search 'L2 sections'",
+   "results": "DAG hits include def-sfb-bundle-sobolev-space (now published; reused), def-sfb-smooth-bundle-test-distributions (global continuous strong dual, not a finite-order local weak equation), and its manifold, bundle, density, test and integration prerequisites. Direct project grep finds the complex Hermitian-specific structures and CoordinateDifferentialOperator.firstOrder/weightedAdjoint, not this real arbitrary-order two-bundle interface. Both blueprint searches return 0 nodes. No upstream WeilConjectures match; grep -rn lem-sfb-elliptic-adjoint-regularity lean/WeilConjectures returns no match.",
+   "date": "2026-10-24",
+   "verdict": "The finite-order real local weak equation is missing. Existing global test-density constructions are not redeclared: this interface uses the defining coordinate-test equality directly."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-adjoint-regularity",
+  "date": "2026-10-24",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf; supporting explicit local weak elliptic-operator equation and positive smooth volume interface.",
+   "via": [
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.EllipticWeakBundleEquation",
+  "declaration": "RealEllipticBundle.DifferentialOperator",
+  "file": "lean/Sheaf/Geometry/Manifold/EllipticWeakBundleEquation.lean",
+  "statement": "structure DifferentialOperator (G : MetricBundle.{u, v} m q N) (H : MetricBundle.{u, w} m q N) (k : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "RealEllipticBundle.OrientedAtlas",
+   "RealEllipticBundle.SmoothVolume",
+   "RealEllipticBundle.MetricBundle",
+   "RealEllipticBundle.Sections",
+   "RealEllipticBundle.coordinates",
+   "RealEllipticBundle.coordinateDomain",
+   "RealEllipticBundle.indices",
+   "RealEllipticBundle.DifferentialOperator",
+   "RealEllipticBundle.DifferentialOperator.symbol",
+   "RealEllipticBundle.DifferentialOperator.IsElliptic",
+   "RealEllipticBundle.DifferentialOperator.WeakEquation",
+   "RealEllipticBundle.HasSmoothRepresentative"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e49dbf961",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e49dbf961",
+  "group": "NE",
+  "result": "pass",
+  "note": "Item record changes only lean + stmt_dep def-sfb-elliptic-weak-bundle-equation; statement fields verbatim; new def node record complete, 12 declarations, real data, built on landed BundleSobolev.L2/multiPartial/Model. Clause check: compact T2 boundaryless smooth m-manifold (hm), OrientedAtlas and metric g (unused, harmless), SmoothVolume = positive smooth chart densities (more general than metric volume; theorem stays true), MetricBundle same rank q with independent fibre universes, DifferentialOperator with coefficients pinned by the operator (each |α|<=k listed once), IsElliptic = IsUnit of the degree-k symbol for xi!=0, WeakEquation = sum (-1)^|α| ∫ u_b ∂^α(b_{α,ab} φ) with tests compactly supported in V_p (sign and coefficient placement correct; not vacuous: smooth u satisfies it by integration by parts), Quotient.out invariant because chart densities are positive, conclusion = smooth section equal mu-a.e. to the same class. Edge cases empty N, q=0, m=1, odd k, α=0, f=0, universes ok. No sorry outside the theorem; docstrings carry the source place and proof steps 1-4. Maintainer note: parallel unlanded same-notion def nodes in Q45 fredholm db8b (smooth-real-differential-operator, real-metric-volume; LAND2 failed) and Q88 formal-adjoint-symbol 4f8e (smooth-differential-operator, oriented-smooth-volume); no name clash, none on base, so PASS+note; stage 3 will need bridges or the maintainer should unify them."
+ }
+}

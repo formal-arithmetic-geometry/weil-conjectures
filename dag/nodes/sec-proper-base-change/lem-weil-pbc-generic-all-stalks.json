@@ -150,5 +150,84 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.all_sheafFiber_map_eq_zero_of_generic"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.all_sheafFiber_map_eq_zero_of_generic",
+     "module": "WeilConjectures.AlgebraicGeometry.GenericStalkVanishingPropagation",
+     "lines": [
+      23,
+      202
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be an irreducible scheme with generic point $\\eta$, and $\\Lambda$ a commutative ring. Let $F$ and $G$ be sheaves of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-site], with $G$ locally constant [def-constructible-locally-constant], and let $\\varphi:F\\to G$ be a morphism such that for every separably closed field $\\Omega$ and every geometric point $s:\\operatorname{Spec}\\Omega\\to X$ whose image is $\\eta$ the induced map of stalks $\\varphi_s:F_s\\to G_s$ [def-weil-pbc-geometric-stalks] is zero. Then $\\varphi_s=0$ for every separably closed field $\\Omega$ and every geometric point $s:\\operatorname{Spec}\\Omega\\to X$. No finiteness assumption is made.",
+  "proof": [
+   {
+    "text": "First show that an image section on an etale W with a point w over eta vanishes after a nonempty etale refinement. Compose the algebraic-closure point of W at w with W to X. The stalk map is zero by the hypothesis. Naturality of the germ maps makes the germ of the image section zero; equality in the filtered colimit gives a pointed refinement W prime where that section is zero. The retained geometric point makes W prime nonempty. ([def-weil-pbc-etale-site], [def-weil-pbc-geometric-stalks]).",
+    "uses": [
+     "def-weil-pbc-etale-site",
+     "def-weil-pbc-geometric-stalks"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "A constant element n whose associated section is zero on a nonempty etale W is zero. Local injectivity of sheafification says that the equalizer sieve of n and zero covers W. If n differs from zero that sieve is empty, whereas a covering sieve on a nonempty W has a member through each point, since etale covering families are jointly surjective. ([def-constructible-constant], [def-weil-pbc-etale-site]).",
+    "uses": [
+     "def-constructible-constant",
+     "def-weil-pbc-etale-site"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For any section a of F on V and any ordinary point v of V, choose a trivializing cover member Ui of G through the image of v. The scheme pullback V times_X Ui has a point w1 over v. The isomorphism of the restriction of G to Ui with a constant sheaf, composed with the identification of the restriction of the constant sheaf N_X to Ui with the constant sheaf on Ui, sends the pulled-back image b = phi(a) to a section c of N_X. Local surjectivity of sheafification (the image sieve of c is covering, and etale coverings are jointly surjective) gives a further etale neighbourhood W2 of w1 on which c is the constant section of some n in N. No finite generation is needed. ([def-constructible-locally-constant], [def-constructible-constant], [def-weil-pbc-etale-site]).",
+    "uses": [
+     "def-constructible-locally-constant",
+     "def-constructible-constant",
+     "def-weil-pbc-etale-site"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "W2 is nonempty and etale over X, hence has nonempty open image. Since eta is the generic point of the irreducible space X, it lies in every nonempty open subset, in particular in this image. At a point w of W2 over eta, apply the first step to the restriction of a. On the resulting nonempty W3 the image section is zero. Naturality of the constant-sheaf isomorphism and of sheafification implies that the constant section of n is zero on W3. The second step gives n = 0. Consequently the image section b is already zero on W2, since the trivializing isomorphism is injective on sections. ([lem-weil-pbc-flat-lfp-open], [def-weil-pbc-geometric-stalks], [def-constructible-constant]).",
+    "uses": [
+     "lem-weil-pbc-flat-lfp-open",
+     "def-weil-pbc-geometric-stalks",
+     "def-constructible-constant"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The sieve of restrictions of b that vanish is thus covering: the preceding construction supplies a member over every v of V. Sheaf separatedness gives b = 0. Extensionality on sections proves phi = 0, and additivity of each geometric stalk functor gives its map equal to zero. This proves the stated conclusion without stalk conservativity or the constant-sheaf stalk formula. ([def-weil-pbc-etale-site], [def-weil-pbc-geometric-stalks]).",
+    "uses": [
+     "def-weil-pbc-etale-site",
+     "def-weil-pbc-geometric-stalks"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

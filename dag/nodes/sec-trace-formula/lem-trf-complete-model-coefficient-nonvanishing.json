@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-complete-model-coefficient-nonvanishing",
+ "kind": "statement",
+ "title": "Coefficient control and monomial survival in completed monoid hypersurfaces",
+ "statement": "Let $(A,\\mathfrak m)$ be a Noetherian local commutative integral domain [def-weil-pbc-noetherian-ring], complete and separated for the powers of $\\mathfrak m$ [def-weil-pbc-adically-complete-ring]. Let $T$ be a finitely generated additive submonoid of a free abelian group $H$ of finite rank, and let $W:H\\to\\mathbf Z$ be a homomorphism positive on $T\\setminus\\{0\\}$. Write $A[T]$ for finite sums $\\sum_{u\\in T}a_u z^u$, with $z^uz^v=z^{u+v}$, and let $B$ be its completion [def-weil-pbc-adic-completion] at $(\\mathfrak m,z^u\\ (u\\ne0))$. Then $B$ is Noetherian and identifies as an $A$-algebra with all coefficient families $(a_u)_{u\\in T}$, with componentwise addition and finite convolution\n$$(ab)_u=\\sum_{v+w=u}a_vb_w.$$\nUnder this identification $a z^u$ has coefficient $a$ at $u$ and zero elsewhere, so every $z^u$ is nonzero. Suppose $r\\in\\mathfrak m\\setminus\\{0\\}$ and $\\theta\\in B$ has constant coefficient $r$. Then $B/(\\theta)$ is Noetherian and the image of every $z^u$ is nonzero, including $u=0$. More precisely, for any $u\\in T$ and $b\\in B$ such that $(\\theta b)_v=0$ for all $v$ with $W(v)<W(u)$, one has $b_v=0$ for all those $v$ and $(\\theta b)_u=r b_u$. These assertions allow $T=\\{0\\}$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-formulated refinement of Expose VI 1.6(i)--(ii), printed p. 70 (model notation, not a theorem asserted there). Extracted from lem-trf-complete-toric-facet-valuations retained proof steps 6--8; the full original argument is retained in report.md. Underlying algebra: Stacks Tags 00FN (lemma-Noetherian-permanence) and 0316 (lemma-completion-Noetherian-Noetherian)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose nonzero additive generators $g_1,\\ldots,g_s$ of $T$, allowing $s=0$. The $A$-algebra map $A[X_1,\\ldots,X_s]\\to A[T]$, $X_i\\mapsto z^{g_i}$, is surjective: every $z^u$ is the image of a product of the $X_i$, and finite sums lift term by term. Thus $A[T]$ is of finite type over the Noetherian ring $A$. Apply [lem-weil-pbc-finite-type-algebra-noetherian], then [lem-weil-pbc-adic-completion-noetherian] to the ideal $J=(\\mathfrak m,z^u:u\\ne0)$. This proves that $B$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence) and 0316 (lemma-completion-Noetherian-Noetherian)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-monoid-completion-coefficients] with $P=T$, $G=H$, $w=W$ and $\\mathfrak b=J$. The hypotheses are exactly the given Noetherian locality, completeness and separatedness of $A$, finite generation and lattice embedding of $T$, and positivity of $W$. It identifies $B$ as an $A$-algebra with all coefficient families, gives finite convolution and sends $az^u$ to the family supported at $u$ with coefficient $a$. In particular $z^u\\ne0$ because its $u$-coefficient is $1\\ne0$ in the integral domain $A$.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70: agent coefficient refinement of the displayed completed models; existing coefficient-isomorphism node."
+   }
+  },
+  {
+   "text": "Fix $u$ and put $N=W(u)\\ge0$. Suppose $(\\theta b)_v=0$ whenever $W(v)<N$. Strong induction on the nonnegative integer $n<N$ proves $b_v=0$ for every $v$ with $W(v)=n$. In the finite convolution at such a $v$, the summand with first exponent $0$ is $r b_v$. Every other summand has first exponent $a\\ne0$ and second exponent $c$ with $a+c=v$, hence $0\\le W(c)=n-W(a)<n$; it vanishes by induction. Thus $0=(\\theta b)_v=r b_v$, and $r\\ne0$ in the domain $A$ implies $b_v=0$. For the base $n=0$, there are no summands with $a\\ne0$, by positivity. This proves the asserted vanishing below $N$.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written weight induction for the refinement of VI 1.6(i)--(ii), printed p. 70; finite convolution supplied by the cited node."
+   }
+  },
+  {
+   "text": "In the convolution at $u$, a summand with first exponent $a\\ne0$ has second exponent $c$ of weight $W(u)-W(a)<N$, so its $b_c$ vanishes by Step 3. The remaining summand is $\\theta_0 b_u=r b_u$. Therefore $(\\theta b)_u=r b_u$, including when $N=0$.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written coefficient calculation for the refinement of VI 1.6(i)--(ii), printed p. 70."
+   }
+  },
+  {
+   "text": "The canonical map $B\\to B/(\\theta)$ is a surjective homomorphism, so [lem-weil-pbc-surjective-image-noetherian] and Step 1 make its quotient Noetherian. If the image of some $z^u$ were zero, then $z^u\\in(\\theta)$, so $z^u=\\theta b$ for some $b\\in B$: finite sums of multiples of the single generator combine into one multiple. Step 2 gives zero coefficients below $W(u)$ and coefficient $1$ at $u$. Steps 3--4 then give $1=r b_u$. Since $r\\in\\mathfrak m$, this puts $1$ in the proper maximal ideal $\\mathfrak m$, a contradiction. Thus every monomial survives.",
+   "uses": [
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), quotient argument; agent-written monomial contradiction for ILO VI 1.6(ii)."
+   }
+  },
+  {
+   "text": "When $T=\\{0\\}$, the generator list in Step 1 is empty and $A[T]=A$. Step 2 identifies $B$ with $A$, and $\\theta=r$. Steps 3--4 have no lower-weight coefficients and say $(rb)_0=rb_0$. Step 5 proves that $1$ survives in $A/(r)$ since $r\\in\\mathfrak m$. Hence none of the arguments excludes the trivial monoid or the exponent $u=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written check of the degenerate model in VI 1.6(i)--(ii), printed p. 70."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-monoid-completion-coefficients",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-surjective-image-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70 supplies the models only; algebraic refinement using existing coefficient and Noetherianity nodes and explicit weight induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A completed sharp saturated monoid algebra over a field or Cohen ring modulo theta with constant coefficient p is Noetherian and its chart monomials are nonzero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/PowerSeries/Inverse\", \"type\": \"∀ {k : Type u_2} [inst : Field k], IsNoetherianRing (PowerSeries k)\", \"doc\": \"For any field $ k $, the ring of formal power series $ k⟦X⟧ $ is a Noetherian ring, meaning every ideal in this ring is finitely generated.\"}\n  {\"name\": \"PowerSeries.instIsNoetherianRing\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R], IsNoetherianRing (PowerSeries R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a Noetherian ring. This means every ideal in $ R⟦X⟧ $ is finitely generated, inheriting th\"}\n  {\"name\": \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] {x : LaurentSeries.RatFuncAdicCompl K},\\n  x ∈ IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K) →\\n    ∃ F, (LaurentSeries.LaurentSeriesRingEquiv K) ((HahnSeries.ofPowerSeries ℤ K) F) = x\", \"doc\": \"For any element $ x $ in the adic completion of the integers with respect to the ideal generated by $ X $ in the field of rational functions $ K $, there exists a power series $ F $ such that the Laur\"}\n  {\"name\": \"LaurentSeries.mem_integers_of_powerSeries\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (F : PowerSeries K),\\n  (LaurentSeries.LaurentSeriesRingEquiv K) ((HahnSeries.ofPowerSeries ℤ K) F) ∈\\n    IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K)\", \"doc\": \"Every power series over a field $ K $, when converted to a Laurent series via the canonical equivalence, belongs to the adic completion of the ring of integers in the field of rational functions $ K(X\"}\n  {\"name\": \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal (PowerSeries R)} [I.IsPrime],\\n  PowerSeries.X ∉ I →\\n    ∀ {S : Set R},\\n      Ideal.span S = Ideal.map PowerSeries.constantCoeff I →\\n        S.Finite → ∃ T, I = Ideal.span T ∧ T.Finite ∧ T.ncard = S.ncard\", \"doc\": \"If the formal variable $ X $ is not in the ideal $ I $ of univariate power series over a ring $ R $, and the image of $ I $ under the constant coefficient homomorphism is finitely generated by a set $\"}\n  {\"name\": \"PowerSeries.fg_iff_of_isPrime\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : Ideal (PowerSeries R)} [P.IsPrime],\\n  P.FG ↔ (Ideal.map PowerSeries.constantCoeff P).FG\", \"doc\": \"For an ideal $ P $ in the ring of formal power series over a commutative ring $ R $, $ P $ is finitely generated if and only if the ideal generated by the constant terms of elements of $ P $ in $ R $ \"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"LaurentSeries.algebraMap_C_mem_adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (x : K),\\n  ((LaurentSeries.LaurentSeriesRingEquiv K).toRingHom.comp HahnSeries.C) x ∈\\n    IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K)\", \"doc\": \"The multiplicative type synonym for the integers $\\\\mathbb{Z}$, equipped with the standard linear order, forms an ordered commutative monoid. This means that the monoid operation (interpreted as additi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weight induction on formal monoid series proves that a monomial cannot be divisible by a series whose constant coefficient is a nonunit nonzero divisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPowerSeries.X_pow_dvd_iff\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Basic\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] {s : σ} {n : ℕ} {φ : MvPowerSeries σ R},\\n  MvPowerSeries.X s ^ n ∣ φ ↔ ∀ (m : σ →₀ ℕ), m s < n → (MvPowerSeries.coeff m) φ = 0\", \"doc\": \"For a multivariate power series $\\\\varphi$ over a semiring $R$ in variables indexed by $\\\\sigma$, the monomial $(X_s)^n$ divides $\\\\varphi$ if and only if all coefficients of $\\\\varphi$ corresponding to m\"}\n  {\"name\": \"MvPowerSeries.X_dvd_iff\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Basic\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] {s : σ} {φ : MvPowerSeries σ R},\\n  MvPowerSeries.X s ∣ φ ↔ ∀ (m : σ →₀ ℕ), m s = 0 → (MvPowerSeries.coeff m) φ = 0\", \"doc\": \"For a multivariate power series $\\\\varphi$ over a semiring $R$ in variables indexed by $\\\\sigma$, the variable $X_s$ divides $\\\\varphi$ if and only if every monomial coefficient of $\\\\varphi$ with exponen\"}\n  {\"name\": \"MvPowerSeries.mem_nonZeroDivisorsRight_of_constantCoeff\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] {φ : MvPowerSeries σ R},\\n  MvPowerSeries.constantCoeff φ ∈ nonZeroDivisorsRight R → φ ∈ nonZeroDivisorsRight (MvPowerSeries σ R)\", \"doc\": \"If the constant term of a multivariate power series $\\\\varphi$ over a semiring $R$ is a right non-zero divisor in $R$, then $\\\\varphi$ itself is a right non-zero divisor in the semiring of multivariate \"}\n  {\"name\": \"MvPowerSeries.monomial_mem_nonzeroDivisors\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] {n : σ →₀ ℕ} {r : R},\\n  (MvPowerSeries.monomial n) r ∈ nonZeroDivisors (MvPowerSeries σ R) ↔ r ∈ nonZeroDivisors R\", \"doc\": \"A monomial with exponents $n$ and coefficient $r$ in the ring of multivariate power series over $R$ is a non-zero divisor if and only if the coefficient $r$ is a non-zero divisor in the base semiring \"}\n  {\"name\": \"MvPowerSeries.mem_nonZeroDivisors_of_constantCoeff\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] {φ : MvPowerSeries σ R},\\n  MvPowerSeries.constantCoeff φ ∈ nonZeroDivisors R → φ ∈ nonZeroDivisors (MvPowerSeries σ R)\", \"doc\": \"If the constant term of a multivariate power series $\\\\varphi$ over a ring $R$ is a non-zero divisor in $R$, then $\\\\varphi$ itself is a non-zero divisor in the ring of multivariate power series $R[[\\\\si\"}\n  {\"name\": \"MvPowerSeries.monomial_mem_nonzeroDivisorsRight\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] {n : σ →₀ ℕ} {r : R},\\n  (MvPowerSeries.monomial n) r ∈ nonZeroDivisorsRight (MvPowerSeries σ R) ↔ r ∈ nonZeroDivisorsRight R\", \"doc\": \"A monomial in the multivariate power series ring $ R[[\\\\sigma]] $ is a right non-zero divisor if and only if its coefficient is a right non-zero divisor in the base ring $ R $.\"}\n  {\"name\": \"MvPowerSeries.mem_nonZeroDivisorsLeft_of_constantCoeff\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] {φ : MvPowerSeries σ R},\\n  MvPowerSeries.constantCoeff φ ∈ nonZeroDivisorsLeft R → φ ∈ nonZeroDivisorsLeft (MvPowerSeries σ R)\", \"doc\": \"If the constant term of a multivariate power series $\\\\varphi$ over a ring $R$ is a left non-zero divisor in $R$, then $\\\\varphi$ itself is a left non-zero divisor in the semiring of multivariate power \"}\n  {\"name\": \"MvPowerSeries.monomial_mem_nonzeroDivisorsLeft\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] {n : σ →₀ ℕ} {r : R},\\n  (MvPowerSeries.monomial n) r ∈ nonZeroDivisorsLeft (MvPowerSeries σ R) ↔ r ∈ nonZeroDivisorsLeft R\", \"doc\": \"A monomial with finite support $ n $ and coefficient $ r $ in the multivariate power series ring $ \\\\mathbb{M}[[\\\\sigma]] $ over a semiring $ R $ is a left non-zero divisor if and only if the coefficien\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"AdicCompletion\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*(nonzero|ne_zero)|AdicCompletion.*MonoidAlgebra|MonoidAlgebra.*AdicCompletion",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"line\": \"165\", \"text\": \"    simp [X, monomial_mul_monomial, coeff_monomial, single_left_inj (one_ne_zero : (1 : ℕ) ≠ 0)]\"}\n  {\"file\": \"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"line\": \"167\", \"text\": \"    simp [X, monomial_mul_monomial, coeff_monomial, single_left_inj (one_ne_zero : (1 : ℕ) ≠ 0)]\"}\n  {\"file\": \"Mathlib/Algebra/LinearRecurrence.lean\", \"line\": \"215\", \"text\": \"    <;> rw [degree_monomial E.order one_ne_zero]\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/CoeffList.lean\", \"line\": \"125\", \"text\": \"    simp [coeffList_monomial (Polynomial.leadingCoeff_ne_zero.mpr h), hep]\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Inductions.lean\", \"line\": \"187\", \"text\": \"* monomials with nonzero coefficient and non-zero exponent,\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Inductions.lean\", \"line\": \"217\", \"text\": \"      exact h_monomial a0 n.succ_ne_zero\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Taylor.lean\", \"line\": \"97\", \"text\": \"  simp [taylor_monomial, natDegree_C_mul_of_mul_ne_zero, natDegree_pow_X_add_C, c0]\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Degree/TrailingDegree.lean\", \"line\": \"357\", \"text\": \"  trailingDegree_monomial one_ne_zero\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Degree/TrailingDegree.lean\", \"line\": \"361\", \"text\": \"  natTrailingDegree_monomial one_ne_zero\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Degree/TrailingDegree.lean\", \"line\": \"366\", \"text\": \"  rw [X_pow_eq_monomial, trailingDegree_monomial one_ne_zero]\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Degree/TrailingDegree.lean\", \"line\": \"371\", \"text\": \"  rw [X_pow_eq_monomial, natTrailingDegree_monomial one_ne_zero]\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Degree/Defs.lean\", \"line\": \"262\", \"text\": \"  degree_monomial _ one_ne_zero\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Degree/Defs.lean\", \"line\": \"514\", \"text\": \"  rw [X_pow_eq_monomial, degree_monomial _ (one_ne_zero' R)]\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\", \"line\": \"165\", \"text\": \"    refine vars_monomial_single i (pow_ne_zero _ hp.1) ?_\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean\", \"line\": \"160\", \"text\": \"  rw [dvd_monomial_iff_exists (one_ne_zero' R)]\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Degrees.lean\", \"line\": \"107\", \"text\": \"  (degrees_monomial_eq _ (1 : R) one_ne_zero).trans (toMultiset_single _ _)\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Degrees.lean\", \"line\": \"280\", \"text\": \"  rw [X_pow_eq_monomial, degreeOf_monomial_eq _ _ one_ne_zero, Finsupp.single_eq_same]\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Degrees.lean\", \"line\": \"531\", \"text\": \"    (X s ^ n : MvPolynomial σ R).totalDegree = n := by simp [X_pow_eq_monomial, one_ne_zero]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"line\": \"308\", \"text\": \"    exact (eq_of_coeff_monomial_ne_zero (right_ne_zero_of_mul hd)).symm\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Variables.lean\", \"line\": \"91\", \"text\": \"  rw [X, vars_monomial (one_ne_zero' R), Finsupp.support_single _ (one_ne_zero' ℕ)]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"103\", \"text\": \"lemma monomial_mem_nonzeroDivisorsLeft {n : σ →₀ ℕ} {r} :\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"104\", \"text\": \"    monomial n r ∈ nonZeroDivisorsLeft (MvPowerSeries σ R) ↔ r ∈ nonZeroDivisorsLeft R := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"116\", \"text\": \"lemma monomial_mem_nonzeroDivisorsRight {n : σ →₀ ℕ} {r} :\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"117\", \"text\": \"    monomial n r ∈ nonZeroDivisorsRight (MvPowerSeries σ R) ↔ r ∈ nonZeroDivisorsRight R := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"128\", \"text\": \"lemma monomial_mem_nonzeroDivisors {n : σ →₀ ℕ} {r} :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian completed monoid algebra and nonvanishing of monomials modulo a series with constant coefficient p",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerSeries.HasSubst.monomial'\", \"module\": \"Mathlib.RingTheory.PowerSeries.Substitution\", \"type\": \"{n : ℕ} (hn : n ≠ 0) (s : S) : HasSubst (monomial n s)\", \"doc\": \"For any non-zero natural number $n$ and element $s$ in a ring $S$, the monomial power series $sX^n$ satisfies the substitution condition because its constant term is zero, which is nilpotent.\"}\n  {\"name\": \"MvPowerSeries.mem_nonZeroDivisors_of_constantCoeff\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors\", \"type\": \"{φ : MvPowerSeries σ R} (hφ : constantCoeff φ ∈ R⁰) : φ ∈ (MvPowerSeries σ R)⁰\", \"doc\": \"If the constant term of a multivariate power series $\\\\varphi$ over a ring $R$ is a non-zero divisor in $R$, then $\\\\varphi$ itself is a non-zero divisor in the ring of multivariate power series $R[[\\\\si\"}\n  {\"name\": \"PowerSeries.instIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Ideal\", \"type\": \"[IsNoetherianRing R] : IsNoetherianRing R⟦X⟧\", \"doc\": \"If $ R $ is a Noetherian ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a Noetherian ring. This means every ideal in $ R⟦X⟧ $ is finitely generated, inheriting th\"}\n  {\"name\": \"MvPowerSeries.order_ne_zero_iff_constCoeff_eq_zero\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \": f.order ≠ 0 ↔ f.constantCoeff = 0\", \"doc\": \"For a multivariate power series $ f $, the order of $ f $ is not equal to zero if and only if the constant coefficient of $ f $ is zero.\"}\n  {\"name\": \"PowerSeries.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsNoetherianRing k⟦X⟧\", \"doc\": \"For any field $ k $, the ring of formal power series $ k⟦X⟧ $ is a Noetherian ring, meaning every ideal in this ring is finitely generated.\"}\n  {\"name\": \"MvPowerSeries.homogeneousComponent_of_order\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{f : MvPowerSeries σ R} {p : ℕ} (hf : p = f.order) : f.homogeneousComponent p ≠ 0\", \"doc\": \"For a multivariate power series $ f $, if $ p $ is the order of $ f $, then the homogeneous component of $ f $ of degree $ p $ is non-zero.\"}\n  {\"name\": \"MvPowerSeries.ne_zero_iff_exists_coeff_ne_zero\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Basic\", \"type\": \"(f : MvPowerSeries σ R) : f ≠ 0 ↔ (∃ d : σ →₀ ℕ, coeff d f ≠ 0)\", \"doc\": \"A multivariate power series $ f $ over a ring $ R $ in variables indexed by $ \\\\sigma $ is non-zero if and only if there exists a monomial $ d : \\\\sigma \\\\to_0 \\\\mathbb{N} $ such that the coefficient of $\"}\n  {\"name\": \"MvPowerSeries.coeff_expand_of_not_dvd\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Expand\", \"type\": \"(φ : MvPowerSeries σ R) {m : σ →₀ ℕ} {i : σ} (h : ¬p ∣ m i) : (expand p hp φ).coeff m = 0\", \"doc\": \"For any multivariate power series $\\\\varphi$ over a commutative ring $R$ in variables indexed by $\\\\sigma$, and for any monomial $m : \\\\sigma \\\\to_0 \\\\mathbb{N}$, if the exponent $m(i)$ of some variable $i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a positive finitely generated monoid algebra over a complete local domain has coefficient families and nonzero monomials modulo a series with nonzero nonunit constant coefficient",
+   "results": "Wrapper returned 8 hits: PowerSeries.exists_isWeierstrassDivision, PowerSeries.weierstrassDistinguished, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.weierstrassMod, PowerSeries.weierstrassUnit, PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod, PowerSeries.IsWeierstrassDivisorAt.divCoeff, PowerSeries.weierstrassDiv. Read MvPowerSeries/NoZeroDivisors.lean:54--101 for the constant-term candidate; it concerns free multivariate power series and proves non-zero-divisibility, not monomial survival in this monoid quotient. Weierstrass hits concern one variable and do not state this item. Weighted-order hits likewise concern free exponent monoids.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*AdicCompletion|AdicCompletion.*MonoidAlgebra|constantCoeff.*nonZeroDivisors",
+   "results": "Wrapper returned 4 hits in RingTheory: Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/Inverse.lean. Read MvPowerSeries/NoZeroDivisors.lean:54--101 for the constant-term candidate; it concerns free multivariate power series and proves non-zero-divisibility, not monomial survival in this monoid quotient. Weierstrass hits concern one variable and do not state this item. Weighted-order hits likewise concern free exponent monoids.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a formal monoid series ring over a domain a monomial survives quotient by a series with nonzero nonunit constant term",
+   "results": "Wrapper returned 8 hits: MvPowerSeries.mem_nonZeroDivisors_of_constantCoeff, PowerSeries.isUnit_iff_constantCoeff, PowerSeries.monomial, PowerSeries.HasSubst.monomial', PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain, PowerSeries.divXPowOrderHom, MvPowerSeries.isUnit_iff_constantCoeff, PowerSeries.monomial_eq_C_mul_X_pow. Read MvPowerSeries/NoZeroDivisors.lean:54--101 for the constant-term candidate; it concerns free multivariate power series and proves non-zero-divisibility, not monomial survival in this monoid quotient. Weierstrass hits concern one variable and do not state this item. Weighted-order hits likewise concern free exponent monoids.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"AdicCompletion\"",
+   "results": "Wrapper returned 0 hits: . Read MvPowerSeries/NoZeroDivisors.lean:54--101 for the constant-term candidate; it concerns free multivariate power series and proves non-zero-divisibility, not monomial survival in this monoid quotient. Weierstrass hits concern one variable and do not state this item. Weighted-order hits likewise concern free exponent monoids.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weighted formal series over an integral domain: if a product has zero coefficients below a given degree, multiplication by its nonzero constant term determines its first coefficient",
+   "results": "Wrapper returned 8 hits: MvPowerSeries.coeff_mul_prod_one_sub_of_lt_weightedOrder, MvPowerSeries.coeff_mul_left_one_sub_of_lt_weightedOrder, MvPowerSeries.coeff_mul_right_one_sub_of_lt_weightedOrder, MvPowerSeries.coeff_mul_prod_one_sub_of_lt_order, MvPowerSeries.weightedOrder_mul, MvPowerSeries.coeff_mul_right_one_sub_of_lt_order, PowerSeries.coeff_mul_of_lt_order, MvPowerSeries.coeff_mul_left_one_sub_of_lt_order. Read MvPowerSeries/NoZeroDivisors.lean:54--101 for the constant-term candidate; it concerns free multivariate power series and proves non-zero-divisibility, not monomial survival in this monoid quotient. Weierstrass hits concern one variable and do not state this item. Weighted-order hits likewise concern free exponent monoids.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-toric-facet-valuations",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Boundary-prime and valuation input to the complete-local recognition equality, replacing the unsupported converse application of VI 1.6. Re-split of the retained facet-valuation proof, steps 6--8: Coefficient control and monomial survival in completed monoid hypersurfaces.",
+   "via": [
+    "lem-trf-complete-toric-facet-valuations",
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-complete-model-coefficient-nonvanishing",
+  "worker": "stage1",
+  "summary": "Reused the existing general coefficient-isomorphism node and three Noetherianity nodes; no new nodes. Proved the truncated coefficient control by strong induction on weight, then monomial survival by the nonunit constant-term contradiction. Checked every cited statement and literal quote, the zero monoid and zero exponent, nonfree positive monoids and equal-weight ties. Statement and original search evidence preserved; new searches recorded from the Q42 wrapper log.",
+  "blueprint": "Retains the ancestry of lem-trf-local-term-locality, proof (1)--(2), through log-regular complete-local recognition. Realizes the coefficient and nonvanishing input extracted from retained facet-valuation proof steps 6--8 for the formal models of ILO VI 1.6; the current latest blueprint has no standalone node for this auxiliary algebra.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherianity of adic completion, used on A[T]; the curve-zero unit has no replacement for this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-ea25dabdf",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-ea25dabdf (reviewer sub-agent of L); spot-checked: Q42 lem-trf-complete-model-coefficient-nonvanishing ea25dabd: no new nodes, and the inherited statement is unchanged. I read all four cited statements in full. lem-trf-monoid-completion-coefficients (same unit, no cycle back to the item) gives the B≅A^T identification, the finite convolution and the images of az^u; its hypotheses (Noetherian local, complete and separated, finitely generated monoid in Z^r, positive w, b=(m,z^p)) are exactly the item's. The three pbc Noetherianity nodes give Steps 1 and 5. Step 1: the surjection from the polynomial ring A[X] is written out, and the empty generator list is allowed. Steps 3-4: a correct strong induction on the weight n<W(u). Any other summand has W(a)>=1, so W(c)<n. Cancelling r needs r!=0 in the domain A. The base case is forced by positivity, and ties in weight are covered. Step 5: z^u=θb gives 1=r·b_u in m, a contradiction. Small cases tested: T={0}; T=N with θ=p+z over Z_p; N^2; the monoid generated by 2 and 3; the field case used by the parent's case (i); r a unit or r=0 as counterexamples. Sources: ILO VI 1.6 on PDF pp. 75-76 shows only the models, so the agent origin is right; Stacks 00FN and 0316 labels match. No SGA is cited and no repair note exists. The pbc adic-completion-noetherian tool use is accepted as generic. A dup search on constant coefficient and monomial survival finds only the parent. The item's opening clauses repeat the cited coefficient node; this is inherited from Q138, not introduced by this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteModelCoefficientNonvanishing",
+  "declaration": "AddMonoidAlgebra.completeModel_coefficient_nonvanishing",
+  "file": "lean/Sheaf/RingTheory/CompleteModelCoefficientNonvanishing.lean",
+  "statement": "theorem completeModel_coefficient_nonvanishing (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (H : Type v) [AddCommGroup H] (T : AddSubmonoid H) [AddMonoid.FG T] (W : H →+ ℤ) (hpos : ∀ t : T, t ≠ 0 → 0 < W (t : H)) (hfree : ∃ d : ℕ, Nonempty (H ≃+ (Fin d → ℤ))) : ∃ (J : Ideal (AddMonoidAlgebra A T)), J = Ideal.map (algebraMap A (AddMonoidAlgebra A T)) (IsLocalRing.maximalIdeal A) ⊔ Ideal.span {x | ∃ t : T, t ≠ 0 ∧ x = AddMonoidAlgebra.single t (1 : A)} ∧ IsNoetherianRing (AdicCompletion J (AddMonoidAlgebra A T)) ∧ ∃ (ring : CommRing (T → A)) (alg : @Algebra A (T → A) _ ring.toSemiring) (c : @AlgEquiv A (AdicCompletion J (AddMonoidAlgebra A T)) (T → A) _ _ ring.toSemiring _ alg), (∀ (a b : T → A) (t : T), (@Add.add (T → A) ring.toAdd a b) t = a t + b t) ∧ (∀ (a b : T → A) (t : T), (@Mul.mul (T → A) ring.toMul a b) t = ∑ᶠ q : {q : T × T // q.1 + q.2 = t}, a q.1.1 * b q.1.2) ∧ (∀ t : T, Set.Finite {q : T × T | q.1 + q.2 = t}) ∧ (∀ (a : A) (t s : T), c (AdicCompletion.of J (AddMonoidAlgebra A T) (AddMonoidAlgebra.single t a)) s = if s = t then a else 0) ∧ (∀ t : T, AdicCompletion.of J (AddMonoidAlgebra A T) (AddMonoidAlgebra.single t (1 : A)) ≠ 0) ∧ (∀ (r : A), r ∈ IsLocalRing.maximalIdeal A → r ≠ 0 → ∀ θ : AdicCompletion J (AddMonoidAlgebra A T), c θ 0 = r → IsNoetherianRing (AdicCompletion J (AddMonoidAlgebra A T) ⧸ Ideal.span {θ}) ∧ (∀ t : T, Ideal.Quotient.mk (Ideal.span {θ}) (AdicCompletion.of J (AddMonoidAlgebra A T) (AddMonoidAlgebra.single t (1 : A))) ≠ 0) ∧ (∀ (t : T) (b : AdicCompletion J (AddMonoidAlgebra A T)), (∀ s : T, W (s : H) < W (t : H) → c (θ * b) s = 0) → (∀ s : T, W (s : H) < W (t : H) → c b s = 0) ∧ c (θ * b) t = r * c b t))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31a0bcc4d",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: A Noetherian local complete domain; T an FG submonoid of a finite-rank free H; positive W on T∖0 only; J pinned by an equation inside ∃; B Noetherian; ring/alg/c coefficient identification in the same form as monoidCompletion_coefficients, and c is unique given the monomial formula; a z^u coefficient formula; every z^u ≠ 0; θ with c θ 0 = r for r∈m∖0 gives B/(θ) Noetherian, monomials survive, and lower-weight vanishing with (θb)_t = r b_t. T={0}, t=0 and A a field are covered; no extra hypotheses; universes u and v bound; lean.statement verbatim; node change is lean only; stmt_dep records unchanged Mathlib existing:true; imports exist; sorry only; docstrings carry source place, blueprint id and 6-step proof; both report sections present. Advisory: duplicated copyright header (cosmetic)."
+ }
+}

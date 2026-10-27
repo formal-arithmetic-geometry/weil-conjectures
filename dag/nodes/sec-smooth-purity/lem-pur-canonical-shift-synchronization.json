@@ -1,0 +1,157 @@
+{
+ "id": "lem-pur-canonical-shift-synchronization",
+ "kind": "statement",
+ "title": "Existence of a synchronized shifted canonical construction",
+ "statement": "Fix a finite-field datum $D$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, the strict coefficient-system operations $o$, and a supplied integral realization record $R$ [def-sf-integral-system-realization-data]. Let $I$ be finite, $X_i,W$ schemes over $\\operatorname{Spec}D.k$, and $e,t$ finite geometric expressions with bijective occurrence-label maps [def-pur-integral-expression-occurrences]. Let $K$ lie in the full domain of $e$, and assume $K$ also lies in that of $t$ [def-sf-integral-system-expression-domain]. Given $i\\in I$, $r\\in\\mathbf Z$, and any CanonicalPair consisting of its actual system map $s:e(\\mathcal RK)\\to t(\\mathcal RK)$ and completed integral map $v:e_{\\rm int}(K)\\to t_{\\rm int}(K)$, there exist maps $s',v'$ at $K'=K[i\\mapsto K_i[r]]$ such that SynchronizedPair holds for $(s,v,s',v')$ [def-pur-synchronized-canonical-maps]. Thus the old and shifted maps use the identical formal constructors and geometric parameters, including all finite compositions and contexts. This is only an existence assertion; it asserts no shift square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used and coefficient-comparison sentences; local generator squares and simultaneous shifted-construction steps of the agent-expanded adic argument"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-realization-data",
+  "def-sf-integral-system-expression-domain",
+  "def-pur-integral-expression-occurrences",
+  "def-pur-synchronized-canonical-maps"
+ ],
+ "proof": [
+  {
+   "text": "Every CanonicalIsoPair constructor preserves the labelled occurrence set: unary operations leave it alone, tensor associativity uses the associativity equivalence of disjoint sums, and pull/tensor and projection retain the same two sums. Taking hom or inverse, composition and contexts preserves this labelled equivalence. Hence injectivity at the source propagates to every intermediate expression of a CanonicalPair. Tensor children have disjoint occurrence labels.",
+   "uses": [
+    "def-pur-integral-expression-occurrences",
+    "def-pur-synchronized-canonical-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used and coefficient-comparison sentences; local generator squares and simultaneous shifted-construction steps of the agent-expanded adic argument"
+   }
+  },
+  {
+   "text": "For any such injectively labelled subtree, the designated label is absent or has a unique context. In the absent case its evaluation is unchanged. In the present case the fixed reduction and operation shifts give an isomorphism from the shifted evaluation to the old evaluation shifted by r. Derived completeness and bounded constructibility of the input are shift stable. At every positive coefficient level cohomology degrees translate by -r and the Tor interval translates by -r; the same finite intervals work at every level. Normalized transition adjoints remain invertible after the shift, since derived reduction commutes with it. Shift each retained etale antecedent and its transition map: exact restriction and the existing evaluation comparisons commute with shift, so the origin squares remain the same shifted commuting squares. Thus Good and the recursive admissibility tests remain true at every intermediate subtree. The compact-support intermediate is its recorded open extension and is treated in the same way.",
+   "uses": [
+    "def-pur-integral-operation-shift-data",
+    "def-sf-integral-system-expression-domain",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-proetale-tor-interval-shift",
+    "def-coef-normalized-dvr-tower",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used and coefficient-comparison sentences; local generator squares and simultaneous shifted-construction steps of the agent-expanded adic argument"
+   }
+  },
+  {
+   "text": "Induct on the original canonical-pair construction. Repeat its actual isomorphism and basic-map constructor at the shifted family, retaining the geometric witnesses. The source completion map is invertible by the supplied R.completionIso on the shifted domain from the preceding step; hence SynchronizedPair.basic has exactly the required new completed integral map. Identity repeats identity. Composition uses the shifted intermediate admissibility and the two induction witnesses. Unary contexts apply their same functor to the two new maps; tensor applies its bifunctor. These are precisely the synchronized constructors, and therefore produce the claimed existential witnesses. This is a proof of existence, with no selection of data from a mere unproved existence assertion.",
+   "uses": [
+    "def-sf-integral-system-realization-data",
+    "def-pur-synchronized-canonical-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used and coefficient-comparison sentences; local generator squares and simultaneous shifted-construction steps of the agent-expanded adic argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pur-integral-expression-occurrences",
+  "def-pur-integral-operation-shift-data",
+  "def-pur-synchronized-canonical-maps",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-realization-data",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-proetale-tor-interval-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used and coefficient-comparison sentences; local generator squares and simultaneous shifted-construction steps of the agent-expanded adic argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "synchronized canonical six functor system maps preserve their constructors when one independently labelled input is shifted",
+   "results": "CategoryTheory.Functor.shiftMap, CategoryTheory.Functor.CommShift, and CategoryTheory.ShiftedHom.map; no synchronized expression-constructor assertion.",
+   "date": "2026-10-27",
+   "verdict": "no match: project-specific assertion; generic infrastructure or different statements only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reevaluate a finite canonical expression map after shifting one input keeping the same generators and composition witnesses",
+   "results": "Fin2.remapLeft and syntax relabelling operations; no derived six-functor expression synchronization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match: project-specific assertion; generic infrastructure or different statements only"
+  },
+  {
+   "tool": "grep",
+   "query": "SynchronizedPair|CanonicalPair|canonicalShiftSynchronization",
+   "results": "msearch Mathlib grep: 0 hits. Local SynchronizedCanonicalMaps proves components and diagonal only; neither reevaluates at a different, shifted family.",
+   "date": "2026-10-27",
+   "verdict": "no match: project-specific assertion; generic infrastructure or different statements only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralRealizationShiftCoherence",
+  "date": "2026-10-27",
+  "group": "J6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Adic transport Step 2: coefficient comparisons for the maps made from tensor reassociation, evaluation, and adjunction units and counits",
+   "via": [
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CanonicalShiftSynchronization",
+  "file": "lean/Sheaf/SixFunctors/CanonicalShiftSynchronization.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.canonicalShiftSynchronization",
+  "statement": "theorem canonicalShiftSynchronization (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)\n    (o : Operations l E) (R : Realizations l E D o)\n    {I : Type u} [Finite I] {X : I → Over (Spec (.of D.k))}\n    {W : Over (Spec (.of D.k))} (e t : IndependentExpression _ I X W)\n    (_ge : e.val.geometric) (_gt : t.val.geometric)\n    (K : (e.val.domain l E o).FullSubcategory) (_ht : t.val.domain l E o K.obj)\n    (i : I) (r : ℤ)\n    (s : e.val.systemObj l E o ((inputReduction l E X).obj K.obj) ⟶\n      t.val.systemObj l E o ((inputReduction l E X).obj K.obj))\n    (v : (e.val.evaluate (integralInterpretation l E)).obj K.obj ⟶\n      (t.val.evaluate (integralInterpretation l E)).obj K.obj)\n    (_hpair : CanonicalPair l E o R.compositors R.openComparisons R.canonicalBridge R.properOpen\n      R.ringedModels R.ringedOpenComparisons R.ringedProperOpen\n      ((inputReduction l E X).obj K.obj) K.obj e.val t.val s v) :\n    ∃ sNew vNew,\n      SynchronizedPair l E o R.compositors R.openComparisons R.canonicalBridge R.properOpen\n          R.ringedModels R.ringedOpenComparisons R.ringedProperOpen\n          ((inputReduction l E X).obj K.obj) K.obj\n          ((inputReduction l E X).obj (Function.update K.obj i ((K.obj i)⟦r⟧)))\n          (Function.update K.obj i ((K.obj i)⟦r⟧)) e.val t.val s v sNew vNew",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T012854-L-2342707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T012854-L-2342707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-scalar-refinement-closure-square",
+ "kind": "statement",
+ "title": "Coefficient squares for dense refinements and schematic closures",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. All schemes are separated of finite type over $k$, and all morphisms are $k$-morphisms [sk-def-sfb-dc-setting]. Let $\\Lambda\\to\\Lambda'$ be any of the coefficient maps specified in [det-prop-scalar-six-direct-image]: a homomorphism of finite commutative $\\ell$-primary rings, $\\mathcal O_E\\to\\mathcal O_F$ or $E\\to F$ for finite $F/E$ inside $\\overline{\\mathbf Q}_\\ell$, $\\mathcal O_E\\to E$, $E\\to\\overline{\\mathbf Q}_\\ell$, a continuous map $\\mathcal O_E\\to A$ to a finite admissible ring, or a finite composite. Here $E/\\mathbf Q_\\ell$ is finite and $\\mathcal O_E$ its valuation ring; use pulled-back condensed coefficients, including the finite-subextension condensed convention for $\\overline{\\mathbf Q}_\\ell$. Work in ordinary unbounded module-object derived categories on the small pro-étale sites [sk-def-sfb-module-derived-pushpull]. Write $T_V=\\Lambda'_V\\otimes^{\\mathbf L}_{\\Lambda_V}-$ [sk-def-sfb-coefficient-change], $\\gamma_{v,M}:T Rv_*M\\to Rv_*TM$ for the unit/pullback/counit comparison [det-prop-scalar-six-direct-image], and $\\delta_{a,M}:T a_!M\\xrightarrow{\\sim}a_!TM$ for the canonical open comparison [def-sfb-derived-open-immersion-shriek-iso, det-prop-scalar-six-pullback]. The notation $\\Dctf$ means bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible].\n\nLet $c=(j:X\\hookrightarrow Z,p:Z\\to Y)$ and $c'=(j':X\\hookrightarrow Z',p':Z'\\to Y)$ be compactifications [sk-def-nagata-sketch-data], and let $h:Z'\\to Z$ be proper with $hj'=j$, $p'=ph$ and $h^{-1}(j(X))=j'(X)$. Assume either (a) both compactifications are dense, or (b) $Z'$ is the schematic closure of $X$ in $Z$ and $h$ is its closed inclusion. For $K\\in\\Dctf(X,\\Lambda)$ let $e_{h,K}:j_!K\\to Rh_*j'_!K$ be the open-adjunction transpose of the inverse of the canonical identification $j^*Rh_*j'_!K\\simeq K$. In case (a) this is the refinement map of [det-sf-comp-coherence-refinement]; in case (b) it is the restriction-normalized schematic-closure identification of [sk-lem-nagata-density-normalization]. It is an isomorphism in both cases. Then\n$$Rh_*\\delta_{j',K}\\circ\\gamma_{h,j'_!K}\\circ T_Z(e_{h,K})=e_{h,T_XK}\\circ\\delta_{j,K}.$$\nDefine $C_{c,K}=Rp_*\\delta_{j,K}\\circ\\gamma_{p,j_!K}$ and $C_{c',K}=Rp'_*\\delta_{j',K}\\circ\\gamma_{p',j'_!K}$, and put $\\phi_{h,K}=Rp_*e_{h,K}$, with target identified using $Rp_*Rh_*\\simeq R(ph)_*$. Then\n$$\\phi_{h,T_XK}\\circ C_{c,K}=C_{c',K}\\circ T_Y(\\phi_{h,K}).$$\nBoth equalities hold as morphisms in the $\\Lambda'$-module derived categories, with the displayed proper-composition identifications.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Independence paragraph: the two refinement composites and application of Rp_*; returned steps 3 and 4 (dense refinement and schematic-closure normalization)."
+ },
+ "stmt_deps": [
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback",
+  "det-sf-comp-coherence-refinement",
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-lem-nagata-density-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Put $M=j'_!K$ and $K'=T_XK$. By [lem-sfb-open-extension-zero-constructible-finite-tor], $M$ is in $\\Dctf(Z',\\Lambda)$, so [lem-sfb-proper-direct-image-coefficient-restriction] applies to $h$ and the open $j$. The inverse-image condition in the statement identifies its Cartesian square with $j':X\\hookrightarrow Z'$, $j:X\\hookrightarrow Z$, and $h_X=1_X$. Also $K'\\in\\Dctf(X,\\Lambda')$ by [det-prop-scalar-six-ctf]. For either coefficient ring write $u_j:1\\xrightarrow{\\sim}j^*j_!$ for the invertible unit of the ambient unbounded open adjunction, supplied by [lem-sfb-condensed-open-adjunction-localization].",
+   "uses": [
+    "lem-sfb-open-extension-zero-constructible-finite-tor",
+    "lem-sfb-proper-direct-image-coefficient-restriction",
+    "det-prop-scalar-six-ctf",
+    "lem-sfb-condensed-open-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence paragraph: equality by open restriction, then application of Rp_*"
+   }
+  },
+  {
+   "text": "Write $r_{h,N}:j^*Rh_*N\\xrightarrow{\\sim}j'^*N$ for the canonical open restriction [lem-sfb-identity-open-derived-restriction], and suppress the canonical tensor/pullback identifications of [det-prop-scalar-six-pullback](1). The exchange map $b_{h,N}$ of [lem-sfb-proper-direct-image-coefficient-restriction] is $r_{h,N}$: since $h_X=1_X$, its unit factor is the identity and $b_{h,N}=j'^*(\\varepsilon_{h,N})\\circ a_{h,Rh_*N}^{-1}$, where $a_h:j'^*h^*\\cong j^*$ is the inverse composition comparison; the counit equation $j'^*(\\varepsilon_{h,N})=r_{h,N}\\,a_{h,Rh_*N}$ of [lem-sfb-identity-open-derived-adjunction-normalization], whose underived adjunct hypothesis is supplied by [lem-sfb-identity-open-underived-square-normalization], gives $b_{h,N}=r_{h,N}$ over both admissible rings $\\Lambda,\\Lambda'$. The open coefficient square [lem-sfb-proper-direct-image-coefficient-restriction] therefore gives\n$$r_{h,T_{Z'}M}\\,j^*\\gamma_{h,M}=T_X(r_{h,M}),$$\nbecause $h_X=1_X$ and $\\gamma_{1,N}=1$ (the defining unit/counit composite in [det-prop-scalar-six-direct-image] is the triangle identity). For each open $a$, [lem-sfb-open-scalar-conjugate-normalization] identifies the restriction of the conjugate $\\delta_a$ of [def-sfb-derived-open-immersion-shriek-iso]: $u_{a,K'}^{-1}a^*(\\delta_{a,K})=T_X(u_{a,K}^{-1})\\theta_{a,a_!K}^{-1}$, where $\\theta_a$ is the K-flat-normalized scalar/pullback identification, the same one that gives [det-prop-scalar-six-pullback](1). Suppressing $\\theta_a$, this reads\n$$a^*\\delta_{a,K}\\,T_X(u_{a,K})=u_{a,K'}.$$\nThese equations use the specified comparisons, not arbitrarily chosen isomorphisms.",
+   "uses": [
+    "lem-sfb-identity-open-derived-restriction",
+    "det-prop-scalar-six-pullback",
+    "lem-sfb-identity-open-derived-adjunction-normalization",
+    "lem-sfb-identity-open-underived-square-normalization",
+    "lem-sfb-proper-direct-image-coefficient-restriction",
+    "det-prop-scalar-six-direct-image",
+    "lem-sfb-open-scalar-conjugate-normalization",
+    "def-sfb-derived-open-immersion-shriek-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence paragraph: equality by open restriction, then application of Rp_*"
+   }
+  },
+  {
+   "text": "Set $\\theta_{h,K}=u_{j',K}^{-1}r_{h,j'_!K}$. By the definition of $e$ as an open-adjunction transpose,\n$$\\theta_{h,K}\\,j^*e_{h,K}\\,u_{j,K}=1_K.$$\nLet $A=Rh_*\\delta_{j',K}\\,\\gamma_{h,j'_!K}\\,T_Z(e_{h,K})$ and $B=e_{h,K'}\\delta_{j,K}$. Naturality of $r_h$ [lem-sfb-identity-open-derived-restriction] and the equations of step 2 give\n$$\\theta_{h,K'}j^*A\\,T_X(u_{j,K})=T_X(\\theta_{h,K}j^*e_{h,K}u_{j,K})=1_{K'},$$\nwhereas the transpose identity for $e_{h,K'}$ and the unit equation for $\\delta_j$ give\n$$\\theta_{h,K'}j^*B\\,T_X(u_{j,K})=1_{K'}.$$\nBoth $\\theta_{h,K'}$ and $T_X(u_{j,K})$ are invertible. Precompose $A,B$ with $\\delta_{j,K}^{-1}$ and apply the Hom bijection for $j_!\\dashv j^*$ [lem-sfb-condensed-open-adjunction-localization]; the displayed equality of adjuncts implies $A=B$. This proves the first asserted square in both cases, using only the common inverse-image condition.",
+   "uses": [
+    "lem-sfb-identity-open-derived-restriction",
+    "lem-sfb-condensed-open-adjunction-localization",
+    "def-sfb-derived-open-immersion-shriek-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence paragraph: equality by open restriction, then application of Rp_*"
+   }
+  },
+  {
+   "text": "For completeness, the map used above has the required isomorphism normalization. In case (a), [det-sf-comp-coherence-refinement](1)-(2) identifies this exact adjunction transpose with the refinement map and makes it invertible for $K\\in\\Dctf\\subset\\operatorname{Loc}(\\Dctf)$; the same applies to $K'$. In case (b), [det-nagata-density-normalization-sheaves] gives the unit-induced map $j_!K\\xrightarrow{\\sim}i_*j'_!K$ and its unbounded derived identification, while [sk-lem-nagata-density-normalization] gives the corresponding direct-image identification. Its restriction to $X$ is the identity: restricting the displayed unit and the open base-change identification in the sheaf statement evaluates on the identity map over $X$. The open Hom bijection therefore identifies the restriction-normalized schematic-closure map specified in the item with $e_{i,K}$. This also applies after coefficient change. No density assertion is needed for this closed-inclusion case.",
+   "uses": [
+    "det-sf-comp-coherence-refinement",
+    "det-nagata-density-normalization-sheaves",
+    "sk-lem-nagata-density-normalization",
+    "lem-sfb-condensed-open-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence paragraph: equality by open restriction, then application of Rp_*"
+   }
+  },
+  {
+   "text": "Let $P=Rp_*$, $H=Rh_*$ and $N=j_!K$. Under $Rp'_*\\simeq PH$, the composition and naturality equations of [det-prop-scalar-six-direct-image](2) read\n$$\\gamma_{p',M}=P(\\gamma_{h,M})\\gamma_{p,HM},\\qquad\n\\gamma_{p,HM}T_Y(Pe_{h,K})=P(T_Ze_{h,K})\\gamma_{p,N}.$$\nConsequently\n$$\\begin{aligned}\nC_{c',K}T_Y(\\phi_{h,K})\n&=PH(\\delta_{j',K})P(\\gamma_{h,M})P(T_Ze_{h,K})\\gamma_{p,N}\\\\\n&=P(e_{h,K'}\\delta_{j,K})\\gamma_{p,N}\\\\\n&=\\phi_{h,K'}C_{c,K}.\n\\end{aligned}$$\nThe middle equality is step 3. This is the second claimed equality, including the specified proper-composition identifications. Only functoriality and reassociation are used after the cited naturality and composition equations.",
+   "uses": [
+    "det-prop-scalar-six-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence paragraph: equality by open restriction, then application of Rp_*"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "det-nagata-density-normalization-sheaves",
+  "det-prop-scalar-six-ctf",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback",
+  "det-sf-comp-coherence-refinement",
+  "lem-sfb-condensed-open-adjunction-localization",
+  "lem-sfb-identity-open-derived-adjunction-normalization",
+  "lem-sfb-identity-open-derived-restriction",
+  "lem-sfb-identity-open-underived-square-normalization",
+  "lem-sfb-open-extension-zero-constructible-finite-tor",
+  "lem-sfb-open-scalar-conjugate-normalization",
+  "lem-sfb-proper-direct-image-coefficient-restriction",
+  "sk-lem-nagata-density-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Independence paragraph: equality by open restriction, then application of Rp_*"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "refinement.*coefficient|coefficient.*refinement|schematicClosure",
+   "results": "; 0 hits; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of scalars respects proper compactification refinement and schematic closure comparison maps",
+   "results": "; AlgebraicGeometry.IsProper.isStableUnderBaseChange; ContinuousLinearMap.restrictScalarsₗ; ContinuousLinearMap.restrictScalarsL; SpectrumRestricts.compactSpace; AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme; AlgebraicClosure.instIsScalarTower; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of coefficients commutes with the identity-normalized proper refinement map between extensions by zero, including schematic closure normalization",
+   "results": "; FormalMultilinearSeries.compChangeOfVariables_blocksFun; AlgebraicGeometry.AffineSpace.reindex_appTop_coord; FormalMultilinearSeries.compChangeOfVariables; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization; AlgebraicGeometry.AffineSpace.map_reindex; ShrinkingLemma.PartialRefinement.exists_gt; OrderedFinpartition.applyOrderedFinpartition_update_left; OrderedFinpartition.applyOrderedFinpartition_update_right",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from open extension to a proper pushforward of open extension commutes with derived tensor by a new coefficient ring when the proper map is identity above the open",
+   "results": "; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app; PresheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_id_comp; PresheafOfModules.pushforward_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient extension commutes with the proper refinement map between open extensions by zero",
+   "results": "ContinuousLinearMap.extend_zero; ContinuousLinearMap.extend_eq; AbstractCompletion.compare_comp_eq_compare; Function.apply_extend; AbstractCompletion.extend_map; extendFrom_extends; BoundedContinuousFunction.extend_comp; Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern generic adjunctions or scalar maps, not the condensed pro-etale refinement coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern generic adjunctions or scalar maps, not the condensed pro-etale refinement coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*coefficient|coefficient.*refinement|schematicClosure",
+   "results": "; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern generic adjunctions or scalar maps, not the condensed pro-etale refinement coefficient square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of scalars commutes with compactification refinement and schematic closure",
+   "results": "ContinuousAlgHom.coe_restrictScalars; AlgebraicClosure.instIsScalarTower; ContinuousLinearMap.restrictScalarsₗ; SpectrumRestricts.compactSpace; Ring.instIsScalarTowerNormalClosure; ContinuousAlgHom.restrictScalars; ContinuousLinearMap.restrictScalarsL; Ring.instIsScalarTowerNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure_1",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern generic adjunctions or scalar maps, not the condensed pro-etale refinement coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open adjunction transpose of the identity commutes with derived extension of coefficients and proper pushforward",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; SheafOfModules.pullback_id_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern generic adjunctions or scalar maps, not the condensed pro-etale refinement coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; scope Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern generic adjunctions or scalar maps, not the condensed pro-etale refinement coefficient square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-compact-support",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-compact-support",
+   "place": "Independence paragraph: the two refinement composites and application of Rp_*; returned steps 3 and 4 (dense refinement and schematic-closure normalization).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scalar-refinement-closure-square",
+  "worker": "stage1",
+  "summary": "Proved the coefficient refinement square by the existing coefficient/open-restriction compatibility and the normalized open adjunction, writing both adjuncts explicitly. Checked dense and schematic-closure isomorphism normalization separately, then expanded the pushforward square using naturality and the direct-image compositor. No new nodes or statement changes.",
+  "blueprint": "Independence paragraph of det-prop-scalar-six-compact-support: identity restriction of the two composites, uniqueness under open adjunction, and application of Rp_* with composition compatibility. The schematic-closure case uses the existing normalization nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-open-extension-zero-constructible-finite-tor",
+    "why": "Generic preservation of bounded constructibility and Tor amplitude by open extension verifies the hypothesis of the existing coefficient/open-restriction square; this unit has no separate general preservation statement."
+   },
+   {
+    "node": "lem-sfb-condensed-open-adjunction-localization",
+    "why": "Generic ambient unbounded open adjunction with invertible unit supplies the Hom bijection and its normalization, independently of compactifications."
+   },
+   {
+    "node": "lem-sfb-identity-open-derived-restriction",
+    "why": "Generic identity-over-an-open restriction isomorphism and its naturality specify theta for both dense refinements and closed inclusions."
+   },
+   {
+    "node": "det-sf-comp-coherence-refinement",
+    "why": "The existing refinement theorem supplies the prescribed dense refinement map and its invertibility, rather than replacing the coefficient-comparison route."
+   },
+   {
+    "node": "det-nagata-density-normalization-sheaves",
+    "why": "The unit-normalized schematic-closure sheaf and complex isomorphism identifies the closed-inclusion comparison with the adjunction transpose."
+   },
+   {
+    "node": "sk-lem-nagata-density-normalization",
+    "why": "Generic schematic-closure normalization provides the compactification expression and its pushforward identification."
+   },
+   {
+    "node": "lem-sfb-identity-open-derived-adjunction-normalization",
+    "why": "Generic counit normalization i^*(ε_h)=r_h a_h of the derived adjunction over an identity locus; identifies the proper-square exchange map b_h with r_h when h_X=1_X. No node of sk-prop-scalar-six states it. (Added by maintainer review.)"
+   },
+   {
+    "node": "lem-sfb-identity-open-underived-square-normalization",
+    "why": "Generic underived adjunct compatibility of c_h,a_h, the hypothesis of the derived normalization lemma. (Added by maintainer review.)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-open-extension-zero-constructible-finite-tor",
+  "lem-sfb-condensed-open-adjunction-localization",
+  "lem-sfb-identity-open-derived-restriction",
+  "det-sf-comp-coherence-refinement",
+  "det-nagata-density-normalization-sheaves",
+  "sk-lem-nagata-density-normalization",
+  "lem-sfb-identity-open-derived-adjunction-normalization",
+  "lem-sfb-identity-open-underived-square-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-03f864c05",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-03f864c05 (reviewer sub-agent of L); spot-checked: I read the item in full (statement unchanged, 5 steps, no new nodes) against the blueprint main-20261015 det-prop-scalar-six-compact-support.proof.md Independence paragraph (l.12-24); the split follows that route. Steps 3 and 5 are correct; I recomputed both adjunct chains and the Rp_* expansion. Step 4: e is normalized by det-sf-comp-coherence-refinement (1)-(2) in case (a) and by det-nagata-density-normalization-sheaves plus the Hom bijection in case (b). Small cases checked: K=0, X empty, h=1, identity coefficients, nonflat Z/l^2->F_l, schematic closure with an extra closed component. FIX, two missing citations in step 2. (1) The step used the identity-open restriction r_h in place of the exchange map b_h of lem-sfb-proper-direct-image-coefficient-restriction, and no node says b=r_h. Now cited: the counit equation of lem-sfb-identity-open-derived-adjunction-normalization, with its hypothesis from lem-sfb-identity-open-underived-square-normalization. Both are declared in tool_uses. (2) The delta unit equation was justified only as 'the defining characterization'. Now cited: the in-unit node lem-sfb-open-scalar-conjugate-normalization, whose theta is the same K-flat normalization as det-prop-scalar-six-pullback(1). Batch-5: det-prop-scalar-six-ctf reaches the trace-formula chapter only via the generic inverse-image stalk comparison lem-trf-proetale-pullback-stalk-coherence, and lem-sfb-proper-direct-image-coefficient-restriction reaches the PD chapter only via the generic module-object/ringed-topos comparison lem-pd-module-ringed-topos-derived-comparison. Neither is a step of the trace formula or Poincare duality, so both are accepted as generic. The nodes added by the FIX have the same generic reach and create no cycle. The six declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ScalarRefinementClosureSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarRefinementClosureSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarRefinementOpenIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarCompactificationComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarRefinementComposition",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarRefinementPushforward",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarRefinementClosureSquare"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ScalarRefinementClosureSquare.lean",
+  "statement": "theorem scalarRefinementClosureSquare (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)] {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (_ha : ListedCoefficientMap ell a) {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (c d : Compactification.BoundaryCompactification f.left) (r : d ⟶ c) (_hcases : (IsSchemeTheoreticallyDominant c.obj.obj.i ∧ IsSchemeTheoreticallyDominant d.obj.obj.i) ∨ ∃ e : d.obj.obj.Z ≅ c.obj.obj.i.image, e.hom ≫ c.obj.obj.i.imageι = r.hom.hom.hom ∧ d.obj.obj.i ≫ e.hom = c.obj.obj.i.toImage) (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left)) (_hK : constantModelBoundedConstructible Λ.X X.left K ∧ DerivedCategory.finiteTorAmplitude _ K) : IsIso (localizingRefinementMap Λ.X r K) ∧ IsIso (localizingRefinementMap Λ'.X r ((scalarSixChange a X.left).obj K)) ∧ ((scalarSixChange a c.obj.obj.Z).map (localizingRefinementMap Λ.X r K) ≫ (scalarDirectImageMate a r.hom.hom.hom).app ((openImmersionLowerShriek Λ.X d.obj.obj.i).mapDerivedCategory.obj K) ≫ (RootCoordinateFace.lower Λ'.X r.hom.hom.hom).map ((scalarRefinementOpenIso a d.obj.obj.i).hom.app K) = (scalarRefinementOpenIso a c.obj.obj.i).hom.app K ≫ localizingRefinementMap Λ'.X r ((scalarSixChange a X.left).obj K)) ∧ (scalarCompactificationComparison a c.obj.obj K ≫ scalarRefinementPushforward Λ' r ((scalarSixChange a X.left).obj K) = (scalarSixChange a Y.left).map (scalarRefinementPushforward Λ r K) ≫ scalarCompactificationComparison a d.obj.obj K)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helpers merely specialize the published scalar conjugate, form C_c, and apply the normalized proper-composition identification to Rp_*(e_h). BoundaryCompactification supplies quasi-compact opens and both refinement triangles; the closure case is stated up to its unique scheme isomorphism over Z and X. Both coefficient squares are equalities of actual derived module morphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80f8253a9",
+  "group": "NG",
+  "result": "pass",
+  "note": "Item matches node clause by clause: setting, listed maps, BoundaryCompactification c,d with r:d⟶c (triangles + inverse-image open), case (a) IsSchemeTheoreticallyDominant both, case (b) ∃ e: Z'≅i.image with e≫imageι=h ∧ j'≫e=toImage (no density), K∈Dctf by recorded predicates; e = localizingRefinementMap (transpose of θ⁻¹), IsIso at K and T_X K; square 1 T_Z e ≫ γ_h ≫ Rh_*δ_j' = δ_j ≫ e'; C_c = γ_p ≫ Rp_*δ_j; φ_h = Rp_*e ≫ lowerComp.symm ≫ eqToIso(hom_g); square 2 C_c≫φ' = T_Y φ ≫ C_d. Helpers non-hollow. Dep §1(B) repair of deleted sk-lem-nagata-density-normalization module: ∃ eZ uniquely pinned by unit≫j^*eZ≫r_i = unit_Z, eS = whiskered composite; matches node, no added hypotheses (IsCommMonObj is framework standing). Records lean-only, statements verbatim, lines ≤93, imports exist, report sections present. Advisory: uncited def owners (scalar-six interfaces, listed maps, def-sf-comp-refinement-data, identity-open restriction) not addable at S2. No compile (no file changed)."
+ }
+}

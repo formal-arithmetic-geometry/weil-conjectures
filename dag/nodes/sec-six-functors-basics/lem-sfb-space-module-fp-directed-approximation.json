@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-space-module-fp-directed-approximation",
+ "kind": "statement",
+ "title": "Quasi-coherent modules on qcqs spaces are filtered colimits of finitely presented modules",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use sheaves of $\\mathcal O_X$-modules on the small etale site and quasi-coherence of [def-trf-space-quasi-coherent-module]. Assume $|X|$ is quasi-compact (every open cover has a finite subcover, with topology [def-a1-space-point-topology]) and that its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact on affine scheme tests. A module is of finite presentation if etale locally it is the cokernel of a map $\\mathcal O^{m}\\to\\mathcal O^{n}$ with $m,n$ finite. For every quasi-coherent module $\\mathcal M$ there are a small filtered category $J$, a diagram $(\\mathcal F_j)_{j\\in J}$ of quasi-coherent modules of finite presentation, and compatible maps $\\mathcal F_j\\to\\mathcal M$ exhibiting $\\mathcal M$ as their colimit in all module sheaves [def-weil-pbc-category-colimit]. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07V9 (lemma-colimit-finitely-presented)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-a1-space-point-topology",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-space-change-base-to-integers] with $S\\to\\operatorname{Spec}\\mathbf Z$ to view $X$ over the integers. Its small etale site and structure sheaf are identified with the original ones, hence the module category, quasi-coherence, finite presentations and the asserted colimit universal property are unchanged. The same atlas schemes and maps give the same point topology [def-a1-space-point-topology], so quasi-compactness is unchanged; quasi-separatedness was already imposed on the absolute diagonal. Thus the hypotheses of absolute approximation apply.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V9 (lemma-colimit-finitely-presented)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-absolute-noetherian-approximation] to obtain a small nonempty directed set $I$, spaces $X_i$ with affine transitions, and $X\\simeq\\varprojlim_I X_i$, with every $X_i$ Noetherian. Apply [lem-sfb-space-affine-limits-schematic-stages] to this system: its limit projections $q_i:X\\to X_i$ are affine. Choose $i_0\\in I$ using nonemptiness. We have obtained an affine morphism $q_{i_0}$ to a Noetherian algebraic space; no Noetherian property of $X$ has been inferred.",
+   "uses": [
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-space-affine-limits-schematic-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V9 (lemma-colimit-finitely-presented)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-affine-noetherian-module-approximation] with $S=\\operatorname{Spec}\\mathbf Z$, $f=q_{i_0}$, $Y=X_{i_0}$ and the given module $\\mathcal M$. Step 2 supplies precisely affineness and Noetherianity of the target. The lemma supplies the small filtered diagram, its finitely presented quasi-coherent terms and its colimit cocone in all module sheaves. Under the ringed-site identification of step 1 these are the required objects and maps on the original $X$ over $S$.",
+   "uses": [
+    "lem-sfb-space-affine-noetherian-module-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07V9 (lemma-colimit-finitely-presented)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-change-base-to-integers",
+  "def-a1-space-point-topology",
+  "lem-sfb-space-absolute-noetherian-approximation",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-affine-noetherian-module-approximation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07V9 (lemma-colimit-finitely-presented)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Cc]olimit.*[Ff]inite[Pp]resentation",
+   "results": "{\"t\": \"2026-10-23T11:59:38Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Cc]olimit.*[Ff]inite[Pp]resentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on qcqs algebraic spaces are filtered colimits of modules of finite presentation",
+   "results": "{\"t\": \"2026-10-23T11:59:38Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent modules on qcqs algebraic spaces are filtered colimits of modules of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"ModuleCat.FilteredColimits.colimit\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\"], \"digest\": \"9387e14171300fa3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"IsFinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T11:59:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasicoherent\\\", \\\"IsFinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"0767b60e21425786\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent module on a quasi compact quasi separated algebraic space is a directed colimit of finitely presented modules",
+   "results": "{\"t\": \"2026-10-23T11:59:48Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasi coherent module on a quasi compact quasi separated algebraic space is a directed colimit of finitely presented modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.presentation\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"f5208eede7802a80\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent algebraic space modules are unions of images of finitely presented modules",
+   "results": "{\"t\": \"2026-10-23T12:00:48Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent algebraic space modules are unions of images of finitely presented modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.coversTop\"], \"digest\": \"b60fd1d9411e39af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFilteredColimits_coyoneda_of_finitePresentation|isFinitelyPresentable_iff_preservesFilteredColimits|isFinite_presentation|instIsQuasicoherentOfIsFinitePresentation|exists_quasicoherentData|preservesColimit_Γ",
+   "results": "{\"t\": \"2026-10-23T12:27:32Z\", \"tool\": \"grep\", \"query\": \"preservesFilteredColimits_coyoneda_of_finitePresentation|isFinitelyPresentable_iff_preservesFilteredColimits|isFinite_presentation|instIsQuasicoherentOfIsFinitePresentation|exists_quasicoherentData|preservesColimit_Γ\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"036db84f9fe5cf82\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Quasicoherent.lean lines 233-285 and Presentable/Finite.lean lines 49-79; the hits define local finite presentation or characterize categorical finite presentability, not approximation or global Hom continuity on qcqs algebraic spaces, nor affine-etale algebra evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent module on a quasi compact quasi separated algebraic space is a filtered colimit of finitely presented quasi coherent modules",
+   "results": "{\"t\": \"2026-10-23T13:47:46Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasi coherent module on a quasi compact quasi separated algebraic space is a filtered colimit of finitely presented quasi coherent modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"c8c0ce7e977c4b79\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Cc]olimit.*[Ff]inite[Pp]resentation",
+   "results": "{\"t\": \"2026-10-23T13:50:43Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Cc]olimit.*[Ff]inite[Pp]resentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"IsFinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T13:50:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasicoherent\\\", \\\"IsFinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"0767b60e21425786\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on qcqs algebraic spaces are filtered colimits of modules of finite presentation",
+   "results": "{\"t\": \"2026-10-23T13:50:44Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent modules on qcqs algebraic spaces are filtered colimits of modules of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"ModuleCat.FilteredColimits.colimit\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\"], \"digest\": \"9387e14171300fa3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on algebraic spaces are unions of images of finitely presented modules",
+   "results": "{\"t\": \"2026-10-23T14:23:05Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent modules on algebraic spaces are unions of images of finitely presented modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"00b22b7c1f7e43b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-integral-algebra-fp-colimit",
+  "date": "2026-10-23",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction. Supporting input to the relative-Spec proof of Tag 09YA: Integral quasi-coherent algebras on qcqs spaces admit finite finitely presented directed approximations. Supporting input: Tag 07V9 (lemma-colimit-finitely-presented).",
+   "via": [
+    "lem-sfb-space-integral-algebra-fp-colimit",
+    "lem-sfb-integral-space-finite-presentation-limit",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-module-fp-directed-approximation",
+  "worker": "stage1",
+  "summary": "Read Stacks 07V9 and its prerequisite 07UW in full. Reuse the existing base-scheme change, absolute Noetherian approximation and affine limit-projection nodes. Add only the missing affine-over-Noetherian module theorem as a statement-only node; preserve the item statement and all inherited metadata. No exact project or Mathlib attachment found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction. Supporting input to the relative-Spec proof of Tag 09YA: Integral quasi-coherent algebras on qcqs spaces admit finite finitely presented directed approximations. Supporting input: Tag 07V9 (lemma-colimit-finitely-presented). Steps 1-3 realize the three reductions of Tag 07V9. The current blueprint direct-image proof (3) is the ancestor route; blueprint_refs ancestor returns None, retained as inherited."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-9d74144ce",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-9d74144ce (reviewer sub-agent of L); spot-checked: FIX: one wording repair to the new node's hypothesis; the item is unchanged. The item statement is identical to live, where it is still unsplit, and there is no repair note. Sources read in full: Stacks 07V9 (spaces-limits.tex:2275) and 07UW (spaces-cohomology.tex:2681, whole proof), plus the Noetherian-space definition (spaces-properties.tex:4155). Step 1: change-base-to-integers clauses (1) and (3) identify the étale ringed sites, so the module categories, quasi-coherence, finite presentation and colimits are the same. Field points and the étale-map final topology also agree, so |X| is quasi-compact over Spec Z too; quasi-separatedness was already stated on the absolute diagonal. Step 2: absolute-noetherian-approximation gives a nonempty directed system with affine transitions and Noetherian stages (it covers the source's finite-presentation-implies-Noetherian step). affine-limits-schematic-stages gives affine projections, and composing with the limit isomorphism keeps them affine. Step 3: the new node is 07UW, matched hypothesis by hypothesis. It is not a restatement of the item: the item has no affine-over-Noetherian hypothesis. Repair: the new node required that 'its etale scheme charts are locally Noetherian', i.e. every chart, while step 2 only supplies some locally Noetherian atlas (an E1/C1 gap). I restated the hypothesis as Stacks does ('admits a surjective etale map from a locally Noetherian scheme'). That is a weaker hypothesis, still true, and exactly step 2's output. Small cases: X = Spec B over a field with B non-Noetherian, X empty, f = identity. Duplicate search (rg -L for 07UW, 07V9 and both labels; the 07UV coherent-filtered-union node) found no duplicate. All citations stay inside unit sk-thm-sf-ctf-stability. Batch-5 flags: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-a1-space-point-topology are general definitions. change-base-to-integers, absolute-noetherian-approximation and affine-limits-schematic-stages reach the trace-formula chapter only through the definition def-trf-algebraic-space; they are generic space foundations (Stacks 03I4, 07SU, 07SF), not steps of the trace-formula or Poincaré-duality proofs. All accepted. No SGA cited, no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModuleFpDirectedApproximation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finitePresentation_filtered_colimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceModuleFpDirectedApproximation.lean",
+  "statement": "theorem exists_finitePresentation_filtered_colimit {S : Scheme.{u}} (X : AlgebraicSpace S) [CompactSpace (Point X.obj.obj)] (hqs : IsAbsolutelyQuasiSeparated X) (M : X.Modules) [M.IsQuasicoherent] : ∃ (J : Type u) (_ : SmallCategory J) (_ : IsFiltered J) (D : J ⥤ X.Modules), (∀ j : J, (D.obj j).IsFinitePresentation) ∧ ∃ ι : D ⟶ (Functor.const J).obj M, Nonempty (IsColimit (Cocone.mk M ι))",
+  "branch": "sheaf-dag",
+  "by": "Q90",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce8183b20",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Every clause of Stacks 07V9 / the node matches: X.Modules (ringedSiteModules of structureSheaf), Mathlib IsQuasicoherent, CompactSpace (Point X.obj.obj) with the recorded point topology, the landed IsAbsolutelyQuasiSeparated (affine test, 0AHR), J : Type u small filtered, D with IsFinitePresentation terms (quasi-coherent by instance), ι : D ⟶ const M with IsColimit in all module sheaves; no Noetherian or extra hypotheses and no free universes. Edge cases M=0, empty X, non-Noetherian affine X covered. Node record differs from live only in the new lean record and an added stmt_dep def-sfb-space-absolute-quasi-separated, which is landed on base and used. lean.statement is verbatim. Docstrings have source, blueprint id and the 3 proof steps; only sorry; no duplicate in lean/Sheaf (CoherentFilteredUnion and SpaceFinitePresentationModuleLimit state different results). No change made, so no compile; worker reports a clean scompile and preflight."
+ }
+}

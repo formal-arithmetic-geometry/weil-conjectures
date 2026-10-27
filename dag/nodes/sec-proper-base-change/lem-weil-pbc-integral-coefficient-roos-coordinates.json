@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-integral-coefficient-roos-coordinates",
+ "kind": "statement",
+ "title": "Coefficient transport of the Roos complex with both coordinates",
+ "statement": "Let l be prime, E/Q_l finite and U a scheme. Assume the published scalar transport H=pbcIntegralTransportModules U l E is an equivalence. There is a natural isomorphism gamma from the ordinary integral Roos functor followed by H on complexes to H applied termwise followed by the native completed-coefficient Roos functor. For every native tower C, ordinary integral tower D, tower isomorphism t:C ≅ D followed by H, and complex isomorphism z:H(Roos D) ≅ Roos C whose forward map is gamma_D followed by Roos(t inverse), both product-projection coordinates of PbcIntegralRoosTransportCoordinates U l E C D t z hold. These functors and coordinates are those of [def-weil-pbc-proper-integral-ordinary-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; Stacks 0941 and 08TC. Coefficient transport part of original strict-model matching step 1."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-proper-integral-ordinary-data"
+ ],
+ "proof": [
+  {
+   "text": "Form scalarRoosMap for the additive coefficient equivalence; preservation of countable products and the normalized pod-reindexing comparison make every component invertible. Naturality of scalarRoosMap makes these components a natural isomorphism. Its two projection formulas composed with the coordinate formulas for Roos of t inverse give the two required transport coordinates. Substitute the assumed forward map formula for z. This works for every C, D and t, without a flatness or boundedness assumption.",
+   "uses": [
+    "lem-pod-reindexing-roos-comparison",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-roos-comparison",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; Stacks 0941 and 08TC. Coefficient transport part of original strict-model matching step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*mapHomologicalComplex|Roos",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Use the published project comparisons and Mathlib functor isomorphism APIs; no duplicate normalized assertion found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "12 hits: CategoryTheory.Functor.mapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplex_reflects_iso, CategoryTheory.instPreservesZeroMorphismsHomologicalComplexMapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplex_obj_X, CategoryTheory.instFaithfulHomologicalComplexMapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplexIdIso, CategoryTheory.instAdditiveHomologicalComplexMapHomologicalComplex, CategoryTheory.instFullHomologicalComplexMapHomologicalComplexOfFaithful",
+   "date": "2026-10-27",
+   "verdict": "Use the published project comparisons and Mathlib functor isomorphism APIs; no duplicate normalized assertion found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence of abelian categories preserves the Roos complex of a countable inverse tower with both product projection coordinates",
+   "results": "8 hits: CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.Abelian.DoldKan.comparisonN, CategoryTheory.abelianOfEquivalence, CategoryTheory.Equivalence.mapHomologicalComplex, CategoryTheory.IsGrothendieckAbelian.of_equivalence, CategoryTheory.Functor.exact_tfae, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso, ChainComplex.mkXIso",
+   "date": "2026-10-27",
+   "verdict": "Use the published project comparisons and Mathlib functor isomorphism APIs; no duplicate normalized assertion found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictModelMatchingExists",
+  "date": "2026-10-27",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice proof paragraph: identification of ordinary integral pullback and the actual quotient-tower completion comparison; original ordinary-input proof steps 5–7. Parent comparison step(s) 2–3. Remark 6.8.15; Stacks 0941 and 08TC. Coefficient transport part of original strict-model matching step 1.",
+   "via": [
+    "lem-weil-pbc-integral-strict-model-matching",
+    "lem-weil-pbc-proper-integral-strict-model-comparison",
+    "lem-weil-pbc-proper-integral-ordinary-inputs",
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCoefficientRoosCoordinates",
+  "file": "lean/Sheaf/Paper/IntegralCoefficientRoosCoordinates.lean",
+  "declaration": "WeilConjectures.pbc_integral_coefficient_roos_coordinates",
+  "statement": "theorem pbc_integral_coefficient_roos_coordinates\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (U : Scheme.{u})\n    [(pbcIntegralTransportModules U l E).IsEquivalence] :\n    ∃ γ : integralOperationsRoosFunctor (A := integralTowerModules l E U) ⋙\n          pbcIntegralTransportComplex U l E ≅\n        (Functor.whiskeringRight ℕᵒᵖ _ _).obj (pbcIntegralTransportComplex U l E) ⋙\n          integralOperationsRoosFunctor\n            (A := pbcModules U (pbcAdicCompletion U (pbcIntegralDatum l E))),\n      ∀ (C : ℕᵒᵖ ⥤ CochainComplex\n          (pbcModules U (pbcAdicCompletion U (pbcIntegralDatum l E))) ℤ)\n        (D : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E U) ℤ)\n        (t : C ≅ D ⋙ pbcIntegralTransportComplex U l E)\n        (z : (pbcIntegralTransportComplex U l E).obj (integralOperationsRoos D) ≅\n          integralOperationsRoos C),\n        z.hom = γ.hom.app D ≫ integralOperationsRoosFunctor.map t.inv →\n          PbcIntegralRoosTransportCoordinates U l E C D t z",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

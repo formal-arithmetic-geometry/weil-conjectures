@@ -1,0 +1,54 @@
+## Worker report
+
+Files written (all under dag/nodes/sec-six-functors-basics):
+- lem-sfb-double-flag-invariant-boundary.json: item, split with eight proof steps; no statement change.
+- lem-sfb-bruhat-longest-cell-charts.json: statement, unsplit; no Mathlib match.
+- lem-sfb-rho-regular-weyl-orbit.json: statement, unsplit; no Mathlib match.
+
+Attachments: none. Searches of lean/WeilConjectures for the blueprint id, double flag, Bruhat, Schubert and dominant-weight language found no project declaration covering this item. No Lean was written or compiled.
+
+WANTED: none. Milne, Algebraic Groups (2017), is available locally and was read. All supporting material used is in this document; no SGA route is used.
+
+The imported item was statement-only. Its source suggests divisors, but an explicit primitive-function argument follows the same Bruhat geometry without needing a divisor comparison: choose a U-fixed function in W_1; compare its left and right weights at every Bruhat representative. The section on the double flag is f(g^{-1}h). Neither new node states a section on a double flag, an orbit torsor, or invariant functions on that orbit; these conclusions are proved in the item.
+
+Mathlib searches were run by the required msearch.py command, with two LeanFinder phrasings, Loogle, grep, and LeanSearch for each new node and the item. Full returned text for the charts/item searches is in research.jsonl; searches.jsonl is the command's authentic log. The root-system search results are also recorded in the node, naming the returned declarations and digests. I read the results: Coxeter words, abstract root pairings and Lie weights do not establish the required scheme assertions or the rho orbit criterion. The root-system grep hits are sum-positivity proof lines, not a half-sum theorem. The extra exploratory dominant-weight/minor searches were run honestly, then not used because the existing primitive-line node provides the necessary representation-theoretic input. No new minor node was created.
+
+The whole DAG and imported blueprint were searched before either new node: Bruhat, opposite, Schubert, longest, dominant weight, half sum, regular weight, and source places 21.80 and 22.22. I opened the existing primitive-line, rho modules, simply-connected character lattice, Borel structure, homogeneous-bundle, product irreducibility and properness nodes. The finite-type group hypotheses give all chart and primitive-line hypotheses; no characteristic-zero hypothesis is inserted. The current blueprint's sk-thm-sf-ctf-stability-direct-images.proof.md (frontmatter det-thm-sf-ctf-stability-direct-images), paragraph (3), was read. This split serves the recorded geometric-reductivity branch beneath its preservation route; it changes no chapter or unit. The inherited created.item chain ends at Sheaf.SixFunctors.CtfStabilityDirectImages rather than a node, and blueprint_refs.py ancestor reports null. The new nodes retain that computed null and list the full intervening chain, with a precise textual place.
+
+Nothing mathematical remains unfinished at this level; the two new nodes are deliberately statement-only next-stage-1 tasks.
+
+## Not duplicates
+
+lem-sfb-bruhat-longest-cell-charts vs lem-sfb-reductive-borel-pair-structure: the latter supplies a proper flag quotient and a B-torsor, but no Bruhat strata, longest-cell affine-space charts, or opposite intersection.
+
+lem-sfb-bruhat-longest-cell-charts vs lem-sfb-induced-module-primitive-line: the latter asserts a unique U-fixed line and its T-weight, not Bruhat charts or integral flag geometry.
+
+lem-sfb-rho-regular-weyl-orbit vs lem-sfb-simply-connected-character-lattice: the latter identifies the full character lattice and fundamental weights; it does not assert simple-coroot pairings of rho or trivial Weyl stabilizers.
+
+lem-sfb-rho-regular-weyl-orbit vs lem-sfb-induced-module-primitive-line: the latter names an element taking positive roots to negative roots, but gives no uniqueness criterion w rho = -rho. The new node supplies that finite-root-system assertion and contains no functions or invariant sections.
+
+lem-sfb-rho-regular-weyl-orbit vs lem-sfb-rho-section-modules: the latter gives existence of rho as an actual character and nonzero W_m, not its Weyl stabilizer.
+
+## Review by Q158
+
+I read Milne 21.70--21.80, 21.84--21.86, 22.21--22.27 and 22.48--22.49, and Appendix C.21--C.22. In particular 22.49 merely describes line-bundle divisor classes; it cannot alone supply the claimed invariant double-flag section. I removed that possible hidden argument and used 22.22's primitive function, whose statement is already represented by lem-sfb-induced-module-primitive-line. The charts node states the scheme form of the Bruhat isomorphisms (21.80(b)), dense longest cell (21.73(b)), opposite intersection (21.84), and finite chart cover (21.80(c)). A section of pi over the longest chart is u -> u n_0; its translates are sections too. Summary 21.86 gives the root-group product identifying V with affine space. Thus the additional local triviality is a direct chart consequence, not an assumed quotient theorem. Geometric integrality uses the dense affine-space cell and the reduced chart cover (and the corresponding open product chart in G), all preserved under field extension.
+
+The rho node is a rational-character-space fact, not a statement about Lie algebra characters in characteristic p. For a simple root alpha, its reflection permutes positive roots other than alpha and takes alpha to -alpha: this follows from simple-root coefficients and reducedness. Hence s_alpha rho=rho-alpha and the coroot pairing is one. Every positive coroot is a nonnegative combination of simple coroots, so rho is in the open dominant chamber. C.22's simply transitive action on chambers gives its trivial stabilizer. The element exchanging positive and negative chambers sends their half sums to negatives and is an involution. This verifies the new statement also for reducible root systems and the empty system; it does not require the geometric field to have characteristic zero.
+
+Step 1 cites the charts node for actual affine-space charts and geometrical integrality; the Borel node for reductive applicability and proper Q; lem-sc-geometrically-irreducible-product for irreducibility of Q times Q; and the existing Mathlib leaves lem-weil-pbc-proper-base-change and lem-weil-pbc-proper-composition for properness of X. Reducedness is checked on the chart products, whose coordinate rings are polynomial rings. I initially used a nonexistent shorthand citation for closed-immersion stability; the first server review exposed it, and I replaced the whole diagonal argument with the two existing properness leaves after opening their precise statements. The product irreducibility node is a generic tool from the Picard unit; split_report declares its use, with no change of the unit's substantive route.
+
+Step 2 uses the rho node only for w_0 rho=-rho; rho-section-modules only for W_1 nonzero and its exact right-character convention; and the primitive-line node for a nonzero U-fixed vector and its LEFT translation weight. With lambda=-rho the weight is +rho, so f(bx)=rho(b)^{-1}f(x), whereas f(xb)=rho(b)f(x). I checked the inverse here explicitly. No self-duality of W_1 is used (it would be wrong in general positive characteristic).
+
+Step 3 cites the charts and rho-orbit nodes: evaluate at t n_w=n_w(n_w^{-1}tn_w), obtaining characters -rho and w rho. If f(n_w) is nonzero they agree as group-scheme characters, hence w=w_0. The constancy on U and right semi-invariance then determine f on each Bruhat stratum, and density in the integral S forces f(n_0) nonzero. These formulas remain valid over every algebraically closed field extension. Equality of the nonvanishing opens follows by testing underlying points over algebraic closures, not by falsely asserting equality of zero subschemes or equality from Lie weights. This is an explicit elementary use of the two cited statements.
+
+Step 4 cites the homogeneous-bundle node for the precise trivialization and transition character, and the charts node for chosen sections of pi. Applying its transition rule to both factors proves gluing without invoking an uncited Kunneth theorem or a product-version section theorem. The calculation with b_1^{-1}g^{-1}h b_2 gives positive rho in both factors. The identity delta(sg,sh)=delta(g,h) is a functorial identity, so proves rational-coaction invariance with the requested linearization.
+
+Step 5 uses only the charts node beyond preceding steps. I wrote the coordinate change y -> a(x)^{-1}y and the lift sigma(x,u n_0B)=a(x)u; the uniqueness of u is scheme-theoretic in that node. It proves image equality and actual local sections, not just surjectivity on F-points. Density uses nonemptiness and irreducibility proved in step 1.
+
+Step 6 cites the subgroup-SCHEME intersection in the charts node. Equality of two orbit images forces g^{-1}h into both Borels, after every test-scheme base change. The inverse map and local trivializations are written explicitly. The Laurent polynomial module basis proves faithful flatness of the torus projection; thus inseparable-stabilizer pathologies are not hidden under a pointwise stabilizer calculation.
+
+Step 7 has no external input: use the local sections already constructed, their explicit T-valued ratios on overlaps, and the ordinary structure-sheaf gluing axiom. This supplies both surjectivity and injectivity of q^*, its algebra operations, and the exact left-translation equivariance formula. Step 8 checks rank zero directly.
+
+I checked SL_2 in every characteristic, including characteristic two: with the upper triangular Borel, rho(diag(t,t^{-1}))=t, f is the lower-left matrix entry up to a nonzero scalar, and delta is the determinant of the two first-column vectors. Its nonvanishing open is precisely the pairs of distinct lines in P^1 times P^1; the stabilizer is the scheme torus. For products of semisimple groups the characters and cells factor, so no irreducibility-of-root-system hypothesis is needed. For a nontrivial reductive torus in the charts/root supporting statements, the flag is a point, rho=0 and the Weyl group is trivial. For the trivial semisimple group the item takes d=1 and the asserted maps are identities. I checked that no step is longer than 2000 characters and that neither new statement carries proof steps. citations.json records verbatim statements for every citation, so the quoted hypotheses and conclusions can be checked directly. No statement dispute was found and the item statement is preserved.
+
+The first complete delivery dry run found doubled TeX escapes introduced in the revised properness sentence of step 1; these were reduced to single TeX command backslashes. No mathematical statement changed.

@@ -1,0 +1,17 @@
+# NF maintenance: iterated purity scalar pasting (2026-10-22)
+
+The failure is a superseded stage-1 claim, not a mathematical defect. Q21's accepted split is commit f90a0ee7d21bf59978fad92172efdbf2ddb1fea7, reviewed PASS by NT-cc-Q21-bb48242b6. coord/deliveries.log records completion at 2026-10-22T10:39:43Z. NF acquired coord/claims/lem-pur-iterated-purity-scalar-pasting.lock at 10:39:52Z, nine seconds later, while a stale queue could still list the item. NF has no delivery branch or open return for this item; there is no released repair note, and it is absent from the current coord/queue.tsv.
+
+The dispatcher keeps held claims as work even after queue removal. Group.server() reports held_by(NF), preserving NF's original stage 1 when queue_stage returns no stage; Group.work()'s claimed-never-delivered loop schedules it again as @new. The worker correctly follows coord/brief-stage1.md's live-wins rule and refuses a replacement split. At investigation, all 32 completed attempt directories contained this substantive stale-dispatch answer; the incident was raised at 27 counted failures. Failure counts are not a dispatch cutoff.
+
+Repair: backed up the exact claim and deliveries.log, then used tools/claim.py release NF with an explicit supersession reason. This removes only the obsolete claim and adds an audit line. The accepted node and its review, mathematical statement and proof, Lean files, queue generation, worker sandbox, failure counters, launcher files, provider settings and landing/review tools are unchanged.
+
+The current claim tool intentionally grants listed, unclaimed items (human policy of 2026-10-22; commits 19a02c3a093 and 13f40e5d647). This maintenance does not override that rule. A durable general repair belongs in launcher-owned dispatch_all.py: reconcile held stage-1 assignments with accepted current-stage completion and any released stage-1 repair note; retire superseded claims with an auditable reason instead of scheduling another author. Continue dispatching every genuinely open or explicitly reopened item regardless of prior failure count. No concurrency cap, throttle, admission limit or pause is proposed. The launcher-owned change is documented in the local REPORT.md and was not applied.
+
+Provider note: several attempts also recorded recovered HTTP 429 errors, and one recorded a model-account error. These do not explain the repeated substantive stale-dispatch answers. Provider errors are outside this repair; no provider/admission changes or workarounds were attempted.
+
+Next worker: do not re-split or fabricate a report-only delivery. Stage 1 is accepted. Work only from a future eligible stage-2 assignment or an explicit released stage-1 repair note. The old sandbox contains reporting and dispatcher markers only, not a pending mathematical packet. No Lean compilation is needed for this coordination-only repair.
+
+Backups: /home/ubuntu/weil-maint-bak/20261022-NF-iterated-purity-scalar-pasting-1792676949/lem-pur-iterated-purity-scalar-pasting.lock.bak and /home/ubuntu/weil-maint-bak/20261022-NF-iterated-purity-scalar-pasting-1792676949/deliveries.log.bak. This new maintenance record is also snapshotted as /home/ubuntu/weil-maint-bak/20261022-NF-iterated-purity-scalar-pasting-1792676949/20261022-NF-iterated-purity-scalar-pasting.md.bak.
+
+Accepted node SHA-256, checked unchanged: 6f427d68f089f4afa34e20cb16e76260e43d910390336e5113471af21e459f83.

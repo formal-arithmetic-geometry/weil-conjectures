@@ -1,0 +1,363 @@
+{
+ "id": "lem-sfb-open-square-support-scalar-counit",
+ "kind": "statement",
+ "title": "Open-square support criterion with scalar-compatible counit normalization",
+ "statement": "Use small pro-etale sites [def-weil-pbc-proetale-site]. For a commutative condensed ring $R$ [sk-def-sfb-condensed-ring], put $R_T=p_T^*R$ [sk-def-sfb-pulled-back-coefficients]. Modules are internal $R_T$-modules [sk-def-sfb-module-objects]; $D(T,R)$ is their ordinary unbounded derived category with the actual derived direct images and inverse images [sk-def-sfb-module-derived-pushpull]. Write $D^+(T,R)$ for the full subcategory with cohomology zero in sufficiently negative degrees. For an open immersion use the exact extension by zero [def-sfb-module-open-lower-shriek]. All inverse images below use the canonical identifications of the pulled-back coefficient rings.\n\nLet $Y$ be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Let $j:V\\hookrightarrow Y$ and $c:O\\hookrightarrow Y$ be open immersions, put $W=V\\times_YO$, and write $b:W\\hookrightarrow V$, $a:W\\hookrightarrow O$ for the projections [def-pc-fibre-product, def-weil-open-immersion]. Let $i:Z\\hookrightarrow Y$ be the reduced closed complement of $O$. For $M\\in D^+(W,R)$ set $B_R(M)=Rj_{*,R}b_{!,R}M$. Let\n$$\\rho_{R,M}:c^*B_R(M)\\xrightarrow{\\sim}Ra_{*,R}M$$\nbe the open-slice comparison, namely the derived restriction mate $c^*Rj_{*,R}(b_{!,R}M)\\to Ra_{*,R}b^*(b_{!,R}M)$ of [def-sfb-open-square-restriction-mates] for the commutative square $j\\circ b=c\\circ a$, followed by $Ra_*$ of the inverse of the actual open unit $M\\xrightarrow{\\sim}b^*b_!M$. Let $e_{R,M}:c_!Ra_{*,R}M\\to B_R(M)$ be the adjunct of $\\rho_{R,M}^{-1}$ under $c_!\\dashv c^*$. Then\n$$e_{R,M}=\\varepsilon_{c,B_R(M)}\\circ c_!(\\rho_{R,M}^{-1}),$$\nwhere $\\varepsilon_c$ is the actual open counit. The maps $\\rho_{R,M}$ and $e_{R,M}$ are natural in $M$. If $i^*B_R(M)=0$, then $e_{R,M}$ is an isomorphism.\n\nFor any morphism $\\varphi:R\\to R'$ of commutative condensed rings, write $\\operatorname{Res}_T:D(T,R')\\to D(T,R)$ for exact restriction of scalars along $p_T^*\\varphi$ [def-pc-sheaf-restrict-scalars]. The ordinary direct-image and inverse-image scalar-restriction comparisons, and the extension-by-zero comparison induced by the identical underlying extension presheaf and its sheafification, preserve the specified open adjunction maps and $\\rho$. For $M'\\in D^+(W,R')$ and any $\\mu:M\\to\\operatorname{Res}_WM'$, after inserting these comparisons one has\n$$\\operatorname{Res}_Y(e_{R',M'})\\circ c_!Ra_*(\\mu)=Rj_*b_!(\\mu)\\circ e_{R,M}.$$\nNo vanishing hypothesis is required for this equality. No commutation of scalar extension with derived direct image is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), all-continuous tame-boundary input: actual open counit and its scalar-restriction naturality; extracted from returned transverse exchange proof steps 7-8. Agent-extracted formal lemma; not a theorem printed in this blueprint paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-module-open-lower-shriek",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-sheaf-restrict-scalars",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-open-square-restriction-mates"
+ ],
+ "proof": [
+  {
+   "text": "Work over the reconstructed section-ring sheaves. The internal/section equivalence preserves underlying abelian sheaves, and its derived pushpull comparisons identify the actual geometric adjunctions and their units and counits. The scalar equivalence likewise identifies exact restriction of scalars. By the coefficient isomorphism $\\alpha_f$, module inverse image is ordinary sheaf inverse image with its action transported, so is exact. The open extension is the same underlying abelian extension by zero with its transported action; hence its sectionwise model and its specified open adjunction identify with the internal ones. All later equalities may therefore be proved in sectionwise modules and transported back. Since every open subset of a Noetherian space is quasi-compact, $V,O,W$ are Noetherian and every open immersion occurring here is quasi-compact. Thus all the complementary-open and qcqs hypotheses used below hold.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pd-section-derived-pushpull-normalization",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-alpha-iso",
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-open-lower-shriek-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, lemma-extension-by-zero; 03D7, lemma-adjoint-pullback-pushforward-modules; internal/section transport by the cited normalization lemmas."
+   }
+  },
+  {
+   "text": "For every open $d$, the module open/closed result supplies the actual adjunction $d_!\\dashv d^*$ and invertible open unit $\\eta_d:1\\to d^*d_!$. Both functors are exact. Apply the termwise homotopy adjunction and then adjunction localization: this gives $D(d_!)\\dashv D(d^*)$ with exactly the termwise unit and counit, including invertibility of $\\eta_d$. We use these normalized derived adjunctions throughout; no new choice of an adjunction on the same functors is made.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FJ, lemma-adjoint-lower-shriek-restrict; termwise normalization as in the cited adjunction-localization statement."
+   }
+  },
+  {
+   "text": "For an object $K\\in D(V,R)$ choose a K-injective representative $I$. The exact left adjoint $b_!$ implies that $b^*I$ is K-injective. Therefore the underived open-slice isomorphism $c^*j_*I\\cong a_*b^*I$ computes a natural derived isomorphism $\\beta_K:c^*Rj_*K\\xrightarrow{\\sim}Ra_*b^*K$. This is the actual slice comparison: on each site object $E\\to O$ its underived map identifies $I(V\\times_Y E)$ with $I(W\\times_O E)$, with the specified module actions. By the counit equation of the cited open-restriction lemma, the underived isomorphism is the mate of the inverse-image composition comparison under $j^*\\dashv j_*$ and $a^*\\dashv a_*$, i.e. the underived restriction mate of [def-sfb-open-square-restriction-mates] for the square $jb=ca$. Since $c^*$, $b^*$ are exact and $Rj_*$, $Ra_*$ are computed on the K-injectives $I$, $b^*I$, the derived mate of that definition at $K$ is $\\beta_K$; in particular it is invertible. Specialize to $K=b_!M$ and define $\\rho_M=Ra_*(\\eta_{b,M}^{-1})\\circ\\beta_{b_!M}$. This proves that the isomorphism in the statement exists with its prescribed normalization. Naturality follows from naturality of $\\beta$ and $\\eta_b$, rather than from objectwise choices of resolutions.",
+   "uses": [
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-open-square-restriction-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism, and sites.tex Tag 00XZ, section-localize; derived.tex Tag 08BJ, lemma-adjoint-preserve-K-injectives."
+   }
+  },
+  {
+   "text": "For the specified $c_!\\dashv c^*$ adjunction, the inverse Hom bijection sends $t:A\\to c^*B$ to $\\varepsilon_{c,B}\\circ c_!(t)$. Indeed the transpose of this composite is $c^*(\\varepsilon_{c,B})\\circ c^*c_!(t)\\circ\\eta_{c,A}=c^*(\\varepsilon_{c,B})\\circ\\eta_{c,c^*B}\\circ t=t$ by naturality of $\\eta_c$ and the triangle identity. Taking $A=Ra_*M$, $B=Rj_*b_!M$ and $t=\\rho_M^{-1}$ proves the asserted formula for $e_M$. The naturality equation for $\\rho$ and naturality of $\\varepsilon_c$ give naturality of $e$ by this formula.",
+   "uses": [
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint; the inverse-adjunct formula is written out using the specified derived triangle identities."
+   }
+  },
+  {
+   "text": "Assume $i^*B=0$ for $B=Rj_*b_!M$. Exactness of $i^*$ gives $i^*H^n(B)=0$ for every $n$. Apply the actual sheaf localization sequence $0\\to c_!c^*N\\xrightarrow{\\varepsilon_{c,N}}N\\to i_*i^*N\\to0$ to $N=H^n(B)$. It says that $\\varepsilon_{c,H^n(B)}$ is an isomorphism. Exactness of $c_!,c^*$ and the termwise counit normalization identify this map with $H^n(\\varepsilon_{c,B})$. Thus the derived counit is a quasi-isomorphism, hence invertible. Since $c_!(\\rho_M^{-1})$ is invertible too, the formula in step 4 proves that $e_M$ is invertible. This uses the support hypothesis only here.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; Tags 09BM and 09BN for exactness and open restriction."
+   }
+  },
+  {
+   "text": "For $\\varphi:R\\to R'$, the coefficient square $\\varphi_S\\alpha_f^R=\\alpha_f^{R'}f^{-1}\\varphi_T$ follows from naturality of the pulled-back coefficient identifications. Apply the ring-sheaf change-adjunction theorem to each geometric map in the square. It gives the canonical isomorphisms $\\operatorname{Res}_Sf_{R'}^*\\cong f_R^*\\operatorname{Res}_T$ and $\\operatorname{Res}_TRf_{*,R'}\\cong Rf_{*,R}\\operatorname{Res}_S$, compatible with the actual derived adjunction bijections. The internal/section scalar and pushpull normalization lemmas carry precisely these comparisons to the internal categories. The theorem allows arbitrary ring maps: no assertion that restriction of scalars preserves injectives is used.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pd-section-derived-pushpull-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D, lemma-derived-pullback-composition; 0D6E, lemma-derived-pushforward-composition; 07A6, lemma-adjoint. Apply to the two ringed-topos factorizations through the coefficient maps."
+   }
+  },
+  {
+   "text": "For an open $d:S\\hookrightarrow T$, compare $d_{!,R}\\operatorname{Res}_S$ and $\\operatorname{Res}_Td_{!,R'}$ before deriving. On a site object mapping into $S$ the extension presheaf has the same section group on both sides; otherwise both values are zero. The $R_T$-action on either side is the $R'_T$-action composed with $\\varphi_T$. Their abelian sheafifications, and the induced actions on them, are identical. The open unit on an object over $S$ is the identity; the counit is induced by the section map into the target module. These formulas are unchanged by restricting scalars, so the comparison preserves both specified maps. Since all functors in these open squares are exact, termwise application and adjunction localization give the same assertions in the derived categories, for arbitrary derived arrows.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-sfb-module-open-lower-shriek",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, its sectionwise construction and Hom formula; Tag 03DJ, lemma-extension-by-zero-exact; localized using the cited exact-functor and adjunction lemmas."
+   }
+  },
+  {
+   "text": "To check scalar compatibility of $\\beta$, use its mate description. The open base-change map $\\gamma:j^*c_!\\xrightarrow{\\sim}b_!a^*$ is the sectionwise extension-by-zero identification, with its prescribed open-unit normalization. On K-injectives the mate of $\\gamma^{-1}$ through $c_!\\dashv c^*$, $j^*\\dashv Rj_*$, $b_!\\dashv b^*$ and $a^*\\dashv Ra_*$ is $\\beta$: its underived evaluation is the same fibre-product identification of step 3, and the slice-counit equation specifies its geometric adjunct. Steps 6 and 7 preserve all four adjunction bijections and the sectionwise map $\\gamma$, since its coefficient square identifies the same sections with the same action. Mate pasting therefore identifies $\\operatorname{Res}(\\beta_{R'})$ with $\\beta_R\\operatorname{Res}$ under these comparisons. Step 7 also preserves the actual $\\eta_b$; hence the formula $\\rho=Ra_*(\\eta_b^{-1})\\circ\\beta_{b_!(-)}$ gives scalar compatibility of $\\rho$. This checks the maps, including their units, rather than only their endpoints.",
+   "uses": [
+    "lem-sf-ring-sheaf-base-change-mates",
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change (exchange via the actual counits); underived slice normalization from proetale.tex Tag 09A5 and open extension from sites-modules.tex Tag 03DI. Mate pasting is the cited general categorical tool."
+   }
+  },
+  {
+   "text": "Write $A_R=Ra_{*,R}$ and $B_R=Rj_{*,R}b_{!,R}$. After all comparisons, step 8 and naturality imply, for $\\mu:M\\to\\operatorname{Res}_WM'$, $$c^*B_R(\\mu)\\circ\\rho_{R,M}^{-1}=\\operatorname{Res}_O(\\rho_{R',M'}^{-1})\\circ A_R(\\mu).$$ Indeed apply naturality of $\\rho_R$ to $\\mu$ and replace its value on $\\operatorname{Res}M'$ by the restricted $\\rho_{R',M'}$. Under $c_!\\dashv c^*$ the transpose of $B_R(\\mu)\\circ e_{R,M}$ is the left side of this equation. By preservation of the actual open adjunction maps (step 7), the transpose of $\\operatorname{Res}_Y(e_{R',M'})\\circ c_!A_R(\\mu)$ is the right side. Injectivity of the adjunction Hom bijection proves exactly the displayed mixed-coefficient equality in the statement. The proof uses no vanishing and no scalar-extension/direct-image interchange.",
+   "uses": [
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint: naturality and injectivity of the specified adjunction Hom bijection, using steps 4 and 6-8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-alpha-iso",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-adjunction-localization",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "lem-weil-pbc-mate-pasting",
+  "def-sfb-open-square-restriction-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted open-square support and scalar-normalization input; assembly from the cited Stacks-based general module lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian square of open immersions, the adjunct of inverse slice restriction is the open counit, commutes with restriction of coefficients, and is invertible if the closed restriction vanishes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and Zariski open direct-image counits do not give this pro-etale shriek/star support criterion with scalar-compatible slice comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open slice base change comparison and extension by zero adjunction commute with forgetting scalars in ordinary unbounded derived module categories",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.unit, CategoryTheory.Functor.mapExtLinearMap_apply, ModuleCat.ExtendRestrictScalarsAdj.counit, CategoryTheory.Functor.mapExtLinearMap_coe, ModuleCat.extendScalars_comp_id_assoc, CategoryTheory.Functor.mapExactFunctor_smul, ModuleCat.extendScalars_id_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and Zariski open direct-image counits do not give this pro-etale shriek/star support criterion with scalar-compatible slice comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical exchange for two open immersions is a scalar compatible open adjunction counit and is invertible for objects with zero closed restriction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, TopologicalSpace.Opens.adjunction_counit_map_functor, AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_inv_app_app, AlgebraicGeometry.Scheme.Hom.app_appIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and Zariski open direct-image counits do not give this pro-etale shriek/star support criterion with scalar-compatible slice comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"counit\"",
+   "results": "8 hits: AlgCat.restrictScalarsEquivalenceOfRingEquiv_counitIso, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.restrictScalarsEquivalenceOfRingEquiv_counitIso, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_apply_one_tmul, ModuleCat.extendRestrictScalarsAdj_counit_app_apply_one_tmul, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and Zariski open direct-image counits do not give this pro-etale shriek/star support criterion with scalar-compatible slice comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(shriek|extensionByZero|extension_by_zero).*(scalar|counit)|restrictScalars.*(shriek|counit)",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and Zariski open direct-image counits do not give this pro-etale shriek/star support criterion with scalar-compatible slice comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|extension_by_zero|lowerShriek).*(restrictScalars|counit)|(restrictScalars).*(lowerShriek|extensionByZero)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities cover formal steps, but do not supply pro-etale module localization, open slice comparison and arbitrary coefficient restriction together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived open localization and extension by zero adjunction compatible with forgetting coefficients",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.derived_counit, PresheafOfModules.sheafificationAdjunction, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities cover formal steps, but do not supply pro-etale module localization, open slice comparison and arbitrary coefficient restriction together"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.homEquiv_symm_apply, CategoryTheory.Adjunction.homEquiv_symm_id, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities cover formal steps, but do not supply pro-etale module localization, open slice comparison and arbitrary coefficient restriction together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module sheaves on a pro-etale site an open extension by zero counit is invertible when closed restriction vanishes and its open square comparison commutes with restriction of scalars",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities cover formal steps, but do not supply pro-etale module localization, open slice comparison and arbitrary coefficient restriction together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-transverse-tame-open-shriek-exchange",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), all-continuous tame-boundary input: actual open counit and its scalar-restriction naturality; extracted from returned transverse exchange proof steps 7-8.",
+   "via": [
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-open-square-support-scalar-counit",
+  "worker": "stage1",
+  "summary": "Proved the actual open-slice comparison, inverse-adjunct counit formula and support criterion, then scalar restriction compatibility and the mixed morphism equation. Reused general ringed module and exact-localization nodes; no new nodes or added flatness hypothesis. The existing source-library scalar comparison assumes flatness and does not attach this item.",
+  "blueprint": "Realizes the all-continuous tame-boundary input extracted from paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md; actual open counit and scalar-restriction naturality of returned exchange steps 7-8. This ancestor chain has no imported blueprint node (from.node=null), retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   },
+   {
+    "node": "lem-sf-ring-sheaf-base-change-mates",
+    "why": "Generic module/adjunction normalization or open-localization tool, used with the stated coefficient and site hypotheses; it does not replace a constructibility step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sf-ring-sheaf-base-change-mates"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-78290d230",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-78290d230 (reviewer sub-agent of L); spot-checked: I read the item in full (9 steps, no new nodes) and every cited statement. Statement and stmt_deps are unchanged from base (diffed against the O2 and Q140 snapshot copies). Live is still unsplit; there is no repair note and the item is not on the dropped list. Small cases checked: O=Y (identity), O=∅ (support forces B=0), V or W empty, M=0, nonflat Z→Z/n. All 9 steps check out (details in review.md). Step 3: K-injectivity of b^*I by the exact left adjoint b_!; the underived β of lem-sfb-proetale-open-restriction-counit with f=j, h=c, g=b, f_W=a. Step 4: the inverse-adjunct formula, correctly elementary. Step 5: the 09AH sequence via lem-weil-pbc-proetale-ringed-open-closed; j quasi-compact because Y is Noetherian. Step 6: lem-weil-pbc-ring-sheaf-change-adjunction allows arbitrary ring maps, so no flatness is used. Step 7: sectionwise extension-by-zero calculation. Step 8: base-change-mates with X=Y and X'=V qcqs, a double mate giving β, then mate pasting. Step 9: transposes checked. Stacks tags resolve in tags/tags; no SGA. Duplicate search: the derived-open-square and identity-open nodes are admissible/finite-type only, so they are neither duplicates nor citable. Batch-5 flag lem-pd-section-derived-pushpull-normalization: a generic internal/sectionwise transport for arbitrary f and Λ. Its closure has only generic pd/pod/trf definitions and adjunction lemmas, no PD or trace-formula theorem, so it is outside the assumptions and accepted. The declared tool_uses are accepted as generic module/adjunction black boxes. FIX (B3): the statement's 'open-slice comparison' cited no definition. It is now pinned to the derived restriction mate of def-sfb-open-square-restriction-mates for the square j∘b=c∘a; that node was added to stmt_deps, and step 3 gains two sentences identifying the definition's mate with β_K (counit equation, K-injectives), with uses and proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenSquareSupportScalarCounit",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openSquare_support_scalar_counit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareB",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareA",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareOpenUnitIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareRho",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareCounit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareRes",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquarePushScalar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareShriekScalar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareBScalar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquareAScalar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenSquareRhoFamily",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenSquareCounitAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenSquareScalarOpenAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenSquareScalarUnderivedOpenAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenSquareScalarAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openSquare_support_scalar_counit"
+  ],
+  "file": "lean/Sheaf/Paper/OpenSquareSupportScalarCounit.lean",
+  "statement": "theorem openSquare_support_scalar_counit (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] {V O Y Z : Scheme.{u}} [IsLocallyNoetherian Y] [CompactSpace Y] (j : V ⟶ Y) (c : O ⟶ Y) [IsOpenImmersion j] [IsOpenImmersion c] (i : Z ⟶ Y) [IsClosedImmersion i] [IsReduced Z] (hcomplement : Set.range i = (Set.range c)ᶜ) : ∃ rho : OpenSquareRhoFamily R (pullback.fst j c) (pullback.snd j c) j c, OpenSquareCounitAssertions R (pullback.fst j c) (pullback.snd j c) j c (CommSq.mk (pullback.condition (f := j) (g := c))) i rho ∧ ∀ (R' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R'] [IsCommMonObj R'] (phi : R ⟶ R') [IsMonHom phi], ∃ rho' : OpenSquareRhoFamily R' (pullback.fst j c) (pullback.snd j c) j c, OpenSquareCounitAssertions R' (pullback.fst j c) (pullback.snd j c) j c (CommSq.mk (pullback.condition (f := j) (g := c))) i rho' ∧ OpenSquareScalarAssertions phi (pullback.fst j c) (pullback.snd j c) j c (CommSq.mk (pullback.condition (f := j) (g := c))) rho rho'",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical maps are real constructions: rho is the recorded derived restriction mate followed by the inverse of the actual open unit, and e is its inverse adjunct. The existential rho families are uniquely determined by their hom normalization. Derived scalar direct-image comparisons are the actual mates of the published inverse-image scalar isomorphisms; their invertibility is asserted for arbitrary ring maps, without the flatness assumption required by the older derivedComapLowerStarIso interface. All helpers belong to this node and are listed in declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1c0530e0",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read item, 14 stmt_dep records, module, report and the exact side-live decls (derivedDirectImageOpenRestriction mate, moduleObjectDerivedPushforward, ChangeOfCoefficients derivedComapUpperStarIso/comapOpenImmersionLowerShriekIso with no flatness, derived open adjunction = mapDerivedCategoryAdjunction, DerivedCategory.Plus). Statement verbatim in the file; 16 decls listed; one sorry; live node differs only by the lean block. rho = whiskered restriction mate for CommSq b a j c (b≫j=a≫c) then Ra_* of the asIso actual derived unit inverse, pinned in an existential iso family; e = homEquiv.symm rho.inv with the counit formula, naturality of both, IsZero(i^*B)→IsIso e. Scalar part: arbitrary IsMonHom phi; direct-image comparison = mate of derivedComapUpperStarIso.inv (orientation checked), invertibility asserted per node step 6; underived and derived unit/counit preservation for b and c pin the shriek comparison; rho preservation and mixed equation with comparisons inserted and no support hypothesis. Noetherian = IsLocallyNoetherian+CompactSpace; reduced closed complement via range. Edge cases O=Y, O=∅, empty V/W, M=0, phi=id or non-flat covered; universes as deps. No duplicate of the non-flat condensed-module push scalar comparison. Advisory only: three upstream plain defs whose owners are proof_deps but not stmt_deps; likely unused private proof-dep imports; inverse image via exact D(f^*), consistent with def-sfb-open-square-restriction-mates. No compile run (no file changed); worker reports clean 14.4/11.9 s."
+ }
+}

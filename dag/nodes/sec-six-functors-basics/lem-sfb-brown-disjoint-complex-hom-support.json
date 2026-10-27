@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-brown-disjoint-complex-hom-support",
+ "kind": "statement",
+ "title": "Finite Hom support for degreewise disjoint complexes under Brown compactness",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a commutative condensed coefficient ring. Put $S=\\mathrm{Dctf}(X,\\Lambda)$ and $L=\\mathrm{Loc}(S)$ [sk-def-localizing-closure], and assume BrownHypothesesFor $\\Lambda$ $X$ [lem-sfb-brown-hypotheses-criterion]. Let $K\\in L$ have underlying object in $S$. Let $M_n$, for $n\\in\\mathbf N$, be cochain complexes of pro-etale $\\Lambda_X$-module objects such that $Q(M_n)\\in L$. Suppose that in each degree $d\\in\\mathbf Z$ at most one term $M_n^d$ is nonzero. Then there is a finite set $T\\subset\\mathbf N$ such that $\\operatorname{Hom}(K,Q(M_n))=0$ for every $n\\notin T$. The complexes need not be bounded or constructible; their derived images only need to lie in $L$.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "lem-sfb-brown-hypotheses-criterion"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support argument in not_preservesColimitsOfShape_of_forall_hom_ne_zero, with DegreewiseLimits.lean, HomologicalComplex.isLimitFanMkProjOfIsColimit, and Products.lean, DerivedCategory.isLimitFanMkQObj"
+ },
+ "proof": [
+  {
+   "text": "Form the degreewise cochain coproduct with canonical diagonal projections. HomologicalComplex.isLimitFanMkProjOfIsColimit makes it a product since each degree has at most one nonzero term. Exact countable products of the pro-etale module category and K-injective resolutions transport this product to the derived category by DerivedCategory.isLimitFanMkQObj. DerivedCategory.isColimitCofanMkQObj transports its coproduct universal property. These are proved source-library constructions read in DegreewiseLimits.lean, Products.lean and Coproducts.lean; countableAB4Star_mod in ProperLowerStarCoproducts.lean supplies exactness.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Every localizing property containing S contains each Q(M_n) by hypothesis and their coproduct by closure. Lift the natural indexing type into the fixed ambient universe when applying this closure condition. Thus the common product-coproduct vertex belongs to L. Fullness restricts both universal properties to L; canonical projections have zero off-diagonal composites.",
+   "uses": [
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the Brown product-coproduct finite-Hom-support theorem to these objects in L. Lower the lifted natural-number indices of its finite exceptional set. Outside that image the full-subcategory Hom type is a subsingleton. The full inclusion identifies it with the ambient Hom type in the conclusion.",
+   "uses": [
+    "lem-sfb-brown-product-coproduct-obstruction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-localizing-closure",
+  "lem-sfb-brown-product-coproduct-obstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support argument in not_preservesColimitsOfShape_of_forall_hom_ne_zero, with DegreewiseLimits.lean, HomologicalComplex.isLimitFanMkProjOfIsColimit, and Products.lean, DerivedCategory.isLimitFanMkQObj"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compact object has nonzero Hom groups to only finitely many complexes with disjoint degree supports when countable products are exact",
+   "results": "Eight hits for CountableAB4Star, Grothendieck homological complexes and support definitions; no finite-support theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact objects have finite nonzero Hom support for a family of degreewise disjoint cochain complexes",
+   "results": "Eight hits for derived t-structure support and maps to injective or from projective complexes; no finite-support theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLimitFanMkProjOfIsColimit|finite_nonzero_hom|degreewise.disjoint",
+   "results": "Zero Mathlib hits. Direct source rg found the proved isLimitFanMkProjOfIsColimit in WeilConjectures/CategoryTheory/DerivedCategory/DegreewiseLimits.lean and the existing shifted-heart specialization in the item.",
+   "date": "2026-10-26",
+   "verdict": "source infrastructure reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-26",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2, checking compactness of constructible finite-Tor representatives; finite-support obstruction underlying the varying-heart Ext diagnostic",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.BrownHypothesesFor.finite_nonzero_hom_of_degreewise_disjoint",
+  "statement": "theorem BrownHypothesesFor.finite_nonzero_hom_of_degreewise_disjoint\n    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (hB : BrownHypothesesFor Λ X)\n    (K : (localizingClosureProEtale Λ X).FullSubcategory)\n    (hK : constantModelBoundedConstructible Λ X K.obj ∧\n      DerivedCategory.finiteTorAmplitude _ K.obj)\n    (M : ℕ → CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)\n    (hM : ∀ n, localizingClosureProEtale Λ X (DerivedCategory.Q.obj (M n)))\n    (hdisjoint : ∀ (d : ℤ) (m n : ℕ),\n      ¬ IsZero ((M m).X d) → ¬ IsZero ((M n).X d) → m = n) :\n    ∃ S : Finset ℕ, ∀ n ∉ S, Subsingleton (K.obj ⟶ DerivedCategory.Q.obj (M n))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T202742-L-2749244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

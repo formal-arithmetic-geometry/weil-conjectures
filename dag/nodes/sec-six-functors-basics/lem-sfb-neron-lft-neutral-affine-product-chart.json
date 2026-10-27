@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-neron-lft-neutral-affine-product-chart",
+ "kind": "statement",
+ "title": "An affine product chart covers the neutral part of a Néron lft-group",
+ "statement": "Let $D$ be a Noetherian integrally closed domain of Krull dimension one, $K=\\operatorname{Frac}D$, and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. Let $V/K$ be a smooth separated commutative group scheme of finite type, and let $N/S$ be a Néron lft-model of $V$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Thus $N$ is a smooth separated commutative $S$-group scheme, with a specified generic-fibre group isomorphism $N_K\\simeq V$ [def-pc-base-change], such that restriction is a bijection $\\operatorname{Hom}_S(Y,N)\\simeq\\operatorname{Hom}_K(Y_K,V)$ for every smooth $S$-scheme $Y$. A group scheme has multiplication, inverse and identity morphisms satisfying the group diagrams [def-sc-group-scheme]; separated means the diagonal is a closed immersion [def-weil-closed-immersion]. Let $C\\subseteq |N|$ be the union of the identity connected components of all geometric fibres, viewed as a subset of $|N|$ [def-weil-connected-scheme, def-weil-geometric-fibre]. Then $C$ is open, and its open subscheme structure makes it a subgroup scheme $N^0\\subseteq N$ [def-weil-open-immersion]. For every $s\\in S$ there is an affine open neighbourhood $B\\subseteq S$ of $s$ and an affine open subscheme $U\\subseteq N^0\\times_SB$ such that the restriction of multiplication\n$$U\\times_BU\\longrightarrow N^0\\times_SB$$\nis surjective on underlying points [def-pc-fibre-product]. In particular the image is the entire indicated open subgroup; no finiteness of the component groups of $N$ is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1, paragraph after Definition 1, printed p.290 (PDF p.296), the S-dense affine open and its surjective product map; 6.4 discussion of the open identity component. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "def-weil-geometric-fibre",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $f:N\\to S$ and $e:S\\to N$. By [lem-sbc-section-component-cartesian], the ordinary fibrewise component locus through $e$ pulls back to the corresponding locus under every base change. On $N_{\\bar s}$ it is $(N_{\\bar s})^0$, so it is exactly the subset $C$ of the item. The theorem [lem-sfb-locally-algebraic-group-identity-component] applies to $N_{\\bar s}$: its base-change smoothness, hence local finite type, follows affine-locally from the two cited smooth-ring lemmas. It shows $(N_{\\bar s})^0$ is geometrically irreducible and of finite type, hence quasi-compact. The projection $N_{\\bar s}\\to N_s$ is surjective by [lem-weil-pbc-surjective-base-change], applied to the surjection $\\operatorname{Spec}\\overline{\\kappa(s)}\\to\\operatorname{Spec}\\kappa(s)$. The component base-change equality shows that the image of $(N_{\\bar s})^0$ is precisely $C_s$. Thus $C_s$ is connected and quasi-compact by continuity and [lem-weil-pbc-continuous-image-quasi-compact].",
+   "uses": [
+    "lem-sbc-section-component-cartesian",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055M, lemma-base-change-connected-along-section; groupoids.tex Tag 0B7R, proposition-connected-component."
+   }
+  },
+  {
+   "text": "Fix $x\\in C_s$. The image $e(S)$ is quasi-compact since $S$ is affine. Together with the quasi-compact $C_s$ it is contained in a finite union $W$ of affine opens of $N$. The restricted map $W\\to S$ is smooth by [lem-pc-open-immersion-smooth-composition], applied to the open immersion $W\\hookrightarrow N$, and $e$ factors through $W$. It is quasi-compact: on each affine chart, preimages of principal base opens are principal affine, and every affine base open has a finite cover by principal opens. It is quasi-separated: intersections of these affine charts are inverse images of the closed diagonal of $N/S$ in their affine fibre product, hence affine by the affine description of a closed immersion. Apply [lem-sbc-smooth-section-component-open] to $W\\to S$ and its section, obtaining an open $W^0$. The whole connected set $C_s$ lies in $W_s$, so its component through $e(s)$ is precisely $C_s$ and $x\\in W^0$. On every fibre the component through $e(t)$ in $W_t$ maps into the component through $e(t)$ in $N_t$, so $W^0\\subset C$. Every $x\\in C$ thus has an open neighbourhood in $N$ contained in $C$. Hence $C$ is open.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-sbc-smooth-section-component-open",
+    "def-weil-finite-type-morphism",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055R, lemma-connected-along-section-open, applied only to quasi-compact open pieces containing the section; extension to N by open neighbourhoods."
+   }
+  },
+  {
+   "text": "Give $C$ its open subscheme structure. On each geometric fibre it is the open subgroup $(N_{\\bar s})^0$ by step 1 and [lem-sfb-locally-algebraic-group-identity-component]. Multiplication $C\\times_SC\\to N$ and inversion $C\\to N$ therefore have image in $C$: lift any source point to an algebraically closed extension $\\Omega$ of its residue field, note that by [lem-sbc-section-component-cartesian] for the base change along $\\operatorname{Spec}\\Omega\\to S$ the inverse image of $C$ in $N_\\Omega$ is $(N_\\Omega)^0$, apply the subgroup assertion there, and project back. The identity also has image in $C$. The factorization lemma [lem-weil-pbc-morphism-factors-through-open-subscheme] gives the three maps into $C$. Each group identity holds after composing with $C\\hookrightarrow N$ because it holds in $N$; uniqueness of factorization through the open subscheme makes its two sides equal. Thus $N^0=C$ is the required open subgroup.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-sbc-section-component-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, proposition-connected-component, subgroup operations; BLR 6.4 discussion preceding Lemma 3."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ and choose an affine open $A\\subset N^0$ containing $e(s)$. Its structure map is smooth by [lem-pc-open-immersion-smooth-composition], so [sbc-lem-smooth-criterion] gives flatness and local finite presentation. By [lem-weil-pbc-flat-lfp-open], $f(A)$ is an open neighbourhood of $s$. Choose a principal base open $B=D(a)$ with $s\\in B\\subset f(A)$. Put $U=A\\times_SB$, an open in $N^0\\times_SB$. It is affine by [lem-weil-pbc-fibre-product-affine-spectra]. Every $U_t$ for $t\\in B$ is nonempty. After any algebraically closed extension $\\Omega/\\kappa(t)$ it remains nonempty: [lem-weil-pbc-surjective-base-change] makes $U_t\\times_{\\kappa(t)}\\Omega\\to U_t$ surjective. By [lem-sbc-section-component-cartesian] for the base change along $\\operatorname{Spec}\\Omega\\to S$, $(N^0)_\\Omega=(N_\\Omega)^0$, which is irreducible by [lem-sfb-locally-algebraic-group-identity-component], and $U_\\Omega$ is a nonempty open, hence dense. This constructs a fibrewise dense affine chart without assuming $N$ quasi-compact.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sbc-section-component-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 paragraph after Definition 1, printed p.290/PDF p.296; affine chart simplified using geometrically irreducible neutral fibres; Stacks Tags 01V8, 01VF and 01UA for the open image."
+   }
+  },
+  {
+   "text": "Let $x\\in N^0\\times_SB$ lie over $t$, choose an algebraic closure $\\Omega$ of $\\kappa(x)$, and let $g:\\operatorname{Spec}\\Omega\\to(N^0)_t$ be its point above $x$. In the irreducible $\\Omega$-group $G=(N^0)_\\Omega$ (step 4), using its group law [def-sc-group-scheme] on points, both $U_\\Omega$ and $gU_\\Omega^{-1}$ are nonempty opens: the latter is its image under the isomorphism $h\\mapsto gh^{-1}$ with inverse $h\\mapsto h^{-1}g$. Irreducibility gives a point $z$ in their intersection. Put $L=\\kappa(z)$. Its induced $L$-point $u$ lies in $U_L$, and $v=u^{-1}g_L$ also lies in $U_L$ because $u\\in g_LU_L^{-1}$. Then $uv=g_L$. The fibre-product universal property gives $(u,v):\\operatorname{Spec}L\\to U\\times_BU$ whose multiplication image is $g_L$, hence whose underlying point maps to $x$. Thus multiplication $U\\times_BU\\to N^0\\times_SB$ is surjective on underlying points.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.1 Lemma 4, printed p.113/PDF p.119, the S-dense product map; 10.1 paragraph after Definition 1. Geometric-point intersection argument written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sbc-section-component-cartesian",
+  "lem-sbc-smooth-section-component-open",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-surjective-base-change",
+  "sbc-lem-smooth-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Assembly following BLR 10.1 paragraph after Definition 1 and 5.1 Lemma 4, using Stacks 055M/055R/0B7R. Primary-source scan read online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of a Neron lft group model over a Dedekind domain is open and locally on the base contains an affine open U with surjective difference map U times U to the identity component",
+   "results": "{\"t\": \"2026-10-24T07:09:20Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of a Neron lft group model over a Dedekind domain is open and locally on the base contains an affine open U with surjective difference map U times U to the identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.Polynomial.isOpen_imageOfDf\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"ed94c5d0b2e00a01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary affine-neighbourhood and smooth-locus facts; no theorem constructs a fibre-dense affine open of the neutral part of a Néron lft-model with surjective product map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"identityComponent\"",
+   "results": "{\"t\": \"2026-10-24T07:09:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"identityComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary affine-neighbourhood and smooth-locus facts; no theorem constructs a fibre-dense affine open of the neutral part of a Néron lft-model with surjective product map."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|neutralComponent|Neron|Néron|connectedComponent",
+   "results": "{\"t\": \"2026-10-24T07:09:09Z\", \"tool\": \"grep\", \"query\": \"identityComponent|neutralComponent|Neron|Néron|connectedComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"e8d6fe6e952964e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary affine-neighbourhood and smooth-locus facts; no theorem constructs a fibre-dense affine open of the neutral part of a Néron lft-model with surjective product map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth group scheme over a Dedekind scheme identity component affine fibre dense open generates by two products",
+   "results": "{\"t\": \"2026-10-24T07:09:10Z\", \"tool\": \"leansearch\", \"query\": \"Smooth group scheme over a Dedekind scheme identity component affine fibre dense open generates by two products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instIsAffineXSchemeCoverOfIsIsoIsOpenImmersionId\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"b9ee2960217d9a9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary affine-neighbourhood and smooth-locus facts; no theorem constructs a fibre-dense affine open of the neutral part of a Néron lft-model with surjective product map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Neron locally finite type model of an algebraic group has finite type neutral component since a fibrewise dense affine open multiplied by its inverse covers it",
+   "results": "{\"t\": \"2026-10-24T07:09:21Z\", \"tool\": \"leanfinder\", \"query\": \"A Neron locally finite type model of an algebraic group has finite type neutral component since a fibrewise dense affine open multiplied by its inverse covers it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"124a7f442045e86d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary affine-neighbourhood and smooth-locus facts; no theorem constructs a fibre-dense affine open of the neutral part of a Néron lft-model with surjective product map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"IsOpenMap\"",
+   "results": "{\"t\": \"2026-10-24T07:41:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"IsOpenMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth affine charts, ordinary topological groups or scheme fibre inclusions; none states this relative group-scheme neutral affine product chart."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|neutralComponent|Neron|Néron",
+   "results": "{\"t\": \"2026-10-24T07:41:49Z\", \"tool\": \"grep\", \"query\": \"identityComponent|neutralComponent|Neron|Néron\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth affine charts, ordinary topological groups or scheme fibre inclusions; none states this relative group-scheme neutral affine product chart."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth group scheme has an open fibrewise identity component and locally contains an affine open whose square under multiplication surjects onto the neutral component",
+   "results": "{\"t\": \"2026-10-24T07:41:49Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth group scheme has an open fibrewise identity component and locally contains an affine open whose square under multiplication surjects onto the neutral component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\"], \"digest\": \"64abfdb5dfa66f9e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth affine charts, ordinary topological groups or scheme fibre inclusions; none states this relative group-scheme neutral affine product chart."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonempty open in a geometrically connected smooth group scheme has surjective multiplication from its square",
+   "results": "{\"t\": \"2026-10-24T07:41:50Z\", \"tool\": \"leansearch\", \"query\": \"A nonempty open in a geometrically connected smooth group scheme has surjective multiplication from its square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpen.mul_left\", \"GroupTopology.continuous_mul'\", \"GroupFilterBasis.mul\", \"IsTopologicalGroup.toContinuousMul\", \"IsOpen.mul_right\", \"isOpenMap_mul_left\", \"isOpenMap_mul_right\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\"], \"digest\": \"ada2988db3cf073c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth affine charts, ordinary topological groups or scheme fibre inclusions; none states this relative group-scheme neutral affine product chart."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The union of connected components of fibres of a smooth scheme containing a section is open and commutes with base change",
+   "results": "{\"t\": \"2026-10-24T07:44:36Z\", \"tool\": \"leanfinder\", \"query\": \"The union of connected components of fibres of a smooth scheme containing a section is open and commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.Scheme.Hom.range_fiberι\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.Scheme.Cover.isOpenMap_fromGlued\", \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\", \"AlgebraicGeometry.Scheme.GlueData.isOpen_iff\", \"AlgebraicGeometry.IsOpenImmersion.opensRange_pullback_snd_of_left\"], \"digest\": \"19e92a33b5d38d5d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth affine charts, ordinary topological groups or scheme fibre inclusions; none states this relative group-scheme neutral affine product chart."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-lft-weil-restriction-geometry",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4). BLR 10.1, paragraph after Definition 1, printed p.290 (PDF p.296), the S-dense affine open and its surjective product map; 6.4 discussion of the open identity component.",
+   "via": [
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neron-lft-neutral-affine-product-chart",
+  "worker": "stage1",
+  "summary": "Proved openness using quasi-compact open pieces containing the entire section and one fibre component; factored the group operations through the open locus; chose an affine neighbourhood of e(s), shrank to a principal base open in its smooth image, and proved product surjectivity by intersecting two nonempty geometric-fibre opens. No new nodes or statement changes.",
+  "blueprint": [
+   "Proof (3), open direct-image preservation through sk-prop-open-coefficients: BLR 10.1 affine product chart and finite-flat Néron lft descent input."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-section-component-open",
+    "why": "Openness for a smooth quasi-compact quasi-separated family with section, applied to finite affine unions; no such theorem in the item unit."
+   },
+   {
+    "node": "lem-sbc-section-component-cartesian",
+    "why": "Base-change equality for fibrewise section components, used to identify geometric neutral fibres."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Flatness and local finite presentation of a smooth map, used with the flat-lfp open-map theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "Affine-local base-change smoothness of geometric fibres."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Bridge from the cited ring smoothness base-change theorem to smooth geometric fibres."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-section-component-open",
+  "lem-sbc-section-component-cartesian",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-cea68219b",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-cea68219b (reviewer sub-agent of L); spot-checked: I read the whole item and all 5 steps; the mathematics is correct. The statement (identity components of the geometric fibres form an open subgroup N^0; locally on S an affine U ⊂ N^0_B with U×_B U → N^0_B surjective) holds for any smooth separated S-group, so it holds here. It is unchanged from base and checked on small cases: trivial group, zero-dimensional and imperfect fibres, a split torus's lft-model. Sources: BLR is not in literature/; the worker records WANTED and proof_origin agent, which is right. I read Stacks 0B7R (groupoids proposition-connected-component) and 055R (more-morphisms lemma-connected-along-section-open); 055R needs finite presentation, matching the qcqs hypothesis that step 2 correctly establishes. Steps: step 1 is correct (component-cartesian lemma, field identity-component lemma, surjective base change). Step 2 is correct: a finite affine union W containing e(S) and C_s is qc, and qs via the closed diagonal, an affine fibre product and the affine description of a closed immersion. Step 3 factors the group maps through the open subscheme. Step 4 uses smooth ⇒ flat and lfp ⇒ open map to get B = D(a) and an affine, fibrewise dense U. Step 5 is a correct and complete g·U^{-1} ∩ U argument. FIX, C1 (missing citations): steps 2 and 4 justified the smoothness of an open piece inline although the Mathlib leaf lem-pc-open-immersion-smooth-composition exists, so I cite it. Steps 3 and 4 used (N^0)_Ω = (N_Ω)^0 for an arbitrary algebraically closed Ω only 'by step 1', so I now cite lem-sbc-section-component-cartesian and, for irreducibility, the field lemma. Step 5 now cites def-sc-group-scheme. proof_deps is the union of the uses. Duplicates: lem-sfb-neron-neutral-local-properties (Q122) overlaps only partly (it assumes a geometrically connected H and has no product chart), so it is not a duplicate. Accepted tool uses: lem-sbc-smooth-section-component-open, lem-sbc-section-component-cartesian, sbc-lem-smooth-criterion, lem-weil-pbc-smooth-ring-map-iff-smooth-affine. No SGA is cited. Minor note, already on base: def-sc-group-scheme defines group schemes over a field only, and the statement spells out the relative notion inline.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NeronLftNeutralAffineProductChart",
+  "declaration": "AlgebraicGeometry.neronLft_neutralAffineProductChart",
+  "declarations": [
+   "AlgebraicGeometry.groupOpenProductMap",
+   "AlgebraicGeometry.neronLft_neutralAffineProductChart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NeronLftNeutralAffineProductChart.lean",
+  "statement": "theorem neronLft_neutralAffineProductChart (D K : Type u) [CommRing D] [IsDomain D] [IsNoetherianRing D] [IsIntegrallyClosed D] [Field K] [Algebra D K] [IsFractionRing D K] (_hDim : ringKrullDim D = 1) (V : Grp (Over (Spec (.of K)))) [IsCommMonObj V.X] [Smooth V.X.hom] [IsSeparated V.X.hom] [LocallyOfFiniteType V.X.hom] [QuasiCompact V.X.hom] (N : Grp (Over (Spec (.of D)))) [IsCommMonObj N.X] [Smooth N.X.hom] [IsSeparated N.X.hom] (α : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D K)))).mapGrp.obj N ≅ V) (_hNeron : ∀ (Y : Over (Spec (.of D))) [Smooth Y.hom], Function.Bijective (fun h : Y ⟶ N.X ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D K)))).map h ≫ α.hom.hom.hom)) : ∃ C : N.X.left.Opens, (C : Set N.X.left) = {x | x ∈ connectedComponentIn (N.X.hom ⁻¹' {N.X.hom x}) (η[N.X].left (N.X.hom x))} ∧ ∃ (H : Grp (Over (Spec (.of D)))) (j : H ⟶ N), IsOpenImmersion j.hom.hom.left ∧ Set.range j.hom.hom.left = (C : Set N.X.left) ∧ ∀ s : Spec (.of D), ∃ B : (Spec (.of D)).Opens, s ∈ B ∧ IsAffine B.toScheme ∧ ∃ U : ((Over.pullback B.ι).mapGrp.obj H).X.left.Opens, IsAffine U.toScheme ∧ Surjective (groupOpenProductMap ((Over.pullback B.ι).mapGrp.obj H) U)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is the actual multiplication restricted to the square of an open subscheme. The section-component description equals the geometric identity-component locus by lem-sbc-section-component-cartesian. An open group immersion with this image is the canonical open subscheme up to its unique isomorphism over N."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a4c0d892",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Node differs from live only in lean; 11 dep records byte-identical to live; statement verbatim in file. Clause check: D Noetherian integrally closed domain with ringKrullDim=1, K via IsFractionRing; V Grp(Over Spec K) commutative, smooth, separated, finite type (LocallyOfFiniteType+QuasiCompact); N commutative, smooth, separated, no qc/finite-type assumption; α iso in Grp; Néron bijection over all S-morphisms from smooth Y. C = section-component locus connectedComponentIn(f⁻¹{f x})(e(f x)), equal to the geometric-fibre neutral locus by landed section_component_preimage_of_isPullback (node proof step 1), same rendering as existing section-component modules. Open subgroup = Grp morphism that is an open immersion with range C; ∀s ∃ affine B∋s ∃ affine U ⊆ H×_S B with Surjective restricted multiplication (groupOpenProductMap = (ι⊗ι)≫μ over B: real data, not an arbitrary map). Edge cases ok (trivial group, infinitely many components, generic point, single universe). Docstrings carry source and blueprint; proof sorry only. IsNeronLftModel/def-sfb-neron-lft-model is not on live and not a stmt_dep, so the inline Néron hypotheses create no duplicate (maintainer note). No compile run: no file changed; worker reports a clean scompile."
+ }
+}

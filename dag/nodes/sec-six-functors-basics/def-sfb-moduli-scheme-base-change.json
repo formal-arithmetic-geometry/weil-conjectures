@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-moduli-scheme-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Regular universal etale presentation of the stable moduli groupoid. Geometric prerequisite: algebraicity and unobstructedness of all nodal curve families, before imposing stability or selecting an atlas. Generic atlas comparison and arbitrary scheme base change used when passing from the absolute isolated-lci smooth locus to the arithmetic nodal stack and testing nonsurjective charts. The explicit inherited ancestor is det-thm-sf-ctf-stability-direct-images, paragraph (3), in literature/blueprint/latest; the automatic creation chain terminates at a Lean module rather than a DAG id. Canonical change of the scheme base for the atlas comparison and arbitrary base-change clauses.",
+   "via": [
+    "lem-sfb-stack-smooth-atlas-base-change",
+    "lem-sfb-arithmetic-nodal-curve-stack-smooth",
+    "lem-sfb-stable-moduli-regular-universal-atlas",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Scheme base change of a moduli groupoid and of a scheme map",
+ "statement": "Let $S,S^{\\prime}$ be schemes [def-pc-scheme] in the universes of [def-weil-size-convention], let $g:S^{\\prime}\\to S$, and let $p:\\mathcal F\\to\\mathit{Sch}/S$ be a category over $\\mathit{Sch}/S$, using the total-category and 2-fibre-product convention of [def-sfb-stable-pointed-moduli-groupoids]. Define $\\mathcal F_{S^{\\prime}}$ over $\\mathit{Sch}/S^{\\prime}$ as the iso-comma category of $p$ and composition with $g$: its objects are triples $(x,T,\\alpha)$, where $x\\in\\mathcal F$, $T$ is an $S^{\\prime}$-scheme, and $\\alpha:p(x)\\xrightarrow{\\sim}(T\\to S^{\\prime}\\to S)$ is an isomorphism of $S$-schemes. An arrow is a pair $(b:x\\to y,c:T\\to V)$ with $\\beta p(b)=c\\alpha$ as $S$-maps. The projection sends the triple to $T$. If $U$ is an $S$-scheme and $a:h_U\\to\\mathcal F$ is a functor over $\\mathit{Sch}/S$, form $U^{\\prime}=U\\times_S S^{\\prime}$ [def-pc-fibre-product]. The induced map $h_{U^{\\prime}}\\to\\mathcal F_{S^{\\prime}}$ sends $V\\to U^{\\prime}$ to the image under $a$ of its composite $V\\to U$, together with $V/S^{\\prime}$ and the identity comparison of their $S$-bases; its arrows are the induced pairs. The auxiliary functor $h_{U^{\\prime}}\\to h_U$ on total categories is this composition with $U^{\\prime}\\to U$, viewing $V$ over $S$. These are constructions of categories and functors, with no assertion of algebraicity or stack descent.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 003R (example-2-fibre-product-categories); base localization is stacks.tex Tag 04WV (lemma-localize-stacks)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change of a category fibred in groupoids along a functor is the iso comma category",
+   "results": "8 hits: CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange, HasFibers.Fib.isoMk, CategoryTheory.Comma.instIsIsoLeft, CategoryTheory.Functor.Fiber.inducedFunctorCompIsoSelf, CategoryTheory.StructuredArrow.commaMapEquivalenceFunctor, CategoryTheory.Grothendieck.isoMk_hom_base, CategoryTheory.Grothendieck.isoMk_hom_fiber; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic comma, fibre and scheme-over constructions do not supply restriction of the recorded moduli groupoid or its specified base-changed scheme map."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BasedCategory, CategoryTheory.Comma",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic comma, fibre and scheme-over constructions do not supply restriction of the recorded moduli groupoid or its specified base-changed scheme map."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|changeBase|[Pp]ullback",
+   "results": "10 hits: Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic comma, fibre and scheme-over constructions do not supply restriction of the recorded moduli groupoid or its specified base-changed scheme map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a fibred category over schemes over S along the composition functor from schemes over S prime; objects are a scheme and an object with an isomorphism of their bases",
+   "results": "8 hits: AlgebraicGeometry.Scheme.asOver, AlgebraicGeometry.Scheme.CanonicallyOver, AlgebraicGeometry.Scheme.Over, AlgebraicGeometry.Scheme.restrictFunctor, AlgebraicGeometry.Scheme.Hom.asOver, AlgebraicGeometry.Scheme.canonicallyOverPullback, AlgebraicGeometry.instCanonicallyOverFiber, HasFibers.category; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic comma, fibre and scheme-over constructions do not supply restriction of the recorded moduli groupoid or its specified base-changed scheme map."
+  },
+  {
+   "tool": "grep",
+   "query": "iso.?comma|[Bb]ase[Cc]hange|changeBase",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic comma, fibre and scheme-over constructions do not supply restriction of the recorded moduli groupoid or its specified base-changed scheme map."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-atlas-base-change",
+  "date": "2026-10-23",
+  "group": "Q11"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuliSchemeBaseChange",
+  "declaration": "CategoryTheory.moduliSchemeBaseChange",
+  "declarations": [
+   "CategoryTheory.moduliSchemeBaseChange",
+   "CategoryTheory.schemeModuliBaseChangeForget",
+   "CategoryTheory.moduliSchemeBaseChangeAtlas"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuliSchemeBaseChange.lean",
+  "statement": "def moduliSchemeBaseChange {S S' : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (g : S' ⟶ S) : BasedCategory (Over S')",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7bafdb1b",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7bafdb1b",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery of the head 2dd1799850d7, which was PASSed and then returned by the landing because the new node def-sfb-moduli-scheme-base-change had blueprint.from.node 'det-thm-sf-ctf-stability-direct-images' while the computed ancestor is None. Snapshot diff: only from.node -> null and a report section changed; both Lean modules and the item node are byte-identical. blueprint_refs.py ancestor now gives None, which matches. Substance re-checked against live AlgebraicModuliStack/StablePointedModuliGroupoids: the iff premise is IsSmoothModuliAtlas without surjectivity; clauses 2-4 allow arbitrary g with no flatness or finiteness hypothesis; the explicit iso-comma base change and the counit atlas map are real data; universes u,v,w are free; the lean.statement fields are verbatim; only sorrys; no duplicate and no parallel landing in side-live. Advisory: 4 proof_deps lack Lean (stage 3); the second reading is formal. No compile (no file changed)."
+ }
+}

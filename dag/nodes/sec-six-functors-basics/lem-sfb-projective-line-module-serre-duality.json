@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-projective-line-module-serre-duality",
+ "kind": "statement",
+ "title": "Functorial Serre duality for line bundles on smooth projective schemes",
+ "statement": "Let $F$ be a field [def-weil-field], and let $Y$ be a smooth projective $F$-scheme of pure dimension $n\\geq0$ [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-projective-morphism]. Put $\\omega_Y=\\bigwedge^n\\Omega^1_{Y/F}$, where the differential sheaf is obtained by gluing the affine Kähler differential modules [def-weil-pbc-kahler-differentials] and the exterior power is the alternating quotient of the tensor power, with $\\bigwedge^0=\\mathcal O_Y$. For every invertible $\\mathcal O_Y$-module $E$ [def-sc-invertible-module], put $E^\\vee=\\mathcal H om_{\\mathcal O_Y}(E,\\mathcal O_Y)$. There are $F$-linear isomorphisms\n$$\\theta_E^j:H^j(Y,\\omega_Y\\otimes E^\\vee)\\xrightarrow{\\sim}\\operatorname{Hom}_F(H^{n-j}(Y,E),F)\\qquad(j\\geq0),$$\nwith $H^r(Y,E)=0$ for $r<0$. The groups on both sides are finite dimensional. Here $H^j$ is Zariski module sheaf cohomology [pqf-def-cohomology], and tensor product is [def-pur-sheaf-tensor-product]. The isomorphisms are natural: for any morphism of invertible modules $v:E\\to E'$, the map $H^j(Y,\\omega_Y\\otimes(E')^\\vee)\\to H^j(Y,\\omega_Y\\otimes E^\\vee)$ induced by $\\operatorname{id}_{\\omega_Y}\\otimes v^\\vee$ corresponds to precomposition by $H^{n-j}(Y,v)$. In particular $H^j(Y,\\omega_Y\\otimes E^\\vee)=0$ for $j>n$. Neither geometric integrality nor connectedness of $Y$ is required.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0FVV (lemma-duality-proper-over-field), especially (5),(7); Tag 0FVX (remark-coherent-duality-proper-over-field) for naturality; Tag 0FW0 (remark-rework-duality-locally-free-CM) for the locally free pairing. This is the line-module consequence in the final sentence of Popa Theorem 1.6.6 proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-weil-pbc-kahler-differentials",
+  "pqf-def-cohomology",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:Y\\to\\operatorname{Spec}F$. By [lem-kun-projective-implies-proper], $f$ is proper. In particular it is separated and of finite type [def-weil-proper-morphism], hence quasi-compact [def-weil-finite-type-morphism]. Its only fibre is $Y$, of dimension at most $n$. Smoothness and pure dimension $n$ say that $f$ is smooth of relative dimension $n$ [def-sbc-smooth-morphisms]. By [lem-sc-smooth-omega-finite-locally-free], $\\Omega^1_{Y/F}$ is locally free of rank $n$. On a common trivializing cover for this sheaf and $E$ [def-sc-invertible-module], the wedge of a basis identifies $\\omega_Y$ with $\\mathcal O_Y$ (the empty wedge is $1$ for $n=0$), and the dual basis identifies $E^\\vee$ with $\\mathcal O_Y$. Thus $G_E=\\omega_Y\\otimes E^\\vee$ is locally free of rank one. On affine subopens these are associated free rank-one modules, so $G_E$ is quasi-coherent by [pqf-def-coherent]. These local descriptions also identify the differential sheaf and exterior power used here with those in the trace-pairing node.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-sbc-smooth-morphisms",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "def-sc-invertible-module",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WC (lemma-locally-projective-proper), 02G1 (lemma-smooth-omega-finite-locally-free); local basis computation"
+   }
+  },
+  {
+   "text": "For $0\\leq j\\leq n$, set $i=n-j$. Apply [lem-sfb-smooth-proper-coherent-trace-pairing] to $Y/F$ and the rank-one locally free module $E$. It gives a single trace $t_Y:H^n(Y,\\omega_Y)\\to F$ and a perfect pairing $P_{E,i}$ between $H^i(Y,E)$ and $H^j(Y,E^\\vee\\otimes\\omega_Y)$, both finite dimensional. The coefficient isomorphism $s_E:\\omega_Y\\otimes E^\\vee\\to E^\\vee\\otimes\\omega_Y$, $w\\otimes\\lambda\\mapsto\\lambda\\otimes w$, has inverse the same interchange, so its cohomology map is an isomorphism. Define $\\theta_E^j(z)(x)=P_{E,i}(x,H^j(s_E)z)$. Bilinearity makes this $F$-linear. Perfection means precisely that the map from the second factor to the linear dual of the first is bijective; composition with $H^j(s_E)$ gives the required isomorphism. Its formula is cup product in the order $x,H^j(s_E)z$, followed by evaluation and $t_Y$.",
+   "uses": [
+    "lem-sfb-smooth-proper-coherent-trace-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0FW0 (remark-rework-duality-locally-free-CM), with 0FVV (lemma-duality-proper-over-field), (7)"
+   }
+  },
+  {
+   "text": "For a map $v:E\\to E'$, put $b=v^\\vee\\otimes\\operatorname{id}_{\\omega_Y}:(E')^\\vee\\otimes\\omega_Y\\to E^\\vee\\otimes\\omega_Y$. Ordinary module cup product is natural for these coefficient maps: [lem-sc-scalar-cup-coefficient-naturality] gives naturality of scalar Ext cup, and [lem-sc-scalar-cup-module-cup-compatibility] identifies it with $(-1)^{ij}$ times the ordinary cup of [def-sc-module-cohomology-cup-product]. The same sign occurs in source and target, and its square is $1$, so cancellation gives ordinary cup naturality. Locally evaluation satisfies $\\operatorname{ev}_E(e,b(\\lambda'\\otimes w))=\\lambda'(v(e))w=\\operatorname{ev}_{E'}(v(e),\\lambda'\\otimes w)$. This equality of sheaf maps and the two coefficient naturality squares therefore give $P_{E,i}(x,H^j(b)y)=P_{E',i}(H^i(v)x,y)$ after applying the same trace $t_Y$. Also $b\\circ s_{E'}=s_E\\circ(\\operatorname{id}_{\\omega_Y}\\otimes v^\\vee)$ on the elementary tensors $w\\otimes\\lambda'$. Substitute $y=H^j(s_{E'})z$ into the pairing equality. Step 2 then gives $\\theta_E^j(H^j(\\operatorname{id}\\otimes v^\\vee)z)(x)=\\theta_{E'}^j(z)(H^i(v)x)$ for every $x$. Equality of linear functionals is pointwise equality, proving the asserted square, including noninvertible and zero maps $v$.",
+   "uses": [
+    "lem-sc-scalar-cup-coefficient-naturality",
+    "lem-sc-scalar-cup-module-cup-compatibility",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sfb-smooth-proper-coherent-trace-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0FVX (remark-coherent-duality-proper-over-field); cup interpretation 0FW0 and cohomology.tex Tag 0FKV (lemma-diagrams-commute)"
+   }
+  },
+  {
+   "text": "If $j>n$, apply [lem-sfb-proper-quasicoherent-fibre-dimension-vanishing] to $f$ and $G_E$. Step 1 verified properness, the fibre dimension bound, and quasi-coherence, so $R^jf_*G_E=0$. The target $\\operatorname{Spec}F$ is affine and $f$ is quasi-compact and separated, so [lem-pc-cohomology-sections-affine-base] gives $H^j(Y,G_E)\\cong\\Gamma(\\operatorname{Spec}F,R^jf_*G_E)=0$. The stated negative-degree convention gives $H^{n-j}(Y,E)=0$, so its linear dual is zero as well. Define $\\theta_E^j$ to be the unique map between these zero vector spaces; it is bijective and the naturality square commutes because all its maps have zero source and target.",
+   "uses": [
+    "lem-sfb-proper-quasicoherent-fibre-dimension-vanishing",
+    "lem-pc-cohomology-sections-affine-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0E7D (lemma-higher-direct-images-zero-above-dimension-fibre), (1); coherent.tex Tag 01XK (lemma-quasi-coherence-higher-direct-images-application)"
+   }
+  },
+  {
+   "text": "In the range $j\\leq n$, step 2 gives finite-dimensional cohomology groups. A basis of $H^{n-j}(Y,E)$ has the finite dual basis in $\\operatorname{Hom}_F(H^{n-j}(Y,E),F)$, so the right-hand space is also finite dimensional. For $j>n$ both sides are zero by step 4. The preceding construction works unchanged for $n=0$; in the empty case every group and every map is zero. None of the invoked pairing or vanishing results requires connectedness or geometric integrality, so all the claimed cases are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0FW0 (remark-rework-duality-locally-free-CM), finite-dimensional perfect pairings; elementary zero-space and dual-basis arguments"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "lem-sfb-smooth-proper-coherent-trace-pairing",
+  "lem-sc-scalar-cup-coefficient-naturality",
+  "lem-sc-scalar-cup-module-cup-compatibility",
+  "def-sc-module-cohomology-cup-product",
+  "lem-sfb-proper-quasicoherent-fibre-dimension-vanishing",
+  "lem-pc-cohomology-sections-affine-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0FVV, 0FVX, 0FW0: smooth canonical bundle, cup-evaluation pairing and coefficient naturality; degrees above dimension supplied by limits.tex Tag 0E7D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality for a line bundle on a smooth projective variety identifies cohomology of canonical tensor dual line bundle with dual cohomology in complementary degree naturally in bundle maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X) {n : ℕ}\\n  [inst_3 : HasDerivedCategory C]\\n  (x : CochainComplex.HomComplex.Cocycle R.cochainComplex ((CochainComplex\", \"doc\": \"For a projective resolution $ R $ in an abelian category $ \\\\mathcal{C} $ with derived category structure, the inverse equivalence of the cohomology class equivalence maps a cocycle $ x $ to a morphism\"}\n  {\"name\": \"CommRing.Pic.mk_dual\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M], CommRing.Pic.mk R (Module.Dual R M) = (CommRing.Pic.mk R M)⁻¹\", \"doc\": \"For any invertible $ R $-module $ M $, the isomorphism class of its dual module $ \\\\mathrm{Dual}_R(M) $ in the Picard group $ \\\\mathrm{Pic}(R) $ is the inverse of the class of $ M $, i.e., $ [\\\\mathrm{Du\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X) {n : ℕ}\\n  (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m) (hf : CategoryTheory.CategoryStruct.comp (R.complex.d m n\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\mathrm{Ext}^n(X, Y)$ is naturally equivalent to the $n$-th cohomology class of the homomorphism complex between the cochai\"}\n  {\"name\": \"CharacterModule.dual_rTensor_conj_homEquiv\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] {A : Type uA} [inst_1 : AddCommGroup A] (A' : Type u_1) [inst_2 : AddCommGroup A']\\n  {B : Type uB} [inst_3 : AddCommGroup B] [inst_4 : Module R A] [inst_5 : Module R A'] [inst_6 : Module R B]\\n  (f : A →ₗ[R] A'),\\n  ↑CharacterModule.homEquiv.symm ∘ₗ CharacterModule.\", \"doc\": \"For a linear map $ f: A \\to A' $ over a ring $ R $, the composition of the inverse homomorphism equivalence, the dual of the right tensor product of $ f $ with a module $ B $, and the homomorphism equi\"}\n  {\"name\": \"CharacterModule.homEquiv_symm_apply_apply_apply\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] {A : Type uA} [inst_1 : AddCommGroup A] {B : Type uB} [inst_2 : AddCommGroup B]\\n  [inst_3 : Module R A] [inst_4 : Module R B] (a : CharacterModule (TensorProduct R A B)) (x : A) (a_1 : B),\\n  ((CharacterModule.homEquiv.symm a) x) a_1 = a (x ⊗ₜ[R] a_1)\", \"doc\": \"The character module of an additive commutative group $ A $, consisting of homomorphisms from $ A $ to the additive circle $ \\\\mathbb{Q}/\\\\mathbb{Z} $, forms an additive commutative group under pointwis\"}\n  {\"name\": \"CharacterModule.homEquiv\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"{R : Type uR} →\\n  [inst : CommRing R] →\\n    {A : Type uA} →\\n      [inst_1 : AddCommGroup A] →\\n        {B : Type uB} →\\n          [inst_2 : AddCommGroup B] →\\n            [inst_3 : Module R A] →\\n              [inst_4 : Module R B] → (A →ₗ[R] CharacterModule B) ≃ₗ[R] CharacterModule (TensorProduct R A B\", \"doc\": \"For a commutative ring $ R $ and additive commutative $ R $-modules $ A $, $ B $, this establishes an $ R $-linear equivalence between the space of $ R $-linear maps $ A →ₗ[R] \\text{CharacterModule}(B)\"}\n  {\"name\": \"CommRing.Pic.inv_eq_dual\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (M : CommRing.Pic R), M⁻¹ = CommRing.Pic.mk R (Module.Dual R M.AsModule)\", \"doc\": \"For any element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, the inverse of $ M $ under the tensor product operation is equal to the isomorphism class of its dual module, i.e., $ M^{-1} = [\\\\mathrm{D\"}\n  {\"name\": \"groupCohomologyIsoExt\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) → (n : ℕ) → groupCohomology A n ≅ ((Ext k (Rep k G) n).obj (Opposite.op (Rep.trivial k G k))).obj A\", \"doc\": \"For a group $ G $, a commutative ring $ k $, and a $ k $-representation $ A $ of $ G $, the $ n $-th group cohomology module $ H^n(G, A) $ is isomorphic to the $ n $-th extension group $ \\\\text{Ext}^n_\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give algebraic duality, abstract Ext, or Serre subcategories; none constructs coherent Serre duality for smooth projective schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Serre\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Parser.ParserResolution\", \"module\": \"Lean.Parser.Extension\", \"type\": \" : Type\", \"doc\": \"Result of resolving a parser name.\"}\n  {\"name\": \"Lean.Parser.ParserResolution.alias\", \"module\": \"Lean.Parser.Extension\", \"type\": \" (p : Lean.Parser.ParserAliasValue) : Lean.Parser.ParserResolution\", \"doc\": \"Reference to a parser alias. Note that as aliases are built-in, a corresponding declaration may\\nnot be in the environment (yet).\"}\n  {\"name\": \"Lean.Parser.ParserResolution.category\", \"module\": \"Lean.Parser.Extension\", \"type\": \" (cat : Lean.Name) : Lean.Parser.ParserResolution\", \"doc\": \"Reference to a category.\"}\n  {\"name\": \"Lean.Parser.ParserResolution.parser\", \"module\": \"Lean.Parser.Extension\", \"type\": \" (decl : Lean.Name) (isDescr : Bool) : Lean.Parser.ParserResolution\", \"doc\": \"Reference to a parser declaration in the environment.  A `(Trailing)ParserDescr` if `isDescr` is\\ntrue.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] (P : CategoryTheory.ObjectProperty C) : Prop\", \"doc\": \"A Serre class in an abelian category consists of a predicate which\\nholds for the zero object and is closed under subobjects, quotients, extensions.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsSerreClassIsZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] : CategoryTheory.ObjectProperty.IsSerreClass CategoryTheory.Limits.IsZero\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.toContainsZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {inst✝¹ : CategoryTheory.Abelian C} {P : CategoryTheory.ObjectProperty C} [self : P.IsSerreClass] : P.ContainsZero\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderQuotients\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {inst✝¹ : CategoryTheory.Abelian C} {P : CategoryTheory.ObjectProperty C} [self : P.IsSerreClass] : P.IsClosedUnderQuotients\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {inst✝¹ : CategoryTheory.Abelian C} {P : CategoryTheory.ObjectProperty C} [self : P.IsSerreClass] : P.IsClosedUnderSubobjects\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsSerreClassTop\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] : ⊤.IsSerreClass\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {inst✝¹ : CategoryTheory.Abelian C} {P : CategoryTheory.ObjectProperty C} [self : P.IsSerreClass] : P.IsClosedUnderExtensions\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.mk\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {P : CategoryTheory.ObjectProperty C} [toContainsZero : P.ContainsZero] [toIsClosedUnderSubobjects : P.IsClosedUnderSubobjects] [toIsClosedUnderQuotients : P.IsClosedUnderQuotients] [toIsClosedUnderExtensions : P.IsClosedUnd\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give algebraic duality, abstract Ext, or Serre subcategories; none constructs coherent Serre duality for smooth projective schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "Serre.*duality|serre.*duality|canonical.*bundle|dualizing.*sheaf",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"97\", \"text\": \"/-- The canonical (bundled) continuous map from the underlying topological\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiffMFDeriv.lean\", \"line\": \"410\", \"text\": \"/-- The canonical equivalence between the tangent bundle of a product and the product of\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiffMFDeriv.lean\", \"line\": \"419\", \"text\": \"/-- The canonical equivalence between the product of tangent bundles and the tangent bundle of a\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/Defs.lean\", \"line\": \"58\", \"text\": \"can define bundled morphisms and construct canonically maps from the total space of one bundle to\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/Tangent.lean\", \"line\": \"97\", \"text\": \"/-- The canonical identification between the tangent bundle to the model space and the product,\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/Tangent.lean\", \"line\": \"396\", \"text\": \"/-- The canonical identification between the tangent bundle to the model space and the product,\"}\n  {\"file\": \"Mathlib/Analysis/Complex/CanonicalDecomposition.lean\", \"line\": \"216\", \"text\": \"To simplify notation and avoid repetition, we introduce a structure, `CanonicalDecomp`, that bundles\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/MoebiusAction.lean\", \"line\": \"421\", \"text\": \"/-- Canonical embedding of `SL(2, ℤ)` into `GL(2, ℝ)⁺`, bundled as a group hom. -/\"}\n  {\"file\": \"Mathlib/Algebra/Order/Hom/Monoid.lean\", \"line\": \"34\", \"text\": \"There's a coercion from bundled homs to fun, and the canonical notation is to use the bundled hom as\"}\n  {\"file\": \"Mathlib/Data/Bundle.lean\", \"line\": \"58\", \"text\": \"  /-- `Bundle.TotalSpace.proj` is the canonical projection `Bundle.TotalSpace F E → B` from the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give algebraic duality, abstract Ext, or Serre subcategories; none constructs coherent Serre duality for smooth projective schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect functorial pairing between H j omega tensor inverse line bundle and H n minus j line bundle for smooth projective scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.IsPerfPair.dualEval\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"[IsReflexive R M] : IsPerfPair (Dual.eval R M)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $, if $ M $ is reflexive (i.e., the canonical evaluation map $ M \\to (M^*)^* $ is an isomorphism), then this evaluation map defines a perfect pairin\"}\n  {\"name\": \"LinearMap.IsPerfPair.recOn\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_5} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [inst_2 : CommRing R] →\\n            [inst_3 : Module R M] →\\n              [inst_4 : Module R N] →\\n                {p : M →ₗ[R] N →ₗ[R] R} →\\n                  {motive\", \"doc\": \"For any property or construction depending on a perfect pairing between modules over a commutative ring, if the property is established when the linear map $ p: M \\to N^* $ and its flipped version $ p^\"}\n  {\"name\": \"LinearMap.IsPerfPair.congr\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"(eM : M' ≃ₗ[R] M) (eN : N' ≃ₗ[R] N) (q : M' →ₗ[R] N' →ₗ[R] R) (H : q.compl₁₂ eM.symm eN.symm = p) : q.IsPerfPair\", \"doc\": \"If $ p $ is a perfect pairing between $ R $-modules $ M $ and $ N $, and $ e_M: M' \\\\xrightarrow{\\\\sim} M $, $ e_N: N' \\\\xrightarrow{\\\\sim} N $ are linear equivalences, then the induced linear map $ q: M'\"}\n  {\"name\": \"LinearMap.IsPerfPair.mk\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} {N : Type u_5} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] [inst_2 : CommRing R]\\n  [inst_3 : Module R M] [inst_4 : Module R N] {p : M →ₗ[R] N →ₗ[R] R},\\n  Function.Bijective ⇑p → Function.Bijective ⇑p.flip → p.IsPerfPair\", \"doc\": \"If a linear map $ p: M \\\\to N^* $ and its flipped version $ p^\\\\text{flip}: N \\\\to M^* $ are both bijective, then $ p $ is a perfect pairing, where $ M $ and $ N $ are additive commutative groups equippe\"}\n  {\"name\": \"LinearMap.IsPerfPair.bijective_right\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} {N : Type u_5} {inst : AddCommGroup M} {inst_1 : AddCommGroup N} {inst_2 : CommRing R}\\n  {inst_3 : Module R M} {inst_4 : Module R N} (p : M →ₗ[R] N →ₗ[R] R) [self : p.IsPerfPair], Function.Bijective ⇑p.flip\", \"doc\": \"For a perfect pairing $ p $ between $ R $-modules $ M $ and $ N $, the flipped map $ p.\\text{flip} $ is bijective.\"}\n  {\"name\": \"LinearMap.IsPerfPair.rec\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_5} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [inst_2 : CommRing R] →\\n            [inst_3 : Module R M] →\\n              [inst_4 : Module R N] →\\n                {p : M →ₗ[R] N →ₗ[R] R} →\\n                  {motive\", \"doc\": \"For any property or construction depending on a perfect pairing between modules over a commutative ring, if the property is established when the linear map $ p: M \\to N^* $ and its flipped version $ p^\"}\n  {\"name\": \"LinearMap.IsPerfPair.compl₁₂\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"(eM : M' ≃ₗ[R] M) (eN : N' ≃ₗ[R] N) : (p.compl₁₂ eM eN : M' →ₗ[R] N' →ₗ[R] R).IsPerfPair\", \"doc\": \"Given a perfect pairing between $ R $-modules $ M $ and $ N $, and linear isomorphisms $ e_M: M' \\to M $ and $ e_N: N' \\to N $, the induced pairing on $ M' $ and $ N' $ defined by composing with $ e_M $\"}\n  {\"name\": \"LinearMap.IsPerfPair.casesOn\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_5} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [inst_2 : CommRing R] →\\n            [inst_3 : Module R M] →\\n              [inst_4 : Module R N] →\\n                {p : M →ₗ[R] N →ₗ[R] R} →\\n                  {motive\", \"doc\": \"For any property depending on a perfect pairing between modules over a commutative ring, if the property holds when the linear map $ p: M \\to N^* $ and its flipped version $ p^\\text{flip}: N \\to M^* $ ar\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give algebraic duality, abstract Ext, or Serre subcategories; none constructs coherent Serre duality for smooth projective schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial coherent Serre duality in arbitrary dimension for invertible sheaves and vanishing above dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isoModSerre_isInvertedBy_iff\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [CategoryTheory.Abelian D] (P : CategoryTheory.ObjectProperty C)\\n  [inst_4 : P.IsSerreClass] (F : CategoryTheory.Functor C D) [CategoryTheory.Lim\", \"doc\": \"For a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserving finite limits and colimits, the property that $ F $ inverts the isomorphism modulo Serre class $ P $ is equivalent to $ P $ being contained\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give algebraic duality, abstract Ext, or Serre subcategories; none constructs coherent Serre duality for smooth projective schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality for an invertible sheaf on a smooth projective scheme over a field, natural in maps of invertible sheaves, in every cohomological degree",
+   "results": "8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, CommRing.Pic.mk_dual, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CommRing.Pic.inv_eq_dual, AlgebraicGeometry.Scheme.Modules.inv_app. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic dual modules, abstract Ext and linear perfect pairings do not state coherent duality for smooth proper schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Serre\", \"dual\"",
+   "results": "No hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic dual modules, abstract Ext and linear perfect pairings do not state coherent duality for smooth proper schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "Serre.*duality|serreDuality|dualizing|canonicalSheaf",
+   "results": "No hits.  Mathlib subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic dual modules, abstract Ext and linear perfect pairings do not state coherent duality for smooth proper schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a line bundle on a smooth projective scheme is dual to complementary cohomology of its inverse tensor the canonical bundle",
+   "results": "8 hits: CommRing.Pic.inv_eq_dual, CommRing.Pic.mk_dual, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_add, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, dualTensorHomEquivOfBasis_symm_cancel_left, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_neg, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_sub, Module.Invertible.linearEquivDual. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic dual modules, abstract Ext and linear perfect pairings do not state coherent duality for smooth proper schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent Serre duality perfect trace pairing on smooth proper schemes of arbitrary dimension for locally free sheaves",
+   "results": "8 hits: LinearMap.IsPerfPair.dualEval, LinearEquiv.instIsPerfPair, LinearMap.apply_toPerfPair_flip, Module.IsReflexive.of_isPerfPair, FGModuleCat.exactPairing, Module.finrank_of_isPerfPair, LinearMap.toPerfPair, FGModuleCat.rightRigidCategory. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic dual modules, abstract Ext and linear perfect pairings do not state coherent duality for smooth proper schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kollar-smooth-divisor-injectivity",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof, last sentence: natural Serre duality, in arbitrary dimension rather than only for curves.",
+   "via": [
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-projective-line-module-serre-duality",
+  "worker": "stage1",
+  "summary": "Reused the existing smooth-proper coherent trace pairing instead of creating another duality node. Constructed the requested maps in degrees 0 through n, checked coefficient naturality including the scalar/ordinary cup sign, and treated degrees above n separately using proper fibre-dimension vanishing and affine-base cohomology. No statement change and no new nodes.",
+  "blueprint": "Realizes the inherited Popa Theorem 1.6.6 final-sentence Serre-duality prerequisite beneath det-thm-sf-ctf-stability-direct-images proof (3), without altering the unit or chapter route. Whole-blueprint searches find only curve duality nodes, which do not state the arbitrary-dimensional item.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Converts the existing projective hypothesis into the proper hypothesis of coherent duality; a generic geometric implication, not a substitute for any unit step."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "Gives rank n of the differential sheaf, used only to trivialize its top exterior power and verify quasi-coherence."
+   },
+   {
+    "node": "lem-sc-scalar-cup-coefficient-naturality",
+    "why": "Gives coefficient naturality for all modules and degrees, needed to prove the bundle-map square of the trace pairing."
+   },
+   {
+    "node": "lem-sc-scalar-cup-module-cup-compatibility",
+    "why": "Identifies the coefficient-natural scalar cup with the ordinary cup up to a fixed degree sign, which cancels in the square."
+   },
+   {
+    "node": "lem-pc-cohomology-sections-affine-base",
+    "why": "Identifies the vanishing higher direct image over Spec F with module cohomology; the unit has no replacement for this generic affine-base tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-sc-scalar-cup-coefficient-naturality",
+  "lem-sc-scalar-cup-module-cup-compatibility",
+  "lem-pc-cohomology-sections-affine-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-2aef82413",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-2aef82413 (reviewer sub-agent of L); spot-checked: I read the item and all 13 cited nodes in full. The delivery creates no new nodes and leaves the item's statement unchanged. It is a first split: the base had a seeded item with no proof and there is no repair note, so this is not a re-split. The closure walk finds no cycle, and proof_deps equals the union of the step uses. Sources: the statement agrees with Stacks duality.tex Tag 0FVV (5) and (7), and with Tag 0FVX, whose functoriality allows any module map. Duplicate search: the trace-pairing node (unsplit, same unit) gives the perfect pairing for 0<=i<=d but naturality only under automorphisms, so it does not state the item. The curve, nodal, flag and f^! dualizing nodes do not state it either. Step 1: projective implies proper; pure dimension n gives relative dimension n and Krull dimension at most n; Omega has rank n; G_E is locally isomorphic to O and quasi-coherent. Step 2: theta is the pairing composed with the involutive swap s_E. Step 3: I re-derived P_E(x,H(b)y)=P_E'(H(v)x,y) from the scalar-cup coefficient naturality, ev_E(id x b)=ev_E'(v x id), and the sign (-1)^{pq}, which is the same on both sides and cancels. The result is precomposition by H^{n-j}(v), and it holds for zero and non-invertible v. Step 4: for j>n, fibre-dimension vanishing and Gamma(Spec F,R^jf_*) give 0=0. Edge cases checked: n=0, disconnected Y, imperfect F, empty Y, j=n, j>n. The five declared tool_uses are generic and accepted. Batch 5: the two scalar-cup lemmas reach sec-poincare-duality only through def-pod-ring-scalar-extension, a general definition of scalar extension. The fibre-dimension vanishing node reaches sec-trace-formula only through lem-trf-limit-fibre-dimension-bound, a generic limits fibre-dimension lemma. Neither is part of the proof of Poincare duality or of the trace formula, so both are accepted. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineModuleSerreDuality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.projective_lineModule_serreDuality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.lineSerreCohomology",
+   "AlgebraicGeometry.Scheme.Modules.projective_lineModule_serreDuality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineModuleSerreDuality.lean",
+  "statement": "theorem projective_lineModule_serreDuality (F : Type u) [Field F] (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of F))] (n : ℕ) [SmoothOfRelativeDimension n (Y ↘ Spec (CommRingCat.of F))] [IsProjective (Y ↘ Spec (CommRingCat.of F))] : ∃ θ : ∀ (E : Y.Modules) [IsInvertible E] (j : ℕ), (scalarCohomology (Y ↘ Spec (CommRingCat.of F)) (exteriorSheaf (Y ↘ Spec (CommRingCat.of F)).relativeDifferentials n ⊗ dual E) j) ≃ₗ[F] Module.Dual F ((lineSerreCohomology (Y ↘ Spec (CommRingCat.of F)) ((n : ℤ) - (j : ℤ))).obj E), (∀ (E : Y.Modules) [IsInvertible E] (j : ℕ), FiniteDimensional F (scalarCohomology (Y ↘ Spec (CommRingCat.of F)) (exteriorSheaf (Y ↘ Spec (CommRingCat.of F)).relativeDifferentials n ⊗ dual E) j) ∧ FiniteDimensional F (Module.Dual F ((lineSerreCohomology (Y ↘ Spec (CommRingCat.of F)) ((n : ℤ) - (j : ℤ))).obj E))) ∧ (∀ (E E' : Y.Modules) [IsInvertible E] [IsInvertible E'] (v : E ⟶ E') (j : ℕ) (z : scalarCohomology (Y ↘ Spec (CommRingCat.of F)) (exteriorSheaf (Y ↘ Spec (CommRingCat.of F)).relativeDifferentials n ⊗ dual E') j) (x : (lineSerreCohomology (Y ↘ Spec (CommRingCat.of F)) ((n : ℤ) - (j : ℤ))).obj E), θ E j (scalarCohomologyMap (Y ↘ Spec (CommRingCat.of F)) (exteriorSheaf (Y ↘ Spec (CommRingCat.of F)).relativeDifferentials n ◁ dualMap v) j z) x = θ E' j z (((lineSerreCohomology (Y ↘ Spec (CommRingCat.of F)) ((n : ℤ) - (j : ℤ))).map v).hom x)) ∧ (∀ (E : Y.Modules) [IsInvertible E] (j : ℕ), n < j → Subsingleton (scalarCohomology (Y ↘ Spec (CommRingCat.of F)) (exteriorSheaf (Y ↘ Spec (CommRingCat.of F)).relativeDifferentials n ⊗ dual E) j))",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary lineSerreCohomology is only the negative-degree convention: the existing moduleCohomology followed by canonical restriction of scalars in nonnegative degrees, and the constant zero vector-space functor in negative degrees. The main theorem gives a single family natural in all invertible-module morphisms. Additional statement dependencies are already landed owning nodes for the relative differential sheaf, sheaf exterior powers and field-linear module cohomology."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d06771a8",
+  "group": "Q102",
+  "result": "pass",
+  "note": "All node clauses match the Lean: smooth of relative dimension n + IsProjective over Spec F; ω = exteriorSheaf of relativeDifferentials, n; dual E; ∃ θ family of F-linear isos H^j(ω⊗E^∨) ≃ Dual(H^{n-j}(E)); finite dimensionality of both sides; naturality for all v in the correct variance (ω ◁ dualMap v, precomposition by H^{n-j}(v)); vanishing for j>n as Subsingleton. The helper lineSerreCohomology is real data: moduleCohomology with restrictScalars(scalarMap f ⊤), the same action as scalarCohomology, and zero for r<0, with integer subtraction. The ⊗ instance is the same monoidalCategory definition as the def-pur-sheaf-tensor-product owner. lean.statement is verbatim; only lean and stmt_deps differ from the live node (3 landed upstream definition nodes added); proof imports exist; docstrings carry source, blueprint and proof steps; proof is sorry only; the report has both sections. Edge cases n=0, j=n+1, empty and disconnected Y, single universe u are covered. No file changed, so no compile."
+ }
+}

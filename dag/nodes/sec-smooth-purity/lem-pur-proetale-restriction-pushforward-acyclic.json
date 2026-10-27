@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-proetale-restriction-pushforward-acyclic",
+ "kind": "lemma",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Scalar-restricted K-injectives are acyclic for pro-etale direct image",
+ "statement": "On the original pro-etale sites of schemes X and Y, let f:X→Y, let B→C be a map of sheaves of commutative rings on X, and let D→f_*B be any structural map of ring sheaves. Rings and modules lie in the independent universe max u (t+1), as in [def-pur-completed-pushforward-models]. For any supplied RightImage model F of the additive pushforward of B-modules to D-modules and any K-injective C-module cochain complex I, the universal derived unit of F at the scalar restriction of I to B is an isomorphism. The rings B and C may be presented as RingCat-valued sheaves with sectionwise commutativity. Neither flatness of B→C nor commutativity of D is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to scalar restriction; Tag 08FI, restriction of K-injectives to a localized site; Tag 0A95, sectionwise detection."
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models"
+ ],
+ "proof": [
+  {
+   "text": "Lift the sectionwise commutative ring sheaves and their map to CommRingCat. Resolve the scalar-restricted complex by a quasi-isomorphism j to a K-injective B-module complex K, using Grothendieck abelianness and K-injective resolutions in the independent coefficient universe.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each object U of the original pro-etale site, restrict I, K and j to X/U. Exact slice restriction preserves the quasi-isomorphism, and preserves K-injectivity of I and K. Apply scalar-restriction acyclicity for sections to these two complexes and j.",
+   "uses": [
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-sp-site-restriction-kinjective-independent-ring",
+    "lem-coef-restriction-sections-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Global sections on X/U identify naturally with evaluation at its terminal object. The resulting quasi-isomorphism is sections of j over U. Direct image evaluates j on the base-changed target objects, so sectionwise detection makes f_*(j) a quasi-isomorphism of module complexes.",
+   "uses": [
+    "lem-pur-quasi-iso-of-sections-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied derived unit is invertible at K. Its naturality square for j has the other two sides Q(f_*(j)) and F(Q(j)) invertible. Two-out-of-three for isomorphisms therefore makes its unit at the scalar restriction of I invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E, 08FI and 0A95; proof on the original site by evaluating a restricted K-injective resolution on every slice."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of a K-injective complex of sheaves of modules is acyclic for direct image",
+   "results": "Eight hits, including SheafOfModules.restrictScalars, its additive instance, and the corresponding presheaf constructions; no derived acyclicity theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, SheafOfModules.restrictScalars",
+   "results": "Zero hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*[Aa]cyclic|coefficientRestrictionSections",
+   "results": "Mathlib search service found zero hits. Local source search found the proved coefficientRestrictionSections_quasiIso, overFunctor_preservesKInjectiveComplexes_ofUniverses and quasiIso_of_sectionsOfUniverses; these are used to prove the direct-image assertion.",
+   "date": "2026-10-27",
+   "verdict": "use existing section and slice lemmas"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientImageComparisons",
+  "date": "2026-10-27",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, completed coefficient direct-image comparisons: scalar restriction is acyclic for direct image.",
+   "via": [
+    "lem-pur-completed-coefficient-image-comparisons",
+    "lem-pur-completed-coefficient-direct-image-diagrams",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleRestrictionPushforwardAcyclic",
+  "file": "lean/Sheaf/Paper/ProEtaleRestrictionPushforwardAcyclic.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.restrictionPushforward_acyclic",
+  "statement": "theorem restrictionPushforward_acyclic {X Y : Scheme.{t}} (f : X ⟶ Y)\n    {B C : Sheaf (ProEt.topology X) RingCat.{max u (t + 1)}}\n    {D : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)}}\n    (hB : ∀ (U : X.ProEtᵒᵖ) (a b : B.obj.obj U), a * b = b * a)\n    (hC : ∀ (U : X.ProEtᵒᵖ) (a b : C.obj.obj U), a * b = b * a)\n    (a : B ⟶ C) (c : D ⟶ (ringPush.{t, u} f).obj B)\n    [(push f c).Additive] (F : RightImage (push f c))\n    (I : CochainComplex (Mod X C) ℤ) (hI : I.IsKInjective) :\n    IsIso (F.unit.app\n      (((SheafOfModules.restrictScalars.{max u (t + 1)} a).mapHomologicalComplex\n        (.up ℤ)).obj I))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-sp-site-restriction-kinjective-independent-ring",
+  "lem-coef-restriction-sections-acyclic",
+  "lem-pur-quasi-iso-of-sections-universes"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T222747-L-692508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T222747-L-692508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

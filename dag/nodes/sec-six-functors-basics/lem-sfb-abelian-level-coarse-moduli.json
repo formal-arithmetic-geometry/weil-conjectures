@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-abelian-level-coarse-moduli",
+ "kind": "statement",
+ "title": "Coarse scheme and algebraicity for abelian-level curve moduli",
+ "statement": "Let $k$ be a field [def-weil-field], let $g\\geq2$, and let $\\ell\\geq3$ be a prime invertible in $k$. Let $\\mathcal L_{g,\\ell}$ be the groupoid of smooth projective geometrically connected genus-$g$ curves with a full abelian level-$\\ell$ structure, with objects and arrows exactly as in [def-sfb-stable-pointed-moduli-groupoids]. Then $\\mathcal L_{g,\\ell}$ is a separated Deligne--Mumford stack, smooth and of finite type over $k$, and it has a separated finite-type coarse moduli $k$-scheme $C_{g,\\ell}$ with coarse morphism $c:\\mathcal L_{g,\\ell}\\to C_{g,\\ell}$. Coarse moduli, Deligne--Mumford stack and algebraic space have the conventions of [def-sfb-stable-pointed-moduli-groupoids]: $c$ is initial among maps to algebraic spaces and induces a bijection of geometric isomorphism classes. Smoothness and finite type for the stack are tested on smooth scheme atlases, with quasi-compactness for finite type; the scheme morphism conventions are [def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-pc-scheme].",
+ "source": {
+  "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+  "place": "Section 2.3, paragraphs preceding Theorem 2.3.2, Theorem 2.3.2(1), and Section 2.3.3. Local PDF WANTED; primary author PDF read online.",
+  "url": "https://arxiv.org/pdf/alg-geom/9501003"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-sfb-moduli-stack-properties"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\overline{\\mathcal M}=\\overline{\\mathcal M}_{g,0}$ and $\\mathcal M=\\mathcal M_{g,0}$. The unpointed stable coarse theorem supplies smoothness and the Deligne--Mumford property of $\\overline{\\mathcal M}$ and identifies $\\mathcal M$ as an open substack. The stable-isomorphism theorem supplies finite type and finite diagonal, properties not inferred merely from the existence of a projective coarse scheme. Apply the open-substack part of the permanence lemma: $\\mathcal M$ is smooth, separated, finite type and Deligne--Mumford, with finite diagonal.",
+   "uses": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-stable-isom-finite-unramified",
+    "lem-sfb-dm-open-finite-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E9C and 0E9A; open-substack permanence"
+   }
+  },
+  {
+   "text": "Put $A=\\mathbf F_\\ell$. For any $T\\to\\mathcal M$ corresponding to $f:X\\to T$, projectivity in the specified projective-bundle convention makes $f$ proper by the projective-bundle-proper lemma. Apply the smooth-proper finite-cohomology local-system theorem to the constant rank-one $A$-module sheaf and $q=1$. Thus $\\mathcal H=R^1f_*\\underline A$ is locally constant with finite-dimensional fibres. The prime-coefficient proper-base-change theorem identifies $u^{-1}\\mathcal H$ with $R^1(f_{T'})_*\\underline A$ for every $u:T'\\to T$, using the specified exchange map. No assumption that $T$ is Noetherian is used.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "lem-sfb-smooth-proper-finite-cohomology-local-system",
+    "lemma-weil-pbc-prime-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GLI, proposition-loc-cst-torsion, with the proper-base-change theorem cited by the node"
+   }
+  },
+  {
+   "text": "On an etale cover of $T$ trivializing $\\mathcal H$ as a finite $A$-module $B$, the frame sheaf $\\operatorname{Isom}_A(\\underline{A^{2g}},\\mathcal H)$ is the constant sheaf of the finite set $\\operatorname{Isom}_A(A^{2g},B)$. That set may be empty, which still gives a finite locally constant sheaf. The finite-locally-constant representability theorem therefore gives a finite etale $T$-scheme $P_T$. To check the required functor on all $T$-schemes, use the proper-base-change identification in step 2 and inverse-image representability: pulling $P_T$ to $T'$ represents the pulled-back frame sheaf. Its sections over $T'$ are exactly the level structures on $X_{T'}$. An object of $T\\times_{\\mathcal M}\\mathcal L_{g,\\ell}$ is $(Y,\\lambda,\\alpha:Y\\simeq X_{T'})$; send it to $(\\alpha^*)^{-1}\\lambda$. Its inverse sends a frame $\\mu$ to $(X_{T'},\\mu,\\mathrm{id})$. An arrow compatible with $\\alpha$ is uniquely forced, so these functors are inverse up to the displayed isomorphism and the groupoid is discrete. This proves the finite-etale chart criterion for the forgetful map $p:\\mathcal L_{g,\\ell}\\to\\mathcal M$.",
+   "uses": [
+    "lem-galois-flc-representable",
+    "lem-galois-inverse-image-representable",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV (finite locally constant representability); explicit 2-fibre-product calculation with the moduli definition"
+   }
+  },
+  {
+   "text": "Apply the finite-etale-decoration part of the permanence lemma to the forgetful map from step 3 and the smooth finite-diagonal stack of step 1. It gives that $\\mathcal L_{g,\\ell}$ is a separated smooth finite-type Deligne--Mumford stack and that $p$ is representable finite etale. This proves all the stack assertions before any claim of scheme representability.",
+   "uses": [
+    "lem-sfb-dm-open-finite-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Finite-etale chart criterion and smooth/finite-type composition"
+   }
+  },
+  {
+   "text": "For a geometric object $(C,\\lambda)$, an automorphism $a$ satisfies $a^*\\lambda=\\lambda$. Since $\\lambda$ is an isomorphism, cancel it to obtain $a^*=\\mathrm{id}$ on $H^1(C_{\\mathrm{et}},A)$. Geometric level faithfulness applies: the curve is smooth, projective, connected, of genus $g\\geq2$, and $\\ell\\geq3$ is prime to the characteristic. Hence $a=\\mathrm{id}$. Thus every geometric object of $\\mathcal L_{g,\\ell}$ has trivial automorphism group.",
+   "uses": [
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Section 2.3.3; geometric level faithfulness, no symplectic restriction"
+   }
+  },
+  {
+   "text": "Let $q:\\overline{\\mathcal M}\\to Q_g$ be the coarse scheme provided by the stable coarse theorem. Apply coarse-open restriction to the open $\\mathcal M\\subset\\overline{\\mathcal M}$, using finite type and finite diagonal from the stable-isomorphism theorem. This gives an open subscheme $V\\subset Q_g$ and a coarse morphism $\\mathcal M\\to V$. Apply inertia-free finite-cover coarse descent to $p:\\mathcal L_{g,\\ell}\\to\\mathcal M$: step 1 gives the finite-type Deligne--Mumford base with finite diagonal, step 3 gives representable finiteness, and step 5 gives trivial geometric automorphisms. Its conclusion represents $\\mathcal L_{g,\\ell}$ by a scheme $L$ finite over $V$. In particular this is a scheme, rather than only an algebraic space.",
+   "uses": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-stable-isom-finite-unramified",
+    "lem-sfb-coarse-moduli-open-restriction",
+    "lem-sfb-inertia-free-finite-cover-coarse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tags 0DUT and 0DUV; inertia-free finite-cover consequence"
+   }
+  },
+  {
+   "text": "Take $C_{g,\\ell}=L$ and let $c$ be the equivalence $\\mathcal L_{g,\\ell}\\simeq h_L$ from step 6. For every algebraic space $Z$, composition with this equivalence identifies maps $L\\to Z$ with maps $\\mathcal L_{g,\\ell}\\to Z$; on every algebraically closed field it identifies the discrete set $L(\\Omega)$ with geometric isomorphism classes. These are precisely the two coarse conditions. Since $L$ represents the stack, its identity atlas tests the smoothness and finite type proved in step 4, and its scheme diagonal is the diagonal of that stack. Thus $L$ is separated and of finite type over $k$, as required.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Coarse universal property; identity atlas of a scheme, with the moduli-groupoid conventions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-galois-flc-representable",
+  "lem-galois-inverse-image-representable",
+  "lem-sfb-coarse-moduli-open-restriction",
+  "lem-sfb-dm-open-finite-etale-permanence",
+  "lem-sfb-geometric-curve-level-faithfulness",
+  "lem-sfb-inertia-free-finite-cover-coarse",
+  "lem-sfb-smooth-proper-finite-cohomology-local-system",
+  "lem-sfb-stable-isom-finite-unramified",
+  "lem-sfb-unpointed-stable-coarse-projective",
+  "lem-trf-projective-bundle-proper",
+  "lemma-weil-pbc-prime-proper-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Agent synthesis of the cited Stacks results and the abelian frame construction of Pikaart--de Jong Section 2.3.3; the local Pikaart--de Jong PDF is WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence of a coarse moduli scheme for smooth genus g curves with level structures",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Moduli\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "grep",
+   "query": "coarseModuli|coarse_moduli|Teichmuller|abelianLevel",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"18\", \"text\": \"`Perfection.teichmuller`, such that it composed with the quotient map `R →+* R ⧸ I` is the\"}\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"31\", \"text\": \"noncomputable def teichmullerAux (x : Perfection (R ⧸ I) p) : ℕ → R\"}\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"35\", \"text\": \"theorem teichmullerAux_sModEq (x : Perfection (R ⧸ I) p) (m : ℕ) :\"}\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"36\", \"text\": \"    teichmullerAux x m ≡ teichmullerAux x (m + 1) [SMOD I ^ m] := by\"}\n  {\"file\": \"Mathlib/RingTheory/Teichmuller.lean\", \"line\": \"40\", \"text\": \"  rw [teichmullerAux, pow_succ' p, pow_mul]\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Teichmuller\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"50\", \"text\": \"  teichmuller p _\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"59\", \"text\": \"  mk_teichmuller x\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"69\", \"text\": \"  mk_comp_teichmuller' ..\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.WittVector.TeichmullerSeries\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"25\", \"text\": \"* `fontaineTheta_teichmuller` : `θ([x])` is the untilt of `x`.\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"122\", \"text\": \"theorem ghostComponentModPPow_teichmuller_coeff (n : ℕ) (x : R♭) :\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"123\", \"text\": \"    ghostComponentModPPow n (teichmuller p (PreTilt.coeff n x)) =\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"126\", \"text\": \"    (teichmuller p ((((_root_.frobeniusEquiv _ p).symm ^ n) x).untilt))\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.WittVector.Teichmuller\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"12\", \"text\": \"# Teichmuller Series\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"16\", \"text\": \"(`p`-adic) summation of Teichmuller series, namely\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"17\", \"text\": \"`∑ i, (teichmuller p\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/TeichmullerSeries.lean\", \"line\": \"22\", \"text\": \"* `WittVector.dvd_sub_sum_teichmuller_iterateFrobeniusEquiv_coeff` : `p ^ (n + 1)` divides\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.WittVector.Teichmuller\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"13\", \"text\": \"This file defines `WittVector.teichmuller`, a monoid hom `R →* 𝕎 R`, which embeds `r : R` as the\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"18\", \"text\": \"- `WittVector.teichmuller`: the Teichmuller map.\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"19\", \"text\": \"- `WittVector.map_teichmuller`: `WittVector.teichmuller` is a natural transformation.\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"20\", \"text\": \"- `WittVector.ghostComponent_teichmuller`:\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Teichmuller.lean\", \"line\": \"21\", \"text\": \"  the `n`-th ghost component of `WittVector.teichmuller p r` is `r ^ p ^ n`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The moduli stack of smooth curves with an abelian level structure has a separated finite type coarse moduli scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Teichmuller level cover of the stack of curves has a coarse scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXBind\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        [inst_2 : P.IsStableUnderComposition] →\\n          {X : AlgebraicGeometry.Sc\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this instance defines a cover of $ X $ using th\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over.over\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    {inst : P.IsStableUnderBaseChange} →\\n      {inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P} →\\n        {X : AlgebraicGeometry.Scheme} →\\n          {inst_2 : X.Over S} →\\n          \", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this function maps each element of the zeroth c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"(S : AlgebraicGeometry.Scheme) →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    [P.IsStableUnderBaseChange] →\\n      [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X : AlgebraicGeometry.Scheme} →\\n          [X.Over S] → AlgebraicGeometry.Scheme.Cover (Alg\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, the cover of $ X $ is defined by the precoverag\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"Given a precoverage $K$ on the category of schemes, the cover associated to $K$ is the zero hypercover defined by $K$, which consists of a collection of covering sieves for each scheme in the category\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.mkOfCovers_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} (J : Type u_1)\\n  (obj : J → AlgebraicGeometry.Scheme) (map : (j : J) → obj j ⟶ X)\\n  (covers : ∀ (x : ↥X), ∃ j y, (CategoryTheory.ConcreteCategory.hom (map j).base) y = x)\\n  (map_prop : autoParam (∀ (j : J\", \"doc\": \"Given a scheme $X$, a morphism property $P$, an index type $J$, a family of schemes $Y_j$ indexed by $J$, and morphisms $f_j: Y_j \\to X$ that are jointly surjective (their images cover $X$) and satisfy\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphism properties, elliptic Weierstrass curves or Witt-vector Teichmuller representatives, not moduli of genus-at-least-two curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The moduli stack of smooth genus g curves with full abelian level structure has a coarse moduli scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"WeierstrassCurve\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"Type u → Type u\", \"doc\": \"The type of Weierstrass curves over a given type $ R $.\"}\n  {\"name\": \"WeierstrassCurve.instInhabited\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"{R : Type u} → [Inhabited R] → Inhabited (WeierstrassCurve R)\", \"doc\": \"For any inhabited ring $ R $, the type of Weierstrass curves over $ R $ is inhabited. This instance provides a canonical trivial Weierstrass curve constructed using the default elements of $ R $ for a\"}\n  {\"name\": \"WeierstrassCurve.Affine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of affine Weierstrass curves over a given base $ R $.\"}\n  {\"name\": \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"{F : Type u_2} → [inst : Field F] → [DecidableEq F] → Inhabited { W // W.IsElliptic }\", \"doc\": \"For any field $ F $ with decidable equality, there exists an elliptic Weierstrass curve over $ F $ with j-invariant $ 37 $. This curve is constructed explicitly using the standard form for j-invariant\"}\n  {\"name\": \"WeierstrassCurve.ofJ\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"{F : Type u_2} → [Field F] → F → [DecidableEq F] → WeierstrassCurve F\", \"doc\": \"The function constructs a Weierstrass curve over a field $ F $ with j-invariant $ j $, defined by different equations depending on the value of $ j $: \\n- If $ j = 0 $, it uses the curve $ y^2 + y = x^\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coarse moduli schemes of smooth curves with level structures",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Moduli\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "coarseModuli|coarse_moduli|abelianLevel",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence.",
+   "via": [
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-abelian-level-coarse-moduli",
+  "worker": "stage1",
+  "group": "ND",
+  "summary": "Reuse stable finite-diagonal and inertia-free-cover inputs from the live DAG. Construct the frame cover without asserting its rank or surjectivity, obtain stack properties by atlas permanence, and prove coarse-scheme existence via open coarse restriction and inertia-free finite-cover descent. Two general statement-only inputs; no Lean changes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-264f4478d",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-264f4478d (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes and every cited statement in full. Source: I fetched Pikaart–de Jong online and converted it with pdftotext. §2.3 says the level stack is representable finite étale over M_g, so it is separated and smooth. Thm 2.3.2(1) gives a separated finite-type coarse scheme. §2.3.3 defines a non-symplectic frame (Z/m)^{2g} -> R^1f_*. The item is the specialization of this to S=Spec k, and its statement is identical to Q22's. Steps: (1) unpointed-stable gives smooth DM with M open, stable-isom gives finite type and finite diagonal, then open permanence; (2) projective-bundle-proper, the local system with q=1 and constant A, and prime PBC for arbitrary base change; (3) the frame sheaf is finite locally constant, possibly empty, so flc-representable(2) applies, and inverse-image-representable applies because P_T is étale. I checked the 2-fibre-product functors against the def. (4) decoration permanence; (5) a*=id on H^1 from a*λ=λ, then faithfulness, using connected fibres from def-sfb-stable-pointed-curve; (6) coarse-open restriction to V⊂Q_g, then inertia-free finite cover, so L is a scheme finite over V; (7) the equivalence onto h_L is coarse (elementary). No cycle: none of the closures reaches the item. New nodes: open-restriction is true by Keel–Mori 0DUT (uniform categorical moduli space and universal homeomorphism; Q is the KM space by the categorical property). Permanence is true: Δ_U is a base change of Δ_X, the opens are quasi-compact by 0CPM, Y is a stack via the h_P sheaf property, and Δ_Y is (open-closed relative diagonal)∘(base change of Δ_U), so it is finite and Y is separated. Neither node is a duplicate or a clause of the item, and both are statement-only. Edge cases checked: empty open, empty frame, small characteristic. Tool uses to accept: trf projective-bundle-proper, pbc prime PBC, galois flc/inverse-image (all also used by the parent). Batch-5 flags are all generic: the nodal lci criterion, projective⇒proper, PBC→the pod lisse=module-object equivalence, and the def-trf projective-bundle definition. None is a step of the trace formula or of Poincaré duality. No changes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianLevelCoarseModuli",
+  "declaration": "AlgebraicGeometry.abelian_level_coarse_moduli",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianLevelCoarseModuli.lean",
+  "statement": "theorem abelian_level_coarse_moduli (k : Type u) [Field k] (g : ℕ) (hg : 2 ≤ g) (ℓ : AbelianLevelPrime (Spec (.of k))) : IsDeligneMumfordModuliStack (BasedCategory.ofFunctor (AbelianLevelModuli.forget (Spec (.of k)) g ℓ)) ∧ HasProperModuliDiagonal (BasedCategory.ofFunctor (AbelianLevelModuli.forget (Spec (.of k)) g ℓ)) ∧ HasSmoothFiniteTypeModuliAtlas (BasedCategory.ofFunctor (AbelianLevelModuli.forget (Spec (.of k)) g ℓ)) ∧ ∃ (C : Over (Spec (.of k))) (c : BasedFunctor (BasedCategory.ofFunctor (AbelianLevelModuli.forget (Spec (.of k)) g ℓ)) (discreteModuli (yoneda.obj C))), IsCoarseModuliScheme (BasedCategory.ofFunctor (AbelianLevelModuli.forget (Spec (.of k)) g ℓ)) C c ∧ IsSeparated C.hom ∧ LocallyOfFiniteType C.hom ∧ QuasiCompact C.hom",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-461461400",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Item node changes only by adding the new definition node def-sfb-moduli-stack-properties to stmt_deps plus the lean record; statement unchanged and lean.statement verbatim. Every clause matches: k a field, g>=2, AbelianLevelPrime (on Spec k this is exactly a prime >=3 nonzero in k), the recorded AbelianLevelModuli.forget groupoid in every conjunct, IsDeligneMumfordModuliStack, HasProperModuliDiagonal (equivalent to a separated DM stack: proper DM diagonal is finite so scheme-representable; both projections pinned over identity base maps), HasSmoothFiniteTypeModuliAtlas (etale surjective atlas, smooth + LFT + QC over k; equivalent to smooth finite type for DM stacks), IsCoarseModuliScheme with the given c, and C separated + LFT + QC. No extra hypotheses or conclusions. New node has the required fields and its definitions are real, not hollow; no duplicate predicate in live Sheaf or sibling deliveries (unpointed-stable theorem writes its atlas inline the same way). Docstrings carry source, blueprint id and 7 proof steps; one sorry; proof-dependency imports are the recorded modules; lines <=100; universes bound. Edge cases g=2, l=3, char 0 or char != l, empty test schemes checked. Advisory: Smooth is imported only transitively. No file changed, so no compile."
+ }
+}

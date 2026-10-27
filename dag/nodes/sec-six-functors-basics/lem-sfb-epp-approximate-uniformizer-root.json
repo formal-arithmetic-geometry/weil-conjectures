@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-epp-approximate-uniformizer-root",
+ "kind": "statement",
+ "title": "Separable approximate roots of a uniformizer",
+ "statement": "Let $p$ be prime, let $R$ be a complete discrete valuation ring of characteristic $p$, with fraction field $E$ and uniformizer $\\pi$ [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring, def-pc-field-extension]. For every integer $r\\geq1$, $q=p^r$, and integer $h>1$, there is a separable field extension $E_1/E$ of degree $q$ [def-weil-pbc-separable-algebraic-extension] whose integral closure $R_1$ of $R$ is a complete discrete valuation ring [def-weil-pbc-integral-closure], with $R_1/\\mathfrak m_{R_1}=R/\\mathfrak m_R$ and $\\mathfrak m_RR_1=\\mathfrak m_{R_1}^{q}$. It has a uniformizer $t$ and elements $b,b'\\in R_1$ satisfying $t^q=\\pi+\\pi^h b=\\pi+t^{hq}b'$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EW, lemma-make-degree-q-extension, equicharacteristic-p specialization; completeness of the finite normalization over the complete base."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=h+q-1$ and $f(X)=X^q-\\pi^NX-\\pi\\in R[X]$. Since $r\\geq1$ and $p$ is prime, $q\\geq2$; hence $f$ is monic of degree $q$. Its nonleading coefficients belong to $\\pi R$, and its constant coefficient $-\\pi$ does not belong to $\\pi^2R$: otherwise cancelling the nonzero $\\pi$ in the domain $R$ would make $\\pi$ a unit. Apply lem-sfb-eisenstein-quotient-dvr to obtain the DVR $C=R[X]/(f)$ with uniformizer $t=[X]$. By lem-weil-pbc-monic-quotient-free, $1,t,\\ldots,t^{q-1}$ is an $R$-basis of $C$; in particular $R\\to C$ is injective and $C$ is finite free of rank $q$.",
+   "uses": [
+    "lem-sfb-eisenstein-quotient-dvr",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EW, lemma-make-degree-q-extension, characteristic-p proof, after y=pi z"
+   }
+  },
+  {
+   "text": "Localize the displayed basis at $R\\setminus\\{0\\}$, obtaining a domain $D=E[X]/(f)=E[t]$ with $E$-basis $1,t,\\ldots,t^{q-1}$. For any nonzero $a\\in D$, multiplication by $a$ is an injective endomorphism of the finite-dimensional $E$-vector space $D$, hence surjective; a preimage of $1$ is its inverse. Thus $D$ is a field. It contains $C$ and every fraction of elements of $C$, so $E_1:=D=\\operatorname{Frac}(C)$, $E_1=E(t)$, and $[E_1:E]=q$. The basis also shows that no nonzero polynomial of degree less than $q$ vanishes at $t$, so the monic relation $f$ is its minimal polynomial.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EW, lemma-make-degree-q-extension, characteristic-p proof, after y=pi z"
+   }
+  },
+  {
+   "text": "In characteristic $p$, the derivative of $X^q$ is zero since $p\\mid q$. Consequently $f\\prime=-\\pi^N\\ne0$ is a constant in $E[X]$. The explicit Bezout identity $0\\cdot f+(-\\pi^{-N})f\\prime=1$ shows that $f$ is separable by def-pc-separable-polynomial. Since it is the minimal polynomial of $t$, the element $t$ is separable algebraic over $E$. Apply lem-trf-simple-separable-field-extension and $E_1=E(t)$ to obtain that the whole degree-$q$ extension $E_1/E$ is separable.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-trf-simple-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EW, lemma-make-degree-q-extension, characteristic-p proof, after y=pi z"
+   }
+  },
+  {
+   "text": "The element $t$ is integral over $R$, being a root of the monic $f$. The integral closure of $R$ in $E_1$ is a subring containing $R$ and $t$, so it contains $C=R[t]$. Conversely, $C$ is a DVR, hence a valuation ring by the characterization in def-sc-discrete-valuation-ring, and is integrally closed in its fraction field $E_1$ by lem-weil-pbc-valuation-ring-normal. If $z\\in E_1$ is integral over $R$, its same monic equation has coefficients in $C$, so $z$ is integral over $C$ and belongs to $C$. Therefore the integral closure $R_1$ is exactly $C$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-valuation-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EW, lemma-make-degree-q-extension, characteristic-p proof, after y=pi z"
+   }
+  },
+  {
+   "text": "The relation $f(t)=0$ reads $t^q=\\pi(1+\\pi^{N-1}t)$. Put $u=1+\\pi^{N-1}t$. Since $\\mathfrak m_C=(t)$, the image of $u$ in the residue field is $1$, so $u$ is a unit. Thus $(\\pi)C=(t^q)=\\mathfrak m_C^q$. Killing $t$ in the presentation gives $C/(t)=R[X]/(X,f)=R/(\\pi)$, via the canonical residue map. This proves precisely the claimed equality of residue fields (identified by this canonical isomorphism) and the claimed extended-maximal-ideal formula.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EW, lemma-make-degree-q-extension, characteristic-p proof, after y=pi z"
+   }
+  },
+  {
+   "text": "All ideals of the DVR $R$ are principal, so $R$ is Noetherian. The finite free $R$-module $C$ is therefore $(\\pi)$-adically complete by lem-weil-pbc-finite-module-complete-over-complete-noetherian, since the base $R$ is complete. Step 5 gives $\\pi^kC=(t^{qk})$. These powers are cofinal among all $(t^m)$: a compatible family modulo $t^m$ restricts to one modulo $t^{qk}$, and conversely its coordinate modulo $t^m$ is the image of any coordinate modulo $t^{qk}$ with $qk\\geq m$, independent of $k$ by compatibility. These two operations are inverse and preserve the canonical map from $C$. Thus $C=R_1$ is complete also for its own maximal ideal $(t)$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA, lemma-completion-tensor (3); Tag 0317, definition-complete; cofinal powers spelled out for (pi)C=(t^q)"
+   }
+  },
+  {
+   "text": "Finally set $b=\\pi^{q-1}t\\in R_1$. The defining equation gives $t^q=\\pi+\\pi^{h+q-1}t=\\pi+\\pi^h b$. Since $t^q=\\pi u$ and $u$ is a unit, $\\pi^h=t^{hq}u^{-h}$. Taking $b\\prime=u^{-h}b\\in R_1$ yields $t^q=\\pi+t^{hq}b\\prime$. These are the two required approximation identities for the same uniformizer $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EW, lemma-make-degree-q-extension, characteristic-p proof, after y=pi z"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-eisenstein-quotient-dvr",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-pc-separable-polynomial",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-trf-simple-separable-field-extension",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EW, lemma-make-degree-q-extension, characteristic-p proof, after y=pi z"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A discrete valuation ring admits a finite separable totally ramified extension with a uniformizer whose p power approximates a given uniformizer to arbitrary order",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Valuation.exists_pow_Uniformizer\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {Γ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ] {K : Type u_2} [inst_1 : Field K] {v : Valuation K Γ}\\n  [hv : v.IsRankOneDiscrete] {r : ↥v.valuationSubring}, r ≠ 0 → ∀ (π : v.Uniformizer), ∃ n u, ↑r = ↑(π.val ^ n) * ↑↑u\", \"doc\": \"For any non-zero element $ r $ in the field $ K_0 $ and any uniformizer $ \\\\pi $ of the discrete valuation $ v $, there exists a natural number $ n $ and a unit $ u $ in the valuation ring such that $ \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_exists_uniformizer\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R),\\n  ∃ π, (IsDedekindDomain.HeightOneSpectrum.valuation K v) π = WithZero.exp (-1)\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, and a height one prime ideal $ v $ in $ R $, there exists an element $ \\\\pi \\\\in K $ such that the valuation $ v(\\\\pi) = -1 $. This element $ \\\\pi $ \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation_exists_uniformizer\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (v : IsDedekindDomain.HeightOneSpectrum R),\\n  ∃ π, v.intValuation π = WithZero.exp (-1)\", \"doc\": \"For a Dedekind domain $A$ and a height one prime ideal $v$, there exists an element $\\\\pi \\\\in A$ such that the valuation $v(\\\\pi)$ equals $-1$ in the multiplicative integers with zero $\\\\mathbb{Z}^\\\\times\"}\n  {\"name\": \"Valuation.pow_Uniformizer_is_pow_generator\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {Γ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ] {K : Type u_2} [inst_1 : Field K] {v : Valuation K Γ}\\n  [hv : v.IsRankOneDiscrete] (π : v.Uniformizer) (n : ℕ),\\n  IsLocalRing.maximalIdeal ↥v.valuationSubring ^ n = Ideal.span {π.val ^ n}\", \"doc\": \"For any natural number $n$, the $n$th power of the maximal ideal $\\\\mathfrak{m}$ of the valuation subring $A$ is equal to the ideal generated by $\\\\pi^n$, i.e., $\\\\mathfrak{m}^n = \\\\langle \\\\pi^n \\\\rangle$.\"}\n  {\"name\": \"Valuation.exists_isUniformizer_of_isCyclic_of_nontrivial\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {Γ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ] {K : Type u_2} [inst_1 : Field K] (v : Valuation K Γ)\\n  [inst_2 : IsCyclic ↥(MonoidWithZeroHom.valueGroup v)] [inst_3 : Nontrivial ↥(MonoidWithZeroHom.valueGroup v)],\\n  ∃ π, v.IsUniformizer ↑π\", \"doc\": \"For a valuation $ v $ with cyclic and nontrivial value group $ \\\\Gamma $, there exists an element $ \\\\pi $ in the valuation subring $ K_0 $ such that $ \\\\pi $ is a uniformizer for $ v $, i.e., $ v(\\\\pi) $\"}\n  {\"name\": \"Valuation.instNonemptyUniformizer\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {Γ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ] {K : Type u_2} [inst_1 : Field K] (v : Valuation K Γ)\\n  [inst_2 : IsCyclic ↥(MonoidWithZeroHom.valueGroup v)] [inst_3 : Nontrivial ↥(MonoidWithZeroHom.valueGroup v)],\\n  Nonempty v.Uniformizer\", \"doc\": \"For a rank one discrete valuation $ v $, there exists a uniformizer element. A uniformizer is an element whose valuation generates the value group $ \\\\Gamma $, which for rank one discrete valuations is\"}\n  {\"name\": \"Valuation.Uniformizer\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"{Γ : Type u_1} →\\n  [inst : LinearOrderedCommGroupWithZero Γ] →\\n    {A : Type u_2} → [inst_1 : Ring A] → (v : Valuation A Γ) → [hv : v.IsRankOneDiscrete] → Type u_2\", \"doc\": \"The type of a uniformizer element for a rank one discrete valuation $ v $ from a ring $ A $ to a linearly ordered commutative group with zero $ \\\\Gamma $.\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsDedekindDomain S] [Algebra.EssFiniteType R S] [IsDomain R] [Module.Finite ℤ R] [CharZero R]\\n  [Algebra.IsIntegral R S],\\n  p ≠ ⊥ → (Algebra.IsUnramifiedAt R p ↔ Ide\", \"doc\": \"Let $ S $ be a Dedekind domain that is an essentially finite type algebra over a domain $ R $, where $ R $ is finitely generated as a $ \\\\mathbb{Z} $-module, has characteristic zero, and $ S $ is integ\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer and Eisenstein identities do not construct the specified separable totally ramified extension with arbitrarily accurate uniformizer root."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separable totally ramified extension of degree p power approximating a purely inseparable root of a uniformizer",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"separableClosure.isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[Algebra.IsAlgebraic F E] : IsPurelyInseparable (separableClosure F E) E\", \"doc\": \"If $ E $ is an algebraic extension of $ F $, then the field extension from the separable closure of $ F $ in $ E $ to $ E $ is purely inseparable. Every element in $ E $ not in the separable closure h\"}\n  {\"name\": \"IsPurelyInseparable.instOfHasExponent\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"[HasExponent K L] : IsPurelyInseparable K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ has a purely inseparable exponent $ n $, meaning that for every element $ \\\\alpha \\\\in L $, $ \\\\alpha^{p^n} $ lies in $ K $, where $ p $ is the character\"}\n  {\"name\": \"IsPurelyInseparable.sepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : sepDegree F E = 1\", \"doc\": \"If $ E/F $ is a purely inseparable field extension, then the separable degree of $ E $ over $ F $ is equal to 1, i.e., $ [E : F]_\\\\text{sep} = 1 $.\"}\n  {\"name\": \"IsPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(F : Type u_1) → (E : Type u_2) → [inst : CommRing F] → [inst_1 : Ring E] → [Algebra F E] → Prop\", \"doc\": \"The property that the field extension $ E $ over $ F $ is purely inseparable, meaning every element of $ E $ has a minimal polynomial over $ F $ of the form $ x^{p^n} - a $ for some $ a \\\\in F $ and pr\"}\n  {\"name\": \"IsPurelyInseparable.tower_top\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[Algebra E K] [IsScalarTower F E K] [h : IsPurelyInseparable F K] : IsPurelyInseparable E K\", \"doc\": \"In a tower of field extensions $ F \\\\subseteq E \\\\subseteq K $, if $ K $ is purely inseparable over $ F $, then $ K $ is also purely inseparable over $ E $. This means every element of $ K $ has a minim\"}\n  {\"name\": \"isPurelyInseparable_iff_natSepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \": IsPurelyInseparable F E ↔ ∀ x : E, (minpoly F x).natSepDegree = 1\", \"doc\": \"A field extension $ E $ over $ F $ is purely inseparable if and only if, for every element $ x \\\\in E $, the natural separable degree of the minimal polynomial of $ x $ over $ F $ is equal to 1.\"}\n  {\"name\": \"isPurelyInseparable_iff_finSepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \": IsPurelyInseparable F E ↔ finSepDegree F E = 1\", \"doc\": \"A field extension $ E $ over $ F $ is purely inseparable if and only if its separable degree $[E:F]_s$ equals 1.\"}\n  {\"name\": \"IsPurelyInseparable.isPRadical\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \"[IsPurelyInseparable K L] : IsPRadical (algebraMap K L) p\", \"doc\": \"For any purely inseparable field extension $ L $ over $ K $, the canonical algebra homomorphism from $ K $ to $ L $ satisfies the $ p $-radical condition for some prime power $ p $. This means that th\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer and Eisenstein identities do not construct the specified separable totally ramified extension with arbitrarily accurate uniformizer root."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsSeparable",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer and Eisenstein identities do not construct the specified separable totally ramified extension with arbitrarily accurate uniformizer root."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer.*separable|separable.*uniformizer|totallyRamified|TotallyRamified",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer and Eisenstein identities do not construct the specified separable totally ramified extension with arbitrarily accurate uniformizer root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eisenstein polynomial X to q minus pi to n plus q minus one times X minus pi gives an approximate qth root uniformizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"hensels_lemma\", \"module\": \"Mathlib/NumberTheory/Padics/Hensel\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : CommSemiring R] [inst_2 : Algebra R ℤ_[p]]\\n  {F : Polynomial R} {a : ℤ_[p]},\\n  ‖(Polynomial.aeval a) F‖ < ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ ^ 2 →\\n    ∃ z,\\n      (Polynomial.aeval z) F = 0 ∧\\n        ‖z - a‖ < ‖(Polynomial.a\", \"doc\": \"For a polynomial $ F $ over the p-adic integers $ \\\\mathbb{Z}_p $ and an element $ a \\\\in \\\\mathbb{Z}_p $, if the p-adic norm of $ F(a) $ is strictly less than the p-adic norm of the derivative $ F'(a) $\"}\n  {\"name\": \"Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {f : Polynomial R} {S : Type v} [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : R}\\n  {x : S},\\n  (Polynomial.aeval x) f = 0 →\\n    f.Monic →\\n      f.IsWeaklyEisensteinAt (R ∙ p) →\\n        ∃ y ∈ Algebra.adjoin R {x}, (algebraMap R S) p * y = x ^ (Polynomial.map (alg\", \"doc\": \"Let $ R $ be a commutative semiring, $ S $ an $ R $-algebra, $ f \\\\in R[X] $ a monic polynomial that is weakly Eisenstein at the ideal $ I = (p) $ generated by $ p \\\\in R $, and $ x \\\\in S $ a root of $ \"}\n  {\"name\": \"Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree_le\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {f : Polynomial R} {S : Type v} [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : R}\\n  {x : S},\\n  (Polynomial.aeval x) f = 0 →\\n    f.Monic →\\n      f.IsWeaklyEisensteinAt (R ∙ p) →\\n        ∀ (i : ℕ),\\n          (Polynomial.map (algebraMap R S) f).natDegree ≤ i → ∃ y \", \"doc\": \"Let $ R $ be a commutative semiring, $ S $ an $ R $-algebra, and $ f \\\\in R[X] $ a monic polynomial that is weakly Eisenstein at the ideal generated by $ p \\\\in R $. If $ x \\\\in S $ satisfies $ f(x) = 0 \"}\n  {\"name\": \"Polynomial.IsWeaklyEisensteinAt.pow_natDegree_le_of_root_of_monic_mem\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {𝓟 : Ideal R} {f : Polynomial R},\\n  f.IsWeaklyEisensteinAt 𝓟 → ∀ {x : R}, f.IsRoot x → f.Monic → ∀ (i : ℕ), f.natDegree ≤ i → x ^ i ∈ 𝓟\", \"doc\": \"For a monic polynomial $ f $ over a commutative ring $ R $ that is weakly Eisenstein at an ideal $ \\\\mathfrak{p} \\\\subseteq R $, if $ x \\\\in R $ is a root of $ f $, then for all integers $ i $ satisfying\"}\n  {\"name\": \"HenselianRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ I →\\n        IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ I\", \"doc\": \"Let $R$ be a commutative ring that is Henselian with respect to an ideal $I$. For any monic polynomial $f \\\\in R[X]$ and any element $a_0 \\\\in R$, if $f(a_0) \\\\in I$ and the derivative $f'(a_0)$ is a uni\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"WittVector.RecursionBase.solution_pow\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [IsAlgClosed k] (a₁ a₂ : WittVector p k),\\n  ∃ x, x ^ (p - 1) = a₂.coeff 0 / a₁.coeff 0\", \"doc\": \"For any two Witt vectors $\\\\mathbf{a}_1$ and $\\\\mathbf{a}_2$ over an algebraically closed field $k$ of characteristic $p$, there exists an element $x \\\\in k$ such that $x^{p-1} = \\\\frac{\\\\mathbf{a}_2^{(0)}\"}\n  {\"name\": \"WittVector.RecursionMain.root_exists\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [IsAlgClosed k] (n : ℕ)\\n  (a₁ a₂ : WittVector p k) (bs : Fin (n + 1) → k),\\n  a₁.coeff 0 ≠ 0 → a₂.coeff 0 ≠ 0 → ∃ b, (WittVector.RecursionMain.succNthDefiningPoly p n a₁ a₂ bs).IsRoot b\", \"doc\": \"For any natural number $n$, Witt vectors $a_1, a_2$ over a field $k$ with non-vanishing zeroth coefficients ($a_1^{(0)} \\\\neq 0$ and $a_2^{(0)} \\\\neq 0$), and a function $bs : \\\\mathrm{Fin}(n+1) \\\\to k$, \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer and Eisenstein identities do not construct the specified separable totally ramified extension with arbitrarily accurate uniformizer root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A discrete valuation ring in characteristic p has a separable totally ramified extension of degree p power with an arbitrarily accurate uniformizer root",
+   "results": "{\"t\": \"2026-10-24T07:35:45Z\", \"tool\": \"leanfinder\", \"query\": \"A discrete valuation ring in characteristic p has a separable totally ramified extension of degree p power with an arbitrarily accurate uniformizer root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"PreTilt\", \"Valuation.exists_pow_Uniformizer\", \"PreTilt.instPerfectRing\", \"IsPRadical.isPurelyInseparable\", \"IsPurelyInseparable.isPRadical\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\"], \"digest\": \"230df8587d9b77d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give uniformizer structure, separability notions, or Hensel and weak Eisenstein identities, not the specified separable extension with both approximation identities."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer.*separable|separable.*uniformizer|approximate.*root|totallyRamified",
+   "results": "{\"t\": \"2026-10-24T07:36:30Z\", \"tool\": \"grep\", \"query\": \"uniformizer.*separable|separable.*uniformizer|approximate.*root|totallyRamified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Field/Approximation.lean\", \"Mathlib/Data/Rat/NatSqrt/Defs.lean\"], \"digest\": \"34b6c4e32bfa9568\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give uniformizer structure, separability notions, or Hensel and weak Eisenstein identities, not the specified separable extension with both approximation identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separable Eisenstein polynomial produces a totally ramified extension of a complete discrete valuation field",
+   "results": "{\"t\": \"2026-10-24T07:36:30Z\", \"tool\": \"leansearch\", \"query\": \"A separable Eisenstein polynomial produces a totally ramified extension of a complete discrete valuation field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSeparable\", \"Algebra.FormallyUnramified.of_isSeparable\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.IsSeparable.finInsepDegree_eq\", \"IsGalois.of_separable_splitting_field\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"Algebra.IsSeparable.insepDegree_eq\", \"IsPurelyInseparable.natSepDegree_eq_one\"], \"digest\": \"0f657769e7346d98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give uniformizer structure, separability notions, or Hensel and weak Eisenstein identities, not the specified separable extension with both approximation identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-24T07:36:30Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give uniformizer structure, separability notions, or Hensel and weak Eisenstein identities, not the specified separable extension with both approximation identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complete discrete valuation ring of positive characteristic construct an Eisenstein polynomial with nonzero constant derivative whose root is an approximate p power root of the uniformizer",
+   "results": "{\"t\": \"2026-10-24T07:37:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a complete discrete valuation ring of positive characteristic construct an Eisenstein polynomial with nonzero constant derivative whose root is an approximate p power root of the uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hensels_lemma\", \"PowerSeries.weierstrassDistinguished\", \"Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree\", \"Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree_le\", \"WittVector.RecursionMain.root_exists\", \"HenselianLocalRing.is_henselian\", \"PowerSeries.weierstrassMod\", \"WittVector.RecursionBase.solution\"], \"digest\": \"dd3a2d10b7c3f360\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give uniformizer structure, separability notions, or Hensel and weak Eisenstein identities, not the specified separable extension with both approximation identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-artin-schreier-degree-p",
+  "date": "2026-10-24",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09F1, lemma-characteristic-p-case; conclusion used only in its finite separable totally ramified form, not the stronger Galois wording. Tag 09F1 nonempty J case: choose a degree p^r separable totally ramified coefficient extension with an approximate uniformizer root, using Tag 09EW.",
+   "via": [
+    "lem-sfb-epp-artin-schreier-degree-p",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-approximate-uniformizer-root",
+  "worker": "stage1",
+  "summary": "Q02: expanded Tag 09EW into an explicit Eisenstein quotient construction, used the existing general DVR quotient, monic basis, valuation normality, simple separable extension and finite module completeness nodes, and proved the residue, ramification and both approximation formulas. No new nodes. Repaired doubled TeX escapes only; no mathematical statement change.",
+  "blueprint": "Historical supporting algebra for det-thm-sf-ctf-stability-direct-images (3) through the recorded Epp creation chain. Latest blueprint no longer states this auxiliary result; retained the existing precise historical from.place and via chain. Whole-blueprint searches for 09EW, Eisenstein and approximate uniformizer root found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Generic normality of valuation rings identifies the explicit DVR quotient with the integral closure; the unit has no substitute for this commutative algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic finite module completeness over a complete Noetherian ring proves completeness of the explicit finite free quotient; no same-unit node supplies this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-040d46324",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-040d46324 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. All seven steps check against Stacks more-algebra Tag 09EW (char-p proof with y=πz). f = X^q − π^N X − π with N=h+q−1 is exactly the source's y-equation. Step 1: f is Eisenstein (a_1=−π^N, a_0=−π ∈ πR∖π²R, q≥2), which meets the hypotheses of lem-sfb-eisenstein-quotient-dvr (Tag 09ER); monic-quotient-free gives the basis. Step 2: E(t) is a field of degree q and f is the minimal polynomial. Step 3: f' = −π^N in char p, and the one-generator separability lemma 09H9 gives E_1/E separable. Step 4: R_1 = C by valuation-ring normality (00IC). Step 5: u = 1+π^{N−1}t is a unit (N−1 ≥ 1), so πC = t^qC and C/(t) = R/(π). Step 6: (π)-adic completeness via 00MA/031B, then the cofinal t-adic reindexing. Step 7: b = π^{q−1}t and b' = u^{−h}b; the identities are verified. Tested on p=q=2, h=2 and on q=9. The statement is unweakened; the only edit is TeX escaping. The two off-unit split tools in tool_uses (valuation-ring-normal, finite-module-complete) are accepted as generic algebra. Batch-5 flag: lem-trf-simple-separable-field-extension is a Mathlib field-theory leaf (Tag 09H9), outside both assumed statements and not a step of their proofs, so it is accepted. No duplicates: separable-uniformizer-approximation covers only q=p. Not a re-split. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SeparableApproximateUniformizerRoot",
+  "declaration": "IsDiscreteValuationRing.exists_separable_approximate_uniformizer_root",
+  "file": "lean/Sheaf/RingTheory/SeparableApproximateUniformizerRoot.lean",
+  "statement": "theorem exists_separable_approximate_uniformizer_root (p : ℕ) (hp : p.Prime) (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [CharP R p] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (E : Type v) [Field E] [Algebra R E] [IsFractionRing R E] (pi : R) (hpi : Irreducible pi) (r : ℕ) (hr : 1 ≤ r) (h : ℕ) (hh : 1 < h) : ∃ (E1 : Type v) (_ : Field E1) (_ : Algebra E E1) (_ : Algebra R E1) (_ : IsScalarTower R E E1) (_ : Algebra.IsSeparable E E1) (_ : IsDiscreteValuationRing (integralClosure R E1)), Module.finrank E E1 = p ^ r ∧ IsAdicComplete (IsLocalRing.maximalIdeal (integralClosure R E1)) (integralClosure R E1) ∧ ∃ e : IsLocalRing.ResidueField R ≃+* IsLocalRing.ResidueField (integralClosure R E1), (∀ x : R, e (IsLocalRing.residue R x) = IsLocalRing.residue (integralClosure R E1) (algebraMap R (integralClosure R E1) x)) ∧ Ideal.map (algebraMap R (integralClosure R E1)) (IsLocalRing.maximalIdeal R) = IsLocalRing.maximalIdeal (integralClosure R E1) ^ (p ^ r) ∧ ∃ t b b' : integralClosure R E1, Irreducible t ∧ t ^ (p ^ r) = algebraMap R (integralClosure R E1) pi + algebraMap R (integralClosure R E1) pi ^ h * b ∧ t ^ (p ^ r) = algebraMap R (integralClosure R E1) pi + t ^ (h * p ^ r) * b'",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-690148d3a",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Node diff vs live: only lean added; lean.statement verbatim in file. Clause-by-clause match to node/Stacks 09EW: p prime, R complete DVR char p (IsDomain+IsDiscreteValuationRing+CharP+IsAdicComplete maxIdeal), E = Frac R, pi Irreducible, r>=1, h>1; E1 : Type v field with IsScalarTower R E E1, Algebra.IsSeparable, finrank = p^r; integralClosure R E1 DVR and maximal-adically complete; residue-field iso compatible with residue∘algebraMap (canonical, not arbitrary); map m_R = m_R1^(p^r); Irreducible t, b, b' with t^q = pi + pi^h b = pi + t^(hq) b'. No stronger hypotheses; universes OK (E1 in E's universe, witness E[X]/(f)). All 5 stmt_deps are Mathlib existing:true records used exactly. No new defs, theorem proof sorry only, docstrings with source place, blueprint tag and 7 proof steps; no duplicate declaration in side-live Sheaf/WeilConjectures; report has Worker report + Second reading sections. Not recompiled (no file changed)."
+ }
+}

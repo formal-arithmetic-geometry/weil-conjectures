@@ -19,9 +19,74 @@
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 099N(5), strict-tower part before Rlim; sites-modules.tex Tags 03D2/03D3 for ringed module pullback; sites-cohomology.tex Tags 06YS/06YY and derived.tex Tag 06XN for resolving-class universal derived functors. O_E specialization with independent site and coefficient universes."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For reduction, use the existing functorial flat-term K-flat resolution to make the inclusion of good complexes a left derivability structure. Finite reduction preserves quasi-isomorphisms between its good complexes. Exact scalar restriction preserves them, and evaluation detects quasi-isomorphisms of strict towers. Apply the derivability-structure theorem and its computation criterion, retaining the actual transposed quotient tower.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed structural map supplied by the completed-coefficient structure-map theorem has precisely the displayed finite components. Rewrite both components through it and use the limit cone identity to prove component naturality. The ordinary module direct image has a left adjoint in the universe containing both sites; sectionwise additivity of direct image implies additivity of that left adjoint.",
+   "uses": [
+    "lem-pur-completed-coefficient-structure-map",
+    "lem-pur-ringed-site-module-pullback-exists-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the algebraic lift of the actual set-sheaf inverse image. Transpose the given direct ring map through the sheaf adjunction: the addition, multiplication and unit graph identities make its adjunct a ring map. Restrict the set-sheaf adjunction to linear maps, using the algebraic inverse-image operation graphs, and compose with scalar extension. This identifies inverse image followed by scalar extension with the specified left adjoint of the actual direct image, by uniqueness of left adjoints.",
+   "uses": [
+    "lem-pur-independent-composite-algebraic-image",
+    "def-pur-cochain-coefficient-arrows",
+    "lem-weil-pbc-geometric-module-construction",
+    "def-pur-cochain-tensor-coherence-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Algebraic inverse image is exact. At the conservative set of arbitrary pro-etale topos points, the K-flat stalk criterion shows that it carries every K-flat complex to a K-flat complex; no flat-term hypothesis is used here. The established independent-coefficient scalar-extension invariance theorem then shows that ordinary pullback preserves quasi-isomorphisms between all K-flat complexes. Transfer along the adjoint-uniqueness isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-sfb-proetale-enough-points",
+    "lem-sfb-algebraic-inverse-image-kflat",
+    "lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve a complex of strict towers by applying the functorial K-flat resolution to its evaluation diagram and transposing back. Evaluation detects the resulting quasi-isomorphism. Apply the resolving-class left-derived theorem on the homotopy category, using all objectwise K-flat tower complexes as its resolving class. Fullness of the homotopy quotient transfers its universal counit to complexes, preserving computation on that entire class and the triangulated integer-shift structure.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-ringed-derived-adjunction-independent-universes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-completed-coefficient-structure-map",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "lem-pur-independent-composite-algebraic-image",
+  "def-pur-cochain-coefficient-arrows",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sfb-proetale-enough-points",
+  "lem-sfb-algebraic-inverse-image-kflat",
+  "lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-ringed-derived-adjunction-independent-universes",
+  "def-pur-cochain-tensor-coherence-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YY; derived.tex Tag 06XN; sites-modules.tex Tags 03D2 and 03D3. N4: functorial diagram resolution, independent-universe linear-adjunction bridge, and the conservative-point criterion for every K-flat complex."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -68,10 +133,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-deligne-laumon-a1",
@@ -125,5 +194,15 @@
   "group": "NH",
   "result": "pass",
   "note": "5dddf992 fixes the da39d42e H13 return. Both dependency records (def-weil-pbc-adic-coefficient-datum, def-weil-pbc-completed-pullback) are cmp-identical to live. The CompletedTowerIndependent helpers moved unchanged (diffed with comments stripped) into the new def node def-a1-integral-completed-tower-pullback-universes with its own module, which the item cites; a specialisation is needed because the general interfaces fix the coefficient ring at universe t+1. The new node follows H12: no hollow data (limit lift, leftAdjoint, universal left-derived choices), sorry'd results are named theorems with proof docstrings, statement citations equal stmt_deps, statement verbatim, no live collision. Item Lean changes are cosmetic (abbrev to def with explicit types, same bodies). I re-read the Comparison structure: b on all of D(R_T), Koszul and balanced isomorphisms pinned on generators, actual augmentation, K-flat and quasi-isomorphism clauses, counit-descended shifts; only hX/hY assumed; universes u and t independent. Edge cases g=id, empty schemes, n=0 meaning exponent 1, all r, non-invertible c_g are covered. stmt_deps: 12 base kept, plus landed def nodes and the 2 new ones, no theorem. Report sections present, lines at most 100 chars. Advisories: new node does not cite def-weil-proetale-inverse-image (proEtaleBaseChange, coefficientProEtaleDirectRingMap) or def-pc-kflat-complex; helper module has two unused public imports (AdicCoefficientDatum, PbcQbarCompletedPullback); second reading by the same worker. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T123435-L-1871671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

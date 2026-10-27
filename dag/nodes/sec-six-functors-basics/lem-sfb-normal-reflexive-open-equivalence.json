@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-normal-reflexive-open-equivalence",
+ "kind": "statement",
+ "title": "Reflexive modules extend across codimension two in a normal scheme",
+ "statement": "Let $Y$ be an integral locally Noetherian normal scheme [def-pc-integral-scheme, pqf-def-locnoeth, def-weil-pbc-normal-ring], and let $j:V\\hookrightarrow Y$ be an open subscheme [def-weil-open-immersion]. Suppose $\\dim\\mathcal O_{Y,y}\\ge2$ for every $y\\in Y\\setminus V$ [def-weil-pbc-krull-dimension-ring]. A coherent module $F$ [pqf-def-coherent] is reflexive when the evaluation morphism $F\\to\\mathcal Hom_{\\mathcal O_Y}(\\mathcal Hom_{\\mathcal O_Y}(F,\\mathcal O_Y),\\mathcal O_Y)$ is an isomorphism [def-pur-sheaf-hom]. Restriction and direct image [def-pc-module-pullback] give quasi-inverse equivalences between coherent reflexive modules on $Y$ and on $V$, with all module morphisms. Explicitly, for coherent reflexive $F$ on $Y$, the unit $F\\to j_*(F|_V)$ is an isomorphism; for coherent reflexive $G$ on $V$, $j_*G$ is coherent reflexive and the counit $(j_*G)|_V\\to G$ is an isomorphism. In particular restriction induces a bijection on every Hom set between coherent reflexive modules on $Y$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/properties.tex",
+  "place": "Tag 0EBJ (divisors-lemma-reflexive-S2-extend), specialized by the normal S2 criterion Tag 0345 (properties-lemma-criterion-normal)."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-open-immersion",
+  "def-weil-pbc-krull-dimension-ring",
+  "pqf-def-coherent",
+  "def-pur-sheaf-hom",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For $y\\in Y\\setminus V$, the local ring $\\mathcal O_{Y,y}$ is a normal domain by normality, and is Noetherian: take a Noetherian affine neighbourhood from the locally Noetherian cover and localize its ring at the prime of $y$. Localization preserves Noetherianity. Its dimension is at least two by hypothesis, so the normal-local-depth theorem gives $\\operatorname{depth}\\mathcal O_{Y,y}\\ge2$. These same local rings occur after restricting to any open neighbourhood of $y$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-normal-local-depth-two"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 0345 (properties-lemma-criterion-normal), S2 implication; Tag 0EBJ depth hypothesis."
+   }
+  },
+  {
+   "text": "Open restriction preserves coherence by the coherence-locality theorem. It also preserves reflexivity: on an open $W\\subseteq V$, the sections defining sheaf Hom are exactly the same module maps before and after restriction; hence restriction identifies the double dual and its evaluation map. Now let $F$ be coherent reflexive on $Y$. Write $F^\\vee=\\mathcal Hom(F,\\mathcal O_Y)$. The structure module is quasi-coherent of finite type, hence coherent on this locally Noetherian scheme; coherent sheaf Hom shows $F^\\vee$ is coherent. Thus $F^\\vee$ is locally finitely presented and its stalks are finite. For a boundary point $y$, put $R=\\mathcal O_{Y,y}$ and $N=(F^\\vee)_y$. The stalk-Hom comparison, applied with source $F^\\vee$ and target $\\mathcal O_Y$, identifies $(F^{\\vee\\vee})_y$ with $\\operatorname{Hom}_R(N,R)$. Evaluation identifies $F_y$ with this dual. Apply the existing local dual-depth theorem to the finite module $N$ and to the depth bound from step 1: $\\operatorname{depth}_R F_y\\ge2$. This is the stalk-depth argument of Tag 0EBI written from existing inputs. To check the Hartogs hypotheses, coherence gives quasi-coherence and finite type; the affine criterion gives finiteness on every affine open. The coherent local finite presentations also give finite stalks, by taking their cokernel at the point. Hartogs therefore gives the canonical unit isomorphism $\\eta_F:F\\xrightarrow{\\sim}j_*(F|_V)$. This argument applies as well to any nonempty affine open of $Y$ with its intersection with $V$.",
+   "uses": [
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "def-pur-sheaf-hom",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-coherent-local-finite-presentation",
+    "lem-sbc-depth-two-hartogs-restriction",
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "new-local-dual-depth-two"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 0EBJ (divisors-lemma-reflexive-S2-extend), first two sentences of proof; Tag 0EBI(1); Tag 0E9I."
+   }
+  },
+  {
+   "text": "Let $G$ be coherent reflexive on $V$. Fix a nonempty affine open $A\\subseteq Y$ and put $W=A\\cap V$. The affine scheme $A$ is quasi-compact and quasi-separated. Since an open immersion into a locally Noetherian scheme is quasi-compact, $W$ is quasi-compact. The coherent restriction $G|_W$ is of finite presentation by the local finite-presentation theorem. Apply the finite-presentation extension theorem with ambient module $0$ and zero map $G|_W\\to0$: it gives a finitely presented $\\mathcal O_A$-module $H$ and an isomorphism $H|_W\\cong G|_W$. Finite presentation implies quasi-coherence and finite type. As $A$ is locally Noetherian, the coherent-finite-type criterion shows that $H$ is coherent. No global quasi-compactness of $Y$ or $V$ has been assumed.",
+   "uses": [
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-coherent-local-finite-presentation",
+    "lem-weil-pbc-module-finite-presentation-extension",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 0EBJ proof, affine reduction and coherent extension; Tag 0G41(2) (properties-lemma-lift-finite-presentation), deduced from existing Tag 01PI with zero ambient module."
+   }
+  },
+  {
+   "text": "On $A$, replace $H$ by the explicit double dual $E=H^{\\vee\\vee}$. The coherent-reflexive-hull lemma makes $E$ coherent reflexive. The sheaf-Hom formula on opens gives $E|_W=(H|_W)^{\\vee\\vee}\\cong(G|_W)^{\\vee\\vee}\\cong G|_W$, the last isomorphism being evaluation for $G|_W$. By step 2 applied on $A$, $E\\cong (j_A)_*(E|_W)\\cong (j_A)_*(G|_W)$, where $j_A:W\\hookrightarrow A$. On an open $B\\subseteq A$, both $((j_*G)|_A)(B)$ and $((j_A)_*(G|_W))(B)$ equal $G(B\\cap V)$, with the same scalar action and restriction maps. Thus $(j_*G)|_A$ is coherent reflexive. Coherence is local on the affine cover, so $j_*G$ is coherent globally. Its stalk at each point is reflexive because it agrees on a neighbourhood with one of these coherent reflexive modules; the stalk criterion for reflexivity now proves $j_*G$ reflexive.",
+   "uses": [
+    "lem-sfb-coherent-reflexive-hull",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-sfb-affine-reflexive-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 0EBJ proof, replace the extension by its reflexive hull and identify its pushforward; Tags 0AY4, 0AY3."
+   }
+  },
+  {
+   "text": "For an open $B\\subseteq V$, $((j_*G)|_V)(B)=G(B)$; the counit is the identity on these sections. It is therefore an isomorphism for every module $G$. Restriction and direct image act on every module morphism, and their units and counits are natural, so the preceding isomorphisms make these functors quasi-inverse on the stated full subcategories. Explicitly, if $F_1,F_2$ are coherent reflexive on $Y$ and $a:F_1|_V\\to F_2|_V$, its extension is $\\eta_{F_2}^{-1}\\circ j_*a\\circ\\eta_{F_1}$. Its restriction equals $a$ since the restricted units are inverse to the counits. For any $b:F_1\\to F_2$, naturality gives $\\eta_{F_2}\\circ b=j_*(b|_V)\\circ\\eta_{F_1}$; hence restriction is injective as well as surjective on Hom sets.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 0EBJ conclusion; ordinary restriction/direct-image adjunction, with inverse on Hom sets written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-hom",
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-sfb-affine-reflexive-module-comparison",
+  "lem-sfb-coherent-reflexive-hull",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-finite-presentation-extension",
+  "lem-weil-pbc-normal-local-depth-two",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "new-local-dual-depth-two",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/properties.tex",
+  "place": "Tag 0EBJ proof, specialized by Tag 0345; affine extension is Tag 0G41(2), via the existing more general Tag 01PI node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsReflexive\", \"IsCoherent\"",
+   "results": "0 hits: .  The returned declarations concern ordinary restriction, normalization, tilde sheaves or module reflexivity; none supplies this coherent sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|reflexivity|codimension",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean.  The returned declarations concern ordinary restriction, normalization, tilde sheaves or module reflexivity; none supplies this coherent sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction across codimension at least two on a locally Noetherian normal integral scheme is an equivalence for coherent reflexive sheaves, inverse given by direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.Scheme.Opens.topIso_inv, AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme, AlgebraicGeometry.morphismRestrictRestrictBasicOpen, AlgebraicGeometry.arrowResLEAppIso.  The returned declarations concern ordinary restriction, normalization, tilde sheaves or module reflexivity; none supplies this coherent sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent reflexive sheaves are unchanged by removing a closed subset of codimension at least two in a normal locally Noetherian integral scheme",
+   "results": "8 hits: AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, SheafOfModules.isQuasicoherent, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, SheafOfModules.IsQuasicoherent.casesOn, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsReduced.component_reduced.  The returned declarations concern ordinary restriction, normalization, tilde sheaves or module reflexivity; none supplies this coherent sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reflexive coherent module on an open normal scheme extends uniquely by pushforward when the complement contains no codimension zero or one point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, ModuleCat.Tilde.res_const, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top.  The returned declarations concern ordinary restriction, normalization, tilde sheaves or module reflexivity; none supplies this coherent sheaf theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReflexive\", \"IsCoherent\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|reflexivity|codimension",
+   "results": "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean:16; Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean:62; Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean:63",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent reflexive modules extend uniquely over a normal scheme across a closed subset of codimension at least two",
+   "results": "Module.IsReflexive.of_split; Module.IsReflexive; ClosedSubmodule.ext; Module.IsReflexive.recOn; Module.IsReflexive.to_isTorsionFree; Module.instIsReflexiveOfFiniteOfProjective; ClosedSubmodule.ext_iff; SheafOfModules.IsQuasicoherent.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reflexive coherent module extends by direct image across an open immersion missing only points of local dimension at least two",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap; ModuleCat.Tilde.exists_const; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.IsOpenImmersion.lift_app; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; ModuleCat.Tilde.res_const",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-punctured-picard-local-extension-criterion",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.13.10 converse: the direct-image extension and its unit; replaces its limit-spreading input by the coherent reflexive extension theorem, before the generic noninvertibility obstruction.",
+   "via": [
+    "lem-sfb-punctured-picard-local-extension-criterion",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-reflexive-open-equivalence",
+  "worker": "stage1",
+  "summary": "Read 0EBJ and its actual inputs. Reuse Hartogs, finite-presentation extension, stalk-Hom comparison and the local dual-depth theorem. Only coherent reflexive hull remains a new statement-only input. The depth inheritance is written out, not made into an elementary new node. Check the quasi-compact open needed by extension and spell out restriction, local pushforward identification, and the inverse on every Hom set. Statement retained.",
+  "blueprint": "The inherited created-node chain ends at lem-sfb-admissible-direct-image and has no imported blueprint ancestor (blueprint_refs ancestor returns None). This is the coherent-extension input to EGA IV4 21.13.10 converse in the parent punctured-Picard criterion; steps implement the first unit argument and converse affine-hull argument of Stacks 0EBJ. The latest sk-thm-sf-ctf-stability proof uses compactification/open direct-image preservation; no new unit route is proposed.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-depth-two-hartogs-restriction",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-local-finite-presentation",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-finite-presentation-extension",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-normal-local-depth-two",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "new-local-dual-depth-two",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherent-module, affine-scheme or local-ring tool used in the Stacks 0EBJ extension argument; it does not replace any step of the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-finite-presentation-extension",
+  "lem-weil-pbc-normal-local-depth-two",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "new-local-dual-depth-two",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-66a2a86a9",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-66a2a86a9 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-coherent-reflexive-hull and every cited statement, plus the Stacks sources: divisors 0EBJ with its proof, 0EBI, 0AY4/remark-tensor and depth-2-hartog; more-algebra lemma-dual-reflexive and reflexive-S2; properties 0G41. The item is 0EBJ with the depth hypothesis replaced by normality and dim>=2 (0345), and nothing is weakened. Live still has the item unsplit, there is no repair note and no earlier run. Step 1: localization is Noetherian and normal-local-depth-two applies. Step 2: F-dual is coherent (01CQ, O_Y coherent by 01XZ) and locally finitely presented, so the 01CP stalk-Hom gives F_y = Dual((F-dual)_y), and new-local-dual-depth-two gives depth>=2 (depth(0)=infinity). All Hartogs 0E9I hypotheses are checked. Step 3: W=A∩V is quasi-compact by noetherian-open-immersion-qc; 01PI with ambient 0 is exactly 0G41(2); the extension is coherent via 01BO/01XZ. Step 4: the hull node applies on the integral open A, restriction commutes with sheaf Hom section-wise, step 2 on A gives E=(j_*G)|_A, coherence glues, and reflexivity follows from the stalk criterion 0AY0/0AY3 in both directions. Step 5 is honestly elementary: explicit unit/counit and Hom inverse. proof_deps equals the union of the uses. The new node is 0AY4 with G=O_X: true (tested on torsion H, H=O_X, singular integral X), statement-only, three search kinds recorded, and not a restatement of an item clause. Duplicate search (rg reflexive/0AY4/0EBI/dual-reflexive) found only different statements (0AV2, 0AVB, 0EB9, 0B3N, affine-reflexive comparison, sbc finite-étale hulls). The declared tool_uses are generic coherent/local-algebra facts used as black boxes; I accept them. from.node=null because the inherited chain has no blueprint ancestor; accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalReflexiveOpenEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.normal_reflexive_open_equivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalReflexiveOpenEquivalence.lean",
+  "statement": "theorem normal_reflexive_open_equivalence {Y V : Scheme.{u}} [IsIntegral Y] [IsLocallyNoetherian Y] (hnormal : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (j : V ⟶ Y) [IsOpenImmersion j] (hcodim : ∀ y : Y, y ∉ Set.range j → (2 : WithBot ℕ∞) ≤ ringKrullDim (Y.presheaf.stalk y)) : (∀ F : Y.Modules, RingedSpace.IsCoherent Y.toRingedSpace F → IsIso (SheafOfModules.bidual (R := Y.sheaf) F) → RingedSpace.IsCoherent V.toRingedSpace ((restrictFunctor j).obj F) ∧ IsIso (SheafOfModules.bidual (R := V.sheaf) ((restrictFunctor j).obj F)) ∧ IsIso ((restrictAdjunction j).unit.app F)) ∧ (∀ G : V.Modules, RingedSpace.IsCoherent V.toRingedSpace G → IsIso (SheafOfModules.bidual (R := V.sheaf) G) → RingedSpace.IsCoherent Y.toRingedSpace ((pushforward j).obj G) ∧ IsIso (SheafOfModules.bidual (R := Y.sheaf) ((pushforward j).obj G)) ∧ IsIso ((restrictAdjunction j).counit.app G)) ∧ (∀ F₁ F₂ : Y.Modules, RingedSpace.IsCoherent Y.toRingedSpace F₁ → IsIso (SheafOfModules.bidual (R := Y.sheaf) F₁) → RingedSpace.IsCoherent Y.toRingedSpace F₂ → IsIso (SheafOfModules.bidual (R := Y.sheaf) F₂) → Function.Bijective (fun f : F₁ ⟶ F₂ ↦ (restrictFunctor j).map f))",
+  "branch": "sheaf-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The equivalence is stated in its canonical adjunction form: restriction and direct image preserve coherent reflexive modules, the restricted unit and counit are isomorphisms, and the actual restriction map on all Hom sets is bijective. Reflexivity uses the existing SheafOfModules.bidual evaluation, without a new predicate or an arbitrary double-dual isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8b94d517",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Statement matches Stacks 0EBJ with depth>=2 replaced by normal + dim>=2 (0345): IsIntegral, IsLocallyNoetherian, normal stalks (domains via integrality), arbitrary open immersion j, dim>=2 off range j. Coherent = recorded RingedSpace.IsCoherent (01BV); reflexive = IsIso of existing SheafOfModules.bidual into recorded homObj, no new predicate; Mathlib restrictFunctor/pushforward/restrictAdjunction (canonical, restrictFunctorIsoPullback). Clauses: restriction and direct image preserve coherent reflexive, unit/counit isos, restriction bijective on every Hom set. Edge cases (empty Y/V, iso j, zero module, non-qc) fine; single universe u. Only the item lean record added; all 8 stmt_dep records identical to side-live; lean.statement verbatim; imports exist; docstrings with source, blueprint and 5 proof steps; sorry only; report has Worker report + Second reading (self-review, minor). No fixes; no compile run because nothing was changed."
+ }
+}

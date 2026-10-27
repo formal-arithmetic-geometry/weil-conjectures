@@ -1,0 +1,265 @@
+{
+ "id": "lem-trf-fixed-family-affine-span-model",
+ "kind": "statement",
+ "title": "An affine span has a finite-stage model with both target families fixed",
+ "statement": "Let $I$ be a nonempty directed set and $(S_i)_{i\\in I}$ an inverse system of affine schemes [def-pc-scheme, pqf-def-affine-morphism], with limit $B$ and projections $p_i:B\\to S_i$ [def-weil-pbc-category-colimit]. Fix $i_0\\in I$, affine schemes $P_0,Q_0$ of finite presentation over $S_{i_0}$, and an affine scheme $U$ of finite presentation over $B$ [def-sbc-locally-finite-presentation, def-weil-pbc-scheme-conventions]. For $i\\ge i_0$ put $P_i=P_0\\times_{S_{i_0}}S_i$, $Q_i=Q_0\\times_{S_{i_0}}S_i$, $P_B=P_0\\times_{S_{i_0}}B$, and $Q_B=Q_0\\times_{S_{i_0}}B$ [def-pc-fibre-product]. Given arbitrary $B$-morphisms $a:U\\to P_B$ and $c:U\\to Q_B$, there exist $r\\ge i_0$, an affine scheme $V_r$ of finite presentation over $S_r$, $S_r$-morphisms $\\alpha_r:V_r\\to P_r$, $\\beta_r:V_r\\to Q_r$, and a $B$-isomorphism $e_r:V_r\\times_{S_r}B\\xrightarrow{\\sim}U$ such that $\\alpha_{r,B}=a\\circ e_r$ and $\\beta_{r,B}=c\\circ e_r$. Here $\\alpha_{r,B},\\beta_{r,B}$ are the actual base changes of the two stage arrows, with targets identified with $P_B,Q_B$ by the unique iterated-fibre-product isomorphisms preserving projections. No etaleness or point is assumed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM, lemma-descend-finite-presentation (1),(2), and Tag 01ZN, lemma-descend-affine-finite-presentation; simultaneous fixed-target affine-span construction in More on Morphisms Tag 0GDX, lemma-relative-map-approximation-pre, finite-stage span paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "All $S_i$ and $U$ are quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Every transition map $S_j\\to S_i$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine]. We may restrict the index set to $I_{\\ge i_0}$ without changing the limit: a cone on this tail extends to an index $i$ by choosing $k\\ge i,i_0$ and composing its $k$-leg with $S_k\\to S_i$. Two choices agree after passing to a common upper bound, and the extended cone is unique. Thus the universal property of the given limit $B$ is also the limit property for the tail. This also proves the same assertion for each later tail used below.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1),(2); Tag 01ZN, lemma-descend-affine-finite-presentation"
+   }
+  },
+  {
+   "text": "Apply part (1) of [thm-pd-spreading-out] to $U\\to B$ over this tail. It gives $j\\ge i_0$, a finitely presented $S_j$-scheme $W_j$, and a $B$-isomorphism $e_j:(W_j)_B\\xrightarrow{\\sim}U$. The source $W_j$ is quasi-compact and quasi-separated by (2) of [lem-weil-pbc-qcqs-morphism-permanence], since its structure map is of finite presentation and $S_j$ is qcqs. By (3), every later base change remains finitely presented. In particular the prescribed $P_j,Q_j$, and all their later base changes, are of finite presentation.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1),(2); Tag 01ZN, lemma-descend-affine-finite-presentation"
+   }
+  },
+  {
+   "text": "The limit structure map $(W_j)_B\\to B$ is affine: $e_j$ identifies its source with the affine scheme $U$, and $B$ is affine by the final assertion of [lem-weil-pbc-limit-affine-transition], so [lem-weil-pbc-morphism-affine-schemes-affine] applies. Use [lem-weil-pbc-descend-affine] with $X_j=W_j$, $Y_j=S_j$ and the tail based at $j$. Its qcqs hypotheses were verified above. There is $k\\ge j$ for which $V_k:=W_j\\times_{S_j}S_k\\to S_k$ is affine. Since $S_k$ is affine, (2) of [lem-weil-pbc-affine-morphism-permanence] makes $V_k$ affine. It is finitely presented by base-change permanence. The unique projection-preserving iterated-pullback isomorphism of [def-pc-fibre-product] gives $e_k:(V_k)_B\\xrightarrow{\\sim}U$ by composing with $e_j$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-descend-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1),(2); Tag 01ZN, lemma-descend-affine-finite-presentation"
+   }
+  },
+  {
+   "text": "Put $a_k=a\\circ e_k:(V_k)_B\\to P_B$. Apply part (2) of [thm-pd-spreading-out] to the fixed finitely presented $S_k$-models $V_k$ and $P_k$. It gives $l\\ge k$ and an $S_l$-map $\\alpha_l:V_l\\to P_l$, where $V_l=V_k\\times_{S_k}S_l$, whose base change is $a_k$. Here and below each target $(P_k)_{S_l}$ is identified with the actual prescribed $P_l$ by [def-pc-fibre-product], preserving both projections. By (3) of [lem-weil-pbc-qcqs-morphism-permanence], $V_l$ and $Q_l$ are finitely presented. Apply part (2) again to these fixed models and $c\\circ e_l:(V_l)_B\\to Q_B$, where $e_l=e_k\\circ\\theta_l$ and $\\theta_l:(V_l)_B\\xrightarrow{\\sim}(V_k)_B$ preserves projections. It gives $r\\ge l$ and $\\beta_r:V_r\\to Q_r$ whose base change is $c\\circ e_l$. Define $\\alpha_r$ as the actual base change of $\\alpha_l$ along $S_r\\to S_l$, followed by the projection-preserving target comparison to $P_r$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1),(2); Tag 01ZN, lemma-descend-affine-finite-presentation"
+   }
+  },
+  {
+   "text": "The scheme $V_r=V_l\\times_{S_l}S_r$ is affine: $V_k\\to S_k$ was affine, and (1),(2) of [lem-weil-pbc-affine-morphism-permanence] apply to each subsequent base change over the affine bases $S_l,S_r$. Its structure map is finitely presented by (3) of [lem-weil-pbc-qcqs-morphism-permanence].",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1),(2); Tag 01ZN, lemma-descend-affine-finite-presentation"
+   }
+  },
+  {
+   "text": "Let $\\theta_{rl}:(V_r)_B\\xrightarrow{\\sim}(V_l)_B$ be the iterated-fibre-product comparison and set $e_r=e_l\\circ\\theta_{rl}$. To verify the arrows, [def-pc-fibre-product] characterizes the base change of $\\alpha_l$ by its projection to $P_l$ and its structure map to $B$. Composing these projections through either iterated pullback gives the same two maps. Uniqueness therefore gives $\\alpha_{r,B}=\\alpha_{l,B}\\circ\\theta_{rl}=a\\circ e_l\\circ\\theta_{rl}=a\\circ e_r$. The equality supplied for $\\beta_r$ similarly reads $\\beta_{r,B}=c\\circ e_l\\circ\\theta_{rl}=c\\circ e_r$. The target comparisons to $P_B,Q_B$ have the same projection characterization, so these equations concern the actual base changes required in the statement. Finally $r\\ge l\\ge k\\ge j\\ge i_0$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1),(2); Tag 01ZN, lemma-descend-affine-finite-presentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-descend-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM, lemma-descend-finite-presentation (1),(2); Tag 01ZN, lemma-descend-affine-finite-presentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine finitely presented span over an inverse limit of affine schemes descends to a common finite stage keeping two prescribed finitely presented target models fixed",
+   "results": "msearch OK, 8 hits; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE; AlgebraicGeometry.locallyOfFinitePresentation_iff; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset; AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "No match: factorization of a given morphism, finite-presentation criteria and affine-space instances do not construct a finitely presented affine source model with two prescribed target families."
+  },
+  {
+   "tool": "grep",
+   "query": "span.*descen|descen.*span|exists.*finitePresentation.*model",
+   "results": "msearch OK, 0 hits;  Directory: AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "No match: factorization of a given morphism, finite-presentation criteria and affine-space instances do not construct a finitely presented affine source model with two prescribed target families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine span of finitely presented schemes descends over a directed inverse limit with specified target models",
+   "results": "msearch UNAVAILABLE, 0 hits; . service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"LocallyOfFinitePresentation\", \"exists\"",
+   "results": "msearch OK, 1 hits; AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "No match: factorization of a given morphism, finite-presentation criteria and affine-space instances do not construct a finitely presented affine source model with two prescribed target families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented affine source and two morphisms to fixed models can be defined over a finite stage of a filtered colimit of rings",
+   "results": "msearch OK, 8 hits; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.locallyOfFinitePresentation_iff; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset; AlgebraicGeometry.LocallyOfFinitePresentation; AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+   "date": "2026-10-22",
+   "verdict": "No match: factorization of a given morphism, finite-presentation criteria and affine-space instances do not construct a finitely presented affine source model with two prescribed target families."
+  },
+  {
+   "tool": "grep",
+   "query": "span.*descen|descen.*span|exists.*finitePresentation.*model",
+   "results": "msearch OK, 0 hits;  Directory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "No match: no matching span-model declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine span of finitely presented schemes descends over a directed inverse limit with specified target models",
+   "results": "msearch OK, 8 hits; AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd; AlgebraicGeometry.Scheme.isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit; AlgebraicGeometry.IsAffine.recOn; AlgebraicGeometry.AffineScheme.hasLimits; AlgebraicGeometry.exists_isAffineOpen_preimage_eq",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give affineness or section properties, not the whole finite-stage fixed-target span."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"LocallyOfFinitePresentation\", \"exists\"",
+   "results": "msearch OK, 1 hits; AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "No match: the candidate factors a map into an already finitely presented target; it does not construct the source model and the simultaneous span."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finitely presented span over an inverse limit of affine schemes descends to a common finite stage keeping two prescribed finitely presented target models fixed",
+   "results": "msearch OK, 8 hits; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "No match: the candidate factors a map into an already finitely presented target; it does not construct the source model and the simultaneous span."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented affine source and two morphisms to fixed models can be defined over a finite stage of a filtered colimit of rings",
+   "results": "msearch OK, 8 hits; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "No match: the candidate factors a map into an already finitely presented target; it does not construct the source model and the simultaneous span."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fixed-family-etale-span-descent",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical relative-map approximation input to the nodal local-equation argument: the finite-stage descent paragraph of Tag 0GDX, keeping X_i=X×_S S_i and Y_i=Y×_T S_i fixed and descending only the pointed common etale neighbourhood. Re-split of lem-trf-fixed-family-etale-span-descent, former proof steps 1–4.",
+   "via": [
+    "lem-trf-fixed-family-etale-span-descent",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fixed-family-affine-span-model",
+  "worker": "stage1",
+  "summary": "Kept the statement and all existing provenance. Read Stacks 01ZM, 01ZN and the finite-stage span paragraph of 0GDX; split into source descent, eventual affineness, two successive fixed-target arrow descents, and explicit projection equations. Reused existing nodes throughout, with no new nodes; reran and logged the item Mathlib searches and checked the candidate types.",
+  "blueprint": "Historical approximation input inherited through lem-trf-fixed-family-etale-span-descent: Tag 0GDX finite-stage diagram X_i <- U_i -> Y_i, keeping both target families fixed. The current latest blueprint local-term proof uses the contracting-correspondence route; this auxiliary item preserves its inherited provenance and proves only the stated generic approximation tool.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Supplies qcqs hypotheses for the affine bases and source; this generic scheme property is not a local-term argument."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Supplies qcqs total spaces and finite-presentation base-change permanence in finite-stage descent; the unit has no substitute for these generic morphism facts."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Supplies stability of affine morphisms under base change and affineness over an affine target, purely generic geometric tools."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-d549f6d1a",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-d549f6d1a (reviewer sub-agent of L); spot-checked: Ordinary one-level split of an unsplit node with no repair note: no new nodes, and the statement, stmt_deps and provenance are unchanged. Checked against Stacks more-morphisms.tex:11144 (lemma-relative-map-approximation-pre). Its finite-stage paragraph ('By Limits lemma-descend-finite-presentation ... diagram X_i <- U_i -> Y_i') is exactly this item without the étale/point refinement. Step 1: the affine bases are qcqs, the transition maps are affine (01SH), and the tail I>=i0 has the same limit B (elementary, correct). Step 2: thm-pd-spreading-out (1) gives a finitely presented model W_j, which is qcqs by qcqs-permanence (2); clause (3) gives finite presentation of P_j and Q_j. Step 3: B is affine by the final clause of lem-weil-pbc-limit-affine-transition, and W_B is isomorphic to U, which is affine, so W_B->B is affine. lem-weil-pbc-descend-affine (01ZN) applies with X0=W_j, Y0=S_j; its qcqs hypotheses are verified, and it does not need f to be finitely presented. Affine-permanence (2) then makes V_k affine. Step 4: spreading-out (2) is used twice on fixed finitely presented models; the first arrow is pulled back to the second arrow's stage, and the targets are identified with P_B and Q_B by the canonical projection-preserving isomorphisms. Steps 5-6 (affineness and the equations alpha_{r,B}=a∘e_r, beta_{r,B}=c∘e_r via fibre-product uniqueness) are correct. proof_deps equals the union of uses. Route: sk-thm-p1 is on the transitive route of sk-i-curve-zero, and thm-pd-spreading-out is slopmaster2-closed, so it is a tool. The three declared tool_uses are on-route Mathlib leaves (unnecessary, harmless). Duplicates: lem-weil-pbc-finite-diagram-lift-of-models gives neither source affineness nor canonical target identification; the family-descent node handles objects only. Edge cases checked: U empty, one-element I, non-injective transitions, arrows descending at unrelated stages. Advisory: the inherited statement cites def-weil-pbc-category-colimit for a limit (duality, not new here). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FixedFamilyAffineSpanModel",
+  "declaration": "AlgebraicGeometry.exists_fixedFamily_affine_span_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedFamilyAffineSpanModel.lean",
+  "statement": "theorem exists_fixedFamily_affine_span_model {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, IsAffine (D.obj i)] (L : Cone D) (hL : IsLimit L) (i₀ : I) (P₀ Q₀ : Scheme.{u}) [IsAffine P₀] [IsAffine Q₀] (fP : P₀ ⟶ D.obj (op i₀)) (fQ : Q₀ ⟶ D.obj (op i₀)) [LocallyOfFinitePresentation fP] [LocallyOfFinitePresentation fQ] (U : Scheme.{u}) [IsAffine U] (fU : U ⟶ L.pt) [LocallyOfFinitePresentation fU] (a : U ⟶ pullback fP (L.π.app (op i₀))) (c : U ⟶ pullback fQ (L.π.app (op i₀))) (ha : a ≫ pullback.snd fP (L.π.app (op i₀)) = fU) (hc : c ≫ pullback.snd fQ (L.π.app (op i₀)) = fU) : ∃ (r : I) (hr : i₀ ≤ r) (V : Scheme.{u}) (fV : V ⟶ D.obj (op r)), IsAffine V ∧ LocallyOfFinitePresentation fV ∧ ∃ (α : V ⟶ pullback fP (D.map (homOfLE hr).op)) (β : V ⟶ pullback fQ (D.map (homOfLE hr).op)), α ≫ pullback.snd fP (D.map (homOfLE hr).op) = fV ∧ β ≫ pullback.snd fQ (D.map (homOfLE hr).op) = fV ∧ ∃ e : pullback fV (L.π.app (op r)) ≅ U, e.hom ≫ fU = pullback.snd fV (L.π.app (op r)) ∧ e.hom ≫ a ≫ pullback.fst fP (L.π.app (op i₀)) = pullback.fst fV (L.π.app (op r)) ≫ α ≫ pullback.fst fP (D.map (homOfLE hr).op) ∧ e.hom ≫ c ≫ pullback.fst fQ (L.π.app (op i₀)) = pullback.fst fV (L.π.app (op r)) ≫ β ≫ pullback.fst fQ (D.map (homOfLE hr).op)",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d858486fe",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause. The two equations project to P0/Q0, which is equivalent to the node's full equalities because the B components agree via ha/hc and e being over B. LocallyOfFinitePresentation equals finite presentation here since sources and bases are affine. I:Type u matches the proof dependencies and the landed etale sibling. lean.statement is verbatim; the node differs from live only by the lean record and stmt_deps are unchanged. Plain imports are the proof-dependency modules. No definitions; proof is sorry; docstrings carry source and blueprint tags and all six proof steps. Edge cases covered (singleton index set, empty U or targets, zero ring). No duplicate in Mathlib or the project; the etale sibling is a different statement. Not recompiled since no file changed. Advisory only: the inherited statement cites a colimit definition for a limit."
+ }
+}

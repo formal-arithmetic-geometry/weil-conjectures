@@ -1,0 +1,246 @@
+{
+ "id": "lem-sp-compact-support-tower-reduction",
+ "kind": "statement",
+ "title": "Actual compact-support tower reduction and its coefficient-independent bounds",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a smooth separated morphism of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Write $\\ell=u\\varpi_E^e$ with $u$ a unit and $e\\geq1$, and put $R_n=\\mathcal O_E/\\ell^n=A_{E,en}$ for $n\\geq1$. Use the ordinary derived categories of strict varying-coefficient towers [sk-def-sp-coefficient-towers, def-weil-abstract-derived-category], their uniform constructible finite-Tor full subcategories $\\mathcal C_T=\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ [sk-def-sp-normalized-towers], and ordinary derived tensor products [def-weil-derived-tensor]. Twists are [def-coefficient-twists-detailed], and $F_\\bullet=Rf_{!,\\bullet}\\dashv G_\\bullet=f^!_\\bullet$ with finite units, counits and evaluations is [det-sp-tower-gluing]. Put $\\mathbf1_{\\bullet,T}=(R_{n,T})_n$ and $\\omega_\\bullet=G_\\bullet\\mathbf1_{\\bullet,Y}$, so $\\omega_n=f^!_{R_n}R_{n,Y}$; pullback means levelwise finite derived pullback [def-weil-derived-pullback-tensor-hom].\n\nLet $C_\\bullet\\in\\mathcal C_X$ and write $\\rho^C_{n,m}:(C_n)_{R_m}\\to C_m$ for its canonical reduction maps [det-sp-coefficient-towers-abelian]; no normalization is assumed. Choose a compactification $f=pj$ [def-weil-compactifications-refinements], and compute $F_\\bullet=Rp_{*,\\bullet}j_{!,\\bullet}$ using [det-sp-tower-shriek-levels]. Under its finite evaluations, the actual reduction maps of this derived strict tower are\n$$\\rho^{FC}_{n,m}=Rf_{!,R_m}(\\rho^C_{n,m})\\circ b_{R_n,R_m}(C_n)\\qquad(1\\leq m\\leq n),$$\nwhere $b$ is precisely the compactification-normalized coefficient comparison [det-sp-reduction-direct-image]: the proper coefficient exchange, followed by the extension-by-zero tensor identification. These identities include identity indices and the quotient composition cocycle. For common input Tor bounds $[a,b]$, the levels of $F_\\bullet C_\\bullet$ are constructible and have common Tor and cohomological bounds $[a,b+2d]$, so $F_\\bullet C_\\bullet\\in\\mathcal C_Y$. No flatness or finite projective dimension of $R_m$ over $R_n$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), compactification reduction factorization and uniform output bounds; retained proof step 9"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "def-weil-derived-pullback-tensor-hom",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-compactifications-refinements",
+  "det-sp-tower-shriek-levels",
+  "det-sp-reduction-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct the finite Evaluation for the supplied base, operations and coordinates: whisker the realization counit, the existing Fcomparison of [det-sp-tower-shriek-levels], and the two levelComparison isomorphisms. Expanding this word proves the required normalization. The bounded constructible essential-image criterion of [lem-weil-pbc-finite-ring-constructible-derived-origin] gives each input level an etale representative; transport its bounded-below origin through the intrinsic derived equivalence. Together these constructions supply FiniteNormalization without choosing new operations or assuming preservation.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive characteristic p of the closure field from the recorded finite-field cardinality. QuasiCompact.of_comp gives quasi-compactness of f, and Compactification.quasiCompact_openImmersion gives it for the chosen open factor. Smooth relative dimension survives base change by [lem-sbc-smooth-relative-dimension-permanence]; the proved upstream topologicalKrullDim_le_of_smoothOfRelativeDimension bounds each geometric fibre by d, including empty fibres. For every positive quotient prove ell^(n+1)=0 by ideal membership; since ell differs from p its exponent is invertible on Spec k. Apply the proved finite_bound helper of [det-sp-tower-bound-uniform] to the level and its prescribed Tor interval. Its output gives finite-Tor constructibility, Tor interval [a,b+2d], and cohomology vanishing in that interval. Whisker the canonical open-coordinate isomorphism and inverse Evaluation to transport all three conclusions to the actual output level. Apply this to the common input Tor interval from [sk-def-sp-normalized-towers] to obtain the output tower predicate, and to an arbitrary supplied interval to obtain the final quantitative clause.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-weil-compactifications-refinements",
+    "det-sp-tower-bound-uniform",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite_coordinates_exists from [lem-sp-coefficient-tower-shriek-calculus] for the section-preserving direct-image coordinates. Apply [lem-sp-tower-transition-compatibility] to the supplied operations, the FiniteNormalization constructed in step 1, and the input tower. This gives exactly the displayed equation for every m <= n with the canonical comparison of [det-sp-reduction-direct-image]. Unlike the existential full calculus theorem, this transition theorem works for the already supplied base and operations and needs no global preservation hypothesis.",
+   "uses": [
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "lem-sp-tower-transition-compatibility",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved reduction_identity_aux and reduction_composition_aux from [lem-sp-coefficient-tower-shriek-calculus] to the actual output tower. These helpers expand the intrinsic scalar coordinates and use respectively reduction_identity and reduction_comp from [det-sp-coefficient-towers-abelian]. They yield the displayed scalar-unit and scalar-associator equations without requiring any reduction to be invertible.",
+   "uses": [
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-shriek-levels",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "sk-def-sp-normalized-towers",
+  "def-weil-finite-field-fiber",
+  "def-sbc-smooth-morphisms",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-weil-compactifications-refinements",
+  "det-sp-tower-bound-uniform",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "lem-sp-tower-transition-compatibility",
+  "det-sp-reduction-direct-image",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), compact-support half, with det-sp-tower-bound-uniform; Lean assembly by J9, 2026-10-25, using the existing transition helper for supplied operations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reduction maps of compact support direct image on strict coefficient towers factor through coefficient base change with uniform cohomological Tor bounds",
+   "results": "8 hit(s): Rep.Tor_map, Rep.torIso, AdicCompletion.ofTensorProduct_naturality, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, AdicCompletion.tensor_map_id_left_eq_map, Rep.Tor, Rep.Tor_obj, groupHomology.coinvariantsTensorResProjectiveResolutionIso. Hits concern algebraic field traces, derived localization or local cohomology, not compact-support image with the actual quotient transition and uniform finite-Tor bound.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerShriek\"",
+   "results": "0 hit(s): . Hits concern algebraic field traces, derived localization or local cohomology, not compact-support image with the actual quotient transition and uniform finite-Tor bound.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*tower|compact.*support.*reduction",
+   "results": "3 hit(s): Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean. Hits concern algebraic field traces, derived localization or local cohomology, not compact-support image with the actual quotient transition and uniform finite-Tor bound.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image with compact support commutes with quotient coefficient reduction on a derived inverse system of constructible finite Tor sheaves",
+   "results": "8 hit(s): CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso, AlgebraicGeometry.Scheme.Hom.support_ker, DerivedCategory.singleFunctorsPostcompQIso, AlgebraicGeometry.Scheme.IdealSheafData.support_map, Quot.compactSpace, rTensor.inverse_comp_rTensor. Hits concern algebraic field traces, derived localization or local cohomology, not compact-support image with the actual quotient transition and uniform finite-Tor bound.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image with compact support commutes with quotient coefficient reduction on a derived inverse system of constructible finite Tor sheaves",
+   "results": "8 hit(s): localCohomology.diagram, Condensed.isColimitLocallyConstantPresheaf_desc_apply, localCohomology.ofDiagram, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, SheafOfModules.Presentation.map_π_eq, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit. Hits concern algebraic field traces, derived localization or local cohomology, not compact-support image with the actual quotient transition and uniform finite-Tor bound.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportTower|reduction.*[Ll]owerShriek|torAmplitude.*[Ll]owerShriek",
+   "results": "{\"t\": \"2026-10-22T09:40:28Z\", \"tool\": \"grep\", \"query\": \"compactSupportTower|reduction.*[Ll]owerShriek|torAmplitude.*[Ll]owerShriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image with compact support on inverse systems of sheaves preserves uniform Tor amplitude bounds",
+   "results": "{\"t\": \"2026-10-22T09:40:28Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image with compact support on inverse systems of sheaves preserves uniform Tor amplitude bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\", \"SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf\"], \"digest\": \"508667540747bddc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerShriek\"",
+   "results": "{\"t\": \"2026-10-22T09:40:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"LowerShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction maps of compact support direct image on strict coefficient towers factor through coefficient base change with uniform cohomological Tor bounds",
+   "results": "{\"t\": \"2026-10-22T09:40:31Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction maps of compact support direct image on strict coefficient towers factor through coefficient base change with uniform cohomological Tor bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"Rep.Tor\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Rep.Tor_map\", \"Algebra.Generators.H1Cotangent.δAux_ofComp\"], \"digest\": \"939e3a8cedfc4750\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change mate identifies transitions of a derived direct image of a diagram of ringed topos modules",
+   "results": "{\"t\": \"2026-10-22T09:40:33Z\", \"tool\": \"leanfinder\", \"query\": \"Coefficient change mate identifies transitions of a derived direct image of a diagram of ringed topos modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.Presentation.map_relations_I\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.Presentation.mapGenerators\", \"PresheafOfModules.pushforward_obj_map_apply'\", \"PresheafOfModules.pushforward_obj_map_apply\"], \"digest\": \"5731ae94ff379fb1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-gamma",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (3), compactification reduction factorization and uniform output bounds; retained proof step 9",
+   "via": [
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-compact-support-tower-reduction",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Reused existing tower shriek calculus (3) for the actual coefficient-normalized reduction maps, and the existing uniform bound theorem for constructibility and the common output interval. Made bounded-below input, geometric fibre dimension, preservation hypothesis, identity indices and quotient cocycle explicit. No new nodes.",
+  "blueprint": "det-sp-integral-adjunction-bijection, Normalization paragraph via det-sp-tower-gamma; main-20261015 tower-geometric gamma proof (3), compact-support half, with det-sp-tower-bound-uniform for its uniform domain bounds.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Base change of smooth relative dimension identifies the geometric fibre dimension required by the bound theorem; this is a generic geometric hypothesis check."
+   },
+   {
+    "node": "det-sp-tower-bound-uniform",
+    "why": "Supplies the coefficient-independent compact-support Tor and cohomology bounds used in the blueprint tower route."
+   },
+   {
+    "node": "lem-sp-coefficient-tower-shriek-calculus",
+    "why": "Supplies the existing strict-tower coefficient reduction identity and its compactification normalization from the tower-geometric unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Provides etale-origin witnesses for intrinsic finite-ring constructible levels, checking the domain of the existing compact-support bound theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "det-sp-tower-bound-uniform",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-19914fd3f",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-19914fd3f (reviewer sub-agent of L); spot-checked: Read the item, all 10 cited statements and the main-20261015 gamma proof (3). Statement and stmt_deps are unchanged; no repair note, no new nodes; live item still unsplit; cited statements are identical in the snapshot and in live/side-live. Step 1: exact level evaluation (coefficient-towers-abelian (1)-(2)) gives bounded-below input, then tower-shriek-levels (1) gives the finite levels. Step 2: base change keeps smooth relative dimension d (permanence (1) plus def-sbc), so geometric fibres have dimension at most d. Finite-ring etale origin holds for arbitrary finite rings. tower-bound-uniform gives constructibility plus common Tor/cohomology interval [a,b+2d], so F C lies in C_Y; this discharges the calculus's preservation hypothesis. The two constructibility notions agree by unwinding the definitions. Step 3: shriek-calculus (3) is exactly the stated reduction identity: no normalization, same A_n and compactification, same b (counit transpose plus extension by zero) as reduction-direct-image, which needs no flatness. Step 4: towers-abelian (3) gives the cocycle; m=n is included. Edge cases checked: d=0, empty X, nonflat Z/l^2 to Z/l, ramified E, zero transitions. Route: every cited unit is reachable from sk-prop-sp-integral-adjunction; no cycle; no SGA; declared tool_uses accepted. Batch-5 flags: lem-trf-proetale-unit-leray-chain-formula (generic Leray identification inside the Tor-bound proof) and lem-trf-site-functorial-flat-resolution (generic flat resolutions) are outside both assumed statements and are not steps of their proofs, so both are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportTowerReduction",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerCalculus.compact_support_tower_reduction",
+  "file": "lean/Sheaf/Paper/CompactSupportTowerReduction.lean",
+  "statement": "theorem compact_support_tower_reduction (field : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ field.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (base : SpTowerShriek.Base l E) (ops : SpTowerShriek.Operations l E base) (q : Coordinates l E base) {X Y : Scheme.{u}} [X.Over (Spec (.of field.k))] [Y.Over (Spec (.of field.k))] [IsSeparated (X ↘ Spec (.of field.k))] [IsSeparated (Y ↘ Spec (.of field.k))] [LocallyOfFiniteType (X ↘ Spec (.of field.k))] [QuasiCompact (X ↘ Spec (.of field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of field.k))] [QuasiCompact (Y ↘ Spec (.of field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of field.k))] [IsSeparated f] (d : ℕ) [SmoothOfRelativeDimension d f] (c : Compactification f) (K : C l E base q X) : ∃ v : ∀ n : ℕ, Evaluation l E base ops q c n, (∀ (m n : ℕ) (h : m ≤ n), (scalarExtensionFunctor (quotient l E h) Y).map ((v n).comparison.hom.app K.obj) ≫ (reductionDirectImageComparison (quotient l E h) c.i c.g).app ((spDerivedCoefficientEvaluation l E X (q.abelian X) n).obj K.obj) ≫ (reductionCompactSupport (SpTowerShriek.R l E m) c.i c.g).map (reduction l E X (q.abelian X) h (q.scalar X h) K.obj) = reduction l E Y (q.abelian Y) h (q.scalar Y h) ((F l E base ops q c).obj K.obj) ≫ (v m).comparison.hom.app K.obj) ∧ (∀ n : ℕ, reduction l E Y (q.abelian Y) (Nat.le_refl n) (q.scalar Y (Nat.le_refl n)) ((F l E base ops q c).obj K.obj) = (scalarUnit l E base q Y n).hom.app ((spDerivedCoefficientEvaluation l E Y (q.abelian Y) n).obj ((F l E base ops q c).obj K.obj))) ∧ (∀ (r m n : ℕ) (h : r ≤ m) (w : m ≤ n), (scalarExtensionFunctor (quotient l E h) Y).map (reduction l E Y (q.abelian Y) w (q.scalar Y w) ((F l E base ops q c).obj K.obj)) ≫ reduction l E Y (q.abelian Y) h (q.scalar Y h) ((F l E base ops q c).obj K.obj) = (scalarAssoc l E base q Y h w).hom.app ((spDerivedCoefficientEvaluation l E Y (q.abelian Y) n).obj ((F l E base ops q c).obj K.obj)) ≫ reduction l E Y (q.abelian Y) (h.trans w) (q.scalar Y (h.trans w)) ((F l E base ops q c).obj K.obj)) ∧ spConstructibleTorTowers l E Y (q.abelian Y) ((F l E base ops q c).obj K.obj) ∧ (∀ (a b : ℤ), a ≤ b → (∀ n : ℕ, HasProEtaleTorAmplitude X (SpTowerShriek.R l E n) ((spDerivedCoefficientEvaluation l E X (q.abelian X) n).obj K.obj) a b) → ∀ n : ℕ, spFiniteConstructibleTor Y (SpTowerShriek.R l E n) ((spDerivedCoefficientEvaluation l E Y (q.abelian Y) n).obj ((F l E base ops q c).obj K.obj)) ∧ HasProEtaleTorAmplitude Y (SpTowerShriek.R l E n) ((spDerivedCoefficientEvaluation l E Y (q.abelian Y) n).obj ((F l E base ops q c).obj K.obj)) a (b + 2 * (d : ℤ)) ∧ cohomologicalInterval l E Y n ((spDerivedCoefficientEvaluation l E Y (q.abelian Y) n).obj ((F l E base ops q c).obj K.obj)) a (b + 2 * (d : ℤ)))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1318a991",
+  "group": "Q07",
+  "result": "fix",
+  "note": "Lean exact vs node: conjunct 1 = ReductionCalculus.reduction_formula (same b = reductionDirectImageComparison(quotient h) c.i c.g, same direction, evaluations pinned by Evaluation.normalization); conjuncts 2-3 identity/cocycle via scalarUnit/scalarAssoc; F C in C_Y; uniform [a,b+2d] constructible/Tor/cohomology bounds as in compactSupport_uniform_tor_bound. Index n = node level n+1, d=0, empty schemes, unnormalized towers checked; a<=b excludes only the trivial empty interval and is the dependency's convention. Only lean changed vs live; first S2 delivery; sorry-only proof, docstrings OK, imports per brief §114. Only fault H11: second reading was the dispatcher placeholder; fixes/lem-sp-compact-support-tower-reduction.report.md keeps the worker report and adds an independent clause-by-clause reading. Advisory: owners def-sp-coefficient-tower-shriek-interfaces, def-sp-reduction-direct-image-comparison, det-sp-scalar-extension-functor, def-weil-proetale-tor-amplitude, def-nagata-compactification not in stmt_deps (S2 fix cannot add them; precedent advisory). No Lean change, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T143529-L-1039324",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

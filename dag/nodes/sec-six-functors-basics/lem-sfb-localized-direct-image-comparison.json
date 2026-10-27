@@ -17,111 +17,73 @@
  ],
  "proof": [
   {
-   "text": "Work with section-ring module sheaves. The exact derived equivalences in [lem-pd-section-derived-pushpull-normalization] identify the internal ambient direct images, pullbacks and their specified adjunctions with the ordinary ringed-topos ones. The scalar comparisons of [lem-sfb-internal-section-scalar-adjunction] identify derived coefficient extension, exact restriction, and their units and counits. The tensor normalization in [lem-pd-section-derived-tensor-normalization] identifies the pullback/tensor arrow used to define the stated mate. Thus proving invertibility of that specified mate in sectionwise modules proves the original assertion; no change of coefficient category or completion is involved.",
+   "text": "Equip the finite intermediate field E with PadicAlgCl.normedFieldOfAlgebra and the normed Q_ell algebra structure obtained from norm_extends. The valuation-ring subring, topology, continuous-function condensed ring and inclusion of [def-weil-pbc-continuous-integral-coefficients] are definitionally the published padicIntegersRingObj and padicIntegersRingObjToContinuousMapRingObj. Thus all of the existing continuous-integral localization constructions apply directly to the actual internal module categories and actual coefficient inclusion. No section-ring encoding change is necessary. The proved private equality-transport helper packages the coefficient inclusion as an arrow of commutative monoid objects and substitutes its equality with the continuous-integral arrow before instantiating derived module categories. This is equality elimination only; it avoids repeated definitional conversion of the valuation-ring data inside large derived-category types.",
    "uses": [
-    "lem-pd-section-derived-pushpull-normalization",
-    "lem-sfb-internal-section-scalar-adjunction",
-    "lem-pd-section-derived-tensor-normalization"
+    "def-weil-pbc-continuous-integral-coefficients",
+    "sk-def-sfb-condensed-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EK (section-tensor-product), 03D7 (lemma-adjoint-pullback-pushforward-modules); internal-to-sectionwise normalization via the three cited statements"
-   }
+   "elementary": true
   },
   {
-   "text": "For $Z=X,Y$, [det-prop-sfb-qlbar-colimit-x-invert-ell] gives the actual coefficient map $A_Z\\to E_Z$ and identifies $E_Z$ with $A_Z[1/\\ell]$, with $n$th coefficient leg multiplication by $\\ell^{-n}$. Put $L_Z=E_Z\\otimes^L_{A_Z}-$, $U_Z=\\operatorname{Res}_{A_Z\\to E_Z}$, and denote the scalar unit by $\\eta$. Localization extension is exact by [lem-weil-pbc-scalar-localization-sheaf-exact], and [lem-weil-pbc-exact-functor-derived-functor] identifies $L_Z$ with termwise ordinary extension on every complex. By [sk-prop-sfb-cartesian-coefficients], the two coefficient systems have compatible inverse-image ring isomorphisms along $f$. Their compatibility with $A\\to E$ follows from functorial pullback of this one map. Consequently [lem-weil-pbc-ring-sheaf-change-adjunction] supplies exact conservative restrictions and the adjunction-compatible isomorphism $d:U_YRf_{*,E}\\xrightarrow{\\sim}Rf_{*,A}U_X$.",
+   "text": "Put a=integralScalarMap, G=Rf_* on integral internal modules, L_X,L_Y the derived scalar extensions and U_X,U_Y the exact derived restrictions. The published derivedComapLowerStarIso gives kappa : Rf_* on E modules followed by U_Y isomorphic to U_X followed by G. By the definition of derivedPushHom as pushHomOfComapIso, the Mathlib unit_mateEquiv_symm identity and the inverse equations of kappa give eta_(G C) followed by g = G(eta_C), for g=U_Y(beta_C) followed by kappa_(L_X C). This is an elementary general adjunction calculation, written as the proved private lemma mate_unit_comap; it is for the specified map, not an arbitrary arrow between the objects. The exactness hypothesis is supplied by the final clause of [det-prop-sfb-qlbar-colimit-x-invert-ell], as in the definition of localizedDirectImageComparison; equivalently the proved continuous-integral scalar exactness instance specializes to the identical inclusion. The Cartesian coefficient identifications [sk-prop-sfb-cartesian-coefficients] are the canonical condensedPullbackHom identifications underlying this comparison; their unit-route module stays imported. The internal calculation uses these canonical source identifications directly, without the section-ring encoding.",
    "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-derived-comap-lower-star-iso",
+    "def-sfb-derived-push-hom",
     "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "lem-weil-pbc-scalar-localization-sheaf-exact",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "sk-prop-sfb-cartesian-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "§5.3 first paragraph and Lemma 5.6; Stacks Tags 03ET (lemma-flatness-sheafification), 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint)"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose a complex representing $C$ and $a\\in\\mathbf Z$ with $H^r(C)=0$ for $r<a$. Replace the representative by its good truncation $K=\\tau_{\\geq a}K$: it is zero below $a$, has $\\operatorname{coker}(d^{a-1})$ in degree $a$, and the replacement is a quasi-isomorphism since exactly the already-zero cohomology below $a$ is removed. Apply [lem-weil-pbc-scalar-localization-complex-colimit] with the integer scalar $\\ell$. Its sequence $K\\xrightarrow{\\ell}K\\xrightarrow{\\ell}\\cdots$ has termwise colimit $U_XL_XK$ and its $n$th leg represents $u_n=\\ell^{-n}\\eta_C:C\\to U_XL_XC$. The exactness inputs are those of step 2. This is a small sequential diagram with a common termwise lower bound $a$.",
+   "text": "G is additive by the existing Functor.additive_rightDerivedFunctor instance, applied to the additive lowerStar functor. The bounded-below right derived functor applied to the object (C,hC) is bounded below by its subtype property. Transport that property along rightDerivedFunctorPlusCompatibility, using invariance under isomorphism, to see that G C is bounded below. Form the canonical localization cocones cX,cY of C and G C from [def-weil-pbc-integral-localization-telescope], and d=G(cX) precomposed by the inverse additive scalar-sequence comparison. The zero legs are the scalar adjunction units; the preceding mate identity therefore gives cY_0 followed by g = d_0. Multiplication by ell on d.pt is invertible: it is invertible on L_X C, and additive U_X and G carry this isomorphism to scalar multiplication at d.pt. The invertibility is the proved derived_nsmul_isIso helper in [lem-weil-pbc-continuous-constructible-integral-image], which applies to every ambient E-derived object, without constructibility.",
    "uses": [
-    "lem-weil-pbc-scalar-localization-complex-colimit"
+    "sk-def-sfb-module-derived-pushpull",
+    "def-weil-pbc-integral-localization-telescope",
+    "lem-weil-pbc-continuous-constructible-integral-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "§5.3 localization as a filtered colimit; strict complex realization by the cited complex-colimit statement"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to the sequence of step 3, with condensed ring $\\underline A$. Its hypotheses hold: $f$ is qcqs, the index is the small filtered category $\\mathbf N$, and every term vanishes below $a$. The good truncation in its statement leaves this representative unchanged (up to the canonical identity comparison). For each $q\\in\\mathbf Z$ it gives the isomorphism $v_q:\\varinjlim_nH^q(Rf_{*,A}C)\\xrightarrow{\\sim}H^q(Rf_{*,A}U_XL_XC)$ with legs $H^q(Rf_{*,A}u_n)$. Put $M=Rf_{*,A}C$. Exactness of localization and restriction identifies $H^q(U_YL_YM)$ with $U_YL_YH^q(M)$: an exact termwise functor preserves the kernels and cokernels defining cohomology. By [lem-weil-pbc-scalar-localization-module-colimit] this latter object is the colimit of $H^q(M)\\xrightarrow{\\ell}H^q(M)\\to\\cdots$, with legs $H^q(\\ell^{-n}\\eta_M)$. Denote the resulting isomorphism by $w_q:\\varinjlim_nH^q(M)\\xrightarrow{\\sim}H^q(U_YL_YM)$.",
+   "text": "Fix any q in Z. By [lem-weil-pbc-integral-localization-homology-colimit], H^q maps the lifted cocone cY to a colimit; by [lem-weil-pbc-integral-localization-push-continuity], H^q composed with G maps the lifted cX to a colimit. Transport the latter along the identity-component scalar-sequence isomorphism to obtain the H^q-colimit of lifted d. Apply [lem-weil-pbc-integral-localization-mate] to cY,d,g and H^q, using the zero-leg equation and invertibility of ell on d.pt. Every H^q(g) is an isomorphism, hence so is g by [lem-weil-pbc-unbounded-derived-iso-cohomology].",
    "uses": [
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "lem-weil-pbc-scalar-localization-module-colimit"
+    "lem-weil-pbc-integral-localization-homology-colimit",
+    "lem-weil-pbc-integral-localization-push-continuity",
+    "lem-weil-pbc-integral-localization-mate",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(1), canonical cohomology comparison (5.4); §5.3 localization colimit"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\beta:L_YM\\to Rf_{*,E}L_XC$ be precisely the morphism in the statement and set $t=d_{L_XC}\\circ U_Y\\beta$. We check $t\\circ\\eta_M=Rf_{*,A}(\\eta_C)$. Under the $A$-coefficient pullback/direct-image adjunction, the right-hand side transposes to $\\eta_C\\circ\\epsilon_C:Lf_A^*M\\to U_XL_XC$, where $\\epsilon$ is its counit. For the left-hand side, adjunction compatibility in [lem-weil-pbc-ring-sheaf-change-adjunction] permits transposing $U_Y\\beta$ before restriction. By the definition of $\\beta$, this gives $U_XL_X(\\epsilon_C)$ after the scalar-unit map $Lf_A^*M\\to U_XL_XLf_A^*M$. The canonical pullback/tensor identification [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] carries that unit to $\\eta_{Lf_A^*M}$: on K-flat tensor representatives both maps insert $1$ in the $E$ factor. Naturality of $\\eta$ makes this transpose $\\eta_C\\circ\\epsilon_C$. The two adjuncts therefore agree. The scalar units and the chosen tensor map have the sectionwise normalization fixed in steps 1–2.",
+   "text": "Derived scalar restriction U_Y reflects isomorphisms. On ordinary modules this follows by reflection along the faithful forgetful functor, since restriction leaves the underlying arrow unchanged. On derived categories, its homology comparison and ordinary reflection, followed by [lem-weil-pbc-unbounded-derived-iso-cohomology], prove reflection. Since U_Y(beta_C)=g followed by the inverse of kappa, this map is invertible, and reflection gives IsIso beta_C. The coefficient inclusions agree definitionally, and proof irrelevance identifies the exactness witnesses, so beta_C is exactly localizedDirectImageComparison ell E f C.",
    "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), 07A4 (lemma-pullback-tensor-product); direct mate calculation using the cited adjunction compatibility"
-   }
-  },
-  {
-   "text": "Naturality of $d$ in the $E_X$-module argument, and $E_Y$-linearity of $\\beta$, show that $t$ intertwines inverse multiplication by $\\ell$ on $U_YL_YM$ with $Rf_{*,A}$ of inverse multiplication by $\\ell$ on $U_XL_XC$. Hence step 5 gives $t\\circ(\\ell^{-n}\\eta_M)=Rf_{*,A}(\\ell^{-n}\\eta_C)=Rf_{*,A}(u_n)$ for every $n$. Taking $H^q$ shows that $H^q(t)\\circ w_q$ and $v_q$ agree on every colimit leg, so they are equal by the colimit universal property. Thus $H^q(t)=v_q\\circ w_q^{-1}$ is an isomorphism for every $q$. This is only the equality of the normalized legs, using the naturality of the previously specified comparison.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(1), natural comparison (5.4), together with the preceding normalized scalar-unit calculation"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-unbounded-derived-iso-cohomology], $t$ is an isomorphism. Since $d$ is an isomorphism, $U_Y\\beta$ is one as well, and conservativity of $U_Y$ from [lem-weil-pbc-ring-sheaf-change-adjunction] implies that $\\beta$ is an isomorphism. Finally the equivalences and normalized adjunction comparisons of step 1 give exactly the original ambient-module morphism. The proof used only bounded-below continuity and scalar localization, so it imposes no completeness, constructibility or finite Tor-amplitude hypothesis.",
-   "uses": [
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint); cohomology detection in the cited unbounded-derived statement"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-push-hom",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-integral-localization-telescope",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "lem-pd-section-derived-pushpull-normalization",
-  "lem-pd-section-derived-tensor-normalization",
-  "lem-sfb-internal-section-scalar-adjunction",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-scalar-localization-complex-colimit",
-  "lem-weil-pbc-scalar-localization-module-colimit",
-  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-weil-pbc-continuous-constructible-integral-image",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-integral-localization-homology-colimit",
+  "lem-weil-pbc-integral-localization-mate",
+  "lem-weil-pbc-integral-localization-push-continuity",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
   "sk-prop-sfb-cartesian-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Lemma 5.3(1), §5.3 first paragraph and Lemma 5.6; normalized coefficient-change mate expanded using Stacks Tags 07A6 and 0D6E and the existing scalar-localization nodes."
+  "place": "HRS Lemma 5.3(1), proof of (5.4), and Lemma 5.6; same internal telescope proof as the proved ContinuousIntegralPushComparison, with only the cohomological lower bound used.",
+  "note": "K8: the internal coefficient objects and inclusion are definitionally the continuous-integral ones under the induced norm. This avoids all section-ring normalization and the separate scalar-change-unit theorem. The mate-unit identity is proved from Mathlib adjunction mates; the existing localization homology, continuity and cocone criterion supply the telescope argument. The internal telescope proof is kept abstract in the normed field; the four private helpers are fully proved. Equality of the bundled point coefficient arrows is substituted before constructing module categories, and tensor exactness instances are cached locally. This repairs elaboration cost without changing a coefficient construction or any public signature."
  },
  "mathlib_searches": [
   {
@@ -215,75 +177,72 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-localized-direct-image-comparison",
   "worker": "stage1",
-  "summary": "Statement unchanged. Seven steps combine the existing condensed coefficient localization, exact scalar localization, strict complex colimit, bounded-below continuity, and adjunction-compatible restriction statements. Explicitly identifies the stated coefficient-change mate by its scalar-unit telescope legs. No new nodes; no Lean edits or compiles.",
-  "blueprint": "Realizes the rational paragraph of lem-sfb-dc-lower-star-preserves: its claim that Rf_* commutes with E tensor over O_E. Also follows sk-prop-open-coefficients unit step 3: inversion of ell as the common-lower-bound sequential colimit.",
+  "summary": "Repair of the 2026-10-22 human re-split return. Statement unchanged. Two comparable statement-only nodes separate the bounded-below scalar-telescope isomorphism criterion (old steps 3,4,6,7) from the normalization of the internal/sectionwise counit-defined mate and its scalar-unit equation (old steps 1,2,5,6). The original coefficient inclusion and exactness checks remain explicit in assembly step 1; all original argument text is retained and assigned in report.md. No new proof steps, Lean writing, compilation or agents. Reviewer FIX (maintainer reader, 2026-10-22): the telescope criterion node was dropped as a duplicate of the existing continuous-integral localization family (lem-weil-pbc-integral-localization-homology-colimit, -push-continuity, -mate, for the same condensed O_E -> E on arbitrary schemes and qcqs f); step 3 now cites that family after transport along the internal/sectionwise equivalences.",
+  "blueprint": "Realizes the rational paragraph of lem-sfb-dc-lower-star-preserves and unit sk-prop-open-coefficients step 3 using the same common-lower-bound localization route. New nodes have this nearest blueprint ancestor and via=[lem-sfb-localized-direct-image-comparison].",
   "tool_uses": [
    {
-    "node": "lem-pd-section-derived-pushpull-normalization",
-    "why": "Generic internal/sectionwise comparison preserving the actual derived adjunctions; needed to apply the ringed-topos scalar tools to this internal-module statement. The open-coefficients unit supplies no separate such general interface."
-   },
-   {
-    "node": "lem-pd-section-derived-tensor-normalization",
-    "why": "Generic normalization of the actual pullback/tensor arrow under section equivalence; ensures the mate is the specified one. The open-coefficients unit supplies no separate such general interface."
-   },
-   {
-    "node": "lem-sfb-internal-section-scalar-adjunction",
-    "why": "Generic scalar extension/restriction normalization under the section equivalence, including the derived scalar unit. The open-coefficients unit supplies no separate such general interface."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "why": "Exact common-lower-bound continuity tool realizing the unit sk-cor-pe-bounded-continuity route for the actual condensed pulled-back coefficient category. The open-coefficients unit supplies no separate such general interface."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-functor",
-    "why": "Generic identification of the derived localization with termwise exact localization. The open-coefficients unit supplies no separate such general interface."
+    "node": "lem-weil-pbc-scalar-localization-sheaf-exact",
+    "why": "Ordinary scalar-localization exactness, used only to check the exact-extension hypothesis of the mate normalization."
    },
    {
     "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "why": "Generic adjunction-compatible restriction/direct-image comparison and conservativity; used to test and identify the coefficient-change mate. The open-coefficients unit supplies no separate such general interface."
+    "why": "Generic exact conservative restriction and adjunction-compatible derived direct-image comparison, used to reflect the derived isomorphism back to the specified map."
    },
    {
-    "node": "lem-weil-pbc-scalar-localization-complex-colimit",
-    "why": "Generic strict localization complex model with its normalized unit legs; supplies the diagram to which the unit continuity route applies. The open-coefficients unit supplies no separate such general interface."
+    "node": "lem-weil-pbc-integral-localization-homology-colimit",
+    "why": "Bounded-below H^q colimit of the O_E->E localization cocone on Y; the unit has no node for it."
    },
    {
-    "node": "lem-weil-pbc-scalar-localization-module-colimit",
-    "why": "Generic ordinary module localization colimit, used to identify the source cohomology cocone. The open-coefficients unit supplies no separate such general interface."
+    "node": "lem-weil-pbc-integral-localization-push-continuity",
+    "why": "Qcqs Rf_* followed by H^q preserves the O_E->E localization cocone of a bounded-below complex; unit step 3 continuity input."
    },
    {
-    "node": "lem-weil-pbc-scalar-localization-sheaf-exact",
-    "why": "Generic exactness of ordinary module-sheaf localization; no completeness or constructibility restriction. The open-coefficients unit supplies no separate such general interface."
+    "node": "lem-weil-pbc-integral-localization-mate",
+    "why": "Formal preadditive colimit criterion: a zeroth-leg-compatible map of scalar-sequence cocones mapped to colimits is invertible."
    },
    {
     "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "why": "Generic detection of derived isomorphisms by cohomology; no replacement of the unit route. The open-coefficients unit supplies no separate such general interface."
+    "why": "Cohomology detects isomorphisms in an unbounded derived category."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Internal vs section-ring identification of Rf_* used to transport the cocones."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Internal vs section-ring identification of derived scalar extension, restriction and units."
    }
   ]
  },
  "tool_uses": [
-  "lem-pd-section-derived-pushpull-normalization",
-  "lem-pd-section-derived-tensor-normalization",
-  "lem-sfb-internal-section-scalar-adjunction",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-scalar-localization-complex-colimit",
-  "lem-weil-pbc-scalar-localization-module-colimit",
-  "lem-weil-pbc-scalar-localization-sheaf-exact",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-integral-localization-homology-colimit",
+  "lem-weil-pbc-integral-localization-push-continuity",
+  "lem-weil-pbc-integral-localization-mate"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q67-822e8e6d5",
-  "group": "Q67",
+  "reviewer": "NT-cc-NK-56ae991ab",
+  "group": "NK",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-822e8e6d5 (reviewer sub-agent of L); spot-checked: Q67 822e8e6d is a 0-new-node split of lem-sfb-localized-direct-image-comparison with the statement unchanged. I checked it against Hemo–Richarz–Scholbach Lemma 5.3(1), the proof of (5.4), and §5.3 (T^-1 Λ_X = colim Λ_X). Hypotheses in force: f qcqs, a common lower bound, no ℓ-invertibility; edge cases C=0, ℓ-torsion C and C unbounded above all pass. Step 1: the pd/sfb section normalizations state the derived equivalences, units and counits it uses. Step 2: det-prop qlbar-colimit-x-invert-ell (sheaf colimit = sheafified R[1/ℓ], a one-liner), sheaf-exact plus exact-functor-derived, and cartesian-coefficients(1) give the commuting square, so ring-sheaf-change-adjunction applies (b, d, conservativity, adjunct identity). Step 3: complex-colimit gives legs η·ℓ^-n. Step 4: qcqs pushforward continuity with index ℕ and bound a, plus module-colimit, give v_q and w_q. Step 5: I recomputed the unit equality as A-adjunct = U_X(β♭)∘b^-1, with the bracket equal to η_{Lf*M} on K-flat representatives; it is correct and fine as elementary. Steps 6–7: leg equality, then cohomology detection plus conservativity give that β is an isomorphism. No cycle and no SGA. Not a duplicate: lem-weil-pbc-realization-localized-push is a finite-type constructible special case in the continuous-coefficient model. Tool uses accepted as generic; unit sk-cor-pe-bounded-continuity has no realizing node, and the pbc continuity node is its analogue. Batch-5: both flagged sec-poincare-duality citations (section-derived-pushpull and section-derived-tensor normalization) are generic internal⇄sectionwise comparisons (Stacks 09T5/08BJ/07A6/07A4). Their closures contain only generic pd nodes and a trf Mathlib leaf; they are neither Poincaré duality nor trace-formula content, so they are accepted and no assumption leaf is needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-56ae991ab (reviewer sub-agent of L); spot-checked: Re-split of the 7-step proof. I read the item, both new nodes, every cited statement, the unit sk-prop-open-coefficients (rational paragraph) and HRS 5.3(1)/§5.3; no SGA is used. No argument of the old proof is dropped: old steps 1,2,5 and the scalar part of 6 go to lem-sfb-scalar-change-direct-image-unit, old steps 3,4,6,7 to the telescope criterion. FIX 1 (C5/D duplicate): the telescope criterion is true (t is unique by lim^1=0 and an iso by the telescope argument; s=0, nilpotent and C=0 checked), but it only generalizes, to arbitrary Λ and s, the existing B2 family lem-weil-pbc-integral-localization-{homology-colimit,push-continuity,mate}. That family covers the same uncompleted condensed O_E→E on arbitrary schemes with qcqs f and bounded-below K, and its Lean files (ContinuousIntegralLocalization*.lean) contain no sorry. ContinuousIntegralPushComparison.integralScalarPushHom_isIso proves the item's map invertible for constructible K using only t.plus. The report misread this family as 'completed-integral'. I dropped the node and replaced item step 3 with steps 3-4 (1615 and 1396 chars). They identify the B2 coefficients with A→E, note M is bounded below via R^+f_*, take the H^q colimits from homology-colimit and push-continuity, transport the cocones to section-ring modules (internal-section-scalar-adjunction, pd pushpull-normalization), apply the mate lemma with g=t and F=H^q∘ℰ^{-1} with the zeroth leg from step 2, then use cohomology detection and conservativity of U_Y via ring-sheaf-change-adjunction. B2 nodes are declared in tool_uses; no cycle. FIX 2: the unit node used the d of ring-sheaf-change-adjunction without its isomorphisms c_R, c_S. I added them as α_f of sk-def-sfb-coefficient-morphisms (compatible with a by naturality) and added the stmt_dep. I recomputed the unit equation t∘η_M=Rf_*(η_C) by adjunction: it holds; cases a=id, S=0, f=id checked. Batch-5: both pd section-normalization citations are accepted. They are generic internal/section-ring identifications for any condensed ring, outside both assumed statements and not steps of their proofs; their closures contain no thm-pd, trace or nt-assume node; and the base item already cited both in step 1, so the batch-5 closure is unchanged. The item statement is unchanged and no target is weakened.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.LocalizedDirectImageComparison",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.localizedDirectImageComparison_isIso",
@@ -305,5 +264,15 @@
   "group": "O1",
   "result": "pass",
   "note": "Only the item's lean field is added; the 6 dependency node files are byte-identical to live; lean.statement is verbatim in the file. Clauses match: ℓ prime, E FiniteIntermediateField, f qcqs with no extra hypotheses, C in D(Mod A_X) with t.plus (existential lower bound), source L(Ext_Y)∘moduleObjectDerivedPushforward, target the reverse. The map is the canonical derivedPushHom mate of derivedComapLowerStarIso; derivedPullIso is the conjugate of the same iso, so it is the node's counit adjunct. The flatness letI comes from the last clause of padicIntegers_invertEll; it is a Prop (PreservesFiniteLimits), chooses no data and sits in the def body. No duplicate: the existing derivedPushHom IsIso results are for other coefficient maps or constructible K only. Docstrings carry the source place and blueprint id, the 7 proof steps are in the docstring, body is sorry only, the helper has real content, and both report sections are present. Not recompiled (no file changed). Advisories: synthInstance.maxSize is file-level, not scoped as the report says; plain imports are kept for proof_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261022T202033-L-1250605",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

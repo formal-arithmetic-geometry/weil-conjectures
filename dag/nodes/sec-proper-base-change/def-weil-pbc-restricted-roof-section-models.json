@@ -1,0 +1,128 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "def-weil-pbc-restricted-roof-section-models",
+ "kind": "definition",
+ "title": "Restriction and direct-image section models for injective roofs",
+ "statement": "For an open U of a scheme X, global sections after restriction of a module to U are naturally isomorphic to sections on U. The comparison is restrictAppIso on the whole open subscheme followed by transport along the equality that its image is U. The private section API computes the restriction/direct-image comparison on the prescribed restricted injective resolutions.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 and 01FB: restriction to opens and the canonical section formula"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-square-local-models",
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof": [
+  {
+   "text": "Use restrictAppIso at the whole open subscheme and the equality that its image is U. Naturality is presheaf naturality along that equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove the private one-degree restriction/direct-image section formula by the existing raw restriction-adjunction calculation. These provide the section APIs used by the restricted classical roof proof without unfolding its large comparison data. The canonical top-section pushforward comparison is the proved construction in ModuleCohomologyFMap.",
+   "uses": [
+    "lem-weil-restriction-resolution-lift-sections",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-restriction-resolution-lift-sections",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 and 01FB: explicit restriction-adjunction and section computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of local hypercohomology comparison for a coefficient map and derived direct image composition",
+   "results": "Eight generic sheaf-global-section, hypercover and homology naturality hits; no normalized comparison for the project coefficient square. Project rg found the exact comparison definitions and the classical cohomology roof implementation.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorOfQuasiIsoResolutionsObjIso\"",
+   "results": "No Mathlib hits. This is a project API; its definition and naturality calculation were read in the source.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localLerayComparison|rightDerivedFunctorOfQuasiIsoResolutionsObjIso",
+   "results": "No Mathlib hits. Local rg found UnboundedDirectImageSectionPresheaf, DerivedAdjunctionTopEdgeData, ModuleCohomologyFMap and its independence theorem. These give the ingredients, but do not state the new comparison equations.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareLocalHypercohomology",
+  "date": "2026-10-26",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison. Local hypercohomology of a normalized coefficient square; Separated classical and raw resolution comparisons; restriction and direct-image section models",
+   "via": [
+    "lem-weil-pbc-restricted-coefficient-nat-roof",
+    "lem-weil-pbc-restricted-coefficient-roof",
+    "lem-weil-pbc-square-local-hypercohomology",
+    "lem-weil-pbc-derived-square-local-classes",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedRoofSectionModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedRoofSectionModels.lean",
+  "declaration": "AlgebraicGeometry.restrictionSectionsIso",
+  "declarations": [
+   "AlgebraicGeometry.restrictionSectionsIso"
+  ],
+  "statement": "def restrictionSectionsIso {X : Scheme.{u}} (U : X.Opens) :\n    restrictFunctor U.ι ⋙ RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙\n      forget₂ _ AddCommGrpCat.{u} ≅ RingedSpace.openModuleSections X.toRingedSpace U",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T111935-L-1782906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T111935-L-1782906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

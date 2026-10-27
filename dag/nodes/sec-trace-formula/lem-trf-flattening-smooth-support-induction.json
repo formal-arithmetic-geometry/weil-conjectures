@@ -1,0 +1,144 @@
+{
+ "id": "lem-trf-flattening-smooth-support-induction",
+ "kind": "statement",
+ "title": "Generic free subtraction as the smooth flattening induction step",
+ "statement": "Fix $n\\in\\mathbf N$. Assume that every quasi-compact morphism $g:Y\\to T$ locally of finite presentation over any qcqs base, with a finite-type quasi-coherent module $N$ finitely presented and flat over a quasi-compact base open $V$, admits a $V$-admissible blowup making its module strict transform flat whenever every fibre support of $N$ has dimension strictly less than $n$. Let $S$ be affine, $f:X\\to S$ affine smooth of relative dimension $n$ with geometrically integral fibres, $F$ a finite-type quasi-coherent module, and $U\\subseteq S$ quasi-compact open such that $F|_{X_U}$ is finitely presented and flat over $U$. Then there is a $U$-admissible blowup making the strict transform of $F$ flat over its base. Dimension of empty fibre support is $-\\infty$. The asserted induction hypothesis concerns all qcqs bases, not just the given smooth family. Schemes, module properties, flatness, dimension, smooth morphisms, pullback, admissible blowups and their canonical strict transforms use the conventions of [def-weil-pbc-scheme-conventions], [def-weil-quasi-separated-morphism], [def-sbc-locally-finite-presentation], [def-nagata-admissible-blowup], [def-trf-module-strict-transform], [pqf-def-coherent], [def-weil-pbc-module-finite-type-presentation], [lem-pqf-finite-type-ideal-module], [def-pc-module-stalk-functor], [def-pc-scheme-module-flat-over], [def-sbc-smooth-morphisms], [def-kun-topological-krull-dimension], [def-weil-etale-morphism]. Module tensor pullback is [def-pc-module-pullback]; integrality is [def-pc-integral-scheme].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, third proof paragraph, including the preliminary blowup, free subtraction and strict-transform comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-quasi-separated-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-pqf-finite-type-ideal-module",
+  "def-pc-module-stalk-functor",
+  "def-pc-scheme-module-flat-over",
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-krull-dimension",
+  "def-weil-etale-morphism",
+  "def-pc-module-pullback",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply smooth generic-rank reduction to obtain a preliminary admissible blowup and a finite affine open cover of its base. On each member the universally exact free sequence has a quasi-coherent finite-type cokernel H, finitely presented and flat over the compact preserved open, with every fibre support of dimension < n.",
+   "uses": [
+    "lem-trf-smooth-generic-rank-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each affine cover base is qcqs and each affine smooth source morphism is quasi-compact and locally of finite presentation. Flatness of the open restriction implies the original stalk-flatness condition over U by the open stalk isomorphisms. Apply the lower-support hypothesis to H. The free-sequence transform flatness equivalence then flattens the middle term. This includes n=0, for which H has empty fibre support.",
+   "uses": [
+    "lem-trf-smooth-free-sequence-transform-flatness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use etale flattening descent for the finite affine base cover of the preliminary blowup. The corresponding source restrictions cover the full base-changed source. Finally compose with the preliminary blowup by the module-admissible-blowup calculus and transport flatness along its source and base isomorphisms.",
+   "uses": [
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-module-admissible-blowup-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-generic-rank-reduction",
+  "lem-trf-smooth-free-sequence-transform-flatness",
+  "lem-trf-etale-flattening-descent",
+  "lem-trf-module-admissible-blowup-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, third proof paragraph, including the preliminary blowup, free subtraction and strict-transform comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flatten.*cokernel|cokernel.*flatten",
+   "results": "0 hits; top=[]. No geometric flattening induction reduction; existing project-specific reductions were checked separately.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatten a smooth affine family using a universally injective free module map and flattening its cokernel of smaller fibre support dimension",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat.mk', 'Module.Flat.mk', 'Module.Flat.tfae_equational_criterion', 'Algebra.Smooth.flat', 'Module.Flat.exists_factorization_of_apply_eq_zero_of_free', 'Module.Flat.of_shrink', 'Module.Flat.of_free', 'Module.flat_iff']. No geometric flattening induction reduction; existing project-specific reductions were checked separately.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatten a smooth affine family using a universally injective free module map and flattening its cokernel of smaller fibre support dimension",
+   "results": "8 hits; top=['Algebra.Smooth.flat', 'AlgebraicGeometry.Flat', 'AlgebraicGeometry.Flat.flat_of_affine_subset', 'Algebra.Smooth.flat_of_isNoetherianRing', 'AlgebraicGeometry.Flat.flat_appLE', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.Flat.instHasRingHomPropertyFlat', 'AlgebraicGeometry.Flat.instIsMultiplicativeScheme']. No geometric flattening induction reduction; existing project-specific reductions were checked separately.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatteningModuleByAdmissibleBlowup",
+  "date": "2026-10-26",
+  "group": "B5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks Tag 0815: Tag 0815, theorem-flatten-module, third proof paragraph, including the preliminary blowup, free subtraction and strict-transform comparison.",
+   "via": [
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatteningSmoothSupportInduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatteningSmoothSupportInduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flat_moduleStrictTransform_smooth_of_lower_support",
+  "statement": "theorem exists_flat_moduleStrictTransform_smooth_of_lower_support\n    (n : ℕ)\n    (hlower : ∀ (S X : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S]\n      (f : X ⟶ S) [QuasiCompact f] [LocallyOfFinitePresentation f]\n      (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType]\n      (U : S.Opens), IsCompact (U : Set S) →\n      (F.restrict (f ⁻¹ᵁ U).ι).IsFinitePresentation →\n      (∀ x : X, f x ∈ U → Module.Flat (S.presheaf.stalk (f x))\n        ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj\n          ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F))) →\n      (∀ s : S, topologicalKrullDim {x : f.fiber s |\n      ¬ Subsingleton (((tensorPullback (f.fiberι s)).obj F).presheaf.stalk x)} <\n        (n : WithBot ℕ∞)) →\n      ∃ B : IsAdmissible S U,\n      (@moduleStrictTransform _ _ f B.I\n        (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).IsFlatOver\n          (pullback.snd f B.I.blowupMap))\n    {S X : Scheme.{u}} [IsAffine S]\n    (f : X ⟶ S) [IsAffineHom f] [SmoothOfRelativeDimension n f]\n    [GeometricallyIntegral f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType]\n    (U : S.Opens) (hU : IsCompact (U : Set S))\n    (hfp : (F.restrict (f ⁻¹ᵁ U).ι).IsFinitePresentation)\n    (hflat : (F.restrict (f ⁻¹ᵁ U).ι).IsFlatOver (f ∣_ U)) :\n    ∃ B : IsAdmissible S U,\n      (@moduleStrictTransform _ _ f B.I\n        (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).IsFlatOver\n          (pullback.snd f B.I.blowupMap)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T081025-L-1770709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T081025-L-1770709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

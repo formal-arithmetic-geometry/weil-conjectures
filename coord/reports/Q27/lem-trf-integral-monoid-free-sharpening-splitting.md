@@ -1,0 +1,154 @@
+## Worker report
+
+The module `Sheaf.GroupTheory.IntegralMonoidFreeSharpeningSplitting` states
+`Algebra.integral_monoid_free_sharpening_splitting`, with `sorry` as its whole proof.
+It introduces no new definition and changes only the item's `lean` record.
+Multiplicative notation follows the existing log-monoid library; products mean
+additive sums and division in the completion means subtraction.
+
+Hypotheses and clauses, checked against the node:
+
+- The arbitrary integral commutative monoid is `(R : Type u) [CommMonoid R]`
+  together with `hR : Function.Injective (GrothendieckGroup.of (M := R))`.
+  This is exactly integrality, without assuming finite generation or saturation.
+- `G` is Mathlib's `Algebra.GrothendieckGroup R`. The units `U` are `Rˣ`, embedded
+  by `u ↦ GrothendieckGroup.of (u : R)`. Integrality makes this an embedding;
+  the inverse of an embedded unit is the image of its inverse unit.
+- `B` is Mathlib's `Associates R`, the quotient by `Associated`, whose defining
+  relation is multiplication by a unit. Under `hR`, this is precisely the node's
+  difference-in-`U` relation. `q` is `Associates.mkMonoidHom`.
+- The finite integer basis assumption is `hfree : ∃ n : ℕ, Nonempty
+  (Module.Basis (Fin n) ℤ (Additive (GrothendieckGroup (Associates R))))`.
+  Every finite basis can be indexed by `Fin n`, including `Fin 0`.
+- Injectivity of the canonical map `B → B^gp` is the first conjunct.
+- The canonical induced homomorphism `π` is written as
+  `GrothendieckGroup.lift (GrothendieckGroup.of.comp Associates.mkMonoidHom)`.
+  This uses the universal extension of the prescribed quotient map, not an
+  arbitrary map satisfying extra assumptions. Its surjectivity is the second
+  conjunct; the third says `π g = 1 ↔ ∃ u : Rˣ, of (u : R) = g`, exactly kernel `U`.
+- `t` is existentially quantified as a group homomorphism (a `MonoidHom` between
+  commutative groups). The equality `π.comp t = MonoidHom.id _` is `πt = id`.
+  `∀ b, ∃ r, of r = t (of b)` is exactly `t(B) ⊆ R`.
+- `j : Associates R →* R` is tied to this same section by
+  `∀ b, of (j b) = t (of b)`, so it is precisely the restriction `t|_B`.
+  `Associates.mkMonoidHom.comp j = MonoidHom.id _` is `qj = id`.
+- `e : (Associates R × Rˣ) ≃* R` gives inverse monoid isomorphisms on the
+  Cartesian product with componentwise multiplication. Its formula is
+  `e (b,u) = j b * (u : R)`. For every `r`, the inverse has first component
+  `Associates.mk r` and unit component whose embedded value is
+  `of r / of (j (Associates.mk r))`. These are both displayed maps in the node.
+  Equality in the completion uniquely specifies the inverse's unit component,
+  since `hR` and `Units.val_injective` make the unit embedding injective.
+- There is no torsion-freeness assumption on `G` or `U`, and no finite-generation
+  or saturation assumption on `R`.
+
+Dependency declarations and sources read:
+
+- `Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup`, the recorded dependency
+  `AlgebraicGeometry.IsSaturatedLogBlowup`: read its full signature, docstring,
+  and module. Its public dependency `Sheaf.AlgebraicGeometry.LogRegularPair`
+  supplies the existing group-completion convention; `IsFineSaturatedMonoid`
+  explicitly uses injectivity of `Algebra.GrothendieckGroup.of`. We use that
+  same canonical completion but do not impose the unrelated fs conditions.
+- Mathlib `GroupTheory/MonoidLocalization/GrothendieckGroup.lean`:
+  `Algebra.GrothendieckGroup`, `.of`, `.lift`, their signatures and docstrings.
+- Mathlib `Algebra/GroupWithZero/Associated.lean`: `Associated`, its setoid,
+  `Associates`, and `Associates.mkMonoidHom`.
+- Mathlib `Module.Basis`, publicly imported through
+  `Mathlib.LinearAlgebra.Basis.Defs`.
+- The two proof dependencies, `lem-trf-integral-sharpening-group-exactness` and
+  `lem-trf-group-section-monoid-product`, have no recorded Lean declarations in
+  the read DAG. Their complete statements were read and their three-step
+  assembly is included in the theorem docstring. No unstated interface is
+  needed to formulate the present statement.
+
+Source checked: ILO PDF, physical pp. 81 and 104 (printed pp. 75 and 98).
+VI 3.7(a) explicitly splits the exact group sequence and restricts its section to
+Q; VIII 3.1.1 defines sharpening by the unit quotient and 3.1.2 describes integral
+localization inside the group completion. The extension to arbitrary integral
+monoids with finite free sharpening group is explicitly identified as the DAG's
+agent algebraic generalization.
+
+Edge cases checked mathematically before drafting:
+
+- The one-element monoid: basis rank zero, trivial section, trivial product.
+- Any abelian group as a monoid, including `Z/2`: sharpening is trivial and the
+  product map is the usual identification with its full unit group.
+- `N × Z/2`: sharpening `N` has rank-one completion while the units have torsion;
+  all clauses hold and no instance in the statement excludes this case.
+- The non-saturated monoid generated by `2,3` in `Z`, times `Z/2`: a valid rank-one
+  example, showing that saturation was not accidentally assumed.
+- An infinitely generated submonoid of `Z²` times an arbitrary unit group,
+  for example the monoid generated by `(n,1)` for all natural `n`, still falls
+  under the hypothesis whenever its sharpening completion is finite free.
+  No finite-generation instance occurs in the signature.
+
+Searches actually run:
+
+- `msearch.py ... leanfinder`: "An integral commutative monoid splits as its
+  sharpening times its units if the group completion of the sharpening has a
+  finite integer basis, allowing torsion units." Eight hits, all number-field
+  arithmetic statements; none is this arbitrary-monoid statement.
+- `msearch.py ... loogle 'Algebra.GrothendieckAddGroup, AddUnits'`: zero hits.
+- `msearch.py ... grep 'sharpen|Sharpen|[Uu]nits.*[Ss]plit|[Ss]plit.*[Uu]nits'
+  Algebra`: zero hits.
+- `rg` of the named upstream `lean/WeilConjectures` directories and node-id
+  search: no corresponding declaration. The wider name search through
+  Mathlib, upstream, and `lean/Sheaf` found no collision with the new name.
+- `rg` of `lean/Sheaf` found `FineMonoidUnitSplitting.lean`, whose signature was
+  read in full: it assumes `IsFine` and torsion-freeness of both completions and
+  also gives a free unit factor. It does not state this node, which permits
+  arbitrary torsion units and does not assume finite generation of `R`.
+- `FsFaceSharpening.lean` is an fs-face-specific result, not this arbitrary
+  integral-monoid splitting. Its finite-basis encoding was reused unchanged.
+
+Validation: `scompile.py Q27 lem-trf-integral-monoid-free-sharpening-splitting`
+compiled the module against the server's live build, in both sandbox and library
+modes, in 10.3 seconds each, with no errors or unexpected warnings.
+No statement dispute, correction, new node, or dependency-module repair is needed.
+
+## Second reading by Q27
+
+Independent second reading by the maintainer's reader (NT-cc review service, 2026-10-24); it replaces the delivered
+same-worker self-audit (H11). Read: the node, stmt_dep def-trf-fs-log-blowup (record and the integrality convention
+`Function.Injective (Algebra.GrothendieckGroup.of (M := P))` used throughout lean/Sheaf, e.g. LogRegularPair.lean:143),
+the proof-dep nodes lem-trf-integral-sharpening-group-exactness and lem-trf-group-section-monoid-product (both unsplit,
+no Lean), Mathlib `Algebra.GrothendieckGroup`/`.of`/`.lift` (GroupTheory/MonoidLocalization/GrothendieckGroup.lean) and
+`Associates`/`Associates.mkMonoidHom` (Algebra/GroupWithZero/Associated.lean:393, 487), and the module.
+
+Clause by clause (node → Lean → verdict):
+
+- R integral commutative monoid → `(R : Type u) [CommMonoid R]`, `hR : Injective (GrothendieckGroup.of (M := R))` → exact
+  (multiplicative notation; no FG, saturation or cancellativity instance beyond integrality).
+- G = R^gp → `GrothendieckGroup R` (generators and relations, = def-trf-fs-log-blowup's P^gp) → exact.
+- U = R^× = {r : -r ∈ R} → `Rˣ` embedded by `of (u : R)` → exact; injective by `hR` and `Units.val_injective`.
+- B = R/U (difference in U), q → `Associates R`, `Associates.mkMonoidHom` → exact: `Associated a b ↔ ∃ u, a*u = b`,
+  which under integrality is "b/a ∈ U in G".
+- B^gp finite Z-basis (rank 0 allowed) → `∃ n, Nonempty (Module.Basis (Fin n) ℤ (Additive (GrothendieckGroup (Associates R))))`
+  → exact (any finite index set is equivalent to some `Fin n`; `n = 0` allowed).
+- B → B^gp injective → first conjunct → exact.
+- π : G → B^gp induced, surjective → `GrothendieckGroup.lift (of.comp mkMonoidHom)`, `Function.Surjective` → exact,
+  canonical (universal extension), not chosen data.
+- ker π = U → `∀ g, π g = 1 ↔ ∃ u : Rˣ, of u = g` → exact (both inclusions).
+- ∃ group hom t : B^gp → G, πt = id, t(B) ⊆ R → `∃ t : … →* …, π.comp t = id ∧ ∀ b, ∃ r, of r = t (of b)` → exact.
+- j = t|_B, qj = id → `∃ j : Associates R →* R, (∀ b, of (j b) = t (of b)) ∧ mkMonoidHom.comp j = id` → exact; the first
+  clause pins j as the restriction of the same t (j is determined, by `hR`).
+- F(b,u) = j(b)+u and E(r) = (q(r), r - j(q(r))) inverse monoid isomorphisms, B ⊕ U Cartesian product →
+  `∃ e : (Associates R × Rˣ) ≃* R, e (b,u) = j b * u ∧ ∀ r, (e.symm r).1 = mk r ∧ of (e.symm r).2 = of r / of (j (mk r))`
+  → exact; product monoid structure is componentwise; the unit coordinate of E is computed in G as the node says
+  and is uniquely determined since the unit embedding is injective.
+- No FG / saturation / torsion-freeness → none in the signature → exact.
+
+Edge cases: trivial monoid (n = 0, B trivial, e : 1 × 1 ≃ 1); R an abelian group with torsion (B trivial, R ≅ Rˣ);
+R = ℕ × ℤ/2 (rank 1, torsion units); non-saturated ⟨2,3⟩ × ℤ/2; non-finitely generated submonoids. All are admitted by
+the signature and the conclusion holds in each. Universe: single `u`, all objects in `Type u`; nothing unbound.
+
+One definition per notion: no new definition is introduced. No integrality predicate exists in lean/Sheaf (the inline
+injectivity is the project convention); no Mathlib or project statement of this splitting (the closest,
+`associatesEquivOfUniqueUnits`, assumes trivial units; FineMonoidUnitSplitting assumes `IsFine` and torsion-free
+completions). Live side clone (806f51d9) has no Lean record for this item.
+
+Gates: no hollow definition, proof is `sorry` only, module and theorem docstrings carry the ILO source places and
+`(blueprint: lem-trf-integral-monoid-free-sharpening-splitting)`, the proof docstring follows the node's three steps,
+`lean.statement` is verbatim the file's signature, no pro-étale substitute, no stronger assumption.
+No mismatch found; Lean module and node record unchanged.

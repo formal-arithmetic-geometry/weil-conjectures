@@ -1,0 +1,355 @@
+{
+ "id": "lem-pur-coordinate-section-site-transport",
+ "kind": "statement",
+ "title": "Finite-site realization and transport of the coordinate normalization",
+ "statement": "Fix the finite purity datum P [def-pur-conventions], a separated finite-type k-scheme T that is Noetherian, and an invertible Cartier ideal for its affine zero section. CartierRealization [def-pur-coordinate-section-cartier-realization] holds with one supported-source comparison for all annihilating exponents. Moreover, at each allowed exponent and invertibility witness, OrdinaryNormalization [def-pur-coordinate-section-ordinary-arrows] and CoprojectionNormalization [def-pur-coordinate-section-coprojection-arrows] imply ProNormalization [def-pur-coordinate-section-site-arrows]. All Tate inputs have the required finite-Tor constructibility, bounded compared origins, proper projection and middle comparison unit isomorphisms; their actual proOrientation and gammaCoordinates are isomorphisms and their composite with the specified proComposition is identity. The ordinary normalization is a hypothesis, not a conclusion.\n\nThe exact Lean statement is:\n\ntheorem coordinateSectionSiteTransport\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u})\n    (aT : T ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT] [IsNoetherian T]\n    (hI : (sectionMap T).ker.IsInvertible) :\n    CartierRealization T P aT hI ∧\n    ∀ (b : ℕ) (hA : ((P.coefficients.l ^ (b + 1) : ℕ) : Ring P) = 0)\n      (hT : IsUnit ((P.coefficients.l ^ (b + 1) : ℕ) : Γ(T, ⊤))),\n      OrdinaryNormalization (Ring P) T (P.coefficients.l ^ (b + 1))\n        (pow_pos (Fact.out : P.coefficients.l.Prime).pos _) hA hT hI →\n      CoprojectionNormalization (Ring P) T (P.coefficients.l ^ (b + 1))\n        (pow_pos (Fact.out : P.coefficients.l.Prime).pos _) hA hT hI →\n      ProNormalization T P b hA aT hT hI",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pur-coordinate-section-cartier-realization",
+  "def-pur-coordinate-section-ordinary-arrows",
+  "def-pur-coordinate-section-coprojection-arrows",
+  "def-pur-coordinate-section-site-arrows"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Rank-one supported Cartier normalization, even twists and finite etale-origin transport; expanded parent proof steps as specified below."
+ },
+ "proof": [
+  {
+   "text": "Apply the published Cartier Kummer map theorem to the coordinate zero divisor. Boundary uniqueness identifies its ordinary family with ordinaryClass. Its supported-constant unit is epic, so the normalized source comparison is independent of exponent. The finite Tate root projection fixes the target as twistDerived. Pass through Ext.hom and the exact-image/single and comparison/single isomorphisms. This gives CartierRealization with exactly cartierSource, uniformly over the allowed exponents; a common larger exponent gives the same published map.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite twist lines and their even shifts are finite-Tor constructible and bounded. Finite-origin full faithfulness makes middleUnit invertible on the relevant ordinary exceptional value. The coordinate-line adjunction and vector-integration comparison identify the actual transported transpose as gammaCoordinates. The closed counit transport identifies the actual closed adjunction, while closed-section compact origin identifies the normalized supported source.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-coordinate-line-adjunction",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "lem-pur-closed-section-compact-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compact-support site coherence and conjugation identify the ordinary exceptional composition with proComposition, including inverse middleUnit and the comparison counit. Apply comparison to the assumed ordinary exceptional equation, cancel adjacent units/counits, and retain the given coprojection orientation. This proves the literal pro-etale equation and transports isomorphy. Treat the unit input separately and each Tate input with its bounded witness.",
+   "uses": [
+    "lem-pur-compact-support-site-coherence",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-amb-cartier-kummer-map",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-pur-closed-finite-adjoint-counit-transport",
+  "lem-pur-closed-section-compact-origin",
+  "lem-pur-compact-support-site-coherence",
+  "lem-pur-coordinate-line-adjunction",
+  "lem-pur-vector-integration-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Expanded parent proof; coordinate-specific assembly of its cited declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The supported Kummer class of the zero section of the affine line integrates to one, with its Tate twists normalized by projection",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "WeierstrassCurve.Affine.Point.toClass_zero",
+     "WeierstrassCurve.Affine.CoordinateRing.basis_zero",
+     "Height.mulHeight₁_zero",
+     "Height.mulHeight_zero",
+     "Polynomial.logMahlerMeasure_X",
+     "Polynomial.logMahlerMeasure_one",
+     "WeierstrassCurve.Affine.Point.toClass_eq_zero",
+     "Height.mulHeight₁_one"
+    ],
+    "digest": "9d457e29adf8c506"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUnit.pow",
+   "results": {
+    "n_hits": 2,
+    "top": [
+     "IsUnit.pow",
+     "IsUnit.unit_pow"
+    ],
+    "digest": "5f945a676e6f90f1"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "grep",
+   "query": "zeroSection.*[Ii]nvertible|[Ii]nvertible.*zeroSection",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed section of the affine line has positive projective Chern class after extension by zero and normalized compact support composition",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "rieszContentAux_image_nonempty",
+     "exists_lt_rieszContentAux_add_pos",
+     "RealRMK.le_rieszMeasure_tsupport_subset",
+     "RealRMK.rieszMeasure_le_of_eq_one",
+     "CompactlySupportedContinuousMap.toRealLinear_nonneg",
+     "NNRealRMK.le_rieszMeasure_of_isCompact_tsupport_subset",
+     "MeasureTheory.Measure.modularCharacterFun_pos",
+     "ExistsContDiffBumpBase.u_int_pos"
+    ],
+    "digest": "0b9b060a6b80c30c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An effective Cartier divisor in the projective line has supported Kummer class whose compact image is the positive Chern class of O(1)",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Algebra.FormallySmooth.projective_kaehlerDifferential",
+     "OnePoint.smul_some_eq_ite",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "MeromorphicOn.divisor",
+     "MeromorphicOn.divisor_zpow",
+     "WeierstrassCurve.Projective.Point.point",
+     "Projectivization.rep",
+     "MeromorphicOn.divisor_def"
+    ],
+    "digest": "167d9087386e6c71"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Chern\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|supported.*[Cc]hern|[Cc]hern.*supported",
+   "results": {
+    "n_hits": 25,
+    "top": [
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean",
+     "Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean",
+     "Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean"
+    ],
+    "digest": "33598ab28f6dafee"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a supported Cartier class with an invertible Tate object preserves its integration normalization and identifies its exceptional adjoint with the closed coprojection mate",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoApp",
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'",
+     "CategoryTheory.ihom.instIsLeftAdjointTensorLeft",
+     "CategoryTheory.exp.adjunction",
+     "CategoryTheory.ihom.adjunction",
+     "Algebra.IsIntegral.tensorProduct",
+     "CategoryTheory.Closed.adj",
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoAux"
+    ],
+    "digest": "ec9f22a06a3663dd"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The supported Cartier Kummer class of the coordinate zero divisor is the negative of the localization boundary of the coordinate Kummer class",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AddLocalization.Away.negSelf",
+     "MeromorphicOn.divisor",
+     "Algebra.unramifiedLocus_eq_compl_support",
+     "MeromorphicOn.divisor_sub_const_self",
+     "CochainComplex.HomComplex.CohomologyClass.mk_neg",
+     "ClassGroup.mk0",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.mk_mem_carrier",
+     "WeierstrassCurve.Affine.Point.toClass_eq_zero"
+    ],
+    "digest": "14f6de7a56042b0a"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact etale to proetale comparison transports normalized supported Kummer maps, trace counits, and their adjunction transposes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "StandardEtalePair.HasMap.map",
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation",
+     "StandardEtalePair.homEquiv",
+     "Algebra.Etale.comp",
+     "StandardEtalePresentation.mapEquiv",
+     "StandardEtalePresentation.lift_bijective",
+     "StandardEtalePair.homEquiv_apply_coe"
+    ],
+    "digest": "6411708b0080d577"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "grep",
+   "query": "coprojection|Cartier.*[Kk]ummer|[Kk]ummer.*[Cc]artier|proetale.*[Aa]djunction",
+   "results": {
+    "n_hits": 15,
+    "top": [
+     "Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+     "Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+     "Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+     "Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+     "Mathlib/CategoryTheory/Distributive/Cartesian.lean",
+     "Mathlib/CategoryTheory/Distributive/Cartesian.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean"
+    ],
+    "digest": "12e2d2d4db47fed4"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact comparison between ordinary etale and proetale sites preserves supported Cartier maps, integration traces and exceptional adjunction composition",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Equivalence.sheafCongr",
+     "Algebra.FormallyEtale.of_equiv",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "Algebra.Etale.formallyEtale",
+     "CategoryTheory.Equivalence.transportSheafificationAdjunction",
+     "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+     "CategoryTheory.Equivalence.sheafCongrPrecoherent",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility"
+    ],
+    "digest": "01ce17c49619ad20"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"tensor\"",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor",
+     "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+     "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+     "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+     "CategoryTheory.tensorLeftAdjunction",
+     "CategoryTheory.tensorRightAdjunction",
+     "CategoryTheory.Types.tensorProductAdjunction",
+     "CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction"
+    ],
+    "digest": "9e62f5e4c3e3a14d"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedCoordinateSectionNormalization",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-twisted-coordinate-section-normalization",
+   "place": "Finite-site realization and transport of the coordinate normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateSectionSiteTransport",
+  "file": "lean/Sheaf/Paper/CoordinateSectionSiteTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoordinateSectionNormalization.coordinateSectionSiteTransport",
+  "statement": "theorem coordinateSectionSiteTransport\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u})\n    (aT : T ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT] [IsNoetherian T]\n    (hI : (sectionMap T).ker.IsInvertible) :\n    CartierRealization T P aT hI ∧\n    ∀ (b : ℕ) (hA : ((P.coefficients.l ^ (b + 1) : ℕ) : Ring P) = 0)\n      (hT : IsUnit ((P.coefficients.l ^ (b + 1) : ℕ) : Γ(T, ⊤))),\n      OrdinaryNormalization (Ring P) T (P.coefficients.l ^ (b + 1))\n        (pow_pos (Fact.out : P.coefficients.l.Prime).pos _) hA hT hI →\n      CoprojectionNormalization (Ring P) T (P.coefficients.l ^ (b + 1))\n        (pow_pos (Fact.out : P.coefficients.l.Prime).pos _) hA hT hI →\n      ProNormalization T P b hA aT hT hI",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T161924-L-149448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T161924-L-149448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-flat-fp-purity-open",
+ "kind": "statement",
+ "title": "Openness of purity for a flat finitely presented family",
+ "statement": "Let $f:X\\to S$ be a finitely presented morphism of schemes [def-pc-scheme, def-sbc-locally-finite-presentation], meaning locally of finite presentation, quasi-compact and quasi-separated. Let $F$ be a quasi-coherent $\\mathcal O_X$-module of finite presentation [pqf-def-coherent, def-weil-pbc-module-finite-type-presentation], flat over $S$ [def-pc-scheme-module-flat-over]. Then $\\{s\\in S:F\\text{ is pure along }X_s\\}$ is open in $S$, where purity along a fibre is [def-sfb-scheme-relative-purity]. No Noetherian hypothesis is imposed on $S$.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-scheme-relative-purity",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix $s$ in the asserted purity locus $U$. Apply [lem-sfb-flat-fibre-projective-etale-cover] to obtain $e:(S^{\\prime},s^{\\prime})\\to(S,s)$, affine $X^{\\prime},S^{\\prime}$, and $g,p$ with $fg=ep$, $g$ etale, $X_s\\subseteq g(X^{\\prime})$, and $N=\\Gamma(X^{\\prime},g^*F)$ projective over $A=\\Gamma(S^{\\prime},\\mathcal O_{S^{\\prime}})$. Its flatness hypothesis holds on the entire fibre because $F$ is flat over $S$. Write $G=g^*F$, $Y=X\\times_SS^{\\prime}$, $F_Y=\\operatorname{pr}_X^*F$, $q:Y\\to S^{\\prime}$ and $h=(g,p):X^{\\prime}\\to Y$.",
+   "uses": [
+    "lem-sfb-flat-fibre-projective-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open), proof."
+   }
+  },
+  {
+   "text": "The module $G$ is quasi-coherent and finitely presented by pullback permanence. Since $g$ and $e$ are etale they are locally of finite presentation. The composite $fg=ep$ is locally of finite presentation, and the over-base permanence lemma applied to $ep$ and $e$ gives that $p$ is locally of finite presentation. Both its schemes are affine, hence quasi-compact and quasi-separated, so $p$ is finitely presented. Projectivity of $N$ makes it flat over $A$, and the affine-chart flatness criterion makes $G$ flat over $S^{\\prime}$. Therefore the projectivity-implies-universal-purity direction of [lem-sfb-affine-flat-fp-projectivity-purity] applies to $p,G$: $G$ is universally pure over $S^{\\prime}$, in particular pure along every fibre.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "def-weil-etale-morphism",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-affine-chart-relative-flat-criterion",
+    "lem-sfb-affine-flat-fp-projectivity-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open), proof."
+   }
+  },
+  {
+   "text": "The projection $Y\\to X$ is etale by base change of $e$, so cancellation with $g$ makes $h$ etale. Hence its image $W=h(X^{\\prime})$ is open in $Y$. It is quasi-compact over $S^{\\prime}$: for any affine open $B\\subseteq S^{\\prime}$, $W\\cap q^{-1}(B)$ is the continuous image under $h$ of $p^{-1}(B)$, which is quasi-compact because $p$ is finitely presented. Base change makes $q$ finitely presented, and $F_Y$ is quasi-coherent and finitely presented. Thus [lem-sfb-scheme-assassin-open-constructible] applies over the affine base $S^{\\prime}$ and shows that $E=\\{t\\in S^{\\prime}:\\operatorname{Ass}_{Y_t}((F_Y)_t)\\subseteq W_t\\}$ is constructible.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-sfb-scheme-assassin-open-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open), proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-purity-etale-assassin-criterion] to the original diagram at $s$. Its source $p$ is of finite type, $G$ is pure along $X^{\\prime}_{s^{\\prime}}$, $F$ is flat along $X_s$, and $g(X^{\\prime})$ contains the whole fibre, hence its associated points. Since $s\\in U$, the criterion says that $W$ contains all points of the relative assassin of $F_Y$ lying over generalizations of $s^{\\prime}$. The relative assassin is the union of the fibrewise associated points by [def-trf-relative-assassin]; hence every generalization of $s^{\\prime}$ belongs to $E$.",
+   "uses": [
+    "lem-sfb-purity-etale-assassin-criterion",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open), proof."
+   }
+  },
+  {
+   "text": "The affine scheme $S^{\\prime}$ is quasi-compact and quasi-separated, hence spectral. The complement $C=S^{\\prime}\\setminus E$ is constructible. If $s^{\\prime}\\in\\overline C$, [lem-weil-pbc-spectral-proconstructible-closure-specialization], applied to the one-member family $C$, would give $c\\in C$ specializing to $s^{\\prime}$, contradicting the preceding step. Consequently $V=S^{\\prime}\\setminus\\overline C$ is an open neighbourhood of $s^{\\prime}$ contained in $E$. This proves the needed Tag 05LW neighbourhood conclusion directly from existing spectral-space lemmas.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open), proof."
+   }
+  },
+  {
+   "text": "For $t\\in V$, apply [lem-sfb-purity-etale-assassin-criterion] over $S^{\\prime}$ to $q:Y\\to S^{\\prime}$, $F_Y$, the identity elementary neighbourhood $(S^{\\prime},t)$, and $h:X^{\\prime}\\to Y$. The pullback-composition isomorphism identifies $h^*F_Y$ with $G$, since $\\operatorname{pr}_Xh=g$. The sheaf $F_Y$ is flat over $S^{\\prime}$ by relatively flat base change. The other hypotheses hold by steps 2 and 3, and $t\\in E$ gives the required containment of the associated points of the fibre in $h(X^{\\prime})$. Every generalization $u$ of $t$ lies in the open $V$, hence in $E$; thus all relative associated points over these $u$ lie in $W=h(X^{\\prime})$. The reverse implication of the criterion proves that $F_Y$ is pure along $Y_t$.",
+   "uses": [
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-sfb-purity-etale-assassin-criterion",
+    "def-trf-relative-assassin",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open), proof."
+   }
+  },
+  {
+   "text": "For any $s_1\\in e(V)$ choose $t\\in V$ mapping to $s_1$. The etale map $e$ is flat at $t$. Apply [lem-sfb-purity-flat-point-descent] to the purity of $F_Y$ along $Y_t$ just proved: $F$ is pure along $X_{s_1}$, so $e(V)\\subseteq U$. The image $e(V)$ is open by etale openness and contains $s$. Every $s\\in U$ therefore has an open neighbourhood contained in $U$, proving the assertion.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-purity-flat-point-descent",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-fibre-projective-etale-cover",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "def-weil-etale-morphism",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-sfb-affine-flat-fp-projectivity-purity",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-sfb-scheme-assassin-open-constructible",
+  "lem-sfb-purity-etale-assassin-criterion",
+  "def-trf-relative-assassin",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sfb-purity-flat-point-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05MC (lemma-flat-finite-presentation-purity-open), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented morphism and a finitely presented relatively flat module the locus in the base where it is pure along the fiber is open",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"hits\": [{\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}, {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}, {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}, {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}, {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}, {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}, {\"name\": \"Module.freeLocus_eq_univ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  [Module.Flat R M], Module.freeLocus R M = Set.univ\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $ that is finitely generated and flat, the free locus of $ M $—the set of prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ where the lo\"}, {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}]}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpen_freeLocus requires a module finitely presented over the base and describes freeness at its base localizations; universally open flat morphisms concern images of opens, not this purity locus. Pure in the Loogle hit is a filter."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness of the purity locus for a flat finitely presented quasi coherent sheaf",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"hits\": [{\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}, {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}, {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}, {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsOpen (freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}, {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}, {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}, {\"name\": \"Module.basicOpen_subset_freeLocus_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] {f : R} :\\n  (basicOpen f : Set (PrimeSpectrum R)) ⊆ freeLocus R M ↔\\n    Module.Projective (Localization.Away f) (LocalizedModule (.powers f) M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $ and an element $ f \\\\in R $, the basic open set $ D(f) $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in the free lo\"}, {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}]}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpen_freeLocus requires a module finitely presented over the base and describes freeness at its base localizations; universally open flat morphisms concern images of opens, not this purity locus. Pure in the Loogle hit is a filter."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pure\", \"IsOpen\"",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"hits\": [{\"name\": \"isOpen_singleton_iff_nhds_eq_pure\", \"module\": \"Mathlib.Topology.Neighborhoods\", \"type\": \" {X : Type u} [TopologicalSpace X] (x : X) : IsOpen {x} ↔ nhds x = pure x\", \"doc\": \"\"}]}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpen_freeLocus requires a module finitely presented over the base and describes freeness at its base localizations; universally open flat morphisms concern images of opens, not this purity locus. Pure in the Loogle hit is a filter."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]urity|pure[Ll]ocus|pure.*[Ii]sOpen|[Ii]sOpen.*pure",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"hits\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpen_freeLocus requires a module finitely presented over the base and describes freeness at its base localizations; universally open flat morphisms concern images of opens, not this purity locus. Pure in the Loogle hit is a filter."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative purity of a flat coherent family spreads from one fiber to an open neighborhood in the base without Noetherian assumptions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"hits\": [{\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}, {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}, {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}, {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}, {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.Flat f], AlgebraicGeometry.Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}, {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism being a generalizing map on the underlying topological spaces is Zariski-local at the source. This means that for any scheme morphism, if its restriction to a Zariski\"}, {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is a generalizing map is Zariski-local at the target. Specifically, for any such morphism $ f $ and any Zariski covering siev\"}, {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}]}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpen_freeLocus requires a module finitely presented over the base and describes freeness at its base localizations; universally open flat morphisms concern images of opens, not this purity locus. Pure in the Loogle hit is a filter."
+  },
+  {
+   "tool": "grep",
+   "query": "purity|pureLocus|pure.*IsOpen",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Topology/Order.lean\", \"line\": \"689\", \"text\": \"  (isOpen_singleton_iff_nhds_eq_pure _).1 <| isOpen_singleton_nhdsAdjoint f h\"}\n  {\"file\": \"Mathlib/Topology/Order.lean\", \"line\": \"701\", \"text\": \"    t ≤ nhdsAdjoint a f ↔ @nhds α t a ≤ pure a ⊔ f ∧ ∀ b ≠ a, IsOpen[t] {b} := by\"}\n  {\"file\": \"Mathlib/Topology/Order.lean\", \"line\": \"966\", \"text\": \"  le_antisymm (le_pure_iff.2 <| isOpen_singleton_true.mem_nhds <| mem_singleton _) (pure_le_nhds _)\"}\n  {\"file\": \"Mathlib/Topology/Order/SuccPred.lean\", \"line\": \"57\", \"text\": \"  (isOpen_singleton_iff_nhds_eq_pure _).symm.trans isOpen_singleton_iff\"}\n  {\"file\": \"Mathlib/Topology/Neighborhoods.lean\", \"line\": \"269\", \"text\": \"theorem isOpen_singleton_iff_nhds_eq_pure (x : X) : IsOpen ({x} : Set X) ↔ 𝓝 x = pure x := by\"}\n  {\"file\": \"Mathlib/Topology/Neighborhoods.lean\", \"line\": \"270\", \"text\": \"  simp [← (pure_le_nhds _).ge_iff_eq', isOpen_iff_mem_nhds]\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open morphisms and free/smooth loci do not assert relative purity of sheaves; filter pure is unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented scheme morphism and a relatively flat finitely presented quasicoherent module the fiberwise purity locus in the base is open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open morphisms and free/smooth loci do not assert relative purity of sheaves; filter pure is unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Purity along a fibre spreads to a neighborhood of the base point in a flat family",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.Flat f], AlgebraicGeometry.Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open morphisms and free/smooth loci do not assert relative purity of sheaves; filter pure is unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative purity of a flat finitely presented sheaf is open in the base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[LocallyOfFinitePresentation f] (hf : GeneralizingMap f) : IsOpenMap f\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsOpen (freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"Module.basicOpen_subset_freeLocus_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] {f : R} :\\n  (basicOpen f : Set (PrimeSpectrum R)) ⊆ freeLocus R M ↔\\n    Module.Projective (Localization.Away f) (LocalizedModule (.powers f) M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $ and an element $ f \\\\in R $, the basic open set $ D(f) $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in the free lo\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open morphisms and free/smooth loci do not assert relative purity of sheaves; filter pure is unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pure\", \"IsOpen\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"isOpen_singleton_iff_nhds_eq_pure\", \"module\": \"Mathlib.Topology.Neighborhoods\", \"type\": \" {X : Type u} [TopologicalSpace X] (x : X) : IsOpen {x} ↔ nhds x = pure x\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open morphisms and free/smooth loci do not assert relative purity of sheaves; filter pure is unrelated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). Proof of Tag 05UD, final application of Tag 05UA: flatness at a point is detected at the associated generalizations in its fibre. Subinput of Tag 05UA: Tag 0AT4 (lemma-upstairs-finite-type-injective-into-flat-mod-m). Subinput: Tag 05U7 (lemma-flat-finite-type-local-colimit-free), first assertion, omitting the additional Mittag-Leffler conclusion. Supporting geometric input: Tag 05MF (lemma-flat-finite-type-affine-neighbourhood-projective), over a henselian local base, used in the free-neighbourhood paragraph of Tag 05U7. Supporting input for Tag 05MF: Tag 05ME (lemma-flat-finite-presentation-affine-neighbourhood-projective), applied after the affine-space and finite-presentation reductions. Tag 05ME proof, second paragraph: purity along U_s spreads after shrinking S by lemma-flat-finite-presentation-purity-open.",
+   "via": [
+    "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+    "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+    "lem-sfb-henselian-flat-finite-module-residue-free-colimit",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-fp-purity-open",
+  "worker": "stage1",
+  "summary": "Followed Tag 05MC without Noetherian hypotheses; exposed projective whole-fibre charts (05KW), the etale relative-assassin criterion (05L4), and pointed flat purity descent (05J9). Reused the scheme constructibility and spectral neighbourhood lemmas. Checked the criterion twice and descended purity at arbitrary etale points without assuming their residue fields agree.",
+  "blueprint": "Latest sec-six-functors-basics/sk-thm-sf-ctf-stability, proof direct-image/compactification paragraph; preserves the inherited supporting stable-moduli/flattening chain and realizes the Tag 05ME second-paragraph use of 05MC. Nearest recorded blueprint ancestor is null, retained from blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-sbc-locally-finite-presentation-composition",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-pc-affine-chart-relative-flat-criterion",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-pc-relatively-flat-module-pullback",
+    "why": "Generic scheme/module/topological permanence or constructibility tool in the Stacks 05MC argument; no alternative route for the unit is introduced."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic tensor pullback composition identifies the sheaf on the etale source chart; this is an identification needed for the criterion, not a different unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-119a02473",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-119a02473 (reviewer sub-agent of L); spot-checked: Read Stacks 05MC with its proof, and 05KW, 05L4, 05J9, 05K6, 05MD and 05ME. Item statement unchanged; there is no re-split note. All seven steps check against the cited statements. Steps 1–2: the 05KW chart, finite presentation of p via 01TR and 02FV, and flatness of G via the affine-chart criterion; then the projective⇒universally pure direction of the 05MD node. Step 3: h is étale, W is open and quasi-compact over S′ because q∘h=p, and the 05KR node makes E constructible. Step 4: the 05L4 forward direction plus the union definition of Ass puts every generalization of s′ in E. Step 5: the 05LW argument from spectral spaces and Topology 0903 on C=S′∖E. Steps 6–7: 05L4 again over (S′,t) with the identity neighbourhood, then 05J9(1) descent at a point where e is flat. This correctly fixes the source, which does not check that (S′,t) is elementary over (S,e(t)). No cycle: 05MD's proof does not use 05MC. The three new nodes match their sources hypothesis by hypothesis and are statement-only with correct stmt_deps. They are not duplicates: the 05ID and 05ME nodes are pointwise and the 05ME node cites the item. Tested on F=0, the identity base change and a field base. Batch-5 check: def-trf-relative-assassin is the general definition of associated points (02OJ/05AT). lem-sfb-scheme-assassin-open-constructible reaches the trace-formula chapter only through that definition. Neither is part of the trace formula or Poincaré duality, so both are accepted. No SGA citation."
+ }
+}

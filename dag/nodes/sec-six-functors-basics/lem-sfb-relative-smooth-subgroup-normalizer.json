@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-relative-smooth-subgroup-normalizer",
+ "kind": "statement",
+ "title": "Relative representability of the normalizer of a smooth connected subgroup",
+ "statement": "Let $A$ be a commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. A group scheme over $S$ is a group object in schemes over $S$ [def-pc-scheme], with the multiplication, identity and inverse diagrams of [def-sc-group-scheme] over this base. Let $H\\hookrightarrow G$ be a finitely presented closed subgroup [def-weil-closed-immersion] which is smooth over $S$ with nonempty geometrically connected fibres [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure of each residue field. For each $S$-scheme $W$, define $N(W)=\\{g\\in G(W):c_g(H_W)=H_W\\}$, where $H_W=H\\times_SW$, $c_g$ is conjugation by $g$, and equality is equality of closed subgroup schemes, or equivalently equality of subgroup functors on every $W$-scheme. Then $N$ is represented by a finitely presented closed subgroup scheme $N_G(H)\\hookrightarrow G$. There is a canonical closed inclusion $H\\hookrightarrow N_G(H)$. For every morphism $S\\prime\\to S$, the natural map $N_G(H)\\times_SS\\prime\\to N_{G_{S\\prime}}(H_{S\\prime})$ is an isomorphism. No flatness or smoothness assertion about $N_G(H)$ is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Proposition 2.1.6, printed pp.61--62; the normalizer functor and its closed finite-presentation representability. Base change follows from the displayed functor on all test schemes. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative group-scheme assertion."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-connected-subgroup-noetherian-model] to obtain $A_0,G_0,H_0$ and the compatible base-change identifications. Work first over $S_0=\\operatorname{Spec}A_0$; its group $G_0$ is affine and Noetherian. We construct the normalizer on all $S_0$-scheme tests, including non-Noetherian tests. Step 7 then pulls this construction back to $S$, so this reduction does not assume that the normalizer functor commutes with limits or is already represented.",
+   "uses": [
+    "lem-sfb-smooth-connected-subgroup-noetherian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.6, proof, p.62, noetherian reduction; Proposition 2.1.2, proof, p.57, descent of group data."
+   }
+  },
+  {
+   "text": "Use the identity section $e:S_0\\to H_0$. Write $H_0=\\operatorname{Spec}B_0$ and $J=\\ker(e^*:B_0\\to A_0)$. By [lem-sfb-smooth-section-finite-jets], $D_n=\\operatorname{Spec}(B_0/J^{n+1})$ is finite locally free for every $n\\geq0$ and is the corresponding infinitesimal neighborhood after any base change. By [lem-sfb-smooth-section-universal-jet-density], if a closed subscheme of $(H_0)_T$ contains all $(D_n)_T$, it equals $(H_0)_T$, for every $S_0$-scheme $T$. The hypotheses hold because $H_0$ is affine, smooth and finitely presented, $A_0$ is Noetherian, and the fibers of $H_0$ are nonempty and geometrically connected. No assertion that $D_n$ is a subgroup is needed.",
+   "uses": [
+    "lem-sfb-smooth-section-finite-jets",
+    "lem-sfb-smooth-section-universal-jet-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.6, proof, pp.62--63, neighborhoods of a section and their universal weak schematic density."
+   }
+  },
+  {
+   "text": "For each $n$, restrict the two conjugation families to $D_n\\times_{S_0}G_0$: they send $(h,g)$ to $ghg^{-1}$ and $g^{-1}hg$, respectively. These are morphisms by the multiplication and inverse morphisms in the group-object structure specified in the statement: compose $m$ twice with the projections and the inverse of the $G_0$ coordinate. Apply [lem-sfb-finite-locally-free-source-factorization-locus] with $D=D_n$, parameter scheme $P=G_0$, affine target $X=G_0$, and finitely presented closed target $Z=H_0$. It gives finitely presented closed subschemes $L_n^+,L_n^-\\hookrightarrow G_0$. On every test $t:T\\to G_0$, membership in $L_n^+$ means that conjugation by $t$ on $(D_n)_T$ factors through $(H_0)_T$, and membership in $L_n^-$ means the same for conjugation by $t^{-1}$.",
+   "uses": [
+    "lem-sfb-finite-locally-free-source-factorization-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.2, proof, p.60, Hom-functor coefficient equations pulled back along the orbit map; Proposition 2.1.6, proof, p.62."
+   }
+  },
+  {
+   "text": "Write $G_0=\\operatorname{Spec}C_0$. By [def-weil-closed-immersion], write $L_n^\\pm=\\operatorname{Spec}(C_0/K_n^\\pm)$ and set $I=\\sum_{n\\geq0}(K_n^++K_n^-)$ and $N_0=\\operatorname{Spec}(C_0/I)$. An affine test factors through $N_0$ exactly when its ring map kills every $K_n^\\pm$. For arbitrary tests this equivalence is checked on an affine open cover: the local quotient factorizations are unique and agree on overlaps, so they glue by [lem-weil-pbc-scheme-morphism-gluing]. For a test point $g\\in G_0(T)$, the inverse image of $(H_0)_T$ under each map $c_g,c_{g^{-1}}:(H_0)_T\\to(G_0)_T$ is closed by [lem-weil-pbc-closed-immersion-base-change]. Step 2 says that it is the whole source precisely when it contains every $(D_n)_T$. Thus $N_0(T)$ consists exactly of $g$ satisfying both $c_g((H_0)_T)\\subseteq(H_0)_T$ and $c_{g^{-1}}((H_0)_T)\\subseteq(H_0)_T$. Applying $c_g$ to the second containment gives the reverse of the first. Hence $N_0$ represents the equality normalizer on all tests.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.6, proof, p.62, intersection of finite-source containment conditions; two-sided containment identifies the equality normalizer without using an endomorphism-surjectivity theorem."
+   }
+  },
+  {
+   "text": "Since $G_0$ is Noetherian, [pqf-lem-affine-open-locnoeth] makes $C_0$ a Noetherian ring. By [def-weil-pbc-noetherian-ring], $I$ is finitely generated. The morphism $G_0\\to S_0$ is locally of finite presentation, so [lem-weil-pbc-lfp-affine-opens-finite-presentation] gives that $C_0$ is a finitely presented $A_0$-algebra. Apply [lem-weil-pbc-finite-presentation-quotient-fg-ideal] to $C_0$ and $I$: $C_0/I$ is finitely presented over $A_0$. Thus $N_0\\to S_0$ is finitely presented. Also $C_0/I$ is presented over $C_0$ by the finitely many generators of $I$, with zero algebra generators, so $N_0\\hookrightarrow G_0$ is a finitely presented closed immersion.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-quotient-fg-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.2, proof, p.57, finite presentation over the noetherian model; Stacks 01OW (properties-lemma-locally-Noetherian), 00FM (algebra-section-Noetherian), 01TQ (morphisms-lemma-locally-finite-presentation), and 00F3 (algebra-definition-finite-type)."
+   }
+  },
+  {
+   "text": "For every $T$, equality $c_g((H_0)_T)=(H_0)_T$ is preserved under multiplication and inverse: $c_{gg'}=c_g\\circ c_{g'}$, $c_1=1$, and $c_{g^{-1}}=c_g^{-1}$. These identities show that multiplication, identity and inverse of $G_0$ restrict to the represented subfunctor $N_0$. The Yoneda bijection [lem-pc-yoneda] turns these restrictions into scheme morphisms; their composites satisfy the group diagrams because their composites in $G_0$ do, and a closed immersion is monic by [lem-pc-proper-monomorphism-closed]. For every $h\\in H_0(T)$, subgroup closure gives $hH_0(U)h^{-1}=H_0(U)$ for every $T$-scheme $U$, so $H_0\\to G_0$ factors canonically through $N_0$. If $H_0=\\operatorname{Spec}(C_0/K)$, this factorization says $I\\subseteq K$. Its map $C_0/I\\to C_0/K$ is surjective, so [def-weil-closed-immersion] makes $H_0\\to N_0$ closed. This proves the closed subgroup and inclusion assertions.",
+   "uses": [
+    "lem-pc-yoneda",
+    "lem-pc-proper-monomorphism-closed",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.6, p.61, normalizer as a closed subgroup; group-object operations and the canonical subgroup inclusion checked on all test schemes. Yoneda: Stacks 001P."
+   }
+  },
+  {
+   "text": "Define $N=N_0\\times_{S_0}S$. It is closed in $G$ by [lem-weil-pbc-closed-immersion-base-change]. On affine coordinates, [lem-weil-pbc-finite-presentation-base-change-composition](1) preserves the finite presentations of both $N_0\\to S_0$ and $N_0\\to G_0$. The group operations and $H\\to N$ are the base changes of those of Step 6. For any $S$-scheme $T$, its base change from the model satisfies $(H_0)_T=H_T$ and $(G_0)_T=G_T$, with identical conjugation operations. Thus Step 4 identifies $N(T)$ with the functor in the statement. For any $S'\\to S$ and any $S'$-scheme $T$, exactly the same identifications give $(N\\times_SS')(T)=N(T)=N_{G_{S'}}(H_{S'})(T)$. These bijections are natural. Yoneda [lem-pc-yoneda], or evaluation of these inverse transformations on the identity points, gives the claimed canonical isomorphism, commuting with the inclusions in $G_{S'}$. This verifies arbitrary, possibly nonflat and nonreduced, base change.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-pc-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.6, proof, pp.62--63, construction on all tests and return from the noetherian model; Stacks 01QR, 05G5 and 001P for base change and Yoneda."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-connected-subgroup-noetherian-model",
+  "lem-sfb-smooth-section-finite-jets",
+  "lem-sfb-smooth-section-universal-jet-density",
+  "lem-sfb-finite-locally-free-source-factorization-locus",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-lem-affine-open-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-quotient-fg-ideal",
+  "lem-pc-yoneda",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-weil-pbc-finite-presentation-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Proposition 2.1.6, proof pp.62--63, using the finite-source construction of Proposition 2.1.2 and Lemma 2.1.3, pp.58--60. Online text read; local archival document WANTED. Explicit two-sided-conjugation assembly by Q10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-24T08:46:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer|transporter",
+   "results": "{\"t\": \"2026-10-24T08:46:00Z\", \"tool\": \"grep\", \"query\": \"normalizer|transporter\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of a normalizer for smooth connected subgroup schemes over a base ring",
+   "results": "{\"t\": \"2026-10-24T08:46:00Z\", \"tool\": \"leansearch\", \"query\": \"Representability of a normalizer for smooth connected subgroup schemes over a base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.normalizer\", \"Subgroup.setNormalizer\", \"AddSubgroup.normalizer\", \"LieSubalgebra.normalizer\", \"AddSubgroup.setNormalizer\", \"Subgroup.le_normalizer\", \"NormalizerCondition\", \"Subgroup.mem_normalizer_iff'\"], \"digest\": \"bca396b89220388d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer of a smooth geometrically connected closed subgroup in a smooth affine group scheme is represented by a closed subgroup of finite presentation",
+   "results": "{\"t\": \"2026-10-24T08:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"The normalizer of a smooth geometrically connected closed subgroup in a smooth affine group scheme is represented by a closed subgroup of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.normalCore_isClosed\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"instNormalCommutatorClosure\", \"Subgroup.is_normal_topologicalClosure\", \"Subgroup.normalClosure_normal\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"Subgroup.Normal.pathComponentOne\", \"CategoryTheory.Subgroupoid.IsNormal.vertexSubgroup\"], \"digest\": \"5fa63821fddb8bfc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transporter and scheme theoretic normalizer of a smooth closed subgroup with connected geometric fibers are finitely presented closed subschemes",
+   "results": "{\"t\": \"2026-10-24T08:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"The transporter and scheme theoretic normalizer of a smooth closed subgroup with connected geometric fibers are finitely presented closed subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"8a0972da39a3e2d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer|transporter",
+   "results": "{\"t\": \"2026-10-24T09:18:22Z\", \"tool\": \"grep\", \"query\": \"normalizer|transporter\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract and topological normalizers or normalization of schemes do not represent this relative subgroup functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalizer functor of a smooth connected closed subgroup scheme over a commutative ring is representable",
+   "results": "{\"t\": \"2026-10-24T09:18:23Z\", \"tool\": \"leansearch\", \"query\": \"The normalizer functor of a smooth connected closed subgroup scheme over a commutative ring is representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.normalizer\", \"Subgroup.normalizer\", \"LieSubmodule.normalizer\", \"AddSubgroup.normalizer\", \"Subgroup.setNormalizer\", \"Subgroup.le_normalizer\", \"LieSubalgebra.coe_normalizer_eq_normalizer\", \"AddSubgroup.normalizer_eq_top\"], \"digest\": \"d2c4be0d4e1642b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract and topological normalizers or normalization of schemes do not represent this relative subgroup functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalizer of a smooth geometrically connected closed subgroup scheme is a finitely presented closed subgroup and commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T09:18:24Z\", \"tool\": \"leanfinder\", \"query\": \"A normalizer of a smooth geometrically connected closed subgroup scheme is a finitely presented closed subgroup and commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"Subgroup.normalCore_isClosed\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Subgroup.normalClosure_normal\", \"Subgroup.Normal.pathComponentOne\", \"instNormalCommutatorClosure\", \"CategoryTheory.Subgroupoid.IsNormal.vertexSubgroup\", \"Subgroup.is_normal_topologicalClosure\"], \"digest\": \"f2417600586ede70\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract and topological normalizers or normalization of schemes do not represent this relative subgroup functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-adjoint-rank-one-flag-curve",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, construction of B=P_G(lambda), its self-normalizer and G/B, before trivializing the pointed curve. This does not assert a relative matrix-model isomorphism. Supporting input: Proposition 4.2.7, proof, p.123: construct the closed normalizer of B before proving B=N_G(B).",
+   "via": [
+    "lem-sfb-relative-adjoint-rank-one-flag-curve",
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-smooth-subgroup-normalizer",
+  "worker": "stage1",
+  "summary": "Q10: read Conrad Proposition 2.1.6 and the finite-source coefficient construction. Split the identity-jet proof into finite jets, universal density, finite-source closed factorization and a simultaneous noetherian group/subgroup model. The proof uses both conjugation directions, explicit affine ideal intersection, and Yoneda; retains all original hypotheses and arbitrary base change.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), the existing alteration/moduli/root-theoretic dependency chain recorded in blueprint.from.place: normalizer representability used before proving a relative parabolic is self-normalizing. This split supplies that precise supporting input and does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic affine-scheme, finite-presentation or Yoneda tool used exactly as its statement in the cited proof step; it supplies no alternative route for the unit."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic affine-scheme, finite-presentation or Yoneda tool used exactly as its statement in the cited proof step; it supplies no alternative route for the unit."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic affine-scheme, finite-presentation or Yoneda tool used exactly as its statement in the cited proof step; it supplies no alternative route for the unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-quotient-fg-ideal",
+    "why": "Generic affine-scheme, finite-presentation or Yoneda tool used exactly as its statement in the cited proof step; it supplies no alternative route for the unit."
+   },
+   {
+    "node": "lem-pc-yoneda",
+    "why": "Generic affine-scheme, finite-presentation or Yoneda tool used exactly as its statement in the cited proof step; it supplies no alternative route for the unit."
+   },
+   {
+    "node": "lem-pc-proper-monomorphism-closed",
+    "why": "Generic affine-scheme, finite-presentation or Yoneda tool used exactly as its statement in the cited proof step; it supplies no alternative route for the unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic affine-scheme, finite-presentation or Yoneda tool used exactly as its statement in the cited proof step; it supplies no alternative route for the unit."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing of unique quotient factorizations over an affine cover of a test scheme; no change of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-quotient-fg-ideal",
+  "lem-pc-yoneda",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-d0633cbf9",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-d0633cbf9 (reviewer sub-agent of L); spot-checked: Read Conrad's Reductive group schemes from the public PDF (not in literature/): Prop 2.1.2 and Lemma 2.1.3 on pp.56-60, Prop 2.1.6, Def 2.1.7 and Example 2.1.10 on pp.61-63. The item statement is unchanged from the base and matches Prop 2.1.6 with Y=Y'=H over an affine base: equality normalizer, no flatness asserted. Steps: (1) noetherian model, with the transfer back done on all tests in step 7. (2) Finite jets and universal density: all hypotheses hold for H_0. (3) Factorization loci for the conjugations by g and by g^-1, with D_n finite locally free, P=X=G_0 affine fp, Z=H_0 fp closed. (4) I is the sum of the ideals K_n^±. Density turns jet containment into c_g(H_T)⊆H_T, the g^-1 containment gives equality, and non-affine tests glue. (5) C_0 Noetherian, so I is finitely generated and C_0/I is fp over A_0. (6) Subgroup structure by Yoneda, closed immersions are monic, and H_0⊆N_0 because I⊆K. (7) Base change to S and S' by Yoneda. Each cited statement says what is used. All off-unit citations are Mathlib leaves declared in tool_uses; I accept them. New nodes: all four statements are true and self-contained, statement-only and unsplit, with searches recorded. The noetherian model holds by EGA IV 17.8.7, 9.7.9 and 8.3.4. The finite jets hold for any ring since B=A⊕J. Universal density holds for arbitrary T: Conrad proves the local case on p.63, and I extended it by localizing at primes of R and covering T by affines. Small cases: A^1, G_m, and a disconnected counterexample showing connectedness is needed. The factorization locus is pp.59-60. Note: lem-pc-hilb-containment-locus (Stacks 0B97) is a near-duplicate of lem-sfb-finite-locally-free-source-factorization-locus but assumes constant degree and has no fp clause, so the new node stays; its stage-1 split should cite that node or lem-pc-affine-containment-ideal. No duplicates were found for the other three nodes. Minor: the report says source.place was corrected to include p.63, but only proof_origin.place was changed; this is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeSmoothSubgroupNormalizer",
+  "declaration": "AlgebraicGeometry.exists_relative_smooth_subgroup_normalizer",
+  "declarations": [
+   "AlgebraicGeometry.IsRelativeGroupSchemeNormalizer",
+   "AlgebraicGeometry.exists_relative_smooth_subgroup_normalizer"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeSmoothSubgroupNormalizer.lean",
+  "statement": "theorem exists_relative_smooth_subgroup_normalizer (A : Type u) [CommRing A] (G H : Grp (Over (Spec (.of A)))) [IsAffine G.X.left] [Smooth G.X.hom] [LocallyOfFinitePresentation G.X.hom] (i : H ⟶ G) [IsClosedImmersion i.hom.hom.left] [LocallyOfFinitePresentation i.hom.hom.left] [Smooth H.X.hom] [GeometricallyConnected H.X.hom] : ∃ (N : Grp (Over (Spec (.of A)))) (j : N ⟶ G), IsClosedImmersion j.hom.hom.left ∧ LocallyOfFinitePresentation j.hom.hom.left ∧ LocallyOfFinitePresentation N.X.hom ∧ QuasiCompact N.X.hom ∧ QuasiSeparated N.X.hom ∧ IsRelativeGroupSchemeNormalizer i j ∧ (∃! h : H ⟶ N, IsClosedImmersion h.hom.hom.left ∧ h ≫ j = i) ∧ ∀ (S' : Scheme.{u}) (f : S' ⟶ Spec (.of A)), IsRelativeGroupSchemeNormalizer ((Over.pullback f).mapGrp.map i) ((Over.pullback f).mapGrp.map j) ∧ ∀ (N' : Grp (Over S')) (j' : N' ⟶ (Over.pullback f).mapGrp.obj G), IsClosedImmersion j'.hom.hom.left → IsRelativeGroupSchemeNormalizer ((Over.pullback f).mapGrp.map i) j' → ∃! e : (Over.pullback f).mapGrp.obj N ≅ N', e.hom ≫ j' = (Over.pullback f).mapGrp.map j",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper predicate spells out this node’s normalizer functor on all scheme tests. The base-change clause gives its pullback representative and the unique comparison isomorphism over the ambient group to any closed representative."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a37b5fe50",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Only the lean field changed; single module, lean.statement verbatim. Hypotheses match Conrad Prop 2.1.6 / node: affine smooth lfp G over Spec A (fp via affine/affine), closed fp subgroup i, Smooth H, Mathlib GeometricallyConnected (= geometrically ConnectedSpace, includes nonempty fibres). Helper IsRelativeGroupSchemeNormalizer is a real Prop: g factors through j iff c_g(H(U)) = H(U) for all U over W (subgroup-functor equality, nonreduced tests included). Conclusions: closed fp group embedding j, N fp over S, unique closed H→N over G, and for every S'→S the pullback of j represents the pulled-back normalizer plus unique Grp iso to any closed representative; all true and non-vacuous. Universe u throughout; zero ring, H=G, nonflat S' covered. Field-based RankOneRootInterfaces.normalizer is a different notion; no other duplicate. All 8 stmt_deps existing Mathlib def records; no theorem/missing deps. Docstrings carry source, blueprint and 7-step plan; sorry only; report has both sections. Minor: redundant lfp on G (implied by Smooth). No compile run; no fixes."
+ }
+}

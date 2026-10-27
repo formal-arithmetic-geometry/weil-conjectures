@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-rational-affine-adjunction-calculus",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-affine-space-rational-induction",
+   "place": "Induction proof, steps 1--7, corresponding separate ambient calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open and composed compact-support adjunctions on the rational localizing categories",
+ "statement": "Fix rational coefficients E or the specified algebraic closure over a positive-characteristic field k with characteristic different from ell [sk-def-sfb-dc-setting; sk-def-sfb-condensed-ring; sk-def-sfb-qlbar-condensed]. On the literal Loc(Dbc) categories [sk-def-localizing-closure; sk-def-sfb-constructible], ordinary derived inverse image of an open immersion is right adjoint to its compactification lower shriek. Given compact-support adjunctions for composable separated finite-type k-morphisms f and g with specified ambient right functors Hf and Hg, their composite has ambient right functor Hg followed by Hf, for any compactification of f followed by g. An isomorphism of the displayed ambient functor transports this property.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+  "place": "First paragraph (composition and induction); second paragraph (preservation)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "def-sfb-rational-localizing-twist",
+  "def-sfb-rational-tate-pullback-comparison",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "def-sfb-module-upper-star"
+ ],
+ "proof": [
+  {
+   "text": "For rational coefficients identify Loc(Dctf) with Loc(Dbc). The open-extension/restriction adjunction and the trivial-open compactification comparison give the open result; compactification coherence handles the chosen compactification.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-sf-mate-open-restriction",
+    "det-sf-comp-coherence-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+    "place": "Expanded induction proof, geometry, tensor compatibility or composition step."
+   }
+  },
+  {
+   "text": "Compose the two given restricted adjunctions. The localizing lower-shriek composition isomorphism compares their left functor with the specified compactification of the composite; whiskering the given right-functor comparisons identifies the composed right functor. Whiskering also transports any ambient isomorphism.",
+   "uses": [
+    "lem-sfb-localizing-lower-shriek-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+    "place": "Expanded induction proof, geometry, tensor compatibility or composition step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-sf-mate-open-restriction",
+  "det-sf-comp-coherence-cocycle",
+  "lem-sfb-localizing-lower-shriek-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+  "place": "Separate part of the published affine-space induction argument, E1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor powers of a locally free rank one sheaf commute with inverse image and preserve bounded constructible derived objects",
+   "results": "8 hits, including SheafOfModules.freeFunctorCompPullbackIso and the sheaf inverse-image exactness instances.",
+   "date": "2026-10-24",
+   "verdict": "No direct match to the rational internal-module tensor calculus or restricted compact-support adjunction. Reuse the underlying categorical APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorRight, CategoryTheory.Adjunction",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "No packaged affine-space induction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorRight|Tate|constructible; AffineSpace.sumIso; leftDerivedUpperStarComp",
+   "results": "Mathlib affine-space sum/reindex isomorphisms; source derived pullback composition; Sheaf.SixFunctors.FieldTensor.tensorClosureRational and the internal/sectionwise tensor comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the affine-space coordinate and derived categorical APIs; no full induction theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpaceRationalInduction",
+  "date": "2026-10-24",
+  "group": "E1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-affine-space-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalAffineAdjunctionCalculus",
+  "file": "lean/Sheaf/Paper/RationalAffineAdjunctionCalculus.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalCompactSupportAdjunction_comp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.RationalCompactSupportAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.RationalCompactSupportAdjunction.ofIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalOpenCompactSupportAdjunction"
+  ],
+  "statement": "theorem rationalCompactSupportAdjunction_comp (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ)) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y Z : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] [LocallyOfFiniteType g] [QuasiCompact g] [IsSeparated g] (bf : Compactification f) (bg : Compactification g) (bfg : Compactification (f ≫ g)) (Hf : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (RationalP1.coefficient ℓ c).X Y)) ⥤ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (RationalP1.coefficient ℓ c).X X))) (Hg : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj (RationalP1.coefficient ℓ c).X Z)) ⥤ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (RationalP1.coefficient ℓ c).X Y))) (hf : RationalCompactSupportAdjunction (RationalP1.coefficient ℓ c).X bf Hf) (hg : RationalCompactSupportAdjunction (RationalP1.coefficient ℓ c).X bg Hg) : RationalCompactSupportAdjunction (RationalP1.coefficient ℓ c).X bfg (Hg ⋙ Hf)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6802c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261024T214858-L-725923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6802c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261024T214858-L-725923",
+  "kind": "interface",
+  "note": "independent cc review: rationalAffineTensorCalculus (sorry) vs node lem-sfb-rational-affine-tensor-calculus and the RationalP1 line, constructibility and twist definitions; item induction vs det-cor-affine-space-rational-induction; importer RestrictionLocal compiled with the delivered modules (all compiled, exit 0)"
+ }
+}

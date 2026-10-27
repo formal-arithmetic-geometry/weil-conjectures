@@ -25,7 +25,7 @@
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
     "place": "Step 1: geometric fibre and compactification"
    }
   },
@@ -37,7 +37,7 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
     "place": "Step 2: finite coefficients"
    }
   },
@@ -52,7 +52,7 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
     "place": "Step 3: integral coefficients"
    }
   },
@@ -66,12 +66,12 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
     "place": "Step 4: rational coefficients"
    }
   },
   {
-   "text": "For Qbar, finite type gives Noetherianness of X, Y and the geometric fibre, and finite dimension of X, Y, Spec Omega and the geometric fibre. Base change supplies finite type of the fibre projection; the purity setting gives invertibility of the coefficient prime on all four schemes. Specialize qbarCompactSupportBaseChange to c, c.baseChange s and the literal proper/open squares. Its first conclusion supplies Nonempty of the normalized exchange model, without choosing a model as data. For every model D and object K, project its descended-component IsIso conclusion. These are exactly the two conclusions of CompactFiberQbarFormula. All four proofs retain the given canonical maps and therefore apply to zero inputs, empty fibres and identity squares without exceptional choices.",
+   "text": "For Qbar, finite type gives Noetherianness of X, Y and the geometric fibre, and finite dimension of X, Y, Spec Omega and the geometric fibre. Base change supplies finite type of the fibre projection; the purity setting gives invertibility of the coefficient prime on all four schemes. Specialize qbarCompactSupportBaseChange to c, c.baseChange s and the literal proper/open squares. Its first conclusion supplies Nonempty of the normalized exchange model, without choosing a model as data. For every model D and object K, project its descended-component IsIso conclusion. These are exactly the two conclusions of CompactFiberQbarFormula. All four proofs retain the given canonical maps and therefore apply to zero inputs, empty fibres and identity squares without exceptional choices. In Lean, introduce the conjunction first, prove its model-existence component, and then introduce D before projecting the descended-component conclusion. This keeps elaboration from expanding the large dependent exchange model while checking a single tuple term.",
    "uses": [
     "def-pur-conventions",
     "def-cbc-compact-support-square",
@@ -82,7 +82,7 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
     "place": "Step 4 and Step 5: algebraically closed coefficients and canonicality"
    }
   }
@@ -103,8 +103,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
-  "place": "E7 stage-3 specialization of the published exchange theorems, by coefficient stage"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-cfiber-stalk.proof.md",
+  "place": "V9 restoration of the existing four coefficient-stage exchange specializations; Qbar conjunction checked one component at a time, 2026-10-23"
  },
  "mathlib_searches": [
   {
@@ -183,7 +183,18 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "split_report": {
@@ -240,12 +251,45 @@
   "note": "The four coefficient clauses are compactFiber_finite, _integral, _rational and _qbar. Each states invertibility of the specified compactification exchange over the geometric point, the stalk/fibre reading fixed by Step 1 of this node. Integral input is the original detailed finite-Tor object transported by integralDetailedTransport. Rational input is the original raw sfRationalConstructibleCategory, and its map is actual localization of the completed arrow. The Qbar clause uses the published unit/scalar-normalized common-stage model and asserts its existence; no model is an extra hypothesis. Helpers construct only the literal proper/open fibre squares and specialize existing canonical maps. All chapter hypotheses are retained explicitly by include; no new coefficient category, arbitrary comparison or proof is introduced."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E7",
+  "group": "V9",
   "result": "pass",
-  "landing": "20261020T051221-L-1598043",
-  "kind": "proof"
+  "landing": "20261023T152118-L-449756",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\pi:E\\to B$ be a\nseparated finite-type\nmorphism, let $K\\in D^b_{ctf}(E,\\Lambda)$, and let\n$\\bar b\\to B$ be a geometric\npoint with the fiber $E_{\\bar b}$. The canonical comparison\n\n$$\n(R\\pi_!K)_{\\bar b}\\;\\xrightarrow{\\ \\sim\\ }\\;R\\Gamma_c(E_{\\bar b},K|_{E_{\\bar b}})\n$$\n\nis an isomorphism.",
+  "proof": [
+   {
+    "text": "*At $\\Lambda=A$.* The stalk is the filtered-neighborhood fiber of [def-weil-pbc-geometric-stalks].\nChoose a compactification $c=(j,p)$ of $\\pi$\n([def-compact-support-direct-image-detailed]); its base change at\n$\\bar b$ is a compactification of $E_{\\bar b}\\to\\bar b$. The\ncompatibility of geometric stalks with extension by zero and with the\nproper direct image ([thm-cbc-finite-level-proetale] for the\ncompact-support functors, [cor-weil-pbc-geometric-fiber-finite]\nfor the proper direct image of the [def-weil-pbc-etale-origin-witness]\nrepresentative) gives the displayed comparison, the witnesses being\ncompatible by [def-compact-support-direct-image-detailed].",
+    "uses": [
+     "def-weil-pbc-geometric-stalks",
+     "def-compact-support-direct-image-detailed",
+     "thm-cbc-finite-level-proetale",
+     "cor-weil-pbc-geometric-fiber-finite",
+     "def-weil-pbc-etale-origin-witness"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*At the other coefficient rings $\\Lambda\\neq A$ of [def-pur-conventions].*\nHere $K$ lies in the condensed category $\\Dbc(E,\\Lambda)$. The stalk at $\\bar b$ is the inverse image along\n$\\bar b\\to B$, and $R\\Gamma_c(E_{\\bar b},-)$ is the compact-support direct\nimage along the base change $E_{\\bar b}\\to\\bar b$ of $\\pi$. The displayed map\nis therefore the compact-support base change morphism of\n[sk-def-sfb-shriek-base-change-morphism] for the cartesian square formed by\n$\\pi$ and $\\bar b\\to B$, with the base-changed compactification. It is an\nisomorphism by [sk-thm-sfb-shriek-base-change] for the rational rings and by\n[thm-cbc-complete-proetale] for the ring of integers.",
+    "uses": [
+     "def-pur-conventions",
+     "sk-def-sfb-shriek-base-change-morphism",
+     "sk-thm-sfb-shriek-base-change",
+     "thm-cbc-complete-proetale"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

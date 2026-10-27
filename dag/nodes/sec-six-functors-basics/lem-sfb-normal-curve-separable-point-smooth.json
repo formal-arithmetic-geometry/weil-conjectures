@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-normal-curve-separable-point-smooth",
+ "kind": "statement",
+ "title": "Normal curve points with separable residue field are smooth",
+ "statement": "Let $k$ be a field and $X$ a curve over $k$ [def-pc-curve], so $X$ is integral, separated and of finite type over $k$ and has dimension one. Let $x\\in X$ be a closed point with residue field $\\kappa(x)$ [def-weil-residue-field]. Suppose $\\mathcal O_{X,x}$ is an integrally closed domain and $\\kappa(x)/k$ is finite separable [def-weil-pbc-separable-algebraic-extension]. Then $\\mathcal O_{X,x}$ is a discrete valuation ring [def-sc-discrete-valuation-ring], and the structure morphism $X\\to\\operatorname{Spec}k$ is smooth at $x$ [def-sbc-smooth-morphisms], meaning that some open neighbourhood of $x$ is smooth over $k$. The field $k$ need not be perfect.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B8Y, lemma-regular-point-on-curve: equivalence of normality, the DVR property and regularity at a closed point, and equivalence with smoothness when the residue field is separable over the base."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-curve",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-sbc-smooth-morphisms",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-curve-closed-point-affine-local-model] to the given curve and closed point. Choose its affine neighbourhood $U$, and put $S=\\Gamma(U,\\mathcal O_X)$, $R=\\mathcal O_{X,x}$. It gives a maximal ideal $\\mathfrak q$, a finite type $k$-algebra $S$, and a local $k$-algebra isomorphism $S_{\\mathfrak q}\\cong R$, with both local rings Noetherian domains of dimension one.",
+   "uses": [
+    "lem-sfb-curve-closed-point-affine-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B8Y, lemma-regular-point-on-curve, opening sentence of proof, expanded by Tag 0A21, lemma-dimension-locally-algebraic (2),(3); affine chart and Noetherianity details recorded in the repair report."
+   }
+  },
+  {
+   "text": "The hypothesis says that $R$ is integrally closed, so it is normal. Its Noetherian local domain and dimension-one hypotheses were obtained in step 1. Apply [lem-sc-normal-dim1-dvr] to conclude that $R$ is a discrete valuation ring. Apply independently [lem-weil-pbc-regular-local-dim-one-iff-normal] to the same ring to conclude that $R$ is regular. The local-ring isomorphism of step 1 transfers regularity to $S_{\\mathfrak q}$.",
+   "uses": [
+    "lem-sc-normal-dim1-dvr",
+    "lem-weil-pbc-regular-local-dim-one-iff-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, (5) implies (1) and (3), as used in Tag 0B8Y"
+   }
+  },
+  {
+   "text": "The residue-field isomorphism over $k$ in [lem-sfb-curve-closed-point-affine-local-model] identifies $\\kappa(\\mathfrak q)/k$ with the assumed finite separable extension $\\kappa(x)/k$. Thus [lem-sfb-regular-separable-affine-smooth-neighbourhood] applies to $f$, $U$, $S$ and $\\mathfrak q$, using regularity from step 2. It gives an open subscheme $V\\subseteq X$ containing $x$ for which $f|_V$ is smooth. This is the required second conclusion; neither application assumes $k$ perfect.",
+   "uses": [
+    "lem-sfb-curve-closed-point-affine-local-model",
+    "lem-sfb-regular-separable-affine-smooth-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TV, lemma-separable-smooth, implication (2) to (1), and Tag 00TB, definition-smooth-at-prime; geometric interpretation via Schemes Tag 01I3, lemma-standard-open-affine, and Morphisms Tag 01V6, lemma-smooth-characterize."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-curve-closed-point-affine-local-model",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-sfb-regular-separable-affine-smooth-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B8Y, lemma-regular-point-on-curve, proof: Noetherian local dimension one, Algebra 00PD, and Algebra 00TV for the separable residue field case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normal algebraic curve over a field is smooth at a closed point whose residue field is separable over the ground field",
+   "results": "8 hits; Algebra.IsSmoothAt, Algebra.isUnramifiedAt_iff_map_eq, Algebra.smoothLocus, Algebra.isSeparable_residueField_iff, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, WeierstrassCurve.IsGoodReduction, instIsSeparableResidueFieldOfQuotientIdeal, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt defines the smooth locus, and formally smooth field results do not prove smoothness of a normal local curve algebra at a separable closed point. Elliptic good reduction has different hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsRegular\", \"IsSmooth\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt defines the smooth locus, and formally smooth field results do not prove smoothness of a normal local curve algebra at a separable closed point. Elliptic good reduction has different hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "separable.*smooth|smooth.*separable|regular.*smooth",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt defines the smooth locus, and formally smooth field results do not prove smoothness of a normal local curve algebra at a separable closed point. Elliptic good reduction has different hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local ring of finite type over a field at a separable residue field point is smooth",
+   "results": "8 hits; Algebra.Smooth.of_isLocalization_Away, Algebra.FormallySmooth.of_perfectField, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, AlgebraicGeometry.IsSmooth.recOn, Algebra.Smooth.mk, Algebra.IsSmoothAt, RingHom.smooth_def, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt defines the smooth locus, and formally smooth field results do not prove smoothness of a normal local curve algebra at a separable closed point. Elliptic good reduction has different hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type curve with a discrete valuation local ring at a separable closed point is smooth at that point",
+   "results": "8 hits; WeierstrassCurve.IsGoodReduction, WeierstrassCurve.IsMinimal, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.IsSmoothAt, WeierstrassCurve.isGoodReduction_iff, WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction, WeierstrassCurve.IsGoodReduction.goodReduction, WeierstrassCurve.valuation_Δ_aux",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt defines the smooth locus, and formally smooth field results do not prove smoothness of a normal local curve algebra at a separable closed point. Elliptic good reduction has different hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "separable.*smooth|smooth.*separable|regular.*smooth",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elliptic reduction, separability of residue fields, or smoothness definitions, not normal-curve smoothness at a finite separable closed point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal algebraic curve over a field is smooth at a closed point whose residue field is separable over the ground field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.isSeparable_residueField_iff\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances\", \"type\": \"∀ {A : Type u_2} {B : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  {q : Ideal B} [inst_3 : q.LiesOver p] [inst_4 : p.IsMaximal] [inst_5 : q.IsMaximal],\\n  Algebra.IsSeparable p.ResidueField q.ResidueField ↔ Algebra.IsSeparable (A ⧸ p) (B ⧸ q)\", \"doc\": \"For maximal ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{q} \\\\subseteq B$ lying over each other, the separability of their residue fields as algebras is equivalent to the separability of the quotie\"}\n  {\"name\": \"instIsSeparableResidueFieldOfQuotientIdeal\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances\", \"type\": \"∀ {A : Type u_2} {B : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (q : Ideal B) [inst_3 : q.LiesOver p] [inst_4 : p.IsMaximal] [inst_5 : q.IsMaximal]\\n  [Algebra.IsSeparable (A ⧸ p) (B ⧸ q)], Algebra.IsSeparable p.ResidueField q.ResidueField\", \"doc\": \"If the quotient rings $ A/p $ and $ B/q $ are separable algebras, then the residue fields of the maximal ideals $ p $ and $ q $ are also separable algebras.\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elliptic reduction, separability of residue fields, or smoothness definitions, not normal-curve smoothness at a finite separable closed point."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local ring of finite type over a field at a separable residue field point is smooth",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsRegular\", \"IsSmooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elliptic reduction, separability of residue fields, or smoothness definitions, not normal-curve smoothness at a finite separable closed point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type curve with a discrete valuation local ring at a separable closed point is smooth at that point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔ (Wei\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elliptic reduction, separability of residue fields, or smoothness definitions, not normal-curve smoothness at a finite separable closed point."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-radical-curve-normalization",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, smoothness at tame branch points with separable residue fields; apply only after proving the upstairs residue extension separable.",
+   "via": [
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-curve-separable-point-smooth",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return. Two comparable statement-only unsplit nodes carry all arguments of old steps 1--3 (2030 characters) and 5--6 (1798 characters). The item retains its exact statement and now assembles their affine local model and smooth principal-neighbourhood conclusions with the existing dimension-one normal-to-DVR and normal-to-regular criteria. No Lean written or compiled; the report preserves every old argument verbatim and audits the new work allocation.",
+  "blueprint": "Supports sk-thm-sf-ctf-stability-direct-images, proof (3), along the existing alteration/marked plurinodal reduction chain recorded in blueprint.from.via: the tame-normalization input of lem-sfb-tame-radical-curve-normalization uses smoothness at separable branch points (de Jong section 3.5). The existing ancestor query returns None; retain its inherited null from.node and the exact recorded place rather than inventing an ancestor. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic dimension-one normal local algebra criterion supplies the DVR conclusion once the new affine local model has verified its hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "why": "Generic dimension-one local regularity criterion supplies the regularity hypothesis of the new separable-residue neighbourhood lemma; the alteration unit has no replacement for this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-sc-normal-dim1-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-04dd8dec2",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-04dd8dec2 (reviewer sub-agent of L); spot-checked: This answers the released human re-split note (repair-notes, 2026-10-22). The live item still has the six-step base proof and neither new id exists live, so the delivery is not superseded. The statement is unchanged and faithful to Stacks 0B8Y (2)=>(3),(6) in the separable case. I read Stacks 0B8Y (varieties.tex 9356-9385) with its proof and Algebra 00TV. Old steps 1-3 (chart, k-algebra and residue identifications, Noetherian, closed-point dim 1 via 0A21/00OU) all reappear in lem-sfb-curve-closed-point-affine-local-model. Old steps 5-6 (finite separable to 00TV, then smooth at q, then g with S_g smooth, D(g)=Spec S_g by 01I3, smooth V over k by 01V6) all reappear in lem-sfb-regular-separable-affine-smooth-neighbourhood. Old step 4 remains the item's step 2, citing lem-sc-normal-dim1-dvr and lem-weil-pbc-regular-local-dim-one-iff-normal; both are declared tool_uses and their hypotheses are checked. The two nodes are of comparable size (about 2030 vs 1798 old characters), and the item proof is 1290 characters. Both new statements are true: they are statement-only, unsplit, self-contained, and every notion cites a definition node. Neither restates the item: node A has no normality, DVR or smoothness, and node B has no curve and assumes regularity. Edge cases: A1 at (t); a nonlinear separable point; the cusp, allowed in A and correctly not regular; the generic point, excluded; S=k[x,y] at q=(x), excluded by finiteness; the origin of A2 for B; y^2=x^p-a over F_p(a), excluded by separability. Duplicate scan over dag/nodes: the nearest candidates are closed-point-dimension-local-ring, affine-open-stalk-localization, rational-point-stalk-local-dimension, regular-local-separable-residue-smooth (ring criterion only), regular-perfect-field-smooth (perfect field) and regular-closed-point-smooth-source (algebraically closed field); none is a duplicate. Searches: Loogle, LeanFinder and grep ran; LeanSearch is recorded as unavailable. No SGA source is cited. The null blueprint from.node is inherited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.NormalSeparablePointSmooth",
+  "declaration": "AlgebraicGeometry.IsIntegralCurve.isDiscreteValuationRing_and_smoothAt_of_isIntegrallyClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NormalSeparablePointSmooth.lean",
+  "statement": "theorem IsIntegralCurve.isDiscreteValuationRing_and_smoothAt_of_isIntegrallyClosed {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsIntegralCurve f] (x : X) (hx : IsClosed ({x} : Set X)) [IsIntegrallyClosed (X.presheaf.stalk x)] (hfin : (f.residueFieldAlgebraMap x).Finite) (hsep : @Algebra.IsSeparable k (X.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra) : IsDiscreteValuationRing (X.presheaf.stalk x) ∧ ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87881b844",
+  "group": "NE",
+  "result": "pass",
+  "note": "Statement matches Stacks 0B8Y (normal ⇒ DVR, and ⇒ smooth at x when κ(x)/k is separable) and the node clause by clause: IsIntegralCurve f (integral, separated, finite type, dim 1); closed x; IsIntegrallyClosed stalk, with domain from IsVariety.isIntegral; finite and separable for the canonical residueFieldAlgebraMap; conclusion IsDiscreteValuationRing stalk ∧ ∃ open U ∋ x with Smooth (U.ι ≫ f); no perfectness assumption. Universe u is forced by Spec (.of k). lean.statement verbatim in the file; only the lean field differs from the live node; no earlier S2 run, not superseded. Docstrings carry the source place, blueprint tag and six proof steps; proof is sorry only; no new definitions. No duplicate (ReducedCurveNormalization and NormalSmooth need a perfect or algebraically closed field). Advisory only: residueFieldAlgebraMap is owned by sk-def-zeta, outside stmt_deps; it is canonical and implements def-weil-residue-field. Not recompiled per the 2026-10-21 rule; worker compile and dry run clean."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

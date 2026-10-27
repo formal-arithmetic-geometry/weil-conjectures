@@ -1,0 +1,196 @@
+{
+ "id": "def-sp-tower-shriek-data",
+ "kind": "definition",
+ "title": "Normalized interface for strict tower compact support",
+ "statement": "Fix a prime ell and a finite extension E/Q_ell. Set R_n=O_E/ell^(n+1), with the actual quotient maps, and B_n,T the constant ring sheaves on the small pro-etale site. Define S(T) as the existing category of strict semilinear module systems and D(T) as its ordinary unbounded derived category, with exact ordinary and derived evaluations. Base records the ramification equation, ideal equality, finiteness, the section-preserving presentation of coefficient towers, the existing semilinear derived calculus, and K-injective resolutions. Geometry records the fixed constant-coefficient coordinates of that calculus, retaining ordinary and derived adjunctions and their normalized evaluation equations. Open records the exact ordinary extension by zero with its normalized adjunction. Operations collects geometric operations, termwise composition and the open tensor mate; OpenExchange records the open base-change isomorphism fixed by its inverse adjunction mate. Define compactification F=Rp_* j_!, its proper-counit/open-tensor projection, its proper-square/open-mate exchange, and its finite evaluation isomorphism. Origin retains one bounded-below etale antecedent at a finite level. GoodLevel is the published finite-Tor constructibility predicate after canonical quotient-ideal equality transport. LocalizationData records the exact closed pushforward and the counit-unit distinguished triangle with evaluated boundary. Laws collects boundedness, the finite-field projection claim with both GoodLevel hypotheses, arbitrary-base exchange on level origins, localization, and unbounded joint detection of isomorphisms. The level coordinate normalization identifies the dependent package of the two ordinary functors and their adjunction with the canonical constant-ring package, not just the adjunction values in isolation. The remaining interfaces are the existing ones extracted from SmoothPurityTowerShriekLevels.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-etale-origin-witness",
+  "def-cbc-compact-support-square",
+  "def-coefficient-twists-detailed",
+  "def-coef-semilinear-derived-calculus",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2); explicit transport argument in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact evaluation jointly reflects isomorphisms on unbounded derived categories of sequence site modules",
+   "results": "Eight generic results about exact functors, Ext, bounded-below representatives and condensed abelian categories. None supplies the normalized finite projection or the strict open-closed localization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ReflectsIsomorphisms",
+   "results": "Generic reflection and functor isomorphism lemmas; no coefficient tower geometric construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Rr]eflect|isIso_iff.*homology",
+   "results": "Only ModuleCat.Topology.Homology hit. Local source search found Data.detects, strict comparison realization, and semilinearOpenClosedComplexSequence, which are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open closed decomposition ringed site distinguished localization triangle of module sheaf complexes",
+   "results": "Eight scheme ring localization and GammaSpec results; no strict system localization triangle.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula compactification scheme morphism finite coefficient constructible complexes finite Tor amplitude",
+   "results": "Eight scheme affine limit and Spec factorization results; no finite derived compactification formula. The existing source-library formula and normalized strict comparison dependency are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES_distinguished|projection.*[Ff]ormula",
+   "results": "Mathlib triangleOfSES_distinguished found at Algebra/Homology/DerivedCategory/ShortExact.lean:92 and generic SES applications; projection formula hits concern Witt vectors. The SES triangle is reused, but it does not identify the normalized strict open/closed functors and maps.",
+   "date": "2026-10-25",
+   "verdict": "generic tool only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerShriekLevels",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "Operations statement (1)-(3): unchanged strict tower interfaces shared by the statement and its normalized realization dependency.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerShriekData",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerShriekData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.Base",
+  "statement": "class Base",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.R",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.B",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.tau",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.small",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.sequenceSmall",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.S",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.D",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.ev",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Ev",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Base",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.tensor",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Geometry",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.pull",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.push",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.adjunction",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.deriveMap",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.finiteOpenAdjunction",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Open",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.openD",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.openEvaluation",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Operations",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.F",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.projection",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.square",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.openMate",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.OpenExchange",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.exchange",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.finiteF",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Fcomparison",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Origin",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.quotientTransport",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.GoodLevel",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.LocalizationData",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Laws"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d3de1",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261025T203044-L-2779831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T022945-L-508607",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "C4 stage 2",
+  "old_statement": "Fix a prime ell and a finite extension E/Q_ell. Set R_n=O_E/ell^(n+1), with the actual quotient maps, and B_n,T the constant ring sheaves on the small pro-etale site. Define S(T) as the existing category of strict semilinear module systems and D(T) as its ordinary unbounded derived category, with exact ordinary and derived evaluations. Base records the ramification equation, ideal equality, finiteness, the section-preserving presentation of coefficient towers, the existing semilinear derived calculus, and K-injective resolutions. Geometry records the fixed constant-coefficient coordinates of that calculus, retaining ordinary and derived adjunctions and their normalized evaluation equations. Open records the exact ordinary extension by zero with its normalized adjunction. Operations collects geometric operations, termwise composition and the open tensor mate; OpenExchange records the open base-change isomorphism fixed by its inverse adjunction mate. Define compactification F=Rp_* j_!, its proper-counit/open-tensor projection, its proper-square/open-mate exchange, and its finite evaluation isomorphism. Origin retains one bounded-below etale antecedent at a finite level. GoodLevel is the published finite-Tor constructibility predicate after canonical quotient-ideal equality transport. LocalizationData records the exact closed pushforward and the counit-unit distinguished triangle with evaluated boundary. Laws collects boundedness, the finite-field projection claim with both GoodLevel hypotheses, arbitrary-base exchange on level origins, localization, and unbounded joint detection of isomorphisms. These are the exact existing interfaces formerly in SmoothPurityTowerShriekLevels; no data or condition is changed.",
+  "what": "Repair the underspecified HEq normalization of Geometry.levelAdjunction_eq. Identifying adjunction values does not identify their type parameters; bundle both functors with the ordinary adjunction so projection and dependent elimination provide the required coordinate transport. No evaluation equation is added as an assumption. The original constant-section normalization intent is retained. See coord/changes/C4-tower-level-adjunction-coordinates.md.",
+  "citers": [
+   {
+    "id": "det-sp-tower-shriek-levels",
+    "holds": true,
+    "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+   },
+   {
+    "id": "lem-sp-finite-level-projection-criterion",
+    "holds": true,
+    "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+   },
+   {
+    "id": "lem-sp-tower-exchange-realization",
+    "holds": true,
+    "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+   },
+   {
+    "id": "lem-sp-tower-localization-realization",
+    "holds": true,
+    "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+   },
+   {
+    "id": "lem-sp-tower-ordinary-localization",
+    "holds": true,
+    "note": "The canonical coordinate statement and its use remain applicable; the corrected package retains both functors."
+   }
+  ],
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+   "place": "paragraph (2)"
+  }
+ }
+}

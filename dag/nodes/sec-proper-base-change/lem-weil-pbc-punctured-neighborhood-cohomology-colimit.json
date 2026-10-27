@@ -28,73 +28,38 @@
  ],
  "proof": [
   {
-   "text": "Let $I$ be the set of quasi-compact open neighborhoods of $Z$, with $N\\le M$ meaning $M\\subseteq N$. It contains $T$ and $N\\cap M$ is a common upper bound by the quasi-separated clause of [def-weil-spectral-space]. The closed subset $Z$ is quasi-compact: append the open $T\\setminus Z$ to any open cover of $Z$ and use quasi-compactness of $T$. Every $t\\in W$ belongs to every such $N$, since an open containing a specialization of $t$ contains $t$. Conversely, if $t\\notin W$, the closed set $\\overline{\\{t\\}}$ misses $Z$. Cover $Z$ by quasi-compact basis opens contained in $T\\setminus\\overline{\\{t\\}}$ and take a finite subcover. Their union is a quasi-compact open neighborhood of $Z$ missing $t$. Thus $W=\\bigcap_{N\\in I}N$ and $S=\\bigcap_{N\\in I}(N\\setminus Z)$. For $Z=\\varnothing$ the same argument uses the empty union.",
+   "text": "The index of compact open neighborhoods, ordered by reverse inclusion, is nonempty since it contains the whole spectral space. Intersecting two neighborhoods gives a common later stage because compact opens in a spectral space are closed under intersection. The index is a preorder category, so parallel morphisms are equal. This proves the asserted IsFiltered instance.",
    "uses": [
     "def-weil-spectral-space"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0A31, label lemma-make-spectral-space, proof (3) implies (4); specialized argument written out"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $X_N=N\\setminus Z=N\\cap U$. Each $X_N$ is quasi-compact open in $T$, since $N,U$ are quasi-compact open and $T$ is quasi-separated. Any quasi-compact open $V$ of a spectral space is itself spectral: it is quasi-compact; its quasi-compact opens are exactly the quasi-compact ambient opens contained in $V$, so the ambient basis and intersection property restrict to it. For sobriety, if $C$ is a nonempty irreducible closed subset of $V$, its closure in $T$ is irreducible with unique generic point $\\eta$; because $V$ meets that closure and is open, it contains $\\eta$, and $C=V\\cap\\overline{\\{\\eta\\}}$. Uniqueness follows from uniqueness in $T$ after taking closure in $T$. This verifies all clauses of [def-weil-spectral-space] for $X_N$. For $M\\subseteq N$, the inclusion $X_M\\hookrightarrow X_N$ is spectral: a quasi-compact open $B$ of $X_N$ is also a quasi-compact open of $T$, and its inverse image is $B\\cap X_M$, quasi-compact by quasi-separatedness of $T$.",
+   "text": "For injectivity of the canonical colimit comparison, represent a colimit element z at some neighborhood N, using preservation of filtered colimits by the forgetful functor on abelian groups. If the comparison kills z, the canonical cocone leg kills its representative x. Apply punctured-neighborhood eventual vanishing to obtain a later neighborhood M on which x restricts to zero. The defining colimit relation identifies z with the image of that zero class, hence z is zero. An additive homomorphism with trivial kernel is injective.",
    "uses": [
-    "def-weil-spectral-space"
+    "lem-weil-pbc-punctured-neighborhood-cohomology-eventual-zero"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0902, label lemma-spectral-sub, quasi-compact-open case; direct proof from spectral-space definition"
-   }
+   "elementary": false
   },
   {
-   "text": "The inclusions $p_N:S\\hookrightarrow X_N$ exhibit a topological inverse limit. Indeed compatible points of the $X_N$ are all the same point, since any two indices have a common upper bound; they are therefore exactly the points of $\\bigcap_N X_N=S$. The initial topology of these maps is the subspace topology: all maps are continuous for that topology, and the coordinate $N=T$ is the inclusion into $U$, which already induces the subspace topology of $T$ on $S$. The directed set and spectral transition maps were checked in steps 1 and 2, so [lem-weil-pbc-spectral-directed-limit-spectral] implies that $S$ is spectral and the $p_N$ are spectral.",
+   "text": "For surjectivity, the punctured-neighborhood class-lifting theorem represents every target class by a class x at a neighborhood N. The image of x under the N-th colimit coprojection maps to the desired target class by the colimit.desc coprojection equation. The comparison is therefore bijective, hence an isomorphism in AddCommGrpCat. Both halves concern the specified canonical cocone, so the proof proves invertibility of the canonical comparison.",
    "uses": [
-    "lem-weil-pbc-spectral-directed-limit-spectral"
+    "lem-weil-pbc-punctured-neighborhood-cohomology-class-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0A2Z, label lemma-directed-inverse-limit-spectral-spaces; Tag 0AP0, label lemma-make-spectral-space-minus, intersection-limit argument"
-   }
-  },
-  {
-   "text": "Take $F_N=A|_{X_N}$. Since $X_N$ is open in $T$, the presheaf inverse image in [def-weil-pbc-topological-inverse-image] is just restriction (an open of $X_N$ is open in $T$ and is a terminal neighborhood in that colimit), already a sheaf. Thus the maps $F_N\\to(f_{NM})_*F_M$ are ordinary restriction maps, whose identity and composition laws hold section by section. On $S$, each $p_N^{-1}F_N$ identifies canonically with $A|_S$. To see both the identification and its compatibility, for composable continuous maps $h,k$ use the adjunction bijections $\\mathrm{Hom}(k^{-1}h^{-1}B,C)=\\mathrm{Hom}(B,h_*k_*C)=\\mathrm{Hom}(B,(hk)_*C)$, since direct images compose sectionwise. The representing isomorphism to $(hk)^{-1}B$ is uniquely determined by sending the composite unit to the unit for $hk$; for three maps both composites send the same unit to the same unit, hence are equal. Explicitly, write $j_N:X_N\\hookrightarrow T$ and $c(h,k):k^{-1}h^{-1}\\xrightarrow{\\sim}(h\\circ k)^{-1}$ for these unit-compatible composition isomorphisms. For $N\\le M$, the adjoint restriction map is $\\beta_{NM}=c(j_N,f_{NM})_A:f_{NM}^{-1}F_N\\to F_M$, because on every open it is the identity after restriction. The transition on the pulled-back sheaves is $t_{NM}=p_M^{-1}(\\beta_{NM})\\circ c(f_{NM},p_M)_{F_N}^{-1}$. Set $\\theta_N=c(j_N,p_N)_A:p_N^{-1}F_N\\xrightarrow{\\sim}A|_S$. Associativity of the unit-compatible composition isomorphisms, proved by the preceding Hom calculation, gives $\\theta_M\\circ t_{NM}=\\theta_N$. Hence all transition maps become identities on $A|_S$. This constant diagram has $A|_S$ as its colimit: compatible maps from its terms to any sheaf are a single map, because $I$ is nonempty and any two indices have a common upper bound. This is exactly the universal property in [def-weil-pbc-category-colimit].",
-   "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A37, label lemma-colimit, preceding setup, for the restriction system; inverse images from Sheaves Section 008C"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-spectral-limit-cohomology] to the small directed set $I$, the spectral spaces $X_N$, their spectral inclusions, the spectral limit $S$ and the abelian-sheaf restriction system $F_N$. All hypotheses are verified in steps 1--4. Its sheaf colimit is $A|_S$ by step 4, hence it gives the asserted isomorphism in each degree $p\\ge0$. Its comparison leg at $N$ is the pullback along $S\\hookrightarrow X_N$ followed by the coefficient-colimit leg. Under the unit-compatible identification of step 4 that coefficient leg is the canonical restriction identification with $A|_S$. Therefore this is precisely the canonical restriction map in the stated conclusion, with the stated restriction transition maps, not merely an abstract isomorphism of groups.",
-   "uses": [
-    "lem-weil-pbc-spectral-limit-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3D, label lemma-cohomology-of-neighbourhoods-of-closed (2), proof via Tag 0A37, label lemma-colimit"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-spectral-space",
-  "lem-weil-pbc-spectral-directed-limit-spectral",
-  "def-weil-pbc-topological-inverse-image",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-spectral-limit-cohomology"
+  "lem-weil-pbc-punctured-neighborhood-cohomology-eventual-zero",
+  "lem-weil-pbc-punctured-neighborhood-cohomology-class-lift"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "T7",
+  "date": "2026-10-24",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0A3D, label lemma-cohomology-of-neighbourhoods-of-closed (2), with the topology verifications expanded from Tags 0A31, 0AP0 and 0902"
+  "place": "Tag 0A3D(2), canonical comparison proved from its class-lifting and eventual-vanishing halves"
  },
  "mathlib_searches": [
   {
@@ -143,7 +108,18 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-14",
   "item": "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
@@ -179,5 +155,15 @@
   "by": "NY",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T020608-L-2624606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

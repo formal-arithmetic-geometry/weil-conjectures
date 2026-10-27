@@ -51,7 +51,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Representation.invariants_ne_bot_and_exists_filtration_of_isPGroup"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Representation.invariants_ne_bot_and_exists_filtration_of_isPGroup",
+     "module": "WeilConjectures.Mathlib.RepresentationTheory.Invariants",
+     "lines": [
+      125,
+      152
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -64,5 +89,22 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $H$ be an $\\ell$-group (every element has $\\ell$-power order; $H$ need\nnot be finite) and $V$ a finite-dimensional $\\mathbf F_\\ell$-linear\nrepresentation of $H$, of dimension $n$. If $V\\neq0$ then $V^H\\ne0$. Moreover\nthere is a flag $0=F_0\\subseteq F_1\\subseteq\\cdots\\subseteq F_n=V$ of\n$H$-stable subspaces with $\\dim F_i=i$ such that $H$ acts trivially on each\n$F_{i+1}/F_i$, i.e. $hx-x\\in F_i$ for $h\\in H$ and $x\\in F_{i+1}$; its\nsuccessive quotients are the trivial one-dimensional representation.",
+  "proof": [
+   {
+    "text": "The action factors through the image $\\bar H$ of $H$ in the finite group\n$\\operatorname{GL}(V)$, which is a finite $\\ell$-group. If $V\\neq0$, the\nnontrivial $\\bar H$-orbits on the finite set $V$ have cardinality a positive\npower of $\\ell$, so $\\#V^H\\equiv\\#V\\equiv0\\pmod\\ell$; as $0\\in V^H$, this\nforces $V^H\\neq0$. Build the flag inductively: given $F_i$ with $i<n$, the\nquotient $V/F_i$ is a nonzero representation of $H$, so it has a nonzero\ninvariant vector; let $F_{i+1}$ be the preimage of the line it spans. Then\n$F_{i+1}$ is $H$-stable of dimension $i+1$ and $H$ acts trivially on\n$F_{i+1}/F_i$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

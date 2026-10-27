@@ -1,0 +1,362 @@
+{
+ "id": "lem-sfb-smooth-derivation-zero-divisor",
+ "kind": "statement",
+ "title": "Tangent sections and effective zero divisors of smooth-curve derivations",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $X$ be a smooth proper connected curve over $k$ [def-sc-curves], and let $g=\\dim_kH^1(X,\\mathcal O_X)$ be its genus [def-sc-genus]. Write $\\Omega^1_{X/k}$ for the sheaf of relative differentials with universal derivation $d$ [def-sc-relative-differential-sheaf], and $T=\\mathcal{H}om_{\\mathcal O_X}(\\Omega^1_{X/k},\\mathcal O_X)$ for its dual. Then $T$ is an invertible $\\mathcal O_X$-module [def-sc-invertible-module], of degree $2-2g$ [def-sc-pic0], and the universal derivation gives a canonical additive identification\n$$\\operatorname{Der}_k(\\mathcal O_X,\\mathcal O_X)\\cong H^0(X,T),\\qquad D=\\theta\\circ d\\longleftrightarrow\\theta.$$\nHere derivations are $k$-linear sheaf maps satisfying the Leibniz rule, and $H^0(X,T)$ means global sections. Every closed point $q$ has residue field $k$ [def-weil-residue-field]. A derivation $D$ preserves the ideal sheaf $\\mathcal I_q$ [def-sfb-curve-vector-fields-fixing-points] if and only if its corresponding section $s_D$ of $T$ vanishes in the fibre at $q$. For every nonzero $D$, $s_D$ has nonzero generic germ, and its rational-section divisor\n$$Z_D=\\operatorname{div}_T(s_D)=\\sum_{q\\ \\mathrm{closed}}m_q[q]$$\n[def-sc-rational-section-divisor, def-sc-divisor] is effective, has finite support, and satisfies $T\\cong\\mathcal O_X(Z_D)$ and $\\deg Z_D=\\sum_qm_q=2-2g$. Its coefficient $m_q$ is the valuation of the local coefficient of $s_D$ in any basis of $T_q$; it is positive exactly when $D(\\mathcal I_q)\\subseteq\\mathcal I_q$. In particular each distinct point fixed by a nonzero $D$ contributes at least one to this degree.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E67 (lemma-smooth-vector-fields), universal derivation, fixed-point calculation, and tangent degree argument; Tag 0C1E (lemma-uniformizer-works); divisors.tex Tags 02SF (definition-order-vanishing-meromorphic), 0BE6 (definition-divisor-invertible-sheaf)."
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-divisor",
+  "def-sc-genus",
+  "def-sc-invertible-module",
+  "def-sc-pic0",
+  "def-sc-rational-section-divisor",
+  "def-sc-relative-differential-sheaf",
+  "def-sfb-curve-vector-fields-fixing-points",
+  "def-weil-algebraic-closure",
+  "def-weil-field",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply the smooth connected curve local-ring theorem: $X$ is Noetherian and integral, its generic stalk is its function field, and each closed stalk is a DVR. Apply the closed-point residue-field theorem to the finite-type $k$-scheme $X$: the structural map $k\\to\\kappa(q)$ is an isomorphism for every closed $q$. In particular this residue extension is finite separable, as required for the uniformizer differential lemma.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E67 (lemma-smooth-vector-fields), standing hypotheses; Tag 0C1E (lemma-uniformizer-works), residue hypothesis; morphisms.tex Tag 01TB (lemma-jacobson-finite-type-points)"
+   }
+  },
+  {
+   "text": "The diagonal-conormal comparison identifies the canonical differential sheaf used by the curve lemmas with the affine universal differential sheaf in this statement. By the canonical-sheaf lemma $\\Omega^1_{X/k}$ is invertible; the tensor-dual lemma makes $T=(\\Omega^1_{X/k})^\\vee$ invertible and gives $\\Omega^1_{X/k}\\otimes T\\cong\\mathcal O_X$. By the canonical-degree lemma choose $K$ with $\\mathcal O_X(K)\\cong\\Omega^1_{X/k}$ and $\\deg K=2g-2$. Since the degree on the Picard group is a homomorphism, $\\deg\\Omega^1_{X/k}=2g-2$ and $\\deg T=-(2g-2)=2-2g$.",
+   "uses": [
+    "lem-sc-canonical-sheaf",
+    "lem-pc-tensor-dual-invertible",
+    "lem-sc-canonical-degree",
+    "def-sc-pic0",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E67 (lemma-smooth-vector-fields), proof, tangent degree; Tags 0BS2 (lemma-duality-dim-1), 0BS6 (lemma-rr); divisors.tex Tag 02SL (lemma-c1-additive); morphisms.tex Tag 08S2 (lemma-differentials-diagonal)."
+   }
+  },
+  {
+   "text": "By the universal property of the sheaf of relative differentials, applied to $X\\to\\operatorname{Spec}k$ and $\\mathcal F=\\mathcal O_X$, composition with $d$ is an additive bijection from $\\mathcal O_X$-linear maps $\\theta:\\Omega^1_{X/k}\\to\\mathcal O_X$ onto $k$-derivations $D:\\mathcal O_X\\to\\mathcal O_X$; here a $k$-derivation is a $k$-linear Leibniz sheaf map, i.e. one killing the constants, which is the stated notion. The sheaf-Hom definition identifies these global morphisms $\\theta$ with $H^0(X,T)$. Write $s_D$ for the section corresponding to $\\theta$ with $D=\\theta\\circ d$. Additivity is $(\\theta+\\theta')\\circ d=\\theta\\circ d+\\theta'\\circ d$. This gives exactly the stated canonical additive identification.",
+   "uses": [
+    "lem-sfb-relative-differentials-sheaf-universal-property",
+    "def-sc-relative-differential-sheaf",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UR (lemma-universal-derivation-universal); curves.tex Tag 0E67, first sentence of the proof"
+   }
+  },
+  {
+   "text": "Fix a closed point $q$ and choose a uniformizer $t$ of $A=\\mathcal O_{X,q}$. Smoothness implies local finite presentation. Apply the current affine-chart stalk theorem over $\\operatorname{Spec}k$: choose $W=\\operatorname{Spec}B$ containing $q$, with $q$ represented by $\\mathfrak p$, so $A\\cong B_{\\mathfrak p}$ and $\\Omega^1_{X/k,q}\\cong(\\Omega_{B/k})_{\\mathfrak p}$. The localization theorem identifies the latter with $\\Omega_{A/k}$, sending $db/1$ to $d(b/1)$. These comparisons preserve the universal derivation: on fractions, Leibniz gives $d(b/u)=u^{-1}db-bu^{-2}du$ for $u\\notin\\mathfrak p$. The uniformizer differential lemma applies by step 1 and gives the basis $dt$ of $\\Omega^1_{X/k,q}$. In the dual basis write $(s_D)_q=a(dt)^\\vee$, so $a=\\theta_q(dt)=D_q(t)$. Since $\\mathfrak m_q=(t)$, the Leibniz formula $D_q(bt)=bD_q(t)+tD_q(b)$ shows $D_q(\\mathfrak m_q)\\subseteq\\mathfrak m_q$ if and only if $a\\in\\mathfrak m_q$. Away from $q$ the point ideal stalk is the whole local ring, so there is no condition. Membership in a subsheaf is local, hence preservation of the ideal sheaf is equivalent to this stalk condition. Finally the image of $s_D$ in $T_q/\\mathfrak m_qT_q$ is zero exactly when $a\\in\\mathfrak m_q$. This proves the fixed-point/fibre-vanishing equivalence.",
+   "uses": [
+    "lem-a1-uniformizer-differential-basis",
+    "def-sc-relative-differential-sheaf",
+    "def-sfb-curve-vector-fields-fixing-points",
+    "lem-trf-affine-chart-stalk-differentials",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E (lemma-uniformizer-works); Tag 0E67 (lemma-smooth-vector-fields), final paragraph and fixed-point definition preceding the lemma; algebra.tex Tag 00RT (lemma-differentials-localize), (2); morphisms.tex Tag 01UT."
+   }
+  },
+  {
+   "text": "Let $D\\ne0$. By step 3 its global section $s_D$ is nonzero. A section of an invertible module on $X$ with zero generic germ is zero: on a nonempty trivializing open it is a regular function with zero generic germ, and the injectivity in the local-ring theorem makes that function zero. These opens cover $X$. Thus $s_D$ has nonzero generic germ. At every closed $q$, express its stalk as $a_q e_q$ in a basis. The generic germ of $e_q$ is a basis, by local trivialization, so $a_q\\ne0$. Since $a_q\\in\\mathcal O_{X,q}$, its normalized valuation is nonnegative; it is positive exactly when $a_q\\in\\mathfrak m_q$ (write $a_q=ut^n$ in the DVR). A different basis multiplies $a_q$ by a unit and leaves its valuation unchanged.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02SF (definition-order-vanishing-meromorphic), preceding paragraph; curves.tex Tag 0E67, nonzero tangent section"
+   }
+  },
+  {
+   "text": "Apply the rational-section order theorem to the nonzero generic germ of $s_D$ in the invertible module $T$: only finitely many of its orders $m_q$ are nonzero, and the rational-section divisor definition gives $Z_D=\\sum_qm_q[q]$. Step 5 makes this an effective divisor. The line-bundle rational-section theorem gives the isomorphism $\\mathcal O_X(Z_D)\\to T$, $f\\mapsto fs_D$. The defining degree homomorphism therefore gives $\\deg Z_D=\\deg T=2-2g$; the divisor degree is $\\sum_qm_q$, since the points have residue field $k$. By step 4 and the local computation in step 5, $m_q>0$ holds exactly when $D$ preserves $\\mathcal I_q$. Every such integer is at least one, so every distinct fixed point contributes at least one to the sum, as claimed.",
+   "uses": [
+    "lem-sc-rational-section-order",
+    "def-sc-rational-section-divisor",
+    "lem-sc-line-bundle-rational-section",
+    "def-sc-pic0",
+    "def-sc-divisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02SF (definition-order-vanishing-meromorphic), 02SG (lemma-divisor-meromorphic-locally-finite), 0BE6 (definition-divisor-invertible-sheaf); curves.tex Tag 0E67 (lemma-smooth-vector-fields), zero-counting argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-sbc-smooth-morphisms",
+  "def-sc-divisor",
+  "def-sc-invertible-module",
+  "def-sc-pic0",
+  "def-sc-rational-section-divisor",
+  "def-sc-relative-differential-sheaf",
+  "def-sfb-curve-vector-fields-fixing-points",
+  "lem-a1-uniformizer-differential-basis",
+  "lem-pc-tensor-dual-invertible",
+  "lem-sc-canonical-degree",
+  "lem-sc-canonical-sheaf",
+  "lem-sc-line-bundle-rational-section",
+  "lem-sc-rational-section-order",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "lem-sfb-relative-differentials-sheaf-universal-property",
+  "lem-trf-affine-chart-stalk-differentials",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E67 (lemma-smooth-vector-fields), expanded using Tag 0C1E (lemma-uniformizer-works) and divisors.tex Tags 02SF, 02SG, 0BE6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vector.?field|canonical.*degree|genus|divisor.*section",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"grep\", \"query\": \"vector.?field|canonical.*degree|genus|divisor.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass point ideals, analytic meromorphic divisors and manifold vector fields do not give tangent zero divisors on algebraic curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, Derivation",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: loogle: unknown identifier 'AlgebraicGeometry'; corrected pattern recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The divisor of zeros of a nonzero tangent section on a smooth proper curve has degree 2-2g",
+   "results": "{\"t\": \"2026-10-22T06:00:29Z\", \"tool\": \"leansearch\", \"query\": \"The divisor of zeros of a nonzero tangent section on a smooth proper curve has degree 2-2g\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeromorphicOn.divisor\", \"MeromorphicOn.divisor_def\", \"MeromorphicOn.divisor_sub_const_self\", \"MeromorphicOn.divisor_apply\", \"MeromorphicOn.divisor_zpow\", \"TangentBundle.tangentMap_tangentBundle_pure\", \"MeromorphicOn.divisor_ofNat\", \"MeromorphicOn.divisor_fun_zpow\"], \"digest\": \"4d012f71919db42e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass point ideals, analytic meromorphic divisors and manifold vector fields do not give tangent zero divisors on algebraic curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ideal preserving derivations on smooth curves vanish at a point exactly when the dual differential section has positive order there",
+   "results": "{\"t\": \"2026-10-22T06:00:41Z\", \"tool\": \"leanfinder\", \"query\": \"Ideal preserving derivations on smooth curves vanish at a point exactly when the dual differential section has positive order there\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"PowerSeries.IsWeierstrassDivisorAt.div_coe_eq_zero\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"aeval_derivative_mem_differentIdeal\", \"PowerSeries.degree_weierstrassMod_lt\"], \"digest\": \"ea966eb912cabc4c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass point ideals, analytic meromorphic divisors and manifold vector fields do not give tangent zero divisors on algebraic curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vector field on a smooth proper curve corresponds to a tangent line bundle section with effective zero divisor of degree two minus twice the genus",
+   "results": "{\"t\": \"2026-10-22T06:00:41Z\", \"tool\": \"leanfinder\", \"query\": \"A vector field on a smooth proper curve corresponds to a tangent line bundle section with effective zero divisor of degree two minus twice the genus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.FunctionField\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁\"], \"digest\": \"2f461ca104685e36\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass point ideals, analytic meromorphic divisors and manifold vector fields do not give tangent zero divisors on algebraic curves"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|canonical.*degree|vector.?field|divisor.*section",
+   "results": "{\"t\": \"2026-10-22T06:01:47Z\", \"tool\": \"grep\", \"query\": \"genus|canonical.*degree|vector.?field|divisor.*section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/FieldTheory/Finite/Extension.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\"], \"digest\": \"3b963a31be32930c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass point ideals, analytic meromorphic divisors and manifold vector fields do not give tangent zero divisors on algebraic curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Derivation",
+   "results": "{\"t\": \"2026-10-22T06:01:48Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass point ideals, analytic meromorphic divisors and manifold vector fields do not give tangent zero divisors on algebraic curves"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|vector.?field|divisor.*section|canonical.*degree",
+   "results": "{\"t\": \"2026-10-23T04:25:06Z\", \"tool\": \"grep\", \"query\": \"genus|vector.?field|divisor.*section|canonical.*degree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Weierstrass point ideals, ring differentials, analytic meromorphic divisors, and manifold vector fields do not state the smooth proper curve tangent zero-divisor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The zeros of a nonzero vector field on a smooth proper algebraic curve form an effective divisor of degree 2-2g",
+   "results": "{\"t\": \"2026-10-23T04:25:07Z\", \"tool\": \"leansearch\", \"query\": \"The zeros of a nonzero vector field on a smooth proper algebraic curve form an effective divisor of degree 2-2g\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeromorphicOn.divisor\", \"VectorField.mpullback_zero\", \"MeromorphicNFOn.zero_set_eq_divisor_support\", \"VectorField.mpullbackWithin_zero\", \"MeromorphicOn.divisor_apply\", \"MeromorphicOn.divisor_def\", \"VectorField.mlieBracket_zero_right\", \"MeromorphicOn.divisor_sub_const_self\"], \"digest\": \"d8173a155edf9c9f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Weierstrass point ideals, ring differentials, analytic meromorphic divisors, and manifold vector fields do not state the smooth proper curve tangent zero-divisor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Derivation",
+   "results": "{\"t\": \"2026-10-23T04:25:07Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Weierstrass point ideals, ring differentials, analytic meromorphic divisors, and manifold vector fields do not state the smooth proper curve tangent zero-divisor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth proper algebraic curve derivations correspond to tangent line bundle sections whose zero divisor has degree 2 minus twice the genus",
+   "results": "{\"t\": \"2026-10-23T04:25:11Z\", \"tool\": \"leanfinder\", \"query\": \"On a smooth proper algebraic curve derivations correspond to tangent line bundle sections whose zero divisor has degree 2 minus twice the genus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.FunctionField\", \"KaehlerDifferential.endEquivDerivation'\", \"aeval_derivative_mem_differentIdeal\", \"WeierstrassCurve.Affine.derivative_addPolynomial_slope\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\"], \"digest\": \"90542216d98170e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Weierstrass point ideals, ring differentials, analytic meromorphic divisors, and manifold vector fields do not state the smooth proper curve tangent zero-divisor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "derivation|vector.?field|tangent",
+   "results": "{\"t\": \"2026-10-23T04:25:38Z\", \"tool\": \"grep\", \"query\": \"derivation|vector.?field|tangent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"a672deda03a30b5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Weierstrass point ideals, ring differentials, analytic meromorphic divisors, and manifold vector fields do not state the smooth proper curve tangent zero-divisor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derivation of a smooth algebraic curve preserving a closed point maximal ideal vanishes in the tangent fibre and has at most 2-2g zeros",
+   "results": "{\"t\": \"2026-10-23T04:25:40Z\", \"tool\": \"leanfinder\", \"query\": \"A derivation of a smooth algebraic curve preserving a closed point maximal ideal vanishes in the tangent fibre and has at most 2-2g zeros\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"aeval_derivative_mem_differentIdeal\", \"WeierstrassCurve.Affine.Nonsingular\", \"WeierstrassCurve.Affine.derivative_addPolynomial_slope\", \"WeierstrassCurve.Affine.nonsingular_negAdd_of_eval_derivative_ne_zero\", \"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\"], \"digest\": \"7797d2eb22b1f3cc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Weierstrass point ideals, ring differentials, analytic meromorphic divisors, and manifold vector fields do not state the smooth proper curve tangent zero-divisor theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-marked-nodal-infinitesimal-fields",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Infinitesimal marked automorphisms and normalized vector fields; returned proof steps 8--9: tangent section dictionary and effective zero divisor",
+   "via": [
+    "lem-sfb-marked-nodal-infinitesimal-fields",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-derivation-zero-divisor",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six proof steps use existing DAG ingredients only: curve integrality and rational points, dual and canonical degree, affine universal derivation and sheaf Hom, the uniformizer calculation, nonzero generic germ, and effective divisor and degree. No new nodes or Lean changes. Repeated live project attachment search and recorded current Mathlib searches; reviewed exact cited statements and small cases. Repair of the returned delivery: revalidated every citation against the current DAG; refreshed the affine-chart differential citation after its module-localization definition reference was added, and wrote the chart/localization maps explicitly in step 4. Statement and dependency sets remain unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Infinitesimal marked automorphisms and normalized vector fields; returned proof steps 8--9: tangent section dictionary and effective zero divisor",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic injectivity, integral curve and DVR structure used as a general curve tool; this rigidity unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Nullstellensatz identifies closed residue fields with k for the uniformizer hypothesis; generic tool for finite-type schemes."
+   },
+   {
+    "node": "lem-sc-canonical-sheaf",
+    "why": "The differential sheaf of a smooth curve is invertible; generic curve tool below the marked-curve rigidity route."
+   },
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "Dual invertibility and evaluation are general line bundle tools."
+   },
+   {
+    "node": "lem-sc-canonical-degree",
+    "why": "Riemann-Roch canonical degree is a general smooth proper curve tool required by the Stacks vector-field argument."
+   },
+   {
+    "node": "lem-a1-uniformizer-differential-basis",
+    "why": "The differential of a uniformizer is a basis; generic local smooth-curve tool."
+   },
+   {
+    "node": "lem-sc-rational-section-order",
+    "why": "Finite support and basis independence of orders are generic line bundle divisor tools."
+   },
+   {
+    "node": "lem-sc-line-bundle-rational-section",
+    "why": "The isomorphism O(div s) to a line bundle is a generic divisor tool."
+   },
+   {
+    "node": "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "why": "Canonical identification of the two differential-sheaf descriptions, a general scheme tool."
+   },
+   {
+    "node": "lem-trf-affine-chart-stalk-differentials",
+    "why": "Affine localized description of differential stalks, a general scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-localization",
+    "why": "Localization of ring differentials identifies the stalk with the local ring differential module."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-canonical-sheaf",
+  "lem-pc-tensor-dual-invertible",
+  "lem-sc-canonical-degree",
+  "lem-a1-uniformizer-differential-basis",
+  "lem-sc-rational-section-order",
+  "lem-sc-line-bundle-rational-section",
+  "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "lem-trf-affine-chart-stalk-differentials",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-9ea251f8d",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-9ea251f8d (reviewer sub-agent of L); spot-checked: FIX. Re-delivery of Q94 lem-sfb-smooth-derivation-zero-divisor at 9ea251f8 after the landing refusal of the earlier FIX (run d56e2cce5e17), refused because lem-trf-affine-chart-stalk-differentials changed statement. Compared with the d56e head, only step 4 and split_report.summary changed; the statement, deps, created, blueprint and searches are identical, and steps 1-3, 5 and 6 are byte-identical. So the step-3 fault (C1/C2, D5) is back: step 3 is marked elementary and glues the ring-level universal property, citing only the affine-local definition of Omega. That needs the sheaf-level Hom(Omega_{X/S},F) = Der_S(O_X,F) (Stacks 01UR, resting on the 01UO Leibniz extension to D(f)). No node in the snapshot states it; I grepped for 01UR/01UO and for derivation and universal-property ids, and lem-sc-diagonal-conormal-derivation-exists explicitly asserts no universal property. I re-applied the d56e repair. It adds the statement-only unsplit node lem-sfb-relative-differentials-sheaf-universal-property (morphisms.tex 01UR/01UT/01UO/01US), true on the affine case. Step 3 now cites it and is non-elementary. proof_deps is the union of uses: the new node added, the unused def-weil-pbc-kahler-differentials dropped. The new step 4 checks out. Smooth gives locally of finite presentation. The current affine-chart lemma over Spec k gives A = B_p and Omega_q = (Omega_{B/k})_p, and 00RT(2) gives Omega_{B_p/k}. The 0C1E dt basis applies because kappa(q) = k (step 1). Then a = D_q(t), and Leibniz gives fixes q iff a in m iff s_D vanishes in the fibre. I re-checked steps 1, 2, 5 and 6 against the cited statements, Stacks 0E67, 02SF/02SG and 0BE6. Small cases: on P^1, d/dt has a double zero at infinity and t d/dt simple zeros at 0 and infinity; for g = 1 a nonzero D fixes no point; for g >= 2 there is no nonzero D; characteristic p is fine. Batch-5 flags: lem-sc-canonical-degree (Riemann-Roch for curves; the flagged path only reaches a trf definition, and the parent already cites it) and lem-trf-affine-chart-stalk-differentials (general 01V9 scheme fact) are not parts of the trace formula or Poincare duality, so both are accepted. All 11 tool_uses are accepted as general tools. No SGA is cited. The fixes are in fixes/dag/nodes/sec-six-functors-basics/: the item and the new node.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothDerivationZeroDivisor",
+  "declaration": "AlgebraicGeometry.smooth_derivation_zero_divisor",
+  "declarations": [
+   "AlgebraicGeometry.smoothCurveTangentSection",
+   "AlgebraicGeometry.smoothCurveSectionGenericGerm",
+   "AlgebraicGeometry.smoothCurveLocalCoefficientOrder",
+   "AlgebraicGeometry.smooth_curve_tangent_invertible",
+   "AlgebraicGeometry.smoothCurveTangentZeroDivisor",
+   "AlgebraicGeometry.smooth_curve_tangent_dictionary",
+   "AlgebraicGeometry.smooth_curve_derivation_fixes_iff",
+   "AlgebraicGeometry.smooth_derivation_zero_divisor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDerivationZeroDivisor.lean",
+  "statement": "theorem smooth_derivation_zero_divisor (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (θ : f.relativeDifferentials ⟶ Scheme.Modules.unit X) (hθ : θ ≠ 0) : ∃ hη : smoothCurveSectionGenericGerm k X f (Scheme.Modules.dual f.relativeDifferentials) (smoothCurveTangentSection f θ) ≠ 0, (∀ q : closedPoints X, 0 ≤ smoothCurveTangentZeroDivisor k X f θ hη q) ∧ Set.Finite {q : closedPoints X | smoothCurveTangentZeroDivisor k X f θ hη q ≠ 0} ∧ Nonempty (Scheme.Modules.dual f.relativeDifferentials ≅ Scheme.Divisor.moduleOfSmoothConnectedCurve k X f (smoothCurveTangentZeroDivisor k X f θ hη)) ∧ Scheme.Divisor.degree X (smoothCurveTangentZeroDivisor k X f θ hη) = (smoothCurveTangentZeroDivisor k X f θ hη).sum (fun _ m ↦ m) ∧ Scheme.Divisor.degree X (smoothCurveTangentZeroDivisor k X f θ hη) = 2 - 2 * (f.genus : ℤ) ∧ (∀ (q : closedPoints X) (b : Module.Basis PUnit.{u + 1} (X.presheaf.stalk q.val) ((Scheme.Modules.dual f.relativeDifferentials).presheaf.stalk q.val)), ∃ a : X.presheaf.stalk q.val, a ≠ 0 ∧ TopCat.Presheaf.germ (Scheme.Modules.dual f.relativeDifferentials).val.presheaf ⊤ q.val trivial (smoothCurveTangentSection f θ) = a • b PUnit.unit ∧ smoothCurveTangentZeroDivisor k X f θ hη q = smoothCurveLocalCoefficientOrder k X f q a) ∧ (∀ q : closedPoints X, 0 < smoothCurveTangentZeroDivisor k X f θ hη q ↔ θ ∈ curveVectorFieldsFixingPoints f {q.val}) ∧ (∀ q : closedPoints X, θ ∈ curveVectorFieldsFixingPoints f {q.val} → 1 ≤ smoothCurveTangentZeroDivisor k X f θ hη q) ∧ (∀ E : Finset (closedPoints X), (∀ q ∈ E, θ ∈ curveVectorFieldsFixingPoints f {q.val}) → (E.card : ℤ) ≤ 2 - 2 * (f.genus : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The complete statement is the conjunction of the four recorded theorems: invertibility, degree and canonical additive dictionary, residue rationality and fibre vanishing, and nonzero zero-divisor properties. The four helper definitions construct the section, its generic germ, normalized coefficient order, and the recorded rational-section divisor; no new notion or dependency repair is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-945116c63",
+  "group": "NW",
+  "result": "pass",
+  "note": "Checked node clauses against SmoothDerivationZeroDivisor.lean through the recorded owners (IsConnectedCurve/Smooth/IsProper, relativeDifferentials, Modules.dual=homObj into unit, IsInvertible, picDegree, genus, rationalSectionDivisor, moduleOfSmoothConnectedCurve, Divisor.degree, curveVectorFieldsFixingPoints, residue map). The equivalence e is pinned because θ↦s_θ (homObjSectionsEquiv at ⊤) is bijective; additivity is stated on every open. Fibre vanishing is m_q•⊤, not stalk zero, for all θ. Basis-independent m_q = Mathlib X.ord(a), whose sign agrees with the exponent valuation v of smooth_connected_curve_local_rings used by rationalSectionOrder; O(D) has generator t^(-D), so the sign of T≅O(Z_D) is right. Effective, finite support, degree 2-2g, fixed⟺m_q>0, ≥1 each, #fixed ≤ 2-2g. Edge cases: char p, g=0 (P^1), g=1, g≥2 vacuous, θ=0, empty E, universes. Node JSON differs from live only in lean; statement verbatim; 8 declarations present; helpers carry real data; theorem bodies are sorry; docstrings OK; report sections present. Remarks only: sorried Prop @[instance] theorem; deg=Σ holds by rfl; def-pur-sheaf-hom not in stmt_deps (stage-1 record question). No compile (no file changed)."
+ }
+}

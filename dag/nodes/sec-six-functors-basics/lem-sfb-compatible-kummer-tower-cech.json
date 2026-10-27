@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-compatible-kummer-tower-cech",
+ "kind": "statement",
+ "title": "Compatible Kummer tower Cech comparisons with fixed rotation coordinates",
+ "statement": "Let $p$ be prime, let $H$ be a commutative ring of characteristic $p$, and let $t_1,\\ldots,t_r\\in H$, with $r\\geq0$. For every positive integer $n$ prime to $p$, fix a primitive root $\\zeta_n\\in H$ with $\\zeta_m^{m/n}=\\zeta_n$ when $n\\mid m$ and with $\\zeta_n^a-\\zeta_n^b$ a unit for distinct residues $a,b$ modulo $n$. Put $f=\\prod_i t_i$, with empty product $1$,\n$$U=\\operatorname{Spec}H[1/f],\\quad X_n=\\operatorname{Spec}(H[x_1,\\ldots,x_r]/(x_i^n-t_i)_i)[1/f],\\quad\\Gamma_n=(\\mathbf Z/n\\mathbf Z)^r.$$\nUse the divisibility power transitions $X_m\\to X_n$ and the reduction transitions $\\Gamma_m\\to\\Gamma_n$. Set $X=\\varprojlim_{(n,p)=1}X_n$ and $G=(\\prod_{q\\ne p}\\mathbf Z_q)^r$, where $q$ runs over primes; identify $G=\\varprojlim_n\\Gamma_n$ by the usual residue coordinates. For an affine scheme $W$ and a profinite set $P$, write $W[P]$ for the inverse limit of the finite disjoint unions of $W$ indexed by finite continuous quotients of $P$ [def-sfb-profinite-test-objects].\n\nThe rotations $x_i\\mapsto\\zeta_n^{a_i}x_i$ define compatible actions of $\\Gamma_n$ on $X_n$ and of $G$ on $X$. The comparisons\n$$\\coprod_{g\\in\\Gamma_n}X_n\\xrightarrow{\\ \\sim\\ }X_n\\times_UX_n,\\quad(x,g)\\mapsto(x,gx),\\qquad X[G]\\xrightarrow{\\ \\sim\\ }X\\times_UX$$\nare isomorphisms of schemes. They identify triple vertices $(x,gx,hgx)$ with successive labels $g,h$, so the direct first-to-third label is $hg$. The comparisons commute with all divisibility transitions and with base changes $H\\to H'$ that preserve the parameters and compatible roots. For a characteristic-$p$ ring $H'$ carrying parameters $t_i'$ and compatible primitive roots $\\zeta_n'$ with the same unit-difference property, and a ring map $H\\to H'$ carrying $\\zeta_n$ to $\\zeta_n'$, they also commute with substitutions $t_i\\mapsto u_it_i'$ accompanied by compatible roots $v_{i,n}$ of the units $u_i$, where $v_{i,n}^n=u_i$ and $v_{i,m}^{m/n}=v_{i,n}$ for $n\\mid m$, with root-coordinate map $x_{i,n}\\mapsto v_{i,n}x_{i,n}'$; both product projections and every rotation coordinate commute with that map. For $r=0$ the comparisons are the identity comparison and $G=1$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, printed p.133, simultaneous root rotations; agent-formulated compatible punctured root-algebra CRT and inverse-limit calculation."
+ },
+ "stmt_deps": [
+  "def-sfb-profinite-test-objects",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-fibre-product",
+  "def-weil-l-adic-numbers",
+  "def-sfb-full-parameter-root-tower",
+  "def-sfb-parameter-root-coordinate-views",
+  "def-sfb-profinite-product-maps",
+  "def-sfb-strict-local-kummer-tame-module"
+ ],
+ "proof": [
+  {
+   "text": "First suppose $H$ is the zero ring. Every root algebra and localization is zero, all schemes in the assertion are empty, and the scheme comparisons and diagrams are unique. Otherwise put $A=H[1/f]$ and $B_n=A[x_1,\\ldots,x_r]/(x_i^n-t_i)_i$; this is $(H[x_1,\\ldots,x_r]/(x_i^n-t_i)_i)[1/f]$, the ring of $X_n$, since both have the same maps to any ring: maps from $H$ inverting $f$ together with $n$-th roots of the images of the $t_i$. Each $t_i$ is a unit in $A$, with inverse $(\\prod_{j\\ne i}t_j)/f$; each $x_i$ is a unit in $B_n$, with inverse $x_i^{n-1}/t_i$. These formulas remain valid when a punctured ring is zero. The set $N_p$ of positive prime-to-$p$ integers is small and directed by divisibility: a common upper bound is the least common multiple.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed p.133, simultaneous root presentation and rotations; agent-written coordinate calculation."
+   }
+  },
+  {
+   "text": "Write $H_n=H[x_1,\\ldots,x_r]/(x_i^n-t_i)_i$ and $H_\\infty=\\varinjlim_{n\\in N_p}H_n$. A compatible family $H_n[1/f]\\to C$ is exactly a compatible family $H_n\\to C$ whose common image of $f$ is invertible. By the colimit and localization universal properties it is exactly a map $H_\\infty[1/f]\\to C$. Thus $B=\\varinjlim_n B_n=H_\\infty[1/f]$. The small-colimit spectrum lemma identifies $X=\\operatorname{Spec}B$ with the specified scheme inverse limit.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-spec-small-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; localization universal-property calculation."
+   }
+  },
+  {
+   "text": "For $a\\in\\Gamma_n$, evaluation $x_i\\mapsto\\zeta_n^{a_i}x_i$ preserves $x_i^n=t_i$, is independent of residue representatives, and has inverse given by $-a$. Composition adds the residues. If $n\\mid m$, then $(\\zeta_m^{a_i}x_{i,m})^{m/n}=\\zeta_n^{a_i}x_{i,m}^{m/n}$, so the power transitions intertwine rotations and residue reduction. Passing to the colimit of rings gives an action on $X$ of the compatible residue families. This is an action on schemes since the equalities are identities on algebra generators.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-category-colimit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed p.133, simultaneous root presentation and rotations; agent-written coordinate calculation."
+   }
+  },
+  {
+   "text": "Fix $n$. A zero coefficient ring gives the unique isomorphism of zero rings; otherwise, over any $B_n$-algebra occurring below, $T^n-1=\\prod_{a=0}^{n-1}(T-\\zeta_n^a)$. To verify it over rings with zero divisors, divide successively by these monic linear factors. After the first $k$ divisions, evaluation at $\\zeta_n^k$ makes the remaining quotient vanish: the other factors evaluate to units. Division is justified by $T^j-c^j=(T-c)\\sum_{b=0}^{j-1}T^{j-1-b}c^b$. After $n$ divisions the quotient is $1$, by monicity and degree. The ideals $(T-\\zeta_n^a)$ are pairwise coprime, since subtracting their generators gives a unit. Their intersection equals their product: if $I+J=(1)$, write $1=u+v$ with $u\\in I,v\\in J$, and $z=zu+zv$ for $z\\in I\\cap J$; induction applies because a product of ideals each coprime to $J$ is coprime to $J$ (multiply elements congruent to $1$ modulo $J$). Consequently the CRT node gives $C[T]/(T^n-1)\\cong\\prod_{a\\bmod n}C$ by evaluations, for each such coefficient ring $C$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT, lemma-chinese-remainder; explicit monic division and coprimality calculation for the supplied roots."
+   }
+  },
+  {
+   "text": "The affine fibre-product lemma gives $X_n\\times_U X_n=\\operatorname{Spec}(B_n\\otimes_A B_n)$, with the two specified coefficient maps. By polynomial evaluation this tensor algebra is $B_n[y_1,\\ldots,y_r]/(y_i^n-t_i)_i$: its maps to any algebra amount to the two compatible $B_n$-maps. Substitute $z_i=y_i/x_i$; the inverse is $y_i=x_i z_i$, so it becomes $B_n[z_1,\\ldots,z_r]/(z_i^n-1)_i$. Apply step 4 successively to the variables, taking the remaining variables and relations as the coefficient ring at each application. The resulting evaluation isomorphism is\n$$B_n\\otimes_A B_n\\longrightarrow\\prod_{a\\in\\Gamma_n}B_n,\\qquad b\\otimes c\\longmapsto(b\\,r_a^*(c))_a.$$\nThe finite-affine-coproduct lemma turns this into precisely $(x,a)\\mapsto(x,ax)$. Its projections are the two displayed tensor inclusions, not merely their maps on geometric points. All calculations allow a zero coefficient ring.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; agent ratio calculation and iterative use of Tag 00DT."
+   }
+  },
+  {
+   "text": "Put $L=\\varprojlim_{n\\in N_p}\\mathbf Z/n$, with its subspace topology in the product of finite discrete rings. Given $(z_q)_{q\\ne p}$, integer CRT gives the unique $a_n$ with residues $\\rho_{v_q(n)}(z_q)$ for $q\\mid n$. CRT uniqueness and residue compatibility show $a_m\\bmod n=a_n$ for $n\\mid m$. Conversely the coordinate ring maps $L\\to\\mathbf Z/q^b$ are compatible; the adic-residue universal property supplies a unique ring map $L\\to\\mathbf Z_q$. Residue separation and CRT uniqueness show these constructions are inverse. Each forward coordinate depends on finitely many residues, whose fibres are cosets of $q^b\\mathbf Z_q$. Those are open: a sufficiently small norm ball is contained in $q^b\\mathbf Z_q$, by the residue node's norm criterion. Conversely equality modulo $q^b$ bounds the norm of the difference by $q^{-b}$, proving continuity of the inverse into each $\\mathbf Z_q$. Taking the finite product over the parameters gives $G\\cong\\varprojlim_n\\Gamma_n$ with exactly the stated topological residue coordinates. Here $n=1$ gives the singleton ring.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT, lemma-chinese-remainder; agent reconstruction using the cited adic-residue universal property (Mathlib realization recorded on that node)."
+   }
+  },
+  {
+   "text": "Every finite continuous quotient $G\\to F$ factors through some $\\Gamma_n$. Indeed residue cylinders form a neighbourhood basis by step 6. For each $g$ choose a cylinder about $g$ on which the map is constant; compactness of the profinite set $G$ gives finitely many covering cylinders. A common multiple $n\\in N_p$ of their levels refines all of them, so equal residues modulo $n$ give equal values in $F$. The residue map to $\\Gamma_n$ is surjective: integer representatives in the finitely many relevant adic factors realize any prescribed residues. Thus the $\\Gamma_n$ are a cofinal family of finite quotients. By the test-object definition, $X[G]=\\varprojlim_n\\coprod_{\\Gamma_n}X$. At a fixed finite label set $F$, the finite-coproduct spectrum lemma and step 2 identify $\\varprojlim_m\\coprod_F X_m=\\coprod_F X$: the ring identity $\\varinjlim_m\\prod_F B_m=\\prod_F B$ follows from the elementwise filtered-colimit node applied to $(B_m)_m$: the canonical map is surjective by choosing one common stage for finitely many entries, and injective by choosing one later common stage for finitely many equalities. These arguments include $F$ a singleton.",
+   "uses": [
+    "def-sfb-profinite-test-objects",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-weil-pbc-category-colimit",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; agent finite-cylinder and finite-product universal-property arguments."
+   }
+  },
+  {
+   "text": "The finite comparisons commute with transitions: on the component $a\\in\\Gamma_m$ the map to level $n\\mid m$ sends $x_{i,m}$ to $x_{i,m}^{m/n}$ and its rotated value to $\\zeta_n^{a_i}x_{i,m}^{m/n}$, by step 3. Consider $D_{m,n}=\\coprod_{\\Gamma_n}X_m$. Its diagonal inverse limit equals its double inverse limit: to get the projection to $(m,n)$ from a diagonal cone, choose a common multiple $k$ of $m,n$, and project from $D_{k,k}$; independence of $k$ follows after a further common multiple. Conversely restrict any double cone to the diagonal. Step 7 therefore identifies $\\varprojlim_n D_{n,n}=X[G]$. Also $\\varprojlim_n(X_n\\times_U X_n)=X\\times_U X$: a cone is precisely two compatible cones to $X_n$ with the same composite to $U$, by the fibre-product universal property. The inverses of the compatible finite isomorphisms are compatible as well; the two induced limit morphisms are inverse since all projections of their composites are identities. This gives the actual scheme comparison $X[G]\\cong X\\times_U X$ with first projection $x$ and second projection $gx$. The compatible rotations of step 3 define a scheme action of $G$: apply the same limits to the finite actions; identity and multiplication hold after every projection.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-profinite-test-objects",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW and the explicit inverse-limit universal properties; agent diagonal-cone argument."
+   }
+  },
+  {
+   "text": "The triple convention follows from the action of steps 3 and 8, without choosing new coordinates. Work on any scheme of test points, allowing labels to vary on its finite open-and-closed pieces. Successive vertices are $x$, $gx$, $h(gx)$; the action identity gives $h(gx)=(hg)x$. At level $n$ the root coordinate on the third vertex is $\\zeta_n^{b_i}\\zeta_n^{a_i}x_{i,n}=\\zeta_n^{b_i+a_i}x_{i,n}$, so its label relative to the first vertex is $hg$. In the profinite parameter object this identity holds after every finite quotient projection, hence holds in the defining inverse limit. Both projections are the stated vertices by the fibre-product universal property [def-pc-fibre-product]. This proves the convention as an identity of scheme morphisms, rather than only on geometric points. The triple map $X[G\\times G]\\to X\\times_UX\\times_UX$, $(x,g,h)\\mapsto(x,gx,hgx)$, is an isomorphism: write $X\\times_UX\\times_UX=(X\\times_UX)\\times_{\\mathrm{pr}_2,X,\\mathrm{pr}_1}(X\\times_UX)$ and pull back the double comparison of step 8 on both factors, giving $X[G]\\times_{X}X[G]$, formed with $(x,g)\\mapsto gx$ on the left and the first projection on the right. By [def-sfb-profinite-test-objects], $X[S]=\\operatorname{Spec}LC(S,\\mathbf Z)\\times_{\\operatorname{Spec}\\mathbf Z}X$, so this fibre product is $X[G]\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Spec}LC(G,\\mathbf Z)=X[G\\times G]$, since $LC(G,\\mathbf Z)\\otimes LC(G,\\mathbf Z)=LC(G\\times G,\\mathbf Z)$ (the quotients $\\Gamma_n\\times\\Gamma_n$ are cofinal among finite quotients of $G\\times G$, by the cylinder argument of step 7). Under these identifications the point $(x,g,h)$ has vertices $x,gx,h(gx)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed p.133, explicit simultaneous root presentation; agent coordinate calculation supplement."
+   }
+  },
+  {
+   "text": "For the remaining substitution, write $\\phi:H\\to H'$ with $\\phi(t_i)=u_it'_i$ and $\\phi(\\zeta_n)=\\zeta'_n$. Evaluation $x_{i,n}\\mapsto v_{i,n}x'_{i,n}$ respects the relations because $(v_{i,n}x'_{i,n})^n=u_it'_i$. It extends to the punctured algebra since $\\phi(f)=(\\prod_i u_i)\\prod_i t'_i$ is invertible there. For $n\\mid m$, the two images of $x_{i,n}$ are equal because $(v_{i,m}x'_{i,m})^{m/n}=v_{i,n}(x'_{i,m})^{m/n}$. For every rotation label $a$, the two images of a generator are $\\phi(\\zeta_n^{a_i})v_{i,n}x'_{i,n}=v_{i,n}(\\zeta'_n)^{a_i}x'_{i,n}$. They agree on coefficients as well, proving equality of the algebra maps. Thus the induced scheme map $F_n:X'_n\\to X_n$ satisfies $F_n(a x')=aF_n(x')$. The comparison square commutes since its two projections are $F_n(x')$ and $F_n(a x')=aF_n(x')$, while the label stays $a$. Passing to the inverse limits gives the same equalities for $F:X'\\to X$ and every finite rotation coordinate. Equality is detected by the limit projections, so this proves the whole profinite square, both product projections and all rotation coordinates. Ordinary base change is the special case $u_i=v_{i,n}=1$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed p.133, explicit simultaneous root presentation; agent coordinate calculation supplement."
+   }
+  },
+  {
+   "text": "If $r=0$, $f=1$, each $H_n=H$ and every transition is the identity. Thus $X=U=\\operatorname{Spec}H$ and $\\Gamma_n=G=1$. The map $(x,1)\\mapsto(x,x)$ identifies with the identity under $U\\times_U U=U$; all substitutions and triple labels reduce to identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed p.133, explicit simultaneous root presentation; agent coordinate calculation supplement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "def-weil-affine-spectrum",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-exc-padic-residue-universal-property",
+  "def-sfb-profinite-test-objects",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, printed p.133, simultaneous root presentation; independent punctured CRT, adic-residue reconstruction, inverse-limit cones and explicit triple/substitution calculations. No use of the dependent full-root-rotation-torsor node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chinese remainders identify the Cech nerve of a compatible prime to p multi parameter Kummer root tower with its profinite rotation group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WittVector.factorPowSucc_comp_fontaineThetaModPPow\", \"module\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsAdicComplete (Ideal.span {↑p}) R] (n : ℕ),\\n  (Ideal.Quotient.factorPowSucc (Ideal.span {↑p}) (n + 1)).comp (WittVector.fontaineThetaModPPow R p (n + 1)) =\\n    WittVector.fontaineThetaModPPow R p \", \"doc\": \"For any natural number $n$, the composition of the canonical quotient homomorphism $R/(p^{n+2}) \\\\to R/(p^{n+1})$ with the Fontaine theta function $\\\\theta_{n+1}$ modulo $p^{n+1}$ equals the Fontaine th\"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"cyclotomicCharacter.toFun_apply\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] (g : L ≃+* L)\\n  [inst_3 : ∀ (i : ℕ), HasEnoughRootsOfUnity L (p ^ i)],\\n  cyclotomicCharacter.toFun p g = PadicInt.ofIntSeq (fun x => modularCyclotomicCharacter.aux g (p ^ x)) ⋯\", \"doc\": \"For a prime number $ p $ and a ring automorphism $ g : L \\to L $, the cyclotomic character evaluated at $ g $ is the $ p $-adic integer obtained as the limit of the sequence $ (m_i) $, where each $ m_i\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"cyclotomicCharacter.toZModPow_toFun\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] (g : L ≃+* L)\\n  [inst_3 : ∀ (i : ℕ), HasEnoughRootsOfUnity L (p ^ i)] (n : ℕ),\\n  (PadicInt.toZModPow n) (cyclotomicCharacter.toFun p g) = ↑((modularCyclotomicCharacter L ⋯) g)\", \"doc\": \"For a prime $ p $, natural number $ n $, and automorphism $ g $ of a field $ L $ containing all $ p^n $-th roots of unity, the cyclotomic character $ \\\\chi_p(g) $ evaluated at $ n $ equals the modular \"}\n  {\"name\": \"cyclotomicCharacter.toFun\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"{L : Type u} → [inst : CommRing L] → [IsDomain L] → (p : ℕ) → [inst_2 : Fact (Nat.Prime p)] → L ≃+* L → ℤ_[p]\", \"doc\": \"Let `p` be a prime number, `L` be a commutative domain, and `g` be a ring automorphism of `L`. The `p`-adic cyclotomic character of `g` is an element of the ring of `p`-adic integers `\\\\mathbb{Z}_p`. I\"}\n  {\"name\": \"WittVector.fontaineThetaModPPow_teichmuller\", \"module\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] (n : ℕ) (x : PreTilt R p),\\n  (WittVector.fontaineThetaModPPow R p n) ((WittVector.teichmuller p) x) =\\n    (Ideal.Quotient.mk (Ideal.span {↑p} ^ (n + 1))\", \"doc\": \"For any natural number $ n $ and element $ x $ in the pretilt $ R^\\flat $, the Fontaine theta function modulo $ p^n $ evaluated at the Teichmüller lift of $ x $ equals the quotient map sending $ x $'s \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: CRT supplies the finite ring ingredient only; the scheme Cech identifications with all root transitions and profinite labels require an argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The double overlap of an inverse limit of parameter root covers is the product of the tower with the prime to characteristic adic integers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.piEquivFin_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ) (x : AdicCompletion I (Fin n → R)),\\n  (AdicCompletion.piEquivFin I n) x = (AdicCompletion.pi I fun x => R) x\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a natural number $ n $, there exists a linear equivalence between the $ I $-adic completion of the product module $ R^n $ (viewed as functions $ \\\\math\"}\n  {\"name\": \"WittVector.factorPowSucc_comp_fontaineThetaModPPow\", \"module\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsAdicComplete (Ideal.span {↑p}) R] (n : ℕ),\\n  (Ideal.Quotient.factorPowSucc (Ideal.span {↑p}) (n + 1)).comp (WittVector.fontaineThetaModPPow R p (n + 1)) =\\n    WittVector.fontaineThetaModPPow R p \", \"doc\": \"For any natural number $n$, the composition of the canonical quotient homomorphism $R/(p^{n+2}) \\\\to R/(p^{n+1})$ with the Fontaine theta function $\\\\theta_{n+1}$ modulo $p^{n+1}$ equals the Fontaine th\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (n : ℕ) (x : AdicCompletion I S),\\n  (Ideal.Quotient.mk (I ^ n • ⊤)) ((AdicCompletion.ofAlgEquiv I).symm x) = (AdicCompletion.eval I S n) x\", \"doc\": \"For a commutative ring $ S $, an ideal $ I $, and any natural number $ n $, the evaluation map at level $ n $ of an element $ x $ in the $ I $-adic completion of $ S $ satisfies $ \\\\text{quotient}_{I^n\"}\n  {\"name\": \"AdicCompletion.pi_apply_coe\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {ι : Type u_6} (M : ι → Type u_7)\\n  [inst_1 : (i : ι) → AddCommGroup (M i)] [inst_2 : (i : ι) → Module R (M i)] (c : AdicCompletion I ((j : ι) → M j))\\n  (i : ι) (n : ℕ), ↑((AdicCompletion.pi I M) c i) n = (LinearMap.reduceModIdeal (I ^ n) (LinearMap\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, an index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, the linear map from the $ I $-adic completion of the product module $ \\\\p\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"AdicCompletion.mk_ofAlgEquiv_symm\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (n : ℕ) (x : AdicCompletion I S),\\n  (Ideal.Quotient.mk (I ^ n)) ((AdicCompletion.ofAlgEquiv I).symm x) = (AdicCompletion.evalₐ I n) x\", \"doc\": \"For any natural number $ n $ and any element $ x $ in the $ I $-adic completion of a commutative ring $ S $, the image of $ (\\\\text{ofAlgEquiv}\\\\ I)^{-1}(x) $ under the canonical quotient map $ S \\\\to S/\"}\n  {\"name\": \"AdicCompletion.transitionMap_map_mul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {m n : ℕ} (hmn : m ≤ n) (x : R ⧸ I ^ n • ⊤) (y : R ⧸ I ^ n • ⊤),\\n  (AdicCompletion.transitionMap I R hmn) (x * y) =\\n    (AdicCompletion.transitionMap I R hmn) x * (AdicCompletion.transitionMap I R hmn) y\", \"doc\": \"For natural numbers $ m \\\\leq n $, the transition map from the quotient ring $ R/I^n $ to $ R/I^m $ preserves multiplication. Specifically, for any elements $ x, y \\\\in R/I^n $, the image of the product\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: CRT supplies the finite ring ingredient only; the scheme Cech identifications with all root transitions and profinite labels require an argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootsOfUnity\", \"IsIso\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: CRT supplies the finite ring ingredient only; the scheme Cech identifications with all root transitions and profinite labels require an argument."
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|root).*(torsor|Cech|Čech)|(torsor|Cech|Čech).*(Kummer|root)",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Topology/Category/Stonean/Adjunctions.lean\", \"line\": \"43\", \"text\": \"  exact (_root_.stoneCechEquivalence (TopCat.of X) (toCompHaus.obj Y)).trans\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Chain.lean\", \"line\": \"37\", \"text\": \"* `LieModule.trace_toEnd_genWeightSpaceChain_eq_zero`: given a root `α` relative to a Cartan\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: CRT supplies the finite ring ingredient only; the scheme Cech identifications with all root transitions and profinite labels require an argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible parameter root covers have a profinite Galois torsor comparison from the Chinese remainder theorem",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Nat.chineseRemainderOfMultiset\", \"module\": \"Mathlib.Data.Nat.ChineseRemainder\", \"type\": \"{m : Multiset ι} :\\n  m.Nodup → (∀ i ∈ m, s i ≠ 0) → Set.Pairwise {x | x ∈ m} (Coprime on s) → { k // ∀ i ∈ m, k ≡ a i [MOD s i] }\", \"doc\": \"Given a finite set of pairwise coprime non-zero natural numbers $\\\\{m_i\\\\}$, there exists a natural number $k$ such that $k \\\\equiv a_i \\\\pmod{m_i}$ for each $i$, where $a_i$ are given remainders. The sol\"}\n  {\"name\": \"ZMod.chineseRemainder\", \"module\": \"Mathlib.Data.ZMod.Basic\", \"type\": \"{m n : ℕ} (h : m.Coprime n) : ZMod (m * n) ≃+* ZMod m × ZMod n\", \"doc\": \"For any coprime natural numbers $m$ and $n$, the Chinese Remainder Theorem establishes a ring isomorphism between $\\\\mathbb{Z}/(mn)\\\\mathbb{Z}$ and the product ring $\\\\mathbb{Z}/m\\\\mathbb{Z} \\\\times \\\\mathb\"}\n  {\"name\": \"Ideal.quotientInfRingEquivPiQuotient\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Operations\", \"type\": \"(f : ι → Ideal R) (hf : Pairwise (IsCoprime on f)) : (R ⧸ ⨅ i, f i) ≃+* ∀ i, R ⧸ f i\", \"doc\": \"For a commutative ring $ R $ and a finite family of pairwise coprime ideals $\\\\{I_i\\\\}_{i \\\\in \\\\iota}$ (i.e., $ I_i + I_j = R $ for all $ i \\\\neq j $), the canonical ring homomorphism from the quotient ri\"}\n  {\"name\": \"IsDedekindDomain.quotientEquivPiOfProdEq\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas\", \"type\": \"{ι : Type*} [Fintype ι] (I : Ideal R) (P : ι → Ideal R) (e : ι → ℕ) (prime : ∀ i, Prime (P i))\\n  (coprime : Pairwise fun i j => P i ≠ P j) (prod_eq : ∏ i, P i ^ e i = I) : R ⧸ I ≃+* ∀ i, R ⧸ P i ^ e i\", \"doc\": \"In a Dedekind domain $ R $, given a finite set of pairwise distinct prime ideals $ \\\\{\\\\mathfrak{p}_i\\\\} $ with positive integers $ e_i $, if the product $ \\\\prod_{i} \\\\mathfrak{p}_i^{e_i} $ equals an idea\"}\n  {\"name\": \"ZMod.prodEquivPi\", \"module\": \"Mathlib.Data.ZMod.QuotientRing\", \"type\": \"{ι : Type*} [Fintype ι] (a : ι → ℕ) (coprime : Pairwise (Nat.Coprime on a)) : ZMod (∏ i, a i) ≃+* Π i, ZMod (a i)\", \"doc\": \"Given a finite type $\\\\iota$ and a family of pairwise coprime natural numbers $a : \\\\iota \\\\to \\\\mathbb{N}$, there exists a ring isomorphism between $\\\\mathbb{Z}/\\\\left(\\\\prod_{i \\\\in \\\\iota} a(i)\\\\right)\\\\mathb\"}\n  {\"name\": \"Ideal.quotientInfToPiQuotient_surj\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Operations\", \"type\": \"{I : ι → Ideal R} (hI : Pairwise (IsCoprime on I)) : Surjective (quotientInfToPiQuotient I)\", \"doc\": \"For a ring $ R $ and a family of pairwise coprime two-sided ideals $\\\\{I_i\\\\}_{i \\\\in \\\\iota}$, the canonical ring homomorphism $ R / \\\\bigcap_{i \\\\in \\\\iota} I_i \\\\to \\\\prod_{i \\\\in \\\\iota} R / I_i $ is surject\"}\n  {\"name\": \"Nat.chineseRemainderOfFinset\", \"module\": \"Mathlib.Data.Nat.ChineseRemainder\", \"type\": \"(t : Finset ι) (hs : ∀ i ∈ t, s i ≠ 0) (pp : Set.Pairwise t (Coprime on s)) : { k // ∀ i ∈ t, k ≡ a i [MOD s i] }\", \"doc\": \"Given a finite set $ t $ of indices, a family of non-zero natural numbers $ \\\\{s_i\\\\}_{i \\\\in t} $ that are pairwise coprime, and a family of residues $ \\\\{a_i\\\\}_{i \\\\in t} $, there exists a natural number\"}\n  {\"name\": \"InfiniteGalois.profiniteGalGrp\", \"module\": \"Mathlib.FieldTheory.Galois.Profinite\", \"type\": \"[IsGalois k K] : ProfiniteGrp\", \"doc\": \"The Galois group $\\\\text{Gal}(K/k)$ of an infinite Galois extension $K/k$, equipped with the Krull topology, is constructed as an object in the category of profinite groups. This topology ensures the g\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: CRT supplies the finite ring ingredient only; the scheme Cech identifications with all root transitions and profinite labels require an argument."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*torsor|torsor.*Kummer|root.*rotation|rotation.*root",
+   "results": "{\"t\": \"2026-10-22T07:02:26Z\", \"tool\": \"grep\", \"query\": \"Kummer.*torsor|torsor.*Kummer|root.*rotation|rotation.*root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Probability/Distributions/Fernique.lean\", \"Mathlib/Probability/Distributions/Fernique.lean\", \"Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean\"], \"digest\": \"8e77c88795d62d67\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms do not give the simultaneous scheme torsor, profinite limit and coordinate-change assertions over arbitrary commutative rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Cech comparison of a Kummer root cover is an isomorphism compatible with power transitions and scaling the parameters by units",
+   "results": "{\"t\": \"2026-10-22T07:02:26Z\", \"tool\": \"leansearch\", \"query\": \"The Cech comparison of a Kummer root cover is an isomorphism compatible with power transitions and scaling the parameters by units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"adjoinRootXPowSubCEquiv.congr_simp\", \"adjoinRootXPowSubCEquiv_symm_eq_root\", \"adjoinRootXPowSubCEquiv\", \"adjoinRootXPowSubCEquiv_root\", \"instIsScalarTowerCyclotomicField\", \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"IsPrimitiveRoot.autToPow.congr_simp\", \"autAdjoinRootXPowSubC_root\"], \"digest\": \"3baf7885266f094f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms do not give the simultaneous scheme torsor, profinite limit and coordinate-change assertions over arbitrary commutative rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimitiveRoot\", \"IsTorsor\"",
+   "results": "{\"t\": \"2026-10-22T07:02:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPrimitiveRoot\\\", \\\"IsTorsor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms do not give the simultaneous scheme torsor, profinite limit and coordinate-change assertions over arbitrary commutative rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible Kummer root towers identify their double overlap with the profinite rotation group, naturally under rescaling roots by units",
+   "results": "{\"t\": \"2026-10-22T07:02:27Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible Kummer root towers identify their double overlap with the profinite rotation group, naturally under rescaling roots by units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"autAdjoinRootXPowSubCEquiv_root\", \"autAdjoinRootXPowSubC_root\", \"AdjoinRootXPowSubCEquivToRootsOfUnity\", \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"autEquivRootsOfUnity_smul\", \"modularCyclotomicCharacter.aux_spec\", \"autAdjoinRootXPowSubCEquiv\", \"cyclotomicCharacter.toFun_spec\"], \"digest\": \"8eaf53af0557e7db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms do not give the simultaneous scheme torsor, profinite limit and coordinate-change assertions over arbitrary commutative rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite root algebra torsor isomorphisms commute with inverse limits and parameter changes",
+   "results": "{\"t\": \"2026-10-22T07:06:29Z\", \"tool\": \"leanfinder\", \"query\": \"Finite root algebra torsor isomorphisms commute with inverse limits and parameter changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.comp_indexEquiv_symm_apply\", \"RootPairing.Hom.comp_indexEquiv_apply\", \"RootPairing.Equiv.comp_indexEquiv_symm_apply\", \"InfiniteGalois.limitToAlgEquiv_apply\", \"RootPairing.Equiv.comp_indexEquiv_apply\", \"InfiniteGalois.limitToAlgEquiv_symm_apply\", \"InfiniteGalois.mk_toAlgEquivAux\", \"InfiniteGalois.limitToAlgEquiv\"], \"digest\": \"13d0622d3fc36c41\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field Kummer automorphisms do not give the simultaneous scheme torsor, profinite limit and coordinate-change assertions over arbitrary commutative rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-tame-finite-fibre-classification",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite tame sheaves over a universal residual SNC neighborhood; returned finite-fibre proof steps 8: Compatible Kummer tower Cech comparisons with fixed rotation coordinates",
+   "via": [
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-compatible-kummer-tower-cech",
+  "worker": "stage1",
+  "summary": "Repair of returned cyclic delivery: rebase the retained statement and searches on the current DAG, remove the citation of full-root-rotation-torsor (which now depends on this item), and give the independent monic-division/CRT, adic-residue and scheme-limit arguments. Retain and check triple labels, substitutions and all edge cases. No new nodes or Mathlib leaves.",
+  "blueprint": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md: open direct image, tame-boundary Kummer calculation; finite-fibre classification needs fixed rotation labels and pointed unit-root chart changes.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-padic-residue-universal-property",
+    "why": "Generic adic residue reconstruction and norm criterion identify the prescribed deck-group coordinates; this Mathlib leaf imports no coefficient or purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-padic-residue-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-dc631db5c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-dc631db5c (reviewer sub-agent of L); spot-checked: I read the item in full. It has 11 steps and no new nodes, and the statement is identical to side-live, so nothing is weakened. No repair note exists. Live and side-live both have the item unsplit, so it is not superseded. The 2-cycle that caused the return is gone: no node in the stmt_deps/proof_deps closure reaches the item, and full-root-rotation-torsor now only cites it. Source: ILO IX Prop 2.1 (printed p.133, PDF p.139) is Fujiwara-Kato for regular Y and serves only as chart material. The proof is agent-written for arbitrary characteristic-p rings, and no SGA is cited. Every cited node is a definition or a Mathlib leaf; I read each statement, and the declared padic-residue tool use is accepted. Checks: zero-ring case; B=H_inf[1/f] by the universal properties; rotations ((zeta_m^a x)^{m/n}=zeta_n^a x^{m/n}); T^n-1=prod(T-zeta^a) by successive division with unit differences, then the CRT leaf; tensor presentation with z=y/x in both directions and component a=(id, Spec r_a); G is lim Z/n topologically by integer CRT, the adic lift and the norm criterion; Gamma_n cofinal by compactness and lcm; finite products commute with the filtered colimit; diagonal limit equals double limit; substitution via (vx')^n=ut', phi(f) a unit and the m/n and rotation identities. Edge cases tested: H=0, H'=0, r=0, n=1, nilpotent t_i (empty puncture). FIX: (1) Step 9 re-applies the lost FIX of run 92cc88969, whose landing was refused for the cycle, and is now marked non-elementary. The step proves that X[G x G] -> X x_U X x_U X, (x,g,h) -> (x,gx,hgx), is an isomorphism by pulling the double comparison back and using LC(G) tensor LC(G) = LC(G x G). The statement's triple clause asserts this, and kummer-partial-nerve-naturality step 8 uses it. (2) Step 1 now justifies B_n=H_n[1/f]. (3) Step 7's garbled sentence on the elementwise leaf is rewritten as explicit surjectivity and injectivity. Uses and proof_deps are unchanged. Maintainer note: lem-pc-crt-ideal-quotient-product's source says Stacks 00U3, but the tag is 00DT.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompatibleKummerTowerCech",
+  "declaration": "AlgebraicGeometry.ProEtale.KummerCech.compatible_kummer_tower_cech",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.KummerCech.orderNeZero",
+   "AlgebraicGeometry.ProEtale.KummerCech.Label",
+   "AlgebraicGeometry.ProEtale.KummerCech.labelGroup",
+   "AlgebraicGeometry.ProEtale.KummerCech.labelTopology",
+   "AlgebraicGeometry.ProEtale.KummerCech.labelCompact",
+   "AlgebraicGeometry.ProEtale.KummerCech.labelT2",
+   "AlgebraicGeometry.ProEtale.KummerCech.labelDisconnected",
+   "AlgebraicGeometry.ProEtale.KummerCech.labelTopologicalGroup",
+   "AlgebraicGeometry.ProEtale.KummerCech.reduction",
+   "AlgebraicGeometry.ProEtale.KummerCech.residueMap",
+   "AlgebraicGeometry.ProEtale.KummerCech.exponent",
+   "AlgebraicGeometry.ProEtale.KummerCech.cover",
+   "AlgebraicGeometry.ProEtale.KummerCech.firstLabel",
+   "AlgebraicGeometry.ProEtale.KummerCech.secondLabel",
+   "AlgebraicGeometry.ProEtale.KummerCech.composedLabel",
+   "AlgebraicGeometry.ProEtale.KummerCech.nextVertex",
+   "AlgebraicGeometry.ProEtale.KummerCech.Coordinates",
+   "AlgebraicGeometry.ProEtale.KummerCech.Substitution",
+   "AlgebraicGeometry.ProEtale.KummerCech.compatible_kummer_tower_cech"
+  ],
+  "file": "lean/Sheaf/Paper/CompatibleKummerTowerCech.lean",
+  "statement": "theorem compatible_kummer_tower_cech (p : ℕ) (hp : p.Prime) {H : Type u} [CommRing H] [CharP H p] (r : ℕ) (t : Fin r → H) (ζ : TameRootOrder p → H) (hζ : ∀ n, IsPrimitiveRoot (ζ n) n.val) (hcompat : ∀ (n m : TameRootOrder p), n.val ∣ m.val → ζ m ^ (m.val / n.val) = ζ n) (hunit : ∀ (n : TameRootOrder p) (a b : ZMod n.val), a ≠ b → IsUnit (ζ n ^ a.val - ζ n ^ b.val)) : ∃ D : Coordinates p t ζ, ∀ (K : Type u) [CommRing K] [CharP K p] (s : Fin r → K) (η : TameRootOrder p → K) (_hη : ∀ n, IsPrimitiveRoot (η n) n.val) (_hcompat : ∀ (n m : TameRootOrder p), n.val ∣ m.val → η m ^ (m.val / n.val) = η n) (_hunit : ∀ (n : TameRootOrder p) (a b : ZMod n.val), a ≠ b → IsUnit (η n ^ a.val - η n ^ b.val)) (φ : H →+* K) (_hroots : ∀ n, φ (ζ n) = η n) (unit : Fin r → Kˣ) (v : Fin r → TameRootOrder p → K) (_ht : ∀ i, φ (t i) = (unit i : K) * s i) (_hv : ∀ i n, v i n ^ n.val = (unit i : K)) (_hvcompat : ∀ i (n m : TameRootOrder p), n.val ∣ m.val → v i m ^ (m.val / n.val) = v i n) (E : Coordinates p s η), Nonempty (Substitution D E φ v)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existential Coordinates and Substitution conclusions specify all maps on actual quotient/localization rings. Finite and full profinite test objects use the published profiniteProduct interface; the downstream FullRootRotationTorsor is deliberately not imported. ULift on the finite parameter index keeps label schemes in the coefficient universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25c74687a",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 6c65d72a1097; F1-F3 repaired. F1: theorem node lem-sfb-unit-root-coordinate-tower-comparison dropped from stmt_deps; new def-sfb-parameter-root-coordinate-views (existing:true, unchanged UnitRootCoordinateTowerComparison lines 40-155) matches the Lean exactly (stage, labels, labelIndex/Order, root, boundaryIdeal tags 0/1/2, reduced, view, viewMap); statement verbatim; definition-only stmt_deps. F2: new tripleComparison iso X[Γ×Γ] ≅ (X×_U X)×_{pr2,X,pr1}(X×_U X) pinned by tripleComparison_fst (x,gx) and tripleComparison_snd (gx,hgx), at all levels; step-9 docstring extended. F3: def-sfb-strict-local-kummer-tame-module in stmt_deps with public import. Item node unchanged apart from lean/stmt_deps; lean.statement verbatim; all 10 stmt_deps are definitions; only sorry; docstrings OK; edge cases r=0, n=1, H=0, empty puncture covered. Notes: F4, the second-reading section names maintainer L's return review as the second reading and the worker check as a self-check, a process gap; the view declarations are also listed on the theorem node (same as the profinite-product-maps precedent). No compile (no file changed)."
+ }
+}

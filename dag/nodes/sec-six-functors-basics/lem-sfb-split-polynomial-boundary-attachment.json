@@ -1,0 +1,400 @@
+{
+ "id": "lem-sfb-split-polynomial-boundary-attachment",
+ "kind": "statement",
+ "title": "Attach polynomial generators with prescribed compatible faces and fixed degeneracies",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, let $n\\geq0$, and let $P$ be an augmented $n$-truncated simplicial $A$-algebra [def-weil-pbc-simplicial-coskeleton]. Suppose there are finite sets $E_0,\\ldots,E_n$ and specified identifications with polynomial algebras [def-weil-pbc-mv-polynomial-ring]\n$$P_k=A[x_{e,\\sigma}: e\\in E_j,\\ 0\\leq j\\leq k,\\ \\sigma:[k]\\twoheadrightarrow[j]]\\quad(0\\leq k\\leq n),$$\nunder which every degeneracy operator associated to a surjection $\\tau:[\\ell]\\twoheadrightarrow[k]$ sends $x_{e,\\sigma}$ to $x_{e,\\sigma\\tau}$. Let $T$ be a finite set. For each $t\\in T$ prescribe $b_t\\in B$ and $a_{t,i}\\in P_n$ for $0\\leq i\\leq n+1$ such that every $a_{t,i}$ augments to $b_t$ and, when $n\\geq1$, $d_i a_{t,j}=d_{j-1}a_{t,i}$ for $i<j$. There is an augmented $(n+1)$-truncated simplicial $A$-algebra $P'$ whose restriction is the specified $P$, whose new term is\n$$P'_{n+1}=A[x_{e,\\sigma}:e\\in E_j,\\ 0\\leq j\\leq n,\\ \\sigma:[n+1]\\twoheadrightarrow[j]][y_t:t\\in T],$$\nand whose new generators satisfy $d_i y_t=a_{t,i}$ and $\\epsilon(y_t)=b_t$. Every degeneracy, including the new ones, acts on the displayed polynomial generators by composition of surjections, so this is the same kind of presentation with $E_{n+1}=T$. All simplicial identities and augmentation identities hold.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PX (proposition-polynomial), inductive polynomial replacement of the next degree; repaired compatible-degeneracy form using the split indexing of simplicial.tex Tag 017P (definition-split). Arbitrary independent lifts of degeneracies in the printed proof do not establish their identities; the new statement isolates the polynomial boundary attachment that supplies compatible lifts."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-coskeleton",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $m=n+1$ and $z_e=x_{e,\\mathrm{id}_{[j]}}\\in P_j$ for $e\\in E_j$. Write $P(\\alpha)$ for the operator of the given truncated functor. The hypothesis on degeneracies gives $x_{e,\\rho}=P(\\rho)(z_e)$ for every surjection $\\rho:[k]\\twoheadrightarrow[j]$, $k\\leq n$. Form the displayed polynomial algebra $Q$ in the statement. Define $D_i:Q\\to P_n$ on its variables by $D_i(x_{e,\\sigma})=P(\\sigma\\delta_i)(z_e)$ and $D_i(y_t)=a_{t,i}$. This is well-typed: $\\sigma\\delta_i:[n]\\to[j]$ has both degrees at most $n$. Define $S_l:P_n\\to Q$ by $S_l(x_{e,\\rho})=x_{e,\\rho\\sigma_l}$. Existence and uniqueness of all these $A$-algebra maps are the polynomial universal property; retain every map in lower degrees.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PX (proposition-polynomial), inductive step; compatible split-generator replacement, using simplicial.tex Tag 017P (definition-split)."
+   }
+  },
+  {
+   "text": "Check the new face–face relation for $n\\geq1$. On $y_t$, $d_iD_j=d_{j-1}D_i$ is precisely the assumed equation $d_i a_{t,j}=d_{j-1}a_{t,i}$. On $x_{e,\\sigma}$ its sides are $P(\\sigma\\delta_j\\delta_i)(z_e)$ and $P(\\sigma\\delta_i\\delta_{j-1})(z_e)$ by functoriality in the old truncation. The two increasing maps into $[m]$ omit exactly the same two vertices $i,j$ and hence are equal. The maps agree on coefficients as well, so polynomial uniqueness proves their equality. When $n=0$ this relation has no nonnegative target degree.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PX (proposition-polynomial), inductive step; compatible split-generator replacement, using simplicial.tex Tag 017P (definition-split)."
+   }
+  },
+  {
+   "text": "Check the new mixed identities on each generator $x_{e,\\rho}$ of $P_n$. The value of $D_iS_l$ is $P(\\rho\\sigma_l\\delta_i)(z_e)$. Directly from the maps that omit $i$ and repeat $l$, $\\sigma_l\\delta_i$ equals $\\delta_i\\sigma_{l-1}$ if $i<l$, the identity if $i=l,l+1$, and $\\delta_{i-1}\\sigma_l$ if $i>l+1$. In the first and last cases both intermediate degrees are $n-1$ and $n$, so old functoriality identifies this value with $s_{l-1}d_i(x_{e,\\rho})$ or $s_l d_{i-1}(x_{e,\\rho})$ respectively; in the middle cases it is $x_{e,\\rho}$. These pointwise identities follow by evaluating below, at, and above the repeated vertex. Polynomial uniqueness proves the mixed identities as algebra maps. For $n=0$ only the two middle cases occur.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PX (proposition-polynomial), inductive step; compatible split-generator replacement, using simplicial.tex Tag 017P (definition-split)."
+   }
+  },
+  {
+   "text": "The only new degeneracy–degeneracy identities have source $P_{n-1}$, so assume $n\\geq1$. Applied to $x_{e,\\rho}$, the two maps $S_i s_j$ and $S_{j+1}s_i$ for $i\\leq j$ give $x_{e,\\rho\\sigma_j\\sigma_i}$ and $x_{e,\\rho\\sigma_i\\sigma_{j+1}}$. The two ordinal surjections agree: collapsing positions $i,i+1$ and then $j,j+1$ is the same ordered quotient as first collapsing $j+1,j+2$ and then $i,i+1$ (for $i=j$ both collapse the same three consecutive vertices). Thus the labels agree. Polynomial uniqueness gives the identity on $P_{n-1}$. All identities lying wholly in old degrees already hold.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PX (proposition-polynomial), inductive step; compatible split-generator replacement, using simplicial.tex Tag 017P (definition-split)."
+   }
+  },
+  {
+   "text": "The preceding three checks give every retained simplicial identity. Apply the truncated recognition theorem with $N=m$ in the category of commutative $A$-algebras. It gives the required truncated functor, and uniqueness identifies its restriction with the specified $P$, since all old objects and operators were retained. The theorem also expresses every surjection as codegeneracies; composing their prescribed substitutions gives $x_{e,\\sigma}\\mapsto x_{e,\\sigma\\tau}$. There is no surjection out of a retained degree strictly larger than $m$, so no degeneracy out of a new $y_t$ needs specification. Set $E_m=T$, with $y_t=x_{t,\\mathrm{id}_{[m]}}$.",
+   "uses": [
+    "lem-sfb-truncated-simplex-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 0168 (lemma-face-degeneracy-category) and 016B (lemma-characterize-simplicial-object), bounded-degree version."
+   }
+  },
+  {
+   "text": "Define $\\epsilon_Q:Q\\to B$ by $x_{e,\\sigma}\\mapsto\\epsilon_j(z_e)$ and $y_t\\mapsto b_t$. On an old variable, $\\epsilon_nD_i(x_{e,\\sigma})=\\epsilon_j(z_e)$ because the old augmentation commutes with $P(\\sigma\\delta_i)$; on $y_t$ this is the hypothesis $\\epsilon_n(a_{t,i})=b_t$. Also $\\epsilon_Q S_l(x_{e,\\rho})=\\epsilon_j(z_e)=\\epsilon_n(x_{e,\\rho})$. Polynomial uniqueness proves these augmentation equalities on the whole algebras. The natural-transformation clause of recognition now makes the old augmentation together with $\\epsilon_Q$ an augmentation to the constant $B$. This includes $n=0$, where the equality of both augmented faces replaces a degree $-1$ face–face equation. The variables of $Q$ are exactly those demanded, including empty $T$ or empty $E_j$; no domain, nonzero-ring, or Noetherian assumption was used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-simplicial-coskeleton",
+    "lem-sfb-truncated-simplex-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PX (proposition-polynomial), inductive step; compatible split-generator replacement, using simplicial.tex Tag 017P (definition-split)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-simplicial-coskeleton",
+  "lem-sfb-truncated-simplex-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PX inductive step, repaired using split polynomial variables as suggested by simplicial.tex Tag 017P; explicit identity checks supplied by Q51."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(latching|degenerac|simplicial).*(polynomial|MvPolynomial)|(polynomial|MvPolynomial).*(latching|degenerac)",
+   "results": {
+    "t": "2026-10-23T12:12:15Z",
+    "tool": "grep",
+    "query": "(latching|degenerac|simplicial).*(polynomial|MvPolynomial)|(polynomial|MvPolynomial).*(latching|degenerac)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"degeneracy\", MvPolynomial",
+   "results": {
+    "t": "2026-10-23T12:12:16Z",
+    "tool": "loogle",
+    "query": "\"degeneracy\", MvPolynomial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Attaching polynomial generators to a truncated simplicial algebra with compatible faces and free degeneracies",
+   "results": {
+    "t": "2026-10-23T12:12:16Z",
+    "tool": "leansearch",
+    "query": "Attaching polynomial generators to a truncated simplicial algebra with compatible faces and free degeneracies",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.mk",
+     "Algebra.Generators.Simps.σ",
+     "SimplexCategoryGenRel.generators",
+     "SimplexCategoryGenRel.exists_P_σ_P_δ_factorization",
+     "SimplexCategoryGenRel.instHasFactorizationP_σP_δ",
+     "CategoryTheory.SimplicialObject.Truncated.mkNotation",
+     "SimplexCategoryGenRel.degeneracies.σ",
+     "SimplexCategoryGenRel.generators.δ"
+    ],
+    "digest": "57b2bf558666fe2a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a truncated simplicial polynomial algebra by finitely many generators with prescribed compatible faces and compatible degeneracy variables",
+   "results": {
+    "t": "2026-10-23T12:44:28Z",
+    "tool": "leanfinder",
+    "query": "Extend a truncated simplicial polynomial algebra by finitely many generators with prescribed compatible faces and compatible degeneracy variables",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategory.Truncated.tacticTrunc",
+     "SimplexCategory.Truncated.σ",
+     "SimplexCategory.Truncated.δ",
+     "CategoryTheory.SimplicialObject.Truncated",
+     "SimplexCategory.Truncated",
+     "CategoryTheory.CosimplicialObject.Truncated",
+     "SSet.Truncated",
+     "SimplexCategory.Truncated.incl"
+    ],
+    "digest": "fac20898836582b3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free simplicial commutative algebra cell attachment along prescribed boundary yields a compatible truncated polynomial algebra",
+   "results": {
+    "t": "2026-10-23T12:46:20Z",
+    "tool": "leanfinder",
+    "query": "Finite free simplicial commutative algebra cell attachment along prescribed boundary yields a compatible truncated polynomial algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂",
+     "HomotopicalAlgebra.RelativeCellComplex.Cells.ι",
+     "SSet.modelCategoryQuillen.boundary_ι_mem_I",
+     "SSet.horn.multicoequalizerDiagram",
+     "SSet.Subcomplex.MulticoequalizerDiagram",
+     "Topology.CWComplex.mkFinite_cell",
+     "Topology.RelCWComplex.mkFinite_map",
+     "SSet.horn.isColimit"
+    ],
+    "digest": "1cc2d76bf3564d35"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(latching|degenerac|simplicial).*(MvPolynomial|polynomial)|(MvPolynomial|polynomial).*(latching|degenerac)",
+   "results": {
+    "t": "2026-10-23T13:56:20Z",
+    "tool": "grep",
+    "query": "(latching|degenerac|simplicial).*(MvPolynomial|polynomial)|(MvPolynomial|polynomial).*(latching|degenerac)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned truncated objects, generic skeletal extensions, algebra-generator presentations and Dold–Kan additive constructions do not assert this compatible polynomial attachment"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a truncated simplicial commutative algebra by polynomial generators along compatible boundary",
+   "results": {
+    "t": "2026-10-23T13:56:21Z",
+    "tool": "leansearch",
+    "query": "Extend a truncated simplicial commutative algebra by polynomial generators along compatible boundary",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.extend",
+     "Algebra.Generators.toExtension",
+     "Algebra.Generators.toExtension_algebra₁",
+     "CategoryTheory.SimplicialObject.sk",
+     "SSet.Truncated.rightExtensionInclusion",
+     "Algebra.Extension.mk",
+     "CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion",
+     "Algebra.Generators.toExtension_algebra₂"
+    ],
+    "digest": "41620ead748a6498"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned truncated objects, generic skeletal extensions, algebra-generator presentations and Dold–Kan additive constructions do not assert this compatible polynomial attachment"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Truncated\", \"Splitting\"",
+   "results": {
+    "t": "2026-10-23T13:56:21Z",
+    "tool": "loogle",
+    "query": "\"Truncated\", \"Splitting\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned truncated objects, generic skeletal extensions, algebra-generator presentations and Dold–Kan additive constructions do not assert this compatible polynomial attachment"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a truncated simplicial polynomial algebra by generators with prescribed compatible faces and fixed degeneracies",
+   "results": {
+    "t": "2026-10-23T13:56:23Z",
+    "tool": "leanfinder",
+    "query": "Extend a truncated simplicial polynomial algebra by generators with prescribed compatible faces and fixed degeneracies",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SSet.Truncated.liftOfStrictSegal.app",
+     "SimplexCategory.Truncated.σ",
+     "CategoryTheory.SimplicialObject.Truncated.sk",
+     "SimplexCategory.Truncated.tacticTrunc",
+     "SimplexCategory.Truncated.δ",
+     "CategoryTheory.SimplicialObject.Truncated",
+     "CategoryTheory.CosimplicialObject.Truncated",
+     "SimplexCategory.Truncated.incl"
+    ],
+    "digest": "7998db31ae2ab3b7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned truncated objects, generic skeletal extensions, algebra-generator presentations and Dold–Kan additive constructions do not assert this compatible polynomial attachment"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free polynomial cell extension of a simplicial commutative algebra with prescribed boundary in one degree",
+   "results": {
+    "t": "2026-10-23T14:10:50Z",
+    "tool": "leanfinder",
+    "query": "Free polynomial cell extension of a simplicial commutative algebra with prescribed boundary in one degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.hσ",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂",
+     "SimplexCategoryGenRel",
+     "AlgebraicTopology.DoldKan.MorphComponents.φ",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.summand",
+     "AlgebraicTopology.DoldKan.hσ'",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.map",
+     "SimplexCategoryGenRel.generators.δ"
+    ],
+    "digest": "8e3fd893230ba778"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned truncated objects, generic skeletal extensions, algebra-generator presentations and Dold–Kan additive constructions do not assert this compatible polynomial attachment"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-polynomial-simplicial-resolution",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). Tag 08PX (proposition-polynomial), inductive polynomial replacement of the next degree; repaired compatible-degeneracy form using the split indexing of simplicial.tex Tag 017P (definition-split). Arbitrary independent lifts of degeneracies in the printed proof do not establish their identities; the new statement isolates the polynomial boundary attachment that supplies compatible lifts.",
+   "via": [
+    "lem-sfb-finite-polynomial-simplicial-resolution",
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-split-polynomial-boundary-attachment",
+  "worker": "stage1",
+  "summary": "Q51: retained the compatible-degeneracy statement; constructed all new faces and degeneracies explicitly and verified each family of identities on polynomial generators. One generic bounded-degree reconstruction theorem is left as a statement-only node. No Lean attachment found.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), algebra prerequisite of Stacks 08PX through finite polynomial simplicial resolutions. Checked the latest blueprint direct-images proof and its unit; the old alteration detail is no longer printed there, and the existing prerequisite is treated on its inherited source route. from.node remains null, as blueprint_refs.py ancestor reports. No unit or chapter edited."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-82ebd4cfb",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-82ebd4cfb (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-sfb-truncated-simplex-presentation in full, with no changes made. The item statement is byte-identical to live, and live and side-live still have the item unsplit with no proof, so it is not superseded. There is no repair note, so this is a first split. Sources checked: Stacks 08PX inductive step (its arbitrary s'_i lifts do not give the identities, which is why the item uses forced split labels instead), plus 0166/0167, 0168, 016B, 0180 and 017P; the tags match their labels. Cited definition nodes: the coskeleton node gives Delta_{<=m}, truncated functors and natural transformations; the mv-polynomial node gives aeval and algHom_ext. Steps 1-6 check out: D_i(x_{e,sigma}) = P(sigma delta_i)(z_e) is well-typed; delta_j delta_i = delta_i delta_{j-1}, since both miss {i,j}; sigma_l delta_i satisfies the three case identities, and the outer cases need n>=1; sigma_j sigma_i = sigma_i sigma_{j+1}; the relations with top degree n+1 are complete; the augmentation equalities hold on generators, and the transformation clause finishes step 6. Edge cases n=0, T empty, all E_j empty and the zero ring cause no problem. The new node is true: epi-mono factorization gives generation within degree <=N, the rewriting sigma delta -> delta sigma lowers degree so normalization stays <=N, and 0166 gives uniqueness. It holds for N=0 and N=1. It is generic, statement-only and smaller than the item. It is not a duplicate of the unbounded lem-trf reconstruction, unique-lifts or word-evaluation nodes, nor of the site-split attachment nodes. Pinned Mathlib has no GenRel-to-Delta equivalence (its NormalForms TODO is still open). Four kinds of search are recorded. Route: same unit, definitions only, no tool_uses, no SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SplitPolynomialBoundaryAttachment",
+  "declaration": "Algebra.SplitPolynomialAttachment.exists_boundary_attachment",
+  "declarations": [
+   "Algebra.SplitPolynomialAttachment.degree",
+   "Algebra.SplitPolynomialAttachment.Variable",
+   "Algebra.SplitPolynomialAttachment.precompose",
+   "Algebra.SplitPolynomialAttachment.CompatibleFaces",
+   "Algebra.SplitPolynomialAttachment.exists_boundary_attachment"
+  ],
+  "file": "lean/Sheaf/RingTheory/SplitPolynomialBoundaryAttachment.lean",
+  "statement": "theorem exists_boundary_attachment {A : Type u} [CommRing A] {B : Type v} [CommRing B] [Algebra A B] (n : ℕ) (P : SimplicialObject.Truncated (CommAlgCat.{v} A) n) (ε : P ⟶ (Functor.const (SimplexCategory.Truncated n)ᵒᵖ).obj (CommAlgCat.of A B)) (E : Fin (n + 1) → Type w) [∀ j : Fin (n + 1), Finite (E j)] (p : ∀ k : Fin (n + 1), MvPolynomial (Variable E k.val) A ≃ₐ[A] P.obj (op (degree n k.val (Nat.le_of_lt_succ k.isLt)))) (hdeg : ∀ (k l : Fin (n + 1)) (τ : SimplexCategory.mk l.val ⟶ SimplexCategory.mk k.val) (hτ : Function.Surjective τ.toOrderHom) (x : Variable E k.val), P.map (SimplexCategory.Truncated.Hom.tr τ (Nat.le_of_lt_succ l.isLt) (Nat.le_of_lt_succ k.isLt)).op (p k (MvPolynomial.X x)) = p l (MvPolynomial.X (precompose τ hτ x))) (T : Type z) [Finite T] (b : T → B) (a : T → Fin (n + 2) → P.obj (op (degree n n le_rfl))) (haug : ∀ (t : T) (i : Fin (n + 2)), ε.app (op (degree n n le_rfl)) (a t i) = b t) (hfaces : ∀ t : T, CompatibleFaces n P (a t)) : ∃ (P' : SimplicialObject.Truncated (CommAlgCat.{v} A) (n + 1)) (ε' : P' ⟶ (Functor.const (SimplexCategory.Truncated (n + 1))ᵒᵖ).obj (CommAlgCat.of A B)) (hP : (SimplicialObject.Truncated.trunc (CommAlgCat.{v} A) (n + 1) n (Nat.le_succ n)).obj P' = P) (q : MvPolynomial (Variable E (n + 1) ⊕ T) A ≃ₐ[A] P'.obj (op (degree (n + 1) (n + 1) le_rfl))), Functor.whiskerLeft (SimplexCategory.Truncated.incl n (n + 1) (Nat.le_succ n)).op ε' = eqToHom hP ≫ ε ∧ (∀ (t : T) (i : Fin (n + 2)), (eqToHom hP).app (op (degree n n le_rfl)) (P'.map (SimplexCategory.Truncated.Hom.tr (SimplexCategory.δ i) (Nat.le_succ n) le_rfl).op (q (MvPolynomial.X (Sum.inr t)))) = a t i) ∧ (∀ t : T, ε'.app (op (degree (n + 1) (n + 1) le_rfl)) (q (MvPolynomial.X (Sum.inr t))) = b t) ∧ (∀ (k : Fin (n + 1)) (τ : SimplexCategory.mk (n + 1) ⟶ SimplexCategory.mk k.val) (hτ : Function.Surjective τ.toOrderHom) (x : Variable E k.val), P'.map (SimplexCategory.Truncated.Hom.tr τ le_rfl (Nat.le_trans (Nat.le_of_lt_succ k.isLt) (Nat.le_succ n))).op ((eqToHom hP.symm).app (op (degree n k.val (Nat.le_of_lt_succ k.isLt))) (p k (MvPolynomial.X x))) = q (MvPolynomial.X (Sum.inl (precompose τ hτ x))))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a64bbbdf",
+  "group": "NH",
+  "result": "pass",
+  "note": "Node record differs from side-live only in lean; lean.statement equals the file signature verbatim. Clause match: Variable (surjective labels, j<=k implied), hdeg = x_{e,σ}↦x_{e,στ}, CompatibleFaces reindexes all pairs i<j' (empty at n=0), haug; conclusion has literal trunc equality hP, restricted augmentation, q onto MvPolynomial(Variable E (n+1) ⊕ T), d_i y_t=a_{t,i}, ε'(y_t)=b_t, new degeneracies by composition. Edge cases n=0, empty T/E_j, zero ring ok; P and B in the same universe v as the category forces, existential still satisfiable. Helpers real with source/blueprint docstrings, 6-step proof docstring, sorry only, no name collision in side-live, no competing delivery. Nothing changed, nothing compiled. No findings."
+ }
+}

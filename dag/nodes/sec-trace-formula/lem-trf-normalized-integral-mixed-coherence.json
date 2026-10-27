@@ -1,0 +1,115 @@
+{
+ "id": "lem-trf-normalized-integral-mixed-coherence",
+ "kind": "statement",
+ "title": "NormalizedIntegralMixedCoherence",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "The mixed comparison is natural and commutes with geometric composition. For every fixed ambient normalized system D, with exactly the hypotheses and conclusions in the Lean attachment.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0941; NormalizedIntegralMixedCoherence"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "The lambda and mu coordinates are components of natural transformations: whisker the prescribed model realizations and the whole-system pullback and scalar counits. Cancel the invertible mu component at the target to prove naturality of lambda followed by inverse mu.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of the adjunction counit to compute the mate of a realized map b followed by L(t), and cancel the inverse target coordinate. This proves the reduction equations for the displayed integral compositor and mixed comparison directly from their definitions. No word-domain or normalization hypotheses are needed for this calculation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply reduction to the two mixed-composition paths. The reconstruction unit at the target is invertible by the supplied complete field, so reduction reflects their equality. Postcompose with the composite pullback and scalar counits, invertible by the supplied effective fields. Move the counits using their naturality, use the reduction equations of the preceding step, and apply the derived_mixed field of integralQuotientMixedCoherence. Naturality of the system compositor finishes the calculation. Full-subcategory hom extensionality gives the stated equation.",
+   "uses": [
+    "lem-trf-quotient-system-mixed-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-quotient-system-mixed-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0941; direct whole-counit mate calculation; adapted from the proved private calculations in PullbackIdentitiesScalarExtension and IteratedReturnTransportScalarCalculus (R9, 2026-10-27)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Associativity and units of completed pullback comparisons transported by normalized whole-system derived limit counits",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.Limits.map_lift_pullbackComparison_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.Limits.pullbackComparison_comp_snd_assoc, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.CategoricalPullback.mkNatIso",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_triangle_components",
+   "results": "1 hits: CategoryTheory.Adjunction.left_triangle_components",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*(assoc|coher)|scalar.*pullback.*comp",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/CatCommSq.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SimultaneousIntegralPullbackComparisons",
+  "date": "2026-10-25",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Tags 06YY, 0D6D and 0941; NormalizedIntegralMixedCoherence",
+   "via": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralMixedCoherence",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralMixedCoherence.lean",
+  "declaration": "WeilConjectures.normalizedIntegralMixedCoherence",
+  "statement": "theorem normalizedIntegralMixedCoherence\n    (l : ℕ) [Fact l.Prime] (D : IntegralComparisonSystem.{u} l)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) :\n    (∀ {X Y : Scheme.{u}}\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (f : X ⟶ Y) (K J : sfIntegralConstructibleCategory l E Y) (r : K ⟶ J),\n    (integralScalarExtension l E L ι X).map ((integralDerivedPullback l E f).map r.hom) ≫\n        (integralComparisonScalar l E L ι D f J).hom =\n      (integralComparisonScalar l E L ι D f K).hom ≫\n        (integralDerivedPullback l L f).map ((integralScalarExtension l E L ι Y).map r.hom)) ∧\n    (∀ {V W Z : Scheme.{u}}\n    [∀ v : V, Invertible (l : V.residueField v)]\n    [∀ w : W, Invertible (l : W.residueField w)]\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    (h : Z ⟶ W) (k : W ⟶ V) (K : sfIntegralConstructibleCategory l E V),\n    integralComparisonScalarSquareLeft l E L ι D h k K =\n      integralComparisonScalarSquareRight l E L ι D h k K)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T162139-L-324177",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T084451-L-3684079",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-finite-coefficient-heart-tensor-square",
+ "kind": "statement",
+ "title": "The canonical normalized coefficient mate is monoidal on hearts",
+ "statement": "Let $A$ be a finite discrete commutative topological ring, $R$ a commutative condensed ring, $e:R\\simeq\\mathrm{coefficient}(A)$ an isomorphism of ring objects, $p:X\\to Y$ a scheme morphism, and $E_X,E_Y$ normalized encodings as in [def-sfb-finite-coefficient-operation-encoding]. Let $N_T$ be restriction along the inverse coefficient isomorphism on $T$, followed by the two actual heart equivalences of $E_T$. Let $\\alpha:p^*_{\\mathrm{ordinary}}\\circ N_Y\\simeq N_X\\circ p^*_{\\mathrm{internal}}$ be the specific comparison coefficientHeartPullIso: conjugate the coefficient-natural and normalized identity-on-additive-sections direct-image comparison by the encoding equivalences, then use uniqueness of left adjoints for the published geometric adjunctions. There exist strong monoidal structures on $N_X$ and $N_Y$ for the native relative and fixed-scalar sheaf tensors such that this fixed $\\alpha$ is monoidal. This statement concerns only the abelian hearts; it contains no derived functor, derived tensor, or projection morphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Transport paragraph and clause (3); the underived normalized pure-tensor square in proof step 2 of lem-sfb-finite-coefficient-tensor-pullback-encoding."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-coefficient-operation-encoding",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-finite-coefficient-section-tensor-normalization] to choose strong monoidal structures on the actual coefficient section composites while retaining their local pure-pair formula. Transport them by the two recorded Encoding functor equalities to the actual heart functors N_X,N_Y. Their canonical underlying abelian-sheaf identifications are natural.",
+   "uses": [
+    "lem-sfb-finite-coefficient-section-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The direct-image comparison defining coefficientHeartPushIso is identity on the underlying additive sections over every fibre product, by scalar naturality and the normalized fixed encoding comparison. The canonical internal right-adjoint lax tensorator sends a local pure pair to that same pair over the fibre product: use the already proved canonicalInternalPush_normalized of [def-pd-proetale-section-module-functors], not a newly chosen lax structure. The fixed-scalar direct-image tensorator has the same formula. Applying the normalized encoding tensorators on both sides proves the tensor equation on every local pure pair; fixed tensor extensionality extends it to the whole tensor sheaf.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-pe-finite-discrete-encoding-pullback-fixed",
+    "def-pd-proetale-section-module-functors",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An invertible natural transformation between lax monoidal functors that preserves tensors also preserves units: transport the monoid object F(1) by its component, compare multiplication using naturality and the tensor equation, and use uniqueness of a monoid unit (MonObj.ext). Thus the specified direct-image comparison is monoidal. Inverse monoidal encoding equivalences and the monoidal associators show that the exact conjugated right-adjoint isomorphism kr used in coefficientHeartPullIso is monoidal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify leftAdjointUniq after ofNatIsoRight with the inverse conjugate of kr, using the adjunction hom equivalence and its unit formula. The generic monoidal adjunction conjugate identities give the tensor and unit equations for that inverse conjugate. This is exactly the specified coefficientHeartPullIso, so it proves NatTrans.IsMonoidal without changing that definition. The same equations cover the empty scheme and zero coefficients.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-mates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "The stated normalized heart argument, reusing the canonical internal direct-image normalization and generic monoidal adjunction conjugation. Full Lean proof by Y7."
+ },
+ "proof_deps": [
+  "lem-sfb-finite-coefficient-section-tensor-normalization",
+  "sk-def-sfb-change-of-scalars",
+  "lem-pe-finite-discrete-encoding-pullback-fixed",
+  "def-pd-proetale-section-module-functors",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-sfb-monoidal-adjunction-mates"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between right adjoints which is identity on underlying module sections has a monoidal left adjoint mate",
+   "results": "Adjunction.rightAdjointLaxMonoidal, Adjunction.ofNatIsoRight, Adjunction.natIsoOfRightAdjointNatIso and ordinary adjunction uniqueness; no normalized internal-to-fixed coefficient square.",
+   "date": "2026-10-26",
+   "verdict": "No direct match. The generic monoidal mate machinery does not supply the concrete normalized coefficient tensor equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact strong monoidal equivalence of module sheaves transports the derived pullback tensor comparison compatibly",
+   "results": "SheafOfModules.pullbackIso, pullbackComp, freeFunctorCompPullbackIso and pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; none identifies this normalized coefficient mate.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; the ordinary module pullback API is useful but the coefficient normalization is concrete."
+  },
+  {
+   "tool": "grep",
+   "query": "ComparisonCompatible|comap.*[Mm]onoidal|[Mm]onoidal.*comap",
+   "results": "The Mathlib search returned only SkewMonoidAlgebra comap operations. Repository searches found the existing normalized encoding, the identity-on-sections pushforward isomorphism, and the proved generic derived-square calculus.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of the heart-level normalized monoidal square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientTensorPullbackEncoding",
+  "group": "Q9",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Transport paragraph and clause (3): the normalized underived tensor/pullback square before passing to K-flat complexes.",
+   "via": [
+    "lem-sfb-finite-coefficient-tensor-pullback-encoding",
+    "lem-sfb-finite-coefficient-projection-encoding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientHeartEncoding",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientHeartEncoding.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientHeartPullIso_monoidal",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientHeartEncoding",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.inverseCoefficient_isIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientHeartEncoding_isEquivalence",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientHeartEncoding_additive",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientHeartEncoding_monoidal",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientHeartPushIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientHeartPullIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientHeartPullIso_monoidal"
+  ],
+  "statement": "theorem coefficientHeartPullIso_monoidal\n    (e : Mon.mk R ≅ Mon.mk (coefficient A))\n    {X Y : Scheme.{u}} (p : X ⟶ Y) (EX : Encoding A X) (EY : Encoding A Y) :\n    ∃ (mX : (coefficientHeartEncoding A e X EX).Monoidal)\n      (mY : (coefficientHeartEncoding A e Y EY).Monoidal),\n      letI := mX\n      letI := mY\n      NatTrans.IsMonoidal (coefficientHeartPullIso A e p EX EY).hom",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261026T002325-L-76293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261026T071546-L-3949425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

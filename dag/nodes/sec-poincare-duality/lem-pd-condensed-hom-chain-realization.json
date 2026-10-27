@@ -1,0 +1,219 @@
+{
+ "id": "lem-pd-condensed-hom-chain-realization",
+ "kind": "statement",
+ "title": "Condensed tensor-Hom chain and its precise counit representative",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a $k$-morphism $f:X\\to Y$ between separated finite-type $k$-schemes. Put $\\Lambda=\\mathrm{Profinite.padicAlgClRingObj}(\\ell)$ [sk-def-sfb-qlbar-condensed] and $\\mathcal C_T=D_{\\mathrm{cons}}(T,\\Lambda)$ with the exact internal-module bounded-constructible predicate [sk-def-sfb-bounded-constructible]. Write $U=Lf^*$, $G=Rf_*$ for the restricted adjoint pair of [sk-def-sfb-dc-restricted-functors], and $F=Rf_!$, $V=Rf^!$ for the chosen-compactification adjoint pair [sk-def-sfb-dc-lower-shriek, sk-def-sfb-dc-upper-shriek]. Write $H_T$ for the internal Hom and use the chosen left-factor adjunction $A\\otimes-\\dashv H_T(A,-)$ [def-sfb-dc-tensor-hom-adjunction]. Let $\\varepsilon:UG\\to1$ and $\\varepsilon^!:FV\\to1$ be the specified counits. Fix $K\\in\\mathcal C_X$, $L\\in\\mathcal C_Y$, and a family of isomorphisms $P_B:FK\\otimes B\\xrightarrow{\\sim}F(K\\otimes UB)$, natural for all $B\\in\\mathcal C_Y$. Put $W=H_X(K,VL)$, $E=GW$ and $D=H_Y(FK,L)$. Let $\\operatorname{ev}:K\\otimes W\\to VL$ be evaluation and let\n$$\\Phi=\\operatorname{curry}\\bigl(\\varepsilon^!_L\\circ F(\\operatorname{ev})\\circ F(1_K\\otimes\\varepsilon_W)\\circ P_E\\bigr):E\\longrightarrow D.$$\nFor every $B\\in\\mathcal C_Y$, the following composite, in the displayed direction, is a bijection natural in $B$:\n$$b_B:\\operatorname{Hom}_Y(B,E)\\simeq\\operatorname{Hom}_X(UB,W)\\simeq\\operatorname{Hom}_X(K\\otimes UB,VL)\\simeq\\operatorname{Hom}_Y(F(K\\otimes UB),L)\\simeq\\operatorname{Hom}_Y(FK\\otimes B,L)\\simeq\\operatorname{Hom}_Y(B,D).$$\nThe first and third bijections are the inverse Hom bijections of $U\\dashv G$ and $F\\dashv V$; the second is uncurrying, the fourth precomposes with $P_B$, and the fifth is currying. For every $h:B\\to E$ its value is precisely\n$$b_B(h)=\\operatorname{curry}\\bigl(\\varepsilon^!_L\\circ F(\\operatorname{ev})\\circ F(1_K\\otimes(\\varepsilon_W\\circ U(h)))\\circ P_B\\bigr)=\\Phi\\circ h.$$\nThese are equalities for the specified adjunctions, evaluation and natural family $P$, rather than only an assertion that the endpoints are isomorphic. The test objects include $B=E,D$ in the same full bounded-constructible categories; no smoothness, purity, finite-field hypothesis, or coefficient-category comparison is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+  "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-dc-restricted-functors",
+  "sk-def-sfb-dc-lower-shriek",
+  "sk-def-sfb-dc-upper-shriek",
+  "def-sfb-dc-tensor-hom-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout in the stated full categories $\\mathcal C_X,\\mathcal C_Y$. The restricted functors give $U\\dashv G$, the chosen compactification gives $F\\dashv V$, and the chosen left-factor tensor adjunctions give the second and fifth bijections. Thus all five arrows in the displayed chain are bijections: the fourth, $a\\mapsto a\\circ P_B$, has inverse $t\\mapsto t\\circ P_B^{-1}$. Their composite is $b_B$. Closure under the restricted internal Hom and pushforward puts $W,E,D$ in these same categories, so $E$ and $D$ are permitted test objects.",
+   "uses": [
+    "sk-def-sfb-dc-restricted-functors",
+    "sk-def-sfb-dc-upper-shriek",
+    "def-sfb-dc-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification"
+   }
+  },
+  {
+   "text": "For $h:B\\to E$, the inverse Hom formula for $U\\dashv G$ sends $h$ to $q=\\varepsilon_W\\circ U(h):UB\\to W$. The evaluation formula for uncurrying sends $q$ to $\\operatorname{ev}\\circ(1_K\\otimes q)$. The inverse Hom formula for $F\\dashv V$ sends this to $\\varepsilon^!_L\\circ F(\\operatorname{ev}\\circ(1_K\\otimes q))$. Precomposing with $P_B$, then currying, gives exactly the displayed formula for $b_B(h)$ by functoriality of $F$. These formulas refer to the specified counits, not to an unspecified choice of equivalent adjunction.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification"
+   }
+  },
+  {
+   "text": "Write $r_B$ for the uncurried expression just obtained and $r_E$ for that expression at $h=1_E$. Tensor and functor composition laws, followed by the assumed naturality of $P$, give\n$$F(1_K\\otimes U(h))\\circ P_B=P_E\\circ(1_{FK}\\otimes h),\\qquad r_B=r_E\\circ(1_{FK}\\otimes h).$$\nNaturality in the source of the Hom bijection for $FK\\otimes-\\dashv H_Y(FK,-)$ now gives $b_B(h)=\\operatorname{curry}(r_E)\\circ h=\\Phi\\circ h$. Here $U(1_E)=1_{UE}$ identifies $\\operatorname{curry}(r_E)$ with the precise definition of $\\Phi$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification"
+   }
+  },
+  {
+   "text": "For $a:B'\\to B$, the last equality gives $b_{B'}(h\\circ a)=\\Phi\\circ h\\circ a=b_B(h)\\circ a$ by associativity. This is the required naturality on every test object, including $E,D$. No geometric or coefficient comparison enters the calculation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-dc-restricted-functors",
+  "sk-def-sfb-dc-upper-shriek",
+  "def-sfb-dc-tensor-hom-adjunction",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-pod-closed-uncurry-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+  "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification; explicit counit calculation checked against WeilConjectures/PoincareDuality/Abstract.lean, lines 225-244"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In monoidal closed categories with two adjunctions the chain of Hom adjunction bijections equals postcomposition with the exchange map defined by projection counit and evaluation",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.MonoidalClosed.compTranspose_eq\", \"CategoryTheory.MonoidalClosed.coev_app_comp_pre_app\", \"CategoryTheory.coev_app_comp_pre_app\", \"CategoryTheory.MonoidalClosed.coev_app_comp_pre_app_assoc\", \"CategoryTheory.MonoidalClosed.comp_eq\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev\", \"CategoryTheory.MonoidalClosed.comp\"], \"note\": \"\", \"digest\": \"91fba0d7d147c1f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homEquiv_apply_eq and ofEquiv_curry_def concern individual tensor-Hom adjunctions or equivalence transport; ihomPoints concerns point sections; none states the two-adjunction projection/counit chain and its precise representative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two adjunctions and a natural projection formula compute the induced bijection of represented Hom functors as currying of the two counits and evaluation",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.ParametrizedAdjunction.homEquiv\", \"CategoryTheory.Adjunction.leftAdjointsCoyonedaEquiv\", \"CategoryTheory.ParametrizedAdjunction.homEquiv_eq\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two\", \"CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one\", \"CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_three\", \"CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one_assoc\"], \"note\": \"\", \"digest\": \"37c221bf4acbead1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homEquiv_apply_eq and ofEquiv_curry_def concern individual tensor-Hom adjunctions or equivalence transport; ihomPoints concerns point sections; none states the two-adjunction projection/counit chain and its precise representative"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.MonoidalClosed.curry",
+   "results": "{\"n_hits\": 3, \"top\": [\"CategoryTheory.MonoidalClosed.homEquiv_apply_eq\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"LightCondensed.ihomPoints_symm_apply\"], \"note\": \"\", \"digest\": \"fda873fbabc52cc3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homEquiv_apply_eq and ofEquiv_curry_def concern individual tensor-Hom adjunctions or equivalence transport; ihomPoints concerns point sections; none states the two-adjunction projection/counit chain and its precise representative"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*curry|curry.*homEquiv|isIso_exchange",
+   "results": "{\"n_hits\": 21, \"top\": [\"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/Category/Cat/CartesianClosed.lean\"], \"note\": \"\", \"digest\": \"6cdde6c612d89cb9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homEquiv_apply_eq and ofEquiv_curry_def concern individual tensor-Hom adjunctions or equivalence transport; ihomPoints concerns point sections; none states the two-adjunction projection/counit chain and its precise representative"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier exchange Hom adjunction chain equals the curry of the projection counit evaluation pairing",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.MonoidalClosed.homEquiv_apply_eq\", \"CategoryTheory.ihom.ihom_adjunction_counit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp\", \"CategoryTheory.exp.ev\", \"CategoryTheory.MonoidalClosed.curry\"], \"note\": \"\", \"digest\": \"052391d6817b4d7b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homEquiv_apply_eq and ofEquiv_curry_def concern individual tensor-Hom adjunctions or equivalence transport; ihomPoints concerns point sections; none states the two-adjunction projection/counit chain and its precise representative"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*curry|curry.*homEquiv|homEquiv_counit",
+   "results": "{\"t\": \"2026-10-22T12:06:27Z\", \"tool\": \"grep\", \"query\": \"homEquiv.*curry|curry.*homEquiv|homEquiv_counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\"], \"digest\": \"c8ae33f264896ec2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations supply individual adjunction formulas, rigid tensor adjunctions or parametrized Hom equivalences; none states the entire two-adjunction chain with projection family and exact counit representative. Existing formula leaves are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.MonoidalClosed.curry",
+   "results": "{\"t\": \"2026-10-22T12:06:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv, CategoryTheory.MonoidalClosed.curry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.homEquiv_apply_eq\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"LightCondensed.ihomPoints_symm_apply\"], \"digest\": \"fda873fbabc52cc3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations supply individual adjunction formulas, rigid tensor adjunctions or parametrized Hom equivalences; none states the entire two-adjunction chain with projection family and exact counit representative. Existing formula leaves are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composite Hom adjunction bijection with projection formula equals curry of counit and evaluation",
+   "results": "{\"t\": \"2026-10-22T12:06:28Z\", \"tool\": \"leansearch\", \"query\": \"Composite Hom adjunction bijection with projection formula equals curry of counit and evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.mkOfHomEquiv_counit_app\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit\", \"CategoryTheory.MonoidalClosed.curry\"], \"digest\": \"6f9b8d272d2bae5e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations supply individual adjunction formulas, rigid tensor adjunctions or parametrized Hom equivalences; none states the entire two-adjunction chain with projection family and exact counit representative. Existing formula leaves are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute a composite of tensor Hom adjunction bijections as postcomposition with its value on the identity",
+   "results": "{\"t\": \"2026-10-22T12:06:38Z\", \"tool\": \"leanfinder\", \"query\": \"Compute a composite of tensor Hom adjunction bijections as postcomposition with its value on the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\"], \"digest\": \"c7f5bb50830b5408\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations supply individual adjunction formulas, rigid tensor adjunctions or parametrized Hom equivalences; none states the entire two-adjunction chain with projection family and exact counit representative. Existing formula leaves are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two adjunctions and a natural projection isomorphism induce a Hom bijection equal to currying the counits and evaluation",
+   "results": "{\"t\": \"2026-10-22T12:06:38Z\", \"tool\": \"leanfinder\", \"query\": \"Two adjunctions and a natural projection isomorphism induce a Hom bijection equal to currying the counits and evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ParametrizedAdjunction.homEquiv\", \"CategoryTheory.ParametrizedAdjunction.homEquiv_eq\", \"CategoryTheory.Adjunction.homEquiv_counit\", \"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.homEquiv_symm_apply\", \"CategoryTheory.MonoidalClosed.FunctorCategory.adj\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit\", \"CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one\"], \"digest\": \"3f713445ec13743a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations supply individual adjunction formulas, rigid tensor adjunctions or parametrized Hom equivalences; none states the entire two-adjunction chain with projection family and exact counit representative. Existing formula leaves are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "def homEquiv|homEquiv_counit|curry_natural_left|uncurry_eq|uncurry_natural_left|uncurry_curry",
+   "results": "{\"t\": \"2026-10-22T12:07:01Z\", \"tool\": \"grep\", \"query\": \"def homEquiv|homEquiv_counit|curry_natural_left|uncurry_eq|uncurry_natural_left|uncurry_curry\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Parametrized.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"be8d13fe34feb530\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations supply individual adjunction formulas, rigid tensor adjunctions or parametrized Hom equivalences; none states the entire two-adjunction chain with projection family and exact counit representative. Existing formula leaves are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "nt-target-poincare-isiso",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tensor-Hom proof used by sk-thm-sf-verdier-exchange, displayed Hom chain and representability; creating item former Steps 3-4, including equality with the specified exchange pairing. The ancestor command returns None for the seeded target.",
+   "via": [
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pd-condensed-hom-chain-realization",
+  "worker": "stage1",
+  "summary": "Composed the five specified Hom bijections, computed the two inverse adjuncts and uncurrying using existing Mathlib leaf nodes, and proved the exact representative using projection naturality. No new nodes and no statement change.",
+  "blueprint": "The displayed Hom chain of sk-thm-sf-tensor-hom is traversed in reverse, within the condensed bounded-constructible categories; the last two steps make explicit its naturality and the specified representative. The seeded target has no imported blueprint ancestor, so the existing null from.node is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-b679d2129",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-b679d2129 (reviewer sub-agent of L); spot-checked: I read the full item: 4 steps, no new nodes, no SGA citation. Statement and stmt_deps are byte-identical to live and side-live (where the item is still unsplit) and to the earlier Q07 d9fa4957 snapshot. There is no repair note for the item, so the re-split rules do not apply. The Q07 delivery was marked LAND superseded and the item is still unsplit live, so this delivery is not superseded. Source: sk-thm-sf-tensor-hom.proof.md (main-20261015). The item's chain is that chain reversed with (M,N,L)->(K,L,B), arrows matched one for one, inside D_cons(-,Q̄_ℓ). It identifies no coefficient categories, and the projection family P is a hypothesis, so the target is not weakened. Each cited statement says what its step takes. sk-def-sfb-dc-restricted-functors gives Lf^*⊣Rf_* and K⊗−⊣RHom(K,−), and closure of Rf_*, ⊗ and RHom for Q̄_ℓ. sk-def-sfb-dc-upper-shriek gives Rf_!⊣Rf^! with the right adjoint existing for Q̄_ℓ. def-sfb-dc-tensor-hom-adjunction gives the left-factor adjunction. The two Mathlib leaves give Ψ^{-1}(b)=ε∘F(b) with the two naturality laws, and uncurry(v)=(1⊗v);ev. Step 1: all five arrows are bijections (inverse of −∘P_B is −∘P_B^{-1}) and W, E, D lie in the full categories. Step 2: the formula ε^!_L∘F(ev)∘F(1⊗(ε_W∘Uh))∘P_B, with every arrow's type checked. Step 3: naturality of P plus bifunctoriality of ⊗ give r_B=r_E∘(1⊗h); source naturality of curry then gives b_B(h)=Φh, and U(1_E)=1 identifies curry(r_E) with Φ. Step 4: associativity gives naturality in B. Edge cases agree: f=id with P=id, K=0 or L=0, h=1_E. The citer nt-target-poincare-isiso Step 2 uses exactly bijectivity at B=D and B=E. Not duplicates: lem-pod-hom-chain-counit-formula and lem-pod-structure-hom-chain-realization are the same formal chain on D^b_ctf with fixed stage projection maps, a different coefficient category. All proof dependencies are definitions or Mathlib leaves, so no route issue and no tool_uses entry. One advisory: the uncurry formula is equally the instance F=K⊗− of the adjunction leaf, so the monoidal-category wording of lem-pod-closed-uncurry-laws is not needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedHomChainRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensedHomChain_realization",
+  "file": "lean/Sheaf/Paper/CondensedHomChainRealization.lean",
+  "statement": "theorem condensedHomChain_realization : (∀ (B B' : BoundedConstructible (condensedRingObj (padicAlgClRingObj ℓ) Y.left)) (a : B' ⟶ B) (h : B ⟶ condensedHomChainSource ℓ f K L), condensedHomChain ℓ f K L P B' (a ≫ h) = a ≫ condensedHomChain ℓ f K L P B h) ∧ (∀ (B : BoundedConstructible (condensedRingObj (padicAlgClRingObj ℓ) Y.left)) (h : B ⟶ condensedHomChainSource ℓ f K L), condensedHomChain ℓ f K L P B h = (boundedConstructibleTensorHomAdjunction (padicAlgClRingObj ℓ) ((boundedConstructibleLowerShriek (padicAlgClRingObj ℓ) ℓ f).obj K)).homEquiv B L (condensedHomChainPairing ℓ f K L P B h) ∧ condensedHomChain ℓ f K L P B h = h ≫ condensedHomChainExchange ℓ f K L P)",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedHomChainInner",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedHomChainSource",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedHomChainTarget",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedHomChain",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedHomChainPairing",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedHomChainExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedHomChain_realization"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdfa19332",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read item, 6 stmt_dep records, both delivered modules, upstream BoundedConstructible/UpperShriek/HomOfPreserves decls, source sk-thm-sf-tensor-hom chain. Hypotheses (ℓ prime, char k prime ≠ ℓ, sep. finite-type Over Spec k, original condensed BoundedConstructible over padicAlgClRingObj) exact; U⊣G, F⊣V, K⊗−⊣H from recorded stmt_dep declarations (restricted-functors record lists boundedConstructibleTensorHomAdjunction); P natural iso in stated direction; Equiv chain factors checked type by type (homCongr (P.app B).symm = precomposition with P_B); Φ and pairing match node formulas; theorem gives naturality, curry(pairing) and h≫Φ equalities. §1(B) restoration of deleted def-sfb-dc-tensor-hom-adjunction module matches deleted original (restrictFullyFaithful of ambient adjunction), adapted to current HomOfPreserves arg order; real data. lean.statement verbatim for both; docstrings/blueprint tags/proof steps present; only sorry; no duplicate (pod hom-chain is D^b_ctf). Edge cases f=id, K/L=0, B=E,D, h=1 fine; no universe restriction. Cosmetic: restored module lacks copyright header. No compile (no change)."
+ }
+}

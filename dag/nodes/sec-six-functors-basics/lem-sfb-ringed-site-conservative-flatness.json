@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-ringed-site-conservative-flatness",
+ "kind": "statement",
+ "title": "Conservative points detect flatness over an arbitrary ring sheaf",
+ "statement": "Work in the universe convention [def-weil-size-convention]. Let $(\\mathcal C,J)$ be a small site, let $R$ be a sheaf of commutative rings on it, and let $M$ be a sheaf of $R$-modules [def-weil-sheaf-of-modules-category]. Let $\\{p_i\\}_{i\\in I}$ be a set-indexed family of points of $\\operatorname{Sh}(\\mathcal C,J)$: each $p_i$ is a geometric morphism $\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C,J)$ [def-trf-geometric-morphism]. Assume that the inverse-image functors $p_i^{-1}$ jointly reflect isomorphisms of sheaves of sets. Give $R_i=p_i^{-1}R$ its induced commutative ring structure and $M_i=p_i^{-1}M$ its induced $R_i$-module structure, by applying $p_i^{-1}$ to the ring and module operations using its finite-product comparisons. Then $M$ is flat as a sheaf of $R$-modules [def-pc-flat-sheaf-modules] if and only if $M_i$ is a flat $R_i$-module [def-weil-pbc-flat-ring-map] for every $i\\in I$. The ring sheaf $R$ need not be constant, and no quasi-coherence or finiteness assumption on $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VC (lemma-check-flat-stalks), statement and proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-geometric-morphism",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-flat-ring-map",
+  "def-sfb-ringed-site-point"
+ ],
+ "proof": [
+  {
+   "text": "For each $i$, choose the normalized presentation $s_i$ supplied by [def-sfb-ringed-site-point], with ring $R_i$ and module functor $S_i$. Its prescribed transport of operations is exactly the finite-product transport in the statement, so $S_i(M)=M_i$ up to the specified module identification. If $M$ is flat, [lem-sfb-ringed-site-point-flat] gives flatness of $S_i(M)$ over $R_i$, for every $i$.",
+   "uses": [
+    "def-sfb-ringed-site-point",
+    "lem-sfb-ringed-site-point-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VC (lemma-check-flat-stalks), proof; Tag 05VB (lemma-stalk-flat), and Tag 05V3 (lemma-check-exactness-stalks)."
+   }
+  },
+  {
+   "text": "Assume every $M_i$ is flat. Let $K=(A\\xrightarrow{f}B\\xrightarrow{g}C)$ be any complex of $R$-module sheaves exact at $B$. Regard it as a cochain complex in degrees $0,1,2$, zero elsewhere [def-pc-cochain-complex-modules], and write $M[0]$ for $M$ in degree zero. Exactness of $S_i$ [lem-sfb-ringed-site-point-exact] makes $S_i(A)\\to S_i(B)\\to S_i(C)$ exact. Apply [lem-weil-pbc-flat-tensor-exact] over the commutative ring $R_i$ with flat module $S_i(M)=M_i$. Thus $S_i(A)\\otimes_{R_i}M_i\\to S_i(B)\\otimes_{R_i}M_i\\to S_i(C)\\otimes_{R_i}M_i$ is exact at its middle term. By the signed-total formula [def-pc-tensor-complex-sheaves], this is degree-one exactness of $\\operatorname{Tot}(S_i(K)\\otimes_{R_i}S_i(M[0]))$. The isomorphism of complexes in [lem-sfb-ringed-site-point-tensor], applied to $K,M[0]$, proves degree-one exactness of $S_i(\\operatorname{Tot}(K\\otimes_R M[0]))$. No naturality assertion beyond that complex isomorphism is needed.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "lem-sfb-ringed-site-point-exact",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-ringed-site-point-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VC (lemma-check-flat-stalks), proof; Tag 05VB (lemma-stalk-flat), and Tag 05V3 (lemma-check-exactness-stalks)."
+   }
+  },
+  {
+   "text": "Exactness is reflected by these $S_i$: for any three-term module complex $L=(L^0\\xrightarrow{a}L^1\\xrightarrow{b}L^2)$ put $H=\\ker(b)/\\operatorname{im}(a)$ in the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. An exact functor preserves kernels, cokernels and hence images, so [lem-sfb-ringed-site-point-exact] identifies $S_i(H)$ with $\\ker S_i(b)/\\operatorname{im}S_i(a)$. If every $S_i(L)$ is exact at its middle, then $S_i(H)=0$. By the underlying-set identification in [def-sfb-ringed-site-point], every $p_i^{-1}$ sends the map $|H|\\to|0|$ to a bijection. Joint reflection of isomorphisms makes this map an isomorphism of set sheaves; its inverse preserves the unique zero module structure, so $H=0$. Thus $L$ is exact at $L^1$. This is the kernel-quotient argument behind Tag 05V3.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-sfb-ringed-site-point-exact",
+    "def-sfb-ringed-site-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VC (lemma-check-flat-stalks), proof; Tag 05VB (lemma-stalk-flat), and Tag 05V3 (lemma-check-exactness-stalks)."
+   }
+  },
+  {
+   "text": "Apply step 3 to $L=\\operatorname{Tot}(K\\otimes_R M[0])$, using step 2. The total formula [def-pc-tensor-complex-sheaves] gives $L=(A\\otimes_R M\\to B\\otimes_R M\\to C\\otimes_R M)$: only the summands with second degree zero survive and their differential is $d_K\\otimes1$. Hence tensoring with $M$ preserves exactness of every three-term complex, including those with an endpoint zero. It is additive: on local pure tensors $(f+f')\\otimes1$ sends $a\\otimes m$ to $f(a)\\otimes m+f'(a)\\otimes m$; the equality extends by bilinearity and sheafification [def-pur-sheaf-tensor-product]. It therefore preserves short exact sequences, which is exactness of this additive functor. By [def-pc-flat-sheaf-modules], $M$ is flat.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VC (lemma-check-flat-stalks), proof; Tag 05VB (lemma-stalk-flat), and Tag 05V3 (lemma-check-exactness-stalks)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ringed-site-point",
+  "lem-sfb-ringed-site-point-flat",
+  "def-pc-cochain-complex-modules",
+  "lem-sfb-ringed-site-point-exact",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-ringed-site-point-tensor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VC (lemma-check-flat-stalks): forward direction by stalk flatness; converse by tensor-stalk comparison and conservative exactness. The kernel-quotient argument spells out the latter, and complexes concentrated in three degrees use the existing total-tensor interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*stalk|stalk.*flat|flat.*point|point.*flat|isFlat_iff",
+   "results": "1 hits; Mathlib/CategoryTheory/Sites/Point/Comap.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or scheme stalk maps; none states flatness of modules over an arbitrary sheaf of rings at conservative topos points"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*stalk|stalk.*flat|flat.*point|point.*flat|isFlat_iff",
+   "results": "0 hits; ; directory Mathlib/Algebra",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or scheme stalk maps; none states flatness of modules over an arbitrary sheaf of rings at conservative topos points"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules over a sheaf of rings is flat exactly when all stalk modules at a conservative family of points are flat",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Flat.iff_flat_stalkMap, SheafOfModules.noConfusionType, Module.flat_of_isLocalized_span, SheafOfModules, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.stalkMap, SheafOfModules.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or scheme stalk maps; none states flatness of modules over an arbitrary sheaf of rings at conservative topos points"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"flat\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or scheme stalk maps; none states flatness of modules over an arbitrary sheaf of rings at conservative topos points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a sheaf M of modules over a varying sheaf of commutative rings R is exact if and only if tensoring with M_p over R_p is exact at all points of a conservative family",
+   "results": "8 hits; Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.rTensor_exact_iff_exact, Module.FaithfullyFlat.lTensor_exact_iff_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or scheme stalk maps; none states flatness of modules over an arbitrary sheaf of rings at conservative topos points"
+  },
+  {
+   "tool": "grep",
+   "query": "iff_rTensor_exact|rTensor_exact|shortExact.*[tT]ensor",
+   "results": "14 hits; Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean; directory Mathlib/RingTheory/Flat",
+   "date": "2026-10-23",
+   "verdict": "match: ordinary flat-tensor exactness only; already represented by lem-weil-pbc-flat-tensor-exact, cited without creating a node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a short exact sequence with a flat module preserves short exactness",
+   "results": "8 hits; Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact, Module.FaithfullyFlat.rTensor_exact_iff_exact",
+   "date": "2026-10-23",
+   "verdict": "match: ordinary flat-tensor exactness only; already represented by lem-weil-pbc-flat-tensor-exact, cited without creating a node"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.iff_rTensor_exact",
+   "results": "1 hits; Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-23",
+   "verdict": "match: ordinary flat-tensor exactness only; already represented by lem-weil-pbc-flat-tensor-exact, cited without creating a node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat module over a commutative ring tensor product preserves short exact sequences",
+   "results": "8 hits; Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact, Module.Flat.iff_lTensor_exact', Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-23",
+   "verdict": "match: ordinary flat-tensor exactness only; already represented by lem-weil-pbc-flat-tensor-exact, cited without creating a node"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*stalk|stalk.*flat|flat.*point|point.*flat|IsFlatOnSite",
+   "results": "1 hits; Mathlib/CategoryTheory/Sites/Point/Comap.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme stalk-map and ordinary-module statements do not give the arbitrary-ring-sheaf criterion on a small site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an arbitrary ring sheaf R on a site with conservative points p, flatness of an R module M is equivalent to flatness of every stalk over the stalk ring",
+   "results": "8 hits; AlgebraicGeometry.Flat.iff_flat_stalkMap, Module.flat_of_isLocalized_span, Module.flat_iff_of_isLocalization, Module.Flat.iff_flat_tensorProduct, Module.Flat.of_isLocalizedModule, RingHom.Flat.propertyIsLocal, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.flat_of_isLocalized_maximal",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme stalk-map and ordinary-module statements do not give the arbitrary-ring-sheaf criterion on a small site"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Module.Flat",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme stalk-map and ordinary-module statements do not give the arbitrary-ring-sheaf criterion on a small site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules over an arbitrary sheaf of commutative rings is flat if and only if its stalk modules at a conservative family of topos points are flat",
+   "results": "8 hits; AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, RingHom.Flat.propertyIsLocal, AlgebraicGeometry.Flat.stalkMap, Module.FaithfullyFlat.toFlat, Module.flat_of_isLocalized_maximal, Module.flat_iff_of_isLocalization, Module.Flat.iff_flat_tensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme stalk-map and ordinary-module statements do not give the arbitrary-ring-sheaf criterion on a small site"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-etale-ringed-comparison",
+  "date": "2026-10-23",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Augmentations and faces of a hypercover retain its covering property. General geometric input: flatness on the ringed small etale site, Stacks 073C. Supporting input to 073C: flatness for an arbitrary ring sheaf is detected by a conservative family of points (05VC).",
+   "via": [
+    "lem-sfb-space-flat-etale-ringed-comparison",
+    "lem-sfb-hypercover-augmentation-face-property",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-conservative-flatness",
+  "worker": "stage1",
+  "summary": "Q06: proved the unchanged arbitrary-ring-sheaf criterion using the existing normalized point flatness, exactness and total-tensor statements and the existing Mathlib flat-tensor-exact leaf. Conservative reflection is the elementary kernel-quotient argument, written out. No new nodes and no new Lean.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), the inherited alteration/flat-etale supporting-input chain recorded in blueprint.from.place; realizes precisely its final 05VC prerequisite. The item has no imported blueprint identity and its inherited from.node is null; no ancestor identity is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-site-point-flat",
+    "why": "Generic flatness of the normalized inverse-image module at any point; no item-unit node gives the forward implication for a varying ring sheaf."
+   },
+   {
+    "node": "lem-sfb-ringed-site-point-exact",
+    "why": "Generic exactness of algebraic inverse image at a point; used on three-term complexes and kernel quotients, independently of any derived factorization."
+   },
+   {
+    "node": "lem-sfb-ringed-site-point-tensor",
+    "why": "Generic comparison of signed total complexes at a normalized point, specialized to a three-term complex and a module in degree zero; no derived result is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-site-point-flat",
+  "lem-sfb-ringed-site-point-exact",
+  "lem-sfb-ringed-site-point-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-784597368",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-784597368 (reviewer sub-agent of L); spot-checked: Read the item and all 4 steps in full. There are no new nodes. The statement is unchanged and matches Stacks 05VC (sites-modules.tex 7350-7369) hypothesis by hypothesis: arbitrary ring sheaf, a family that jointly reflects isomorphisms, and transport along the finite-product comparison. Step 1: def-sfb-ringed-site-point gives existence of normalized presentations and the identification S_i(M)=M_i, then lem-sfb-ringed-site-point-flat gives the forward direction. Step 2: point exactness plus the Mathlib leaf lem-weil-pbc-flat-tensor-exact over R_i; the Tot formula collapses to (-)⊗M_i because S(0)=0; the point-tensor complex isomorphism carries degree-1 exactness across. Step 3 is correctly elementary: S_i(H)=0, so p_i^{-1}|H| is a singleton, and joint reflection gives H=0; the empty family also works. Advisory: the existing lem-sfb-ringed-site-point-acyclic could be cited here instead. Step 4: the triples (0,A,B),(A,B,C),(B,C,0) give preservation of short exact sequences, which is def-pc-flat-sheaf-modules. Duplicate search: the kflat-stalk-criterion is the K-flat analogue and not a duplicate; etale-flat-geometric-fibers is the constant-coefficient case. No cycle in the 152-node closure. Batch-5: all four point nodes reach sec-trace-formula only through the general definition def-trf-geometric-morphism, which was already in the item's base stmt_deps. They are generic topos-point facts (00YV/03D2, 05V3, 05VD, 07A4), not trace-formula or Poincaré steps, so the finding does not lead to a RETURN. I accept the three point lemmas of sk-prop-sfb-module-derived-factorization as tool uses. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ConservativePointFlatness",
+  "declaration": "CategoryTheory.RingedSitePoint.isFlatOnSite_iff",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ConservativePointFlatness.lean",
+  "statement": "theorem isFlatOnSite_iff {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}} {I : Type t} (p : I → GeometricMorphism (Type w) (Sheaf J (Type w))) (s : ∀ i : I, RingedSitePoint R (p i)) (hp : JointlyReflectIsomorphisms (fun i : I ↦ (p i).inverse)) (M : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) : SheafOfModules.IsFlatOnSite.{u, v, w, w} (J := J) (R := R) M ↔ ∀ i : I, Module.Flat (s i).ring ((s i).modules.obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-634815457",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Statement matches Stacks 05VC clause by clause: an arbitrary CommRingCat.{w} sheaf R on an EssentiallySmall.{w} site with free u/v/t universes; M in ringedSiteModules; points as GeometricMorphism (Type w) (Sheaf J (Type w)); conservativity as JointlyReflectIsomorphisms of the inverse images; an iff between IsFlatOnSite M and Module.Flat (s i).ring ((s i).modules.obj M) for all i. Quantifying over RingedSitePoint presentations restricts nothing: the operation fields force the finite-product transport and .nonempty gives existence. Binders are identical to the landed RingedSitePoint.flat. No Nonempty I, finiteness or quasi-coherence assumption; empty family OK. Item record changes are only lean and the added landed definition stmt_dep def-sfb-ringed-site-point, which is already a proof_dep, creates no cycle and is used in the signature. lean.statement is verbatim. Docstrings give source, blueprint id and all four steps. Proof is sorry only; no hollow definitions; no duplicate found in Mathlib, Sheaf/ or WeilConjectures/. Report has both sections. No file changed, so no compile."
+ }
+}

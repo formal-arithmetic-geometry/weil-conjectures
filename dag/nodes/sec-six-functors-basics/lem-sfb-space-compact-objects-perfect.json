@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-space-compact-objects-perfect",
+ "kind": "statement",
+ "title": "Compact quasi-coherent derived objects on algebraic spaces are perfect",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover of $|X|$ has a finite subcover, and the absolute diagonal is quasi-compact. Use its small etale structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Write $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $P\\in C_X$ be compact [def-pc-compact-object]: for every small family $(L_\\alpha)$ in $C_X$, the canonical map $\\bigoplus_\\alpha\\operatorname{Hom}_{C_X}(P,L_\\alpha)\\to\\operatorname{Hom}_{C_X}(P,\\bigoplus_\\alpha L_\\alpha)$ is bijective. Then $P$ is perfect. This asserts compactness only in $C_X$, with no compactness hypothesis in all of $D(\\mathcal O_X)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09M8, proposition-compact-is-perfect, compact-to-perfect implication."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-compact-object",
+  "def-sfb-space-derived-module-calculus",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale chart $j:U=\\operatorname{Spec}A\\to X$ by [lem-sfb-qc-space-affine-etale-atlas]. Since $X$ is quasi-separated, [lem-sfb-space-affine-source-qc-separated] makes $j$ quasi-compact and separated. Its diagonal is therefore quasi-compact: over an affine scheme test a closed immersion is $\\operatorname{Spec}(B/I)\\to\\operatorname{Spec}B$, with affine source. Thus $j$ is quasi-separated. By [lem-sfb-space-derived-etale-chart-calculus], $j^*=Lj^*$ is exact restriction, preserves quasi-coherent cohomology and is left adjoint to $Rj_*$. By [lem-sfb-space-derived-pushforward-coproducts], the latter preserves quasi-coherent cohomology and small coproducts. Thus this adjunction restricts to $C_U\\rightleftarrows C_X$, with coproducts equal to the ambient derived coproducts.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-affine-source-qc-separated",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-derived-pushforward-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, proposition-compact-is-perfect, converse; affine reduction as in perfect.tex Tag 09M1, proposition-compact-is-perfect, final paragraph."
+   }
+  },
+  {
+   "text": "Put $K=j^*P$. For any small family $(L_i)$ in $C_U$, the preceding adjunction and coproduct comparison give $\\operatorname{Hom}_{C_U}(K,\\bigoplus_i L_i)\\cong\\operatorname{Hom}_{C_X}(P,\\bigoplus_iRj_*L_i)\\cong\\bigoplus_i\\operatorname{Hom}_{C_X}(P,Rj_*L_i)\\cong\\bigoplus_i\\operatorname{Hom}_{C_U}(K,L_i)$. The middle bijection is the assumed compactness of $P$ [def-pc-compact-object]. Naturality of adjunction identifies these bijections with the map induced by the coproduct injections, so $K$ is compact in $C_U$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "def-pc-compact-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, proposition-compact-is-perfect, converse; affine reduction as in perfect.tex Tag 09M1, proposition-compact-is-perfect, final paragraph."
+   }
+  },
+  {
+   "text": "Use the equivalence $a_A:D(A)\\simeq C_U$ of [lem-sfb-affine-etale-derived-module-realization] and choose $E$ with $a_A(E)\\cong K$. An equivalence preserves coproducts by their universal property: applying its fully faithful Hom bijections and essential surjectivity to the universal cocone gives the same universal cocone in the other category. Consequently, for every small family $(M_i)$ in $D(A)$, $\\operatorname{Hom}(E,\\bigoplus_iM_i)\\cong\\operatorname{Hom}(K,\\bigoplus_i a_A(M_i))\\cong\\bigoplus_i\\operatorname{Hom}(E,M_i)$. These maps respect the injections; hence $E$ is compact [def-pc-compact-object].",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "def-pc-compact-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, proposition-compact-is-perfect, converse; affine reduction as in perfect.tex Tag 09M1, proposition-compact-is-perfect, final paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ring-derived-compact-perfect] to $E$, obtaining a bounded complex $F^\\bullet$ whose terms split off finite free $A$-modules and with $F^\\bullet\\cong E$. The functor $a_A$ in [lem-sfb-affine-etale-derived-module-realization] acts termwise. Its affine-etale formula $a_A(M)(\\operatorname{Spec}B)=B\\otimes_A M$ identifies $a_A(A^n)$ with $\\mathcal O_U^{\\oplus n}$. Applying it to $p_ri_r=1$ gives the same splitting for $a_A(F^r)$. Thus $a_A(F^\\bullet)$ is strictly perfect and isomorphic to $K$ in the derived category; the boundedness interval is unchanged.",
+   "uses": [
+    "lem-sfb-ring-derived-compact-perfect",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, proposition-compact-is-perfect, converse; affine reduction as in perfect.tex Tag 09M1, proposition-compact-is-perfect, final paragraph."
+   }
+  },
+  {
+   "text": "Represent $P$ by a complex of $\\mathcal O_X$-modules on the small etale site and choose a K-injective resolution of it, a quasi-isomorphism to a K-injective complex $I$ [prop-pur-kinjective-resolutions-exist]; then $I$ also represents $P$. Its restriction $I|_U$ to $X_{\\mathrm{et}}/U$, the etale site of $U$, is K-injective [lem-pur-kinjective-restrict-localized] and represents $K=j^*P$, because etale pullback is exact restriction [lem-sfb-space-derived-etale-chart-calculus]. Apply [lem-pur-rhom-into-kinjective-local] on the ringed site $(U_{\\mathrm{et}},\\mathcal O_U)$ at its final object $U$, with $\\mathcal L^\\bullet=a_A(F^\\bullet)$ and the K-injective complex $I|_U$: the derived isomorphism $a_A(F^\\bullet)\\cong K$ of step 4 equals $Q_U(f)$ for a chain map $f:a_A(F^\\bullet)\\to I|_U$. Since the cohomology sheaf functors factor through the derived category, $f$ is a quasi-isomorphism. Now let $V\\to X$ be any object of the small etale site [def-trf-algebraic-space] and put $W=V\\times_XU$; it is a scheme etale over $V$ because $j$ is representable and etale, and $\\{W\\to V\\}$ is a covering because $j$ is surjective. Restrict $f$ along $W\\to U$ (relocalization [def-pur-localized-ringed-site]): this gives a chain map $a_A(F^\\bullet)|_W\\to I|_W$, again a quasi-isomorphism because restriction is exact [lem-sfb-space-derived-etale-chart-calculus]. Its source vanishes outside the bounds of $F^\\bullet$, and restricting the maps $a_A(i_r),a_A(p_r)$ of step 4 exhibits each term as a direct summand of $\\mathcal O_W^{\\oplus n_r}$. This is exactly the local condition of [def-weil-pbc-strict-perfect-coefficient-package] for the representative $I$ at $V$, with the one-member covering $\\{W\\to V\\}$. Therefore $P$ is perfect.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-pur-rhom-into-kinjective-local",
+    "def-trf-algebraic-space",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, proposition-compact-is-perfect, converse, first sentence: perfectness may be checked on an affine scheme etale over X (sites-cohomology lemma-perfect-independent-representative); the chain-map representative is taken in a K-injective resolution."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-affine-source-qc-separated",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "def-pc-compact-object",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-ring-derived-compact-perfect",
+  "def-trf-algebraic-space",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-rhom-into-kinjective-local",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09M8, proposition-compact-is-perfect, compact-to-perfect implication, with the affine case expanded using perfect.tex Tag 09M1 and more-algebra.tex Tag 07LT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compact.*perfect|perfect.*compact|IsPerfect",
+   "results": "0 hits; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-compactness of schemes and topological perfect sets do not characterize compact quasi-coherent derived objects on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"Perfect\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-compactness of schemes and topological perfect sets do not characterize compact quasi-coherent derived objects on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact quasi coherent derived complex on a qcqs algebraic space is perfect",
+   "results": "Hits: HasDerivedCategory.standard, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, Perfect.mk, perfectSpace_of_module, AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace, DerivedCategory, perfect_def, DerivedCategory.instEssSurjCochainComplexIntQ",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-compactness of schemes and topological perfect sets do not characterize compact quasi-coherent derived objects on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact objects in the derived category of quasi coherent sheaves on a quasi compact quasi separated algebraic space are perfect",
+   "results": "Hits: AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.TStructure.t, DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-compactness of schemes and topological perfect sets do not characterize compact quasi-coherent derived objects on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The converse of perfect complexes are compact for the unbounded derived category of an algebraic space",
+   "results": "Hits: DerivedCategory.TStructure.t, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsGE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-compactness of schemes and topological perfect sets do not characterize compact quasi-coherent derived objects on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*perfect|perfect.*compact|IsPerfect",
+   "results": "0 hits; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not characterize compact objects of the quasi-coherent derived category of an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not characterize compact objects of the quasi-coherent derived category of an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact quasi coherent derived complex on a qcqs algebraic space is perfect",
+   "results": "Hits: HasDerivedCategory.standard, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, Perfect.mk, perfectSpace_of_module, AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace, DerivedCategory, perfect_def, DerivedCategory.instEssSurjCochainComplexIntQ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not characterize compact objects of the quasi-coherent derived category of an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact objects of the derived category of quasi coherent modules on an algebraic space are etale locally bounded complexes of finite projective modules",
+   "results": "Hits: SheafOfModules.QuasicoherentData.IsFinitePresentation, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, SheafOfModules.quasicoherentDataOfIsFinitePresentation, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not characterize compact objects of the quasi-coherent derived category of an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-countable-telescope",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09M8, proposition-compact-is-perfect, compact-to-perfect implication.",
+   "via": [
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-compact-objects-perfect",
+  "worker": "stage1",
+  "summary": "Expanded the source converse into affine-etale chart reduction, the explicit adjunction calculation preserving compactness, transport through the existing affine derived equivalence, the module compact/perfect theorem, and local strict-perfect models. Added only the general ring derived-category theorem as a statement-only node; reused the existing chart and derived-calculus nodes. Corrected the source proof typo in the argument (restriction is first compact, then perfect), without changing the item statement.",
+  "blueprint": "Supports the inherited direct-image/coherent-family effectivity branch recorded in blueprint.from.place. The newest blueprint unit is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md; this auxiliary algebraic-space result is below the unit, not a replacement of a unit step. Steps 1-5 realize the converse proof of the item source Tag 09M8, with its affine reduction expanded by Tag 09M1 and Tag 07LT. blueprint_refs.py ancestor returns None for this inherited new-target chain, which is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-92a2caf81",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-92a2caf81 (reviewer sub-agent of L); spot-checked: I read Tag 09M8 converse, Tag 09M1 final paragraph and Tag 07LT. Steps 1-4 are correct and each cited statement says what the step uses. (1) The atlas lemma needs only |X| quasi-compact. The affine-source lemma uses the quasi-separatedness of X and gives j quasi-compact and separated, hence quasi-separated. The chart-calculus node states the adjunction, QCoh preservation and exact restriction. The pushforward node states QCoh preservation and sums for qcqs maps. (2) The adjunction calculation for compactness is elementary and correct. The worker's typo note on 09M8 (perfect written where compact is meant) is right: 09M1 reads compact. (3) The affine étale equivalence holds for every commutative ring, and an equivalence preserves sums. (4) The new node lem-sfb-ring-derived-compact-perfect is 07LT for commutative A. It is true and statement-only. Its finite-free-summand form is equivalent. I tested it on the zero ring, a field and a non-Noetherian ring; A^(N) is not compact. No duplicate: the existing compact⇒perfect nodes are Noetherian-scheme only, and lem-zl-ring-derived-dualizable-perfect is a different predicate. FIX in step 5: it cited lem-sfb-ringed-site-perfect-criterion only for a derived-isomorphism meaning of perfect. The item's definition, def-weil-pbc-strict-perfect-coefficient-package, needs chain quasi-isomorphisms into one representative (gap C4/E5), and that criterion's closure reaches sec-trace-formula (batch-5 flag). Step 5 now takes a K-injective representative I (prop-pur-kinjective-resolutions-exist). I|_U is K-injective (lem-pur-kinjective-restrict-localized), and lem-pur-rhom-into-kinjective-local turns the derived isomorphism into a chain quasi-isomorphism a_A(F)→I|_U. This is restricted to the covering V×_X U→V of each V, via def-pur-localized-ringed-site and the exact restriction of chart calculus, and the step now cites the definition. proof_deps are updated; all the new cites are in unit sk-def-sf-operations, which the item's unit cites, and none reaches trace-formula or Poincaré. The other batch-5 flags (atlas, affine-source, chart calculus, pushforward-coproducts, affine realization) are accepted: they reach only the general definition def-trf-algebraic-space and are outside both assumptions. The live item is still unsplit with an identical statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCompactObjectsPerfect",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isPerfect_of_compact",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCompactObjectsPerfect.lean",
+  "statement": "theorem isPerfect_of_compact {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (P : X.DerivedQCoh) (hcompact : ∃ hcoprod : HasCoproducts.{u} X.DerivedQCoh, @IsCompactObject.{u} X.DerivedQCoh _ _ hcoprod P) : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P.obj",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42d8d6b51",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read Tag 09M8 converse, the node, all stmt_dep records and the live Lean of DerivedQCoh/derivedQCohProperty, the small ringed model, IsPerfectOnRingedSiteOfUniverses/IsLocallyStrictPerfectComplexOfUniverses and IsCompactObject. Clause by clause the Lean matches: qc via CompactSpace (Point X), absolute qs via the affine-pair test (same as landed generator), P : X.DerivedQCoh, compactness in C_X via ∃ HasCoproducts (Prop, true, not an extra assumption), conclusion is the recorded local strict-perfect predicate on P.obj. No extra hypotheses or universe equations; edge cases (empty space, zero object, empty families) covered. lean.statement verbatim; node diff vs live = lean record + two landed def stmt_deps (records identical); statement unchanged; only sorry; docstrings with source and blueprint; no duplicate declaration. Note: small-model and point-class owners reached transitively via the added def nodes; second reading is an author pass."
+ }
+}

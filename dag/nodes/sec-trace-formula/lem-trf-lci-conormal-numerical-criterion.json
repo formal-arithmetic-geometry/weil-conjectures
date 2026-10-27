@@ -1,0 +1,171 @@
+{
+ "id": "lem-trf-lci-conormal-numerical-criterion",
+ "kind": "statement",
+ "title": "Numerical conormal criterion at a prime of a finite type algebra",
+ "statement": "Let k be a field and C a finite type commutative k-algebra [def-weil-pbc-finite-type-algebra]. Fix a surjection pi:k[x_1,...,x_n] -> C, write I=ker(pi), and let q be a prime of C, with p=pi^{-1}(q). Then C_q is a complete-intersection local k-algebra [def-trf-complete-intersection-local] if and only if there is a natural number d with dim_q(Spec C)=d, d<=n, and dim_{kappa(p)}(kappa(p) tensor_{k[x]_p} (I/I^2)_p)=n-d [lem-trf-lci-conormal-fibre-field-change]. Dimensions here are local topological dimensions, not the Krull dimension of C_q.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00SC (lemma-lci), 00SF (lemma-lci-local), 00SG (lemma-lci-at-prime); numerical conormal criterion used in Tag 00SI."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-trf-complete-intersection-local",
+  "lem-trf-lci-conormal-fibre-field-change"
+ ],
+ "proof": [
+  {
+   "text": "Replace the finite polynomial presentation by its quotient by the kernel. The quotient algebra equivalence identifies the contracted prime, its local ring and its local topological dimension. Localization and tensor cancellation identify the polynomial conormal fibre with the residue-field tensor product of the quotient conormal localization.",
+   "uses": [
+    "def-trf-complete-intersection-local",
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00SC (lemma-lci), 00SF (lemma-lci-local), 00SG (lemma-lci-at-prime); numerical conormal criterion used in Tag 00SI."
+   }
+  },
+  {
+   "text": "A complete-intersection local presentation spreads to a principal global-complete-intersection neighbourhood by lem-trf-ci-local-ring-principal-neighbourhood. The conormal rank theorem supplies a basis of size n-d and d<=n. Base change of this basis to the residue field proves the numerical equality.",
+   "uses": [
+    "lem-trf-ci-local-ring-principal-neighbourhood",
+    "lem-weil-pbc-lci-conormal-free-rank-codimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00SC (lemma-lci), 00SF (lemma-lci-local), 00SG (lemma-lci-at-prime); numerical conormal criterion used in Tag 00SI."
+   }
+  },
+  {
+   "text": "Conversely, the conormal localization is finite over the Noetherian polynomial quotient local ring. Lift a residue-field basis of n-d elements to module elements and apply Nakayama to obtain local generators. The conormal-generator criterion gives a principal global-complete-intersection neighbourhood. Its dimension integer equals d by equality of the local topological dimensions.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-lci-conormal-generators-global-complete-intersection",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00SC (lemma-lci), 00SF (lemma-lci-local), 00SG (lemma-lci-at-prime); numerical conormal criterion used in Tag 00SI."
+   }
+  },
+  {
+   "text": "Choose a polynomial quotient presentation of that neighbourhood. Pull its prime back through the presentation. The equations are regular in the polynomial local ring by the global-complete-intersection regular-sequence theorem, and lie in its maximal ideal. Localization of the quotient and iterated localization identify their quotient with the desired local ring. Lift the regular local ring to the universe required by IsCompleteIntersectionLocal and transport the list and quotient equivalence. This proves the reverse implication, including empty lists.",
+   "uses": [
+    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00SC (lemma-lci), 00SF (lemma-lci-local), 00SG (lemma-lci-at-prime); numerical conormal criterion used in Tag 00SI."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-complete-intersection-local",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-regular-sequence",
+  "lem-trf-ci-local-ring-principal-neighbourhood",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-lci-conormal-free-rank-codimension",
+  "lem-weil-pbc-lci-conormal-generators-global-complete-intersection",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00SC (lemma-lci), 00SF (lemma-lci-local), 00SG (lemma-lci-at-prime); numerical conormal criterion used in Tag 00SI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conormal.*finrank|completeIntersection|CompleteIntersection",
+   "results": "{\"t\": \"2026-10-23T11:29:14Z\", \"tool\": \"grep\", \"query\": \"conormal.*finrank|completeIntersection|CompleteIntersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching complete-intersection criterion. Hits concern smooth presentations or maximal-ideal cotangent spaces, rather than the presentation-ideal conormal fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CompleteIntersection\"",
+   "results": "{\"t\": \"2026-10-23T11:29:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"CompleteIntersection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching complete-intersection criterion. Hits concern smooth presentations or maximal-ideal cotangent spaces, rather than the presentation-ideal conormal fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local ring of a finite type algebra is a complete intersection if and only if the conormal fibre dimension of a polynomial presentation equals the codimension",
+   "results": "{\"t\": \"2026-10-23T11:29:15Z\", \"tool\": \"leanfinder\", \"query\": \"A local ring of a finite type algebra is a complete intersection if and only if the conormal fibre dimension of a polynomial presentation equals the codimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\"], \"digest\": \"6148f7bc8b259013\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching complete-intersection criterion. Hits concern smooth presentations or maximal-ideal cotangent spaces, rather than the presentation-ideal conormal fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a polynomial presentation of a finite type algebra over a field, the localization at a prime is a complete intersection if and only if the conormal residue fibre dimension equals the codimension",
+   "results": "{\"t\": \"2026-10-23T11:56:48Z\", \"tool\": \"leansearch\", \"query\": \"For a polynomial presentation of a finite type algebra over a field, the localization at a prime is a complete intersection if and only if the conormal residue fibre dimension equals the codimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.Localizations\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization\", \"AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal\", \"Algebra.IsSmoothAt\", \"IsLocalization.AtPrime\", \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"IsLocalization.isDomain_of_local_atPrime\"], \"digest\": \"b23bf68cfda5fdc6\"}",
+   "date": "2026-10-23",
+   "verdict": "No complete-intersection criterion. The iterated-localization equivalence hit is used in the proof; the other hits concern localization or smoothness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.LciFieldChangeLocal",
+  "date": "2026-10-23",
+  "group": "E5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Local-algebra field-change input: numerical complete-intersection criterion in a fixed polynomial presentation (Stacks 00SC, 00SF, 00SG).",
+   "via": [
+    "lem-trf-lci-field-change-local",
+    "lem-trf-syntomic-locus-base-change",
+    "lem-trf-nodal-open-locus",
+    "lem-trf-stable-modification-constructibility",
+    "lem-trf-stable-modification-stability-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LciConormalNumericalCriterion",
+  "file": "lean/Sheaf/TraceFormula/LciConormalNumericalCriterion.lean",
+  "declaration": "Algebra.isCompleteIntersectionLocal_iff_conormal_finrank",
+  "statement": "theorem isCompleteIntersectionLocal_iff_conormal_finrank\n    (k : Type u) (C : Type v) [Field k] [CommRing C] [Algebra k C]\n    [FiniteType k C] (n : ℕ) (π : MvPolynomial (Fin n) k →ₐ[k] C)\n    (hπ : Function.Surjective π) (q : Ideal C) [q.IsPrime] :\n    IsCompleteIntersectionLocal k (Localization.AtPrime q) ↔\n      ∃ d : ℕ,\n        topologicalKrullDimAt (⟨q, inferInstance⟩ : PrimeSpectrum C) =\n          (d : WithBot ℕ∞) ∧ d ≤ n ∧\n        Module.finrank (q.comap π.toRingHom).ResidueField\n          (AlgebraicGeometry.lciConormalFibre (q.comap π.toRingHom)\n            (RingHom.ker π.toRingHom)) = n - d",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261023T131542-L-2120463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261023T131542-L-2120463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

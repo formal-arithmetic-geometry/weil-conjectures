@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-finite-reduction-line-input-constructible",
+ "kind": "statement",
+ "title": "Finite-Tor constructibility of the shifted finite root line",
+ "statement": "Fix the finite coefficient datum P of [def-pur-conventions], with ell different from the characteristic and positive coefficient level n. For every k-scheme T, the ordinary finite root line mu_(ell^n) tensor_(Z/ell^n) A_(E,n), shifted by two, pulled from the small etale site to the small pro-etale site and transported through the specified intrinsic realization [def-pur-finite-reduction-root-charts], is finite-Tor constructible [def-weil-finite-tor-amplitude]. No finite-type, separatedness or ramification-divisibility hypothesis on T or n is imposed. The empty scheme is included.\n\ntheorem finiteReductionLineInput_constructible (P : PurityFiniteSetting.{u})\n    (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] :\n    finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos T\n      ((Scheme.sfIntrinsicDerivedEquivalence T P.Ring).functor.obj\n        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.obj\n          ((Etale.ordinaryFiniteLine P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates T)⟦(2 : ℤ)⟧)))",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-reduction-root-charts",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, compatibility with the invertible twist; Step 3, the shifted root-line input"
+ },
+ "proof": [
+  {
+   "text": "Since ell differs from the field characteristic, ell^n is nonzero. Choose a primitive ell^n-th root in the algebraically closed base field. The specified root chart identifies the displayed input with the degree-two shift of the coefficient unit.",
+   "uses": [
+    "def-pur-finite-reduction-root-charts",
+    "lem-pur-finite-reduction-line-chart-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant coefficient module is an invertible rank-one module. Its finite locally free line models give constructibility, and the single-complex support theorem gives bounded constructible cohomology in degree zero.",
+   "uses": [
+    "lem-pur-finite-locally-free-line-models",
+    "lem-pur-constructible-single-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero single complex of this module is a bounded flat model: in degree zero its tensor is the unit tensor, and all other terms are zero. The flat-model characterization supplies Tor interval [0,0]. The specified unit realization isomorphism transfers finite-Tor constructibility to the coefficient unit.",
+   "uses": [
+    "lem-sf-flat-model",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-finite-reduction-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the triangulated and replete finite-Tor constructible subcategory to shift by two and then transfer along the root chart. This works without alteration for level one and the empty scheme.",
+   "uses": [
+    "lem-weil-finite-ctf-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, compatibility with invertible twist",
+  "group": "C4",
+  "date": "2026-10-26"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A shifted rank one constant coefficient sheaf is constructible with finite Tor amplitude",
+   "results": "8 hits: constantSheaf, isConstant_iff_mem_essImage, SheafOfModules.isFinitePresentation and related constant-sheaf facts. No finite-Tor root-line comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the project flat-model and constructibility interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant rank one sheaf finite Tor amplitude constructible Tate twist shift derived",
+   "results": "Derived t-structure and finite-type sheaf facts, no exact result.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteReductionLineInput|finiteTorConstructible|Tate.*[Cc]onstructible",
+   "results": "msearch Mathlib: one unrelated Chevalley result. Project searches find the orientation input and general flat-model/triangulated interfaces, but no theorem about this shifted root line. Blueprint root line search: no exact node.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate; combine the existing project interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionAffineOrientation",
+  "date": "2026-10-26",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Step 2, compatibility with the invertible twist; Step 3, shifted root-line input",
+   "via": [
+    "def-pur-finite-affine-orientation-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionLineInputConstructible",
+  "file": "lean/Sheaf/Paper/FiniteReductionLineInputConstructible.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionLineInput_constructible",
+  "statement": "theorem finiteReductionLineInput_constructible (P : PurityFiniteSetting.{u})\n    (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] :\n    finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos T\n      ((Scheme.sfIntrinsicDerivedEquivalence T P.Ring).functor.obj\n        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.obj\n          ((Etale.ordinaryFiniteLine P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates T)⟦(2 : ℤ)⟧)))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-pur-finite-reduction-root-charts",
+  "lem-pur-finite-reduction-line-chart-scalars",
+  "lem-pur-finite-locally-free-line-models",
+  "lem-pur-constructible-single-support",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pur-finite-reduction-comparisons",
+  "lem-weil-finite-ctf-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T180516-L-3997369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T180516-L-3997369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-ringed-site-equivalence-tensor",
+ "kind": "statement",
+ "title": "Ordinary sheaf tensor through a ringed-site equivalence",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let C and D be categories essentially small relative to a universe w, J and K Grothendieck topologies on them [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], and e : C ≌ D an equivalence whose functor and inverse are continuous for J and K. Let R be a sheaf of commutative rings on (D,K), S one on (C,J), and c : S ≅ e^s R a coefficient isomorphism. Write F : Mod(R) → Mod(S) [def-weil-sheaf-of-modules-category] for precomposition along e.functor followed by restriction of scalars along c. With ordinary sheaf tensor products [def-pur-sheaf-tensor-product] and coefficients and modules in universe w, there is a natural isomorphism of binary functors tensor_R ⋙ F ≅ (F × F) ⋙ tensor_S. No complexes, flatness, reduction, completion, or choice of comparison as data is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product (03EK), lemma-tensor-product-pullback (03EL), and lemma-sheafification-tensor; ringed-site equivalence specialization of the intrinsic-to-the-topos tensor argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The inverse of e is continuous, hence CoverPreserving.of_isContinuous makes it cover preserving. Apply Adjunction.isCocontinuous_iff_coverPreserving to e.toAdjunction to obtain cocontinuity of e.functor. This uses only the given continuity hypothesis and the site equivalence adjunction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply sheafCompose with the forgetful functor from commutative rings to rings to the coefficient isomorphism c. The resulting isomorphism has exactly the coefficient type required by ringed_cocontinuous_monoidal. Apply that theorem to e.functor, S and R, using the given essential-smallness and continuity hypotheses and the cocontinuity proved in Step 1. Its monoidal categories are the existing localization tensor categories; their monoidality witnesses agree with isMonoidal_W_independentCoefficients by proof irrelevance.",
+   "uses": [
+    "lem-sfb-ringed-cocontinuous-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Locally install the resulting strong monoidal structure on the exact specified pushforward functor F. Functor.Monoidal.muNatIso (Lean identifier μNatIso) is a natural isomorphism F.prod F followed by tensor to tensor followed by F. Take its inverse and introduce Nonempty, obtaining the required orientation without selecting any tensor comparison as public data.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-cocontinuous-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback. Reuse the established cocontinuous ringed-module restriction theorem, with cocontinuity from the equivalence adjunction and continuity of its inverse; finish with the inverse monoidal tensorator."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed sites induces an equivalence of module sheaves preserving tensor products",
+   "results": "Equivalence.sheafCongr; ModuleCat.restrictScalars_isEquivalence_of_ringEquiv; Equivalence.sheafCongr_functor; Equivalence.sheafCongrPrecoherent; MoritaEquivalence.ofAlgEquiv; Equivalence.sheafCongr.functor; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforward.congr_simp",
+   "date": "2026-10-26",
+   "verdict": "No match: sheaf equivalence, section-module scalar restriction, Morita equivalence and pullback adjunction declarations do not give this binary tensor comparison for the specified module-sheaf pushforward."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sites with an invertible map of sheaves of commutative rings preserves the tensor product of sheaves of modules",
+   "results": "Sheaf.monoidalCategory; Sheaf.instMonoidalFunctorOppositePresheafToSheaf; Sheaf.tensorProd_isSheaf; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalLightCondSetLightCondModFree; GrothendieckTopology.W.transport_isMonoidal; sheafToPresheaf_μ",
+   "date": "2026-10-26",
+   "verdict": "No match: the general sheaf monoidal constructions and constant-coefficient condensed specializations do not state transport of module sheaf tensor for the specified varying coefficient ring and ring isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Tt]ensor|[Tt]ensor.*pushforward (msearch), followed by rg on Mathlib/Algebra/Category/ModuleCat/{Presheaf,Sheaf}",
+   "results": "msearch: 0 hits. Local source: Presheaf/PushforwardZeroMonoidal supplies strong monoidality for presheaf precomposition. Sheaf/PushforwardContinuous supplies module-sheaf pushforward and equivalences, without this tensor comparison. No project DAG or imported blueprint duplicate found by equivalence/tensor searches.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Presheaf precomposition is a useful ingredient, but passage through sheafification and restriction along the coefficient isomorphism remains."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"tensor\"",
+   "results": "msearch returned OK with 0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No named pushforward/tensor declaration was found; the sectionwise presheaf result and sheafification argument remain the available route."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCbcExtensionZeroCompletion",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Integral open factor, preservation of flat-term K-flat models: ordinary tensor comparison for the localized-site and AsSmall coefficient equivalences.",
+   "via": [
+    "lem-sf-cbc-extension-zero-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteEquivalenceTensor",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteEquivalenceTensor.lean",
+  "declaration": "SheafOfModules.pushforward_equivalence_tensor_iso",
+  "statement": "theorem pushforward_equivalence_tensor_iso\n    {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]\n    {D : Type u'} [Category.{v'} D] [EssentiallySmall.{w} D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (e : C ≌ D) [e.functor.IsContinuous J K] [e.inverse.IsContinuous K J]\n    (R : Sheaf K CommRingCat.{w}) (S : Sheaf J CommRingCat.{w})\n    (c : S ≅ (e.functor.sheafPushforwardContinuous CommRingCat.{w} J K).obj R) :\n    letI := isMonoidal_W_independentCoefficients R\n    letI := isMonoidal_W_independentCoefficients S\n    letI := monoidalCategory R\n    letI := monoidalCategory S\n    let F := pushforward.{w} (F := e.functor) (J := J) (K := K)\n      (R := (sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj R)\n      (S := (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj S)\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map c.hom)\n    Nonempty (tensor _ ⋙ F ≅ F.prod F ⋙ tensor _)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T065626-L-3135916",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T083016-L-2249481",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

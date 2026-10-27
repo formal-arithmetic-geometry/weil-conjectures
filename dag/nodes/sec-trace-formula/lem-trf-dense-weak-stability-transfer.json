@@ -1,0 +1,610 @@
+{
+ "id": "lem-trf-dense-weak-stability-transfer",
+ "kind": "statement",
+ "title": "Stability transfers across a weakly stable dense extension",
+ "statement": "Let $K\\subseteq F$ be fields [def-weil-field] with compatible nontrivial real-valued multiplicative nonarchimedean absolute values. Assume $K$ is dense in $F$: for every $x\\in F$ and $\\epsilon>0$ there is $a\\in K$ with $|x-a|_F<\\epsilon$. Assume $K$ is stable [def-trf-stable-nonarchimedean-field]. Assume also the following weak stability condition on $F$: for every finite extension $E/F$, endowed with its minimal-polynomial spectral norm $s_{E/F}$ [lem-trf-incomplete-spectral-algebra-norm], and every $F$-basis $w_1,\\ldots,w_m$ of $E$, there exist real constants $c,C>0$ such that $$c\\max_i |a_i|_F\\ \\le\\ s_{E/F}\\left(\\sum_i a_iw_i\\right)\\ \\le\\ C\\max_i |a_i|_F\\qquad(a_i\\in F).$$ Then $F$ is stable [def-trf-stable-nonarchimedean-field]. No completeness of $K$ or $F$, algebraicity of $F/K$, or separability of the finite extensions is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.6.2/3, printed p.158 (scan PDF p.166), applied through the common completion of a dense isometric field inclusion; this is the generic dense-field transfer used explicitly in the proof of Proposition 5.3.2/3, printed p.214 (scan PDF p.220). Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-stable-nonarchimedean-field",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=\\widehat K$. By [lem-sfb-normed-field-completion] this is a complete field with an isometric copy of $K$, and [lem-trf-stable-field-completion] makes $H$ stable. For $x\\in F$, choose $a_m\\in K$ with $|x-a_m|_F<2^{-m}$ and map $x$ to the Cauchy class $(a_m)$ in $H$. The ultrametric inequality makes this sequence Cauchy and makes the class independent of the choices. Approximants for $x+y$ and $xy$ can be taken to be $a_m+b_m$ and $a_mb_m$: convergent sequences are bounded and $|a_mb_m-xy|\\le\\max(|a_m||b_m-y|,|y||a_m-x|)\\to0$. This proves additivity and multiplicativity, and constant sequences give preservation of $1$. Taking limits of absolute values proves isometry and hence injectivity. Thus regard $K\\subseteq F\\subseteq H$ isometrically. The image of $F$ is dense since it contains $K$. Its metric completion is therefore $H$: send a Cauchy sequence in $F$ to its limit in $H$; this is an isometry, and surjectivity follows already from the Cauchy sequences in $K$. The absolute value on $H$ is nonarchimedean by taking limits of the inequality on $K$, and nontrivial because it restricts to the given value on $K$.",
+   "uses": [
+    "lem-sfb-normed-field-completion",
+    "lem-trf-stable-field-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, printed p.158 (scan PDF p.166), completion criterion; proof supplied by the agent because the local archival document is absent."
+   }
+  },
+  {
+   "text": "Fix an arbitrary finite extension $E/F$ of dimension $n\\ge1$, and write $s=s_{E/F}$. It is a definite ultrametric $F$-algebra norm by [lem-trf-incomplete-spectral-algebra-norm]. Choose any basis of $E/F$; the assumed weak stability supplies its positive constants $c,C$. Apply [lem-trf-weak-spectral-completion-product], using the identified completion $H=\\widehat F$. We obtain the $n$-dimensional $H$-algebra $A=\\widehat E$, with norm $N=\\widehat s$, an isometric dense inclusion $E\\hookrightarrow A$, and an isometric product decomposition $A\\simeq\\prod_{j=1}^r L_j$ with norm $\\max_j s_{L_j/H}$. In particular we have used no separability and have not asserted that $A$ is a field.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-weak-spectral-completion-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, printed p.158 (scan PDF p.166), completion criterion; proof supplied by the agent because the local archival document is absent."
+   }
+  },
+  {
+   "text": "Since $H$ is stable, [def-trf-stable-nonarchimedean-field] supplies an orthogonal spectral $H$-basis of each finite field $L_j/H$. Insert each such basis into the $j$th product coordinate, with zero in the other coordinates, and pull back along the product isomorphism from step 2. These vectors form an $H$-basis $b_1,\\ldots,b_n$ of $A$: spanning and independence follow coordinate by coordinate, and the number of vectors is $\\sum_j[L_j:H]=n$. For any scalars $h_i\\in H$, the product maximum formula and the orthogonal formula within each factor give $$N\\left(\\sum_i h_i b_i\\right)=\\max_i |h_i|N(b_i).$$ Each weight $d_i=N(b_i)$ is positive because the vectors are nonzero. This is an exact orthogonal basis; no almost-orthogonal estimate is substituted.",
+   "uses": [
+    "def-trf-stable-nonarchimedean-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, printed p.158 (scan PDF p.166), completion criterion; proof supplied by the agent because the local archival document is absent."
+   }
+  },
+  {
+   "text": "By density of $E$ in $A$, choose $v_i\\in E$ with $N(v_i-b_i)<d_i$ for every $i$. Set $\\delta=\\max_i N(v_i-b_i)/d_i<1$. For scalars $a_i\\in F$, not all zero, put $M=\\max_i |a_i|d_i>0$. The ultrametric and scalar axioms of the norm give $$N\\left(\\sum_i a_i(v_i-b_i)\\right)\\le\\max_i |a_i|N(v_i-b_i)\\le\\delta M<M,$$ whereas step 3 gives $N(\\sum_i a_ib_i)=M$. In any ultrametric norm, $N(y)<N(x)$ implies $N(x+y)=N(x)$: the upper bound is $N(x+y)\\le N(x)$, and a strict inequality would contradict $N(x)\\le\\max(N(x+y),N(y))$. Hence $s(\\sum_i a_iv_i)=N(\\sum_i a_iv_i)=M$. Applying the same argument to just the $i$th coefficient gives $s(v_i)=d_i$. Thus $$s\\left(\\sum_i a_iv_i\\right)=\\max_i|a_i|s(v_i),$$ including the all-zero tuple. The formula makes the $v_i$ linearly independent over $F$; there are $n=\\dim_F E$ of them, so they form a basis. This proves the condition of [def-trf-stable-nonarchimedean-field] for the arbitrary $E/F$, and therefore proves stability of $F$.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-trf-stable-nonarchimedean-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/3, printed p.158 (scan PDF p.166), completion criterion; proof supplied by the agent because the local archival document is absent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-field-completion",
+  "lem-trf-stable-field-completion",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-trf-weak-spectral-completion-product",
+  "def-trf-stable-nonarchimedean-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.6.2/3, printed p.158 (scan PDF p.166), completion criterion; proof supplied by the agent because the local archival document is absent. Common-completion construction and exact basis perturbation written out explicitly; no claim to have read the absent scan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|weakly.*[Cc]artesian",
+   "results": {
+    "t": "2026-10-24T15:01:31Z",
+    "tool": "grep",
+    "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|weakly.*[Cc]artesian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Valued.completable and valuedCompletion construct completions; nonarchimedean completion instances preserve an ultrametric topology, not stability of finite spectral extensions. spectralAlgNorm gives norm axioms only, not exact orthogonal bases. DenselyNormedField concerns the value group, not a dense field inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"UniformSpace.Completion\"",
+   "results": {
+    "t": "2026-10-24T15:01:31Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"UniformSpace.Completion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Valued.completable and valuedCompletion construct completions; nonarchimedean completion instances preserve an ultrametric topology, not stability of finite spectral extensions. spectralAlgNorm gives norm axioms only, not exact orthogonal bases. DenselyNormedField concerns the value group, not a dense field inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valued field is stable if and only if its completion is stable and completion preserves the dimension of every finite extension with its spectral norm",
+   "results": {
+    "t": "2026-10-24T15:01:34Z",
+    "tool": "leanfinder",
+    "query": "A valued field is stable if and only if its completion is stable and completion preserves the dimension of every finite extension with its spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Valued.completable",
+     "spectralNorm.completeSpace",
+     "Valuation.instRankOneCompletion",
+     "Valued.valuedCompletion",
+     "WithAbs.instFiniteDimensional",
+     "Valued.valuedCompletion_apply",
+     "Valued.extension",
+     "Valued.extensionValuation"
+    ],
+    "digest": "83c26838380dee56"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Valued.completable and valuedCompletion construct completions; nonarchimedean completion instances preserve an ultrametric topology, not stability of finite spectral extensions. spectralAlgNorm gives norm axioms only, not exact orthogonal bases. DenselyNormedField concerns the value group, not a dense field inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak stability and stable completion characterize stable nonarchimedean valued fields",
+   "results": {
+    "t": "2026-10-24T15:01:35Z",
+    "tool": "leansearch",
+    "query": "Weak stability and stable completion characterize stable nonarchimedean valued fields",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "Valued.completable",
+     "instNonarchimedeanRingCompletion",
+     "instNonarchimedeanAddGroupCompletion",
+     "IsNonarchimedeanLocalField",
+     "IsNonarchimedeanLocalField.instIsDiscrete",
+     "Valued.valuedCompletion_apply",
+     "IsNonarchimedeanLocalField.toIsValuativeTopology"
+    ],
+    "digest": "521b4f1f2d85959d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Valued.completable and valuedCompletion construct completions; nonarchimedean completion instances preserve an ultrametric topology, not stability of finite spectral extensions. spectralAlgNorm gives norm axioms only, not exact orthogonal bases. DenselyNormedField concerns the value group, not a dense field inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability transfers from a dense stable valued subfield to a weakly stable nonarchimedean valued overfield whose finite spectral extensions have the vector space topology",
+   "results": {
+    "t": "2026-10-24T15:05:53Z",
+    "tool": "leanfinder",
+    "query": "Stability transfers from a dense stable valued subfield to a weakly stable nonarchimedean valued overfield whose finite spectral extensions have the vector space topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsNonarchimedeanLocalField",
+     "IsNonarchimedeanLocalField.toIsValuativeTopology",
+     "IsNonarchimedeanLocalField.instIsRankLeOne",
+     "Valued.completable",
+     "isNonarchimedean_spectralNorm",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "IsNonarchimedeanLocalField.instIsDiscrete",
+     "spectralNorm.nontriviallyNormedField"
+    ],
+    "digest": "43c7e1d2293efc47"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Valued.completable and valuedCompletion construct completions; nonarchimedean completion instances preserve an ultrametric topology, not stability of finite spectral extensions. spectralAlgNorm gives norm axioms only, not exact orthogonal bases. DenselyNormedField concerns the value group, not a dense field inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dense extension of a stable ultrametric field is stable if all its finite extensions with spectral norm are equivalent to a maximum coordinate norm",
+   "results": {
+    "t": "2026-10-24T15:05:53Z",
+    "tool": "leansearch",
+    "query": "A dense extension of a stable ultrametric field is stable if all its finite extensions with spectral norm are equivalent to a maximum coordinate norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "spectralNorm.normedSpace",
+     "spectralNorm.normedField",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm_eq_invariantExtension",
+     "DenselyNormedField.casesOn",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "DenselyNormedField.noConfusionType"
+    ],
+    "digest": "b94a997f3218951b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Valued.completable and valuedCompletion construct completions; nonarchimedean completion instances preserve an ultrametric topology, not stability of finite spectral extensions. spectralAlgNorm gives norm axioms only, not exact orthogonal bases. DenselyNormedField concerns the value group, not a dense field inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*stable.*field|stable.*dense.*field|[Ss]tability.*[Cc]ompletion",
+   "results": {
+    "t": "2026-10-24T15:07:05Z",
+    "tool": "grep",
+    "query": "dense.*stable.*field|stable.*dense.*field|[Ss]tability.*[Cc]ompletion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Valued.completable and valuedCompletion construct completions; nonarchimedean completion instances preserve an ultrametric topology, not stability of finite spectral extensions. spectralAlgNorm gives norm axioms only, not exact orthogonal bases. DenselyNormedField concerns the value group, not a dense field inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The metric completion of a stable nonarchimedean valued field is stable: every finite extension of the completion has an orthogonal spectral norm basis",
+   "results": {
+    "t": "2026-10-24T15:33:10Z",
+    "tool": "leanfinder",
+    "query": "The metric completion of a stable nonarchimedean valued field is stable: every finite extension of the completion has an orthogonal spectral norm basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "Valued.completable",
+     "spectralNorm.metricSpace",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "spectralNorm.normedAddCommGroup",
+     "spectralNorm.seminormedAddCommGroup"
+    ],
+    "digest": "c08e00eb4c3d27cf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]table.*[Cc]ompletion|[Cc]ompletion.*[Ss]table|[Cc]artesian.*[Nn]orm|[Oo]rthogonal.*[Ss]pectral",
+   "results": {
+    "t": "2026-10-24T15:33:41Z",
+    "tool": "grep",
+    "query": "[Ss]table.*[Cc]ompletion|[Cc]ompletion.*[Ss]table|[Cc]artesian.*[Nn]orm|[Oo]rthogonal.*[Ss]pectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Ss]pectral.*[Pp]roduct|[Pp]roduct.*[Ss]pectral",
+   "results": {
+    "t": "2026-10-24T15:33:41Z",
+    "tool": "grep",
+    "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Ss]pectral.*[Pp]roduct|[Pp]roduct.*[Ss]pectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/InnerProductSpace/Spectrum.lean"
+    ],
+    "digest": "e4b52ba66c3bb250"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of a stable nonarchimedean valued field is stable",
+   "results": {
+    "t": "2026-10-24T15:33:42Z",
+    "tool": "leansearch",
+    "query": "The completion of a stable nonarchimedean valued field is stable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instNonarchimedeanRingCompletion",
+     "instNonarchimedeanAddGroupCompletion",
+     "Valued.valuedCompletion",
+     "Valued.extensionValuation",
+     "Valued.extension",
+     "Valuation.Completion",
+     "CauSeq.Completion.Cauchy.field",
+     "AbsoluteValue.Completion"
+    ],
+    "digest": "ed17a8ce143106b5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"Completion\"",
+   "results": {
+    "t": "2026-10-24T15:33:42Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"Completion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"IsProduct\"",
+   "results": {
+    "t": "2026-10-24T15:33:42Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"IsProduct\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a finite spectral normed field extension decomposes into finite extensions of the complete base with the maximum norm",
+   "results": {
+    "t": "2026-10-24T15:33:42Z",
+    "tool": "leansearch",
+    "query": "Completion of a finite spectral normed field extension decomposes into finite extensions of the complete base with the maximum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NormedField.instCompletableTopField",
+     "spectralNorm.completeSpace",
+     "AbsoluteValue.Completion",
+     "spectralNorm.normedSpace",
+     "spectralNorm_eq_invariantExtension",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.normedField",
+     "spectralNorm"
+    ],
+    "digest": "688c169e43a64ee9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field extension with spectral norm equivalent to a coordinate maximum norm completes isometrically to a finite product of finite extensions of the completed base with maximum spectral norm",
+   "results": {
+    "t": "2026-10-24T15:33:43Z",
+    "tool": "leanfinder",
+    "query": "A finite field extension with spectral norm equivalent to a coordinate maximum norm completes isometrically to a finite product of finite extensions of the completed base with maximum spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "spectralNorm.normedField",
+     "spectralNorm.metricSpace",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm.normedSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedAddCommGroup",
+     "spectralNorm_unique_field_norm_ext"
+    ],
+    "digest": "54525f9530ea0b59"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability ascends to the completion of a valued field: orthogonal bases for finite spectral field extensions",
+   "results": {
+    "t": "2026-10-24T15:33:44Z",
+    "tool": "leanfinder",
+    "query": "Stability ascends to the completion of a valued field: orthogonal bases for finite spectral field extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm_extends_of_finiteDimensional",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "NumberField.InfinitePlace.Completion.instAlgebra",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "7fb46d5c4d38e0ad"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional reduced commutative Banach algebra over a complete nonarchimedean field is a product of finite field extensions and its power multiplicative norm is their maximum spectral norm",
+   "results": {
+    "t": "2026-10-24T15:33:45Z",
+    "tool": "leanfinder",
+    "query": "Finite dimensional reduced commutative Banach algebra over a complete nonarchimedean field is a product of finite field extensions and its power multiplicative norm is their maximum spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralMulAlgNorm",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "spectralNorm_unique_of_finiteDimensional_normal",
+     "spectralMulAlgNorm_def",
+     "spectralNorm_eq_invariantExtension"
+    ],
+    "digest": "4b6b8179aea950ca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]educed.*[Bb]anach|[Bb]anach.*[Rr]educed|[Ss]pectral.*[Cc]omplet|[Cc]omplet.*[Ss]pectral",
+   "results": {
+    "t": "2026-10-24T15:35:18Z",
+    "tool": "grep",
+    "query": "[Rr]educed.*[Bb]anach|[Bb]anach.*[Rr]educed|[Ss]pectral.*[Cc]omplet|[Cc]omplet.*[Ss]pectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/InnerProductSpace/Rayleigh.lean",
+     "Mathlib/Analysis/InnerProductSpace/Rayleigh.lean"
+    ],
+    "digest": "3833a8637a66c3ce"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional reduced commutative nonarchimedean Banach algebra is a product of finite field extensions with its spectral maximum norm",
+   "results": {
+    "t": "2026-10-24T15:35:18Z",
+    "tool": "leansearch",
+    "query": "A finite dimensional reduced commutative nonarchimedean Banach algebra is a product of finite field extensions with its spectral maximum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralAlgNorm",
+     "Prod.normedAlgebra",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "Pi.normedAlgebra",
+     "isNonarchimedean_spectralNorm",
+     "IsUltrametricDist.invariantExtension",
+     "norm_le_spectralNorm"
+    ],
+    "digest": "7c13948b7e4d8d3b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralAlgNorm\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T15:35:19Z",
+    "tool": "loogle",
+    "query": "\"spectralAlgNorm\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dense extension of a stable valued field is stable if its finite spectral extensions have their vector space topology",
+   "results": {
+    "t": "2026-10-24T15:35:20Z",
+    "tool": "leanfinder",
+    "query": "A dense extension of a stable valued field is stable if its finite spectral extensions have their vector space topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DenselyNormedField",
+     "Valued.completable",
+     "spectralNorm.nontriviallyNormedField",
+     "Valued.extension",
+     "Valued.continuous_extension",
+     "Valued.valuedCompletion",
+     "Valuation.instRankOneCompletion",
+     "NumberField.InfiniteAdeleRing.denseRange_algebraMap"
+    ],
+    "digest": "f43d4b60d766064a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures, completion structures and value-group density do not state stability transfer for a dense field inclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-gauss-fraction-stability",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Proposition 3.6.2/3, printed p.158 (scan PDF p.166), applied through the common completion of a dense isometric field inclusion; this is the generic dense-field transfer used explicitly in the proof of Proposition 5.3.2/3, printed p.214 (scan PDF p.220).",
+   "via": [
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-dense-weak-stability-transfer",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all hypotheses. Split through common completion, stability ascent, finite spectral completion product, product orthogonal bases and an explicit strict-error perturbation back into E. Two statement-only analytic inputs; reused the existing generic normed-field completion Mathlib leaf. No separability, completeness of K or F, or algebraicity of F/K is added.",
+  "blueprint": "Historical analytic support beneath lem-trf-local-term-locality, through the inherited Temkin normalization ancestry and BGR 3.6.2/3 used in BGR 5.3.2/3. Latest blueprint contracting-correspondence proof read; chapter and unit route unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-5959904d7",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-5959904d7 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the parent tate-gauss-fraction-stability and the near-duplicates. BGR is not in literature/ or the snapshot, so Prop 3.6.2/3 could not be checked at its page (still WANTED, as the worker reports). I checked all the mathematics myself. The item statement and its stmt_deps are unchanged from the accepted base, and the parent's use of the item (K=R, F=Frac T) meets its hypotheses. Step 1: the Cauchy-approximation embedding of F into H=K̂ is correct: the ultrametric Cauchy and product estimates hold, the map is an isometry, F is dense, so H≅F̂. Step 2 uses node 2: a bound for one basis is enough, F is nontrivial and H=F̂. Step 3: orthogonal bases of the L_j over the stable complete H, put in product slots, give an exact orthogonal H-basis of Ê (count Σ[L_j:H]=n). Step 4: with δ<1 the strict ultrametric inequality gives s(Σa_iv_i)=max|a_i|d_i, so n independent vectors form an orthogonal basis of E/F. Node 2 is true by my own check: Ê≅E⊗H≅H^n; s is power-multiplicative, so Ê is reduced and a product of fields L_j; with idempotents ŝ=max_j ŝ(ze_j); a power-multiplicative norm over complete H is unique, so ŝ=s_{L_j/H}; the inseparable nilpotent case is excluded by the kept hypothesis. Node 1 (K stable ⇒ K̂ stable) is true: stable implies weakly stable, then the BGR §3.6.2 ascent. It is the separate ascent half and does not restate the item; the descent is node 2 plus steps 3–4. No duplicates in the DAG (separable-valued-completion-factors needs separability) or in blueprint main-20261015. No cycle; same unit except a Mathlib leaf; no SGA; no tool_uses. FIX (B3): node 1 used the spectral norm s_{L/H} without citing its defining node; added [lem-trf-incomplete-spectral-algebra-norm] to its statement and stmt_deps in fixes/dag/nodes/sec-trace-formula/lem-trf-stable-field-completion.json.; 1 file(s) fixed by the reviewer"
+ }
+}

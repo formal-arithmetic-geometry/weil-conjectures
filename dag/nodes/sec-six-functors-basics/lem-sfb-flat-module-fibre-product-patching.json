@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-flat-module-fibre-product-patching",
+ "kind": "statement",
+ "title": "Flat modules patch over a surjective ring fibre product",
+ "statement": "Let $A'\\twoheadrightarrow A$ be a surjective homomorphism of commutative rings, let $B\\to A$ be a ring homomorphism, and put $I=\\ker(A'\\to A)$ and $R=B\\times_A A'=\\{(b,a'):b|_A=a'|_A\\}$ with coordinatewise ring operations. Tensor products are those of [def-weil-pbc-module-tensor-product]. Let $N$ be a $B$-module, $M'$ an $A'$-module and $\\varphi:N\\otimes_B A\\xrightarrow{\\sim}M'/IM'$ an $A$-linear isomorphism. Put $M=M'/IM'$ and $P=N\\times_M M'$, using $n\\mapsto\\varphi(n\\otimes1)$, with the coordinatewise $R$-action. If $N$ is flat over $B$ and $M'$ is flat over $A'$, then $P$ is flat over $R$ [def-weil-pbc-flat-ring-map]. For any flat $R$-module $L$, the canonical $R$-linear map $$L\\longrightarrow (L\\otimes_R B)\\times_{L\\otimes_R A}(L\\otimes_R A'),\\qquad l\\longmapsto(l\\otimes1,l\\otimes1)$$ is an isomorphism. No finiteness, nilpotence or Noetherian hypothesis is assumed; zero rings and modules are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D2I, lemma-flat-module-over-fibre-product, parts (1) and (2), in Situation 08KH (situation-module-over-fibre-product)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $J=\\ker(R\\to B)=\\{(0,i):i\\in I\\}$. The map $R\\to B$ is onto, by lifting the image of $b\\in B$ to $A'$; hence $R/J\\cong B$, and $J\\to I$ is an $R$-linear isomorphism. By [lem-sfb-patched-module-base-change], the maps $P\\otimes_R B\\to N$ and $\\gamma:P\\otimes_R A'\\to M'$, $p\\otimes a\\prime\\mapsto a\\prime\\rho(p)$, are isomorphisms, where $\\rho:P\\to M'$ is the second projection. By clause (1) of [lem-weil-pbc-tensor-over-quotient-ring], interchanging tensor factors, $P/JP\\cong N$ over $B=R/J$. Thus $P/JP$ is flat over $R/J$.",
+   "uses": [
+    "lem-sfb-patched-module-base-change",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2I, proof of (1), invoking 07RU; Tag 00DF for quotient tensor"
+   }
+  },
+  {
+   "text": "For every $A'$-module $T$ there is a canonical isomorphism $\\theta_T:T\\otimes_R P\\to T\\otimes_{A'}M'$, $t\\otimes p\\mapsto t\\otimes\\rho(p)$. Here is the tensor identification being used: $T\\otimes_R P\\cong T\\otimes_{A'}(P\\otimes_R A')$ sends $t\\otimes p$ to $t\\otimes(p\\otimes1)$ and its inverse sends $t\\otimes(p\\otimes a\\prime)$ to $a\\prime t\\otimes p$. Balancing checks these maps and their inverse identities on pure tensors [def-weil-pbc-module-tensor-product]. Compose with the canonical base-change isomorphism of [lem-sfb-patched-module-base-change] from step 1. For $T=I$, use $J\\cong I$. The composite $J\\otimes_R P\\to P\\xrightarrow{\\rho}M'$ becomes multiplication $I\\otimes_{A'}M'\\to M'$. This is injective by flatness of $M'$ [def-weil-pbc-flat-ring-map], applied to $I\\hookrightarrow A'$, and the elementary isomorphism $A'\\otimes_{A'}M'\\cong M'$. Consequently $J\\otimes_R P\\to P$ is injective.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-patched-module-base-change",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2I, proof of (1): the display identifying the J tensor and ideal multiplication"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak b\\subseteq R$ be a finitely generated ideal. Let $\\overline{\\mathfrak b}\\subseteq B=R/J$ be its image; its kernel as a quotient of $\\mathfrak b$ is $\\mathfrak b\\cap J$. Suppose $z\\in\\mathfrak b\\otimes_R P$ has zero product in $P$. By clause (2) of [lem-weil-pbc-tensor-over-quotient-ring] and step 1, $\\overline{\\mathfrak b}\\otimes_R P\\cong\\overline{\\mathfrak b}\\otimes_B N$. Multiplication from this module to $N$ is injective by flatness of $N$ [def-weil-pbc-flat-ring-map], applied to $\\overline{\\mathfrak b}\\hookrightarrow B$. Therefore $z$ maps to zero in $\\overline{\\mathfrak b}\\otimes_R P$. Right exactness [lem-weil-pbc-tensor-right-exact] of $(\\mathfrak b\\cap J)\\to\\mathfrak b\\to\\overline{\\mathfrak b}\\to0$ gives $w\\in(\\mathfrak b\\cap J)\\otimes_R P$ mapping to $z$. Its product in $P$ is also zero. It suffices, therefore, to prove injectivity of multiplication for every ideal $\\mathfrak c\\subseteq J$; $\\mathfrak c$ need not be finitely generated.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2I, proof of (1), first ideal reduction; Tag 00HD (finitely generated ideal test)"
+   }
+  },
+  {
+   "text": "Fix such an ideal $\\mathfrak c$. Under $J\\cong I$, let $\\mathfrak d=A'\\mathfrak c\\subseteq I$ be its $A'$-span, viewed also as an $R$-ideal of $J$. We have $J\\mathfrak d\\subseteq\\mathfrak c$: if $j=(0,i)\\in J$, $c=(0,k)\\in\\mathfrak c$, and $a\\prime\\in A'$, then $j(a\\prime c)=(0,ia\\prime)c\\in\\mathfrak c$, because $(0,ia\\prime)\\in R$; finite sums give the claim. Apply [lem-sfb-tensor-inclusion-flat-reduction] with $E=P$, $U=\\mathfrak c$, $V=\\mathfrak d$, and ideal $J$. Steps 1 and 2 give its flat-reduction and ideal-injectivity hypotheses, and the displayed calculation gives $JV\\subseteq U$. Thus $\\mathfrak c\\otimes_R P\\to\\mathfrak d\\otimes_R P$ is injective.",
+   "uses": [
+    "lem-sfb-tensor-inclusion-flat-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2I, proof of (1), enlargement of the ideal; Tag 051C and Remark 00M6"
+   }
+  },
+  {
+   "text": "Apply $\\theta_T$ of step 2 with the $A'$-ideal $T=\\mathfrak d$. It identifies $\\mathfrak d\\otimes_R P\\to M'$ with multiplication $\\mathfrak d\\otimes_{A'}M'\\to M'$, which is injective by flatness of $M'$ [def-weil-pbc-flat-ring-map], applied to $\\mathfrak d\\hookrightarrow A'$. Composing with the injection of step 4 shows that $\\mathfrak c\\otimes_R P\\to P\\to M'$ is injective; hence its first map is injective. Step 3 now shows that multiplication $\\mathfrak b\\otimes_R P\\to P$ is injective for every finitely generated ideal $\\mathfrak b$. The criterion [lem-weil-pbc-flat-fg-ideal-criterion] proves that $P$ is flat over $R$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-fg-ideal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2I, proof of (1), last display and conclusion; Tag 00HD"
+   }
+  },
+  {
+   "text": "For the second assertion, the maps $u:R\\to B\\oplus A'$, $r\\mapsto(\\pi_B(r),\\pi_{A'}(r))$, and $v:B\\oplus A'\\to A$, $(b,a\\prime)\\mapsto b|_A-a\\prime|_A$, form an exact sequence $0\\to R\\xrightarrow{u}B\\oplus A'\\xrightarrow{v}A\\to0$: $u$ is injective by coordinates, $\\ker v=R$ by the fibre-product equation, and $v$ is onto since $A'\\to A$ is onto. For flat $L$, apply [lem-weil-pbc-flat-tensor-exact] to the sequence through $A$, obtaining injectivity on the left and exactness at $L\\otimes_R(B\\oplus A')$. The tensor universal property [def-weil-pbc-module-tensor-product] identifies $L\\otimes_R R$ with $L$ by $l\\otimes r\\mapsto rl$, and identifies $L\\otimes_R(B\\oplus A')$ with $(L\\otimes_R B)\\oplus(L\\otimes_R A')$ by $l\\otimes(b,a\\prime)\\mapsto(l\\otimes b,l\\otimes a\\prime)$; the inverse adds the two tensors along the summand inclusions. Under these maps, $1\\otimes v$ is the difference of the two canonical maps to $L\\otimes_R A$. Its kernel is exactly the asserted fibre product. The induced isomorphism from $L$ is $l\\mapsto(l\\otimes1,l\\otimes1)$, as required.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2I, proof of (2): tensor the explicit short exact sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-patched-module-base-change",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-sfb-tensor-inclusion-flat-reduction",
+  "lem-weil-pbc-flat-fg-ideal-criterion",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D2I (lemma-flat-module-over-fibre-product), proofs of (1) and (2), using 07RU and the first-paragraph consequence of algebra.tex Tag 051C with 00M6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compatible pair of flat modules over rings B and A prime with the same reduction glues to a flat module over B times A prime over A",
+   "results": "{\"t\": \"2026-10-23T11:56:11Z\", \"tool\": \"leanfinder\", \"query\": \"A compatible pair of flat modules over rings B and A prime with the same reduction glues to a flat module over B times A prime over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.Flat.of_flat_tensorProduct\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.Flat.of_isLocalizedModule\", \"Module.Flat.trans\", \"Module.flat_iff_of_isLocalization\", \"Module.Flat.iff_flat_tensorProduct\", \"IsLocalization.flat\"], \"digest\": \"76b61b6c5d3ff3de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat module patching for a cartesian square of rings with one surjection",
+   "results": "{\"t\": \"2026-10-23T11:57:46Z\", \"tool\": \"leanfinder\", \"query\": \"Flat module patching for a cartesian square of rings with one surjection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"Module.Flat.trans\", \"RingHom.Flat\", \"Module.Flat.of_flat_tensorProduct\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"RingHom.FaithfullyFlat\", \"Module.Flat.iff_flat_tensorProduct\"], \"digest\": \"718c28db1898ec40\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T11:52:15Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right\", \"LinearIndependent.tmul_of_flat_left\", \"LinearIndependent.tmul_of_flat_right\", \"TensorProduct.LinearIndepOn.tmul_of_flat_left\", \"TensorProduct.LinearIndepOn.tmul_of_flat_right\", \"TensorProduct.nontrivial_of_linearMap_injective_of_flat_left\", \"TensorProduct.nontrivial_of_linearMap_injective_of_flat_right\"], \"digest\": \"d1f186fc0c797f5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ff]lat|[Ff]lat.*pullback|Milnor|patching",
+   "results": "{\"t\": \"2026-10-23T11:56:10Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Ff]lat|[Ff]lat.*pullback|Milnor|patching\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"18854824ade3310d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pullback of flat modules over a surjective fiber product square of commutative rings is flat",
+   "results": "{\"t\": \"2026-10-23T11:56:10Z\", \"tool\": \"leansearch\", \"query\": \"A pullback of flat modules over a surjective fiber product square of commutative rings is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.of_retract\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.instTensorProduct\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.of_flat_tensorProduct\", \"RingHom.Flat\", \"Module.FaithfullyFlat.toFlat\"], \"digest\": \"59b509fd92eefeef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible pair of flat modules over a pullback of commutative rings with one surjection patches to a flat module",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:48:20Z\", \"tool\": \"leanfinder\", \"query\": \"A compatible pair of flat modules over a pullback of commutative rings with one surjection patches to a flat module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.trans\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"Module.Flat\", \"Module.FaithfullyFlat\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"62118a2a9a2448df\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension, descent along faithfully flat maps, and finite-limit preservation by tensor with an already flat module do not give flat patching across an arbitrary surjective ring fibre product."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:50:18Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right\", \"LinearIndependent.tmul_of_flat_left\", \"LinearIndependent.tmul_of_flat_right\", \"TensorProduct.LinearIndepOn.tmul_of_flat_left\", \"TensorProduct.LinearIndepOn.tmul_of_flat_right\", \"TensorProduct.nontrivial_of_linearMap_injective_of_flat_left\", \"TensorProduct.nontrivial_of_linearMap_injective_of_flat_right\"], \"digest\": \"d1f186fc0c797f5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension, descent along faithfully flat maps, and finite-limit preservation by tensor with an already flat module do not give flat patching across an arbitrary surjective ring fibre product."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ff]lat|[Ff]lat.*pullback|Milnor|patching",
+   "sub": "RingTheory",
+   "results": "{\"t\": \"2026-10-23T13:51:41Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Ff]lat|[Ff]lat.*pullback|Milnor|patching\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"18854824ade3310d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension, descent along faithfully flat maps, and finite-limit preservation by tensor with an already flat module do not give flat patching across an arbitrary surjective ring fibre product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pullback of flat modules over a surjective fiber product square of commutative rings is flat",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:51:42Z\", \"tool\": \"leansearch\", \"query\": \"A pullback of flat modules over a surjective fiber product square of commutative rings is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.of_retract\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.instTensorProduct\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.of_flat_tensorProduct\", \"RingHom.Flat\", \"Module.FaithfullyFlat.toFlat\"], \"digest\": \"59b509fd92eefeef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension, descent along faithfully flat maps, and finite-limit preservation by tensor with an already flat module do not give flat patching across an arbitrary surjective ring fibre product."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fibre-product-algebra-flat-presentation",
+  "date": "2026-10-23",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX reduces to the ring-algebra lemma Tag 08KQ, parts (2), (3) and final assertion. Module input: 0D2I (lemma-flat-module-over-fibre-product, parts (1) and (2)).",
+   "via": [
+    "lem-sfb-fibre-product-algebra-flat-presentation",
+    "lem-sfb-scheme-pushout-flat-patching",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-module-fibre-product-patching",
+  "worker": "stage1",
+  "summary": "Read Stacks 0D2I and 08KH, reused 07RU base-change and the existing tensor/flatness leaves, and isolated only the generic tensor-inclusion consequence of 051C as a new statement-only input. All ideal reductions and tensor comparisons are written out; no nilpotence, finite-generation, or Noetherian assumption is added. The statement is unchanged.",
+  "blueprint": "Read the latest sk-thm-sf-ctf-stability unit and det-thm-sf-ctf-stability-direct-images proof (3); preserve the inherited auxiliary alteration/deformation ancestry (blueprint_refs.py ancestor returns None). Steps 1-5 realize Stacks 0D2I (1), the module input of 08KQ through 07RX and 07W3; step 6 realizes 0D2I (2). No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-patched-module-base-change",
+    "why": "Generic algebra input used in the explicit Stacks 0D2I patching argument; no alternative geometric route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-over-quotient-ring",
+    "why": "Generic algebra input used in the explicit Stacks 0D2I patching argument; no alternative geometric route is substituted."
+   },
+   {
+    "node": "def-weil-pbc-module-tensor-product",
+    "why": "Generic algebra input used in the explicit Stacks 0D2I patching argument; no alternative geometric route is substituted."
+   },
+   {
+    "node": "def-weil-pbc-flat-ring-map",
+    "why": "Generic algebra input used in the explicit Stacks 0D2I patching argument; no alternative geometric route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic algebra input used in the explicit Stacks 0D2I patching argument; no alternative geometric route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-flat-fg-ideal-criterion",
+    "why": "Generic algebra input used in the explicit Stacks 0D2I patching argument; no alternative geometric route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic algebra input used in the explicit Stacks 0D2I patching argument; no alternative geometric route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-patched-module-base-change",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-flat-fg-ideal-criterion",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-9f82441db",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-9f82441db (reviewer sub-agent of L); spot-checked: I read Stacks 0D2I (more-algebra.tex l.807-889, Situation 08KH) and 051C (algebra.tex l.23651, first paragraph). The item statement is unchanged and matches 0D2I (1),(2); the source's L vs L' typo is handled correctly. All six steps check out against the cited statements. Step 1: patched base change gives P⊗B≅N and P⊗A'≅M'; quotient-tensor (1) then gives P/JP≅N, flat over R/J. Step 2: θ_T has an explicit inverse; J⊗P→P→M' is I⊗_{A'}M'→M', injective by flatness of M'. Step 3: an fg ideal b reduces to b∩J using flatness of N, quotient-tensor (2) and right exactness; the step correctly does not assume b∩J is fg. Step 4: I verified Jd⊆c via (0,i)(0,a'k)=(0,ia')(0,k) with ia'∈I, then applied the new node. Step 5: θ_d and flatness of M' give injectivity, and the fg ideal criterion concludes. Step 6: 0→R→B⊕A'→A→0 tensored with flat L, using flat-tensor-exact and explicit sum/unit identifications. The new node lem-sfb-tensor-inclusion-flat-reduction is a correct generic statement of the first paragraph of 051C. I checked it with the free-presentation Tor argument and on the cases J=0, J=R, U=0 and Z/2. It is statement only, self-contained, cites its definition nodes, and is not a clause of the item. rg -L found no duplicate; lem-sfb-nilpotent-ideal-module-flatness has this argument only inside its proof steps, not as a node statement. Advisory: project Filtration.lean:198 plus :66 gives the new node in two lines (universe of N, tensor order), so stage 3 should use it. The item is unsplit in the live and side-live clones and has no re-split note. No SGA source is used. tool_uses (generic algebra nodes) accepted. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatModuleFibreProductPatching",
+  "declaration": "ModuleCat.FibreProductPatching.flat_patchedModule",
+  "declarations": [
+   "ModuleCat.FibreProductPatching.leftMap",
+   "ModuleCat.FibreProductPatching.rightMap",
+   "ModuleCat.FibreProductPatching.patchedModule",
+   "ModuleCat.FibreProductPatching.transition",
+   "ModuleCat.FibreProductPatching.transitionLeft",
+   "ModuleCat.FibreProductPatching.transitionRight",
+   "ModuleCat.FibreProductPatching.flat_patchedModule",
+   "ModuleCat.FibreProductPatching.exists_reconstruction_iso"
+  ],
+  "file": "lean/Sheaf/RingTheory/FlatModuleFibreProductPatching.lean",
+  "statement": "theorem flat_patchedModule {A A' B : CommRingCat.{u}} (b : B ⟶ A) (q : A' ⟶ A) (hq : Function.Surjective q) (N : ModuleCat.{max u v} B) (M' : ModuleCat.{max u v} A') (φ : (extendScalars b.hom).obj N ≅ (extendScalars q.hom).obj M') [Module.Flat B N] [Module.Flat A' M'] : Module.Flat (pullback (C := CommRingCat) b q) (patchedModule b q N M' φ)",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Two clauses: flat_patchedModule gives flatness of the explicitly constructed compatible-module pullback; exists_reconstruction_iso gives an isomorphism to the pullback of scalar extensions with both projection equations equal to the canonical adjunction units. Scalar extension A tensor_Aprime Mprime is canonically Mprime/ker(q)Mprime for the surjection q; the tensor symmetry matches the node convention. Helper definitions construct only the canonical maps and patched module of this same node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e5f2749e",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (Mathlib TensorProduct and Module.Flat), Stacks 08KH and 0D2I, and the delivered module. Rings are arbitrary in CommRingCat.{u}, with q surjective as in 08KH. R is the CommRingCat pullback. φ is an iso between the two extendScalars, i.e. Stacks' Mod_B ×_{Mod_A} Mod_{A'} datum (A⊗_{A'}M' ≅ M'/IM'). leftMap, rightMap, patchedModule and transition are real canonical data. flat_patchedModule is the full clause (1). exists_reconstruction_iso pins both projections to the extend-restrict units, so it states that the canonical map l↦(1⊗l,1⊗l) is an iso: the full clause (2), for every flat L. No extra hypotheses; zero rings allowed; module universe max u v. The record statement is verbatim and all 8 declarations exist. Only the theorems are sorry, and docstrings carry the source, blueprint tag and proof steps. Only the lean field differs from the live node. No duplicate in Mathlib or side-live, and the live item has no Lean record. Advisory only: the proof-only private imports are unused. No file changes, so no compile."
+ }
+}

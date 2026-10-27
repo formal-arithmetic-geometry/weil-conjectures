@@ -18,142 +18,78 @@
   "def-weil-etale-morphism",
   "pqf-def-coherent",
   "def-kun-transcendence-degree",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-trf-hilbert-samuel-invariant",
+  "def-trf-marked-ideal-order",
+  "def-trf-hilbert-samuel-presentation"
  ],
  "proof": [
   {
-   "text": "Work in an affine etale chart of the smooth ambient. By [lem-trf-jet-diagram-hilbert-control], each $H_X(x)(n)$ is a finite Taylor-module fibre dimension and is the count of missing monomials in its diagram. The diagrams take finitely many values locally, so $H_X$ does also. Its possible values in any fixed number of ambient variables satisfy the descending-chain condition. The same ambient variable bound works along blowups, whose charts have the same dimension; thus this condition also applies to values encountered later, rather than just to the initial finite image.",
+   "text": "Apply [lem-trf-jet-level-topology-reachable-dcc] on affine charts: its finite jet presentations give local finiteness and lexicographic upper semicontinuity. Its reachable diagram bound applies to all finite admissible histories from the fixed initial scheme, including subsequences separated by plateaus; hence there is no infinite strict descent.",
    "uses": [
-    "lem-trf-jet-diagram-hilbert-control"
+    "lem-trf-jet-level-topology-reachable-dcc"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BMT 6.1; BM 1997, Corollary 3.20 and Lemma 9.3."
+    "place": "ILO VIII 2.3.11--2.3.13; BM/BMT assembly; re-split of old proof steps 1,2 and DCC part of 9"
    }
   },
   {
-   "text": "On an affine chart, the coordinate ring is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (a field has only the ideals zero and one). A finite Taylor module has a finite presentation since its relation module is a submodule of a finite free module [lem-trf-noetherian-submodule-finitely-presented]. For a matrix with $v$ target rows, fibre dimension at least $c$ means that all $(v-c+1)$-minors vanish: this follows by row reduction over the residue field. Thus each coordinate $H_X(\\cdot)(n)$ is upper semicontinuous. On the finite set of local sequence values from [lem-trf-jet-diagram-hilbert-control], choose $n_1$ at least the first index at which any two of these values differ. Intersect the neighbourhoods where each coordinate $n\\le n_1$ is at most its value at $a$. If $H_X(x)\\ne H_X(a)$ there, they first differ at some $n\\le n_1$, where $H_X(x)(n)<H_X(a)(n)$; so the neighbourhood has $H_X(x)\\le H_X(a)$ lexicographically. Applying this at each point of a strict lower-level set proves that every lexicographic upper-level set is closed.",
-   "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-trf-noetherian-submodule-finitely-presented",
-    "lem-trf-jet-diagram-hilbert-control"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BM 1997, Remarks 9.1, Theorem 9.2 and Lemma 9.3; finite-matrix argument written out."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-regular-hilbert-coefficient-data] after the preceding shrinking. It gives a smooth $N$, regular coefficients $c_{i\\gamma}$ and positive weights $m_{i\\gamma}=d_i-|\\gamma|$ for $|\\gamma|<d_i$. Choose a positive common multiple $b$ of these finitely many weights and set $I=\\sum_{i,\\gamma}(c_{i\\gamma}^{\\,b/m_{i\\gamma}})$ on $N$; if the list is empty take $b=1$ and $I=0$. In a smooth Taylor ring the order of a nonzero product is the sum of its orders, since its first nonzero homogeneous terms multiply to a nonzero polynomial. Consequently $\\operatorname{ord} I\\ge b$ is exactly the set of all the coefficient inequalities. The initial-stratum assertion of [lem-trf-formal-coefficient-transform-criterion] identifies this set with the $H_X(a)$ equality locus. Coherence of this finite generated ideal and of its finite free relation modules follows from [lem-trf-noetherian-submodule-finitely-presented]. This is a construction of the ideal, not a choice from a bare existence theorem.",
+   "text": "After shrinking about $a$ using step 1, [lem-trf-regular-hilbert-coefficient-data] supplies the regular coefficients and positive weights. Apply [lem-trf-common-power-hilbert-marking] to form $I=\\sum(c_{i\\gamma}^{b/(d_i-|\\gamma|)})$ on its smooth $N$, with $(I,b)=(0,1)$ for an empty list. This gives the initial equality locus, coherence, the controlled transform $e^{-b}\\sigma^*I$, and nonincrease for every smooth locally $H$-constant center, including outside it.",
    "uses": [
     "lem-trf-regular-hilbert-coefficient-data",
-    "lem-trf-formal-coefficient-transform-criterion",
-    "lem-trf-noetherian-submodule-finitely-presented"
+    "lem-trf-common-power-hilbert-marking"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BM 1997, Theorems 9.4 and 9.6; BMT 6.2, combining marked functions by common powers."
+    "place": "ILO VIII 2.3.11--2.3.13; BM/BMT assembly; re-split of old proof steps 3,4"
    }
   },
   {
-   "text": "Take a smooth center contained in this equality locus and in normal crossings with the boundary. The normal coordinates for its inclusion in the smooth ambient are supplied by [lem-pur-smooth-pair-local-coordinates]. The formulas of [lem-trf-formal-coefficient-transform-criterion] give $c'_{i\\gamma}=e^{-m_{i\\gamma}}\\sigma^*c_{i\\gamma}$ on the strict transform of $N$. Taking the powers used above gives $(c'_{i\\gamma})^{b/m_{i\\gamma}}=e^{-b}\\sigma^*(c_{i\\gamma}^{b/m_{i\\gamma}})$; hence the transformed coefficient ideal is precisely the controlled transform of $I$. The same theorem gives $H_{X'}(a')\\le H_X(a)$ and characterizes equality by these coefficient inequalities, with the five division/Jacobian conditions retained at equality points. Away from the center the blowup is an isomorphism by [thm-nagata-global-blowup-complement], and the strict transform restricts to the original scheme by [lemma-nagata-strict-transform-over-complement]. Shrinking around any point of a locally $H$-constant center proves the stated nonincrease for all such blowups.",
+   "text": "Apply [lem-trf-coefficient-test-sequence-propagation] to these same coefficient data. Its prefix identity identifies transformed cosupport with the retained level after every finite test, with one summation per line product. The boundary starts empty and remains transverse to $N$; its ordered transforms and next centers therefore agree. This is the required presentation. Its smooth-pullback assertion gives the level $\\Lambda^r H$, equality strata and tests on each relative-dimension piece, including restriction.",
    "uses": [
-    "lem-pur-smooth-pair-local-coordinates",
-    "lem-trf-formal-coefficient-transform-criterion",
-    "thm-nagata-global-blowup-complement",
-    "lemma-nagata-strict-transform-over-complement"
+    "lem-trf-coefficient-test-sequence-propagation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BM 1997, Theorems 7.20 and 9.4; Stacks 0FUE for smooth-pair coordinates."
+    "place": "ILO VIII 2.3.11--2.3.13; BM/BMT assembly; re-split of old proof steps 5,7"
    }
   },
   {
-   "text": "The other formulas of [lem-trf-formal-coefficient-transform-criterion] use ordinary pullback for an exceptional intersection blowup; $X$ is then a total transform, not an arbitrarily stipulated strict transform. For a line product the Taylor count in [lem-trf-jet-diagram-hilbert-control] replaces $H$ by $\\Lambda H$. Adjoin the horizontal zero section to the ordered boundary. Induct on the length of a test sequence, carrying also the claim that every boundary component is transverse to the current $N$ (its equation is a coordinate of $N$ in the coordinates $(W,Z)$): the boundary is empty at length zero; an admissible center lies in the cosupport, hence in $N$, so in each chart meeting the strict transform of $N$ the exceptional equation and the strict transforms of earlier boundary coordinates are $W$-coordinates; a line zero section and the exceptional divisor of a blowup of two such boundary hyperplanes are again given by $W$-coordinates. This is the transversality hypothesis of the exceptional-intersection formula. For length zero the initial equality criterion was proved in step 3. For an admissible blowup apply step 4 and retain the division data at equality points; for the other two operations use the just cited formulas. Thus at each stage the two cosupports coincide and allow exactly the same next smooth center. This proves equality of all test sequences, with the specified exceptional ordering.",
+   "text": "Choose a minimal envelope and apply the construction of steps 2--3 there. [lem-trf-minimal-envelope-coefficient-comparison] supplies such envelopes, positive essential transverse rank at a singular point, and the explicit suspension ideal $(z_1^b,\\ldots,z_r^b)+p^*I$ of order exactly $b$. It also compares coefficient choices and minimal envelopes, retaining the ordered earlier-center ideals and induced boundary through admissible histories. Its regular zero-ideal case supplies presentations without a finite-order claim.",
    "uses": [
-    "lem-trf-formal-coefficient-transform-criterion",
-    "lem-trf-jet-diagram-hilbert-control"
+    "lem-trf-minimal-envelope-coefficient-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BM 1997, Definition 6.2, formulas (6.1), Theorems 7.20--7.21; BMT 5.2."
+    "place": "ILO VIII 2.3.11--2.3.13; BM/BMT assembly; re-split of old proof steps 6,8"
    }
   },
   {
-   "text": "First choose a minimal smooth envelope by [lem-trf-smooth-embedding-etale-comparison], and perform step 3 there. At a singular point its Taylor ideal is nonzero, so the construction uses at least one essential transverse variable: otherwise the diagram would be empty and the local scheme would be the smooth envelope. The smooth pair has etale transverse retraction coordinates by the same comparison node. Apply [lem-trf-marked-ideal-transverse-suspension] to $(N,I,b)$ in those coordinates. Its explicit ideal $J=(z_1^b,\\ldots,z_r^b)+p^*I$ has the same test sequences, is on the whole envelope, and has order exactly $b$ along cosupport since $r\\ge1$. For a regular codimension-zero germ take $N=Z$, $I=0$, $b=1$; the equality/test description still holds, while order is infinite. This explains the necessary singular-point restriction on the maximal-order clause.",
-   "uses": [
-    "lem-trf-smooth-embedding-etale-comparison",
-    "lem-trf-regular-hilbert-coefficient-data",
-    "lem-trf-marked-ideal-transverse-suspension"
-   ],
-   "elementary": false,
+   "text": "For a maximum level $H_0$, step 3 identifies its final equality locus with the transformed cosupport. If that cosupport is empty, equality is impossible; nonincrease from step 2 excludes values above $H_0$, so all final values are smaller. The reachable descending-chain condition of step 1 rules out infinitely many strict drops. All of these conclusions concern the stated transforms and tests; no resolution tower is constructed.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BMT 6.2, minimal embedding and maximal-order paragraph; explicit regular-germ exception."
-   }
-  },
-  {
-   "text": "A smooth morphism is locally etale over an affine-space projection by [sbc-thm-etale-local-normal-form]. The Taylor-module identities of [lem-trf-jet-diagram-hilbert-control] are invariant under that etale localization, and adjoining $r$ free variables gives $H_Y=\\Lambda^rH_X$ on a piece of relative dimension $r$. For two different sequences the first nonzero coefficient of their difference is also the first nonzero coefficient of its partial sum, with the same sign. Thus $\\Lambda^r$ preserves and reflects lexicographic inequalities and equality. Pull back the coefficient construction; its test-transform identities remain the identities in step 4, now in the pulled-back coordinates. Therefore it is a presentation of the summed level. This is a local assertion on each relative-dimension piece; it does not synchronize the numerical maxima of different pieces.",
-   "uses": [
-    "sbc-thm-etale-local-normal-form",
-    "lem-trf-jet-diagram-hilbert-control",
-    "lem-trf-formal-coefficient-transform-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BMT 6.3, line-product formula and smooth functoriality; BM 1997, Definition 6.2."
-   }
-  },
-  {
-   "text": "Any two coefficient constructions in a fixed envelope present the same intrinsic retaining-level test data by step 5; hence their sequences agree, which is exactly equivalence. Two minimal envelopes have a common etale comparison identifying their closed copies of $X$ by [lem-trf-smooth-embedding-etale-comparison]. On that comparison apply the preceding observation. This identifies classes, not a uniquely chosen coefficient ideal. The comparisons pull back every specified earlier center ideal. Repeating the retaining-level criterion of step 5 after each center therefore also identifies the induced ordered boundary and subsequent transformed presentations. Restriction is obtained by applying the very same formulas in a smaller open neighbourhood. This proves the claimed intrinsic dependence for these admissible histories, without a new assertion about arbitrary ambient histories.",
-   "uses": [
-    "lem-trf-smooth-embedding-etale-comparison",
-    "lem-trf-formal-coefficient-transform-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BM 1997, Remarks 6.3 and Definition 6.4; BMT 6.2--6.3."
-   }
-  },
-  {
-   "text": "Suppose the presentation is of the maximum level $H_0$ and an admissible sequence empties its cosupport. At each preceding stage the equality criterion of step 5 says that every point with value $H_0$ is in that cosupport, while nonincrease in step 4 rules out values above $H_0$. Thus no final point has value $H_0$. The diagram descending-chain condition of [lem-trf-jet-diagram-hilbert-control] applies at every stage in the same ambient dimension; it rules out infinitely many strict drops. The ambient and strict transform remain smooth and reduced, respectively, by [lem-trf-smooth-center-blowup-geometry], after restriction to finite-type separated smooth charts. Induction therefore reapplies the construction at every admissible history. No resolution engine is invoked to turn this conditional disappearance statement into an assertion of a completed tower.",
-   "uses": [
-    "lem-trf-jet-diagram-hilbert-control",
-    "lem-trf-formal-coefficient-transform-criterion",
-    "lem-trf-smooth-center-blowup-geometry"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BMT 6.1 and first paragraph of 6.3; BM 1997, presentation criterion."
+    "place": "ILO VIII 2.3.11--2.3.13; BM/BMT assembly; re-split of old proof steps remaining conditional-disappearance part of 9"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-smooth-pair-local-coordinates",
-  "lem-trf-formal-coefficient-transform-criterion",
-  "lem-trf-jet-diagram-hilbert-control",
-  "lem-trf-marked-ideal-transverse-suspension",
-  "lem-trf-noetherian-submodule-finitely-presented",
-  "lem-trf-regular-hilbert-coefficient-data",
-  "lem-trf-smooth-center-blowup-geometry",
-  "lem-trf-smooth-embedding-etale-comparison",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lemma-nagata-strict-transform-over-complement",
-  "sbc-thm-etale-local-normal-form",
-  "thm-nagata-global-blowup-complement"
+  "lem-trf-coefficient-test-sequence-propagation",
+  "lem-trf-common-power-hilbert-marking",
+  "lem-trf-jet-level-topology-reachable-dcc",
+  "lem-trf-minimal-envelope-coefficient-comparison",
+  "lem-trf-regular-hilbert-coefficient-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "VIII 2.3.11--2.3.13; detailed BM 1997 Chapter III and BMT sections 5.1--5.2, 6.1--6.3 read in sandbox PDFs; local assembly and transverse suspension written explicitly."
+  "place": "VIII 2.3.11--2.3.13 (referral only). BM 1997 and BMT 6.1--6.3 detailed inputs WANTED; assembly of four independent statement-only re-split nodes, preserving original argument in report.md."
  },
  "mathlib_searches": [
   {
@@ -253,33 +189,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "item": "lem-trf-hilbert-samuel-local-presentations",
   "worker": "stage1",
-  "summary": "Constructed the marked ideal from regular coefficient data, proved the common-power transform identities and test-sequence induction, and exposed five strictly lower inputs. Corrected the zero-ideal maximal-order edge case, test transforms, and smooth level shift; detailed source review and all exceptions are in report.md.",
-  "blueprint": "Historical local presentation input of the recorded blueprint ancestor, via the invariant-calculus branch; no change to chapter or unit routes.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
-    "why": "Generic Noetherian algebra or smooth local-coordinate tool; no lemma of this unit supplies this statement."
-   },
-   {
-    "node": "lem-pur-smooth-pair-local-coordinates",
-    "why": "Generic Noetherian algebra or smooth local-coordinate tool; no lemma of this unit supplies this statement."
-   },
-   {
-    "node": "sbc-thm-etale-local-normal-form",
-    "why": "Generic Noetherian algebra or smooth local-coordinate tool; no lemma of this unit supplies this statement."
-   },
-   {
-    "node": "thm-nagata-global-blowup-complement",
-    "why": "Generic blowup-complement comparison, needed to include points outside the center in the nonincrease assertion; this unit has no replacement for this scheme-theoretic tool."
-   },
-   {
-    "node": "lemma-nagata-strict-transform-over-complement",
-    "why": "Generic blowup-complement comparison, needed to include points outside the center in the nonincrease assertion; this unit has no replacement for this scheme-theoretic tool."
-   }
-  ]
+  "summary": "Repair of the long-proof return: four balanced statement-only tasks carry old steps 1/2/9, 3/4, 5/7 and 6/8; the unchanged statement is assembled in five short steps. Verbatim old arguments and their allocation are preserved in report.md. Source referral, coefficient hypotheses, boundary conventions, singular/regular edge cases and reachable DCC were checked.",
+  "blueprint": "Same recorded historical local-presentation input of lem-trf-local-term-locality through the invariant-calculus branch. No chapter or unit route changes.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-finite-type-algebra-noetherian",
@@ -289,12 +204,70 @@
   "lemma-nagata-strict-transform-over-complement"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NA-73ec54a08",
-  "group": "NA",
+  "reviewer": "NT-cc-Q158-a978f46b2",
+  "group": "Q158",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-73ec54a08 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement, 9 steps), all 5 new nodes, every cited statement, both citers (resolution-invariant-calculus Steps 2/3/5/6/7; smooth-dimension-profile Steps 8-14) and ILO VIII 2.3.11-2.3.13 pp.93-94. ILO only points to BM/BMT, which are not in literature/, so WANTED and by=agent are correct. Mechanical checks: the item, its new nodes and its via chain are not on the drop list; no SGA is cited; all ids exist; every step is under 2000 chars. Statement changes are reported (E7) and correct: (a) maximal order only at singular points, since X=Z=Spec Q admits no positive finite marking; (b) the level shifts to Λ^r H under smooth pullback (Spec Q gives 1, A^1 gives n+1); (c) total transform of X in the auxiliary operations, which settles the y^6=x^4 counterexample from the earlier returns. Steps checked: Step 1 DCC is true (degreewise limit plus Dickson). Step 3 is right (ord c^{b/m}=(b/m)ord c via polynomial gr; cusp and xy=0 tested). Step 4 exponents are right. Step 6 is right (K≠0 ⇒ r≥1; suspension order b). Steps 7-9 are right. The comparison node holds (lift étale coordinates; minimality makes M1→A^d étale). The suspension node holds by chart computation. No new node restates an item clause, no DAG duplicates were found, and the 5 tool uses are accepted. Fixes in the item: (1) Statement precision: test boundary is empty at the presentation's stage and consists only of divisors created by the sequence. The other reading is false: X=V(wy+u^3) with old E0={u=0}, E1={w=0}, J=(w^2,y^2,u^3); after the auxiliary blowup and a point blowup, the y-chart strict transform keeps H_a where the ideal is a unit. (2) Step 5: added the inductive argument that the boundary is transverse to N (W-coordinates), which the exceptional formula and the suspension node need. (3) Step 2: lex upper semicontinuity now uses all coordinates n≤n_1, not an arbitrary distinguishing set (which fails for (1,3) vs (2,1)). Maintainer note: smooth-dimension-profile's maximal-order presentation at codimension-zero regular germs needs a non-minimal ambient.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-a978f46b2 (reviewer sub-agent of L); spot-checked: Released stage-1 re-split note (2026-10-22, keep_plan) read in live and side-live. Compared field by field with live, the item changes only proof, proof_deps, proof_origin and split_report. Statement, stmt_deps, lean, reviewed_lean, tool_uses and blueprint are identical, so no landed record is touched. The 9 old steps (8619 chars) now sit in 4 statement-only unsplit nodes of comparable size (2150 to 2753 chars). (A) jet-level-topology-reachable-dcc takes old steps 1, 2 and the DCC and geometry part of 9: P^q presentation, (v-c+1)-minors, finite F with q_0, lex upper semicontinuity, reachable DCC in at most d variables. (B) common-power-hilbert-marking takes steps 3 and 4: I_b = sum of c^{b/m}, the empty case (0,1), ord(c^{b/m}) = (b/m) ord c, the controlled transform e^{-b} sigma^* I_b, nonincrease for locally H-constant centres. (C) coefficient-test-sequence-propagation takes steps 5 and 7: the prefix identity cosupp(I_j,b) = {H = Lambda^{l_j} H_0}, boundary transversality as W-coordinates, H_{X_1} = Lambda^r H, and Lambda preserving and reflecting lex order. (D) minimal-envelope-coefficient-comparison takes steps 6 and 8: r>=1 at singular points, J = (z^b) + p^*I of order exactly b, the regular case (M,0,1), comparison of envelopes and histories. The item proof is a 5-step assembly of 2288 chars. Its steps cite exactly what the nodes state, and step 5 (conditional disappearance) is elementary logic. Each node was tested on small cases, all true: c=1 and c=v+1 minors; q=0; the empty vertex list; r=0 forcing a zero Taylor ideal; the blowup of w1=w2=0 for z^2+c(w), comparing the total-transform H with the pullback cosupport at the same point; the generic and rational fibre points for Lambda; ord z_1^b = b. Form B1-B9 is fine, with three search kinds recorded per node. ILO VIII 2.3.11-2.3.13 (pp.93-94) checked: it is a BM/BMT referral, so WANTED and by=agent are correct. No SGA. No duplicates in the DAG: checked test-sequence-order-recovery, marked-controlled-blowup-charts, formal-hilbert-stratum-minors, smooth-dimension-profile, equality-component-rigidity and the suspension and comparison tools. No fixes. Maintainer note: the 5 accepted item tool_uses are no longer cited by the item proof; the splits of nodes A-C will need to declare them again."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertSamuelReachableLevels",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.function_no_infinite_reachable_drops",
+  "declarations": [
+   "AlgebraicGeometry.HilbertSamuel.function_local_finite_upperSemicontinuous",
+   "AlgebraicGeometry.HilbertSamuel.function_nonincrease",
+   "AlgebraicGeometry.HilbertSamuel.function_no_infinite_drops",
+   "AlgebraicGeometry.HilbertSamuel.local_presentations",
+   "AlgebraicGeometry.HilbertSamuel.local_minimal_presentations",
+   "AlgebraicGeometry.HilbertSamuel.presentation_full_maximalOrder",
+   "AlgebraicGeometry.HilbertSamuel.presentation_intrinsic_comparison",
+   "AlgebraicGeometry.HilbertSamuel.presentation_history_comparison",
+   "AlgebraicGeometry.HilbertSamuel.function_smooth_pullback",
+   "AlgebraicGeometry.HilbertSamuel.presentation_smooth_pullback",
+   "AlgebraicGeometry.HilbertSamuel.presentation_empty_maximum",
+   "AlgebraicGeometry.HilbertSamuel.function_no_infinite_reachable_drops"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertSamuelReachableLevels.lean",
+  "statement": "theorem function_no_infinite_reachable_drops (S : Embedded (ULift.{u} ℚ)) [IsReduced S.X] [LocallyOfFiniteType (S.i ≫ S.p)] [QuasiCompact (S.i ≫ S.p)] (values : ℕ → ℕ → ℕ) (hvalues : ∀ n : ℕ, ∃ T : Embedded (ULift.{u} ℚ), Relation.ReflTransGen BlowupTransition S T ∧ ∃ x : T.X, function (T.i ≫ T.p) x = values n) : ¬ ∀ n : ℕ, lt (values (n + 1)) (values n)",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The previous function_no_infinite_drops quantified over consecutive single blowups and only forbade a strict drop at every successive stage. It did not supply the node's descending-chain condition after passing to a subsequence separated by plateaus, as required by the dimension-profile proof step 14. The new module publicly imports HilbertSamuelLocalPresentations, retaining every existing numerical and marked-presentation declaration, and adds function_no_infinite_reachable_drops for levels attained after arbitrary finite admissible histories from one fixed initial scheme. Relation.ReflTransGen uses exactly the existing BlowupTransition; it includes zero blowups and supplies the source's fixed-ambient-dimension descending-chain assertion without introducing an arbitrary transition map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4686d8156",
+  "group": "Q37",
+  "result": "pass",
+  "note": "All 17 node clauses match the Lean: hypotheses (reduced, finite type over Q via IsReduced/LocallyOfFiniteType/QuasiCompact on p), local invariants (c = ncard of the distinct-dimension set; integer Λ/Δ; Lex(ℕ × Lex(ℕ→ℤ)) head), smooth pullback (s = Krull dim of the regular fibre stalk at f.asFiber y; h_y = Λ^s h_x, dimensions shifted by s, equal heads; checked s=0 and s=1), regular-head iff plus strict >, modifiedHead_eq under dim X ≤ D, USC/finite image/level-component iff with H, shared presentations, test equivalence, centre equivalence, nonincrease, reachable no-infinite-drops, empty-maximum and history comparison. FullMaximalOrder at regular points goes beyond local-presentations' qualified clause, but the node's wording requires it and lem-trf-marked-ideal-transverse-suspension (r=1, I=0) makes it true. Dependency repair under §1(B): function_no_infinite_drops forbids only consecutive drops on one history and step 14 needs subsequences; the new function_no_infinite_reachable_drops (ReflTransGen BlowupTransition) is a superset record over a public re-export module that keeps all 11 live declarations, overwrites nothing, and is true by the fixed-ambient-dimension diagram DCC. Statements verbatim; only lean changed in both node copies; no hollow definitions, all sorry, docstrings and blueprint tags present, universes bound, no duplicates; item not dropped (stage-1 re-split note keeps the statement). Advisories: step 11 should cite the suspension node at the re-split; rigidity now has a Lean module; proof-dependency imports unused by the statement. Not compiled: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T093005-L-3487682",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.HilbertSamuel.function_no_infinite_reachable_drops"
+  ],
+  "sorry_after": []
+ }
 }

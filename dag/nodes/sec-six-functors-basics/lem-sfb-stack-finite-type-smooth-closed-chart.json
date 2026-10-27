@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-stack-finite-type-smooth-closed-chart",
+ "kind": "statement",
+ "title": "Closed points in smooth charts representing finite-type stack points",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], fibred groupoids and $2$-fibre products mean [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces mean [def-trf-algebraic-space]. A morphism is representable if every scheme base change is an algebraic space. Properties of representable maps are tested after scheme base change on etale scheme charts. The point set $|\\mathcal X|$ of an algebraic stack consists of field-valued objects modulo isomorphism after common field extension. A point is of finite type if it has a representative $\\operatorname{Spec}K\\to\\mathcal X$ locally of finite type, where $K$ is a field [def-weil-field], and local finite type is tested on smooth scheme charts using [def-weil-finite-type-morphism]. For every finite-type point $x$ of an algebraic stack $\\mathcal X/S$, there are an affine scheme $U/S$, a smooth morphism $q:U\\to\\mathcal X$ [def-sbc-smooth-morphisms], and a closed point $u\\in U$ mapping to $x$. With $k=\\kappa(u)$ and $a:\\operatorname{Spec}k\\to U\\to\\mathcal X$, the map $a$ is locally of finite type. The algebraic space $R=\\operatorname{Spec}k\\times_{\\mathcal X}\\operatorname{Spec}k$, with source and target the projections and composition induced by composition of isomorphisms, is a groupoid over $S$ whose two projections to $\\operatorname{Spec}k$ are locally of finite type. Here $\\kappa(u)$ is the residue field of $\\mathcal O_{U,u}$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06FX (lemma-point-finite-type), (1) implies (2), followed by affine shrinking; Tag 06G3 (lemma-point-finite-type-monomorphism), first proof paragraph: local finite type of the field self-relation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-space-groupoid-quotient-presentation",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Choose a locally finite type representative $a_0:\\operatorname{Spec}K\\to\\mathcal X$ of $x$ and a smooth surjective scheme atlas $p:V\\to\\mathcal X$. Schemes are algebraic spaces, so the representable-diagonal theorem makes $a_0$ representable by algebraic spaces. Thus $Z=V\\times_{\\mathcal X}\\operatorname{Spec}K$ is an algebraic space. Its map to $V$ is locally of finite type by base change of $a_0$; its map to $\\operatorname{Spec}K$ is surjective by base change of $p$. Choose a representable surjective etale scheme atlas $e:E\\to Z$. The chartwise calculus makes $e$ locally of finite type and the composite $h:E\\to Z\\to V$ locally of finite type. The space chart-test identifies this last property with the scheme property for $h$. The composite $E\\to\\operatorname{Spec}K$ is surjective. Since a field spectrum has a point, $E$ is nonempty.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FX (lemma-point-finite-type), (1) implies (2), first two sentences; expand finite type point selection using an etale scheme atlas of the pulled-back space."
+   }
+  },
+  {
+   "text": "Take a nonempty affine open $W=\\operatorname{Spec}A\\subseteq E$. A point of $W$ gives a proper prime ideal of $A$, so $A$ is nonzero. The maximal-ideal theorem gives a maximal ideal $\\mathfrak m$; its point $w$ is closed in $W$, since the only prime containing $\\mathfrak m$ is $\\mathfrak m$ itself. Put $L=\\kappa(w)$. The canonical $r:\\operatorname{Spec}L\\to W$ is locally of finite type by condition (iii) of the scheme field-point criterion: use the affine neighbourhood $W$ and the degree-one extension $L/\\kappa(w)$. The inclusion $W\\hookrightarrow E$ is etale, hence locally of finite type. Since for scheme morphisms the chart-tested property is the scheme property (space chart-test), the composition clause of the chartwise calculus applies to these scheme maps: composition with $h$ makes $f:\\operatorname{Spec}L\\to V$ locally of finite type. Apply the field-point criterion again to $f$: its image $u$ is closed in some affine open $U\\subseteq V$, and $L/\\kappa(u)$ is finite. This uses no Jacobson or Noetherian hypothesis.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-sfb-finite-type-field-point-characterization",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FX (lemma-point-finite-type), (1) implies (2), finite type point selection and affine shrinking; morphisms.tex Tag 01TA (lemma-point-finite-type), (2) iff (4); algebra.tex Tag 00E0 (lemma-Zariski-topology), (2)."
+   }
+  },
+  {
+   "text": "Let $j:U\\hookrightarrow V$ be the inclusion and set $q=pj$. The open-immersion theorem makes $j$ etale; etale implies smooth and smooth morphisms compose, so $q$ is smooth. By the defining 2-isomorphism of $Z$, the field-valued maps $pf$ and $a_0b$ are isomorphic, where $b:\\operatorname{Spec}L\\to\\operatorname{Spec}K$ is the composite through $W\\to Z$. The field-morphism theorem writes $f$ as the canonical $\\operatorname{Spec}\\kappa(u)\\to V$ precomposed with $\\operatorname{Spec}(\\kappa(u)\\to L)$; that canonical point factors through the open $U$. Also $b$ is induced by a field embedding $K\\to L$. Consequently the representative of $q(u)$ and the chosen representative $a_0$ of $x$ become isomorphic over the common field $L$. By the point equivalence relation, $q(u)=x$. We have obtained the required affine $U$ and closed point $u$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FX (lemma-point-finite-type), conclusion of (1) implies (2); affine shrinking as in Tag 06FZ (lemma-identify-finite-type-points)."
+   }
+  },
+  {
+   "text": "Put $k=\\kappa(u)$ and let $c:\\operatorname{Spec}k\\to U$ be the canonical morphism. The scheme field-point criterion applies on the affine neighbourhood $U$, since $u$ is closed there and $k/\\kappa(u)$ has degree one. Thus $c$ is locally of finite type. Smoothness makes $q$ locally of finite presentation, hence locally of finite type; by the space chart-test the scheme map $c$ is also locally of finite type in the chart-tested sense, so composition makes $a=qc$ locally of finite type. The representable-diagonal theorem also makes $a$ representable by algebraic spaces. Apply the self-relation theorem to $a$ (regarding $\\operatorname{Spec}k$ as an algebraic space): $R=\\operatorname{Spec}k\\times_{\\mathcal X}\\operatorname{Spec}k$ is an algebraic space, and its two projections and composition of isomorphisms give a groupoid over $S$. Finally each projection $R\\to\\operatorname{Spec}k$ is a base change of the representable locally finite type map $a$ along $a$. Base-change stability in the chartwise calculus therefore proves local finite type for both projections.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-sfb-finite-type-field-point-characterization",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-self-relation-quotient-embedding",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FX (lemma-point-finite-type), (2) implies (1); Tag 06G3 (lemma-point-finite-type-monomorphism), first proof paragraph; algebraic.tex Tag 04T4 (lemma-map-space-into-stack), (1),(4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-sfb-finite-type-field-point-characterization",
+  "lem-sfb-self-relation-quotient-embedding",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06FX (lemma-point-finite-type), both directions, with the finite type point choice expanded via an etale scheme atlas, Tag 01TA and Tag 00E0; Tag 06G3 (lemma-point-finite-type-monomorphism), first proof paragraph. For the final local finite type assertion use base change of the field representative, already proved locally of finite type."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type point of an algebraic stack lifts to a closed point in an affine smooth scheme chart",
+   "results": "OK; 8 hits; AlgebraicGeometry.IsAffineOpen.fromSpecStalk_closedPoint, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.toSpecΓ_base, AlgebraicGeometry.Scheme.toSpecΓ_apply, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.IsAffineOpen.primeIdealOf_eq_map_closedPoint, AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_base_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed scheme chart representatives for points represented by locally finite type maps from fields to algebraic stacks",
+   "results": "OK; 8 hits; AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.instIsPreimmersionFromSpecStalk, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk, AlgebraicGeometry.Scheme.fromSpecStalk",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type point of an algebraic stack admits an affine smooth chart with a closed point mapping to it",
+   "results": "OK; 8 hits; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_closedPoint, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"LocallyOfFiniteType\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|finiteTypePoint|finite_type_point.*smooth",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|finiteTypePoint|finite_type_point.*smooth",
+   "sub": "",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern schemes or rings, not the affine smooth closed-point lift for an algebraic stack. The closed-point equivalence in Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:222 assumes JacobsonSpace; no such assumption is available here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type point on an algebraic stack is represented by a closed point in an affine smooth scheme atlas",
+   "sub": "",
+   "results": "OK; 8 hits; AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern schemes or rings, not the affine smooth closed-point lift for an algebraic stack. The closed-point equivalence in Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:222 assumes JacobsonSpace; no such assumption is available here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"LocallyOfFiniteType\"",
+   "sub": "",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern schemes or rings, not the affine smooth closed-point lift for an algebraic stack. The closed-point equivalence in Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:222 assumes JacobsonSpace; no such assumption is available here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type field valued point of an algebraic stack construct a smooth affine scheme with a closed point above it",
+   "sub": "",
+   "results": "OK; 8 hits; AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.instIsPreimmersionFromSpecStalk, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_closedPoint, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern schemes or rings, not the affine smooth closed-point lift for an algebraic stack. The closed-point equivalence in Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:222 assumes JacobsonSpace; no such assumption is available here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type point of an algebraic stack lifts to a closed point of an affine smooth chart and has locally finite type self relation",
+   "sub": "",
+   "results": "OK; 8 hits; AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern schemes or rings, not the affine smooth closed-point lift for an algebraic stack. The closed-point equivalence in Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:222 assumes JacobsonSpace; no such assumption is available here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+  "date": "2026-10-23",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 06MF (theorem-quasi-DM), equivalence (1)--(2); relative over S, as in the chapter conventions; quasi-DM expanded as locally quasi-finite diagonal. Auxiliary input: Tag 06FX (lemma-point-finite-type), (1) implies (2), followed by affine shrinking; Tag 06G3 (lemma-point-finite-type-monomorphism), first proof paragraph: local finite type of the field self-relation.",
+   "via": [
+    "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-finite-type-smooth-closed-chart",
+  "worker": "stage1",
+  "summary": "Q13 read Stacks 06FX and the first proof paragraph of 06G3, searched the project source and Mathlib, and proved the chart construction using existing representability, chartwise calculus, scheme field-point criterion and maximal-ideal nodes. All supporting nodes already exist; no new frontier node is necessary. Wrote out the common-field comparison identifying the image point, and obtained both self-relation projections by base change of the locally finite type field representative. The statement is unchanged; added the spectrum and residue-field statement dependencies.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting alteration/moduli route, specifically the 06FX/06G3 input to the pointwise groupoid chart preceding the quasi-DM flat locally quasi-finite atlas. Read the latest blueprint proof. blueprint_refs.py ancestor returns None; preserved inherited from.node=null and the explicit place/via chain. Blueprint searches for finite type point, 06FX and smooth chart found no exact blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-769f86cb2",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-769f86cb2 (reviewer sub-agent of L); spot-checked: I read the whole item: Stacks 06FX in both directions, 06FZ, the first proof paragraph of 06G3, morphisms 01TA (1)-(4), and every cited statement. The statement is unchanged and matches 06FX (1)⇒(2) with an affine U, plus 06G3 paragraph 1. There are no new nodes and nothing is a duplicate: the residual-substack and etale-self-relation nodes are stronger, different results, and the space finite-type-point node is the algebraic-space analogue. Step 1: a0 is representable through the diagonal/space-source node, the pulled-back space Z maps lft to V and surjectively to Spec K, and E is nonempty. Step 2: a maximal ideal of a nonempty affine W gives a closed point, and the field-point criterion, used (iii)⇒(ii) and then (ii)⇒(iii), gives u closed in an affine open U with [L:κ(u)] finite. Step 3: the 2-fibre-product object (f,b,φ) and the factorization of f through κ(u) give q(u)=x over the common field L. Step 4: a=qc is lft, R is a groupoid by the self-relation node, and both projections are base changes of a along a, which is a valid departure from 06G3's composition argument. I tested BG over a field, the generic point of Spec Z_(p) (closed only in U = Spec Q), the empty stack and a non-Noetherian base. FIX: steps 2 and 4 compose scheme lft maps with the chartwise calculus, which is stated for representable stack maps, without citing the scheme/chart-tested identification. I added lem-sfb-space-local-properties-chart-test to both steps' uses, with one sentence each; proof_deps already contains it. Batch-5 flags: def-trf-scheme-algebraic-space is a general definition, and the four sfb lemmas are generic stack and space calculus (Stacks 045G, 04XB, 03MJ, 04T4) that reach sec-trace-formula only through the definition def-trf-algebraic-space. None of them is a trace-formula or Poincaré step, so all are accepted. No SGA source is used. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackFiniteTypeSmoothClosedChart",
+  "declaration": "CategoryTheory.stack_finiteType_smooth_closed_chart",
+  "declarations": [
+   "CategoryTheory.moduliResidueFieldChart",
+   "CategoryTheory.ModuliSelfRelationGroupoid",
+   "CategoryTheory.stack_finiteType_smooth_closed_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackFiniteTypeSmoothClosedChart.lean",
+  "statement": "theorem stack_finiteType_smooth_closed_chart {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (x : ModuliPoints F) (hx : ∃ (K : Type u) (_ : Field K) (b : Spec (.of K) ⟶ S) (a : BasedFunctor (discreteModuli (yoneda.obj (Over.mk b))) F), ModuliSpaceTest @LocallyOfFiniteType a ∧ x ∈ Set.range (moduliPointMap a)) : ∃ (U : Over S) (q : BasedFunctor (discreteModuli (yoneda.obj U)) F) (z : U.left), IsAffine U.left ∧ ModuliSpaceTest @Smooth q ∧ IsClosed ({z} : Set U.left) ∧ z ∈ moduliChartPreimage q {x} ∧ ModuliSpaceTest @LocallyOfFiniteType (moduliResidueFieldChart q z) ∧ ∃ (R : AlgebraicSpace S) (s t : R.obj.obj ⟶ yoneda.obj (Over.mk (U.left.fromSpecResidueField z ≫ U.hom))) (e : yoneda.obj (Over.mk (U.left.fromSpecResidueField z ≫ U.hom)) ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : pullback s t ⟶ R.obj.obj), Nonempty (ModuliSelfRelationGroupoid (moduliResidueFieldChart q z) R s t e i c) ∧ ∀ (V : Over S) (b : yoneda.obj V ⟶ R.obj.obj), AlgebraicSpace.IsEtale b → LocallyOfFiniteType (yoneda.preimage (b ≫ s)).left ∧ LocallyOfFiniteType (yoneda.preimage (b ≫ t)).left",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9170e6ed9",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Statement matches the unchanged node clause by clause: finite-type point via field representative with ModuliSpaceTest LFT; affine U with ModuliSpaceTest @Smooth q (same content as SpaceMapIsSmooth, no surjectivity); closed z with z in moduliChartPreimage q {x}; moduliResidueFieldChart is the real fromSpecResidueField composite (real data); R pinned to Spec k x_X Spec k by unique-arrow representation plus natural 2-iso, composition fixed to composition in F (convention matches IsPresheafGroupoid); both projections LFT on every etale chart. ModuliSelfRelationGroupoid is not a duplicate (no self-relation declaration exists; HasSpaceBaseChange pins only one projection). The 4 added stmt_deps are existing, unchanged and used; lean.statement verbatim. Docstrings carry source, blueprint id and the four proof steps; only sorry; no extra hypotheses or universe restrictions. Edge cases checked: empty stack, closed only after affine shrinking, BG, non-Jacobson base. No compile (no file changed)."
+ }
+}

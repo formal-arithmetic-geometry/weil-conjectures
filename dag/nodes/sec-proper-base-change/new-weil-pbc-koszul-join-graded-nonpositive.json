@@ -1,0 +1,131 @@
+{
+ "id": "new-weil-pbc-koszul-join-graded-nonpositive",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-koszul-join-graded-bijective",
+   "place": "nonpositive-degree ordered-subset basis argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Nonpositive-degree basis splitting for graded exterior multiplication",
+ "statement": "theorem koszulJoinGraded_bijective_of_nonpositive\n    {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)\n    (m : ℕ) (i : ℤ) (hi : i ≤ 0) :\n    Function.Bijective (koszulJoinGraded r a m i).hom",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-join-graded"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0664, lemma-join-sequences-koszul-complex, proof hint: exterior generators of the two factors and their Koszul differentials."
+ },
+ "proof": [
+  {
+   "text": "Use extension by zero to discard positive degrees. For the head complex, the exterior basis indexed by subsets of Fin 1 is empty in degrees above one. Consequently only the summands with head cochain degrees 0 and -1 can contribute to the tensor term. The universal property of the coproduct shows that a map from this tensor term is bijective whenever its restriction, parametrized by isomorphisms onto these two summands, is bijective. Indeed the coprod of those parametrizations is epi; bijectivity of its composite gives injectivity and surjectivity of the original map.",
+   "uses": [
+    "def-weil-pbc-koszul-join-graded",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct tail restriction p along Fin.succ, and let delta evaluate the first coordinate. Write j for tail inclusion and ell for the first basis generator. Direct evaluation gives p(j(v))=v, p(ell)=0 and j(p(v))+delta(v)ell=v. Contraction by delta kills the tail exterior algebra by left induction. For n>=0 construct the assembly S(a,b)=Lambda^(n+1)(j)(a)+ell wedge Lambda^n(j)(b). Its inverse is x |-> (Lambda^(n+1)(p)(x), Lambda^n(p)(koszulBoundary delta x)). Projection and contraction give the left inverse identity. For the right inverse, left induction proves T(x)+ell*T(contractLeft delta x)=x, where T=Lambda(j) after Lambda(p), using the vector decomposition, contraction recursion, anticommutation and ell squared equal to zero. Restrict to degree n+1.",
+   "uses": [
+    "def-weil-pbc-koszul-join-graded",
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For cochain degree -(n+1), identify the two surviving tensor summands with tail exterior powers n+1 and n using the rank-one head identifications Lambda^0(A)=A and Lambda^1(A)=A. The defining pure-tensor equation of koszulJoinWedge identifies their images with the two components of S. The defining coproduct equation of koszulJoinGraded and the extension term isomorphisms transport this bijectivity to the required map.",
+   "uses": [
+    "def-weil-pbc-koszul-join-graded",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In cochain degree zero the head -1 summand has positive tail degree and is zero. The remaining map is Lambda^0(j), which is bijective by naturality of exteriorPower.zeroEquiv. The two-summand criterion applies with its other parameter module zero. Every nonpositive integer is zero or -(n+1), so the two cases give the theorem, including r=0, the zero ring and degrees above the rank.",
+   "uses": [
+    "def-weil-pbc-koszul-join-graded",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-join-graded",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0664, lemma-join-sequences-koszul-complex; degreewise assembly in Tag 0628, lemma-cone-koszul-abstract. Explicit projection/contraction inverse adapted to the first generator from the proved source-library KoszulLastGeneratorAssembly argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exterior multiplication from the tensor of the exterior algebras of two complementary free submodules is an isomorphism, with differential given by the graded Leibniz rule",
+   "results": "Eight hits: Submodule.LinearDisjoint.mulMap, TensorProduct.gradedMul and graded tensor multiplication, ExteriorAlgebra.map and iota relations. No graded Koszul splitting or chain-map theorem.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; exterior multiplication and total tensor must be assembled."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"tensor\"",
+   "results": "exteriorPower.toTensorPower and exteriorPower.toTensorPower_apply_ιMulti only.",
+   "date": "2026-10-26",
+   "verdict": "Neither proves the direct-sum/tensor splitting or its contraction equation."
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower.*(sum|Sum|prod|Prod)|koszul.*(adjoin|tensor|concat)",
+   "results": "Five Mathlib hits, on exterior spanning families and inner products; no Koszul splitting. Local source search additionally found the proved final-generator assembly and its cone coordinates, but no completed cochain tensor map or transition/unit compatibility.",
+   "date": "2026-10-26",
+   "verdict": "No direct implementation of the required graded map and local contraction equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilKoszulJoinBijective",
+  "date": "2026-10-26",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilKoszulJoinBijectiveNonpositive",
+  "file": "lean/Sheaf/Paper/WeilKoszulJoinBijectiveNonpositive.lean",
+  "declaration": "AlgebraicGeometry.Scheme.koszulJoinGraded_bijective_of_nonpositive",
+  "statement": "theorem koszulJoinGraded_bijective_of_nonpositive\n    {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)\n    (m : ℕ) (i : ℤ) (hi : i ≤ 0) :\n    Function.Bijective (koszulJoinGraded r a m i).hom",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261026T023056-L-518428",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T065340-L-2849473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

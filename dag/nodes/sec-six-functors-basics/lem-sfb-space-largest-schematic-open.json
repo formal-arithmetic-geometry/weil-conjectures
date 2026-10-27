@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-space-largest-schematic-open",
+ "kind": "statement",
+ "title": "The largest schematic open of an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with point topology [def-a1-space-point-topology] and open subspaces [def-a1-space-open-subspace, def-weil-open-immersion]. There is an open subspace $X_{\\mathrm{sch}}\\subseteq X$ represented by an $S$-scheme which contains every open subspace of $X$ represented by an $S$-scheme. Its point set is the union of the point sets of all such open subspaces. No separation or quasi-compactness hypothesis is assumed; this open may be empty.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03JH, lemma-subscheme."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-a1-space-etale-open-image], open subspaces of $X$ correspond bijectively, preserving inclusion, to open subsets of the set $|X|$. Thus their isomorphism classes form a set. Let $I$ index precisely those open subspaces $X_i$ represented by $S$-schemes. Each $|X_i|$ is open, so $O=\\bigcup_{i\\in I}|X_i|$ is open. The same correspondence gives an open subspace $J\\subseteq X$ with point image $O$.",
+   "uses": [
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JH, lemma-subscheme, proof."
+   }
+  },
+  {
+   "text": "For each $i$, $|X_i|\\subseteq O$, so [lem-a1-space-open-factor-scheme-tests] gives a unique factorization $X_i\\to J\\to X$. Regard $X_i$ as a subfunctor of $J$; sectionwise injectivity follows from its inclusion in $X$. For every $S$-scheme $T\\to J$, the same node identifies $X_i\\times_JT$ with $X_i\\times_XT$. The latter is an open subscheme of $T$ by [def-a1-space-open-subspace]. Hence every $X_i\\to J$ is representable by open immersions.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JH, lemma-subscheme, proof."
+   }
+  },
+  {
+   "text": "For a scheme $T$ and a section $a\\in J(T)$, let $T_i\\subseteq T$ represent $h_T\\times_JX_i$. By [lem-a1-space-point-open-calculus], its point image in $T$ is $|a|^{-1}(|X_i|)$, viewing $|X_i|$ inside $|J|$. These opens cover $T$: for each $t\\in T$, $|a|(t)\\in |J|=O$, hence lies in some $|X_i|$. The projection to $X_i$ says exactly that $a|_{T_i}\\in X_i(T_i)$. Thus the subfunctors $X_i$ cover $J$ in the sense of [def-pc-cover].",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-pc-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JH, lemma-subscheme, proof."
+   }
+  },
+  {
+   "text": "The open subspace $J$ is an algebraic space by [def-a1-space-open-subspace], hence an fppf sheaf by [def-trf-algebraic-space]. Every Zariski open covering is an fppf covering by [lem-pc-zariski-coverings-are-fppf]. The sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology], applied to this covering, therefore gives unique gluing of matching sections of $J$ on Zariski opens. This is precisely [def-pc-zariski-sheaf-property].",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-trf-algebraic-space",
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-zariski-sheaf-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JH, lemma-subscheme, proof."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-schemes-criterion] to $F=J$ and the set-indexed subfunctors $(X_i)_{i\\in I}$. Step 4 supplies its Zariski sheaf condition; each $X_i$ is represented by an $S$-scheme by the definition of $I$; step 2 supplies open representability of each inclusion; step 3 supplies the cover. Consequently $J$ is represented by an $S$-scheme.",
+   "uses": [
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ, lemma-glue-functors; applied as in Tag 03JH, lemma-subscheme."
+   }
+  },
+  {
+   "text": "Set $X_{\\mathrm{sch}}=J$. Every schematic open subspace of $X$ is one of the $X_i$, and step 2 already provides its inclusion in $J$. Thus $J$ contains every schematic open and has exactly their union as point set, by step 1. The construction uses neither separation nor quasi-compactness. No step requires $O$ to be nonempty: when $O=\\varnothing$, every test scheme admitting a section of $J$ is empty, the covering condition still holds, and the same criterion applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JH, lemma-subscheme, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-pc-cover",
+  "def-pc-zariski-sheaf-property",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-pc-schemes-criterion",
+  "lem-pc-zariski-coverings-are-fppf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03JH, lemma-subscheme, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic space has a largest open subspace represented by a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.Scheme.Opens, AlgebraicGeometry.isAffineOpen_top, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.instIsAffineTerminalScheme, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Union of all schematic open subspaces of an algebraic space is representable by a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Opens, AlgebraicGeometry.Scheme.OpenCover, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.Scheme.OpenCover.iSup_opensRange, AlgebraicGeometry.iSup_affineOpens_eq_top, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic space has a largest open subscheme called the schematic locus",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.isAffineOpen_top, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.Scheme.mk, AlgebraicGeometry.iSup_affineOpens_eq_top, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "schematic.?locus|largest.*open.*scheme|AlgebraicSpace",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space has a largest open subspace represented by a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.isAffineOpen_top, AlgebraicGeometry.Scheme.Opens, AlgebraicGeometry.instIsAffineTerminalScheme, AlgebraicGeometry.instHasInitialScheme, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.IsAffineOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or locally ringed spaces, not the algebraic-space assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Union of scheme represented open subfunctors of an algebraic space is a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IsLocallyDirected.V, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.Scheme.OpenCover, AlgebraicGeometry.Scheme.OpenCover.iSup_opensRange, AlgebraicGeometry.Scheme.Opens.iSupOpenCover, AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange, AlgebraicGeometry.Scheme.Cover.gluedCover_U, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or locally ringed spaces, not the algebraic-space assertion; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or locally ringed spaces, not the algebraic-space assertion; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schematicLocus|largest.*open.*scheme",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or locally ringed spaces, not the algebraic-space assertion; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic space has a largest open subscheme",
+   "results": "OK 8 hits: AlgebraicGeometry.iSup_affineOpens_eq_top, AlgebraicGeometry.isAffineOpen_top, AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_self, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.Scheme.Opens.ι_image_top, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, AlgebraicGeometry.isBasis_affine_open, AlgebraicGeometry.Scheme.Opens.ι_preimage_self",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or locally ringed spaces, not the algebraic-space assertion; no one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "date": "2026-10-23",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Sobriety of a quasi-separated algebraic space. In Tag 03K6, the sentence applying theorem-decent-open-dense-scheme to the reduced closed subspace. Supporting input to the dense schematic locus argument: The largest schematic open of an algebraic space.",
+   "via": [
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-sfb-space-topological-dimension-local-rings",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-largest-schematic-open",
+  "worker": "stage1",
+  "summary": "Followed Stacks 03JH: form the union through the open-subspace correspondence, verify the Zariski covering after every scheme test and apply the existing 01JJ representability criterion. Reused existing DAG statements throughout; no new nodes, no statement change, no Lean writing or compiler.",
+  "blueprint": "Supporting schematic-locus input in the inherited alteration/moduli prerequisite chain for det-thm-sf-ctf-stability-direct-images, proof (3). Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), remains the direct-image/compactification route; this item supplies the local algebraic-space prerequisite described by its inherited blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "General open-subspace/open-subset correspondence constructs the set of schematic opens and its union; the unit contains no substitute."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "General factorization and scheme-base-change comparison through an open subspace; used to verify the inclusions in the union are open."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "General point images under fibre products; used to check that the pullback opens cover each test scheme."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "General Zariski representability criterion, exactly the gluing theorem cited in Stacks 03JH; not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-pc-schemes-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-9950c318a",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-9950c318a (reviewer sub-agent of L); spot-checked: PASS, no changes made. I read Stacks 03JH (spaces-properties.tex:1565) in full. The statement is identical to live (where the item is still unsplit) and matches 03JH: S is any scheme, X any algebraic space over S, no added hypotheses, and the empty case is allowed. There are no new nodes and no repair or re-split note. Step 1: the bijection in lem-a1-space-etale-open-image gives the set of schematic opens and J with |J| = O. Step 2: lem-a1-space-open-factor-scheme-tests (inclusion |X_i| in O) gives X_i -> J and identifies X_i x_J T with X_i x_X T, so each inclusion is representable by open immersions (01JJ condition (2)(b)). Step 3: the image formula in lem-a1-space-point-open-calculus plus injectivity of |j| show the opens T_i cover T, which is the cover condition of 01JI (def-pc-cover). Step 4: Zariski coverings are fppf coverings and the sheaf equalizer gives unique gluing; this is genuinely elementary. Step 5: every hypothesis of lem-pc-schemes-criterion (01JJ) is discharged. I checked the edge cases X a scheme, X empty and A^1_Q/Z. No step uses a node's proof instead of its statement (C3), every cited node says what the step uses (C4), there is no cycle and no SGA citation. I accept the 4 declared tool uses as generic algebraic-space and scheme tools. Batch-5 check: the 3 lem-a1-space-* citations reach sec-trace-formula only through def-trf-algebraic-space and other sk-i-curve-zero algebraic-space foundations (fibre products, fppf descent, open gluing). These are not steps of the trace formula or Poincare duality, and the item's statement already cited def-trf-algebraic-space on the base, so no assumption leaf is needed. Maintainer note: lem-sfb-space-dense-schematic-locus (created by Q57 the same day, unsplit) is the S = Spec k special case of this item and should be merged into it or cite it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceLargestSchematicOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_largest_schematic_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceLargestSchematicOpen.lean",
+  "statement": "theorem exists_largest_schematic_open {S : Scheme.{u}} (X : AlgebraicSpace S) : ∃ J : OpenSubspace X, J.val.toFunctor.IsRepresentable ∧ (∀ A : OpenSubspace X, A.val.toFunctor.IsRepresentable → A ≤ J) ∧ pointImage J.val.ι = ⋃ (A : OpenSubspace X) (_ : A.val.toFunctor.IsRepresentable), pointImage A.val.ι",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1c38a39a",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 03JH: ∃ J : OpenSubspace X with J represented by an S-scheme, containing every represented open, with pointImage J = union of the represented opens' pointImages; no extra hypotheses, empty case allowed. Dependency declarations read (OpenSubspace, pointImage, Functor.IsRepresentable on (Over S)ᵒᵖ). Lean record verbatim; only lean changed vs live; public imports = stmt_dep modules; docstrings carry source, blueprint ID and 6 proof steps; proof is sorry; no definitions. No duplicate (lem-sfb-space-dense-schematic-locus, the S=Spec k case, has no Lean; maintainer note: merge or cite). No compile: no file changed; worker reports clean scompile."
+ }
+}

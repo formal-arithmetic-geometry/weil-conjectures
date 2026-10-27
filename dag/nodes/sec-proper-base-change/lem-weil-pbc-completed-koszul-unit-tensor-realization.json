@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-unit-tensor-realization",
+ "kind": "statement",
+ "title": "Unit tensor realization of the exterior Koszul source tower",
+ "statement": "For the same concrete functor E of constant module sheafification followed by completedAdicScalarExtension, and U the cochain tensor unit, fix any isomorphism c from U in degree zero to E of the regular ULift A-module. For algebraic exterior Koszul complexes with generators (ULift a_i)^(n+1), and any transitions sA whose exterior degree k component is the exterior power of the diagonal with entries (ULift a_i)^(m-n), there are isomorphisms from the termwise E-realization of the extended complexes to the actual completedKoszulTensorTower evaluated at U. They commute with every specified transition for n<=m and carry c followed by E of the inverse exteriorPower.zeroEquiv and the extension identification to the degree-zero component of completedAdicKoszulTensorUnit. There is no finite quotient, augmentation or cone in this assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Proof of lemma-naive-completion (099M), finite realization; sites-modules.tex, lemma-completion-flat (093M); more-algebra.tex, lemma-sequence-Koszul-complexes (0921)."
+ },
+ "proof": [
+  {
+   "text": "Apply the proved completedKoszulRegularUnitNormalization to obtain one isomorphism c0 from the completed regular module to E of the regular coefficient module. At every Koszul level, c0 followed by the realized exterior degree-zero identification is the prescribed completed Koszul unit.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-regular-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each exterior degree q, compute the n+k to n successor composite by induction on k. Exterior functoriality makes its component the q-th exterior power of the k-th power of the generator diagonal. On Finsupp.single j c that power has value single j (c*a_j^k), so the supplied hsA identifies each extended sA transition with this canonical composite. Outside the reindexing image both maps have zero source.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the supplied c with c0 inverse to obtain an automorphism b of the module tensor unit. Extend b inverse to the single cochain tensor unit. For each level take the inverse left unitor followed by whiskering this automorphism on the left tensor factor. Naturality and tensor interchange prove the successor squares; NatTrans.ofOpSequence extends them to all tower arrows. Apply the preceding transition computation to obtain the required sA compatibility.",
+   "uses": [
+    "def-weil-pbc-koszul-reconstruction-models",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The definition of b gives c followed by the realized degree-zero identification equal to b followed by the actual completed degree-zero unit. Expand the inverse cochain left unitor in degree zero and the tensor map on its (0,0) summand. Tensor interchange, naturality of the right unitor, equality of the two unitors at the tensor unit, and b followed by b inverse equal to identity give exactly the recorded completedAdicKoszulTensorUnit formula. The same calculation covers r=0 and equal tower indices.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-koszul-regular-unit-normalization",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-koszul-reconstruction-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S4",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Proof of lemma-naive-completion (099M), finite exterior realization; more-algebra.tex, lemma-sequence-Koszul-complexes (0921). Categorical unit adjustment written in Lean by S4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact constant sheaf scalar extension identifies Koszul complexes and quotient augmentation mapping cones",
+   "results": "Generic Ext.mapExactFunctor and injective resolution results; no completed coefficient model comparison.",
+   "verdict": "No direct match. Use the existing finite cone-family theorem for assembly.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapHomologicalComplexIso",
+   "results": "The additive mapping cone comparison exists in Mathlib; the local additiveConeFamilyComparison packages its strict family naturality.",
+   "verdict": "Generic cone API reused; no finite quotient or Koszul presentation identification.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(realiz|[Ii]so)|additiveConeFamilyComparison; rg CompletedAdicKoszulConstruction, CompletedConstantSheafReduction, AdicResidueKoszulCoefficientConeComparison",
+   "results": "Found the explicit completed Koszul construction, finite coefficient identification, and the analogous comparison for the different slice/dual coefficient model.",
+   "verdict": "Reuse categorical assembly; remaining statements concern the concrete completed model and its finite normalizations.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulCoefficientConeRealization",
+  "group": "M9",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-koszul-coefficient-cone-realization",
+   "place": "Exterior source identification (step 3)"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulUnitTensorRealization",
+  "file": "lean/Sheaf/Paper/CompletedKoszulUnitTensorRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulUnitTensorRealization",
+  "statement": "theorem completedKoszulUnitTensorRealization\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A)\n    (sA : ∀ n m : ℕ, n ≤ m →\n      (ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r\n          (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A) ^ (m + 1)) ⟶\n        ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r\n          (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A) ^ (n + 1))))\n    (hsA : ∀ n m h k, (sA n m h).f k = ModuleCat.ofHom\n      (exteriorPower.map k (Finsupp.linearCombination (ULift.{t + 1} A)\n        (fun i ↦ Finsupp.single i ((ULift.up (a i) : ULift.{t + 1} A) ^ (m - n)))))) :\n    let E := koszulConstantFunctor T A ⋙ completedAdicScalarExtension T d\n    let U := 𝟙_ (CochainComplex (CompletedAdicModules T d) ℤ)\n    ∀ c : U.X 0 ≅ E.obj (ModuleCat.of (ULift.{t + 1} A) (ULift.{t + 1} A)),\n    ∃ eK : ∀ n : ℕ, (E.mapHomologicalComplex (.up ℤ)).obj\n        ((ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r\n          (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A) ^ (n + 1))).extend\n            ComplexShape.embeddingDownNat) ≅\n        ((completedKoszulTensorTower T d r a).obj U).asFunctor.obj (op n),\n      (∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map\n        (HomologicalComplex.extendMap (sA n m h) ComplexShape.embeddingDownNat) ≫\n          (eK n).hom = (eK m).hom ≫\n            ((completedKoszulTensorTower T d r a).obj U).asFunctor.map (homOfLE h).op) ∧\n      ∀ n : ℕ, c.hom ≫ E.map\n        (ModuleCat.ofHom (exteriorPower.zeroEquiv (ULift.{t + 1} A)\n          (Fin r →₀ ULift.{t + 1} A)).symm.toLinearMap ≫\n          ((ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r\n            (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A) ^ (n + 1))).extendXIso\n              ComplexShape.embeddingDownNat (i := 0) rfl).inv) ≫\n        (eK n).hom.f 0 = (completedAdicKoszulTensorUnit T d r a U n).f 0",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.unitTensorCochainMonoidal",
+   "AlgebraicGeometry.Scheme.unitTensorCochainMonoidalStruct",
+   "AlgebraicGeometry.Scheme.completedKoszulUnitTensorRealization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T034713-L-3676722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T052609-L-456909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

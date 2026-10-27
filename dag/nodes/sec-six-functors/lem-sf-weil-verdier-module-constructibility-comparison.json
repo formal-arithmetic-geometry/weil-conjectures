@@ -1,0 +1,342 @@
+{
+ "id": "lem-sf-weil-verdier-module-constructibility-comparison",
+ "kind": "statement",
+ "title": "Native internal-module and scalar-constructibility comparison",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ and a prime $\\ell\\ne\\operatorname{char}(k_0)$. Put $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its extended $\\ell$-adic topology. For a separated finite-type $k$-scheme $T$, use the small pro-etale site and compatible coefficient universes of [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $R_T=p_T^*\\underline\\Omega$, with the finite-subextension-valued condensed ring of [sk-def-sfb-qlbar-condensed, sk-def-sfb-pulled-back-coefficients]. Let $B_T$ be the native sheaf of continuous $\\Omega$-valued functions whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-space, and use the canonical ring isomorphism $\\theta_T:R_T\\xrightarrow{\\sim}B_T$ of [lem-sf-locally-finite-coefficient-ring-realization]. Native modules mean $B_T$-module objects in sheaves of $\\Omega$-vector spaces, as in [def-sf-native-weil-derived-framework, sk-def-sfb-module-objects]; ordinary modules mean sectionwise $R_T$-module sheaves [def-weil-sheaf-of-modules-category].\n\nTransport of the action along $\\theta_T$ and restriction of scalars along constant sections give mutually inverse exact equivalences between these module presentations. They preserve underlying abelian sheaves, restriction maps, kernels and cokernels. The equivalences commute with restriction to a locally closed stratum and identify the native constructibility predicate (a finite locally closed constructible stratification with pro-etale locally finite free restrictions) with the finite-constant-local-model predicate of [sk-def-sfb-constructible]. More precisely, on any member $V$ of a pro-etale cover of a stratum, a local model $R_V\\otimes_{\\Omega}P$ for a finitely presented scalar $\\Omega$-module $P$ corresponds to $B_V^{\\oplus r}$ for a finite nonnegative integer $r$, and every such finite free local model arises this way. The identification uses the same stratification and cover. Applied termwise, these equivalences identify the full subcategories with bounded constructible cohomology in the ordinary derived categories [def-weil-abstract-derived-category], preserving each finite cohomological support interval.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph, derived-sheaf realization: old preservation proof step 1, module and constructibility comparison after the coefficient-ring identification; agent-formulated interface. Read also native Adic/Module.lean:50-56 and sk-def-sfb-constructible, clauses 1-2. Coefficient-ring gluing is already lem-sf-locally-finite-coefficient-ring-realization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "def-sf-native-weil-derived-framework",
+  "sk-def-sfb-module-objects",
+  "def-weil-sheaf-of-modules-category",
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "det-def-sfb-constructible-local-model",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Use the fixed normalized coefficient isomorphism theta_T from locallyFiniteCoefficientRing_realization. Restriction of scalars along this ring isomorphism is an equivalence by Mod.comapEquivalenceOfIsIso, and changes no underlying abelian sheaf.",
+   "uses": [
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Lemma 5.6 (finite-subextension coefficient and point pullback). Agent-formulated identification with the native locally finite range condition, read also in lean/WeilConjectures/SixFunctors/ProEtale/Adic/ConstantSheaf.lean:79-150,230-242,306-333; the statement compares the finite-subextension ring, not the all-continuous norm-topology ring."
+   }
+  },
+  {
+   "text": "Apply nativeScalarForgetting_isEquivalence, which reconstructs scalar actions from the native algebra unit and recovers tensor-linear actions by monoidal sheafification. Compose this equivalence with scalar change along theta_T and the existing sectionModuleEquivalence. The resulting forward functor is definitionally nativeToOrdinaryModules and its underlying abelian sheaf functor is definitionally AdicSheaf.forget followed by weilCoefficientsForgetAb.",
+   "uses": [
+    "lem-sf-native-scalar-forgetting-equivalence",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CW (definition-sheaf-modules), 03CY (lemma-sheafification-presheaf-modules), 03EK (section-tensor-product); explicit agent comparison with native Adic/Module.lean:50-56"
+   }
+  },
+  {
+   "text": "The composite functor is additive by its unchanged maps. Its inverse is additive because it is an inverse equivalence. Equivalences preserve all existing limits and colimits, giving the four required finite preservation classes.",
+   "uses": [
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definition 03CW and kernel/cokernel descriptions for module sheaves; agent transport of their universal properties through the explicit additive equivalence, using lem-weil-pbc-equivalence-injective-resolutions clause (2)"
+   }
+  },
+  {
+   "text": "Apply nativeScalarForgetting_pullbackIso for any scheme morphism h. Whisker with the ordinary presentation, inserting its unit isomorphism on the source scheme. This gives exactly the ordinaryModuleRestriction comparison, both on prescribed strata and on every member of their covers. This adjunction argument applies without requiring h to be an immersion.",
+   "uses": [
+    "lem-sf-native-scalar-restriction-comparison",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Opening paragraph M|_Z = g^*M; agent calculation using the naturality clause of lem-sf-locally-finite-coefficient-ring-realization and sk-prop-sfb-cartesian-coefficients (1)"
+   }
+  },
+  {
+   "text": "Identify the scalar ring at the one-point profinite set with ULift Omega by constant functions; evaluation at its unique point is inverse, including the finite-intermediate-field-valued condition since each scalar generates a finite extension. Transport finitely presented internal scalar modules through the existing internalToModule equivalence. A finite presentation gives a finite-dimensional ordinary Omega-vector space; its finite basis identifies it with Omega^r. Both scalar extension and the native comparison preserve finite biproducts and the regular module, yielding the local-model isomorphism. Conversely the free scalar module of rank r is finitely presented as the cokernel of zero between two rank-r free modules. Rank zero is included. Full faithfulness of the native comparison transports local isomorphisms on exactly the given cover members.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "lem-weil-pbc-internal-module-ab-equivalence",
+    "lem-sfb-scalar-finite-free-resolutions",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Clause 1, scalar constant tensor models; agent finite-basis coordinate calculation from the field clause of lem-sfb-scalar-finite-free-resolutions"
+   }
+  },
+  {
+   "text": "Shrink the native lisse cover using the smallness of the pro-etale precoverage and apply the same-cover local-model equivalence. A native finite stratification indexed by a finite type is reindexed by Fin(card); conversely the ordinary stratification data give the native uniquely covering partition. The pullback comparison gives equivalence on every specified stratum. The finite-type separated scheme is qcqs by the standard scheme lemmas; native qcqs globalization therefore identifies native constructibility with ordinary finite-constant constructibility.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-sf-native-adic-qcqs-stratification",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Clause 2, finite constructible stratification; agent comparison with native Adic/Constructible.lean IsAdicConstructibleSheaf using lem-sf-native-adic-qcqs-stratification"
+   }
+  },
+  {
+   "text": "Use Equivalence.mapDerivedCategory and the existing exact-functor localization and homology isomorphisms. The equivalence preserves and reflects zero cohomology objects, so every interval of cohomological vanishing is preserved and reflected. The exact-functor API preserves and reflects boundedness. Apply the sheaf constructibility comparison degreewise and transport it through the homology isomorphism to get the asserted bounded constructible equivalence.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section 05RR (section-derived-categories), Definition 05RU (definition-unbounded-derived-category); agent application of localization to termwise inverse exact functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "sk-def-sfb-module-objects",
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-sf-native-scalar-restriction-comparison",
+  "det-def-sfb-constructible-local-model",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sf-native-adic-qcqs-stratification",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CW, 03CY and 03EK; the actual proof uses scalar recovery, direct-image adjunction conjugation, finite bases, native qcqs globalization and the exact-functor derived API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "adicConstantSheaf|finite.subextension|locally.finite.*continuous|Qbar.*[Cc]ondensed",
+   "results": "Read returned hits: Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/MeasureTheory/Integral/Bochner/FundThmCalculus.lean. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of algebras over an algebraic closure of Q_l given by locally finite continuous functions is the pullback of the finite subextension valued condensed coefficient ring",
+   "results": "Read returned hits: SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso, LightCondensed, Condensed, Condensed.ofSheafForgetCompHaus, SheafOfModules.instIsLeftAdjointPullback, LightCondensed.ofSheafForgetLightProfinite. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ModuleCat\"",
+   "results": "Read returned hits: Condensed.instHasLimitsOfSizeModuleCat, CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor, CondensedMod.LocallyConstant.instFullModuleCatFunctor, LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete, LightCondMod.LocallyConstant.instFullModuleCatLightCondensedDiscrete, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.instFaithfulModuleCatCondensedDiscrete, CondensedMod.LocallyConstant.instFullModuleCatCondensedDiscrete. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the pulled back condensed algebraic closure of Q_l, with finite subextension valued continuous functions, with the sheaf of continuous functions whose values locally span a finite dimensional Q_l vector space; identify constructible modules",
+   "results": "Read returned hits: CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functor_obj_val, CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafProfinite, CondensedMod.LocallyConstant.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functor, LightCondMod.ofSheafLightProfinite. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Ss]ubextension|[Aa]dic|[Cc]ontinuous[Mm]ap",
+   "results": "Read returned hits: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Light/TopCatAdjunction.lean, Mathlib/Condensed/Light/TopCatAdjunction.lean, Mathlib/Condensed/Light/TopCatAdjunction.lean. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The continuous function coefficient sheaf with locally finite dimensional image in algebraic Q_l equals the filtered sheaf colimit of continuous finite extension coefficient rings",
+   "results": "Read returned hits: LightCondensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.isColimitLocallyConstantPresheaf_desc_apply, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheafDiagram. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "module.*[Oo]bject|[Mm]odule[Oo]bj|[Ss]heaf[Oo]f[Mm]odules.*equiv",
+   "results": "Read returned hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of Omega algebras in sheaves of Omega vector spaces are equivalent to ordinary ring sheaf modules; finite scalar local models match locally finite free constructibility",
+   "results": "Read returned hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules over an Omega algebra sheaf in Omega vector space sheaves identify with ring sheaf modules and preserve stratified finite scalar local models",
+   "results": "Read returned hits: SheafOfModules.mk, AlgebraicGeometry.Scheme.Modules, SheafOfModules, SheafOfModules.noConfusionType, AlgebraicGeometry.Scheme.PresheafOfModules, SheafOfModules.sections, SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections. Generic module sheaf/condensed constructions only; no coefficient-specific constructibility comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of field algebras in vector space sheaves are equivalent to ordinary module sheaves and identify finite scalar local models with locally finite free modules",
+   "results": "Read returned hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.free, ModuleCat.tilde, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.freeFunctor_obj, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.X. Definitions of sectionwise module sheaves, free sheaves or local finite presentation; none identifies the two native coefficient presentations and the finite scalar models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internal.*module|module.*equivalence|ModuleCat.*equiv",
+   "results": "Read returned hits: Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean. Read Internal/Module.lean:177,221: monoid objects in ModuleCat correspond to algebras, not modules in sheaves or the claimed constructibility interface.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between internal modules over a sheaf of algebras in vector space sheaves and sectionwise ring sheaf modules preserving constructibility",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Modules, PresheafOfModules.unitHomEquiv, SheafOfModules.mk, SheafOfModules.noConfusionType, SheafOfModules, AlgebraicGeometry.Scheme.PresheafOfModules, SheafOfModules.freeHomEquiv, SheafOfModules.sections. Definitions of sectionwise module sheaves, free sheaves or local finite presentation; none identifies the two native coefficient presentations and the finite scalar models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Mod\", \"equivalence\"",
+   "results": "Read returned hits: SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app. These compare sectionwise sheaves under an equivalence of sites, not native internal modules or constructibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def .*equiv|def .*Equiv|def .*equivalence|def .*Equivalence|constructib",
+   "results": "Read returned hits: 177, 221. Read Internal/Module.lean:177,221: monoid objects in ModuleCat correspond to algebras, not modules in sheaves or the claimed constructibility interface.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf module over an algebra sheaf can be viewed as an internal module in sheaves of vector spaces; finite presented vector space constant models are locally free of finite rank",
+   "results": "Read returned hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation. Definitions of sectionwise module sheaves, free sheaves or local finite presentation; none identifies the two native coefficient presentations and the finite scalar models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Internal-Hom paragraph, derived-sheaf realization: old preservation proof step 1, module and constructibility comparison after the coefficient-ring identification; agent-formulated interface. Read also native Adic/Module.lean:50-56 and sk-def-sfb-constructible, clauses 1-2. Coefficient-ring gluing is already lem-sf-locally-finite-coefficient-ring-realization.",
+   "via": [
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-verdier-module-constructibility-comparison",
+  "worker": "stage1",
+  "summary": "No new nodes. Explicit scalar-compatible ring transport, inverse internal/sectionwise actions, exactness, restriction comparison, finite-basis coordinates, qcqs global stratification, and descent to ordinary derived categories. All non-elementary inputs reused; no whole-item Lean attachment. Statement unchanged.",
+  "blueprint": "Realizes the recorded parent preservation proof step 1: module and constructibility comparison after coefficient-ring realization, supporting the internal-Hom paragraph of lem-fix-weil-operations. Whole-blueprint searches found no equivalent node. The current created.item ancestry is broken at a seeded parent, and blueprint_refs.py ancestor reports None; the inherited from.node and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-equivalence-injective-resolutions",
+    "why": "Generic additive-equivalence preservation of kernels, cokernels and exactness; no native-unit node supplies this abstract categorical fact."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic coefficient pullback isomorphism and underlying inverse-image description, needed to compare restrictions rather than replace a duality argument."
+   },
+   {
+    "node": "lem-sfb-scalar-finite-free-resolutions",
+    "why": "Only its field clause supplies a finite basis of a finitely presented scalar module; no geometric duality route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic geometric size hypothesis for a separated finite-type scheme over a field, used to apply the stratification lemma."
+   },
+   {
+    "node": "lem-sf-native-adic-qcqs-stratification",
+    "why": "Globalizes native local constructibility on the qcqs scheme, a generic topological input to predicate comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sf-native-adic-qcqs-stratification"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-e93e05d7d",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-e93e05d7d (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the statement of every cited node, the parent's step 1, the unit, blueprint lem-fix-weil-operations.proof.md (internal-Hom paragraph), Stacks 03CW/03CY/03EK/05RU, and HRS Example 3.1 and Definition 3.3. The delivery has no new nodes, the statement is unchanged, and no SGA source is used. Step 1: the D_T-algebra compatibility of theta_T follows from the E-clause of the ring realization plus naturality of pulling back global sections (Lambda(*)=Omega). Step 2: the internal-vs-sectionwise module equivalence goes through the sheafification universal property and never assumes sheaf tensors are sectionwise. Step 3: exactness comes from clause (2) of the additive-equivalence leaf. Step 4: theta_S alpha_h = rho_h h^{-1} theta_T follows by adjunction, so rho_h is invertible, and both pullbacks are identified with h^{-1} carrying the transported action (sk-prop-sfb-cartesian-coefficients, last paragraph). Step 5: the field clause of lem-sfb-scalar-finite-free-resolutions gives P = Omega^r; the formulas are mutually inverse and r=0 is included. Step 6: T is qcqs, and native local constructibility is globalized by lem-sf-native-adic-qcqs-stratification, matching HRS Definition 3.3 and sk-def-sfb-constructible (2). Step 7: H^q and quasi-isomorphisms are preserved, so the equivalences descend and support intervals are kept. Edge cases checked: empty scheme, rank 0, ranks varying by cover member, non-reduced T. No duplicate: lem-weil-pbc-internal-module-ab-equivalence is over Ab with tensor over Z. I accept the tool uses: three are Mathlib leaves, the other two are the generic coefficient pullback and qcqs globalization. Batch-5 flag: lem-trf-geometric-inverse-image-exact (reached via native-adic-qcqs-stratification and pullback-exact-lisse) is general exactness of inverse image along a geometric morphism. Neither the trace-formula nor the Poincare-duality assumption gives it, it is not a step specific to their proofs, and about 25 nodes in other chapters (including batch-5 zeta-weil nodes) cite it, so it is outside the assumptions and not a reason to RETURN. One inherited point, not this delivery's fault: the parent uses sectionwise modules while sk-def-sfb-constructible is phrased for module objects in Sh(Ab); the predicate has the same content in either presentation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeModuleConstructibilityComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.nativeModuleConstructibilityComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.nativeModuleCoefficientIso",
+   "AlgebraicGeometry.ProEtale.nativeModuleCoefficientIso_isMonHom",
+   "AlgebraicGeometry.ProEtale.nativeOrdinaryPresentation",
+   "AlgebraicGeometry.ProEtale.NativeOrdinaryModules",
+   "AlgebraicGeometry.ProEtale.nativeOrdinaryModules_hasDerivedCategory",
+   "AlgebraicGeometry.ProEtale.nativeToOrdinaryModules",
+   "AlgebraicGeometry.ProEtale.ordinaryModuleRestriction",
+   "AlgebraicGeometry.ProEtale.ordinaryScalarModel",
+   "AlgebraicGeometry.ProEtale.nativeModuleConstructibilityComparison"
+  ],
+  "file": "lean/Sheaf/Paper/NativeModuleConstructibilityComparison.lean",
+  "statement": "theorem nativeModuleConstructibilityComparison (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k] [IsAlgClosure k₀ k] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k₀) (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of k))] [IsSeparated (T ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k))] [QuasiCompact (T ↘ Spec (CommRingCat.of k))] : ∃ E : AdicSheaf ℓ T ≌ NativeOrdinaryModules ℓ T, E.functor = nativeToOrdinaryModules ℓ T ∧ E.functor ⋙ SheafOfModules.toSheaf _ = AdicSheaf.forget T ⋙ weilCoefficientsForgetAb ℓ T ∧ (PreservesFiniteLimits E.functor ∧ PreservesFiniteColimits E.functor ∧ PreservesFiniteLimits E.inverse ∧ PreservesFiniteColimits E.inverse) ∧ (∀ (Z : Scheme.{u}) (h : Z ⟶ T) [IsImmersion h], (nativeToOrdinaryModules ℓ Z).IsEquivalence ∧ Nonempty (adicUpperStar ℓ h ⋙ nativeToOrdinaryModules ℓ Z ≅ E.functor ⋙ ordinaryModuleRestriction ℓ h) ∧ (∀ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage Z, (∀ i : 𝒰.I₀, (nativeToOrdinaryModules ℓ (𝒰.X i)).IsEquivalence ∧ Nonempty (adicUpperStar ℓ (𝒰.f i) ⋙ nativeToOrdinaryModules ℓ (𝒰.X i) ≅ nativeToOrdinaryModules ℓ Z ⋙ ordinaryModuleRestriction ℓ (𝒰.f i))) ∧ (∀ (i : 𝒰.I₀) (P : Mod Ab.{u + 1} (scalarRingObj (Profinite.padicAlgClRingObj ℓ))), Mod.IsFinitelyPresented (scalarRingObj (Profinite.padicAlgClRingObj ℓ)) P → ∃ r : ℕ, Nonempty ((nativeToOrdinaryModules ℓ (𝒰.X i)).obj (Mod.finiteFree (adicConstantSheaf ℓ (𝒰.X i)) r) ≅ ordinaryScalarModel ℓ (𝒰.X i) P)) ∧ (∀ (i : 𝒰.I₀) (r : ℕ), ∃ P : Mod Ab.{u + 1} (scalarRingObj (Profinite.padicAlgClRingObj ℓ)), Mod.IsFinitelyPresented (scalarRingObj (Profinite.padicAlgClRingObj ℓ)) P ∧ Nonempty ((nativeToOrdinaryModules ℓ (𝒰.X i)).obj (Mod.finiteFree (adicConstantSheaf ℓ (𝒰.X i)) r) ≅ ordinaryScalarModel ℓ (𝒰.X i) P)) ∧ (∀ M : AdicSheaf ℓ Z, HasFiniteConstantLocalModelOnCover (Profinite.padicAlgClRingObj ℓ) ((nativeOrdinaryPresentation ℓ Z).inverse.obj ((nativeToOrdinaryModules ℓ Z).obj M)) 𝒰 ↔ ∀ i : 𝒰.I₀, ∃ r : ℕ, Nonempty ((adicUpperStar ℓ (𝒰.f i)).obj M ≅ Mod.finiteFree (adicConstantSheaf ℓ (𝒰.X i)) r)))) ∧ (∀ (M : AdicSheaf ℓ T) (S : Scheme.Stratification T), (∀ a : Fin S.n, HasFiniteConstantLocalModel (Profinite.padicAlgClRingObj ℓ) (S.domain a) ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (S.immersion a)).obj ((nativeOrdinaryPresentation ℓ T).inverse.obj (E.functor.obj M)))) ↔ ∀ a : Fin S.n, IsAdicLisseSheaf ((adicUpperStar ℓ (S.immersion a)).obj M)) ∧ (∀ M : AdicSheaf ℓ T, IsAdicConstructibleSheaf M ↔ IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) T ((nativeOrdinaryPresentation ℓ T).inverse.obj (E.functor.obj M))) ∧ (∃ D : DerivedCategory (AdicSheaf ℓ T) ≌ DerivedCategory (NativeOrdinaryModules ℓ T), Nonempty (E.functor.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ D.functor) ∧ (∀ q : ℤ, Nonempty (D.functor ⋙ DerivedCategory.homologyFunctor _ q ≅ DerivedCategory.homologyFunctor _ q ⋙ E.functor)) ∧ (∀ (K : DerivedCategory (AdicSheaf ℓ T)) (a b : ℤ), (∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) ↔ ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (D.functor.obj K))) ∧ (∀ K : DerivedCategory (AdicSheaf ℓ T), (DerivedCategory.TStructure.t.bounded K ∧ ∀ q : ℤ, IsAdicConstructibleSheaf ((DerivedCategory.homologyFunctor _ q).obj K)) ↔ (DerivedCategory.TStructure.t.bounded (D.functor.obj K) ∧ ∀ q : ℤ, IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) T ((nativeOrdinaryPresentation ℓ T).inverse.obj ((DerivedCategory.homologyFunctor _ q).obj (D.functor.obj K))))))",
+  "branch": "sheaf-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The sectionwise category is ringedSiteModules for the section ring sheaf reconstructed from R_T by the existing sectionModuleEquivalence. The forward functor is fixed to native forgetful scalar restriction, comap along canonical theta, and that sectionwise presentation; its underlying abelian sheaf functor is unchanged. Includes exactness, natural restriction comparisons, both finite scalar/free local-model directions, each fixed cover and stratification, constructibility, termwise derived equivalence and every finite support interval. Helpers are actual canonical constructions. The ordinary derived category uses the standard localization in universe u+2; no site/coefficient universe identification or new mathematical hypothesis is imposed. The theorem binds the separated finite-type T once; auxiliary equivalence and restriction assertions are scoped to its locally closed immersions and their covering members."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-825311c36",
+  "group": "Q93",
+  "result": "pass",
+  "note": "One module, NativeModuleConstructibilityComparison; item changes only in lean and in stmt_deps (+ landed def-weil-pbc-internal-abelian-sheaf-module-equivalence, allowed); all 13 dep nodes equal side-live; statement verbatim. Clauses match the node: theta = .choose of the proved realization theorem, pinned uniquely by chartComparison normalization; AdicSheaf = B_T-modules in Omega-sheaves; ordinary = SheafOfModules over sectionRingSheaf R_T; E.functor fixed to forgetAb ⋙ comap theta ⋙ sectionModuleEquivalence; underlying-sheaf functor equality; exactness both ways; restriction isos for every immersion and cover member; both local-model directions (finiteConstantScalarExtension vs ⨁Fin r, r=0 ok); same-cover and same-stratification iffs; IsAdicConstructibleSheaf ↔ IsConstantModelConstructible; derived-category equivalence D with Q-compatibility, homology isos, every [a,b] support iff, bounded constructible iff (both ordinary Verdier localizations). No extra hypotheses or universe equalities; empty scheme, rank 0, varying rank and a>b checked. Docstrings, 7 proof steps, sorry only, report sections present. Advisory: native and other decls owned outside stmt_deps; unused CochainTensorUniverses / AlgebraicClosure imports. Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6325a",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T043435-L-1768238",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 2 new modules/nodes vs clone 939ea7ddad9: statements/bodies unchanged except the main sorry→proof; unit realized empty so CartesianCoefficients drop bypasses nothing; axioms of the main theorem clean; 4 direct importers compile against the delivered modules"
+ }
+}

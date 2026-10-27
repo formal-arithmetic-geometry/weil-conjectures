@@ -1,0 +1,227 @@
+{
+ "id": "lem-trf-derived-square-polynomial-resolution",
+ "kind": "statement",
+ "title": "Polynomial resolutions under a derived tensor square",
+ "statement": "Let $A\\to C$, $A\\to A'$, $f:C\\to C'$ and $A'\\to C'$ form a commutative square of commutative rings. Use ordinary-module derived categories $D(T)$ [def-weil-abstract-derived-category] and the derived scalar extension and its normalized extension/restriction adjunction obtained through the one-point-site identification [lem-trf-one-point-derived-ring-identification, lem-pur-sheaf-ring-derived-coefficient-adjunction]. Let $\\epsilon:P_\\bullet\\to C$ be any polynomial resolution in [lem-trf-cotangent-resolution-coherence]: each $P_n$ is a polynomial $A$-algebra surjecting onto $C$, and its nonpositive alternating-face complex $S=s(P_\\bullet)$ augments quasi-isomorphically to $C[0]$. Then $S$ has flat $A$-module terms and is K-flat [def-pc-module-kflat-complex]. Under its canonical computation isomorphism $C\\otimes_A^{\\mathbf L}A'\\simeq Q(S\\otimes_A A')$, the derived multiplication $\\mu:C\\otimes_A^{\\mathbf L}A'\\to C'[0]$ (the adjunct of $f:C[0]\\to\\operatorname{Res}C'[0]$) is represented by the chain augmentation $\\epsilon'$, zero in negative degrees and given by $p\\otimes a'\\mapsto f(\\epsilon(p))a'$ in degree zero. If $\\mu$ is a quasi-isomorphism, the canonical ring map $\\alpha:C\\otimes_A A'\\to C'$, $c\\otimes a'\\mapsto f(c)a'$, is an isomorphism, the canonical map $C\\otimes_A^{\\mathbf L}A'\\to(C\\otimes_A A')[0]$ is $\\alpha^{-1}\\mu$, and $P'_\\bullet=P_\\bullet\\otimes_A A'\\to C'$ with augmentation $\\epsilon'$ is a polynomial resolution over $A'$. Tensor and scalar extension mean [def-weil-pbc-module-tensor-product, def-weil-module-base-change]. No flatness of the ring maps is assumed. Flat modules are as in [def-weil-pbc-flat-ring-map], and simplicial objects and their morphisms are as in [def-weil-pbc-simplicial-object].",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), proof using the free resolution s(P) and its tensor augmentation; the degree-zero pushout identification makes explicit the reduction for a general commutative square."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-trf-cotangent-resolution-coherence",
+  "def-pc-module-kflat-complex",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-polynomial-simplicial-tensor-model] with $B=C$ and the given augmentation. Its hypotheses require only termwise polynomiality and surjectivity, both included in the resolution hypothesis. It gives flat terms of $S$, polynomial terms of $P'_\\bullet=P_\\bullet\\otimes_A A'$, a termwise surjective augmentation $q':s(P'_\\bullet)\\to(C\\otimes_A A')[0]$, and the identity comparison $S\\otimes_A A'=s(P'_\\bullet)$ carrying $\\epsilon\\otimes1$ to $q'$. Write $U=C\\otimes_A A'$ and $T=S\\otimes_A A'$.",
+   "uses": [
+    "lem-trf-polynomial-simplicial-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof; Tag 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "The given $\\epsilon:S\\to C[0]$ is a quasi-isomorphism and $S^i=0$ for $i>0$. Apply [lem-trf-flat-resolution-canonical-tensor-comparison] with $N=C$, bound $b=0$, and the flat terms from Step 1. It makes $S$ K-flat and supplies $j:QT\\xrightarrow{\\sim}C\\otimes_A^{\\mathbf L}A'$ with $\\gamma_{C[0]}j=Q(\\epsilon\\otimes1)=Qq'$, where $\\gamma$ is the canonical derived-to-ordinary map. Thus the computation isomorphism in the statement is $j^{-1}$, with its prescribed counit normalization.",
+   "uses": [
+    "lem-trf-flat-resolution-canonical-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof; Tag 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "Set $g=f\\epsilon:S\\to\\operatorname{Res}C'[0]$. Apply the representative formula (2) in [lem-pur-sheaf-ring-derived-coefficient-adjunction], transported to ordinary modules by [lem-trf-one-point-derived-ring-identification]. Its hypotheses hold because Step 2 gives K-flatness and Step 1 gives flat terms. Naturality of adjunction with respect to $Q\\epsilon$ identifies the adjunct of $Qf$ after precomposition with $L(Q\\epsilon)$ with the adjunct of $Qg$. Under the computation at $S$ the latter is the chain map $h:T\\to C'[0]$, zero in negative degrees, with $h^0(p\\otimes a')=f(\\epsilon_0(p))a'$. Hence $\\mu j=Qh$. The tensor relations and commutativity of the ring square define a unital ring map $\\alpha:U\\to C'$ by $c\\otimes a'\\mapsto f(c)a'$. On pure tensors $h=\\alpha[0]q'$, so $\\mu=\\alpha[0]\\gamma_{C[0]}$ by Step 2 and cancellation of $j$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-one-point-derived-ring-identification",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof; Tag 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "Compute degree zero using [def-weil-abstract-derived-category]. Since $S$ has zero positive terms, $C=\\operatorname{coker}(d:S^{-1}\\to S^0)$ via $\\epsilon_0$. The tensor universal property [def-weil-pbc-module-tensor-product] identifies $H^0(T)=T^0/\\operatorname{im}(d\\otimes1)$ with $U$: a balanced bilinear map $S^0\\times A'\\to M$ vanishes on $(dx,a')$ exactly when it descends to $C\\times A'$. Thus the quotient and $C\\otimes_A A'$ have the same universal property, and the resulting isomorphism is $[p\\otimes a']\\mapsto\\epsilon_0(p)\\otimes a'$. Under it $H^0(h)=\\alpha$. If $\\mu$ is invertible, $Qh=\\mu j$ is invertible. Applying $H^0$ therefore makes the underlying $A'$-linear map of $\\alpha$ bijective. A bijective unital ring homomorphism has a ring-homomorphic inverse: apply its injectivity to the addition, multiplication and unit identities. Hence $\\alpha$ is a ring isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof; Tag 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "Step 3 gives $\\gamma_{C[0]}=\\alpha[0]^{-1}\\mu$, proving the asserted equality with the canonical map. The augmentation of $P'_\\bullet$ to $C'$ is $\\alpha\\epsilon'_U$, where $\\epsilon'_U$ is the augmentation to $U$ from Step 1; its alternating chain map is exactly $h$. Polynomiality and surjectivity of every augmentation to $U$ were supplied by [lem-trf-polynomial-simplicial-tensor-model]; composition with the isomorphism $\\alpha$ preserves surjectivity. Finally $Qh=\\mu j$ is invertible, so every $H^r(h)$ is an isomorphism by the cohomology functors of [def-weil-abstract-derived-category]. The polynomial-resolution criterion of [lem-trf-cotangent-resolution-coherence] now applies: $P'_\\bullet\\to C'$ is termwise polynomial and surjective and its alternating augmentation is a quasi-isomorphism. No tensor functor was assumed exact.",
+   "uses": [
+    "lem-trf-polynomial-simplicial-tensor-model",
+    "def-weil-abstract-derived-category",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof; Tag 08QI (remark-resolution)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-polynomial-simplicial-tensor-model",
+  "lem-trf-flat-resolution-canonical-tensor-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-trf-one-point-derived-ring-identification",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), proof, with the normalized adjunction of Tag 07A6 and explicit tensor-quotient degree-zero computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A commutative ring square with derived tensor quasi-isomorphism gives a polynomial simplicial resolution after scalar extension",
+   "results": "8 hits; top=['CategoryTheory.Tor_obj', \"CategoryTheory.Tor'_obj_obj\", 'CategoryTheory.Tor', \"CategoryTheory.Tor'\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", 'CategoryTheory.Abelian.LeftResolution.chainComplexXIso', 'CategoryTheory.isZero_Tor_succ_of_projective', 'CategoryTheory.ProjectiveResolution.homotopyEquiv']; note=; digest=7054769d86f4f0d7. The returned Tor functors, projective-resolution comparison and additive left-resolution results do not construct polynomial simplicial algebra resolutions or identify the canonical multiplication of a general ring square. No declaration states all the claims.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial simplicial resolution remains a resolution under a Tor independent pushout of commutative rings",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c. Service unavailable; no absence conclusion drawn from this request.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"baseChange\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. The returned Tor functors, projective-resolution comparison and additive left-resolution results do not construct polynomial simplicial algebra resolutions or identify the canonical multiplication of a general ring square. No declaration states all the claims.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*resolution|resolution.*baseChange|simplicial.*[Tt]ensor",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. The returned Tor functors, projective-resolution comparison and additive left-resolution results do not construct polynomial simplicial algebra resolutions or identify the canonical multiplication of a general ring square. No declaration states all the claims.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Computing derived tensor of a ring by the alternating complex of a free simplicial algebra resolution identifies the tensor augmentation and its degree zero ring pushout",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c. Service unavailable; no absence conclusion drawn from this request.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial simplicial algebra resolution computes derived scalar extension and its tensor augmentation under a commutative ring square",
+   "results": "8 hits; top=['Algebra.Presentation.tensorModelOfHasCoeffsInv', 'Algebra.Presentation.tensorModelOfHasCoeffsHom', 'Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val', 'Algebra.Presentation.tensorModelOfHasCoeffsEquiv', 'Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul', 'Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul', 'Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul', 'Algebra.Extension.tensorCotangent']; note=; digest=f8972866d6204578. Read results: ordinary algebra presentation, cotangent-space, Tor or simplicial enrichment declarations do not state the full polynomial-resolution result with the normalized derived multiplication.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"baseChange\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read results: ordinary algebra presentation, cotangent-space, Tor or simplicial enrichment declarations do not state the full polynomial-resolution result with the normalized derived multiplication.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*resolution|resolution.*baseChange|simplicial.*[Tt]ensor",
+   "results": "1 hits; top=['Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean']; note=; digest=e0a768d0741c09ac. Read results: ordinary algebra presentation, cotangent-space, Tor or simplicial enrichment declarations do not state the full polynomial-resolution result with the normalized derived multiplication.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial simplicial resolution stays a resolution after a derived tensor pushout of commutative rings",
+   "results": "8 hits; top=['KaehlerDifferential.tensorKaehlerEquivBase.congr_simp', 'CommRingCat.tensorProdIsoPushout', 'CommRingCat.isPushout_tensorProduct', 'CommRingCat.tensorProdObjIsoPushoutObj', 'RingHom.IsStableUnderBaseChange', 'Algebra.IsPushout.tensorProduct_tensorProduct', 'instIsPushoutPolynomial', 'Algebra.IsPushout.cancelBaseChangeAux']; note=; digest=8305d044c36512f2. Read results: ordinary algebra presentation, cotangent-space, Tor or simplicial enrichment declarations do not state the full polynomial-resolution result with the normalized derived multiplication.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The alternating face complex of a free simplicial algebra resolution is K flat and computes the derived tensor multiplication map",
+   "results": "8 hits; top=['Algebra.Extension.tensorH1Cotangent', 'Algebra.FormallySmooth.instTensorProduct', 'CategoryTheory.Tor_obj', \"CategoryTheory.Tor'_obj_obj\", 'Algebra.FormallyEtale.instTensorProduct', 'CategoryTheory.Tor', \"CategoryTheory.Tor'\", 'Algebra.FormallySmooth.projective_kaehlerDifferential']; note=; digest=0bef9dd51e733229. Read results: ordinary algebra presentation, cotangent-space, Tor or simplicial enrichment declarations do not state the full polynomial-resolution result with the normalized derived multiplication.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-flat-base-change",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Proof of Tag 08SJ: apply Tag 08QQ using the canonical derived tensor identification, not an assumption of flatness. Re-split: polynomial resolution under a general derived pushout; old proof steps 1--3.",
+   "via": [
+    "lem-trf-cotangent-flat-base-change",
+    "lem-trf-koszul-quotient-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-derived-square-polynomial-resolution",
+  "worker": "stage1",
+  "summary": "Used the existing polynomial simplicial tensor model and flat-resolution canonical comparison; identified the specified derived multiplication by the normalized adjunction and computed its degree-zero map as the ordinary ring pushout map. No new nodes or statement changes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Proof of Tag 08SJ: apply Tag 08QQ using the canonical derived tensor identification, not an assumption of flatness. Re-split: polynomial resolution under a general derived pushout; old proof steps 1--3.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Its normalized representative formula identifies the adjunct defining the given multiplication; this is a generic coefficient adjunction and the unit has no alternative normalized adjunction statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-6882b4b8d",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-6882b4b8d (reviewer sub-agent of L); spot-checked: Read the item's statement and all 5 steps. Read every cited statement in full: polynomial-simplicial-tensor-model, flat-resolution-canonical-tensor-comparison, formula (2) of pur-sheaf-ring-derived-coefficient-adjunction, one-point-derived-ring-identification, cotangent-resolution-coherence, abstract-derived-category, module-tensor-product, and derived-change-of-rings/left-derived-from-kflat-class, which I needed to check that c_S = gamma_S. Source: Stacks cotangent.tex Tag 08QP (lemma-flat-base-change, l.958). It matches the delivery, which also makes explicit the identification of mu and the degree-zero pushout. Step 1: the tensor model applies with B=C and needs only polynomial terms and surjective epsilon_n. Step 2: the comparison applies with N=C, b=0, q=epsilon; the direction of j checks out. Step 3: f epsilon is A-linear because the square commutes. By adjunction naturality, formula (2) and c_S = gamma_S, mu j = Qh and mu = alpha[0] gamma. Step 4: right exactness is proved through the tensor universal property, using ker epsilon_0 = im d from the quasi-isomorphism with S^1=0; H^0(h)=alpha, so alpha is a ring isomorphism. Step 5: the canonical-map clause and the polynomial-resolution criterion are met by alpha epsilon'_U. Small cases tested: Z to F_p with C=A'=C'=F_p (the hypothesis fails, Tor_1 is nonzero, nothing false is concluded); C=A; A'=0; empty variable sets; flat base change. There are no new nodes. Statement unchanged, TeX single-escaped, blueprint fields present. lem-trf-tor-independent-cotangent-base-change states the special case C'=C⊗A'; it is a special case, not a duplicate (advisory). Accepted tool use: lem-pur-sheaf-ring-derived-coefficient-adjunction (sk-def-sf-operations), a generic adjunction used for formula (2) only. No fixes."
+ }
+}

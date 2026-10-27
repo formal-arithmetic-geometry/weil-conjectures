@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-space-relative-finite-free-locus-base-change",
+ "kind": "statement",
+ "title": "Relative finite locally free locus on algebraic spaces commutes with arbitrary base change",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $p:X\\to Y$ be locally of finite presentation, tested on etale scheme charts [def-sfb-space-morphism-properties]. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module] and tensor pullback [def-trf-space-etale-module-functors]. Let $F$ be a quasi-coherent $\\mathcal O_X$-module of finite presentation (etale locally the cokernel of a map between finite rank free modules), flat over $Y$ (on etale scheme charts, each stalk is flat over the corresponding local ring of the base). Let $W(F)\\subseteq|X|$ consist of points admitting an etale neighbourhood on which $F$ is isomorphic to $\\mathcal O^{\\oplus r}$ for a finite integer $r\\geq0$. Then $W(F)$ is open. For every morphism $v:Y'\\to Y$ of algebraic spaces over $S$, form $X'=X\\times_Y Y'$ with projection $q:X'\\to X$ [lem-trf-space-fibre-products-etale-covers]; then $W(q^*F)=|q|^{-1}(W(F))$. No flatness assumption on $p$ or $v$, no finite-presentation assumption on $v$, and no Noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CZT (lemma-finite-free-open), statement and proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-flat-proper-coefficient"
+ ],
+ "proof": [
+  {
+   "text": "For each $x\\in W(F)$ choose its witnessing etale scheme neighbourhood $e:U\\to X$ with $e^*F\\simeq\\mathcal O_U^{\\oplus r}$. Every point in $|e|(|U|)$ has this same witness, so this image is contained in $W(F)$ and contains $x$. By [lem-a1-space-affine-etale-cover] the point image of every etale scheme map is open. Thus $W(F)$ is the union of these open images and is open.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CZT (lemma-finite-free-open), proof: Openness holds trivially; spaces topology made explicit."
+   }
+  },
+  {
+   "text": "The hypotheses needed on $X'$ and $F'=q^*F$ persist. For local finite presentation of $p':X'\\to Y'$, choose a surjective etale scheme chart $V\\to Y$ and a surjective etale scheme chart $U\\to X\\times_YV$; by [lem-sfb-space-local-properties-chart-test] the scheme map $U\\to V$ is locally of finite presentation. Choose a surjective etale scheme chart $V'\\to V\\times_YY'$ and put $U'=U\\times_VV'$, a scheme. By [lem-trf-space-fibre-products-etale-covers], $V\\times_YY'\\to Y'$ and $U'\\to(X\\times_YV)\\times_VV'=X'\\times_{Y'}V'$ are base changes of surjective etale maps, hence surjective etale, so $V'\\to Y'$ and $U'\\to X'\\times_{Y'}V'$ are surjective etale charts. On affine pieces a presentation $B=A[t_1,\\ldots,t_n]/(h_1,\\ldots,h_m)$ becomes $B\\otimes_AA'=A'[t_1,\\ldots,t_n]/(h'_1,\\ldots,h'_m)$, so $U'\\to V'$ is locally of finite presentation [lem-weil-pbc-finite-presentation-base-change-composition]; the other direction of [lem-sfb-space-local-properties-chart-test] then gives the chartwise condition of [def-sfb-space-morphism-properties] for $p'$ on every chart pair. The module $F'$ is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent] and of finite presentation by the clause \"Tensor pullback preserves finite presentation\" of [lem-sfb-space-fp-module-limit-category] (its limit clauses are not used): a local presentation $\\mathcal O^a\\to\\mathcal O^b\\to F\\to0$ pulls back to one of the same shape, since tensor pullback [def-trf-space-etale-module-functors] is a left adjoint and $q^*\\mathcal O_X=\\mathcal O_{X'}$; this is the predicate of [def-trf-space-quasi-coherent-module] with finite index sets. Finally [lem-sfb-space-pointwise-module-flat-base-change](1), at every $x'$, shows that $F'$ is flat over $Y'$. This uses no flatness of $p$ or $v$.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-fp-module-limit-category",
+    "def-trf-space-etale-module-functors",
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-pointwise-module-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CZT (lemma-finite-free-open), application of the fibre criterion to the pullback; spaces-morphisms.tex Tag 05VW (lemma-base-change-module-flat); spaces-morphisms.tex Tag 03XR (lemma-base-change-finite-presentation) via the chart test Tag 0410, and Tag 03DO for the module."
+   }
+  },
+  {
+   "text": "Fix $x'\\in|X'|$ and a field-valued representative $\\xi':\\operatorname{Spec}K\\to X'$; put $\\xi=q\\xi'$, $\\eta'=p'\\xi'$ and $\\eta=p\\xi=v\\eta'$. The fibre-product universal property [lem-trf-space-fibre-products-etale-covers] gives $\\alpha:X'\\times_{Y',\\eta'}\\operatorname{Spec}K\\xrightarrow{\\sim}X\\times_{Y,\\eta}\\operatorname{Spec}K$. On test schemes it sends $((a,b),c)$ to $(a,c)$; the inverse sends $(a,c)$ to $((a,\\eta'c),c)$. These inverse formulas also identify the two tautological points from $\\xi'$ and $\\xi$. The projections to $X$ agree under $\\alpha$, so the pulled-back modules agree: the tensor reassociation $C\\otimes_B(B\\otimes_A N)\\cong C\\otimes_A N$, given by $c\\otimes(b\\otimes n)\\mapsto cb\\otimes n$ with inverse $c\\otimes n\\mapsto c\\otimes(1\\otimes n)$, gives their canonical identification from [def-trf-space-etale-module-functors].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CZT (lemma-finite-free-open), comparison of the fibres; explicit common-field fibre identification underlying the appeal to Tag 05WY."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-fibre-flat-free-criterion] to $p,F,\\xi$ and to $p',F',\\xi'$, using step 2 for the latter hypotheses. It identifies $|q|(x')\\in W(F)$ and $x'\\in W(F')$ respectively with flatness of the two fibre modules over their own fibre spaces at the tautological points. Step 3 identifies these ringed spaces, modules and points; therefore the two flatness conditions are the same. Hence for every $x'$ one has $x'\\in W(q^*F)\\iff |q|(x')\\in W(F)$, proving the required equality. The argument includes rank zero and imposes no further condition on $Y'\\to Y$.",
+   "uses": [
+    "lem-sfb-space-fibre-flat-free-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CZT (lemma-finite-free-open), proof, the two applications of Tag 0CZS and the final fibre comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-fp-module-limit-category",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-pointwise-module-flat-base-change",
+  "lem-sfb-space-fibre-flat-free-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CZT (lemma-finite-free-open), proof, with the same-field form of the Tag 05WY comparison made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented quasi-coherent module flat over the base of a locally finitely presented morphism of algebraic spaces, the finite locally free locus is open and commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes that is locally of finite presentation, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphisms or the absolute affine-module free locus, not relative algebraic-space module loci with arbitrary base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.isOpen_freeLocus",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.FinitePresentation R M] : IsOpen (Module.freeLocus R M)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphisms or the absolute affine-module free locus, not relative algebraic-space module loci with arbitrary base change"
+  },
+  {
+   "tool": "grep",
+   "query": "freeLocus|finite.free.*locus|locally.free.*locus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphisms or the absolute affine-module free locus, not relative algebraic-space module loci with arbitrary base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus where a relatively flat finitely presented sheaf on an algebraic space is finite locally free commutes with every change of base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FinitePresentation.of_isBaseChange\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"{A} [CommRing A] [Algebra R A] [Module A N] [IsScalarTower R A N] (f : M →ₗ[R] N) (h : IsBaseChange A f)\\n  [Module.FinitePresentation R M] : Module.FinitePresentation A N\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ A $, and an $ A $-module $ N $ equipped with an $ R $-linear map $ f : M → N $ from an $ R $-module $ M $, if $ f $ satisfies the base change univers\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsStableUnderBaseChange @IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"Algebra.FinitePresentation.baseChange\", \"module\": \"Mathlib.RingTheory.FiniteStability\", \"type\": \"[FinitePresentation R A] : FinitePresentation B (B ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative ring, and let $A$ and $B$ be $R$-algebras. If $A$ is a finitely presented $R$-algebra, then the base change $B \\\\otimes_R A$ is a finitely presented $B$-algebra.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphisms or the absolute affine-module free locus, not relative algebraic-space module loci with arbitrary base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Openness and arbitrary base change of the etale locally free locus of a relatively flat sheaf on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphisms or the absolute affine-module free locus, not relative algebraic-space module loci with arbitrary base change"
+  },
+  {
+   "tool": "grep",
+   "query": "freeLocus|finiteFreeLocus|finite_free_locus",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"line\": \"14\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"27\", \"text\": \"- `Module.freeLocus`: The set of points `x` in `Spec R` such that `Mₓ` is free over `Rₓ`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"28\", \"text\": \"- `Module.freeLocus_eq_univ_iff`:\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"30\", \"text\": \"- `Module.basicOpen_subset_freeLocus_iff`: `D(f)` is contained in the free locus if and only if\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"49\", \"text\": \"def freeLocus : Set (PrimeSpectrum R) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"54\", \"text\": \"lemma mem_freeLocus {p} : p ∈ freeLocus R M ↔\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/Free.lean\", \"line\": \"23\", \"text\": \"In the file `Mathlib.RingTheory.Spectrum.Prime.FreeLocus`, we deduce that the free\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"57\", \"text\": \"    smoothLocus R A = (Module.support A (H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R] := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"60\", \"text\": \"    Module.mem_freeLocus]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"87\", \"text\": \"  · rw [← PrimeSpectrum.basicOpen_eq_zeroLocus_compl, Module.basicOpen_subset_freeLocus_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"129\", \"text\": \"    (smoothLocus_eq_compl_support_inter.le hx).2 Module.isOpen_freeLocus\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus\"}\n  {\"file\": \"Mathlib/RingTheory/Grassmannian.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-module and scheme results do not state the algebraic-space relative locus theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness and universal base change of the free locus of a relatively flat quasi-coherent module on an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \": Set (PrimeSpectrum R)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p}$ in the prime spectrum of a commutative ring $R$ such that the localization of the $R$-module $M$ at $\\\\mathfrak{p}$ (i.e., the module obtained by inverting all el\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsOpen (freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is universally open, every base change $ Y' \\\\to Y $ induces an open map $ X \\\\times_Y Y' \\\\to Y' $ on the underlying topological spaces.\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Module.freeLocus_eq_univ\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.Finite R M] [Module.Flat R M] : freeLocus R M = Set.univ\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $ that is finitely generated and flat, the free locus of $ M $—the set of prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ where the lo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[IsOpenImmersion f] : UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-module and scheme results do not state the algebraic-space relative locus theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of finite presentation flat over its base is locally free exactly where its fibre module is flat",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"Module.freeLocus_eq_univ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  [Module.Flat R M], Module.freeLocus R M = Set.univ\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $ that is finitely generated and flat, the free locus of $ M $—the set of prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ where the lo\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup P] [inst_2 : Module R P] [IsLocalRing R]\\n  [Module.Finite R P] [Module.Flat R P], Module.Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-module and scheme results do not state the algebraic-space relative locus theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-invertible-open-coherent",
+  "date": "2026-10-24",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces. Specific input: quot.tex lemma-picard-stack-open-in-coh, the sentence invoking spaces-more-morphisms lemma-finite-free-open to obtain W and its arbitrary-base-change property.",
+   "via": [
+    "lem-sfb-space-invertible-open-coherent",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-relative-finite-free-locus-base-change",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Expanded openness as a union of etale chart images, checked finite presentations and relative flatness after arbitrary base change, and compared both fibre criteria over one field-valued representative. Two statement-only general supporting lemmas, Tags 0CZS/05WY and 05VW; no locus clause is restated in a new node.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces. Specific input: quot.tex lemma-picard-stack-open-in-coh, the sentence invoking spaces-more-morphisms lemma-finite-free-open to obtain W and its arbitrary-base-change property. The latest blueprint direct-images proof (3) is the inherited unit context; this auxiliary Stacks input serves the Picard-stack branch already recorded by the item. The ancestor command returns null, preserved together with the existing via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic algebraic-space topology: etale scheme maps have open point images. It proves openness of the union of trivializing neighbourhoods; no node of this unit supplies this foundational topological fact."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and base-changed etale coverings, used to form and identify the same-field fibres and retain local presentations. No node of this unit supplies this general construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-465fe099d",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-465fe099d (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full, against Stacks 0CZT, 0CZS, 05WY (spaces-more-morphisms) and 05VW (spaces-morphisms). The item statement is unchanged and matches 0CZT exactly: the base-change morphism is the projection q with tensor pullback q^*, the coefficients are quasi-coherent modules on the small étale site, and no hypothesis is added on v. Step 1 is correct: lem-a1-space-affine-etale-cover gives open images of étale maps. Step 3 is correct and elementary: I checked the identification X'×_{Y'}Spec K = X×_Y Spec K, the inverse maps, the matching tautological points and the module comparison. Step 4 applies the new criterion twice, at ξ'=ξ' and ξ=qξ', and is correct. New node fibre-flat-free-criterion (0CZS (1)⇔(4) with the representative of 05WY(2), applied to id_X over Y) is true, needs no flatness of X over Y, and is neither a duplicate (the trf node is schemes-only and one direction only) nor a clause of the item. New node pointwise-module-flat-base-change (05VW) is true and is not a duplicate (the existing node is for schemes only; the proper-support node uses 05VW(1) only inside its proof). FIX 1, item step 2: local finite presentation of p' was argued only on base-changed affine pieces, but def-sfb-space-morphism-properties tests every chart pair. The step now cites lem-sfb-space-local-properties-chart-test (Stacks 0410/03XR), lem-trf-space-fibre-products-etale-covers and the Mathlib leaf lem-weil-pbc-finite-presentation-base-change-composition. Quasi-coherence and finite presentation of F' now cite the existing same-unit nodes lem-sfb-space-module-pullback-quasicoherent and lem-sfb-space-fp-module-limit-category (only its clause that pullback preserves finite presentation). proof_deps was recomputed. FIX 2, 05VW node clause (2): it said g is flat at y' in the sense of a definition that only defines global flatness; the pointwise chart condition is now spelled out and def-weil-flat-morphism added to stmt_deps. The item does not use clause (2). Tool uses lem-a1-space-affine-etale-cover and lem-trf-space-fibre-products-etale-covers are accepted as generic tools. Batch 5: every listed trf/a1/sfb citation is a general definition or foundation (algebraic space, quasi-coherent module, pullback functors, fibre products, point topology, atlas), not part of the trace formula or Poincaré duality or their proofs, so no RETURN. No SGA is cited.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceRelativeFiniteFreeLocusBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relativeFiniteFreeLocus_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.finiteFreeLocus",
+   "AlgebraicGeometry.AlgebraicSpace.relativeFiniteFreeLocus_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceRelativeFiniteFreeLocusBaseChange.lean",
+  "statement": "theorem relativeFiniteFreeLocus_baseChange {S : Scheme.{u}} {X Y : AlgebraicSpace S} (p : X ⟶ Y) (hp : MapIsLocallyOfFinitePresentation p) (F : X.QCoh) (hF : SheafOfModules.IsFinitePresentation F.obj) (hflat : ModuleIsFlatOver p F.obj) : IsOpen (finiteFreeLocus X F.obj) ∧ ∀ (Y' : AlgebraicSpace S) (v : Y' ⟶ Y) (X' : AlgebraicSpace S) (q : X' ⟶ X) (p' : X' ⟶ Y'), IsPullback q p' p v → finiteFreeLocus X' ((moduleTensorPullback q).obj F.obj) = (mapPoint q.hom.hom) ⁻¹' finiteFreeLocus X F.obj",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e580684b",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Clause-by-clause match with Tag 0CZT. finiteFreeLocus is real data: an etale chart whose point image contains x, with F|_U ≅ SheafOfModules.free (ULift (Fin r)), r=0 allowed. Hypotheses use the existing chartwise MapIsLocallyOfFinitePresentation, QCoh, Mathlib IsFinitePresentation and ModuleIsFlatOver; no extra hypotheses. Base change over every IsPullback q p' p v (orientation q≫p=p'≫v correct) with moduleTensorPullback q; conclusion is IsOpen plus set equality with the mapPoint preimage. Node diff vs live: only lean, plus stmt_dep def-sfb-space-flat-proper-coefficient (landed by Q17, allowed by brief §5). lean.statement verbatim in file. No existing algebraic-space free locus found. Only sorry is the theorem proof; docstrings carry source, blueprint id and proof steps. Imports match proof_dep records. Advisory: mapPoint is owned by def-sfb-proper-curve-moduli, not a stmt_dep, but is the standard point map. No fixes, no compile."
+ }
+}

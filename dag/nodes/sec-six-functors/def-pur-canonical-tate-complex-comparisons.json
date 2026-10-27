@@ -1,0 +1,152 @@
+{
+ "id": "def-pur-canonical-tate-complex-comparisons",
+ "kind": "definition",
+ "title": "Unshifted flat Tate complexes and normalized ordinary products",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and schemes on which $\\ell$ is invertible. Use the existing nonnegative Tate lines and root generators [def-weil-frobenius-coefficient-twists]. Define the unshifted integral and finite single complexes and their generators. Their flat lines give flat-term K-flat integral complexes and K-flat finite complexes. The integral and finite total tensor products have unique isomorphisms to the line of exponent $r+s$ sending every pair of scalar/root generators to the concatenated roots with multiplied scalars. The finite ordinary inverse-image comparison under arbitrary scheme morphisms is uniquely fixed on all scalar/root generators. These are the original degree-zero comparison declarations of the blueprint Tate datum, with unchanged signatures.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-frobenius-coefficient-twists",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-sf-orientation-integral-line-comparisons",
+  "lem-weil-integral-twist-base-change",
+  "lem-weil-signed-twist-reduction-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Canonical roots-of-unity Tate factors and their tensor, coefficient and pullback comparisons in the source-of-purity composite."
+ },
+ "proof": [
+  {
+   "text": "For integralGood and finiteGood, coefficientTwistLine_exact gives flatness of each signed coefficient line. Apply flat_single_derived_normalization to obtain K-flatness and termwise flatness of its degree-zero single complex. The finite assertion only needs the K-flatness clause.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pur-flat-single-derived-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For integralProductComplex_existsUnique, apply positiveRootTensorProduct_existsUnique to the unshifted module sheaves. The total tensor of two single complexes is supported in degree zero, where the (0,0) inclusion is an isomorphism. Conjugate this component by the single-object identifications to extract the ordinary module tensor product. Lift the normalized sheaf multiplication through this component isomorphism and mkHomFromSingle. Naturality of the sheafified pure tensor gives the displayed scalar/root formula. Extraction is injective on complex isomorphisms by to_single_hom_ext, so uniqueness of the sheaf multiplication proves uniqueness of the complex multiplication. The auxiliary single-tensor constructions are the existing proved private helpers of the orientation module, accessed through a private proof import.",
+   "uses": [
+    "lem-sf-positive-root-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-frobenius-coefficient-twists",
+    "def-sf-orientation-integral-line-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The existing finitePullSheaf_existsUnique and finiteProductComplex_existsUnique remain named holes with the unchanged source and complete proof descriptions in their docstrings. Their statements and all constructors using them are relocated verbatim, not replaced by new statements.",
+   "uses": [
+    "def-weil-frobenius-coefficient-twists",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "lem-pur-flat-single-derived-normalization",
+  "lem-sf-positive-root-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-frobenius-coefficient-twists",
+  "def-sf-orientation-integral-line-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "E9: original comparison declarations grouped into a separate module after local definition-opacity and shared-completeness optimizations still left the original file over 60 seconds. No statement, data construction, or mathematical hole added."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product and pullback of single cochain complexes of Tate coefficient sheaves",
+   "results": "HomologicalComplex.tensorObj, HomologicalComplex.tensorHom, SheafOfModules.pullback, PresheafOfModules.Monoidal.tensorObj. No normalized Tate comparison package.",
+   "date": "2026-10-27",
+   "verdict": "The existing project declarations are retained; Mathlib supplies categorical infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of complexes concentrated in degree zero is the complex of the tensor product",
+   "results": "No exact normalized root-generator comparison; the proved private orientation helpers implement the single-complex tensor construction.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project comparison route, with unchanged statements."
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Tt]ensor|[Tt]ensor.*[Ss]ingle; rg on lean/WeilConjectures and lean/Sheaf",
+   "results": "The msearch grep of Mathlib found no exact normalized Tate comparison. Project rg finds proved singleTensorLift, singleTensorExtract_lift, singleTensorExtract_injective and rootTensorExtract_pure in OrientationIntegralCoefficientTwists; PositiveRootTensorProduct and IntegralPullbackAugmentationAmbient supply the specialized normalization statements.",
+   "date": "2026-10-27",
+   "verdict": "No new mathematics is introduced by relocating the existing declarations into compilation units."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalTateComparisons",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-tate-datum",
+   "place": "Unshifted flat Tate complexes and normalized ordinary products in the canonical comparison construction.",
+   "via": [
+    "def-pur-canonical-tate-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalTateComplexComparisons",
+  "file": "lean/Sheaf/Paper/CanonicalTateComplexComparisons.lean",
+  "declaration": "WeilConjectures.CanonicalTate.integralProductComplex_existsUnique",
+  "declarations": [
+   "WeilConjectures.CanonicalTate.finitePullSheaf_existsUnique",
+   "WeilConjectures.CanonicalTate.finitePullSheaf",
+   "WeilConjectures.CanonicalTate.integralComplex",
+   "WeilConjectures.CanonicalTate.integralGenerator",
+   "WeilConjectures.CanonicalTate.integralProductComplex_existsUnique",
+   "WeilConjectures.CanonicalTate.integralProductComplex",
+   "WeilConjectures.CanonicalTate.finiteComplex",
+   "WeilConjectures.CanonicalTate.finiteGenerator",
+   "WeilConjectures.CanonicalTate.finiteProductComplex_existsUnique",
+   "WeilConjectures.CanonicalTate.finiteProductComplex",
+   "WeilConjectures.CanonicalTate.integralGood",
+   "WeilConjectures.CanonicalTate.finiteGood"
+  ],
+  "statement": "theorem integralProductComplex_existsUnique (X : Scheme.{u}) (r s : ℕ) :\n    ∃! e : (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology X)\n        (completedIntegralCommRingSheafUnrestricted l E X)).obj\n          (integralComplex l E X r, integralComplex l E X s) ≅\n        integralComplex l E X (r + s),\n      ∀ (U : X.ProEtᵒᵖ) (a b : (completedIntegralCommRingSheafUnrestricted l E X).obj.obj U)\n        (x : Fin r → (purTwistZlOne X l).obj.obj U)\n        (y : Fin s → (purTwistZlOne X l).obj.obj U),\n        (e.hom.f 0).val.app U\n          (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)\n            (completedIntegralCommRingSheafUnrestricted l E X) (integralComplex l E X r)\n              (integralComplex l E X s)\n            0 0 0 (by omega) U\n            (integralGenerator l E X r U a x) (integralGenerator l E X s U b y)) =\n        integralGenerator l E X (r + s) U (a * b) (Fin.addCases x y)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "independent cc review: old CanonicalTateComparisons/CanonicalTateArrowNaturality/RationalPurityTraceCoherence (clone == delivery base) block-by-block against the 12 delivered modules; node lean records and stmt_deps against declaration usage; #print axioms of the new proofs and their cited helpers"
+ }
+}

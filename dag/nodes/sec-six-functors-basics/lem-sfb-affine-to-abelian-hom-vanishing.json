@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-affine-to-abelian-hom-vanishing",
+ "kind": "statement",
+ "title": "Homomorphisms from smooth connected affine groups to abelian varieties vanish",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $L/k$ be a smooth connected affine group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism, def-weil-pbc-scheme-conventions], not necessarily commutative, where affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme]. Let $A/k$ be an abelian variety [def-sc-abelian-variety]. Every homomorphism $f:L\\to A$ of $k$-group schemes is the zero homomorphism: $f=e_A\\circ(L\\to\\operatorname{Spec}k)$, where $e_A$ is the identity section of $A$. This includes $L=1$ and $A=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.1(b) and Example 8.4, printed p.149, together with the homomorphism image factorization of Theorem 5.39, printed pp.108--109. Also Conrad, Semistable Reduction for Abelian Varieties, Example 2.4, printed pp.2--3. No Stacks tag states this vanishing assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-abelian-variety",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The definition of an abelian variety makes $A$ proper, hence separated and of finite type over $k$. The group-scheme separatedness lemma makes $L$ separated too. Apply the homomorphism theorem to $f$: obtain $f=i\\circ q$, with $q:L\\to I$ faithfully flat and finitely presented, $i:I\\hookrightarrow A$ a closed immersion of finite-type group schemes, and $N=\\ker f=\\ker q$ a closed normal subgroup of $L$. The theorem identifies $I$ with the fppf sheaf quotient $L/N$.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism",
+    "lem-sc-group-scheme-separated-field",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Remark 5.40, printed p.108; Proposition 8.1(b) and Example 8.4, printed p.149"
+   }
+  },
+  {
+   "text": "Write $L=\\operatorname{Spec}R$. Since $N\\hookrightarrow L$ is a closed immersion, the affine characterization of a closed immersion writes $N=\\operatorname{Spec}(R/J)$ for an ideal $J$; thus $N$ is affine. Apply the affine normal quotient theorem to $N\\triangleleft L$. It supplies an affine finite-type group scheme $Q=L/N$, with quotient map $r:L\\to Q$. Because $L$ is smooth, $Q$ is smooth. Because $k$ is already algebraically closed and $L$ is connected, $L$ is geometrically connected in the theorem's stated sense (connected after algebraic closure); hence $Q$ is geometrically connected, in particular connected. There is no smoothness assumption on $N$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Remark 5.40, printed p.108; Proposition 8.1(b) and Example 8.4, printed p.149"
+   }
+  },
+  {
+   "text": "The quotient descriptions identify $I$ and $Q$ compatibly with their maps from $L$. Explicitly, on commutative $k$-algebras both are sheafifications of the same presheaf $R\\mapsto L(R)/N(R)$. The sheafification universal property gives maps in both directions; their composites are identities by uniqueness. These natural maps on affine test schemes extend to all test schemes: cover a test scheme by affine opens, map the restrictions, and glue the resulting morphisms; naturality on affine opens in intersections gives compatibility. Uniqueness of gluing is the representable descent lemma, applied to the Zariski cover (an fpqc covering). Yoneda then gives inverse scheme morphisms $I\\simeq Q$ over $k$. Consequently $I$ is affine, smooth and connected. This is the uniqueness argument of Milne Remark 5.40, not an assertion that a faithfully flat quotient of an arbitrary affine scheme is affine.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Remark 5.40, printed p.108; Proposition 8.1(b) and Example 8.4, printed p.149"
+   }
+  },
+  {
+   "text": "The closed immersion $i:I\\hookrightarrow A$, with $A$ proper over $k$, makes $I$ proper over $k$ by the closed-immersion properness lemma. Since $I$ is also affine, the proper-affine finiteness lemma makes $I\\to\\operatorname{Spec}k$ finite. Thus $I=\\operatorname{Spec}B$ for a finite-dimensional commutative $k$-algebra $B$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sc-proper-affine-finite-general",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W5, lemma-closed-immersion-proper; Tag 01W3, lemma-composition-proper; Tag 01WN, lemma-finite-proper; Milne Example 8.4, printed p.149"
+   }
+  },
+  {
+   "text": "Smoothness of $I$ over the field $k$ gives geometrically reduced fibres by the smooth-fibre lemma; the fibre over the sole point of $\\operatorname{Spec}k$ is $I$ itself. In particular $I$ is reduced, so $B=\\Gamma(I,\\mathcal O_I)$ is reduced: a nilpotent section has zero germ in every reduced local ring and hence is zero. The identity section gives a $k$-algebra map $B\\to k$, so $1\\ne0$ in $B$ and $I$ is nonempty. Since $I$ is connected, the idempotent criterion says that $B$ has only the idempotents $0,1$. Apply the finite reduced algebra lemma over the algebraically closed field $k$: the structure map $k\\to B$ is bijective. Its inverse is the map of the identity section, since the latter is a retraction of the structure map. Therefore the structure map $p_I:I\\to\\operatorname{Spec}k$ and $e_I$ are inverse isomorphisms.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-pc-scheme-connected-iff-idempotents",
+    "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; Tag 0BUG, lemma-proper-geometrically-reduced-global-sections, proof (2); Milne Example 8.4, printed p.149"
+   }
+  },
+  {
+   "text": "Finally $\\mathrm{id}_I=e_I\\circ p_I$, and $i\\circ e_I=e_A$ because $i$ is a group homomorphism. Hence $f=i\\circ q=i\\circ e_I\\circ p_I\\circ q=e_A\\circ p_L$, where $p_L:L\\to\\operatorname{Spec}k$ is the structure map. This proves equality of scheme morphisms and therefore of group-scheme homomorphisms, including on nonreduced test schemes. The same calculation covers $L=1$ and $A=1$.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Remark 5.40, printed p.108; Proposition 8.1(b) and Example 8.4, printed p.149"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-variety",
+  "def-weil-proper-morphism",
+  "lem-sc-group-scheme-separated-field",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "def-weil-closed-immersion",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sc-proper-affine-finite-general",
+  "def-sc-group-scheme",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.39 and Remark 5.40, printed p.108; Proposition 8.1(b) and Example 8.4, printed p.149"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism from a smooth connected affine algebraic group to an abelian variety is trivial",
+   "results": "{\"t\": \"2026-10-24T07:03:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every homomorphism from a smooth connected affine algebraic group to an abelian variety is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"AlgebraicGeometry.ext_of_isAffine\", \"AlgebraicGeometry.AffineSpace.map\"], \"digest\": \"cc3f4b19c827e347\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\", \"hom\"",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAbelianVariety\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*abelian|abelian.*affine|AbelianVariety",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"grep\", \"query\": \"affine.*abelian|abelian.*affine|AbelianVariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\"], \"digest\": \"5b2683051c846aff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group scheme homomorphism from a smooth connected affine group to a proper smooth connected group is zero",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"leansearch\", \"query\": \"A group scheme homomorphism from a smooth connected affine group to a proper smooth connected group is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_zero\", \"AddGrpCat.instZeroHom\", \"AddCommGrpCat.zero_apply\", \"AddCommGrpCat.instZeroHom\", \"AddCommGrpCat.instZeroHom_1\", \"instZeroAddHom\", \"SemiNormedGrp.hom_zero\", \"AddGrpCat.zero_apply\"], \"digest\": \"d9e5ef46087df573\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There are no nonzero morphisms of algebraic groups from a connected linear algebraic group to an abelian variety",
+   "results": "{\"t\": \"2026-10-24T07:03:58Z\", \"tool\": \"leanfinder\", \"query\": \"There are no nonzero morphisms of algebraic groups from a connected linear algebraic group to an abelian variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"AddCommGrpCat.enoughInjectives\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.nonempty_fiber_of_isConnected\"], \"digest\": \"ba83a55ce17fa987\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism from a smooth connected affine algebraic group to an abelian variety is trivial",
+   "results": "{\"t\": \"2026-10-24T07:32:33Z\", \"tool\": \"leanfinder\", \"query\": \"Every homomorphism from a smooth connected affine algebraic group to an abelian variety is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"Abelianization.lift.unique\", \"Abelianization.lift_unique\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"Abelianization.hom_ext\"], \"digest\": \"48bc932683589cfa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract/Lie groups, affine-space maps, Galois categories, or abelian sheaf categories, not this algebraic-group-scheme vanishing statement."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*abelian|abelian.*affine|AbelianVariety",
+   "results": "{\"t\": \"2026-10-24T07:32:55Z\", \"tool\": \"grep\", \"query\": \"affine.*abelian|abelian.*affine|AbelianVariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\"], \"digest\": \"5b2683051c846aff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract/Lie groups, affine-space maps, Galois categories, or abelian sheaf categories, not this algebraic-group-scheme vanishing statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism from a connected linear algebraic group to a proper smooth connected group is zero",
+   "results": "{\"t\": \"2026-10-24T07:32:56Z\", \"tool\": \"leansearch\", \"query\": \"A homomorphism from a connected linear algebraic group to a proper smooth connected group is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieHom.zero_apply\", \"AddMonoidHom.ker_eq_top_iff\", \"LieHom.map_zero\", \"LieHom.coe_zero\", \"AddMonoidHom.range_eq_bot_iff\", \"AddCommGrpCat.instZeroHom_1\", \"SemiNormedGrp₁.zero_apply\", \"WeierstrassCurve.Affine.Point.map_zero\"], \"digest\": \"091abe864f0b40ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract/Lie groups, affine-space maps, Galois categories, or abelian sheaf categories, not this algebraic-group-scheme vanishing statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\", \"hom\"",
+   "results": "{\"t\": \"2026-10-24T07:32:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAbelianVariety\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract/Lie groups, affine-space maps, Galois categories, or abelian sheaf categories, not this algebraic-group-scheme vanishing statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There are no nonzero morphisms of algebraic groups from a connected linear algebraic group to an abelian variety",
+   "results": "{\"t\": \"2026-10-24T07:34:28Z\", \"tool\": \"leanfinder\", \"query\": \"There are no nonzero morphisms of algebraic groups from a connected linear algebraic group to an abelian variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected\", \"CommGrpCat.enoughInjectives\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.epi_of_nonempty_of_isConnected\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"CommGrpCat.isZero_iff_subsingleton\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\"], \"digest\": \"fb92df5eb35e23ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract/Lie groups, affine-space maps, Galois categories, or abelian sheaf categories, not this algebraic-group-scheme vanishing statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-connected-semiabelian-subgroup",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited alteration/plurinodal prerequisites: Conrad Corollary 3.2 subgroup direction, the affine part maps trivially to the abelian quotient. Supporting argument: Milne Theorem 5.39, Proposition 8.1(b), and Example 8.4. The current latest blueprint states direct-image preservation by compactification; this inherited lower-level prerequisite changes no unit route.",
+   "via": [
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-to-abelian-hom-vanishing",
+  "worker": "stage1",
+  "summary": "Six-step proof along Milne 5.39, 8.1(b), and Example 8.4. Reuse the existing homomorphism factorization and affine normal quotient theorem; identify their quotient objects by the sheafification universal property, then use proper-affine finiteness and the existing connected reduced finite-algebra criterion. No new nodes. Statement unchanged mathematically; normalize doubled TeX escapes. No exact project attachment or Mathlib match.",
+  "blueprint": "Realizes the inherited affine-to-abelian vanishing prerequisite of the semiabelian closed-subgroup argument (Conrad Corollary 3.2), ultimately below direct-image stability proof (3). Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; no chapter or unit step is replaced. Retain inherited null from.node and via chain, as ancestor command reports.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-group-scheme-separated-field",
+    "why": "Generic group-scheme separatedness supplies the exact hypotheses of the homomorphism theorem."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic uniqueness and gluing of maps extends quotient comparison from affine tests to schemes."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-fibre reducedness turns the finite smooth affine image into a reduced algebra; the unit contains no replacement for this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-group-scheme-separated-field",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-646988e73",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-646988e73 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery adds no new nodes, and the statement is unchanged apart from fixing the doubled TeX backslashes. Its six steps follow Milne, Algebraic Groups: Theorem 5.39 and Remark 5.40, Proposition 8.1(b) and Example 8.4 (pp.108 and 149, checked in the PDF). Step checks: (1) The hypotheses of the homomorphism-factorization node hold: A is proper, hence separated and of finite type, and L is separated by the group-separatedness lemma. (2) N is affine because it is a closed subscheme of the affine L. The affine normal-quotient node then gives Q affine, smooth and geometrically connected, using that k is algebraically closed. (3) I and Q are identified because both represent the same fppf quotient, via sheafification, Zariski gluing of maps through the fpqc representable-descent lemma (a Zariski cover is an fpqc covering) and Yoneda; marking this step elementary is acceptable. The two nodes word their fppf coverings slightly differently; I accepted this because both mean the same fppf quotient. (4) I is proper by clause (c) of the closed-immersion lemma, and affine by step 3, so it is finite. (5) I is smooth, hence reduced, nonzero (it has an identity section) and connected, hence has only trivial idempotents. The finite reduced algebra lemma then gives B=k, and e_I is inverse to p_I. (6) f=e_A∘p_L follows by composing the maps. Edge cases checked: L=1, A=1, noncommutative L, nonreduced kernel, alpha_p and mu_2. A search of the DAG found no duplicate; the nearest is lem-sfb-torus-abelian-hom-vanishing, which covers only G_m^r. Batch-5: the two flagged closures reach lem-trf-fppf-covering-base-change (fppf coverings are stable under base change) and def-trf-scheme-cover-descent-datum (a general descent-data definition). Both are generic foundations; the full closures contain no trace-formula or Poincaré-duality result and no assumption or target node, so I accepted them. The tool_uses (group-scheme separatedness, fpqc representable descent, smooth implies geometrically reduced fibres) are generic and accepted. The null blueprint from.node is inherited from the base record. Changes: none."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineToAbelianHomVanishing",
+  "declaration": "AlgebraicGeometry.affine_to_abelian_hom_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineToAbelianHomVanishing.lean",
+  "statement": "theorem affine_to_abelian_hom_vanishing {k : Type u} [Field k] [IsAlgClosed k] (L A : Grp (Over (Spec (.of k)))) [Smooth L.X.hom] [ConnectedSpace L.X.left] [IsAffine L.X.left] [LocallyOfFiniteType L.X.hom] [QuasiCompact L.X.hom] [IsAbelianVariety A.X] (f : L ⟶ A) : f.hom.hom.left = L.X.hom ≫ (η[A.X]).left",
+  "branch": "sheaf-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-adb6788ef",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Each clause matches the node: alg-closed field k; L, A : Grp (Over (Spec k)); L Smooth, ConnectedSpace (nonempty, as in def-weil-connected-scheme), IsAffine, LocallyOfFiniteType ∧ QuasiCompact (recorded convention), no commutativity; IsAbelianVariety A.X (proper/smooth/connected, group data from Grp); arbitrary f : L ⟶ A; conclusion f.hom.hom.left = L.X.hom ≫ (η[A.X]).left, an equality of scheme morphisms. No extra assumptions; L=1, A=1, noncommutative L, nonreduced kernel and any characteristic are covered. lean.statement is verbatim in the file; the node record equals side-live apart from lean (no stmt_dep change, no parallel landing). Single sorry, no definitions, docstrings give source and blueprint plus the six proof steps, proof imports exist, report has both sections, no duplicate found (torus sibling covers tori only). No compile: nothing changed."
+ }
+}

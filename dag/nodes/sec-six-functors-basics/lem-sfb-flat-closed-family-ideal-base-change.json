@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-flat-closed-family-ideal-base-change",
+ "kind": "statement",
+ "title": "Finite-type ideals and universal exactness for flat closed subfamilies",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $X\\to T$ and $Z\\to T$ be finitely presented morphisms (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated), and let $i:Z\\hookrightarrow X$ be a closed immersion over $T$ [def-weil-closed-immersion]. Assume $Z\\to T$ is flat [def-weil-flat-morphism]. Define $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$, where $(i_*\\mathcal O_Z)(U)=\\mathcal O_Z(i^{-1}U)$. Then $i$ is finitely presented and $\\mathcal I$ is a quasi-coherent module of finite type [pqf-def-coherent]. For every $g:T'\\to T$, write $X'=X\\times_TT'$, $Z'=Z\\times_TT'$, $g_X:X'\\to X$, and $i':Z'\\hookrightarrow X'$ [def-pc-fibre-product]. Ordinary module pullback [def-pc-module-pullback] carries the ideal sequence to a short exact sequence\n$$0\\longrightarrow g_X^*\\mathcal I\\longrightarrow\\mathcal O_{X'}\\longrightarrow i'_*\\mathcal O_{Z'}\\longrightarrow0.$$\nIn particular the canonical map $g_X^*\\mathcal I\\to\\ker(\\mathcal O_{X'}\\to i'_*\\mathcal O_{Z'})$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FV (lemma-finite-presentation-permanence), (2); Tag 01TV (lemma-closed-immersion-finite-presentation). Universal exactness is the affine-local application of algebra.tex Tag 00HL (lemma-flat-tor-zero) to the flat quotient over the base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For affine $V=\\operatorname{Spec}R\\subseteq T$ and $U=\\operatorname{Spec}A\\subseteq X$ mapping into $V$, the closed immersion gives $i^{-1}U=\\operatorname{Spec}(A/J)$. The affine finite-presentation criterion for $X/T$ and $Z/T$ makes $A$ and $B=A/J$ finitely presented over $R$. Discarding the relations in a presentation makes $A$ finite type over $R$; the intermediate-algebra lemma makes $B$ finitely presented over $A$. For each $z\\in Z$, choose $V$ around its image and $U$ around $i(z)$ inside the inverse image of $V$; then $i^{-1}U$ is the required affine neighbourhood of $z$. Thus $i$ is locally of finite presentation. A closed immersion is affine; affine permanence gives quasi-compactness and separatedness, hence quasi-separatedness. Thus $i$ is finitely presented.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FV, lemma-finite-presentation-permanence (1), proof via Algebra Tag 00F4, lemma-compose-finite-type (4); Tag 01TQ, lemma-locally-finite-presentation-characterize"
+   }
+  },
+  {
+   "text": "On an arbitrary affine $U=\\operatorname{Spec}A\\subseteq X$, the ideal description gives $\\mathcal I|_U=\\widetilde J$ and $i^{-1}U=\\operatorname{Spec}(A/J)$; in particular $\\mathcal I$ is quasi-coherent. Local finite presentation of $i$ and the affine criterion make $A/J$ finitely presented over $A$. The presentation-kernel lemma with zero variables, applied to $A[\\ ]=A\\twoheadrightarrow A/J$, makes $J$ finitely generated. Clause (a) of the quasi-coherent finite-type affine criterion makes $\\mathcal I|_U$ of finite type. This on an affine covering proves that $\\mathcal I$ is of finite type.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV, lemma-closed-immersion-finite-presentation, proof; Algebra Tag 00R2, lemma-finite-presentation-independent with n=0"
+   }
+  },
+  {
+   "text": "Fix any $g:T'\\to T$. The affine-diagram lemma supplies $i'$, the canonical maps $a,b$, their three quasi-coherent terms, the pushforward comparison and an affine covering $Q=\\operatorname{Spec}(A\\otimes_RR')$. Its section identifications carry $a,b$ to $J\\otimes_RR'\\to A\\otimes_RR'\\to B\\otimes_RR'$, with precisely the inclusion and quotient maps, not merely abstract isomorphic terms. On each such chart $B$ is flat over $R$ by the affine flatness criterion for $Z\\to T$. The sequence $0\\to J\\to A\\to B\\to0$ is short exact since $B=A/J$, also as $R$-modules since scalar restriction changes neither kernels nor surjectivity. Apply the relative-flat tensor-chart criterion with $Y=X'$, chart rings $(R,A,S)=(R,A,R')$ and modules $(L,M,N)=(J,A,B)$; the affine-diagram formulas give its two commuting squares: the sheaf sequence of $a,b$ is short exact and its canonical factorization onto $\\ker b$ is an isomorphism. The affine-diagram comparison identifies this sequence with ordinary pullback of the original ideal sequence, as required.",
+   "uses": [
+    "lem-sfb-closed-ideal-base-change-affine-diagram",
+    "lem-sfb-relative-flat-tensor-charts-sheaf-exact",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL (lemma-flat-tor-zero), applied through the two new affine-chart interfaces; schemes.tex Tags 01I9 and 01JQ; morphisms.tex Tag 01U5 (lemma-flat-characterize)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sfb-closed-ideal-base-change-affine-diagram",
+  "lem-sfb-relative-flat-tensor-charts-sheaf-exact",
+  "lem-weil-pbc-flat-morphism-affine-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 02FV and 01TV, affine-local proofs; universal exactness from algebra.tex Tag 00HL, identified with module pullback by schemes.tex Tag 01I9 and coherent.tex Tag 02KG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented closed subfamily in a flat finitely presented scheme the ideal is of finite type and the ideal exact sequence stays exact under every base change",
+   "results": "{\"t\": \"2026-10-22T04:23:32Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat finitely presented closed subfamily in a flat finitely presented scheme the ideal is of finite type and the ideal exact sequence stays exact under every base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.flat_iff\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat\", \"Algebra.Smooth.flat\"], \"digest\": \"8724c525ba62880f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: closed-immersion permanence and tensor exactness are separate ingredients; no declaration gives finite-type ideal plus its ordinary pullback identification for a relatively flat closed family."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-22T04:23:32Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: closed-immersion permanence and tensor exactness are separate ingredients; no declaration gives finite-type ideal plus its ordinary pullback identification for a relatively flat closed family."
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*[Ff]inite|[Ff]inite.*ideal|[Ff]lat",
+   "results": "{\"t\": \"2026-10-22T04:23:32Z\", \"tool\": \"grep\", \"query\": \"ideal.*[Ff]inite|[Ff]inite.*ideal|[Ff]lat\", \"sub\": \"AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: closed-immersion permanence and tensor exactness are separate ingredients; no declaration gives finite-type ideal plus its ordinary pullback identification for a relatively flat closed family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ideal sheaf of a closed immersion between flat finitely presented families has finite type and commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:23:33Z\", \"tool\": \"leansearch\", \"query\": \"Ideal sheaf of a closed immersion between flat finitely presented families has finite type and commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.map\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\"], \"digest\": \"40a3e66c390a3beb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: closed-immersion permanence and tensor exactness are separate ingredients; no declaration gives finite-type ideal plus its ordinary pullback identification for a relatively flat closed family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion finite presentation equivalent to finite type ideal and flat quotient makes tensor preserve the ideal exact sequence",
+   "results": "{\"t\": \"2026-10-22T04:23:41Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersion finite presentation equivalent to finite type ideal and flat quotient makes tensor preserve the ideal exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"instFinitePresentationTensorProduct\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.FaithfullyFlat.rTensor_exact_iff_exact\", \"Module.Flat.iff_rTensor_injective\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\", \"Module.Flat.iff_lTensor_injective\"], \"digest\": \"cbdf667397646f2a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: closed-immersion permanence and tensor exactness are separate ingredients; no declaration gives finite-type ideal plus its ordinary pullback identification for a relatively flat closed family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between schemes of finite presentation over a base is locally of finite presentation",
+   "results": "{\"t\": \"2026-10-22T04:43:01Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between schemes of finite presentation over a base is locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"a76fa25f11ed39ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-22T04:43:02Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.LocallyOfFinitePresentation.SpecMap_iff\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\"], \"digest\": \"cff7ca6e963d2f35\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|finitePresentation",
+   "results": "{\"t\": \"2026-10-22T04:43:02Z\", \"tool\": \"grep\", \"query\": \"of_comp|finitePresentation\", \"sub\": \"AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"11\", \"45\", \"46\", \"48\", \"50\"], \"digest\": \"6a808392234e9e0f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "of_restrictScalars|of_surjective|ker.*[Ff][Gg]|[Ff][Gg].*ker|of_comp",
+   "results": "{\"t\": \"2026-10-22T04:43:12Z\", \"tool\": \"grep\", \"query\": \"of_restrictScalars|of_surjective|ker.*[Ff][Gg]|[Ff][Gg].*ker|of_comp\", \"sub\": \"RingTheory/FinitePresentation.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"45\", \"105\", \"117\", \"122\", \"123\"], \"digest\": \"053efedb31bd0d33\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|ker|[Ff][Gg]",
+   "results": "{\"t\": \"2026-10-22T04:43:12Z\", \"tool\": \"grep\", \"query\": \"of_comp|ker|[Ff][Gg]\", \"sub\": \"RingTheory/RingHom/FinitePresentation.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"35\"], \"digest\": \"76942122e4b1ae71\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If A to B is a finite type algebra and A to C is finitely presented then B to C is finitely presented; a surjective finitely presented ring map has finitely generated kernel",
+   "results": "{\"t\": \"2026-10-22T04:43:13Z\", \"tool\": \"leanfinder\", \"query\": \"If A to B is a finite type algebra and A to C is finitely presented then B to C is finitely presented; a surjective finitely presented ring map has finitely generated kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.FinitePresentation.comp_surjective\", \"RingHom.FinitePresentation.comp_surjective\", \"Algebra.FinitePresentation.of_surjective\", \"RingHom.FinitePresentation.of_comp_finiteType\", \"AlgHom.FinitePresentation.of_comp_finiteType\", \"Algebra.FinitePresentation.trans\", \"AlgHom.FinitePresentation.of_surjective\", \"AlgHom.FinitePresentation.comp\"], \"digest\": \"4a95c0a81783575d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "ker.*[Ff][Gg]|[Ff][Gg].*ker|of_comp_finiteType|ker_finite",
+   "results": "{\"t\": \"2026-10-22T04:43:25Z\", \"tool\": \"grep\", \"query\": \"ker.*[Ff][Gg]|[Ff][Gg].*ker|of_comp_finiteType|ker_finite\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\"], \"digest\": \"ad8bc01410b8f60a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion of finitely presented schemes over a base with flat source has a finite type quasi coherent ideal and its ideal short exact sequence is preserved by arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:44:31Z\", \"tool\": \"leansearch\", \"query\": \"A closed immersion of finitely presented schemes over a base with flat source has a finite type quasi coherent ideal and its ideal short exact sequence is preserved by arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\"], \"digest\": \"1c7170e700f25e9a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a relatively flat finitely presented closed subscheme of a finitely presented family, its finite type ideal sheaf pulls back isomorphically to the ideal after arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:44:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a relatively flat finitely presented closed subscheme of a finitely presented family, its finite type ideal sheaf pulls back isomorphically to the ideal after arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"9243864cbe6f7895\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the returned declarations are component flatness, finite-presentation or closed-immersion facts, not the conjunction including the canonical ideal pullback isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-uniform-section-bound",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, identifying pulled-back ideal sheaves before any fibrewise cohomology argument",
+   "via": [
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-closed-family-ideal-base-change",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split order: preserve the statement and existing finite-presentation route; expose two independent statement-only tasks, the canonical closed-ideal affine diagram (without flatness) and the general relative-flat tensor-chart sheaf exactness criterion. Parent assembly is below 3000 characters. The full returned proof is retained in report.md with its allocation and all canonical-map and localization details. Landing-return repair: rechecked the retained split against the current DAG and all cited statements; clarified the direction of the balanced-coordinate identification and the exact module data in the assembly. The delivery is rebuilt on the current server base by deliver.py. Further landing-return audit on 2026-10-23: source metadata now names 02FV(1), which the unchanged route actually applies; the assembly spells out the affine neighbourhood choice, obtains quasi-coherence before invoking the finite-type criterion, and states exactness after scalar restriction. The rings in Step 3 are chart rings, not local rings. Added comparisons with the two newly present same-tag nodes.",
+  "blueprint": "Inherited provenance: det-thm-sf-ctf-stability-direct-images, proof (3), alteration/Hilbert prerequisites through lem-sfb-hilbert-uniform-section-bound. Steps 1-3 provide finite-type ideal data; Steps 4-8 establish the ideal pullback identification required before fibrewise Hilbert/cohomology arguments. The ancestor command returns None because the inherited created.item chain is broken; preserve the existing from.node=null and its exact from.place/via. Re-split: new affine-diagram node carries old Steps 4,5,7 and quasi-coherence from 8; tensor-chart criterion carries old Steps 6,8. Old Steps 1-3 remain explicitly in the short parent assembly. Inherited ancestor remains None as printed by blueprint_refs.py."
+ },
+ "tool_uses": [
+  "lem-pc-closed-subscheme-base-change-ideal-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-423ab8f2d",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-423ab8f2d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the repair note and the Stacks sources at 02FV, 01TV, 00HL, 02KG, 01JU, 01JR/01JQ, 01I9, 00CS and 01HV. This is the third push of the same re-split; the earlier heads bba0 and c348 both got PASS. Against c348, both new nodes are byte-identical, and only the wording of the three assembly steps and the split_report changed. Step 1 says how the neighbourhood is chosen, Step 2 gets quasi-coherence before applying clause (a), and Step 3 notes that restricting scalars keeps the sequence exact. The live item is still the old 8-step split and the released human re-split note still applies, so the delivery is not superseded. Statement, stmt_deps, lean, tool_uses and blueprint are unchanged. The assembly is 2415 characters, and proof_deps is exactly the union of uses (11 nodes). Step 1: 01TQ applied to X/T and Z/T, the intermediate-algebra lemma with A of finite type, and affine permanence (3); this is 02FV(1). Step 2: I|_U = J~, the kernel lemma with n=0, and clause (a) of the affine finite-type criterion; this is 01TV. Step 3: the flat-affine criterion applied to Z→T makes B flat over R, then the tensor-chart node with (R,A,R';J,A,B); both squares commute (j⊗r'↦j⊗(1⊗r')↦j⊗r', and b_Q=q⊗1). Allocation: old steps 4, 5 and 7 and the quasi-coherence part of step 8 went to the affine-diagram node (2268 characters). It holds without flatness, because 02KG needs only that i is affine. Old step 6 and the localization part of step 8 went to the tensor-chart node (1839 characters). It holds by 00HL with an arbitrary S, then 00CS and the D(c) basis. The example Z=Spec F_2 in Spec Z with R'=F_2 shows the quotient-flatness hypothesis is needed. Old steps 1-3 stay in the parent as a short assembly of existing Mathlib-leaf nodes, with every argument kept. Of the 5 nodes new in live since this base, none is a duplicate. Earlier comparisons hold: the site flat-quotient node needs a flat sheaf, and lem-pc-closed-imm-base-change needs g flat. The declared tool_use lem-pc-closed-subscheme-base-change-ideal-image is accepted; maintainer note: it now serves the split of the affine-diagram node. The report says the item-level source was changed to 02FV(1), but it still cites (2) while Step 1 cites (1); this is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatClosedFamilyIdealBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatClosedFamily_ideal_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.flatClosedFamilyBaseChangeImmersion",
+   "AlgebraicGeometry.Scheme.Modules.flatClosedFamilyIdealBaseChangeMap",
+   "AlgebraicGeometry.Scheme.Modules.flatClosedFamilyBaseChangeQuotient",
+   "AlgebraicGeometry.Scheme.Modules.flatClosedFamily_ideal_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatClosedFamilyIdealBaseChange.lean",
+  "statement": "theorem flatClosedFamily_ideal_baseChange {T X Z : Scheme.{u}} (f : X ⟶ T) (i : Z ⟶ X) [IsClosedImmersion i] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFinitePresentation (i ≫ f)] [QuasiCompact (i ≫ f)] [QuasiSeparated (i ≫ f)] [Flat (i ≫ f)] : (LocallyOfFinitePresentation i ∧ QuasiCompact i ∧ QuasiSeparated i) ∧ i.ker.toModules.IsQuasiCoherentFiniteType ∧ ∀ (T' : Scheme.{u}) (g : T' ⟶ T), IsClosedImmersion (flatClosedFamilyBaseChangeImmersion f i g) ∧ ∃ w : flatClosedFamilyIdealBaseChangeMap f i g ≫ flatClosedFamilyBaseChangeQuotient f i g = 0, (ShortComplex.mk (flatClosedFamilyIdealBaseChangeMap f i g) (flatClosedFamilyBaseChangeQuotient f i g) w).ShortExact ∧ ∃ e : (tensorPullback (Limits.pullback.fst f g)).obj i.ker.toModules ≅ kernel (flatClosedFamilyBaseChangeQuotient f i g), e.hom ≫ kernel.ι (flatClosedFamilyBaseChangeQuotient f i g) = flatClosedFamilyIdealBaseChangeMap f i g",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-baac473a9",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: LFP+QC+QS on f and i≫f, IsClosedImmersion i, Flat (i≫f) only; conclusions LFP∧QC∧QS i, i.ker.toModules IsQuasiCoherentFiniteType, ∀ T' g: IsClosedImmersion i' (true extra), ShortExact of the canonical maps (pullback of toModulesι ≫ tensorPullbackObjUnitToUnit, whose adjunction unit is fixed as 1⊗m; unitToPushforwardObjUnit of i'), and an iso e to kernel b with e.hom≫ι=a. Only the lean record was added; stmt_deps and statement unchanged since S1; lean.statement verbatim; helpers are real constructions; proof is sorry only; docstrings have source and blueprint, 8 proof steps condensed into 6; no duplicate found. Not recompiled per brief; worker reports clean compiles (11.3 s, 13.7 s). Advisory: tensorPullbackObjUnitToUnit (theorem-owned plain def) and Hom.ker.toModules are used without their owner nodes in stmt_deps; proof dep closedSubscheme_baseChange_ideal_image uses an unfixed Classical.choice adjunction, so stage 3 needs a bridge."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

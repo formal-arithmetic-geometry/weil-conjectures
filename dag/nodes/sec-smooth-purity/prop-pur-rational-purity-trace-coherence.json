@@ -17,9 +17,37 @@
   "def-pur-smooth-trace",
   "def-pur-conventions",
   "thm-pur-composition-coherence",
-  "thm-pur-smooth-base-change-coherence"
+  "thm-pur-smooth-base-change-coherence",
+  "def-pur-rational-purity-line-comparisons",
+  "def-pur-rational-purity-common-comparisons"
  ],
  "proof": [
+  {
+   "text": "Auxiliary declarations for the geometric source comparisons: reuse the uniquely root-normalized integral line pullback of [def-sf-orientation-integral-line-comparisons]. Use the rank-one clause of [lem-pur-twist-sheaf-locally-free] and [lem-route-coefficient-twist-line-exact] to prove the positive line flat. The proved degree-zero helpers of [lem-pur-flat-single-derived-normalization] give its K-flatness and flat terms. Reuse integralPullUnit_isIso of [def-pur-canonical-tate-comparisons] for the completed pullback augmentation. For lineSingle_finiteTor, choose an auxiliary prime p greater than l and its explicitly constructed finite-field datum; [lem-coef-integral-residue-tor] identifies the integral constructible and finite-Tor predicates, and the singleFunctorIsoCompQ transports membership of the actual twisting object from [def-coefficient-twists-detailed]. No geometric characteristic hypothesis is added: the auxiliary datum is a redundant parameter of that characterization. For lineAdd_existsUnique, invert the normalized multiplication isomorphism of [lem-sf-positive-root-tensor-product]. Concatenating the two restrictions of an ordered root list is the original list, so the multiplication formula proves the required inverse formula. Conversely, the given inverse formula, linearity in the scalar coefficient (by induction on the root power) and tensor balancing imply the full two-scalar multiplication formula; uniqueness of multiplication then gives uniqueness of its inverse. This works for zero exponents as well. The even-shift addition equation is integer distributivity and Nat.cast_add. These are proofs of the auxiliary Lean declarations; the substantive trace, composition and descent obligations in the following steps remain open.",
+   "uses": [
+    "def-sf-orientation-integral-line-comparisons",
+    "def-pur-canonical-tate-comparisons",
+    "lem-coef-integral-residue-tor",
+    "def-coefficient-twists-detailed",
+    "lem-sf-positive-root-tensor-product",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-route-coefficient-twist-line-exact",
+    "lem-pur-flat-single-derived-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "paragraph, corresponding O_E-level statements"
+   }
+  },
+  {
+   "text": "The existing line and finite-stage composition constructors are publicly re-exported from separate compilation modules. This preserves all signatures and comparison objects, and the original auxiliary proofs and remaining holes. The split follows canonical instance priorities, local common-stage opacity and an explicit stage argument in the defining equality proof, which improved cost but still left the full consumer over 60 seconds. The trace/coherence statements and their proof route remain unchanged.",
+   "uses": [
+    "def-pur-rational-purity-line-comparisons",
+    "def-pur-rational-purity-common-comparisons"
+   ],
+   "elementary": true
+  },
   {
    "text": "Fix the setting and the coefficient object of [thm-pur-rational-and-qbar-purity], and an integral lattice presenting it. The rational categories of [def-weil-pbc-rational-category] are defined on noetherian finite-dimensional schemes with $\\ell$ invertible, and their lattices lie in the completed integral category. The schemes $X,Y$ involved are of finite type over the field $k$, hence noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to their structure morphisms (a field is noetherian), and finite-dimensional by [lem-kun-dimension-finite-type]; $\\ell$ is invertible on them since $\\ell\\ne p$. On these schemes [lem-weil-pbc-integral-stratified-perfect-characterization] identifies that category with the derived-complete integral category used by reconstruction. Choose an interval $[a,b]$ bounding the first reduction of the lattice. Then [lem-coef-integral-residue-tor] gives Tor amplitude $[a,b]$ for every reduction, so the lattice belongs to the required uniform finite-Tor domain. Put $F_h=Rh_!$, $G_h=Rh^!$, and $H_h=Lh^*(-)(d_h)[2d_h]$ for each smooth morphism involved. The integral isomorphisms are those of [thm-pur-adic-reconstruction], chosen as the simultaneous natural, scalar-compatible family of [lem-pur-adic-purity-scalar-naturality] used in rational purity. Reconstruction alone asserts no uniqueness of arbitrary coherent lifts, and no such uniqueness is used. Apply [prop-pur-adic-reconstruction-trace-coherence] to obtain the integral counit composite $t_{h,K}=\\epsilon_{h,K}F_h(\\gamma_{h,K})$, the transport of the formula of [def-pur-smooth-trace], and the integral versions of the equalities in [thm-pur-composition-coherence] and [thm-pur-smooth-base-change-coherence]. Thus at integral coefficients the single-map purity and its iterated composition agree, and the two paths around the smooth pullback square agree. These are supplied commutative diagrams, not consequences of detecting equality of morphisms by finite reductions.",
    "uses": [
@@ -124,6 +152,16 @@
   }
  ],
  "proof_deps": [
+  "def-sf-orientation-integral-line-comparisons",
+  "def-pur-canonical-tate-comparisons",
+  "lem-coef-integral-residue-tor",
+  "def-coefficient-twists-detailed",
+  "lem-sf-positive-root-tensor-product",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-route-coefficient-twist-line-exact",
+  "lem-pur-flat-single-derived-normalization",
+  "def-pur-rational-purity-line-comparisons",
+  "def-pur-rational-purity-common-comparisons",
   "thm-pur-rational-and-qbar-purity",
   "thm-pur-adic-reconstruction",
   "lem-pur-adic-purity-scalar-naturality",
@@ -133,7 +171,6 @@
   "thm-pur-smooth-base-change-coherence",
   "def-weil-pbc-rational-category",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-coef-integral-residue-tor",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-kun-dimension-finite-type",
   "prop-weil-pbc-rational-transport",
@@ -145,7 +182,6 @@
   "def-pur-conventions",
   "lem-pur-composition-comparison-scalar-compatibility",
   "lem-pur-smooth-exchange-scalar-compatibility",
-  "def-coefficient-twists-detailed",
   "def-weil-pbc-qbar-category",
   "prop-weil-pbc-descent-functors",
   "prop-pur-rational-purity-transitivity-summands"
@@ -153,7 +189,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-  "place": "The smooth trace and coherence statements over E and Qbar are reductions of the corresponding O_E-level statements"
+  "place": "The smooth trace and coherence statements over E and Qbar are reductions of the corresponding O_E-level statements; B4 (2026-10-26): auxiliary root-line, inverse-concatenation and finite-Tor proofs reuse existing canonical comparison declarations; the main theorem and common-support descent remain open. E9, 2026-10-27: preserve the line and common-stage constructors in two compilation modules; no new mathematical hole, no change to trace/coherence statements or the unit route."
  },
  "mathlib_searches": [
   {
@@ -249,7 +285,18 @@
   "def-pur-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "split_report": {
@@ -312,35 +359,6 @@
   "module": "Sheaf.SecSmoothPurity.RationalPurityTraceCoherence",
   "declaration": "WeilConjectures.RationalPurityCoherence.rationalPurityTraceCoherence",
   "declarations": [
-   "WeilConjectures.RationalPurityCoherence.linePull_existsUnique",
-   "WeilConjectures.RationalPurityCoherence.linePull",
-   "WeilConjectures.RationalPurityCoherence.lineAdd_existsUnique",
-   "WeilConjectures.RationalPurityCoherence.lineAdd",
-   "WeilConjectures.RationalPurityCoherence.lineSingle_good",
-   "WeilConjectures.RationalPurityCoherence.lineSingle_finiteTor",
-   "WeilConjectures.RationalPurityCoherence.linePullAugmentation_isIso",
-   "WeilConjectures.RationalPurityCoherence.integralLinePull",
-   "WeilConjectures.RationalPurityCoherence.rationalLinePull",
-   "WeilConjectures.RationalPurityCoherence.lineSingleTensor",
-   "WeilConjectures.RationalPurityCoherence.integralLineAdd",
-   "WeilConjectures.RationalPurityCoherence.evenShift_add",
-   "WeilConjectures.RationalPurityCoherence.integralTensorBothShift",
-   "WeilConjectures.RationalPurityCoherence.integralShiftedLineAdd",
-   "WeilConjectures.RationalPurityCoherence.rationalShiftedLineAdd",
-   "WeilConjectures.RationalPurityCoherence.rationalShiftedLinePull",
-   "WeilConjectures.RationalPurityCoherence.rationalSourceComposition",
-   "WeilConjectures.RationalPurityCoherence.rationalSquarePull",
-   "WeilConjectures.RationalPurityCoherence.rationalSourceBaseChange",
-   "WeilConjectures.RationalPurityCoherence.rationalSupportComposition",
-   "WeilConjectures.RationalPurityCoherence.rationalExceptionalComposition",
-   "WeilConjectures.RationalPurityCoherence.commonPullInclusion",
-   "WeilConjectures.RationalPurityCoherence.commonSourceComposition",
-   "WeilConjectures.RationalPurityCoherence.commonSourceBaseChange",
-   "WeilConjectures.RationalPurityCoherence.commonSupportComposition_existsUnique",
-   "WeilConjectures.RationalPurityCoherence.commonSupportComposition",
-   "WeilConjectures.RationalPurityCoherence.commonExceptionalComposition",
-   "WeilConjectures.RationalPurityCoherence.RationalCompositionClause",
-   "WeilConjectures.RationalPurityCoherence.CommonCompositionClause",
    "WeilConjectures.RationalPurityCoherence.localizedSmoothTrace",
    "WeilConjectures.RationalPurityCoherence.modelSmoothTrace",
    "WeilConjectures.RationalPurityCoherence.descendedSmoothTrace",
@@ -370,5 +388,15 @@
   "group": "NE",
   "result": "fix",
   "note": "7th delivery; F1-F3 of b41005e3 addressed: the trace witnesses are pinned by equality/HEq to rationalIso, commonIso and the actual G/adjunction; composition uses f, g, d, e and c_{g,f} = conjugate mate of sfFieldShriekCompositionRational, with a common-stage ∃!-pinned support compositor; base change has an arbitrary IsPullback and no condition on b; the duplicate def node is gone. Remaining fault, H3: the Qbar trace clause was rfl because descendedSmoothTrace := F(commonIso) ≫ counit (compiler-checked with a control). FIX: new modelSmoothTrace (homEquiv.symm of smallModelIso), and descendedSmoothTrace = F(commonSourceComparison) ≫ q⁻¹ ≫ inclusion(model trace), stated on ⟨fieldIndex (stageSetting P i), K⟩ to avoid the heartbeat timeout from Shrink unfolding; rfl now fails; it holds by q-naturality plus the Comparison.counit field. fixes/: complete module (clean, 23.5 s), lean-record (+modelSmoothTrace, statement verbatim), report. Delivered module compiles clean in 19.1 s. Advisory: BaseChangeClause is a tautology inherited from thm-pur-smooth-base-change-coherence (Iso.hom_inv_id_assoc), and two private imports are unused. H4 clean; docstrings present; rational trace and composition clauses are substantive."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "independent cc review: old CanonicalTateComparisons/CanonicalTateArrowNaturality/RationalPurityTraceCoherence (clone == delivery base) block-by-block against the 12 delivered modules; node lean records and stmt_deps against declaration usage; #print axioms of the new proofs and their cited helpers"
  }
 }

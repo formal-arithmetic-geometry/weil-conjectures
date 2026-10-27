@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-relative-canonical-root-exponential",
+ "kind": "statement",
+ "title": "Canonical relative exponential of a root line",
+ "statement": "Let $A$ be a nonzero commutative Noetherian ring [def-weil-pbc-noetherian-ring], $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $r\\geq0$. An $A$-group scheme means a scheme over $X$ with multiplication, identity and inverse satisfying associativity, unit and inverse diagrams, as in [def-sc-group-scheme] with this base in place of a field. Put $T=\\mathbf G_{m,A}^r=\\operatorname{Spec}A[M]$, $M=\\mathbf Z^r$, where $A[M]=A[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$, $e^m=\\prod_jz_j^{m_j}$, and the group law is multiplication of units. Write $\\chi_m:T\\to\\mathbf G_{m,A}$ for the character $e^m$. Let $G$ be a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $A$-group scheme with a closed inclusion $T\\hookrightarrow G$ [def-weil-closed-immersion]. Assume every geometric fibre of $G$ is reductive, meaning connected [def-weil-connected-scheme] with no nontrivial smooth connected normal unipotent closed subgroup. Unipotent means that all geometric points are unipotent matrices in a faithful representation. Assume $T$ is a maximal torus in every geometric fibre, where a torus over an algebraically closed field is a product of multiplicative groups and maximality is for subgroup inclusion. Put $\\mathfrak g=\\ker(G(A[\\epsilon]/(\\epsilon^2))\\to G(A))$, with addition induced by multiplication in $G$ and scalar multiplication induced by $\\epsilon\\mapsto a\\epsilon$. The conjugation coaction of $T$ on this tangent module is denoted $\\rho$, and $\\mathfrak g_m=\\{v:\\rho(v)=v\\otimes e^m\\}$. For any $\\alpha\\in M\\setminus\\{0\\}$ such that $\\mathfrak g_\\alpha$ is locally free of rank one on $X$, put $V_\\alpha=\\operatorname{Spec}\\operatorname{Sym}_A(\\operatorname{Hom}_A(\\mathfrak g_\\alpha,A))$, with addition; its $B$-points are $B\\otimes_A\\mathfrak g_\\alpha$. There is a unique $T$-equivariant group homomorphism $\\exp_\\alpha:V_\\alpha\\to G$ whose tangent map is the inclusion $\\mathfrak g_\\alpha\\hookrightarrow\\mathfrak g$, where $t\\in T(B)$ acts on $V_\\alpha(B)$ by multiplication by $\\chi_\\alpha(t)$. It is a closed immersion. Its image is smooth with geometrically connected fibres, and over every algebraically closed $A$-field its image is the $\\alpha$-root subgroup in [lem-sfb-reductive-root-subgroup-parametrizations]. The homomorphism and its closed image commute with every base change $A\\to B$, including successive base changes; uniqueness holds after every such base change. No global basis of $\\mathfrak g_\\alpha$ is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Theorem 4.1.4, printed p.110, and its proof, pp.116-118; Remark 4.2.4. Closed canonical exponential of the root line, uniqueness and arbitrary base change. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness supplies local finite presentation; since $G$ is affine of finite type over the affine base, it is quasi-compact and quasi-separated, hence of finite presentation. By [lem-sfb-relative-tangent-weight-base-change], the root line $L=\\mathfrak g_\\alpha$ and its coaction commute with every base change. In particular $\\alpha$ is a root on each geometric fibre. Apply [lem-sfb-relative-root-rank-one-centralizer] to obtain $H=Z_G(T_\\alpha)$ with tangent module $\\mathfrak t\\oplus L\\oplus\\mathfrak g_{-\\alpha}$. Any possible $T$-equivariant homomorphism $V_\\alpha\\to G$ factors through $H$: $T_\\alpha$ acts trivially on its source, so its image commutes with $T_\\alpha$ after every algebra extension, precisely the centralizer's defining condition. This factorization remains valid over every $A$-algebra.",
+   "uses": [
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-relative-root-rank-one-centralizer",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4 proof, printed p.116, first paragraph; Lemma 4.1.3."
+   }
+  },
+  {
+   "text": "Choose $\\lambda\\in\\operatorname{Hom}(M,\\mathbf Z)$ with $n=\\lambda(\\alpha)>0$: choose a nonzero coordinate of $\\alpha$ and give the corresponding coordinate projection its sign. Use conjugation through $\\lambda:\\mathbf G_m\\to T\\subseteq H$. Its tangent weights on $H$ are $0,n,-n$. By [lem-sfb-relative-dynamic-attracting-subgroup] the contracting subgroup $U\\subseteq H$ is smooth affine finitely presented with geometrically connected unipotent fibres and tangent module exactly $L$. It is $T$-stable: the orbit of $tut^{-1}$ is $t\\lambda(c)u\\lambda(c)^{-1}t^{-1}$, whose extension at zero is $1$. On each geometric fibre $U$ is therefore the root subgroup by [lem-sfb-reductive-root-subgroup-parametrizations], so it is isomorphic to $\\mathbf G_a$. The same dynamic theorem gives the contraction of $U$ inside itself.",
+   "uses": [
+    "lem-sfb-relative-dynamic-attracting-subgroup",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4 proof, printed pp.116-117, positive-weight subgroup; Theorem 4.1.7."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-contracted-smooth-curve-linearization] to $U$ with weight $n$. On each affine etale chart $S_i=\\operatorname{Spec}A_i$ it supplies a scaling-equivariant group isomorphism $q_i:\\mathbf G_a\\to U_{S_i}$. Its derivative is a basis $v_i=dq_i(1)$ of $L_i$. Define $e_i:V(L_i)\\to U_{S_i}$ by $e_i(bv_i)=q_i(b)$. This is a group isomorphism equivariant for $c\\cdot v=c^nv$, and its derivative is the identity of $L_i$. This construction uses each chart's basis only temporarily.",
+   "uses": [
+    "lem-sfb-contracted-smooth-curve-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4 proof, printed pp.117-118, normalization after Lemma 4.2.2."
+   }
+  },
+  {
+   "text": "For any ring $R$ and $n>0$, a morphism $f:\\mathbf A^1_R\\to\\mathbf A^1_R$ equivariant for $c\\cdot x=c^nx$ is a polynomial $\\sum a_jx^j$ satisfying $\\sum a_jc^{nj}x^j=\\sum a_jc^nx^j$ in $R[c,c^{-1},x]$. Independence of Laurent monomials implies $a_j=0$ for $j\\ne1$; hence $f(x)=a_1x$. This works over nonreduced rings and when $n$ is not a unit. In the coordinates of Step 3 it shows that a scaling-equivariant map of these line groups is uniquely determined by its tangent map. On every overlap $e_j^{-1}e_i$ has tangent identity and is scaling-equivariant, so it is the identity. For the universal $t\\in T$ over $S_i\\times_ST$, conjugation by $t$ on $U$ commutes with $\\lambda$ and has derivative multiplication by $\\chi_\\alpha(t)$. The same polynomial calculation therefore gives $t e_i(v)t^{-1}=e_i(\\chi_\\alpha(t)v)$. Thus the $e_i$ are $T$-equivariant, as maps of schemes, rather than merely on residue-field points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4 proof, printed p.117, equivariant polynomial calculation; agent expansion of full torus equivariance."
+   }
+  },
+  {
+   "text": "The etale covering is fpqc by [lem-weil-pbc-fpqc-finer-than-etale]; its pullbacks to $V_\\alpha$, $U$, their products and their torus products are fpqc by [lem-galois-fpqc-covering-base-change]. Apply [lem-weil-pbc-fpqc-representable-descent] to the compatible maps $e_i$ and separately to $e_i^{-1}$. It gives inverse global maps $e:V_\\alpha\\simeq U$; equality after these covers proves that they are inverses. Checking multiplication, identity, $T$-equivariance and the tangent inclusion on the same covers gives all the asserted identities. Compose $e$ with the closed subgroup inclusions $U\\hookrightarrow H\\hookrightarrow G$ to define $\\exp_\\alpha$. Its closed image is $U$; smoothness, geometric connectedness and the geometric root-subgroup identification were established in Step 2.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4 proof, printed pp.116-118, etale-local argument and descent; Stacks Tag 023Q, lemma-fpqc-universal-effective-epimorphisms."
+   }
+  },
+  {
+   "text": "Let $f:V_\\alpha\\to G$ be any $T$-equivariant group homomorphism with the prescribed derivative. Step 1 factors it through $H$. Each source point $v$ has contracting orbit $c\\mapsto c^nv$ with value zero at zero. Equivariant functoriality in [lem-sfb-relative-dynamic-attracting-subgroup] therefore factors $f$ through $U$. On each chart of Step 3, $e_i^{-1}f$ is a scaling-equivariant endomorphism of the additive line with tangent identity. Step 4 makes it the identity. Uniqueness of morphism descent in [lem-weil-pbc-fpqc-representable-descent], on the pulled-back fpqc cover of Step 5, implies $f=\\exp_\\alpha$. This proves uniqueness among all the stated homomorphisms, without assuming in advance that $f$ is an immersion.",
+   "uses": [
+    "lem-sfb-relative-dynamic-attracting-subgroup",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4 proof, printed pp.116-117, factorization through the contracting subgroup and uniqueness."
+   }
+  },
+  {
+   "text": "For an arbitrary $A$-algebra $B$, including nonflat and non-Noetherian ones, [lem-sfb-relative-tangent-weight-base-change] identifies the source after base change with the additive group of $B\\otimes_A L$ and identifies its derivative. The centralizer and dynamic subgroup identifications in [lem-sfb-relative-root-rank-one-centralizer] and [lem-sfb-relative-dynamic-attracting-subgroup] identify $H_B,U_B$ with the corresponding functors over $B$. The maps $e_i$ and their inverses pull back to an etale cover of $\\operatorname{Spec}B$, so Steps 4 and 6 apply over $B$ verbatim: their only ring calculation is equality of Laurent-polynomial coefficients. The pullback of $\\exp_\\alpha$ is therefore the unique map with the required derivative and equivariance over $B$, with closed image $U_B$. For $A\\to B\\to C$, both constructions over $C$ have these properties and hence agree. If $B$ is the zero ring all schemes concerned are empty over its spectrum and the assertions hold uniquely.",
+   "uses": [
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-relative-root-rank-one-centralizer",
+    "lem-sfb-relative-dynamic-attracting-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4 proof, printed p.116, base change from uniqueness; agent expansion for arbitrary and successive base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-sfb-relative-root-rank-one-centralizer",
+  "lem-sfb-relative-dynamic-attracting-subgroup",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-contracted-smooth-curve-linearization",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Supporting relative root-group prerequisite on the imported alteration/moduli route; Conrad Theorem 4.1.4 proof read online, archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a reductive group scheme and a split maximal torus a root line has a unique torus equivariant exponential closed immersion of its additive vector group",
+   "results": "{\"t\": \"2026-10-24T04:47:56Z\", \"tool\": \"leansearch\", \"query\": \"For a reductive group scheme and a split maximal torus a root line has a unique torus equivariant exponential closed immersion of its additive vector group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.root.congr_simp\", \"RootPairing.restrictScalars_coe_root\", \"RootPairing.Base.linearIndepOn_root\", \"RootSystem.ext\", \"RootPairing.pairing_eq_add_of_root_eq_smul_add_smul\", \"LieAlgebra.IsKilling.rootSystem_toLinearMap_apply\", \"LieAlgebra.rootSpace.congr_simp\", \"LieAlgebra.IsKilling.rootSystem_root_apply\"], \"digest\": \"d308f03167d9d755\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"root\"",
+   "results": "{\"t\": \"2026-10-24T04:47:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"root\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "exponential|root.?group|root.?subgroup|reductive",
+   "results": "{\"t\": \"2026-10-24T04:47:58Z\", \"tool\": \"grep\", \"query\": \"exponential|root.?group|root.?subgroup|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical root group exponential of the additive root line in a reductive group scheme over a commutative base ring",
+   "results": "{\"t\": \"2026-10-24T04:47:59Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical root group exponential of the additive root line in a reductive group scheme over a commutative base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.root'In\", \"RootPairing.EmbeddedG2.shortAddLongRoot\", \"RootPairing.EmbeddedG2.longRoot\", \"RootPairing.rootSpanMem\", \"RootPairing.EmbeddedG2\", \"RootPairing.EmbeddedG2.indexEquivAllRoots\", \"RootPairing.EmbeddedG2.indexEquivAllRoots_apply_coe\", \"RootPairing.EmbeddedG2.allRoots_subset_range_root\"], \"digest\": \"8b78996e57adcebe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical root group exponential of the additive root line in a reductive group scheme over a commutative base ring",
+   "results": "{\"t\": \"2026-10-24T05:16:51Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical root group exponential of the additive root line in a reductive group scheme over a commutative base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.root'In\", \"RootPairing.EmbeddedG2.shortAddLongRoot\", \"RootPairing.EmbeddedG2.longRoot\", \"RootPairing.rootSpanMem\", \"RootPairing.EmbeddedG2\", \"RootPairing.EmbeddedG2.indexEquivAllRoots\", \"RootPairing.EmbeddedG2.indexEquivAllRoots_apply_coe\", \"RootPairing.EmbeddedG2.allRoots_subset_range_root\"], \"digest\": \"8b78996e57adcebe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and ordinary closed-immersion facts do not construct relative root group exponentials with the stated uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A root line of a reductive group scheme admits a unique torus equivariant additive exponential closed immersion",
+   "results": "{\"t\": \"2026-10-24T05:17:52Z\", \"tool\": \"leansearch\", \"query\": \"A root line of a reductive group scheme admits a unique torus equivariant additive exponential closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.root.congr_simp\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"RootPairing.restrictScalars_coe_root\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"RootPairing.root\", \"AlgebraicGeometry.instIsClosedImmersionOfSubsingletonCarrierCarrierCommRingCatOfIsOver\", \"AlgebraicGeometry.instIsClosedImmersionMorphismRestrict\"], \"digest\": \"d59632136395471f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and ordinary closed-immersion facts do not construct relative root group exponentials with the stated uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"root\"",
+   "results": "{\"t\": \"2026-10-24T05:17:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"root\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and ordinary closed-immersion facts do not construct relative root group exponentials with the stated uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "exponential|root.?group|root.?subgroup|reductive",
+   "results": "{\"t\": \"2026-10-24T05:17:53Z\", \"tool\": \"grep\", \"query\": \"exponential|root.?group|root.?subgroup|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and ordinary closed-immersion facts do not construct relative root group exponentials with the stated uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-split-root-data-weyl-lifts",
+  "date": "2026-10-24",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Theorem 4.1.4, printed p.110, and its proof, pp.116-118; Remark 4.2.4. Closed canonical exponential of the root line, uniqueness and arbitrary base change. ",
+   "via": [
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-canonical-root-exponential",
+  "worker": "stage1",
+  "summary": "Followed Conrad’s dynamic construction: isolated the rank-one centralizer, relative attracting subgroup, and etale local contracted-curve linearization; retained normalization, Laurent-polynomial uniqueness, torus equivariance, gluing and arbitrary base change in the parent. Statement unchanged; no Lean declaration attaches.",
+  "blueprint": "Supporting canonical root exponential prerequisite of the imported det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli route, at the exact place retained in blueprint.from.place. No matching blueprint root-group statement was found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Convert the etale linearization cover to an fpqc cover for morphism descent; no group-structural result supplies this generic covering fact."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Base change the cover to the vector group and its products to test identities."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Glue the compatible local group maps and inverses and detect their equality; the unit has no substitute for general morphism descent."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Unpack smoothness and finite presentation before applying the relative structural lemmas; this is generic morphism terminology."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Unpack smoothness and finite presentation before applying the relative structural lemmas; this is generic morphism terminology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-87c45cb5f",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-87c45cb5f (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged from base, 7 steps) and the 3 new statement-only nodes in full, with every cited statement and definition. Conrad's Reductive group schemes is not archived and network access is blocked, so the cited places (Thm 4.1.4, Lemma 4.1.3, Thm 4.1.7/Prop 4.1.10, the vector-group linearization lemma) were checked against their standard content and the mathematics was verified directly; WANTED and proof_origin agent are correct. Step 1: alpha=d*alpha0 puts T_alpha in ker chi_alpha, so any equivariant map centralizes T_alpha functorially. Step 2: signed coordinate projection gives n>0, lambda-weights 0,n,-n, dynamic node gives U with Lie=g_alpha; U is T-stable because T is commutative; on geometric fibres U is the root subgroup by the uniqueness clause of root-subgroup-parametrizations. Step 3: every hypothesis of the curve node is supplied. Step 4: the Laurent coefficient argument is valid over any ring and any n; overlaps and full T-equivariance over S_i x T hold via the derivative Ad(t)|_L = chi_alpha(t). Step 5: the fpqc nodes say exactly what is used; closedness via U in H in G. Step 6: dynamic functoriality with H'=V_alpha (U_a'=V_alpha since n>0), then the chart computation and descent uniqueness. Step 7: all nodes hold over an arbitrary B; zero ring handled. New nodes are true: centralizer (reduced root system gives roots +-alpha; r=1 gives H=G); dynamic (U_a closed, G_m schematically dense in A^1); curve (tested over k[eps] in char p with n=p: positive-weight actions are coboundary-linearizable; the Witt-cocycle deformation admits none). They are not clauses of the item and have no relative duplicate (all existing related nodes are over a field or assume the exponential). Searches recorded, blueprint fields consistent with the inherited null ancestor, tool_uses (fpqc descent, two definitions) accepted, no SGA. The inherited theorem stmt_dep lem-sfb-relative-tangent-weight-base-change is unchanged from base. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeCanonicalRootExponential",
+  "declaration": "AlgebraicGeometry.RelativeRootExponential.exists_unique",
+  "declarations": [
+   "AlgebraicGeometry.RelativeRootExponential.Line",
+   "AlgebraicGeometry.RelativeRootExponential.vector",
+   "AlgebraicGeometry.RelativeRootExponential.vectorPoint",
+   "AlgebraicGeometry.RelativeRootExponential.characterValue",
+   "AlgebraicGeometry.RelativeRootExponential.infinitesimal",
+   "AlgebraicGeometry.RelativeRootExponential.basePoint",
+   "AlgebraicGeometry.RelativeRootExponential.forgetPoint",
+   "AlgebraicGeometry.RelativeRootExponential.evaluate",
+   "AlgebraicGeometry.RelativeRootExponential.IsExponentialOver",
+   "AlgebraicGeometry.RelativeRootExponential.IsGeometricRootImage",
+   "AlgebraicGeometry.RelativeRootExponential.exists_unique"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeCanonicalRootExponential.lean",
+  "statement": "theorem exists_unique [Nontrivial A] [IsNoetherianRing A] [IsAffine G.X.left] [Smooth G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (i : ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ)) ⟶ G) [IsClosedImmersion i.hom.hom.left] (hred : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra A Ω], ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A Ω)))).mapGrp.obj G)) (hmax : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra A Ω], ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A Ω)))).mapGrp.map i)) (hconj : a.smul = (CartesianMonoidalCategory.fst _ _ ≫ i.hom.hom) * CartesianMonoidalCategory.snd _ _ * (CartesianMonoidalCategory.fst _ _ ≫ i.hom.hom)⁻¹) (D : RelativeTangentWeights.Data r G a) (α : ULift.{u} (Fin r → ℤ)) (hα : α ≠ 0) (hrank : ∀ p : PrimeSpectrum A, Module.rankAtStalk (Line D α) p = 1) : ∃ q : vector D α ⟶ G.X, IsExponentialOver D α i A ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A A)))).map q) ∧ (∀ q' : vector D α ⟶ G.X, IsExponentialOver D α i A ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A A)))).map q') → q' = q) ∧ IsClosedImmersion q.left ∧ Smooth (vector D α).hom ∧ GeometricallyConnected (vector D α).hom ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra A Ω], IsGeometricRootImage D α i q Ω) ∧ (∀ (B : Type u) [CommRing B] [Algebra A B], IsExponentialOver D α i B ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A B)))).map q) ∧ ∀ qB : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A B)))).obj (vector D α) ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A B)))).obj G.X, IsExponentialOver D α i B qB → qB = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A B)))).map q) ∧ (∀ (B C : Type u) [CommRing B] [Algebra A B] [CommRing C] [Algebra A C] (f : B →ₐ[A] C) (v : B ⊗[A] Line D α), points.map G.X f (vectorPoint D α v ≫ q) = vectorPoint D α (TensorProduct.map f.toLinearMap LinearMap.id v) ≫ q)",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The actual Spec Sym(L-dual) is used, with canonical evaluation at tensor vectors. IsExponentialOver encodes addition, identity, full character equivariance and tangent inclusion over every algebra; all base-changed maps are the actual Over.pullback.map of q, unique among every competing map. Naturality under every algebra homomorphism and arbitrary-base uniqueness include successive base changes. D is the recorded canonical tangent-weight comparison datum; its existence follows from the recorded dependency under conjugation, so it is an interface parameter rather than an added mathematical assumption. Helpers are specialized to this node and have real data. The finite-projective weight conclusion of D together with stalk rank one is exactly the locally free rank-one hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b43258295",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read item, all stmt_deps, module, report, RelativeTangentWeights.Data, the reductive/maximal-torus predicates, IsStable, IsClosedSubgroupScheme and reductive_root_subgroup_parametrizations. Every hypothesis matches: Noetherian nonzero A, smooth affine finite-type G, closed torus i, geometric reductive and maximal-torus conditions, α≠0, stalk rank 1 with D.weight_projective = locally free rank one. D and a are unique interface data (normalize/natural/differentiated pin E and rho; hconj pins a.smul), and exists_data supplies D under these hypotheses. Conclusions: V=Spec Sym(L*); homomorphism, χ_α-equivariance and tangent inclusion on all C-points; uniqueness among all maps; closed immersion; smooth geometrically connected image; geometric image meets the root-subgroup uniqueness characterization (tangent range via D.weight_baseChange); arbitrary and successive base change with uniqueness. Edge cases r=0, B=0, nonflat B and any characteristic are covered. Statement record matches the file after normalization; stmt_deps unchanged; owners of ringDiagonalizableGroup, weightSpace, GrpObj.Lie and IsReductive reached through cited nodes; docstrings and 7 proof steps present; only the theorem is sorry. No fixes, so no compile."
+ }
+}

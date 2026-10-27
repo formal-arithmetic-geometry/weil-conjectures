@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-finite-reduction-base-change-source",
+ "kind": "statement",
+ "title": "Finite reduction of the ordinary source arrow in smooth base change",
+ "statement": "Fix the finite-coefficient setting P of [def-pur-conventions], with level n and 1 <= m <= n. Let X, X prime, Y, Y prime be separated finite-type schemes over its algebraically closed base field, and let u:X prime -> X, f prime:X prime -> Y prime, f:X -> Y and v:Y prime -> Y form a Cartesian square, with f and f prime smooth separated of relative dimension d. Use the actual coefficient quotient Q_T=P.finiteReduction(m)_T, the pullback and source comparisons of [def-pur-finite-reduction-comparisons], and the root-normalized base-change source b of [def-pur-smooth-pullback-exchange]. For every K in the ordinary intrinsic pro-etale derived category over Y (without a finite-Tor or constructibility assumption), Q_(X prime)(b_A(K)) followed by the source comparison for f prime and then the shifted pullback of the input comparison p_v(K) equals p_u(H_f(K)) followed by u_B^*(s_f(K)) and then b_B(Q_Y(K)). Here H_f(K)=f_A^*K(d)[2d], s_f is the specified finite reduction source comparison and p_h is the actual scalar/pullback comparison. These are exactly the two paths in the source square in finiteReductionOfBaseChange. No exceptional inverse image or purity map enters this statement, and v is arbitrary.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 2 and 4: coefficient compatibility of pullback, twist and shift and the source arrow in the base-change square"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-smooth-pullback-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Choose a primitive ell^n root using invertibility of its order in the algebraically closed base. Its ell^(n-m) power is a primitive ell^m root. Apply the existing unique source-comparison normalization to both vertical source maps and the existing base-change-source normalization at both levels. Prove input naturality of the source chart: tensor-shift naturality, tensor naturality in the first variable, the shifted right unitor, then exact realization and its shift. Prove naturality of the actual coefficient/pullback comparison by expressing it as the composite natural isomorphism in its definition.",
+   "uses": [
+    "def-pur-finite-reduction-comparisons",
+    "def-pur-smooth-pullback-exchange",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the desired equation with the invertible smaller-level output root chart. Move the input coefficient comparison through this chart by its proved input naturality. Use the source-comparison normalization twice and base-change-source normalization at both levels. Naturality of the coefficient/pullback comparison moves the original root chart through the left vertical edge. The common leading reduced pullback of the original root chart then factors off. The remaining equality is exactly finiteReduction_shiftedPullbackCube with r=2d. Whisker that equality with the common leading arrow and cancel the output chart. All these cancellations are actual Lean proofs; the remaining lemma concerns only ordinary inverse images and scalar shifts, with no Tate line or purity map.",
+   "uses": [
+    "lem-pur-finite-reduction-shifted-pullback-cube",
+    "def-pur-finite-reduction-comparisons",
+    "def-pur-smooth-pullback-exchange"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-smooth-pullback-exchange",
+  "def-pur-finite-reduction-root-charts",
+  "lem-pur-finite-reduction-shifted-pullback-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q7",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 2 and 4; Lean root-chart naturality and cancellation, reducing to the shifted ordinary pullback cube"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coefficient extension commutes with pullback composition and a Cartesian square in derived sheaves",
+   "results": "Eight hits, including SheafOfModules.pullbackComp, pullback_assoc and conjugateEquiv_pullbackComp_inv. They give general underived compositor calculus, not the intrinsic derived quotient source equation.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension commutes with the ordinary pullback compositor for a Cartesian square",
+   "results": "Eight hits, including Scheme.Modules.pullbackComp and PresheafOfModules.pullbackComp. None states this normalized derived quotient equation.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*[Pp]ullback.*[Cc]omp|[Pp]ullback.*[Cc]omp.*reduction",
+   "results": "Zero Mathlib hits. Whole-DAG audit of coefficient/reduction and pullback compositor, pullback composition or base-change source found the rational scalar lemma lem-pur-twisted-pullback-square-scalars and the finite tensor reassociation lemma lem-pur-finite-tensor-presentation-reduction; their Lean statements do not give this intrinsic quotient source square.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionOfPurity",
+  "date": "2026-10-25",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 4, source part of the smooth base-change square",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionBaseChangeSource",
+  "file": "lean/Sheaf/Paper/FiniteReductionBaseChangeSource.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReduction_baseChangeSource",
+  "statement": "theorem finiteReduction_baseChangeSource\n    (K : Scheme.proEtaleDerivedCategory Y P.Ring) :\n    ((P.finiteReduction m hm hmn X').map\n        (P.finiteReductionBaseChangeSource u f' f v sq d K).hom ≫\n      (P.finiteReductionSourceComparison m hm hmn f' d\n        ((P.finiteReductionPullback v).obj K)).hom ≫\n      ((P.finiteReductionSetting m hm).compositionShiftedPullback f' d).map\n        (P.finiteReductionPullbackComparison m hm hmn v K).hom =\n    (P.finiteReductionPullbackComparison m hm hmn u\n        ((P.compositionShiftedPullback f d).obj K)).hom ≫\n      ((P.finiteReductionSetting m hm).finiteReductionPullback u).map\n        (P.finiteReductionSourceComparison m hm hmn f d K).hom ≫\n      ((P.finiteReductionSetting m hm).finiteReductionBaseChangeSource\n        u f' f v sq d ((P.finiteReduction m hm hmn Y).obj K)).hom)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T122842-L-1813084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T164145-L-962378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

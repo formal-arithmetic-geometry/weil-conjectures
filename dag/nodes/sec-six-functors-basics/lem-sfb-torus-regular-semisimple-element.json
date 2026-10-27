@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-torus-regular-semisimple-element",
+ "kind": "statement",
+ "title": "One semisimple torus element detects the whole scheme centralizer",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group scheme $T$ isomorphic over $k$ to $(\\mathbf G_m)^r$ for some integer $r\\geq0$ [def-sc-gm-ga]. Let $G$ be smooth and connected, and let $T\\subseteq G$ be a torus. A point $s\\in G(k)$ is semisimple if its image in every finite-dimensional algebraic representation $G\\to\\operatorname{GL}(V)$ is diagonalizable; here $V$ is a finite-dimensional $k$-vector space, $\\operatorname{GL}(V)$ is its group scheme of invertible linear maps, and an algebraic representation is a homomorphism of group schemes. There exists a semisimple point $s\\in T(k)$ with the following property for every commutative $k$-algebra $A$ and every $g\\in G(A)$: $$gs_A=s_Ag\\quad\\Longleftrightarrow\\quad g_{A\\prime}t=tg_{A\\prime}\\text{ for every commutative }A\\text{-algebra }A\\prime\\text{ and every }t\\in T(A\\prime).$$ Here $s_A$ denotes scalar extension of $s$. Thus the centralizer functors of $s$ and of $T$ agree on all algebras, including nonreduced ones.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.42 and its proof, printed p.339: a faithful representation and separation of its finitely many torus weights. The conclusion is equality of centralizer schemes, not just equality on field-valued points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-semisimple-group-scheme-point"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-kernel-subgroup] to $\\mathrm{id}_G$: its kernel is the identity subgroup $1\\subseteq G$, which is normal since $\\{1\\}$ is normal in every $G(A)$. Apply [lem-sfb-normal-subgroup-representation-kernel] with $N=1$. This gives $n\\geq1$ and a representation $\\rho:G\\to\\mathrm{GL}_{n,k}$ with kernel $1$ on every commutative $k$-algebra. Thus every $\\rho_A$ is injective: $\\rho_A(x)=\\rho_A(y)$ implies $\\rho_A(xy^{-1})=I_n$, hence $xy^{-1}=1$. Put $V=k^n$. Affineness and finite type are exactly the hypotheses of the representation-kernel lemma.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-normal-subgroup-representation-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42, first sentence, printed p.339; Corollary 5.19, printed p.103, applied to the identity subgroup (an alternative to Theorem 4.9, printed p.87)."
+   }
+  },
+  {
+   "text": "Restrict $\\rho$ to $T$; this is a homomorphism $T\\to\\mathrm{GL}_{n,k}=\\operatorname{GL}(V)$, $V=k^n$. Apply [lem-sfb-split-torus-representation-weight-decomposition]: $V=\\bigoplus_{\\chi\\in\\Omega}V_\\chi$ for a finite set $\\Omega$ of pairwise distinct characters $\\chi:T\\to\\mathbf G_m$ with $V_\\chi\\ne0$, where $\\rho_B(t)(v\\otimes1)=v\\otimes\\chi_B(t)$ for $v\\in V_\\chi$, every commutative $k$-algebra $B$ and every $t\\in T(B)$. Concatenate bases of the $V_\\chi$ to a basis of $V$. By the same node, in the induced $B$-basis of $V\\otimes_kB$ the matrix of $\\rho_B(t)$ is block diagonal with scalar block $\\chi_B(t)I$, for every $B$ and every $t\\in T(B)$. From now on write matrices in this basis: the change of basis is conjugation by one matrix in $\\mathrm{GL}_n(k)$, so it commutes with every scalar extension and keeps the injectivity of step 1.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42 and Theorem 12.12(a)--(d), printed pp.339 and 234--235."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-torus-finite-character-separation] to this finite character set $\\Omega$, obtaining $s\\in T(k)$ with pairwise distinct scalars $\\lambda_\\chi=\\chi_k(s)$. This point is semisimple in the precise sense of the item. Indeed, for any finite-dimensional algebraic representation $\\eta:G\\to\\mathrm{GL}(W)$, apply [lem-sfb-split-torus-representation-weight-decomposition] to $\\eta|_T$. With $B=k$ and $t=s$ it says that, in a basis of $W$ concatenated from bases of its weight spaces, $\\eta_k(s)$ is diagonal with entries $\\psi_k(s)$; for $W=0$ there is nothing to show. No separation condition on the weights of $W$ is necessary.",
+   "uses": [
+    "lem-sfb-torus-finite-character-separation",
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42, character-equality loci and semisimplicity, printed p.339; Theorem 12.12, printed p.235."
+   }
+  },
+  {
+   "text": "Fix a commutative $k$-algebra $A$ and $g\\in G(A)$ with $gs_A=s_Ag$. Write $M=\\rho_A(g)$ in the weight basis, using the pointwise matrix interpretation in [def-sc-general-linear-group]. Since $\\rho_A(s_A)$ has scalar block $\\lambda_\\chi I$, its commutation with $M$ gives $$(\\lambda_\\psi-\\lambda_\\chi)M_{\\chi\\psi}=0.$$ For $\\chi\\ne\\psi$ the scalar difference is nonzero in $k$, hence has an inverse in $k$ whose image in $A$ is an inverse. Multiplying by it gives $M_{\\chi\\psi}=0$. Thus $M$ is block diagonal. Over any commutative $A$-algebra $B$, these zero blocks stay zero, while $\\rho_B(t)$ for $t\\in T(B)$ is scalar on each block by step 2. Block multiplication gives $\\rho_B(g_B)\\rho_B(t)=\\rho_B(t)\\rho_B(g_B)$. Injectivity of $\\rho_B$ from step 1 gives $g_Bt=tg_B$. This computation also applies when $A$ or $B$ is the zero ring.",
+   "uses": [
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42, weight-preserving centralizer argument, printed p.339; the displayed block equations supply its arbitrary-algebra refinement."
+   }
+  },
+  {
+   "text": "Conversely, if $g_B$ commutes with every $t\\in T(B)$ for every commutative $A$-algebra $B$, take $B=A$ with its identity structure map and $t=s_A$. This gives $gs_A=s_Ag$. Together with step 4 this is the required equivalence, for the single point $s$ fixed in step 3 and for every $A,g$. The identities are natural under change of algebra because $s_A$ and the group homomorphisms are scalar extensions. Hence the two centralizer functors agree, including on nonreduced algebras. For the rank-zero torus the only character is trivial, so all blocks coalesce and $s=1$ works.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42, concluding equality of centralizers, printed p.339; direct functor-of-points verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-normal-subgroup-representation-kernel",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-torus-finite-character-separation",
+  "def-sc-general-linear-group"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.42, printed p.339: weight-separation route, with the final field-points/smoothness argument replaced by the explicit block calculation over every algebra; faithful representation obtained from Corollary 5.19."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a torus acting on an affine finite type scheme over an algebraically closed field there is an element with the same fixed subscheme as the whole torus",
+   "results": "8 hits; top: top_fixedByFinite, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial', FixedPoints.toAlgAut_surjective, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, FixedPoints.toAlgHom_bijective, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest 011cf7fb00c8f544.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separate finitely many torus weights by one group element so its fixed locus equals the torus fixed locus",
+   "results": "8 hits; top: SubMulAction.fixingSubgroup_map_conj_eq, AddAction.fixedBy_subset_fixedBy_zsmul, Representation.invariants_eq_inter, AddAction.mem_fixedBy_zmultiples_iff_mem_fixedBy, fixingSubgroup_iUnion, MulAction.mem_fixedBy_zpowers_iff_mem_fixedBy, AddAction.vadd_mem_fixedBy_iff_mem_fixedBy, fixedPoints_subgroup_iSup. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest 47e00a1a2d33bf5e.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weight\", \"fixed\"",
+   "results": "0 hits; top: none. No matching source lines or declarations returned. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weightSpace|eigenspace|torus",
+   "results": "0 hits; top: none. No matching source lines or declarations returned. Mathlib/AlgebraicGeometry/ searched. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus subgroup of a smooth connected affine algebraic group over an algebraically closed field has a semisimple element whose scheme centralizer equals the torus centralizer",
+   "results": "8 hits; top: LieAlgebra.exists_isCartanSubalgebra_engel, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra, Module.End.IsSemisimple.of_mem_adjoin_pair, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieAlgebra.center_le_maxNilpotentIdeal, LieSubalgebra.ucs_eq_self_of_isCartanSubalgebra, LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest 562eadf817182bce.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a semisimple element of a torus subgroup whose centralizer group scheme equals the centralizer of the torus",
+   "results": "8 hits; LieAlgebra.exists_isCartanSubalgebra_engel, Subgroup.centralizer_eq_top_iff_subset, LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, commutator_centralizer_commutator_le_center, Subgroup.center_eq_infi', LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra. Read returned signatures. Source subdirectory: whole Mathlib / remote index. Logged digest 66073b95a42cc774.",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract group centralizers or Lie algebras, and do not assert equality of algebraic-group centralizer functors on all algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "centralizer|regularSemisimple|regular.semisimple",
+   "results": "0 hits; none. Read returned signatures. Source subdirectory: AlgebraicGeometry. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract group centralizers or Lie algebras, and do not assert equality of algebraic-group centralizer functors on all algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"exists\"",
+   "results": "0 hits; none. Read returned signatures. Source subdirectory: whole Mathlib / remote index. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract group centralizers or Lie algebras, and do not assert equality of algebraic-group centralizer functors on all algebras."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-centralizer-smooth-connected",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Lemma 16.42 and its proof, printed p.339: a faithful representation and separation of its finitely many torus weights. The conclusion is equality of centralizer schemes, not just equality on field-valued points.",
+   "via": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-regular-semisimple-element",
+  "worker": "stage1",
+  "summary": "Read Milne Lemma 16.42, Theorem 12.12 and the affine-linearization results. Kept the statement unchanged; reused the existing scheme-kernel representation and universal torus-weight clauses, isolated finite character separation, and proved the arbitrary-test-algebra centralizer equality by invertible scalar block equations. Checked rank zero, repeated weights, positive characteristic and nonreduced test algebras.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the recorded alteration/moduli/reductive-centre ancestry: Milne Lemma 16.42 in the torus-centralizer input. The ancestor tool reports blueprint.from.node = None; its existing provenance chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic kernel-as-closed-subgroup fact, applied to id_G to meet the existing representation-kernel theorem hypotheses; not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kernel-subgroup"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-5fe8d61cc",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-5fe8d61cc (reviewer sub-agent of L); spot-checked: Read in full: the item, the delivered new node lem-sfb-torus-finite-character-separation and every cited statement. Sources checked: Milne iAG2017 Lemma 16.42 with its proof (p.339) and Theorem 12.12 with Remark 12.13 (pp.234-235). The item statement is unchanged from the base (compared against about 60 earlier run snapshots) and no other group has split it. The route matches Milne: a faithful representation, torus weights, and a point s outside the finitely many loci where two characters agree. Milne's final smoothness/k-points step (13.8) is replaced by a block-matrix computation over every algebra A. That computation is correct: the scalar differences lie in k^x, so they stay units in A (including A=0), and injectivity of rho_B on B-points closes it. Step 5 (the converse) is correct and fixes s before A and g. The new separation node is true and is not a restatement of the item: each nontrivial character is a monomial x^m with m nonzero, and the complement of finitely many proper closed loci has a point because k is infinite. Small cases checked: r=0, an empty set, a single character, and 1, t, t^p in characteristic p (every t in F_p fails by Fermat, but k infinite gives a good t). It is false over a finite field (t and t^q agree on F_q^x), so the algebraically closed hypothesis is needed. One fault, repaired (C7/C3-type): steps 2 and 3 took the weight decomposition of a G_m^r-representation from a side clause of the unsplit lem-sfb-torus-coherent-fixed-point-formula, instantiated with H=T and Z=Spec k. That node is an agent-formulated fixed-point theorem whose sources (Nielsen, Iversen) are WANTED, while Milne 12.12, which Lemma 16.42 itself cites, gives the fact directly. The DAG has no rank-r version: gm-representation-weight-basis is rank 1 only, character-eigenspaces-independent gives independence but not spanning, and central-torus-faithful-weight-blocks builds its own representation. FIX: I added the statement-only node lem-sfb-split-torus-representation-weight-decomposition (Milne 12.12 (a)=>(d) for G_m^r: pointwise V_chi, a direct sum, and scalar blocks over every A), with status unsplit and created.by reviewer. Steps 2 and 3 now cite it instead of the fixed-point-formula and comodule-dictionary nodes, and proof_deps is the union of the step citations. Batch-5 flag: the citation of lem-sfb-normal-subgroup-representation-kernel reaches lem-trf-vector-subspace-complement. That node is the Mathlib leaf Submodule.exists_isCompl (existence of a complement of a vector subspace), generic linear algebra and not a step of the trace formula or Poincare duality, so the citation is accepted. The tool_uses entry for lem-sc-kernel-subgroup is accepted. No SGA source and no cycle.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusRegularSemisimpleElement",
+  "declaration": "AlgebraicGeometry.torus_exists_semisimplePoint_centralizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusRegularSemisimpleElement.lean",
+  "statement": "theorem torus_exists_semisimplePoint_centralizer {k : Type u} [Field k] [IsAlgClosed k] (G T : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [IsAffine T.X.left] [LocallyOfFiniteType T.X.hom] [QuasiCompact T.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (i : T ⟶ G) (hi : IsClosedSubgroupScheme i.hom.hom) (hT : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) : ∃ s : StandardGroupSchemes.affine k k ⟶ T.X, IsSemisimpleGroupSchemePoint G.X (s ≫ i.hom.hom) ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (g : StandardGroupSchemes.affine k A ⟶ G.X), Commute g (StandardGroupSchemes.map k (Algebra.ofId k A) ≫ s ≫ i.hom.hom) ↔ g ∈ ReductiveTorusCentralizer.centralizerPoints i A",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b05592088",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read item, all stmt_deps, new def node/module, item module, report, and declarations centralizerPoints, StandardGroupSchemes.affine/map, splitTorus, GeneralLinearGroup/homMulEquiv, RationalHom. Clause by clause: alg-closed k, affine finite-type G,T, Smooth+Connected G, closed subgroup i, T ≅ splitTorus k r (group iso, r=0 included), ∃ s before A,g, semisimplicity of s≫i, Commute g s_A ↔ centralizerPoints (all k-algebra maps A→B = all A-algebras, no reducedness). New def IsSemisimpleGroupSchemePoint is a real Prop: every finite ι:Type u, every RationalHom with IsMonHom, ∃ P d with P⁻¹ρ(s)P diagonal; reuses upstream GL/RationalHom; no duplicate found in DAG/Sheaf/WeilConjectures. Item node diff vs side-live = lean record + 3 used stmt_deps; statements verbatim; docstrings carry source and 5 proof steps; sorry only; report has Worker report and Second reading by Q40. Edge cases (rank 0, zero/nonreduced rings, empty rep, char p, universes) ok. No change, so no compile. Advisory: def-sc-general-linear-group unrecorded; GL comes via the def-wf-algebraic-representations module."
+ }
+}

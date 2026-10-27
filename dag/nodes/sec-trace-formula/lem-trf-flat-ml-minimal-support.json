@@ -14,68 +14,53 @@
  ],
  "proof": [
   {
-   "text": "For each submodule $N\\subseteq E$, write $i_N:N\\hookrightarrow E$ and $T_N=i_N\\otimes\\mathrm{id}_M$. By flatness [def-weil-pbc-flat-ring-map], $T_N$ is injective. Let $I$ be the set of submodules $N$ for which $x\\in\\operatorname{im}T_N$; it is a set, being a subset of the power set of $E$, and is nonempty since $E\\in I$ and $T_E$ is the identity [def-weil-pbc-module-tensor-product]. Put $K=\\bigcap_{N\\in I}N$, $P=\\prod_{N\\in I}E/N$, and define the linear map $q:E\\to P$ by $q(e)=(e+N)_{N\\in I}$. For each $e\\in E$, $q(e)=0$ if and only if $e\\in N$ for every $N\\in I$. Hence $\\ker q=K$, so $0\\to K\\xrightarrow{i_K}E\\xrightarrow{q}P$ is exact.",
-   "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AS6 (lemma-minimal-contains), first paragraph and the quotient-product map"
-   }
-  },
-  {
-   "text": "Define $\\beta:P\\otimes_R M\\to\\prod_{N\\in I}((E/N)\\otimes_R M)$ by $\\beta((a_N)_N\\otimes m)=(a_N\\otimes m)_N$, using the bilinear universal property [def-weil-pbc-module-tensor-product]. The factor swaps $A\\otimes_R M\\to M\\otimes_R A$, $a\\otimes m\\mapsto m\\otimes a$, are well-defined linear maps by that same property; swapping again is the identity on pure tensors and hence on the whole module. With these swaps on its source and each target component, $\\beta$ is the map $\\theta_{M,(E/N)}$ of [def-trf-mittag-leffler-module]: the formulas agree on every pure tensor. That definition and the Mittag-Leffler hypothesis make $\\theta_{M,(E/N)}$ injective, so $\\beta$ is injective as well. The index $I$ is a set and each quotient is an $R$-module, exactly the hypotheses of the definition.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product",
-    "def-trf-mittag-leffler-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AS6 (lemma-minimal-contains), use of Proposition Tag 059M (proposition-ML-tensor), condition (2)"
-   }
-  },
-  {
-   "text": "For $N\\in I$ choose a lift $y_N\\in N\\otimes_R M$ with $T_N(y_N)=x$. Let $q_N:E\\to E/N$ be the quotient map. Since $q_Ni_N=0$, functoriality and the zero-map identity in [def-weil-pbc-module-tensor-product] give $(q_N\\otimes\\mathrm{id}_M)(x)=0$. The $N$th component of $\\beta((q\\otimes\\mathrm{id}_M)(x))$ equals $(q_N\\otimes\\mathrm{id}_M)(x)$: on $e\\otimes m$ both are $(e+N)\\otimes m$, and pure tensors generate. Thus every component is zero. Injectivity of $\\beta$ from Step 2 gives $(q\\otimes\\mathrm{id}_M)(x)=0$.",
+   "text": "Let $i_N:N\\hookrightarrow E$ denote inclusion and $T_N=i_N\\otimes\\mathrm{id}_M$. The submodules of $E$ form a set $\\operatorname{Sub}_R(E)\\subseteq\\mathcal P(E)$. Define $\\mathcal S=\\{N\\in\\operatorname{Sub}_R(E):x\\in\\operatorname{im}T_N\\}$. It contains $E$, because $i_E$ and its tensor map are identities [def-weil-pbc-module-tensor-product]. Put $K=\\bigcap_{N\\in\\mathcal S}N$ and $P=\\prod_{N\\in\\mathcal S}E/N$. The intersection is a submodule by closure under addition and scalar multiplication; the map $q:E\\to P$, $q(e)=(e+N)_{N\\in\\mathcal S}$, is linear componentwise.",
    "uses": [
     "def-weil-pbc-module-tensor-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AS6 (lemma-minimal-contains), the two displayed quotient-product maps"
+    "place": "Tag 0AS6 (lemma-minimal-contains), definition of the family I"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-flat-tensor-exact] to the exact sequence $0\\to K\\xrightarrow{i_K}E\\xrightarrow{q}P$ of Step 1, with the given flat module $M$. It gives $\\ker(q\\otimes\\mathrm{id}_M)=\\operatorname{im}(i_K\\otimes\\mathrm{id}_M)$. Step 3 therefore provides $y\\in K\\otimes_R M$ mapping to $x$. In particular $K\\in I$. By its definition as the intersection, $K\\subseteq N$ for every $N\\in I$. Consequently $K$ is the least supporting submodule. This application uses exactness at $E$, with the zero left endpoint; it makes no assumption that $q$ is surjective.",
+   "text": "Apply [lem-trf-ml-quotient-product-vanishing] to $J=\\mathcal S$ and $N_j=j\\subseteq E$. Its product and map are precisely $P$ and $q$: the $j$th component is $e+j$. For each fixed $j\\in\\mathcal S$, the support condition gives some $y\\in j\\otimes_R M$ with $T_j(y)=x$, exactly the image hypothesis; no compatible family of lifts is required. The given $M$ is Mittag-Leffler, so the lemma yields $(q\\otimes\\mathrm{id}_M)(x)=0$.",
    "uses": [
-    "lem-weil-pbc-flat-tensor-exact"
+    "lem-trf-ml-quotient-product-vanishing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AS6 (lemma-minimal-contains), kernel identification; Tag 00HD (lemma-flat), exactness of tensoring by a flat module"
+    "place": "Tag 0AS6 (lemma-minimal-contains), the two displayed maps"
    }
   },
   {
-   "text": "By the pure-tensor generation in [def-weil-pbc-module-tensor-product], the lift $y$ is a finite sum $y=\\sum_{j=1}^r f_j\\otimes m_j$ with $f_j\\in K$, $m_j\\in M$: any scalar coefficient in a finite linear combination can be absorbed into $f_j$ by bilinearity. Let $L\\subseteq E$ consist of the linear combinations $\\sum_{j=1}^r a_j f_j$ with $a_j\\in R$. This is a submodule contained in $K$. The tensor $\\sum_j f_j\\otimes m_j$, now formed in $L\\otimes_R M$, maps to $x$, by the formula for the induced tensor map in the same definition. Hence $L\\in I$, and leastness from Step 4 gives $K\\subseteq L$. Therefore $K=L$, which is generated by the finite list $f_1,\\ldots,f_r$. Taking $E_0=K$ proves the finiteness assertion (finite means finitely generated over $R$).",
+   "text": "Apply [lem-trf-flat-quotient-product-finite-lift] with the same set, family, $E$ and $x$: its intersection and map are $K$ and $q$. Flatness of $M$ and Step 2 meet its hypotheses. Obtain a finitely generated $L\\subseteq K$ and $z\\in L\\otimes_R M$ mapping to $x$, so $L\\in\\mathcal S$. Let $a:L\\hookrightarrow K$ be inclusion and put $y=(a\\otimes\\mathrm{id}_M)(z)$. Since $i_Ka=i_L$, tensor compatibility with composition [def-weil-pbc-module-tensor-product] gives $(i_K\\otimes\\mathrm{id}_M)(y)=x$. Thus $K\\in\\mathcal S$ as well.",
    "uses": [
+    "lem-trf-flat-quotient-product-finite-lift",
     "def-weil-pbc-module-tensor-product"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AS6 (lemma-minimal-contains), kernel and finite coefficient construction"
+   }
+  },
+  {
+   "text": "For any supporting submodule $N$, membership $N\\in\\mathcal S$ gives $K\\subseteq N$. Since Step 3 gives $L\\subseteq K$ and $L\\in\\mathcal S$, the inclusions $L\\subseteq K\\subseteq N$ show that $L$ itself is a least support. Taking $N=L$ gives $K\\subseteq L$, so $K=L$. The finite list generating $L$ therefore generates $K$, and $E_0=K$ has both required properties. If $H$ is any other least support, its leastness gives $H\\subseteq L$ and that of $L$ gives $L\\subseteq H$, hence $H=L=K$. Thus smallest means least under inclusion, and finite means finitely generated over $R$.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AS6 (lemma-minimal-contains), final three sentences: finite tensor expression and its coefficient submodule"
+    "place": "Tag 0AS6 (lemma-minimal-contains), leastness of the finite coefficient submodule and equality with the intersection"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-module-tensor-product",
-  "def-trf-mittag-leffler-module",
-  "lem-weil-pbc-flat-tensor-exact"
+  "lem-trf-ml-quotient-product-vanishing",
+  "lem-trf-flat-quotient-product-finite-lift"
  ],
  "proof_origin": {
   "by": "document",
@@ -233,19 +218,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-flat-ml-minimal-support",
   "worker": "stage1",
-  "summary": "Expanded the complete proof of Stacks Tag 0AS6 into five steps: the set of all supports, the injective tensor-product comparison with explicit factor swaps, componentwise vanishing, flat-tensor exactness for the quotient-product map, and finite generation by coefficients of one tensor lift. Reused existing definitions and the flat-tensor exactness Mathlib leaf; created no nodes. Verified no upstream project declaration states the item and inspected two formulations in the recorded Mathlib searches. The statement and its hypotheses are unchanged.",
-  "blueprint": "The inherited ancestry is lem-trf-local-term-locality, via the listed alteration/flatification/projectivity lemmas. This item supplies the forward implication in lem-trf-flat-mittag-leffler-criterion: the Tag 0AS6 least-support input. The five steps expand precisely that algebraic subargument, without altering the chapter or unit route."
+  "summary": "Repair of the human re-split return: extracted two independent, statement-only unsplit arguments of comparable size. One proves arbitrary-family quotient-product vanishing using only the Mittag-Leffler hypothesis; the other gives the kernel identification and finite lift using only flatness. The unchanged parent is their short assembly plus intersection leastness. All five returned proof steps and their citations are retained verbatim in report.md, with their allocation and full extracted arguments. Two phrasings and three search kinds were run for each new task; no exact Mathlib match or existing DAG/blueprint node was found. Repaired the live-DAG promotion return for head fba76cd0700: compared the retained split with the current DAG, reread every cited statement and the flat exactness input, retained the identical statement and current maintainer metadata, and made the assembly explicit about the inclusion maps, linear quotient-product map, intersection submodule, and application of leastness to the finite lift. The delivery tool rebases the split-owned fields on current origin/sheaf-dag; the two new tasks and all search evidence are retained. Latest promotion retry: reread the return for e13e14760d5 and compared all retained fields with the current read DAG; only the three split-owned fields differ. Explicitly matched the set-indexed family, quotient-product map and intersection in both auxiliary applications, and recorded the current return and dry-run evidence in the report. No statement, dependency statement, search question or maintainer-owned field changed. Promotion repair for the current returned head 6cb2ac84de8 (2026-10-22 16:30 UTC): rebuilt this sandbox item from the current shared DAG while retaining only the three split-owned differences; reread every current citation and the 0AS6/059M/00HD source passages. Step 4 now explicitly proves L is contained in every supporting N before identifying it with K, and matches finitely generated with the unchanged finite-module clause. The two new statement-only tasks, statements, ancestry, and logged searches remain unchanged. Current-head repair after the return for 5e2d9a48eb5 (2026-10-22 20:07 UTC): rebuilt from the present read DAG, retained only proof/proof_deps/split_report differences, and verified the four recorded dependency file hashes are unchanged. Step 2 now identifies each quotient component and checks its image hypothesis with an individual witness; the auxiliary requires no coherent choice of lifts. The report records the current return, latest blueprint snapshot and initial diagnostic receipt. No statement or search question changed. Repair of the latest returned head c249ee114e9 (2026-10-23 09:28 UTC): reconstructed the parent on the current shared DAG, reread all unchanged input statements and Stacks sources, and made Step 1 define its support family explicitly as a subset of the set of submodules. Both new statement-only tasks and all retained evidence are preserved. Initial diagnostic dry run fed65a88c55 passed; the final dry run follows the current signed review. Repair of returned head b0ebe7f1e8c (2026-10-23 10:46 UTC): reconstructed on the current read DAG, retaining only proof/proof_deps/split_report differences; all four existing input hashes are unchanged. Step 3 now explicitly constructs the tensor in the intersection from the finite lift by tensoring L inclusion K, citing the composition clause of the tensor definition, and Step 4 derives leastness directly from that support. Updated citation evidence and signed review; both extracted statement-only tasks and all logged searches are retained. Initial diagnostic receipt d85b050f788 passed. Repair of returned head beac9dd24d5: reconstructed on the current shared DAG, checked that all four existing input hashes and cited statements are unchanged, verified every step citation verbatim, and made the final elementary step explicitly prove the universal leastness assertion and uniqueness by both inclusions. The two statement-only tasks, logged searches and original arguments are retained; delivery preparation rebases onto the freshly fetched server base. Repair of returned head ecc13fb11e3 (2026-10-23 12:28 UTC): rebuilt from the current shared DAG, preserving all fields except proof/proof_deps/split_report. Reread the four unchanged existing inputs, both auxiliaries, the latest blueprint ancestor and Stacks sources. The last step now proves the finitely generated L is itself least by L contained in K contained in every support, then identifies K=L and proves uniqueness. Both statement-only tasks and all logged searches are retained. Initial diagnostic dry run 8287403e68e passed.",
+  "blueprint": "The inherited ancestry is lem-trf-local-term-locality, via the listed alteration/flatification/projectivity lemmas. This item supplies the forward implication in lem-trf-flat-mittag-leffler-criterion: the Tag 0AS6 least-support input. The five steps expand precisely that algebraic subargument, without altering the chapter or unit route. The refinement assigns returned Steps 2–3 to lem-trf-ml-quotient-product-vanishing and the kernel part of Step 1 plus Steps 4–5 to lem-trf-flat-quotient-product-finite-lift; the parent retains the set of supports and the elementary leastness equalities."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q75-adb3f4eb3",
-  "group": "Q75",
+  "reviewer": "NT-cc-Q107-2c4851f2b",
+  "group": "Q107",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-adb3f4eb3 (reviewer sub-agent of L); spot-checked: I read the item in full, along with the statements of all four nodes it cites, the parent lem-trf-flat-mittag-leffler-criterion, unit sk-i-curve-zero and Stacks algebra.tex lemma-minimal-contains (line 21534; tags/tags confirms 0AS6). Statement: it matches 0AS6 hypothesis by hypothesis. M is flat Mittag-Leffler, E is an arbitrary module, there is a least submodule whose tensor image contains x, and that submodule is finite. Nothing is weakened or added. Step 1 (elementary): the set I of supporting submodules contains E, and the kernel of q: E -> prod_{N in I} E/N is the intersection K; checked pointwise, and q is not assumed surjective. Step 2 (elementary): beta is the Mittag-Leffler map theta_{M,(E/N)} of def-trf-mittag-leffler-module conjugated by the factor swaps, checked on pure tensors; that definition covers families indexed by any set, so I is allowed. Step 3 (elementary): (q_N tensor 1)(x)=0 follows from the composition and zero-map clauses of the tensor-product node; the components of beta then show (q tensor 1)(x)=0, which is Stacks' use of 059M. Step 4: the first sentence of the Mathlib leaf lem-weil-pbc-flat-tensor-exact applied to K->E->P gives x in the image of K tensor M, so K is the least support. Step 5 (elementary): the coefficients f_j of one lift span a submodule L contained in K that is itself a support, so K=L is finitely generated. proof_deps equals the union of the uses. No new nodes. No cycle (the item does not cite its parent). No off-unit route: the only non-definition dependency is a Mathlib leaf, so no tool_uses are needed and none were accepted. No SGA citation. No base-change morphism or coefficient category is involved (commutative algebra, not a target node). Duplicates: rg over dag/nodes for 0AS6, minimal-contains, smallest/least submodule and Mittag finds no other node stating this. The parent is the finite-free criterion and uses this item for its forward direction, so the item is not a restated clause. Small cases: x=0, E=0 or M=0 give K=0. M=R gives K=Re. Over a field with x = sum e_j tensor b_j (b_j a basis), K is the span of the e_j. R=Z, M=Q, x=1 tensor 1 in Z tensor Q: every nZ is a support but the intersection 0 is not, so the Mittag-Leffler hypothesis is really used. Minor, no change: the report mentions citations.json and searches.jsonl, which are not on the branch. No fixes written; review.md is in the run directory."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-2c4851f2b (reviewer sub-agent of L); spot-checked: Ninth head of the Q107 re-split of 0AS6, after 8 PASSed heads (fba7…ecc1) whose landings were refused for promotion reasons. Live still has the old 5-step parent, the released re-split note and neither new id, so the re-split is still needed. Diff vs ecc13fb11e3: both new nodes byte-identical; in the item only the Step 4 text and split_report changed. New Step 4: for every N in S, L ⊆ K ⊆ N with L in S, so L is least; N=L gives K=L, so K is finitely generated and the least support is unique by two inclusions. Correct. Re-checked against the cited statements (ML θ with M on the left, the tensor composition/identity/zero clauses, flatness, flat-tensor-exact with no surjectivity needed) and Stacks algebra.tex 21534-21565. Node 1 (ml-quotient-product-vanishing, old Steps 2-3): β is θ conjugated by the factor swaps, so it is injective; the components (q_j⊗1)x vanish; true for any set J; Z/Q/nZ shows ML is needed. Node 2 (flat-quotient-product-finite-lift, old Step 1 kernel and Steps 4-5): ker q=K, flat exactness of 0→K→E→P, and a finitely generated L spanned by the coefficients of a lift; ℤ/2, E=ℤ², N1=ℤ(1,0), N2=ℤ(1,2) shows flatness is needed. Neither node restates the parent; they are of comparable size; the assembly is 2115 chars; proof_deps equals the union of the uses; no cycle. An rg search of dag/nodes finds no duplicate (only CRT nodes and the Noetherian local tensor-quotient detection). Unit sk-i-curve-zero and the blueprint ancestry are unchanged; no tool_uses; no SGA. Maintainer note: the repeated refusals are a promotion problem, not a mathematical one."
  },
  "lean": {
   "module": "Sheaf.RingTheory.FlatMittagLefflerMinimalSupport",
@@ -265,5 +250,16 @@
   "result": "pass",
   "note": "Statement matches Stacks 0AS6 and the node clause by clause: CommRing R, Module.Flat R M, Module.IsMittagLeffler.{u,v,max u w,w} (an instance implied by the node's ML; index universe >= u contains Submodule R E, test universe max u v w holds ULift (E/N)), arbitrary E : Type w, x : E ⊗ M, ∃ E₀ with E₀.FG, x ∈ range (rTensor M E₀.subtype), least over all supports. Universes u, v, w independent. The 0AS6 proof works at these universes. Node unchanged except lean; lean.statement verbatim; docstrings carry the source, blueprint tag and five steps; proof is sorry only; no definitions or new nodes; no duplicate in side Sheaf or Mathlib. nt_compile --json clean (1.7 s); broken control copy errors as expected. Advisory: TensorProduct.Map import possibly redundant; the citer flat_mittag_leffler_criterion will need a universe transport at stage 3."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-affine-scheme-fppf-qcoh-acyclic",
+ "kind": "statement",
+ "title": "Affine schemes have no positive quasi-coherent fppf cohomology",
+ "statement": "Fix small presentations of sites in the universes of [def-weil-size-convention]. Let $U$ be an affine scheme [def-pc-scheme] and let $F$ be an arbitrary quasi-coherent Zariski $\\mathcal O_U$-module [pqf-def-coherent]. On the big fppf site $\\mathcal C_U=(\\mathit{Sch}/U)_{\\mathrm{fppf}}$ [def-pc-fppf-site], let $F^a$ be the associated module sheaf of [lem-sfb-scheme-big-fppf-quasicoherent-equivalence], with $F^a(v:T\\to U)=\\Gamma(T,v^*F)$ and tensor-pullback restrictions [def-pc-module-pullback]. Write $(F^a)_{ab}$ for its underlying abelian sheaf. Then $$H^q(\\mathcal C_U,(F^a)_{ab})=0\\qquad(q>0),$$ where $H^q$ is the right derived functor of evaluation at the terminal object $\\operatorname{id}_U$ in abelian sheaves [def-weil-pbc-sites-and-cohomology, def-sp-injective-resolutions]. No finite-generation, flatness or Noetherian hypothesis on $F$ or $U$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex; literature/stacks-project/coherent.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03DW (descent.tex, proposition-same-cohomology-quasi-coherent), part (1) with tau = fppf: H^q(U,F) = H^q((Sch/U)_fppf, F^a); combined with Tag 01XB (coherent.tex, lemma-quasi-coherent-affine-cohomology-zero) for affine U. Used in Tag 0DEW (etale-cohomology.tex, lemma-review-quasi-coherent), proof of (7), affine-cover paragraph, vanishing of H^p_fppf(U_i,F^a) for affine U_i. This is the affine intermediate conclusion, not the higher-direct-image assertion."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fppf-site",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "def-pc-module-pullback",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=(F^a)_{ab}$ on $\\mathcal C_U$. The associated-sheaf theorem gives precisely the sheaf with the section and restriction formulas in the statement. Let $\\mathcal B$ be all objects $v:V\\to U$ whose source is affine, and let $\\mathrm{Cov}$ consist of all finite affine fppf covering families of members of $\\mathcal B$. A finite iterated fibre product of affine schemes over an affine scheme is affine: repeatedly use the spectrum-of-tensor-product description, including repeated factors. Thus targets, members and all nonempty iterated fibre products of a covering in $\\mathrm{Cov}$ lie in $\\mathcal B$. This verifies hypothesis (1) of the general-site Cech criterion.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DW, proposition-same-cohomology-quasi-coherent, proof, first affine-objects paragraph (using Tags 03F9 and 03FJ)."
+   }
+  },
+  {
+   "text": "For any $v:V\\to U$ in $\\mathcal B$ and any fppf covering $\\{T_i\\to V\\}$, apply the affine-refinement theorem to its affine target $V$. It supplies a finite jointly covering family of affine opens $W_j\\subseteq T_{i(j)}$, each flat and locally of finite presentation over $V$, with the displayed factorizations through $T_{i(j)}$. Composing their structure maps with $v$ makes this a covering in $\\mathcal C_U$ refining the original covering. It belongs to $\\mathrm{Cov}$, so hypothesis (2), cofinality at every affine object, holds.",
+   "uses": [
+    "lem-pc-fppf-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021P, lemma-fppf-affine; the cofinality input to Tag 03DW."
+   }
+  },
+  {
+   "text": "Apply the finite affine fppf Cech-vanishing lemma with base scheme $S=U$, quasi-coherent module $F$, and arbitrary $v:V\\to U$ in $\\mathcal B$. It gives $\\check H^p(\\mathcal V,G)=0$ for every $\\mathcal V\\in\\mathrm{Cov}$ and $p>0$, with exactly the tensor-pullback restrictions used here. Its hypotheses require affineness only for $V$ and its covering members, and impose no flatness or finiteness condition on $F$. This verifies hypothesis (3).",
+   "uses": [
+    "lem-sfb-finite-affine-fppf-cech-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03FJ, lemma-standard-covering-Cech-quasi-coherent; used in Tag 03DW proof, first affine-objects paragraph."
+   }
+  },
+  {
+   "text": "The general-site Cech criterion now gives $H^q(V,G)=0$ for all $V\\in\\mathcal B$ and $q>0$. Take the terminal object $\\operatorname{id}_U$, which belongs to $\\mathcal B$ because $U$ is affine. Cohomology over this object is the right derived functor of its evaluation in abelian sheaves, hence is exactly $H^q(\\mathcal C_U,(F^a)_{ab})$ in the question. This proves the asserted vanishing.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DW, proposition-same-cohomology-quasi-coherent, proof, first affine-objects paragraph (using Tags 03F9 and 03FJ)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-fppf-affine-refinement",
+  "lem-sfb-finite-affine-fppf-cech-vanishing",
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DW, proposition-same-cohomology-quasi-coherent, proof, first affine-objects paragraph (using Tags 03F9 and 03FJ)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine schemes have zero positive fppf cohomology for sheaves associated to arbitrary modules",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+   "date": "2026-10-24",
+   "verdict": "no match: fppf precoverage, abstract sheaf cohomology definitions, quasi-coherent presentation data and faithfully-flat ring lemmas do not assert affine-scheme fppf acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "7 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
+   "date": "2026-10-24",
+   "verdict": "no match: fppf precoverage, abstract sheaf cohomology definitions, quasi-coherent presentation data and faithfully-flat ring lemmas do not assert affine-scheme fppf acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*cohomology|cohomology.*fppf|quasicoherent.*vanish|vanish.*quasicoherent",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: fppf precoverage, abstract sheaf cohomology definitions, quasi-coherent presentation data and faithfully-flat ring lemmas do not assert affine-scheme fppf acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On the big fppf site of an affine scheme every quasi coherent module has zero cohomology in degrees greater than zero",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.presentation, AlgebraicGeometry.Scheme.AffineZariskiSite",
+   "date": "2026-10-24",
+   "verdict": "no match: fppf precoverage, abstract sheaf cohomology definitions, quasi-coherent presentation data and faithfully-flat ring lemmas do not assert affine-scheme fppf acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat finitely presented topology of Spec A has no higher sheaf cohomology for an arbitrary A module",
+   "results": "8 hits: Module.FaithfullyFlat, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, Module.freeLocus_eq_univ, Module.FaithfullyFlat.of_specComap_surjective, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFiniteType, AlgebraicGeometry.flat_and_surjective_SpecMap_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: fppf precoverage, abstract sheaf cohomology definitions, quasi-coherent presentation data and faithfully-flat ring lemmas do not assert affine-scheme fppf acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAffine.*cohomology|cohomology.*IsAffine|fppf.*[Hh]igher|[Hh]igher.*fppf",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: fppf precoverage, abstract sheaf cohomology definitions, quasi-coherent presentation data and faithfully-flat ring lemmas do not assert affine-scheme fppf acyclicity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-fppf-qcoh-higher-vanishing",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (3) in the unbounded descent argument: derived unit only for modules in degree zero; supporting input: 0DHE proof: compare small-etale and big-fppf sections at the base and every flat face, with one compatible resolution; Quasi-coherent modules are acyclic for big-fppf to small-etale direct image; affine-scheme cohomology input in the proof of Stacks 0DGN(7), via the affine-cover argument of 0DEW(7).",
+   "via": [
+    "lem-sfb-space-fppf-qcoh-higher-vanishing",
+    "lem-sfb-flat-object-fppf-derived-sections",
+    "lem-sfb-fppf-face-heart-derived-unit",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-scheme-fppf-qcoh-acyclic",
+  "worker": "stage1",
+  "summary": "Used the first affine-objects paragraph of Stacks 03DW directly: affine fibre products, cofinal finite affine fppf refinements, finite-cover Cech vanishing (one new statement-only node), and the existing general-site Cech criterion. Statement unchanged; no module/abelian derived-functor comparison is used.",
+  "blueprint": "Supporting affine cohomology input on the inherited ctf direct-image/duality descent route; realizes the affine-cover paragraph of 0DEW(7) through 03DW proof, first affine-objects paragraph. The inherited blueprint ancestor is null (blueprint_refs.py ancestor confirms None); the current latest blueprint direct-images proof was read and no chapter or unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product calculation verifies closure of the affine-object collection."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic finite affine refinement of an fppf cover verifies cofinality."
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "General-site criterion converts the three verified Cech hypotheses into derived abelian-sheaf cohomology vanishing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-b8530c175",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-b8530c175 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full; no changes made. Item statement and stmt_deps are unchanged against live, where the item is still unsplit (no parallel split, no repair note). The four steps follow the first affine paragraph of Stacks 03DW and check the three hypotheses of 03F9: (1) B = affine-source objects, closed under iterated fibre products by fibre-product-affine-spectra (01I4); (2) cofinality at every affine V by lem-pc-fppf-affine-refinement (021P), which gives finite affine fppf opens with factorizations over V, including the empty-V case; (3) the new node; then lem-weil-pbc-site-cech-vanishing-criterion at id_U, which is exactly the item's derived evaluation in Ab(C). New node lem-sfb-finite-affine-fppf-cech-vanishing is true and matches 03FJ/03FI (finite affine fppf covering = standard covering; Amitsur complex with R->A faithfully flat). Small cases checked: F=0, empty cover of the empty scheme, identity singleton cover, empty members, non-flat F. It is statement-only and self-contained, with six real searches and no Mathlib match. Not a duplicate of lem-pc-cech-exact (algebraic only; the geometric identification is the omitted 03FJ verification), of new-etale-affine-tensor-cech-vanishing (small etale site) or of the 03DW-citing etale/Zariski nodes. Not a restatement of the item. Batch-5 flag: the citation of lem-sfb-scheme-big-fppf-quasicoherent-equivalence reaches def-trf-space-quasi-coherent-module, the general definition of a quasi-coherent module on a ringed site (mathlib status). It is not part of the trace-formula or Poincare proofs, so it is accepted. Accepted tool uses: lem-weil-pbc-fibre-product-affine-spectra, lem-pc-fppf-affine-refinement and lem-weil-pbc-site-cech-vanishing-criterion, all generic. No SGA citation, no cycle. Missing lean_audit on the new node matches most recent new nodes and is not treated as a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSchemeFppfQCohAcyclic",
+  "declaration": "AlgebraicGeometry.Scheme.affine_scheme_fppf_qcoh_acyclic",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.affineFppfHasSheafify",
+   "AlgebraicGeometry.Scheme.affine_scheme_fppf_qcoh_acyclic"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSchemeFppfQCohAcyclic.lean",
+  "statement": "theorem affine_scheme_fppf_qcoh_acyclic (U : Scheme.{u}) [IsAffine U] (F : SfbZariskiQCoh U) (q : ℕ) (hq : 0 < q) : IsZero (@Sheaf.H'.{u + 1, u, u + 1} (Over U) _ (fppfTopology.over U) inferInstance (HasExt.standard _) ((SheafOfModules.toSheaf (sfbFppfRings U)).obj ((sfbAssociated U ((Classical.choose scheme_big_fppf_quasicoherent_equivalence) U)).obj F)) q (Over.mk (𝟙 U)))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H-prime at the terminal object of the existing big fppf site, using the section-normalized associated equivalence from lem-sfb-scheme-big-fppf-quasicoherent-equivalence. The auxiliary affineFppfHasSheafify supplies left exactness of the existing small-valued reflector so that abelian cohomology is available without an extra hypothesis. Standard Ext lives in u+1; site morphisms and coefficients retain u."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca55bab2e",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause match: U:Scheme.{u} [IsAffine U]; F:SfbZariskiQCoh U (quasi-coherence only); fppfTopology.over U; F^a via sfbAssociated with Classical.choose of scheme_big_fppf_quasicoherent_equivalence, pinned by its section/restriction/module-map comparisons; underlying abelian sheaf via SheafOfModules.toSheaf; Sheaf.H' (recorded cohomology) at Over.mk (𝟙 U), HasExt.standard in u+1; ∀ q>0 IsZero. Statement verbatim; only the item lean field differs from live; 8 stmt_dep records identical to side-live; no duplicate. Sorried helper instance HasSheafify (fppfTopology.over U) AddCommGrpCat.{u} is needed by H', true (left-exact shrink of the u+1 sheafification), adds no hypothesis, no duplicate instance in live. Edge cases: empty U, F=0, non-flat F, q=0 excluded. Docstrings carry source, blueprint and four steps; plain imports are existing proof-dep modules. Advisories: helper name/placement; stage 3 needs the small-site transfer because isZero_H'_of_siteCech_vanishing requires SmallCategory; second reading is the worker's own check."
+ }
+}

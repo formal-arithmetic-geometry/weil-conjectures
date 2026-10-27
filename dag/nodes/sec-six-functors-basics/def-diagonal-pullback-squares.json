@@ -1,0 +1,123 @@
+{
+ "id": "def-diagonal-pullback-squares",
+ "kind": "definition",
+ "title": "Separate class and trace equations for fixed pullback endpoints",
+ "statement": "For a condensed coefficient ring R, g:Yprime→Y, a family of R-module lines L, diagrams d,dprime over the two bases, underlying line maps mP,mW and normalized ordinary SourcePullback s, ClassPullbackSquare is the proposition containing exactly the delta equation of PullbackCompatibility. TracePullbackSquares is the proposition containing exactly its traceq, trace1 and trace2 fields, using the endpoints and geometric squares of s. These proposition structures are small wrappers for elaboration of concrete coefficient comparisons; they add no assumptions or data choices.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), the diagonal class square and the three trace base-change squares"
+ },
+ "proof": [
+  {
+   "text": "Introduce two Prop structures. Their fields are copied verbatim from the class and trace equation fields of PullbackCompatibility, with all rings and lines generic. This is a direct construction with no postponed proof or chosen witness.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-pullback"
+ ],
+ "proof_origin": {
+  "by": "Y3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), the diagonal class square and the three trace base-change squares",
+  "note": "Definitional wrappers for the existing fields; introduced to avoid repeated elaboration of concrete derived coefficient constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with pullback of sheaves of modules; tensor quotient base change",
+   "results": "Eight hits including SheafOfModules.pullbackComp, pullbackObjFreeIso and pullback_map_ιFree_comp_pullbackObjFreeIso. These concern the ordinary sheaf-module presentation, not the specified internal-module endpoints or diagonal class and trace squares.",
+   "date": "2026-10-27",
+   "verdict": "Use scalar/pullback uniqueness and tensor quotient universal properties; no complete project-specific theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "One hit, CategoryTheory.mateEquiv_vcomp, in Mathlib.CategoryTheory.Adjunction.Mates. This gives the mate pasting identity; no quotient diagonal compatibility is stated. A separate query CategoryTheory.Mod.extendπ returned unknown identifier (the definition belongs to the project).",
+   "date": "2026-10-27",
+   "verdict": "Generic mate pasting is available; quotient endpoint normalization remains project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Mm]ap|pullIso.*unit|preserves.*coequalizer",
+   "results": "The search service returned 25 Mathlib hits about scalar maps and coequalizers. Local rg additionally found CondensedRing.pullIso, comapUpperStarIso, Mod.extendIsCoequalizer, and diagonal_uniformizer_restriction_mate_isIso in the project. None supplies the complete normalized quotient diagonal comparison.",
+   "date": "2026-10-27",
+   "verdict": "Reuse ordinary scalar compositor, coequalizer API and normalized scalar-square theory; separate the class and trace transport obligations."
+  },
+  {
+   "tool": "grep",
+   "query": "ClassPullbackSquare|TracePullbackSquares|PullbackCompatibility",
+   "results": "No Mathlib declaration; the project has the combined PullbackCompatibility structure only.",
+   "date": "2026-10-27",
+   "verdict": "This is a project-specific view of the existing fields, without a second definition of any geometric functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with geometric pullback for sheaves of modules, compatibly with adjunction units and traces",
+   "results": "Eight hits, including SheafOfModules.pullback, pullbackPushforwardAdjunction, sheafificationCompPullback, and ModuleCat.ExtendRestrictScalarsAdj.unit_app. These supply ordinary adjunction APIs but do not state the normalized internal-module quotient class and trace squares.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing ordinary adjunction API; project-specific comparison constituents remain necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalQuotientBaseChange",
+  "date": "2026-10-27",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (3), the diagonal class square and the three trace base-change squares",
+   "via": [
+    "lem-diagonal-quotient-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalPullbackSquares",
+  "file": "lean/Sheaf/Paper/DiagonalPullbackSquares.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ClassPullbackSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ClassPullbackSquare",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.TracePullbackSquares"
+  ],
+  "statement": "structure ClassPullbackSquare : Prop",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T094543-L-241497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T094543-L-241497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

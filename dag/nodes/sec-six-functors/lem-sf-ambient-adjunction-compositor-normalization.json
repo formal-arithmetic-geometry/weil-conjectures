@@ -1,0 +1,357 @@
+{
+ "id": "lem-sf-ambient-adjunction-compositor-normalization",
+ "kind": "statement",
+ "title": "Adjunction and resolution normalization of ambient direct-image and open compositors",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. All schemes are finite-type $k$-schemes; their structure maps are not required to be separated [def-weil-scheme-morphism-properties]. Use small pro-etale sites [def-weil-pbc-proetale-site]. For each $T$, choose either $\\mathscr M_T=\\operatorname{Mod}((A_n)_T)$ at one fixed $n$, or the category $\\mathscr M_T$ of module sheaves $M_n$ over $(A_n)_T$ with semilinear maps $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$ and compatible componentwise morphisms [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars, lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived category $D(\\mathscr M_T)$ [def-weil-abstract-derived-category]. For a scheme map $f$ write $f^*$ for exact constant-coefficient module inverse image and $P_f=D(f^*)$; for an open immersion $j$ write $j_!$ for exact extension by zero and $J_j=D(j_!)$. Use the specified adjunctions $P_f\\dashv S_f=Rf_*$ and $J_j\\dashv P_j$ [def-weil-pbc-proetale-operations, lem-pur-site-restriction-module-adjunction-exact]. System operations are constructed simultaneously on the ringed diagram site, before finite evaluation, scalar restriction or total limit [lem-coef-semilinear-derived-sections].\n\nUse the canonical inverse-image compositor $d_{v,u}:P_uP_v\\cong P_{vu}$ induced by the constant-ring local tensor formula $(m\\otimes a)\\otimes b\\mapsto m\\otimes c_u(a)b$, with its composite-unit normalization [lem-sf-proetale-tensor-composition-unit, lem-pur-proetale-constant-ring-composition]. Let $c_{v,u}:S_vS_u\\cong S_{vu}$ be the inverse of its adjunction conjugate. For composable open immersions $j:A\\hookrightarrow B$ and $b:B\\hookrightarrow T$, let $e_{b,j}:J_bJ_j\\cong J_{bj}$ be the inverse open-adjunction conjugate of $P_jP_b\\cong P_{bj}$ [def-weil-pbc-adjunction-conjugate, def-weil-pbc-composite-adjunction].\n\nThese $c,e$ are the canonical unbounded derived direct-image and open-extension compositors. Each identifies both unit and counit for the composite adjunction with the unit and counit of the single-map adjunction. In particular, $c$ agrees on K-injective resolutions with the ordinary direct-image composition comparison, and $e$ agrees with localization of the ordinary open-extension comparison; these identifications also hold on the ringed diagram category itself. Here a complex is K-injective when every chain map from an acyclic complex to it is null-homotopic.\n\nThey are natural, associative and unital. Explicitly, for $u:X\\to Y$, $v:Y\\to Z$, $w:Z\\to T$,\n$$c_{w,vu}\\circ(S_wc_{v,u})=c_{wv,u}\\circ(c_{w,v}S_u),$$\nand for opens $j,b,a$,\n$$e_{a,bj}\\circ(J_ae_{b,j})=e_{ab,j}\\circ(e_{a,b}J_j).$$\nThe identity equations use the adjunction-normalized identity comparisons. These equations identify the two composites even when the underlying functors are only canonically isomorphic. Under the displayed comparisons the threefold adjunction Hom bijection is the three successive specified Hom bijections, independent of parenthesization.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E (lemma-derived-pushforward-composition); derived.tex Tag 09T5 (lemma-derived-adjoint-functors). Agent normalization and threefold-coherence formulation; returned proof Step 2."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-proetale-tensor-composition-unit",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-proetale-constant-ring-composition",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-proetale-inverse-image",
+  "def-weil-finite-field-fiber",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "proof": [
+  {
+   "text": "For arbitrary Operations, prove the unit, counit and Hom normalization by the Mathlib conjugate adjunction identities. Iterating the composite adjunction Hom equivalence gives all four threefold formulas.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 09T5, 015F, 0DV0, 0D6E; categorical coherence and the existing fixed-scalar realization API"
+   }
+  },
+  {
+   "text": "Identify c.hom with rightDerivedFunctorCompIso′ using the source-library CompConjugate theorem. Right adjoints to the exact pull functors preserve K-injectives; the universal right-derived composition unit then gives precisely the required resolving normalization.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 09T5, 015F, 0DV0, 0D6E; categorical coherence and the existing fixed-scalar realization API"
+   }
+  },
+  {
+   "text": "Localize the ordinary extension comparison. Its termwise unit equation determines its derived left-adjoint comparison by normalizedAdjunction_composition and normalizedAdjunction_uniqueness. The exactDerivedRestrictionComposition factor equations identify it with localization of ordinaryE.",
+   "uses": [
+    "lem-pur-normalized-adjunction-composition",
+    "lem-pur-exact-restriction-composition",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 09T5, 015F, 0DV0, 0D6E; categorical coherence and the existing fixed-scalar realization API"
+   }
+  },
+  {
+   "text": "Prove a generic pull-coherence criterion. Exact descent preserves its associativity and identity equations. Conjugate triangle associativity and identity mates transfer them to direct image; leftAdjointCompIso associativity and identity formulas transfer them to extension by zero, retaining the equality transports.",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 09T5, 015F, 0DV0, 0D6E; categorical coherence and the existing fixed-scalar realization API"
+   }
+  },
+  {
+   "text": "For systems use the published ordinary pull coherence. Derive the two missing pull identity equations by taking left-adjoint mates of the sectionwise push identity equations. Those equations reduce to the pullbackComp/pullbackId identities on the whole diagram site. The ordinaryC equality with pushComp is the inverse law of conjugateIsoEquiv.",
+   "uses": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "def-sf-semilinear-proper-open-comparisons",
+    "def-sp-semilinear-constant-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 09T5, 015F, 0DV0, 0D6E; categorical coherence and the existing fixed-scalar realization API"
+   }
+  },
+  {
+   "text": "For finite coefficients transport the proved fixed-scalar upperStar composition associativity and identity laws across sfIntrinsicModuleEquivalence. Expand the transported comparisons and use naturality and the equivalence triangle equations. This establishes the ordinary pull coherence, then apply the generic criterion.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 09T5, 015F, 0DV0, 0D6E; categorical coherence and the existing fixed-scalar realization API"
+   }
+  },
+  {
+   "text": "Transport the composite Hom formula across the three realization equivalences, first for a single adjunction and then for a composite. Evaluate at the composite counit to identify the transported ordinaryC with the fixed-scalar lowerStarComp. The existing bijective sectionRealization and sectionDirectImageIso normalization transfer its sectionwise pullbackComp restriction formula to native module sections.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-pur-proetale-direct-image-global-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 09T5, 015F, 0DV0, 0D6E; categorical coherence and the existing fixed-scalar realization API"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pur-normalized-adjunction-composition",
+  "lem-pur-exact-restriction-composition",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-weil-pbc-proetale-operations",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-pur-proetale-direct-image-global-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "C9: generic adjunction calculus, exact descent, and fixed-scalar transport; proved private helpers in the assigned module; 2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|pullbackComp|pushforwardComp",
+   "results": "25 hits; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/compositor identities are present, but they do not identify both ambient geometric realizations with their specified resolution and open-localization compositors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "12 hits; CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/compositor identities are present, but they do not identify both ambient geometric realizations with their specified resolution and open-localization compositors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived pushforward composition preserves the composite adjunction units counits and open extension composition",
+   "results": "8 hits; CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived_unit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Adjunction.comp_unit_app, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Under.postAdjunctionRight_unit_app_right, CategoryTheory.ExponentiableMorphism.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/compositor identities are present, but they do not identify both ambient geometric realizations with their specified resolution and open-localization compositors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived direct image and open extension compositors are associative unital conjugates of inverse image composition in proetale ringed diagram topoi",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app_assoc, AlgebraicGeometry.PresheafedSpace.map_comp_c_app, AlgebraicGeometry.LocallyRingedSpace.comp_c, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/compositor identities are present, but they do not identify both ambient geometric realizations with their specified resolution and open-localization compositors"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*(unit|counit)|conjugateIsoEquiv|comp_homEquiv",
+   "results": "18 hits; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and exact-localization comparisons do not state both geometric resolution/open normalizations on the simultaneous ringed system category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived direct image composition on K-injective resolutions agrees with the adjunction conjugate of exact pullback composition",
+   "results": "8 hits; CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.NatTrans.rightDerived_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and exact-localization comparisons do not state both geometric resolution/open normalizations on the simultaneous ringed system category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateIsoEquiv",
+   "results": "0 hits;  | loogle: unknown identifier 'CategoryTheory.Adjunction.conjugateIsoEquiv'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and exact-localization comparisons do not state both geometric resolution/open normalizations on the simultaneous ringed system category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image and exact extension by zero composition isomorphisms preserve composite adjunction units and counits",
+   "results": "8 hits; CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.unitAsIsoOfIso, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.isIso_unit_of_iso, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.derivedε",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and exact-localization comparisons do not state both geometric resolution/open normalizations on the simultaneous ringed system category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associative unital conjugate compositors for derived module direct images and exact open extensions on a ringed diagram site",
+   "results": "8 hits; SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, PresheafOfModules.pushforward_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and exact-localization comparisons do not state both geometric resolution/open normalizations on the simultaneous ringed system category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits; CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and exact-localization comparisons do not state both geometric resolution/open normalizations on the simultaneous ringed system category"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|[Oo]pen.*[Cc]omp|[Cc]omp.*[Oo]pen",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and exact-localization comparisons do not state both geometric resolution/open normalizations on the simultaneous ringed system category"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ambient-proper-open-pasting",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": canonical direct-image and open-extension compositors (returned Step 2).",
+   "via": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ambient-adjunction-compositor-normalization",
+  "worker": "stage1",
+  "summary": "Q134: no exact upstream attachment; split by K-injective Hom computation, identification of the canonical ringed comparison, exact localization of open adjunctions, explicit unit/counit recovery, and mate-pasting coherence. Reused existing generic nodes throughout; no new nodes and no statement changes. All system equalities are proved before evaluation.",
+  "blueprint": "fix-prop-projection-formula.proof.md, sentence “The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]”: ordinary ambient direct-image/open compositors, their specified adjunction normalizations and threefold coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic categorical tool used exactly as stated; this unit supplies no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic K-injective computation of a total right derived functor on the whole ringed category."
+   },
+   {
+    "node": "lem-sf-proetale-tensor-composition-unit",
+    "why": "The item specifies this exact ordinary tensor/unit normalization; it identifies the comparison used in the proof."
+   },
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "Identifies the single-map coefficient isomorphism with the composite one required by the tensor formula."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic termwise Hom bijection on homotopy categories."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalized derived Hom formula, with all complexes resolving because inverse image is exact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ringed-topos K-injective comparison, specialized to the ringed sequence topos before evaluation."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic realization of inverse systems of sheaves as sheaves on the small diagram site; used to apply ringed-site K-injective and composition results to systems."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Defines the specified derived adjunction of def-weil-pbc-proetale-operations; its characterizing formula gives the termwise transpose."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the pro-etale site of an open with the localized site, and of the constant ring restriction."
+   },
+   {
+    "node": "lem-exc-proetale-open-derived-image",
+    "why": "Identifies module inverse image along an open immersion with restriction, including action and unit; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-7986e5a35",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-7986e5a35 (reviewer sub-agent of L); spot-checked: I read the item, all 23 cited statements, the parent and the sibling lem-sf-ambient-pullback-tensor-coherence. The delivery adds no new nodes, and the statement and stmt_deps are byte-identical to Q144's created node. Sources checked: Stacks 0D6E (sites-cohomology l.4011, composition by uniqueness of adjoints) and the tags table for 09T5, 08BJ, 070I, 015F, 03D3, 070Y and 070K; the blueprint main-20261015 fix-prop-projection-formula.proof.md l.12 sentence. There is no SGA citation. The types of c and e (inverse conjugates) check out. Step 6's unit and counit formulas re-derive correctly, and Step 7's mate-pasting coherence is correct. Three faults were repairable, and I fixed all three in the item file. (1) E5/C1, Step 5: the item never connects P_j, which is restriction to the localized site in the open adjunction, with the scheme-pullback compositor d. The fix cites lem-weil-proetale-weakly-etale-localization and lem-exc-proetale-open-derived-image. It then shows d^0_{b,j} is the relocalization identity: the unit equation of lem-sf-proetale-tensor-composition-unit holds because q preserves the projections, and lem-weil-pbc-conjugate-iso-unit-equation gives uniqueness. (2) C4, Step 3: the specified adjunction of def-weil-pbc-proetale-operations is the bijection of lem-pc-pre-derived-adjoint-functors-general. With s=id and t=id its formula is the termwise transpose. The fix cites that node and adds a uniqueness argument for the system adjunction, because the resolving-normalization node only asserts that some adjunction exists. (3) Steps 1 and 4: K-injective resolutions and the ringed-topos composition comparison are applied to systems without the small-site realization. The fix cites lem-weil-pbc-diagram-site-realization. The four added generic tools are declared in tool_uses, and none of them creates a cycle. Advisory: Step 2 re-proves the laws of d that the unsplit sibling lem-sf-ambient-pullback-tensor-coherence states; the argument is correct and short, so I left it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.AmbientAdjunctionCompositorNormalization",
+  "declaration": "WeilConjectures.AmbientCompositor.ambientAdjunctionCompositorNormalization",
+  "declarations": [
+   "WeilConjectures.AmbientCompositor.Operations",
+   "WeilConjectures.AmbientCompositor.Operations.D",
+   "WeilConjectures.AmbientCompositor.Operations.P",
+   "WeilConjectures.AmbientCompositor.Operations.S",
+   "WeilConjectures.AmbientCompositor.Operations.J",
+   "WeilConjectures.AmbientCompositor.Operations.adjunction",
+   "WeilConjectures.AmbientCompositor.Operations.openAdjunction",
+   "WeilConjectures.AmbientCompositor.Operations.ordinaryC",
+   "WeilConjectures.AmbientCompositor.Operations.ordinaryE",
+   "WeilConjectures.AmbientCompositor.Operations.d",
+   "WeilConjectures.AmbientCompositor.Operations.c",
+   "WeilConjectures.AmbientCompositor.Operations.e",
+   "WeilConjectures.AmbientCompositor.Operations.pId",
+   "WeilConjectures.AmbientCompositor.Operations.sId",
+   "WeilConjectures.AmbientCompositor.Operations.jId",
+   "WeilConjectures.AmbientCompositor.Operations.jCongr",
+   "WeilConjectures.AmbientCompositor.finite",
+   "WeilConjectures.AmbientCompositor.systems",
+   "WeilConjectures.AmbientCompositor.coefficientTower",
+   "WeilConjectures.AmbientCompositor.coefficientTransition",
+   "WeilConjectures.AmbientCompositor.Normalized",
+   "WeilConjectures.AmbientCompositor.FiniteTypeOver",
+   "WeilConjectures.AmbientCompositor.Laws",
+   "WeilConjectures.AmbientCompositor.FiniteSections",
+   "WeilConjectures.AmbientCompositor.SystemSections",
+   "WeilConjectures.AmbientCompositor.ambientAdjunctionCompositorNormalization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/AmbientAdjunctionCompositorNormalization.lean",
+  "statement": "theorem ambientAdjunctionCompositorNormalization (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : (∀ n : ℕ, letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n) Laws F (finite (Padic.coefficientExtensionRing l E (n + 1))) ∧ FiniteSections F (Padic.coefficientExtensionRing l E (n + 1))) ∧ (Laws F (systems (coefficientTower l E) (coefficientTransition l E)) ∧ SystemSections F (coefficientTower l E) (coefficientTransition l E))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Packages the actual published finite constant-ring and simultaneous ringed-sequence operations. Laws states both units and counits, Hom normalization, K-injective comparison, ordinary exact open descent, both associativity and unit laws, and both threefold Hom parenthesizations. H2 repair: cite def-sp-semilinear-constant-ring-operations for ordinary system operations and the already-landed existing:true def-sf-semilinear-proper-open-comparisons for pushComp_existsUnique, pushComp, pullComp and pushId_existsUnique. Remove the unused finiteTensorIdentification and its open-square import and theorem statement dependency. No mathematical statement changes. The smaller ProEtaleOpenSquareExchange import is retained for sfIntrinsicOpenAdjunction and exact open-extension instances, cited through its existing definition owner def-sp-finite-intrinsic-open-square."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53e7008b1",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery of 7fcd (RETURN H2). Only stmt_deps and lean changed; the statement is byte-identical and verbatim the file signature. Theorem stmt_deps lem-sf-semilinear-proper-open-mate-pasting and lem-trf-open-square-exchange are replaced by landed existing:true def owners on the base: def-sp-semilinear-constant-ring-operations, def-sf-semilinear-proper-open-comparisons (pushComp/pullComp/pushId_existsUnique) and def-sp-finite-intrinsic-open-square (sfIntrinsicOpenAdjunction). Unused finiteTensorIdentification and its import removed; ProEtaleOpenSquareExchange import is used only for the owned def. Ownership scan: no theorem stmt_dep, no theorem conclusion used as data. Substance re-read: d/c/e orientations, Normalized, kinjective with section pins, localizedOpen, assoc/unit/threefold clauses, edge cases, universes, gates; all OK. Not superseded. Advisory: finite-side def owners (def-sp-finite-intrinsic-pullback, def-weil-extension-by-zero, def-sp-finite-intrinsic-direct-adjunction, def-weil-exact-derived-adjunction) not in stmt_deps, as in 7fcd, and the report misattributes them; second reading still labelled a self-check. No compile run (review only)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261024T184809-L-3188128",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

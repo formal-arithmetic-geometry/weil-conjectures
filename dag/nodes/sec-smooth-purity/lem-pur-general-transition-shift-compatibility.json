@@ -1,0 +1,206 @@
+{
+ "id": "lem-pur-general-transition-shift-compatibility",
+ "kind": "statement",
+ "title": "The actual coefficient-stage identifications respect the normalized shifts",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and an arbitrary scheme $Y$. The universe of $Y$ and the universe of $\\Omega$ are independent. Let $I$ be the directed poset of finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set]. Use the specified small coefficient models, intrinsic raw rational stages $C_E=D^b_c(Y,E)$ [def-weil-rationalization-karoubi], and the datum-free normalized scalar stage system $S$ of [lem-general-algebraically-closed-coefficient-stages]. Write $T_{EL}$ for its transition for $E\\le L$, $a_{ELM}:T_{LM}T_{EL}\\cong T_{EM}$ for its associator, and $\\sigma_{EL,n,K}:T_{EL}(K[n])\\cong(T_{EL}K)[n]$ for its fixed integral-image-normalized integer-shift comparison. Let $P=S.\\mathrm{PairCategory}$ be the category with literal objects $(E,K)$ and morphisms the classes $[L,u]$ modulo equality after common-stage transport [def-sf-directed-common-stage-data]. Write $j_E:C_E\\to P$ for the specified inclusion. No finite-field datum, geometric base-field structure, noetherian assumption, or Karoubi completion is part of this construction.\n\nEquip $P$ with the uniquely specified shifts and identity-normalized inclusion comparisons $\\beta$ of [lem-pur-general-pair-shift-normalization]. For $E\\le L$, let\n$$\\theta_{EL}:j_L T_{EL}\\xrightarrow{\\sim}j_E$$\nbe the canonical stage identification [def-sf-directed-common-stage-data], whose component at $K\\in C_E$ is represented over $L$ by $a_{ELL,K}:T_{LL}T_{EL}K\\to T_{EL}K$. With the composite shift comparison on $j_LT_{EL}$ built from the prescribed $\\sigma$ and $\\beta$, this actual natural isomorphism commutes with all integer shifts. Explicitly, for every $n\\in\\mathbf Z$ and $K\\in C_E$,\n$$\n \\beta_{E,n,K}\\circ\\theta_{EL,K[n]}\n =\\theta_{EL,K}[n]\\circ\\beta_{L,n,T_{EL}K}\\circ j_L(\\sigma_{EL,n,K}).\n$$\nThus its hom natural transformation has $\\mathrm{NatTrans.CommShift}$ for $\\mathbf Z$ with these already specified comparisons. This includes $E=L$ and repeated finite stages; the comparisons are not replaced by other choices.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained order-1462 definition, common-stage composition and shift clause; live GeneralAlgebraicallyClosedCoefficients.lean:587-600, transitionIso_commShift; live Lean: Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients.transitionIso_commShift",
+  "note": "Construction material for GeneralAlgebraicallyClosedCoefficients.transitionIso_commShift: theta_EL is represented by a_ELL. Apply the normalized scalar associator shift-compatibility equation to that representative and use the sigma-conjugated representative shift formula. The inclusion beta components are identities, so cancellation gives exactly the displayed equation, including E=L and repeated stages. Keep the already chosen comparisons; choosing a fresh CommShift via ofIso would not prove this assertion."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-directed-common-stage-data",
+  "lem-pur-general-pair-shift-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-scalar-associator-shifts] to the inclusions $E\\le L\\le M$. Its auxiliary finite-field datum can have $a=1$ and $p=2$ if $\\ell\\ne2$, or $p=3$ if $\\ell=2$ [def-weil-finite-field-fiber]; take $k_0=\\mathbf Z/p\\mathbf Z$ and its algebraic closure, which exists by [def-weil-algebraic-closure]. This imposes no structure morphism on $Y$. The parameter-independence and normalized-shift identification in [lem-general-algebraically-closed-coefficient-stages] identify its scalar functors and shifts with the prescribed datum-free ones. Its canonical tensor associator is the specified $a_{ELM}$: both are balanced tensor composition followed by the equality of the composite coefficient inclusion with the direct inclusion. Thus its shift equation, with $M=L$, reads\n$$\\sigma_{EL,n,K}\\circ a_{ELL,K[n]}=a_{ELL,K}[n]\\circ\\sigma_{LL,n,T_{EL}K}\\circ T_{LL}(\\sigma_{EL,n,K}).$$\nThe coefficient-inclusion equality is the same on both sides; substituting that equality merely identifies the endpoints. No alternative shift or associator is chosen.",
+   "uses": [
+    "lem-weil-scalar-associator-shifts",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-weil-finite-field-fiber",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Canonical scalar composition; agent expansion of the retained order-1462 common-stage shift clause, using GeneralAlgebraicallyClosedCoefficients.lean:508-553,587-600 and GeneralAlgebraicallyClosedCoefficientStages.lean:530-581."
+   }
+  },
+  {
+   "text": "Fix $n\\in\\mathbf Z$ and $K\\in C_E$. By [def-sf-directed-common-stage-data], $\\theta_{EL,K}$ has representative $[L,a_{ELL,K}]$ and $j_L(\\sigma_{EL,n,K})$ has representative $[L,T_{LL}(\\sigma_{EL,n,K})]$. By [lem-pur-general-pair-shift-normalization], the two $\\beta$ components in the desired equation are identities on the literal shifted pairs, and\n$$\\theta_{EL,K}[n]=[L,\\sigma_{EL,n,K}^{-1}\\circ a_{ELL,K}[n]\\circ\\sigma_{LL,n,T_{EL}K}].$$\nIn particular the reflexive transition $T_{LL}$ is retained; it has not been set equal to the identity.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "lem-pur-general-pair-shift-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Canonical scalar composition; agent expansion of the retained order-1462 common-stage shift clause, using GeneralAlgebraicallyClosedCoefficients.lean:508-553,587-600 and GeneralAlgebraicallyClosedCoefficientStages.lean:530-581."
+   }
+  },
+  {
+   "text": "Compose the representatives of Step 2 at their common stage $L$, using [def-sf-directed-common-stage-data]. The right side of the required square is represented by\n$$\\sigma_{EL,n,K}^{-1}\\circ a_{ELL,K}[n]\\circ\\sigma_{LL,n,T_{EL}K}\\circ T_{LL}(\\sigma_{EL,n,K})=a_{ELL,K[n]}.$$\nThe equality is Step 1 multiplied on the left by $\\sigma_{EL,n,K}^{-1}$. The left side, since $\\beta_{E,n,K}$ is the identity [lem-pur-general-pair-shift-normalization], has exactly this representative. Equal representatives give equal quotient morphisms. This proves the displayed square.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "lem-pur-general-pair-shift-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Canonical scalar composition; agent expansion of the retained order-1462 common-stage shift clause, using GeneralAlgebraicallyClosedCoefficients.lean:508-553,587-600 and GeneralAlgebraicallyClosedCoefficientStages.lean:530-581."
+   }
+  },
+  {
+   "text": "The argument applies to every integer $n$, including $0$ and negative integers, and every $K$. The composite comparison for $j_LT_{EL}$ is precisely $\\beta_{L,n,T_{EL}K}\\circ j_L(\\sigma_{EL,n,K})$ by the definition of the composite shift comparison. Hence Step 3 is the componentwise defining equation for $\\mathrm{NatTrans.CommShift}(\\theta_{EL}.\\mathrm{hom},\\mathbf Z)$. It uses no strict inequality of coefficient stages, so also covers $E=L$ and repeated fields.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Canonical scalar composition; agent expansion of the retained order-1462 common-stage shift clause, using GeneralAlgebraicallyClosedCoefficients.lean:508-553,587-600 and GeneralAlgebraicallyClosedCoefficientStages.lean:530-581."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-scalar-associator-shifts",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraic-closure",
+  "def-sf-directed-common-stage-data",
+  "lem-pur-general-pair-shift-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Canonical scalar composition; agent expansion of the retained order-1462 common-stage shift clause, using GeneralAlgebraicallyClosedCoefficients.lean:508-553,587-600 and GeneralAlgebraicallyClosedCoefficientStages.lean:530-581."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical natural isomorphism from a stage inclusion to scalar extension followed by a later stage inclusion commutes with integer shifts",
+   "results": "8 hits: CochainComplex.shiftEval, CochainComplex.shiftShortComplexFunctorIso, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_hom_app_f, CochainComplex.shiftShortComplexFunctorIso_add'_hom_app, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_eq, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_inv_app_f, CochainComplex.shiftShortComplexFunctor', CochainComplex.shiftFunctorComm_hom_app_f",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits: CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor, CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "transIso|transitionIso_commShift|CommShift.*(comp|iso)",
+   "results": "25 hits: Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical transition isomorphism of a filtered pair category commutes with shifts of the stage inclusions",
+   "results": "8 hits: CategoryTheory.NatTrans.CommShift.shift_comm, CategoryTheory.NatTrans.shift_app_comm, CategoryTheory.Functor.ShiftSequence.induced.isoZero, CategoryTheory.Equivalence.commShiftFunctor, CategoryTheory.Functor.CommShift.OfComp.iso, CategoryTheory.Functor.CommShift.commShiftIso, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.Functor.CommShift.iso",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of coefficient tensor associators with shifts implies that the canonical common stage identification is a shift compatible natural transformation",
+   "results": "8 hits: CategoryTheory.NatTrans.CommShift.associator, CategoryTheory.Functor.commShift₂_comm_assoc, CategoryTheory.TwistShiftData.assoc, CategoryTheory.TwistShiftData.shiftFunctorAdd'_hom_app, CategoryTheory.ShiftMkCore.assoc_hom_app, CategoryTheory.Functor.CommShift.isoAdd'_assoc, CategoryTheory.ShiftMkCore.assoc_hom_app_assoc, CategoryTheory.ShiftMkCore.assoc_inv_app",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|transitionIso_commShift",
+   "results": "{\"t\": \"2026-10-27T07:26:03Z\", \"tool\": \"grep\", \"query\": \"StageSystem|PairCategory|transitionIso_commShift\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic shift operations and transport lemmas do not prove the specified pair-category representative square with already fixed comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism induced by transition associators on a filtered colimit category is compatible with shifts",
+   "results": "{\"t\": \"2026-10-27T07:26:03Z\", \"tool\": \"leansearch\", \"query\": \"A natural isomorphism induced by transition associators on a filtered colimit category is compatible with shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CommShift.ofIso_compatibility\", \"CategoryTheory.NatTrans.CommShift.associator\", \"CategoryTheory.Functor.CommShift.isoAdd\", \"CategoryTheory.NatTrans.CommShiftCore.shift_app_assoc\", \"CategoryTheory.Functor.CommShift.OfComp.iso\", \"CategoryTheory.Functor.ShiftSequence.induced.isoZero\", \"CategoryTheory.NatTrans.CommShiftCore.shift_app_comm\", \"CategoryTheory.Functor.ShiftSequence.induced.shiftIso\"], \"digest\": \"ab293df033f7000c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic shift operations and transport lemmas do not prove the specified pair-category representative square with already fixed comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift",
+   "results": "{\"t\": \"2026-10-27T07:26:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.CommShift.id\", \"CategoryTheory.NatTrans.CommShift.isoRefl_hom\", \"CategoryTheory.NatTrans.CommShift\", \"CategoryTheory.Functor.CommShift.ofIso_compatibility\", \"CategoryTheory.NatTrans.CommShift.of_core\", \"CategoryTheory.NatTrans.CommShift.leftUnitor\", \"CategoryTheory.NatTrans.CommShift.rightUnitor\", \"CategoryTheory.NatTrans.CommShift.of_iso_inv\"], \"digest\": \"90520e9555bd11f4\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic shift operations and transport lemmas do not prove the specified pair-category representative square with already fixed comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical stage identification in a directed pair category commutes with prescribed integer shifts via the scalar associator shift equation",
+   "results": "{\"t\": \"2026-10-27T07:26:05Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical stage identification in a directed pair category commutes with prescribed integer shifts via the scalar associator shift equation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.shiftFunctorComm_eq\", \"CategoryTheory.shiftComm_hom_comp_assoc\", \"CategoryTheory.shiftFunctorAdd'_assoc\", \"CategoryTheory.SingleFunctors.shiftIso_add'\", \"CategoryTheory.shiftComm'\", \"CategoryTheory.shiftComm\", \"CategoryTheory.Functor.shiftIso_hom_app_comp_shiftMap\", \"CategoryTheory.shiftComm_hom_comp\"], \"digest\": \"b215761a6777c642\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic shift operations and transport lemmas do not prove the specified pair-category representative square with already fixed comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of a scalar extension associator with coherent shifts implies shift compatibility of the canonical finite stage identification in a category of pairs",
+   "results": "{\"t\": \"2026-10-27T07:26:23Z\", \"tool\": \"leanfinder\", \"query\": \"Compatibility of a scalar extension associator with coherent shifts implies shift compatibility of the canonical finite stage identification in a category of pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommShift₂Setup.int\", \"CategoryTheory.Functor.commShiftIso_eq_ofInduced\", \"CategoryTheory.Functor.ShiftSequence.induced.shiftIso\", \"CategoryTheory.SingleFunctors.shiftIso_add'\", \"CategoryTheory.Functor.CommShift.isoAdd'_assoc\", \"CategoryTheory.SingleFunctors.shiftIso_add\", \"CategoryTheory.Functor.ShiftSequence.induced_shiftMap_assoc\", \"CategoryTheory.shiftFunctorAdd'_assoc\"], \"digest\": \"c97156c8a5eea4d8\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic shift operations and transport lemmas do not prove the specified pair-category representative square with already fixed comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained order-1462 definition, common-stage composition and shift clause; live GeneralAlgebraicallyClosedCoefficients.lean:587-600, transitionIso_commShift",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-transition-shift-compatibility",
+  "worker": "stage1",
+  "summary": "Expanded the actual theta representative and the prescribed shift-conjugation formula. Reused the existing scalar-associator shift theorem through the datum-free parameter identification, retained T_LL and a_ELL, and proved the square by an explicit equality at L. No new nodes, no changed statement, no Lean edits.",
+  "blueprint": "Retained order-1462 definition: common-stage coefficient identifications and the clause (E,K)[1]=(E,K[1]); newest blueprint scalar-composition proof supplies the transitivity route."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NV-582a120f2",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-582a120f2 (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes. The statement is byte-identical to the live copy, so it is not weakened. Lean StageSystem/Basic.lean transIso_hom_app_eq confirms θ_{EL,K} is represented at L by a_{ELL,K}. Step 1: lem-weil-scalar-associator-shifts applies with an auxiliary datum p=2 (or p=3 when ℓ=2), a=1, k0=Z/pZ and its algebraic closure, so ℓ≠p holds and no map from Y is needed. Its canonical composition iso followed by eqToIso along the law j∘i=i is the stage associator; Lean Stages.lean:537 defines scalarAssociator exactly this way. The M=L shift equation was checked for sources and targets. Advisory: the stage node's parameter-independence sentence names only functors and shifts; the associator identification rests on both nodes citing the canonical iso of lem-weil-scalar-extension-composition. Steps 2-3: the representatives θ=[L,a_ELL], j_L(σ)=[L,T_LL(σ)], identity β components and θ[n]=[L,σ_EL^{-1}∘a[n]∘σ_LL] are correct, with the inverse on the E side and T_LL kept; composing at stage L and cancelling σ^{-1} gives a_{ELL,K[n]}. Step 4 is exactly Mathlib's NatTrans.CommShift equation with the composite comparison j_L(σ) then β_L. Checked n=0, negative n, K=0, E=L and repeated stages. No cycle. All cited theorem nodes are in the unit, so no tool_uses are needed. lem-pur-general-legacy-pair-shifts is the D-dependent S^old system, not a duplicate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.transitionIso_commShift",
+  "statement": "theorem transitionIso_commShift\n    {l : ℕ} [Fact l.Prime]\n    {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {Y : AlgebraicGeometry.Scheme.{u}}\n    (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) :\n    NatTrans.CommShift ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).transIso h).hom ℤ",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing theorem at GeneralAlgebraicallyClosedCoefficients.lean:593. The actual stageSystem.transIso is used with the already fixed hasShift, inclusionCommShift and stageTransitionCommShift instances. NatTrans.CommShift.shift_app_comm, with the composite Functor.CommShift comparison, is precisely the displayed component square (with sides reversed). The binders retain independent scheme/coefficient universes, all integer shifts and reflexive inclusions. No additional finite-field datum or completion is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-258ab5d93",
+  "group": "NA",
+  "result": "pass",
+  "note": "existing:true transitionIso_commShift (GeneralAlgebraicallyClosedCoefficients.lean:593); statement verbatim; only the lean field changed. Checked: sigma = stageTransitionCommShift (S.T h reduces to stageTransition), beta = inclusionCommShift (identity components, shift_existsUnique), theta = transIso with representative a_ELL (transIso_hom_app_eq); the NatTrans.CommShift component condition is the displayed equation. Universes u/v independent; all n in Z; E=L included; no finite-field datum or Karoubi. No compile (existing declaration, no file changed). Advisory: parent def-weil-algebraically-closed-coefficients also lists the declaration (two owners, existing precedent); the docstring's blueprint tag is the parent."
+ }
+}

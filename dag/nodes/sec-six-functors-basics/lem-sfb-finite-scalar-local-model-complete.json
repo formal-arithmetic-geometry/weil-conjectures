@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-finite-scalar-local-model-complete",
+ "kind": "statement",
+ "title": "Derived completeness of finite constant scalar local models",
+ "statement": "Fix a prime $\\ell$, a finite extension $F/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_F$ with its induced $\\ell$-adic norm topology, and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$, put $B_T=p_T^*\\underline A$ and $k_{n,T}=(A/\\pi^n)_T$ for $n\\ge1$. Use the small pro-étale sites and universes of [def-weil-size-convention] and the ordinary unbounded derived module categories [sk-def-sfb-module-derived-pushpull]. Write $C_T(K)=R\\varprojlim_{n\\ge1}\\operatorname{Res}_n(K\\otimes^L_{B_T}k_{n,T})$ and $c_{T,K}:K\\to C_T(K)$ for the specified strict-tower completion unit [sk-def-pe-derived-completion, lem-pe-completion-triangle-comparison].\nLet $T$ be any scheme and $M$ a $B_T$-module sheaf with a finite constant scalar local model [sk-def-sfb-constructible]: there is a pro-étale cover $\\{U_i\\to T\\}$ and finitely presented scalar $A$-modules $P_i$ with $M|_{U_i}\\simeq B_{U_i}\\otimes_{\\underline A}\\underline{P_i}$, where finitely presented means a cokernel of a map between finite free $A$-modules, and underlines on scalar modules mean constant sheaves. Then $c_{T,M[0]}$ is an isomorphism.\nIn particular this holds for every global scalar model $B_T\\otimes_{\\underline A}\\underline P$, including torsion $P$, and for every finite power $B_T^d$, $d\\ge0$. For the free case the canonical cone-to-quotient maps identify the strict reduction tower of $B_T^d[0]$ with $(k_{n,T}^d[0])_n$, compatibly with the actual quotient transitions and augmentations. The isomorphism $B_T^d[0]\\simeq R\\varprojlim_n k_{n,T}^d[0]$ so obtained carries the completion unit to the inverse-limit cone with its specified scalar quotient projections. No geometric condition on $T$ or torsion-freeness of the scalar modules is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Local models and Locality paragraphs of the finite-model proof; returned proof steps 3--4. Agent completion argument from Bhatt--Scholze Sections 3.1 and 3.5, not the Noetherian stratification criterion."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "lem-pe-completion-triangle-comparison",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing coefficient short exact sequence of the completion-triangle comparison, map it by the d-fold biproduct and then by the degree-zero single functor. Naturality of scalar action identifies its first arrow with the actual principal scalar on the finite free complex. The mapping-cone short-exact comparison gives the map from each canonical principal cone to the actual finite quotient power. Its formula is zero on the shifted summand and quotient on the unshifted summand. The canonical transition and augmentation coordinate equations prove that these maps form one strict tower morphism, with all the required coordinates.",
+   "uses": [
+    "lem-pe-completion-triangle-comparison",
+    "det-pe-derived-nakayama-resolution",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "lem-pur-finite-power-complex",
+    "lem-pe-principal-reduction-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Local models; free case, with the normalized strict principal quotient resolution"
+   }
+  },
+  {
+   "text": "The integral coefficient quotient cone is limiting and its transitions are epi. Finite biproduct powers preserve limits, as does the degree-zero single functor. Hence the finite-free quotient cone is limiting with exactly its specified projections. The generic Roos kernel calculation identifies its inclusion as the kernel of one minus the product shift. The pro-etale tower epimorphism theorem makes that difference map degreewise epi. The degreewise-epi kernel-to-shifted-cone comparison shows that the quotient augmentation is a quasi-isomorphism. The Roos calculus carries the strict tower map of Step 1 to a quasi-isomorphism. Its coordinate formula identifies every specified strict completion augmentation with this quotient augmentation after that same tower map. The completion-triangle comparison therefore makes the free completion unit invertible, including rank zero.",
+   "uses": [
+    "lem-sfb-integral-coefficient-quotient-limit",
+    "lem-pur-finite-power-complex",
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-roos-split-comparison",
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "det-pe-replete-epimorphism",
+    "lem-pe-roos-cone-calculus",
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 3.1.9--3.1.10; the strict augmented comparison uses the existing principal/Roos normalization nodes"
+   }
+  },
+  {
+   "text": "Apply the existing two-term free resolution of a finitely presented ordinary scalar module. Its two free terms are complete by Step 2. The short exact sequence supplies its degree-zero distinguished triangle. The exact completion functor and its natural unit give a morphism to the completed distinguished triangle; two-out-of-three makes the final unit invertible. This proves completeness for each ordinary scalar presentation, including torsion modules.",
+   "uses": [
+    "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "lem-sf-derived-ses-triangle",
+    "lem-sf-triangle-morphism-iso",
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Local models, exact length-one scalar resolution; completion-unit triangle argument from Bhatt--Scholze Section 3.4"
+   }
+  },
+  {
+   "text": "Use the existing normalized strict completion restriction comparison for each weakly-etale map in a pro-etale model cover. Its derived comparison is an isomorphism and its unit equation identifies the restricted original unit with the completion unit of the restricted object. The comparison concerns these covering slices and preserves the specified augmentation.",
+   "uses": [
+    "lem-sfb-strict-completion-restriction-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 3.4, paragraph following Definition 3.4.1: restriction commutes with homotopy limits; strict-unit refinement using the displayed principal and Roos formulas"
+   }
+  },
+  {
+   "text": "Use the existing local-model representative theorem to express each model chart by an actual finite scalar matrix cokernel. Transport between the two coefficient topology presentations using equality of the induced topologies. Over the scalar DVR these matrix cokernels are finitely presented, so Step 3 applies. The derived inverse-image factorization and single-functor comparison transport completeness through the chart isomorphism. Step 4 and joint conservativity on a pro-etale cover show that the original completion unit is invertible. A global condensed-point finite presentation is a local model using the identity cover and the pullback composition comparison.",
+   "uses": [
+    "lem-sfb-proetale-scalar-local-model-representatives",
+    "det-pe-derived-nakayama-resolution",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-strict-completion-restriction-comparison",
+    "lem-pe-completion-triangle-comparison",
+    "lem-zl-condensed-cover-restriction-conservative",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Locality paragraph; apply slice compatibility to the completion unit and use covering conservativity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-completion-triangle-comparison",
+  "det-pe-derived-nakayama-resolution",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "lem-pur-finite-power-complex",
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-sfb-integral-coefficient-quotient-limit",
+  "lem-weil-strict-roos-derivation",
+  "lem-weil-roos-split-comparison",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "det-pe-replete-epimorphism",
+  "lem-pe-roos-cone-calculus",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sfb-strict-completion-restriction-comparison",
+  "lem-sfb-proetale-scalar-local-model-representatives",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "sk-def-sfb-pullback-from-point-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Local models and Locality. X9 proves the normalized coefficient quotient cone, strict principal/Roos comparison and triangle argument, and uses the existing finite scalar resolution and restriction/descent interfaces. The coefficient quotient-limit calculation is proved in the same delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proetale sheaf locally a finite constant module over the l adic ring of integers is derived pi complete including torsion modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"Hausdorffification\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"For a commutative ring `R`, an ideal `I` of `R`, and an `R`-module `M`, the `Hausdorffification` of `M` with respect to `I` is the quotient module $M / (\\\\bigcap_{n \\\\in \\\\mathbb{N}} I^n M)$.\"}\n  {\"name\": \"IsAdicComplete.toIsPrecomplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_4} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : IsAdicComplete I M], IsPrecomplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, if $ M $ is adic complete with respect to $ I $, then $ M $ is precomplete with respect to $ I $.\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite scalar presentation modules over continuous integral coefficient sheaves reconstruct from their derived finite quotient tower",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"Module.FinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  (∃ s, Submodule.span R ↑s = ⊤ ∧ (Finsupp.linearCombination R Subtype.val).ker.FG) → Module.FinitePresentation R M\", \"doc\": \"If there exists a finite set $ s $ such that the span of $ s $ equals $ M $ and the kernel of the linear map from the free module on $ s $ to $ M $ is finitely generated, then $ M $ is finitely presen\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite.rec\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a finite presentation of a quasicoherent sheaf $ M $ over a ring sheaf $ R $, any property or construction that holds when the generating sections are finitely generated and the relations are fi\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, this recursor allows defining functions on the property tha\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Prop\", \"doc\": \"A module `M` is `I`-adically complete if it is Hausdorff and precomplete.\"}\n  {\"name\": \"IsAdicComplete.of_subsingleton\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [Subsingleton M] : IsAdicComplete I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.toIsHausdorff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} {inst✝ : CommRing R} {I : Ideal R} {M : Type u_4} {inst✝¹ : AddCommGroup M} {inst✝² : Module R M} [self : IsAdicComplete I M] : IsHausdorff I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.toIsPrecomplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} {inst✝ : CommRing R} {I : Ideal R} {M : Type u_4} {inst✝¹ : AddCommGroup M} {inst✝² : Module R M} [self : IsAdicComplete I M] : IsPrecomplete I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.mk\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_4} [AddCommGroup M] [Module R M] [toIsHausdorff : IsHausdorff I M] [toIsPrecomplete : IsPrecomplete I M] : IsAdicComplete I M\", \"doc\": \"\"}\n  {\"name\": \"isAdicComplete_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : IsAdicComplete I M ↔ IsHausdorff I M ∧ IsPrecomplete I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.bot\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (M : Type u_4) [AddCommGroup M] [Module R M] : IsAdicComplete ⊥ M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.subsingleton\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (M : Type u_4) [AddCommGroup M] [Module R M] (h : IsAdicComplete ⊤ M) : Subsingleton M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.le_jacobson_bot\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) [IsAdicComplete I R] : I ≤ ⊥.jacobson\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.map_algebraMap_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [CommRing S] [Module S M] [Algebra R S] [IsScalarTower R S M] : IsAdicComplete (Ideal.map (algebraMap R S) I) M ↔ IsAdicComplete I M\", \"doc\": \"\"}\n  {\"name\": \"IsAdicComplete.StrictMono.extend\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_4} [AddCommGroup M] [Module R M] {N : Type u_5} [AddCommGroup N] [Module R N] {a : ℕ → ℕ} (ha : StrictMono a) (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (n : ℕ) : M →ₗ[R] N ⧸ I ^ n • ⊤\", \"doc\": \"Instead of providing all `M →ₗ[R] N ⧸ (I ^ n • ⊤)`, one can just provide\\n`M →ₗ[R] N ⧸ (I ^ (a n) • ⊤)` for a strictly increasing sequence `a n` to recover all\\n`M →ₗ[R] N ⧸ (I ^ n • ⊤)`.\"}\n  {\"name\": \"IsAdicComplete.lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_4} [AddCommGroup M] [Module R M] {N : Type u_5} [AddCommGroup N] [Module R N] [IsAdicComplete I N] (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow I N hle ∘ₗ f n = f m) : M →ₗ[R] N\", \"doc\": \"Universal property of `IsAdicComplete`.\\nThe lift linear map `lift I f h : M →ₗ[R] N` of a sequence of compatible\\nlinear maps `f n : M →ₗ[R] N ⧸ (I ^ n • ⊤)`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|isAdicComplete",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"36\", \"text\": \"* `AdicCompletion.isAdicComplete`: `AdicCompletion I M` is `I`-adically complete if `I` is\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"39\", \"text\": \"* `MvPowerSeries.isAdicComplete`: Multivariate power series is adic complete with respect to\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"185\", \"text\": \"theorem isAdicComplete (h : I.FG) : IsAdicComplete I (AdicCompletion I M) where\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"215\", \"text\": \"    IsAdicComplete (.span (.range X) : Ideal (MvPowerSeries σ R)) (MvPowerSeries σ R) := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"221\", \"text\": \"  rw [← IsAdicComplete.congr_ringEquiv _ (toAdicCompletionAlgEquiv σ R).toRingEquiv, this,\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"line\": \"39\", \"text\": \"    IsAdicComplete (IsLocalRing.maximalIdeal A) A where\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"34\", \"text\": \"* `AdicCompletion.isAdicComplete_of_fg` : for a local ring `R` with finitely generated\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"49\", \"text\": \"theorem isLocalRing_of_isAdicComplete_maximal (m : Ideal R) [m.IsMaximal] [IsAdicComplete m R] :\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"53\", \"text\": \"      (IsAdicComplete.le_jacobson_bot m).trans <| sInf_le ⟨bot_le, hJ⟩).symm⟩\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"61\", \"text\": \"lemma isAdicComplete_self (fg : I.FG) :\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"62\", \"text\": \"    IsAdicComplete (I.map (algebraMap R (AdicCompletion I R))) (AdicCompletion I R) :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"24\", \"text\": \"- `IsAdicComplete I M`: this says that `M` is Hausdorff and precomplete.\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"29\", \"text\": \"- `IsAdicComplete.lift`: if `N` is `I`-adically complete, then a compatible family of\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"55\", \"text\": \"@[mk_iff, stacks 0317 \\\"see also `IsAdicComplete.of_bijective_iff`\\\"]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"56\", \"text\": \"class IsAdicComplete : Prop extends IsHausdorff I M, IsPrecomplete I M\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"647\", \"text\": \"theorem of_bijective_iff : Function.Bijective (of I M) ↔ IsAdicComplete I M :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"line\": \"428\", \"text\": \"variable [IsAdicComplete I S]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"18\", \"text\": \"- `IsAdic.isAdicComplete_iff`:\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"19\", \"text\": \"  `IsAdicComplete I R` is equivalent to `CompleteSpace R` and `T2Space R` in the adic topology.\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"75\", \"text\": \"/-- `IsAdicComplete I R` is equivalent to being complete and hausdorff in the adic topology. -/\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"76\", \"text\": \"protected lemma IsAdic.isAdicComplete_iff : IsAdicComplete I R ↔ CompleteSpace R ∧ T2Space R := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"77\", \"text\": \"  rw [isAdicComplete_iff, hI.isHausdorff_iff, hI.isPrecomplete_iff, and_comm]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"21\", \"text\": \"- `IsAdicComplete.liftRingHom`: if `R` is\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"34\", \"text\": \"namespace IsAdicComplete\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"40\", \"text\": \"variable [IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite two term free resolution of an integral scalar module gives completeness for the canonical derived quotient tower on a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Module.Projective A Ω[A⁄R]\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a commutative $ R $-algebra. If $ A $ is formally smooth over $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*complet|complet.*proetale|derivedCompletion",
+   "date": "2026-10-22",
+   "results": "Actual search returned 0 hits: ",
+   "verdict": "no match: these are ordinary scalar adic completion or general finite-presentation/condensed constructions, not canonical derived completeness of local continuous pro-etale scalar models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of a finite locally presented module over a continuous proetale integral coefficient sheaf",
+   "date": "2026-10-22",
+   "results": "Actual search returned 8 hits: AdicCompletion.module, AdicCompletion, SheafOfModules.isFinitePresentation, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, SheafOfModules.QuasicoherentData.IsFinitePresentation, IsAdicComplete.mk, AdicCompletion.of_surjective_iff, AdicCompletion.of_surjective",
+   "verdict": "no match: these are ordinary scalar adic completion or general finite-presentation/condensed constructions, not canonical derived completeness of local continuous pro-etale scalar models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\"",
+   "date": "2026-10-22",
+   "results": "Actual search returned 12 hits: IsAdicComplete, IsAdicComplete.of_subsingleton, IsAdicComplete.toIsHausdorff, IsAdicComplete.toIsPrecomplete, IsAdicComplete.mk, isAdicComplete_iff, IsAdicComplete.bot, IsAdicComplete.subsingleton",
+   "verdict": "no match: these are ordinary scalar adic completion or general finite-presentation/condensed constructions, not canonical derived completeness of local continuous pro-etale scalar models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proetale sheaf locally a finite constant module over the l adic ring of integers is derived pi complete including torsion modules",
+   "date": "2026-10-22",
+   "results": "Actual search returned 8 hits: BDeRhamPlus, instCommRingBDeRhamPlus, BDeRham, AdicCompletion.module, IsAdicComplete, Hausdorffification, IsAdicComplete.toIsPrecomplete, CondensedMod.ofSheafProfinite",
+   "verdict": "no match: these are ordinary scalar adic completion or general finite-presentation/condensed constructions, not canonical derived completeness of local continuous pro-etale scalar models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free resolution modules over a complete ring sheaf on a replete topos are derived complete and completion is local on covers",
+   "date": "2026-10-22",
+   "results": "Actual search returned 8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, CondensedMod.IsSolid, CondensedMod.ofSheafProfinite, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.Presentation.IsFinite, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "verdict": "no match: these are ordinary scalar adic completion or general finite-presentation/condensed constructions, not canonical derived completeness of local continuous pro-etale scalar models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-integral-finite-model-completeness",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Local models and Locality paragraphs of the finite-model proof; returned proof steps 3--4. Agent completion argument from Bhatt--Scholze Sections 3.1 and 3.5, not the Noetherian stratification criterion.",
+   "via": [
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-scalar-local-model-complete",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the normalized free case via the augmented strict cone-to-quotient tower and the existing surjective-tower Roos theorem; passed through the existing finite-flat scalar resolution and actual completion-unit morphism of triangles, including torsion. Proved locality by literal slice restriction of principal and Roos cochain formulas, then applied covering conservativity. Reused existing DAG nodes throughout: zero new nodes and zero Mathlib leaves. Read every cited statement; no reliance on Noetherian stratification or arbitrary-pullback limit preservation.",
+  "blueprint": "The finite local-model completeness subargument of the closed-complement calculation serving det-sf-comp-coherence-cocycle, through the item ancestry: explicit free reconstruction, scalar length-one resolution (Local models), and covering-slice locality (Locality). The compactification route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Canonical integral coefficient ring limit, needed for the finite-free unit; no compactification-unit node supplies this coefficient calculation."
+   },
+   {
+    "node": "det-prop-integral-criterion-constant-coefficients",
+    "why": "Flat constant-to-continuous coefficient map and quotient identification on arbitrary schemes; generic coefficient tool."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Scalar valuation ring is a DVR and its uniformizer is nonzero; generic local-field algebra tool."
+   },
+   {
+    "node": "lem-sfb-flat-scalar-cyclic-resolution",
+    "why": "Nonzero-scalar injectivity after flat scalar extension gives the exact free quotient resolution; generic ringed-site algebra."
+   },
+   {
+    "node": "lem-pe-principal-reduction-cone-calculus",
+    "why": "Specified strict principal reduction model, including quotient transitions and augmentations; generic completion tool."
+   },
+   {
+    "node": "lem-pc-cone-short-exact-quasi-iso",
+    "why": "Canonical cone-to-cokernel map is a quasi-isomorphism for a short exact sequence; generic homological tool."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "Surjective module towers compute derived inverse limit with the prescribed inclusion and projections; generic pro-etale limit tool."
+   },
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "Roos construction preserves strict levelwise quasi-isomorphisms and their augmentations; generic completion tool."
+   },
+   {
+    "node": "lem-pe-completion-triangle-comparison",
+    "why": "Strict Roos augmentation equals the actual completion unit, naturally and as a morphism of triangles; generic completion tool."
+   },
+   {
+    "node": "lem-sfb-scalar-model-finite-flat-resolution",
+    "why": "Length-one finite free resolution for an arbitrary finite scalar model over a flat DVR algebra sheaf; generic local-model algebra."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "A short exact sequence of module sheaves supplies a distinguished derived triangle; generic homological tool."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Two isomorphisms in a morphism of distinguished triangles imply the third; generic triangulated tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "A pro-etale site object gives the slice site and the same constant ring; generic site localization tool."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "The actual condensed coefficient identification over a site object agrees with slice restriction; generic coefficient normalization."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of module restriction to a slice; generic ringed-site tool."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Products of module sheaves are sectionwise, so covering slice restriction commutes with the products in Roos; generic product tool."
+   },
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "Sectionwise formula for slice restriction, used for product, cone and augmentation compatibility."
+   },
+   {
+    "node": "lem-zl-condensed-cover-restriction-conservative",
+    "why": "Joint conservativity on unbounded module derived categories for any pro-etale cover and condensed coefficients; generic descent tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "lem-pe-roos-cone-calculus",
+  "lem-pe-completion-triangle-comparison",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-zl-condensed-cover-restriction-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-bbcf2327e",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-bbcf2327e (reviewer sub-agent of L); spot-checked: Read in full: the item, all 5 steps, all 6 stmt_deps and 18 proof_deps, blueprint ctf-equals-bc.proof (Local models, Locality) and Bhatt-Scholze Props 3.1.9-3.1.10 and the paragraph after Def 3.4.1. The delivery has no new nodes. The statement and stmt_deps are unchanged, proof_deps equals the union of the step uses, an ancestry check over 1485 nodes finds no cycle, no SGA is cited, and there is no re-split note. Step 1: flatness and B/pi^n=k_n (integral criterion), DVR, and the flat cyclic resolution give injectivity of pi^n. The cone-to-cokernel map is a quasi-isomorphism. I checked by hand that the transition (x,y)->(x,pi y) is a chain map and is compatible with q_n and j_n. Step 2: on a degree-0 surjective tower the Roos complex is [prod -> prod] with kernel lim and cokernel 0. H(q) sends c=(((m,0))_n,0) to ((m mod pi^n)_n,0). B^d->lim k_n^d is the canonical iso, and its projections are the quotient maps (one-line check). So the free unit is an isomorphism with the stated normalisation. Step 3: the finite-flat resolution over a flat DVR algebra (torsion P allowed), the completion morphism of triangles including the last square, and two-of-three. Step 4: slice restriction is exact, products are sectionwise and F|U(V/U)=F(V), so restriction commutes literally with D_n, Roos and c. alpha_u is natural in the coefficient ring, so it respects pi. The step avoids any claim that arbitrary inverse images preserve products. Step 5: naturality of c plus conservativity on covers for any condensed ring and any cover. Edge cases checked: T empty, d=0, P=0, P=A/pi^r (H^-1 handled through the resolution), n=1, infinite covers. All 18 tool_uses are accepted as generic coefficient, completion and site tools. Duplicate search (rg -L for derived complete with local/scalar model): candidates are perfect-model, line, cohomology-only or Noetherian variants, none a duplicate. Maintainer note: the same-day unsplit sibling lem-sfb-strict-completion-restriction-comparison contains the site-object case of Step 4. I kept the inline proof because it rests only on reviewed nodes, while the sibling also asserts product preservation for locally closed immersions. The sibling can reuse Step 4's argument when it is split. Advisory: the item names module-object categories while the tools use section-ring module sheaves, which the DAG's E_T equivalence identifies without changing sheaves, sections or morphisms. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteScalarLocalModelComplete",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.finite_scalar_local_model_complete",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.complexProduct",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.freeComplex",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.quotientPower",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.powerQuotient",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.powerStep",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.finiteBiproductPower",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.complexOfSequence",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.quotientSequence",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.quotientTower",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.quotientChainMap",
+   "AlgebraicGeometry.ProEtale.FiniteScalarCompletion.finite_scalar_local_model_complete"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteScalarLocalModelComplete.lean",
+  "statement": "theorem finite_scalar_local_model_complete : (∀ M : Modules l E T, HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) T M → IsDerivedComplete l E T (DerivedCategory.Q.obj ((singleFunctor (Modules l E T) 0).obj M))) ∧ (∀ P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (DerivedNakayama.integerRing l E), Mod.IsFinitelyPresented (DerivedNakayama.integerRing l E) P → IsDerivedComplete l E T (DerivedCategory.Q.obj ((singleFunctor (Modules l E T) 0).obj ((DerivedNakayama.pullback l E T).obj P)))) ∧ (∀ d : ℕ, IsDerivedComplete l E T (DerivedCategory.Q.obj (freeComplex l E T d)) ∧ ∀ data : PrincipalReductionConeData l E T, data.IsCanonical l E T → ∃ (q : (CompletionTriangle.tower l E T data).obj (freeComplex l E T d) ⟶ quotientTower l E T d) (b : freeComplex l E T d ⟶ roosF.obj (quotientTower l E T d)) (e : DerivedCategory.Q.obj (freeComplex l E T d) ≅ DerivedCategory.Q.obj (roosF.obj (quotientTower l E T d))), (∀ n : ℕ, QuasiIso ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map q).app (op n))) ∧ (∀ (n : ℕ) (k : ℤ), (q.f k).app (op n) = (data.χ n (freeComplex l E T d) k).hom ≫ biprod.fst ≫ (quotientChainMap l E T d n).f k) ∧ (∀ n : ℕ, (data.j n).app (freeComplex l E T d) ≫ (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map q).app (op n) = quotientChainMap l E T d n) ∧ (∀ p : ℤ, b.f (p + 1) ≫ (roosχ (quotientTower l E T d) p).hom = biprod.lift 0 ((Pi.lift (fun n : ℕ ↦ quotientChainMap l E T d n)).f (p + 1))) ∧ e.hom = DerivedCategory.Q.map b ∧ (∀ a : 𝟭 (CochainComplex (Modules l E T) ℤ) ⟶ CompletionTriangle.complexCompletion l E T data, (∀ p : ℤ, (a.app (freeComplex l E T d)).f (p + 1) ≫ (roosχ ((CompletionTriangle.tower l E T data).obj (freeComplex l E T d)) p).hom = biprod.lift 0 ((Pi.lift (f := fun n : ℕ ↦ ((CompletionTriangle.tower l E T data).obj (freeComplex l E T d)).asFunctor.obj (op n)) (fun n : ℕ ↦ (data.j n).app (freeComplex l E T d))).f (p + 1))) → a.app (freeComplex l E T d) ≫ roosF.map q = b))",
+  "branch": "sheaf-dag",
+  "by": "Q82",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem jointly states local, global scalar-presentation, and finite-free completeness, with an augmented strict cone-to-quotient tower quasi-isomorphism and a unit-normalized derived isomorphism. Global scalar presentations use the same condensed-point finite-matrix encoding as the recorded constructibility dependency. Helpers are actual finite powers and actual quotient maps, not new independent notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8d0b4df9",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed head 6f86a2bc (H3: free ψ in the final clause). Snapshot diff: only the Lean module, lean.statement and the report changed; the item is not live. The new clause ∀ a : 𝟭 ⟶ complexCompletion data with the exact roosχ coordinate formula of completion_triangle_comparison → a.app free ≫ roosF.map q = b ties the unit to the pinned q. That theorem supplies such an a (non-vacuous), and its c≫κ = Q(a) gives c≫κ≫Q(roosF.map q) = e.hom (the node's normalization). Hand-verified true via roosF_map_χ and j_n≫q_n = quotientChainMap; also holds at d=0. Other clauses unchanged and correct (local model, global finitely presented P incl. torsion, all d, q/b/e pinned, arbitrary T, universes). Statement verbatim, lines ≤ 89, docstrings with 5 steps, proof sorry, nothing hollow. No fix, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9dc67",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261024T191755-L-489561",
+  "kind": "interface",
+  "note": "independent cc review: item theorem finite_scalar_local_model_complete: pp.all elaborated type byte-identical old vs new; refactored quotientSequence/quotientTower/freeComplex checked against the change record; new node lem-sfb-integral-coefficient-quotient-limit statement vs proved Lean; proof_deps vs imports; axioms (sorryAx only via the open cited completion_triangle_comparison / strict_completion_restriction_comparison / scalar_local_model_representatives); importers Qcqs and SupportedImage compile against the delivery"
+ }
+}

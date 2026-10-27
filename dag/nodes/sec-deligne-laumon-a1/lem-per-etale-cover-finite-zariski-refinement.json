@@ -1,0 +1,271 @@
+{
+ "id": "lem-per-etale-cover-finite-zariski-refinement",
+ "kind": "statement",
+ "title": "Finite-surjective Zariski refinement of an etale covering",
+ "statement": "Let $S$ be a reduced Noetherian scheme [def-pc-reduced-scheme, def-weil-pbc-noetherian-ring], where Noetherian means admitting a finite affine cover by spectra of Noetherian rings. Let $(u_i:U_i\\to S)_{i\\in I}$ be a jointly surjective family [def-weil-surjective-morphism] of etale morphisms [def-weil-etale-morphism], each of finite type [def-weil-finite-type-morphism]; the index set $I$ need not be finite. There exist a reduced Noetherian scheme $F$, a finite surjective morphism $a:F\\to S$ [def-weil-finite-integral-morphism], with $F$ an object of $\\operatorname{alt}/S$ as defined in [def-per-ordinary-alteration-topology], a finite Zariski open cover $F=\\bigcup_{j\\in J}V_j$ [def-weil-open-immersion], indices $i(j)\\in I$, and $S$-morphisms $V_j\\to U_{i(j)}$. Equivalently, the maps $V_j\\to S$ factor through the indicated $U_{i(j)}$. When $S$ is empty one may take $F$ and the open covering empty. No normality, regularity or degree restriction is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Proposition 3.1.1, ordinary case (parameter 1), and 3.1.2, printed p.28; finite extraction by quasi-compactness of the finite source. This is only the etale-generator case, not an arbitrary alteration cover."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-per-ordinary-alteration-topology",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, take $F=\\varnothing$ and $J=\\varnothing$. Otherwise, $S$ is locally Noetherian by its given affine cover, and is quasi-compact because that cover is finite. By [lem-weil-pbc-locally-noetherian-quasi-separated], it is quasi-separated. Form $U=\\coprod_{i\\in I}U_i$ and its induced map $u:U\\to S$ using [lem-weil-pbc-scheme-coproduct-family]. On the open summand $U_i$ the map $u$ is exactly $u_i$. Thus [lem-weil-pbc-etale-local-on-source] makes $u$ etale. Every point of $S$ has a lift in a summand by joint surjectivity, so $u$ is surjective. No finiteness of $I$ or of $U$ is needed here.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09Z0, label lemma-there-is-a-scheme-integral-over; passage from a covering family to its coproduct. Quasi-separatedness: Properties Tag 01OY, label lemma-locally-Noetherian-quasi-separated."
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-finite-refinement-etale-cover] to the surjective etale map $u$ and the qcqs target $S$. Obtain a finite, finitely presented, surjective map $r:Y\\to S$, a finite open cover $Y=\\bigcup_{a\\in A}W_a$, and maps $\\phi_a:W_a\\to U$ with $u\\circ\\phi_a=r|_{W_a}$. This application does not impose any extra hypothesis on the given $u_i$.",
+   "uses": [
+    "lemma-weil-pbc-finite-refinement-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09Z0, label lemma-there-is-a-scheme-integral-over, statement; this gives the ordinary-case refinement of ILO II Proposition 3.1.1."
+   }
+  },
+  {
+   "text": "A finite map is of finite type: on an affine target its finitely many module generators also generate its algebra [def-weil-finite-integral-morphism, def-weil-finite-type-morphism]. Consequently $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. By [lem-weil-pbc-noetherian-finitely-many-components] and [lem-sc-scheme-sober], $S$ has finitely many irreducible components $S_1,\\dots,S_m$, with generic points $\\eta_1,\\dots,\\eta_m$, and $S=S_1\\cup\\dots\\cup S_m$ by [lem-sc-noetherian-closed-subset-finite-components]. By [lem-weil-pbc-finite-closed-map-finite-fibres](2) the set $A=r^{-1}(\\{\\eta_1,\\dots,\\eta_m\\})$ is finite. Put $Z=\\overline A=\\bigcup_{y\\in A}\\overline{\\{y\\}}$ and let $j:F=Z_{\\mathrm{red}}\\hookrightarrow Y$ be the reduced induced closed subscheme [lem-weil-pbc-reduced-induced-closed-subscheme]: $F$ is reduced and $j$ maps $F$ homeomorphically onto $Z$ (this is $Y_{\\mathrm{md}}$ of ILO II 1.2.5). Each $\\overline{\\{y\\}}$ is closed and irreducible. An irreducible component $C$ of $Z$ lies in this finite union, hence in some $\\overline{\\{y\\}}$, so $C=\\overline{\\{y\\}}$ by maximality and its unique generic point [lem-sc-scheme-sober] is $y\\in A$. Thus every generic point of $F$ maps to some $\\eta_k$. By [lem-weil-pbc-finite-closed-map-finite-fibres](1) $r(Z)$ is closed; it contains every $\\eta_k$ because $r$ is surjective, hence every $S_k=\\overline{\\{\\eta_k\\}}$, hence $S$. So $a=r\\circ j:F\\to S$ is surjective. It is finite directly on affine charts: if $r^{-1}(\\operatorname{Spec}R)=\\operatorname{Spec}B$ with $B$ a finite $R$-module, the closed immersion $j$ identifies the inverse image in $F$ with $\\operatorname{Spec}(B/J)$ [def-weil-closed-immersion]; the images of the module generators generate $B/J$ over $R$. Thus $a$ is finite, and $F$ is Noetherian by the same finite-type result.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-scheme-sober",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.5 (X_md = closure of the image of the generic fibre with its reduced structure) and 1.2.8, printed pp.25--26; finite-map affine quotient calculation. Stacks Tag 01T6, label lemma-finite-type-noetherian, and Tag 01WN, label lemma-finite-proper."
+   }
+  },
+  {
+   "text": "For a generic point $x$ of $F$, put $s=a(x)$, a generic point of $S$ by step 3. The base change $F_s\\to\\operatorname{Spec}\\kappa(s)$ is finite by [lem-weil-pbc-finite-morphism-permanence](a). By [lem-weil-pbc-finite-over-field-affine-finite-dim], write $F_s=\\operatorname{Spec}C$ with $C$ finite-dimensional over $\\kappa(s)$. The fibre-point identification [def-pc-scheme-fibre] gives a point $z\\in F_s$ above $x$. Its residue field is $\\kappa(x)$: apply [lem-weil-pbc-fibre-product-point-residue-field] to $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(s)=\\kappa(x)$, whose unique prime is zero. The point $z$ corresponds to a prime $\\mathfrak q$ of $C$; the domain $C/\\mathfrak q$ is still finite-dimensional, hence is a field by [lem-weil-pbc-finite-dimensional-domain-is-field]. Therefore it equals its fraction field $\\kappa(x)$, giving $[\\kappa(x):\\kappa(s)]<\\infty$. Together with reducedness and finite type from step 3, these are exactly the object conditions in [def-per-ordinary-alteration-topology]. Thus $F$ belongs to $\\operatorname{alt}/S$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Definition 1.2.2 and 1.2.5--1.2.6, printed pp.24--25; finite generic fibres give finite residue extensions. Stacks finite-map base change and finite-dimensional algebra calculation."
+   }
+  },
+  {
+   "text": "Pull back $W_a$ along $j$ to the open $O_a=j^{-1}(W_a)\\subset F$ and compose its map to $W_a$ with $\\phi_a$, obtaining $\\psi_a:O_a\\to U$. For every $i\\in I$ put $V_{a,i}=\\psi_a^{-1}(U_i)$, using the open summands of [lem-weil-pbc-scheme-coproduct-family]. These are open subschemes of $F$ and cover it: choose $a$ containing a point, and then the unique summand containing its image in $U$. Restricting $\\psi_a$ and identifying the corresponding summand with $U_i$ gives $V_{a,i}\\to U_i$; its composite to $S$ is $a|_{V_{a,i}}$ by the equality of step 2. As $F$ is Noetherian, it is quasi-compact, so this open cover has a finite subcover. Index the selected pairs $(a,i)$ by a finite set $J$ and set $i(j)=i$. These opens and maps give every asserted factorization; empty selected opens can be omitted.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 3.1.1 (ordinary case) and 3.1.2, printed p.28; finite extraction is the definition of quasi-compactness. Coproduct summand restriction makes the family indices explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-local-on-source",
+  "lemma-weil-pbc-finite-refinement-etale-cover",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-sober",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-per-ordinary-alteration-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09Z0, label lemma-there-is-a-scheme-integral-over; family assembly and reduced closure of the generic fibres as in ILO Expose II 1.2.5, 1.2.8 and Proposition 3.1.1 (ordinary case), printed pp.25--28."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-etale-cover-finite-zariski-refinement: Every finite etale covering family of a reduced Noetherian scheme is refined by open subsets of a finite surjective reduced scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The Zariski precoverage on the category of schemes is the precoverage generated by open immersions. Each covering sieve consists of morphisms that are open immersions, forming a basis for the Zariski \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-etale-cover-finite-zariski-refinement: An etale cover becomes Zariski locally split after a finite surjective base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {ι : Sort u_1} (U : ι → Y.Opens),\\n  iSup U = ⊤ → (∀ (i : ι), P (f ∣_ U i)) → P f\", \"doc\": \"If a morphism property $P$ is Zariski local at the target, and if a morphism $f : X \\to Y$ satisfies $P$ on each open set $U_i$ of a covering (i.e., $\\\\bigcup U_i = Y$), then $f$ itself satisfies $P$.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{ι} (U : ι → Y.Opens) (hU : iSup U = ⊤) (H : ∀ i, P (f ∣_ U i)) : P f\", \"doc\": \"For a morphism $f$ of schemes, if the target is covered by an indexed family of open subsets $\\\\{U_i\\\\}$ (i.e., $\\\\bigcup U_i = Y$), and if the restriction of $f$ to each $U_i$ satisfies property $P$, th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes where covering families are collections of open immersions that are jointly surjective, constructed by intersecting the jointly surjective preco\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{ι} (U : ι → Y.Opens) (hU : iSup U = ⊤) : P f ↔ ∀ i, P (f ∣_ U i)\", \"doc\": \"A morphism property $P$ on schemes is Zariski local at the target if and only if, given an open cover $\\\\{U_i\\\\}$ of the target scheme $Y$ such that $\\\\bigcup U_i = Y$, the property $P$ holds for a morph\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{ι} (U : ι → X.Opens) (hU : iSup U = ⊤) : P f ↔ ∀ i, P ((U i).ι ≫ f)\", \"doc\": \"A morphism property $ P $ that is Zariski-local at the source satisfies $ P(f) $ if and only if $ P $ holds for the composition of $ f $ with the inclusion of each open set $ U_i $ in a covering $ \\\\{U\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (𝒰 : Y.OpenCover),\\n  (∀ (i : 𝒰.toPreZeroHypercover.1), P (AlgebraicGeometry.Scheme.Cover.pullbackHom 𝒰 f i)) → P f\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target, then for any morphism $ f : X \\to Y $ and open cover $ \\\\mathcal{U} $ of $ Y $, if the pullback of $ f $ along every morphism in $ \\\\mathcal{U\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\n",
+   "date": "2026-10-24",
+   "verdict": "invalid pattern: IsEtale is not an identifier; corrected to Etale in a subsequent search. Both semantic services and the source search ran."
+  },
+  {
+   "tool": "grep",
+   "query": "refin.*[Ff]inite|[Ff]inite.*[Zz]ariski|[Zz]ariski.*[Ff]inite",
+   "results": "[grep] OK 22 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"141\", \"text\": \"  rw [IsZariskiLocalAtSource.iff_of_iSup_eq_top (P := @LocallyOfFiniteType) _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"line\": \"37\", \"text\": \"  refine ⟨Finsupp.equivFunOnFinite.symm fun i x ↦ f x i, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"78\", \"text\": \"  -- Since the image of `y ↦ γ(e, y)` is finite, by Zariski Main, there exists an open\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"86\", \"text\": \"    refine ((((γ.left.imageι ≫ (fst G G).left) ∣_ U).finite_preimage_singleton x).image\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"110\", \"text\": \"      refine subsingleton_image_closure_of_finite_of_isPreirreducible\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"54\", \"text\": \"  refine .of_biUnion_eq_of_finite (SetLike.coe '' Us) (by simp_all) (hUf.image _) ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"136\", \"text\": \"    refine .of_finite (κ := Σ (i : s), t i.1 i.2) (fun p ↦ ⟨p.1, p.2⟩) (fun p ↦ W _ p.1.2 _ p.2.2)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"144\", \"text\": \"    refine .of_finite_of_isSpectralMap (fun i ↦ (𝒰.f i).isSpectralMap) ?_ U.2 hU.isCompact\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"220\", \"text\": \"  refine ⟨⨆ x : { x | f.QuasiFiniteAt x }, V x, this, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"309\", \"text\": \"    · refine ⟨⟨x, hxV⟩, show (f.resLE _ _ _).QuasiFiniteAt _ from ?_, rfl⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"346\", \"text\": \"  refine ⟨fun H ↦ locallyQuasiFinite_iff_isDiscrete_preimage_singleton.mpr fun x ↦ ?_,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"377\", \"text\": \"  refine (IsFinite.iff_isIntegralHom_and_locallyOfFiniteType _).mpr ⟨?_, inferInstance⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"435\", \"text\": \"  refine exists_isFinite_morphismRestrict_of_finite_preimage_singleton _ _ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"line\": \"78\", \"text\": \"/-- Every open cover of a quasi-compact scheme can be refined into a finite subcover.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"108\", \"text\": \"  refine isCompact_iff_finite_and_eq_biUnion_affineOpens.mpr ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"114\", \"text\": \"  refine ⟨Set.range g, Set.finite_range g, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"223\", \"text\": \"    refine (MorphismProperty.cancel_right_of_respectsIso @LocallyQuasiFinite _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"103\", \"text\": \"  · rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @IsFinite) Y.affineCover,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"105\", \"text\": \"      IsZariskiLocalAtTarget.iff_of_openCover (P := @LocallyOfFiniteType) Y.affineCover]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"127\", \"text\": \"  · rw [← monomorphisms.iff, IsZariskiLocalAtTarget.iff_of_openCover (P := @IsFinite) Y.affineCover,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"161\", \"text\": \"  refine HasAffineProperty.coprodDesc_affineAnd inferInstance RingHom.finite_respectsIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"165\", \"text\": \"  refine RingHom.finite_algebraMap.mpr inferInstance\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-etale-cover-finite-zariski-refinement: Finite covers dominate etale covers up to a Zariski covering in the h topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"AlgebraicGeometry.Scheme.zariskiTopology ≤ AlgebraicGeometry.Scheme.etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The Zariski precoverage on the category of schemes is the precoverage generated by open immersions. Each covering sieve consists of morphisms that are open immersions, forming a basis for the Zariski \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"Given a precoverage $K$ on the category of schemes, the cover associated to $K$ is the zero hypercover defined by $K$, which consists of a collection of covering sieves for each scheme in the category\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-24T07:16:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\"], \"digest\": \"4844ac06f7bda4d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the corrected Loogle hit exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--57) gives an etale-local finite piece around a point of a separated quasi-finite map; it does not give a global finite surjection whose Zariski open cover refines an etale cover. The grep hits only weak-etale locality and zariskiTopology_le_etaleTopology."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|zariski.*etale|etale.*zariski",
+   "results": "{\"t\": \"2026-10-24T07:16:00Z\", \"tool\": \"grep\", \"query\": \"compactification|zariski.*etale|etale.*zariski\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\"], \"digest\": \"0415a10cfa5b4e95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the corrected Loogle hit exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--57) gives an etale-local finite piece around a point of a separated quasi-finite map; it does not give a global finite surjection whose Zariski open cover refines an etale cover. The grep hits only weak-etale locality and zariskiTopology_le_etaleTopology."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Etale",
+   "results": "1 hits; AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt. Source subdirectory: whole Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give etale sites and locality; grep gives cover refinements and local Zariski main theorem inputs. The Loogle candidate exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--54, read) produces an etale-local finite piece around one point, not a finite surjection Zariski locally refining the given family. The full refinement theorem is in the project, and is cited by its existing DAG node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective etale morphism is refined Zariski locally by a finite surjective morphism",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.IsEtale, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, RingHom.Etale.ofLocalizationSpan. Source subdirectory: whole Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give etale sites and locality; grep gives cover refinements and local Zariski main theorem inputs. The Loogle candidate exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--54, read) produces an etale-local finite piece around one point, not a finite surjection Zariski locally refining the given family. The full refinement theorem is in the project, and is cited by its existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*refin|refin.*finite|finite.*zariski|zariski.*finite",
+   "results": "22 hits; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean. Source subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give etale sites and locality; grep gives cover refinements and local Zariski main theorem inputs. The Loogle candidate exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--54, read) produces an etale-local finite piece around one point, not a finite surjection Zariski locally refining the given family. The full refinement theorem is in the project, and is cited by its existing DAG node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-etale-cover-finite-zariski-refinement: etale covering family over a Noetherian scheme admits a finite surjective reduced scheme with a finite Zariski cover refining the family",
+   "results": "8 hits; AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.zariskiPrecoverage, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.QuasiCompactCover.of_finite. Source subdirectory: whole Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give etale sites and locality; grep gives cover refinements and local Zariski main theorem inputs. The Loogle candidate exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--54, read) produces an etale-local finite piece around one point, not a finite surjection Zariski locally refining the given family. The full refinement theorem is in the project, and is cited by its existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "refinement|factorsLocallyThrough|09Z0",
+   "results": "15 hits; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean. Source subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give etale sites and locality; grep gives cover refinements and local Zariski main theorem inputs. The Loogle candidate exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--54, read) produces an etale-local finite piece around one point, not a finite surjection Zariski locally refining the given family. The full refinement theorem is in the project, and is cited by its existing DAG node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-etale-cover-finite-zariski-refinement: finite surjective morphism splits any etale cover locally on its source",
+   "results": "8 hits; AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.Etale.propertyIsLocal, Algebra.isOpen_etaleLocus, Algebra.IsStandardEtale.of_surjective. Source subdirectory: whole Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give etale sites and locality; grep gives cover refinements and local Zariski main theorem inputs. The Loogle candidate exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--54, read) produces an etale-local finite piece around one point, not a finite surjection Zariski locally refining the given family. The full refinement theorem is in the project, and is cited by its existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_isCompl_of_quasiFiniteAt|etaleTopology|zariskiTopology_le_etaleTopology",
+   "results": "22 hits; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean. Source subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give etale sites and locality; grep gives cover refinements and local Zariski main theorem inputs. The Loogle candidate exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49--54, read) produces an etale-local finite piece around one point, not a finite surjection Zariski locally refining the given family. The full refinement theorem is in the project, and is cited by its existing DAG node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-ordinary-alteration-proper-refinement",
+  "date": "2026-10-24",
+  "group": "Q111"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor lem-per-artin-gabber-affine-curve, purity/regular-local-model input via the ordinary weak uniformization branch; ILO II 3.2.1 ordinary-case proof: Expose II Proposition 3.1.1, ordinary case (parameter 1), and 3.1.2, printed p.28; finite extraction by quasi-compactness of the finite source. This is only the etale-generator case, not an arbitrary alteration cover.",
+   "via": [
+    "lem-per-ordinary-alteration-proper-refinement",
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-etale-cover-finite-zariski-refinement",
+  "worker": "stage1",
+  "summary": "Retained the full statement and its eight statement dependencies. Combined the arbitrary etale family into its scheme coproduct, reused the Lean-closed Tag 09Z0 finite-refinement node, passed to its reduced dominant part and checked surjectivity, finiteness, Noetherianity and finite generic residue extensions, then restricted each factorization to summands and extracted a finite subcover. No new nodes or Mathlib leaves; seven fresh searches with exact logged queries appended to the inherited searches.",
+  "blueprint": "Current latest ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (duality), supplies the inherited provenance via the recorded chain; the immediate parent lem-per-ordinary-alteration-proper-refinement needs the etale-generator input. The five steps realize precisely that input via ILO II Proposition 3.1.1 (ordinary case), without changing a chapter or unit route. The ancestor itself does not state an alteration-refinement theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-8e3551ef6",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-8e3551ef6 (reviewer sub-agent of L); spot-checked: All five steps are mathematically correct. I read ILO II 1.2.5, 1.2.8, 3.1.1 (ℓ=1) and 3.1.2 (printed pp.25-29) and Stacks 09Z0. The statement and its 8 stmt_deps are unchanged, and no target is weakened. Mechanical finding: step 3 cited lem-per-dominant-part-coreflection, which is in the 2026-10-19 artin-gabber section of route-pivot-dropped.txt (line 1499), and the delivery gives no justification for it. FIX: step 3 is rewritten without that node. S has finitely many components with generic points η_k (noetherian-finitely-many-components, sc-scheme-sober), and S is their union (sc-noetherian-closed-subset-finite-components). A=r⁻¹{η_k} is finite by the finite-fibres clause (2). F=Z_red with Z=closure of A (reduced-induced-closed-subscheme). By maximality each component of Z is the closure of a point of A, so the generic points of F map to the η_k. Since a finite map is closed (clause 1), r(Z) is closed and contains every η_k, so a=r∘j is surjective. The B/J chart finiteness argument is kept. The proof_deps closure has no node from the drop list. Steps 1, 2, 4 and 5 checked: the coproduct with étale-local-on-source; the 09Z0 hypotheses (qcqs only); the fibre residue-field identification κ(z)≅κ(x) followed by a finite-dimensional domain being a field, giving the alt/S object condition; and a finite subcover by quasi-compactness. Edge cases checked: S empty, S a field with an inseparable extension, reducible S, Y with nilpotents or vertical components, infinite I. There are no new nodes and I found no twin. Maintainer note: with the drop list excluded the item is unreached; its only path goes through dropped gabber-absolute-equivariant-modification and complete-local-rigidification-comparison via the qe-weak-uniformization chain. The report's claim that it feeds the ancestor's duality branch is inaccurate, since the current artin-gabber-affine-curve proof uses only the finite-coefficient nodes. The maths is generic and has no twin, so this is a FIX rather than a RETURN.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,268 @@
+{
+ "id": "lem-trf-split-node-algebraization-finite-type",
+ "kind": "statement",
+ "title": "Algebraization of a rational split node over an affine integer finite-type base",
+ "statement": "Let $g:Z\\to B$ be a flat [def-weil-flat-morphism], locally finitely presented [def-sbc-locally-finite-presentation] morphism of schemes [def-pc-scheme], with $B$ affine and of finite type over $\\operatorname{Spec}\\mathbf Z$ [def-weil-finite-type-morphism, def-weil-affine-spectrum]. Fix $z\\in Z$ with image $b\\in B$. Suppose the induced residue-field map $\\kappa(b)\\to\\kappa(z)$ is an isomorphism [def-weil-residue-field], and suppose\n$$\\widehat{\\mathcal O}_{Z_b,z}\\cong\\kappa(b)[[u,v]]/(uv)$$\nas $\\kappa(b)$-algebras, where $Z_b$ is the scheme-theoretic fibre [def-pc-scheme-fibre], completion is maximal-ideal-adic [def-weil-pbc-adic-completion], and power series are [def-weil-pbc-multivariate-power-series]. Set\n$$T=\\operatorname{Spec}\\mathbf Z[a],\\qquad Y=\\operatorname{Spec}\\mathbf Z[u,v,a]/(uv-a),$$\nwith $Y\\to T$ induced by the inclusion of the parameter $a$ [def-weil-polynomial-ring]. Then there exist schemes $V,U$, points $v\\in V$, $q\\in U$, an etale morphism $e:(V,v)\\to(B,b)$ [def-weil-etale-morphism], a morphism $\\tau:V\\to T$, an etale morphism $p:(U,q)\\to(Z,z)$, a morphism $w:U\\to V$, and an etale $V$-morphism\n$$m:U\\to Y\\times_{T,\\tau}V$$\n[def-pc-fibre-product], with $e\\circ w=g\\circ p$, $w(q)=v$, and $\\operatorname{pr}_V\\circ m=w$. The induced maps $\\kappa(b)\\to\\kappa(v)$ and $\\kappa(z)\\to\\kappa(q)$ are isomorphisms. If $h=\\tau^*a\\in\\Gamma(V,\\mathcal O_V)$, the target of $m$ is canonically $\\operatorname{Spec}_V(\\mathcal O_V[u,v]/(uv-h))$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, third paragraph and its concluding application of relative approximation; Tag 0CBX, lemma-formal-local-structure-nodal-family; More on Morphisms Tag 0GDX, lemma-relative-map-approximation-pre; returned parent steps 4--6."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-polynomial-ring",
+  "def-weil-residue-field",
+  "def-trf-universal-nodal-model",
+  "def-trf-formal-nodal-model-constructions"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-lfp-affine-opens-finite-presentation], for all affine opens $U\\subseteq Z$, $W\\subseteq B$ with $g(U)\\subseteq W$ the ring map $\\mathcal O_B(W)\\to\\mathcal O_Z(U)$ is of finite presentation, in particular a finitely generated algebra; hence $g$ is locally of finite type [def-weil-finite-type-morphism] by [lem-weil-pbc-lft-affine-pairs]. By [lem-weil-pbc-finite-type-over-noetherian], $B$ is Noetherian. Choose a Noetherian affine neighbourhood of $b$. Its stalk $A=\\mathcal O_{B,b}$ is a localization by [lem-weil-pbc-affine-open-stalk-localization], hence Noetherian by [lem-weil-pbc-localization-noetherian]. The residue extension has degree one; [lem-trf-finite-residue-point-closed-in-fibre] therefore makes $z$ closed in $Z_b$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-trf-finite-residue-point-closed-in-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, split-node paragraph; auxiliary Tags 01T6, 00FN and 01TE"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-formal-local-structure-nodal-family] to $(g,z,b)$. Flatness is given, $A$ is Noetherian by step 1, and its split-node hypotheses are exactly the closedness just proved, the given residue-field isomorphism, and the given completed fibre equation. Its equivalent polynomial-model conclusion gives $H\\in\\mathfrak m_A\\widehat A$, $M_H=\\operatorname{Spec}(\\widehat A[u,v]/(uv-H))$, its point $o$ with ideal $(\\mathfrak m_A\\widehat A,u,v)$, and a $\\widehat A$-algebra isomorphism $\\widehat{\\mathcal O}_{Z,z}\\cong\\widehat{\\mathcal O}_{M_H,o}$.",
+   "uses": [
+    "lem-trf-formal-local-structure-nodal-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family; Tag 0CBY, first proof, third paragraph"
+   }
+  },
+  {
+   "text": "Define $\\sigma_0:\\mathbf Z[a]\\to\\widehat A$ by $a\\mapsto H$ and put $\\mathfrak t=\\sigma_0^{-1}(\\mathfrak m_A\\widehat A)$, $t=\\mathfrak t\\in T$. By [lem-weil-pbc-local-completion-local-ring], $\\widehat A$ is local with this maximal ideal. Every element outside $\\mathfrak t$ maps to a unit, so $\\sigma_0$ extends to the local map $\\sigma:\\mathcal O_{T,t}\\to\\widehat A$. By [lem-weil-pbc-fibre-product-affine-spectra], $Y_\\sigma$ is $M_H$: the ring isomorphism sends $u\\otimes1,v\\otimes1,1\\otimes c$ to $u,v,c$ and its inverse sends these generators back; the relation is $uv-H$. Take $y_\\sigma=o$ and let $y$ be its image in $Y$. This point maps to $t$ and $o$ lies over the closed point of $\\operatorname{Spec}\\widehat A$. Step 2 supplies the required scalar-compatible completed local isomorphism.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, first proof, construction of sigma and Y_sigma; auxiliary Tags 05GI, 05GG and 01I4"
+   }
+  },
+  {
+   "text": "Use [lem-trf-relative-completion-etale-approximation] with $X=Z$, $S=B$ and the given $Y\\to T$, the points $z,b,y,t$, and the data of step 3. Both bases are of finite type over $\\mathbf Z$. The map $Z\\to B$ is locally of finite type by step 1; $Y\\to T$ is of finite type because its algebra is generated by $u,v$ with one relation. The lemma gives $(V,v)\\to(B,b)$, $\\tau:V\\to T$, $(U,q)\\to(Z,z)$ and the etale $V$-map $m:U\\to Y\\times_{T,\\tau}V$. Its commuting diagram gives $e\\circ w=g\\circ p$, $w(q)=v$, and $\\operatorname{pr}_V\\circ m=w$, where $w$ is the supplied structure map. The same lemma gives the two residue-field isomorphisms required in the statement.",
+   "uses": [
+    "lem-trf-relative-completion-etale-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, applied as at the end of the first proof of Tag 0CBY"
+   }
+  },
+  {
+   "text": "Put $h=\\tau^*a$. On an affine open $V_0=\\operatorname{Spec}C\\subset V$, the preimage of $V_0$ in $Y\\times_{T,\\tau}V$ is $Y\\times_{T}V_0$, and $\\tau|_{V_0}$ is $\\operatorname{Spec}$ of the ring map $\\mathbf Z[a]\\to C$, $a\\mapsto h|_{V_0}$, by [lem-weil-pbc-morphism-into-affine-scheme]; so [lem-weil-pbc-fibre-product-affine-spectra] identifies the target with the spectrum of $(\\mathbf Z[u,v,a]/(uv-a))\\otimes_{\\mathbf Z[a]}C$. Sending the variables to $u,v,h|_{V_0}$ and constants to constants identifies this algebra with $C[u,v]/(uv-h|_{V_0})$; the inverse fixes $u,v$ and $C$. These maps commute with restriction because they fix the same generators. The affine charts of the relative spectrum in [lem-weil-pbc-affine-morphism-relative-spec](2),(4) therefore identify these spectra canonically with $\\operatorname{Spec}_V(\\mathcal O_V[u,v]/(uv-h))$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01LW and 01LX, definition-relative-spec and lemma-spec-properties; Schemes Tag 01I4, lemma-fibre-product-affine-schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "lem-trf-formal-local-structure-nodal-family",
+  "lem-trf-relative-completion-etale-approximation",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, third paragraph; formal model Tag 0CBX and relative approximation Tag 0GDX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodal|Artin.*approximation|relative.*completion.*etale|completion.*isom.*etale",
+   "results": "{\"t\": \"2026-10-22T06:00:09Z\", \"tool\": \"grep\", \"query\": \"nodal|Artin.*approximation|relative.*completion.*etale|completion.*isom.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations and the etale locus supply neither the completed nodal equation nor its relative Artin algebraization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A formal ordinary double point in a flat family over a finite type integer scheme has an etale algebraic smoothing chart",
+   "results": "{\"t\": \"2026-10-22T06:00:09Z\", \"tool\": \"leansearch\", \"query\": \"A formal ordinary double point in a flat family over a finite type integer scheme has an etale algebraic smoothing chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.IsSmoothAt\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"bdb7e75e3acfe232\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations and the etale locus supply neither the completed nodal equation nor its relative Artin algebraization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AdicCompletion",
+   "results": "{\"t\": \"2026-10-22T06:00:09Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations and the etale locus supply neither the completed nodal equation nor its relative Artin algebraization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraize the split node completed local equation xy equals h over a base of finite type over integers to obtain a common etale neighbourhood of the family and the universal nodal smoothing",
+   "results": "{\"t\": \"2026-10-22T06:00:21Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraize the split node completed local equation xy equals h over a base of finite type over integers to obtain a common etale neighbourhood of the family and the universal nodal smoothing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"StandardEtalePair.instEtaleRing\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"StandardEtalePresentation\"], \"digest\": \"dc1f8b90aaa31d06\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations and the etale locus supply neither the completed nodal equation nor its relative Artin algebraization."
+  },
+  {
+   "tool": "grep",
+   "query": "approximation|algebrai[sz]ation|completed.*local|completion.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-22T06:00:42Z\", \"tool\": \"grep\", \"query\": \"approximation|algebrai[sz]ation|completed.*local|completion.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations and the etale locus supply neither the completed nodal equation nor its relative Artin algebraization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Artin approximation turns an isomorphism of completed local algebras over a noetherian base of finite type over integers into a common etale neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:00:54Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Artin approximation turns an isomorphism of completed local algebras over a noetherian base of finite type over integers into a common etale neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.toAlgebra\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.instEtaleRing\", \"Algebra.instEtaleOfIsStandardEtale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"f2c228c732bb6203\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations and the etale locus supply neither the completed nodal equation nor its relative Artin algebraization."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|Artin.*approximation|relative.*completion.*etale",
+   "results": "{\"t\": \"2026-10-23T04:06:09Z\", \"tool\": \"grep\", \"query\": \"nodal|Artin.*approximation|relative.*completion.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/standard-etale algebra facts do not give nodal formal structure or relative algebraization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraization of a split ordinary double point in a flat family by relative Artin approximation",
+   "results": "{\"t\": \"2026-10-23T04:06:09Z\", \"tool\": \"leansearch\", \"query\": \"Algebraization of a split ordinary double point in a flat family by relative Artin approximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.FormallySmooth.iff_split_surjection\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.FormallySmooth.of_split\", \"Algebra.Smooth.formallySmooth\", \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.FormallySmooth.mk\"], \"digest\": \"bdbc6b288c186bce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/standard-etale algebra facts do not give nodal formal structure or relative algebraization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T04:06:09Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/standard-etale algebra facts do not give nodal formal structure or relative algebraization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational split nodal fibre point in a flat finitely presented family over an affine finite type integer base has a common etale chart uv equals h after an elementary etale base change",
+   "results": "{\"t\": \"2026-10-23T04:06:14Z\", \"tool\": \"leanfinder\", \"query\": \"A rational split nodal fibre point in a flat finitely presented family over an affine finite type integer base has a common etale chart uv equals h after an elementary etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePair.HasMap\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"StandardEtalePresentation.toPresentation_σ'\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\"], \"digest\": \"f2b6501f882fefc1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/standard-etale algebra facts do not give nodal formal structure or relative algebraization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between completions of a family and the universal nodal smoothing over a completed local base algebraizes to elementary etale neighbourhoods",
+   "results": "{\"t\": \"2026-10-23T04:06:15Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism between completions of a family and the universal nodal smoothing over a completed local base algebraizes to elementary etale neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.exists_etale_of_isEtaleAt\", \"StandardEtalePair.homEquiv\"], \"digest\": \"d605383b88a67cad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/standard-etale algebra facts do not give nodal formal structure or relative algebraization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-family-etale-local-model",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the nodal local equation (1.a) of ILO VI Proposition 1.9 (citing SGA 7 XV 1.3.2 / de Jong 2.23), here in the form of Stacks Tag 0CBY used by step 3 of lem-trf-nodal-etale-chart. Re-split: Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, third paragraph and its concluding application of relative approximation; Tag 0CBX, lemma-formal-local-structure-nodal-family; More on Morphisms Tag 0GDX, lemma-relative-map-approximation-pre; returned parent steps 4--6.",
+   "via": [
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-split-node-algebraization-finite-type",
+  "worker": "stage1",
+  "summary": "Assembled the finite-type rational split-node case of Stacks 0CBY from existing formal nodal structure and relative approximation nodes, checking closedness in the fibre, Noetherian stalks, the local parameter map, the marked polynomial model, and the relative spectrum identification. Statement unchanged; no new nodes.",
+  "blueprint": "Preserves the historical nodal-local-equation ancestry recorded in blueprint.from: Stacks 0CBY first proof, third paragraph (formal model from 0CBX followed by 0GDX), used in the nodal-etale-chart chain below lem-trf-local-term-locality. The current main-20261015 locality proof uses contracting correspondences; no claim that it contains this historical nodal argument is made.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine-scheme tool identifying the base stalk with a localization so that its Noetherian hypothesis can be checked; it does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic relative-spectrum affine-chart and restriction tool for identifying the displayed target with the equation uv=h; no trace-formula node states this general scheme construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-8b68b692e",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-8b68b692e (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full. I checked them against Stacks 0CBY (first proof, third paragraph), 0CBX and 0GDX, and against the statement of every cited node. The delivery creates no new nodes, and the statement and stmt_deps are unchanged. Step 2's hypotheses all hold (flatness at z; a Noetherian stalk via 01T6 and 00FN; LFT; closed in the fibre via 01TE; rational residue field; the completed fibre equation), and it uses the node's own 'equivalently' M_h/o clause, so it relies on the statement, not the proof. Step 3 correctly fills the source's gap: 0GDX needs a local map O_{T,t}→Â, and the step takes t=σ0^{-1}(mÂ) and extends by localization using 05GI/05GG; Y_σ≅M_H is Â-linear and o lies over the closed point. Step 4 meets every hypothesis of lem-trf-relative-completion-etale-approximation (B and Spec Z[a] of finite type over Z, Y→T of finite type), and its conclusion gives every clause of the item, including both residue isomorphisms and pr_V∘m=w. Step 5's gluing through relative Spec (2),(4) is sound. Fault C1/C4: step 1 took 'locally of finite presentation ⇒ locally of finite type' from the two definitions alone, but the LFP definition is pointwise and the LFT definition covers all affines. Fixed by citing lem-weil-pbc-lfp-affine-opens-finite-presentation and lem-weil-pbc-lft-affine-pairs (mathlib leaves). In the same repair, step 5 now cites lem-weil-pbc-morphism-into-affine-scheme for τ|V0 = Spec(a↦h|V0) and writes out that the preimage of V0 is Y×_T V0. proof_deps are updated to match. No duplicate found (searched 0CBY, 0GDX and uv−a/uv−h; read split-point-neighbourhood, completed-base-affine-etale-span, the isomorphism/local-map approximation nodes and nodal-polynomial-model-completion). The item is exactly parent step 3, not a restatement of the parent. Edge cases checked: h=0, a field base, characteristic 2, non-closed b, nonreduced B. I accept the two declared generic tool_uses. Cosmetic note for the maintainer: the statement uses the letter v both for the point v∈V and for a coordinate of Y.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SplitNodeAlgebraizationFiniteType",
+  "declaration": "AlgebraicGeometry.split_node_algebraization_finite_type",
+  "file": "lean/Sheaf/TraceFormula/SplitNodeAlgebraizationFiniteType.lean",
+  "statement": "theorem split_node_algebraization_finite_type {Z B : Scheme.{u}} (g : Z ⟶ B) [Flat g] [LocallyOfFinitePresentation g] [IsAffine B] (bZ : B ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType bZ] [QuasiCompact bZ] (z : Z) (hκ : Function.Bijective (g.residueFieldMap z).hom) (hsplit : Nonempty (@AlgEquiv (B.residueField (g z)) (formalNodalCompletedStalk (g.fiber (g z)) (g.asFiber z)) (formalNodalPowerSeriesQuotient (B.residueField (g z)) 0) _ _ _ (formalNodalFiberCompletionAlgebra g z) inferInstance)) : ∃ (V U : Scheme.{u}) (v : V) (q : U) (h : Γ(V, ⊤)) (e : V ⟶ B) (p : U ⟶ Z) (w : U ⟶ V) (m : U ⟶ pullback nodalModelBaseMap (nodalBaseMap h)), e v = g z ∧ p q = z ∧ w q = v ∧ Etale e ∧ Etale p ∧ Etale m ∧ w ≫ e = p ≫ g ∧ m ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h) = w ∧ IsIso (e.residueFieldMap v) ∧ IsIso (p.residueFieldMap q) ∧ ∀ A : V.Opens, IsAffineOpen A → IsAffineOpen ((pullback.snd nodalModelBaseMap (nodalBaseMap h)) ⁻¹ᵁ A) ∧ ∃ φ : Γ(pullback nodalModelBaseMap (nodalBaseMap h), (pullback.snd nodalModelBaseMap (nodalBaseMap h)) ⁻¹ᵁ A) ≃+* formalNodalModelRing Γ(V, A) (V.presheaf.map (homOfLE (le_top : A ≤ ⊤)).op h), (∀ c : Γ(V, A), φ (((pullback.snd nodalModelBaseMap (nodalBaseMap h)).app A).hom c) = algebraMap Γ(V, A) _ c) ∧ ∀ k : Fin 2, φ (((pullback.fst nodalModelBaseMap (nodalBaseMap h)).appLE ⊤ ((pullback.snd nodalModelBaseMap (nodalBaseMap h)) ⁻¹ᵁ A) le_top).hom ((Scheme.ΓSpecIso (.of nodalModelRing)).inv (Ideal.Quotient.mk _ (MvPolynomial.X k)))) = Ideal.Quotient.mk _ (MvPolynomial.X k)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9167dfe2d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 4a9302c9d177. Lean file byte-identical to the previously reviewed, correct statement; item JSON differs from main only in stmt_deps/lean (theorem lem-trf-formal-local-structure-nodal-family replaced by new def node def-trf-formal-nodal-model-constructions, theorem kept in proof_deps). New node registers the nine existing formalNodal* plain defs existing:true on the unchanged module; clauses (1)-(9) checked against the Lean definitions (incl. the canonical coordinatewise completion map via Classical.choose); theorem excluded; 7 def stmt_deps present, no cycle; lean.statement verbatim; H12 fields present. No other owner of formalNodal* in side-live. def-trf-universal-nodal-model owns nodalModelBaseMap/nodalBaseMap/nodalModelRing. Edge cases unchanged (h=0, char 2, nonreduced B, empty open). No compile (no file changed). Advisory only: landed nodalCompletedLocalRing may overlap formalNodalCompletedStalk; letter v reused."
+ }
+}

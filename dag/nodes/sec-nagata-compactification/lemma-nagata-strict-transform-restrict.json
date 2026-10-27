@@ -85,21 +85,65 @@
   "thm-nagata-global-blowup-complement"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap",
+     "module": "WeilConjectures.Compactification.StrictTransform",
+     "lines": [
+      317,
+      331
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap",
+     "module": "WeilConjectures.Compactification.StrictTransform",
+     "lines": [
+      452,
+      466
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-prepared",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X'\\to X$ be the blow-up of a center $C\\hookrightarrow X$ and let\n$f\\colon Y\\to X$ be a morphism. Over $X\\setminus C$, the strict transform of\n$f$ is canonically the ordinary pullback $Y\\times_X(X\\setminus C)$.\nThis identification is compatible with the projection to the original\nscheme.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal with\ncenter $C=V(\\mathcal I)$, let $b\\colon X'=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$\nbe the blow-up, and let $f\\colon Y\\to X$ be a morphism. Let\n$\\Omega\\subseteq Y\\times_XX'$ be the open subscheme lying over\n$X\\setminus C$ and let $\\widetilde Y\\hookrightarrow Y\\times_XX'$ be the\nstrict transform of $f$ along the blow-up ([def-nagata-strict-transform]).\nThen the part $\\widetilde Y\\times_{Y\\times_XX'}\\Omega$ of the strict\ntransform lying over $X\\setminus C$, together with its projection to $Y$\nand the map to $b^{-1}(X\\setminus C)\\xrightarrow{\\sim}X\\setminus C$, is a\nfibre product of $f$ and the inclusion $X\\setminus C\\hookrightarrow X$.\nThus over $X\\setminus C$ the strict transform is canonically\n$Y\\times_X(X\\setminus C)$, compatibly with the projection to $Y$.",
   "proof": [
    {
-    "text": "This is exactly\n[lemma-nagata-strict-transform-over-complement], applied to the ideal\ndefining $C$. The compatibility with the projection is part of that\ncanonical identification.",
+    "text": "By [thm-nagata-global-blowup-complement] the blow-up restricts to an\nisomorphism $b^{-1}(X\\setminus C)\\xrightarrow{\\sim}X\\setminus C$, so\n[lemma-nagata-strict-transform-over-complement] shows that $\\Omega$, with\nits projection to $Y$ and the map to $X\\setminus C$, is a fibre product of\n$f$ and $X\\setminus C\\hookrightarrow X$. It remains to see that the strict\ntransform contains all of $\\Omega$, i.e. that the projection\n$\\widetilde Y\\times_{Y\\times_XX'}\\Omega\\to\\Omega$ is an isomorphism. This\nprojection is a closed immersion. Since $\\widetilde Y$ is the\nscheme-theoretic image ([def-nagata-scheme-theoretic-image]) of the open\nimmersion $j\\colon\\Omega\\hookrightarrow Y\\times_XX'$, its ideal is the\nkernel ideal of $j$ ([lemma-nagata-scheme-image-ideal-qc]), and the ideal\nof the projection is the extension of that kernel ideal along $j$\n([def-nagata-extended-ideal]). This extension is zero because\n$j^\\sharp$ restricted to $\\Omega$ is the identity of $\\mathcal O_\\Omega$.\nA closed immersion with zero ideal is an isomorphism, and transporting the\nfibre square of $\\Omega$ along it gives the claim.",
     "uses": [
-     "lemma-nagata-strict-transform-over-complement"
+     "thm-nagata-global-blowup-complement",
+     "lemma-nagata-strict-transform-over-complement",
+     "def-nagata-scheme-theoretic-image",
+     "lemma-nagata-scheme-image-ideal-qc",
+     "def-nagata-extended-ideal"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

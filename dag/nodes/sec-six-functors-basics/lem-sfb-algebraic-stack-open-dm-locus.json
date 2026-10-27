@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-algebraic-stack-open-dm-locus",
+ "kind": "statement",
+ "title": "Largest open with unramified diagonal in an algebraic stack",
+ "statement": "Let $S$ be a scheme and $\\mathcal X$ an algebraic stack over $S$. There exists an open substack $\\mathcal U\\subseteq\\mathcal X$ whose relative diagonal $\\mathcal U\\to\\mathcal U\\times_S\\mathcal U$ is unramified, and every open substack of $\\mathcal X$ with unramified relative diagonal is contained in $\\mathcal U$. An algebraic stack here is a stack in groupoids on schemes with representable diagonal and a smooth surjective scheme atlas; stacks, representability and scheme atlases use [def-sfb-stable-pointed-moduli-groupoids], and smooth means [def-sbc-smooth-morphisms]. Open substacks are full substacks whose pullback by every scheme is an open subscheme. A representable morphism is unramified if every scheme base change, on etale scheme charts of its algebraic-space source, is unramified in [def-weil-unramified-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DSM (lemma-open-DM-locus), DM part, with definition-absolute-separated and Tag 050N (lemma-separated-implies-morphism-separated), part (1) for the relative-base convention."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sbc-smooth-morphisms",
+  "def-weil-unramified-morphism",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-open-substack-unions], choose a set of representatives of all open substacks of $\\mathcal X$. Let $I$ be the subset consisting of those representatives $\\mathcal U_i$ whose relative diagonal over $S$ is unramified. Form the algebraic open substack $\\mathcal U=\\bigcup_{i\\in I}\\mathcal U_i$. For every scheme $T\\to\\mathcal U$, the open subschemes $T_i=T\\times_{\\mathcal U}\\mathcal U_i$ cover $T$. This is a set-indexed union; no quasi-compactness of $\\mathcal X$ or finiteness of $I$ is assumed.",
+   "uses": [
+    "lem-sfb-open-substack-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 06FJ (lemma-open-substacks) and 05UQ (lemma-union-open-substacks), applied to the family in Tag 0DSM (lemma-open-DM-locus)."
+   }
+  },
+  {
+   "text": "For each $i\\in I$, apply [lem-sfb-unramified-diagonal-etale-atlas] to the algebraic stack $\\mathcal U_i$ over $S$. Choose a scheme $W_i$ and a representable surjective etale map $a_i:W_i\\to\\mathcal U_i$. Its hypothesis is exactly the defining condition for $i\\in I$; the criterion is already stated for the relative diagonal over $S$.",
+   "uses": [
+    "lem-sfb-unramified-diagonal-etale-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSM (lemma-open-DM-locus), application of Tag 06N3 (theorem-DM); relative-base convention is included in the cited node."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-scheme-coproduct-family] to form the scheme $W=\\coprod_{i\\in I}W_i$, with its disjoint open summands covering $W$. The objects over $W_i$ given by the composites $W_i\\to\\mathcal U_i\\to\\mathcal U$ glue to an object over $W$: on intersections of distinct summands there is only the empty descent datum, and on each summand the overlap isomorphism is the identity. The stack descent axiom in [def-sfb-stable-pointed-moduli-groupoids] therefore gives a map $a:W\\to\\mathcal U$ restricting to those composites. This map is representable by algebraic spaces: for a scheme $T\\to\\mathcal U$, $W\\times_{\\mathcal U}T$ is the base change of the representable diagonal of $\\mathcal U$ by $W\\times_ST\\to\\mathcal U\\times_S\\mathcal U$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSM (lemma-open-DM-locus), the disjoint-union atlas construction, with scheme coproduct and stack descent written out."
+   }
+  },
+  {
+   "text": "We check etaleness of $a$ on scheme charts, as required by [def-sfb-stable-pointed-moduli-groupoids]. Fix a scheme $T\\to\\mathcal U$ and write $E=W\\times_{\\mathcal U}T$. For an etale scheme chart $P\\to E$, inverse images of the summands $W_i\\subseteq W$ give an open cover $P=\\bigcup_iP_i$. Because $\\mathcal U_i\\subseteq\\mathcal U$ is full, the $i$th open subspace of $E$ is canonically $W_i\\times_{\\mathcal U_i}T_i$, where $T_i=T\\times_{\\mathcal U}\\mathcal U_i$ is an open subscheme of $T$. Thus $P_i$ is an etale scheme chart of that base change of $a_i$, and $P_i\\to T_i$ is etale by the representable etaleness of $a_i$. By clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation], $P_i\\to T_i\\hookrightarrow T$ is etale. Apply [lem-weil-pbc-etale-local-on-source] to the open cover $(P_i)$ to conclude that $P\\to T$ is etale. This proves that $a$ is etale. The identifications here are identities of triples in the 2-fibre product, not an assertion that the diagonal's target is covered by the products $\\mathcal U_i\\times_S\\mathcal U_i$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-open-substack-unions",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), 02GJ (lemma-etale-characterize), in the atlas construction of Tag 0DSM (lemma-open-DM-locus)."
+   }
+  },
+  {
+   "text": "The map $a$ is surjective in the same scheme tests. For every $T\\to\\mathcal U$, the opens $T_i$ cover $T$ by [lem-sfb-open-substack-unions]. Each $W_i\\times_{\\mathcal U_i}T_i\\to T_i$ is surjective by the chosen representable surjectivity of $a_i$. It is an open part of $W\\times_{\\mathcal U}T$, so every point of every $T_i$ lies in the image of $W\\times_{\\mathcal U}T\\to T$. Since the $T_i$ cover $T$, this map is surjective. This uses precisely the scheme-test definition of surjectivity in [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "lem-sfb-open-substack-unions",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSM (lemma-open-DM-locus), surjectivity of the union atlas; scheme-test convention of the cited definition."
+   }
+  },
+  {
+   "text": "Now $\\mathcal U$ is algebraic and has the representable surjective etale scheme atlas $a:W\\to\\mathcal U$. The reverse implication of [lem-sfb-unramified-diagonal-etale-atlas] proves that its relative diagonal over $S$ is unramified. This includes the case $I=\\varnothing$: the union and $W$ are empty, and the scheme-chart and surjectivity checks above are vacuous on their empty tests.",
+   "uses": [
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-open-substack-unions",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSM (lemma-open-DM-locus), concluding application of Tag 06N3 (theorem-DM)."
+   }
+  },
+  {
+   "text": "If $\\mathcal V\\subseteq\\mathcal X$ is an open substack with unramified relative diagonal, its representative occurs among the $\\mathcal U_i$ by definition of $I$. The containment $\\mathcal U_i\\subseteq\\mathcal U$ furnished by [lem-sfb-open-substack-unions] therefore gives $\\mathcal V\\subseteq\\mathcal U$ (containment of full substacks is invariant under equivalence over $\\mathcal X$). This is the required maximality.",
+   "uses": [
+    "lem-sfb-open-substack-unions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSM (lemma-open-DM-locus), largest-open assertion, using the union property of Tag 05UQ (lemma-union-open-substacks)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-open-substack-unions",
+  "lem-sfb-unramified-diagonal-etale-atlas",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DSM (lemma-open-DM-locus), DM part: union of opens via their etale scheme atlases; arbitrary-union and scheme-test details expanded using Tags 06FJ, 05UQ, 02GP, 02GN and 02GJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic stack has a largest open substack whose diagonal is unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary union of open Deligne Mumford substacks is Deligne Mumford",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isOpen_biUnion\", \"module\": \"Mathlib.Topology.Basic\", \"type\": \"{s : Set α} {f : α → Set X} (h : ∀ i ∈ s, IsOpen (f i)) : IsOpen (⋃ i ∈ s, f i)\", \"doc\": \"If every set in the family $ f(i) $ for $ i \\\\in s $ is open, then the union $ \\\\bigcup_{i \\\\in s} f(i) $ is open in the topological space.\"}\n  {\"name\": \"TopologicalSpace.isOpen_sUnion\", \"module\": \"Mathlib.Topology.Defs.Basic\", \"type\": \"∀ {X : Type u} [self : TopologicalSpace X] (s : Set (Set X)),\\n  (∀ (t : Set X), t ∈ s → TopologicalSpace.IsOpen t) → TopologicalSpace.IsOpen (⋃₀ s)\", \"doc\": \"In a topological space $X$, if $\\\\mathcal{S}$ is a collection of open subsets of $X$, then the union $\\\\bigcup \\\\mathcal{S}$ is also an open set in $X$.\"}\n  {\"name\": \"isOpen_iUnion\", \"module\": \"Mathlib.Topology.Basic\", \"type\": \"{f : ι → Set X} (h : ∀ i, IsOpen (f i)) : IsOpen (⋃ i, f i)\", \"doc\": \"In a topological space, if $\\\\{U_i\\\\}_{i \\\\in I}$ is a family of open sets, then their arbitrary union $\\\\bigcup_{i \\\\in I} U_i$ is also open.\"}\n  {\"name\": \"isOpen_sUnion\", \"module\": \"Mathlib.Topology.Defs.Basic\", \"type\": \"{s : Set (Set X)} (h : ∀ t ∈ s, IsOpen t) : IsOpen (⋃₀ s)\", \"doc\": \"If every set in a family $ s $ of subsets of a topological space is open, then the union $ \\\\bigcup₀ s $ is also open.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.iSup_opensRange\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.OpenCover) : ⨆ i, (𝒰.f i).opensRange = ⊤\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$, the union of the open subsets $(\\\\mathcal{U}.f(i)).\\\\text{opensRange}$ over all indices $i$ equals the entire topological space of $X$, i.e., $\\\\bigcup_{\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{s : Set σ} (hs : s.Finite) {U : σ → X.Opens} (hU : ∀ i ∈ s, IsAffineOpen (U i)) (hU' : s.Pairwise (Disjoint on U)) :\\n  IsAffineOpen (⨆ i ∈ s, U i)\", \"doc\": \"Given a finite family of affine open subsets $\\\\{U_i\\\\}_{i \\\\in s}$ of a scheme $X$ that are pairwise disjoint (i.e., $U_i \\\\cap U_j = \\\\emptyset$ for all distinct $i,j \\\\in s$), the union $\\\\bigcup_{i \\\\in s\"}\n  {\"name\": \"TopologicalSpace.Opens.iSup_def\", \"module\": \"Mathlib.Topology.Sets.Opens\", \"type\": \"{ι} (s : ι → Opens α) : ⨆ i, s i = ⟨⋃ i, s i, isOpen_iUnion fun i => (s i).2⟩\", \"doc\": \"In a topological space $\\\\alpha$, for any indexed family $s : \\\\iota \\\\to \\\\text{Opens}(\\\\alpha)$ of open subsets, the supremum $\\\\bigvee_{i \\\\in \\\\iota} s(i)$ in the complete lattice of open sets is equal to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_iSup\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{ι : Sort*} (s : ι → X.Opens) : (f ''ᵁ ⨆ (i : ι), s i) = ⨆ (i : ι), f ''ᵁ s i\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes and any family of open subsets $ \\\\{U_i\\\\}_{i \\\\in I} $ of $ X $, the image of their union under $ f $ satisfies $ f\\\\left(\\\\bigcup_{i \\\\in I} U_i\\\\right) = \\\\b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DeligneMumford\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|open.*DM.*locus",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"409\", \"text\": \"  let V : Y.Opens := ⟨_, (f.isClosedMap _ f.quasiFiniteLocus.isOpen.isClosed_compl).isOpen_compl⟩\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary union of open Deligne Mumford substacks is Deligne Mumford",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOp\", \"doc\": \"For a functor $ F : J \\to \\text{Sch} $ from a small category $ J $ to the category of schemes, if the morphism property defining the colimit is Zariski-local at the source, then the colimit of $ F $ exi\"}\n  {\"name\": \"AlgebraicGeometry.sigmaOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"{σ : Type v} → (g : σ → AlgebraicGeometry.Scheme) → [inst : Small.{u, v} σ] → (∐ g).OpenCover\", \"doc\": \"Given a small type $\\\\sigma$ and a function $g : \\\\sigma \\\\to \\\\text{Scheme}$ assigning a scheme to each element of $\\\\sigma$, this constructs the open cover of the coproduct (disjoint union) scheme $\\\\copr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.iSupOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{J : Type u_1} → {X : AlgebraicGeometry.Scheme} → (U : J → X.Opens) → (↑(⨆ i, U i)).OpenCover\", \"doc\": \"Given a scheme $X$ and a family of open subsets $U_i$ indexed by $J$, this function constructs an open cover of the union $\\\\bigcup_{i \\\\in J} U_i$ by taking the canonical open immersions $U_i \\\\to \\\\bigc\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {σ : Type v} {X : AlgebraicGeometry.Scheme} [Finite σ] {U : σ → X.Opens},\\n  (∀ (i : σ), AlgebraicGeometry.IsAffineOpen (U i)) →\\n    Pairwise (Function.onFun Disjoint U) → AlgebraicGeometry.IsAffineOpen (iSup U)\", \"doc\": \"Let $X$ be a scheme. If $\\\\{U_i\\\\}_{i \\\\in \\\\sigma}$ is a finite family of affine open subsets of $X$ such that $U_i \\\\cap U_j = \\\\varnothing$ for all distinct $i,j \\\\in \\\\sigma$, then the union $\\\\bigcup_{i \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.iSup_opensRange\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover), ⨆ i, AlgebraicGeometry.Scheme.Hom.opensRange (𝒰.f i) = ⊤\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$, the union of the open subsets $(\\\\mathcal{U}.f(i)).\\\\text{opensRange}$ over all indices $i$ equals the entire topological space of $X$, i.e., $\\\\bigcup_{\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_cofanMk_of\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {σ : Type v} [Small.{u, v} σ] {X : σ → AlgebraicGeometry.Scheme} {S : AlgebraicGeometry.Scheme}\\n  (f : (i : σ) → X i ⟶ S) [inst : ∀ (i : σ), AlgebraicGeometry.IsOpenImmersion (f i)],\\n  ⨆ i, AlgebraicGeometry.Scheme.Hom.opensRange (f i) = ⊤ →\\n    Pairwise (Function.onFun Disjoint fun x => Algebraic\", \"doc\": \"Let $\\\\{X_i\\\\}$ be a family of schemes with open immersions $f_i: X_i \\\\to S$ such that the images of the $f_i$ are pairwise disjoint and their union equals the entire scheme $S$. Then the colimit of the\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionLeftSchemeDiscretePUnitιOverTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [inst_2 : ∀ {i j : J} (f : i ⟶ j), Alge\", \"doc\": \"For each object $j$ in the category $J$, the left component of the inclusion morphism from $F(j)$ to the colimit of the functor $F : J \\to \\text{Sch}$ is an open immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {σ : Type v} {X : AlgebraicGeometry.Scheme} {s : Set σ},\\n  s.Finite →\\n    ∀ {U : σ → X.Opens},\\n      (∀ i ∈ s, AlgebraicGeometry.IsAffineOpen (U i)) →\\n        s.Pairwise (Function.onFun Disjoint U) → AlgebraicGeometry.IsAffineOpen (⨆ i ∈ s, U i)\", \"doc\": \"Given a finite family of affine open subsets $\\\\{U_i\\\\}_{i \\\\in s}$ of a scheme $X$ that are pairwise disjoint (i.e., $U_i \\\\cap U_j = \\\\emptyset$ for all distinct $i,j \\\\in s$), the union $\\\\bigcup_{i \\\\in s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic stack has a largest open substack with unramified diagonal over its base scheme",
+   "results": "{\"t\": \"2026-10-22T05:31:18Z\", \"tool\": \"leanfinder\", \"query\": \"Every algebraic stack has a largest open substack with unramified diagonal over its base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\"], \"digest\": \"bf4f6822d33aeeba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|open.*DM.*locus",
+   "results": "{\"t\": \"2026-10-22T05:31:22Z\", \"tool\": \"grep\", \"query\": \"DeligneMumford|open.*DM.*locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"77b07415186409c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack admits a largest open Deligne Mumford substack characterized by unramified diagonal",
+   "results": "{\"t\": \"2026-10-22T05:31:23Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic stack admits a largest open Deligne Mumford substack characterized by unramified diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.formallyUnramified_iff\", \"Algebra.unramifiedLocus\", \"Algebra.isOpen_unramifiedLocus\", \"Algebra.Unramified.formallyUnramified\"], \"digest\": \"bc74adb8c44d255c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DeligneMumford\"",
+   "results": "{\"t\": \"2026-10-22T05:31:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"DeligneMumford\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-stack-infinitesimal-dm-locus",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Largest open with unramified diagonal in an algebraic stack.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-algebraic-stack-open-dm-locus",
+  "worker": "stage1",
+  "summary": "Followed the DM part of Stacks Tag 0DSM using the existing relative unramified-diagonal/etale-atlas criterion. Added one statement-only open-substack-union lemma, including set-sizedness and scheme-pullback compatibility. Wrote the arbitrary atlas coproduct, representability, etaleness on scheme charts, surjectivity and maximality explicitly, reusing existing scheme Mathlib leaves. Statement unchanged; no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Largest open with unramified diagonal in an algebraic stack. This split realizes that supporting largest-open prerequisite by the union/etale-atlas argument of 0DSM; it does not alter a chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-aa31e23c1",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-aa31e23c1 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-open-substack-unions, every cited statement (atlas criterion 06N3, coproduct family, étale composition and locality, the final paragraph of def-sfb-stable-pointed-moduli-groupoids) and the sources Stacks 0DSM, 06FJ and 05UQ. Live, the item is still unsplit with an identical statement, has no repair note and is not dropped. Steps 1-7 carry out the set-indexed form of 0DSM's atlas argument. Step 3 is correctly elementary: descent gluing over a disjoint cover, and representability through the base change of the diagonal. Step 4 applies its étaleness citations to scheme maps only, using E_i = W_i x_{U_i} T_i from full faithfulness (read as every chart; a 'some chart' reading also works). Step 7 handles full versus strictly full. The new node is 06FJ plus 05UQ and is true, including the least-upper-bound and scheme-pullback clauses; I checked the empty family, a singleton, repeats and infinite families. It is strictly smaller than the item and no DAG node duplicates it (searched 06FJ, 05UQ and 'open substack'). Item cases: a DM stack gives U = X, BG_m gives U empty, the empty stack gives the empty locus. Batch-5 flag on def-sfb-stable-pointed-moduli-groupoids reaching def-trf-projective-bundle-morphism: it is a generic definition, already a stmt_dep of the item on the base, and not a step of the trace formula or Poincaré duality, so accepted. No SGA, blueprint ancestor null as tools/blueprint_refs.py confirms, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicStackOpenDmLocus",
+  "declaration": "CategoryTheory.exists_largest_open_unramified_moduli_diagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicStackOpenDmLocus.lean",
+  "statement": "theorem exists_largest_open_unramified_moduli_diagonal {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hstack : IsModuliStack F) (hdiag : HasAlgebraicSpaceDiagonal F) (hatlas : ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ SpaceMapIsSurjective Z T p ∧ ∀ (V : Over S) (b : yoneda.obj V ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b → AlgebraicGeometry.Smooth ((yoneda.preimage (b ≫ p)).left)) : ∃ U : OpenModuliSubstack F, HasUnramifiedModuliDiagonal U.category ∧ ∀ V : OpenModuliSubstack F, HasUnramifiedModuliDiagonal V.category → V.IsContainedIn U",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68ed89942",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery carries out the e83687d8 RETURN correction exactly: def-sfb-algebraic-moduli-stack node and AlgebraicModuliStack.lean removed; hstack/hdiag/hatlas inline and byte-identical to the landed unramifiedModuliDiagonal_iff_etaleAtlas (diffed); public imports only; stmt_deps = base three + def-sfb-open-moduli-substack; node differs from live only in lean/stmt_deps; lean.statement verbatim. Clauses match the node: S arbitrary; algebraic stack (IsModuliStack + HasAlgebraicSpaceDiagonal + smooth surjective atlas on the specified projection); ∃ OpenModuliSubstack with HasUnramifiedModuliDiagonal over T⨯U in Over S with both projections pinned; maximality via IsContainedIn. Edge cases (empty, BG_m, DM, infinite families) OK; universes free; sorry only; docstrings with source/blueprint and 7 steps; report sections present; live item unlanded, no competing decl. No new node, so the reach landing block cannot recur. Advisory: redundant StablePointedModuliGroupoids import; def-trf-algebraic-space reached via the stable-pointed node. Not compiled (no change)."
+ }
+}

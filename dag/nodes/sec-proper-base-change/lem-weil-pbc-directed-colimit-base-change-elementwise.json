@@ -112,7 +112,32 @@
   "item": "lem-weil-pbc-colimit-etale-ring-map",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "TensorProduct.directedColimitBaseChangeElementwise"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "TensorProduct.directedColimitBaseChangeElementwise",
+     "module": "WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise",
+     "lines": [
+      35,
+      198
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -156,5 +181,37 @@
   "landing": "20261012T060753-L-2915125",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $I$ be a directed set, $(A_i,\\alpha_{i'i}:A_i\\to A_{i'})_{i\\le i'}$ a directed system of commutative rings with colimit $A=\\varinjlim_iA_i$ in the category of commutative rings and coprojections $\\alpha_i:A_i\\to A$. Let $0\\in I$ and $M_0$ an $A_0$-module. For $i\\ge0$ regard $A_i$ as an $A_0$-algebra via $\\alpha_{i0}$ and $A$ via $\\alpha_0$, and put $M_i=A_i\\otimes_{A_0}M_0$, $M=A\\otimes_{A_0}M_0$, with the maps $\\mu_{i'i}=\\alpha_{i'i}\\otimes\\mathrm{id}:M_i\\to M_{i'}$ ($0\\le i\\le i'$) and $\\mu_i=\\alpha_i\\otimes\\mathrm{id}:M_i\\to M$. Then (1) every element of $M$ is $\\mu_i(t)$ for some $i\\ge0$ and some $t\\in M_i$; (2) if $t\\in M_i$ satisfies $\\mu_i(t)=0$, then $\\mu_{i'i}(t)=0$ for some $i'\\ge i$. (Equivalently, $M$ with the maps $\\mu_i$ is the colimit of the directed system $(M_i,\\mu_{i'i})_{i\\ge0}$ of $A_0$-modules.)",
+  "proof": [
+   {
+    "text": "Restrict to the upper tail $J=\\{i\\in I\\mid i\\ge0\\}$; it is nonempty, directed and cofinal in $I$, so $A=\\varinjlim_{i\\in J}A_i$ with the same coprojections. For $i\\in J$ regard $A_i$ as an $A_0$-module via $\\alpha_{i0}$; then the transition maps $\\alpha_{i'i}$ and the coprojections $\\alpha_i$ are $A_0$-linear and satisfy the identities of a directed system and of a cocone.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The ring colimit is also the module colimit. The compatible $A_0$-linear maps $\\alpha_i$ induce an $A_0$-linear map $g:\\varinjlim_{i\\in J}A_i\\to A$ from the direct limit of $A_0$-modules. It is surjective: every element of the filtered colimit of rings $A$ is $\\alpha_i(a)$ for some $i\\in I$ and $a\\in A_i$, and moving $a$ to a later stage we may take $i\\ge0$. It is injective: if two stage elements have the same image in $A$, they become equal at some later stage, so they define the same element of the module direct limit. Hence $g$ is an isomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Tensor products commute with direct limits, so $(\\varinjlim_{i\\in J}A_i)\\otimes_{A_0}M_0\\cong\\varinjlim_{i\\in J}(A_i\\otimes_{A_0}M_0)=\\varinjlim_{i\\in J}M_i$, the transition maps being $\\mu_{i'i}=\\alpha_{i'i}\\otimes\\mathrm{id}$ (these satisfy the identities of a directed system, as one checks on pure tensors). Composing the inverse of this isomorphism with $g\\otimes\\mathrm{id}_{M_0}$ gives an isomorphism $e:\\varinjlim_{i\\in J}M_i\\xrightarrow{\\sim}A\\otimes_{A_0}M_0=M$. On pure tensors one checks that $e$ sends the class of $t\\in M_i$ to $\\mu_i(t)=(\\alpha_i\\otimes\\mathrm{id})(t)$; by linearity this holds for all $t\\in M_i$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Now (1) follows because every element of a direct limit of modules is the class of an element of some stage: for $x\\in M$, $e^{-1}(x)$ is the class of some $t\\in M_i$, and then $x=\\mu_i(t)$. For (2), if $\\mu_i(t)=0$ then, $e$ being injective, the class of $t$ in the direct limit is zero, and an element of a stage with zero class in a directed limit of modules vanishes at some later stage: $\\mu_{i'i}(t)=0$ for some $i'\\ge i$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,194 @@
+{
+ "id": "lem-sfb-reductive-root-subgroup-parametrizations",
+ "kind": "statement",
+ "title": "Root subgroups and coroots of a reductive group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Write $\\mathbf G_a$ and $\\mathbf G_m$ for the additive and multiplicative group schemes [def-sc-gm-ga]. A torus is a group scheme becoming $\\mathbf G_m^r$ over an algebraic closure; split means already isomorphic to this product over $F$, and maximal means maximal under inclusion. Let $G$ be a smooth connected affine $F$-group scheme of finite type which is reductive, meaning that it has no nontrivial smooth connected normal unipotent closed subgroup scheme. Here unipotent means that every geometric point is a unipotent matrix in a faithful linear representation. Let $T\\subseteq G$ be a split maximal torus. Let $\\mathfrak g$ be the tangent space of $G$ at the identity, with the action of $T$ obtained by differentiating conjugation on $G$. Let $\\Phi$ be the nontrivial characters $\\alpha:T\\to\\mathbf G_m$ occurring as weights in this action: $\\mathfrak g_\\alpha$ is the subspace on which $t$ acts by $\\alpha(t)$. We use characters of $T$, not their differentials. For every $\\alpha\\in\\Phi$ there is a unique smooth connected closed subgroup $U_\\alpha\\subseteq G$ normalized by $T$ whose tangent space is $\\mathfrak g_\\alpha$. It is isomorphic to $\\mathbf G_a$. For any group-scheme isomorphism $u_\\alpha:\\mathbf G_a\\xrightarrow{\\sim}U_\\alpha$ one has\n$$t\\,u_\\alpha(a)\\,t^{-1}=u_\\alpha(\\alpha(t)a)\\qquad(t\\in T(A),\\ a\\in A)$$\nfor every commutative $F$-algebra $A$. There is a group-scheme homomorphism $\\alpha^\\vee:\\mathbf G_m\\to T$ satisfying\n$$\\alpha(\\alpha^\\vee(s))=s^2\\qquad(s\\in A^\\times)$$\nfor every commutative $F$-algebra $A$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.11(b),(c),(e), printed pp.428--430, and 21.19, printed p.431 (formula (135))"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\alpha\\in\\Phi$. Apply [lem-sfb-reductive-rank-one-reflections] to $(G,T)$: its reductivity and maximal-torus hypotheses are exactly those here. It gives $\\dim_F\\mathfrak g_\\alpha=1$ and $\\mathbf Q\\alpha\\cap\\Phi=\\{\\alpha,-\\alpha\\}$. Consequently the sum of the adjoint weight spaces on the positive rational ray through $\\alpha$ is exactly $\\mathfrak g_\\alpha$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(b), printed pp.428--429."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-torus-positive-ray-subgroup] to the conjugation action of $S=T$ on $H=G$, with $\\eta=\\alpha$. It constructs a smooth connected unipotent closed $T$-stable subgroup $U_\\alpha$ with tangent space $\\mathfrak g_\\alpha$. If $K$ is another smooth connected closed $T$-stable subgroup with that tangent space, both implications of that lemma give $U_\\alpha\\subseteq K\\subseteq U_\\alpha$, hence equality as subgroup schemes. Its tangent space has dimension one by step 1, so [lem-sfb-one-dimensional-unipotent-additive] gives the required group-scheme isomorphism with $\\mathbf G_a$.",
+   "uses": [
+    "lem-sfb-torus-positive-ray-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.64; Theorem 21.11(c); paragraph 14.58."
+   }
+  },
+  {
+   "text": "Fix any group-scheme isomorphism $u:\\mathbf G_a\\to U_\\alpha$. Transport conjugation through $u$. Write $R=F[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]=F[T]$ using a splitting of $T$ and [def-sc-gm-ga]. At the universal point of $T$ this action is an $R$-automorphism of $\\mathbf A^1_R$ fixing zero, hence a polynomial $P(X)$ with polynomial inverse $Q(X)$. Since $R$ is a domain, $\\deg(P\\circ Q)=\\deg P\\deg Q=1$; thus $P(X)=cX$ with $c\\in R^\\times$. On the tangent line its multiplier is $c$. But $du$ identifies that line with $\\mathfrak g_\\alpha$, so the definition of the $T$-weight gives $c=\\alpha\\in F[T]^\\times$. This polynomial identity over $F[T]$ specializes along every $F[T]\\to A$, giving $t u(a)t^{-1}=u(\\alpha(t)a)$ for all commutative $F$-algebras $A$, including nonreduced ones.",
+   "uses": [
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraphs 14.59--14.60, printed p.298, and 21.19, printed p.431, formula (135); universal Laurent-polynomial calculation written out."
+   }
+  },
+  {
+   "text": "The cocharacter $\\alpha^\\vee:\\mathbf G_m\\to T$ supplied by [lem-sfb-reductive-rank-one-reflections] has $\\langle\\alpha,\\alpha^\\vee\\rangle=2$. The pairing in its statement is defined by $\\chi\\circ\\nu(s)=s^{\\langle\\chi,\\nu\\rangle}$, so substituting $\\chi=\\alpha$ and $\\nu=\\alpha^\\vee$ gives $\\alpha(\\alpha^\\vee(s))=s^2$ on every test algebra. If $\\Phi$ is empty all assertions indexed by $\\alpha$ are vacuous.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(e), printed pp.429--430; definition of the character-cocharacter pairing on printed p.428."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-torus-positive-ray-subgroup",
+  "lem-sfb-one-dimensional-unipotent-additive",
+  "def-sc-gm-ga"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.11(b),(c),(e) and paragraph 21.19, through Proposition 16.64 and paragraphs 14.58--14.60; explicit universal-coordinate form of the calculation in 14.59."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A root subgroup of a reductive algebraic group is an additive group on which the maximal torus acts by its nonzero root character",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairingCat.weightIsAddCommGroup\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat\", \"type\": \"{R : Type u} → [inst : CommRing R] → (self : RootPairingCat R) → AddCommGroup self.weight\", \"doc\": \"For any commutative ring $ R $ and any root pairing over $ R $, the weight type associated to the root pairing is equipped with the structure of an additive commutative group.\"}\n  {\"name\": \"RootPairingCat.coweightIsAddCommGroup\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat\", \"type\": \"{R : Type u} → [inst : CommRing R] → (self : RootPairingCat R) → AddCommGroup self.coweight\", \"doc\": \"For any commutative ring $ R $ and any object in the category of root pairings over $ R $, the coweight associated to that object is equipped with the structure of an additive commutative group.\"}\n  {\"name\": \"LieSubalgebra.root\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} → [inst_4 : H.IsCartanSubalgebra] → Finset (LieModule.Weight K (↥H) L)\", \"doc\": \"The finite set of non-zero weights $\\\\alpha \\\\in \\\\text{Weight}(K, \\\\mathfrak{h}, \\\\mathfrak{g})$ associated with the Lie subalgebra $\\\\mathfrak{h}$, where each weight $\\\\alpha$ satisfies $\\\\alpha \\\\neq 0$ (i.\"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} →\\n              [inst_4 : H.IsCartanSubalgebra] →\\n                [LieAlgebra.IsKilling K L] →\\n         \", \"doc\": \"Given a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a non-degenerate Killing form and a non-zero weight $\\\\alpha$, this constructs the $\\\\mathfrak{sl}_2$-submodule of $\\\\mathfrak{g}$ generated by th\"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSystem_root_apply\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L] (α :\", \"doc\": \"For any element $\\\\alpha$ in the index set of the root system, the root function evaluated at $\\\\alpha$ returns $\\\\alpha$ itself, i.e., $\\\\text{root}(\\\\alpha) = \\\\alpha$.\"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"{K : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : Field K] →\\n      [CharZero K] →\\n        [inst_2 : LieRing L] →\\n          [inst_3 : LieAlgebra K L] →\\n            [LieAlgebra.IsKilling K L] →\\n              [inst_5 : FiniteDimensional K L] →\\n                (H : LieSubalgebra K L) →\\n                  [\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form and a non-zero weight $\\\\alpha$, the $\\\\mathfrak{sl}_2$-submodule generated by the $\\\\mathfrak{sl}_2$-triple associated \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras or root systems, not root subgroup schemes of reductive algebraic groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive group has root homomorphisms from the additive group and coroot homomorphisms from the multiplicative group with pairing two",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairingCat.pairing\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat\", \"type\": \"{R : Type u} → [inst : CommRing R] → (self : RootPairingCat R) → RootPairing self.index R self.weight self.coweight\", \"doc\": \"For a commutative ring $ R $ and an object in the category of root pairings over $ R $, this constructs a root pairing between the index type, the ring $ R $, the weight type, and the coweight type, a\"}\n  {\"name\": \"RootSystem.mk'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"{ι : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_4} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [Finite ι] →\\n            {k : Type u_5} →\\n              [inst_3 : Field k] →\\n                [CharZero k] →\\n                  [inst_5 : Module k M] →\\n               \", \"doc\": \"Constructs a root system over a field $ k $ of characteristic zero, given a perfect pairing between $ k $-modules $ M $ and $ N $, injective maps $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iot\"}\n  {\"name\": \"RootPairing.mk''\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"{ι : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_4} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [Finite ι] →\\n            {k : Type u_5} →\\n              [inst_3 : Field k] →\\n                [CharZero k] →\\n                  [inst_5 : Module k M] →\\n               \", \"doc\": \"Given a perfect pairing between $ k $-modules $ M $ and $ N $, injective functions $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iota \\\\to N $ satisfying $ p(\\\\text{root}\\\\, i, \\\\text{coroot}\\\\, i) = \"}\n  {\"name\": \"RootPairing\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (R : Type u_2) →\\n    (M : Type u_3) →\\n      (N : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [Module R M] → [inst_3 : AddCommGroup N] → [Module R N] → Type (max (max (max u_1 u_2) u_3) u_4)\", \"doc\": \"Given a commutative ring $ R $, an additive commutative group $ M $ with an $ R $-module structure, and an additive commutative group $ N $ with an $ R $-module structure, this constructs the type of \"}\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.isRootSystem_mk''\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ {ι : Type u_1} {M : Type u_3} {N : Type u_4} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] [inst_2 : Finite ι]\\n  {k : Type u_5} [inst_3 : Field k] [inst_4 : CharZero k] [inst_5 : Module k M] [inst_6 : Module k N]\\n  {p : M →ₗ[k] N →ₗ[k] k} [inst_7 : p.IsPerfPair] {root : ι ↪ M} {coroot : ι ↪ N}\", \"doc\": \"Given a perfect pairing $ p $ between $ k $-modules $ M $ and $ N $, injective maps $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iota \\\\to N $ satisfying $ p(\\\\text{root}\\\\, i, \\\\text{coroot}\\\\, i) =\"}\n  {\"name\": \"RootPairing.RootSystem\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Prop\", \"doc\": \"The proposition that a root pairing between R-modules forms a root system, satisfying bilinearity, non-degeneracy, and reflection conditions.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras or root systems, not root subgroup schemes of reductive algebraic groups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras or root systems, not root subgroup schemes of reductive algebraic groups"
+  },
+  {
+   "tool": "grep",
+   "query": "rootSubgroup|rootGroup|rootHom|corootHom",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras or root systems, not root subgroup schemes of reductive algebraic groups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root subgroups of split reductive algebraic groups are isomorphic to the additive group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairingCat.coweightIsAddCommGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.RootPairingCat\", \"type\": \"{R : Type u} → [inst : CommRing R] → (self : RootPairingCat R) → AddCommGroup self.coweight\", \"doc\": \"For any commutative ring $ R $ and any object in the category of root pairings over $ R $, the coweight associated to that object is equipped with the structure of an additive commutative group.\"}\n  {\"name\": \"RootPairingCat.weightIsAddCommGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.RootPairingCat\", \"type\": \"{R : Type u} → [inst : CommRing R] → (self : RootPairingCat R) → AddCommGroup self.weight\", \"doc\": \"For any commutative ring $ R $ and any root pairing over $ R $, the weight type associated to the root pairing is equipped with the structure of an additive commutative group.\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂]\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.coroot_mem_or_neg_mem_closure_of_root\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseExists\", \"type\": \"(s : Set ι) (hli : LinearIndepOn R P.root s)\\n  (hsp : ∀ i, P.root i ∈ AddSubmonoid.closure (P.root '' s) ∨ -P.root i ∈ AddSubmonoid.closure (P.root '' s)) (i : ι) :\\n  P.coroot i ∈ AddSubmonoid.closure (P.coroot '' s) ∨ -P.coroot i ∈ AddSubmonoid.closure (P.coroot '' s)\", \"doc\": \"Given a set $ S $ of indices and a root pairing $ P $, if the roots indexed by $ S $ are linearly independent over $ R $ and each root $ P.root(i) $ lies in the additive submonoid generated by $ P.roo\"}\n  {\"name\": \"LieAlgebra.rootSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \"(χ : H → R) : LieSubmodule R H L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $\\\\mathfrak{h}$, and a root $\\\\chi : \\\\mathfrak{h} \\\\to R$, the root space is the generalized weight space $\\\\bigcap_{x \\\\in \\\\m\"}\n  {\"name\": \"Additive.mem_toAddSubgroup\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Lattice\", \"type\": \"(S : Subgroup G) (g : Additive G) : g ∈ S.toAddSubgroup ↔ Additive.toMul g ∈ S\", \"doc\": \"There exists a canonical order isomorphism between the subgroups of a group $G$ and the additive subgroups of the additive group $\\\\text{Additive}\\\\, G$. This bijection preserves inclusion relations, ma\"}\n  {\"name\": \"AddSubgroup.noConfusionType\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"Sort u →\\n  {G : Type u_3} →\\n    [inst : AddGroup G] → AddSubgroup G → {G' : Type u_3} → [inst' : AddGroup G'] → AddSubgroup G' → Sort u\", \"doc\": \"The structure of an additive subgroup of an additive group $ G $, consisting of a subset of $ G $ closed under addition, negation, and containing the zero element.\"}\n  {\"name\": \"AddSubgroupClass.toAddCommGroup.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \"∀ {S : Type u_4} (H : S) {G : Type u_5} [inst : AddCommGroup G] [inst_1 : SetLike S G] [inst_2 : AddSubgroupClass S G],\\n  AddSubgroupClass.toAddCommGroup H = AddSubgroupClass.toAddCommGroup H\", \"doc\": \"For any additive commutative group $ G $ and a subgroup $ H $ of $ G $, the additive commutative group structure on $ H $ inherited from $ G $ is equal to itself.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras or root systems, not root subgroup schemes of reductive algebraic groups"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-group-perfect",
+  "date": "2026-10-23",
+  "group": "Q129"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50.",
+   "via": [
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reductive-root-subgroup-parametrizations",
+  "worker": "stage1",
+  "summary": "Reused the existing rank-one/reflection node for root-space dimension, reducedness and coroots. Added only the general positive-ray integration/comparison lemma and one-dimensional unipotent classification. Wrote the universal conjugation polynomial calculation to cover all test algebras and every parametrization. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. The split supplies the root-subgroup and coroot input of Milne Corollary 21.50, without changing the higher unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-6191c903c",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-6191c903c (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, the cited rank-one node and the Milne iAG sources: Def 21.10, Thm 21.11(b),(c),(e) pp.428-430, 21.19 eq.(135) p.431, Prop 16.62 pp.346-347, Prop 16.64 and its uniqueness sentence pp.348-349, 14.58/Cor 14.53 p.298, 14.59-14.60, Prop 1.37 p.18. The item statement is unchanged and matches the source. Step 1: lem-sfb-reductive-rank-one-reflections literally states dim g_alpha=1 and Q alpha ∩ Phi={±alpha}, so V_alpha=g_alpha (unsplit node, so no cycle). Step 2: the positive-ray node applied with H=G, S=T, eta=alpha has satisfied hypotheses; the two implications give uniqueness as subgroup schemes; the 1-dim unipotent node gives G_a. Step 3: the universal-point polynomial argument over the domain F[T] (deg P·deg Q=1, P(0)=0, tangent multiplier = alpha) is correct and specializes to non-reduced A, so it is genuinely elementary. Step 4: the rank-one pairing definition gives alpha∘alpha^vee = s^2. The new nodes are statement-only and self-contained, cite their definition nodes, and are generic (Milne 16.64+16.62; 14.58/14.53 with 1.37), not clauses of the item. Tested: G_a weights (1), (1,2) incl. Frobenius graph in char 2, (1,-1), empty ray; alpha_p and wound forms excluded by hypotheses; G=T vacuous; SL2 char 2. rg -L duplicate search over the DAG (borel-pair, regular-cocharacter, torus-centralizer, self-centralizer, root-subgroups-generate, smooth-unipotent-solvable etc.) found no duplicate. No SGA, no doubled TeX. blueprint.from.node is null, inherited from the sibling base nodes, a base fault and not this delivery's. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ReductiveRootSubgroupParametrizations",
+  "declaration": "AlgebraicGeometry.TorusCharacterTangent.reductive_root_subgroup_parametrizations",
+  "declarations": [
+   "AlgebraicGeometry.TorusCharacterTangent.additiveParameterPoint",
+   "AlgebraicGeometry.TorusCharacterTangent.multiplicativePointCoordinate",
+   "AlgebraicGeometry.TorusCharacterTangent.reductive_root_subgroup_parametrizations"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveRootSubgroupParametrizations.lean",
+  "statement": "theorem reductive_root_subgroup_parametrizations (F : Type u) [Field F] [IsAlgClosed F] (G T : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (i : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) (r : ℕ) (hsplit : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) [ModObj T.X G.X] (hconj : γ[T.X,G.X] = (fst T.X G.X ≫ i.hom.hom) * snd T.X G.X * (fst T.X G.X ≫ i.hom.hom)⁻¹) (α : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hα : α.hom.hom ≠ 1) (hweight : weightSpace T G α ≠ ⊥) : ∃ (U : Grp (Over (Spec (.of F)))) (j : U ⟶ G), IsClosedSubgroupScheme j.hom.hom ∧ Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ IsStable T G j ∧ (GrpObj.differential j.hom.hom).toLinearMap.range = weightSpace T G α ∧ Nonempty (Grp.mk (StandardGroupSchemes.additive F) ≅ U) ∧ (∀ (K : Grp (Over (Spec (.of F)))) (k : K ⟶ G), IsClosedSubgroupScheme k.hom.hom → Smooth K.X.hom → ConnectedSpace K.X.left → IsStable T G k → (GrpObj.differential k.hom.hom).toLinearMap.range = weightSpace T G α → ∃ e : K ≅ U, e.hom ≫ j = k) ∧ (∀ (v : Grp.mk (StandardGroupSchemes.additive F) ≅ U) (A : Type u) [CommRing A] [Algebra F A] (t : StandardGroupSchemes.affine F A ⟶ T.X) (a : A), (t ≫ i.hom.hom) * (additiveParameterPoint F a ≫ v.hom.hom.hom ≫ j.hom.hom) * (t ≫ i.hom.hom)⁻¹ = additiveParameterPoint F (multiplicativePointCoordinate F (t ≫ α.hom.hom) * a) ≫ v.hom.hom.hom ≫ j.hom.hom) ∧ (∃ αcoroot : Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T, ∀ (A : Type u) [CommRing A] [Algebra F A] (s : StandardGroupSchemes.affine F A ⟶ StandardGroupSchemes.multiplicative F), s ≫ αcoroot.hom.hom ≫ α.hom.hom = s ^ 2)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55fe62ae7",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Item lem-sfb-reductive-root-subgroup-parametrizations @55fe62ae: one new module; node diff = lean record + 3 used def stmt_deps (reductive-torus-centralizer, torus-character-tangent-weights, tori-multiplicative-type); statement verbatim in file. Every clause matches the node: IsReductive/IsMaximalTorus/splitTorus hypotheses (no stronger assumption, r=0 ok), hconj only pins the action to conjugation, α nontrivial character with nonzero weightSpace (characters not differentials, char p ok); conclusions closed smooth connected T-stable U with tangent = g_α, uniqueness as subgroup via ∃ e : K ≅ U, e≫j=k, Nonempty(G_a ≅ U), conjugation formula for every iso v, every F-algebra A (nonreduced/zero ok), t, a via concrete coordinate helpers, coroot with α∘α^∨ = s^2 in the G_m Hom-monoid. Recorded dep decls read in side-live; sibling positive-ray node uses same conventions; no existing duplicate; helpers have real data; only sorry; docstrings with Milne 21.11/21.19 and blueprint tags. Not recompiled (worker's clean scompile)."
+ }
+}

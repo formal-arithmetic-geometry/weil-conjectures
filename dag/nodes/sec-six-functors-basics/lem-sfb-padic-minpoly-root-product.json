@@ -1,0 +1,447 @@
+{
+ "id": "lem-sfb-padic-minpoly-root-product",
+ "kind": "statement",
+ "title": "Minimal-polynomial root-product norm identity over a p-adic field",
+ "statement": "Let $\\ell$ be a prime, $K=\\mathbf Q_\\ell$ with its normalized absolute value [def-weil-l-adic-numbers], and $\\Omega/K$ an algebraic closure [def-weil-algebraic-closure] equipped with an absolute value extending that of $K$. Let $H\\in K[X]$ be monic of degree $r\\geq0$ [def-weil-polynomial-ring], with roots $c_1,\\ldots,c_r\\in\\Omega$ counted with multiplicity. For $\\alpha\\in\\Omega$, let $f\\in K[T]$ be its minimal polynomial over $K$ [def-weil-pbc-separable-algebraic-extension] and put $m=\\deg f\\geq1$. Then\n$$\\left|\\prod_{i=1}^r f(c_i)\\right|=|H(\\alpha)|^m.$$\nAll evaluations and products are computed in $\\Omega$ using the given inclusion of $K$, and the empty product is $1$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, proof of Lemma 10.21, printed p.51: the displayed identity for the product of F(a_i), with F the minimum polynomial of alpha, and its identical Q formula."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "The minimal polynomial $f$ is monic by [def-weil-pbc-separable-algebraic-extension]. Apply [lem-weil-alg-closed-linear-factorization] in $\\Omega$ to $f$ and $H$. Since their leading coefficients are $1$, write $f(T)=\\prod_{j=1}^m(T-\\alpha_j)$ and $H(T)=\\prod_{i=1}^r(T-c_i)$, listing roots with multiplicity. The numbers of factors are $m$ and $r$ by degrees. In particular $f(\\alpha_j)=0$ for every $j$. This includes $H=1$, with no factors.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-alg-closed-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Lemma 10.21, printed p.51: factorization by conjugates and the two displayed root-product identities."
+   }
+  },
+  {
+   "text": "The extension $\\Omega/K$ is algebraic by [def-weil-algebraic-closure] and normal: the minimal polynomial of every element splits in the algebraically closed field $\\Omega$, by the factorization lemma of step 1. Thus [lem-weil-pbc-normal-extension-conjugate-by-automorphism], applied to $\\alpha$ and each root $\\alpha_j$ of $f$, supplies a $K$-automorphism $\\sigma_j$ of $\\Omega$ with $\\sigma_j(\\alpha)=\\alpha_j$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-alg-closed-linear-factorization",
+    "lem-weil-pbc-normal-extension-conjugate-by-automorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Lemma 10.21, printed p.51: factorization by conjugates and the two displayed root-product identities."
+   }
+  },
+  {
+   "text": "The base $K=\\mathbf Q_\\ell$ is complete, nontrivially valued and nonarchimedean by [def-weil-l-adic-numbers] (nontriviality follows from $|\\ell|_\\ell=\\ell^{-1}\\ne1$). For each $j$, $u_j(z)=|\\sigma_j(z)|$ is an absolute value on $\\Omega$: multiplicativity and the triangle inequality follow by applying $|\\cdot|$ to the corresponding identities for the field automorphism, and $u_j(z)=0$ iff $z=0$. It agrees with $|\\cdot|_K$ since $\\sigma_j$ fixes $K$. Apply [lem-sfb-algebraic-absolute-value-unique] to $u_j$ and the given absolute value on the algebraic extension $\\Omega/K$. Therefore $|\\sigma_j(z)|=|z|$ for all $z$. Writing $H(T)=\\sum_k h_kT^k$ gives $H(\\alpha_j)=\\sum_k h_k\\sigma_j(\\alpha)^k=\\sigma_j(\\sum_k h_k\\alpha^k)=\\sigma_j(H(\\alpha))$, hence $|H(\\alpha_j)|=|H(\\alpha)|$.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-sfb-algebraic-absolute-value-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Lemma 10.21, printed p.51: factorization by conjugates and the two displayed root-product identities."
+   }
+  },
+  {
+   "text": "Rearrange the finite products from step 1 in the commutative field $\\Omega$: $$\\prod_i f(c_i)=\\prod_{i,j}(c_i-\\alpha_j)=(-1)^{rm}\\prod_j\\prod_i(\\alpha_j-c_i)=(-1)^{rm}\\prod_j H(\\alpha_j).$$ Taking absolute values, $|-1|=1$ and multiplicativity give $|\\prod_i f(c_i)|=\\prod_j|H(\\alpha_j)|=|H(\\alpha)|^m$ by step 3. No division or cancellation of evaluations is used, so vanishing evaluations cause no exception. When $r=0$, both sides are $1$ because $H=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Lemma 10.21, printed p.51: factorization by conjugates and the two displayed root-product identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-alg-closed-linear-factorization",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-normal-extension-conjugate-by-automorphism",
+  "def-weil-l-adic-numbers",
+  "lem-sfb-algebraic-absolute-value-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, proof of Lemma 10.21, printed p.51: factorization by conjugates and the two displayed root-product identities.",
+  "note": "Expanded the Milne argument with explicit normal-extension conjugacy and uniqueness of the extending absolute value. The finite-product rearrangement proves the identity without a resultant theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a complete nonarchimedean field the product of minimal polynomial values at roots of a monic polynomial has norm equal to the polynomial value norm raised to the minimal polynomial degree",
+   "results": {
+    "t": "2026-10-23T13:08:12Z",
+    "tool": "leanfinder",
+    "query": "In a complete nonarchimedean field the product of minimal polynomial values at roots of a monic polynomial has norm equal to the polynomial value norm raised to the minimal polynomial degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "Algebra.norm_eq_prod_roots",
+     "Algebra.PowerBasis.norm_gen_eq_prod_roots",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "max_norm_root_eq_spectralValue",
+     "IntermediateField.AdjoinSimple.norm_gen_eq_prod_roots",
+     "norm_root_le_spectralValue"
+    ],
+    "digest": "552a11f27f3db367"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.norm_eq_prod_roots and spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots give the product of the roots of the minimal polynomial of a single element, not the product of f(c_i) for the roots of an independent H. spectralNorm.spectralMulAlgNorm_eq_of_mem_roots is a conjugate-norm ingredient. Combining conjugate evaluation with the double root product is a further argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "resultant.*(norm|abs)|norm.*resultant|norm.*minpoly|minpoly.*norm",
+   "results": {
+    "t": "2026-10-23T13:09:04Z",
+    "tool": "grep",
+    "query": "resultant.*(norm|abs)|norm.*resultant|norm.*minpoly|minpoly.*norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/AdjoinRoot.lean",
+     "Mathlib/FieldTheory/PolynomialGaloisGroup.lean",
+     "Mathlib/FieldTheory/PolynomialGaloisGroup.lean",
+     "Mathlib/FieldTheory/Normal/Basic.lean",
+     "Mathlib/FieldTheory/Normal/Basic.lean",
+     "Mathlib/FieldTheory/Normal/Basic.lean",
+     "Mathlib/FieldTheory/Normal/Closure.lean",
+     "Mathlib/FieldTheory/Normal/Closure.lean"
+    ],
+    "digest": "861bf4e13ce7918e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.norm_eq_prod_roots and spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots give the product of the roots of the minimal polynomial of a single element, not the product of f(c_i) for the roots of an independent H. spectralNorm.spectralMulAlgNorm_eq_of_mem_roots is a conjugate-norm ingredient. Combining conjugate evaluation with the double root product is a further argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The norm of a resultant with a minimal polynomial equals the norm of evaluation at a root to the degree of the minimal polynomial over a complete p adic field",
+   "results": {
+    "t": "2026-10-23T13:09:04Z",
+    "tool": "leansearch",
+    "query": "The norm of a resultant with a minimal polynomial equals the norm of evaluation at a root to the degree of the minimal polynomial over a complete p adic field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "Polynomial.resultant_X_sub_C_right",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "Algebra.norm_eq_prod_roots",
+     "IntermediateField.AdjoinSimple.norm_gen_eq_prod_roots",
+     "Polynomial.resultant_X_sub_C_pow_left",
+     "Algebra.PowerBasis.norm_gen_eq_prod_roots",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots"
+    ],
+    "digest": "741c870d1d76f174"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.norm_eq_prod_roots and spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots give the product of the roots of the minimal polynomial of a single element, not the product of f(c_i) for the roots of an independent H. spectralNorm.spectralMulAlgNorm_eq_of_mem_roots is a conjugate-norm ingredient. Combining conjugate evaluation with the double root product is a further argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minpoly\", \"norm\"",
+   "results": {
+    "t": "2026-10-23T13:09:05Z",
+    "tool": "loogle",
+    "query": "\"minpoly\", \"norm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Normal.minpoly_eq_iff_mem_orbit",
+     "Algebra.PowerBasis.norm_gen_eq_coeff_zero_minpoly",
+     "Algebra.normalizedTrace_minpoly",
+     "KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk",
+     "KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span"
+    ],
+    "digest": "ec710e405541235a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.norm_eq_prod_roots and spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots give the product of the roots of the minimal polynomial of a single element, not the product of f(c_i) for the roots of an independent H. spectralNorm.spectralMulAlgNorm_eq_of_mem_roots is a conjugate-norm ingredient. Combining conjugate evaluation with the double root product is a further argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute value of the resultant H minpoly alpha equals absolute value of H alpha to degree minpoly alpha over the p adic numbers",
+   "results": {
+    "t": "2026-10-23T13:09:05Z",
+    "tool": "leanfinder",
+    "query": "Absolute value of the resultant H minpoly alpha equals absolute value of H alpha to degree minpoly alpha over the p adic numbers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NumberField.natAbs_discr_eq_absNorm_differentIdeal_mul_natAbs_discr_pow",
+     "Algebra.discr_powerBasis_eq_norm",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "NumberField.discr",
+     "NumberField.Embeddings.coeff_bdd_of_norm_le",
+     "NumberField.hermiteTheorem.natDegree_le_rankOfDiscrBdd",
+     "Algebra.PowerBasis.norm_gen_eq_coeff_zero_minpoly",
+     "Algebra.norm_eq_prod_embeddings_gen"
+    ],
+    "digest": "d810608b058f49e5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.norm_eq_prod_roots and spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots give the product of the roots of the minimal polynomial of a single element, not the product of f(c_i) for the roots of an independent H. spectralNorm.spectralMulAlgNorm_eq_of_mem_roots is a conjugate-norm ingredient. Combining conjugate evaluation with the double root product is a further argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.resultant, \"norm\"",
+   "results": {
+    "t": "2026-10-23T13:21:43Z",
+    "tool": "loogle",
+    "query": "Polynomial.resultant, \"norm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Polynomial.resultant_integralNormalization"
+    ],
+    "digest": "bd480a3443183f19"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.norm_eq_prod_roots and spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots give the product of the roots of the minimal polynomial of a single element, not the product of f(c_i) for the roots of an independent H. spectralNorm.spectralMulAlgNorm_eq_of_mem_roots is a conjugate-norm ingredient. Combining conjugate evaluation with the double root product is a further argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralMulAlgNorm_eq_of_mem_roots|spectralNorm_pow_natDegree_eq_prod_roots",
+   "results": {
+    "t": "2026-10-23T13:34:07Z",
+    "tool": "grep",
+    "query": "spectralMulAlgNorm_eq_of_mem_roots|spectralNorm_pow_natDegree_eq_prod_roots",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "dccafaaa8b7128ab"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.norm_eq_prod_roots and spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots give the product of the roots of the minimal polynomial of a single element, not the product of f(c_i) for the roots of an independent H. spectralNorm.spectralMulAlgNorm_eq_of_mem_roots is a conjugate-norm ingredient. Combining conjugate evaluation with the double root product is a further argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralMulAlgNorm_eq_of_mem_roots|norm_eq_prod_roots|norm.*aeval|aeval.*norm",
+   "results": {
+    "t": "2026-10-23T14:26:58Z",
+    "tool": "grep",
+    "query": "spectralMulAlgNorm_eq_of_mem_roots|norm_eq_prod_roots|norm.*aeval|aeval.*norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Padics/Hensel.lean",
+     "Mathlib/NumberTheory/Padics/Hensel.lean",
+     "Mathlib/NumberTheory/Padics/Hensel.lean",
+     "Mathlib/NumberTheory/Padics/Hensel.lean",
+     "Mathlib/NumberTheory/Padics/Hensel.lean",
+     "Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean",
+     "Mathlib/FieldTheory/PolynomialGaloisGroup.lean",
+     "Mathlib/FieldTheory/Minpoly/IsConjRoot.lean"
+    ],
+    "digest": "8d4a7acfaab13acf"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give norms of a single element or its conjugates, not the product of f(c_i) for a separately given H; the double-product calculation and conjugate evaluation are needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The norm of a resultant of H with minpoly alpha is the norm of H alpha raised to degree minpoly over a complete nonarchimedean field",
+   "results": {
+    "t": "2026-10-23T14:26:58Z",
+    "tool": "leansearch",
+    "query": "The norm of a resultant of H with minpoly alpha is the norm of H alpha raised to degree minpoly over a complete nonarchimedean field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.norm_eq_prod_roots",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralMulAlgNorm",
+     "Polynomial.resultant_X_sub_C_pow_right",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "Polynomial.resultant_pow_right",
+     "Polynomial.resultant_X_sub_C_pow_left"
+    ],
+    "digest": "390a3010caf3219c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give norms of a single element or its conjugates, not the product of f(c_i) for a separately given H; the double-product calculation and conjugate evaluation are needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minpoly\", \"norm\"",
+   "results": {
+    "t": "2026-10-23T14:26:58Z",
+    "tool": "loogle",
+    "query": "\"minpoly\", \"norm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Normal.minpoly_eq_iff_mem_orbit",
+     "Algebra.PowerBasis.norm_gen_eq_coeff_zero_minpoly",
+     "Algebra.normalizedTrace_minpoly",
+     "KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk",
+     "KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span"
+    ],
+    "digest": "ec710e405541235a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give norms of a single element or its conjugates, not the product of f(c_i) for a separately given H; the double-product calculation and conjugate evaluation are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a complete p adic field the absolute value of the product of minimal polynomial evaluations at roots of a monic polynomial H equals the absolute value of H at alpha to the degree of the minimal polynomial",
+   "results": {
+    "t": "2026-10-23T14:26:59Z",
+    "tool": "leanfinder",
+    "query": "Over a complete p adic field the absolute value of the product of minimal polynomial evaluations at roots of a monic polynomial H equals the absolute value of H at alpha to the degree of the minimal polynomial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "Algebra.PowerBasis.norm_gen_eq_prod_roots",
+     "norm_root_le_spectralValue",
+     "Algebra.norm_eq_prod_roots",
+     "IntermediateField.AdjoinSimple.norm_gen_eq_prod_roots",
+     "Algebra.norm_eq_prod_embeddings_gen"
+    ],
+    "digest": "ac32583e24338371"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give norms of a single element or its conjugates, not the product of f(c_i) for a separately given H; the double-product calculation and conjugate evaluation are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute value of polynomial evaluated at conjugate algebraic elements over a complete nonarchimedean field is the same",
+   "results": {
+    "t": "2026-10-23T14:28:54Z",
+    "tool": "leanfinder",
+    "query": "Absolute value of polynomial evaluated at conjugate algebraic elements over a complete nonarchimedean field is the same",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "Polynomial.aeval_conj",
+     "norm_root_le_spectralValue",
+     "IsConjRoot.aeval_eq_zero",
+     "Polynomial.tendsto_abv_aeval_atTop",
+     "isConjRoot_iff_aeval_eq_zero",
+     "isConjRoot_of_aeval_eq_zero",
+     "Polynomial.exists_forall_norm_le"
+    ],
+    "digest": "fc0dece817b86d5b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give norms of a single element or its conjugates, not the product of f(c_i) for a separately given H; the double-product calculation and conjugate evaluation are needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-padic-resultant-rigidity",
+  "date": "2026-10-23",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I, Lemma 10.21 and its proof, printed p.51. Supporting identity in Milne I Lemma 10.21, p.51: the two displayed root-product formulas for the minimum polynomial of alpha.",
+   "via": [
+    "lem-sfb-padic-resultant-rigidity",
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-padic-minpoly-root-product",
+  "worker": "stage1",
+  "summary": "Read Milne I Lemma 10.21 p.51. Retained the statement; expanded factorization, normal-extension conjugacy, norm invariance and the signed double-product rearrangement. Reused two existing Mathlib lemmas and created one general uniqueness Mathlib leaf; checked r=0, repeated roots and vanishing evaluations. No project declaration proves the item exactly.",
+  "blueprint": "Supporting identity in the alteration/level-rigidity prerequisites of det-thm-sf-ctf-stability-direct-images (3), as recorded in blueprint.from.place: Milne I Lemma 10.21, both root-product formulas. Latest blueprint key node and chapter/unit route read; no route change. The inherited nearest-blueprint-ancestor tool returns None, retained as null."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-de8a8c138",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-de8a8c138 (reviewer sub-agent of L); spot-checked: Item statement and stmt_deps are byte-identical to the Q111-created unsplit version; this is a first split, not a re-split. Source checked: Milne AV I Lemma 10.21, printed p.51. The four steps are correct and I read each cited statement. Step 1: the minimal polynomial is monic (def-weil-pbc-separable-algebraic-extension) and lem-weil-alg-closed-linear-factorization factors f and H with roots listed with multiplicity, so separability is not assumed. Step 2: Ω is algebraic and normal, and lem-weil-pbc-normal-extension-conjugate-by-automorphism gives σ_j with σ_j(α)=α_j. Step 3: Q_ℓ is complete, nonarchimedean and nontrivial (|ℓ|=1/ℓ), and the new leaf gives |σ_j z|=|z|, hence |H(α_j)|=|H(α)|. Step 4: the signed double product ∏_i f(c_i)=(−1)^{rm}∏_j H(α_j) uses no division. Hand checks: r=0, α∈K, H(α)=0 and ℓ=2, α=√2, H=X all agree. New leaf lem-sfb-algebraic-absolute-value-unique matches Mathlib spectralNorm_unique_field_norm_ext (SpectralNorm.lean:770, section hypotheses at 691-692: NontriviallyNormedField, IsUltrametricDist, Algebra.IsAlgebraic, CompleteSpace K). The statement is self-contained and has no proof sketch. Duplicate search: lem-weil-l-adic-extension-absolute-value covers only finite extensions, lem-trf-spectral-norm-algebraic-extension has no uniqueness clause, and the Q141 sibling nodes state no invariance or uniqueness. proof_deps equal the union of the steps' uses. No SGA citation, no tool_uses, no route change, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.MinpolyRootProduct",
+  "declaration": "Polynomial.abs_prod_minpoly_eq_aeval_pow_natDegree",
+  "file": "lean/Sheaf/NumberTheory/Padics/MinpolyRootProduct.lean",
+  "statement": "theorem abs_prod_minpoly_eq_aeval_pow_natDegree (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (v : AbsoluteValue Ω ℝ) (hv : ∀ x : ℚ_[ell], v (algebraMap ℚ_[ell] Ω x) = ‖x‖) (r : ℕ) (H : Polynomial ℚ_[ell]) (hH : H.Monic) (hdeg : H.natDegree = r) (c : Fin r → Ω) (hc : (↑(List.ofFn c) : Multiset Ω) = (H.map (algebraMap ℚ_[ell] Ω)).roots) (alpha : Ω) : v (∏ i : Fin r, aeval (c i) (minpoly ℚ_[ell] alpha)) = v (aeval alpha H) ^ (minpoly ℚ_[ell] alpha).natDegree",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e992ff6f",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Every clause matches the node: prime ell, ℚ_[ell] with its normalized norm, any IsAlgClosure Ω, an AbsoluteValue v extending ‖·‖ with no extra assumptions, H monic with natDegree r, roots kept with multiplicity as a multiset, minpoly and its natDegree, and the exact equation. lean.statement is verbatim. Edge cases r=0, repeated roots, H(alpha)=0, alpha in the base and ell=2 are covered. Docstrings carry the source place (Milne AV I Lemma 10.21 p.51), the blueprint tag and all four proof steps. No definitions and proof is sorry only. stmt_deps are imported publicly. Node unchanged from live except the new lean record. No duplicate in Mathlib or the project, and the interface matches the RootProductRigidity consumer. No file changed, so no compile."
+ }
+}

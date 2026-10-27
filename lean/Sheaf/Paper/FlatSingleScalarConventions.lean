@@ -5,139 +5,35 @@ Authors: SHEAF group Q55
 -/
 module
 
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-public import Sheaf.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedTotalTensor
+public import Sheaf.Paper.FlatSingleScalarInterface
+import Sheaf.Paper.FlatSingleScalarOrdinaryComparison
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 
-/-! # Flat degree-zero scalar extension in two conventions
+/-! # Flat single complexes and the derived scalar comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03ER(3), Cohomology on
-Sites, Tags 06YQ and 06YY, and blueprint `sk-def-sfb-change-of-scalars`(2)
-and `sk-def-sfb-derived-categories` (blueprint: lem-sfb-flat-single-scalar-conventions).
-
-The identifications below retain the given underlying module actions. The monoid-side
-extension is the recorded `Mod.extendScalars`, including its coequalizer projection.
-The section-side extension is the prescribed sheafified `changeOfRings`, as recorded
-by `DerivedChangeOfRingsCochainModel`. No flatness of the target ring is required.
+Source: Stacks Project, Tags 03ER, 06YQ, 06YY and 06XN.
+(blueprint: lem-sfb-flat-single-scalar-conventions).
 -/
 
 @[expose] public noncomputable section
-
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 universe u v r wR wB
-
 open CategoryTheory CategoryTheory.Limits MonoidalCategory MonObj
 open scoped ChangeOfRings
-
 namespace SheafOfModules.FlatSingleScalar
-
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   [HasSheafify J AddCommGrpCat.{r}]
-
-/-- The existing module-sheaf category, without a change in coefficient universe.
-Source: Stacks 03EK (blueprint: lem-sfb-flat-single-scalar-conventions). -/
-abbrev Modules (R : Sheaf J CommRingCat.{r}) :=
-  ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
-
-variable {R B : Sheaf J CommRingCat.{r}} (φ : R ⟶ B)
-
-/-- The target ring as an R-module, with its given scalar action through φ.
-Source: Stacks 03EK (blueprint: lem-sfb-flat-single-scalar-conventions). -/
-abbrev scalarAlgebra : Modules R :=
-  (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj
-    (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
-
-/-- A local pure tensor in the existing localization tensor, via sheafification.
-Source: Stacks 03EK (blueprint: lem-sfb-flat-single-scalar-conventions). -/
-def tensorSection (M N : Modules R) (U : Cᵒᵖ) (m : M.val.obj U) (n : N.val.obj U) :
-    (M ⊗ N).val.obj U :=
-  (tensorObjIsoSheafification M N).inv.val.app U
-    (((PresheafOfModules.sheafificationAdjunction
-      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app
-        (M.val ⊗ N.val)).app U (m ⊗ₜ[R.obj.obj U] n))
-
-/-- Presentations of precisely the two action-preserving identifications in the node.
-The monoid unit is φ, its multiplication is that of B, and the module equivalence
-intertwines the given B-actions on all local pure tensors. The unit-module equivalence
-is identified with the identity on underlying R-modules; unitality forces its action.
-These are presentations of the prescribed notions, not additional assumptions.
-Source: Stacks 03EK and blueprint change of scalars (2)
-(blueprint: lem-sfb-flat-single-scalar-conventions). -/
-structure Identifications where
-  /-- B with its actual multiplication as an R-algebra object. -/
-  [monoid : MonObj (scalarAlgebra φ)]
-  /-- Commutativity of the given ring multiplication. -/
-  [commutative : IsCommMonObj (scalarAlgebra φ)]
-  /-- Its unit is a monoid homomorphism from the tensor unit. -/
-  [unitHom : IsMonHom (η[scalarAlgebra φ])]
-  /-- The monoid unit is exactly the given ring morphism. -/
-  one_sections : ∀ (U : Cᵒᵖ) (a : R.obj.obj U),
-    (η[scalarAlgebra φ]).val.app U a = (φ.hom.app U) a
-  /-- The monoid multiplication is the local ring multiplication. -/
-  mul_sections : ∀ (U : Cᵒᵖ) (b b' : B.obj.obj U),
-    (μ[scalarAlgebra φ]).val.app U
-      (tensorSection (scalarAlgebra φ) (scalarAlgebra φ) U b b') = b * b'
-  /-- Modules over the unit monoid are R-module sheaves. -/
-  unitModules : Modules R ≌ Mod (Modules R) (𝟙_ (Modules R))
-  /-- This identification retains the underlying module. -/
-  unitUnderlying : unitModules.functor ⋙ Mod.forget (𝟙_ (Modules R)) ≅ 𝟭 (Modules R)
-  /-- Modules over B internally are sheaves of B-modules. -/
-  modules : Modules B ≌ Mod (Modules R) (scalarAlgebra φ)
-  /-- This identification retains the underlying R-module. -/
-  underlying : modules.functor ⋙ Mod.forget (scalarAlgebra φ) ≅
-    restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
-  /-- The internal module action is exactly its given sectionwise B-action. -/
-  action_sections : ∀ (N : Modules B) (U : Cᵒᵖ) (b : B.obj.obj U)
-      (n : (modules.functor.obj N).X.val.obj U),
-    (underlying.hom.app N).val.app U
-      ((ModObj.smul (M := scalarAlgebra φ) (X := (modules.functor.obj N).X)).val.app U
-        (tensorSection (scalarAlgebra φ) (modules.functor.obj N).X U b n)) =
-      b • (@id (N.val.obj U) ((underlying.hom.app N).val.app U n))
-  /-- The transported ordinary extension is additive. -/
-  [additive : (unitModules.functor ⋙ Mod.extendScalars (η[scalarAlgebra φ]) ⋙
-    modules.inverse).Additive]
-
-/-- The actual coequalizer extension, transported along the action identifications.
-Source: blueprint change of scalars (2)
-(blueprint: lem-sfb-flat-single-scalar-conventions). -/
-abbrev monExtension (d : Identifications φ) : Modules R ⥤ Modules B :=
-  letI := d.monoid
-  letI := d.unitHom
-  d.unitModules.functor ⋙ Mod.extendScalars (η[scalarAlgebra φ]) ⋙ d.modules.inverse
-
-/-- Additivity retained from the ordinary action identification.
-Source: Stacks 03EK (blueprint: lem-sfb-flat-single-scalar-conventions). -/
-instance monExtension_additive (d : Identifications φ) : (monExtension φ d).Additive :=
-  d.additive
-
-/-- The balancing-coequalizer projection on underlying R-modules. The factors are
-only the specified underlying identifications and the actual `Mod.extendπ`.
-Source: blueprint change of scalars (2)
-(blueprint: lem-sfb-flat-single-scalar-conventions). -/
-def projection (d : Identifications φ) (M : Modules R) :
-    scalarAlgebra φ ⊗ M ⟶
-      (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj
-        ((monExtension φ d).obj M) :=
-  letI := d.monoid
-  letI := d.unitHom
-  scalarAlgebra φ ◁ (d.unitUnderlying.app M).inv ≫
-    Mod.extendπ (η[scalarAlgebra φ]) (d.unitModules.functor.obj M) ≫
-    (d.modules.counitIso.app
-      ((Mod.extendScalars (η[scalarAlgebra φ])).obj (d.unitModules.functor.obj M))).inv.hom ≫
-    (d.underlying.app ((monExtension φ d).obj M)).hom
+  {R B : Sheaf J CommRingCat.{r}} (φ : R ⟶ B)
 
 variable [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wB} (Modules B)]
 
@@ -191,6 +87,104 @@ def DerivedCompatible (d : Identifications φ) (s : DerivedChangeOfRingsCochainM
           DerivedCategory.Q.map
             ((HomologicalComplex.single (Modules B) (.up ℤ) 0).map (e.hom.app M))
 
+omit [HasDerivedCategory (Modules R)] in
+private theorem single_flat_kflat (M : Modules R) (hM : IsFlatOnSite M) :
+    CochainComplex.IsKFlatForTotalTensor
+      ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M) ∧
+    CochainComplex.IsKFlatIndependentCoefficients
+      ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M) := by
+  have h : PreservesFiniteLimits (siteSheafTensorRight (A := R) M) ∧
+      PreservesFiniteColimits (siteSheafTensorRight (A := R) M) := hM
+  have := h.1
+  have := h.2
+  have : PreservesFiniteLimits (tensorRight M) :=
+    preservesFiniteLimits_of_natIso (siteSheafTensorRightIso R M)
+  have : PreservesFiniteColimits (tensorRight M) :=
+    preservesFiniteColimits_of_natIso (siteSheafTensorRightIso R M)
+  have : PreservesFiniteLimits (tensorLeft M) :=
+    preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M).symm
+  have : PreservesFiniteColimits (tensorLeft M) :=
+    preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M).symm
+  constructor
+  · constructor
+    · intro P Q f hf
+      have := hf
+      have hg := HomologicalComplex.quasiIso_map_of_preservesHomology f (tensorLeft M)
+      exact (quasiIso_iff_of_arrow_mk_iso _ _
+        (Arrow.isoMk
+          (CochainComplex.mapBifunctorSingle₁Iso (curriedTensor (Modules R)) M P)
+          (CochainComplex.mapBifunctorSingle₁Iso (curriedTensor (Modules R)) M Q)
+          (CochainComplex.mapBifunctorSingle₁Iso_hom_naturality _ _ f).symm)).2 hg
+    · intro P Q f hf
+      have := hf
+      have hg := HomologicalComplex.quasiIso_map_of_preservesHomology f (tensorRight M)
+      exact (quasiIso_iff_of_arrow_mk_iso _ _
+        (Arrow.isoMk
+          (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor (Modules R)) M P)
+          (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor (Modules R)) M Q)
+          (CochainComplex.mapBifunctorSingle₂Iso_hom_naturality _ _ f).symm)).2 hg
+  · intro P hP i
+    apply HomologicalComplex.ExactAt.of_iso (e :=
+      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor (Modules R)) M P).symm)
+    exact ShortComplex.Exact.map (hP i) (tensorRight M)
+
+private theorem derived_compatible (d : Identifications φ)
+    (s : DerivedChangeOfRingsCochainModel φ) (e : monExtension φ d ≅ s.E)
+    (hflat : ∀ M : Modules R, IsFlatOnSite M →
+      CochainComplex.IsKFlatIndependentCoefficients
+        ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M)) :
+    DerivedCompatible φ d s e := by
+  intro L ε hL
+  let := hL
+  let := s.universal
+  let W := HomologicalComplex.quasiIso (Modules R) (.up ℤ)
+  let k := Functor.isoWhiskerRight (NatIso.mapHomologicalComplex e (.up ℤ))
+    DerivedCategory.Q
+  let eL : L ≅ s.T := Functor.leftDerivedNatIso L s.T ε s.ε W k
+  have he : Functor.whiskerLeft DerivedCategory.Q eL.hom ≫ s.ε = ε ≫ k.hom :=
+    Functor.leftDerivedNatTrans_fac L s.T ε s.ε W k.hom
+  refine ⟨eL, he, ?_⟩
+  intro M hM
+  have : IsIso (s.ε.app ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M)) :=
+    s.computes _ (hflat M hM)
+  have hs : IsIso ((degreeZeroCounit s.E s.T s.ε).app M) := by
+    dsimp [degreeZeroCounit]
+    infer_instance
+  have hsq :
+      eL.hom.app (DerivedCategory.Q.obj
+          ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M)) ≫
+        (degreeZeroCounit s.E s.T s.ε).app M =
+      (degreeZeroCounit (monExtension φ d) L ε).app M ≫
+        DerivedCategory.Q.map
+          ((HomologicalComplex.single (Modules B) (.up ℤ) 0).map (e.hom.app M)) := by
+    have heM := NatTrans.congr_app he
+      ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M)
+    dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.comp_obj] at heM
+    dsimp only [degreeZeroCounit, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.comp_obj]
+    simp only [Category.assoc]
+    rw [← Category.assoc, heM]
+    simp only [Category.assoc, k, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app]
+    rw [← DerivedCategory.Q.map_comp]
+    rw [← DerivedCategory.Q.map_comp]
+    apply congrArg (fun f ↦ ε.app _ ≫ DerivedCategory.Q.map f)
+    apply HomologicalComplex.to_single_hom_ext
+    simp only [HomologicalComplex.comp_f, NatIso.mapHomologicalComplex_hom_app_f,
+      HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Functor.comp_obj,
+      Functor.comp_map, Mod.extendScalars_map, Category.assoc]
+    exact (e.hom.naturality (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).hom).symm
+  have hm : IsIso ((degreeZeroCounit (monExtension φ d) L ε).app M) := by
+    have hi : IsIso ((degreeZeroCounit (monExtension φ d) L ε).app M ≫
+        DerivedCategory.Q.map
+          ((HomologicalComplex.single (Modules B) (.up ℤ) 0).map (e.hom.app M))) := by
+      rw [← hsq]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      (DerivedCategory.Q.map
+        ((HomologicalComplex.single (Modules B) (.up ℤ) 0).map (e.hom.app M)))
+  exact ⟨hm, hs, hsq⟩
+
 /-- Flat degree-zero scalar comparisons agree in the two conventions, without local
 freeness or flatness of B. Source: Stacks 03EK, 03ER(3), 06YQ, 06YY, 06XN and blueprint
 change of scalars (2) (blueprint: lem-sfb-flat-single-scalar-conventions).
@@ -232,6 +226,11 @@ theorem flat_single_scalar_conventions :
         ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M)) ∧
     ∃ d : Identifications φ, ∀ s : DerivedChangeOfRingsCochainModel φ,
       ∃ e : monExtension φ d ≅ s.E, Normalized φ d s e ∧ DerivedCompatible φ d s e := by
-  sorry
+  refine ⟨fun M hM ↦ single_flat_kflat M hM, ?_⟩
+  obtain ⟨d, hd⟩ := ordinary_scalar_comparison φ
+  refine ⟨d, ?_⟩
+  intro s
+  obtain ⟨e, he⟩ := hd s
+  exact ⟨e, he, derived_compatible φ d s e (fun M hM ↦ (single_flat_kflat M hM).2)⟩
 
 end SheafOfModules.FlatSingleScalar

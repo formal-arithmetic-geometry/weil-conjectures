@@ -214,7 +214,18 @@
   "sbc-def-coefficient-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "split_report": {
@@ -295,5 +306,50 @@
   "landing": "20261019T192834-L-1874940",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Fix an algebraically closed field $k$, a prime\n$\\ell\\ne\\operatorname{char}k$, $n\\geq1$,\n$A=A_{E,n}$, finite-type\n$k$-schemes $X,Y$ and a separated finite-type morphism $f:X\\to Y$.\nAssume $\\operatorname{UDV}(f,A;N)$ for an integer $N\\geq0$, in the sense\nof [def-sf-uniform-direct-image-vanishing]. Let $K$ be a bounded\nconstructible complex of $A$-modules on the small étale site $X_{\\Et}$\nwith finite Tor amplitude in\n$[a,b]$, the finite-Tor condition being the one of the étale clause of\n[lem-sf-flat-model]. Then $Rf_*K$ is bounded constructible on\n$Y_{\\Et}$ and has finite Tor amplitude in $[a,b+N]$.",
+  "proof": [
+   {
+    "text": "Let $P$ be the bounded flat model of $K$ given by the étale clause of\n[lem-sf-flat-model]: $P\\cong K$ is a bounded complex of flat\n$A_X$-module sheaves with $P^q=0$ for $q\\notin[a,b]$. Its terms\nvanish outside $[a,b]$, so $\\mathcal H^q(K)=0$ for $q\\notin[a,b]$.\nPut $\\kappa=A/(\\pi_E)$, the residue field of the local ring $A$. The\nconstant sheaf $\\kappa_X$ is a sheaf of $A$-modules placed in degree\nzero, so the definition of finite Tor amplitude gives\n\n$$\n\\mathcal H^q\\bigl(K\\otimes^L_A\\kappa_X\\bigr)=0\\qquad(q\\notin[a,b]).\n$$",
+    "uses": [
+     "lem-sf-flat-model"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the truncation spectral sequence of [thm-sp-truncation-e2] to\nthe left exact direct image functor and to the complex\n$K\\otimes^L_A\\kappa_X$:\n\n$$\nE_2^{p,q}=R^pf_*\\bigl(\\mathcal H^q(K\\otimes^L_A\\kappa_X)\\bigr)\n\\ \\Longrightarrow\\ \\mathcal H^{p+q}\\bigl(Rf_*(K\\otimes^L_A\\kappa_X)\\bigr).\n$$",
+    "uses": [
+     "thm-sp-truncation-e2"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Only $q\\in[a,b]$ occurs, and only $p\\leq N$ occurs by\n$\\operatorname{UDV}(f,A;N)$; hence\n$\\mathcal H^n(Rf_*(K\\otimes^L_A\\kappa_X))=0$ for $n\\notin[a,b+N]$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The coefficient ring $A$ is finite and annihilated by the integer\n$\\ell^n$, which is invertible in $k$ by the stated characteristic\nassumption; so\n[thm-dg-finite-type-constructibility] makes $Rf_*K$ a bounded\nconstructible complex on $Y_{\\Et}$, with constructible cohomology\nsheaves.",
+    "uses": [
+     "thm-dg-finite-type-constructibility"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The module $\\kappa$ is finitely presented over the Noetherian ring $A$,\nso the projection formula of [lem-sf-projection-finite-constant]\nidentifies\n\n$$\n(Rf_*K)\\otimes^L_A\\kappa_Y\\cong Rf_*\\bigl(K\\otimes^L_A\\kappa_X\\bigr),\n$$\n\nand by the spectral-sequence computation this complex has cohomology only\nin $[a,b+N]$. The residue test [lem-exc-residue-tor-test] applies to\nthe bounded complex $Rf_*K$, whose cohomology sheaves are constructible,\nand to the residue field $\\kappa=A/(\\pi_E)$; it converts the\nconcentration just proved into finite Tor amplitude of $Rf_*K$ in\n$[a,b+N]$, which is the assertion.",
+    "uses": [
+     "lem-sf-projection-finite-constant",
+     "lem-exc-residue-tor-test"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

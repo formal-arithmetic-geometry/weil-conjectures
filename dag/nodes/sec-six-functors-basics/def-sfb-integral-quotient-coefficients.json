@@ -15,9 +15,47 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
   "place": "Paragraphs (1), (3); scalar-refined cone reduction and compatibility of canonical maps; Stacks 06YY, 0D6D, 0G7E, 07A6, 0944."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Continuity of each actual positive-level reduction follows from the uniformizer-coset neighbourhood basis: its fibre at every point is a neighbourhood, hence the map is locally constant, and therefore continuous into the discrete quotient. This proves reduction_continuous without using the completed coefficient comparison.",
+   "uses": [
+    "lem-sfb-integers-coset-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For multiplication_linear first verify linearity of multiplicationPoint at the condensed point. The sheaf tensor comparison detects equality, and its compatibility with ring multiplication reduces the equation on pure tensors to pi^(n+1)*(a*b)=a*(pi^(n+1)*b). This is commutativity and associativity in the integer ring. Transport this equation through the monoidal inverse image using naturality of its tensor comparison.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For projection_linear unfold the restricted regular action. The required equation is the multiplication-preservation equation for the ring-object homomorphism coefficientMap (reduction n), after expanding its tensor square into whiskerings and reassociating.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For reduction_comp use extensionality of sheaf morphisms, their section maps, continuous functions and values at points. The quotient factor applied to the quotient class of an integer is definitionally its class at the smaller level, including when the two levels coincide. All remaining definitions are the existing constructions recorded in the statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integers-coset-basis",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-continuous-map-condensed-ring-map"
+ ],
+ "proof_origin": {
+  "by": "P3 stage 3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1), (3); explicit continuity, linearity and quotient-transition proofs from the recorded constructions."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -68,10 +106,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -128,5 +170,15 @@
   "group": "NE",
   "result": "fix",
   "note": "Item statement correct clause by clause: R=sfbCondensedIntegers, S_n=discrete continuous-map quotient at n+1 (all positive levels), ordinary unbounded internal-module D/L/F/adj wrappers of the recorded decls, rho=mateEquiv of b.hom (direction checked), IsIso for all f,K, projection equation, cone-of-pi^(n+1) resolution with unique augmentation, tower compatibility via SuccessiveNormalized beta and PullNormalized c; all existentials pinned by universal-counit/K-flat equations; dep records byte-identical to live, item changed only lean+stmt_deps. F1 (H4/H12) fixed: def-sfb-integral-quotient-projection-map re-implemented the projection map via its own tensorPull (generic leftDerivedTensorComparison + sorry'd upperStar_preservesFlat), duplicating def-sfb-module-object-projection-map; fix defines projectionMap := moduleObjectProjectionMap ≫ Rf_*.map (K ◁ coefficientPull) (same signature), removes tensorPull/coefficientTensorPull/upperStar_preservesFlat and their 2 imports, adds the existing node to the new node's stmt_deps, trims declarations. Fixed files compile clean via nt_compile --json (10.6/33.6/28.4 s); check_new_node/check_lean_text clean. Advisories: internal projection map instead of section-module pi (N9 precedent); unused duplicate helpers scalar/restrict/scalarAdjunction; plain proof-plan imports (H9); sorry'd Prop helpers documented; second reading is a self-audit under dispatcher policy."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261022T144041-L-1489711",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

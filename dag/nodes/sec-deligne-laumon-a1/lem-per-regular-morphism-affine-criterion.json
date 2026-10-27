@@ -1,0 +1,232 @@
+{
+ "id": "lem-per-regular-morphism-affine-criterion",
+ "kind": "statement",
+ "title": "Regular morphisms characterized on affine coordinate rings",
+ "statement": "Let $f:X\\to Y$ be a morphism of locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth]. Then $f$ is regular [def-per-regular-scheme-morphism] if and only if for every affine open $U\\subseteq X$ and affine open $V\\subseteq Y$ with $f(U)\\subseteq V$, the homomorphism $\\varphi_{U,V}:\\mathcal O_Y(V)\\to\\mathcal O_X(U)$, obtained from the structure-sheaf map of $f$ followed by restriction to $U$ [def-weil-locally-ringed-space-morphism], is a regular ring map [def-weil-pbc-g-ring].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07R8, lemma-regular, equivalence (2) iff (3). The locally Noetherian source makes its fibre charts Noetherian. Its proof uses Varieties Tag 038V, lemma-geometrically-regular, in varieties.tex for the scheme/algebra comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-per-regular-scheme-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix affine opens $U=\\operatorname{Spec}B\\subseteq X$, $V=\\operatorname{Spec}A\\subseteq Y$ with $f(U)\\subseteq V$. For $y\\in V$ corresponding to $\\mathfrak p\\subset A$, identify $\\kappa(y)$ with $\\kappa(\\mathfrak p)$ compatibly with the map from $A$. The open fibre-product lemma identifies $U_y=U\\times_V\\operatorname{Spec}\\kappa(y)$ with the inverse image of $U$ in $X_y$; the affine fibre-product formula identifies it, over $\\kappa(y)$, with $\\operatorname{Spec}(B\\otimes_A\\kappa(\\mathfrak p))$. These opens cover $X_y$: choose an affine neighbourhood $V$ of $y$ and cover $f^{-1}(V)$ by affine opens $U$. Since $X$ is locally Noetherian, $B$ is Noetherian, and the fibre-ring lemma makes each such tensor ring Noetherian. Thus $X_y$ is locally Noetherian by its affine open covering.",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07R8, lemma-regular; affine fibre identifications and the locally Noetherian fibre hypothesis"
+   }
+  },
+  {
+   "text": "Suppose $f$ is regular. Its defining conditions give flatness and regularity of $(X_y)_K$ for every finite extension $K/\\kappa(y)$. The flat-morphism affine criterion makes $A\\to B$ flat. Apply the geometric-regularity affine-cover comparison, (1) => (2), to the locally Noetherian scheme $X_y$ and its affine open $U_y$ from step 1. It gives geometric regularity over $\\kappa(\\mathfrak p)$ of $B\\otimes_A\\kappa(\\mathfrak p)$ for every $\\mathfrak p$. Flatness together with these Noetherian geometrically regular fibre rings is exactly regularity of $A\\to B$. The pair $(U,V)$ was arbitrary.",
+   "uses": [
+    "def-per-regular-scheme-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-per-geometric-regularity-affine-cover",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07R8, lemma-regular; (2) => (3)"
+   }
+  },
+  {
+   "text": "Conversely suppose every $\\varphi_{U,V}$ is regular. The definition of a regular ring map makes all these maps flat, so the flat-morphism affine criterion gives flatness of $f$. Fix $y\\in Y$. The affine opens $U_y$ constructed in step 1 cover $X_y$, and their coordinate rings $B\\otimes_A\\kappa(\\mathfrak p)$ are geometrically regular by the regularity of $A\\to B$. Apply the geometric-regularity affine-cover comparison, (3) => (1), to $X_y$. It says that $(X_y)_K$ is regular for every finite extension $K/\\kappa(y)$. As $y$ was arbitrary, these fibre conditions and flatness give regularity of $f$ by its definition.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-per-geometric-regularity-affine-cover",
+    "def-per-regular-scheme-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07R8, lemma-regular; (3) => (5) => (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "pqf-def-locnoeth",
+  "def-per-regular-scheme-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-per-geometric-regularity-affine-cover",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07R8, lemma-regular, equivalence (2) iff (3), through affine fibre charts and Varieties Tag 038V"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsRegularMorphism|RegularMorphism|[Gg]eometrically[Rr]egular|regular.*fib[er]",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular morphisms of locally Noetherian schemes are characterized by regular ring maps on affine opens",
+   "results": "8 hits: AlgebraicGeometry.flat_iff, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.targetAffineLocally_affineAnd_iff', AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsRegularMorphism",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry.IsRegularMorphism'",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of locally Noetherian schemes is flat with geometrically regular fibres if and only if every induced ring homomorphism on affine open charts is regular",
+   "results": "8 hits: AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.flat_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism has geometrically regular fibres exactly when its affine coordinate ring maps have geometrically regular residue field fibre rings, provided it is flat",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.flat_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness and smoothness criteria do not give geometric regularity of arbitrary Noetherian fibres; the generic HasRingHomProperty theorem still requires a regular ring-map/scheme-morphism correspondence."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularMorphism|RegularMorphism|geometrically.?regular",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is regular exactly when its affine coordinate ring maps are regular",
+   "results": "8 hits: AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.IsIntegralHom.mk, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsIntegralHom.SpecMap_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.flat_iff",
+   "results": "1 hits: AlgebraicGeometry.flat_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of locally Noetherian schemes is regular if and only if all ring maps on affine open charts are flat with geometrically regular fibres",
+   "results": "8 hits: AlgebraicGeometry.flat_iff, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.Flat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-scheme-stalk-criterion",
+  "date": "2026-10-24",
+  "group": "Q124"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Supporting the regular-morphism descent used for Temkin Proposition 3.3.5: pass from flatness and geometrically regular scheme fibres to regular maps on affine coordinate rings (Stacks 07R8 (2) iff (3)). The recorded ancestor is lem-per-artin-gabber-affine-curve; its current proof does not explicitly spell out this supporting comparison.",
+   "via": [
+    "lem-per-regular-scheme-stalk-criterion",
+    "lem-per-regular-precomposition-smooth-image",
+    "lem-per-elkik-rational-smooth-models",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-morphism-affine-criterion",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof by the affine fibre construction and both implications of Stacks 07R8. Reused the flatness criterion, Noetherian fibre rings, and affine/open fibre products; created only the independent geometric-regularity affine-cover comparison from 038V.",
+  "blueprint": "Supporting regular-morphism descent in the Temkin branch below lem-per-artin-gabber-affine-curve, through lem-per-regular-scheme-stalk-criterion; not an explicit step of the current ancestor proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-residue-field-identification",
+    "why": "Generic compatibility of the scheme residue field and the affine ring residue field; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-noetherian",
+    "why": "Generic Noetherianity of residue fibre rings, needed before applying 038V; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-fibre-ring-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-0ec4271eb",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-0ec4271eb (reviewer sub-agent of L); spot-checked: I read Stacks 07R8 (more-morphisms.tex lemma-regular, line 5682) and Varieties 038V (varieties.tex lemma-geometrically-regular, line 2424) in full. Step 1 follows the source: the open fibre product plus the affine fibre product, with the residue-field identification j_p=Spec(e^-1∘π), make U_y = Spec(B⊗_Aκ(p)) an open of X_y. For each y, one affine V∋y and an affine cover of f^-1(V) give charts that cover X_y. B is Noetherian (affine open of a locally Noetherian scheme), so B⊗_Aκ(p) is Noetherian by lem-weil-pbc-fibre-ring-noetherian, which needs only B Noetherian. Hence X_y is locally Noetherian; this is exactly the source's fibre hypothesis. Step 2 (regular f ⇒ every φ_{U,V} regular): flatness comes from the flat affine criterion; new node (1)⇒(2) applied to the chart U_y gives geometric regularity, which with Noetherianity is def-weil-pbc-g-ring's 07BZ definition. Step 3 (all φ_{U,V} regular ⇒ f regular): flatness from the converse of the flat criterion; new node (3)⇒(1) on the cover {U_y} gives (X_y)_K regular for all finite K, which is def-per-regular-scheme-morphism. This mirrors the source's (2)⇒(3) and (3)⇒(5)⇒(2). New node lem-per-geometric-regularity-affine-cover is statement-only and self-contained, with source 038V and five recorded searches. Its 'all finite extensions' test lies between 038V(2) and 038V(3), so it is true. It is one-scheme-over-a-field and does not restate the item. The DAG grep for 038V, 07R8 and 'geometrically regular' finds no duplicate (lem-weil-pbc-geometrically-regular-finitely-generated-extensions is a single-algebra ring statement), and the blueprint search returns 0 matches. Edge cases checked: empty X and Z; Spec k' with k'/k purely inseparable; Spec F_p(t^{1/p})→Spec F_p(t); Spec Z[x]→Spec Z. Accepted tool_use: lem-weil-pbc-fibre-ring-noetherian (a generic Noetherian lemma; no node of this unit gives it). The declared residue-field identification is a Mathlib leaf, so its tool_use is superfluous but harmless. No cycle, no SGA, statement unchanged. Minor: step 1's affine-basis covering argument is elementary, so lem-weil-pbc-affine-opens-basis need not be cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularMorphismAffineCriterion",
+  "declaration": "AlgebraicGeometry.isRegularSchemeMorphism_iff_regular_appLE",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularMorphismAffineCriterion.lean",
+  "statement": "theorem isRegularSchemeMorphism_iff_regular_appLE {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (f : X ⟶ Y) : IsRegularSchemeMorphism f ↔ ∀ (U : X.Opens) (V : Y.Opens), IsAffineOpen U → IsAffineOpen V → ∀ (h : U ≤ f ⁻¹ᵁ V), RingHom.IsRegular (f.appLE V U h).hom",
+  "branch": "sheaf-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79c8bdb93",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Stmt matches node/Stacks 07R8 (2)<->(3): Scheme.{u} X Y with IsLocallyNoetherian on both (as node), IsRegularSchemeMorphism f (Flat ∧ IsRegularScheme of fibre ×Spec K for every finite K : Type u) ↔ ∀ U V affine, U ≤ f⁻¹ᵁ V → RingHom.IsRegular (f.appLE V U h).hom (Mathlib appLE = app then restriction, O_Y(V)→O_X(U); GRing IsRegular = flat + Noetherian geometrically regular fibres). Universes single u, no silent cut; scheme side tests all finite K, ring side finite purely inseparable k', which agree for loc. Noetherian fibres by 038V (the node's proof route). Edge cases empty X/U/V and purely inseparable extension consistent. Node differs from live only in lean; statement verbatim; no name clash; no defs, sorry only, docstrings with source + blueprint + 3 proof steps; report has Worker report + Second reading by Q145. No changes, no compile needed."
+ }
+}

@@ -1,0 +1,304 @@
+{
+ "id": "lem-per-normalized-tower-support-recovery",
+ "kind": "statement",
+ "title": "Recovery of centered normalized towers by restriction and local flat tests",
+ "statement": "Let $X$ be a reduced Noetherian scheme [def-pc-reduced-scheme], [pqf-def-locnoeth]. A centered normalized blowup tower $B$ retains its coherent defining ideal $J_i$ at each stage $X_i$ [def-trf-normalized-blowup]; assume all its intermediate schemes are Noetherian. Define $\\operatorname{Ass}(B)$ to be the union of the images in $X$ of the associated points of $\\mathcal O_{X_i}/J_i$, where an associated point is one whose local maximal ideal annihilates a nonzero element of this quotient.\n\nLet $j:U\\to X$ be a quasi-compact flat monomorphism (the diagonal is an isomorphism), and suppose $\\operatorname{Ass}(B)\\subset j(U)$. Then $B$ is uniquely recovered from its uncontracted restriction $j^*B$ by taking schematic closures of its centers at each successive normalized blowup stage. For a restricted closed centre $Z$, schematic closure means the closed subscheme defined by $\\ker(\\mathcal O\\to j_*\\mathcal O_Z)$ on the corresponding stage. Thus if two such towers have equal uncontracted restrictions and both associated-point sets lie in $j(U)$, they have equal lengths and equal ordered ideal centers on $X$. This applies in particular to the rational localization $X_{\\mathbf Q}=X\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Spec}\\mathbf Q$, whether or not it is an open subscheme.\n\nEquality of two centered towers can also be tested after an fpqc cover (a faithfully flat quasi-compact morphism) whenever their scheme-theoretic uncontracted pullbacks exist. If $X$ is nonempty, it can be tested after the family $\\{\\operatorname{Spec}\\widehat{\\mathcal O^{\\rm sh}_{X,\\bar x}}\\to X\\}_{\\bar x}$ of completed strict local schemes, again assuming these uncontracted pullbacks exist [def-weil-pbc-strict-henselization-limit], [def-weil-pbc-adic-completion]. The maps $\\mathcal O_{X,x}\\to\\widehat{\\mathcal O^{\\rm sh}_{X,\\bar x}}$ are faithfully flat local maps. In particular a nonempty centre having a point over $x$ has nonempty pullback to this completed strict local scheme. When $X$ is empty, the completed-strict-local family is empty and equality of the original tower lengths must be required separately; with this length comparison the same test applies. These tests compare the actual ideal sheaves and the original finite stage indices, without deleting unit-center stages. Noetherian schemes here admit finite affine covers by spectra of Noetherian rings.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.18--2.1.20, 2.2.11--2.2.12, printed pp.88--91; use of completed strict local tests in the proof of 3.4.15, printed p.114 No Stacks tag states this combined result; the cited place is in the archived ILO volume."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-trf-normalized-blowup",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-adic-completion",
+  "def-per-normalized-tower-recovery-tests"
+ ],
+ "proof": [
+  {
+   "text": "Put $U_i=X_i\\times_XU$ and $j_i:U_i\\to X_i$. A pullback of a monomorphism is a monomorphism (its diagonal is the pullback of the original diagonal); flatness is preserved by base change [lem-weil-pbc-flat-morphism-base-change], and quasi-compactness is preserved by base change [lem-pc-quasi-compact-base-change]. By [lem-per-flat-monomorphism-local-structure], $U_i$ is reduced and Noetherian, $j_i$ is regular, and its local ring maps are isomorphisms. Thus [lem-per-normalized-tower-regular-pullback], specifically its second paragraph for arbitrary reduced Noetherian bases, identifies the recursive normalized tower on $U$ with these scheme-theoretic pullbacks and the extended ideal centers. It retains exactly the original finite index set.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-per-flat-monomorphism-local-structure",
+    "lem-per-normalized-tower-regular-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.8--2.2.9 and 2.2.12, pp.90--91"
+   }
+  },
+  {
+   "text": "Fix $i$ and cover $X_i$ by finitely many affine opens $\\operatorname{Spec}A'$ with $A'$ Noetherian (the stages are Noetherian). Let $V=\\operatorname{Spec}A$ be a principal open $D(g)$ of one of them, so $A=A'_g$ is again Noetherian (every ideal of $A'_g$ is extended from $A'$); these $V$ form a basis of the topology of $X_i$. Write $I=J_i(V)$. Suppose $a\\in A$ vanishes on the restriction of the closed center to $j_i^{-1}V$. For every $\\mathfrak p\\in\\operatorname{Ass}_A(A/I)$, [lem-sfb-affine-associated-points-primes] applied to $\\mathcal O_{X_i}/J_i$ makes the corresponding point $z\\in V$ an associated point of that quotient. Its image in $X$ lies in $j(U)$ by the hypothesis on $\\operatorname{Ass}(B)$. The fibre description in [lem-per-flat-monomorphism-local-structure] therefore supplies a point $u\\in U_i$ over $z$, with an isomorphism of local rings. Modulo $J_i$, this identifies the restricted center stalk at $u$ with $(A/I)_{\\mathfrak p}$. Consequently the class of $a$ is zero in every such localization. By [lem-weil-pbc-module-injects-localizations-associated-primes] it is zero in $A/I$, hence $a\\in I$. Conversely every element of $I$ vanishes on the restricted center by its definition. This proves the equality of sections on every such $V$, a basis of opens, hence as ideal sheaves, $J_i=\\ker(\\mathcal O_{X_i}\\to(j_i)_*\\mathcal O_{Z_i\\times_XU})$.",
+   "uses": [
+    "lem-sfb-affine-associated-points-primes",
+    "lem-per-flat-monomorphism-local-structure",
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 2.1.18 and 2.2.12, pp.89,91; associated-prime proof expanded using Stacks Tags 02OK and 0311"
+   }
+  },
+  {
+   "text": "Recover the tower by induction on its original stage index. At index zero its ambient scheme is $X$. Given the reconstructed $X_i$, the preceding kernel formula recovers $J_i$ from the restricted center, and [def-trf-normalized-blowup] constructs $X_{i+1}$ from exactly this ideal. The initial identification and each successor identification are therefore canonical. If two uncontracted restrictions agree, their finite lengths already agree, and this induction gives equal ordered ideals and stages. A unit ideal remains a recorded ideal at its original index, including a stage whose normalized blowup is the identity.",
+   "uses": [
+    "def-trf-normalized-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.15--2.1.20 and 2.2.12, pp.89--91"
+   }
+  },
+  {
+   "text": "For the rational localization, on $\\operatorname{Spec}A\\subset X$ the inverse image is $\\operatorname{Spec}(S^{-1}A)$, where $S$ is the image of the nonzero integers. This is flat by [lem-weil-pbc-localization-flat]. It is a monomorphism because the multiplication map $S^{-1}A\\otimes_A S^{-1}A\\to S^{-1}A$ has inverse $b\\mapsto b\\otimes1$: every $1\\otimes s^{-1}$ equals $s^{-1}\\otimes1$. It is affine, hence quasi-compact by [lem-weil-pbc-affine-morphism-permanence]. The preceding reconstruction consequently applies with $U=X_{\\mathbf Q}$ under its stated associated-point hypothesis, without an openness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII proof of Theorem 3.4.15, p.114 (recovery from the rational localization)"
+   }
+  },
+  {
+   "text": "First consider ideals $I,J$ on a scheme $T$ and a jointly surjective flat family $T_a\\to T$ on which their extended ideals agree. For $t\\in T$, choose a lift $v\\in T_a$. The local ring map $\\mathcal O_{T,t}\\to\\mathcal O_{T_a,v}$ is flat and local, hence faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. By [lem-weil-pbc-faithfully-flat-ideal-contraction], contraction of the equal extended stalk ideals gives $I_t=J_t$; equality at all stalks gives equality of ideal sheaves. For an fpqc cover $Y\\to X$ and a point $z\\in X_i$ over $x\\in X$, choose $v\\in Y$ over $x$. The flat local map $A=\\mathcal O_{X,x}\\to\\mathcal O_{Y,v}$ is faithfully flat by the same local-flat lemma. By [lem-weil-pbc-faithfully-flat-base-change] and [lem-weil-pbc-faithfully-flat-surjective-spectrum], $\\operatorname{Spec}(\\kappa(z)\\otimes_A\\mathcal O_{Y,v})$ is nonempty; its points give lifts of $z$ to $X_i\\times_XY$. Thus every stage cover is surjective, and it is flat by [lem-weil-pbc-flat-morphism-base-change]. Uncontracted equality after the cover includes equality of lengths even on the empty scheme. Starting at $X_0=X$, apply the ideal argument and construct the next normalized blowup from the common ideal [def-trf-normalized-blowup]. Induction gives equality whenever the assumed scheme-theoretic pullbacks exist.",
+   "uses": [
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-trf-normalized-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.11, p.91; Stacks Tags 00HR, 05CK and 00FI"
+   }
+  },
+  {
+   "text": "For $x\\in X$ with geometric point $\\bar x$, choose an affine open $\\operatorname{Spec}D\\ni x$ from a finite cover by spectra of Noetherian rings and set $A=\\mathcal O_{X,x}=D_{\\mathfrak p}$, a Noetherian local ring. By [lem-exc-affine-strict-local-ring-comparison] there is a $D$-algebra isomorphism $\\theta:\\mathcal O^{\\rm sh}_{X,\\bar x}\\cong A^{\\rm sh}$, compatible with the structural morphism to $X$ and with residue fields, where $A^{\\rm sh}$ is the pair colimit over etale $A$-algebras $S$ with $A$-maps $\\chi:S\\to K$, $K$ the separable closure of $\\kappa(x)$ in $\\Omega$. Sending $(S,\\chi)$ to the triple $(S,\\ker\\chi,\\bar\\chi)$ (the prime $\\ker\\chi$ lies over $\\mathfrak m_A$ because $A\\to K$ kills $\\mathfrak m_A$) and a triple $(S,\\mathfrak q,\\phi)$ to $(S,\\phi\\circ(S\\to\\kappa(\\mathfrak q)))$ is an isomorphism of index categories compatible with the diagrams, so $A^{\\rm sh}$ is also the triple colimit used below. Since $\\theta$ is a local isomorphism it identifies the completions at the maximal ideals; put $C=\\widehat{A^{\\rm sh}}\\cong\\widehat{\\mathcal O^{\\rm sh}_{X,\\bar x}}$.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring); algebra.tex Tag 04GW (lemma-strict-henselization-different) for the pair/triple colimit models"
+   }
+  },
+  {
+   "text": "With $A$, $A^{\\rm sh}$ and $C$ as in the preceding step: The local maps $A\\to A^{\\rm sh}$ and $A^{\\rm sh}\\to C$ are faithfully flat by [lem-sc-strict-henselization-faithfully-flat] and [lem-sc-strict-henselization-completion-noetherian]. Their composite is faithfully flat: tensoring successively preserves and reflects exactness, which is precisely [def-weil-pbc-faithfully-flat-ring-map]. It is also local. For any point $y\\in X_i$ with image $x$, base change to $\\kappa(y)$ is faithfully flat by [lem-weil-pbc-faithfully-flat-base-change]; its spectrum is nonempty by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Thus the completed-strict-local family, after pullback, is jointly surjective on every stage; it is flat by [lem-weil-pbc-flat-morphism-base-change]. Apply the ideal and induction argument of the preceding step. When $X\\ne\\varnothing$, at least one geometric point exists and equality of that uncontracted pullback also forces equal lengths. When $X=\\varnothing$, the explicit length comparison in the corrected statement supplies this datum; there is only one ideal on each empty stage. Finally, if a center has a point $y$ over $x$, the same nonempty spectrum $\\operatorname{Spec}(\\kappa(y)\\otimes_A C)$ maps into its pullback, proving the asserted nonemptiness. No stage is contracted.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sc-strict-henselization-completion-noetherian",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII proof of Theorem 3.4.15, p.114; Stacks Tags 07QM, 06LJ and faithful-flat base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-per-flat-monomorphism-local-structure",
+  "lem-per-normalized-tower-regular-pullback",
+  "lem-sfb-affine-associated-points-primes",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "def-trf-normalized-blowup",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-completion-noetherian",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.18--2.1.20 and 2.2.11--2.2.12; proof of 3.4.15. Expanded affine associated-prime and pointwise faithfully-flat arguments, with explicit empty-base length convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalized-tower-support-recovery: Normalized blowup towers with centers whose associated points lie over a flat monomorphism are recovered by schematic closure of the restricted tower",
+   "results": "{\"t\": \"2026-10-24T01:30:25Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-normalized-tower-support-recovery: Normalized blowup towers with centers whose associated points lie over a flat monomorphism are recovered by schematic closure of the restricted tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"7e39c8ab2de0fa0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-normalized-tower-support-recovery: Equality of ordered blowup towers and ideal centers is detected on all completed strict local rings and by restriction containing associated points",
+   "results": "{\"t\": \"2026-10-24T01:30:26Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-normalized-tower-support-recovery: Equality of ordered blowup towers and ideal centers is detected on all completed strict local rings and by restriction containing associated points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"Polynomial.support_integralNormalization_subset\", \"Polynomial.support_integralNormalization\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\"], \"digest\": \"cd792ed28e29385c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schematicClosure\"",
+   "results": "{\"t\": \"2026-10-24T01:30:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"schematicClosure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "associated.*schematic|schematic.*associated|blow.*tower",
+   "results": "{\"t\": \"2026-10-24T01:30:26Z\", \"tool\": \"grep\", \"query\": \"associated.*schematic|schematic.*associated|blow.*tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalized-tower-support-recovery: Equality of ordered blowup towers and ideal centers is detected on all completed strict local rings and by restriction containing associated points",
+   "results": "{\"t\": \"2026-10-24T01:30:37Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-normalized-tower-support-recovery: Equality of ordered blowup towers and ideal centers is detected on all completed strict local rings and by restriction containing associated points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"Ideal.exists_ltSeries_of_hasGoingDown\", \"Algebra.ZariskisMainProperty.trans\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"8e63467dd0e75757\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalized-tower-support-recovery: recover ordered normalized blowup towers from center ideals on a flat monomorphism containing associated points",
+   "results": "{\"t\": \"2026-10-24T02:12:12Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-normalized-tower-support-recovery: recover ordered normalized blowup towers from center ideals on a flat monomorphism containing associated points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"b55229429152ca19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization morphisms and faithfully-flat ideal results do not state the ordered normalized-tower assertion; the existing DAG supplies these algebraic tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizedBlowup\"",
+   "results": "{\"t\": \"2026-10-24T02:13:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalizedBlowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization morphisms and faithfully-flat ideal results do not state the ordered normalized-tower assertion; the existing DAG supplies these algebraic tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-normalized-tower-support-recovery: equality of blowup towers keeping every ideal center is detected by faithfully flat local schemes",
+   "results": "{\"t\": \"2026-10-24T02:13:36Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-normalized-tower-support-recovery: equality of blowup towers keeping every ideal center is detected by faithfully flat local schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"Ideal.comap_map_eq_self_of_faithfullyFlat\", \"Module.FaithfullyFlat.recOn\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"RingHom.Flat.propertyIsLocal\", \"Module.FaithfullyFlat.of_comap_surjective\"], \"digest\": \"232300f440f47750\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization morphisms and faithfully-flat ideal results do not state the ordered normalized-tower assertion; the existing DAG supplies these algebraic tools."
+  },
+  {
+   "tool": "grep",
+   "query": "associated.*schematic|schematic.*associated|blow.*tower",
+   "results": "{\"t\": \"2026-10-24T02:13:36Z\", \"tool\": \"grep\", \"query\": \"associated.*schematic|schematic.*associated|blow.*tower\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization morphisms and faithfully-flat ideal results do not state the ordered normalized-tower assertion; the existing DAG supplies these algebraic tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-characteristic-zero-log-resolution-independence",
+  "date": "2026-10-24",
+  "group": "Q129"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. VIII Theorem 2.3.10 and Remarks 2.3.11--2.3.12, pp.93--94 (existence and normalized regular functoriality); 3.2.19 and Theorem 3.4.15 with its proof and Remark 3.4.16(i), pp.106,113--114 (induced rule, independence, and synchronization). Supporting input: VIII 2.1.18--2.1.20, 2.2.11--2.2.12, printed pp.88--91; use of completed strict local tests in the proof of 3.4.15, printed p.114",
+   "via": [
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-normalized-tower-support-recovery",
+  "worker": "stage1",
+  "summary": "Expanded the associated-point closure argument and induction on actual centers; reduced flat tests to faithful-flat ideal contraction, reusing the existing algebra and strict-local completion nodes. Added one generic flat-monomorphism local-structure input. STATEMENT-DISPUTED: the completed-strict-local family is empty on the empty base, so the original length must be compared separately there.",
+  "blueprint": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. VIII Theorem 2.3.10 and Remarks 2.3.11--2.3.12, pp.93--94 (existence and normalized regular functoriality); 3.2.19 and Theorem 3.4.15 with its proof and Remark 3.4.16(i), pp.106,113--114 (induced rule, independence, and synchronization). Supporting input: VIII 2.1.18--2.1.20, 2.2.11--2.2.12, printed pp.88--91; use of completed strict local tests in the proof of 3.4.15, printed p.114 This split supplies the geometric support-recovery tool in the existing VIII 3.4.15 independence route; current blueprint ancestor text checked at literature/blueprint/latest/.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-affine-associated-points-primes",
+    "why": "Generic algebra or scheme tool: Associated points on an affine open and associated primes of sections. Used for the explicit affine/stalk argument, not as a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic algebra or scheme tool: A module over a Noetherian ring embeds in the product of its localizations at its associated primes. Used for the explicit affine/stalk argument, not as a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic algebra or scheme tool: Strict henselization is faithfully flat. Used for the explicit affine/stalk argument, not as a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-completion-noetherian",
+    "why": "Generic algebra or scheme tool: Completion of a strict henselization is Noetherian and faithfully flat. Used for the explicit affine/stalk argument, not as a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic scheme tool (Stacks 04HX): the geometric strict local ring at a geometric point is the strict henselization of the Zariski local ring. Added by the reviewer in Step 6 to identify the completed strict local rings of the statement with the completions of (O_{X,x})^sh used by the faithful-flatness nodes; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-affine-associated-points-primes",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-completion-noetherian",
+  "lem-exc-affine-strict-local-ring-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-1c39d3f7b",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-1c39d3f7b (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-flat-monomorphism-local-structure, every cited statement, and ILO VIII 2.1.12-2.1.20, 2.2.3-2.2.12 and the proof of 3.4.15 (p.114). The item was unsplit with no proof on the base and the live clone still has it unsplit, so there is no supersession, no repair note, and the re-split rule does not apply. No SGA source is used. Statement change (E7, named in the report): the completed-strict-local test now requires X nonempty, and on the empty base equality of tower lengths must be required separately. I checked the counterexample: on the empty scheme, towers of lengths 0 and 1 are distinct but agree vacuously on the empty family. The only citer, char-zero-log-resolution-independence, handles the empty case itself, so the correction is accepted. New node: I proved every clause. A quasi-compact monomorphism to Spec of a field is Spec of the field or empty (an epimorphism from a field). The local ring maps are faithfully flat epimorphisms, hence isomorphisms (Stacks 04VU). A flat epimorphism from a Noetherian ring has every ideal extended from its contraction, so the source is Noetherian. Reducedness, regularity and base-change stability follow. I tested the empty, identity, Spec O_{X,x} and X_Q cases. It is not a duplicate of lem-pe-flat-lfp-monomorphism-open (needs lfp), lem-sfb-space-flat-monomorphism-representable (representability only) or the ring-epimorphism nodes, and it does not restate a clause of the item. Steps 1, 3, 4, 5 and 7 are correct; Step 1 uses only paragraph 2 of regular-pullback, whose reduced Noetherian hypotheses hold. Two faults were fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-normalized-tower-support-recovery.json. (1) E1, Step 2: Tag 0311 needs a Noetherian ring, but the step used an arbitrary affine open. It now uses principal opens of a Noetherian affine cover, which form a basis. (2) C1, Step 6: the step silently identified the geometric strict local ring with (O_{X,x})^sh (Stacks 04HX). A new Step 6 cites the existing lem-exc-affine-strict-local-ring-comparison and writes out the elementary pair/triple equivalence; old Step 6 becomes Step 7. proof_deps and split_report.tool_uses are updated. Batch 5: lem-sfb-affine-associated-points-primes reaches only def-trf-relative-assassin, a general definition outside both assumed statements, so it is accepted. The added lem-exc node has no trace-formula, Poincaré-duality or nt- node in its closure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedTowerSupportRecovery",
+  "declaration": "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedTower_support_recovery",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedTower_support_recovery",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedTower_restriction_injective",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedTower_rational_recovery",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedTower_fpqc_test",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedTower_completedStrict_local",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedTower_completedStrict_test",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedTower_center_completedStrict_nonempty"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedTowerSupportRecovery.lean",
+  "statement": "theorem normalizedTower_support_recovery {n : ℕ} (T : NormalizedTower.{u} n) (hNoeth : ∀ i, IsNoetherian (T.level i)) {U : Scheme.{u}} (j : U ⟶ T.level 0) [Flat j] [Mono j] [QuasiCompact j] (hAss : T.associatedCenterImages ⊆ Set.range j) : Nonempty (PullbackOver T (𝟙 _) j) ∧ ∀ i : Fin n, ((T.center i).comap (pullback.fst (T.toFirst i.castSucc) j)).map (pullback.fst (T.toFirst i.castSucc) j) = T.center i",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-666bc92e1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Item changed only lean+stmt_deps (+def-per-normalized-tower-recovery-tests); statements verbatim; no live supersession. Clause check: reduced/Noetherian stages via NormalizedTower+hNoeth; Ass(B)=associatedCenterImages over def-sc-associated-points; qc flat mono j with Ass⊆range j; recovery = Nonempty PullbackOver + ((J_i).comap p).map p = J_i, map=(subschemeι≫p).ker = node's ker(O→j_*O_Z); uniqueness via SameOver (n=m, CenterIso equal ideals, over base); X_Q as genuine pullback over Spec ℤ, no openness; fpqc iff with given pullback data; completed strict local ring = AdicCompletion of recorded H_s at ker ε, map via recorded structural map; local/ff clause ∃! harmless (fromSpecStalk mono pins φ); empty-base length condition present; all-Ω test equivalent to one per point. New node fields ok, no existing scheme-level completed strict local ring/X_Q/tower comparison found. No hollow defs, 7 sorry theorems, docstrings with source+proof steps, lines ≤100. Advisory: owner decls of NormalizedTower/toFirst reached via new node's stmt_deps; FlatMonomorphismLocalStructure now live for a stage-3 proof import."
+ }
+}

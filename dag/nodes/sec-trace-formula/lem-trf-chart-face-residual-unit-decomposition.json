@@ -1,0 +1,325 @@
+{
+ "id": "lem-trf-chart-face-residual-unit-decomposition",
+ "kind": "statement",
+ "title": "Residual unit decomposition of a face-localized monoid chart",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero commutative local ring, let $R,Q$ be fine saturated additive monoids [def-trf-fs-log-blowup], and let $h:R\\to Q$ induce an isomorphism $h^{\\rm gp}$. Let $\\alpha:R\\to(A,\\cdot)$ be a homomorphism, set $G=\\alpha^{-1}(A^\\times)$, $R_G=\\{r-g:r\\in R,g\\in G\\}$, $S=R_G/G^{\\rm gp}$. Extend $\\alpha$ to the monoid homomorphism $\\alpha_G:R_G\\to(A,\\cdot)$ by $\\alpha_G(r-g)=\\alpha(r)\\alpha(g)^{-1}$. Suppose that $a:S\\to(A,\\cdot)$ is a monoid homomorphism and $\\epsilon:R^{\\rm gp}\\to A^\\times$ is a group homomorphism satisfying $\\alpha_G(x)=\\epsilon(x)a(\\bar x)$ for every $x\\in R_G$. Put $C=A\\otimes_{\\mathbf Z[R]}\\mathbf Z[Q]$ [def-weil-pbc-module-tensor-product], choose a prime $\\mathfrak q$ contracting to $\\mathfrak m$, and put $B=C_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], $F=\\{q\\in Q:[q]\\in B^\\times\\}$, $Q_F=\\{q-f:q\\in Q,f\\in F\\}$, $N=h(G^{\\rm gp})$, $P=Q_F/N$, $T=Q_F/F^{\\rm gp}$. Monoid rings $E[M]$ consist of finite sums $\\sum c_u[u]$ with $[u][v]=[u+v]$.\nThen $G,F$ are faces, meaning submonoids with $x+y$ in the submonoid only if both summands belong to it; $h^{-1}(F)=G$, $R_G^\\times=G^{\\rm gp}$, $Q_F^\\times=F^{\\rm gp}$, and $S,T$ are sharp (their only invertible element is $0$) fine saturated monoids with finite free group completions. Put $M=Q^{\\rm gp}/N\\cong S^{\\rm gp}$ and $K=F^{\\rm gp}/N\\subset M$. The group $K$ is finite free, and $P$ is the inverse image of $T$ under $M\\to T^{\\rm gp}$. There exists a group section $\\sigma:T^{\\rm gp}\\to M$ with $\\sigma(T)\\subset P$, giving $P\\cong K\\oplus T$ by $(k,v)\\mapsto k+\\sigma(v)$. The induced $f:S\\to P$ has coordinates $(\\delta,\\beta)$ with $\\beta(s)\\ne0$ for every $s\\ne0$.\nLet $C_F$ mean the localization of $C$ at the multiplicative subset $\\{[f]:f\\in F\\}$ [def-weil-pbc-module-localization], inverting all $[f]$ for $f\\in F$. There is an $A$-algebra isomorphism\n$$C_F\\cong A\\otimes_{\\mathbf Z[S]}\\mathbf Z[K\\oplus T],$$\nwhere $\\mathbf Z[S]\\to A$ sends $[s]$ to $a(s)$ and the other map is induced by $f$. With $\\chi=\\epsilon\\circ(h^{\\rm gp})^{-1}$, this isomorphism sends $[q]$ to $\\chi(q)[k][v]$ when the class of $q$ in $P$ is $(k,v)$, and $[q]/[f]$ to $\\chi(q-f)[k'][v']$ with $(k',v')$ the class of $q-f$. It identifies the chosen localizations and their completions [def-weil-pbc-adic-completion]; $q\\notin F$ holds exactly when its $T$-coordinate is nonzero. No injectivity of $S^{\\rm gp}\\to T^{\\rm gp}$ is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Products in a commutative ring are units exactly when both factors are units: if $xyu=1$, then $x(yu)=y(xu)=1$. Thus $G$ and $F$ are submonoids and faces. The map $A\\to B$ reflects units: if $a\\in\\mathfrak m$, its image lies in $\\mathfrak qB$, the maximal ideal of $B$, so is not a unit; if $a\\notin\\mathfrak m$, it is a unit already in $A$. Here use the prime-localization description and the local-ring unit criterion. The tensor relation $[h(r)]=\\alpha(r)$ therefore gives $h^{-1}(F)=G$. Cross multiplication $r+g'=r'+g$ shows that $\\alpha(r)\\alpha(g)^{-1}=\\alpha(r')\\alpha(g')^{-1}$, so the specified extension $\\alpha_G$ is well defined.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 07BH/07BI (local rings), 00E9 (lemma-characterize-local-ring), 00CV/00CX (section-tensor-product / lemma-tensor-product), 00M9 (section-completion), as applicable; explicit agent calculation of the displayed fractions, balancing and inverse maps."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fs-face-sharpening] to $(R,G)$ and $(Q,F)$. The faces were proved in Step 1 and both monoids are fs by hypothesis. This gives exactly $R_G^\\times=G^{\\rm gp}$, $Q_F^\\times=F^{\\rm gp}$, sharp fs monoids $S,T$, and embeddings $S\\subset R^{\\rm gp}/G^{\\rm gp}$ and $T\\subset Q^{\\rm gp}/F^{\\rm gp}$ identifying these quotient groups with $S^{\\rm gp},T^{\\rm gp}$; both groups are finite free. Since $h(G)\\subset F$, the subgroup $N=h(G^{\\rm gp})$ lies in $F^{\\rm gp}$; the isomorphism $h^{\\rm gp}$ identifies $M=Q^{\\rm gp}/N$ with $S^{\\rm gp}$.",
+   "uses": [
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4."
+   }
+  },
+  {
+   "text": "The quotient $P$ embeds in $M$: two elements $w,w'$ of $Q_F\\subset Q^{\\rm gp}$ have the same image in $M$ exactly when $w-w'\\in N$, precisely its defining quotient relation. It generates $M$, hence $P^{\\rm gp}=M$. The quotient $M\\to Q^{\\rm gp}/F^{\\rm gp}=T^{\\rm gp}$ has kernel $K=F^{\\rm gp}/N$. Moreover $P$ is the inverse image of $T$: if the image of $m\\in M$ is in $T$, choose $w\\in Q_F$ with that image. The difference $m-\\bar w$ is represented by an element of $F^{\\rm gp}\\subset Q_F^\\times$, so $m\\in P$. Conversely every element of $P$ maps into $T$. In particular $P^\\times=K$, since $T$ is sharp and all elements of $K$ have both signs in $P$. Thus $P/K=T$, and the group kernel and surjectivity required below have been checked.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4."
+   }
+  },
+  {
+   "text": "The identification $M\\cong S^{\\rm gp}$ makes $K$ a subgroup of a finite free abelian group, so [lem-weil-subgroup-finite-free-abelian-group-free] gives that $K$ is finite free. Apply [lem-trf-group-section-monoid-product] to the surjection $P\\to T$. Step 3 supplies integral monoids, group completions $M,T^{\\rm gp}$ and kernel $P^\\times=K$; Step 2 supplies a finite basis of $T^{\\rm gp}$. It gives a group section $\\sigma:T^{\\rm gp}\\to M$ with $\\sigma(T)\\subset P$ and the inverse monoid maps $(k,v)\\mapsto k+\\sigma(v)$ and $p\\mapsto(p-\\sigma(\\bar p),\\bar p)$. This is the asserted $P\\cong K\\oplus T$, with the factors interchanged from the cited statement.",
+   "uses": [
+    "lem-weil-subgroup-finite-free-abelian-group-free",
+    "lem-trf-group-section-monoid-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4."
+   }
+  },
+  {
+   "text": "The map $h$ extends to $R_G\\to Q_F$ because $h(G)\\subset F$. Modulo $N$ it descends to $f:S\\to P$, whose coordinates define $(\\delta,\\beta)$. To show $\\beta(s)=0$ forces $s=0$, write $s=\\overline{r-g}$. Vanishing means $h(r-g)\\in F^{\\rm gp}$, hence $h(r)\\in Q\\cap F^{\\rm gp}$. This intersection is $F$: if $q=f_1-f_2$ with $q\\in Q$ and $f_i\\in F$, the equality $q+f_2=f_1$ and the face condition imply $q\\in F$. Thus $r\\in G$ by Step 1, and $s=0$. The same intersection calculation shows, for every $q\\in Q$, that its $T$-coordinate is zero exactly when $q\\in F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4."
+   }
+  },
+  {
+   "text": "First use the quotient notation $D=A\\otimes_{\\mathbf Z[S]}\\mathbf Z[P]$. The monoid-algebra and algebra-tensor universal properties give its $A$-algebra structure and monomials $[p]$ with $[p][p']=[p+p']$, and the balancing relation $[f(s)]=a(s)$. It is generated by these monomials over $A$, because pure tensors generate and every element of $\\mathbf Z[P]$ is an integer sum of monomials. Put $\\chi=\\epsilon\\circ(h^{\\rm gp})^{-1}$, a group homomorphism to $A^\\times$. All its values below are scalar units in $D$ or $C_F$.",
+   "uses": [
+    "lem-trf-integer-monoid-algebra-universal-property",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 07BH/07BI (local rings), 00E9 (lemma-characterize-local-ring), 00CV/00CX (section-tensor-product / lemma-tensor-product), 00M9 (section-completion), as applicable; explicit agent calculation of the displayed fractions, balancing and inverse maps."
+   }
+  },
+  {
+   "text": "Define $Q\\to(D,\\cdot)$ by $q\\mapsto\\chi(q)[\\bar q]$. It is multiplicative since $\\chi$ and the quotient map are homomorphisms. The monoid-algebra universal property extends it to $\\mathbf Z[Q]\\to D$. For $r\\in R$ its value on $[h(r)]$ is $\\epsilon(r)[f(\\bar r)]=\\epsilon(r)a(\\bar r)=\\alpha(r)$, so this map is compatible with $\\mathbf Z[R]\\to A$. The algebra-tensor universal property now gives an $A$-algebra map $C\\to D$. If $f_0\\in F$, its class belongs to $K=P^\\times$, so the image $\\chi(f_0)[\\bar f_0]$ has inverse $\\chi(f_0)^{-1}[-\\bar f_0]$. Consequently the map extends to $\\Phi:C_F\\to D$ by fractions: $c/[f_0]\\mapsto\\Phi(c)\\Phi([f_0])^{-1}$. Cross multiplication in the fraction definition [def-weil-pbc-module-localization] proves independence of representatives and preservation of sums and products. In particular $\\Phi([q]/[f_0])=\\chi(q-f_0)[\\overline{q-f_0}]$.",
+   "uses": [
+    "lem-trf-integer-monoid-algebra-universal-property",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 07BH/07BI (local rings), 00E9 (lemma-characterize-local-ring), 00CV/00CX (section-tensor-product / lemma-tensor-product), 00M9 (section-completion), as applicable; explicit agent calculation of the displayed fractions, balancing and inverse maps."
+   }
+  },
+  {
+   "text": "For $w=q-f_0\\in Q_F$ put $z(w)=[q]/[f_0]\\in C_F$. This is independent of its monoid fraction representative: equality $q+f'_0=q'+f_0$ gives equality of the corresponding monomial products. It is multiplicative and satisfies $z(h(x))=\\alpha_G(x)$ for $x\\in R_G$, by the tensor relation and inversion of $\\alpha(G)$. For $t\\in G^{\\rm gp}$ we have $\\alpha_G(t)=\\epsilon(t)$, since its class in $S$ is zero and $a(0)=1$. Therefore $w\\mapsto\\chi(w)^{-1}z(w)$ is invariant under addition of $h(t)\\in N$: its multiplier is $\\epsilon(t)^{-1}\\alpha_G(t)=1$. It descends to a multiplicative map $y:P\\to C_F$ with $y(\\bar w)=\\chi(w)^{-1}z(w)$, not depending on the lift $w$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4."
+   }
+  },
+  {
+   "text": "For $s=\\bar x\\in S$, with $x\\in R_G$, the preceding formula gives $y(f(s))=\\epsilon(x)^{-1}\\alpha_G(x)=a(s)$. Hence the monoid-algebra universal property extends $y$ to a map $\\mathbf Z[P]\\to C_F$ compatible with $\\mathbf Z[S]\\to A$. The algebra-tensor universal property gives the $A$-algebra map $\\Psi:D\\to C_F$ with $\\Psi([\\bar w])=\\chi(w)^{-1}z(w)$. All balancing is accounted for by the displayed identity on $f(s)$; neither flatness nor injectivity of a sharp group map is used.",
+   "uses": [
+    "lem-trf-integer-monoid-algebra-universal-property",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 07BH/07BI (local rings), 00E9 (lemma-characterize-local-ring), 00CV/00CX (section-tensor-product / lemma-tensor-product), 00M9 (section-completion), as applicable; explicit agent calculation of the displayed fractions, balancing and inverse maps."
+   }
+  },
+  {
+   "text": "On each $[\\bar w]\\in D$ the composite $\\Phi\\Psi$ is $\\chi(w)^{-1}\\chi(w)[\\bar w]=[\\bar w]$, so it is the identity, since these monomials generate $D$ over $A$. On $[q]\\in C$, $\\Psi\\Phi$ gives $\\chi(q)\\chi(q)^{-1}[q]=[q]$, and it fixes $A$; it therefore fixes $C$ and the inverses of all $[f_0]$, hence is the identity on $C_F$. Use $P\\cong K\\oplus T$ to reindex monomials in $D$: the maps $[p]\\leftrightarrow[k][v]$ preserve multiplication and all coefficient relations, so give $D\\cong A\\otimes_{\\mathbf Z[S]}\\mathbf Z[K\\oplus T]$. Combining with $\\Phi$ gives both formulas in the statement.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4."
+   }
+  },
+  {
+   "text": "Every $[f_0]$, $f_0\\in F$, lies outside $\\mathfrak q$: otherwise its image in the maximal ideal $\\mathfrak qB$ could not be a unit. Thus $\\mathfrak q_F$ is a prime of $C_F$, and $(C_F)_{\\mathfrak q_F}\\cong B$. Explicitly fractions over $C_F$ map to $B$ by evaluating their monomial denominators, and the reverse map sends $c/s$ ($s\\notin\\mathfrak q$) to the same fraction; their composites fix all fractions. The isomorphism $\\Phi$ carries $\\mathfrak q_F$ to a prime $\\mathfrak q_D$ of $D$ and induces inverse fraction maps $(C_F)_{\\mathfrak q_F}\\cong D_{\\mathfrak q_D}$. They identify maximal ideals, hence every power of these ideals and the quotient rings by those powers. Applying them termwise to the compatible sequences defining adic completion gives inverse maps on completions. Finally Step 5 gives the claimed nonzero-$T$-coordinate criterion; it does not imply or require injectivity of $S^{\\rm gp}\\to T^{\\rm gp}$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 07BH/07BI (local rings), 00E9 (lemma-characterize-local-ring), 00CV/00CX (section-tensor-product / lemma-tensor-product), 00M9 (section-completion), as applicable; explicit agent calculation of the displayed fractions, balancing and inverse maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lem-trf-group-section-monoid-product",
+  "lem-trf-integer-monoid-algebra-universal-property",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4. Explicit algebraic argument; ILO supplies the terminology and local-chart route, not this tensor formula verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For fine saturated monoids with isomorphic group completions, a monoid algebra tensor localized at a prime splits the surviving units as a finite free group and a sharp monoid after a character twist",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalization.algebraTensorEquiv\", \"module\": \"Mathlib/RingTheory/Localization/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    (S : Submonoid R) →\\n      (A : Type u_2) →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Algebra R A] →\\n            [IsLocalization S A] →\\n              (B : Type u_5) →\\n                (C : Type u_6) →\\n                  [inst_4 : Semiring B\", \"doc\": \"Given commutative semirings $ R $ and $ S $, $ R $-algebras $ A $, $ B $, and $ C $ with compatible $ S $-module structures (via $ \\\\mathrm{SMulCommClass} $ and $ \\\\mathrm{TensorProduct.CompatibleSMul} \"}\n  {\"name\": \"Ideal.Fiber.exists_smul_eq_one_tmul\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (x : p.Fiber S), ∃ r ∉ p, ∃ s, r • x = 1 ⊗ₜ[R] s\", \"doc\": \"For any element $ x $ in the tensor product $ k(p) \\\\otimes_R S $, where $ k(p) $ is the residue field of the prime ideal $ p $ in the commutative ring $ R $, there exist an element $ r \\\\in R \\\\setminus\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {T : Type u_3} [inst_2 : CommRing T]\\n  [inst_3 : Algebra R T] [inst_4 : Algebra R S],\\n  (algebraMap R T).SurjectiveOnStalks →\\n    ∀ (x : TensorProduct R S T) (J : Ideal T), J.IsPrime → ∃ t r a, r • t ∉ J ∧ 1 ⊗ₜ[R] (r • t) * x \", \"doc\": \"Let $R, S, T$ be commutative rings, and let $S$ and $T$ be $R$-algebras. Let $\\\\phi: R \\\\to T$ be the structure map. Suppose that $\\\\phi$ is surjective on stalks. Then for any element $x \\\\in S \\\\otimes_R \"}\n  {\"name\": \"MonoidAlgebra.tensorEquiv\", \"module\": \"Mathlib/RingTheory/TensorProduct/MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  {M : Type u_2} →\\n    (A : Type u_4) →\\n      (B : Type u_5) →\\n        [inst : CommSemiring R] →\\n          [inst_1 : CommSemiring A] →\\n            [inst_2 : CommSemiring B] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R B] →\\n                  [inst_5 : \", \"doc\": \"Let $R$ be a commutative semiring, $A$ and $B$ be commutative $R$-algebras, and $M$ be a commutative monoid. This defines the canonical $A$-algebra isomorphism:\\n$$A \\\\otimes_R B[M] \\\\cong (A \\\\otimes_R B\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {s : Set S},\\n  Ideal.span s = ⊤ →\\n    ∀ (Sᵣ : ↑s → Type u_4) [inst_5 : (r : ↑s) → CommRing (Sᵣ r)] [inst_6 : (r : ↑s) → Algebra S (Sᵣ r)]\\n   \", \"doc\": \"Let $R$ and $S$ be commutative rings, with $S$ being an $R$-algebra, and let $B$ be another $R$-algebra. For a ring $A$ and an $A$-algebra $C$, let $\\\\overline{C}^A$ denote the integral closure of $A$ \"}\n  {\"name\": \"Module.mem_freeLocus_iff_tensor\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (p : PrimeSpectrum R)\\n  (Rₚ : Type u_1) [inst_3 : CommRing Rₚ] [inst_4 : Algebra R Rₚ] [IsLocalization.AtPrime Rₚ p.asIdeal],\\n  p ∈ Module.freeLocus R M ↔ Module.Free Rₚ (TensorProduct R Rₚ M)\", \"doc\": \"A prime ideal $\\\\mathfrak{p}$ of a commutative ring $R$ lies in the free locus of an $R$-module $M$ if and only if the tensor product $R_\\\\mathfrak{p} \\\\otimes_R M$ is a free module over the localized ri\"}\n  {\"name\": \"Ideal.ResidueField.exists_smul_eq_tmul_one\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (x : TensorProduct R S p.ResidueField), ∃ r ∉ p, ∃ s, r • x = s ⊗ₜ[R] 1\", \"doc\": \"For any element $ x $ in the tensor product $ S \\\\otimes_R \\\\text{ResidueField}(p) $, there exists an element $ r \\\\notin p $ and an element $ s \\\\in S $ such that $ r \\\\cdot x = s \\\\otimes 1 $.\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Let $R \\\\to S \\\\to T$ be homomorphisms of commutative rings, where $T$ is the localization of $S$ at a multiplicative submonoid $M \\\\subseteq S$. Then the first cotangent cohomology module commutes with \"}\n\nThe hits give tensor and localization APIs or domCongr for an already isomorphic monoid; none constructs the residual unit splitting and character-compatible localized tensor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize a saturated monoid at a face and quotient by a subgroup of units: the residual monoid is a direct sum of its free unit group and its sharpening",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomogeneousLocalization\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} → {σ : Type u_3} → [inst : CommRing A] → [SetLike σ A] → (ι → σ) → Submonoid A → Type (max u_1 u_2)\", \"doc\": \"The type representing the quotient of homogeneous fractions (with numerator and denominator in the submonoid $ x $) by the equivalence relation induced by their equality in the localization $ A_x $, w\"}\n  {\"name\": \"Localization.Away\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/Away\", \"type\": \"{M : Type u_1} → [CommMonoid M] → M → Type u_1\", \"doc\": \"For a commutative monoid $ M $ and an element $ x $, this denotes the localization of $ M $ with respect to the submonoid generated by all powers of $ x $. This construction formally inverts all eleme\"}\n  {\"name\": \"Localization\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/Basic\", \"type\": \"{M : Type u_1} → [inst : CommMonoid M] → Submonoid M → Type u_1\", \"doc\": \"For a commutative monoid $ M $ and a submonoid $ S $, $ \\\\text{Localization}(S, M) $ denotes the Ore localization of $ M $ with respect to $ S $. This is constructed as the quotient of the set of pairs\"}\n  {\"name\": \"Algebra.GrothendieckGroup.lift_apply\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup\", \"type\": \"∀ {M : Type u_1} {G : Type u_2} [inst : CommMonoid M] [inst_1 : CommGroup G] (f : M →* G)\\n  (x : Algebra.GrothendieckGroup M),\\n  (Algebra.GrothendieckGroup.lift f) x = f ((Localization.monoidOf ⊤).sec x).1 / f ↑((Localization.monoidOf ⊤).sec x).2\", \"doc\": \"For any commutative monoid $M$ and commutative group $G$, there is a natural bijection between monoid homomorphisms $M \\to G$ and group homomorphisms $K(M) \\to G$, where $K(M)$ denotes the Grothendieck \"}\n  {\"name\": \"HomogeneousLocalization.Away\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} → {A : Type u_2} → {σ : Type u_3} → [CommRing A] → [SetLike σ A] → (ι → σ) → A → Type (max u_1 u_2)\", \"doc\": \"The homogeneous localization of a graded algebra $ A $ at the submonoid generated by the powers of an element $ f $, consisting of homogeneous fractions where numerators and denominators are homogeneo\"}\n  {\"name\": \"Submonoid.divPairs\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/DivPairs\", \"type\": \"{M : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommMonoid M] → [inst_1 : CommGroup G] → ⊤.LocalizationMap G → Submonoid G → Submonoid (M × M)\", \"doc\": \"The submonoid of $ M \\times M $ consisting of all pairs $ (a, b) $ such that the division $ f(a)/f(b) $ lies in the submonoid $ s $ of the target monoid, where $ f $ is a given monoid homomorphism.\"}\n  {\"name\": \"Set.unit\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SInteger\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      Set (IsDedekindDomain.HeightOneSpectrum R) →\\n        (K : Type v) → [inst_2 : Field K] → [inst_3 : Algebra R K] → [IsFractionRing R K] → Subgroup Kˣ\", \"doc\": \"The subgroup of the multiplicative group $ K^\\times $ consisting of elements $ x $ such that for every height one prime ideal valuation $ v $ not in the set $ S $, the valuation $ v(x) = 1 $. This is c\"}\n  {\"name\": \"AddLocalization.Away\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/Away\", \"type\": \"{M : Type u_1} → [AddCommMonoid M] → M → Type u_1\", \"doc\": \"The type representing the additive localization of an additive commutative monoid $ M $ at the submonoid generated by an element $ m \\\\in M $.\"}\n\nThe hits give tensor and localization APIs or domCongr for an already isomorphic monoid; none constructs the residual unit splitting and character-compatible localized tensor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"Localization\"",
+   "results": "[loogle] OK 0 hit(s)\n\nThe hits give tensor and localization APIs or domCongr for an already isomorphic monoid; none constructs the residual unit splitting and character-compatible localized tensor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(monoid.*face|face.*monoid|monoid.*sharpen|domCongr|twist.*monoid)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Finsupp/LSum.lean\", \"line\": \"182\", \"text\": \"This is `Finsupp.domCongr` as a `LinearEquiv`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Finsupp/LSum.lean\", \"line\": \"185\", \"text\": \"  (Finsupp.domCongr e : (α₁ →₀ M) ≃+ (α₂ →₀ M)).toLinearEquiv <| by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Finsupp/LSum.lean\", \"line\": \"186\", \"text\": \"    simpa only [equivMapDomain_eq_mapDomain, domCongr_apply] using! (lmapDomain M R e).map_smul\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Finsupp/LSum.lean\", \"line\": \"190\", \"text\": \"    (Finsupp.domLCongr e : _ ≃ₗ[R] _) v = Finsupp.domCongr e v :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Finsupp/Supported.lean\", \"line\": \"19\", \"text\": \"* `Finsupp.domLCongr`: a `LinearEquiv` version of `Finsupp.domCongr`;\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Orientation.lean\", \"line\": \"86\", \"text\": \"  Module.Ray.map <| AlternatingMap.domDomCongrₗ R e\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Orientation.lean\", \"line\": \"91\", \"text\": \"      rayOfNeZero _ (v.domDomCongr e) (mt (v.domDomCongr_eq_zero_iff e).mp hv) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Orientation.lean\", \"line\": \"96\", \"text\": \"  rw [Orientation.reindex, AlternatingMap.domDomCongrₗ_refl, Module.Ray.map_refl]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/CommShiftTwo.lean\", \"line\": \"52\", \"text\": \"    TwistShiftData (PullbackShift D (AddMonoidHom.fst M M + AddMonoidHom.snd _ _)) (M × M) where\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean\", \"line\": \"40\", \"text\": \"    MultilinearMap.alternatization_apply, MultilinearMap.domDomCongr_apply]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/Simplex/Basic.lean\", \"line\": \"577\", \"text\": \"lemma affineCombination_mem_interior_face_iff_pos [IsOrderedAddMonoid k] {n : ℕ}\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/Simplex/Basic.lean\", \"line\": \"588\", \"text\": \"lemma affineCombination_mem_closedInterior_face_iff_nonneg [IsOrderedAddMonoid k] {n : ℕ}\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean\", \"line\": \"682\", \"text\": \"  let f := domDomCongrLinearEquiv' R R s (⨂[R] (i : ι₂), s (e.symm i)) e\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean\", \"line\": \"683\", \"text\": \"  let g := domDomCongrLinearEquiv' R R s (⨂[R] (i : ι), s i) e\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean\", \"line\": \"697\", \"text\": \"    (domDomCongrLinearEquiv' R R s _ e).symm (tprod R) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean\", \"line\": \"701\", \"text\": \"    lift φ ∘ₗ (reindex R s e) = lift ((domDomCongrLinearEquiv' R R s _ e).symm φ) := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean\", \"line\": \"706\", \"text\": \"    lift φ ∘ₗ (reindex R s e).symm = lift (domDomCongrLinearEquiv' R R s _ e φ) := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Determinant.lean\", \"line\": \"719\", \"text\": \"    (e : ι ≃ ι') : (b.reindex e).det = b.det.domDomCongr e :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric.lean\", \"line\": \"128\", \"text\": \"@[simp] lemma domDomCongr_tprod (e : Perm ι) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric.lean\", \"line\": \"129\", \"text\": \"    (tprod R (ι := ι) (M := M)).domDomCongr e = tprod R :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Multilinear/TensorProduct.lean\", \"line\": \"101\", \"text\": \"/-- When passed an `Equiv.sumCongr`, `MultilinearMap.domDomCongr` distributes over\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Multilinear/TensorProduct.lean\", \"line\": \"103\", \"text\": \"theorem domCoprod_domDomCongr_sumCongr (a : MultilinearMap R (fun _ : ι₁ => N) N₁)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Multilinear/TensorProduct.lean\", \"line\": \"105\", \"text\": \"    (a.domCoprod b).domDomCongr (σa.sumCongr σb) =\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Multilinear/TensorProduct.lean\", \"line\": \"106\", \"text\": \"      (a.domDomCongr σa).domCoprod (b.domDomCongr σb) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Multilinear/Curry.lean\", \"line\": \"352\", \"text\": \"  (domDomCongrLinearEquiv R R M' M₂ (finSumEquivOfFinset hk hl).symm).trans\"}\n\nThe hits give tensor and localization APIs or domCongr for an already isomorphic monoid; none constructs the residual unit splitting and character-compatible localized tensor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A character twist untwists monoid algebra tensor relations and the face localized quotient monoid splits as a free abelian unit group plus a sharp saturated monoid",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MonoidAlgebra.scalarTensorEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \": A ⊗[R] R[M] ≃ₐ[A] A[M]\", \"doc\": \"The tensor product of an $ R $-algebra $ A $ with the monoid algebra $ R[M] $ over $ R $ is isomorphic to the monoid algebra $ A[M] $ as an $ A $-algebra. This equivalence is constructed by transposin\"}\n  {\"name\": \"MonoidAlgebra.instHopfAlgebra\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.MonoidAlgebra\", \"type\": \": HopfAlgebra R A[G]\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ equipped with a Hopf algebra structure over $ R $, and a group $ G $, the monoid algebra $ A[G] $ admits a canonical Hopf algebra structure over $ \"}\n  {\"name\": \"MonoidAlgebra.tensorEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \": A ⊗[R] B[M] ≃ₐ[A] (A ⊗[R] B)[M]\", \"doc\": \"Let $R$ be a commutative semiring, $A$ and $B$ be commutative $R$-algebras, and $M$ be a commutative monoid. This defines the canonical $A$-algebra isomorphism:\\n$$A \\\\otimes_R B[M] \\\\cong (A \\\\otimes_R B\"}\n  {\"name\": \"MonoidAlgebra.instFree\", \"module\": \"Mathlib.LinearAlgebra.Finsupp.VectorSpace\", \"type\": \": Module.Free R S[M]\", \"doc\": \"The monoid algebra $ S[M] $ over a semiring $ R $ is a free $ R $-module. This means $ S[M] $ admits a basis (a linearly independent spanning set) consisting of the indicator functions of elements in \"}\n  {\"name\": \"MonoidAlgebra.tensorEquiv.invFun\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \": (A ⊗[R] B)[M] →ₐ[A] A ⊗[R] B[M]\", \"doc\": \"The inverse function of the tensor product equivalence between the monoid algebra over a tensor product and the tensor product of monoid algebras. It constructs an $ A $-algebra homomorphism from $ (A\"}\n  {\"name\": \"MonoidAlgebra.domCongr\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Basic\", \"type\": \"(e : M ≃* N) : A[M] ≃ₐ[R] A[N]\", \"doc\": \"Let $R$ be a commutative semiring, $A$ be a semiring that is an $R$-algebra, and $M$ and $N$ be monoids. A monoid equivalence $e : M \\\\to N$ induces an $R$-algebra equivalence between the monoid algebr\"}\n  {\"name\": \"AddMonoidAlgebra.tensorEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  {M : Type u_2} →\\n    (A : Type u_4) →\\n      (B : Type u_5) →\\n        [inst : CommSemiring R] →\\n          [inst_1 : CommSemiring A] →\\n            [inst_2 : CommSemiring B] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R B] →\\n                  [inst_5 : \", \"doc\": \"Let $R$ be a commutative semiring, and let $A$ and $B$ be commutative $R$-algebras. Let $M$ be an additive commutative monoid. This definition establishes an equivalence of $A$-algebras between the te\"}\n  {\"name\": \"AddMonoidAlgebra.scalarTensorEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  {M : Type u_2} →\\n    (A : Type u_4) →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Algebra R A] →\\n            [inst_3 : AddCommMonoid M] → TensorProduct R A (AddMonoidAlgebra R M) ≃ₐ[A] AddMonoidAlgebra A M\", \"doc\": \"Let $R$ be a commutative semiring, $M$ be an additive commutative monoid, and $A$ be a commutative $R$-algebra. This definition establishes an $A$-algebra equivalence between the tensor product of $A$\"}\n\nThe hits give tensor and localization APIs or domCongr for an already isomorphic monoid; none constructs the residual unit splitting and character-compatible localized tensor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "domCongr|character|sharpen|face",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"line\": \"307\", \"text\": \"`MonoidAlgebra.domCongr e` is an algebra equivalence between their monoid algebras. -/\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"line\": \"310\", \"text\": \"`AddMonoidAlgebra.domCongr e` is an algebra equivalence between their additive monoid algebras. -/]\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"line\": \"311\", \"text\": \"def domCongr (e : M ≃* N) : A[M] ≃ₐ[R] A[N] where\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"line\": \"316\", \"text\": \"lemma coeff_domCongr (e : M ≃* N) (f : A[M]) (n : N) :\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"line\": \"317\", \"text\": \"    (domCongr R A e f).coeff n = f.coeff (e.symm n) := by simp [domCongr]\"}\n\nThe hits give tensor and localization APIs or domCongr for an already isomorphic monoid; none constructs the residual unit splitting and character-compatible localized tensor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(monoid.*face|face.*monoid|monoid.*sharpen|twist.*monoid)",
+   "results": "3 hits; recorded top results: Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/LinearAlgebra/AffineSpace/Simplex/Basic.lean, Mathlib/LinearAlgebra/AffineSpace/Simplex/Basic.lean. Read the returned types: tensorEquiv concerns coefficient change for a fixed monoid; GrothendieckGroup.lift is only the group-completion extension; localization APIs do not supply face sharpening or the character-compatible quotient tensor formula. No match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Splitting the unit group off a sharp saturated monoid and untwisting a monoid algebra by a group character",
+   "results": "8 hits; recorded top results: MonCat.units, MonoidAlgebra.instHopfAlgebra, MulChar.toUnitHom, Units.instGroup, MulChar.ofUnitHom, MulChar.mulEquiv_units, GroupExtension.Splitting.instMonoidHomClass, MulChar.pow_card_eq_one. Read the returned types: tensorEquiv concerns coefficient change for a fixed monoid; GrothendieckGroup.lift is only the group-completion extension; localization APIs do not supply face sharpening or the character-compatible quotient tensor formula. No match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"Localization\"",
+   "results": "0 hits; recorded top results: . Read the returned types: tensorEquiv concerns coefficient change for a fixed monoid; GrothendieckGroup.lift is only the group-completion extension; localization APIs do not supply face sharpening or the character-compatible quotient tensor formula. No match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fine saturated monoid localized at a face splits as the direct sum of its unit group and sharp quotient, with a character twisted monoid algebra tensor isomorphism",
+   "results": "8 hits; recorded top results: MonoidAlgebra.tensorEquiv.invFun_tmul, MonoidAlgebra.tensorEquiv.invFun, MonoidAlgebra.tensorEquiv_symm_single, AddMonoidAlgebra.tensorEquiv.invFun_tmul, MonoidAlgebra.scalarTensorEquiv_symm_single, AddMonoidAlgebra.decomposeAux, AddMonoidAlgebra.decomposeAux_eq_decompose, AddMonoidAlgebra.decomposeAux_single. Read the returned types: tensorEquiv concerns coefficient change for a fixed monoid; GrothendieckGroup.lift is only the group-completion extension; localization APIs do not supply face sharpening or the character-compatible quotient tensor formula. No match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral monoid modulo its units with free group completion admits a section and product decomposition; monoid rings base change under localization",
+   "results": "8 hits; recorded top results: Algebra.GrothendieckGroup.lift_apply, IsLocalization.lift_spec_mul_add, Algebra.PreSubmersivePresentation.localizationAway, Module.Basis.localizationLocalization_repr_algebraMap, Module.Basis.localizationLocalization_apply, Algebra.Presentation.relation_comp_localizationAway_inl, IsLocalization.localization_localization_isLocalization_of_has_all_units, Algebra.Generators.toAlgHom_ofComp_localizationAway. Read the returned types: tensorEquiv concerns coefficient change for a fixed monoid; GrothendieckGroup.lift is only the group-completion extension; localization APIs do not supply face sharpening or the character-compatible quotient tensor formula. No match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-monoid-extension-model",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Independent completed-local algebra input for the toric chart case of VI 1.8: VI 1.6, printed p. 70 (the two formal models), and VIII 3.1.1--3.1.5, printed pp. 98--99 (face localization). The algebraic base-change statement is an agent-supplied local-model input, not a quotation of VI 1.8; its intended independent argument is in report.md. Re-split task: VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70, 98--99; agent-supplied tensor and residual-unit refinement of the formal chart, returned proof Steps 1--4.",
+   "via": [
+    "lem-trf-formal-monoid-extension-model",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-chart-face-residual-unit-decomposition",
+  "worker": "stage1",
+  "summary": "N8 reuses face sharpening, free subgroup, monoid product and ring universal-property nodes; writes explicit character-twisted mutually inverse algebra maps, prime-localization maps and completion maps. No new nodes. STATEMENT-DISPUTED: makes the intended monoid/group homomorphism hypotheses on a and epsilon explicit and types the extension of alpha to R_G; the raw factorization alone does not imply multiplicativity.",
+  "blueprint": "Historical nearby-duality/alteration chart input below lem-trf-local-term-locality (1)--(2), through lem-trf-formal-monoid-extension-model. Current latest blueprint replaces the top-level historical argument by contracting correspondences; this assigned algebraic subnode is proved independently without changing any unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-7bd966c1d",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-7bd966c1d (reviewer sub-agent of L); spot-checked: Read in full: the item, its 11 steps, every cited statement (fs-face-sharpening, group-section-monoid-product, subgroup-finite-free, integer-monoid-algebra UP, algebra-tensor pushout UP, local-ring unit criterion, localization-at-prime, adic completion, module tensor, fs-log-blowup) and ILO VI 1.6, PDF p.76, which gives only the setting, so by=agent is correct. Statement change: a is now stated to be a monoid hom and ε a group hom, and α_G is defined. The report's counterexample is valid (A=Q[[t]], R=Q=N, a(2)=2t^2≠a(1)^2, so Z[S]→A does not exist). Both citers (formal-monoid-extension-model, formal-chart-geometric-regularity) already supply homomorphisms and a character, so this makes the intended reading explicit and weakens nothing. I re-derived the isomorphism independently: the χ-twist untwists α_G=ε·a, P^×=K, the group-section lemma's kernel hypothesis holds, Q∩F^gp=F, and N-invariance holds via α_G(t)=ε(t). It also holds in small cases: R=Q=0, G=R, and the report's R=N² example with non-injective β^gp. No new nodes. No live supersession: the item is still unsplit on live and side-live, and it has no repair note. Every off-unit citation is a Mathlib leaf; no SGA. Not duplicated by monoid-face-localization-ideal-tensor, monoid-unit-twist-ideal-tensor, toric-chart-strict-local-preparation, or the sfb/per inline siblings. FIX (B3/C4): C_F is a localization at the multiplicative set {[f]}, but only localization-at-prime was cited. I added def-weil-pbc-module-localization to the statement, stmt_deps, steps 7, 8 and 11, and proof_deps, in fixes/dag/nodes/sec-trace-formula/lem-trf-chart-face-residual-unit-decomposition.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ChartFaceResidualUnitDecomposition",
+  "declaration": "Algebra.chart_face_residual_unit_decomposition",
+  "declarations": [
+   "Algebra.ChartResidual.faceGroup",
+   "Algebra.ChartResidual.groupMap",
+   "Algebra.ChartResidual.localizationGroup",
+   "Algebra.ChartResidual.sharpMap",
+   "Algebra.ChartResidual.relations",
+   "Algebra.ChartResidual.residualMonoid",
+   "Algebra.ChartResidual.residualUnits",
+   "Algebra.ChartResidual.fractionClass",
+   "Algebra.ChartResidual.denominators",
+   "Algebra.ChartResidual.tensorFraction",
+   "Algebra.ChartResidual.character",
+   "Algebra.ChartResidual.sourceFace",
+   "Algebra.ChartResidual.sourceSharp",
+   "Algebra.ChartResidual.targetFace",
+   "Algebra.ChartResidual.targetSharp",
+   "Algebra.ChartResidual.chartRelations",
+   "Algebra.chart_face_residual_unit_decomposition"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ChartFaceResidualUnitDecomposition.lean",
+  "statement": "theorem chart_face_residual_unit_decomposition (A : Type u) [CommRing A] [IsLocalRing A] (R : Type v) [CommMonoid R] (Q : Type w) [CommMonoid Q] (hR : AlgebraicGeometry.IsFineSaturatedMonoid R) (hQ : AlgebraicGeometry.IsFineSaturatedMonoid Q) (h : R →* Q) (hh : Function.Bijective (groupMap h)) (α : R →* A) (a : sourceSharp α →* A) (ε : GrothendieckGroup R →* Aˣ) (hα : ∀ x : Localization ((IsUnit.submonoid A).comap α), localizedUnitChart α x = (ε (unitChartGroupMap α x) : A) * a (Associates.mk x)) (q : Ideal (monoidChartTensor α h)) [q.IsPrime] (hq : Ideal.comap (monoidChartTensorBase α h) q = IsLocalRing.maximalIdeal A) : (∀ x y : R, x * y ∈ (sourceFace α) → x ∈ (sourceFace α) ∧ y ∈ (sourceFace α)) ∧ (∀ x y : Q, x * y ∈ (targetFace α h q) → x ∈ (targetFace α h q) ∧ y ∈ (targetFace α h q)) ∧ (targetFace α h q).comap h = (sourceFace α) ∧ (∀ x : Localization (sourceFace α), IsUnit x ↔ localizationGroup (sourceFace α) x ∈ faceGroup (sourceFace α)) ∧ (∀ x : Localization (targetFace α h q), IsUnit x ↔ localizationGroup (targetFace α h q) x ∈ faceGroup (targetFace α h q)) ∧ AlgebraicGeometry.IsFineSaturatedMonoid (sourceSharp α) ∧ AlgebraicGeometry.IsFineSaturatedMonoid (targetSharp α h q) ∧ (∀ s : (sourceSharp α), IsUnit s → s = 1) ∧ (∀ t : (targetSharp α h q), IsUnit t → t = 1) ∧ (∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (Additive (GrothendieckGroup (sourceSharp α))))) ∧ (∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (Additive (GrothendieckGroup (targetSharp α h q))))) ∧ (chartRelations α h) ≤ faceGroup (targetFace α h q) ∧ ∃ (eM : GrothendieckGroup (sourceSharp α) ≃* (GrothendieckGroup Q ⧸ (chartRelations α h))) (π : (GrothendieckGroup Q ⧸ (chartRelations α h)) →* GrothendieckGroup (targetSharp α h q)) (σ : GrothendieckGroup (targetSharp α h q) →* (GrothendieckGroup Q ⧸ chartRelations α h)) (eP : residualMonoid (targetFace α h q) (chartRelations α h) ≃* (residualUnits (targetFace α h q) (chartRelations α h) × targetSharp α h q)) (f : (sourceSharp α) →* (residualUnits (targetFace α h q) (chartRelations α h) × (targetSharp α h q))), (∃ eK : (faceGroup (targetFace α h q) ⧸ (chartRelations α h).comap (faceGroup (targetFace α h q)).subtype) ≃* residualUnits (targetFace α h q) (chartRelations α h), ∀ z : faceGroup (targetFace α h q), (eK (QuotientGroup.mk' _ z) : GrothendieckGroup Q ⧸ chartRelations α h) = QuotientGroup.mk' (chartRelations α h) z.1) ∧ (∀ r : R, eM (GrothendieckGroup.of (sharpMap (sourceFace α) r)) = QuotientGroup.mk' (chartRelations α h) (GrothendieckGroup.of (h r))) ∧ (∀ z : Q, π (QuotientGroup.mk' (chartRelations α h) (GrothendieckGroup.of z)) = GrothendieckGroup.of (sharpMap (targetFace α h q) z)) ∧ (∀ m : GrothendieckGroup Q ⧸ (chartRelations α h), m ∈ residualMonoid (targetFace α h q) (chartRelations α h) ↔ ∃ t : (targetSharp α h q), π m = GrothendieckGroup.of t) ∧ (∀ t : GrothendieckGroup (targetSharp α h q), π (σ t) = t) ∧ (∀ t : (targetSharp α h q), σ (GrothendieckGroup.of t) ∈ residualMonoid (targetFace α h q) (chartRelations α h)) ∧ (∀ (k : residualUnits (targetFace α h q) (chartRelations α h)) (t : (targetSharp α h q)), (eP.symm (k, t) : GrothendieckGroup Q ⧸ (chartRelations α h)) = k.1 * σ (GrothendieckGroup.of t)) ∧ (∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (Additive (residualUnits (targetFace α h q) (chartRelations α h))))) ∧ (∀ r : R, f (sharpMap (sourceFace α) r) = eP (fractionClass (targetFace α h q) (chartRelations α h) (h r) 1)) ∧ (∀ s : (sourceSharp α), s ≠ 1 → (f s).2 ≠ 1) ∧ (∀ z : Q, z ∉ targetFace α h q ↔ (eP (fractionClass (targetFace α h q) (chartRelations α h) z 1)).2 ≠ 1) ∧ ∃ Φ : Localization (denominators α h (targetFace α h q)) ≃+* monoidChartTensor a f, (∀ b : A, Φ (algebraMap (monoidChartTensor α h) _ (monoidChartTensorBase α h b)) = monoidChartTensorBase a f b) ∧ (∀ z : Q, Φ (algebraMap (monoidChartTensor α h) _ (monoidChartTensorMonomial α h z)) = monoidChartTensorBase a f (character h hh ε (GrothendieckGroup.of z)) * monoidChartTensorMonomial a f (eP (fractionClass (targetFace α h q) (chartRelations α h) z 1))) ∧ (∀ (z : Q) (d : (targetFace α h q)), Φ (tensorFraction α h (targetFace α h q) z d) = monoidChartTensorBase a f (character h hh ε (GrothendieckGroup.of z * (GrothendieckGroup.of d.1)⁻¹)) * monoidChartTensorMonomial a f (eP (fractionClass (targetFace α h q) (chartRelations α h) z d))) ∧ ∃ (qD : Ideal (monoidChartTensor a f)) (_ : qD.IsPrime), Ideal.comap (Φ.toRingHom.comp (algebraMap (monoidChartTensor α h) (Localization (denominators α h (targetFace α h q))))) qD = q ∧ ∃ (eB : Localization.AtPrime q ≃+* Localization.AtPrime qD) (eHat : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q) ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime qD)) (Localization.AtPrime qD)), (∀ c : monoidChartTensor α h, eB (algebraMap (monoidChartTensor α h) _ c) = algebraMap (monoidChartTensor a f) _ (Φ (algebraMap (monoidChartTensor α h) _ c))) ∧ (∀ b : Localization.AtPrime q, eHat (algebraMap (Localization.AtPrime q) _ b) = algebraMap (Localization.AtPrime qD) _ (eB b)) ∧ (∀ n : ℕ, ∃ eN : (Localization.AtPrime q ⧸ (IsLocalRing.maximalIdeal (Localization.AtPrime q)) ^ n) ≃+* (Localization.AtPrime qD ⧸ (IsLocalRing.maximalIdeal (Localization.AtPrime qD)) ^ n), (∀ b : Localization.AtPrime q, eN (Ideal.Quotient.mk _ b) = Ideal.Quotient.mk _ (eB b)) ∧ (∀ x : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime qD)) n (eHat x) = eN (AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime q)) n x)))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Multiplicative notation for the additive monoids. Canonical helpers construct the specified face subgroups, residual quotient monoid, residual subgroup, fractions and transported character; no data is postponed. Uses the already published chart tensor, its base and monomial maps, localized chart and sharp quotient. The ring equivalence is A-linear by its explicit coefficient equation. Local and completed equivalences retain their canonical maps and all finite quotient evaluations. The accepted natural-language statement and split are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31a3378bd",
+  "group": "NA",
+  "result": "pass",
+  "note": "All clauses match the node: faces and h^-1F=G, unit groups, S/T sharp fs with finite free completions, eM/π/σ/eP/f fixed on generators, Φ with both monomial formulas (Φ([h r])=ε(r)a(r̄)=α(r) checks the twist direction), qD/eB/eHat/eN compatible. Records: only lean changed, statement verbatim, 17 declarations match. No hollow defs, theorem proof is only sorry, docstrings carry source place, blueprint id and all 11 steps. No compile run (no file changed). Maintainer note: the item imports its citer's module FormalMonoidExtensionModel (lem-trf-formal-monoid-extension-model cites the item in proof_deps), which closes a stage-3 import cycle. def-per-formal-monoid-extension-data owns the helpers existing:true on that same module, so the group cannot repair it. Move the helpers into a data module owned by that def node and repoint this item's import and stmt_deps."
+ }
+}

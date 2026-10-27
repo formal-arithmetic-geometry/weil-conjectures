@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-finite-free-complex-dual-pullback",
+ "kind": "statement",
+ "title": "Ordinary inverse image preserves termwise finite free complex duals",
+ "statement": "Let J and K be small sites, L a finite-limit-preserving left adjoint with right adjoint V, and F its algebraic inverse-image data [def-pur-constant-coefficient-inverse-image-data]. Let R and S be commutative ring sheaves and c:F.rings(R)→S any ring-sheaf map. Let P be degreewise ordinary module pullback along c. Let Free(E) mean that each E.X(n) is isomorphic to a free R-module sheaf on a finite set. Write H_R(E)=Hom(E,R[0]) and H_S(E)=Hom(E,S[0]) for the actual internal Hom complexes [def-pur-hom-complex]. For every isomorphism j:P(R[0])≅S[0], there exist an isomorphism u:P(R[0])≅S[0] and isomorphisms d_E:P(H_R(E))≅H_S(P(E)) for every termwise finite free E, contravariantly natural in every chain map between such E. With eta_R:R[0]→H_R(R[0]) and eta_S:S[0]→H_S(S[0]) the inverse evaluation-at-one maps [def-weil-pbc-ringed-completion-unit], P(eta_R) followed by d_R equals j followed by eta_S followed by H_S(u). The source E need not be bounded; the target of Hom is concentrated in degree zero. No flatness or invertibility of c is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "remark-pullback-internal-hom and lemma-tensor-product-pullback; algebraization.tex Tag 0A0E, lemma-derived-completion-koszul, finite dual calculation"
+ },
+ "stmt_deps": [
+  "def-pur-constant-coefficient-inverse-image-data",
+  "def-pur-hom-complex",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing canonical ordinary tensor comparison for module pullback. Evaluating the given complex isomorphism j in degree zero identifies pullback of the rank-one ring module with the target ring module. Transpose pulled-back evaluation with closedTransport, and use abstractMap to assemble a chain map on the actual Hom complexes. The generic construction needs only additivity, tensor naturality, and the closed adjunction; exactness and the source-shift conclusion of the enclosing library theorem are not used.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-hom-complex-pullback-shift",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a rank-one source, tensoring by that source is equivalent to the identity. Its tensor-Hom adjunction therefore has invertible counit, so uncurrying reflects and preserves invertibility. The pulled evaluation of the identity is invertible, hence so is its transpose on the target. Package the ordinary comparison as an additive natural transformation in the opposite source category. The sum of inclusions, inverse component comparisons, and projections supplies an inverse on any finite biproduct. Reindex a finite free basis by Fin(card T) and transfer invertibility along its free-module isomorphism; the same sum argument covers rank zero.",
+   "uses": [
+    "lem-coef-hom-kflat-into-kinjective-independent-coefficients",
+    "lem-sf-ringed-hom-complex-pullback-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a target complex concentrated in degree zero, the degree-n Hom product has only the factor with source index -n potentially nonzero. Its projection is an isomorphism by the product universal property. Pullback preserves zero objects and isomorphisms, so the same applies to the pulled target. The chain comparison followed by the surviving projection is pullback of the source projection followed by the finite-free module comparison. Thus each chain-map component is invertible. Postcompose the target by the specified j; naturality is inherited from abstractMap and the Hom bifunctor.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-to-single",
+    "lem-sf-ringed-hom-complex-pullback-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at one identifies precomposition by an endomorphism of the rank-one ring module with that endomorphism itself: sectionwise both are multiplication by its value at one, and the coefficient ring is commutative. Naturality of evaluation transports this identity to the degree-zero term of the ring complex; all other degrees are zero. Write a for j.inv followed by pullback of inverse evaluation, d at the ring complex, contravariant Hom of j.inv, and evaluation over S. This is an automorphism of S[0]. Set u=j followed by a. Self-duality of a and cancellation of the evaluation and j isomorphisms give exactly the required normalization. All auxiliary constructions and identities are proved; no additional statement is left open.",
+   "uses": [
+    "lem-sfb-ring-complex-endomorphism-self-dual"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-hom-complex-pullback-shift",
+  "def-pur-hom-complex",
+  "lem-coef-hom-kflat-into-kinjective-independent-coefficients",
+  "lem-sc-hom-complex-to-single",
+  "lem-sfb-ring-complex-endomorphism-self-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "remark-pullback-internal-hom and lemma-tensor-product-pullback; algebraization.tex Tag 0A0E, finite free dual calculation; categorical finite-biproduct extension and algebraic normalization of the unit comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of the dual of a finite free complex into the ring concentrated in degree zero",
+   "results": "Eight hits, including free-module pullback and Module.dual_free; none states complex dual pullback with its evaluation normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free complex dual commutes with inverse image of sheaves of modules",
+   "results": "Eight free-module transport and pullback hits; none gives finite free complex duality or its unit normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dual\"",
+   "results": "Twelve tactic-translation hits; no sheaf complex duality comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*pullback|pullback.*Koszul|homObj.*pullback|pullback.*homObj",
+   "results": "Zero Mathlib hits. Project has a natural Hom-complex comparison for ringed module pullbacks and a finite free chart lemma for concrete continuous site maps. Neither gives this general topos inverse-image dual isomorphism and evaluation normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulDualTowerPullback",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Finite augmented Koszul calculation in the complete-object restriction argument: Ordinary inverse image preserves termwise finite free complex duals.",
+   "via": [
+    "lem-sfb-completed-koszul-dual-tower-pullback",
+    "lem-sfb-strict-completed-koszul-tower-pullback",
+    "lem-sfb-exact-completed-koszul-pullback",
+    "lem-sfb-adic-stratum-completion-unit",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeComplexDualPullback",
+  "file": "lean/Sheaf/Paper/FiniteFreeComplexDualPullback.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.finiteFreeComplexDualPullback",
+  "statement": "theorem finiteFreeComplexDualPullback\n    {C D : Type v} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {L : Sheaf J (Type v) ⥤ Sheaf K (Type v)}\n    (F : InverseImageData L) (V : Sheaf K (Type v) ⥤ Sheaf J (Type v))\n    (adj : L ⊣ V) [PreservesFiniteLimits L]\n    {R : Sheaf J CommRingCat.{v}} {S : Sheaf K CommRingCat.{v}}\n    (c : F.rings.obj R ⟶ S)\n    (j : ((pull F c).mapHomologicalComplex (.up ℤ)).obj\n      (ringedSiteRingComplex R) ≅ ringedSiteRingComplex S) :\n    let P := (pull F c).mapHomologicalComplex (.up ℤ)\n    let Free := fun E : Cx R ↦ ∀ n : ℤ, ∃ (T : Type v) (_ : Fintype T),\n      Nonempty (E.X n ≅ SheafOfModules.free (R := siteModuleRings R) T)\n    let HR := (homComplexFunctor (R := R)).flip.obj (ringedSiteRingComplex R)\n    let HS := (homComplexFunctor (R := S)).flip.obj (ringedSiteRingComplex S)\n    ∃ (u : P.obj (ringedSiteRingComplex R) ≅ ringedSiteRingComplex S)\n      (d : ∀ (E : Cx R) (_ : Free E), P.obj (HR.obj (op E)) ≅ HS.obj (op (P.obj E))),\n      (∀ (E E' : Cx R) (hE : Free E) (hE' : Free E') (f : E' ⟶ E),\n        P.map (HR.map f.op) ≫ (d E' hE').hom =\n          (d E hE).hom ≫ HS.map (P.map f).op) ∧\n      (∀ hR : Free (ringedSiteRingComplex R),\n        P.map (ringedHomUnitEvaluationIso R (ringedSiteRingComplex R)).inv ≫\n            (d (ringedSiteRingComplex R) hR).hom =\n          j.hom ≫ (ringedHomUnitEvaluationIso S (ringedSiteRingComplex S)).inv ≫\n            HS.map u.hom.op)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091703-L-3364804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T111835-L-1749370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

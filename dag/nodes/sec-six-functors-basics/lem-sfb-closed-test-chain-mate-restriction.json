@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-closed-test-chain-mate-restriction",
+ "kind": "statement",
+ "title": "Closed-test chain mate and the normalized derived restriction",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and on every small pro-etale site put $\\Lambda_Y=p_Y^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Use internal $\\Lambda_Y$-modules [sk-def-sfb-module-objects], their exact inverse images and ordinary unbounded derived direct images computed on K-injectives [sk-def-sfb-module-derived-pushpull]. All sites and section values are taken in a common sufficiently large universe. Let $A$ be a commutative ring, $\\mathfrak a\\subseteq A$ an ideal, $U=\\operatorname{Spec}A$, and $s:Z=\\operatorname{Spec}(A/\\mathfrak a)\\hookrightarrow U$. Let $v$ be the affine ind-etale closed-site lift [def-exc-closed-site-lift]. Let $V\\to Z$ be an affine ind-etale object such that $V$ and $B=v(V)$ are w-contractible [sk-def-pe-wlocal]. Let $f:X\\to U$ be a morphism of affine schemes and put $X_Z=X\\times_UZ$, with projections $h:X_Z\\to X$, $f_Z:X_Z\\to Z$. Put $T=X\\times_UB$, $T_0=X\\times_UV$ and $a:T_0\\hookrightarrow T$; products mean scheme fibre products [def-pc-fibre-product]. Write $\\eta_b,\\varepsilon_b$ for the specified unit and counit of $b^*\\dashv b_*$, and $\\theta:f_Z^*s^*\\cong h^*f^*$ for canonical pullback composition. Define\n$$\\operatorname{Ex}^0_F=(f_Z)_*(h^*\\varepsilon_{f,F}\\circ\\theta_{f_*F})\\circ\\eta_{f_Z,s^*f_*F}:s^*f_*F\\to(f_Z)_*h^*F$$\n[def-weil-pbc-adjunction-square-exchange]. Under the inverse of the actual closed unit-section isomorphism $(f_*F)(B)\\to(s^*f_*F)(V)$ and the direct-image section formulas, $\\operatorname{Ex}^0_F(V)$ is precisely\n$$F(T)\\xrightarrow{\\eta_{a,F|_T}(T)}(a^*(F|_T))(T_0)=(h^*F)(T_0).$$\nLet $\\mathcal I$ be a K-injective representative of a bounded-below $K\\in D(\\operatorname{Mod}_{\\Lambda_X})$, let $j:h^*\\mathcal I\\to\\mathcal J$ be a K-injective resolution, and set $e=(f_Z)_*j\\circ\\operatorname{Ex}^0_{\\mathcal I}$. In the ordinary unbounded module derived categories [sk-def-sfb-derived-categories], $Q(e)$ represents the derived exchange whose adjunct under $f_Z^*\\dashv R(f_Z)_*$ is $h^*\\varepsilon_f\\circ\\theta$. Its evaluation, with the actual closed unit and localized section identities, is\n$$Q\\bigl(\\mathcal I(T)\\xrightarrow{\\eta_a}(h^*\\mathcal I)(T_0)\\xrightarrow{j(T_0)}\\mathcal J(T_0)\\bigr).$$\nUnder the canonical K-injective section-localization identifications this arrow is the derived unit for $a^*\\dashv Ra_*$ followed by $R\\Gamma(T,Ra_*(-))\\cong R\\Gamma(T_0,-)$. The latter composition is normalized by $\\Gamma(T,a_*\\mathcal J|_{T_0})=\\Gamma(T_0,\\mathcal J|_{T_0})$ degreewise. The localized adjunctions and the derived composition comparisons preserve the specified units and counits. Neither exchange nor restriction is asserted invertible.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BL, lemma-closed-immersion-affines-apply; derived.tex Tag 09T5, lemma-derived-adjoint-functors, and sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition; agent unit–counit calculation, returned proof steps 5–7."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-exc-closed-site-lift",
+  "sk-def-pe-wlocal",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-adjunction-square-exchange",
+  "def-sfb-proetale-inverse-image-unit-section",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-right-derived-functor",
+  "def-pur-localized-ringed-site",
+  "def-sfb-closed-test-kinjective-section-maps",
+  "def-sfb-closed-test-derived-exchange-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-closed-test-unit-evaluation] to pass to section-ring modules, preserving the specified inverse-image/direct-image adjunctions. In particular $(f_*F)(B)=F(T)$ and $((f_Z)_*h^*F)(V)=(h^*F)(T_0)$. The source identification is $u^{-1}$, where $u:(f_*F)(B)\\to(s^*f_*F)(V)$ is the actual unit section and is invertible. Thus it suffices to calculate $\\operatorname{Ex}^0_F(V)u(x)$ for $x\\in F(T)$; no inverse of exchange is used.",
+   "uses": [
+    "lem-sfb-closed-test-unit-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply (1)–(2); actual unit normalization supplied by the cited node."
+   }
+  },
+  {
+   "text": "Expand the specified square mate [def-weil-pbc-adjunction-square-exchange]. By [def-sfb-proetale-inverse-image-unit-section], unit insertion first gives $f_Z^{-1}(s^{-1}x)$ on $T_0$. The geometric pullback composition [def-sfb-module-upper-star-comp] identifies this with $h^{-1}(f^{-1}x)$, with the canonical fibre-product pasting. For clarity, the counit here has a concrete description: in the inverse-image colimit [def-weil-proetale-inverse-image], a generator $(W,\\phi:L\\to X\\times_UW,y\\in F(X\\times_UW))$ is sent by $\\varepsilon_f$ to $F(\\phi)y$. Indeed these maps form the adjunct of the identity of $f_*F$. For $W=B$, $L=T$, $\\phi=1_T$, the value is $x$. After $h^{-1}$ and restriction to $T_0$ it is therefore the inverse-image unit section of $x$ for $a:T_0\\to T$. This proves $\\operatorname{Ex}^0_F(V)u(x)=\\eta_{a,F|_T}(T)(x)$. The coefficient isomorphisms from the point are the ones in the specified module adjunction, so the calculation is linear, not just set-valued.",
+   "uses": [
+    "def-weil-pbc-adjunction-square-exchange",
+    "def-sfb-proetale-inverse-image-unit-section",
+    "def-sfb-module-upper-star-comp",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL together with the explicit unit/counit construction of the inverse-image adjunction; agent section calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-closed-test-chain-exchange-normalization] to the supplied K-injective representatives and resolution. Its ordinary construction is the fixed chainMate of [def-sfb-closed-test-chain-mate-data]; its conclusion is the first conjunct.",
+   "uses": [
+    "lem-sfb-closed-test-chain-exchange-normalization",
+    "def-sfb-closed-test-chain-mate-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND and 09T5, lemma-pre-derived-adjoint-functors-general and lemma-derived-adjoint-functors; normalized Hom representatives."
+   }
+  },
+  {
+   "text": "Use closed_test_mate_sections and cancel the inverse/hom of pushEvaluation to prove evaluatedExchange = testSectionUnit. Apply NatTrans.mapHomologicalComplex to this natural-transformation equality and compose with the same map of j. This proves the middle equality of chain maps directly, before localization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6F, lemma-unbounded-cohomology-of-open; termwise use of step 2 with the cited exact evaluation models."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-closed-test-chain-unit-normalization]. Its explicit section unit and final-object comparisons unfold to sectionChain and globalLocalizationModel, giving the third conjunct.",
+   "uses": [
+    "lem-sfb-closed-test-chain-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; derived.tex Tag 09T5 for the normalized derived adjunct."
+   }
+  },
+  {
+   "text": "For closed_test_localized_adjunctions, first prove the conjugacy identities for any commutative square, without localization hypotheses. Conjugation reverses transitivity and preserves inverses. Apply CondensedRing.conjugateIsoEquiv_upperStarComp to the two ordinary compositors in [def-sfb-module-upper-star-comp]; equality induction identifies the conjugate of the middle equality transport. This gives directSquare as the conjugate of ordinarySquare. For right-derived composition use the source-library theorem Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv on the specified ordinary adjunctions. Right derivation preserves composition of natural isomorphisms; equality induction again treats the middle transport, yielding derivedDirectSquare as the conjugate of square. Expanding the exact localization compositors identifies square with Functor.mapDerivedCategorySquareIso ordinarySquare, hence the test comparison is derivedTestPullbackComposition. These are the actual constructions of [def-sfb-closed-test-derived-exchange-maps] and [def-sfb-closed-test-kinjective-section-maps]. Specialize to the test square and to each of the last three displayed squares. Every helper in this calculation is proved in Lean. No localized-model coherence theorem or separate derived-composition normalization theorem is needed for this clause.",
+   "uses": [
+    "def-sfb-module-upper-star-comp",
+    "def-sfb-closed-test-derived-exchange-maps",
+    "def-sfb-closed-test-kinjective-section-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E; derived.tex Tag 09T5. The existing source-library conjugacy and right-derived compositor theorems supply the formal normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-test-unit-evaluation",
+  "def-weil-pbc-adjunction-square-exchange",
+  "def-sfb-proetale-inverse-image-unit-section",
+  "def-sfb-module-upper-star-comp",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-closed-test-chain-exchange-normalization",
+  "def-sfb-closed-test-chain-mate-data",
+  "lem-sfb-closed-test-chain-unit-normalization",
+  "def-sfb-closed-test-derived-exchange-maps",
+  "def-sfb-closed-test-kinjective-section-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BL unit-section evaluation, combined with derived.tex Tags 0FND, 09T5, 08BJ and sites-cohomology.tex Tags 08FI, 0D6E, 0D6F; explicit mate and localized derived-unit calculation. Stage-3 F4: step 7 is proved by ordinary compositor conjugacy, the source-library right-derived compositor conjugacy theorem, and equality induction; steps 1-6 remain the plans for the two retained holes. Stage-3 S7: steps 3 and 5-6 split into two independent normalization statements. Step 4 is proved by cancellation of pushEvaluation and functoriality on complexes; the main conjunction is assembled in Lean. The ordinary section theorem remains unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate for a closed affine pro etale square on K injective complexes evaluated at a lifted test is the unit section map followed by a target resolution",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, AlgebraicGeometry.AffineSpace.homOfVector_over, StandardEtalePair.homEquiv, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: General derived adjunction unit/counit and mate declarations are tools; none evaluates the closed lifted test mate on module sections or identifies the resulting chain arrow with normalized derived restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: General derived adjunction unit/counit and mate declarations are tools; none evaluates the closed lifted test mate on module sections or identifies the resulting chain arrow with normalized derived restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "(mate|exchange|baseChange).*(KInjective|rightDerived|proetale)|(KInjective|rightDerived|proetale).*(mate|exchange|baseChange)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: General derived adjunction unit/counit and mate declarations are tools; none evaluates the closed lifted test mate on module sections or identifies the resulting chain arrow with normalized derived restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed pro etale derived base change mate represented by ordinary unit counit chain map equals derived restriction with canonical derived composition normalization",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived_counit, HomologicalComplex.restrictionMap_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: General derived adjunction unit/counit and mate declarations are tools; none evaluates the closed lifted test mate on module sections or identifies the resulting chain arrow with normalized derived restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluate underived closed test base change mate on a section x then apply the K injective resolution gives the canonical derived restriction map",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: General derived adjunction unit/counit and mate declarations are tools; none evaluates the closed lifted test mate on module sections or identifies the resulting chain arrow with normalized derived restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "1 hits: CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract derived adjunction or sheaf pullback tools, not the closed pro-etale test-section calculation and normalized restriction identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a derived base change mate equals the derived adjunction unit followed by global sections composition",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derivedη_fac_app, IsBaseChange.toDualBaseChange_tmul, CategoryTheory.Adjunction.derivedη, CategoryTheory.rightAdjointMate_comp_evaluation, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.evaluationAdjunctionRight_unit_app",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract derived adjunction or sheaf pullback tools, not the closed pro-etale test-section calculation and normalized restriction identification."
+  },
+  {
+   "tool": "grep",
+   "query": "(mate|exchange|baseChange).*(KInjective|rightDerived|proetale)|(KInjective|rightDerived|proetale).*(mate|exchange|baseChange)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract derived adjunction or sheaf pullback tools, not the closed pro-etale test-section calculation and normalized restriction identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed pro etale base change adjunction mate on sections of a K injective complex is the canonical derived restriction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract derived adjunction or sheaf pullback tools, not the closed pro-etale test-section calculation and normalized restriction identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit counit formula for adjunction square exchange evaluated on sheaf sections is pullback restriction and stays the same after K injective derived localization",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract derived adjunction or sheaf pullback tools, not the closed pro-etale test-section calculation and normalized restriction identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-test-derived-exchange-model",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 5, 6, 7: Closed-test chain mate and the normalized derived restriction",
+   "via": [
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-test-chain-mate-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported metadata. Split the explicit ordinary section calculation, normalized derived Hom calculation, chain evaluation, localized unit, and derived global-section compositor into seven steps. Reused existing closed-test and general adjunction/localization nodes; no new node is needed. All cited statements were read, every citation has a verbatim quotation, and no Lean was written or compiled.",
+  "blueprint": "The inherited ancestry has no blueprint node (blueprint_refs ancestor prints None). The proof realizes the inherited from.place: paragraph (3), closed-base-change mate identified with restriction on the integral root tower, specifically returned steps 5–7. Searches for mate and closed test found no blueprint node stating this closed-test normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalized derived Hom bijection, used for the specified exact module adjunctions; the unit route has no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized-universes",
+    "why": "Generic preservation of K-injectives under site localization in arbitrary coefficient universes, needed for the actual localized resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint criterion, applied to a_* and used to compute section composition on the identity resolution."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ringed-topos composition theorem with representative normalization, applied to a and global sections."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic exact-left-adjoint composition normalization, ensuring that the geometric compositors preserve specified units and counits."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-pur-kinjective-restrict-localized-universes",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-1bdd1220a",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-1bdd1220a (reviewer sub-agent of L); spot-checked: I read the item, which has no new nodes, all 7 steps and every cited statement, plus Stacks 09BL (proetale l.4852), 09T5, 0FND, 08BJ, 08FI, 0D6E and 0D6F. The statement, stmt_deps, unit and blueprint are unchanged. proof_deps equals the union of uses, and a closure over 549 nodes shows no cycle. There is no re-split note and no SGA. Step 2 is the explicit mate calculation: unit section s^{-1}x, then θ (the conjugate of the lower-star composition) sending iterated unit sections to iterated unit sections, then the counit triangle identity at B, giving η_a(x) on T_0. It is correct and acceptable as elementary. Step 3 gives the transpose (f_Z)_*j∘Ex^0=e, and the derived counit Q(ε_I) via the resolving-adjunction node, whose hypotheses hold because f_Z^* is exact. Step 5: I_T and J_0 are K-injective through the section-ring equivalence, j_0 is a quasi-isomorphism, and the derived unit is the class of a_*j_0∘η_a; it never claims a^*I_T is K-injective. Step 6: a_*J_0 is K-injective because a^* is an exact left adjoint, and the ringed-topos composition with an identity resolution gives Γ(T,a_*J_0)=J(T_0). Step 7 takes the localized unit/counit coherence from the statements of the sibling node and the generic composition node. Edge cases checked: ideal 0, ideal A (empty T_0), f=id, K=0. I accept the five declared generic tool_uses. Maintainer note: the qcqs node lem-sfb-nonaffine-closed-test-exchange-identification (unit sk-prop-sf-comp-coherence) proves the same chain identification in its steps 6–8; it is off-route here, but the parent derived-exchange-model is nearly a special case of it."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedTestChainMateRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.closed_test_chain_mate_restriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.closed_test_mate_sections",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.closed_test_chain_mate_restriction",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.closed_test_localized_adjunctions"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedTestChainMateRestriction.lean",
+  "statement": "theorem closed_test_chain_mate_restriction (A : Type u) [CommRing A] (a : Ideal A) {X XZ : Scheme.{u}} [IsAffine X] (f : X ⟶ Spec (.of A)) (h : XZ ⟶ X) (fZ : XZ ⟶ Spec (.of (A ⧸ a))) (w : IsPullback h fZ f (closedMap A a)) (V : (Spec (.of (A ⧸ a))).AffineProEt) [IsWContractibleRing Γ(V.left, ⊤)] [IsWContractibleRing Γ((liftedTest A a V).left, ⊤)] (K : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (L : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) [L.IsKInjective] (e : DerivedCategory.Q.obj L ≅ K.obj) (J : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology XZ) Ab.{u + 1}) (condensedRingObj Λ XZ)) ℤ) [J.IsKInjective] (j : (complexes (CondensedRing.upperStar Λ h)).obj L ⟶ J) [QuasiIso j] : HEq (DerivedCategory.Q.map (chainMate Λ w.toCommSq L J j) ≫ pushModel Λ fZ ((CondensedRing.upperStar Λ h).mapDerivedCategory.obj K.obj) J (pullRepresentative Λ h K.obj L e J j)) ((CondensedRing.upperStar Λ (closedMap A a)).mapDerivedCategoryFactors.inv.app ((complexes (CondensedRing.lowerStar Λ f)).obj L) ≫ (CondensedRing.upperStar Λ (closedMap A a)).mapDerivedCategory.map (pushModel Λ f K.obj L e) ≫ (ClosedTestDerivedExchangeModel.exchange Λ w.toCommSq).app K.obj) ∧ evaluatedChainMate Λ A a w V L J j = sectionChain Λ A a w V L J j ∧ HEq (DerivedCategory.Q.map (sectionChain Λ A a w V L J j) ≫ globalLocalizationModel Λ (testFibre fZ (closedTest A a V)) ((CondensedRing.upperStar Λ h).mapDerivedCategory.obj K.obj) J (pullRepresentative Λ h K.obj L e J j)) (globalLocalizationModel Λ (testFibre f (liftedTest A a V)) K.obj L e ≫ (ClosedTestDerivedExchangeModel.restriction Λ (testArrow A a w V)).app ((CondensedRing.upperStar Λ (testFibre f (liftedTest A a V)).hom).mapDerivedCategory.obj K.obj) ≫ (condensedModuleSections Λ (testFibre fZ (closedTest A a V)).left).rightDerivedFunctor.map ((derivedTestPullbackComposition Λ A a w V).inv.app K.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The ordinary section identity and localized adjunction compatibility are stated as closed_test_mate_sections and closed_test_localized_adjunctions in the same module. The primary declaration states the derived representative, its chain evaluation, and its normalized derived restriction. Existing canonical exchange and restriction definitions are reused; no invertibility of these arrows is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c6b48810",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Re-delivery after a records-only RETURN (4560c431fba1). Lean module byte-identical (sha256 457b915d…). Item record differs only in stmt_deps: theorem node lem-sfb-closed-test-kinjective-section-models replaced by new def-sfb-closed-test-kinjective-section-maps (existing:true on unchanged Sheaf.Paper.ClosedTestKInjectiveSectionModels) plus landed def-sfb-closed-test-derived-exchange-maps (snapshot = live record; owns adj/exchange/restriction/sectionsOver/square). By grep the item uses exactly the 15 recorded defs. All bodies are real constructions with no use of closed_test_kinjective_section_models or a choice from it. pushModel signature verbatim. The new node's statement describes the constructions without invertibility claims. Same double-listing pattern as the landed derived-exchange-maps owner. No cycle. Substance re-read: hypotheses (Λ, A, a, s = Spec.map mk, V, both IsWContractibleRing, IsAffine X, IsPullback, K Plus, K-injective L/J, quasi-iso j) match the node; Ex0 = squareExchange with upperStarComp θ; u-form section clause; derived-exchange, chain-equality and normalized-restriction clauses; conjugacy unit/counit clause; no invertibility asserted; edge cases a=0, a=A, empty V, f=id, K=0. 3 sorries; docstrings and proof steps present; lean.statement verbatim. Report has a Worker report and a Second reading section. No compile (no file changed). Advisories: condensedModuleSections owner cited only transitively; base-era closedSiteLiftInclusion (owned by a theorem node) used in the owned def bodies."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-13773",
+  "group": "S7",
+  "result": "fix",
+  "landing": "20261025T123833-L-1907732",
+  "kind": "interface",
+  "note": "independent cc review: Data module declaration blocks vs published item (verbatim); new sorry statements vs item conjuncts 1/3 (byte-identical); node stmt_deps vs owners of names used; sandbox run_set + #print axioms"
+ }
+}

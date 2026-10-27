@@ -1,0 +1,156 @@
+{
+ "id": "lem-pur-system-pullback-compositor-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of the section-normalized system pullback compositor",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbb Q_\\ell$ [def-weil-l-adic-coefficient-extension], and schemes $X,Y,Z$ with morphisms $f:X\\to Y$ and $g:Y\\to Z$ [def-weil-scheme-morphism-properties]. Use the strict coefficient-system derived categories $\\mathscr D_W=D(\\mathscr S_W)$, the specified pullbacks $P_h$, and any simultaneous operations $o$ and section-normalized compositors $c$ of [def-sf-integral-system-operations]. For $n\\geq0$ let $e_{W,n}$ be actual derived evaluation at the positive quotient $A_{n+1}$ [def-coef-ringed-sequence-site]. Let $p_{h,n}$ be the intrinsic finite pullback and $a_{f,g,n}:p_{gf,n}\\xrightarrow{\\sim}p_{g,n}p_{f,n}$ its canonical compositor [def-sp-finite-intrinsic-open-square]. Let $\\epsilon_{h,n}:P_h e_{U,n}\\xrightarrow{\\sim}e_{V,n}p_{h,n}$ denote the specified cochain-normalized evaluation isomorphism [def-pur-completed-pullback-tensor-comparison], with functors written in diagrammatic order. Then for every $N\\in\\mathscr D_Z$,\n$$e_{X,n}(c_{f,g,N}^{-1});\\epsilon_{gf,n,N}=\\epsilon_{f,n,P_gN};p_{f,n}(\\epsilon_{g,n,N});a_{f,g,n,e_{Z,n}N}^{-1}.$$\nHere semicolons denote composition in written order. Both sides go from $e_{X,n}(P_fP_gN)$ to $p_{gf,n}(e_{Z,n}N)$. No normalization, finite-Tor, constructibility, or geometric finiteness condition is imposed. The equation compares the specified maps, not arbitrary lifts of finite evaluations.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-push-pull-composition-modules (03D8), lemma-derived-pullback-composition (0D6D); agent refinement spelling out the last finite pullback identification in the parent projection-evaluation proof."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-coef-ringed-sequence-site",
+  "def-sf-integral-system-operations",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary module-sheaf evaluation square for the section-normalized compositor, including transport through the unit-normalized intrinsic level comparison. This is the only remaining split-off obligation; it contains no complexes or localization.",
+   "uses": [
+    "lem-pur-ordinary-system-pullback-compositor-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify c.pullComp with mapDerivedCategoryNatIso(c.ordinaryPull) followed by mapDerivedCategoryCompIso: use localization extensionality, cancel the exact-functor factors, and compare c.pullComp_model with mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_hom_app_factors. Identify each specified derived evaluation with mapDerivedCategorySquareIso of its ordinary square by its unique cochain normalization.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exact derived-square composition to the ordinary square. Substitute the identified derived compositor and evaluations; the intrinsic finite derived compositor is defined by exactly the same localization. A generic categorical square calculation precomposes with the inverse system compositor and postcomposes with the inverse intrinsic compositor, cancelling both pairs to obtain the required inverse orientation.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition",
+    "def-sp-finite-intrinsic-open-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ordinary-system-pullback-compositor-evaluation",
+  "def-sf-integral-system-operations",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pod-derived-exact-square-composition",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "03D8 and 0D6D; ordinary square followed by the proved exact derived-square composition theorem and categorical cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation of inverse image composition comparison for strict coefficient systems",
+   "results": [
+    "InverseSystem.map_map",
+    "InverseSystem.globalEquiv_naturality",
+    "InverseSystem.globalEquiv_compatibility",
+    "AdicCompletion.transitionMap_comp_eval",
+    "Profinite.NobelingProof.GoodProducts.smaller_factorization",
+    "InverseSystem.piLTLim_symm_apply",
+    "Profinite.NobelingProof.GoodProducts.max_eq_eval_unapply",
+    "Profinite.NobelingProof.GoodProducts.range_equiv_factorization"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No specialized comparison for the project coefficient-system functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": [
+    "CategoryTheory.mateEquiv_vcomp"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Generic pasting identity; it does not identify the project section and cochain normalization maps."
+  },
+  {
+   "tool": "grep",
+   "query": "pullComp.*evaluation|compositor.*evaluation",
+   "results": [],
+   "date": "2026-10-26",
+   "verdict": "No Mathlib specialization. Local ordinaryCompositionEvaluation is reused for the ordinary part; NormalizedPullbackCompositionTransport uses different named compositors and has additional hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a left adjoint composition comparison agrees with the comparison of evaluated functors",
+   "results": [
+    "CategoryTheory.leftAdjointMate_comp_evaluation",
+    "CategoryTheory.evaluationLeftAdjoint",
+    "CategoryTheory.evaluationAdjunctionLeft",
+    "CategoryTheory.evaluationAdjunctionRight",
+    "CategoryTheory.Adjunction.leftAdjointCompNatTrans",
+    "CategoryTheory.Functor.isLeftAdjoint_comp",
+    "CategoryTheory.Comonad.comparison_map_f",
+    "CategoryTheory.evaluationIsLeftAdjoint"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction constructions, no equality of the specified section-normalized and intrinsic finite compositors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemProjectionFormulaCoherence",
+  "date": "2026-10-26",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Strict-system projection finite-evaluation proof: the normalized pullback compositor supplies the last finite pullback identification.",
+   "via": [
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemPullbackCompositorEvaluation",
+  "file": "lean/Sheaf/Paper/SystemPullbackCompositorEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.systemPullbackCompositorEvaluation",
+  "statement": "theorem systemPullbackCompositorEvaluation\n    (o : Operations l E) (c : Compositors l E o)\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ) (N : System l E Z) :\n    (coefficientSequenceDerivedEvaluation l E X n).map ((c.pullComp f g).inv.app N) ≫\n      (pullbackTensorDerivedEvaluation l E (f ≫ g) n).hom.app N =\n    (pullbackTensorDerivedEvaluation l E f n).hom.app ((pull l E g).obj N) ≫\n      (finiteDerivedPullback l E n f).map\n        ((pullbackTensorDerivedEvaluation l E g n).hom.app N) ≫\n      (sfIntrinsicDerivedPullbackComp (Padic.coefficientExtensionRing l E (n + 1))\n        f g).inv.app ((coefficientSequenceDerivedEvaluation l E Z n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T065934-L-3305155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T123538-L-2319149",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

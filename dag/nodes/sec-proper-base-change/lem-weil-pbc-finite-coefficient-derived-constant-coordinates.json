@@ -1,0 +1,133 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Localization (099R), comparison (099Y, 099V, 09AL); constant-coefficient module sheafification, sites-modules.tex Tags 03CY and 093J."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "agent": "G7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 03CY, 093J and 099R: derived scalar cancellation, natural module-sheafification comparison and localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on a localized ringed site with constant coefficients have an equivalent derived category to module valued sheaves and constant complexes agree",
+   "results": "8 hits: constantSheaf, Sheaf.isConstant_iff_mem_essImage, isConstant_of_iso, isConstant_iff_of_equivalence, SheafOfModules and its constructor. No derived ringed-slice coordinate comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing project exact derived functors and module sheafification."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: restriction functor, additivity, object and map formulas.",
+   "date": "2026-10-27",
+   "verdict": "These provide scalar restriction; construct the slice and constant-complex comparisons from them."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ee]quivalence|[Ee]quivalence.*mapDerivedCategory",
+   "results": "0 Mathlib hits. Project ExactFunctor.lean supplies Equivalence.mapDerivedCategory and the induced equivalence instance.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project exact-equivalence construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicEtaleLevelDescent",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-etale-level-descent",
+   "place": "Single finite-level descent, coefficient-coordinate and bounded-origin steps",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-etale-stalk-data",
+    "lem-weil-pbc-finite-perfect-adic-stalk-models",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-coefficient-derived-constant-coordinates",
+ "title": "Derived constant realization in fixed coordinates",
+ "statement": "Let X be any scheme, B any commutative ring in its universe, R a commutative ring sheaf on X_proet, psi:constant(B)->R an isomorphism and W an X-etale chart. For every small B-derived object F, the fixed-coordinate chart restriction [def-weil-pbc-finite-coefficient-slice-restriction] of derived scalar extension along psi of its constant realization [def-weil-pbc-finite-perfect-adic-tower-data] is isomorphic to the constant module-valued complex on W.left of its coefficient universe lift [def-weil-pbc-finite-perfect-adic-etale-level-data]. No finite ring, boundedness, cover or nonempty chart is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-adic-etale-level-data"
+ ],
+ "proof": [
+  {
+   "text": "Restriction along psi and its inverse are inverse exact equivalences; the sectionwise restriction-composition isomorphisms give the unit and counit. On derived categories, uniqueness of left adjoints identifies actual derived scalar extension with the inverse equivalence. Thus extension followed by restriction cancels.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafification unit induces a natural map from the fixed-module constant sheaf to restriction of koszulConstantFunctor. It is invertible by the locally bijective scalar unit. Naturality is the naturality of the module-sheafification unit, checked after precomposition with toSheafify.",
+   "uses": [
+    "new-lem-pur-intrinsic-lisse-fixed",
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the constant comparison by localization, which preserves constant sheaves. Apply the exact-derived composition and natural-isomorphism APIs, retaining the small coefficient lift. This is valid for unbounded complexes.",
+   "uses": [
+    "def-weil-pbc-finite-coefficient-slice-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "new-lem-pur-intrinsic-lisse-fixed"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientDerivedConstantCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientDerivedConstantCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficient_derived_constant_coordinates",
+  "statement": "theorem finiteCoefficient_derived_constant_coordinates\n    (X : Scheme.{t}) (B : Type t) [CommRing B]\n    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})\n    (ψ : adicConstantRing X B ⟶ R) (hψ : IsIso ψ) (W : X.Etale)\n    (F : DerivedCategory (ModuleCat.{t} B)) :\n    Nonempty ((finiteCoefficientSliceRestriction X B R ψ W).mapDerivedCategory.obj\n      ((completedAdicDerivedChange X ψ).obj ((finitePerfectAdicDerivedConstant X B).obj F)) ≅\n      (constantSheaf (ProEt.topology W.left)\n        (ModuleCat.{t + 1} (ULift.{t + 1} B))).mapDerivedCategory.obj\n          ((finitePerfectAdicAlgebraLift B).obj F))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T123442-L-2300780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T123442-L-2300780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,280 @@
+{
+ "id": "lem-per-field-extension-generic-reducedness",
+ "kind": "statement",
+ "title": "Generic reducedness is invariant under characteristic-zero field extension",
+ "statement": "Let $F$ be a field of characteristic zero, let $E/F$ be any field extension [def-pc-field-extension], and let $A$ be a commutative $F$-algebra [def-weil-pbc-algebra-hom-quotient]. Give $E\\otimes_F A$ [def-weil-pbc-module-tensor-product] the multiplication $(e\\otimes a)(e\\prime\\otimes a\\prime)=ee\\prime\\otimes aa\\prime$. A prime ideal is minimal if it contains no strictly smaller prime ideal. A ring $T$ is called generically reduced if, for every minimal prime $\\mathfrak p$ of $T$, its localization $T_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is reduced, meaning that $x^m=0$ for an integer $m\\geq1$ implies $x=0$. Then $A$ is generically reduced if and only if $E\\otimes_F A$ is generically reduced. No finite generation, Noetherianity, algebraicity of $E/F$, or nonzero-algebra hypothesis is imposed; for the zero algebra the condition is vacuous.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00I4 (lemma-perfect-reduced) and 00HS (lemma-flat-going-down), combined generic-local consequence with faithfully flat descent as in the proof of 00HS; not a verbatim statement of either tag."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=E\\otimes_F A$ and $i:A\\to B$, $a\\mapsto1\\otimes a$. If $A=0$, bilinearity makes every pure tensor zero, hence $B=0$; both spectra have no primes, so both generic-reducedness conditions are vacuous. We may therefore treat the case $A\\ne0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), bilinearity and generation by pure tensors; zero-ring case"
+   }
+  },
+  {
+   "text": "By field-extension base change, $A\\to A\\otimes_F E$ is faithfully flat. The switch $a\\otimes e\\mapsto e\\otimes a$, with inverse $e\\otimes a\\mapsto a\\otimes e$, identifies this with $i:A\\to B$: the maps respect the bilinear relations and multiplication. Thus $i$ is faithfully flat and, in particular, flat.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HI (lemma-flat-base-change), 00HP (lemma-ff), and 00HB (definition-flat); field-extension base change"
+   }
+  },
+  {
+   "text": "For any minimal prime $\\mathfrak q$ of $B$, let $\\mathfrak p=i^{-1}(\\mathfrak q)$. This is prime since $i$ preserves products and $1$. It is minimal: if a prime $\\mathfrak p_0$ were strictly smaller, going down for the flat map $i$ would give a prime $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to $\\mathfrak p_0$. Minimality forces $\\mathfrak q_0=\\mathfrak q$, contradicting their different contractions.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS (lemma-flat-going-down), minimal-prime consequence"
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak p$ of $A$ set $S=A\\setminus\\mathfrak p$ and $C=E\\otimes_F A_{\\mathfrak p}$. Directly from the fraction and bilinearity relations there are inverse ring maps\n$$C\\longrightarrow i(S)^{-1}B,\\quad e\\otimes(a/s)\\longmapsto (e\\otimes a)/i(s),\\qquad\n i(S)^{-1}B\\longrightarrow C,\\quad b/i(s)\\longmapsto j(b)(1\\otimes(s/1))^{-1},$$\nwhere $j(e\\otimes a)=e\\otimes(a/1)$. For well-definedness, a fraction relation $u(as^{\\prime}-a^{\\prime}s)=0$ becomes the same relation with invertible $i(u)$; the tensor relations are bilinearity. The composites fix pure tensors and inverses of denominators, which generate the respective rings. In particular $j(b)=0$ if and only if $i(s)b=0$ for some $s\\notin\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 07JZ (definition-localization-module), and 00CX (lemma-tensor-product); explicit tensor-localization fraction calculation"
+   }
+  },
+  {
+   "text": "Assume $A$ generically reduced, and take a minimal $\\mathfrak q\\subset B$. Its contraction $\\mathfrak p$ is minimal by step 3, so $A_{\\mathfrak p}$ is reduced by the hypothesis. The field $F$ is perfect because it has characteristic zero; $E$ is reduced because it is a field. The perfect-field reduced tensor theorem gives reducedness of $C=E\\otimes_F A_{\\mathfrak p}$. Now if $x=b/t\\in B_{\\mathfrak q}$ satisfies $x^n=0$, with $t\\notin\\mathfrak q$ and $n\\ge1$, the fraction zero criterion gives $u\\notin\\mathfrak q$ with $ub^n=0$. Thus $j(ub)^n=j(u^{n-1}ub^n)=0$, and reducedness of $C$ gives $j(ub)=0$. Step 4 supplies $s\\notin\\mathfrak p$ with $i(s)ub=0$. Both $i(s)$ and $u$ avoid $\\mathfrak q$, so their product does too, proving $b/t=0$ by the same fraction criterion. Hence $B$ is generically reduced.",
+   "uses": [
+    "lem-weil-pbc-perfect-reduced-tensor",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I4 (lemma-perfect-reduced); Tag 00CO (definition-localization), explicit nilpotent calculation"
+   }
+  },
+  {
+   "text": "Conversely assume $B$ generically reduced and fix a minimal prime $\\mathfrak p$ of $A$. Faithful flatness and surjectivity on spectra give a prime $\\mathfrak q_0$ of $B$ contracting to $\\mathfrak p$. Choose a minimal prime $\\mathfrak q\\subseteq\\mathfrak q_0$. Its contraction is a prime contained in $\\mathfrak p$, hence equals $\\mathfrak p$ by minimality. In particular $B_{\\mathfrak q}$ is reduced by the assumption.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HQ (lemma-ff-rings); Tag 00E0 (lemma-Zariski-topology), part (4)"
+   }
+  },
+  {
+   "text": "The localized map $A_{\\mathfrak p}\\to B_{\\mathfrak q}$ is flat and local, since $i$ is flat and $i^{-1}(\\mathfrak q)=\\mathfrak p$. A flat local map is faithfully flat. Apply universal injectivity to this map and the module $N=A_{\\mathfrak p}$: under $N\\otimes_{A_{\\mathfrak p}}B_{\\mathfrak q}\\cong B_{\\mathfrak q}$, $a\\otimes b\\mapsto i_{\\mathfrak q}(a)b$ with inverse $b\\mapsto1\\otimes b$, it says precisely that $A_{\\mathfrak p}\\to B_{\\mathfrak q}$ is injective. A nilpotent of $A_{\\mathfrak p}$ maps to a nilpotent of the reduced ring $B_{\\mathfrak q}$, hence to zero, and is therefore zero. This holds for every minimal $\\mathfrak p$, proving generic reducedness of $A$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT (lemma-flat-localization), 00HR (lemma-local-flat-ff), and 05CK (lemma-faithfully-flat-universally-injective)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-sc-flat-going-down",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-universally-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Generic-local argument combining Tags 00I4 and 00HS with 00HQ, 00HR, 00HT, 05CK; the tensor-localization maps and nilpotent calculations are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GenericallyReduced|generically.reduced",
+   "results": "{\"t\": \"2026-10-24T07:03:22Z\", \"tool\": \"grep\", \"query\": \"GenericallyReduced|generically.reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reducedness of the entire algebra, geometric reducedness, or the definition of minimal primes; none states reducedness only at minimal-prime localizations under arbitrary field extension. Read GeometricallyReduced.lean:30-107 (arbitrary-field extension is still a TODO) and MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative algebra over a field of characteristic zero is reduced at its minimal primes if and only if its scalar extension to any extension field is reduced at minimal primes",
+   "results": "{\"t\": \"2026-10-24T07:03:23Z\", \"tool\": \"leansearch\", \"query\": \"A commutative algebra over a field of characteristic zero is reduced at its minimal primes if and only if its scalar extension to any extension field is reduced at minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced\", \"isReduced_ofLocalizationMaximal\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_injective\"], \"digest\": \"4a4a29fd57fca702\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reducedness of the entire algebra, geometric reducedness, or the definition of minimal primes; none states reducedness only at minimal-prime localizations under arbitrary field extension. Read GeometricallyReduced.lean:30-107 (arbitrary-field extension is still a TODO) and MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minimalPrimes\"",
+   "results": "{\"t\": \"2026-10-24T07:03:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"minimalPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"minimalPrimes\", \"Ideal.minimalPrimes\", \"Ideal.radical_minimalPrimes\", \"Ideal.minimalPrimes_isPrime\", \"Ideal.minimalPrimes_eq_subsingleton_self\", \"Ideal.sInf_minimalPrimes\", \"Ideal.minimalPrimes_eq_subsingleton\", \"Ideal.minimalPrimes_top\"], \"digest\": \"d8486a420095bc9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reducedness of the entire algebra, geometric reducedness, or the definition of minimal primes; none states reducedness only at minimal-prime localizations under arbitrary field extension. Read GeometricallyReduced.lean:30-107 (arbitrary-field extension is still a TODO) and MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic reducedness of a commutative algebra over a characteristic zero field is invariant under every extension of the ground field",
+   "results": "{\"t\": \"2026-10-24T07:03:24Z\", \"tool\": \"leanfinder\", \"query\": \"Generic reducedness of a commutative algebra over a characteristic zero field is invariant under every extension of the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\"], \"digest\": \"26f9da1a66db79b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reducedness of the entire algebra, geometric reducedness, or the definition of minimal primes; none states reducedness only at minimal-prime localizations under arbitrary field extension. Read GeometricallyReduced.lean:30-107 (arbitrary-field extension is still a TODO) and MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes.*(tensor|[Bb]ase)|[Gg]enerically.*[Rr]educed|[Rr]educed.*minimalPrimes",
+   "results": "{\"t\": \"2026-10-24T07:04:25Z\", \"tool\": \"grep\", \"query\": \"minimalPrimes.*(tensor|[Bb]ase)|[Gg]enerically.*[Rr]educed|[Rr]educed.*minimalPrimes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reducedness of the entire algebra, geometric reducedness, or the definition of minimal primes; none states reducedness only at minimal-prime localizations under arbitrary field extension. Read GeometricallyReduced.lean:30-107 (arbitrary-field extension is still a TODO) and MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced local rings at the generic points of a finite type algebra over a perfect field stay reduced after arbitrary scalar extension and generic reducedness descends under field extensions",
+   "results": "{\"t\": \"2026-10-24T07:04:31Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced local rings at the generic points of a finite type algebra over a perfect field stay reduced after arbitrary scalar extension and generic reducedness descends under field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_injective\"], \"digest\": \"29bb7fa216eb235a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reducedness of the entire algebra, geometric reducedness, or the definition of minimal primes; none states reducedness only at minimal-prime localizations under arbitrary field extension. Read GeometricallyReduced.lean:30-107 (arbitrary-field extension is still a TODO) and MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic reducedness at minimal prime localizations is invariant under extension of a characteristic zero ground field",
+   "results": "{\"t\": \"2026-10-24T07:29:08Z\", \"tool\": \"leanfinder\", \"query\": \"Generic reducedness at minimal prime localizations is invariant under extension of a characteristic zero ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isReduced_localizationPreserves\", \"Algebra.IsGeometricallyReduced\", \"isReduced_ofLocalizationMaximal\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_injective\", \"isStronglyTranscendental_mk_of_mem_minimalPrimes\", \"Algebra.IsGeometricallyReduced.of_forall_fg\"], \"digest\": \"229b7ecf4927bd3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Geometric reducedness concerns all primes after algebraic-closure base change; the tensor instance requires an algebraic extension. Flat localization and going down are component tools, not the stated equivalence. Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-107 and Ideal/MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minimalPrimes\"",
+   "results": "{\"t\": \"2026-10-24T07:30:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"minimalPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"minimalPrimes\", \"Ideal.minimalPrimes\", \"Ideal.radical_minimalPrimes\", \"Ideal.minimalPrimes_isPrime\", \"Ideal.minimalPrimes_eq_subsingleton_self\", \"Ideal.sInf_minimalPrimes\", \"Ideal.minimalPrimes_eq_subsingleton\", \"Ideal.minimalPrimes_top\"], \"digest\": \"d8486a420095bc9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Geometric reducedness concerns all primes after algebraic-closure base change; the tensor instance requires an algebraic extension. Flat localization and going down are component tools, not the stated equivalence. Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-107 and Ideal/MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "grep",
+   "query": "GenericallyReduced|generically.reduced|minimalPrimes.*(tensor|[Bb]ase)",
+   "results": "{\"t\": \"2026-10-24T07:30:00Z\", \"tool\": \"grep\", \"query\": \"GenericallyReduced|generically.reduced|minimalPrimes.*(tensor|[Bb]ase)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Geometric reducedness concerns all primes after algebraic-closure base change; the tensor instance requires an algebraic extension. Flat localization and going down are component tools, not the stated equivalence. Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-107 and Ideal/MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring algebra over a characteristic zero field is reduced at every minimal prime if and only if any extension of the ground field is reduced at every minimal prime",
+   "results": "{\"t\": \"2026-10-24T07:30:54Z\", \"tool\": \"leansearch\", \"query\": \"A ring algebra over a characteristic zero field is reduced at every minimal prime if and only if any extension of the ground field is reduced at every minimal prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_injective\", \"isReduced_ofLocalizationMaximal\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\"], \"digest\": \"71e363bfa26fe277\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Geometric reducedness concerns all primes after algebraic-closure base change; the tensor instance requires an algebraic extension. Flat localization and going down are component tools, not the stated equivalence. Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-107 and Ideal/MinimalPrime/Basic.lean:35-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat scalar extension preserves and reflects reduced local rings at generic points without noetherian hypotheses",
+   "results": "{\"t\": \"2026-10-24T07:30:55Z\", \"tool\": \"leanfinder\", \"query\": \"Flat scalar extension preserves and reflects reduced local rings at generic points without noetherian hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"instFlatAtPrime\", \"RingHom.Flat.localRingHom\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"isReduced_localizationPreserves\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"eaeb429d144128ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Geometric reducedness concerns all primes after algebraic-closure base change; the tensor instance requires an algebraic extension. Flat localization and going down are component tools, not the stated equivalence. Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-107 and Ideal/MinimalPrime/Basic.lean:35-105."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-flat-model-generic-reducedness",
+  "date": "2026-10-24",
+  "group": "Q114"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 3 (duality), via the regular-resolution branch: preservation of generic reducedness in the flat coefficient models used for the rational approximation of varieties (Bierstone–Milman–Temkin, Theorem 7.5). Field-extension comparison of generic local rings in the flat coefficient-model argument.",
+   "via": [
+    "lem-per-flat-model-generic-reducedness",
+    "lem-per-variety-rational-smooth-limit-models",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-field-extension-generic-reducedness",
+  "worker": "stage1",
+  "summary": "Proved the arbitrary-algebra equivalence using existing DAG tools only: contraction of minimal primes by going down, explicit tensor-localization maps, perfect-field reduced tensor ascent, and faithfully flat local descent. No Noetherian, finite-generation, or nonzero-algebra hypothesis is used. No new nodes.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, Step 3 (duality), through the existing regular-resolution / rational smooth-limit model branch named by blueprint.from; supplies the generic-reducedness scalar-extension comparison used by lem-per-flat-model-generic-reducedness.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-perfect-reduced-tensor",
+    "why": "Generic commutative-algebra tool: reduced algebras over the perfect characteristic-zero field F have reduced tensor product; the perverse unit has no such ring-theoretic assertion. This supports the inherited coefficient-model route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-perfect-reduced-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-807ce4d0f",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-807ce4d0f (reviewer sub-agent of L); spot-checked: Read the item, all seven steps and every cited node in full; the delivery has no new nodes. The statement is true. Small cases checked: A=0 (vacuous), F[ε]/ε² (neither side generically reduced), F[x,ε]/(ε²,xε) (generically reduced on both sides). Characteristic zero is needed: F_p(t)[x]/(x^p−t) is a counterexample in characteristic p. Sources match algebra.tex: 00I4 at line 10581 has no finiteness hypothesis, and 00HS (9265), 00HQ, 00HR, 00HT and 05CK (20255) were checked against their tags. Step 2: field-extension base change is faithfully flat, through the switch isomorphism. Step 3: going down gives a contradiction with minimality, so contractions of minimal primes are minimal. Step 4: the isomorphism E⊗A_p≅i(S)^{-1}B is written out and short enough to be elementary. Step 5: the hypotheses of perfect-reduced-tensor hold (F perfect, E a field, A_p reduced because p is minimal); in the nilpotent calculation, i(s)u avoids q because s∉p=i^{-1}(q). Step 6: surjectivity on spectra plus a minimal prime below q0 gives a minimal prime contracting to p. Step 7: the localized map is flat and local, hence faithfully flat, hence injective by universal injectivity with N=A_p; its Noetherian clause is unused. No duplicate in the DAG (grep -R for generically reduced / generic reducedness). Accepted tool_uses: lem-weil-pbc-perfect-reduced-tensor (unsplit, unit sk-thm-iff) as a generic tool; the other cross-unit citations are Mathlib leaves. Mathlib searches cover all four tools; the blueprint field is filled; no SGA citation. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FieldExtensionGenericReducedness",
+  "declaration": "Algebra.genericallyReduced_iff_field_extension",
+  "file": "lean/Sheaf/RingTheory/FieldExtensionGenericReducedness.lean",
+  "statement": "theorem genericallyReduced_iff_field_extension (F : Type u) (E : Type v) (A : Type w) [Field F] [CharZero F] [Field E] [Algebra F E] [CommRing A] [Algebra F A] : (∀ (p : Ideal A) [p.IsPrime], p ∈ minimalPrimes A → IsReduced (Localization.AtPrime p)) ↔ (∀ (q : Ideal (E ⊗[F] A)) [q.IsPrime], q ∈ minimalPrimes (E ⊗[F] A) → IsReduced (Localization.AtPrime q))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6aed977f7",
+  "group": "NY",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: char-0 field F, arbitrary Field E with Algebra F E, CommRing A with Algebra F A, E ⊗[F] A with Mathlib ring structure, ∀ minimal prime → IsReduced (Localization.AtPrime) on each side, joined by ↔. No extra hypotheses (no Nontrivial/Noetherian/FiniteType/algebraic); universes u v w independent and bound; [IsPrime] binders harmless; IsNilpotent exponent 0 only arises in the zero ring. Edge cases A=0, E=F, F[ε]/ε², F[x,ε]/(ε²,xε) OK; char-p counterexample shows CharZero needed. Only the lean field differs from side-live; lean.statement verbatim in the file; docstrings carry source 00I4/00HS, blueprint tag and all 7 proof steps; proof is sorry only. H4: no generically-reduced-ring def node or upstream/Mathlib duplicate. Report has Worker report and Second reading by NY sections. Not recompiled per instructions; no fixes."
+ }
+}

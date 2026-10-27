@@ -25,129 +25,58 @@
  ],
  "proof": [
   {
-   "text": "Fix the anchor $x_*$ and a closed point $x$, allowing $x=x_*$. Apply [lem-zl-curve-testing-irreducibility] to the nonempty finite set of the chosen geometric lifts (a singleton if the lifts coincide) and to the whole finite family $\\mathcal S_1,\\ldots,\\mathcal S_r$. Its hypotheses are exactly the smooth, geometrically connected, affine, positive-dimensional hypotheses on $X_0$ and the geometric irreducibility hypotheses on the quotients. It gives one smooth connected affine geometric curve $i:C\\hookrightarrow X$ through both lifts on which every $i^*\\mathcal S_j$ is irreducible. This also applies to the empty family when $r=0$.",
+   "text": "Apply [lem-zl-curve-testing-irreducibility] to the two chosen lifts, as a singleton when equal, and the whole finite family of quotients. Apply [lem-zl-geometric-closed-curve-smooth-model] to its closed geometric curve. This gives one smooth geometrically connected affine model over some $k_m$ through both lifts, with closed points under them and all geometric quotient restrictions irreducible. Both lemmas permit an empty family.",
    "uses": [
-    "lem-zl-curve-testing-irreducibility"
+    "lem-zl-curve-testing-irreducibility",
+    "lem-zl-geometric-closed-curve-smooth-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 2: simultaneous two-point curve testing"
+    "place": "Paragraphs 2-4; assembly of the four re-split arguments."
    }
   },
   {
-   "text": "Apply [lem-zl-bertini-finite-field-descent] to this closed immersion to obtain $m\\ge1$ and $C_m\\hookrightarrow X_{0,m}=X_0\\times_{k_0}k_m$, with $k_m=\\mathbf F_{q^m}$ and geometric base change $C$. Since $X_{0,m}$ is affine and of finite type, its closed subscheme is affine of finite type: writing $X_{0,m}=\\operatorname{Spec}A$, it is $\\operatorname{Spec}(A/I)$. Write $B=A/I$. The map $B\\to k\\otimes_{k_m}B$ is faithfully flat: choose a $k_m$-basis of $k$ containing $1$; as a $B$-module the target is a nonempty direct sum of copies of $B$, so tensoring preserves and reflects exactness, the definition in [def-weil-pbc-faithfully-flat-ring-map]. Thus [lem-weil-pbc-faithfully-flat-surjective-spectrum] supplies a geometric prime above every prime of $B$.",
+   "text": "Apply [lem-zl-curve-restriction-filtration-spectrum] to this model and the supplied filtration. It gives the classical lisse restricted filtration with exactly the restricted quotients, the same common-stage operators, reality of the total sheaf, and the residue-degree power formulas with multiplicities at all closed points.",
    "uses": [
-    "lem-zl-bertini-finite-field-descent",
-    "def-weil-closed-immersion",
-    "def-weil-pbc-faithfully-flat-ring-map",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+    "lem-zl-curve-restriction-filtration-spectrum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 2: a closed finite-field model of the geometric affine curve"
+    "place": "Paragraphs 2-4; assembly of the four re-split arguments."
    }
   },
   {
-   "text": "For each prime $\\mathfrak p$ of $B$, choose a prime of $k\\otimes_{k_m}B$ above it as in Step 2. The latter algebra is the coordinate ring of the smooth curve $C$. Apply [lem-weil-pbc-smooth-at-prime-field-extension-descent] with base field $k_m$, extension $k$, and finite-type algebra $B$: $B$ is smooth at $\\mathfrak p$. These neighborhoods cover $\\operatorname{Spec}B$, hence $C_m$ is smooth. Apply [lem-weil-pbc-dimension-at-point-field-extension] at the same primes; its geometric dimension is one, so $C_m$ has dimension one at every point. Finally [lem-weil-geometrically-connected-algebraic-closure] applies because $(C_m)_k=C$ is connected. Thus $C_m$ is a smooth geometrically connected affine curve over $k_m$, exactly the type of curve required by the curve-purity theorem.",
+   "text": "By [lem-zl-geometric-quotient-weil-composition-series], the nonzero geometrically irreducible restricted quotients are constituents of the real lisse sheaf on this curve. Apply [thm-rp-real-lisse-purity-affine] over $k_m$ to obtain their punctual purity. These results apply to the actual filtration without a splitting or semisimplicity assumption.",
    "uses": [
-    "lem-weil-pbc-smooth-at-prime-field-extension-descent",
-    "lem-weil-pbc-dimension-at-point-field-extension",
-    "lem-weil-geometrically-connected-algebraic-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 2: smooth geometrically connected affine curve over the finite extension"
-   }
-  },
-  {
-   "text": "First restrict the given filtration to $X_{0,m}$ using [lem-zl-constant-extension-weil-heart-equivalence](a), then pull it back along $C_m\\hookrightarrow X_{0,m}$ using [lem-zl-immersion-weil-local-behavior](1), now over $k_m$. Both functors are exact, so the resulting quotients are precisely $\\mathcal S_j|_{C_m}$. Lissity is preserved by pulling back their finite-level locally constant trivializations in [def-pod-lisse-l-adic-sheaves]. The heart restrictions realize the classical ones with their Weil maps: [lem-per-lisse-completed-system-comparison] (classical systems vs lisse completed modules) and [lem-tw-lisse-rational-realization] (lisse heart vs lisse $E_X$-modules) commute with pullback along any scheme map, including non-$k$-linear Frobenius, with composites, and with point fibres and iterated point transports, so the heart local operators below are the classical ones. Their geometric restrictions are the irreducible local systems on $C$ from Step 1. For a closed point $z\\in C_m$ over $x\\in X_0$, let $y$ be its image in $X_{0,m}$. The immersion identifies $\\kappa(z)=\\kappa(y)$ and the local operators. Constant restriction identifies the latter operator with $F_x^{[\\kappa(y):\\kappa(x)]}$. The eigenvalue multiset, including algebraic multiplicities, is given by [lem-fd-weil-pullback-local-frobenius] applied to $g_m:X_{0,m}\\to X_0$ as a morphism over $k_0$: clause (b) of [lem-zl-constant-extension-weil-heart-equivalence] identifies the local operators of $g_m^*\\mathcal F$ and constant restriction. The immersion then preserves that multiset. Thus the eigenvalues at $z$ are the corresponding $f$th powers and $q_z=q_x^f$, where $f=[\\kappa(z):\\kappa(x)]\\ge1$. The same applies to $\\mathcal G$ and to every quotient. The chosen geometric lifts give points $z_*,z$ of $C_m$: their residue fields embed into $k$ and are algebraic over $k_m$, hence these are closed by [lem-kun-closed-point-field](a).",
-   "uses": [
-    "lem-zl-constant-extension-weil-heart-equivalence",
-    "lem-zl-immersion-weil-local-behavior",
-    "def-pod-lisse-l-adic-sheaves",
-    "lem-kun-closed-point-field",
-    "lem-fd-weil-pullback-local-frobenius",
-    "lem-per-lisse-completed-system-comparison",
-    "lem-tw-lisse-rational-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraphs 2-4: exact restriction and residue-degree Frobenius powers"
-   }
-  },
-  {
-   "text": "The restriction $\\mathcal G|_{C_m}$ is real. Indeed [def-wf-iota-real] says its original local eigenvalue multiset is stable under complex conjugation, including multiplicities. For every positive integer $f$, $\\overline{a^f}=\\overline a^{\\,f}$; hence the multiset of $f$th powers is also conjugation-stable, even when powers of distinct eigenvalues coincide. Apply the local power formula of Step 4 at every closed point of $C_m$. No diagonalizability is required.",
-   "uses": [
-    "def-wf-iota-real"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 2 and paragraph 1 final sentence: reality under Frobenius powers"
-   }
-  },
-  {
-   "text": "Pass to Weil representations by the exact equivalence [prop-wf-weil-sheaf-representation-equivalence] on the curve $C_m$ over $k_m$, under which subobjects, quotients and short exact sequences of lisse Weil sheaves correspond to those of the Weil fundamental representations of [def-wf-fundamental-representation]. The restriction of the representation of $\\mathcal S_j|_{C_m}$ to the geometric subgroup $\\pi_1(C)$ is, by [def-wf-fundamental-representation], the stalk representation of the local system $i^*\\mathcal S_j$, which is irreducible by Step 1. A nonzero proper $W$-stable subspace would be $\\pi_1(C)$-stable, so the representation of each nonzero quotient $\\mathcal S_j|_{C_m}$ is irreducible. By Step 4 the restricted filtration of $\\mathcal G|_{C_m}$ is exact with these quotients, so its image under the equivalence is a composition series of the representation of $\\mathcal G|_{C_m}$, and every $\\mathcal S_j|_{C_m}$ is an irreducible constituent in the sense of [def-real-weil-representation-operations]. Apply [thm-rp-real-lisse-purity-affine] over the finite field $k_m$ to the real lisse sheaf from Step 5 on the smooth geometrically connected curve from Step 3. This gives a real weight $v_j(C_m)$ for which each restricted quotient is punctually $\\iota$-pure. The theorem applies to constituents and assumes no semisimplicity of $\\mathcal G$.",
-   "uses": [
-    "prop-wf-weil-sheaf-representation-equivalence",
-    "def-wf-fundamental-representation",
-    "def-real-weil-representation-operations",
+    "lem-zl-geometric-quotient-weil-composition-series",
     "thm-rp-real-lisse-purity-affine"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 2: irreducible constituents of the restricted real sheaf are pure"
+    "place": "Paragraphs 2-4; assembly of the four re-split arguments."
    }
   },
   {
-   "text": "Fix $j$. Its stalk at $x_*$ has positive rank and invertible Frobenius, so it has a nonzero eigenvalue $\\alpha$ over the algebraically closed coefficient field. For a point $z_*\\in C_m$ under the chosen lift of $x_*$ put $e=[\\kappa(z_*):\\kappa(x_*)]\\ge1$. Steps 4 and 6, together with [def-weil-punctual-weights], give $|\\iota(\\alpha)|^e=(q_{x_*}^{e})^{v_j(C_m)/2}$. Taking real logarithms and dividing by $e\\log q_{x_*}>0$ gives $v_j(C_m)=2\\log_{q_{x_*}}|\\iota(\\alpha)|=:w_j$. The same equality applies to every eigenvalue at the anchor, so all have this modulus. This defines $w_j$ independently of the eigenvalue, of the curve, and of the finite extension. To initialize it one may use Step 1 with $x=x_*$, so no existence of a second distinct closed point is needed.",
+   "text": "Fix $j$. Let the test collection consist of the models just obtained as $x$ and the choices vary. Steps 1-3 verify all three hypotheses of [lem-zl-anchored-pure-curve-criterion]: coverage includes the anchor itself, restrictions are pure, and their spectra and residue sizes have the required powers. It supplies $w_j$, its formula for every anchor eigenvalue, independence of every curve purity weight, and purity at every closed point. The additional-curve clause proves the same independence for any further pure test curve. Do this for each member of the finite family. When $r=0$ no criterion is needed: Steps 1-2 already supply the simultaneous curve, reality and local formulas. This proves every clause of the unchanged statement.",
    "uses": [
-    "def-weil-punctual-weights"
+    "lem-zl-anchored-pure-curve-criterion"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 3: the fixed-anchor logarithm calculation"
-   }
-  },
-  {
-   "text": "Let $x$ be any closed point and $\\beta$ any eigenvalue of $\\mathcal S_j$ there. Choose the two-point curve as above and its point $z$ over $x$, with residue degree $f\\ge1$. By Step 4 and curve purity, $|\\iota(\\beta)|^f=(q_x^f)^{w_j/2}=q_x^{fw_j/2}$. Taking the unique positive $f$th root yields $|\\iota(\\beta)|=q_x^{w_j/2}$. This includes the anchor itself by Step 7 and proves purity everywhere by [def-weil-punctual-weights]. For $r=0$ there are no weights or eigenvalue assertions to check, and Steps 1-5 still give the required curve and reality. Both Frobenius-power and residue-size clauses are already proved in Step 4. Thus all assertions hold simultaneously for the supplied filtration without choosing a semisimplification.",
-   "uses": [
-    "def-weil-punctual-weights"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 4: comparison at the second point and global punctual purity"
+    "place": "Paragraphs 2-4; assembly of the four re-split arguments."
    }
   }
  ],
  "proof_deps": [
-  "def-pod-lisse-l-adic-sheaves",
-  "def-real-weil-representation-operations",
-  "def-weil-closed-immersion",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "def-weil-punctual-weights",
-  "def-wf-fundamental-representation",
-  "def-wf-iota-real",
-  "lem-fd-weil-pullback-local-frobenius",
-  "lem-kun-closed-point-field",
-  "lem-per-lisse-completed-system-comparison",
-  "lem-tw-lisse-rational-realization",
-  "lem-weil-geometrically-connected-algebraic-closure",
-  "lem-weil-pbc-dimension-at-point-field-extension",
-  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-  "lem-weil-pbc-smooth-at-prime-field-extension-descent",
-  "lem-zl-bertini-finite-field-descent",
-  "lem-zl-constant-extension-weil-heart-equivalence",
+  "lem-zl-anchored-pure-curve-criterion",
+  "lem-zl-curve-restriction-filtration-spectrum",
   "lem-zl-curve-testing-irreducibility",
-  "lem-zl-immersion-weil-local-behavior",
-  "prop-wf-weil-sheaf-representation-equivalence",
+  "lem-zl-geometric-closed-curve-smooth-model",
+  "lem-zl-geometric-quotient-weil-composition-series",
   "thm-rp-real-lisse-purity-affine"
  ],
  "proof_origin": {
@@ -247,45 +176,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-zl-two-point-curve-constituent-purity",
   "worker": "stage1",
-  "summary": "Q114 expands the simultaneous curve construction, finite-field smooth model, exact restriction, reality, constituent purity, and fixed-anchor calculation. The statement is unchanged. No new node is necessary: all non-elementary inputs already exist, and power/logarithm arguments are written as elementary steps.",
-  "blueprint": "Realizes thm-zl-real-mixed-by-curves.proof.md paragraphs 2-4: two-point curves, purity on the model, fixed-anchor independence, and comparison at every closed point.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "why": "Generic algebraic descent or restriction tool used to justify the finite-field curve model and its stalks; it does not replace curve testing or real-sheaf purity, and no statement of this unit supplies this general fact."
-   },
-   {
-    "node": "lem-weil-pbc-smooth-at-prime-field-extension-descent",
-    "why": "Generic algebraic descent or restriction tool used to justify the finite-field curve model and its stalks; it does not replace curve testing or real-sheaf purity, and no statement of this unit supplies this general fact."
-   },
-   {
-    "node": "lem-weil-pbc-dimension-at-point-field-extension",
-    "why": "Generic algebraic descent or restriction tool used to justify the finite-field curve model and its stalks; it does not replace curve testing or real-sheaf purity, and no statement of this unit supplies this general fact."
-   },
-   {
-    "node": "lem-weil-geometrically-connected-algebraic-closure",
-    "why": "Generic algebraic descent or restriction tool used to justify the finite-field curve model and its stalks; it does not replace curve testing or real-sheaf purity, and no statement of this unit supplies this general fact."
-   },
-   {
-    "node": "lem-zl-immersion-weil-local-behavior",
-    "why": "Generic algebraic descent or restriction tool used to justify the finite-field curve model and its stalks; it does not replace curve testing or real-sheaf purity, and no statement of this unit supplies this general fact."
-   },
-   {
-    "node": "lem-kun-closed-point-field",
-    "why": "Generic algebraic descent or restriction tool used to justify the finite-field curve model and its stalks; it does not replace curve testing or real-sheaf purity, and no statement of this unit supplies this general fact."
-   },
-   {
-    "node": "lem-fd-weil-pullback-local-frobenius",
-    "why": "Generic algebraic descent or restriction tool used to justify the finite-field curve model and its stalks; it does not replace curve testing or real-sheaf purity, and no statement of this unit supplies this general fact."
-   },
-   {
-    "node": "lem-per-lisse-completed-system-comparison",
-    "why": "Generic coefficient-model comparison: classical normalized lisse systems versus lisse completed module sheaves, compatible with module pullback; no node of this unit's route compares the classical restriction with the heart restriction."
-   }
-  ]
+  "summary": "Q59 repairs the released human re-split order with four independent statement-only work packages: prescribed geometric curve models, exact restriction and spectra, composition-series recognition, and the anchored curve purity criterion. The complete old argument is retained verbatim and allocated in report.md. Statement and existing Lean metadata are unchanged.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md paragraph 2 is realized by assembly steps 1-3; paragraphs 3-4 by step 4. The four new nodes inherit those precise places through this item."
  },
  "tool_uses": [
   "lem-weil-pbc-faithfully-flat-surjective-spectrum",
@@ -298,12 +193,12 @@
   "lem-per-lisse-completed-system-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q114-3a1230f79",
-  "group": "Q114",
+  "reviewer": "NT-cc-Q59-58a8ff0b3",
+  "group": "Q59",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-3a1230f79 (reviewer sub-agent of L); spot-checked: This is the first delivery of the item: live and side-live are unsplit, and there is no re-split note. It adds 0 new nodes and leaves the statement unchanged (checked by JSON diff); the two added stmt_deps (closed immersion, base change) are used by the statement. I read the item, every cited statement, the full proof of thm-rp, and the unit record and parent proof (main-20261015 thm-zl-real-mixed-by-curves, paragraphs 2-4). The route matches unit step 2/3 and the realized record. Off-unit tools are generic and declared. No SGA. Step checks: (1) curve testing hypotheses hold exactly, including r=0 and x=x_*. (2) Bertini descent: B to k⊗B is free and nonzero, so faithfully flat, and the surjective-spectrum lemma applies. (3) Smoothness descent (02UQ), dimension at a point (00P4) and geometric connectedness (0387) give a d-real-setup curve; dimension 1 at every point implies pure dimension one. (4) Constant restriction (a) gives F_x^f with q_z=q_x^f; the immersion lemma (1) applied over k_m keeps the residue field and the operator; closed points via lem-kun (a). (5) Reality: f-th powers of a conjugation-stable multiset are conjugation-stable. (7-8) The log and root computations need e,f>=1 and q>1, and are correct. Edge cases tested: r=0, x=x_*, d=1, rank one, a nonsplit unipotent extension, and colliding powers. Repairs (2 faults): F1 (E, Step 4): the step silently identified the heart restriction (constant-extension and immersion lemmas) with the classical def-pod-lisse restriction used for lissity, irreducibility and thm-rp. Fixed by citing lem-per-lisse-completed-system-comparison and lem-tw-lisse-rational-realization, which are compatible with pullback (including non-k-linear Frobenius), composites and point transports. F2 (C, Step 6): passing from the sheaf filtration to a composition series of Weil representations, and from geometric to Weil irreducibility, needed prop-wf-weil-sheaf-representation-equivalence and def-wf-fundamental-representation. Both are now cited. proof_deps were updated and one tool_use added; Step 4 is 1926 characters. Batch-5: def-real-weil-representation-operations, lem-fd-weil-pullback-local-frobenius, constant-extension, immersion and curve-testing reach only definitions (def-pod-lisse, def-weil-local-frobenius-trace) or the generic Galois correspondence (cor-galois). For these and the added nodes, the trf/PD part of their closures adds nothing beyond what the parent already reaches without this item: accepted. thm-rp-real-lisse-purity-affine does add trf/pod nodes, via cor-rp-euler-product -> thm-trf-grothendieck-lefschetz-qbar/trace-formula-e/l-function-euler-product and via lem-wf-curve-finite-level-pd -> thm-pod-proper-poincare-duality. Purity on curves is neither assumption nor a step of their proofs, and it is mandated by the unit (sk-p-real-purity) and by the parent: accepted. Maintainer note: cor-rp-euler-product and lem-wf-curve-finite-level-pd should cite nt-assume-trace-formula / nt-assume-poincare-duality. The lem-fd citation in Step 4 is redundant but harmless.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-58a8ff0b3 (reviewer sub-agent of L); spot-checked: I read the full re-split of lem-zl-two-point-curve-constituent-purity and certify it. Against the released stage-1 repair note (keep_plan, at least 2 new nodes, assembly of at most 3000 characters), the base 8-step proof (live node, Q114 FIX) is cut into 4 statement-only nodes of comparable size. Each old argument has a home: old steps 2-3 and the closed-point clause go to geometric-closed-curve-smooth-model; old steps 4-5 to curve-restriction-filtration-spectrum; the recognition part of old step 6 to geometric-quotient-weil-composition-series; old steps 7-8 to anchored-pure-curve-criterion. The thm-rp application and the curve-testing step stay in the 1846-character, 4-step assembly. None of the new nodes restates the item: they contain, respectively, no sheaves, no purity, no purity, and only assumed curves. A JSON diff against live shows that only proof, proof_deps and split_report changed (the Q22 lean record is intact), and live still has the 8-step proof with no new ids, so nothing supersedes this delivery. Step checks: curve-testing hypotheses are exactly the item's, including r=0 and coinciding lifts. Its curve is exactly the model node's input, and the model's output is a d-real-setup curve over k_m. The restriction node gives exactness, lissity, geometric pullbacks matching i^*S_j, F_z conjugate to F_x^f with f=m/gcd(d,m) (agreeing with constant-extension clause (a) and immersion clause (1)), and reality. The composition-series node is true because P lies in W and prop-wf gives exactness and the subquotient correspondence. It produces constituents in the def-real-weil-representation-operations sense, which is what thm-rp needs. The criterion is true: the anchor rank is positive (S is nonzero and lisse on connected X_0), e,f>=1 and q>=2 allow the cancellation, and a 0-dimensional X_0 or a zero sheaf is excluded. Small cases tested: colliding powers, nonsplit extensions, r=0, rank one, points over proper subfields. Duplicate search found nothing; I checked lem-zl-bertini-finite-field-descent, smooth-affine-filtration descent, lem-dl-a1-constant-field-charts, prop-wf, and the constant-extension and immersion lemmas. Form B1-B4 holds: statement-only, real recorded searches, blueprint.from paragraphs 2-4, no cycles, no SGA. Batch 5: every flagged citation is a definition already in the base closure (def-mg-weil-composition-series is reached through def-real-weil-representation-operations), so none is a trace-formula or Poincare-duality step; all accepted. No new tool_uses. Maintainer advisories: (1) the item's tool_uses carried from the base list 8 tools that the new proof no longer cites; (2) the restriction node cites def-wf-fundamental-representation (which assumes X connected) only for the notion of a lisse Weil sheaf. No fixes."
  },
  "lean": {
   "module": "Sheaf.DeligneLaumon.TwoPointCurveConstituentPurity",
@@ -334,5 +229,17 @@
   "group": "Q22",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of ad402953: Lean byte-identical (sha a9cf06ff…), only stmt_deps changed — theorem lem-zl-constant-extension-weil-heart-equivalence replaced by existing:true def nodes def-dl-a1-constant-extension-data and def-zl-constant-extension-restriction-local-data (identical to side-live; own constantExtensionDatum/Model/Projection/FiberIso and ConstantExtensionRestrictionSpec, plain defs l.59-454, no .choose); theorem kept in proof_deps; item not yet landed in side-live, statement/proof unchanged. Re-checked math vs main-20261015 thm-zl-real-mixed-by-curves.proof.md ¶2-4: hypotheses (affine, nonempty, geom. connected, smooth rel dim d≥1, lisse real F, Fin filtration with actual cokernels, lisse-subobject geometric irreducibility), four conclusion clauses, spec satisfiable via the equivalence theorem, spectrum = charpoly roots, edge cases r=0/x=anchor/collisions/zero stalks. Docstrings, sorry-only, verbatim statement OK. Advisory: lean.note says 'three' added deps (now four). No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-coefficient-slice-fixed-module-equivalence",
+ "kind": "statement",
+ "title": "Fixed-scalar weakly-etale localization on coefficient-sized sites",
+ "statement": "For a scheme Y, an object U of its coefficient-sized pro-etale site, and a commutative ring k in the coefficient universe, put Z=U.left. There exists an equivalence S from sheaves of k-modules on the coefficient-sized pro-etale site of Z to sheaves of k-modules on the coefficient-sized slice at U. Composing fixed-scalar inverse image along U.hom (as in [def-sfb-affine-locally-constructible-proetale-modules]) with S gives restriction to U. For every k-module M, S sends the constant sheaf with value M on Z to the constant sheaf with value M on the slice. No assumption is made on the ring, the module or the schemes.",
+ "stmt_deps": [
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites Tag 00XZ; Modules on Sites Tag 04IX; weakly-etale localization and fixed-scalar part of step 2 of lem-sfb-constant-slice-module-encoding."
+ },
+ "proof": [
+  {
+   "text": "Conjugate the concrete weakly-etale localization equivalence by AsSmall, using Over.postEquiv. Covers correspond: overEquiv commutes with postcomposition, the induced AsSmall topology corresponds to covers, and the middle site equivalence preserves covers. Apply Mathlib Equivalence.sheafCongr.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition with U.hom is left adjoint to scheme base change. Conjugate this adjunction by AsSmall and lift it to precomposition on sheaves. Uniqueness of left adjoints identifies the specified fixed-scalar inverse image with precomposition along composition. After the site equivalence this functor is precomposition by Over.forget U: the component is the identity on the underlying scheme, with its structural equation given by Over.w.",
+   "uses": [
+    "def-sfb-affine-locally-constructible-proetale-modules",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The site equivalence is continuous and cocontinuous. Its precomposition commutes with sheafification. Apply that proved natural comparison to the constant presheaf with value M to obtain the constant-sheaf comparison.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites Tag 00XZ; Modules on Sites Tag 04IX; weakly-etale localization and fixed-scalar part of step 2 of lem-sfb-constant-slice-module-encoding."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant ring sheaf inverse image isomorphism compatible with constant sections and Cartesian coefficient ring",
+   "date": "2026-10-26",
+   "results": "Search of the Mathlib interfaces for constant sheaves and inverse image. Project searches also read ProEtaleConstantRingMap, SheafPullbackForgetComparison and the actual condensed coefficient maps.",
+   "verdict": "The generic adjunction and constant comparisons are available; no theorem states transport of arbitrary coordinates for this reconstructed condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Sheaf",
+   "date": "2026-10-26",
+   "results": "12 hits, including Equivalence.sheafCongr and dense-subsite sheaf equivalences.",
+   "verdict": "Use sheafCongr for the slice; it does not itself provide the specified inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|sheafPushforwardContinuousComp|constantCommuteCompose",
+   "date": "2026-10-26",
+   "results": "25 hits, including Sites.Equivalence, Sites.Continuous and Sites.ConstantSheaf.",
+   "verdict": "These supply the proved site transport and constant-sheaf comparison used in the new fixed-scalar localization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantSliceModuleEncoding",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-constant-slice-module-encoding",
+   "place": "Sites Tag 00XZ; Modules on Sites Tag 04IX; weakly-etale localization and fixed-scalar part of step 2 of lem-sfb-constant-slice-module-encoding.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientSliceFixedModuleEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientSliceFixedModuleEquivalence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.coefficient_slice_fixed_module_equivalence",
+  "statement": "theorem coefficient_slice_fixed_module_equivalence\n    (Y : Scheme.{u}) (U : coefficientProEtaleSiteModel.{u, u} Y)\n    (k : Type (u + 1)) [CommRing k] :\n    ∃ S : Sheaf (coefficientProEtaleModelTopology.{u, u} (AsSmall.down.obj U).left)\n          (ModuleCat.{u + 1} k) ≌\n        Sheaf ((coefficientProEtaleModelTopology.{u, u} Y).over U) (ModuleCat.{u + 1} k),\n      Nonempty (coefficientProEtaleFixedModulePullback.{u, u} (AsSmall.down.obj U).hom k ⋙\n        S.functor ≅ (coefficientProEtaleModelTopology.{u, u} Y).overPullback\n          (ModuleCat.{u + 1} k) U) ∧\n      ∀ M : ModuleCat.{u + 1} k,\n        Nonempty (S.functor.obj\n          ((constantSheaf\n            (coefficientProEtaleModelTopology.{u, u} (AsSmall.down.obj U).left)\n            (ModuleCat.{u + 1} k)).obj M) ≅\n          (constantSheaf ((coefficientProEtaleModelTopology.{u, u} Y).over U)\n            (ModuleCat.{u + 1} k)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T152628-L-1143618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T152628-L-1143618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

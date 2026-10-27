@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.CohomologyGerms
+
 public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison

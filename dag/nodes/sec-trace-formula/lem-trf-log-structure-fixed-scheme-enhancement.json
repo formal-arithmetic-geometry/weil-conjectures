@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-log-structure-fixed-scheme-enhancement",
+ "kind": "statement",
+ "title": "Fine log enhancement of a fixed scheme over a log base",
+ "statement": "Let $(S,M_S)$ be a fine log scheme [def-trf-fine-log-scheme-morphisms], let $X$ be a scheme [def-pc-scheme], and fix a scheme map $f:X\\to S$. Let $\\{p_a:V_a\\to X\\}_{a\\in A}$ be a jointly surjective etale covering [def-weil-pbc-etale-site]. For each $a$ let $V_a$ be locally Noetherian [pqf-def-locnoeth], equipped with a fine log structure $M_a$ (etale-local charts by finitely generated integral monoids) and a log morphism $f_a:(V_a,M_a)\\to(S,M_S)$ whose underlying map is $fp_a$. Log structures, their structure maps $\\alpha_a:M_a\\to\\mathcal O_{V_a}$, and log morphisms have the meaning of [def-trf-fs-log-blowup]; no saturation is assumed. On $V_{ab}=V_a\\times_XV_b$ [def-pc-fibre-product] suppose given isomorphisms $\\phi_{ab}:M_a|_{V_{ab}}\\xrightarrow{\\sim}M_b|_{V_{ab}}$ over $\\mathcal O_{V_{ab}}$, with identity on the diagonals and $\\phi_{bc}\\phi_{ab}=\\phi_{ac}$ on triple overlaps. Assume $\\phi_{ab}f_a^\\flat=f_b^\\flat$ on $V_{ab}$, using the common inverse image of $M_S$ along $fp_a\\mathrm{pr}_1=fp_b\\mathrm{pr}_2$. Restriction means localization of the small etale site, so these are isomorphisms of log structures on the actual scheme overlaps.\n\nThen $X$ is locally Noetherian, and there exist a fine log structure $M_X$ on $X$, isomorphisms $e_a:M_X|_{V_a}\\xrightarrow{\\sim}M_a$ with $\\phi_{ab}e_a=e_b$ on overlaps, and a log morphism $F:(X,M_X)\\to(S,M_S)$ whose underlying map is $f$ and whose restrictions through $e_a$ are $f_a$. The structure morphism of this lift is a homomorphism $F^\\flat:f^{-1}M_S\\to M_X$ over $\\mathcal O_X$. If every $M_a$ has etale-local charts by fine saturated monoids, then $M_X$ has such charts. Here the underlying scheme $X$ and map $f$ are prescribed; no assertion of effective descent of schemes or of line bundles is made.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1, printed p.69 (etale fine/fs charts and locally Noetherian convention); VIII 3.3.4(ii) and 3.3.8, printed pp.107--108 (strict etale chart descent). Underlying local Noetherianity: Stacks descent.tex Tag 034C, lemma-Noetherian-local-fppf. This is the fixed-underlying-scheme and relative-log-map part of that descent argument."
+ },
+ "stmt_deps": [
+  "def-trf-fine-log-scheme-morphisms",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup",
+  "def-pc-fibre-product",
+  "def-trf-fine-log-etale-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-etale-local-noetherian-descent] to the prescribed scheme $X$ and its jointly surjective etale covering $\\{p_a:V_a\\to X\\}$. Each $V_a$ is locally Noetherian by hypothesis, so $X$ is locally Noetherian. This supplies the underlying-scheme hypothesis for fine log structures before any log descent is invoked.",
+   "uses": [
+    "lem-trf-etale-local-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034C, lemma-Noetherian-local-fppf, descent direction specialized to an etale covering"
+   }
+  },
+  {
+   "text": "Apply the existence clause of [lem-trf-fine-log-structure-etale-descent] with $T=X$, $T_a=V_a$, local log structures $M_a$, and transitions $\\phi_{ab}$. Step 1 supplies local Noetherianity; the given transitions commute with the structure maps, are identities on diagonals, and satisfy the required cocycle. Obtain a fine log structure $(M_X,\\alpha_X)$ and structure-preserving monoid isomorphisms $e_a:M_X|_{V_a}\\xrightarrow{\\sim}M_a$ with $e_b=\\phi_{ab}e_a$. If all local structures have fine saturated charts, the same cited statement supplies fine saturated charts for $M_X$.",
+   "uses": [
+    "lem-trf-fine-log-structure-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, printed p.69; VIII 3.3.4(ii) and 3.3.8, printed p.107, strict etale chart descent"
+   }
+  },
+  {
+   "text": "Work directly with the relative-test presentation of [def-trf-fine-log-scheme-morphisms]. On a test object V with a lift g to U_a, transport the given section homomorphism by e_a^{-1}. Naturality of e and localMap makes these homomorphisms natural under test-object restriction. Their values agree for different lifts by e_b=phi_ab e_a and the hypothesis phi_ab localMap_a=localMap_b. For every V, the sieve of arrows j:Z→V whose source admits a lift to some U_a is covering: it contains the base changes V×_X U_a→V. The sheaf axiom of [def-weil-pbc-etale-sheaf-of-sets], implemented by Presheaf.IsSheaf.amalgamate in CommMonCat, glues the compatible transported section homomorphisms for each relative diagram (W,V,k). Separatedness of the monoid sheaf proves naturality in both W and V, using naturality of localMap after restriction. Separatedness of the multiplicative structure sheaf proves compatibility with alpha, using e.alpha and localMap.compatibility. This constructs the HomAlong map without constructing an inverse-image sheaf or invoking the separate morphism-gluing clause of the fine-log descent theorem.",
+   "uses": [
+    "def-trf-fine-log-scheme-morphisms",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps, sectionwise gluing and separatedness; Tag 00VM, definition-sheaf-sets. Relative-test presentation: ILO VI 1.1."
+   }
+  },
+  {
+   "text": "By the definition of a log morphism [def-trf-fs-log-blowup], the pair $F=(f,u)$ is a log morphism $(X,M_X)\\to(S,M_S)$ with $F^\\flat=u$. For every $a$, $e_a(u|_{V_a})=e_au_a=f_a^\\flat$, and its underlying scheme map on $V_a$ is $fp_a$. Thus its restriction through $e_a$ is exactly $f_a$. The isomorphism compatibility and the conditional saturated-chart assertion are already established in Step 2.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, printed p.69, log structures and log morphisms; assembly of the descended relative structure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-log-scheme-morphisms",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "lem-trf-etale-local-noetherian-descent",
+  "lem-trf-fine-log-structure-etale-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 3.3.8 for descent of the fine structure; Stacks 034C for local Noetherianity. Y2 formalizes the relative-map part directly with the sheaf axiom (Stacks 00VM and the argument of 04TQ), rather than constructing the inverse-image monoid sheaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a scheme with an etale cover by locally Noetherian schemes, fine logarithmic structures and maps to a fixed log base descend to the existing scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\", \"descent\"",
+   "results": "[loogle] OK 0 hit(s)\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|FineLogScheme|logStructure",
+   "results": "[grep] OK 0 hit(s)\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of fine log structures and their structural morphism to a log scheme along an etale covering",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of an etale sheaf of integral finitely generated monoids over the structure sheaf, including compatible maps from the inverse image of a base log structure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logarithmic|log.structure|log.scheme",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"line\": \"26\", \"text\": \"where `K` is a field with a height and `h` denotes the (logarithmic) naïve height on `E(K)`.\"}\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|FineLogScheme|logStructure",
+   "results": "{\"t\": \"2026-10-23T09:32:33Z\", \"tool\": \"grep\", \"query\": \"LogStructure|FineLogScheme|logStructure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary etale sites and morphism properties, Zariski scheme gluing, and module presentations do not state logarithmic-structure descent or a relative logarithmic lift on a fixed scheme. Both log-structure grep patterns returned no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue logarithmic structures and their maps to a log scheme over an etale cover",
+   "results": "{\"t\": \"2026-10-23T09:32:33Z\", \"tool\": \"leansearch\", \"query\": \"Glue logarithmic structures and their maps to a log scheme over an etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\"], \"digest\": \"f99a9fb514226db0\"}; Read the returned hits: ordinary etale sites and morphism properties, Zariski scheme gluing, and module presentations do not state logarithmic-structure descent or a relative logarithmic lift on a fixed scheme. Both log-structure grep patterns returned no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\", \"descent\"",
+   "results": "{\"t\": \"2026-10-23T09:32:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\", \\\"descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary etale sites and morphism properties, Zariski scheme gluing, and module presentations do not state logarithmic-structure descent or a relative logarithmic lift on a fixed scheme. Both log-structure grep patterns returned no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fine log structures with a morphism to a fixed log base descend along an etale covering of a prescribed scheme",
+   "results": "{\"t\": \"2026-10-23T09:32:37Z\", \"tool\": \"leanfinder\", \"query\": \"Fine log structures with a morphism to a fixed log base descend along an etale covering of a prescribed scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"], \"digest\": \"3032d1b7f9a79bc6\"}; Read the returned hits: ordinary etale sites and morphism properties, Zariski scheme gluing, and module presentations do not state logarithmic-structure descent or a relative logarithmic lift on a fixed scheme. Both log-structure grep patterns returned no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logarithmic.*(scheme|structure)|log.*etale.*descent",
+   "results": "{\"t\": \"2026-10-23T09:41:31Z\", \"tool\": \"grep\", \"query\": \"logarithmic.*(scheme|structure)|log.*etale.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary etale sites and morphism properties, Zariski scheme gluing, and module presentations do not state logarithmic-structure descent or a relative logarithmic lift on a fixed scheme. Both log-structure grep patterns returned no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of sheaves of commutative monoids over the structure sheaf with fine etale local charts and compatible homomorphisms",
+   "results": "{\"t\": \"2026-10-23T09:41:41Z\", \"tool\": \"leanfinder\", \"query\": \"Effective descent of sheaves of commutative monoids over the structure sheaf with fine etale local charts and compatible homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.Presentation.map\", \"AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizer\", \"AlgebraicGeometry.LocallyRingedSpace.coequalizer\", \"AlgebraicGeometry.LocallyRingedSpace.coequalizerCofork\"], \"digest\": \"c7b805d4bdfcad16\"}; Read the returned hits: ordinary etale sites and morphism properties, Zariski scheme gluing, and module presentations do not state logarithmic-structure descent or a relative logarithmic lift on a fixed scheme. Both log-structure grep patterns returned no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polarized-fine-log-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration reduction via the regular modification of log regular nodal pairs. ILO VIII 3.3.8 final descent sentence, after the underlying polarized scheme has been descended: descend local Noetherianity, the fine log structure, its map to the log base, and conditional saturated charts (returned item steps 2--5).",
+   "via": [
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-log-structure-fixed-scheme-enhancement",
+  "worker": "stage1",
+  "summary": "Kept the statement and its six statement dependencies unchanged. Assembled local Noetherian descent, existing fine/fs log-structure descent, and its arbitrary-monoid-sheaf morphism clause. Wrote the overlap equation for the relative map explicitly and checked that its source need not be a log structure. No new nodes or attachments. Refreshed the item Mathlib searches with the required logged command.",
+  "blueprint": "Inherited support chain from lem-trf-local-term-locality (1)--(2), via lem-trf-polarized-fine-log-etale-descent: the fixed-underlying-scheme portion of ILO VIII 3.3.8 descent. Read the current latest blueprint locality proof; it contains no log-descent duplicate. This split leaves the inherited route and blueprint provenance intact."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-0d41a45a1",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-0d41a45a1 (reviewer sub-agent of L); spot-checked: I read the item and all four cited statements in full. There are no new nodes; the only files are the item and its report, and there is no re-split repair note. The item is still unsplit on live and side-live with an identical statement, and the statement and stmt_deps are unchanged. Step 1: lem-trf-etale-local-noetherian-descent applies verbatim (jointly surjective étale cover by locally Noetherian V_a). Step 2: every hypothesis of the existence clause of lem-trf-fine-log-structure-etale-descent is present (T=X locally Noetherian by step 1; φ_ab are over O and satisfy the diagonal and cocycle conditions). It gives e_b=φ_ab e_a and the conditional fs charts. Step 3: A=f^{-1}M_S with γ=f^♯∘f^{-1}α_S. α_X u_a=γ follows from e_a and f_a preserving structure maps. I recomputed the overlap: e_b^{-1}f_b^♭=(φ_ab e_a)^{-1}φ_ab f_a^♭=e_a^{-1}f_a^♭. The moreover clause allows an arbitrary monoid-sheaf source, so A needs no log axiom. Step 4 is the definition of a morphism in def-trf-fs-log-blowup and is correctly marked elementary. proof_deps equals the union of uses, there is no cycle, and both lemmas are in unit sk-i-curve-zero (no tool_uses needed). Sources checked: ILO VI 1.1 (PDF p.75), ILO VIII 3.3.8 (PDF pp.113-114, 'follows by descent'), Stacks 034C lemma-Noetherian-local-fppf, Stacks sites lemma-glue-maps. Small cases checked: empty cover, identity cover, repeated indices, trivial log structures, non-saturated fine structures. Duplicate search with rg -L over about 80 log-structure descent/gluing nodes found no duplicate. The sibling lem-trf-log-morphism-fixed-map-etale-lifting is different and is not used. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogStructureFixedSchemeEnhancement",
+  "declaration": "AlgebraicGeometry.exists_fineLogStructure_fixedScheme_enhancement",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogStructureFixedSchemeEnhancement.lean",
+  "statement": "theorem exists_fineLogStructure_fixedScheme_enhancement (S : FineLogScheme.{u}) (X : Scheme.{u}) (f : X ⟶ S.scheme) {ι : Type v} (U : ι → X.Etale) [∀ a : ι, IsLocallyNoetherian (U a).left] (hcover : ∀ x : X, ∃ (a : ι) (y : (U a).left), (U a).hom y = x) (D : FineLogEtaleDescentDatum U) (localMap : ∀ a : ι, (D.localLog a).HomAlong S.logStructure ((U a).hom ≫ f)) (hover : ∀ (a b : ι) (V : X.Etale) (g : V ⟶ U a) (h : V ⟶ U b) (W : S.scheme.Etale) (k : V.left ⟶ W.left) (ha : k ≫ W.hom = g.left ≫ ((U a).hom ≫ f)) (hb : k ≫ W.hom = h.left ≫ ((U b).hom ≫ f)) (s : S.logStructure.monoidSheaf.obj.obj (op W)), D.transition a b V g h ((localMap a).sectionMap W ((Scheme.Etale.overToEtale (U a)).obj (Over.mk g)) k ha s) = (localMap b).sectionMap W ((Scheme.Etale.overToEtale (U b)).obj (Over.mk h)) k hb s) : IsLocallyNoetherian X ∧ ∃ (M : EtaleLogStructure X) (_hM : M.IsFine) (e : D.Gluing M) (F : M.HomAlong S.logStructure f), (∀ (a : ι) (V : X.Etale) (g : V ⟶ U a) (W : S.scheme.Etale) (k : V.left ⟶ W.left) (hk : k ≫ W.hom = V.hom ≫ f) (ha : k ≫ W.hom = g.left ≫ ((U a).hom ≫ f)) (s : S.logStructure.monoidSheaf.obj.obj (op W)), e.component a V g (F.sectionMap W V k hk s) = (localMap a).sectionMap W ((Scheme.Etale.overToEtale (U a)).obj (Over.mk g)) k ha s) ∧ ((∀ a : ι, (D.localLog a).IsFineSaturated) → M.IsFineSaturated)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b99c7355f",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_deps (FineLogScheme/HomAlong, FineLogEtaleDescentDatum/Gluing/IsFine, EtaleLogStructure/IsFineSaturated, Scheme.Etale, IsLocallyNoetherian) and the proof-only lemmas fineLogStructure_etale_descent and isLocallyNoetherian_of_etale_cover. Clause by clause: fine base S, prescribed X and f, pointwise jointly surjective étale cover U : ι → X.Etale (free universe v, may be empty), loc. Noeth. members, descent datum D, local maps HomAlong over (U a).hom ≫ f. hover is exactly φ_ab f_a^♭ = f_b^♭ on a common base section; testing only overToEtale objects is enough because overToEtale is an equivalence and sectionMap is natural. Conclusion: IsLocallyNoetherian X ∧ ∃ fine M, Gluing e, HomAlong F over f with e_a∘F^♭ = f_a^♭, and conditional fs. Nothing stronger assumed, no clause missing. Node differs from live only in lean and stmt_deps (+ landed def-trf-fine-log-etale-descent-datum, allowed); lean.statement verbatim; one sorry; docstrings carry source, blueprint and 4 proof steps; report has both sections; no duplicate, not on side-live. Edge cases: empty, identity and repeated covers, non-saturated, universes. No recompile (file unchanged). Cosmetic: unused HasPullback import."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T083529-L-2379855",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -63,7 +63,20 @@ theorem moduleChartMap_smul (f : X ⟶ Y) (M : X.Modules) (V : Y.EtaleSite)
     (b : Y.structureSheaf.obj.obj (op V)) (m : M.val.obj (op r.left)) :
     M.val.map a.left.op (moduleChartScalar f V r b • m) =
       moduleChartScalar f V q b • M.val.map a.left.op m := by
-  sorry
+  rw [M.val.map_smul]
+  have h : a.left.hom.left.left ≫ r.hom.left.left = q.hom.left.left :=
+    congrArg (fun k ↦ k.left.left) (CostructuredArrow.w a)
+  have hs : X.structureSheaf.obj.map a.left.op (moduleChartScalar f V r b) =
+      moduleChartScalar f V q b := by
+    change a.left.hom.left.left.appTop (r.hom.left.left.appTop b) =
+      q.hom.left.left.appTop b
+    let hb : (Scheme.Γ.obj (op V.obj.left.left)) := b
+    change a.left.hom.left.left.appTop (r.hom.left.left.appTop hb) =
+      q.hom.left.left.appTop hb
+    exact ConcreteCategory.congr_hom
+      ((Scheme.Hom.comp_appTop a.left.hom.left.left r.hom.left.left).symm.trans
+        (congrArg Scheme.Hom.appTop h)) hb
+  rw [hs]
 
 /-- Restriction between chart sections, viewed as a linear map over `Γ(V,𝒪_V)`.
 Source: Stacks, Tag 03M8 (blueprint: def-trf-space-etale-module-functors). -/
@@ -87,7 +100,10 @@ Source: Stacks, Tag 03M8 (blueprint: def-trf-space-etale-module-functors).
 Proof: the restriction of `M` along the identity is the identity on every section. -/
 theorem moduleChartMap_id (f : X ⟶ Y) (M : X.Modules) (V : Y.EtaleSite)
     (q : ModuleChart f V) : moduleChartMap f M V (𝟙 q) = 𝟙 _ := by
-  sorry
+  ext m
+  change M.val.map (𝟙 (op q.left)) m = m
+  rw [M.val.map_id]
+  rfl
 
 /-- Composition law for the chart diagram.
 Source: Stacks, Tag 03M8 (blueprint: def-trf-space-etale-module-functors).
@@ -95,7 +111,10 @@ Proof: both maps are the iterated module restriction along the composite chart m
 theorem moduleChartMap_comp (f : X ⟶ Y) (M : X.Modules) (V : Y.EtaleSite)
     {q r t : ModuleChart f V} (a : q ⟶ r) (b : r ⟶ t) :
     moduleChartMap f M V (a ≫ b) = moduleChartMap f M V b ≫ moduleChartMap f M V a := by
-  sorry
+  ext m
+  change M.val.map (b.left.op ≫ a.left.op) m =
+    M.val.map a.left.op (M.val.map b.left.op m)
+  exact M.val.map_comp_apply b.left.op a.left.op m
 
 /-- The diagram whose limit is the compatible sections on all scheme charts of `X ×_Y V`.
 Source: Stacks, Tags 03H7 and 03M8 (blueprint: def-trf-space-etale-module-functors). -/
@@ -154,6 +173,69 @@ theorem moduleDirectImageModel_nonempty (f : X ⟶ Y) :
     Nonempty (ModuleDirectImageModel f) := by
   sorry
 
+private theorem model_section_ext (f : X ⟶ Y) (D : ModuleDirectImageModel f)
+    (M : X.Modules) (V : Y.EtaleSite) (s t : (D.functor.obj M).val.obj (op V))
+    (h : ∀ q : ModuleChart f V,
+      (D.projection M V).app (op q) s = (D.projection M V).app (op q) t) : s = t := by
+  let R := Y.structureSheaf.obj.obj (op V)
+  let l (x : (D.functor.obj M).val.obj (op V)) :
+      ModuleCat.of R R ⟶ (D.functor.obj M).val.obj (op V) :=
+    ModuleCat.ofHom (LinearMap.toSpanSingleton R _ x)
+  have hl : l s = l t := (D.isLimit M V).hom_ext (f := l s) (f' := l t) (fun q ↦ by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro r
+    change (D.projection M V).app q (r • s) =
+      (D.projection M V).app q (r • t)
+    simpa only [map_smul] using congrArg (r • ·) (h q.unop))
+  have hst := ConcreteCategory.congr_hom hl 1
+  simpa [l] using hst
+
+private def model_section_iso (f : X ⟶ Y) (D E : ModuleDirectImageModel f)
+    (M : X.Modules) (V : Y.EtaleSite) :
+    (D.functor.obj M).val.obj (op V) ≅ (E.functor.obj M).val.obj (op V) :=
+  (D.isLimit M V).conePointUniqueUpToIso (E.isLimit M V)
+
+private theorem model_section_iso_projection (f : X ⟶ Y)
+    (D E : ModuleDirectImageModel f) (M : X.Modules) (V : Y.EtaleSite)
+    (q : ModuleChart f V) (s : (D.functor.obj M).val.obj (op V)) :
+    (E.projection M V).app (op q) ((model_section_iso f D E M V).hom s) =
+      (D.projection M V).app (op q) s :=
+  ConcreteCategory.congr_hom
+    ((D.isLimit M V).conePointUniqueUpToIso_hom_comp (E.isLimit M V) (op q)) s
+
+private def model_comparison (f : X ⟶ Y) (D E : ModuleDirectImageModel f) :
+    D.functor ⟶ E.functor where
+  app M := ⟨{
+    app V := (model_section_iso f D E M V.unop).hom
+    naturality := by
+      intro V W a
+      ext s
+      change (model_section_iso f D E M W.unop).hom
+          ((D.functor.obj M).val.map a s) =
+        (E.functor.obj M).val.map a ((model_section_iso f D E M V.unop).hom s)
+      apply model_section_ext f E M W.unop
+      intro q
+      erw [model_section_iso_projection, E.restriction_projection M a.unop,
+        model_section_iso_projection, D.restriction_projection M a.unop] }⟩
+  naturality := by
+    intro M N a
+    ext V s
+    change (model_section_iso f D E N V.unop).hom
+        ((D.functor.map a).val.app V s) =
+      (E.functor.map a).val.app V ((model_section_iso f D E M V.unop).hom s)
+    apply model_section_ext f E N V.unop
+    intro q
+    rw [model_section_iso_projection, E.map_projection,
+      model_section_iso_projection, D.map_projection]
+
+private theorem model_comparison_projection (f : X ⟶ Y)
+    (D E : ModuleDirectImageModel f) (M : X.Modules) (V : Y.EtaleSite)
+    (q : ModuleChart f V) (s : (D.functor.obj M).val.obj (op V)) :
+    (E.projection M V).app (op q) (((model_comparison f D E).app M).val.app (op V) s) =
+      (D.projection M V).app (op q) s :=
+  model_section_iso_projection f D E M V q s
+
 /-- The chart universal property determines direct image up to a unique normalized iso.
 Source: Stacks, Tags 03H7 and 03M8 (blueprint: def-trf-space-etale-module-functors).
 Proof: the universal property gives the unique section map between the two limits on
@@ -166,7 +248,35 @@ theorem moduleDirectImageModel_unique (f : X ⟶ Y) (D E : ModuleDirectImageMode
         (s : (D.functor.obj M).val.obj (op V)),
         (E.projection M V).app (op q) ((e.hom.app M).val.app (op V) s) =
           (D.projection M V).app (op q) s := by
-  sorry
+  let e : D.functor ≅ E.functor :=
+    { hom := model_comparison f D E
+      inv := model_comparison f E D
+      hom_inv_id := by
+        ext M V s
+        apply model_section_ext f D M V.unop
+        intro q
+        change (D.projection M V.unop).app (op q)
+            (((model_comparison f E D).app M).val.app V
+              (((model_comparison f D E).app M).val.app V s)) =
+          (D.projection M V.unop).app (op q) s
+        rw [model_comparison_projection, model_comparison_projection]
+      inv_hom_id := by
+        ext M V s
+        apply model_section_ext f E M V.unop
+        intro q
+        change (E.projection M V.unop).app (op q)
+            (((model_comparison f D E).app M).val.app V
+              (((model_comparison f E D).app M).val.app V s)) =
+          (E.projection M V.unop).app (op q) s
+        rw [model_comparison_projection, model_comparison_projection] }
+  refine ⟨e, ?_, ?_⟩
+  · exact model_comparison_projection f D E
+  · intro e' he'
+    apply Iso.ext
+    ext M V s
+    apply model_section_ext f E M V.unop
+    intro q
+    exact (he' M V.unop q s).trans (model_comparison_projection f D E M V.unop q s).symm
 
 /-- The normalized direct-image model, selected by its complete limit universal property.
 Source: Stacks, Tags 03H7 and 03M8 (blueprint: def-trf-space-etale-module-functors). -/

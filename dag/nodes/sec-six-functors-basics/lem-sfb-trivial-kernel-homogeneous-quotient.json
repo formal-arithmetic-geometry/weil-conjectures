@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-trivial-kernel-homogeneous-quotient",
+ "kind": "statement",
+ "title": "Homogeneous quotient for a homomorphism with trivial scheme-theoretic kernel",
+ "statement": "Let $k$ be a field [def-weil-field], and let $H,G$ be separated finite-type $k$-group schemes [def-sc-group-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism]. Let $i:H\\to G$ be a homomorphism whose scheme-theoretic kernel $H\\times_{G,i,e_G}\\operatorname{Spec}k$ is the trivial $k$-group scheme $\\operatorname{Spec}k$ [def-pc-fibre-product, def-weil-affine-spectrum]. There exist a finite-type $k$-scheme $X$, a left $G$-action $\\mu:G\\times_k X\\to X$, and a point $o:\\operatorname{Spec}k\\to X$. Here a left action satisfies $\\mu(e_G,x)=x$ and $\\mu(g,\\mu(g',x))=\\mu(gg',x)$ on points over every $k$-scheme. Put $q(g)=\\mu(g,o)$. For every $k$-scheme $T$ and every $a,b\\in G(T)$ one has\n$$q_T(a)=q_T(b)\\quad\\Longleftrightarrow\\quad a^{-1}b\\in i_T(H(T)).$$\nHere $Y(T)=\\operatorname{Mor}_k(T,Y)$, and $o_T$ denotes the base change of $o$. No closed-immersion hypothesis is imposed on $i$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.28, printed p.105, with Definition 5.20(a), printed p.104; Appendix B Theorem B.37, printed p.605 (the trivial-kernel, not closed-subgroup, version). The test-scheme coset equality is the affine-local form of Definition 5.20(a). Only the representability and coset-fibre conclusions are retained."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "The trivial scheme-theoretic kernel implies that $i_T:H(T)\\to G(T)$ is injective for every $k$-scheme $T$: if $i_T(h)=i_T(h')$, then $h^{-1}h'$ factors through the kernel and is therefore the identity. Define a left $H$-action on $G$ by $h\\cdot g=g\\,i(h)^{-1}$. The equality $i(hh')^{-1}=i(h')^{-1}i(h)^{-1}$ proves the action law. If $h\\cdot g=g$, cancellation and the established injectivity give $h=1$. Thus this action is free on all scheme tests, including nonreduced tests.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.31 and Appendix B, Example B.2; right-coset convention."
+   }
+  },
+  {
+   "text": "Regard $H,G$ as their representable algebraic spaces. The structure map of $H$ is flat by the field-flatness lemma; it is locally finitely presented by the locally-Noetherian lemma, since $k$ is a field and $H/k$ is finite type. Apply the free-flat-action quotient theorem to obtain the fppf sheaf $F=G/H$ and a surjective flat locally finitely presented map $q:G\\to F$. Its kernel-pair isomorphism, after switching the two factors in the theorem's formula, is\n$$G\\times_kH\\xrightarrow{\\sim}G\\times_FG,\\qquad(g,h)\\longmapsto(g,g\\,i(h)).$$\nIndeed the theorem's pair $(g i(h)^{-1},g)$ is of this form after replacing the first coordinate by $g i(h)^{-1}$. In particular $q_T(a)=q_T(b)$ if and only if $b=a i_T(h)$ for a unique $h\\in H(T)$.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-pc-flat-field",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-sfb-free-flat-group-space-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH, lemma-quotient-free-action; schemes are representable algebraic spaces."
+   }
+  },
+  {
+   "text": "Left multiplication commutes with the right $H$-action and therefore defines a left $G$-action on $F$. Explicitly, for $g\\in G(T)$ and $x\\in F(T)$ choose the fppf local lifts $a_\\alpha\\in G(T_\\alpha)$ of $x$ supplied by the quotient theorem and set $(g\\cdot x)|_{T_\\alpha}=q(g|_{T_\\alpha}a_\\alpha)$. On overlaps two lifts differ by right multiplication by $i(h)$, so their left translates have equal $q$-images by the kernel-pair formula. The sheaf property glues these sections uniquely; the same formula proves independence of lifts and naturality in $T$. On these covers the unit and associativity laws reduce to those of $G$, hence hold globally. Write $o_F=q(1)$; then $q(g)=g\\cdot o_F$.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.28 and Appendix B Theorem B.37: the action on the quotient; explicit local-section construction."
+   }
+  },
+  {
+   "text": "The diagonal of $F/k$ is quasi-compact, without first asserting separatedness. Its pullback by the fppf covering $q\\times q:G\\times_kG\\to F\\times_kF$ is the morphism $G\\times_kH\\to G\\times_kG$ of Step 2. The source is quasi-compact: finite affine covers of $G$ and $H$ give a finite cover by affine products. The target is quasi-separated: it is separated over the affine field spectrum, so its relative diagonal is closed and its absolute diagonal is quasi-compact. The qcqs permanence lemma therefore makes this morphism quasi-compact. The covering calculus gives that $q\\times q$ is fppf (base change and composition of $q$), and quasi-compactness descends along this covering by the quasi-compactness descent lemma. This verifies exactly the diagonal hypothesis of the dense-scheme-open theorem.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-quasicompact-fppf-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041L, lemma-descending-property-quasi-compact; spaces-morphisms.tex Tag 073B; spaces-topologies.tex Tag 03Y9."
+   }
+  },
+  {
+   "text": "The quotient $F$ is finite type over $k$. The source-descent lemma applies to $G\\xrightarrow qF\\to\\operatorname{Spec}k$: these are algebraic-space morphisms, $q$ is surjective flat lfp, and their composite is locally finite type. Thus $F/k$ is locally finite type. The continuous surjection $|G|\\to|F|$ makes $|F|$ quasi-compact. By the qcqs permanence lemma (whose quasi-compact-space convention is the point-topological one), $F\\to\\operatorname{Spec}k$ is quasi-compact because the target is affine and quasi-separated. Combining the two properties gives finite type. Notice that this argument needs no separatedness of $F$.",
+   "uses": [
+    "lem-sfb-representable-lft-fppf-source-descent",
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "lem-sfb-space-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06EW, lemma-locally-finite-type-fppf-local-source; spaces-morphisms.tex Tag 073B; stacks-properties.tex Tag 04XL."
+   }
+  },
+  {
+   "text": "By the dense-scheme-open theorem and Step 4, $F$ contains a dense scheme open $V$. It is nonempty since $q(1)$ is a point of $F$. For each finite intermediate extension $K$ in a fixed algebraic closure of $k$, let $V[K]=(F_K)_{\\mathrm{sch}}$ be the largest scheme open supplied by the schematic-open lemma. It contains $V_K$. Translation by an element of $G(K)$ is an automorphism of $F_K$ and carries a scheme open to a scheme open; applying the same observation to its inverse proves that it preserves $V[K]$. For $K\\subseteq K'$, the base change $(V[K])_{K'}$ is a scheme open of $F_{K'}$, hence is contained in $V[K']$. These assertions concern open subspaces and therefore also their inverse images in $G_K$.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "lem-sfb-space-largest-schematic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix B Theorem B.37, Step 1; dense generic quotient implemented by Stacks Tags 086U and 03JH."
+   }
+  },
+  {
+   "text": "The inverse image $q^{-1}(V)$ is a nonempty open of the finite-type scheme $G$. Take a nonempty principal affine open inside it and a maximal ideal of its nonzero finite-type $k$-algebra. Zariski's lemma makes the residue field finite over $k$. Embed it in the fixed algebraic closure; thus for some finite $k_1/k$ there is $g_0\\in G(k_1)$ whose image lies in $V[k_1]$. For every finite $K/k_1$ and $g\\in G(K)$, translation by $g g_0^{-1}$ sends $q(g_0)$ to $q(g)$; invariance of $V[K]$ gives $q(G(K))\\subseteq V[K]$. Apply the existing finite-extension exhaustion lemma to $Z=G_{k_1}$ and the compatible opens $U[K]=q_K^{-1}(V[K])$, which contain all $K$-rational points. It gives $U[K]=G_K$ for some finite $K/k_1$. Base-change surjectivity of $q$ then gives $V[K]=F_K$. Consequently $F_K$ is a scheme $Y$, finite type over $K$ by base-change stability of finite type.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma",
+    "lem-sfb-finite-extension-open-exhaustion",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-four-property-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix B Lemma B.36 and Theorem B.37, Step 1, printed pp.604-605."
+   }
+  },
+  {
+   "text": "We can now prove that $i$ is closed using only the scheme quotient over $K$. The rational point $o_K=q_K(1):\\operatorname{Spec}K\\to Y$ has residue field $K$, so its image is closed by the closed-point field criterion for finite-type schemes. The residue-point immersion lemma makes $o_K$ a closed immersion. Base changing the kernel-pair formula of Step 2 along $1:\\operatorname{Spec}K\\to G_K$ identifies $H_K$ with $G_K\\times_{Y,o_K}\\operatorname{Spec}K$, compatibly with $i_K$. Hence $i_K$ is a closed immersion, as the base change of the closed immersion $o_K$ along $q_K$ by the closed-immersion base-change lemma. A finite basis of $K/k$ makes $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ finite flat, surjective and locally finitely presented; the same is true after base change to $G$. Closed-immersion fppf descent applied to $i$ and the cover $G_K\\to G$ proves that $i$ is a closed immersion. No monomorphism-to-closed-immersion theorem has been used.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-trf-closed-point-residue-immersion",
+    "lem-sfb-space-closed-immersion-fppf-descent",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.34, first proof, applied after the finite extension of Appendix B Theorem B.37 Step 1; descent: Stacks Tag 0420."
+   }
+  },
+  {
+   "text": "Apply the existing closed-subgroup homogeneous quotient theorem to the now-established closed subgroup $i:H\\hookrightarrow G$. It supplies a separated finite-type $k$-scheme $X$ and a flat surjective finitely presented $p:G\\to X$ with the same right-coset fibre relation as $q$. Its hypotheses on $H,G$ and on closedness have all been verified. The scheme and quotient map are obtained at this point over the original field $k$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.28, closed-subgroup case, as independently split in lem-sfb-algebraic-group-homogeneous-quotient."
+   }
+  },
+  {
+   "text": "Identify $X$ with $F$ as fppf sheaves. For $x\\in F(T)$, take fppf local lifts $a_\\alpha:T_\\alpha\\to G$ and assign $p(a_\\alpha)$. Their equality on overlaps follows from the common coset relation; the fppf-sheaf property of the representable algebraic space $X$ glues them to a unique section of $X(T)$. Conversely the flat surjective finitely presented morphism $p$ gives fppf local lifts of every $X(T)$-section: its scheme pullback along $T\\to X$ is itself an fppf covering by the definition of the big fppf site. Apply the same construction with $q$ and the fppf-sheaf property of $F$. The two transformations are natural and inverse, since on local lifts their composites send $a$ back to its original image. Thus the identification carries $p$ to $q$. It transports the natural action from Step 3 to a morphism $\\mu:G\\times_kX\\to X$: a natural transformation between representable functors is the morphism obtained by evaluating it on the identity of its source. Put $o=p(1)$. The already verified action laws give $p(g)=\\mu(g,o)$.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "def-trf-scheme-algebraic-space",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.28 and Definition 5.20; explicit comparison of the quotient fppf sheaves."
+   }
+  },
+  {
+   "text": "For any $k$-scheme $T$, Step 10 identifies the required orbit map with $p_T$. The coset-fibre equality in the closed-subgroup quotient theorem therefore reads\n$$q_T(a)=q_T(b)\\quad\\Longleftrightarrow\\quad a^{-1}b\\in i_T(H(T)).$$\nThe quotient theorem quantifies over every scheme $T$, so this includes non-affine and nonreduced schemes. The finite-type property of $X$, its action and its $k$-point have all been obtained without an initial closed-immersion assumption on $i$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 5.20(a) and Theorem 5.28, the claimed clauses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-sc-group-scheme",
+  "def-trf-scheme-algebraic-space",
+  "lem-kun-closed-point-field",
+  "lem-pc-flat-field",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-sfb-finite-extension-open-exhaustion",
+  "lem-sfb-free-flat-group-space-quotient",
+  "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "lem-sfb-representable-lft-fppf-source-descent",
+  "lem-sfb-space-closed-immersion-fppf-descent",
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-space-largest-schematic-open",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-zariski-lemma",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix B Theorem B.37 Step 1 and Theorem 5.34 first proof. Agent-written assembly replaces generic quotient construction by existing Stacks algebraic-space quotient/dense-scheme-open nodes, proves closedness after the finite extension, descends closedness, then reuses the independent closed-subgroup quotient."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient|Quotient|homogeneous|torsor|Torsor",
+   "results": "{\"t\": \"2026-10-23T14:32:38Z\", \"tool\": \"grep\", \"query\": \"quotient|Quotient|homogeneous|torsor|Torsor\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient representability for an injectively embedded finite-type group scheme is absent; abstract group quotients, representations and PreGaloisCategory quotients do not concern schemes. Scheme.LocalRepresentability.isRepresentable requires a jointly surjective open atlas, not supplied by these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T14:32:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient representability for an injectively embedded finite-type group scheme is absent; abstract group quotients, representations and PreGaloisCategory quotients do not concern schemes. Scheme.LocalRepresentability.isRepresentable requires a jointly surjective open atlas, not supplied by these hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous space quotient of an algebraic group by a homomorphism with trivial kernel is representable by a scheme over the field",
+   "results": "{\"t\": \"2026-10-23T14:33:15Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous space quotient of an algebraic group by a homomorphism with trivial kernel is representable by a scheme over the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.ofQuotient\", \"Representation.ofQuotient\", \"QuotientGroup.quotientKerEquivOfSurjective\", \"Ideal.quotientKerAlgEquivOfSurjective\", \"Rep.quotientToCoinvariants\", \"Representation.ofQuotient_coe_apply\", \"Representation.ofQuotient.congr_simp\", \"QuotientGroup.lift\"], \"digest\": \"1f40d6679107f86d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient representability for an injectively embedded finite-type group scheme is absent; abstract group quotients, representations and PreGaloisCategory quotients do not concern schemes. Scheme.LocalRepresentability.isRepresentable requires a jointly surjective open atlas, not supplied by these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type group scheme over a field modulo an injective homomorphism from another finite type group scheme has a representable homogeneous quotient with coset fibres and faithfully flat local lifts",
+   "results": "{\"t\": \"2026-10-23T14:32:45Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type group scheme over a field modulo an injective homomorphism from another finite type group scheme has a representable homogeneous quotient with coset fibres and faithfully flat local lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Rep.instInjective\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\", \"FDRep.instInjectiveOfNeZeroCastCard\", \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\"], \"digest\": \"15aad7d0719aef9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group, representation and Galois-category quotients are different objects; Scheme.LocalRepresentability.isRepresentable (Mathlib/AlgebraicGeometry/Sites/Representability.lean:210) assumes an open atlas and local surjectivity, which are not supplied for this coset functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the fppf coset sheaf G/H for finite type group schemes and a monomorphism H to G without assuming it is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:33:19Z\", \"tool\": \"leanfinder\", \"query\": \"Representability of the fppf coset sheaf G/H for finite type group schemes and a monomorphism H to G without assuming it is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget₂\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\"], \"digest\": \"1c8d787d6e2bf29c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group, representation and Galois-category quotients are different objects; Scheme.LocalRepresentability.isRepresentable (Mathlib/AlgebraicGeometry/Sites/Representability.lean:210) assumes an open atlas and local surjectivity, which are not supplied for this coset functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of homogeneous coset quotients G/H for finite type group schemes over a field with trivial scheme theoretic kernel",
+   "results": "{\"t\": \"2026-10-23T16:21:58Z\", \"tool\": \"leanfinder\", \"query\": \"Representability of homogeneous coset quotients G/H for finite type group schemes over a field with trivial scheme theoretic kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Rep.ofQuotient\", \"Representation.ofQuotient\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"Action.FintypeCat.term_⧸ₐ_\", \"Rep.quotientToInvariants\", \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\"], \"digest\": \"2f54a7c9428b880f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group or Galois-category quotients and ring quotients, not a homogeneous quotient scheme for a trivial-kernel homomorphism; Loogle did not recognize the group-scheme identifier."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GrpObj",
+   "results": "{\"t\": \"2026-10-23T16:21:58Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GrpObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GrpObj'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group or Galois-category quotients and ring quotients, not a homogeneous quotient scheme for a trivial-kernel homomorphism; Loogle did not recognize the group-scheme identifier."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|homogeneous|coset",
+   "results": "{\"t\": \"2026-10-23T16:21:58Z\", \"tool\": \"grep\", \"query\": \"quotient|homogeneous|coset\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group or Galois-category quotients and ring quotients, not a homogeneous quotient scheme for a trivial-kernel homomorphism; Loogle did not recognize the group-scheme identifier."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous quotient scheme for an injective homomorphism of algebraic groups",
+   "results": "{\"t\": \"2026-10-23T16:21:59Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous quotient scheme for an injective homomorphism of algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.rangeKerLift_injective\", \"QuotientGroup.kerLift_injective\", \"QuotientAddGroup.kerLift_injective\", \"QuotientAddGroup.rangeKerLift_injective\", \"Ideal.quotientKerAlgEquivOfSurjective\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"QuotientGroup.rangeKerLift\", \"QuotientGroup.quotientKerEquivOfSurjective\"], \"digest\": \"913a23e9436ebe39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group or Galois-category quotients and ring quotients, not a homogeneous quotient scheme for a trivial-kernel homomorphism; Loogle did not recognize the group-scheme identifier."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type group scheme monomorphism admits a quotient scheme with orbit map fibres the right cosets",
+   "results": "{\"t\": \"2026-10-23T16:22:01Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type group scheme monomorphism admits a quotient scheme with orbit map fibres the right cosets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Action.FintypeCat.term_⧸ₐ_\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Action.FintypeCat.quotientToEndHom_mk\", \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\"], \"digest\": \"8a72284d4411a2aa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group or Galois-category quotients and ring quotients, not a homogeneous quotient scheme for a trivial-kernel homomorphism; Loogle did not recognize the group-scheme identifier."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+  "date": "2026-10-23",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof, final sentence: the induced homomorphism is a monomorphism, hence a closed immersion by Theorem 5.34. Supporting input in the first proof of Milne Theorem 5.34: Theorem 5.28 applies to a homomorphism with trivial kernel before closedness is known.",
+   "via": [
+    "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trivial-kernel-homogeneous-quotient",
+  "worker": "stage1",
+  "summary": "No new nodes. Retained the full statement. Trivial kernel gives a free action; existing algebraic-space quotient and dense scheme locus plus finite-extension exhaustion supply a scheme quotient after a finite field extension. Its rational identity fibre proves closedness after extension, which descends. The independent closed-subgroup quotient then supplies the finite-type scheme and the explicit sheaf comparison supplies its action. All test schemes and infinitesimal kernels are retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof, final sentence: the induced homomorphism is a monomorphism, hence a closed immersion by Theorem 5.34. Supporting input in the first proof of Milne Theorem 5.34: Theorem 5.28 applies to a homomorphism with trivial kernel before closedness is known. The full homogeneous-quotient prerequisite is realized by Steps 1-11; no chapter or unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic residue fields of closed points input used exactly as stated in the homogeneous-quotient construction; no node of this unit supplies its scheme/field/sheaf assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-ca71c8407",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-ca71c8407 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 20 cited statements (no new nodes); Milne iAG2017 5.24/5.25/5.28, 5.34 first proof, B.36 and B.37 Steps 1-3. Statement and stmt_deps are unchanged against live and side-live (both still unsplit), with no SGA and no re-split note. The route replaces B.37 Step 1 (avoiding quasi-projectivity) with the Stacks 06PH quotient F, then 086U (diagonal qc in step 4 via the qc-fppf-local and qcqs-permanence nodes), the 03JH largest schematic open, Zariski's lemma and B.36, giving F_K a scheme. Step 8 is the 5.34 argument over K (rational point closed, fibre = H_K), then closed-immersion fppf descent. Steps 9-11 use the independent closed-subgroup quotient and an fppf-sheaf identification, which I checked in both directions. I checked the kernel-pair reparametrisation (g i(h)^{-1},g) -> (g,g i(h)), the left-action order and the direction a^{-1}b. A closure walk over all proof_deps reaches neither the item nor its parent: no cycle. Edge cases H=1, H=G, alpha_p and Frobenius are fine. No duplicate node found. tool_use lem-kun-closed-point-field accepted as a generic criterion. Batch-5 flags: def-trf-scheme-algebraic-space and the sfb algebraic-space/group nodes reach sec-trace-formula only through algebraic-space foundations (sk-i-curve-zero) and generic pod base-change/scalar lemmas. None is part of the trace formula or Poincare proof, so this is not a RETURN. FIX (C1): step 8 justified base change of the closed immersion o_K along q_K only by prose; it now cites the Mathlib leaf lem-weil-pbc-closed-immersion-base-change, also added to proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TrivialKernelHomogeneousQuotient",
+  "declaration": "AlgebraicGeometry.exists_homogeneousQuotient_of_trivialKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TrivialKernelHomogeneousQuotient.lean",
+  "statement": "theorem exists_homogeneousQuotient_of_trivialKernel (k : Type u) [Field k] (H G : Over (Spec (.of k))) [GrpObj H] [GrpObj G] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : H ⟶ G) [IsMonHom i] (hker : IsIso (toUnit (GrpObj.ker i))) : ∃ (X : Over (Spec (.of k))) (act : ModObj G X) (o : 𝟙_ (Over (Spec (.of k))) ⟶ X), LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom ∧ ∀ (T : Over (Spec (.of k))) (a b : T ⟶ G), lift a (toUnit T ≫ o) ≫ act.smul = lift b (toUnit T ≫ o) ≫ act.smul ↔ a⁻¹ * b ∈ Set.range (fun h : T ⟶ H ↦ h ≫ i)",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Mathlib's ModObj G X is the left action morphism with unit and associativity laws. IsIso (toUnit (GrpObj.ker i)) expresses triviality of the canonical scheme-theoretic kernel, not an initial closed-immersion hypothesis. The all-scheme-test orbit-map equivalence retains the full scheme structure of H."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84841768c",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; lean.statement verbatim. Clauses checked: field k (u arbitrary); H,G GrpObj over Spec k with IsSeparated+LFT+QuasiCompact (dep records list these); IsMonHom i; hker = IsIso(toUnit(GrpObj.ker i)) with ker = pullback f η (upstream Grp.lean:84, recorded in def-sc-group-scheme) — genuine scheme-theoretic kernel, no closedness assumed, α_p excluded; conclusion ∃ X LFT∧QC, ModObj G X (Mathlib left action, unit+assoc), k-point o, ∀ T a b, lift a (toUnit T≫o)≫smul equality ↔ a⁻¹*b ∈ range(·≫i) — right cosets, same convention as exists_homogeneousQuotient. Edge cases H=1, i=id, empty T, nonreduced fine. ModObj not owned by a group-action def node (pur713-def-modules is ring-object modules); no existing trivial-kernel theorem. Single sorry theorem, docstrings with Milne 5.20(a)/5.28/B.37 and blueprint tag, 11-step proof plan, private proof-dep imports. Report has Worker report and Second reading by Q38. No compile needed (no change)."
+ }
+}

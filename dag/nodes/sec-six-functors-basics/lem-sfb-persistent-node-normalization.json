@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-persistent-node-normalization",
+ "kind": "statement",
+ "title": "Finite normalization at persistent nodes over an arbitrary trait",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $X\\to S$ be projective [def-kun-projective], flat [def-weil-flat-morphism] and finitely presented [def-sbc-locally-finite-presentation], with nonempty nodal geometric fibres. Let $N_K$ be the reduced singular subscheme of $X_K$, and let $N\\subset X$ be its scheme-theoretic closure. Then $N$ is finite etale over $S$ [def-weil-finite-integral-morphism, def-weil-etale-morphism]. The normalization $\\nu:C\\to X$, defined on reduced affine rings by integral closure in the product of their component fraction fields, is finite. The family $C\\to S$ is projective, flat and finitely presented, with nodal geometric fibres and smooth generic fibre [def-sbc-smooth-morphisms]. The map $\\nu$ is an isomorphism over $X\\setminus N$. The inverse image $B=C\\times_XN$ lies in the relative smooth locus of $C$, is finite etale over $S$, and $B\\to N$ is finite etale of constant degree two. The square with vertices $B,C,N,X$ is a pushout of schemes [def-weil-pbc-category-colimit]. For every open subscheme $V\\subseteq X$ [def-weil-open-immersion], the square of the inverse images of $V$ in $B$, $C$, $N$ and $V$ itself is again a pushout of schemes. The coordinate rings of $N$ and $B$ are the integral closures of $R$ in their generic finite algebras; these schemes and their map are therefore determined by their generic finite schemes. The generic square is the normalization and conductor square of $X_K$. The empty case is allowed. A nodal geometric fibre here is reduced of pure dimension one, and each nonsmooth closed point has completed local ring $\\Omega[[x,y]]/(xy)$ [def-weil-geometric-fibre, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The intermediate geometric fibres need not be connected. The map $B\\to C$ is a closed immersion [def-weil-closed-immersion]. Here $X$ is reduced, and scheme-theoretic closure is the scheme-theoretic image of the generic immersion [def-nagata-scheme-theoretic-image]. The finite etale schemes $N$ and $B$ are regular semilocal schemes of dimension one when nonempty; their local rings at closed points are DVRs in which a uniformizer of $R$ is a uniformizer.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Agent persistent-node consequence of Tag 0CDD (lemma-etale-local-at-worst-nodal) and curves.tex Tag 0CBY (lemma-etale-local-structure-nodal-family): horizontal nodes have xy=0, while xy=pi^m is normal. Reconstruction uses the conductor square of more-morphisms.tex Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral). These tags do not state the global assertion verbatim."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pure-dimension",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalization-atlas lemma to $X/S$. It gives reducedness of $X$, the finite surjective normalization $C\\to X$, all asserted family properties of $C/S$, and the canonical generic normalization. The affine-normalization lemma identifies this with integral closure in component fraction fields on every reduced affine open.",
+   "uses": [
+    "lem-sfb-nodal-trait-normalization-atlas",
+    "lem-sfb-split-node-normalization-conductor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD; extracted normalization atlas and affine calculation"
+   }
+  },
+  {
+   "text": "The singular-closure-atlas lemma applies to that same atlas: it gives $N$ and $B$ finite etale over $S$, $B\\to N$ finite etale of degree two, the closed immersion into the smooth locus, the isomorphism away from $N$, and the generic conductor ideal. Its chart identification $N_K=N\\times_SK$ identifies the generic square with the normalization and conductor square.",
+   "uses": [
+    "lem-sfb-persistent-singular-closure-atlas",
+    "lem-sfb-nodal-trait-normalization-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD; extracted horizontal-closure and conductor atlas"
+   }
+  },
+  {
+   "text": "On each persistent model $Q=R'[u,v]/(uv)$ (or $K'[u,v]/(uv)$ on a generic split chart) the split-node algebra lemma gives $Q\\cong E\\times_{R'\\times R'}R'$ with $E\\to R'\\times R'$ surjective, i.e. the exact difference sequence $0\\to Q\\to E\\oplus R'\\to R'\\times R'\\to0$; and $\\operatorname{Spec}E\\to\\operatorname{Spec}Q$ is finite and $\\operatorname{Spec}R'\\to\\operatorname{Spec}Q$ a closed immersion. By the normalization atlas and the closure atlas, on the common chart $U_a=\\operatorname{Spec}P_a\\to\\operatorname{Spec}Q$ (etale, so $P_a$ is flat over $Q$) the inverse images of $C,N,B$ are $\\operatorname{Spec}$ of $P_a\\otimes_QE$, $P_a\\otimes_QR'$, $P_a\\otimes_Q(R'\\times R')$. The pinching-descent lemma applied to $\\operatorname{Spec}Q$ with its identity chart, and its flat-algebra clause with $H=P_a$, shows that the sequence stays exact on $U_a$. On every other chart the square is the identity with $B=N=\\varnothing$. Applied to $X$ with this atlas, its criterion proves the scheme pushout and every open-restriction pushout.",
+   "uses": [
+    "lem-sfb-split-node-normalization-conductor",
+    "lem-sfb-nodal-trait-normalization-atlas",
+    "lem-sfb-persistent-singular-closure-atlas",
+    "lem-sfb-etale-affine-pinching-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0ET0 and 0BMP; extracted affine pinching descent"
+   }
+  },
+  {
+   "text": "Apply finite-etale generic components to $N/S$ and $B/S$, since the DVR is normal integral Noetherian. Their coordinate rings are the integral closures in the respective generic finite algebras. A generic algebra map preserves monic equations, hence integral elements; it restricts uniquely to those subrings. Thus both schemes and their map are determined by their generic data.",
+   "uses": [
+    "lem-sfb-finite-etale-normal-generic-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL (lemma-finite-etale-covering-normal-unramified); preservation of integral elements"
+   }
+  },
+  {
+   "text": "For either finite etale $R$-algebra $T$, all maximal ideals lie over $(\\pi)$ and correspond to maximal ideals of the finite-dimensional algebra $T/\\pi T$, so $T$ is semilocal. Its component decomposition gives domain local rings. At a closed point $t$, $T_t/\\pi T_t$ is a field, so its maximal ideal is $(\\pi)$; flatness makes $\\pi$ nonzero and a nonzerodivisor. Noetherianity and the DVR characterization give a DVR with that uniformizer and dimension one. Generic local rings are fields, proving regularity and dimension one when nonempty. If $N_K=\\varnothing$, the atlas gives $N=B=\\varnothing$, $C=X$; the empty-base degree-two and pushout assertions still hold.",
+   "uses": [
+    "lem-sfb-finite-etale-normal-generic-components",
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-dimension-one",
+    "lem-sfb-persistent-singular-closure-atlas"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD DVR characterization; extracted closure atlas for the empty case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-trait-normalization-atlas",
+  "lem-sfb-split-node-normalization-conductor",
+  "lem-sfb-persistent-singular-closure-atlas",
+  "lem-sfb-etale-affine-pinching-descent",
+  "lem-sfb-finite-etale-normal-generic-components",
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-dimension-one"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Short assembly of the extracted Tag 0CDD chart arguments, affine pinching descent (0ET0, 0BMP), and finite-etale generic determination (0BQL)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a nodal curve family over a discrete valuation ring along the closures of generic nodes with finite etale conductor",
+   "results": "{\"t\": \"2026-10-22T04:21:02Z\", \"tool\": \"leanfinder\", \"query\": \"Normalize a nodal curve family over a discrete valuation ring along the closures of generic nodes with finite etale conductor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"WeierstrassCurve.instIsMinimalMinimal\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"16c49e9fc92d7e46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization exists, but its conductor at persistent nodes, finite etale branches and nodal reconstruction are not stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a nodal relative curve has smooth generic fibre and is reconstructed by pinching its persistent node branches",
+   "results": "{\"t\": \"2026-10-22T04:21:01Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of a nodal relative curve has smooth generic fibre and is reconstructed by pinching its persistent node branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"6d633cc5a77d1702\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization exists, but its conductor at persistent nodes, finite etale branches and nodal reconstruction are not stated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-22T04:21:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization exists, but its conductor at persistent nodes, finite etale branches and nodal reconstruction are not stated."
+  },
+  {
+   "tool": "grep",
+   "query": "conductor|persistent.*node|nodal.*normali",
+   "results": "{\"t\": \"2026-10-22T04:21:01Z\", \"tool\": \"grep\", \"query\": \"conductor|persistent.*node|nodal.*normali\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization exists, but its conductor at persistent nodes, finite etale branches and nodal reconstruction are not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a nodal curve over a discrete valuation ring separates persistent nodes with finite etale conductor",
+   "results": "{\"t\": \"2026-10-22T04:44:24Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a nodal curve over a discrete valuation ring separates persistent nodes with finite etale conductor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\"], \"digest\": \"96b31d48634f10e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization does not state the persistent-node conductor and nodal reconstruction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-22T04:44:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization does not state the persistent-node conductor and nodal reconstruction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a nodal family over a trait is finite and its conductor is finite etale",
+   "results": "{\"t\": \"2026-10-22T04:45:05Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of a nodal family over a trait is finite and its conductor is finite etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"2c616073db8166fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization does not state the persistent-node conductor and nodal reconstruction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. Separate xy=0 branches; retain normal xy=pi^n charts; descend finite normalization and reconstruct by the conductor fibre-product rings.",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-persistent-node-normalization",
+  "worker": "stage1",
+  "summary": "Repair after landing refusal at reader-approved head 5c6dcf7c48d: retained the unchanged statement, four independent statement-only obligations, five-step short assembly and all ten original arguments in report.md. Compared against the current DAG; reopened all seven assembly dependency statements and verified all twelve verbatim citations. The required initial dry run identified three new same-tag pairs; each current statement was read and substantively distinguished in report.md, including the affine-normalization overlap. Reused actual logged searches after reading their candidate results because no statement or search question changed. No project-source attachment was found. Current-DAG repair and source/hypothesis checks are signed under Review by Q123. No Lean was written or compiled; the delivery tool prepares the fresh base. A further completed dry run identified the newly present regular-family section-avoidance node in two additional pairs; its full statement was read and both distinctions added. Five new current-DAG comparisons are now documented.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. Separate xy=0 branches; retain normal xy=pi^n charts; descend finite normalization and reconstruct by the conductor fibre-product rings.; all ten returned steps are accounted for by the four extracted obligations and assembly steps 4-5. blueprint_refs.py ancestor gives None, retained as in the current item.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-trf-etale-source-smoothness",
+  "lem-fin-projective-finite-fibres",
+  "lem-trf-nodal-family-etale-source-locality",
+  "lem-fin-finite-over-projective",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-63e3ffb61",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-63e3ffb61 (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the same split; earlier heads were 70ee190, 50703cd and 5c6dcf7c, all FIX. Every earlier landing was refused as a promotion block ('completed in this project's DAG but not in the live DAG'), not for content. Live still holds the 10-step Q05 split, and the batch5 re-split note is still released, so the item is not superseded. The four new nodes are byte-identical to 5c6dcf7c, and the item differs only in split_report. Re-split check: old steps 1/3/5 go to nodal-trait-normalization-atlas, old step 2 to split-node-normalization-conductor, old steps 4/6 and the conductor half of 9 to persistent-singular-closure-atlas, and old steps 7/8 to etale-affine-pinching-descent. The determination half of step 9 and step 10 stay at full length as assembly steps 4 and 5. The nodes are of comparable size, statement-only, and none restates the item. Sources read: 0CDD (models l.5889, π is a uniformizer of R'), 0ET0 (l.4101, with A'=E, A=D, B=T) and 0BMP (l.4183, with overlaps through flat affine opens and 023Q). No SGA is cited and split_report.tool_uses is empty. I checked the conductor algebra (E=Q[e], I=(u,v)=IE, Q≅E×_{R×R}R) and the nonsplit conductor on ℝ[x,y]/(x²+y²). I tested smooth, uv=0, uv=π, uv=π^n (n>1), empty N_K and zero-ring cases. The new same-tag nodes (kernel-pair descent, normalization-affine-total-fractions, generic-residue charts, section avoidance) and the formal-node/conductor nodes created since 2026-10-22 are not duplicates. The 5c6dcf7c FIX was lost again and is re-applied. C1/C3: step 3 now cites the atlas, applies the pinching node to Spec Q with its identity chart and the flat clause with H=P_a, then applies it to X, and reads R' for R. E3: the closure atlas gets back the sentence that classes the generic K'[u,v]/(uv) charts as persistent. B2: π' and π_a are defined as uniformizers. The assembly is 2774 characters. Maintainer: land these fixes, not the delivered step 3 and node statements.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PersistentNodeNormalization",
+  "declaration": "AlgebraicGeometry.persistent_node_normalization",
+  "declarations": [
+   "AlgebraicGeometry.persistentGenericSingular",
+   "AlgebraicGeometry.persistentGenericSingularMap",
+   "AlgebraicGeometry.persistentNodes",
+   "AlgebraicGeometry.persistentNodesι",
+   "AlgebraicGeometry.persistentBranches",
+   "AlgebraicGeometry.persistent_node_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PersistentNodeNormalization.lean",
+  "statement": "theorem persistent_node_normalization (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (η : Spec (.of K) ⟶ Spec (.of R)) (hη : η = Spec.map (CommRingCat.ofHom (algebraMap R K))) (X : Scheme.{u}) (f : X ⟶ Spec (.of R)) [IsHProjective f] [Flat f] [LocallyOfFinitePresentation f] (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty (pullback (C := Scheme.{u}) f g) ∧ IsReduced (pullback (C := Scheme.{u}) f g) ∧ (pullback (C := Scheme.{u}) f g).IsPureDimension 1 ∧ ∀ x : pullback (C := Scheme.{u}) f g, x ∉ (pullback.snd f g).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) f g).presheaf.stalk x)) ((pullback (C := Scheme.{u}) f g).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X (1 : Fin 2) : MvPowerSeries (Fin 2) Ω)}))) : IsReduced X ∧ IsFinite (persistentNodesι f η ≫ f) ∧ Etale (persistentNodesι f η ≫ f) ∧ IsFinite X.fromReducedNormalization ∧ IsHProjective (X.fromReducedNormalization ≫ f) ∧ Flat (X.fromReducedNormalization ≫ f) ∧ ∃ hfp : LocallyOfFinitePresentation (X.fromReducedNormalization ≫ f), (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty (pullback (C := Scheme.{u}) (X.fromReducedNormalization ≫ f) g) ∧ IsReduced (pullback (X.fromReducedNormalization ≫ f) g) ∧ (pullback (C := Scheme.{u}) (X.fromReducedNormalization ≫ f) g).IsPureDimension 1 ∧ ∀ x : pullback (C := Scheme.{u}) (X.fromReducedNormalization ≫ f) g, x ∉ (pullback.snd (X.fromReducedNormalization ≫ f) g).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) (X.fromReducedNormalization ≫ f) g).presheaf.stalk x)) ((pullback (C := Scheme.{u}) (X.fromReducedNormalization ≫ f) g).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X (1 : Fin 2) : MvPowerSeries (Fin 2) Ω)}))) ∧ Smooth (pullback.snd (X.fromReducedNormalization ≫ f) η) ∧ (∀ U : X.Opens, Disjoint (U : Set X) (Set.range (persistentNodesι f η)) → IsIso (pullback.snd X.fromReducedNormalization U.ι)) ∧ IsClosedImmersion (pullback.fst X.fromReducedNormalization (persistentNodesι f η)) ∧ (∀ z : persistentBranches f η, pullback.fst X.fromReducedNormalization (persistentNodesι f η) z ∈ (@Scheme.Hom.smoothLocus _ _ (X.fromReducedNormalization ≫ f) hfp : X.reducedNormalization.Opens)) ∧ IsFinite (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f) ∧ Etale (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f) ∧ IsFinite (pullback.snd X.fromReducedNormalization (persistentNodesι f η)) ∧ Etale (pullback.snd X.fromReducedNormalization (persistentNodesι f η)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ persistentNodes f η), Nat.card (pullback (C := Scheme.{u}) (pullback.snd X.fromReducedNormalization (persistentNodesι f η)) g) = 2) ∧ IsPushout (pullback.fst X.fromReducedNormalization (persistentNodesι f η)) (pullback.snd X.fromReducedNormalization (persistentNodesι f η)) X.fromReducedNormalization (persistentNodesι f η) ∧ (∀ (V : Scheme.{u}) (j : V ⟶ X) [IsOpenImmersion j] (a : pullback (C := Scheme.{u}) (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization) j ⟶ pullback (C := Scheme.{u}) X.fromReducedNormalization j) (c : pullback (C := Scheme.{u}) (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization) j ⟶ pullback (C := Scheme.{u}) (persistentNodesι f η) j), a ≫ pullback.fst X.fromReducedNormalization j = pullback.fst (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization) j ≫ pullback.fst X.fromReducedNormalization (persistentNodesι f η) → a ≫ pullback.snd X.fromReducedNormalization j = pullback.snd (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization) j → c ≫ pullback.fst (persistentNodesι f η) j = pullback.fst (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization) j ≫ pullback.snd X.fromReducedNormalization (persistentNodesι f η) → c ≫ pullback.snd (persistentNodesι f η) j = pullback.snd (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization) j → IsPushout a c (pullback.snd X.fromReducedNormalization j) (pullback.snd (persistentNodesι f η) j)) ∧ (Function.Injective (pullback.fst (persistentNodesι f η ≫ f) η).appTop.hom ∧ ∀ z : Γ(pullback (C := Scheme.{u}) (persistentNodesι f η ≫ f) η, ⊤), (((pullback.snd (persistentNodesι f η ≫ f) η ≫ η).appTop).hom.comp (Scheme.ΓSpecIso (.of R)).inv.hom).IsIntegralElem z ↔ ∃ a : Γ(persistentNodes f η, ⊤), (pullback.fst (persistentNodesι f η ≫ f) η).appTop.hom a = z) ∧ (IsRegularScheme (persistentNodes f η) ∧ (closedPoints (persistentNodes f η)).Finite ∧ (Nonempty (persistentNodes f η) → topologicalKrullDim (persistentNodes f η) = 1) ∧ ∀ x : persistentNodes f η, IsClosed ({x} : Set (persistentNodes f η)) → ∃ hd : IsDomain ((persistentNodes f η).presheaf.stalk x), @IsDiscreteValuationRing ((persistentNodes f η).presheaf.stalk x) _ hd ∧ ∀ π : R, Irreducible π → IsLocalRing.maximalIdeal ((persistentNodes f η).presheaf.stalk x) = Ideal.span {((persistentNodes f η).presheaf.Γgerm x).hom.comp ((persistentNodesι f η ≫ f).appTop.hom.comp (Scheme.ΓSpecIso (.of R)).inv.hom) π}) ∧ (Function.Injective (pullback.fst (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f) η).appTop.hom ∧ ∀ z : Γ(pullback (C := Scheme.{u}) (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f) η, ⊤), (((pullback.snd (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f) η ≫ η).appTop).hom.comp (Scheme.ΓSpecIso (.of R)).inv.hom).IsIntegralElem z ↔ ∃ a : Γ(persistentBranches f η, ⊤), (pullback.fst (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f) η).appTop.hom a = z) ∧ (IsRegularScheme (persistentBranches f η) ∧ (closedPoints (persistentBranches f η)).Finite ∧ (Nonempty (persistentBranches f η) → topologicalKrullDim (persistentBranches f η) = 1) ∧ ∀ x : persistentBranches f η, IsClosed ({x} : Set (persistentBranches f η)) → ∃ hd : IsDomain ((persistentBranches f η).presheaf.stalk x), @IsDiscreteValuationRing ((persistentBranches f η).presheaf.stalk x) _ hd ∧ ∀ π : R, Irreducible π → IsLocalRing.maximalIdeal ((persistentBranches f η).presheaf.stalk x) = Ideal.span {((persistentBranches f η).presheaf.Γgerm x).hom.comp ((pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f).appTop.hom.comp (Scheme.ΓSpecIso (.of R)).inv.hom) π}) ∧ (∀ ψ : persistentBranches f η ⟶ persistentNodes f η, ψ ≫ (persistentNodesι f η ≫ f) = pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f → pullback.fst (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f) η ≫ ψ = pullback.fst (pullback.fst X.fromReducedNormalization (persistentNodesι f η) ≫ X.fromReducedNormalization ≫ f) η ≫ pullback.snd X.fromReducedNormalization (persistentNodesι f η) → ψ = pullback.snd X.fromReducedNormalization (persistentNodesι f η)) ∧ (∃ e : pullback (C := Scheme.{u}) (X.fromReducedNormalization ≫ f) η ≅ (pullback (C := Scheme.{u}) f η).reducedNormalization, e.hom ≫ (pullback (C := Scheme.{u}) f η).fromReducedNormalization ≫ pullback.fst f η = pullback.fst (X.fromReducedNormalization ≫ f) η ≫ X.fromReducedNormalization ∧ e.hom ≫ (pullback (C := Scheme.{u}) f η).fromReducedNormalization ≫ pullback.snd f η = pullback.snd (X.fromReducedNormalization ≫ f) η) ∧ (∃ e : pullback (C := Scheme.{u}) (persistentNodesι f η ≫ f) η ≅ persistentGenericSingular f η, e.hom ≫ persistentGenericSingularMap f η = pullback.fst (persistentNodesι f η ≫ f) η ≫ persistentNodesι f η ∧ e.hom ≫ (pullback.snd f η).smoothLocus.closedComplement ≫ pullback.snd f η = pullback.snd (persistentNodesι f η ≫ f) η) ∧ (∀ U : (pullback (C := Scheme.{u}) f η).affineOpens, ∀ a : Γ(pullback (C := Scheme.{u}) f η, U.1), a ∈ ((pullback.snd f η).smoothLocus.closedComplement).ker.ideal U ↔ ∀ z : Γ((pullback (C := Scheme.{u}) f η).reducedNormalization, (pullback (C := Scheme.{u}) f η).fromReducedNormalization ⁻¹ᵁ U.1), ∃ c : Γ(pullback (C := Scheme.{u}) f η, U.1), ((pullback (C := Scheme.{u}) f η).fromReducedNormalization.app U.1).hom c = ((pullback (C := Scheme.{u}) f η).fromReducedNormalization.app U.1).hom a * z)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical reduced generic singular subscheme, its scheme-theoretic closure, and the pullback branch scheme are real constructions in the owning module. Reuses the recorded componentwise normalization. Pure-dimension and regular-scheme dependencies added from existing landed nodes. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4dcd96e6b",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read node vs live side node (only lean + stmt_deps changed; stmt_deps gains two landed def nodes pure-dimension/regular-scheme, both used), the full module, all 18 dep records, ReducedNormalization, IsHProjective, closedComplement, Mathlib smoothLocus. Hypotheses: DVR R, IsFractionRing K, η pinned by hη, IsHProjective+Flat+LFP (=finite presentation), hgeom over all alg. closed Ω:Type u: nonempty, reduced, pure dim 1, completed stalk ≃ Ω[[x,y]]/(xy) at non-smooth points (equivalent to closed-point form); no extra assumptions. Conclusions all rendered: X reduced; N finite étale/S (scheme-theoretic image of reduced generic singular locus); ν finite; C/S H-projective, flat, fp, nodal fibres, smooth generic fibre; iso off N; B=C×_X N closed in C, in smooth locus, finite étale over S and N, geometric fibres of card 2; IsPushout orientation correct; open-V pushout with a,c pinned by both projection equations; integral-closure coordinate rings + uniqueness of B→N from generic map; generic C_K≅(X_K)^ν, N_K identification, conductor criterion; regular semilocal dim 1 when nonempty, DVR stalks with π uniformizer. Edge cases smooth/uv=0/uv=π^n/nonsplit/empty/V=∅,X fine. Statement verbatim, only sorry the theorem, docstrings with source+blueprint, 10-step proof docstring. No recompilation (no change). Advisories: stray '(C := Scheme.{u})' in docstring steps 3 and 7; Mathlib support decls smoothLocus/vanishingIdeal/closedComplement not in stmt_dep records."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

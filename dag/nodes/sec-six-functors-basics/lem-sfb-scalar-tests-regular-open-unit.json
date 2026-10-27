@@ -1,0 +1,211 @@
+{
+ "id": "lem-sfb-scalar-tests-regular-open-unit",
+ "kind": "statement",
+ "title": "Scalar contractible tests detect the regular-module open unit",
+ "statement": "Let $X$ be any scheme and $U\\subseteq X$ an open subscheme. Let $\\Lambda$ be an arbitrary commutative condensed ring [sk-def-sfb-condensed-ring], with $\\Lambda_Z=p_Z^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] on each small pro-etale site [def-weil-pbc-proetale-site]. Suppose the actual derived restriction $R\\Gamma(V,\\Lambda_V[0])\\to R\\Gamma(U\\times_XV,\\Lambda_{U\\times_XV}[0])$ is an isomorphism for every affine weakly contractible $V\\to X$ on the full $X$ site [sk-def-pe-weak-contractible]. Then for every weakly etale $a:Y\\to X$ and $j:U\\times_XY\\to Y$, the specified ordinary unbounded derived adjunction unit [sk-def-sfb-module-derived-pushpull] $\\Lambda_Y[0]\\to Rj_*Lj^*\\Lambda_Y[0]$ is an isomorphism in the derived category of internal $\\Lambda_Y$-modules [sk-def-sfb-module-objects], where $\\Lambda_Y$ is its regular module. There is no lisse-module assertion; $Y$ need not be affine. Empty schemes and identity opens are included.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-pe-weak-contractible"
+ ],
+ "proof": [
+  {
+   "text": "Pass from internal modules to section-ring module sheaves by the exact operations equivalence; its unit comparison preserves the actual ordinary open unit and the pulled coefficient ring.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "det-def-sfb-sheaf-tensor-structure",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  },
+  {
+   "text": "For j:U times_X Y -> Y, resolve j^*R[0] by a K-injective I. The chain map eta followed by j_* of the resolution represents the exact-left/K-injective-right derived unit. Transport along the canonical exact/K-flat comparison, whose transpose is the identity, to identify it with the specified unit.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-kflat-derived-adjunction-transport-shifts",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  },
+  {
+   "text": "Regard every Y-site object as an X-site object by composition with a. Cover it on the full X site by affine weakly contractible objects, retaining the maps to Y. Thus every testing object satisfies precisely hscalar on X, with no assertion that its open puncture is weakly contractible.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "sk-thm-pe-weakly-contractible-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  },
+  {
+   "text": "On such a V the evaluated chain map sends x to its restriction on U times_X V followed by the resolution. Restriction of I remains K-injective. The module/abelian derived-sections comparison and exact evaluation on V identify this very arrow with the scalar restriction in hscalar, using naturality; hence it is invertible.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-sfb-ringed-sections-forget-abelian",
+    "det-pe-wc-sections-exact",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  },
+  {
+   "text": "The cone evaluates to an acyclic complex on the contractible covering basis. Exact evaluation commutes with cohomology. Sheaf separatedness forces every cohomology sheaf to vanish on all objects; hence the cone is acyclic. Localization inverts the unit, and the exact operations equivalence transports back. This includes empty bases and identity opens.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "det-pe-wc-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "det-def-sfb-sheaf-tensor-structure",
+  "det-pe-wc-sections-exact",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-kflat-derived-adjunction-transport-shifts",
+  "lem-sfb-ringed-sections-forget-abelian",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-thm-pe-weakly-contractible-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived open adjunction unit for a locally free module is detected by scalar restriction on weakly contractible pro etale objects",
+   "results": "8 hits, including Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction and PresheafOfModules.freeAdjunctionUnit. These underived free-module adjunctions do not detect the actual unbounded derived open unit.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules on a ringed site derived restriction along an object commutes with open direct image and preserves its adjunction unit",
+   "results": "8 hits including SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj and AlgebraicGeometry.Scheme.Modules.restrictAdjunction. The section formula is relevant underived input; no comparison with the condensed K-flat/K-injective adjunction or cover criterion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"Adjunction.unit\"",
+   "results": "CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful only. Open restriction is not generally fully faithful.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*[Uu]nit|[Uu]nit.*regular|[Uu]nit.*finiteFree|finiteFree.*[Uu]nit; Open.*BaseChange and OpenUnit module paths",
+   "results": "Read ProEtaleOpenUnitEvaluation (finite constant coefficients, underived), ProEtaleIntrinsicOpenUnit (j_! unit, wrong adjunction), SecSmoothPurity.OpenBaseChangeDerivedUnit (finite coefficients and j_!), DerivedBaseChangeOpenUnit (Zariski O-modules). None gives the required arbitrary condensed-ring Rj_* unit. CondensedCoverRestrictionConservative supplies the general cover conservativity input.",
+   "date": "2026-10-26",
+   "verdict": "no existing theorem with the required signature"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseOpenUnitTestDescent",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Rank-one scalar calculation and covering descent in steps 1--8 of the scalar-to-lisse sublemma, serving direct-images paragraph (3).",
+   "via": [
+    "lem-sfb-lisse-open-unit-test-descent",
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarTestsRegularOpenUnit",
+  "file": "lean/Sheaf/Paper/ScalarTestsRegularOpenUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_regular_open_unit_of_scalar_tests",
+  "statement": "theorem isIso_regular_open_unit_of_scalar_tests\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (U : X.Opens)\n    (hscalar : ∀ (V : X.ProEt), IsAffine V.left →\n      (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} V →\n      IsIso ((Functor.rightDerivedFunctorNatTrans\n        ((sheafSections (Scheme.ProEt.topology X) Ab.{u + 1}).map\n          (show Scheme.ProEt.mk (pullback.snd U.ι V.hom ≫ V.hom) ⟶ V from\n            MorphismProperty.Over.homMk (pullback.snd U.ι V.hom) rfl).op)).app\n              ((DerivedCategory.singleFunctor _ 0).obj (condensedRingObj Λ X))))\n    (Y : Scheme.{u}) (a : Y ⟶ X) [WeaklyEtale a] :\n    IsIso ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ\n      (pullback.snd U.ι a)).unit.app\n        ((DerivedCategory.singleFunctor _ 0).obj (Mod.regular (condensedRingObj Λ Y))))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-scalar-tests-regular-open-unit",
+  "worker": "B3 stage 3",
+  "summary": "A genuine intermediate statement extracted from the original scalar-to-lisse descent proof; its exact signature compiles and its full argument is recorded in the module docstring.",
+  "blueprint": "Direct-images paragraph (3): rank-one scalar comparison"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T080958-L-1747205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T080958-L-1747205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

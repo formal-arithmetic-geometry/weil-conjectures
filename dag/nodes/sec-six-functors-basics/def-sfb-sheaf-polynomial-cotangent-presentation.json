@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-sheaf-polynomial-cotangent-presentation",
+ "kind": "definition",
+ "title": "Sheaf polynomial presentations, kernel ideals and differential tensors",
+ "statement": "Let $\\mathcal C$ be a small category with a Grothendieck topology $J$, regarded as a small site [def-weil-pbc-sites-and-cohomology] in the chosen universe [def-weil-size-convention]. Let $f:A\\to B$ be a homomorphism of sheaves of commutative rings on this site. Write $\\operatorname{sets}(B)$ for the underlying sheaf of sets. For a sheaf of sets $E$, define $A[E]$ to be the sheafification [def-weil-pbc-sheafification] of $U\\mapsto A(U)[E(U)]$, the polynomial algebra [def-weil-pbc-mv-polynomial-ring] with one variable $[e]$ for each $e\\in E(U)$. Restriction sends coefficients to their restrictions and $[e]$ to $[e|_V]$. The coefficient maps induce $A\\to A[E]$. A map $\\alpha:E\\to\\operatorname{sets}(B)$ induces evaluation $A[E]\\to B$ by the coefficient map $f$ and $[e]\\mapsto\\alpha(e)$. A polynomial presentation of $f$ is a pair $(E,\\alpha)$ for which this evaluation is locally surjective. The canonical presentation has $E=\\operatorname{sets}(B)$ and $\\alpha=\\mathrm{id}$; its evaluation is locally surjective since $b$ is the evaluation of $[b]$. For a presentation $P$, define the ideal subsheaf $I_P=\\ker(A[E]\\to B)$ [def-weil-pbc-ringed-site-ideal], with section ideals the sectionwise evaluation kernels. A section $p$ of $A[E]$ is locally in the kernel square if there is a covering sieve on which every restriction of $p$ belongs to the square of the corresponding sectionwise kernel ideal. Define $F_P=B\\otimes_{A[E]}\\Omega_{A[E]/A}$ using sheaf tensor and change of rings [def-pur-sheaf-tensor-product] in module sheaves [def-weil-sheaf-of-modules-category], with the sheafified relative differentials and universal derivation [def-sfb-sheaf-differentials]. For local sections $b$ of $B$ and $p$ of $A[E]$, define $\\operatorname{tensorD}_P(b,p)$ to be the image of $b\\otimes\\mathrm dp$ under the module-sheafification unit.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-ringed-site-ideal",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-sheaf-differentials"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TW (definition-naive-cotangent-complex), its preceding equation-canonical-presentation, and the sheaf-generator presentation preceding Tag 08TY (lemma-NL-up-to-qis)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf polynomial algebra presentation evaluation kernel ideal differential tensor",
+   "results": "OK 8 hit(s): KaehlerDifferential.ideal, SheafOfModules.Presentation.mk, smoothSheafCommRing.nonunits_stalk, KaehlerDifferential.kerToTensor_apply, Algebra.PreSubmersivePresentation.aevalDifferential, Algebra.Extension.cotangentEquiv, Algebra.Presentation.differentials, Algebra.Presentation.differentials.hom₁",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact landed SheafPolynomialCotangent definitions with existing: true; no new Lean construction. Mathlib hits do not supply this combined sheaf polynomial presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial presentations for a morphism of sheaves of commutative rings and their kernel ideals and differential tensor",
+   "results": "OK 8 hit(s): SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.mapRelations, SheafOfModules.Presentation.map_relations_I, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', SheafOfModules.Presentation.mapGenerators, SheafOfModules.Presentation.relations, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, SheafOfModules.Presentation.mapRelations_mapGenerators",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact landed SheafPolynomialCotangent definitions with existing: true; no new Lean construction. Mathlib hits do not supply this combined sheaf polynomial presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafPolynomialCotangent|polynomialSheaf|evaluationPresheaf",
+   "results": "OK 0 hit(s): ; local rg of lean/WeilConjectures: no matching construction; lean/Sheaf: exact definitions in Sheaf.CategoryTheory.SheafPolynomialCotangentComparison and the duplicated SiteNaiveCotangent definitions in the item being superseded. rg of definition nodes finds no generic sheaf-polynomial-presentation owner; blueprint_refs.py search sheaf polynomial: 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact landed SheafPolynomialCotangent definitions with existing: true; no new Lean construction. Mathlib hits do not supply this combined sheaf polynomial presentation."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-space-naive-cotangent-complex",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0V (definition-netherlander), with sites-modules.tex Tags 08TW (definition-naive-cotangent-complex) and 08U0 (definition-cotangent-complex-morphism-ringed-topoi). Definition input: the sheaf polynomial presentation, evaluation kernel, locally generated kernel square and differential tensor used in NL.",
+   "via": [
+    "def-sfb-space-naive-cotangent-complex",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafPolynomialCotangentComparison",
+  "declaration": "CategoryTheory.SheafPolynomialCotangent.canonical",
+  "declarations": [
+   "CategoryTheory.SheafPolynomialCotangent.sets",
+   "CategoryTheory.SheafPolynomialCotangent.polynomials",
+   "CategoryTheory.SheafPolynomialCotangent.polynomialSheaf",
+   "CategoryTheory.SheafPolynomialCotangent.coefficientMap",
+   "CategoryTheory.SheafPolynomialCotangent.base",
+   "CategoryTheory.SheafPolynomialCotangent.evaluationPresheaf",
+   "CategoryTheory.SheafPolynomialCotangent.evaluation",
+   "CategoryTheory.SheafPolynomialCotangent.Presentation",
+   "CategoryTheory.SheafPolynomialCotangent.canonical_surjective",
+   "CategoryTheory.SheafPolynomialCotangent.canonical",
+   "CategoryTheory.SheafPolynomialCotangent.LocallyInKernelSquare",
+   "CategoryTheory.SheafPolynomialCotangent.kernel_ideal_axioms",
+   "CategoryTheory.SheafPolynomialCotangent.kernelIdeal",
+   "CategoryTheory.SheafPolynomialCotangent.differentialTerm",
+   "CategoryTheory.SheafPolynomialCotangent.tensorD",
+   "CategoryTheory.SheafPolynomialCotangent.polynomialMapPresheaf",
+   "CategoryTheory.SheafPolynomialCotangent.polynomialMap"
+  ],
+  "statement": "def canonical {A B : Sheaf J CommRingCat.{u}} (f : A ⟶ B) : Presentation f",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-node ownership binding requested in the independent return on 973fbb1cf6c6. Reuses Q150’s already landed definitions at SheafPolynomialCotangentComparison.lean:53-198. canonical_surjective and kernel_ideal_axioms are the existing named proof obligations for these constructions. No Comparison data or comparison theorem is bound or used; no new Lean file or duplicate construction is introduced. Q141 repair of 2091695a211d (2026-10-24): the old declaration list omitted the existing canonical renaming maps polynomialMapPresheaf and polynomialMap, needed to state naturality for arbitrary sheaf-generator maps. They are now bound here as definition helpers for these polynomial presentations: sectionwise MvPolynomial.rename with coefficients fixed, followed by ring sheafification. Both definitions already exist at SheafPolynomialCotangentComparison.lean:220-245; no Lean code, comparison theorem, node statement, or other field is changed."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba26235e1",
+  "group": "Q62",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7561a72fc",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Re-delivery of 2091695a211d fixes both returned points. H2: theorem stmt_dep lem-sfb-sheaf-polynomial-cotangent-comparison replaced by def nodes def-sfb-sheaf-polynomial-cotangent-presentation and def-sfb-sheaf-differentials; item differs from side-live only in stmt_deps and lean, live lean is null. Dep record of def-sfb-sheaf-polynomial-cotangent-presentation is lean-only: polynomialMapPresheaf and polynomialMap (SheafPolynomialCotangentComparison.lean:221/240) added with a lean.note; statement unchanged. F clause is now (∃! F, pure-tensor formula) ∧ (∀ F, formula → Φ' ≫ F = free.map v ≫ Φ), the only module change vs the prior snapshot. lean.statement verbatim in file, single sorry. Maths, edge cases, docstrings, no hollow defs and no surjectivity re-checked. Notes, non-blocking: the def node's text does not describe renaming maps; polynomialMap is also still listed under the theorem node; inherited theorem stmt_dep lem-trf-free-module-sheaf-universal-property has def owner def-trf-free-module-sheaf-construction. No compile: no file changed."
+ }
+}

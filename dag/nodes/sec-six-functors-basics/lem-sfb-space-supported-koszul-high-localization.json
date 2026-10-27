@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-space-supported-koszul-high-localization",
+ "kind": "statement",
+ "title": "A supported Koszul test controls high truncation of open localization",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover of $|X|$ has a finite subcover, and the absolute diagonal is quasi-compact. Use its small etale structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $(i:U\\hookrightarrow X,p:V\\to X)$ be an elementary distinguished square: $U$ is a quasi-compact open subspace [def-a1-space-open-subspace], $p$ is representable etale, $V=\\operatorname{Spec}A$ is affine, and $V\\times_X Z\\to Z$ is an isomorphism for the reduced closed subspace $Z$ of $X$ with underlying set $|X|\\setminus|U|$ [lem-sfb-space-reduced-closed-support]. Put $T=U\\times_XV$. There is a finite list $f_1,\\ldots,f_r\\in A$ with $T=\\bigcup_{k=1}^rD(f_k)$. For every such list, let $B\\in D(\\mathcal O_V)$ be the associated etale complex of the Koszul complex $K_\\bullet(f_1,\\ldots,f_r)$ [def-weil-pbc-koszul-complex], placed in cohomological degrees $-r,\\ldots,0$ by $B^{-n}=\\widetilde {K_n}$ [lem-sfb-affine-etale-derived-module-realization]. Use canonical derived module functors [lem-sfb-space-derived-etale-chart-calculus] and standard truncation [def-sbc-standard-tstructure-derived-category]. Then $B_X=Rp_*B$ is perfect. For every $E\\in C_X$, if $\\operatorname{Hom}_{D(\\mathcal O_X)}(B_X,E[j])=0$ for all sufficiently positive integers $j$, there exists $a\\in\\mathbf Z$ such that the canonical open-adjunction unit induces an isomorphism in $D(\\mathcal O_X)$\n$$\\tau_{\\ge a}E\\xrightarrow{\\sim}\\tau_{\\ge a}Ri_*(i^*E).$$",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0GFH, proposition-detecting-bounded-above, distinguished-square proof from the construction of K and K' through the canonical high-truncation comparison; supported transport: Tags 08HK lemma-pushforward-perfect and 08GG lemma-pushforward-with-support-in-open; affine orthogonality: perfect.tex Tag 0GEJ lemma-orthogonal-koszul-first-variant."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-reduced-closed-support",
+  "def-weil-pbc-koszul-complex",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-derived-module-calculus",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-affine-hom-comparison",
+  "def-a1-space-point-topology",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-reduced-algebraic-space",
+  "def-sfb-space-small-ringed-model"
+ ],
+ "proof": [
+  {
+   "text": "The open $U$ is quasi-separated: its absolute diagonal is the base change of the absolute diagonal of $X$ along $U\\times U\\to X\\times X$. The affine scheme $V$ is qcqs. Apply the qcqs fibre-product lemma to $U\\to X\\leftarrow V$; its three spaces are qcqs, so $T$ is quasi-compact. The principal opens form a basis on $V=\\operatorname{Spec}A$. Refine $T$ by this basis and take a finite subcover, giving the list in the statement. When $T=\\varnothing$ the empty list is allowed.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFH, proposition-detecting-bounded-above, paragraph Say V = Spec(A); finite principal-open cover."
+   }
+  },
+  {
+   "text": "Fix any such list. The Koszul definition gives $K_q$ the finite basis of increasing $q$-element subsets, with zero terms for $q>r$. Exact affine etale realization sends $A$ and its finite direct sums to $\\mathcal O_V$ and its finite direct sums. Thus $B^{-q}=\\widetilde K_q$ is an actual bounded finite free representative, making $B$ perfect. On $D(f_k)$ put $h(x)=f_k^{-1}e_k\\wedge x$. The displayed Koszul differential satisfies $d(e_k\\wedge x)=f_kx-e_k\\wedge dx$, so $dh+hd=\\mathrm{id}$. This gives a contraction after sheafification, also on every etale object over $D(f_k)$. Hence $B|_T=0$. For $r=0$ the assertion about this restriction is vacuous, and $B=\\mathcal O_V[0]$.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFH, Koszul construction; more-algebra.tex Tags 0622 and 0623, differential and exterior bases."
+   }
+  },
+  {
+   "text": "Apply supported etale excision to $F=B$, using $B|_T=0$. It gives $p^*B_X\\cong B$, $i^*B_X=0$, and the natural bijections $\\operatorname{Hom}(B_X,E[j])\\cong\\operatorname{Hom}(B,p^*E[j])$. The family $U\\amalg V\\to X$ is a surjective etale cover: $U$ covers its own points and $V$ covers the complement because it is an isomorphism over $Z$. To check perfectness using the strict-perfect definition, choose a representative $L^\\bullet$ of $B_X$. On the part over $U$ it is acyclic and $0\\to L^\\bullet|_U$ is a quasi-isomorphism. On the part over $V$ the isomorphism from the bounded finite free representative of $B$ to $L^\\bullet|_V$ is, locally, an actual chain map by the strict-perfect local-actual lemma. Such a map is a quasi-isomorphism, since its image in the derived category is invertible. Pull back this covering to each etale object of $X$. It exhibits the local representatives required by the definition, proving that $B_X$ is perfect. The Hom bijections transfer the assumed positive-degree vanishing to $B$ on $V$.",
+   "uses": [
+    "lem-sfb-space-supported-etale-excision",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-ringed-site-strict-perfect-local-actual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 08GG lemma-pushforward-with-support-in-open and 08HK lemma-pushforward-perfect; Tag 0GFH, K prime and Hom formula; sites-cohomology.tex Tag 08FR lemma-local-actual (1)."
+   }
+  },
+  {
+   "text": "Let $E_V=p^*E$. It has quasi-coherent cohomology by the etale chart calculus. Choose $a\\in\\mathbf Z$ so that $\\operatorname{Hom}(B,E_V[n])=0$ for every $n\\ge a$. Shifting the source identifies this group with $\\operatorname{Hom}(B[-n],E_V)$, so there is no reversal of the bound. Write $k:T\\hookrightarrow V$. Use the derived etale/Zariski equivalence on the schemes $V$ and $T$ to represent $E_V$ by $E_0\\in D_{\\mathrm{QCoh}}(\\mathcal O_{V,\\mathrm{Zar}})$. The associated Koszul object corresponds to the Zariski object $C_f$: affine etale realization is Zariski tilde followed by exact etale pullback. Full faithfulness transfers the Hom vanishing. The affine upper-localization lemma therefore gives $\\tau_{\\ge a}E_0\\to\\tau_{\\ge a}Rk_{\\mathrm{Zar},*}(E_0|_T)$ invertible. The topology comparison is exact, hence commutes with standard truncations. Its direct-image comparison applies: $T$ is a quasi-compact open of the affine scheme $V$, so $k$ is quasi-compact and separated. The canonical pullback and direct-image comparisons identify the units, since their transposes are the identity of the restricted object. Transporting this very map gives the canonical isomorphism $\\tau_{\\ge a}E_V\\to\\tau_{\\ge a}Rk_*(E_V|_T)$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-affine-koszul-upper-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFH, application of perfect.tex Tag 0GEJ lemma-orthogonal-koszul-first-variant; Tags 08H8, 071Q and 08GH for the comparison of topologies."
+   }
+  },
+  {
+   "text": "Let $u:E\\to Ri_*i^*E$ be the specified unit. Etale base change in the chart calculus, with its unit compatibility, identifies $p^*u$ with $E_V\\to Rk_*(E_V|_T)$. Over $U$ the same calculation is base change along the open immersion itself, so $i^*u$ is the identity of $i^*E$. Exact restriction commutes with kernels, cokernels and cohomology, hence with standard truncation. Thus $\\tau_{\\ge a}u$ restricts to isomorphisms on $V$ by step 4 and on $U$ by the identity calculation. Its cone has zero cohomology after restriction to both members of the cover $U\\amalg V\\to X$. For each etale object, sections of any of these cohomology sheaves vanish on the pulled-back cover and therefore vanish by the sheaf axiom. The cone is consequently acyclic. In the derived category, the localization at quasi-isomorphisms, this makes $\\tau_{\\ge a}u$ invertible. This proves the asserted derived isomorphism for the canonical map itself.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFH, check that the canonical map is an isomorphism after restricting to U and to V."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-pbc-koszul-complex",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-space-supported-etale-excision",
+  "lem-sfb-ringed-site-strict-perfect-local-actual",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-affine-koszul-upper-localization",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0GFH, proposition-detecting-bounded-above, supported Koszul and high-truncation paragraphs; explicit comparison through Tags 08GG, 08HK, 08H8, 071Q, 08GH and perfect.tex Tag 0GEJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an elementary distinguished square with affine etale chart, push forward its supported Koszul complex; eventual vanishing of Hom from it identifies high truncations with open direct image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {V : ↑X.affineOpens} (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  AlgebraicGeometry.IsOpenImmersion (I.glueDataObjMap ⋯)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, an affine open subset $V \\\\subseteq X$, and a section $f$ of the structure sheaf over $V$, the morphism induced by the inclusion $D(f) \\\\subseteq V$\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n  {\"name\": \"HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported\", \"module\": \"Mathlib/Algebra/Homology/Embedding/TruncLEHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [inst_2 : e.IsTruncLE] [inst_3 : ∀ (i' : ι'), K.HasHomo\", \"doc\": \"The canonical morphism $\\\\iota_{\\\\text{truncLE}}: K.\\\\text{truncLE}(e) \\\\to K$ is a quasi-isomorphism if and only if the homological complex $K$ is supported by the embedding $e$.\"}\n  {\"name\": \"HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside\", \"module\": \"Mathlib/Algebra/Homology/Embedding/TruncLEHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Abelian C] (K : HomologicalComplex C c')\\n  (e : c.Embedding c') [inst_2 : e.IsTruncLE], (K.shortComplexTruncLE e).X₃.IsSupportedOutside\", \"doc\": \"The third object $X_3$ in the short complex obtained by truncating $K$ via the embedding $e$ is supported outside the image of $e$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary scheme sections or abstract complex truncation. The only grep Koszul hit is a future-work comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45, not a supported derived localization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul orthogonality in high degrees gives the truncated derived localization unit isomorphism for an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.isIso_ιTruncLE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : ∀ (i : ℤ), HomologicalComplex.HasHomology K i] (n : ℤ),\\n  CategoryTheory.IsIso (K.ιTruncLE n) ↔ K\", \"doc\": \"The canonical morphism $\\\\iota_{\\\\text{truncLE}}: K.\\\\text{truncLE}(n) \\\\to K$ is an isomorphism if and only if the cochain complex $K$ is strictly supported by the index embedding $n \\\\mapsto p - n$ at in\"}\n  {\"name\": \"HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported\", \"module\": \"Mathlib/Algebra/Homology/Embedding/TruncLE\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [inst_2 : e.IsTruncLE] [inst_3 : ∀ (i' : ι'), K.HasHomo\", \"doc\": \"If a homological complex $ K $ is strictly supported by an embedding $ e $, then the canonical morphism $ \\\\iota_{\\\\text{truncLE}}: K.\\\\text{truncLE}(e) \\\\to K $ is an isomorphism.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : ∀ (i : ℤ), HomologicalComplex.HasHomology K i] (n : ℤ) [K.IsStrictlyLE n],\\n  CategoryTheory.IsIso\", \"doc\": \"If a cochain complex $ K $ is strictly supported by the embedding $ n \\\\mapsto p - n $ at integer $ n $, then the canonical morphism $ \\\\iota_{\\\\text{truncLE}}: K.\\\\text{truncLE}(n) \\\\to K $ is an isomorph\"}\n  {\"name\": \"CochainComplex.quasiIso_ιTruncLE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : ∀ (i : ℤ), HomologicalComplex.HasHomology K i] (n : ℤ), QuasiIso (K.ιTruncLE n) ↔ K.IsLE n\", \"doc\": \"The canonical morphism from the truncation of the cochain complex $ K $ at integer $ n $ to $ K $ is a quasi-isomorphism if and only if the complex $ K $ is supported under the embedding from the down\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CochainComplex.isIso_πTruncGE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : ∀ (i : ℤ), HomologicalComplex.HasHomology K i] (n : ℤ),\\n  CategoryTheory.IsIso (K.πTruncGE n) ↔ K\", \"doc\": \"The canonical morphism $\\\\pi_{\\\\text{truncGE}}: K \\\\to K.\\\\text{truncGE}(n)$ is an isomorphism if and only if the cochain complex $K$ is strictly supported in degrees $\\\\geq n$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary scheme sections or abstract complex truncation. The only grep Koszul hit is a future-work comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45, not a supported derived localization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported perfect Koszul test detects the high truncation of derived pushforward from an open algebraic subspace",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.quasiIso_ιTruncLE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \": QuasiIso (K.ιTruncLE n) ↔ K.IsLE n\", \"doc\": \"The canonical morphism from the truncation of the cochain complex $ K $ at integer $ n $ to $ K $ is a quasi-isomorphism if and only if the complex $ K $ is supported under the embedding from the down\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncLEHomology\", \"type\": \": QuasiIso (K.ιTruncLE e) ↔ K.IsSupported e\", \"doc\": \"The canonical morphism $\\\\iota_{\\\\text{truncLE}}: K.\\\\text{truncLE}(e) \\\\to K$ is a quasi-isomorphism if and only if the homological complex $K$ is supported by the embedding $e$.\"}\n  {\"name\": \"HomologicalComplex.quasiIso_πTruncGE_iff_isSupported\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncGEHomology\", \"type\": \": QuasiIso (K.πTruncGE e) ↔ K.IsSupported e\", \"doc\": \"The canonical morphism from a homological complex $ K $ to its truncation via a complex shape embedding $ e $ is a quasi-isomorphism if and only if $ K $ is supported by the embedding $ e $. This equi\"}\n  {\"name\": \"HomologicalComplex.isZero_stupidTrunc_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.StupidTrunc\", \"type\": \": IsZero (K.stupidTrunc e) ↔ K.IsStrictlySupportedOutside e\", \"doc\": \"The stupid truncation of a homological complex $ K $ with respect to an embedding $ e $ is a zero complex if and only if $ K $ is strictly supported outside the image of $ e $.\"}\n  {\"name\": \"HomologicalComplex.instIsStrictlySupportedTruncLE_1\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncLE\", \"type\": \"{ι'' : Type*} {c'' : ComplexShape ι''} (e' : c''.Embedding c') [K.IsStrictlySupported e'] :\\n  (K.truncLE e).IsStrictlySupported e'\", \"doc\": \"If a homological complex $ K $ is strictly supported by an embedding $ e' $, then the truncation $ K^{\\text{truncLE}} $ obtained via an embedding $ e $ is also strictly supported by $ e' $. This instan\"}\n  {\"name\": \"CochainComplex.isIso_ιTruncLE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \": IsIso (K.ιTruncLE n) ↔ K.IsStrictlyLE n\", \"doc\": \"The canonical morphism $\\\\iota_{\\\\text{truncLE}}: K.\\\\text{truncLE}(n) \\\\to K$ is an isomorphism if and only if the cochain complex $K$ is strictly supported by the index embedding $n \\\\mapsto p - n$ at in\"}\n  {\"name\": \"HomologicalComplex.isIso_πTruncGE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncGE\", \"type\": \": IsIso (K.πTruncGE e) ↔ K.IsStrictlySupported e\", \"doc\": \"The canonical morphism $\\\\pi_{\\\\text{truncGE}}: K \\\\to K.\\\\text{truncGE}(e)$ is an isomorphism if and only if the homological complex $K$ is strictly supported by the embedding $e$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary scheme sections or abstract complex truncation. The only grep Koszul hit is a future-work comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45, not a supported derived localization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"trunc\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary scheme sections or abstract complex truncation. The only grep Koszul hit is a future-work comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45, not a supported derived localization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|distinguished.square",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary scheme sections or abstract complex truncation. The only grep Koszul hit is a future-work comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45, not a supported derived localization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"45\", \"text\": \"    * the characterization as the limit of Koszul homology\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary scheme sections or abstract complex truncation. The only grep Koszul hit is a future-work comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45, not a supported derived localization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A supported perfect Koszul complex on an affine etale neighbourhood controls high truncations of open derived localization on an algebraic space",
+   "results": "{\"t\": \"2026-10-23T19:51:30Z\", \"tool\": \"leanfinder\", \"query\": \"A supported perfect Koszul complex on an affine etale neighbourhood controls high truncations of open derived localization on an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.isOpen_etaleLocus\", \"Algebra.FormallyEtale.localization_base\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"c66d4d28c3512fba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme etale loci, abstract truncation, or cohomological bounds; the grep result is only the future-work Koszul comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45. None states supported etale Koszul localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"trunc\"",
+   "results": "{\"t\": \"2026-10-23T19:51:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\", \\\"trunc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme etale loci, abstract truncation, or cohomological bounds; the grep result is only the future-work Koszul comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45. None states supported etale Koszul localization."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "{\"t\": \"2026-10-23T19:51:31Z\", \"tool\": \"grep\", \"query\": \"Koszul|koszul\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"c9ca54f8aea9f997\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme etale loci, abstract truncation, or cohomological bounds; the grep result is only the future-work Koszul comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45. None states supported etale Koszul localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If Hom from the supported Koszul complex into E shifted by n vanishes for n sufficiently large then E and the derived pushforward from the complementary open have isomorphic high truncations",
+   "results": "{\"t\": \"2026-10-23T19:51:32Z\", \"tool\": \"leansearch\", \"query\": \"If Hom from the supported Koszul complex into E shifted by n vanishes for n sufficiently large then E and the derived pushforward from the complementary open have isomorphic high truncations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isIso_ιTruncLE_iff\", \"HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported\", \"CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE\", \"CochainComplex.quasiIso_ιTruncLE_iff\", \"HomologicalComplex.isZero_stupidTrunc_iff\", \"HomologicalComplex.isIso_πTruncGE_iff\", \"HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported\", \"CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE\"], \"digest\": \"a004ee3bc880e9de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme etale loci, abstract truncation, or cohomological bounds; the grep result is only the future-work Koszul comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45. None states supported etale Koszul localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category algebraic space supported etale excision and Koszul orthogonality detect upper cohomological bound",
+   "results": "{\"t\": \"2026-10-23T19:51:33Z\", \"tool\": \"leanfinder\", \"query\": \"Derived category algebraic space supported etale excision and Koszul orthogonality detect upper cohomological bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.IsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"8cf6667ec63ca744\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme etale loci, abstract truncation, or cohomological bounds; the grep result is only the future-work Koszul comment in Mathlib/Algebra/Homology/LocalCohomology.lean:45. None states supported etale Koszul localization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-tensor-tests-upper-bound",
+  "date": "2026-10-24",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0GFH, proposition-detecting-bounded-above, implication (7)(b) to (1), with the perfect generator supplied by theorem-bondal-van-den-Bergh. Subargument in spaces-perfect.tex Tag 0GFH: the supported Koszul object K' and the comparison of high truncations with R(U to X)_*.",
+   "via": [
+    "lem-sfb-space-perfect-tensor-tests-upper-bound",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-supported-koszul-high-localization",
+  "worker": "stage1",
+  "summary": "Verified the supported Koszul argument of Tag 0GFH against Tags 08GG, 08HK and 0GEJ, including the small-etale/Zariski comparison and compatibility with the canonical unit. Reused existing excision, affine upper-localization, and topology-comparison nodes; no new node or statement change. Wrote finite-cover and Koszul contraction arguments and checked empty and unit-generator cases.",
+  "blueprint": "Inherited provenance: det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration/duality/perfect-test branch. Steps realize spaces-perfect.tex Tag 0GFH from Say V=Spec(A) through the check of the high-truncation unit on U and V. blueprint_refs.py ancestor reports the inherited null ancestor; the existing from record and via list are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-ffbe6b861",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-ffbe6b861 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit changing the item and the report, with no new nodes. The item is still unsplit with an empty proof on live and side-live, so it is not superseded. The statement and stmt_deps are unchanged and proof_deps equals the union of the uses. The deps' closure does not contain the item (no cycle), there is no SGA citation, and the Mathlib searches cover all three kinds. Source: Stacks 0GFH (elementary-square paragraph from 'Say V=Spec(A)') and perfect.tex 0GEJ (2)=>(1) with the same a. They match the item's hypothesis Hom(B_X,E[j])=0 for j>>0 and its tau_{>=a} conclusion for the canonical unit. Nothing is weakened. Step 1: U is quasi-separated because it is a monomorphism into X; all three spaces are qcqs, so the fibre-product node gives T quasi-compact, and a finite principal-open subcover gives the list (T empty gives r=0). Step 2: I checked the contraction (dh+hd)x=x from the Koszul differential D(v^x)=phi(v)x-v^Dx. It extends over etale objects over D(f_k) through the realization's values B'⊗M, and the terms are finite free, so B is strictly perfect; elementary. Step 3: the excision statement gives counit p^*Rp_*B=B, i^*Rp_*B=0 and the Hom bijection with no extra hypotheses. {U,V} is a jointly surjective etale cover. The local-actual node (unbounded target) gives the representatives that the strict-perfect definition needs. Step 4: the Hom shift convention matches the affine upper-localization node. The etale/Zariski equivalence holds for any scheme, is fully faithful on D_QCoh and intertwines Rk_* for the qcqs open immersion k:T->V. I tested E=M[-q] on an affine: both truncations vanish for a>q+r. Step 5: chart-calculus base change respects units; i^*u is invertible; a cone acyclic on a cover is acyclic. Edge cases r=0, U=X and V empty are fine. No duplicates: the related nodes are the low-localization sibling (tau_<=), the scheme lemma lem-sfb-perfect-tensor-tests-bounded-above, the cited affine lemma and the parent, whose step 3 uses exactly this statement. Route: everything is in unit sk-thm-sf-ctf-stability or is a definition or Mathlib leaf; no tool_uses. Batch-5 finding: qcqs-space-fibre-product and supported-etale-excision reach only def-trf-algebraic-space, and derived-etale-zariski-equivalence reaches only def-trf-space-quasi-coherent-module. Both are general definitions the item already uses as stmt_deps, not steps of the trace formula or Poincare duality, so I accept them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSupportedKoszulHighLocalization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_supported_koszul_high_localization",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineSpaceKoszul",
+   "AlgebraicGeometry.AlgebraicSpace.space_supported_koszul_high_localization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSupportedKoszulHighLocalization.lean",
+  "statement": "theorem space_supported_koszul_high_localization {S : Scheme.{u}} (X U : AlgebraicSpace S) (i : U ⟶ X) (hXqc : CompactSpace (Point X.obj.obj)) (hXqs : IsAbsolutelyQuasiSeparated X) (hUqc : CompactSpace (Point U.obj.obj)) (hi : ∃ O : OpenSubspace X, ∃ e : U.obj.obj ≅ O.val.toFunctor, e.hom ≫ O.val.ι = i.hom.hom) (A : Type u) [CommRing A] (v : Spec (.of A) ⟶ S) (p : schemeSpace (Over.mk v) ⟶ X) (hp : IsEtale p.hom.hom) (Z : ClosedSubspace X) (hZred : IsReduced (Z.val : AlgebraicSpace S)) (hZsupport : pointImage Z.val.arrow.hom.hom = (pointImage i.hom.hom)ᶜ) (hdist : IsIso (Limits.pullback.snd p.hom Z.val.arrow.hom)) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} U.SmallModules] [HasDerivedCategory.{w} (schemeSpace (Over.mk v)).SmallModules] : (∃ (r : ℕ) (f : Fin r → A), schemePointMap p.hom.hom ⁻¹' pointImage i.hom.hom = ⋃ k : Fin r, (PrimeSpectrum.basicOpen (f k) : Set (PrimeSpectrum A))) ∧ ∀ (r : ℕ) (f : Fin r → A), schemePointMap p.hom.hom ⁻¹' pointImage i.hom.hom = (⋃ k : Fin r, (PrimeSpectrum.basicOpen (f k) : Set (PrimeSpectrum A))) → SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u} X.smallStructureSheaf ((derivedDirectImage p).obj (affineSpaceKoszul A v r f)) ∧ ∀ E : X.DerivedQCoh, (∃ N : ℤ, ∀ j : ℤ, N ≤ j → Subsingleton ((derivedDirectImage p).obj (affineSpaceKoszul A v r f) ⟶ E.obj⟦j⟧)) → ∃ a : ℤ, IsIso ((DerivedCategory.TStructure.t.truncGE a).map ((spaceDerivedAdjunction i).unit.app E.obj))",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Includes the finite principal-open cover and the conclusion for every such list. The helper constructs the associated Koszul object termwise by the existing universal affine scalar pullback on the small etale model; no auxiliary theorem or arbitrary map is introduced. The conclusion is IsIso of standard truncation applied to the canonical normalized adjunction unit. Added only landed definition owners for the reused size model, point topology, absolute quasi-separatedness, represented affine scheme, scalar pullback and derived adjunction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4aede994f",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Re-delivery of bf2dbd079418, which was returned for H2 only. Snapshot diff: the Lean module adds only public imports of AlgebraicSpacePointClasses, AlgebraicSpaceClosedSubspace, ReducedAlgebraicSpace and AlgebraicSpaceSmallRingedModel; affineSpaceKoszul, the theorem, the docstrings and the sorry are byte-identical. The node JSON diff is exactly the four added stmt_deps (def-a1-algebraic-space-point-classes, def-sfb-space-closed-subspace, def-sfb-reduced-algebraic-space, def-sfb-space-small-ringed-model). All four are on base d6be0c8e561 with lean records owning Point, schemePointMap, ClosedSubspace, IsReduced, smallStructureSheaf and SmallModules, the declarations used in the signature; they are definitions, so there is no cycle. The commit touches only 3 files (report, node, module). lean.statement is verbatim in the file, with a single sorry. The report has Worker report, Second reading by Q134 and a repair section. The item is still unstated on live, so it is not superseded. The mathematics was checked clause by clause in the previous review (0GFH, 08GG, 08HK, 0GEJ; edge cases r=0, A=0, U empty, U=X, unbounded E) and is unchanged. No files were changed, so no compile was run."
+ }
+}

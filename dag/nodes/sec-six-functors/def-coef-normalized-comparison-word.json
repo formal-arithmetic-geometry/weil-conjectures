@@ -1,0 +1,107 @@
+{
+ "id": "def-coef-normalized-comparison-word",
+ "kind": "definition",
+ "title": "Explicit categorical normalized comparison word",
+ "statement": "For any two categories, an arrow i in the first and a composable six-arrow word a,b,c,d,e,f in the second, with v parallel to that word, NormalizedComparisonWord means precisely IsIso i, invertibility of all six factors, and a followed by b,c,d,e,f equals v. Its constructor combines these seven invertibility proofs and the equation. A second constructor applies this to a mapped inverse, two mapped arrows and a contravariant Hom bifunctor. This is exactly the conjunction and displayed equation of the locally closed Hom generator.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraph 4, displayed normalized word"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Define the predicate by the displayed eight-fold conjunction. The first constructor is conjunction introduction. For the second constructor, functors preserve inverses and isomorphisms, opposite preserves isomorphisms, and components of natural isomorphisms are isomorphisms. Apply the first constructor to these proofs and the supplied exact word equation. The mapped word and its equation retain the same functor arguments, with inverse, map and natural-transformation component formed only in the generic definition. The mapped constructor is the second constructor directly. The auxiliary cancellation identity follows by rewriting map of an inverse and cancelling the resulting inverse, then using preservation of composition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraph 4, displayed normalized word",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functor maps preserve inverse cancellation of an invertible morphism in a composite pairing equation",
+   "results": "Functor.map_inv_hom_assoc and seven other generic cancellation results; none identifies the specified geometric word.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inv_comp_eq\"",
+   "results": "Five hits including CategoryTheory.IsIso.inv_comp_eq; generic categorical cancellation only.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCoefficientDirectImageMap_comp|PairingChangeEquation",
+   "results": "0 Mathlib hits. Local direct-image composition theorem gives the required factorization, not its locally closed finite-stage specialization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyClosedHomGenerator",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Paragraph 4, displayed normalized word",
+   "via": [
+    "lem-coef-locally-closed-hom-generator"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedComparisonWord",
+  "file": "lean/Sheaf/Paper/NormalizedComparisonWord.lean",
+  "declaration": "CategoryTheory.NormalizedComparisonWord",
+  "statement": "def NormalizedComparisonWord\n    {C D : Type*} [Category C] [Category D] {U V : C}\n    (i : U ⟶ V) {X₀ X₁ X₂ X₃ X₄ X₅ X₆ : D}\n    (a : X₀ ⟶ X₁) (b : X₁ ⟶ X₂) (c : X₂ ⟶ X₃)\n    (d : X₃ ⟶ X₄) (e : X₄ ⟶ X₅) (f : X₅ ⟶ X₆) (v : X₀ ⟶ X₆) : Prop",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "mathlib": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

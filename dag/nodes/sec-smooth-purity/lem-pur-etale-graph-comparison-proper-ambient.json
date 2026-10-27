@@ -1,0 +1,205 @@
+{
+ "id": "lem-pur-etale-graph-comparison-proper-ambient",
+ "kind": "statement",
+ "title": "Cartesian proper changes of ambient scheme in the explicit graph comparison",
+ "statement": "Let $A$ be a finite commutative ring, and use the ordinary unbounded small-etale module derived categories [def-weil-pbc-derived-categories]. Fix $f:X\\to Y$, a compactification $c$ and two proper/open/proper presentations $s=(a_s,e_s,p_s)$ and $t=(a_t,e_t,p_t)$ [def-pur-etale-graph-presentation-maps]. Let $r:P_t\\to P_s$ be proper and $q:U_t\\to U_s$ such that the square with top $e_t$, bottom $e_s$, left $q$ and right $r$ is Cartesian [def-pc-fibre-product], $q a_t=a_s$, and $p_s r=p_t$. Write $R_g=Rg_*$ and $J_j=Dj_!$, with the canonical direct-image compositors [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Define $L:F_s\\to F_t$ by inserting $R_{a_s}\\cong R_{a_t}R_q$, applying the Cartesian proper/open interchange $J_{e_s}R_q\\to R_rJ_{e_t}$ [lem-pur-etale-proper-open-exchange-cube], and composing $R_{p_s}R_r\\cong R_{p_t}$. Then the specified graph comparisons [lem-sf-etale-locally-closed-graph-model] satisfy $L B_{s,c}=B_{t,c}$. This statement involves no shrinking of the supporting open and requires no quasi-compactness.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Steps 5--7: proper-projection grids, before shrinking; Stacks Tags 0F7C and 0F7D."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-etale-graph-presentation-maps",
+  "def-pc-fibre-product",
+  "lem-sf-etale-locally-closed-graph-model",
+  "lem-pur-etale-proper-open-exchange-cube",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [
+  {
+   "text": "Construct the product map and its two Cartesian supporting-neighborhood squares by explicit pullback lifts. Their proved graph equations give the first and second transport isomorphisms.",
+   "uses": [
+    "def-pur-etale-graph-proper-ambient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first-side and second-side pasting equations compare the two side factors against these transports.",
+   "uses": [
+    "lem-pur-etale-graph-proper-ambient-first-side",
+    "lem-pur-etale-graph-proper-ambient-second-side"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The intersection pasting equation identifies the two middle words against the same transports. The graph model supplies the four graph properness proofs.",
+   "uses": [
+    "lem-pur-etale-graph-proper-ambient-middle",
+    "lem-sf-etale-locally-closed-graph-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand B_s and B_t into first side, middle, inverse second side. Postcompose with the new second side. Replace L followed by that side using the second-side equation, cancel the old second side, substitute the middle equation and then the first-side equation. Cancel the new second side to obtain exactly B_s L = B_t.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-proper-ambient-data",
+  "lem-pur-etale-graph-proper-ambient-first-side",
+  "lem-pur-etale-graph-proper-ambient-second-side",
+  "lem-pur-etale-graph-proper-ambient-middle",
+  "lem-sf-etale-locally-closed-graph-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C--0F7D; explicit side and intersection decomposition of the proper-projection grid, with a proved cancellation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherence proper direct image extension by zero Cartesian squares vertical horizontal pasting",
+   "results": "8 hits: pullback pasting and CategoryTheory.mateEquiv_square; none states invariance of the explicit graph comparison.",
+   "date": "2026-10-24",
+   "verdict": "No matching graph-comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived direct image graph comparisons normalized by product of proper ambient schemes and intersection of opens",
+   "results": "8 hits: Scheme.Hom.normalizationDiagram, normalizationDiagramMap, gluing and ordinary scheme maps; no derived graph-comparison coherence.",
+   "date": "2026-10-24",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosedGraph|GraphComparison|LowerStarCompOpenImmersion",
+   "results": "msearch: 0 Mathlib hits. Direct rg in both project roots found the explicit graph model, the parent interchange and base-change statements; the parent second clause uses this item and cannot be used here.",
+   "date": "2026-10-24",
+   "verdict": "No independent existing theorem for the two elementary moves."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans",
+   "results": "Iso.trans_assoc, Iso.symm_self_id_assoc and related cancellation lemmas; used for the combination proof, no graph-word invariance theorem.",
+   "date": "2026-10-24",
+   "verdict": "Provides categorical cancellation only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtalePairwiseProductGraphNormalization",
+  "date": "2026-10-24",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 5--7: proper-projection grids, before shrinking; Stacks Tags 0F7C and 0F7D. Coherences (i) and (iii), comparison of the compactification composition maps used before transposition; the product-graph normalization needed in the canonicity paragraph of sk-thm-sf-comp-composition.proof.md.",
+   "via": [
+    "lem-pur-etale-pairwise-product-graph-normalization",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonProperAmbient",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphComparisonProperAmbient.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphComparisonFromOpen_properAmbient",
+  "statement": "theorem etaleGraphComparisonFromOpen_properAmbient\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (s t : EtaleGraphPresentation f) (pr : t.P ⟶ s.P) [IsProper pr]\n    (q : t.U ⟶ s.U) (sq : IsPullback q t.e s.e pr)\n    (hz : t.a ≫ q = s.a) (hp : pr ≫ s.p = t.p) :\n    etaleGraphComparisonFromOpen A c s ≪≫\n        Functor.isoWhiskerRight\n          (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A) t.a q s.a hz).symm _ ≪≫\n        Functor.associator _ _ _ ≪≫\n        Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫\n          Functor.isoWhiskerRight (openImmersionLowerShriekLowerStarExchangeIso A sq) _ ≪≫\n          Functor.associator _ _ _ ≪≫\n          Functor.isoWhiskerLeft _\n            (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A) pr s.p t.p hp)) =\n      etaleGraphComparisonFromOpen A c t",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261024T021210-L-2724135",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T023027-L-514396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "F8 stage 3 repair",
+  "old_statement": "Let $A$ be a finite commutative ring, and use the ordinary unbounded small-etale module derived categories [def-weil-pbc-derived-categories]. Fix $f:X\\to Y$, a compactification $c$ and two proper/open/proper presentations $s=(a_s,e_s,p_s)$ and $t=(a_t,e_t,p_t)$ [lem-pur-etale-graph-comparison-base-change]. Let $r:P_t\\to P_s$ be proper and $q:U_t\\to U_s$ such that the square with top $e_t$, bottom $e_s$, left $q$ and right $r$ is Cartesian [def-pc-fibre-product], $q a_t=a_s$, and $p_s r=p_t$. Write $R_g=Rg_*$ and $J_j=Dj_!$, with the canonical direct-image compositors [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Define $L:F_s\\to F_t$ by inserting $R_{a_s}\\cong R_{a_t}R_q$, applying the Cartesian proper/open interchange $J_{e_s}R_q\\to R_rJ_{e_t}$ [lem-pur-etale-proper-open-exchange-cube], and composing $R_{p_s}R_r\\cong R_{p_t}$. Then the specified graph comparisons [lem-sf-etale-locally-closed-graph-model] satisfy $L B_{s,c}=B_{t,c}$. This statement involves no shrinking of the supporting open and requires no quasi-compactness.",
+  "old_stmt_deps": [
+   "def-weil-pbc-derived-categories",
+   "lem-pur-etale-graph-comparison-base-change",
+   "def-pc-fibre-product",
+   "lem-sf-etale-locally-closed-graph-model",
+   "lem-pur-etale-proper-open-exchange-cube",
+   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+   "lem-cbc-extension-zero-composition"
+  ],
+  "old_proof": [
+   {
+    "text": "in the products `s.P ×_Y c.Z` and `t.P ×_Y c.Z`, the map induced by `pr`\nis proper. The supporting neighborhood for `t` is the inverse image of the one\nfor `s` by the supplied Cartesian square. The neighborhood for `c` and their\nintersection are also related by Cartesian proper maps. Their proper graph lifts\nare compatible with these maps by the pullback projection equations and `hz`.\nFor each supporting neighborhood, expand the side word of the graph comparison.\nVertical pasting of the normalized proper/open exchange identifies this side word\nwith the old side word followed by the proper-projection exchange and direct-image\ncompositor. For the intersection word, apply vertical pasting to the graph triangle\nabove the proper-projection square and horizontal pasting to the two open inclusions.\nNaturality interchanges the two exchange factors and gives the same projection\nexchange at both ends. Substitute these equations in `B₂⁻¹ R(B₁₂) B₁`.\nThe two occurrences of the intersection projection exchange cancel. The remaining\nside factor is precisely the displayed compositor--Cartesian-exchange word.\nAssociativity of the canonical direct-image and open compositors supplies the\nparenthesizations shown below. The argument also applies to empty schemes and to\nidentity maps; it requires no quasi-compactness of either supporting open.",
+    "uses": [
+     "lem-pur-etale-proper-open-exchange-cube",
+     "lem-sf-etale-locally-closed-graph-model",
+     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+     "lem-cbc-extension-zero-composition",
+     "def-pc-fibre-product",
+     "lem-weil-pbc-proper-base-change",
+     "lem-weil-pbc-proper-to-separated",
+     "lem-weil-pbc-open-immersion-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-etale-proper-open-exchange-cube",
+   "lem-sf-etale-locally-closed-graph-model",
+   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+   "lem-cbc-extension-zero-composition",
+   "def-pc-fibre-product",
+   "lem-weil-pbc-proper-base-change",
+   "lem-weil-pbc-proper-to-separated",
+   "lem-weil-pbc-open-immersion-base-change"
+  ],
+  "what": "Dependency-only interface separation: use the verbatim presentation and specified graph-map definitions in the shared definition node, not the seven-clause theorem. No mathematical or Lean signature changes. Preserve current main proofs verbatim. This removes the returned import cycle through the two elementary graph moves.",
+  "source": {
+   "document": "literature/stacks-project/more-etale.tex",
+   "place": "Steps 5--7: proper-projection grids, before shrinking; Stacks Tags 0F7C and 0F7D."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-etale-pairwise-product-graph-normalization",
+    "holds": true,
+    "note": "Every existing statement and specified map is unchanged; the presentation definitions move verbatim and are re-exported by the assigned module. The existing use remains valid."
+   }
+  ]
+ }
+}

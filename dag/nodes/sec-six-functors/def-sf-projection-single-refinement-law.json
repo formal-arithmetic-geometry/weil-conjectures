@@ -1,0 +1,114 @@
+{
+ "id": "def-sf-projection-single-refinement-law",
+ "kind": "definition",
+ "title": "The projection square for one proper compactification refinement",
+ "statement": "Fix the finite-field and coefficient datum of [def-fix-six-functor-datum]. The schemes are finite-type schemes over its field, with separated finite-type morphisms [def-weil-scheme-morphism-properties]. Compactifications and proper refinements are those of [def-weil-compactifications-refinements]. For a recorded coefficient stage $S$, tensor $T$, projection family $A$ of [def-exchange-projection], and input predicate $P$, define $\\mathrm{refinementLaw}(S,T,A,P)$ to mean: for every $f:X\\to Y$, compactifications $c,d$, proper refinement $r:c\\to d$, $K\\in B_X$, and $L\\in B_Y$ with $P_Y(L)$, one has $\\mathrm{PF}^{c}_{K,L};\\rho_{c,d}(K\\otimes Lf^*L)=(\\rho_{c,d}(K)\\otimes1_L);\\mathrm{PF}^{d}_{K,L}$. Here semicolon denotes composition in the written order, the projection is selected at the identity base-change square of the displayed compactification, and $\\rho$ is the recorded compactification comparison. This is only the local refinement predicate, not the assertion that it holds. The same data module retains the existing identitySquare (the chosen compactification in the identity base-change square), higherLaw (the same square for any two compactifications), and finiteLaw (the witnessed common-refinement comparison equation at finite coefficients) without changing their formulas.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of refinement comparisons with the counits and j_!, together with naturality."
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-exchange-projection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural projection morphism commutes with a proper refinement of compactifications at integral coefficients",
+   "results": "8 unrelated hits, including AffineSpace.toSpecMvPoly, Algebra.PreSubmersivePresentation.ofHasCoeffs_map and LightProfinite projections.",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized integral or field single-refinement square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection transformation commutes with refinement comparison of compactifications",
+   "results": "8 unrelated Profinite and LightProfinite projection/transition identities.",
+   "date": "2026-10-25",
+   "verdict": "No derived compactification statement."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementProjection|projectionRefinement|higherLaw",
+   "results": "msearch: 0 Mathlib hits. Local rg found ProjectionRefinementDescent.finite_descent (used), refinementProjectionCounit (ambient system equation), and projectionIntegralCoherenceRealization (requires specified expression realization). No datum-coordinate integral/field single-refinement square.",
+   "date": "2026-10-25",
+   "verdict": "Reuse finite_descent. New steps concern realization and coefficient transport of one refinement, not ambient refinement algebra."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "projection refinement; projection integral refinement",
+   "results": "22 and 8 blueprint matches respectively. Generic exchange/datum/package/adjunction entries, no statement matching one normalized integral refinement square or its field transport.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint local-step statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FixProjectionCompactificationComparison",
+  "date": "2026-10-25",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Compactification-independence sentence: compatibility of refinement comparisons with the counits and j_!, together with naturality.",
+   "via": [
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionCompactificationData",
+  "file": "lean/Sheaf/Paper/ProjectionCompactificationData.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.refinementLaw",
+  "statement": "def refinementLaw {D : FiniteFieldDatum.{u}}\n    {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]\n    (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)\n    (A : ∀ Q : SixFunctorCompactifiedSquare D, SixFunctorExchangeData S T Q)\n    (P : ∀ Y, ObjectProperty (B Y)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.FixProjectionCompactification.identitySquare",
+   "WeilConjectures.FixProjectionCompactification.higherLaw",
+   "WeilConjectures.FixProjectionCompactification.refinementLaw",
+   "WeilConjectures.FixProjectionCompactification.finiteLaw"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a98d5",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261025T211625-L-3999844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a98d5",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261025T211625-L-3999844",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery a98d vs prior FIX'd head ea930 (Lean+nodes byte-identical) and clone published item b3f4169; 5 delivered modules + 4 direct importers (incl. new RelativeProductInputDomains) compiled in /tmp sandbox, exit 0"
+ }
+}

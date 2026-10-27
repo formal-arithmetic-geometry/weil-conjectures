@@ -1,0 +1,441 @@
+{
+ "id": "lem-sfb-etale-cover-trace-koszul-resolution",
+ "kind": "statement",
+ "title": "Trace Koszul resolution for a surjective etale scheme cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], let $X$ be an algebraic space over $S$ with its small etale site [def-trf-algebraic-space], and let $f:U\\to X$ be a representable surjective etale morphism from a scheme [def-weil-etale-morphism]. Let $E$ be the free abelian sheaf on $U/X$: the sheafification of the presheaf $V\\mapsto\\bigoplus_{a\\in\\operatorname{Hom}_X(V,U)}\\mathbf Z e_a$ on etale scheme objects $V\\to X$, with restriction $e_a\\mapsto e_{a|_{V\\prime}}$ [def-weil-pbc-sheafification]. Let $\\epsilon:E\\to\\underline{\\mathbf Z}$ send each $e_a$ to $1$. Write $\\bigwedge^nE$ for the sheafification of sectionwise exterior powers over $\\underline{\\mathbf Z}$, with exterior powers as in [def-weil-pbc-exterior-algebra] and tensor as in [def-pur-sheaf-tensor-product]. For $p\\geq0$ set $K_p=\\bigwedge^{p+1}E$. The contraction formula $$\\partial_p(e_0\\wedge\\cdots\\wedge e_p)=\\sum_{i=0}^p(-1)^i\\epsilon(e_i)e_0\\wedge\\cdots\\wedge\\widehat{e_i}\\wedge\\cdots\\wedge e_p$$ defines maps $\\partial_p:K_p\\to K_{p-1}$ for $p\\geq1$ and $\\partial_0=\\epsilon:K_0\\to\\underline{\\mathbf Z}$. The augmented sequence $$\\cdots\\longrightarrow K_2\\longrightarrow K_1\\longrightarrow K_0\\xrightarrow{\\epsilon}\\underline{\\mathbf Z}\\longrightarrow0$$ is a chain complex exact at every term in the abelian category of abelian sheaves on $X_{\\mathrm{et}}$ [def-weil-pbc-sites-and-cohomology]. No separation or finiteness of the fibres of $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0723, equation-quasi-isomorphism, and its preceding construction in Section 0721; the exactness assertion preceding Definition 0724."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-exterior-algebra",
+  "def-sfb-site-exterior-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\underline{\\mathbf Z}$. The unit $\\eta:\\mathbf Z\\to R$ from the constant presheaf is inverted by sheafification; on underlying sets $|\\eta|$ is a set sheafification by [lem-pc-sites-sheafification-underlying-sets], so $|\\eta|$ is locally bijective by [lem-weil-pbc-large-set-sheafification]. In particular every section of $R(V)$ is, on some covering of $V$, the image of an integer. On each site object $V$, regard $E(V)$ as an $R(V)$-module: a section of $R(V)$ acts, on a covering where it is the image of an integer $n$, by multiplication by $n$; by local injectivity of $|\\eta|$ these local products agree on overlaps after refinement, and the sheaf axiom of $E$ glues them uniquely. The same argument makes $\\epsilon_V:E(V)\\to R(V)$ linear. Apply [lem-weil-pbc-koszul-differential-existence] with this commutative ring, module and linear form. Its recurrence, starting with $D(1)=0$, gives exactly the displayed contraction formula on every pure wedge. Such wedges span each exterior power by [def-weil-pbc-exterior-algebra], so the formula determines $D$, lowers exterior degree by one, and commutes with restriction: restricting each summand gives the identical formula on the restricted wedge. Thus $P_p(V)=\\bigwedge^{p+1}_{R(V)}E(V)$, $P_{-1}(V)=R(V)$ and their contractions form an augmented diagram of presheaves of abelian groups. Sheafifying its arrows gives the stated maps on $K_p=P_p^\\#$ by [def-weil-pbc-sheafification]; $P_0=E$ and $P_{-1}=R$ are already sheaves.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential-existence",
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-large-set-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0622, definition-koszul and the explicit formula immediately following it; spaces-cohomology.tex Tag 0723, preceding construction"
+   }
+  },
+  {
+   "text": "The augmented presheaf diagram is a complex. On a pure wedge, the two terms of $D^2$ deleting positions $i<j$ have coefficients $(-1)^{i+j-1}\\epsilon(e_i)\\epsilon(e_j)$ and $(-1)^{i+j}\\epsilon(e_j)\\epsilon(e_i)$; the remaining factors occur in the same order. They cancel because $R(V)$ is commutative. This includes $\\epsilon D=0$ on $\\bigwedge^2E(V)$. Linearity and the spanning description of [def-weil-pbc-exterior-algebra] prove the assertion on all elements. Sheafification carries zero composites to zero composites, so the augmented sequence in the statement is a chain complex.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0622, contraction formula; spaces-cohomology.tex Tag 0723"
+   }
+  },
+  {
+   "text": "Fix any scheme object $V\\to X$. By [lem-trf-space-fibre-products-etale-covers], $W=V\\times_XU$ is a scheme and $W\\to V$ is a surjective etale covering. The second projection $a:W\\to U$ defines a basis vector in the free abelian presheaf, hence a section $e\\in E(W)$ through its sheafification unit. By the definition of $\\epsilon$, $\\epsilon_W(e)=1$. The same holds for the restrictions of $e$ to every object over $W$. This uses only representability, surjectivity and etaleness of $f$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0723, surjectivity of the trace; spaces.tex Tag 02X2 and spaces-topologies.tex Tag 041F"
+   }
+  },
+  {
+   "text": "On the sections over $W$ from Step 3 put $h_p(z)=e\\wedge z$ for $p\\geq0$, and put $h_{-1}(r)=re$. The recurrence in [lem-weil-pbc-koszul-differential-existence] gives $D(e\\wedge z)=\\epsilon(e)z-e\\wedge D(z)=z-e\\wedge D(z)$, so $D h_p+h_{p-1}D=\\mathrm{id}$ in every degree $p\\geq0$. In degree $-1$, $\\epsilon h_{-1}(r)=r\\epsilon(e)=r$. Consequently every cycle $z$ of the presheaf complex on $V$ becomes a boundary after restriction to $W$: $z|_W=D(h_p(z|_W))$. The same identity in degree $-1$ shows every augmentation section locally lifts. These equalities are direct substitutions in the cited recurrence, including $p=0$, where $D$ means $\\epsilon$.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0626, lemma-homotopy-koszul-abstract and its one-line proof, with image f=1"
+   }
+  },
+  {
+   "text": "For every degree $p\\geq-1$, let $H_p(P)$ be the homology presheaf. It is computed objectwise by [lem-weil-pbc-site-module-presheaf-sheafification-exact](1), with fixed scalar ring $\\mathbf Z$. Step 4 proves that every section of $H_p(P)$ is zero on a cover. The underlying set-presheaf map $|H_p(P)|\\to\\{*\\}$ is therefore locally bijective: it is surjective on every object by its zero section, and any two sections become equal on a common refinement of covers killing them. By [lem-weil-pbc-large-set-sheafification], its set sheafification is an isomorphism. By [lem-pc-sites-sheafification-underlying-sets], the underlying set sheaf of $H_p(P)^\\#$ is thus terminal, so this abelian sheaf is zero. Finally [lem-weil-pbc-site-module-presheaf-sheafification-exact](2) gives $H_p(P^\\#)\\cong H_p(P)^\\#=0$. Since $P^\\#$ is precisely the augmented complex of the statement, it is exact at every $K_p$ and at $\\underline{\\mathbf Z}$, as required.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-large-set-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0723, exactness assertion preceding definition-alternating-cech-complex; sites.tex Tags 00WJ, 00WK, 00WM and section-sheaves-algebraic-structures"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-koszul-differential-existence",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-sheafification",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-large-set-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Section 0721, equation-quasi-isomorphism (Tag 0723), with the contraction of more-algebra.tex Tag 0626 performed over a cover rather than at a geometric stalk"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exterior Koszul complex of the trace from the free abelian sheaf of a surjective etale cover resolves the constant integer sheaf",
+   "results": {
+    "t": "2026-10-23T22:07:54Z",
+    "tool": "leanfinder",
+    "query": "The exterior Koszul complex of the trace from the free abelian sheaf of a surjective etale cover resolves the constant integer sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+     "Algebra.Extension.exact_cotangentComplex_toKaehler",
+     "Algebra.etaleLocus_eq_compl_support",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "Algebra.FormallySmooth.projective_kaehlerDifferential",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "Algebra.FormallyEtale.subsingleton_kaehlerDifferential"
+    ],
+    "digest": "9442e91b1de412c1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective augmentation of a locally free abelian sheaf has an exact augmented exterior power complex",
+   "results": {
+    "t": "2026-10-23T22:08:03Z",
+    "tool": "leanfinder",
+    "query": "A surjective augmentation of a locally free abelian sheaf has an exact augmented exterior power complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "ExteriorAlgebra.map_surjective_iff",
+     "ChainComplex.alternatingConst_exactAt",
+     "Algebra.Extension.exact_cotangentComplex_toKaehler",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+     "Algebra.Generators.H1Cotangent.exact_δ_map",
+     "LinearMap.exact_lcomp_of_exact_of_surjective",
+     "Algebra.H1Cotangent.exact_map_δ"
+    ],
+    "digest": "f22ccf37b7e9792b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\", \"exact\"",
+   "results": {
+    "t": "2026-10-23T22:08:04Z",
+    "tool": "loogle",
+    "query": "\"KoszulComplex\", \"exact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*[Kk]oszul|[Kk]oszul.*trace|[Ee]xterior.*[Ss]heaf",
+   "results": {
+    "t": "2026-10-23T22:08:04Z",
+    "tool": "grep",
+    "query": "trace.*[Kk]oszul|[Kk]oszul.*trace|[Ee]xterior.*[Ss]heaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented exterior power complex associated to a surjective trace map of sheaves is exact",
+   "results": {
+    "t": "2026-10-23T22:08:05Z",
+    "tool": "leansearch",
+    "query": "The augmented exterior power complex associated to a surjective trace map of sheaves is exact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChainComplex.augment",
+     "CategoryTheory.ShortComplex.exact_iff_surjective_moduleCatToCycles",
+     "CategoryTheory.ShortComplex.Exact.mk",
+     "CategoryTheory.ShortComplex.exact_iff_surjective_abToCycles",
+     "HomologicalComplex.ExactAt",
+     "CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements",
+     "CategoryTheory.ShortComplex.Exact.recOn",
+     "CategoryTheory.ShortComplex.Exact.casesOn"
+    ],
+    "digest": "0d047cd029e6d733"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*[Kk]oszul|[Kk]oszul.*trace|[Ee]xterior.*[Ss]heaf",
+   "results": {
+    "t": "2026-10-23T22:33:13Z",
+    "tool": "grep",
+    "query": "trace.*[Kk]oszul|[Kk]oszul.*trace|[Ee]xterior.*[Ss]heaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary Clifford/exterior algebra, cotangent complexes, generic resolutions or a Mayer-Vietoris square; none supplies the trace complex of a surjective etale scheme cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\", \"exact\"",
+   "results": {
+    "t": "2026-10-23T22:33:14Z",
+    "tool": "loogle",
+    "query": "\"KoszulComplex\", \"exact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary Clifford/exterior algebra, cotangent complexes, generic resolutions or a Mayer-Vietoris square; none supplies the trace complex of a surjective etale scheme cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented exterior Koszul complex of the free abelian sheaf on a surjective etale cover is exact",
+   "results": {
+    "t": "2026-10-23T22:33:15Z",
+    "tool": "leanfinder",
+    "query": "The augmented exterior Koszul complex of the free abelian sheaf on a surjective etale cover is exact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+     "Algebra.Generators.H1Cotangent.exact_δ_map",
+     "Profinite.NobelingProof.succ_exact",
+     "Algebra.Generators.H1Cotangent.exact_map_δ",
+     "Algebra.H1Cotangent.exact_map_δ",
+     "Algebra.Generators.H1Cotangent.exact_map_δ'",
+     "Algebra.Extension.exact_cotangentComplex_toKaehler",
+     "KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange"
+    ],
+    "digest": "63f65b88f40677d2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary Clifford/exterior algebra, cotangent complexes, generic resolutions or a Mayer-Vietoris square; none supplies the trace complex of a surjective etale scheme cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact augmented Koszul resolution of a surjective map to the constant integer sheaf",
+   "results": {
+    "t": "2026-10-23T22:33:35Z",
+    "tool": "leansearch",
+    "query": "Exact augmented Koszul resolution of a surjective map to the constant integer sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ProjectiveResolution.exact₀",
+     "CategoryTheory.exact_d_f",
+     "CategoryTheory.InjectiveResolution.of",
+     "CategoryTheory.InjectiveResolution.of_def",
+     "CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ",
+     "CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
+     "CategoryTheory.Abelian.LeftResolution.epi_π_app",
+     "CategoryTheory.ProjectiveResolution.exact_succ"
+    ],
+    "digest": "7d3f5f5031404ae9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary Clifford/exterior algebra, cotangent complexes, generic resolutions or a Mayer-Vietoris square; none supplies the trace complex of a surjective etale scheme cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear functional with an element of value one contracts its augmented exterior power Koszul complex",
+   "results": {
+    "t": "2026-10-23T22:33:36Z",
+    "tool": "leanfinder",
+    "query": "A linear functional with an element of value one contracts its augmented exterior power Koszul complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CliffordAlgebra.contractLeft_one",
+     "CliffordAlgebra.contractRight_one",
+     "exteriorPower.pairingDual_apply_apply_eq_one",
+     "ExteriorAlgebra.liftAlternating_one",
+     "ExteriorAlgebra.ιInv",
+     "exteriorPower.oneEquiv_symm_apply",
+     "ExteriorAlgebra.liftAlternating_ι",
+     "exteriorPower.oneEquiv_ιMulti"
+    ],
+    "digest": "ede415307c15450d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary Clifford/exterior algebra, cotangent complexes, generic resolutions or a Mayer-Vietoris square; none supplies the trace complex of a surjective etale scheme cover"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-alternating-sign-cohomology-spectral",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module. Supporting input: Tag 072C proof, displayed E_1 page supplied by Tag 0728, using the unordered distinct-tuple quotients and sign line of Tag 0727. Supporting input: Tag 0723, equation-quasi-isomorphism, and its preceding construction in Section 0721; the exactness assertion preceding Definition 0724.",
+   "via": [
+    "lem-sfb-space-alternating-sign-cohomology-spectral",
+    "lem-sfb-space-qcoh-cohomology-finite-bound",
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-cover-trace-koszul-resolution",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0723 and 0622/0626 and all supporting node statements. Gave the actual local wedge contraction, including the augmentation, and deduced exactness by locally zero homology and exact sheafification. No new nodes and no statement changes. Repaired the inherited null blueprint ancestor using its explicit ancestry place and the existing imported node.",
+  "blueprint": "Ancestor det-thm-sf-ctf-stability-direct-images, proof (3), existing descendant route to Stacks 0728: this item supplies the exact trace complex 0723. Steps 1-2 construct it, Steps 3-4 contract it locally, Step 5 proves exactness.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-koszul-differential-existence",
+    "why": "Generic contraction for a linear form over an arbitrary commutative ring; the unit supplies no module-algebra replacement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Base change of the given covering supplies a scheme object with a map to U; generic algebraic-space site geometry."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "why": "Generic objectwise presheaf homology and exact abelian sheafification; applies with fixed scalar ring Z on this small site."
+   },
+   {
+    "node": "lem-weil-pbc-large-set-sheafification",
+    "why": "Generic local-bijection criterion for set sheafification in the chosen universes; detects the zero homology presheaf after sheafification."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Generic compatibility of abelian sheafification with underlying sets; makes that local-bijection criterion applicable to homology presheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-koszul-differential-existence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-large-set-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-9cee465b8",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-9cee465b8 (reviewer sub-agent of L); spot-checked: I read the item, all 7 cited nodes and Stacks spaces-cohomology 0721/0723 (lines 578-760). The delivery has no new nodes, and the statement and stmt_deps are unchanged from side-live. The sign rule matches the source's (-1)^{i+1}. Instead of the source's stalk argument, the proof shows that homology is locally zero on the cover W=V×_X U→V, using a trace-1 section e and the identity D(e∧z)=z-e∧Dz. This yields the same exactness; I accept it. Steps 2-5 are correct. Step 5 kills homology using objectwise homology, a local-bijection criterion for set sheafification, the comparison of underlying sets, and exactness of sheafification. FIX (C4): step 1 used that sections of the constant sheaf Z are locally integers, but cited only the universal-property sheafification node for it. It now derives this from lem-pc-sites-sheafification-underlying-sets plus lem-weil-pbc-large-set-sheafification. Both were already in proof_deps; the corrected item is in fixes/. Edge cases checked: the identity cover, two sheets, infinitely many sheets, empty X, disconnected V and non-separated f. No duplicate node exists: the alternating-Čech nodes are Zariski/qcoh and the trf trace nodes say something else. I accept all 5 tool_uses as generic. Batch-5 flag on lem-trf-space-fibre-products-etale-covers: it states Stacks 02X2 and 041F(3), base change of étale coverings of algebraic spaces. Its 141-node closure is foundational and reaches no nt-assume, trace-formula or Poincaré node, so it lies outside the assumed statements and is no RETURN. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoverTraceKoszulResolution",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleCover_traceKoszul_resolution",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.traceKoszulRing",
+   "AlgebraicGeometry.AlgebraicSpace.traceKoszulCoefficients",
+   "AlgebraicGeometry.AlgebraicSpace.traceKoszulFreePresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.traceKoszulFree",
+   "AlgebraicGeometry.AlgebraicSpace.traceKoszulGenerator",
+   "AlgebraicGeometry.AlgebraicSpace.traceKoszulAbelian",
+   "AlgebraicGeometry.AlgebraicSpace.traceKoszulTerm",
+   "AlgebraicGeometry.AlgebraicSpace.traceKoszulWedge",
+   "AlgebraicGeometry.AlgebraicSpace.etaleCover_traceKoszul_resolution"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoverTraceKoszulResolution.lean",
+  "statement": "theorem etaleCover_traceKoszul_resolution (U : X.EtaleSite) (hf : IsSurjective U.obj.hom) : ∃ (i : (SheafOfModules.toSheaf X.traceKoszulCoefficients).obj (X.traceKoszulFree U) ≅ X.traceKoszulAbelian U) (ε : X.traceKoszulFree U ⟶ SheafOfModules.unit X.traceKoszulCoefficients) (a : X.traceKoszulTerm U 0 ⟶ SheafOfModules.unit X.traceKoszulCoefficients) (d : ∀ p : ℕ, X.traceKoszulTerm U (p + 1) ⟶ X.traceKoszulTerm U p), (∀ (V : X.EtaleSite) (b : V ⟶ U), i.hom.hom.app (op V) (X.traceKoszulGenerator U V b) = (toSheafify X.etaleTopology (uliftYoneda.{u + 1}.obj U ⋙ AddCommGrpCat.free)).app (op V) (FreeAbelianGroup.of (ULift.up b))) ∧ (∀ (V : X.EtaleSite) (b : V ⟶ U), ε.val.app (op V) (X.traceKoszulGenerator U V b) = (1 : X.traceKoszulRing.obj.obj (op V))) ∧ (∀ (V : X.EtaleSite) (v : Fin 1 → (X.traceKoszulFree U).val.obj (op V)), a.val.app (op V) (X.traceKoszulWedge U V 0 v) = ε.val.app (op V) (v 0)) ∧ (∀ (p : ℕ) (V : X.EtaleSite) (v : Fin (p + 1 + 1) → (X.traceKoszulFree U).val.obj (op V)), (d p).val.app (op V) (X.traceKoszulWedge U V (p + 1) v) = ∑ j : Fin (p + 1 + 1), (-1 : ℤ) ^ j.val • (ε.val.app (op V) (v j) • X.traceKoszulWedge U V p (fun k ↦ v (j.succAbove k)))) ∧ (∃ h : (SheafOfModules.toSheaf X.traceKoszulCoefficients).map (d 0) ≫ (SheafOfModules.toSheaf X.traceKoszulCoefficients).map a = 0, (ShortComplex.mk ((SheafOfModules.toSheaf X.traceKoszulCoefficients).map (d 0)) ((SheafOfModules.toSheaf X.traceKoszulCoefficients).map a) h).Exact) ∧ (∀ p : ℕ, ∃ h : (SheafOfModules.toSheaf X.traceKoszulCoefficients).map (d (p + 1)) ≫ (SheafOfModules.toSheaf X.traceKoszulCoefficients).map (d p) = 0, (ShortComplex.mk ((SheafOfModules.toSheaf X.traceKoszulCoefficients).map (d (p + 1))) ((SheafOfModules.toSheaf X.traceKoszulCoefficients).map (d p)) h).Exact) ∧ Epi ((SheafOfModules.toSheaf X.traceKoszulCoefficients).map a)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing siteExteriorPower/siteExteriorWedge (landed def-sfb-site-exterior-sheaf). The free coefficient-module construction is pinned to the prescribed free abelian sheaf by an isomorphism on its canonical generators. Exactness and zero composites are stated after forgetting to abelian sheaves, and the augmentation is epi. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-acea524a2",
+  "group": "Q119",
+  "result": "pass",
+  "note": "The node is unchanged apart from its lean record and one added stmt_dep, def-sfb-site-exterior-sheaf, which is landed (NQ) with a lean record and is really used (allowed: stmt_deps may gain landed nodes). lean.statement is verbatim in the file. Clause by clause: U : X.EtaleSite with IsEtale plus hf : IsSurjective gives the representable surjective etale scheme cover, with no extra hypotheses. The module E is tied to presheafToSheaf(uliftYoneda U ⋙ free) by an iso fixed on every generator; it exists and is unique because constant-Z sections are locally integers. ε (generators to 1), a (1-wedges to ε(v 0)) and d p (contraction on arbitrary sections, sign (-1)^j zero-based, succAbove deletion) are each uniquely determined; nothing is hollow or arbitrary. The conclusion gives both zero composites, ShortComplex exactness at K_0 and every K_{p+1} as abelian sheaves after toSheaf, and Epi a for exactness at Z. K_p = siteExteriorPower (p+1) over the constant Z ring sheaf. Coefficients in u+1 match the size convention and the large covering sieves; ULift is only a transport. Edge cases (empty X, identity cover, infinitely many sheets, non-separated f, p=0) are covered. Docstrings carry the source/blueprint and proof steps 1-5; only the main theorem is sorry. No duplicate found in project lean/Sheaf or dag/nodes. Not recompiled, per instruction."
+ }
+}

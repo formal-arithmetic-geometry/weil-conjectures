@@ -1,0 +1,464 @@
+{
+ "id": "lem-sfb-generalizing-subset-affine-envelope",
+ "kind": "statement",
+ "title": "Affine envelope and boundary criterion for a generalizing ringed subspace",
+ "statement": "Let $S=\\operatorname{Spec}A$ be an affine scheme for a commutative ring $A$ [def-pc-scheme, def-weil-affine-spectrum]. Let $H\\subseteq|S|$ be stable under generalization, meaning that $s\\in H$ and $s\\in\\overline{\\{t\\}}$ imply $t\\in H$, and retrocompact, meaning that $H\\cap U$ is quasi-compact for every quasi-compact open $U\\subseteq S$. Give $E=S|_H=(H,\\mathcal O_S|_H)$ the induced ringed-space structure [def-a1-ringed-subspace]. It is locally ringed [def-weil-locally-ringed-space-morphism]. Put $C=\\Gamma(H,\\mathcal O_S|_H)$, $V=\\operatorname{Spec}C$, and let $h:V\\to S$ be induced by restriction $A\\to C$. The morphism $k:E\\to V$ is the canonical morphism whose map on global sections is $\\mathrm{id}_C$. It identifies $E$ with the ringed subspace on its image $k(H)$, and $h\\circ k$ is the canonical inclusion $E\\to S$. One has $h^{-1}(H)=k(H)$. Write $B=h(|V|\\setminus k(H))$. Then $E$ is a scheme if and only if $\\overline B\\cap H=\\varnothing$; whenever $E$ is a scheme its canonical morphism to $S$ is a quasi-compact flat monomorphism [def-weil-flat-morphism, def-weil-pbc-scheme-conventions]. Moreover $k$ is surjective if and only if it is an isomorphism, if and only if $E$ is an affine scheme.\n\nFor $s\\in S$, put $S_s=\\operatorname{Spec}\\mathcal O_{S,s}$ and $H_s=c_s^{-1}(H)$, where $c_s:S_s\\to S$ is the canonical local-spectrum morphism [lem-weil-pbc-spec-local-ring-canonical-morphism]. The subset $H_s$ again satisfies the two hypotheses. Its induced ringed space $E_s=S_s|_{H_s}$ has canonical affine envelope $V_s$ as above. There is a canonical $S_s$-isomorphism $V_s\\simeq V\\times_S S_s$ [def-pc-fibre-product]. Under this identification $k_s(H_s)$ is the inverse image of $k(H)$ and the image of its complement under $h_s:V_s\\to S_s$ is $c_s^{-1}(B)$.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "§2 Proposition 2.3(ii)–(iii), Proposition 2.4(A),(B) and Corollary 2.5(i),(ii), printed pp.4–8, specialized to affine S; boundary-image localization is the complement identification in the proof of Theorem 3.3, step 4°, printed p.13; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-a1-ringed-subspace",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Since $S$ is affine, it is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], hence spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Retrocompactness applied to the quasi-compact open $S$ makes $H$ quasi-compact. The set of generalizations of $H$ is $H$ itself, by the hypothesis. Thus [lem-weil-pbc-spectral-generalizations-of-quasi-compact] expresses $H$ as the intersection of all quasi-compact open neighbourhoods of $H$. This is a nonempty set-indexed family (it contains $S$), closed under finite intersections by quasi-separatedness. Empty $H$ is allowed: the family then includes the empty open.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0A31, lemma-make-spectral-space, implication (3) to (4); Raynaud Lemma 2.1, printed p.4."
+   }
+  },
+  {
+   "text": "Every quasi-compact open of the affine scheme $S$ is quasi-affine in the precise sense required by [lem-a1-intersection-canonical-affine-embedding]: it is already a quasi-compact open subscheme of $S$. Apply that node to the family in Step 1. It gives the locally ringed structure of $E$, the canonical $k:E\\to\\operatorname{Spec}C$, and an identification of $E$ with the induced ringed subspace on $k(H)$. In particular this identification uses the actual sheaf map of $k$. By [lem-a1-locally-ringed-space-affine-adjunction], morphisms of locally ringed spaces into $\\operatorname{Spec}A$ are determined by their maps $A\\to\\Gamma(E,\\mathcal O_E)$. The maps for $h\\circ k$ and the inclusion $i:E\\to S$ are both restriction $A\\to C$. Hence $h\\circ k=i$.",
+   "uses": [
+    "lem-a1-intersection-canonical-affine-embedding",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0API, lemma-sits-in-functions, statement and proof; the affine adjunction is schemes.tex Tag 01I1."
+   }
+  },
+  {
+   "text": "For use both at points and on principal opens, let $M\\subset A$ be any multiplicative subset, $A'=M^{-1}A$, $S'=\\operatorname{Spec}A'$, $c:S'\\to S$, and $H'=c^{-1}H$. By [lem-sfb-localization-spectrum-flat-monomorphism], $c$ is flat. Every quasi-compact open $U\\subset S$ is covered by finitely many principal opens $D(a_j)\\subset U$, using the basis in [lem-weil-pbc-spec-localization-away-basic-open] and quasi-compactness. The contraction description in [lem-weil-pbc-localization-spectrum-embedding] gives $c^{-1}D(a_j)=D(a_j/1)$. These are affine by [lem-weil-pbc-affine-open-section-vanishing-prime], hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Their finite union $c^{-1}U$ is quasi-compact. Thus the inverse images of the family in Step 1 are quasi-compact opens, closed under finite intersections, with intersection $H'$, and include $S'$. The affine scheme $S'$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-a1-qc-open-intersection-spectral-presentation] with member $S'$ and then [lem-weil-pbc-spectral-directed-limit-spectral]. The projection $H'\\hookrightarrow S'$ is spectral, so its inverse image of every quasi-compact open is quasi-compact: $H'$ is retrocompact. It is stable under generalization because it is an intersection of opens, and every open containing a point contains its generalizations. Taking $M=A\\setminus\\mathfrak p_s$ gives the two hypotheses for $H_s$.",
+   "uses": [
+    "lem-sfb-localization-spectrum-flat-monomorphism",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-a1-qc-open-intersection-spectral-presentation",
+    "lem-weil-pbc-spectral-directed-limit-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Equation equation-sections-of-intersection preceding Tag 0APJ; Topology Tags 0A31 and 0A2Z; Algebra Tags 00E0 and 00E3 and Schemes Tag 01I3 for the finite principal-open cover. Raynaud Proposition 2.3(iii), pp.6–7."
+   }
+  },
+  {
+   "text": "Put $E'=S'|_{H'}$ and $C'=\\Gamma(H',\\mathcal O_{S'}|_{H'})$. Apply [lem-a1-intersection-sections-flat-base-change] to $Y=S$ and the flat map $S'\\to S$ from Step 3. Its hypotheses hold since $S$ is quasi-separated and $H$ is the nonempty-family intersection of Step 1. It gives the canonical isomorphism $C\\otimes_A A'\\xrightarrow{\\sim}C'$, $u\\otimes a'\\mapsto c^\\sharp(u)a'$. By [lem-weil-pbc-fibre-product-affine-spectra], its spectrum identifies $V'=\\operatorname{Spec}C'$ with $V\\times_SS'$, including both projections. The comparison on the induced ringed subspaces sends $H'$ to $H$ by $c$. Naturality of [lem-a1-locally-ringed-space-affine-adjunction] identifies its composites with the canonical $k'$ and $k$: their section maps are exactly the restriction maps in the displayed tensor formula. Thus this is the canonical comparison of envelopes, with no scheme assumption on $E$. In particular it supplies the asserted $S_s$-isomorphism when $A'=A_{\\mathfrak p_s}$.",
+   "uses": [
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ, lemma-affine-base-change; schemes.tex Tag 01JQ, lemma-fibre-product-affines. Raynaud Proposition 2.3(iii)."
+   }
+  },
+  {
+   "text": "For clarity about points in this base change, the tensor pushout [lem-weil-pbc-algebra-tensor-pushout-universal-property] and localization universal property [lem-weil-pbc-ring-localization-universal-property] identify $C\\otimes_A M^{-1}A$ with the localization of $C$ at the image of $M$. Indeed maps from either ring to any commutative ring $D$ are exactly maps $C\\to D$ making every image of $m\\in M$ a unit; the extensions agree on $C$ and $M^{-1}A$, so the two inverse comparison maps are forced. Consequently [lem-weil-pbc-localization-spectrum-embedding] identifies the projection $\\pi:V_s\\to V$ with the embedding onto $h^{-1}(c_s(S_s))$: the condition on a prime $\\mathfrak q\\subset C$ is that its contraction to $A$ be contained in $\\mathfrak p_s$. Here [lem-weil-pbc-spec-local-ring-canonical-morphism] identifies $c_s(S_s)$ with the generalizations of $s$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CP (proposition-universal-property-localization) and 00E3 (lemma-spec-localization); canonical local-spectrum description in schemes.tex."
+   }
+  },
+  {
+   "text": "If $s\\in H$, every generalization of $s$ belongs to $H$, so $H_s=S_s$ by [lem-weil-pbc-spec-local-ring-canonical-morphism]. The ringed space $E_s$ is then $S_s$ and its global sections are $\\mathcal O_{S,s}$; hence its envelope arrow $h_s:V_s\\to S_s$ is an isomorphism by the affine-spectrum description [def-weil-affine-spectrum]. Step 5 says every point of $V$ above $s$ lifts uniquely to $V_s$. Since $h_s$ is an isomorphism there is just one such point, and it is $k(s)$ by $h k=i$. Therefore $h^{-1}(H)=k(H)$. The argument applies to every affine pair satisfying the hypotheses, including $(S_s,H_s)$ of Step 3. It follows that $k_s(H_s)=h_s^{-1}(H_s)=\\pi^{-1}(h^{-1}H)=\\pi^{-1}(k(H))$. Finally Step 5 identifies $\\pi$ with a bijection onto the points above the generalizations of $s$. For $t\\in S_s$, a point above $t$ outside $k_s(H_s)$ exists exactly when a point above $c_s(t)$ outside $k(H)$ exists. Thus $h_s(V_s\\setminus k_s(H_s))=c_s^{-1}(B)$, including equality of the stated boundary images.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization, applied after Steps 4–5; Raynaud Corollary 2.5(ii) and Theorem 3.3, proof 4°, printed p.13."
+   }
+  },
+  {
+   "text": "Suppose first that $E$ is a scheme. Its canonical arrow $i:E\\to S$ is flat: [lem-weil-pbc-topological-inverse-image-stalk] identifies each induced-sheaf stalk with $\\mathcal O_{S,s}$ and identifies the map of $i$ with that isomorphism, so it is flat by [def-weil-flat-morphism]. It is quasi-compact since the inverse image of any affine open $W\\subset S$ is the quasi-compact subspace $H\\cap W$, by retrocompactness. It is monic as a ringed-space map. Two maps with equal composites have equal base maps since $H\\hookrightarrow S$ is injective. For this fixed base map, a sheaf map from the inverse-image sheaf $i^{-1}\\mathcal O_S$ is uniquely determined by its adjoint map from $\\mathcal O_S$ under [def-weil-pbc-topological-inverse-image]. Equality of the composites says precisely that these latter maps are equal. Thus the maps into $E$ agree. All these claims concern the specified inclusion and its specified inverse-image sheaf [def-a1-ringed-subspace].",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-weil-flat-morphism",
+    "def-weil-pbc-topological-inverse-image",
+    "def-a1-ringed-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008H, lemma-stalk-pullback, and inverse-image adjunction; Raynaud Definition 1.4 and Proposition 2.4(A)(i),(ii)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-qc-flat-monomorphism-affine-neighbourhood] to $i$ from Step 7. Obtain an open $U\\subset S$ containing $H$ such that $E\\to U$ is affine. For each $s\\in H$, choose $a\\in A$ with $s\\in D(a)\\subset U$ by [lem-weil-pbc-spec-localization-away-basic-open]. The induced open $D(a)$ is affine with ring $A_a$ by [lem-weil-pbc-affine-open-section-vanishing-prime]. Its inverse image $E_a=E|_{H\\cap D(a)}$ is affine by [lem-weil-pbc-affine-morphism-permanence] applied to $E\\to U$. Step 4 with $A'=A_a$ identifies its envelope with $V\\times_SD(a)=h^{-1}D(a)$, using [lem-weil-pbc-open-preimage-fibre-product]. Since $E_a$ is affine, its canonical map to its envelope is an isomorphism by [lem-a1-locally-ringed-space-affine-adjunction] and [def-weil-affine-spectrum]. Therefore $h^{-1}D(a)\\subset k(H)$. Let $U_0$ be the union of these $D(a)$ for all $s\\in H$. Then $H\\subset U_0$ and $h^{-1}U_0\\subset k(H)$, so $B\\subset S\\setminus U_0$. The latter is closed and avoids $H$; hence $\\overline B\\cap H=\\varnothing$.",
+   "uses": [
+    "lem-sfb-qc-flat-monomorphism-affine-neighbourhood",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ (localization of sections) with schemes.tex Tag 01I3 (lemma-standard-open-affine); Raynaud Proposition 1.5 and Proposition 2.4(A), necessity."
+   }
+  },
+  {
+   "text": "Conversely assume $\\overline B\\cap H=\\varnothing$ and put $U=S\\setminus\\overline B$. Then $k(H)\\subset h^{-1}U$ since $hk=i$ and $H\\subset U$. Every point of $V\\setminus k(H)$ maps into $B\\subset\\overline B$, so $h^{-1}U\\subset k(H)$. Thus $k(H)=h^{-1}U$ is open in $V$. Step 2 identifies $E$, with its actual sheaf, with the induced ringed subspace on this open; it is therefore the open subscheme of $V$, by [def-weil-open-immersion]. In particular $E$ is a scheme. Step 7 now gives all the asserted properties of its canonical morphism to $S$. This proves both implications of the boundary criterion.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Open-subspace description of open immersions (Tag 01HF); Raynaud Proposition 2.4(A), sufficiency."
+   }
+  },
+  {
+   "text": "Step 2 already identifies $k$ with an isomorphism onto its induced ringed image. Hence if it is surjective, that image is all of $V$ and $k$ is an isomorphism. An isomorphism to $V=\\operatorname{Spec}C$ makes $E$ affine. Conversely if $E$ is affine, its canonical map $k$ is an isomorphism: for any presentation $E\\simeq\\operatorname{Spec}D$, the resulting isomorphism $C=\\Gamma(E,\\mathcal O_E)\\simeq D$ induces an inverse by [def-weil-affine-spectrum], and the composite with $k$ is the identity by the section-map uniqueness of [lem-a1-locally-ringed-space-affine-adjunction]. Isomorphisms are surjective. This proves the three equivalences, also for the empty affine scheme $\\operatorname{Spec}0$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I1 (lemma-morphism-into-affine) and 01I2 (lemma-category-affine-schemes); Raynaud Proposition 2.4(B) and Corollary 2.5(i)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+  "lem-a1-intersection-canonical-affine-embedding",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-sfb-localization-spectrum-flat-monomorphism",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-a1-qc-open-intersection-spectral-presentation",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lem-a1-intersection-sections-flat-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-topological-inverse-image",
+  "def-a1-ringed-subspace",
+  "lem-sfb-qc-flat-monomorphism-affine-neighbourhood",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Assembly of Tags 0API (lemma-sits-in-functions) and 0APJ (lemma-affine-base-change), spectral topology and the existing Raynaud affine-neighbourhood input. Corresponds to Raynaud §2 Propositions 2.3–2.4 and Corollary 2.5; its archival PDF is WANTED, primary Numdam text read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a retrocompact generalization stable subset of a scheme the direct image of the induced structure sheaf is quasi coherent and its relative spectrum detects whether the subset is a scheme",
+   "results": "{\"t\": \"2026-10-24T14:39:51Z\", \"tool\": \"leanfinder\", \"query\": \"For a retrocompact generalization stable subset of a scheme the direct image of the induced structure sheaf is quasi coherent and its relative spectrum detects whether the subset is a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.isCompact_iff_exists\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\"], \"digest\": \"e3af2d0bc94cb4d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GammaSpec and quasi-affine schemes do not construct or characterize the envelope of a possibly nonschematic generalizing ringed subspace or its compatibility with point localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyRingedSpace\", \"Spec\", \"IsEmbedding\"",
+   "results": "{\"t\": \"2026-10-24T14:39:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyRingedSpace\\\", \\\"Spec\\\", \\\"IsEmbedding\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GammaSpec and quasi-affine schemes do not construct or characterize the envelope of a possibly nonschematic generalizing ringed subspace or its compatibility with point localization."
+  },
+  {
+   "tool": "grep",
+   "query": "affini[sz]|affine.?envelope|pro.?open|generaliz.*subset|generiz.*subset",
+   "results": "{\"t\": \"2026-10-24T14:39:52Z\", \"tool\": \"grep\", \"query\": \"affini[sz]|affine.?envelope|pro.?open|generaliz.*subset|generiz.*subset\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"c434e993766d7d7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GammaSpec and quasi-affine schemes do not construct or characterize the envelope of a possibly nonschematic generalizing ringed subspace or its compatibility with point localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud criterion for a retrocompact generalizing ringed subspace to be a scheme using the boundary of its affine envelope and compatibility with localization",
+   "results": "{\"t\": \"2026-10-24T14:39:52Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud criterion for a retrocompact generalizing ringed subspace to be a scheme using the boundary of its affine envelope and compatibility with localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.isRetrocompact_basicOpen\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap\"], \"digest\": \"4839c42966c1a1fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GammaSpec and quasi-affine schemes do not construct or characterize the envelope of a possibly nonschematic generalizing ringed subspace or its compatibility with point localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical affine envelope of an intersection of open subschemes commutes with localization at a point and is equal to the subset exactly when the inclusion is affine",
+   "results": "{\"t\": \"2026-10-24T14:39:54Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical affine envelope of an intersection of open subschemes commutes with localization at a point and is equal to the subset exactly when the inclusion is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_basicOpen_le_affine_inter\", \"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.affineOpensRestrict_apply_coe_coe\", \"AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f\", \"AlgebraicGeometry.Scheme.affineBasicOpen_coe\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.ι_basicOpen_preimage\"], \"digest\": \"e6665342010acc5f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GammaSpec and quasi-affine schemes do not construct or characterize the envelope of a possibly nonschematic generalizing ringed subspace or its compatibility with point localization."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.?envelope|retrocompact.*gener|gener.*retrocompact|boundary.*scheme",
+   "results": "{\"t\": \"2026-10-24T15:16:16Z\", \"tool\": \"grep\", \"query\": \"affine.?envelope|retrocompact.*gener|gener.*retrocompact|boundary.*scheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical affinization of a generalizing subspace of an affine scheme commutes with localization at a prime ideal",
+   "results": "{\"t\": \"2026-10-24T15:16:16Z\", \"tool\": \"leansearch\", \"query\": \"Canonical affinization of a generalizing subspace of an affine scheme commutes with localization at a prime ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.Localizations\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"AlgebraicGeometry.StructureSheaf.instAlgebraLocalizationsValCarrierTopMemOpens\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'\", \"LocalSubring.ofPrimeEquiv\", \"AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal\"], \"digest\": \"6a1a0677f1bcf8d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyRingedSpace\", \"toΓSpec\"",
+   "results": "{\"t\": \"2026-10-24T15:16:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyRingedSpace\\\", \\\"toΓSpec\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecMapBasicOpen\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecBase\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecFun\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpec_base\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpec_continuous\", \"AlgebraicGeometry.LocallyRingedSpace.toToΓSpecMapBasicOpen\"], \"digest\": \"ddaa4085ed07cfc7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of global sections of an intersection of quasi compact opens commutes with flat affine base change and detects schematicity of the induced locally ringed subspace",
+   "results": "{\"t\": \"2026-10-24T15:16:17Z\", \"tool\": \"leanfinder\", \"query\": \"The spectrum of global sections of an intersection of quasi compact opens commutes with flat affine base change and detects schematicity of the induced locally ringed subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ\"], \"digest\": \"395a905872092ffa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a retrocompact subset of an affine scheme stable under generalization, its induced ringed space embeds in the spectrum of its global sections, and the closure of the boundary image detects whether it is a scheme",
+   "results": "{\"t\": \"2026-10-24T15:16:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a retrocompact subset of an affine scheme stable under generalization, its induced ringed space embeds in the spectrum of its global sections, and the closure of the boundary image detects whether it is a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isRetrocompact_basicOpen\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.isCompact_iff_exists\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\"], \"digest\": \"8df930ab186b9f16\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*quasi.?compact.*open|stable.*generalization|retrocompact",
+   "results": "{\"t\": \"2026-10-24T15:18:11Z\", \"tool\": \"grep\", \"query\": \"intersection.*quasi.?compact.*open|stable.*generalization|retrocompact\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\"], \"digest\": \"90da0c668bf8b5b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sections on intersection of quasi compact opens commute with flat affine base change",
+   "results": "{\"t\": \"2026-10-24T15:18:12Z\", \"tool\": \"leansearch\", \"query\": \"sections on intersection of quasi compact opens commute with flat affine base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"IsQuasiSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\"], \"digest\": \"014995de9a3f6dd8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\" \"toΓSpec\"",
+   "results": "{\"t\": \"2026-10-24T15:18:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\" \\\"toΓSpec\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"IsLocalization\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"toΓSpec\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "query error: Loogle returned Function expected for this malformed pattern; not evidence of absence. Raw response retained. Subsequent well-formed searches were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generalization stable retrocompact subset of a scheme is an intersection of quasi compact open subsets",
+   "results": "{\"t\": \"2026-10-24T15:18:12Z\", \"tool\": \"leanfinder\", \"query\": \"A generalization stable retrocompact subset of a scheme is an intersection of quasi compact open subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isRetrocompact_basicOpen\", \"PrimeSpectrum.isRetrocompact_basicOpen\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible\", \"AlgebraicGeometry.isCompact_basicOpen\"], \"digest\": \"e1cfbe4821669c4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from a generalization stable retrocompact subspace to the spectrum of global sections identifies it with an intersection of quasi compact opens",
+   "results": "{\"t\": \"2026-10-24T15:18:13Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical map from a generalization stable retrocompact subspace to the spectrum of global sections identifies it with an intersection of quasi compact opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isRetrocompact_basicOpen\", \"PrimeSpectrum.instQuasiSeparatedSpace\", \"AlgebraicGeometry.isRetrocompact_basicOpen\", \"PrimeSpectrum.instPrespectralSpace\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible\", \"PrimeSpectrum.instSpectralSpace\", \"PrimeSpectrum.isCompact_basicOpen\"], \"digest\": \"a2487206eb411c77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "grep",
+   "query": "retrocompact|generalization|quasi.?compact",
+   "results": "{\"t\": \"2026-10-24T15:20:49Z\", \"tool\": \"grep\", \"query\": \"retrocompact|generalization|quasi.?compact\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Bornology/Absorbs.lean\", \"Mathlib/Topology/CWComplex/Abstract/Basic.lean\", \"Mathlib/Topology/Maps/Strict/Basic.lean\", \"Mathlib/Topology/Compactness/LocallyCompact.lean\", \"Mathlib/Topology/Inseparable.lean\", \"Mathlib/Topology/Inseparable.lean\", \"Mathlib/Topology/Inseparable.lean\", \"Mathlib/Topology/Inseparable.lean\"], \"digest\": \"7dd475f7f668b20f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generalizing retrocompact subset is the intersection of its quasi compact open neighborhoods",
+   "results": "{\"t\": \"2026-10-24T15:20:50Z\", \"tool\": \"leansearch\", \"query\": \"A generalizing retrocompact subset is the intersection of its quasi compact open neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsRetrocompact\", \"IsCompact.isRetrocompact\", \"IsRetrocompact.biInter\", \"IsRetrocompact.isConstructible\", \"IsRetrocompact.univ\", \"QuasiSeparatedSpace.isRetrocompact_iff_isCompact\", \"IsRetrocompact.iInter\", \"IsRetrocompact.inter\"], \"digest\": \"7f4a07849c140597\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "StableUnderGeneralization, IsRetrocompact",
+   "results": "{\"t\": \"2026-10-24T15:20:50Z\", \"tool\": \"loogle\", \"query\": \"StableUnderGeneralization, IsRetrocompact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A retrocompact subset stable under generalization in a scheme is an intersection of quasi compact open neighborhoods",
+   "results": "{\"t\": \"2026-10-24T15:20:50Z\", \"tool\": \"leanfinder\", \"query\": \"A retrocompact subset stable under generalization in a scheme is an intersection of quasi compact open neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isRetrocompact_basicOpen\", \"stableUnderGeneralization_iff_exists_sInter_eq\", \"PrimeSpectrum.isRetrocompact_basicOpen\", \"PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.isCompact_basicOpen\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\"], \"digest\": \"93a61f3c41c59ce1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give component topology, affine adjunction, quasi-affineness, or localization facts; none proves the full boundary criterion and point-localization assertion for a possibly nonschematic induced ringed subspace. Existing DAG nodes supply the component facts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-descent-flat-monomorphism-subset",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited strict-local trait group descent; the finite-set affine-neighbourhood branch, via Raynaud integral descent of admissible subsets. Supporting input: §2 Proposition 2.3(ii)–(iii), Proposition 2.4(A),(B) and Corollary 2.5(i),(ii), printed pp.4–8, specialized to affine S; boundary-image localization is the complement identification in the proof of Theorem 3.3, step 4°, printed p.13",
+   "via": [
+    "lem-sfb-integral-descent-flat-monomorphism-subset",
+    "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generalizing-subset-affine-envelope",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing intersection embedding, flat section base change, spectral presentation and affine-neighbourhood nodes; no new nodes. Proved the localization comparison before using schematicity, then point-fibre and boundary-image identities, both directions of the boundary criterion, and the affine equivalence. All non-elementary inputs are cited. No Lean written or compiled.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), the inherited motivating direct-image branch. blueprint_refs ancestor returns None; retain existing null from.node and full via chain. The item is the Raynaud auxiliary input already selected below lem-sfb-integral-descent-flat-monomorphism-subset, not the unit key node. Searches for generalizing, ringed subspace and proconstructible found no blueprint duplicate. Steps 1–6 realize Raynaud Proposition 2.3 and Corollary 2.5; Steps 7–10 realize Proposition 2.4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+    "why": "Generic In a spectral space the generalizations of a quasi-compact set form an intersection of quasi-compact opens. Used only for its stated spectral, affine, localization or inverse-image property; it supplies an auxiliary input to the existing Raynaud route, not a replacement for any unit step."
+   },
+   {
+    "node": "lem-a1-intersection-canonical-affine-embedding",
+    "why": "Generic Canonical affine embedding of an intersection of quasi-compact opens. Used only for its stated intersection/base-change properties of induced ringed subspaces; it supplies an auxiliary input to the existing Raynaud route, not a replacement for any unit step."
+   },
+   {
+    "node": "lem-a1-qc-open-intersection-spectral-presentation",
+    "why": "Generic Spectral presentation of a directed intersection of quasi-compact opens. Used only for its stated intersection/base-change properties of induced ringed subspaces; it supplies an auxiliary input to the existing Raynaud route, not a replacement for any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-directed-limit-spectral",
+    "why": "Generic A directed limit of spectral spaces along spectral maps is spectral, with spectral projections. Used only for its stated spectral, affine, localization or inverse-image property; it supplies an auxiliary input to the existing Raynaud route, not a replacement for any unit step."
+   },
+   {
+    "node": "lem-a1-intersection-sections-flat-base-change",
+    "why": "Generic Flat affine base change for sections on intersections of quasi-compact opens. Used only for its stated intersection/base-change properties of induced ringed subspaces; it supplies an auxiliary input to the existing Raynaud route, not a replacement for any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic The canonical morphism Spec O_{Y,y} -> Y is flat and identifies local rings. Used only for its stated spectral, affine, localization or inverse-image property; it supplies an auxiliary input to the existing Raynaud route, not a replacement for any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "Generic Stalks of the inverse image of a sheaf along a continuous map, with germs. Used only for its stated spectral, affine, localization or inverse-image property; it supplies an auxiliary input to the existing Raynaud route, not a replacement for any unit step."
+   },
+   {
+    "node": "def-a1-ringed-subspace",
+    "why": "Generic Ringed subspace with the inverse-image structure sheaf. Used only for its stated spectral, affine, localization or inverse-image property; it supplies an auxiliary input to the existing Raynaud route, not a replacement for any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+  "lem-a1-intersection-canonical-affine-embedding",
+  "lem-a1-qc-open-intersection-spectral-presentation",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lem-a1-intersection-sections-flat-base-change",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "def-a1-ringed-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-527abe937",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-527abe937 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item only, a first split from an empty proof, with 10 steps, the statement unchanged and no new nodes. All 25 cited statements were read and are used as stated. Hypotheses are checked where they are used: S affine, hence qcqs and spectral. Retrocompactness gives H qc, and generalization stability gives W=H, so H is an intersection of qc opens. The a1 embedding applies with Y=S (qc opens of an affine scheme are quasi-affine), and the affine adjunction gives hk=i. Retrocompactness of H' under any localization follows from the spectral presentation and directed-limit nodes. a1 flat base change gives V'=V×_S S'. C⊗M^{-1}A is a localization of C, so the projection is an embedding onto the points over the generalizations of s. From this, h^{-1}H=k(H) and the boundary-image localization follow pointwise. qc, flat and mono follow from the inverse-image adjunction and the stalk isomorphism. The Raynaud 1.5(i) node, the D(a) charts and Step 4 give closure(B)∩H=∅. The converse is an open-subscheme argument, and surjective ⇔ iso ⇔ affine follows from adjunction uniqueness. Small cases tested: punctured A^2, the generic point, the punctured local spectrum, height ≤1 points of A^2 (non-scheme, closure(B) meets H), and empty H. Sources read locally: Stacks more-groupoids, the equation before 0API, 0API and 0APJ. Raynaud has no local PDF (filed as WANTED); the proof is agent-written and cites Stacks. No SGA. Batch-5 flag: lem-a1-intersection-canonical-affine-embedding reaches lem-trf-quasi-affine-canonical-affine-embedding, a Mathlib leaf for Stacks 01P9 (a quasi-affine scheme X embeds openly in Spec Γ). This is general scheme theory, not stated by and not a step of the trace-formula or Poincaré-duality assumptions, so I accept it as generic. I accept the declared generic tool uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeneralizingSubsetAffineEnvelope",
+  "declaration": "AlgebraicGeometry.GeneralizingSubset.affine_envelope",
+  "declarations": [
+   "AlgebraicGeometry.GeneralizingSubset.sections",
+   "AlgebraicGeometry.GeneralizingSubset.envelope",
+   "AlgebraicGeometry.GeneralizingSubset.map",
+   "AlgebraicGeometry.GeneralizingSubset.space",
+   "AlgebraicGeometry.GeneralizingSubset.unit",
+   "AlgebraicGeometry.GeneralizingSubset.image",
+   "AlgebraicGeometry.GeneralizingSubset.boundary",
+   "AlgebraicGeometry.GeneralizingSubset.localSubset",
+   "AlgebraicGeometry.GeneralizingSubset.affine_envelope"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeneralizingSubsetAffineEnvelope.lean",
+  "statement": "theorem affine_envelope (A : CommRingCat.{u}) (H : Set (Spec A)) (hgen : ∀ (s : Spec A), s ∈ H → ∀ (t : Spec A), t ⤳ s → t ∈ H) (hretro : IsRetrocompact H) : ∃ hl : ∀ x : H, IsLocalRing ((LocallyRingedSpace.ringedSubspace (Spec A).toLocallyRingedSpace H).presheaf.stalk x), (toSpecΓ (sections A H) ≫ (unit A H hl).c.app (op ⊤) = 𝟙 _) ∧ (∃ e : (space A H hl).toSheafedSpace ≅ LocallyRingedSpace.ringedSubspace (envelope A H).toLocallyRingedSpace (image A H hl), e.hom ≫ LocallyRingedSpace.ringedSubspaceι (envelope A H).toLocallyRingedSpace (image A H hl) = (unit A H hl).toShHom) ∧ ((unit A H hl).toShHom ≫ (map A H).toLRSHom.toShHom = LocallyRingedSpace.ringedSubspaceι (Spec A).toLocallyRingedSpace H) ∧ (map A H ⁻¹' H = image A H hl) ∧ ((∃ X : Scheme.{u}, Nonempty (X.toLocallyRingedSpace ≅ space A H hl)) ↔ closure (boundary A H hl) ∩ H = ∅) ∧ (∀ (X : Scheme.{u}) (e : X.toLocallyRingedSpace ≅ space A H hl), ∃ f : X ⟶ Spec A, f.toLRSHom.toShHom = e.hom.toShHom ≫ LocallyRingedSpace.ringedSubspaceι (Spec A).toLocallyRingedSpace H ∧ QuasiCompact f ∧ Flat f ∧ Mono f) ∧ (Function.Surjective (unit A H hl).base ↔ IsIso (unit A H hl)) ∧ (IsIso (unit A H hl) ↔ ∃ X : Scheme.{u}, IsAffine X ∧ Nonempty (X.toLocallyRingedSpace ≅ space A H hl)) ∧ (∀ s : Spec A, (∀ t ∈ localSubset A H s, ∀ z, z ⤳ t → z ∈ localSubset A H s) ∧ IsRetrocompact (localSubset A H s) ∧ ∃ hls : ∀ x : localSubset A H s, IsLocalRing ((LocallyRingedSpace.ringedSubspace (Spec ((Spec A).presheaf.stalk s)).toLocallyRingedSpace (localSubset A H s)).presheaf.stalk x), ∃ q : space ((Spec A).presheaf.stalk s) (localSubset A H s) hls ⟶ space A H hl, (∀ x, (q.base x).val = (Spec A).fromSpecStalk s x.val) ∧ (q.toShHom ≫ LocallyRingedSpace.ringedSubspaceι (Spec A).toLocallyRingedSpace H = LocallyRingedSpace.ringedSubspaceι (Spec ((Spec A).presheaf.stalk s)).toLocallyRingedSpace (localSubset A H s) ≫ ((Spec A).fromSpecStalk s).toLRSHom.toShHom) ∧ ∃ e : envelope ((Spec A).presheaf.stalk s) (localSubset A H s) ≅ pullback (map A H) ((Spec A).fromSpecStalk s), (e.hom ≫ pullback.fst (map A H) ((Spec A).fromSpecStalk s) = Spec.map (LocallyRingedSpace.Γ.map q.op)) ∧ (e.hom ≫ pullback.snd (map A H) ((Spec A).fromSpecStalk s) = map ((Spec A).presheaf.stalk s) (localSubset A H s)) ∧ (image ((Spec A).presheaf.stalk s) (localSubset A H s) hls = (e.hom ≫ pullback.fst (map A H) ((Spec A).fromSpecStalk s)) ⁻¹' image A H hl) ∧ (boundary ((Spec A).presheaf.stalk s) (localSubset A H s) hls = (Spec A).fromSpecStalk s ⁻¹' boundary A H hl))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06e19bbc5",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Node unchanged except the lean field (no statement_change, no stmt_deps added); the report has the Worker report and Second reading by Q69 sections. Checked every clause: generalization (t ⤳ s, correct direction) and IsRetrocompact hypotheses; locality as ∃ hl; sections/envelope/map (Spec.map(toSpecΓ ≫ ι.c ⊤)); k = toΓSpec with Γ(k)=id normalization; E ≅ ringedSubspace V k(H) with the sheaf map pinned; h∘k = ι; h⁻¹H = k(H); B = h(V∖k(H)); scheme ⇔ closure B ∩ H = ∅; for every scheme presentation the canonical f with toShHom pinned is QuasiCompact ∧ Flat ∧ Mono; surj ⇔ iso ⇔ affine; ∀ s: H_s generalizing and retrocompact, ∃ hls, q pinned by its base map and ι-compatibility, e : V_s ≅ V ×_S S_s pinned by both projections (fst = Spec Γ q, snd = h_s), image and boundary equalities. Edge cases: empty H, A = 0, H_s empty, s ∉ H, a single universe u. The 8 helpers have real bodies with source and blueprint docstrings; the single sorry is in the theorem; the docstring has all 10 proof steps; lean.statement is verbatim in the file; no clash in side-live Sheaf/WeilConjectures. Advisory only: hgen is inline rather than Mathlib StableUnderGeneralization (equivalent, and the node defines it inline). Not recompiled (no change)."
+ }
+}

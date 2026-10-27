@@ -1,0 +1,251 @@
+{
+ "id": "lem-trf-double-derived-hom-lower-bound",
+ "kind": "statement",
+ "title": "Lower support bound for double derived Hom with bounded injective targets",
+ "statement": "Let $R$ be a commutative ring, let $E,L,M\\in D(R)$ [def-weil-abstract-derived-category], and let $q,u,v\\in\\mathbf Z$. Suppose $H^r(E)=0$ for $r<q$. Let $J,I$ be bounded cochain complexes of injective $R$-modules [def-sp-injective-resolutions, def-pc-cochain-complex-modules], equipped with isomorphisms $J\\cong L$ and $I\\cong M$ in $D(R)$, such that $J^r=0$ for $r>u$ and $I^r=0$ for $r<v$. Use derived internal Hom on the one-object ringed site [def-pur-derived-internal-hom] and the Hom complex [def-pur-hom-complex]. For every complex $B$ representing $E$ with $B^r=0$ for $r<q$, put $C=\\operatorname{Hom}^\\bullet_R(B,J)$ and $D=\\operatorname{Hom}^\\bullet_R(C,I)$. There are isomorphisms in $D(R)$\n$$C\\cong R\\operatorname{Hom}_R(E,L),\\qquad D\\cong R\\operatorname{Hom}_R(R\\operatorname{Hom}_R(E,L),M).$$\nThese actual model complexes satisfy $C^s=0$ for $s>u-q$ and $D^t=0$ for $t<q+v-u$. In particular $H^t(R\\operatorname{Hom}_R(R\\operatorname{Hom}_R(E,L),M))=0$ for $t<q+v-u$. The same integers $u,v$ apply to every $E$ and $q$ satisfying the given hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical, proof: The second displayed tail object and the last sentence: double-Hom vanishing from finite injective dimension; old item Steps 2 and 5."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-pc-cochain-complex-modules",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pc-ring-hom-extension-shared-definitions"
+ ],
+ "proof": [
+  {
+   "text": "The cohomological hypothesis on $E$ says that $E\\in D(R)^{\\ge q}$. By the cohomology/representative equivalence in [def-sbc-standard-tstructure-derived-category], there exists a representing complex $B$ with $B^p=0$ for $p<q$. Fix any such representative, as the statement permits; the subsequent argument works for each of them.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, lower truncation; the representative equivalence is also Mathlib DerivedCategory.isGE_iff."
+   }
+  },
+  {
+   "text": "Since $J$ is bounded, some integer $a$ satisfies $J^p=0$ for $p<a$; $I$ is already zero below $v$. Both have injective terms by hypothesis. Apply [lem-weil-pbc-bounded-below-injectives-kinjective] in the abelian category of $R$-modules, first with lower bound $a$ and then with lower bound $v$. Thus both $J$ and $I$ are K-injective. No injectivity hypothesis on $B$ or on $C$ is needed.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070J, lemma-bounded-below-injectives-K-injective."
+   }
+  },
+  {
+   "text": "On the one-object site with trivial topology and coefficient ring $R$, the derived internal Hom construction [def-pur-derived-internal-hom] may use any K-injective representative for its second argument. Its independence from the resolution and from the first representative is justified by [lem-pur-rhom-well-defined]. Apply this with source $B$ and target $J$ to obtain $QC\\cong R\\operatorname{Hom}_R(E,L)$, where $Q$ is localization. Apply it again with source $C$ and target $I$ to obtain $QD\\cong R\\operatorname{Hom}_R(QC,M)$. Finally apply the contravariant first-variable functor $R\\operatorname{Hom}_R(-,M)$ to the first isomorphism and compose its inverse with the second, giving $QD\\cong R\\operatorname{Hom}_R(R\\operatorname{Hom}_R(E,L),M)$. These are isomorphisms in $D(R)$, with no boundedness assumption on $C$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, section-internal-hom, choice of representatives and bifunctor; Tag 0A95, lemma-RHom-well-defined."
+   }
+  },
+  {
+   "text": "By [def-pur-hom-complex], $C^s=\\prod_{p\\in\\mathbf Z}\\operatorname{Hom}_R(B^p,J^{p+s})$. Suppose $s>u-q$. For every $p<q$ the source $B^p$ is zero. For every $p\\ge q$ one has $p+s\\ge q+s>u$, so $J^{p+s}=0$. Every factor is therefore the zero module, and their product is zero (its only family is the family of zero maps). Consequently $C^s=0$ for $s>u-q$.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product formula; expanded support calculation for more-algebra.tex Tag 0A69, final sentence of proof."
+   }
+  },
+  {
+   "text": "Again [def-pur-hom-complex] gives $D^t=\\prod_{s\\in\\mathbf Z}\\operatorname{Hom}_R(C^s,I^{s+t})$. Let $t<q+v-u$. If $s>u-q$, the source is zero by Step 4. If $s\\le u-q$, then $s+t\\le u-q+t<v$, so the target is zero by the hypothesis on $I$. Thus all factors, and hence the product, are zero. This proves the claimed actual-complex support bound $D^t=0$ below $q+v-u$.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product formula; expanded support calculation for more-algebra.tex Tag 0A69, final sentence of proof."
+   }
+  },
+  {
+   "text": "For $t<q+v-u$, Step 5 gives $D^t=0$, so $\\ker(d_D^t)=0$ and $H^t(D)=\\ker(d_D^t)/\\operatorname{im}(d_D^{t-1})=0$. By [def-weil-abstract-derived-category], cohomology factors through $Q$ and is functorial on $D(R)$. Applying it to the derived isomorphism of Step 3 proves the asserted vanishing of double derived Hom. The computations used only $J^{>u}=0$, $I^{<v}=0$ and $B^{<q}=0$; thus the same fixed $u,v$ work for every eligible $E,q$ and every chosen $B$, including zero complexes.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical, final sentence of proof, second tail object; cohomology is defined in derived.tex Tag 05RR."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical, proof, final vanishing assertion for the second tail; expanded using Tags 070J, 08J7, 0A95 and 0A8X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Dd]ouble.*[Hh]om|[Hh]om.*[Ii]sGE|[Ii]sGE.*[Hh]om",
+   "results": "13 hits; top=['Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean', 'Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/DerivedCategory/Plus.lean']; subdirectory=Algebra/Homology; note=; digest=725456fe1d02b886",
+   "date": "2026-10-22",
+   "verdict": "no match: support, injective-resolution, exact-sequence and truncation infrastructure do not state this comparison with these hypotheses in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Double derived Hom with bounded injective targets sends a bounded below complex to one bounded below with a uniform shifted bound",
+   "results": "0 hits; top=[]; subdirectory=; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, DerivedCategory.IsGE",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: support, injective-resolution, exact-sequence and truncation infrastructure do not state this comparison with these hypotheses in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For complexes of modules B zero below q and bounded injective complexes J zero above u and I zero below v, derived Hom of derived Hom B J into I vanishes below q+v-u",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'DerivedCategory.isZero_of_isLE', 'DerivedCategory.isZero_of_isGE', 'DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.isLE_iff', 'DerivedCategory.isGE_iff', 'CategoryTheory.InjectiveResolution.extMk_zero']; subdirectory=; note=; digest=049fbaa8504b78cc",
+   "date": "2026-10-22",
+   "verdict": "no match: support, injective-resolution, exact-sequence and truncation infrastructure do not state this comparison with these hypotheses in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological amplitude of contravariant derived Hom twice with bounded complexes of injective modules and a bounded below source",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.isKInjective_of_injective', 'CochainComplex.IsKInjective', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE', 'CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt', 'CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE', 'CochainComplex.cm5b.instIsStrictlyGEI', 'DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE']; subdirectory=; note=; digest=3afd1366351ff58f",
+   "date": "2026-10-22",
+   "verdict": "no match: support, injective-resolution, exact-sequence and truncation infrastructure do not state this comparison with these hypotheses in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double derived Hom with bounded injective targets and a source zero below q vanishes below q+v-u",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'DerivedCategory.isZero_of_isLE', 'DerivedCategory.isZero_of_isGE', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.isLE_iff', 'DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective', 'DerivedCategory.isGE_iff', 'CochainComplex.isKInjective_of_injective_aux']; subdirectory=; note=; digest=5166bd4f9cfa84b4",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide t-structure, injective-target Ext vanishing and K-injective replacement infrastructure; none states the iterated internal-Hom model and its two support bounds in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ouble.*[Hh]om|[Hh]om.*[Ii]sGE|[Ii]sGE.*[Hh]om",
+   "results": "13 hits; top=['Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Embedding/CochainComplex.lean', 'Mathlib/Algebra/Homology/Embedding/CochainComplex.lean', 'Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean']; subdirectory=Algebra/Homology; note=; digest=9f181dc8c2861572",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide t-structure, injective-target Ext vanishing and K-injective replacement infrastructure; none states the iterated internal-Hom model and its two support bounds in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological lower bound of double derived Hom for bounded injective target complexes",
+   "results": "0 hits; top=[]; subdirectory=; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, DerivedCategory.IsGE",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide t-structure, injective-target Ext vanishing and K-injective replacement infrastructure; none states the iterated internal-Hom model and its two support bounds in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological amplitude of iterated internal Hom of module complexes with bounded injective targets",
+   "results": "8 hits; top=['CochainComplex.cm5b.instIsStrictlyGEI', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.cm5b.I', 'CochainComplex.cm5b.instInjectiveXIntI', 'CochainComplex.isKInjective_of_injective', 'CochainComplex.isKInjective_of_injective_aux', 'CochainComplex.cm5b.I_X', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE']; subdirectory=; note=; digest=ee4e3739f27abe12",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide t-structure, injective-target Ext vanishing and K-injective replacement infrastructure; none states the iterated internal-Hom model and its two support bounds in one specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-evaluation-finite-injective",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. The second displayed tail object and the last sentence: double-Hom vanishing from finite injective dimension; old item Steps 2 and 5.",
+   "via": [
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-double-derived-hom-lower-bound",
+  "worker": "stage1",
+  "group": "Q82",
+  "summary": "Expanded the double-Hom support argument of Stacks Tag 0A69 using existing Mathlib K-injectivity and standard t-structure leaves and existing ringed-site derived-Hom comparisons. Preserved the statement. Both strict degree inequalities and the existence of a lower-supported representative are checked; no new nodes are needed.",
+  "blueprint": "Serves the inherited lem-trf-local-term-locality proof (1)--(2) nearby-cycle duality branch, via the recorded relative-duality and complete-local-coherent-duality chain: precisely the second tail-object vanishing in the proof of Tag 0A69, used by lem-trf-derived-evaluation-finite-injective. Does not change the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic ringed-site resolution-independence comparison used for the two ordinary module RHom models; it does not replace a geometric step of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-3f3fcc399",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-3f3fcc399 (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, 0 new nodes. Its statement, stmt_deps and blueprint fields are unchanged from side-live, where the item is still unsplit; it was not superseded, has no repair note and is not dropped. No SGA citation. Source: Stacks 0A69 (more-algebra, lemma-internal-hom-evaluate-isomorphism-technical). The proof's second-tail vanishing 'from assumption (1)' is expanded with explicit models. Step 1 cites the representative clause of def-sbc-standard-tstructure-derived-category (equivalently, a complex zero below n), which gives the existence of B. Step 2 cites 070J/lem-weil-pbc-bounded-below-injectives-kinjective: J is bounded below by some a and I by v, both with injective terms. Step 3: def-pur-derived-internal-hom allows any K-injective representative and the bifunctor; lem-pur-rhom-well-defined is 0A95. It gives QC≅RHom(E,L) and QD≅RHom(QC,M), and the contravariant first variable then gives QD≅RHom(RHom(E,L),M). The tool use of lem-pur-rhom-well-defined is generic and accepted. Steps 4–5: index arithmetic checked (p≥q gives p+s>u; s≤u−q gives s+t<v). Step 6: D^t=0 gives H^t=0, carried along the step-3 isomorphism; uniformity holds because u and v are fixed beforehand. Field case B=k[−q], J=k[−u], I=k[−v]: C sits in degree u−q and D in degree q+v−u, so the bounds are sharp and the inequalities strict on the correct sides. Duplicate search over the 0A69 and double-evaluation nodes: they make different assertions. Searches are recorded, with LeanSearch marked unavailable. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DoubleDerivedHomLowerBound",
+  "declaration": "DerivedCategory.double_derived_hom_lower_bound",
+  "file": "lean/Sheaf/Algebra/Homology/DoubleDerivedHomLowerBound.lean",
+  "statement": "theorem double_derived_hom_lower_bound (R : Type u) [CommRing R] [HasDerivedCategory.{w} (RingSiteModules R)] (L M : DerivedCategory (RingSiteModules R)) (J I : CochainComplex (RingSiteModules R) ℤ) (uBound vBound : ℤ) (_hJ : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (J.X r)) (_hI : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (I.X r)) (_hJinj : ∀ r : ℤ, Injective (J.X r)) (_hIinj : ∀ r : ℤ, Injective (I.X r)) (_eJ : Q.obj J ≅ L) (_eI : Q.obj I ≅ M) (_hJu : ∀ r : ℤ, uBound < r → IsZero (J.X r)) (_hIv : ∀ r : ℤ, r < vBound → IsZero (I.X r)) : ∀ (E : DerivedCategory (RingSiteModules R)) (q : ℤ), (∀ r : ℤ, r < q → IsZero ((homologyFunctor (RingSiteModules R) r).obj E)) → (∀ (B : CochainComplex (RingSiteModules R) ℤ) (_eB : Q.obj B ≅ E) (_hB : ∀ r : ℤ, r < q → IsZero (B.X r)), Nonempty (Q.obj (homComplex (R := CochainComplex.onePointRingSheaf R) B J) ≅ (derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op E, L)) ∧ Nonempty (Q.obj (homComplex (R := CochainComplex.onePointRingSheaf R) (homComplex (R := CochainComplex.onePointRingSheaf R) B J) I) ≅ (derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op ((derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op E, L)), M)) ∧ (∀ s : ℤ, uBound - q < s → IsZero ((homComplex (R := CochainComplex.onePointRingSheaf R) B J).X s)) ∧ (∀ t : ℤ, t < q + vBound - uBound → IsZero ((homComplex (R := CochainComplex.onePointRingSheaf R) (homComplex (R := CochainComplex.onePointRingSheaf R) B J) I).X t))) ∧ (∀ t : ℤ, t < q + vBound - uBound → IsZero ((homologyFunctor (RingSiteModules R) t).obj ((derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op ((derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op E, L)), M))))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-421626983",
+  "group": "Q66",
+  "result": "pass",
+  "note": "DerivedCategory.double_derived_hom_lower_bound matches the node clause by clause: RingSiteModules one-object site; bounded injective J,I with Q.obj iso to L,M; actual-term bounds J^{>u}, I^{<v}, B^{<q}; homComplex models C,D; Nonempty derived isos to derivedInternalHomOfUniverses ⊥, as the node only asserts existence; strict support bounds checked by the product formula and a sharp field example; final H^t vanishing outside ∀B; uniform u,v before ∀E q. No extra hypotheses; universes {u,u,u,w} fit the site, w free. Node differs from side-live only in lean and the permitted landed stmt_dep def-pc-ring-hom-extension-shared-definitions (owns RingSiteModules). Statement verbatim in file; public statement imports, plain proof-dep imports match records; docstrings carry source, blueprint and steps 1-6; both report sections present. Item not dropped, no repair note; citer lem-trf-derived-evaluation-finite-injective uses the same encoding with SignedRingedHom = this RHom at w=u. No file changed, no compile run."
+ }
+}

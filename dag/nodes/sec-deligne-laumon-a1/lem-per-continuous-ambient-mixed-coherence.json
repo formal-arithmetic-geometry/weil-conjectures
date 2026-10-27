@@ -1,0 +1,138 @@
+{
+ "id": "lem-per-continuous-ambient-mixed-coherence",
+ "kind": "statement",
+ "title": "Normalized mixed tensor comparison before completion",
+ "statement": "Let l be prime and E,F finite extensions of Q_l with embedding i:E→F. Let g:X→Y be between noetherian finite-dimensional l-invertible schemes, with normalized continuous realizations at X and Y, Along comparisons agE and agF, and FieldChange comparisons bX and bY [def-per-continuous-rational-realization-data]. There exist the coefficient equality, ordinary isomorphism, all-scalar ordinary section equation, termwise complex isomorphism with component equation, and ambient derived isomorphism with its flat-term K-flat normalized computation equation, exactly the fields of Mixed preceding raw. The AmbientMixed record asserts no raw isomorphism, completion equation or raw realization compatibility.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; Stacks Tags 0D6D, 0A0E and 0A0G. Expansion of the normalized comparison argument."
+ },
+ "proof": [
+  {
+   "text": "Choose normalized raw module realizations and their normalized pullback comparison records using the two declared existence theorems. In the mixed case also choose the scalar comparison records. Pointwise continuous-function normalization identifies their coefficient maps with the supplied Along and FieldChange coefficient maps. Transpose the coefficient maps through the inverse-image adjunction. Precomposition of continuous functions and postcomposition by i commute, giving the coefficient square.",
+   "uses": [
+    "lem-per-rational-realization-scalar-coherence",
+    "lem-pur-inverse-image-scalar-unit-normalization",
+    "lem-per-rational-module-realization-functor",
+    "lem-per-rational-realization-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mixed ordinary scalar comparison in rational-realization-scalar-coherence is balanced tensor multiplication. Remove identity scalar extension by the inverse-image scalar-unit normalization. Transport the comparison across this ordinary isomorphism. Its formula extends from unit generators to every coefficient by scalar linearity and balancing; sheafification gives equality on the actual module sheaves.",
+   "uses": [
+    "lem-per-rational-realization-scalar-coherence",
+    "lem-pur-inverse-image-scalar-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the transported comparison degreewise. The supplied normalized counits identify the derived computations with the old counits followed by the degreewise identity-scalar removal. Substitute in the old mixed computation equation and cancel those comparison maps. On flat-term K-flat resolutions this gives the required normalized equation, which descends to the ambient derived isomorphism.",
+   "uses": [
+    "lem-per-rational-realization-scalar-coherence",
+    "lem-pur-inverse-image-scalar-unit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-rational-realization-scalar-coherence",
+  "lem-pur-inverse-image-scalar-unit-normalization",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-realization-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "H8 expansion of BS Remark 6.8.15 into ambient tensor calculations and integral unit cancellation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived pullback and coefficient extension comparisons obey composition and identity",
+   "results": "8 hits on scheme normalization (hom_ext, normalizationDesc_comp, toNormalization_fromNormalization and related lemmas), none on continuous coefficient tensor normalization.",
+   "date": "2026-10-27",
+   "verdict": "No match for the concrete normalized tensor and completion data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "1 hit: CategoryTheory.Functor.leftDerivedUnique, generic uniqueness of left derived functors.",
+   "date": "2026-10-27",
+   "verdict": "A generic proof tool; it does not state the coefficient and tensor-unit equations."
+  },
+  {
+   "tool": "grep",
+   "query": "pbcReductionNormalization|IsNormalizedPullCounit|RationalRealizationScalar",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars commutes with derived inverse image along a morphism of ringed topoi.",
+   "results": "8 hits: ModuleCat.extendScalarsComp and extension/restriction adjunctions in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; SheafOfModules.PullbackConstruction.adjunction in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; PresheafOfModules.pullback and pullbackPushforwardAdjunction in Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback; DerivedCategory.instLinear. These are ordinary constructions, not the mixed derived normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; ordinary pullback and tensor coherence are useful proof tools but do not state these normalized derived equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalContinuousComparisonCoherence",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: cohomology sheaves of pullback are pullbacks, via the continuous rational realization and its normalized scheme/coefficient comparisons.",
+   "via": [
+    "lem-per-rational-continuous-comparison-coherence",
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousAmbientMixedCoherence",
+  "file": "lean/Sheaf/Paper/ContinuousAmbientMixedCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.continuousAmbientMixedCoherence",
+  "statement": "theorem continuousAmbientMixedCoherence (i : E →ₐ[ℚ_[l]] F)\n    {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)\n    (aXE : At l E X) (aYE : At l E Y) (aXF : At l F X) (aYF : At l F Y)\n    (agE : Along l E g aXE aYE) (agF : Along l F g aXF aYF)\n    (bX : FieldChange l E F i X aXE aXF) (bY : FieldChange l E F i Y aYE aYF) :\n    Nonempty (AmbientMixed l E F i g aXE aYE aXF aYF agE agF bX bY)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousRational.AmbientMixed",
+   "AlgebraicGeometry.Scheme.ContinuousRational.continuousAmbientMixedCoherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T094422-L-223889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T094422-L-223889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

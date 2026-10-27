@@ -13,39 +13,42 @@
  ],
  "proof": [
   {
-   "text": "On every K-flat complex with flat terms, the prescribed quotient tensor maps form a compatible map to the product of the finite reductions. The composite with 1 minus shift is zero. Its cone map has those quotient components and zero shifted component. The ordinary derived counit and the fixed completed-scalar representative comparison transport this chain map to a derived morphism. Good resolutions exist for every complex. Naturality for chain maps and the good-resolution roof computation descend these components to a natural transformation on the whole derived category.",
+   "text": "The two specified completed coefficient maps agree by their finite quotient projections. The already proved ordinaryScalarModelIso identifies their ordinary sheafified tensor functors; its termwise complex isomorphism induces an ordinary derived isomorphism e by the universal left-derived functor property. The derived component equation is e followed by the target counit equals the source counit followed by the localized ordinary complex comparison. Compose e with the existing completedScalarComparison. The latter normalization and integralScalarCompletionChain_model identify the resulting representative square with the exact required quotient-completion-chain square, including the zero shifted coordinate.",
    "uses": [
     "def-weil-integral-scalar-extension",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "lem-pc-kflat-resolution"
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-scalar-extension-constructible"
    ],
    "elementary": false
   },
   {
-   "text": "For a derived-complete input, identify the two ordinary coefficient models by their pure tensor sections; their coefficient maps agree after every finite quotient projection. These identifications preserve the displayed quotient-chain map. The finite-free completed-scalar comparison therefore proves invertibility of this particular component, with no scheme finiteness hypothesis.",
+   "text": "For an input satisfying IsSfDerivedComplete, choose a prime p greater than l and the auxiliary finite-field datum of characteristic p. The intrinsic/legacy completeness equivalence implies IsDerivedCompleteUnrestricted for this same input. The finite-free completed scalar comparison proves that its specified completion component is invertible. The ordinary derived-model comparison e is a natural isomorphism, so its composite with that component is invertible as required. The auxiliary datum imposes no hypothesis on the scheme.",
    "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
     "lem-weil-finite-free-completed-scalar-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "For uniqueness, apply the normalization equation to a good representative of any object and cancel the invertible completed representative comparison. Naturality transports this equality along the resolution isomorphism to the original object. Thus every component is forced; natural transformation extensionality proves uniqueness. The construction and argument also apply to the identity embedding, the zero complex and the empty scheme.",
+   "text": "Good complexes localize to the ambient derived category. Two transformations with the stated normalization agree on the image of every good complex, by cancellation of its invertible completed representative comparison. Localization.natTrans_ext then proves equality on the whole derived category. This argument includes the zero complex, empty scheme, identity embedding, and arbitrary unbounded complete inputs.",
    "uses": [
-    "lem-pc-kflat-resolution"
+    "lem-pur-integral-operations-well-defined"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-integral-scalar-extension",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-pc-kflat-resolution",
-  "lem-weil-finite-free-completed-scalar-comparison"
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-integral-operations-well-defined"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "M4",
+  "date": "2026-10-26",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 3.5.1 and Lemma 6.8.2(1); normalized quotient-completion map in the first paragraph of blueprint lem-weil-scalar-extension-composition"
+  "place": "Proposition 3.5.1 and Lemma 6.8.2(1); normalized quotient-completion comparison and canonical ordinary scalar-model transport"
  },
  "mathlib_searches": [
   {
@@ -89,14 +92,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.IntegralOperationsScalarComparisons",
-  "declaration": "WeilConjectures.scalarCompletion_existsUnique",
-  "statement": "theorem scalarCompletion_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :\n    ∃! χ : integralOrdinaryDerivedScalar l E L ι W ⟶ integralScalarExtension l E L ι W,\n      (∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,\n        χ.app (DerivedCategory.Q.obj P.obj) ≫\n            (integralScalarExtensionComparison l E L ι W).hom.app P =\n          (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.obj ≫\n            DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι W).app P.obj)) ∧\n      (∀ K, IsSfDerivedComplete l E W K → IsIso (χ.app K))",
-  "existing": true,
+  "module": "Sheaf.Paper.NormalizedIntegralScalarCompletion",
+  "declaration": "WeilConjectures.normalizedIntegralScalarCompletion",
+  "statement": "theorem normalizedIntegralScalarCompletion (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (W : AlgebraicGeometry.Scheme.{u}) :\n    ∃! χ : integralOrdinaryDerivedScalar l E L ι W ⟶ integralScalarExtension l E L ι W,\n      (∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,\n        χ.app (DerivedCategory.Q.obj P.obj) ≫\n            (integralScalarExtensionComparison l E L ι W).hom.app P =\n          (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.obj ≫\n            DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι W).app P.obj)) ∧\n      (∀ K, IsSfDerivedComplete l E W K → IsIso (χ.app K))",
+  "existing": false,
   "branch": "sheaf-dag",
-  "by": "A6",
-  "date": "2026-10-20",
-  "note": "Attach only the existing global completion-normalization theorem. Its previous grouped attachment also contains tower/unit operation coherence and has scalar-extension composition as a statement dependency; that grouped node cannot serve as a noncircular dependency for this item. No Lean statement, proof or module is added here."
+  "by": "M4",
+  "date": "2026-10-26",
+  "note": "The full normalized completion proof is extracted to this module after explicit typed ordinary-counit and representative wrappers leave the complete item file over 60 seconds. The existing scalarCompletion_existsUnique declaration remains in IntegralOperationsScalarComparisons with its exact signature and is proved by applying this theorem after unfolding its normalization predicate. No statement or definition is weakened, and no new theorem hole is introduced.",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralScalarCompletion.lean"
  },
  "reviewed": {
   "date": "2026-10-20",
@@ -109,13 +113,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A6",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261020T051009-L-1522974",
-  "kind": "interface"
+  "landing": "20261026T114203-L-2272378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-bounded-finite-pseudocoherent-model",
+ "kind": "statement",
+ "title": "BoundedFinitePseudoCoherentModel",
+ "statement": "Let R be a commutative Noetherian ring and E an object of D(R) [def-weil-abstract-derived-category], pseudo-coherent in the sense of [def-pc-ring-pseudo-coherent-complex]. Let a,b be integers. Suppose H^i(E)=0 for i<a or b<i. There is a cochain complex P of finite R-modules with P^i=0 for i<a or b<i and an isomorphism Q(P)≅E. No projectivity of P^a is asserted, and no assumption a≤b is needed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066E, lemma-Noetherian-pseudo-coherent, together with truncation at a and b"
+ },
+ "stmt_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-above finite-free representative from pseudo-coherence. Truncate it above b by replacing degree b by its cycles. The cycles are a submodule of a finite module over a Noetherian ring, hence finite. The upper cohomology bound makes the truncation map a quasi-isomorphism.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Truncate below a by replacing degree a by the cokernel of the incoming differential. This is finite as a quotient of a finite module. The lower cohomology bound makes the second truncation a quasi-isomorphism. Compose their localization isomorphisms; both strict term bounds persist.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066E, lemma-Noetherian-pseudo-coherent, together with truncation at a and b"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded pseudo-coherent complex over a Noetherian ring admits a bounded complex of finite modules in its cohomological interval",
+   "results": "8 hits including DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE (no finite-term clause), FGModuleCat.instAbelian and Module.finitePresentation_of_finite; no exact match.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPseudoCoherent\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|IsPseudoCoherent|pseudo_coherent",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseNormalizedTowerLocalModels",
+  "date": "2026-10-27",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): Tag 066E, lemma-Noetherian-pseudo-coherent, together with truncation at a and b",
+   "via": [
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundedFinitePseudoCoherentModel",
+  "file": "lean/Sheaf/Paper/BoundedFinitePseudoCoherentModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_boundedFinite_model",
+  "statement": "theorem exists_boundedFinite_model {R : Type u} [CommRing R] [IsNoetherianRing R]\n    [HasDerivedCategory.{v} (ModuleCat.{u} R)]\n    (C : DerivedCategory (ModuleCat.{u} R)) (a b : ℤ) (hC : DerivedCategory.IsPseudoCoherent C)\n    (hvan : ∀ i : ℤ, (i < a ∨ b < i) →\n      IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj C)) :\n    ∃ P : CochainComplex (ModuleCat.{u} R) ℤ,\n      (∀ i : ℤ, (i < a ∨ b < i) → IsZero (P.X i)) ∧\n      (∀ i : ℤ, Module.Finite R (P.X i)) ∧ Nonempty (DerivedCategory.Q.obj P ≅ C)",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9c288",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261026T201428-L-3380950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9c288",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261026T201428-L-3380950",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone d8f3c43 (byte-identical), node lean.statements vs Lean (all 4 match), unit realized list vs removed import (not on unit route), new sorry statements vs landed flatness/module-model lemmas"
+ }
+}

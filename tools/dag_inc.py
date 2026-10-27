@@ -20,6 +20,7 @@ import collections, json, pathlib, re, subprocess, sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import dag_queue as dq  # noqa: E402
 import dag_delta  # noqa: E402
+import nodefiles  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 NODE_LINE = re.compile(r"^units: (\S+) (has no chapter \(|names a unit that does not exist: )")
@@ -88,7 +89,7 @@ def delivery_findings(base, ids):
     nodes, seen = {}, set()
     for p in sorted(dq.nodes_dir().rglob("*.json")):
         try:
-            d = json.loads(p.read_text())
+            d = nodefiles.read(p)
         except (OSError, json.JSONDecodeError):
             return _none("unparsable file")
         i = dq.field(d, "id") if isinstance(d, dict) else None
@@ -106,7 +107,7 @@ def delivery_findings(base, ids):
             if str(dq.field(o, "id")) != i or dq.field(o, "merged") or str(dq.field(o, "status") or "").lower() == "merged":
                 return _none("id changed or merged on base")
         C.add(i)
-    g = dq.Dag(nodes)
+    g = nodefiles.dag(nodes)
     import units as un
     units, chapters = un.load_units()
 

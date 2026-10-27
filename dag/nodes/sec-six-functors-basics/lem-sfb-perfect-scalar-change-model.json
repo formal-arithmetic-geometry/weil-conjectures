@@ -1,0 +1,681 @@
+{
+ "id": "lem-sfb-perfect-scalar-change-model",
+ "kind": "statement",
+ "title": "Projective scalar models under arbitrary coefficient change",
+ "statement": "Let $\\Lambda\\to\\Lambda'$ be any morphism of commutative condensed rings [sk-def-sfb-condensed-ring], and set $R=\\Lambda(*)$, $R'=\\Lambda'(*)$. Let $S$ be any scheme, with small pro-étale site [sk-def-pe-site] and coefficient sheaves $\\Lambda_S=p_S^*\\Lambda$, $\\Lambda'_S=p_S^*\\Lambda'$ [sk-def-sfb-pulled-back-coefficients]. Use module sheaves, their ordinary unbounded derived categories, and ordinary uncompleted derived extension $P_{\\Lambda'}=\\Lambda'_S\\otimes^{\\mathbf L}_{\\Lambda_S}P$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, sk-def-sfb-coefficient-change]. Scalar tensors mean constant sheaves [det-def-sfb-constructible-local-model].\n\nSuppose $P\\in D(\\Lambda_S)$ has a specified pro-étale cover $\\{W_i\\to S\\}$ and isomorphisms $P|_{W_i}\\simeq\\Lambda_{W_i}\\otimes_R P_i^\\bullet$, with $P_i^\\bullet$ bounded complexes of finitely generated projective $R$-modules [def-pc-perfect-ring-complex]. Then $R'\\otimes_R P_i^\\bullet$ is bounded finite projective over $R'$, and in $D(\\Lambda'_{W_i})$ there is an isomorphism\n$$P_{\\Lambda'}|_{W_i}\\simeq\\Lambda'_{W_i}\\otimes_{\\Lambda_{W_i}}(\\Lambda_{W_i}\\otimes_RP_i^\\bullet)\\simeq\\Lambda'_{W_i}\\otimes_{R'}(R'\\otimes_RP_i^\\bullet).$$\nEach term of $\\Lambda_{W_i}\\otimes_RP_i^\\bullet$ and of its new coefficient model is a direct summand of a finite free coefficient sheaf and is flat [def-pc-flat-sheaf-modules]; these bounded complexes are K-flat [def-pc-kflat-complex]. The same assertion about flat terms and K-flatness holds for every bounded finite-projective scalar complex without any $P$ or covering assumption. No flatness of $R\\to R'$, $\\Lambda_S\\to\\Lambda'_S$, or the constant-to-coefficient ring maps is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "(2) Local models, displayed scalar-change formula; original step 4, also the flat-model input of step 9"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-pe-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-coefficient-change",
+  "det-def-sfb-constructible-local-model",
+  "def-pc-perfect-ring-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "For each finite free scalar module, extension of scalars preserves its finite biproduct decomposition and sends the regular module to the regular module via Mod.regularExtensionIso. The same applies to finiteConstantScalarExtension, using preservation of finite colimits by the constant-sheaf inverse image. Map every given retract through these functors and compose with the finite-free comparison. This proves finite projectivity after scalar extension, including rank zero, without any flatness assumption on the ring map.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "lem-weil-pbc-regular-extension-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "(2), displayed scalar-change formula; categorical implementation using the recorded existing Lean APIs"
+   }
+  },
+  {
+   "text": "The tensor unit is flat; finite biproducts of flat objects are flat; flatness passes to retracts. Thus the old and changed coefficient models have flat terms. The additive functors preserve zero terms, so both models and the changed scalar complex retain the given strict bounds. Apply the bounded-flat sublemma CochainComplex.kFlat_of_bounded_of_flat in the source module of lem-sfb-bounded-above-flat-kflat to obtain the categorical two-sided K-flat predicates appearing in the Lean statement.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-sfb-bounded-above-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "(2), displayed scalar-change formula; categorical implementation using the recorded existing Lean APIs"
+   }
+  },
+  {
+   "text": "Use the canonical scalarPullComparison and its scalarPullComparison_isIso instance from def-sfb-free-parameter-scalar-maps, for the condensed rings Mon.mk Λ and Mon.mk Λ′ and the chart map. Invert this isomorphism to identify chart pullback of the derived extended object with derived scalar extension of the pulled-back object. This general comparison imposes no flatness assumption on the coefficient map.",
+   "uses": [
+    "def-sfb-free-parameter-scalar-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "(2), displayed scalar-change formula; categorical implementation using the recorded existing Lean APIs"
+   }
+  },
+  {
+   "text": "Apply derived extension on the chart to the specified local-model isomorphism. The old model is K-flat by the cover-independent assertion just proved. The left-derived-functor counit is therefore invertible on its homotopy-category image; conjugating by quotientCompQhIso identifies derived extension of its derived-category image with the image of termwise extension. Compose with the preceding chart comparison to obtain the first asserted isomorphism.",
+   "uses": [
+    "sk-def-sfb-derived-extension-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "(2), displayed scalar-change formula; categorical implementation using the recorded existing Lean APIs"
+   }
+  },
+  {
+   "text": "Naturality of the constant-sheaf adjunction counit gives the commutative coefficient square scalarCoefficientHom Λ X ≫ coefficientMap a X = scalarConstant.map(scalarSections.map a) ≫ scalarCoefficientHom Λ′ X. The adjunction mapMod comparison and comapMapModComapIso show that mapMod for scalarConstant commutes with scalar extension. Compose this comparison with extendScalarsComp and the coefficient-square equality to identify the two ordinary extension functors. Map this natural isomorphism to cochain complexes and then through DerivedCategory.Q. This proves the second asserted isomorphism; no projectivity or boundedness is needed for this last comparison.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-coefficient-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "(2), displayed scalar-change formula; categorical implementation using the recorded existing Lean APIs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "lem-weil-pbc-regular-extension-comparison",
+  "def-pc-flat-sheaf-modules",
+  "lem-sfb-bounded-above-flat-kflat",
+  "def-sfb-free-parameter-scalar-maps",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "sk-def-sfb-coefficient-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "(2), local models and scalar-change display",
+  "note": "C8: preserve the finite-projective/flat/K-flat argument; reuse the existing general scalarPullComparison_isIso for chart compatibility; implement ordinary associativity using adjunctions and extendScalarsComp."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of coefficient rings on a pro-etale local bounded finite projective scalar complex is computed termwise and its new scalar model is still finite projective",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "Algebra.FormallyUnramified.projective_of_restrictScalars",
+      "module": "Mathlib/RingTheory/Unramified/Finite",
+      "type": "∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Projective R M], Module",
+      "doc": "Let $ R $ and $ S $ be commutative rings with $ S $ formally unramified over $ R $. If $ M $ is an $ S $-module that is projective as an $ R $-module, then $ M $ is projective as an $ S $-module."
+     },
+     {
+      "name": "RingHom.Etale.isStableUnderBaseChange",
+      "module": "Mathlib/RingTheory/RingHom/Etale",
+      "type": "RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale",
+      "doc": "If a ring homomorphism $ f : R \\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\to S \\otimes_R R' $ is also étale. This means that étale morphisms preserve their"
+     },
+     {
+      "name": "Algebra.FormallyEtale.of_restrictScalars",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B",
+      "doc": "If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra."
+     },
+     {
+      "name": "KaehlerDifferential.isBaseChange_of_formallyEtale",
+      "module": "Mathlib/RingTheory/Etale/Kaehler",
+      "type": "∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)",
+      "doc": "If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\Omega_{T/S} $ is a base change of $ \\Omega_{S/R} $ via the algebra homomorphism $ S"
+     },
+     {
+      "name": "Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B",
+      "doc": "Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \to A \to B $. If $ A $ is formally unram"
+     },
+     {
+      "name": "Algebra.FormallyEtale.comp",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B",
+      "doc": "If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $."
+     },
+     {
+      "name": "Algebra.FormallyEtale.localization_map",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ {R : Type u_2} {S : Type u_3} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing S]\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R S] [inst_5 : Algebra R Sₘ]\n  [inst_6 : Algebra S Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca",
+      "doc": "If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\text{FormallyÉta"
+     },
+     {
+      "name": "RingHom.Etale.stableUnderComposition",
+      "module": "Mathlib/RingTheory/RingHom/Etale",
+      "type": "RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale",
+      "doc": "The composition of two étale ring homomorphisms is again an étale ring homomorphism."
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Projective.tensorProduct handles scalar module projectivity only; ordinary module flatness and extension functors do not state the K-flat coefficient-sheaf derived-model isomorphism for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, TensorProduct",
+   "results": {
+    "summary": "[loogle] OK 12 hit(s)",
+    "hits": [
+     {
+      "name": "Module.Projective.tensorProduct",
+      "module": "Mathlib.Algebra.Module.Projective",
+      "type": " {R : Type u} [Semiring R] {R₀ : Type u_2} {M : Type u_1} {N : Type u_3} [CommSemiring R₀] [Algebra R₀ R] [AddCommMonoid M] [Module R₀ M] [Module R M] [IsScalarTower R₀ R M] [AddCommMonoid N] [Module R₀ N] [hM : Module.Projective R M] [hN : Module.Projective R₀ N] : Module.Projective R (TensorProduc",
+      "doc": ""
+     },
+     {
+      "name": "IsAzumaya.mk",
+      "module": "Mathlib.Algebra.Azumaya.Defs",
+      "type": " {R : Type u_1} {A : Type u_2} [CommSemiring R] [Semiring A] [Algebra R A] [toProjective : Module.Projective R A] [toFaithfulSMul : FaithfulSMul R A] [toFinite : Module.Finite R A] (bij : Function.Bijective ⇑(AlgHom.mulLeftRight R A)) : IsAzumaya R A",
+      "doc": ""
+     },
+     {
+      "name": "dualTensorHomEquiv",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " (R : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] : TensorProduct R (Module.Dual R M) N ≃ₗ[R] M →ₗ[R] N",
+      "doc": "If `M` is finite projective, the natural map $M^* ⊗ N → Hom(M, N)$ is an equivalence."
+     },
+     {
+      "name": "dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] [DecidableEq ι] [Fintype ι] (b : Module.Basis ι R M) : dualTensorHomEquivOfBasis b = dualTensorHomEquiv R M N",
+      "doc": ""
+     },
+     {
+      "name": "lTensorHomEquivHomLTensor",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " (R : Type u_2) (M : Type u_3) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] : TensorProduct R P (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] TensorProduct R P Q",
+      "doc": "When `M` is a finite projective module, the map `lTensorHomToHomLTensor` is an equivalence. Note\nthat `lTensorHomEquivHomLTensor` is not defined directly in terms of\n`lTensorHomToHomLTensor`, but the "
+     },
+     {
+      "name": "rTensorHomEquivHomRTensor",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " (R : Type u_2) (M : Type u_3) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] : TensorProduct R (M →ₗ[R] P) Q ≃ₗ[R] M →ₗ[R] TensorProduct R P Q",
+      "doc": "When `M` is a finite projective module, the map `rTensorHomToHomRTensor` is an equivalence. Note\nthat `rTensorHomEquivHomRTensor` is not defined directly in terms of\n`rTensorHomToHomRTensor`, but the "
+     },
+     {
+      "name": "TensorProduct.dualDistribEquiv",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " (R : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Finite R N] [Module.Projective R M] [Module.Projective R N] : TensorProduct R (Module.Dual R M) (Module.Dual R N) ≃ₗ[R] Module.Dual R (TensorProduc",
+      "doc": "A linear equivalence between `Dual M ⊗ Dual N` and `Dual (M ⊗ N)` when `M` and `N` are finite\nprojective modules. It sends `f ⊗ g` to the composition of `TensorProduct.map f g` with the natural\nisomor"
+     },
+     {
+      "name": "Module.Projective.of_one_mem_range_dualTensorHom",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " {R : Type u_2} {M : Type u_3} [CommSemiring R] [AddCommMonoid M] [Module R M] (h : 1 ∈ (dualTensorHom R M M).range) : Module.Projective R M",
+      "doc": "If the identity linear map lies in the range of the canonical map `M* ⊗[R] M → Hom_R(M, M)`,\nthen `M` is a finite projective `R`-module (projective part)."
+     },
+     {
+      "name": "toLinearMap_dualTensorHomEquiv",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] : ↑(dualTensorHomEquiv R M N) = dualTensorHom R M N",
+      "doc": ""
+     },
+     {
+      "name": "homTensorHomEquiv",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " (R : Type u_2) (M : Type u_3) (N : Type u_4) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R N] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] [Module.Projective R N] [Module.Finite ",
+      "doc": "When `M` and `N` are finite projective `R` modules, the map `homTensorHomMap` is an equivalence."
+     },
+     {
+      "name": "dualTensorHom_bijective",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] : Function.Bijective ⇑(dualTensorHom R M N)",
+      "doc": ""
+     },
+     {
+      "name": "dualTensorHom_bijective_of_finite_left_projective_right",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": " {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R N] : Function.Bijective ⇑(dualTensorHom R M N)",
+      "doc": ""
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Projective.tensorProduct handles scalar module projectivity only; ordinary module flatness and extension functors do not state the K-flat coefficient-sheaf derived-model isomorphism for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojective.*[Tt]ensor|[Tt]ensor.*[Pp]rojective|[Kk][Ff]lat",
+   "results": {
+    "summary": "[grep] OK 24 hit(s)",
+    "hits": [
+     {
+      "file": "Mathlib/RingTheory/PicardGroup.lean",
+      "line": "665",
+      "text": "private theorem projective_units_and_mul'_comp_lTensor_bijective (I : (Submodule R A)ˣ) :"
+     },
+     {
+      "file": "Mathlib/RingTheory/PicardGroup.lean",
+      "line": "666",
+      "text": "    Projective R I ∧ Function.Bijective (mul' R A ∘ₗ I.1.subtype.lTensor A) := by"
+     },
+     {
+      "file": "Mathlib/RingTheory/PicardGroup.lean",
+      "line": "698",
+      "text": "  (projective_units_and_mul'_comp_lTensor_bijective I).1"
+     },
+     {
+      "file": "Mathlib/RingTheory/PicardGroup.lean",
+      "line": "712",
+      "text": "    (projective_units_and_mul'_comp_lTensor_bijective J).2.1.comp"
+     },
+     {
+      "file": "Mathlib/RingTheory/PicardGroup.lean",
+      "line": "843",
+      "text": "        I.1.subtype) (projective_units_and_mul'_comp_lTensor_bijective I).2⟩"
+     },
+     {
+      "file": "Mathlib/LinearAlgebra/Contraction.lean",
+      "line": "141",
+      "text": "private theorem finite_projective_of_one_mem_range_dualTensorHom :"
+     },
+     {
+      "file": "Mathlib/LinearAlgebra/Contraction.lean",
+      "line": "153",
+      "text": "  (finite_projective_of_one_mem_range_dualTensorHom h).1"
+     },
+     {
+      "file": "Mathlib/LinearAlgebra/Contraction.lean",
+      "line": "157",
+      "text": "theorem Module.Projective.of_one_mem_range_dualTensorHom : Module.Projective R M :="
+     },
+     {
+      "file": "Mathlib/LinearAlgebra/Contraction.lean",
+      "line": "158",
+      "text": "  (finite_projective_of_one_mem_range_dualTensorHom h).2"
+     },
+     {
+      "file": "Mathlib/LinearAlgebra/Contraction.lean",
+      "line": "210",
+      "text": "theorem dualTensorHom_bijective [Module.Finite R M] [Projective R M] :"
+     },
+     {
+      "file": "Mathlib/Algebra/Module/Projective.lean",
+      "line": "242",
+      "text": "instance Projective.tensorProduct [hM : Module.Projective R M] [hN : Module.Projective R₀ N] :"
+     },
+     {
+      "file": "Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean",
+      "line": "12",
+      "text": "# Projective seminorm on the tensor of a finite family of normed spaces."
+     },
+     {
+      "file": "Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean",
+      "line": "25",
+      "text": "* `PiTensorProduct.projectiveSeminorm`: The projective seminorm on `⨂[𝕜] i, Eᵢ`."
+     },
+     {
+      "file": "Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean",
+      "line": "40",
+      "text": "* `PiTensorProduct.norm_eval_le_projectiveSeminorm`: If `f` is a continuous multilinear map on"
+     },
+     {
+      "file": "Mathlib/Analysis/Normed/Module/PiTensorProduct/InjectiveSeminorm.lean",
+      "line": "8",
+      "text": "public import Mathlib.Analysis.Normed.Module.PiTensorProduct.ProjectiveSeminorm"
+     },
+     {
+      "file": "Mathlib/Condensed/Light/Sequence.lean",
+      "line": "304",
+      "text": "  rw [free_lightProfinite_internallyProjective_iff_tensor_condition' R ℕ∪{∞}]"
+     },
+     {
+      "file": "Mathlib/Condensed/Light/InternallyProjective.lean",
+      "line": "19",
+      "text": "`internallyProjective_iff_tensor_condition`: `P : LightCondMod R` is internally projective if and"
+     },
+     {
+      "file": "Mathlib/Condensed/Light/InternallyProjective.lean",
+      "line": "32",
+      "text": "(see `internallyProjective_iff_tensor_condition'`), and the special cases when `P` is the free"
+     },
+     {
+      "file": "Mathlib/Condensed/Light/InternallyProjective.lean",
+      "line": "33",
+      "text": "condensed module on a condensed set (`free_internallyProjective_iff_tensor_condition`,"
+     },
+     {
+      "file": "Mathlib/Condensed/Light/InternallyProjective.lean",
+      "line": "34",
+      "text": "`free_internallyProjective_iff_tensor_condition'`) and when `P` is the free condensed module on a"
+     },
+     {
+      "file": "Mathlib/Condensed/Light/InternallyProjective.lean",
+      "line": "35",
+      "text": "light profinite set (`free_lightProfinite_internallyProjective_iff_tensor_condition`/"
+     },
+     {
+      "file": "Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean",
+      "line": "53",
+      "text": "noncomputable abbrev coinvariantsTensorResProjectiveResolutionIso"
+     },
+     {
+      "file": "Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean",
+      "line": "55",
+      "text": "    ((resFunctor S.subtype).mapProjectiveResolution P).complex.coinvariantsTensorObj A ≅"
+     },
+     {
+      "file": "Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean",
+      "line": "70",
+      "text": "    (coinvariantsTensorResProjectiveResolutionIso S A (barResolution k G)).symm) ≪≫"
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Projective.tensorProduct handles scalar module projectivity only; ordinary module flatness and extension functors do not state the K-flat coefficient-sheaf derived-model isomorphism for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars preserves bounded finite projective local sheaf models",
+   "results": {
+    "summary": "[leansearch] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "ModuleCat.ExtendScalars.obj'",
+      "module": "Mathlib.Algebra.Category.ModuleCat.ChangeOfRings",
+      "type": "{R : Type u₁} → {S : Type u₂} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → ModuleCat R → ModuleCat S",
+      "doc": "Given a ring homomorphism $ f : R → S $ and an $ R $-module $ M $, this constructs the $ S $-module obtained by extending scalars through $ f $, defined as the tensor product $ M ⊗_R S $ with scalar m"
+     },
+     {
+      "name": "Bornology.IsVonNBounded.extend_scalars",
+      "module": "Mathlib.Analysis.LocallyConvex.Bounded",
+      "type": "[NontriviallyNormedField 𝕜] {E : Type*} [AddCommGroup E] [Module 𝕜 E] (𝕝 : Type*) [NontriviallyNormedField 𝕝]\n  [NormedAlgebra 𝕜 𝕝] [Module 𝕝 E] [TopologicalSpace E] [ContinuousSMul 𝕝 E] [IsScalarTower 𝕜 𝕝 E] {s : Set E}\n  (h : IsVonNBounded 𝕜 s) : IsVonNBounded 𝕝 s",
+      "doc": "Let $ E $ be a topological vector space over a nontrivially normed field $ \\mathbb{K} $, and let $ \\mathbb{L} $ be another nontrivially normed field equipped with a normed algebra structure over $ \\ma"
+     },
+     {
+      "name": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+      "module": "Mathlib.Algebra.Category.ModuleCat.Descent",
+      "type": "(hf : f.Flat) : PreservesFiniteLimits (extendScalars.{_, _, u} f)",
+      "doc": "Given a flat ring homomorphism $ f : R \\to S $ between commutative rings, the scalar extension functor $ \\text{Mod}_R \\to \\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod"
+     },
+     {
+      "name": "instFinitePresentationTensorProduct",
+      "module": "Mathlib.Algebra.Module.FinitePresentation",
+      "type": "{A} [CommRing A] [Algebra R A] [Module.FinitePresentation R M] : Module.FinitePresentation A (A ⊗[R] M)",
+      "doc": "Let $R$ be a commutative semiring and let $A$ be a commutative ring that is also an $R$-algebra. If $M$ is a finitely presented $R$-module, then the tensor product $A \\otimes_R M$, viewed as an $A$-mo"
+     },
+     {
+      "name": "AlgHom.extendScalars",
+      "module": "Mathlib.RingTheory.AlgebraTower",
+      "type": ": @AlgHom B C D _ _ _ _ (f.restrictDomain B).toRingHom.toAlgebra",
+      "doc": "Given an algebra homomorphism $ f : C \to D $ over a commutative semiring $ A $, and a scalar tower $ A \to B \to C $, this constructs the extended algebra homomorphism over $ B $ by composing $ f $ with"
+     },
+     {
+      "name": "LinearEquiv.extendScalarsOfIsLocalization",
+      "module": "Mathlib.RingTheory.Localization.Module",
+      "type": "(f : M ≃ₗ[R] N) : M ≃ₗ[A] N",
+      "doc": "Let $R$ be a commutative semiring, $S$ a submonoid of $R$, and $A$ the localization of $R$ at $S$. Let $M$ and $N$ be two $A$-modules. This definition provides a function that takes an $R$-linear equi"
+     },
+     {
+      "name": "Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+      "module": "Mathlib.Algebra.Module.FinitePresentation",
+      "type": "(Rₛ) [CommRing Rₛ] [Algebra R Rₛ] [Module Rₛ M'] [Module Rₛ N'] [IsScalarTower R Rₛ M'] [IsScalarTower R Rₛ N']\n  [IsLocalization S Rₛ] [Module.FinitePresentation R M] :\n  IsLocalizedModule S (IsLocalizedModule.mapExtendScalars S f g Rₛ)",
+      "doc": "If $ R_\\!_\\!s $ is the localization of a commutative ring $ R $ at a submonoid $ S $, and $ M $ is a finitely presented $ R $-module, then the scalar extension map from $ M $ to an $ R_\\!_\\!s $-module"
+     },
+     {
+      "name": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+      "module": "Mathlib.Algebra.Category.ModuleCat.ChangeOfRings",
+      "type": "{R : Type u₁} →\n  {S : Type u₂} →\n    [inst : CommRing R] →\n      [inst_1 : CommRing S] →\n        (f : R →+* S) →\n          {X : ModuleCat R} →\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)",
+      "doc": "For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S "
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Projective.tensorProduct handles scalar module projectivity only; ordinary module flatness and extension functors do not state the K-flat coefficient-sheaf derived-model isomorphism for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf algebra over a constant ring, base change of a bounded projective scalar complex is a K-flat complex of finite projective sheaves",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Flat",
+      "type": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat",
+      "doc": "The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat."
+     },
+     {
+      "name": "Module.Flat.of_projective",
+      "module": "Mathlib/RingTheory/Flat/Basic",
+      "type": "∀ {R : Type u} {M : Type v} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\n  [Module.Projective R M], Module.Flat R M",
+      "doc": "Every projective module over a commutative semiring is flat. Specifically, if $ M $ is a projective module over a commutative semiring $ R $, then $ M $ satisfies the flatness condition, meaning tenso"
+     },
+     {
+      "name": "Module.Flat.projective_of_finitePresentation",
+      "module": "Mathlib/RingTheory/Flat/EquationalCriterion",
+      "type": "∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\n  [Module.FinitePresentation R M], Module.Projective R M",
+      "doc": "If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $."
+     },
+     {
+      "name": "LightCondensed.free_internallyProjective_iff_tensor_condition",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj ",
+      "doc": "For a light condensed set $ P $, the free $ R $-module $ \\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\to B"
+     },
+     {
+      "name": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+      "module": "Mathlib/Algebra/Category/ModuleCat/Descent",
+      "type": "∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)",
+      "doc": "Given a flat ring homomorphism $ f : R \\to S $ between commutative rings, the scalar extension functor $ \\text{Mod}_R \\to \\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod"
+     },
+     {
+      "name": "Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+      "module": "Mathlib/RingTheory/Flat/CategoryTheory",
+      "type": "∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\n  Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)",
+      "doc": "A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits."
+     },
+     {
+      "name": "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+      "module": "Mathlib/Algebra/Category/ModuleCat/Descent",
+      "type": "∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\n  f.Flat →\n    CategoryTheory.Limits.PreservesFiniteLimits\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))",
+      "doc": "For a flat ring homomorphism $ f : R \\to S $, the functor $ - \\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits."
+     },
+     {
+      "name": "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj ",
+      "doc": "For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,"
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Projective.tensorProduct handles scalar module projectivity only; ordinary module flatness and extension functors do not state the K-flat coefficient-sheaf derived-model isomorphism for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.tensorProduct|[Kk][Ff]lat|projective.*[Bb]ase[Cc]hange",
+   "results": {
+    "summary": "6 hits",
+    "declarations_or_files": [
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean",
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/Smooth/Basic.lean",
+     "Mathlib/Algebra/Module/Projective.lean"
+    ],
+    "digest": "13ee9cef5dacaca1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module flatness/projectivity, K-projective complexes, or scalar-extension functors; none states the arbitrary condensed coefficient-sheaf K-flat local-model calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes of finite projective modules remain K-flat after extension to sheaves of coefficient rings",
+   "results": {
+    "summary": "8 hits",
+    "declarations_or_files": [
+     "Module.Flat.of_projective",
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "CochainComplex.isKProjective_of_iso",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "RingHom.Flat"
+    ],
+    "digest": "d2abd721ddd913b7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module flatness/projectivity, K-projective complexes, or scalar-extension functors; none states the arbitrary condensed coefficient-sheaf K-flat local-model calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, TensorProduct",
+   "results": {
+    "summary": "12 hits",
+    "declarations_or_files": [
+     "Module.Projective.tensorProduct",
+     "IsAzumaya.mk",
+     "dualTensorHomEquiv",
+     "dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv",
+     "lTensorHomEquivHomLTensor",
+     "rTensorHomEquivHomRTensor",
+     "TensorProduct.dualDistribEquiv",
+     "Module.Projective.of_one_mem_range_dualTensorHom"
+    ],
+    "digest": "c248ea90c1dc8b6f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module flatness/projectivity, K-projective complexes, or scalar-extension functors; none states the arbitrary condensed coefficient-sheaf K-flat local-model calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective scalar modules gives a K-flat sheaf complex and computes arbitrary derived change of coefficient sheaves",
+   "results": {
+    "summary": "8 hits",
+    "declarations_or_files": [
+     "Module.Flat.of_projective",
+     "CochainComplex.isKProjective_of_projective",
+     "Module.Flat.projective_of_finitePresentation",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "CategoryTheory.isZero_Tor'_succ_of_projective",
+     "CategoryTheory.isZero_Tor_succ_of_projective",
+     "Module.Flat.rTensor_shortComplex_exact"
+    ],
+    "digest": "1880b79c04727818"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module flatness/projectivity, K-projective complexes, or scalar-extension functors; none states the arbitrary condensed coefficient-sheaf K-flat local-model calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a bounded finite projective complex to a ringed site is computed by ordinary sheaf tensor products and stays K-flat",
+   "results": {
+    "summary": "8 hits",
+    "declarations_or_files": [
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "Module.Flat.of_projective",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "LightCondensed.internallyProjective_iff_tensor_condition"
+    ],
+    "digest": "9c01c821691975ef"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module flatness/projectivity, K-projective complexes, or scalar-extension functors; none states the arbitrary condensed coefficient-sheaf K-flat local-model calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-ctf",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-ctf",
+   "place": "(2) Local models, displayed scalar-change formula; original step 4, also the flat-model input of step 9",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-scalar-change-model",
+  "worker": "stage1",
+  "summary": "Proved the unchanged arbitrary-coefficient statement in seven steps using existing nodes only: scalar splittings, sheaf retract flatness, bounded-flat K-flatness, restriction of K-flat resolutions, and explicit balanced chain isomorphisms. Checked the newest blueprint and Stacks sources; excluded admissible-only Cartesian and constant-coefficient-only Lean results. No new nodes or statement changes.",
+  "blueprint": "det-prop-scalar-six-ctf.proof.md (2), its displayed scalar-change formula and preservation of finite projective terms; also the flat-model input in the ancestor split, step 9.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General ringed-site K-flat criterion, applied to the explicit bounded flat coefficient complexes; no admissible or constant-coefficient hypothesis."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site flat-term resolution to compute chart restriction; the unit has no replacement for this foundational construction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General ring-sheaf change of rings computed on K-flat complexes, retaining the new coefficient action; not a purity theorem."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "General exact slice restriction and K-flat preservation, needed for restriction of the scalar-extension computation."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "General sheaf tensor restriction formula on local tensors, applied termwise; no geometric theorem of its owning unit is used."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-e3207fbfa",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e3207fbfa (reviewer sub-agent of L); spot-checked: Read the whole item: 7 steps, no new nodes, statement unchanged. I checked it against det-prop-scalar-six-ctf.proof.md (2) in main-20261024. The statement is true for any map of commutative condensed rings. Base change is L(Ext) along a_S = p_S^*a on ordinary module sheaves, and the parent's step 2 uses exactly this. Small cases tested: Z/4→F_2, R'=0, n=0, empty cover. Steps 2-7 are correct. Step 2: split surjection, 05CF/00NX. Step 3: the retract-flatness argument is written out (03ER). Step 4: bounded flat complexes are K-flat; the Stacks label is 06YQ, and the cited node's 06YS is that node's own mislabel. Step 5: K-flat resolution (06YS), restriction preserves K-flatness (0E8K), tensor commutes with restriction (03EL), all read. Step 6: identity resolution. Step 7: balanced chain isomorphism. I accept the declared tool uses (general K-flat and localization lemmas). One C1/C4 fault, now fixed. Step 1 took Λ_S|_W ≅ Λ_W and a_S|_W = a_W without citing any node: def-sfb-pullback-from-point-comp-iso gives u^*p_S^* ≅ p_W^* but not that u^* is restriction to the localized site. I added the on-route lem-sfb-coefficient-sections-localization (localized site = W_proét, u^* = restriction, α_u is a ring isomorphism) and the square of sk-def-sfb-coefficient-change (α'_u∘u^*a_S = a_W∘α_u) to step 1 and to proof_deps, with rewritten text. The parallel N7 delivery of the same item has not landed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectScalarChangeModel",
+  "declaration": "AlgebraicGeometry.ProEtale.sfbPerfectScalarChangeModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfbScalarModelComplex",
+   "AlgebraicGeometry.ProEtale.sfbScalarChangedComplex",
+   "AlgebraicGeometry.ProEtale.sfbExtendedScalarModelComplex",
+   "AlgebraicGeometry.ProEtale.sfbPerfectScalarChangeModels",
+   "AlgebraicGeometry.ProEtale.sfbPerfectScalarChangeModel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectScalarChangeModel.lean",
+  "statement": "theorem sfbPerfectScalarChangeModel (S : Scheme.{u}) (P : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))) (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S) (C : ∀ i : 𝒰.I₀, CochainComplex (Mod Ab.{u + 1} (scalarRingObj Λ)) ℤ) (hb : ∀ i : 𝒰.I₀, ∃ l h : ℤ, (C i).IsStrictlyGE l ∧ (C i).IsStrictlyLE h) (hp : ∀ (i : 𝒰.I₀) (q : ℤ), ∃ n : ℕ, Nonempty (Retract ((C i).X q) (Mod.finiteFree (scalarRingObj Λ) n))) (e : ∀ i : 𝒰.I₀, (CondensedRing.upperStar Λ (𝒰.f i)).mapDerivedCategory.obj P ≅ DerivedCategory.Q.obj (sfbScalarModelComplex (𝒰.X i) (C i))) : ∀ i : 𝒰.I₀, Nonempty ((CondensedRing.upperStar Λ' (𝒰.f i)).mapDerivedCategory.obj ((Mod.extendScalars (coefficientMap a S)).leftDerivedFunctor.obj P) ≅ DerivedCategory.Q.obj (sfbExtendedScalarModelComplex a (𝒰.X i) (C i))) ∧ Nonempty (DerivedCategory.Q.obj (sfbExtendedScalarModelComplex a (𝒰.X i) (C i)) ≅ DerivedCategory.Q.obj (sfbScalarModelComplex (𝒰.X i) (sfbScalarChangedComplex a (C i))))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem states the two derived isomorphisms on the specified cover. The companion sfbPerfectScalarChangeModels states scalar finite projectivity, finite-free coefficient retracts, flatness and K-flatness independently of any object or cover, hence also on every chart. Three transparent helper constructions apply the recorded constant-sheaf extension, scalar extension at the point, and ordinary coefficient extension termwise. Internal modules over scalarRingObj are ordinary scalar modules, and a finite-free retract expresses finitely generated projectivity exactly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-585738caf",
+  "group": "Q35",
+  "result": "pass",
+  "note": "First S2 delivery; S1 landed through Q25 e3207, so this is not a push after a merge. Node unchanged apart from lean; recorded statement verbatim in the file. Clause check: arbitrary commutative condensed rings and IsMonHom map, no flatness; Scheme.Cover over proetalePrecoverage (fpqc covers by weakly étale maps); strictly bounded complexes with terms retracts of finite free modules (= f.g. projective); chart isos via CondensedRing.upperStar and finiteConstantScalarExtension (constant sheaf, then Λ_X⊗); conclusion gives both displayed isomorphisms in D(Λ'_W) using the recorded leftDerivedFunctor of sk-def-sfb-derived-extension-of-scalars. Companion sfbPerfectScalarChangeModels covers the cover-independent clauses: changed complex bounded finite projective, finite-free retracts, ObjectProperty.flat (relative ⊗_A monoidal structure) and kFlat for both models, via declarations recorded on def-pc-flat-sheaf-modules and def-pc-kflat-complex. Mathematics checked. Edge cases admitted: empty cover/scheme, rank 0, R'=0, l>h, non-uniform bounds, non-flat maps. Helpers are real termwise maps, not hollow; theorems sorry only; docstrings carry source, blueprint id and the 7 steps; imports exist; no name clash. Advisory: the CondensedRing.upperStar owner is not in stmt_deps, as in most landed sfb items; not a fault. No compile run because no file changed; the worker reports scompile exit 0 with no warnings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T212724-L-220004",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

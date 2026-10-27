@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-permissible-blowup-standard-degrees",
+ "kind": "statement",
+ "title": "Numerical nearness preserves tangent standard-basis degrees",
+ "statement": "Let $(T,\\mathfrak M,k)$ be a nonzero commutative regular local ring, with residue field $k=T/\\mathfrak M$ [def-weil-regular-scheme, def-weil-residue-field]. Fix a regular system of parameters $(x_0,\\ldots,x_r,y_1,\\ldots,y_s)$, where $r,s\\geq0$, and put $P=(x_0,\\ldots,x_r)$ [def-weil-pbc-regular-system-of-parameters]. Let $\\mathfrak a\\subseteq P$ be an ideal, put $R=T/\\mathfrak a$, $\\mathfrak m=\\mathfrak M/\\mathfrak a$, $I=P/\\mathfrak a$, $A=T/P=R/I$, and assume $G=\\operatorname{gr}_I R$ is flat over $A$ [def-weil-pbc-associated-graded-ring, def-weil-pbc-flat-ring-map]. Set $S=G\\otimes_A k$ [def-weil-pbc-module-tensor-product] and $B=k[X_0,\\ldots,X_r]$, with all variables of degree one [def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra].\nAssume $R$ is reduced (it has no nonzero nilpotent elements) and no minimal prime of $R$ contains $I$, where a minimal prime contains no strictly smaller prime. Let $z\\in\\operatorname{Bl}_I(\\operatorname{Spec}R)$ be over $\\mathfrak m$ and belong to the chart $\\operatorname{Spec}R[I/\\bar x_0]$ [def-weil-affine-spectrum, def-nagata-affine-blowup, def-nagata-blowup-chart-ring]. Put\n$$D_T=T[t_1,\\ldots,t_r]/(x_0t_i-x_i:1\\leq i\\leq r),\\qquad T'=(D_T)_{\\mathfrak p'},$$\nwhere $\\mathfrak p'$ is the inverse image of $z$ under the surjection $D_T\\twoheadrightarrow R[I/\\bar x_0]$, $t_i\\mapsto\\bar x_i/\\bar x_0$. Assume $T'$ is regular local, let $R_z=\\mathcal O_{\\operatorname{Bl}_I(\\operatorname{Spec}R),z}$, and put $\\mathfrak a'=\\ker(T'\\twoheadrightarrow R_z)$ [def-weil-pbc-localization-at-prime].\nFor a regular local ring $(V,\\mathfrak l,\\kappa)$ and an ideal $\\mathfrak b\\subseteq\\mathfrak l$, let $E(V,\\mathfrak b)=\\ker(\\operatorname{gr}_{\\mathfrak l}V\\to\\operatorname{gr}_{\\mathfrak l/\\mathfrak b}(V/\\mathfrak b))$. Define $\\nu^*(V,\\mathfrak b)$ to be the nondecreasing sequence containing $d$ with multiplicity $\\dim_\\kappa(E_d/(\\sum_{j=1}^d (\\operatorname{gr}_{\\mathfrak l}V)_j E_{d-j}))$, followed by infinitely many $\\infty$'s. Equivalently these are the degrees of a minimal homogeneous generating set of $E$, padded by $\\infty$.\nPut $h_R(n)=\\operatorname{length}_R(R/\\mathfrak m^{n+1})$ and $h_z(n)=\\operatorname{length}_{R_z}(R_z/\\mathfrak n_z^{n+1})$, where $\\mathfrak n_z$ is the maximal ideal of $R_z$ [def-weil-pbc-module-length]. Set $\\delta=\\operatorname{trdeg}_k\\kappa(z)$ [def-kun-transcendence-degree] and $\\Lambda f(n)=\\sum_{j=0}^n f(j)$. If $\\Lambda^\\delta h_z=h_R$, then\n$$\\nu^*(T',\\mathfrak a')=\\nu^*(T,\\mathfrak a).$$\nNo converse is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Ancillary source read online: Hironaka, Certain numerical characters of singularities, J. Math. Kyoto Univ. 10 (1970), Theorem III, p.156, with the definition of the degree sequence and standard bases on p.155; proof summarized on p.187; local chart form of the regular ambient embedding; https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf. Archival original WANTED. ILO VIII 2.3.13, p.94, is ancestor motivation only. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-residue-field",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-affine-spectrum",
+  "def-nagata-affine-blowup",
+  "def-nagata-blowup-chart-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-length",
+  "def-kun-transcendence-degree",
+  "def-trf-permissible-basis-chart-data",
+  "def-trf-adic-initial-ideal-generator-degrees",
+  "def-trf-local-quotient-hilbert-function",
+  "def-trf-hilbert-samuel-invariant"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normal-flat double-initial-ideal statement: the specified parameter map gives $S=B/C$ with $C=\\ker\\beta$, and $\\operatorname{gr}_{\\mathfrak m}R=S[Y_1,\\ldots,Y_s]$, with ambient tangent ideal $Ck[X,Y]$. The graded-length bridge identifies $h_R(n)$ with the sum of dimensions in degrees at most $n$. Write $h_S(n)=\\sum_{j=0}^n\\dim_k S_j$. Adding one degree-one polynomial variable replaces this cumulative function by $\\Lambda h_S$: in degree $d$, the monomials in that variable give $\\bigoplus_{a=0}^d S_{d-a}Y^a$. Iterating gives $h_R=\\Lambda^s h_S$. Likewise the degree-$d$ minimal-generator quotient of $Ck[X,Y]$ is that of $C$: reduction modulo the positive-degree ideal kills all terms with a $Y$ factor and all positive-degree multiples in $B$. Thus $\\nu^*(T,\\mathfrak a)=\\nu_B(C)$, with the multiplicity formula of the projective-cone node.",
+   "uses": [
+    "lem-trf-normal-flat-double-initial-ideal",
+    "lem-trf-maximal-adic-graded-length-bridge",
+    "lem-trf-projective-cone-hilbert-standard-degrees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Section 2, p.153, and paragraph following Example (4.2), p.157; online source https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED"
+   }
+  },
+  {
+   "text": "Put $\\boldsymbol u=(x_0,y_1,\\ldots,y_s)\\subset T'$ and $\\overline V=T'/(\\boldsymbol u)$. Apply the permissible-coordinate-chart statement to the full parameter boundary and to the centre generated by all the $x_i$. Since $z$ lies over $\\mathfrak m$, all members of $\\boldsymbol u$ vanish there and occur at distinct positions in a regular system of parameters of $T'$. The ambient chart presentation gives $\\overline V=k[t_1,\\ldots,t_r]_{\\mathfrak p}=Q$, where $\\mathfrak p$ is the point in the exceptional affine fibre chart. For the quotient transform, relative-Proj base change identifies its closed fibre with $\\operatorname{Proj}S$: degree by degree its Rees algebra tensored with $k$ is $I^d/\\mathfrak m I^d$, also the degree-$d$ piece of $G\\otimes_A k$, since $I^{d+1}\\subseteq\\mathfrak m I^d$. On the $X_0$ chart the degree-zero fractions are $f/X_0^{\\deg f}$, represented by $f(1,t)$; hence the fibre local ring is exactly $F=Q/J$ from the projective-cone node, and $R_z/(\\boldsymbol u)R_z=F$. The induced ambient ideal is $\\mathfrak a'Q=J$. These identifications send each $t_i$ to the same named ratio and preserve the residue field, so $\\operatorname{trdeg}_k\\kappa(F)=\\delta$.",
+   "uses": [
+    "lem-trf-permissible-coordinate-chart",
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "def-nagata-rees-algebra",
+    "lem-trf-projective-cone-hilbert-standard-degrees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Section 2, p.154; Remark (5.2), p.158; chart notation (13.1), pp.168--169; online source https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED"
+   }
+  },
+  {
+   "text": "Apply the linear-section comparison to $V=T'$, $\\mathfrak b=\\mathfrak a'$ and the $s+1$ distinct parameters $\\boldsymbol u$. It gives $h_z\\leq\\Lambda^{s+1}h_F$. Apply the projective-cone comparison to $C\\subset B$ and $\\mathfrak p$; it gives $\\Lambda^{\\delta+1}h_F\\leq h_S$. Finite summation preserves pointwise inequalities. Consequently\n$$\\Lambda^\\delta h_z\\ \\leq\\ \\Lambda^{\\delta+s+1}h_F\\ \\leq\\ \\Lambda^s h_S=h_R.$$\nThe hypothesis identifies the two endpoints, so equality holds at each term for every $n$. Summation is injective on functions on $\\mathbf N$: recover $f(0)$ from $\\Lambda f(0)$ and $f(n)$ from $\\Lambda f(n)-\\Lambda f(n-1)$ for $n>0$. Cancel $\\Lambda^\\delta$ from the first equality and $\\Lambda^s$ from the second. This gives $h_z=\\Lambda^{s+1}h_F$ and $\\Lambda^{\\delta+1}h_F=h_S$.",
+   "uses": [
+    "lem-trf-linear-sections-hilbert-standard-degrees",
+    "lem-trf-projective-cone-hilbert-standard-degrees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Inequalities (4.1), p.156; proof of Theorem III, p.187; online source https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED"
+   }
+  },
+  {
+   "text": "The first equality activates the equality clause of the linear-section node, so $\\nu^*(T',\\mathfrak a')=\\nu^*(Q,J)$. The second activates the equality clause of the projective-cone node, so $\\nu^*(Q,J)=\\nu_B(C)$. Step 1 identified $\\nu_B(C)=\\nu^*(T,\\mathfrak a)$. Chaining these three equalities proves the stated conclusion, including the multiplicities of all finite degrees and the padded infinite tail.",
+   "uses": [
+    "lem-trf-linear-sections-hilbert-standard-degrees",
+    "lem-trf-projective-cone-hilbert-standard-degrees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Remark (12.2), pp.167--168; proof of Theorem III, p.187; online source https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-normal-flat-double-initial-ideal",
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-trf-projective-cone-hilbert-standard-degrees",
+  "lem-trf-permissible-coordinate-chart",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "def-nagata-rees-algebra",
+  "lem-trf-linear-sections-hilbert-standard-degrees"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+  "place": "Historical nearby-duality/alteration branch, via the recorded blueprint chain; explicit algebraic assembly follows the online Hironaka Theorem III proof, p.187, and Remark (12.2), pp.167--168. The archival Hironaka document is WANTED, so marked agent under brief section 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|Hironaka|standard.?bas[ei].*degree|nuStar",
+   "results": "{\"t\": \"2026-10-22T06:50:10Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|Hironaka|standard.?bas[ei].*degree|nuStar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary polynomial degree, Weierstrass preparation, cotangent modules, smoothness/flatness, homogeneous localization, or linear bases; they do not assert the stated normal-flatness or permissible-transform standard-basis theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal\", \"associatedGraded\", \"degree\"",
+   "results": "{\"t\": \"2026-10-22T06:50:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ideal\\\", \\\"associatedGraded\\\", \\\"degree\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary polynomial degree, Weierstrass preparation, cotangent modules, smoothness/flatness, homogeneous localization, or linear bases; they do not assert the stated normal-flatness or permissible-transform standard-basis theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality in the Hilbert Samuel blowup inequality is equivalent to preservation of degrees of minimal tangent initial generators",
+   "results": "{\"t\": \"2026-10-22T06:50:12Z\", \"tool\": \"leansearch\", \"query\": \"Equality in the Hilbert Samuel blowup inequality is equivalent to preservation of degrees of minimal tangent initial generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousIdeal.ext_iff\", \"HomogeneousIdeal.ext'\", \"HomogeneousSubmodule.ext_iff\", \"HomogeneousLocalization.ext_iff_val\", \"MvPowerSeries.isHomogeneous_iff_eq_homogeneousComponent\", \"HomogeneousSubmodule.mk.injEq\", \"AlgebraicGeometry.Proj.awayι.congr_simp\", \"HomogeneousLocalization.NumDenSameDeg.ext\"], \"digest\": \"31e2fd75af62850c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary polynomial degree, Weierstrass preparation, cotangent modules, smoothness/flatness, homogeneous localization, or linear bases; they do not assert the stated normal-flatness or permissible-transform standard-basis theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-permissible-blowup-standard-degrees: Hironaka theorem III equality of Hilbert Samuel functions and nu star under permissible blowup",
+   "results": "{\"t\": \"2026-10-22T06:50:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-permissible-blowup-standard-degrees: Hironaka theorem III equality of Hilbert Samuel functions and nu star under permissible blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime\", \"Ideal.ramificationIdx_eq_find\", \"PowerSeries.IsWeierstrassFactorization.degree_eq_coe_lift_order_map\", \"Ideal.ramificationIdx_spec\", \"PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime\"], \"digest\": \"ff1d28cee7fefd75\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary polynomial degree, Weierstrass preparation, cotangent modules, smoothness/flatness, homogeneous localization, or linear bases; they do not assert the stated normal-flatness or permissible-transform standard-basis theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-permissible-blowup-standard-degrees: normally flat monoidal transform preserves sorted standard basis orders at numerical near points",
+   "results": "{\"t\": \"2026-10-22T06:50:34Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-permissible-blowup-standard-degrees: normally flat monoidal transform preserves sorted standard basis orders at numerical near points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"RingHom.IsStandardSmoothOfRelativeDimension.comp\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"ChevalleyThm.MvPolynomialC.degBound_le_degBound\", \"ChevalleyThm.MvPolynomialC.numBound_mono\"], \"digest\": \"f8f2955013373035\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary polynomial degree, Weierstrass preparation, cotangent modules, smoothness/flatness, homogeneous localization, or linear bases; they do not assert the stated normal-flatness or permissible-transform standard-basis theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hironaka theorem numerical nearness permissible blowup Hilbert Samuel equality minimal tangent ideal generating degrees",
+   "results": "{\"t\": \"2026-10-23T14:45:07Z\", \"tool\": \"leanfinder\", \"query\": \"Hironaka theorem numerical nearness permissible blowup Hilbert Samuel equality minimal tangent ideal generating degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\"], \"digest\": \"c43ff5c3ce6c63c3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; they concern regular-local dimension, ordinary polynomial degree, homogeneous-ideal definitions or Proj chart constructions, and do not give the Hilbert--Samuel inequality with its equality criterion for minimal tangent generators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equal Hilbert Samuel functions under a permissible blowup preserve minimal degrees of tangent initial ideal generators",
+   "results": "{\"t\": \"2026-10-23T14:51:01Z\", \"tool\": \"leansearch\", \"query\": \"Equal Hilbert Samuel functions under a permissible blowup preserve minimal degrees of tangent initial ideal generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.minimal_primes_comap_of_surjective\", \"Ideal.comap_minimalPrimes_eq_of_surjective\", \"Polynomial.comap_taylorEquiv_degreeLT\", \"RingEquiv.height_comap\", \"AlgebraicGeometry.Proj.awayι.congr_simp\", \"RingEquiv.height_map\", \"Ideal.map_height_le_one_of_mem_minimalPrimes\", \"Ideal.inertiaDeg_comap_eq\"], \"digest\": \"4fa2dd1d410c1a55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; they concern regular-local dimension, ordinary polynomial degree, homogeneous-ideal definitions or Proj chart constructions, and do not give the Hilbert--Samuel inequality with its equality criterion for minimal tangent generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal flat blowup tangent cone minimal homogeneous generator degrees unchanged at a near point",
+   "results": "{\"t\": \"2026-10-23T14:51:03Z\", \"tool\": \"leanfinder\", \"query\": \"Normal flat blowup tangent cone minimal homogeneous generator degrees unchanged at a near point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.denom_notMem\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"Polynomial.IsDistinguishedAt.coe_natDegree_eq_order_map\"], \"digest\": \"5834f76dfe1b8e8e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; they concern regular-local dimension, ordinary polynomial degree, homogeneous-ideal definitions or Proj chart constructions, and do not give the Hilbert--Samuel inequality with its equality criterion for minimal tangent generators."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|Hironaka|nuStar|permissible",
+   "results": "{\"t\": \"2026-10-23T14:45:07Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|Hironaka|nuStar|permissible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Basic.lean\"], \"digest\": \"a0c0d6ee2a77720b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; they concern regular-local dimension, ordinary polynomial degree, homogeneous-ideal definitions or Proj chart constructions, and do not give the Hilbert--Samuel inequality with its equality criterion for minimal tangent generators."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Ideal\"",
+   "results": "{\"t\": \"2026-10-23T14:51:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"Ideal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; they concern regular-local dimension, ordinary polynomial degree, homogeneous-ideal definitions or Proj chart constructions, and do not give the Hilbert--Samuel inequality with its equality criterion for minimal tangent generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-near-blowup-order-generators",
+  "date": "2026-10-22",
+  "group": "Q103"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Theorem III, p.156, with the definition of the degree sequence and standard bases on p.155; proof summarized on p.187; local chart form of the regular ambient embedding",
+   "via": [
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-permissible-blowup-standard-degrees",
+  "worker": "stage1",
+  "summary": "Split numerical nearness through the two Hilbert--Samuel inequalities of Hironaka (4.1). Reuse normal-flat tangent comparison and ambient chart statements; expose linear-section equality and arbitrary-residue-field projective-cone equality as two strictly smaller unsplit inputs. Cancel discrete summations explicitly and assemble the degree equalities. Statement unchanged.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality (1)--(2), through the preserved via list: normal-flat permissible transform calculation used by the resolution invariant. Current blueprint was read: its main proof now quotes Varshavsky; this split refines only the already-recorded historical lower input.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Generic arbitrary-base-change property of relative Proj identifies the closed exceptional fibre from the Rees algebra; it does not replace a proof step of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-9c39b2844",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-9c39b2844 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement; review.md has the step-by-step checks. Item statement unchanged from base (still unsplit on side-live); no re-split note, no parallel split. Step 1: from lem-trf-normal-flat-double-initial-ideal, ker γ = Ck[X,Y]. That gives h_R = Λ^s h_S and ν*(T,a) = ν_B(C), via C/B_+C; the graded-length bridge is applied correctly at n+1. Step 2: in the permissible-coordinate-chart node's chart, x_0 and every y_k are at distinct positions in a regular system of parameters of T'. Then T'/(u) = k[t]_p = Q. The closed fibre is Proj(Rees⊗k), and Rees⊗k = ⊕ I^d/mI^d = G⊗_A k = S. Hence F = Q/J and a'Q = J, and δ agrees. One implicit identity is elementary: mR_z = (x_0,y)R_z, since x_i = x_0 t_i. Step 3: the Λ-chain and the cancellation by injectivity of Λ are correct. Step 4: the three ν* equalities chain correctly. Linear-sections node: I proved it myself. The inequality comes from the colon-length estimate, h_D ≤ Λh_{D/x}. Equality makes u* a degree-one regular sequence on gr D, and then Tor/Koszul plus graded Nakayama give E/(u*)E ≅ E(V̄,b̄). Edge cases q=0, b=0, k[[u]] with b=(u) checked. Projective-cone node: the homogeneous core, strictly smaller than the item. Tests: C=0 at any p, (X_1^d), (X_0X_1), a conic squared, and char 2 with inseparable points of (X_1^2-aX_0^2) and (X_1^2+aX_2^2). All are consistent; whenever ν* differs the inequality is strict. Duplicate search over the trace-formula Hilbert–Samuel nodes found nothing; no cycle; three kinds of Mathlib search recorded for both nodes. The Hironaka 1970 paper is absent from literature/, so it is WANTED and the proof is marked agent, per the brief; I verified the mathematics independently and did not read the paper's pages. Accepted tool_use: lemma-nagata-relative-proj-base-change-arbitrary, generic Proj base change. Advisory B3: unused polynomial-ring and standard-graded-algebra stmt_deps in the linear node; gr not cited inline. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PermissibleBlowupStandardDegrees",
+  "declaration": "Hironaka.permissibleBlowupStandardDegrees",
+  "file": "lean/Sheaf/RingTheory/PermissibleBlowupStandardDegrees.lean",
+  "statement": "theorem permissibleBlowupStandardDegrees {T : Type u} [CommRing T] [IsRegularLocalRing T] (r s : ℕ) (x : Fin (r + 1) → T) (y : Fin s → T) (hparams : IsLocalRing.IsRegularSystemOfParameters (List.ofFn x ++ List.ofFn y)) (b : Ideal T) (hb : b ≤ Ideal.span (Set.range x)) (hflat : Module.Flat ((T ⧸ b) ⧸ (Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)) (Ideal.associatedGraded ((Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)))) (hred : IsReduced (T ⧸ b)) (hmin : ∀ q ∈ minimalPrimes (T ⧸ b), ¬ (Ideal.span (Set.range x)).map (Ideal.Quotient.mk b) ≤ q) (ρ : ParameterChart x →+* chartRing ((Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)) (Ideal.Quotient.mk b (x 0))) (hρ : IsQuotientChartMap x b ρ) (z : PrimeSpectrum (chartRing ((Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)) (Ideal.Quotient.mk b (x 0)))) (hz : z.asIdeal.comap ((algebraMap (T ⧸ b) _).comp (Ideal.Quotient.mk b)) = IsLocalRing.maximalIdeal T) [IsRegularLocalRing (LocalChart ρ z)] (hnear : (HilbertSamuel.summation^[Cardinal.toNat (@Algebra.trdeg (IsLocalRing.maximalIdeal T).ResidueField z.asIdeal.ResidueField _ _ (Ideal.ResidueField.map (IsLocalRing.maximalIdeal T) z.asIdeal ((algebraMap (T ⧸ b) _).comp (Ideal.Quotient.mk b)) hz.symm).toAlgebra)]) (fun n : ℕ => (Module.length (Localization.AtPrime z.asIdeal) ((Localization.AtPrime z.asIdeal) ⧸ IsLocalRing.maximalIdeal (Localization.AtPrime z.asIdeal) ^ (n + 1))).toNat) = quotientHilbertFunction (IsLocalRing.maximalIdeal T) b) : nuStar (transformIdeal ρ z) = nuStar b",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1f891a16",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Return-L H2 repaired: projective-cone theorem now only in proof_deps; nuStar/quotientHilbertFunction/summation cited via landed def owners (def-trf-adic-initial-ideal-generator-degrees Q37, def-trf-local-quotient-hilbert-function Q110, def-trf-hilbert-samuel-invariant) plus def-trf-permissible-basis-chart-data. Node diff vs side-live = lean + stmt_deps only; lean.statement verbatim in file. All clauses checked against source decls: IsRegularLocalRing T, RSP list x++y, b≤P, Module.Flat (R/I) gr_I R, IsReduced, minimalPrimes avoidance, z in chartRing over 𝔐 via comap, ParameterChart = T[t]/(x_i-x_0t_i), ρ pinned by IsQuotientChartMap (unique, exists), LocalChart = (D_T)_{ρ⁻¹z} regular, transformIdeal = ker localRingHom to R_z, nuStar = padded minimal-generator degrees of initial ideal, h_R/h_z lengths, δ = trdeg κ(𝔐)→κ(z) canonical, Λ^δ = summation iterate; conclusion ν*(T',𝔞')=ν*(T,𝔞), no converse. Edge cases r=0,s=0,δ=0,b=0,b=P checked; single universe; sorry-only; docstrings with source+blueprint+proof steps; report has Worker report and Second reading by Q28. No compile rerun (no file changed)."
+ }
+}

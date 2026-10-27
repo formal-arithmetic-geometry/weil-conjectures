@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-closed-test-localized-model-coherence",
+ "kind": "statement",
+ "title": "Resolution and geometric coherence of closed-test section models",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and on every small pro-etale site put $\\Lambda_Y=p_Y^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Use internal $\\Lambda_Y$-modules [sk-def-sfb-module-objects], their exact inverse images and ordinary unbounded derived direct images computed on K-injectives [sk-def-sfb-module-derived-pushpull]. All sites and section values are taken in a common sufficiently large universe. Let $A$ be a commutative ring, $\\mathfrak a\\subseteq A$ an ideal, $U=\\operatorname{Spec}A$, and $s:Z=\\operatorname{Spec}(A/\\mathfrak a)\\hookrightarrow U$. Let $v$ be the affine ind-etale closed-site lift [def-exc-closed-site-lift]. Let $V\\to Z$ be an affine ind-etale object such that $V$ and $B=v(V)$ are w-contractible [sk-def-pe-wlocal]. Let $f:X\\to U$ be a morphism of affine schemes and put $X_Z=X\\times_UZ$, with projections $h:X_Z\\to X$, $f_Z:X_Z\\to Z$. Put $T=X\\times_UB$, $T_0=X\\times_UV$ and $a:T_0\\hookrightarrow T$; products mean scheme fibre products [def-pc-fibre-product]. For a K-injective representative $\\mathcal I$ of $K\\in D^+(\\operatorname{Mod}_{\\Lambda_X})$ and a K-injective resolution $j:h^*\\mathcal I\\to\\mathcal J$, use the normalized source model $C=Q(\\mathcal I(T))$ and target model $D=Q(\\mathcal J(T_0))$. Normalize the source comparison by the inverse of the actual unit-section map $(f_*\\mathcal I)(B)\\to(s^*f_*\\mathcal I)(V)$, the target comparison by the direct-image section identity, and both localized-section comparisons by the degreewise identity. Put $r=Q(j(T_0)\\circ\\eta_a):C\\to D$, where $\\eta_a$ is the actual inverse-image unit section [def-sfb-proetale-inverse-image-unit-section].\nThese comparisons and $r$ are independent of both resolutions, with transition maps induced by the unique homotopy classes of comparisons into K-injectives [sk-def-sfb-derived-categories]. They are natural for every morphism $K\\to K'$: if $c,d$ are the induced source and target maps, then $d\\circ r=r'\\circ c$, and the same transition maps commute with the derived section comparisons. Homotopic comparison maps give identical arrows in $D(\\operatorname{Ab})$.\nFor any map $V'\\to V$ with both tests and their lifts w-contractible, the analogous square for $r$ and the section-model comparisons commutes, with $c,d$ the presheaf restriction maps on the fibre products. The same equations hold for an isomorphism of the original cartesian square. They also hold after any pro-etale base change $U'\\to U$, on affine localizations and every admissible test there, using the induced site localizations, pullback composition and the canonical derived direct-image composition comparisons. In this last assertion the localized direct-image comparison is normalized by $(f_*F)(W)=F(X\\times_UW)$ and commutes with the localized adjunction units and counits. Compatibility is asserted with these specified comparison maps; it imposes no invertibility on the closed restriction.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070I, lemma-K-injective, and sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition and lemma-restrict-direct-image-open; agent closed-test geometric coherence, returned proof steps 8–9."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-exc-closed-site-lift",
+  "sk-def-pe-wlocal",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-proetale-inverse-image-unit-section",
+  "def-pur-localized-ringed-site",
+  "def-sfb-right-derived-functor",
+  "def-sfb-closed-test-derived-exchange-maps",
+  "def-sfb-closed-fibre-module-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete maps of [def-sfb-closed-test-localized-model-data]. Apply [lem-sfb-closed-test-derived-comparison-normalization] for the pinned source and target isomorphisms and for invertibility of the two localization units. The inverse equations show sourceUnit and targetUnit invertible as inverses of the supplied isomorphisms.",
+   "uses": [
+    "def-sfb-closed-test-localized-model-data",
+    "lem-sfb-closed-test-derived-comparison-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-sc-kinjective-quasi-iso-comparison] to represent α into I′ and Qj inverse followed by h*α and Qj′ into J′. Injectivity gives the comparison homotopy. Additive evaluation carries it to a homotopy; naturality of unitAt proves the model-arrow square. Naturality of [def-sfb-right-derived-functor] and exact-pullback factors gives all comparison squares. Homotopic maps have equal Q-images and isomorphic α gives invertible evaluated transitions by conjugating with the derived units.",
+   "uses": [
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sfb-closed-test-comparison-test-naturality] for the five test-map squares, using the same global I, J and j on both tests. This proves TestCoherence independently of the already established resolution changes.",
+   "uses": [
+    "lem-sfb-closed-test-comparison-test-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-sfb-closed-test-localized-restriction-normalization], [lem-sfb-closed-test-derived-comparison-normalization] and [lem-sfb-closed-test-geometric-section-coherence] for the normalized localized model equation, specified comparison isomorphisms, and the full geometric localization statement including its mate unit/counit equations. Assemble these with the proved resolution-independence conjunction and the five test squares.",
+   "uses": [
+    "lem-sfb-closed-test-localized-restriction-normalization",
+    "lem-sfb-closed-test-derived-comparison-normalization",
+    "lem-sfb-closed-test-geometric-section-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-closed-test-localized-model-data",
+  "lem-sfb-closed-test-derived-comparison-normalization",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-closed-test-comparison-test-naturality",
+  "lem-sfb-closed-test-localized-restriction-normalization",
+  "lem-sfb-closed-test-geometric-section-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0D6G, derived.tex 070I: explicit representative homotopy and naturality proof plus independent geometric normalization subcalculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed pro etale K injective test section models and unit restriction chain maps are independent of resolutions and compatible with localization and maps of tests",
+   "results": "8 hits: StandardEtalePair.homEquiv, StandardEtalePresentation.mk.inj, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.hom_ext_iff, StandardEtalePair.hom_ext, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.homEquiv_symm_apply, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-22",
+   "verdict": "no match: Injective-resolution naturality for degree-indexed derived functors and generic localization lifts do not state the test, square and pro-etale localization coherence of these closed section models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"naturality\"",
+   "results": "10 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: Injective-resolution naturality for degree-indexed derived functors and generic localization lifts do not state the test, square and pro-etale localization coherence of these closed section models."
+  },
+  {
+   "tool": "grep",
+   "query": "(localiz|restrict).*(KInjective|rightDerived)|(KInjective|rightDerived).*(localiz|restrict)",
+   "results": "11 hits: Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Injective-resolution naturality for degree-indexed derived functors and generic localization lifts do not state the test, square and pro-etale localization coherence of these closed section models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of closed lifted pro etale test derived section models under morphisms of complexes tests isomorphisms of squares and pro etale base localization",
+   "results": "8 hits: CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh.congr_simp, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Localization.lift₂NatTrans_app_app, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-22",
+   "verdict": "no match: Injective-resolution naturality for degree-indexed derived functors and generic localization lifts do not state the test, square and pro-etale localization coherence of these closed section models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes between K injectives induce canonical transitions for closed test section models commuting with site localization units and counits",
+   "results": "8 hits: CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff, CategoryTheory.GrothendieckTopology.W.isLocallyInjective, CategoryTheory.Presheaf.isLocallyInjective_iff_of_fac, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, CategoryTheory.Presheaf.isLocallyInjective_toSheafify', CategoryTheory.Presheaf.IsLocallyInjective, CategoryTheory.GrothendieckTopology.instIsLocallyInjectiveToSheafify, CategoryTheory.Sheaf.IsLocallyInjective",
+   "date": "2026-10-22",
+   "verdict": "no match: Injective-resolution naturality for degree-indexed derived functors and generic localization lifts do not state the test, square and pro-etale localization coherence of these closed section models."
+  },
+  {
+   "tool": "grep",
+   "query": "closedTest|closed_test|closed.test.*coherence|localiz.*direct.image",
+   "results": "; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match for this item: returned results do not state normalized closed-test coherence under pro-etale base localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsKInjective, DerivedCategory",
+   "results": "loogle: unknown identifier 'IsKInjective'; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "invalid query: Loogle reported unknown identifier IsKInjective; not evidence of absence, corrected qualified query run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of restriction maps on derived sections for closed immersion on pro etale sites computed with K injective resolutions",
+   "results": "; 8 hits: TopCat.Presheaf.map_restrict, CategoryTheory.Sheaf.natTransΓRes_app, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.Scheme.Modules.restrict_map, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.Sheaf.natTransΓRes, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match for this item: returned results do not state normalized closed-test coherence under pro-etale base localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and independence of K injective derived section models on closed lifted pro etale test objects under site localization",
+   "results": "; 8 hits: CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_fac, CategoryTheory.Presheaf.IsLocallyInjective, CategoryTheory.Presheaf.isLocallyInjective_iff_of_fac, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, CategoryTheory.Presheaf.isLocallyInjective_of_injective, CategoryTheory.Presheaf.isLocallyInjective_comp_iff, CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf",
+   "date": "2026-10-23",
+   "verdict": "no match for this item: returned results do not state normalized closed-test coherence under pro-etale base localization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective.*(equiv|bijective)|toDerivedCategory.*(bijective|Equiv)|homEquiv",
+   "results": "; 19 hits: Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean",
+   "date": "2026-10-23",
+   "verdict": "match for the generic comparison ingredient only: CochainComplex.IsKInjective.Qh_map_bijective, already carried by lem-sc-kinjective-quasi-iso-comparison; no match for the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms into a K injective complex in the derived category are uniquely represented by chain maps up to homotopy",
+   "results": "; 8 hits: CochainComplex.IsKInjective.Qh_map_bijective, CochainComplex.IsKInjective.homotopyZero_def, CochainComplex.IsKInjective.rightOrthogonal, CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.IsKInjective.homotopyZero, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.IsKInjective",
+   "date": "2026-10-23",
+   "verdict": "match for the generic comparison ingredient only: CochainComplex.IsKInjective.Qh_map_bijective, already carried by lem-sc-kinjective-quasi-iso-comparison; no match for the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "12 hits: CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: generic K-injective definitions and homotopy facts only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-test-derived-exchange-model",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 8, 9: Resolution and geometric coherence of closed-test section models",
+   "via": [
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-test-localized-model-coherence",
+  "worker": "stage1",
+  "summary": "Split geometric coherence into explicit comparison-homotopy, unit naturality, presheaf restriction and ringed-slice mate calculations. Reused the existing Mathlib Hom-bijection leaf and all existing model/localization tools; no new nodes and no statement change. All citation statements were read. After a concurrent landing made the chain-mate sibling depend on this item, removed that sibling from the proof; test and base localization are now proved directly on the unit eta_h and its slice eta_a.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), via the recorded admissible-direct-image and integral closed-base-change chain: realizes returned closed-test proof steps 8--9 only (coherence, not geometric invertibility). The ancestor command reports None because the inherited created.item chain is broken; the existing nonempty place and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-unbounded-sections-localization",
+    "why": "Generic derived evaluation versus slice sections; the current unit has no general localized-site comparison."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies weakly etale scheme sites with slice sites, used as a generic site tool."
+   },
+   {
+    "node": "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "why": "Generic unbounded ringed-slice comparison with its counit and K-injective normalization; used for localization, not smooth base change."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic composition of ordinary unbounded ringed direct images with its explicit K-injective normalization."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of unit-compatible transport under isomorphic adjoints."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-unbounded-sections-localization",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-f104e2979",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-f104e2979 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps against the full statements of all 12 cited nodes (identical in the snapshot, live and side-live), and checked Stacks 070I, 0D6E, 0D6G, 04IF, 0D6F, 070Y and 09BL at their labels. No new nodes; the statement is unchanged; there is no repair note; the item is still unsplit in live, so not superseded. Step 2: unique homotopy classes u and w come from the Qh-bijection leaf, using only K-injective targets; h^* is exact, so h^*I need not be K-injective. Step 3: d r = r' c follows from evaluating that homotopy at T0 and using naturality of eta_h; marked elementary, correctly. Step 4: xi_E is invertible on every complex because evaluation at V preserves homology (2-out-of-3 in the naturality square); u_{F,V} is natural in F; the localization comparison is the degreewise identity. Step 5: eta_h and j are sheaf maps, so they commute with restriction along T'->T; the slice mate gives eta_a, with the unit equation obtained from the counit equation by the triangle identities. Step 6: transport is pinned by the unique unit-compatible conjugate isomorphism. Steps 7-8: only clause (1) of the weakly-etale localization lemma is used, Lambda_{Y'} = q^*Lambda_Y, beta is the section identity with r_X keeping K-injectives, and kappa is normalized on one representative; the new local lift is not identified with the old one. Edge cases checked: K=0, identities, ideal 0 (s=id, B=V), ideal A (everything empty), three resolutions. The cycle check is clean in all three graphs: the chain-mate back-edge was removed. The three citers are distinct consumers, not duplicates. The declared tool uses are generic site/adjunction statements; no SGA source is cited. Maintainer notes: blueprint.from.node is null, inherited from the parent chain (the ancestor tool returns None); lem-exc-closed-site-adjunction is cited without a tool_uses declaration, but it is the defining adjunction of the stmt_dep def-exc-closed-site-lift (advisory)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedTestLocalizedModelCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestLocalizedModelCoherence.closed_test_localized_model_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedTestLocalizedModelCoherence.closed_test_localized_model_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedTestLocalizedModelCoherence.lean",
+  "statement": "theorem closed_test_localized_model_coherence [IsAffine X] (V : (Spec (.of (A ⧸ 𝔞))).AffineProEt) [IsWContractibleRing Γ(V.left, ⊤)] [IsWContractibleRing Γ(((Scheme.AffineProEt.closedSiteLift A 𝔞).obj V).left, ⊤)] (K : DerivedCategory.Plus (Modules Λ X)) (I : CochainComplex (Modules Λ X) ℤ) [I.IsKInjective] (_e : DerivedCategory.Q.obj I ≅ K.obj) (J : CochainComplex (Modules Λ XZ) ℤ) [J.IsKInjective] (j : ((CondensedRing.upperStar Λ h).mapHomologicalComplex (.up ℤ)).obj I ⟶ J) [QuasiIso j] : IsIso (sourceUnit Λ A 𝔞 f V I) ∧ IsIso (targetUnit Λ A 𝔞 h fZ V I J j) ∧ IsIso (localizationUnit Λ (sourceTest A 𝔞 f V) I) ∧ IsIso (localizationUnit Λ (targetTest A 𝔞 fZ V) J) ∧ ResolutionCoherence Λ A 𝔞 f h fZ w V I J j ∧ TestCoherence Λ A 𝔞 f h fZ w V I J j ∧ LocalizedModelEquation Λ A 𝔞 f h fZ w V I J j ∧ NormalizedComparisons Λ A 𝔞 f h fZ V I J j ∧ GeometricCoherence Λ A 𝔞 f h fZ w V",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86f2dfdc1",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (dc481024392d). The Lean module is byte-identical to the returned head; the item node changes only stmt_deps (lem-sfb-proper-wcontractible-closed-fibre-rigidity -> def-sfb-closed-fibre-module-evaluation). New def node: existing:true on landed Sheaf.Paper.ProperWContractibleClosedFibreRigidity owning closedFibreModuleEvaluation, closedFibreModuleSectionsRestriction and closedFibreModuleDerivedRestriction (plain defs, no .choose). Statement verbatim in side-live and live; field set matches the landed existing:true precedent. TeX (forget+evaluate, unit then restriction along (phi,id_Z), rightDerivedPullback) matches the Lean; all cited ids in stmt_deps and present in live; no other owner. Full item re-read: clauses, normalizations pinned, edge cases (a=0, a=A, K=0, identities) and H5/H6/H8/H9 gates OK; item not superseded. No file changed, so no compile. Advisories: reused docstrings name the rigidity blueprint; inherited null blueprint.from.node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-5381c",
+  "group": "E2",
+  "result": "fix",
+  "landing": "20261023T230716-L-3468184",
+  "kind": "interface",
+  "note": "independent cc review: unchanged item theorem signature (clone vs delivery) and the 31 moved declarations (bodies identical, or proved equal via *_eq_original) against the change record; the 4 sorried conjuncts against the item statement and their nodes"
+ }
+}

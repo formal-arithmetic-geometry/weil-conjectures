@@ -1,0 +1,194 @@
+{
+ "id": "lem-sfb-artin-nonversal-thickening-tower",
+ "kind": "statement",
+ "title": "A tower of non-retractable first order deformations",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] in the universes of [def-weil-size-convention]. Let $\\mathcal F$ be fibred in groupoids on the big fppf site [def-pc-fppf-site]. A category fibred in groupoids assigns a groupoid $\\mathcal F(T)$ to each scheme $T$ over the base, with pullback functors and coherent identity and composition isomorphisms. Assume also that for every diagram of base algebras $A\\to B\\leftarrow B'$ with $B'\\to B$ surjective and square-zero kernel, restriction gives an equivalence $\\mathcal F(\\operatorname{Spec}(A\\times_B B'))\\simeq\\mathcal F(\\operatorname{Spec}A)\\times_{\\mathcal F(\\operatorname{Spec}B)}\\mathcal F(\\operatorname{Spec}B')$, where the right side retains the specified isomorphism over $B$ and arrows compatible with it. Let $U=\\operatorname{Spec}R_0$ be affine of finite type over $\\mathbf Z$, let $x\\in\\mathcal F(U)$, and let $(u_n)_{n\\geq1}$ be finite type points of $U$ such that no two distinct terms specialize to one another and $x$ is not versal at any $u_n$. A point $u\\in U$ is of finite type if $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type [def-weil-finite-type-morphism, def-weil-residue-field]. For $x\\in\\mathcal F(U)$, versality at $u$ means: for every surjection $A'\\to A$ of Artinian local base algebras with common residue field identified with $\\kappa(u)$ and nilpotent kernel, every map $\\operatorname{Spec}A\\to U$ reducing to $u$, and every $y'\\in\\mathcal F(\\operatorname{Spec}A')$ with a specified isomorphism $y'|_A\\cong x|_A$, there is a lift $\\operatorname{Spec}A'\\to U$ and an isomorphism $y'\\cong x|_{A'}$ inducing the specified one. Artinian means that descending chains of ideals stabilize; local means having a unique maximal ideal, and all maps respect the residue-field identifications. Then there exist a sequence of surjective ring maps $R_n\\to R_{n-1}$ and a compatible system $x_n\\in\\mathcal F(U_n)$, where $U_n=\\operatorname{Spec}R_n$ and $x_0=x$, with specified isomorphisms $x_n|_{U_{n-1}}\\cong x_{n-1}$. Each composite $R_n\\to R_0$ has square-zero kernel, so all $U_n$ have the same underlying space as $U$. For every $n\\geq1$ there is no open neighbourhood $W\\subseteq U_n$ of $u_n$, no morphism $r:W\\to U$ whose restriction to $U\\cap W$ is its open inclusion in $U$, and no isomorphism $\\alpha:x_n|_W\\cong r^*x$ whose restriction to $U\\cap W$ is the inverse of the specified reduction isomorphism $r^*x|_{U\\cap W}\\cong x_n|_{U\\cap W}$. Equivalently, there is no cartesian arrow $x_n|_W\\to x$ whose composition with $x|_{U\\cap W}\\to x_n|_W$ is the canonical restriction arrow. The maps $U\\to U_n$ are first order thickenings [def-sbc-first-order-thickening].",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0G2S (lemma-infinite-sequence-pre), specialized to Spec Z; conditions (1) and (3), with the affine spectra used in the proof of Tag 0CXU. The residue-field kernel clause (2) is not needed here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-sbc-first-order-thickening",
+  "def-sfb-artin-criterion-fibred-vocabulary",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "For each $n\\geq1$ apply [lem-sfb-artin-single-point-obstruction] with $\\Lambda=\\mathbf Z$, the given $U,x$, and $u=u_n$. The integers are Noetherian since every ideal is principal, and the remaining hypotheses are precisely the finite-type, nonversality and square-zero gluing hypotheses of the item. Choose a surjection $q_n:S_n\\to R_0$ with square-zero kernel $I_n\\cong\\kappa(u_n)$, an object $y_n\\in\\mathcal F(T_n)$ for $T_n=\\operatorname{Spec}S_n$, and its specified reduction isomorphism to $x$. The cited statement forbids, on every neighbourhood of $u_n$ in $T_n$, an arrow $y_n\\to x$ whose composite with $x\\to y_n$ is the canonical restriction arrow.",
+   "uses": [
+    "lem-sfb-artin-single-point-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2S (lemma-infinite-sequence-pre), proof, using Tag 0G2J (lemma-single-point); explicit affine fibre-product construction."
+   }
+  },
+  {
+   "text": "Set $R_0$ as given and, for $n\\geq1$, define the commutative ring $R_n=\\{(s_1,\\ldots,s_n)\\in\\prod_{i=1}^n S_i:q_1(s_1)=\\cdots=q_n(s_n)\\}$ with coordinatewise operations; its map to $R_0$ is the common value. Forgetting the last coordinate gives $R_n\\to R_{n-1}$ (for $n=1$ use $q_1$). This map is surjective: lift the common value to $S_n$. The map to $R_0$ is likewise surjective by choosing finitely many lifts. Its kernel is $\\prod_{i=1}^n I_i$, whose product is zero because multiplication is coordinatewise and $I_i^2=0$. Thus $U=\\operatorname{Spec}R_0\\to U_n=\\operatorname{Spec}R_n$ is a first order thickening by [def-sbc-first-order-thickening] and the affine description of closed immersions in [def-weil-closed-immersion]. In particular all these schemes have the same underlying space: every prime contains the square-zero kernel. The coordinate projections induce maps $T_i\\to U_n$ for $1\\leq i\\leq n$, whose composite with $U\\to T_i$ is $U\\to U_n$, by the functoriality of [def-weil-affine-spectrum].",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2S (lemma-infinite-sequence-pre), proof, using Tag 0G2J (lemma-single-point); explicit affine fibre-product construction."
+   }
+  },
+  {
+   "text": "Take $x_0=x$ and $x_1=y_1$. For the induction step, $R_n=R_{n-1}\\times_{R_0}S_n$, and $S_n\\to R_0$ is surjective with square-zero kernel. Apply the assumed restriction equivalence to the pair $(x_{n-1},y_n)$ with their specified identification over $U$. Essential surjectivity gives $x_n\\in\\mathcal F(U_n)$ and restriction isomorphisms to both objects whose reductions agree with that identification. Choose these at each stage. Composing the transition isomorphisms gives compatible reductions to $x$, and the isomorphism $x_n|_{T_n}\\cong y_n$ respects the chosen reduction to $x$. This uses only the gluing equivalence explicitly assumed in the item and its groupoid of pairs with a specified isomorphism; there is no appeal to stack descent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2S (lemma-infinite-sequence-pre), proof, using Tag 0G2J (lemma-single-point); explicit affine fibre-product construction."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and suppose an open neighbourhood $W\\subset U_n$ of $u_n$ admitted the forbidden arrow $x_n|_W\\to x$. Let $h_n:T_n\\to U_n$ be the map induced by the $n$th coordinate projection. Its restriction to $U$ is the identity, so $V=h_n^{-1}(W)$ is an open neighbourhood of $u_n$ in $T_n$ and $U\\cap V=U\\cap W$ under the common-space identifications. Pull back the arrow along $V\\to W$ and compose with $y_n|_V\\cong h_n^*x_n|_V$, using step 3. On $U\\cap V$ its composite with $x\\to y_n$ is the pullback of the assumed canonical composite for $x\\to x_n$, hence is the canonical restriction arrow to $x$. This contradicts the prohibition furnished by [lem-sfb-artin-single-point-obstruction]. In the formulation with $r$ and $\\alpha$, the pulled-back map is $r\\circ h_n|_V$, and the reduction equality for the pulled-back isomorphism is the same equality. This proves the required non-retraction property at every stage. The argument works for the stated antichain of points; the stronger residue-field transition-kernel clause of Tag 0G2S is not part of this item and is not needed.",
+   "uses": [
+    "lem-sfb-artin-single-point-obstruction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2S (lemma-infinite-sequence-pre), proof, using Tag 0G2J (lemma-single-point); explicit affine fibre-product construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-artin-single-point-obstruction",
+  "def-sbc-first-order-thickening",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0G2S (lemma-infinite-sequence-pre), proof, using Tag 0G2J (lemma-single-point); explicit affine fibre-product construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Nonversal points of a category fibred in groupoids produce a sequence of square zero thickenings without local retractions",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Profinite.NobelingProof.CC_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n      {f : LocallyConstant ↑C ℤ},\\n      (Profinite.NobelingProof.Linea\", \"doc\": \"In Nobeling's profinite construction, for any locally constant $\\\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\\\text{Linear}_{C\\\\to C'}(f) = 0$ (where $\\\\text{Linear}_{C\\\\to C'}$ denotes the $\\\\mathbb\"}\n  {\"name\": \"retractionOfSectionOfKerSqZero\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                [inst_5 : Algebra R S] →\\n                  [inst_6 : IsSc\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings. Let $f: P \\\\to S$ be an $R$-algebra homomorphism with kernel $I = \\\\ker(f)$, and assume that $I$ is a square-zero ideal (i.e., $I^2 = \\\\{0\\\\}$). Suppose there e\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"TopCat.partialSections.nonempty\", \"module\": \"Mathlib/Topology/Category/TopCat/Limits/Konig\", \"type\": \"∀ {J : Type u} [inst : CategoryTheory.SmallCategory J] (F : CategoryTheory.Functor J TopCat)\\n  [CategoryTheory.IsCofilteredOrEmpty J] [h : ∀ (j : J), Nonempty ↑(F.obj j)] {G : Finset J}\\n  (H : Finset (TopCat.FiniteDiagramArrow✝ G)), (TopCat.partialSections F H).Nonempty\", \"doc\": \"Let $\\\\mathcal{J}$ be a small category that is cofiltered or empty, and let $F : \\\\mathcal{J} \\\\to \\\\mathbf{Top}$ be a diagram of topological spaces where each object $j \\\\in \\\\mathcal{J}$ satisfies $F(j) \\\\\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"ContMDiffFiberwiseLinear.locality_aux₁\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/FiberwiseLinear\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F : Type u_3} [inst : TopologicalSpace B] [inst_1 : NontriviallyNormedField 𝕜]\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace 𝕜 F] {EB : Type u_4} [inst_4 : NormedAddCommGroup EB]\\n  [inst_5 : NormedSpace 𝕜 EB] {HB : Type u_5} [inst_6 : TopologicalSpace HB] [\", \"doc\": \"Given a C^n-differentiable open partial homeomorphism $ e $ on $ B \\\\times F $, if for every point $ p \\\\in \\\\text{source}(e) $ there exists a neighborhood $ s $ containing $ p $ and a continuous family \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (s : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover) [Finite 𝒰.I₀],\\n  (∀ (i : 𝒰.I₀), IsNilpotent ((CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) s)) →\\n    IsNilpotent s\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf of $ X $ over $ U $. If there exists a finite open cover $ \\\\mathcal{U} $ of $ X $ such that for every o\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic square-zero lifting and scheme gluing do not construct nonversality witnesses in a fibred groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"thickening\"",
+   "sub": "",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Disjoint.exists_uniform_thickening_of_basis\", \"module\": \"Mathlib.Topology.UniformSpace.Compact\", \"type\": \" {α : Type ua} {ι : Sort u_1} [UniformSpace α] {p : ι → Prop} {s : ι → Set (α × α)} (hU : (uniformity α).HasBasis p s) {A B : Set α} (hA : IsCompact A) (hB : IsClosed B) (h : Disjoint A B) : ∃ i, p i ∧ Disjoint (⋃ x ∈ A, UniformSpace.ball x (s i)) (⋃ x ∈ B, UniformSpace.ball x (s i))\", \"doc\": \"\"}\n  {\"name\": \"Disjoint.exists_uniform_thickening\", \"module\": \"Mathlib.Topology.UniformSpace.Compact\", \"type\": \" {α : Type ua} [UniformSpace α] {A B : Set α} (hA : IsCompact A) (hB : IsClosed B) (h : Disjoint A B) : ∃ V ∈ uniformity α, Disjoint (⋃ x ∈ A, UniformSpace.ball x V) (⋃ x ∈ B, UniformSpace.ball x V)\", \"doc\": \"\"}\n  {\"name\": \"Metric.cthickening\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] (δ : ℝ) (E : Set α) : Set α\", \"doc\": \"The closed `δ`-thickening `Metric.cthickening δ E` of a subset `E` in a pseudo emetric space\\nconsists of those points that are at infimum distance at most `δ` from `E`.\"}\n  {\"name\": \"Metric.thickening\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] (δ : ℝ) (E : Set α) : Set α\", \"doc\": \"The (open) `δ`-thickening `Metric.thickening δ E` of a subset `E` in a pseudo emetric space\\nconsists of those points that are at distance less than `δ` from some point of `E`.\"}\n  {\"name\": \"Metric.self_subset_cthickening\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] {δ : ℝ} (E : Set α) : E ⊆ Metric.cthickening δ E\", \"doc\": \"A set is contained in its own closed thickening.\"}\n  {\"name\": \"Metric.isClosed_cthickening\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] {δ : ℝ} {E : Set α} : IsClosed (Metric.cthickening δ E)\", \"doc\": \"The closed thickening is a closed set.\"}\n  {\"name\": \"Metric.isOpen_thickening\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] {δ : ℝ} {E : Set α} : IsOpen (Metric.thickening δ E)\", \"doc\": \"The (open) thickening is an open set.\"}\n  {\"name\": \"Metric.cthickening_empty\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] (δ : ℝ) : Metric.cthickening δ ∅ = ∅\", \"doc\": \"The closed thickening of the empty set is empty.\"}\n  {\"name\": \"Metric.thickening_empty\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] (δ : ℝ) : Metric.thickening δ ∅ = ∅\", \"doc\": \"The (open) thickening of the empty set is empty.\"}\n  {\"name\": \"Metric.thickening_subset_cthickening\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] (δ : ℝ) (E : Set α) : Metric.thickening δ E ⊆ Metric.cthickening δ E\", \"doc\": \"The open thickening `Metric.thickening δ E` is contained in the closed thickening\\n`Metric.cthickening δ E` with the same radius.\"}\n  {\"name\": \"Metric.closure_subset_cthickening\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u} [PseudoEMetricSpace α] (δ : ℝ) (E : Set α) : closure E ⊆ Metric.cthickening δ E\", \"doc\": \"The closed thickening of a set contains the closure of the set.\"}\n  {\"name\": \"Bornology.IsBounded.cthickening\", \"module\": \"Mathlib.Topology.MetricSpace.Thickening\", \"type\": \" {α : Type u_2} [PseudoMetricSpace α] {δ : ℝ} {E : Set α} (h : Bornology.IsBounded E) : Bornology.IsBounded (Metric.cthickening δ E)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic square-zero lifting and scheme gluing do not construct nonversality witnesses in a fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "nonversal|RimSchlessinger|squareZeroThickening",
+   "sub": "",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic square-zero lifting and scheme gluing do not construct nonversality witnesses in a fibred groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rim Schlessinger gluing of infinitesimal deformations at pairwise incomparable points",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue locally ringed spaces, typically involving open covers and compatible transition maps between local pieces.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{motive : AlgebraicGeometry.LocallyRingedSpace.GlueData → Sort u} →\\n  (t : AlgebraicGeometry.LocallyRingedSpace.GlueData) →\\n    ((toGlueData : CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace) →\\n        (f_open : ∀ (i j : toGlueData.J), AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersio\", \"doc\": \"A case analysis principle for gluing data structures of locally ringed spaces, which allows defining functions on such gluing data by specifying their behavior on the underlying category-theoretic glu\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"(x : 𝖣.glued) : ∃ (i : D.J) (y : D.U i), (𝖣.ι i).base y = x\", \"doc\": \"For any point $x$ in the glued locally ringed space $D.\\\\text{glued}$, there exists an index $i$ in the indexing category $D.J$ and a point $y$ in the open set $D.U(i)$ such that the underlying continu\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"Sort u → AlgebraicGeometry.LocallyRingedSpace.GlueData → AlgebraicGeometry.LocallyRingedSpace.GlueData → Sort u\", \"doc\": \"A case analysis principle for gluing data structures of locally ringed spaces, which allows defining functions on such gluing data by specifying their behavior on the underlying category-theoretic glu\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{P : Sort u} →\\n  {t t' : AlgebraicGeometry.LocallyRingedSpace.GlueData} →\\n    t = t' → AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType P t t'\", \"doc\": \"An inductive type representing the data required to glue locally ringed spaces, typically involving open covers and compatible transition maps between local pieces.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": IsIso 𝒰.fromGlued\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Directed\", \"type\": \"{S : Scheme.{u}} {X : Over S} (𝒰 : X.left.OpenCover) [Category* 𝒰.I₀] [𝒰.LocallyDirected] {Y : Over S}\\n  (g : ∀ i, 𝒰.X i ⟶ Y.left) (h : ∀ {i j : 𝒰.I₀} (hij : i ⟶ j), 𝒰.trans hij ≫ g j = g i)\\n  (w : ∀ i, g i ≫ Y.hom = 𝒰.f i ≫ X.hom) : X ⟶ Y\", \"doc\": \"Given a scheme $X$ with an open cover $\\\\mathcal{U}$ equipped with a locally directed structure, and a family of morphisms $g_i: \\\\mathcal{U}.X(i) \\\\to Y$ compatible with the transition maps $\\\\mathcal{U}\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic square-zero lifting and scheme gluing do not construct nonversality witnesses in a fibred groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal nonversality witnesses at countably many distinct points glue to successive first order extensions",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FirstOrder.Language.Theory.isSatisfiable_union_distinctConstantsTheory_of_infinite\", \"module\": \"Mathlib/ModelTheory/Satisfiability\", \"type\": \"∀ {L : FirstOrder.Language} {α : Type w} (T : L.Theory) (s : Set α) (M : Type w') [inst : L.Structure M] [M ⊨ T]\\n  [Infinite M], ((L.lhomWithConstants α).onTheory T ∪ L.distinctConstantsTheory s).IsSatisfiable\", \"doc\": \"If $ T $ is a first-order theory in language $ \\\\mathcal{L} $ with an infinite model $ M $, then the union of the $ \\\\mathcal{L} $-theory $ T $ expanded by constants from a set $ \\\\alpha $ (via language \"}\n  {\"name\": \"FirstOrder.Language.age.jointEmbedding\", \"module\": \"Mathlib/ModelTheory/Fraisse\", \"type\": \"∀ {L : FirstOrder.Language} (M : Type w) [inst : L.Structure M], FirstOrder.Language.JointEmbedding (L.age M)\", \"doc\": \"For any first-order language $L$ and $L$-structure $M$, the age of $M$ (the set of all finitely generated $L$-structures embeddable into $M$) satisfies the joint embedding property. This means that fo\"}\n  {\"name\": \"FirstOrder.Language.IsFraisseLimit.isExtensionPair\", \"module\": \"Mathlib/ModelTheory/Fraisse\", \"type\": \"∀ {L : FirstOrder.Language} {K : Set (CategoryTheory.Bundled L.Structure)} {M : Type w} [inst : L.Structure M]\\n  {N : Type w} [inst_1 : L.Structure N] [inst_2 : Countable ((l : ℕ) × L.Functions l)] [inst_3 : Countable M]\\n  [inst_4 : Countable N],\\n  FirstOrder.Language.IsFraisseLimit K M → FirstOrder\", \"doc\": \"If $M$ is a Fraïssé limit of a first-order language $\\\\mathcal{L}$ with countable function symbols, then for any $\\\\mathcal{L}$-structure $N$, the pair $(M, N)$ satisfies the extension property: every f\"}\n  {\"name\": \"FirstOrder.Language.Amalgamation\", \"module\": \"Mathlib/ModelTheory/Fraisse\", \"type\": \"{L : FirstOrder.Language} → Set (CategoryTheory.Bundled L.Structure) → Prop\", \"doc\": \"For any three L-structures $M, N, P$ in a class $K$ with structure-preserving embeddings $M \\\\to N$ and $M \\\\to P$, there exists an L-structure $Q$ in $K$ together with embeddings $N \\\\to Q$ and $P \\\\to Q\"}\n  {\"name\": \"FirstOrder.Language.IsExtensionPair.definedAtRight\", \"module\": \"Mathlib/ModelTheory/PartialEquiv\", \"type\": \"{L : FirstOrder.Language} →\\n  {M : Type w} →\\n    {N : Type w'} →\\n      [inst : L.Structure M] → [inst_1 : L.Structure N] → L.IsExtensionPair N M → N → Order.Cofinal (L.FGEquiv M N)\", \"doc\": \"Given a first-order language $\\\\mathcal{L}$ and $\\\\mathcal{L}$-structures $M$ and $N$ forming an extension pair, for any element $n \\\\in N$, the set of finitely generated partial equivalences $f : M \\\\rig\"}\n  {\"name\": \"FirstOrder.Language.embedding_from_cg\", \"module\": \"Mathlib/ModelTheory/PartialEquiv\", \"type\": \"∀ {L : FirstOrder.Language} {M : Type w} {N : Type w'} [inst : L.Structure M] [inst_1 : L.Structure N],\\n  FirstOrder.Language.Structure.CG L M → ∀ (g : L.FGEquiv M N), L.IsExtensionPair M N → ∃ f, ↑g ≤ f.toPartialEquiv\", \"doc\": \"Given a first-order language $\\\\mathcal{L}$, an $\\\\mathcal{L}$-structure $M$ satisfying the finite generation closure property, a finitely generated partial equivalence $g : M \\to N$, and the $\\\\mathcal{L\"}\n  {\"name\": \"FirstOrder.Language.IsFraisse.amalgamation\", \"module\": \"Mathlib/ModelTheory/Fraisse\", \"type\": \"∀ {L : FirstOrder.Language} {K : Set (CategoryTheory.Bundled L.Structure)} [self : FirstOrder.Language.IsFraisse K],\\n  FirstOrder.Language.Amalgamation K\", \"doc\": \"If $ K $ is a Fraïssé class of $ L $-structures, then $ K $ satisfies the amalgamation property: for any three structures $ M, N, P \\\\in K $ with embeddings $ M \\\\to N $ and $ M \\\\to P $, there exists a \"}\n  {\"name\": \"FirstOrder.Language.Theory.isSatisfiable_union_distinctConstantsTheory_of_card_le\", \"module\": \"Mathlib/ModelTheory/Satisfiability\", \"type\": \"∀ {L : FirstOrder.Language} {α : Type w} (T : L.Theory) (s : Set α) (M : Type w') [Nonempty M] [inst : L.Structure M]\\n  [M ⊨ T],\\n  Cardinal.lift.{w', w} (Cardinal.mk ↑s) ≤ Cardinal.lift.{w, w'} (Cardinal.mk M) →\\n    ((L.lhomWithConstants α).onTheory T ∪ L.distinctConstantsTheory s).IsSatisfiable\", \"doc\": \"For a first-order language $ L $, theory $ T $, and set $ s $, if there exists a non-empty $ L $-structure $ M $ modeling $ T $ such that the cardinality of $ s $ is less than or equal to the cardinal\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic square-zero lifting and scheme gluing do not construct nonversality witnesses in a fibred groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-square-zero-effectivity-openness",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, second paragraph: construct the sequence x to x_1 to x_2 by lemma-infinite-sequence-pre, retaining its local non-retraction property (3).",
+   "via": [
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-nonversal-thickening-tower",
+  "worker": "stage1",
+  "summary": "Preserved the statement and statement dependencies. Read Stacks 0G2S and 0G2J. Reused the concurrently available single-point obstruction node rather than duplicating it. Constructed the successive affine fibre products explicitly, checked surjectivity and the square-zero composite kernel coordinatewise, glued with the assumed equivalence, and proved the reduction-compatible non-retraction by pulling a hypothetical retraction back to T_n. No new nodes are needed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, second paragraph: construct the sequence x to x_1 to x_2 by lemma-infinite-sequence-pre, retaining its local non-retraction property (3). Realizes the supporting 0G2S tower construction through 0G2J and the affine pushout construction; no unit or chapter change. The current latest blueprint direct-image proof was read; the inherited ancestor is null as confirmed by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-702c2119d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-702c2119d (reviewer sub-agent of L); spot-checked: Ordinary first split, no re-split note. Statement and stmt_deps are identical to the live node, which is unsplit, and there are no new nodes. Read Stacks artin.tex 0G2S (lines 2958-3037), 0G2J and the 0CXU use. The item specializes 0G2S to Spec Z with affine U_n and keeps (1) and (3) plus composite square-zero kernels; omitting clause (2) is explicit, and the parent effectivity-openness steps 3 and 8 use only what is stated. Step 1: the statement of lem-sfb-artin-single-point-obstruction (on base, same unit) matches hypothesis for hypothesis, with verbatim gluing and versality definitions; Z is Noetherian. Step 2: R_n=R_{n-1}x_{R_0}S_n is surjective by lifting, the kernel prod I_i has square zero, and the first-order thickening follows from def-sbc-first-order-thickening and def-weil-closed-immersion. Step 3: the assumed gluing equivalence with B'=S_n gives x_n with reduction-compatible isomorphisms. Step 4: pulling a hypothetical retraction back along h_n:T_n->U_n gives V=h_n^{-1}(W), with V∩U=W∩U, and a forbidden arrow from y_n, contradicting the single-point node. This is valid and replaces Stacks' 'details omitted' without needing to shrink. proof_deps equals the union of uses, there is no SGA, no duplicates turned up in an rg -L search of the DAG for these tags, and no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinNonversalThickeningTower",
+  "declaration": "AlgebraicGeometry.ArtinCriterion.exists_nonversalThickeningTower",
+  "declarations": [
+   "AlgebraicGeometry.ArtinCriterion.HasNoLocalMarkedRetraction",
+   "AlgebraicGeometry.ArtinCriterion.NonversalThickeningTower",
+   "AlgebraicGeometry.ArtinCriterion.exists_nonversalThickeningTower"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinNonversalThickeningTower.lean",
+  "statement": "theorem exists_nonversalThickeningTower (F : BasedCategory.{v, w} (Over Base.{u})) (hFibred : IsFibredInGroupoids F) (hGluing : ∀ (A B B' : CommRingCat.{u}) (f : A ⟶ B) (g : B' ⟶ B), Function.Surjective g.hom → RingHom.ker g.hom ^ 2 = ⊥ → ∀ (P : Over Base.{u}) (i : integerScheme (Spec A) ⟶ P) (j : integerScheme (Spec B') ⟶ P), IsPushout (overMap (Spec.map f)) (overMap (Spec.map g)) i j → ∀ (z : Object F (integerScheme (Spec B))) (a : Object F (integerScheme (Spec A))) (b : Object F (integerScheme (Spec B'))) (az : Lift (overMap (Spec.map f)) z a) (bz : Lift (overMap (Spec.map g)) z b), ∃ (c : Object F P) (ac : Lift i a c) (bc : Lift j b c), IsPushout az.val bz.val ac.val bc.val) (R₀ : CommRingCat.{u}) (hFiniteType : LocallyOfFiniteType (specULiftZIsTerminal.from (Spec R₀))) (x : Object F (integerScheme (Spec R₀))) (points : ℕ → Spec R₀) (hPoints : ∀ n : ℕ, FiniteTypePoint (Spec R₀) (points n)) (hAntichain : ∀ n m : ℕ, n ≠ m → ¬ Specializes (points n) (points m)) (hNonversal : ∀ n : ℕ, ¬ IsVersalAt F (Spec R₀) x (points n)) : Nonempty (NonversalThickeningTower F R₀ x points)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned immutable head 466bcf138cf7: the plain ArtinCriterion Base, integerScheme, overMap, Object, Lift, FiniteTypePoint and IsVersalAt definitions are owned by the new definition node def-sfb-artin-criterion-fibred-vocabulary, cited instead of the criterion theorem. Retains def-sfb-stable-pointed-moduli-groupoids. Positive stages use n for paper index n+1; the zero stage is literally x. Removed unused Sites.Fpqc, Sites.Over and ClosedImmersion imports. No mathematical signature change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98b4a3279",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-delivery of 466bcf138cf7 (RETURN H2/H3(3)). Repaired by the new existing:true def node def-sfb-artin-criterion-fibred-vocabulary on unchanged Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion (Base, integerScheme, overMap, Object, Lift, FiniteTypePoint, IsVersalAt). Its TeX matches the Lean defs clause by clause; source tags 07XF/003T/02J1 checked; H12 fields OK; check_existing and check_record clean; no landed def node owns these decls (owner map over live dag); parallel Q05/Q30 versality defs are other modules and postdate this one. Item: only lean+stmt_deps changed vs live; the theorem stmt_dep is gone and landed def-sfb-stable-pointed-moduli-groupoids is kept; statement verbatim. Lean byte-identical apart from 3 removed unused imports (advisory H9). Substance re-checked against Stacks 0G2S and the node: gluing hypothesis over all rings, antichain, nonversality, surjective transitions, square-zero composite kernels, first-order thickenings, coherent markings with zero stage x, no-retraction = 0G2S(3); edge cases, universes, docstrings, sorry-only OK. No compile run (no file changed); worker reports a clean compile and deliver2 --no-push OK."
+ }
+}

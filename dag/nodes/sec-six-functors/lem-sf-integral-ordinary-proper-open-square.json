@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-integral-ordinary-proper-open-square",
+ "kind": "lemma",
+ "title": "Ordinary coefficient square for the proper/open gamma",
+ "statement": "Fix l,E,o,a and ordinary inputs K for expressions over a scheme B [def-sf-integral-realization-assembly-data, def-sf-integral-system-expression-domain]. In a commutative square k:U→V, r:U→W, p:V→Z, i:W→Z over B, assume k and i are quasi-compact open immersions and r and p proper. For any child expression e on U, rho_(J_i S_r e) followed by the specified system gamma equals R of the independently specified ordinary ringed gamma followed by rho_(S_p J_k e). Here rho is constructed by ordinary coefficient recursion [def-sf-integral-ordinary-expression-reduction]. No realization comparison, completion map, inverse structural generator, exchange or projection case occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction; coherence inherited from individual maps."
+ },
+ "stmt_deps": [
+  "def-sf-integral-realization-assembly-data",
+  "def-sf-integral-ordinary-expression-reduction"
+ ],
+ "proof": [
+  {
+   "text": "expand gamma as the open adjunct of inverse lambda. The canonical bridge identifies the system lambda with the cartesian open-base-change, clopen lift and proper-composition factors. The ringed lambda has exactly the independent ringed factors. Their coefficient squares follow from pull-composition, open base change, clopen adjunction normalization and proper composition. Paste, invert the resulting lambda square, and transpose under the actual open adjunction using its counit square. Naturality inserts the coefficient map of e. The computation is in whole systems and ordinary ringed categories; no completion or expression comparison is used.",
+   "uses": [
+    "lem-sf-integral-ordinary-canonical-iso-square",
+    "lem-sf-tensor-adjunction-reduction-squares",
+    "lem-sf-proper-open-lambda-reduction-square",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-ordinary-canonical-iso-square",
+  "lem-sf-tensor-adjunction-reduction-squares",
+  "lem-sf-proper-open-lambda-reduction-square",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Explicit ordinary coefficient recursion and its primitive generator diagrams; refinement of lem-sf-integral-basic-generator-square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient reduction functor intertwines associators, adjunction units counits, exchange projection maps and their composites; transpose recursive coefficient maps under an adjunction",
+   "results": "conjugateEquiv_associator_hom; mateEquiv_apply; mateEquiv_counit and its inverse; iterated_mateEquiv_conjugateEquiv. No project expression coefficient theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the general adjunction API and the project normalized primitive maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "mateEquiv, mateEquiv_counit, unit_mateEquiv, mateEquiv_vcomp/hcomp, conjugateEquiv_mateEquiv_vcomp, iterated_mateEquiv_conjugateEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate calculus, not the project-specific coefficient diagrams."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*(Square|Reduction)|transpose_substitution; homEquiv_naturality_right_square_iff|iso.*naturality",
+   "results": "Mathlib generic adjunction naturality and project private ordinaryR/tensorOrdinaryR/pushOrdinaryR in TensorAdjunctionReductionSquares. Those private word APIs require GeneratorReduction.Operations, including unitReduction/unitNormalization not supplied by AmbientModels. No independent coefficient recursion for Expression.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary coefficient maps on Expression and transpose with the actual adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralBasicGeneratorSquare",
+  "date": "2026-10-27",
+  "group": "J7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction; coherence inherited from individual maps.",
+   "via": [
+    "lem-sf-integral-basic-generator-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOrdinaryProperOpenSquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralOrdinaryProperOpenSquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryProperOpenSquare",
+  "statement": "theorem ordinaryProperOpenSquare\n    (o : Operations l E) (a : AmbientModels l E o)\n    {B : Scheme.{u}} {I : Type u} {X : I → Over B}\n    (K : ∀ i, Integral l E (X i).left)\n    {U V W Z : Over B} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n    [hk : IsOpenImmersion k.left] [hi : IsOpenImmersion i.left]\n    [qk : QuasiCompact k.left] [qi : QuasiCompact i.left]\n    [hr : IsProper r.left] [hp : IsProper p.left]\n    (w : k.left ≫ p.left = r.left ≫ i.left) (e : Expression B I X U) :\n    (Expression.shriek i hi qi (.push r hr e)).ordinaryReduction l E o a K ≫\n      (a.properOpen.gamma k.left r.left p.left i.left w).app\n        (e.systemObj l E o ((inputReduction l E X).obj K)) =\n    (calculus l E Z.left).reduction.map\n        ((a.ringedProperOpen.gamma k.left r.left p.left i.left w).app\n          (e.ringedObj l E a.ringedModels K)) ≫\n      (Expression.push p hp (.shriek k hk qk e)).ordinaryReduction l E o a K",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T235911-L-1467113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T235911-L-1467113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

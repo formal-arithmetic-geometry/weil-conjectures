@@ -1,0 +1,193 @@
+{
+ "id": "lem-sfb-field-nonquasifinite-specialization",
+ "kind": "statement",
+ "title": "Failure of local quasi-finiteness over a field produces a specialization",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a scheme [def-pc-scheme], and let $f:X\\to\\operatorname{Spec}k$ be locally of finite type [def-weil-affine-spectrum, def-weil-finite-type-morphism]. If $f$ is not locally quasi-finite [pqf-def-quasifinite], there exist distinct points $x,x^{\\prime}\\in X$ with $x^{\\prime}\\in\\overline{\\{x\\}}$. Here $\\overline{\\{x\\}}$ is closure in the Zariski topology, so this says that $x\\leadsto x^{\\prime}$ is a nontrivial specialization. No quasi-compactness or separation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TH (lemma-quasi-finite-at-point-characterize), contrapositive of (3) implies (1) over a field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Argue contrapositively. Suppose there are no distinct points $a,b\\in X$ with $b\\in\\overline{\\{a\\}}$. For every $a$, the inclusion $\\{a\\}\\subseteq\\overline{\\{a\\}}$ and the assumption give $\\overline{\\{a\\}}=\\{a\\}$, so every singleton is closed. Moreover, for any $x$ and $a$, the condition $x\\in\\overline{\\{a\\}}$ implies $a=x$. Thus every point is closed and has no distinct generalization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TH (lemma-quasi-finite-at-point-characterize), implication (3) to (1), contraposed over a field."
+   }
+  },
+  {
+   "text": "Let $s$ be the unique point of $\\operatorname{Spec}k$ [def-weil-affine-spectrum]. By [def-pc-scheme-fibre], the projection $X_s\\to X$ is a homeomorphism onto $f^{-1}(\\{s\\})=X$. Fix any $x\\in X$ and view it in $X_s$ using this homeomorphism. Step 1 says that $\\{x\\}$ is closed in $X_s$ and that any $a\\in X_s$ with $x\\in\\overline{\\{a\\}}$ equals $x$. Apply [lem-sfb-closed-fibre-point-quasifinite-criterion] to $g=f$, $Y=X$, $T=\\operatorname{Spec}k$ and $y=x$. Its locally-of-finite-type hypothesis is the hypothesis on $f$; its two fibre hypotheses were just checked. It follows that $f$ is quasi-finite at $x$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-scheme-fibre",
+    "lem-sfb-closed-fibre-point-quasifinite-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TH (lemma-quasi-finite-at-point-characterize), implication (3) to (1), contraposed over a field."
+   }
+  },
+  {
+   "text": "Since $x$ in step 2 was arbitrary, $f$ is quasi-finite at every point of $X$. By the definition of locally quasi-finite in [pqf-def-quasifinite], $f$ is locally quasi-finite. This proves the contrapositive and hence the assertion. If $X$ is empty, the same universal statement is vacuous, so the antecedent of the original implication cannot hold.",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TD (definition-quasi-finite), definition of locally quasi-finite; Tag 01TH (lemma-quasi-finite-at-point-characterize), (3) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "lem-sfb-closed-fibre-point-quasifinite-criterion",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TH (lemma-quasi-finite-at-point-characterize), implication (3) to (1), contraposed over a field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scheme locally of finite type over a field which is not locally quasi finite has a nontrivial specialization with strictly decreasing residue transcendence degree",
+   "results": "Actual hits: AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, IsLocalRing.specializes_closedPoint, Polynomial.not_quasiFiniteAt, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a scheme locally of finite type over a field has no distinct comparable points then its structure morphism is locally quasi finite",
+   "results": "Actual hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.LocallyOfFiniteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme locally of finite type over a field with no nontrivial specialization is locally quasi finite",
+   "results": "Actual hits: AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite, Algebra.QuasiFinite.casesOn, AlgebraicGeometry.LocallyQuasiFinite.casesOn, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.locallyQuasiFinite_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"Specializes\"",
+   "results": "Actual hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "transcendence|trdeg|specializ.*degree|degree.*specializ",
+   "results": "Actual hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme locally of finite type over a field which is not locally quasi finite has distinct points specializing to each other",
+   "results": "Actual command log: {\"t\": \"2026-10-23T11:42:32Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme locally of finite type over a field which is not locally quasi finite has distinct points specializing to each other\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\"], \"digest\": \"4671d876f9760060\"}. Read returned signatures: the hits give local quasi-finiteness definitions, fibre/Jacobson properties, immersion/finite implications, or closedness versus a residue-field morphism being locally of finite type. None gives the requested existence of a distinct specialization. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFinite|quasiFinite|Specializes|specializes",
+   "results": "Actual command log: {\"t\": \"2026-10-23T11:43:07Z\", \"tool\": \"grep\", \"query\": \"QuasiFinite|quasiFinite|Specializes|specializes\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"27\", \"32\", \"34\", \"36\"], \"digest\": \"316c7f3c9c88457f\"}. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:276-290 and 389-419. The fibre-discreteness criterion and isolated-point criterion do not assert that absence of nontrivial specializations supplies their hypotheses; that requires an argument. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If every point of a scheme locally of finite type over a field is closed then its structure map is locally quasi finite",
+   "results": "Actual command log: {\"t\": \"2026-10-23T11:43:08Z\", \"tool\": \"leansearch\", \"query\": \"If every point of a scheme locally of finite type over a field is closed then its structure map is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.casesOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\"], \"digest\": \"a0ffa667d196c9d7\"}. Read returned signatures: the hits give local quasi-finiteness definitions, fibre/Jacobson properties, immersion/finite implications, or closedness versus a residue-field morphism being locally of finite type. None gives the requested existence of a distinct specialization. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"Specializes\"",
+   "results": "Actual command log: {\"t\": \"2026-10-23T11:43:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"Specializes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned signatures: the hits give local quasi-finiteness definitions, fibre/Jacobson properties, immersion/finite implications, or closedness versus a residue-field morphism being locally of finite type. None gives the requested existence of a distinct specialization. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt_iff_isOpen_singleton_asFiber|locallyQuasiFinite_iff_isDiscrete_preimage_singleton|quasiFiniteAt_iff",
+   "results": "Actual command log: {\"t\": \"2026-10-23T11:43:48Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt_iff_isOpen_singleton_asFiber|locallyQuasiFinite_iff_isDiscrete_preimage_singleton|quasiFiniteAt_iff\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"34\", \"63\", \"65\", \"276\", \"389\"], \"digest\": \"ad62abe0fed3704f\"}. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:276-290 and 389-419. The fibre-discreteness criterion and isolated-point criterion do not assert that absence of nontrivial specializations supplies their hypotheses; that requires an argument. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme over a field with no distinct comparable points in the specialization order is locally quasi finite",
+   "results": "Actual command log: {\"t\": \"2026-10-23T11:43:54Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type scheme over a field with no distinct comparable points in the specialization order is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\"], \"digest\": \"d8d6b10bf0e338a9\"}. Read returned signatures: the hits give local quasi-finiteness definitions, fibre/Jacobson properties, immersion/finite implications, or closedness versus a residue-field morphism being locally of finite type. None gives the requested existence of a distinct specialization. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-field-etale-chart-quasifinite",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Etale presentation test for intrinsic stack local quasi-finiteness. Supporting input for the etale local-quasi-finiteness test: Etale scheme charts of a discrete finite-type DM stack over a field. Supporting input to the 06UC specialization argument: Failure of local quasi-finiteness over a field produces a specialization. Current latest blueprint: sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), Rj_* preservation; steps 1-3 give the field-specialization prerequisite via Stacks 01TH (3) implies (1).",
+   "via": [
+    "lem-sfb-dm-field-etale-chart-quasifinite",
+    "lem-sfb-dm-lqf-atlas-test",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-nonquasifinite-specialization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the contrapositive of Stacks 01TH (3) implies (1), using the existing same-unit closed-fibre-point quasi-finiteness criterion. Absence of nontrivial specializations gives closedness and no other generalizations by the definition of closure. The unique fibre over Spec k is all of X. No new nodes; no global quasi-compactness or separation used.",
+  "blueprint": "Current literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), preservation by Rj_*. This is the inherited alteration/moduli auxiliary route through lem-sfb-dm-field-etale-chart-quasifinite and lem-sfb-dm-lqf-atlas-test. The creation chain has no resolvable blueprint ancestor (blueprint_refs.py ancestor returns None); the inherited from.node and via are retained. Steps 1-3 realize the elementary scheme specialization input to the field chart argument, using Stacks 01TH."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-498307b45",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-498307b45 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement is unchanged and correct as the global contrapositive of Stacks 01TH (3)=>(1) over Spec k (morphisms.tex lemma-quasi-finite-at-point-characterize: full lemma and proof read; tag mapping checked). Small cases: empty X, A^1_k, finite k-algebras, an infinite disjoint union of points. Step 1 is elementary: under the hypothesis every singleton is closed and no point has a distinct generalization. Step 2: def-weil-affine-spectrum (Spec of a field has one point) and def-pc-scheme-fibre (the projection is a homeomorphism onto f^-1(s)=X) supply exactly the hypotheses of the existing same-unit node lem-sfb-closed-fibre-point-quasifinite-criterion; the step uses only its statement. That node is unsplit with empty proof_deps in the snapshot and in live, so there is no cycle, and it is on the unit route, so no tool_uses are needed. Step 3 is the universal step from pqf-def-quasifinite clause 2. proof_deps equal the union of uses. Citing the existing pointwise criterion is not relabelling, because the item's global field argument is written out. I found no duplicate among the about 33 DAG nodes that cite 01TH. The citer lem-sfb-dm-field-etale-chart-quasifinite (step 2) uses the item in the stated direction. There is no repair note, and live still has the item unsplit, so it is not superseded. Blueprint from.node is null, consistent with ancestor=None; there is no SGA citation; the four kinds of search are recorded with logs. No fixes."
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-fix-qcqs-ordinary-quotient-restriction",
+ "kind": "statement",
+ "title": "Augmented strict quotient-tower comparison under ordinary qcqs restriction",
+ "statement": "Fix ell,E and weakly etale s:S->V followed by an immersion i:V->T of qcqs schemes [def-weil-l-adic-coefficient-extension, def-pc-scheme, def-weil-quasi-separated-morphism]. Put r=s followed by i and use the fixed ordinary module and complex pullback of [def-fix-qcqs-completion-ordinary-models]. There is a natural isomorphism from the strict quotient tower of P followed termwise by ordinaryComplexPull r to the strict quotient tower of ordinaryComplexPull r, with the tower and augmentation of [def-pur-integral-derived-operations]. For every complex P and every n, applying ordinaryComplexPull to its nth augmentation and then the nth component of the isomorphism equals the nth augmentation of ordinaryComplexPull(P). No Roos or derived comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA, lemma-closed-immersion, clause (1); Tag 09BL, lemma-closed-immersion-affines-apply; weakly etale slice restriction in Tag 09AE, definition-extension-zero; Bhatt–Scholze Lemma 6.5.8(1). Tensor comparison: sites-cohomology.tex Tags 06YY, lemma-derived-base-change, and 07A4, lemma-pullback-tensor-product."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pur-integral-derived-operations",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Take the invertibility of ordinaryCoefficientMap for s followed by i from qcqsOrdinaryRestrictionExact. For each positive quotient exponent apply ordinaryQuotientModuleComparison. Its natural isomorphism is between completed-module quotients followed by ordinary pullback and ordinary pullback followed by the quotient. Apply it termwise to complexes; naturality in the module maps proves compatibility with the differentials.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "lem-fix-ordinary-quotient-module-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For adjacent exponents compare the two chain maps after the ordinary pullback adjunction. Pure-tensor extensionality reduces their equality to a section a tensor x. Naturality of the adjunction unit moves the quotient transition before the unit. The specified comparison formula and the recorded transition formula reduce the desired square to the constant-section finite ring-map square (proved locally from sheafification-adjunction naturality and evaluated at the finite quotient transition). Thus NatTrans.ofOpSequence assembles the maps into a strict tower map. Each component is invertible, so the tower map is invertible; naturality in the original complex is the naturality of each termwise comparison.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-fix-qcqs-completion-ordinary-models",
+    "lem-fix-ordinary-quotient-module-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the augmentation equation degreewise after the same ordinary adjunction. Naturality of its unit moves the source augmentation before the unit. Both augmentations send x to 1 tensor x; the normalized finite-module comparison sends this to 1 tensor the unit pullback of x, because ordinaryFiniteRingMap preserves one. The defining generator formula for the target augmentation gives the required equality.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-fix-ordinary-quotient-module-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-derived-operations",
+  "lem-fix-ordinary-quotient-module-comparison",
+  "lem-fix-qcqs-ordinary-restriction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-tensor-product-pullback (03EL), together with the original strict quotient generator/transition proof; R9 Lean assembly through the specified adjunction and generator extensionality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of modules on ringed sites commutes with extension of scalars for a quotient coefficient sheaf",
+   "results": "SheafOfModules.pullback, pullbackPushforwardAdjunction, pullbackComp, and free-module generator formulas; no strict ordinary quotient-tower comparison normalized at the specified augmentation.",
+   "date": "2026-10-27",
+   "verdict": "The abstract adjunction and composition lemmas do not identify the fixed reductionWitness and its strict transitions automatically."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of modules commutes with reduction modulo a finite quotient ring and preserves the quotient augmentation",
+   "results": "SheafOfModules.pullbackComp, pullbackIso, pullbackObjUnitToUnit and pullbackFree formulas. None provides the fixed strict quotient tower with its transition and augmentation normalization.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match for the statement in the fixed ordinary models."
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*pullback|quotient.*pullback",
+   "results": "msearch grep returned seven unrelated hits: Subobject pullback quotient proofs, Abelian.Preradical.colon, and IdealSheafData.glueDataObjι. Local project search found ReductionPullbackDerivedTower, which uses derived models rather than the specified strict tower.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of either independent-universe ordinary restriction interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryRestrictionModels",
+  "date": "2026-10-27",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.; Step 2: tensor base change, strict quotient transitions and augmentation",
+   "via": [
+    "lem-fix-qcqs-ordinary-restriction-models",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsOrdinaryQuotientRestriction",
+  "file": "lean/Sheaf/Paper/QcqsOrdinaryQuotientRestriction.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.qcqsOrdinaryQuotientRestriction",
+  "statement": "theorem qcqsOrdinaryQuotientRestriction\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {S V T : Scheme.{t}} [CompactSpace S] [QuasiSeparatedSpace S]\n    [CompactSpace V] [QuasiSeparatedSpace V] [CompactSpace T] [QuasiSeparatedSpace T]\n    (s : S ⟶ V) (i : V ⟶ T) [WeaklyEtale s] [IsImmersion i] :\n    let r := s ≫ i\n    ∃ (τ : tower l E T none ⋙\n          (Functor.whiskeringRight ℕᵒᵖ (Cx l E T none) (Cx l E S none)).obj\n            (ordinaryComplexPull l E r) ≅\n          ordinaryComplexPull l E r ⋙ tower l E S none),\n        (∀ (P : Cx l E T none) (n : ℕ),\n          (ordinaryComplexPull l E r).map (((augmentation l E T none).app P).app (op n)) ≫\n              (τ.hom.app P).app (op n) =\n            ((augmentation l E S none).app ((ordinaryComplexPull l E r).obj P)).app (op n))",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T222619-L-674254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T012931-L-2349462",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

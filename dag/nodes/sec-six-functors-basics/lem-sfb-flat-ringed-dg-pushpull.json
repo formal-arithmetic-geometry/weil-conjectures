@@ -1,0 +1,343 @@
+{
+ "id": "lem-sfb-flat-ringed-dg-pushpull",
+ "kind": "statement",
+ "title": "Flat ringed dg push-pull and its underlying-complex comparison",
+ "statement": "Let $X,Z$ be topological spaces with sheaves of commutative rings $\\mathcal O_X,\\mathcal O_Z$. Let $f:X\\to Z$ be continuous with a unital ring map $f^{-1}\\mathcal O_Z\\to\\mathcal O_X$, and assume the module-sheaf pullback $f^*L=\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Z}f^{-1}L$ is exact. Let $\\mathcal C$ be a sheaf dg $\\mathcal O_Z$-algebra and put $\\mathcal B=f^*\\mathcal C$, with multiplication induced by tensoring. Use left dg modules, signed shifts, cones and localization at underlying quasi-isomorphisms as in [def-sfb-sheaf-dg-module-localization]. Assume the underlying complexes of $\\mathcal C$ and $\\mathcal B$ are K-flat over $\\mathcal O_Z$ and $\\mathcal O_X$, respectively [def-pc-kflat-complex]. Write $U_Z,U_X$ for their forgetful functors to the ordinary unbounded derived categories of module sheaves [def-weil-abstract-derived-category].\n\nEvery sheaf dg $\\mathcal B$-module has a quasi-isomorphism to a homotopically injective dg module $I$, meaning that the complex of global graded dg-linear maps from any acyclic dg module to $I$ is acyclic. Its underlying $\\mathcal O_X$-complex is K-injective: the ordinary Hom complex from every acyclic $\\mathcal O_X$-complex to $U_XI$ is acyclic. Degreewise $f_*I$, with its induced $\\mathcal C$-action, computes an exact right derived functor $Rf_*^{\\mathrm{dg}}$. There is an exact adjunction\n$$f^*:D_Z(\\mathcal C)\\rightleftarrows D_X(\\mathcal B):Rf_*^{\\mathrm{dg}},$$\nwhere dg pullback is the exact degreewise module-sheaf pullback. There are canonical natural isomorphisms\n$$U_X f^*\\cong f^* U_Z,\\qquad U_ZRf_*^{\\mathrm{dg}}\\cong Rf_*U_X.$$\nHere $Rf_*$ is ordinary module-sheaf derived direct image [def-pc-ringed-spaces-derived-direct-image]. Under these isomorphisms the dg adjunction unit and counit become the unit and counit of the ordinary exact-pullback/derived-pushforward adjunction. No boundedness of modules or cohomology is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FT0 (theorem-qis-into-dg-injective), 0FRU (lemma-adjunction-push-pull-dg), and 0FTR (lemma-derived-adjoint-push-pull). The K-flat forgetful comparison and compatibility with the ordinary adjunction are the stated agent refinement."
+ },
+ "stmt_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sfb-sheaf-dg-homotopical-injectivity"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Grothendieck-category and acyclic-test lemmas to $\\mathcal B$. Fix the resulting set $a_r:E_r\\hookrightarrow F_r$ of acyclic dg modules. For a dg module $M$, let $T(M)$ be the pushout of $\\bigoplus_{(r,u)}E_r\\to\\bigoplus_{(r,u)}F_r$ along the evaluation map to $M$, where $u$ ranges over dg maps $E_r\\to M$. These are set-indexed coproducts. The induced map $j_M:M\\hookrightarrow T(M)$ is monic and has cokernel $\\bigoplus_{(r,u)}\\operatorname{coker}(a_r)$: this follows by computing the pushout as the quotient of $M\\oplus\\bigoplus F_r$ by $(u(e),-a_r(e))$. Each $\\operatorname{coker}(a_r)$ is acyclic by the long exact cohomology sequence, and their coproduct is acyclic since it is the filtered colimit of finite sums and cohomology commutes with filtered colimits. Another long exact sequence gives that $j_M$ is a quasi-isomorphism. Every $u:E_r\\to M$ extends across $F_r$ into $T(M)$ by its coproduct summand. Postcomposition of $u$ defines the summand maps for $T(M)\\to T(M')$, so $T$ and $j$ are functorial.",
+   "uses": [
+    "lem-sfb-sheaf-dg-grothendieck",
+    "lem-sfb-sheaf-dg-injectivity-tests",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSZ, lemma-functor-set-of-monos (explicit pushout construction)."
+   }
+  },
+  {
+   "text": "Choose a limit ordinal $\\alpha$ of cofinality larger than the cardinality of the subobject set of each $E_r$, possible because $R$ is a set. Set $M_0=M$, $M_{\\beta+1}=T(M_\\beta)$, and $M_\\lambda=\\operatorname{colim}_{\\beta<\\lambda}M_\\beta$ at limits. The transition maps are monic quasi-isomorphisms: successor maps were checked above; at limits, exact filtered colimits and their cohomology compatibility give the same assertion. In particular $M\\to I=M_\\alpha$ is a quasi-isomorphism. Smallness of each $E_r$ in this Grothendieck category says that every $u:E_r\\to I$ factors through some $M_\\beta$, $\\beta<\\alpha$. Its map into $M_{\\beta+1}$ extends to $F_r$ by the preceding construction, and $\\beta+1<\\alpha$. Hence $u$ extends to $F_r\\to I$, and the test lemma makes $I$ graded injective and homotopically injective. Recursion on the functor $T$ makes $M\\to I$ functorial. The construction applies equally to $\\mathcal C$ and involves no degree bound.",
+   "uses": [
+    "lem-sfb-sheaf-dg-grothendieck",
+    "lem-sfb-sheaf-dg-injectivity-tests",
+    "prop-pur-kinjective-objects-small"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FT0, theorem-qis-into-dg-injective, successor and limit stages; Injectives Tag 079F."
+   }
+  },
+  {
+   "text": "For an acyclic $\\mathcal O_X$-complex $L$, the free/forgetful specialization of the Hom-complex adjunction gives $\\operatorname{Hom}^{\\bullet}_{\\mathcal O_X}(L,U_XI)\\cong\\operatorname{Hom}^{\\bullet}_{\\mathcal B}(\\mathcal B\\otimes_{\\mathcal O_X}L,I)$. The underlying free-module complex is acyclic by K-flatness of $\\mathcal B$: the tensor symmetry $b\\otimes l\\mapsto(-1)^{|b||l|}l\\otimes b$ identifies it with the tensor in the definition of K-flatness. The right Hom complex is acyclic by homotopical injectivity of $I$. Thus $U_XI$ is K-injective. This applies to every homotopically injective $I$, and the identical argument with $\\mathcal C$ gives the corresponding assertion on $Z$.",
+   "uses": [
+    "lem-sfb-sheaf-dg-pushpull-hom",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Agent refinement of 0FT0: free/forgetful adjunction and K-flatness of the algebra."
+   }
+  },
+  {
+   "text": "Use the sheaf dg homotopy-system theorem and triangulated localization for $K_X(\\mathcal B)$ and $D_X(\\mathcal B)$. The right-module version applies to left modules by $m\\cdot a=(-1)^{|a||m|}am$ over the graded opposite algebra; this changes right shifts to the stated signed left shifts. Acyclic dg modules form a full triangulated subcategory since their underlying cones and shifts are acyclic. A homotopically injective $I$ is right orthogonal to that subcategory, since $H^0\\operatorname{Hom}^{\\bullet}(E,I)=\\operatorname{Hom}_{K_X(\\mathcal B)}(E,I)=0$. The orthogonal-localization lemma gives natural bijections $\\operatorname{Hom}_{K_X(\\mathcal B)}(N,I)\\cong\\operatorname{Hom}_{D_X(\\mathcal B)}(QN,QI)$. Thus localization is fully faithful on homotopically injectives and essentially surjective by step 2. Those objects are closed under shifts and cones: Hom into a shifted object is the shifted Hom complex, and Hom into a cone is the cone of the Hom map, hence acyclic for acyclic input. Their full subcategory therefore maps by an exact equivalence to $D_X(\\mathcal B)$. The same statements hold on $Z$.",
+   "uses": [
+    "lem-sfb-sheaf-dg-homotopy-system",
+    "lem-pur-localization-triangles-05r6",
+    "lem-sfb-right-orthogonal-localization-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FS7, 0FT4, 0FT5; lemma-hom-derived, via right orthogonality."
+   }
+  },
+  {
+   "text": "The underived adjunction identifies dg pullback with exact degreewise ordinary pullback because $\\mathcal B=f^*\\mathcal C$. Exactness implies that this functor preserves acyclic complexes and quasi-isomorphisms; hence it descends to $f^*$ on derived categories. The Hom-complex adjunction shows that $f_*I$ is homotopically injective over $\\mathcal C$: for acyclic $N$, its Hom complex into $f_*I$ equals that from the acyclic $f^*N$ into $I$. Define $Rf_*^{\\mathrm{dg}}$ by the inverse of the equivalence in step 4, followed by $f_*$ and localization. It is represented by $f_*I$ for every resolution in step 2. Shifts and cones are preserved by $f_*$ on the homotopy category, and the equivalence and localization are exact; therefore $Rf_*^{\\mathrm{dg}}$ is exact. The same cone calculation makes the descended $f^*$ exact.",
+   "uses": [
+    "lem-sfb-sheaf-dg-pushpull-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRU, 0FT5; section-derived-pushforward, computation on injective representatives."
+   }
+  },
+  {
+   "text": "For completeness the construction is a total right derived functor, with its usual comparison: the inclusion of the homotopically injective subcategory followed by the inverse equivalence defines $r:D_X(\\mathcal B)\\to K_X(\\mathcal B)$. Step 4 gives $Q\\dashv r$, with unit represented by $M\\to I$ and invertible counit $Qr\\cong\\mathrm{id}$. Put $H=Q_{\\mathcal C}f_*$. Then $Hr=Rf_*^{\\mathrm{dg}}$, and $H\\to HrQ$ is $H$ applied to this unit. For any functor $V$ on $D_X(\\mathcal B)$, a transformation $a:H\\to VQ$ determines $Hr\\xrightarrow{ar}VQr\\to V$ using the counit, and a transformation $b:Hr\\to V$ gives $H\\to HrQ\\xrightarrow{bQ}VQ$. The two composites are identities by the adjunction triangle identities. The argument works after arbitrary postcomposition, so the derived functor is absolute. Its comparison on a homotopically injective object is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Section-derived-pushforward, lemma-right-derived; explicit Kan universal property from the equivalence in step 4."
+   }
+  },
+  {
+   "text": "For $N$ on $Z$ and a resolution $M\\to I$ on $X$, use step 4, the underived Hom adjunction, and the homotopical injectivity of $f_*I$ to obtain natural bijections\n$$\\operatorname{Hom}_{D_X(\\mathcal B)}(f^*N,M)\\cong\\operatorname{Hom}_{K_X(\\mathcal B)}(f^*N,I)\\cong\\operatorname{Hom}_{K_Z(\\mathcal C)}(N,f_*I)\\cong\\operatorname{Hom}_{D_Z(\\mathcal C)}(N,Rf_*^{\\mathrm{dg}}M).$$\nThey define the required adjunction. Each bijection commutes with the signed shifts (it is induced by the Hom-complex isomorphism and localization), so this is an exact adjunction with the exact functors of step 5. Its maps are the derived unit and counit of the underived adjunction, since the middle bijection is precisely that adjunction, with its specified evaluation formulas.",
+   "uses": [
+    "lem-sfb-sheaf-dg-pushpull-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTR, lemma-derived-adjoint-push-pull, specialized to exact pullback."
+   }
+  },
+  {
+   "text": "The underived pullback tensor identification is literally the same underlying ordinary pullback complex, natural in chain maps and homotopies; it inverts the same quasi-isomorphisms. It therefore gives $U_Xf^*\\cong f^*U_Z$. By step 3, $U_XM\\to U_XI$ is an ordinary K-injective resolution. The ordinary derived-direct-image definition computes $Rf_*U_XM$ as $f_*U_XI$, while the other composite is $U_Z(f_*I)$, the same complex with the same differential. The canonical comparison between these representatives is the identity. For maps, step 4 represents derived arrows into a resolution by dg homotopy classes; forgetting gives the ordinary homotopy classes representing the same derived arrows by the ordinary K-injective Hom theorem. Thus the identity comparisons commute with all derived maps and with replacement of $I$, giving the canonical natural isomorphism $U_ZRf_*^{\\mathrm{dg}}\\cong Rf_*U_X$.",
+   "uses": [
+    "lem-sfb-sheaf-dg-pushpull-hom",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTW, lemma-pushforward-agrees, using the stronger K-flat representative comparison."
+   }
+  },
+  {
+   "text": "Check the adjunction maps under these comparisons, rather than only identifying the functors. Take $M\\to I$ as above. After forgetting actions, $f_*U_XI$ is an ordinary K-injective complex: apply the Hom adjunction of the underived lemma with dg algebras $\\mathcal O_Z,\\mathcal O_X$ concentrated in degree zero, and use exactness of ordinary $f^*$ and K-injectivity of $U_XI$. Consequently the ordinary adjunction is computed by the same three Hom bijections as step 7 after forgetting the actions, using ordinary K-injective localization on both sides. This square of Hom correspondences commutes, because the underived lemma's tensor identification sends the dg unit $n\\mapsto1\\otimes n$ and evaluation counit to the ordinary ones. Applying the square to the identity of $f^*N$ gives equality of the two units, and applying it to the identity of $Rf_*^{\\mathrm{dg}}M$ gives equality of the two counits. All constructions use arbitrary integer complexes; no truncation or boundedness assumption occurred.",
+   "uses": [
+    "lem-sfb-sheaf-dg-pushpull-hom",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Agent refinement of 0FTR and 0FTW: normalized adjunction maps checked on the same representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sheaf-dg-grothendieck",
+  "lem-sfb-sheaf-dg-injectivity-tests",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "prop-pur-kinjective-objects-small",
+  "lem-sfb-sheaf-dg-pushpull-hom",
+  "def-pc-kflat-complex",
+  "lem-sfb-sheaf-dg-homotopy-system",
+  "lem-pur-localization-triangles-05r6",
+  "lem-sfb-right-orthogonal-localization-hom",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Proof of 0FT0 from 0FS9, 0FSY and pushouts (0FSZ); 0FRU and 0FTR; K-flat refinement of 0FTW and compatibility of units and counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|DGModule|DgModule",
+   "results": "{\"t\": \"2026-10-24T06:59:41Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|DGModule|DgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module-sheaf pushforward composition and pullback adjunctions and ordinary K-injective complexes do not provide dg injective resolutions or the underlying-complex comparison for a K-flat algebra. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and AlgebraicGeometry/Modules/Sheaf.lean:189."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-24T07:00:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightDerivedFunctor\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module-sheaf pushforward composition and pullback adjunctions and ordinary K-injective complexes do not provide dg injective resolutions or the underlying-complex comparison for a K-flat algebra. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and AlgebraicGeometry/Modules/Sheaf.lean:189."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K injective differential graded modules remain K injective after restriction along a K flat algebra",
+   "results": "{\"t\": \"2026-10-24T07:00:17Z\", \"tool\": \"leansearch\", \"query\": \"K injective differential graded modules remain K injective after restriction along a K flat algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_iso\", \"Module.Flat.iff_rTensor_preserves_injective_linearMap'\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.isKInjective_of_injective\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Module.Flat.toAlgebra_injective\"], \"digest\": \"40fc2c2c5f3714ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module-sheaf pushforward composition and pullback adjunctions and ordinary K-injective complexes do not provide dg injective resolutions or the underlying-complex comparison for a K-flat algebra. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and AlgebraicGeometry/Modules/Sheaf.lean:189."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of differential graded sheaf modules under flat pullback commutes with forgetting action for a K-flat algebra",
+   "results": "{\"t\": \"2026-10-24T07:00:20Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pushforward of differential graded sheaf modules under flat pullback commutes with forgetting action for a K-flat algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardNatIso_hom\"], \"digest\": \"3ca6ddfbae9cbc01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module-sheaf pushforward composition and pullback adjunctions and ordinary K-injective complexes do not provide dg injective resolutions or the underlying-complex comparison for a K-flat algebra. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and AlgebraicGeometry/Modules/Sheaf.lean:189."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat morphism of ringed spaces derived dg pullback pushforward adjunction underlying complex",
+   "results": "{\"t\": \"2026-10-24T07:00:21Z\", \"tool\": \"leanfinder\", \"query\": \"Flat morphism of ringed spaces derived dg pullback pushforward adjunction underlying complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"d3d3dac4a6abb584\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module-sheaf pushforward composition and pullback adjunctions and ordinary K-injective complexes do not provide dg injective resolutions or the underlying-complex comparison for a K-flat algebra. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and AlgebraicGeometry/Modules/Sheaf.lean:189."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat ringed space derived pushforward of sheaf differential graded modules and underlying K injective complexes",
+   "results": "{\"t\": \"2026-10-24T07:37:46Z\", \"tool\": \"leanfinder\", \"query\": \"Flat ringed space derived pushforward of sheaf differential graded modules and underlying K injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforward_obj_val\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardSections\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\"], \"digest\": \"d4b26416bf09087a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheaf adjunctions do not provide this sheaf dg theorem; two phrasings and K-injective candidates read."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|DGModule|DgModule",
+   "results": "{\"t\": \"2026-10-24T07:38:10Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|DGModule|DgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheaf adjunctions do not provide this sheaf dg theorem; two phrasings and K-injective candidates read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K injective sheaf differential graded modules flat ringed space pushforward forgetful comparison",
+   "results": "{\"t\": \"2026-10-24T07:38:11Z\", \"tool\": \"leansearch\", \"query\": \"K injective sheaf differential graded modules flat ringed space pushforward forgetful comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"SheafOfModules.forget\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.fullyFaithfulForget\", \"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"SheafOfModules.unitToPushforwardObjUnit\", \"TopCat.Sheaf.pushforwardForgetIso\"], \"digest\": \"b9337b2bc8ef6c25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheaf adjunctions do not provide this sheaf dg theorem; two phrasings and K-injective candidates read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-24T07:38:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeAdjunction\", \"PresheafOfModules.freeAdjunctionUnit_app\", \"PresheafOfModules.freeAdjunction_homEquiv\", \"PresheafOfModules.freeAdjunction_unit_app\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"PresheafOfModules.colimitAdjunction\"], \"digest\": \"3bc2b9beb5471990\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheaf adjunctions do not provide this sheaf dg theorem; two phrasings and K-injective candidates read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-dg-coefficient-module-comparison",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence.",
+   "via": [
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-ringed-dg-pushpull",
+  "worker": "stage1",
+  "summary": "Constructed sheaf dg injective resolutions by set-indexed acyclic attachments and transfinite smallness; established underlying K-injectivity by the free/forgetful Hom isomorphism and K-flatness. Derived pushforward, exact adjunction and its ordinary comparison use the same representatives and retain the unit/counit normalization. Three statement-only prerequisites; no Lean changes.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, (3), direct-image factorization and preservation. The inherited creation chain records the auxiliary affine-dg comparison route. Its nearest imported ancestor is null as reported by blueprint_refs.py ancestor; preserved that metadata. Steps 1-4 establish the resolution prerequisite, 5-7 construct push-pull, and 8-9 compare the underlying complexes and adjunction maps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic category-theoretic or module-complex tool for the sheaf dg resolution/localization argument; it replaces no geometric step of the unit."
+   },
+   {
+    "node": "prop-pur-kinjective-objects-small",
+    "why": "Generic category-theoretic or module-complex tool for the sheaf dg resolution/localization argument; it replaces no geometric step of the unit."
+   },
+   {
+    "node": "lem-pur-localization-triangles-05r6",
+    "why": "Generic category-theoretic or module-complex tool for the sheaf dg resolution/localization argument; it replaces no geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic category-theoretic or module-complex tool for the sheaf dg resolution/localization argument; it replaces no geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "prop-pur-kinjective-objects-small",
+  "lem-pur-localization-triangles-05r6",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-b3f783364",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-b3f783364 (reviewer sub-agent of L); spot-checked: I read all nine steps and the three new statement-only nodes in full and checked them against sdga.tex 0FRJ, 0FS9, 0FSY (full proof), 0FSZ, 0FT0 and 0FRU. Grothendieck node: true. It is the open-site case of 0FRJ+0FS9, and its extra clauses hold: exact faithful forgetful functor, colimits computed on underlying modules, H^n commuting with filtered colimits. Test node: this is 0FSY. Stacks' K-injective agrees with Hom-complex acyclicity because acyclics are closed under shift; graded injectivity is defined inline. Pushpull-hom: I checked by hand that the signed inverse is well defined on the balanced relation, is B-linear with sign, and commutes with the differentials (δh(b⊗n)=(−1)^{(r+1)|b|}b(δk̃)(n)). The forward map is C-linear with sign, and the base-change and free/forgetful specializations are correct. Item steps: the step-1 pushout writes out the functoriality that 0FSZ omits. In step 2, prop-pur-kinjective-objects-small's hypotheses hold: Grothendieck category, monic chain, cofinality above every |E_r| since R is a set. Step 3 uses the K-flatness of B and C exactly as def-pc-kflat-complex states it. In step 4 I checked that the right-to-left conversion through the opposite algebra gives the def node's shift and homotopy signs, that W equals the cone class, and that the orthogonal leaf applies. Step 6 is the triangle-identity Kan-extension argument, verified both ways. Steps 7–9 compose three bijections, and step 9 identifies units and counits through the degree-zero case of the same node. No duplicates: lem-sfb-dg-injective-resolution-localization is for a single dg ring and lem-sfb-ringed-dg-scalar-adjunction is single-site. No cycle, no new node restates an item clause, no SGA. Batch-5 flag: lem-sfb-sheaf-dg-homotopy-system reaches lem-trf-triangulated-subcategory-cone-system, a generic Mathlib leaf (Stacks 05RG, the cone class of a triangulated subcategory) that is not part of the trace-formula or Poincaré-duality content, so I accept the citation. I accept the four split_report tool_uses as generic (LES, smallness, triangulated localization, K-injective Hom). Minor note: the 'ordinary exact-pullback/derived-pushforward adjunction' in the statement has no node of its own. Step 9 builds it from the ordinary sheaf adjunction on K-injective representatives, which I accept. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatRingedDgPushpull",
+  "declaration": "CategoryTheory.SheafDg.flat_ringed_dg_pushpull",
+  "declarations": [
+   "CategoryTheory.SheafDg.coefficientPullback",
+   "CategoryTheory.SheafDg.coefficientAdjunction",
+   "CategoryTheory.SheafDg.coefficientPullback_additive",
+   "CategoryTheory.SheafDg.pullComplex",
+   "CategoryTheory.SheafDg.pushComplex",
+   "CategoryTheory.SheafDg.pullSection",
+   "CategoryTheory.SheafDg.IsPullbackAlgebra",
+   "CategoryTheory.SheafDg.existsUnique_pullbackAlgebra",
+   "CategoryTheory.SheafDg.pullbackAlgebra",
+   "CategoryTheory.SheafDg.IsPullbackAction",
+   "CategoryTheory.SheafDg.existsUnique_pullbackAction",
+   "CategoryTheory.SheafDg.pullModule",
+   "CategoryTheory.SheafDg.IsPushforwardAction",
+   "CategoryTheory.SheafDg.existsUnique_pushforwardAction",
+   "CategoryTheory.SheafDg.pushModule",
+   "CategoryTheory.SheafDg.pullMap_linear",
+   "CategoryTheory.SheafDg.pushMap_linear",
+   "CategoryTheory.SheafDg.pullModules",
+   "CategoryTheory.SheafDg.pushModules",
+   "CategoryTheory.SheafDg.existsUnique_moduleAdjunction",
+   "CategoryTheory.SheafDg.moduleAdjunction",
+   "CategoryTheory.SheafDg.pushModules_homotopy",
+   "CategoryTheory.SheafDg.pushHomotopy",
+   "CategoryTheory.SheafDg.existsUnique_derivedPullback",
+   "CategoryTheory.SheafDg.derivedPullback",
+   "CategoryTheory.SheafDg.derivedPullbackFactors",
+   "CategoryTheory.SheafDg.existsUnique_ordinaryDerivedAdjunction",
+   "CategoryTheory.SheafDg.ordinaryDerivedAdjunction",
+   "CategoryTheory.SheafDg.flat_ringed_dg_pushpull"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatRingedDgPushpull.lean",
+  "statement": "theorem flat_ringed_dg_pushpull (hA : A.X.IsKFlatIndependentCoefficients) (hB : (pullbackAlgebra f A).X.IsKFlatIndependentCoefficients) : (∀ M : LeftModule (pullbackAlgebra f A), ∃ (I : LeftModule (pullbackAlgebra f A)) (s : M ⟶ I), QuasiIso s.hom ∧ IsHomotopicallyInjective (pullbackAlgebra f A) I) ∧ (∀ I : LeftModule (pullbackAlgebra f A), IsHomotopicallyInjective (pullbackAlgebra f A) I → I.X.IsKInjective) ∧ ∃ (R : Derived (pullbackAlgebra f A) ⥤ Derived A) (β : pushHomotopy f A ⋙ Q A ⟶ Q (pullbackAlgebra f A) ⋙ R) (sL : (derivedPullback f A).CommShift ℤ) (sR : R.CommShift ℤ) (a : derivedPullback f A ⊣ R) (lcmp : derivedPullback f A ⋙ forget (pullbackAlgebra f A) ≅ forget A ⋙ (coefficientPullback f).mapDerivedCategory) (rcmp : R ⋙ forget A ≅ forget (pullbackAlgebra f A) ⋙ RingedSpace.derivedModuleDirectImage f), R.IsRightDerivedFunctor β (quasiIsomorphisms (pullbackAlgebra f A)) ∧ (∀ I : LeftModule (pullbackAlgebra f A), IsHomotopicallyInjective (pullbackAlgebra f A) I → IsIso (β.app ((q (pullbackAlgebra f A)).obj I))) ∧ (∀ t : Triangle (Derived A), IsConeTriangle A t → IsConeTriangle (pullbackAlgebra f A) ((@Functor.mapTriangle _ _ _ _ _ _ (derivedPullback f A) sL).obj t)) ∧ (∀ t : Triangle (Derived (pullbackAlgebra f A)), IsConeTriangle (pullbackAlgebra f A) t → IsConeTriangle A ((@Functor.mapTriangle _ _ _ _ _ _ R sR).obj t)) ∧ (@Adjunction.CommShift _ _ _ _ (derivedPullback f A) R a ℤ _ _ _ sL sR) ∧ (∀ M : LeftModule A, a.unit.app ((moduleQ A).obj M) ≫ R.map ((derivedPullbackFactors f A).hom.app M) = (moduleQ A).map ((moduleAdjunction f A).unit.app M) ≫ β.app ((q (pullbackAlgebra f A)).obj ((pullModules f A).obj M))) ∧ (∀ I : LeftModule (pullbackAlgebra f A), (derivedPullback f A).map (β.app ((q (pullbackAlgebra f A)).obj I)) ≫ a.counit.app ((moduleQ (pullbackAlgebra f A)).obj I) = (derivedPullbackFactors f A).hom.app ((pushModules f A).obj I) ≫ (moduleQ (pullbackAlgebra f A)).map ((moduleAdjunction f A).counit.app I)) ∧ (∀ M : LeftModule A, lcmp.hom.app ((moduleQ A).obj M) ≫ (coefficientPullback f).mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj M.X) = (forget (pullbackAlgebra f A)).map ((derivedPullbackFactors f A).hom.app M)) ∧ (∀ I : LeftModule (pullbackAlgebra f A), (forget A).map (β.app ((q (pullbackAlgebra f A)).obj I)) ≫ rcmp.hom.app ((moduleQ (pullbackAlgebra f A)).obj I) = (RingedSpace.moduleDirectImage f).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I.X)) ∧ (∀ N : Derived A, (forget A).map (a.unit.app N) ≫ rcmp.hom.app ((derivedPullback f A).obj N) ≫ (RingedSpace.derivedModuleDirectImage f).map (lcmp.hom.app N) = (ordinaryDerivedAdjunction f).unit.app ((forget A).obj N)) ∧ (∀ M : Derived (pullbackAlgebra f A), (coefficientPullback f).mapDerivedCategory.map (rcmp.inv.app M) ≫ lcmp.inv.app (R.obj M) ≫ (forget (pullbackAlgebra f A)).map (a.counit.app M) = (ordinaryDerivedAdjunction f).counit.app ((forget (pullbackAlgebra f A)).obj M))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91849d818",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read the whole module, node, report and the five stmt_dep modules (SheafDgModuleLocalization, SheafDgHomotopicalInjectivity, KFlatIndependentCoefficients, RingedSpaceDerivedDirectImage, moduleRings). Every node clause is rendered: resolution to IsHomotopicallyInjective (shared def-node predicate), underlying IsKInjective under hB, R.IsRightDerivedFunctor β with β iso on h-injectives, exactness via CommShift + IsConeTriangle + Adjunction.CommShift, unit/counit equations against the ∃!-pinned moduleAdjunction, lcmp/rcmp normalized on all objects to factorsh and rightDerivedFunctorUnit, ordinary unit/counit against the ∃!-pinned ordinaryDerivedAdjunction. Only hypothesis added is PreservesFiniteLimits of Mathlib's pullback (= exactness). Definitions are ∃!.choose pinned (Derived is strict Localization.Construction, so the derivedPullback lift is unique); 11 sorried theorems; docstrings and blueprint tags present; universes bound (u shared, wX/wZ independent); edge cases OK. Node differs from side-live only in lean; statement verbatim; declarations in file order; report has Worker report + Second reading by NL; earlier duplicate IsHomotopicallyInjective removed, shared owner imported. No duplicate in CategoryTheory.SheafDg. Not recompiled (no file changed); delivery dry run OK at 7662fb94050. Advisory only: sL/sR existential shift structures."
+ }
+}

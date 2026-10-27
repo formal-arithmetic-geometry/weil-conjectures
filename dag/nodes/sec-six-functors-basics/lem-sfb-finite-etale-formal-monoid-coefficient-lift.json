@@ -1,0 +1,185 @@
+{
+ "id": "lem-sfb-finite-etale-formal-monoid-coefficient-lift",
+ "kind": "statement",
+ "title": "Finite etale local factors lift from formal monoid coefficients",
+ "statement": "Let $(E,\\mathfrak n)$ be a nonzero complete regular Noetherian local commutative ring [def-weil-regular-scheme, def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion], let $S$ be a fine saturated monoid [def-trf-fs-log-blowup] which is sharp, meaning that $0$ is its only invertible element, and put $H=E[[S]]$, the completion at $(\\mathfrak n,[s]:s\\ne0)$ of the monoid ring $E[S]$, which has $E$-basis $[s]$ ($s\\in S$) and multiplication $[s][s']=[s+s']$. Let $f$ belong to the maximal ideal of $H$, allowing $f=0$, and put $A_0=H/(f)$. Let $K$ be a nonzero local finite etale $A_0$-algebra; finite etale means finite as a module and etale on affine spectra [def-weil-finitely-generated-module, def-weil-etale-morphism, def-weil-affine-spectrum]. Then there exist a nonzero complete regular Noetherian local finite etale $E$-algebra $D$ with residue field $\\kappa(K)$ and a continuous $A_0$-algebra isomorphism $K\\cong D[[S]]/(f)$, where $f$ on the right is its coefficientwise image. Moreover $\\mathfrak m_D=\\mathfrak nD$, and the image in $D$ of every element of $\\mathfrak n\\setminus\\mathfrak n^2$ lies in $\\mathfrak m_D\\setminus\\mathfrak m_D^2$. A local ring has a unique maximal ideal; complete means that its canonical map to its maximal-ideal completion is an isomorphism. Here $D[[S]]$ is defined by the same combined-adic monoid-ring completion as $E[[S]]$, and $\\kappa(K)$ is the quotient of $K$ by its unique maximal ideal.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Tags 09ZL (more-algebra, lemma-finite-etale-equivalence), 07NF (algebra, lemma-regular-goes-up), 031B (algebra, lemma-when-finite-module-complete-over-complete-ring). Agent-formulated formal-monoid coefficient base-change consequence; ILO VI 2.3, printed pp.72--73 supplies the motivating formal chart."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-trf-fs-log-blowup",
+  "def-weil-finitely-generated-module",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-finite-etale-formal-monoid-coefficient-lift] to the given $E,S,f,K$. Its hypotheses are exactly those here: $E$ is nonzero complete regular Noetherian local, $S$ is fine saturated and sharp, $H$ is the combined-adic completion of $E[S]$, $f$ lies in its maximal ideal (zero is allowed), and $K$ is nonzero local finite etale over $H/(f)$. Its conclusion gives the same finite etale coefficient algebra $D$, its completeness and regularity, its residue field $\\kappa(K)$, the continuous $A_0$-algebra isomorphism $K\\cong D[[S]]/(f)$ with coefficientwise image of $f$, the equality $\\mathfrak m_D=\\mathfrak nD$, and preservation of every class from $\\mathfrak n\\setminus\\mathfrak n^2$. The final sentences of the present statement only spell out local rings, completion, and the residue field; they impose no extra hypothesis or conclusion. Thus all clauses follow by direct specialization, with no auxiliary construction.",
+   "uses": [
+    "lem-per-finite-etale-formal-monoid-coefficient-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent assembly using the existing exact formal-monoid coefficient-lift node (Stacks 09ZL/04GK; algebra.tex 07NF and 00MA)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-finite-etale-formal-monoid-coefficient-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Direct reuse of existing reviewed lem-per-finite-etale-formal-monoid-coefficient-lift, whose statement gives every clause; not a new proof of the coefficient-lifting theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Etale|etale).*(PowerSeries|AdicComplete)|(PowerSeries|AdicComplete).*(Etale|etale)",
+   "results": "{\"t\": \"2026-10-22T07:48:34Z\", \"tool\": \"grep\", \"query\": \"(Etale|etale).*(PowerSeries|AdicComplete)|(PowerSeries|AdicComplete).*(Etale|etale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and square-zero lifting do not identify a local finite etale algebra over an arbitrary sharp formal monoid hypersurface with a coefficient extension or preserve its specified cotangent classes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale algebras over a complete local formal monoid ring are obtained by lifting their residue field to the coefficient ring",
+   "results": "{\"t\": \"2026-10-22T07:48:34Z\", \"tool\": \"leansearch\", \"query\": \"Finite etale algebras over a complete local formal monoid ring are obtained by lifting their residue field to the coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.finitePresentation\", \"Algebra.FormallyEtale.comp\", \"RingHom.Etale\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.iff_comp_bijective\"], \"digest\": \"67096aa684197306\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and square-zero lifting do not identify a local finite etale algebra over an arbitrary sharp formal monoid hypersurface with a coefficient extension or preserve its specified cotangent classes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"MvPowerSeries\"",
+   "results": "{\"t\": \"2026-10-22T07:48:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"MvPowerSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and square-zero lifting do not identify a local finite etale algebra over an arbitrary sharp formal monoid hypersurface with a coefficient extension or preserve its specified cotangent classes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local finite etale algebra over a quotient E[[S]]/(f) of a formal sharp monoid ring lifts to D[[S]]/(f) for a finite etale complete regular local coefficient extension D of E preserving cotangent classes",
+   "results": "{\"t\": \"2026-10-22T07:48:35Z\", \"tool\": \"leanfinder\", \"query\": \"A local finite etale algebra over a quotient E[[S]]/(f) of a formal sharp monoid ring lifts to D[[S]]/(f) for a finite etale complete regular local coefficient extension D of E preserving cotangent classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.lift\", \"StandardEtalePresentation\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.P\", \"StandardEtalePair\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"e4feb0fe70dbe3e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and square-zero lifting do not identify a local finite etale algebra over an arbitrary sharp formal monoid hypersurface with a coefficient extension or preserve its specified cotangent classes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale local coefficient extensions commute with formal monoid power series and hypersurface quotients and preserve nonzero classes in the cotangent space",
+   "results": "{\"t\": \"2026-10-22T07:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"Finite etale local coefficient extensions commute with formal monoid power series and hypersurface quotients and preserve nonzero classes in the cotangent space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.cotangentCompAwaySec_apply\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.toPresentation_val\"], \"digest\": \"e0404b97b188d150\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and square-zero lifting do not identify a local finite etale algebra over an arbitrary sharp formal monoid hypersurface with a coefficient extension or preserve its specified cotangent classes."
+  },
+  {
+   "tool": "grep",
+   "query": "(Etale|etale).*(AdicCompletion|MonoidAlgebra)|(AdicCompletion|MonoidAlgebra).*(Etale|etale)",
+   "results": "{\"t\": \"2026-10-23T09:41:49Z\", \"tool\": \"grep\", \"query\": \"(Etale|etale).*(AdicCompletion|MonoidAlgebra)|(AdicCompletion|MonoidAlgebra).*(Etale|etale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned standard-etale presentations and etale algebras over fields do not state the complete-local formal-monoid coefficient lift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale local algebras over a complete local ring are classified by finite separable residue field extensions",
+   "results": "{\"t\": \"2026-10-23T09:41:49Z\", \"tool\": \"leansearch\", \"query\": \"Finite etale local algebras over a complete local ring are classified by finite separable residue field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.Etale\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"8be7a5f6dcfe62ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned standard-etale presentations and etale algebras over fields do not state the complete-local formal-monoid coefficient lift."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-23T09:41:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned standard-etale presentations and etale algebras over fields do not state the complete-local formal-monoid coefficient lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale algebras over a complete local formal monoid hypersurface are coefficient extensions from a finite etale local algebra of the coefficient ring",
+   "results": "{\"t\": \"2026-10-23T09:41:58Z\", \"tool\": \"leanfinder\", \"query\": \"Finite etale algebras over a complete local formal monoid hypersurface are coefficient extensions from a finite etale local algebra of the coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation\", \"Algebra.IsStandardEtale\", \"StandardEtalePair\", \"StandardEtalePresentation.P\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instEtaleRing\", \"Algebra.instIsStandardEtaleRing\"], \"digest\": \"032f793ee181ab1c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned standard-etale presentations and etale algebras over fields do not state the complete-local formal-monoid coefficient lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete local finite etale formal monoid coefficient extension preserves maximal ideal and nonzero cotangent classes",
+   "results": "{\"t\": \"2026-10-23T09:41:59Z\", \"tool\": \"leanfinder\", \"query\": \"Complete local finite etale formal monoid coefficient extension preserves maximal ideal and nonzero cotangent classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.P\", \"StandardEtalePair.lift\", \"StandardEtalePresentation\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePair\", \"StandardEtalePair.instFormallyEtaleRing\"], \"digest\": \"38b024a101d2f60d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned standard-etale presentations and etale algebras over fields do not state the complete-local formal-monoid coefficient lift."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-completed-tame-monoid-base-change-model",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction: ILO X Lemma 2.2 proof, p.149, the successive modification of a marked nodal curve and the following smooth-pair-over-a-field sentence; the relative smoothness, rather than mere regularity, of the final free-characteristic charts; log regularity before choosing a sharp chart in repaired Step 1; completed local calculation for log-smooth preservation, including invertible torsion in the chart cokernel; Steps 9 and 14: finite-etale coefficient lift and preservation of cotangent classes",
+   "via": [
+    "lem-sfb-completed-tame-monoid-base-change-model",
+    "lem-sfb-log-smooth-preserves-log-regularity",
+    "lem-sfb-free-characteristic-relative-nc-criterion",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-etale-formal-monoid-coefficient-lift",
+  "worker": "stage1",
+  "summary": "DAG-wide search found an exact existing reviewed theorem, lem-per-finite-etale-formal-monoid-coefficient-lift. Reused it without creating duplicate nodes. Compared every hypothesis and clause, read its proof and key Stacks sources, checked its 409-node closure does not contain this item, searched Lean and Mathlib, and retained the item statement unchanged.",
+  "blueprint": "Preserves inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry: finite-etale coefficient lift and preservation of coefficient cotangent classes in steps 9 and 14 of lem-sfb-completed-tame-monoid-base-change-model. Blueprint ancestor command returns None because the inherited created.item chain terminates; retained its existing from.node=null and precise from.place. No imported blueprint node states the formal-monoid lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-per-finite-etale-formal-monoid-coefficient-lift",
+    "why": "Exact existing theorem providing this coefficient-lifting calculation; generic complete-local algebra tool, filed in the arbitrary-field duality ancestry. Reuse avoids a duplicate and preserves the unit alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-finite-etale-formal-monoid-coefficient-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-d18d49cc7",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-d18d49cc7 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item's statement is the earlier node lem-per-finite-etale-formal-monoid-coefficient-lift's statement verbatim, plus three sentences that only define local, complete, D[[S]] and κ(K). The stmt_deps are identical. The single step cites that node as a direct restatement, which the stage-1 brief allows, and the citation is declared as a tool use. I read the cited node's 11 steps in full and they are correct. They use Stacks 00FN, 0316, 05GG, 0325, 0ALJ, 00GK, 00OI, 00U4, 00U3, 04GK (and 09ZL, checked in more-algebra.tex at line 3383), 00MA, 07NF (checked in algebra.tex at line 46610), 00NZ, 00HR and 05CK; the finite-basis completion identification D[[S]] ≅ D⊗H is elementary. Edge cases S={0}, E a field, f=0, f=t² and E=Z_p with f=p all hold. The parent lem-sfb-completed-tame-monoid-base-change-model uses the lemma in steps 9 and 14 exactly as stated. A grep of the whole DAG finds no other duplicate. Batch-5 check: the cited node's closure reaches sec-trace-formula only through the definitions def-trf-fs-log-blowup and def-trf-log-regular-pair, which are not part of the trace formula or Poincaré duality. The item already cited def-trf-fs-log-blowup on base, and the citation adds 0 nodes to the parent's closure. Artin–Gabber check: the cited node is plain commutative algebra and uses none of the forbidden methods. Without this new edge, its citers end at the orphan lem-per-qbar-middle-tstructure and no longer reach lem-per-artin-gabber-affine-curve or any target. The item is in sk-thm-sf-ctf-stability, not that node or its children, so the citation is accepted. Maintainer note: the cited node is now in the live closure, so keep it (or merge the two) if the dropped subtree is pruned."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteEtaleFormalMonoidCoefficientLift",
+  "declaration": "AddMonoidAlgebra.finiteEtale_formalMonoid_coefficientLift",
+  "statement": "theorem finiteEtale_formalMonoid_coefficientLift (E : Type u) [CommRing E] [IsRegularLocalRing E] [IsAdicComplete (IsLocalRing.maximalIdeal E) E] (S : Type v) [AddCommMonoid S] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative S)) (hsharp : ∀ s : S, IsUnit (Multiplicative.ofAdd s) → s = 0) (a : Ideal (AddMonoidAlgebra E S)) (ha : a = Ideal.map (algebraMap E (AddMonoidAlgebra E S)) (IsLocalRing.maximalIdeal E) ⊔ Ideal.span {b | ∃ s : S, s ≠ 0 ∧ b = single s (1 : E)}) (f : AdicCompletion a (AddMonoidAlgebra E S)) (hf : f ∈ Ideal.map (algebraMap (AddMonoidAlgebra E S) _) a) (K : Type w) [CommRing K] [IsLocalRing K] [Algebra (AdicCompletion a (AddMonoidAlgebra E S) ⧸ Ideal.span {f}) K] [Module.Finite (AdicCompletion a (AddMonoidAlgebra E S) ⧸ Ideal.span {f}) K] [Algebra.Etale (AdicCompletion a (AddMonoidAlgebra E S) ⧸ Ideal.span {f}) K] : ∃ (D : Type (max u v w)) (_ : CommRing D) (_ : IsRegularLocalRing D) (_ : Algebra E D), Module.Finite E D ∧ Algebra.Etale E D ∧ IsAdicComplete (IsLocalRing.maximalIdeal D) D ∧ Nonempty (IsLocalRing.ResidueField D ≃+* IsLocalRing.ResidueField K) ∧ IsLocalRing.maximalIdeal D = Ideal.map (algebraMap E D) (IsLocalRing.maximalIdeal E) ∧ (∀ x : E, x ∈ IsLocalRing.maximalIdeal E → x ∉ (IsLocalRing.maximalIdeal E) ^ 2 → algebraMap E D x ∈ IsLocalRing.maximalIdeal D ∧ algebraMap E D x ∉ (IsLocalRing.maximalIdeal D) ^ 2) ∧ ∃ e : K ≃+* CoefficientHypersurface E S a f D, (∀ h : AdicCompletion a (AddMonoidAlgebra E S), e (algebraMap (AdicCompletion a (AddMonoidAlgebra E S) ⧸ Ideal.span {f}) K (Ideal.Quotient.mk (Ideal.span {f}) h)) = Ideal.Quotient.mk (Ideal.span {formalCoefficientMap E S a D f}) (formalCoefficientMap E S a D h)) ∧ @Continuous K (CoefficientHypersurface E S a f D) (IsLocalRing.maximalIdeal K).adicTopology (coefficientHypersurfaceTopology E S a f D) e ∧ @Continuous (CoefficientHypersurface E S a f D) K (coefficientHypersurfaceTopology E S a f D) (IsLocalRing.maximalIdeal K).adicTopology e.symm",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing canonical statement of lem-per-finite-etale-formal-monoid-coefficient-lift. The item adds only explanatory definitions of local rings, completeness, the completed monoid ring, and residue fields. Reuses the restored live declaration as required by the resolved maintenance handoff; no duplicate module or declaration is delivered."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6387a3e94",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Lean-record-only delivery (existing:true) binding the item to AddMonoidAlgebra.finiteEtale_formalMonoid_coefficientLift, the canonical declaration of its sole proof_dep lem-per-finite-etale-formal-monoid-coefficient-lift, as the resolved repair-notes handoff prescribes. The node is identical to live apart from lean. The item statement is the lem-per statement verbatim plus definitional sentences, with identical stmt_deps. lean.statement is byte-identical to the live, already PASSed lem-per record, and the declaration exists in side-live. Neither node nor module is on the route-pivot-dropped lists. All clauses map: completion ideal pinned by ha, f=0 allowed, A0-compatible iso, continuity both ways, cotangent clause for all x in n\\n^2. Helpers mapRingHomAlong/formalCoefficientMap/CoefficientHypersurface/topology are real constructions with docstrings. Universes are not restricted. Edge cases S={0}, E a field, f=0, f=t^2, Z_p with f=p hold. The report has both required sections. No files changed, so no compile."
+ }
+}

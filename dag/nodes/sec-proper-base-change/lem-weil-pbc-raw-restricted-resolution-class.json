@@ -13,28 +13,38 @@
  ],
  "proof": [
   {
-   "text": "Compare the two homomorphisms at an arbitrary raw class z. Put A=f^{-1}Z[V] and let I be the chosen injective resolution.\nCompose z with the shifted augmentation F[0][q] -> Q(I)[q]. Since I[q] is\nK-injective, localization and the homotopy quotient supply a chain representative\nc:A[0] -> I[q]. Exact etale restriction preserves injectives, so the restricted\ncomplex has the same resolution property. The resolution evaluation formula sends\nc to the homology class of its value at the pulled-back identity generator.\nThe termwise normalizationSectionsIso identifies this value with the corresponding\nsection of I[q] over V times_S X. Undoing the shift gives its degree-q section\ncocycle in the homology presheaf of f_*I.\n\nTake the ordinary termwise adjunct c':Z[V][0] -> f_*I[q]. Its value at the\nidentity generator is exactly that same section cocycle, by the unit formula for\nthe ordinary adjunction. The factorization of the derived adjunction unit through\nthe ordinary unit identifies the derived adjunct of Q(c) with Q(c') followed by\nthe right-derived comparison. This follows by moving the localization comparison\nthrough the unit using naturality and then applying the adjunction triangle\nidentity. Naturality with the augmentation gives the derived adjunct of z.\n\nThe definition of normalizationResolutionClass first sheafifies the homology\npresheaf, uses exactness of sheafification to identify its homology, applies the\nsheafification counit to the direct-image complex, and finally applies the two\naugmentation-normalized derived-functor comparisons. On a section cocycle,\nhomology-map naturality with the cycle projection shows that the first three\nfactors give its class in the homology sheaf of f_*I. Hence this composite sends\nthe evaluated representative c to the degree-q class of c' at the identity generator,\nwith the prescribed augmentation comparison at the end.\n\nFinally, applying H^0 to the derived adjunct of z and evaluating the generator\nis the definition of abelianHigherDirectImageClass. The single-complex homology\ncomparison and the homology shift comparison identify H^0(Q(c')) evaluated at\nthe generator with the degree-q class of that generator's image in f_*I.\nTheir naturality with the derived-unit and augmentation comparisons gives the\nsame augmentation-normalized class just computed. The derived adjunction shift\ncompatibility uses these same shift comparisons, so their signs agree. Homotopic\nrepresentatives differ by boundaries, and both constructions send a boundary to\nzero. This proves the formula for every z, including q=0 and empty charts. By definition normalizationKappa has value abelianHigherDirectImageClass. Extensionality therefore gives the stated homomorphism equality.",
+   "text": "At an arbitrary raw class z, compose with the shifted augmentation a:F[0][q] ≅ Q(I[q]). K-injectivity of I[q] and the localization bijection give a homotopy class, then a chain representative c:A[0] → I[q]. Full faithfulness of D+ into D gives Q(c)=z ≫ a; cancelling a yields z=Q(c) ≫ a.inv.",
    "uses": [
-    "lem-sbc-raw-restricted-resolution-evaluation",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-sbc-abelian-higher-direct-image-class-compatibility",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-derived-adjunction-commshift"
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false
+  },
+  {
+   "text": "Let T be zeroth derived restricted sections and x the transported identity generator. Evaluate rawRestricted_resolution_shift_square at T(z)(x). Functoriality and z=Q(c) ≫ a.inv give T(a)(T(z)(x))=T(Q(c))(x). Apply rawRestricted_resolution_evaluation to c into the shifted K-injective resolution. Thus normalizationRestrictedIso(rawRestrictedCohomologyComparison(z)) is the shifted section cocycle of c. Apply normalizationResolutionClass to this equality.",
+   "uses": [
+    "lem-weil-pbc-raw-restricted-resolution-cocycle",
+    "lem-sbc-raw-restricted-resolution-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply resolutionCocycle_adjunction_class to identify this image with abelianHigherDirectImageClass(z). This is normalizationKappa(z) by definition. Extensionality gives the equality of abelian-group homomorphisms.",
+   "uses": [
+    "lem-weil-pbc-resolution-cocycle-adjunction-class"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-raw-restricted-resolution-evaluation",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "lem-sbc-abelian-higher-direct-image-class-compatibility",
   "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-derived-adjunction-commshift"
+  "lem-weil-pbc-raw-restricted-resolution-cocycle",
+  "lem-sbc-raw-restricted-resolution-evaluation",
+  "lem-weil-pbc-resolution-cocycle-adjunction-class"
  ],
  "proof_origin": {
-  "by": "F2",
+  "by": "J7",
   "document": "Stacks Project",
-  "place": "Fixed-resolution part of parent normalization proof, steps 2–3 and 6"
+  "place": "Tags 072W, 0DVC and 09T5: reduction to chain representatives, followed by the two separate chain-level comparison identities."
  },
  "mathlib_searches": [
   {
@@ -92,7 +102,7 @@
   "module": "Sheaf.AlgebraicGeometry.RawRestrictedResolutionClass",
   "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedResolutionClass.lean",
   "declaration": "AlgebraicGeometry.Etale.rawRestrictedResolution_class",
-  "statement": "theorem rawRestrictedResolution_class {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale) : rawRestrictedCohomologyComparison f q F V ≫ normalizationIota f q F V = (normalizationKappa f q F).app (op V)",
+  "statement": "theorem rawRestrictedResolution_class {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale) :\n    rawRestrictedCohomologyComparison f q F V ≫ normalizationIota f q F V =\n      (normalizationKappa f q F).app (op V)",
   "branch": "sheaf-dag",
   "by": "F2",
   "date": "2026-10-22"
@@ -108,13 +118,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-11761",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "J7",
   "result": "pass",
-  "landing": "20261022T011833-L-3222256",
+  "landing": "20261025T095515-L-3431351",
   "kind": "interface",
-  "note": "independent cc review: item statement vs clone (byte-identical); data module vs old item module construction block (same bodies; def/abbrev swaps and transport builder declared in change record); three sorry lemmas vs item clauses 1, 2, 5 (equivalent up to cancelling isomorphisms); node proof/proof_deps vs Lean proof"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

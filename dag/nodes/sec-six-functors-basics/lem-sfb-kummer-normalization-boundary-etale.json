@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-kummer-normalization-boundary-etale",
+ "kind": "statement",
+ "title": "Killing boundary ramification in normalized Galois tensor factors",
+ "statement": "Let $R\\hookrightarrow B$ be an injective map of Noetherian normal domains, with induced fraction-field inclusion $K\\hookrightarrow E$ [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring, def-pc-field-extension]. Fix $n\\geq1$ invertible in $R$. Let $(L_j/K)_j$ be a nonempty finite family of finite Galois field extensions with $[L_j:K]\\mid n$, and fix an $E$-algebra decomposition\n$$\\prod_j(L_j\\otimes_K E)\\cong\\prod_a F_a$$\ninto a finite family of finite separable extensions $F_a/E$ [def-weil-pbc-separable-algebraic-extension], each with the structure induced by its tensor factor. Let $C_a$ be the integral closure of $B$ in $F_a$ and put $C=\\prod_a C_a$ [def-weil-pbc-integral-closure]. Let $\\mathfrak q\\subset B$ be a height-one prime (nonzero with no prime strictly between $(0)$ and $\\mathfrak q$), and put $\\mathfrak p=\\mathfrak q\\cap R$. Assume $V=R_{\\mathfrak p}$ and $A=B_{\\mathfrak q}$ are discrete valuation rings [def-weil-pbc-localization-at-prime, def-sc-discrete-valuation-ring], that the induced map $V\\to A$ is finite and injective, and that $\\mathfrak m_VA=\\mathfrak m_A^{n}$. Then $C$ is a finite, hence finitely presented, $B$-algebra. For every prime $\\mathfrak Q_a$ of $C_a$ over $\\mathfrak q$, one has\n$$\\Omega_{(C_a)_{\\mathfrak Q_a}/A}=0$$\n[def-weil-pbc-kahler-differentials]. For every prime $\\mathfrak Q$ of $C$ over $\\mathfrak q$, the local ring $C_{\\mathfrak Q}$ is flat over $A$ [def-weil-pbc-flat-ring-map], $(\\Omega_{C/B})_{\\mathfrak Q}=0$, and there is $g\\in C\\setminus\\mathfrak Q$ such that $\\operatorname{Spec}C[1/g]\\to\\operatorname{Spec}B$ is etale [def-weil-affine-spectrum, def-weil-ring-localization-away, def-weil-etale-morphism]. No assumption that $B$ or $C$ is excellent is required.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1(i), printed pp.133-134: codimension-one Abhyankar subargument, returned steps 11-13. Stacks more-algebra.tex Tags 09EB (lemma-galois-conclusion), 0BRM (lemma-abhyankar), algebra.tex Tags 032L (lemma-Noetherian-normal-domain-finite-separable-extension), 0307 (lemma-integral-closure-localize), 00FP (lemma-Noetherian-finite-type-is-finite-presentation), 08WD (lemma-etale-flat-unramified-finite-presentation); differential and flatness comparisons use the existing nodes recorded in the returned steps."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For each $a$, apply [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] to the Noetherian normal domain $B$, its fraction field $E$, and the given finite separable extension $F_a/E$. Thus $C_a$ is finite over $B$. Choose finite module generators in every factor and insert them into the product with zero in the other coordinates; these finitely many elements generate $C$ as a $B$-module. The same elements generate it as a $B$-algebra. By [lem-weil-pbc-finite-type-noetherian-finite-presentation], $C$ is finitely presented over $B$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032L (lemma-Noetherian-normal-domain-finite-separable-extension) and 00FP (lemma-Noetherian-finite-type-is-finite-presentation)."
+   }
+  },
+  {
+   "text": "Put V = R_p and A = B_q, with the localization maps into the specified fraction fields K and E. The canonical fraction field of V is V-algebra isomorphic to K. A prime kernel of the projection from the given product decomposition to F_a selects one tensor coordinate j (PrimeSpectrum.exists_comap_evalRingHom_eq). Factoring this surjective projection through coordinate evaluation gives a surjective E-algebra map L_j tensor_K E -> F_a. Its restriction iL to L_j commutes with K and its image generates F_a over E. Since A is finite faithful over V, E is also the localization of A at the nonzero elements of V. The inverses of these elements lie in iL(L_j), so the same image generates F_a as an A-algebra. Tensor lifting therefore gives a surjection L_j tensor_V A -> F_a, identifying F_a with the quotient by a maximal ideal and respecting its specified A-structure. The private helpers tensor_field_factor and adjoin_over_finite_dvr_extension implement these comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM (lemma-abhyankar), generic tensor-product setup; explicit finite-dimensional linear-algebra and localization argument for the input of lem-sbc-dvr-tame-tensor-factor-unramified."
+   }
+  },
+  {
+   "text": "Put $T=B\\setminus\\mathfrak q$. By [lem-weil-pbc-integral-closure-commutes-localization],\n$$S_a=T^{-1}C_a=\\overline A^{\\,F_a},$$\nas subrings of $F_a$: localizing the field $F_a$ at the nonzero images of $T$ leaves that field unchanged. Localizing the finite module generators from Step 1 makes $S_a$ finite over $A$. A prime $\\mathfrak Q_a$ over $\\mathfrak q$ is disjoint from $T$, hence gives $Q'_a=T^{-1}\\mathfrak Q_a$ in $S_a$, contracting to $\\mathfrak m_A$. The fractions in $(S_a)_{Q'_a}$ and $(C_a)_{\\mathfrak Q_a}$ have precisely the same denominators after iterated localization, so these rings are canonically equal as $A$-algebras.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); localization at the chosen boundary prime."
+   }
+  },
+  {
+   "text": "For the selected j, apply [lem-sbc-dvr-galois-normalization-ramification-dvd] over V to L_j after transporting its K-algebra structure along Frac(V) ≃ K. The Galois property, finrank, and divisibility by n transport along this equivalence. Apply [lem-sbc-dvr-tame-tensor-factor-unramified] to the maximal tensor quotient constructed in Step 2, using the finite normalization S_a and its closed prime from Step 3. This gives formal unramifiedness of (S_a)_Q over A. The private helper tame_compositum_unramified_same makes this application and transports through the quotient and integral-closure equivalences. To accommodate the upstream lemmas' single universe without restricting the item's independent universes, tame_compositum_unramified uses Module.Finite.small to replace A and L_j by Shrink models in V's universe. DVR, Galois, finite normalization, ideal-power, and finrank data transport along the ring and algebra equivalences. Localized normalization and formally unramified maps transport back. Step 3 then gives vanishing of the relative Kahler differentials for (C_a)_{Q_a}.",
+   "uses": [
+    "lem-sbc-dvr-galois-normalization-ramification-dvd",
+    "lem-sbc-dvr-tame-tensor-factor-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09EB (lemma-galois-conclusion) and 0BRM (lemma-abhyankar), in the existing two DVR lemmas; formal unramifiedness is their stated vanishing of differentials."
+   }
+  },
+  {
+   "text": "The localization $(C_a)_{\\mathfrak Q_a}$ embeds in $F_a$, since $C_a$ is a subring of that field and every element inverted is nonzero. Also $A\\hookrightarrow F_a$ is injective. Thus, if $0\\ne b\\in A$ and $bx=0$ in this local ring, the same equation in $F_a$ gives $x=0$. It is torsion-free over $A$. A DVR is a principal ideal domain by [def-sc-discrete-valuation-ring], so [lem-weil-pbc-pid-torsion-free-module-flat] gives flatness over $A$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW (lemma-dedekind-torsion-free-flat), part (1), applied to the torsion-free localized subring of a field."
+   }
+  },
+  {
+   "text": "A prime of the finite product C selects one factor, using PrimeSpectrum.exists_comap_evalRingHom_eq. The bijective map Localization.AtPrime.mapPiEvalRingHom identifies C_Q with the corresponding (C_a)_{Q_a}. Its compatibility with the canonical A-localization maps transfers flatness from Step 5 and formal unramifiedness from Step 4. Formal unramifiedness of B -> A, which is a localization, and composition give formal unramifiedness of B -> C_Q. By [lem-weil-pbc-kahler-differentials-localization] the canonical map Omega(C/B) -> Omega(C_Q/B) is a localization of modules. Since the latter is zero, so is (Omega(C/B))_Q. These steps are implemented by the proved private helper pi_boundary_local_properties and the canonical localized-module isomorphism.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RT (lemma-differentials-localize), parts (1) and (2); finite-product localization written explicitly using coordinate idempotents."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-etale-at-prime-flat-unramified-criterion] to $B\\to C$ and $\\mathfrak Q$. Finite presentation is Step 1, its contracted prime is $\\mathfrak q$, and its flatness and localized differential-vanishing hypotheses are Step 6. The criterion supplies $g\\in C\\setminus\\mathfrak Q$ such that $\\operatorname{Spec}C[1/g]\\to\\operatorname{Spec}B$ is etale. This proves all assertions. The finiteness input was the separable-extension theorem over a Noetherian normal domain, which has no excellence hypothesis.",
+   "uses": [
+    "lem-sc-etale-at-prime-flat-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U6 (lemma-characterize-etale) and 08WD (lemma-etale-flat-unramified-finite-presentation), pointwise criterion as stated by the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-sbc-dvr-galois-normalization-ramification-dvd",
+  "lem-sbc-dvr-tame-tensor-factor-unramified",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-etale-at-prime-flat-unramified-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly of Tags 09EB and 0BRM using existing DVR nodes; global finiteness/localization and pointwise etale steps from algebra.tex Tags 032L, 0307, 00FP, 00RT, 00U6, 08WD. Context: ILO IX Proposition 2.1(i), printed pp.133-134. Lean implementation by E1: finite-product projection kernels, adjoin generation over the finite DVR extension, Shrink universe transport for upstream DVR lemmas, integral-closure localization, and product local-ring equivalences. The seven-step unit route and proof dependencies are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite Galois extensions of degree dividing an invertible integer n, base change along a finite extension of boundary discrete valuation rings of ramification n makes each finite normalized tensor field factor etale at boundary points",
+   "results": "{\"t\": \"2026-10-22T05:58:38Z\", \"tool\": \"leanfinder\", \"query\": \"For finite Galois extensions of degree dividing an invertible integer n, base change along a finite extension of boundary discrete valuation rings of ramification n makes each finite normalized tensor field factor etale at boundary points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.comp\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_restrictScalars\"], \"digest\": \"4ab18a0c1c094322\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale.baseChange assumes an already etale input; differential base change and ramification-index-one criteria do not prove Abhyankar ramification removal or its normalization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ramificationIdx\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T05:58:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"ramificationIdx\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale.baseChange assumes an already etale input; differential base change and ramification-index-one criteria do not prove Abhyankar ramification removal or its normalization comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|((ramificationIdx|ramificationIdxIn).*(Etale|Unramified))|((Etale|Unramified).*(ramificationIdx|ramificationIdxIn))",
+   "results": "{\"t\": \"2026-10-22T05:58:27Z\", \"tool\": \"grep\", \"query\": \"Abhyankar|((ramificationIdx|ramificationIdxIn).*(Etale|Unramified))|((Etale|Unramified).*(ramificationIdx|ramificationIdxIn))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/DedekindDomain/Different.lean\"], \"digest\": \"e3b08be9e7b3178e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale.baseChange assumes an already etale input; differential base change and ramification-index-one criteria do not prove Abhyankar ramification removal or its normalization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abhyankar base change kills Galois ramification in normalized tensor factors; vanishing Kahler differentials and torsion free flatness over the boundary DVR give an etale source neighbourhood",
+   "results": "{\"t\": \"2026-10-22T05:58:28Z\", \"tool\": \"leansearch\", \"query\": \"Abhyankar base change kills Galois ramification in normalized tensor factors; vanishing Kahler differentials and torsion free flatness over the boundary DVR give an etale source neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.mapBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.Unramified.baseChange\", \"Algebra.Etale.baseChange\", \"KaehlerDifferential.isLocalizedModule_map\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\"], \"digest\": \"608c1d4d2b32651b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale.baseChange assumes an already etale input; differential base change and ramification-index-one criteria do not prove Abhyankar ramification removal or its normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abhyankar base change kills Galois ramification in normalized tensor factors; vanishing Kahler differentials and torsion free flatness over the boundary DVR give an etale source neighbourhood",
+   "results": "{\"t\": \"2026-10-22T05:59:37Z\", \"tool\": \"leanfinder\", \"query\": \"Abhyankar base change kills Galois ramification in normalized tensor factors; vanishing Kahler differentials and torsion free flatness over the boundary DVR give an etale source neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.comp\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"48a8d4082b770b8e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale.baseChange assumes an already etale input; differential base change and ramification-index-one criteria do not prove Abhyankar ramification removal or its normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Galois extension of degree dividing n becomes unramified after normalized base change along a finite extension of discrete valuation rings of ramification index n invertible in the base",
+   "results": "{\"t\": \"2026-10-22T06:58:51Z\", \"tool\": \"leanfinder\", \"query\": \"A finite Galois extension of degree dividing n becomes unramified after normalized base change along a finite extension of discrete valuation rings of ramification index n invertible in the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.Unramified.baseChange\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"NumberField.InfinitePlace.isUnramifiedIn_comap\", \"Algebra.Unramified.comp\", \"Ideal.ramificationIdx_eq_of_isGalois\", \"Ideal.ramificationIdx_eq_of_isGaloisGroup\"], \"digest\": \"a36d5de55f039d8f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned base-change lemmas require etaleness/unramifiedness already; Galois index formulas and the different criterion do not remove tame ramification in a normalized tensor factor. No single Mathlib declaration gives this item."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|tame.*tensor|tensor.*tame|ramificationIdx.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-22T07:11:21Z\", \"tool\": \"grep\", \"query\": \"Abhyankar|tame.*tensor|tensor.*tame|ramificationIdx.*[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned base-change lemmas require etaleness/unramifiedness already; Galois index formulas and the different criterion do not remove tame ramification in a normalized tensor factor. No single Mathlib declaration gives this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite Galois extension of degree dividing n becomes unramified after normalized base change along a finite extension of discrete valuation rings of ramification index n invertible in the base",
+   "results": "{\"t\": \"2026-10-22T07:11:22Z\", \"tool\": \"leansearch\", \"query\": \"A finite Galois extension of degree dividing n becomes unramified after normalized base change along a finite extension of discrete valuation rings of ramification index n invertible in the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Unramified.baseChange\", \"IsGalois.to_normal\", \"Ideal.ramificationIdx_eq_of_isGalois\", \"Ideal.ramificationIdxIn_eq_ramificationIdx\", \"Ideal.ramificationIdx_eq_of_isGaloisGroup\", \"IsUnramifiedAtInfinitePlaces_of_odd_finrank\", \"NumberField.InfinitePlace.card_isUnramified\", \"not_dvd_differentIdeal_iff\"], \"digest\": \"8494e2955355d25b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned base-change lemmas require etaleness/unramifiedness already; Galois index formulas and the different criterion do not remove tame ramification in a normalized tensor factor. No single Mathlib declaration gives this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abhyankar lemma finite normalization tensor product Galois extension etale at primes over a discrete valuation ring after ramified base change",
+   "results": "{\"t\": \"2026-10-22T07:11:29Z\", \"tool\": \"leanfinder\", \"query\": \"Abhyankar lemma finite normalization tensor product Galois extension etale at primes over a discrete valuation ring after ramified base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.Etale.baseChange\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.IsUnramifiedAt\", \"Algebra.Unramified.baseChange\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"58657080c25c0980\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned base-change lemmas require etaleness/unramifiedness already; Galois index formulas and the different criterion do not remove tame ramification in a normalized tensor factor. No single Mathlib declaration gives this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; finite-cover geometric input: prime-to-p Galois torsors on a strict-local boundary puncture are split at a finite simultaneous parameter-root level. Re-split subargument: returned proof steps 11-13, Killing boundary ramification in normalized Galois tensor factors.",
+   "via": [
+    "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+    "lem-sfb-lisse-lattice-potential-kummer-tameness",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-kummer-normalization-boundary-etale",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven-step assembly of existing finite-normalization, Galois divisibility, tame DVR tensor-factor, differential-localization, PID flatness and pointwise etale criteria. The tensor-factor and product-localization maps are made explicit; no new nodes or excellence assumptions.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; finite-cover geometric input: prime-to-p Galois torsors on a strict-local boundary puncture are split at a finite simultaneous parameter-root level. Re-split subargument: returned proof steps 11-13, Killing boundary ramification in normalized Galois tensor factors.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-dvr-galois-normalization-ramification-dvd",
+    "why": "Generic DVR Galois ramification/residue-degree bound supplies the hypotheses of the boundary Abhyankar input; no statement of the coefficient unit supplies this local algebra."
+   },
+   {
+    "node": "lem-sbc-dvr-tame-tensor-factor-unramified",
+    "why": "Generic tame DVR normalized tensor-factor lemma kills ramification after the prescribed index-n base extension; no coefficient-unit node supplies this fact."
+   },
+   {
+    "node": "lem-sc-etale-at-prime-flat-unramified-criterion",
+    "why": "Generic affine pointwise etale criterion converts the proven flatness and vanishing differentials into a principal source neighbourhood; it does not replace the coefficient-unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-dvr-galois-normalization-ramification-dvd",
+  "lem-sbc-dvr-tame-tensor-factor-unramified",
+  "lem-sc-etale-at-prime-flat-unramified-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O1-5db2234ae",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-5db2234ae (reviewer sub-agent of L); spot-checked: PASS, no fixes or dropped nodes. The statement and stmt_deps are byte-identical to the base (unsplit, empty proof). Live is still unsplit, there is no repair note, and the delivery has zero new nodes. The 7-step proof carries every argument of the parent's old steps 11-13 (NK d91a019d) and improves two of them. Step 2 now proves the tensor identification: A⊗_V K is a finite-dimensional domain, hence a field, hence E. Step 6 replaces the old base-change mis-citation with a Leibniz argument plus the universal property of Kähler differentials, which identifies B-derivations with A-derivations on C_Q. Every cited statement checked hypothesis by hypothesis. 032L leaf (B Noetherian normal, F_a/E separable) and 00FP leaf give finite presentation. 0307 leaf with T=B∖q gives T^{-1}C_a = integral closure of A in F_a, finite over A. The Galois-dvd node (V, L_j, [L_j:K]|n) gives e,f|n. The tame tensor-factor node gets all its inputs: finite injective V→A, n a unit, m_V A=m_A^n, L_j separable, D/P_a with right A-structure, S finite. Its output Ω=0 matches 0BRM, since f|n with p∤n gives separable residue extensions. PID torsion-free ⇒ flat. Source localization of Ω (00RT leaf) is used only for what it states. 08WD criterion (3)⇒(2) is applied with p=q. Sources read: ILO IX 2.1 pp.133-134, Stacks 0BRM, and every tag/label pair. No SGA citation. No cycle (172-node closure). No duplicate: snc-tame-root-etale-extension, codimension-one-neighbourhood-etale-extension, per-kummer-boundary-restriction and the sbc DVR nodes were read. Tool uses accepted: lem-sbc-dvr-galois-normalization-ramification-dvd, lem-sbc-dvr-tame-tensor-factor-unramified and lem-sc-etale-at-prime-flat-unramified-criterion are generic local algebra. Small cases checked: t=s^n Kummer (C=∏k[s] étale), n=1, repeated factors."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KummerNormalizationBoundaryEtale",
+  "declaration": "RingTheory.kummer_normalization_boundary_etale",
+  "file": "lean/Sheaf/RingTheory/KummerNormalizationBoundaryEtale.lean",
+  "statement": "theorem kummer_normalization_boundary_etale (R : Type uR) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (B : Type uB) [CommRing B] [IsDomain B] [IsNoetherianRing B] [IsIntegrallyClosed B] [Algebra R B] (hRB : Function.Injective (algebraMap R B)) (K : Type uK) [Field K] [Algebra R K] [IsFractionRing R K] (E : Type uE) [Field E] [Algebra B E] [IsFractionRing B E] [Algebra K E] (hKE : (algebraMap K E).comp (algebraMap R K) = (algebraMap B E).comp (algebraMap R B)) (n : ℕ) (hn : 0 < n) (hnunit : IsUnit (n : R)) (J : Type uJ) [Finite J] [Nonempty J] (L : J → Type uL) [∀ j, Field (L j)] [∀ j, Algebra K (L j)] [∀ j, FiniteDimensional K (L j)] [∀ j, IsGalois K (L j)] (hdegree : ∀ j, Module.finrank K (L j) ∣ n) (I : Type uI) [Finite I] (F : I → Type uF) [∀ a, Field (F a)] [∀ a, Algebra E (F a)] [∀ a, FiniteDimensional E (F a)] [∀ a, Algebra.IsSeparable E (F a)] [∀ a, Algebra B (F a)] (hBF : ∀ a, algebraMap B (F a) = (algebraMap E (F a)).comp (algebraMap B E)) (decomposition : @AlgEquiv E (∀ j, L j ⊗[K] E) (∀ a, F a) _ _ _ (@Pi.algebra J E (fun j ↦ L j ⊗[K] E) _ _ (fun _ ↦ Algebra.TensorProduct.rightAlgebra)) _) (q : Ideal B) [q.IsPrime] (hheight : q ≠ ⊥ ∧ ∀ r : Ideal B, r.IsPrime → r < q → r = ⊥) [IsDiscreteValuationRing (Localization.AtPrime (q.comap (algebraMap R B)))] [IsDiscreteValuationRing (Localization.AtPrime q)] (hfinite : RingHom.Finite (Localization.localRingHom (q.comap (algebraMap R B)) q (algebraMap R B) rfl)) (hinjective : Function.Injective (Localization.localRingHom (q.comap (algebraMap R B)) q (algebraMap R B) rfl)) (hindex : (IsLocalRing.maximalIdeal (Localization.AtPrime (q.comap (algebraMap R B)))).map (Localization.localRingHom (q.comap (algebraMap R B)) q (algebraMap R B) rfl) = IsLocalRing.maximalIdeal (Localization.AtPrime q) ^ n) : Module.Finite B (∀ a, integralClosure B (F a)) ∧ Algebra.FinitePresentation B (∀ a, integralClosure B (F a)) ∧ (∀ (a : I) (Q : Ideal (integralClosure B (F a))) [Q.IsPrime] (hQ : q = Q.comap (algebraMap B (integralClosure B (F a)))), Subsingleton (@KaehlerDifferential (Localization.AtPrime q) (Localization.AtPrime Q) _ _ (Localization.localRingHom q Q (algebraMap B (integralClosure B (F a))) hQ).toAlgebra)) ∧ (∀ (Q : Ideal (∀ a, integralClosure B (F a))) [Q.IsPrime] (hQ : q = Q.comap (algebraMap B (∀ a, integralClosure B (F a)))), RingHom.Flat (Localization.localRingHom q Q (algebraMap B (∀ a, integralClosure B (F a))) hQ) ∧ Subsingleton (LocalizedModule Q.primeCompl (KaehlerDifferential B (∀ a, integralClosure B (F a)))) ∧ ∃ g : (∀ a, integralClosure B (F a)), g ∉ Q ∧ Algebra.Etale B (Localization.Away g))",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a779a8e7b",
+  "group": "NH",
+  "result": "pass",
+  "note": "Each hypothesis and conclusion matches the node: normal Noetherian domains, induced K→E via hKE, n>0 unit, nonempty finite Galois family with finrank dividing n, explicit Pi rightAlgebra AlgEquiv E decomposition, integralClosure factors with hBF, height-one q, DVR localizations, canonical localRingHom finite/injective/index; conclusions: Module.Finite, FinitePresentation, factor Kaehler Subsingleton, and for each Q over q: RingHom.Flat, localized Omega zero, exists g with Algebra.Etale B C[1/g]. The ring-level etale form matches the landed lem-sc-etale-at-prime criterion convention, avoids a forced universe equality and is equivalent by HasRingHomProperty (advisory only). Eight independent universes, all variables bound, statement verbatim, only lean added to the item node. Stmt_dep records are Mathlib-existing; def-sc-discrete-valuation-ring is a Mathlib leaf. Proof imports exist; the tame tensor lemma inputs match step 4 (stage-3 universe transport needed, not a stage-2 fault). Docstrings carry source, blueprint id and 7 steps. No duplicate found in side-live lean. No recompile (no files changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261023T131528-L-2117951",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "lem-diagonal-completed-diagram-realization",
+ "kind": "statement",
+ "title": "Transport the completed diagonal diagram to condensed coefficients",
+ "statement": "In the setting of [lem-diagonal-completed-frame], let delta be a completed diagonal arrow and tq,t1,t2 the three completed traces in the prescribed projective models. Assume normalized sources a1,a2 satisfy a_i R_i(delta) trace_i=id. There exists a condensed Z_ell Diagram d as in [def-sfb-diagonal-coefficient-category], such that every Family whose Z_ell component equals d admits a Reference for the specified whole completed arrow delta and traces as in [def-sfb-diagonal-coefficient-reference]. No integral extension, rationalization or quotient assertion is made.",
+ "stmt_deps": [
+  "lem-diagonal-completed-frame",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-diagrams"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), transport of the class and traces"
+ },
+ "proof": [
+  {
+   "text": "Obtain the completed coefficient frame. Conjugate delta by the source, single and shifted-line comparisons. Define each trace by the inverse direct-image/shifted-line comparison followed by the image of its completed trace and the regular-module comparison.",
+   "uses": [
+    "lem-diagonal-coefficient-integration-transport",
+    "lem-diagonal-canonical-right-derived",
+    "lem-diagonal-integral-root-map",
+    "lem-diagonal-completed-frame",
+    "lem-diagonal-completed-push-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The class square follows by cancellation of the source isomorphism. Each trace square follows by cancelling its defining inverse. Use integration_transport for each projection with the frame source square and these class and trace squares. Assemble Diagram and Reference; the canonical derived models have their literal functor equalities and units.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-canonical-right-derived",
+  "lem-diagonal-coefficient-integration-transport",
+  "lem-diagonal-completed-frame",
+  "lem-diagonal-completed-push-square",
+  "lem-diagonal-integral-root-map"
+ ],
+ "proof_origin": {
+  "by": "U4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), transport of the class and traces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport integration identity through a natural transformation and endpoint isomorphisms; canonical right derived functor computed on K injective complexes; diagonal trace coefficient extension and uniformizer quotient annihilation",
+   "results": "Eight hits, including InjectiveResolution.isoRightDerivedObj and Functor.mapDerivedCategoryFactorsh_hom_app; none states the normalized diagonal comparison. The canonical K-injective unit API is reused.",
+   "date": "2026-10-24",
+   "verdict": "No complete existing diagonal coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits, including rightDerivedUnique and LocalizerMorphism.Derives construction APIs. These provide the canonical unit universal property; they do not assert the geometric coefficient endpoints.",
+   "date": "2026-10-24",
+   "verdict": "Use the published universal-property API for the canonical derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|canonicalDiagonalRightDerived|diagonalUniformizer_annihilator|diagonalCompleted_frame|diagonalCoefficientFamily_extension|diagonalCoefficient_uniformizerFiniteComparison",
+   "results": "Zero hits in the search service. Local rg of both roots found the definitions of Reference, Family and ScalarCompatibility but no constructions.",
+   "date": "2026-10-24",
+   "verdict": "New comparison components are necessary for this reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "date": "2026-10-24",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), transport of the class and traces",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletedDiagramRealization",
+  "file": "lean/Sheaf/Paper/DiagonalCompletedDiagramRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCompletedDiagram_realization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCompletedDiagram_realization"
+  ],
+  "statement": "theorem diagonalCompletedDiagram_realization\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (tq : DiagonalTrace.Result l (ULift.{u} (Padic l)) (ProjectiveLine Y ↘ Y))\n    (t₁ : DiagonalTrace.Result l (ULift.{u} (Padic l))\n      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)))\n    (t₂ : DiagonalTrace.Result l (ULift.{u} (Padic l))\n      (pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)))\n    (hq : tq.model.model = Iso.refl (ProjectiveLine Y))\n    (h₁ : t₁.model.model = diagonalTraceFirstModel Y)\n    (h₂ : t₂.model.model = diagonalTraceSecondModel Y)\n    (a₁ : DiagonalTrace.SupportedSource l Y\n      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) t₁.Rc)\n    (a₂ : DiagonalTrace.SupportedSource l Y\n      (pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) t₂.Rc)\n    (hi₁ : DiagonalTrace.IsIntegration t₁.Rc.R a₁.hom t₁.trace δ)\n    (hi₂ : DiagonalTrace.IsIntegration t₂.Rc.R a₂.hom t₂.trace δ) :\n    ∃ d : Diagram (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y (zlLine l),\n      ∀ family : Family l Y, family.zl = d → Nonempty (Reference l Y δ family)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "independent cc review: item module diff + 13 new modules/nodes vs clone (Family, ScalarCompatibility, FiniteReductions, FamilyPullback, SupportedSource defs; unit sk-prop-diagonal-tower realized=empty; importer grep = 0)"
+ }
+}

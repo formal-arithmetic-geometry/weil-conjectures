@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-diagonal-finite-coefficient-extension",
+ "kind": "statement",
+ "title": "Extend one diagonal diagram to one finite coefficient field",
+ "statement": "Let ell be prime and let Y, P1_Y and its self-product be Noetherian, with ell invertible on Y. For every Z_ell Diagram d in [def-sfb-diagonal-coefficient-category] and every finite subextension E of Qbar_ell/Q_ell, there exist an integral Diagram i over O_E with spIntegralTwist and a rational Diagram r over E with spRationalTwist. Their scalar comparisons in [def-sfb-diagonal-coefficient-scalars] are ScalarCompatibility for the actual integralMap, integralLineMap and rationalLineMap of [def-sfb-diagonal-coefficient-maps]: d to i and i to r. No transition to another finite field and no closure diagram is asserted.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-maps",
+  "def-sfb-diagonal-coefficient-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1) and paragraph (2), rationalization before the finite-field colimit"
+ },
+ "proof": [
+  {
+   "text": "Pull l-invertibility to P and W. Apply the finite integral endpoint theorem at P,W. For rationalization the integral line is locally free of rank one; the signed-line tensor equivalence and internal/section flatness give its flatness. The flat endpoint theorem therefore supplies the rational endpoints directly, since spRationalTwist and rationalLineMap are defined by ordinary scalar extension and its unit.",
+   "uses": [
+    "lem-diagonal-finite-integral-endpoint",
+    "lem-route-sp-twists-locally-free",
+    "lem-weil-signed-line-tensor-equivalence",
+    "lem-c2-internal-section-module-flatness",
+    "lem-diagonal-flat-scalar-endpoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The three projective-line projections are qcqs. Apply the finite/localization scalar-square theorem with the actual input right-derived models to obtain normalized restriction squares and their invertible scalar mates on the shifted lines.",
+   "uses": [
+    "lem-diagonal-finite-scalar-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply diagonal_scalar_diagram_of_squares with the integral line endpoints and integral scalar squares, obtaining the integral Diagram and its ScalarCompatibility. Apply it again with the flat rational endpoints and rational scalar squares, obtaining the rational Diagram and its ScalarCompatibility. Pair the witnesses and comparisons.",
+   "uses": [
+    "lem-diagonal-scalar-diagram-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-finite-integral-endpoint",
+  "lem-route-sp-twists-locally-free",
+  "lem-weil-signed-line-tensor-equivalence",
+  "lem-c2-internal-section-module-flatness",
+  "lem-diagonal-flat-scalar-endpoint",
+  "lem-diagonal-finite-scalar-squares",
+  "lem-diagonal-scalar-diagram-transport"
+ ],
+ "proof_origin": {
+  "by": "Q2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraphs (1)--(2); application of the proved generic scalar-diagram transport to the integral and rational comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars transports a diagram and traces compatible with integral rational algebraic closure coefficient changes",
+   "results": "Eight hits, including LinearMap.trace_baseChange and algebraic trace comparisons; none is a derived-sheaf diagram extension theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match for either normalized finite-stage transport or closure coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits, including CategoryTheory.NatTrans.naturality. This is the naturality equation used to transport integration identities, not a coefficient-extension comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing integration_transport lemma for this categorical calculation; no complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarCompatibility|integration_transport|diagonalCoefficientFamily_extension",
+   "results": "The search service returned no hits. Local rg in lean/Sheaf and lean/WeilConjectures found the ScalarCompatibility definition, the original open extension theorem and the proved CategoryTheory.integration_transport. No finite-extension or coherent closure construction was found. Mathlib has PreservesFiniteBiproducts, not these geometric comparison records.",
+   "date": "2026-10-26",
+   "verdict": "New statements isolate the missing geometric comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCoefficientFamilyExtension",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1) and paragraph (2), rationalization before the finite-field colimit",
+   "via": [
+    "lem-diagonal-coefficient-family-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCoefficientFiniteExtension",
+  "file": "lean/Sheaf/Paper/DiagonalCoefficientFiniteExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCoefficient_finiteExtension",
+  "statement": "theorem diagonalCoefficient_finiteExtension\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    (d : Diagram (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y (zlLine l))\n    (E : PadicAlgCl.FiniteIntermediateField l) :\n    ∃ i : Diagram (Profinite.padicIntegersRingObj.{u} l E.1) Y\n        (fun X ↦ spIntegralTwist X l E),\n      ∃ r : Diagram (Profinite.continuousMapRingObj.{u} E.1) Y\n          (fun X ↦ spRationalTwist X l E),\n        Nonempty (ScalarCompatibility (integralMap l E) Y (zlLine l)\n          (fun X ↦ spIntegralTwist X l E) (integralLineMap l E) d i) ∧\n        Nonempty (ScalarCompatibility (padicIntegersRingObjToContinuousMapRingObj l E) Y\n          (fun X ↦ spIntegralTwist X l E) (fun X ↦ spRationalTwist X l E)\n          (rationalLineMap l E) i r)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3df5",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T222726-L-686554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T235929-L-1471056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

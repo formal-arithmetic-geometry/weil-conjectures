@@ -45,89 +45,77 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sf-clopen-lisse-complete-localization], simultaneously trivialize the finitely many nonzero residue cohomology sheaves on a finite clopen partition. On every nonempty piece $U$, restriction preserves completeness and the residue interval $[a,b]$; $U$ is quasi-compact, evaluation is exact, and finite free module sheaves are projective. Work on one such $U$.",
+   "text": "Apply lem-sf-residue-lisse-clopen-bases to obtain a finite disjoint open covering. On each member X, the completed pullback M is complete, X is compact and weakly contractible, all completed finite free sheaves are projective, and one ordered interval [a,b] and rank function r identify the residue cohomology with finite free sheaves. The same residue Tor interval holds on every object of X_proet.",
    "uses": [
-    "lem-sf-clopen-lisse-complete-localization"
+    "lem-sf-residue-lisse-clopen-bases"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 1; extracted arguments in the cited nodes."
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex; finite-residue-field specialization of the top-degree cone induction."
    }
   },
   {
-   "text": "By [lem-sf-completed-coefficient-free-resolution], shifted finite free $B_U$-sheaves are complete and uniformizer reduction is the stated triangle. Use [det-prop-integral-criterion-constant-coefficients] to identify this completeness with the convention of [det-pe-derived-nakayama-first-reduction]. Thus cones stay complete, and zero residue detects zero complete objects. The coefficient input and completeness convention require no finite-type or characteristic restriction on $U$.",
-   "uses": [
-    "lem-sf-completed-coefficient-free-resolution",
-    "det-prop-integral-criterion-constant-coefficients",
-    "det-pe-derived-nakayama-first-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 2; extracted arguments in the cited nodes."
-   }
-  },
-  {
-   "text": "Induct on $b-a\\geq0$, with claim that any complete $M$ on this fixed $U$ with constant finite-dimensional residue cohomology and residue Tor amplitude $[a,b]$ has a finite free model supported in $[a,b]$. The bound [lem-sf-complete-residue-cohomology-bounds] gives $H^q(M)=0$ outside that interval. Choose residue bases; [lem-sf-projective-cohomology-split-model] supplies their zero-differential model and the shifted-free Hom calculation.",
-   "uses": [
-    "lem-sf-complete-residue-cohomology-bounds",
-    "lem-sf-projective-cohomology-split-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 3; extracted arguments in the cited nodes."
-   }
-  },
-  {
-   "text": "Apply [lem-sf-complete-top-residue-cell-cone] to these bases. It gives $P=B_U^{r_b}$, a map $P[-b]\\to M$, and a complete cone $L$ with residue the split complex in $[a,b-1]$. If $a=b$, it gives $L=0$ and $M\\cong P[-a]$, proving the base case. If $a<b$, the cone satisfies precisely the induction hypotheses for $[a,b-1]$ on the same $U$, so induction supplies a finite free representative $Q^\\bullet$ of $L$ in that interval. This also includes $r_b=0$.",
+   "text": "On this fixed X prove by strong induction on (b-a).toNat that M has a finite free cochain model supported in [a,b]. Apply lem-sf-complete-top-residue-cell-cone to the chosen bases, giving a distinguished triangle F[-b] -> M -> L -> F[-b+1], completeness of L, and the shortened residue bases and Tor interval.",
    "uses": [
     "lem-sf-complete-top-residue-cell-cone"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 4; extracted arguments in the cited nodes."
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex; finite-residue-field specialization of the top-degree cone induction."
    }
   },
   {
-   "text": "Use [lem-sf-projective-top-cell-attachment] for the triangle $P[-b]\\to M\\to L\\to P[-b+1]$ and its representative $Q^\\bullet$. Its conclusion realizes the connecting map by an actual sheaf chain map and gives $\\operatorname{Cone}(g)[-1]\\cong M$ with finite free terms in $[a,b]$. This proves the induction step.",
+   "text": "If a=b, the cone theorem says the first morphism is an isomorphism. Use the actual single complex with F=topCellIntegralFree(r b) in degree b. Its other terms are zero, identified with the free module on the empty basis. This proves the singleton-interval case, including rank zero.",
    "uses": [
-    "lem-sf-projective-top-cell-attachment"
+    "lem-sf-complete-top-residue-cell-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex; finite-residue-field specialization of the top-degree cone induction."
+   }
+  },
+  {
+   "text": "If a<b, (b-1-a).toNat is strictly smaller. Induction applied to L and its supplied residue bases gives a finite free model Q supported in [a,b-1]. Every term of Q is projective, by its isomorphism to a completed finite free sheaf. Transport the distinguished triangle along the induction isomorphism L ~= Q(Q).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex; finite-residue-field specialization of the top-degree cone induction."
+   }
+  },
+  {
+   "text": "The private attachCell proof works in any abelian category: a bounded-above complex of projectives is K-projective (Mathlib CochainComplex.isKProjective_of_projective). Surjectivity of IsKProjective.Qh_map_bijective, followed by the homotopy quotient map_surjective, represents the connecting morphism by a chain map g:Q -> F[-b+1]. Rotate the distinguished triangle twice and compare its first two objects with the cone triangle of g by isoTriangleOfIso12. Shift the resulting third-object isomorphism by -1, obtaining Q(Cone(g)[-1]) ~= M. The literal cone projections give its terms Q^q for q != b and F in degree b; the remaining terms vanish. Thus the resulting model is finite free and supported in [a,b]. All these comparisons are proved in Lean, without a new proof obligation.",
+   "uses": [
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 5; extracted arguments in the cited nodes."
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex; finite-residue-field specialization of the top-degree cone induction."
    }
   },
   {
-   "text": "Apply the claim to $K|_U$ on every partition member. Finite free terms are direct summands of themselves via identity maps, and the attachment allows arbitrary sheaf-linear differentials. For empty $S$ take the empty partition. On a piece with zero residue, [det-pe-derived-nakayama-first-reduction] gives $K|_U=0$, represented by the zero complex. These choices yield the asserted models.",
-   "uses": [
-    "det-pe-derived-nakayama-first-reduction"
-   ],
-   "elementary": false,
+   "text": "Apply the induction on each member. Reindex each finite free sheaf from ULift(Fin N) to Fin N by Sigma.whiskerEquiv. In the abelian sheaf category the finite coproduct is isomorphic to the finite product through biproduct.isoCoproduct and biproduct.isoProduct. Compose with each term isomorphism and use its hom and inv as the required inclusion and retraction. These maps compose to the identity. The empty covering is allowed, and neither the induction nor the cone calculation constrains the differentials to constant matrices.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 6; extracted arguments in the cited nodes."
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex; finite-residue-field specialization of the top-degree cone induction."
    }
   }
  ],
  "proof_deps": [
-  "lem-sf-clopen-lisse-complete-localization",
-  "lem-sf-completed-coefficient-free-resolution",
-  "det-prop-integral-criterion-constant-coefficients",
-  "det-pe-derived-nakayama-first-reduction",
-  "lem-sf-complete-residue-cohomology-bounds",
-  "lem-sf-projective-cohomology-split-model",
+  "lem-sf-residue-lisse-clopen-bases",
   "lem-sf-complete-top-residue-cell-cone",
-  "lem-sf-projective-top-cell-attachment"
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "R5",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C3, lemma-local-structure-constructible-complex, same top-degree cone induction, specialized to field residue and expanded via exact evaluation and split finite-free residue models; supporting Tags 09C2 and 099I."
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex. Lean strong induction on the residue interval, with a private size-independent proof of projective cell attachment using Mathlib K-projectives and cone triangles."
  },
  "mathlib_searches": [
   {
@@ -290,21 +278,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-prop-integral-criterion-constant-coefficients",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-proetale-surjective-tower-derived-limit",
-  "det-pe-derived-nakayama-first-reduction",
-  "det-pe-topos-functoriality-site",
-  "sk-lem-pe-weakly-etale-stability",
-  "det-pe-morphisms-etale-comparison",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -335,5 +309,26 @@
   "result": "pass",
   "note": "All statement clauses, dependencies, source alignment, universes, edge cases, docstrings, report sections, and per-file scompile evidence checked; no defects found."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ede4f",
+  "group": "R5",
+  "result": "fix",
+  "landing": "20261027T021359-L-2763710",
+  "kind": "interface",
+  "note": "independent cc review: item residue_lisse_projective_models proof + new residue_lisse_clopen_bases against nodes lem-fix-residue-lisse-projective-models / lem-sf-residue-lisse-clopen-bases, clone signatures, importer AffineCommonProjectiveCharts (compiled OK), #print axioms"
+ }
 }

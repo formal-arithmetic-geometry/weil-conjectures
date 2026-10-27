@@ -198,7 +198,32 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-qlbar-colimit-x",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.padicIntegersToPadicSubfield"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.padicIntegersToPadicSubfield",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization",
+     "lines": [
+      106,
+      112
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -218,17 +243,37 @@
   "note": "Exact published upstream construction, read using scompile.py --source because the module is absent from the older local source checkout. In namespace AlgebraicGeometry.ProEtale, the surrounding variable command binds (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ). The body is (upperStarFromPoint X).map (padicIntegersRingObjToContinuousMapRingObj ℓ E); sfbPullbackFromPoint is definitionally upperStarFromPoint. Its IsMonHom instance and its definitional identification with the mapMon morphism between the two coefficientRing objects were checked with scompile.py. No duplicate definition or stronger hypothesis is introduced."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "T8",
   "result": "pass",
-  "landing": "20261018T101338-L-3972760",
+  "landing": "20261023T135436-L-2894854",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
   "sorry_before": [
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalars_obj",
    "AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a scheme $X$, the morphism of ring objects\n$$\n\\varphi=p_X^*(\\underline{\\cO}_E\\to\\underline E)\\colon\\cO_{E,X}=p_X^*\\underline{\\cO}_E\\to E_X=p_X^*\\underline E\n$$\nof $\\Sh(X_{\\mathrm{proét}},\\Ab)$ is the image under $p_X^*$ [det-def-sfb-pullback-from-point]\nof the morphism of [def-sfb-integers-to-subfield-point], between the coefficient rings of\n[det-def-sfb-pulled-back-coefficients].",
+  "proof": [
+   {
+    "text": "$p_X^*$ is monoidal [det-def-sfb-pulled-back-coefficients], so it sends morphisms of ring\nobjects to morphisms of ring objects.",
+    "uses": [
+     "det-def-sfb-pulled-back-coefficients"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

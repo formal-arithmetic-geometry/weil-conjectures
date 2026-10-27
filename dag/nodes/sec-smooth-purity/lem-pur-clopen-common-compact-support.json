@@ -1,0 +1,373 @@
+{
+ "id": "lem-pur-clopen-common-compact-support",
+ "kind": "statement",
+ "title": "Shared compactification and finite clopen compact-support summands",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $O=\\mathcal O_E$ and uniformizer $\\varpi$, and $A_n=O/(\\varpi^n)$ for $n\\geq1$ [def-pur-conventions]. Let $g:X\\to Y$ be separated of finite type between finite-type $k$-schemes, without assuming $Y$ separated over $k$ [def-weil-proper-morphism, def-weil-finite-type-morphism]. Let $I$ be finite and let $j_i:X_i\\hookrightarrow X$ be pairwise disjoint open and closed immersions covering $X$, with $g_i=g\\circ j_i$ [def-weil-open-immersion, def-weil-closed-immersion]. Empty components and the empty cover of $X=\\varnothing$ are allowed.\n\nUse the ordinary small pro-etale derived categories, their bounded constructible subcategories and pullback [def-weil-pbc-proetale-site, def-weil-finite-torsion-constructibility, def-weil-derived-pullback-tensor-hom]. At a fixed positive level $n$, let $r_i=Lj_i^*$ and let $E_i$ be zero insertion under the finite-clopen equivalence [lem-pur-finite-clopen-derived-decomposition].\n\nThere exists a compactification $c=(a,p)$ of $g$, and every chosen such compactification gives $c_i=(a\\circ j_i,p)$ of $g_i$, with the SAME proper part $p:\\overline X\\to Y$ [def-weil-compactifications-refinements]. The schemes $X,Y,X_i,\\overline X$ are Noetherian, the maps $j_i$ and $g_i$ are separated of finite type, and $\\dim\\overline X\\leq d$ for some integer $d\\geq0$ (take $d=0$ if $\\overline X$ is empty).\n\nThe functor $E_i$ is exact and is both a left and a right adjoint of $r_i$. It preserves bounded constructibility, agrees with exact extension by zero $j_{i,!}$ [def-weil-extension-by-zero], and gives $K\\cong\\bigoplus_iE_ir_iK$. The adjunction identification is normalized to the identity after restriction to $X_i$. There is a natural unit-compatible comparison $a_!E_i\\cong(a\\circ j_i)_!$ obtained by descending the ordinary open-extension comparison. For $F_g^c=Rp_*a_!$ and $F_{g_i}^{c_i}=Rp_*(a\\circ j_i)_!$ [def-compact-support-direct-image-detailed], it yields\n$$b_{i,n}:F_g^cE_i\\xrightarrow{\\sim}F_{g_i}^{c_i},\\qquad\nF_g^cK\\xrightarrow{\\sim}\\bigoplus_iF_{g_i}^{c_i}r_iK.$$\nThese are natural derived-category isomorphisms; the second is the image of the displayed finite biproduct decomposition. On bounded constructible inputs they agree with the compactification-independent functors through the canonical compactification comparisons. For $I=\\varnothing$, $K=0$ and the displayed direct image is the empty direct sum.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final sentence 'invertible by [def-pur-co-smoothness]': identification of $\\omega_g$ on finite clopen components, compact-support half; zero insertion = extension by zero as in Stacks sites-modules.tex Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), gluing Stacks sites.tex Tag 04TS. Argument: former Steps 1-3 of lem-pur-finite-clopen-exceptional-restriction, retained verbatim in coord/reports/Q121/lem-pur-finite-clopen-exceptional-restriction.md"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "def-weil-compactifications-refinements",
+  "def-weil-extension-by-zero",
+  "def-compact-support-direct-image-detailed"
+ ],
+ "proof": [
+  {
+   "text": "A field is Noetherian (its only ideals are zero and the unit ideal). Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure maps of $X$ and $Y$. Thus both are Noetherian, in particular quasi-compact; [lem-weil-pbc-locally-noetherian-quasi-separated] makes $Y$ quasi-separated. The hypotheses of [thm-nagata-compactification] are therefore satisfied for $g$, without separatedness of $Y$ over $k$. Choose $c=(a,p)$. The rest of the argument works for any such choice: $a$ is open, $p$ proper, and $pa=g$ by [def-weil-compactifications-refinements].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-compactification/thm-nagata-compactification.md",
+    "place": "Conclusion of Nagata compactification; Noetherian hypotheses from Stacks morphisms.tex Tag 01T6 (lemma-finite-type-noetherian) and properties.tex Tag 01OY (lemma-locally-Noetherian-quasi-separated)"
+   }
+  },
+  {
+   "text": "Each $X_i$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. For an affine open $V\\subseteq X$, $j_i^{-1}V$ is a closed subspace of the quasi-compact affine space $V$, hence is quasi-compact (extend any open cover by the complementary open and take a finite subcover). Thus $j_i$ is a quasi-compact open immersion, so is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The finite-type composition clause of [lem-sfb-finite-type-composition-base-change] makes $g_i$ finite type, and likewise makes $X_i\\to X\\to\\operatorname{Spec}k$ finite type, so $X_i$ is a finite-type $k$-scheme as the compactification category requires. To check separatedness directly, $X_i\\times_Y X_i$ is the open subscheme of $X\\times_Y X$ where both coordinates lie in $X_i$. The inverse image of the closed subscheme $\\Delta_g(X)$ there is precisely $\\Delta_{g_i}(X_i)$, so [lem-weil-pbc-closed-immersion-base-change] makes $\\Delta_{g_i}$ closed. The diagonal of $j_i$ is an isomorphism, hence closed. Finally composing the identifications with open subschemes gives an open immersion $a_i=a j_i$, with $pa_i=g_i$. By [def-weil-compactifications-refinements], $c_i=(a_i,p)$ is a compactification; its proper part is literally $p$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T5 (lemma-immersion-locally-finite-type), 01T3 (lemma-composition-finite-type), 01QR (lemma-base-change-closed-immersion); component geometry from the open and closed subscheme definitions"
+   }
+  },
+  {
+   "text": "Properness of $p$ includes finite type. Compose $p$ with the finite-type structure map of $Y$, using [lem-sfb-finite-type-composition-base-change]. Thus $\\overline X$ is finite type over $k$, and [lem-weil-pbc-finite-type-over-noetherian] makes it Noetherian. Apply [lem-kun-dimension-finite-type] to obtain a finite integer bound for its Krull dimension; enlarge it to a nonnegative integer $d$. For the empty scheme take $d=0$. This proves all the stated finiteness assertions for every chosen compactification, including compactifications with extra boundary components.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
+    "place": "Finiteness conclusion, applied to the proper part composed with Y over k; finite-type composition is Stacks Tag 01T3"
+   }
+  },
+  {
+   "text": "At level $n$, use the module and unbounded derived equivalences of [lem-pur-finite-clopen-derived-decomposition]. Zero insertion has the following Hom sets in either category:\n$$\\operatorname{Hom}(E_iM,H)=\\operatorname{Hom}(M,r_iH),\\qquad \\operatorname{Hom}(H,E_iM)=\\operatorname{Hom}(r_iH,M).$$\nIndeed all other components of a tuple of morphisms are maps to or from zero, hence unique. Composition is componentwise, proving naturality, both adjunctions and their triangle identities. In module categories insertion is exact because kernels and cokernels are componentwise. The stated derived equivalence is termwise, so derived insertion is the induced exact functor. The inclusions and projections of the component tuples give $K\\cong\\bigoplus_iE_ir_iK$ (their composites are the Kronecker identities and their finite sum is $1_K$). A tuple with one bounded constructible entry and zero entries elsewhere is bounded constructible by the last part of the cited equivalence. Thus $E_i$ preserves bounded constructibility. The same calculation covers an empty component, whose category is zero. In Lean, the generic categorical transport calculation is isolated as lem-pur-clopen-product-adjoints. The original insertion theorem is assembled from this calculation, the actual intrinsic restriction equivalence and the componentwise constructibility bounds.",
+   "uses": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-pur-clopen-product-adjoints"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS (lemma-mapping-property-glue), applied through the cited module/derived finite-clopen equivalence; elementary zero-coordinate Hom calculation"
+   }
+  },
+  {
+   "text": "On module sheaves, [lem-weil-extension-by-zero-adjunction] gives another left adjoint $j_{i,!}$ to $r_i$. By [lem-weil-pbc-conjugate-iso-unit-equation], the identity of $r_i$ determines a unique unit-compatible natural isomorphism $E_i\\cong j_{i,!}$. Its restriction to $X_i$ is the identity: the insertion unit is the identity, and on objects of the localized site over $X_i$ the extension presheaf of [def-weil-extension-by-zero] is exactly the given sheaf, so its unit is the identity under this identification. Exactness of $j_{i,!}$ is [lem-weil-extension-by-zero-exact]. By [lem-sf-exact-functor-derived-triangulated] these exact functors act termwise on derived categories. Their comparison and its inverse descend by [lem-weil-pbc-localization-universal-property]; their inverse and unit identities descend as equalities of natural transformations. This identifies the derived insertion from step 4 with exact derived extension by zero with the asserted normalization. The insertion assertion is reduced to the general finite-product adjunction lemma. Exactness proves triangulatedness. Its constructibility clause is obtained by transporting the diagonal unit and off-diagonal zero objects through openSquareDerivedPullbackModel, then applying finite_clopen_constructibility_bounds to the original cohomological bounds and constructible cohomology. Restriction preservation is proved separately from finite_clopen_constructibility_bounds, transported to the actual intrinsic pullback by openSquareDerivedPullbackModel. Intrinsic constructibility is transported across isomorphisms using the restriction comparison to constant-module constructibility.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-clopen-finite-constructibility-bounds",
+    "def-sp-finite-intrinsic-open-square",
+    "lem-trf-open-square-exchange",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); categorical unit comparison from categories.tex Tag 0B65 and exact derived descent from derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "On module sheaves the composite $a_!j_{i,!}$ is left adjoint to $j_i^*a^*=(a j_i)^*$ by [lem-weil-extension-by-zero-adjunction] and [def-weil-pbc-composite-adjunction]. Here the restriction equality simply evaluates a sheaf on the same scheme over $\\overline X$. The other left adjoint is $(a j_i)_!$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with this identity of right adjoints to obtain the unique unit-compatible isomorphism. After step 5 this is $a_!E_i\\cong(a j_i)_!$. All open-extension functors are exact by [lem-weil-extension-by-zero-exact]. Their termwise comparison, inverse and unit equation therefore descend through [lem-weil-pbc-localization-universal-property] to the unbounded derived categories. Apply the single functor $Rp_*$ to this isomorphism. The formula of [def-compact-support-direct-image-detailed] identifies its source and target as $F_g^cE_i$ and $F_{g_i}^{c_i}$, giving $b_{i,n}$. Naturality is preserved by descent and by applying $Rp_*$.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-localization-universal-property",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ; compose the adjunctions by categories.tex Tag 0DV0 (lemma-compose-counits) and normalize by Tag 0B65 (lemma-transformation-between-functors-and-adjoints)"
+   }
+  },
+  {
+   "text": "The finite-biproduct comparison for $F_g^c$ is elementary here. On sheaves $a_!$ is additive and preserves finite sums: maps from $a_!(\\bigoplus M_i)$ correspond by its adjunction to tuples of maps from $M_i$, so this is the coproduct of the $a_!M_i$. Its termwise derived functor has the same property. For $Rp_*$, the adjunction $Lp^*\\dashv Rp_*$ of [def-weil-pbc-proetale-operations] gives, for each $T$,\n$$\\operatorname{Hom}(T,Rp_*\\prod M_i)\\cong\\operatorname{Hom}(Lp^*T,\\prod M_i)\\cong\\prod_i\\operatorname{Hom}(T,Rp_*M_i).$$\nThus it preserves finite products, hence the corresponding biproducts. Its maps are additive, as also seen directly by termwise direct image on complexes and the derived functor. Apply $Rp_*a_!$ to the inclusions and projections in step 4 and use step 6 on each summand. This gives exactly $F_g^cK\\cong\\bigoplus_iF_{g_i}^{c_i}r_iK$, naturally in $K$. For $I=\\varnothing$, step 4 gives $K=0$; $a_!$ preserves the initial zero object and $Rp_*$ the terminal zero object. The image and the empty sum are both zero.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-compact-support-direct-image-detailed.md",
+    "place": "The formula Rp_* a_!; elementary finite (co)product Hom calculation with the stated adjunctions"
+   }
+  },
+  {
+   "text": "For canonical comparison existence, take a bounded etale origin of each intrinsic bounded constructible object using finiteRing_constructibleDerived_origin. The comparison functor from bounded-below etale complexes to intrinsic complexes is fully faithful. Descend fixedCompactSupportOriginIso by conjugating with origin isomorphisms; full faithfulness proves naturality and independence from the witness, and normalization on every witness gives uniqueness. The etale compactification cocycle cancels the intermediate comparison factors; uniqueness descends identity and composition to clopenSupportCanonicalComparison_coherence. The component-independence assertion clopenSupport_independent remains the original named open step: on etale origins it requires compatibility of the normalized open-extension composition with the canonical compactification comparisons, followed by descent. Once this assertion is supplied, apply it on each constructible restricted object; naturality of the canonical comparison on each projection K to E_i r_i K proves clopenSupportSumMap_compactification by biproduct projections. Its composition with the componentwise comparison cocycle proves clopenSupportIndependentSumComparison_eq, including empty sums.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-sp-fixed-compact-support-comparison",
+    "prop-compactification-coherence-detailed",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/prop-compactification-coherence.md",
+    "place": "Statement and final proof paragraph: canonical comparisons on bounded-below etale-origin inputs and cocycle; apply only to bounded constructible objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "def-weil-compactifications-refinements",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-clopen-finite-constructibility-bounds",
+  "def-sp-finite-intrinsic-open-square",
+  "lem-trf-open-square-exchange",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "def-weil-pbc-composite-adjunction",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-sp-fixed-compact-support-comparison",
+  "prop-compactification-coherence-detailed",
+  "lem-sf-proetale-constructible-origin",
+  "lem-pur-clopen-product-adjoints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Finite-clopen compact-support supplement, implemented by B3: eight original theorem proofs; the original named insertion and component-independence theorems remain open. Restriction preservation uses finite-clopen constructibility bounds and the actual intrinsic pullback model. Public statements, definitions and unit route are unchanged. Y3: reduce clopenSupport_insertion to the general finite-product adjunction lemma; prove the intrinsic derived-equivalence transport and preservation of bounded constructibility. clopenSupport_independent remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite clopen cover compute compact support direct image by a shared compactification and extension by zero from each component",
+   "results": "Hits read: HasCompactSupport.extend_zero, HasCompactSupport.tsupport_extend_zero_subset, HasCompactSupport.tsupport_extend_zero, HasCompactMulSupport.extend_one, HasCompactSupport.continuous_extend_zero, exists_clopen_partition_of_clopen_cover, HasCompactMulSupport.mulTSupport_extend_one_subset, TopologicalSpace.Clopens.surjective_finset_sup_prod. Hits concern compactly supported functions, ordinary scheme-module pushforward or complex-shape support, not derived constructible compact support and its common compactification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support pushforward of extension by zero from an open closed component equals pushforward for the composite map",
+   "results": "Hits read: HasCompactSupport.tsupport_extend_zero, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, TopCat.Presheaf.Pushforward.comp, HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport.extend_zero, HasCompactSupport.comp_left, HasCompactSupport.tsupport_extend_zero_subset, hasCompactSupport_comp_left. Hits concern compactly supported functions, ordinary scheme-module pushforward or complex-shape support, not derived constructible compact support and its common compactification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "Hits read: . Hits concern compactly supported functions, ordinary scheme-module pushforward or complex-shape support, not derived constructible compact support and its common compactification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|lowerShriek|extensionByZero",
+   "results": "Hits read: . Hits concern compactly supported functions, ordinary scheme-module pushforward or complex-shape support, not derived constructible compact support and its common compactification. Subdirectory CategoryTheory.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open closed component has the same proper compactification part and its compactly supported derived direct image is the corresponding summand",
+   "results": "Hits read: TestFunction.coe_ofSupportedInLM, TestFunction.coe_ofSupportedInCLM, IsCompactOpenCovered.of_comp, ComplexShape.Embedding.AreComplementary.isSupportedOutside₂_iff, ComplexShape.Embedding.AreComplementary.isSupportedOutside₁_iff, ComplexShape.Embedding.AreComplementary.desc_inl, exists_tsupport_one_of_isOpen_isClosed, IsCompactOpenCovered.image. Hits concern compactly supported functions, ordinary scheme-module pushforward or complex-shape support, not derived constructible compact support and its common compactification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|lowerShriek|extensionByZero",
+   "results": "Hits read: .  No result states the ordinary pro-etale compactification and derived finite-clopen support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero from disjoint open closed subschemes splits compactly supported derived direct image",
+   "results": "Hits read: HasCompactSupport.tsupport_extend_zero, HasCompactSupport.extend_zero, HasCompactSupport.continuous_extend_zero, HasCompactSupport.zero, HasCompactSupport.tsupport_extend_zero_subset, AlgebraicGeometry.Scheme.zero_of_zero_cover, HasCompactSupport, AlgebraicGeometry.RingedSpace.res_zero.  No result states the ordinary pro-etale compactification and derived finite-clopen support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "Hits read: .  No result states the ordinary pro-etale compactification and derived finite-clopen support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image with proper support of a finite disjoint union is the biproduct of its component functors",
+   "results": "Hits read: CategoryTheory.Limits.preservesBiproduct_of_preservesCoproduct, CategoryTheory.Limits.preservesBiproductsOfShape_of_preservesCoproductsOfShape, CategoryTheory.Limits.preservesCoproduct_of_preservesBiproduct, CategoryTheory.Limits.preservesCoproductsOfShape_of_preservesBiproductsOfShape, CategoryTheory.Limits.HasBiproduct.of_hasCoproduct, CategoryTheory.Functor.biproductComparison', CategoryTheory.Limits.instHasBiproductSigmaFstSndOfBiproduct, CategoryTheory.Limits.CoproductsFromFiniteFiltered.finiteSubcoproductsCocone_ι_app_eq_sum.  No result states the ordinary pro-etale compactification and derived finite-clopen support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite clopen components of a scheme a common compactification gives a direct sum decomposition of derived compact support pushforward",
+   "results": "Hits read: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CompHausLike.LocallyConstant.sigmaIso, AlgebraicGeometry.isCompl_opensRange_inl_inr, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top.  No result states the ordinary pro-etale compactification and derived finite-clopen support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-clopen-exceptional-restriction",
+  "date": "2026-10-22",
+  "group": "Q121"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility sentence: finite-clopen component identification; Earlier returned proof steps 1-3: common proper compactification, zero insertion and compact support",
+   "via": [
+    "lem-pur-finite-clopen-exceptional-restriction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-common-compact-support",
+  "worker": "stage1",
+  "summary": "Expanded all three retained arguments into eight steps using existing DAG lemmas. No new nodes. Geometry permits nonseparated Y, gives the same proper part for every component, and bounds every compactification. Finite-product Hom calculations give exact two-sided insertion and normalized extension by zero. Exact termwise descent constructs the unit-compatible comparison; finite products give the sum formula. Compactification-independent interpretations are explicitly restricted to bounded constructible inputs. Statement unchanged.",
+  "blueprint": "def-pur-section-invariant, final sentence “invertible by [def-pur-co-smoothness]”: finite-clopen identification, compact-support part, via lem-pur-finite-clopen-exceptional-restriction.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of a compactification over a qcqs target; the conventions unit supplies no compactification existence theorem."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite Krull dimension of a finite-type scheme over k; a geometric bound, independent of the purity route."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Ordinary pro-etale module adjunction used for normalization and the finite-sum calculation."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Exactness permits the ordinary comparison to descend to unbounded derived categories."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Uses exactly its unbounded derived adjunction Lp^* ⊣ Rp_* and direct-image construction to preserve finite products."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Canonical comparisons interpret candidates on bounded constructible etale-origin inputs; no compactification theorem is present in the conventions unit."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Provides an etale-origin witness for bounded constructible inputs, to satisfy the domain of compactification coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-exact",
+  "def-weil-pbc-proetale-operations",
+  "prop-compactification-coherence-detailed",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N9-478d2c5d9",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-478d2c5d9 (reviewer sub-agent of L); spot-checked: Read the full item: unchanged statement, 8 steps, and every cited statement (21 proof_deps, 12 stmt_deps, plus derived-direct-image, compact-support-candidate and the etale-origin subcategory/witness for domains). No new nodes; the base item was statement-only (Q121), so no proof was shortened. Step 1: k Noetherian, so X and Y are Noetherian and Y is qcqs; Nagata applies without Y separated over k. Step 2: j_i^{-1}V is closed in affine V, so j_i is quasi-compact and of finite type; Delta_{g_i} is the base change of Delta_g along an open immersion (01QR leaf); the same proper part p for every i. Step 3: X-bar is finite type over k, so it has finite dimension (lem-kun). Step 4: Hom calculations use only what lem-pur-finite-clopen-derived-decomposition states (module, derived and D^b_c equivalences, I empty allowed). Steps 5-6: conjugate-iso unit equation with delta=id against j^*; composite adjunction for a_! j_!; restriction composes strictly; exact termwise descent by the localization leaf; then F^c = Rp_* a_! by the definition. Step 7: def-weil-pbc-proetale-operations does assert Lu^* -| Ru_* on unbounded categories, so finite products and biproducts are preserved. Step 8: lem-sf-proetale-constructible-origin (ii) gives the etale-origin witness, so prop-compactification-coherence applies only on its declared domain. Edge cases checked: I empty, empty X_i, a single component, nonseparated Y, extra boundary of X-bar. No duplicate found by rg -L (the Q121 siblings are different statements). No SGA. All seven declared tool uses accepted as generic black boxes. FIX: step 2 source tag 01T2 corrected to 01T5 (lemma-immersion-locally-finite-type; 01T2 is lemma-locally-finite-type-characterize; B5), and added that X_i is a finite-type k-scheme by the composition clause, which Comp(g_i) requires. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-clopen-common-compact-support.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClopenCommonCompactSupport",
+  "declaration": "WeilConjectures.PurityFiniteSetting.clopenSupport_geometry",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.clopenSupportComponentComparison",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportEtaleComparison",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportCanonicalComparison_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportCanonicalComparison",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportCanonicalComparison_coherence",
+   "WeilConjectures.PurityFiniteSetting.clopenSupport_geometry",
+   "WeilConjectures.PurityFiniteSetting.clopenSupport_insertion",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportSumMap",
+   "WeilConjectures.PurityFiniteSetting.clopenSupport_sum",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportSumIso",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportSumMap_naturality",
+   "WeilConjectures.PurityFiniteSetting.clopenSupport_restriction_constructible",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportConstructibleInsertion",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportIndependentComponentComparison",
+   "WeilConjectures.PurityFiniteSetting.clopenSupport_independent",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportSumMap_compactification",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportIndependentSumComparison",
+   "WeilConjectures.PurityFiniteSetting.clopenSupportIndependentSumComparison_eq"
+  ],
+  "file": "lean/Sheaf/Paper/ClopenCommonCompactSupport.lean",
+  "statement": "theorem clopenSupport_geometry : Nonempty (Compactification g.left) ∧ IsNoetherian X.left ∧ IsNoetherian Y.left ∧ (∀ i, IsNoetherian (Xi i).left ∧ IsSeparated (j i).left ∧ LocallyOfFiniteType (j i).left ∧ QuasiCompact (j i).left ∧ IsSeparated ((j i).left ≫ g.left) ∧ LocallyOfFiniteType ((j i).left ≫ g.left) ∧ QuasiCompact ((j i).left ≫ g.left)) ∧ ∀ c : Compactification g.left, IsNoetherian c.Z ∧ ∃ d : ℕ, topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞) ∧ (IsEmpty c.Z → d = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses are stated across the listed declarations: shared compactification geometry, both normalized insertion adjunctions, exact and constructible extension by zero, the specified derived component and finite-sum comparisons with naturality, and canonical compactification agreement on bounded constructible inputs only. Helper definitions construct the maps from published comparisons; no new independent datum or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d64a2b590",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Read the node, the 12 stmt_deps' records and Lean, the module (18 declarations), report, and Stacks 03DI/03DJ/04TS. All clauses rendered: geometry via c.precomp (same proper part, Noetherian, sep+FT, ∀c ∃d:ℕ with empty→0); E_i = existing sfIntrinsicDerivedOpen with pinned unit, inverse counit, off-diagonal zero (zero insertion via decomposition components r_k), triangulated, D^b_c-preserving, biproduct splitting; b = sfIntrinsicDerivedOpenComp (unit-compatible leftAdjointUniq) + Rp_*; sum map, iso, naturality, empty I; compactification independence only on D^b_c via an ∃! comparison normalized on every étale witness by fixedCompactSupportOriginIso (uniqueness from constructible_proEtale_origin). Edge cases: I=∅, empty components, X̄=∅, Y non-separated, n=1. Defs not hollow; 10 theorems sorry; docstrings OK; lines ≤100; statement verbatim; node differs from live only in lean. Advisories: owners outside stmt_deps (def-sp-finite-intrinsic-open-square/-pullback, def-sf-intrinsic-compact-support-realization, def-sp-fixed-compact-support-comparison); local canonical comparison vs intrinsicCompactificationComparison (different, witnessed domain); sum declarations take a general R; second reading is a self-audit backed by clause tables. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T203758-L-2854697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-hom-comparison-existence",
+ "kind": "statement",
+ "title": "Augmentation-normalized internal-Hom comparison for slice restriction",
+ "statement": "Let J be a Grothendieck topology on C with independent object and morphism universes c,v. Let A be a commutative ring sheaf with values in max(c,v,u), with module sheafification and locally bijective sheafification equivalences. Fix an object U and derived categories of module sheaves on J and J.over U in independent universes w,w'. For the fixed derived internal Homs H,HU and exact derived slice restriction r of [def-sfb-ringed-slice-comparison-model], there exists a natural isomorphism eta: H followed by r isomorphic to (r.op product r) followed by HU. For every complex L and every K-injective complex I there are isomorphisms kappa: H(QL,QI) isomorphic to Q Hom(L,I), kappaU for the restricted complexes, and gamma: R Hom(L,I) isomorphic to Hom(RL,RI). Both kappa isomorphisms obey RingedKInjectiveHomModel, the equation with the fixed K-injective augmentation. On each local family the gamma component at V over U, degree n and component L^p to I^q with p+n=q evaluates over W over V to the original component evaluated over Over.mk(W.hom.left). The square with r(kappa), ringedSliceLocalizationIso, Q(gamma), eta, transport by the two argument localization isomorphisms, and kappaU commutes, in the order displayed in the Lean statement. No tensor model, closed structure, symmetry, K-flatness or flat terms are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB, lemma-restriction-RHom-to-U; Tags 08FI, 0A8X and 0A95 for K-injectivity, local Hom complexes and their localization."
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-slice-comparison-model",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "The existing presheaf internal-Hom restriction isomorphism identifies relocalized families of module maps. Bundle the actual Hom-complex functor, object maps and product projections with their proved limit, differential and map equations. Restriction preserves the integer-indexed products because it is a right adjoint. Product universal properties and the two-term differential equation give the ordinary chain isomorphism. The component equation proves simultaneous naturality and, evaluated over an object of the twice-localized site, exactly the displayed local-family normalization.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-restricted-coefficient-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB and 0A8X; Sites Tag 03EH, relocalization."
+   }
+  },
+  {
+   "text": "Use the existing ordinary-to-derived Hom comparison, its naturality and its invertibility for K-injective targets. Restriction preserves K-injectivity by the independent-universe restriction theorem. After applying functorial K-injective replacement to the target, both comparisons are invertible, as are the images of the augmentations. Compose these four isomorphisms and descend along Q.op product Q using fully faithful whiskering. Naturality with respect to the augmentation proves the equation characterizing the descended isomorphism on all complexes.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-kinjective-restrict-localized-universes",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI, 08JB and 0A95."
+   }
+  },
+  {
+   "text": "For a K-injective target, invert the fixed ordinary-to-derived comparison to obtain kappa. Its factorization through the fixed augmentation proves RingedKInjectiveHomModel by cancelling the augmentation map and the resolution isomorphism. Do the same on the slice. The descent equation from the preceding step, with the two inverse identifications substituted, gives the required square by cancellation of the comparison isomorphisms. No representative or resolution is chosen from an undetermined existence assertion.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-sfb-ringed-slice-comparison-model",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB and 0A95, fixed augmentation normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "def-sfb-ringed-slice-comparison-model",
+  "lem-pur-kinjective-restrict-localized-universes",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-hom-complex-projections",
+  "lem-weil-pbc-restricted-coefficient-hom-complex",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB, lemma-restriction-RHom-to-U; Tags 08FI, 0A8X and 0A95 for K-injectivity, local Hom complexes and their localization. B2, 2026-10-26: complete the existing Hom comparison using the actual product-Hom interface, natural ordinary comparison, fixed K-injective replacement and localization descent. Recover and adapt the Hom portion of the archived D4 proof; all public statements and representative normalizations remain unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a slice site commutes with derived internal Hom and the K-injective augmentation comparison",
+   "results": "service unavailable: error code: 502 ",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom commutes with slice restriction with K-injective augmentation comparison natural in both objects",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotalIso|hom.*[Rr]estrict|tensor.*[Rr]estrict",
+   "results": "25 hits: Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/Subalgebra/Operations.lean, Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean, Mathlib/Algebra/Algebra/Epi.lean, Mathlib/Algebra/Algebra/Subalgebra/Tower.lean, Mathlib/Algebra/Algebra/Subalgebra/Tower.lean, Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean, Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "The internal-Hom restriction comparison in the evaluation and transposition compatibility argument.",
+   "via": [
+    "lem-weil-pbc-ringed-slice-normalized-comparisons",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceHomComparisonExistence",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceHomComparisonExistence.lean",
+  "declaration": "CategoryTheory.ringedSlice_homComparison_exists",
+  "statement": "theorem ringedSlice_homComparison_exists\n    (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U)\n      (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))] :\n    ∃ η : derivedInternalHomOfUniverses.{c, v, u, w} J A ⋙\n        ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U ≅\n      ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).op.prod\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U)) ⋙\n          derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U),\n  ∀ (L I : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J (forget₂ CommRingCat.{max c v\n      u} RingCat.{max c v u})).obj A)) ℤ) [I.IsKInjective],\n      ∃ (κ : (derivedInternalHomOfUniverses.{c, v, u, w} J A).obj\n            (op (DerivedCategory.Q.obj L), DerivedCategory.Q.obj I) ≅\n            DerivedCategory.Q.obj (homComplex (R := A) L I))\n        (κU : (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)).obj\n          (op (DerivedCategory.Q.obj ((ringedSliceComplexRestriction.{c, v, u} J A U).obj L)),\n            DerivedCategory.Q.obj ((ringedSliceComplexRestriction.{c, v, u} J A U).obj I)) ≅\n          DerivedCategory.Q.obj (homComplex (R := A.over U)\n            ((ringedSliceComplexRestriction.{c, v, u} J A U).obj L)\n            ((ringedSliceComplexRestriction.{c, v, u} J A U).obj I)))\n        (γ : (ringedSliceComplexRestriction.{c, v, u} J A U).obj (homComplex (R := A) L I) ≅\n          homComplex (R := A.over U) ((ringedSliceComplexRestriction.{c, v, u} J A U).obj L)\n            ((ringedSliceComplexRestriction.{c, v, u} J A U).obj I)),\n        RingedKInjectiveHomModel.{c, v, u, w} J A L I κ ∧\n        RingedKInjectiveHomModel.{max c v, v, u, w'} (J.over U) (A.over U)\n          ((ringedSliceComplexRestriction.{c, v, u} J A U).obj L)\n          ((ringedSliceComplexRestriction.{c, v, u} J A U).obj I) κU ∧\n        (∀ (n p q : ℤ) (h : p + n = q) (V : Over U)\n          (W : Over V) (x : (L.X p).val.obj (op W.left.left))\n          (z : ((homComplex (R := A) L I).X n).val.obj (op V.left)),\n          (((coefficientHomComponent.{u, max c v, v} (J.over U) (A.over U)\n            ((ringedSliceComplexRestriction.{c, v, u} J A U).obj L)\n            ((ringedSliceComplexRestriction.{c, v, u} J A U).obj I) n p q h).val.app (op V)\n              ((γ.hom.f n).val.app (op V) z)).app (op W)).hom x =\n          (((coefficientHomComponent.{u, c, v} J A L I n p q h).val.app (op V.left) z).app\n            (op (Over.mk W.hom.left))).hom x) ∧\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).map κ.hom ≫\n          (ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).hom.app (homComplex (R := A) L I) ≫\n          DerivedCategory.Q.map γ.hom =\n        η.hom.app (op (DerivedCategory.Q.obj L), DerivedCategory.Q.obj I) ≫\n          (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)).map\n            (X := (op ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj\n              (DerivedCategory.Q.obj L)), (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj\n              (DerivedCategory.Q.obj I)))\n            (Y := (op (DerivedCategory.Q.obj\n              ((ringedSliceComplexRestriction.{c, v, u} J A U).obj L)),\n              DerivedCategory.Q.obj ((ringedSliceComplexRestriction.{c, v, u} J A U).obj I)))\n            (((ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).inv.app L).op,\n              (ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).hom.app I) ≫ κU.hom",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-weil-pbc-ringed-slice-hom-comparison-existence",
+  "worker": "stage3",
+  "summary": "Augmentation-normalized internal-Hom comparison for slice restriction",
+  "blueprint": "The internal-Hom restriction comparison in the evaluation and transposition compatibility argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-site-restriction-kinjective-independent-ring",
+    "why": "The same exact slice restriction preserves K-injective complexes with these independent ring and site universes; this is a generic resolution tool, not a replacement of a unit step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T135527-L-4040856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e6e7",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261026T154307-L-1630540",
+  "kind": "interface",
+  "note": "independent cc review: three delivered theorem signatures vs clone (identical); the two closed holes vs their nodes and change record; #print axioms of both newly proved theorems (clean); proof_deps/uses vs imports and declarations used"
+ }
+}

@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-integral-variety-smooth-curve-interpolation",
+ "kind": "statement",
+ "title": "Finite rational-point interpolation by a smooth curve in an integral variety",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $X$ be an integral scheme [def-pc-scheme, def-pc-integral-scheme], separated and of finite type over $k$ [def-weil-finite-type-morphism]; separated means its diagonal is a closed immersion. Let $F\\subseteq X(k)$ be a finite nonempty set of $k$-rational points [def-pc-rational-point]. There exist a smooth separated connected finite-type $k$-scheme $D$ of dimension exactly one [def-sc-curves, def-sbc-smooth-morphisms], a $k$-morphism $g:D\\to X$, and points $d_s\\in D(k)$ for $s\\in F$, with $g\\circ d_s=s$ for every $s\\in F$. Here connected means that the underlying space is nonempty and is not a disjoint union of two nonempty open subsets. No positive-dimensional, smoothness, properness, or quasi-projectivity hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+  "place": "Corollary 1.9 (printed p.4), y=1, followed by normalization of the reduced integral curve. Supporting Stacks Tags 0BXR (varieties.tex lemma-normalization-locally-algebraic), 0BX2 (properties.tex lemma-normal-dimension-1-regular), and 038X (varieties.tex lemma-geometrically-regular-smooth); over perfect k geometric regularity equals regularity because there are no nontrivial finite purely inseparable extensions. The zero-dimensional case is the constant map from the projective line. This is an agent-assembled consequence, not the verbatim assertion of Corollary 1.9."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-rational-point",
+  "def-sc-curves",
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-kun-dimension-finite-type] and the nonemptiness in [def-pc-integral-scheme], $m=\\dim X$ is a nonnegative integer. Each section $s:\\operatorname{Spec}k\\to X$ is a closed immersion by [lem-weil-pbc-section-separated-closed-immersion], since $X\\to\\operatorname{Spec}k$ is separated. Thus the images of $F$ are a finite nonempty set of closed points.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-section-separated-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KT, lemma-section-immersion; dimension finiteness as in lem-kun-dimension-finite-type"
+   }
+  },
+  {
+   "text": "If $m=0$, irreducibility and the definition of dimension imply that $|X|$ has one point: another point would have a proper nonempty irreducible closure, giving a chain of length one. Any affine neighbourhood is therefore all of $X$, say $X=\\operatorname{Spec}L$. The domain $L$ has only the prime $(0)$, hence is a field. A chosen $s_0\\in F$ gives a $k$-algebra map $L\\to k$ splitting $k\\to L$; injectivity and the fact its image contains $k$ make it an isomorphism. Hence $X\\simeq\\operatorname{Spec}k$ and all the sections in $F$ agree. Take $D=\\mathbf P^1_k$, a smooth proper connected curve by [lem-asd-projective-line-genus-zero], take $g$ constant with value $s_0$, and use $[1:0]$ for every $d_s$. Properness includes separatedness and finite type, so this gives the required zero-dimensional case.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-pc-integral-scheme",
+    "lem-asd-projective-line-genus-zero",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2P, lemma-projective-space-smooth, n=1; elementary zero-dimensional reduction"
+   }
+  },
+  {
+   "text": "Assume $m\\geq1$. We construct integral separated finite-type closed subschemes $C_r\\subseteq X$ containing the same closed points, with $\\dim C_r=r$, by descending induction on $r$ from $m$ to $1$. Start with $C_m=X$. For $r\\geq2$, apply [lem-sfb-bertini-prescribed-point-dimension-cut] to $C_r$ and the marked points, closed also in $C_r$, to obtain $C_{r-1}\\hookrightarrow C_r$. Composing the inclusions gives the required closed immersion into $X$: on affine opens the ring maps are successive surjections. Thus $C=C_1$ is integral, separated, finite type, of dimension one, and contains every marked point. A section $s$ factors through $C$ since the defining ideal lies in the kernel of evaluation at its image (the residue-field point is exactly the given $k$-point). Denote this factorization by $c_s$. For $m=1$ this construction simply takes $C=X$.",
+   "uses": [
+    "lem-sfb-bertini-prescribed-point-dimension-cut"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Theorem 1.8 iterated, equivalently the proof of Corollary 1.9, printed p.4"
+   }
+  },
+  {
+   "text": "Let $\\nu:D=C^\\nu\\to C$ be [def-sc-normalization]. By [lem-sc-normalization-exists], $\\nu$ is finite and surjective and $\\dim D=\\dim C=1$. Its affine charts are integral closures of domains inside the common function field, hence are domains with a common generic point; consequently $D$ is integral and nonempty, and thus connected. By [lem-weil-pbc-finite-over-separated-finite-type], $D$ is separated and of finite type over $k$. An algebraically closed field is perfect: it has no nontrivial algebraic field extensions. Apply [lem-sc-normalized-curve-smooth] to conclude that $D$ is smooth over $k$.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-finite-over-separated-finite-type",
+    "lem-sc-normalized-curve-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR, lemma-normalization-locally-algebraic; Tag 038X, lemma-geometrically-regular-smooth; normal dimension-one regularity is properties.tex Tag 0BX2"
+   }
+  },
+  {
+   "text": "For each $s\\in F$, choose an affine neighbourhood $U=\\operatorname{Spec}A$ of $c_s$ in $C$. Write $\\nu^{-1}U=\\operatorname{Spec}B$ with $B$ finite over $A$, using [def-weil-finite-integral-morphism]. The fibre at $c_s$ has ring $B\\otimes_A k$, a finite-dimensional $k$-algebra; it is nonzero because $\\nu$ is surjective. A maximal ideal of this algebra gives a field quotient finite-dimensional over $k$, hence equal to $k$ since $k$ is algebraically closed. The resulting $k$-algebra map $B\\otimes_A k\\to k$ gives $d_s\\in D(k)$ with $\\nu d_s=c_s$. This argument works even when $c_s$ is singular or has several branches; only one branch is chosen.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WH, definition-integral-finite; elementary finite-algebra quotient argument over an algebraically closed field"
+   }
+  },
+  {
+   "text": "Let $i:C\\hookrightarrow X$ be the constructed inclusion and set $g=i\\circ\\nu$. For every $s\\in F$, $g\\circ d_s=i\\circ\\nu\\circ d_s=i\\circ c_s=s$. The preceding steps give every required property of $D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Corollary 1.9, printed p.4, normalization assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-dimension-finite-type",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "lem-asd-projective-line-genus-zero",
+  "def-weil-proper-morphism",
+  "lem-sfb-bertini-prescribed-point-dimension-cut",
+  "def-sc-normalization",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lem-sc-normalized-curve-smooth",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+  "place": "Theorem 1.8 and Corollary 1.9, printed p.4, assembled with existing normalization nodes; zero-dimensional constant-map case and finite-fibre rational lifts written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bertini|bertini|curveThrough|curve_through|hypersurface",
+   "results": "{\"t\": \"2026-10-24T08:00:20Z\", \"tool\": \"grep\", \"query\": \"Bertini|bertini|curveThrough|curve_through|hypersurface\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given finitely many closed points of a geometrically irreducible variety of positive dimension there is a one dimensional geometrically irreducible closed subvariety containing them",
+   "results": "{\"t\": \"2026-10-24T08:00:20Z\", \"tool\": \"leansearch\", \"query\": \"Given finitely many closed points of a geometrically irreducible variety of positive dimension there is a one dimensional geometrically irreducible closed subvariety containing them\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"exists_mem_irreducibleComponents_subset_of_isIrreducible\", \"IsGenericPoint.isIrreducible\", \"QuasiSober.sober\", \"isClosed_irreducibleComponent\", \"IsIrreducible.isGenericPoint_genericPoint\", \"TopologicalSpace.IrreducibleCloseds.carrier\", \"TopologicalSpace.IrreducibleCloseds.is_closed'\"], \"digest\": \"193e37e66623b5c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIrreducible, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T08:00:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GeometricallyIrreducible, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically irreducible separated variety over a field contains a geometrically irreducible curve through any finite set of closed points",
+   "results": "{\"t\": \"2026-10-24T08:00:24Z\", \"tool\": \"leanfinder\", \"query\": \"A geometrically irreducible separated variety over a field contains a geometrically irreducible curve through any finite set of closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\"], \"digest\": \"96e6e340fc9f12f6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bertini irreducibility with prescribed closed points yields subvarieties of any positive dimension",
+   "results": "{\"t\": \"2026-10-24T08:00:45Z\", \"tool\": \"leanfinder\", \"query\": \"Bertini irreducibility with prescribed closed points yields subvarieties of any positive dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"genericPoints.ofComponent\", \"PrimeSpectrum.quasiSober\"], \"digest\": \"ed70b57c9ada234f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an algebraically closed field any finite set of rational points on an integral variety lifts along a morphism from a smooth connected curve",
+   "results": "{\"t\": \"2026-10-24T08:04:18Z\", \"tool\": \"leanfinder\", \"query\": \"Over an algebraically closed field any finite set of rational points on an integral variety lifts along a morphism from a smooth connected curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"ax_grothendieck_of_locally_finite\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"ax_grothendieck_of_definable\", \"ax_grothendieck_univ\", \"ax_grothendieck_zeroLocus\", \"FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime\"], \"digest\": \"9a68da8633cd0dab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite list of rational points of an integral variety over an algebraically closed field is contained in the image of a smooth connected curve",
+   "results": "{\"t\": \"2026-10-24T08:05:32Z\", \"tool\": \"leansearch\", \"query\": \"Every finite list of rational points of an integral variety over an algebraically closed field is contained in the image of a smooth connected curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\"], \"digest\": \"33bde649ff88de11\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any finite set of rational points of an integral separated variety over an algebraically closed field lifts to a smooth connected curve",
+   "results": "{\"t\": \"2026-10-24T08:30:39Z\", \"tool\": \"leanfinder\", \"query\": \"Any finite set of rational points of an integral separated variety over an algebraically closed field lifts to a smooth connected curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.IsIntegral\", \"WeierstrassCurve.Affine.Point.map_some\", \"ax_grothendieck_univ\", \"WeierstrassCurve.integralModel\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"5995e5480de4529c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-24T08:30:40Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "grep",
+   "query": "Bertini|bertini|curveThrough|curve_through",
+   "results": "{\"t\": \"2026-10-24T08:30:40Z\", \"tool\": \"grep\", \"query\": \"Bertini|bertini|curveThrough|curve_through\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any finite collection of rational points in a variety is in the image of a morphism from a smooth connected curve",
+   "results": "{\"t\": \"2026-10-24T08:33:50Z\", \"tool\": \"leansearch\", \"query\": \"Any finite collection of rational points in a variety is in the image of a morphism from a smooth connected curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finite_preimage\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"0d065694279acde4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible variety admits smooth curves mapping to it through prescribed rational points",
+   "results": "{\"t\": \"2026-10-24T08:33:52Z\", \"tool\": \"leanfinder\", \"query\": \"An irreducible variety admits smooth curves mapping to it through prescribed rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.IsDominant\", \"WeierstrassCurve.Projective.NonsingularLift\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"ad42395c4f5c044d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  },
+  {
+   "tool": "grep",
+   "query": "Bertini|bertini|hypersurface|prescribed",
+   "results": "{\"t\": \"2026-10-24T08:37:51Z\", \"tool\": \"grep\", \"query\": \"Bertini|bertini|hypersurface|prescribed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean\"], \"digest\": \"330a1dacd62a4125\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; irreducible spaces, generic points, finite fibres, elliptic-curve models and rational maps do not construct an integral subvariety through prescribed points or a smooth interpolating curve."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-line-family-projective-curve-interpolation",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical alteration/Picard branch under det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-birigidified-affine-triviality-locus, proof step 2: algebraically trivial classes on the smooth affine product. Current latest blueprint direct-images proof (3) supplies the direct-image context, not this auxiliary Picard formula. Supporting parameter-curve input: restrict the family along a smooth curve meeting both marked parameter points before completing that curve.",
+   "via": [
+    "lem-sfb-line-family-projective-curve-interpolation",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-variety-smooth-curve-interpolation",
+  "worker": "stage1",
+  "summary": "Split into the zero-dimensional constant map, explicit dimension descent using the codimension-one Charles–Poonen theorem, normalization using existing nodes, and rational lifts via nonzero finite k-algebras. Created one genuine dimension-cutting input, not a smooth-interpolation restatement. Corrected doubled TeX slashes only. No exact project attachment or Mathlib match found.",
+  "blueprint": "Historical alteration/Picard parameter-curve branch recorded in blueprint.from.place: constructs the smooth parameter curve through the marked points. Latest det-thm-sf-ctf-stability-direct-images proof (3) supplies context only. No unit/chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finiteness of the dimension of a finite-type scheme is a generic scheme tool; the stability unit has no such lemma."
+   },
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "Only the smooth proper connected dimension-one projective-line clause is used for a constant map; no genus calculation is used."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-separated-finite-type",
+    "why": "Generic permanence under a finite morphism, needed after normalization; the stability unit has no normalization geometry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-asd-projective-line-genus-zero",
+  "lem-weil-pbc-finite-over-separated-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-14b2a7a60",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-14b2a7a60 (reviewer sub-agent of L); spot-checked: Ordinary first split (no repair note). I checked Charles–Poonen printed pp.3–4. Their varieties are separated and of finite type. Theorem 1.8: a geometrically irreducible X of dim m≥2 and finite closed F give Y⊆X of dim m−1 containing F. The proof (Nagata and Chow reductions, Y=H_f∩X̄′, proper image, then restriction to the open X) makes Y closed, so the 'closed immersion' in the new node is justified. Over k=k̄ an integral X is geometrically irreducible, and the reduced Y is integral, separated and of finite type. Empty F is allowed as in the source. New node lem-sfb-bertini-prescribed-point-dimension-cut: statement only and self-contained, with all notions cited. blueprint_refs ancestor gives None and the Bertini search finds 0 blueprint nodes, so same_as=[] is right. It has 4 search kinds. It is not a restatement: it is a codimension-one cut, while the item does the induction, the dim-0 case, normalization and the lifts. rg over the DAG finds only smooth-affine or F̄_q Bertini nodes (lem-zl-bertini-*, sk-lem-wgen-bertini-cover), so there is no duplicate. Item statement (unchanged except TeX) tested on X=Spec k (P^1, constant map), the nodal cubic through its node, and a singular surface. Steps: (1) dimension finite and ≥0; sections are closed immersions by the separated-section leaf. (2) m=0: one point, X=Spec L with L a field, the section gives L≅k; lem-asd-projective-line-genus-zero gives P^1 as a connected curve (def-sc-curves) and properness gives separated and finite type. (3) descending induction is set up properly (claim, base C_m=X, transition for r≥2 by the new node, whose hypotheses hold in C_r); closed immersions compose; s factors through C because O_{X,x}→k kills I_x⊆m_x. (4) def-sc-normalization for integral C; lem-sc-normalization-exists gives finite, surjective, dim 1; D is integral because all generic points lie over η with fibre Spec K, so D is connected; lem-weil-pbc-finite-over-separated-finite-type gives separated and finite type; lem-sc-normalized-curve-smooth applies (k̄ perfect). Both normalization nodes are slopmaster2-closed, so the off-unit use is accepted. (5) the fibre B⊗_A k is finite and nonzero by surjectivity, and a maximal quotient is k, giving d_s; this is elementary. (6) composition gives g∘d_s=s. Accepted tool_uses: lem-kun-dimension-finite-type, lem-asd-projective-line-genus-zero (only the clause that P^1 is a smooth proper connected curve), lem-weil-pbc-finite-over-separated-finite-type. Nit: step 3 could also list def-weil-closed-immersion. No SGA is cited and no fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralVarietySmoothCurveInterpolation",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_smooth_connectedCurve_interpolating",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralVarietySmoothCurveInterpolation.lean",
+  "statement": "theorem exists_smooth_connectedCurve_interpolating {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} [IsIntegral X] (f : X ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (F : Set (f.fieldPoints k)) (hF : F.Finite) (hne : F.Nonempty) : ∃ (D : Scheme.{u}) (p : D ⟶ Spec (.of k)), IsConnectedCurve p ∧ Smooth p ∧ ∃ (g : D ⟶ X), g ≫ f = p ∧ ∃ d : F → p.fieldPoints k, ∀ s : F, (d s).val ≫ g = s.val.val",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8896b3c1f",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read node, all 9 stmt_deps, module, report, and the upstream IsCurve/IsConnectedCurve (Curve.lean) and Hom.fieldPoints (Comparator/Weil/Definitions.lean:85). Clause match: IsAlgClosed k; IsIntegral X; IsSeparated f and LocallyOfFiniteType+QuasiCompact (the recorded finite-type conjunction); F a finite nonempty Set of f.fieldPoints k (sections); conclusion ∃ D p, IsConnectedCurve p (separated, finite type, ConnectedSpace, topologicalKrullDim=1) ∧ Smooth p ∧ ∃ g with g≫f=p ∧ ∃ d : F → p.fieldPoints k with (d s).val≫g = s. No extra hypotheses; quantifier order exact; statement field verbatim equals the file signature. Shared universe u is the existing scheme/field-point convention. Edge cases dim 0 (constant P^1 map), singular multibranch points, |F|=1, F=∅ excluded as in node, X=∅ excluded by IsIntegral. Node JSON differs from live only in lean; live lean null, no rebind. Single sorry theorem; source/blueprint docstrings and 6-step proof plan present; imported proof-dep modules exist; H2 ok. Worker report and Second reading by O3 present. No findings, no compile needed."
+ }
+}

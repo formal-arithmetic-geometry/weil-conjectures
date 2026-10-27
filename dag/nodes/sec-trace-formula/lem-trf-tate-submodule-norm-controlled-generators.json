@@ -1,0 +1,324 @@
+{
+ "id": "lem-trf-tate-submodule-norm-controlled-generators",
+ "kind": "statement",
+ "title": "Norm-controlled generators of submodules of finite free Tate modules",
+ "statement": "Let $K$ be a field [def-weil-field], complete for a nontrivial real-valued multiplicative nonarchimedean absolute value. For $r,s\\ge0$ put $D=K\\langle T_1,\\ldots,T_r\\rangle$, the restricted-series ring of [def-trf-restricted-series-presentation]. For $f=\\sum_{\\nu\\in\\mathbf N^r}c_\\nu T^\\nu\\in D$ set $\\|f\\|_G=\\sup_\\nu|c_\\nu|$, and for $x=(x_1,\\ldots,x_s)\\in D^s$ set $\\|x\\|=\\max_{1\\le j\\le s}\\|x_j\\|_G$, with $\\|0\\|=0$ when $s=0$. For every $D$-submodule $L\\subseteq D^s$ there are an integer $h\\ge0$ and vectors $v_1,\\ldots,v_h\\in L$ such that $\\|v_i\\|=1$ for every $i$ and, for every $x\\in L$, there exist $f_1,\\ldots,f_h\\in D$ satisfying $x=\\sum_{i=1}^h f_iv_i$ and $\\|f_i\\|_G\\le\\|x\\|$ for all $i$. The empty family is allowed for $L=0$; no finite-generation hypothesis is imposed on $L$.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.3, Corollary 10, printed pp. 21–22 (PDF pages 23–24, one-based); online primary PDF read, local archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "If $L=0$, take the empty family; this also handles $s=0$. Otherwise $s>0$. Put $E=K\\langle T_1,\\ldots,T_r,Y_1,\\ldots,Y_s\\rangle$ and define $\\iota(x)=\\sum_{j=1}^s x_jY_j$. Its coefficient at $(\\nu,e_j)$ is the coefficient of $T^\\nu$ in $x_j$, and all other coefficients vanish. Thus the restrictedness definition gives $\\iota(x)\\in E$, $\\|\\iota(x)\\|_G=\\|x\\|$, and injectivity. For $0\\ne x$, select any nonzero coefficient of magnitude $a>0$. Only finitely many coefficients of $\\iota(x)$ have magnitude at least $a$, so their maximum is the maximum of all coefficient magnitudes. In particular the Gauss norm is attained, and its maximizing exponents form a finite nonempty set.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3, Corollary 10, printed pp. 21–22 (PDF pages 23–24); agent-supplied homogeneous encoding and bounded-division proof of the same conclusion; online primary PDF read, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Use graded lexicographic order on $\\mathbf N^{r+s}$, and for a nonzero series $F$ let $\\lambda(F)$ be the largest exponent among its coefficients of maximal magnitude. Let $A=\\{\\lambda(\\iota(x)):0\\ne x\\in L\\}$. Each element has the form $(\\nu,e_j)$. Let $B$ be the set of coordinatewise minimal elements of $A$. Distinct elements of $B$ are incomparable, so the cited antichain statement with $d=r+s$ makes $B$ finite. Every $\\alpha\\in A$ dominates an element of $B$: among $\\beta\\in A$ with $\\beta\\le\\alpha$, choose one with least sum of coordinates; any strictly smaller element of $A$ would have a smaller sum. Enumerate $B=\\{\\beta_1,\\ldots,\\beta_h\\}$.",
+   "uses": [
+    "lem-trf-dickson-exponent-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3, Corollary 10, printed pp. 21–22 (PDF pages 23–24); agent-supplied homogeneous encoding and bounded-division proof of the same conclusion; online primary PDF read, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "For each $\\beta_i$ choose $w_i\\in L\\setminus\\{0\\}$ with $\\lambda(\\iota(w_i))=\\beta_i$, and let $c_i\\ne0$ be the coefficient at $\\beta_i$. Set $v_i=c_i^{-1}w_i\\in L$ and $b_i=\\iota(v_i)$. Multiplicativity of the absolute value on $K$ gives $\\|v_i\\|=\\|b_i\\|_G=1$ coefficient by coefficient, since $|c_i|=\\|w_i\\|$. Scaling all coefficients by the same nonzero constant preserves their relative magnitudes, hence $\\lambda(b_i)=\\beta_i$. These choices depend only on $L$, not on the element to be represented.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3, Corollary 10, printed pp. 21–22 (PDF pages 23–24); agent-supplied homogeneous encoding and bounded-division proof of the same conclusion; online primary PDF read, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Fix $x\\in L$. Apply bounded convergent division in the $r+s$ variables of $E$ to $F=\\iota(x)$ and the finite list $b_1,\\ldots,b_h$ of norm one. It gives $q_1,\\ldots,q_h,R\\in E$ with $F=\\sum_iq_ib_i+R$, $\\|q_i\\|_G\\le\\|x\\|$ and $\\|R\\|_G\\le\\|x\\|$. For every exponent $\\gamma$ with nonzero coefficient in $R$ and every $i$, one has $\\beta_i\\nleq\\gamma$ coordinatewise. These are exactly the norm and support clauses in the cited statement; it does not require the list to be a Gröbner basis.",
+   "uses": [
+    "lem-trf-tate-convergent-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3, Corollary 10, printed pp. 21–22 (PDF pages 23–24); agent-supplied homogeneous encoding and bounded-division proof of the same conclusion; online primary PDF read, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $q\\in E$ write $q_0\\in D$ for its coefficients at $Y$-exponent $0$, and for $R\\in E$ let $P(R)\\in D^s$ have $j$th entry given by its coefficients at $Y$-exponent $e_j$. Both are restricted: for every $\\epsilon>0$ the retained coefficients of magnitude at least $\\epsilon$ form a subset of the finite such set for the original series. Also $\\|q_0\\|_G\\le\\|q\\|_G$. Since $b_i=\\sum_j(v_i)_jY_j$, the coefficient at $(\\nu,e_j)$ of $q_ib_i$ is $\\sum_{\\alpha+\\delta=\\nu}(q_i)_{\\alpha,0}(v_i)_{j,\\delta}$: nonnegative $Y$-exponents force the $Y$-exponent of $q_i$ to be zero. Thus extracting these coefficients in the division identity gives $x=\\sum_if_iv_i+z$ with $f_i=(q_i)_0\\in D$ and $z=P(R)\\in L$. Moreover every nonzero coefficient of $\\iota(z)$ is the identical coefficient of $R$, so its exponent is not above any $\\beta_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3, Corollary 10, printed pp. 21–22 (PDF pages 23–24); agent-supplied homogeneous encoding and bounded-division proof of the same conclusion; online primary PDF read, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "If $z\\ne0$, its leading exponent $\\lambda(\\iota(z))$ belongs to $A$ and hence dominates some $\\beta_i$ by Step 2. Its coefficient is nonzero in $R$, contradicting the support clause from Step 4. Therefore $z=0$, and $x=\\sum_if_iv_i$ with $\\|f_i\\|_G\\le\\|q_i\\|_G\\le\\|x\\|$. The norm-one property was proved in Step 3. For $x=0$ the coefficients can also be chosen all zero. No finite generation or closedness of $L$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3, Corollary 10, printed pp. 21–22 (PDF pages 23–24); agent-supplied homogeneous encoding and bounded-division proof of the same conclusion; online primary PDF read, local archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-restricted-series-presentation",
+  "lem-trf-dickson-exponent-sequences",
+  "lem-trf-tate-convergent-division"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.3, Corollary 10, printed pp. 21–22 (PDF pages 23–24); agent-supplied homogeneous encoding and bounded-division proof of the same conclusion; online primary PDF read, local archival copy WANTED. This proof uses existing scalar bounded division instead of Bosch’s orthonormal-basis construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|gaussNorm|IsRestricted",
+   "results": "10 hits: Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean, Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean, Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean, Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean, Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A submodule of a finite free module over a Tate algebra admits norm controlled generators",
+   "results": "8 hits: Module.Finite.iff_fg, Submodule.basisOfPid, MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite, Submodule.FG.finite_generators, FGModuleRepr.S, instModuleFinite_of_discrete_submodule, Submodule.FG.of_le, Submodule.generators; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.IsRestricted, Submodule.FG",
+   "results": "0 hits: ; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every submodule of a finite free Tate algebra module has finitely many generators of Gauss norm one with norm bounded coefficients",
+   "results": "8 hits: ClassGroup.fintypeOfAdmissibleOfFinite, Ideal.norm_mem_spanNorm, ClassGroup.exists_mem_finsetApprox, Submodule.nonempty_basis_of_pid, Submodule.basis_of_pid_aux, Ideal.smithNormalForm, Module.exists_isPrincipal_quotient_of_finite, Ideal.exists_smith_normal_form; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a submodule of K restricted power series to a finite power the integral unit ball is generated by finitely many norm one vectors with coefficients bounded by the vector norm",
+   "results": "8 hits: PowerSeries.IsRestricted.monomial, PowerSeries.IsRestricted.isRestricted_iff, MvPowerSeries.LinearTopology.mem_basis_iff, FormalMultilinearSeries.ofScalarsSubmodule, LaurentSeries.exists_Polynomial_intValuation_lt, MvPowerSeries.LinearTopology.basis, PowerSeries.IsRestricted.convergenceSet, HasFiniteFPowerSeriesOnBall; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|norm.controlled|gaussNorm.*(generat|submodule)|submodule.*gaussNorm",
+   "results": "0 hits: ; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|norm.controlled|gaussNorm.*(generat|submodule)|submodule.*gaussNorm",
+   "results": {
+    "t": "2026-10-24T13:53:10Z",
+    "tool": "grep",
+    "query": "TateAlgebra|norm.controlled|gaussNorm.*(generat|submodule)|submodule.*gaussNorm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned restricted-series definitions, algebraic finiteness, PID or algebraic field-norm statements, not norm-controlled generators for arbitrary Tate submodules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Submodules of a finite free module over restricted power series admit finitely many norm controlled generators",
+   "results": {
+    "t": "2026-10-24T13:53:10Z",
+    "tool": "leansearch",
+    "query": "Submodules of a finite free module over restricted power series admit finitely many norm controlled generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Submodule.FG.finite_generators",
+     "Module.Finite.span_of_finite",
+     "isNoetherian_of_finite",
+     "instModuleFinite_of_discrete_submodule",
+     "Module.Finite.iff_fg",
+     "MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite",
+     "Module.finite_def",
+     "Module.Finite.of_finite"
+    ],
+    "digest": "8c53ed5fcf85a2f0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned restricted-series definitions, algebraic finiteness, PID or algebraic field-norm statements, not norm-controlled generators for arbitrary Tate submodules"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.IsRestricted, Submodule.FG",
+   "results": {
+    "t": "2026-10-24T13:53:10Z",
+    "tool": "loogle",
+    "query": "MvPowerSeries.IsRestricted, Submodule.FG",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned restricted-series definitions, algebraic finiteness, PID or algebraic field-norm statements, not norm-controlled generators for arbitrary Tate submodules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every submodule of a finite free Tate algebra module has generators of norm one with coefficient norms bounded by the input norm",
+   "results": {
+    "t": "2026-10-24T13:53:11Z",
+    "tool": "leanfinder",
+    "query": "Every submodule of a finite free Tate algebra module has generators of norm one with coefficient norms bounded by the input norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ClassGroup.norm_le",
+     "ClassGroup.norm_lt",
+     "ClassGroup.normBound",
+     "Ideal.norm_mem_spanNorm",
+     "Submodule.basis_of_pid_aux",
+     "associated_norm_prod_smith",
+     "ClassGroup.exists_mem_finsetApprox",
+     "Ideal.smithNormalForm"
+    ],
+    "digest": "797e30d77a6a2d5e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned restricted-series definitions, algebraic finiteness, PID or algebraic field-norm statements, not norm-controlled generators for arbitrary Tate submodules"
+  },
+  {
+   "tool": "grep",
+   "query": "gaussNorm|IsRestricted",
+   "results": {
+    "t": "2026-10-24T13:53:33Z",
+    "tool": "grep",
+    "query": "gaussNorm|IsRestricted",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean"
+    ],
+    "digest": "f8a23b96ae6f13fe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned restricted-series definitions, algebraic finiteness, PID or algebraic field-norm statements, not norm-controlled generators for arbitrary Tate submodules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A submodule of restricted multivariate power series vectors admits a finite strict generating set with Gauss norm bounds",
+   "results": {
+    "t": "2026-10-24T13:53:34Z",
+    "tool": "leanfinder",
+    "query": "A submodule of restricted multivariate power series vectors admits a finite strict generating set with Gauss norm bounds",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictTotalDegreeOfFinite",
+     "MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite",
+     "MvPowerSeries.LinearTopology.basis",
+     "ChevalleyThm.chevalley_mvPolynomialC",
+     "Profinite.NobelingProof.GoodProducts.spanFin",
+     "ChevalleyThm.chevalley_polynomialC",
+     "MvPowerSeries.LinearTopology.mem_basis_iff",
+     "MvPowerSeries.LinearTopology.basis_le"
+    ],
+    "digest": "8a5495e70264c5f3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned restricted-series definitions, algebraic finiteness, PID or algebraic field-norm statements, not norm-controlled generators for arbitrary Tate submodules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-restricted-flat-module-finite-presentation",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Completeness of restricted-series quotients over a rank-one valuation ring. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Specifically, the induced-submodule topology input of Bosch 2.3/7(ii), used in the proof of 2.3/8 supporting 2.3/9. The saturated-submodule finiteness input in Bosch 2.3/7(i), used to prove 2.3/7(ii). Theorem 2.3/4, applied to the torsion-free quotient M/P in the proof of Lemma 2.3/7(i). The height-one proof of Bosch 2.3/4 uses the norm-controlled generators of a Tate-module submodule supplied by Bosch 1.3/10.",
+   "via": [
+    "lem-trf-restricted-flat-module-finite-presentation",
+    "lem-trf-restricted-saturated-submodule-finite",
+    "lem-trf-restricted-submodule-adic-topology",
+    "lem-trf-restricted-quotient-complete",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-submodule-norm-controlled-generators",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the module result by encoding vectors as series homogeneous of degree one in extra variables, choosing finitely many minimal leading exponents by the existing Dickson leaf, applying the existing scalar bounded convergent division statement, and extracting degree-one coefficients. No new nodes. Checked all cited statements, restrictedness of coefficient slices, normalization, support contradiction, zero cases and arbitrary real value groups. The resolved stale-assignment note was read; the current stage1() lists the item, so this fresh assignment is eligible.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Completeness of restricted-series quotients over a rank-one valuation ring. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Specifically, the induced-submodule topology input of Bosch 2.3/7(ii), used in the proof of 2.3/8 supporting 2.3/9. The saturated-submodule finiteness input in Bosch 2.3/7(i), used to prove 2.3/7(ii). Theorem 2.3/4, applied to the torsion-free quotient M/P in the proof of Lemma 2.3/7(i). The height-one proof of Bosch 2.3/4 uses the norm-controlled generators of a Tate-module submodule supplied by Bosch 1.3/10. The six steps refine only this inherited historical analytic input. The latest blueprint uses contracting correspondences; no unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-8b7b4d885",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-8b7b4d885 (reviewer sub-agent of L); spot-checked: Read the item and all three cited nodes in full. The statement matches Bosch's Lectures (Apr 2008) §1.3 Corollary 10, pp. 21–22, read via pdftotext: any T_n-submodule of T_n^s, under the max of Gauss norms, has generators of norm 1, and every x is Σ f_i x_i with |f_i| ≤ |x|. The proof is agent-written and correct. Step 1 encodes x as Σ x_j Y_j in K<T,Y>; this is isometric, and the norm is attained. Step 2 takes the coordinatewise-minimal grlex leading exponents; Dickson (Mathlib leaf, antichain clause) makes them finite, and every exponent dominates one of them by a least-coordinate-sum argument. Step 3 normalises by the leading coefficient; |c_i| = ‖w_i‖ and λ is unchanged. Step 4 applies lem-trf-tate-convergent-division in r+s variables with norm-1 b_i; its L(·) is the same grlex function as λ, and the norm and support clauses are quoted correctly. I checked that the division node is true by splitting each b_i into a unit-leading polynomial plus a part of norm ≤ ρ < 1 and iterating; this also works for dense value groups. Step 5: the Y-degree-1 coefficients of q_i b_i only involve the Y-exponent-0 slice of q_i, so x = Σ (q_i)_0 v_i + z with z in L. Step 6: z ≠ 0 would contradict the support exclusion. Checked the cases L=0, s=0, r=0 (a line (1,π)), s=1, L=D^s, and dense value groups. proof_deps equal the union of uses. There is no cycle (the division node has no proof_deps), the cited lemmas are in the item's own unit sk-i-curve-zero, there are no new nodes, and no duplicate exists in the DAG (lem-trf-tate-ideal-best-approximation is a different statement). Both citers use exactly the two clauses as stated. No SGA is cited. The source PDF is not in literature/ and is recorded as WANTED. No changes."
+ }
+}

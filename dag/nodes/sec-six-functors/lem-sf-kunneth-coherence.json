@@ -19,137 +19,73 @@
  ],
  "proof": [
   {
-   "text": "Write $F=Rf_!K$, $G=Rg_!L$, and $D=Lp^*K\\otimes^LLq^*L$. All maps below are on the finite-Tor domains of the supplied datum [def-sf-datum]; in particular its pullback, tensor, and compact-support functors can be iterated on these inputs. By the actual definition of the canonical map in [thm-sf-kunneth-relative], its inverse $\\lambda_{f,g}=\\kappa_{f,g}^{-1}$ is\n$$\\lambda_{f,g}=\\alpha_{g,q}\\circ Rg_!\\bigl(\\operatorname{PF}_{q,Lp^*K,L}\\circ(\\operatorname{Ex}_{f,g}(K)\\otimes1_L)\\bigr)\\circ\\Psi_g(F,L),$$\nwhere $\\Psi_g(F,L):F\\otimes G\\to Rg_!(Lg^*F\\otimes L)$ is $\\operatorname{PF}_{g,L,F}$ preceded by the source symmetry and followed by $Rg_!$ of the target symmetry. Here $\\operatorname{Ex}_{f,g}:Lg^*Rf_!\\to Rq_!Lp^*$ has exactly the direction in (A2), and $\\alpha_{g,q}:Rg_!Rq_!\\to Rt_!$ is (A4). This follows by reversing, in order, the six arrows defining $\\kappa$, not by choosing an arbitrary product isomorphism.",
+   "text": "Reverse the six arrows of [thm-sf-kunneth-relative]: $\\kappa^{-1}=\\lambda=\\alpha_{g,q}Rg_!(\\beta_{f,g})\\Psi_g$, where $\\beta=\\operatorname{PF}_q(\\operatorname{Ex}_{f,g}\\otimes1)$ and $\\Psi_g=Rg_!(\\sigma)\\operatorname{PF}_g\\sigma$. These are exactly the words specified in the three new lemmas.",
    "uses": [
-    "def-sf-datum",
-    "thm-sf-kunneth-relative",
-    "def-sf-pf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Opening sentence; the canonical composite whose coherence is in question"
-   }
-  },
-  {
-   "text": "Suppose $f,g$ proper; their product $t$ and both projections are proper by [lem-weil-pbc-proper-fp-permanence]. Apply [lem-sf-proper-product-counit-transpose] to the precise formula of step 1, with $F=Rf_*K$, $G=Rg_*L$. It identifies its transpose under $Lt^*\\dashv Rt_*$ with\n$$c_{f,g}:Lt^*(F\\otimes G)\\cong Lp^*Lf^*F\\otimes Lq^*Lg^*G\\xrightarrow{Lp^*\\varepsilon_f\\otimes Lq^*\\varepsilon_g}D.$$\nThe same lemma supplies the intermediate $q$-transpose and the canonical proper normalization; thus this computation applies to the specified $\\lambda$, with its completed and field interpretations, rather than an arbitrary isomorphism.",
-   "uses": [
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-sf-proper-product-counit-transpose"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Symmetry paragraph: the transpose of the two counits; explicit computation of the missing intermediate transpose"
-   }
-  },
-  {
-   "text": "For proper $f,g$, naturality of the derived symmetry gives\n$$\\sigma_D\\circ(Lp^*\\varepsilon_f\\otimes Lq^*\\varepsilon_g)=(Lq^*\\varepsilon_g\\otimes Lp^*\\varepsilon_f)\\circ\\sigma_{Lt^*(F\\otimes G)},$$\nwhere the source symmetry is read through the symmetric monoidal pullback comparisons [lem-pur-derived-pullback-tensor-iso] and the product swap. Hence step 2 gives equal transposes for the two swapped versions of $\\lambda$. The adjunction bijection in [fix-prop-adjunctions] makes the original maps equal. Taking inverses proves (i) in the proper case. This retains the signed symmetry; it does not replace it by an unsigned flip.",
-   "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
-    "fix-prop-adjunctions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Clause (i): compare the symmetric two-counit map"
-   }
-  },
-  {
-   "text": "For proper $f,g,h$, put $H=Rh_*M$, $V=X\\times_BY\\times_BW$, $v:V\\to B$, with projections $r_X,r_Y,r_W$; write $t_{g,h}:Y\\times_BW\\to B$ for the other two-factor structure map. The two inverse iterates are $\\lambda_{t,h}\\circ(\\lambda_{f,g}\\otimes1)$ and $\\lambda_{f,t_{g,h}}\\circ(1\\otimes\\lambda_{g,h})$, with the appropriate fibre-product identifications. Apply the formula of step 2 to the outer pair. In the first iterate, naturality of the tensor comparison and of the outer counit moves $L(r_{XY})^*\\lambda_{f,g}$ next to $L(r_{XY})^*\\varepsilon_t$; their composite is $L(r_{XY})^*c_{f,g}$ by the transpose equation for $\\lambda_{f,g}$. It follows that the transpose under $Lv^*\\dashv Rv_*$ is\n$$Lv^*(F\\otimes G\\otimes H)\\longrightarrow Lr_X^*K\\otimes Lr_Y^*L\\otimes Lr_W^*M,$$\nnamely $Lr_X^*\\varepsilon_f\\otimes Lr_Y^*\\varepsilon_g\\otimes Lr_W^*\\varepsilon_h$. For the second iterate, put $z:Y\\times_BW\\to B$ and $r_{YW}:V\\to Y\\times_BW$. Its transpose first applies the outer two-counit map to $F\\otimes Rz_*(L\\boxtimes M)$ after $1\\otimes\\lambda_{g,h}$. Naturality of $\\varepsilon_z$ replaces $\\varepsilon_{z,L\\boxtimes M}\\circ Lz^*\\lambda_{g,h}$ by $c_{g,h}$. Pulling this equation back by $r_{YW}$ gives $Lr_Y^*\\varepsilon_g\\otimes Lr_W^*\\varepsilon_h$ in the last two factors; the first factor is $Lr_X^*\\varepsilon_f$. Thus this transpose is also the displayed three-counit map. The pasted counits and mate pasting are [fix-prop-adjunctions] and [lem-weil-pbc-mate-pasting]; [lem-pur-derived-pullback-tensor-iso] identifies the two tensor bracketings. Injectivity of the adjunction bijection and then inversion prove (ii) for proper morphisms.",
-   "uses": [
-    "fix-prop-adjunctions",
-    "lem-weil-pbc-mate-pasting",
-    "lem-pur-derived-pullback-tensor-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Clause (ii): spell out the equality by the three-counit transpose"
-   }
-  },
-  {
-   "text": "Work first at finite coefficients. The bounded constructible inputs have bounded etale-origin witnesses by clause (ii) of [lem-sf-proetale-constructible-origin], as required for the exchanges. Choose the supplied compactifications $f=aj$, $g=bk$ of [def-sf-datum], put $\\bar T=\\bar X\\times_B\\bar Y$, $u=j\\times_Bk$, and let $c:\\bar T\\to B$. The product $u$ is open: its image is the intersection of the two inverse-image opens; $c$ is proper by [lem-weil-pbc-proper-fp-permanence]. Apply [lem-sf-open-external-tensor-normalization] to obtain the specific comparison\n$$e_{j,k}:(j_!K)\\boxtimes(k_!L)\\xrightarrow{\\sim}u_!(K\\boxtimes L).$$\nIt restricts to the identity and satisfies both signed symmetry and three-factor associativity. This is the open tensor comparison used below; its construction and normalization have been extracted as a separate statement rather than inferred from compactification independence.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "def-sf-datum",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-sf-open-external-tensor-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "The reduction to proper f,g: construct the open external-tensor identification rather than infer it from independence"
-   }
-  },
-  {
-   "text": "For these finite-coefficient compactifications, [lem-sf-product-compactification-identity] gives the equality of specified composites\n$$\\lambda_{aj,bk}(K,L)=Rc_*(e_{j,k})\\circ\\lambda_{a,b}(j_!K,k_!L).$$\nRead its source as $Rf_!K\\otimes Rg_!L=Ra_*j_!K\\otimes Rb_*k_!L$, and its target as $Rt_!D=Rc_*u_!D$. Its $\\lambda$ is exactly the formula of step 1. Its $e$ is the normalized map of step 5, and the equality respects refinement comparisons. Thus it permits reducing the actual canonical map, including its open factors, to the proper map.",
-   "uses": [
-    "lem-sf-product-compactification-identity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Reduction to proper morphisms: expanded identity for the canonical composite; cf. Stacks Tag 0F7J (lemma-shriek-composition) and Tag 0F7F (lemma-shriek-proper-and-open-base-change)"
-   }
-  },
-  {
-   "text": "Apply step 6 also to the swapped pair and, for three inputs, to the compactification $j\\times k\\times l$ obtained from compactifications of $f,g,h$. At finite coefficients the proper symmetry of step 3 and the symmetry of $e_{j,k}$ in step 5 give (i). For (ii), expand both iterates by step 6. Naturality of the proper pair map moves the inner $e$ through it. Both results have the proper triple comparison of step 4 followed by the extension comparison\n$$(j_!K)\\boxtimes(k_!L)\\boxtimes(l_!M)\\longrightarrow(j\\times k\\times l)_!(K\\boxtimes L\\boxtimes M).$$\nThe two such extension comparisons agree by step 5; (A4)'s associativity in [def-sf-datum] identifies the final direct images. Thus both original iterates agree. All coefficients in the proper comparisons remain constructible finite Tor: this is the stipulated finite-Tor operation domain of the datum, including extension by zero as the compact-support image of an open immersion.",
-   "uses": [
-    "def-sf-datum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Clauses (i) and (ii) after the justified compactification reduction"
-   }
-  },
-  {
-   "text": "At integral coefficients set $A=\\mathcal O_E$, $I=(\\varpi_E)$. The ring is a principal ideal domain with finite residue field by [lem-weil-l-adic-extension-integers-dvr]; hence it is Noetherian since every ideal has one generator. Every $A/I^m$ is finite by [lem-weil-valued-dvr-finite-quotients]. All schemes in the compactification diagrams are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] over the Noetherian field $k$. The datum [def-sf-datum] supplies bounded constructible finite reductions, with bounded etale-origin witnesses by [lem-sf-proetale-constructible-origin] (ii). These check the hypotheses of [lem-sf-integral-open-product-diagram-normalization]. That lemma gives the completed open comparison, its symmetry and associativity, and precisely the compactification identity used in steps 5--7, by equalities in the strict diagram category before functorial derived inverse limit. The proper transpose calculation of step 2 already applies to completed operations by its cited lemma; therefore steps 3,4,7 prove (i),(ii) integrally. The same normalization lemma gives the rationalized and common-finite-field versions of the open comparisons and compactification identity. Applying the same proper and compactification arguments proves (i),(ii) for $E$ and $\\overline{\\mathbf Q}_\\ell$. Equality of integral morphisms is never inferred merely from equality of their finite reductions.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-sf-datum",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-integral-open-product-diagram-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Uniform coefficient interpretation of the compactification reduction"
-   }
-  },
-  {
-   "text": "For (iii), use the base-changed data and exchange identifications of [thm-sf-kunneth-relative]: form $X',Y',T'$ over $B'$ and write $b_X,b_Y,b_T$ for their projections. Let $\\chi:Lb_T^*D\\xrightarrow{\\sim}Lb_X^*K\\boxtimes Lb_Y^*L$ be the monoidal pullback comparison of [lem-pur-derived-pullback-tensor-iso]. It suffices to check the inverse-map equation\n$$Rt'_!(\\chi)\\circ\\operatorname{Ex}_{t,b}\\circ Lb^*\\lambda_{f,g}=\\lambda_{f',g'}\\circ(\\operatorname{Ex}_{f,b}\\otimes\\operatorname{Ex}_{g,b})\\circ\\mu_b.$$\nInsert the expression in step 1. Move $Lb^*$ through each symmetry by its symmetric monoidality. Apply the displayed base-change square of [prop-sf-pf-coherence] to PF for $g$ along $b$, and to PF for $q$ along $b_Y$. Replace the two successive exchanges for $f$ along $g$ and $b_Y$ by those along $b$ and $g'$ using horizontal pasting in [fix-lem-exchanges], clause (2); replace the successive exchanges for $g,q$ by that for $t$ using its vertical-pasting equation. Their compatibility with composition is the same clause with its $\\alpha$ comparisons. The factors remaining on the lower route are, in order, $\\Psi_{g'}$, the exchange for $(f',g')$, PF for $q'$, and $\\alpha_{g',q'}$, hence $\\lambda_{f',g'}$. This gives the written equation, and inversion gives (iii). These are exactly the base-change maps and domains in the parent theorem, which already states compatibility for such $b$; its hypotheses, and the coefficient-domain conventions of the cited exchange and PF nodes, are retained.",
-   "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
-    "prop-sf-pf-coherence",
-    "fix-lem-exchanges",
     "thm-sf-kunneth-relative"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Clause (iii): the two PF squares and the horizontal/vertical exchange-pasting equations"
+    "place": "Opening canonical-composite sentence"
    }
   },
   {
-   "text": "For (iv), identify $X\\times_BB$ with $X$, so $p=\\mathrm{id}_X$ and $q=f$. In step 1, $\\alpha_{\\mathrm{id},f}$ is the identity: the composition law (A4) of [def-sf-datum] is the one of [thm-sf-comp-composition], which states that $\\alpha_{g,f}$ is the identity when $f$ or $g$ is an identity, and the integral and field forms are obtained from it by the same functorial coefficient passage as in step 8, which carries identities to identities. $\\operatorname{Ex}_{f,\\mathrm{id}}$ is the identity by clause (2) of [fix-lem-exchanges], and $\\operatorname{PF}_{\\mathrm{id}}$ is the identity by [prop-sf-pf-coherence]. The source symmetry in $\\Psi_{\\mathrm{id}}$ is canceled by its target symmetry, so $\\Psi_{\\mathrm{id}}=1$. The only remaining factor is $\\operatorname{PF}_{f,K,L}$; thus $\\lambda_{f,\\mathrm{id}}=\\operatorname{PF}_{f,K,L}$ and $\\kappa_{f,\\mathrm{id}}=\\operatorname{PF}_{f,K,L}^{-1}$.",
+   "text": "For proper factors, [lem-sf-proper-product-counit-transpose] gives the two-counit transpose. Naturality of the signed symmetry through [lem-pur-derived-pullback-tensor-iso] identifies its swapped version; injectivity of the adjunction bijection [fix-prop-adjunctions] gives (i). The two triple transposes in [lem-sf-proper-triple-counit-transpose] agree, giving (ii) for proper factors by the same bijection.",
    "uses": [
-    "def-sf-datum",
-    "fix-lem-exchanges",
-    "prop-sf-pf-coherence",
-    "thm-sf-comp-composition"
+    "lem-sf-proper-product-counit-transpose",
+    "lem-pur-derived-pullback-tensor-iso",
+    "fix-prop-adjunctions",
+    "lem-sf-proper-triple-counit-transpose"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Clause (iv): identity composition, identity square and identity projection formula"
+    "place": "Assembly of Clause (ii), associativity of tensor with PF, and final two-counit sentence: returned steps 2--4, extracting the proper three-counit transpose computation."
    }
   },
   {
-   "text": "For $r=1$ use the identity. For $r\\geq2$ define a left-associated iteration of the binary map. Any other binary bracketing can be changed to this one by repeatedly replacing $A(B C)$ by $(A B)C$; clause (ii) preserves the resulting morphism at every replacement. For permutations, use adjacent swaps and clause (i). The symmetric monoidal constraints already present in the datum [def-sf-datum] ensure that two words for the same permutation induce the same signed tensor identification: the symmetry squared is the identity, disjoint swaps commute, and the hexagon gives the three-factor braid relation. Equivalently the same two- and three-counit and open-restriction calculations of steps 3--8 verify these relations on the product maps. This proves independence after the stated canonical constraints. Finally apply the result to the structure morphisms of the closed subschemes and the restricted objects in the compact-support clause of [thm-sf-kunneth-relative]. The pullback comparisons used there are symmetric and associative by [lem-pur-derived-pullback-tensor-iso], so the same identifications and base changes commute. This proves the asserted closed-subscheme compact-support compatibility; no cohomology-with-supports identification is involved.",
+   "text": "For general factors, the pair identity [lem-sf-product-compactification-identity] and its completed and field forms [lem-sf-integral-open-product-diagram-normalization] reduce (i) to proper symmetry and the signed symmetry of the normalized open comparison [lem-sf-open-external-tensor-normalization]. For (ii), [lem-sf-triple-compactification-normal-form] writes each iterate as its proper iterate followed by $Rc_*e_L$ or $Rc_*e_R$; step 2 and $e_L=e_R$ identify them. This uses strict-diagram equalities before $R\\lim$ integrally.",
+   "uses": [
+    "lem-sf-product-compactification-identity",
+    "lem-sf-integral-open-product-diagram-normalization",
+    "lem-sf-open-external-tensor-normalization",
+    "lem-sf-triple-compactification-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Proper reduction via product compactifications, all coefficients"
+   }
+  },
+  {
+   "text": "For (iii), substitute the middle-square equality [lem-sf-middle-exchange-projection-base-change] into the word of step 1. The PF base-change square [prop-sf-pf-coherence] for $g$ transports $\\Psi_g$, with its symmetries transported by [lem-pur-derived-pullback-tensor-iso]. Vertical exchange pasting, including $\\alpha$, in [fix-lem-exchanges](2) combines the $g,q$ exchanges into the $t$ exchange. The resulting word is $\\alpha_{g',q'}Rg'_!(\\beta_{f',g'})\\Psi_{g'}$; invert to obtain (iii).",
+   "uses": [
+    "lem-sf-middle-exchange-projection-base-change",
+    "prop-sf-pf-coherence",
+    "lem-pur-derived-pullback-tensor-iso",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (iii), outer PF and composition pasting"
+   }
+  },
+  {
+   "text": "For (iv), $X\\times_BB=X$, $p=1$, $q=f$. Identity composition [thm-sf-comp-composition], transported in [fix-lem-exchanges](2), the identity-square exchange there, and identity PF [prop-sf-pf-coherence] reduce step 1 to $\\lambda=\\operatorname{PF}_{f,K,L}$: the two symmetries in $\\Psi_1$ cancel. Invert.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "fix-lem-exchanges",
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (iv), identity comparisons"
+   }
+  },
+  {
+   "text": "For $r=1$ take the identity. Repeated rotations $A(BC)\\leftrightarrow(AB)C$ and adjacent swaps give every bracketing and order; (ii) and (i) preserve the map. The datum's symmetric monoidal constraints [def-sf-datum] give involution, disjoint-swap and braid relations. Apply this to the restricted objects and structure maps of the closed subschemes in [thm-sf-kunneth-relative]; the symmetric associative pullback comparisons [lem-pur-derived-pullback-tensor-iso] identify their external products.",
    "uses": [
     "def-sf-datum",
     "thm-sf-kunneth-relative",
@@ -158,26 +94,22 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Consequently: finite products and closed-subscheme compact-support forms"
+    "place": "Consequence: finite products and closed restrictions"
    }
   }
  ],
  "proof_deps": [
   "def-sf-datum",
-  "def-sf-pf",
   "fix-lem-exchanges",
   "fix-prop-adjunctions",
   "lem-pur-derived-pullback-tensor-iso",
   "lem-sf-integral-open-product-diagram-normalization",
+  "lem-sf-middle-exchange-projection-base-change",
   "lem-sf-open-external-tensor-normalization",
   "lem-sf-product-compactification-identity",
-  "lem-sf-proetale-constructible-origin",
   "lem-sf-proper-product-counit-transpose",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sf-proper-triple-counit-transpose",
+  "lem-sf-triple-compactification-normal-form",
   "prop-sf-pf-coherence",
   "thm-sf-comp-composition",
   "thm-sf-kunneth-relative"
@@ -185,7 +117,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-  "place": "Complete proof; expanded mate and compactification calculations, with Stacks Tags 07A7, 0B56, 0E48, 03DI, 03DJ, 0F7F, 0F7J as read sources"
+  "place": "Short assembly of the three extracted intermediate comparisons and the existing pair-normalization nodes; old arguments preserved and assigned in the O1 report."
  },
  "mathlib_searches": [
   {
@@ -262,27 +194,30 @@
   "thm-sf-pf-finite"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-kunneth-relative",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-sf-kunneth-coherence",
   "worker": "stage1",
-  "summary": "Repair of the human return: extracted four genuine intermediate comparison arguments from steps 2,5,6,8 into four searched statement-only nodes. Kept the item statement, Lean audit, proof route and the other seven steps unchanged. The new nodes state the proper counit transpose, finite open tensor normalization, finite product compactification identity and integral strict-diagram normalization; none asserts an item coherence clause.",
-  "blueprint": "Steps 1--4 realize the canonical-composite opening and the final two-counit sentence, with the three-counit computation supplying clause (ii). Steps 5--8 supply the argument hidden by \"after reduction to proper f,g\". Step 9 spells out clause (iii), step 10 clause (iv), and step 11 the concluding n-fold and closed-subscheme assertion. The original unit route through PF coherence, compact-support composition, base change and mate calculus is retained. Returned long steps 2,5,6,8 now cite statement-only intermediate lemmas for their hidden comparisons; all non-elementary steps are below 2000 characters.",
+  "summary": "Repair of 2026-10-22 re-split return: three independently searchable statement-only nodes distribute the proper triple transpose, the triple compactification normal forms at all coefficient stages, and the middle exchange/PF base-change square. Statement and maintainer fields unchanged; proof is a short assembly. The report preserves all eleven old arguments verbatim and identifies their destinations.",
+  "blueprint": "Opening canonical word and final counit sentence -> proper triple transpose; proper-reduction sentence -> triple compactification normal forms; clause (iii) PF_q and horizontal pasting -> middle base-change square; PF_g and vertical pasting, identity clause, and finite-product consequence stay as assembly steps.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-proper-fp-permanence",
-    "why": "Proper base-change and composition permanence make the product of the proper compactifications proper; the unit has no separate scheme-permanence statement."
-   },
-   {
     "node": "lem-pur-derived-pullback-tensor-iso",
-    "why": "The canonical monoidal pullback comparisons, including symmetry, composition and completed coefficients, are the generic tensor tool used throughout the unit."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Noetherianity of the finite-type k-schemes checks the hypothesis of the generic fully faithful open-extension and strict diagram tools."
+    "why": "Canonical symmetric monoidal pullback comparisons, including completed and field stages; generic tensor tool, preserving the unit route."
    }
   ]
  },
@@ -295,11 +230,11 @@
   "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q69-6a1ec6901",
-  "group": "Q69",
+  "reviewer": "NT-cc-O1-d3091b98c",
+  "group": "O1",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-6a1ec6901 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the four new nodes in full. I checked them against the main-20261015 blueprint lemma proof and the unit sk-thm-sf-kunneth-relative, and read the statement of every cited node. The Stacks tags in the report match their labels (07A7, 0B56, 0E48, 03DI/03DJ: sites-modules l.2057/2160, 0F7F, 0F7J: more-etale l.3159). There is no SGA citation. The item statement is unchanged and nothing is weakened. Step 1's lambda is the exact inverse of the parent's composite. Proper transpose: I recomputed it by hand. The q-transpose of PF_q(Ex x 1) is (Lp*eps_f theta) x 1 and the t-transpose of lambda is Lp*eps_f x Lq*eps_g, following from the mate and counit definitions in def-exchange-projection and fix-prop-adjunctions (3). Open normalization: the factorization through X x_B Ybar is well typed. Independence, signed symmetry and associativity follow from restriction to the identity, because j_! -| restriction is fully faithful. Compactification identity: tested with identity j,k and with identity a,b (open f,g); it is the statement hidden in the blueprint's 'reduction to proper f,g'. Integral node: its hypotheses match lem-sp-proper-open-tower-comparison (Noetherian O_E with finite quotients, Noetherian schemes, levelwise etale witnesses, no transitions), and it uses equalities in the diagram category before Rlim, never faithfulness of finite reduction. None of the new nodes restates clauses (i)-(iv), and there is no cycle. proof_deps equals the union of the step uses. Route: only lem-pur-derived-pullback-tensor-iso is off route, and I accept it as a generic tool use. FIX: I removed three stale split_report.tool_uses entries (lem-sfb-locally-closed-extension-coherence, lem-sp-proper-open-tower-comparison, lem-weil-pbc-ringed-strict-tower-homotopy-limit); no step of the item cites them after the repair. For the maintainer: (1) the existing node lem-trf-relative-kunneth-counit (Q72, 2026-10-17) is the finite-coefficient special case of lem-sf-proper-product-counit-transpose. Keep the new node, since step 8 needs the integral and field cases, and later merge or repoint the trf node. (2) Reduce the item's maintainer-owned top-level tool_uses the same way.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-d3091b98c (reviewer sub-agent of L); spot-checked: I read in full the item, the three new nodes, the cited statements and the main-20261015 blueprint proof. Re-split note of 2026-10-22: in live and side-live the item still has the 11-step base proof (11302 characters), so it is not superseded, and it is not in the dropped list. The statement and maintainer fields are unchanged. All 11 base steps appear verbatim in the report as handoff material. The assembly has 6 steps and 2525 characters, and proof_deps equals the union of the step uses. Three new statement-only nodes of comparable size (2563, 3538 and 2561 characters), none restating clauses (i)-(iv). (1) proper-triple-counit-transpose (old step 4): both iterates are typed and true by counit naturality; f=g=h=id checked. (2) triple-compactification-normal-form (old steps 7-8): e_L and e_R are well typed; the identities follow from the pair identity applied twice plus naturality; checked for identity opens and for open f_i; the integral stage keeps the strict diagrams, Rlim and witnesses. (3) middle-exchange-projection-base-change (part of old step 9): T'=T x_Y Y'; true by the PF base-change square and horizontal/vertical exchange pasting; b=id gives beta=beta. Old steps 3, 10 and 11 and the outer PF_g/vertical pasting remain short glue steps in the assembly with their content intact. Old steps 2, 5 and 6 and the pair part of 8 go to existing dedicated nodes; the integral node fixes O_E and the k-schemes in its own statement, so no hypothesis check is lost. No duplicates: binary transpose and pair nodes, lem-pur-finite-proper-product-transpose, lem-kun-proj-formula-natural, lem-kun-bc-base-change and lem-sf-exterior-shriek-projection-compatibility are all different statements. No cycle, no SGA. Batch-5 flag: the base item already cited lem-sf-integral-open-product-diagram-normalization, and lem-trf-adjoint-composition-coherence is a generic categorical (status mathlib) lemma about composing adjunctions, outside the trace formula and Poincare duality; accepted. Tool use lem-pur-derived-pullback-tensor-iso accepted. Maintainer note: the item's top-level tool_uses lists nodes no longer cited, and source.document still points at master."
  }
 }

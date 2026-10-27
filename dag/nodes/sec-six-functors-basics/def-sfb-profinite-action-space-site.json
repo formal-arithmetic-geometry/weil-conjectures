@@ -1,0 +1,161 @@
+{
+ "id": "def-sfb-profinite-action-space-site",
+ "kind": "definition",
+ "title": "Small profinite action-space site and parameter functors",
+ "status": "split",
+ "statement": "Use the compatible universes and small profinite parameter category $B=\\operatorname{AsSmall}_{u+1}(\\operatorname{Profinite}_u)$ with its canonical functor $\\operatorname{par}:B\\to\\operatorname{Profinite}_u$ from [def-sfb-profinite-action-base-coefficients]. Let $J$ be a compact Hausdorff totally disconnected topological group in universe $u$. Write $A_J$ for the category of profinite spaces with continuous left $J$-action and continuous equivariant maps, as in [def-sfb-profinite-action-parameters]. Define $\\operatorname{Space}_J=\\operatorname{AsSmall}_{u+1}(A_J)$. Define $U_J:\\operatorname{Space}_J\\to\\operatorname{Profinite}_u$ by the canonical functor to $A_J$ followed by forgetting the action. Define a precoverage $\\mathcal C_J$ by declaring a presieve $W$ on $T$ covering precisely when its set of arrows is finite and for every $x\\in U_J(T)$ there exist an arrow $f:V\\to T$ in $W$ and $y\\in U_J(V)$ with $U_J(f)(y)=x$. Thus the empty presieve covers exactly the empty underlying space. Transport the trivial and free parameter functors $t_J,H_J$ of [def-sfb-profinite-action-parameters] to $B\\to\\operatorname{Space}_J$ by precomposing with $\\operatorname{par}$ and postcomposing with the canonical inclusion into the small model. Explicitly, $t_J(S)$ retains $\\operatorname{par}(S)$ with trivial action, while $H_J(S)=J\\times\\operatorname{par}(S)$ with $a\\cdot(j,s)=(aj,s)$, and the induced maps are respectively $f$ and $(j,s)\\mapsto(j,f(s))$. These are the actual spaces and maps, transported only by the canonical small-model equivalences; no coherent-presentation theorem or equivalence is part of these definitions.",
+ "stmt_deps": [
+  "def-sfb-profinite-action-base-coefficients",
+  "def-sfb-profinite-action-parameters"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated auxiliary profinite action-space infrastructure: definitions of P_J, its finite jointly surjective coverage, and small-model t and H, serving free-restriction proof steps 2--5. This paragraph does not itself assert these auxiliary constructions; records existing definitions in ProfiniteActionCoherentPresentation.lean:105--132."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Small model of profinite spaces with continuous group action finite jointly surjective covering presieves and free trivial parameter functors",
+   "results": {
+    "t": "2026-10-24T01:30:43Z",
+    "tool": "leansearch",
+    "query": "Small model of profinite spaces with continuous group action finite jointly surjective covering presieves and free trivial parameter functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp",
+     "ProfiniteGrp.ofProfinite",
+     "ProfiniteGrp.isIso_toLimit",
+     "Profinite.indexFunctor",
+     "ProfiniteGrp.mk",
+     "ProfiniteGrp.ofFiniteGrp",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.casesOn",
+     "FintypeCat.toProfinite"
+    ],
+    "digest": "df8f660b6bc38c1a"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing five plain definitions in Sheaf.CategoryTheory.ProfiniteActionCoherentPresentation; no definition node currently records them."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContAction\", \"AsSmall\"",
+   "results": {
+    "t": "2026-10-24T01:30:43Z",
+    "tool": "loogle",
+    "query": "\"ContAction\", \"AsSmall\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing five plain definitions in Sheaf.CategoryTheory.ProfiniteActionCoherentPresentation; no definition node currently records them."
+  },
+  {
+   "tool": "grep",
+   "query": "freeParameter|trivialParameter|def coverage|def underlying",
+   "results": {
+    "t": "2026-10-24T01:30:43Z",
+    "tool": "grep",
+    "query": "freeParameter|trivialParameter|def coverage|def underlying",
+    "sub": "CategoryTheory/Action",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing five plain definitions in Sheaf.CategoryTheory.ProfiniteActionCoherentPresentation; no definition node currently records them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l CoherentPresentation\\.(Space|underlying|coverage|trivialParameter|freeParameter) dag/nodes --glob def-*.json; rg freeParameter|trivialParameter|CoherentPresentation lean/WeilConjectures/CategoryTheory; rg definitions lean/Sheaf/CategoryTheory/ProfiniteActionCoherentPresentation.lean; blueprint_refs.py search profinite action",
+   "results": "No definition node records these five declarations; no upstream CategoryTheory match. Existing Sheaf declarations occur at lines 105, 110, 116, 125, 131 respectively. blueprint_refs.py: 0 blueprint nodes match profinite action. The landed base-coefficients node owns Base, parameter, baseCoverage, groupPresheaf and Actions, not these five action-space constructions.",
+   "date": "2026-10-24",
+   "verdict": "Ownership-only extraction requested by H2 return at immutable head 7041473dc2e7. No new Lean definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-free-restriction",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), auxiliary profinite action-space site and free/trivial parameters needed to state free restriction.",
+   "via": [
+    "lem-sfb-profinite-action-free-restriction",
+    "lem-sfb-profinite-action-coherent-presentation",
+    "lem-sfb-profinite-invariants-filtered-continuity",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteActionCoherentPresentation",
+  "declaration": "Profinite.CondensedAction.CoherentPresentation.freeParameter",
+  "declarations": [
+   "Profinite.CondensedAction.CoherentPresentation.Space",
+   "Profinite.CondensedAction.CoherentPresentation.underlying",
+   "Profinite.CondensedAction.CoherentPresentation.coverage",
+   "Profinite.CondensedAction.CoherentPresentation.trivialParameter",
+   "Profinite.CondensedAction.CoherentPresentation.freeParameter"
+  ],
+  "statement": "def freeParameter : Base.{u} ⥤ Space J",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair of return at immutable head 7041473dc2e7: records the five existing plain definitions and no theorem of coherent presentation. Base/parameter and internal actions are owned by the cited base-coefficients definition node; free/trivial action functors by the cited parameter node. None of these five definitions uses or chooses from the coherent-presentation theorem. Lean source is unchanged; a later foundational-module extraction can remove the stage-3 import-cycle constraint."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52f3fd445",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52f3fd445",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 7041473dc2e7. Item Lean byte-identical (sha256 725e1eaa); item node differs from live only in lean and stmt_deps (+ landed def-sfb-profinite-action-base-coefficients, + new def-sfb-profinite-action-space-site). New def node: existing:true on live ProfiniteActionCoherentPresentation for Space/underlying/coverage/trivialParameter/freeParameter (live lines 102-132, plain defs, no use of the coherent-presentation theorem); statement verbatim 'def freeParameter : Base.{u} ⥤ Space J'; TeX matches AsSmall model, forget₂, finite jointly surjective coverage incl. empty cover, transported t/H; stmt_deps base-coefficients + parameters, acyclic; no other owner in live DAG or in-flight runs. All signature objects now have cited owners. Mathematics re-checked: J hypotheses exact; sheaf clause on H.op⋙F.obj; r_g real data; F(r_h)≫F(r_g)=F(r_gh) is the left-action order; unit; naturality H(f)≫r_g=r_{g∘f}≫H(f); FreeRestriction pins sections/action/maps (not hollow); cover and pullback for all a,b. Edge cases: S=∅ and empty cover, J=1, non-abelian J. Report sections present. No compile (no file changed). Advisory: stage-3 import cycle with the coherent-presentation module (move shared defs to a foundational module later); owner docstrings still name the theorem node."
+ }
+}

@@ -9,6 +9,7 @@ public import Sheaf.Paper.SectionLocalComparisonData
 public import Sheaf.AlgebraicGeometry.AffineLinearTraceAction
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Canonical coordinate-counit arrows on affine space
 
@@ -36,7 +37,10 @@ theorem tateFlat (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (S : Scheme.{u})
     (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
     ObjectProperty.flat (Scheme.finiteEtaleTateTwist S N A hA d) := by
-  sorry
+  have hInv : ∀ s : S, IsUnit (N : S.presheaf.stalk s) := fun s ↦ by
+    simpa only [map_natCast] using hS.map (S.presheaf.germ ⊤ s (by trivial)).hom
+  exact (ObjectProperty.flat_iff_preservesFiniteLimits _).2
+    (Scheme.finite_etale_torsion_twist_line S N hN hInv A hA d).2.2.1
 
 /-- One canonical regrouping step for the ordered shifted Tate tensors.
 Source: sk-thm-dnc, Local construction (blueprint: def-trf-coordinate-counit-arrows). -/
@@ -113,7 +117,12 @@ isomorphisms is Cartesian. This includes the zero-variable affine space. -/
 theorem standardSquare (S : Scheme.{u}) (d : ℕ) :
     IsPullback (affineTraceAffineSpaceIso S d).inv
       (AffineSpace (ULift.{u} (Fin d)) S ↘ S) (affineTraceProjection S d) (𝟙 S) := by
-  sorry
+  apply IsPullback.of_horiz_isIso
+  refine ⟨?_⟩
+  rw [Category.comp_id]
+  apply (cancel_epi (affineTraceAffineSpaceIso S d).hom).mp
+  simp only [Iso.hom_inv_id_assoc]
+  exact (AffineSpace.homOfVector_over _ _).symm
 
 /-- The prescribed affine orientation in the standard affine-space model. The middle
 map is the actual tower counit's transpose; the final map is the exceptional mate

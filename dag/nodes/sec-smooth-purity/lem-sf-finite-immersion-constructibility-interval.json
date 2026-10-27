@@ -1,0 +1,263 @@
+{
+ "id": "lem-sf-finite-immersion-constructibility-interval",
+ "kind": "statement",
+ "title": "Finite constructibility partitions and unchanged intervals for immersion restriction and closed direct image",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $t$, and $A_n=R/t^n$ for $n\\geq1$ [def-weil-finite-field-fiber], [def-weil-l-adic-coefficient-extension]. Let $X$ be a Noetherian scheme (locally Noetherian and quasi-compact) on which $\\ell$ is invertible, let $i:Z\\hookrightarrow X$ be a closed immersion, and let $j:U\\hookrightarrow X$ be its complementary open immersion [pqf-def-locnoeth], [def-weil-closed-immersion], [def-weil-open-immersion]. Use constant $A_n$-module sheaves on the small pro-etale sites, finite constructibility as a finite disjoint locally closed constructible partition with locally constant finite-module restrictions, and the derived categories $D^b_c(-,A_n)$ [def-weil-pbc-proetale-site], [def-weil-pbc-constant-sheaf], [def-weil-finite-torsion-constructibility].\n\nOrdinary inverse images $i^{-1},j^{-1}$ and closed direct image $i_*$ induce exact triangulated functors $i^*,j^*,Ri_*=i_*$ on these bounded constructible categories [def-weil-pbc-proetale-operations], [lem-weil-pbc-proetale-ringed-open-closed]. For every integer interval $[a,b]$, each of these three functors preserves that same cohomological interval; more precisely $\\mathcal H^r(FC)\\cong F\\mathcal H^r(C)$ for every $r$ and $F\\in\\{i^{-1},j^{-1},i_*\\}$ [def-weil-derived-cohomology-sheaves], [def-weil-cohomological-support].\n\nFor a constructible sheaf $M$ on $X$, a partition $(S_\\nu)$ witnessing constructibility pulls back to the partitions $(S_\\nu\\times_XZ)$ and $(S_\\nu\\times_XU)$ witnessing constructibility of its two inverse images. For a constructible sheaf $N$ on $Z$ with partition $(T_\\mu)$, the same locally closed subschemes $T_\\mu\\to Z\\to X$, together with $U$, witness constructibility of $i_*N$: its restriction to $T_\\mu$ is that of $N$ and its restriction to $U$ is zero. Empty strata may be omitted. No reducedness hypothesis on $Z$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Finite-stage paragraph: constructible restriction partitions and closed pushforward; original detailed step 1, used again for the uniform interval in integral step 6. Stacks proetale.tex labels lemma-closed-immersion (09AA), lemma-closed-immersion-complement-retrocompact-exact (09BM), and lemma-ses-associated-to-open (09AH) supply the support input."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-cohomological-support",
+  "lemma-constructible-pullback-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Use exact constant-ring pullback from def-weil-pbc-proetale-operations. The Noetherian open immersion is quasi-compact by Mathlib. Apply lem-sfb-proetale-identified-open-closed to the canonical constant-ring comparisons to obtain exact closed direct image and an invertible counit. The adjunction transpose identity identifies its scalar map with proEtaleCoefficientDirectImageMap, so this is the specified proEtaleConstantModuleDirectImage. Apply the forward essential-image implication of lem-exc-proetale-closed-essential-image to obtain its zero open restriction.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-sfb-proetale-identified-open-closed",
+    "lem-exc-proetale-closed-essential-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each original stratum, apply lem-sf-cartesian-stratum-module-restriction. Its final clause gives local constancy and finite geometric stalks on the actual pullback scheme. Convert the universe-general local-constancy predicate by unpacking its True model condition. Thus lemma-constructible-pullback-stratification is the required same-index partition, and witnesses sheaf constructibility.",
+   "uses": [
+    "lem-sf-cartesian-stratum-module-restriction",
+    "lemma-constructible-pullback-stratification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget only the constructibility field of the supplied closed-side stratification and apply lem-sf-closed-partition-module-test with the counit and zero restriction from step 1. Its dependent-pair equalities yield isomorphisms of the original domain schemes over X by equality elimination. Reindex Fin(n+1) by Fin n plus Unit using finSumFinEquiv. The returned partition retains every composite immersion and adds precisely the supplied U; its stratum tests prove closed direct-image constructibility. Its index set is nonempty because it contains the open index, also when all schemes are empty.",
+   "uses": [
+    "lem-sf-closed-partition-module-test"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing exact-functor termwise factorization, triangulated structure and source-library rightDerivedFunctorIsoMapDerivedCategory to compare the specified functors with termwise exact descent. The source-library mapDerivedCategoryHomologyFunctorIso gives the natural cohomology comparison in every integer degree. These are the established exact-functor constructions of lem-weil-pbc-exact-functor-derived-factorization and lem-weil-pbc-exact-functor-derived-functor, not new assumptions.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every complex C and degree r, zero source cohomology maps to zero under the additive ordinary functor; transport through the comparison of step 4. Contraposition gives support(DF C) subset support(C), so every identical interval is preserved, even for a>b. A subset of finite support is finite. Apply steps 2 and 3 to each source cohomology sheaf and transport its constructible witness through the same comparison. These are exactly both clauses of intrinsicFiniteTorsionConstructible.",
+   "uses": [
+    "def-weil-cohomological-support",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-cohomological-support",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-closed-essential-image",
+  "lem-sf-cartesian-stratum-module-restriction",
+  "lem-sf-closed-partition-module-test",
+  "lem-sfb-proetale-identified-open-closed",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lemma-constructible-pullback-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D4",
+  "date": "2026-10-24",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Complete Lean assembly of the finite-stage partition and exact-derived argument. Uses already-proved identified-coefficient open/closed transport and source-library exact derived comparisons; no new nodes or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On small pro-etale sites of Noetherian schemes, open and closed immersion inverse image and closed direct image preserve finite constructible complexes and the same cohomological interval",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction and extension across a closed subset preserve finite locally constant stratifications of sheaf cohomology",
+   "results": "[leanfinder] OK 8 hit(s); CompHausLike.LocallyConstant.presheaf_ext; Profinite.NobelingProof.CC_exact; CompHausLike.LocallyConstant.incl_comap; Condensed.isColimitLocallyConstantPresheaf_desc_apply; Profinite.exists_locallyConstant_finite_aux; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; LightCondensed.isColimitLocallyConstantPresheaf_desc_apply; Profinite.exists_locallyConstant_fin_two",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback and closed immersion pushforward of finite torsion constructible proetale module complexes preserve cohomological bounds",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instFullPushforward; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; SheafOfModules.pullbackObjFreeIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "[loogle] OK 12 hit(s); Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible; IsRetrocompact.isLocallyConstructible; Topology.IsConstructible.compl; Topology.IsConstructible.of_compl; Topology.isConstructible_compl",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(proetale|pro.etale).*(constructib|stratif)|(constructib|stratif).*(proetale|pro.etale)",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sheaf inverse image closed immersion pushforward bounded constructible complexes stratifications",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scheme or site infrastructure, not all clauses for finite-constant-coefficient pro-etale constructible partitions and unchanged cohomological intervals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image and closed immersion direct image preserve constructible pro-etale module sheaves and cohomological intervals",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scheme or site infrastructure, not all clauses for finite-constant-coefficient pro-etale constructible partitions and unchanged cohomological intervals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant stratifications of sheaves are preserved under restriction to open or closed subschemes and extension from a closed subscheme",
+   "results": "OK 8 hits: AlgebraicGeometry.instLocallyQuasiFiniteResLE, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.instLocallyOfFiniteTypeResLE, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.Scheme.OpenCover.restrict_I₀, AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scheme or site infrastructure, not all clauses for finite-constant-coefficient pro-etale constructible partitions and unchanged cohomological intervals"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-open-closed-triangle-all-stages",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Finite-stage paragraph: constructible restriction partitions and closed pushforward; original detailed step 1, used again for the uniform interval in integral step 6. Stacks proetale.tex labels lemma-closed-immersion (09AA), lemma-closed-immersion-complement-retrocompact-exact (09BM), and lemma-ses-associated-to-open (09AH) supply the support input.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-immersion-constructibility-interval",
+  "worker": "Q08",
+  "summary": "Repair of the 6329-character proof: extracted two independent statement-only nodes, one for cartesian stratum module comparisons and one for the Noetherian ambient partition and restriction test. Retains the statement and all old arguments, with their full text and allocation in report.md; parent is a short exactness/partition/derived assembly.",
+  "blueprint": "Finite-stage constructibility detail for prop-sf-open-closed-triangle-all-stages, and unchanged intervals reused at its integral stage; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies the pulled-back finite constant coefficient rings with the target constant rings; generic coefficient tool. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Provides exactness on module sheaves for the ordinary immersion inverse images; generic topos tool. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Provides exact closed image and the counit/zero-restriction identities on all module sheaves; support input required by the unit itself. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Gives the actual fibre-product partition, avoiding unsupported factorization of strata; generic scheme partition tool. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-pur-scheme-constructible-preimage",
+    "why": "Ensures constructibility of the inverse-image subsets; generic scheme tool. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Passes the exact abelian functors to triangulated functors represented termwise; generic homological algebra tool. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identifies the termwise exact functor with its total derived functor, hence Ri_*=i_*; generic homological algebra tool. No statement of this unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-45fcc5238",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-45fcc5238 (reviewer sub-agent of L); spot-checked: This delivery answers the released stage-1 re-split note dated 2026-10-21/22 (batch5; keep_plan; at least 2 new nodes; old proof 6329 characters in 7 steps). Compared with live, only proof, proof_deps and split_report changed; the statement is unchanged. The assembly is 2213 characters in 5 steps. Every old argument now has a place, and none was shortened. Old step 3 goes to lem-sf-cartesian-stratum-module-restriction: a finite commutative ring A, the actual fibre-product composition iso theta_M, coefficient maps that agree on constant sections along both paths, A-linearity, and finite local constancy via lem-pur-proetale-finite-local-constancy-pullback. Old steps 1, 4 and 5 go to lem-sf-closed-partition-module-test: Noetherian X makes every open retrocompact and quasi-compact; the strata i∘t_mu plus U are constructible (Stacks 02V0, 01OW/01OZ, 04ZA, checked); and a P with i^*P≅N and j^*P≅0 is constructible. Old steps 2 and 6 stay in the assembly as citations of the existing constant-ring-map, immersion-limit, ringed-open-closed and exact-functor nodes. Old step 7 stays as an elementary step, written out in full. The two new nodes carry about 1.5k and 2.4k characters of old argument, so they are of comparable size, and neither restates the item. Node 1 extends lem-sfb-intrinsic-finite-derived-pullback from finite fields to finite rings, which A_n needs for n>1, so it is not a duplicate. I found no duplicate for node 2: 09YG, the condensed open-closed-images node, the qcqs refinement node and lem-exc-proetale-closed-support all state something else. Every stmt_dep exists. Each new node has grep, leansearch, loogle and leanfinder searches. No SGA source is cited. Stacks 093R was checked. Edge cases checked: empty Z, U, X and S'; Z=X; the zero ring; non-reduced Z; a>b; F_4-type ring endomorphisms. The 7 declared generic tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteImmersionConstructibilityInterval",
+  "declaration": "AlgebraicGeometry.Scheme.finiteImmersion_constructibility_interval",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfFiniteImmersionStratum",
+   "AlgebraicGeometry.Scheme.sfFiniteImmersionAction",
+   "AlgebraicGeometry.Scheme.sfFiniteImmersionPullbackPartitions",
+   "AlgebraicGeometry.Scheme.sfFiniteImmersionClosedPartitions",
+   "AlgebraicGeometry.Scheme.finiteImmersion_constructibility_interval"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteImmersionConstructibilityInterval.lean",
+  "statement": "theorem finiteImmersion_constructibility_interval (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X Z U : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] (_hX : IsUnit (l : Γ(X, ⊤))) (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (_hU : Set.range j = (Set.range i)ᶜ) : sfFiniteImmersionAction (Padic.coefficientExtensionRing l E n) X Z (intrinsicFiniteTorsionConstructible l E n hn X) (intrinsicFiniteTorsionConstructible l E n hn Z) (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E n) i) (proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) i) ∧ sfFiniteImmersionAction (Padic.coefficientExtensionRing l E n) X U (intrinsicFiniteTorsionConstructible l E n hn X) (intrinsicFiniteTorsionConstructible l E n hn U) (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E n) j) (proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) j) ∧ sfFiniteImmersionAction (Padic.coefficientExtensionRing l E n) Z X (intrinsicFiniteTorsionConstructible l E n hn Z) (intrinsicFiniteTorsionConstructible l E n hn X) (proEtaleConstantModuleDirectImage i (Padic.coefficientExtensionRing l E n)) (proEtaleConstantDerivedDirectImage i (Padic.coefficientExtensionRing l E n)) ∧ sfFiniteImmersionPullbackPartitions (Padic.coefficientExtensionRing l E n) i ∧ sfFiniteImmersionPullbackPartitions (Padic.coefficientExtensionRing l E n) j ∧ sfFiniteImmersionClosedPartitions (Padic.coefficientExtensionRing l E n) i j",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The four real Prop-valued helpers name clauses of this node, retaining the actual sheaf operations, natural derived comparisons and original scheme strata. The original reviewed proof and statement are unchanged. The landed Stratification.pullback node is added to statement dependencies because its actual fibre-product construction appears in the signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fbc700227",
+  "group": "N8",
+  "result": "pass",
+  "note": "Hypotheses (l≠p, E/Q_l finite, 1≤n, locally Noetherian+compact X, l unit on X, closed i with complementary open j) match the node with nothing stronger. The three sfFiniteImmersionAction clauses on the recorded i^{-1}, j^{-1} and i_* (exact, triangulated, termwise Q⋙DF≅F.mapHC⋙Q, natural H^r comparison, intrinsic D^b_c preserved, every Icc a b preserved) match the node. The partition clauses use the exact IsConstructibleProEtaleModuleSheaf per-stratum conditions with the real Stratification.pullback, and on the closed side the original strata plus U with isomorphisms over X and zero restriction to U. Edge cases covered: empty Z/U/X, zero sheaves, empty strata, a>b, nonreduced Z. Mechanical theorem-stmt_dep finding: Stratification.pullback is the lemma's construction (its fields are the proof), and the statement uses the object it builds, so PASS on that point. Advisory only: the Stratification owner def-constructible-stratification is not in stmt_deps; two canonical inverse-image functors are used for different clauses. Node statement, proof and blueprint identical to side-live; lean.statement verbatim; no hollow defs; docstrings and the 7 proof steps present; one sorry; no recompile per instruction."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261024T184838-L-3220542",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

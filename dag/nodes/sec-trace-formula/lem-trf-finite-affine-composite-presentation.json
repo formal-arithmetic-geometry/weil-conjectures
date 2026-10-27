@@ -1,0 +1,255 @@
+{
+ "id": "lem-trf-finite-affine-composite-presentation",
+ "kind": "statement",
+ "title": "Compatible finite affine coproduct maps for locally finitely presented composites",
+ "statement": "Let $f:X\\to S$ and $(h_i:U_i\\to X)_{i\\in I}$ be morphisms of schemes [def-pc-scheme] such that every $f\\circ h_i$ is locally of finite presentation [def-sbc-locally-finite-presentation]. Let $V=\\operatorname{Spec}R\\subseteq S$ and $W=\\operatorname{Spec}A\\subseteq X$ be affine opens [def-weil-affine-spectrum] with $W\\subseteq f^{-1}(V)$. Let $J$ be finite, $i:J\\to I$, and let $T_j=\\operatorname{Spec}B_j$ be affine open subschemes of $U_{i(j)}$ contained in $h_{i(j)}^{-1}(W)$. Put $B=\\prod_jB_j$. The component restrictions induce maps $q:Z=\\coprod_jT_j\\to W$ and $p:Z\\to V$ [lem-weil-pbc-scheme-coproduct-family] satisfying $p=(f|_W)\\circ q$. Under the canonical isomorphism $Z\\cong\\operatorname{Spec}B$ of [lem-weil-pbc-finite-affine-coproduct-spectrum], the maps on rings are the componentwise maps $A\\to B$ and $R\\to B$; in particular $R\\to B$ is the composite $R\\to A\\to B$. Each $R\\to B_j$ is finitely presented [def-weil-pbc-finitely-presented-algebra], $p$ is locally of finite presentation, and $R\\to B$ is finitely presented. No flatness, covering, separation or Noetherian hypothesis is required. Empty $J$ and zero rings are allowed, with empty product the zero ring.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, proof, replacement by the finite disjoint affine source and the composite map to the affine base; Morphisms Tag 01TQ, lemma-locally-finite-presentation-characterize."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write $a=f|_W:W\\to V$. For each $j$ the assumed image inclusions give restrictions $q_j=h_{i(j)}|_{T_j}:T_j\\to W$ and $p_j=(f\\circ h_{i(j)})|_{T_j}:T_j\\to V$. These restrictions are obtained by restricting the underlying continuous maps and the structure-sheaf maps to the named opens; composition of the restricted sheaf maps gives $p_j=a\\circ q_j$. Apply the coproduct universal property to these two families to construct $q:Z\\to W$ and $p:Z\\to V$. Both $p$ and $a\\circ q$ restrict to $p_j$ on every coprojection, so uniqueness gives $p=a\\circ q$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, proof: replace the source by a finite disjoint union of affine opens"
+   }
+  },
+  {
+   "text": "Use the canonical isomorphism e = Sigma.mapIso of the affine-open isoSpec maps followed by asIso (sigmaSpec B). To identify the map induced by q (and likewise p), cancel e.hom and test on every coprojection using Sigma.hom_ext. The identities Sigma.ι_mapIso_hom and ι_sigmaSpec reduce this to the product projection composed with the componentwise ring map, which is the given appLE map by evaluation. Scheme.Opens.toSpecΓ_SpecMap_appLE supplies the required equality. Finally Scheme.Hom.appLE_comp_appLE, evaluated on every section and every product coordinate, gives gamma = beta.comp alpha.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, proof: replace the source by a finite disjoint union of affine opens"
+   }
+  },
+  {
+   "text": "For each $j$, apply the affine-open finite-presentation lemma to $g=f\\circ h_{i(j)}:U_{i(j)}\\to S$, with source affine open $T_j$ and target affine open $V$. The hypothesis on the composite gives local finite presentation of $g$. The required image containment holds because $h_{i(j)}(T_j)\\subseteq W$ and $f(W)\\subseteq V$. Its induced ring map is exactly $\\gamma_j$ from Step 2. Thus every $R\\to B_j$ is finitely presented.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2) and the pointwise definition"
+   }
+  },
+  {
+   "text": "Each restriction (h (i j) ≫ f).resLE V (T j) is locally of finite presentation by the restriction instance. Apply IsZariskiLocalAtSource.sigmaDesc to this family: local finite presentation is local on the source, and the coprojections form an open cover. This proves local finite presentation of p, including for an empty index type.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2) and the pointwise definition"
+   }
+  },
+  {
+   "text": "The coordinate identity of Step 2 identifies Spec.map gamma with e.inv ≫ p ≫ hV.isoSpec.hom. Both isomorphisms are locally of finite presentation and this property is stable under composition, so Spec.map gamma is locally of finite presentation. Mathlib LocallyOfFinitePresentation.SpecMap_iff, the affine finite-presentation criterion, now gives gamma.FinitePresentation.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2) and the pointwise definition"
+   }
+  },
+  {
+   "text": "All constructions use Sigma.desc, Sigma.hom_ext, sigmaSpec, and coordinatewise RingHom.pi identities without choosing an index, so the empty family is included. The source-locality theorem applies to the empty coproduct, and SpecMap_iff then proves finite presentation of the map to the zero product ring. Zero factors cause no change to these arguments. No flatness, covering, separation, or Noetherian assumption is used.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2) and the pointwise definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02KL affine coproduct reduction and Morphisms Tag 01TQ; implemented using Mathlib Sigma.desc, sigmaSpec, toSpecΓ_SpecMap_appLE, resLE_comp_resLE, appLE_comp_appLE, IsZariskiLocalAtSource.sigmaDesc and LocallyOfFinitePresentation.SpecMap_iff."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sigmaDesc|sigmaSpec|finitePresentation_of_affine_subset",
+   "results": "{\"t\": \"2026-10-22T08:06:52Z\", \"tool\": \"grep\", \"query\": \"sigmaDesc|sigmaSpec|finitePresentation_of_affine_subset\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"ab0d80ec210fe4ba\"}. Read Mathlib AlgebraicGeometry/Morphisms/Basic.lean:305-309 (IsZariskiLocalAtSource.sigmaDesc), Morphisms/FinitePresentation.lean:43-60, Limits.lean:607-647, and RingTheory/Finiteness/FinitePresentationLocal.lean:136-146. sigmaDesc gives only local finite presentation of an already constructed coproduct map; the affine criterion only one ring map; neither constructs the two compatible maps, their coordinate identifications and the product presentation in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine coproduct maps to two affine schemes give compatible ring maps and finite presentation of the product coordinate algebra when each composite is locally finitely presented",
+   "results": "{\"t\": \"2026-10-22T08:06:52Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine coproduct maps to two affine schemes give compatible ring maps and finite presentation of the product coordinate algebra when each composite is locally finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.coprodSpec\", \"AlgebraicGeometry.instIsAffineHomDescScheme\", \"RingHom.FinitePresentation\", \"AlgebraicGeometry.instIsAffineCoprodScheme\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"Algebra.FinitePresentation.pi\", \"AlgebraicGeometry.instIsIsoSchemeCoprodSpec\", \"AlgebraicGeometry.sigmaSpec\"], \"digest\": \"6d2bdc3dbac13acc\"}. Read Mathlib AlgebraicGeometry/Morphisms/Basic.lean:305-309 (IsZariskiLocalAtSource.sigmaDesc), Morphisms/FinitePresentation.lean:43-60, Limits.lean:607-647, and RingTheory/Finiteness/FinitePresentationLocal.lean:136-146. sigmaDesc gives only local finite presentation of an already constructed coproduct map; the affine criterion only one ring map; neither constructs the two compatible maps, their coordinate identifications and the product presentation in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc, AlgebraicGeometry.sigmaSpec",
+   "results": "{\"t\": \"2026-10-22T08:06:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc, AlgebraicGeometry.sigmaSpec\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read Mathlib AlgebraicGeometry/Morphisms/Basic.lean:305-309 (IsZariskiLocalAtSource.sigmaDesc), Morphisms/FinitePresentation.lean:43-60, Limits.lean:607-647, and RingTheory/Finiteness/FinitePresentationLocal.lean:136-146. sigmaDesc gives only local finite presentation of an already constructed coproduct map; the affine criterion only one ring map; neither constructs the two compatible maps, their coordinate identifications and the product presentation in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For affine open source pieces of locally finitely presented composites U_i to X to S mapping into one affine target V, their finite coproduct is the spectrum of their product of rings and its map to V is locally finitely presented and induces a finitely presented product algebra",
+   "results": "{\"t\": \"2026-10-22T08:06:58Z\", \"tool\": \"leanfinder\", \"query\": \"For affine open source pieces of locally finitely presented composites U_i to X to S mapping into one affine target V, their finite coproduct is the spectrum of their product of rings and its map to V is locally finitely presented and induces a finitely presented product algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"0a9092b52ab79713\"}. Read Mathlib AlgebraicGeometry/Morphisms/Basic.lean:305-309 (IsZariskiLocalAtSource.sigmaDesc), Morphisms/FinitePresentation.lean:43-60, Limits.lean:607-647, and RingTheory/Finiteness/FinitePresentationLocal.lean:136-146. sigmaDesc gives only local finite presentation of an already constructed coproduct map; the affine criterion only one ring map; neither constructs the two compatible maps, their coordinate identifications and the product presentation in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given finitely many affine opens in sources of locally finitely presented composites through X to S, form their coproduct and its two maps into affine neighbourhoods W and V; the induced map R to the product algebra factors through A and is finitely presented",
+   "results": "{\"t\": \"2026-10-22T08:13:00Z\", \"tool\": \"leanfinder\", \"query\": \"Given finitely many affine opens in sources of locally finitely presented composites through X to S, form their coproduct and its two maps into affine neighbourhoods W and V; the induced map R to the product algebra factors through A and is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\"], \"digest\": \"adc7427df7f4f0c9\"}. Read Mathlib AlgebraicGeometry/Morphisms/Basic.lean:305-309 (IsZariskiLocalAtSource.sigmaDesc), Morphisms/FinitePresentation.lean:43-60, Limits.lean:607-647, and RingTheory/Finiteness/FinitePresentationLocal.lean:136-146. sigmaDesc gives only local finite presentation of an already constructed coproduct map; the affine criterion only one ring map; neither constructs the two compatible maps, their coordinate identifications and the product presentation in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine coproducts mapping compatibly to affine opens have componentwise ring maps, and locally finitely presented composites give a finitely presented product coordinate algebra",
+   "results": "{\"t\": \"2026-10-23T09:27:19Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine coproducts mapping compatibly to affine opens have componentwise ring maps, and locally finitely presented composites give a finitely presented product coordinate algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd\", \"AlgebraicGeometry.sigmaSpec\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.coprodSpec\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instIsAffineHomDescScheme\"], \"digest\": \"e90fc20179a10d78\"}. Read FinitePresentation.lean:45-60, Limits.lean:607-647, and Morphisms/Basic.lean:305-309. Hits provide the affine criterion or coproduct spectrum separately; none states all compatible-map and coordinate clauses as a one-line specialization. Reuse existing DAG leaves for these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaDesc|sigmaSpec|finitePresentation_of_affine_subset",
+   "results": "{\"t\": \"2026-10-23T09:29:57Z\", \"tool\": \"grep\", \"query\": \"sigmaDesc|sigmaSpec|finitePresentation_of_affine_subset\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"3bb087baeed43a21\"}. Read FinitePresentation.lean:45-60, Limits.lean:607-647, and Morphisms/Basic.lean:305-309. Hits provide the affine criterion or coproduct spectrum separately; none states all compatible-map and coordinate clauses as a one-line specialization. Reuse existing DAG leaves for these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite coproduct of affine source opens of locally finitely presented composites gives compatible maps to two affine targets and a finitely presented product algebra",
+   "results": "{\"t\": \"2026-10-23T09:29:58Z\", \"tool\": \"leansearch\", \"query\": \"A finite coproduct of affine source opens of locally finitely presented composites gives compatible maps to two affine targets and a finitely presented product algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineHomDescScheme\", \"AlgebraicGeometry.coprodSpec\", \"AffineMap.prod\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.instIsAffineCoprodScheme\", \"AlgebraicGeometry.instIsOpenImmersionSigmaSpec\", \"AlgebraicGeometry.sigmaSpec\", \"AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd\"], \"digest\": \"6e7ea81b5ef4bda2\"}. Read FinitePresentation.lean:45-60, Limits.lean:607-647, and Morphisms/Basic.lean:305-309. Hits provide the affine criterion or coproduct spectrum separately; none states all compatible-map and coordinate clauses as a one-line specialization. Reuse existing DAG leaves for these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.sigmaSpec, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T09:29:58Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.sigmaSpec, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read FinitePresentation.lean:45-60, Limits.lean:607-647, and Morphisms/Basic.lean:305-309. Hits provide the affine criterion or coproduct spectrum separately; none states all compatible-map and coordinate clauses as a one-line specialization. Reuse existing DAG leaves for these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coordinate ring of a finite disjoint union of affine schemes is the product, and the induced map to an affine base is locally of finite presentation if each component is locally of finite presentation",
+   "results": "{\"t\": \"2026-10-23T09:31:16Z\", \"tool\": \"leanfinder\", \"query\": \"The coordinate ring of a finite disjoint union of affine schemes is the product, and the induced map to an affine base is locally of finite presentation if each component is locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.sigmaSpec\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\"], \"digest\": \"817abd768a34742d\"}. Read FinitePresentation.lean:45-60, Limits.lean:607-647, and Morphisms/Basic.lean:305-309. Hits provide the affine criterion or coproduct spectrum separately; none states all compatible-map and coordinate clauses as a one-line specialization. Reuse existing DAG leaves for these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-lfp-fppf-source-locality",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. Auxiliary input to the source-locality proof of Stacks Tag 0C5D: Tag 036N, lemma-locally-finite-presentation-fppf-local-source. Original steps 3, 5--7: construct the compatible maps p and q from selected affine source opens, prove p locally of finite presentation on its components, and obtain finite presentation of R to the product algebra.",
+   "via": [
+    "lem-trf-lfp-fppf-source-locality",
+    "lem-trf-nodal-family-etale-source-locality",
+    "lem-trf-valuation-symmetric-nodal-blowup",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-affine-composite-presentation",
+  "worker": "stage1",
+  "summary": "Expanded the compatible coproduct maps, identified their ring maps by product projections, applied the existing affine-open finite-presentation leaf to the components, checked the pointwise witnesses on the coproduct, and applied the same leaf to the whole affine source. No new nodes or statement changes; empty families and zero factors checked.",
+  "blueprint": "The historical auxiliary finite-affine reduction on the inherited ancestry of lem-trf-local-term-locality is made explicit, as requested by lem-trf-lfp-fppf-source-locality. Current latest blueprint checked: the ancestor now proves the contracting-correspondence statement; this generic auxiliary tool does not replace that route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-9f53e9cf1",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-9f53e9cf1 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit holding the item and the report, with no new nodes. Compared with clones/live and clones/side-live (both still unsplit), the only changes are status, proof, proof_deps, proof_origin and split_report, plus 5 Mathlib searches added to the 5 already there. The statement and stmt_deps are unchanged. The statement is true. Small cases checked: J empty gives Z = Spec 0 and R/(1); R = 0 makes V, W and every T_j empty with B_j = 0; a zero factor is an empty component; repeated i(j) causes no problem. It also matches the use in step 3 of the citer lem-trf-lfp-fppf-source-locality. Sources read: descent.tex Tag 02KL (its proof replaces the source by a coproduct of affines, which this item makes explicit for a finite family given in advance, so flatness and surjectivity are not needed) and morphisms.tex Tag 01TQ, (1)⇒(2). Step checks: Step 1 gets p = f|_W ∘ q from the uniqueness clause of the coproduct-family leaf. Step 2 uses the coproduct-spectrum leaf (coprojection = Spec π_j) and the bijection in def-weil-affine-spectrum to identify the coordinates and get γ_j = β_j ∘ α. Step 3 applies lem-weil-pbc-lfp-affine-opens-finite-presentation to f∘h_{i(j)} on (T_j, V); its containment hypothesis holds. Step 4 is an instance of the pointwise lfp definition on the components, and elementary is acceptable there. Step 5 applies the same leaf to all of Z → V. Step 6 covers the edge cases. proof_deps equals the union of the uses. Every cited node is a definition or a Mathlib leaf, so the unit route is not involved and no tool_uses are needed. There is no SGA citation. I searched the DAG and found no duplicate (lem-weil-pbc-finite-coproduct-lfp-qcqs covers only the lfp part and belongs to another unit). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCompositePresentation",
+  "declaration": "AlgebraicGeometry.finite_affine_composite_presentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCompositePresentation.lean",
+  "statement": "theorem finite_affine_composite_presentation {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (U : I → Scheme.{u}) (h : ∀ k : I, U k ⟶ X) [∀ k : I, LocallyOfFinitePresentation (h k ≫ f)] (V : S.Opens) (hV : IsAffineOpen V) (W : X.Opens) (hW : IsAffineOpen W) (hWV : W ≤ f ⁻¹ᵁ V) {J : Type u} [Finite J] (i : J → I) (T : ∀ j : J, (U (i j)).Opens) (hT : ∀ j : J, IsAffineOpen (T j)) (hTW : ∀ j : J, T j ≤ h (i j) ⁻¹ᵁ W) : ∃ (q : (∐ fun j : J ↦ (T j).toScheme) ⟶ W.toScheme) (p : (∐ fun j : J ↦ (T j).toScheme) ⟶ V.toScheme) (e : (∐ fun j : J ↦ (T j).toScheme) ≅ Spec (CommRingCat.of (∀ j : J, Γ(U (i j), T j)))) (β : Γ(X, W) →+* (∀ j : J, Γ(U (i j), T j))) (γ : Γ(S, V) →+* (∀ j : J, Γ(U (i j), T j))), (∀ j : J, Sigma.ι (fun j : J ↦ (T j).toScheme) j ≫ q = (h (i j)).resLE W (T j) (hTW j)) ∧ (∀ j : J, Sigma.ι (fun j : J ↦ (T j).toScheme) j ≫ p = (h (i j) ≫ f).resLE V (T j) (fun _ hx ↦ hWV (hTW j hx))) ∧ p = q ≫ f.resLE V W hWV ∧ e = Sigma.mapIso (fun j : J ↦ (hT j).isoSpec) ≪≫ asIso (sigmaSpec (fun j : J ↦ Γ(U (i j), T j))) ∧ β = RingHom.pi (fun j : J ↦ ((h (i j)).appLE W (T j) (hTW j)).hom) ∧ γ = RingHom.pi (fun j : J ↦ ((h (i j) ≫ f).appLE V (T j) (fun _ hx ↦ hWV (hTW j hx))).hom) ∧ e.inv ≫ q ≫ hW.isoSpec.hom = Spec.map (CommRingCat.ofHom β) ∧ e.inv ≫ p ≫ hV.isoSpec.hom = Spec.map (CommRingCat.ofHom γ) ∧ γ = β.comp (f.appLE V W hWV).hom ∧ (∀ j : J, ((h (i j) ≫ f).appLE V (T j) (fun _ hx ↦ hWV (hTW j hx))).hom.FinitePresentation) ∧ LocallyOfFinitePresentation p ∧ γ.FinitePresentation",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b062d2308",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Read node, report, module, 6 stmt_deps, Stacks 02KL/01TQ and Mathlib sigmaSpec/isoSpec/appLE/resLE. All hypotheses (lfp on composites only, W≤f⁻¹V, finite J in scheme universe, T_j affine ≤ h⁻¹W, no extra assumptions) and all conclusions (q,p pinned by component resLE; p = q ≫ f.resLE; e pinned to the canonical mapIso≫sigmaSpec; β,γ = RingHom.pi of appLE; both Spec.map identities true via toSpecΓ_SpecMap_appLE + ι_sigmaSpec; γ = β∘f.appLE by appLE_comp_appLE; per-component fp, p lfp, γ fp) match. Edge cases (empty J, zero factors, R=0, empty I, repeated i) fine. Only the lean record differs from live; lean.statement verbatim; no defs, sorry-only, docstrings with source/blueprint/6 steps; no duplicate (lem-a1-finite-affine-family-fppf-algebra is a different flat ring-level statement). Not recompiled (no change). Note: Second reading section is an author self-check, stated openly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T082030-L-2122488",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

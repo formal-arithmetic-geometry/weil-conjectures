@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-product-subseries-eventual-fullness",
+ "kind": "statement",
+ "title": "Eventual completeness of a very ample series times generated series",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], and let $C/k$ be a smooth projective connected curve [def-sc-curves, def-sbc-smooth-morphisms, def-kun-projective] with $g=\\dim_k H^1(C,\\mathcal O_C)$ [def-pc-genus]. Let $L,A,B$ be invertible $\\mathcal O_C$-modules [def-sc-invertible-module], with degrees $d,a,b$ [def-pc-degree-line-bundle]. Let $V\\subseteq H^0(C,L)$, $U\\subseteq H^0(C,A)$ and $T\\subseteq H^0(C,B)$ be nonzero finite-dimensional $k$-subspaces. Assume all three evaluation maps are surjective, and that the morphism $C\\to\\mathbf P(V^\\vee)$ given by $V$ is a closed immersion [def-weil-closed-immersion]. For integers $p\\geq0$ and $0\\leq l\\leq p$, put $M=L\\otimes A^{\\otimes(p-l)}\\otimes B^{\\otimes l}$, and let $S\\subseteq H^0(C,M)$ be the span of products $v u_1\\cdots u_{p-l}t_1\\cdots t_l$ with $v\\in V$, $u_i\\in U$, $t_j\\in T$. Empty products mean $1$. Then $S$ generates $M$ and gives a closed immersion $C\\to\\mathbf P(S^\\vee)$. There is an integer $n_0$, allowed to depend on all these data, such that for every $n\\geq n_0$ the multiplication map $\\operatorname{Sym}^n_k S\\to H^0(C,M^{\\otimes n})$ is surjective, and its image has dimension\n$$n\\bigl(d+(p-l)a+lb\\bigr)+1-g.$$\nCohomology is that of [def-sc-ringed-space-module-cohomology], and tensor products are those of [def-pur-sheaf-tensor-product]. There is no assumption on the characteristic, completeness of $V,U,T$, or normal generation in degree one.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Morrison Section 2.3, printed p.9, pointwise argument for equation (4), before the sentence about standard boundedness. Underlying local literature: Stacks Tag 0B5U, coherent.tex, lemma-vanshing-gives-ample (Serre vanishing), and Tag 0AYX, varieties.tex, lemma-degree-tensor-product (degree of the product line). This is only the pointwise assertion, not the uniform boundedness assertion. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-curves",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-pc-genus",
+  "def-sc-invertible-module",
+  "def-pc-degree-line-bundle",
+  "def-weil-closed-immersion",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-sfb-field-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Put $r=p-l$ and $Q=A^{\\otimes r}\\otimes B^{\\otimes l}$. Choose bases of $V,U,T$. At every point, surjectivity of evaluation supplies a section of each basis with nonzero fibre value; their product has nonzero value in the one-dimensional fibre of $M$. The fibre criterion therefore says that $S$ generates $M$. It is finite-dimensional because products of the three finite bases span it. Tensor products and fibre values are as in the cited tensor lemma; when an exponent is zero its contribution is the unit section. Projectivity makes $C$ proper.",
+   "uses": [
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space: generating sections; tensor-product evaluation calculation as in Tag 01WD, lemma-segre-embedding"
+   }
+  },
+  {
+   "text": "The embedding given by $V$ separates distinct closed points and tangent vectors: for points, distinct projective coordinate vectors admit a linear form zero at the first and nonzero at the second; for a tangent vector, on a chart with $v_0(x)\\ne0$ the surjection of local rings of a closed immersion surjects on cotangent spaces, so some linear combination of the ratios $v_i/v_0$ has nonzero derivative. Subtract its value at $x$ to obtain $v\\in V$ vanishing at $x$ with nonzero derivative. For distinct $x,y$, choose such a point-separating $v$ and sections $u\\in U,t\\in T$ nonzero at $y$. Then $vu^rt^l\\in S$ vanishes at $x$ but not $y$. For a nonzero tangent vector at $x$, choose tangent-separating $v$ and $u,t$ nonzero at $x$. In local frames the product rule gives $d(vu^rt^l)_x=u(x)^rt(x)^l\\,dv_x\\ne0$, since $v(x)=0$. Thus the cited point-and-tangent criterion applies to $S$: $j:C\\hookrightarrow P=\\mathbf P(S^\\vee)$ is a closed immersion with $j^*\\mathcal O_P(1)\\cong M$, carrying coordinate sections to the chosen basis of $S$. All its hypotheses hold: $k$ is algebraically closed, $C$ proper, and generation was checked in step 1.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-scheme-tangent-space",
+    "lem-sc-point-tangent-separation-closed-immersion",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors; elementary product-rule verification for the product subseries"
+   }
+  },
+  {
+   "text": "Apply the restriction clause of the projective-polarization section-algebra lemma to $X=P$, $L=\\mathcal O_P(1)$ and the closed subscheme $j(C)$. Projective space is projective of finite type over $k$ and its polarization is the identity embedding. Consequently $H^0(P,\\mathcal O_P(1)^{\\otimes n})\\to H^0(C,M^{\\otimes n})$ is surjective for all $n\\ge n_1$. The twist-tensor and pullback-tensor isomorphisms identify these powers with $\\mathcal O_P(n)$ and $j^*\\mathcal O_P(n)$. Projective-space twist cohomology identifies the source with $\\operatorname{Sym}^n_k S$, using a basis of $S$ as homogeneous coordinates. Under these identifications restriction sends each coordinate monomial $s_{i_1}\\cdots s_{i_n}$ to the product of the corresponding sections of $M$, so this restriction is exactly the multiplication map in the statement. For zero-dimensional projective space the source is rank one with the same monomial description; thus there is no dimension exception.",
+   "uses": [
+    "lem-sfb-projective-polarization-section-algebra",
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-pc-twist-tensor",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5T, lemma-coherent-proper-ample, high-degree ideal restriction consequence; Tag 01XT, lemma-cohomology-projective-space-over-ring, homogeneous monomial description"
+   }
+  },
+  {
+   "text": "Apply closed-immersion Serre vanishing to $j:C\\hookrightarrow P$ over the Noetherian ring $k$ and $F=\\mathcal O_C$. The latter is quasi-coherent and finitely presented as a module over itself, locally free with its single basis element $1$. This yields $n_2$ such that $H^q(C,j^*\\mathcal O_P(n))=0$ for every $q>0$ and $n\\ge n_2$. The tensor identifications of step 3 give $j^*\\mathcal O_P(n)\\cong M^{\\otimes n}$. Hence for these $n$ the Euler characteristic of $M^{\\otimes n}$ equals its $h^0$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-serre-vanishing",
+    "lem-pc-twist-tensor",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5U, lemma-vanshing-gives-ample, Serre vanishing; closed-immersion projective-twist form"
+   }
+  },
+  {
+   "text": "Degree additivity for tensor products on a proper scheme of dimension at most one gives, by induction starting with $\\deg\\mathcal O_C=0$, $D:=\\deg M=d+ra+lb$ and $\\deg(M^{\\otimes n})=nD$. Here $\\deg$ is that of the statement, $\\deg\\mathcal F=\\chi(C,\\mathcal F)-\\chi(C,\\mathcal O_C)$, so $\\chi(C,M^{\\otimes n})=nD+\\chi(C,\\mathcal O_C)$. Line-bundle Riemann--Roch for the proper smooth connected curve $C$ over the algebraically closed field $k$ gives $\\chi(C,\\mathcal O_C)=1-g$, its genus being the same $\\dim_kH^1(C,\\mathcal O_C)$; hence $\\chi(C,M^{\\otimes n})=nD+1-g$. With $n_0=\\max(1,n_1,n_2)$, steps 3 and 4 show that the multiplication map is onto and that its image has dimension $n(d+(p-l)a+lb)+1-g$ for every $n\\ge n_0$. This bound is chosen after fixing the embedding and the product exponents; it asserts no uniformity over these data.",
+   "uses": [
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-sc-riemann-roch"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYX, lemma-degree-tensor-product, rank-one case; curves.tex Tag 0BS6, lemma-rr, line-bundle Riemann--Roch"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-pc-projective-proper",
+  "def-weil-closed-immersion",
+  "def-sc-scheme-tangent-space",
+  "lem-sc-point-tangent-separation-closed-immersion",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-sfb-projective-polarization-section-algebra",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-twist-tensor",
+  "lem-weil-pbc-closed-immersion-serre-vanishing",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-sc-riemann-roch"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Expansion of Morrison Section 2.3 printed p.9, equation (4), using Tags 0E8S, 0B5T, 01XT, 0B5U, 0AYX and 0BS6; Morrison PDF not available locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth projective curve a very ample linear series times generated linear series has full symmetric powers in all sufficiently large degrees",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {ι : Type u_2} (f : ι → A),\\n  (HomogeneousIdeal.irrelevant 𝒜).toIdeal ≤ Ideal.span (Set.range f) → ⨆ i, AlgebraicGeometry.Proj.basicOpen 𝒜 (f i) = ⊤\", \"doc\": \"If the irrelevant ideal of a graded ring $\\\\mathcal{A}$ is contained in the ideal generated by a family of homogeneous elements $\\\\{f_i\\\\}_{i \\\\in \\\\iota}$, then the union of the basic open sets $D_+(f_i)$\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XIdeal W (W.addX x₁ x₂ (W.slope x₁ x₂ y₁ y₂)) *\\n            (W\", \"doc\": \"For two points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ satisfying $x_1 \\neq x_2$ or $y_1 \\neq -y_2 - a_1 x_2 - a_3$, the product of the ideal generated by $X - \"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (elements with zero zeroth homogeneous component) is contained in the ideal generated by a set of hom\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract symmetric-power quotients, Proj affine covers, analytic multilinear series and elliptic-curve ideal classes, not eventual completeness of a product linear series."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Products of base point free linear systems with an embedding series eventually generate all sections of powers of the product line bundle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ProjectiveSpectrum.basicOpen_eq_union_of_projection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubmonoidClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A),\\n  ProjectiveSpectrum.basicOpen 𝒜 f = ⨆ i, ProjectiveSpectrum.basicOpen 𝒜 ((GradedRing.proj 𝒜 i) f)\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ A $, the basic open set $ D_+(f) $ in the projective spectrum $ \\\\text{Proj}(A) $ is equal to the union over all $ i \\\\in \\\\mathbb{N} $ of the basic ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpen_eq_iSup_proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A),\\n  AlgebraicGeometry.Proj.basicOpen 𝒜 f = ⨆ i, AlgebraicGeometry.Proj.basicOpen 𝒜 ((GradedRing.proj 𝒜 i) f)\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ \\\\mathcal{A} $, the basic open set $ D_+(f) $ in the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ is equal to the supremum (union) over al\"}\n  {\"name\": \"AlgebraicGeometry.Proj.mul_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {V : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ}\\n  (s t : ↑((AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf 𝒜).val.obj V)) (x : ↥(Opp\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring assigns to each open set $ U $ the ring of sections locally represented by homogeneous fractions $ r/s $, where $ s $ is a homogeneous e\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem'\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] (U : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ)\\n  (a b : (x : ↥(Opposite.unop U)) → HomogeneousLocalization.AtPrime 𝒜 (↑x).asHomogeneousIdeal.\", \"doc\": \"For any open set $U$ in the projective spectrum of a graded ring $\\\\mathcal{A}$, if sections $a$ and $b$ over $U$ are expressible as homogeneous fractions $r/s$ with denominators $s$ (homogeneous of de\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"ProjectiveSpectrum.basicOpen_mul_le_right\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubmonoidClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f g : A), ProjectiveSpectrum.basicOpen 𝒜 (f * g) ≤ ProjectiveSpectrum.basicOpen 𝒜 g\", \"doc\": \"For any homogeneous elements $ f $ and $ g $ in a graded ring $ A $, the basic open set defined by $ f g $ is contained in the basic open set defined by $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpen_mul\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f g : A),\\n  AlgebraicGeometry.Proj.basicOpen 𝒜 (f * g) =\\n    AlgebraicGeometry.Proj.basicOpen 𝒜 f ⊓ AlgebraicGeometry.Proj.basicOpen 𝒜 g\", \"doc\": \"For any homogeneous elements $ f $ and $ g $ in a graded ring $ \\\\mathcal{A} $, the basic open set $ D_+(fg) $ in the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ is equal to the intersecti\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract symmetric-power quotients, Proj affine covers, analytic multilinear series and elliptic-curve ideal classes, not eventual completeness of a product linear series."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricPower\", \"section\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract symmetric-power quotients, Proj affine covers, analytic multilinear series and elliptic-curve ideal classes, not eventual completeness of a product linear series."
+  },
+  {
+   "tool": "grep",
+   "query": "linear.series|linearSeries|normally.generated|normal.generation|SymmetricPower.*section|section.*SymmetricPower",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"24\", \"text\": \"or as a `FormalMultilinearSeries`, and show that it converges to `f` if `f` is periodic, holomorphic\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"199\", \"text\": \"The `q`-expansion of a function on the upper half plane, bundled as a `FormalMultilinearSeries`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"202\", \"text\": \"`FormalMultilinearSeries`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"204\", \"text\": \"def qExpansionFormalMultilinearSeries : FormalMultilinearSeries ℂ ℂ ℂ :=\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"208\", \"text\": \"lemma qExpansionFormalMultilinearSeries_coeff (m : ℕ) :\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Binomial.lean\", \"line\": \"45\", \"text\": \"/-- **Binomial series**: the (scalar) formal multilinear series with coefficients given\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Binomial.lean\", \"line\": \"50\", \"text\": \"    FormalMultilinearSeries 𝕂 𝔸 𝔸 :=\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Binomial.lean\", \"line\": \"57\", \"text\": \"  simp [binomialSeries, FormalMultilinearSeries.ofScalars]\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Binomial.lean\", \"line\": \"65\", \"text\": \"    FormalMultilinearSeries.ofScalars_comp_neg_id]\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Binomial.lean\", \"line\": \"86\", \"text\": \"    FormalMultilinearSeries.radius_compNeg]\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Uniqueness.lean\", \"line\": \"34\", \"text\": \"to formal multilinear series `p₁` and `p₂`, then these representations agree term-by-term. That is,\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Uniqueness.lean\", \"line\": \"90\", \"text\": \"/-- If a formal multilinear series `p` represents the zero function at `x : E`, then the\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Uniqueness.lean\", \"line\": \"92\", \"text\": \"theorem HasFPowerSeriesAt.apply_eq_zero {p : FormalMultilinearSeries 𝕜 E F} {x : E}\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Uniqueness.lean\", \"line\": \"105\", \"text\": \"/-- A one-dimensional formal multilinear series representing the zero function is zero. -/\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Uniqueness.lean\", \"line\": \"106\", \"text\": \"theorem HasFPowerSeriesAt.eq_zero {p : FormalMultilinearSeries 𝕜 𝕜 E} {x : 𝕜}\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/ConvergenceRadius.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.Calculus.FormalMultilinearSeries\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/ConvergenceRadius.lean\", \"line\": \"19\", \"text\": \"Let `p` be a formal multilinear series from `E` to `F`, i.e., `p n` is a multilinear map on `E^n`\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/ConvergenceRadius.lean\", \"line\": \"51\", \"text\": \"namespace FormalMultilinearSeries\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/ConvergenceRadius.lean\", \"line\": \"58\", \"text\": \"/-- Given a formal multilinear series `p` and a vector `x`, then `p.sum x` is the sum `Σ pₙ xⁿ`. A\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/ConvergenceRadius.lean\", \"line\": \"60\", \"text\": \"protected def sum (p : FormalMultilinearSeries 𝕜 E F) (x : E) : F :=\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Constructions.lean\", \"line\": \"45\", \"text\": \"    HasFPowerSeriesOnBall (fun _ => c) (constFormalMultilinearSeries 𝕜 E c) e ⊤ := by\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Constructions.lean\", \"line\": \"47\", \"text\": \"  simp [constFormalMultilinearSeries_apply_of_nonzero hn]\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Constructions.lean\", \"line\": \"50\", \"text\": \"    HasFPowerSeriesAt (fun _ => c) (constFormalMultilinearSeries 𝕜 E c) e :=\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Constructions.lean\", \"line\": \"55\", \"text\": \"  ⟨constFormalMultilinearSeries 𝕜 E v, hasFPowerSeriesAt_const⟩\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Constructions.lean\", \"line\": \"72\", \"text\": \"variable {f g : E → F} {pf pg : FormalMultilinearSeries 𝕜 E F} {s : Set E} {x : E} {r : ℝ≥0∞}\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract symmetric-power quotients, Proj affine covers, analytic multilinear series and elliptic-curve ideal classes, not eventual completeness of a product linear series."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Eventual surjectivity of symmetric powers of a very ample product linear series on a projective curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Sym2.mk_surjective\", \"module\": \"Mathlib.Data.Sym.Sym2\", \"type\": \": Function.Surjective (@Sym2.mk α)\", \"doc\": \"The canonical quotient map from the product type $\\\\alpha \\\\times \\\\alpha$ to the symmetric square $\\\\mathrm{Sym}^2(\\\\alpha)$ is surjective. In other words, every element of $\\\\mathrm{Sym}^2(\\\\alpha)$ can be\"}\n  {\"name\": \"SymmetricPower\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R : Type u) →\\n  Type u → [inst : CommSemiring R] → (M : Type v) → [inst_1 : AddCommMonoid M] → [Module R M] → Type (max u v)\", \"doc\": \"The symmetric power of an $ R $-module $ M $, constructed as the quotient of the tensor product $ \\\\bigotimes_R M $ by the equivalence relation identifying tensors that differ by permutation of factors\"}\n  {\"name\": \"SymmetricPower.range_mk\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \": LinearMap.range (mk R ι M) = ⊤\", \"doc\": \"The range of the canonical linear map from the tensor product $\\\\bigotimes_R M$ to the symmetric power $\\\\text{Sym}^n(M)$ is the entire symmetric power module, i.e., $\\\\text{Range}(\\\\text{mk}) = \\\\top$.\"}\n  {\"name\": \"SymmetricPower.instAddCommMonoid\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R ι : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type v) → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → AddCommMonoid (SymmetricPower R ι M)\", \"doc\": \"The $ n $-th symmetric power $ \\\\text{Sym}^n(M) $ of an $ R $-module $ M $, constructed as the quotient of the tensor product $ \\\\bigotimes_R M $ by the equivalence relation identifying tensors that dif\"}\n  {\"name\": \"SymmetricPower.mk\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R ι : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type v) →\\n      [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → (PiTensorProduct R fun x => M) →ₗ[R] SymmetricPower R ι M\", \"doc\": \"The canonical $ R $-linear map from the tensor product $ \\bigotimes_R M $ to the symmetric power $ \\text{Sym}^n(M) $, induced by quotienting the symmetric tensor relation that identifies tensors differi\"}\n  {\"name\": \"SymAlg.sym_surjective\", \"module\": \"Mathlib.Algebra.Symmetrized\", \"type\": \": Surjective (sym : α → αˢʸᵐ)\", \"doc\": \"The canonical map from $\\\\alpha$ to its symmetric algebra $\\\\alpha^{\\\\mathrm{sym}}$ is surjective, where the symmetric algebra is canonically isomorphic to $\\\\alpha$ itself.\"}\n  {\"name\": \"Module.End.iterate_surjective\", \"module\": \"Mathlib.Algebra.Module.LinearMap.End\", \"type\": \"(h : Surjective f') : ∀ n : ℕ, Surjective (f' ^ n)\", \"doc\": \"If $ f' $ is a surjective linear endomorphism of an $ R $-module $ M $, then for every natural number $ n $, the $ n $-th composition power $ f'^n $ is also surjective.\"}\n  {\"name\": \"SymAlg.unsym_surjective\", \"module\": \"Mathlib.Algebra.Symmetrized\", \"type\": \": Surjective (unsym : αˢʸᵐ → α)\", \"doc\": \"The identity function from the symmetric algebra $\\\\mathrm{SymAlg}\\\\, \\\\alpha$ (which is defined as $\\\\alpha$ itself) to $\\\\alpha$ is surjective, i.e., every element of $\\\\alpha$ is the image of itself unde\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract symmetric-power quotients, Proj affine covers, analytic multilinear series and elliptic-curve ideal classes, not eventual completeness of a product linear series."
+  },
+  {
+   "tool": "grep",
+   "query": "linear.series|linearSeries|normally.generated|normal.generation|SymmetricPower.*section|section.*SymmetricPower",
+   "results": "[grep] OK 0 hit(s)\nScoped to Mathlib/AlgebraicGeometry/; the earlier whole-tree grep returned only analytic formal multilinear series.",
+   "date": "2026-10-22",
+   "verdict": "No match: no algebraic-geometric product-linear-series completeness theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A base point free product of linear series with an embedding series eventually spans all sections of tensor powers",
+   "results": "Hits: Profinite.NobelingProof.GoodProducts.span, Profinite.NobelingProof.GoodProducts.maxTail_isGood, Profinite.NobelingProof.GoodProducts.spanFin, Profinite.NobelingProof.Products.span_nil_eq_top, SymmetricPower.span_tprod_eq_top, Profinite.NobelingProof.GoodProducts.MaxToGood, Profinite.NobelingProof.Products.isGood, Profinite.NobelingProof.GoodProducts.span_iff_products",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor spans, Proj structure-sheaf section arithmetic and unrelated profinite/manifold results do not state the embedding plus eventual completeness assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "linear.series|linearSeries|normally.generated|normal.generation|SymmetricPower.*section|section.*SymmetricPower",
+   "results": "No hits. Scope: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor spans, Proj structure-sheaf section arithmetic and unrelated profinite/manifold results do not state the embedding plus eventual completeness assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of high powers of a line bundle are spanned by products of sections of a very ample subspace",
+   "results": "Hits: AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.Proj.mul_apply, Submodule.pow_eq_span_pow_set, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem', Submodule.span_pow, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, ContMDiff.sum_section",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor spans, Proj structure-sheaf section arithmetic and unrelated profinite/manifold results do not state the embedding plus eventual completeness assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricPower\", \"section\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor spans, Proj structure-sheaf section arithmetic and unrelated profinite/manifold results do not state the embedding plus eventual completeness assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-uniform-gieseker-codegree-criterion",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.3, printed p.9, pointwise argument for equation (4), before the sentence about standard boundedness. Underlying local literature: Stacks Tag 0B5U, coherent.tex, lemma-vanshing-gives-ample (Serre vanishing), and Tag 0AYX, varieties.tex, lemma-degree-tensor-product (degree of the product line). This is only the pointwise assertion, not the uniform boundedness assertion.",
+   "via": [
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-product-subseries-eventual-fullness",
+  "worker": "stage1",
+  "summary": "Expanded pointwise product-series argument using existing separation, restriction, projective cohomology, Serre vanishing and degree/Riemann--Roch nodes. No new nodes or statement changes. Checked characteristic-free product derivatives, zero exponents and exact multiplication-map identification.",
+  "blueprint": "Nearest imported ancestor is null as reported by blueprint_refs.py ancestor. The inherited from.place names det-thm-sf-ctf-stability-direct-images (3); this split realizes its nested Morrison equation (4) pointwise product-series prerequisite, retaining the existing alteration/moduli route and making no uniform boundedness claim.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Fibre criterion for the finite product family to generate M. No node of the six-functor unit states this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Invertibility, fibre products and canonical pullback of tensor powers. No node of the six-functor unit states this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Properness required by the separation and Riemann--Roch tools. No node of the six-functor unit states this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-point-tangent-separation-closed-immersion",
+    "why": "Generic embedding criterion applied to the explicitly checked product sections. No node of the six-functor unit states this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "Canonical coordinate-monomial description of global sections, identifying restriction with multiplication. No node of the six-functor unit states this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-pc-twist-tensor",
+    "why": "Canonical twist/tensor identification needed for powers of the polarization. No node of the six-functor unit states this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-serre-vanishing",
+    "why": "Higher-cohomology vanishing for the fixed embedding, with F the rank-one structure module. No node of the six-functor unit states this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Generic degree arithmetic for the product line and its powers. No node of the six-functor unit states this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-riemann-roch",
+    "why": "Line-bundle Euler characteristic formula on the proper smooth connected curve. No node of the six-functor unit states this algebraic-geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-pc-projective-proper",
+  "lem-sc-point-tangent-separation-closed-immersion",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-twist-tensor",
+  "lem-weil-pbc-closed-immersion-serre-vanishing",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-sc-riemann-roch"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-1783d073e",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-1783d073e (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and all 13 cited statements in full, plus Stacks 0E8S (varieties.tex:4309) and 0AYX. Morrison §2.3 p.9 has no local copy and is recorded WANTED; the statement is inherited unchanged from live and is true. Small cases checked: P1 with O(1), p=0, l=0, l=p, and characteristic p. Steps 1–4 are correct: the fibre criterion uses pullback-tensor (3); the point and tangent separation argument meets hypotheses (0)–(2) of lem-sc-point-tangent-separation-closed-immersion; the restriction clause of the polarization lemma is applied to the identity on P^N; the twist cohomology identifies the source with Sym^n S, so restriction equals the multiplication map; closed-immersion Serre vanishing is applied with F=O_C. One fault (E6/C4), repaired: step 5 applied Riemann–Roch as χ(M^n)=nD+1−g, silently identifying the Riemann–Roch node's degree (def-sc-pic0, the divisor-class degree on the base) with the χ-difference degree of def-pc-degree-line-bundle. Step 5 now uses χ(M^n)=deg(M^n)+χ(O_C) and only Riemann–Roch's χ(O_C)=1−g; the genus is the same h^1 in both nodes, and the citations are unchanged. Batch-5: all four listed citations are accepted as generic. lem-trf-proper-finite-fibre-finite-near, lem-trf-proj-separated and lem-trf-curve-degree-tensor-additive (Stacks 0AYX) are generic Stacks lemmas, and def-trf-schematically-dense-open is a definition. The full closure reaches no nt-assume leaf and no trace-formula or Poincaré-duality theorem. There are no new nodes, and the 9 tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProductSubseriesEventualFullness",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.product_subseries_eventual_fullness",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.seriesTensorProduct",
+   "AlgebraicGeometry.Scheme.Modules.productSeriesLine",
+   "AlgebraicGeometry.Scheme.Modules.productSubseries",
+   "AlgebraicGeometry.Scheme.Modules.subseriesEvaluation",
+   "AlgebraicGeometry.Scheme.Modules.IsEmbeddingSubseries",
+   "AlgebraicGeometry.Scheme.Modules.product_subseries_eventual_fullness"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProductSubseriesEventualFullness.lean",
+  "statement": "theorem product_subseries_eventual_fullness (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsConnectedCurve (C ↘ Spec (.of k))] [Smooth (C ↘ Spec (.of k))] [IsHProjective (C ↘ Spec (.of k))] (L A B : C.Modules) [L.IsInvertible] [A.IsInvertible] [B.IsInvertible] (V : Submodule k (ProjectiveSpace.fieldSections k L)) (U : Submodule k (ProjectiveSpace.fieldSections k A)) (T : Submodule k (ProjectiveSpace.fieldSections k B)) [FiniteDimensional k V] [FiniteDimensional k U] [FiniteDimensional k T] (hV : V ≠ ⊥) (hU : U ≠ ⊥) (hT : T ≠ ⊥) (hVe : Epi (subseriesEvaluation k L V)) (hUe : Epi (subseriesEvaluation k A U)) (hTe : Epi (subseriesEvaluation k B T)) (hVemb : IsEmbeddingSubseries k L V) (p l : ℕ) (hl : l ≤ p) : Epi (subseriesEvaluation k (productSeriesLine L A B p l) (productSubseries k L A B V U T p l)) ∧ IsEmbeddingSubseries k (productSeriesLine L A B p l) (productSubseries k L A B V U T p l) ∧ ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n → ∃ μ : SymmetricPower k (ULift.{u} (Fin n)) (productSubseries k L A B V U T p l) →ₗ[k] ProjectiveSpace.fieldSections k ((productSeriesLine L A B p l).tensorPow n), (∀ s : ULift.{u} (Fin n) → productSubseries k L A B V U T p l, μ (SymmetricPower.tprod k s) = seriesTensorProduct (productSeriesLine L A B p l) n (fun i ↦ (s ⟨i⟩).val)) ∧ Function.Surjective μ ∧ (Module.finrank k (LinearMap.range μ) : ℤ) = (n : ℤ) * (L.degree k + ((p - l : ℕ) : ℤ) * A.degree k + (l : ℤ) * B.degree k) + 1 - (C.arithmeticGenus k : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helpers specify the product series and its evaluation in this owning module. SymmetricPower uses ULift (Fin n) for the index-universe convention; the map is uniquely characterized on all pure tensors. No arbitrary multiplication map is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73c80cf5e",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 0e5b17a239f5: the only changes are stmt_deps (the theorem node lem-sfb-m-regular-coherent-sheaf-consequences is replaced by def-sfb-field-global-sections, landed in maintenance commit 1b012d88, which is an ancestor of the head, plus def-weil-pbc-morphism-to-projective-space-by-sections) and the import of Sheaf.AlgebraicGeometry.FieldGlobalSections; the helpers and theorem are byte-identical. Independent reading: every hypothesis and conclusion clause matches the node (arithmeticGenus = finrankH 1, degree in ℤ, tensorPow/tmulSection/unit section, homOfGeneratingSections closed immersion, μ pinned on all pure tensors so it is the multiplication map, and it exists because sections of invertible modules commute; n₀ after all data; dimension formula in ℤ); edge cases p=l=0, l=0, l=p, Fin 0, any characteristic; universes fine (ULift index only). lean.statement verbatim (script check), single sorry, no hollow helpers, docstrings with source and blueprint, all stmt_deps are definition nodes, statement unchanged so no citers. No files changed and no compile run; the worker's scompile was clean."
+ }
+}

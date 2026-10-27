@@ -1,0 +1,295 @@
+{
+ "id": "lem-pur-retagging-coordinate-orientations",
+ "kind": "statement",
+ "title": "Retagging identifies the normalized diagonal orientation on coordinate charts",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q\\subset k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$, with the small pro-etale conventions [def-pur-conventions]. Let $X,Y$ be separated finite-type $k$-schemes with structural maps $a_X,a_Y$, and let $f:X\\to Y$ be a smooth separated $k$-morphism of pure relative dimension $d\\geq0$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms]. Fix an automorphism $\\sigma:k\\simeq k$ fixing $k_0$. For $T=X,Y$ put $T^\\sigma=(T,\\operatorname{Spec}(\\sigma)\\circ a_T)$ and let $f^\\sigma:X^\\sigma\\to Y^\\sigma$ be the same underlying scheme morphism. Identify the small sites, constant coefficient sheaves and Tate lines [def-coefficient-twists-detailed] by the identity of underlying schemes. Use the same underlying compactification to identify compact-support direct images, and use the unique counit-preserving isomorphisms to identify their constructible right adjoints [def-weil-exceptional-inverse-image].\n\nFor $m\\geq1$ put $R=\\mathbf Z/\\ell^m$, using $E=\\mathbf Q_\\ell$ and uniformizer $\\ell$. Let $V\\subseteq Y$ be an affine open, let $U\\subseteq f^{-1}(V)$ be open, write $j:U\\hookrightarrow X$, and suppose $e:U\\to\\mathbf A^d_V$ is an etale $V$-morphism [def-weil-etale-morphism, def-sbc-affine-space]. Write $\\Pi_{f,R}:Rf_R^!R_Y\\xrightarrow{\\sim}R_X(d)[2d]$ and $\\Pi_{f^\\sigma,R}$ for the normalized diagonal orientations [def-pur-smooth-purity-map]. Then\n$$Lj^*\\Pi_{f^\\sigma,R}=Lj^*\\Pi_{f,R}.$$\nMore precisely, the identity of underlying schemes identifies the relative diagonals $X\\hookrightarrow X\\times_YX$, their normal bundles, and the deformation families of [def-pur-dnc-section-family], including their fibres at $0,1$, punctured trivializations and etale coordinate maps. Under the corresponding identity and counit-preserving identifications of section invariants [def-pur-section-invariant], it identifies the normalized diagonal-to-normal-bundle comparisons [thm-pur-dnc-invariance] on these charts, as well as the integration-normalized vector-bundle orientations [det-sp-orientation-vector-bundle]. The equality displayed above is an equality of derived morphisms under the coordinate-adjunction identifications of [det-sp-orientation-charts], with the Tate-line normalization and its power transition maps retained.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, semilinear purity square: diagonal, Rees deformation and integration-normalized coordinate comparisons before global gluing; explicit auxiliary statement, agent formulation"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-pur-smooth-purity-map",
+  "def-pur-dnc-section-family",
+  "def-pur-section-invariant",
+  "thm-pur-dnc-invariance",
+  "det-sp-orientation-vector-bundle",
+  "det-sp-orientation-charts",
+  "def-pur-normal-bundle",
+  "def-pc-fibre-product",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The defining normalization in thm-pur-diagonal-dualizing-object depends on aY only through proofs of Noetherianity and invertibility of the fixed coefficient exponent. All these witnesses lie in Prop. Thus the ordinary witness extracted from the normalized orientation for one structure map satisfies exactly the normalization for any other finite-type structure map on the same underlying base. The pro-etale comparison uses the same compactification, because HasCompactification is a proposition. Apply the uniqueness clause to identify the two actual diagonal isomorphisms. Congruence under the derived pullback along U gives the first required equality, without needing chart descent again. This includes empty charts and d=0.",
+   "uses": [
+    "thm-pur-diagonal-dualizing-object",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1; auxiliary retagging argument, using the published coordinate normalization and DNC uniqueness"
+   }
+  },
+  {
+   "text": "The underlying extended-Rees source, projection and augmentation in def-pur-dnc-section-family are definitionally unchanged by postcomposing the structural map. The finite section invariant and family use the same actual underlying maps and coefficient object; their compactifiability witnesses are proofs. The normal section object and both fibre comparisons of lem-pur-dnc-section-geometry likewise have only proof-irrelevant dependence on the structural map. Reflexivity proves their heterogeneous equalities for the relative diagonal, which is the same closed section of the same pullback projection.",
+   "uses": [
+    "def-pur-dnc-section-family",
+    "def-pur-section-invariant",
+    "lem-pur-dnc-section-geometry",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1; auxiliary retagging argument, using the published coordinate normalization and DNC uniqueness"
+   }
+  },
+  {
+   "text": "Let alpha_sigma be the chosen DNC isomorphism for the retagged base. For every original test base (Bprime,aBprime) and b with b composed with aB equal to aBprime, postcompose that equation with Spec(sigma). The same b is then a morphism of the retagged bases. Evaluate the normalization of alpha_sigma on (Bprime,aBprime composed with Spec(sigma)), the same C0 and the same family trivialization e. All underlying family, source and normal comparison maps agree definitionally. Hence alpha_sigma satisfies the original normalization predicate. The uniqueness clause of thm-pur-dnc-invariance identifies it with the original chosen isomorphism.",
+   "uses": [
+    "thm-pur-dnc-invariance",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1; auxiliary retagging argument, using the published coordinate normalization and DNC uniqueness"
+   }
+  },
+  {
+   "text": "For every vector-bundle presentation of the normal bundle, apply det-sp-orientation-vector-bundle to each of the two structural maps. These give both actual integration-transpose equations required in RetaggingVectorOrientationConclusion. The general structure-independence argument of Step 1 identifies their hom arrows. The geometric affine and smooth projection facts in that same vector-bundle interface discharge the domain hypotheses. No arbitrary orientation or frame is chosen.",
+   "uses": [
+    "det-sp-orientation-vector-bundle",
+    "thm-pur-diagonal-dualizing-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1; auxiliary retagging argument, using the published coordinate normalization and DNC uniqueness"
+   }
+  },
+  {
+   "text": "Over.map of the field automorphism keeps the underlying scheme definitionally equal to the original scheme. The pro-etale roots-of-unity tower of def-coefficient-twists-detailed is a construction on that underlying scheme alone; reflexivity identifies the entire tower, including its power transitions. Combine this equality and the preceding three clauses to obtain the unchanged conclusion.",
+   "uses": [
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1; auxiliary retagging argument, using the published coordinate normalization and DNC uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pc-fibre-product",
+  "def-pur-dnc-section-family",
+  "def-pur-section-invariant",
+  "det-sp-orientation-vector-bundle",
+  "lem-pur-dnc-section-geometry",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "S9 stage 3: shorter uniqueness proof using the published normalized orientation and DNC predicates; no statement or unit-route change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Changing the structural field map without changing the underlying smooth scheme morphism preserves the normalized diagonal deformation to normal cone orientation on coordinate charts",
+   "results": "{\"t\": \"2026-10-22T06:12:02Z\", \"tool\": \"leansearch\", \"query\": \"Changing the structural field map without changing the underlying smooth scheme morphism preserves the normalized diagonal deformation to normal cone orientation on coordinate charts\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orientation\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-22T06:12:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"orientation\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned types; algebraic smoothness, ordinary module adjunctions and generic derived-category results do not give this normalized pro-etale orientation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalOrientation|smoothPurity|dnc|DNC|retag",
+   "results": "{\"t\": \"2026-10-22T06:12:02Z\", \"tool\": \"grep\", \"query\": \"diagonalOrientation|smoothPurity|dnc|DNC|retag\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned types; algebraic smoothness, ordinary module adjunctions and generic derived-category results do not give this normalized pro-etale orientation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized diagonal smooth purity orientations on etale coordinate charts agree when the structural ground field maps are retagged by an automorphism",
+   "results": "{\"t\": \"2026-10-22T06:12:30Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized diagonal smooth purity orientations on etale coordinate charts agree when the structural ground field maps are retagged by an automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.mapEquiv\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsStandardEtale.of_equiv\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePresentation.toSubmersivePresentation_map\", \"StandardEtalePresentation.mk.inj\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\"], \"digest\": \"dbbadcb40cb4bf32\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned types; algebraic smoothness, ordinary module adjunctions and generic derived-category results do not give this normalized pro-etale orientation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale sheaf orientation of a smooth relative diagonal depends only on the underlying scheme morphism and its normal bundle",
+   "results": "{\"t\": \"2026-10-22T06:12:50Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical etale sheaf orientation of a smooth relative diagonal depends only on the underlying scheme morphism and its normal bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"80b6e5259429d0fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned types; algebraic smoothness, ordinary module adjunctions and generic derived-category results do not give this normalized pro-etale orientation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "retag|diagonalOrientation|smoothPurity|integrationOrientation",
+   "results": "{\"t\": \"2026-10-22T07:07:24Z\", \"tool\": \"grep\", \"query\": \"retag|diagonalOrientation|smoothPurity|integrationOrientation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme smoothness, etaleness or scheme normalization; none states equality of normalized derived purity maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical smooth purity orientation depends only on the underlying smooth scheme morphism and is unchanged by a ground field automorphism",
+   "results": "{\"t\": \"2026-10-22T07:07:24Z\", \"tool\": \"leansearch\", \"query\": \"The canonical smooth purity orientation depends only on the underlying smooth scheme morphism and is unchanged by a ground field automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"RingHom.isStandardSmoothOfRelativeDimension_respectsIso\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"Algebra.Smooth.baseChange\"], \"digest\": \"671764c4a589604e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme smoothness, etaleness or scheme normalization; none states equality of normalized derived purity maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orientation\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-22T07:07:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"orientation\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme smoothness, etaleness or scheme normalization; none states equality of normalized derived purity maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Retagging the ground field structure of a smooth scheme morphism preserves its normalized diagonal and integration orientation on etale coordinate charts",
+   "results": "{\"t\": \"2026-10-22T07:07:35Z\", \"tool\": \"leanfinder\", \"query\": \"Retagging the ground field structure of a smooth scheme morphism preserves its normalized diagonal and integration orientation on etale coordinate charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"e2beb03eebaa539a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme smoothness, etaleness or scheme normalization; none states equality of normalized derived purity maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale Kummer normalized integration trace and smooth purity isomorphism are intrinsic to a scheme morphism independently of the choice of structure map to the ground field",
+   "results": "{\"t\": \"2026-10-22T07:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"The etale Kummer normalized integration trace and smooth purity isomorphism are intrinsic to a scheme morphism independently of the choice of structure map to the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"2c51451ab1f1def9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme smoothness, etaleness or scheme normalization; none states equality of normalized derived purity maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-orientation-ground-field-retagging",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Step 1, semilinear purity square: diagonal, Rees deformation and integration-normalized coordinate comparisons before global gluing",
+   "via": [
+    "lem-pur-orientation-ground-field-retagging"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-retagging-coordinate-orientations",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Seven explicit steps identify relative geometry, Rees family, intrinsic Tate tower, normalized DNC comparison, Kummer-normalized ordered traces, integration transposes and coordinate composites. Reused existing nodes; no new node. No semilinear morphism is fed to a k-linear base-change theorem.",
+  "blueprint": "thm-pur-weil-equivariance-of-purity-and-trace Step 1: the retagging auxiliary input before applying the semilinear purity square.",
+  "tool_uses": [
+   {
+    "node": "det-sp-orientation-charts",
+    "why": "Generic normalized purity construction used to compare identical underlying scheme presentations; this is the smooth-purity input of package clause (5), not an alternative route."
+   },
+   {
+    "node": "det-sp-orientation-vector-bundle",
+    "why": "Generic normalized purity construction used to compare identical underlying scheme presentations; this is the smooth-purity input of package clause (5), not an alternative route."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic normalized purity construction used to compare identical underlying scheme presentations; this is the smooth-purity input of package clause (5), not an alternative route."
+   },
+   {
+    "node": "lem-pur-diagonal-regular-immersion",
+    "why": "Generic normalized purity construction used to compare identical underlying scheme presentations; this is the smooth-purity input of package clause (5), not an alternative route."
+   },
+   {
+    "node": "lem-pur-dnc-section-geometry",
+    "why": "Generic normalized purity construction used to compare identical underlying scheme presentations; this is the smooth-purity input of package clause (5), not an alternative route."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Generic normalized purity construction used to compare identical underlying scheme presentations; this is the smooth-purity input of package clause (5), not an alternative route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic normalized purity construction used to compare identical underlying scheme presentations; this is the smooth-purity input of package clause (5), not an alternative route."
+   },
+   {
+    "node": "thm-pur-dnc-invariance",
+    "why": "Generic normalized purity construction used to compare identical underlying scheme presentations; this is the smooth-purity input of package clause (5), not an alternative route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-orientation-charts",
+  "det-sp-orientation-vector-bundle",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-pur-dnc-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-033b3cc3c",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-033b3cc3c (reviewer sub-agent of L); spot-checked: Read the item's 7 steps and every cited statement in full. Statement unchanged, no new nodes; it is true because every ingredient of Pi_f depends only on the underlying data (fibre product over Y, Rees charts R[t,I/t], mu_{l^r} tower, P^1 Kummer trace, vector integration, counit-preserving adjoints). Hypotheses checked: W=X x_Y X is separated finite type with a closed diagonal; R=Z/l^m with E=Q_l matches det-sp-orientation-charts; finite-type bases are Noetherian. Edge cases sigma=id, d=0, f=id, empty U, arbitrary m are fine. Step 4 correctly uses the uniqueness clause of thm-pur-dnc-invariance and not its k-base-change clause, which does not apply to the semilinear identity. Step 6's uniqueness is in the def-amb-vector-integration statement. One repaired gap: Step 7 applied det-sp-orientation-charts to f_V but never showed that Pi_f restricted over V equals Pi_{f_V}, hiding this in a vague parenthetical. The fix derives it from that node's 'on separated target opens' clause (V affine, hence separated) for both presentations. Step 6's scope now also covers the trivial bundle A^d_V->V. uses and proof_deps are unchanged. The 8 declared off-unit tool_uses (sk-prop-sp-orientation/dnc/an/diag-reg/geometry/p1) are generic purity constructions and are accepted. No SGA. A DAG grep for 'retag' finds only the parent and its siblings, so no duplicate. Source: main-20261015 thm-pur-weil-equivariance-of-purity-and-trace proof Step 1 (agent auxiliary, proof_origin=agent correct).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RetaggingCoordinateOrientations",
+  "declaration": "WeilConjectures.PurityFiniteSetting.retagging_coordinate_orientations",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.RetaggingSectionConclusion",
+   "WeilConjectures.PurityFiniteSetting.RetaggingVectorOrientationConclusion",
+   "WeilConjectures.PurityFiniteSetting.RetaggingCoordinateOrientationsConclusion",
+   "WeilConjectures.PurityFiniteSetting.retagging_coordinate_orientations"
+  ],
+  "file": "lean/Sheaf/Paper/RetaggingCoordinateOrientations.lean",
+  "statement": "theorem retagging_coordinate_orientations (P : PurityFiniteSetting.{u}) (_hE : P.extension = ⊥) (σ : P.field.k ≃ₐ[P.field.k₀] P.field.k) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (d : ℕ) (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [SmoothOfRelativeDimension d f] (_hf : f ≫ aY = aX) (V : Y.Opens) (hV : IsAffineOpen V) (U : X.Opens) (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) V.toScheme) [Etale e] (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) V.toScheme ↘ V.toScheme) ≫ V.ι = U.ι ≫ f) : P.RetaggingCoordinateOrientationsConclusion σ aX aY d f V hV U e w",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The conclusion packages the derived-arrow equality, actual section and DNC-family identifications, unique coordinate-normalized DNC comparison, normal-bundle integration orientation and intrinsic root-power tower. Only the final theorem is postponed; the three predicates contain real expressions in the published interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-848a73563",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Item changed only in lean; 17 stmt_dep records identical to side-live; one module; lean.statement verbatim; max line 91. Every node clause rendered: Lj^*Π_{f^σ}=Lj^*Π_f as upperStar U.ι leftDerived map of diagonalDualizingObject d f (aY≫Spec σ) vs aY (same Π/Lj^* as det-sp-orientation-charts, Z/ℓ^m via _hE); DNC source/map/section/family/section invariant/normal section/fibres 0,1 on g=pullback.fst, s=diagonal with base aX; unique DNC comparison via existsUnique_dncInvariance choose (substantive, base-change quantifier depends on aB); vector-bundle orientations via HEq over presentations of the normal cone. Hypotheses not stronger (finite-type f derivable), d=0/U empty/σ=id/f=id covered, universe u only. No hollow defs, sorry only in theorem, docstrings with source + 7 steps. Advisories: roots-tower conjunct is HEq of definitionally equal terms (padding); main and vector equalities probably definitional since aY enters only via Prop proofs (not compile-verified; fine, Π is intrinsic); the two VectorBundleDiagonalOrientationConclusion conjuncts restate the dep; diagonalDualizingObject (thm-pur-diagonal-dualizing-object), VectorBundleZeroSection and DNC fibre declarations used without their owner in stmt_deps (advisory); second reading in-session but a real reading. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T164327-L-999492",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-etale-coordinates-of-fibre-basis",
+ "kind": "statement",
+ "title": "Prescribed differential fibre bases give principal etale polynomial charts",
+ "statement": "Let R and A be commutative rings, with A a smooth R-algebra [def-weil-pbc-smooth-ring-map], and let K be a field [def-weil-field] with an A-algebra structure. Let I be a finite set, h:I to A a family, b an A-basis of the Kahler module Omega_{A/R} [def-weil-pbc-free-module, def-weil-pbc-kahler-differentials], and c a K-basis of K tensor_A Omega_{A/R} [def-weil-module-base-change] indexed by the same I. Suppose c_i=1 tensor dh_i for every i. Then there is f in A with nonzero image in K such that the polynomial evaluation map R[T_i:i in I] to A[1/f], T_i maps to h_i/1 [def-weil-pbc-mv-polynomial-ring, def-weil-ring-localization-away], is etale. Here etale means finitely presented and formally etale: its Kahler module and first cotangent homology vanish. Empty I is allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GU (lemma-etale-at-point), differential criterion; algebra.tex Tag 00T7 (lemma-standard-smooth), part (2). Agent-written determinant-of-differential-basis variant, using the proved source-library polynomial-evaluation criterion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-field",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Set v_i=dh_i and let M be the matrix of v in the basis b. Set f=det M [def-weil-pbc-matrix-determinant]. The base-changed basis b_K has coefficient matrix obtained by applying A to K entrywise. Since v becomes the basis c, this coefficient matrix is invertible. Determinants commute with ring homomorphisms; hence the image of f in K is nonzero. Formally, Module.Basis.isUnit_det and RingHom.map_det give this directly.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Put S=A[1/f] [def-weil-ring-localization-away]. In the base-changed basis b_S, the vectors 1 tensor v_i have coefficient matrix M_S with unit determinant f/1. The adjugate gives an inverse to M_S, so the vectors are an S-basis, including when I is empty. This is Module.Basis.is_basis_iff_det.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Localization A to S is formally etale. The canonical differential equivalence [lem-trf-formally-etale-differentials-base-change] takes 1 tensor dh_i to d(h_i/1). Thus these latter vectors form an S-basis of Omega_{S/R}. Smoothness and finite presentation over R persist under principal localization. Apply the already-proved source-library theorem MvPolynomial.etale_aeval_of_basis_kaehlerDifferential (WeilConjectures.Mathlib.RingTheory.Etale.Kaehler). Its proof uses the polynomial differential basis to identify S tensor_{R[T]} Omega_{R[T]/R} to Omega_{S/R} with a basis isomorphism. The Jacobi-Zariski exact sequence and H1(L_{S/R})=0 give H1(L_{S/R[T]})=0, and the differential transitivity sequence gives Omega_{S/R[T]}=0. Finite presentation over R implies finite presentation over R[T]. Hence the specified evaluation map is etale.",
+   "uses": [
+    "lem-trf-formally-etale-differentials-base-change",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GU (lemma-etale-at-point), differential criterion; algebra.tex Tag 00T7 (lemma-standard-smooth), part (2). Agent-written determinant-of-differential-basis variant, using the proved source-library polynomial-evaluation criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth algebra with free Kahler differentials and a basis of prescribed differentials in a field fibre admits a principal localization where the polynomial evaluation is etale",
+   "results": "Eight hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.exists_etale_of_isEtaleAt; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; Algebra.IsStandardEtale; StandardEtalePresentation.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Existential unspecified coordinates do not preserve the functions h. The existing proved source criterion for a global differential basis supplies the last step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A basis of differentials at a residue field extends to etale coordinates on a principal open subset of a smooth algebra",
+   "results": "Eight hits: Algebra.exists_etale_of_isEtaleAt; Algebra.basicOpen_subset_etaleLocus_iff; Algebra.SubmersivePresentation.basisDeriv; Algebra.basicOpen_subset_etaleLocus_iff_etale; Algebra.FormallyEtale.subsingleton_kaehlerDifferential; Algebra.isOpen_etaleLocus; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.Generators.basisCotangentAway.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The etale-locus theorems assume the map already formally etale at a prime."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, TensorProduct, Localization.Away",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "fibre.*basis|fiber.*basis|basis.*fibre|basis.*fiber|etale_aeval",
+   "results": "Searched Mathlib/RingTheory/Smooth and Etale and WeilConjectures/Mathlib/RingTheory. Found the proved MvPolynomial.etale_aeval_of_basis_kaehlerDifferential, which assumes a global basis, and a single-polynomial etale criterion. No fibre-to-principal-open criterion. Blueprint search for differential.*basis found no matches; etale coordinate found only the broader deformation-to-normal-cone theorem.",
+   "date": "2026-10-26",
+   "verdict": "New lemma supplies just the finite free change-of-basis determinant step before the global criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAtPointFromDifferentials",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-regular-immersion-linearization",
+   "place": "proof, second paragraph: the prescribed coordinate map is etale by the differential criterion, then shrink its source",
+   "via": [
+    "lem-pur-etale-at-point-from-differentials"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleCoordinatesOfFibreBasis",
+  "file": "lean/Sheaf/RingTheory/EtaleCoordinatesOfFibreBasis.lean",
+  "declaration": "MvPolynomial.exists_etale_aeval_localization_of_fibre_basis",
+  "statement": "theorem exists_etale_aeval_localization_of_fibre_basis\n    {R A K ι : Type*} [CommRing R] [CommRing A] [Field K]\n    [Algebra R A] [Algebra A K] [Algebra.Smooth R A] [Finite ι]\n    (h : ι → A) (b : Module.Basis ι A (KaehlerDifferential R A))\n    (c : Module.Basis ι K (K ⊗[A] KaehlerDifferential R A))\n    (hc : ∀ i, c i = 1 ⊗ₜ[A] KaehlerDifferential.D R A (h i)) :\n    ∃ f : A, algebraMap A K f ≠ 0 ∧\n      (aeval (fun i => algebraMap A (Localization.Away f) (h i)) :\n        MvPolynomial ι R →ₐ[R] Localization.Away f).toRingHom.Etale",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-ring-localization-away",
+  "lem-trf-formally-etale-differentials-base-change",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T091901-L-3384438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T091901-L-3384438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

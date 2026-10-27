@@ -1,0 +1,135 @@
+{
+ "id": "def-weil-pbc-completed-constant-completion-functor",
+ "kind": "definition",
+ "title": "The additive completed constant quotient functor and natural comparison",
+ "statement": "Let X be a scheme, A a commutative ring, I an ideal, and C=AdicCompletion I A. Send a C-module N to the inverse limit of the constant sheaves of its underlying A-module quotients N/I^(n+1)N. Send a C-linear map to the inverse limit of its induced quotient maps. This defines an additive functor completion. For a coefficient morphism phi:constant C -> H=lim constant(A/I^(n+1)), scalar extension of constant N followed by restriction to constant A defines an additive functor realization, preserving finite colimits. If A is Noetherian and phi has the prescribed evaluation projections, the already constructed completedConstantComparisonMap is a natural transformation from realization to completion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J--093M, together with More on Algebra Tag 0912"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-constant-projection-maps"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural quotient-tower map from a completion-linear map. Quotient induction proves compatibility with transitions, identities, composition and addition. Taking limits gives the additive completion functor.",
+   "uses": [
+    "def-weil-pbc-completed-constant-projection-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Constant-module sheafification is additive and preserves finite colimits. The ordinary coefficient adjunction makes scalar extension preserve finite colimits, and also states preservation of finite colimits by scalar restriction. Compose these functors to obtain realization and its properties.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the limit hom-extensionality principle to the asserted naturality square. After each projection it is exactly the proved completedConstantProjection_naturality identity.",
+   "uses": [
+    "def-weil-pbc-completed-constant-projection-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-constant-projection-maps",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-presentation argument of Tags 093J--093M and More on Algebra Tag 0912, specialized to the canonical quotient tower"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module over a Noetherian adic completion, scalar extension of its constant sheaf to the completed constant ring is the inverse limit of its constant finite quotients",
+   "results": "Ordinary AdicCompletion.ofTensorProductEquivOfFiniteNoetherian and related equivalences; no matching sheaf map or right-exactness result. A second query for constant quotient sheaf cokernels returned AdicCompletion.map_exact, again for ordinary modules.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "results": "Five ordinary completion/tensor declarations, with no site or constant-sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*completion|completion.*constant|limMap_add",
+   "results": "No matching declaration in the Mathlib grep search. Separate project rg inspection found CompletedConstantProjectionMaps and CompletedConstantSheafReduction, which supply the constructions used by the proof.",
+   "date": "2026-10-27",
+   "verdict": "use existing constructions and ordinary adjunction; isolate two distinct missing steps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of constant quotient sheaves of finite modules over a Noetherian completed ring preserves cokernels, and the completed constant comparison is an isomorphism for the rank one free module",
+   "results": "Eight results: generic cokernel preservation and module/sheaf limits, ordinary AdicCompletion, and ModuleCat.cokernelIsoRangeQuotient. None establishes the constant quotient sheaf comparison or its right exactness.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedConstantComparisonIsIso",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-constant-comparison-is-iso",
+   "place": "The additive completed constant quotient functor and natural comparison"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantCompletionFunctor",
+  "file": "lean/Sheaf/Paper/CompletedConstantCompletionFunctor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedConstantPresentation.completion",
+  "statement": "def completion : ModuleCat.{u + 1} (AdicCompletion I A) ⥤\n    SheafOfModules.{u + 1} (adicLisseRing X A)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletedConstantPresentation.tower",
+   "AlgebraicGeometry.Scheme.CompletedConstantPresentation.completion",
+   "AlgebraicGeometry.Scheme.CompletedConstantPresentation.tower_additive",
+   "AlgebraicGeometry.Scheme.CompletedConstantPresentation.completion_additive",
+   "AlgebraicGeometry.Scheme.CompletedConstantPresentation.realization",
+   "AlgebraicGeometry.Scheme.CompletedConstantPresentation.realization_additive",
+   "AlgebraicGeometry.Scheme.CompletedConstantPresentation.realization_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.CompletedConstantPresentation.comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T054604-L-967842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T054604-L-967842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

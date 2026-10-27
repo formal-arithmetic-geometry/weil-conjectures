@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-pointed-generic-integral-action-square-power",
+ "kind": "statement",
+ "title": "A square power for a pointed smooth family with geometrically integral generic fibre",
+ "statement": "Let $S$ be a nonempty affine Noetherian integral scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme, def-pc-integral-scheme] which is normal: every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $\\eta=\\operatorname{Spec}k(S)$ be its generic point [def-sc-generic-point, def-sc-function-field]. Let $H\\to S$ be a smooth separated group scheme of finite type with geometrically connected fibres [def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-connected-scheme]. Thus $H$ has multiplication, identity and inverse satisfying the group identities; separated means the diagonal is a closed immersion [def-weil-closed-immersion]; and $H\\times_S\\operatorname{Spec}\\Omega$ is nonempty and connected for every algebraically closed field $\\Omega$ over a residue field of $S$ [def-pc-fibre-product, def-weil-residue-field]. Let $p:Y\\to S$ be smooth, separated and of finite type, with $Y$ integral, an $S$-section $e:S\\to Y$ satisfying $pe=\\mathrm{id}_S$, and an action $a:H\\times_SY\\to Y$ satisfying the unit and associativity identities. Suppose the generic fibre $Y_\\eta$ is geometrically integral: it remains nonempty, reduced and irreducible after every extension of $k(S)$ [def-pc-geometrically-irreducible]. Let $L$ be any invertible $\\mathcal O_Y$-module [def-sc-invertible-module]. There exists an integer $r\\geq1$ such that $M=L^{\\otimes r}$ has the following property. For every $S$-scheme $B$, write $Y_B=Y\\times_SB$, $q_B:Y_B\\to B$, and $M_B$ for the module pullback [def-pc-module-pullback]. For every $g,h\\in H(B)=\\operatorname{Hom}_S(B,H)$, put $\\tau_g(y,b)=(g(b)y,b)$. There is an invertible $\\mathcal O_B$-module $N$ and an isomorphism\n$$\\tau_{gh}^*M_B\\otimes M_B\\cong\\tau_g^*M_B\\otimes\\tau_h^*M_B\\otimes q_B^*N.$$\nAll tensor products and tensor powers are sheaf tensor products [def-pur-sheaf-tensor-product]. The exponent $r$ is chosen before $B,g,h$. No equivariance of the section $e$, integrality of special fibres of $Y$, properness, or commutativity is assumed.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Proposition 5.9, final assertion, case (1), and Lemma 5.7; smooth Noetherian affine-base specialization; printed pp.14-15 of March 31, 2026 version, read online. Local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-pc-integral-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-pc-geometrically-irreducible",
+  "def-weil-connected-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Both $Y\\to S$ and $H\\to S$ are of finite presentation. Indeed smoothness gives local finite presentation by [lem-pc-smooth-flat], finite type gives quasi-compactness [def-weil-finite-type-morphism], and the closed diagonal is quasi-compact: by the affine description in [def-weil-closed-immersion], its inverse image of an affine is affine, hence quasi-compact by the basic-open/unit-ideal argument. This is precisely finite presentation as defined in [def-sbc-locally-finite-presentation]. The identity section of $H$ and [lem-sbc-smooth-section-component-geometrically-irreducible] give an open $U\\subseteq H$ with geometrically irreducible fibres containing every point of the fibre component through the identity. The fibres are connected by hypothesis, so this component is the entire fibre and $U=H$. The fibres are also geometrically reduced by [sbc-lem-smooth-geometrically-reduced]. Thus all fibres of $H$ are nonempty geometrically integral, using the definitions [def-pc-geometrically-irreducible, def-pc-integral-scheme]. No analogous assertion is made about special fibres of $Y$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-sbc-locally-finite-presentation",
+    "lem-sbc-smooth-section-component-geometrically-irreducible",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.9(1), geometric hypotheses; smooth specialization; cf. the existing normal-group-square-power proof, Step 1."
+   }
+  },
+  {
+   "text": "Put $C=Y\\times_SH\\times_SH$, ordered as $(y,u,v)$, $P=Y\\times_SY\\times_SH\\times_SH$, ordered as $(y_0,y_1,u_0,u_1)$, and $Z=P\\times_SH$, with projection $\\pi:Z\\to P$. Build each product by adjoining one factor at a time. Every new projection is smooth by [lem-pc-proper-base-change](2); iterating [lem-trf-smooth-composition] makes each product smooth over $S$. Hence $P$ is flat and locally of finite presentation over $S$ by [lem-pc-smooth-flat]. Starting from normal $S$, [lem-sfb-smooth-normal-ascent] along the projections gives normal products. Starting from locally Noetherian $S$, [pqf-lem-locnoeth-lft] along the same projections gives locally Noetherian products, since local finite presentation implies local finite type directly from finite generators. After base change to $k(S)$ the factors remain smooth, separated and of finite presentation by [lem-pc-proper-base-change](2), [lem-weil-pbc-separated-base-change], and [lem-weil-pbc-qcqs-morphism-permanence](3). The factors $Y_\\eta,H_\\eta,H_\\eta$ are geometrically integral by hypothesis and Step 1. Repeated [lem-sc-geometrically-irreducible-product] makes $P_\\eta$ geometrically irreducible; its smoothness and [sbc-lem-smooth-geometrically-reduced] make it geometrically reduced. In particular $P_\\eta$ is nonempty and integral.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-pc-smooth-flat",
+    "lem-sfb-smooth-normal-ascent",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sc-geometrically-irreducible-product",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034F, lemma-normal-local-smooth; the cited product, smoothness and Noetherian permanence statements. This verifies the parameter-base hypotheses used in Guo Proposition 5.2(i)."
+   }
+  },
+  {
+   "text": "The scheme $P$ is integral even though special fibres of $Y$ may be disconnected. Here is the elementary localization argument of Stacks Tag 0BCM (lemma-flat-over-integral-integral-fibre). For a nonempty affine $W=\\operatorname{Spec}D\\subseteq P$ mapping into $V=\\operatorname{Spec}R\\subseteq S$, $R$ is a domain and $D$ is flat over $R$ by [lem-weil-pbc-flat-morphism-affine-criterion]. By [lem-trf-flat-module-torsionfree-domain], localization gives an injection $D\\hookrightarrow D\\otimes_R\\operatorname{Frac}(R)$. By [lem-weil-pbc-fibre-product-affine-spectra] the latter is the ring of the open $W_\\eta$ of $P_\\eta$. It is nonzero by the injection, and a domain because $P_\\eta$ is integral. Thus $D$ is a domain. Such $W$ form a basis, and every nonempty open of $P$ meets $P_\\eta$. Any two nonempty opens therefore meet in the irreducible $P_\\eta$. Consequently $P$ is nonempty, reduced and irreducible, which is integrality [def-pc-integral-scheme]. Moreover $P\\to S$ is surjective: $y_0=y_1=e(s)$ and $u_0=u_1=1_s$ give a section. The generic point $\\xi$ of $P$ therefore maps to $\\eta$: its image specializes to every point of $S$, by continuity and surjectivity, and $S$ has a unique generic point.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCM, lemma-flat-over-integral-integral-fibre; the displayed affine-local argument and elementary generic-point reasoning."
+   }
+  },
+  {
+   "text": "Let $b:C\\to Y$ be $b(y,u,v)=uv^{-1}y$, and set $A=b^*L$. It is invertible: pull back local rank-one generators [def-sc-invertible-module, def-pc-module-pullback]. For an invertible $F$ on $C$, abbreviate its pullbacks to $Z$ as $F_{ab}=F(y_a,u_b,v)$ and set $E(F)=F_{00}\\otimes F_{11}\\otimes F_{01}^{-1}\\otimes F_{10}^{-1}$. Apply [lem-sfb-field-product-square-power] over $k(S)$ with factors $X_1=Y_\\eta$ and $X_2=X_3=H_\\eta$ and line $A_\\eta$. All three factors have the required smooth separated finite presentation and geometric integrality by Steps 1-2. It gives one integer $r\\geq1$ and an invertible $Q_\\eta$ on $P_\\eta$ with $E(A^{\\otimes r})_\\eta\\cong\\pi_\\eta^*Q_\\eta$. The identification follows by expanding the four factors: pullback commutes with tensor products, tensor powers and duals, as is checked on local rank-one generators. Set $M=L^{\\otimes r}$ and $F=b^*M=A^{\\otimes r}$. This choice of $r$ precedes all test schemes and group-valued points.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-sfb-field-product-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2(ii), generic-field power, applied in the order X,Y,Z = Y,H,H as in Proposition 5.9(1)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-noetherian-generic-line-pullback] to $\\pi:Z\\to P$ and the invertible line $E(F)$. The base $P$ is normal integral locally Noetherian by Steps 2-3, and $Z$ is locally Noetherian by Step 2. The map $\\pi$ is smooth, hence flat and locally of finite presentation and therefore locally of finite type. For any $p\\in P$ over $s\\in S$, $Z_p=H_s\\times_{\\kappa(s)}\\operatorname{Spec}\\kappa(p)$ is integral and nonempty by Step 1. Finally, $\\xi\\to P$ factors through $P_\\eta$ by Step 3. Pulling the Step 4 isomorphism to $Z_\\xi$ gives $E(F)|_{Z_\\xi}\\cong\\pi_\\xi^*(Q_\\eta|_\\xi)$. An invertible module over the field $k(P)$ is a one-dimensional vector space and has a basis [def-sc-invertible-module]; hence this last pullback is trivial. These are all the hypotheses of the cited generic-line statement, which yields an invertible $Q$ on $P$ and $E(F)\\cong\\pi^*Q$. Crucially the integral fibres used here are those of $H$, not those of $Y$.",
+   "uses": [
+    "lem-sfb-normal-noetherian-generic-line-pullback",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, hypotheses (1)-(5) and conclusion; Guo Proposition 5.2(i) in the reordered factors."
+   }
+  },
+  {
+   "text": "On $Y^2\\times_SH^2\\times_SH^2$, define $\\mathcal C$ to be the pullback of $E(F)$ at $v=v_0$ tensored with the inverse of its pullback at $v=v_1$. Step 5 makes $\\mathcal C$ trivial, since the two maps to $P$ are identical and the factors $Q$ and $Q^{-1}$ cancel. For $T=H^4$ with coordinates $(u_0,u_1,v_0,v_1)$, define on $Y\\times_ST$ the line\n$$D(y)=F(y,u_0,v_0)\\otimes F(y,u_1,v_1)\\otimes F(y,u_0,v_1)^{-1}\\otimes F(y,u_1,v_0)^{-1}.$$\nExpanding both expressions gives $\\mathcal C\\cong D(y_0)\\otimes D(y_1)^{-1}$: the positive factors are $F(y_0,u_0,v_0),F(y_1,u_1,v_0),F(y_0,u_1,v_1),F(y_1,u_0,v_1)$, and the four complementary factors have negative sign. Reordering tensor factors is allowed for modules; no group factors are reordered. All pullback, dual and cancellation identities follow on rank-one local frames [def-pc-module-pullback, def-sc-invertible-module, def-pur-sheaf-tensor-product].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Section 5.1: square implies cube and symmetry of the eight-factor cubical difference; Proposition 5.9(1), change of factor order."
+   }
+  },
+  {
+   "text": "Let $q:Y\\times_ST\\to T$ be projection and let $e_T:T\\to Y\\times_ST$ be the pullback of the given section $e$. Set $K=e_T^*D$, an invertible module on $T$ [def-sc-invertible-module, def-pc-module-pullback]. Pull the trivialization $D(y_0)\\otimes D(y_1)^{-1}\\cong\\mathcal O$ of Step 6 back along $(y,t)\\mapsto(y,e(s),t),\\quad s\\text{ the common image in }S$. Pullback composition identifies it with $D\\otimes q^*K^{-1}\\cong\\mathcal O$. Tensoring by $q^*K$ and canceling gives $D\\cong q^*K$. This uses only that $e$ is an $S$-section. Its image is not required to be fixed by the action.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Section 5.1: cube implies square when the third factor has a section; Proposition 5.9(1), return to the order H,H,Y."
+   }
+  },
+  {
+   "text": "Fix any $S$-scheme $B$ and $g,h\\in H(B)$. Define $t:B\\to T=H^4$ by $t=(g,1,h^{-1},1)$. Pull the isomorphism $D\\cong q^*K$ back along $Y_B\\to Y\\times_ST$ induced by $t$. The four composites with $b$ in the definition of $D$ are $ghy,y,gy,hy$, respectively. The unit, inverse and associativity identities of the action give these equalities without commuting $g$ and $h$. Thus the pullback is\n$$\\tau_{gh}^*M_B\\otimes M_B\\otimes(\\tau_g^*M_B)^{-1}\\otimes(\\tau_h^*M_B)^{-1}\\cong q_B^*t^*K.$$\nSet $N=t^*K$ and tensor by $\\tau_g^*M_B\\otimes\\tau_h^*M_B$. Evaluation of a line against its dual cancels the inverse factors and gives exactly the asserted isomorphism [def-sc-invertible-module, def-pc-module-pullback]. The same $r$ from Step 4 works for every $B,g,h$, including nonreduced or non-Noetherian $B$, since this is pullback of one global isomorphism.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Lemma 5.7, explicit square-difference specialization; Proposition 5.9(1), final assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sfb-smooth-normal-ascent",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-sfb-field-product-square-power",
+  "lem-sfb-normal-noetherian-generic-line-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Guo Sections 5.1, 5.6, Lemma 5.7, Proposition 5.9(1); online author PDF read 2026-10-24; local PDF WANTED. Explicit smooth Noetherian argument using Stacks 0BCM and 0BD7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a pointed smooth scheme with geometrically integral generic fibre over a normal Noetherian domain has a positive power satisfying the theorem of the square for a smooth connected group action",
+   "results": "{\"t\": \"2026-10-24T14:26:15Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle on a pointed smooth scheme with geometrically integral generic fibre over a normal Noetherian domain has a positive power satisfying the theorem of the square for a smooth connected group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Scheme.basicOpen_pow\"], \"digest\": \"8ee033e04ff31fe8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures and saved outputs; Picard group tensor identities for ring modules, localization and arithmetic approximation do not assert the square identity for this scheme action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T15:08:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CommRing.Pic.mk_tensor\", \"CommRing.Pic.mul_eq_tensor\"], \"digest\": \"e7cb255b44488ed1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ring Picard/tensor identities and scalar-extension maps do not state a uniform square power for this scheme action."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|theorem.of.the.square|square_condition",
+   "results": "{\"t\": \"2026-10-24T15:08:40Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|theorem.of.the.square|square_condition\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ring Picard/tensor identities and scalar-extension maps do not state a uniform square power for this scheme action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive tensor power of a line bundle satisfies the square condition under a connected smooth group action on a pointed normal family",
+   "results": "{\"t\": \"2026-10-24T14:26:17Z\", \"tool\": \"leansearch\", \"query\": \"Positive tensor power of a line bundle satisfies the square condition under a connected smooth group action on a pointed normal family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorPower.mulEquiv\", \"LinearEquiv.lTensor_zpow\", \"TensorPower.gMul_def\", \"TensorProduct.map_pow\", \"TensorPower\", \"PiTensorProduct.mapL_pow\", \"TensorProduct.congr_pow\", \"LinearEquiv.lTensor_pow\"], \"digest\": \"92ff7bbb8d4155fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures and saved outputs; Picard group tensor identities for ring modules, localization and arithmetic approximation do not assert the square identity for this scheme action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard admissibility after taking a tensor power for an action on a smooth family with a section and geometrically integral generic fibre",
+   "results": "{\"t\": \"2026-10-24T14:26:18Z\", \"tool\": \"leanfinder\", \"query\": \"Picard admissibility after taking a tensor power for an action on a smooth family with a section and geometrically integral generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"Algebra.FormallyUnramified.elem\", \"Algebra.FormallyUnramified.iff_exists_tensorProduct\", \"Algebra.Extension.tensorH1Cotangent\", \"CommRing.Pic.mapAlgebra_apply\", \"Ideal.Fiber.exists_smul_eq_one_tmul\"], \"digest\": \"e73b431b6f857318\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures and saved outputs; Picard group tensor identities for ring modules, localization and arithmetic approximation do not assert the square identity for this scheme action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard admissibility of a tensor power for a group action on a smooth scheme over a normal integral base",
+   "results": "{\"t\": \"2026-10-24T15:08:40Z\", \"tool\": \"leansearch\", \"query\": \"Picard admissibility of a tensor power for a group action on a smooth scheme over a normal integral base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorPower\", \"CommRing.Pic.mk_tensor\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"CommRing.Pic.mapRingHom_algebraMap\", \"CommRing.relPic\", \"CommRing.Pic.mapAlgebra_apply\", \"Action.diagonalSuccIsoTensorTrivial\"], \"digest\": \"a49c935943f1f93e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ring Picard/tensor identities and scalar-extension maps do not state a uniform square power for this scheme action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive tensor power of a line bundle satisfies the theorem of the square for a smooth connected group acting on a pointed smooth family with geometrically integral generic fibre",
+   "results": "{\"t\": \"2026-10-24T15:08:41Z\", \"tool\": \"leanfinder\", \"query\": \"A positive tensor power of a line bundle satisfies the theorem of the square for a smooth connected group acting on a pointed smooth family with geometrically integral generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pow_apply\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mk_tensor\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"TensorProduct.congr_zpow\", \"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"LinearEquiv.rTensor_zpow\"], \"digest\": \"c9ab7056bf8aa8e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ring Picard/tensor identities and scalar-extension maps do not state a uniform square power for this scheme action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The difference of translations of a line bundle defines a group homomorphism to the relative Picard group after a uniform tensor power",
+   "results": "{\"t\": \"2026-10-24T15:12:07Z\", \"tool\": \"leanfinder\", \"query\": \"The difference of translations of a line bundle defines a group homomorphism to the relative Picard group after a uniform tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic\", \"Submodule.unitsToPic\", \"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.functor\", \"Submodule.range_unitsToPic\", \"instCommGroupPic\", \"Submodule.unitsQuotEquivRelPic\", \"CommRing.Pic.mapRingHom\"], \"digest\": \"2f451cbabc28b68c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ring Picard/tensor identities and scalar-extension maps do not state a uniform square power for this scheme action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-action-orbit-section-ampleness",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary to det-thm-sf-ctf-stability-direct-images, inherited direct-image proof (3), normal-base ampleness branch; Guo Proposition 6.4(b), preliminary pointed case via Proposition 5.9(1).",
+   "via": [
+    "lem-sfb-connected-action-orbit-section-ampleness",
+    "lem-sfb-connected-action-affine-saturation-ample",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pointed-generic-integral-action-square-power",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the field product-square power and flat integral-fibre generic-line pullback statements. Worked in the order Y,H,H, verified the normal integral parameter base without assuming integral special fibres of Y, and wrote out the eight-factor cube identity, section restriction and noncommutative specialization. No new nodes.",
+  "blueprint": "Auxiliary normal-base ampleness branch historically attached to det-thm-sf-ctf-stability-direct-images proof (3), as recorded in blueprint.from.place. The latest main-20261024 direct-image proof (3) has no group-ampleness clause. This is a local auxiliary split along its supplied Guo Proposition 5.9(1) route; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-section-component-geometrically-irreducible",
+    "why": "Generic scheme geometry or invertible-module tool: used only for the exact property stated in its proof step; the present unit supplies no replacement. It does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-sc-geometrically-irreducible-product",
+    "why": "Generic scheme geometry or invertible-module tool: used only for the exact property stated in its proof step; the present unit supplies no replacement. It does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "lem-sc-geometrically-irreducible-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NM-6de5823c1",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-6de5823c1 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, unchanged statement and stmt_deps, no new nodes, and every cited statement. Guo Prop. 5.9(1)/Lemma 5.7 is not in literature/ (WANTED), so the argument was checked on its own. Stacks 0BCM in divisors.tex was read: Step 3 follows its torsion-free argument and is accepted as elementary. Step 1: the section-component lemma (H qcqs via finite type + separated, identity section) plus connected fibres gives U=H; with geometric reducedness, every fibre H_s is geometrically integral; nothing is claimed for the special fibres of Y. Step 2: smooth base change and composition, normal ascent, locNoeth-lft; P_eta is geometrically integral via the product lemma over k(S). Step 3: P is integral through flat D into D tensor Frac R; the section (e,e,1,1) gives surjectivity, so xi maps to eta. Step 4: field-product-square-power applied with X1=Y_eta, X2=X3=H_eta, A=b^*L for b=uv^{-1}y; its D(A) equals E(A) exactly, and r is chosen before B. Step 5: all five hypotheses of generic-line-pullback hold for Z=P×H→P, using the H-fibres, and the field line over kappa(xi) is trivial. Steps 6-8: I expanded the cube identity factor by factor and it matches; the section pullback gives D≅q^*K; t=(g,1,h^{-1},1) gives gh,1,g,h without commutativity. Edge cases (trivial H, Y=S, g=h=1, the DVR xy=t example) are all consistent. No duplicate: normal-product-square-descent is correctly not used because it needs integral fibres of Y. Batch 5: lem-trf-smooth-composition and lem-trf-flat-module-torsionfree-domain are generic Mathlib leaves; the flags on field-product-square-power and generic-line-pullback reach only these. In the recomputed closure, the trace-chapter nodes are all sk-i-curve-zero generic algebra or geometry, with no trace-formula or PD statement or proof step, so all four flags are accepted. The two tool_uses (smooth section component, geometric-irreducible product) are accepted as generic geometry. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointedGenericIntegralActionSquarePower",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_pointedGenericIntegralAction_square_tensorPower",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedGenericIntegralActionSquarePower.lean",
+  "statement": "theorem exists_pointedGenericIntegralAction_square_tensorPower (S : Scheme.{u}) [IsAffine S] [IsLocallyNoetherian S] [IsIntegral S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (H : Over S) [GrpObj H] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [GeometricallyConnected H.hom] (Y : Over S) [Smooth Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsIntegral Y.left] (e : S ⟶ Y.left) (he : e ≫ Y.hom = 𝟙 S) [ModObj H Y] (hη : GeometricallyIntegral (pullback.snd Y.hom (S.fromSpecStalk (genericPoint S)))) (L : Y.left.Modules) [L.IsInvertible] : ∃ r : ℕ, 1 ≤ r ∧ ∀ (B : Over S) (g h : B ⟶ H), ∃ N : B.left.Modules, N.IsInvertible ∧ Nonempty (((tensorPullback (((snd Y B ≫ (g * h)) • fst Y B).left)).obj (L.tensorPow r) ⊗ (tensorPullback (fst Y B).left).obj (L.tensorPow r)) ≅ (((tensorPullback (((snd Y B ≫ g) • fst Y B).left)).obj (L.tensorPow r) ⊗ (tensorPullback (((snd Y B ≫ h) • fst Y B).left)).obj (L.tensorPow r)) ⊗ (tensorPullback (snd Y B).left).obj N))",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b9bb382",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read the node, the dependency records, the Lean module and the report. Clause-by-clause match: S affine, locally Noetherian, integral, with stalkwise normality hS; H : Over S with GrpObj, Smooth, IsSeparated, LOFT+QC and GeometricallyConnected (equivalent to nonempty connected geometric fibres); Y smooth, separated, finite type with IsIntegral Y.left, a plain section e (he), ModObj H Y for unit and associativity; generic fibre GeometricallyIntegral via pullback.snd along S.fromSpecStalk (genericPoint S); ∃ r ≥ 1 before ∀ B g h; the translations (snd≫g)•fst are pr_Y∘τ_g by Hom.smul_def; factor order gh, M ≅ g, h, q_B^*N; g*h does not commute the group. Only `lean` was added to the node and the statement field matches the file verbatim. No hollow definitions, nothing proved beyond sorry, docstrings carry the source and blueprint. Edge cases checked: empty S, r=0, arbitrary B, noncommutative H, universes. Not recompiled because no files changed. No findings."
+ }
+}

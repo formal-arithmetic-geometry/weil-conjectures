@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-independent-expression-shift-naturality",
+ "kind": "lemma",
+ "title": "Naturality of recursively assembled independent input shifts",
+ "status": "split",
+ "statement": "For any interpretation d of independently labelled expressions in categories with integer shift, and natural primitive shift comparisons a, the recursively defined independent-slot comparison is natural in every input-family morphism. For the input-shift functor S_i(r), expression evaluation F, and endpoint-corrected comparison sigma_K: F(S_i(r)K) ≅ F(K)[r], one has F(S_i(r)f) ≫ sigma_N.hom = sigma_K.hom ≫ (F(f))[r]. The comparison sigma is the existing explicit unique-occurrence context construction of [def-pur-integral-expression-occurrences], with its equality endpoint identifications. The tensor-slot endofunctors are those of [def-pur-integral-tensor-shift-properties].",
+ "stmt_deps": [
+  "def-pur-integral-expression-occurrences",
+  "def-pur-integral-tensor-shift-properties"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, canonical maps and integer shifts in independent expression inputs."
+ },
+ "proof": [
+  {
+   "text": "Follow the selected occurrence. Variables give identity shifts. At unary vertices apply the operation functor to the induction square, then use its primitive shift naturality. At a tensor vertex injectivity of occurrence labels excludes the selected index from the other subtree; its evaluation therefore ignores the single-coordinate shift. Apply naturality of the designated left or right tensor isomorphism to the pair of actual evaluated maps. Equality transport along the explicit endpoint evaluation identities gives the asserted square.",
+   "uses": [
+    "def-pur-integral-expression-occurrences"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-expression-occurrences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2: expand the canonical expression shift through the selected occurrence."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor on a product category evaluated on a map in one coordinate equals the map of the corresponding single slot context",
+   "results": "8 hits, including CategoryTheory.Functor.pi'_map, CategoryTheory.Pi.eval_map, CategoryTheory.Pi.comap_map. No expression-context comparison.",
+   "date": "2026-10-26",
+   "verdict": "Reuse product functor API; explicit expression recursion is project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor congruence transports maps along equality of functors",
+   "results": "8 hits, including CategoryTheory.Functor.congr_hom and CategoryTheory.Functor.hcongr_hom.",
+   "date": "2026-10-26",
+   "verdict": "Provides equality-transport glue, not the independent-context equation."
+  },
+  {
+   "tool": "grep",
+   "query": "Functor.congr_hom|eqToHom_map|Pi.isoMk",
+   "results": "25 hits in Mathlib category theory; generic congruence and equality transport only.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate expression theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOperationShiftData",
+  "date": "2026-10-26",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Step 2, shift coherence for independent expression inputs",
+   "via": [
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IndependentExpressionShiftNaturality",
+  "file": "lean/Sheaf/SixFunctors/IndependentExpressionShiftNaturality.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.IndependentExpression.shift_naturality_generic",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.InterpretationShifts",
+   "WeilConjectures.IntegralSystemRealization.Expression.SlotContext.shift",
+   "WeilConjectures.IntegralSystemRealization.IndependentExpression.shift",
+   "WeilConjectures.IntegralSystemRealization.IndependentExpression.shift_naturality_generic"
+  ],
+  "statement": "theorem IndependentExpression.shift_naturality_generic\n    {B : Scheme.{u}} {I : Type u} {X : I → Over B}\n    {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)] [∀ W, HasShift (C W) ℤ]\n    (d : Interpretation C) (a : InterpretationShifts d) {W : Over B}\n    (e : IndependentExpression B I X W) (K N : ∀ i, C (X i).left)\n    (f : K ⟶ N) (i : I) (r : ℤ) :\n    (e.val.evaluate d).map ((inputShift _ i r).map f) ≫\n        ((e.val.evaluate d).mapIso (eqToIso (inputShift_obj _ N i r)) ≪≫\n          e.shift d a N i r).hom =\n      ((e.val.evaluate d).mapIso (eqToIso (inputShift_obj _ K i r)) ≪≫\n          e.shift d a K i r).hom ≫ ((e.val.evaluate d).map f)⟦r⟧'",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acd0d",
+  "group": "X6",
+  "result": "fix",
+  "landing": "20261026T003221-L-153828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T023922-L-614571",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.IntegralSystemRealization.IndependentExpression.shift_naturality_generic"
+  ],
+  "sorry_after": []
+ }
+}

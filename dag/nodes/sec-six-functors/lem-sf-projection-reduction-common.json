@@ -1,0 +1,339 @@
+{
+ "id": "lem-sf-projection-reduction-common",
+ "kind": "statement",
+ "title": "Projection right tensor action at common coefficients",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$, an integer $n\\ge1$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ containing $E$. Let $S$ be a six-functor datum at these coefficients [def-sf-datum], with the specified operation and comparison data [def-fix-six-functor-datum].\n\nWork at $\\Lambda=\\overline{\\mathbf Q}_\\ell$ in the common finite-stage categories $D^b_c(T,\\overline{\\mathbf Q}_\\ell)$ [def-weil-algebraically-closed-coefficients].\n\nLet $f:X\\to Y$ be a separated morphism of finite-type $k$-schemes and supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ with $j$ open, $p$ proper and $pj=f$. Write $F=Rf_!^c$, $U=Lf^*$, and $P(K,L)=\\operatorname{PF}_{f,K,L}^c:FK\\otimes L\\to F(K\\otimes UL)$ for the datum's actual compactification projection, namely the proper counit projection followed by the open tensor comparison [def-sf-constructible-projection-mates, def-exchange-projection]. Write $a_T(A,B,C):(A\\otimes B)\\otimes C\\xrightarrow{\\sim}A\\otimes(B\\otimes C)$ for the canonical tensor associator conjugated by the datum's tensor normalization, and $\\mu_f(L,N):U(L\\otimes N)\\xrightarrow{\\sim}UL\\otimes UN$ for the canonical normalized tensor-pullback comparison [def-pur-completed-pullback-tensor-comparison]. Then, for every $K\\in D^b_c(X,\\Lambda)$ and $L,N\\in D^b_c(Y,\\Lambda)$, with no additional finite-Tor restriction on these inputs,\n$$\\begin{aligned}\nP(K\\otimes UL,N)\\circ(P(K,L)\\otimes1_N)\n={}&F\\bigl(a_X(K,UL,UN)^{-1}\\bigr)\\circ F(1_K\\otimes\\mu_f(L,N))\\\\\n&\\circ P(K,L\\otimes N)\\circ a_Y(FK,L,N).\n\\end{aligned}$$\nBoth sides are morphisms $(FK\\otimes L)\\otimes N\\to F((K\\otimes UL)\\otimes UN)$. The two final images under $F$ are separate composites. All tensors, associators and pullbacks are the specified completed integral, rationalized, or common-stage operations, according to the coefficient stage. This is an equality of projection maps without an extra invertibility hypothesis. Taking $N$ to be the degree-zero constant quotient $(\\Lambda/J)_Y$ for an ideal $J\\subseteq\\Lambda$ gives reduction inside the original coefficient category; $UN$ is its canonical pulled-back coefficient object. The assertion is for arbitrary $N$, not only constant quotients.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Final finite-reduction clause: tensor-action equation at the common coefficient stage",
+  "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "file": "lean/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+  "line": 1246,
+  "declaration": "WeilConjectures.sixFunctorProjection_reduction_common",
+  "note": "Construction material for a future worker, not a proof certification: prove the proper counit tensor-action identity by transposing both composites, and the open unit tensor identity on pure tensors; paste those identities for the actual compactification map. At the integral stage keep the equation in the coherent system with its completion units before applying the total derived inverse limit. Localization and common-field inclusion preserve that completed equation with the specified tensor associators. No finite-Tor restriction on N or L is present in these exact source declarations; do not silently add one. Right tensor by a constant quotient is reduction inside the original category, not a functor reducing a rational coefficient object to a finite coefficient ring.\n\nExact source docstring (unproved source):\n/-- Finite-reduction compatibility for the datum's common projection maps.\nRight tensor by the constant quotient is reduction kept in the original coefficient\ncategory, as in prop-sf-pf-reduction. The displayed identity is stated for all N,\nso it also retains the identity and zero reductions.\nSource: current blueprint prop-sf-pf-coherence, final clause\n(blueprint: prop-sf-pf-coherence).\nProof: the proper counit projection satisfies tensor associativity by transposing\nboth composites. The open unit tensor comparison satisfies the same identity on\npure tensors. Paste them. At the integral stage retain this equation on coherent\nsystems and their completion units before applying Rlim. Localization and a common\nfinite coefficient field preserve it, with the specified tensor associators. -/\n\nVerbatim retained old parent argument, in source order:\nFor coefficients, [prop-sf-pf-reduction] supplies the finite reduction square on the finite-Tor domains. At field stages use the integral representatives, rationalization and common-stage comparisons of [thm-sf-pf-field]. The (A5) comparisons [def-sf-datum] and primitive-map data [def-exchange-projection] satisfy the intertwining and cocycle hypotheses of [lem-sf-pf-coefficient-realization-transport]. It carries the proved equal composites and their unit identifications to the specified coefficient/site maps; its cocycles give coefficient naturality. [thm-sf-pf-proetale] identifies the realized projection with the same proper counit projection followed by the open tensor map. Integral commutativity was proved directly in step 2; fields use chosen integral representatives, never reduction of field objects. For the finite all-ideal clause, [def-sf-constructible-projection-mates] gives the actual component and its recorded source and target realization comparisons. Conjugate by these comparisons and cancel the inverse/hom composites; the fully faithful preimage equation for the realization equivalence identifies the arrow with fixedComponent. Its tensor-coordinate evaluation is the same canonical proper/open projection. Apply the expanded general coefficient-category compactification tensor-action identity [lem-sf-projection-tensor-coordinate-action], proved from the existing generic library calculation in [lem-pur-finite-projection-action-laws] with third input the degree-zero constant quotient A/J. Functorial preservation of composition separates the pullback tensor comparison and the inverse target associator. The quotient is arbitrary; no perfectness or flatness assumption is imposed. The remaining coefficient clauses retain the preceding plan.\n\nExact sorried source theorem header:\ntheorem sixFunctorProjection_reduction_common (S : SixFunctorDatum D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left]\n    (c : Compactification f.hom.left)\n    (K : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left)\n    (L N : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar\n      Y.obj.left) :\n    sixFunctorProjectionCommonReductionSquare S f c K L N"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates",
+  "def-exchange-projection",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Final finite-reduction clause, expanded into proper counit action, normalized open action, and their common-stage paste"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For algebraically closed l-adic common finite coefficient field constructible derived sheaves the canonical compact support projection is compatible with right tensoring by an arbitrary coefficient object and associators",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"∀ (R : Type u) [inst : CommRing R], (CategoryTheory.coherentTopology LightProfinite).W.IsMonoidal\", \"doc\": \"The coherent Grothendieck topology on the opposite category of light profinite spaces, when lifted to the category of modules over a commutative ring $ R $, satisfies the monoidal property. This means\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"projection\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(tensorAction|[Aa]ssociat|[Rr]eduction)|compactSupportProjection",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Idempotent.lean\", \"line\": \"28\", \"text\": \"we show that idempotent elements of `M →L[R] M` are precisely the projections associated to\"}\n  {\"file\": \"Mathlib/Data/Setoid/Partition.lean\", \"line\": \"396\", \"text\": \"/-- The projection onto the quotient associated to an indexed partition. -/\"}\n  {\"file\": \"Mathlib/Tactic/Simps/Basic.lean\", \"line\": \"773\", \"text\": \"Get the projections used by `simps` associated to a given structure `str`.\"}\n  {\"file\": \"Mathlib/Tactic/Simps/NotationClass.lean\", \"line\": \"91\", \"text\": \"/-- Data needed to generate automatic projections. This data is associated to a name of a projection\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Projections.lean\", \"line\": \"66\", \"text\": \"/-- `Q q` is the complement projection associated to `P q` -/\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor action associativity of a proper adjunction projection followed by open extension tensor comparison at algebraically closed l-adic common finite coefficient field coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.TensorProduct.assoc\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \": A ⊗[S] C ⊗[R] D ≃ₐ[S] A ⊗[S] (C ⊗[R] D)\", \"doc\": \"Let $R$ and $S$ be commutative semirings. Let $S$ be an $R$-algebra, $A$ be an $S$-algebra, and $C$ and $D$ be $R$-algebras. If the scalar actions of $R$ and $S$ on $A$ form a scalar tower, then there\"}\n  {\"name\": \"TensorProduct.tensorTensorTensorAssoc\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Associator\", \"type\": \": M ⊗[R] N ⊗[R] (P ⊗[R] Q) ≃ₗ[R] M ⊗[R] (N ⊗[R] P) ⊗[R] Q\", \"doc\": \"The canonical isomorphism between $ (M \\\\otimes_R N) \\\\otimes_R (P \\\\otimes_R Q) $ and $ M \\\\otimes_R (N \\\\otimes_R P) \\\\otimes_R Q $, constructed by composing the inverse of the standard associator with co\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.assoc\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": (M ⊗[A] P) ⊗[R] Q ≃ₗ[B] M ⊗[A] (P ⊗[R] Q)\", \"doc\": \"Given commutative semirings $ R $, $ A $, and $ B $ with $ A $ and $ B $ as $ R $-algebras, and modules $ M $, $ P $, and $ Q $ equipped with compatible $ A $- and $ B $-module structures (via scalar \"}\n  {\"name\": \"CategoryTheory.ihom.adjunction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \": tensorLeft A ⊣ ihom A\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the left tensoring functor $- \\\\otimes A$ is left adjoint to the internal hom functor $[A, -]$. This establishes a natural isomorphism b\"}\n  {\"name\": \"contractLeft_assoc_coevaluation\", \"module\": \"Mathlib.LinearAlgebra.Coevaluation\", \"type\": \":\\n  (contractLeft K V).rTensor _ ∘ₗ\\n      (TensorProduct.assoc K _ _ _).symm.toLinearMap ∘ₗ (coevaluation K V).lTensor (Module.Dual K V) =\\n    (TensorProduct.lid K _).symm.toLinearMap ∘ₗ (TensorProduct.rid K _).toLinearMap\", \"doc\": \"For a commutative semiring $ K $ and an $ K $-module $ V $, the composition of the contraction map $ \\\\text{contractLeft} $ with the right tensor product of the inverse associator isomorphism and the c\"}\n  {\"name\": \"Coalgebra.TensorProduct.assoc\", \"module\": \"Mathlib.RingTheory.Coalgebra.TensorProduct\", \"type\": \": (M ⊗[S] N) ⊗[R] P ≃ₗc[S] M ⊗[S] (N ⊗[R] P)\", \"doc\": \"The canonical coalgebra isomorphism between $(M \\\\otimes_S N) \\\\otimes_R P$ and $M \\\\otimes_S (N \\\\otimes_R P)$, establishing associativity of tensor products in the category of coalgebras over a commutat\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.rTensor_tensor\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"[Module R P'] [IsScalarTower R A P'] (g : P →ₗ[A] P') :\\n  g.rTensor (M ⊗[R] N) = assoc R A A P' M N ∘ₗ map (g.rTensor M) id ∘ₗ (assoc R A A P M N).symm.toLinearMap\", \"doc\": \"Given commutative semirings $ R $, $ A $, and modules $ M $, $ N $, $ P $, $ P' $ with compatible $ A $-module structures via the scalar tower $ R \\\\to A $, and an $ A $-linear map $ g: P \\\\to P' $, the\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": A ⊗[R] (M ⊗[R] N) ≃ₗ[A] (A ⊗[R] M) ⊗[A] (A ⊗[R] N)\", \"doc\": \"Let $R$ and $A$ be commutative semirings, let $A$ be an $R$-algebra, and let $M$ and $N$ be $R$-modules. There is a canonical $A$-linear isomorphism between the extension of scalars of the tensor prod\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor action associativity of a proper adjunction projection followed by open extension tensor comparison at algebraically closed l-adic common finite coefficient field coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*(fullyFaithful|fully_faithful)|extensionByZero|projectionMap",
+   "results": "Search log 2026-10-27T07:59:36Z; directory CategoryTheory; 0 hit(s): ",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open immersion extension by zero has invertible adjunction unit and its derived tensor projection restricts to the identity after the unit identifications",
+   "results": "Search log 2026-10-27T07:59:36Z; directory all Mathlib; 8 hit(s): AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, CategoryTheory.ihom.coev, CategoryTheory.Adjunction.unitAsIsoOfIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app', AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Full",
+   "results": "Search log 2026-10-27T07:59:36Z; directory all Mathlib; 12 hit(s): CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful, CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful, CategoryTheory.Adjunction.counitSplitMonoOfRFull, CategoryTheory.Adjunction.counit_isSplitMono_of_R_full, CategoryTheory.Adjunction.full_L_of_isSplitEpi_unit_app, CategoryTheory.Adjunction.full_R_of_isSplitMono_counit_app, CategoryTheory.Adjunction.unitSplitEpiOfLFull, CategoryTheory.Adjunction.unit_isSplitEpi_of_L_full",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical open extension by zero on completed integral rationalized and common finite field constructible derived categories is fully faithful and its tensor projection is normalized by the open adjunction unit",
+   "results": "Search log 2026-10-27T07:59:37Z; directory all Mathlib; 8 hit(s): CondensedSet.LocallyConstant.functorFullyFaithful, LightCondSet.LocallyConstant.functorFullyFaithful, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, LightCondSet.fullyFaithfulSequentialToLightCondSet, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and restriction for l adic derived complete sheaves preserve the open unit tensor comparison at a common finite coefficient field",
+   "results": "Search log 2026-10-27T07:59:38Z; directory all Mathlib; 8 hit(s): AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(tensorAction|associat)|compactSupportProjection",
+   "results": "Search log 2026-10-27T07:59:50Z; directory CategoryTheory; 0 hit(s): ",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right tensor action associativity for the proper counit projection and the compact support projection at common finite coefficient fields",
+   "results": "Search log 2026-10-27T07:59:51Z; directory all Mathlib; 8 hit(s): CategoryTheory.MonoidalCategory.MonoidalRightAction.actionAssocNatIso, CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_right, Coalgebra.TensorProduct.assoc, CoalgCat.MonoidalCategoryAux.counit_tensorObj, TensorProduct.counit_def, Bimod.TensorBimod.right_assoc', Coalgebra.rTensor_counit_comul, CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_left",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support projection formula map for algebraically closed l adic constructible sheaves obeys the right tensor associativity action law for arbitrary three objects",
+   "results": "Search log 2026-10-27T07:59:52Z; directory all Mathlib; 8 hit(s): LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*assoc|frobenius.*assoc|rightAdjoint.*[Pp]rojection",
+   "results": "Search log 2026-10-27T08:00:45Z; directory CategoryTheory; 1 hit(s): Mathlib/CategoryTheory/RegularCategory/Basic.lean",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"associativity\"",
+   "results": "Search log 2026-10-27T08:00:46Z; directory all Mathlib; 0 hit(s): ",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint projection map associated to a strong monoidal functor satisfies associativity with respect to tensoring the coefficient twice",
+   "results": "Search log 2026-10-27T08:00:46Z; directory all Mathlib; 8 hit(s): CategoryTheory.Functor.Monoidal.map_rightUnitor_assoc, CategoryTheory.Functor.Monoidal.μ_fst_assoc, CategoryTheory.Functor.Monoidal.μ_snd_assoc, CategoryTheory.Functor.Monoidal.commTensorRight, CategoryTheory.comp_rightAdjointMate_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.MonoidalCategory.MonoidalRightAction.actionAssocNatIso, CategoryTheory.Functor.LaxRightLinear.μᵣ_associativity_assoc",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a strong monoidal left adjoint U with right adjoint R the counit-defined projection R M tensor L to R (M tensor U L) obeys the right tensor action associativity equation",
+   "results": "Search log 2026-10-27T08:00:47Z; directory all Mathlib; 8 hit(s): CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor with a right adjoint induces a lax module action on its right adjoint through the counit and the action constraint is associative",
+   "results": "Search log 2026-10-27T08:01:50Z; directory all Mathlib; 8 hit(s): CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Functor.RightLinear.toLaxRightLinear, CategoryTheory.Functor.LaxRightLinear.μᵣ, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Functor.LaxRightLinear, CategoryTheory.Adjunction.instIsMonoidal",
+   "date": "2026-10-27",
+   "verdict": "no match: these generic adjunction, tensor, sheaf restriction or algebra results do not give the specified common-stage compactification projection equation with its canonical coefficient comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-pf-coherence",
+  "date": "2026-10-27",
+  "group": "NB"
+ },
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.sixFunctorProjection_reduction_common",
+   "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+   "file": "lean/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+   "line": 1246,
+   "quarantine_file": "quarantine/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+   "quarantine_line": 1246,
+   "statement": "theorem sixFunctorProjection_reduction_common (S : SixFunctorDatum D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left]\n    (c : Compactification f.hom.left)\n    (K : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left)\n    (L N : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar\n      Y.obj.left) :\n    sixFunctorProjectionCommonReductionSquare S f c K L N",
+   "proposed_module": "Sheaf.Paper.ProjectionReductionCommon",
+   "status": "sorried",
+   "note": "Exact source allocation only; not a verified attachment or a separately extracted module. Source proof contains sorry; no compilation performed."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Final sentence: compatibility with finite reduction; common-stage tensor-action refinement of the proper/open mate calculation",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "proof": [
+  {
+   "text": "Use the specified common-stage categories and actual maps, rather than an arbitrary isomorphic projection. Put R=Rp_*, V=Lp^*, J=j_!, Q=Lj^*, so F=RJ and U=QV through the specified pullback compositor. The construction stage of the datum at these coefficients [def-sf-operation-stages] supplies, together with the operations, the ordinary adjunctions V adjoint to R (pullback/direct image, also recorded in [def-exchange-projection]) and J adjoint to Q (extension by zero for the open immersion j with its adjunction to restriction), with their units and counits. The canonical mu maps for V,Q,U satisfy monoidal associativity, units and pullback-composition compatibility by [lem-pur-derived-pullback-tensor-iso]; the associators are natural on every common-stage arrow by [lem-pur-common-stage-tensor-associator-natural]. Thus the monoidal hypotheses needed below hold for the specified normalized tensors. All inputs in this proof are in the common-stage field category; its tensor is defined on arbitrary bounded constructible inputs. No projection-formula isomorphism or finite-Tor reduction assertion is invoked.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-sf-operation-stages",
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-common-stage-tensor-associator-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Proper/open mate description and final coefficient clause: fix the actual monoidal operation data"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-unit-adjunct-tensor-action] to J'=R^op left adjoint to Q'=V^op on the opposite monoidal categories. Their associators are the opposites of the inverse original associators, and the inverse tensor comparison of Q' is the opposite of mu_p^{-1}. Its map kappa, reversed back to the original categories, is pi_{p;M,L}:RM tensor L -> R(M tensor VL): the defining transpose becomes (epsilon_{p,M} tensor 1) mu_p, exactly the counit-defined map in [def-exchange-projection]. Reversing the lemma's associativity equation therefore gives\npi(M tensor VL,N)(pi(M,L) tensor 1_N)\n=R(a_barX(M,VL,VN)^{-1}) R(1_M tensor mu_p(L,N)) pi(M,L tensor N) a_Y(RM,L,N).\nThis applies to arbitrary M,L,N in the displayed domains and assumes no invertibility of pi. Passing to opposite categories only reverses the specified arrows and equations; it introduces no geometric hypothesis.",
+   "uses": [
+    "lem-pur-unit-adjunct-tensor-action",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Proper factor: transpose the two tensor-action routes under the proper adjunction"
+   }
+  },
+  {
+   "text": "The target barX of j is locally Noetherian by [pqf-lem-locnoeth-lft]: its structure map is of finite type, since p is proper and Y is of finite type over the field k. Thus j is quasi-compact by [lem-sfb-noetherian-open-immersion-qc]. Check the open map's normalization at the coefficient stage actually used. For complete integral inputs, [lem-pur-completed-open-tensor-system-realization] identifies the actual completed gamma with the total limit of the whole normalized open tensor system, retaining quotient transitions and completion units; after the open unit and restriction/tensor identifications, Q gamma is the identity. Consequently gamma^{-1}:J(M tensor QH) -> JM tensor H has adjunct mu_{JM,H}^{-1}(v_M tensor 1), since Q(gamma^{-1}) composed with v_{M tensor QH} is this map by naturality of the open unit. At rational coefficients this equality is the image of the integral equality: [def-weil-rationalization-karoubi] is raw scalar localization, with the same objects. At common coefficients, choose integral representatives over a common finite coefficient field for M,H. The supplied scalar-extension comparisons of [def-exchange-projection] intertwine units and tensor/open maps, and [def-sf-operation-stages] states that its coefficient comparisons preserve both ordinary adjunction units and counits and that rationalization and common-stage inclusion preserve these maps; conjugating the adjunct equality cancels each interior comparison with its inverse. Further extension gives the same equation by their cocycle. Every common-stage object and arrow has such a representative by [def-weil-algebraically-closed-coefficients]. Hence this is the adjunct characterization of the actual common-stage gamma^{-1}. The completed realization statement allows arbitrary inputs, without a finite-Tor assumption; this reasoning uses a whole-system equality, not faithfulness of individual finite evaluations.",
+   "uses": [
+    "lem-pur-completed-open-tensor-system-realization",
+    "def-weil-rationalization-karoubi",
+    "def-exchange-projection",
+    "def-sf-operation-stages",
+    "def-weil-algebraically-closed-coefficients",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-noetherian-open-immersion-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Open factor and final coefficient clause: unit normalization before completion, localization and common-field inclusion"
+   }
+  },
+  {
+   "text": "Now apply [lem-pur-unit-adjunct-tensor-action] in the original common-stage categories to J=j_!, Q=Lj^*. Step 3 identifies its kappa with gamma^{-1}. Invert the lemma's associativity equation and use functoriality to obtain, for arbitrary M,H1,H2,\ngamma(M tensor QH1,H2)(gamma(M,H1) tensor 1_H2)\n=J(a_X(M,QH1,QH2)^{-1}) J(1_M tensor mu_j(H1,H2)) gamma(M,H1 tensor H2) a_barX(JM,H1,H2).\nOnly the open tensor isomorphism is inverted here. It is supplied at these stages and its completed realization was checked in Step 3; no compact-support or proper projection is inverted.",
+   "uses": [
+    "lem-pur-unit-adjunct-tensor-action",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Open factor: the unit-adjunct tensor-action equation"
+   }
+  },
+  {
+   "text": "Paste these two equations for the given K,L,N. Here is the actual cancellation calculation, temporarily suppressing only the associators appearing in Steps 2 and 4. Write g(K,H)=gamma_{K,H} for the open tensor map before the QV=U identification, and pi for the proper projection. By definition P(K,L)=R(g(K,VL))pi(JK,L). Naturality of pi in M gives\npi(J(K tensor QVL),N)(R(g(K,VL)) tensor 1_N)\n=R(g(K,VL) tensor 1_VN)pi(JK tensor VL,N).\nThus the left route is\nR(g(K tensor QVL,VN)(g(K,VL) tensor 1_VN))pi(JK tensor VL,N)(pi(JK,L) tensor 1_N).\nSubstitute the open law from Step 4 and the proper law from Step 2. Naturality of g in its second input, applied to mu_p(L,N), moves this comparison inside J; the remaining tensor comparison is mu_j(VL,VN) Q(mu_p(L,N)). Under QV=U this is precisely mu_f(L,N), by the pullback-composition compatibility of [lem-pur-derived-pullback-tensor-iso]. Restore the displayed associators: naturality of a_barX cancels the interior a_barX and its inverse, leaving a_Y on the source and RJ(a_X^{-1}) on the target. The resulting route is F(a_X^{-1}) F(1_K tensor mu_f(L,N)) P(K,L tensor N) a_Y. This proves the required equation for the actual proper/open composite.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-common-stage-tensor-associator-natural"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Final coefficient clause: paste the proper and open tensor-action equations with the specified compositors"
+   }
+  },
+  {
+   "text": "Finally conjugate every vertex by the datum's recorded support and tensor realization comparisons. The projection is the actual compactification component of [def-sf-constructible-projection-mates], not a newly chosen isomorphism. Consecutive comparison inverse/hom pairs cancel on both routes, so the equation of Step 5 becomes the equation for the datum's normalized F,U,P,a and mu. Functoriality F(b composed with a)=F(b) composed with F(a) keeps the two final images under F separate, in the order written in the statement. Both routes have source (FK tensor L) tensor N and target F((K tensor UL) tensor UN).",
+   "uses": [
+    "def-sf-constructible-projection-mates",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Final coefficient clause: recorded realization comparisons and separated functor images"
+   }
+  },
+  {
+   "text": "The proof imposed no condition on N beyond being an object of the common coefficient category. Substitute the degree-zero constant object N=(Lambda/J)_Y; its U-image is the specified pulled-back coefficient object. The cases J=0 and J=Lambda respectively give the unchanged coefficient object and the zero object, so the identity and zero reductions are included. This is substitution inside the same category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Final clause: arbitrary right tensor input and constant-quotient specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates",
+  "def-sf-operation-stages",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-common-stage-tensor-associator-natural",
+  "lem-pur-completed-open-tensor-system-realization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-unit-adjunct-tensor-action",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-projection-reduction-common",
+  "worker": "stage1",
+  "summary": "Kept the exact imported common-stage statement and all arbitrary-input clauses. Expanded the proper counit tensor-action law using the existing unit-adjunct law on opposite categories, checked the open map normalization through whole-system completion, scalar localization and common-field inclusion, and wrote out the proper/open paste and normalization cancellations. Reused existing DAG statements throughout; no new nodes and no Lean work.",
+  "blueprint": "Realizes the final coefficient-compatibility sentence of prop-sf-pf-coherence using its proper counit/open unit route; the imported item source note specifies the arbitrary right tensor action and completed/common coefficient normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-unit-adjunct-tensor-action",
+    "why": "Generic monoidal-adjunction action identity; used on opposite categories for the proper factor and directly for the open factor. The unit gives the geometric mate route but not this abstract coherence calculation."
+   },
+   {
+    "node": "lem-pur-completed-open-tensor-system-realization",
+    "why": "Generic completed open tensor normalization for arbitrary complete inputs, including whole-system units and transitions. The current unit supplies coefficient transport but not the completion realization theorem."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical monoidal and composition coherence of the specified completed/rational/common pullback tensor comparison, needed to identify the pasted comparison with mu_f."
+   },
+   {
+    "node": "lem-pur-common-stage-tensor-associator-natural",
+    "why": "Naturality of the prescribed common-stage associator on all arrows, used when cancelling the interior associators in the paste."
+   },
+   {
+    "node": "lem-sfb-noetherian-open-immersion-qc",
+    "why": "Generic quasi-compactness of open immersions into locally Noetherian schemes; checks the explicit geometric hypothesis of the completed-open realization theorem, which this unit does not restate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-unit-adjunct-tensor-action",
+  "lem-pur-completed-open-tensor-system-realization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-common-stage-tensor-associator-natural",
+  "lem-sfb-noetherian-open-immersion-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NY-27af71489",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-27af71489 (reviewer sub-agent of L); spot-checked: I read the whole item (unchanged statement, matching Lean sixFunctorProjectionCommonReductionSquare, ProjectionFormulaCoherence.lean:1205), all 7 steps, every cited statement, prop-sf-pf-coherence.proof.md and the unit. The delivery has no new nodes, and proof_deps equals the union of the step uses. Step 2 checked by hand: on the opposite categories, R^op is left adjoint to V^op, the unit becomes ε_p, the inverse tensor comparison becomes μ_p^{-1} and κ becomes the counit-defined π_p. Reversing the lemma's equation gives the stated proper law. Step 3: X̄ is locally Noetherian by 01T6, so j is quasi-compact. In the realization lemma, j^*γ^c is the identity, so the adjunct of γ^{-1} is μ^{-1}(v⊗1), i.e. κ=γ^{-1}. The Lean sixFunctorOpenProjectionInverse defines exactly this transpose. Step 4: inverting the lemma's equation is correct. Step 5: in the paste, the interior a_X̄ cancels and μ_j·Q(μ_p)=μ_f by the composition clause of lem-pur-derived-pullback-tensor-iso. Steps 6 and 7 are elementary (J=0 or Λ). Edge cases checked: K, L, N = 0, N = unit, f = id, Y = ∅. Not a duplicate of the common comparison-equations nodes, whose pentagon is the support-compositor equation. FIX (C4/E1): steps 1 and 3 used the common-stage open adjunction j_!⊣j^* and its unit, which is a hypothesis of lem-pur-unit-adjunct-tensor-action, but cited def-fix-six-functor-datum and def-exchange-projection. Those supply only Lu^*⊣Ru_*, and def-sf-datum (A1) has no j_!⊣j^*. Steps 1 and 3 and proof_deps now cite def-sf-operation-stages (Lean SixFunctorPushStage.openAdjunction, SixFunctorOperationDatumStages.lean:168; its comparisons preserve both adjunctions' units and counits). The added citation creates no cycle. Batch 5: lem-pod-integral-system-reduction-fully-faithful (via the associator-naturality node) and lem-pod-unrestricted-normalized-reconstruction (via the completed-open realization) are generic coefficient-calculus facts, not steps of Poincaré duality or the trace formula. Both are already in the closure of the item's unchanged stmt_deps (185 such nodes), and every cited proof dependency adds 0, so I accept both. Tool uses accepted: unit-adjunct action, derived pullback-tensor iso, common associator naturality and the Mathlib leaves; the completed-open realization is on the route (sk-prop-sf-pf-reduction).; 1 file(s) fixed by the reviewer"
+ }
+}

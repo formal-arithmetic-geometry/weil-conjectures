@@ -1,0 +1,223 @@
+{
+ "id": "lem-weil-pbc-spectral-page-zero-propagation",
+ "kind": "statement",
+ "title": "Zero entries propagate through all spectral-sequence pages",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $(E_r^{p,q},d_r)_{r\\ge2}$ be a cohomological spectral sequence [def-sp-spectral-sequence] indexed by $(p,q)\\in\\mathbb Z^2$, with $d_r:E_r^{p,q}\\to E_r^{p+r,q-r+1}$ and specified isomorphisms from the homology of page $r$ to page $r+1$. For every $s\\ge2$, every $(p,q)\\in\\mathbb Z^2$, and every $r\\ge s$, if $E_s^{p,q}$ is a zero object, then $E_r^{p,q}$ is a zero object. Consequently, if $E_2^{p,q}=0$ whenever $p<0$ or $q<0$, and also $E_2^{p,q}=0$ whenever $q>0$, then $E_r^{p,q}=0$ whenever $p<0$ or $q\\ne0$, for every $r\\ge2$. In particular every eventually stationary term in any positive row is zero.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0BDV (lemma-relate-boundedness), proof hint: a zero entry stays zero on every later page; Tag 011N (definition-spectral-sequence), page homology. This states the propagation argument of the row-collapse proof, without an abutment or edge map."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t\\ge2$ and $(p,q)\\in\\mathbb Z^2$. The page differentials give the short complex $S=(E_t^{p-t,q+t-1}\\xrightarrow{d_t}E_t^{p,q}\\xrightarrow{d_t}E_t^{p+t,q-t+1})$: the composite is zero because page $t$ is a complex [def-sp-spectral-sequence]. If $E_t^{p,q}$ is a zero object, the first assertion of [lem-weil-pbc-short-complex-zero-homology] says $H(S)$ is a zero object. The specified page isomorphism $\\phi:H(S)\\xrightarrow{\\sim}E_{t+1}^{p,q}$ then makes $E_{t+1}^{p,q}$ a zero object: for any object $T$, composition with $\\phi$ and $\\phi^{-1}$ gives bijections on both Hom sets, so their uniqueness for $H(S)$ gives uniqueness for $E_{t+1}^{p,q}$.",
+   "uses": [
+    "def-sp-spectral-sequence",
+    "lem-weil-pbc-short-complex-zero-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011N (definition-spectral-sequence), page homology; Tag 0BDV (lemma-relate-boundedness), proof hint."
+   }
+  },
+  {
+   "text": "Fix $s\\ge2$ and $(p,q)$ with $E_s^{p,q}$ a zero object. Induct on $k\\in\\mathbb N$ to show that $E_{s+k}^{p,q}$ is a zero object. At $k=0$ this is the hypothesis. For the successor, use Step 1 with $t=s+k\\ge2$ and the induction hypothesis, obtaining $E_{s+k+1}^{p,q}=0$. Given any integer $r\\ge s$, the nonnegative integer $r-s$ equals some $k\\in\\mathbb N$ and $r=s+k$, proving the first assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0BDV (lemma-relate-boundedness), proof hint, expanded as induction on the page difference."
+   }
+  },
+  {
+   "text": "Under the two page-two vanishing hypotheses, fix $(p,q)$ with $p<0$ or $q\\ne0$. If $p<0$ or $q<0$, the first hypothesis gives $E_2^{p,q}=0$. In the remaining case $q\\ne0$ and $q\\ge0$, hence $q>0$, so the second hypothesis gives the same vanishing. Step 2 with $s=2$ yields $E_r^{p,q}=0$ for every $r\\ge2$. In particular for $q>0$ every term is zero, so any eventually stationary value, represented by any sufficiently late page term, is a zero object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0BDV (lemma-relate-boundedness), proof hint, applied to the given page-two support."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-spectral-sequence",
+  "lem-weil-pbc-short-complex-zero-homology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0BDV (lemma-relate-boundedness), proof hint, with the page-homology definition Tag 011N (definition-spectral-sequence)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isZero.*page|page.*isZero|vanish|zero_of",
+   "results": "No hits; searched Mathlib/Algebra/Homology/SpectralSequence",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are single-complex support or differentials; no propagation theorem for integer-bigraded spectral-sequence pages"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Support of all later pages of a cohomological spectral sequence is contained in support of its initial page",
+   "results": "CochainComplex.isLE_of_le, CochainComplex.isGE_of_ge, CochainComplex.isStrictlyGE_of_iso, CochainComplex.isStrictlyGE_of_ge, CochainComplex.isStrictlyLE_of_le, CochainComplex.isStrictlyGE_iff, Module.support_of_exact, CochainComplex.isStrictlyGE_shift",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are single-complex support or differentials; no propagation theorem for integer-bigraded spectral-sequence pages"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence, Limits.IsZero",
+   "results": "No hits; loogle: unknown identifier 'Limits.IsZero'",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a term of a spectral sequence in an abelian category is zero on page two then the same bidegree is zero on every later page",
+   "results": "HomologicalComplex.mapBifunctor₁₂.d₂_eq_zero, HomologicalComplex₂.d₂_eq_zero, HomologicalComplex.ιMapBifunctorOrZero_eq_zero, HomologicalComplex.mapBifunctor₂₃.d₂_eq_zero, HomologicalComplex.mapBifunctor₂₃.ιOrZero_eq_zero, HomologicalComplex.mapBifunctor₁₂.ιOrZero_eq_zero, HomologicalComplex.mapBifunctor₁₂.d₃_eq_zero, HomologicalComplex₂.d₂_eq_zero'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are single-complex support or differentials; no propagation theorem for integer-bigraded spectral-sequence pages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectral sequence zero entries persist under passage to homology on subsequent pages",
+   "results": "HomologicalComplex.fromOpcycles_eq_zero, CochainComplex.isZero_of_isLE, CochainComplex.isZero_of_isGE, HomologicalComplex.isZero_single_obj_homology, HomologicalComplex.homologyι_comp_fromOpcycles, HomologicalComplex.fromOpcycles_d_assoc, HomologicalComplex.homologyι_comp_fromOpcycles_assoc, HomologicalComplex.fromOpcycles_d",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are single-complex support or differentials; no propagation theorem for integer-bigraded spectral-sequence pages"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence, CategoryTheory.Limits.IsZero",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are single-complex support or differentials; no propagation theorem for integer-bigraded spectral-sequence pages"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*[Pp]age|[Pp]age.*isZero|isZero_homology_of_isZero",
+   "results": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean (searched Mathlib/Algebra/Homology)",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem for arbitrary integer-bigraded spectral sequences and arbitrary starting page s; short-complex and spectral-object hits are ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A spectral sequence term that is zero is zero on every subsequent page",
+   "results": "FormalMultilinearSeries.congr_zero, HomologicalComplex.dFrom_eq_zero, CategoryTheory.ProjectiveResolution.π_f_succ, CategoryTheory.ShortComplex.opcyclesMap'_zero, ChainComplex.chainComplex_d_succ_succ_zero, spectralValueTerms_of_natDegree_le, CochainComplex.cochainComplex_d_succ_succ_zero, CategoryTheory.ShortComplex.rightHomologyMap'_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem for arbitrary integer-bigraded spectral sequences and arbitrary starting page s; short-complex and spectral-object hits are ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence, CategoryTheory.Limits.IsZero",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem for arbitrary integer-bigraded spectral sequences and arbitrary starting page s; short-complex and spectral-object hits are ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A zero entry of a spectral sequence remains zero on every later page by induction using page homology",
+   "results": "HomologicalComplex.ιMapBifunctorOrZero_eq_zero, HomologicalComplex.mapBifunctor₂₃.ιOrZero_eq_zero, HomologicalComplex.mapBifunctor₁₂.ιOrZero_eq_zero, dNext_eq_zero, HomologicalComplex₂.d₂_eq_zero, HomologicalComplex₂.d₁_eq_zero, HomologicalComplex₂.d₂_eq_zero', HomologicalComplex.isZero_double_X",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem for arbitrary integer-bigraded spectral sequences and arbitrary starting page s; short-complex and spectral-object hits are ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.isZero_homology_of_isZero_X₂",
+   "results": "CategoryTheory.ShortComplex.isZero_homology_of_isZero_X₂",
+   "date": "2026-10-23",
+   "verdict": "match for the existing short-complex leaf, not for page propagation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of a short complex in an abelian category is a zero object when its middle object is zero",
+   "results": "CategoryTheory.ShortComplex.isZero_homology_of_isZero_X₂, CategoryTheory.ShortComplex.hasHomology_of_zeros, CategoryTheory.ShortComplex.HomologyData.ofZeros, CategoryTheory.ShortComplex.HasRightHomology.of_zeros, CategoryTheory.ShortComplex.HasLeftHomology.of_zeros, CategoryTheory.ShortComplex.LeftHomologyData.ofZeros_H, CategoryTheory.ShortComplex.HomologyData.ofZeros_left, CategoryTheory.ShortComplex.RightHomologyData.ofZeros_H",
+   "date": "2026-10-23",
+   "verdict": "match for the existing short-complex leaf, not for page propagation"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero|vanish|support",
+   "results": "No hits (searched Mathlib/Algebra/Homology/SpectralSequence)",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem for arbitrary integer-bigraded spectral sequences and arbitrary starting page s; short-complex and spectral-object hits are ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Support of later pages of a spectral sequence is contained in the support of each earlier page",
+   "results": "CochainComplex.isGE_of_ge, CochainComplex.isLE_of_le, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, HomologicalComplex.IsStrictlySupported, HomologicalComplex.instIsSupportedOfIsStrictlySupported, HomologicalComplex.IsStrictlySupportedOutside, HomologicalComplex.IsSupportedOutside, HomologicalComplex.IsSupported",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem for arbitrary integer-bigraded spectral sequences and arbitrary starting page s; short-complex and spectral-object hits are ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-first-quadrant-row-collapse",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-cancellation",
+   "place": "First paragraph, sentence \"the spectral sequence ... collapses to the q=0 row and yields\": propagation of page-two support; old row-collapse Step 1.",
+   "via": [
+    "lem-weil-pbc-first-quadrant-row-collapse"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-weil-pbc-spectral-page-zero-propagation",
+  "worker": "stage1",
+  "summary": "Expanded the zero-propagation hint into the short-complex successor calculation, induction for arbitrary s and integer bidegrees, and the off-row support consequence. Reused the existing short-complex Mathlib leaf; no new nodes or statement changes. Project propagation declarations only cover natural first-quadrant indices and page two, so are not exact attachments.",
+  "blueprint": "Latest blueprint lemma-weil-pbc-cancellation.proof.md, part (1), sentence saying the Grothendieck spectral sequence collapses to row q=0: this item proves only that the initial vanishing persists on every page, not the edge-map or abutment identification."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-218a5065e",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-218a5065e (reviewer sub-agent of L); spot-checked: Ordinary 3-step split with no new nodes; the item statement and stmt_deps are unchanged from live, where the item is still unsplit (not superseded). Source checked: Stacks homology.tex lemma-relate-boundedness (0BDV), whose hint 'E_r^{p,q}=0 implies E_{r'}^{p,q}=0 for r'>=r' is exactly the first assertion; 011N gives the page homology. The blueprint main-20261015 lemma-weil-pbc-cancellation, first paragraph, gives the q=0 row collapse; the item only proves persistence of the page-2 support, matching its blueprint.from via lem-weil-pbc-first-quadrant-row-collapse. Step 1: specializing def-sp-spectral-sequence to Z^2 with r0=2 and bidegree (r,1-r) gives the unique neighbours (p-t,q+t-1) and (p+t,q-t+1), so the homology at (p,q) is the homology of the displayed short complex. The first clause of lem-weil-pbc-short-complex-zero-homology (isZero_homology_of_isZero_X2) makes it zero, and the page isomorphism carries this to the next page via the Hom-set bijections. Step 2: properly set-up induction on k with r=s+k. Step 3: correct case split, no abutment claimed. Edge cases checked: r=s; r=s+1; row 0 with p>=0, where nothing is claimed; no converse used. lem-sp-page-induction concerns morphisms that are isomorphisms on all of E_2, so it is not a duplicate. The project lemma isZero_page_of_isZero_page_two covers only N bidegrees and page 2, so it is not an exact attachment. Advisory: the report lists citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SpectralPageZeroPropagation",
+  "declaration": "CategoryTheory.SpectralSequence.spectral_page_zero_propagation",
+  "file": "lean/Sheaf/Algebra/Homology/SpectralPageZeroPropagation.lean",
+  "statement": "theorem spectral_page_zero_propagation {C : Type u} [Category.{v} C] [Abelian C] (E : E₂CohomologicalSpectralSequence C) : (∀ (s : ℤ) (hs : 2 ≤ s) (p q r : ℤ) (hsr : s ≤ r), IsZero ((E.page s hs).X (p, q)) → IsZero ((E.page r (le_trans hs hsr)).X (p, q))) ∧ ((∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((E.page 2).X (p, q))) → (∀ p q : ℤ, 0 < q → IsZero ((E.page 2).X (p, q))) → (∀ (r : ℤ) (hr : 2 ≤ r) (p q : ℤ), p < 0 ∨ q ≠ 0 → IsZero ((E.page r hr).X (p, q))) ∧ ∀ p q : ℤ, 0 < q → ∀ Z : C, (∃ (R : ℤ) (hR : 2 ≤ R), ∀ (r : ℤ) (hr : R ≤ r), Nonempty ((E.page r (le_trans hR hr)).X (p, q) ≅ Z)) → IsZero Z)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6ede1ab9",
+  "group": "NI",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BDV hint/011N: E₂CohomologicalSpectralSequence C (ℤ×ℤ, r₀=2, up'(r,1-r)); propagation for arbitrary s≥2, r≥s; page-two hypotheses only as antecedents; support p<0∨q≠0 on all pages r≥2; stationary positive-row value via ∃R, ∀r≥R, E_r≅Z → IsZero Z. Independent universes u v, no extra instances. Snapshot node differs from live only in lean; lean.statement verbatim in file; stmt_deps def-sp-abelian/def-sp-spectral-sequence are mathlib records and both used. Docstrings carry source, blueprint tag, proof steps; sorry only; private import = proof_dep short-complex module. Project isZero_page_of_isZero_page_two is ℕ×ℕ/page 2 only, not exact. Citer first-quadrant-row-collapse uses the same interface. Report has Worker report and Second reading by NI. No compile run (no change). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T033846-L-128223",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.SpectralSequence.spectral_page_zero_propagation"
+  ],
+  "sorry_after": []
+ }
+}

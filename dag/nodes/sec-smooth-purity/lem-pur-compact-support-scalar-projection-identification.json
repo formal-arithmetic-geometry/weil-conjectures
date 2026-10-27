@@ -1,0 +1,479 @@
+{
+ "id": "lem-pur-compact-support-scalar-projection-identification",
+ "kind": "statement",
+ "title": "Identification of scalar projection squares through completion",
+ "statement": "Fix the finite-field datum of [def-pur-conventions], with algebraic closure $k$ of characteristic $p$, a prime $\\ell\\ne p$, and finite extensions $E\\subset F$ of $\\mathbf Q_\\ell$. Write $A=\\mathcal O_E$, $B=\\mathcal O_F$, $t=\\varpi_E$, $v=\\varpi_F$ and $e\\geq1$ with $tB=v^eB$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be separated of finite type between separated finite-type $k$-schemes, and fix a compactification $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p_c}Y)$ with $j$ open and $p_c$ proper [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. On the small pro-etale sites [def-weil-pbc-proetale-site], put $R_W=\\widehat{\\mathcal O}_{E,W}$, $S_W=\\widehat{\\mathcal O}_{F,W}$ [def-weil-completed-integral-coefficients] and $C_W=-\\otimes^L_{R_W}S_W$ [lem-pur-derived-change-of-rings]. Let $M\\in D^b_{ctf}(X,\\mathcal O_E)$, the derived-complete bounded constructible category with a uniform Tor-amplitude interval for all reductions [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude]. Write $A_n=A/t^n$, $B_n=B/t^nB=B/v^{en}$, $M_n=M\\otimes^L_{R_X}(A_n)_X$, and $C_W^{(n)}=-\\otimes^L_{(A_n)_W}(B_n)_W$. For $H=E,F$, let $P_H^c$ be the integral compact-support functor attached to $c$, defined as the total derived inverse limit of its finite separately derived proper/open images [def-weil-integral-rational-qbar-compact-support]. Let $K\\in D^b_{ctf}(Y,\\mathcal O_E)$. Use the completed integral pullback and completed tensor [def-weil-derived-pullback-tensor-hom]. Let $\\gamma_N:C_YP_E^cN\\to P_F^cC_XN$ be the map $r_e^{-1}\\mathsf R(q_\\bullet^c)\\tau$ defined by the strict scalar mate and the normalized limit construction [lem-pur-compact-support-strict-scalar-mate, lem-pur-compact-support-scalar-limit-reduction]. Let $\\operatorname{PF}_H^c$ denote the actual counit-defined proper/open compact-support projection transformation for $H=E,F$ [def-exchange-projection]. Then the following two composites agree, under the canonical scalar tensor and scalar pullback identifications:\n$$\nC_Y(P_E^cM\\widehat\\otimes K)\n\\xrightarrow{C_Y\\operatorname{PF}_E^c}\nC_YP_E^c(M\\widehat\\otimes f_E^*K)\n\\xrightarrow{\\gamma_{M\\widehat\\otimes f_E^*K}}\nP_F^cC_X(M\\widehat\\otimes f_E^*K)\n$$\nand\n$$\nC_Y(P_E^cM\\widehat\\otimes K)\\cong C_YP_E^cM\\widehat\\otimes C_YK\n\\xrightarrow{\\gamma_M\\widehat\\otimes1}P_F^cC_XM\\widehat\\otimes C_YK\n\\xrightarrow{\\operatorname{PF}_F^c}P_F^c(C_XM\\widehat\\otimes f_F^*C_YK).\n$$\nTheir equality already holds for the finite quotient projection maps on the ringed diagram sites. At integral coefficients, under the canonical direct-image/total-limit and quasi-compact-open extension/total-limit comparisons, those finite proper/open maps give the completed-adjunction projection itself, with its actual units and counits. More precisely, for each coefficient ring $H=\\mathcal O_E,\\mathcal O_F$, its completion reflector $\\widehat{(-)}$ with unit $\\eta$ and proper direct image $P=Rp_{c*,H}$ satisfy, by [lem-pur-compact-support-completed-projection-coherence] applied to $u=p_c$ and the ideal $(\\varpi_H)$,\n$$\\pi^c_{V,L}\\eta_{PV\\otimes^LL}=P(\\eta_{V\\otimes^Lp_c^*L})\\pi^o_{V,L}$$\nfor complete $V,L$, where $\\pi^o$ is the ordinary projection and $\\pi^c$ the completed one. These identifications commute with the finite-free scalar mate, and the open factor has the same identification. The resulting equality is of integral morphisms; it does not assume that reduction functors are faithful.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent auxiliary: returned comparison Steps 9-10; Stacks Tag 0E48 (remark-compatible-with-diagram), Tag 0B56 (equation-projection-formula-map); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor). The completion-reflector identification is the separate argument retained in report.md.",
+  "note": "New statement-only task extracted under the human re-split decision of 2026-10-21; no numbered source is claimed to state the entire auxiliary. Full original argument and its source/node citations are preserved verbatim in report.md."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "def-exchange-projection",
+  "lem-pur-compact-support-completed-projection-coherence",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-pur-compact-support-completed-scalar-arrow",
+  "def-pur-compact-support-completed-projection-data",
+  "lem-pur-compact-support-scalar-completion-normalization",
+  "lem-pur-compact-support-projection-realization"
+ ],
+ "proof": [
+  {
+   "text": "Work in constant integral modules using [lem-pur-compact-support-coefficient-models]: $B$ is finite free over $A$, its quotient bases are compatible, and the complete constant/completed models identify quotient transitions, limits and the scalar comparison $\\chi$. Write $T_W=-\\otimes_A B$ in this model and $\\mathsf C_{H,W}$ for completion, to distinguish it from coefficient extension $C_W$. The required $F$-adic filtration is the full $v$-filtration, with the $t$-filtration its subsequence $en$. Countable products are exact by [lem-weil-proetale-countable-products-exact]. Consequently all Roos and scalar/completion constructions below have their stated hypotheses. Apply the coefficient-model statement also with $M$ replaced by any of the complete finite-Tor inputs below.",
+   "uses": [
+    "lem-pur-compact-support-coefficient-models",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent assembly of the coefficient model and returned Steps 9-10; no numbered Stacks theorem is claimed for this model"
+   }
+  },
+  {
+   "text": "For inner_domain, use the existing ordinary/completed integral pullback theorem to preserve sfIntegralConstructible. Identify the actual pullback coefficient map with the ordinary one by its normalized quotient equations and identify the left adjoints and their derived functors by uniqueness. For the specified arbitrary TensorModel, choose good K-flat representatives using the proved goodRepresentative helper of IntegralOperationsPreserveConstructible and transport through its representative comparison to constructibleTensorCompletion. Integral operations preserve constructibility; qcqsCompletionUnitLocality makes the tensor completion unit invertible, so its completion is constructible too. Finite-type schemes over the finite-field datum are Noetherian of finite dimension and the coefficient prime is invertible in their global rings and residue fields. Finally integral_residue_tor identifies sfIntegralConstructible with finiteTorConstructibleIntegral. This supplies the uniform finite-Tor domain without a separate finite-level interval computation. The unproved diagram_projection domain may be obtained by the same constructibility argument before completion. U6 reuses the identical proved private tensor_domains and pull_domains helpers from Sheaf.Paper.SfProEtaleProjectionFormula (import all), rather than re-elaborating their constructions; the mathematical dependencies of those helper proofs are unchanged.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-fix-constructible-tensor-completion",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-kun-dimension-finite-type",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks 07A4, 099N; existing integral constructibility, completed tensor, ordinary pullback and residue-Tor criterion; proved representative argument reused from IntegralOperationsPreserveConstructible."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square with vertical arrows $p_c$ and horizontal identity-topos coefficient maps $A_n\\to B_n$. The structural ring square commutes since all maps send a constant section to that same section. Its exchange is exactly $a_{p_c,n}$: both have transpose $C^{(n)}\\varepsilon_{p_c,A_n}$ after the pullback/scalar comparison. The cited equality is thus the proper scalar/projection square. Apply the same statement on the ringed diagram sites of the quotient systems, using the proper mate supplied by [lem-pur-compact-support-strict-scalar-mate]. This proves an equality before evaluation. Also apply it to the constant integral square $A\\to B$; denote that ordinary proper scalar mate by $a^o$. Neither application requires the coefficient square to be cartesian or the projection map to be invertible.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-pur-compact-support-strict-scalar-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Tag 0E48, remark-compatible-with-diagram; Tag 0B56, equation-projection-formula-map"
+   }
+  },
+  {
+   "text": "For the open factor use [lem-sf-open-tensor-normalization], including its ringed-diagram clause. On the extension-by-zero presheaf, both scalar/projection composites send $((x\\otimes b)\\otimes(y\\otimes b'))$ to $(x\\otimes y)\\otimes bb'$ on every summand indexed by a map into the open, and send zero to zero on the remaining components. Tensor balancing and sheafification preserve this equality. The normalized open units identify these maps with the specified derived open maps. The formula also commutes with every quotient transition. Pasting this equality with Step 3 in the order $Rp_{c*}(b_j)\\,a_{p_c}$ gives the compact-support projection square on the finite ringed diagram, for exactly $q_\\bullet^c$ of [lem-pur-compact-support-strict-scalar-mate] and $\\operatorname{PF}^c$ of [def-exchange-projection]. The same calculation gives the ordinary constant-integral square. Write its scalar comparison as $q^o=Rp_{c*,B}(b_j^o)a^o$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 0E48; elementary tensor-balancing calculation"
+   }
+  },
+  {
+   "text": "F6: properProjection_existsUnique follows directly from the completion-unit Hom bijection, without a separate completed-projection comparison. The principal Koszul reflector [lem-weil-pbc-ringed-koszul-completion-reflector], the unit-preserving principal-cone/quotient comparison [lem-pur-integral-principal-cone-quotient-comparison], the completeness equivalence [lem-pur-roos-intrinsic-completeness-equivalence], and the exact small-site transport [lem-pur-native-principal-completeness-small-model] show, on an arbitrary scheme, that quotient completion has complete output and precomposition by its actual unit is bijective into every complete object. Reuse the fully proved general reflectorFacts helper from OpenRoosUnitAdjunction; unlike that module's final geometric theorem this helper has no finite-type or field-of-definition hypotheses. Its adic datum is supplied by the valuation-ring DVR theorem [lem-weil-l-adic-extension-integers-dvr]; an auxiliary prime different from ell supplies the Roos predicate's finite-field witness. Identify the actual inverse-image coefficient isomorphism with the normalized completed coefficient isomorphism by applying the sheaf adjunction Hom equivalence. This identifies push (completed l E) g with sfCompletedDerivedDirectImage. Reuse the proved completed_image_complete and complete_unrestricted helpers from SfCompleteDirectImageReduction, which transport the preservation-of-completeness assertion of [lem-pur-completed-coefficient-pushforward-comparison] to that actual derived functor. Hence the target push_g(C_Z(tensor(V,pull_g L))) is complete. Apply the unit Hom bijection to properProjectionOrdinary followed by push_g of the Z-completion unit. Surjectivity supplies the required map and equation; injectivity gives uniqueness. No faithfulness of finite evaluation, constructibility of the tensor, or invertibility of the ordinary projection is assumed. The additional identification with the whole finite quotient-diagram projection, needed by the still-open native and gamma comparisons, remains part of the original plan: apply [lem-pur-compact-support-completed-projection-coherence] to the principal uniformizer ideal and the actual direct-image adjunction, then transport by [lem-pur-completed-coefficient-pushforward-comparison], preserving counits and all tower transitions. This delivery proves only the named properProjection_existsUnique component of this step, not that further finite-system identification.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-pur-integral-principal-cone-quotient-comparison",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-pur-native-principal-completeness-small-model",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-pur-compact-support-completed-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B and 0A0E, completion reflector and normalized quotient comparison; proetale.tex Tag 099N(1), preservation by direct image. The existing general helper proofs are reused with their actual hypotheses."
+   }
+  },
+  {
+   "text": "A4 (2026-10-27): openProjection_existsUnique follows directly from the completion-unit Hom bijection. Choose the principal DVR datum using the proved coefficient_datum helper of PrincipalKoszulStrictReplacement. Reuse the proved canonical dvrCoefficientModel_exists and dvrOpenModel_exists helpers of OpenQuotientKoszulCompleteness; these helpers require neither coefficient-prime invertibility on the scheme nor constructibility. The openDvrIntrinsicCriterion translates quotient completeness to intrinsic principal Koszul completeness. openDvrIntrinsicOpenTransport preserves the latter for a quasi-compact open immersion; the criterion then translates back. openDvr_ringed_identification transports this completeness to the actual completed-ring open extension. Completeness is invariant under this natural isomorphism. Completion of the inner tensor is complete on every scheme, hence its open extension is complete. The completion reflector Hom bijection extends the actual ordinary open projection followed by extension of the inner completion unit, and proves uniqueness. No new theorem hole is introduced. The following stronger finite-system comparison, needed by the remaining realization/native/gamma holes, remains the original plan: The compactification open is quasi-compact: for affine $V\\subset\\overline X$, $j^{-1}V=X\\times_{\\overline X}V$ is closed in $X\\times_k V$ because $\\overline X$ is separated over $k$; the latter is quasi-compact. Hence [lem-cbc-completed-extension-zero-comparison], applied to the identity base-change square, makes $j_!M$ complete and identifies it with the limit of its strict reductions. Apply [lem-pur-completed-open-tensor-system-realization] with $K=M$, $N=p_{c,H}^*L$ (completed pullback) for the open tensor factor. Its completion-unit equation identifies the completed open map with the finite system map and fixes its open unit. Together with Step 5 this identifies $P_H^c$ with $Rp_{c*,H}j_!$ and identifies the entire finite proper/open projection with the actual completed-adjunction projection. These comparisons are natural for morphisms of the input systems.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-pur-completed-open-tensor-system-realization",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-open-dvr-intrinsic-criterion",
+    "lem-sf-open-dvr-intrinsic-open-transport",
+    "lem-sf-open-dvr-ringed-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent application of open completeness and open tensor realization; Stacks sites-modules.tex Tag 0E8I and sites-cohomology.tex Tag 0GL1"
+   }
+  },
+  {
+   "text": "E4 pruning: identify the specified integral gamma with the ordinary proper/open scalar mate by the already proved component [lem-pur-compact-support-scalar-gamma-identification], rather than by a new whole-diagram native_scalar_identification. The scalar-limit theorem gives gamma its finite counit equation and the finite-Tor scalar-extended input. The actual ordinary coefficient comparison has comparison_reduction and comparison_factorization, while realization has its specified finite counits. Naturality of scalarReductionBalancing and cancellation of the invertible finite counits identify the reductions of the two integral composites at all exponents e(n+1). Source and target are constructible: use the coefficient model, the actual proper/open image, and the realization isomorphism. The cofinal-to-all-reductions argument and finite shifted Hom groups make the constructible Milnor map injective, so the two integral composites agree. The final projection square then follows by the existing Step 10 conjugation of ordinaryCompletedSquare. Independently, diagram_projection follows by applying SFY.reduction to compactSupportProjectionCoefficientChange and postcomposing with nativeRealization, as Step 11 records. Thus all clauses of this node, including the finite diagram projection equality and its integral gamma square, retain their existing proved declarations; an additional scalar-coherence equation for nativeRealization on the whole quotient diagram is not a premise of either argument. The unused theorem native_scalar_identification and its Lean attachment are pruned. The node statement and the blueprint unit route are unchanged.",
+   "uses": [
+    "lem-pur-compact-support-scalar-gamma-identification",
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-compact-support-projection-realization",
+    "lem-pur-compact-support-coefficient-models",
+    "lem-sf-integral-reduction-shifted-hom-finite-qcqs",
+    "lem-pur-compact-support-projection-coefficient-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks 0941 and 0A07; existing gamma_identification proof via comparison_reduction and the constructible Milnor injection, and the ordinary scalar/projection square (0E48, 0B56, sites-modules.tex 0E8I)."
+   }
+  },
+  {
+   "text": "F6 (2026-10-27): scalarCompletion_existsUnique and scalarCompletion are supplied by the fully proved normalization component [lem-pur-compact-support-scalar-completion-normalization], publicly re-exported from its own module without changing their names, signatures or chosen maps. That component combines [lem-pur-integral-scalar-completion-unit-comparison] with the actual completion-reflector Hom injection to prove uniqueness: the two unit equations imply that chi inverse followed by any other normalized comparison is the identity, and cancellation proves equality of isomorphisms. The existence comparison uses an integral basis, the actual ramification equation, exact products, the existing quotient/Roos exchange, and the fully proved unit-preserving representative transport [lem-pur-integral-principal-completion-comparison]. The scalar normalization component also retains the original proved scalar-comparison isomorphism-naturality helper. The original scalarTensorCompleted definition and its tensor naturality and unit helpers remain in this item, using that scalar-comparison naturality. No dependency on the whole integral coefficient-comparison theorem is added. The remaining completed pullback scalar comparisons and their use in the still-open native and gamma identifications retain the original plan: tensor balancing and quotient augmentations preserve the same tensors, and completed-tensor unit insertion identifies their normalizations. No new theorem hole is introduced; the three proved components isolate self-contained parts so each file fits the compile-time limit.",
+   "uses": [
+    "lem-pur-compact-support-scalar-completion-normalization",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-pur-completed-tensor-unit-insertion",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-pur-integral-principal-cone-quotient-comparison",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Agent unit-normalization assembly; Stacks algebraization.tex proposition-derived-completion and remark-completed-tensor-product"
+   }
+  },
+  {
+   "text": "Let $Z=Rp_{c*,A}j_!M\\otimes_A^L K$ and $W=M\\otimes_A^Lf_A^*K$ in the ordinary constant-ring model. The common source in the question identifies with $\\mathsf C_{F,Y}(T_YZ)$ by Step 8. Precompose the two proposed maps with $\\eta^F_{T_YZ}$. By the proper and open unit equations in Steps 5-6, scalar/unit compatibility in Step 8 and $\\gamma=q^o$ from Step 7, their composites are the two ordinary scalar/projection paths of Step 4 followed by the target map induced by $T_XW\\to\\mathsf C_{F,X}T_XW$. Naturality of $q^o$ moves this last unit past its scalar mate; unit insertion identifies the completed pullback in $N$ with completion of the ordinary pullback. The ordinary paths are equal by Steps 3-4. The target is complete by Steps 5-6. Precomposition with $\\eta^F_{T_YZ}$ is bijective on maps to a complete target by [lem-sp-completed-pullback-adjunction], so the original integral composites agree. This also proves that the identifications commute with the finite-free scalar mate, while Step 4 gives the finite diagram assertion. No reduction functor has been assumed faithful.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-pur-completed-tensor-unit-insertion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Agent reflector-uniqueness argument; Stacks algebraization.tex proposition-derived-completion and remark-completed-tensor-product"
+   }
+  },
+  {
+   "text": "The public compactSupportScalarProjectionIdentification theorem is assembled from the existing ordinaryCompletedSquare and gamma_identification statements of this module. Obtain hCM from gamma_identification at M and hCK from gamma_identification for the identity compactification of Y at K. The inner_domain theorem gives the complete finite-Tor inner input; scalarCompletion, scalarTensor and scalarPull give an actual isomorphism from its scalar extension to the completed F-inner tensor. Derive naturality of scalarCompletion under isomorphisms from its unit-normalized uniqueness. Derive naturality of realization under isomorphisms from its finite-counit uniqueness, using adjunction naturality for scalarSupportCounit. Conjugate ordinaryCompletedSquare by the two support realizations; gamma_identification at M and the completed inner tensor replaces the conjugated ordinary scalar mates by completedArrow. Naturality of scalarTensor and of scalarCompletion transports the outer tensor comparison, and functoriality cancels the inverse support realizations. This is an equality of integral maps; no reduction functor is used to detect equality. The other eight named comparison statements remain the proof obligations described in Steps 1--9.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent categorical assembly of the existing comparison statements; Stacks 07A6, 0B56 and 0941."
+   }
+  },
+  {
+   "text": "M3: diagram_projection follows directly from compactSupportProjectionCoefficientChange, the ordinary integral proper/open scalar square, by mapping that equality through SFY.reduction and postcomposing with nativeRealization. Its finite-Tor witness is supplied by the actual ordinary F inner tensor: ordinaryCompletedSquare supplies constructibility of the scalar-extended inputs; pull_domains and tensor_domains preserve constructibility; finiteTor_of_constructible applies the integral residue-Tor criterion. Finite-type geometry supplies the Noetherian, finite-dimensional and prime-invertibility hypotheses. No reduction or finite evaluation functor is assumed faithful. This removes the separate completion-unit cancellation formerly planned for diagram_projection.",
+   "uses": [
+    "lem-pur-compact-support-projection-coefficient-change",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-fix-constructible-tensor-completion",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-kun-dimension-finite-type",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks 0E48, 0B56 and sites-modules.tex 0E8I, via the existing ordinary coefficient square; Step 2 supplies the domain."
+   }
+  },
+  {
+   "text": "M3: ordinaryCompletedSquare follows from compactSupportProjectionCoefficientChange. The existing integral_ramification helper and its uniformizer equation give a positive ramification exponent and the principal-ideal equality. compactSupportCoefficientModels_scalar supplies constructibility of the scalar-extended inputs. The proved scalarTensorCompleted_unit helper follows from scalarCompletion_existsUnique and naturality of the completion unit. integralDomains makes the E source completion unit invertible. Precompose by its scalar extension. projection_unit at E rewrites the first integral projection; naturality of comparison moves the E inner unit across the scalar mate. Scalar completion normalization and naturality of the F unit at the inner balancing map give the ordinary inner balancing map followed by the F inner unit. At the outer tensor, scalarTensorCompleted_unit and naturality of the F unit move the source unit through the scalar tensor comparison and coefficient mate. projection_unit at F rewrites the other integral projection. The remaining equality is the ordinary coefficient square postcomposed with compact support of the F inner unit. Cancel the source unit. No faithfulness of reduction and no arbitrary complete-target Hom bijection are used. Six existing comparison holes remain, with their original proof plans.",
+   "uses": [
+    "lem-pur-compact-support-projection-coefficient-change",
+    "lem-pur-compact-support-coefficient-models",
+    "lem-weil-completed-integral-finite-free",
+    "def-pur-compact-support-completed-projection-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Formal completion-unit insertion from the ordinary coefficient square (0E48, 0B56, 0E8I); scalar domains by the existing coefficient model."
+   }
+  },
+  {
+   "text": "B3: the unique normalized constructible support realization and its chosen map are supplied by the fully proved component [lem-pur-compact-support-projection-realization]. Its public re-export preserves the original names, binders and chosen map. The component constructs the normalized lift, proves invertibility by finite comparison, and proves uniqueness by the constructible Milnor injection.",
+   "uses": [
+    "lem-pur-compact-support-projection-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0941 and 0A07; existing normalized qcqs realization and constructible Milnor detection."
+   }
+  },
+  {
+   "text": "B3: gamma_identification is supplied by the fully proved component [lem-pur-compact-support-scalar-gamma-identification]. Its finite equation, normalized realization equations, explicit finite comparison factorization and constructible Milnor injection identify completedArrow with the actual proper/open mate. The original module publicly re-exports the same declaration and its existing projection-square assembly uses it unchanged. This extraction followed profiling and explicit isomorphism cancellation; no theorem hole is introduced.",
+   "uses": [
+    "lem-pur-compact-support-scalar-gamma-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0941 and 0A07; finite reduction comparison, scalar-limit reduction, and constructible Milnor injection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-coefficient-models",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-fix-constructible-tensor-completion",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-fix-qcqs-completion-unit-locality",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-kun-dimension-finite-type",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-sf-open-tensor-normalization",
+  "def-exchange-projection",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-pur-integral-principal-cone-quotient-comparison",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-pur-native-principal-completeness-small-model",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-compact-support-completed-projection-coherence",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-pur-completed-open-tensor-system-realization",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-sf-open-quotient-koszul-completeness",
+  "lem-sf-open-dvr-intrinsic-criterion",
+  "lem-sf-open-dvr-intrinsic-open-transport",
+  "lem-sf-open-dvr-ringed-identification",
+  "lem-pur-compact-support-scalar-gamma-identification",
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-pur-compact-support-projection-realization",
+  "lem-sf-integral-reduction-shifted-hom-finite-qcqs",
+  "lem-pur-compact-support-projection-coefficient-change",
+  "lem-pur-compact-support-scalar-completion-normalization",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-completed-tensor-unit-insertion",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-completed-integral-finite-free",
+  "def-pur-compact-support-completed-projection-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent assembly of returned comparison Steps 9-10, with Stacks Tags 0E48, 0B56, 07A6, 0941, 0A07 and sites-modules.tex Tag 0E8I. Completion normalization uses the individually cited DAG statements, not an assertion that Stacks states the whole auxiliary. Y3 (2026-10-25): Step 2 follows the compiled inner_domain proof via constructibility, completed tensor and the integral residue-Tor criterion; the other steps remain the plan for the remaining named holes. U6 (2026-10-25): the final displayed square is proved by conjugating ordinaryCompletedSquare with the uniquely normalized support realizations and using gamma_identification; Step 10 records the actual assembly and its private naturality lemmas. No new theorem hole is introduced. The duplicate tensor_domains and pull_domains proof bodies are applications of the identical existing private helpers in SfProEtaleProjectionFormula. K7 (2026-10-26): diagram_projection follows by precomposition and cancellation of actual completion units from ordinaryCompletedSquare, as the final proof step records. No new dependencies or holes. N4 (2026-10-26): ordinaryCompletedSquare is proved by cancellation of the invertible constructible source unit from the ordinary compact-support coefficient square; its final proof step records the compiled argument. No theorem holes are added. M3 (2026-10-26): the current source had eight holes despite the earlier K7/N4 node entries. Restore proofs of diagram_projection and ordinaryCompletedSquare using the existing ordinary coefficient square; the diagram proof now applies reduction directly. Public signatures and definitions are unchanged; no new holes or nodes. F6 (2026-10-26): Step 5 records the complete Lean proof of properProjection_existsUnique and retains the further finite-system identification plan by the actual quotient-completion Hom bijection and preservation of completeness by the actual completed-ring direct image. No signatures, definitions, new nodes, or theorem holes are changed or added; five of the six starting comparison holes remain. F6 (2026-10-27): Step 8 now records the scalarCompletion_existsUnique proof by unit-preserving comparison of arbitrary principal quotient models with the specified IntegralOnSlice completion and the existing finite-free cochain exchange. Four original holes remain; no new nodes, holes or public signatures are introduced. The unit-preserving principal/integral comparison is a new proved node, with no sorry; it is isolated after profiling the expensive derived-functor presentations. A4 (2026-10-27): Step 6 records the complete proof of openProjection_existsUnique from the completion-unit Hom bijection and existing intrinsic DVR open completeness/actual ringed identification. Three of the four starting theorem holes remain; no new holes, nodes, public signatures or definitions are introduced. B3 (2026-10-27): the appended steps give the proofs of realization_existsUnique and gamma_identification from the existing strict system comparison and constructible Milnor detection. Native scalar identification retains its original plan. One of three starting holes remains; no holes are added. E4 (2026-10-27): prune the unused native_scalar_identification auxiliary. Step 7 now records the existing finite-counit/constructible-Milnor proof of gamma_identification and the existing direct ordinary proof of diagram_projection. The main projection-square proof is unchanged. No new nodes or holes; no statement or definition needed by a target is altered.",
+  "note": " F6 2026-10-27: the scalar-existence construction is isolated as a fully proved lemma after the complete item exceeded 60 seconds in delivery checking; uniqueness remains a real reflector argument in the item. No added holes. F6: the scalar normalization component (two public declarations with identical signatures and chosen maps) is publicly re-exported from a new module after a second delivery check measured 67 seconds for the complete item. The new normalization node carries the moved Lean attachments; the parent statement gains only that structural dependency, with no mathematical change. B3: realization_existsUnique/realization and gamma_identification are now publicly re-exported from two proved component modules after the item measured 84 seconds, then 70 seconds after cancelling explicit isomorphisms. Their new nodes carry the moved Lean attachments. There are no shared-definition changes or additional holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict finite free scalar mate preserves compact support projection transformation under completion reflector and strict tower counit identifications",
+   "results": "{\"t\": \"2026-10-22T05:58:44Z\", \"tool\": \"leanfinder\", \"query\": \"Strict finite free scalar mate preserves compact support projection transformation under completion reflector and strict tower counit identifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"Condensed.profiniteSolidCounit\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"LightCondensed.internallyProjective_iff_tensor_condition'\"], \"digest\": \"89525ecf310b6f59\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed projectivity, ordinary completion projections and module reflexivity do not identify the completed compact-support projection square and its counit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed proper open projection formula coefficient square agrees with the total limit of finite projection mates without faithfulness of reductions",
+   "results": "{\"t\": \"2026-10-22T05:58:50Z\", \"tool\": \"leanfinder\", \"query\": \"Completed proper open projection formula coefficient square agrees with the total limit of finite projection mates without faithfulness of reductions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.pi_apply_coe\", \"Profinite.NobelingProof.eval_eq_πJ\", \"Profinite.NobelingProof.GoodProducts.smaller_factorization\", \"Profinite.NobelingProof.πs'_apply_apply\", \"Profinite.IndexFunctor.map_comp_π_app\", \"Profinite.NobelingProof.coe_πs'\", \"Profinite.NobelingProof.Products.evalFacProps\", \"LightProfinite.proj_comp_transitionMapLE'\"], \"digest\": \"3031d1703153fb9e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed projectivity, ordinary completion projections and module reflexivity do not identify the completed compact-support projection square and its counit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-22T05:58:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"projection\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed projectivity, ordinary completion projections and module reflexivity do not identify the completed compact-support projection square and its counit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*projection|projection.*completed|projection.*[Cc]oefficient|[Cc]oefficient.*projection",
+   "results": "{\"t\": \"2026-10-22T05:58:40Z\", \"tool\": \"grep\", \"query\": \"completed.*projection|projection.*completed|projection.*[Cc]oefficient|[Cc]oefficient.*projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed projectivity, ordinary completion projections and module reflexivity do not identify the completed compact-support projection square and its counit normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free coefficient extension commutes with completed compact support projection formula maps",
+   "results": "{\"t\": \"2026-10-22T05:58:41Z\", \"tool\": \"leansearch\", \"query\": \"Finite free coefficient extension commutes with completed compact support projection formula maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.completion_apply_coe\", \"Pi.comul_coe_finsupp\", \"ContinuousLinearMap.completion\", \"Module.IsReflexive.of_finite_of_free\", \"Rep.coinvariantsTensorFreeToFinsupp\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"Rep.finsuppToCoinvariantsTensorFree\", \"Condensed.freeForgetAdjunction\"], \"digest\": \"fb0b2159995614e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed projectivity, ordinary completion projections and module reflexivity do not identify the completed compact-support projection square and its counit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*projection|projection.*completed|compactSupport.*[Ss]calar|[Ss]calar.*compactSupport",
+   "results": "{\"t\": \"2026-10-22T06:55:34Z\", \"tool\": \"grep\", \"query\": \"completed.*projection|projection.*completed|compactSupport.*[Ss]calar|[Ss]calar.*compactSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, coalgebra counits and ordinary adic completion do not state this completed proper/open projection comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars preserves the compact support projection transformation on derived complete sheaves",
+   "results": "{\"t\": \"2026-10-22T06:55:34Z\", \"tool\": \"leansearch\", \"query\": \"Extension of scalars preserves the compact support projection transformation on derived complete sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.map'\", \"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalars\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"AlgHom.extendScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.ExtendScalars.map'_comp\", \"LinearEquiv.extendScalarsOfSurjective_apply\"], \"digest\": \"302e15794b1bcd65\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, coalgebra counits and ordinary adic completion do not state this completed proper/open projection comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"mate\"",
+   "results": "{\"t\": \"2026-10-22T06:55:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"projection\\\", \\\"mate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, coalgebra counits and ordinary adic completion do not state this completed proper/open projection comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free change of coefficients commutes with the counit defined compact support projection map under derived completion",
+   "results": "{\"t\": \"2026-10-22T06:55:45Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free change of coefficients commutes with the counit defined compact support projection map under derived completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"Pi.counit_comp_finsuppLcoeFun\", \"Pi.counit_comp_dFinsuppCoeFnLinearMap\", \"Finsupp.counit_comp_lsingle\", \"DFinsupp.counit_comp_lsingle\", \"TopModuleCat.freeAdj\", \"Pi.counit_comp_single\", \"Condensed.profiniteSolidification\"], \"digest\": \"d79e06c42d7699f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, coalgebra counits and ordinary adic completion do not state this completed proper/open projection comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "def extendScalars|def map'|def toRestrictScalars|preservesFiniteLimits_extendScalars_of_flat",
+   "results": "{\"t\": \"2026-10-22T06:56:55Z\", \"tool\": \"grep\", \"query\": \"def extendScalars|def map'|def toRestrictScalars|preservesFiniteLimits_extendScalars_of_flat\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"4b66a8ba92e25b58\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, coalgebra counits and ordinary adic completion do not state this completed proper/open projection comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|comparisonCompatible|mateEquiv.*Projection",
+   "results": "{\"t\": \"2026-10-22T06:56:55Z\", \"tool\": \"grep\", \"query\": \"rightAdjointProjectionMap|comparisonCompatible|mateEquiv.*Projection\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, coalgebra counits and ordinary adic completion do not state this completed proper/open projection comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal change of scalars intertwines projection formula mates for a right adjoint and the isomorphism persists after derived adic completion",
+   "results": "{\"t\": \"2026-10-22T06:57:05Z\", \"tool\": \"leanfinder\", \"query\": \"A monoidal change of scalars intertwines projection formula mates for a right adjoint and the isomorphism persists after derived adic completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProduct_naturality\", \"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"ModuleCat.RestrictionCoextensionAdj.counit'\"], \"digest\": \"e15ab026d44d1071\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, coalgebra counits and ordinary adic completion do not state this completed proper/open projection comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-integral-coefficient-comparison",
+  "group": "Q13",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Identification of scalar projection squares through completion (returned comparison Steps 9, 10)",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-compact-support-scalar-projection-identification",
+  "worker": "stage1",
+  "summary": "Nine-step split using existing ringed-topos scalar/projection coherence, open tensor normalization, completion coherence, and the augmented strict-tower transpose identity. Retained the entire statement. No new nodes or Mathlib leaves; no Lean written or compiled. Identifies the actual gamma and completed counits without faithfulness of reductions.",
+  "blueprint": "thm-pur-rational-and-qbar-purity, imported Proof Step 2 (Qbar-stage independence); sk-thm-purity-transport coefficient compatibility; current sk-thm-sf-compatibility clause (7), realized by proper/open projection compatibility. Returned parent comparison Steps 9-10 are expanded.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic unbounded ringed-topos projection/exchange square, applied to coefficient maps and to their diagram sites; does not replace a geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal mate pasting for the augmented coefficient square."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic normalized-system realization of tensor and pullback, used to type the expressions and their quotient systems."
+   },
+   {
+    "node": "lem-pur-completed-open-tensor-system-realization",
+    "why": "Generic quasi-compact-open completed tensor realization with its unit normalization."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Finite-coefficient pullback Tor bound, used only to check the displayed domain."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Finite-coefficient tensor Tor bound, used only to check the displayed domain."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-completed-open-tensor-system-realization",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-692abac51",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-692abac51 (reviewer sub-agent of L); spot-checked: This is a one-level split with no new nodes. I compared the item with the version Q13 landed (bad34355 FIX file): statement, stmt_deps, source and blueprint are byte-identical, so nothing was weakened. The 9 steps carry everything in the parent's returned Steps 9 and 10 (Q13 report lines 295-311) and add the gamma = q^o identification (Step 7). Step 3: ringed-exchange-tensor-coherence on the identity-topos coefficient square A_n to B_n over p_c gives Ex = a_{p_c,n}; no cartesianness is needed, and the same holds on diagram topoi and for the constant A to B square. Step 4: open-tensor-normalization allows any ring map g^{-1}B to B', so beta is b_j and gamma is the open projection; after j^* both are identities and j_! is fully faithful, so the pasted square is PF^c and q. Step 5: O_H is a Noetherian DVR and D/h^n is perfect, so completed-projection-coherence gives pi^c eta = P(eta) pi^o; completed-coefficient-pushforward-comparison gives the limit projections and completeness. Step 6: j is quasi-compact (j^{-1}V closed in X x_k V because X-bar is separated over k); completed extension by zero and the open tensor realization give gamma^c eta = j_!(eta) gamma^o. Step 7: perfect-quotient-exchange-normalization, mate pasting, tower-limit-transpose-normalization and Roos r_e/tau compatibility identify gamma with q^o through the augmented transpose, without faithfulness. Step 8: finite-free-completion-exchange hypotheses hold (S = R^d, t = u v^e, exact products). Step 9: precomposing with eta^F reduces both composites to the ordinary paths of Steps 3-4, and the reflector adjunction makes that precomposition bijective. Edge cases checked: E=F, ramified e, empty X, identity compactification, n=1, degree-0 signs. All 23 deps exist and lie on the transitive unit route; the declared tool_uses are accurate and accepted. No cycle, no SGA citation, and the Stacks tags 0E48/0B56/0E8I/07A6/0A07/0941/0GL1 resolve. review_split.py reports 'no such node' only because it does not follow symlinked chapter directories. Advisory: Step 8 fixes the unit normalization of lem-pur-integral-operations-scalar-extension, whose statement leaves its maps unspecified."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportScalarProjectionIdentification",
+  "declaration": "WeilConjectures.PurScalarProjection.compactSupportScalarProjectionIdentification",
+  "declarations": [
+   "WeilConjectures.PurScalarProjection.scalarTensorCompleted",
+   "WeilConjectures.PurScalarProjection.properProjectionOrdinary",
+   "WeilConjectures.PurScalarProjection.properProjection_existsUnique",
+   "WeilConjectures.PurScalarProjection.properProjection",
+   "WeilConjectures.PurScalarProjection.openProjection_existsUnique",
+   "WeilConjectures.PurScalarProjection.nativeRealization",
+   "WeilConjectures.PurScalarProjection.projectionFirst",
+   "WeilConjectures.PurScalarProjection.scalarFirst",
+   "WeilConjectures.PurScalarProjection.diagram_projection",
+   "WeilConjectures.PurScalarProjection.inner_domain",
+   "WeilConjectures.PurScalarProjection.ordinaryCompletedSquare",
+   "WeilConjectures.PurScalarProjection.supportProjection",
+   "WeilConjectures.PurScalarProjection.scalarInner",
+   "WeilConjectures.PurScalarProjection.compactSupportScalarProjectionIdentification",
+   "WeilConjectures.PurScalarProjection.projection_unit"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportScalarProjectionIdentification.lean",
+  "statement": "theorem compactSupportScalarProjectionIdentification (SE : CoefficientDerivedSystemCalculus.{u, u} l E X) (SF : CoefficientDerivedSystemCalculus.{u, u} l F X) (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e) (aX : PurProjectionData.TensorModel l E X) (aZ : PurProjectionData.TensorModel l E c.Z) (aY : PurProjectionData.TensorModel l E Y) (bX : PurProjectionData.TensorModel l F X) (bZ : PurProjectionData.TensorModel l F c.Z) (bY : PurProjectionData.TensorModel l F Y) (M : DerivedCategory (scalarReductionSource l E X)) (hM : finiteTorConstructibleIntegral l E X M) (K : DerivedCategory (scalarReductionSource l E Y)) (hK : finiteTorConstructibleIntegral l E Y K) : ∃ (hCM : finiteTorConstructibleIntegral l F X ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)) (hCK : finiteTorConstructibleIntegral l F Y ((pbcDerivedExtend (completedCoefficientMap l E F i Y)).obj K)), (pbcDerivedExtend (completedCoefficientMap l E F i Y)).map (supportProjection l E D hl f c SE aX aZ aY M hM K hK) ≫ PurScalarArrow.completedArrow l E F i D hl f c SE SF e he hepos ((IntegralOnSlice.completion l E X none).obj (PurProjectionData.ordinaryInner l E f aX M K)) (inner_domain l E D hl f aX M hM K hK) ≫ (PurStrictScalar.scalarSupport l F c SF).map (scalarInner l E F i f aX bX M K) = (scalarTensorCompleted l E F i Y aY bY ((PurStrictScalar.scalarSupport l E c SE).obj M) K).hom ≫ (IntegralOnSlice.completion l F Y none).map (bY.tensor.map (Prod.mkHom (PurScalarArrow.completedArrow l E F i D hl f c SE SF e he hepos M hM) (𝟙 _))) ≫ supportProjection l F D hl f c SF bX bZ bY ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M) hCM ((pbcDerivedExtend (completedCoefficientMap l E F i Y)).obj K) hCK",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair of returned head 6d87b91f58bc: the two formerly added theorem dependencies are replaced by definition nodes re-exporting the exact completedArrow/uniqueness and completed projection/typing interfaces. Main mathematics unchanged; transparent aliases preserve every type and chosen map. The main square uses the specified normalized strict scalar limit gamma; additional declarations retain finite diagram equality and actual completion units/counits. E4 2026-10-27: unused native_scalar_identification is removed from the auxiliary declaration list; the main statement and all its used declarations stay unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58ed20d0e",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Re-delivery of 6d87 (H2 return). Item record differs from live only in lean+stmt_deps, which add 3 definition nodes (landed def-pur-integral-compact-support-coefficient-data plus new def-pur-compact-support-completed-scalar-arrow and def-pur-compact-support-completed-projection-data); the theorem stmt_deps are gone. Item module diff against 6d87 = 2 imports + renames to transparent abbrev aliases (@Orig.{u}), so the maths read in 6d87 is unchanged. Re-checked the main square (C(PF_E)·γ_N·P_F(scalarInner) = scalarTensorCompleted·completion(γ_M⊗1)·PF_F, ∃hCM hCK is a conclusion), the auxiliary diagram/unit/γ clauses, and the binders. 11 sorries, one per theorem; definitions are choose-of-∃! or explicit composites; statement verbatim; all declarations present. New nodes: alias-only modules, NEW_NODE_KEYS fields, searches recorded, deps exist; their statements match the re-exported completedArrow normalization and the integralMap composite. Q77 parallel 5701 was LAND superseded, so no conflict. Advisories: the alias modules import theorem modules (completedArrow_existsUnique/integralDomains proofs stay with those theorem nodes); auxiliaries use systemU/reductionBalancing owned by definition nodes reached through the cited strict-scalar-mate; the own scalarCompletion differs in type from the existing ones, as the report explains. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ce01a",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T034632-L-3667948",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean vs clone 368903d5532 (only native_scalar_identification removed, no users in lean/dag/units, 0 importers) and node JSON diff (statement/stmt_deps unchanged; step 7, proof_deps, lean.declarations, tool_uses follow the retained gamma_identification/diagram_projection route)"
+ }
+}

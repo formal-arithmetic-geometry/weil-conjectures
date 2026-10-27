@@ -1,0 +1,389 @@
+{
+ "id": "lem-sfb-projective-matrix-central-cover",
+ "kind": "statement",
+ "title": "Projective matrix group and its finite flat special-linear central cover",
+ "statement": "Let $k$ be a field [def-weil-field] and $r\\geq2$. Write $\\operatorname{GL}_{r,k}=\\operatorname{Spec}k[x_{ij},\\det(x)^{-1}]$ and $\\operatorname{SL}_{r,k}=\\operatorname{Spec}k[x_{ij}]/(\\det(x)-1)$, with matrix multiplication and determinant as in [def-weil-pbc-matrix-determinant], where $1\\leq i,j\\leq r$ [def-weil-affine-spectrum, sk-def-av-group-scheme]. The fpqc sheaf quotient of $\\operatorname{GL}_{r,k}$ by the scalar subgroup $\\mathbf G_m$ is represented by an affine group scheme $\\operatorname{PGL}_{r,k}$; here the quotient sheaf is the sheafification of $T\\mapsto\\operatorname{GL}_{r,k}(T)/\\Gamma(T,\\mathcal O_T)^\\times$ for the coverings of [def-weil-pbc-fpqc-covering]. Here faithfully flat means flat [def-weil-flat-morphism] and surjective, and an $F$-torsor means a faithfully flat map $T\\to S$ with the isomorphism $T\\times F\\simeq T\\times_S T$ induced by the action. The quotient map $\\operatorname{GL}_{r,k}\\to\\operatorname{PGL}_{r,k}$ is a faithfully flat $\\mathbf G_m$-torsor. Its restriction $q:\\operatorname{SL}_{r,k}\\to\\operatorname{PGL}_{r,k}$ is finite locally free of rank $r$ (an affine map whose direct-image structure module is locally free of rank $r$) and surjective, with central kernel $\\mu_r=\\operatorname{Spec}k[t]/(t^r-1)$ acting by scalar matrices. In particular it is an fpqc covering, and $(g,z)\\mapsto(g,gz)$ is an isomorphism $\\operatorname{SL}_{r,k}\\times_k\\mu_r\\simeq\\operatorname{SL}_{r,k}\\times_{\\operatorname{PGL}_{r,k}}\\operatorname{SL}_{r,k}$. Both $\\operatorname{SL}_{r,k}$ and $\\operatorname{PGL}_{r,k}$ are smooth [def-sbc-smooth-morphisms], of finite type [def-weil-finite-type-morphism], and geometrically connected (their base changes to algebraically closed fields are connected), and each has Krull dimension $r^2-1$ [def-kun-topological-krull-dimension]. These descriptions commute with field extension, without assuming $r$ invertible in $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups-2022.pdf",
+  "place": "Milne, Algebraic Groups (2022 corrected text), Example 5.49, printed p.111 (GL/Gm and SL/mu_r); Propositions 5.24--5.27, printed pp.104--105 (torsor), and Proposition 7.15, printed p.142 (finite flatness for finite kernel). Section 2.42, printed p.53, gives SL connectedness and the variety isomorphism SL times Gm to GL; Proposition 1.62(b), printed p.24, gives smoothness of a quotient, and Proposition 5.23, printed p.104, gives the dimensions. The finite flat mu_r torsor has rank r since k[t]/(t^r-1) is free of rank r. Local PDF WANTED; primary PDF read online.",
+  "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-flat-morphism",
+  "sk-def-av-group-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-general-linear-group",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Use [def-sc-general-linear-group] for the displayed GL and SL group schemes, and [def-sc-gm-ga] for scalar units and roots of unity. Apply [lem-sfb-projective-frames-pgl] with $S=\\operatorname{Spec}k$ and $V=\\mathcal O_S^r$: its $G$ is the determinant-nonzero open in projective matrix space, with the Zariski-local matrix-lift property and scalar equality criterion. Call it $P$. Put $R=k[x_{ij}]$, graded by degree one. The determinant is homogeneous of positive degree $r$, directly from its Leibniz formula. Thus $P=D_+(\\det)\\subset\\operatorname{Proj}R$ is affine by [prop-nagata-proj-standard-open]. This constructs the required affine group scheme rather than taking a quotient of groups of rational points.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-sc-gm-ga",
+    "lem-sfb-projective-frames-pgl",
+    "def-weil-pbc-matrix-determinant",
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 5.49; determinant-open model supplied by the existing projective-frame lemma; Stacks Constructions 01MB, lemma-proj-scheme (standard homogeneous affine opens), with 01M7, lemma-proj-sheaves (their coordinate rings)."
+   }
+  },
+  {
+   "text": "On the projective chart indexed by an entry $(a,b)$, normalize that entry to $1$. By [lem-weil-pbc-projective-space-standard-charts] its intersection $U_{ab}$ with $P$ is $\\operatorname{Spec}B_{ab}$, where $B_{ab}=k[y_{ij}:(i,j)\\ne(a,b)][1/d]$, $A=(y_{ij})$, $y_{ab}=1$, and $d=\\det A$. Its inverse image in GL consists of matrices $g=sA$, with $s=g_{ab}\\in\\mathbf G_m$; the inverse is $g\\mapsto(g_{ab},g/g_{ab})$. Hence $\\operatorname{GL}|_{U_{ab}}\\simeq U_{ab}\\times\\mathbf G_m$. These opens cover $P$. Each projection is smooth, since $\\mathbf G_{m,U}$ is the open $D(t)$ in $\\mathbf A^1_U$; cite [sbc-lem-affine-space-smooth] and [lem-pc-open-immersion-smooth-composition]. Smoothness is local on the source by [lem-weil-pbc-smooth-local-on-source], so GL to $P$ is smooth, and is flat by [lem-pc-smooth-flat]. The sections $A$ prove surjectivity. It is affine by [lem-weil-pbc-morphism-affine-schemes-affine]; over each affine target open its affine inverse image is therefore itself the single affine required by [def-weil-pbc-fpqc-covering].",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "sbc-lem-affine-space-smooth",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NG, lemma-standard-covering-projective-space; Morphisms 01VC, 01VA, 01V6, 01VF; Milne 5.24--5.27 for the torsor viewpoint."
+   }
+  },
+  {
+   "text": "If two matrices $g,h$ have the same image in $P$, the scalar-equality clause of [lem-sfb-projective-frames-pgl] gives the unique unit $z$ with $h=gz$. Uniqueness also follows from the $(1,1)$ entry of $g^{-1}h=zI$. This formula and its inverse are regular on the charts of step 2 and agree on their overlaps, so $(g,z)\\mapsto(g,gz)$ identifies $\\operatorname{GL}\\times\\mathbf G_m$ with $\\operatorname{GL}\\times_P\\operatorname{GL}$. The faithfully flat map of step 2 is therefore the claimed torsor. Moreover $h_P$ is an fpqc sheaf by [lem-weil-pbc-fpqc-representable-descent]. A map from the presheaf GL/scalars to any fpqc sheaf extends to $h_P$ by choosing the local matrix lifts of step 2: two lifts differ by a scalar, so their images agree, and the sheaf axiom glues them uniquely. Conversely restriction along GL gives the original map. This is precisely the universal property of [def-weil-pbc-sheafification], establishing the stated fpqc quotient, including for nonaffine test schemes.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 5.24--5.27, printed pp.104--105; Stacks Descent Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; Sites 00WH (sheafification universal property)."
+   }
+  },
+  {
+   "text": "Restrict the quotient homomorphism to SL. Over $U_{ab}$ a lift has the form $g=tA$ by step 2; the condition $\\det g=1$ reads $t^rd=1$. This follows by taking the factor $t$ out of each of the $r$ factors in every Leibniz monomial. Thus $q^{-1}(U_{ab})\\simeq\\operatorname{Spec}C_{ab}$ with $C_{ab}=B_{ab}[t]/(t^r-d^{-1})$. Explicitly the map sends $t$ to $g_{ab}$ and $y_{ij}$ to $g_{ij}/g_{ab}$, while its inverse sends $g_{ij}$ to $ty_{ij}$. The denominators exist because $t^{-1}=dt^{r-1}$ and because step 2 identifies this inverse image inside GL with $U_{ab}\\times\\mathbf G_m$. The two substitutions fix every generator, so they are inverse algebra maps, hence inverse scheme maps by [def-weil-affine-spectrum]. These are identities over arbitrary $k$-algebras, including rings with nilpotents.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-affine-spectrum",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 5.49, printed p.111: determinant-root lifting; explicit normalized-entry coordinate calculation by Q67."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-monic-quotient-free], each $C_{ab}$ is free over $B_{ab}$ with basis $1,t,\\ldots,t^{r-1}$. Consequently the affine map over this chart is finite, flat and finitely presented: finiteness uses the displayed basis, flatness uses [lem-sc-affine-standard-cover-finite-free-local-fp-flat] and [lem-weil-pbc-flat-morphism-affine-criterion], and finite presentation uses the single displayed monic relation. Its fibre over any field has the same $r$-element basis. Therefore it is finite locally free of degree $r$ in [def-pc-finite-locally-free]. The $U_{ab}$ form an open, hence etale, covering by [lem-weil-pbc-open-immersion-etale]; [lem-weil-pbc-finite-locally-free-degree-etale-descent] gives the global assertion. Apply [lem-pc-flf-properties] to obtain the direct-image module formulation in the item. For each point $u$ of $U_{ab}$, choose a root $α$ of $t^r-d(u)^{-1}$ in an algebraic closure $L$ of its residue field. It is nonzero, and evaluation $C_{ab}\\to L$, $t\\mapstoα$, has prime kernel contracting to the prime of $u$. Thus $q$ is surjective. Both its source and target are affine, so [lem-weil-pbc-morphism-affine-schemes-affine] and [def-weil-pbc-fpqc-covering] show that this flat surjection is an fpqc covering. No separability of the polynomial is used.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "lem-pc-flf-properties",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VO, lemma-descending-property-finite-locally-free, applied to the Zariski chart cover; Morphisms 02KB, lemma-finite-flat; Milne Example 5.49 and Proposition 7.15, printed pp.111,142--143."
+   }
+  },
+  {
+   "text": "The GL torsor identity in step 3 identifies the kernel of $q$ with scalars $zI$ satisfying $z^r=1$, that is the full group scheme $\\mu_r$ of [def-sc-gm-ga]. Scalar multiplication commutes with every matrix, so this kernel is central over every test algebra. For $g,h\\in\\operatorname{SL}(T)$ with equal images, the unique scalar $z$ of step 3 obeys $1=\\det h=z^r\\det g=z^r$. Hence the same inverse formula gives $(g,z)\\mapsto(g,gz)$ and $ (g,h)\\mapsto(g,g^{-1}h)$ as mutually inverse morphisms $\\operatorname{SL}\\times\\mu_r\\simeq\\operatorname{SL}\\times_P\\operatorname{SL}$, where in the latter formula the scalar is read from the $(1,1)$ entry. This verifies the scheme-theoretic kernel and the fibre-product clause even when $\\mu_r$ is nonreduced.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 5.49 and Proposition 5.24, printed pp.111,104; restricting the explicit GL torsor identity."
+   }
+  },
+  {
+   "text": "Every chart $U_{ab}$ is an open of affine $(r^2-1)$-space, hence smooth by [sbc-lem-affine-space-smooth] and [lem-pc-open-immersion-smooth-composition]; their cover gives smoothness of $P$ by [lem-weil-pbc-smooth-local-on-source]. To check SL directly, write $c_{ij}$ for the signed cofactor of $x_{ij}$. Cofactor expansion, obtained by grouping the Leibniz sum by the value in row $i$, gives $\\det X=c_{ij}x_{ij}+b$ with $c_{ij},b$ independent of $x_{ij}$. On $D(c_{ij})$ in SL, solving gives $x_{ij}=(1-b)/c_{ij}$, identifying that chart with $\\operatorname{Spec}k[x_{uv}:(u,v)\\ne(i,j)][1/c_{ij}]$. These opens cover SL: the identity $X\\operatorname{adj}(X)=I$ of [lem-weil-pbc-matrix-adjugate-identity] shows that its cofactors generate the unit ideal when $\\det X=1$. These are again opens of affine $(r^2-1)$-space, so the same smoothness lemmas apply. Finally SL is finite type from its finite polynomial quotient presentation; $P$ is finite type from its finite cover by the $U_{ab}$, each having finitely many generators and one inverted element, using [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "sbc-lem-affine-space-smooth",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-local-on-source",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V6, 01VC, 01VA; standard affine-space smoothness 00T7; explicit cofactor charts, consistent with Milne Examples 2.40--2.42 and Corollary 5.26."
+   }
+  },
+  {
+   "text": "Over any field extension $K/k$, the polynomial ring $K[x_{ij}]$ is a domain by [lem-weil-pbc-polynomial-ring-domain], and $\\det$ is nonzero since evaluation at the identity gives $1$. Its localization at $\\det$ is a nonzero domain: by the fraction equivalence in [lem-weil-pbc-ring-localization-universal-property], $a/(\\det)^m=0$ iff some nonzero power of $\\det$ annihilates $a$, hence iff $a=0$. Thus a product of two nonzero fractions is nonzero, and $1/1\\ne0$. Hence GL is integral; equivalently its zero prime has closure the whole spectrum by [lem-weil-pbc-spec-irreducible-closed-subsets-primes], so GL is irreducible. The regular map $g\\mapsto g\\operatorname{diag}(\\det(g)^{-1},1,\\ldots,1)$ to SL is surjective, having the inclusion of SL as a section. Thus SL is irreducible: a decomposition into two proper closed sets would pull back to such a decomposition of GL. The quotient map GL to $P$ is also surjective by step 2, so the same argument gives irreducibility of $P$. Both are nonempty (the identity). Irreducibility implies connectedness by [lem-pc-irreducible-space-connected]. Taking $K$ algebraically closed proves geometric connectedness. For use in the next step, SL is also integral: the maps $(h,u)\\mapsto h\\operatorname{diag}(u,1,\\ldots,1)$ and $g\\mapsto(g\\operatorname{diag}(\\det(g)^{-1},1,\\ldots,1),\\det(g))$ are inverse, write $N:\\operatorname{GL}\\to\\operatorname{SL}$ for the normalization and $i:\\operatorname{SL}\\to\\operatorname{GL}$ for inclusion. Since $N\\circ i=\\mathrm{id}$, the coordinate maps satisfy $i^*N^*=\\mathrm{id}$. Thus $N^*:K[\\operatorname{SL}]\\hookrightarrow K[\\operatorname{GL}]$ is injective, so its source is a nonzero domain. This also makes explicit the inclusion of Laurent constant polynomials under the displayed product isomorphism.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-pc-irreducible-space-connected",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 2.40 and 2.42, printed pp.52--53; explicit determinant-normalization isomorphism and elementary continuous-image argument."
+   }
+  },
+  {
+   "text": "The nonempty chart $D(c_{11})$ in SL contains the identity and is the nonempty principal open of affine $(r^2-1)$-space described in step 7. Polynomial rings over $k$ have dimension $r^2-1$ by [lem-sf-noetherian-polynomial-dimension] (a field is Noetherian of dimension zero). Apply [lem-sc-integral-locally-algebraic-opens-dimension] first to this open in affine space and then to this open in the integral finite-type scheme SL: $\\dim\\operatorname{SL}=r^2-1$. For $P$, choose $U_{11}$, also containing the identity and a principal open of affine $(r^2-1)$-space. Its coordinate ring is a domain; since $P$ is irreducible by step 8 and covered by such reduced affine charts, it is integral by [def-pc-integral-scheme]. The same open-dimension lemma yields $\\dim P=\\dim U_{11}=r^2-1$. Ring and topological dimensions agree here because [lem-weil-pbc-spec-irreducible-closed-subsets-primes] identifies strict chains of irreducible closed sets with the reversed strict chains of primes.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic, part (3); Algebra polynomial dimension, and Milne Proposition 5.23 as the matching quotient dimension formula."
+   }
+  },
+  {
+   "text": "All the displayed equations, matrix multiplication, normalized-entry maps, cofactor substitutions and inverse formulas have coefficients in $k$ and remain the same after tensoring with any extension field $K$. The projective-frame node explicitly asserts arbitrary base-change compatibility for the determinant-open quotient. Affine fibre products are computed by tensor products by [lem-weil-pbc-fibre-product-affine-spectra]; hence the GL, SL and $\\mu_r$ presentations become the corresponding presentations over $K$, and the morphism $q$, its kernel and the torsor isomorphisms are the same maps over $K$. The monic basis calculation remains valid over $K$ by [lem-weil-pbc-monic-quotient-free], while steps 7--9 apply to that field without additional hypotheses. This proves every stated field-extension compatibility. In characteristic $p$ dividing $r$, the relation $t^r-1$ may have repeated factors, but neither the rank calculation nor any chart argument divided by $r$.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 5.49, printed p.111, together with exact-sequence base extension on p.24; Stacks Schemes 01I4, lemma-fibre-product-affine-schemes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-general-linear-group",
+  "def-sc-gm-ga",
+  "lem-sfb-projective-frames-pgl",
+  "def-weil-pbc-matrix-determinant",
+  "prop-nagata-proj-standard-open",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "sbc-lem-affine-space-smooth",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-sheafification",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "lem-pc-flf-properties",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-pc-irreducible-space-connected",
+  "def-pc-integral-scheme",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 5.49, printed p.111; Propositions 5.24--5.27, pp.104--105; Example 2.42, p.53. Explicit matrix-chart expansion by Q67; scheme-theoretic details from the Stacks places specified in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The group scheme SL r maps finite faithfully flat onto PGL r with kernel mu r over any field including characteristic dividing r",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instFinite\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] [Finite R],\\n  Finite (Matrix.SpecialLinearGroup n R)\", \"doc\": \"If $ R $ is a finite commutative ring, then the special linear group $ \\\\text{SL}(n, R) $ of $ n \\\\times n $ matrices over $ R $ is finite. This follows because the set of all $ n \\\\times n $ matrices wi\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.mapGL_inj\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] {S : Type u_1}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [FaithfulSMul R S] (g g' : Matrix.SpecialLinearGroup n R),\\n  (Matrix.SpecialLinearGroup.mapGL S) g = (Matrix.SpecialLinearGroup.mapGL S) g' ↔ g \", \"doc\": \"Given a faithful scalar multiplication from $ R $ to $ S $, the induced monoid homomorphism $ \\\\text{SL}(n, R) \\\\to \\\\text{GL}(n, S) $ is injective, meaning that two elements of the special linear group \"}\n  {\"name\": \"Matrix.SpecialLinearGroup.mapGL_injective\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] {S : Type u_1}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [FaithfulSMul R S],\\n  Function.Injective ⇑(Matrix.SpecialLinearGroup.mapGL S)\", \"doc\": \"The induced homomorphism from the special linear group $\\\\text{SL}(n, R)$ to the general linear group $\\\\text{GL}(n, S)$, defined by applying a ring homomorphism $f : R \\\\to S$ to each matrix entry and e\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.mapGL\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] →\\n      {R : Type v} →\\n        [inst_2 : CommRing R] →\\n          (S : Type u_1) → [inst_3 : CommRing S] → [Algebra R S] → Matrix.SpecialLinearGroup n R →* GL n S\", \"doc\": \"The monoid homomorphism from $\\\\text{SL}(n, R)$ to $\\\\text{GL}(n, S)$ induced by a ring homomorphism $f : R \\\\to S$, defined by first applying $f$ to each matrix entry (preserving determinant 1) and then\"}\n  {\"name\": \"SpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"(R : Type u_1) → (V : Type u_2) → [inst : CommRing R] → [inst_1 : AddCommGroup V] → [Module R V] → Type (max 0 u_2)\", \"doc\": \"The special linear group $\\\\text{SL}(V)$ over a commutative ring $ R $, consisting of all invertible linear transformations of the $ R $-module $ V $ with determinant equal to 1. This is the kernel of \"}\n  {\"name\": \"SpecialLinearGroup.instGroup\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : AddCommGroup V] → [inst_2 : Module R V] → Group (SpecialLinearGroup R V)\", \"doc\": \"The special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and $ R $-module $ V $ forms a group under composition of linear transformations, with the group operations defined such that th\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract SL/PSL groups or projectivized vector spaces, not an fpqc quotient of group schemes or a finite locally free central torsor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective general linear group as the determinant nonvanishing open in projective matrix space and GL modulo scalar matrices",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"SpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"(R : Type u_1) → (V : Type u_2) → [inst : CommRing R] → [inst_1 : AddCommGroup V] → [Module R V] → Type (max 0 u_2)\", \"doc\": \"The special linear group $\\\\text{SL}(V)$ over a commutative ring $ R $, consisting of all invertible linear transformations of the $ R $-module $ V $ with determinant equal to 1. This is the kernel of \"}\n  {\"name\": \"Projectivization.generalLinearGroup_smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  (g : LinearMap.GeneralLinearGroup K V) (x : Projectivization K V), g • x = Projectivization.map ↑g.toLinearEquiv ⋯ x\", \"doc\": \"For any invertible linear transformation $ g \\\\in \\\\mathrm{GL}(K, V) $ and any projective point $ x \\\\in \\\\mathbb{P}_K(V) $ (represented by a nonzero vector $ v \\\\in V $), the group action $ g \\\\cdot x $ is\"}\n  {\"name\": \"Matrix.SpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max 0 u v)\", \"doc\": \"The special linear group of n×n matrices over a commutative ring R, consisting of all invertible matrices with determinant equal to 1.\"}\n  {\"name\": \"Matrix.GeneralLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"(n : Type u) → (R : Type v) → [DecidableEq n] → [Fintype n] → [Semiring R] → Type (max v u)\", \"doc\": \"The group of invertible $ n \\times n $ matrices over a semiring $ R $, where $ n $ is a finite type. This is defined as the group of units in the semiring of square matrices under matrix multiplication\"}\n  {\"name\": \"LinearMap.GeneralLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/GeneralLinearGroup/Basic\", \"type\": \"(R : Type u_1) → (M : Type u_2) → [inst : Semiring R] → [inst_1 : AddCommMonoid M] → [Module R M] → Type u_2\", \"doc\": \"The group of invertible linear transformations (automorphisms) of an $ R $-module $ M $, denoted $ \\text{GL}(M) $, consisting of all $ R $-linear maps $ M \\to M $ with composition as the group operation\"}\n  {\"name\": \"Matrix.GLPos\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"(n : Type u) →\\n  (R : Type v) →\\n    [inst : DecidableEq n] →\\n      [inst_1 : Fintype n] →\\n        [inst_2 : CommRing R] → [inst_3 : LinearOrder R] → [IsStrictOrderedRing R] → Subgroup (GL n R)\", \"doc\": \"The subgroup of the general linear group $\\\\mathrm{GL}(n, R)$ consisting of invertible $n \\\\times n$ matrices whose determinants belong to the subgroup of strictly positive units in the commutative ring\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract SL/PSL groups or projectivized vector spaces, not an fpqc quotient of group schemes or a finite locally free central torsor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"quotient\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract SL/PSL groups or projectivized vector spaces, not an fpqc quotient of group schemes or a finite locally free central torsor."
+  },
+  {
+   "tool": "grep",
+   "query": "PGL|ProjectiveGeneralLinear|projective.general.linear|central.isogen|mu_",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"95\", \"text\": \"    IsBoundedAt c f k ↔ ∃ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c ∧ IsBoundedAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"103\", \"text\": \"    IsZeroAt c f k ↔ ∃ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c ∧ IsZeroAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"111\", \"text\": \"    IsBoundedAt c f k ↔ ∀ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c → IsBoundedAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"117\", \"text\": \"    IsZeroAt c f k ↔ ∀ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c → IsZeroAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/SlashActions.lean\", \"line\": \"153\", \"text\": \"  monoidHomSlashAction (Matrix.SpecialLinearGroup.mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"717\", \"text\": \"  exact ⟨g, by simp [mapGL]⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"724\", \"text\": \"  exact ⟨g, by simp [mapGL]⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"59\", \"text\": \"    HasDetOne (Γ.map <| mapGL S) where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"63\", \"text\": \"    HasDetOne (mapGL (n := n) (R := R) S).range where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"93\", \"text\": \"scoped[MatrixGroups] notation \\\"𝒮ℒ\\\" => MonoidHom.range (mapGL ℝ : SL(2, ℤ) →* GL (Fin 2) ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"98\", \"text\": \"  coe := map (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"111\", \"text\": \"      comap_map_eq_self_of_injective mapGL_injective] using h\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"202\", \"text\": \"  ((toConjAct g⁻¹) • (Γ.map <| mapGL ℝ)).comap (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"206\", \"text\": \"  simp [conjGL, mapGL, Subgroup.mem_inv_pointwise_smul_iff, toConjAct_smul]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"229\", \"text\": \"    ∃ N ≠ 0, ∀ x ∈ Gamma N, g * (mapGL ℚ x) * g⁻¹ ∈ (Gamma M).map (mapGL ℚ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"280\", \"text\": \"    ∃ N ≠ 0, (toConjAct <| g.map (Rat.castHom ℝ)) • (Gamma N).map (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"281\", \"text\": \"      ≤ (Gamma M).map (mapGL ℝ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"35\", \"text\": \"    ∃ g : SL(2, A), (mapGL K g) • ∞ = c := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"119\", \"text\": \"    simpa only [hgp.smul_eq_self_iff.mp hgc] using ⟨(mapGL ℚ g).parabolicFixedPoint,\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"124\", \"text\": \"    · suffices (mapGL ℝ ModularGroup.T).IsParabolic by simpa\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"133\", \"text\": \"lemma isCusp_SL2Z_iff' {c : OnePoint ℝ} : IsCusp c 𝒮ℒ ↔ ∃ g : SL(2, ℤ), c = mapGL ℝ g • ∞ := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"140\", \"text\": \"      ← (Rat.castHom ℝ).algebraMap_toAlgebra, g.map_mapGL]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/Defs.lean\", \"line\": \"222\", \"text\": \"    simp [SpecialLinearGroup.mapGL, ← SL_slash, eisensteinSeries_slash_apply, Gamma_mem'.mp hA]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"147\", \"text\": \"  exists_bound_of_subgroup_invariant_of_isBigO hf_cont ht hf_infinity (Γ := Γ.comap (mapGL ℝ))\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"198\", \"text\": \"    simpa [(show Rat.castHom ℝ = algebraMap ℚ ℝ by rfl), map_inv, map_mapGL]\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract SL/PSL groups or projectivized vector spaces, not an fpqc quotient of group schemes or a finite locally free central torsor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Special linear group scheme quotient by central roots of unity is projective general linear group finite flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ProjectiveSpecialLinearGroup\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \"(i : n) : center (SpecialLinearGroup n R) ≃* rootsOfUnity (Fintype.card n) R\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and commutative ring $R$, there is a canonical group isomorphism between the center of the special linear group $\\\\text{SL}(n, R)$ and the group of $\\\\#n$-th\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \": center (SpecialLinearGroup n R) ≃* rootsOfUnity (max (Fintype.card n) 1) R\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and commutative ring $R$, there is a canonical group isomorphism between the center of the special linear group $\\\\text{SL}(n, R)$ and the group of $\\\\max(\\\\#\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ProjectiveSpecialLinearGroup\", \"type\": \": Type _\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"SpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(R : Type u_1) → (V : Type u_2) → [inst : CommRing R] → [inst_1 : AddCommGroup V] → [Module R V] → Type (max 0 u_2)\", \"doc\": \"The special linear group $\\\\text{SL}(V)$ over a commutative ring $ R $, consisting of all invertible linear transformations of the $ R $-module $ V $ with determinant equal to 1. This is the kernel of \"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \": (Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(r : rootsOfUnity (max (Module.finrank R V) 1) R) : (centerEquivRootsOfUnity.symm r : V →ₗ[R] V) = r • LinearMap.id\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(g) :\\n  ((centerCongr (toLin_equiv b)).trans centerEquivRootsOfUnity g).val =\\n    Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity g\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract SL/PSL groups or projectivized vector spaces, not an fpqc quotient of group schemes or a finite locally free central torsor."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bPGL\\b|ProjectiveGeneralLinear|central.isogen",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern abstract SL/PSL groups or projectivized vector spaces, not an fpqc quotient of group schemes or a finite locally free central torsor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fpqc quotient group scheme GL n by scalar units is affine and SL n maps to it as a finite locally free mu n torsor of rank n in every characteristic",
+   "results": "8 hits; MatrixGroups.termPSL(_,_), Matrix.ProjectiveSpecialLinearGroup, Matrix.SpecialLinearGroup.instFinite, SpecialLinearGroup, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, SpecialLinearGroup.instDiv, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over. ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract matrix groups or affine-space facts, not the group-scheme quotient and finite locally free central cover; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean lines 40--72 read: quotient of abstract GL by its center only."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveGeneralLinear|\\bPGL\\b|fpqc.*quotient|quotient.*fpqc",
+   "results": "12 hits; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Projectivization/Action.lean, Mathlib/LinearAlgebra/Projectivization/Action.lean, Mathlib/LinearAlgebra/Projectivization/Action.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract matrix groups or affine-space facts, not the group-scheme quotient and finite locally free central cover; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean lines 40--72 read: quotient of abstract GL by its center only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "General linear group scheme modulo scalars and the special linear finite flat central cover",
+   "results": "8 hits; Matrix.SpecialLinearGroup, SpecialLinearGroup, LinearMap.GeneralLinearGroup, Matrix.GeneralLinearGroup, Matrix.GeneralLinearGroup.mem_center_iff_val_eq_scalar, SpecialLinearGroup.instCoeFunForall, Matrix.SpecialLinearGroup.instCoeFun, Matrix.GeneralLinearGroup.center_eq_range_units. ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract matrix groups or affine-space facts, not the group-scheme quotient and finite locally free central cover; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean lines 40--72 read: quotient of abstract GL by its center only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"quotient\"",
+   "results": "1 hits; instMulActionSubtypeGeneralLinearGroupFinOfNatNatRealMemSubgroupQuotientSubgroupOf. ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract matrix groups or affine-space facts, not the group-scheme quotient and finite locally free central cover; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean lines 40--72 read: quotient of abstract GL by its center only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-plucker-pgl-linearization",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: Morrison Section 2.1, passing to the finite SL cover of PGL; central group-scheme kernel and its torsor, before descending the Hilbert line power.",
+   "via": [
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-matrix-central-cover",
+  "worker": "stage1",
+  "summary": "Repair retry after the side-completion promotion refusal: rebase the retained delivered split onto the current live item, preserving its exact statement and maintainer-owned fields. Re-read all 32 cited proof statements and checked all 47 verbatim quotations against the current DAG. Retain the approved explicit matrix-chart route; strengthen step 5 by the prime-kernel proof of surjectivity and step 8 by a direct fraction proof of the localization domain property. No new nodes or Mathlib leaves; retained searches reused after reading their results.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: Morrison Section 2.1, passing to the finite SL cover of PGL; central group-scheme kernel and its torsor, before descending the Hilbert line power.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "General scheme/algebra tool: Standard charts and coordinate sections of projective space over a scheme. Used for the explicit matrix chart proof; does not replace the constructible-direct-image unit route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "General scheme/algebra tool: Affine space is smooth. Used for the explicit matrix chart proof; does not replace the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "why": "General scheme/algebra tool: Finite locally free of degree d descends along etale coverings (Stacks 02VO). Used for the explicit matrix chart proof; does not replace the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-pc-flf-properties",
+    "why": "General scheme/algebra tool: The module $f_*\\mathcal{O}_X$ of a finite locally free morphism. Used for the explicit matrix chart proof; does not replace the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "General scheme/algebra tool: Nonempty opens of an integral locally algebraic scheme have its dimension. Used for the explicit matrix chart proof; does not replace the constructible-direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "lem-pc-flf-properties",
+  "lem-sc-integral-locally-algebraic-opens-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-daa996bfd",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-daa996bfd (reviewer sub-agent of L); spot-checked: Third delivery of this split: f8c11fa35 and d5df0275 each got a source-field FIX, both were refused at promotion ('completed in this project's DAG but not in the live DAG'), and the FIX was lost both times. In clones/live and clones/side-live the item is still unsplit with an empty proof. No other group has split it and there is no repair note, so neither the supersession rule nor the re-split rule applies. 0 new nodes. Diff against d5df: the statement, stmt_deps, uses, tool_uses, proof_origin and steps 1-4, 6-7, 9-10 are identical. Step 5 now proves surjectivity at each point u: take a nonzero root α of t^r−d(u)^{-1} in an algebraic closure of κ(u); the kernel of C_ab→L is prime (the image lies in a field) and contracts to p_u. This is correct, with no separability and no inverse of r. Step 8 now shows a/det^m=0 ⇔ det^n·a=0 ⇔ a=0, since K[x] is a domain and det≠0, so K[GL] is a domain. Correct. The old dag snapshot had been cleaned, so I re-read all 36 cited statements in the current snapshot. Each step's hypotheses still match: D_+(det) affine (degree r>0); projective-frames-pgl gives the det-open model, lifts, scalar criterion and base change; charts U_ab with GL|U_ab≅U_ab×G_m; representable fpqc descent and the sheafification universal property; det(tA)=t^r d; the monic basis gives finite locally free of degree r through étale descent over opens (open-immersion-etale meets the étale hypothesis); the kernel is the full μ_r and central; cofactor charts cover SL by X·adjX=I; irreducibility via surjective images of GL; dimension r²−1 via the open-dimension lemma, whose integral and locally-finite-type hypotheses are proved in steps 7-8; base change on generators. Edge cases: r=2 over ℝ, char p | r (μ_r nonreduced), nonreduced test rings. Milne iAG2017 Example 5.49 and 2.42 checked by pdftotext. No SGA citation; the generic tool_uses are accepted. FIX: source.document still names the absent milne-algebraic-groups-2022.pdf with 'Local PDF WANTED' and an unused Prop 1.62(b). I re-applied the d5df source object verbatim: the iAG2017 PDF and URL, with Example 5.49 p.111, Propositions 5.24-5.25 and Corollary 5.27 pp.104-105, Proposition 7.15 p.142, Example 2.42 p.53 and Proposition 5.23 p.104. No other field changed. Maintainer: this split has been refused three times at promotion; L must promote the side completion, or the item keeps looping and the source FIX keeps being lost.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveMatrixCentralCover",
+  "declaration": "AlgebraicGeometry.ProjectiveMatrixCentralCover.exists_presentation",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveMatrixCentralCover.scalar",
+   "AlgebraicGeometry.ProjectiveMatrixCentralCover.rootsScalar",
+   "AlgebraicGeometry.ProjectiveMatrixCentralCover.Presentation",
+   "AlgebraicGeometry.ProjectiveMatrixCentralCover.extension",
+   "AlgebraicGeometry.ProjectiveMatrixCentralCover.CompatibleExtension",
+   "AlgebraicGeometry.ProjectiveMatrixCentralCover.exists_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveMatrixCentralCover.lean",
+  "statement": "theorem exists_presentation (hr : 2 ≤ r) : ∃ (G : Grp (Over (Spec (.of k)))) (π : GeneralLinearGroup (LinearGroupSchemes.Index.{u} r) k ⟶ G.X) (j : StandardGroupSchemes.roots k r ⟶ LinearGroupSchemes.specialLinear k r), Presentation k r hr G π j ∧ ∀ (K : Type u) [Field K] [Algebra k K], ∃ (H : Grp (Over (Spec (.of K)))) (ρ : GeneralLinearGroup (LinearGroupSchemes.Index.{u} r) K ⟶ H.X) (jK : StandardGroupSchemes.roots K r ⟶ LinearGroupSchemes.specialLinear K r), Presentation K r hr H ρ jK ∧ CompatibleExtension k r K G π j H ρ jK",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Existence of the affine fpqc quotient with the full scalar-orbit sheafification universal property on all test schemes; the existing GL, SL and mu_r schemes are reused. Presentation bundles the node clauses, and CompatibleExtension fixes the field-extension comparisons on all coordinate generators and requires commutation with quotient, inclusion and scalar maps. No PGL object or morphism is chosen from bare existence. Only the main theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bb23e10f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Every node clause is rendered. PGL is an existential affine Grp(Over Spec k) with IsMonHom π; quotient_sheaf + quotient_universal are exactly the fpqc sheafification universal property of GL/scalars on all test schemes. The GL Gm-torsor and SL μ_r-torsor have pinned projections (g, g·scalar z; g, g·j z). q is literally inclusion≫π: IsFiniteLocallyFreeOfDegree r, affine, pushforward unit locally free of rank r, surjective, fpqc singleton. The kernel μ_r ≅ GrpObj.ker q over j, with j pinned by j≫inclusion = rootsInclusion≫scalar, and is central. SL and PGL are Smooth, LocallyOfFiniteType∧QuasiCompact, GeometricallyConnected, topologicalKrullDim = r²−1. The field-extension comparisons are pinned on all coordinate generators, and δ is pinned through the epimorphic pulled-back π. The existing GL/SL/Gm/μ_r declarations are reused; scalar is real tI data with no existing duplicate. hr : 2 ≤ r is the only hypothesis (no IsUnit r, nonreduced μ_r kept); K is in the common universe u, which is forced. The only sorry is the main theorem; docstrings and the 10 proof steps are present; the record is verbatim; only the item's lean field changed; no name clash. Advisory: non-stmt_dep declarations (IsFiniteLocallyFreeOfDegree, IsFiniteLocallyFreeOfRank, Mathlib GeometricallyConnected) because the node defines finite locally free inline; the extension docstring wording is cosmetic. No compile run (no FIX)."
+ }
+}

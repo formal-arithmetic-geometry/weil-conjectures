@@ -3,48 +3,162 @@
  "blueprint": {
   "is": "lem-wf-affine-constructible-open",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Chevalley constructibility and open pieces of constructible sets",
- "statement": "Let $k$ be a field.\n\n1. (Chevalley.) If $f:X\\to Y$ is a morphism of affine schemes of\n   finite type over $k$, then the image of every constructible subset of\n   $X$ is a constructible subset of $Y$. In particular $f(X)$ is\n   constructible.\n2. If $S$ is a nonempty constructible subset of an affine scheme $Y$ of\n   finite type over $k$, then $S$ contains a nonempty open subset of its\n   closure $\\overline S$. In particular, a dense constructible subset of\n   $Y$ contains a nonempty open subset of $Y$.",
+ "statement": "Let $k$ be a field. Use affine schemes and spectra as in [def-pc-scheme, def-weil-affine-spectrum], finite type over $k$ as in [def-weil-finite-type-morphism], and constructible subsets as in [def-weil-constructible-subset].\n\n1. (Chevalley.) If $f:X\\to Y$ is a morphism over $k$ of affine schemes of\n   finite type over $k$, then the image of every constructible subset of\n   $X$ is a constructible subset of $Y$. In particular $f(X)$ is\n   constructible.\n2. If $S$ is a nonempty constructible subset of an affine scheme $Y$ of\n   finite type over $k$, then $S$ contains a nonempty open subset of its\n   closure $\\overline S$. In particular, a nonempty dense constructible subset of\n   $Y$ contains a nonempty open subset of $Y$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-affine-constructible-open.md",
   "place": "node lem-wf-affine-constructible-open, order 2486"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-constructible-subset"
+ ],
  "proof": [
   {
-   "text": "(1) The coordinate map $k[Y]\\to k[X]$ is of finite type, hence of\nfinite presentation because $k[Y]$ is Noetherian\n([lem-wf-affine-noetherian-components]). Chevalley's theorem says that\nfor a ring map of finite presentation the induced map on spectra sends\nconstructible subsets to constructible subsets (in Mathlib:\n`PrimeSpectrum.isConstructible_comap_image`). On the Noetherian space\n$Y$, constructible in this sense is the same as a finite union of\nintersections of an open and a closed subset.",
+   "text": "First let $Y$ be any affine scheme of finite type over $k$, with structure morphism $p:Y\\to\\operatorname{Spec}k$. Apply the definition of finite type to $p$ and the affine open $\\operatorname{Spec}k$ of $\\operatorname{Spec}k$: $Y$ has an affine open cover by spectra $\\operatorname{Spec}A_j$ of finitely generated $k$-algebras $A_j$. The Noetherianity node makes each $A_j$ Noetherian, so $Y$ is locally Noetherian by definition. The affine-scheme node makes $Y$ quasi-compact and quasi-separated; in particular $Y$ is a Noetherian scheme (locally Noetherian and quasi-compact). Now let $f:X\\to Y$ be a morphism over $k$ as in (1), so that the structure morphism $q$ of $X$ equals $p\\circ f$. Apply clause (a) of the finite-type cancellation node to $X\\xrightarrow{f}Y\\xrightarrow{p}\\operatorname{Spec}k$: the composite $q$ is locally of finite type by hypothesis, so $f$ is locally of finite type. The locally Noetherian finite-presentation node now makes $f$ locally of finite presentation. Since $X$ and $Y$ are affine, $f$ is affine by the morphism-of-affine-schemes node and hence quasi-compact by clause (3) of the affine-morphism node.",
    "uses": [
-    "lem-wf-affine-noetherian-components"
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components",
+    "pqf-def-locnoeth",
+    "lemma-nagata-finite-type-to-separated-target",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T8 (lemma-permanence-finite-type), 01TX (lemma-noetherian-finite-type-finite-presentation), 01S7 (lemma-affine-separated); blueprint proof paragraph (1), finite-presentation reduction"
+   }
   },
   {
-   "text": "(2) Write $S=\\bigcup_{i=1}^rS_i$ with $S_i=U_i\\cap F_i$, $U_i$ open and\n$F_i$ closed, all $S_i$ nonempty. Put $Z=\\overline S$; then\n$Z=\\bigcup_i\\overline{S_i}$. The space $Z$ is a closed subset of $Y$,\nhence has finitely many irreducible components\n([lem-wf-affine-noetherian-components], applied to\n$\\operatorname{Spec}$ of the corresponding quotient of $k[Y]$), and it\nis nonempty. Choose one, $C$. Since $C=\\bigcup_i(C\\cap\\overline{S_i})$\nis irreducible, $C\\subseteq\\overline{S_i}$ for some $i$. Let $\\Omega$ be\nthe complement in $Z$ of the union of the other irreducible components.\nIt is open in $Z$, contained in $C$, and nonempty because $C$ is not\ncontained in the union of finitely many other components (it would lie\nin one of them, contradicting maximality). So $\\Omega$ is a nonempty\nopen subset of $Z$ with $\\Omega\\subseteq\\overline{S_i}$; in particular\nit is open in $\\overline{S_i}$ and therefore meets the dense subset\n$S_i$ of $\\overline{S_i}$.",
+   "text": "All the hypotheses of the existing Chevalley node are now verified: $f$ is quasi-compact and locally of finite presentation, and $Y$ is quasi-compact and quasi-separated. It therefore sends every constructible subset of $X$ to a constructible subset of $Y$. Its explicit $C=X$ clause also gives constructibility of $f(X)$.",
    "uses": [
-    "lem-wf-affine-noetherian-components"
+    "lem-weil-pbc-chevalley-constructible-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054J (lemma-chevalley); blueprint proof paragraph (1), Chevalley application"
+   }
   },
   {
-   "text": "As $\\overline{S_i}\\subseteq F_i$, we have\n$S_i=U_i\\cap\\overline{S_i}$, so\n$S_i\\cap\\Omega=U_i\\cap\\Omega$, which is open in $Z$. It is nonempty by\nthe previous paragraph and contained in $S$. This is the required\nnonempty open subset of $\\overline S$. When $S$ is dense, $\\overline\nS=Y$.",
+   "text": "For (2), use the definition of constructibility to write $S=\\bigcup_{i=1}^r S_i$ with $S_i=U_i\\cap F_i$, $U_i$ open and $F_i$ closed in $Y$, discarding empty pieces. Since $S\\ne\\varnothing$, $r>0$. Set $Z=\\overline S$. Closure commutes with finite unions, so $Z=\\bigcup_i\\overline{S_i}$. The closed-subset component node applies to $Y$, which is a Noetherian scheme by the first paragraph of step 1, and the closed subset $Z$: write $Z=C_1\\cup\\cdots\\cup C_t$ as its finitely many distinct irreducible components. Here $t>0$ since $Z$ contains $S\\ne\\varnothing$. Each $C_j$ is closed in $Z$, and therefore in $Y$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-affine-constructible-open.proof.md",
+    "place": "paragraph (2), finite locally closed decomposition and finite irreducible components of Z; Stacks 005G (definition-constructible), 0BA8 (properties-lemma-Noetherian-irreducible-components)"
+   }
+  },
+  {
+   "text": "We will use the finite closed-cover consequence of the definition of irreducibility. If an irreducible nonempty subspace $C$ is contained in $D_1\\cup\\cdots\\cup D_r$ with all $D_i$ closed, then $C=\\bigcup_i(C\\cap D_i)$; induction on $r$ using the binary closed-union definition shows $C\\subseteq D_i$ for some $i$ (the case $r=0$ is excluded by nonemptiness). Apply this with $C=C_1$ and $D_i=\\overline{S_i}$ to choose $i$ with $C_1\\subseteq\\overline{S_i}$.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-affine-constructible-open.proof.md",
+    "place": "paragraph (2), finite closed cover of the chosen component; induction from Stacks 004V (definition-irreducible-components)"
+   }
+  },
+  {
+   "text": "Let $\\Omega=Z\\setminus\\bigcup_{j=2}^t C_j$. This is open in $Z$ and contained in $C_1$, since the components cover $Z$. It is nonempty: otherwise $C_1\\subseteq\\bigcup_{j=2}^t C_j$, and the finite closed-cover argument of step 4 would put $C_1$ inside one distinct component $C_j$, contradicting maximality in the definition of irreducible components. For $t=1$ the union removed is empty and $\\Omega=Z\\ne\\varnothing$.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-affine-constructible-open.proof.md",
+    "place": "paragraph (2), complement of the remaining components; maximality and the finite closed-cover argument"
+   }
+  },
+  {
+   "text": "Choose an open subset $O\\subseteq Y$ with $\\Omega=O\\cap Z$, by the subspace topology. Since $\\overline{S_i}\\subseteq Z$, we have $O\\cap\\overline{S_i}=\\Omega\\cap\\overline{S_i}=\\Omega$, the last equality following from $\\Omega\\subseteq C_1\\subseteq\\overline{S_i}$. Thus $\\Omega$ is a nonempty open subset of $\\overline{S_i}$ and meets its dense subset $S_i$. Also $S_i\\subseteq F_i$ and $F_i$ is closed, so $\\overline{S_i}\\subseteq F_i$ and $S_i=U_i\\cap\\overline{S_i}$. Consequently $S_i\\cap\\Omega=U_i\\cap\\Omega$ is nonempty, open in $Z$, and contained in $S$. This proves (2). If $S$ is also dense in $Y$, then $Z=Y$, giving the final assertion under the same nonemptiness hypothesis.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-affine-constructible-open.proof.md",
+    "place": "paragraphs (2) and (3), corrected explicit subspace-open calculation and final intersection"
+   }
   }
  ],
  "proof_deps": [
-  "lem-wf-affine-noetherian-components"
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-wf-affine-noetherian-components",
+  "pqf-def-locnoeth",
+  "lemma-nagata-finite-type-to-separated-target",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "def-weil-constructible-subset",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "def-weil-irreducible-components"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-affine-constructible-open.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-affine-constructible-open.proof.md",
+  "place": "paragraphs (1)-(3), with the finite-presentation reduction through existing scheme lemmas and the subspace-open calculation made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley image of constructible subsets and nonempty open subset of closure of a constructible subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.exists_range_eq_of_isConstructible, Topology.IsConstructible.image_of_isClosedEmbedding, PrimeSpectrum.ConstructibleSetData.map, Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+   "date": "2026-10-24",
+   "verdict": "partial match: Chevalley is in Mathlib, but the nonempty open piece for arbitrary reducible closure requires the written argument; no declaration supplies the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "isConstructible_comap_image|exists_isOpen.*Constructible|isConstructible_iff",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+   "date": "2026-10-24",
+   "verdict": "partial match: Chevalley is in Mathlib, but the nonempty open piece for arbitrary reducible closure requires the written argument; no declaration supplies the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley image of constructible subsets and nonempty open subset of closure of a constructible subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, ChevalleyThm.chevalley_polynomialC, ChevalleyThm.chevalley_mvPolynomialC, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsConstructible, Topology.IsConstructible.preimage_of_isOpenEmbedding, PrimeSpectrum.ConstructibleSetData.map, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+   "date": "2026-10-24",
+   "verdict": "partial match: Chevalley is in Mathlib, but the nonempty open piece for arbitrary reducible closure requires the written argument; no declaration supplies the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isConstructible_comap_image\"",
+   "results": "1 hits: PrimeSpectrum.isConstructible_comap_image",
+   "date": "2026-10-24",
+   "verdict": "partial match: Chevalley is in Mathlib, but the nonempty open piece for arbitrary reducible closure requires the written argument; no declaration supplies the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "isIrreducible_iff_sUnion_isClosed|isConstructible_iff|of_comp_finiteType|FinitePresentation.of_finiteType|exists_isOpen_nonempty_subset_irreducibleComponent",
+   "results": "18 hits: Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/Topology/NoetherianSpace.lean, Mathlib/Topology/NoetherianSpace.lean, Mathlib/Topology/Irreducible.lean, Mathlib/Topology/Irreducible.lean, Mathlib/RingTheory/Etale/Field.lean",
+   "date": "2026-10-24",
+   "verdict": "partial match: Chevalley is in Mathlib, but the nonempty open piece for arbitrary reducible closure requires the written argument; no declaration supplies the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty constructible set in a Noetherian space contains a nonempty relatively open subset of its closure",
+   "results": "8 hits: Topology.IsConstructible.isLocallyConstructible, Topology.IsLocallyConstructible, TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent, TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent, Topology.IsConstructible, Topology.IsLocallyConstructible.univ, Topology.IsLocallyConstructible.empty, Topology.IsLocallyConstructible.isConstructible",
+   "date": "2026-10-24",
+   "verdict": "partial match: Chevalley is in Mathlib, but the nonempty open piece for arbitrary reducible closure requires the written argument; no declaration supplies the whole item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "mentions_mathlib"
@@ -55,7 +169,59 @@
   "lem-wf-affine-noetherian-components"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-i-geometry"
+ "unit": "sk-i-geometry",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-wf-affine-constructible-open",
+  "worker": "stage1",
+  "summary": "Reused existing Chevalley, finite-type cancellation, finite-presentation, affine and Noetherian-component nodes; no new nodes. Wrote the elementary finite closed-cover induction and component-isolation argument explicitly. Wrote the source's passage from 'open in Z and contained in the closure of S_i' to 'open in the closure of S_i' as an explicit ambient-open intersection calculation (the source's inference is valid; reviewer correction of the worker's claim that it was not). Made explicit that the morphism in (1) is a morphism over k (an arbitrary scheme morphism between finite-type affine k-schemes, e.g. Spec of an embedding C[x] into C, can have the non-constructible generic point as image). Step 1 derives local Noetherianity from the finite-type cover rather than from an uncited finite generation of the global coordinate ring. Made nonemptiness explicit in the dense corollary; the empty scheme is a counterexample to an unconditional reading. All searches are logged and every citation is backed by a verbatim statement quotation.",
+  "blueprint": "Current latest/main-20261024 node in sk-p-geometry, proof paragraphs (1)-(3): steps 1-2 realize Chevalley, step 3 the decompositions, steps 4-5 component choice and isolation, step 6 the open-piece conclusion. The recorded unit sk-i-geometry constructibility step is preserved. No chapter/unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-58e583d26",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-58e583d26 (reviewer sub-agent of L); spot-checked: I read the master, main-20261015 and latest (sk-p-geometry) blueprint text, all identical, plus unit sk-i-geometry's Constructibility step, Stacks 054J and the tag labels for 01T8/01TX/01S7/005G/0BA8/004V/01OV. I read all 14 cited node statements. The split has no new nodes and follows the unit route; every off-unit citation is a Mathlib leaf or a definition, so tool_uses=[] is right. Steps 2-6 are correct: Chevalley hypotheses (qc, lfp, qcqs Y) all supplied; components of Z via the 0BA8 leaf; the finite closed-cover induction is written out; Ω nonempty by maximality; S_i∩Ω=U_i∩Ω open in Z. The worker's 'nonempty dense' corollary is a correct clarification: Spec 0 with S=∅ is the counterexample. No DAG node duplicates clause (2). FIX applied to the item only (statement, proof steps 1 and 3, proof_deps, split_report.summary). (1) Clause (1) did not say 'over k', and the literal reading is false: Spec of an embedding C[x]→C has the non-constructible generic point of A^1 as image. The statement now reads 'a morphism over $k$'. (2) C1: step 1 used 'Y=Spec A, A finitely generated' without a node; that is Stacks 01T2/00EP. Step 1 now gets local Noetherianity from the cover in def-weil-finite-type-morphism plus lem-wf-affine-noetherian-components, and quasi-compactness from the qcqs node. Step 3 cites this for the Noetherian Y; def-weil-finite-type-morphism was added to proof_deps. (3) The worker's claimed source error, that 'open in Z and contained in closure(S_i)' does not imply 'open in closure(S_i)', is wrong: the inference is valid. I corrected split_report.summary so it is not recorded in HUMAN.md; step 6's explicit calculation stays.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineConstructibleOpen",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isConstructible_image_of_affine_finiteType",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.isConstructible_image_of_affine_finiteType",
+   "AlgebraicGeometry.Scheme.Hom.isConstructible_range_of_affine_finiteType",
+   "AlgebraicGeometry.Scheme.exists_isOpen_inter_closure_subset_of_isConstructible_of_affine_finiteType",
+   "AlgebraicGeometry.Scheme.exists_isOpen_nonempty_subset_of_dense_isConstructible_of_affine_finiteType"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineConstructibleOpen.lean",
+  "statement": "theorem Scheme.Hom.isConstructible_image_of_affine_finiteType (k : Type u) [Field k] {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] {S : Set X} (hS : Topology.IsConstructible S) : Topology.IsConstructible (f '' S)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four statements render both numbered clauses and both explicit corollaries on affine schemes of finite type over a field. Existing upstream declarations give the algebra-map Chevalley form and the open-piece form for an arbitrary Noetherian space; this module specializes to the scheme objects and structure morphisms of the node, reusing their definitions. No definitions or hypotheses about irreducibility or reducedness are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57df200c3",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read item node, 4 stmt_dep records, module (4 sorry theorems), report, upstream WeilConjectures Topology/Constructible:86 and Mathlib Scheme.Hom.isConstructible_image (054J). Hypotheses match: Field k, IsAffine, X.Over Spec k with LocallyOfFiniteType+QuasiCompact structure maps (= def-weil-finite-type-morphism record), f.IsOver Spec k (required by the 'over k' clause), Topology.IsConstructible (= def-weil-constructible-subset mathlib_match). Clause (1) gives image and range constructible; clause (2) gives ∃ open U with (U ∩ closure S) nonempty and ⊆ S under S.Nonempty; the dense corollary keeps hne. No extra assumptions; universe forced by Spec (.of k). lean.statement appears verbatim in the file. Edge cases (empty X/S/Y, reducible closure, any characteristic) are covered. No defs, docstrings carry source + blueprint tag + proof steps, sorry only. No duplicate declaration and no parallel landing. Not recompiled (no change); the worker's scompile and dry run are clean. The report has the Worker report and Second reading sections; the latter says no separate second reader was run."
+ }
 }

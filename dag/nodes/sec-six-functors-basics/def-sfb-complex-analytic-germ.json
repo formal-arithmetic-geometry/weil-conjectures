@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-complex-analytic-germ",
+ "kind": "definition",
+ "title": "Complex analytic germs at the origin",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For $d\\in\\mathbf N$, let $G_d$ be the subtype of germs at $0\\in\\mathbf C^d$ of complex-valued functions admitting a representative $f:\\mathbf C^d\\to\\mathbf C$ analytic at zero, where analytic means locally represented by a convergent complex power series [lem-sfb-complex-analytic-function-operations]. Germ equivalence is equality on some neighbourhood of zero. Only local analyticity of a representative is required; no global extension property is required. In particular $d=0$ is allowed.",
+ "stmt_deps": [
+  "lem-sfb-complex-analytic-function-operations"
+ ],
+ "source": {
+  "document": "literature/cartan-1951-52-exp10.pdf",
+  "place": "Frenkel, Séminaire H. Cartan 1951–52, exposé 10, §4, printed pp.6–7; https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf. Positive polyradii, convergent scalar series and functions analytic at the origin; explicit subtype formulation for the weighted Taylor Banach model."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Weighted Taylor coefficient space and analytic function germs at the origin",
+   "results": "[leansearch] OK 8 hit(s): taylorCoeffWithin; AnalyticAt; AnalyticOn.hasFPowerSeriesOnSubball; AnalyticAt.hasFPowerSeriesAt; HasFPowerSeriesAt.analyticAt; AnalyticOnNhd.hasFTaylorSeriesUpToOn; HasFPowerSeriesOnBall.analyticAt; AnalyticWithinAt.exists_hasFTaylorSeriesUpToOn.",
+   "date": "2026-10-24",
+   "verdict": "no match: AnalyticAt supplies power-series analyticity, but not the analytic germ subtype or weighted coefficient subtype"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Subtype of multivariate complex power series with summable weighted absolute coefficients and subtype of analytic germs at zero",
+   "results": "[leanfinder] OK 8 hit(s): AnalyticAt; HasFPowerSeriesAt; FormalMultilinearSeries.analyticOnNhd; PowerSeries.IsRestricted; hasFPowerSeriesAt_iff; HasFPowerSeriesAt.analyticAt; HasFiniteFPowerSeriesOnBall; HasFPowerSeriesWithinAt.",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic function predicates and one-variable restricted coefficients do not define either specialized subtype"
+  },
+  {
+   "tool": "grep",
+   "query": "AnalyticGerm|analyticGerm|WeightedTaylor|weightedTaylor",
+   "results": "[grep] OK 0 hit(s). Direct rg in Mathlib, lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json also finds no declaration. DAG searches find the item and its derivative/Weierstrass consumers, no definition of either subtype. blueprint_refs.py search weighted Taylor and holomorphic germ each return 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weighted-taylor-banach-model",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: local-ring input for exact analytic pullback. The canonical local completion comparison. Analytic local-coordinate input: Analytic Weierstrass division after linear regularization. Supporting input: Complete weighted Taylor coefficient model for holomorphic germs. Definition of the coefficient space and analytic germs used in its statement.",
+   "via": [
+    "lem-sfb-weighted-taylor-banach-model",
+    "lem-sfb-holomorphic-weierstrass-division",
+    "lem-sfb-analytic-local-completion-comparison",
+    "lem-sfb-analytic-pullback-exact",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.AnalyticGerm",
+  "declaration": "Complex.Taylor.AnalyticGerm",
+  "declarations": [
+   "Complex.Taylor.AnalyticGerm"
+  ],
+  "file": "lean/Sheaf/Analysis/Complex/AnalyticGerm.lean",
+  "statement": "def AnalyticGerm (d : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d092df3b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d092df3b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read item, 3 stmt_deps, the 2 new def nodes and all 3 modules. Each node clause is matched: weighted l1 subtype; ring ops, convolution and unit fixed by an AlgHom equal to .val; norm by norm_eq; norm_mul_le and CompleteSpace for the specified metric; summability and AnalyticOnNhd on the open polydisc; G_d as a subtype of Filter.Germ with pointwise ops fixed; one canonical γ (val = ofFun seriesValue), injective; every germ at some ρ, no uniform radius; σ≤ρ restriction with norm bound and commutation; coordinate restriction via Fin k ↪ Fin d with embDomain, for every representative; d=0 algebra equivalences. ∃ M : BanachModel is not a weakening because Spec fixes all of its data. Def nodes have real data and match their statements; no duplicates found in side-live lean/Sheaf or DAG. Only sorry is the theorem; docstrings and 12 proof steps present; lean.statement verbatim; report has Worker report, Second reading by Q48 and the Frenkel completeness remark (correct for weighted l1). No changes, no compile run (worker compile evidence and dry run OK)."
+ }
+}

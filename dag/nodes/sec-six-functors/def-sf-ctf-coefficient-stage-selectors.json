@@ -1,0 +1,121 @@
+{
+ "id": "def-sf-ctf-coefficient-stage-selectors",
+ "kind": "definition",
+ "title": "Selectors for the four constructible coefficient stages",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite-field coefficient datum, a finite extension $E/\\mathbf Q_\\ell$, an integer $n\\geq1$, and the recorded six-functor operation datum $S$ [def-fix-six-functor-datum]. Define the coefficient-stage index to have the four values finite, integral, rational and common (algebraically closed coefficients). For a finite-type geometric scheme $X$ in $S$, select at these values respectively its recorded bounded constructible finite-quotient, derived-complete integral, rationalized and common-finite-stage categories, with their inherited category structures. Select the recorded finite-Tor domain at finite and integral stages and the whole constructible category at rational and common stages. Select the existing pullback, direct image, compact support, exceptional inverse image, permitted internal-Hom pair domain and internal Hom at the chosen stage. Select the recorded tensor with unrestricted constructible first input and finite-Tor second input; at finite coefficients use the actual partial tensor of [def-sf-constructible-projection-mates], and at the other stages restrict the recorded tensor through the selected domain inclusion. These are selectors and full-subcategory restrictions of existing data; no existence of restricted adjunctions or additional preservation property is asserted.",
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "The four coefficient conventions and the finite-Tor inputs to the six displayed factors; same domains as det-thm-sf-ctf-stability-adjunctions. Existing selectors extracted from PodCtfAdjunctions.lean:44-135 without changing their data."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PodCoefficientStage|coefficientStage",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib selector for these project coefficient stages. Extract the existing project selectors unchanged into their own definition module; do not define an alternative selector."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose existing constructible categories operations and finite Tor domains at four coefficient stages",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, Rep.Tor, CategoryTheory.AB4OfSize, instAB4StarModuleCat, CategoryTheory.AB4OfSize.mk, instAB4ModuleCat; digest 30825cf94bf1f6fb",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib selector for these project coefficient stages. Extract the existing project selectors unchanged into their own definition module; do not define an alternative selector."
+  },
+  {
+   "tool": "loogle",
+   "query": "PodCoefficientStage",
+   "results": "0 hits: ; loogle: unknown identifier 'PodCoefficientStage'; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib selector for these project coefficient stages. Extract the existing project selectors unchanged into their own definition module; do not define an alternative selector."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Select the bounded constructible category, finite Tor domain, six functor operations and partial tensor at each of the finite integral rational and common coefficient stages",
+   "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor', LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, CondensedMod.IsSolid, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; digest c3e38a36a9d91a13",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib selector for these project coefficient stages. Extract the existing project selectors unchanged into their own definition module; do not define an alternative selector."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'PodCoefficientStage|coefficientStage' lean/WeilConjectures; rg -l 'PodCoefficientStage|coefficient.stage.select|coefficient-stage-select' dag/nodes; rg -n 'PodCoefficientStage' lean/Sheaf/Paper/PodCtfAdjunctions.lean; blueprint_refs.py search PodCoefficientStage; blueprint_refs.py search 'coefficient stage'",
+   "results": "Upstream has only the unrelated exceptionalInverseImage_coefficientStages remark. The eight selector declarations occur in PodCtfAdjunctions.lean:44-135, owned solely by theorem det-thm-sf-ctf-stability-adjunctions. Other DAG matches are selector consumers, not definition owners. No node of the new id exists. Blueprint search PodCoefficientStage: 0 matches; coefficient stage: 81 coefficient-convention consumers, no separate selector definition.",
+   "date": "2026-10-24",
+   "verdict": "Move, rather than duplicate, the existing selectors into a new owning definition module; retain all old public names through the original module import."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-relative-product-base-change-factor-squares",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "The coefficient-stage categories, finite-Tor domains and operations in the six-factor relative-product construction.",
+   "via": [
+    "lem-sf-relative-product-base-change-factor-squares"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.Paper.CtfCoefficientStageSelectors",
+  "declaration": "WeilConjectures.PodCoefficientStage",
+  "declarations": [
+   "WeilConjectures.PodCoefficientStage",
+   "WeilConjectures.PodCoefficientStage.category",
+   "WeilConjectures.PodCoefficientStage.categoryInstance",
+   "WeilConjectures.PodCoefficientStage.domain",
+   "WeilConjectures.PodCoefficientStage.operations",
+   "WeilConjectures.PodCoefficientStage.homPairs",
+   "WeilConjectures.PodCoefficientStage.internalHom",
+   "WeilConjectures.PodCoefficientStage.tensor"
+  ],
+  "file": "lean/Sheaf/Paper/CtfCoefficientStageSelectors.lean",
+  "statement": "inductive PodCoefficientStage",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: move all eight selectors verbatim from the theorem-owned PodCtfAdjunctions module into this definition-owned module, changing only their source/blueprint ownership docstrings. PodCtfAdjunctions publicly imports this module and retains its theorem interfaces. No selector or operation is duplicated or chosen from an existence theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "maintenance-Q18-factor-squares-1792863238",
+  "group": "Q18",
+  "result": "fix",
+  "note": "Maintenance extraction requested by return 191b54044d2. All 20 public signatures and masked declaration bodies preserved across the two files. New-definition metadata checks pass. land_set single-file checks: selectors 9.1 s; PodCtfAdjunctions 14.8 s; import and name checks pass. No new mathematics."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "maintenance-Q18-factor-squares-1792863238",
+  "group": "Q18",
+  "result": "fix",
+  "note": "Maintenance extraction requested by return 191b54044d2. All 20 public signatures and masked declaration bodies preserved across the two files. New-definition metadata checks pass. land_set single-file checks: selectors 9.1 s; PodCtfAdjunctions 14.8 s; import and name checks pass. No new mathematics."
+ }
+}

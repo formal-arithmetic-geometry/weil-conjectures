@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-rank-one-reductive-generation",
+ "kind": "statement",
+ "title": "Reductive generation from compatible rank-one subgroups",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme], and $T\\subseteq H$ a split maximal torus, meaning a closed subgroup isomorphic to $\\mathbf G_m^r$ for some $r\\geq0$, maximal among torus subgroups [def-sc-group-scheme-subgroup, def-sc-gm-ga]. Put $X=X^*(T)=\\operatorname{Hom}(T,\\mathbf G_m)$ and $Y=X_*(T)=\\operatorname{Hom}(\\mathbf G_m,T)$, with pairing $\\chi\\circ\\nu(s)=s^{\\langle\\chi,\\nu\\rangle}$. Let $D\\subset X\\setminus\\{0\\}$ be finite and $\\mathbf Z$-linearly independent. For each $\\alpha\\in D$, suppose given a smooth connected split reductive closed subgroup $J_\\alpha\\subseteq H$ with maximal torus $T$ and root set $\\{\\alpha,-\\alpha\\}$, using the root and reductivity conventions of [lem-sfb-reductive-borel-pair-structure]. Denote its root subgroups by $U_{\\pm\\alpha}$ [lem-sfb-reductive-root-subgroup-parametrizations] and its coroot by $c_\\alpha\\in Y$. Assume that for distinct $\\alpha,\\beta\\in D$, $U_{-\\alpha}$ and $U_\\beta$ commute as subgroup schemes: their commutator morphism is constant at the identity. The smallest closed subgroup $G\\subseteq H$ containing $T$ and all the $J_\\alpha$ is smooth connected split reductive, has maximal torus $T$, and has simple-root base $D$. Its coroot corresponding to $\\alpha\\in D$ is $c_\\alpha$. More generally, if $J\\subseteq G$ is any split reductive closed subgroup having maximal torus $T$ and roots exactly $\\pm\\gamma$ for a root $\\gamma$ of $G$, the coroot of $\\gamma$ in $J$ is its coroot in $G$. For $D=\\varnothing$, interpret the generated subgroup as $T$. Reductive means that the smooth connected affine group of finite type has no nontrivial smooth connected normal unipotent subgroup, with unipotence defined by unipotent geometric matrices in a faithful representation. All assertions concern group schemes in every characteristic, rather than just rational-point groups.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.31 and Remark 23.33, printed p.494; root-coroot compatibility for embedded rank-one subgroups as in Theorem 21.11, pp.428-429."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "def-sfb-geometric-coroot"
+ ],
+ "proof": [
+  {
+   "text": "For $D=\\varnothing$, $G=T$. A torus has no nontrivial smooth unipotent subgroup: its points are semisimple in a faithful diagonal representation, so any unipotent point is the identity; smoothness excludes infinitesimal residue. Its adjoint action is trivial, so its roots are empty. Suppose $D\\ne\\varnothing$. Let $P=\\prod_{\\alpha\\in D}J_\\alpha$, with the factors in any fixed order, and $w:P\\to H$ their multiplication map. Put $X=P\\times P$ and $\\varphi(a,b)=w(a)w(b)^{-1}$, pointed at the tuple of identities. Its image is inversion-stable, since swapping $a,b$ inverts $\\varphi$, and contains each $J_\\alpha$ by taking all other factors equal to $1$. Finite products of these smooth affine groups are smooth directly from the definition: lift maps across a square-zero thickening coordinate by coordinate, and tensor their finite presentations. Smoothness gives geometric reducedness. The generic smooth-connected group assertion gives geometric connectedness of each factor; the product-components lemma, after every field extension and by induction on the number of factors, gives geometric connectedness of $X$. Apply the pointed-map generated-subgroup construction. It gives the smallest closed generated $G$, affine of finite type, geometrically reduced and connected. The geometrically-reduced group theorem makes it smooth. Any torus of $G$ containing $T$ is a torus of $H$, so maximality of $T$ in $H$ gives maximality in $G$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "lem-sfb-affine-pointed-map-generated-subgroup",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2h, Propositions 2.46--2.48; smoothness over a perfect field"
+   }
+  },
+  {
+   "text": "The perfect character-cocharacter pairing for any one of the given reductive $J_\\alpha$ identifies $Y$ with the integer dual of $X$. Independence of $D$ lets us prescribe rational values on it in $X\\otimes\\mathbf Q$, extend to a rational basis, and clear denominators. Thus choose $\\lambda\\in Y$ with $\\langle\\alpha,\\lambda\\rangle=n>0$ for every $\\alpha$. The same argument gives face cocharacters $\\eta_\\alpha$ zero on $\\alpha$ and a common positive integer on the remaining roots. Apply the contracting-cell lemma to the given $J_\\alpha\\subseteq G$: the closed-generation, common maximal torus and mixed commutation hypotheses are exactly those of the statement. Obtain $U,V$, the dense open cell $V\\times T\\times U$, the solvable subgroups $TU,TV$, their intersection $T$, and $U=U_G(\\lambda)$, $V=U_G(-\\lambda)$, $Z_G(\\lambda)=T$.",
+   "uses": [
+    "lem-sfb-contracting-rank-one-cell",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.31; Section 13d and assertion 23.22"
+   }
+  },
+  {
+   "text": "Apply the simple-root limit-retraction lemma with these cell and contraction identifications. It gives $p_\\alpha$, its smooth connected kernel $K_\\alpha$, the splitting $U=U_\\alpha\\ltimes K_\\alpha$, the face centralizer $C_U(\\eta_\\alpha)=U_\\alpha$, and extension of every cocharacter nonnegative on $D$ to $U$. Apply the rank-one reflection theorem inside each reductive $J_\\alpha$ to choose $n_\\alpha\\in N_{J_\\alpha}(T)(F)$ acting as $x\\mapsto x-\\langle x,c_\\alpha\\rangle\\alpha$ and sending the weight $α$ to $-α$. Uniqueness of root subgroups in $J_α$ then says that $n_α$ conjugates its two root groups. The retraction lemma says $n_\\alpha$ normalizes $K_\\alpha$. These are all the inputs required by the triangular-reflection-orbit lemma; apply it to obtain $W,R=WD$, their signed integral simple coefficients, the well-defined subgroups $U_\\rho$, and $\\dot w_0$ exchanging $U$ and $V$. This constructs an abstract root system without yet asserting reductivity of $G$.",
+   "uses": [
+    "lem-sfb-simple-root-limit-retractions",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-triangular-reflection-orbits",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.31; Theorem 21.11(d),(e) and cocharacter limits"
+   }
+  },
+  {
+   "text": "The subgroup-detection lemma now applies: each nontrivial reduced $T$-normalized closed subgroup of $U$ contains some $U_\\rho$. Let $A$ be a smooth connected solvable subgroup containing $TV$. If $A\\ne TV$, its intersection with the open cell is dense open in $A$ and has point set $V(F)T(F)(A(F)\\cap U(F))$. Therefore $A(F)\\cap U(F)\\ne\\{1\\}$, for otherwise $TV$ would contain a dense open subset of $A$ and hence all of $A$. The reduction of $A\\cap U$ is a nontrivial reduced closed $T$-normalized subgroup. Detection gives $U_\\rho\\subseteq A$ for some positive $\\rho=w\\alpha$. The orbit lemma places $U_{-\\rho}$ in $V$, hence also in $A$. Thus $A$ contains the conjugate $\\dot wJ_\\alpha\\dot w^{-1}$, since a reductive rank-one group is generated by $T$ and its two root groups. This is impossible: a smooth connected solvable reductive group is a torus, by the unipotent-part/torus-quotient theorem, whereas $J_\\alpha$ has nonempty roots. Consequently $TV$ is a Borel. Conjugation by $\\dot w_0$ shows $TU$ is a Borel as well.",
+   "uses": [
+    "lem-sfb-triangular-root-subgroup-detection",
+    "lem-sfb-triangular-reflection-orbits",
+    "lem-sfb-contracting-rank-one-cell",
+    "lem-sfb-simple-root-generation-mixed-commutation",
+    "lem-sfb-perfect-solvable-unipotent-torus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.31; Definition 17.6 and Theorem 16.33"
+   }
+  },
+  {
+   "text": "Let $N$ be any smooth connected normal unipotent closed subgroup of $G$. It is solvable. Let $N$ act on the nonempty projective scheme $\\mathcal B(G)$ of Borel subgroups by conjugation. The solvable fixed-point theorem gives an $N$-fixed rational point. Normality of $N$ implies every $G(F)$-translate of that point is again $N$-fixed. Transitivity on the rational points and the scheme-theoretic stabilizer description then put $N$ in every Borel subgroup, in particular in $TU\\cap TV=T$. A smooth unipotent subgroup of a torus is trivial, by the semisimple/unipotent point argument of step 1. Thus $G$ is reductive. The torus $T$ is split and maximal, so this is a split reductive group, as required.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-contracting-rank-one-cell"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.31; Theorem 17.9, Section 17f, and the Borel fixed-point theorem"
+   }
+  },
+  {
+   "text": "We identify the abstract $R$ with the actual roots $\\Phi$ of the reductive pair $(G,T)$. Every $U_\\rho$ is a conjugate of an embedded root group of some $J_\\alpha$, so its nonzero tangent line gives the adjoint weight $\\rho$; hence $R\\subseteq\\Phi$. Conversely take $\\chi\\in\\Phi$. Its canonical root subgroup is $\\mathbf G_a$ with conjugation scaling by $\\chi$. Its pairing with $\\lambda$ cannot be zero, since $Z_G(\\lambda)=T$ has only zero adjoint weights. According to its sign, the root group lies in $U_G(\\lambda)=U$ or $U_G(-\\lambda)=V$. In the positive case apply detection to this reduced root group: it contains some $U_\\rho$; equality follows since both are smooth connected one-dimensional closed subgroups. Their conjugation characters agree, so $\\chi=\\rho\\in R$. In the negative case conjugate by $\\dot w_0$ and repeat, then conjugate back. Thus $\\Phi=R$. Since the orbit lemma gives $D$ as the simple-root base of $R$, it is the simple-root base of $(G,T)$.",
+   "uses": [
+    "lem-sfb-triangular-reflection-orbits",
+    "lem-sfb-triangular-root-subgroup-detection",
+    "lem-sfb-contracting-rank-one-cell",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.31; Theorem 21.11 and Theorem 13.33(c)"
+   }
+  },
+  {
+   "text": "Finally let $J\\subseteq G$ be split reductive with maximal torus $T$ and roots $\\pm\\gamma$, where $\\gamma\\in\\Phi$. Its root groups $U^J_{\\pm\\gamma}$ are smooth connected, normalized by $T$, with tangent spaces the nonzero $\\pm\\gamma$ weight spaces of $\\operatorname{Lie}(J)\\subseteq\\mathfrak g$. By the rank-one reflection theorem $\\dim\\mathfrak g_{\\pm\\gamma}=1$, so these tangent spaces are $\\mathfrak g_{\\pm\\gamma}$, and the uniqueness assertion of the root-subgroup theorem gives $U^J_{\\pm\\gamma}=U_{\\pm\\gamma}$. Let $T_\\gamma$ be the largest subtorus of $\\ker\\gamma$ and $G_\\gamma=C_G(T_\\gamma)$; the rank-one reflection theorem makes it reductive, and it contains the commutative $T$, maximal in $G$ and hence in $G_\\gamma$. Since $T_{-\\gamma}=T_\\gamma$, the unitriangular images under $v_\\gamma$ and $v_{-\\gamma}$ lie in $G_\\gamma$ and are, by uniqueness, $U_\\gamma$ and $U_{-\\gamma}$. The roots of $(G_\\gamma,T)$ are exactly $\\pm\\gamma$: $T_\\gamma$ is central in $G_\\gamma$, hence acts trivially on $\\operatorname{Lie}(G_\\gamma)\\subseteq\\mathfrak g$, so a root $\\chi$ of $G_\\gamma$ is a root of $G$ trivial on $T_\\gamma$, that is, a character of the one-dimensional torus $T/T_\\gamma$; thus $\\chi\\in\\mathbf Q\\gamma\\cap\\Phi=\\{\\pm\\gamma\\}$, and both occur. The simple-root generation lemma, applied to $J$ and to $G_\\gamma$, each with base $\\{\\gamma\\}$, says each is the smallest closed subgroup containing $T$ and $U_{\\pm\\gamma}$. Therefore $J=G_\\gamma$. As $T$ and $U_{\\pm\\gamma}$ commute with $T_\\gamma$, $C_J(T_\\gamma)=J=G_\\gamma$, so the rank-one reflection theorem applied to $(J,T)$ and to $(G,T)$ at $\\gamma$ uses the same unique nonidentity element of $N_{G_\\gamma}(T)(F)/T(F)$; it acts by $x\\mapsto x-\\langle x,c\\rangle\\gamma$ both for the coroot $c$ of $\\gamma$ in $J$ and for $\\gamma^\\vee$ in $G$, and uniqueness of the cocharacter with this reflection identity gives $c=\\gamma^\\vee$. Taking $J=J_\\alpha$ proves that its original $c_\\alpha$ is the coroot of $\\alpha$ in $G$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-simple-root-generation-mixed-commutation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 23.33; Theorem 21.11(a)--(e), pp.428--430"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sfb-affine-pointed-map-generated-subgroup",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sfb-contracting-rank-one-cell",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-simple-root-limit-retractions",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-triangular-reflection-orbits",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-triangular-root-subgroup-detection",
+  "lem-sfb-simple-root-generation-mixed-commutation",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-sfb-cocharacter-limit-smooth-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.31 and Remark 23.33, p.494; assembly through triangular-cell and limit-retraction inputs. Milne refers the omitted general-generation proof to Steinberg 1999, 5.4; local copy requested in report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Steinberg rank one generation criterion: reductive rank one subgroups sharing a maximal torus and commuting opposite simple root groups generate a reductive group",
+   "results": "{\"t\": \"2026-10-23T21:32:47Z\", \"tool\": \"leanfinder\", \"query\": \"Steinberg rank one generation criterion: reductive rank one subgroups sharing a maximal torus and commuting opposite simple root groups generate a reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"closureCommutatorRepresentatives\", \"rank_closureCommutatorRepresentatives_le\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"frattini_nongenerating\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\"], \"digest\": \"fba0ba072b2c0bc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.instHasTrivialRadical (GeckConstruction/Semisimple.lean:392) is a characteristic-zero Lie-algebra result. Abstract Subgroup.noncommPiCoprod_range requires pairwise commuting whole subgroups; here only opposite root groups from distinct rank-one subgroups commute. No group-scheme recognition theorem occurs in the grep or Loogle hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear algebraic group generated by compatible rank one reductive subgroups is reductive with prescribed simple roots",
+   "results": "{\"t\": \"2026-10-23T21:33:19Z\", \"tool\": \"leanfinder\", \"query\": \"A linear algebraic group generated by compatible rank one reductive subgroups is reductive with prescribed simple roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.EmbeddedG2.toIsReduced\", \"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.IsG2.toIsReduced\", \"RootPairing.EmbeddedG2\", \"RootPairing.IsG2.toIsIrreducible\"], \"digest\": \"bd558e95c896d73f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.instHasTrivialRadical (GeckConstruction/Semisimple.lean:392) is a characteristic-zero Lie-algebra result. Abstract Subgroup.noncommPiCoprod_range requires pairwise commuting whole subgroups; here only opposite root groups from distinct rank-one subgroups commute. No group-scheme recognition theorem occurs in the grep or Loogle hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reductive\"",
+   "results": "{\"t\": \"2026-10-23T21:33:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"reductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.instHasTrivialRadical (GeckConstruction/Semisimple.lean:392) is a characteristic-zero Lie-algebra result. Abstract Subgroup.noncommPiCoprod_range requires pairwise commuting whole subgroups; here only opposite root groups from distinct rank-one subgroups commute. No group-scheme recognition theorem occurs in the grep or Loogle hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split reductive rank one subgroups with a common maximal torus generate a reductive group when distinct simple opposite root groups commute",
+   "results": "{\"t\": \"2026-10-23T21:33:17Z\", \"tool\": \"leansearch\", \"query\": \"Split reductive rank one subgroups with a common maximal torus generate a reductive group when distinct simple opposite root groups commute\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.noncommPiCoprod_range\", \"Subgroup.independent_of_coprime_order\", \"Subgroup.closureCommGroupOfComm\", \"RootPairing.weylGroup\", \"AddSubgroup.closureAddCommGroupOfComm\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.IsReduced.mk\"], \"digest\": \"466ae615306ec493\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.instHasTrivialRadical (GeckConstruction/Semisimple.lean:392) is a characteristic-zero Lie-algebra result. Abstract Subgroup.noncommPiCoprod_range requires pairwise commuting whole subgroups; here only opposite root groups from distinct rank-one subgroups commute. No group-scheme recognition theorem occurs in the grep or Loogle hits."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive.*group|root.subgroup|rank.one.*group",
+   "results": "{\"t\": \"2026-10-23T21:33:16Z\", \"tool\": \"grep\", \"query\": \"reductive.*group|root.subgroup|rank.one.*group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/DiscreteValuativeRel.lean\"], \"digest\": \"2fd1c358f2a1b36c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.instHasTrivialRadical (GeckConstruction/Semisimple.lean:392) is a characteristic-zero Lie-algebra result. Abstract Subgroup.noncommPiCoprod_range requires pairwise commuting whole subgroups; here only opposite root groups from distinct rank-one subgroups commute. No group-scheme recognition theorem occurs in the grep or Loogle hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible rank one reductive subgroups generate a reductive algebraic group with simple roots",
+   "results": "{\"t\": \"2026-10-23T22:27:24Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible rank one reductive subgroups generate a reductive algebraic group with simple roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.EmbeddedG2.toIsReduced\", \"RootPairing.IsG2.toIsIrreducible\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"RootPairing.instIsRootSystemOfNonemptyOfNeZeroOfNatOfIsIrreducible\"], \"digest\": \"db29521ea1db7fb9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction is a characteristic-zero Lie algebra theorem, not reductivity of group schemes; the other hits concern root pairings, valuations or module rank."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Steinberg criterion for reductivity from commuting opposite simple root subgroups",
+   "results": "{\"t\": \"2026-10-23T22:27:25Z\", \"tool\": \"leanfinder\", \"query\": \"Steinberg criterion for reductivity from commuting opposite simple root subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\"], \"digest\": \"a19fd5125cbe8bb8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction is a characteristic-zero Lie algebra theorem, not reductivity of group schemes; the other hits concern root pairings, valuations or module rank."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reductive\"",
+   "results": "{\"t\": \"2026-10-23T22:27:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"reductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction is a characteristic-zero Lie algebra theorem, not reductivity of group schemes; the other hits concern root pairings, valuations or module rank."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|root.subgroup",
+   "results": "{\"t\": \"2026-10-23T22:27:21Z\", \"tool\": \"grep\", \"query\": \"reductive|root.subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\"], \"digest\": \"d761836b500ad783\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction is a characteristic-zero Lie algebra theorem, not reductivity of group schemes; the other hits concern root pairings, valuations or module rank."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rank one generation of split reductive group schemes",
+   "results": "{\"t\": \"2026-10-23T22:27:21Z\", \"tool\": \"leansearch\", \"query\": \"Rank one generation of split reductive group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finite_of_rank_eq_one\", \"Valuation.IsRankOneDiscrete.generator_mem_range\", \"Group.rank_spec\", \"Valuation.RankOne\", \"Valuation.IsRankOneDiscrete.generator_ne_one\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"Valuation.IsRankOneDiscrete\", \"Module.rank_le_one_iff_top_isPrincipal\"], \"digest\": \"e8940f986da400f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction is a characteristic-zero Lie algebra theorem, not reductivity of group schemes; the other hits concern root pairings, valuations or module rank."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-root-exponential-group",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Theorem 23.31 and Remark 23.33, printed p.494; root-coroot compatibility for embedded rank-one subgroups as in Theorem 21.11, pp.428-429.",
+   "via": [
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-one-reductive-generation",
+  "worker": "stage1",
+  "summary": "Constructed a seven-step proof through four strictly intermediate triangular-cell, limit-retraction, abstract reflection-orbit and reduced-subgroup-detection inputs. Kept the statement unchanged, treated the empty base, proved reductivity by Borel fixed points, and checked coroot compatibility scheme-theoretically in every characteristic.",
+  "blueprint": "Supporting rank-one generation input beneath det-thm-sf-ctf-stability-direct-images proof (3), through the existing Chevalley realization ancestry; no unit route changed.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-to-geometrically-reduced result for the pointed source of generated subgroups; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-connected-product-components",
+    "why": "Generic connected-product theorem for the finite product of rank-one groups; not a change of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-geometrically-connected-product-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-eab7341c9",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-eab7341c9 (reviewer sub-agent of L); spot-checked: Read in full: Milne iAG 2017 Thm 23.31 and Rem 23.33 (p.494, which refer the proof to Steinberg 1999, 5.4), together with 21.11. Q77 kept the item's statement, stmt_deps and blueprint unchanged (diffed against the Q06 snapshot). There is no repair note, no cycle and no SGA. Steps 1-6 check out. Step 1: the pointed map (a,b)->w(a)w(b)^-1 on P×P gives L=G; geometric connectedness via solvable-normal-products and the product-components leaf, geometric reducedness via smoothness, then geometrically-reduced-group-smooth. Steps 2-3: every hypothesis of the cell, retraction and orbit nodes is supplied; n_α comes from rank-one-reflections in J_α, and uniqueness gives n_α U_α n_α^-1 = V_α. Step 4: a solvable A ⊋ TV meets the open cell, (A∩U)_red is detected, ẇJ_αẇ^-1 ⊆ A would be a solvable reductive group, hence a torus, a contradiction; so TV and TU are Borels. Step 5: fixed point on B(G), normality, scheme-theoretic stabilizers, so N ⊆ TU∩TV = T. Step 6: R ⊆ Φ by tangent weights; for χ in Φ, ⟨χ,λ⟩≠0 via Lie Z_G(λ) = g_0, then detection, with ẇ_0 for the negative case. FIX (C4/E5): step 7 asserted 'G_γ = C_G(T_γ) has roots ±γ', which rank-one-reflections does not state. I wrote in the deduction (T_γ is central in G_γ, so its roots lie in Qγ∩Φ = {±γ}; U_±γ ⊆ G_γ via v_±γ). I also made the coroot step explicit: C_J(T_γ) = J = G_γ gives the same Weyl element, and uniqueness of the cocharacter gives c = γ^∨. The uses list is unchanged; the fix touches the step-7 text only. The four new nodes are true, not restatements of the item, and not duplicates. contracting-rank-one-cell: under its hypotheses G is reductive by 23.31, so the big cell gives U = U_G(λ), Z_G(λ) = T and TU∩TV = T; longest-weyl-open-cell assumes reductivity and compatible-rank-one-graph-geometry is about graphs in a product of two reductive groups. simple-root-limit-retractions: p_α projects onto U_α, K_α = R_u(P_α), and n_α ∈ Z_G(η_α). triangular-reflection-orbits holds without generation by J_α: W is finite via N/Z, U_ρ is well defined via C_U(η_β) = U_β, and ẇ_0 swaps U and V by dimension. triangular-root-subgroup-detection: retraction limits plus height descent by n_β; reducedness is needed (α_p is a counterexample). Batch-5: the 11 citations reach only generic trf scheme tools (fppf base change, split-lattice tori, fpqc smooth descent, the descent-datum definition, the fibre smoothness criterion), none of them part of the trace formula or Poincaré duality, so all are accepted. Tool uses accepted: sbc-lem-smooth-geometrically-reduced and the product-components leaf.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RankOneReductiveGeneration",
+  "declaration": "AlgebraicGeometry.rankOne_reductive_generation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RankOneReductiveGeneration.lean",
+  "statement": "theorem rankOne_reductive_generation {F : Type u} [Field F] [IsAlgClosed F] (H T : Grp (Over (Spec (.of F)))) (hH : SolvableGroupStructure.IsAlgebraic H) (hsm : Smooth H.X.hom) (hconn : ConnectedSpace H.X.left) (iT : T ⟶ H) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (D : Finset (Additive (RankOneRoots.Character T))) (hDzero : ∀ α ∈ D, α ≠ 0) (hDind : LinearIndependent ℤ (fun α : D ↦ α.val)) (J : D → Grp (Over (Spec (.of F)))) (jH : ∀ α, J α ⟶ H) (tJ : ∀ α, T ⟶ J α) (hJclosed : ∀ α, IsClosedSubgroupScheme (jH α).hom.hom) (hJred : ∀ α, ReductiveTorusCentralizer.IsReductive (J α)) (hJtorus : ∀ α, ReductiveTorusCentralizer.IsMaximalTorus (tJ α)) (hJinc : ∀ α, tJ α ≫ jH α = iT) (aJ : ∀ α, ModObj T.X (J α).X) (haJ : ∀ α, (aJ α).smul = RankOneRoots.adjointMap (tJ α)) (hJroots : ∀ (α : D) (χ : RankOneRoots.Character T), χ ∈ RankOneRoots.roots T (J α) (aJ α) ↔ Additive.ofMul χ = α.val ∨ Additive.ofMul χ = -α.val) (c : D → RankOneRoots.Cocharacter T) (hc : ∀ α, RankOneRoots.IsGeometricCoroot (tJ α) α.val.toMul (c α)) (U : D → Bool → Grp (Over (Spec (.of F)))) (uJ : ∀ α ε, U α ε ⟶ J α) (hU : ∀ α ε, IsClosedSubgroupScheme (uJ α ε).hom.hom ∧ Smooth (U α ε).X.hom ∧ ConnectedSpace (U α ε).X.left ∧ @TorusCharacterTangent.IsStable F _ T (J α) (aJ α) _ (uJ α ε) ∧ (GrpObj.differential (uJ α ε).hom.hom).toLinearMap.range = RankOneRoots.weight T (J α) (aJ α) (if ε then α.val.toMul else (-α.val).toMul)) (hcomm : ∀ α β : D, α ≠ β → Commute (fst (U α false).X (U β true).X ≫ (uJ α false ≫ jH α).hom.hom) (snd (U α false).X (U β true).X ≫ (uJ β true ≫ jH β).hom.hom)) : ∃ (G : Grp (Over (Spec (.of F)))) (gH : G ⟶ H) (tG : T ⟶ G) (jG : ∀ α, J α ⟶ G), IsClosedSubgroupScheme gH.hom.hom ∧ tG ≫ gH = iT ∧ (∀ α, jG α ≫ gH = jH α) ∧ (∀ (K : Grp (Over (Spec (.of F)))) (kH : K ⟶ H), IsClosedSubgroupScheme kH.hom.hom → (∃ tK : T ⟶ K, tK ≫ kH = iT) → (∀ α, ∃ jK : J α ⟶ K, jK ≫ kH = jH α) → ∃ f : G ⟶ K, f ≫ kH = gH) ∧ Smooth G.X.hom ∧ ConnectedSpace G.X.left ∧ ReductiveTorusCentralizer.IsReductive G ∧ ReductiveTorusCentralizer.IsMaximalTorus tG ∧ (D = ∅ → IsIso tG) ∧ ∃ (aG : ModObj T.X G.X) (Φ : Finset (Additive (RankOneRoots.Character T))) (P : RootDatum Φ (Additive (RankOneRoots.Character T)) (Additive (RankOneRoots.Cocharacter T))) (b : P.Base), Module.Finite ℤ (Additive (RankOneRoots.Character T)) ∧ Module.Finite ℤ (Additive (RankOneRoots.Cocharacter T)) ∧ aG.smul = RankOneRoots.adjointMap tG ∧ P.IsReduced ∧ (∀ ρ : Φ, P.root ρ = ρ.val) ∧ (∀ (χ : Additive (RankOneRoots.Character T)) (ν : Additive (RankOneRoots.Cocharacter T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) ∧ (∀ χ : RankOneRoots.Character T, Additive.ofMul χ ∈ Φ ↔ χ ∈ RankOneRoots.roots T G aG) ∧ (∀ χ : Additive (RankOneRoots.Character T), χ ∈ D ↔ ∃ ρ : Φ, ρ ∈ b.support ∧ ρ.val = χ) ∧ (∀ ρ : Φ, RankOneRoots.IsGeometricCoroot tG ρ.val.toMul (P.coroot ρ).toMul) ∧ (∀ (α : D) (ρ : Φ), ρ.val = α.val → (P.coroot ρ).toMul = c α) ∧ ∀ (K : Grp (Over (Spec (.of F)))) (kG : K ⟶ G) (tK : T ⟶ K), IsClosedSubgroupScheme kG.hom.hom → ReductiveTorusCentralizer.IsReductive K → ReductiveTorusCentralizer.IsMaximalTorus tK → tK ≫ kG = tG → ∀ aK : ModObj T.X K.X, aK.smul = RankOneRoots.adjointMap tK → ∀ ρ : Φ, (∀ χ : RankOneRoots.Character T, χ ∈ RankOneRoots.roots T K aK ↔ Additive.ofMul χ = ρ.val ∨ Additive.ofMul χ = -ρ.val) → ∀ d : RankOneRoots.Cocharacter T, RankOneRoots.IsGeometricCoroot tK ρ.val.toMul d → d = (P.coroot ρ).toMul",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c80801f66",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node. F, H and the split maximal T are faithful. J_α closed, reductive, same T, roots exactly ±α under pinned conjugation. Supplied U_{±α} satisfy exactly the uniqueness hypotheses of reductive_root_subgroup_parametrizations, so they are canonical and not a stronger assumption. hcomm is Commute on the product scheme. Conclusion: minimality over all closed subgroups, smooth/connected/reductive/maximal T, D=∅ gives IsIso, Φ = actual roots, reduced RootDatum with pinned pairing and geometric coroots, Base support exactly D, coroot at α is c_α, general embedded rank-one clause present. New def-sfb-geometric-coroot (IsGeometricCoroot): rational point in N(T)∩C(T_α) outside T(F) acting by the reflection formula; matches Milne 21.11(d),(e) pp.428-429 and the rank-one-reflections direction; unique since the local Weyl group has order 2; searches found no duplicate. lean.statement verbatim for both nodes; item text unchanged, only stmt_dep added; one sorry; docstrings OK; universes bound. No compile run (worker reports clean)."
+ }
+}

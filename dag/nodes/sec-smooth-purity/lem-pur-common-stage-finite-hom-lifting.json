@@ -1,0 +1,232 @@
+{
+ "id": "lem-pur-common-stage-finite-hom-lifting",
+ "kind": "statement",
+ "title": "Finite common-stage Hom lifting and eventual equality",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-pur-conventions]. Let $X,X_i$ be finite-type $k$-schemes, $j_i:X_i\\to X$ morphisms [def-weil-finite-type-morphism], and $I$ a finite set, possibly empty. Use the small pro-etale sites [def-weil-pbc-proetale-site], raw rational categories [def-weil-rationalization-karoubi] and common-stage pair categories [def-weil-algebraically-closed-coefficients]. Write $r_{E,i}=Lj_i^*$ for the rational derived pullback of [def-weil-derived-pullback-tensor-hom], with the rationalized canonical scalar comparisons $b^i_{L/E,K}:r_{E,i}K\\otimes_EL\\xrightarrow{\\sim}r_{L,i}(K\\otimes_EL)$ of [lem-pur-integral-operations-scalar-extension], with their identity and tower compatibilities [lem-weil-scalar-extension-composition]. Assume $R_E=(r_{E,i})_i$ is fully faithful at every finite coefficient field $E\\subset\\Omega$ [def-weil-finite-subextension-directed-set].\n\nFor global pair objects $A=(E,K)$ and $B=(F,M)$, common-stage restriction, whose component representative of $[L,u]$ is\n$$[L,(b^i_{L/F,M})^{-1}\\circ r_{L,i}(u)\\circ b^i_{L/E,K}],$$\ninduces a bijection\n$$\\operatorname{Hom}(A,B)\\xrightarrow{\\sim}\\prod_i\\operatorname{Hom}((E,r_{E,i}K),(F,r_{F,i}M)).$$\nEvery tuple on the right has a simultaneous representative and a preimage $u:K\\otimes_EL\\to M\\otimes_FL$ at a single finite $L\\supset E,F$, which can also contain any prescribed finite list of coefficient fields. More precisely, for component representatives $v_i$ at $L_i\\supset E,F$ one can choose any common finite upper field $L\\supset L_i,E,F$, transport every $v_i$ there using the scalar-tower isomorphisms, and choose $u$ with\n$$r_{L,i}(u)=b^i_{L/F,M}\\circ(v_i)_L\\circ(b^i_{L/E,K})^{-1}.$$\nFor representatives $u_0,u_1$ of two global arrows at fields $L_0,L_1$, their component classes are equal for every $i$ if and only if the transported global representatives agree over some finite $N\\supset L_0,L_1$. Given component equality witnesses at finitely many fields, $N$ can be any common upper field also containing the representatives' fields. No injectivity of transition maps on Hom groups is required. For $I=\\varnothing$ the Hom set is a singleton, and the common field for the empty family can be $\\mathbf Q_\\ell$ enlarged to contain the fields of the endpoints and representatives.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility assertion, finite-clopen transport: original item steps 8-9 and empty Hom/equality case of step 11; simultaneous arrow and equality descent. Agent subargument; coefficient models in the current DAG definitions (the blueprint itself only asserts invertibility)."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Use the unique coherent pullback stage-system morphism supplied by lem-sf-rational-direct-image-coefficient-compatibility. Its functor family is the literal rationalDerivedPullback and its beta components are commonStagePullbackComparison. Substitute these components in StageSystem.Morphism.tr_mapAt to prove stageRestriction commutes with transport. No right-adjoint mate assertion is used.",
+   "uses": [
+    "lem-sf-rational-direct-image-coefficient-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen common-stage pullback functor satisfies its representative formula by commonStageDerivedPullback_existsUnique. Conjugation by its specified object equalities converts the heterogeneous formula to restrictionHom_ofHom.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct over any finite list of coefficient fields. Start with the compositum of the endpoint fields (also for the empty list); at insertion replace the upper field by its compositum with the new field. The finite-coefficient compositum bounds preserve all earlier lower bounds. Every component Hom class has a representative, so this supplies one common upper field for all component representatives and any prescribed finite list. At this field, conjugate the transported representatives by inverse source comparison and target comparison. Stagewise surjectivity supplies a global stage arrow. Cancelling the comparisons proves the restriction formula and therefore simultaneous lifting and surjectivity. The same stagewise surjectivity proves the displayed lifting assertion at any given upper field.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For two representatives, assume component transport equality at witness fields Ni. Transport each equality to any N containing every Ni and the original representative fields. StageSystem.tr_tr and the transport compatibility from step 1 identify the resulting equalities with equality of the restrictions of the two global transports. Cancel both endpoint comparisons and use stagewise injectivity to equate these global transports. For equality of component classes, the representatives theorem supplies the actual Ni. Take a finite compositum of them and both original fields. Eventual equality then proves equality of global classes, giving injectivity. Conversely applying restrictionHom to equal global classes gives equal components. Combine this injectivity with the representatives equality criterion to obtain the eventual-equality iff.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Combine injectivity and surjectivity to obtain bijectivity. If I is empty, its unique empty tuple has a preimage by surjectivity, giving Nonempty Hom. For any two arrows their component functions agree by elimination from I, and injectivity equates them. This gives Subsingleton Hom without requiring I to be nonempty or any Hom transition to be injective.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-rational-direct-image-coefficient-compatibility",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": "T9, 2026-10-25: Lean proof from the existing uniquely normalized coherent pullback family, StageSystem tr_mapAt/tr_tr/mkHom_tr, finite compositum induction, stagewise bijectivity and the existing representative/equality theorem. This reuses the coefficient coherence already stated elsewhere; no new results or holes.",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "filtered.*(prod|pi)|(?:prod|pi).*filtered|colimit.*(prod|pi)",
+   "results": "{\"t\": \"2026-10-22T06:45:20Z\", \"tool\": \"grep\", \"query\": \"filtered.*(prod|pi)|(?:prod|pi).*filtered|colimit.*(prod|pi)\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/ColimitLimit.lean\", \"Mathlib/CategoryTheory/Limits/ColimitLimit.lean\", \"Mathlib/CategoryTheory/Limits/ColimitLimit.lean\", \"Mathlib/CategoryTheory/Limits/ColimitLimit.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean\"], \"digest\": \"c310de5bf3031672\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit/product isomorphisms are tools on set diagrams, not the conjugated coefficient Hom map with global lift and eventual equality; the pair-category identification and finite-stage comparison remain arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.filteredColimit, CategoryTheory.Functor.FullyFaithful",
+   "results": "{\"t\": \"2026-10-22T06:45:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.filteredColimit, CategoryTheory.Functor.FullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.filteredColimit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "query error: loogle: unknown identifier 'CategoryTheory.Limits.filteredColimit'; corrected query is recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite product of filtered Hom colimits with simultaneous stage representatives and eventual equality",
+   "results": "{\"t\": \"2026-10-22T06:45:20Z\", \"tool\": \"leansearch\", \"query\": \"Finite product of filtered Hom colimits with simultaneous stage representatives and eventual equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc\", \"CategoryTheory.Limits.IsIPC.isIso\", \"CategoryTheory.Limits.coconePointwiseProduct_ι_app\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π\", \"CategoryTheory.Limits.Types.isIso_colimitPointwiseProductToProductColimit\", \"CategoryTheory.Limits.colimitPointwiseProductToProductColimit_app\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"CategoryTheory.Limits.pointwiseProductCompEvaluation_hom_app\"], \"digest\": \"8919cf9a5668ef1b\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit/product isomorphisms are tools on set diagrams, not the conjugated coefficient Hom map with global lift and eventual equality; the pair-category identification and finite-stage comparison remain arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite products of common stage Hom colimits are bijective if the maps at each stage are bijective with simultaneous representatives and eventual equality",
+   "results": "{\"t\": \"2026-10-22T06:45:21Z\", \"tool\": \"leanfinder\", \"query\": \"Finite products of common stage Hom colimits are bijective if the maps at each stage are bijective with simultaneous representatives and eventual equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CofanTypes.bijective_fromSigma_of_isColimit\", \"CategoryTheory.Limits.Cofan.nonempty_isColimit_iff_bijective_fromSigma\", \"CategoryTheory.Limits.Types.isIso_colimitPointwiseProductToProductColimit\", \"CategoryTheory.Functor.bijective_colimitTypePrecomp\", \"CategoryTheory.Limits.CofanTypes.isColimit_iff_bijective_fromSigma\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.iff_bijective\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.bijective\", \"CategoryTheory.Limits.IsIPC.isIso\"], \"digest\": \"7af20074526c5063\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit/product isomorphisms are tools on set diagrams, not the conjugated coefficient Hom map with global lift and eventual equality; the pair-category identification and finite-stage comparison remain arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of a functor between filtered colimits of categories detected at each finite stage and finitely many component equality witnesses",
+   "results": "{\"t\": \"2026-10-22T06:45:22Z\", \"tool\": \"leanfinder\", \"query\": \"Full faithfulness of a functor between filtered colimits of categories detected at each finite stage and finitely many component equality witnesses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFilteredOrEmpty.of_exists_of_isFiltered_of_fullyFaithful\", \"CategoryTheory.IsFiltered.of_exists_of_isFiltered_of_fullyFaithful\", \"CategoryTheory.IsFiltered.SmallFilteredIntermediate.instFullInclusion\", \"CategoryTheory.Functor.final_of_exists_of_isFiltered_of_fullyFaithful\", \"CategoryTheory.Ind.inclusion.fullyFaithful\", \"CategoryTheory.IsCofiltered.SmallCofilteredIntermediate.instFullInclusion\", \"CategoryTheory.instFullIndFunctorOppositeTypeInclusion\", \"instFullLightDiagram'LightDiagramToLightFunctor\"], \"digest\": \"ad6e94883d420779\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit/product isomorphisms are tools on set diagrams, not the conjugated coefficient Hom map with global lift and eventual equality; the pair-category identification and finite-stage comparison remain arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful",
+   "results": "{\"t\": \"2026-10-22T06:46:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.FullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.id\", \"CategoryTheory.Functor.FullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.instSubsingleton\", \"CategoryTheory.Functor.FullyFaithful.faithful\", \"CategoryTheory.Functor.FullyFaithful.full\", \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.ofIso\", \"CategoryTheory.Functor.FullyFaithful.preimageIso\"], \"digest\": \"bd2150d70932d296\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit/product isomorphisms are tools on set diagrams, not the conjugated coefficient Hom map with global lift and eventual equality; the pair-category identification and finite-stage comparison remain arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(prod|pi)|(?:prod|pi).*filtered|colimit.*(prod|pi)",
+   "results": "{\"t\": \"2026-10-22T07:54:26Z\", \"tool\": \"grep\", \"query\": \"filtered.*(prod|pi)|(?:prod|pi).*filtered|colimit.*(prod|pi)\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Pi.lean\", \"Mathlib/CategoryTheory/Limits/Pi.lean\", \"Mathlib/CategoryTheory/Limits/Pi.lean\", \"Mathlib/CategoryTheory/Limits/Pi.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean\"], \"digest\": \"f27eae7cba34f397\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic filtered-colimit products, eventual equality or fully faithful functors. None states the actual conjugated rational pullback map with simultaneous finite-field lift and equality witnesses. Read FullyFaithful.lean and FilteredColimitCommutesProduct.lean; these tools do not supply the coefficient comparison calculation in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite product of filtered Hom colimits with simultaneous stage representatives and eventual equality",
+   "results": "{\"t\": \"2026-10-22T07:54:27Z\", \"tool\": \"leansearch\", \"query\": \"Finite product of filtered Hom colimits with simultaneous stage representatives and eventual equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc\", \"CategoryTheory.Limits.IsIPC.isIso\", \"CategoryTheory.Limits.coconePointwiseProduct_ι_app\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π\", \"CategoryTheory.Limits.Types.isIso_colimitPointwiseProductToProductColimit\", \"CategoryTheory.Limits.colimitPointwiseProductToProductColimit_app\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"CategoryTheory.Limits.pointwiseProductCompEvaluation_hom_app\"], \"digest\": \"8919cf9a5668ef1b\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic filtered-colimit products, eventual equality or fully faithful functors. None states the actual conjugated rational pullback map with simultaneous finite-field lift and equality witnesses. Read FullyFaithful.lean and FilteredColimitCommutesProduct.lean; these tools do not supply the coefficient comparison calculation in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful",
+   "results": "{\"t\": \"2026-10-22T07:54:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.FullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.id\", \"CategoryTheory.Functor.FullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.instSubsingleton\", \"CategoryTheory.Functor.FullyFaithful.faithful\", \"CategoryTheory.Functor.FullyFaithful.full\", \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.ofIso\", \"CategoryTheory.Functor.FullyFaithful.preimageIso\"], \"digest\": \"bd2150d70932d296\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic filtered-colimit products, eventual equality or fully faithful functors. None states the actual conjugated rational pullback map with simultaneous finite-field lift and equality witnesses. Read FullyFaithful.lean and FilteredColimitCommutesProduct.lean; these tools do not supply the coefficient comparison calculation in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite products of common stage Hom colimits are bijective if the maps at each stage are bijective with simultaneous representatives and eventual equality",
+   "results": "{\"t\": \"2026-10-22T07:54:36Z\", \"tool\": \"leanfinder\", \"query\": \"Finite products of common stage Hom colimits are bijective if the maps at each stage are bijective with simultaneous representatives and eventual equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsIPC.isIso\", \"CategoryTheory.Functor.bijective_colimitTypePrecomp\", \"CategoryTheory.Limits.IsIPC\", \"CategoryTheory.Limits.CofanTypes.bijective_fromSigma_of_isColimit\", \"CategoryTheory.Limits.colimitPointwiseProductToProductColimit\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π\", \"CategoryTheory.Limits.CofanTypes.isColimit_iff_bijective_fromSigma\", \"CategoryTheory.Limits.Types.isIso_colimitPointwiseProductToProductColimit\"], \"digest\": \"98551af88c6b8dc6\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic filtered-colimit products, eventual equality or fully faithful functors. None states the actual conjugated rational pullback map with simultaneous finite-field lift and equality witnesses. Read FullyFaithful.lean and FilteredColimitCommutesProduct.lean; these tools do not supply the coefficient comparison calculation in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|FullyFaithful|finite.*[Hh]om|common.stage",
+   "results": "{\"t\": \"2026-10-22T07:55:26Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful|FullyFaithful|finite.*[Hh]om|common.stage\", \"sub\": \"CategoryTheory/Limits/FilteredColimitCommutesProduct.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic filtered-colimit products, eventual equality or fully faithful functors. None states the actual conjugated rational pullback map with simultaneous finite-field lift and equality witnesses. Read FullyFaithful.lean and FilteredColimitCommutesProduct.lean; these tools do not supply the coefficient comparison calculation in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of a functor between filtered colimits of categories detected at each finite stage and finitely many component equality witnesses",
+   "results": "{\"t\": \"2026-10-22T07:55:29Z\", \"tool\": \"leanfinder\", \"query\": \"Full faithfulness of a functor between filtered colimits of categories detected at each finite stage and finitely many component equality witnesses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.inclusion.fullyFaithful\", \"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.IsFiltered.SmallFilteredIntermediate.instFullInclusion\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"instFullLightDiagram'LightDiagramToLightFunctor\", \"CategoryTheory.IsCofiltered.SmallCofilteredIntermediate.instFullInclusion\", \"CategoryTheory.IsFiltered.SmallFilteredIntermediate.instFaithfulInclusion\"], \"digest\": \"0300414c78d70a45\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic filtered-colimit products, eventual equality or fully faithful functors. None states the actual conjugated rational pullback map with simultaneous finite-field lift and equality witnesses. Read FullyFaithful.lean and FilteredColimitCommutesProduct.lean; these tools do not supply the coefficient comparison calculation in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-product-field-coefficient-descent",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, finite-clopen transport: original item steps 8-9 and empty Hom/equality case of step 11; simultaneous arrow and equality descent.",
+   "via": [
+    "lem-pur-finite-product-field-coefficient-descent",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-common-stage-finite-hom-lifting",
+  "worker": "stage1",
+  "summary": "Q47: checked source, current coefficient models, all comparison types, finite-stage full faithfulness, simultaneous representatives, equality witnesses, empty product and noninjective transitions. Existing nodes suffice; no new nodes. Wrote the scalar transport calculation explicitly.",
+  "blueprint": "def-pur-section-invariant final invertibility assertion: finite-clopen transport, simultaneous Hom lifting and equality (ancestor split steps 8-9 and 11).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Canonical natural pullback/scalar comparisons and their identity/tower laws; a coefficient-operation tool, with no substitute in the purity-conventions unit."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Natural scalar-tower identifications used in both global and local Hom transitions; generic coefficient tool from the operations unit."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-d38dc83f5",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-d38dc83f5 (reviewer sub-agent of L); spot-checked: Shape: one commit touching only the item and the report, no new nodes. Statement, stmt_deps and blueprint are byte-identical to the Q126 FIX version of this re-split node, so the target is not weakened. There is no repair note for this item, and the proof on the base was empty. Route lock: no SGA anywhere; source is main-20261015 def-pur-section-invariant as an agent subargument (file read). The single citer, lem-pur-finite-product-field-coefficient-descent, uses exactly the stated simultaneous-lift, Hom-bijection and eventual-equality clauses. Cited statements read: the pair category (def-weil-algebraically-closed-coefficients), the raw rationalization, def-weil-derived-pullback-tensor-hom (its Omega-level pullback is the same theta-conjugation as the item's formula), lem-pur-integral-operations-scalar-extension (natural, tower- and identity-compatible, needs ell invertible, which holds for X, X_i of finite type over F_q-bar), lem-weil-scalar-extension-composition, and the finite-subextension directed set. Step 1: checked naturality on pure tensors f⊗c; inverses and tower laws rationalize; it implicitly takes the rational associator to be the rationalized integral one, which is the canonical choice and accepted. Step 2: checked the tower equation type by type and the cancellation of r_N(a_E) and r_N(a_F); naturality of b_{N/L} at u gives Phi_N T = T^i Phi_L. Steps 3-6: well-definedness, the lift at a single common L by fullness of R_L, injectivity by pushing the actual witnesses N_i to a common N and using faithfulness of R_N (no transition injectivity), and I empty, where each stage Hom and hence the colimit is a singleton. Small cases tested: j=id, E=F=L, repeated fields, a difference killed only at a later stage, I empty. Both tool_uses accepted: the integral-operations scalar-extension lemma (another unit, already a stmt_dep) and scalar-extension composition (a unit the item's unit uses). Advisory for the maintainer: the item overlaps lem-sf-common-stage-full-faithfulness (Q50, unsplit, same day; the generic one-pair-category version) and lem-sbc-coherent-pair-functor-descent, but it is not a duplicate, because its target is a finite product of pair categories and it carries the simultaneous-field and witness clauses. The report names citations.json and searches.jsonl, which are not in the commit; this is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageFiniteHomLifting",
+  "declaration": "WeilConjectures.CommonStageFiniteHomLifting.finiteHomLifting",
+  "declarations": [
+   "WeilConjectures.CommonStageFiniteHomLifting.residueInvertible",
+   "WeilConjectures.CommonStageFiniteHomLifting.restrictionHom",
+   "WeilConjectures.CommonStageFiniteHomLifting.stageRestriction",
+   "WeilConjectures.CommonStageFiniteHomLifting.finiteHomLifting"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageFiniteHomLifting.lean",
+  "statement": "theorem finiteHomLifting [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [∀ i, LocallyOfFiniteType (Xi i).hom] [∀ i, QuasiCompact (Xi i).hom] (hfully : ∀ (E : Index P.coefficients.l P.coefficients.Qbar) (K M : Stage P.coefficients.l P.coefficients.Qbar X.left E), Function.Bijective (fun a : K ⟶ M ↦ fun i : I ↦ (rationalDerivedPullback P.coefficients.l (Coefficient.{u} P.coefficients.l P.coefficients.Qbar E) (j i).left).map a)) (A B : Pair P.coefficients.l P.coefficients.Qbar X.left) : Function.Bijective (fun a : A ⟶ B ↦ fun i : I ↦ restrictionHom P (j i) A B a) ∧ (∀ (L : Common A B) (a : StageHom A B L) (i : I), restrictionHom P (j i) A B (ofHom A B L.val L.property.1 L.property.2 a) = ofHom (commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left A) (commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left B) L.val L.property.1 L.property.2 (stageRestriction P (j i) A B L a)) ∧ (∀ (v : ∀ i : I, commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left A ⟶ commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left B) (S : Finset (Index P.coefficients.l P.coefficients.Qbar)), ∃ (L : Common A B), (∀ E ∈ S, E ≤ L.val) ∧ ∃ a : StageHom A B L, ∀ i : I, restrictionHom P (j i) A B (ofHom A B L.val L.property.1 L.property.2 a) = v i) ∧ (∀ (Li : ∀ i : I, Common (commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left A) (commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left B)) (v : ∀ i : I, StageHom _ _ (Li i)) (L : Common A B) (hL : ∀ i : I, (Li i).val ≤ L.val), ∃ a : StageHom A B L, ∀ i : I, (rationalDerivedPullback P.coefficients.l (Coefficient.{u} P.coefficients.l P.coefficients.Qbar L.val) (j i).left).map a = (commonStagePullbackComparison P.coefficients.l P.coefficients.Qbar (j i).left A L.val L.property.1).inv ≫ transport _ _ (Li i) ⟨L.val, L.property⟩ (hL i) (v i) ≫ (commonStagePullbackComparison P.coefficients.l P.coefficients.Qbar (j i).left B L.val L.property.2).hom) ∧ (∀ (L₀ L₁ : Common A B) (a₀ : StageHom A B L₀) (a₁ : StageHom A B L₁), (∀ i : I, restrictionHom P (j i) A B (ofHom A B L₀.val L₀.property.1 L₀.property.2 a₀) = restrictionHom P (j i) A B (ofHom A B L₁.val L₁.property.1 L₁.property.2 a₁)) ↔ ∃ (N : Common A B) (h₀ : L₀ ≤ N) (h₁ : L₁ ≤ N), transport A B L₀ N h₀ a₀ = transport A B L₁ N h₁ a₁) ∧ (∀ (L₀ L₁ : Common A B) (a₀ : StageHom A B L₀) (a₁ : StageHom A B L₁) (Ni : I → Common A B) (h₀ : ∀ i : I, L₀ ≤ Ni i) (h₁ : ∀ i : I, L₁ ≤ Ni i), (∀ i : I, transport (commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left A) (commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left B) ⟨L₀.val, L₀.property⟩ ⟨(Ni i).val, (Ni i).property⟩ (h₀ i) (stageRestriction P (j i) A B L₀ a₀) = transport (commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left A) (commonStagePullbackObject P.coefficients.l P.coefficients.Qbar (j i).left B) ⟨L₁.val, L₁.property⟩ ⟨(Ni i).val, (Ni i).property⟩ (h₁ i) (stageRestriction P (j i) A B L₁ a₁)) → ∀ (N : Common A B) (k₀ : L₀ ≤ N) (k₁ : L₁ ≤ N), (∀ i : I, Ni i ≤ N) → transport A B L₀ N k₀ a₀ = transport A B L₁ N k₁ a₁) ∧ (IsEmpty I → Nonempty (A ⟶ B) ∧ Subsingleton (A ⟶ B))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-103877d15",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Only change: node lean field plus new module CommonStageFiniteHomLifting.lean; statement verbatim; docstrings and the 6 proof steps present; only proof is sorry. Hypotheses match the node: PurityFiniteSetting, finite type = LocallyOfFiniteType+QuasiCompact, Finite I (may be empty, own universe), hfully = Bijective tuple map = full faithfulness of R_E at every finite E. Objects are the recorded canonical ones: rationalDerivedPullback, commonStagePullbackComparison (pinned via rationalPullbackScalarComparison to the localized integralPullbackScalarComparison), restrictionHom = commonStageDerivedPullback.map conjugated by its own choose_spec object equalities, no arbitrary maps. All 7 clauses match the node and were checked true: bijection, representative formula b_B^-1 r_L(u) b_A, simultaneous lift containing a Finset S, lift at every common L with comparison directions correct, eventual-equality iff, any N above the actual witnesses Ni (no injectivity), I empty -> Nonempty and Subsingleton. All stmt_dep modules imported and used. Not recompiled (no FIX). Advisories: Second reading by Q98 is a worker self-check; residueInvertible global instance duplicates the identical one in the citer FiniteProductFieldCoefficientDescent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T101502-L-3700839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 03EL and 099N(5). Same-site coefficient comparison in the strict-model chain transport."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-integral-coefficient-strict-tower-comparison",
+ "title": "Unit-normalized strict tower comparison for integral coefficient presentations",
+ "statement": "For a prime l, a finite extension E of Q_l and a scheme W, scalar restriction from the ordinary completed integral coefficients to the actual adic completion carries its complete strict reduction tower naturally isomorphically to the ordinary finite quotient tower followed by scalar restriction. At every degree and finite quotient level this isomorphism sends the actual completed quotient unit to the scalar restriction of the ordinary quotient augmentation. This holds for every unbounded cochain complex without flatness or completeness hypotheses.",
+ "stmt_deps": [
+  "def-weil-pbc-proper-integral-ordinary-data",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "For the same-site coefficient comparison, lift the canonical completed ring comparison to commutative ring sheaves and use its prescribed finite projections. The corresponding square of scalar restrictions is invertible. The generic square_iso theorem, applied to the ordinary scalar-extension adjunctions and the two restriction equivalences, gives a finite-level comparison preserving the actual tensor units. Apply it degreewise. Quotient units are epimorphisms; isoOfEpiAugmentations therefore assembles the level comparisons into a natural isomorphism of entire augmented strict towers, on all cochain complexes. No flatness or completeness condition is used.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Q7: invertible ordinary scalar-restriction adjunction square and epimorphic quotient-unit assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a ring sheaf isomorphism commutes with tensor reduction towers and their natural mapping cone, preserving tensor unit sections",
+   "results": "Eight basic scalar-restriction and tensor results, but no normalized tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring sheaf isomorphism scalar restriction commutes with sheaf tensor products and strict inverse towers with prescribed tensor unit augmentations",
+   "results": "Basic SheafOfModules restriction and presheaf tensor maps only.",
+   "date": "2026-10-27",
+   "verdict": "No matching normalized statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictModelChainTransport",
+  "date": "2026-10-27",
+  "group": "Q7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-integral-strict-model-chain-transport",
+   "place": "Same-site coefficient comparison, proof step 1.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCoefficientStrictTowerComparison",
+  "file": "lean/Sheaf/Paper/IntegralCoefficientStrictTowerComparison.lean",
+  "declaration": "WeilConjectures.integralCoefficientStrictTowerComparison",
+  "statement": "theorem integralCoefficientStrictTowerComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :\n    ∃ c : pbcIntegralTransportComplex W l E ⋙\n        completedReductionComplexTowerFunctor W (pbcIntegralDatum l E) ⋙\n          HomologicalComplex.complexOfFunctorsToFunctorToComplex ≅\n      IntegralOnSlice.tower l E W none ⋙\n        (Functor.whiskeringRight ℕᵒᵖ _ _).obj (pbcIntegralTransportComplex W l E),\n      ∀ (P : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (i : ℤ),\n        ((completedReductionModuleUnit (pbcIntegralDatum l E) W).app\n            ((pbcIntegralTransportModules W l E).obj (P.X i))).app (op n) ≫\n            ((c.hom.app P).app (op n)).f i =\n          (pbcIntegralTransportModules W l E).map\n            ((((IntegralOnSlice.augmentation l E W none).app P).app (op n)).f i)",
+  "by": "Q7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.integralCoefficientStrictTowerComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T123522-L-2315271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T123522-L-2315271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

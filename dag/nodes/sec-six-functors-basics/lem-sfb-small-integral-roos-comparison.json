@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-small-integral-roos-comparison",
+ "kind": "statement",
+ "title": "Scalar transport preserves the strict augmented quotient Roos complex",
+ "statement": "For the coefficient isomorphism and exact scalar equivalence G of the finite quotient transport, and any cochain complex P, there is an isomorphism from the image under G of the small Roos complex to the ordinary Roos complex of the image of P. Under this isomorphism the image of the specified small augmentation equals the specified ordinary augmentation. No K-flatness or completeness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-sfb-small-coefficient-derived-completion",
+  "def-sfb-integral-constant-model-realization",
+  "sk-def-pe-derived-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/algebraization.tex; literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Tags 099L and 099M (section-derived-completion-noetherian and lemma-naive-completion); Tag 0A0E (lemma-derived-completion-koszul); integral-heart-local-model clause (2), Completeness, comparison with the explicit quotient Roos augmentation"
+ },
+ "proof": [
+  {
+   "text": "Tensor the normalized finite quotient comparisons with each term of P using the strong monoidal comparison. Monoidal naturality and unitality give compatibility with level units and transitions.",
+   "uses": [
+    "lem-sfb-small-integral-finite-quotient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the preserved product of the resulting chain isomorphisms. Its projections intertwine the units and one minus shift. In degree i take the diagonal biproduct comparison in degrees i and i-1. Check the two coordinates of the explicit differential to obtain a chain isomorphism. The augmentation has coordinates (unit,zero), giving the claimed equality.",
+   "uses": [
+    "def-sfb-small-coefficient-derived-completion",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-small-coefficient-derived-completion",
+  "lem-sfb-small-integral-finite-quotient-transport",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/algebraization.tex; literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Existing ordinary-completion comparison plus monoidal transport of the strict quotient Roos augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion preserved under an exact equivalence of module categories and computed by the Roos complex of quotient reductions",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; AdicCompletion.map_exact; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.instIsIsoFunctorFromLeftDerivedZero; CategoryTheory.Functor.leftDerivedZeroIsoSelf; DerivedCategory.instLinearCochainComplexIntQ; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "IsAdicComplete; IsAdicComplete.of_subsingleton; IsAdicComplete.toIsHausdorff; IsAdicComplete.toIsPrecomplete; IsAdicComplete.mk; isAdicComplete_iff; IsAdicComplete.bot; IsAdicComplete.subsingleton",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|IsDerivedComplete",
+   "results": "No matches",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of condensed discrete valuation rings induces compatible isomorphisms of their finite quotient module towers",
+   "results": "Ideal.quotientRangePowQuotSuccInclusionEquiv; Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField; IsDiscreteValuationRing.RingEquivClass.isDiscreteValuationRing; Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField; IsDiscreteValuationRing.TFAE; instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField; localCohomology.isoSelfLERadical",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientEquiv",
+   "results": "Ideal.quotientEquiv; Ideal.quotientEquiv_mk; Ideal.quotientEquiv_symm_mk; Ideal.quotientEquiv_apply; Ideal.quotientEquiv_symm_apply; PowerBasis.quotientEquivQuotientMinpolyMap_apply; PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmallIntegralRoosCompletenessTransport",
+  "date": "2026-10-26",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-integral-heart-local-model",
+   "place": "Clause (2), Completeness: Strict Roos comparison after finite quotient identification",
+   "via": [
+    "lem-sfb-integral-heart-constructible-module-complete",
+    "lem-sfb-small-integral-roos-completeness-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmallIntegralRoosComparison",
+  "file": "lean/Sheaf/Paper/SmallIntegralRoosComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.smallIntegralRoosComparison",
+  "statement": "theorem smallIntegralRoosComparison\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E]\n    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]\n    (F : Type u) [Field F] [Algebra (Padic ℓ) F] [FiniteDimensional (Padic ℓ) F]\n    (e : Mon.mk (SmallAdicCompletion.Coefficients.integerRing.{u} ℓ E) ≅\n      sfbCondensedIntegers ℓ F) (X : Scheme.{u})\n    (P : CochainComplex (SmallAdicCompletion.Modules ℓ E X) ℤ) :\n    let G := Mod.comap (coefficientMap (IntegralConstantModel.pointComparison ℓ F).hom.hom X ≫\n      coefficientMap e.inv.hom X)\n    let Gc := G.mapHomologicalComplex (.up ℤ)\n    ∃ b : Gc.obj (SmallAdicCompletion.roos ℓ E X P) ≅\n        AdicCompletion.roos ℓ F X (Gc.obj P),\n      Gc.map (SmallAdicCompletion.augmentation ℓ E X P) ≫ b.hom =\n        AdicCompletion.augmentation ℓ F X (Gc.obj P)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T023603-L-584355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T023603-L-584355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

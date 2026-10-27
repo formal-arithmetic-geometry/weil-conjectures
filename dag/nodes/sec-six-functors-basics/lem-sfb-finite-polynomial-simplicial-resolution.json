@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-finite-polynomial-simplicial-resolution",
+ "kind": "statement",
+ "title": "Finite polynomial simplicial resolutions over a Noetherian base",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $B$ be a commutative $A$-algebra of finite type [def-weil-pbc-finite-type-algebra]. There exists an augmented simplicial $A$-algebra $Q_\\bullet\\to B$ [def-weil-pbc-simplicial-object] that is a polynomial resolution in the sense of [def-trf-cotangent-resolution-data], with $Q_n\\cong A[x_1,\\ldots,x_{r_n}]$ for a finite integer $r_n\\geq0$ for every $n\\geq0$ [def-weil-pbc-mv-polynomial-ring]. Explicitly, each augmentation $Q_n\\to B$ is surjective, and the alternating additive complex with $Q_n$ in degree $-n$, differential $\\sum_i(-1)^id_i$ for $n>0$, and zero positive terms has an augmentation to $B[0]$ which is a quasi-isomorphism. No uniform bound on the integers $r_n$ and no vanishing in sufficiently negative degrees is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PX (proposition-polynomial), finite polynomial simplicial resolution, together with Tag 08QI (remark-resolution), equivalence with an additive quasi-isomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-simplicial-object",
+  "def-trf-cotangent-resolution-data",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjection $P_0=A[x_e:e\\in E_0]\\to B$ with $E_0$ finite, using precisely the definition of finite type. This is the initial $0$-truncation, its augmentation is surjective, and its specified polynomial basis is indexed by the sole surjection $[0]\\to[0]$. We inductively construct compatible augmented truncations through degree $n$, with finite sets $E_j$, presentations $P_k=A[x_{e,\\sigma}:e\\in E_j,\\ \\sigma:[k]\\twoheadrightarrow[j],\\ j\\leq k]$ with degeneracies given by composition of surjections, and surjective matching maps in degrees $0,\\ldots,n$. The base has all these properties.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PX (proposition-polynomial), initial choice of finite polynomial surjection and induction invariant, strengthened to compatible polynomial bases."
+   }
+  },
+  {
+   "text": "Given the truncation through degree $n$, apply [lem-sfb-truncated-algebra-matching-finite-type]. The base is Noetherian, $B$ is finite type, every lower term is finite polynomial and hence finite type, and all lower matching maps are surjective by induction. It follows that $M_{n+1}$ is finite type. Choose a finite set $T$ of algebra generators of $M_{n+1}$. Each generator is a compatible tuple $(a_{t,0},\\ldots,a_{t,n+1})$ over a common $b_t\\in B$. This includes $n=0$, where $M_1=P_0\\times_B P_0$.",
+   "uses": [
+    "lem-sfb-truncated-algebra-matching-finite-type",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PW (lemma-polynomial) and Tag 08PX (proposition-polynomial), finite-type matching term and choice of generators."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-polynomial-boundary-attachment] to those tuples and the specified old bases. The resulting truncation agrees with the old one, satisfies every simplicial identity, and has the same split polynomial form with $E_{n+1}=T$. Its matching map sends $y_t$ to the chosen generator of $M_{n+1}$, so it is surjective: every element of the target is a polynomial in these images and coefficients. Lower matching maps are unchanged. The new variable set is finite, since there are finitely many order-preserving surjections between any two fixed finite ordinals and only finitely many $j\\leq n$. This proves the induction step.",
+   "uses": [
+    "lem-sfb-split-polynomial-boundary-attachment",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PX (proposition-polynomial), polynomial replacement; compatible-degeneracy repair via the explicit split polynomial bases."
+   }
+  },
+  {
+   "text": "For each $k$ take $Q_k$ and its operators from any constructed truncation of degree at least $k$ (and at least both source and target degrees for an operator). Later truncations restrict to the earlier ones, so these choices agree. Every functor law is an equality involving finitely many degrees and holds in a common truncation. Thus they define an augmented simplicial algebra $Q$. Its $k$th variable set is the finite disjoint union of $E_j$ indexed by surjections $[k]\\twoheadrightarrow[j]$, $j\\leq k$. Each $Q_k\\to B$ is surjective: a composite of degeneracies $Q_0\\to Q_k$ commutes with augmentation. Surjectivity of every matching map gives a filler for every compatible boundary over $b\\in B$, by taking a preimage of its tuple. In dimension zero this is the surjectivity of $Q_0\\to B$. This is exactly the trivial Kan fibration condition of [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PX (proposition-polynomial), final degreewise stabilization; explicit verification of the boundary lifting property in place of the inverse-limit lemma."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-trivial-kan-homotopy-equivalence] to the underlying augmentation $Q\\to\\operatorname{const}B$. Apply [lem-trf-simplicial-abelian-set-homotopy-quasi-iso] to its additive simplicial groups: the augmentation is additive, whereas its homotopy inverse need not be. This gives a quasi-isomorphism $s(Q)\\to s(\\operatorname{const}B)$. In the latter complex the differential out of degree $-m$ is zero for odd $m$ and the identity for positive even $m$. Thus its augmentation to $B[0]$ induces the identity in degree-zero cohomology and isomorphisms between zero groups in all other degrees. Composing gives the required quasi-isomorphism. Together with the polynomial terms and termwise surjectivity, these are exactly the polynomial-resolution conditions of [def-trf-cotangent-resolution-data]. The induction provides one finite variable set in each degree; it supplies no uniform size or eventual vanishing.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+    "def-trf-cotangent-resolution-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QI (remark-resolution); simplicial.tex Tags 08NS (lemma-trivial-kan-homotopy) and 08P2 (lemma-homotopy-equivalence)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "lem-sfb-truncated-algebra-matching-finite-type",
+  "lem-sfb-split-polynomial-boundary-attachment",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+  "def-trf-cotangent-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PW, 08PX and 08QI. Stacks induction repaired by split polynomial boundary attachment; degreewise stabilization and boundary fillers written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "simplicial.*polynomial|polynomial.*resolution|resolution.*polynomial",
+   "results": {
+    "t": "2026-10-23T09:41:44Z",
+    "tool": "grep",
+    "query": "simplicial.*polynomial|polynomial.*resolution|resolution.*polynomial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial finite type polynomial resolution of an algebra over a Noetherian ring",
+   "results": {
+    "t": "2026-10-23T09:41:44Z",
+    "tool": "leansearch",
+    "query": "Simplicial finite type polynomial resolution of an algebra over a Noetherian ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPolynomial.isNoetherianRing",
+     "Algebra.FiniteType.instPolynomial",
+     "Algebra.FiniteType.isNoetherianRing",
+     "Algebra.FiniteType.instMvPolynomialOfFinite",
+     "instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra",
+     "Algebra.FiniteType.iff_quotient_mvPolynomial",
+     "Algebra.FiniteType.iff_quotient_mvPolynomial'",
+     "instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing"
+    ],
+    "digest": "beccff1c7dbdd012"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"simplicial\", MvPolynomial",
+   "results": {
+    "t": "2026-10-23T09:41:44Z",
+    "tool": "loogle",
+    "query": "\"simplicial\", MvPolynomial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring every finite type algebra admits a simplicial resolution by polynomial algebras in finitely many variables in each degree",
+   "results": {
+    "t": "2026-10-23T09:41:55Z",
+    "tool": "leanfinder",
+    "query": "Over a Noetherian ring every finite type algebra admits a simplicial resolution by polynomial algebras in finitely many variables in each degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FinitePresentation.of_finiteType",
+     "AlgHom.FinitePresentation.of_finiteType",
+     "RingHom.FinitePresentation.of_finiteType",
+     "Algebra.Smooth.exists_finiteType",
+     "Algebra.Smooth.flat_of_isNoetherianRing",
+     "Algebra.IsStandardSmooth.out",
+     "Algebra.Smooth.exists_subalgebra_finiteType",
+     "Algebra.SubmersivePresentation"
+    ],
+    "digest": "e8f346e6279185b4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolve a finitely generated commutative algebra over a noetherian base by an augmented simplicial algebra with finite polynomial terms",
+   "results": {
+    "t": "2026-10-23T09:41:55Z",
+    "tool": "leanfinder",
+    "query": "Resolve a finitely generated commutative algebra over a noetherian base by an augmented simplicial algebra with finite polynomial terms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.SubmersivePresentation",
+     "Algebra.FinitePresentation",
+     "Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg",
+     "Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite",
+     "Algebra.Smooth.exists_subalgebra_finiteType",
+     "Algebra.Smooth.exists_finiteType",
+     "Algebra.Smooth.exists_subalgebra_fg",
+     "Algebra.IsStandardSmooth.out"
+    ],
+    "digest": "a084c66349802a8c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*polynomial|polynomial.*simplicial|polynomial.*resolution",
+   "results": {
+    "t": "2026-10-23T12:12:15Z",
+    "tool": "grep",
+    "query": "simplicial.*polynomial|polynomial.*simplicial|polynomial.*resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite polynomial simplicial resolution of a Noetherian algebra",
+   "results": {
+    "t": "2026-10-23T12:12:16Z",
+    "tool": "leansearch",
+    "query": "Finite polynomial simplicial resolution of a Noetherian algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_finite_inj_algHom_of_fg",
+     "MvPolynomial.isNoetherianRing",
+     "Algebra.FinitePresentation.mvPolynomial_of_finitePresentation",
+     "RingHom.FinitePresentation",
+     "Algebra.FinitePresentation.iff_quotient_mvPolynomial'",
+     "AlgHom.FinitePresentation.of_finiteType",
+     "Algebra.FinitePresentation.mvPolynomial",
+     "Algebra.FinitePresentation.out"
+    ],
+    "digest": "7b8861839c6265ad"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"simplicial\", MvPolynomial",
+   "results": {
+    "t": "2026-10-23T12:12:16Z",
+    "tool": "loogle",
+    "query": "\"simplicial\", MvPolynomial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a Noetherian ring has a simplicial resolution by polynomial algebras with finitely many variables in each degree",
+   "results": {
+    "t": "2026-10-23T12:12:17Z",
+    "tool": "leanfinder",
+    "query": "A finite type algebra over a Noetherian ring has a simplicial resolution by polynomial algebras with finitely many variables in each degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FinitePresentation.of_finiteType",
+     "AlgHom.FinitePresentation.of_finiteType",
+     "RingHom.FinitePresentation.of_finiteType",
+     "Algebra.SubmersivePresentation",
+     "Algebra.FiniteType.exists_fgAlgCatSkeleton",
+     "Algebra.Presentation.exists_presentation_fin",
+     "Algebra.Presentation.finitePresentation_of_isFinite",
+     "Algebra.FinitePresentation"
+    ],
+    "digest": "b76f7c8d6b105708"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolve a finitely generated commutative algebra over a noetherian base by an augmented simplicial algebra with finite polynomial terms",
+   "results": {
+    "t": "2026-10-23T12:55:59Z",
+    "tool": "leanfinder",
+    "query": "Resolve a finitely generated commutative algebra over a noetherian base by an augmented simplicial algebra with finite polynomial terms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FinitePresentation.of_finiteType",
+     "Algebra.Presentation.exists_presentation_fin",
+     "AlgHom.FinitePresentation.of_finiteType",
+     "Algebra.FinitePresentation",
+     "Algebra.SubmersivePresentation",
+     "FGAlgCatSkeleton.eval",
+     "Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite",
+     "RingHom.FinitePresentation.of_finiteType"
+    ],
+    "digest": "d6ef2ebaca858424"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite presentations and their skeleton category give single algebra presentations, not a simplicial polynomial resolution"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cotangent-ext-smooth-support",
+  "date": "2026-10-23",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX).",
+   "via": [
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-polynomial-simplicial-resolution",
+  "worker": "stage1",
+  "summary": "Q23: finite matching-algebra induction and compatible polynomial boundary attachment; audited the Stacks degeneracy gap, retained the statement, and reused existing homotopy/quasi-isomorphism comparison nodes. No Lean proof attachment found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). The current blueprint direct-image proof (3) is read as the parent route; this historical auxiliary chain supplies the finite polynomial model used in cotangent support. The present split realizes only that supporting algebra, not a change to the unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial homotopy/additive comparison tool for the final augmentation; no node in this unit states this comparison."
+   },
+   {
+    "node": "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+    "why": "Generic simplicial homotopy/additive comparison tool for the final augmentation; no node in this unit states this comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-trf-simplicial-abelian-set-homotopy-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-9606221d2",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-9606221d2 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Stacks sources read: cotangent.tex 08PW, 08PX and 08QI, plus more-algebra.tex lemma-fibre-product-finite-type and lemma-formal-consequence. The statement is unchanged and agrees with 08PX and 08QI. The worker's source error is real: 08PX lifts each degeneracy separately, which does not give s'_1 s_0 = s'_0 s_0. The fix by free cells indexed by surjections is correct. Steps 1-5 check out. (1) Base: a finite-type surjection gives the 0-truncation. (2) The new matching node applies: A is Noetherian, every P_k is a finite polynomial algebra, and μ_0..μ_n are surjective. M_1 = P_0 ×_B P_0, and for k ≥ 2 the common b is forced. (3) The new attachment node applies, μ_{n+1} is onto because its image contains the generators, and the variable set stays finite. (4) The union is a simplicial algebra and boundary fillers come from surjective matching maps, so it is a trivial Kan fibration in the sense of 08NL. Reading maps from ∂Δ[n] as compatible face tuples is elementary. (5) 08NS gives the two-sided homotopy that 08P2 needs, and s(const B) → B[0] is a quasi-isomorphism because its differentials alternate between id and 0. The matching node is true by 08PW and formal-consequence; small cases n=0 and n=1 hold. The attachment node is true over any A → B: faces are defined through epi-mono factorisations, and the faces of y_t are well defined by the given compatibility. I tested n=0, T empty and E_j empty. Neither node duplicates an existing one: my rg -L found only general-category matching nodes and scheme-hypercover attachment nodes. Neither restates a clause of the item. Batch-5 flag: lem-trf-simplicial-abelian-set-homotopy-quasi-iso is Stacks 08P2, a generic fact about simplicial abelian groups. Neither assumption gives it and it is not part of their proofs, so it is accepted. Route-pivot flag: def-weil-pbc-trivial-kan-fibration is the classical 08NL simplicial-set notion (a Mathlib leaf), not the dropped ∞ machinery, and steps 4-5 use it concretely. The word 'quillen' appears only in a recorded search result name. Tool uses accepted: lem-weil-pbc-trivial-kan-homotopy-equivalence and lem-trf-simplicial-abelian-set-homotopy-quasi-iso. No SGA source is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FinitePolynomialSimplicialResolution",
+  "declaration": "Algebra.CotangentResolution.exists_finite_polynomial_simplicial_resolution",
+  "file": "lean/Sheaf/RingTheory/FinitePolynomialSimplicialResolution.lean",
+  "statement": "theorem exists_finite_polynomial_simplicial_resolution (f : Arrow CommRingCat.{u}) [IsNoetherianRing f.left] (_hf : RingHom.FiniteType f.hom.hom) : ∃ Q : Augmentation f, IsPolynomialResolution Q ∧ ∀ n : ℕ, ∃ (r : ℕ) (e : CommRingCat.of (MvPolynomial (Fin r) f.left) ≅ Q.algebra.obj (op ⦋n⦌)), ∀ a : f.left, e.hom (MvPolynomial.C a) = Q.base.app (op ⦋n⦌) a",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91b338305",
+  "group": "NM",
+  "result": "pass",
+  "note": "Theorem matches lem-sfb-finite-polynomial-simplicial-resolution clause by clause. Hypotheses: Noetherian base (IsNoetherianRing) and finite-type ring map (RingHom.FiniteType), with no extra instances or universe equations. Conclusion uses the recorded Augmentation and IsPolynomialResolution from def-trf-cotangent-resolution-data, plus a per-degree ∃ r with an iso MvPolynomial (Fin r) A ≅ Q_n compatible with C, so A-linear. Quantifiers are in node order; no uniform bound or vanishing. Node diff vs side-live: only the lean field was added. All 5 stmt_dep records match the declarations used; the 3 plain imports are existing proof_dep modules. Edge cases n=0, r=0, A=0, B=0 and the constant resolution are covered. No duplicate in Mathlib or live Sheaf/WeilConjectures. Docstring has source 08PX/08QI, blueprint id and proof steps 1-5; the only sorry is the proof; no definitions; no pro-etale substitute; report has both required sections. No files changed, so no compile."
+ }
+}

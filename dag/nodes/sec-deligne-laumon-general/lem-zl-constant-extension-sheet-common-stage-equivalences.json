@@ -1,0 +1,131 @@
+{
+ "id": "lem-zl-constant-extension-sheet-common-stage-equivalences",
+ "kind": "lemma",
+ "title": "Common-stage and heart equivalences for cyclic sheets",
+ "statement": "Fix the data of [def-zl-constant-extension-sheet-heart-data], including l$\\ne$p, an algebraic closure $\\Omega$ of Q_l, G : ZlSheetGeometry D m hm X_0, and the coefficient clauses ZlSheetCoefficientClauses D m hm X_0 l hl of [lem-zl-constant-extension-sheet-coefficient-equivalences]. There exists S : ZlSheetCommonClauses D m hm X_0 l hl $\\Omega$ G: the actual common-stage product and full-heart equivalences detecting standard halves, cohomology comparison, identity-normalized stage comparisons, exact Frobenius equivalence on the heart, and exact clopen-inclusion/coordinate factorizations with ambient and coefficient-stage coordinate equivalences. This conclusion contains no Weil-equivariant category or cyclic fixed-pair equivalence.",
+ "stmt_deps": [
+  "def-zl-constant-extension-sheet-heart-data",
+  "lem-zl-constant-extension-sheet-coefficient-equivalences"
+ ],
+ "proof": [
+  {
+   "text": "Assume the finite/integral/rational sheet clauses of [lem-zl-constant-extension-sheet-coefficient-equivalences]. Represent the finite tuple of component objects and arrows at one coefficient stage. Use the rational inverse product functor and its scalar-normalized unit and counit to descend the equivalence to common stages. Both standard halves are detected componentwise after extending all finitely many witnesses to one field. Restrict to the full hearts. Use the literal stage comparison, whose components are identities, to retain stage_normalization. The cohomology comparison descends from the stagewise one.",
+   "uses": [
+    "lem-zl-constant-extension-sheet-coefficient-equivalences",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-constructible-standard-tstructure",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-pod-isomorphism-field-transport] for the geometric Frobenius, each sheet coordinate and their inverses. This gives the Frobenius heart equivalence and the coordinate equivalences, with exactness because they are equivalences. Restriction along each clopen inclusion is exact component restriction. The geometric factorization and the specified integral compositor identify the composite heart functor with the product-heart projection. Its scalar law persists after rationalization, giving all coordinate_factors with the inherited residue units.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport",
+    "lem-pod-integral-pullback-composition",
+    "lem-pod-pullback-identities-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-constant-extension-sheet-coefficient-equivalences",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-constructible-standard-tstructure",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-pod-isomorphism-field-transport",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-pullback-identities-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), (1.1.10) and following paragraph, pp.150–152; explicit semilinear sheet calculation and coefficient-stage assembly from cited DAG statements"
+ },
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7) and paragraph after (1.1.10), pp.150–152; geometric splitting, coefficient enhancement and transition-arrow coordinates (returned steps 1–2 and coordinate part of step 3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalences of constructible derived categories over all finite coefficient fields pass compatibly with scalar extension to an algebraically closed common-stage category",
+   "results": "DerivedCategory bounded representatives and mapDerivedCategory factorization isomorphisms; none supplies the scalar-normalized common-stage product equivalence.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.congrFullSubcategory",
+   "results": "congrFullSubcategory restricts an existing equivalence; it does not construct the common-stage equivalence or its coordinate factors.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage.*equivalence|scalar.*equivalence",
+   "results": "25 unrelated scalar-restriction and algebra equivalences. Project common-stage and clopen interfaces require assembly across finite coefficient fields.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of categories with scalar compatible equivalences",
+   "results": "Filtered colimits of modules/types and colimitLimitIso; none transports the common-stage sheet equivalences.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionSheetHeartCoordinates",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Stage-3 proof part 3; original steps 3–4 and 7",
+   "via": [
+    "lem-zl-constant-extension-weil-heart-equivalence",
+    "lem-zl-constant-extension-sheet-heart-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantExtensionSheetCommonStageEquivalences",
+  "file": "lean/Sheaf/Paper/ConstantExtensionSheetCommonStageEquivalences.lean",
+  "declaration": "WeilConjectures.constantExtensionSheetCommonStageEquivalences",
+  "statement": "theorem constantExtensionSheetCommonStageEquivalences (G : ZlSheetGeometry D m hm X₀) (hcoeff : ZlSheetCoefficientClauses D m hm X₀ l hl) : Nonempty (ZlSheetCommonClauses D m hm X₀ l hl Ω G)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7ff04",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122459-L-1775850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7ff04",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122459-L-1775850",
+  "kind": "interface",
+  "note": "independent cc review: HeartData.lean vs clone item module (verbatim 20 interfaces, only blueprint ids differ); item proof vs 3 new sorry statements + proved fixedPairTransport/sheetWeilCoordinates; sandbox --all compile + #print axioms (propext/choice/Quot.sound/sorryAx)"
+ }
+}

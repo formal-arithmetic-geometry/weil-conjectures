@@ -31,53 +31,40 @@
  ],
  "proof": [
   {
-   "text": "For each continuous map h, exact inverse image makes A↦H^n(h⁻¹A) a cohomological delta-functor. The given normalized family commutes with its Yoneda connecting maps. Embed A into an injective I with quotient Q. Positive cohomology of I vanishes, so the connecting map H^n(Q)→H^(n+1)(A) is surjective. Consequently two natural, boundary-compatible families with the same degree-zero values are equal, by induction on n. This argument also applies after composing with exact inverse-image functors and natural coefficient maps.",
+   "text": "Apply the normalized identity f-map theorem with hfid and hαid. This gives a_ii=id without changing the coefficient sheaf.",
    "uses": [
-    "lem-weil-pbc-site-cohomology-pullback-unique",
-    "lem-weil-pbc-site-cohomology-pullback-data",
+    "lem-weil-pbc-spectral-limit-fmap-identity",
     "def-weil-pbc-spectral-limit-cohomology-laws"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A37, label lemma-colimit, final sentence and preceding setup, specialized to a directed-set index"
+    "place": "Functoriality of cohomology, Tags 01F7 and 01F8; Tag 0A37, the canonical diagram preceding lemma-colimit."
    }
   },
   {
-   "text": "Use the proved canonical-map evaluation formula and Mathlib’s adjunction hom-equivalence unit equation. They give the section formulas required by the injective-evaluation transfer lemma, with M_i=H^0(S_i,F_i), N=H^0(X,colim P), and generator evaluation. Its injectivity gives the identity, composition and cocone equations in degree zero. Instantiating this interface at the concrete cohomology groups is part of this remaining laws obligation.",
+   "text": "Apply the composition theorem to f_ij,f_jk,f_ik and α_ij,α_jk,α_ik. The map equality is hfcomp and the sectionwise f-map equality is precisely hαcomp. This gives a_ij≫a_jk=a_ik.",
    "uses": [
-    "lem-weil-pbc-spectral-limit-cohomology-degree-zero",
-    "lem-weil-pbc-spectral-limit-cohomology-zero-laws"
+    "lem-weil-pbc-spectral-limit-fmap-composition",
+    "def-weil-pbc-spectral-limit-cohomology-laws"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A37, label lemma-colimit, final sentence and preceding setup, specialized to a directed-set index"
+    "place": "Functoriality of cohomology, Tags 01F7 and 01F8; Tag 0A37, the canonical diagram preceding lemma-colimit."
    }
   },
   {
-   "text": "Apply the preceding uniqueness argument to identity pullback and to successive pullbacks. Their degree-zero maps are respectively identity and the composite of section maps; inverse-image composition is the unit-compatible isomorphism between the two left adjoints. Naturality in the sheaf and compatibility with boundaries are preserved by this isomorphism. Thus the identity and composite formulas hold in every degree. The hypotheses on α identify these formulas with a_ii=id and a_ij≫a_jk=a_ik.",
+   "text": "Write δ_i=eP_i.inv≫colimit.ι P i and let leg_i be its transpose. Apply δ_j on sections to hP, transporting the inverse-image opens along hpcomp. The cocone equation P.map(h)≫colimit.ι P j=colimit.ι P i and cancellation of eP_j give ((eP_i.inv≫P.map(h)≫eP_j.hom)≫δ_j)=δ_i. The hom-equivalence unit formula therefore gives leg_i(s)=leg_j(α_ij(s)) on every open. Apply the normalized composition theorem to f_ij,p_j,p_i with this sectionwise equality, obtaining the cocone field a_ij≫b_j=b_i.",
    "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "lem-weil-pbc-site-cohomology-pullback-data",
-    "lem-weil-pbc-site-cohomology-pullback-composite"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A37, label lemma-colimit, final sentence and preceding setup, specialized to a directed-set index"
-   }
-  },
-  {
-   "text": "For the legs, hP identifies the transition between pullback sheaves on every unit section. Adjunction says these units determine the coefficient arrow. Compose with the colimit coprojection and use its cocone equation. This identifies the composite f-map for f_ij then p_j with the leg for p_i on sections, hence in all degrees by the same normalized uniqueness argument. This is a_ij≫b_j=b_i.",
-   "uses": [
+    "lem-weil-pbc-spectral-limit-fmap-composition",
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-topological-inverse-image"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A37, label lemma-colimit, final sentence and preceding setup, specialized to a directed-set index"
+    "place": "Functoriality of cohomology, Tags 01F7 and 01F8; Tag 0A37, the canonical diagram preceding lemma-colimit."
    }
   }
  ],
@@ -85,16 +72,14 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-spectral-limit-cohomology-laws",
   "def-weil-pbc-topological-inverse-image",
-  "lem-weil-pbc-site-cohomology-pullback-composite",
-  "lem-weil-pbc-site-cohomology-pullback-data",
-  "lem-weil-pbc-site-cohomology-pullback-unique",
-  "lem-weil-pbc-spectral-limit-cohomology-degree-zero",
-  "lem-weil-pbc-spectral-limit-cohomology-zero-laws"
+  "lem-weil-pbc-spectral-limit-fmap-composition",
+  "lem-weil-pbc-spectral-limit-fmap-identity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Expanded laws subargument of Tag 0A37, label lemma-colimit, following the parent node proof."
+  "place": "Functoriality of cohomology, Tags 01F7 and 01F8; Tag 0A37, the canonical diagram preceding lemma-colimit.",
+  "note": "Q7: complete diagram/cocone assembly from identity and binary-composition f-map lemmas."
  },
  "mathlib_searches": [
   {
@@ -136,7 +121,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Topology.SpectralLimitCohomologyLaws",
   "declaration": "TopCat.Sheaf.spectralLimit_cohomology_laws",
@@ -158,13 +154,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-57f22",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "Q7",
   "result": "pass",
-  "landing": "20261018T071236-L-1681912",
+  "landing": "20261025T123600-L-1881416",
   "kind": "interface",
-  "note": "independent cc review: Delivered SpectralLimitCohomology (theorem statement byte-identical to clone; relocated spectralLimitCohomologyMap identical and publicly re-exported) against clone, change record, new nodes and Stacks 0A37; all 7 modules compile clean; importer PuncturedNeighborhoodCohomologyColimit compiles; axioms: sorryAx only via the three named holes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

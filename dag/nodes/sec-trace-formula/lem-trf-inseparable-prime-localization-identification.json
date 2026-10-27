@@ -1,0 +1,267 @@
+{
+ "id": "lem-trf-inseparable-prime-localization-identification",
+ "kind": "statement",
+ "title": "Prime localization after finite purely inseparable scalar extension",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "statement": "Let $k$ be a field, $E/k$ a finite purely inseparable field extension [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension], $R$ a commutative $k$-algebra, and $\\mathfrak p$ a prime ideal of $R$. Put $R_E=R\\otimes_kE$, $A=R_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pA$, and $C=A\\otimes_kE$ [def-weil-pbc-localization-at-prime] [def-weil-pbc-module-tensor-product]. Tensor products have their usual algebra multiplication. The contraction map on prime ideals of $C$ to those of $A$ is a bijection respecting inclusion in both directions. In particular $C$ is a local ring, meaning a ring with exactly one maximal ideal $\\mathfrak n$, and $\\mathfrak n$ is the unique prime of $C$ contracting to $\\mathfrak m$. For every prime $\\mathfrak P$ of $R_E$ contracting to $\\mathfrak p$, the canonical map $R_E\\to C$, $r\\otimes e\\mapsto(r/1)\\otimes e$, has inverse image $\\mathfrak P$ of $\\mathfrak n$ and extends to a ring isomorphism\n$$\\theta_{\\mathfrak P}:(R_E)_{\\mathfrak P}\\xrightarrow{\\sim}C,\\qquad t/u\\longmapsto\\overline t\\,\\overline u^{-1},$$\nwhere bars denote images in $C$. This isomorphism is compatible with the maps from $R_E$ and $A$. It is also compatible with any map to a ring $D$ that inverts $R_E\\setminus\\mathfrak P$: the maps from $C$ and $(R_E)_{\\mathfrak P}$ to $D$ induced by the same map $R_E\\to D$ agree under $\\theta_{\\mathfrak P}$. No Noetherian, finite type or closed-point hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 035W (lemma-geometrically-reduced-at-point), first paragraph of proof: purely inseparable scalar extension is local and is the local ring at the unique point; uses algebra.tex Tag 0BRA (lemma-p-ring-map)."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "For either $B=A$ or $B=R$, apply [lem-pc-homeo-pure-insep] to $\\operatorname{Spec}B$. By [lem-weil-pbc-fibre-product-affine-spectra] the base-changed scheme is $\\operatorname{Spec}(B\\otimes_kE)$ and its projection is induced by $b\\mapsto b\\otimes1$. Thus contraction is a homeomorphism, hence a bijection, on prime ideals. It preserves inclusion both ways: in the Zariski topology [def-weil-affine-spectrum], $Q\\subseteq Q\\prime$ means $Q\\prime\\in\\overline{\\{Q\\}}$, since this closure is $V(Q)$ (intersect the closed sets $V(I)$ containing $Q$). A homeomorphism and its inverse preserve these closures. In particular this proves the first assertion for $C$, and also uniqueness of a prime of $R_E$ over any given prime of $R$.",
+   "uses": [
+    "lem-pc-homeo-pure-insep",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035W, lemma-geometrically-reduced-at-point, first proof paragraph; algebra.tex Tag 0BRA, lemma-p-ring-map"
+   }
+  },
+  {
+   "text": "The ring $A=R_{\\mathfrak p}$ is local with maximal ideal $\\mathfrak m$ by [def-weil-pbc-localization-at-prime]. Every prime of $A$ is contained in $\\mathfrak m$: use [lem-weil-pbc-proper-ideal-contained-in-maximal] and uniqueness of the maximal ideal. Let $\\mathfrak n$ correspond to $\\mathfrak m$ under step 1. Every prime of $C$ is contained in $\\mathfrak n$. A maximal ideal containing the proper ideal $\\mathfrak n$ exists by the same cited lemma; being prime (if $ab$ lies in a maximal ideal $M$ and $a$ does not, write $1=m+ca$ to deduce $b\\in M$), it is contained in $\\mathfrak n$, so equals it. Every maximal ideal of $C$ is likewise contained in $\\mathfrak n$ and equals it. Thus $C$ is local and $\\mathfrak n$ is its unique prime contracting to $\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9, lemma-characterize-local-ring, (1) and (2); Tag 00E0, lemma-Zariski-topology, maximal-ideal existence"
+   }
+  },
+  {
+   "text": "Put $S=R_E$, $V=R\\setminus\\mathfrak p$, and $j:S\\to C$. Apply [lem-weil-pbc-localization-tensor-over-base] with its base ring $k$, its algebra and module both $R$, its multiplicative subset $V$, and its second module $E$. It identifies $C$ with the module localization $V^{-1}S$ by $(r\\otimes e)/v\\mapsto(r/v)\\otimes e$. This is also a ring identification: on generators the product is $((r\\otimes e)/v)((r\\prime\\otimes e\\prime)/w)=(rr\\prime\\otimes ee\\prime)/(vw)$ on both sides, and the identity is preserved; distribute over finite sums. Equivalently, under $j$ each image of $v\\in V$ is a unit with inverse $(1/v)\\otimes1$, every element of $C$ has form $j(t)j(v\\otimes1)^{-1}$, and $j(t)=0$ implies $(v\\otimes1)t=0$ for some $v\\in V$. Hence $C$ has the ring-localization universal property [lem-weil-pbc-ring-localization-universal-property] at these images of $V$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK, lemma-tensor-localization, and Tag 00D2, lemma-tensor-with-bimodule; Tag 00CP, proposition-universal-property-localization"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak P\\subset S$ contract to $\\mathfrak p$. The inverse image $j^{-1}(\\mathfrak n)$ is a prime ideal, since the inverse image of a proper prime under a unital ring map is proper and satisfies the prime-product condition. Its contraction to $R$ is $\\mathfrak p$: the contraction of $\\mathfrak n$ to $A$ is $\\mathfrak m$, and [lem-trf-localization-maximal-contraction] identifies the contraction of $\\mathfrak m$ to $R$ with $\\mathfrak p$. By uniqueness over $\\mathfrak p$ from step 1, $j^{-1}(\\mathfrak n)=\\mathfrak P$.",
+   "uses": [
+    "lem-trf-localization-maximal-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035W, lemma-geometrically-reduced-at-point, first proof paragraph; algebra.tex Tag 00E9, lemma-characterize-local-ring"
+   }
+  },
+  {
+   "text": "If $u\\notin\\mathfrak P$, step 4 gives $j(u)\\notin\\mathfrak n$, so $j(u)$ is a unit by [lem-weil-pbc-local-ring-unit-criterion]. The universal property [lem-weil-pbc-ring-localization-universal-property] gives $\\theta_{\\mathfrak P}:S_{\\mathfrak P}\\to C$, $t/u\\mapsto j(t)j(u)^{-1}$. Conversely every $v\\in V$ has $v\\otimes1\\notin\\mathfrak P$ by contraction, so $S\\to S_{\\mathfrak P}$ factors through a ring map $\\psi:C\\to S_{\\mathfrak P}$ using step 3. Both composites $\\psi\\theta_{\\mathfrak P}$ and $\\theta_{\\mathfrak P}\\psi$ agree with the identity on $S$; uniqueness for the two localizations makes them identities. This proves the required ring isomorphism with its stated formula.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9, lemma-characterize-local-ring, (1) and (3); Tag 00CP, proposition-universal-property-localization, existence and uniqueness"
+   }
+  },
+  {
+   "text": "The construction gives $\\theta_{\\mathfrak P}(t/1)=j(t)$ for $t\\in S$, so it is compatible with $R_E$. On $A$ the structural map into $S_{\\mathfrak P}$ sends $r/v$ to $(r\\otimes1)/(v\\otimes1)$; applying $\\theta_{\\mathfrak P}$ gives $(r/v)\\otimes1$, proving compatibility with $A$. Finally let $f:S\\to D$ invert $S\\setminus\\mathfrak P$. It inverts the images of $V$, so step 3 gives $f_C:C\\to D$, and [lem-weil-pbc-ring-localization-universal-property] gives $f_{\\mathfrak P}:S_{\\mathfrak P}\\to D$. The maps $f_C\\theta_{\\mathfrak P}$ and $f_{\\mathfrak P}$ agree on $S$, hence are equal by the same uniqueness assertion. This includes arbitrary $D$ and completes every compatibility clause.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization, uniqueness and fraction formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-homeo-pure-insep",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-trf-localization-maximal-contraction",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 035W, lemma-geometrically-reduced-at-point, first proof paragraph, expanded using algebra.tex Tags 0BRA, 00E9, 00E0, 00DK, 00D2, and 00CP; the denominator and compatibility arguments are written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]urely[Ii]nseparable.*[Ll]ocal|[Ll]ocal.*[Pp]urely[Ii]nseparable|[Ll]ocal.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T06:45:19Z\", \"tool\": \"grep\", \"query\": \"[Pp]urely[Ii]nseparable.*[Ll]ocal|[Ll]ocal.*[Pp]urely[Ii]nseparable|[Ll]ocal.*[Tt]ensor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\"], \"digest\": \"3dc71ba06d6ab8da\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean:65, supplies the spectrum homeomorphism. It does not state the compatible prime-localization isomorphism for arbitrary R; the local-ring identification still needs the denominator and maximal-ideal argument. The project Noetherian local-ring theorem has an extra hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IsLocalRing",
+   "results": "{\"t\": \"2026-10-22T06:45:19Z\", \"tool\": \"loogle\", \"query\": \"IsPurelyInseparable, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean:65, supplies the spectrum homeomorphism. It does not state the compatible prime-localization isomorphism for arbitrary R; the local-ring identification still needs the denominator and maximal-ideal argument. The project Noetherian local-ring theorem has an extra hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a local algebra with a purely inseparable field extension gives a local ring identified with the localization of the scalar extended algebra",
+   "results": "{\"t\": \"2026-10-22T06:45:19Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring a local algebra with a purely inseparable field extension gives a local ring identified with the localization of the scalar extended algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalizedModule.rTensor\", \"Algebra.Extension.localization\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"IsLocalization.tensorRight\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.tensor\"], \"digest\": \"740b29ee259bee84\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean:65, supplies the spectrum homeomorphism. It does not state the compatible prime-localization isomorphism for arbitrary R; the local-ring identification still needs the denominator and maximal-ideal argument. The project Noetherian local-ring theorem has an extra hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite purely inseparable extension E of a field k and an arbitrary k algebra R the tensor product R_p tensor k E is local and equals (R tensor k E)_P at every prime P over p",
+   "results": "{\"t\": \"2026-10-22T06:45:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite purely inseparable extension E of a field k and an arbitrary k algebra R the tensor product R_p tensor k E is local and equals (R tensor k E)_P at every prime P over p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"Ideal.ResidueField.exists_smul_eq_tmul_one\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\"], \"digest\": \"a3daedab019bafad\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean:65, supplies the spectrum homeomorphism. It does not state the compatible prime-localization isomorphism for arbitrary R; the local-ring identification still needs the denominator and maximal-ideal argument. The project Noetherian local-ring theorem has an extra hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "isHomeomorph_comap_of_isPurelyInseparable|[Pp]urely[Ii]nseparable",
+   "results": "{\"t\": \"2026-10-22T06:45:50Z\", \"tool\": \"grep\", \"query\": \"isHomeomorph_comap_of_isPurelyInseparable|[Pp]urely[Ii]nseparable\", \"sub\": \"RingTheory/Spectrum/Prime/Homeomorph.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"8\", \"23\", \"65\", \"68\", \"75\"], \"digest\": \"9b3dec14748872e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean:65, supplies the spectrum homeomorphism. It does not state the compatible prime-localization isomorphism for arbitrary R; the local-ring identification still needs the denominator and maximal-ideal argument. The project Noetherian local-ring theorem has an extra hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime localization commutes without further localization with finite purely inseparable scalar extension: R_p tensor k E is isomorphic to (R tensor k E)_P when P lies over p",
+   "results": "{\"t\": \"2026-10-22T06:46:02Z\", \"tool\": \"leanfinder\", \"query\": \"Prime localization commutes without further localization with finite purely inseparable scalar extension: R_p tensor k E is isomorphic to (R tensor k E)_P when P lies over p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"IsLocalization.Away.tensorEquiv\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Localization.AtPrime.instAlgebraOfLiesOver\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"IsLocalization.Away.tensorRightEquiv\"], \"digest\": \"3f8d7abb62e25557\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean:65, supplies the spectrum homeomorphism. It does not state the compatible prime-localization isomorphism for arbitrary R; the local-ring identification still needs the denominator and maximal-ideal argument. The project Noetherian local-ring theorem has an extra hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a purely inseparable extension E of k, Spec of A tensor k E maps homeomorphically to Spec A, and localizing R tensor k E over p gives R_p tensor k E",
+   "results": "{\"t\": \"2026-10-23T04:43:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a purely inseparable extension E of k, Spec of A tensor k E maps homeomorphically to Spec A, and localizing R tensor k E over p gives R_p tensor k E\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_symm_apply_coe_asIdeal\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal\", \"PrimeSpectrum.coe_primesOverOrderIsoFiber_symm_apply_coe\", \"PrimeSpectrum.preimageHomeomorphFiber\", \"PrimeSpectrum.preimageEquivFiber_symm_apply_coe\"], \"digest\": \"bd245da2054928a9\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the full item. PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Homeomorph.lean:65) gives only the spectrum clause; IsLocalization.tensor and tensorRight (BaseChange.lean) give tensor localization but not locality or the compatible prime-localization isomorphism. These ingredients are already represented by existing DAG nodes used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IsLocalRing",
+   "results": "{\"t\": \"2026-10-23T04:45:47Z\", \"tool\": \"loogle\", \"query\": \"IsPurelyInseparable, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the full item. PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Homeomorph.lean:65) gives only the spectrum clause; IsLocalization.tensor and tensorRight (BaseChange.lean) give tensor localization but not locality or the compatible prime-localization isomorphism. These ingredients are already represented by existing DAG nodes used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isHomeomorph_comap_of_isPurelyInseparable|tensorRight|tensorLeft",
+   "results": "{\"t\": \"2026-10-23T04:45:47Z\", \"tool\": \"grep\", \"query\": \"isHomeomorph_comap_of_isPurelyInseparable|tensorRight|tensorLeft\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\"], \"digest\": \"c585462d2bae585e\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the full item. PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Homeomorph.lean:65) gives only the spectrum clause; IsLocalization.tensor and tensorRight (BaseChange.lean) give tensor localization but not locality or the compatible prime-localization isomorphism. These ingredients are already represented by existing DAG nodes used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local ring tensor a purely inseparable field extension is local and equals the localization of the tensor product at the unique prime over the original prime",
+   "results": "{\"t\": \"2026-10-23T04:49:15Z\", \"tool\": \"leansearch\", \"query\": \"A local ring tensor a purely inseparable field extension is local and equals the localization of the tensor product at the unique prime over the original prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isLocalRing\", \"Localization.AtPrime.isLocalRing\", \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"IsPurelyInseparable.isIntegral\", \"IsPurelyInseparable.mk\", \"Localization.AtPrime.instAlgebraOfLiesOver.congr_simp\"], \"digest\": \"917aa7d39bef109a\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the full item. PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Homeomorph.lean:65) gives only the spectrum clause; IsLocalization.tensor and tensorRight (BaseChange.lean) give tensor localization but not locality or the compatible prime-localization isomorphism. These ingredients are already represented by existing DAG nodes used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization commutes with base change: localizing a k algebra R at a multiplicative subset S and tensoring a field E gives the ring localization of R tensor k E at the image of S",
+   "results": "{\"t\": \"2026-10-23T04:49:16Z\", \"tool\": \"leanfinder\", \"query\": \"Localization commutes with base change: localizing a k algebra R at a multiplicative subset S and tensoring a field E gives the ring localization of R tensor k E at the image of S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.tensor\", \"IsLocalization.tensor\", \"IsLocalization.Away.tensorRight\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.tensorRight\", \"IsLocalization.Away.tensorRightEquiv\", \"RingHom.IsStableUnderBaseChange.of_isLocalization\", \"IsLocalization.Away.tensorEquiv\"], \"digest\": \"39fdbe0444c889bd\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the full item. PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Homeomorph.lean:65) gives only the spectrum clause; IsLocalization.tensor and tensorRight (BaseChange.lean) give tensor localization but not locality or the compatible prime-localization isomorphism. These ingredients are already represented by existing DAG nodes used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isHomeomorph_comap_of_isPurelyInseparable",
+   "results": "{\"t\": \"2026-10-23T04:52:44Z\", \"tool\": \"grep\", \"query\": \"isHomeomorph_comap_of_isPurelyInseparable\", \"sub\": \"RingTheory/Spectrum/Prime/Homeomorph.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"23\", \"65\", \"89\"], \"digest\": \"15bb3124dd461519\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the full item. PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Homeomorph.lean:65) gives only the spectrum clause; IsLocalization.tensor and tensorRight (BaseChange.lean) give tensor localization but not locality or the compatible prime-localization isomorphism. These ingredients are already represented by existing DAG nodes used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-reducedness-local-base-change",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited Curves 0C4D geometric-point descent branch, expanded by 035W: the unique point after a finite purely inseparable extension and identification of its local ring; old item proof steps 2 and 5.",
+   "via": [
+    "lem-trf-geometric-reducedness-local-base-change",
+    "lem-trf-geometric-field-stalk-descent",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-inseparable-prime-localization-identification",
+  "worker": "stage1",
+  "summary": "Statement unchanged. No exact project attachment: the existing Noetherian local-ring result imposes an extra hypothesis and does not provide this localization identification. Six steps expand 035W using existing DAG nodes only: spectrum order correspondence, locality via maximal ideals, module-to-ring tensor localization, identification of the inverse-image prime, mutually inverse localization maps, and structural/universal compatibility. No new nodes. Small cases include E=k, characteristic zero, nonreduced and non-Noetherian R, and nonclosed primes.",
+  "blueprint": "The inherited geometric-point descent branch recorded in blueprint.from.place uses 035W to identify the unique local ring after finite purely inseparable extension. Steps 1-2 realize its spectrum/locality assertion; steps 3-6 supply its ring identification and the compatible maps, without changing the current blueprint local-term statement or the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-homeo-pure-insep",
+    "why": "Generic purely inseparable base-change homeomorphism, applied to affine schemes; this is precisely the 0BRA input of 035W, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-homeo-pure-insep"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-0e813055c",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-0e813055c (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, with no new nodes. The statement is byte-identical to the unsplit live/side-live node, and there is no repair note, so this is a first split. Source check: varieties.tex 035W (lemma-geometrically-reduced-at-point, first proof paragraph, lines 371-380) and algebra.tex 0BRA (lemma-p-ring-map, line 10868). Step 1: lem-pc-homeo-pure-insep together with the affine fibre-product node gives contraction as a homeomorphism Spec(B⊗E)→Spec B; inclusion goes both ways through closure{Q}=V(Q), and the case B=R gives uniqueness over p. Step 2: locality via maximal-ideal existence and the written maximal⇒prime argument. Step 3: localization-tensor-over-base with k→R, M=R, T=R∖p, N=E; multiplicativity is checked, so the module isomorphism is also a ring localization. Step 4: R→S→C equals R→A→C, plus maximal-contraction and step-1 uniqueness, give j^{-1}(n)=P. Step 5: unit criterion plus the universal property give θ and inverse ψ; both composites are identities by uniqueness. Step 6: the A-compatibility (r/v)⊗1 and the arbitrary-D compatibility are verified. proof_deps equals the union of the uses, and there is no cycle and no SGA citation. Tested on E=k, k=F_p(t) with E=k(t^{1/p}) and R=k[x] (field case), and R=E (nonreduced local E⊗E). Duplicate search: lem-weil-pbc-purely-inseparable-base-change-local-ring is Noetherian-only and has no θ_P compatibilities, so it is not a duplicate. Accepted tool_use: lem-pc-homeo-pure-insep, a generic blueprint node of sk-thm-picard-rr, Lean-closed in slopmaster2 and exactly the 0BRA input. The citer lem-trf-geometric-reducedness-local-base-change uses only the compatible θ, which the statement supplies."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InseparablePrimeLocalizationIdentification",
+  "declaration": "Algebra.TensorProduct.inseparable_primeLocalization_identification",
+  "declarations": [
+   "Algebra.TensorProduct.primeLocalizationBaseChangeMap",
+   "Algebra.TensorProduct.inseparable_primeLocalization_identification"
+  ],
+  "file": "lean/Sheaf/RingTheory/InseparablePrimeLocalizationIdentification.lean",
+  "statement": "theorem inseparable_primeLocalization_identification (k : Type u) (E : Type v) (R : Type w) [Field k] [Field E] [CommRing R] [Algebra k E] [Algebra k R] [Module.Finite k E] [IsPurelyInseparable k E] (p : Ideal R) [p.IsPrime] : (∃ e : PrimeSpectrum (Localization.AtPrime p ⊗[k] E) ≃o PrimeSpectrum (Localization.AtPrime p), ∀ q, e q = PrimeSpectrum.comap (algebraMap (Localization.AtPrime p) (Localization.AtPrime p ⊗[k] E)) q) ∧ IsLocalRing (Localization.AtPrime p ⊗[k] E) ∧ ∃ n : Ideal (Localization.AtPrime p ⊗[k] E), n.IsMaximal ∧ (∀ n' : Ideal (Localization.AtPrime p ⊗[k] E), n'.IsMaximal → n' = n) ∧ n.comap (algebraMap (Localization.AtPrime p) (Localization.AtPrime p ⊗[k] E)) = IsLocalRing.maximalIdeal (Localization.AtPrime p) ∧ (∀ q : Ideal (Localization.AtPrime p ⊗[k] E), q.IsPrime → q.comap (algebraMap (Localization.AtPrime p) (Localization.AtPrime p ⊗[k] E)) = IsLocalRing.maximalIdeal (Localization.AtPrime p) → q = n) ∧ ∀ (P : Ideal (R ⊗[k] E)) [P.IsPrime], P.comap (algebraMap R (R ⊗[k] E)) = p → n.comap (primeLocalizationBaseChangeMap k E R p) = P ∧ ∃ theta : Localization.AtPrime P ≃+* (Localization.AtPrime p ⊗[k] E), theta.toRingHom.comp (algebraMap (R ⊗[k] E) (Localization.AtPrime P)) = primeLocalizationBaseChangeMap k E R p ∧ (∀ (a : R ⊗[k] E) (b : P.primeCompl), theta (IsLocalization.mk' (Localization.AtPrime P) a b) = primeLocalizationBaseChangeMap k E R p a * Ring.inverse (primeLocalizationBaseChangeMap k E R p b)) ∧ (∃ aMap : Localization.AtPrime p →+* Localization.AtPrime P, aMap.comp (algebraMap R (Localization.AtPrime p)) = (algebraMap (R ⊗[k] E) (Localization.AtPrime P)).comp (algebraMap R (R ⊗[k] E)) ∧ theta.toRingHom.comp aMap = algebraMap (Localization.AtPrime p) (Localization.AtPrime p ⊗[k] E)) ∧ ∀ (D : Type t) [Ring D] (f : R ⊗[k] E →+* D), (∀ b : P.primeCompl, IsUnit (f b)) → ∃! maps : ((Localization.AtPrime p ⊗[k] E) →+* D) × (Localization.AtPrime P →+* D), maps.1.comp (primeLocalizationBaseChangeMap k E R p) = f ∧ maps.2.comp (algebraMap (R ⊗[k] E) (Localization.AtPrime P)) = f ∧ maps.1.comp theta.toRingHom = maps.2",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-528fe7cf9",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Node statement/stmt_deps byte-identical to side-live; lean.statement verbatim in file; single sorry. primeLocalizationBaseChangeMap is real (TensorProduct.map of R→R_p and id_E). Hypotheses exactly field, Module.Finite, IsPurelyInseparable, CommRing R, k-algebra, prime p; no Noetherian/finite-type. Clauses all present: contraction as an order iso given by comap; IsLocalRing; n unique maximal and unique prime over m; n.comap j = P for every prime P over p; theta ≃+* fixed by theta∘(S→S_P)=j, with fraction formula via Ring.inverse; A-compatibility via aMap determined by R_p universal property; arbitrary Ring D gives ∃! pair of extensions, true also for noncommutative D. Source 035W read. Edge cases E=k, non-Noetherian/nonreduced R, non-closed p, D=0 covered; universes u v w t bound. Upstream purelyInseparable_baseChange_localRing is Noetherian-only with no theta, so not a duplicate. Second reading is a self-reading but complete. No fix needed, no compile run."
+ }
+}

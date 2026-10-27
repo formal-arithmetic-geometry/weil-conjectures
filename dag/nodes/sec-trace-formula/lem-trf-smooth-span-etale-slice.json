@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-smooth-span-etale-slice",
+ "kind": "statement",
+ "title": "A pointed etale span over a smooth base restricts to an etale slice",
+ "statement": "Let $X\\to S$, $Y\\to T$, $q:S'\\to S$, and $\\lambda':S'\\to T$ be morphisms of schemes [def-pc-scheme], with $q$ smooth [def-sbc-smooth-morphisms]. Let $s'\\in S'$, put $s=q(s')$ and $t=\\lambda'(s')$, and suppose $\\kappa(s)\\to\\kappa(s')$ is an isomorphism [def-weil-residue-field]. Put $X'=X\\times_SS'$ and $Y'=Y\\times_{T,\\lambda'}S'$ [def-pc-fibre-product]. Let $a':H'\\to X'$ and $c':H'\\to Y'$ be étale $S'$-morphisms [def-weil-etale-morphism], with a point $h'\\in H'$ over $s'$. Put $x'=a'(h')$ and $y'=c'(h')$, and let $x\\in X$ be the image of $x'$. Suppose $\\kappa(x)\\to\\kappa(x')$, $\\kappa(x')\\to\\kappa(h')$, and $\\kappa(y')\\to\\kappa(h')$ are isomorphisms. Then there exist an open neighbourhood $O\\subseteq S'$ of $s'$ [def-weil-open-immersion], a closed immersion $i:V\\hookrightarrow O$ [def-weil-closed-immersion], and $v\\in V$ mapping to $s'$, such that $V\\to S$ is étale, $\\kappa(s)\\to\\kappa(v)$ is an isomorphism, and the underlying fibre over $s$ is $\\{v\\}$. Put $\\tau=\\lambda' i:V\\to T$, regarding $i$ also as a map to $S'$, and put $W=H'\\times_{S'}V$. The fibre of $W\\to H'$ over $h'$ is canonically $\\operatorname{Spec}\\kappa(h')$, so it has a unique point $w$ with $\\kappa(h')\\to\\kappa(w)$ an isomorphism. The canonical comparison maps identify, compatibly with projections, $W\\cong H'\\times_{X'}(X\\times_SV)$ and $W\\cong H'\\times_{Y'}(Y\\times_{T,\\tau}V)$. Consequently the induced maps $W\\to X\\times_SV$, $W\\to Y\\times_{T,\\tau}V$, and $W\\to X$ are étale. They commute over $S$ and $V$, $w$ maps to $x$ and $v$, $\\tau(v)=t$, and $\\kappa(x)\\to\\kappa(w)$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, final proof paragraph: restriction to the etale slice and its scheme theoretic inverse image; Tag 057G, lemma-slice-smooth, supplies the immersion slice."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "First $s'$ is closed in the fibre $S'_s$. Indeed canonical point naturality [lem-weil-pbc-residue-field-point-naturality] and [def-pc-fibre-product] lift $\\operatorname{Spec}\\kappa(s')\\to S'$ to the fibre. It is a $\\kappa(s)$-rational point by the assumed residue-field isomorphism. If $r$ specializes this point, choose an affine neighbourhood $\\operatorname{Spec}A$ of $r$ in the fibre; it also contains $s'$. Evaluation $A\\to\\kappa(s')=\\kappa(s)$ is surjective because it is a $\\kappa(s)$-algebra map. Its kernel is maximal, so $r=s'$. This uses the subspace identification of the fibre in [def-pc-scheme-fibre] and the prime-ideal description in [def-weil-affine-spectrum]. The residue extension is finite separable because it is an isomorphism. Thus [lem-trf-smooth-point-etale-immersion] applies to the smooth map $q$ at $s'$, giving an immersion $V\\to S'$, a point $v$ over $s'$, an etale composite $V\\to S$, and singleton underlying fibre over $s$. Factor the immersion as a closed immersion $i:V\\to O$ followed by an open immersion $O\\to S'$, as in [def-weil-closed-immersion]; the image of $O$ contains $s'$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-affine-spectrum",
+    "lem-trf-smooth-point-etale-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0GDX (lemma-relative-map-approximation-pre), final paragraph, and 057G (lemma-slice-smooth), hypotheses and conclusion"
+   }
+  },
+  {
+   "text": "The open and closed immersion residue maps are isomorphisms by [lem-weil-pbc-residue-field-point-naturality] and [lem-weil-pbc-closed-immersion-residue-field-iso]. Hence $\\kappa(s')\\to\\kappa(v)$ is an isomorphism. Composing with $\\kappa(s)\\to\\kappa(s')$ gives the required isomorphism $\\kappa(s)\\to\\kappa(v)$: these are the specified maps, since local stalk maps and their residue-field quotients compose [def-weil-residue-field]. Set $\\tau=\\lambda' i$ and $W=H'\\times_{S'}V$. Naturality of the canonical point morphisms $j_z:\\operatorname{Spec}\\kappa(z)\\to Z$ gives $i j_v=j_{s'}\\operatorname{Spec}(\\kappa(s')\\to\\kappa(v))$. Its inverse residue isomorphism therefore lifts $j_{s'}$ to $V$. Compose this lift with $\\operatorname{Spec}(\\kappa(s')\\to\\kappa(h'))$ to lift the structural point morphism $\\operatorname{Spec}\\kappa(h')\\to S'$ to $V$.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-weil-residue-field",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, final paragraph: pointed restriction; point morphism naturality expanded"
+   }
+  },
+  {
+   "text": "By the fibre-product universal property [def-pc-fibre-product], the fibre of $W\\to H'$ at $h'$ identifies over $\\operatorname{Spec}\\kappa(h')$ with $F=V\\times_{S'}\\operatorname{Spec}\\kappa(h')$. The point morphism to $S'$ factors through $O$, so this is also $V\\times_O\\operatorname{Spec}\\kappa(h')$. Base-change stability of closed immersions [lem-weil-pbc-proper-fp-permanence](b) makes $F\\to\\operatorname{Spec}\\kappa(h')$ a closed immersion. The lift from step 2 supplies its section, so $F$ is nonempty. By the affine quotient characterization [def-weil-closed-immersion], $F=\\operatorname{Spec}(\\kappa(h')/I)$ for a proper ideal $I$ of the field $\\kappa(h')$; thus $I=0$. This identifies the fibre canonically with $\\operatorname{Spec}\\kappa(h')$. The fibre-point morphism sends its sole point to $w\\in W$ over $h'$ [def-pc-scheme-fibre]. Its residue maps give $\\kappa(h')\\to\\kappa(w)\\to\\kappa(h')$ with composite identity. Field homomorphisms are injective, so the second map is also surjective and both are inverse isomorphisms. Thus the structural map $\\kappa(h')\\to\\kappa(w)$ is an isomorphism.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion",
+    "def-pc-scheme-fibre",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, final sentence: scheme-theoretic inverse image, fibre and residue-field verification expanded"
+   }
+  },
+  {
+   "text": "For any test scheme $P$, a map $P\\to W$ is a pair $(b:P\\to H',d:P\\to V)$ with equal maps to $S'$. The pair $(a' b,d)$ is exactly a map to $X'\\times_{S'}V$ over $X'$; forgetting this forced component is the inverse construction. Also $X'\\times_{S'}V\\cong X\\times_SV$: keep the $X$- and $V$-components, and recover the $S'$-component as $i d$. The same constructions with $c'$ and $Y$ use $\\tau=\\lambda' i$ and give $Y'\\times_{S'}V\\cong Y\\times_{T,\\tau}V$. Uniqueness in [def-pc-fibre-product] proves that the resulting comparisons are inverse isomorphisms and preserve every indicated projection. This gives precisely the two comparison isomorphisms of the statement.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, final sentence: cartesian comparisons for restriction of the span"
+   }
+  },
+  {
+   "text": "Under the step-4 comparisons, $W\\to X\\times_SV$ and $W\\to Y\\times_{T,\\tau}V$ are the base changes of $a'$ and $c'$, hence etale by [lem-weil-pbc-etale-scheme-base-change]. The projection $X\\times_SV\\to X$ is etale by the same lemma applied to the etale map $V\\to S$. Their composite $W\\to X$ is etale by [lem-weil-pbc-etale-composition-cancellation](2). The projection equalities proved in step 4 give all commutative triangles over $S$ and $V$. At $w$ they give the images $h'$, $x'$, $x$ and $v$, and $\\tau(v)=\\lambda'(s')=t$. Finally the specified residue map $\\kappa(x)\\to\\kappa(w)$ is the composite of the assumed isomorphisms $\\kappa(x)\\to\\kappa(x')\\to\\kappa(h')$ and the isomorphism of step 3; composition of local stalk maps verifies that it is the required map [def-weil-residue-field].",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, final sentence; Tags 02GO (lemma-base-change-etale) and 02GN (lemma-composition-etale)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "lem-trf-smooth-point-etale-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "def-weil-residue-field",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, final paragraph, with the suppressed pointed pullback calculation expanded using Tag 057G"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pointed etale span over a smooth base with unchanged residue field restricts to an etale slice and remains an elementary etale neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardEtale R S], Algebra.Etale R S\", \"doc\": \"Every standard étale algebra over a commutative ring is an étale algebra. Specifically, if an algebra $ S $ over a commutative ring $ R $ is isomorphic to a localization of a polynomial ring over $ R \"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: definitions, smooth normal forms, and etale base-change stability do not construct a closed slice through the chosen point or prove the stated pointed pullback comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism has a closed subscheme through a rational point etale over the base and base change of a pointed etale span preserves residue fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: definitions, smooth normal forms, and etale base-change stability do not construct a closed slice through the chosen point or prove the stated pointed pullback comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsEtale",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-22",
+   "verdict": "Search returned an unknown identifier; not evidence of absence. Both semantic tools and the source grep were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*slice|slice.*[Ee]tale|[Ss]mooth.*[Ii]mmersion|[Ii]mmersion.*[Ss]mooth",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"120\", \"text\": \"instance : MorphismProperty.Respects @Smooth @IsOpenImmersion :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"176\", \"text\": \"/-- Open immersions are smooth of relative dimension `0`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"177\", \"text\": \"instance (priority := 900) [IsOpenImmersion f] : SmoothOfRelativeDimension 0 f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"182\", \"text\": \"/-- Open immersions are smooth. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"183\", \"text\": \"instance (priority := 900) [IsOpenImmersion f] : Smooth f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"line\": \"35\", \"text\": \"every smooth monomorphism is an open immersion.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: definitions, smooth normal forms, and etale base-change stability do not construct a closed slice through the chosen point or prove the stated pointed pullback comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale slice of a smooth scheme through a rational fibre point and pullback of an elementary etale span",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpan Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsEtale (f ≫ g)] [LocallyOfFiniteType g] [FormallyUnramified g] : IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: definitions, smooth normal forms, and etale base-change stability do not construct a closed slice through the chosen point or prove the stated pointed pullback comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*slice|slice.*etale|exists_etale.*immersion",
+   "results": "{\"t\": \"2026-10-23T09:36:17Z\", \"tool\": \"grep\", \"query\": \"etale.*slice|slice.*etale|exists_etale.*immersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, local smooth charts and etale-algebra localization results do not state the closed slice with singleton fibre and pointed span comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict a span of etale scheme morphisms to an immersion slice of a smooth base through a rational point",
+   "results": "{\"t\": \"2026-10-23T09:36:17Z\", \"tool\": \"leansearch\", \"query\": \"Restrict a span of etale scheme morphisms to an immersion slice of a smooth base through a rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.restrict\", \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict\", \"AlgebraicGeometry.instIsOpenImmersionMorphismRestrict\", \"AlgebraicGeometry.IsImmersion.instMorphismRestrict\"], \"digest\": \"1ed250766c3baac6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, local smooth charts and etale-algebra localization results do not state the closed slice with singleton fibre and pointed span comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Etale\", \"IsImmersion\"",
+   "results": "{\"t\": \"2026-10-23T09:36:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Etale\\\", \\\"IsImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, local smooth charts and etale-algebra localization results do not state the closed slice with singleton fibre and pointed span comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pointed etale span over a smooth base with unchanged residue field restricts to an etale slice and remains an elementary etale neighbourhood",
+   "results": "{\"t\": \"2026-10-23T09:36:26Z\", \"tool\": \"leanfinder\", \"query\": \"A pointed etale span over a smooth base with unchanged residue field restricts to an etale slice and remains an elementary etale neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.instEtaleOfIsStandardEtale\"], \"digest\": \"5ef624f9c89e7d57\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, local smooth charts and etale-algebra localization results do not state the closed slice with singleton fibre and pointed span comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism has a closed subscheme through a rational point etale over the base and base change of a pointed etale span preserves residue fields",
+   "results": "{\"t\": \"2026-10-23T09:37:03Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth morphism has a closed subscheme through a rational point etale over the base and base change of a pointed etale span preserves residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"ba723f2bfd5d50b6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, local smooth charts and etale-algebra localization results do not state the closed slice with singleton fibre and pointed span comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-completion-etale-approximation",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical auxiliary branch of lem-trf-local-term-locality: Tag 0GDX final proof paragraph restricting the pointed etale span to the Tag 057G immersion slice; retained ancestry only, not the current contracting-correspondence proof.",
+   "via": [
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-span-etale-slice",
+  "worker": "stage1",
+  "summary": "Q81: proved the pointed span restriction using the existing full 057G immersion slice, its open/closed factorization, a nonempty closed subscheme of a field spectrum calculation, explicit universal-property comparisons, and existing etale permanence nodes. No new nodes; statement unchanged.",
+  "blueprint": "Historical 0GDX auxiliary final-paragraph argument of the ancestor lem-trf-local-term-locality. The current latest blueprint uses contracting correspondences instead; this split preserves the auxiliary branch and does not alter that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-residue-field-point-naturality",
+    "why": "Canonical residue-field point naturality and open-immersion residue isomorphism ensure the lift is over the specified base; generic scheme-theoretic tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Closed immersions preserve residue fields, needed to verify the pointed slice; generic scheme-theoretic tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Only clause (b), closed-immersion base change, is used to compute the nonempty closed subscheme of a field spectrum."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic base-change stability supplies etaleness of the restricted legs and the projection to X."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Only composition clause (2) supplies etaleness of W to X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-e8121990f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-e8121990f (reviewer sub-agent of L); spot-checked: I read 0GDX (lemma-relative-map-approximation-pre) in full, especially the final restriction paragraph, and 057G (lemma-slice-smooth). The statement is byte-identical to live and side-live, where the node is still unsplit; there is no repair note and no SGA reference. Step 1: the closedness proof is correct. It lifts Spec κ(s') into the fibre by point naturality; the κ(s)-algebra evaluation A→κ(s')=κ(s) is surjective, so the kernel is maximal. With that, the hypotheses of the same-unit 057G node lem-trf-smooth-point-etale-immersion hold, and its immersion is factored as closed into O, then open, by def-weil-closed-immersion. Step 2: the open and closed residue isomorphisms give κ(s)≅κ(v), and the lift of j_{s'} through j_v is correct. Step 3: closed-immersion base change (proper-fp-permanence (b)) plus the section gives a nonempty closed subscheme of Spec κ(h'), so I=0. The identity composite gives κ(h')≅κ(w), and w↦v comes from the step-2 lift. Step 4: the elementary cartesian pastings, including Y'×_{S'}V≅Y×_{T,λ'i}V, are justified. Step 5: base change and composition (2) give étaleness, the points are right (τ(v)=t), and κ(x)→κ(w) is the composite of isomorphisms. The citer relative-completion step 4 uses exactly these clauses and does not need 0GDX clause (4). I tested the identity base change, A^n_S slices, a two-sheeted H' and a non-reduced H'. The only dependency of the item that its scope covers is one DAG duplicate candidate, and it is weaker (sbc-smooth-separable-point-etale-slice gives only a morphism); no cycle. The five declared generic tools (four Mathlib leaves plus the closed-immersion residue isomorphism) are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothSpanEtaleSlice",
+  "declaration": "AlgebraicGeometry.Smooth.exists_pointed_span_etale_slice",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSpanEtaleSlice.lean",
+  "statement": "theorem Smooth.exists_pointed_span_etale_slice {X Y S T S' H : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ T) (q : S' ⟶ S) (lam : S' ⟶ T) [Smooth q] (s' : S') (hs : IsIso (q.residueFieldMap s')) (r : H ⟶ S') (a : H ⟶ pullback f q) (c : H ⟶ pullback g lam) [Etale a] [Etale c] (ha : a ≫ pullback.snd f q = r) (hc : c ≫ pullback.snd g lam = r) (h : H) (hh : r h = s') (hx : IsIso ((pullback.fst f q).residueFieldMap (a h))) (haκ : IsIso (a.residueFieldMap h)) (hcκ : IsIso (c.residueFieldMap h)) : ∃ (O : S'.Opens) (V : Scheme.{u}) (i : V ⟶ O.toScheme) (v : V) (j : V ⟶ S') (qV : V ⟶ S) (τ : V ⟶ T), s' ∈ O ∧ IsClosedImmersion i ∧ j = i ≫ O.ι ∧ qV = j ≫ q ∧ τ = j ≫ lam ∧ j v = s' ∧ Etale qV ∧ IsIso (qV.residueFieldMap v) ∧ qV ⁻¹' {q s'} = {v} ∧ ∃ (kX : pullback f qV ⟶ pullback f q) (kY : pullback g τ ⟶ pullback g lam), kX ≫ pullback.fst f q = pullback.fst f qV ∧ kX ≫ pullback.snd f q = pullback.snd f qV ≫ j ∧ kY ≫ pullback.fst g lam = pullback.fst g τ ∧ kY ≫ pullback.snd g lam = pullback.snd g τ ≫ j ∧ ∃ (aV : pullback r j ⟶ pullback f qV) (cV : pullback r j ⟶ pullback g τ), aV ≫ pullback.fst f qV = pullback.fst r j ≫ a ≫ pullback.fst f q ∧ aV ≫ pullback.snd f qV = pullback.snd r j ∧ cV ≫ pullback.fst g τ = pullback.fst r j ≫ c ≫ pullback.fst g lam ∧ cV ≫ pullback.snd g τ = pullback.snd r j ∧ ∃ (eX : pullback r j ≅ pullback a kX) (eY : pullback r j ≅ pullback c kY), eX.hom ≫ pullback.fst a kX = pullback.fst r j ∧ eX.hom ≫ pullback.snd a kX = aV ∧ eY.hom ≫ pullback.fst c kY = pullback.fst r j ∧ eY.hom ≫ pullback.snd c kY = cV ∧ IsIso ((pullback.fst r j).fiberToSpecResidueField h) ∧ Etale aV ∧ Etale cV ∧ Etale (aV ≫ pullback.fst f qV) ∧ (aV ≫ pullback.fst f qV) ≫ f = pullback.snd r j ≫ qV ∧ ∃ (w : ↥(pullback r j : Scheme.{u})), (pullback.fst r j) ⁻¹' {h} = {w} ∧ IsIso ((pullback.fst r j).residueFieldMap w) ∧ (aV ≫ pullback.fst f qV) w = (pullback.fst f q) (a h) ∧ (pullback.snd r j) w = v ∧ τ v = lam s' ∧ IsIso ((aV ≫ pullback.fst f qV).residueFieldMap w)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a0e835e3",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Item lem-trf-smooth-span-etale-slice: every hypothesis and conclusion clause of the node matches Lean, quantifier order preserved, no added hypotheses, single universe u. kX/kY/aV/cV and eX/eY are each fixed by both projection equations, so they are the canonical maps. The canonical-fibre clause is IsIso of fiberToSpecResidueField h; w is the unique point over h with IsIso of its residue map; the point images, tau v = lam s' and the residue isomorphism for x are present. The 1(B) repair of lem-trf-smooth-point-etale-immersion converts the module to module mode (required for the import) and passes the residue algebra explicitly instead of letI, same meaning. The four dropped WeilConjectures rule-7 imports match no module recorded for the current proof_deps, and no file imports the module. Both lean.statement fields are verbatim in their files (script-checked). Docstrings carry source and blueprint, proof is sorry, report has Worker report and Second reading sections. No file changed and no compile run; worker reports clean server compiles."
+ }
+}

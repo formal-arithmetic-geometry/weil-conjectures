@@ -1,0 +1,16 @@
+--- a/lcompile.py
++++ b/lcompile.py
+@@ -426,8 +426,11 @@
+         text = r["out"].replace(td + "/lean", str(root)).replace(td + "/.lbuild", str(lb or root.parent / ".lbuild")).replace(td, str(root.parent))
+         note = f"(with the modules compiled into {lb}) " if lb and not out and r["arts"] else ""
+         outs.append((r["rc"], text + f"\n{note}[{r['secs']:.1f} s]"))
+-    if local and any(("failed to open file" in (o or "") and ".olean" in (o or "")) or "lset.py" in (o or "") for _, o in outs):
+-        # the mirror lacks an import (sync in progress) or the local service itself failed: not an answer, the server compiles
++    if local and any(("failed to open file" in (o or "") and ".olean" in (o or ""))
++                     or re.search(r"error: object file [^\n]+ does not exist", o or "")
++                     or "lset.py" in (o or "") for _, o in outs):
++        # The mirror omits Lake traces, so a missing transitive object may need
++        # the server's dependency resolver. A local service failure also retries there.
+         _log("local-missing", len(jobs), time.time() - t0); return None
+     _log(kind, len(jobs), time.time() - t0)
+     return outs

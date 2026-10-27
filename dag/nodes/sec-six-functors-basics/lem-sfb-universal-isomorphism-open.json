@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-universal-isomorphism-open",
+ "kind": "statement",
+ "title": "The universal isomorphism locus in the base is open",
+ "statement": "Let $B,A,C$ be schemes [def-pc-scheme], let $p:A\\to B$ and $q:C\\to B$ be morphisms, and let $f:A\\to C$ satisfy $q\\circ f=p$. Assume that $p$ is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and universally closed [def-weil-proper-morphism]. Assume that $q$ is locally of finite type [def-weil-finite-type-morphism], separated [def-weil-proper-morphism], and a closed map on underlying topological spaces. There is an open subscheme $U\\subseteq B$ [def-weil-open-immersion] such that, for every scheme $B\\prime$ and every morphism $h:B\\prime\\to B$, the base-changed morphism $f_{B\\prime}:A\\times_BB\\prime\\to C\\times_BB\\prime$ [def-pc-fibre-product] is an isomorphism if and only if $h$ factors through $U\\hookrightarrow B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism, scheme specialization; all six hypotheses and the universal base-change conclusion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The map $p$ is closed: in the definition of universal closedness [def-weil-proper-morphism], take the identity base change of $B$. Also $p$ is locally of finite type: each local finite presentation in [def-sbc-locally-finite-presentation] writes its algebra as a quotient of a polynomial algebra on finitely many generators, which is finitely generated as required by [def-weil-finite-type-morphism]. Thus both properties needed below follow without an extra hypothesis on $p$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-universal-surjective-flat-open] to the given $p,q,f$. Its assumptions are precisely the flatness and local finite presentation of $p$, its closedness from Step 1, and the assumed local finite type and closedness of $q$. Obtain an open $U_1\\subseteq B$ such that for every $h:T\\to B$, $h$ factors through $U_1$ exactly when $f_T$ is surjective and flat.",
+   "uses": [
+    "lem-sfb-universal-surjective-flat-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-universal-closed-immersion-open] to the same $p,q,f$. Step 1 gives local finite type of $p$; universal closedness of $p$ and separatedness of $q$ are original hypotheses. Obtain an open $U_2\\subseteq B$ such that for every $h:T\\to B$, $h$ factors through $U_2$ exactly when $f_T$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-universal-closed-immersion-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism, proof"
+   }
+  },
+  {
+   "text": "Let $U$ be the open subscheme corresponding to $U_1\\cap U_2$. A morphism $h:T\\to B$ factors through an open subscheme $V$ exactly when its underlying image is in $V$: restrict the underlying continuous map and the structure sheaf map to $V$; the resulting morphism is unique since the inclusion identifies its structure sheaf with the restriction [def-weil-open-immersion]. Consequently $h$ factors through $U$ exactly when it factors through both $U_1$ and $U_2$.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism, proof"
+   }
+  },
+  {
+   "text": "Fix an arbitrary scheme $T$ and $h:T\\to B$. If $h$ factors through $U$, Steps 2--4 imply that $f_T$ is surjective, flat and a closed immersion. Apply [lem-sfb-surjective-flat-closed-immersion-isomorphism] to $f_T$ to obtain an isomorphism. Conversely, if $f_T$ is an isomorphism, its underlying map is a homeomorphism, hence surjective [def-weil-surjective-morphism]; its stalk maps are ring isomorphisms, hence flat [def-weil-flat-morphism]; and its structure sheaf map is an isomorphism, hence surjective, so it is a closed immersion onto the whole target [def-weil-closed-immersion]. Steps 2 and 3 then force $h$ to factor through both opens, hence through $U$ by Step 4. This proves the universal equivalence for arbitrary, including nonreduced, $T$ without identifying any fibrewise locus with a universal one.",
+   "uses": [
+    "lem-sfb-surjective-flat-closed-immersion-isomorphism",
+    "def-weil-surjective-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-universal-surjective-flat-open",
+  "lem-sfb-universal-closed-immersion-open",
+  "def-weil-open-immersion",
+  "lem-sfb-surjective-flat-closed-immersion-isomorphism",
+  "def-weil-surjective-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isomorphism.*locus|where.*isomorphism|isIso.*[Oo]pen|[Oo]pen.*isIso",
+   "results": "{\"t\": \"2026-10-22T04:01:25Z\", \"tool\": \"grep\", \"query\": \"isomorphism.*locus|where.*isomorphism|isIso.*[Oo]pen|[Oo]pen.*isIso\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"5af4570bdfa1c4f7\"}; no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal isomorphism locus of a morphism between proper flat finitely presented families is open in the base",
+   "results": "{\"t\": \"2026-10-22T04:01:26Z\", \"tool\": \"leansearch\", \"query\": \"Universal isomorphism locus of a morphism between proper flat finitely presented families is open in the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"AlgebraicGeometry.universallyOpen_iff\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme\", \"AlgebraicGeometry.UniversallyInjective.respectsIso\"], \"digest\": \"184b02e49eab437b\"}; no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-22T04:01:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"isIso\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.base_isIso_of_iso\", \"AlgebraicGeometry.PresheafedSpace.c_isIso_of_iso\", \"AlgebraicGeometry.PresheafedSpace.isIso_of_components\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.isIso\", \"AlgebraicGeometry.PresheafedSpace.ofRestrict_stalkMap_isIso\", \"AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso\", \"AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso_toHom\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\"], \"digest\": \"4d11566b787ae4c7\"}; no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map between proper flat finitely presented schemes over a base, the functor of base changes on which the map is an isomorphism is represented by an open subset of the base",
+   "results": "{\"t\": \"2026-10-22T04:01:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a map between proper flat finitely presented schemes over a base, the functor of base changes on which the map is an isomorphism is represented by an open subset of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"42b0e876d8318019\"}; no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base."
+  },
+  {
+   "tool": "grep",
+   "query": "whereIsomorphism|isomorphismLocus|isomorphism.*locus|[Ii]somorphism.*famil",
+   "results": "{\"t\": \"2026-10-22T04:01:44Z\", \"tool\": \"grep\", \"query\": \"whereIsomorphism|isomorphismLocus|isomorphism.*locus|[Ii]somorphism.*famil\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If p A to B is flat locally of finite presentation and universally closed, q C to B is separated closed and locally of finite type, then for a B-morphism f A to C the base changes making f an isomorphism are represented by an open of B",
+   "results": "{\"t\": \"2026-10-22T04:01:46Z\", \"tool\": \"leanfinder\", \"query\": \"If p A to B is flat locally of finite presentation and universally closed, q C to B is separated closed and locally of finite type, then for a B-morphism f A to C the base changes making f an isomorphism are represented by an open of B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\"], \"digest\": \"93e7d08eed69f933\"}; no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universally open morphisms, restriction of an already invertible map, stalk isomorphisms, fpqc descent or gluing representable functors; none constructs the universal isomorphism open in the parameter base."
+  },
+  {
+   "tool": "grep",
+   "query": "whereIsomorphism|isomorphismLocus|isomorphism.*locus|isIso_of.*[Ff]lat|[Ff]lat.*isIso",
+   "results": "{\"t\": \"2026-10-22T04:10:32Z\", \"tool\": \"grep\", \"query\": \"whereIsomorphism|isomorphismLocus|isomorphism.*locus|isIso_of.*[Ff]lat|[Ff]lat.*isIso\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\"], \"digest\": \"662361f6fdbb3570\"}; no match: universal openness and closedness, ordinary isomorphism criteria and descent do not represent the universal isomorphism locus in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness and closedness, ordinary isomorphism criteria and descent do not represent the universal isomorphism locus in the parameter base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base changes for which a morphism of schemes between a flat finitely presented universally closed family and a separated finite type closed family is an isomorphism are represented by an open subscheme of the base",
+   "results": "{\"t\": \"2026-10-22T04:10:38Z\", \"tool\": \"leanfinder\", \"query\": \"The base changes for which a morphism of schemes between a flat finitely presented universally closed family and a separated finite type closed family is an isomorphism are represented by an open subscheme of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\"], \"digest\": \"868f33ad80289b54\"}; no match: universal openness and closedness, ordinary isomorphism criteria and descent do not represent the universal isomorphism locus in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness and closedness, ordinary isomorphism criteria and descent do not represent the universal isomorphism locus in the parameter base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal isomorphism locus of a morphism between flat finitely presented universally closed schemes over a base is open",
+   "results": "{\"t\": \"2026-10-22T04:11:01Z\", \"tool\": \"leansearch\", \"query\": \"Universal isomorphism locus of a morphism between flat finitely presented universally closed schemes over a base is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\"], \"digest\": \"ff60a2cb479aa19d\"}; no match: universal openness and closedness, ordinary isomorphism criteria and descent do not represent the universal isomorphism locus in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness and closedness, ordinary isomorphism criteria and descent do not represent the universal isomorphism locus in the parameter base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-22T04:11:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.base_isIso_of_iso\", \"AlgebraicGeometry.PresheafedSpace.c_isIso_of_iso\", \"AlgebraicGeometry.PresheafedSpace.isIso_of_components\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.isIso\", \"AlgebraicGeometry.PresheafedSpace.ofRestrict_stalkMap_isIso\", \"AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso\", \"AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso_toHom\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\"], \"digest\": \"4d11566b787ae4c7\"}; no match: universal openness and closedness, ordinary isomorphism criteria and descent do not represent the universal isomorphism locus in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness and closedness, ordinary isomorphism criteria and descent do not represent the universal isomorphism locus in the parameter base."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graphs-open-in-hilbert",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family",
+   "via": [
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-universal-isomorphism-open",
+  "worker": "stage1",
+  "summary": "Read Stacks 05XD and both input lemmas 05XC and 05XA, plus 04PW and Mathlib FlatMono. Expanded the proof into two universal loci, their open intersection and both directions for every test scheme. Added only the two genuine locus lemmas and one Mathlib corollary; checked definitions, hypotheses, duplicates, source and Lean searches and nonreduced/empty examples. Statement unchanged.",
+  "blueprint": "Inherited ancestry has from.node=null, as confirmed by blueprint_refs ancestor; retained that ancestry and its exact de Jong 3.9 / quot 0D1B place. Steps 2 and 3 realize the first two sentences of 05XD, Step 4 its intersection, Step 5 its surjective-flat-closed-immersion conclusion. No chapter or unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-76f45cc41",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-76f45cc41 (reviewer sub-agent of L); spot-checked: I read Stacks spaces-more-morphisms 05XA, 05XC and 05XD (lines 11642-11830) and morphisms 04PW. The item statement is unchanged and matches the scheme case of 05XD hypothesis by hypothesis, so its only citer, lem-sfb-graphs-open-in-hilbert, still applies. The five steps follow the 05XD proof: Step 1 gets p closed (identity base change in def-weil-proper-morphism) and p lft from lfp. Step 2 applies the new 05XC node; its five hypotheses check out (q-separatedness is not needed). Step 3 applies the new 05XA node (p lft and universally closed, q separated). Step 4 shows that factoring through U1∩U2 means factoring through both opens, using def-weil-open-immersion. Step 5 goes forward through the Mathlib leaf; for the converse, an isomorphism is surjective, flat and a closed immersion by the definition nodes, and the step works for arbitrary T. New nodes: universal-surjective-flat-open is exactly 05XC and universal-closed-immersion-open is exactly 05XA. Both are statement-only, self-contained and strictly smaller than the item. I tested them on the empty source, the identity and the fold of two points. The Mathlib leaf Flat.isIso_of_surjective_of_mono (FlatMono.lean:24-26) takes its Mono and QuasiCompact instances from ClosedImmersion.lean:69 and :151, Preimmersion.lean:65 and Affine.lean:58, as its how field says, so it is a one-line specialization. grep -R found no duplicate for 04PW, 05XA-05XD or 06NC in the DAG. Advisory: Step 1's lfp⇒lft glosses the affine locality of lft (Stacks 01T2); both definitions are Mathlib definitions with an instance, so this is not a C2 fault. No SGA, no tool_uses, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalIsomorphismOpen",
+  "declaration": "AlgebraicGeometry.exists_universalIsomorphismOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalIsomorphismOpen.lean",
+  "statement": "theorem exists_universalIsomorphismOpen {B A C : Scheme.{u}} (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (hf : f ≫ q = p) [Flat p] [LocallyOfFinitePresentation p] [UniversallyClosed p] [LocallyOfFiniteType q] [IsSeparated q] (hq : IsClosedMap q) : ∃ U : B.Opens, ∀ (T : Scheme.{u}) (h : T ⟶ B), IsIso (pullback.map p h q h f (𝟙 T) (𝟙 B) (by simpa only [Category.comp_id] using hf.symm) (by simp)) ↔ ∃ l : T ⟶ U.toScheme, l ≫ U.ι = h",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89b8430e9",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Node diff vs side-live: only the lean field changed. Lean matches Stacks 05XD (spaces-more-morphisms.tex:11790-11810), scheme case, hypothesis by hypothesis: [Flat p], [LocallyOfFinitePresentation p], [UniversallyClosed p], [LocallyOfFiniteType q], [IsSeparated q], hq : IsClosedMap q (not universal). Conclusion: ∃ U : B.Opens, ∀ T h, IsIso (canonical pullback.map p h q h f (𝟙 T) (𝟙 B)) ↔ ∃ l, l ≫ U.ι = h. No extra assumptions; quantifier order matches. Edge cases: empty and nonreduced T covered; empty open allowed (needed for A=∅, q=id and the fold of two points). T shares universe u with B (standard, not a silent restriction). All 7 stmt_dep records are existing Mathlib declarations, used through their API. No duplicate in Mathlib or the project (FiniteLocallyFreeMapIsoOpen is about vector bundles). Proof is sorry only. Docstring has the source place, blueprint tag and all 5 proof steps. Report has the Worker report and Second reading by Q07 sections. Not recompiled per the 2026-10-21 instruction; no fixes. Advisory only: the private FlatMono import is unneeded for the statement."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261023T105426-L-3557415",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_universalIsomorphismOpen"
+  ],
+  "sorry_after": []
+ }
+}

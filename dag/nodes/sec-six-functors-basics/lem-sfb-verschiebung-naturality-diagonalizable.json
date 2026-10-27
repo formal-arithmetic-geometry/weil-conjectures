@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-verschiebung-naturality-diagonalizable",
+ "kind": "statement",
+ "title": "Naturality of Verschiebung and its value on diagonalizable groups",
+ "statement": "Let $k$ be a field [def-weil-field] of characteristic $p>0$. All groups are commutative affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], with closed subgroups as in [def-sc-group-scheme-subgroup]. Use the twist $G^{(p)}$ and canonical $V_G:G^{(p)}\\to G$ of [lem-sfb-affine-group-frobenius-verschiebung]. For every group homomorphism $f:G\\to H$, one has $fV_G=V_Hf^{(p)}$. Formation of $V$ commutes with arbitrary extensions of the ground field and with finite products, under the canonical product and twist identifications. Consequently, if $V_G=0$, then $V_N=0$ for every closed subgroup $N\\subseteq G$, and $V_Q=0$ for every quotient homomorphism $G\\to Q$ that is faithfully flat and finitely presented (that is, an epimorphism of represented fppf sheaves, for faithfully flat finitely presented coverings of commutative $k$-algebras). If $M$ is a finitely generated abelian group and $D_k(M)=\\operatorname{Spec}k[M]$, where $k[M]$ has basis $e_m$, product $e_me_n=e_{m+n}$ and coproduct $e_m\\mapsto e_m\\otimes e_m$, then $V_{D_k(M)}$ is an isomorphism: its coordinate map sends $e_m$ to $e_m\\otimes1$ in $k[M]^{(p)}$. Tensor products and spectra are [lem-weil-pbc-algebra-tensor-pushout-universal-property, def-weil-affine-spectrum]. No smoothness, connectedness or perfection is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 11.39, properties (a)-(c), printed pp.224-225; diagonalizable specialization of its invariant-tensor construction, with the group-algebra Hopf structure in Chapter 12. Subgroup and quotient consequences use the represented fppf quotient convention of Chapter 5."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-affine-group-frobenius-verschiebung",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=k[G]$, $A=k[H]$ and $h=f^*:A\\to C$. The construction [lem-sfb-affine-group-frobenius-verschiebung] gives $v_C=\\lambda_C\\Delta_{p,C}$ and $v_A=\\lambda_A\\Delta_{p,A}$. Pulling back the homomorphism identity $f m_G=m_H(f\\times f)$ gives $\\Delta_C h=(h\\otimes h)\\Delta_A$, using the tensor pushout and affine spectrum correspondence. Iteration gives $\\Delta_{p,C}h=h^{\\otimes p}\\Delta_{p,A}$. The naturality formula of [lem-sfb-symmetric-invariant-frobenius-projection] now gives\n$$v_C h=\\lambda_C I_p(h)\\Delta_{p,A}=h^{(p)}\\lambda_A\\Delta_{p,A}=h^{(p)}v_A.$$\nThe faithful affine spectrum correspondence reverses this equality to $fV_G=V_Hf^{(p)}$.",
+   "uses": [
+    "lem-sfb-affine-group-frobenius-verschiebung",
+    "lem-sfb-symmetric-invariant-frobenius-projection",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39(a), printed p.224; explicit coordinate proof of functoriality"
+   }
+  },
+  {
+   "text": "For a field extension $k\\to K$, put $C_K=C\\otimes_k K$. The tensor pushout and scalar-extension definitions give the twist comparison\n$$\\theta:(C_K)^{(p)}\\xrightarrow{\\sim}C^{(p)}\\otimes_k K,\\qquad (c\\otimes a)\\otimes b\\longmapsto(c\\otimes1)\\otimes a^pb.$$\nIts inverse sends $(c\\otimes d)\\otimes a$ to $(c\\otimes1)\\otimes da$ ($d\\in k$, viewed in $K$). These formulas respect both balancing relations, and composing either way is the identity because $(a x)\\otimes b=x\\otimes a^pb$ in the twist. Thus no inverse to Frobenius on either field is used. A $k$-basis $B$ of $C$ extends to the $K$-basis $\\{b\\otimes1:b\\in B\\}$: finite tensor sums expand in these vectors, and the coefficient maps associated to $B$ prove their independence. The same argument on tensor powers shows that extension of scalars identifies the orbit-sum bases of $I_p(C)\\otimes_k K$ and $I_p(C_K)$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-symmetric-invariant-frobenius-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39(c), printed p.225; explicit twist and invariant-space comparisons"
+   }
+  },
+  {
+   "text": "On a singleton orbit $b^{\\otimes p}$, the two maps $\\theta\\lambda_{C_K}$ and $\\lambda_C\\otimes1$ of the preceding comparison both give $(b\\otimes1)\\otimes1$; on each non-singleton orbit sum both give zero. By the orbit-basis formula in [lem-sfb-symmetric-invariant-frobenius-projection] they agree on every invariant tensor. The comultiplication on $C_K$ is obtained by extending that on $C$: on $c\\otimes a$, its iterated value is $\\Delta_{p,C}(c)$ with scalar $a$ in one factor, by pulling back the base-changed multiplication. Consequently\n$$\\theta v_{C_K}(c\\otimes a)=v_C(c)\\otimes a.$$\nThe construction of $v$ and the affine spectrum correspondence identify this equality with the claimed base-change compatibility of $V$.",
+   "uses": [
+    "lem-sfb-symmetric-invariant-frobenius-projection",
+    "lem-sfb-affine-group-frobenius-verschiebung",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39(c), printed p.225; comparison of the orbit formula with iterated comultiplication"
+   }
+  },
+  {
+   "text": "For $G\\times H$, its coordinate algebra is $C\\otimes_k A$: maps to it as an affine scheme are pairs of algebra maps by the tensor pushout property. The same property identifies $(G\\times H)^{(p)}$ with $G^{(p)}\\times H^{(p)}$, the coordinate isomorphism sending $(c\\otimes a)\\otimes d$ to $(c\\otimes1)\\otimes(a\\otimes d)$. Apply step 1 to the two projections $\\pi_G,\\pi_H$. The two components of $V_{G\\times H}$ are then $V_G\\pi_G^{(p)}$ and $V_H\\pi_H^{(p)}$, so the product universal property identifies it with $V_G\\times V_H$. Iterate for any nonempty finite product. For the empty product, the terminal group has only one endomorphism, which proves the assertion as well.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum",
+    "lem-sfb-affine-group-frobenius-verschiebung"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39(b), printed p.225; projections and the product universal property"
+   }
+  },
+  {
+   "text": "Suppose $V_G=0$ and let $i:N\\hookrightarrow G$ be a closed subgroup. Step 1 gives $iV_N=V_Gi^{(p)}=0=i0$. For every $k$-algebra $R$, the map $i(R)$ is injective by the subgroup definition [def-sc-group-scheme-subgroup], hence $V_N(R)=0$. As $N^{(p)}$ is affine, evaluate this equality at its coordinate ring and at its universal point; the affine spectrum correspondence then gives $V_N=0$ as a morphism. This argument uses injectivity on all algebra-valued points, not only on points valued in fields.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-affine-group-frobenius-verschiebung",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39(a), printed p.224, applied to closed subgroups (Chapter 5 subgroup convention)"
+   }
+  },
+  {
+   "text": "Let $q:G\\to Q$ be a quotient of the stated kind and put $E=k[Q]$. The coordinate map $u:E\\to C$ is faithfully flat. Its Frobenius twist $u^{(p)}:E^{(p)}\\to C^{(p)}$ is its base change along $E\\to E^{(p)}$, $e\\mapsto e\\otimes1$: the tensor pushout identifies\n$$C\\otimes_E E^{(p)}\\simeq C\\otimes_{k,\\sigma}k,\\qquad c\\otimes(e\\otimes a)\\longmapsto c\\,u(e)\\otimes a,$$\nwith inverse $c\\otimes a\\mapsto c\\otimes(1\\otimes a)$. Thus [lem-weil-pbc-faithfully-flat-base-change] makes $u^{(p)}$ faithfully flat. Taking the module $E^{(p)}$ in [lem-weil-pbc-faithfully-flat-universally-injective] shows that $u^{(p)}$ is injective. Step 1 and $V_G=0$ give $V_Qq^{(p)}=0q^{(p)}$. On coordinate maps this is $u^{(p)}v_E=u^{(p)}0^*$, so injectivity yields $v_E=0^*$ and hence $V_Q=0$. Finite presentation is part of the quotient convention; the cancellation itself only needs faithful flatness.",
+   "uses": [
+    "lem-sfb-affine-group-frobenius-verschiebung",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39(a), printed p.224, quotient consequence; algebraic cancellation uses Stacks Tags 00HI (lemma-flat-base-change) and 05CK (lemma-faithfully-flat-universally-injective)"
+   }
+  },
+  {
+   "text": "For $C=k[M]$ with the displayed Hopf structure, iteration gives $\\Delta_p(e_m)=e_m^{\\otimes p}$. The singleton-orbit formula in [lem-sfb-affine-group-frobenius-verschiebung] therefore gives $v_C(e_m)=e_m\\otimes1$. Define a $k$-linear map $w:C^{(p)}\\to C$ by\n$$w\\bigl((\\sum_m a_me_m)\\otimes c\\bigr)=\\sum_m a_m^p c\\,e_m.$$\nThe sums are finite. The formula is additive, and the balancing relation $(ra)\\otimes c=a\\otimes r^pc$ shows it is well-defined. Its product formula follows from $(\\sum_{m+n=t}a_mb_n)^p=\\sum_{m+n=t}a_m^pb_n^p$, so $w$ is a unital $k$-algebra map. Now $wv_C(e_m)=e_m$, and\n$$v_Cw\\bigl((\\sum_m a_me_m)\\otimes c\\bigr)=\\sum_m(e_m\\otimes a_m^pc)=(\\sum_m a_me_m)\\otimes c.$$\nThus $w$ and $v_C$ are mutual inverses. Applying affine spectrum proves that $V_{D_k(M)}$ is an isomorphism with precisely the asserted coordinate formula. This includes $M=0$, infinite $M$ with finite support in each element, and $p$-torsion in $M$; in the item $M$ is finitely generated.",
+   "uses": [
+    "lem-sfb-affine-group-frobenius-verschiebung",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39, printed p.224; Chapter 12(b), printed pp.230-232, especially the Hopf formulas on p.231 and additive notation in Remark 12.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-frobenius-verschiebung",
+  "lem-sfb-symmetric-invariant-frobenius-projection",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "def-weil-module-base-change",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-universally-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 11.39(a)-(c), printed pp.224-225; Chapter 12(b), printed pp.230-232. Coordinate verification and explicit inverse supplied by Q93; quotient cancellation uses Stacks Tags 00HI and 05CK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Verschiebung of commutative affine group schemes commutes with homomorphisms products and field extensions and is an isomorphism on diagonalizable groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).hom =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.ΓSpecIso\\n          { carrier := MvPolynomial n ↑(S\", \"doc\": \"When the base scheme $ S $ is affine, the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $ maps the entire space to the\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_Spec_map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {R S : CommRingCat} (φ : R ⟶ S),\\n  AlgebraicGeometry.AffineSpace.map n (AlgebraicGeometry.Spec.map φ) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.SpecIso n S).hom\\n      (CategoryTheory.CategoryStruct.comp\\n        (AlgebraicGeometry.Spec.map (CommRingCat.ofH\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ φ: R → S $, the induced morphism $ \\\\mathbb{A}^n_{\\\\operatorname{Spec}(S)} → \\\\mathbb{A}^n_{\\\\operatorname{Spec}(R)} $ between affine s\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_SpecMap\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {R S : CommRingCat} (φ : R ⟶ S),\\n  AlgebraicGeometry.AffineSpace.map n (AlgebraicGeometry.Spec.map φ) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.SpecIso n S).hom\\n      (CategoryTheory.CategoryStruct.comp\\n        (AlgebraicGeometry.Spec.map (CommRingCat.ofH\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ \\\\varphi: R \\\\to S $, and a natural number $ n $, the induced morphism between affine spaces $ \\\\mathbb{A}^n_{\\\\operatorname{Spec}(S)} \\\\to \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace.toSpecMvPoly n S) =\\n    (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEqu\", \"doc\": \"For a scheme $ S $ and index set $ n $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the projection $ \\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_\\\\mathbb{Z} $ equals the inverse equivalence $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  {Z : AlgebraicGeometry.Scheme}\\n  (h :\\n    AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{max u v, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial } ⟶\\n      Z),\\n  Cat\", \"doc\": \"For any scheme $ X $ over $ S $, a tuple $ v $ of global sections on $ X $, and a morphism $ h $ from the affine $ n $-space over $ \\\\mathbb{Z} $ to a scheme $ Z $, the composition of the morphism $ \\\\m\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S] (i : n),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv))\\n      (AlgebraicGeometry.AffineSpace.coord S i) =\\n    (CategoryTheo\", \"doc\": \"For an affine scheme $ S $, the inverse of the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $ maps the $ i $-th coord\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv\\n      (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRing\", \"doc\": \"When $ S $ is an affine scheme, the inverse of the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $, composed with the \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S] {Z : AlgebraicGeometry.Scheme}\\n  (h : S ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace n S ↘ \", \"doc\": \"For an affine scheme $ S $ and any scheme $ Z $, the composition of the inverse isomorphism $ (\\\\mathbb{A}^n_S \\\\cong \\\\operatorname{Spec}(\\\\Gamma(S)[x_1,\\\\dots,x_n]))^{-1} $, the canonical morphism $ \\\\mat\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector shift identities and scheme base-change instances do not state naturality or diagonalizable invertibility of the canonical group-scheme Verschiebung."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verschiebung\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"WittVector.verschiebungPoly\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" (n : ℕ) : MvPolynomial ℕ ℤ\", \"doc\": \"The 0th Verschiebung polynomial is 0. For `n > 0`, the `n`th Verschiebung polynomial is the\\nvariable `X (n-1)`.\"}\n  {\"name\": \"WittVector.verschiebungFun\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" {p : ℕ} {R : Type u_1} [CommRing R] (x : WittVector p R) : WittVector p R\", \"doc\": \"`verschiebungFun x` shifts the coefficients of `x` up by one,\\nby inserting 0 as the 0th coefficient.\\n`x.coeff i` then becomes `(verschiebungFun x).coeff (i + 1)`.\\n\\n`verschiebungFun` is the underlying \"}\n  {\"name\": \"WittVector.verschiebungFun_isPoly\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" (p : ℕ) : WittVector.IsPoly p fun R _Rcr => WittVector.verschiebungFun\", \"doc\": \"`WittVector.verschiebung` has polynomial structure given by `WittVector.verschiebungPoly`.\"}\n  {\"name\": \"WittVector.verschiebungFun_coeff_succ\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" {p : ℕ} {R : Type u_1} [CommRing R] (x : WittVector p R) (n : ℕ) : x.verschiebungFun.coeff n.succ = x.coeff n\", \"doc\": \"\"}\n  {\"name\": \"WittVector.verschiebungFun_coeff_zero\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" {p : ℕ} {R : Type u_1} [CommRing R] (x : WittVector p R) : x.verschiebungFun.coeff 0 = 0\", \"doc\": \"\"}\n  {\"name\": \"WittVector.verschiebungPoly_zero\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" : WittVector.verschiebungPoly 0 = 0\", \"doc\": \"\"}\n  {\"name\": \"WittVector.verschiebungFun_coeff\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" {p : ℕ} {R : Type u_1} [CommRing R] (x : WittVector p R) (n : ℕ) : x.verschiebungFun.coeff n = if n = 0 then 0 else x.coeff (n - 1)\", \"doc\": \"\"}\n  {\"name\": \"WittVector.verschiebung\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" {p : ℕ} {R : Type u_1} [CommRing R] [hp : Fact (Nat.Prime p)] : WittVector p R →+ WittVector p R\", \"doc\": \"`verschiebung x` shifts the coefficients of `x` up by one, by inserting 0 as the 0th coefficient.\\n`x.coeff i` then becomes `(verschiebung x).coeff (i + 1)`.\\n\\nThis is an additive monoid hom with underl\"}\n  {\"name\": \"WittVector.ghostComponent_zero_verschiebungFun\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" {p : ℕ} {R : Type u_1} [CommRing R] [hp : Fact (Nat.Prime p)] (x : WittVector p R) : (WittVector.ghostComponent 0) x.verschiebungFun = 0\", \"doc\": \"\"}\n  {\"name\": \"WittVector.aeval_verschiebung_poly'\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" {p : ℕ} {R : Type u_1} [CommRing R] (x : WittVector p R) (n : ℕ) : (MvPolynomial.aeval x.coeff) (WittVector.verschiebungPoly n) = x.verschiebungFun.coeff n\", \"doc\": \"\"}\n  {\"name\": \"WittVector.verschiebung_isPoly\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" {p : ℕ} [hp : Fact (Nat.Prime p)] : WittVector.IsPoly p fun x x_1 => ⇑WittVector.verschiebung\", \"doc\": \"`WittVector.verschiebung` is a polynomial function.\"}\n  {\"name\": \"WittVector.verschiebung_injective\", \"module\": \"Mathlib.RingTheory.WittVector.Verschiebung\", \"type\": \" (p : ℕ) (R : Type u_1) [CommRing R] [hp : Fact (Nat.Prime p)] : Function.Injective ⇑WittVector.verschiebung\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector shift identities and scheme base-change instances do not state naturality or diagonalizable invertibility of the canonical group-scheme Verschiebung."
+  },
+  {
+   "tool": "grep",
+   "query": "verschiebung|relativeFrobenius",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/WittVector/Identities.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.WittVector.Verschiebung\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Identities.lean\", \"line\": \"15\", \"text\": \"In this file we derive common identities between the Frobenius and Verschiebung operators.\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Identities.lean\", \"line\": \"19\", \"text\": \"* `frobenius_verschiebung`: the composition of Frobenius and Verschiebung is multiplication by `p`\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Identities.lean\", \"line\": \"20\", \"text\": \"* `verschiebung_mul_frobenius`: the “projection formula”: `V(x * F y) = V x * y`\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Identities.lean\", \"line\": \"21\", \"text\": \"* `iterate_verschiebung_mul_coeff`: an identity from [Haze09] 6.2\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/MulP.lean\", \"line\": \"15\", \"text\": \"and Verschiebung is equal to multiplication by `p`.\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"56\", \"text\": \"  rwa [← frobenius_verschiebung, _root_.map_eq_zero_iff _ (frobenius_bijective p k).injective,\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"57\", \"text\": \"      _root_.map_eq_zero_iff _ (verschiebung_injective p k)] at h\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"70\", \"text\": \"    _ = verschiebung (x.shift 1) := by\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"71\", \"text\": \"      simpa using eq_iterate_verschiebung (n := 1) (by simp [h])\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"73\", \"text\": \"      rw [← verschiebung_frobenius, ← frobeniusEquiv_apply,\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean\", \"line\": \"102\", \"text\": \"  obtain ⟨m, a, ha, rfl⟩ := verschiebung_nonzero ha0\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean\", \"line\": \"103\", \"text\": \"  obtain ⟨n, b, hb, rfl⟩ := verschiebung_nonzero hb0\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean\", \"line\": \"106\", \"text\": \"  rw [iterate_verschiebung_mul] at hab\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean\", \"line\": \"109\", \"text\": \"    verschiebung_coeff_add_one, verschiebung_coeff_zero] at hab\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean\", \"line\": \"120\", \"text\": \"  obtain ⟨m, c, hc, hcm⟩ := WittVector.verschiebung_nonzero ha\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Verschiebung.lean\", \"line\": \"12\", \"text\": \"## The Verschiebung operator\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Verschiebung.lean\", \"line\": \"34\", \"text\": \"/-- `verschiebungFun x` shifts the coefficients of `x` up by one,\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Verschiebung.lean\", \"line\": \"36\", \"text\": \"`x.coeff i` then becomes `(verschiebungFun x).coeff (i + 1)`.\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Verschiebung.lean\", \"line\": \"38\", \"text\": \"`verschiebungFun` is the underlying function of the additive monoid hom `WittVector.verschiebung`.\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Verschiebung.lean\", \"line\": \"40\", \"text\": \"def verschiebungFun (x : 𝕎 R) : 𝕎 R :=\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Domain.lean\", \"line\": \"17\", \"text\": \"of `WittVector.verschiebung` and `WittVector.frobenius`\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Domain.lean\", \"line\": \"23\", \"text\": \"to some vector $w_x$ whose 0th component is nonzero (`WittVector.verschiebung_nonzero`).\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Domain.lean\", \"line\": \"24\", \"text\": \"Known identities (`WittVector.iterate_verschiebung_mul`) allow us to transform\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Domain.lean\", \"line\": \"31\", \"text\": \"* `WittVector.iterate_verschiebung_mul_coeff` : an identity from [Haze09]\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector shift identities and scheme base-change instances do not state naturality or diagonalizable invertibility of the canonical group-scheme Verschiebung."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verschiebung on diagonalizable group schemes is an isomorphism and is natural under base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"[IsStableUnderBaseChange P] [P.RespectsIso] : P.diagonal.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $P$ in a category with pullbacks is stable under base change and respects isomorphisms, then the diagonal morphism property derived from $P$ is also stable under base change. Sp\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \": IsStableUnderBaseChange @IsLocalIso\", \"doc\": \"The property of being a local isomorphism of schemes is stable under base change. That is, if a morphism $ f : X \\to Y $ is a local isomorphism, then any base change (pullback) of $ f $ is also a local\"}\n  {\"name\": \"Rep.diagonalSuccIsoTensorTrivial\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (n : ℕ) →\\n        Rep.diagonal k G (n + 1) ≅\\n          CategoryTheory.MonoidalCategoryStruct.tensorObj (Rep.leftRegular k G) (Rep.trivial k G ((Fin n → G) →₀ k))\", \"doc\": \"For a group $ G $ and natural number $ n $, the diagonal action of $ G $ on the $ (n+1) $-fold product $ G^{n+1} $ is naturally isomorphic to the tensor product of the left regular representation of $\"}\n  {\"name\": \"IsBaseChange.transvection\", \"module\": \"Mathlib.LinearAlgebra.Transvection\", \"type\": \"(f : Dual R V) (v : V) : ibc.endHom (transvection f v) = transvection (ibc.toDual f) (ε v)\", \"doc\": \"For a base change $ \\\\phi: R \\\\to A $, the induced endomorphism homomorphism $ \\\\text{ibc.endHom} $ satisfies $ \\\\text{ibc.endHom}(T_{f,v}) = T_{\\\\text{ibc.toDual}(f), \\\\varepsilon(v)} $ for any linear func\"}\n  {\"name\": \"CategoryTheory.Functor.isoShift\", \"module\": \"Mathlib.CategoryTheory.Shift.ShiftSequence\", \"type\": \"(n : M) : shiftFunctor C n ⋙ F ≅ F.shift n\", \"doc\": \"For each element $ n $ in an additive monoid $ M $, there is a natural isomorphism between the composition of the shift functor by $ n $ with the functor $ F $ and the functor obtained by shifting $ F\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector shift identities and scheme base-change instances do not state naturality or diagonalizable invertibility of the canonical group-scheme Verschiebung."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Verschiebung is invertible on a group represented by the group algebra of an abelian group in positive characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WittVector.verschiebung_zmod\", \"module\": \"Mathlib/RingTheory/WittVector/Identities\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (x : WittVector p (ZMod p)), WittVector.verschiebung x = x * ↑p\", \"doc\": \"For any Witt vector $ x $ over the ring $ \\\\mathbb{Z}/p\\\\mathbb{Z} $, the Verschiebung operator $ V $ satisfies $ V(x) = x \\\\cdot p $, where $ p $ is a prime number and $ \\\\mathbb{Z}/p\\\\mathbb{Z} $ denotes\"}\n  {\"name\": \"WittVector.verschiebung_injective\", \"module\": \"Mathlib/RingTheory/WittVector/Verschiebung\", \"type\": \"∀ (p : ℕ) (R : Type u_1) [inst : CommRing R] [hp : Fact (Nat.Prime p)], Function.Injective ⇑WittVector.verschiebung\", \"doc\": \"For any commutative ring $ R $ and prime $ p $, the Verschiebung operator on the Witt vectors over $ R $ is injective.\"}\n  {\"name\": \"WittVector.verschiebung_isPoly\", \"module\": \"Mathlib/RingTheory/WittVector/Verschiebung\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)], WittVector.IsPoly p fun x x_1 => ⇑WittVector.verschiebung\", \"doc\": \"For any prime $ p $ and commutative ring $ R $, the Verschiebung operator $ V $ on the Witt vectors over $ R $ is a polynomial function, meaning its action on coefficients is defined by polynomial exp\"}\n  {\"name\": \"WittVector.verschiebung_nonzero\", \"module\": \"Mathlib/RingTheory/WittVector/Domain\", \"type\": \"∀ {p : ℕ} {R : Type u_1} [hp : Fact (Nat.Prime p)] [inst : CommRing R] {x : WittVector p R},\\n  x ≠ 0 → ∃ n x', x'.coeff 0 ≠ 0 ∧ x = (⇑WittVector.verschiebung)^[n] x'\", \"doc\": \"For any non-zero Witt vector $x$ over a commutative ring $R$, there exists a natural number $n$ and a Witt vector $x'$ with $x'.c_0 \\neq 0$ (where $c_0$ denotes the 0th coefficient) such that $x = V^n(\"}\n  {\"name\": \"WittVector.verschiebungFun_isPoly\", \"module\": \"Mathlib/RingTheory/WittVector/Verschiebung\", \"type\": \"∀ (p : ℕ), WittVector.IsPoly p fun R _Rcr => WittVector.verschiebungFun\", \"doc\": \"The Verschiebung operator on Witt vectors over a commutative ring is a polynomial function. This operator shifts coefficients of a Witt vector right by one position, inserting a zero at the first posi\"}\n  {\"name\": \"WittVector.verschiebung\", \"module\": \"Mathlib/RingTheory/WittVector/Verschiebung\", \"type\": \"{p : ℕ} → {R : Type u_1} → [inst : CommRing R] → [hp : Fact (Nat.Prime p)] → WittVector p R →+ WittVector p R\", \"doc\": \"The additive homomorphism from the Witt vectors over a commutative ring $ R $ to itself, defined by shifting coefficients right by one position with a zero inserted at the first position. For a Witt v\"}\n  {\"name\": \"WittVector.verschiebung_frobenius_comm\", \"module\": \"Mathlib/RingTheory/WittVector/Identities\", \"type\": \"∀ {p : ℕ} {R : Type u_1} [hp : Fact (Nat.Prime p)] [inst : CommRing R] [CharP R p],\\n  Function.Commute ⇑WittVector.verschiebung ⇑WittVector.frobenius\", \"doc\": \"For a commutative ring $ R $ of characteristic $ p $, the Verschiebung operator and the Frobenius endomorphism on Witt vectors over $ R $ commute, i.e., their compositions in either order yield the sa\"}\n  {\"name\": \"WittVector.verschiebungFun\", \"module\": \"Mathlib/RingTheory/WittVector/Verschiebung\", \"type\": \"{p : ℕ} → {R : Type u_1} → [CommRing R] → WittVector p R → WittVector p R\", \"doc\": \"The function maps a Witt vector $ x $ to a new Witt vector whose $ n $-th coefficient is $ 0 $ when $ n = 0 $, and equals the $ (n-1) $-th coefficient of $ x $ for $ n > 0 $. This corresponds to the s\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector shift identities and scheme base-change instances do not state naturality or diagonalizable invertibility of the canonical group-scheme Verschiebung."
+  },
+  {
+   "tool": "grep",
+   "query": "verschiebung|diagonalizable|frobeniusTwist",
+   "results": "0 hits; ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.map_verschiebung is only for Witt vectors, group-algebra Hopf instances provide the displayed structure but no canonical Verschiebung, and affine-space/base-change hits do not state this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical Verschiebung of commutative affine algebraic groups commutes with base change and finite products",
+   "results": "8 hits; RingHom.IsStableUnderBaseChange, SpecialLinearGroup.baseChange_apply_coe, IsBaseChange.transvection, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, LinearEquiv.dilatransvection.baseChange, WeierstrassCurve.map_baseChange, WeierstrassCurve.VariableChange.map_baseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.map_verschiebung is only for Witt vectors, group-algebra Hopf instances provide the displayed structure but no canonical Verschiebung, and affine-space/base-change hits do not state this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verschiebung\"",
+   "results": "12 hits; WittVector.verschiebungPoly, WittVector.verschiebungFun, WittVector.verschiebungFun_isPoly, WittVector.verschiebungFun_coeff_succ, WittVector.verschiebungFun_coeff_zero, WittVector.verschiebungPoly_zero, WittVector.verschiebungFun_coeff, WittVector.verschiebung",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.map_verschiebung is only for Witt vectors, group-algebra Hopf instances provide the displayed structure but no canonical Verschiebung, and affine-space/base-change hits do not state this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verschiebung of a commutative affine group scheme is natural under group homomorphisms and is an isomorphism on diagonalizable groups",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace.functor, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.AffineSpace.map_Spec_map, AlgebraicGeometry.AffineSpace.map_SpecMap, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.AffineSpace.map_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.map_verschiebung is only for Witt vectors, group-algebra Hopf instances provide the displayed structure but no canonical Verschiebung, and affine-space/base-change hits do not state this item."
+  },
+  {
+   "tool": "grep",
+   "query": "verschiebung.*(map|natural)|map.*verschiebung",
+   "results": "7 hits; Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Verschiebung.lean, Mathlib/RingTheory/WittVector/Verschiebung.lean, Mathlib/RingTheory/WittVector/Verschiebung.lean, Mathlib/RingTheory/WittVector/Verschiebung.lean, Mathlib/RingTheory/WittVector/Verschiebung.lean; searched Mathlib/RingTheory/WittVector",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.map_verschiebung is only for Witt vectors, group-algebra Hopf instances provide the displayed structure but no canonical Verschiebung, and affine-space/base-change hits do not state this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The group algebra Hopf algebra of an abelian group has invertible Verschiebung, induced by the Frobenius twist on coefficients",
+   "results": "8 hits; AddMonoidAlgebra.instHopfAlgebraStruct, AddMonoidAlgebra.instHopfAlgebra, MonoidAlgebra.instHopfAlgebra, MonoidAlgebra.instHopfAlgebraStruct, CommSemiring.toHopfAlgebra, AddMonoidAlgebra.antipode_single, MonoidAlgebra.antipode_single, LaurentPolynomial.instHopfAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.map_verschiebung is only for Witt vectors, group-algebra Hopf instances provide the displayed structure but no canonical Verschiebung, and affine-space/base-change hits do not state this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zero-verschiebung-primitive-generation",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Proposition 14.48, printed pp.295-296, together with the equivalent coordinate-algebra characterization in Definition 14.45, printed p.295. This is the primitive-generation consequence of the Verschiebung criterion, for arbitrary commutative affine algebraic groups. Present split: Naturality of Verschiebung and its value on diagonalizable groups. Definition 11.39, properties (a)-(c), printed pp.224-225; diagonalizable specialization of its invariant-tensor construction, with the group-algebra Hopf structure in Chapter 12. Subgroup and quotient consequences use the represented fppf quotient convention of Chapter 5.",
+   "via": [
+    "lem-sfb-zero-verschiebung-primitive-generation",
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-verschiebung-naturality-diagonalizable",
+  "worker": "stage1",
+  "summary": "Proved naturality using the existing invariant-tensor projection, checked field extension on orbit bases with an explicit twist comparison, obtained products from projections, proved subgroup and quotient inheritance by pointwise injectivity and faithfully flat coordinate cancellation, and computed diagonalizable Verschiebung with an explicit inverse. No new nodes or Lean attachment. Statement unchanged.",
+  "blueprint": "Current latest blueprint, det-thm-sf-ctf-stability-direct-images proof (3), direct-image preservation via the alteration route recorded in blueprint.from.place. This supporting node realizes the Milne 11.39 naturality/base-change/product inputs and the diagonalizable obstruction used by the zero-Verschiebung primitive-generation node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-56a00a23c",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-56a00a23c (reviewer sub-agent of L); spot-checked: This is a first split: no repair note, the item is unsplit and unreviewed on live and side-live, and its statement and stmt_deps are byte-identical to base. It adds no new nodes and cites no SGA source. The two cited non-leaf statements (affine-group-frobenius-verschiebung and symmetric-invariant-frobenius-projection) are in the item's own unit, sk-thm-sf-ctf-stability. Source: I read Milne iAG2017 Def 11.39(a)-(c) and Prop 11.40 (printed pp.224-225) and Ch.12 Lemma 12.4 and Remark 12.6; the λ_A and v_A in the construction node match Milne. Step 1: the homomorphism square pulls back to Δh=(h⊗h)Δ, and with the projection node's formula λ_C I_p(h)=h^(p)λ_A this gives v_C h=h^(p)v_A. Step 2: I checked that θ:(C_K)^(p)→C^(p)⊗K and its inverse respect both balancing relations, compose to the identity both ways, and take no p-th roots. Step 3: θλ_{C_K} and λ_C⊗1 agree on the singleton and non-singleton orbit sums of the K-basis {b⊗1}. Step 4: the product twist isomorphism respects balancing and matches the projections; the empty product is trivial. Step 5: i(R) is injective by the definition of closed subgroup, then the universal point gives V_N=0. Step 6: C⊗_E E^(p)≅C^(p) shows u^(p) is the base change of u, so it is faithfully flat (00HI leaf) and injective (05CK leaf with N=E^(p)), and cancelling it gives v_E=0*. This reads 'faithfully flat' as a property of the coordinate map, which is Milne's affine convention. Step 7: w((Σa_m e_m)⊗c)=Σa_m^p c e_m is well defined and multiplicative (Frobenius is additive) and inverse to v. Small cases: μ_p (V iso, F=0), G_m, G_a and α_p (V=0), M=0, and k=F_p(t), where no p-th roots are needed. The DAG has no duplicate Verschiebung or diagonalizable node, and Mathlib has no group-scheme Verschiebung. No A–F faults."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VerschiebungNaturalityDiagonalizable",
+  "declaration": "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebung_naturality",
+  "declarations": [
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebungCoordinate",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebung_naturality",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebung_baseChange",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebung_product",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebung_emptyProduct",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebung_closedSubgroup",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebung_quotient",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.verschiebung_diagonalizable"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VerschiebungNaturalityDiagonalizable.lean",
+  "statement": "theorem verschiebung_naturality (f : G.asOver (Spec (.of k)) ⟶ H.asOver (Spec (.of k))) [IsMonHom f] : ∃ ft : twist k p Γ(H, ⊤) →+* twist k p Γ(G, ⊤), (∀ (a : Γ(H, ⊤)) (b : k), ft (pure k p Γ(H, ⊤) a b) = pure k p Γ(G, ⊤) (f.left.appTop a) b) ∧ (∀ a : Γ(H, ⊤), ft (verschiebungCoordinate k p Γ(H, ⊤) a) = verschiebungCoordinate k p Γ(G, ⊤) (f.left.appTop a))",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Seven clause theorems state the full item using the dependency’s canonical coordinate construction. The real-data helper is projection composed with iteratedComul. Naturality, field-extension and tensor-product comparisons are fixed on every pure tensor. Binary and nullary product clauses give all finite products. Vanishing uses counit followed by the scalar map, not the zero linear map. The diagonalizable clause is an algebra equivalence realizing that canonical coordinate map, including its basis formula. Explicit include commands retain commutativity and finite-type hypotheses in the signatures."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b91cf579",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Item changes only lean; no new nodes. verschiebungCoordinate = projection∘iteratedComul, exactly the canonical v fixed by dependency Maps (not a duplicate). All seven clauses checked: naturality ft∘v_H=v_G∘f* with ft fixed on pure tensors; base-change θ((a⊗c)⊗b)=a^p b⊗first c (both balancings and K-linearity checked, no Frobenius inverse); binary product plus nullary product (true for any basis of k); closed subgroup and fppf quotient (FaithfullyFlat+FinitePresentation of appTop) with V=0 encoded as second-factor algebraMap∘counit (coordinate map of the zero homomorphism); D(M) algebra equivalence equal to verschiebungCoordinate with e_m↦e_m⊗1 (M=0,ℤ,ℤ/p checked). No extra hypotheses; docstrings and verbatim statement OK. Advisories: K and M in universe u forced by monomorphic twist; coordinate Hopf instance and RingHom.FaithfullyFlat not in stmt_deps but enter via the cited dependency or uncited prose; unneeded non-public FaithfullyFlat.Algebra proof import. No file changed, no compile run."
+ }
+}

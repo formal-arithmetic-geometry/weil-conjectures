@@ -1,0 +1,294 @@
+{
+ "id": "lem-sf-perfect-pairing-reduction-adjoints",
+ "kind": "statement",
+ "title": "Evaluation-normalized comparison of inverse pairing adjoints",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories [def-sfb-monoidal-category] with chosen internal Homs $[U,V]$ and natural tensor-Hom adjunctions $\\operatorname{Hom}(U\\otimes V,W)\\cong\\operatorname{Hom}(V,[U,W])$. Write $U^\\vee=[U,\\mathbf1]$, $\\operatorname{ev}_U:U\\otimes U^\\vee\\to\\mathbf1$, and for $f:U\\to V$ let $f^\\vee:V^\\vee\\to U^\\vee$ be precomposition by $f$. Let $F:\\mathcal C\\to\\mathcal D$ be a strong monoidal functor [def-sfb-strong-monoidal-functor], with $u:\\mathbf1_{\\mathcal D}\\xrightarrow{\\sim}F\\mathbf1_{\\mathcal C}$ and $\\mu_{U,V}:FU\\otimes FV\\xrightarrow{\\sim}F(U\\otimes V)$.\n\nLet $C,D\\in\\mathcal C$, $C',D'\\in\\mathcal D$, pairings $\\beta:C\\otimes D\\to\\mathbf1_{\\mathcal C}$ and $\\beta':C'\\otimes D'\\to\\mathbf1_{\\mathcal D}$, an isomorphism $c:FC\\xrightarrow{\\sim}C'$, and a morphism $r:FD\\to D'$ be given. Assume their tensor-Hom adjoints $b:D\\to C^\\vee$ and $b':D'\\to(C')^\\vee$ are isomorphisms. Suppose $h:F(C^\\vee)\\xrightarrow{\\sim}(FC)^\\vee$ is an isomorphism with\n$$\\operatorname{ev}_{FC}\\circ(1_{FC}\\otimes h)=u^{-1}\\circ F(\\operatorname{ev}_C)\\circ\\mu_{C,C^\\vee},$$\nand suppose\n$$\\beta'\\circ(c\\otimes r)=u^{-1}\\circ F(\\beta)\\circ\\mu_{C,D}.$$\nNo invertibility hypothesis is imposed on $r$.\n\nDefine $\\ell=(c^{-1})^\\vee\\circ h:F(C^\\vee)\\xrightarrow{\\sim}(C')^\\vee$. Then\n$$\\operatorname{ev}_{C'}\\circ(c\\otimes\\ell)=u^{-1}\\circ F(\\operatorname{ev}_C)\\circ\\mu_{C,C^\\vee},$$\n$$b'\\circ r=\\ell\\circ F(b),\\qquad r\\circ F(b^{-1})=(b')^{-1}\\circ\\ell.$$\nIn particular $r=(b')^{-1}\\circ\\ell\\circ F(b)$ is an isomorphism, with inverse $F(b^{-1})\\circ\\ell^{-1}\\circ b'$. These are equalities of the specified maps, with the displayed strong monoidal unit and tensor constraints; the dual in $\\ell$ is the dual of $c^{-1}$, not of $c$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+  "place": "Second paragraph: perfect compact-support dual comparison, taking adjoints in the pairing square and inverting the horizontal adjoints; formal content of returned proof steps 5-6."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\operatorname{uncurry}_A$ for the inverse of the stated tensor–Hom bijection with first tensor factor $A$. The evaluation and cancellation clauses of [lem-pod-closed-uncurry-laws], applied in $\\mathcal C$ and $\\mathcal D$, give\n$$\\beta=\\operatorname{ev}_C\\circ(1_C\\otimes b),\\qquad \\beta'=\\operatorname{ev}_{C'}\\circ(1_{C'}\\otimes b').$$\nThe same evaluation formula identifies $\\operatorname{uncurry}_A(v)$ with $\\operatorname{ev}_A\\circ(1_A\\otimes v)$ for every $v:T\\to A^\\vee$. Since uncurry is the inverse of a bijection, equality of these evaluations implies equality of the corresponding maps $v$. This last assertion uses injectivity of a bijection, not invertibility of any pairing comparison.",
+   "uses": [
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "Final paragraph: taking adjoints in the commuting pairing square, then taking inverses of the horizontal adjoints."
+   }
+  },
+  {
+   "text": "Spell out precomposition, as defined in the statement. For $f:A\\to B$, $f^\\vee$ is uniquely characterized by\n$$\\operatorname{ev}_A\\circ(1_A\\otimes f^\\vee)=\\operatorname{ev}_B\\circ(f\\otimes1_{B^\\vee}).$$\nIndeed $f^\\vee$ is the transpose $\\operatorname{curry}(\\operatorname{ev}_B\\circ(f\\otimes1_{B^\\vee}))$, so the cancellation and evaluation clauses of [lem-pod-closed-uncurry-laws] give this equation, and uniqueness is injectivity of uncurry. Substitution of this equation twice and the tensor bifunctor law in [def-sfb-monoidal-category] give, for composable $f:A\\to B$ and $g:B\\to E$,\n$$\\operatorname{ev}_A\\circ(1_A\\otimes(f^\\vee\\circ g^\\vee))=\\operatorname{ev}_E\\circ((g\\circ f)\\otimes1_{E^\\vee});$$\nuniqueness under the stated adjunction gives $(g\\circ f)^\\vee=f^\\vee\\circ g^\\vee$ and $(1_A)^\\vee=1_{A^\\vee}$. Put $d=(c^{-1})^\\vee:(FC)^\\vee\\to(C')^\\vee$ and $e=c^\\vee:(C')^\\vee\\to(FC)^\\vee$. The two inverse identities for $c$ now give $e\\circ d=1$ and $d\\circ e=1$. Thus $d$ is an isomorphism. Its defining evaluation equation, precomposed with $c\\otimes1_{(FC)^\\vee}$, gives\n$$\\operatorname{ev}_{C'}\\circ(c\\otimes d)=\\operatorname{ev}_{FC},$$\nsince $c^{-1}\\circ c=1_{FC}$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "Final paragraph: taking adjoints in the commuting pairing square, then taking inverses of the horizontal adjoints."
+   }
+  },
+  {
+   "text": "The composite $\\ell=d\\circ h$ is an isomorphism with inverse $h^{-1}\\circ e$: both composite identities follow from Step 2 and the inverse identities of $h$. The tensor bifunctor law of [def-sfb-monoidal-category], Step 2, and the assumed evaluation normalization of $h$ give\n$$\\operatorname{ev}_{C'}\\circ(c\\otimes\\ell)=\\operatorname{ev}_{FC}\\circ(1_{FC}\\otimes h)=u^{-1}\\circ F(\\operatorname{ev}_C)\\circ\\mu_{C,C^\\vee}.$$\nThis proves the first displayed conclusion with the specified unit constraint and the specified inverse variance of $c$.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "Final paragraph: taking adjoints in the commuting pairing square, then taking inverses of the horizontal adjoints."
+   }
+  },
+  {
+   "text": "Compare the two proposed maps $FD\\to(C')^\\vee$ by evaluation. Using Step 1 and the tensor bifunctor composition law of [def-sfb-monoidal-category], the pairing-square hypothesis gives\n$$\\operatorname{ev}_{C'}\\circ(c\\otimes(b'\\circ r))=\\beta'\\circ(c\\otimes r)=u^{-1}\\circ F(\\beta)\\circ\\mu_{C,D}.$$\nFor the other map, Step 3 gives\n$$\\begin{aligned}\n\\operatorname{ev}_{C'}\\circ(c\\otimes(\\ell\\circ F(b)))\n&=u^{-1}\\circ F(\\operatorname{ev}_C)\\circ\\mu_{C,C^\\vee}\\circ(1_{FC}\\otimes F(b))\\\\\n&=u^{-1}\\circ F(\\operatorname{ev}_C)\\circ F(1_C\\otimes b)\\circ\\mu_{C,D}\\\\\n&=u^{-1}\\circ F(\\beta)\\circ\\mu_{C,D}.\n\\end{aligned}$$\nThe middle equality is precisely tensorator naturality from [def-sfb-strong-monoidal-functor] with $f=1_C$, $g=b$; the last uses functoriality and Step 1. No assumption on $r$ was used here.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "Final paragraph: taking adjoints in the commuting pairing square, then taking inverses of the horizontal adjoints."
+   }
+  },
+  {
+   "text": "The inverse of $c\\otimes1_{FD}$ is $c^{-1}\\otimes1_{FD}$ by the tensor bifunctor laws of [def-sfb-monoidal-category]. Precompose the equality of Step 4 with this inverse to obtain\n$$\\operatorname{ev}_{C'}\\circ(1_{C'}\\otimes(b'\\circ r))=\\operatorname{ev}_{C'}\\circ(1_{C'}\\otimes(\\ell\\circ F(b))).$$\nThe evaluation formula in [lem-pod-closed-uncurry-laws] identifies these as the uncurries of the two maps; injectivity of the stated adjunction bijection therefore gives $b'\\circ r=\\ell\\circ F(b)$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "Final paragraph: taking adjoints in the commuting pairing square, then taking inverses of the horizontal adjoints."
+   }
+  },
+  {
+   "text": "Functoriality in [def-sfb-strong-monoidal-functor] gives $F(b)\\circ F(b^{-1})=1$ and $F(b^{-1})\\circ F(b)=1$. Postcompose the equality of Step 5 with $(b')^{-1}$ to get $r=(b')^{-1}\\circ\\ell\\circ F(b)$. Precomposing this equality with $F(b^{-1})$ gives\n$$r\\circ F(b^{-1})=(b')^{-1}\\circ\\ell.$$\nFinally put $s=F(b^{-1})\\circ\\ell^{-1}\\circ b'$. Associativity and the displayed inverse identities give\n$$r\\circ s=(b')^{-1}\\circ\\ell\\circ F(b)\\circ F(b^{-1})\\circ\\ell^{-1}\\circ b'=1_{D'},$$\n$$s\\circ r=F(b^{-1})\\circ\\ell^{-1}\\circ b'\\circ(b')^{-1}\\circ\\ell\\circ F(b)=1_{FD}.$$\nThus $r$ is an isomorphism with exactly the claimed inverse, deduced from the pairing square rather than assumed.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "Final paragraph: taking adjoints in the commuting pairing square, then taking inverses of the horizontal adjoints."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-closed-uncurry-laws",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+  "place": "Final paragraph: taking adjoints in the commuting pairing square, then taking inverses of the horizontal adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of perfect complexes commutes with duals and compatible perfect pairings give a commuting square of inverse adjoints",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mapExactFunctor_hom, ModuleCat.homEquiv_extendScalarsComp, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Functor.mapExtLinearMap_apply, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfectPairing\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*pairing|pairing.*perfect|dual.*baseChange|baseChange.*dual",
+   "results": "25 hits; Mathlib/RingTheory/PicardGroup.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a perfect complex extension of scalars and taking the adjoint of a bilinear pairing commute",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pairing preserving comparison with an isomorphism in its first variable is an isomorphism in its second variable when both adjoint pairings are isomorphisms",
+   "results": "8 hits; RootPairing.Equiv.comp, SSet.Subcomplex.PairingCore.pairing_p_equivII, SSet.Subcomplex.PairingCore.pairing_p_symm_equivI, RootPairing.Equiv.toHom_comp, RootPairing.Equiv.mk', IsOrderRightAdjoint.comp_orderIso, IsOrderRightAdjoint.orderIso_comp, CategoryTheory.conjugateEquiv_of_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfPair\"",
+   "results": "12 hits; LinearMap.IsPerfPair, LinearMap.isPerfPair_of_subsingleton, Module.IsReflexive.of_isPerfPair, LinearMap.IsPerfPair.ext, LinearMap.IsPerfPair.ext_iff, LinearMap.IsPerfPair.dualEval, Module.finrank_of_isPerfPair, LinearMap.IsPerfPair.nondegenerate",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_natural_left|map.*evaluation|evaluation.*map",
+   "results": "11 hits; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a strong monoidal functor between closed monoidal categories an evaluation compatible dual comparison and a commuting pairing square give a commuting square of inverse adjoints",
+   "results": "8 hits; CategoryTheory.coev_expComparison, CategoryTheory.expComparison_ev, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.expComparison, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.exp.ev_coev_assoc, CategoryTheory.ihom.ev_coev_assoc, CategoryTheory.rightAdjointMate_comp_evaluation_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|uncurry.*map|map.*uncurry",
+   "results": "8 hits; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal functor transports tensor Hom adjoints of perfect pairings via the evaluation compatible dual comparison",
+   "results": "8 hits; CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.Monoidal.mk, CategoryTheory.FunctorToTypes.adj, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv, CategoryTheory.Monoidal.transportStruct, CategoryTheory.tensorLeftAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: module perfect-pairing classes, Ext functoriality, rigid tensor adjunctions and closed uncurrying laws supply ingredients, not this comparison theorem with c, r and an evaluation-normalized h"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_natural_left|uncurry_curry|uncurry_pre_app",
+   "results": "{\"t\": \"2026-10-22T06:59:44Z\", \"tool\": \"grep\", \"query\": \"uncurry_natural_left|uncurry_curry|uncurry_pre_app\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"30286ad2bf414274\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, uncurrying, rigid-dual and functor-square results do not state the full evaluation-normalized comparison with arbitrary r"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry_natural_left",
+   "results": "{\"t\": \"2026-10-22T06:59:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed.uncurry_natural_left\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.uncurry_natural_left\"], \"digest\": \"b921f39ed9316391\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, uncurrying, rigid-dual and functor-square results do not state the full evaluation-normalized comparison with arbitrary r"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commuting square of perfect pairings under a strong monoidal functor induces a commuting square of inverse adjoint isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:59:44Z\", \"tool\": \"leansearch\", \"query\": \"A commuting square of perfect pairings under a strong monoidal functor induces a commuting square of inverse adjoint isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.iso_inv_naturality_assoc\", \"CategoryTheory.CatCommSq.iso_inv_naturality\", \"CategoryTheory.CommSq.left_adjoint\", \"CategoryTheory.Functor.Monoidal.ofBifunctor\", \"CategoryTheory.CommSq.right_adjoint\", \"CategoryTheory.CatCommSq.vInv_iso_inv_app\", \"CategoryTheory.CatCommSq.hInv\", \"CategoryTheory.CommSq.leftAdjointLiftStructEquiv\"], \"digest\": \"68a0cd5f60355b21\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, uncurrying, rigid-dual and functor-square results do not state the full evaluation-normalized comparison with arbitrary r"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In closed monoidal categories an evaluation compatible strong monoidal comparison carries a commuting perfect pairing square to a commuting square of inverse adjoints",
+   "results": "{\"t\": \"2026-10-22T06:59:47Z\", \"tool\": \"leanfinder\", \"query\": \"In closed monoidal categories an evaluation compatible strong monoidal comparison carries a commuting perfect pairing square to a commuting square of inverse adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExactPairing.coevaluation_evaluation\", \"CategoryTheory.frobeniusMorphism_mate\", \"CategoryTheory.ExactPairing.evaluation_coevaluation\", \"CategoryTheory.ExactPairing.coevaluation_evaluation'\", \"CategoryTheory.ExactPairing.coevaluation_evaluation''\", \"CategoryTheory.ExactPairing.evaluation_coevaluation'\", \"CategoryTheory.ExactPairing.evaluation_coevaluation''\", \"CategoryTheory.rightAdjointMate_comp_evaluation_assoc\"], \"digest\": \"5719a0ad643f4076\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, uncurrying, rigid-dual and functor-square results do not state the full evaluation-normalized comparison with arbitrary r"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*[Pp]air|[Pp]air.*perfect|ihomComparison",
+   "results": "{\"t\": \"2026-10-22T07:00:39Z\", \"tool\": \"grep\", \"query\": \"perfect.*[Pp]air|[Pp]air.*perfect|ihomComparison\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, uncurrying, rigid-dual and functor-square results do not state the full evaluation-normalized comparison with arbitrary r"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry_pre_app",
+   "results": "{\"t\": \"2026-10-22T07:00:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed.uncurry_pre_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.uncurry_pre_app\"], \"digest\": \"a17b2dac2e8359e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, uncurrying, rigid-dual and functor-square results do not state the full evaluation-normalized comparison with arbitrary r"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal closed category preservation of evaluation and equality of pairings imply equality of their tensor Hom transposes",
+   "results": "{\"t\": \"2026-10-22T07:00:41Z\", \"tool\": \"leanfinder\", \"query\": \"In a monoidal closed category preservation of evaluation and equality of pairings imply equality of their tensor Hom transposes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.ihom.ev_coev_assoc\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.exp.ev_coev_assoc\", \"CategoryTheory.MonoidalClosed.compTranspose_eq\", \"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.MonoidalClosed.coev_app_comp_pre_app\"], \"digest\": \"01e9afccc8e67145\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, uncurrying, rigid-dual and functor-square results do not state the full evaluation-normalized comparison with arbitrary r"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pod-finite-reduction",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-finite-reduction",
+   "place": "Second paragraph: perfect compact-support dual comparison, taking adjoints in the pairing square and inverting the horizontal adjoints; formal content of returned proof steps 5-6.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-perfect-pairing-reduction-adjoints",
+  "worker": "stage1",
+  "group": "Q148",
+  "summary": "Expanded the evaluation-normalized formal pairing comparison into six steps: uncurrying formulas, explicit precomposition identities, normalized dual comparison, tensorator-naturality calculation, cancellation by c and adjunction injectivity, and explicit inverse calculation. Statement unchanged; no new nodes. Reused the existing Mathlib uncurrying leaf.",
+  "blueprint": "thm-pod-finite-reduction.proof.md, final paragraph: taking adjoints in the commuting pairing square and then inverses of the horizontal adjoints. Steps 1–5 justify the first sentence and step 6 the second."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-9caf77d4c",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-9caf77d4c (reviewer sub-agent of L); spot-checked: I read the whole delivery and checked every step by hand. The item statement is unchanged against base (diffed with the Q149 run snapshot): only proof, proof_deps, proof_origin, status, split_report and the appended searches changed. There are no new nodes. Source: blueprint main-20261015 thm-pod-finite-reduction.proof.md, final paragraph ('taking adjoints in the commuting pairing square ... inverses of the horizontal adjoints'). The parent's step uses exactly the item's conclusions. Conventions match Mathlib Monoidal/Closed/Basic.lean: uncurry_curry l.180, uncurry_natural_left l.175, uncurry_eq l.194, and pre/id_tensor_pre_app_comp_ev l.245-251, which matches step 2's characterisation of f^vee. Steps 1-6 are correct: (gf)^vee=f^vee g^vee; ev_{C'}(c⊗(c^{-1})^vee)=ev_{FC}; step 4 is tensorator naturality with f=1_C, g=b; step 5 cancels c⊗1 and uses injectivity of uncurry; step 6 gives the explicit two-sided inverse of r, which is never assumed invertible. Small cases checked: F=id; change of basis in Vect, which forces (c^T)^{-1}; rescaled pairings. No braiding is used. Duplicate search found only geometric or coefficient-specific nodes. Batch-5 check: lem-pod-closed-uncurry-laws is accepted. It is a Mathlib leaf with empty closure, a general closed-monoidal adjunction fact that neither nt-assume leaf gives and that is no step of their proofs. One fault, C1: step 2 used the uncurry leaf's cancellation and evaluation clauses but cited only def-sfb-monoidal-category. FIX: added the leaf to step 2's uses and wrote the curry formula explicitly (fixes/dag/nodes/sec-six-functors/lem-sf-perfect-pairing-reduction-adjoints.json). There are no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PerfectPairingReductionAdjoints",
+  "declaration": "CategoryTheory.perfectPairing_reduction_adjoints",
+  "declarations": [
+   "CategoryTheory.perfectPairingDualComparison",
+   "CategoryTheory.perfectPairing_reduction_adjoints"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PerfectPairingReductionAdjoints.lean",
+  "statement": "theorem perfectPairing_reduction_adjoints (F : 𝒞 ⥤ 𝒟) (m : F.CoreMonoidal) {C D : 𝒞} {C' D' : 𝒟} (β : C ⊗ D ⟶ 𝟙_ 𝒞) (β' : C' ⊗ D' ⟶ 𝟙_ 𝒟) (c : F.obj C ≅ C') (r : F.obj D ⟶ D') (b : D ≅ (ihom C).obj (𝟙_ 𝒞)) (b' : D' ≅ (ihom C').obj (𝟙_ 𝒟)) (hb : b.hom = MonoidalClosed.curry β) (hb' : b'.hom = MonoidalClosed.curry β') (h : F.obj ((ihom C).obj (𝟙_ 𝒞)) ≅ (ihom (F.obj C)).obj (𝟙_ 𝒟)) (heval : (F.obj C ◁ h.hom) ≫ (ihom.ev (F.obj C)).app (𝟙_ 𝒟) = (m.μIso C ((ihom C).obj (𝟙_ 𝒞))).hom ≫ F.map ((ihom.ev C).app (𝟙_ 𝒞)) ≫ m.εIso.inv) (hpair : (c.hom ⊗ₘ r) ≫ β' = (m.μIso C D).hom ≫ F.map β ≫ m.εIso.inv) : (c.hom ⊗ₘ (perfectPairingDualComparison F c h).hom) ≫ (ihom.ev C').app (𝟙_ 𝒟) = (m.μIso C ((ihom C).obj (𝟙_ 𝒞))).hom ≫ F.map ((ihom.ev C).app (𝟙_ 𝒞)) ≫ m.εIso.inv ∧ r ≫ b'.hom = F.map b.hom ≫ (perfectPairingDualComparison F c h).hom ∧ F.map b.inv ≫ r = (perfectPairingDualComparison F c h).hom ≫ b'.inv ∧ r = F.map b.hom ≫ (perfectPairingDualComparison F c h).hom ≫ b'.inv ∧ ∃ rIso : F.obj D ≅ D', rIso.hom = r ∧ rIso.inv = b'.hom ≫ (perfectPairingDualComparison F c h).inv ≫ F.map b.inv",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-864047fd9",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node. MonoidalCategory/MonoidalClosed with independent universes; CoreMonoidal εIso/μIso orientations match the stmt_dep. b, b' are pinned to curry β/β' by hb/hb'. heval and hpair match the displayed equations in forward order, and heval determines h uniquely (not a free arrow). ell = h ≪≫ (internalHom.mapIso c.symm.op).app 𝟙_ is pre c.inv, the dual of c⁻¹ as the node insists; real data. Conclusions: evaluation normalization, both adjoint squares, the r formula, and an explicit Iso with hom = r and the stated inverse. Hand-checked conjunct 1 via the interchange law and the pre-evaluation law (Closed/Basic l.250). The lean.statement field appears verbatim in the file; one sorry; source/blueprint docstrings with steps 1-6; single needed import; stmt_deps unchanged; node differs from live only in lean. No duplicate: there is no generic closed-monoidal def node; ihomComparison is a different canonical map. Edge cases: identity F, zero objects, non-symmetric categories, arbitrary r. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261022T144044-L-1490476",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.perfectPairing_reduction_adjoints"
+  ],
+  "sorry_after": []
+ }
+}

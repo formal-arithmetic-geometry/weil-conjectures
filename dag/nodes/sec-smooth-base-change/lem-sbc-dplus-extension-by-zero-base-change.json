@@ -1,0 +1,103 @@
+{
+ "id": "lem-sbc-dplus-extension-by-zero-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+   "place": "extension by zero commutes with arbitrary base change, a^{-1} j_! F = j'_! a_U^{-1} F, here as the exchange morphism on bounded-below derived categories used to build the compact-support base change map (upstream declaration AlgebraicGeometry.Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange, recorded by the 2026-10-22 maintainer audit of upstream sorries without a DAG node)",
+   "via": []
+  },
+  "same_as": [
+   "sbc-prop-extension-by-zero-and-arbitrary-base-change"
+  ]
+ },
+ "kind": "statement",
+ "title": "Base change for extension by zero on bounded-below derived categories",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category and, for a scheme $T$ [def-weil-pbc-scheme-conventions], let $D^+(T)$ be the bounded-below derived category [def-weil-abstract-derived-category] of $\\mathcal A$-valued sheaves on the small étale site $T_{\\mathrm{\\acute et}}$ [def-weil-pbc-etale-site]. Let $j\\colon X\\to Z$ and $j'\\colon X'\\to Z'$ be open immersions and $g\\colon Z'\\to Z$, $g'\\colon X'\\to X$ morphisms forming a cartesian square $X'=X\\times_ZZ'$ [def-pc-fibre-product] with $jg'=gj'$. Let $j_!$, $j'_!$ be extension by zero [def-weil-pbc-extension-by-zero] and $g^*$, $g'^*$ the inverse images [def-weil-pbc-inverse-image], all exact and extended to $D^+$. Then the canonical exchange morphism, the natural transformation $j'_!\\,g'^*\\Rightarrow g^*\\,j_!$ of functors $D^+(X)\\to D^+(Z')$ obtained as the mate of the comparison $j'^*g^*\\cong g'^*j^*$ under the adjunctions $j_!\\dashv j^*$, $j'_!\\dashv j'^*$, is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-prop-extension-by-zero-and-arbitrary-base-change.md",
+  "place": "sbc-prop-extension-by-zero-and-arbitrary-base-change: extension by zero commutes with arbitrary base change, a^{-1} j_! F = j'_! a_U^{-1} F, here as the exchange morphism on bounded-below derived categories used to build the compact-support base change map; Lean: upstream file lean/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/LowerShriek/MorphismDefs.lean, declaration AlgebraicGeometry.Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange (module WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs, lines 208-210, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change for extension by zero along an open immersion is an isomorphism for etale sheaves",
+   "results": "IsOpenImmersion.isoRestrict and its SheafedSpace/LocallyRingedSpace variants (Mathlib.AlgebraicGeometry.OpenImmersion, Mathlib.Geometry.RingedSpace.OpenImmersion): no extension by zero",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerShriek\"",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'lowerShriek|extensionByZero|ExtensionByZero' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration without a DAG node (maintainer audit of dag/lean_audit.json, the human's order 2026-10-22: every sorried upstream declaration gets a node whether or not a target needs it); no sorry-free SHEAF declaration states it; recorded so that stage 1 splits it when a target reaches it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs",
+     "lines": [
+      208,
+      210
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/LowerShriek/MorphismDefs.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange"
+  ],
+  "statement": "theorem Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange (sq : IsPullback g' j' j g) :\n    IsIso (Etale.derivedPlusOpenImmersionLowerShriekBaseChange A sq.toCommSq) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; consumed in the same upstream file by Etale.derivedPlusOpenImmersionLowerShriekBaseChangeIso (no DAG node records it); the sheaf-level statement is sbc-prop-extension-by-zero-and-arbitrary-base-change, and both functors being exact the derived statement is its degreewise application"
+ }
+}

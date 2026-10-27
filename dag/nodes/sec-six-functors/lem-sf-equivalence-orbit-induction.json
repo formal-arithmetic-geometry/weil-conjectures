@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-equivalence-orbit-induction",
+ "kind": "statement",
+ "title": "Normalized exact integer-orbit induction for additive autoequivalences",
+ "statement": "Let $A$ be a Grothendieck abelian category in its morphism universe [def-sp-grothendieck-abelian], and let $F:A\\to A$ be an additive equivalence functor. There is a functor $I:A\\to A^F$, left adjoint to the fixed-pair forgetful functor [def-weil-endofunctor-fixed-pair-category]. Its carrier is the coproduct of $(F.asEquivalence)^n(X)$ over all integers. There are natural successor comparisons $(F.asEquivalence)^n\\circ F\\simeq(F.asEquivalence)^{n+1}$ such that the structure map sends the translated nth coprojection to the $(n+1)$st coprojection. The adjunction bijection restricts a map to its zeroth coprojection. On actual carrier maps $I$ preserves addition. It preserves all finite limits and finite colimits.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original twisted-site proof steps 7--8; normalized reuse of the explicit source Free construction. Agent twisted variant of Tag 00W0 (proposition-sheaves-on-group), motivation only; exact non-SGA reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Reuse Free.functor F and Free.adjunction F from WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra, whose objects are the explicit integer coproducts. Identify their recursive positive and negative iterates with functor iterates by induction. Equivalence.powNat agrees with those iterates by two-step induction. The resulting natural successor comparison is obtained from Free.objSucc by these equalities; its naturality is Free.map_objMap_comp_objSucc. Transport Free.map_ι_comp_str through Sigma.mapIso to obtain the stated shift formula. Free.adjunction is definitionally restriction to the zero summand, and Sigma.ι_mapIso_hom verifies its normalization.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove additivity using Free.hom_ext at the zero summand and Sigma.ι_map. The Grothendieck AB4 instance gives stability of monomorphisms under integer coproducts (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim). Hence Free.functor preserves monomorphisms by the source Free instance. Its adjunction supplies preservation of cokernels and finite colimits. Apply Functor.preservesHomology_of_preservesMonos_and_cokernels and Functor.preservesFiniteLimits_of_preservesHomology from Mathlib.Algebra.Homology.ShortComplex.ExactFunctor to obtain finite limits. These facts also cover zero objects and the zero category.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original twisted-site proof steps 7--8; normalized reuse of the explicit source Free construction."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive autoequivalence on a Grothendieck abelian category has exact free invertible endofunctor algebra given by the integer coproduct",
+   "results": "8 hits: AddCommGrpCat.free, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, CategoryTheory.shiftEquiv', AddCommGrpCat.free_obj_coe, MulOpposite.opAddEquiv, CategoryTheory.IsGrothendieckAbelian.tensorObj, CategoryTheory.abelianOfEquivalence, CategoryTheory.instIsEquivalenceShiftFunctor. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra.forget",
+   "results": "6 hits: CategoryTheory.Endofunctor.Algebra.forget, CategoryTheory.Endofunctor.Algebra.forget_faithful, CategoryTheory.Endofunctor.Algebra.forget_reflects_iso, CategoryTheory.Endofunctor.Algebra.forget_obj, CategoryTheory.Endofunctor.Algebra.forget_map, CategoryTheory.Algebra.forget_additive. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification|IsoAlgebra|preservesFiniteLimits_of_preservesHomology",
+   "results": "9 hits: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionRingedSite",
+  "date": "2026-10-22",
+  "group": "U3"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 7--8; normalized reuse of the explicit source Free construction.",
+   "via": [
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.EquivalenceOrbitInduction",
+  "file": "lean/Sheaf/CategoryTheory/EquivalenceOrbitInduction.lean",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.exists_exactOrbitInduction",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.ExactOrbitInduction",
+   "CategoryTheory.Endofunctor.IsoAlgebra.exists_exactOrbitInduction"
+  ],
+  "statement": "theorem exists_exactOrbitInduction [Abelian A] [F.Additive] [IsGrothendieckAbelian.{v} A] : Nonempty (ExactOrbitInduction F)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9bf8a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261023T105703-L-3592432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9bf8a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261023T105703-L-3592432",
+  "kind": "interface",
+  "note": "independent cc review: presentation statement and moved definitions in TwistedActionRingedSiteData vs live item module (verbatim apart from the ModulePresentation→RestrictionPresentation split, covered by the change record); new sorry statements siteRestriction/closedComparisons vs the item's original fields and steps 1–6/9–13; node proof/proof_deps vs the Lean proof; #print axioms on the proved modules"
+ }
+}

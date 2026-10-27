@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-ordered-tate-pullback-square",
+ "kind": "statement",
+ "title": "Ordered finite Tate pullback around a commutative square",
+ "statement": "Let A be a commutative ring killed by N and t an OrdinaryFiniteTwistTransport, normalized on roots and pure coefficient/root tensors [def-asd-ordinary-finite-p1-arrows]. Put T_X=A_X(d)[2d] in the ordered tensor presentation of [def-amb-vector-integration-charts], for d≥0. For maps s:Y→X, s′:Y′→X′, b:Y′→Y and v:X′→X satisfying s′v=bs, assume N is invertible on X,Y,X′. Write c_f:f* T_target ≅ T_source for vectorIntegrationBaseCoefficientPullback and e for the inverse-image compositor from b*(s*(-)) to s′*(v*(-)), constructed around this square. Then b*(c_s^{-1}) followed by e on T_X followed by s′*(c_v) equals c_b followed by c_s′^{-1}. This is only an equality of coefficient maps; no compact support, dualizing object or integration occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition."
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-vector-integration-charts"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordered coefficient composition law to b followed by s and to s′ followed by v, using hs.symm for the second composite. Cancel the inverse and forward coefficient comparisons and use functoriality of ordinary pullback to obtain the displayed square.",
+   "uses": [
+    "lem-pur-ordered-tate-coefficient-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ordered-tate-coefficient-composition"
+ ],
+ "proof_origin": {
+  "by": "K8 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Compatibility paragraph: base change of the normalized trace and transposition; coefficient composition and cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback comparisons of tensor powers of a finite etale Tate line respect composition of scheme morphisms",
+   "results": "8 generic pullback-comparison hits, including CategoryTheory.Over.pullbackComp; no ordered finite Tate transport theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib result; the coefficient construction is project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate of vector bundle integration is compatible with Cartesian base change and restriction to the zero section",
+   "results": "8 differential-geometric vector-bundle hits; no etale integration theorem.",
+   "date": "2026-10-26",
+   "verdict": "No matching etale compact-support or Tate comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegrationBaseCoefficientPullback|sectionBaseChange",
+   "results": "msearch Mathlib grep: 0 hits. Repository search: VectorTraceGeometricDescent proves the canonical linear pullback trace square; SfP1ChartExchange has a private shifted-line composition proof; OrderedTateExactOpenComposition is only for nested opens.",
+   "date": "2026-10-26",
+   "verdict": "No existing arbitrary commutative-square coefficient comparison or zero-preserving Cartesian trace equation with these exact normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorZeroSectionIntegrationBaseChange",
+  "date": "2026-10-26",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition.",
+   "via": [
+    "lem-pur-vector-zero-section-integration-base-change",
+    "lem-pur-diagonal-orientation-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedTatePullbackSquare",
+  "file": "lean/Sheaf/Paper/OrderedTatePullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.orderedTatePullbackSquare",
+  "statement": "theorem orderedTatePullbackSquare (A : Type (u + 1)) [CommRing A]\n    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {X Y X' Y' : Scheme.{u}} (s : Y ⟶ X) (s' : Y' ⟶ X')\n    (b : Y' ⟶ Y) (v : X' ⟶ X) (hs : s' ≫ v = b ≫ s)\n    (hX : IsUnit (N : Γ(X, ⊤))) (hY : IsUnit (N : Γ(Y, ⊤)))\n    (hX' : IsUnit (N : Γ(X', ⊤))) (d : ℕ) :\n    (ordinaryFinitePullback A b).map\n        (vectorIntegrationBaseCoefficientPullback A N hA t s hX d).inv ≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) b s).inv.app\n        (affineLinearBaseCoefficient A N hA X d) ≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s' v (b ≫ s) hs.symm).hom.app\n        (affineLinearBaseCoefficient A N hA X d) ≫\n      (ordinaryFinitePullback A s').map\n        (vectorIntegrationBaseCoefficientPullback A N hA t v hX d).hom =\n    (vectorIntegrationBaseCoefficientPullback A N hA t b hY d).hom ≫\n      (vectorIntegrationBaseCoefficientPullback A N hA t s' hX' d).inv",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T201126-L-3364166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T235916-L-1467894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

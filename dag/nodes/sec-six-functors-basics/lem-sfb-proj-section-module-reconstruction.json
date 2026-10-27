@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-proj-section-module-reconstruction",
+ "kind": "statement",
+ "title": "Reconstructing a quasi-coherent sheaf on standard Proj from all twisted sections",
+ "statement": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a nonnegatively graded commutative ring generated over $S_0$ by finitely many elements of $S_1$, and put $X=\\operatorname{Proj}(S)$ [def-pc-proj]. Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Write $\\mathcal F(n)=\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal O_X(n)$ for $n\\in\\mathbf Z$, where $\\mathcal O_X(n)=\\widetilde{S(n)}$ [def-weil-pbc-proj-twisting-sheaf, def-pur-sheaf-tensor-product]. Equip $N=\\bigoplus_{n\\in\\mathbf Z}\\Gamma(X,\\mathcal F(n))$ with its graded $S$-module action: for $s\\in S_e$ and $t\\in N_n$, multiply the canonical section $s$ of $\\mathcal O_X(e)$ with $t$ via the multiplication maps of [lem-sfb-standard-proj-twist-tensor], obtaining $st\\in N_{n+e}$. There is a canonical isomorphism $\\varepsilon_{\\mathcal F}:\\widetilde N\\longrightarrow\\mathcal F$. On $D_+(f)$ for $f\\in S_1$ its map on sections is $N_{(f)}\\longrightarrow\\Gamma(D_+(f),\\mathcal F)$, $t/f^a\\longmapsto t|_{D_+(f)}\\otimes f^{-a}$, where $a\\ge0$, $t\\in N_a$, and $f^{-a}$ denotes the inverse trivialization of $\\mathcal O_X(a)|_{D_+(f)}$. No Noetherian hypothesis on $S_0$ and no finiteness hypothesis on $\\mathcal F$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0AG5, lemma-proj-quasi-coherent, isomorphism of the counit; constructions.tex Tag 0B5I, lemma-comparison-proj-quasi-coherent, definition and displayed chart formula; finite degree-one generation supplies the quasi-compact cover required by 0AG5."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "pqf-def-coherent",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-standard-proj-twist-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Choose degree-one algebra generators $f_1,\\ldots,f_r$ of $S$ over $S_0$. Every positive-degree homogeneous element lies in $(f_1,\\ldots,f_r)$, so this ideal contains $S_+$. By [prop-nagata-proj-standard-open], $X=\\bigcup_iD_+(f_i)$ and each chart is affine. By [lem-weil-pbc-proj-standard-open-inclusion], $D_+(f_i)\\cap D_+(f_j)=D_+(f_if_j)$ is also affine. These charts and intersections are quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Thus the finite cover makes $X$ quasi-compact, and clause (2) of [lem-weil-pbc-quasi-separated-affine-cover-criterion] makes it quasi-separated. In particular the degree-one standard opens cover $X$. If $r=0$, then $S_+=0$, $X=\\varnothing$, and the empty cover gives the same conclusions.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 00JP and 01M4 for affine standard opens and their intersections; schemes.tex Tag 01KO (lemma-characterize-quasi-separated), clause (3) implies (1), for the affine-cover criterion; algebra.tex Tag 00E8 (lemma-quasi-compact) for affine quasi-compactness."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-proj-section-tensor-localization-comparison] with $L=\\mathcal O_X(1)$ and each $f_i$: it identifies $X_{f_i}$ with $D_+(f_i)$ and $N_{(f_i)}$ with the degree-zero localization of $\\bigoplus_n\\Gamma(X,\\mathcal F\\otimes L^{\\otimes n})$, including the fraction evaluation formula. Since $X$ is quasi-compact and quasi-separated by Step 1 and $\\mathcal F$ is quasi-coherent, [lem-sc-p1-invertible-section-localization] says that evaluation is an isomorphism. Thus $\\phi_{f_i}:N_{(f_i)}\\to\\Gamma(D_+(f_i),\\mathcal F)$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-proj-section-tensor-localization-comparison",
+    "lem-sc-p1-invertible-section-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AG5, proof, localized section comparison and application of Tag 01PW(2)"
+   }
+  },
+  {
+   "text": "By [lem-sfb-proj-section-fraction-naturality], the maps $\\phi_g$ for all positive-degree homogeneous $g$ respect every standard-open inclusion. The associated sheaf has sections $N_{(g)}$ and exactly these localization restrictions by [lem-weil-pbc-proj-graded-module-sheaf-exists]. Since the standard opens form a basis by [lem-weil-pbc-proj-standard-open-inclusion], these maps define a unique $\\mathcal O_X$-linear sheaf map $\\varepsilon_{\\mathcal F}:\\widetilde N\\to\\mathcal F$: on any open, restrict a section to its standard-open subcharts, apply $\\phi_g$, and glue the compatible results. This also proves the required formula on every $D_+(f)$ with $f\\in S_1$, not only on the chosen generators. The source is quasi-coherent by the associated-sheaf statement and the target by hypothesis. Step 2 gives bijectivity on sections of every affine in the cover of Step 1, so [lem-weil-pbc-quasi-coherent-iso-on-affine-cover] makes $\\varepsilon_{\\mathcal F}$ an isomorphism, including $X=\\varnothing$.",
+   "uses": [
+    "lem-sfb-proj-section-fraction-naturality",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 0B5I (lemma-comparison-proj-quasi-coherent), gluing of chart maps; properties.tex Tag 0AG5, final local-to-global conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-invertible-section-localization",
+  "lem-sfb-proj-section-fraction-naturality",
+  "lem-sfb-proj-section-tensor-localization-comparison",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "prop-nagata-proj-standard-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tags 0AG5 and 0B5I; the chart localization input is Tag 01PW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Gg]amma[Ss]tar|[Ss]ection[Mm]odule|reconstruct|fromTilde",
+   "results": "{\"t\": \"2026-10-22T04:34:20Z\", \"tool\": \"grep\", \"query\": \"[Gg]amma[Ss]tar|[Ss]ection[Mm]odule|reconstruct|fromTilde\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"9a7935916a0bfc9b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fromTildeΓ at Mathlib/AlgebraicGeometry/Modules/Tilde.lean:259 is an affine Spec counit; the other hits concern the structure sheaf, Gamma-Spec adjunction, or sheafification, not the Proj graded-section counit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit tilde Gamma star F to F is an isomorphism for quasicoherent sheaves on projective spectrum",
+   "results": "{\"t\": \"2026-10-22T04:34:20Z\", \"tool\": \"leansearch\", \"query\": \"The counit tilde Gamma star F to F is an isomorphism for quasicoherent sheaves on projective spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.adjunction_counit_app\", \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"CategoryTheory.instIsIsoFunctorOppositeValAppSheafCounitSheafificationAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit\", \"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit\"], \"digest\": \"eda334634d9e3dd0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fromTildeΓ at Mathlib/AlgebraicGeometry/Modules/Tilde.lean:259 is an affine Spec counit; the other hits concern the structure sheaf, Gamma-Spec adjunction, or sheafification, not the Proj graded-section counit."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, CategoryTheory.IsIso",
+   "results": "{\"t\": \"2026-10-22T04:34:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fromTildeΓ at Mathlib/AlgebraicGeometry/Modules/Tilde.lean:259 is an affine Spec counit; the other hits concern the structure sheaf, Gamma-Spec adjunction, or sheafification, not the Proj graded-section counit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicoherent sheaf on Proj is canonically isomorphic to the associated sheaf of the graded module of sections of all its twists",
+   "results": "{\"t\": \"2026-10-22T04:34:31Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicoherent sheaf on Proj is canonically isomorphic to the associated sheaf of the graded module of sections of all its twists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\"], \"digest\": \"636eeed98499ff97\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fromTildeΓ at Mathlib/AlgebraicGeometry/Modules/Tilde.lean:259 is an affine Spec counit; the other hits concern the structure sheaf, Gamma-Spec adjunction, or sheafification, not the Proj graded-section counit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the graded twisted global sections module Gamma star of a quasicoherent sheaf on Proj recovers that sheaf",
+   "results": "{\"t\": \"2026-10-22T04:35:31Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of the graded twisted global sections module Gamma star of a quasicoherent sheaf on Proj recovers that sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.ext_iff\"], \"digest\": \"c53a5eb8a7350688\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fromTildeΓ at Mathlib/AlgebraicGeometry/Modules/Tilde.lean:259 is an affine Spec counit; the other hits concern the structure sheaf, Gamma-Spec adjunction, or sheafification, not the Proj graded-section counit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-graded-module-section-tail",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Reconstruction via the finite degree-one standard-open cover, tensor-power localization comparison, and fraction-evaluation overlap compatibility (Stacks 0AG5 and 0B5I); the new nodes separate the two comparison arguments.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proj-section-module-reconstruction",
+  "worker": "stage1",
+  "summary": "Rebased the returned two-node re-split on the current DAG, preserving its statement, all recorded searches and both comparison tasks. Re-read every current dependency and checked all citation quotes. Replaced the inline quasi-separatedness refinement argument by the existing affine-qcqs and affine-cover Mathlib leaves; retained the explicit affine-cover criterion for the final sheaf isomorphism. Maintainer reader (Q28 d664b4ee): both new nodes state the degree-one standard-open cover as an explicit hypothesis (re-applied from the 418d42c8 FIX lost at landing); the two Mathlib leaves cited in Step 1 are recorded as tool uses.",
+  "blueprint": "Created-node ancestor is null as reported by blueprint_refs.py. The two new nodes realize the existing reconstruction proof steps 2 and 3; the finite-cover reduction and local-to-global conclusion remain explicit assembly steps.",
+  "tool_uses": [
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "The finite degree-one generators give the standard affine cover via the irrelevant-ideal criterion."
+   },
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "The intersections and basis statements justify the cover calculation and sheaf assembly."
+   },
+   {
+    "node": "lem-sc-p1-invertible-section-localization",
+    "why": "The generic qcqs localization theorem supplies local bijectivity after the new comparison lemma identifies its source and map."
+   },
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "The associated sheaf has the stated local modules and restriction maps used in assembly."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+    "why": "The generic quasi-coherent affine-cover criterion converts the bijective chart-section maps into a sheaf isomorphism; no same-unit node supplies this criterion."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Mathlib leaf: each affine chart D_+(f_i) and each affine intersection D_+(f_if_j) is quasi-compact, giving quasi-compactness of X and the hypothesis of the quasi-separatedness criterion."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Mathlib leaf: clause (2), an affine cover with quasi-compact pairwise intersections makes X quasi-separated, the qcqs hypothesis of the 01PW localization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-proj-standard-open",
+  "lem-sfb-standard-proj-twist-tensor",
+  "lem-sc-p1-invertible-section-localization",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-d664b4ee6",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-d664b4ee6 (reviewer sub-agent of L); spot-checked: Head d664b4ee is a re-delivery after the 418d42c8 FIX, whose fixes did not land. The item statement, stmt_deps and source are unchanged, and the author kept both the iso-on-affine-cover route in Step 3 and the qs-criterion citation in Step 1. Step 1 now also cites the Mathlib leaf lem-weil-pbc-affine-scheme-qcqs; I read it and it is correct. The assembly steps are 733, 544 and 1001 characters. The 418d fix that made the S_1 cover an explicit hypothesis in both new nodes was lost again: they still say 'X=Proj(S), covered by the opens D_+(f) with f in S_1', which reads as an assertion and is false for S=k[x] with deg x=2. Re-split check against the base proof: old step 2 is now lem-sfb-proj-section-tensor-localization-comparison and old step 3 is now lem-sfb-proj-section-fraction-naturality; nothing was summarised or dropped. Checks on the comparison node: beta_n for all n in Z via the dual; X_s=D_+(f) because s=(f/f_j)f_j; theta_f is well defined under the common-power relation. Checks on the naturality node: g/1 generates O(d) on D_+(g); for g^e=ah with ed=c+b, deg(a^m t)=med and rho matches graded-module-sheaf-exists (a); a^m g^{-em}=h^{-m}. The two nodes are of comparable size (2032 and 1701 characters), neither restates the item, and none of the candidates I checked (standard-proj-twist-tensor, finite-graded-proj-section-comparison, sc-p1-*) is a duplicate. Step 2 applies lem-sc-p1-invertible-section-localization (01PW(2)), and its qcqs, invertible-L and quasi-coherence hypotheses are all supplied. Sources: Stacks constructions.tex:1996 (0B5I, overlap gluing omitted there), properties.tex:5074 (0AG5) and :2227 (01PW). No SGA. Edge cases checked: r=0, S_1=0, F=0, S=A[x], nilpotent denominators. Fixes: (1) both new nodes now say 'Assume that X is covered by the standard opens D_+(f) with f in S_1'; (2) the item split_report records the tool uses of lem-weil-pbc-affine-scheme-qcqs and lem-weil-pbc-quasi-separated-affine-cover-criterion. The corrected files are under fixes/dag/nodes/sec-six-functors-basics/.; 3 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjSectionModuleReconstruction",
+  "declaration": "AlgebraicGeometry.Proj.projSectionModuleReconstruction",
+  "declarations": [
+   "AlgebraicGeometry.Proj.projTwistedSections",
+   "AlgebraicGeometry.Proj.projTwistedSectionsGrading",
+   "AlgebraicGeometry.Proj.IsProjSectionReconstruction",
+   "AlgebraicGeometry.Proj.projSectionModuleReconstruction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjSectionModuleReconstruction.lean",
+  "statement": "theorem projSectionModuleReconstruction (hgen : ∃ (r : ℕ) (f : Fin r → S), (∀ i : Fin r, f i ∈ 𝒜 1) ∧ Algebra.adjoin (𝒜 0) (Set.range f) = ⊤) (F : (Proj 𝒜).Modules) [F.IsQuasicoherent] : ∃ m : Module S (projTwistedSections 𝒜 F), (∀ (e : ℕ) (n : ℤ) (s : S) (hs : s ∈ 𝒜 e) (t : Γ(F ⊗ twist 𝒜 n, ⊤)), @SMul.smul S (projTwistedSections 𝒜 F) m.toSMul s (DirectSum.of (fun k : ℤ ↦ Γ(F ⊗ twist 𝒜 k, ⊤)) n t) = DirectSum.of (fun k : ℤ ↦ Γ(F ⊗ twist 𝒜 k, ⊤)) (n + e) ((F ◁ twistMul n hs).app ⊤ t)) ∧ @IsProjSectionReconstruction S _ 𝒜 _ F m",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The underlying additive module is the actual all-integer direct sum. The theorem supplies its S-action with the canonical twistMul equation. The associated sheaves are specified by the existing IsStandardProjShiftSheaf chart interface; the unique isomorphism is characterized by multiplying the fraction evaluation by the existing free generator f^a."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4d911c0d",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Only the lean field changed vs the live node; one module, one sorry (the theorem). hgen is exact finite degree-one generation over 𝒜 0, r=0 allowed. F is only [IsQuasicoherent], the quasi-coherence part of pqf-def-coherent, with no finite-type, Noetherian or universe restriction. N is the actual ⨁_{n∈ℤ} Γ(F⊗twist n) with summand-range grading. The S-action is a conclusion (∃ m) fixed on homogeneous scalars by F◁twistMul n hs into degree n+e, which equals the twistTensorIso multiplication of standard-proj-twist-tensor. Ñ is given by the existing IsStandardProjShiftSheaf chart predicate (injective, degree-zero-fraction range, scalar and restriction compatibility), which fixes G up to unique iso, so the existential is non-vacuous. ∃! ε : G 0 ⟶ F is IsIso and satisfies tmulSection ε(q) f^a = t|_D for all f∈𝒜 1; f^a is a free generator, so this is ε(t/f^a)=t⊗f^{-a}; every chart section has such a representative and the charts cover X under hgen, so uniqueness is sound. Edge cases r=0, S_1=0, F=0, a=0, nilpotent f, negative degrees, zero ring all covered. No duplicate in Mathlib or the project; helpers real; docstrings with source and blueprint plus the 3-step proof; lean.statement verbatim; imports cover stmt and proof deps (the two new split inputs have no Lean yet). No compile run since nothing was changed. The report's Second reading by Q125 is the author's reread; this review is the independent reading."
+ }
+}

@@ -1,0 +1,376 @@
+{
+ "id": "lem-sfb-smooth-space-integral-fibre-locus",
+ "kind": "statement",
+ "title": "Constructibility of integral geometric fibres of a smooth algebraic space",
+ "statement": "Work with schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space]. Smoothness and local finite presentation are tested on etale scheme charts [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. Finite presentation means local finite presentation, quasi-compactness and quasi-separatedness; quasi-compactness means that affine scheme tests have quasi-compact inverse images, and quasi-separatedness means that the diagonal is quasi-compact. Separatedness means that the representable diagonal is a closed immersion on every scheme test. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $B$ be a Noetherian scheme, meaning a quasi-compact locally Noetherian scheme [pqf-def-locnoeth], and let $f:X\\to B$ be a smooth separated morphism of finite presentation from an algebraic space. A geometric fibre at $b\\in B$ is $X_{\\bar b}=X\\times_B\\operatorname{Spec}\\overline{\\kappa(b)}$, using an algebraic closure of the residue field [def-weil-residue-field, def-weil-algebraic-closure, def-weil-affine-spectrum]. It is integral if it is nonempty, reduced and irreducible, with its atlas topology [def-a1-space-point-topology]. Then\n$$E_f=\\{b\\in |B|:X_{\\bar b}\\text{ is integral}\\}$$\nis a constructible subset [def-weil-constructible-subset], independent of the chosen algebraic closures. For every morphism of schemes $h:B'\\to B$, with no Noetherian assumption on $B'$, the corresponding locus for $f':X\\times_BB'\\to B'$ is exactly $h^{-1}(E_f)$. No properness, group structure or nonempty-fibre assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Agent-formulated algebraic-space extension of Tag 055B (lemma-nr-geom-irreducible-components-constructible), using smooth etale presentations and the finite component incidence relation; Tag 0E0A (spaces-more-morphisms lemma-geometrically-reduced-constructible) supplies the reduced-fibre counterpart. This is not a claim that 055B itself has algebraic-space sources. Constructibility is in the sense of topology.tex Tag 005G."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "pqf-def-locnoeth",
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "def-weil-constructible-subset",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine surjective etale atlas $p:U\\to X$ by [lem-sfb-qc-space-affine-etale-atlas] and put $R=U\\times_XU$, with projections $s,t$. The base is quasi-compact and $f$ is quasi-compact, so $X$ is quasi-compact. Smoothness tested on etale charts makes $U\\to B$ locally finitely presented. Since $U$ is affine and $B$ is quasi-separated, being locally Noetherian [lem-weil-pbc-locally-noetherian-quasi-separated], [lem-weil-pbc-qcqs-morphism-permanence] makes $U\\to B$ finitely presented, hence finite type; [lem-weil-pbc-finite-type-over-noetherian] makes $U$ Noetherian. Every etale scheme chart of $X$ is locally of finite type over the locally Noetherian $B$, hence locally Noetherian by [pqf-def-locnoeth]; $X$ is quasi-separated by the assumed finite presentation and separatedness, so [lem-sfb-noetherian-affine-atlas-relation] applies: $R$ is a Noetherian scheme. Its maps to $U$ are etale, hence locally finitely presented, so $R\\to B$ is locally finitely presented by [lem-sfb-space-separated-fp-composition]. Quasi-compactness and quasi-separatedness of the Noetherian $R$ [lem-weil-pbc-locally-noetherian-quasi-separated] and the same permanence lemma make $R\\to B$ finitely presented. By [lem-a1-space-affine-etale-cover] the point map of $p$ is an open continuous quotient surjection. The presentation and all its etale surjections persist after base change by [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-affine-atlas-relation",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Atlas preparation for the algebraic-space extension of the finite component argument; spaces-properties.tex Tags 03H6, 03BX; spaces-morphisms.tex Tag 03XQ."
+   }
+  },
+  {
+   "text": "For any algebraically closed geometric point of $B$, let $Y$ denote its fibre and $V$ the pulled-back atlas. It is smooth by [lem-sfb-space-smooth-surjective-fppf-locality], so $V$ is a smooth finite-type scheme over that field. By [lem-trf-smooth-geometrically-normal], $V$ is normal and reduced. It has finitely many irreducible components by [lem-sc-noetherian-finite-irreducible-components] and [lem-weil-pbc-finite-type-over-noetherian]; applying [lem-a1-normal-etale-components-clopen] to $\\mathrm{id}_V$ makes each component open and closed. Their images in $Y$ are nonempty irreducible open subsets by continuity and openness of the atlas [lem-a1-space-affine-etale-cover]. Reducedness of $Y$ is the etale-chart condition that its chart local rings are reduced, which holds here. Consequently $Y$ is integral if and only if it is connected: indeed a finite irreducible-open cover of a connected space has connected overlap graph, since a partition of this graph gives disjoint nonempty open unions covering the space. Overlapping irreducible open subsets have irreducible union: any nonempty open in either meets their overlap, and two such opens then meet by irreducibility. Induct along a spanning tree of the graph. Conversely every irreducible space is nonempty and connected. The empty atlas gives an empty fibre, which satisfies neither property.",
+   "uses": [
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-a1-normal-etale-components-clopen",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Smooth-fibre reduction to connectedness: varieties.tex Tag 056T; the finite open-cover argument is written here."
+   }
+  },
+  {
+   "text": "Let $b'\\mapsto b$ under any $h:B'\\to B$. Choose algebraic closures $K$ of $\\kappa(b)$ and $K'$ of $\\kappa(b')$. By [lem-weil-common-extension-fields] they embed over $\\kappa(b)$ into a common field $M$. Associativity of the sheaf fibre products [lem-trf-space-fibre-products-etale-covers] identifies the two fibres after extension to $M$. Apply [lem-sfb-space-sepclosed-components-base-change] separately to the fibres over $K$ and $K'$: each is connected if and only if this common extension is connected. Step 2 therefore makes their integrality equivalent. Its finite-type smooth atlas exists for both fibres, independently of whether $B'$ is Noetherian, by base change of $U\\to B$ and [lem-weil-pbc-qcqs-morphism-permanence]; smoothness persists by [lem-sfb-space-smooth-surjective-fppf-locality]. This proves the claimed equality of loci under every base change, as well as independence of the chosen algebraic closures, before proving constructibility.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-sepclosed-components-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "spaces-over-fields.tex Tag 0A12, common-field connected-component comparison."
+   }
+  },
+  {
+   "text": "Fix a nonempty irreducible closed subset $Z\\subseteq |B|$. Give it the reduced induced scheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme]; this is an integral Noetherian scheme with generic point $\\eta$. Apply [lem-sbc-generic-components-split] to the finite-type generic fibre of $U_Z\\to Z$. It gives a finite etale field extension $L/\\kappa(\\eta)$ over which the irreducible components $A_1,\\ldots,A_n$ are geometrically irreducible. There are finitely many, by [lem-weil-pbc-finite-type-over-noetherian] over the field $L$ and [lem-sc-noetherian-finite-irreducible-components]. They form a closed cover, with the empty list permitted when the fibre is empty. Apply [lem-sbc-geometric-generic-cover-model] with these supplied data. It gives an etale $g:T\\to Z$, a generic point $\\xi$ above $\\eta$, and a finite closed cover $C_i$ of $P=U_Z\\times_ZT$ whose traces on every field-extended fibre are nonempty and irreducible. Restrict $T$ to an affine neighbourhood of $\\xi$. Since $Z$ is locally Noetherian, hence quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated], it is finitely presented over $Z$ by [lem-weil-pbc-qcqs-morphism-permanence] and is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its image $W=g(T)$ is open and contains $\\eta$ by [lem-a1-space-affine-etale-cover]. No identification of the $C_i$ with the original generic components is needed.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sbc-generic-components-split",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055G (lemma-geometrically-connected-generic-fibre), component splitting, etale model, and spreading the finite closed cover; Tag 0551."
+   }
+  },
+  {
+   "text": "Set $Q=R\\times_BT$, with projections $s,t:Q\\to P$. Both $P$ and $Q$ are finitely presented over $T$ by step 1 and [lem-weil-pbc-qcqs-morphism-permanence], hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For each ordered pair $(i,j)$ form the closed subset $D_{ij}=s^{-1}(C_i)\\cap t^{-1}(C_j)\\subseteq Q$ and give it the reduced induced closed scheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme]. The map $D_{ij}\\to T$ is quasi-compact and locally finitely presented: on Noetherian affine charts its closed immersion has finitely generated defining ideal, and it is followed by the finitely presented $Q\\to T$, so the composite is locally finitely presented by [lem-sfb-space-separated-fp-composition]. Thus [lem-weil-pbc-chevalley-constructible-image] makes its image $H_{ij}\\subseteq T$ constructible. For a geometric point $\\bar t$ over $t$, its fibre is nonempty exactly when $t\\in H_{ij}$: a field-valued point of an ordinary fibre and the geometric field have a common extension by [lem-weil-common-extension-fields], so nonemptiness persists after the field extension; the converse follows by projection.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-weil-common-extension-fields",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Finite incidence relation for the atlas: Tag 055G intersection construction, with Chevalley Tag 054J replacing its generic-flatness shrinking."
+   }
+  },
+  {
+   "text": "For a geometric point $\\bar t$, put a graph on $\\{1,\\ldots,n\\}$ with edge $ij$ when $t\\in H_{ij}$. It is symmetric since the relation has an inverse [lem-a1-etale-atlas-presentation]. The closed irreducible nonempty sets $(C_i)_{\\bar t}$ cover $P_{\\bar t}$. Their images cover $X_{\\bar t}$ and are connected, by continuity of the atlas [lem-a1-space-affine-etale-cover]. Two images meet exactly when there is an edge: two representatives of one space point agree over a common field extension, precisely the point relation defined by $P\\times_XP$ [lem-trf-space-fibre-products-etale-covers, def-a1-space-point-topology]. If the graph is nonempty and connected, the images form an intersecting connected chain along each path, so their union is connected. Conversely, if the graph has a partition into two nonempty parts with no crossing edge, the corresponding finite unions of $(C_i)_{\\bar t}$ are disjoint closed sets covering $P_{\\bar t}$. They are saturated for the atlas relation, since no point in the first can be related to a point in the second. The quotient topology therefore gives a partition of $X_{\\bar t}$ into two nonempty closed, hence also open, subsets. Thus $X_{\\bar t}$ is connected exactly when this finite graph is nonempty and connected. If $n=0$, $P$ and $X_T$ are empty and the condition is false.",
+   "uses": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Elementary finite closed-cover argument on the quotient atlas, extending the finite incidence argument of Tag 055G."
+   }
+  },
+  {
+   "text": "For fixed $n>0$, graph connectedness is a finite Boolean condition on the edge sets: for every nonempty proper subset $J\\subset\\{1,\\ldots,n\\}$ require $t\\in\\bigcup_{i\\in J,\\ j\\notin J}H_{ij}$. Take the intersection of these finitely many unions; for $n=1$ the empty intersection is $T$, and for $n=0$ use the empty subset. By [def-weil-constructible-subset] this defines a constructible subset $F\\subseteq T$. Steps 2 and 6 identify $F$ with the integral geometric-fibre locus over $T$. Step 3 identifies it with $g^{-1}(E_f\\cap Z)$. Since $g$ is surjective onto $W$, we have $g(F)=E_f\\cap W$. By [lem-weil-pbc-chevalley-constructible-image], applied to the finitely presented scheme map $g:T\\to Z$ with $Z$ quasi-compact and quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated], this is constructible in $Z$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055B / Tag 055H finite incidence constructibility; Chevalley Tag 054J on the etale model."
+   }
+  },
+  {
+   "text": "There is now a nonempty relatively open $V\\subseteq Z$ which is wholly in $E_f$ or wholly outside it. Indeed $W$ contains the generic point $\\eta$ of $Z$ and $E_f\\cap W$ is a finite union of locally closed sets by [def-weil-constructible-subset]. If it contains $\\eta$, a locally closed term containing $\\eta$ has closed factor all of $Z$, hence contains an open neighbourhood of $\\eta$. If it does not, the closure of each locally closed term is proper: a locally closed set dense in irreducible $Z$ is open in $Z$ and contains $\\eta$. Remove these finitely many proper closed subsets from $W$. This proves the required alternative for every irreducible closed $Z$. The Noetherian scheme $B$ has a finite affine cover by Noetherian rings by its quasi-compactness and local Noetherianity. Therefore [lem-trf-noetherian-constructible-subset-criterion] applies and makes $E_f$ constructible. Together with step 3 this proves every assertion, including empty fibres and arbitrary non-Noetherian base changes.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-trf-noetherian-constructible-subset-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Topology Tag 053Z (lemma-characterize-constructible-Noetherian), applied as in the Noetherian case of Tag 055B."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-point-topology",
+  "def-weil-constructible-subset",
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-normal-etale-components-clopen",
+  "lem-a1-space-affine-etale-cover",
+  "lem-sbc-generic-components-split",
+  "lem-sbc-geometric-generic-cover-model",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-noetherian-affine-atlas-relation",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-sepclosed-components-base-change",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-trf-noetherian-constructible-subset-criterion",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/spaces-over-fields.tex",
+  "place": "Algebraic-space adaptation of Tag 055G finite component incidence, Tag 055B constructibility and Tag 0A12 field-extension comparison; elementary quotient and finite-graph arguments written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated algebraic space of finite presentation over a Noetherian scheme the locus of geometrically integral fibres is constructible and commutes with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsIntegralHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is an integral morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsAffine Y],\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).IsIntegral\", \"doc\": \"If $ f: X \\\\to Y $ is a universally closed morphism of schemes and $ Y $ is affine, then the induced ring homomorphism on global sections $ \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ is in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of the geometric connected fibre locus for smooth algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Topology.IsConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space is constructible if it belongs to the Boolean subalgebra generated by the open retrocompact sets. This means $ s $ can be formed by taking finite unions, intersectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) [LocallyOfFinitePresentation f] [QuasiCompact f] [CompactSpace Y] [QuasiSeparatedSpace Y] {s : Set X}\\n  (hs : IsConstructible s) : IsConstructible (f '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Topology.IsLocallyConstructible.isConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"[PrespectralSpace X] [QuasiSeparatedSpace X] [CompactSpace X] (hs : IsLocallyConstructible s) : IsConstructible s\", \"doc\": \"In a compact quasi-separated prespectral space $X$, if a set $s$ is locally constructible (i.e., every point has an open neighborhood whose intersection with $s$ is constructible), then $s$ is constru\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : (f.fiber y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}\n  {\"name\": \"Topology.IsLocallyConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space is locally constructible if, for every point $ x $, there exists an open neighborhood $ U $ of $ x $ such that the intersection $ U \\\\cap s $ is a constructible set. \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIntegral\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.GeometricallyIntegral\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"We say that morphism `f : X ⟶ Y` is geometrically integral if for all `Spec K ⟶ Y` with `K`\\na field, `X ×[Y] Spec K` is integral.\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.eq_geometrically\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" : @AlgebraicGeometry.GeometricallyIntegral = AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instGeometricallyIrreducibleOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.GeometricallyIrreducible f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instGeometricallyReducedOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.GeometricallyReduced f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instSurjectiveOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.Surjective f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (geometrically_isIntegral : AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f) : AlgebraicGeometry.GeometricallyIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.geometricallyIntegral_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.GeometricallyIntegral f ↔ AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyReduced f] [AlgebraicGeometry.GeometricallyIrreducible f] : AlgebraicGeometry.GeometricallyIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.UniversallyOpen f] [AlgebraicGeometry.IsIntegral S] [AlgebraicGeometry.IsLocallyNoetherian S] : AlgebraicGeometry.IsIntegral X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] [Subsingleton ↥S] [AlgebraicGeometry.IsIntegral S] : AlgebraicGeometry.IsIntegral X\", \"doc\": \"If `X` is geometrically integral over a field, then it is integral.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Gg]eometricallyIntegral|geometrically.*(integral|connected).*constructib",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"435\", \"text\": \"instance : GeometricallyIntegral (𝔸(n; S) ↘ S) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"15\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"19\", \"text\": \"- `GeometricallyIntegral.iff_geometricallyIntegral_fiber`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"22\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"25\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"40\", \"text\": \"class GeometricallyIntegral (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"17\", \"text\": \"- `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"133\", \"text\": \"theorem isCommMonObj_of_isProper_of_geometricallyIntegral\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"134\", \"text\": \"    (G : Over (Spec (.of K))) [IsProper G.hom] [GeometricallyIntegral G.hom] [GrpObj G] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of integral geometric fibres for smooth separated finitely presented algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsIntegralHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is an integral morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y),\\n  AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Scheme.Hom.fiberι f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $y$ be a point in $Y$. The fiber of $f$ over $y$, denoted $X_y$, is the pullback $X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is th\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsIntegralHom g],\\n  AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned geometric integrality and constructible-image declarations are for schemes, not the algebraic-space fibre-locus statement; ring smooth loci and integral morphisms are different assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIntegral\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.GeometricallyIntegral\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"We say that morphism `f : X ⟶ Y` is geometrically integral if for all `Spec K ⟶ Y` with `K`\\na field, `X ×[Y] Spec K` is integral.\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.eq_geometrically\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" : @AlgebraicGeometry.GeometricallyIntegral = AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instGeometricallyIrreducibleOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.GeometricallyIrreducible f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instGeometricallyReducedOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.GeometricallyReduced f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instSurjectiveOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.Surjective f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (geometrically_isIntegral : AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f) : AlgebraicGeometry.GeometricallyIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.geometricallyIntegral_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.GeometricallyIntegral f ↔ AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyReduced f] [AlgebraicGeometry.GeometricallyIrreducible f] : AlgebraicGeometry.GeometricallyIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.UniversallyOpen f] [AlgebraicGeometry.IsIntegral S] [AlgebraicGeometry.IsLocallyNoetherian S] : AlgebraicGeometry.IsIntegral X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] [Subsingleton ↥S] [AlgebraicGeometry.IsIntegral S] : AlgebraicGeometry.IsIntegral X\", \"doc\": \"If `X` is geometrically integral over a field, then it is integral.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned geometric integrality and constructible-image declarations are for schemes, not the algebraic-space fibre-locus statement; ring smooth loci and integral morphisms are different assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|geometrically.*(integral|connected).*constructib",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned geometric integrality and constructible-image declarations are for schemes, not the algebraic-space fibre-locus statement; ring smooth loci and integral morphisms are different assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The number of connected components of geometric fibres of a smooth algebraic space is constructible",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Topology.IsConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space is constructible if it belongs to the Boolean subalgebra generated by the open retrocompact sets. This means $ s $ can be formed by taking finite unions, intersectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) [LocallyOfFinitePresentation f] [QuasiCompact f] [CompactSpace Y] [QuasiSeparatedSpace Y] {s : Set X}\\n  (hs : IsConstructible s) : IsConstructible (f '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : (irreducibleComponents X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"Topology.IsConstructible.isLocallyConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(hs : IsConstructible s) : IsLocallyConstructible s\", \"doc\": \"If a set $ s $ is constructible in a topological space, then it is locally constructible. That is, for every point $ x $, there exists an open neighborhood $ U $ of $ x $ such that $ U \\\\cap s $ is a c\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned geometric integrality and constructible-image declarations are for schemes, not the algebraic-space fibre-locus statement; ring smooth loci and integral morphisms are different assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite presentation smooth algebraic space has a constructible locus of geometrically connected fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned geometric integrality and constructible-image declarations are for schemes, not the algebraic-space fibre-locus statement; ring smooth loci and integral morphisms are different assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-open-arithmetic-model",
+  "date": "2026-10-23",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Arithmetic models of a smooth group with a fibrewise nonempty open.; arithmetic approximation: the integral-fibre condition is a constructible base locus with exact base-change equality",
+   "via": [
+    "lem-sfb-group-open-arithmetic-model",
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-space-integral-fibre-locus",
+  "worker": "stage1",
+  "summary": "Proved the algebraic-space extension using existing finite affine atlas, generic scheme component cover, finite relation incidence and Chevalley nodes. Proved the geometric-fibre integral/connected equivalence and arbitrary base-change equality explicitly. No new nodes or changed statement. Checked each cited statement and did not assume the generic-cover model identifies its closed sets with the original components.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Arithmetic models of a smooth group with a fibrewise nonempty open.; arithmetic approximation: the integral-fibre condition is a constructible base locus with exact base-change equality",
+  "tool_uses": [
+   {
+    "node": "def-a1-space-point-topology",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-a1-normal-etale-components-clopen",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-sbc-generic-components-split",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-sbc-geometric-generic-cover-model",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-trf-noetherian-constructible-subset-criterion",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   },
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic algebraic-geometry/topology tool for the atlas and component-incidence construction; no step of the constructible-direct-image unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-a1-space-point-topology",
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-normal-etale-components-clopen",
+  "lem-a1-space-affine-etale-cover",
+  "lem-sbc-generic-components-split",
+  "lem-sbc-geometric-generic-cover-model",
+  "lem-trf-noetherian-constructible-subset-criterion",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-aee4eb24f",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-aee4eb24f (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct; the only fault is three missing citations (C1), repaired in place. I read in full the item, its eight steps and the statements of all 21 cited nodes, and checked Stacks 055G/055H in more-morphisms.tex; the labels of 055B, 0A12, 053Z and 0E0A exist. The statement and stmt_deps are unchanged against the earlier copy of the item (unsplit, empty proof), the delivery has no new nodes, and live is still unsplit, so no other group superseded it. The DAG search found no duplicate: the nearest nodes cover rings, schemes, irreducible or reduced fibres, the proper case, or neighbourhoods only. The route adapts the 055G component-incidence argument to an atlas: Chevalley images of the D_ij incidence loci plus the 053Z criterion. I checked each step: affine atlas and Noetherian R; smooth geometric fibre integral iff connected, by the overlap-graph argument; base-change and choice-of-closure independence via 0A12 over a common field M, including non-Noetherian B'; the generic cover model is used only for what its statement gives; the graph-cut Boolean formula, with n=0 and n=1 handled; the generic-point alternative and 053Z. Small cases checked: empty X or base, A^1_B, open immersion, two components, n=1. Missing citations repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-space-integral-fibre-locus.json: 'Noetherian => quasi-separated' is now cited to the Mathlib leaf lem-weil-pbc-locally-noetherian-quasi-separated in steps 1, 4 and 7; 'every étale chart of X is locally Noetherian' to pqf-def-locnoeth in step 1, which had checked only U; the lfp composite in step 5 to lem-sfb-space-separated-fp-composition. proof_deps reset to the union of the step uses. The split_report tool_uses are generic algebraic-geometry tools and are accepted. Batch-5: the listed a1/sfb citations reach sec-trace-formula only through algebraic-space foundations (def-trf-algebraic-space, fibre products, smooth composition, fppf locality); the trf 053Z criterion and 056T smooth-implies-normal are generic lemmas. None is a step of the trace formula or of Poincaré duality, and nothing reaches an nt-assume leaf or sec-poincare-duality, so they are accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothSpaceIntegralFibreLocus",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isConstructible_integralGeometricFibreLocus",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fieldFibrePresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.IsIntegralFieldFibre",
+   "AlgebraicGeometry.AlgebraicSpace.integralGeometricFibreLocus",
+   "AlgebraicGeometry.AlgebraicSpace.isConstructible_integralGeometricFibreLocus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSpaceIntegralFibreLocus.lean",
+  "statement": "theorem isConstructible_integralGeometricFibreLocus {S : Scheme.{u}} (X : AlgebraicSpace S) (B : Over S) [IsNoetherian B.left] (f : X.obj.obj ⟶ yoneda.obj B) (hsmooth : MapToSchemeIsLocally (@Smooth) X B f) (hsep : MapToSchemeIsSeparated X B f) (hlfp : MapToSchemeIsLocally (@LocallyOfFinitePresentation) X B f) (hqc : MapIsQuasiCompact f) (hqs : MapIsQuasiCompact (pullback.diagonal f)) : Topology.IsConstructible (integralGeometricFibreLocus f) ∧ (∀ (b : B.left) (K : Type u) [Field K] [Algebra (B.left.residueField b) K] [IsAlgClosure (B.left.residueField b) K], IsIntegralFieldFibre f K (Spec.map (CommRingCat.ofHom (algebraMap (B.left.residueField b) K)) ≫ B.left.fromSpecResidueField b) ↔ b ∈ integralGeometricFibreLocus f) ∧ ∀ (B' : Over S) (h : B' ⟶ B), integralGeometricFibreLocus (Limits.pullback.snd f (yoneda.map h)) = h.left ⁻¹' integralGeometricFibreLocus f",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three explicit helpers define this node’s field fibre, its integral predicate and its residue-field algebraic-closure locus. The theorem gives constructibility, comparison with every algebraic closure and exact arbitrary base-change equality. The existing scheme-target chart and affine-test morphism predicates are reused from def-sfb-proper-curve-moduli."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c60a1dd1f",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read the node, its 8 proof steps, all 12 statement-dependency records, the report and the module (identical to the snapshot). Clause check against the node: B : Over S with [IsNoetherian B.left]; f : X.obj.obj ⟶ yoneda B; hypotheses smooth, separated, lfp, qc and qs (diagonal), using the def-sfb-proper-curve-moduli predicates (landed node; brief §5 allows adding a landed stmt_dep). The field fibre is the presheaf pullback along Spec K̄ → Spec κ(b) → B. Integral = IrreducibleSpace of Point (includes nonempty) plus every étale scheme chart reduced. Conclusions: Topology.IsConstructible; for every K : Type u with IsAlgClosure κ(b) K, the fibre over K is integral iff b ∈ E; for arbitrary B' and h, the locus of pullback.snd equals h.left⁻¹' E. Nothing stronger is assumed (hqs is in the node's finite-presentation definition). Edge cases empty X/B, identity, open immersion, two copies, 𝔸¹ and non-Noetherian B' all OK. Lean statement verbatim; node differs from live only in lean and stmt_deps; first S2 delivery; all imports exist in live; helpers are real definitions with source/blueprint docstrings; only proof is sorry. Maintainer note: def-sfb-reduced-algebraic-space (AlgebraicSpace.IsReduced) defines the same étale-chart reducedness, but only on a packaged AlgebraicSpace; the fibre here is a raw pullback, so the inline condition (same mathematics, RegularGroupSpace precedent) is accepted. Second reading is by the same worker, as it states, with real clause content. No change, no compile."
+ }
+}

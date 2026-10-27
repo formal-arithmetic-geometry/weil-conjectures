@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-nodal-equivariant-torsor-rigidity",
+ "kind": "statement",
+ "title": "Fullness of equivariant torsor restriction at the nodal origin",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $\\pi$ a uniformizer and $k=A/(\\pi)$ its residue field. Assume the canonical map $A\\to\\varprojlim_{n\\geq1}A/(\\pi^n)$ is bijective [def-weil-pbc-adic-completion]. An $A$-group scheme means a group object in schemes over $\\operatorname{Spec}A$: the multiplication, unit and inverse diagrams of [def-sc-group-scheme], with this base in place of the field base. Write $\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. Let $H$ be a smooth affine finite-type $A$-group scheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Put $X=\\operatorname{Spec}A[s,t]/(st-\\pi)$, with $\\mathbf G_{m,A}$ acting by $z\\cdot(s,t)=(zs,z^{-1}t)$, and let $o=V(s,t)=\\operatorname{Spec}k$. A right $H$-torsor over an $A$-scheme $Y$ means a represented right torsor in [def-sfb-split-solvable-right-torsors], with base $\\operatorname{Spec}A$. A $\\mathbf G_m$-equivariant such torsor has a left $\\mathbf G_{m,A}$-action covering the specified action on $Y$ and commuting with the right $H$-action; isomorphisms respect both actions and the projection to $Y$. For any two $\\mathbf G_{m,A}$-equivariant right $H$-torsors $P,Q$ over $X$ and any $\\mathbf G_{m,k}$-equivariant right $H_k$-torsor isomorphism $\\alpha_0:P|_o\\simeq Q|_o$, there exists an equivariant right $H$-torsor isomorphism $\\alpha:P\\simeq Q$ over $X$ restricting to $\\alpha_0$. Equivalently, restriction from equivariant $H$-torsors on $X$ to equivariant $H_k$-torsors on $o$ is full; uniqueness is not asserted.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf. Lemma 3.3 and its proof, printed p.4, expressed as equivariant torsors on the nodal scheme; Section 2, Claim 3, printed p.3, gives the degreewise algebraization calculation."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sfb-split-solvable-right-torsors"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-torsor-isom-affine-smooth] with $B=\\operatorname{Spec}A$, $Y=X$ and the given $H,P,Q$. We obtain an affine scheme $I=\\operatorname{Spec}C$, smooth over $X=\\operatorname{Spec}R$, where $R=A[s,t]/(st-\\pi)$. Its sections are exactly the right-torsor isomorphisms, after every base change. The two commuting actions give an action on $I$: on test schemes, $z\\cdot\\beta=a_Q(z)\\circ\\beta\\circ a_P(z)^{-1}$, now over $z\\cdot x$. This is natural and therefore defines a scheme action by the stated representing bijection. The action law follows by composing these formulas. A section is equivariant precisely when the corresponding torsor isomorphism is equivariant. Thus $\\alpha_0$ supplies an equivariant map $X_1=\\operatorname{Spec}(R/\\mathfrak m)\\to I$, where $\\mathfrak m=(s,t)$ and $R/\\mathfrak m=k$.",
+   "uses": [
+    "lem-sfb-torsor-isom-affine-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Isom reduction; groupoids.tex Tag 049C; paper Section 2 Claim 3, first paragraph of printed p.3."
+   }
+  },
+  {
+   "text": "Here is the coordinate meaning of equivariance used below. For an affine $A$-scheme with $\\mathbf G_{m,A}$-action, write its coaction as $\\rho(c)=\\sum_dc_dz^d$, a finite Laurent sum. Coassociativity says $\\rho(c_d)=c_dz^d$, by comparing the two Laurent exponents; the unit says $c=\\sum_dc_d$. Linear independence of Laurent monomials makes the decomposition unique. Multiplicativity gives $C_dC_e\\subset C_{d+e}$ and $1\\in C_0$. Conversely these formulas define the coaction, and a ring map commutes with coactions exactly when it preserves degrees. The same applies to $R$, whose $s,t$ have degrees $1,-1$, and its homogeneous quotients. Affine morphisms and products are translated into ring maps and tensor products by [def-weil-affine-spectrum] and [lem-weil-pbc-fibre-product-affine-spectra]; a tensor with $A[z,z^{-1}]$ is just a finite Laurent sum with coefficients in the other factor.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Explicit coaction-coefficient calculation; schemes.tex Tags 01I4, 01JQ; paper Section 2 Claim 3, graded-coordinate paragraph."
+   }
+  },
+  {
+   "text": "Put $e_d=s^d$ for $d\\geq0$ and $e_d=t^{-d}$ for $d<0$. Replacing every pair $st$ by $\\pi$ writes each element of $R$ uniquely as a finite sum $\\sum_da_de_d$: uniqueness follows by substituting $t=\\pi s^{-1}$ into $\\operatorname{Frac}(A)[s,s^{-1}]$, since all powers of $\\pi$ are nonzero. Thus $R_d=Ae_d$. For $N\\geq1$, the degree-$d$ part of $\\mathfrak m^N$ is $\\pi^{q(N,d)}Ae_d$, where $q(N,d)=\\max(0,\\lceil(N-|d|)/2\\rceil)$. Indeed a reduced monomial $\\pi^je_d$ has original length $2j+|d|$; the monomials of length at least $N$ generate $\\mathfrak m^N$, and in each degree their coefficient ideals are generated by the smallest such power of $\\pi$. Consequently $(R/\\mathfrak m^N)_d=(A/\\pi^{q(N,d)})e_d$. For each fixed $d$, the exponents $q(N,d)$ increase to infinity and attain every nonnegative integer. A compatible family in these quotients therefore determines exactly a compatible family modulo all positive powers of $\\pi$, and conversely. The assumed completeness and separatedness of $A$ give $R_d\\xrightarrow{\\sim}\\varprojlim_N(R/\\mathfrak m^N)_d$ for every $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent monomial computation expanding Section 2 Claim 3, printed p.3; completeness is exactly the hypothesis of the item."
+   }
+  },
+  {
+   "text": "We spell out the equivariant square-zero lifting argument. Suppose $D'\\twoheadrightarrow D$ is a graded $R$-algebra surjection with homogeneous kernel $J$, $J^2=0$, and $f_0:C\\to D$ is a graded $R$-algebra map. Smoothness of $I\\to X$, in the affine lifting definition [def-sbc-smooth-morphisms], supplies an ungraded lift $f:C\\to D'$. For homogeneous $c\\in C_d$, define $g(c)$ as the degree-$d$ component of $f(c)$, extending additively over the finite homogeneous decomposition. Write $f(c)=g(c)+\\epsilon_c$. All off-degree components lie in $J$, since $f_0$ preserves degrees. For $c\\in C_d$, $b\\in C_e$, the degree-$d+e$ component of $f(c)f(b)$ is $g(c)g(b)$: each term containing exactly one off-degree component has the wrong degree, and $\\epsilon_c\\epsilon_b=0$. Hence $g(cb)=g(c)g(b)$. Also $g(1)=1$ and $g(r)=r$ for homogeneous $r\\in R$ because $f$ is an $R$-algebra map. Additivity and these homogeneous identities show that $g$ is a graded $R$-algebra lift of $f_0$.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "more-morphisms.tex Tag 02H0 (definition-formally-smooth); elementary homogeneous correction of a smooth lift, expanding the linear-reductivity sentence in Section 2 Claim 3."
+   }
+  },
+  {
+   "text": "Set $D_N=R/\\mathfrak m^N$ for $N\\geq1$. The given isomorphism supplies a graded $R$-algebra map $f_1:C\\to D_1$. For each $N\\geq1$, $D_{N+1}\\twoheadrightarrow D_N$ is graded and its kernel $\\mathfrak m^N/\\mathfrak m^{N+1}$ has square zero because $2N\\geq N+1$. Apply Step 4 successively, choosing $f_{N+1}$ lifting $f_N$. This yields compatible graded maps $f_N:C\\to D_N$ for all $N$, starting with the specified map, without any triviality assumption on $P|_o$ or $Q|_o$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Induction through successive first order thickenings; paper Lemma 3.3, printed p.4, and Section 2 Claim 3."
+   }
+  },
+  {
+   "text": "For each homogeneous $c\\in C_d$, Step 3 gives a unique $\\phi_d(c)\\in R_d$ with residues $f_N(c)$ for all $N$. Define $\\phi(\\sum_dc_d)=\\sum_d\\phi_d(c_d)$; this is a finite sum for every element of $C$. Additivity, $\\phi(1)=1$, $\\phi(r)=r$ for $r\\in R$, and $\\phi(cb)=\\phi(c)\\phi(b)$ follow by reducing each homogeneous identity modulo every $\\mathfrak m^N$ and using the injectivity in Step 3 in the relevant degree. Thus $\\phi:C\\to R$ is a graded $R$-algebra map lifting every $f_N$. By Step 2 it gives an equivariant section $X\\to I$. By Step 1 this section is an equivariant right $H$-torsor isomorphism $P\\simeq Q$; its restriction to $o=X_1$ is the prescribed $\\alpha_0$. Only the algebraization of the chosen compatible family is unique; the successive lifts were choices, so we assert fullness alone.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent degreewise assembly; compare Section 2 Claim 3, last graded-homomorphism paragraph, printed p.3; Lemma 3.3, conclusion, printed p.4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-torsor-isom-affine-smooth",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Agent affine proof of the nodal restriction assertion. Compare Alper--Halpern-Leistner--Heinloth, Lemma 3.3, printed p.4 and Section 2 Claim 3, printed p.3; author-hosted paper read remotely, WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a complete DVR multiplicative group equivariant torsors on st equals uniformizer have isomorphisms lifting from the closed fixed point",
+   "results": "Valuation.Uniformizer.ext: For a rank one discrete valuation $ v $ from a ring $ A $ to a linearly ordered commutative group with zero $ \\Gamma $, if two uniformizers $ x $ and $ y $ have the same image in the valuation ring $ ; Valuation.Uniformizer.ext_iff: For any two uniformizers $x$ and $y$ of a rank one discrete valuation $v$, $x = y$ if and only if their corresponding elements in the valuation ring $v.\text{integer}$ are equal, i.e., $x.\text{val} = y; Valuation.exists_isUniformizer_of_isCyclic_of_nontrivial: For a valuation $ v $ with cyclic and nontrivial value group $ \\Gamma $, there exists an element $ \\pi $ in the valuation subring $ K_0 $ such that $ \\pi $ is a uniformizer for $ v $, i.e., $ v(\\pi) $; IsArithFrobAt.mul_inv_mem_inertia: If $\\sigma$ and $\\sigma'$ satisfy the arithmetic Frobenius condition at an ideal $Q \\subseteq S$, then the product $\\sigma \\cdot (\\sigma')^{-1}$ lies in the inertia subgroup of the additive subgroup $; ValuationSubring.inertiaSubgroup: The inertia subgroup of a valuation subring $ A $ is the subgroup of its decomposition subgroup consisting of all $ K $-algebra automorphisms of $ L $ that act trivially on the residue field of $ A $.; CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply: There exists a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\mathrm{Aut}(F) $ of the fiber functor $ F : \\mathcal{C} \\to \\text{Fintype} $, establ; ValuationSubring.decompositionSubgroup: The subgroup of $K$-algebra automorphisms of $L$ that stabilize the valuation subring $A$, consisting of all automorphisms $\\sigma \\in \\text{Aut}_K(L)$ satisfying $\\sigma(A) = A$. This is the stabiliz; InfiniteGalois.limitToAlgEquiv_apply: The function constructs an algebra equivalence (field automorphism) of $ K $ induced by an element $ g $ of the profinite Galois group $ \\text{Gal}(K/k) $, which fixes the base field $ k $ and preserv",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\"",
+   "results": "AddTorsor: An `AddTorsor G P` gives a structure to the nonempty type `P`,\nacted on by an `AddGroup G` with a transitive and free action given\nby the `+ᵥ` operation and a corresponding subtraction given by the\n`-; Torsor: A `Torsor G P` gives a structure to the nonempty type `P`,\nacted on by a `Group G` with a transitive and free action given\nby the `•` operation and a corresponding division given by the\n`/ₛ` operation; addGroupIsAddTorsor: **Alias** of `AddGroup.instAddTorsor`.\n\n---\n\nAn `AddGroup G` is a torsor for itself.; AddGroup.instAddTorsor: An `AddGroup G` is a torsor for itself.; Group.instTorsor: A `Group G` is a torsor for itself.; AddTorsor.nonempty:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : AddGroup G} [self : AddTorsor G P] : Nonempty P; Torsor.nonempty:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : Group G} [self : Torsor G P] : Nonempty P; AddTorsor.toVSub:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : AddGroup G} [self : AddTorsor G P] : VSub G P; Torsor.toSDiv:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : Group G} [self : Torsor G P] : SDiv G P; AddTorsor.subsingleton_iff:  (G : Type u_1) (P : Type u_2) [AddGroup G] [AddTorsor G P] : Subsingleton G ↔ Subsingleton P; Torsor.subsingleton_iff:  (G : Type u_1) (P : Type u_2) [Group G] [Torsor G P] : Subsingleton G ↔ Subsingleton P; AddTorsor.toAddAction:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : AddGroup G} [self : AddTorsor G P] : AddAction G P",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant|torsor|coherent.*complet",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration for this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fullness of restriction of principal bundles on the nodal test stack to the residual gerbe",
+   "results": "instFullLightDiagram'LightDiagramToLightFunctor: The functor mapping light diagrams' to light diagrams is full, meaning that for any two light diagrams' $X$ and $Y$, every morphism between their corresponding light diagrams factors through the funct; AlgebraicGeometry.Scheme.instFullEtaleOverForget: The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \to X$ and $g : Z \to X$, every morph; AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace_full: The forgetful functor from sheafed spaces over a category $\\mathcal{C}$ to presheafed spaces over $\\mathcal{C}$ is full. This means that for any two sheafed spaces, every morphism between their underl; instFullLightDiagramProfiniteLightDiagramToProfinite: The canonical functor from light diagrams to profinite spaces, which maps each light diagram to the apex of its limiting cone in the category of profinite spaces, is a full functor. This means that fo; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful: The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.; AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace: The forgetful functor from the category of schemes to the category of locally ringed spaces is full, meaning that for any two schemes, every morphism between their underlying locally ringed spaces ari; AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace: The forgetful functor from the category of schemes to the category of locally ringed spaces is fully faithful, meaning it induces a bijection between hom-sets of schemes and hom-sets of their underlyi; CategoryTheory.MorphismProperty.instFullOverTopOverForget: The forgetful functor from the over category equipped with the top morphism property to the standard over category is full. This means that for any morphism in the standard over category, there exists",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant torsor isomorphism extends from origin over complete nodal surface",
+   "results": "Equiv.vaddConst: For a fixed point $p$ in an additive torsor $P$ over an additive group $G$, the map $g\\mapsto g+_v p$ is a bijection from $G$ to $P$ whose inverse sends $p'$ to $p'-_v p$.; AddTorsor.noConfusion: A structure on a type $\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\alpha$; Homeomorph.vaddConst: For any element $ p $ in a topological additive torsor $ P $ over an additive topological group $ V $, the map $ V \to P $ defined by adding $ p $ to elements of $ V $ is a homeomorphism, with continui; Equiv.constVSub: For a fixed point $ p $ in the additive torsor $ P $ over an additive group $ G $, the function mapping each point $ q \\in P $ to $ p - q $ is a bijection between $ P $ and $ G $, with the inverse fun; AffineEquiv.vaddConst: Given a point $ b $ in an affine space $ P_1 $ over a ring $ k $, this constructs the affine equivalence from the underlying vector space $ V_1 $ to $ P_1 $ defined by translating vectors via addition; instProperVAdd: The additive group action of $ V $ on the topological torsor $ P $ is proper with respect to the given topologies on $ V $ and $ P $.; AffineEquiv.ctorIdx: A structure representing an affine equivalence between two affine spaces $ P_1 $ and $ P_2 $ over a ring $ k $, where $ P_1 $ is a torsor over the $ k $-module $ V_1 $ and $ P_2 $ is a torsor over the; IsometryEquiv.constVSub: For a fixed point $ x $ in the normed additive torsor $ P $ over a seminormed additive commutative group $ V $, the function mapping each point $ q \\in P $ to $ x - q $ is an isometric equivalence bet",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant principal bundles on the nodal scheme st equals uniformizer over a complete discrete valuation ring have isomorphisms lifting from the origin",
+   "results": "{\"t\": \"2026-10-24T04:15:43Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant principal bundles on the nodal scheme st equals uniformizer over a complete discrete valuation ring have isomorphisms lifting from the origin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\"], \"digest\": \"4fb9dd28b2e49892\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern stalks, affine schemes, restriction of integral morphisms, or abstract torsors. None gives this equivariant group-scheme restriction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\"",
+   "results": "{\"t\": \"2026-10-24T04:17:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddTorsor\", \"Torsor\", \"addGroupIsAddTorsor\", \"AddGroup.instAddTorsor\", \"Group.instTorsor\", \"AddTorsor.nonempty\", \"Torsor.nonempty\", \"AddTorsor.toVSub\"], \"digest\": \"152f29f523dd7238\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern stalks, affine schemes, restriction of integral morphisms, or abstract torsors. None gives this equivariant group-scheme restriction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|coherent.*complet|equivariant.*torsor",
+   "results": "{\"t\": \"2026-10-24T04:18:37Z\", \"tool\": \"grep\", \"query\": \"nodal|coherent.*complet|equivariant.*torsor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern stalks, affine schemes, restriction of integral morphisms, or abstract torsors. None gives this equivariant group-scheme restriction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of multiplicative group equivariant torsors over a complete nodal scheme to its closed origin is full",
+   "results": "{\"t\": \"2026-10-24T04:18:37Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of multiplicative group equivariant torsors over a complete nodal scheme to its closed origin is full\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"MulEquiv.unzero\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"Equiv.vaddConst\", \"AddTorsor.noConfusion\", \"MulEquiv.restrictRootsOfUnity\", \"AddTorsor.subsingleton_iff\", \"AlgebraicGeometry.stalkClosedPointIso\"], \"digest\": \"45c3c1e65349be5f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern stalks, affine schemes, restriction of integral morphisms, or abstract torsors. None gives this equivariant group-scheme restriction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-dvr-cocharacter-cartan",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Lemma 3.3 and its proof, printed p.4, expressed as equivariant torsors on the nodal scheme; Section 2, Claim 3, printed p.3, gives the degreewise algebraization calculation.",
+   "via": [
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nodal-equivariant-torsor-rigidity",
+  "worker": "stage1",
+  "summary": "Q85: no exact project attachment. Kept statement unchanged. Replaced the missing proof by the affine Isom argument, explicit Laurent-coaction grading, nodal degreewise completion, elementary homogeneous correction of a smooth square-zero lift, induction, and algebraization. One genuinely non-elementary new statement-only lemma gives affine smooth representability of the torsor Isom functor over arbitrary bases. Fixed-point lifting with trivial test-ring action was checked and not misapplied. Source absent locally is reported WANTED, and the assembled proof is marked agent-written.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Lemma 3.3 and its proof, printed p.4, expressed as equivariant torsors on the nodal scheme; Section 2, Claim 3, printed p.3, gives the degreewise algebraization calculation. Steps 1--6 realize the nodal torsor restriction input to the complete-DVR Cartan argument using the Section 2 Claim 3 affine calculation, without altering the higher unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "The generic affine fibre-product/tensor identity is used only to expand G_m coactions as Laurent sums; it is independent of the higher six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-b90ade2f1",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-b90ade2f1 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, with every cited statement. The item's statement is unchanged and matches its use in step 2 of lem-sfb-complete-dvr-cocharacter-cartan. Step 1 builds the conjugation action on the new node's Isom scheme through its representing bijection; α_0 gives an equivariant section over the fixed point o. Step 2 turns Laurent coactions into gradings and is correct. Step 3: R is free on e_d (independence shown by t↦π/s into Frac(A)[s^±]); (m^N)_d=π^{max(0,⌈(N−|d|)/2⌉)}Ae_d, recomputed at (1,0),(1,1),(3,−2),(4,0); limits are taken degree by degree, using the completeness hypothesis. Step 4: the graded correction of the smooth lift (def-sbc-smooth-morphisms) is right, since off-degree parts lie in J, cross terms have the wrong degree and J²=0. Steps 5 and 6 (induction with 2N≥N+1, then degreewise assembly) are right. New node lem-sfb-torsor-isom-affine-smooth is true by fppf trivialization over P×_YQ and the Stacks results I opened: 049C remark-fun-with-torsors, 0245 lemma-affine and 02VL lemma-descending-property-smooth. It is not a duplicate: lem-sfb-smooth-affine-group-torsor-representability needs a base over a field, the stackification and action-groupoid nodes are over a field, and lem-galois-affine-flat-descent-effective is only the descent tool. It is strictly smaller than the item. The Alper–Halpern-Leistner–Heinloth paper is not in literature; it is reported WANTED and proof_origin is agent. No SGA text. The route stays in sk-thm-sf-ctf-stability apart from a Mathlib leaf, so no tool_uses are needed. Four kinds of Mathlib search are recorded, proof_deps equals the union of uses, and the blueprint fields are inherited as the tool gives them. No changes were made."
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-bounded-line-polynomial-interpolation",
+ "kind": "statement",
+ "title": "Uniformly bounded affine-line polynomials give finite-coordinate polynomials",
+ "statement": "Let $K$ be an infinite field [def-weil-field], $W$ a $K$-vector space, $D\\geq0$ an integer, and $F:W\\to K$ a function. Suppose for every $v,w\\in W$ there is $q_{v,w}\\in K[T]$ of degree at most $D$ [def-weil-polynomial-ring] with $F(tv+w)=q_{v,w}(t)$ for every $t\\in K$. Then for every $r\\geq0$ and every $e_1,\\ldots,e_r\\in W$ there is $P\\in K[X_1,\\ldots,X_r]$ [def-weil-pbc-mv-polynomial-ring] of total degree at most $D$ with $F(\\sum_i x_i e_i)=P(x_1,\\ldots,x_r)$ for every $(x_i)\\in K^r$. A polynomial over an infinite field is determined by its values on $K^r$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 10.12 proof, printed p.47, with the uniform degree bound supplied by Proposition 10.13; bounded version and total-degree argument"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose pairwise distinct $c_0,\\ldots,c_D\\in K$: at each of the $D+1$ choices only finitely many field elements have been excluded, whereas $K$ is infinite. We prove by induction on $n\\geq0$, simultaneously for every $w\\in W$ and every tuple $e_1,\\ldots,e_n$, that $G_{n,w}(x)=F(w+\\sum_{i=1}^n x_i e_i)$ is represented by a polynomial of degree at most $D$ in each separate variable. For $n=0$, use the constant polynomial $F(w)$; the ring in no variables is $K$ by its finite-monomial description [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.12 proof, printed p.47, using the uniform degree bound; agent expansion of total-degree and determination arguments."
+   }
+  },
+  {
+   "text": "Assume the induction claim for $n-1$. For each $j=0,\\ldots,D$, apply it at the translate $w+c_je_n$ to get $P_j\\in K[X_1,\\ldots,X_{n-1}]$. Put $P=\\sum_j P_j L_j(X_n)$ with $L_j$ from [lem-sfb-lagrange-reconstruction]. For a fixed $x\\in K^{n-1}$, the hypothesis supplies a polynomial $q_x(T)$ of degree at most $D$ representing $F(Te_n+w+\\sum_{i<n}x_ie_i)$. Its values at $c_j$ are $P_j(x)$. Reconstruction therefore gives $P(x,t)=\\sum_j P_j(x)L_j(t)=q_x(t)$ for all $t\\in K$. Each $L_j$ is a product of $D$ linear factors, so expanding this displayed sum shows that each variable of $P$ has exponent at most $D$: for the first $n-1$ variables this follows from each $P_j$, and for the last from each $L_j$. Polynomial substitution and this coefficient expansion are the operations of [def-weil-pbc-mv-polynomial-ring]. This proves the induction claim, including repeated or zero $e_i$.",
+   "uses": [
+    "lem-sfb-lagrange-reconstruction",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.12 proof, printed p.47, using the uniform degree bound; agent expansion of total-degree and determination arguments."
+   }
+  },
+  {
+   "text": "Polynomial determination follows by induction on $r$. Subtract two polynomials with the same values to obtain $R$ vanishing on $K^r$. For $r=0$, its single value is its constant coefficient. For $r\\geq1$, collect monomials as $R=\\sum_{i=0}^m A_i(X_1,\\ldots,X_{r-1})X_r^i$, using [def-weil-pbc-mv-polynomial-ring]. At each $x\\in K^{r-1}$ the univariate polynomial $\\sum_i A_i(x)T^i$ vanishes at every $t\\in K$; [lem-trf-polynomial-infinite-evaluation-identity], with $q=0$, says this polynomial is zero. Thus every $A_i(x)=0$; induction gives $A_i=0$ and hence $R=0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-polynomial-infinite-evaluation-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.12 proof, printed p.47, using the uniform degree bound; agent expansion of total-degree and determination arguments."
+   }
+  },
+  {
+   "text": "Apply step 2 with $w=0,n=r$ to obtain a representing polynomial $P$. If $r=0$ or $P=0$, it has total degree at most $D$ (the zero polynomial is allowed). Otherwise write $P=\\sum_\\alpha a_\\alpha X^\\alpha$ and let $m$ be the maximum $|\\alpha|=\\sum_i\\alpha_i$ with $a_\\alpha\\ne0$. If $m>D$, the polynomial $H=\\sum_{|\\alpha|=m}a_\\alpha X^\\alpha$ is nonzero and homogeneous of degree $m$. By [lem-trf-infinite-field-top-form-direction] choose $v\\in K^r$ with $H(v)\\ne0$. Direct monomial substitution gives $P(Tv)=\\sum_\\alpha a_\\alpha v^\\alpha T^{|\\alpha|}$, whose coefficient of $T^m$ is $H(v)\\ne0$ and with no terms above $m$. Thus it has degree $m$. But its values are $F(tu)$ for $u=\\sum_i v_i e_i$, which the original hypothesis with $w=0$ represents by $q_{u,0}$ of degree at most $D$. The two univariate polynomials agree at every point of the infinite field, so [lem-trf-polynomial-infinite-evaluation-identity] makes them equal, contradicting $m>D$. Therefore $P$ has total degree at most $D$, completing both conclusions.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-infinite-field-top-form-direction",
+    "lem-trf-polynomial-infinite-evaluation-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.12 proof, printed p.47, using the uniform degree bound; agent expansion of total-degree and determination arguments."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-lagrange-reconstruction",
+  "lem-trf-polynomial-infinite-evaluation-identity",
+  "lem-trf-infinite-field-top-form-direction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 10.12 proof, printed p.47, using the uniform degree bound; agent expansion of total-degree and determination arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "polynomial.*line|line.*polynomial|IsPolynomial|isPolynomial",
+   "results": "7 hits; searched Algebra/MvPolynomial; Mathlib/Algebra/MvPolynomial/Basic.lean, Mathlib/Algebra/MvPolynomial/Basic.lean, Mathlib/Algebra/MvPolynomial/Coeff.lean, Mathlib/Algebra/MvPolynomial/Coeff.lean, Mathlib/Algebra/MvPolynomial/Coeff.lean, Mathlib/Algebra/MvPolynomial/Derivation.lean, Mathlib/Algebra/MvPolynomial/Derivation.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A function with polynomial restrictions to affine lines of bounded degree is a polynomial on every finite dimensional subspace",
+   "results": "8 hits; searched all Mathlib / remote service; Polynomial.degree_restriction, MvPolynomial.restrictDegree, MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite, HasFiniteFPowerSeriesAt.cpolynomialAt, CPolynomialOn.mono, Polynomial.span_le_degreeLE_of_finite, IsPoly, MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictTotalDegreeOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"line\"",
+   "results": "12 hits; searched all Mathlib / remote service; MvPolynomial.linearMap_ext, MvPolynomial.linearMap_ext_iff, MvPolynomial.linearIndependent_X, MvPolynomial.DirectSum.coeLinearMap_eq_finsum, MvPolynomial.DirectSum.coeLinearMap_eq_dfinsuppSum, LinearMap.toMvPolynomial_id, LinearMap.toMvPolynomial, LinearMap.toMvPolynomial_isHomogeneous",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A function on a vector space over an infinite field whose restriction to each affine line is polynomial of uniformly bounded degree is a multivariable polynomial",
+   "results": "8 hits; searched all Mathlib / remote service; ChevalleyThm.MvPolynomialC.degBound, ChevalleyThm.MvPolynomialC.numBound, MvPolynomial.R, ChevalleyThm.degBound, MvPolynomial.map_restrict_dom_evalₗ, MvPolynomial.indicator_mem_restrictDegree, MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination, MvPolynomial.instInhabitedR",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded degree polynomial functions on affine lines characterize multivariate polynomial functions by interpolation",
+   "results": "8 hits; searched all Mathlib / remote service; MvPolynomial.funext, MvPolynomial.funext_iff, MvPolynomial.funext_set, MvPolynomial.funext_set_iff, Lagrange.interpolate_poly_eq_self, MvPolynomial.map_restrict_dom_evalₗ, Lagrange.funEquivDegreeLT, Polynomial.exists_eq_polynomial",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*line|line.*polynomial|IsPolynomial|isPolynomial",
+   "results": "{\"t\": \"2026-10-23T11:46:57Z\", \"tool\": \"grep\", \"query\": \"polynomial.*line|line.*polynomial|IsPolynomial|isPolynomial\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/Coeff.lean\", \"Mathlib/Algebra/MvPolynomial/Coeff.lean\", \"Mathlib/Algebra/MvPolynomial/Coeff.lean\", \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"Mathlib/Algebra/MvPolynomial/Derivation.lean\", \"Mathlib/Algebra/MvPolynomial/Derivation.lean\"], \"digest\": \"8871f08faa9ce6ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: reconstruction and finite-field interpolation hits do not assert the bounded-affine-line criterion; they are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial on every affine line with a uniform degree bound implies multivariate polynomial of bounded total degree",
+   "results": "{\"t\": \"2026-10-23T11:46:57Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial on every affine line with a uniform degree bound implies multivariate polynomial of bounded total degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.totalDegree\", \"MvPolynomial.aeval_natDegree_le\", \"MvPolynomial.IsHomogeneous.totalDegree_le\", \"ChevalleyThm.MvPolynomialC.degBound\", \"MvPolynomial.restrictTotalDegree\", \"MvPolynomial.totalDegree_le_degrees_card\", \"MvPolynomial.degreeOf\", \"MvPolynomial.IsHomogeneous\"], \"digest\": \"d08b04fc5ac7268f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: reconstruction and finite-field interpolation hits do not assert the bounded-affine-line criterion; they are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"line\"",
+   "results": "{\"t\": \"2026-10-23T11:46:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"line\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.linearMap_ext\", \"MvPolynomial.linearMap_ext_iff\", \"MvPolynomial.linearIndependent_X\", \"MvPolynomial.DirectSum.coeLinearMap_eq_finsum\", \"MvPolynomial.DirectSum.coeLinearMap_eq_dfinsuppSum\", \"LinearMap.toMvPolynomial_id\", \"LinearMap.toMvPolynomial\", \"LinearMap.toMvPolynomial_isHomogeneous\"], \"digest\": \"d6ffbce320f39298\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: reconstruction and finite-field interpolation hits do not assert the bounded-affine-line criterion; they are ingredients only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A function on an infinite field vector space polynomial of degree at most D on every affine line is polynomial of total degree at most D in finite coordinates",
+   "results": "{\"t\": \"2026-10-23T11:47:01Z\", \"tool\": \"leanfinder\", \"query\": \"A function on an infinite field vector space polynomial of degree at most D on every affine line is polynomial of total degree at most D in finite coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.degBound\", \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"ChevalleyThm.MvPolynomialC.degBound_zero\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"Polynomial.cardPowDegreeIsAdmissible\", \"ChevalleyThm.MvPolynomialC.numBound\"], \"digest\": \"f158feb1393c3a9d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: reconstruction and finite-field interpolation hits do not assert the bounded-affine-line criterion; they are ingredients only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separate polynomial functions of bounded degree are multivariate polynomials by Lagrange interpolation over infinite fields",
+   "results": "{\"t\": \"2026-10-23T11:47:43Z\", \"tool\": \"leanfinder\", \"query\": \"Separate polynomial functions of bounded degree are multivariate polynomials by Lagrange interpolation over infinite fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Lagrange.funEquivDegreeLT\", \"ChevalleyThm.MvPolynomialC.degBound\", \"MvPolynomial.indicator_mem_restrictDegree\", \"Lagrange.interpolate_poly_eq_self\", \"MvPolynomial.indicator\", \"Polynomial.exists_eq_polynomial\", \"Lagrange.interpolate\", \"MvPolynomial.map_restrict_dom_evalₗ\"], \"digest\": \"8af278e8bc73f1ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: reconstruction and finite-field interpolation hits do not assert the bounded-affine-line criterion; they are ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-degree-polynomial",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed. Supporting input in Milne Proposition 10.13: Chapter I, Lemma 10.12 proof, printed p.47, with the uniform degree bound supplied by Proposition 10.13; bounded version and total-degree argument",
+   "via": [
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-bounded-line-polynomial-interpolation",
+  "worker": "stage1",
+  "summary": "Checked Milne Lemma 10.12 and Proposition 10.13. Kept the already bounded statement, supplied translated coordinate induction through an explicit Mathlib Lagrange leaf, proved determination by coefficient induction, and supplied the top-homogeneous-part argument for total degree using existing Mathlib leaves. No Lean attachment exists for the whole statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed. Supporting input in Milne Proposition 10.13: Chapter I, Lemma 10.12 proof, printed p.47, with the uniform degree bound supplied by Proposition 10.13; bounded version and total-degree argument Realized here by translated interpolation (steps 1–2), polynomial determination (step 3), and top-degree detection on radial lines (step 4). The current ancestor command returns null; its existing inherited via chain is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-69cbde925",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-69cbde925 (reviewer sub-agent of L); spot-checked: Read Milne AV Ch.I Lemma 10.12 (p.47) and Prop 10.13 (pp.47-48). The item is the uniform-degree version, its statement is unchanged, and its 4 steps are correct. Step 1 is the explicit induction claim over all translates w (base case n=0). Step 2 is Milne's coordinate induction using the new Lagrange leaf: q_x(c_j)=P_j(x), and each separate exponent is at most D. Step 3 is determination by induction on r via Polynomial.eq_of_infinite_eval_eq. Step 4 bounds the total degree using the top form H, a direction with H(v)!=0 (MvPolynomial.funext_set leaf), P(Tv) of degree m, and q_{u,0}. New node lem-sfb-lagrange-reconstruction: Mathlib/LinearAlgebra/Lagrange.lean:362-365 eq_interpolate plus 453-455 interpolate_eq_sum, both verified; it is an exact one-line specialization. I tested it with D=0, q=0 and F_2. My DAG grep found no duplicate, and the node is not a restatement of a clause. Batch-5 flags: lem-trf-polynomial-infinite-evaluation-identity (Roots.lean:156-160) and lem-trf-infinite-field-top-form-direction (Funext.lean:57-72) are generic Mathlib algebra leaves with no proof_deps. Neither is part of the trace-formula or Poincare-duality statements or proofs, so I accept both. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.MvPolynomial.BoundedLinePolynomialInterpolation",
+  "declaration": "MvPolynomial.exists_of_bounded_affine_lines",
+  "file": "lean/Sheaf/Algebra/MvPolynomial/BoundedLinePolynomialInterpolation.lean",
+  "statement": "theorem exists_of_bounded_affine_lines {K : Type u} [Field K] [Infinite K] {W : Type v} [AddCommGroup W] [Module K W] (D : ℕ) (F : W → K) (hF : ∀ v w : W, ∃ q : Polynomial K, q.natDegree ≤ D ∧ ∀ t : K, F (t • v + w) = q.eval t) : (∀ (r : ℕ) (e : Fin r → W), ∃ P : MvPolynomial (Fin r) K, P.totalDegree ≤ D ∧ ∀ x : Fin r → K, F (∑ i : Fin r, x i • e i) = MvPolynomial.eval x P) ∧ (∀ (r : ℕ) (P Q : MvPolynomial (Fin r) K), (∀ x : Fin r → K, MvPolynomial.eval x P = MvPolynomial.eval x Q) → P = Q)",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e6a10e19",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: [Field K][Infinite K], W:Type v module with no finiteness assumption, D:ℕ, hF ∀ v w ∃ q natDegree≤D with F(t•v+w)=q.eval t; conclusion (∀ r e, ∃ P : MvPolynomial (Fin r) K, totalDegree≤D ∧ F(∑ x i • e i)=eval x P) ∧ determination conjunct with no degree restriction. Milne AV I Lemma 10.12 p.47 read; node is the accepted uniform-bound version. Edge cases r=0, D=0, W=0, repeated/zero e_i, char p OK. stmt_deps are Mathlib existing:true records used directly; statement field verbatim; no name collision; proof-leaf lemmas exist (eq_of_infinite_eval_eq, funext_set, Lagrange); node change is lean only; docstrings carry source, blueprint id and 4-step plan; sorry only; report has both sections. No compile needed (no file changed). No findings."
+ }
+}

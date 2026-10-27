@@ -14,35 +14,41 @@
  ],
  "proof": [
   {
-   "text": "For a singleton list the positive Koszul diagram is its two-term factor tensored with R[0]. Remove the tensor unit. In Hom of that factor into R[0], only one Hom-product component survives in each supported degree. Evaluate that component at one. The Hom differential dφ=d_Rφ-(-1)^q φd_K, in degrees -1 and 0, gives multiplication by a^(n+1). Thus this dual is the negative cone used for V_n. Dualizing the forward map (1,a) gives the inverse map (a,1). Dualizing the degree-zero projection gives the cone inclusion. Tensor symmetry changes P tensor dual to dual tensor P, with the standard total signs and no sign on the augmentation. These equations give an augmentation-compatible isomorphism of strict towers.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Apply the normalized strict Roos comparison to the two towers. Its naturality carries the strict tower isomorphism to the isomorphism of the displayed product cones and total derived inverse limits, and its augmentation clause carries the zero-coordinate lift to the specified derived-limit unit.",
+   "text": "Use the strict singleton dual/principal tensor tower isomorphism s, including its degreewise augmentation equation. Let alpha be the ordinary-limit lift of the principal augmentation. The ordinary limit functor applied to s, followed by the canonical complex-limit/termwise-limit isomorphism, carries alpha to ringedKoszulLimitUnit. Prove this by composing with each limit projection in every cochain degree; the equations reduce exactly to the augmentation clause for s.",
    "uses": [
-    "lem-weil-strict-roos-comparison"
+    "lem-pur-principal-koszul-dual-tower-comparison",
+    "lem-sf-strict-roos-derived-limit-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The unique normalized comparison between right-derived inverse-limit functors identifies the result with D.inverseLimit. Compose with D.tensorFactors at P. Naturality of the localized strict unit, applied to the specified representative isomorphism for Q(P), identifies this composite with D.unit(Q(P)). This produces the required isomorphism and unit equation. The finite free dual factors preserve quasi-isomorphisms. All equations remain valid for P=0, a=0 and a invertible.",
+   "text": "Use roosAugment_eq and roosι_natural to identify the Roos-transported augmentation with alpha followed by the limit transport and roosι. The strict Roos derivation gives RF, kappa and its normalized right-derived unit. Transport D.comparison along the canonical termwise-limit isomorphism, obtaining eta and its right-derived property. The unique right-derived comparison rho from RF to D.inverseLimit satisfies Q(roosι) kappa rho = eta. Compose Q(Roos(s)), kappa, rho and D.inverseLimit applied to the inverse of D.tensorFactors at P.",
    "uses": [
-    "lem-weil-pbc-ringed-cech-koszul-dual-kflat"
+    "lem-weil-strict-roos-derivation",
+    "lem-sf-strict-roos-derived-limit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing localized unit naturality lemma unit_app_Q identifies D.unit(Q(P)) with D.unitOnComplex(P). Rewrite the composite using the Roos augmentation equation, the normalized right-derived comparison equation and the ordinary-limit augmentation equation from step 1. The result is precisely the defining composite of D.unitOnComplex. No K-flat representative is chosen.",
+   "uses": [
+    "lem-weil-pbc-flat-scalar-koszul-tower-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-pbc-ringed-cech-koszul-dual-kflat"
+  "lem-pur-principal-koszul-dual-tower-comparison",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-strict-roos-derivation",
+  "lem-weil-pbc-flat-scalar-koszul-tower-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B4",
-  "date": "2026-10-21",
-  "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 0A0E, proof of lemma-derived-completion-koszul: dual finite Koszul complexes and the inverse tensor tower; sites-cohomology.tex, Tag 0941, strict Roos augmentation normalization."
+  "group": "U7",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A0E and 0941; finite strict calculation isolated, normalized derived-limit assembly and representative unit equation proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -122,13 +128,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "U7",
   "result": "pass",
-  "landing": "20261021T182247-L-1170264",
+  "landing": "20261025T204950-L-3070366",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

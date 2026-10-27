@@ -1,0 +1,148 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-square-resolution-local-class",
+ "kind": "statement",
+ "title": "Agreement of classical resolution classes and derived local classes",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $F$ an $O_X$-module, $q\\ge0$, $I$ an injective resolution of $F$, $V\\subseteq Y$ open, $U=f^{-1}V$, and $R$ augmentation-preserving restricted-resolution data [def-weil-pbc-flat-base-change-open-choices]. Write $c$ for squareLocalResolutionComparison [def-weil-pbc-derived-square-local-models] and $\\kappa:H^q(Rf_*F[0])\\simeq R^qf_*F$ for schemeSingleCohomologyComparison of that node. Then the classical class map resolutionSectionClass followed by $(I.isoRightDerivedObj(f_*,q))^{-1}$ equals $c;\\Theta^{Rf_*F[0]}_V;\\Gamma(V,\\kappa)$, where $\\Theta$ is [lem-weil-pbc-derived-adjunction-top-edge]. The same formula holds if $U$ is any open supplied with an equality to $f^{-1}V$, transporting R.sections by that equality.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images; Tag 01FB, remark-explain-arrow; Tags 0BKJ and 0D5X; normalization on the fixed K-injective representatives"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-weil-pbc-derived-adjunction-top-edge",
+  "def-weil-pbc-derived-square-local-models"
+ ],
+ "proof": [
+  {
+   "text": "Eliminate the equality U=f⁻¹(V). The extended supplied injective resolution is K-injective. Apply the complex-level local-class computation with L=I.cocomplex and r given by the single-object comparison followed by the localized augmentation. Precompose by the three factors of the supplied restricted-resolution section comparison, and postcompose by evaluation of I.isoRightDerivedObj(f_*,q).inv.",
+   "uses": [
+    "lem-weil-pbc-direct-image-complex-local-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the total/classical comparison on the supplied injective resolution. Expand isoRightDerivedObjCochainComplex: its inverse is integer homology of mapExtendIso, then extendHomologyIso, then isoRightDerivedObj.inv. Evaluate on V. These are exactly the final factors of the preceding complex calculation. Both local computations use the same short-complex evaluation mapHomologyIso. Functoriality, identity transport of opens and associativity now give the displayed equality with squareLocalResolutionComparison.",
+   "uses": [
+    "lem-weil-pbc-total-classical-resolution-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-direct-image-complex-local-class",
+  "lem-weil-pbc-total-classical-resolution-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4, 01FB, 0BKJ and 0D5X; separate the complex local-class computation from the total/classical resolution comparison, then paste and evaluate the two calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from cohomology of sections of an injective resolution to sections of its cohomology sheaf agrees with the derived sheafification unit, and coefficient maps act by their resolution roofs.",
+   "results": "8 hits: toSheafify, toSheafification, TopCat.Presheaf.toSheafify, Functor.rightDerived_map_eq, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, toSheafify_app_apply, Sheaf.sheafifyCocone_ι_app_val, GrothendieckTopology.instIsLocallyInjectiveToSheafify. These supply generic ingredients; no normalized derived/classical local comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local cohomology class naturality derived direct image comparison of commutative square",
+   "results": "8 hits: four localCohomology diagram declarations, LocalizerMorphism.rightDerivedFunctorComparison_fac_app, and three InjectiveResolution/Sheaf naturality declarations; no sheaf-of-modules square comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|topEdgeLocalClass|homologyRightDerivedFunctorObjSingleFunctorIso",
+   "results": "msearch Mathlib grep: 0 hits. Local rg in the project found the existing definitions and specialized flat-base-change and stalk comparisons. No derived/classical comparison for arbitrary coefficient square.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyRightDerivedFunctorObjSingleFunctorIso\"; \"mapHomologyIso\", \"homologyπ\"",
+   "results": "Both recorded msearch queries returned zero hits; exact signatures were read from the project source.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedSquareLocalClasses",
+  "date": "2026-10-25",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison. Agreement of classical resolution classes and derived local classes",
+   "via": [
+    "lem-weil-pbc-derived-square-local-classes",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareResolutionLocalClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareResolutionLocalClass.lean",
+  "declaration": "AlgebraicGeometry.squareResolution_localClass",
+  "declarations": [
+   "AlgebraicGeometry.squareResolution_localClass"
+  ],
+  "statement": "theorem squareResolution_localClass {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (F : X.Modules) (q : ℕ) (V : Y.Opens) (I : InjectiveResolution F)\n    (U : X.Opens) (hU : U = f ⁻¹ᵁ V) (R : RestrictedResolutionSections I U) :\n    resolutionSectionClass R.resolution\n        (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)\n        V (R.sections ≪≫ eqToIso (congrArg (fun W ↦\n          ((RingedSpace.openModuleSections X.toRingedSpace W).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj I.cocomplex) hU)) q ≫\n      Hom.app (I.isoRightDerivedObj (pushforward f) q).inv V =\n    (squareLocalResolutionComparison f F q V I U hU R).hom ≫\n      (RingedSpace.topEdgeLocalClass Y.toRingedSpace (q : ℤ)\n        ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))).app (op V) ≫\n      Hom.app (schemeSingleCohomologyComparison f F q).hom V",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f3b98",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T202016-L-2663496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T100255-L-4168946",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-space-universal-first-order-thickening",
+ "kind": "definition",
+ "title": "Universal first-order thickening of an algebraic space over another",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $A,A^{+},X$ algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Given $f:A\\to X$, $i:A\\to A^{+}$ and $f^{+}:A^{+}\\to X$, say that $(i,f^{+})$ is a universal first-order thickening of $f$ if $i$ is a first-order thickening [def-sfb-space-square-zero-extension-data], $f^{+}\\circ i=f$, and the following holds: for every pair of algebraic spaces $T,T^{+}$ over $S$, every first-order thickening $j:T\\to T^{+}$, every $b:T^{+}\\to X$ and every $a:T\\to A$ satisfying $f\\circ a=b\\circ j$, there exists exactly one $a^{+}:T^{+}\\to A^{+}$ such that $a^{+}\\circ j=i\\circ a$ and $f^{+}\\circ a^{+}=b$. This is a predicate on the specified maps; it asserts no existence of universal thickenings.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-square-zero-extension-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0601, section-universal-thickening, equation-universal-first-order-thickening."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal first order thickening of a morphism of algebraic spaces, unique extension from every square zero thickening",
+   "results": "{\"t\": \"2026-10-24T01:23:48Z\", \"tool\": \"leansearch\", \"query\": \"Universal first order thickening of a morphism of algebraic spaces, unique extension from every square zero thickening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TrivSqZeroExt.algHom_ext'\", \"TrivSqZeroExt.lift.congr_simp\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.Extension.infinitesimal\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"liftOfDerivationToSquareZero_apply\", \"AlgebraicGeometry.FormallyUnramified\"], \"digest\": \"35cc1ef3162f3b47\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the landed project definition without copying it."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUniversalSpaceFirstOrderThickening",
+   "results": "{\"t\": \"2026-10-24T01:23:49Z\", \"tool\": \"loogle\", \"query\": \"IsUniversalSpaceFirstOrderThickening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsUniversalSpaceFirstOrderThickening'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the landed project definition without copying it."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUniversalSpaceFirstOrderThickening|universal.*[Tt]hickening",
+   "results": "{\"t\": \"2026-10-24T01:23:48Z\", \"tool\": \"grep\", \"query\": \"IsUniversalSpaceFirstOrderThickening|universal.*[Tt]hickening\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the landed project definition without copying it."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUniversalSpaceFirstOrderThickening in dag/nodes, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search",
+   "results": "Exact-name rg in dag/nodes finds only the theorem node lem-sfb-space-universal-thickening-etale-transfer; no definition node owns this predicate. lean/WeilConjectures has no match; lean/Sheaf defines it in SpaceUniversalThickeningEtaleTransfer.lean:38. The scheme universal-thickening definition node has scheme-only tests and objects. blueprint_refs.py search \"universal first-order thickening\" returned 0 blueprint nodes; ancestor for this item is None.",
+   "date": "2026-10-24",
+   "verdict": "Existing project definition has no definition-node owner."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-conormal",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed). Supporting input in the conormal construction of criteria.tex lemma-lci-unobstructed: existence of the universal first-order thickening and interpretation of its ideal. Definition used to state the universal conormal construction.",
+   "via": [
+    "lem-sfb-space-universal-conormal",
+    "lem-sfb-relative-finite-hilbert-lci-lift",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUniversalThickeningEtaleTransfer",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsUniversalSpaceFirstOrderThickening",
+  "statement": "def IsUniversalSpaceFirstOrderThickening {S : Scheme.{u}}\n    {A A' X : AlgebraicSpace S} (f : A ⟶ X) (i : A ⟶ A') (f' : A' ⟶ X) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 definition-ownership repair for returned immutable head c5ece337eebe. Reuses this landed definition unchanged; no Lean declaration, module or docstring is copied, moved or changed."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac9051790",
+  "group": "Q45",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac9051790",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of c5ece337eebe. Lean byte-identical (sha 518cd662). Item node changes only stmt_deps: theorem deps swapped for def-sfb-space-universal-first-order-thickening (new existing:true, IsUniversalSpaceFirstOrderThickening, matches Stacks 0601 and live def clause by clause, signature verbatim), def-sfb-space-small-etale-direct-image (new existing:true, enlargedSmallDirectImage = transported enlarged direct image, Stacks 03G0-03G2(3), verbatim), def-sfb-space-ideal-power-products (live, unchanged). Theorem nodes kept in proof_deps. Every declaration in the signatures is owned by a stmt_dep definition node; no theorem stmt_dep remains; no live def owner existed for either declaration. Independent reading confirms formal/chartwise unramified helpers, all-space universal existence, common topos + qcoh kernel + unit iso, closed case V(K^2) with sheaf-local K^2 and uniquely normalized conormal iso, normalized canonical maps for all thickening squares; no extra hypotheses or universe restrictions, sorry-only, statement verbatim, report sections present. Live item still unlanded. Advisory: transfer theorem record also lists IsUniversalSpaceFirstOrderThickening (usual existing:true overlap)."
+ }
+}

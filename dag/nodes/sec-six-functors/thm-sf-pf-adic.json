@@ -203,7 +203,18 @@
   "thm-sf-pf-finite"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-pf-adic",
  "split_report": {
@@ -299,5 +310,34 @@
    "AlgebraicGeometry.Etale.isIso_of_derivedComplete_of_isIso_reductionModIdeal"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative: the blueprint item thm-sf-pf-adic's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "In the setting of [def-sf-datum], regard $\\mathcal O_E$ as a condensed ring and\nlet $K\\in\\Dbc(X,\\mathcal O_E)$ and $L\\in\\Dbc(Y,\\mathcal O_E)$ be objects of the\ncondensed integral categories, with reductions\n$K_n=K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}(A_{E,n})_X$ and $L_n$\n([def-pe-derived-complete]). Then the projection transformation of\n[def-sf-pf]\n\n$$\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^{\\mathbf L}_{\\mathcal O_{E,Y}}L\n\\longrightarrow Rf_!\\bigl(K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}Lf^*L\\bigr)\n$$\n\nis an isomorphism in $\\Dbc(Y,\\mathcal O_E)$, and its reduction modulo\n$\\pi_E^n$ is $\\operatorname{PF}_{f,K_n,L_n}$ for every $n$. More generally, a\nmorphism between objects of $\\Dbc(Y,\\mathcal O_E)$ is an isomorphism as soon\nas its reduction modulo $\\pi_E$ is one.",
+  "proof": [
+   {
+    "text": "*The general criterion.* Objects of $\\Dbc(Y,\\mathcal O_E)$ are derived\n$\\pi_E$-complete ([sk-prop-integral-criterion]), and derived complete\ncomplexes form a triangulated subcategory, so the cone $C$ of a morphism\n$u$ in $\\Dbc(Y,\\mathcal O_E)$ is derived complete. Reduction modulo $\\pi_E$ is\nthe cone of multiplication by $\\pi_E$, hence exact, so if $u/\\pi_E$ is an\nisomorphism then $C\\otimes^{\\mathbf L}_{\\mathcal O_{E,Y}}(A_{E,1})_Y=0$ and\n$C=0$ by derived Nakayama ([sk-lem-pe-derived-nakayama]).",
+    "uses": [
+     "sk-lem-pe-derived-nakayama"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The projection formula.* Both sides of $\\operatorname{PF}_{f,K,L}$ lie in\n$\\Dbc(Y,\\mathcal O_E)$: $Rf_!$ ([sk-def-sfb-dc-lower-shriek]) and $Lf^*$ preserve the condensed integral\nconstructible categories, and so does $\\otimes^{\\mathbf L}$ ([sk-lem-int-tensor]).\nReduction $\\mathcal O_E\\to A_{E,n}$ commutes with $Rf_!$, $Lf^*$ and\n$\\otimes^{\\mathbf L}$ through the coefficient comparisons of\n[sk-prop-scalar-six], which respect the units, counits and associativity\nmaps from which $\\operatorname{PF}$ is built in [def-sf-pf]; hence the\nreduction of $\\operatorname{PF}_{f,K,L}$ is $\\operatorname{PF}_{f,K_n,L_n}$. The\nobjects $K_n,L_n$ are finite-Tor constructible over $A_{E,n}$\n([sk-prop-scalar-six]), so $\\operatorname{PF}_{f,K_n,L_n}$ is an isomorphism by\n[thm-sf-pf-finite]. The case $n=1$ and the general criterion show that\n$\\operatorname{PF}_{f,K,L}$ is an isomorphism. This is the argument of\n[det-thm-sf-pf-adic-projection] for a compactifiable $f$ instead of a proper\n$p$.",
+    "uses": [
+     "sk-def-sfb-dc-lower-shriek",
+     "sk-lem-int-tensor",
+     "def-sf-pf",
+     "thm-sf-pf-finite",
+     "det-thm-sf-pf-adic-projection"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

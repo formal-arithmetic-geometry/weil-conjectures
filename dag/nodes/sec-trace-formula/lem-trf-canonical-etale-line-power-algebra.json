@@ -1,0 +1,141 @@
+{
+ "id": "lem-trf-canonical-etale-line-power-algebra",
+ "kind": "statement",
+ "title": "Canonical commutative homogeneous algebra on powers of an etale line module",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $L$ a module sheaf locally isomorphic to the structure sheaf on the small etale site [def-trf-algebraic-space, def-weil-sheaf-of-modules-category]. The actual powers $P_d=L^{\\otimes d}$ of [def-trf-etale-module-evaluation-tensor-powers] admit a commutative unital homogeneous algebra $A$ [def-trf-etale-graded-module-algebra] satisfying every canonical chart, product and degree-zero unit normalization of [def-trf-etale-power-product-normalization]. Commutativity is ordinary commutativity, with no cochain signs.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL, lemma-tensor-product-pullback and its preceding tensor universal property; spaces-descent.tex Tag 0D3C, lemma-descending-property-ample, the power algebra and the maps psi_d."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-etale-module-evaluation-tensor-powers",
+  "def-trf-etale-graded-module-algebra",
+  "def-trf-etale-power-product-normalization"
+ ],
+ "proof": [
+  {
+   "text": "On the small affine model, compose the sheaf tensor pairing with inverse concatenation of actual natural tensor powers. The sheaf tensor bilinear universal property gives restriction-compatible bilinear products. Transport them through the small-module equivalence counit to the original site. Transport the tensor-unit identification to define the degree-zero unit; its chart map is the identity on functions and it is invertible.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-sfb-space-small-ringed-model",
+    "def-trf-etale-module-evaluation-tensor-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For associativity induct on the first tensor degree: degree zero is unitor naturality, and the successor recursion for inverse concatenation reduces the equation to the induction hypothesis and the associator pentagon. The left unit is the zero case, and the right unit follows by induction with the triangle identity. Check these identities on pure tensors and extend by the tensor universal property and uniqueness through sheafification. On a covering sieve trivializing L, every factor is a scalar multiple of one local generator. The two orders of multiplication have the same generator power and the same product of scalars, since regular functions form a commutative ring. The sheaf separatedness condition descends commutativity. This also covers zero degrees and the empty site. The counit formulas are exactly the canonical product and unit normalizations.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-presheaf-modules-sheafification",
+    "def-trf-algebraic-space",
+    "def-trf-etale-power-product-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-sfb-space-small-ringed-model",
+  "def-trf-etale-module-evaluation-tensor-powers",
+  "def-weil-presheaf-modules-sheafification",
+  "def-trf-algebraic-space",
+  "def-trf-etale-power-product-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL and preceding tensor universal property; expanded rank-one and normalized tensor-power argument in Step 6 of lem-trf-graded-pushforward-etale-restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical ordinary commutative graded algebra on sheaf tensor powers of locally free rank one modules and etale restriction tensor power comparison",
+   "results": "OK 8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Algebra.Etale.baseChange; Algebra.Etale.exists_subalgebra_fg; KaehlerDifferential.tensorKaehlerEquivBase; Algebra.FormallyEtale.instTensorProduct; KaehlerDifferential.isBaseChange_of_formallyEtale.",
+   "date": "2026-10-26",
+   "verdict": "No match: these are algebraic etaleness or differential-module base changes, not canonical power algebras or normalized module-sheaf tensor comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPowNat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-26",
+   "verdict": "No match; tensorPowNat is a source-library construction."
+  },
+  {
+   "tool": "grep",
+   "query": "(tensorPowNat|canonical.*[Pp]ower|[Pp]ower.*canonical)",
+   "results": "OK 15 hits: divided power algebras, formal power series, power bases, ZMod unit powers, TensorAlgebra.ToTensorPower, TensorPower.Symmetric, and ExteriorPower. No module-sheaf canonical power algebra or normalized etale comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; tensor-algebra embeddings are not an ordinary commutative algebra of powers of a line sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.GradedPushforwardEtaleRestriction",
+  "date": "2026-10-26",
+  "group": "W4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical polarized-descent branch, via lem-trf-algebraic-space-ample-local Step 3: tensor powers in the graded section algebra of Stacks 0D3C; Step 6 of lem-trf-graded-pushforward-etale-restriction. Canonical commutative homogeneous algebra on powers of an etale line module",
+   "via": [
+    "lem-trf-graded-pushforward-etale-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CanonicalEtaleLinePowerAlgebra",
+  "file": "lean/Sheaf/TraceFormula/CanonicalEtaleLinePowerAlgebra.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.canonical_etale_line_power_algebra",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.canonical_etale_line_power_algebra"
+  ],
+  "statement": "theorem canonical_etale_line_power_algebra (X : AlgebraicSpace S)\n    (L : X.Modules) (hL : X.IsLineModule L) :\n    ∃ A : EtaleGradedModuleAlgebra (evaluationLinePower X L),\n      HasCanonicalEtalePowerProducts X L A",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-724b9",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261026T083436-L-2354896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-724b9",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261026T083436-L-2354896",
+  "kind": "interface",
+  "note": "independent cc review: Relocated defs in EtalePowerProductNormalization vs the clone's item module (byte-identical); item node vs the clone (only proof/proof_deps/proof_origin/lean changed); new lemma statements vs their nodes and the EtaleGradedModuleAlgebra/IsLineModule definitions"
+ }
+}

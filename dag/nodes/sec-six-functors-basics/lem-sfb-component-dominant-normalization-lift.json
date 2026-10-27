@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-component-dominant-normalization-lift",
+ "kind": "statement",
+ "title": "Universal property of componentwise normalization for a normal source",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] such that every quasi-compact open has finitely many irreducible components [def-weil-irreducible-components], and let $g:Y\\to X$ be a morphism from a scheme whose local rings are integrally closed domains [def-weil-pbc-normal-ring]. Suppose that each irreducible component $C$ of $Y$ dominates an irreducible component $D$ of $X$, meaning that the closure of $g(C)$ in $X$ is $D$. For the componentwise normalization $\\nu_X:X^\\nu\\to X$ [def-weil-pbc-reduced-normalization], there exists a unique morphism $h:Y\\to X^\\nu$ such that $\\nu_X\\circ h=g$. No integral-morphism, component-bijection, generic-field-isomorphism, quasi-compactness or Noetherian hypothesis is imposed on $g$ or $Y$. The empty source is allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035Q, label lemma-normalization-normal, part (4); Tag 0CDV, label lemma-normalization-in-terms-of-components, identifies the componentwise construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Every local ring of $Y$ is a domain, hence has no nonzero nilpotent element; thus $Y$ is reduced. The reduced-source factorization lemma gives $g=i_X\\circ g_0$ with $g_0:Y\\to X_{\\mathrm{red}}$. Reduction leaves the underlying topological space unchanged, so quasi-compact opens and their irreducible components are unchanged; the finiteness hypothesis on the target therefore still holds. The same topological identification preserves the closure of each component image, so every component of $Y$ still dominates a component of $X_{\\mathrm{red}}$ under $g_0$. The reduced induced scheme on each component is the same for $X$ and $X_{\\mathrm{red}}$: on an affine chart its vanishing prime contains the nilradical, so quotienting first by the nilradical and then by that prime gives the same quotient ring. The definition of componentwise normalization therefore gives the same summands, maps, and coproduct for both schemes. It is enough to prove the result with $X$ reduced and $g=g_0$. A factorization through $X^\\nu$ for the original $g$ is also one over $X_{\\mathrm{red}}$, since $i_X$ is a closed immersion and hence a monomorphism by the closed-immersion characterization (closed immersion if and only if proper and a monomorphism): from $i_X\\circ(\\nu_{X_{\\mathrm{red}}}\\circ h)=g=i_X\\circ g_0$ we get $\\nu_{X_{\\mathrm{red}}}\\circ h=g_0$, because $\\nu_X=i_X\\circ\\nu_{X_{\\mathrm{red}}}$ summand by summand.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-pbc-reduced-normalization",
+    "def-weil-closed-immersion",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, label lemma-normalization-normal, proof of (4), reduction to the reduced target; componentwise definition makes reduction compatibility immediate"
+   }
+  },
+  {
+   "text": "For an arbitrary pair of affine opens $W=\\operatorname{Spec}B\\subseteq Y$ and $U=\\operatorname{Spec}A\\subseteq X$ with $g(W)\\subseteq U$, write $\\varphi:A\\to B$ for the restricted map. Such $W$ cover $Y$, by taking an affine neighbourhood of $g(y)$ and then an affine neighbourhood of $y$ in its inverse image. The affine stalk comparison identifies $B_{\\mathfrak q}$ with $\\mathcal O_{Y,\\mathfrak q}$ for every prime $\\mathfrak q$ of $B$; hence $B$ is a normal ring in the local-ring sense. Both $A$ and $B$ are reduced. The reduced target retains the hypothesis on quasi-compact opens by step 1, so the affine normalization-chart lemma applies; it imposes no condition on the components of $W$. Thus $\\nu^{-1}(U)=\\operatorname{Spec}\\overline A$, where $\\overline A$ is the integral closure of $A$ in $Q(A)$ and the structural map is $a\\mapsto a/1$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-pbc-normal-ring",
+    "def-pc-reduced-scheme",
+    "lem-sfb-normalization-affine-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, label lemma-normalization-normal, proof of (4), affine W and U; Tag 035P via the cited chart node"
+   }
+  },
+  {
+   "text": "For a minimal prime $\\mathfrak q$ of $B$, its closed subset $V(\\mathfrak q)$ is an irreducible component of $W$. Take an irreducible component $C$ of $Y$ containing its closure in $Y$. Since $C$ meets $W$, $C\\cap W$ is an irreducible component of $W$; maximality forces $C\\cap W=V(\\mathfrak q)$. This nonempty open subset is dense in $C$, and the point $\\mathfrak q$ is generic in $V(\\mathfrak q)$, so its closure in $Y$ is $C$. Continuity gives $\\overline{\\{g(\\mathfrak q)\\}}=\\overline{g(C)}=D$, an irreducible component of $X$ by hypothesis: the equality follows by applying continuity to $C=\\overline{\\{\\mathfrak q\\}}$ and using the reverse inclusion from $\\mathfrak q\\in C$. Since $g(\\mathfrak q)\\in U$, closure in the open subspace gives $\\overline{\\{g(\\mathfrak q)\\}}^{U}=D\\cap U$; the open-component lemma makes this an irreducible component of $U$. Under the affine spectrum correspondence its prime is $\\varphi^{-1}(\\mathfrak q)$, which is therefore a minimal prime of $A$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-components-open-injection",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, label lemma-normalization-normal, proof of (4), contraction of minimal primes; elementary topological justification expanded"
+   }
+  },
+  {
+   "text": "Let $s$ be a nonzerodivisor of $A$. The reduced-ring nonzerodivisor criterion says $s$ lies in no minimal prime of $A$. Step 3 shows $\\varphi(s)$ lies in no minimal prime of $B$, so the same criterion for the reduced ring $B$ makes $\\varphi(s)$ a nonzerodivisor. There is consequently a ring homomorphism $\\Phi:Q(A)\\to Q(B)$ given by $a/s\\mapsto\\varphi(a)/\\varphi(s)$. To verify well-definedness directly, an equality of source fractions gives $u(ta-sb)=0$ for a nonzerodivisor $u$; applying $\\varphi$ gives exactly the localization equivalence for the image fractions, since $\\varphi(u)$ is again a nonzerodivisor. Addition, multiplication and the unit are preserved by the displayed fraction formulas. No injectivity of $\\varphi$ or $\\Phi$ is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, label lemma-normalization-normal, proof of (4), canonical total-fraction map; explicit fraction calculation"
+   }
+  },
+  {
+   "text": "For $z\\in\\overline A$, apply $\\Phi$ to a monic equation for $z$ over $A$. This is a monic equation for $\\Phi(z)$ with coefficients in the image of $B$, so $\\Phi(z)$ is integral over $B$. The normal-ring total-fractions lemma now puts $\\Phi(z)$ in the image of $B\\to Q(B)$. This localization map is injective: if $b/1=0$, a nonzerodivisor annihilates $b$, so $b=0$. Thus $\\Phi|_{\\overline A}$ has a unique codomain restriction $\\psi:\\overline A\\to B$. It is a ring map because the inclusion $B\\to Q(B)$ is injective, and $\\psi(a/1)=\\varphi(a)$. Applying the contravariant affine spectrum correspondence gives a morphism $h_W:W\\to\\nu^{-1}(U)\\subseteq X^\\nu$ whose composition with $\\nu$ is $g|_W$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "def-weil-pbc-module-localization",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, label lemma-normalization-normal, proof of (4), integral closure maps into the normal ring; Tag 034M through the cited node"
+   }
+  },
+  {
+   "text": "Here is the omitted local uniqueness check. Every factorization $W\\to X^\\nu$ over $g|_W$ has image in the open $\\nu^{-1}(U)$ and is therefore an $A$-algebra map $\\theta:\\overline A\\to B$ on rings. For $z\\in\\overline A\\subseteq Q(A)$ choose $z=a/s$ with $s$ a nonzerodivisor of $A$. Since $\\overline A$ is a subring of $Q(A)$ containing the image of $A$, $sz=a$ holds in $\\overline A$ itself. Applying $\\theta$ forces $\\varphi(s)\\theta(z)=\\varphi(a)$. Step 4 says $\\varphi(s)$ is a nonzerodivisor in $B$, so this equation has at most one solution for $\\theta(z)$. Both $\\psi(z)$ and $\\theta(z)$ solve it; thus $\\theta(z)=\\psi(z)$ for every $z$, and the affine spectrum correspondence gives uniqueness of $h_W$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, label lemma-normalization-normal, final sentence of proof (4): omitted uniqueness supplied by cancellation"
+   }
+  },
+  {
+   "text": "The maps $h_W$ agree on overlaps. Given a point $y\\in W_i\\cap W_j$, choose an affine open $U_0\\subseteq U_i\\cap U_j$ containing $g(y)$ and an affine open $W_0\\subseteq W_i\\cap W_j\\cap g^{-1}(U_0)$ containing $y$. Each restricted lift has image in $\\nu^{-1}(U_0)$; steps 2--6 were proved for every affine pair with $g(W)\\subseteq U$, so their uniqueness calculation applies to $(W_0,U_0)$ and makes the restrictions equal. Equality on this open covering implies equality on the whole overlap by the gluing lemma. The same lemma glues all $h_W$ to $h:Y\\to X^\\nu$, with $\\nu\\circ h=g$ because the equality holds on the cover. Any other lift agrees on every $W$ by step 6, hence equals $h$ globally. This uses arbitrary open coverings, so no quasi-compactness of $Y$ is required. For $Y=\\varnothing$ the empty covering in the same gluing lemma gives the unique empty-source morphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, label lemma-normalization-normal, proof (4), locality on the source and gluing; arbitrary overlaps refined by affine opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-closed-immersion",
+  "lem-pc-proper-monomorphism-closed",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-sfb-normalization-affine-total-fractions",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-components-open-injection",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035Q, label lemma-normalization-normal, proof of (4), with its omitted uniqueness verified by cancelling the image of a denominator; Tag 035P for affine charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a normal scheme that dominates irreducible components factors uniquely through the componentwise normalization",
+   "results": "{\"t\": \"2026-10-22T05:42:07Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a normal scheme that dominates irreducible components factors uniquely through the componentwise normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"a8ff8df2b562565c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"hom_ext\"",
+   "results": "{\"t\": \"2026-10-22T05:42:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"hom_ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\"], \"digest\": \"a145a7c8eb427638\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationDesc|hom_ext|fromNormalization",
+   "results": "{\"t\": \"2026-10-22T05:42:03Z\", \"tool\": \"grep\", \"query\": \"normalizationDesc|hom_ext|fromNormalization\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"25\", \"26\", \"174\", \"178\"], \"digest\": \"169e2bc6c31d8e8d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique lift of component dominant morphisms from a normal scheme to the normalization",
+   "results": "{\"t\": \"2026-10-22T05:42:04Z\", \"tool\": \"leansearch\", \"query\": \"Unique lift of component dominant morphisms from a normal scheme to the normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"507b626048a6dc49\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal property of absolute normalization for a normal source dominating every irreducible component",
+   "results": "{\"t\": \"2026-10-22T05:42:43Z\", \"tool\": \"leanfinder\", \"query\": \"The universal property of absolute normalization for a normal source dominating every irreducible component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"a10bc638917d7fa2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationDesc|hom_ext|fromNormalization",
+   "results": "{\"t\": \"2026-10-22T06:41:40Z\", \"tool\": \"grep\", \"query\": \"normalizationDesc|hom_ext|fromNormalization\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"25\", \"26\", \"174\", \"178\"], \"digest\": \"169e2bc6c31d8e8d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib relative normalizationDesc and normalization.hom_ext have a supplied qcqs morphism and a different universal property; read Mathlib/AlgebraicGeometry/Normalization.lean:365-458. The project absolute construction only treats integral schemes, not this componentwise theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of normalization for a normal scheme dominating irreducible components",
+   "results": "{\"t\": \"2026-10-22T06:41:41Z\", \"tool\": \"leansearch\", \"query\": \"Universal property of normalization for a normal scheme dominating irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"08489b8a5686201d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib relative normalizationDesc and normalization.hom_ext have a supplied qcqs morphism and a different universal property; read Mathlib/AlgebraicGeometry/Normalization.lean:365-458. The project absolute construction only treats integral schemes, not this componentwise theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"Desc\"",
+   "results": "{\"t\": \"2026-10-22T06:41:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"Desc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization_assoc\"], \"digest\": \"38f868644871a897\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib relative normalizationDesc and normalization.hom_ext have a supplied qcqs morphism and a different universal property; read Mathlib/AlgebraicGeometry/Normalization.lean:365-458. The project absolute construction only treats integral schemes, not this componentwise theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal scheme mapping each irreducible component dominantly to a component of X factors uniquely through the normalization of X",
+   "results": "{\"t\": \"2026-10-22T06:41:44Z\", \"tool\": \"leanfinder\", \"query\": \"A normal scheme mapping each irreducible component dominantly to a component of X factors uniquely through the normalization of X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\"], \"digest\": \"27d75e5260454503\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib relative normalizationDesc and normalization.hom_ext have a supplied qcqs morphism and a different universal property; read Mathlib/AlgebraicGeometry/Normalization.lean:365-458. The project absolute construction only treats integral schemes, not this componentwise theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique extension to absolute normalization from a normal source without quasi compactness hypotheses",
+   "results": "{\"t\": \"2026-10-22T06:42:37Z\", \"tool\": \"leanfinder\", \"query\": \"Unique extension to absolute normalization from a normal source without quasi compactness hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"bc73d607046f5545\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib relative normalizationDesc and normalization.hom_ext have a supplied qcqs morphism and a different universal property; read Mathlib/AlgebraicGeometry/Normalization.lean:365-458. The project absolute construction only treats integral schemes, not this componentwise theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-normal-generic-recognition",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Universal property of componentwise normalization for a normal source.",
+   "via": [
+    "lem-sfb-integral-normal-generic-recognition",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-component-dominant-normalization-lift",
+  "worker": "stage1",
+  "summary": "Checked Stacks 035Q(4) with the exact unrestricted normal-source hypotheses, reduced the target using the literal componentwise definition, constructed the local lift via total fractions, proved the omitted uniqueness by denominator cancellation, and glued on arbitrary open covers. Added one statement-only affine-chart lemma without local Noetherianity; reused existing algebra and geometry tools. Statement unchanged. Repair of the returned side-only completion: re-read the current live dependency statements, retained all original source/search evidence, and made the open-subspace generic-point calculation and the denominator identity inside the integral-closure subring explicit before rebuilding delivery on the current live DAG. Current-return repair (head 752d73374b6): rechecked every current cited statement and explicitly verified preservation of the quasi-compact-open component hypothesis through reduction before applying the affine-chart lemma; no finiteness hypothesis on the normal source was added. Repair of the current returned head 4854e16d255: after rereading all current cited statements, explicitly transported the component-dominance hypothesis through reduction and made the affine-pair argument universally quantified before applying it on overlap refinements. Retained the delivered statements, route, citations and actual search records; delivery preparation rebases these worker fields on the current DAG.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Universal property of componentwise normalization for a normal source. The seven steps supply the normal-source normalization lift needed in the inherited alteration/normalization route; no unit or chapter route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Reduced-source factorization through the reduction is a generic scheme tool; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Integral closure in the total ring of fractions of a normal ring is the algebraic tool needed for local existence; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Arbitrary open-cover gluing of scheme morphisms is a generic geometric tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Containment of an irreducible set in a component is a generic topological tool for restricting the dominance hypothesis to affine charts."
+   },
+   {
+    "node": "lem-sc-components-open-injection",
+    "why": "Intersection of components with open subsets is a generic topological tool for the local minimal-prime calculation."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "why": "The spectrum/minimal-prime component correspondence is a generic affine geometry tool for the local dominance calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-components-open-injection",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-353ea23a3",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-353ea23a3 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, the new node lem-sfb-normalization-affine-total-fractions and every cited statement. I also read Stacks morphisms.tex 035Q(4) (l.14504) with its proof, 035P (l.14426) and 0CDV (l.14588). The item statement is unchanged and matches 035Q(4) exactly. No SGA source is cited and there is no re-split note.\n\nSteps 2-7 are sound. B is normal by the stalk clause (1), which holds for any ring. Minimal primes of B contract to minimal primes of A (minimal-primes, components-cover, open-injection, continuity), with no finiteness on Y. Q(A)->Q(B) comes from the reduced-zerodivisor node and the localization equivalence. Existence uses the normal-ring total-fractions node. Uniqueness, which Stacks omits, cancels φ(s) inside the integral closure of A. Gluing uses arbitrary covers over refined affine pairs (W_0,U_0), and the empty source is the empty cover.\n\nC1 fault in step 1 (third time): 'closed immersion ⇒ monomorphism' still has no node. The 752d and 4854 reviews fixed this, but both landings were refused as side-only completions and the fix was lost. This head only rewords steps 1, 2 and 7 (dominance survives reduction; arbitrary affine pair; refined pair in gluing). I re-applied the fix on this head's text. Step 1 now cites lem-pc-proper-monomorphism-closed (the Mathlib leaf IsClosedImmersion.iff_isProper_and_mono) and writes out i_X∘(ν_red∘h)=i_X∘g_0 ⇒ ν_red∘h=g_0 via ν_X=i_X∘ν_red. proof_deps equals the union of the uses, and step 1 is 1411 characters.\n\nThe new node is 035P(1),(4) under exactly that lemma's hypotheses, combined with 0CDV. It is statement-only and self-contained, and it is a chart computation, not a clause of the item. Duplicate search with rg -L: lem-per-componentwise-normalization-affine-charts needs a locally Noetherian X and gives the product form. The generic-properties nodes are Noetherian and state no chart. lem-sbc-normalization-dominant-lift is the integral special case. No duplicate.\n\nSmall cases: a lift onto one branch of k[x,y]/(xy); Spec k mapped to the node, where the hypothesis fails and there are two lifts; k[ε]; k[x_1,x_2,...]; empty U and empty Y. The 6 generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentDominantNormalizationLift",
+  "declaration": "AlgebraicGeometry.Scheme.existsUnique_lift_reducedNormalization_of_component_dominant",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentDominantNormalizationLift.lean",
+  "statement": "theorem existsUnique_lift_reducedNormalization_of_component_dominant {X Y : Scheme.{u}} (g : Y ⟶ X) (hfinite : ∀ U : X.Opens, IsCompact (U : Set X) → (irreducibleComponents U).Finite) (hnormal : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) (hdominant : ∀ (C : Set Y), C ∈ irreducibleComponents Y → ∃ (D : Set X), D ∈ irreducibleComponents X ∧ closure (g '' C) = D) : ∃! h : Y ⟶ X.reducedNormalization, h ≫ X.fromReducedNormalization = g",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ea5c311d",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Signature matches node/Stacks 035Q(4)+0CDV clause by clause: qc-open finite components (open subspace components), stalks IsDomain∧IsIntegrallyClosed, closure(g''C) is a component for every component C, ∃! h with h ≫ fromReducedNormalization = g using the recorded reducedNormalization (read in side-live). No extra hypotheses; empty Y/X, cross-branch and node-point cases checked. stmt_deps exact; node differs from live only in lean; statement verbatim; docstrings with source, blueprint and 7 steps; no duplicate declaration (only docstring citations). Second-reading section is an author self-check, noted, not a fault. No file changed, so no compile."
+ }
+}

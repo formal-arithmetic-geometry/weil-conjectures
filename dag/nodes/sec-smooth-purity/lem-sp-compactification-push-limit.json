@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-compactification-push-limit",
+ "kind": "statement",
+ "title": "Projection normalization of the completed direct-image limit mate",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], schemes $Z,Y$ and a morphism $p:Z\\to Y$. Use the actual completed ringed direct image $p_{*,R}$, its strict tower functor, their unbounded right derived functors, the specified strict derived limits $\\mathcal L_T$, their projections $\\pi_{T,n}$, and the adjunction-conjugate limit isomorphism pushLimit of [def-sp-complete-compactification-limit-comparison]. There exist isomorphisms $w_n:Rp_{*,R}^{\\rm Tow}\\operatorname{ev}_{Y,n}\\simeq\\operatorname{ev}_{Z,n}Rp_{*,R}$. On every K-injective strict tower complex $I$, the evaluation of the derived tower direct-image comparison, followed by the exact evaluation localization factor, equals $w_n(QI)$ followed by $Rp_{*,R}$ of the exact source evaluation factor and the finite direct-image comparison on $\\operatorname{ev}_nI$. For every derived strict tower $K$, $\\operatorname{pushLimit}_K\\,\\pi_{Y,n}(Rp_{*,R}^{\\rm Tow}K)=Rp_{*,R}(\\pi_{Z,n}(K))\\,w_n(K)^{-1}$. The complex-level normalization is the equality written in compactificationPushLimit, and fixes the specified evaluation isomorphisms before the projection formula. No properness or boundedness is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (2): completed compactification composite and its strict derived inverse limit"
+ },
+ "stmt_deps": [
+  "def-sp-complete-compactification-limit-comparison",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ringed-tower direct-image/limit theorem to the completed coefficient morphism of p. Transport its universal derived functors and exact evaluation identifications to the specified ones by the unique localization comparisons. Its K-injective equation gives the first normalization. Its derived limit comparison and pushLimit are conjugates of the same constant-tower pullback square under the composite adjunctions. Uniqueness of adjoints and the composition-unit normalization identify them. Its projection equation, composed with inverse evaluation, is the stated projection identity. These operations preserve strict transitions, and do not test arbitrary derived morphism equality by evaluation.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (2): completed compactification composite and its strict derived inverse limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (2): completed compactification composite and its strict derived inverse limit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of a ringed topos commutes with derived inverse limit and evaluations of strict towers on K injective complexes",
+   "results": "SheafOfModules.evaluationPreservesLimitsOfShape and hasLimit; PresheafOfModules.evaluation_preservesLimit. These are ordinary evaluation and limit theorems, not the required derived comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived pushforward on strict towers projection preserving inverse limit comparison normalized on K injective resolutions",
+   "results": "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; rightDerivedFunctorComparison_fac and instIsIsoFunctorRightDerivedFunctorComparison. These universal comparisons require identifying the actual geometric and limit adjunctions.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*(Comp|[Ee]valuation)|[Ee]valuation.*rightDerivedFunctor",
+   "results": "Mathlib LocalizerMorphism.rightDerivedFunctorComparison and its fac lemmas. No concrete completed pro-etale tower statement; the existing ringedTowerPushforwardLimitComparison is retained as the general tool.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteCompactificationLimitRealization",
+  "date": "2026-10-25",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Paragraph (2): Projection normalization of the completed direct-image limit mate",
+   "via": [
+    "lem-sp-complete-compactification-limit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactificationPushLimit",
+  "file": "lean/Sheaf/Paper/CompactificationPushLimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteCompactificationLimit.compactificationPushLimit",
+  "statement": "theorem compactificationPushLimit {Z Y : Scheme.{u}} (p : Z ⟶ Y) : ∃ w : ∀ n : ℕ, (fixedPushOrd l E p).rightDerivedFunctor ⋙ coefficientConstantTowerEvaluation l E Y n ≅ coefficientConstantTowerEvaluation l E Z n ⋙ (pushOrd l E p).rightDerivedFunctor, (∀ n : ℕ, ∀ (I : CochainComplex (Fixed l E Z) ℤ) [I.IsKInjective], (fixedEvaluation l E Y n).mapDerivedCategory.map ((fixedPushOrd l E p).rightDerivedFunctorObjQIso I).hom ≫ (fixedEvaluation l E Y n).mapDerivedCategoryFactors.hom.app (((fixedPushOrd l E p).mapHomologicalComplex (.up ℤ)).obj I) = (w n).hom.app (DerivedCategory.Q.obj I) ≫ (pushOrd l E p).rightDerivedFunctor.map ((fixedEvaluation l E Z n).mapDerivedCategoryFactors.hom.app I) ≫ ((pushOrd l E p).rightDerivedFunctorObjQIso (((fixedEvaluation l E Z n).mapHomologicalComplex (.up ℤ)).obj I)).hom) ∧ ∀ (K : DerivedCategory (Fixed l E Z)) (n : ℕ), (pushLimit l E p).hom.app K ≫ (coefficientConstantTowerProjection l E Y n).app (((fixedPushOrd l E p).rightDerivedFunctor).obj K) = (pushOrd l E p).rightDerivedFunctor.map ((coefficientConstantTowerProjection l E Z n).app K) ≫ (w n).inv.app K",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.CompleteCompactificationLimitRealization",
+  "worker": "stage3",
+  "summary": "Specialization and normalization obligation for the existing strict-system proof, separated from its Lean assembly.",
+  "blueprint": "Paragraph (2), exact open extension, right derived direct image and completed strict coefficient systems.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Existing general tool already approved on the parent; needed to transport its normalized construction to the specified coefficient functors."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Existing general tool already approved on the parent; needed to transport its normalized construction to the specified coefficient functors."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bd90f",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T162110-L-278300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bd90f",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T162110-L-278300",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembly from 3 new sorried statements) vs packet nodes, support defs (openLimit/pushLimit/fixedOpenEvaluation), proEtaleRingedExtensionByZero_products and ringedTowerPushforwardLimitComparison hypotheses, unit realized (empty); sandbox compile of 3 new modules + item + importer IntegralReconstructionComparisons OK; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

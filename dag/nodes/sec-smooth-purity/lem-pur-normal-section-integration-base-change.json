@@ -1,0 +1,152 @@
+{
+ "id": "lem-pur-normal-section-integration-base-change",
+ "kind": "statement",
+ "title": "Base change of the inverse-integration normal factor",
+ "statement": "Fix a finite purity setting P [def-pur-conventions] and a normalized etale compact-support datum N. Let aB:B->Spec k and aBprime:Bprime->Spec k be separated finite-type structure maps, b:Bprime->B any morphism with aB b=aBprime, and X=(g:V->B,s), Xprime=(gprime:Vprime->Bprime,sprime) smooth separated quasi-compact pure-dimension-d pairs with closed sections. Fix their Cartesian base-change datum sq [def-pur-section-restriction-data]. Write normalBaseChange(sq) for its canonical pulled-back normal pair and c_N for the counit-defined section exchange along it. Then normalIntegration(Xprime) c_N = Tate_b b^*(normalIntegration(X)), where normalIntegration is the actual conormal-model construction of [def-pur-normal-section-integration-data], and Tate_b is the specified pro-etale Tate pullback [def-pur-section-tate-pullback]. This statement involves only the normal pairs, not the DNC-specialization maps delta. No flatness or positive-rank assumption is made; empty bases are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), normal-bundle base change and inverse vector-integration square"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-section-restriction-data",
+  "def-pur-normal-section-integration-data",
+  "def-pur-section-tate-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Base change of the homogeneous Rees algebra fixes the deformation coordinate and pulls back homogeneous ideal classes. At zero the symmetric conormal comparison therefore intertwines the actual normal-base-change map with pullback of the conormal bundle, preserving projection and zero.",
+   "uses": [
+    "lem-pur-dnc-section-geometry",
+    "def-pur-finite-smooth-canonical-interfaces",
+    "def-pur-finite-ring-section-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), vector-bundle integration"
+   }
+  },
+  {
+   "text": "For the integration adjunct gamma, integration-normalized vector-bundle purity gives E b^*(gamma)=gamma_prime T, with E the exceptional exchange and T Tate pullback. Multiplication by inverse adjuncts gives gamma_prime inverse E=T b^*(gamma inverse). Restrict along the zero section; the zero-section equation and pullback compositor give the ordinary-etale normal-section square.",
+   "uses": [
+    "cor-pur-vector-bundle-purity",
+    "def-pur-bundle-integration-orientation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), vector-bundle integration"
+   }
+  },
+  {
+   "text": "The normalized etale-locality factor in normalIntegration and the counit-defined pro-etale exchange agree after site comparison. Indeed both are mates of inverse compact-support exchange followed by the pulled-back counit. Use vector-integration site comparison and finite-level compact-support comparison, then mate pasting, to identify them. Naturality of comparison pullback and Tate maps yields the stated square. The rank-zero trace is the identity; for empty bases all these same maps are unique.",
+   "uses": [
+    "lem-pur-vector-integration-site-comparison",
+    "thm-cbc-finite-level-proetale",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), vector-bundle integration"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-dnc-section-geometry",
+  "def-pur-finite-smooth-canonical-interfaces",
+  "def-pur-finite-ring-section-data",
+  "cor-pur-vector-bundle-purity",
+  "def-pur-bundle-integration-orientation",
+  "lem-pur-vector-integration-site-comparison",
+  "thm-cbc-finite-level-proetale",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), normal-bundle base change and inverse vector-integration square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The zero section restriction of the inverse integration adjunct of a normal vector bundle commutes with arbitrary scheme base change",
+   "results": "Eight hits about Bundle.zeroSection, differentiability of zero sections and RingedSpace.res_zero. No derived etale or pro-etale integration square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zero section restriction of inverse integration adjunct on normal bundle agrees with normalized section orientation",
+   "results": "Eight hits about Riemannian vector-bundle trivializations, stereographic derivatives and tangent coordinates. No etale derived section orientation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalCone\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalIntegration|normalCone.*Integration|bundleSectionAdjoint",
+   "results": "0 Mathlib hits. Project search finds normalModelSectionOrientation for a presentation and an integration adjunct, but not the conormal-model specialization with its coefficient-compositor identification.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionDncIntegrationSquare",
+  "date": "2026-10-25",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), normal-bundle base change and inverse vector-integration square",
+   "via": [
+    "lem-sp-section-dnc-integration-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalSectionIntegrationBaseChange",
+  "file": "lean/Sheaf/Paper/NormalSectionIntegrationBaseChange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionIntegration.normalIntegration_baseChange",
+  "statement": "theorem normalIntegration_baseChange (P : PurityFiniteSetting.{u})\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)\n    {B' B : Scheme.{u}} {d : ℕ}\n    (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB]\n    [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (aB' : B' ⟶ Spec (.of P.field.k)) [IsSeparated aB']\n    [LocallyOfFiniteType aB'] [QuasiCompact aB']\n    (b : B' ⟶ B) (_hb : b ≫ aB = aB')\n    (X : Pair B d) (X' : Pair B' d) (sq : BaseChange b X' X) :\n    baseComparison P aB aB' (normalBaseChange P aB aB' sq) ≪≫\n        normalIntegration P N aB' X' =\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso\n          (normalIntegration P N aB X) ≪≫ OrientationRefinement.tate P b aB d",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50e31",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261025T202646-L-2739006",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50e31",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261025T202646-L-2739006",
+  "kind": "interface",
+  "note": "independent cc review: SectionDncIntegrationSquare 50e314b5: moved normalIntegration diffed line by line against the item diff and the change record (verbatim); both item proofs read against coherence/diagonalDncAssemblyGlobal/existsUnique_dncInvariance; 2 new sorry nodes checked against normalModelSectionOrientation and ordinaryFiniteTwistTransport_unique; DAG reachability checked (no cycles); 0 importers of the item in live"
+ }
+}

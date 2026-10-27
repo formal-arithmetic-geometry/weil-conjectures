@@ -1,0 +1,292 @@
+{
+ "id": "lem-trf-toric-chart-fs-realization",
+ "kind": "statement",
+ "title": "Locally Noetherian fs realization of an affine toric chart",
+ "statement": "Let $A$ be a commutative ring such that $Y=\\operatorname{Spec}A$ is locally Noetherian [def-weil-affine-spectrum, pqf-def-locnoeth]. Let $P,Q$ be fine saturated commutative monoids, written additively [def-trf-fs-log-blowup], let $g:P\\to Q$ be any monoid homomorphism and let $\\alpha:P\\to(A,\\cdot)$ be a monoid homomorphism. For a monoid $T$, write $\\mathbf Z[T]$ for the ring of finite sums $\\sum_t n_tz^t$, with $z^tz^{t'}=z^{t+t'}$. Use the ring maps $\\mathbf Z[P]\\to A$, $z^p\\mapsto\\alpha(p)$, and $\\mathbf Z[P]\\to\\mathbf Z[Q]$, $z^p\\mapsto z^{g(p)}$, and put $C=A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]$ [def-weil-pbc-module-tensor-product], with multiplication $(a\\otimes u)(b\\otimes v)=ab\\otimes uv$ and $A$-algebra map $a\\mapsto a\\otimes1$.\n\nFor every finite generating tuple $q_1,\\ldots,q_r$ of $Q$, allowing $r=0$, evaluation $A[T_1,\\ldots,T_r]\\to C$, $T_i\\mapsto1\\otimes z^{q_i}$, is surjective [def-weil-pbc-mv-polynomial-ring]. The ring $C$ is Noetherian [def-weil-pbc-noetherian-ring], and $X=\\operatorname{Spec}C$ is locally Noetherian. Let $\\beta:Q\\to C$ be $q\\mapsto1\\otimes z^q$. The log structure $M_X=L_X(Q,\\beta)$ associated to this chart, in the notation of [lem-trf-associated-log-universal-stalks], exists and its canonical map $Q\\to M_X(X)$ is a global chart whose structural image is exactly $\\beta$. Thus $(X,M_X)$ is an fs log scheme. These assertions allow $C=0$ and do not require $Y$ to carry a log regular structure.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, printed p.69 (fs global charts and associated etale log structures); VIII 3.3.8--3.3.11, printed pp.107--108 (chart construction). Noetherian bookkeeping: Stacks algebra.tex Tag 00FN, lemma-Noetherian-permanence; properties.tex Tag 01OW, lemma-locally-Noetherian, and Tag 01OV, definition-noetherian."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-trf-associated-log-universal-stalks",
+  "def-trf-log-ideal-chart-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix any finite generating tuple q : Fin r → Q. For the polynomial evaluation ring homomorphism e, prove that every canonical monomial belongs to e.range by induction on Submonoid.closure (Set.range q): generators are images of variables, the identity is the image of 1, and products stay in the range. Induction on the monoid algebra, using monomials, addition and integer scalar multiplication, then puts every image of the right tensor inclusion in e.range. A pure tensor a ⊗ b is the product of the left inclusion of a (the image of the constant polynomial a) and the right inclusion of b. TensorProduct.induction_on, with zero and addition, proves every tensor is in e.range, hence evaluation is surjective. This argument also handles the empty generating tuple and the zero ring. The tensor and polynomial constructions are [def-weil-pbc-module-tensor-product] and [def-weil-pbc-mv-polynomial-ring]; finite generation of Q is provided by [def-trf-fs-log-blowup] when selecting a tuple in the next step.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product, quotient construction and generation by pure tensors; explicit finite monoid-algebra expansion supplied by the agent."
+   }
+  },
+  {
+   "text": "Apply [pqf-lem-affine-open-locnoeth] to the affine open $Y=\\operatorname{Spec}A$ of itself. It makes $A$ Noetherian, using exactly the assumed local Noetherianity of $Y$. Step 1 exhibits $C$ as a finite type $A$-algebra by [def-weil-pbc-finite-type-algebra]. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $C$ Noetherian. No injectivity of $A\\to C$ or nonzero-ring assumption is among these hypotheses.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, first sentence; properties.tex Tag 01OW, lemma-locally-Noetherian, (1) implies (2)."
+   }
+  },
+  {
+   "text": "The affine scheme $X=\\operatorname{Spec}C$ has global ring $C$ [def-weil-affine-spectrum]. Its single affine open $X$ is therefore an affine cover with Noetherian coordinate ring by Step 2, so $X$ is locally Noetherian by [pqf-def-locnoeth]. The formula $\\beta(q)=1\\otimes z^q$ satisfies $\\beta(0)=1$ and $\\beta(q+q')=\\beta(q)\\beta(q')$ by the prescribed multiplication, and thus gives a monoid homomorphism into $\\Gamma(X,\\mathcal O_X)=C$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV, definition-noetherian, locally Noetherian clause (single affine cover); affine spectrum convention."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-associated-log-universal-stalks] to the canonical global monomial chart β on X. Use its associated-log presentation L,η and normalized pushout stalk isomorphisms e. The pair formula at the terminal etale object, with unit 1, proves α_L ∘ ι = β. To identify the stalk unit copy, represent a ring unit and its inverse on a common pointed etale neighbourhood and refine until their product equals 1, using Mathlib Point.toPresheafFiber_jointly_surjective₂ and Point.toPresheafFiber_eq_iff'. Thus the unit has a unit-section representative. The normalized formula for e on this representative, together with the structural pair formula and the colimit germ equation, says that e([1,a]) has structural image a. Injectivity of the log-unit identification forces e([1,a]) = L.unitsIn(a). Its formula on [q,1] is the germ of the canonical chart. Multiplicativity now identifies e composed with the quotient map with the chart-times-units map on all pairs. The former is surjective and its kernel is exactly the generated pushout congruence, because e is an isomorphism. Transport the first coordinate through the canonical ULift equivalence; Con.comap_conGen_equiv identifies the resulting congruence with the one for the original monoid Q. These are precisely both clauses of IsStalkChart, hence the terminal etale object is an IsChart witness by [def-trf-fs-log-blowup]. At each geometric point choose that same terminal chart and the assumed fs monoid Q, proving IsFineSaturated. No nonzero-ring or base log-regularity assumption is needed.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69, etale-local fs charts; VIII 3.3.3--3.3.11, printed pp.107--108, chart realization and chart base change. Associated-log construction and stalk presentation supplied by the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "pqf-lem-affine-open-locnoeth",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "lem-trf-associated-log-universal-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, printed p.69 and VIII 3.3.3--3.3.11, printed pp.107--108 supply chart conventions. Explicit tensor expansion and assembly supplied by Q05; algebraic Noetherianity uses Stacks Tags 00FN and 01OW. F9 formalized the tensor range induction and the chart consequence, including unit representatives, the structural germ equation and ULift congruence transport, using only proved private helpers and the existing associated-log theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(finiteType|finite_type|noetherian)|finiteType.*[Mm]onoid|[Mm]onoid.*finiteType",
+   "results": "{\"t\": \"2026-10-22T06:04:05Z\", \"tool\": \"grep\", \"query\": \"(MonoidAlgebra|AddMonoidAlgebra).*(finiteType|finite_type|noetherian)|finiteType.*[Mm]onoid|[Mm]onoid.*finiteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/RingTheory/Unramified/Locus.lean\", \"Mathlib/RingTheory/FiniteType.lean\", \"Mathlib/RingTheory/FiniteType.lean\", \"Mathlib/RingTheory/FiniteType.lean\", \"Mathlib/RingTheory/FiniteType.lean\", \"Mathlib/RingTheory/FiniteType.lean\", \"Mathlib/RingTheory/Localization/InvSubmonoid.lean\"], \"digest\": \"8b643c21d3a2610a\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "no match for the full logarithmic statement; ordinary algebra/scheme components only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a monoid algebra of a finitely generated commutative monoid is a finite type algebra and Noetherian over a Noetherian coefficient ring.",
+   "results": "{\"t\": \"2026-10-22T06:04:05Z\", \"tool\": \"leansearch\", \"query\": \"Base change of a monoid algebra of a finitely generated commutative monoid is a finite type algebra and Noetherian over a Noetherian coefficient ring.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"FiniteType\"",
+   "results": "{\"t\": \"2026-10-22T06:04:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidAlgebra\\\", \\\"FiniteType\\\"\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: <html> <head><title>502 Bad Gateway</title></head> <body> <center><h1>502 Bad Ga\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated commutative monoid Q and a map P to Q, A tensor over Z[P] with Z[Q] is generated as an A algebra by the monomials of chosen generators of Q and is Noetherian if A is Noetherian.",
+   "results": "{\"t\": \"2026-10-22T06:04:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated commutative monoid Q and a map P to Q, A tensor over Z[P] with Z[Q] is generated as an A algebra by the monomials of chosen generators of Q and is Noetherian if A is Noetherian.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.Algebra.exists_of_fg\", \"exists_fg_and_mem_baseChange\", \"RingHom.Finite.tensorProductMap\", \"Algebra.EssFiniteType.baseChange\", \"Algebra.FiniteType.baseChange\", \"Algebra.FiniteType.of_span_eq_top_source\", \"TensorProduct.exists_finite_submodule_of_setFinite\", \"TensorProduct.exists_finite_submodule_of_finite\"], \"digest\": \"fdb54b30a33fdc1e\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "no match for the full logarithmic statement; ordinary algebra/scheme components only"
+  },
+  {
+   "tool": "grep",
+   "query": "LogScheme|FineSaturated|associatedLog|logStructure",
+   "results": "{\"t\": \"2026-10-22T06:05:33Z\", \"tool\": \"grep\", \"query\": \"LogScheme|FineSaturated|associatedLog|logStructure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a fine saturated logarithmic structure on the locally Noetherian spectrum of a finite monoid algebra base change, with structural map q to 1 tensor z^q.",
+   "results": "{\"t\": \"2026-10-22T06:05:33Z\", \"tool\": \"leansearch\", \"query\": \"Construct a fine saturated logarithmic structure on the locally Noetherian spectrum of a finite monoid algebra base change, with structural map q to 1 tensor z^q.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isLocalizedModule_iff_isBaseChange\", \"Algebra.QuasiFiniteAt.baseChange\", \"IsLocalization.tensor\", \"MonoidAlgebra.algebraMonoidAlgebra\", \"Subalgebra.saturation\", \"Algebra.QuasiFinite.baseChange\", \"Localization.fg\", \"Algebra.FormallyEtale.of_isLocalization\"], \"digest\": \"4b17fa3956a8aab0\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "no match for the full logarithmic statement; ordinary algebra/scheme components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogScheme\"",
+   "results": "{\"t\": \"2026-10-22T06:05:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a locally Noetherian affine scheme Spec A, fine saturated monoids P Q and a homomorphism P to Q, construct the locally Noetherian fine saturated log scheme on Spec of A tensor over Z[P] with Z[Q] having its specified canonical Q chart.",
+   "results": "{\"t\": \"2026-10-22T06:05:49Z\", \"tool\": \"leanfinder\", \"query\": \"Given a locally Noetherian affine scheme Spec A, fine saturated monoids P Q and a homomorphism P to Q, construct the locally Noetherian fine saturated log scheme on Spec of A tensor over Z[P] with Z[Q] having its specified canonical Q chart.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"058d29fb98d12065\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "no match for the full logarithmic statement; ordinary algebra/scheme components only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite saturated monoid chart on an affine monoid algebra base change has a canonical associated fs log structure, with its specified monomials as structural images and a locally Noetherian underlying scheme.",
+   "results": "{\"t\": \"2026-10-22T06:06:36Z\", \"tool\": \"leanfinder\", \"query\": \"A finite saturated monoid chart on an affine monoid algebra base change has a canonical associated fs log structure, with its specified monomials as structural images and a locally Noetherian underlying scheme.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"AlgebraicGeometry.locallyOfFiniteType_iff\"], \"digest\": \"65039a00692e0a80\"}; The returned ordinary algebra/scheme declarations do not construct an etale log structure or its prescribed global chart.",
+   "date": "2026-10-22",
+   "verdict": "no match for the full logarithmic statement; ordinary algebra/scheme components only"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing_of_finiteType|isLocallyNoetherian.*Spec|isNoetherianRing_iff|noetherian.*iff",
+   "results": "{\"t\": \"2026-10-23T09:35:43Z\", \"tool\": \"grep\", \"query\": \"isNoetherianRing_of_finiteType|isLocallyNoetherian.*Spec|isNoetherianRing_iff|noetherian.*iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"14ffebb8ae5527cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for full fs logarithmic realization; finite-type and polynomial components have existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For fine saturated monoids the base change of their monoid algebras over a Noetherian ring is Noetherian and has an associated fine saturated logarithmic structure.",
+   "results": "{\"t\": \"2026-10-23T09:35:53Z\", \"tool\": \"leanfinder\", \"query\": \"For fine saturated monoids the base change of their monoid algebras over a Noetherian ring is Noetherian and has an associated fine saturated logarithmic structure.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fg_of_fg_of_fg\", \"Algebra.FiniteType.of_span_eq_top_source\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.ZariskisMainProperty.trans\", \"Algebra.QuasiFiniteAt.baseChange\", \"Algebra.Smooth.exists_subalgebra_finiteType\"], \"digest\": \"8ae1746ac80d40e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for full fs logarithmic realization; finite-type and polynomial components have existing DAG leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chart by a finitely generated saturated integral monoid defines a fine saturated log structure on an affine scheme.",
+   "results": "{\"t\": \"2026-10-23T09:37:20Z\", \"tool\": \"leansearch\", \"query\": \"A chart by a finitely generated saturated integral monoid defines a fine saturated log structure on an affine scheme.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.AffineScheme\", \"IsAffineMonoid.toFG\", \"IsLocalization.finiteType_of_monoid_fg\", \"IsAffineAddMonoid.toFG\", \"Localization.fg\", \"AlgebraicGeometry.IsAffine.recOn\", \"AddMonoid.fg_of_monoid_fg\"], \"digest\": \"c567f30f8838c41f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for full fs logarithmic realization; finite-type and polynomial components have existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T09:37:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for full fs logarithmic realization; finite-type and polynomial components have existing DAG leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]og[Ss]tructure|[Pp]re[Ll]og|[Ll]ogification",
+   "results": "{\"t\": \"2026-10-23T09:37:54Z\", \"tool\": \"grep\", \"query\": \"[Ll]og[Ss]tructure|[Pp]re[Ll]og|[Ll]ogification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for full fs logarithmic realization; finite-type and polynomial components have existing DAG leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing_fin|isNoetherianRing.*finite|isNoetherianRing_of",
+   "results": "{\"t\": \"2026-10-23T09:38:17Z\", \"tool\": \"grep\", \"query\": \"isNoetherianRing_fin|isNoetherianRing.*finite|isNoetherianRing_of\", \"sub\": \"RingTheory/Polynomial\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Basic.lean\"], \"digest\": \"4cbce63679007789\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for full fs logarithmic realization; finite-type and polynomial components have existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.isNoetherianRing_fin",
+   "results": "{\"t\": \"2026-10-23T09:38:17Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.isNoetherianRing_fin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPolynomial.isNoetherianRing_fin\"], \"digest\": \"671c8c6587019904\"}",
+   "date": "2026-10-23",
+   "verdict": "match for polynomial component only: MvPolynomial.isNoetherianRing_fin; reused existing more general finite-type Noetherian node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multivariable polynomial ring in finitely many variables over any commutative Noetherian ring is Noetherian.",
+   "results": "{\"t\": \"2026-10-23T09:38:18Z\", \"tool\": \"leanfinder\", \"query\": \"A multivariable polynomial ring in finitely many variables over any commutative Noetherian ring is Noetherian.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.isNoetherianRing\", \"MvPolynomial.isNoetherianRing_fin\", \"Polynomial.isNoetherianRing\", \"MvPolynomial.isNoetherianRing_fin_0\", \"Algebra.FiniteType.isNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.instMvPolynomialOfFinite\", \"Algebra.FinitePresentation.mvPolynomial\"], \"digest\": \"25a0a02d8ec96701\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for full fs logarithmic realization; finite-type and polynomial components have existing DAG leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert basis theorem: polynomials in a finite set of variables over a Noetherian ring form a Noetherian ring.",
+   "results": "{\"t\": \"2026-10-23T09:38:43Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert basis theorem: polynomials in a finite set of variables over a Noetherian ring form a Noetherian ring.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.isNoetherianRing\", \"MvPolynomial.isNoetherianRing_fin\", \"Polynomial.isNoetherianRing\", \"IsNoetherianRing\", \"is_noetherian_subring_closure\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.isNoetherianRing\", \"IsNoetherianRing.of_finite\"], \"digest\": \"a2f39530a01637ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for full fs logarithmic realization; finite-type and polynomial components have existing DAG leaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-toric-refinement",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical lem-trf-local-term-locality proof (1)--(2), nearby-duality alteration branch, through log-blowup-normalization: ILO VIII 3.3.8--3.3.11 toric chart construction; retained toric-refinement proof step 2 and first part of step 3 (Noetherian algebra and associated fs chart).",
+   "via": [
+    "lem-trf-log-regular-toric-refinement",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-toric-chart-fs-realization",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Expanded finite tensors into explicit polynomial preimages, reused the existing finite-type Noetherian Mathlib leaf and affine-open lemma, and checked the associated-log stalk formula against the global-chart definition. Zero rings, zero variables and arbitrary chart homomorphisms are included. No new nodes.",
+  "blueprint": "Historical nearby-duality alteration branch of lem-trf-local-term-locality (1)--(2), through toric-refinement step 2: realizes its affine chart without assuming log regularity. The latest blueprint replaces that ancestor route with contracting correspondences; this delivery only resolves the assigned retained helper and does not change the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-1b3b2e8f1",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-1b3b2e8f1 (reviewer sub-agent of L); spot-checked: I read the item and all four steps in full; there are no new nodes. The statement is byte-identical to the live node, which is still unsplit with no proof. No repair note exists for this item, so this is a first split, not a 2026-10-21 re-split. Sources checked: ILO VI 1.1 (p.69: fs log schemes have étale-local fs charts and are locally Noetherian) and VIII 3.3.4-3.3.11 (pp.107-108: chart base change over Z[P]); Stacks 00FN, 01OV, 01OW and 00CX, all confirmed in tags/tags. No SGA is cited. Step 1: the multiplication on C is balanced over Z[P]; a⊗nz^q = (na)⊗z^q = e((na)ΠT_i^{n_i}) gives surjectivity; r=0 forces Q=0. It is elementary. Step 2: Y is an affine open of itself, so A is Noetherian (affine-open leaf); C is finite type, hence Noetherian (Algebra.FiniteType.isNoetherianRing leaf). The hypotheses match and no nonzero assumption is needed. Step 3: the one-open cover shows X is locally Noetherian, and β is a monoid homomorphism. Step 4: lem-trf-associated-log-universal-stalks applies with R=Q, an arbitrary monoid. Its stalk clause is exactly the chart test of def-trf-fs-log-blowup, so (X,M_X) is fs. Step 4 quotes ι(q)=[q,1], which is literally in that node's proof, not its statement. The statement still gives α_L ι = β from its structure-map formula and its bijection clause with K=L and the identity, so there is no C3 fault and I made no change. Small cases tested: Q=0; Q=Z with generators ±1; C=0 with A nonzero (P=N, Q=Z, α(1)=0); P=Q=N with g=id. The statement is true. Duplicate search over dag/nodes: the only citer is the parent toric-refinement step 2; the sfb chart nodes and toric-realization-finite-type are different statements. Off-unit uses are only Mathlib leaves and definitions, so no tool_uses are needed and there is no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ToricChartFSRealization",
+  "declaration": "AlgebraicGeometry.toricChart_fs_realization",
+  "declarations": [
+   "AlgebraicGeometry.toricTensorGlobalChart",
+   "AlgebraicGeometry.toricChart_fs_realization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ToricChartFSRealization.lean",
+  "statement": "theorem toricChart_fs_realization (A : Type u) [CommRing A] [IsLocallyNoetherian (Spec (.of A))] (P Q : Type u) [CommMonoid P] [CommMonoid Q] (_hP : IsFineSaturatedMonoid P) (_hQ : IsFineSaturatedMonoid Q) (g : P →* Q) (α : P →* A) : (∀ (r : ℕ) (q : Fin r → Q), Submonoid.closure (Set.range q) = ⊤ → Function.Surjective (MvPolynomial.eval₂Hom (logIdealTensorBase A α g) (fun i ↦ logIdealTensorMonomial A α g (q i)))) ∧ IsNoetherianRing (logIdealTensorRing A α g) ∧ IsLocallyNoetherian (Spec (.of (logIdealTensorRing A α g))) ∧ ∃ (L : EtaleLogStructure (Spec (.of (logIdealTensorRing A α g)))) (η : associatedLogPresheaf.{0, u} (toricTensorGlobalChart A α g) ⟶ L.monoidSheaf.obj), IsAssociatedLogPresentation.{0, u} (toricTensorGlobalChart A α g) L η ∧ L.IsChart (Scheme.Etale.mk (𝟙 (Spec (.of (logIdealTensorRing A α g))))) ((associatedLogIota.{0, u} (toricTensorGlobalChart A α g) L η).comp MulEquiv.ulift.symm.toMonoidHom) ∧ (L.alpha.app (op (Scheme.Etale.mk (𝟙 (Spec (.of (logIdealTensorRing A α g))))))).hom.comp ((associatedLogIota.{0, u} (toricTensorGlobalChart A α g) L η).comp MulEquiv.ulift.symm.toMonoidHom) = toricTensorGlobalChart A α g ∧ L.IsFineSaturated",
+  "branch": "sheaf-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the already-landed def-trf-log-ideal-chart-presentation tensor ring, scalar map and monomial map; that node is added to stmt_deps. Multiplicative monoid notation is equivalent to the additive notation of the node. The associated-log ULift is removed along MulEquiv.ulift, so the asserted chart has domain Q itself."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab76f69b8",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Item JSON vs live: only lean (was null) and stmt_deps (+def-trf-log-ideal-chart-presentation, landed 2026-10-18, owns C=A⊗_{Z[P]}Z[Q], a↦a⊗1 and q↦1⊗z^q) differ; lean.statement verbatim in file; report has Worker report + Second reading by Q75. Clauses: Spec A locally Noetherian instance; P,Q CommMonoid+IsFineSaturatedMonoid, no extra assumption; arbitrary g, α; surjectivity of eval₂Hom for every Fin r generating tuple incl. r=0; C Noetherian; Spec C locally Noetherian; ∃ L η with IsAssociatedLogPresentation (pins the associated structure); associatedLogIota.{0,u}∘MulEquiv.ulift.symm has domain Q, is an IsChart at Etale.mk 𝟙 and its structure map equals β moved by ΓSpecIso.inv; L.IsFineSaturated. Edge cases r=0, C=0, group Q, non-injective g covered and true. Shared universe u forced by logIdealTensorRing, no loss since fs monoids are finitely generated. Helper map is real data; source+blueprint docstrings and 4 proof steps; proof sorry only; no duplicate. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261026T091543-L-3353060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

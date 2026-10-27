@@ -1,0 +1,294 @@
+{
+ "id": "lem-trf-bimodule-resolved-hom-tensor-models",
+ "kind": "statement",
+ "title": "Mixed-ring resolved Hom and tensor models",
+ "statement": "Let $S\\to B$ be a homomorphism of commutative rings, and let $U$ denote restriction of scalars, on complexes and on the ordinary unbounded module derived categories [def-weil-abstract-derived-category]. Use total tensor [def-pc-tensor-complex-sheaves], total Hom [def-sc-module-total-hom-complex], K-flatness [def-pc-module-kflat-complex], K-injectivity [def-pur-kinjective-complex], derived tensor [lem-pc-derived-tensor-second-factor-functor] and derived Hom [def-pur-derived-internal-hom]. Let $C,T$ be arbitrary $B$-complexes, $q:Q\\to T$ a K-flat resolution over $B$, and $I$ a K-injective $S$-complex. Give $J(Q,I)=\\operatorname{Hom}_S^\\bullet(UQ,I)$ the $B$-action $(bh)(e)=h(be)$, and give $J(T,I)$ the same action. This action commutes with the Hom differential, and $J(Q,I)$ is K-injective over $B$. Precomposition with $q$ is a $B$-linear quasi-isomorphism $J(T,I)\\to J(Q,I)$. More generally, for every quasi-isomorphism $t:T'\\to T$ of $B$-complexes and every quasi-isomorphism $s:I'\\to I$ of K-injective $S$-complexes, $h\\mapsto s\\circ h\\circ Ut$ is a $B$-linear quasi-isomorphism $J(T,I')\\to J(T',I)$. Thus these comparison maps give a well-defined bifunctor $( [T],[I])\\mapsto[J(T,I)]$ from $D(B)^{\\mathrm{op}}\\times D(S)$ to $D(B)$, independent of representatives through the canonical localization comparisons. Moreover, for every K-flat resolution $p:P\\to C$ over $B$, both arrows in\n$$\\operatorname{Tot}(P\\otimes_B T)\\ \\longleftarrow\\ \\operatorname{Tot}(P\\otimes_B Q)\\ \\longrightarrow\\ \\operatorname{Tot}(C\\otimes_B Q)$$\ninduced by $q$ and $p$ are quasi-isomorphisms. Their localized zigzag identifies $[\\operatorname{Tot}(C\\otimes_B Q)]$ with $[C]\\otimes_B^{\\mathbf L}[T]$, canonically for all such resolutions. The complexes $\\operatorname{Hom}_B^\\bullet(C,J(Q,I))$ and $\\operatorname{Hom}_S^\\bullet(U\\operatorname{Tot}(C\\otimes_B Q),I)$ therefore represent respectively $R\\operatorname{Hom}_B([C],[J(T,I)])$ and $R\\operatorname{Hom}_S(U([C]\\otimes_B^{\\mathbf L}[T]),[I])$. No flatness of $B$ over $S$, boundedness, or perfectness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A96 (lemma-RHom-from-K-flat-into-K-injective), mixed-ring adaptation of its proof; adjacent lemma-RHom-well-defined and the internal-Hom construction, with the ordinary-module K-flat tensor comparison."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-module-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "For any $B$-complex $L$ and $S$-complex $N$, the action $(bh)(e)=h(be)$ makes each product term of $J(L,N)$ a $B$-module: $b_1(b_2h)(e)=h(b_2b_1e)=((b_1b_2)h)(e)$, and the unit and additive laws follow by evaluation. Since $d_L(be)=b\\,d_L(e)$, the Hom differential satisfies $d(bh)(e)=d_Nh(be)-(-1)^nh(b\\,d_Le)=(b\\,dh)(e)$. Thus it is a $B$-complex. Precomposition by a $B$-linear chain map and postcomposition by an $S$-linear chain map commute with this action and the differential. Restriction $U$ preserves and reflects quasi-isomorphisms: the cycles, boundaries and cohomology are the same underlying groups, and an $S$-linear bijection that is already $B$-linear has $B$-linear inverse. No flatness is involved.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, Hom differential; elementary mixed-ring scalar check"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-rhom-well-defined] on the one-point site with ring $S$, source map $Ut:UT'\\to UT$, and the given map $s:I'\\to I$ between K-injective $S$-complexes. By Step 1, $Ut$ is a quasi-isomorphism. The cited lemma says exactly that $h\\mapsto s\\circ h\\circ Ut$ is an $S$-quasi-isomorphism. Step 1 makes it $B$-linear and reflects its quasi-isomorphism property back to $B$. In particular take $t=q$ and $s=1_I$ to obtain $J(T,I)\\to J(Q,I)$. This comparison requires no K-flatness of $UT$ or $UQ$.",
+   "uses": [
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95, lemma-RHom-well-defined, ordinary modules on the one-point site"
+   }
+  },
+  {
+   "text": "Choose a functorial K-injective resolution $N\\to R(N)$ over $S$ using [prop-pur-kinjective-resolutions-exist] on the small one-point site. The functor on pairs of complexes $(L,N)\\mapsto[J(L,R(N))]$ is contravariant in $L$ and covariant in $N$, by composition of the formulas of Step 1. Step 2 makes it invert quasi-isomorphisms in both variables (the natural resolution maps show that $R$ preserves quasi-isomorphisms). Apply [lem-weil-pbc-localization-universal-property] successively in the two variables, taking the other variable as functor-category parameter; natural isomorphisms there are pointwise isomorphisms. This yields $D(B)^{\\mathrm{op}}\\times D(S)\\to D(B)$ with the stated identity and composition laws. If $I$ is already K-injective, $I\\to R(I)$ compares $J(L,I)$ with this model by Step 2. For an arbitrary identification between K-injective representatives use [lem-weil-pbc-kinjective-hom-derived]: it is represented uniquely up to homotopy, and an isomorphism gives a homotopy equivalence. Postcomposition carries a homotopy $h$ to the Hom homotopy $f\\mapsto hf$; hence the comparison is independent of the representative. The uniqueness and natural-transformation clauses of the localization lemma make all these comparisons canonical.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95 and internal-Hom construction; injectives.tex Tag 079P; derived.tex Tag 070I"
+   }
+  },
+  {
+   "text": "Let $A$ be any acyclic $B$-complex. By [def-pc-module-kflat-complex], $\\operatorname{Tot}(A\\otimes_B Q)$ is acyclic; its restriction to $S$ is acyclic by Step 1. Use only the chain-isomorphism clause of [lem-trf-bimodule-chain-currying-descent], with $(A,T,N)=(A,Q,I)$, to identify the underlying $S$-complex of $\\operatorname{Hom}_B^\\bullet(A,J(Q,I))$ with $\\operatorname{Hom}_S^\\bullet(U\\operatorname{Tot}(A\\otimes_B Q),I)$. Apply [lem-sc-module-hom-complex-quotient] on both sides in degree zero. This gives a bijection between $\\operatorname{Hom}_{K(B)}(A,J(Q,I))$ and $\\operatorname{Hom}_{K(S)}(U\\operatorname{Tot}(A\\otimes_B Q),I)$. The latter is zero by [def-pur-kinjective-complex], since $I$ is K-injective over $S$. The former is therefore zero for every such $A$, which is precisely K-injectivity of $J(Q,I)$ over $B$. This is the acyclic-test argument of 0A96 with the rings kept distinct; the cited currying clause has no resolution or derived-model hypotheses.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-trf-bimodule-chain-currying-descent",
+    "lem-sc-module-hom-complex-quotient",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A96, lemma-RHom-from-K-flat-into-K-injective, mixed-ring version of the displayed proof"
+   }
+  },
+  {
+   "text": "Both $P$ and $Q$ are K-flat over $B$. Thus [def-pc-module-kflat-complex] makes $1_P\\otimes q$ a quasi-isomorphism because $P$ is K-flat, and makes $p\\otimes1_Q$ a quasi-isomorphism because $Q$ is K-flat. These are exactly the two arrows of the stated zigzag. Apply [lem-pc-derived-tensor-second-factor-functor] with $R=A=B$, fixed second complex $T$ and first-factor resolution $P\\to C$: $[\\operatorname{Tot}(P\\otimes_B T)]$ computes $[C]\\otimes_B^{\\mathbf L}[T]$. Invert the first arrow and compose with the second to identify this object with $[\\operatorname{Tot}(C\\otimes_B Q)]$. Clauses (2) and (3) of that lemma give independence of the first resolution and naturality for $q$; their composition law gives the same identification through any third resolution. This proves canonicity for all $P,Q$, not merely an abstract existence of an isomorphism.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, lemma-derived-base-change, with the preceding K-flat construction and Tag 064L"
+   }
+  },
+  {
+   "text": "By Steps 2 and 4, $J(T,I)\\to J(Q,I)$ is a K-injective resolution over $B$. The representative formula of [def-pur-derived-internal-hom], specialized to the one-point $B$-site, therefore computes $R\\operatorname{Hom}_B([C],[J(T,I)])$ by $\\operatorname{Hom}_B^\\bullet(C,J(Q,I))$. On the one-point $S$-site the same formula, now with the already K-injective target $I$, computes derived Hom from $U[\\operatorname{Tot}(C\\otimes_B Q)]$ by $\\operatorname{Hom}_S^\\bullet(U\\operatorname{Tot}(C\\otimes_B Q),I)$. Substitute the canonical tensor identification of Step 5 and use exact restriction from Step 1. These are the two claimed models. The representative-independence clause of that definition and Step 3 ensure compatibility with the stated localization comparisons.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Internal hom in the derived category, Tag 08J9 construction; Tag 0A95 for representative independence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pc-module-kflat-complex",
+  "lem-trf-bimodule-chain-currying-descent",
+  "lem-sc-module-hom-complex-quotient",
+  "def-pur-kinjective-complex",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Mixed-ring adaptation of Tag 0A96; Tags 0A95, 08J9, 09LN, 06Y6, 070I, 079P supply the cited ingredients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complex Q over B and K-injective I over S give Hom S Q I K-injective over B with precomposition action and compute derived tensor with Q",
+   "results": "{\"t\": \"2026-10-22T06:45:14Z\", \"tool\": \"leanfinder\", \"query\": \"K-flat complex Q over B and K-injective I over S give Hom S Q I K-injective over B with precomposition action and compute derived tensor with Q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'_obj_obj\", \"LinearMap.lTensor_injective_of_exact_of_flat\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\"], \"digest\": \"dbccdd5c9d94ba19\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective.lean defines K-injectivity and has bounded-below injective and homotopy-invariance results; it does not give the mixed-ring Hom K-injectivity or the simultaneous models. No source hit for the mixed-ring tensor-Hom argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For rings S to B resolve a B complex by a homotopically flat complex Q; the cochain complex of S linear maps Q to an S homotopically injective I is homotopically injective as a B complex",
+   "results": "{\"t\": \"2026-10-22T06:46:09Z\", \"tool\": \"leanfinder\", \"query\": \"For rings S to B resolve a B complex by a homotopically flat complex Q; the cochain complex of S linear maps Q to an S homotopically injective I is homotopically injective as a B complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.I\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\"], \"digest\": \"e76b9d716db0510b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective.lean defines K-injectivity and has bounded-below injective and homotopy-invariance results; it does not give the mixed-ring Hom K-injectivity or the simultaneous models. No source hit for the mixed-ring tensor-Hom argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat bimodule complex Hom into K-injective complex is K-injective over other ring",
+   "results": "{\"t\": \"2026-10-22T06:45:02Z\", \"tool\": \"leansearch\", \"query\": \"K-flat bimodule complex Hom into K-injective complex is K-injective over other ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_op\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"Module.Injective.mk\", \"Module.Injective.recOn\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.isKProjective_of_iso\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\"], \"digest\": \"1a3316cd82b6a381\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective.lean defines K-injectivity and has bounded-below injective and homotopy-invariance results; it does not give the mixed-ring Hom K-injectivity or the simultaneous models. No source hit for the mixed-ring tensor-Hom argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "{\"t\": \"2026-10-22T06:45:03Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKInjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"HomotopyEquiv.isKInjective\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.isKInjective_iff_of_iso\", \"CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX\", \"CochainComplex.instIsKInjectiveObjIntShiftFunctor\", \"CochainComplex.isKInjective_shift_iff\"], \"digest\": \"71ee57824409744c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective.lean defines K-injectivity and has bounded-below injective and homotopy-invariance results; it does not give the mixed-ring Hom K-injectivity or the simultaneous models. No source hit for the mixed-ring tensor-Hom argument."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective|KFlat",
+   "results": "{\"t\": \"2026-10-22T06:45:02Z\", \"tool\": \"grep\", \"query\": \"IsKInjective|KFlat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"bf3ce247c16db7ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective.lean defines K-injectivity and has bounded-below injective and homotopy-invariance results; it does not give the mixed-ring Hom K-injectivity or the simultaneous models. No source hit for the mixed-ring tensor-Hom argument."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective|KFlat|kflat",
+   "results": "{\"t\": \"2026-10-23T09:56:20Z\", \"tool\": \"grep\", \"query\": \"IsKInjective|KFlat|kflat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"0d0da127c713aa01\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-injectivity definitions, homotopy invariance, derived adjunction interfaces or ordinary flat modules do not state the full mixed-ring model package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mixed ring resolved Hom complex and K flat derived tensor models over a homomorphism of commutative rings",
+   "results": "{\"t\": \"2026-10-23T09:56:21Z\", \"tool\": \"leansearch\", \"query\": \"Mixed ring resolved Hom complex and K flat derived tensor models over a homomorphism of commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_flat_tensorProduct\", \"RingHom.FaithfullyFlat\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"3c465c145858634b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-injectivity definitions, homotopy invariance, derived adjunction interfaces or ordinary flat modules do not state the full mixed-ring model package"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "{\"t\": \"2026-10-23T09:56:21Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKInjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"HomotopyEquiv.isKInjective\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.isKInjective_iff_of_iso\", \"CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX\", \"CochainComplex.instIsKInjectiveObjIntShiftFunctor\", \"CochainComplex.isKInjective_shift_iff\"], \"digest\": \"71ee57824409744c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-injectivity definitions, homotopy invariance, derived adjunction interfaces or ordinary flat modules do not state the full mixed-ring model package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat complex over B and K injective complex over S Hom S Q I is K injective over B for a ring map S to B",
+   "results": "{\"t\": \"2026-10-23T09:56:31Z\", \"tool\": \"leanfinder\", \"query\": \"K flat complex over B and K injective complex over S Hom S Q I is K injective over B for a ring map S to B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap'\", \"Module.Flat.iff_rTensor_preserves_injective_linearMap'\", \"LinearMap.lTensor_injective_of_exact_of_flat\", \"Module.Flat.iff_lTensor_preserves_injective_linearMapₛ\", \"Module.Flat.iff_rTensor_preserves_injective_linearMapₛ\", \"Module.FaithfullyFlat.injective_of_tensorProduct\"], \"digest\": \"275fc744ed427d00\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern faithfully flat modules and not mixed-ring complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopically flat tensor functor has a right adjoint taking homotopically injective unbounded module complexes to homotopically injective complexes and derived comparison maps",
+   "results": "{\"t\": \"2026-10-23T09:57:06Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopically flat tensor functor has a right adjoint taking homotopically injective unbounded module complexes to homotopically injective complexes and derived comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.Tor_obj\"], \"digest\": \"d7d2646e78a587b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-injectivity definitions, homotopy invariance, derived adjunction interfaces or ordinary flat modules do not state the full mixed-ring model package"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-bimodule-tensor-hom",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Mixed-ring tensor-Hom adjunction used to move the diagonal module past the perfect polynomial dual. Re-split component: old proof steps 1 and 3, and the model-identification and tensor-zigzag part of step 4.",
+   "via": [
+    "lem-trf-derived-bimodule-tensor-hom",
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-bimodule-resolved-hom-tensor-models",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all provenance. Wrote six proof steps using existing DAG inputs only. Kept B-K-flatness and S-K-injectivity distinct, checked the B-action and reflection of quasi-isomorphisms, explicitly localized the Hom bifunctor, proved K-injectivity by the acyclic test using only the existing currying chain isomorphism, and identified both tensor arrows and Hom models. No new nodes or Mathlib leaves.",
+  "blueprint": "Nearest blueprint ancestor lem-trf-local-term-locality, proof (1)--(2), auxiliary coherent-duality branch recorded in blueprint.from.place; supplies the resolved-model component of lem-trf-derived-bimodule-tensor-hom without changing the unit or chapter route. Current latest blueprint ancestor and unit read. No blueprint node states this mixed-ring model package.",
+  "tool_uses": [
+   {
+    "node": "def-sc-module-total-hom-complex",
+    "why": "Product Hom differential for the elementary scalar check. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Underlying-group cohomology and the localization convention. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "One-point S-site comparison theorem, with both targets K-injective. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Functorial resolutions on the small one-point S-site. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic factorization and uniqueness of natural transformations, applied in each variable. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Comparison of arbitrary K-injective representatives by homotopy-category maps. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "def-pc-module-kflat-complex",
+    "why": "Acyclic tensor test and preservation of quasi-isomorphisms over B. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "lem-sc-module-hom-complex-quotient",
+    "why": "Degree-zero Hom cohomology is homotopy classes, over each ring. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "def-pur-kinjective-complex",
+    "why": "Acyclic-test definition, on the one-point sites over S and B. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Canonical first-K-flat model and naturality in the second complex, with R=A=B. No node of this curve-local-term unit replaces this generic tool."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Representative formula and independence on the one-point sites. No node of this curve-local-term unit replaces this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pc-module-kflat-complex",
+  "lem-sc-module-hom-complex-quotient",
+  "def-pur-kinjective-complex",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pur-derived-internal-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-cbec3c181",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-cbec3c181 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to the base (md5 82fa7c80); its source, stmt_deps and blueprint fields are unchanged. There are no new nodes and no SGA citation. Live and side-live still have the item unsplit, and there is no repair note. Source check: sites-cohomology.tex lemma-RHom-from-K-flat-into-K-injective = 0A96 and lemma-RHom-well-defined = 0A95 (tags lines 12939/12938). The 0A96 proof is the acyclic test, and Step 4 reproduces it with S and B kept separate. Steps 1-6 check out. (1) The B-action (bh)(e)=h(be) is S-linear because B is commutative and S acts through S→B; the differential sign is consistent with def-sc-module-total-hom-complex; U preserves and reflects quasi-isomorphisms. (2) lem-pur-rhom-well-defined on the one-point S-site, with s a quasi-isomorphism between K-injectives and t=Ut, gives the comparison maps; directions match and no K-flatness of UT is needed. (3) A functorial resolution (prop-pur-kinjective-resolutions-exist) and the localization universal property (1)-(3) applied one variable at a time give the bifunctor; lem-weil-pbc-kinjective-hom-derived turns quasi-isomorphisms between K-injectives into homotopy equivalences. (4) Tot(A⊗_B Q) is acyclic because Q is B-K-flat. The unconditional chain-isomorphism clause of lem-trf-bimodule-chain-currying-descent, plus lem-sc-module-hom-complex-quotient on H^0, carries the S-side vanishing to Hom_K(B)(A,J(Q,I))=0. (5) The zigzag arrows are quasi-isomorphisms by B-K-flatness of P and of Q respectively; lem-pc-derived-tensor-second-factor-functor with R=A=B, clauses (2)-(3), makes the identification canonical. (6) def-pur-derived-internal-hom on both one-point sites gives the two Hom models. Small cases: for S=B, Q=B[0] the item is 0A96. For Z→F_p, T=Q=F_p[0], I=(Q→Q/Z), J has Z/p in degree 1, which is Ext^1, and is K-injective over F_p. Zero inputs give zero. Duplicate search: def-trf-derived-coinduction is the special case T=B[0]; the pur/coef Hom-K-flat-into-K-injective nodes are one-ring; nothing else states this. I accept all 13 tool_uses as generic module/derived-category tools. Advisory for the maintainer: whoever splits the unsplit currying node must not cite this item for its model-identification clause, or the DAG gets a cycle. There is no cycle now because that node has empty deps."
+ }
+}

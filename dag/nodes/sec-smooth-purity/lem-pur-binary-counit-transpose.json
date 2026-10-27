@@ -1,0 +1,253 @@
+{
+ "id": "lem-pur-binary-counit-transpose",
+ "kind": "statement",
+ "title": "Binary counit substitution and comparison transpose",
+ "statement": "Let $\\mathcal C_i,\\mathcal D_i$ for $i=1,2,3$ be categories [def-nagata-category]. Specify functors $R_i:\\mathcal C_i\\to\\mathcal D_i$, $L_i:\\mathcal D_i\\to\\mathcal C_i$ and natural transformations $u_i:1\\to L_iR_i$, $e_i:R_iL_i\\to1$ satisfying $L_i(e_{i,M})u_{i,L_iM}=1$ and $e_{i,R_iI}R_i(u_{i,I})=1$. Thus $R_i\\dashv L_i$ is specified. Let $B:\\mathcal D_1\\times\\mathcal D_2\\to\\mathcal D_3$ and $\\bar B:\\mathcal C_1\\times\\mathcal C_2\\to\\mathcal C_3$ be bifunctors, that is, functors on the product categories. Give a natural isomorphism $d_{I,J}:L_3B(R_1I,R_2J)\\xrightarrow{\\sim}\\bar B(I,J)$. Composition is right to left. Define\n$$r_{I,J}=e_{3,B(R_1I,R_2J)}R_3(d_{I,J}^{-1}).$$\nFor $q:R_1I\\to M$, $q':R_2J\\to N$, put $b=L_1(q)u_{1,I}$, $b'=L_2(q')u_{2,J}$ and $q_B=B(q,q')r_{I,J}$. Then\n$$q=e_{1,M}R_1(b),\\quad q'=e_{2,N}R_2(b'),\\quad L_3(r_{I,J})u_{3,\\bar B(I,J)}=d_{I,J}^{-1},$$\n$$b_B:=L_3(q_B)u_{3,\\bar B(I,J)}=L_3B(q,q')d_{I,J}^{-1}=L_3B(e_{1,M},e_{2,N})d_{L_1M,L_2N}^{-1}\\bar B(b,b').$$\nHere $B(q,q')=B(e_{1,M},e_{2,N})B(R_1b,R_2b')$. If $b,b',e_{1,M},e_{2,N}$ are invertible, all factors in the last expression for $b_B$ are invertible, and, with\n$$a_B(M,N)=d_{L_1M,L_2N}(L_3B(e_{1,M},e_{2,N}))^{-1},$$\none has\n$$b_B^{-1}=\\bar B(b^{-1},(b')^{-1})a_B(M,N).$$\nFor arbitrary maps $f:M\\to M'$ and $g:N\\to N'$ for which all four input counits are invertible, writing $E_{M,N}=L_3B(e_{1,M},e_{2,N})$, the identities\n$$E_{M',N'}^{-1}L_3B(f,g)=L_3B(R_1L_1f,R_2L_2g)E_{M,N}^{-1},$$\n$$a_B(M',N')L_3B(f,g)=\\bar B(L_1f,L_2g)a_B(M,N)$$\nhold. The inputs and their maps are independent; the formulas also allow equal objects, repeated inputs and identity maps. No monoidal structure on the categories or faithfulness of evaluations is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Agent-formulated categorical extraction of the coefficient-comparison construction, original lem-pur-integral-realization-recursion steps 3,5 and binary part of 7; not a theorem asserted verbatim in the blueprint."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "For $(i,X,T,p)=(1,I,M,q)$ and $(2,J,N,q')$, counit naturality and the stipulated triangle give\n$$e_{i,T}R_i(L_i(p)u_{i,X})=p\\,e_{i,R_iX}R_i(u_{i,X})=p.$$\nThis is the first pair of identities; only functoriality, naturality of $e_i$, and the second displayed triangle in the hypotheses are used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-written elementary categorical elaboration, calculation 1; coefficient comparisons preserve units and counits in fix-prop-coherence"
+   }
+  },
+  {
+   "text": "Set $H=B(R_1I,R_2J)$, $A=\\bar B(I,J)$ and $h=d_{I,J}^{-1}:A\\to L_3H$. Naturality of $u_3$ gives $L_3R_3(h)u_{3,A}=u_{3,L_3H}h$. Thus the definition of $r$ and the other stipulated triangle give\n$$L_3(r_{I,J})u_{3,A}=L_3(e_{3,H})L_3R_3(h)u_{3,A}=L_3(e_{3,H})u_{3,L_3H}h=h.$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-written elementary categorical elaboration, calculation 2; coefficient comparisons preserve units and counits in fix-prop-coherence"
+   }
+  },
+  {
+   "text": "Apply functoriality to $q_B=B(q,q')r_{I,J}$ and substitute step 2:\n$$b_B=L_3B(q,q')L_3(r_{I,J})u_{3,A}=L_3B(q,q')d_{I,J}^{-1}.$$\nIn the product category composition is componentwise, so step 1 and the defining composition law of the functor $B$ give\n$$B(q,q')=B(e_{1,M},e_{2,N})B(R_1(b),R_2(b')).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-written elementary categorical elaboration, calculation 3; coefficient comparisons preserve units and counits in fix-prop-coherence"
+   }
+  },
+  {
+   "text": "Naturality of $d$ at the product-category arrow $(b,b'):(I,J)\\to(L_1M,L_2N)$ states\n$$\\bar B(b,b')d_{I,J}=d_{L_1M,L_2N}L_3B(R_1(b),R_2(b')).$$\nCompose with the two inverse components of $d$ to obtain\n$$L_3B(R_1(b),R_2(b'))d_{I,J}^{-1}=d_{L_1M,L_2N}^{-1}\\bar B(b,b').$$\nSubstitute this and step 3 into $b_B$ to get precisely $b_B=E_{M,N}d_{L_1M,L_2N}^{-1}\\bar B(b,b')$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-written elementary categorical elaboration, calculation 4; coefficient comparisons preserve units and counits in fix-prop-coherence"
+   }
+  },
+  {
+   "text": "Under the stated invertibility hypotheses, $E_{M,N}^{-1}=L_3B(e_{1,M}^{-1},e_{2,N}^{-1})$ and $\\bar B(b,b')^{-1}=\\bar B(b^{-1},(b')^{-1})$: composing either proposed inverse on either side gives the image of the pair of identity arrows, hence an identity. Reverse the three factors of step 4 and cancel adjacent inverse pairs. This gives\n$$b_B^{-1}=\\bar B(b^{-1},(b')^{-1})d_{L_1M,L_2N}E_{M,N}^{-1}=\\bar B(b^{-1},(b')^{-1})a_B(M,N).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-written elementary categorical elaboration, calculation 5; coefficient comparisons preserve units and counits in fix-prop-coherence"
+   }
+  },
+  {
+   "text": "Counit naturality says $f e_{1,M}=e_{1,M'}R_1L_1(f)$ and $g e_{2,N}=e_{2,N'}R_2L_2(g)$. Applying the functor $L_3B$ on the product category yields\n$$L_3B(f,g)E_{M,N}=E_{M',N'}L_3B(R_1L_1(f),R_2L_2(g)).$$\nAll four counits are invertible, so both $E$ maps have the inverses described in step 5. Compose on the left by $E_{M',N'}^{-1}$ and on the right by $E_{M,N}^{-1}$ to obtain the first requested naturality equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-written elementary categorical elaboration, calculation 6; coefficient comparisons preserve units and counits in fix-prop-coherence"
+   }
+  },
+  {
+   "text": "Naturality of $d$ at $(L_1(f),L_2(g))$ gives\n$$d_{L_1M',L_2N'}L_3B(R_1L_1(f),R_2L_2(g))=\\bar B(L_1(f),L_2(g))d_{L_1M,L_2N}.$$\nMultiply the equation of step 6 by $d_{L_1M',L_2N'}$ on the left, substitute this equality, and use $a_B=dE^{-1}$. The result is $a_B(M',N')L_3B(f,g)=\\bar B(L_1(f),L_2(g))a_B(M,N)$. Each calculation treats the two coordinates independently, so equal objects, repeated inputs and identity arrows are allowed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-written elementary categorical elaboration, calculation 7; coefficient comparisons preserve units and counits in fix-prop-coherence"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Explicit binary adjunction calculation supporting the coefficient-comparison coherence paragraph; not a verbatim blueprint theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bifunctor|map_prod|counit.*naturality|homEquiv.*naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean. Subdirectory: CategoryTheory/Adjunction. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Functor.map_comp",
+   "results": "0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Binary functor comparison transported along two adjunctions using counits is natural and its adjoint transpose factors through transposes in both variables",
+   "results": "8 hits: CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Bicategory.Adjunction.compCounit, CategoryTheory.mateEquiv, CategoryTheory.Limits.prodComparisonNatTrans, CategoryTheory.Bicategory.Adjunction.comp_counit, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.LiftLeftAdjoint.otherMap. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bifunctor B and equivalences R_i left adjoint L_i, a comparison d from L B(R_1,R_2) to barred B has counit transport a(M,N)=d(LM,LN) inverse(LB(e_M,e_N)); transpose and naturality formulas hold in both inputs",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv_counit_symm, AlgebraicTopology.DoldKan.Compatibility.τ₁, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, AlgebraicTopology.DoldKan.Compatibility.υ. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem mateEquiv_counit|theorem mateEquiv_apply|theorem conjugateEquiv_counit|def mateEquiv",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean. Subdirectory: CategoryTheory/Adjunction. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"naturality\"",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_right, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right, CategoryTheory.Adjunction.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.homEquiv_naturality_right_symm, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right_symm. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two variable counit substitution: transpose a bifunctor applied to coefficient arrows under three adjunctions, invert the comparison and prove naturality in both variables",
+   "results": "8 hits: CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app, CategoryTheory.Adjunction.Triple.leftToRight_eq_counits, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app_assoc, CategoryTheory.ParametrizedAdjunction.whiskerLeft_map_counit, CategoryTheory.Adjunction.Triple.rightToLeft_eq_counits, CategoryTheory.ParametrizedAdjunction.whiskerLeft_map_counit_assoc, CategoryTheory.conjugateEquiv_counit. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "grep",
+   "query": "binary.*counit|counit.*binary|homEquiv_counit|homEquiv_unit",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean.  Subdirectory: CategoryTheory/Adjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match: searched hits give ordinary homEquiv, mate, or binary-product comparison facts, not all clauses for the specified arbitrary bifunctors and d; seven direct equation chases assemble the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The transpose of B(q,qprime) composed with the counit comparison equals L_3 B(e_M,e_N) composed with d inverse and C(transpose q,transpose qprime), naturally in two independent inputs",
+   "results": "8 hits: CategoryTheory.Lax.LaxTrans.comp_naturality, Module.Dual.transpose, Module.Dual.transpose_comp, CategoryTheory.Bicategory.adjointifyCounit, CategoryTheory.TwoSquare, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.Adjunction.Triple.leftToRight_app_obj, LinearMap.toMatrix₂'_comp. ",
+   "date": "2026-10-22",
+   "verdict": "no match: searched hits give ordinary homEquiv, mate, or binary-product comparison facts, not all clauses for the specified arbitrary bifunctors and d; seven direct equation chases assemble the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"counit\"",
+   "results": "11 hits: CategoryTheory.Adjunction.CoreHomEquivUnitCounit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit, CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit, CategoryTheory.Adjunction.mkOfHomEquiv_counit_app. ",
+   "date": "2026-10-22",
+   "verdict": "no match: searched hits give ordinary homEquiv, mate, or binary-product comparison facts, not all clauses for the specified arbitrary bifunctors and d; seven direct equation chases assemble the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For bifunctors B and C and three adjunctions R_i left adjoint L_i, an isomorphism L_3 B(R_1 I,R_2 J) to C(I,J) gives a counit comparison whose adjoint transpose factors naturally through both input transposes",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app, CategoryTheory.Adjunction.Triple.leftToRight_eq_counits, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app_assoc, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app. ",
+   "date": "2026-10-22",
+   "verdict": "no match: searched hits give ordinary homEquiv, mate, or binary-product comparison facts, not all clauses for the specified arbitrary bifunctors and d; seven direct equation chases assemble the item"
+  },
+  {
+   "tool": "grep",
+   "query": "def mateEquiv|theorem mateEquiv_counit|homEquiv_naturality_right|counit_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean.  Subdirectory: CategoryTheory/Adjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match: searched hits give ordinary homEquiv, mate, or binary-product comparison facts, not all clauses for the specified arbitrary bifunctors and d; seven direct equation chases assemble the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a comparison obtained by applying a binary functor to invertible counits; invert the transpose using naturality of a specified isomorphism of bifunctors",
+   "results": "8 hits: CategoryTheory.Limits.prodComparison_inv_natural, CategoryTheory.Limits.prodComparison_inv_natural_assoc, CategoryTheory.Iso.inv_hom_id_app_app_app, CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_whiskerLeft, CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_whiskerRight, CategoryTheory.Iso.inv_hom_id_app_app_app_assoc, CategoryTheory.Iso.inv_hom_id_app_app, CategoryTheory.Iso.inv_hom_id_app_app_assoc. ",
+   "date": "2026-10-22",
+   "verdict": "no match: searched hits give ordinary homEquiv, mate, or binary-product comparison facts, not all clauses for the specified arbitrary bifunctors and d; seven direct equation chases assemble the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-realization-recursion",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 (adic transport), coefficient-comparison construction; recursive characterization exposing steps 3-4 of lem-sf-integral-compactification-system-realization; independent-input tensor adjunction-transpose and inverse-factor calculation (original recursion steps 3,5,7)",
+   "via": [
+    "lem-pur-integral-realization-recursion",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-binary-counit-transpose",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and supplied seven short elementary equations using only its explicit units, counits, triangle identities, naturality and functor laws. Checked transpose directions, inverse factor order and both independent-input naturality equations. No new nodes or external theorem dependencies are required. Logged six fresh Mathlib searches and retained inherited searches.",
+  "blueprint": "The coefficient-comparison paragraph of fix-prop-coherence is elaborated for binary operations; realizes original recursion steps 3 and 5 via the inherited chain to thm-pur-rational-and-qbar-purity, Step 1 lattice/adic transport. The blueprint does not assert this abstract lemma verbatim."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-aa11e802b",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-aa11e802b (reviewer sub-agent of L); spot-checked: I read all seven steps of the item in full and checked each one by hand. Steps 1 and 2: counit/unit naturality plus the two stipulated triangles give q = e_M R(b) and L_3(r)u = d^{-1}. Step 3: functoriality of B, composing componentwise in the product category. Step 4: naturality of d at (b,b') gives b_B = E d^{-1}_{L_1M,L_2N} B̄(b,b'), with d^{-1} in the direction the statement says. Step 5: the inverse, using only invertibility of e_1, e_2, b and b'; e_3 is never inverted. Steps 6 and 7: counit naturality under L_3B, then d-naturality at (L_1f,L_2g), give both naturality identities. All steps are short elementary substitutions in the item's own data and cite nothing (C1/C2 fine). Edge cases checked: identity adjunctions, where r = d^{-1} and b = q; equal or repeated inputs; identity maps. Compared with clones/live and side-live, the delivery changes only status, proof, proof_origin, split_report and mathlib_searches. The statement, stmt_deps, source and blueprint are byte-identical, so no target is weakened. The item has no repair note and no other group has split it. The parent lem-pur-integral-realization-recursion uses the binary inverse clause at step 3 and the naturality at step 5, both as stated. proof_origin by=agent is correct: fix-prop-coherence.proof.md lines 10-20 are only the coefficient-comparison context. Duplicate search over dag/nodes found the sibling lem-pur-unary-counit-transpose (the unary case), lem-sp-tower-binary-counit-representability and the sf proper counit-transpose nodes; all are different statements. Mathlib Basic.lean homEquiv (lines 160-170) supplies ingredients only. No new nodes, no SGA, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BinaryCounitTranspose",
+  "declaration": "CategoryTheory.binaryCounitTranspose",
+  "declarations": [
+   "CategoryTheory.BinaryCounitTranspose.comparison",
+   "CategoryTheory.BinaryCounitTranspose.evaluation",
+   "CategoryTheory.BinaryCounitTranspose.inverseComparison",
+   "CategoryTheory.binaryCounitTranspose"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BinaryCounitTranspose.lean",
+  "statement": "theorem binaryCounitTranspose {C₁ : Type u₁} [Category.{v₁} C₁] {D₁ : Type u₂} [Category.{v₂} D₁] {C₂ : Type u₃} [Category.{v₃} C₂] {D₂ : Type u₄} [Category.{v₄} D₂] {C₃ : Type u₅} [Category.{v₅} C₃] {D₃ : Type u₆} [Category.{v₆} D₃] (R₁ : C₁ ⥤ D₁) (L₁ : D₁ ⥤ C₁) (adj₁ : R₁ ⊣ L₁) (R₂ : C₂ ⥤ D₂) (L₂ : D₂ ⥤ C₂) (adj₂ : R₂ ⊣ L₂) (R₃ : C₃ ⥤ D₃) (L₃ : D₃ ⥤ C₃) (adj₃ : R₃ ⊣ L₃) (B : (D₁ × D₂) ⥤ D₃) (barB : (C₁ × C₂) ⥤ C₃) (d : R₁.prod R₂ ⋙ B ⋙ L₃ ≅ barB) : (∀ (I : C₁) (J : C₂) (M : D₁) (N : D₂) (q : R₁.obj I ⟶ M) (q' : R₂.obj J ⟶ N), q = R₁.map (adj₁.homEquiv _ _ q) ≫ adj₁.counit.app M ∧ q' = R₂.map (adj₂.homEquiv _ _ q') ≫ adj₂.counit.app N ∧ adj₃.homEquiv _ _ (comparison adj₃ B barB d I J) = d.inv.app (I, J) ∧ adj₃.homEquiv _ _ (comparison adj₃ B barB d I J ≫ B.map (q ×ₘ q')) = d.inv.app (I, J) ≫ L₃.map (B.map (q ×ₘ q')) ∧ adj₃.homEquiv _ _ (comparison adj₃ B barB d I J ≫ B.map (q ×ₘ q')) = barB.map (adj₁.homEquiv _ _ q ×ₘ adj₂.homEquiv _ _ q') ≫ d.inv.app (L₁.obj M, L₂.obj N) ≫ BinaryCounitTranspose.evaluation adj₁ adj₂ B L₃ M N ∧ B.map (q ×ₘ q') = B.map (R₁.map (adj₁.homEquiv _ _ q) ×ₘ R₂.map (adj₂.homEquiv _ _ q')) ≫ B.map (adj₁.counit.app M ×ₘ adj₂.counit.app N) ∧ (∀ [IsIso (adj₁.homEquiv _ _ q)] [IsIso (adj₂.homEquiv _ _ q')] [IsIso (adj₁.counit.app M)] [IsIso (adj₂.counit.app N)], IsIso (barB.map (adj₁.homEquiv _ _ q ×ₘ adj₂.homEquiv _ _ q')) ∧ IsIso (d.inv.app (L₁.obj M, L₂.obj N)) ∧ IsIso (BinaryCounitTranspose.evaluation adj₁ adj₂ B L₃ M N) ∧ (∀ [IsIso (BinaryCounitTranspose.evaluation adj₁ adj₂ B L₃ M N)], inverseComparison adj₁ adj₂ B L₃ barB d M N = inv (BinaryCounitTranspose.evaluation adj₁ adj₂ B L₃ M N) ≫ d.hom.app (L₁.obj M, L₂.obj N)) ∧ IsIso (adj₃.homEquiv _ _ (comparison adj₃ B barB d I J ≫ B.map (q ×ₘ q'))) ∧ (∀ [IsIso (adj₃.homEquiv _ _ (comparison adj₃ B barB d I J ≫ B.map (q ×ₘ q')))], inv (adj₃.homEquiv _ _ (comparison adj₃ B barB d I J ≫ B.map (q ×ₘ q'))) = inverseComparison adj₁ adj₂ B L₃ barB d M N ≫ barB.map (inv (adj₁.homEquiv _ _ q) ×ₘ inv (adj₂.homEquiv _ _ q'))))) ∧ (∀ (M M' : D₁) (N N' : D₂) (f : M ⟶ M') (g : N ⟶ N') [IsIso (adj₁.counit.app M)] [IsIso (adj₁.counit.app M')] [IsIso (adj₂.counit.app N)] [IsIso (adj₂.counit.app N')], L₃.map (B.map (f ×ₘ g)) ≫ L₃.map (B.map (inv (adj₁.counit.app M') ×ₘ inv (adj₂.counit.app N'))) = L₃.map (B.map (inv (adj₁.counit.app M) ×ₘ inv (adj₂.counit.app N))) ≫ L₃.map (B.map (R₁.map (L₁.map f) ×ₘ R₂.map (L₂.map g))) ∧ L₃.map (B.map (f ×ₘ g)) ≫ inverseComparison adj₁ adj₂ B L₃ barB d M' N' = inverseComparison adj₁ adj₂ B L₃ barB d M N ≫ barB.map (L₁.map f ×ₘ L₂.map g))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf64a3574",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Every clause matches the node: q=R(b)≫e (both inputs); transpose of r is d.inv; b_B=d⁻¹≫L₃B(q,q') and =B̄(b,b')≫d⁻¹_{L₁M,L₂N}≫E; B(q,q') factorization; with b,b',e_M,e_N iso, all three factors are IsIso, a pinned to inv E≫d.hom, inv b_B=a≫B̄(b⁻¹,b'⁻¹); both naturality equations quantified independently with four input counits iso (E⁻¹ written as L₃B(e⁻¹,e⁻¹)). Six independent universe pairs; adjunctions carry only units, counits and the two triangles; no extra assumptions; e₃ never inverted. Helpers r/E/a are real composites with docstrings. Node differs from side-live only in lean; lean.statement verbatim (script check); report has Worker report + Second reading by Q115; proof is sorry only and docstring has 7 steps; lines ≤100; imports used; no name collision in Mathlib/slopmaster2/side-live. Advisory: docstring cites the moved latest/sk-thm-sf-compatibility path of the same source paragraph. No compile (nothing changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261024T185240-L-3491199",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.binaryCounitTranspose"
+  ],
+  "sorry_after": []
+ }
+}

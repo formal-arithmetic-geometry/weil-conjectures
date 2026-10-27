@@ -47,7 +47,7 @@ variable {κ ι : Type*} [Fintype κ] [Fintype ι] [DecidableEq κ] [DecidableEq
 
 /-- The splitting `κ ≃ Fin r ⊕ (κ ∖ range ρ)` along an injection `ρ : Fin r → κ`. -/
 noncomputable abbrev sumComplEquiv {r : ℕ} (ρ : Fin r → κ) (hρ : Function.Injective ρ) :
-    κ ≃ Fin r ⊕ {i // i ∉ Set.range ρ} := PadicAlgCl.sumComplEquiv ρ hρ
+    κ ≃ Fin r ⊕ {i // i ∉ Set.range ρ} := FiniteIndexSplitting.sumComplEquiv ρ hρ
 
 /-- Pulled back to a neighbourhood of a point, a matrix of continuous functions
 of constant rank `r` is equivalent to the matrix `[[1, 0], [0, 0]]` with an `r × r` identity

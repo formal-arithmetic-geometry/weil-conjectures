@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-gm-fixed-square-zero-lifting",
+ "kind": "statement",
+ "title": "Fixed points for a multiplicative-group action lift across square-zero extensions",
+ "statement": "Let $R$ be a commutative ring. Put $\\mathbf G_{m,R}=\\operatorname{Spec}R[z,z^{-1}]$ with multiplication of units [def-weil-affine-spectrum]. Let $X=\\operatorname{Spec}C$ be an affine $R$-scheme smooth over $R$ [def-sbc-smooth-morphisms]. Give $X$ an $R$-action of $\\mathbf G_{m,R}$, meaning an $R$-morphism $a:\\mathbf G_{m,R}\\times_R X\\to X$ satisfying $a(1,x)=x$ and $a(t,a(u,x))=a(tu,x)$ on all commutative $R$-algebras. For an $R$-algebra $B$ write $X(B)=\\operatorname{Hom}_{R\\text{-alg}}(C,B)$; a point $x\\in X(B)$ is fixed if $a(t,x_{B'})=x_{B'}$ for every commutative $B$-algebra $B'$ and every $t\\in(B')^\\times$. Let $p:B_1\\twoheadrightarrow B_0$ be a surjective map of commutative $R$-algebras with kernel $J$ satisfying $J^2=0$. For every fixed point $x_0\\in X(B_0)$ there is a fixed point $x_1\\in X(B_1)$ whose image under $X(p)$ is $x_0$. No reductivity, connectedness, field, Noetherian, or residue-characteristic assumption is imposed on the base or on $X$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent relative infinitesimal extension of Theorem 13.1, printed p.254, and the weight-splitting method in Lemma 13.6, printed p.256. The book states the field case; the square-zero lifting assertion over arbitrary base rings is agent-written, with its graded conormal argument recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-split-torus-over-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-gm-affine-action-grading] to the given action: $C=\\bigoplus_{n\\in\\mathbf Z}C_n$ as $R$-modules, $R$ maps to $C_0$, and homogeneous evaluation is $a_B(t,x)(c_n)=t^nx(c_n)$.",
+   "uses": [
+    "lem-sfb-gm-affine-action-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, and Tag 0EKJ, example-Gm-on-affine"
+   }
+  },
+  {
+   "text": "Write $g:C\\to B_0$ for $x_0$. For $c_n\\in C_n$ with $n\\ne0$, test fixedness after $B_0\\to B_0[z,z^{-1}]$ at the universal unit $z$. Step 1 gives $z^ng(c_n)=g(c_n)$; uniqueness of Laurent coefficients gives $g(c_n)=0$. Conversely, a map killing every $C_n$ for $n\\ne0$ is fixed on every algebra extension by the formula in step 1 and finite additivity.",
+   "uses": [
+    "lem-sfb-gm-affine-action-grading"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKJ, example-Gm-on-affine: homogeneous action formula, applied to the universal Laurent unit"
+   }
+  },
+  {
+   "text": "The surjection $p$ identifies $B_0$ with $B_1/J$. By [def-weil-closed-immersion] and [def-sbc-first-order-thickening], $\\operatorname{Spec}p$ is a first order thickening of affine $R$-schemes: its defining ideal on the affine target is $J$, with $J^2=0$. The affine lifting property in [def-sbc-smooth-morphisms] gives a lift $\\operatorname{Spec}B_1\\to X$ of $x_0$. The affine correspondence [def-weil-affine-spectrum] writes it as an $R$-algebra map $f:C\\to B_1$ with $pf=g$. In particular $f(C_n)\\subseteq J$ for $n\\ne0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-first-order-thickening",
+    "def-sbc-smooth-morphisms",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H0, definition-formally-smooth; application to Spec(B_1/J) inside Spec(B_1)"
+   }
+  },
+  {
+   "text": "For $c=\\sum_n c_n$ set $h(c)=f(c_0)$. The direct-sum decomposition makes $h$ additive and $R$-linear, and $h(1)=1$. Check multiplication on $a\\in C_m$, $b\\in C_n$. If $m=n=0$, the assertion follows from multiplicativity of $f$. If $m+n\\ne0$, then $h(ab)=0$ and at least one of $h(a),h(b)$ is zero. If $m+n=0$ with $m\\ne0$, then $h(ab)=f(ab)=f(a)f(b)=0$, since both factors lie in $J$ and $J^2=0$, while $h(a)h(b)=0$. Finite distributivity proves $h(cd)=h(c)h(d)$ for arbitrary $c,d$. Thus $h$ is an $R$-algebra map.",
+   "uses": [
+    "lem-sfb-gm-affine-action-grading"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent square-zero argument using the weight-splitting idea of Lemma 13.6, printed p.256; the book proves the field case, not this relative assertion"
+   }
+  },
+  {
+   "text": "For every $c=\\sum_n c_n$, $ph(c)=g(c_0)=g(c)$ by step 2. Also $h$ kills each $C_n$ with $n\\ne0$, so the converse in step 2 proves fixedness after every $B_1$-algebra extension. Hence $h$ defines the required fixed lift $x_1$.",
+   "uses": [
+    "lem-sfb-gm-affine-action-grading"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent relative lifting conclusion; compare Theorem 13.1, printed p.254"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-gm-affine-action-grading",
+  "def-weil-closed-immersion",
+  "def-sbc-first-order-thickening",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0EKK (lemma-complete-reducibility-Gm) supplies the grading; the relative square-zero projection argument is agent-written. Milne Theorem 13.1 and Lemma 13.6, printed pp.254,256 motivate the weight-splitting route but only state field results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivariant.*lift|fixed.*[Ss]mooth|[Ss]mooth.*fixed",
+   "results": "{\"t\": \"2026-10-24T03:38:57Z\", \"tool\": \"grep\", \"query\": \"equivariant.*lift|fixed.*[Ss]mooth|[Ss]mooth.*fixed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth lifting has no equivariance condition; graded exterior/Clifford algebra maps and formally unramified morphisms do not lift fixed points"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal lifting of torus invariant points on smooth affine schemes over a ring",
+   "results": "{\"t\": \"2026-10-24T03:38:57Z\", \"tool\": \"leansearch\", \"query\": \"Infinitesimal lifting of torus invariant points on smooth affine schemes over a ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"RingHom.FormallyEtale\", \"Algebra.FormallySmooth.lift\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"Algebra.FormallySmooth.liftOfSurjective\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.FormallySmooth.lift.congr_simp\"], \"digest\": \"a912c621827af950\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth lifting has no equivariance condition; graded exterior/Clifford algebra maps and formally unramified morphisms do not lift fixed points"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"GradedAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T03:38:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\", \\\"GradedAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth lifting has no equivariance condition; graded exterior/Clifford algebra maps and formally unramified morphisms do not lift fixed points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed point of a multiplicative group action on a smooth affine scheme lifts along any square zero extension of the base ring",
+   "results": "{\"t\": \"2026-10-24T03:39:01Z\", \"tool\": \"leanfinder\", \"query\": \"A fixed point of a multiplicative group action on a smooth affine scheme lifts along any square zero extension of the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.FormallySmooth.of_split\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"Algebra.FormallySmooth\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.formallyUnramified_iff\"], \"digest\": \"d2b8e58389e8e5ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth lifting has no equivariance condition; graded exterior/Clifford algebra maps and formally unramified morphisms do not lift fixed points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Z graded smooth algebra every graded map to a quotient by a square zero ideal lifts as a graded algebra map",
+   "results": "{\"t\": \"2026-10-24T03:39:02Z\", \"tool\": \"leanfinder\", \"query\": \"For a Z graded smooth algebra every graded map to a quotient by a square zero ideal lifts as a graded algebra map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExteriorAlgebra.GradedAlgebra.liftι\", \"CliffordAlgebra.GradedAlgebra.lift_ι_eq\", \"DualNumber.lift_apply_inl\", \"ExteriorAlgebra.GradedAlgebra.liftι_eq\", \"Algebra.FormallySmooth.lift\", \"DualNumber.lift_comp_inlHom\", \"Algebra.FormallySmooth.comp_lift\", \"Algebra.FormallySmooth.mk_lift\"], \"digest\": \"65d13b9ea1091cb2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth lifting has no equivariance condition; graded exterior/Clifford algebra maps and formally unramified morphisms do not lift fixed points"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_lift|def liftOfSurjective|theorem comp_lift",
+   "results": "{\"t\": \"2026-10-24T03:40:08Z\", \"tool\": \"grep\", \"query\": \"theorem exists_lift|def liftOfSurjective|theorem comp_lift\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"4b7f931591d9ce22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth lifting has no equivariance condition; graded exterior/Clifford algebra maps and formally unramified morphisms do not lift fixed points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed points of multiplicative group action on a smooth affine scheme lift across square zero extensions",
+   "results": "{\"t\": \"2026-10-24T04:15:24Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed points of multiplicative group action on a smooth affine scheme lift across square zero extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc\", \"AlgebraicGeometry.AffineSpace.homOfVector_over\"], \"digest\": \"7e6c8aea1c4e2d7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.Extension.homInfinitesimal and formally unramified/affine-space statements impose no multiplicative-group fixedness condition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Infinitesimal step for the twisted left-right multiplicative-group action on the smooth affine group; this statement applies to arbitrary smooth affine schemes and square-zero test extensions, with no torus-conjugacy conclusion.",
+   "via": [
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-gm-fixed-square-zero-lifting",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-base statement. Added one general coordinate-grading input (Stacks 0EKK); supplied the universal-unit fixedness test and the explicit weight-zero projection of an ordinary smooth lift, including the opposite-nonzero-weight product check. All other inputs are existing definitions. Searched all same-tag nodes and Mathlib and found no attachment or duplicate.",
+  "blueprint": "Continues the inherited det-thm-sf-ctf-stability-direct-images supporting route through complete-DVR cocharacter conjugacy: provides precisely its infinitesimal fixed-point lifting input, with no change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-2d4e0f0e2",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-2d4e0f0e2 (reviewer sub-agent of L); spot-checked: First split (no repair note). The statement is unchanged and true. New node lem-sfb-gm-affine-action-grading matches Stacks 0EKK/0EKJ (groupoids.tex 2302-2364) in its relative form: R lands in C_0, the C_n are R-submodules, C_mC_n ⊆ C_{m+n}, and a_B(t,x)(c) = t^n x(c) for c in C_n. It is statement-only and self-contained, with three kinds of search recorded. It is not a duplicate: rg over the DAG found only nodes that start from a grading or that work over a field, a Noetherian base or finite projective modules. Steps: (1) quotes the node. (2) Evaluating at the universal unit in B_0[z^±] kills g on C_n for n≠0, with a correct converse. (3) The affine first-order thickening Spec(B_1/J) ⊂ Spec B_1 over R gives the lift f with f(C_n) ⊆ J; the lifting clause of def-sbc-smooth-morphisms also holds under its blueprint_update. (4) h = f∘pr_0 is an R-algebra map, and the opposite-weight case m=-n≠0 is killed by J^2=0. (5) ph = g and h is fixed. Checked edge cases: J=0, trivial action, zero rings, weights ±1 on R[u,v]. Milne 13.1/13.6 (pp.254-256) are field results, correctly cited as motivation only. No SGA, no tool_uses. Advisory: the item's statement-level source.place still mentions a 'graded conormal argument', though the report says that phrase was replaced; this is cosmetic and was not edited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.GmFixedSquareZeroLifting",
+  "declaration": "AlgebraicGeometry.exists_gm_fixed_lift_of_square_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/GmFixedSquareZeroLifting.lean",
+  "statement": "theorem exists_gm_fixed_lift_of_square_zero (R C : Type u) [CommRing R] [CommRing C] [Algebra R C] [Smooth (Spec.map (CommRingCat.ofHom (algebraMap R C)))] [ModObj (RingGroupSchemes.multiplicative R).X ((algSpec (.of R)).obj (op (CommAlgCat.of R C)))] (B₁ B₀ : Type u) [CommRing B₁] [CommRing B₀] [Algebra R B₁] [Algebra R B₀] (p : B₁ →ₐ[R] B₀) (hp : Function.Surjective p) (hJ : RingHom.ker p.toRingHom ^ 2 = ⊥) (x₀ : C →ₐ[R] B₀) (hx₀ : ∀ (B : Type u) [CommRing B] [Algebra R B] (q : B₀ →ₐ[R] B) (t : (algSpec (.of R)).obj (op (CommAlgCat.of R B)) ⟶ (RingGroupSchemes.multiplicative R).X), t • (algSpec (.of R)).map (CommAlgCat.ofHom (q.comp x₀)).op = (algSpec (.of R)).map (CommAlgCat.ofHom (q.comp x₀)).op) : ∃ x₁ : C →ₐ[R] B₁, p.comp x₁ = x₀ ∧ ∀ (B : Type u) [CommRing B] [Algebra R B] (q : B₁ →ₐ[R] B) (t : (algSpec (.of R)).obj (op (CommAlgCat.of R B)) ⟶ (RingGroupSchemes.multiplicative R).X), t • (algSpec (.of R)).map (CommAlgCat.ofHom (q.comp x₁)).op = (algSpec (.of R)).map (CommAlgCat.ofHom (q.comp x₁)).op",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1d003bc7",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the node, the three stmt_deps (affine spectrum, Mathlib Smooth, landed RingGroupSchemes.multiplicative = Spec of the Laurent Hopf algebra) and the 80-line module. Clause by clause: base ring R arbitrary; X = algSpec of C over Spec R; Smooth on Spec.map(algebraMap R C); the ModObj action in Over(Spec R) with the cartesian structure gives the unit and associativity laws; fixedness is universal over q : B₀ →ₐ[R] B (= B₀-algebras) and t : Spec B ⟶ G_m (= B^×) with Hom.smul = lift t x ≫ γ; ker p ^ 2 = ⊥; the conclusion is the same fixedness plus p ∘ x₁ = x₀. No extra hypotheses. The single universe u is forced by Mathlib Spec; the hypothesis gets weaker and the conclusion stays equivalent through the Laurent test in u. lean.statement is verbatim. The added stmt_dep def-sfb-split-torus-over-ring is correct and used. No definitions; proof is sorry; docstrings carry source places, blueprint tag and the 5-step plan; worker report and second reading present. No duplicate found in side-live Sheaf/WeilConjectures. No compile (no change). Cosmetic: source.place still says 'graded conormal argument'."
+ }
+}

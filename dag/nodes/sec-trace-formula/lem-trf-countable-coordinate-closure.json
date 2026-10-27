@@ -13,70 +13,48 @@
  ],
  "proof": [
   {
-   "text": "For each $j\\in J$, choose a generating sequence $(g_{j,n})_{n\\in\\mathbf N}$ of $N_j$. This is possible from the given at most countable generating subset by listing it and inserting zero in unused positions; for the zero module the constant zero sequence suffices. Write $\\iota_j:N_j\\to M$ for the canonical inclusion of [def-weil-pbc-direct-sum-modules]. Thus each $x\\in N_j$ is a finite sum $\\sum_{n\\in E}r_n g_{j,n}$, with $E\\subseteq\\mathbf N$ finite and $r_n\\in R$. The choice is of generators, not an enumeration of all elements of $N_j$.",
+   "text": "For each $j\\in J$, apply [lem-trf-countably-generated-image-support] to $L=N_j$ and $h=f\\circ\\iota_j$, where $\\iota_j$ is the canonical inclusion of [def-weil-pbc-direct-sum-modules]. The hypothesis holds because $N_j$ is countably generated. By classical choice over the set $J$, choose these countable support bounds simultaneously, obtaining a family $(F_j)_{j\\in J}$ of subsets of $J$; for every $x\\in N_j$, $\\operatorname{supp}(f(\\iota_j(x)))\\subseteq F_j$. These are bounds on generator-image supports, not on coefficients or on underlying module cardinalities.",
    "uses": [
+    "lem-trf-countably-generated-image-support",
     "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511-20552, countable generator-support enlargement; assembly of the two extracted lemmas."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-countable-successor-coordinate-exhaustion] to these $F_j$ and the given countable $C$. It gives the increasing countable stages $A_0=C$, $A_{k+1}=A_k\\cup\\bigcup_{j\\in A_k}F_j$, and a countable $D=\\bigcup_kA_k$ containing $C$. For the present family of modules, it also gives $M_D=\\bigcup_kM_{A_k}$.",
+   "uses": [
+    "lem-trf-countable-successor-coordinate-exhaustion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511-20552, countable generator-support enlargement; assembly of the two extracted lemmas."
+   }
+  },
+  {
+   "text": "For $y\\in M_D$, choose $k$ with $y\\in M_{A_k}$ using [lem-trf-countable-successor-coordinate-exhaustion]. By [def-weil-pbc-direct-sum-modules], $y=\\sum_{j\\in\\operatorname{supp}(y)}\\iota_j(y_j)$ is a finite sum, and every such $j$ lies in $A_k$ [def-trf-coordinate-submodule]. The defining recursion gives $F_j\\subseteq A_{k+1}$ for $j\\in A_k$. Step 1, using [lem-trf-countably-generated-image-support], gives $\\operatorname{supp}(f(\\iota_j(y_j)))\\subseteq F_j$. For each $t\\notin A_{k+1}$ every term has zero $t$-coordinate. Linearity and componentwise addition therefore give $(f(y))_t=\\sum_{j\\in\\operatorname{supp}(y)}(f(\\iota_j(y_j)))_t=0$. This includes the empty sum. Thus $f(y)\\in M_{A_{k+1}}$. Since $A_{k+1}\\subseteq D$, any coordinate outside $D$ is outside $A_{k+1}$ and therefore zero in $f(y)$; hence $f(y)\\in M_D$, proving invariance.",
+   "uses": [
+    "lem-trf-countable-successor-coordinate-exhaustion",
+    "def-weil-pbc-direct-sum-modules",
+    "def-trf-coordinate-submodule",
+    "lem-trf-countably-generated-image-support"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
-   }
-  },
-  {
-   "text": "For each $j,n$, put $S_{j,n}=\\operatorname{supp}(f(\\iota_j(g_{j,n})))\\subseteq J$. Each $S_{j,n}$ is finite because its defining vector belongs to the direct sum [def-weil-pbc-direct-sum-modules]. Put $F_j=\\bigcup_{n\\in\\mathbf N}S_{j,n}$. This set is at most countable: choose a finite listing of each $S_{j,n}$, and assign an element of $F_j$ the pair $(n,r)$ of its first occurrence (least $n$, then least position $r$ in that listing). This is an injection into $\\mathbf N^2$, which is enumerated by successive finite diagonals. Empty supports contribute no entries.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
-   }
-  },
-  {
-   "text": "Define subsets of $J$ by ordinary recursion on $\\mathbf N$: $A_0=C$ and $A_{k+1}=A_k\\cup\\bigcup_{j\\in A_k}F_j$. They are increasing and at most countable. For the countability induction, the base is the hypothesis on $C$. Given an injection $a:A_k\\to\\mathbf N$ and the injections $b_j:F_j\\to\\mathbf N$ of Step 2, an element $t\\in\\bigcup_{j\\in A_k}F_j$ is coded by $(a(j),b_j(t))$, choosing among its possible $j$ the one with least $a(j)$. Distinct elements have distinct codes. Adjoining $A_k$ uses one additional binary label. Diagonal enumeration of pairs, and then the binary label, puts this set into $\\mathbf N$. This proves the successor claim even if $A_k$ is empty.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
-   }
-  },
-  {
-   "text": "For every $k$, $f(M_{A_k})\\subseteq M_{A_{k+1}}$. Indeed, for $j\\in A_k$ and $x=\\sum_{n\\in E}r_n g_{j,n}\\in N_j$, linearity gives $f(\\iota_j(x))=\\sum_{n\\in E}r_n f(\\iota_j(g_{j,n}))$. Outside $F_j$ every coordinate of every vector on the right is zero. Hence this vector is supported in $F_j\\subseteq A_{k+1}$. Every $y\\in M_{A_k}$ is the finite sum $\\sum_{j\\in\\operatorname{supp}(y)}\\iota_j(y_j)$ by [def-weil-pbc-direct-sum-modules]. Applying $f$ and the preceding calculation to each term proves that $f(y)$ is supported in $A_{k+1}$.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
-   }
-  },
-  {
-   "text": "Set $D=\\bigcup_{k\\in\\mathbf N}A_k$. Then $C=A_0\\subseteq D$. To verify countability explicitly, choose injections $a_k:A_k\\to\\mathbf N$ supplied by Step 3. Send $j\\in D$ to $(k,a_k(j))$, where $k$ is its least membership stage. This is injective, and enumeration of $\\mathbf N^2$ by finite diagonals proves that $D$ is at most countable. These choices and the recursion are all over sets: $J$ is a set and the stage set is $\\mathbf N$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
-   }
-  },
-  {
-   "text": "Let $y\\in M_D$. If $y=0$, then $f(y)=0\\in M_D$. Otherwise its support is finite by [def-weil-pbc-direct-sum-modules]. For each index of that support choose its least membership stage in $A_k$, and let $k$ be the maximum of these finitely many natural numbers. Since the $A_k$ are increasing, $y\\in M_{A_k}$. Step 4 gives $f(y)\\in M_{A_{k+1}}\\subseteq M_D$. This proves the required invariance. Every countability bound used only generators and finite coordinate supports; none counted the possible coefficients in $R$.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511-20552, countable generator-support enlargement; assembly of the two extracted lemmas."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-sum-modules"
+  "lem-trf-countably-generated-image-support",
+  "def-weil-pbc-direct-sum-modules",
+  "lem-trf-countable-successor-coordinate-exhaustion",
+  "def-trf-coordinate-submodule"
  ],
  "proof_origin": {
   "by": "document",
@@ -191,19 +169,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-countable-coordinate-closure",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Wrote the generator-support closure proof in six elementary steps, with explicit natural-number encodings at every countability argument and the finite-support maximum-stage argument for invariance. Reused the direct-sum Mathlib definition; no new nodes or exact project attachment.",
-  "blueprint": "Realizes the countable support-enlargement input to Tag 058X in the existing ancestry through lem-trf-projective-kaplansky-direct-summand to lem-trf-local-term-locality; preserves blueprint.from and its existing exact place and via list. The support closure follows the generator-matrix paragraph of 058X rather than replacing the enclosing unit route."
+  "summary": "Repair of the 2026-10-22 batch5 re-split return. Preserved the statement and all existing metadata/searches. Extracted two independent statement-only unsplit nodes of comparable argument size: countably generated image support (old steps 1,2 and generator-linearity in 4) and countable successor closure with coordinate exhaustion (old steps 3,5 and finite-support maximum in 6). The parent retains only applications and the finite-sum invariance assembly. The report reproduces every returned proof step with its new owner. Repaired the 2026-10-22 landing return at 6455d2e2495 by comparing the retained delivery with the current shared DAG and re-reading every cited statement; the delivery command rebases the field overlay onto current origin/sheaf-dag. Made the successor inclusion in the final finite-sum assembly explicit; refreshed the citation evidence and report for this rebase. On the repeated landing-return retry, the initial dry run passed at be5d68378ee. Recompared the retained returned files with the current DAG: the only existing-node differences remain proof, proof_deps and split_report; both extracted nodes remain absent upstream. Re-read all four cited statements and Tag 058X. Expanded the final finite-sum step to the coordinate formula outside A_(k+1), and revalidated all seven citation pairs against current statements. Kept all earlier arguments, search logs, statements and metadata. Current promotion-return repair: initial server dry run passed at be2dc780b63. Re-read the current released keep_plan order and all four cited statements; their hypotheses and conclusions still agree. Made the simultaneous set-indexed choice of support bounds explicit in step 1 and justified the last coordinate-submodule inclusion by vanishing outside D in step 3. Retained both statement-only nodes and all original searches and arguments; regenerated citation verification against the current shared DAG.",
+  "blueprint": "Realizes the countable support-enlargement input to Tag 058X in the existing ancestry through lem-trf-projective-kaplansky-direct-summand to lem-trf-local-term-locality; preserves blueprint.from and its existing exact place and via list. The support closure follows the generator-matrix paragraph of 058X rather than replacing the enclosing unit route. The two new nodes preserve this ancestry and divide the Tag 058X support-enlargement construction without changing the unit or chapter route."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q93-1eddac2ef",
-  "group": "Q93",
+  "reviewer": "NT-cc-Q26-f90910db4",
+  "group": "Q26",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-1eddac2ef (reviewer sub-agent of L); spot-checked: Read the item, cited direct-sum definition, unit/chapter route, Stacks Tag 058X source, searches, and edge cases in full. The six-step countable invariant-coordinate construction is correct, self-contained, non-duplicative, and respects all route locks; no repairs are needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-f90910db4 (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the same re-split. The earlier heads 6455d2e2, f7619048 and 4ca28fca all passed review, and each landing was refused because the side-DAG completion had not been promoted to the live DAG. The item is not superseded: in clones/live and clones/side-live it still has the old 6-step proof from 2026-10-18, neither new node exists there, and the released keep_plan re-split note of 2026-10-22 still applies. Diff against 4ca28fca: both new nodes (lem-trf-countably-generated-image-support and lem-trf-countable-successor-coordinate-exhaustion) are byte-identical. The item's statement, stmt_deps, proof_deps, source, blueprint and lean fields are unchanged. Only two proof sentences changed. Step 1 now chooses the family (F_j) explicitly by choice over J. Step 3 now spells out f(y)∈M_{A_{k+1}}⊆M_D by vanishing outside D (def-trf-coordinate-submodule). Both changes are correct. I re-read the mathematics in full. Step 1 applies image-support with L=N_j and h=f∘ι_j, where ι_j is linear by def-weil-pbc-direct-sum-modules. Step 2 takes the recursion, countability, C⊆D and M_D=⋃M_{A_k} from the exhaustion node's statement. Step 3 is an elementary finite-sum assembly. Both new statements are true. Edge cases checked: L=0, h=0, J=∅, uncountable R, C=∅, all F_j=∅, the successor chain on ℕ, E=∅ and y=0. Old steps 1, 2 and the generator part of 4 map to image-support; old steps 3, 5 and the max-stage part of 6 map to exhaustion. The parent is 3 steps and 1727 characters, and neither node restates the item. Re-read Stacks algebra.tex Tag 058X, lines 20467-20560; no SGA is cited. The rg -L duplicate scan (Kaplansky summand, base-change adapted submodule, freeness criterion, flat Mittag-Leffler projective, universally exact fp split, flat pure complete projective, projective descent nodes) found no duplicate. proof_deps equals the union of the uses and there is no cycle. No fixes."
  },
  "lean": {
   "module": "Sheaf.RingTheory.CountableCoordinateClosure",
@@ -223,5 +201,16 @@
   "result": "pass",
   "note": "Statement and helper match the node and source; required reports, docstrings, edge cases, searches, and compile evidence verified."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

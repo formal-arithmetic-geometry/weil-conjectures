@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-sheaf-dg-good-resolutions",
+ "kind": "statement",
+ "title": "Good sheaf dg resolutions and universal tensor acyclicity",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the universes of [def-weil-size-convention], with $\\mathcal O$ commutative, and use sheaves of modules [def-weil-sheaf-of-modules-category] and cohomology of cochain complexes [def-weil-abstract-derived-category]. Let $\\mathcal A$ be a sheaf of associative unital graded $\\mathcal O$-algebras with an $\\mathcal O$-linear differential of degree one, $d^2=0$ and $d(ab)=d(a)b+(-1)^{|a|}a\\,d(b)$. A right dg $\\mathcal A$-module is a graded sheaf with $d^2=0$ and $d(ma)=d(m)a+(-1)^{|m|}m\\,d(a)$; left modules have $d(am)=d(a)m+(-1)^{|a|}a\\,d(m)$. Tensor products mean sheafifications of the balanced graded tensor products, with direct-sum total grading and $d(p\\otimes n)=dp\\otimes n+(-1)^{|p|}p\\otimes dn$. A quasi-isomorphism induces isomorphisms on all underlying cohomology sheaves. Call a right dg module $P$ good if its tensor functor on graded left $\\mathcal A$-modules is exact, $P\\otimes_{\\mathcal A}N$ is acyclic for every acyclic left dg module $N$, and both properties remain true after every base change $(f,f^\\sharp):(\\operatorname{Sh}(\\mathcal C'),\\mathcal O')\\to(\\operatorname{Sh}(\\mathcal C),\\mathcal O)$ of ringed topoi [def-weil-pbc-ringed-topos-morphism] and every dg algebra map $f^{-1}\\mathcal A\\to\\mathcal A'$: the pullback is $f^{-1}P\\otimes_{f^{-1}\\mathcal A}\\mathcal A'$ and the two conditions are over $\\mathcal A'$. Every right dg module $M$ admits a quasi-isomorphism $P\\to M$ with $P$ good. Good modules are closed under integer shifts and mapping cones of maps between them. If $P$ is good and acyclic, then $P\\otimes_{\\mathcal A}N$ is acyclic for every left dg module $N$, without a flatness hypothesis on $N$. In the open site of any topological space, the restriction of a good module to any open subspace is good, and restriction preserves quasi-isomorphisms and these tensor products. The corresponding assertions hold for left modules with the tensor factors reversed.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FSH (lemma-resolve), 0FSC (lemma-good-admissible-ses), 0FSI (lemma-acyclic-good); definition of good in section-P-resolutions and its base-change condition (3); open localization in section-localization-dg."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof": [
+  {
+   "text": "We first record the closure arguments, not extra assumptions on the site. Call a short exact dg sequence admissible when it splits as graded $\\mathcal A$-modules. Tensoring such a sequence with any left module remains degreewise split exact. Thus, if its two outer modules are good, the middle tensor functor is exact: as a graded functor it is their direct sum. For an acyclic left module, the two outer tensor complexes are acyclic, so the middle is acyclic by [lem-weil-pbc-complex-ses-homology-long-exact]. After any base change the graded splitting survives, and the identical argument applies. Hence admissible extensions of good modules are good. Integer shifts are good because they merely reindex the graded tensor functor, and their tensor complexes identify with the corresponding shifts, with signs on homogeneous summands. A cone on $P\\to Q$ has the admissible sequence $0\\to Q\\to C\\to P[1]\\to0$, so is good when $P,Q$ are good.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSC (lemma-good-admissible-ses); shift and cone formulas in section-shift-dg and definition-cone"
+   }
+  },
+  {
+   "text": "Small filtered colimits of good modules are good. Form their colimit degreewise in module sheaves, with the induced action and differential. Tensor commutes with these colimits: balanced bilinear maps out of the colimit are precisely compatible families of balanced bilinear maps, which is the required universal property. The same holds for inverse image, a left adjoint, and scalar extension, by the same balanced-map description. Filtered colimits are exact by [lem-pur-ringed-site-grothendieck-abelian]. Therefore the colimit graded tensor functor is exact. Applying exact colimits to the sequences defining kernels, images and cokernels gives $H^n(\\operatorname{colim}K_i)=\\operatorname{colim}H^n(K_i)$; consequently tensoring an acyclic left module still gives zero cohomology. After any base change repeat the argument in module sheaves on the new small ringed site. This proves universal goodness of the colimit, including the sequential colimits below.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSD (lemma-good-direct-sum), filtered-colimit assertion; sites-modules.tex Tag 03DB (lemma-limits-colimits)"
+   }
+  },
+  {
+   "text": "For the existence assertion use the free construction [lem-sfb-sheaf-dg-free-graded-generators]. Put $\\mathcal S_{0,n}=Z^n(M)=\\ker(d_M^n)$, regarded as a sheaf of sets in degree $n$, and set $P_0=F_{\\mathcal A}(\\mathcal S_0)$. Sending a generator $s$ to the cycle it denotes defines a chain map $u_0:P_0\\to M$. The sheafification universal property [def-weil-presheaf-modules-sheafification] extends the coefficient-linear formula on the free presheaf. The map $H^n(P_0)\\to H^n(M)$ is epi: every cohomology section is locally represented by a cycle, and that cycle has its own closed generator. The cited free-module statement gives goodness of $P_0$.",
+   "uses": [
+    "lem-sfb-sheaf-dg-free-graded-generators",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSH (lemma-resolve), first proof, construction of P_0"
+   }
+  },
+  {
+   "text": "Inductively, given $u_i:P_i\\to M$, let $\\mathcal S_{i+1,n}$ be the sheaf of pairs $(p,m)$ with $p\\in Z^{n+1}(P_i)$, $m\\in M^n$, and $u_i(p)=d_Mm$. Take $P_{i+1}=P_i\\oplus F_{\\mathcal A}(\\mathcal S_{i+1})$ as a graded module. For the new degree-$n$ generator $e_{p,m}$ set $d(e_{p,m})=p$ and $u_{i+1}(e_{p,m})=m$, extending by $d(ea)=p a+(-1)^ne\\,d(a)$ and $u(ea)=m a$. These formulas commute with restriction and sheafify by [def-weil-presheaf-modules-sheafification]. On $ea$, the two cross terms of $d^2$ have coefficients $(-1)^{n+1}$ and $(-1)^n$, and the remaining terms vanish since $dp=0$ and $d^2a=0$. Also $u(d(ea))=u(p)a+(-1)^nm\\,d(a)=d(ma)$. Thus this defines a dg module and chain map extending $u_i$. The quotient is the closed-generator module $F_{\\mathcal A}(\\mathcal S_{i+1})$ of [lem-sfb-sheaf-dg-free-graded-generators]; its generators have differential zero modulo $P_i$. The sequence $0\\to P_i\\to P_{i+1}\\to F_{\\mathcal A}(\\mathcal S_{i+1})\\to0$ is graded split, so step 1 and induction prove every $P_i$ good.",
+   "uses": [
+    "lem-sfb-sheaf-dg-free-graded-generators",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSH (lemma-resolve), first proof, inductive construction"
+   }
+  },
+  {
+   "text": "Set $P=\\operatorname{colim}_{i\\geq0}P_i$ and use the induced $u:P\\to M$. Step 2 proves goodness. Its cohomology is the filtered colimit of the cohomology sheaves by [lem-pur-ringed-site-grothendieck-abelian] and the kernel/image argument in step 2. All $H^n(P_i)\\to H^n(M)$ are epi, since they factor the epi from $P_0$. Their kernels are killed by the next transition: a kernel section is locally represented by a cycle $p$ whose image is locally $dm$; the generator $e_{p,m}$ of degree $n-1$ makes $p$ a boundary in $P_{i+1}$. This is a statement about sheaf kernels, so local representatives suffice; no sectionwise exactness or enough-points assumption is used. Exactness of the filtered colimit now gives an isomorphism $H^n(P)\\to H^n(M)$ for every $n$. This proves the required quasi-isomorphism, not merely a graded surjection.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSH (lemma-resolve), first proof, final paragraph"
+   }
+  },
+  {
+   "text": "The same construction gives left good resolutions. Explicitly, pass to the graded opposite algebra with $a\\star b=(-1)^{|a||b|}ba$ and the same differential. A left module becomes a right module by $m\\cdot a=(-1)^{|m||a|}am$; the Leibniz identities follow by substituting these signs. The reverse conversion uses the same formula. Balanced tensors in the two conventions identify by $m\\otimes n\\mapsto(-1)^{|m||n|}n\\otimes m$; substituting the two differential formulas shows this is a chain isomorphism. These conversions preserve underlying cohomology, graded exactness and commute with inverse image and scalar extension. Apply steps 1--5 to this opposite algebra. Thus the left resolutions needed next are available independently of the tensor-annihilation conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSH (lemma-resolve), left-module version via the graded opposite; conventions and signed tensor formula"
+   }
+  },
+  {
+   "text": "Now let $P$ be good and acyclic, and let $N$ be any left module. By step 6 choose a good left resolution $Q\\to N$. Its cone $T$ is acyclic: apply [lem-weil-pbc-complex-ses-homology-long-exact] to $0\\to N\\to T\\to Q[1]\\to0$; the connecting map is the cohomology map of $Q\\to N$ up to sign, hence an isomorphism. Since $Q$ is left good and $P$ acyclic, $P\\otimes_{\\mathcal A}Q$ is acyclic. Since $P$ is right good and $T$ acyclic, $P\\otimes_{\\mathcal A}T$ is acyclic. Tensor the same graded-split cone sequence with $P$; it remains degreewise split exact, with outer terms $P\\otimes N$ and $P\\otimes Q[1]$. The latter is a signed shift of $P\\otimes Q$, hence acyclic. The long exact sequence then forces $P\\otimes N$ acyclic. This uses no flatness of $N$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSI (lemma-acyclic-good), proof of (1), expressed using the graded-split cone sequence"
+   }
+  },
+  {
+   "text": "For an open subspace $j:V\\hookrightarrow X$, its ringed-topos inverse image is restriction, and extending along the identity algebra map gives $P|_V$ itself by $p\\otimes a\\mapsto pa$. Thus the universal condition in goodness implies the first two good conditions on $V$; for the universal condition there compose any ringed-topos map into $V$ with $j$, and use associativity $(p\\otimes a)\\otimes b\\mapsto p\\otimes ab$ of the balanced tensor. Restriction is exact on underlying abelian sheaves by [lem-weil-pbc-site-restriction-exact], so it commutes with the kernels and images defining cohomology and preserves quasi-isomorphisms. Restriction also preserves the stated tensor products: on every open $W\\subset V$, the presheaves defining both balanced total tensors are the same; the covers used to sheafify on $W$ are the same on $V$ and on $X$. This identifies differentials and all structure maps. Finally step 6 converts every assertion to left modules with the factors reversed.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "section-localize-dg (correct label), section-P-resolutions condition (3), and section-tensor-product-dg"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-sheaf-dg-free-graded-generators",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-site-restriction-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "First proof of Tag 0FSH; Tags 0FSC, 0FSD, 0FSI; section-localize-dg. Explicit right/left sign conversion and local sheaf-kernel details supplied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Good K flat resolutions of sheaves of differential graded modules exist, cones stay good, and acyclic good modules tensor every module to an acyclic complex",
+   "results": "{\"t\": \"2026-10-24T03:59:13Z\", \"tool\": \"leanfinder\", \"query\": \"Good K flat resolutions of sheaves of differential graded modules exist, cones stay good, and acyclic good modules tensor every module to an acyclic complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.Tor_obj\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\"], \"digest\": \"cc9c928c45e36f22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "good.*dg|dg.*good|KFlat|K.flat",
+   "results": "{\"t\": \"2026-10-24T04:01:19Z\", \"tool\": \"grep\", \"query\": \"good.*dg|dg.*good|KFlat|K.flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/SimpleGraph/Triangle/Counting.lean\", \"Mathlib/Computability/TuringMachine/Tape.lean\", \"Mathlib/Computability/TuringMachine/Tape.lean\", \"Mathlib/Computability/TuringMachine/Tape.lean\"], \"digest\": \"373211a00c449f3c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGraded\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T04:01:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGraded\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf differential graded module has a universally K flat graded flat resolution",
+   "results": "{\"t\": \"2026-10-24T04:01:20Z\", \"tool\": \"leansearch\", \"query\": \"Every sheaf differential graded module has a universally K flat graded flat resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"SheafOfModules.noConfusionType\", \"SheafOfModules.hasLimit\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.unit\", \"SheafOfModules.free\", \"SheafOfModules\", \"Module.Flat.of_projective\"], \"digest\": \"3219640b611605ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change stable graded flat K flat resolutions of unbounded sheaf dg modules and acyclic tensor annihilation",
+   "results": "{\"t\": \"2026-10-24T04:01:21Z\", \"tool\": \"leanfinder\", \"query\": \"Base change stable graded flat K flat resolutions of unbounded sheaf dg modules and acyclic tensor annihilation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"eea2780630cf45d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "good.*(module|resolution)|KFlat|K.flat",
+   "results": "{\"t\": \"2026-10-24T04:02:48Z\", \"tool\": \"grep\", \"query\": \"good.*(module|resolution)|KFlat|K.flat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T04:02:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"KFlat\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|KFlat",
+   "results": "{\"t\": \"2026-10-24T04:37:44Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf differential graded module admits a flat K flat resolution stable under base change",
+   "results": "{\"t\": \"2026-10-24T04:37:44Z\", \"tool\": \"leansearch\", \"query\": \"Every sheaf differential graded module admits a flat K flat resolution stable under base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"673465707a7c4d51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGraded\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T04:37:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGraded\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally graded flat K flat resolutions of sheaves of differential graded modules with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T04:37:45Z\", \"tool\": \"leanfinder\", \"query\": \"Universally graded flat K flat resolutions of sheaves of differential graded modules with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.of_projective\", \"Module.flat_of_isLocalized_span\", \"Module.FaithfullyFlat.toFlat\", \"Module.flat_iff_of_isLocalization\", \"Algebra.Smooth.flat\"], \"digest\": \"0fbb5d70797640bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "grep",
+   "query": "free|flat",
+   "results": "{\"t\": \"2026-10-24T04:38:39Z\", \"tool\": \"grep\", \"query\": \"free|flat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\"], \"digest\": \"bf5ec655751d2db7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free module on a sheaf of graded sets tensor an acyclic differential graded module is acyclic",
+   "results": "{\"t\": \"2026-10-24T04:38:40Z\", \"tool\": \"leansearch\", \"query\": \"Free module on a sheaf of graded sets tensor an acyclic differential graded module is acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Acyclic\", \"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"ModuleCat.FreeMonoidal.μIso\", \"ModuleCat.free_δ_freeMk\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"HomologicalComplex.acyclic_iff\", \"Module.Flat.rTensor_shortComplex_exact\"], \"digest\": \"ac1ec3f4866db318\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"free\"",
+   "results": "{\"t\": \"2026-10-24T04:38:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeObj\", \"PresheafOfModules.free\", \"PresheafOfModules.free_obj\", \"PresheafOfModules.freeObj_obj\", \"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeObjDesc\", \"PresheafOfModules.freeHomEquiv\", \"PresheafOfModules.freeAdjunction\"], \"digest\": \"9b41a29953992d7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free differential graded module on a graded sheaf of sets is universally flat and K flat under pullback",
+   "results": "{\"t\": \"2026-10-24T04:38:41Z\", \"tool\": \"leanfinder\", \"query\": \"Free differential graded module on a graded sheaf of sets is universally flat and K flat under pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mapFree\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctor\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"LightCondensed.free\", \"SheafOfModules.freeFunctor_obj\"], \"digest\": \"2629750cd8ed9572\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|KFlat|acyclic",
+   "results": "{\"t\": \"2026-10-24T04:39:08Z\", \"tool\": \"grep\", \"query\": \"graded|KFlat|acyclic\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free graded sheaf modules with closed generators tensor acyclic dg modules to acyclic complexes after arbitrary geometric inverse image and scalar extension",
+   "results": "{\"t\": \"2026-10-24T04:39:18Z\", \"tool\": \"leanfinder\", \"query\": \"Free graded sheaf modules with closed generators tensor acyclic dg modules to acyclic complexes after arbitrary geometric inverse image and scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.generatorsOfIsCokernelFree_I\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\"], \"digest\": \"99b927e6c5215508\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded sheaf dg module resolutions by universally tensor acyclic graded flat modules and acyclic flat tensor annihilation",
+   "results": "{\"t\": \"2026-10-24T04:39:19Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded sheaf dg module resolutions by universally tensor acyclic graded flat modules and acyclic flat tensor annihilation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\", \"CategoryTheory.isZero_Tor_succ_of_projective\"], \"digest\": \"991aa1950e845cd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  },
+  {
+   "tool": "grep",
+   "query": "def free|def freeFunctor|freeObj|pullbackObjFreeIso",
+   "results": "{\"t\": \"2026-10-24T04:39:44Z\", \"tool\": \"grep\", \"query\": \"def free|def freeFunctor|freeObj|pullbackObjFreeIso\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean\", \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean\"], \"digest\": \"c2602f7c600b87a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-flatness, K-projective resolutions and ordinary sheaf free modules do not give the sheaf dg assertion with arbitrary base change; read the displayed hits and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-48."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-dg-scalar-adjunction",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: Derived comparison of dg coefficient realizations with the normalized scheme arrow. Prerequisite: Derived scalar adjunction and exact restriction for sheaf dg algebras. Tags 0FSH (lemma-resolve), 0FSC (lemma-good-admissible-ses), 0FSI (lemma-acyclic-good); definition of good in section-P-resolutions and its base-change condition (3); open localization in section-localization-dg.",
+   "via": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-dg-coefficient-realization-comparison",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-good-resolutions",
+  "worker": "stage1",
+  "summary": "Followed the first Stacks 0FSH proof, adjoining closed free sheaf generators and then killing cohomology kernels, with exact filtered colimits. One new independent input is 0FSG, universally tensor-flat free graded sheaves. Wrote the extension, colimit, cone, left/opposite, acyclic-tensor and open-restriction arguments explicitly. Existing generic exactness statements are reused; no Lean source or target changed.",
+  "blueprint": "The inherited ancestor chain is broken (blueprint_refs ancestor returns None); preserve it. The generic sheaf dg scalar-adjunction prerequisite serves the original det-thm-sf-ctf-stability-direct-images (3), now under sk-thm-sf-ctf-stability in literature/blueprint/latest. Steps follow the stated Stacks route, below the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Exact filtered colimits of module sheaves on any small ringed site; a generic foundational tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Exact restriction to a localized site; a generic foundational tool used for topological opens."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-site-restriction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-e7e4af531",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-e7e4af531 (reviewer sub-agent of L); spot-checked: Read sdga.tex section-P-resolutions: the definition of good with (1)-(3), 0FSC, 0FSD, 0FSF, 0FSG, 0FSH (both proofs), 0FSI and section-localize-dg. Compared with Stacks, the item's goodness keeps the same base change f^*P=f^{-1}P⊗_{f^{-1}A}A′ over a ringed-topos morphism (Stacks 01D3, commutative rings) and the same coefficient category. The statement is identical to live; no hypothesis was added and nothing was weakened. There is no repair note, so this is an ordinary one-level split. Step 1 (0FSC): split sequences stay split after tensor and base change; the long-exact-sequence node is a Mathlib leaf; it uses only the true direction 'outer terms good ⇒ middle good'; shifts are good; the cone sequence 0→Q→C→P[1]→0 holds. Step 2 (0FSD): exact filtered colimits from lem-pur-ringed-site-grothendieck-abelian (small site, commutative O, holds here); tensor and f^{-1} commute with filtered colimits. Steps 3-5 (first proof of 0FSH): I recomputed d²(ea)=0 and u∘d=d∘u, checked that the quotient is F_A(S_{i+1}), and checked the local kernel-killing argument with pairs (p,m) in S_{i+1,n-1} and the colimit isomorphism. Step 6: the opposite-algebra signs check out (associativity, both Leibniz rules, tensor swap) and the step is not circular. Step 7 (0FSI(1)): good left resolution Q, acyclic cone T, the split cone sequence tensored with P, so P⊗N is acyclic; no flatness of N is used. Step 8: open restriction is j^* with the identity algebra map; universality by composing with j; exact restriction (general-site node). The new node 0FSG is statement-only and self-contained; it is not a restatement of an item clause; its searches are recorded; I checked it is true (F⊗N=N[S], exact; base change F_{A′}(f^{-1}S)); the fibre-over-constant-k convention sheafifies to Stacks' formula. Duplicate search (rg -L for 0FS* tags, sdga labels, graded sets, good/K-flat dg): no existing node states 0FSG or the item; lem-sfb-sheaf-dg-hflat-computation only covers topological spaces and cites this item. The tool uses (sk-def-sf-operations is on the route; site-restriction-exact is generic) are accepted. Cosmetic, not fixed: the item's top-level source still says section-localization-dg, while step 8's source has the correct section-localize-dg."
+ }
+}

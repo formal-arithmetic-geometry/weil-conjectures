@@ -1,0 +1,95 @@
+{
+ "id": "lem-trf-weighted-disc-banach",
+ "kind": "statement",
+ "title": "Banach algebra of restricted power series at an arbitrary positive real radius",
+ "statement": "Let $F$ be a field [def-weil-field] with a real-valued nonarchimedean absolute value, meaning $|a|\\ge0$, $|a|=0\\Leftrightarrow a=0$, $|1|=1$, $|ab|=|a||b|$ and $|a+b|\\le\\max(|a|,|b|)$. Suppose the metric $|a-b|$ is complete. For any real $s>0$, let $D_s(F)$ consist of formal series $f=\\sum_{n\\ge0}a_nW^n$ with $|a_n|s^n\\to0$. Equip it with coefficientwise addition, constant scalar multiplication, and Cauchy multiplication $(fg)_n=\\sum_{i=0}^n a_i b_{n-i}$. These operations make $D_s(F)$ a unital commutative $F$-algebra. Its finite-valued norm $\\|f\\|_s=\\sup_{n\\ge0}|a_n|s^n$ satisfies $\\|f\\|_s=0\\Leftrightarrow f=0$, $\\|-f\\|_s=\\|f\\|_s$, $\\|1\\|_s=1$, $\\|af\\|_s=|a|\\|f\\|_s$, $\\|f+g\\|_s\\le\\max(\\|f\\|_s,\\|g\\|_s)$ and $\\|fg\\|_s\\le\\|f\\|_s\\|g\\|_s$. The metric $\\|f-g\\|_s$ is complete. The constant-coefficient map $\\epsilon:D_s(F)\\to F$, $\\epsilon(f)=a_0$, is a unital $F$-algebra homomorphism with $|\\epsilon(f)|\\le\\|f\\|_s$. Constants have norm $|a|$, and $\\|W\\|_s=s$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin, Section 6.2, printed p.45, disc algebra paragraph immediately before Lemma 6.2.8. Agent expansion of its analytic input; primary PDF read online at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf; local archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any positive real radius r the power series over a complete nonarchimedean field with coefficients satisfying norm a_n times r^n tends to zero form a complete normed algebra under the Gauss supremum norm",
+   "results": "PowerSeries.WithPiTopology.instCompleteSpace; instHasSummableGeomSeriesOfCompleteSpace; spectralNorm.completeSpace; LaurentSeries.instLaurentSeriesComplete; spectralNorm.normedAddCommGroup; IsNonarchimedeanLocalField.instCompleteSpace; spectralNorm.uniformSpace; spectralNorm.seminormedAddCommGroup",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.IsRestricted gives the coefficient predicate and subring, and gaussNorm gives some inequalities; PiTopology completeness is for the product topology. None gives completeness of this weighted Gauss norm or the full Banach algebra statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.gaussNorm",
+   "results": "PowerSeries.gaussNorm; PowerSeries.gaussNorm_nonneg; PowerSeries.gaussNorm_zero; PowerSeries.gaussNorm_eq_zero_iff; PowerSeries.gaussNorm_add_le_max; PowerSeries.gaussNorm_eq; PowerSeries.le_gaussNorm; Polynomial.gaussNorm_coe_powerSeries",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.IsRestricted gives the coefficient predicate and subring, and gaussNorm gives some inequalities; PiTopology completeness is for the product topology. None gives completeness of this weighted Gauss norm or the full Banach algebra statement."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|gaussNorm|HasGaussNorm",
+   "results": "Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/GaussNorm.lean; searched Mathlib/RingTheory/PowerSeries",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.IsRestricted gives the coefficient predicate and subring, and gaussNorm gives some inequalities; PiTopology completeness is for the product topology. None gives completeness of this weighted Gauss norm or the full Banach algebra statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weighted restricted power series over a complete nonarchimedean field form a Banach algebra for every positive real radius",
+   "results": "PowerSeries.WithPiTopology.instCompleteSpace; PowerSeries.IsRestricted; FormalMultilinearSeries.radius; FormalMultilinearSeries.summable_nnnorm_mul_pow; formalMultilinearSeries_geometric_radius; PowerSeries.IsRestricted.C; FormalMultilinearSeries.le_radius_of_tendsto; one_le_formalMultilinearSeries_geometric_radius",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.IsRestricted gives the coefficient predicate and subring, and gaussNorm gives some inequalities; PiTopology completeness is for the product topology. None gives completeness of this weighted Gauss norm or the full Banach algebra statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The space of weighted null sequences over a complete valued field is complete in the supremum norm and convolution gives a Banach algebra of convergent power series",
+   "results": "PowerSeries.WithPiTopology.instCompleteSpace; MvPowerSeries.WithPiTopology.instCompleteSpace; LaurentSeries.instLaurentSeriesComplete; instHasSummableGeomSeriesOfCompleteSpace; PadicInt.mahlerSeries_apply; PadicInt.hasSum_mahlerSeries; WithLp.instCompleteSpace; PadicInt.mahlerEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.IsRestricted gives the coefficient predicate and subring, and gaussNorm gives some inequalities; PiTopology completeness is for the product topology. None gives completeness of this weighted Gauss norm or the full Banach algebra statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRestricted|CompleteSpace|NormedRing|gaussNorm",
+   "results": "Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/GaussNorm.lean; Mathlib/RingTheory/PowerSeries/Restricted.lean; Mathlib/RingTheory/PowerSeries/Restricted.lean; Mathlib/RingTheory/PowerSeries/Restricted.lean; searched Mathlib/RingTheory/PowerSeries",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.IsRestricted gives the coefficient predicate and subring, and gaussNorm gives some inequalities; PiTopology completeness is for the product topology. None gives completeness of this weighted Gauss norm or the full Banach algebra statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-disc-translation-embedding",
+  "date": "2026-10-24",
+  "group": "Q76"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Proof of Theorem 6.3.1(i), type 4 argument, printed p. 50, specialized to algebraically closed k: every finite extension is immediate, and the proof constructs a topological generator. Supporting fact: Lemma 6.2.8, printed p. 45, specialized to algebraically closed k; the preceding completed tensor product disc description supplies its notation. Supporting input: the norm-preserving first-factor map into the disc algebra in the paragraphs preceding Lemma 6.2.8, specialized to l=K. Analytic input: completeness and submultiplicativity of the positive-radius disc algebra used for the first-factor embedding.",
+   "via": [
+    "lem-trf-analytic-disc-translation-embedding",
+    "lem-trf-analytic-pth-root-obstruction",
+    "lem-trf-analytic-immediate-rationality",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

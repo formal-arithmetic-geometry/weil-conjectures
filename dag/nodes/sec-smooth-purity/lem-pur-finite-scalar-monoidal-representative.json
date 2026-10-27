@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-finite-scalar-monoidal-representative",
+ "kind": "statement",
+ "title": "Cochain counit equation for the explicitly transported scalar tensorator",
+ "status": "split",
+ "statement": "For commutative rings A and B in Type (u+1), a ring homomorphism phi:A→B, a scheme T in universe u, and cochain complexes C,D of fixed A-module sheaves on its pro-etale site, the explicit structure [def-pur-finite-scalar-monoidal-model] satisfies the full binary representative square [def-pur-finite-tensor-comparison-equations], using the actual fixed scalar adjoint, the actual adjoint-transpose representatives [def-sp-coefficient-scalar-representatives] and the native scalar-first cochain comparison [def-pur-finite-tensor-reduction-data]. This is a concrete equation for an already constructed tensorator, with no existence or uniqueness assertion and no K-flat restriction.",
+ "stmt_deps": [
+  "def-pur-finite-scalar-monoidal-model",
+  "def-pur-finite-tensor-comparison-equations",
+  "def-sp-coefficient-scalar-representatives",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-scalar-tensor-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: finite reduction is derived scalar tensor and its compatibility with invertible twists follows from derived tensor associativity; Stacks Tags 07A4 and 0FPT."
+ },
+ "proof": [
+  {
+   "text": "Start from the native leftDerivedTensorComparison_app_app_comp_tensorHom square on homotopy objects. Apply the cochain-to-homotopy quotient monoidal structure and quotientCompQhIso to express it on arbitrary cochain complexes. The mapDerivedCategoryFactors of exact restriction identifies the localized ordinary unit with the derived adjunction unit. Hence the prescribed homEquiv.symm representative is the native cochain counit preceded by the inverse leftAdjointUniq comparison. Substitute this identity in all three representative components. The coreMonoidalTransport formula cancels the comparison on the tensor source and the two factors on the target, leaving the displayed equation. These are equality calculations on natural transformations, so they require neither K-flatness nor flatness of phi. Identity maps, zero rings and the empty site obey the same identities.",
+   "uses": [
+    "def-pur-finite-scalar-monoidal-model",
+    "def-pur-finite-tensor-comparison-equations",
+    "def-sp-coefficient-scalar-representatives",
+    "def-pur-finite-tensor-reduction-data",
+    "def-pur-finite-scalar-tensor-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-scalar-monoidal-model",
+  "def-pur-finite-tensor-comparison-equations",
+  "def-sp-coefficient-scalar-representatives",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-scalar-tensor-data"
+ ],
+ "proof_origin": "J2, 2026-10-26: isolate the explicit native monoidal model and its remaining counit equation from existsUnique_finiteTensorCore. Generic construction, cancellation and uniqueness are proved in Lean. The equation is now projected from the actual typed diagram, definitionally the same source and tail composites.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness of strong monoidal functor structure determined by tensor comparison on K-flat resolutions",
+   "results": "8 hits, including Functor.Monoidal.ext, Functor.CoreMonoidal.mk.inj and Localization.Monoidal.functorCoreMonoidalOfComp. No cochain scalar-counit normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "generic construction and extensionality ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.CoreMonoidal",
+   "results": "0 hits; the search service did not resolve the unqualified identifier. Local Mathlib source inspection found CoreMonoidal and coreMonoidalTransport.",
+   "date": "2026-10-26",
+   "verdict": "no direct theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "CoreMonoidal.ext|leftDerived.*Monoidal|coreMonoidal",
+   "results": "25 Mathlib hits including generic CoreMonoidal and localization transport. Local source search found proved Functor.leftDerivedFunctorMonoidal and the native derived scalar adjunction; no full fixed-adjoint cochain representative square.",
+   "date": "2026-10-26",
+   "verdict": "use native proved construction; representative equation remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit of derived extension of scalars commutes with the tensor comparison on cochain complexes",
+   "results": "8 hits including Adjunction.derivedε and scalar-extension counit formulas. None compares the fixed adjoint scalar extension with native derived tensor on cochains.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison and scalar extension derived adjunction counit commute on cochain representatives; localization tensorators and scalar counits are isomorphisms on K-flat complexes.",
+   "results": "8 hits, including Adjunction.localization_counit_app and ordinary module extension/restriction counits; no exact fixed-derived-scalar representative tensor square or K-flat source certificate.",
+   "date": "2026-10-26",
+   "verdict": "Use the proved native derived APIs and actual typed scalar diagram."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorSignedReduction",
+  "date": "2026-10-26",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: derived scalar reduction and tensor/twist compatibility",
+   "via": [
+    "def-pur-finite-signed-reduction-comparisons",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarMonoidalRepresentative",
+  "file": "lean/Sheaf/Paper/FiniteScalarMonoidalRepresentative.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteScalarMonoidalModel_representative",
+  "statement": "theorem finiteScalarMonoidalModel_representative\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) (T : Scheme.{u})\n    (C D : CochainComplex (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) ℤ) :\n    (finiteScalarTensorData φ T).source C D =\n      ((finiteScalarMonoidalModel φ T).μIso\n        (_root_.DerivedCategory.Q.obj C) (_root_.DerivedCategory.Q.obj D)).inv ≫\n          (finiteScalarTensorData φ T).tail C D",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered Lean files + 5 change records + 15 node files against clone 3dda50f; FiniteTensorCoreNormalized/LineComparison predicates unfolded against finiteTensorBinaryRepresentativeSquare and old HEq bodies; new sorry against native leftDerivedTensorComparison_app_app_comp_tensorHom and the derivedAdjunction counit; 13 direct importers compiled in a sandbox with the delivery (all pass, max 46 s); #print axioms checked"
+ }
+}

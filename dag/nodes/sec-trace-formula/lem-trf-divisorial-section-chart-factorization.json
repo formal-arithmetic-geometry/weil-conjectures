@@ -1,0 +1,206 @@
+{
+ "id": "lem-trf-divisorial-section-chart-factorization",
+ "kind": "statement",
+ "title": "Divisorial sections factor locally in an fs chart",
+ "statement": "Let $(Y,T)$ be a divisorial fine saturated log regular pair [def-trf-log-regular-pair], with $Y$ locally Noetherian [pqf-def-locnoeth], and write $M_Y=\\mathcal O_Y\\cap j_*\\mathcal O_{Y\\setminus T}^{\\times}$ for its log structure, where $j:Y\\setminus T\\hookrightarrow Y$. Let $V\\to Y$ be etale [def-weil-etale-morphism], let $\\bar y:\\operatorname{Spec}\\Omega\\to V$ be a geometric point [def-weil-geometric-point], and let $h_1,\\ldots,h_r\\in\\Gamma(V,\\mathcal O_V)$ be a finite list, allowing $r=0$, each invertible on $V\\times_Y(Y\\setminus T)$ [def-pc-base-change]. There is a pointed etale neighbourhood $V'\\to V$ of $\\bar y$ and a chart $c:P\\to M_Y|_{V'}$ by a fine saturated commutative monoid $P$ such that for every $1\\leq i\\leq r$ there are $a_i\\in P$ and $\\varepsilon_i\\in\\Gamma(V',\\mathcal O_{V'})^\\times$ with $h_i|_{V'}=\\varepsilon_i\\alpha(a_i)$, where $\\alpha:P\\to\\Gamma(V',\\mathcal O_{V'})$ is the structure map of $c$. A pointed neighbourhood includes a lift $\\operatorname{Spec}\\Omega\\to V'$ of the prescribed geometric point; a chart has the stalk pushout meaning in [def-trf-log-regular-pair].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI §§1.1 and 1.4 (printed p. 69) and Proposition 1.9 proof (printed p. 71), h = epsilon a; finite-list form by simultaneous pointed etale refinement."
+ },
+ "stmt_deps": [
+  "def-trf-log-regular-pair",
+  "pqf-def-locnoeth",
+  "def-weil-etale-morphism",
+  "def-weil-geometric-point",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "By the sectionwise definition of the divisorial log structure in [def-trf-log-regular-pair], each $h_i$ is a section of $M_Y$ on the etale object $V$: it is regular there and invertible on $V\\times_Y(Y\\setminus T)$. In particular its germ belongs to $M_{Y,\\bar y}$.",
+   "uses": [
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.4, printed p. 69; Proposition 1.9 proof, printed p. 71, membership of h in the divisorial log structure."
+   }
+  },
+  {
+   "text": "The fine saturated condition in [def-trf-log-regular-pair] supplies a jointly surjective family of etale maps $U_j\\to Y$ with charts $c_j:P_j\\to M_Y|_{U_j}$ by fine saturated commutative monoids $P_j$. By [lem-weil-pbc-etale-covering-base-change] the projections $V\\times_YU_j\\to V$ are etale and jointly surjective. Apply [lem-weil-pbc-etale-cover-geometric-point-lift] to this family and the prescribed $\\bar y:\\operatorname{Spec}\\Omega\\to V$: it gives some $j$, $W=V\\times_YU_j$ and a lift $\\bar w:\\operatorname{Spec}\\Omega\\to W$ of $\\bar y$ with the same $\\Omega$. By [lem-weil-pbc-etale-composition-cancellation](2), $W\\to Y$ is etale. Put $A=\\mathcal O_{Y,\\bar y}$, where $\\bar y$ is also viewed over $Y$. Let $P=P_j$ and let $c:P\\to M_Y|_W$ be the restriction of $c_j$ along the $Y$-morphism $W\\to U_j$. It is a chart: a geometric point of $W$ and its image in $U_j$ lie over one geometric point of $Y$, and the restriction-stalk clause of [lem-trf-finite-monoid-stalk-data-spreading], applied to the sheaves $M_Y$ and $\\mathcal O_Y$ and to both pointed neighbourhoods, identifies both stalks with those over $Y$ compatibly with the chart sections, so the pushout condition of $c_j$ is the pushout condition of $c$. The same clause identifies the stalks at $\\bar w$ with $M_{Y,\\bar y}$ and $A$.",
+   "uses": [
+    "def-trf-log-regular-pair",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-finite-monoid-stalk-data-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.1, printed p. 69 (etale-local fs charts); pointed lift: Stacks Tag 03PR, lemma-geometric-lift-to-cover; restriction stalks: Tags 03PQ and 040R."
+   }
+  },
+  {
+   "text": "The chart definition [def-trf-log-regular-pair] gives $M_{Y,\\bar y}\\simeq P\\oplus_{\\alpha^{-1}(A^\\times)}A^\\times$. This pushout is the quotient of the product monoid $P\\times A^\\times$ by the relations $(ab,u)\\sim(a,\\alpha(b)u)$ for $b\\in\\alpha^{-1}(A^\\times)$. Thus every element has a representative $(a,u)$: products of representatives combine by $(a,u)(a',u')=(aa',uu')$. For each germ $h_i$ choose such a representative $(a_i,u_i)$; the map to $A$ gives $\\operatorname{germ}(h_i)=u_i\\alpha(a_i)$. Write $v_i=u_i^{-1}$ as an element of $A$, so $u_iv_i=1$. For $r=0$ these are empty lists.",
+   "uses": [
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.1 (chart convention); Proposition 1.9 proof, printed p. 71, h = epsilon a. The representative calculation is the defining commutative-monoid pushout quotient."
+   }
+  },
+  {
+   "text": "Apply the finite-elements clause of [lem-trf-finite-monoid-stalk-data-spreading] to the structure sheaf on $Y_{\\mathrm{Et}}$, the pointed neighbourhood $(W,\\bar w)$, and the $2r$ elements $u_i,v_i$ of $A$. It gives one pointed refinement $W_1\\to W$ and regular representatives $e_i,d_i$. On $W_1$ the finitely many pairs $e_id_i,1$ and $h_i|_{W_1},e_i\\alpha(a_i)|_{W_1}$ have equal germs. Apply that node's finite-equalities clause once more to obtain a single pointed refinement $V'\\to W_1$ where all these equalities hold. Then $d_i|_{V'}$ is an inverse to $e_i|_{V'}$, so set $\\varepsilon_i=e_i|_{V'}\\in\\Gamma(V',\\mathcal O_{V'})^\\times$. The equations give $h_i|_{V'}=\\varepsilon_i\\alpha(a_i)$. Restrict $c$ to $V'$; it remains a chart since that node's restriction-stalk identification preserves its stalk pushout at every geometric point. Its monoid is the same fs $P$. Each pointed refinement is a $Y$-morphism of etale $Y$-schemes, hence etale by [lem-weil-pbc-etale-composition-cancellation](3), and (2) makes $V'\\to V$ etale, and the pointed refinements preserve the original lift with the same $\\Omega$. When $r=0$, take $V'=W$ and omit the two spreading applications.",
+   "uses": [
+    "lem-trf-finite-monoid-stalk-data-spreading",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PQ (lemma-cofinal-etale), 040R (definition-stalk and its following element/equality description); finite simultaneous refinement as in Categories Tag 002W, lemma-directed-commutes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-log-regular-pair",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-finite-monoid-stalk-data-spreading"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI 1.1 and 1.4, printed p. 69, and Proposition 1.9 proof, printed p. 71; explicit finite-list neighbourhood argument using Stacks Tags 03PQ and 040R."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A regular function invertible off the boundary of a divisorial fine saturated log regular pair is etale locally a unit times an element of a fine saturated monoid chart.",
+   "results": "{\"t\": \"2026-10-22T06:10:03Z\", \"tool\": \"leanfinder\", \"query\": \"A regular function invertible off the boundary of a divisorial fine saturated log regular pair is etale locally a unit times an element of a fine saturated monoid chart.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.exists_etale_of_isEtaleAt\", \"StandardEtalePair.HasMap\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\", \"StandardEtalePair.HasMap.isUnit_derivative_f\"], \"digest\": \"ac9395827efe90e4\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of a fine saturated log structure is locally a chart monomial multiplied by a unit using the stalk pushout chart.",
+   "results": "{\"t\": \"2026-10-22T06:09:51Z\", \"tool\": \"leansearch\", \"query\": \"A section of a fine saturated log structure is locally a chart monomial multiplied by a unit using the stalk pushout chart.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-22T06:09:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|divisorial|log.regular|logarithmic",
+   "results": "{\"t\": \"2026-10-22T06:09:52Z\", \"tool\": \"grep\", \"query\": \"LogStructure|divisorial|log.regular|logarithmic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\"], \"digest\": \"67110dfe4035ec45\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a fine saturated logarithmic structure every finite list of sections is etale locally a chart monomial multiplied by a unit.",
+   "results": "{\"t\": \"2026-10-23T09:48:44Z\", \"tool\": \"leanfinder\", \"query\": \"In a fine saturated logarithmic structure every finite list of sections is etale locally a chart monomial multiplied by a unit.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePair.hasMap_X\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"StandardEtalePresentation.P\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"a533c1f1719cd0ce\"}; Read all returned signatures. Standard etale presentations, ordinary structure-sheaf fractions, local-ring stalks and monoid localization are different statements; no fs logarithmic chart factorization theorem occurs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|divisorial|log.regular|logarithmic",
+   "results": "{\"t\": \"2026-10-23T09:55:33Z\", \"tool\": \"grep\", \"query\": \"LogStructure|divisorial|log.regular|logarithmic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\"], \"digest\": \"67110dfe4035ec45\"}; Read all returned signatures. Standard etale presentations, ordinary structure-sheaf fractions, local-ring stalks and monoid localization are different statements; no fs logarithmic chart factorization theorem occurs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of an associated logarithmic structure is a monoid chart element times an invertible regular function on an etale neighborhood.",
+   "results": "{\"t\": \"2026-10-23T09:55:34Z\", \"tool\": \"leansearch\", \"query\": \"A section of an associated logarithmic structure is a monoid chart element times an invertible regular function on an etale neighborhood.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.sec\", \"Submonoid.LocalizationMap.sec_spec\", \"AlgebraicGeometry.StructureSheaf.exists_const\", \"AlgebraicGeometry.StructureSheaf.const\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"Submonoid.LocalizationMap.sec_spec'\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sectionsOfPresieve\", \"ModuleCat.Tilde.const\"], \"digest\": \"cc2b20f10ca462cb\"}; Read all returned signatures. Standard etale presentations, ordinary structure-sheaf fractions, local-ring stalks and monoid localization are different statements; no fs logarithmic chart factorization theorem occurs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T09:55:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures. Standard etale presentations, ordinary structure-sheaf fractions, local-ring stalks and monoid localization are different statements; no fs logarithmic chart factorization theorem occurs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a log structure associated to a commutative monoid prelog chart, each stalk element has a representative consisting of a monoid element and a local ring unit.",
+   "results": "{\"t\": \"2026-10-23T09:56:48Z\", \"tool\": \"leanfinder\", \"query\": \"For a log structure associated to a commutative monoid prelog chart, each stalk element has a representative consisting of a monoid element and a local ring unit.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isUnit_toStalk\", \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgebraicGeometry.stalkToFiberRingHom_germ\", \"AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_germ\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_mk'\", \"AlgebraicGeometry.LocallyRingedSpace.notMem_prime_iff_unit_in_stalk\"], \"digest\": \"e565051d58b2b229\"}; Read all returned signatures. Standard etale presentations, ordinary structure-sheaf fractions, local-ring stalks and monoid localization are different statements; no fs logarithmic chart factorization theorem occurs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-etale-chart",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input of lem-trf-local-term-locality (1)--(2), ILO VI Proposition 1.9: old step 4 of lem-trf-nodal-etale-chart, membership in the divisorial log structure, fs chart, stalk unit factorization and spreading to an etale neighbourhood.",
+   "via": [
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-divisorial-section-chart-factorization",
+  "worker": "stage1",
+  "summary": "Kept the statement and its dependencies unchanged. Gave the sectionwise membership argument, chose a pointed fs chart, computed representatives of the stalk pushout, and used the existing finite stalk-data spreading lemma on each unit and its inverse and on all factorization equations. No new nodes; the empty list and preservation of the specified geometric-point field are explicit. Repeated item searches with two semantic phrasings found no project attachment or Mathlib match.",
+  "blueprint": "Supports the historical alteration/log-chart ancestry of lem-trf-local-term-locality, via lem-trf-nodal-etale-chart: its old step 4 is the h = epsilon a sentence in ILO VI Proposition 1.9. The current latest blueprint proof (1)--(2) uses contracting correspondences; this local logarithmic auxiliary is not asserted to prove the local-term theorem and no unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-e15f18563",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-e15f18563 (reviewer sub-agent of L); spot-checked: I read the item's statement (unchanged from base), all four steps and every cited statement: def-trf-log-regular-pair, the geometric-point lift leaf, composition-cancellation (2)/(3), lem-trf-finite-monoid-stalk-data-spreading. I also read ILO VI 1.1, 1.4 and the proof of Prop 1.9 (printed p.71, 'Écrivons h = εa'). No new nodes. One fault, C1 in step 2: the definition gives fs charts on an étale covering of Y, not of V. Pulling that covering back to V needs etale-covering base change, which was not cited, and the restriction of the chart along W→U_j was not argued. FIX: step 2 now cites lem-weil-pbc-etale-covering-base-change (mathlib leaf, also added to proof_deps), lifts ȳ to W=V×_Y U_j with the same Ω, and shows the restricted c is a chart via the restriction-stalk clause for M_Y and O_Y. Editorial clarification in step 4: refinement maps are étale by (3), composites by (2). Steps 1 and 3 are elementary and correct: membership is sectionwise, and the pushout quotient gives a representative (a,u) with germ(h)=uα(a), with no sharpness used. Step 4's spreading of u_i, v_i and the 2r equalities gives a unit ε_i on a single pointed V'. Edge cases checked: r=0, unit h_i, h_i=0 (impossible since V is nonempty and Y∖T is dense), non-sharp P. No duplicate in sec-trace-formula; fine-log-stalk-chart-spreading, monomial-unit-descent and associated-log-universal-stalks differ. No SGA used; no tool_uses needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DivisorialSectionChartFactorization",
+  "declaration": "AlgebraicGeometry.exists_divisorial_section_chart_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/DivisorialSectionChartFactorization.lean",
+  "statement": "theorem exists_divisorial_section_chart_factorization {Y U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [IsLocallyNoetherian Y] (hU : DenseRange j) (hlog : IsDivisorialFineSaturatedLogRegularPair Y U j hU) {V : Scheme.{u}} (f : V ⟶ Y) [Etale f] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ V) (r : ℕ) (h : Fin r → Γ(V, ⊤)) (hh : ∀ i : Fin r, IsUnit ((pullback.fst f j).appTop (h i))) : ∃ (W : Y.Etale) (g : W.left ⟶ V) (w : Spec (.of Ω) ⟶ W.left), Etale g ∧ g ≫ f = W.hom ∧ w ≫ g = y ∧ ∃ hunit : ∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (t : Spec (.of Ω') ⟶ Y), IsUnit.submonoid (strictLocalRing Y t) ≤ divisorialStalk j t, ∃ (P : Type u) (_ : CommMonoid P) (c : P →* divisorialSections j W), IsFineSaturatedMonoid P ∧ (∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (t : Spec (.of Ω') ⟶ Y) (z : (Scheme.pointSmallEtale t).fiber.obj W), IsDivisorialStalkChart (divisorialStalk j t) (hunit Ω' t) ((divisorialGerm j t W z).comp c)) ∧ ∃ (a : Fin r → P) (ε : Fin r → Γ(W.left, ⊤)ˣ), ∀ i : Fin r, g.appTop (h i) = (ε i).val * (c (a i)).val",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-738c92768",
+  "group": "Q71",
+  "result": "fix",
+  "note": "Lean statement exact against node and LogRegularPair API: hyps j/hU/hlog, IsLocallyNoetherian, Etale f, (Ω,y), h : Fin r → Γ(V,⊤), IsUnit on pullback f j; conclusion W : Y.Etale + g + w lift with same Ω, fs chart c into divisorialSections at every geometric point of W (form of HasDivisorialFineSaturatedCharts; ∃ hunit witness already in hlog, so neither stronger nor weaker), a/ε with g.appTop (h i) = ε·c(a i). r=0, non-sharp P, empty V checked; universes all u; statement field verbatim; docstrings/source/blueprint/proof steps present; proof only sorry; no duplicate (NodalEtaleChart one-section nodal case, DivisorialLogChart snc). Only fault H11: 'Second reading by Q71' is a worker self-check → FIX fixes/lem-trf-divisorial-section-chart-factorization.report.md (Worker report verbatim + independent clause-by-clause second reading). No Lean change, no compile."
+ }
+}

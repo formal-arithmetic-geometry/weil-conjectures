@@ -115,7 +115,18 @@
   "def-weil-smooth-proper-cohomological-family"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-zeta-weil",
  "unit": "sk-prop-separation",
  "split_report": {
@@ -147,5 +158,25 @@
    "AlgebraicGeometry.Scheme.roots_map_frobeniusCharpolyRev_eq_filter"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.ZetaFunction.WeightSeparation: the blueprint item prop-weight-separation's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix a prime $p$, an integer $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$,\n$k_0=\\Fq$, and let $k=\\Fbar$ be the\nfixed algebraic closure of $k_0$.\nFix a prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic\nclosure $\\Qlb$ of $\\Ql$, and fix a field embedding\n$\\iota:\\Qlb\\hookrightarrow\\mathbf C$ and an indeterminate $T$. Let\n$X_0/k_0$ be\nsmooth, proper, geometrically\nconnected of pure dimension\n$d\\in\\mathbf Z_{\\geq0}$, put $X=X_0\\times_{k_0}k$, and let\n$(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the\nsmooth-proper\ncohomological family.\nInterpret ordinary and reciprocal roots by the\nroot convention, and use the\nabsolute-value weight condition. Assume\nthat, for every integer $i$ with $0\\leq i\\leq2d$, every reciprocal root\n$\\alpha$ of $P_{i,\\ell}$ satisfies\n\n$$\n|\\iota(\\alpha)|=q^{i/2}.\n$$\n\nLet $Z(X_0,T)$ be the\npoint-count zeta series. Assume the\ntrace-to-determinant identity\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\n\\quad\\text{in }\\Ql(T).\n$$\n\nFor all integers $0\\leq i,j\\leq2d$ with\n$i\\neq j$, the polynomials $P_{i,\\ell}$ and $P_{j,\\ell}$ have no common\nordinary root in $\\Qlb$ and are coprime in $\\Qlb[T]$. Define the\nodd and even parity products by\n\n$$\nN_\\ell(T)=\\prod_{\\substack{0\\leq i\\leq2d\\\\ i\\text{ odd}}}\nP_{i,\\ell}(T),\n\\qquad\nD_\\ell(T)=\\prod_{\\substack{0\\leq i\\leq2d\\\\ i\\text{ even}}}\nP_{i,\\ell}(T).\n$$\n\nThey are coprime, have constant coefficient $1$, and the\nHasse–Weil zeta series satisfies\n\n$$\nZ(X_0,T)=\\frac{N_\\ell(T)}{D_\\ell(T)}\n$$\n\nafter coefficient extension to $\\Ql[[T]]$. More precisely, the ordinary\nroot multiset of each $P_{i,\\ell}$ is exactly the submultiset of roots of\nthe appropriate parity product whose reciprocal $\\alpha$ satisfies\n\n$$\n|\\iota(\\alpha)|=q^{i/2}\n$$\n\nfor the fixed field embedding\n$\\iota:\\Qlb\\hookrightarrow\\mathbf C$.",
+  "proof": [
+   {
+    "text": "Let $\\beta\\in\\Qlb$ be a common ordinary root of $P_{i,\\ell}$ and\n$P_{j,\\ell}$ with $i\\ne j$. Then $\\alpha=\\beta^{-1}$ is a\nreciprocal root of both polynomials in the sense of\n[def-weil-ordinary-reciprocal-roots], so the assumed absolute\nvalue condition gives $|\\iota(\\alpha)|=q^{i/2}=q^{j/2}$, hence\n$i=j$, a contradiction. Thus distinct $P_{i,\\ell}$ have no common\nordinary root, and since every $P_{i,\\ell}$ has constant coefficient\none, they are coprime in $\\Qlb[T]$; consequently the parity products\n$N_\\ell,D_\\ell$ of [def-weil-parity-products] are coprime and\nhave constant coefficient one. The assumed trace-to-determinant\nidentity for the point-count zeta series of\n[def-weil-point-counts-zeta],\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}},\n$$\n\ngroups the odd-degree factors into $N_\\ell(T)$ and the even-degree\nfactors into $D_\\ell(T)$, giving $Z(X_0,T)=N_\\ell(T)/D_\\ell(T)$\nafter coefficient extension to $\\Ql[[T]]$. Every ordinary root of\n$N_\\ell$ is an ordinary root of exactly one $P_{j,\\ell}$ with $j$\nodd, and its reciprocal satisfies the assumed absolute value condition\nwith weight $j$; hence the submultiset of ordinary roots of $N_\\ell$\nwhose reciprocal satisfies $|\\iota(\\alpha)|=q^{i/2}$ is exactly the\nordinary root multiset of $P_{i,\\ell}$ for $i$ odd, and the\ncorresponding assertion with $D_\\ell$ holds for $i$ even, which is the\nasserted more precise multiset identification.",
+    "uses": [
+     "def-weil-ordinary-reciprocal-roots",
+     "def-weil-parity-products",
+     "def-weil-point-counts-zeta"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

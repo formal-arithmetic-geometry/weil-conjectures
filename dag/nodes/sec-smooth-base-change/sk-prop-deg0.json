@@ -1,0 +1,111 @@
+{
+ "id": "sk-prop-deg0",
+ "kind": "statement",
+ "title": "The degree-zero calculation",
+ "statement": "Consider a cartesian square with $u:X'\\to X$, $f':X'\\to Y'$, $f:X\\to Y$ and $g:Y'\\to Y$, and\nthe exchange map of étale sheaves of [sk-def-exchange].\nSuppose that $g$ is flat and locally of finite\npresentation with geometrically reduced fibres, and that $f$ is qcqs.\nThen the exchange map\n$g^{-1}f_*F_{\\mathrm{\\acute et}}\\to f'_*u^{-1}F_{\\mathrm{\\acute et}}$ of sheaves\non $Y'_{\\mathrm{\\acute et}}$ is an isomorphism for every sheaf of sets\n$F_{\\mathrm{\\acute et}}$ on $X_{\\mathrm{\\acute et}}$.\n\n*Complement.* Let $\\Lambda$ be a commutative ring. For a Cartesian square as in\n[sk-def-bc] (so $g$ is quasi-compact and quasi-separated) in which\n$f:X\\to S$ is flat and locally of finite presentation with geometrically\nreduced fibres (in particular for $f$ smooth), the degree-zero\nbase-change map\n\n$$\nf^{-1}g_*\\mathcal F\\longrightarrow h_*e^{-1}\\mathcal F\n$$\n\nis an isomorphism, for *every* sheaf $\\mathcal F$ of $\\Lambda$-modules on\n$T_{\\Et}$ — no torsion hypothesis is needed in degree zero. Hence\n$\\mathrm{BC}(f,\\Lambda,0)$ holds for such $f$, in particular for smooth $f$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-smooth-base-change/sk-prop-deg0/_section.md",
+  "place": "node sk-prop-deg0, order 1426",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EY5"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A3H"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EZX"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EYS"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-exchange",
+  "sk-def-bc"
+ ],
+ "proof": [
+  {
+   "text": "By [Stacks, Tag 0EY5](https://stacks.math.columbia.edu/tag/0EY5), locally on an étale object\n$U\\to Y'$ there is a\nfactorization $U\\to V\\to Y$ in which $V\\to Y$ is étale and $U\\to V$\nis flat and qcqs with geometrically connected fibres. Pullback along\nsuch a map does not change the sections of a pulled-back étale sheaf\n([Stacks, Tag 0A3H](https://stacks.math.columbia.edu/tag/0A3H), as used in\n[Stacks, Tag 0EZX](https://stacks.math.columbia.edu/tag/0EZX)), and the connected-fibre\nproperty survives base change to $X$. Hence on these objects\n\n$$\n (g^{-1}f_*F_{\\mathrm{\\acute et}})(U)\n   =F_{\\mathrm{\\acute et}}(V\\times_Y X)\n   =(f'_*u^{-1}F_{\\mathrm{\\acute et}})(U).\n$$\n\nThese equalities are given by the exchange map, so descent proves the\nlemma. This is the degree-zero argument of\n[Stacks, Tag 0EYS](https://stacks.math.columbia.edu/tag/0EYS).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Complement.* In the notation of [sk-def-bc] the smooth (or flat) morphism is $f$ and the\nqcqs one is $g$. A sheaf of $\\Lambda$-modules is in particular a sheaf of sets, and the\nbase-change map is the exchange map of underlying sheaves; the argument in detail is as follows.",
+   "uses": [
+    "sk-def-bc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1 (an étale-local normal form with connected fibres).*\nBecause $f$ is flat, locally of finite presentation and has\ngeometrically reduced fibres, there is an étale covering\n$\\{X_i\\to X\\}$ such that each $X_i\\to S$ factors as\n$X_i\\to S_i\\to S$ with $S_i\\to S$ étale and $X_i\\to S_i$ flat of\nfinite presentation with geometrically connected (and geometrically\nreduced) fibres. Geometric reducedness is what allows a geometric\nfibre to be cut into quasi-compact geometrically connected opens which\nthen spread out over an étale neighbourhood of the base point.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 2 (sections agree on such a chart).* Let $U\\to X$ be étale\nand factor as $U\\to V\\to S$ with $V\\to S$ étale and $U\\to V$\nquasi-compact flat with geometrically connected fibres. Since $V\\to S$\nis étale, the inverse image of a sheaf on $S_{\\Et}$ restricted to $V$\nis its restriction, so\n\n$$\n(f^{-1}g_*\\mathcal F)(U)=(g_*\\mathcal F)(V)\n=\\mathcal F(V\\times_ST)=(e^{-1}\\mathcal F)(U\\times_XY)\n=(h_*e^{-1}\\mathcal F)(U).\n$$\n\nThe outer two equalities are the definitions of $g_*$ and $h_*$ together\nwith $U\\times_XY=U\\times_ST$. The first and third use the same input:\nfor a flat quasi-compact morphism with geometrically connected fibres,\nglobal sections of an inverse image agree with global sections\ndownstairs ([Stacks `0A3H`](https://stacks.math.columbia.edu/tag/0A3H)) — applied to $U\\to V$,\nand then to its base change $U\\times_ST\\to V\\times_ST$, whose fibres are\nbase changes of those of $U\\to V$ and hence still geometrically\nconnected. That lemma is itself the statement that a section of the\npullback is constant on each connected geometric fibre, so descends\nalong the fpqc covering $U\\to V$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 3 (glue).* Both sides are sheaves on $X_{\\Et}$, and by\nStep 1 every object of $X_{\\Et}$ has a covering by objects of the shape\nused in Step 2, so the two sheaves agree.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 4 ($\\mathrm{BC}(f,\\Lambda,0)$ for smooth $f$).* A smooth morphism\nis flat and locally of finite presentation and its geometric fibres are\nsmooth varieties, hence reduced; so Steps 1–3 apply and give the\ndegree-zero case of [sk-def-bc] for every quasi-compact\nquasi-separated $g:T\\to S$ and every sheaf $\\mathcal F$ of $\\Lambda$-modules.\n\nThis is Stacks, Étale Cohomology, Lemma 59.87.2\n([`0EYS`](https://stacks.math.columbia.edu/tag/0EYS)), combining Lemma 59.87.1\n([`0EZX`](https://stacks.math.columbia.edu/tag/0EZX)) for Steps 2–3 with More on Morphisms,\nLemma 37.46.3 ([`0EY5`](https://stacks.math.columbia.edu/tag/0EY5)) for Step 1.",
+   "uses": [
+    "sk-def-bc"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-bc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-smooth-base-change/sk-prop-deg0/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1426,
+ "blueprint_uses": [
+  "sk-def-bc",
+  "sk-def-exchange"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.baseChangeProperty_zero",
+  "AlgebraicGeometry.Etale.baseChangeProperty_zero_of_smooth"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Etale.baseChangeProperty_zero",
+  "AlgebraicGeometry.Etale.baseChangeProperty_zero_of_smooth"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "sk-prop-deg0",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-deg0"
+}

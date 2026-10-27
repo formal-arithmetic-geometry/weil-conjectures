@@ -1,0 +1,93 @@
+{
+ "id": "def-sf-integral-localization-comparison-data",
+ "kind": "definition",
+ "title": "Qualitative integral supported localization and reduction data",
+ "statement": "For a prime l, finite extension E/Q_l, field k with l invertible, a k-scheme X with structure morphism t, closed immersion i:Z→X and open immersion j:U→X, and a supplied family F n : SfFiniteLocalization l E n k i j [def-sf-localization-stage-data], define SfIntegralLocalizationComparisonData l E k hl t i j F. It consists of supported localization on the actual integral constructible categories, comparisons to the specified completed images and completed pullbacks, closed/open image reductions, open and closed pullback reductions, exceptional reductions and their exceptional-counit and open-unit equations. This is qualitative data only: no Tor bound, no limit existence and no existence is asserted. The fields except closed_pull_reduction are exactly the corresponding fields of SfIntegralLocalization, with finiteStages supplied as F.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral operations and reduction comparisons; Other stages, reductions of i*,j*,i_*,Rj_*,Ri!."
+ },
+ "stmt_deps": [
+  "def-sf-localization-stage-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct a supported localization triangle from adjunctions closed open recollement and prove uniqueness of the boundary",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Adjunction.IsTriangulated.mk'; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Adjunction.IsTriangulated.mk''; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Adjunction.isTriangulated_leftAdjoint; CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "SfFiniteLocalization|SfIntegralLocalization|HasProEtaleTorAmplitude.*iso",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude is invariant under isomorphism and uniform bounds on all derived reductions imply integral finite Tor amplitude",
+   "results": "RingHom.Flat.respectsIso; CategoryTheory.hasProjectiveDimensionLT_of_iso; CategoryTheory.Triangulated.TStructure.isLE_of_iso; RingHom.finite_respectsIso; RingHom.isIntegral_respectsIso; CategoryTheory.hasInjectiveDimensionLT_of_iso; RingHom.finitePresentation_respectsIso; RingHom.finiteType_respectsIso",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Y2",
+  "item": "Sheaf.Paper.SfIntegralLocalizationConstruction",
+  "date": "2026-10-25"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral operations and reduction comparisons; Other stages, reductions of i*,j*,i_*,Rj_*,Ri!.",
+   "via": [
+    "lem-sf-integral-localization-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfIntegralLocalizationComparisons",
+  "file": "lean/Sheaf/Paper/SfIntegralLocalizationComparisons.lean",
+  "declaration": "WeilConjectures.SfIntegralLocalizationComparisonData",
+  "declarations": [
+   "WeilConjectures.SfIntegralLocalizationComparisonData"
+  ],
+  "statement": "structure SfIntegralLocalizationComparisonData (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (k : Type u) [Field k] (hl : IsUnit (l : k)) {X Z U : Scheme.{u}} (t : X ⟶ Spec (.of k)) (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (F : ∀ n : ℕ, SfFiniteLocalization l E n k i j)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T164813-L-1086400",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T164813-L-1086400",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

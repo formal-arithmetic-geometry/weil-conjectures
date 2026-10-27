@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-semilinear-open-faithful-cartier",
+ "kind": "statement",
+ "title": "Faithful semilinear action and stable Cartier pullback on an invariant open",
+ "statement": "Let $e$ be a field [def-weil-field], let $L/e$ be a field extension [def-pc-field-extension], let $H$ be a subgroup of $\\operatorname{Aut}_e(L)$, and let $B$ be an $e$-scheme [def-pc-scheme]. Put $Y=B\\times_e\\operatorname{Spec}L$ with projections $p:Y\\to B$ and $s:Y\\to\\operatorname{Spec}L$ [def-pc-fibre-product]. Let $X\\subseteq Y$ be a nonempty open subscheme stable under every map $\\alpha_h=\\operatorname{id}_B\\times\\operatorname{Spec}(h^{-1})$ for $h\\in H$, and put $u=p|_X$, $s_X=s|_X$. Suppose $u$ is flat [def-weil-flat-morphism]. The restrictions $r_h=\\alpha_h|_X$ define a left action of $H$ by $e$-scheme automorphisms of $X$, and $u\\circ r_h=u$ and $s_X\\circ r_h=\\operatorname{Spec}(h^{-1})\\circ s_X$ for all $h$. This action on the scheme $X$ is faithful, meaning that $r_h=\\operatorname{id}_X$ implies $h=1$; the given action on $L$ is also faithful. For every effective Cartier divisor $D\\subseteq B$ with ideal $\\mathcal I_D$ [def-nagata-effective-cartier-ideal], its pullback $D_X=D\\times_B X$ is an effective Cartier divisor on $X$, with support $u^{-1}|D|$ and ideal $\\mathcal J=u^{-1}\\mathcal I_D\\cdot\\mathcal O_X$. It is stable as a divisor: $r_h^{-1}\\mathcal J\\cdot\\mathcal O_X=\\mathcal J$ for every $h\\in H$. The empty effective Cartier divisor is allowed. No finiteness, separability, normality, properness or integrality assumption is imposed on $L/e$ or $X$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X 2.3 Step 2, printed p.150: apply 2.2 to the decomposition subgroup acting on (Y_0/S_0,Z_0 intersect Y_0). Extracts returned item steps 5, 9 and 10: canonical restricted semilinear action, faithful scalar action, and stable Cartier pullback. Stacks divisors.tex Tag 02OO, lemma-pullback-effective-Cartier-defined, case (6)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:X\\hookrightarrow Y$. By contravariant functoriality of $\\operatorname{Spec}$ and the fibre-product universal property, $\\alpha_1=1$, $\\alpha_h\\circ\\alpha_k=\\alpha_{hk}$, $p\\circ\\alpha_h=p$ and $s\\circ\\alpha_h=\\operatorname{Spec}(h^{-1})\\circ s$. For the second projection of the composite, $s\\circ\\alpha_h\\circ\\alpha_k=\\operatorname{Spec}(h^{-1})\\circ\\operatorname{Spec}(k^{-1})\\circ s=\\operatorname{Spec}(k^{-1}\\circ h^{-1})\\circ s=\\operatorname{Spec}((hk)^{-1})\\circ s$; its first projection is $p$. Uniqueness in the fibre-product property gives the action law. Since $h$ fixes $e$, these are $e$-morphisms. Stability for both $h$ and $h^{-1}$ gives $\\alpha_h(X)=X$. Restrict the continuous map and its structure-sheaf maps to this open: $\\mathcal O_X=\\mathcal O_Y|_X$, so this defines $r_h$ and $j\\circ r_h=\\alpha_h\\circ j$. The same restriction for $h^{-1}$ is its inverse. Restricting the identities above gives $r_1=1$, $r_h\\circ r_k=r_{hk}$ and the two required formulas for $u$ and $s_X$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150 (PDF p.156), decomposition subgroup acting on Y_0/S_0; explicit restriction calculation from Stacks schemes.tex Tags 01I2 (lemma-category-affine-schemes), 01HB (definition-locally-ringed-space), and 01HE (definition-immersion-locally-ringed-spaces)."
+   }
+  },
+  {
+   "text": "If $r_h=1$, the preceding formula gives $s_X=\\operatorname{Spec}(h^{-1})\\circ s_X$. Choose $x\\in X$, using nonemptiness. The structure map induces $\\lambda:L\\to\\kappa(x)$; the residue field of the sole point of $\\operatorname{Spec}L$ is $L$. By clause (2) of the spectrum-map naturality lemma with $R=R'=L$, $\\psi=h^{-1}$ and the zero prime, $\\operatorname{Spec}(h^{-1})$ induces $h^{-1}$ on this residue field $L$. Applying the maps on stalks and then their residue quotients to this equality gives $\\lambda=\\lambda\\circ h^{-1}$, since the stalk map of a composite is the composite of the stalk maps. Explicitly, a scalar $a\\in L$ has residue $\\lambda(a)$ under $s_X$, whereas the composite sends it to $\\lambda(h^{-1}(a))$. The field homomorphism $\\lambda$ is injective: if $a\\ne0$ were in its kernel, $1=\\lambda(aa^{-1})=0$. Thus $h^{-1}(a)=a$ for every $a\\in L$, so $h=1$. The evaluation action on $L$ itself is faithful because $H$ is a subgroup of its automorphism group: an element fixing every scalar is the identity automorphism.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-field",
+    "lem-weil-pbc-spec-map-residue-field-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HB (definition-locally-ringed-space), residue fields and local maps; Tag 01I2 (lemma-category-affine-schemes), functorial Spec maps; the elementary inverse argument is also fields.tex Tag 09FU (lemma-field-maps-injective)."
+   }
+  },
+  {
+   "text": "Apply the flat Cartier-pullback theorem to $g=u:X\\to B$ and $D\\subseteq B$: its only additional hypothesis is precisely the assumed flatness of $u$. It gives that $D_X=D\\times_BX$ is effective Cartier. Its local formula says that on affine opens $V=\\operatorname{Spec}A\\subseteq u^{-1}(W)$, $W=\\operatorname{Spec}R\\subseteq B$, with $\\mathcal I_D|_W=(t)$, the ideal of $D_X$ is $(\\varphi(t))\\subseteq A$, where $\\varphi:R\\to A$ is induced by $u$. These formulas identify its ideal sheaf with $\\mathcal J=u^{-1}\\mathcal I_D\\cdot\\mathcal O_X$.",
+   "uses": [
+    "lem-pc-flat-pullback-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OO, lemma-pullback-effective-Cartier-defined, case (6) and the affine-local proof; Tag 01WV, definition-pullback-effective-Cartier-divisor."
+   }
+  },
+  {
+   "text": "By the cited description of the map of spectra on points, on the same affine charts, a point with prime ideal $\\mathfrak q\\subset A$ lies in $|D_X|$ exactly when $\\varphi(t)\\in\\mathfrak q$, equivalently $t\\in\\varphi^{-1}(\\mathfrak q)$, exactly when its image in $B$ lies in $|D|$. Thus $|D_X|=u^{-1}|D|$. For invariance, $u\\circ r_h=u$ makes each $u^{-1}W$ stable. On it $\\mathcal J$ is generated by $u^\\sharp(t)$. The extended inverse-image ideal along $r_h$ is generated there by $r_h^\\sharp(u^\\sharp(t))=(u\\circ r_h)^\\sharp(t)=u^\\sharp(t)$. Hence $r_h^{-1}\\mathcal J\\cdot\\mathcal O_X=\\mathcal J$ on this open cover and therefore globally. This is equality of ideal sheaves, so preserves the divisor with its scheme structure. The unit generator $t=1$ covers the empty divisor case, giving $\\mathcal J=\\mathcal O_X$ and empty support.",
+   "uses": [
+    "lem-pc-flat-pullback-effective-cartier-ideal",
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism",
+    "def-nagata-effective-cartier-ideal",
+    "lem-weil-pbc-spec-map-residue-field-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OO, lemma-pullback-effective-Cartier-defined, affine-local description; ideal-generator calculation using the composition in schemes.tex Tag 01HB (definition-locally-ringed-space)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-scheme-over-base",
+  "def-weil-residue-field",
+  "def-weil-field",
+  "lem-pc-flat-pullback-effective-cartier-ideal",
+  "def-nagata-effective-cartier-ideal",
+  "lem-weil-pbc-spec-map-residue-field-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.150: verification of the restricted scalar action and stable Cartier boundary, using Stacks 02OO (6). The action, residue-field kernel test and ideal-generator calculations are written explicitly by Q133."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The semilinear action of a subgroup of field automorphisms on a nonempty invariant open subscheme of a scalar extension is faithful; flat pullbacks of Cartier divisors are invariant",
+   "results": "OK 8 hits: Module.FaithfullyFlat.faithfulSMul, IsGaloisGroup.faithful, FaithfulSMul.of_field_isFractionRing, Ring.instFaithfulSMulSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, Module.FaithfullyFlat.of_specComap_surjective, Module.FaithfullyFlat.of_comap_surjective, Algebra.IsAlgebraic.faithfulSMul_tower_top, RingHom.faithfullyFlat_algebraMap_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give faithful module actions, a residue-field description of field-valued scheme points, or preservation of regular elements by flat base change; none gives this restricted semilinear scheme action with invariant Cartier ideal"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"FaithfulSMul\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give faithful module actions, a residue-field description of field-valued scheme points, or preservation of regular elements by flat base change; none gives this restricted semilinear scheme action with invariant Cartier ideal"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emilinear|[Ff]aithfulSMul|[Cc]artier.*[Ii]nvariant|[Ii]nvariant.*[Cc]artier",
+   "results": "OK 7 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give faithful module actions, a residue-field description of field-valued scheme points, or preservation of regular elements by flat base change; none gives this restricted semilinear scheme action with invariant Cartier ideal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonempty invariant open in a field base change inherits a faithful semilinear action of the scalar automorphism subgroup and stable flat pullback Cartier ideals",
+   "results": "OK 8 hits: IsSMulRegular.of_flat_of_isBaseChange, Subfield.instFaithfulSMulSubtypeMem, IsBaseChange.map_smul_top_ne_top_iff_of_faithfullyFlat, Algebra.isInvariant_of_isGalois', IsGaloisGroup.mk, IsGaloisGroup.casesOn, IsInvariantSubfield.toMulSemiringAction, IntermediateField.instFaithfulSMulSubtypeMem",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give faithful module actions, a residue-field description of field-valued scheme points, or preservation of regular elements by flat base change; none gives this restricted semilinear scheme action with invariant Cartier ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a scalar automorphism acts identically on a nonempty scheme over the field, injectivity into a residue field makes the automorphism trivial, and invariant flat maps preserve effective Cartier divisors",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.specTargetImageFactorization_app_injective, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.stalkMap_injective_of_isAffine, WeierstrassCurve.Affine.Point.map_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give faithful module actions, a residue-field description of field-valued scheme points, or preservation of regular elements by flat base change; none gives this restricted semilinear scheme action with invariant Cartier ideal"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"FaithfulSMul\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states all clauses for an arbitrary nonempty invariant open of a scalar extension; the field-point and scalar-module hits are only ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|FaithfulSMul|Cartier.*invariant|invariant.*Cartier",
+   "results": "7 hits in Mathlib/AlgebraicGeometry: ValuativeCriterion:312; EllipticCurve/Affine/Point:149,151; StructureSheaf:1094,1098,1119,1126. These concern faithful scalar modules or semilinear maps, not this scheme action.",
+   "date": "2026-10-22",
+   "verdict": "no match: none states all clauses for an arbitrary nonempty invariant open of a scalar extension; the field-point and scalar-module hits are only ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonempty scheme over a field detects equality of scalar automorphisms, and a flat pullback of an effective Cartier divisor is an invariant effective Cartier divisor under automorphisms over the base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.mk.inj, AlgebraicGeometry.Scheme.mk.injEq, AlgebraicGeometry.Scheme.noConfusion, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1",
+   "date": "2026-10-22",
+   "verdict": "no match: none states all clauses for an arbitrary nonempty invariant open of a scalar extension; the field-point and scalar-module hits are only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subgroup of field automorphisms acts faithfully on any nonempty invariant open subscheme of a field base change; flat pullback preserves effective Cartier divisors",
+   "results": "8 hits: FaithfulSMul.of_field_isFractionRing, IsGaloisGroup.faithful, IntermediateField.instFaithfulSMulSubtypeMem, IsGaloisGroup.of_isFractionRing, WeierstrassCurve.Affine.Point.map_injective, IsGaloisGroup.to_isFractionRing, Ring.instFaithfulSMulSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, FixedPoints.toAlgHom_bijective",
+   "date": "2026-10-22",
+   "verdict": "no match: none states all clauses for an arbitrary nonempty invariant open of a scalar extension; the field-point and scalar-module hits are only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a field inducing the identity automorphism of a nonempty scheme over the field must be identity, by injectivity of the field map to a residue field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.residueFieldCongr_refl, AlgebraicGeometry.Scheme.SpecToEquivOfField, finGaloisGroupMap.map_id, AlgebraicGeometry.Scheme.residueFieldMap_id, AlgebraicGeometry.Spec.map_eq_id, CategoryTheory.PreGaloisCategory.autMap_id, AlgEquiv.restrictNormalHom_id",
+   "date": "2026-10-22",
+   "verdict": "no match: none states all clauses for an arbitrary nonempty invariant open of a scalar extension; the field-point and scalar-module hits are only ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-galois-component-presentation",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X 2.3 Step 2, printed p.150: apply 2.2 to the decomposition subgroup acting on (Y_0/S_0,Z_0 intersect Y_0). Extracts returned item steps 5, 9 and 10: canonical restricted semilinear action, faithful scalar action, and stable Cartier pullback. Stacks divisors.tex Tag 02OO, lemma-pullback-effective-Cartier-defined, case (6).",
+   "via": [
+    "lem-sfb-galois-component-presentation",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semilinear-open-faithful-cartier",
+  "worker": "stage1",
+  "summary": "Statement retained without new hypotheses. Four explicit steps construct the restricted left action, detect its kernel in a residue field, apply the existing flat Cartier pullback node, and calculate support and invariant ideal generators. No new nodes: all other calculations are elementary from cited definitions. Checked the full project Lean source for an attachment, the current blueprint and DAG for reuse, and two Mathlib search phrasings. Repair of the 2026-10-22 landing return: compared the retained returned-head split with the current unsplit DAG item, reread every statement dependency and proof citation, preserved the statement and search evidence, and made the contravariant action-law and scalar-residue calculations explicit. Delivery is rebuilt on the current server DAG by deliver.py; the sandbox does not assert side-project completion.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images proof (3), ILO X 2.3 Step 2, p.150: validity of the action of the decomposition subgroup on (Y_0/S_0,Z_0 intersect Y_0). This is the faithful-action/Cartier-boundary part extracted from lem-sfb-galois-component-presentation. The inherited ancestor is null (blueprint_refs.py ancestor reports None); its explicit from.place and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-pullback-effective-cartier-ideal",
+    "why": "Generic flat Cartier pullback, already Lean-closed, supplies effectiveness and the local extended ideal; no finiteness or relative-divisor hypotheses are needed."
+   },
+   {
+    "node": "lem-weil-pbc-spec-map-residue-field-naturality",
+    "why": "Clause (1), the inverse-image formula for the map of spectra on prime ideals, reads off the support of the pulled-back divisor (step 4); clause (2) with R=R'=L and the zero prime identifies the residue-field map of Spec(h^{-1}) with h^{-1} (step 2). Existing Lean-closed generic tool; it replaces no unit-level route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-pullback-effective-cartier-ideal",
+  "lem-weil-pbc-spec-map-residue-field-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-d6edf1830",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-d6edf1830 (reviewer sub-agent of L); spot-checked: Q133 S1 delivery of lem-sfb-semilinear-open-faithful-cartier, head d6edf183. One commit containing only the item and its report. No new nodes, nothing dropped. The statement, stmt_deps, source and blueprint are unchanged. No SGA source is cited. This is not a re-split. The previous delivery 779756f3 got a FIX that added clause (2) of lem-weil-pbc-spec-map-residue-field-naturality to step 2; landing was then refused, and this re-delivery was rebuilt from the pre-FIX head, so that FIX was lost. Step 2 again used, without a citation, that Spec(h^-1) induces h^-1 on L. def-weil-affine-spectrum gives only that the residue field is L. FIX: I restored the clause-(2) sentence in step 2 (R=R'=L, psi=h^-1, zero prime), added the node to step 2's uses, and restored the tool_uses 'why' for clauses (1) and (2). The new explicit scalar sentence is kept, and proof_deps equals the union of all uses. The remaining reasoning of step 2 is correct: equal maps give equal stalk maps, the composition formula gives lambda=lambda∘h^-1, and lambda is injective by the inverse argument. Step 1 is correct: Spec(h^-1)∘Spec(k^-1)=Spec((hk)^-1), fibre-product uniqueness gives a left action of e-morphisms, stability under h and h^-1 gives alpha_h(X)=X, and the restriction uses O_X=O_Y|_X. Step 3 applies the Lean-closed flat Cartier pullback node with S=B, Y=X, g=u, giving the local ideal (phi(t))A; this matches Stacks divisors.tex 02OO case (6) and its proof. Step 4: the support follows from clause (1); invariance follows from r_h#u#(t)=u#(t) on the r_h-stable sets u^-1W; the empty divisor is t=1. The parent lem-sfb-galois-component-presentation step 3 uses exactly these clauses. Source read: ILO X 2.3 Step 2, printed p.150. Edge cases tested: X=Spec L, inseparable L, nonreduced or disconnected X, empty X (excluded by hypothesis), empty D. Accepted tool_uses: lem-pc-flat-pullback-effective-cartier-ideal and lem-weil-pbc-spec-map-residue-field-naturality, both Lean-closed generic tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearOpenFaithfulCartier",
+  "declaration": "AlgebraicGeometry.exists_semilinear_open_faithful_cartier",
+  "declarations": [
+   "AlgebraicGeometry.semilinearBaseChangeMap",
+   "AlgebraicGeometry.exists_semilinear_open_faithful_cartier"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearOpenFaithfulCartier.lean",
+  "statement": "theorem exists_semilinear_open_faithful_cartier (e L : Type u) [Field e] [Field L] [Algebra e L] (H : Subgroup (L ≃ₐ[e] L)) (B : Scheme.{u}) (b : B ⟶ Spec (.of e)) (U : (pullback b (Spec.map (CommRingCat.ofHom (algebraMap e L)))).Opens) (hne : Nonempty U.toScheme) (hstable : ∀ h : H, U ≤ (semilinearBaseChangeMap e L b h.val) ⁻¹ᵁ U) [Flat (U.ι ≫ pullback.fst b (Spec.map (CommRingCat.ofHom (algebraMap e L))))] : ∃ r : H →* Aut U.toScheme, (∀ h : H, (r h).hom ≫ U.ι = U.ι ≫ semilinearBaseChangeMap e L b h.val) ∧ (∀ h : H, (r h).hom ≫ U.ι ≫ pullback.fst b (Spec.map (CommRingCat.ofHom (algebraMap e L))) = U.ι ≫ pullback.fst b (Spec.map (CommRingCat.ofHom (algebraMap e L)))) ∧ (∀ h : H, (r h).hom ≫ U.ι ≫ pullback.snd b (Spec.map (CommRingCat.ofHom (algebraMap e L))) = U.ι ≫ pullback.snd b (Spec.map (CommRingCat.ofHom (algebraMap e L))) ≫ Spec.map (CommRingCat.ofHom h.val.symm.toRingHom)) ∧ (∀ h : H, (r h).hom = 𝟙 U.toScheme → h = 1) ∧ (∀ h : H, (∀ a : L, h.val a = a) → h = 1) ∧ (∀ I : B.IdealSheafData, I.IsInvertible → (I.comap (U.ι ≫ pullback.fst b (Spec.map (CommRingCat.ofHom (algebraMap e L))))).IsInvertible ∧ ((I.comap (U.ι ≫ pullback.fst b (Spec.map (CommRingCat.ofHom (algebraMap e L))))).support : Set U.toScheme) = (U.ι ≫ pullback.fst b (Spec.map (CommRingCat.ofHom (algebraMap e L)))) ⁻¹' (I.support : Set B) ∧ ∀ h : H, (I.comap (U.ι ≫ pullback.fst b (Spec.map (CommRingCat.ofHom (algebraMap e L))))).comap (r h).hom = I.comap (U.ι ≫ pullback.fst b (Spec.map (CommRingCat.ofHom (algebraMap e L)))))",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d03152462",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Item record differs from live only by the new lean field; lean.statement matches the file verbatim; one new module with a concrete pullback.map helper (semilinearBaseChangeMap = id_B × Spec(h⁻¹)) and one sorried theorem. Clause check: subgroup of L≃ₐ[e]L with no finiteness/Galois assumption; nonempty U stable under all α_h; flat u; r : H →* Aut U pinned by r_h≫ι=ι≫α_h, and the Aut_mul_def convention gives a left action consistent with α_h∘α_k=α_hk; u∘r_h=u; s_X formula with Spec(h⁻¹); faithfulness on X and on L; for every IsInvertible I (= def-nagata local regular generator): comap along u is IsInvertible, support is the preimage of |D|, and comap by r_h is unchanged; the empty divisor is allowed. Edge cases: empty X excluded as in the node; arbitrary or inseparable L allowed; shared universe u is needed for the fibre product and matches the consumer GaloisComponentPresentation. H4: galoisMap is FiniteFieldDatum-specific, no duplicate found. Gates fine: docstrings with source and blueprint, only sorry, no hollow def. Minor: private PropertyC import used only for docs. No compile run since no FIX."
+ }
+}

@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-equation-count-closed-fibre-localization",
+ "kind": "statement",
+ "title": "Expected closed-fibre equation count permits localization preserving reduction",
+ "statement": "Let $R$ be a commutative ring, $I\\subset R$ an ideal, $m,c\\ge0$, and $S=R[y_1,\\ldots,y_m]/(f_1,\\ldots,f_c)$ [def-weil-pbc-mv-polynomial-ring]. Here $m-c$ is the difference in $\\mathbb Z$, so the following hypothesis requires $c\\le m$ whenever there is a nonempty closed-reduction fibre. Assume every nonempty fibre of $S/IS$ over $R/I$ has Krull dimension $m-c$ [def-weil-pbc-relative-global-complete-intersection]. Then there is $g\\in S$ mapping to $1$ in $S/IS$ such that $S_g$ [def-weil-ring-localization-away] has a presentation $R[y_1,\\ldots,y_m,z]/(f_1,\\ldots,f_c,hz-1)$, where $h$ maps to $g$, which is a relative global complete intersection over $R$ [def-weil-pbc-relative-global-complete-intersection]. Empty fibres, including $S/IS=0$, are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00ST (lemma-localize-relative-complete-intersection), assertion (1)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "If $S/IS=0$, choose $g=0$ and its polynomial lift $h=0$. Its image in the zero reduction is $1=0$. Inverting $0$ gives the zero ring, and the inverse-variable quotient has the relation $-1$, so is also zero. Every fibre is empty, and the relative global complete intersection condition is vacuous. Hence suppose $S/IS\\ne0$. It has a maximal ideal, giving a prime of $S$ containing $IS$ and a nonempty fibre over its contraction in $R/I$. A nonempty spectrum has nonnegative dimension, so the hypothesis with the integer difference $m-c$ implies $c\\le m$. Put $d=m-c\\ge0$.",
+   "uses": [
+    "def-weil-pbc-relative-global-complete-intersection",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ST (1); Tag 00SP (definition-relative-global-complete-intersection); Tag 00E0 (lemma-Zariski-topology), empty-spectrum and maximal-ideal cases"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\in V(IS)$ and $\\mathfrak p=\\mathfrak q\\cap R$, so $I\\subseteq\\mathfrak p$. The quotient-spectrum correspondence identifies these with primes of $S/IS$ and $R/I$. The residue fields at $\\mathfrak p/I$ and $\\mathfrak p$ are identical: fractions modulo these primes have the same numerators and denominators. The fibre rings are canonically isomorphic: $(S/IS)\\otimes_{R/I}\\kappa(\\mathfrak p)\\to S\\otimes_R\\kappa(\\mathfrak p)$ sends $(s\\bmod IS)\\otimes a$ to $s\\otimes a$, with inverse $s\\otimes a\\mapsto(s\\bmod IS)\\otimes a$; these are well defined since $I$ acts by zero on the field and inverse on pure tensors. Consequently the original fibre at $\\mathfrak p$ has dimension $d$. Its point corresponding to $\\mathfrak q$ has dimension some integer $e\\le d$, since dimension at a point is the minimum of the dimensions of its open neighbourhoods and the whole fibre is one of them.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ST (1), closed-reduction fibres; Tag 00E5 (lemma-spec-closed), Tag 00E6 (remark-fundamental-diagram)"
+   }
+  },
+  {
+   "text": "The images of the $m$ variables generate $S$ as an $R$-algebra, so $R\\to S$ is of finite type. At each $\\mathfrak q\\in V(IS)$ apply the bounded-local-fibre-dimension neighbourhood theorem with the integer $e$ from step 2. It gives an open $V_{\\mathfrak q}$ containing $\\mathfrak q$ where every local fibre dimension is at most $e$, hence at most $d$. The union $W=\\bigcup_{\\mathfrak q\\in V(IS)}V_{\\mathfrak q}$ is open, contains $V(IS)$, and every point of $W$ has local fibre dimension at most $d$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ST (1), first sentence, using Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs)"
+   }
+  },
+  {
+   "text": "Write the closed complement of $W$ as $V(J)$ for an ideal $J\\subseteq S$, using the definition of the Zariski topology. Since $V(J)\\cap V(IS)=\\varnothing$, the disjoint-zero-loci criterion gives $g\\in J$ and $u\\in IS$ with $g+u=1$. Thus $g$ maps to $1$ in $S/IS$. If a prime does not contain $g$ it cannot contain $J$, so $D(g)\\subseteq W$. Choose a polynomial preimage $h\\in R[y_1,\\ldots,y_m]$ of $g$ under the surjective quotient map.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ST (1), choice of J, g and h; Tag 00E0 (lemma-Zariski-topology)"
+   }
+  },
+  {
+   "text": "Fix any prime $\\mathfrak p\\subset R$ and put $F=S\\otimes_R\\kappa(\\mathfrak p)$ and $\\bar g=g\\otimes1$. Localization base change identifies $S_g\\otimes_R\\kappa(\\mathfrak p)$ with $F_{\\bar g}$; its spectrum is the open $O=D(\\bar g)$ of $\\operatorname{Spec}F$. A point of $O$ corresponds by the fibre-prime bijection to a prime $\\mathfrak q\\subset S$ above $\\mathfrak p$, and $\\bar g\\notin\\mathfrak Q$ says exactly $g\\notin\\mathfrak q$. Thus $\\mathfrak q\\in D(g)\\subseteq W$, and its local fibre dimension is at most $d$. Dimension at a point is unchanged on an open subspace, so every local dimension in $O$ is at most $d$. The dimension-supremum theorem now gives $\\dim O\\le d$, including $O=\\varnothing$, whose dimension is $-\\infty$. Hence every nonempty fibre of $S_g$ has dimension at most $d$.",
+   "uses": [
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ST (1), passage from W to S_g; Tags 00DK/00DL, 00E4, 00E6; Topology Tag 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  },
+  {
+   "text": "The inverse-variable presentation theorem identifies $S_g$ with $T=R[y_1,\\ldots,y_m,z]/(f_1,\\ldots,f_c,hz-1)$, sending the old variables to their localized images and $z$ to $1/g$. Base change of this presentation to any $\\kappa(\\mathfrak p)$ presents $T\\otimes_R\\kappa(\\mathfrak p)$ with $m+1$ variables and $c+1$ equations. Since $c\\le m$, the polynomial-quotient dimension lower bound applies to each nonzero such fibre and gives dimension at least $(m+1)-(c+1)=d$. The presentation isomorphism induces isomorphisms on fibre rings; their spectra are homeomorphic (the maps are mutually inverse on primes and on basic opens), hence have equal dimensions. Step 5 therefore supplies the upper bound $d$ for these same fibres. All nonempty fibres of the displayed presentation have dimension exactly $d$, so it is a relative global complete intersection by definition. The element $g$ retains the reduction established in step 4.",
+   "uses": [
+    "new-equation-count-localize-presentation",
+    "lem-weil-pbc-presentation-base-change",
+    "lem-weil-pbc-polynomial-quotient-dimension-lower-bound",
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ST (1), inverse-variable presentation and completion of the implicit dimension lower bound; Tag 05G3 (section-base-change); Tags 00OP and 00KW"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "new-equation-count-localize-presentation",
+  "lem-weil-pbc-presentation-base-change",
+  "lem-weil-pbc-polynomial-quotient-dimension-lower-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00ST (lemma-localize-relative-complete-intersection), proof of (1); with the implicit lower bound spelled out using the existing polynomial-quotient lower-bound node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial quotient with c equations and n variables whose fibres over a closed subset have dimension n minus c becomes a relative global complete intersection after inverting an element equal to one on the closed subset",
+   "results": "{\"t\": \"2026-10-23T12:42:52Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial quotient with c equations and n variables whose fibres over a closed subset have dimension n minus c becomes a relative global complete intersection after inverting an element equal to one on the closed subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmooth\"], \"digest\": \"e30be462f5a16850\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, IsLocalization.Away",
+   "results": "{\"t\": \"2026-10-23T12:42:53Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FinitePresentation, IsLocalization.Away\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsLocalization.Away.finitePresentation\", \"Algebra.FinitePresentation.of_isLocalizationAway\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\"], \"digest\": \"ba60b6f943d22e67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]yntomic|[Rr]elativeGlobalCompleteIntersection|localize_relative_complete_intersection",
+   "results": "{\"t\": \"2026-10-23T12:42:53Z\", \"tool\": \"grep\", \"query\": \"[Ss]yntomic|[Rr]elativeGlobalCompleteIntersection|localize_relative_complete_intersection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Expected dimension of fibres over a quotient ring implies a polynomial quotient is a relative complete intersection after localization away from the closed fibre",
+   "results": "{\"t\": \"2026-10-23T12:42:54Z\", \"tool\": \"leansearch\", \"query\": \"Expected dimension of fibres over a quotient ring implies a polynomial quotient is a relative complete intersection after localization away from the closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.localizationAway_dimension_zero\", \"Polynomial.fiberEquivQuotient\", \"Polynomial.not_quasiFiniteAt\", \"RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway\", \"Algebra.QuasiFinite.instLocalization\", \"Algebra.QuasiFiniteAt\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"RingHom.QuasiFinite.holdsForLocalizationAway\"], \"digest\": \"bfca82dbb535b5ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given S=R[x1,...,xn]/(f1,...,fc) with all nonempty fibres over R/I of dimension n-c, there is g in 1+IS for which S localized at g is flat with global complete intersection fibres",
+   "results": "{\"t\": \"2026-10-23T12:47:52Z\", \"tool\": \"leanfinder\", \"query\": \"Given S=R[x1,...,xn]/(f1,...,fc) with all nonempty fibres over R/I of dimension n-c, there is g in 1+IS for which S localized at g is flat with global complete intersection fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"Algebra.Smooth.flat\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.flat_of_isNoetherianRing\"], \"digest\": \"9c78f470a18f9c9e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|relativeGlobalCompleteIntersection|equation.*count.*localiz",
+   "results": "{\"t\": \"2026-10-23T13:23:00Z\", \"tool\": \"grep\", \"query\": \"syntomic|relativeGlobalCompleteIntersection|equation.*count.*localiz\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci and standard smooth presentations impose stronger hypotheses; localization presentations and finite presentation give no expected-fibre-dimension neighbourhood theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localize a finitely presented algebra away from an element equal to one on a closed fibre so all fibres have dimension number of variables minus equations",
+   "results": "{\"t\": \"2026-10-23T13:23:01Z\", \"tool\": \"leansearch\", \"query\": \"Localize a finitely presented algebra away from an element equal to one on a closed fibre so all fibres have dimension number of variables minus equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.localizationAway\", \"instFinitePresentationAway\", \"RingHom.finitePresentation_holdsForLocalizationAway\", \"Algebra.FinitePresentation.of_isLocalizationAway\", \"IsLocalization.Away.finitePresentation\", \"Algebra.Presentation.localizationAway.congr_simp\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"Algebra.Presentation.localizationAway_dimension_zero\"], \"digest\": \"207aa254265029c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci and standard smooth presentations impose stronger hypotheses; localization presentations and finite presentation give no expected-fibre-dimension neighbourhood theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Presentation, IsLocalization.Away",
+   "results": "{\"t\": \"2026-10-23T13:23:01Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Presentation, IsLocalization.Away\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.Presentation.localizationAway\", \"Algebra.Presentation.relation_comp_localizationAway_inl\"], \"digest\": \"033827da973e8915\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci and standard smooth presentations impose stronger hypotheses; localization presentations and finite presentation give no expected-fibre-dimension neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial quotient with expected dimensional fibres over R/I becomes a relative global complete intersection after inverting g congruent to one modulo IS",
+   "results": "{\"t\": \"2026-10-23T13:23:03Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial quotient with expected dimensional fibres over R/I becomes a relative global complete intersection after inverting g congruent to one modulo IS\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.SubmersivePresentation.ofHasCoeffs\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"Algebra.IsStandardSmooth\"], \"digest\": \"f495933ef2306cdb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci and standard smooth presentations impose stronger hypotheses; localization presentations and finite presentation give no expected-fibre-dimension neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented ring map, the locus of points whose fibre has dimension at most d is open, allowing a principal neighbourhood of a prescribed closed fibre",
+   "results": "{\"t\": \"2026-10-23T13:29:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely presented ring map, the locus of points whose fibre has dimension at most d is open, allowing a principal neighbourhood of a prescribed closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"Algebra.isOpen_etaleLocus\", \"PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"Module.isOpen_freeLocus\", \"RingHom.finitePresentation_isLocal\", \"PrimeSpectrum.isConstructible_range_comap\"], \"digest\": \"e7acf136b4fd1c63\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci and standard smooth presentations impose stronger hypotheses; localization presentations and finite presentation give no expected-fibre-dimension neighbourhood theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "def IsStandardSmoothOfRelativeDimension|def localizationAway|relation_comp_localizationAway_inl",
+   "results": "{\"t\": \"2026-10-23T13:36:36Z\", \"tool\": \"grep\", \"query\": \"def IsStandardSmoothOfRelativeDimension|def localizationAway|relation_comp_localizationAway_inl\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"Mathlib/RingTheory/Extension/Generators.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\"], \"digest\": \"f48f7ee68a7d3ef9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci and standard smooth presentations impose stronger hypotheses; localization presentations and finite presentation give no expected-fibre-dimension neighbourhood theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-algebra-surjection-lift",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZH (lemma-lci-unobstructed), scheme formulation via Tag 0DYX (lemma-affine), with example-schemes and section-general; formal-defos.tex, definition-CLambda specifies the coefficient identifications. Ring-theoretic input: Tag 0DZH proof invokes Smoothing Ring Maps Tag 07M8 (1) after recognizing the given deformation algebra as syntomic. Supporting input: 07M8(1), first paragraph: localize the coefficientwise lift with g=1 on its prescribed reduction.",
+   "via": [
+    "lem-sfb-syntomic-algebra-surjection-lift",
+    "lem-sfb-affine-lci-artinian-lift",
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equation-count-closed-fibre-localization",
+  "worker": "stage1",
+  "summary": "Read Stacks 00ST (1), handle zero reduction explicitly, form W via the existing 00QH node, choose g from disjoint zero loci, and bound all localized fibres above and below using existing nodes. No new nodes. Clarified that m-c is an integer difference.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) auxiliary syntomic-lifting chain, specifically 07M8 (1) first paragraph and 00ST (1). Current latest blueprint proof (3) is a compactification/direct-image assembly and contains no separate equation-count statement; no duplicate found. Preserve inherited null from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "why": "Generic algebra/topological input used exactly as stated in Stacks 00ST (1); the item unit has no internal replacement for this ring-theoretic auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic algebra/topological input used exactly as stated in Stacks 00ST (1); the item unit has no internal replacement for this ring-theoretic auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic algebra/topological input used exactly as stated in Stacks 00ST (1); the item unit has no internal replacement for this ring-theoretic auxiliary fact."
+   },
+   {
+    "node": "new-equation-count-localize-presentation",
+    "why": "Generic algebra/topological input used exactly as stated in Stacks 00ST (1); the item unit has no internal replacement for this ring-theoretic auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-quotient-dimension-lower-bound",
+    "why": "Generic algebra/topological input used exactly as stated in Stacks 00ST (1); the item unit has no internal replacement for this ring-theoretic auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "new-equation-count-localize-presentation",
+  "lem-weil-pbc-polynomial-quotient-dimension-lower-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-e3159b2bf",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-e3159b2bf (reviewer sub-agent of L); spot-checked: I read the item, all 20 cited node statements and Stacks algebra.tex Tag 00ST (statement and the proofs of (1)-(3)). This is a first split with no new nodes and no re-split note. Statement: the only change from the base is one sentence saying m−c is the integer difference. That is already the convention of the cited def-weil-pbc-relative-global-complete-intersection (its remark: c>n gives T=0), and truncated subtraction would make the statement false (R=k, m=0, c=1, f=0). 'Nonempty fibres' is weaker than the source's hypothesis, so the statement is not weakened, and the citer lem-sfb-syntomic-algebra-surjection-lift is unaffected. Steps: (1) S/IS=0 with g=h=0 makes everything vacuous; otherwise a maximal ideal gives a nonempty fibre, so c≤m. (2) The fibre rings over R/I and R are matched by an explicit tensor isomorphism (I acts as 0 on κ(p)), and the local dimension e≤d follows from the definition as a minimum. (3) 00QH node with that integer e gives an open W⊇V(IS) where every local fibre dimension is ≤d. (4) Disjoint zero loci give g∈J with g≡1 mod IS, and D(g)⊆W. (5) Localization base change, the D(g) homeomorphism, the fibre-prime bijection (same point ker ψ_q), invariance of local dimension on an open subspace and the 0B7I supremum give fibres of S_g of dimension ≤d. (6) The inverse-variable presentation, presentation base change, and the polynomial-quotient lower bound (m+1≥c+1, nonzero fibre) give dimension exactly d, so the presentation is a relative global complete intersection. Small cases: R=k[t], I=(t), f1=y1(1−ty2), f2=y2(1−ty2), where the generic fibre jumps to dimension 1 and g=1−ty2 removes the line; also I=0 and m=c=0. No duplicate: the existing 00ST nodes all state assertion (3). Accepted tool_uses: the sk-thm-p1 generic lemmas (00QH bound, open-subspace local dimension, 0B7I supremum, localize-presentation, polynomial lower bound). The null blueprint.from.node is inherited from the base. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EquationCountClosedFibreLocalization",
+  "declaration": "Algebra.exists_localization_relativeGlobalCompleteIntersection_preserving_reduction",
+  "file": "lean/Sheaf/RingTheory/EquationCountClosedFibreLocalization.lean",
+  "statement": "theorem exists_localization_relativeGlobalCompleteIntersection_preserving_reduction (R : Type u) [CommRing R] (I : Ideal R) (m c : ℕ) (f : Fin c → MvPolynomial (Fin m) R) (hdim : IsRelativeGlobalCompleteIntersectionPresentation (fun i ↦ MvPolynomial.map (Ideal.Quotient.mk I) (f i))) : ∃ h : MvPolynomial (Fin m) R, Ideal.Quotient.mk (I.map (algebraMap R (MvPolynomial (Fin m) R ⧸ Ideal.span (Set.range f)))) (Ideal.Quotient.mk (Ideal.span (Set.range f)) h) = 1 ∧ IsRelativeGlobalCompleteIntersectionPresentation (Fin.snoc (α := fun _ ↦ MvPolynomial (Fin (m + 1)) R) (fun i ↦ MvPolynomial.rename Fin.castSucc (f i)) (MvPolynomial.rename Fin.castSucc h * MvPolynomial.X (Fin.last m) - 1)) ∧ ∃ e : (MvPolynomial (Fin (m + 1)) R ⧸ Ideal.span (Set.range (Fin.snoc (α := fun _ ↦ MvPolynomial (Fin (m + 1)) R) (fun i ↦ MvPolynomial.rename Fin.castSucc (f i)) (MvPolynomial.rename Fin.castSucc h * MvPolynomial.X (Fin.last m) - 1)))) ≃ₐ[R] Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) h), (∀ i : Fin m, e (Ideal.Quotient.mk _ (MvPolynomial.X (Fin.castSucc i))) = algebraMap (MvPolynomial (Fin m) R ⧸ Ideal.span (Set.range f)) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) h)) (Ideal.Quotient.mk _ (MvPolynomial.X i))) ∧ e (Ideal.Quotient.mk _ (MvPolynomial.X (Fin.last m))) = IsLocalization.Away.invSelf (Ideal.Quotient.mk (Ideal.span (Set.range f)) h)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b1ad1ed1",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read the node, Stacks 00ST(1) statement and proof, the three stmt_deps (MvPolynomial, IsRelativeGlobalCompleteIntersectionPresentation in side-live, Localization.Away/invSelf) and the module. The node differs from live only in lean; lean.statement is verbatim in the file. Hypothesis = recorded predicate on the reduced equations over R/I, which present S/IS; the guard on nonempty fibres (c≤m) gives the integer m−c. Conclusion: ∃h with class g ↦ 1 in S/IS (I.map algebraMap); the Fin.snoc (f, rename h·X_last−1) presentation satisfies the same predicate; ∃ e : T ≃ₐ[R] Localization.Away g with canonical generator images. No extra instances, universe u bound, edge cases (I=⊤, S/IS=0 with c>m, m=c=0) admitted. No hollow defs, sorry only, docstrings carry the source place, blueprint id and the 6 steps; report has the Worker report and Second reading by Q25 sections. No duplicate (existing 00ST(3) theorem is pointwise). Minor: Fin.snoc indexing vs Option in the presentation dependency, not a fault. Not recompiled, per instructions."
+ }
+}

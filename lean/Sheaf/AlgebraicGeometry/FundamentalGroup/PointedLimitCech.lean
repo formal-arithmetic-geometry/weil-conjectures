@@ -11,14 +11,12 @@ public import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
 public import Mathlib.AlgebraicTopology.CechNerve
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits
 public import Mathlib.CategoryTheory.Limits.Final
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.OpenSubgroups
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegree
-import WeilConjectures.AlgebraicGeometry.LimitFibreProducts
-import Sheaf.RingTheory.IndEtaleUniverseTransport
-import Sheaf.AlgebraicGeometry.EtaleComparison
-import Sheaf.AlgebraicGeometry.FiniteEtaleFiniteLimits
+public import Sheaf.AlgebraicGeometry.FundamentalGroup.ProfiniteProductMaps
+import Mathlib.Topology.Homeomorph.Lemmas
+import all Sheaf.AlgebraicGeometry.ProfiniteSchemeProductComponents
+import Sheaf.AlgebraicGeometry.FundamentalGroup.PointedGaloisLimitGeometry
+import Sheaf.AlgebraicGeometry.FundamentalGroup.NormalizedPointedLimitCech
+import all Sheaf.AlgebraicGeometry.FundamentalGroup.PointedLimitFiniteSplitting
 
 /-! # The pointed finite étale limit and its consecutive Čech coordinates
 
@@ -31,6 +29,8 @@ natural automorphism group, with its evaluation topology; it introduces no new g
 
 @[expose] public section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u v w z
 open CategoryTheory Limits Opposite PreGaloisCategory
 
@@ -42,55 +42,6 @@ noncomputable def finiteSplitMap {X : Scheme.{u}} [ConnectedSpace X]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (Y : X.FiniteEtale) :
     (∐ fun _ : (FiniteEtale.fiber x).obj Y ↦ cover x) ⟶ pullback (proj x) Y.obj.hom :=
   Sigma.desc fun s ↦ pullback.lift (𝟙 _) (toObj x Y s) (by simp)
-
-/-- The actual scheme `T × P`, using the existing profinite test object, not a product
-of underlying sets. Source: Stacks 097D
-(blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-noncomputable abbrev profiniteProduct (T : Scheme.{u}) (P : Profinite.{u}) : Scheme.{u} :=
-  ((ProEtale.profiniteToProEtOf T).obj P).left
-
-/-- The first projection of the profinite product. Source: Stacks 097D
-(blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-noncomputable abbrev profiniteProductBase (T : Scheme.{u}) (P : Profinite.{u}) :
-    profiniteProduct T P ⟶ T :=
-  ((ProEtale.profiniteToProEtOf T).obj P).hom
-
-/-- The constant-label section as a scheme morphism, by evaluation of locally constant
-integer functions. Source: Stacks 097D
-(blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-noncomputable def profiniteProductSection (T : Scheme.{u}) (P : Profinite.{u}) (p : P) :
-    T ⟶ profiniteProduct T P :=
-  pullback.lift
-    (ProEtale.toSpecZ T ≫ Spec.map (CommRingCat.ofHom
-      (ULift.ringEquiv.symm.toRingHom.comp (LocallyConstant.evalRingHom p))))
-    (𝟙 T) (by exact (ProEtale.comp_toSpecZ _).trans (Category.id_comp _).symm)
-
-/-- The q-th power of a finite label set. Source: the consecutive-label construction in
-§7.4 (blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-def labelPower (q : ℕ) : Type u ⥤ Type u where
-  obj A := Fin q → A
-  map f := ↾fun a ↦ f ∘ a
-
-/-- The prescribed inverse system `N ↦ ∐_(G/N)^q T`, with quotient transition maps.
-Source: Stacks 097D (blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-noncomputable def finiteLabelDiagram (T : Scheme.{u}) (G : ProfiniteGrp.{u}) (q : ℕ) :
-    OpenNormalSubgroup G ⥤ Scheme.{u} :=
-  ProfiniteGrp.toFiniteQuotientFunctor G ⋙ CategoryTheory.forget FiniteGrp ⋙ labelPower q ⋙
-    (sigmaConst.obj T)
-
-/-- Consecutive labels up to the i-th vertex, in their stated order.
-Source: the cumulative-label formula in §7.4
-(blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-def cumulativeLabel {G : Type u} [Group G] {q : ℕ} (g : Fin q → G) (i : ℕ) : G :=
-  ((List.ofFn g).take i).prod
-
-/-- Restrict a consecutive-label list along an arbitrary simplex map.
-Source: the group-nerve construction in §7.4
-(blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-def restrictedLabels {G : Type u} [Group G] {m n : ℕ}
-    (φ : SimplexCategory.mk n ⟶ SimplexCategory.mk m) (g : Fin m → G) : Fin n → G :=
-  fun i ↦ (cumulativeLabel g (φ.toOrderHom i.castSucc).val)⁻¹ *
-    cumulativeLabel g (φ.toOrderHom i.succ).val
 
 /-- The right deck transformation normalized by left monodromy on finite fibres.
 Source: Stacks 0BND (blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
@@ -113,28 +64,6 @@ noncomputable abbrev cechVertex {X : Scheme.{u}} [ConnectedSpace X]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)
     (q : ℕ) (i : Fin (q + 1)) : cechTerm x q ⟶ cover x :=
   WidePullback.π (fun _ : Fin (q + 1) ↦ proj x) i
-
-/-- The continuous map of q labels induced by a pointed scheme morphism.
-Source: Stacks 0BND (3) (blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-noncomputable def labelMap (G H : ProfiniteGrp.{u}) (ρ : H →* G)
-    (hρ : Continuous ρ) (q : ℕ) :
-    Profinite.of (Fin q → H) ⟶ Profinite.of (Fin q → G) :=
-  ConcreteCategory.ofHom (ContinuousMap.piMap (fun _ : Fin q ↦ ⟨ρ, hρ⟩))
-
-/-- Map of profinite products over a scheme morphism, using the existing test functor.
-Source: Stacks 097D and 0BND (3)
-(blueprint: lem-sfb-pointed-finite-etale-limit-cover). -/
-noncomputable def profiniteProductMap {T T' : Scheme.{u}} (f : T' ⟶ T)
-    {P P' : Profinite.{u}} (a : P' ⟶ P) :
-    profiniteProduct T' P' ⟶ profiniteProduct T P :=
-  pullback.map _ _ _ _ (ProEtale.profiniteToScheme.map a) f
-    (𝟙 ProEtale.specZ) (by
-      change ProEtale.toSpecZ _ ≫ 𝟙 _ = _ ≫ ProEtale.toSpecZ _
-      rw [Category.comp_id]
-      exact (ProEtale.comp_toSpecZ _).symm)
-    (by
-      change ProEtale.toSpecZ T' ≫ 𝟙 _ = f ≫ ProEtale.toSpecZ T
-      exact (Category.comp_id _).trans (ProEtale.comp_toSpecZ f).symm)
 
 /-- All the asserted coordinate data and their normalization. Every field is either
 actual data or a property, with no choice of an unconstrained comparison map.
@@ -262,7 +191,216 @@ theorem nonempty_pointedLimitCechCoordinates {X : Scheme.{u}} [ConnectedSpace X]
     [∀ Y, MulAction G ((FiniteEtale.fiber x).obj Y)]
     [IsFundamentalGroup (FiniteEtale.fiber x) G] :
     Nonempty (PointedLimitCechCoordinates x G) := by
-  sorry
+  classical
+  obtain ⟨E, e, he, hes, het, hsub, harrow, haut, hlim, hover, hcofinal,
+    hstage, htransition, hpoint, hbase, hconnected, hcompact, hqs,
+    haffine, hflat, hsurj, hweak, hcharts, hcover⟩ :=
+    exists_pointedGaloisLimitGeometry x G
+  let S : PointedCosetSystem x G :=
+    { covers := E.functor ⋙ obj x
+      connected := fun N ↦ (hstage N).1
+      label := fun N ↦ (e N).symm
+      label_smul := by
+        intro N a b
+        apply (e N).injective
+        change (e N) ((e N).symm (QuotientGroup.mk (a * b))) =
+          (e N) (a • (e N).symm (QuotientGroup.mk b))
+        calc
+          _ = QuotientGroup.mk (a * b) := (e N).apply_symm_apply _
+          _ = QuotientGroup.mk a * (e N) ((e N).symm (QuotientGroup.mk b)) := by
+            rw [(e N).apply_symm_apply]
+            rfl
+          _ = _ := (hes N a _).symm
+      transition := by
+        intro M N h a
+        apply (e N).injective
+        change (e N) ((FiniteEtale.fiber x).map
+          ((obj x).map (E.functor.map (homOfLE h))) ((e M).symm (QuotientGroup.mk a))) =
+            (e N) ((e N).symm (QuotientGroup.mk a))
+        rw [het, Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+        rfl }
+  let cone : Cone (S.covers ⋙ finiteEtaleOver X) :=
+    { pt := Over.mk (proj x)
+      π :=
+        { app := fun N ↦ Over.homMk (limit.π (diagram x) (E.functor.obj N)) (π_p x _)
+          naturality := by
+            intro M N f
+            apply Over.OverMorphism.ext
+            exact (Category.id_comp _).trans (limit.w (diagram x) (E.functor.map f)).symm } }
+  let L : PointedCosetLimit x G S :=
+    { cone := cone
+      isLimit := by
+        exact (Functor.Initial.isLimitWhiskerEquiv E.functor _).symm hover.some
+      point := pt x
+      point_base := pt_proj x
+      point_leg := by
+        intro N
+        change pt x ≫ limit.π (diagram x) (E.functor.obj N) = _
+        rw [pt_π]
+        congr 1
+        apply (e N).injective
+        change (e N) (point x (E.functor.obj N)) = (e N) ((e N).symm 1)
+        rw [he, Equiv.apply_symm_apply]
+        rfl
+      connected := hconnected }
+  clear hsub harrow haut hlim hcofinal htransition hpoint hbase hcompact hqs hcharts
+  have : ConnectedSpace (cover x) := hconnected
+  obtain ⟨B⟩ := exists_pointedLimitSplitting L
+  obtain ⟨C⟩ := PointedLimitCech.exists_coordinates B
+  obtain ⟨P⟩ := profinite_scheme_product_components.{u}
+  have hs (Y : X.FiniteEtale) (s : (FiniteEtale.fiber x).obj Y) :
+      (B.sectionMap Y s).left = toObj x Y s :=
+    eq_toObj x Y s _ (Over.w _) (B.section_point Y s)
+  have hd (g : G) : (B.deck g).hom.left = (rightDeck x G g).hom := by
+    apply hom_ext x
+    intro Y s
+    calc
+      _ = (B.sectionMap Y (g • s)).left := by
+        rw [← hs Y s]
+        exact B.section_deck Y s g
+      _ = toObj x Y (g • s) := hs Y (g • s)
+      _ = _ := by
+        symm
+        change transportHom (toAut (FiniteEtale.fiber x) G g).symm ≫ toObj x Y s = _
+        rw [transportHom_toObj]
+        rfl
+  let a (q : ℕ) : profiniteProduct (cover x) (Profinite.of (Fin q → G)) ≅
+      (C.cone q).pt := (P.scheme_limit (cover x) G q).conePointUniqueUpToIso (C.isLimit q)
+  have aq (q : ℕ) (N : OpenNormalSubgroup G) :
+      (a q).hom ≫ (C.cone q).π.app N = (P.projections (cover x) G q).app N :=
+    (P.scheme_limit (cover x) G q).conePointUniqueUpToIso_hom_comp (C.isLimit q) N
+  have ac (q : ℕ) (g : Fin q → G) :
+      profiniteProductSection (cover x) (Profinite.of (Fin q → G)) g ≫ (a q).hom =
+        C.constant q g := by
+    apply (C.isLimit q).hom_ext
+    intro N
+    rw [Category.assoc, aq, P.projection_section, C.constant_quotient]
+    rfl
+  let iso (q : ℕ) := a q ≪≫ C.iso q
+  let components (q : ℕ) : ConnectedComponents (cechTerm x q) ≃ₜ (Fin q → G) := by
+    let f := (Scheme.homeoOfIso (iso q)).symm
+    exact (f.isQuotientMap.isCoinducing.connectedComponentsHomeomorph
+      (fun z ↦ f.isConnected_preimage.mpr isConnected_singleton)).trans (P.components (cover x) G q)
+  refine ⟨{
+    connected := hconnected
+    affine := haffine
+    flat := hflat
+    surjective := hsurj
+    weaklyEtale := hweak
+    covering := hcover
+    point_over := pt_proj x
+    point_stage := pt_π x
+    cofinal := fun J _ F _ ↦
+      ⟨(Functor.Initial.isLimitWhiskerEquiv F _).symm (limit.isLimit _)⟩
+    splitting := ?_
+    splitting_point := pt_toObj x
+    splitting_natural := fun b s ↦ toObj_comp x b s
+    monodromy := ?_
+    deck_mul := ?_
+    deck_one := ?_
+    iso := iso
+    first_vertex := ?_
+    vertices := ?_
+    simplicial := ?_
+    quotientProjections := P.projections (cover x) G
+    quotient_limit := P.scheme_limit (cover x) G
+    quotient_base := P.projection_base (cover x) G
+    quotient_labels := P.projection_section (cover x) G
+    components := components
+    component_labels := ?_
+  }⟩
+  · intro Y
+    have h := B.splitting Y
+    rw [Cofan.nonempty_isColimit_iff_isIso_sigmaDesc] at h
+    change IsIso (Sigma.desc (fun s : (FiniteEtale.fiber x).obj Y ↦
+      pullback.lift (f := proj x) (g := Y.obj.hom)
+        (𝟙 (cover x)) (B.sectionMap Y s).left _)) at h
+    simpa only [finiteSplitMap, hs] using h
+  · intro Y s g
+    rw [← hd, ← hs, B.section_deck, hs]
+  · intro g h
+    have h' := congrArg (fun f ↦ f.left) (B.deck_mul g h)
+    change (B.deck g).hom.left ≫ (B.deck h).hom.left = (B.deck (g * h)).hom.left at h'
+    simpa only [hd] using h' 
+  · have h := congrArg (fun f : Aut L.cone.pt ↦ f.hom.left) B.deck_one
+    change (B.deck 1).hom.left = 𝟙 (cover x) at h
+    simpa only [hd] using h
+  · intro q
+    change (a q).hom ≫ (C.iso q).hom ≫ _ = _
+    have hf := C.first_vertex q
+    change (C.iso q).hom ≫ cechVertex x q 0 = _ at hf
+    rw [hf]
+    let N : OpenNormalSubgroup G := ⟨⟨⊤, isOpen_univ⟩, inferInstance⟩
+    rw [← C.quotient_base q N, ← Category.assoc, aq]
+    change (P.projections (cover x) G q).app N ≫
+      Sigma.desc (fun _ : Fin q → G ⧸ N.toSubgroup ↦ 𝟙 (cover x)) = _
+    exact P.projection_base (cover x) G q N
+  · intro q g i
+    change _ ≫ (a q).hom ≫ (C.iso q).hom ≫ _ = _
+    rw [← Category.assoc, ac]
+    have hh := C.vertices q g i
+    change C.constant q g ≫ (C.iso q).hom ≫ cechVertex x q i = _ at hh
+    rw [hh, hd]
+    rfl
+  · intro m n φ g
+    change _ ≫ (a m).hom ≫ (C.iso m).hom ≫ _ =
+      _ ≫ _ ≫ (a n).hom ≫ (C.iso n).hom
+    rw [← Category.assoc, ac]
+    have hh := C.constant_simplicial m n φ g
+    change C.constant m g ≫ (C.iso m).hom ≫ (Arrow.mk (proj x)).cechNerve.map φ.op = _
+      at hh
+    rw [hh]
+    change (B.deck (cumulativeLabel g (φ.toOrderHom 0).val)).hom.left ≫
+      C.constant n (restrictedLabels φ g) ≫ (C.iso n).hom = _
+    rw [hd, ← ac]
+    simp only [Category.assoc]
+  · intro q g z
+    dsimp only [components, Homeomorph.trans_apply]
+    change P.components (cover x) G q (ConnectedComponents.mk
+      ((iso q).inv ((iso q).hom
+        (profiniteProductSection (cover x) (Profinite.of (Fin q → G)) g z)))) = g
+    rw [← Scheme.Hom.comp_apply, Iso.hom_inv_id]
+    change P.components (cover x) G q (ConnectedComponents.mk
+      (profiniteProductSection (cover x) (Profinite.of (Fin q → G)) g z)) = g
+    rw [P.components_mk, P.space_section]
+
+private theorem product_finiteEtale_ext (T : Scheme.{u}) (G : ProfiniteGrp.{u}) (q : ℕ)
+    {X : Scheme.{u}} (Y : X.FiniteEtale)
+    (a b : profiniteProduct T (Profinite.of (Fin q → G)) ⟶ Y.obj.left)
+    (hab : a ≫ Y.obj.hom = b ≫ Y.obj.hom)
+    (h : ∀ g : Fin q → G,
+      profiniteProductSection T (Profinite.of (Fin q → G)) g ≫ a =
+        profiniteProductSection T (Profinite.of (Fin q → G)) g ≫ b) : a = b := by
+  classical
+  have : Etale Y.obj.hom := Y.obj.prop
+  let v := pullback.lift a b hab
+  let δ := pullback.diagonal Y.obj.hom
+  let j := pullback.fst v δ
+  have : IsOpenImmersion j := inferInstance
+  have hj : Surjective j := by
+    obtain ⟨P⟩ := profinite_scheme_product_components.{u}
+    constructor
+    intro z
+    let t := (P.space T G q z).1
+    let g := (P.space T G q z).2
+    have hz' : profiniteProductSection T (Profinite.of (Fin q → G)) g t = z := by
+      apply (P.space T G q).injective
+      rw [P.space_section]
+    let k := profiniteProductSection T (Profinite.of (Fin q → G)) g
+    let l : T ⟶ pullback v δ := pullback.lift k (k ≫ a) (by
+      apply pullback.hom_ext <;> simp [v, δ, k, Category.assoc, h g])
+    refine ⟨l t, ?_⟩
+    change (l ≫ j) t = z
+    rw [show l ≫ j = k from pullback.lift_fst _ _ _]
+    exact hz'
+  have : IsIso j := (isIso_iff_isOpenImmersion_and_surjective j).mpr ⟨inferInstance, hj⟩
+  apply (cancel_epi j).mp
+  have hh := pullback.condition (f := v) (g := δ)
+  have h₁ := congrArg (fun f ↦ f ≫ pullback.fst Y.obj.hom Y.obj.hom) hh
+  have h₂ := congrArg (fun f ↦ f ≫ pullback.snd Y.obj.hom Y.obj.hom) hh
+  simp only [v, δ, Category.assoc, pullback.lift_fst, pullback.lift_snd,
+    pullback.diagonal_fst, pullback.diagonal_snd, Category.comp_id] at h₁ h₂
+  exact h₁.trans h₂.symm
 
 /-- Pointed naturality is compatible with the canonical limit map, and hence acts on
 all consecutive Čech labels by the induced continuous fundamental-group homomorphism.
@@ -295,7 +433,89 @@ theorem pointedLimitCechCoordinates_natural {X X' : Scheme.{u}}
           (FiniteEtale.pullbackFiberIso f x') H G)
           (FiniteEtale.continuous_fundamentalGroupMap
             (FiniteEtale.pullbackFiberIso f x') H G) q) ≫ (C.iso q).hom := by
-  sorry
+  classical
+  let ρ := FiniteEtale.fundamentalGroupMap (FiniteEtale.pullbackFiberIso f x') H G
+  have hd (g : H) : (rightDeck x' H g).hom ≫ map f x' =
+      map f x' ≫ (rightDeck (x' ≫ f) G (ρ g)).hom := by
+    apply UniversalCover.hom_ext (x' ≫ f)
+    intro Y s
+    have hm : pullbackPoint f x' Y (ρ g • s) = g • pullbackPoint f x' Y s := by
+      let τ := FiniteEtale.pullbackFiberIso f x'
+      have h := FiniteEtale.fundamentalGroupMap_smul τ H G g Y (τ.inv.app Y s)
+      have hh := congrArg (fun t ↦ τ.inv.app Y t) h
+      have hi (a : (FiniteEtale.fiber x').obj ((FiniteEtale.pullback f).obj Y)) :
+          τ.inv.app Y (τ.hom.app Y a) = a :=
+        ConcreteCategory.congr_hom (τ.hom_inv_id_app Y) a
+      have hj : τ.hom.app Y (τ.inv.app Y s) = s :=
+        ConcreteCategory.congr_hom (τ.inv_hom_id_app Y) s
+      simpa only [hi, hj, pullbackPoint, ρ, τ] using hh
+    change transportHom (toAut (FiniteEtale.fiber x') H g).symm ≫
+        map f x' ≫ toObj (x' ≫ f) Y s =
+      map f x' ≫ transportHom (toAut (FiniteEtale.fiber (x' ≫ f)) G (ρ g)).symm ≫
+        toObj (x' ≫ f) Y s
+    rw [map_toObj, transportHom_toObj_assoc, transportHom_toObj, map_toObj]
+    simp only [Iso.symm_inv, toAut_hom_app_apply, hm]
+  have hv {Y : Scheme.{u}} [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y]
+      (y : Spec (.of Ω) ⟶ Y) (K : ProfiniteGrp.{u})
+      [∀ Z, MulAction K ((FiniteEtale.fiber y).obj Z)]
+      [IsFundamentalGroup (FiniteEtale.fiber y) K]
+      (D : PointedLimitCechCoordinates y K) (q : ℕ) (i : Fin (q + 1)) :
+      (D.iso q).hom ≫ cechVertex y q i ≫ proj y =
+        profiniteProductBase (cover y) (Profinite.of (Fin q → K)) ≫ proj y := by
+    rw [WidePullback.π_arrow, ← D.first_vertex q]
+    rw [Category.assoc, WidePullback.π_arrow]
+  intro q
+  let b := profiniteProductMap (map f x')
+    (labelMap G H ρ (FiniteEtale.continuous_fundamentalGroupMap
+      (FiniteEtale.pullbackFiberIso f x') H G) q)
+  let a := (Arrow.mapCechNerve (Arrow.homMk
+    (f := Arrow.mk (proj x')) (g := Arrow.mk (proj (x' ≫ f)))
+      (map f x') f (map_proj f x'))).app
+    (op (SimplexCategory.mk q))
+  have he (i : Fin (q + 1)) :
+      ((C'.iso q).hom ≫ a) ≫ cechVertex (x' ≫ f) q i =
+        (b ≫ (C.iso q).hom) ≫ cechVertex (x' ≫ f) q i := by
+    have hai : a ≫ cechVertex (x' ≫ f) q i = cechVertex x' q i ≫ map f x' := by
+      exact WidePullback.lift_π _ _ _ _ i
+    rw [Category.assoc, hai, ← Category.assoc]
+    apply UniversalCover.hom_ext (x' ≫ f)
+    intro Y s
+    apply product_finiteEtale_ext (cover x') H q Y
+    · change ((C'.iso q).hom ≫ cechVertex x' q i ≫ map f x' ≫ toObj _ Y s) ≫ _ =
+        (b ≫ (C.iso q).hom ≫ cechVertex (x' ≫ f) q i ≫ toObj _ Y s) ≫ _
+      simp only [Category.assoc, toObj_hom (x' ≫ f) Y s]
+      rw [map_proj f x']
+      calc
+        _ = (profiniteProductBase (cover x') (Profinite.of (Fin q → H)) ≫
+            proj x') ≫ f := by
+          simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ f) (hv x' H C' q i)
+        _ = _ := by
+          rw [hv (x' ≫ f) G C q i, ← Category.assoc, productMap_base]
+          simp only [Category.assoc, map_proj f x']
+    · intro g
+      change _ ≫ (C'.iso q).hom ≫ cechVertex x' q i ≫ map f x' ≫ toObj _ Y s =
+        (_ ≫ b) ≫ (C.iso q).hom ≫ cechVertex (x' ≫ f) q i ≫ toObj _ Y s
+      rw [show profiniteProductSection (cover x') (Profinite.of (Fin q → H)) g ≫ b =
+        map f x' ≫ profiniteProductSection (cover (x' ≫ f)) (Profinite.of (Fin q → G))
+          (fun i ↦ ρ (g i)) from productMap_section _ _ _]
+      have hρ : cumulativeLabel (fun i ↦ ρ (g i)) i.val =
+          ρ (cumulativeLabel g i.val) := by
+        simp only [cumulativeLabel, map_list_prod, List.map_take, List.map_ofFn,
+          Function.comp_def]
+      have h₁ := C'.vertices q g i
+      have h₂ := C.vertices q (fun i ↦ ρ (g i)) i
+      rw [hρ] at h₂
+      calc
+        _ = ((rightDeck x' H (cumulativeLabel g i.val)).hom ≫ map f x') ≫
+            toObj (x' ≫ f) Y s := by rw [← h₁]; simp only [Category.assoc]
+        _ = (map f x' ≫ (rightDeck (x' ≫ f) G (ρ (cumulativeLabel g i.val))).hom) ≫
+            toObj (x' ≫ f) Y s := by rw [hd]
+        _ = _ := by rw [← h₂]; simp only [Category.assoc]
+  change (C'.iso q).hom ≫ a = b ≫ (C.iso q).hom
+  apply WidePullback.hom_ext (arrows := fun _ : Fin (q + 1) ↦ proj (x' ≫ f))
+  · exact he
+  · have hh := congrArg (fun k ↦ k ≫ proj (x' ≫ f)) (he 0)
+    simpa only [Category.assoc, WidePullback.π_arrow] using hh
 
 /-- The right-torsor cocycle equation, with coefficient sections pulled to the triple
 overlap. Here p₀,p₁ are the two vertices and p₀₁,p₁₂,p₀₂ the three edges.
@@ -325,7 +545,13 @@ theorem right_torsor_cech_cocycle {D : Type u} [Category.{v} D]
     (c : A.obj (op T₂))
     (hc : P.map p₁.op e = act (op T₂) (P.map p₀.op e) c) :
     (A.map p₀₂.op).hom c = (A.map p₀₁.op).hom c * (A.map p₁₂.op).hom c := by
-  sorry
+  have edge (p : T₃ ⟶ T₂) :
+      P.map (p ≫ p₁).op e = act (op T₃)
+        (P.map (p ≫ p₀).op e) ((A.map p.op).hom c) := by
+    simpa only [op_comp, P.map_comp, types_comp_apply, act_natural] using
+      congrArg (P.map p.op) hc
+  apply act_free (op T₃) (P.map (p₀₂ ≫ p₀).op e)
+  rw [← edge p₀₂, ← act_mul, h₀, ← edge p₀₁, h₁, ← edge p₁₂, h₂]
 
 /-- When the transition coefficient depends only on the group label, the shifted
 right-torsor equation specializes to c(gh)=c(g)c(h), with that order of factors.
@@ -340,7 +566,25 @@ theorem label_only_cocycle {Z : Type u} [Nonempty Z] {G : Type v} [Group G]
     (hc : ∀ (z : Z) (g h : G), c z (g * h) = c z g * c (move z g) h)
     (hb : ∀ (z : Z) (g : G), c z g = b g) :
     ∀ g h : G, b (g * h) = b g * b h := by
-  sorry
+  intro g h
+  simpa only [hb] using hc (Classical.arbitrary Z) g h
+
+private theorem pointed_map_unique {X Y : Scheme.{u}}
+    [ConnectedSpace X] [CompactSpace X] [QuasiSeparatedSpace X]
+    [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ X) (y : Spec (.of Ω) ⟶ Y) (f : X ⟶ Y)
+    (h : x ≫ f = y) (F : cover x ⟶ cover y)
+    (hF : F ≫ proj y = proj x ≫ f) (hpt : pt x ≫ F = pt y) :
+    HEq (map f x) F := by
+  subst y
+  apply heq_of_eq
+  apply UniversalCover.hom_ext (x ≫ f)
+  intro P s
+  apply AlgebraicGeometry.Scheme.finiteEtale_point_ext (X := Y) (T := cover x) (pt x) (proj x ≫ f) P
+  · rw [Category.assoc, toObj_hom (x ≫ f) P s, map_proj f x]
+  · rw [Category.assoc, toObj_hom (x ≫ f) P s, hF]
+  · rw [← Category.assoc, pt_map, ← Category.assoc, hpt]
 
 /-- Identity and composition for pointed limit maps. Heterogeneous equality records
 only the reassociation of the base geometric point in their codomains.
@@ -360,6 +604,13 @@ theorem pointedLimitMap_identity_composition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     HEq (map (𝟙 X) x) (𝟙 (cover x)) ∧
       HEq (map (f ≫ g) x) (map f x ≫ map g (x ≫ f)) := by
-  sorry
+  constructor
+  · apply pointed_map_unique x x (𝟙 X) (Category.comp_id x) (𝟙 (cover x))
+    · simp
+    · simp
+  · apply pointed_map_unique x ((x ≫ f) ≫ g) (f ≫ g)
+      (Category.assoc x f g).symm (map f x ≫ map g (x ≫ f))
+    · rw [Category.assoc, map_proj, ← Category.assoc, map_proj, Category.assoc]
+    · rw [← Category.assoc, pt_map, pt_map]
 
 end AlgebraicGeometry.Scheme.UniversalCover

@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-proper-space-curve-qcoh-bound",
+ "kind": "statement",
+ "title": "Quasi-coherent cohomological dimension of algebraic-space curve families",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a proper, flat, finitely presented morphism of algebraic spaces [def-trf-algebraic-space] whose geometric fibres have dimension at most one (the empty fibre is allowed). Flatness and finite presentation are tested on etale scheme charts, and proper means separated, of finite type and universally closed. For any $F\\in\\operatorname{QCoh}(X)$ [def-trf-space-quasi-coherent-module], the higher direct image sheaves $R^qf_*F$, computed on the small etale sites by injective resolutions of module sheaves, vanish for $q>1$. For every affine base change $V=\\operatorname{Spec}A\\to T$ and every quasi-coherent module $G$ on $X_V=X\\times_TV$, including modules not pulled back from $X$, one has\n$$H^q(X_V,G)=0\\quad(q>1).$$\nHere $H^q$ is the right derived functor of sections of module sheaves. The base scheme and the quasi-coherent modules need not be Noetherian or coherent, respectively. No nodal, reduced, connected or Gorenstein hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0E6F (lemma-etale-locally-scheme) reduces families of curves etale locally on the base to proper schemes; limits.tex Tag 0E7D (lemma-higher-direct-images-zero-above-dimension-fibre) gives vanishing for arbitrary quasi-coherent modules over arbitrary scheme bases. Descent of higher direct images uses flat etale base change; this is not an application of spaces-cohomology.tex Tag 0A4T without its locally Noetherian hypothesis."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-global-sections",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale scheme covering $\\{T_i\\to T\\}$ such that $X_i=X\\times_TT_i$ is a scheme, using [lem-sfb-curve-etale-scheme-cover]. By [lem-sfb-space-flat-proper-fp-locality] each $f_i:X_i\\to T_i$ is proper, flat and finitely presented. The base-change invariance in [lem-sfb-proper-flat-space-fibre-dimension], applied also to algebraic closures of residue fields, gives $\\dim (X_i)_t\\leq1$ for every $t\\in T_i$, including empty fibres.",
+   "uses": [
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-proper-flat-space-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6F; spaces-morphisms.tex base-change lemmas and spaces-more-morphisms.tex Tag 0D4N."
+   }
+  },
+  {
+   "text": "Restrict $F$ to $X_i$. It is still quasi-coherent: restrict each local presentation in [def-trf-space-quasi-coherent-module] to the slice etale site, where the same covering and exact presentation apply. By [lem-sfb-scheme-etale-higher-image-comparison] it corresponds to a quasi-coherent Zariski module $F_i$ and $R^qf_{i,\\mathrm{et},*}(F|_{X_i})\\cong(R^qf_{i,\\mathrm{Zar},*}F_i)_{\\mathrm{et}}$. Properness makes $f_i$ quasi-compact and quasi-separated. Apply [lem-sfb-proper-quasicoherent-fibre-dimension-vanishing] with $d=1$: the right side is zero for $q>1$.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-scheme-etale-higher-image-comparison",
+    "lem-sfb-proper-quasicoherent-fibre-dimension-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0E7D; comparison descent.tex Tag 071N."
+   }
+  },
+  {
+   "text": "For $q>1$, [lem-sfb-space-higher-image-etale-restriction] identifies $(R^qf_*F)|_{T_i}$ with the zero sheaf found in step 2. Hence $R^qf_*F=0$: for any etale object $U\\to T$, the base-changed family $\\{U\\times_TT_i\\to U\\}$ covers $U$ by [lem-trf-space-fibre-products-etale-covers]; each restriction of a section is zero, so the sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] makes that section zero. This proves the relative assertion on all of $T$.",
+   "uses": [
+    "lem-sfb-space-higher-image-etale-restriction",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX; sheaf separatedness along a covering."
+   }
+  },
+  {
+   "text": "Now let $V=\\operatorname{Spec}A\\to T$ be arbitrary and $G\\in\\operatorname{QCoh}(X_V)$. By [lem-sfb-space-flat-proper-fp-locality] and [lem-sfb-proper-flat-space-fibre-dimension], $f_V$ satisfies the same family and dimension hypotheses. Repeat steps 1--3 for $f_V$ and $G$ to get $R^qf_{V,*}G=0$ for $q>1$. The affine-base formula [lem-sfb-space-affine-base-higher-image-sections] gives $H^q(X_V,G)\\cong\\Gamma(V,R^qf_{V,*}G)=0$. This repeats the argument for the supplied $G$ and does not require it to descend from $X$.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-proper-flat-space-fibre-dimension",
+    "lem-sfb-space-affine-base-higher-image-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08EX; arbitrary-base preservation of the family hypotheses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-curve-etale-scheme-cover",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-proper-flat-space-fibre-dimension",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-scheme-etale-higher-image-comparison",
+  "lem-sfb-proper-quasicoherent-fibre-dimension-vanishing",
+  "lem-sfb-space-higher-image-etale-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-space-affine-base-higher-image-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0E6F, followed by limits.tex Tag 0E7D, descent.tex Tag 071N, spaces-properties.tex Tag 03LX, and spaces-cohomology.tex Tag 08EX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented family of algebraic spaces with fibres of dimension at most one, quasi coherent higher direct images vanish in degree greater than one over any base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.isZero_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ),\\n  i < n → ∀ [hX : X.IsGE n], CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ belongs to the family $\\\\mathcal{G}_n$ of the T-structure (i.e., is isomorphic to a complex strictly supported in \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext dimension predicates and limit-section lemmas give no higher direct image vanishing for proper algebraic-space curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological dimension one of a proper relative algebraic curve for all quasi coherent sheaves without noetherian hypotheses",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext X Y i)) →\\n    CategoryTheory.HasProjectiveDimensionLT X n\", \"doc\": \"For any natural number n and object X in an abelian category C, if for all i ≥ n and any object Y in C, the Ext group in degree i between X and Y is a subsingleton, then X has projective dimension les\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext X Y i), e = 0) →\\n    CategoryTheory.HasProjectiveDimensionLT X n\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category and $X$ an object in $\\\\mathcal{C}$. If for every integer $i \\\\geq n$ and for every object $Y$ in $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^i(X, Y)$ is tr\"}\n  {\"name\": \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (X : C) (n : ℕ)\\n  [inst_2 : CategoryTheory.HasExt C],\\n  CategoryTheory.HasProjectiveDimensionLT X n ↔\\n    ∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext X Y i), e = 0\", \"doc\": \"An object $X$ in an abelian category $\\\\mathcal{C}$ has projective dimension less than $n$ if and only if for all integers $i \\\\geq n$ and for all objects $Y$ in $\\\\mathcal{C}$, the Ext group $\\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  topologicalKrullDim ↥X ≤ 0 → AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext Y X i)) →\\n    CategoryTheory.HasInjectiveDimensionLT X n\", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, if for all $ i \\\\geq n $ and all objects $ Y $, the Ext group $ \\\\operatorname{Ext}^i(Y, X) $ is trivial (i.e., contains at most one element),\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext Y X i), e = 0) →\\n    CategoryTheory.HasInjectiveDimensionLT X n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, an object $X$ has injective dimension less than $n$ if and only if for every object $Y$ in $\\\\mathcal{C}$ and every integer $i \\\\geq n$, the Ext group $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext dimension predicates and limit-section lemmas give no higher direct image vanishing for proper algebraic-space curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"higherDirectImage\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext dimension predicates and limit-section lemmas give no higher direct image vanishing for proper algebraic-space curves"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|higherDirectImage|higher_direct_image",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext dimension predicates and limit-section lemmas give no higher direct image vanishing for proper algebraic-space curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper flat finitely presented family of algebraic spaces with fibres of dimension at most one, quasi coherent higher direct images vanish in degree greater than one over any base",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent higher direct images of a proper flat finitely presented algebraic space family with fibres of dimension at most one vanish in degrees greater than one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: limits of scheme sections, flat morphisms, abstract projective dimension and definitions of quasi-coherence do not give the asserted relative curve cohomological bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological dimension one for quasi coherent sheaves on proper relative curves over arbitrary affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLE\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"The proposition that object $X$ in abelian category $\\\\mathcal{C}$ has projective dimension strictly less than $n$.\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"The proposition that object X in abelian category C has projective dimension less than n\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext X Y i), e = 0) →\\n    CategoryTheory.HasProjectiveDimensionLT X n\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category and $X$ an object in $\\\\mathcal{C}$. If for every integer $i \\\\geq n$ and for every object $Y$ in $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^i(X, Y)$ is tr\"}\n  {\"name\": \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (X : C) (n : ℕ)\\n  [inst_2 : CategoryTheory.HasExt C],\\n  CategoryTheory.HasProjectiveDimensionLT X n ↔\\n    ∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext X Y i), e = 0\", \"doc\": \"An object $X$ in an abelian category $\\\\mathcal{C}$ has projective dimension less than $n$ if and only if for all integers $i \\\\geq n$ and for all objects $Y$ in $\\\\mathcal{C}$, the Ext group $\\\\operatorn\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext X Y i)) →\\n    CategoryTheory.HasProjectiveDimensionLT X n\", \"doc\": \"For any natural number n and object X in an abelian category C, if for all i ≥ n and any object Y in C, the Ext group in degree i between X and Y is a subsingleton, then X has projective dimension les\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: limits of scheme sections, flat morphisms, abstract projective dimension and definitions of quasi-coherence do not give the asserted relative curve cohomological bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"higherDirectImage\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: limits of scheme sections, flat morphisms, abstract projective dimension and definitions of quasi-coherence do not give the asserted relative curve cohomological bound"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|higherDirectImage|higher_direct_image",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: limits of scheme sections, flat morphisms, abstract projective dimension and definitions of quasi-coherence do not give the asserted relative curve cohomological bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent higher direct images of a proper flat finitely presented algebraic space family with fibres of dimension at most one vanish in degrees greater than one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.QuasicoherentData\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a family of types indexed by the finite presentation condition of a quasicoherent sheaf, and a function that constructs an element of this family when all indexed presentations are finite, this \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a family of types indexed by the finite presentation condition of a quasicoherent sheaf, and a function that constructs an element of this family when all indexed presentations are finite, this \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: limits of scheme sections, flat morphisms, abstract projective dimension and definitions of quasi-coherence do not give the asserted relative curve cohomological bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-relative-dualizing-line",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families.",
+   "via": [
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-space-curve-qcoh-bound",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary-base, arbitrary-quasi-coherent statement. Reduced by the etale scheme-cover lemma, reused the existing scheme fibre-dimension vanishing node, compared etale and Zariski higher images, descended zero sheaves, and repeated the argument for arbitrary affine-base-changed modules before taking higher-image sections. Four new statement-only geometric/comparison tools, no Mathlib matches.",
+  "blueprint": "Supporting quasi-coherent cohomology input to the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/relative-curve route recorded in blueprint.from.place. Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) is the direct-image/compactification paragraph; it contains no separate quasi-coherent curve-bound statement. Steps 1--3 establish the relative cohomology bound used by the nodal dualizing-line prerequisite, and step 4 is its arbitrary affine-base form.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product/covering stability tool for the sheaf-separatedness argument on every etale test object U; this unit has no statement supplying it, and no alteration or direct-image route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-c2d54a3e9",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-c2d54a3e9 (reviewer sub-agent of L); spot-checked: Ordinary one-level split, read in full. The item statement is byte-identical to the live node, which is still unsplit; there is no repair note and no parallel supersession in live or side-live. I checked each new node against its source. lem-sfb-curve-etale-scheme-cover matches the first assertion of 0E6F (moduli-curves.tex:254); a family of curves is defined at lines 52-54 as flat, proper, finitely presented, relative dimension at most 1. lem-sfb-space-higher-image-etale-restriction matches the higher-image clause of 03LX (spaces-properties.tex:4422); the existing trf node covers degree 0 only. lem-sfb-scheme-etale-higher-image-comparison matches 071N (descent.tex:2948), stated through the existing 03DX equivalence. lem-sfb-space-affine-base-higher-image-sections matches 08EX (spaces-cohomology.tex:238) with V=Y=Spec A. All four are true, statement-only, carry their citations in stmt_deps, record five searches each and are not duplicates. I compared them with the trf degree-0 restriction node, lem-trf-space-qc-separated-quasi-coherent-pushforward, lem-pc-cohomology-sections-affine-base, lem-sfb-space-affine-cohomology, lem-sfb-space-affine-higher-direct-image-vanishing, lem-sfb-separated-space-dimension-one-scheme, lem-sfb-noetherian-space-finite-scheme-cover and det-cd-etale-comparison. Step 1: the cover, plus base change of flat, proper and finitely presented, plus the n_{f'}=n_f∘|h| clause give fibres of dimension at most 1 on each X_i, empty fibres included. Step 2: restrict F to X_i, compare by 071N (f_i proper, so qcqs), then apply 0E7D with d=1 (no Noetherian hypothesis). Step 3: 03LX restriction, base-changed coverings and the sheaf equalizer; this is genuinely elementary. Step 4: f_V meets the same hypotheses, the already proved relative statement is applied to arbitrary G (not circular), and 08EX with f_V qcqs finishes. I tested empty X, q=0, positive-genus curves (which show the bound must stay q>1), non-Noetherian A and non-surjective etale maps. Batch-5 flags: def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors, lem-trf-space-fibre-products-etale-covers, lem-trf-scheme-zariski-etale-quasi-coherent-equivalence and lem-trf-space-etale-module-pushforward-restriction are general algebraic-space foundations, not statements or proof steps of the trace formula or Poincare duality. The fp-locality closure reaches the trace-formula chapter only through def-trf-algebraic-space, so the flags are generic. I accept the tool_use of lem-trf-space-fibre-products-etale-covers for covering base change in step 3. There is no SGA citation. Minor, not repaired: proper/flat/finite presentation are defined inline in the base item's own wording rather than cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSpaceCurveQcohBound",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_space_curve_qcoh_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSpaceCurveQcohBound.lean",
+  "statement": "theorem proper_space_curve_qcoh_bound {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X ⟶ schemeSpace T) (hf : IsProperCurveFamily X T f.hom.hom) : (∀ (F : X.QCoh) (q : ℕ), 1 < q → IsZero (((smallModuleDirectImage f).rightDerived q).obj (X.smallModuleRestriction.obj F.obj))) ∧ (∀ (A : Type u) [CommRing A] (V : Over S) (a : V.left ≅ Spec (.of A)) (g : V ⟶ T) (G : (enlargedFibreProduct (ObjectProperty.homMk ⟨yoneda.map g⟩ : schemeSpace V ⟶ schemeSpace T) f).QCoh) (q : ℕ), 1 < q → IsZero (((affineScalarSections A V a (enlargedFibreProduct (ObjectProperty.homMk ⟨yoneda.map g⟩ : schemeSpace V ⟶ schemeSpace T) f) (enlargedFibreProductFst (ObjectProperty.homMk ⟨yoneda.map g⟩ : schemeSpace V ⟶ schemeSpace T) f)).rightDerived q).obj ((smallModuleRestriction (enlargedFibreProduct (ObjectProperty.homMk ⟨yoneda.map g⟩ : schemeSpace V ⟶ schemeSpace T) f)).obj G.obj)))",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0f6ef4ab",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 4c77b760eda7 (RETURN H2). F1 fixed: theorem stmt_dep lem-sfb-space-affine-base-higher-image-sections replaced by def-sfb-space-affine-global-sections; the affineBaseModuleCohomology abbrev is written out as ((affineScalarSections A V a Z p).rightDerived q).obj ((smallModuleRestriction Z).obj G.obj), definitionally identical; the 08EX module is now a plain proof import. F2 fixed: def-trf-scheme-algebraic-space (schemeSpace) and def-sfb-space-sheaf-fibre-product (enlargedFibreProduct/Fst) added to stmt_deps, with EnlargedEtaleRingedSite publicly imported. Node differs from side-live only in stmt_deps and lean; lean.statement verbatim; body is a single sorry; all imports exist; report sections present. All signature declarations are owned by stmt_dep def nodes or Mathlib. Mathematics re-read: IsProperCurveFamily = flat/separated/qc/lft/universally closed/qc diagonal/lfp/geometric fibre dim ≤ 1 (empty allowed); both vanishing clauses for q>1 over arbitrary QCoh F and arbitrary G on the genuine sheaf pullback over any affine V→T; single universe u; edge cases covered. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-generic-extension-ind-etale-limits",
+ "kind": "statement",
+ "title": "Generic extension property under affine ind-étale limits",
+ "statement": "Let $A$ be a commutative ring, let $t\\in A$, and let $N\\to\\operatorname{Spec}A$ be a smooth separated scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-affine-spectrum], with no quasi-compactness assumption. Separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Write $N[1/t]=N\\times_A\\operatorname{Spec}A[1/t]$ [def-pc-base-change]. Suppose restriction is bijective $\\operatorname{Hom}_A(X,N)\\to\\operatorname{Hom}_{A[1/t]}(X[1/t],N[1/t])$ for every smooth $A$-scheme $X$. Let $A\\to B$ be ind-étale, meaning a small filtered colimit of finitely presented étale $A$-algebras [def-weil-pbc-ind-etale-algebra]. Then restriction is bijective $\\operatorname{Hom}_B(Y,N_B)\\to\\operatorname{Hom}_{B[1/t]}(Y[1/t],N_B[1/t])$ for every smooth $B$-scheme $Y$. Here $N_B=N\\times_A\\operatorname{Spec}B$ and $Y[1/t]=Y\\times_B\\operatorname{Spec}B[1/t]$. Localizing at $t$ means inverting its nonnegative powers; finite presentation means finitely many algebra generators and relations on affine charts. The same assertion holds for the two maps $D\\to D\\otimes_R D$ and for all maps inserting one factor into $D^{\\otimes_R n}$, when $R$ is a local commutative ring and $D$ is a strict henselization of $R$ [def-sc-ring-strict-henselization], with $A$ replaced by $D$, $t$ by any element of $D$, and $B$ by the target ring; these are ind-étale maps by base change and composition.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 paragraph following Definition 1, printed p.290 (PDF p.296), and 6.5 Corollary 3 proof, printed p.159 (PDF p.165), expanded to affine ind-étale limits by finite-presentation descent; Stacks limits.tex Tag 01ZC, proposition-characterize-locally-finite-presentation; algebra.tex Tag 0CAQ, lemma-smooth-descends-through-colimit. Agent generalization to a principal open and arbitrary smooth test schemes. Local PDF WANTED; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf. Agent formulation where explicitly indicated."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Choose a small filtered presentation $B=\\operatorname{colim}_i B_i$ by finitely presented etale $A$-algebras. Reindex it by a nonempty directed set using [lem-weil-pbc-filtered-category-directed-cofinal]; this preserves the colimit and all its structural maps. For every $B$-scheme $T$, the fibre-product universal property identifies $\\operatorname{Hom}_B(T,N_B)$ with $\\operatorname{Hom}_A(T,N)$, and identifies their restrictions after inverting $t$. We will use these identifications throughout. Since $N/A$ is smooth, it is locally of finite presentation by [def-sbc-smooth-morphisms]; therefore [lem-sfb-scheme-affine-limit-lfp-criterion] applies to maps into $N$ from inverse systems of affine $A$-schemes, without any quasi-compactness hypothesis on $N$.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-scheme-affine-limit-lfp-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, proposition-characterize-locally-finite-presentation, (1) implies (2); categories.tex Tag 0032, lemma-directed-category-system"
+   }
+  },
+  {
+   "text": "First let $Y=\\operatorname{Spec}C$ be smooth over $B$. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $B\\to C$ is a smooth ring map. Apply [lem-weil-pbc-smooth-algebra-filtered-colimit-descent] to get $i$ and a smooth $B_i$-algebra $C_i$ with $C\\simeq C_i\\otimes_{B_i}B$. For $j\\geq i$ set $C_j=C_i\\otimes_{B_i}B_j$ and $Y_j=\\operatorname{Spec}C_j$. The maps $B_j\\to C_j$ are smooth by [lem-weil-pbc-smooth-ring-map-base-change-composition]. Each $\\operatorname{Spec}B_j\\to\\operatorname{Spec}A$ is etale in the sense of [def-weil-etale-morphism] (the notion used by [def-weil-pbc-ind-etale-algebra]), hence smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]; the affine comparison makes $A\\to B_j$ smooth. Composition of smooth ring maps and the affine comparison now make every $Y_j$ smooth over $A$. This remains true after any later increase of $j$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CAQ, lemma-smooth-descends-through-colimit; Tags 00T4 and 00TD; morphisms.tex Tag 01V6, lemma-smooth-characterize"
+   }
+  },
+  {
+   "text": "The universal properties give $C=\\operatorname{colim}_{j\\geq i} C_j$: a compatible family of $B_i$-algebra maps from $C_j=C_i\\otimes_{B_i}B_j$ into a ring $E$ is exactly a map $C_i\\to E$ and a compatible family $B_j\\to E$ agreeing on $B_i$, hence exactly a map $C_i\\otimes_{B_i}B\\to E$. Similarly $C[1/t]=\\operatorname{colim}_{j\\geq i}C_j[1/t]$: maps out of each localization are maps out of $C_j$ making the image of $t$ a unit; compatibility and this one unit condition identify the compatible families with maps out of $C[1/t]$. Thus [lem-weil-pbc-spec-colimit-limit] gives both $Y=\\lim_jY_j$ and $Y[1/t]=\\lim_jY_j[1/t]$, with affine stages and transitions. These arguments also apply to any tail of this directed system.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; tensor-product and localization universal properties"
+   }
+  },
+  {
+   "text": "Given a map $h:Y[1/t]\\to N$ over $A$, the surjective part of [lem-sfb-scheme-affine-limit-lfp-criterion], applied to the localized affine system of Step 3, gives $j\\geq i$ and $h_j:Y_j[1/t]\\to N$ whose pullback is $h$. By the fibre-product universal property, $h_j$ is equally an $A[1/t]$-map to $N[1/t]$. Since $Y_j/A$ is smooth by Step 2, the hypothesis of the item extends $h_j$ uniquely to an $A$-map $g_j:Y_j\\to N$. Pull back $g_j$ to $Y$ and use Step 1 to obtain a $B$-map $Y\\to N_B$. Its restriction is $h$ under the same identifications. This proves surjectivity for every affine smooth $Y/B$.",
+   "uses": [
+    "lem-sfb-scheme-affine-limit-lfp-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, proposition-characterize-locally-finite-presentation, surjectivity of (2); agent application to the extension hypothesis"
+   }
+  },
+  {
+   "text": "For injectivity on this affine $Y$, let $f,g:Y\\to N$ have equal restrictions on $Y[1/t]$. Apply the surjective part of [lem-sfb-scheme-affine-limit-lfp-criterion] twice to the unlocalized system and pass to a common stage $j$ to represent them by $f_j,g_j:Y_j\\to N$. Their localized restrictions become equal at the limit. The injective part of that same criterion for the localized tail implies equality of their representatives in the filtered colimit of sets, so $f_k|_{Y_k[1/t]}=g_k|_{Y_k[1/t]}$ at some $k\\geq j$. Here equality in a directed colimit of sets means eventual equality of two representatives. By Step 2, $Y_k/A$ is smooth. Injectivity in the assumed restriction bijection over $A$ gives $f_k=g_k$. Pullback gives $f=g$ on $Y$. No schematic density of $Y[1/t]$ is asserted or used.",
+   "uses": [
+    "lem-sfb-scheme-affine-limit-lfp-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, proposition-characterize-locally-finite-presentation, injectivity and surjectivity of (2); agent application to uniqueness"
+   }
+  },
+  {
+   "text": "For an arbitrary smooth $B$-scheme $Y$ choose an affine open cover $(U_a)$. Every $U_a/B$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. Given a map on $Y[1/t]$, Step 4 extends it on each $U_a$ to $f_a:U_a\\to N_B$. Cover each open overlap $U_a\\cap U_b$ by affine opens $W$; each $W/B$ is smooth by the same restriction lemma. Step 5 shows $f_a|_W=f_b|_W$ since their localized restrictions are the given map. The equality clause of [lem-weil-pbc-scheme-morphism-gluing] gives equality on the overlap, and its existence clause glues the $f_a$ to $f:Y\\to N_B$. Its composite to $\\operatorname{Spec}B$ is the structure map since the two agree on every $U_a$; its localized restriction is the original map for the same reason. If two extensions existed, Step 5 would identify them on every $U_a$ and the equality clause would identify them on $Y$. This proves the asserted bijection with no quasi-compactness or separation hypothesis on $Y$.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6, lemma-smooth-characterize, final assertion; schemes.tex Tag 01JA and sheaves.tex Tag 00AN, gluing morphisms"
+   }
+  },
+  {
+   "text": "For the final assertion, [def-sc-ring-strict-henselization] presents $D$ as the colimit of pointed etale $R$-algebras. This category is filtered and essentially small by [lem-sc-pointed-etale-small-filtered], so taking a small skeleton makes $R\\to D$ ind-etale in the sense of [def-weil-pbc-ind-etale-algebra]. For either structural map $D\\to D\\otimes_R D$, the map is the base change of $R\\to D$ along the other copy of $R\\to D$. More generally, put $T_m=D^{\\otimes_R m}$: every map $T_m\\to T_{m+1}$ inserting a unit in a specified factor is, after the canonical permutation and associativity identifications, $T_m\\to T_m\\otimes_R D$, a base change of $R\\to D$. Consequently [lem-weil-pbc-ind-etale-stability] makes all these maps ind-etale, as well as their composites from a specified $D$-factor to $T_n$. Apply the already proved assertion to each such map, with its source as base ring and any supplied element $t$ of that source. In particular, with source $D$, this gives precisely both maps to $D\\otimes_R D$ and every specified factor map to $D^{\\otimes_R n}$, for any $t\\in D$, conditional on the same extension hypothesis for $N/D$.",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "lem-sc-pointed-etale-small-filtered",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW, lemma-strict-henselization-different; proetale.tex Tags 097J and 097K, lemma-base-change-ind-etale and lemma-composition-ind-etale"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-scheme-affine-limit-lfp-criterion",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-sc-ring-strict-henselization",
+  "lem-sc-pointed-etale-small-filtered",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Agent assembly of Tags 01ZC, 01YW and Algebra 0CAQ; principal-open generalization of the BLR ind-etale argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Neron|neron|indEtale|ind_etale",
+   "results": "{\"t\": \"2026-10-24T07:57:18Z\", \"tool\": \"grep\", \"query\": \"Neron|neron|indEtale|ind_etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neron mapping property under filtered inverse limits of etale affine base schemes",
+   "results": "{\"t\": \"2026-10-24T07:57:18Z\", \"tool\": \"leansearch\", \"query\": \"Neron mapping property under filtered inverse limits of etale affine base schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.sourceAffineLocally\", \"AlgebraicGeometry.AffineScheme.Γ_preservesLimits\", \"AdicCompletion.eval_lift_apply\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"9b6d137779fdedd9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-24T07:57:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated scheme with extension of all generic fibre maps retains this extension property after an ind etale base change",
+   "results": "{\"t\": \"2026-10-24T07:57:19Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth separated scheme with extension of all generic fibre maps retains this extension property after an ind etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"5ec7271a7558cb75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique extension of morphisms from smooth schemes from an open generic fibre commutes with affine etale limits",
+   "results": "{\"t\": \"2026-10-24T07:57:21Z\", \"tool\": \"leanfinder\", \"query\": \"Unique extension of morphisms from smooth schemes from an open generic fibre commutes with affine etale limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\"], \"digest\": \"22e35c051a8b2dec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|neron|genericExtension|generic_extension",
+   "results": "{\"t\": \"2026-10-24T09:06:43Z\", \"tool\": \"grep\", \"query\": \"Neron|neron|genericExtension|generic_extension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neron mapping property preserved by filtered colimits of etale base rings",
+   "results": "{\"t\": \"2026-10-24T09:06:43Z\", \"tool\": \"leansearch\", \"query\": \"Neron mapping property preserved by filtered colimits of etale base rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.localization_base\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits\", \"CategoryTheory.MorphismProperty.ind\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.isStableUnderBaseChange\"], \"digest\": \"cd79c982cbd8ef08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness stability, formal unramifiedness, and general filtered-colimit declarations do not assert the extension property"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsEtale",
+   "results": "{\"t\": \"2026-10-24T09:06:43Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "query diagnostic: loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'; no match established by this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated scheme with unique extension of morphisms from smooth schemes over a principal open retains this property after ind etale base change",
+   "results": "{\"t\": \"2026-10-24T09:06:44Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth separated scheme with unique extension of morphisms from smooth schemes over a principal open retains this property after ind etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"6b3f16b188331efa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness stability, formal unramifiedness, and general filtered-colimit declarations do not assert the extension property"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-24T09:08:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique extension of maps from an open subscheme for all smooth test schemes is preserved under affine limits of etale base changes",
+   "results": "{\"t\": \"2026-10-24T09:08:37Z\", \"tool\": \"leanfinder\", \"query\": \"Unique extension of maps from an open subscheme for all smooth test schemes is preserved under affine limits of etale base changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"6ce15c6f4da08b24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness stability, formal unramifiedness, and general filtered-colimit declarations do not assert the extension property"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-strict-local-descent-base-change",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited alteration/trait-extension prerequisite; BLR 10.1 paragraph following Definition 1, printed p.290 (PDF p.296), and 6.5 Corollary 3 proof, printed p.159 (PDF p.165), expanded to affine ind-étale limits by finite-presentation descent; Stacks limits.tex Tag 01ZC, proposition-characterize-locally-finite-presentation; algebra.tex Tag 0CAQ, lemma-smooth-descends-through-colimit. Agent generalization to a principal open and arbitrary smooth test schemes.",
+   "via": [
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generic-extension-ind-etale-limits",
+  "worker": "stage1",
+  "summary": "Proved affine surjectivity and injectivity by smooth-algebra descent and affine Hom continuity, then glued on arbitrary affine covers. Reused all needed DAG results; no new nodes, statement changes, Lean, or compilation. Explicitly checked non-quasi-compact targets and nonregular t.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/trait-extension prerequisite, specifically its descendant strict-local Neron descent argument. The inherited blueprint.from.node is null because the recorded created.item chain has no recognized blueprint ancestor; it is left unchanged. Latest blueprint direct-images proof (3) and unit read; no change to unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Reindexes the small filtered ind-etale presentation so the directed affine-limit criterion applies. Generic scheme/algebra tool; the six-functor unit supplies no version of this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Converts the affine test scheme and its descended smooth algebra between the ring and scheme notions. Generic scheme/algebra tool; the six-functor unit supplies no version of this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+    "why": "Descends the affine smooth test algebra to one finite etale stage without Noetherian assumptions. Generic scheme/algebra tool; the six-functor unit supplies no version of this auxiliary fact."
+   },
+   {
+    "node": "lem-sc-pointed-etale-small-filtered",
+    "why": "Supplies smallness and filteredness of the pointed-etale presentation defining the ring strict henselization. Generic scheme/algebra tool; the six-functor unit supplies no version of this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Supplies base-change and composition stability for the tensor-factor maps. Generic scheme/algebra tool; the six-functor unit supplies no version of this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Converts each finitely presented etale stage B_j (etale = lfp+flat+unramified, def-weil-etale-morphism) into a smooth morphism of def-sbc-smooth-morphisms. Generic scheme tool; the six-functor unit supplies no version of this comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+  "lem-sc-pointed-etale-small-filtered",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-245784168",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-245784168 (reviewer sub-agent of L); spot-checked: One citation repaired in Step 2; the rest of the split is correct. No new nodes, statement unchanged and not weakened. Source checks: Stacks 01ZC (limits.tex l.1285) is the existing in-unit node lem-sfb-scheme-affine-limit-lfp-criterion, with no qc hypothesis on the target. 0CAQ (algebra.tex l.38230) is lem-weil-pbc-smooth-algebra-filtered-colimit-descent, with no Noetherian hypothesis. BLR is not local, so the proof is correctly marked agent-written. Fault (C4): Step 2 got 'etale hence smooth' from the last sentence of def-sbc-smooth-morphisms, but that sentence defines etale as smooth of relative dimension 0. The ind-etale stages are etale in the sense of def-weil-etale-morphism (lfp+flat+unramified), and the two notions agree only by the theorem lem-weil-pbc-etale-smooth-zero-dimensional-fibres (reviewed, via 04FF). Fix: Step 2 now cites that node and def-weil-etale-morphism; proof_deps updated; tool_use declared; no cycle (the cited node's 112-node closure contains neither the item nor its parent). Steps 1-7 checked: Hom identifications through the N_B and N[1/t] fibre products; localized and unlocalized colimits C[1/t]=colim C_j[1/t] (elementary); surjectivity and injectivity from both parts of 01ZC plus the hypothesis at the smooth stage Y_k; gluing over affine covers of overlaps for non-qs Y; R^sh ind-etale via the pointed-etale small filtered node; tensor-factor maps are base changes, closed under composition. The parent uses the clause consistently on T_2 and T_3. Edge cases checked: t a unit, t nilpotent, B=0, empty Y, N=Spec A, non-qc N. Existing tool_uses accepted as generic black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericExtensionIndEtaleLimits",
+  "declaration": "AlgebraicGeometry.genericExtension_bijective_of_indEtale",
+  "declarations": [
+   "AlgebraicGeometry.genericExtension_bijective_of_indEtale",
+   "AlgebraicGeometry.genericExtension_strictHenselization_tensorSquare",
+   "AlgebraicGeometry.genericExtension_strictHenselization_tensorFactor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericExtensionIndEtaleLimits.lean",
+  "statement": "theorem genericExtension_bijective_of_indEtale (A B : Type u) [CommRing A] [CommRing B] (f : A →+* B) (hf : f.IndEtaleAcrossUniverses) (t : A) (N : Over (Spec (CommRingCat.of A))) [Smooth N.hom] [IsClosedImmersion (pullback.diagonal N.hom)] (hN : ∀ X : Over (Spec (CommRingCat.of A)), Smooth X.hom → Function.Bijective (fun h : X ⟶ N ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away t))))).map h)) : ∀ Y : Over (Spec (CommRingCat.of B)), Smooth Y.hom → Function.Bijective (fun h : Y ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom f))).obj N ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap B (Localization.Away (f t)))))).map h)",
+  "branch": "sheaf-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad44343a7",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Read item node, all 7 stmt_dep records/declarations (Smooth, Spec, IsClosedImmersion, Over.pullback base change, RingHom.IndEtaleAcrossUniverses = IndEtale∘ulift with upstream small filtered presentation by Algebra.Etale, StrictHenselizationPresentationIn.{u,v}), module, report (Worker report + Second reading by Q129 present) and parent neron-strict-local-descent usage. General theorem: A,t, smooth N with closed diagonal, no qc, canonical Over.pullback restriction bijection for all smooth X/A, ind-etale f, conclusion for all smooth Y/B with N_B and localization at f t — matches. Tensor clauses: includeLeft∨includeRight and singleAlgHom k for all n,k with ind-etaleness and bijection over the tensor ring, localized at image of t; covers parent's T_2/T_3 use. Edge cases n=0,1, t unit/nilpotent, B=0, non-qc covered; universes R:u, K,D:max u v bound. Only sorry proofs, no definitions, docstrings with source and blueprint and steps, statement verbatim, imports exist, only lean field changed, no duplicates found. Not recompiled (no change)."
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-ringed-forget-associator-model-square",
+ "kind": "lemma",
+ "title": "Associativity square for ringed tensor chain associator models",
+ "statement": "Let J,R and J',R' be independently sized ringed sites, U an additive functor, and u its coherent underived tensor comparison. Let chain be a natural total-tensor comparison specified by u on every coproduct summand. For source complexes P,Q,N, let aB and aA be isomorphisms between the two iterated coefficient total tensors of P,Q,N and of their termwise U-images. Suppose each model associator takes the nested local pure-triple tensor generator to the oppositely nested generator, with all degrees and Koszul total-tensor inclusions as in the canonical formula. Then V(aB) ; chain(P,T_B(Q,N)) ; T_A(1,chain(Q,N)) = chain(T_B(P,Q),N) ; T_A(chain(P,Q),1) ; aA, where V is termwise U and T_B,T_A are the actual coefficient total tensor bifunctors. This statement concerns chain complexes only and has no derived tensor presentation, flatness, or representative normalization square.",
+ "stmt_deps": [
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPT and 06YU; the chain associativity calculation in the representative associator verification."
+ },
+ "proof": [
+  {
+   "text": "Apply coefficientAssociator_eq_native to both supplied generator formulas. The local sheafification detection criterion identifies the two model associator homs with the corresponding native complex associators.",
+   "uses": [
+    "lem-sf-ringed-tensor-associator-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPT and 06YU; the chain associativity calculation in the representative associator verification."
+   }
+  },
+  {
+   "text": "Install the canonical monoidal structures on both module-sheaf categories. Expand the total-tensor and summand aliases in the comparison, both model isomorphisms, and their native identifications. Cancel the underived comparison isomorphisms in its associativity equation to get the inverse equation. Apply the abstract model-chain associativity theorem. Its conclusion is exactly the asserted chain square.",
+   "uses": [
+    "lem-sf-ringed-forget-model-chain-associativity",
+    "def-sf-ringed-forget-tensor-transposition-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPT and 06YU; the chain associativity calculation in the representative associator verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-tensor-associator-detection",
+  "lem-sf-ringed-forget-model-chain-associativity",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPT and 06YU; the chain associativity calculation in the representative associator verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor tensor comparison specified on total-complex summands respects chain model associators identified with native associators",
+   "results": "8 hits, including HomologicalComplex.associator and HomologicalComplex.ι_mapBifunctorAssociatorX_hom; these provide the native construction, not the supplied-comparison model equation. The proved generic chain comparison theorem is used instead.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ι₁₂_associator_hom\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor comparison associativity for normalized cochain tensor associator models",
+   "results": "8 hits about tensor products of modules and coalgebras, including TensorProduct.assoc_tensor; none gives the ringed cochain comparison equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexμIso_associativity|tensorComparison_chain_associativity",
+   "results": "0 indexed hits. Local source search found the adopted functor theorem, and the preceding proved helper implements its summand calculation without coproduct preservation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTensorAssociatorRepresentatives",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "A strict part of the representative associator proof.",
+   "via": [
+    "lem-sf-ringed-forget-tensor-associator-representatives",
+    "lem-sf-ringed-forget-tensor-coherence",
+    "lem-sf-ringed-forget-tensor-descent",
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedForgetTensorAssociatorModelSquare",
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetTensorAssociatorModelSquare.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.ringed_associator_model_square",
+  "statement": "theorem ringed_associator_model_square\n    (u : Underived.{c, v, r, d, vd, s} J R J' R' U)\n    (chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅\n      ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{s, d, vd} J' R')\n    (summand : ∀ (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n      (p q n : ℤ) (hpq : p + q = n),\n      U.map (tensorSummand.{c, v, r} J R P Q p q n hpq) ≫ (chain.hom.app (P, Q)).f n =\n        u.tensor.hom.app (P.X p, Q.X q) ≫\n          tensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)\n            ((U.mapHomologicalComplex (.up ℤ)).obj Q) p q n hpq)\n    (P Q N : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n    (aB : (coefficientTotalTensor.{r, c, v} J R).obj\n        ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q), N) ≅\n      (coefficientTotalTensor.{r, c, v} J R).obj\n        (P, (coefficientTotalTensor.{r, c, v} J R).obj (Q, N)))\n    (aA : (coefficientTotalTensor.{s, d, vd} J' R').obj\n        ((coefficientTotalTensor.{s, d, vd} J' R').obj\n          ((U.mapHomologicalComplex (.up ℤ)).obj P, (U.mapHomologicalComplex (.up ℤ)).obj Q),\n          (U.mapHomologicalComplex (.up ℤ)).obj N) ≅\n      (coefficientTotalTensor.{s, d, vd} J' R').obj\n        ((U.mapHomologicalComplex (.up ℤ)).obj P,\n          (coefficientTotalTensor.{s, d, vd} J' R').obj\n            ((U.mapHomologicalComplex (.up ℤ)).obj Q, (U.mapHomologicalComplex (.up ℤ)).obj N)))\n    (haB : ∀ (p q t pq qt n : ℤ) (hpq : p + q = pq) (hqt : q + t = qt)\n      (hn : pq + t = n) (hn' : p + qt = n) (V : Cᵒᵖ)\n      (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) (z : (N.X t).val.obj V),\n      (aB.hom.f n).val.app V\n        (coefficientTensorGenerator.{r, c, v} J R\n          ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) N pq t n hn V\n          (coefficientTensorGenerator.{r, c, v} J R P Q p q pq hpq V x y) z) =\n      coefficientTensorGenerator.{r, c, v} J R P\n        ((coefficientTotalTensor.{r, c, v} J R).obj (Q, N)) p qt n hn' V x\n        (coefficientTensorGenerator.{r, c, v} J R Q N q t qt hqt V y z))\n    (haA : ∀ (p q t pq qt n : ℤ) (hpq : p + q = pq) (hqt : q + t = qt)\n      (hn : pq + t = n) (hn' : p + qt = n) (V : Dᵒᵖ)\n      (x : (((U.mapHomologicalComplex (.up ℤ)).obj P).X p).val.obj V)\n      (y : (((U.mapHomologicalComplex (.up ℤ)).obj Q).X q).val.obj V)\n      (z : (((U.mapHomologicalComplex (.up ℤ)).obj N).X t).val.obj V),\n      (aA.hom.f n).val.app V\n        (coefficientTensorGenerator.{s, d, vd} J' R'\n          ((coefficientTotalTensor.{s, d, vd} J' R').obj\n            (((U.mapHomologicalComplex (.up ℤ)).obj P), ((U.mapHomologicalComplex (.up ℤ)).obj Q)))\n          ((U.mapHomologicalComplex (.up ℤ)).obj N) pq t n hn V\n          (coefficientTensorGenerator.{s, d, vd} J' R'\n            ((U.mapHomologicalComplex (.up ℤ)).obj P) ((U.mapHomologicalComplex (.up ℤ)).obj Q)\n            p q pq hpq V x y) z) =\n      coefficientTensorGenerator.{s, d, vd} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)\n        ((coefficientTotalTensor.{s, d, vd} J' R').obj\n          (((U.mapHomologicalComplex (.up ℤ)).obj Q), ((U.mapHomologicalComplex (.up ℤ)).obj N)))\n        p qt n hn' V x\n        (coefficientTensorGenerator.{s, d, vd} J' R'\n          ((U.mapHomologicalComplex (.up ℤ)).obj Q) ((U.mapHomologicalComplex (.up ℤ)).obj N)\n          q t qt hqt V y z)) :\n    let V := U.mapHomologicalComplex (.up ℤ)\n    let B := coefficientTotalTensor.{r, c, v} J R\n    let A := coefficientTotalTensor.{s, d, vd} J' R'\n    V.map aB.hom ≫ chain.hom.app (P, B.obj (Q, N)) ≫\n        A.map (X := (V.obj P, V.obj (B.obj (Q, N))))\n          (Y := (V.obj P, A.obj (V.obj Q, V.obj N)))\n          (𝟙 (V.obj P), chain.hom.app (Q, N)) =\n      chain.hom.app (B.obj (P, Q), N) ≫\n        A.map (X := (V.obj (B.obj (P, Q)), V.obj N))\n          (Y := (A.obj (V.obj P, V.obj Q), V.obj N))\n          (chain.hom.app (P, Q), 𝟙 (V.obj N)) ≫ aA.hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27",
+  "note": "The section parameters are the independently sized ringed sites and the additive functor U. There are no derived-category or K-flatness parameters."
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T131452-L-2939889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T131452-L-2939889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

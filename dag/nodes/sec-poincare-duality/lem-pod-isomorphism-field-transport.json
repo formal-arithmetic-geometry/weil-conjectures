@@ -1,0 +1,290 @@
+{
+ "id": "lem-pod-isomorphism-field-transport",
+ "kind": "statement",
+ "title": "Exact isomorphism transport through integral and field coefficient stages",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. Let $X,Y$ be finite-type $k$-schemes, not assumed separated, and let $g:X\\xrightarrow{\\sim}Y$ be a scheme isomorphism, not necessarily over $k$, with inverse $\\bar g$ [def-weil-scheme-morphism-properties]. For every finite $E/\\mathbf Q_\\ell$ in $\\Omega$, write $\\mathcal O_E$ for its valuation ring, choose a uniformizer $\\varpi_E$ and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Use the completed integral constructible category $\\mathcal C_E(W)=D^b_c(W,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], its raw rationalization $\\mathcal C_E(W)[1/\\varpi_E]=D^b_c(W,E)$ [def-weil-rationalization-karoubi], and the common-stage category $D^b_c(W,\\Omega)$ [def-weil-algebraically-closed-coefficients], for $W=X,Y$. Write $P_{g,E}=Lg_E^*$ for the prescribed completed pullback [def-weil-derived-pullback-tensor-hom]. Normalize its comparison $\\lambda^g:P_{g,E}\\xrightarrow{\\sim}g^{-1}$ as in [lem-weil-isomorphism-derived-pullback, lem-pod-pullback-identities-scalar-extension], where the inverse image on modules is through the canonical completed coefficient isomorphism of [lem-weil-proetale-isomorphism-inverse-image].\n\nThe functors $P_{g,E}$ and $P_{\\bar g,E}$ are exact inverse equivalences on these integral categories. On completed module sheaves the transport is the exact inverse-image equivalence, with coefficient isomorphism\n$$g^{-1}\\varprojlim_n(A_{E,n})_Y\\simeq\\varprojlim_ng^{-1}(A_{E,n})_Y\\simeq\\varprojlim_n(A_{E,n})_X.$$\nThe inverse-composition comparison on $K\\in\\mathcal C_E(Y)$ is the specified natural isomorphism\n$$\\epsilon^E_K=\\bigl(\\bar g^{-1}g^{-1}K\\simeq K\\bigr)\\circ\\bar g^{-1}(\\lambda^g_K)\\circ\\lambda^{\\bar g}_{P_{g,E}K}:P_{\\bar g,E}P_{g,E}K\\xrightarrow{\\sim}K,$$\nand the opposite composite has the same formula with $g,\\bar g$ exchanged. The realization by termwise inverse image preserves shifts and distinguished triangles.\n\nAt the rational stage the same object formulas and the rule $u\\otimes c\\mapsto P_{g,E}(u)\\otimes c$, extended additively, give exact inverse equivalences; their inverse comparisons are the images of $\\epsilon^E$ and its opposite. They are natural for all localized morphisms, including those not represented by a single integral morphism.\n\nFor $E\\subset L$ write $T_W=-\\otimes_{\\mathcal O_E}\\mathcal O_L$ [def-weil-integral-scalar-extension] and $\\alpha^g:T_XP_{g,E}\\simeq P_{g,L}T_Y$ for the canonical comparison of [lem-pur-integral-operations-scalar-extension], with the whole-system normalization of [lem-pod-pullback-identities-scalar-extension]. The inverse comparisons obey\n$$\\epsilon^L_{T_YK}\\circ P_{\\bar g,L}(\\alpha^g_K)\\circ\\alpha^{\\bar g}_{P_{g,E}K}=T_Y(\\epsilon^E_K),$$\nand the analogous equation with $g,\\bar g$ exchanged. On common-stage objects put $P_g(E,K)=(E,P_{g,E}K)$; on an arrow represented by $u:K\\otimes_E L\\to K'\\otimes_{E'}L$ use\n$$[L,(\\alpha^g_{E',L})^{-1}P_{g,L}(u)\\alpha^g_{E,L}].$$\nHere the $\\alpha$ in this formula are rationalized. This is independent of representatives and common fields and defines an exact equivalence with inverse $P_{\\bar g}$. Its natural inverse-composition comparison at $(E,K)$ is $[E,\\epsilon^E_K]$, and likewise for the opposite composite. Thus these exactness and inverse identities use the actual common-stage arrows and triangles, without adjoining retracts or assuming separatedness.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "prop-weil-operations proof sentence 1 via lem-fix-weil-operations first paragraph, inverse automorphism squares; original item Steps 2–3, exact completed transport and inverse identities at the field stages"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "The cardinality of k₀ makes its characteristic p. Since l is prime and unequal to p, l is a unit in k₀, then in k and in every stalk through the structure morphism; map this unit to each residue field and take its unique invertibility structure.",
+   "uses": [
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  },
+  {
+   "text": "Apply the single-field normalized construction to g and inv g at every finite coefficient field.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport-finite-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  },
+  {
+   "text": "Choose a normalized integral comparison system using integralPullbackComparisonRealization. Apply the inverse/scalar conjunct of pullbackIdentities_scalarExtension to g and inv g. Replace the whole-system scalar comparisons by the specified tensor/completion comparisons using isomorphismScalarComparisonAgreement. Proof irrelevance removes the auxiliary completeness witnesses and the unused characteristic parameter in the constructible scalar functor.",
+   "uses": [
+    "def-pod-isomorphism-field-transport-clauses",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-pod-isomorphism-scalar-comparison-agreement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  },
+  {
+   "text": "Choose the single-field packages at the small finite coefficient models of Ω and localize the integral inverse/scalar equations in both directions.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport-finite-stage",
+    "lem-pod-isomorphism-field-transport-rational-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  },
+  {
+   "text": "Finite type over a field makes X and Y noetherian and gives finite Krull-dimension bounds. Apply common-stage descent to the chosen normalized finite families and both rational scalar laws, first for g and then for inv g. For the application to inv g, construct its opposite normalized family directly at inv (inv g), using the same finite-stage and scalar-localization theorems; this avoids transporting record data through a dependent inverse-instance equality. This supplies the exact additive common-stage equivalences, own-stage epsilon formulas and shift comparisons required in the original conclusion.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport-common-stage",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-pod-isomorphism-field-transport-clauses",
+  "lem-pod-isomorphism-field-transport-finite-stage",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-pod-isomorphism-scalar-comparison-agreement",
+  "lem-pod-isomorphism-field-transport-rational-scalar",
+  "lem-pod-isomorphism-field-transport-common-stage",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a scheme isomorphism on derived complete constructible sheaves is an exact equivalence after rational scalar localization and passage to common finite coefficient fields",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackIso; AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, site equivalences, or categorical localization only; none states the specified completed integral and rational/common-stage comparison with these normalization identities."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|commonStage|rationalDerivedPullback|pullbackIdentityEpsilon",
+   "results": "0 hit(s): . Searched Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, site equivalences, or categorical localization only; none states the specified completed integral and rational/common-stage comparison with these normalization identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence of derived complete constructible sheaves along a scheme isomorphism after rationalization and algebraic closure of coefficients",
+   "results": "8 hit(s): IsAlgClosure.equivOfEquiv.congr_simp; AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv; AlgebraicGeometry.universallyClosed_respectsIso; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv; CategoryTheory.Equivalence.precoherent_isSheaf_iff; CategoryTheory.Equivalence.sheafCongr; CategoryTheory.Equivalence.sheafCongr.counitIso_hom_app_val_app; CategoryTheory.Equivalence.sheafCongr_functor",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, site equivalences, or categorical localization only; none states the specified completed integral and rational/common-stage comparison with these normalization identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "12 hit(s): CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.pullbackComparison_comp_fst; CategoryTheory.Limits.pullbackComparison_comp_snd; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc; CategoryTheory.Limits.pullbackComparison_comp_snd_assoc; CategoryTheory.Limits.map_lift_pullbackComparison; CategoryTheory.Limits.map_lift_pullbackComparison_assoc; CategoryTheory.Limits.pullbackComparison_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, site equivalences, or categorical localization only; none states the specified completed integral and rational/common-stage comparison with these normalization identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme isomorphism gives mutually inverse exact equivalences on integral constructible derived categories and their raw rational localizations and common finite field coefficient categories",
+   "results": "8 hit(s): DerivedCategory.quotientCompQhIso; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.AffineScheme.ΓIsEquiv; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; HomologicalComplexUpToQuasiIso.quotientCompQhIso; DerivedCategory.singleFunctorsPostcompQIso; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, site equivalences, or categorical localization only; none states the specified completed integral and rational/common-stage comparison with these normalization identities."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|commonStage|rationalDerivedPullback|pullbackIdentityEpsilon",
+   "results": "{\"t\": \"2026-10-22T11:32:40Z\", \"tool\": \"grep\", \"query\": \"derivedComplete|commonStage|rationalDerivedPullback|pullbackIdentityEpsilon\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module or scheme pullback, scalar localization of modules, or field automorphisms; none states the completed constructible equivalences with the specified inverse comparisons at all three stages."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEquivalence\", \"map\"",
+   "results": "{\"t\": \"2026-10-22T11:32:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEquivalence\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.isEquivalenceMap\", \"CategoryTheory.Functor.isEquivalence_mapArrow\", \"CategoryTheory.MorphismProperty.inverseImage_map_eq_of_isEquivalence\", \"CategoryTheory.MorphismProperty.map_inverseImage_eq_of_isEquivalence\", \"CategoryTheory.Adjunction.strongEpi_map_of_isEquivalence\", \"CategoryTheory.Adjunction.strongMono_map_of_isEquivalence\", \"CategoryTheory.Functor.strongEpi_map_iff_strongEpi_of_isEquivalence\", \"CategoryTheory.Functor.strongMono_map_iff_strongMono_of_isEquivalence\"], \"digest\": \"12050eecac690b96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module or scheme pullback, scalar localization of modules, or field automorphisms; none states the completed constructible equivalences with the specified inverse comparisons at all three stages."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalences on completed integral constructible sheaves descend through scalar localization to a common finite coefficient field category",
+   "results": "{\"t\": \"2026-10-22T11:32:41Z\", \"tool\": \"leansearch\", \"query\": \"Exact equivalences on completed integral constructible sheaves descend through scalar localization to a common finite coefficient field category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\", \"IsLocalizedModule.mapEquiv\", \"IsLocalization.instIsScalarTowerAtPrimeFractionRing\", \"PresheafOfModules.restrictHomEquivOfIsLocallySurjective\", \"Module.FinitePresentation.linearEquivMapExtendScalars\", \"PresheafOfModules.sheafifyHomEquiv'\"], \"digest\": \"6998ee9da1b6e64c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module or scheme pullback, scalar localization of modules, or field automorphisms; none states the completed constructible equivalences with the specified inverse comparisons at all three stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a scheme isomorphism induces inverse exact equivalences on completed integral constructible derived categories and raw rationalizations with compatible common finite field scalar extensions",
+   "results": "{\"t\": \"2026-10-22T11:32:44Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback along a scheme isomorphism induces inverse exact equivalences on completed integral constructible derived categories and raw rationalizations with compatible common finite field scalar extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc\"], \"digest\": \"458ad394b1a83e4b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module or scheme pullback, scalar localization of modules, or field automorphisms; none states the completed constructible equivalences with the specified inverse comparisons at all three stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar compatible family of exact inverse equivalences descends to the category of pairs and morphisms defined over common finite extension fields",
+   "results": "{\"t\": \"2026-10-22T11:33:26Z\", \"tool\": \"leanfinder\", \"query\": \"A scalar compatible family of exact inverse equivalences descends to the category of pairs and morphisms defined over common finite extension fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galLiftEquiv_apply\", \"galLiftEquiv\", \"galLiftEquiv_symm_apply\", \"galRestrict'_galLift\", \"galLift_galRestrict'\", \"galRestrict\", \"IntermediateField.restrictRestrictAlgEquivMapHom\", \"InfiniteGalois.mk_toAlgEquivAux\"], \"digest\": \"da55cd49e9f85237\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module or scheme pullback, scalar localization of modules, or field automorphisms; none states the completed constructible equivalences with the specified inverse comparisons at all three stages."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-semilinear-field-operation-lifts",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "prop-weil-operations proof sentence 1 via lem-fix-weil-operations first paragraph, inverse automorphism squares; original item Steps 2–3, exact completed transport and inverse identities at the field stages",
+   "via": [
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-isomorphism-field-transport",
+  "worker": "stage1",
+  "summary": "Completed the six-step argument without changing the statement or introducing nodes. Explicit completed module reindexing yields the exact integral equivalence; existing normalized inverse/scalar identities and exact comparison supply coherent field transport. Raw localization extends every inverse identity to all rational arrows, and generic pair descent gives the actual common-stage inverse maps and exact triangles. Read every cited statement and checked its hypotheses, including nonseparated finite-type schemes and non-k-linear isomorphisms.",
+  "blueprint": "prop-weil-operations proof sentence 1 via lem-fix-weil-operations proof first paragraph, inverse automorphism squares and “Since g* is an equivalence”; steps 1–2 integral transport, 3 normalized scalar inverse identities, 4 rationalization, 5–6 common-stage arrows and exact equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic Inverse image along an isomorphism of schemes on the pro-etale site, used as its stated tool for integral transport or verifying the hypotheses of the coefficient comparison; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic Scalar extension along an isomorphism of ring sheaves, used as its stated tool for integral transport or verifying the hypotheses of the coefficient comparison; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic Derived pullback along an isomorphism of schemes is the termwise inverse image, used as its stated tool for integral transport or verifying the hypotheses of the coefficient comparison; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Generic Bounded constructible derived-complete integral complexes form a triangulated subcategory, used as its stated tool for integral transport or verifying the hypotheses of the coefficient comparison; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic Integral derived operations commute with finite scalar extension, used as its stated tool for integral transport or verifying the hypotheses of the coefficient comparison; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-pod-pullback-identities-scalar-extension",
+    "why": "Generic Pullback composition and inverse identities commute with integral scalar extension, used as its stated tool for integral transport or verifying the hypotheses of the coefficient comparison; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-pod-isomorphism-pullback-texact-coefficients",
+    "why": "Exactness and shift/tower coherence of the actual scalar pullback comparisons; no t-structure conclusions are used."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme, used as its stated tool for integral transport or verifying the hypotheses of the coefficient comparison; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic extension of exact linear functors and natural transformation equations to all localized arrows."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic additive pair-category functor/transformation descent, used before Karoubi completion, for the actual coefficient diagrams."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-8814c5496",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-8814c5496 (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, no new nodes, statement unchanged (first-time S1 split; there is no re-split note). Each step's use matches the cited statement: proetale-isomorphism-inverse-image (1)-(3) and sheaf-scalar-extension-ring-iso give the completed transport; the round-trip coefficient map is the identity because c^g_A is the adjoint of rho, which fixes constants. sf-exact-functor-derived-triangulated, weil-isomorphism-derived-pullback (ell invertible since ell != p) and integral-constructible-triangulated give the integral equivalence and epsilon. Clause 2 of pod-pullback-identities-scalar-extension states the scalar inverse identity verbatim with the same kappa^-1 normalisation of lambda. The hypotheses of pod-isomorphism-pullback-texact-coefficients hold (Noetherian via pbc-finite-type-over-noetherian; finite dimension via kun-dimension-finite-type); it gives the rational beta, the shift law, identity at L=E and the tower law. pur-semilinear-scalar-localization covers all rational arrows; the image of varpi_E is invertible in L, including for ramified L/E. The pre-Karoubi part of sbc-coherent-pair-functor-descent gives the common-stage arrow formula, which equals the one in def-weil-derived-pullback-tensor-hom; its transformation equation is the Step 3 identity, so [E,eps^E] is natural; triangles are handled at a single field L with alpha_{L/L}=1, and the last square uses the shift law. Route matches lem-fix-weil-operations para 1 ('Since g^* is an equivalence'); no SGA. Checked: proof_deps = union of the step uses; no cycle; no separatedness or k-linearity used anywhere. Maintainer notes: lem-sf-automorphism-constructible-stage-equivalence (O1) is a special case of this item (separated automorphisms only) and is not citable here; the worker wrote tool_uses itself (C8), but the entries are accurate and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismFieldTransport",
+  "declaration": "WeilConjectures.isomorphismFieldTransport",
+  "declarations": [
+   "WeilConjectures.isomorphismFieldTransport"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismFieldTransport.lean",
+  "statement": "theorem isomorphismFieldTransport (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (g : X ⟶ Y) [IsIso g] : ∃ (iX : ∀ x : X, Invertible (l : X.residueField x)) (iY : ∀ y : Y, Invertible (l : Y.residueField y)), (fun [_iX : ∀ x : X, Invertible (l : X.residueField x)] [_iY : ∀ y : Y, Invertible (l : Y.residueField y)] ↦ ∃ (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)), (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E], Nonempty (IsomorphismFieldTransportStage l E g hX hY) ∧ Nonempty (IsomorphismFieldTransportStage l E (inv g) hY hX)) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L), isomorphismFieldTransportScalarLaw l E L ι g ∧ isomorphismFieldTransportScalarLaw l E L ι (inv g)) ∧ ∃ (S : ∀ E : Index l Ω, IsomorphismFieldTransportStage l (Coefficient.{u} l Ω E) g hX hY) (R : ∀ E : Index l Ω, IsomorphismFieldTransportStage l (Coefficient.{u} l Ω E) (inv g) hY hX), (∀ (E L : Index l Ω) (h : E ≤ L), isomorphismFieldTransportRationalScalarLaw l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) g hX hY (S E) (S L) ∧ isomorphismFieldTransportRationalScalarLaw l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) (inv g) hY hX (R E) (R L)) ∧ Nonempty (IsomorphismFieldTransportCommon l Ω g hX hY S) ∧ Nonempty (IsomorphismFieldTransportCommon l Ω (inv g) hY hX R)) (_iX := iX) (_iY := iY)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The original four auxiliary clause declarations are reexported unchanged from Sheaf.Paper.IsomorphismFieldTransportClauses, attached to def-pod-isomorphism-field-transport-clauses. The original theorem signature is unchanged; the proof assembles finite-stage transport, the published integral scalar equation, its rationalization and common-stage descent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4ebe977a",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 514e94797d15. Diff 514e→b4eb touches only the item module, item node and report, and drops the stray texact node record. stmt_deps restored to the 12 base entries; the item node differs from live only in lean. The theorem node lem-pod-isomorphism-pullback-texact-coefficients stays in proof_deps only. stage_shift now inlines @NatTrans.CommShift (stageComparison E).hom with both Functor.CommShift.comp instances (inclusionCommShift Y / shift; (S E).rationalShift / inclusionCommShift X). Checked against the isomorphismPullbackShiftSquare body (side-live IsomorphismPullbackTExactCoefficients.lean:73-83): same arguments in the same order, so delta-equal. The theorem-module import is now plain (proof route). lean.statement is verbatim in the file. Re-checked: no separatedness, non-k-linear IsIso g, independent Omega universe, existential l-invertibility, lambda/epsilon pinned to pullbackIdentityLambda/Epsilon, scalar-law HEq endpoints on the same integralScalarExtensionWellDefined.2.choose, rational/common-stage clauses unchanged, no hollow defs, docstrings with source and blueprint tag, proof is sorry. The report has Worker report and Second reading by Q96. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6eabd",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T065118-L-2694757",
+  "kind": "interface",
+  "note": "independent cc review: Delivered Clauses decls vs clone originals (identical), item statement vs clone (identical), CommonStage sorry vs original item claim (equivalent since stage data pinned), 12 direct importers compiled against sandbox build of delivered modules (all OK), #print axioms (sorryAx only from upstream sorried decls)"
+ }
+}

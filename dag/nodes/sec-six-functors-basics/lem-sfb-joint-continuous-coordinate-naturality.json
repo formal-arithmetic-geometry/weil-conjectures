@@ -1,0 +1,390 @@
+{
+ "id": "lem-sfb-joint-continuous-coordinate-naturality",
+ "kind": "statement",
+ "title": "Naturality of the two jointly continuous coordinate formulas",
+ "statement": "Let $E$ be a field [def-weil-field] with a topology making addition, multiplication and inversion on $E\\setminus\\{0\\}$ continuous. Let $J$ be a group with a topology making multiplication and inversion continuous. Let $V$ be an $E$-vector space with a topology making addition and scalar multiplication continuous, and with an $E$-linear $J$-action for which $J\\times V\\to V$ is continuous. For $n\\geq0$ let $B_J^n(V)$ be the space of jointly continuous functions $F:J^{n+1}\\to V$ with $F(ax_0,\\ldots,ax_n)=aF(x_0,\\ldots,x_n)$, and let $C_J^n(V)$ be the space of continuous functions $J^n\\to V$, with $C_J^0(V)=V$. All finite powers have the product topology, and both spaces have pointwise operations. Write $P_n(g_1,\\ldots,g_n)=(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_n)$ and $r_n(x_0,\\ldots,x_n)=(x_0^{-1}x_1,\\ldots,x_{n-1}^{-1}x_n)$. Put $\\Phi_{J,n}F=F\\circ P_n$ and $(\\Psi_{J,n}f)(x)=x_0f(r_n(x))$, using empty tuples for $n=0$. Define\n$$(\\delta_J^nF)(x_0,\\ldots,x_{n+1})=\\sum_{i=0}^{n+1}(-1)^iF(x_0,\\ldots,\\widehat{x_i},\\ldots,x_{n+1}),$$\n$$(d_J^nf)(g_1,\\ldots,g_{n+1})=g_1f(g_2,\\ldots,g_{n+1})+\\sum_{i=1}^{n}(-1)^if(g_1,\\ldots,g_ig_{i+1},\\ldots,g_{n+1})+(-1)^{n+1}f(g_1,\\ldots,g_n),$$\nwith $(d_J^0v)(g)=gv-v$. Let $H$ be another topological group and $W$ another topological $E$-vector space with a jointly continuous $E$-linear $H$-action; define $B_H^n(W)$, $C_H^n(W)$, $\\Phi_{H,n}$, $\\Psi_{H,n}$, $\\delta_H^n$ and $d_H^n$ by the same displayed formulas using $H,W$. Suppose $h:H\\to J$ is a continuous group homomorphism and $u:V\\to W$ is a continuous $E$-linear map such that $u(h(a)v)=a\\,u(v)$ for all $a\\in H,v\\in V$. The formulas\n$$b_n(F)(a_0,\\ldots,a_n)=u(F(h(a_0),\\ldots,h(a_n))),\\qquad c_n(f)(a_1,\\ldots,a_n)=u(f(h(a_1),\\ldots,h(a_n)))$$\ndefine $E$-linear maps $b_n:B_J^n(V)\\to B_H^n(W)$ and $c_n:C_J^n(V)\\to C_H^n(W)$ preserving the required continuity and equivariance, with $c_0=u$. They satisfy\n$$b_{n+1}\\delta_J^n=\\delta_H^nb_n,\\qquad c_{n+1}d_J^n=d_H^nc_n,$$\n$$\\Phi_{H,n}b_n=c_n\\Phi_{J,n},\\qquad \\Psi_{H,n}c_n=b_n\\Psi_{J,n}.$$\nAll four identities include degree zero. For $W=V$, $u=\\operatorname{id}$ and the restricted action $a v=h(a)v$, that action is jointly continuous. No compactness, Hausdorffness or discreteness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, lines 9007–9040 (inhomogeneous differential with arbitrary topological abelian coefficients). Agent-formulated simultaneous coefficient/restriction naturality, not a theorem asserted verbatim by Stacks. Extracted from lem-sfb-topological-homogeneous-cochain-coordinates, old proof steps 10–11."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-joint-continuous-coordinate-equivalence] to $(J,V)$ and $(H,W)$: their hypotheses are precisely the given topological field, topological group, topological vector space and jointly continuous linear action hypotheses. This supplies the pointwise vector spaces and the well-defined linear maps $\\Phi,\\Psi$. Apply [lem-sfb-joint-continuous-coordinate-differential] to the same two pairs to obtain well-defined linear maps $\\delta,d$ with the displayed formulas. No comparison of iterated continuous-map spaces with product-map spaces is used.",
+   "uses": [
+    "lem-sfb-joint-continuous-coordinate-equivalence",
+    "lem-sfb-joint-continuous-coordinate-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential including degree zero; agent-written naturality calculation for the explicit formulas of this item."
+   }
+  },
+  {
+   "text": "For each finite $k$, put $h^k(a_1,\\ldots,a_k)=(h(a_1),\\ldots,h(a_k))$. This is continuous: the inverse image of a basic open product $\\prod_i U_i$ is $\\prod_i h^{-1}(U_i)$; for $k=0$ both powers are points. Thus $u\\circ F\\circ h^{n+1}$ and $u\\circ f\\circ h^n$ are continuous, by composition. For $a\\in H$ and $x=(a_0,\\ldots,a_n)$, the homomorphism law, equivariance of $F$, and the stated relation for $u$ give\n$$b_n(F)(aa_0,\\ldots,aa_n)=u(F(h(a)h(a_0),\\ldots,h(a)h(a_n)))=u(h(a)F(h^{n+1}x))=a\\,b_n(F)(x).$$\nHence $b_n(F)$ is in $B_H^n(W)$ and $c_n(f)$ is in $C_H^n(W)$. For either map $T=b_n$ or $c_n$, pointwise evaluation gives $T(\\lambda q+\\mu q')=\\lambda T(q)+\\mu T(q')$ from linearity of $u$. In degree zero $c_0(v)=u(v)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential including degree zero; agent-written naturality calculation for the explicit formulas of this item."
+   }
+  },
+  {
+   "text": "Deleting the $i$-th entry of a tuple commutes with applying $h$ entrywise. At $a=(a_0,\\ldots,a_{n+1})$, linearity of $u$ therefore gives\n$$(b_{n+1}\\delta_J^nF)(a)=u\\left(\\sum_{i=0}^{n+1}(-1)^i F(h(a_0),\\ldots,\\widehat{h(a_i)},\\ldots,h(a_{n+1}))\\right)=\\sum_{i=0}^{n+1}(-1)^i(b_nF)(a_0,\\ldots,\\widehat{a_i},\\ldots,a_{n+1}).$$\nThis is $(\\delta_H^nb_nF)(a)$, proving the homogeneous differential identity for every $n\\geq0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential including degree zero; agent-written naturality calculation for the explicit formulas of this item."
+   }
+  },
+  {
+   "text": "For $n\\geq1$, expand $u((d_J^nf)(h(a_1),\\ldots,h(a_{n+1})))$. Pull $u$ through the finite signed sum by linearity, use $h(a_i)h(a_{i+1})=h(a_ia_{i+1})$ in each internal term, and use $u(h(a_1)v)=a_1u(v)$ in the leading term. The resulting expression is exactly\n$$a_1(c_nf)(a_2,\\ldots,a_{n+1})+\\sum_{i=1}^{n}(-1)^i(c_nf)(a_1,\\ldots,a_ia_{i+1},\\ldots,a_{n+1})+(-1)^{n+1}(c_nf)(a_1,\\ldots,a_n),$$\nwhich is $(d_H^nc_nf)(a_1,\\ldots,a_{n+1})$. For $n=0$, the same identity reads $u(h(a)v-v)=a\\,u(v)-u(v)$, which follows directly from equivariance and additivity of $u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential including degree zero; agent-written naturality calculation for the explicit formulas of this item."
+   }
+  },
+  {
+   "text": "The identities $h(1)=1$ and $h(a_1\\cdots a_i)=h(a_1)\\cdots h(a_i)$ give $h^{n+1}(P_{H,n}(a))=P_{J,n}(h^n(a))$. Here the product identity follows by induction on $i$, starting with the empty product $1$ and applying $h(xy)=h(x)h(y)$ at the successor. Substituting into the two composites yields\n$$(\\Phi_{H,n}b_nF)(a)=u(F(h^{n+1}(P_{H,n}(a))))=u(F(P_{J,n}(h^n(a))))=(c_n\\Phi_{J,n}F)(a).$$\nFor $n=0$ this is the equality $u(F(h(1)))=u(F(1))$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential including degree zero; agent-written naturality calculation for the explicit formulas of this item."
+   }
+  },
+  {
+   "text": "Since $h(a^{-1}b)=h(a)^{-1}h(b)$, one has $r_{J,n}(h^{n+1}(x))=h^n(r_{H,n}(x))$. At $x=(a_0,\\ldots,a_n)$, use this tuple equality and the assumed intertwining equation for $u$ to compute\n$$(b_n\\Psi_{J,n}f)(x)=u\\big(h(a_0)f(r_{J,n}(h^{n+1}(x)))\\big)=a_0u\\big(f(h^n(r_{H,n}(x)))\\big)=(\\Psi_{H,n}c_nf)(x).$$\nThe group identity used follows by applying $h$ to $aa^{-1}=1$ and then to $a^{-1}b$. In degree zero the ratios are empty, and the equality is $u(h(a_0)v)=a_0u(v)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential including degree zero; agent-written naturality calculation for the explicit formulas of this item."
+   }
+  },
+  {
+   "text": "For completeness, the degree-zero homogeneous differential identity of step 3 is $u(F(h(b))-F(h(a)))=u(F(h(b)))-u(F(h(a)))$, since $(\\delta^0F)(x_0,x_1)=F(x_1)-F(x_0)$. Together with the explicit degree-zero equations in steps 4–6 and $c_0=u$ from step 2, this verifies all four identities in degree zero. Finally, when $W=V$ and $u=\\mathrm{id}$, the restricted action map $H\\times V\\to V$ is the composite $(a,v)\\mapsto(h(a),v)\\mapsto h(a)v$. The first map is continuous in the product topology and the second is the given jointly continuous action. The action laws and linearity follow from the homomorphism law for $h$ and those of the $J$-action. None of these calculations invokes compactness, separation or discreteness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential including degree zero; agent-written naturality calculation for the explicit formulas of this item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-joint-continuous-coordinate-equivalence",
+  "lem-sfb-joint-continuous-coordinate-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential including degree zero; agent-written naturality calculation for the explicit formulas of this item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cumulative product homogeneous to inhomogeneous continuous cochain coordinates commute with coefficient maps and restriction along continuous group homomorphisms for arbitrary topological modules",
+   "results": {
+    "t": "2026-10-22T06:14:55Z",
+    "tool": "leanfinder",
+    "query": "Cumulative product homogeneous to inhomogeneous continuous cochain coordinates commute with coefficient maps and restriction along continuous group homomorphisms for arbitrary topological modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cochainsMap_f",
+     "groupCohomology.cochainsMap_f_hom",
+     "groupCohomology.cochainsMap",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply",
+     "groupCohomology.cochainsMap_comp",
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply",
+     "CochainComplex.HomComplex.Cochain.comp_v"
+    ],
+    "digest": "8f2ad1a487ed3ca0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ContinuousCohomology.cochainsMap is for homogeneous iterated maps, and groupCohomology.cochainsMap for unrestricted inhomogeneous functions. Neither states naturality of both explicit jointly continuous coordinate formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopRep.homogeneousCochains",
+   "results": {
+    "t": "2026-10-22T06:14:45Z",
+    "tool": "loogle",
+    "query": "TopRep.homogeneousCochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TopRep.homogeneousCochains",
+     "ContinuousCohomology.π",
+     "TopRep.homogeneousCochains.d_eq",
+     "TopRep.homogeneousCochains.d_apply",
+     "ContinuousCohomology.cochainsMap",
+     "ContinuousCohomology.cochainsMap_id",
+     "ContinuousCohomology.cochainsMap_f",
+     "ContinuousCohomology.π_map"
+    ],
+    "digest": "ccf54a579b07640c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ContinuousCohomology.cochainsMap is for homogeneous iterated maps, and groupCohomology.cochainsMap for unrestricted inhomogeneous functions. Neither states naturality of both explicit jointly continuous coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "cochainsMap|inhomogeneousCochainsIso|natural",
+   "results": {
+    "t": "2026-10-22T06:14:44Z",
+    "tool": "grep",
+    "query": "cochainsMap|inhomogeneousCochainsIso|natural",
+    "sub": "RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "21",
+     "103",
+     "113",
+     "114",
+     "116"
+    ],
+    "digest": "f884b2877a6f4d06"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ContinuousCohomology.cochainsMap is for homogeneous iterated maps, and groupCohomology.cochainsMap for unrestricted inhomogeneous functions. Neither states naturality of both explicit jointly continuous coordinate formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of both homogeneous inhomogeneous continuous cochain coordinate maps with jointly continuous coefficients and restriction of topological groups",
+   "results": {
+    "t": "2026-10-22T06:14:45Z",
+    "tool": "leansearch",
+    "query": "Naturality of both homogeneous inhomogeneous continuous cochain coordinate maps with jointly continuous coefficients and restriction of topological groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "groupCohomology.cochainsMap",
+     "groupCohomology.cochainsMap_comp",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.MultiInd.d",
+     "groupCohomology.cochainsFunctor",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "ContinuousCohomology.const"
+    ],
+    "digest": "2d914dd4bbf4c457"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ContinuousCohomology.cochainsMap is for homogeneous iterated maps, and groupCohomology.cochainsMap for unrestricted inhomogeneous functions. Neither states naturality of both explicit jointly continuous coordinate formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition with a continuous equivariant linear map and precomposition with a continuous group homomorphism commute with cumulative product evaluation and the inverse ratio formula",
+   "results": {
+    "t": "2026-10-22T06:14:55Z",
+    "tool": "leanfinder",
+    "query": "Postcomposition with a continuous equivariant linear map and precomposition with a continuous group homomorphism commute with cumulative product evaluation and the inverse ratio formula",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.I_map_hom",
+     "ContinuousLinearMap.pi_comp",
+     "ContinuousCohomology.Iobj_ρ_apply",
+     "Pi.compRightL",
+     "ContinuousCohomology.I_obj_ρ_apply",
+     "ContinuousLinearMap.prodₗ_apply",
+     "ContinuousLinearMap.prodL_apply",
+     "Pi.compRightL_apply"
+    ],
+    "digest": "2a09d27bfda0d776"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ContinuousCohomology.cochainsMap is for homogeneous iterated maps, and groupCohomology.cochainsMap for unrestricted inhomogeneous functions. Neither states naturality of both explicit jointly continuous coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "cochainsMap|inhomogeneousCochainsIso|natural",
+   "results": {
+    "t": "2026-10-22T11:49:03Z",
+    "tool": "grep",
+    "query": "cochainsMap|inhomogeneousCochainsIso|natural",
+    "sub": "RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "21",
+     "103",
+     "113",
+     "114",
+     "116"
+    ],
+    "digest": "f884b2877a6f4d06"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ContCohomology/Functoriality.lean:99–110, whose cochainsMap concerns invariant iterated continuous maps, and GroupCohomology/Functoriality.lean:49–63, whose cochainsMap concerns unrestricted inhomogeneous functions. Neither states both explicit coordinate naturality identities for jointly continuous product cochains under these hypotheses; the second phrasing returned infinite-product lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousCohomology.cochainsMap",
+   "results": {
+    "t": "2026-10-22T11:49:04Z",
+    "tool": "loogle",
+    "query": "ContinuousCohomology.cochainsMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.cochainsMap",
+     "ContinuousCohomology.cochainsMap_id",
+     "ContinuousCohomology.cochainsMap_f",
+     "ContinuousCohomology.cochainsMap_comp",
+     "ContinuousCohomology.cochainsMap_comp_assoc",
+     "ContinuousCohomology.cochainsMap_f_hom"
+    ],
+    "digest": "fc324661e83c1fc6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ContCohomology/Functoriality.lean:99–110, whose cochainsMap concerns invariant iterated continuous maps, and GroupCohomology/Functoriality.lean:49–63, whose cochainsMap concerns unrestricted inhomogeneous functions. Neither states both explicit coordinate naturality identities for jointly continuous product cochains under these hypotheses; the second phrasing returned infinite-product lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a continuous group homomorphism and continuous equivariant coefficient maps commute with cumulative product evaluation and inverse ratio cochain coordinates",
+   "results": {
+    "t": "2026-10-22T11:49:04Z",
+    "tool": "leansearch",
+    "query": "Restriction along a continuous group homomorphism and continuous equivariant coefficient maps commute with cumulative product evaluation and inverse ratio cochain coordinates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.resNatTrans",
+     "ContAction.res",
+     "groupCohomology.cochainsMap_comp",
+     "groupCohomology.cochainsMap",
+     "PontryaginDual.mapHom",
+     "groupCohomology.cochainsMap_comp_assoc",
+     "LocallyConstant.comapMonoidHom",
+     "ContinuousCohomology.MultiInd.complex"
+    ],
+    "digest": "cf136092ba9ab8ec"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ContCohomology/Functoriality.lean:99–110, whose cochainsMap concerns invariant iterated continuous maps, and GroupCohomology/Functoriality.lean:49–63, whose cochainsMap concerns unrestricted inhomogeneous functions. Neither states both explicit coordinate naturality identities for jointly continuous product cochains under these hypotheses; the second phrasing returned infinite-product lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the explicit homogeneous and inhomogeneous jointly continuous group cochain coordinate maps under simultaneous continuous group homomorphisms and equivariant linear coefficient maps",
+   "results": {
+    "t": "2026-10-22T11:49:05Z",
+    "tool": "leanfinder",
+    "query": "Naturality of the explicit homogeneous and inhomogeneous jointly continuous group cochain coordinate maps under simultaneous continuous group homomorphisms and equivariant linear coefficient maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply",
+     "groupCohomology.cochainsMap_f_hom",
+     "groupCohomology.cochainsMap",
+     "groupCohomology.cochainsMap_f",
+     "groupCohomology.cochainsMap_f_3_comp_cochainsIso₃_apply",
+     "groupCohomology.cochainsMap_comp_assoc",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁"
+    ],
+    "digest": "e17cc001213f0d5a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ContCohomology/Functoriality.lean:99–110, whose cochainsMap concerns invariant iterated continuous maps, and GroupCohomology/Functoriality.lean:49–63, whose cochainsMap concerns unrestricted inhomogeneous functions. Neither states both explicit coordinate naturality identities for jointly continuous product cochains under these hypotheses; the second phrasing returned infinite-product lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at cumulative products and reconstruction by consecutive ratios are natural in topological group representations with arbitrary jointly continuous coefficients",
+   "results": {
+    "t": "2026-10-22T11:49:20Z",
+    "tool": "leanfinder",
+    "query": "Evaluation at cumulative products and reconstruction by consecutive ratios are natural in topological group representations with arbitrary jointly continuous coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "hasProd_nat_add_iff'",
+     "Multipliable.tprod_eq_zero_mul",
+     "hasProd_nat_add_iff",
+     "Multipliable.prod_mul_tprod_nat_add",
+     "hasProd_ite_div_hasProd",
+     "tprod_eq_zero_mul'",
+     "tprod_zero_pnat_eq_tprod_nat",
+     "Multipliable.tprod_eq_mul_tprod_ite"
+    ],
+    "digest": "45e7cf5d89f92d92"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ContCohomology/Functoriality.lean:99–110, whose cochainsMap concerns invariant iterated continuous maps, and GroupCohomology/Functoriality.lean:49–63, whose cochainsMap concerns unrestricted inhomogeneous functions. Neither states both explicit coordinate naturality identities for jointly continuous product cochains under these hypotheses; the second phrasing returned infinite-product lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-topological-homogeneous-cochain-coordinates",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof paragraph (3), direct-image finiteness and coefficient comparison: elementary homogeneous-to-inhomogeneous coordinates in the arithmetic transfer obligation created below this paragraph; this homogeneous coordinate calculation is not stated in the blueprint itself. Re-split of lem-sfb-topological-homogeneous-cochain-coordinates: old steps 10–11 (coefficient maps and continuous restriction, including both coordinate formulas and differential compatibility).",
+   "via": [
+    "lem-sfb-topological-homogeneous-cochain-coordinates",
+    "lem-sfb-continuous-cochain-finite-index-transfer",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-joint-continuous-coordinate-naturality",
+  "worker": "stage1",
+  "summary": "Reused the coordinate-equivalence and differential siblings only for well-definedness. Proved continuity, linearity and equivariance of b and c, both differential identities and both coordinate identities by explicit pointwise equations, including degree zero and restricted-action continuity. No new nodes, statement changes or extra hypotheses. Rechecked the item in Mathlib using logged searches and a second semantic phrasing.",
+  "blueprint": "The inherited from.place refers to paragraph (3) of det-thm-sf-ctf-stability-direct-images, via the arithmetic transfer and topological homogeneous-coordinate obligations; the immediate parent extracted old steps 10–11. The seven proof steps realize that coefficient/restriction naturality calculation, without changing any unit route. The imported ancestry currently has from.node=null, also returned by blueprint_refs.py ancestor; its inherited place/via are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-57426647c",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-57426647c (reviewer sub-agent of L); spot-checked: Read the whole item, all 7 steps. 0 new nodes. Statement and stmt_deps are identical to the Q144 creation (checked against the Q144 snapshot); nothing weakened. Step 1 cites the two sibling nodes, joint-continuous-coordinate-equivalence and -differential, only for well-definedness; their hypotheses match exactly for both (J,V) and (H,W). No cycle: the parent topological-homogeneous-cochain-coordinates cites this item, not the other way round, and the parent's uses (u=id with the restricted action; h=id_J) fit the statement. Steps 2-7 are explicit pointwise checks: continuity via product basic opens, equivariance via the intertwining relation u(h(a)v)=a u(v), face deletion commuting with h, the hom law for internal terms, cumulative products by induction with h(1)=1, ratios via h(a^{-1}b)=h(a)^{-1}h(b), all degree-zero cases, and continuity of the restricted action as a composite. I checked n=0 and n=1 and noncommutative groups. The differential and its degree-zero rule match Stacks etale-cohomology.tex section-continuous-group-cohomology (lines 9007-9040), and proof_origin is marked agent. No SGA is cited. The null blueprint.from.node is inherited from the parent. mathlib_match null is justified by the logged searches. No changes."
+ }
+}

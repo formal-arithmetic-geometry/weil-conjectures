@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-semiabelian-generic-graph-finite-fibres",
+ "kind": "statement",
+ "title": "Finite fibres of a semiabelian generic graph projection",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $P,Q\\to S$ be smooth separated commutative group schemes of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation] with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. The group laws, identity sections and inverse maps are morphisms satisfying the commutative group identities, and separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Write $\\eta$ for the generic point of $S$, $K=\\kappa(\\eta)$ for its residue field [def-weil-residue-field], and $P_\\eta,Q_\\eta$ for the scheme fibres [def-pc-scheme-fibre]. Given a $K$-group homomorphism $u:P_\\eta\\to Q_\\eta$, let $\\Gamma\\subseteq P\\times_SQ$ be the scheme-theoretic image [def-nagata-scheme-theoretic-image] of $P_\\eta\\xrightarrow{(1,u)}(P\\times_SQ)_\\eta\\to P\\times_SQ$ [def-pc-fibre-product]. Let $\\pi:\\Gamma\\to P$ be the first projection. Then for every point $x\\in P$, the fibre $\\Gamma_x=\\Gamma\\times_P\\operatorname{Spec}\\kappa(x)$ has a finite underlying set of points. No reducedness assertion about this fibre is included.",
+ "source": {
+  "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+  "place": "G. Faltings, Finiteness Theorems for Abelian Varieties over Number Fields, in Arithmetic Geometry (1986), Chapter II, section 2, Lemma 1 proof, printed pp.10-11: the two assertions about the projection of the graph closure. Local copy WANTED; online primary-source proof read at https://www-fourier.univ-grenoble-alpes.fr/~lefourns/contenu/Zywina/Faltings.pdf ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-closed-immersion",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof": [
+  {
+   "text": "Every algebraically closed geometric fibre of $P$ is integral, hence nonempty and connected, by [lem-sfb-semiabelian-geometric-power-integrality] with $n=1$. The algebraically closed extension criterion [lem-weil-geometrically-connected-algebraic-closure] therefore makes every residue-field fibre geometrically connected. Apply [lem-sbc-smooth-connected-generic-geometry-core] to $P\\to S$: the identity section makes $P$ nonempty, and $S$ is integral and normal as required. In particular $P_\\eta$ is integral. Denote its generic point by $\\xi$.",
+   "uses": [
+    "lem-sfb-semiabelian-geometric-power-integrality",
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-sbc-smooth-connected-generic-geometry-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034F, lemma-normal-local-smooth; the geometric-integrality and connectedness inputs are the cited existing nodes."
+   }
+  },
+  {
+   "text": "Put $Y=P\\times_SQ$ and let $a:P_\\eta\\to Y$ be the prescribed graph map. Both $Y$ and its closed subscheme $\\Gamma$ are locally Noetherian. Indeed over a Noetherian affine $\\operatorname{Spec}A\\subset S$, product affine charts have algebras $B\\otimes_A C$ with $B,C$ finitely presented over $A$; the union of their finite generating sets generates the tensor algebra, and passing to a closed subscheme takes a quotient. Apply [lem-weil-pbc-finite-type-over-noetherian] on these charts. The same node makes the finite-type $K$-scheme $P_\\eta$ Noetherian. Choose its finite cover by Noetherian affine opens; [lem-sc-affine-noetherian-underlying-space] makes each chart topologically Noetherian, and a descending chain of closed sets stabilizes on the whole scheme once it stabilizes on these finitely many charts. By [lem-sfb-noetherian-space-compact-subsets], every open subset of $P_\\eta$ is quasi-compact. In particular $a^{-1}(V)$ is quasi-compact for every affine open $V\\subset Y$, so $a$ is quasi-compact. Now [lemma-nagata-scheme-image-ideal-qc] identifies $|\\Gamma|$ with the closure of $a(P_\\eta)$. Continuity and the density of $\\xi$ show that $y=a(\\xi)$ is a generic point of $\\Gamma$, lying over $\\eta$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image; Noetherian affine-chart assembly written explicitly."
+   }
+  },
+  {
+   "text": "Fix $x\\in P$ and two points $z_1,z_2\\in\\pi^{-1}(x)$; write $s$ for the image of $x$ in $S$. For each $z_i\\ne y$, the specialization $y\\leadsto z_i$ in the locally Noetherian $\\Gamma$ is traced by $b_i:\\operatorname{Spec}R_i\\to\\Gamma$ from [lem-sbc-noetherian-specialization-trait], with $R_i$ a DVR, generic image $y$ and closed image $z_i$. If $z_i=y$, instead take $R_i=\\kappa(y)$ and its canonical point map. Thus in both cases the generic point of $\\operatorname{Spec}R_i$ maps to $\\eta$ in $S$, and the closed point maps to $s$. Pull back $P,Q$ to these bases. Smoothness is preserved by [lem-pc-proper-base-change](2). Finite presentation is preserved on affine charts by [lem-weil-pbc-finite-presentation-base-change-composition](1); quasi-compactness is part of the finite affine presentation and its base changes. The closed diagonal remains closed by its quotient-algebra description [def-weil-closed-immersion], and the group identities and the semiabelian geometric-fibre condition persist by their definitions. Hence [lem-sfb-semiabelian-trait-hom-extension] gives a group homomorphism $v_i:P_{R_i}\\to Q_{R_i}$ extending $u_{L_i}$ when $R_i$ is a DVR. In the field case $v_i$ is simply the base change of $u$.",
+   "uses": [
+    "lem-sbc-noetherian-specialization-trait",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-weil-closed-immersion",
+    "lem-sfb-semiabelian-trait-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+    "place": "Chapter II section 2 Lemma 1 proof, valuation-ring reduction; trait selection is Stacks Tag 054F, properties.tex lemma-locally-Noetherian-specialization-dvr."
+   }
+  },
+  {
+   "text": "Let $p_i:\\operatorname{Spec}R_i\\to P$ and $q_i:\\operatorname{Spec}R_i\\to Q$ be the two coordinates of $b_i$. The second coordinate $v_i(p_i)$ agrees with $q_i$ on $\\operatorname{Spec}L_i$: both are $u(p_i)$, since $y$ is the image of the generic point of the prescribed generic graph. They agree on the whole $\\operatorname{Spec}R_i$. In fact their equalizer is cut out by the pullback of the closed diagonal of $Q/S$; its ideal $I\\subset R_i$ becomes zero in $L_i$. Since $R_i\\hookrightarrow L_i$ is injective, $I=0$. The field case is the same argument with $R_i=L_i$. Thus $q_i$ on the closed fibre is the evaluation of $(v_i)_{k_i}$ at the point furnished by $p_i$, where $k_i=R_i/\\mathfrak m_i$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Elementary closed-equalizer ideal calculation; compare Tag 01RH, lemma-equality-of-morphisms."
+   }
+  },
+  {
+   "text": "The closed point maps induce compatible embeddings $\\kappa(x)\\hookrightarrow\\kappa(z_i)\\hookrightarrow k_i$. Apply [lem-weil-common-extension-fields] over $\\kappa(x)$ to embed $k_1,k_2$ into a common field $M$, then choose an algebraic closure $\\Omega/M$ by [def-weil-algebraic-closure]. In particular the two resulting maps $\\operatorname{Spec}\\Omega\\to P$ from $p_i$ are the same canonical point $x$ with the same embedding of $\\kappa(x)$. The given extensions $v_1,v_2$ satisfy every hypothesis of [lem-sfb-semiabelian-trait-specialization-agreement]: their generic restrictions are the pullbacks of the fixed $u$, their closed base point is $s$, and the chosen embeddings $k_i\\hookrightarrow\\Omega$ agree on $\\kappa(s)$. Thus $(v_1)_\\Omega=(v_2)_\\Omega$. Evaluating at that common $P$-point and using step 4 proves that the two maps $\\operatorname{Spec}\\Omega\\to Q$ from $q_i$ agree.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "def-weil-algebraic-closure",
+    "lem-sfb-semiabelian-trait-specialization-agreement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+    "place": "Chapter II section 2 Lemma 1 proof, omitted compatibility in the valuation-ring argument, made explicit by the cited comparison input."
+   }
+  },
+  {
+   "text": "The two maps $\\operatorname{Spec}\\Omega\\to P\\times_SQ$ just obtained have equal first and second coordinates, hence are equal by the defining universal property of the fibre product. Their images are respectively the images of $z_1,z_2$ under the closed immersion $\\Gamma\\hookrightarrow P\\times_SQ$. This immersion is injective on underlying points by [def-weil-closed-immersion], so $z_1=z_2$. Therefore $\\pi^{-1}(x)$ has at most one point. The homeomorphism in [def-pc-scheme-fibre] identifies the underlying set of $\\Gamma_x$ with this set. An empty set or a singleton is finite, proving the requested assertion. No claim about nilpotents in the fibre has been made.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+    "place": "Chapter II section 2 Lemma 1 proof, conclusion about graph-projection fibres; elementary assembly from equal coordinates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semiabelian-geometric-power-integrality",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sbc-noetherian-specialization-trait",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sfb-semiabelian-trait-hom-extension",
+  "lem-weil-common-extension-fields",
+  "def-weil-algebraic-closure",
+  "lem-sfb-semiabelian-trait-specialization-agreement",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+  "place": "Chapter II section 2 Lemma 1 proof, pp.10-11; primary PDF read online. Q08 supplies the trait-comparison assembly; two non-elementary local inputs are separate statement-only nodes. No excellence reduction and no SGA route are used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fibres of the projection of the schematic closure of a generic homomorphism of semiabelian schemes over a normal scheme have finitely many points",
+   "results": "{\"t\": \"2026-10-24T02:00:46Z\", \"tool\": \"leanfinder\", \"query\": \"The fibres of the projection of the schematic closure of a generic homomorphism of semiabelian schemes over a normal scheme have finitely many points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.Scheme.Hom.fiber\"], \"digest\": \"1639bb02987264d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances require IsFinite, the property still to be proved for the graph. Abstract group graphs and closure of linear maps are different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graph closure of a generic group homomorphism between semiabelian schemes is quasi finite over its source",
+   "results": "{\"t\": \"2026-10-24T02:00:47Z\", \"tool\": \"leansearch\", \"query\": \"The graph closure of a generic group homomorphism between semiabelian schemes is quasi finite over its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"LinearPMap.closure\", \"AddMonoidHom.graph\", \"MonoidHom.graph\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"LinearPMap.IsClosable.graph_closure_eq_closure_graph\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.Hom.support_ker\"], \"digest\": \"7024093bcb607fe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances require IsFinite, the property still to be proved for the graph. Abstract group graphs and closure of linear maps are different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFinite\", \"Grp\"",
+   "results": "{\"t\": \"2026-10-24T02:00:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiFinite\\\", \\\"Grp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances require IsFinite, the property still to be proved for the graph. Abstract group graphs and closure of linear maps are different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|[Gg]raph.*[Ff]ibre|[Gg]raph.*[Qq]uasi[Ff]inite",
+   "results": "{\"t\": \"2026-10-24T02:00:47Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|[Gg]raph.*[Ff]ibre|[Gg]raph.*[Qq]uasi[Ff]inite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances require IsFinite, the property still to be proved for the graph. Abstract group graphs and closure of linear maps are different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic graph of a map between semi abelian groups has zero dimensional special fibres in its closure over a normal base",
+   "results": "{\"t\": \"2026-10-24T02:01:51Z\", \"tool\": \"leanfinder\", \"query\": \"A generic graph of a map between semi abelian groups has zero dimensional special fibres in its closure over a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidHom.graph\", \"MonoidHom.graph\", \"AddMonoidHom.mem_graph\", \"LinearMap.exists_range_eq_graph\", \"AddSubgroup.exists_eq_graph\", \"AddMonoidHom.exists_range_eq_graph\", \"AddMonoidHom.graph_eq_range_prod\", \"Subgroup.exists_eq_graph\"], \"digest\": \"32286cdff36e1733\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances require IsFinite, the property still to be proved for the graph. Abstract group graphs and closure of linear maps are different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|[Gg]raph.*[Ff]ibre|[Gg]raph.*[Qq]uasi[Ff]inite",
+   "results": "{\"t\": \"2026-10-24T02:45:01Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|[Gg]raph.*[Ff]ibre|[Gg]raph.*[Qq]uasi[Ff]inite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances assume a finite morphism; specializing-map and general closure results do not establish the semiabelian graph property. Read all returned signatures and tried a second semantic phrasing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generic homomorphism of semiabelian schemes over a normal integral scheme has graph closure with singleton fibres",
+   "results": "{\"t\": \"2026-10-24T02:45:01Z\", \"tool\": \"leansearch\", \"query\": \"A generic homomorphism of semiabelian schemes over a normal integral scheme has graph closure with singleton fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.Hom\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instIsClosedImmersionISchemeOfSubsingletonCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\"], \"digest\": \"4ca3b3f75ccf8113\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances assume a finite morphism; specializing-map and general closure results do not establish the semiabelian graph property. Read all returned signatures and tried a second semantic phrasing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFinite\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T02:45:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiFinite\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances assume a finite morphism; specializing-map and general closure results do not establish the semiabelian graph property. Read all returned signatures and tried a second semantic phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection of the schematic closure of a generic homomorphism between semiabelian schemes has finite fibres",
+   "results": "{\"t\": \"2026-10-24T02:45:02Z\", \"tool\": \"leanfinder\", \"query\": \"The projection of the schematic closure of a generic homomorphism between semiabelian schemes has finite fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsFinite.instFstScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\"], \"digest\": \"92b1bdcd4d448aaa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances assume a finite morphism; specializing-map and general closure results do not establish the semiabelian graph property. Read all returned signatures and tried a second semantic phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic group homomorphism of semi abelian families has at most one specialization above each point of its source",
+   "results": "{\"t\": \"2026-10-24T02:45:03Z\", \"tool\": \"leanfinder\", \"query\": \"A generic group homomorphism of semi abelian families has at most one specialization above each point of its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"SpecializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"AlgebraicGeometry.Flat.generalizingMap\", \"Topology.IsInducing.specializingMap\"], \"digest\": \"88ac90afa1e1fd59\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-fibre instances assume a finite morphism; specializing-map and general closure results do not establish the semiabelian graph property. Read all returned signatures and tried a second semantic phrasing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-semiabelian-hom-extension",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited independent power-prolongation route, graph-closure input for generic semiabelian homomorphism extension: finite fibres via trait extension and agreement of specializations. Faltings II section 2 Lemma 1 proof, pp.10-11.",
+   "via": [
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-generic-graph-finite-fibres",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Expanded the omitted valuation argument into a six-step proof, with the generic graph topologically dense, every proposed fibre point tested by a trait, equality on that trait proved by its closed-equalizer ideal, and the two specializations compared over one common field. Added only the two independent local homomorphism inputs, each unsplit and searched.",
+  "blueprint": "The inherited blueprint.from.node is null (confirmed by blueprint_refs.py ancestor); this item is below the independent power-prolongation replacement attached to sk-thm-sf-ctf-stability. The six steps realize the finite-fibre assertion in the parent graph-closure step, using Faltings II section 2 Lemma 1 valuation argument. Latest blueprint read at latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability; no chapter or unit change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Tests geometric connectedness after an algebraically closed extension; needed to apply the existing smooth-family integrality tool. The unit has no statement replacing this generic tool."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Smooth-family integrality over a normal integral base supplies the integral generic source of the graph. The unit has no statement replacing this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian-ascent tool for the ambient product charts and generic source. The unit has no statement replacing this generic tool."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Turns Noetherian affine charts into topologically Noetherian charts, needed for quasi-compactness of the graph source map. The unit has no statement replacing this generic tool."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme-image support/closure theorem, rather than a definition of scheme image. The unit has no statement replacing this generic tool."
+   },
+   {
+    "node": "lem-sbc-noetherian-specialization-trait",
+    "why": "Traces the strict specialization from the graph generic point to a proposed fibre point; independent scheme geometry. The unit has no statement replacing this generic tool."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only its smooth base-change clause is used for trait pullbacks; no properness of P or Q is required. The unit has no statement replacing this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Only the ring finite-presentation base-change clause is used on affine trait charts. The unit has no statement replacing this generic tool."
+   },
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Amalgamates the two trait residue fields over the fixed point residue field for comparison. The unit has no statement replacing this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sbc-noetherian-specialization-trait",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-e7d82ea8c",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-e7d82ea8c (reviewer sub-agent of L); spot-checked: The item's statement is unchanged (byte-identical to live, which is still unsplit). The live item has no proof and no re-split note. The six steps are correct. Step 1: power-integrality with n=1 (the abelian variety supplies the required proper, smooth, geometrically connected quotient), then the algebraically-closed connectedness criterion, then generic-geometry-core make P_eta integral. Step 2: a is quasi-compact through Noetherian ascent and Noetherian space, and the quasi-compact clause of lemma-nagata-scheme-image-ideal-qc makes y=a(xi) the generic point of Gamma. Step 3: the specialization trait is used only when z_i≠y, with kappa(y) as the field case; smoothness and finite presentation are kept under base change. Step 4: q_i=u(p_i) generically because kappa(y)=kappa(xi), and the closed-equalizer argument on the domain R_i extends this to all of Spec R_i. Step 5: the residue fields are joined over kappa(x) in one algebraically closed field, so the hypotheses of the agreement node hold, including the mixed field/DVR case with s=eta. Step 6: the fibre-product property and injectivity of the closed immersion give at most one point. trait-hom-extension is the DVR case of Faltings Lemma 1 / Faltings–Chai I.2.7, so it is true. It was checked on G_m and on a Tate-curve identity component. It is a legitimate base case: citing the parent would create a cycle. The agreement node is true, since it follows from Faltings plus uniqueness over a DVR, and the report gives an independent prime-to-p torsion / strict-henselization argument. It is not a restatement of the item: it has no graph and no fibre claim. Both new nodes are statement-only and self-contained. No duplicates were found in the snapshot or live. Batch-5: lem-trf-smooth-composition is a generic Mathlib leaf (composition of smooth morphisms) outside both assumptions, so it is accepted. The tool_uses are generic and accepted. No SGA citation. Faltings has no local copy (WANTED), so I checked the statements mathematically instead."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianGenericGraphFiniteFibres",
+  "declaration": "AlgebraicGeometry.semiabelian_generic_graph_finite_fibres",
+  "declarations": [
+   "AlgebraicGeometry.semiabelianGenericGraphMap",
+   "AlgebraicGeometry.semiabelianGenericGraphProjection",
+   "AlgebraicGeometry.semiabelian_generic_graph_finite_fibres"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianGenericGraphFiniteFibres.lean",
+  "statement": "theorem semiabelian_generic_graph_finite_fibres {S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (P Q : Grp (Over S)) [IsCommMonObj P.X] [IsCommMonObj Q.X] [Smooth P.X.hom] [IsSeparated P.X.hom] [LocallyOfFinitePresentation P.X.hom] [QuasiCompact P.X.hom] [Smooth Q.X.hom] [IsSeparated Q.X.hom] [LocallyOfFinitePresentation Q.X.hom] [QuasiCompact Q.X.hom] (hP : HasSemiabelianGeometricFibres P) (hQ : HasSemiabelianGeometricFibres Q) (uη : (Over.pullback (S.fromSpecResidueField (genericPoint S))).mapGrp.obj P ⟶ (Over.pullback (S.fromSpecResidueField (genericPoint S))).mapGrp.obj Q) (x : P.X.left) : Finite ((semiabelianGenericGraphProjection P Q uη).fiber x)",
+  "branch": "sheaf-dag",
+  "by": "Q94",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-283f51d2a",
+  "group": "Q94",
+  "result": "pass",
+  "note": "The node copy differs from live only in lean; the single new module's lean.statement is verbatim the file signature; all imports exist in side-live. Clause check: normal integral locally Noetherian S (hS stalks IsDomain∧IsIntegrallyClosed, literal); P,Q : Grp (Over S) with IsCommMonObj, Smooth, IsSeparated, LFP+QuasiCompact (= finite presentation, not stronger); HasSemiabelianGeometricFibres is the recorded dep; uη is a Grp hom of the generic mapGrp pullbacks (same convention as the parent normal_semiabelian_hom_extension); semiabelianGenericGraphMap is the canonical composite (counit of mapPullbackAdj at P, Over.map uη then counit at Q, prod.lift, prodLeftIsoPullback), not an arbitrary map; Γ = Scheme.Hom.image; π = imageι ≫ pullback.fst; conclusion ∀x, Finite (π.fiber x), no reducedness claim. Edge cases (empty fibre, rank 0, field base, universes) ok. No duplicate graph construction in live lean or Mathlib; the sibling graph-proper node is unstated and should reuse these helpers. Helpers have real data, docstrings carry source+blueprint+6 steps, proof only sorry. Not recompiled (no change). Advisory: IsDomain in hS is redundant."
+ }
+}

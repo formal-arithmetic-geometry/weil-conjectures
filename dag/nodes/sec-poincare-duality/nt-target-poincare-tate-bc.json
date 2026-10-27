@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tateTwistDerived",
- "statement": "Let $\\ell$ be a prime and let $X$ be a scheme on which $\\ell$ is invertible. Let $d,n\\in\\mathbf Z$. Write $B=\\mathrm{Profinite.padicAlgClRingObj}(\\ell)$ for the finite-subextension-valued condensed ring $\\underline{\\overline{\\mathbf Q}}_\\ell$ [sk-def-sfb-qlbar-condensed], and $B_X=p_X^*B$ for its coefficient ring on $X_{\\mathrm{proet}}$. Use exactly the internal-module Tate construction $B_X(d)$ of [def-pur-condensed-tate-twists], and let $\\mathrm{tateTwistDerived}(X,\\ell,d)=B_X(d)[0]$. Then\n$$\\mathrm{tateTwistDerived}(X,\\ell,d)[n]\\in D^b_c(X)[[B]],$$\nwhere bounded constructibility is exactly the upstream predicate boundedConstructible, i.e. [def-sfb-bounded-constructible-complexes] (the definition recorded for the blueprint unit [sk-def-sfb-bounded-constructible]) in the ordinary unbounded derived category of internal $B_X$-modules: cohomology is zero outside a finite interval, and every cohomology module is constructible in the sense of [def-sfb-constructible-module], namely there is one finite stratification of $X$ by immersions $g_a\\colon X_a\\to X$ such that each $g_a^*$ of the module is locally finitely presented over $g_a^*B_X$. No quasi-compactness, Noetherianity, finite-type or finite-field hypothesis on $X$ is assumed. The invertibility hypothesis repairs the unrestricted upstream lemma; it is the hypothesis of the blueprint Tate-twist setting [sk-def-sp-tate-twist].",
+ "statement": "Let $\\ell$ be a prime and let $X$ be a scheme on which $\\ell$ is invertible. Let $d,n\\in\\mathbf Z$. Write $B=\\mathrm{Profinite.padicAlgClRingObj}(\\ell)$ for the finite-subextension-valued condensed ring $\\underline{\\overline{\\mathbf Q}}_\\ell$ [sk-def-sfb-qlbar-condensed], and $B_X=p_X^*B$ for its coefficient ring on $X_{\\mathrm{proet}}$. Use exactly the internal-module Tate construction $B_X(d)$ of [def-pur-condensed-tate-twists], and let $\\mathrm{tateTwistDerived}(X,\\ell,d)=B_X(d)[0]$. Then\n$$\\mathrm{tateTwistDerived}(X,\\ell,d)[n]\\in D^b_c(X)[[B]],$$\nwhere bounded constructibility is exactly the upstream predicate boundedConstructible, i.e. [def-sfb-bounded-constructible-complexes] (the definition recorded for the blueprint unit [sk-def-sfb-bounded-constructible]) in the ordinary unbounded derived category of internal $B_X$-modules: cohomology is zero outside a finite interval, and every cohomology module is constructible in the sense of [def-sfb-constructible-module], namely there is one finite stratification of $X$ by immersions $g_a\\colon X_a\\to X$ such that each $g_a^*$ of the module is locally finitely presented over $g_a^*B_X$. No quasi-compactness, Noetherianity, finite-type or finite-field hypothesis on $X$ is assumed. The invertibility hypothesis repairs the unrestricted upstream lemma; it is the hypothesis of the blueprint Tate-twist setting.",
  "source": {
   "document": "literature/upstream-master-20261017/WeilConjectures/PoincareDuality/Poincare.lean",
   "place": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tateTwistDerived",
@@ -23,7 +23,6 @@
   "def-pur-condensed-tate-twists",
   "sk-def-sfb-qlbar-condensed",
   "sk-def-sfb-bounded-constructible",
-  "sk-def-sp-tate-twist",
   "def-sfb-bounded-constructible-complexes",
   "def-sfb-constructible-module"
  ],
@@ -479,7 +478,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-32942cd53 (reviewer sub-agent of L); spot-checked: Read the master type of Poincare.lean:78-81 (arbitrary X, because the k-section variables do not occur in the type), the exhibited Tate construction, the main-20261015 Tate-twist section and unit record, the item, the new helper and every cited statement. Coefficient category checked: Mod over condensedRingObj(padicAlgClRingObj ℓ) X, with the same tensor-power and ihom definitions as def-pur-condensed-tate-twists. The target has no base-change morphism; the only coefficient change is the scalar extension R_X→B_X. Statement dispute (E7) checked independently and holds: on X=Spec F̄_ℓ[⊕Q_ℓ/Z_ℓ], a one-point w-contractible scheme, L_X(X) contains Q̄_ℓ⊗(⊕Z_ℓ). That contradicts local finite presentation on any stratum through the point, so 'ℓ invertible on X' is the blueprint domain and the target is not weakened further. Steps checked: (1) sk-prop at E=Q_ℓ plus the helper; (2) R⊗μ_{ℓ^r}=(R/ℓ^r)⊗μ≅μ, with transitions agreeing as z^{kℓ} and F_0=0; (3) clause 2 of lem-pur-twist-sheaf-locally-free with ℓ invertible, restriction to slices, B⊗_R R≅B; (4) signed powers and Hom restricted to slices; (5) one stratum id_X, u_j^* equal to slice restriction via the left adjoint, coker(0→B); (6) single complex in degree -n. Edge cases: d<0,0,>0, any n, empty X. No cycle. Both declared tool uses accepted; the unit's own local-freeness node det-def-sp-tate-twist-locally-free is also off-route. Helper: true by the w-contractible basis (C(S,Z_ℓ)→C(S,Z/ℓ^r) is surjective with kernel ℓ^r); not a clause of the item. from.node=null matches the other launcher-created nt-target children. Nearest existing node, lem-sfb-integral-lisse-reduction-equivalence, states this quotient for the different sheaf C(|V|,A), so it is not a duplicate. FIX (B2/B3): the helper's 'canonical reduction map' was not determined by any cited node. It is now defined as the isomorphism R_X≅lim A_{n,X} of sk-prop-sfb-qlbar-colimit-x followed by the projection, the compatibility is written out, and that node is added to stmt_deps (acyclic). The corrected file is in fixes/dag/nodes/sec-poincare-duality/. Regenerate any Step 1 quotation of the helper.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "existing": true,
   "module": "WeilConjectures.PoincareDuality.Poincare",
@@ -500,13 +510,15 @@
   "note": "Wrote review.md. All hypotheses, coefficients, Tate constructions, constructibility predicates, universes, edge cases, dependency records and docstrings match. Signature is verbatim. No route-pivot or pilot-gate faults found. Immutable module independently compiled cleanly through scompile.py; no branch or clone changes."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261018T035847-L-1403567",
+  "landing": "20261024T190117-L-3941029",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
  }
 }

@@ -1,0 +1,64 @@
+# Q26: lem-sfb-space-etale-finite-fp-envelope
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-space-etale-finite-fp-envelope.json`: statement, split into seven proof steps using existing nodes only; no Mathlib match.
+- `citations.json`: one verbatim statement quotation for each of the 31 step/node citations.
+- `searches.jsonl`: actual msearch records, retained unchanged; `write_split.py` is a sandbox-only preparation script.
+- `report.md`: this report.
+
+There are **0 new nodes and 0 Mathlib leaves**. The mathematical statement, statement dependencies, source and inherited metadata are unchanged. `proof_deps` is exactly the union of step citations. No Lean file was written, no compiler or Lake command was run, and no repository or launcher file was edited.
+
+## Attachments
+
+None. Searches of `lean/WeilConjectures/` for the exact blueprint tag, finite envelopes, algebraic spaces and Zariski Main found no project declaration stating this result. Scheme separated envelopes and scheme Zariski Main results do not state it for arbitrary algebraic-space source and target. The current Mathlib scheme theorem `Scheme.Hom.exists_isIso_morphismRestrict_toNormalization` was inspected in `Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:206`; it is not an exact algebraic-space attachment or leaf. The semantic results are likewise scheme morphisms or ring-level Zariski Main properties. All five new searches (LeanFinder twice, Loogle, grep and LeanSearch) actually ran and their hits were read; none was unavailable. The original item's earlier searches remain intact.
+
+## WANTED
+
+None. All sources used are available under `literature/stacks-project/`.
+
+## What needed attention
+
+The item had a statement and searches but no proof. It is the etale instance of Stacks 0874 and is correct. Its etaleness is chartwise; I did not silently assume a morphism so defined is representable. The separated schemehood theorem is applied after every scheme base change in step 1.
+
+The existing `lem-sfb-space-quasifinite-integral-compactification` requires a **scheme** source, so I did not apply it to the algebraic space W. Instead the existing relative-normalization construction and its quasi-finite-locus theorem apply after representability has been established.
+
+The existing open-descent node states descent of a **finite covering family**, rather than just a single open. Step 3 supplies the actual covering family `(W,N)`. The eventual-closed-immersion node only supplies a closed immersion, not an eventual isomorphism. I use exactly that conclusion, and do not use the closed-transition stabilization theorem on a system with merely affine transitions.
+
+For the finite-presentation refinement, I use Stacks 09YA already at the integral-normalization stage, then extend the finite-type ideal of W in a finite stage by 0853. This refines the 082K finite-stage and immersion-reversal argument and gives the 0874 conclusion without a second approximation tower. This is a node-level adaptation of the same route; `proof_origin.by` is `agent`, explicitly recording the adaptation rather than claiming that these seven steps are verbatim the proof of 0874. No new lemma is hidden in the adaptation: all existence, permanence and ideal/closed-subspace inputs are statements of existing cited nodes.
+
+The nearest-blueprint-ancestor script prints None for the inherited chain. I preserved `blueprint.from.node`, its already specific place, and its via list. I read the **latest** blueprint's `sk-thm-sf-ctf-stability.proof.md` and `sk-thm-sf-ctf-stability-direct-images.proof.md`: the input continues to support proof (3), through the inherited compactification/direct-image chain ending at 087B. Whole-blueprint searches for 0874, 082K, 082J, 07VR, finite-presentation envelopes and finite finitely presented objects supplied no blueprint statement of this algebraic-space envelope. The scheme Zariski Main nodes are not duplicates.
+
+## What could not be finished
+
+Nothing mathematical remains in this item. Independent maintainer review and the later formalization of its existing dependencies remain separate project work.
+
+## Not duplicates
+
+No new nodes. I searched the whole DAG by source tags and notions and reused the existing normalization, integral approximation, limit, ideal and finite-presentation nodes. In particular, I did not create a restatement of the item's finite-factorization clause, a duplicate finite-algebra approximation node, or an elementary finite-quotient lemma.
+
+## Review by Q26
+
+I read Stacks `spaces-more-morphisms.tex`, Tags 082K (`lemma-quasi-finite-separated-pass-through-finite`) and 0874 (`lemma-quasi-finite-separated-pass-through-finite-addendum`), including both proofs, and the 087B proof where the envelope is used. I also read `spaces-morphisms.tex`, Tags 0823 (`lemma-characterize-normalization`), 0ABR (`lemma-finite-type-separated`), 0ABS (`lemma-quasi-finite-separated-quasi-affine`), 05WT (`lemma-finite-presentation-permanence`), 084Q (`lemma-closed-immersion-finite-presentation`), and the immersion-reversal lemma. In `spaces-limits.tex` I read 09YA, 07VR, 0827, 0828 and 0853. The proof deliberately uses the existing 09YA and 0853 statements rather than introducing new copies of 07VR or Zariski Main. There are no new-node sources to review.
+
+For **step 1**, the chartwise stack calculus explicitly says etaleness is stable under arbitrary base change and implies local finite presentation, which implies local finite type. Spaces are the discrete-stack special case, with all morphisms representable by algebraic spaces. The separated/finitely-presented composition node explicitly includes preservation of separatedness by arbitrary base change. The separated-etale-space-scheme node has a scheme target and chartwise etaleness as hypotheses; each W times_T B has exactly those hypotheses, so its conclusion gives a scheme for every scheme test. This establishes precisely the representability required by the normalization-locus node.
+
+For **step 2**, the etale definition explicitly includes unramifiedness; the unramified-quasi-finite-at-points node states local quasi-finiteness in the same chartwise, isolated-fibre-point sense used by the normalization-locus node. No finite-geometric-fibre convention is substituted. The relative-integral-factorization statement gives the universal property, and the locus statement explicitly accepts that universal property as its normalization hypothesis. Its finite-type hypothesis follows from the original quasi-compactness and step 1's local finite type, not from a Noetherian assumption. Its quasi-finite locus is all W, so the stated isomorphism really identifies all W with an open in N. Integral permanence states that N is qcqs and n separated; qc cancellation then applies because n a=f is the original quasi-compact map. None of these inputs is taken merely from the proof of a cited node.
+
+For **step 3**, the integral approximation statement gives a **small nonempty directed set**, finite finitely presented stages, affine transitions, qcqs stages and a limit in algebraic spaces over T. The affine-limits statement gives an algebraic-space fppf sheaf limit with the same universal property, so the identification is the unique one commuting with the projections. The quasi-compactness node permits testing the quasi-compact a against the qc algebraic space N, giving W qc. The open-cover descent statement is applied to the genuine finite cover `(W,N)`; it consequently supplies the open V_i, not an unspecified object constructed only in a source proof.
+
+For **step 4**, the same cover-descent statement explicitly supplies qcqs inverse-image opens and affine transitions along the directed tail. The affine-limits statement explicitly gives its base-change identity, hence the limit is W. The eventual-closed-immersion statement assumes qc stages, affine transitions, a closed immersion into the limit, and local finite type over the base. They hold for the identity of W, these stages and base T. I do not claim eventual isomorphism; there is no missing closed-transition hypothesis.
+
+For **step 5**, qcqs permanence states that a map from a qc space to a qs one is qc; thus the quasi-compact open immersion V into C meets the exact hypothesis of the qc-open-finite-presentation node. Finite-presentation composition supplies V to T finitely presented. The local-finite-presentation permanence lemma requires W to T locally finitely presented and V to T locally of finite type, both already established, and it yields precisely the local finite presentation of b. The ideal/closed-subspace correspondence supplies its quasi-coherent ideal. The closed-structure finite-presentation statement explicitly includes equivalence of local finite presentation and finite type of that ideal, without assuming Noetherianity.
+
+For **step 6**, 0853's extension node requires qcqs C, a qc open V, a quasi-coherent ambient module, and a finite-type quasi-coherent submodule on V. C and V have these finiteness properties from steps 3-4; O_C is quasi-coherent by its one-generator, zero-relation local presentation; step 5 supplies the submodule. A submodule of O_C is an ideal by its scalar action; no extra coherence theorem is needed for that observation. The ideal/closed-subspace statement explicitly constructs V(J) and explicitly identifies its ideal under etale base change with restriction. Since V into C is an open immersion, that rule applies and the equality J|V=I identifies the **specified** closed subspace W, rather than just its point set or an abstractly isomorphic space. The resulting W into Y is the actual pullback open immersion and the map to C remains the specified projection.
+
+For **step 7**, the closed-structure criterion yields e finitely presented; finite-presentation composition yields pi finitely presented. Finiteness is verified on each affine test by an actual quotient A/J of the given finite R-algebra A. The affine quotient description is explicitly in the cited closed-immersion definition; finiteness of A/J follows by projecting finite module generators, a two-line argument, not an uncited theorem on compactification. The finite-morphism definition makes pi affine; affine locality explicitly states affines are separated. Qc cancellation is then applicable to pi j=f and gives the requested **relative** quasi-compactness of j, stronger than just knowing W qc. Equality of composites follows from the fixed T-maps throughout, not from a pointwise image comparison.
+
+I checked delivery-errors B through E individually. B: no new nodes or hidden proof sketches in statements, all objects introduced, existing statement unchanged, TeX single-escaped, source tags/labels explicit, searches real, and no inappropriate attachment. C: all 31 citations were checked against the entire statements and copied into citations.json; no source-proof-only conclusion, definition-as-theorem citation or cover/smallness mismatch remains. The two off-unit generic tools are declared in split_report.tool_uses; none replaces a unit step. D: all seven steps carry the construction; no content is moved to a new node and no lemma is cited after being derived as its own missing input. E: I checked the source and target of each map and all finiteness/separation hypotheses, especially the **relative** diagonal and the non-closed transition system.
+
+Small cases: W empty and T empty cause no failure (the cover (W,N) includes N and directed sets remain nonempty); W=T may be taken through the identity normalization and requires no nonempty boundary; over a non-Noetherian affine base a quotient of a finite module is still finite, but its ideal need not be finitely generated, so step 5's local finite presentation and 0853 are essential; nilpotent/nonreduced bases are allowed because we use the exact ideal/closed-subspace correspondence rather than set-theoretic closure. For example, quotienting a finite algebra by an arbitrary infinitely generated ideal is not silently asserted finitely presented. No reducedness, scheme target T, flatness of the envelope, or surjectivity of f was used. Every non-elementary step is below 2000 characters; its internal constructions use explicitly cited existence statements, and the remaining ring/submodule or pullback arguments are written out.
+
+## Validation
+
+The required dry run exited successfully: `OK (not pushed) deliver/Q26/lem-sfb-space-etale-finite-fp-envelope at 5e33f2788bd: preflight passed`. This ran the server preflight, including check_dag and review_split. I then made the existing step-4 open-descent citation explicit in its text (its uses and citation quote were already present); a final dry run and direct push are performed from these files. No local DAG checker or compiler was run.

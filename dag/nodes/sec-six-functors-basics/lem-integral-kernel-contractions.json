@@ -1,0 +1,133 @@
+{
+ "id": "lem-integral-kernel-contractions",
+ "kind": "statement",
+ "title": "Integral diagonal kernel contraction formulas before integration",
+ "statement": "For ell, E and a separated finite-type base Y in the standing characteristic setting, let hq,hr preserve the prescribed restricted functors. Let a be the canonically normalized unit-counit pair for a coefficient family with completed Reference. Then pushforward of the unit followed by the counit is pushforward of right-unitor conjugation of identity tensor the first supported diagonal integral. The other composite is right-unitor conjugation of identity tensor the second supported diagonal integral. The right sides retain support_i, R_i(delta), trace_i and singleUnitIso explicitly, before their integration equalities are applied.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), diagonal unit, trace counit and the two triangle identities"
+ },
+ "stmt_deps": [
+  "lem-integral-normalized-family",
+  "def-integral-kernel-unit-counit"
+ ],
+ "proof": [
+  {
+   "text": "Transport the canonical completed trace base-change equations through the referenced coefficient family.",
+   "uses": [
+    "det-prop-diagonal-tower-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the first trace/base-change rearrangement and projection naturality. Section normalization turns the supported insertion into identity tensor the first integral, followed by pushforward.",
+   "uses": [
+    "lem-sfb-trace-base-change-first",
+    "lem-sfb-projection-section-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the second rearrangement, the Cartesian Tate comparison and the second section normalization. Two shifts of degree two have identity interchange. The result is identity tensor the second integral. No integration equation is used.",
+   "uses": [
+    "lem-sfb-trace-base-change-second",
+    "lem-sfb-projection-section-normalization",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-diagonal-tower-coefficients",
+  "lem-sfb-trace-base-change-first",
+  "lem-sfb-projection-section-normalization",
+  "lem-sfb-trace-base-change-second",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), diagonal unit, trace counit and the two triangle identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A diagonal class and normalized projective line traces extend from completed integral coefficients to a family of coefficient rings",
+   "results": "8 hits: Algebra.normalizedTrace_algebraMap_of_lifts, Algebra.normalizedTrace, Algebra.normalizedTrace_surjective, Algebra.normalizedTrace_map, Algebra.normalizedTrace_algebraMap, Algebra.normalizedTrace_algebraMap_apply, Algebra.normalizedTrace_algebraMap_apply_eq_self, Algebra.normalizedTrace_trans",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "1 hits: CategoryTheory.NatTrans.ext",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(integral|trace)|unitCounit.*exists",
+   "results": "7 hits: Mathlib/LinearAlgebra/Matrix/ToLin.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple.lean, Mathlib/Algebra/DirectSum/LinearMap.lean",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pair of natural transformations satisfying the two triangle identities defines an adjunction",
+   "results": "8 hits, including CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.mk, CategoryTheory.Adjunction.CoreUnitCounit.mk.",
+   "date": "2026-10-25",
+   "verdict": "The general unit-counit constructor closes the assembly; it does not construct the geometric Tate comparisons, coefficient family, natural transformations, or contraction formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralProjectiveLineAdjunction",
+  "date": "2026-10-25",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "Paragraph (1), Integral diagonal kernel contraction formulas before integration",
+   "via": [
+    "lem-sfb-integral-projective-line-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralKernelContractions",
+  "file": "lean/Sheaf/SixFunctors/IntegralKernelContractions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralKernel_contractions",
+  "statement": "theorem integralKernel_contractions\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [∀ x : ProjectiveLine Y, Invertible (ℓ : (ProjectiveLine Y).residueField x)]\n    [∀ x : diagonalSurface Y, Invertible (ℓ : (diagonalSurface Y).residueField x)]\n    (hq : ∀ K, IntegralCompactSupport.localizing\n        (Profinite.padicIntegersRingObj ℓ E.val) Y K →\n      IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val)\n        (ProjectiveSpace (ULift.{u} (Fin 2)) Y)\n        ((pullTwistShift ℓ E (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y) 1).obj K))\n    (hr : ∀ K, IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val)\n        (ProjectiveSpace (ULift.{u} (Fin 2)) Y) K →\n      IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) Y\n        ((IntegralCompactSupport.push (Profinite.padicIntegersRingObj ℓ E.val)\n          (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y)).obj K))\n    (family : Family ℓ Y) (_href : IntegralFamilyReference ℓ Y family)\n    (a : IntegralUnitCounitType ℓ E Y hq hr)\n    (_hnorm : IntegralUnitCounitNormalized ℓ E Y hq hr family a) :\n    (∀ M,\n      (((restrictedPush ℓ E (ProjectiveLine Y ↘ Y) hr).map (a.1.app M)) ≫\n        a.2.app ((restrictedPush ℓ E (ProjectiveLine Y ↘ Y) hr).obj M)).hom =\n      (moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.val)\n        (ProjectiveLine Y ↘ Y)).map\n        ((ρ_ M.obj).inv ≫ (M.obj ◁\n          ((RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)\n            (ProjectiveLine Y)).inv ≫ (family.integral E).support₁.hom ≫\n            (family.integral E).R₁.R.map (family.integral E).delta ≫\n            (family.integral E).trace₁ ≫\n            (RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)\n              (ProjectiveLine Y)).hom)) ≫ (ρ_ M.obj).hom)) ∧\n    (∀ K,\n      (a.1.app ((restrictedPull ℓ E (ProjectiveLine Y ↘ Y) 1 hq).obj K) ≫\n        (restrictedPull ℓ E (ProjectiveLine Y ↘ Y) 1 hq).map (a.2.app K)).hom =\n      (ρ_ (((restrictedPull ℓ E (ProjectiveLine Y ↘ Y) 1 hq).obj K).obj)).inv ≫\n        ((((restrictedPull ℓ E (ProjectiveLine Y ↘ Y) 1 hq).obj K).obj) ◁\n          ((RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)\n            (ProjectiveLine Y)).inv ≫ (family.integral E).support₂.hom ≫\n            (family.integral E).R₂.R.map (family.integral E).delta ≫\n            (family.integral E).trace₂ ≫\n            (RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)\n              (ProjectiveLine Y)).hom)) ≫\n        (ρ_ (((restrictedPull ℓ E (ProjectiveLine Y ↘ Y) 1 hq).obj K).obj)).hom)",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T202418-L-2714738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T202418-L-2714738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

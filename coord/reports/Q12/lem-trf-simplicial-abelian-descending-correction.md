@@ -1,0 +1,45 @@
+## Worker report
+
+The module `Sheaf.AlgebraicTopology.SimplicialAbelianDescendingCorrection` supplies the actual finite descending construction and states `CategoryTheory.SimplicialObject.abelianDescendingCorrection_spec`. This theorem is the only postponed proof. The two definitions are `abelianDescendingCorrection` and `abelianDescendingDefect`; both have explicit data, with no choice or postponed existence theorem. They are helpers belonging to the correction construction already introduced by this node, rather than independent notions requiring new nodes. The item node changes only in `lean`.
+
+Source read: `literature/stacks-project/simplicial.tex`, Tag 08NZ, `lemma-simplicial-group-kan`, especially lines 5788–5803. Its multiplicative descending construction specializes to the node's additive construction: `x^r` there corresponds to `w_(n-r)` here. In an abelian group the multiplicative defect `(d x)⁻¹ a` becomes `a - d x`. No source correction or disputed statement is needed.
+
+Hypothesis and clause correspondence:
+
+- The functor `G : Δᵒᵖ → Ab` is `G : SimplicialObject AddCommGrpCat.{u}`. Its terms, faces and degeneracies are Mathlib's `G _⦋j⦌`, `G.δ` and `G.σ`. The explicit universe `u` is arbitrary.
+- The hypothesis `n ≥ 2` is encoded by writing the degree as `m + 2`, with arbitrary natural `m`. Thus every allowed dimension occurs, with no dimension-zero or dimension-one case added.
+- The range `0 ≤ k ≤ n` is `k : Fin (m + 3)`.
+- The prescribed faces `a_i ∈ G_(n-1)` for `i ≠ k` are the dependent family `a : (i : Fin (m + 3)) → i ≠ k → G _⦋m + 1⦌`. No value for the omitted face is supplied.
+- Compatibility for `i < j`, both distinct from `k`, is `ha`. An ordered pair is represented by `i.castSucc < j.succ`, equivalently `i ≤ j`, for `i j : Fin (m + 2)`. The equation `G.δ i (a j.succ hj) = G.δ j (a i.castSucc hi)` is exactly `d_i a_(j+1) = d_j a_i`, covering every ordered pair once.
+- The initial simplex is `v : G _⦋m + 2⦌`; `hv` prescribes exactly its faces `i < k`. Its proof argument `hi` only makes the corresponding entry of the partial family usable; proof irrelevance ensures there is no extra datum or assumption.
+- The definition of `w_n = v` is `abelianDescendingCorrection G k a v (m + 2)`. The theorem's first conjunct explicitly states that initial equality.
+- The definition evaluates `Nat.rec` at `m + 2 - r`. At recursion time `t < m + 2 - k.val` it adds `G.σ ⟨m + 1 - t, …⟩ (a ⟨m + 2 - t, …⟩ … - G.δ ⟨m + 2 - t, …⟩ w)`. Thus the corrected face is `R = n - t`, and the update is precisely `w_(R-1) = w_R + s_(R-1) (a_R - d_R w_R)`. At time zero the recursor is `v`. The guard stops after `R = k + 1`; values outside `k ≤ r ≤ n` are just a total extension of the definition and are not asserted to be part of the node's sequence.
+- The defect `b_r = a_r - d_r w_r` is `abelianDescendingDefect G k a v r hr` for `hr : k < r`. It uses `ne_of_gt hr` to access precisely the prescribed face.
+- The invariant for every `k ≤ r ≤ n` is the theorem's second conjunct, with `r : Fin (m + 3)` and `k ≤ r`. Its condition `i < k ∨ r < i` is precisely the union of the lower-face and already-corrected upper-face ranges. Its equality is `G.δ i (abelianDescendingCorrection G k a v r.val) = a i hi`.
+- At every `r > k`, the first inner conjunct states both `d_i b_r = 0` and `d_i (s_(r-1) b_r) = 0` for `i < k`. Here `i : Fin (m + 2)` indexes a face of `G_(n-1)`, and `i.castSucc` is the same face index on `G_n`.
+- The second inner conjunct states both `d_(i-1) b_r = 0` and `d_i (s_(r-1) b_r) = 0` for `r < i ≤ n`. The index `⟨i.val - 1, …⟩` is exactly `i - 1` in the adjacent degree.
+- The last equality is `d_r (s_(r-1) b_r) = b_r`. Throughout, the degeneracy index is `⟨r.val - 1, …⟩`; `hr` makes it a valid natural index, without any negative-index convention.
+- When `k = n`, the recursion guard is always false and the theorem's interval `k ≤ r ≤ n` consists only of `r = n`; there are no defect assertions. When `k = 0`, every condition `i.val < k.val` is empty. These endpoint clauses are therefore encoded by the actual construction and quantified index ranges, not by extra assumptions.
+
+Dependency declarations read and used:
+
+- Statement dependency `def-weil-pbc-simplicial-object`: `Mathlib.AlgebraicTopology.SimplicialObject.Basic`, `CategoryTheory.SimplicialObject`, `CategoryTheory.SimplicialObject.δ` and `.σ`; full definitions and docstrings read at lines 48–99. Imported publicly, with `Mathlib.Algebra.Category.Grp.Basic` for the coefficient category and its additive maps.
+- Proof dependency `lem-weil-pbc-simplex-face-face-identity`: its Mathlib match is `SimplexCategory.δ_comp_δ`, read at `Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean:240`. Its simplicial image is `CategoryTheory.SimplicialObject.δ_comp_δ` (also read). The required module is already imported through `SimplicialObject.Basic`.
+- Proof dependency `lem-trf-simplicial-mixed-face-degeneracy-identities`: the exact Mathlib matches `.δ_comp_σ_of_le`, `.δ_comp_σ_self`, `.δ_comp_σ_succ` and `.δ_comp_σ_of_gt'` in `Mathlib.AlgebraicTopology.SimplicialObject.Basic` were read in full at lines 149–190. They cover the two vanishing ranges and the adjacent identity. No dependency interface repair is needed.
+
+Edge cases checked before writing and again against the compiled signature: smallest dimension `n = 2`; `k = n`; `k = 0`; the final upper correction `r = 1` at `k = 0`, using `s_0`; `r = n` with empty upper range; and the zero simplicial abelian group. At `i < k < r`, a nonempty lower range forces `r ≥ 2`, so the proof never calls `s_(-1)`. At `r < i ≤ n`, the index `i - 1` is strictly below `n`. The compatibility equation uses only the two supplied faces. No finiteness or torsion restriction is imposed on the abelian groups.
+
+Searches for an existing statement (2026-10-24):
+
+- `msearch.py ... leanfinder "In a simplicial abelian group descending degeneracy corrections prescribe upper faces while preserving lower faces"`: eight hits, including DoldKan `hσ`, `HigherFacesVanish`, `HigherFacesVanish.induction` and `HigherFacesVanish.comp_σ`. Read `DoldKan/Faces.lean:43–50,160–166`: these statements kill zero-valued high faces of a morphism; they do not prescribe arbitrary compatible faces while preserving prescribed lower faces or state this recursion's defect identities.
+- `msearch.py ... loogle '"SimplicialObject", "δ_comp_σ"'`: twelve hits for the standard adjacent mixed identities (simplicial and cosimplicial). These provide proof inputs, not the descending correction theorem.
+- `msearch.py ... leansearch "For compatible horn faces in a simplicial abelian group degeneracy corrections prescribe upper faces in decreasing order"`: eight hits for mixed face/degeneracy identities, including `SSet.δ_comp_σ_succ_apply`, `SimplexCategory.δ_comp_σ_of_le`, and `CategoryTheory.SimplicialObject.δ_comp_σ_of_le_assoc`. None states the correction construction or invariant.
+- `msearch.py ... grep 'descending|horn|correction|fill.*face|face.*fill' AlgebraicTopology/SimplicialObject`: zero hits.
+- `rg` over `lean/WeilConjectures`, `lean/Sheaf` and `dag/lean_names_upstream.json` for `descendingCorrection|descending_correction|descending.*(face|Face)|simplicial.*[Cc]orrection`: no existing descending correction declaration. The related landed `SimplicialAbelianPrefixCorrection.lean` is the ascending construction and was read; `SimplicialAbelianHornFilling.lean` states existence of a final filler, not the intermediate invariant and defect equations, and was read too.
+- Searched the exact item id in `lean/WeilConjectures`: no match. Searched `descending|Descending|horn|Horn` in both projects' AlgebraicTopology directories: only the related horn-filling module and unrelated normalization/excision material, with no matching theorem.
+
+Validation: `scompile.py Q12 lem-trf-simplicial-abelian-descending-correction <module>` passed both sandbox and named-library checks, with no compiler errors or warnings. An initial index-proof elaboration failure was repaired by giving the equality of natural index values an explicit type; no statement changed. All variables and the single universe are explicitly bound. Every file line is at most 100 characters. There is one named theorem with `sorry`, carrying the six-step natural-language proof.
+
+## Second reading by Q12
+
+This is the dispatcher's single-worker delivery; no second agent was started. I reread the node and the complete compiled module after construction; the maintainer supplies the independent review. The rereading checked the dimension shift `n = m + 2`, the omitted-face dependent family, all compatibility pairs, the direction and stopping point of `Nat.rec`, and each of the five defect/degeneracy equalities. In particular `i.castSucc` preserves the lower index, `i.val - 1` supplies the upper defect's face, and the degeneracy index is `r.val - 1`, not `r.val`. The top initial equality and both endpoint cases are present. No mismatch was found and no node statement or dependency was changed.

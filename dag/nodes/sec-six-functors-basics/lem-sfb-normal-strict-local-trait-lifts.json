@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-normal-strict-local-trait-lifts",
+ "kind": "statement",
+ "title": "Dominant compatible strict henselizations of a normal local domain and a trait",
+ "statement": "Let $A$ be a commutative normal local domain [def-weil-pbc-normal-ring], with residue field $k$, and let $R$ be a field or discrete valuation ring [def-weil-field, def-sc-discrete-valuation-ring], with residue field $l$. Let $A\\to R$ be an injective local ring homomorphism, where local means that the inverse image of the maximal ideal of $R$ is the maximal ideal of $A$. Fix an algebraically closed field $\\Omega$ and compatible embeddings $k\\hookrightarrow l\\hookrightarrow\\Omega$ [def-weil-algebraic-closure, def-pc-field-extension]. Let $k^s$ and $l^s$ be the subfields of $\\Omega$ consisting respectively of elements separable algebraic over $k$ and over $l$. Form the strict henselizations $H=A^{\\mathrm{sh}}$ and $B=R^{\\mathrm{sh}}$ relative to these residue closures [def-sc-ring-strict-henselization]. Then $H$ and $B$ are strictly henselian local normal domains [def-weil-pbc-henselian-terminology]. Their residue fields identify with $k^s$ and $l^s$. There is a unique local homomorphism $h:H\\to B$ extending $A\\to R\\to B$ and inducing the inclusion $k^s\\subseteq l^s$ on residues. The maps $A\\to H$, $R\\to B$ and $h$ are injective. In particular the induced map $\\operatorname{Spec}B\\to\\operatorname{Spec}H$ sends the generic point to the generic point and the closed point to the closed point [def-weil-affine-spectrum]. The composite closed geometric points evaluated in $\\Omega$ commute with this map. Moreover $\\operatorname{Frac}H$ is algebraic over $\\operatorname{Frac}A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GU, lemma-strictly-henselian-functorial; more-algebra.tex Tag 06DI, lemma-henselization-normal and Tag 07QM, lemma-dumb-properties-henselization. Agent-extracted dominance consequence: generic fibres of the etale-algebra colimit are algebraic; a nonzero algebraic element cannot be killed by a map injective on A."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-field",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-relative-separable-closure], the two subfields $k^s,l^s$ in the statement are separable closures, since $\\Omega$ is algebraically closed. They satisfy $k^s\\subseteq l^s$: if $x\\in k^s$, choose a separable polynomial $f\\in k[X]$ vanishing at $x$. A Bezout identity $uf+vf'=1$ remains an identity over $l$, so $f$ remains separable over $l$. Thus $x$ is separable algebraic over $l$, with the specified compatible embeddings.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GU (lemma-strictly-henselian-functorial), compatible residue-closure diagram; elementary Bezout verification of the inclusion."
+   }
+  },
+  {
+   "text": "Use the presentations in [def-sc-ring-strict-henselization]. The pointed etale pairs $(S,\\chi:S\\to k^s)$ correspond to triples $(S,\\mathfrak q,\\phi)$ by $\\mathfrak q=\\ker\\chi$ and $\\phi:\\operatorname{Frac}(S/\\mathfrak q)\\to k^s$, $a/b\\mapsto\\chi(a)/\\chi(b)$. Conversely compose $S\\to\\kappa(\\mathfrak q)$ with $\\phi$. These operations are inverse on objects and on morphisms. Apply [lem-weil-pbc-strict-henselization-triples] at the maximal ideals of $A$ and $R$. It gives filtered etale-algebra presentations of $H,B$, strict henselian local structures, surjections $\\psi_H:H\\to k^s$, $\\psi_B:B\\to l^s$ whose kernels are their maximal ideals, and local structure maps $A\\to H$, $R\\to B$. The residue identifications are induced by these surjections. The universal colimit identifications preserve the structure maps and the pointing maps, so these conclusions apply to the chosen strict henselizations, not just to a different model.",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GW (lemma-strict-henselization-different) and 04GP (lemma-strict-henselization), clauses (2)-(5)."
+   }
+  },
+  {
+   "text": "The ring $R$ is a normal domain. This is immediate for a field. For a DVR [def-sc-discrete-valuation-ring], let $K_R$ be its fraction field and $v$ its normalized valuation, and let $x\\in K_R^\\times$. By [lem-sc-dvr-valuation-arithmetic], $v(1)=v(1\\cdot1)=2v(1)$, so $v(1)=0$, and $v(x)+v(x^{-1})=v(1)=0$. Hence $v(x)\\ge0$ or $v(x^{-1})\\ge0$, and [lem-sc-dvr-nonnegative-valuation-in-ring] gives $x\\in R$ or $x^{-1}\\in R$. Thus $R$ is a valuation ring, and [lem-weil-pbc-valuation-ring-normal] applies. Now [lem-weil-pbc-localization-normal-domain] makes every prime localization of each of the normal domains $A,R$ a normal domain. Consequently both are normal rings in the localization sense required for the next step.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-valuation-arithmetic",
+    "lem-sc-dvr-nonnegative-valuation-in-ring",
+    "lem-weil-pbc-valuation-ring-normal",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IC (lemma-valuation-ring-normal); Tag 00GY (lemma-localize-normal-domain); DVR as valuation ring, Tag 00PD (lemma-characterize-dvr) (1)<=>(2), via the valuation leaves."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-colimit-normal-local-domain] to the two filtered presentations of Step 2. The base rings $A,R$ are domains and normal rings by Step 3, and the colimits are local by Step 2, exactly the hypotheses of that lemma. It follows that $H,B$ are normal domains and that $A\\to H$ and $R\\to B$ are injective. In particular $A\\to R\\to B$ is injective by the given injectivity of $A\\to R$. Together with Step 2 this proves the asserted strict henselian local normal-domain properties.",
+   "uses": [
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06DI (lemma-henselization-normal), normality implication, in its etale-colimit form."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-map-into-henselian-colimit] with base ring $A$, target henselian local ring $B$, ind-etale algebra $H$, prime $\\mathfrak m_H$, and residue map $\\tau:k^s\\hookrightarrow l^s$ of Step 1. The preimage of $\\mathfrak m_B$ in $A$ is $\\mathfrak m_A$: the original $A\\to R$ is local and so is $R\\to B$ by Step 2. Also $\\mathfrak m_H$ lies over $\\mathfrak m_A$, and $\\tau$ is a $k$-algebra map for the prescribed embeddings. The lemma gives exactly one $A$-algebra map $h:H\\to B$ with $h^{-1}(\\mathfrak m_B)=\\mathfrak m_H$ and $\\psi_B h=\\tau\\psi_H$. Thus it is local, extends the specified composite $A\\to R\\to B$, and has precisely the required residue map. Its uniqueness is among all local extensions inducing this residue inclusion, since every such extension satisfies the two conditions of the cited lemma.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit), applied as in Tag 04GU (lemma-strictly-henselian-functorial)."
+   }
+  },
+  {
+   "text": "Put $K=\\operatorname{Frac}A$ and $F=\\operatorname{Frac}H$, with $K\\hookrightarrow F$ from Step 4. Given $z=x/y\\in F$ with $x,y\\in H$ and $y\\ne0$, [lem-weil-pbc-filtered-colimit-algebras-elementwise] supplies representatives of $x,y$ at stages of the presentation in Step 2. Filteredness puts both at one stage $S$; write them $a,b\\in S$. Set $\\mathfrak q=\\ker(S\\to H)$. Since $H$ is a domain, $\\mathfrak q$ is prime, and $\\mathfrak q\\cap A=0$ by injectivity of $A\\to H$. By [lem-weil-pbc-etale-algebra-residue-field-separable], $\\kappa(\\mathfrak q)/\\kappa(0)=\\kappa(\\mathfrak q)/K$ is finite separable. The injection $S/\\mathfrak q\\to H\\to F$ extends to $\\kappa(\\mathfrak q)\\to F$ by $a/b\\mapsto a/b$, and is a $K$-field embedding. Since $b\\notin\\mathfrak q$, $z$ is in its image. A polynomial over $K$ annihilating $a/b\\in\\kappa(\\mathfrak q)$ therefore annihilates $z$. Every $z\\in F$ is thus algebraic over $K$. Notice that $S\\to H$ itself was never assumed injective.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW (lemma-strict-henselization-different), etale-colimit presentation, and Tag 00U4 (lemma-etale-at-prime), clause (2); agent deduction for the fraction field."
+   }
+  },
+  {
+   "text": "Suppose $0\\ne x\\in H$ and $h(x)=0$. Step 6 gives a nonzero $f\\in K[X]$ with $f(x)=0$. If $r$ is its least nonzero coefficient index, write $f=X^r g$; cancellation of $x^r\\ne0$ in $F$ gives $g(x)=0$ and $g(0)\\ne0$. Write the finitely many coefficients of $g$ as $a_i/b_i$ with $a_i,b_i\\in A$, $b_i\\ne0$, and put $d=\\prod_i b_i\\ne0$. Then $q_i=a_i\\prod_{j\\ne i}b_j\\in A$ are the coefficients of $dg$, with $q_0\\ne0$. Hence $\\sum_i q_i x^i=0$ in $H$, since it holds in $F$ and $H\\hookrightarrow F$. Applying $h$ yields that the image of $q_0$ in $B$ is zero, contradicting Step 4. Thus the kernel of $h$ is zero, which implies injectivity by applying this to the difference of two elements with equal images.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent polynomial argument following Tag 04GW; the denominator product and nonzero constant coefficient are displayed explicitly."
+   }
+  },
+  {
+   "text": "In the prime-ideal description of [def-weil-affine-spectrum], $\\operatorname{Spec}h$ sends a prime to its preimage. Its value at the generic point $(0)$ of the domain $B$ is $\\ker h=(0)$, the generic point of the domain $H$. Its value at the closed point $\\mathfrak m_B$ is $\\mathfrak m_H$ by Step 5. Finally let $\\iota_k:k^s\\to\\Omega$ and $\\iota_l:l^s\\to\\Omega$ be the inclusions. Step 5 gives the actual equality of ring maps $\\iota_l\\psi_B h=\\iota_l\\tau\\psi_H=\\iota_k\\psi_H$. Contravariant functoriality of Spec makes this exactly commutativity of the composite closed geometric points. All claims now follow.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GU (lemma-strictly-henselian-functorial), residue square; elementary preimage-of-primes and evaluation calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-relative-separable-closure",
+  "def-sc-ring-strict-henselization",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-sc-dvr-nonnegative-valuation-in-ring",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GP, 04GW and 08HR for structure and functoriality; more-algebra.tex Tag 06DI for normality. The generic-fraction and constant-coefficient arguments are written explicitly by NK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective local map from a normal local domain to a discrete valuation ring induces an injective map of compatible strict henselizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"injective_of_isLocalization_isMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Exactness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S]\\n  (Rₚ : (p : Ideal R) → [p.IsMaximal] → Type u_3) [inst_3 : (p : Ideal R) → [inst : p.IsMaximal] → CommSemiring (Rₚ p)]\\n  [inst_4 : (p : Ideal R) → [inst_4 : p.IsMaximal] → Algebra R (Rₚ p)] (Sₚ \", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of a commutative semiring $R$, the induced algebra homomorphism $R_\\\\mathfrak{p} \\\\to S_\\\\mathfrak{p}$ is injective, then the original algebra homomorphism $R \\\\t\"}\n  {\"name\": \"Valuation.HasExtension.algebraMap_injective\", \"module\": \"Mathlib/RingTheory/Valuation/Extension\", \"type\": \"∀ {A : Type u_2} [inst : Ring A] {K : Type u_5} [inst_1 : Field K] [inst_2 : Algebra K A] {ΓA : Type u_7}\\n  {ΓK : Type u_8} [inst_3 : LinearOrderedCommGroupWithZero ΓK] [inst_4 : LinearOrderedCommGroupWithZero ΓA]\\n  {vK : Valuation K ΓK} {vA : Valuation A ΓA} [inst_5 : vK.HasExtension vA] [Nontrivia\", \"doc\": \"Given a valuation $ v_R $ on a commutative ring $ R $ and its extension $ v_A $ to an $ R $-algebra $ A $, the canonical algebra homomorphism from the valuation ring of $ v_R $ to the valuation ring o\"}\n  {\"name\": \"ValuationSubring.integralClosure_algebraMap_injective\", \"module\": \"Mathlib/RingTheory/Valuation/AlgebraInstances\", \"type\": \"∀ {K : Type u_1} [inst : Field K] (v : Valuation K (WithZero (Multiplicative ℤ))) (L : Type u_2) [inst_1 : Field L]\\n  [inst_2 : Algebra K L],\\n  Function.Injective ⇑(algebraMap ↥v.valuationSubring ↥(integralClosure (↥v.valuationSubring) L))\", \"doc\": \"The canonical algebra homomorphism from a valuation subring $ R $ to its integral closure in an extension field $ L $ is injective, meaning that distinct elements of $ R $ remain distinct in the integ\"}\n  {\"name\": \"Valuation.Integers.hom_inj\", \"module\": \"Mathlib/RingTheory/Valuation/Integers\", \"type\": \"∀ {R : Type u} {Γ₀ : Type v} [inst : CommRing R] [inst_1 : LinearOrderedCommGroupWithZero Γ₀] {v : Valuation R Γ₀}\\n  {O : Type w} [inst_2 : CommRing O] [inst_3 : Algebra O R], v.Integers O → Function.Injective ⇑(algebraMap O R)\", \"doc\": \"If a valuation $ v $ on a commutative ring $ R $ is trivial on a subring $ O $ (i.e., $ v(o) = 1 $ for all $ o \\\\in O $), then the canonical ring homomorphism from $ O $ to $ R $ is injective.\"}\n  {\"name\": \"IsPRadical.injective_comp_of_perfect\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} (M : Type u_3) [inst : CommRing K] [inst_1 : CommRing L] [inst_2 : CommRing M]\\n  (i : K →+* L) (p : ℕ) [inst_3 : ExpChar M p] [IsPRadical i p] [PerfectRing M p], Function.Injective fun f => f.comp i\", \"doc\": \"Let $ K $, $ L $, and $ M $ be commutative semirings with exponential characteristic $ p $. Suppose $ i : K \\\\to+* L $ is a $ p $-radical ring homomorphism and $ M $ is a perfect ring. Then the map sen\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"ValuationSubring.algebraMap_injective\", \"module\": \"Mathlib/RingTheory/Valuation/AlgebraInstances\", \"type\": \"∀ {K : Type u_1} [inst : Field K] (v : Valuation K (WithZero (Multiplicative ℤ))) (L : Type u_2) [inst_1 : Field L]\\n  [inst_2 : Algebra K L], Function.Injective ⇑(algebraMap (↥v.valuationSubring) L)\", \"doc\": \"The canonical algebra map from the valuation subring (consisting of elements with valuation ≤ 1) to the field $ L $ is injective, meaning it preserves distinctness of elements under scalar extension.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation inclusions, local injectivity tests and HenselianLocalRing do not construct compatible dominant strict henselizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization preserves dominance between a normal local domain and a discrete valuation ring with compatible geometric closed points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsDiscreteValuationRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \"∀ {R : Type u} {inst : CommRing R} {inst_1 : IsDomain R} [self : IsDiscreteValuationRing R], IsLocalRing R\", \"doc\": \"Every discrete valuation ring is a local ring, meaning it has a unique maximal ideal.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"of_isDiscreteValuationRing\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \": ValuationRing A\", \"doc\": \"Every discrete valuation ring is a valuation ring. That is, if $ A $ is a commutative ring satisfying the discrete valuation ring axioms (a domain with a valuation taking values in the integers), then\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.casesOn\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {motive : HenselianLocalRing R → Sort u} →\\n      (t : HenselianLocalRing R) →\\n        ([toIsLocalRing : IsLocalRing R] →\\n            (is_henselian :\\n                ∀ (f : Polynomial R),\\n                  f.Monic →\\n                    ∀ (a₀ : R),\\n        \", \"doc\": \"Given a Henselian local ring $ R $, this function allows defining a function by cases on the structure of $ R $ by specifying its behavior on the underlying local ring structure and the Henselian prop\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(K : Type*) [Field K] : HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"HenselianLocalRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [toIsLocalRing : IsLocalRing R],\\n  (∀ (f : Polynomial R),\\n      f.Monic →\\n        ∀ (a₀ : R),\\n          Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n            IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) →\\n              ∃ a, f.IsRoot a ∧ a - a₀ \", \"doc\": \"A commutative local ring $ R $ is Henselian if for every monic polynomial $ f \\\\in R[X] $, whenever $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $ (the maximal ideal) and $ f'(a_0) $ is a unit in \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation inclusions, local injectivity tests and HenselianLocalRing do not construct compatible dominant strict henselizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\", \"injective\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation inclusions, local injectivity tests and HenselianLocalRing do not construct compatible dominant strict henselizations."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel.*[Ii]nject|[Ii]nject.*strictHensel|henseli[sz].*normal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation inclusions, local injectivity tests and HenselianLocalRing do not construct compatible dominant strict henselizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial strict henselization of local normal domains is injective for a dominant morphism to a trait",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.specTargetImageFactorization f)))\", \"doc\": \"The application of the target-image factorization of a scheme morphism $ f $ to the entire topological space induces an injective map between the global sections of the structure sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X], X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f]\\n  (x : ↥(AlgebraicGeometry.Scheme.Hom.image f)),\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        ((TopCat.Presheaf.stalkFunctor CommRingCat x).map (AlgebraicGeometry.Scheme.Hom.toImage f).c))\", \"doc\": \"For any quasi-compact morphism $ f $ of schemes, the induced map on stalks at any point $ x $, given by the stalk functor applied to the presheaf component of the morphism from $ X $ to the image subs\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f : X ⟶ Y} [CompactSpace ↥X],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f)) →\\n    AlgebraicGeometry.IsDominant f\", \"doc\": \"Let $X$ be a compact space. If the induced map on global sections is injective, then the morphism $f$ is dominant, i.e., the image of $f$ is dense in its codomain.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"(X : AlgebraicGeometry.Scheme) → ↥X → Prop\", \"doc\": \"For a scheme $X$ and a point $x$ in its underlying topological space, the proposition that the germ at $x$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens) [inst_1 : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.germToFunctionField U))\", \"doc\": \"For an integral scheme $X$ and a non-empty open subset $U$ of $X$, the morphism from the sections of the structure sheaf $\\\\mathcal{O}_X$ over $U$ to the function field of $X$ (defined as the stalk of \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation inclusions, local injectivity tests and HenselianLocalRing do not construct compatible dominant strict henselizations."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henseli[sz].*normal",
+   "results": "0 hits; none",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: inspected hits concern HenselianLocalRing, localization, valuation inclusions or algebraicity from an already integral extension; they do not give compatible strict henselizations with every asserted clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization of a normal domain is a normal domain and its fraction field is algebraic over the original fraction field",
+   "results": "8 hits; HenselianLocalRing.toIsLocalRing, Ring.instIsGaloisFractionRingNormalClosure, instHenselianRingMaximalIdeal, Field.henselian, HenselianLocalRing.mk, Normal.isIntegral, HenselianLocalRing, Ring.instIsDomainNormalClosure",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: inspected hits concern HenselianLocalRing, localization, valuation inclusions or algebraicity from an already integral extension; they do not give compatible strict henselizations with every asserted clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\"",
+   "results": "0 hits; none",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: inspected hits concern HenselianLocalRing, localization, valuation inclusions or algebraicity from an already integral extension; they do not give compatible strict henselizations with every asserted clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective local map from a normal local domain to a field or discrete valuation ring induces an injective local map of compatible strict henselizations",
+   "results": "8 hits; injective_of_isLocalization_isMaximal, Valuation.HasExtension.algebraMap_injective, HenselianLocalRing.toIsLocalRing, HenselianLocalRing, Field.henselian, IsLocalization.Away.mapₐ_injective_of_injective, IsLocalHom.isField, HenselianLocalRing.TFAE",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: inspected hits concern HenselianLocalRing, localization, valuation inclusions or algebraicity from an already integral extension; they do not give compatible strict henselizations with every asserted clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fraction field of a local domain that is a filtered colimit of etale algebras over a domain is an algebraic extension of the base fraction field",
+   "results": "8 hits; isAlgebraic_of_isFractionRing, IsFractionRing.isAlgebraic_iff', instAlgebraAtPrimeFractionRing, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, IsIntegralClosure.isFractionRing_of_algebraic, instIsSeparableFractionRingLocalizationAlgebraMapSubmonoidPrimeCompl, integralClosure.isFractionRing_of_algebraic, instIsSeparableFractionRingAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: inspected hits concern HenselianLocalRing, localization, valuation inclusions or algebraicity from an already integral extension; they do not give compatible strict henselizations with every asserted clause."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-trait-specialization-agreement",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited independent power-prolongation route below sk-thm-sf-ctf-stability: Faltings II section 2 Lemma 1, valuation-ring comparison of graph fibres; torsion/normality compatibility input.",
+   "via": [
+    "lem-sfb-semiabelian-trait-specialization-agreement",
+    "lem-sfb-semiabelian-generic-graph-finite-fibres",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-strict-local-trait-lifts",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse the existing pointed-etale colimit, normal-domain, localization, residue-field and henselian mapping lemmas. Prove fraction-field algebraicity at one etale stage and prove injectivity with a polynomial relation whose nonzero constant coefficient cannot be killed. No new nodes or Lean files.",
+  "blueprint": "Retains the inherited independent power-prolongation route below sk-thm-sf-ctf-stability: normality and compatible strict-local trait lifts used in Step 1 of lem-sfb-semiabelian-trait-specialization-agreement. The nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports; no new ancestor is invented. Current latest sk-thm-sf-ctf-stability direct-image route read.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic ring presentation and local/residue structure of strict henselizations; the unit has no replacement for this commutative algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Generic valuation-ring normality, used only to verify the trait base-ring hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic normality and injectivity for local etale colimits, applied to the two specified strict henselizations."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic universal property for maps from ind-etale algebras to henselian local rings, with all prime and residue hypotheses verified."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-a07e1343b",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a07e1343b (reviewer sub-agent of L); spot-checked: FIX: one citation fault (C4). Step 3 took 'a DVR is a valuation ring' (Stacks 00PD (1)<=>(2)) from a remark in brackets inside the Mathlib-leaf definition def-sc-discrete-valuation-ring, which is a theorem cited from a definition. The corrected item in fixes/dag/nodes/sec-six-functors-basics/ derives it from the existing Mathlib leaves lem-sc-dvr-valuation-arithmetic and lem-sc-dvr-nonnegative-valuation-in-ring: v(x)+v(x^-1)=0, so x or x^-1 lies in R. Only Step 3's text, uses and source place change; proof_deps is recomputed. Everything else is accepted as delivered. Delivery shape: one commit, item and report only, no new nodes, statement and stmt_deps unchanged, no repair note. Sources read: algebra.tex 04GU (l.43369), 04GW, 04GP, 08HR, 00U4 (l.39435, clause 2), 00IC, 00GY, 00PD (l.29104); more-algebra 06DI (l.11110). Tag-to-label pairs checked; no SGA. Steps: (1) the Bezout argument gives k^s inside l^s. (2) Pointed pairs and triples correspond on objects and morphisms (both directions checked), so the triples lemma applies at m_A and m_R with K=k^s and K=l^s. (4) The etale-colimit lemma gives normal domains and injective A->H and R->B. (5) 08HR form with p=m_A (both maps local), q=m_H and tau a k-algebra map; uniqueness covers every local residue-compatible extension. (6) At a common stage S, q=ker(S->H) is prime with q∩A=0; 00U4 gives kappa(q)/K finite separable; kappa(q) embeds in Frac H over K. (7) The polynomial with nonzero constant term q_0 contradicts injectivity of A->B. (8) Spec h(0)=0, Spec h(m_B)=m_H, and the evaluation maps into Omega agree. Edge cases checked: R a field (forces A a field, H=k^s, B=l^s); A a field with R a DVR; non-Noetherian A. No duplicate in the DAG (lem-dl-a1-separable-normalization-local-embeddings maps into a different ring). The parent's Step 1 uses exactly the statement. The four declared tool_uses (strict-henselization-triples, valuation-ring-normal, etale-colimit-normal-local-domain, map-into-henselian-colimit; all unit sk-thm-p1, generic commutative algebra) are accepted. Ten recorded Mathlib searches cover all three kinds.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalStrictLocalTraitLifts",
+  "declaration": "Algebra.normal_strict_local_trait_lifts",
+  "file": "lean/Sheaf/RingTheory/NormalStrictLocalTraitLifts.lean",
+  "statement": "theorem normal_strict_local_trait_lifts (A : Type u) (R : Type v) (Ω H B : Type (max u v w)) [CommRing A] [IsLocalRing A] [IsDomain A] [IsIntegrallyClosed A] [CommRing R] [IsLocalRing R] [IsDomain R] (hR : IsField R ∨ IsDiscreteValuationRing R) [Algebra A R] (hf : Function.Injective (algebraMap A R)) (hf_local : (IsLocalRing.maximalIdeal R).comap (algebraMap A R) = IsLocalRing.maximalIdeal A) [Algebra (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField R)] (hres : (algebraMap (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField R)).comp (IsLocalRing.residue A) = (IsLocalRing.residue R).comp (algebraMap A R)) [Field Ω] [IsAlgClosed Ω] [Algebra (IsLocalRing.ResidueField A) Ω] [Algebra (IsLocalRing.ResidueField R) Ω] [IsScalarTower (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField R) Ω] [CommRing H] [Algebra A H] [CommRing B] [Algebra R B] [Algebra A (separableClosure (IsLocalRing.ResidueField A) Ω)] [IsScalarTower A (IsLocalRing.ResidueField A) (separableClosure (IsLocalRing.ResidueField A) Ω)] [Algebra R (separableClosure (IsLocalRing.ResidueField R) Ω)] [IsScalarTower R (IsLocalRing.ResidueField R) (separableClosure (IsLocalRing.ResidueField R) Ω)] (P : StrictHenselizationPresentationIn.{u, max v w} A (separableClosure (IsLocalRing.ResidueField A) Ω) H) (Q : StrictHenselizationPresentationIn.{v, max u w} R (separableClosure (IsLocalRing.ResidueField R) Ω) B) : ∃ (_ : IsStrictlyHenselianLocalRing H) (_ : IsStrictlyHenselianLocalRing B) (_ : IsDomain H) (_ : IsDomain B), IsIntegrallyClosed H ∧ IsIntegrallyClosed B ∧ (∃ eH : IsLocalRing.ResidueField H ≃+* separableClosure (IsLocalRing.ResidueField A) Ω, eH.toRingHom.comp (IsLocalRing.residue H) = P.residueMap) ∧ (∃ eB : IsLocalRing.ResidueField B ≃+* separableClosure (IsLocalRing.ResidueField R) Ω, eB.toRingHom.comp (IsLocalRing.residue B) = Q.residueMap) ∧ ∃ hAH : Function.Injective (algebraMap A H), Function.Injective (algebraMap R B) ∧ (∀ z : FractionRing H, ∃ p : Polynomial (FractionRing A), p ≠ 0 ∧ Polynomial.eval₂ (IsFractionRing.map (K := FractionRing A) (L := FractionRing H) hAH) z p = 0) ∧ ∃ τ : separableClosure (IsLocalRing.ResidueField A) Ω →+* separableClosure (IsLocalRing.ResidueField R) Ω, (separableClosure (IsLocalRing.ResidueField R) Ω).subtype.comp τ = (separableClosure (IsLocalRing.ResidueField A) Ω).subtype ∧ ∃ h : H →+* B, (IsLocalRing.maximalIdeal B).comap h = IsLocalRing.maximalIdeal H ∧ h.comp (algebraMap A H) = (algebraMap R B).comp (algebraMap A R) ∧ Q.residueMap.comp h = τ.comp P.residueMap ∧ Function.Injective h ∧ (∀ h' : H →+* B, (IsLocalRing.maximalIdeal B).comap h' = IsLocalRing.maximalIdeal H → h'.comp (algebraMap A H) = (algebraMap R B).comp (algebraMap A R) → Q.residueMap.comp h' = τ.comp P.residueMap → h' = h) ∧ (Spec.map (CommRingCat.ofHom h)) (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum B) = (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum H) ∧ (Spec.map (CommRingCat.ofHom h)) (⟨IsLocalRing.maximalIdeal B, inferInstance⟩ : PrimeSpectrum B) = (⟨IsLocalRing.maximalIdeal H, inferInstance⟩ : PrimeSpectrum H) ∧ (separableClosure (IsLocalRing.ResidueField R) Ω).subtype.comp (Q.residueMap.comp h) = (separableClosure (IsLocalRing.ResidueField A) Ω).subtype.comp P.residueMap ∧ Spec.map (CommRingCat.ofHom ((separableClosure (IsLocalRing.ResidueField R) Ω).subtype.comp Q.residueMap)) ≫ Spec.map (CommRingCat.ofHom h) = Spec.map (CommRingCat.ofHom ((separableClosure (IsLocalRing.ResidueField A) Ω).subtype.comp P.residueMap))",
+  "branch": "sheaf-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded StrictHenselizationPresentationIn and its residueMap, with the actual relative separable closures inside Omega. Fraction-field algebraicity is written elementwise using the canonical IsFractionRing.map induced by the asserted injective structure map. Base rings may have independent universes; the common universe of Omega, H, B and the pointed-etale algebras is max u v w."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e0a19d54",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: normal local domain as IsDomain+IsIntegrallyClosed; IsField R ∨ IsDiscreteValuationRing R; locality as comap of m_R = m_A; residue map k→l pinned by hres; scalar tower k→l→Ω; separableClosure in Ω; recorded StrictHenselizationPresentationIn with towers pinning the A- and R-algebra structures. Conclusions: strictly henselian normal domains; eH/eB pinned to residueMap; τ pinned by the subtypes into Ω; h local, extends A→R→B, residue-compatible, unique among all such h'; three injections; Spec generic and closed points; geometric square as ring maps and Spec maps; algebraicity via IsFractionRing.map hAH. Edge cases (R or A a field, non-Noetherian, imperfect residue fields) covered; universes forced by the presentation interface, w arbitrary. Statement field verbatim; node unchanged except lean; imports resolve; docstrings carry source, blueprint tag and 8 steps; sorry only; no duplicate found. No file changed, so no compile."
+ }
+}

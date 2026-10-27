@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-integral-units-finite-valuation-map",
+ "kind": "statement",
+ "title": "Finite integer-valued unit map for an integral scheme over an algebraically closed field",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $T$ be an integral scheme [def-pc-integral-scheme] locally of finite type over $K$ [def-weil-finite-type-morphism]. Write $B=\\Gamma(T,\\mathcal O_T)$ and $B^\\times$ for the multiplicative group of invertible elements of $B$. There exist a finite set $J$ and a map $v:B^\\times\\to\\mathbf Z^J$, where $\\mathbf Z^J$ is the additive group of functions $J\\to\\mathbf Z$, such that $v(ab)=v(a)+v(b)$ for all $a,b\\in B^\\times$ and $\\ker(v)=K^\\times$. Here $K^\\times\\subset B^\\times$ is the subgroup of nonzero constant functions, and $\\ker(v)$ consists of the units sent to the zero function. No separatedness or quasi-compactness assumption on $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04L5 (lemma-units-integral-finite-type-algebraically-closed), proof by restriction to an affine open and normalization of a projective closure; Tag 04L4 (lemma-open-in-normal-proper), proof, displayed finite valuation map and its kernel. The map on T is the composite of restriction, pullback to the normal open, and that displayed map."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonempty affine open $U=\\operatorname{Spec}A$ from a finite-type affine chart of $T\\to\\operatorname{Spec}K$. Thus $A$ is a finitely generated $K$-algebra and a domain. Put $F=\\mathcal O_{T,\\eta}$ at the generic point. For every nonempty affine open $W\\subset T$, its section ring injects into $F$ by the affine-fraction-field lemma. Consequently $\\Gamma(T,\\mathcal O_T)\\to F$ is injective: a section with zero generic germ restricts to zero on each such $W$, hence is zero by the sheaf axiom. In particular restriction to $U$ is injective, and $F=\\operatorname{Frac}(A)$ with its specified $K$-algebra structure. This argument uses no quasi-compactness or separatedness of $T$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L5 (lemma-units-integral-finite-type-algebraically-closed), first paragraph; Tag 01RV for generic germs"
+   }
+  },
+  {
+   "text": "An affine scheme is quasi-affine (use the identity open immersion). Apply the affine-space immersion existence lemma to $U/K$, then the affine projective-closure lemma over the Noetherian scheme $\\operatorname{Spec}K$. It supplies a projective, hence proper, scheme $C$ containing $U$ as a dense open, with $C$ the scheme-theoretic image of $U\\to\\mathbf P^n_K$. The reduced-image lemma says that $C$ is reduced because $U$ is reduced. Its underlying space is the closure of the irreducible nonempty space $U$, hence is irreducible and nonempty. Thus $C$ is integral, and its generic stalk is the same $F$, since the open immersion is an isomorphism on neighbourhoods of the common generic point.",
+   "uses": [
+    "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+    "det-nagata-affine-opens-projective",
+    "lem-trf-reduced-scheme-image",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L5, first paragraph: affine embedding and projective closure; Tag 056B (morphisms.tex, lemma-scheme-theoretic-image-reduced)"
+   }
+  },
+  {
+   "text": "Take the normalization $\\nu:N\\to C$ in $F$, applying finite-normalization functoriality with the degree-one extension $M=H=F$. It says that $N$ is normal integral and Noetherian, $\\nu$ is finite surjective, and $k(N)$ is canonically $F$. The properness clause of normalization-exists makes $N$ proper because $C$ is proper. Let $V=\\nu^{-1}(U)$; it is a nonempty open by surjectivity. The maps on generic stalks are the specified identification with $F$, so restriction to $U$ followed by pullback to $V$ sends every $a\\in B^\\times$ to the rational function $\\rho(a)\\in F^\\times$ given by its generic germ in step 1. This function and its inverse are regular on $V$. The map $\\rho$ is injective and respects the $K$-algebra structure.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality",
+    "lem-sc-normalization-exists",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L5, second paragraph; Tags 0BXR (lemma-normalization-locally-algebraic), 0GK4 (lemma-normalize-projective)"
+   }
+  },
+  {
+   "text": "Since $C$ is proper it is quasi-compact. Choose a finite cover by nonempty affine opens $C_i=\\operatorname{Spec}R_i$; discard any empty chart. Finiteness of $\\nu$ makes $W_i=\\nu^{-1}(C_i)$ affine, and these form a finite cover of $N$. The affine normalization formula, specialized to the integral scheme $C$ (whose unique minimal prime on each chart is $(0)$), identifies $W_i=\\operatorname{Spec}D_i$, where $D_i$ is the integral closure of $R_i$ in $F$. That formula says the affine section rings of $N$ are Noetherian. The integral-closure normality lemma with $L=F$ shows that each $D_i$ is a normal domain with fraction field $F$. Thus all the hypotheses of the affine principal-divisor kernel theorem hold for each $D_i$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "def-weil-finite-integral-morphism",
+    "lem-trf-normalization-affine-stalk-closure",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L4 (lemma-open-in-normal-proper), affine chart paragraph; morphisms.tex Tags 0C3B/0CDV; algebra.tex Tag 034L"
+   }
+  },
+  {
+   "text": "Let $E=N\\setminus V$, a closed subset of the Noetherian scheme $N$. Its irreducible components are finite in number, and each has a generic point by scheme sobriety. Let $J_i$ be the height-one primes of $D_i$ whose points lie in $E$. For $\\mathfrak q\\in J_i$, let $Z$ be a component of $E$ containing its point $x$, and let $\\zeta$ be the generic point of $Z$. Since $x\\in W_i$ and $W_i$ is open, also $\\zeta\\in W_i$. In $\\operatorname{Spec}D_i$, the prime $\\mathfrak p$ of $\\zeta$ satisfies $\\mathfrak p\\subseteq\\mathfrak q$. It is nonzero: $(0)$ is the generic point of the integral $N$, which belongs to the nonempty open $V$ and cannot lie in $E$. Height one now forces $\\mathfrak p=\\mathfrak q$, so $x=\\zeta$. Thus $J_i$ is contained in the finite set of generic points of the components of $E$. Put $J=\\coprod_iJ_i$; the chart index set is finite, so $J$ is finite. This also handles $E=\\varnothing$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L4, finite generic boundary points and codimension-one paragraph; properties.tex Tag 0BA8 (lemma-Noetherian-irreducible-components)"
+   }
+  },
+  {
+   "text": "For every height-one prime $\\mathfrak q$ of $D_i$, the principal-divisor kernel theorem supplies the normalized additive valuation $v_{i,\\mathfrak q}:F^\\times\\to\\mathbf Z$ of $(D_i)_{\\mathfrak q}$, its additivity, and the criterion $v_{i,\\mathfrak q}(f)=0\\iff f\\in(D_i)_{\\mathfrak q}^\\times$. Define $v(a)(i,\\mathfrak q)=v_{i,\\mathfrak q}(\\rho(a))$ for $(i,\\mathfrak q)\\in J$. Since generic germs respect multiplication and each valuation is additive, coordinatewise $v(ab)=v(a)+v(b)$. Repeated occurrences of a boundary point in different affine charts are allowed: $J$ indexes chart-prime pairs, and no independence of the coordinates is required.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD/031T and divisors.tex Tag 02RP (lemma-div-additive); varieties.tex Tag 04L4, displayed finite valuation map"
+   }
+  },
+  {
+   "text": "Suppose $v(a)=0$ and set $f=\\rho(a)$. Fix $i$ and any height-one prime $\\mathfrak q$ of $D_i$. If its point is outside $V$, it belongs to $J_i$, so $v_{i,\\mathfrak q}(f)=0$ by assumption. If its point is in $V$, both $f$ and $f^{-1}$ are regular there by step 3. The affine stalk-localization theorem identifies their stalk with $(D_i)_{\\mathfrak q}$; their germs multiply to $1$ there, so the valuation's unit criterion again gives $v_{i,\\mathfrak q}(f)=0$. Thus the entire affine principal divisor of $f$ on $\\operatorname{Spec}D_i$ is zero. The kernel clause of that theorem gives $f\\in D_i^\\times$. In particular $f$ and $f^{-1}$ define sections on every $W_i$.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L4, kernel calculation using height-one affine localizations; algebra.tex Tag 031T"
+   }
+  },
+  {
+   "text": "The sections just obtained agree on overlaps: on every nonempty affine open contained in an overlap, their generic germs are the same element $f\\in F$, and the affine-fraction-field lemma makes the germ map injective. The sheaf axiom glues them to $s\\in\\Gamma(N,\\mathcal O_N)$; the sections representing $f^{-1}$ glue in the same way, and their products are $1$ on the cover, so $s$ is a unit. Since $N$ is integral, it is reduced, nonempty and irreducible, hence connected (a separation into two nonempty opens contradicts irreducibility). Apply the proper-reduced global-sections theorem over the algebraically closed field $K$: its component-indexed constant map is an isomorphism. Here the component set has one element, so its assertion is exactly that $K\\to\\Gamma(N,\\mathcal O_N)$ is an isomorphism of $K$-algebras. Therefore $s=c$ for some $c\\in K^\\times$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L4, extension to the proper variety and constant functions; Tag 0BUG (lemma-proper-geometrically-reduced-global-sections), reduced algebraically closed specialization"
+   }
+  },
+  {
+   "text": "Taking the generic germ of $s=c$ gives $\\rho(a)=c$ in the specified $K$-field $F$. The injectivity in step 1 yields $a=c$ in $B$, so $\\ker(v)\\subseteq K^\\times$. Conversely any $c\\in K^\\times$ and its inverse are regular on all of $N$. They are units in every $(D_i)_{\\mathfrak q}$; the same unit criterion gives every coordinate $v(c)(i,\\mathfrak q)=0$. Thus $K^\\times\\subseteq\\ker(v)$. The finite $J$ and the map constructed in step 6 satisfy all the required clauses, including when $J$ is empty.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 04L4/04L5, kernel identification and restriction back to T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+  "det-nagata-affine-opens-projective",
+  "lem-trf-reduced-scheme-image",
+  "lem-sfb-finite-normalization-model-functoriality",
+  "lem-sc-normalization-exists",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-normalization-affine-stalk-closure",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 04L5 and 04L4: restriction to an affine chart, normalization of its projective closure, finite boundary valuations and extension of a zero-divisor rational unit. The affine principal-divisor interface packages the height-one intersection argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|units.*(FG|finitely)|finitely.*units",
+   "results": "Actual search returned 8 hits: Mathlib/NumberTheory/MulChar/Basic.lean, Mathlib/NumberTheory/MulChar/Basic.lean, Mathlib/Data/NNReal/Defs.lean, Mathlib/FieldTheory/Differential/Liouville.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/UniqueFactorizationDomain/Finite.lean, Mathlib/RingTheory/UniqueFactorizationDomain/Finite.lean, Mathlib/RingTheory/Localization/Module.lean; digest a60875432bdd6765",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global units modulo nonzero constant functions on an integral scheme locally of finite type over an algebraically closed field form a finitely generated abelian group",
+   "results": "Actual search returned 8 hits: FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers, ClassGroup.fintypeOfAdmissibleOfFinite, ClassGroup.fintypeOfAdmissibleOfAlgebraic, FunctionField.classNumber, NumberField.Units.instFGUnitsRingOfIntegers, ClassGroup, ClassGroup.mkMMem, NumberField.Units.instFiniteIntAdditiveUnitsRingOfIntegers; digest 3d4de062d95a4299",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invertible regular functions modulo nonzero constants on an integral algebraic variety over an algebraically closed field are finitely generated",
+   "results": "Actual search returned 8 hits: Submodule.fg_unit, Submodule.fg_of_isUnit, exists_integral_inj_algHom_of_fg, Module.Invertible.instFinite, exists_finite_inj_algHom_of_fg, FractionalIdeal.fg_unit, Algebra.FiniteType.of_finitePresentation, Ideal.fg_of_localizationSpan; digest 126df9d703233a13",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Units\"",
+   "results": "Actual search returned 0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht theorem: the unit group of a finite type integral algebra over an algebraically closed field modulo scalar units is finitely generated",
+   "results": "Actual search returned 8 hits: FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers, NumberField.Units.instFGUnitsRingOfIntegers, ClassGroup.fintypeOfAdmissibleOfFinite, NumberField.Units.instFiniteIntAdditiveUnitsRingOfIntegers, FunctionField.classNumber, instFintypeAlgEquivOfIsDomainOfIsIntegrallyClosedOfFiniteOfIsTorsionFree, NumberField.Units.instFiniteIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion, exists_finite_inj_algHom_of_fg; digest e6b17a0591f51075",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "grep",
+   "query": "units.*(quotient|valuation)|valuation.*units|global.*units|units.*global",
+   "results": "Actual search returned 0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The group of invertible global functions modulo constants on an integral variety embeds into a finite rank free abelian group by boundary valuations",
+   "results": "Actual search returned 8 hits: ValuativeRel.ValueGroupWithZero.embed_mk, ValuativeRel.ValueGroupWithZero.embed_valuation, ValuativeRel.ValueGroupWithZero.embed, ValuativeRel.ValueGroupWithZero.embed.congr_simp, IsDedekindDomain.HeightOneSpectrum.valuationOfNeZero, Valuation.IsRankOneDiscrete.generator_zpowers_eq_valueGroup, ValuationSubring.principalUnitGroupOrderEmbedding, Valuation.IsRankOneDiscrete.mk'; digest 559bbb7bc0db0656",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral scheme locally of finite type over an algebraically closed field there is a homomorphism from global units to a finite product of integers whose kernel consists exactly of nonzero constant functions",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.ker_toSpecΓ, IsDedekindDomain.selmerGroup.fromUnit_ker, NumberField.Units.dirichletUnitTheorem.logEmbedding_ker, IsDedekindDomain.selmerGroup.fromUnit, Submodule.ker_unitsToPic, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen, IsDedekindDomain.selmerGroup.fromUnitLift; digest f251b675c24575b5",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Units\", \"Multiplicative\", \"Int\"",
+   "results": "Actual search returned 0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: Dirichlet results concern rings of integers; Selmer maps concern a Dedekind-domain fraction field and a power quotient. Neither supplies a finite coordinate map on global units of an arbitrary integral locally finite type scheme with kernel exactly the scalar units."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|units.*valuation|valuation.*units|units.*finitely",
+   "results": "{\"t\": \"2026-10-23T20:34:28Z\", \"tool\": \"grep\", \"query\": \"Rosenlicht|units.*valuation|valuation.*units|units.*finitely\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Valued/ValuativeRel.lean\", \"Mathlib/Topology/Algebra/Valued/ValuativeRel.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Valued/NormedValued.lean\", \"Mathlib/Topology/Algebra/Valued/NormedValued.lean\", \"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"Mathlib/Topology/Algebra/Valued/ValuedField.lean\"], \"digest\": \"245e9b11cceb69bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fraction-field, proper-global-section, number-field-unit and Dedekind-valuation facts are constituent inputs or concern different rings; none states the finite boundary valuation map for arbitrary integral locally finite type schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral scheme locally of finite type over an algebraically closed field global units admit a homomorphism to a finite product of integers with kernel the nonzero constants",
+   "results": "{\"t\": \"2026-10-23T20:34:28Z\", \"tool\": \"leanfinder\", \"query\": \"For an integral scheme locally of finite type over an algebraically closed field global units admit a homomorphism to a finite product of integers with kernel the nonzero constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"ax_grothendieck_of_locally_finite\", \"Set.unitEquivUnitsInteger\", \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"NumberField.Units.dirichletUnitTheorem.logEmbedding_ker\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.pointsPi_surjective\"], \"digest\": \"7a5a4dcff50edc1d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fraction-field, proper-global-section, number-field-unit and Dedekind-valuation facts are constituent inputs or concern different rings; none states the finite boundary valuation map for arbitrary integral locally finite type schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The global units of an integral variety over an algebraically closed field embed modulo scalar units into a finite rank integer lattice by valuations at the boundary",
+   "results": "{\"t\": \"2026-10-23T20:35:10Z\", \"tool\": \"leansearch\", \"query\": \"The global units of an integral variety over an algebraically closed field embed modulo scalar units into a finite rank integer lattice by valuations at the boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.logEmbeddingEquiv\", \"Units.isOpenEmbedding_val\", \"NumberField.Units.unitLattice_rank\", \"ValuationSubring.principalUnitGroupOrderEmbedding\", \"NumberField.Units.instZLattice_unitLattice\", \"NumberField.Units.unitLattice\", \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZero\", \"ValuationSubring.unitGroupOrderEmbedding\"], \"digest\": \"952a22beff08f869\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fraction-field, proper-global-section, number-field-unit and Dedekind-valuation facts are constituent inputs or concern different rings; none states the finite boundary valuation map for arbitrary integral locally finite type schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Units\"",
+   "results": "{\"t\": \"2026-10-23T20:35:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Units\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fraction-field, proper-global-section, number-field-unit and Dedekind-valuation facts are constituent inputs or concern different rings; none states the finite boundary valuation map for arbitrary integral locally finite type schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht units theorem: invertible regular functions modulo nonzero constant functions on an integral variety form a finite rank free abelian group",
+   "results": "{\"t\": \"2026-10-23T20:37:26Z\", \"tool\": \"leanfinder\", \"query\": \"Rosenlicht units theorem: invertible regular functions modulo nonzero constant functions on an integral variety form a finite rank free abelian group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFieldCarrierFunctionField\", \"FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers\", \"ClassGroup\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"ClassGroup.fintypeOfAdmissibleOfFinite\", \"ClassGroup.mkMMem\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\"], \"digest\": \"1d01fc93e0c5a072\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fraction-field, proper-global-section, number-field-unit and Dedekind-valuation facts are constituent inputs or concern different rings; none states the finite boundary valuation map for arbitrary integral locally finite type schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relatively-closed-constants-units-fg",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Dimension input in the field-groupoid calculation: replace the arrow-space dimension by the stabilizer dimension (Stacks 06FF). Supporting input: Stacks 06FF, middle paragraph: identify k_a=k_b inside the global sections of the connected reduced chart T, and use that this ring is a field to inject it into the residue field at v. Supporting algebra input: 04MK, quasi-compact paragraph after replacing each ground field by its integral closure: invoke 04L7 for the quotient of global units. Integral algebraically closed input for the component calculation in Tag 04L6 (lemma-units-general-algebraically-closed), used by 04L7(1).",
+   "via": [
+    "lem-sfb-relatively-closed-constants-units-fg",
+    "lem-sfb-connected-reduced-scalar-field-uniqueness",
+    "lem-sfb-field-groupoid-stabilizer-dimension",
+    "lem-sfb-field-groupoid-identity-finite-relation",
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-units-finite-valuation-map",
+  "worker": "stage1",
+  "summary": "Nine explicit steps following Stacks 04L5/04L4; no statement correction and no new nodes. Reused existing affine compactification, normalization, affine principal-divisor kernel, finite boundary component and proper global-section statements. Kept the general locally finite type, potentially nonseparated and non-quasi-compact source. Checked every citation against its statement, every search against actual service results, and dimension-zero and empty-boundary cases.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Dimension input in the field-groupoid calculation: replace the arrow-space dimension by the stabilizer dimension (Stacks 06FF). Supporting input: Stacks 06FF, middle paragraph: identify k_a=k_b inside the global sections of the connected reduced chart T, and use that this ring is a field to inject it into the residue field at v. Supporting algebra input: 04MK, quasi-compact paragraph after replacing each ground field by its integral closure: invoke 04L7 for the quotient of global units. Integral algebraically closed input for the component calculation in Tag 04L6 (lemma-units-general-algebraically-closed), used by 04L7(1). The current latest direct-images proof (3) delegates to the open-coefficient finiteness branch. This split realizes its inherited scalar-unit prerequisite, not a change of unit route. Ancestor lookup returns null; retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+    "why": "Generic tool for existence of an affine-space immersion for a quasi-affine scheme, [stacks-project], used exactly in the cited steps of the Stacks 04L5/04L4 construction; no statement of this unit supplies that interface. This preserves the unit route."
+   },
+   {
+    "node": "det-nagata-affine-opens-projective",
+    "why": "Generic tool for projective compactification of an affine piece, used exactly in the cited steps of the Stacks 04L5/04L4 construction; no statement of this unit supplies that interface. This preserves the unit route."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Generic tool for scheme theoretic image of a reduced scheme, used exactly in the cited steps of the Stacks 04L5/04L4 construction; no statement of this unit supplies that interface. This preserves the unit route."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic tool for existence and finiteness of the normalization, used exactly in the cited steps of the Stacks 04L5/04L4 construction; no statement of this unit supplies that interface. This preserves the unit route."
+   },
+   {
+    "node": "lem-trf-normalization-affine-stalk-closure",
+    "why": "Generic tool for affine and stalk integral-closure models of finite normalization, used exactly in the cited steps of the Stacks 04L5/04L4 construction; no statement of this unit supplies that interface. This preserves the unit route."
+   },
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "Generic tool for principal weil divisor map of a normal noetherian domain and its kernel of units, used exactly in the cited steps of the Stacks 04L5/04L4 construction; no statement of this unit supplies that interface. This preserves the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic tool for global functions on a proper reduced scheme over an algebraically closed field, used exactly in the cited steps of the Stacks 04L5/04L4 construction; no statement of this unit supplies that interface. This preserves the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+  "det-nagata-affine-opens-projective",
+  "lem-trf-reduced-scheme-image",
+  "lem-sc-normalization-exists",
+  "lem-trf-normalization-affine-stalk-closure",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-e2be61d51",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-e2be61d51 (reviewer sub-agent of L); spot-checked: I read the whole item: 9 steps, no new nodes, statement unchanged, the base had no proof, and no re-split note applies. The route matches Stacks varieties.tex 04L5 and 04L4, which I read at the source. Step 1: the germ map to the generic stalk is injective via lem-sc-integral-function-field-affine-fraction plus the sheaf axiom, with no quasi-compactness or separatedness used. Step 2: the A^n immersion and the Nagata projective closure over Spec K; the reduced-image lemma plus irreducibility make C integral. Step 3: the normalization in F with M=H=F; def-fin-normalization-extension says this is def-sc-normalization, so lem-sc-normalization-exists makes N proper. Pulling back to V avoids the source's 'tiny detail' ν^{-1}(X)≅X. Step 4: for an integral C the componentwise normalization is N, so the D_i are integral closures that are Noetherian and normal with fraction field F (034L). Step 5: a direct height-one argument (x in the closure of ζ inside open W_i, 𝔭≠0 because the generic point lies in V) replaces the codimension lemma and is correct; J is finite and E=∅ is handled. Steps 6-7: the divisor-kernel node gives the unit criterion; the Spec-stalk node handles points in V. Step 8: gluing over non-affine overlaps uses affine sub-covers; 0BUG with one component gives Γ(N,O_N)=K. Step 9: both inclusions of the kernel. proof_deps is the union of the uses, there is no cycle, and no SGA source is cited. Small cases checked: Spec K, A^1, G_m, a cuspidal curve, the doubled-origin line. The grep for 04L4-04L7 found no duplicate. I accept the 7 declared tool_uses as generic. Batch-5: lem-trf-reduced-scheme-image (056B), lem-trf-normalization-affine-stalk-closure (0C3B/0CDV) and lem-trf-normal-domain-principal-divisor-kernel (031T) are general scheme or commutative-algebra facts that sit under sec-trace-formula only by unit placement. lem-weil-pbc-proper-reduced-algclosed-global-sections-product reaches that chapter only through the general definition def-trf-schematically-dense-open. None of the four is a statement or proof step of the trace formula or of Poincaré duality, so I accept them."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralUnitsFiniteValuationMap",
+  "declaration": "AlgebraicGeometry.Scheme.exists_integral_units_finite_valuation_map",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralUnitsFiniteValuationMap.lean",
+  "statement": "theorem exists_integral_units_finite_valuation_map (K : Type u) [Field K] [IsAlgClosed K] (T : Scheme.{u}) [IsIntegral T] (f : T ⟶ Spec (CommRingCat.of K)) [LocallyOfFiniteType f] : ∃ (n : ℕ) (v : Γ(T, ⊤)ˣ → (Fin n → ℤ)), (∀ a b : Γ(T, ⊤)ˣ, v (a * b) = v a + v b) ∧ ∀ a : Γ(T, ⊤)ˣ, v a = 0 ↔ ∃ c : Kˣ, Units.map (((ΓSpecIso (CommRingCat.of K)).inv ≫ f.appTop).hom.toMonoidHom) c = a",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15a9a871f",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: K alg. closed Field (any char); T IsIntegral with explicit f : T ⟶ Spec K, LocallyOfFiniteType f, no separated/qc assumption; ∃ n, v : Γ(T,⊤)ˣ → Fin n → ℤ with v(ab)=v a+v b and v a = 0 ↔ a ∈ image of Kˣ via Units.map((ΓSpecIso K).inv ≫ f.appTop), the canonical structure map, same as landed consumer relatively_closed_constants_units_fg. Matches Stacks 04L5/04L4. n=0, Spec K, G_m, non-separated/non-qc cases OK; shared universe u forced by Spec. No duplicate in Sheaf/WeilConjectures. Node unchanged except lean; lean.statement verbatim in file; stmt_deps unchanged; imports exist; sorry-only theorem; source/blueprint docstrings and 9-step proof docstring; report has Worker report and Second reading by Q151. No compile (no FIX)."
+ }
+}

@@ -1,0 +1,437 @@
+{
+ "id": "lem-sfb-profinite-product-finite-oscillation",
+ "kind": "statement",
+ "title": "Finite rectangular quotients with arbitrarily small metric oscillation",
+ "statement": "Use [def-weil-size-convention]. Let $S$ be a compact Hausdorff space with a basis of clopen (open and closed) subsets, and let $G$ be a compact Hausdorff topological group whose identity has a neighbourhood basis of open normal subgroups. Let $r\\geq1$ be an integer, $(Y,d_Y)$ any metric space, $f:S\\times G^r\\to Y$ continuous, and $\\epsilon>0$. There exist a finite clopen partition $\\mathcal P$ of $S$ and an open normal subgroup $N\\trianglelefteq G$ such that, for any $s,s'\\in S$ in the same part and $g_i,g_i'\\in G$ with $g_iN=g_i'N$ for $1\\leq i\\leq r$,\n$$d_Y\\bigl(f(s,g_1,\\ldots,g_r),f(s',g_1',\\ldots,g_r')\\bigr)<\\epsilon.$$\nHere a finite clopen partition is a finite set of pairwise disjoint nonempty clopen subsets with union $S$; for empty $S$ it is the empty partition. If $A=\\mathcal P$ and $B=G/N$, both with their discrete topologies, then $B$ is a finite group, the part map $p:S\\to A$ and quotient homomorphism $q:G\\to B$ are continuous surjections, and the displayed bound holds on every fibre of $p\\times q^r$. No completeness of $Y$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel expansion: finite small-oscillation rectangles, finite Boolean partition refinement and finite normal group quotient (returned item proof steps 2-4). Agent-formulated topological auxiliary lemma; the blueprint paragraph motivates the application but supplies no topological proof. Exact external literature reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, take $\\mathcal P=\\varnothing$ and $N=G$. The bound is vacuous, $A=\\varnothing$, and $B=G/G$ is the one-element discrete group. The unique map $S\\to A$ and the constant quotient map $G\\to B$ are continuous surjections. Hence suppose $S\\ne\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image coefficient comparison: agent-written auxiliary topological argument; the current blueprint does not state or prove this auxiliary assertion."
+   }
+  },
+  {
+   "text": "For $x=(s,g_1,\\ldots,g_r)\\in S\\times G^r$, continuity makes $O_x=f^{-1}(B_Y(f(x),\\epsilon/2))$ an open neighbourhood of $x$. By the finite-product topology choose open neighbourhoods $U_x$ of $s$ and $V_{x,i}$ of $g_i$ with $U_x\\times\\prod_iV_{x,i}\\subseteq O_x$. The assumed clopen basis gives a clopen $C_x$ with $s\\in C_x\\subseteq U_x$. The set $\\{h:g_i h\\in V_{x,i}\\}$ is an open neighbourhood of $1$, since multiplication by the fixed $g_i$ is continuous. By the assumed identity basis choose an open normal subgroup $H_{x,i}$ inside it. Then $R_x=C_x\\times\\prod_i g_iH_{x,i}$ contains $x$ and lies in $O_x$. Each coset $g_iH_{x,i}$ is open: it is the inverse image of $H_{x,i}$ under the continuous map $t\\mapsto g_i^{-1}t$. Thus the $R_x$ form an open cover, and $d_Y(f(y),f(x))<\\epsilon/2$ for $y\\in R_x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image coefficient comparison: agent-written auxiliary topological argument; the current blueprint does not state or prove this auxiliary assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-tychonoff-product-quasi-compact] to the finite family consisting of $S$ and $r$ copies of $G$. Its product is $S\\times G^r$ with exactly the topology used above, so it is compact. The definition of compactness gives a finite subcover $R_{x_1},\\ldots,R_{x_m}$. Write $x_j=(s_j,g_{j,1},\\ldots,g_{j,r})$, $C_j=C_{x_j}$, and $H_{j,i}=H_{x_j,i}$. Since $S\\ne\\varnothing$ and $1\\in G$, the product is nonempty and $m\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZU, theorem-tychonov: a product of quasi-compact spaces is quasi-compact; finite open-subcover definition."
+   }
+  },
+  {
+   "text": "For each membership pattern $e:\\{1,\\ldots,m\\}\\to\\{0,1\\}$ form $P_e=\\bigcap_{j=1}^m D_{j,e(j)}$, where $D_{j,1}=C_j$ and $D_{j,0}=S\\setminus C_j$. Discard the empty $P_e$ and let $\\mathcal P$ be the resulting finite set. Finite intersections of clopens are clopen. Every point has exactly one membership pattern, and distinct patterns give disjoint sets. Thus $\\mathcal P$ is a finite clopen partition of $S$, and every part meeting $C_j$ is contained in $C_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image coefficient comparison: agent-written auxiliary topological argument; the current blueprint does not state or prove this auxiliary assertion."
+   }
+  },
+  {
+   "text": "Set $N=\\bigcap_{1\\leq j\\leq m,\\,1\\leq i\\leq r}H_{j,i}$. This is an open normal subgroup: it is a subgroup by closure of each $H_{j,i}$ under products and inverses, it is normal because conjugation preserves every $H_{j,i}$, and it is open as a finite intersection of opens. In particular $N\\subseteq H_{j,i}$ for every $j,i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image coefficient comparison: agent-written auxiliary topological argument; the current blueprint does not state or prove this auxiliary assertion."
+   }
+  },
+  {
+   "text": "Let $y=(s,h_1,\\ldots,h_r)$ and $y'=(s',h_1',\\ldots,h_r')$ satisfy the hypotheses of the displayed bound. Choose $j$ with $y\\in R_{x_j}$. The common partition part of $s,s'$ meets $C_j$, so $s'\\in C_j$. Since $h_iN=h_i'N$, write $h_i'=h_i n_i$ with $n_i\\in N$. Writing $h_i=g_{j,i}a_i$ with $a_i\\in H_{j,i}$ gives $h_i'=g_{j,i}(a_i n_i)\\in g_{j,i}H_{j,i}$. Hence both points lie in $R_{x_j}$, and the triangle inequality gives $d_Y(f(y),f(y'))\\leq d_Y(f(y),f(x_j))+d_Y(f(x_j),f(y'))<\\epsilon/2+\\epsilon/2=\\epsilon$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image coefficient comparison: agent-written auxiliary topological argument; the current blueprint does not state or prove this auxiliary assertion."
+   }
+  },
+  {
+   "text": "Give $A=\\mathcal P$ the discrete topology and let $p(s)$ be its unique containing part. Every part is nonempty, so $p$ is surjective; the inverse image of any subset of $A$ is a union of open parts, so $p$ is continuous. Normality of $N$ makes multiplication $(gN)(hN)=(gh)N$ and inversion $(gN)^{-1}=g^{-1}N$ well-defined, giving the quotient group $B=G/N$ and the surjective homomorphism $q(g)=gN$. Its cosets are open by the same fixed-translation inverse-image argument as above. They cover compact $G$, so finitely many cover $G$; distinct cosets are disjoint, hence these are all cosets and $B$ is finite. For the discrete topology on $B$, every subset has open inverse image, a union of cosets; thus $q$ is continuous. Equality of images under $p\\times q^r$ is exactly the hypothesis used in the previous step. This proves the fibre bound, and no step used completeness of $Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image coefficient comparison: agent-written auxiliary topological argument; the current blueprint does not state or prove this auxiliary assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is only application context; agent-written finite rectangle/Boolean atom/intersection proof using Stacks Tag 08ZU for product compactness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite_approximation|oscillation|exists.*(quotient|partition)",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "grep",
+    "query": "finite_approximation|oscillation|exists.*(quotient|partition)",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation on the whole domain does not supply a rectangular quotient with the same normal subgroup in each group coordinate. Open-normal-basis and finite-index results are ingredients, not this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous function on a profinite space times a finite power of a profinite group has arbitrarily small oscillation on fibres of a finite space quotient and a common finite group quotient",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "leansearch",
+    "query": "A continuous function on a profinite space times a finite power of a profinite group has arbitrarily small oscillation on fibres of a finite space quotient and a common finite group quotient",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"finite\", \"approximation\"",
+   "results": {
+    "t": "2026-10-22T06:09:59Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"finite\", \"approximation\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity"
+    ],
+    "digest": "547a218491d8c35f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation on the whole domain does not supply a rectangular quotient with the same normal subgroup in each group coordinate. Open-normal-basis and finite-index results are ingredients, not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous metric valued function on a profinite space times a finite power of a profinite group, a finite clopen partition and an open normal subgroup make the oscillation on every common quotient fibre smaller than any positive epsilon",
+   "results": {
+    "t": "2026-10-22T06:10:09Z",
+    "tool": "leanfinder",
+    "query": "For a continuous metric valued function on a profinite space times a finite power of a profinite group, a finite clopen partition and an open normal subgroup make the oscillation on every common quotient fibre smaller than any positive epsilon",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "ContinuousMap.modulus_pos",
+     "ContinuousMap.modulus"
+    ],
+    "digest": "a4502dce77a58efc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation on the whole domain does not supply a rectangular quotient with the same normal subgroup in each group coordinate. Open-normal-basis and finite-index results are ingredients, not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform continuity on a compact group gives an open normal subgroup whose cosets have arbitrarily small diameter under a continuous map, uniformly over a profinite parameter space",
+   "results": {
+    "t": "2026-10-22T06:10:37Z",
+    "tool": "leanfinder",
+    "query": "Uniform continuity on a compact group gives an open normal subgroup whose cosets have arbitrarily small diameter under a continuous map, uniformly over a profinite parameter space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.Measure.haar.index_defined",
+     "MeasureTheory.Measure.haar.index_elim",
+     "ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one",
+     "topologicalGroup_is_uniform_of_compactSpace",
+     "compact_covered_by_mul_left_translates",
+     "Subgroup.properlyDiscontinuousSMul_of_tendsto_cofinite",
+     "Subgroup.quotient_finite_of_isOpen'",
+     "Subgroup.quotient_finite_of_isOpen"
+    ],
+    "digest": "3b87c85c4702af68"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation on the whole domain does not supply a rectangular quotient with the same normal subgroup in each group coordinate. Open-normal-basis and finite-index results are ingredients, not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finite_approximation_of_mem_nhds_diagonal|exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+   "results": {
+    "t": "2026-10-22T06:11:03Z",
+    "tool": "grep",
+    "query": "exists_finite_approximation_of_mem_nhds_diagonal|exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+    "sub": "Topology/Separation",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Separation/DisjointCover.lean",
+     "Mathlib/Topology/Separation/DisjointCover.lean",
+     "Mathlib/Topology/Separation/DisjointCover.lean",
+     "Mathlib/Topology/Separation/DisjointCover.lean",
+     "Mathlib/Topology/Separation/DisjointCover.lean"
+    ],
+    "digest": "0be81d603b4e3f78"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation on the whole domain does not supply a rectangular quotient with the same normal subgroup in each group coordinate. Open-normal-basis and finite-index results are ingredients, not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient_finite_of_isOpen|exist_openNormalSubgroup_sub_open_nhds_of_one",
+   "results": {
+    "t": "2026-10-22T06:11:26Z",
+    "tool": "grep",
+    "query": "quotient_finite_of_isOpen|exist_openNormalSubgroup_sub_open_nhds_of_one",
+    "sub": "Topology/Algebra",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/Ring/Compact.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/ClopenNhdofOne.lean",
+     "Mathlib/Topology/Algebra/ClopenNhdofOne.lean"
+    ],
+    "digest": "8b5fb2c807fe0cc7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation on the whole domain does not supply a rectangular quotient with the same normal subgroup in each group coordinate. Open-normal-basis and finite-index results are ingredients, not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map from a compact profinite space times a finite power of a profinite group to a metric space has arbitrarily small oscillation on the fibres of finite rectangular quotients",
+   "results": {
+    "t": "2026-10-23T09:51:47Z",
+    "tool": "leanfinder",
+    "query": "A continuous map from a compact profinite space times a finite power of a profinite group to a metric space has arbitrarily small oscillation on the fibres of finite rectangular quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.modulus",
+     "Profinite.NobelingProof.continuous_CC'₁",
+     "Profinite.NobelingProof.continuous_CC'₀",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal"
+    ],
+    "digest": "e21892df5b372251"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite approximation on a whole profinite domain does not provide a product of a parameter partition with powers of one finite group quotient; modulus results assume a metric domain, and ring/module approximation requires extra structure on Y."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"approximation\"",
+   "results": {
+    "t": "2026-10-23T09:55:28Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"approximation\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity"
+    ],
+    "digest": "547a218491d8c35f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite approximation on a whole profinite domain does not provide a product of a parameter partition with powers of one finite group quotient; modulus results assume a metric domain, and ring/module approximation requires extra structure on Y."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_approximation|oscillation|quotient_finite_of_isOpen",
+   "results": {
+    "t": "2026-10-23T09:55:28Z",
+    "tool": "grep",
+    "query": "finite_approximation|oscillation|quotient_finite_of_isOpen",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/Ring/Compact.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Algebra/OpenSubgroup.lean",
+     "Mathlib/Topology/Separation/DisjointCover.lean",
+     "Mathlib/Topology/Separation/DisjointCover.lean"
+    ],
+    "digest": "1fcfc6250f9cfe7e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite approximation on a whole profinite domain does not provide a product of a parameter partition with powers of one finite group quotient; modulus results assume a metric domain, and ring/module approximation requires extra structure on Y."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniformly small metric oscillation on a compact parameter space times a profinite group using a finite clopen partition and an open normal subgroup",
+   "results": {
+    "t": "2026-10-23T09:56:33Z",
+    "tool": "leansearch",
+    "query": "Uniformly small metric oscillation on a compact parameter space times a profinite group using a finite clopen partition and an open normal subgroup",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsCompact.uniform_oscillation",
+     "IsCompact.uniform_oscillationWithin",
+     "oscillationWithin",
+     "oscillation",
+     "OpenSubgroup.isClopen",
+     "Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace",
+     "Subgroup.quotient_finite_of_isOpen",
+     "topologicalGroup_is_uniform_of_compactSpace"
+    ],
+    "digest": "b1285ef9781b976c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: oscillation hits assume metric structure on the domain, which is not assumed here; open-subgroup results provide only ingredients, not the rectangular metric bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For each positive epsilon, a continuous metric valued function on S times G to a finite power has oscillation less than epsilon when the S coordinates lie in one clopen block and the G coordinates agree modulo one open normal subgroup",
+   "results": {
+    "t": "2026-10-23T09:56:43Z",
+    "tool": "leanfinder",
+    "query": "For each positive epsilon, a continuous metric valued function on S times G to a finite power has oscillation less than epsilon when the S coordinates lie in one clopen block and the G coordinates agree modulo one open normal subgroup",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "ContinuousMap.modulus_pos",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "continuousOn_toIcoDiv",
+     "continuousOn_toIocDiv",
+     "continuousAt_toIcoDiv"
+    ],
+    "digest": "8d9a7a7d805627b5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite approximation on a whole profinite domain does not provide a product of a parameter partition with powers of one finite group quotient; modulus results assume a metric domain, and ring/module approximation requires extra structure on Y."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-metric-function-quotients",
+  "date": "2026-10-22",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel expansion: finite small-oscillation rectangles, finite Boolean partition refinement and finite normal group quotient (returned item proof steps 2-4).",
+   "via": [
+    "lem-sfb-profinite-metric-function-quotients",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-product-finite-oscillation",
+  "worker": "stage1",
+  "summary": "Checked the exact statement, empty S, arbitrary noncomplete metric codomain, the current blueprint and Mathlib candidates. Wrote a direct seven-step proof using the existing Tychonoff Mathlib leaf; all remaining arguments expand the assumed bases, the product topology, finite Boolean membership patterns, subgroup axioms, compactness definitions and the metric triangle inequality. No new nodes or statement changes.",
+  "blueprint": "Auxiliary finite-small-oscillation quotient for the scalar comparison motivated by paragraph (3) of the direct-images proof; latest paragraph (3) only cites the open coefficient comparison and contains no topological argument. The inherited scalar expansion is agent material, not text asserted by the current blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-9a7158f85",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-9a7158f85 (reviewer sub-agent of L); spot-checked: PASS. S1 split with no new nodes. The statement and stmt_deps (def-weil-size-convention) are identical to the live node, which is unsplit with no proof. There is no repair note, so this is not a re-split. The 7-step proof is complete and correct, checked step by step. (1) Empty S: P=∅, N=G. (2) Rectangles C_x×∏g_iH_{x,i} inside f^{-1}(B(f(x),ε/2)) are built from the product basis, the clopen basis and the open-normal identity basis; cosets are open by translation. (3) Finite subcover via lem-weil-pbc-tychonoff-product-quasi-compact: I read its statement (Mathlib leaf Pi.compactSpace) and its source, Stacks 08ZU theorem-tychonov at topology.tex:2446; it applies to the r+1-member family with no extra hypotheses. (4) Membership-pattern atoms give a clopen partition, and a part that meets C_j lies inside C_j. (5) N is a finite intersection of open normal subgroups. (6) Two strict ε/2 inequalities plus symmetry and the triangle inequality give the bound. (7) p and q are continuous surjections and G/N is finite by compactness and disjoint open cosets. No Hausdorffness and no completeness of Y is used. Edge cases checked: empty S, trivial G, r=1, singleton Y, non-complete Y. proof_deps equals the union of the uses, and the elementary markings are honest. The parent lem-sfb-profinite-metric-function-quotients uses exactly the stated clauses (p_n, q_n, same q_n in every coordinate) and there is no cycle. Duplicate search (rg -L for oscillation and clopen partition): rectangular-extension, defect-base-partition, finite-quotient-fiber-product and det-pe-wcb-clopen-partition are different results. No SGA source is used. Note for the maintainer: the inherited source.place names a 'scalar tame-kernel expansion' that is absent from blueprint main-20261015/latest sk-thm-sf-ctf-stability-direct-images paragraph (3). That paragraph is application context only; the report and proof_origin say so, and blueprint.from.node is null. The report mentions a citations.json that is not in the commit, which is not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteProductFiniteOscillation",
+  "declaration": "ContinuousMap.exists_finite_partition_openNormalSubgroup_small_oscillation",
+  "file": "lean/Sheaf/Topology/ProfiniteProductFiniteOscillation.lean",
+  "statement": "theorem exists_finite_partition_openNormalSubgroup_small_oscillation (S : Type u) [TopologicalSpace S] [CompactSpace S] [T2Space S] (hS : TopologicalSpace.IsTopologicalBasis {U : Set S | IsClopen U}) (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] (hG : ∀ U ∈ nhds (1 : G), ∃ N : OpenNormalSubgroup G, (N : Set G) ⊆ U) (r : ℕ) (hr : 1 ≤ r) (Y : Type w) [MetricSpace Y] (f : C(S × (Fin r → G), Y)) (ε : ℝ) (hε : 0 < ε) : ∃ (P : Set (Set S)) (N : OpenNormalSubgroup G), P.Finite ∧ Setoid.IsPartition P ∧ (∀ U ∈ P, IsClopen U) ∧ Finite (G ⧸ N.toSubgroup) ∧ DiscreteTopology (G ⧸ N.toSubgroup) ∧ Continuous (QuotientGroup.mk' N.toSubgroup) ∧ Function.Surjective (QuotientGroup.mk' N.toSubgroup) ∧ ∃ p : S → P, (∀ s : S, s ∈ (p s).val) ∧ @Continuous S P _ ⊥ p ∧ Function.Surjective p ∧ ∀ (s s' : S) (g g' : Fin r → G), p s = p s' → (∀ i : Fin r, QuotientGroup.mk' N.toSubgroup (g i) = QuotientGroup.mk' N.toSubgroup (g' i)) → dist (f (s, g)) (f (s', g')) < ε",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c569d255",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Only change: the item's lean record and one module with a sorry'd theorem; the snapshot node otherwise equals the live node, which has no lean record. Every hypothesis is present with no extra assumptions: compact T2 S with clopen basis (hS), compact T2 group G with open-normal identity basis (hG), 1≤r, MetricSpace Y (no completeness), continuous f, 0<ε; universes u v w independent. The conclusion matches: finite clopen Setoid.IsPartition P, OpenNormalSubgroup N, G⧸N finite and discrete, canonical QuotientGroup.mk' continuous and surjective, part map p pinned by membership, continuous for the discrete (⊥) topology and surjective, strict bound on p×q^r fibres. Edge cases checked: empty S (P=∅, N=⊤), trivial G, r=1, singleton/incomplete Y. lean.statement is verbatim in the file. Docstrings carry the source place, blueprint tag and 7 proof steps. Imports are justified (the plain Compactness import is the recorded Tychonoff proof dependency). Citer lem-sfb-profinite-metric-function-quotients step 1 can use it (Profinite/ProfiniteGrp supply hS and hG). No hollow definitions, no pro-etale substitute. Report has the Worker report and Second reading by Q73 sections. Not recompiled per instructions."
+ }
+}

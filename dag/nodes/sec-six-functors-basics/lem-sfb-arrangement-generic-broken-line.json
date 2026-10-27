@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-arrangement-generic-broken-line",
+ "kind": "statement",
+ "title": "Generic broken lines through finite hyperplane arrangements",
+ "statement": "Let $E$ be a finite-dimensional real vector space [def-weil-vector-space-dimension], with its usual finite-dimensional topology, and let $\\mathcal H$ be a finite set of distinct affine hyperplanes in $E$ (translates of linear subspaces of codimension one). Put $E_{\\mathrm{reg}}=E\\setminus\\bigcup_{H\\in\\mathcal H}H$. Then $E_{\\mathrm{reg}}$ meets every nonempty open subset of $E$. If $U\\subseteq E$ is nonempty, open and convex, and $x,y\\in U\\cap E_{\\mathrm{reg}}$, there is $z\\in U\\cap E_{\\mathrm{reg}}$ such that the broken line $[x,z]\\cup[z,y]$ meets no intersection $H\\cap H'$ for distinct $H,H'\\in\\mathcal H$. Each of its two segments meets each hyperplane at most once, and each meeting is in the interior of that segment and crosses from one strict side to the other. In particular the broken line gives a finite sequence of components of $E_{\\mathrm{reg}}$ from the component of $x$ to the component of $y$, with each consecutive pair separated by just one hyperplane at a point lying on no other hyperplane. If $\\dim E=0$, the arrangement is empty and the constant path is allowed. Here $[u,v]=\\{(1-t)u+tv:0\\leq t\\leq1\\}$, convex means containing these segments between its points, and a component is a maximal connected subset.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.8--C.10, printed pp.609--610, and C.19--C.22, pp.611--612, chamber geometry. Agent supporting lemma for the omitted root-system compatibility input of Conrad Theorem 6.2.4, printed p.202; not an assertion quoted verbatim from Milne. No Stacks tag states this finite-arrangement lemma. Generic-path input to the marked-root wall argument and to positive galleries inside a rank-two half-plane."
+ },
+ "stmt_deps": [
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "For each $H$, choose a basis of its direction subspace $V_H$, extend it by one vector to a basis of $E$, and let $\\ell_H$ be the coordinate functional of that last vector. If $a_H\\in H$, put $f_H(u)=\\ell_H(u-a_H)$. Then $\\ell_H\\ne0$, $H=f_H^{-1}(0)$, and $f_H((1-t)u+tv)=(1-t)f_H(u)+tf_H(v)$. By [lem-sfb-finite-dimensional-linear-map-continuous], applied over the complete nontrivially normed field $\\mathbf R$, each $\\ell_H$ is continuous; translation makes $f_H$ continuous. The two strict sides of $H$ are $f_H>0$ and $f_H<0$. The basis and codimension conventions are those of [def-weil-vector-space-dimension]. If $\\dim E=0$, there can be no codimension-one subspace, hence no hyperplane; $E$ is a singleton and the constant path proves the conclusion. In the remaining steps allow the arrangement to be empty in positive dimension.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.8--C.10 and C.19--C.22, printed pp.609--612, chamber geometry; agent supporting finite-affine-arrangement argument, not a quoted theorem of Milne."
+   }
+  },
+  {
+   "text": "First prove density. If $\\mathcal H$ is empty the assertion is immediate. Otherwise apply [lem-pc-finite-linear-avoidance] over the infinite field $\\mathbf R$ to the proper linear subspaces $\\ker\\ell_H$, obtaining $v$ with $\\ell_H(v)\\ne0$ for every $H$. For a nonempty open set $O$, choose $q\\in O$. Since $t\\mapsto q+tv$ is continuous, $q+tv\\in O$ for all $t$ in some interval $(-\\epsilon,\\epsilon)$. The equation $f_H(q+tv)=f_H(q)+t\\ell_H(v)=0$ excludes just one value of $t$ for each $H$. An interval contains more than any prescribed finite number of distinct real numbers, so choose $t$ excluding this finite list. Then $q+tv\\in O\\cap E_{\\mathrm{reg}}$. This proves the first assertion directly from linear avoidance and the displayed affine equation.",
+   "uses": [
+    "lem-pc-finite-linear-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.8--C.10 and C.19--C.22, printed pp.609--612, chamber geometry; agent supporting finite-affine-arrangement argument, not a quoted theorem of Milne."
+   }
+  },
+  {
+   "text": "For each distinct pair $H,H^{\\prime}$ with nonempty intersection, and $p=x$ or $y$, set $g_{p,H,H^{\\prime}}(u)=f_H(p)f_{H^{\\prime}}(u)-f_{H^{\\prime}}(p)f_H(u)$. Its linear part is $m_{p,H,H^{\\prime}}=f_H(p)\\ell_{H^{\\prime}}-f_{H^{\\prime}}(p)\\ell_H$, which is nonzero. Indeed both coefficients are nonzero since $p$ is regular. If $m=0$, then $\\ell_{H^{\\prime}}=c\\ell_H$ with $c=f_{H^{\\prime}}(p)/f_H(p)$. At a common point $a\\in H\\cap H^{\\prime}$ both affine functions vanish, so $f_{H^{\\prime}}(u)=\\ell_{H^{\\prime}}(u-a)=c\\ell_H(u-a)=cf_H(u)$ for every $u$; this would give $H^{\\prime}=H$. Pairs with empty intersection impose no condition. Thus there are only finitely many additional nonzero linear parts $m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.8--C.10 and C.19--C.22, printed pp.609--612, chamber geometry; agent supporting finite-affine-arrangement argument, not a quoted theorem of Milne."
+   }
+  },
+  {
+   "text": "If the finite list consisting of all $\\ell_H$ and all $m_{p,H,H^{\\prime}}$ is empty, take $z=x$. Otherwise [lem-pc-finite-linear-avoidance], applied to their kernels, gives $v$ on which all are nonzero. Choose $q\\in U$ and $\\epsilon>0$ such that $q+tv\\in U$ for $|t|<\\epsilon$. Each equation $f_H(q+tv)=0$ or $g_{p,H,H^{\\prime}}(q+tv)=0$ excludes exactly one parameter, by its nonzero linear part on $v$. Choose $t$ in this interval outside the finite list and set $z=q+tv$. Then $z\\in U\\cap E_{\\mathrm{reg}}$ and all $g_{p,H,H^{\\prime}}(z)\\ne0$. Convexity puts both segments inside $U$. If $(1-s)p+sz$ belonged to $H\\cap H^{\\prime}$, regularity of $p$ gives $s>0$, and the two zero equations imply $s g_{p,H,H^{\\prime}}(z)=0$, a contradiction. Reversing the segment with $p=y$ gives the required avoidance for $[z,y]$ as well.",
+   "uses": [
+    "lem-pc-finite-linear-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.8--C.10 and C.19--C.22, printed pp.609--612, chamber geometry; agent supporting finite-affine-arrangement argument, not a quoted theorem of Milne."
+   }
+  },
+  {
+   "text": "For either oriented segment $[u,v]=[x,z]$ or $[z,y]$, $f_H(u)$ and $f_H(v)$ are nonzero. The affine expression $(1-s)f_H(u)+sf_H(v)$ is either a nonzero constant, or has at most one zero. A zero in $[0,1]$ must have $0<s<1$; it is possible only when the endpoint values have opposite signs, and then its nonzero slope changes sign across the zero. Hence each meeting is a unique interior crossing. This also covers $u=v$: a constant segment with regular endpoint meets no hyperplane. The statement is per segment; a hyperplane can be crossed once on each leg.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.8--C.10 and C.19--C.22, printed pp.609--612, chamber geometry; agent supporting finite-affine-arrangement argument, not a quoted theorem of Milne."
+   }
+  },
+  {
+   "text": "For a choice of signs $\\sigma_H\\in\\{1,-1\\}$, write $C_\\sigma=\\{u:\\sigma_H f_H(u)>0\\text{ for every }H\\}$. This set is convex by the affine formula, and when nonempty is connected by [lem-sfb-convex-set-connected]. A connected subset $A\\subseteq E_{\\mathrm{reg}}$ cannot contain both a point with $f_H>0$ and one with $f_H<0$: these two relatively open sets would give a disjoint nonempty open partition of $A$. Their relative openness follows from [lem-sfb-finite-dimensional-linear-map-continuous] as in step 1. Thus $A$ has a fixed sign for every $H$, and lies in a single $C_\\sigma$. Each nonempty $C_\\sigma$ is therefore a maximal connected subset, and these sets are exactly the components. In particular the signs determine the component, rather than merely labelling a subset of it.",
+   "uses": [
+    "lem-sfb-convex-set-connected",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.8--C.10 and C.19--C.22, printed pp.609--612, chamber geometry; agent supporting finite-affine-arrangement argument, not a quoted theorem of Milne."
+   }
+  },
+  {
+   "text": "Parameterize the two legs consecutively, and sort their finitely many crossing parameters. None occurs at $x,z,y$, and two different hyperplanes never have the same crossing point on a leg, by step 4. Between successive crossing parameters every $f_H$ has fixed sign by its affine formula; at the bend the signs agree because $z$ is regular. Step 6 therefore assigns one component to each successive portion. At each crossing precisely the sign of the crossed hyperplane changes. To see the local separation explicitly, let $w$ be that crossing point on $H$. For every $H^{\\prime}\\ne H$, $f_{H^{\\prime}}(w)\\ne0$, so by continuity and finiteness there is a neighbourhood of $w$ in $U$ on which all those signs stay fixed. On its two sides of $H$ lie exactly the two components just encountered. This gives the stated finite sequence from the component of $x$ to that of $y$. With no crossings it is a one-term sequence.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.8--C.10 and C.19--C.22, printed pp.609--612, chamber geometry; agent supporting finite-affine-arrangement argument, not a quoted theorem of Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-vector-space-dimension",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-pc-finite-linear-avoidance",
+  "lem-sfb-convex-set-connected"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.8--C.10 and C.19--C.22, printed pp.609--612, chamber geometry; agent supporting finite-affine-arrangement argument, not a quoted theorem of Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hyperplane|Hyperplane|polygonal|Polygonal",
+   "results": "{\"t\": \"2026-10-24T12:29:49Z\", \"tool\": \"grep\", \"query\": \"hyperplane|Hyperplane|polygonal|Polygonal\", \"sub\": \"Geometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\", \"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\", \"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\", \"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\", \"Mathlib/Geometry/Euclidean/Inversion/ImageHyperplane.lean\", \"Mathlib/Geometry/Euclidean/Projection.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Manifold/Instances/Sphere.lean\"], \"digest\": \"3ff04c74f75cd2eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: segment paths, convex separation, visibility, and ample complements do not give a two-segment path avoiding all pairwise hyperplane intersections with the asserted crossings. Read Path.segment and the listed separation/visibility interfaces; no one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic polygonal path in a convex open set avoids intersections of two distinct affine hyperplanes",
+   "results": "{\"t\": \"2026-10-24T12:29:50Z\", \"tool\": \"leansearch\", \"query\": \"Generic polygonal path in a convex open set avoids intersections of two distinct affine hyperplanes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Path.segment\", \"StrictConvex.openSegment_subset\", \"EuclideanHalfSpace.pathConnectedSpace\", \"JoinedIn.somePath_mem\", \"IsPathConnected.exists_path_through_family\", \"JoinedIn\", \"JoinedIn.somePath\", \"RCLike.geometric_hahn_banach_open_open\"], \"digest\": \"fabb9408fdcc3758\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: segment paths, convex separation, visibility, and ample complements do not give a two-segment path avoiding all pairwise hyperplane intersections with the asserted crossings. Read Path.segment and the listed separation/visibility interfaces; no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Hyperplane, Convex",
+   "results": "{\"t\": \"2026-10-24T12:29:50Z\", \"tool\": \"loogle\", \"query\": \"Hyperplane, Convex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Hyperplane'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "inconclusive: loogle: unknown identifier 'Hyperplane'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Points in a convex open subset of a real vector space can be joined by a polygonal path crossing a finite hyperplane arrangement one wall at a time",
+   "results": "{\"t\": \"2026-10-24T12:29:51Z\", \"tool\": \"leanfinder\", \"query\": \"Points in a convex open subset of a real vector space can be joined by a polygonal path crossing a finite hyperplane arrangement one wall at a time\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RCLike.separate_convex_open_set\", \"separate_convex_open_set\", \"geometric_hahn_banach_point_open\", \"RCLike.geometric_hahn_banach_point_open\", \"geometric_hahn_banach_open_point\", \"RCLike.geometric_hahn_banach_open_point\", \"geometric_hahn_banach_open\", \"geometric_hahn_banach_open_open\"], \"digest\": \"5e66ac5ae45a598d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: segment paths, convex separation, visibility, and ample complements do not give a two-segment path avoiding all pairwise hyperplane intersections with the asserted crossings. Read Path.segment and the listed separation/visibility interfaces; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|codim|polygonal",
+   "results": "{\"t\": \"2026-10-24T12:30:58Z\", \"tool\": \"grep\", \"query\": \"hyperplane|codim|polygonal\", \"sub\": \"Analysis/Convex\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Convex/Basic.lean\", \"Mathlib/Analysis/Convex/StoneSeparation.lean\", \"Mathlib/Analysis/Convex/Measure.lean\", \"Mathlib/Analysis/Convex/Measure.lean\", \"Mathlib/Analysis/Convex/KreinMilman.lean\", \"Mathlib/Analysis/Convex/KreinMilman.lean\", \"Mathlib/Analysis/Convex/KreinMilman.lean\", \"Mathlib/Analysis/Convex/KreinMilman.lean\"], \"digest\": \"16eaa55e71c97f18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: segment paths, convex separation, visibility, and ample complements do not give a two-segment path avoiding all pairwise hyperplane intersections with the asserted crossings. Read Path.segment and the listed separation/visibility interfaces; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Avoiding finitely many codimension two affine subspaces by a broken line with two segments inside a convex open set",
+   "results": "{\"t\": \"2026-10-24T12:31:01Z\", \"tool\": \"leanfinder\", \"query\": \"Avoiding finitely many codimension two affine subspaces by a broken line with two segments inside a convex open set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isVisible_iff_lineMap\", \"AffineSubspace.SOppSide.exists_sbtw\", \"IsClosed.exists_wbtw_isVisible\", \"threeAPFree_frontier\", \"not_disjoint_segment_convexHull_triple\", \"openSegment_subset_union\", \"IsVisible.of_convexHull_of_pos\", \"Convex.radon_partition\"], \"digest\": \"c1fecd3f323bc0ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: segment paths, convex separation, visibility, and ample complements do not give a two-segment path avoiding all pairwise hyperplane intersections with the asserted crossings. Read Path.segment and the listed separation/visibility interfaces; no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Convex, Path",
+   "results": "{\"t\": \"2026-10-24T12:35:30Z\", \"tool\": \"loogle\", \"query\": \"Convex, Path\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: segment paths, convex separation, visibility, and ample complements do not give a two-segment path avoiding all pairwise hyperplane intersections with the asserted crossings. Read Path.segment and the listed separation/visibility interfaces; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|polygonal|broken.line",
+   "results": "{\"t\": \"2026-10-24T13:30:24Z\", \"tool\": \"grep\", \"query\": \"hyperplane|polygonal|broken.line\", \"sub\": \"Analysis/Convex\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Convex/Measure.lean\", \"Mathlib/Analysis/Convex/Measure.lean\", \"Mathlib/Analysis/Convex/StoneSeparation.lean\", \"Mathlib/Analysis/Convex/KreinMilman.lean\", \"Mathlib/Analysis/Convex/KreinMilman.lean\", \"Mathlib/Analysis/Convex/KreinMilman.lean\", \"Mathlib/Analysis/Convex/KreinMilman.lean\", \"Mathlib/Analysis/Convex/Cone/Dual.lean\"], \"digest\": \"6c5835f95a97af3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search returns segment paths, visibility, separation or convexity interfaces, not the finite-affine-arrangement generic bend with all crossing and gallery clauses. Read Path.segment and JoinedIn.of_segment_subset in Analysis/Convex/PathConnected.lean; these require the desired avoidance separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two segment polygonal path crossing a finite hyperplane arrangement only through interiors of single walls",
+   "results": "{\"t\": \"2026-10-24T13:30:24Z\", \"tool\": \"leansearch\", \"query\": \"Two segment polygonal path crossing a finite hyperplane arrangement only through interiors of single walls\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"segment_inter_eq_endpoint_of_linearIndependent_sub\", \"Path.segment\", \"Path.segment_add_segment\", \"PathConnectedSpace.exists_path_through_family\", \"JoinedIn.of_segment_subset\", \"Quiver.Path.exists_notMem_mem_hom_path_path_of_notMem_mem\", \"Affine.Simplex.sign_signedInfDist_lineMap_incenter_touchpoint\", \"segment_subset_convexHull\"], \"digest\": \"e563932035c3fa66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search returns segment paths, visibility, separation or convexity interfaces, not the finite-affine-arrangement generic bend with all crossing and gallery clauses. Read Path.segment and JoinedIn.of_segment_subset in Analysis/Convex/PathConnected.lean; these require the desired avoidance separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "AffineSubspace, Path",
+   "results": "{\"t\": \"2026-10-24T13:30:24Z\", \"tool\": \"loogle\", \"query\": \"AffineSubspace, Path\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search returns segment paths, visibility, separation or convexity interfaces, not the finite-affine-arrangement generic bend with all crossing and gallery clauses. Read Path.segment and JoinedIn.of_segment_subset in Analysis/Convex/PathConnected.lean; these require the desired avoidance separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A broken line with two segments joins regular points in a convex open set while avoiding all codimension two intersections of finitely many affine hyperplanes",
+   "results": "{\"t\": \"2026-10-24T13:30:25Z\", \"tool\": \"leanfinder\", \"query\": \"A broken line with two segments joins regular points in a convex open set while avoiding all codimension two intersections of finitely many affine hyperplanes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RCLike.separate_convex_open_set\", \"isVisible_iff_lineMap\", \"RCLike.geometric_hahn_banach_point_open\", \"RCLike.geometric_hahn_banach_open_point\", \"IsClosed.exists_wbtw_isVisible\", \"IsVisible.of_convexHull_of_pos\", \"Convex.openSegment_closure_interior_subset_interior\", \"not_disjoint_segment_convexHull_triple\"], \"digest\": \"234738ab228ec425\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search returns segment paths, visibility, separation or convexity interfaces, not the finite-affine-arrangement generic bend with all crossing and gallery clauses. Read Path.segment and JoinedIn.of_segment_subset in Analysis/Convex/PathConnected.lean; these require the desired avoidance separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-marked-parabolic-connectivity",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation. Supporting input: Theorem 6.2.4, printed pp.201--203, with identities (6.2.2)--(6.2.6) and the uniqueness paragraph immediately before them. This is the relation-level theorem, prior to Corollary 6.2.7. Supporting argument: Theorem 6.2.4 proof, printed pp.202–203: Weyl-word construction of all-root maps, its Tits root-system compatibility input, and the rank-one centralizer calculation. Read Conrad online; local archival PDF WANTED. This node states the omitted compatibility argument as a separate obligation; no other source is invoked. No Stacks tag states this reductive-group result. Supporting input: Theorem 6.2.4 proof, printed p.202, the Tits root-system input to well-defined all-root maps; refined here to an explicit equivalence relation and the dihedral positive-path assertion. Supporting input: Generic-path input to the marked-root wall argument and to positive galleries inside a rank-two half-plane.",
+   "via": [
+    "lem-sfb-root-marked-parabolic-connectivity",
+    "lem-sfb-simple-root-weyl-transport",
+    "lem-sfb-pinned-root-relations-hom-criterion",
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-arrangement-generic-broken-line",
+  "worker": "stage1",
+  "summary": "Write the complete affine-functional generic-bend proof. Reuse the existing Mathlib leaves for finite linear avoidance and finite-dimensional continuity; create just the verified convex-connectedness Mathlib leaf. Prove density and avoidance by explicit one-parameter finite exclusions; identify components with strict sign regions and verify the local one-wall gallery. Preserve the statement and original search history.",
+  "blueprint": "Supporting generic-path input of lem-sfb-root-marked-parabolic-connectivity in the det-thm-sf-ctf-stability-direct-images proof (3) alteration chain. Steps 1--2 establish regular density, 3--4 choose the generic bend, 5 verifies crossings, and 6--7 justify the component gallery. blueprint_refs.py ancestor returns None for this pre-existing imported ancestry; preserve that value and its recorded via chain. Searches of the entire blueprint for hyperplane, affine subspace, convex, subspaces and connected subset give no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-b53908ebe",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-b53908ebe (reviewer sub-agent of L); spot-checked: I read the item, the new node and the statements of all three cited nodes (def-weil-vector-space-dimension, lem-sfb-finite-dimensional-linear-map-continuous, lem-pc-finite-linear-avoidance) in full. Against clones/live, the item's statement, stmt_deps and source are unchanged; on the base it was unsplit with no proof, so this is a first split, not a re-split. I checked Milne App. C.8–C.10 and C.19–C.22 (PDF pp. 621–624): they give only the chamber context, and proof_origin correctly says agent. Step 1: ker ℓ_H = V_H, and the continuity node's hypotheses hold over ℝ; dim 0 gives an empty arrangement. Step 2: density by finite exclusion on the line q+tv, with the avoidance node applied only to the proper kernels. Step 3: m = 0 would force f_{H'} = c·f_H through a common point, hence H' = H; parallel pairs are rightly left out. Step 4: the identity f_H(p)f_{H'}(w) − f_{H'}(p)f_H(w) = s·g(z) holds, and regularity of p gives s > 0; z lies in U by openness and both legs by convexity. Step 5: unique interior crossing per segment, degenerate segment included. Step 6: the nonempty sign regions C_σ are exactly the global components of E_reg. Step 7: no crossing at x, z or y, no simultaneous crossings, and local one-wall separation by continuity. New node lem-sfb-convex-set-connected: one-line specialization of Convex.isConnected (Mathlib/Analysis/Convex/PathConnected.lean:90–92), true, self-contained, statement only, not a clause of the item; no duplicate found in the snapshot or live DAG. Edge cases tested: E = 0, empty arrangement, points on ℝ, crossing or parallel or concurrent lines in ℝ², x = y. No fixes and no tool_uses needed."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.ArrangementGenericBrokenLine",
+  "declaration": "AffineSubspace.arrangement_generic_broken_line",
+  "file": "lean/Sheaf/Geometry/ArrangementGenericBrokenLine.lean",
+  "statement": "theorem arrangement_generic_broken_line (E : Type u) [AddCommGroup E] [Module ℝ E] [FiniteDimensional ℝ E] [TopologicalSpace E] [IsTopologicalAddGroup E] [ContinuousSMul ℝ E] [T2Space E] (ℋ : Finset (AffineSubspace ℝ E)) (hℋ : ∀ H ∈ ℋ, (H : Set E).Nonempty ∧ Module.finrank ℝ H.direction + 1 = Module.finrank ℝ E) : (∀ O : Set E, IsOpen O → O.Nonempty → ∃ q ∈ O, ∀ H ∈ ℋ, q ∉ H) ∧ (∀ U : Set E, U.Nonempty → IsOpen U → Convex ℝ U → ∀ x ∈ U, ∀ y ∈ U, (∀ H ∈ ℋ, x ∉ H) → (∀ H ∈ ℋ, y ∉ H) → ∃ (z : E) (γ : Path x y), z ∈ U ∧ (∀ H ∈ ℋ, z ∉ H) ∧ γ = (Path.segment x z).trans (Path.segment z y) ∧ segment ℝ x z ∪ segment ℝ z y ⊆ U ∧ (∀ H ∈ ℋ, ∀ K ∈ ℋ, H ≠ K → Disjoint (segment ℝ x z ∪ segment ℝ z y) ((H : Set E) ∩ (K : Set E))) ∧ (∀ a b : E, ((a = x ∧ b = z) ∨ (a = z ∧ b = y)) → ∀ H ∈ ℋ, ∀ t ∈ Set.Icc (0 : ℝ) 1, AffineMap.lineMap a b t ∈ H → t ∈ Set.Ioo (0 : ℝ) 1 ∧ H.SOppSide a b ∧ ∀ s ∈ Set.Icc (0 : ℝ) 1, AffineMap.lineMap a b s ∈ H → s = t) ∧ ∃ (n : ℕ) (t : Fin (n + 2) → ℝ) (C : Fin (n + 1) → Set E), StrictMono t ∧ t 0 = 0 ∧ t (Fin.last (n + 1)) = 1 ∧ C 0 = connectedComponentIn {q : E | ∀ H ∈ ℋ, q ∉ H} x ∧ C (Fin.last n) = connectedComponentIn {q : E | ∀ H ∈ ℋ, q ∉ H} y ∧ (∀ i, ∃ p : E, (∀ H ∈ ℋ, p ∉ H) ∧ C i = connectedComponentIn {q : E | ∀ H ∈ ℋ, q ∉ H} p) ∧ (∀ i : Fin (n + 1), ∀ s ∈ Set.Ioo (t i.castSucc) (t i.succ), γ.extend s ∈ C i) ∧ (∀ i : Fin n, ∃ H ∈ ℋ, γ.extend (t i.succ.castSucc) ∈ H ∧ (∀ K ∈ ℋ, K ≠ H → γ.extend (t i.succ.castSucc) ∉ K) ∧ γ.extend (t i.succ.castSucc) ∈ closure (C i.castSucc) ∧ γ.extend (t i.succ.castSucc) ∈ closure (C i.succ) ∧ (∀ a ∈ C i.castSucc, ∀ b ∈ C i.succ, H.SOppSide a b ∧ ∀ K ∈ ℋ, K ≠ H → K.SSameSide a b))) ∧ (Module.finrank ℝ E = 0 → ℋ = ∅)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c859b2c74",
+  "group": "Q39",
+  "result": "fix",
+  "note": "Lean statement and node records correct. Checked against the node: hyperplanes as a Finset of nonempty affine subspaces with codimension-one direction; usual topology via T2 + IsTopologicalAddGroup + ContinuousSMul; density; regular bend z in U with gamma pinned to the Path.segment concatenation; disjoint from H∩K for H≠K; one interior crossing per leg with SOppSide (equal to opposite strict signs for a hyperplane); gallery of connectedComponentIn of E_reg with ordered times, one wall per crossing, closure incidence and SOppSide/SSameSide (true since components are the global sign regions); dim 0 -> empty arrangement. Edge cases checked: dim 0, empty arrangement, x=y, constant legs, dim 1, parallel and concurrent walls, a wall crossed on both legs. stmt_deps complete: no DAG node owns the Mathlib notions used. Node equals side-live except lean; statement verbatim; only sorry; docstrings and all 7 proof steps present. Not compiled: file unchanged. Sole fault H11: the 'Second reading by Q39' section is a worker self-check. FIX: fixes/lem-sfb-arrangement-generic-broken-line.report.md keeps the worker report verbatim and adds an independent clause-by-clause second reading."
+ }
+}

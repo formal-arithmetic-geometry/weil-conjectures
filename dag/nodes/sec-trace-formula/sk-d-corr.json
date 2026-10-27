@@ -223,7 +223,22 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-trace-formula",
  "unit": "sk-d-corr",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.Correspondence"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.Correspondence"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-d-corr",
@@ -253,5 +268,49 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-0ceb194a5 (reviewer sub-agent of L); spot-checked: I read the whole delivery against main-20261015 sk-d-corr (diffed against the master snapshot), every cited node statement and the slopmaster2 Correspondence.lean reference (SupportedClass 105-111, structure 113-152, fix/toProd 162-209, classEquiv 755-785). The domain corrections are needed and correctly recorded under Source error: supported classes only for compactifiable i with Ri_!A_T supplied, and K,L in D^b_ctf, c and p_1 compactifiable and the exceptional adjunctions on D^b_ctf for the final Hom identification. The reason is that sk-d-six gives the projection formula, composition and the exceptional adjunction only on D^b_ctf, and Lean classEquiv needs ctf K and L. I checked the counterexample: X a countable disjoint union of points over s makes p_1 non-compactifiable, because opens of a proper k-scheme are quasi-compact. The item is not a target and nothing is weakened. Step 2: I verified a_C e_C = a_D e_D through a_Z. Step 3: the equalizer lift is (t, c_1 t) and is unique, with no separatedness; this matches Lean fix = equalizer. Step 5: the tensor-Hom direction M⊗- ⊣ RHom(M,-) is correct, with 𝒜 = Mod(A); M, N and A_C lie in D^b_ctf by sk-d-setup stability, the stipulated adjoint and Tor amplitude [0,0]. Step 6: the projection formula is applied at (A_C, M), then the unitor and Rc_! ⊣ c^! on full subcategories. Step 7: sk-d-six's f^* is the module derived pullback of def-weil-pbc-proetale-operations (via sk-def-sf-operations (i) and def-weil-derived-pullback-tensor-hom), so the pullback-composition lemma applies to the same functor. θ, the transported adjunction and Adjunction.comp/rightAdjointUniq give c_1^! ≅ c^! p_1^!, using the agreement at L. Small cases: X=Y=C=s gives Hom(A,RHom(K,L)) ≅ Hom(K,L); an empty support and zero coefficients give zero. There are no new nodes. def-trf-correspondence-between-pairs, lem-trf-correspondence-class and def-trf-supported-class (and the def-trf-correspondence/def-trf-fixed-scheme candidates) are narrower geometric/admissible master-version nodes, not duplicates, so same_as=[] stands. There is no cycle. The unit's sk-thm-sf-comp-composition is reached via sk-d-six -> thm-sf-ctf-stability -> thm-pur-general-admissibility. No SGA is cited. I accept the declared tool uses lem-weil-pbc-proetale-derived-pullback-composition and prop-weil-pbc-proetale-constant-ring-map as generic pullback functoriality and constant-ring identifications. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceCorrespondences",
+  "declaration": "WeilConjectures.TraceCorrespondence",
+  "declarations": [
+   "WeilConjectures.TraceCorrespondenceAdjunction",
+   "WeilConjectures.TraceCorrespondence",
+   "WeilConjectures.TraceCorrespondence.product",
+   "WeilConjectures.TraceCorrespondence.support",
+   "WeilConjectures.TraceCorrespondence.exchange",
+   "WeilConjectures.TraceCorrespondence.oppositeSupport",
+   "WeilConjectures.TraceCorrespondence.intersection",
+   "WeilConjectures.TraceCorrespondence.intersectionFst",
+   "WeilConjectures.TraceCorrespondence.intersectionSnd",
+   "WeilConjectures.TraceCorrespondence.intersectionBase",
+   "WeilConjectures.TraceCorrespondence.fixed",
+   "WeilConjectures.TraceCorrespondence.fixedInclusion",
+   "WeilConjectures.TraceCorrespondence.fixedProjection",
+   "WeilConjectures.TraceCorrespondence.fixedBase",
+   "WeilConjectures.TraceSupportedClass",
+   "WeilConjectures.TraceClassOperations.domain",
+   "WeilConjectures.TraceClassOperations.Category",
+   "WeilConjectures.TraceClassOperations.Data",
+   "WeilConjectures.TraceClassOperations.homEquivalence",
+   "WeilConjectures.TraceClassOperations.supportedClass",
+   "WeilConjectures.TraceCorrespondenceClass.unitCtf",
+   "WeilConjectures.TraceCorrespondenceClass.projectionUnit",
+   "WeilConjectures.TraceCorrespondenceClass.homEquivalence",
+   "WeilConjectures.TraceCorrespondenceClass.supportedClass"
+  ],
+  "file": "lean/Sheaf/Paper/TraceCorrespondences.lean",
+  "statement": "structure TraceCorrespondence (F : FiniteFieldDatum.{u}) (hl : l ≠ F.p) (X Y : Over (Spec (.of F.k))) (K : proEtaleDerivedCategory X.left (Padic.coefficientExtensionRing l E (n + 1))) (L : proEtaleDerivedCategory Y.left (Padic.coefficientExtensionRing l E (n + 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3ae0cdf2",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read node (only lean added), all 6 stmt_deps, TraceCorrespondences.lean, side-live GeometricOperations/GeometricComparisonData/CoefficientRingedTensorHomModel/Compactification.Defs. Correspondence: C over s, c1/c2 Over-maps, specified Compactification of c1, supplied adjunction for actual sfIntrinsicCompactSupport on domains containing c2^*K and L, u : finiteDerivedPullback c2 K → c1^!L. Z=pullback Y.hom X.hom, support=pullback.lift (p1c=c1,p2c=c2), tau=pullbackSymmetry, dbar, E=pullback, Fix=pullback along pullback.diagonal (no separatedness) match node. H_T^0=Hom(i_! unit,P). Geometric Hom equivalence: transpose (tensorRight⊣ihom) → package projection+leftUnitor → A c homEquiv → pullComp and Comparisons.exceptionalComp (rightAdjointUniq mate); unitCtf derived; [u] = .symm preimage. Arbitrary-scheme Data takes projection/composition as supplied data, as sk-d-six Comparisons does; exceptional compositor still the mate. Edge cases: empty, zero, nonseparated, n=0 excluded via n+1. No sorry, docstrings ok, pro-etale, report sections present. No compile (no fixes). Advisory: agreement is iso data not equality; supportedClass not taking TraceCorrespondence directly; unused private imports; self second reading."
  }
 }

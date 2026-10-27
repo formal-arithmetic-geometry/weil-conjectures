@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-algclosed-integral-product",
+ "kind": "statement",
+ "title": "Products of integral varieties over an algebraically closed field",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $A$ and $B$ be nonempty integral schemes [def-pc-integral-scheme], separated and of finite type over $k$ [def-weil-proper-morphism, def-weil-finite-type-morphism]. Then their scheme fibre product $A\\times_k B$ [def-pc-fibre-product] is integral. Here separated means that the diagonal is a closed immersion, and integral means reduced and irreducible. No smoothness, normality or properness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 05P3, lemma-product-varieties, statement and affine tensor-product proof, lines 85--141."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "By finite type, choose finite affine open covers $A=\\bigcup_{i\\in I}U_i$ and $B=\\bigcup_{j\\in J}V_j$, writing $U_i=\\operatorname{Spec}R_i$ and $V_j=\\operatorname{Spec}S_j$, with each coordinate algebra finitely generated over $k$. Discard empty members. Since $A,B$ are nonempty, $I,J$ are nonempty. By the definition of integrality every $R_i,S_j$ is a domain.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 05P3, lemma-product-varieties, first paragraph of the proof: finite affine covers and reduction to the affine case"
+   }
+  },
+  {
+   "text": "Put $P=A\\times_kB$ with projections $p,q$. Base-changing the open inclusions first along $p$ and then along the projection to $B$ identifies $W_{ij}=U_i\\times_kV_j$ with an open subscheme of $P$. More explicitly this open is $p^{-1}(U_i)\\cap q^{-1}(V_j)$: a morphism to $P$ factors through it exactly when its two components factor through $U_i$ and $V_j$, which is precisely the fibre-product universal property. Thus the $W_{ij}$ cover $P$, since the $U_i,V_j$ cover the factors. The affine fibre-product formula gives $W_{ij}\\cong\\operatorname{Spec}(R_i\\otimes_kS_j)$. Apply the existing tensor-domain lemma: $k$ is algebraically closed, $R_i$ is a domain, and $S_j$ is a finite-type domain. Hence every chart ring $R_i\\otimes_kS_j$ is a domain.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algclosed-finite-type-tensor-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 05P3, lemma-product-varieties, affine reduction and tensor-domain argument; affine formula: schemes.tex Tag 01I4, lemma-fibre-product-affine-schemes; openness: Tag 01JY, lemma-base-change-immersion"
+   }
+  },
+  {
+   "text": "For any $(i,j),(i\\prime,j\\prime)$, put $U=U_i\\cap U_{i\\prime}$ and $V=V_j\\cap V_{j\\prime}$. Both are nonempty: the factors are irreducible by integrality, and two disjoint nonempty opens would express an irreducible space as the union of their two proper closed complements. The structure map $U\\to\\operatorname{Spec}k$ is surjective because the target has one point. Surjectivity is stable under base change, so $U\\times_kV\\to V$ is surjective. As $V$ is nonempty, $U\\times_kV$ is nonempty. By the inverse-image description in step 2 and the fibre-product universal property, $U\\times_kV$ is the open intersection $W_{ij}\\cap W_{i\\prime j\\prime}$. Thus every pair of product charts meets. No claim that the underlying space of a scheme product is the Cartesian product of its underlying spaces is needed.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-irreducible-components",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 05P3, lemma-product-varieties, justification of the pairwise-overlap hypothesis in the affine reduction; properties.tex Tag 01OM, lemma-characterize-irreducible; morphisms.tex Tag 01S1, lemma-base-change-surjective"
+   }
+  },
+  {
+   "text": "The family $(W_{ij})_{(i,j)\\in I\\times J}$ is an affine open cover of $P$, with nonempty index set, domain coordinate rings by step 2, and pairwise nonempty intersections by step 3. These are exactly the hypotheses of the integral affine-cover criterion. It follows that $P=A\\times_kB$ is integral, as claimed.",
+   "uses": [
+    "lem-per-integral-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 05P3, lemma-product-varieties, first proof paragraph, applying properties.tex Tags 01OL, 01OM, 01ON (lemma-characterize-reduced, lemma-characterize-irreducible, lemma-characterize-integral)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algclosed-finite-type-tensor-domain",
+  "def-weil-irreducible-components",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-per-integral-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 05P3, lemma-product-varieties, affine-cover proof; existing tensor-domain node supplies the affine algebra argument. Pairwise intersections are made explicit using Tag 01S1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The product of two integral schemes over an algebraically closed field is integral",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {U V X : AlgebraicGeometry.Scheme} (f : U ⟶ X) (g : V ⟶ X) [AlgebraicGeometry.IsIntegralHom f]\\n  [AlgebraicGeometry.IsIntegralHom g], AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.coprod.desc f g)\", \"doc\": \"The coproduct of two integral morphisms of schemes is itself an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is multiplicative, meaning that the composition of two integral morphisms is again an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is multiplicative, meaning that the composition of two integral morphisms is again an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if $ f: X \\to S $ is an integral morphism and $ g: Y \\to S $ is any morphism, then the second projection morphism from the pullback $ X \\times_S Y $ to $ Y $ is also integral.\"}\n  {\"name\": \"Algebra.IsIntegral.prod\", \"module\": \"Mathlib/RingTheory/IntegralClosure/Algebra/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {A : Type u_5} {B : Type u_6} [inst_1 : Ring A] [inst_2 : Algebra R A]\\n  [inst_3 : Ring B] [inst_4 : Algebra R B] [Algebra.IsIntegral R A] [Algebra.IsIntegral R B],\\n  Algebra.IsIntegral R (A × B)\", \"doc\": \"Given a commutative semiring $ R $ and two $ R $-algebras $ A $ and $ B $ where every element is integral over $ R $, then every element of the product algebra $ A \\\\times B $ is also integral over $ R\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsIntegralHom g],\\n  AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsAffine Y],\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).IsIntegral\", \"doc\": \"If $ f: X \\\\to Y $ is a universally closed morphism of schemes and $ Y $ is affine, then the induced ring homomorphism on global sections $ \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ is in\"}\n  {\"name\": \"IsIntegral.pair\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/Basic\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : Ring A] [inst_2 : Ring B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] {x : A × B}, IsIntegral R x.1 → IsIntegral R x.2 → IsIntegral R x\", \"doc\": \"If each component of a pair in the product ring $ A \\\\times B $ is integral over $ R $, then the pair itself is integral over $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the pullback-integrality instance assumes GeometricallyIntegral of a structure map; integral over an algebraically closed field is not that hypothesis by definition. The other hits concern integral morphisms or integrality of elements, rather than integral schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"pullback\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.UniversallyOpen f] [AlgebraicGeometry.IsIntegral Y] [AlgebraicGeometry.IsLocallyNoetherian Y] : AlgebraicGeometry.IsIntegral (CategoryTheory.Limits.pu\", \"doc\": \"If `X` is geometrically integral and flat and universally open over `S` and `Y` is integral\\nand locally noetherian, then `X ×ₛ Y` is integral.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian_1\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.GeometricallyIntegral g] [AlgebraicGeometry.Flat g] [AlgebraicGeometry.UniversallyOpen g] [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.IsLocallyNoetherian X] : AlgebraicGeometry.IsIntegral (CategoryTheory.Limits.pu\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the pullback-integrality instance assumes GeometricallyIntegral of a structure map; integral over an algebraically closed field is not that hypothesis by definition. The other hits concern integral morphisms or integrality of elements, rather than integral schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosed|isIntegral.*pullback|isIntegral.*prod",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"40\", \"text\": \"theorem isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed [IsAlgClosed K]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"141\", \"text\": \"  have := isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed G'\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"40\", \"text\": \"private lemma smooth_of_grpObj_of_isAlgClosed [IsReduced G] [IsAlgClosed K] : Smooth f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"71\", \"text\": \"    exact smooth_of_grpObj_of_isAlgClosed _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.FieldTheory.IsAlgClosed.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"line\": \"28\", \"text\": \"variable {X Y : Scheme.{u}} {K : Type u} [Field K] [IsAlgClosed K]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"line\": \"40\", \"text\": \"    refine IsAlgClosed.ringHom_bijective_of_isIntegral _ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"86\", \"text\": \"  GeometricallyIntegral.geometrically_isIntegral _ _ _ (.of_hasPullback _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"108\", \"text\": \"    [IsLocallyNoetherian Y] : IsIntegral (pullback f g) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"109\", \"text\": \"  GeometricallyIntegral.isIntegral_of_isLocallyNoetherian (pullback.snd _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"113\", \"text\": \"    IsIntegral (pullback f g) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"114\", \"text\": \"  GeometricallyIntegral.isIntegral_of_isLocallyNoetherian (pullback.fst _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"71\", \"text\": \"instance (f : X ⟶ S) (g : Y ⟶ S) [IsIntegralHom g] : IsIntegralHom (Limits.pullback.fst f g) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"75\", \"text\": \"instance (f : X ⟶ S) (g : Y ⟶ S) [IsIntegralHom f] : IsIntegralHom (Limits.pullback.snd f g) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"105\", \"text\": \"    IsIntegralHom (Limits.coprod.desc f g) := by\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the pullback-integrality instance assumes GeometricallyIntegral of a structure map; integral over an algebraically closed field is not that hypothesis by definition. The other hits concern integral morphisms or integrality of elements, rather than integral schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor products of finite type integral algebras over an algebraically closed field are domains",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IntermediateField.LinearDisjoint.isDomain\", \"module\": \"Mathlib.FieldTheory.LinearDisjoint\", \"type\": \"(H : A.LinearDisjoint L) : IsDomain (A ⊗[F] L)\", \"doc\": \"If an intermediate field $ A $ and the field $ L $ are linearly disjoint over $ F $, then their tensor product $ A \\\\otimes_F L $ is a domain (i.e., has no zero divisors).\"}\n  {\"name\": \"Algebra.FiniteType.baseChange\", \"module\": \"Mathlib.RingTheory.FiniteStability\", \"type\": \"[hfa : FiniteType R A] : Algebra.FiniteType B (B ⊗[R] A)\", \"doc\": \"For any field $K$, $K$ is also a domain.\"}\n  {\"name\": \"Subalgebra.LinearDisjoint.isDomain\", \"module\": \"Mathlib.RingTheory.LinearDisjoint\", \"type\": \"[IsDomain S] : IsDomain (A ⊗[R] B)\", \"doc\": \"Let $S$ be an algebra over a commutative semiring $R$. Suppose $S$ is an integral domain. Let $A$ and $B$ be two $R$-subalgebras of $S$ that are linearly disjoint over $R$. Then their tensor product, \"}\n  {\"name\": \"Algebra.IsIntegral.tensorProduct\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \"[CommRing B] [Algebra R A] [Algebra R B] [int : Algebra.IsIntegral R B] : Algebra.IsIntegral A (A ⊗[R] B)\", \"doc\": \"Let $R, A, B$ be commutative rings such that $A$ and $B$ are $R$-algebras. If $B$ is an integral extension of $R$, then the tensor product $A \\\\otimes_R B$ is an integral extension of $A$.\"}\n  {\"name\": \"Subalgebra.LinearDisjoint.isDomain_of_injective\", \"module\": \"Mathlib.RingTheory.LinearDisjoint\", \"type\": \"[IsDomain S] {A B : Type*} [Semiring A] [Semiring B] [Algebra R A] [Algebra R B] {fa : A →ₐ[R] S} {fb : B →ₐ[R] S}\\n  (hfa : Function.Injective fa) (hfb : Function.Injective fb) (H : fa.range.LinearDisjoint fb.range) :\\n  IsDomain (A ⊗[R] B)\", \"doc\": \"Let $ R $ be a commutative semiring, and let $ A $ and $ B $ be $ R $-algebras. Suppose there exist injective algebra homomorphisms $ f_A: A \\\\to S $ and $ f_B: B \\\\to S $ into an $ R $-algebra $ S $, s\"}\n  {\"name\": \"TensorAlgebra.instIsDomain\", \"module\": \"Mathlib.LinearAlgebra.TensorAlgebra.Basis\", \"type\": \"[IsDomain R] [Module.Free R M] : IsDomain (TensorAlgebra R M)\", \"doc\": \"If $ R $ is a domain and $ M $ is a free $ R $-module, then the tensor algebra $ \\\\mathrm{TensorAlgebra}(R, M) $ is also a domain.\"}\n  {\"name\": \"Algebra.TensorProduct.not_isField_of_transcendental\", \"module\": \"Mathlib.RingTheory.LinearDisjoint\", \"type\": \"(A : Type v) [CommRing A] (B : Type w) [CommRing B] [Algebra R A] [Algebra R B] [Module.Flat R A] [Module.Flat R B]\\n  [Algebra.Transcendental R A] [Algebra.Transcendental R B] : ¬IsField (A ⊗[R] B)\", \"doc\": \"For commutative rings $ A $ and $ B $ that are flat $ R $-algebras, if both $ A $ and $ B $ contain transcendental elements over $ R $, then their tensor product $ A \\\\otimes_R B $ is not a field.\"}\n  {\"name\": \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"module\": \"Mathlib.FieldTheory.LinearDisjoint\", \"type\": \"(K : Type*) [Field K] [Algebra F K] [IsDomain (E ⊗[F] K)] (halg : Algebra.IsAlgebraic F E ∨ Algebra.IsAlgebraic F K) :\\n  IsField (E ⊗[F] K)\", \"doc\": \"Let $F$ be a field, and let $E$ and $K$ be field extensions of $F$. If the tensor product ring $E \\\\otimes_F K$ is an integral domain, and at least one of the extensions $E/F$ or $K/F$ is algebraic, th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the pullback-integrality instance assumes GeometricallyIntegral of a structure map; integral over an algebraically closed field is not that hypothesis by definition. The other hits concern integral morphisms or integrality of elements, rather than integral schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic varieties over an algebraically closed field have integral fibre products",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsIntegralHom g],\\n  AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if $ f: X \\to S $ is an integral morphism and $ g: Y \\to S $ is any morphism, then the second projection morphism from the pullback $ X \\times_S Y $ to $ Y $ is also integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsAffine Y],\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).IsIntegral\", \"doc\": \"If $ f: X \\\\to Y $ is a universally closed morphism of schemes and $ Y $ is affine, then the induced ring homomorphism on global sections $ \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ is in\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {U V X : AlgebraicGeometry.Scheme} (f : U ⟶ X) (g : V ⟶ X) [AlgebraicGeometry.IsIntegralHom f]\\n  [AlgebraicGeometry.IsIntegralHom g], AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.coprod.desc f g)\", \"doc\": \"The coproduct of two integral morphisms of schemes is itself an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the pullback-integrality instance assumes GeometricallyIntegral of a structure map; integral over an algebraically closed field is not that hypothesis by definition. The other hits concern integral morphisms or integrality of elements, rather than integral schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyIntegral|isDomain.*[Tt]ensor|[Tt]ensor.*isDomain",
+   "results": "Read search output: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are integral morphisms or require geometric integrality/linear disjointness not supplied by the item; the affine tensor-domain result is an existing DAG node, not an exact Mathlib match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor products of integral domains over an algebraically closed field are integral domains",
+   "results": "Read search output: Algebra.IsIntegral.tensorProduct, Subalgebra.LinearDisjoint.isDomain, IntermediateField.LinearDisjoint.isDomain, Algebra.TensorProduct.isField_of_isAlgebraic, Subalgebra.LinearDisjoint.isDomain_of_injective, IntermediateField.LinearDisjoint.isField_of_forall, IsIntegral.tmul, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are integral morphisms or require geometric integrality/linear disjointness not supplied by the item; the affine tensor-domain result is an existing DAG node, not an exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Products of integral schemes of finite type over an algebraically closed field are integral",
+   "results": "Read search output: AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1, AlgebraicGeometry.IsIntegralHom.instDescScheme, Algebra.IsIntegral.prod, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.IsIntegralHom.instSndScheme, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are integral morphisms or require geometric integrality/linear disjointness not supplied by the item; the affine tensor-domain result is an existing DAG node, not an exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type integral scheme over an algebraically closed field is geometrically integral",
+   "results": "Read search output: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.IsIntegral.nonempty, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are integral morphisms or require geometric integrality/linear disjointness not supplied by the item; the affine tensor-domain result is an existing DAG node, not an exact Mathlib match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-boundary-divisor-model",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian",
+  "file": "Mathlib/AlgebraicGeometry/Geometrically/Integral.lean",
+  "how": "Lines 104--109 supply the product once geometric integrality of one factor is proved; no theorem supplying that hypothesis from algebraic closedness and integrality was found. This is not recorded as an exact leaf."
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne (2013), Proposition 4.1 proof: normality of G times the completion and its boundary components",
+   "via": [
+    "lem-sfb-rational-boundary-divisor-model",
+    "lem-sfb-rational-boundary-positive-stabilizer",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algclosed-integral-product",
+  "worker": "stage1",
+  "summary": "Q45 checked the affine-cover route of Stacks 05P3, reused the existing algebraically-closed tensor-domain and integral affine-cover nodes, and explicitly proved that product charts meet by base-change stability of surjectivity. Statement unchanged; no new nodes. No completed project attachment or exact Mathlib match found.",
+  "blueprint": "The inherited ancestry has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); retain its from/via provenance to Milne Proposition 4.1 via the rational-boundary-divisor-model chain. The four steps realize the integral-product ingredient in that boundary argument through Stacks 05P3. Latest blueprint searched, with no equivalent product-integrality statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algclosed-finite-type-tensor-domain",
+    "why": "Generic commutative-algebra tool: domains over algebraically closed k have domain tensor product when one factor is finite type; no node of this unit supplies the affine algebra fact."
+   },
+   {
+    "node": "lem-per-integral-affine-cover-criterion",
+    "why": "Generic scheme-theoretic tool: an affine open cover by domain rings with pairwise nonempty overlaps is integral; no node of this unit supplies the cover criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algclosed-finite-type-tensor-domain",
+  "lem-per-integral-affine-cover-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-31c553955",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-31c553955 (reviewer sub-agent of L); spot-checked: I read the full item: 4 steps, no new nodes, statement and stmt_deps unchanged. The route matches Stacks varieties.tex 05P3 (lines 85-141). Step 1: finite affine covers by Spec of finitely generated domains; empty charts are discarded and both index sets stay nonempty. Step 2: W_ij = p^-1(U_i) ∩ q^-1(V_j) is open, ≅ Spec(R_i⊗S_j), and is a domain by lem-weil-pbc-algclosed-finite-type-tensor-domain, whose hypotheses all hold. Step 3: charts meet pairwise, by irreducibility of each factor plus the 01S1 base change of the surjection U→Spec k, which makes U×_kV nonempty. It never uses a Cartesian product of the underlying point sets. Step 4: lem-per-integral-affine-cover-criterion, whose hypotheses steps 1-3 supply exactly. I read the proofs of both tool nodes; they are correct and acyclic, and I accept both as tool_uses. Small cases: Spec k, A^2, the cusp; Q(i)⊗_Q Q(i) shows algebraic closure is needed. Batch-5 check: the criterion reaches lem-trf-reduced-scheme-open-cover, a mathlib leaf saying reducedness is local on an open cover. That is a general scheme fact, not part of the trace formula or Poincaré duality or their proofs, so I accept it. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgClosedIntegralProduct",
+  "declaration": "AlgebraicGeometry.isIntegral_pullback_of_isAlgClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgClosedIntegralProduct.lean",
+  "statement": "theorem isIntegral_pullback_of_isAlgClosed (k : Type u) [Field k] [IsAlgClosed k] (A B : Scheme.{u}) [A.Over (Spec (CommRingCat.of k))] [B.Over (Spec (CommRingCat.of k))] [IsIntegral A] [IsIntegral B] [IsSeparated (A ↘ Spec (CommRingCat.of k))] [IsSeparated (B ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (A ↘ Spec (CommRingCat.of k))] [QuasiCompact (A ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (B ↘ Spec (CommRingCat.of k))] [QuasiCompact (B ↘ Spec (CommRingCat.of k))] : IsIntegral (pullback (A ↘ Spec (CommRingCat.of k)) (B ↘ Spec (CommRingCat.of k)))",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b78b6fdd0",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05P3 (varieties.tex 85-141) clause by clause: Field+IsAlgClosed k; IsIntegral A,B (Nonempty field); IsSeparated, LocallyOfFiniteType+QuasiCompact (per def-weil-finite-type-morphism record) of both A↘Spec k and B↘Spec k; conclusion IsIntegral (pullback ..). No extra hypotheses; shared universe u forced by Spec (CommRingCat.of k). lean.statement verbatim equal to file signature; only node field changed is lean. Proof sorry, no defs, docstring has source+blueprint+4 steps. Non-public proof import AlgClosedFiniteTypeTensorDomain exists; cover criterion has no Lean record so no import. No Mathlib/project duplicate (Geometrically/Integral instance needs GeometricallyIntegral+Flat+UniversallyOpen+locally Noetherian). Report has Worker report and Second reading by Q85 (same worker, disclosed). No compile run per instructions; no fixes."
+ }
+}

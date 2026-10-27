@@ -1,0 +1,343 @@
+{
+ "id": "lem-pod-point-dual-coefficient-domains",
+ "kind": "statement",
+ "title": "Point sections comparisons and coefficient-dual domains",
+ "statement": "Fix the Poincare coefficient conventions [def-pod-conventions]: $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, $\\ell\\ne\\operatorname{char}k$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Write $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ and $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Use the point categories and $F_\\Lambda=\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point], finite Tor amplitude [def-weil-finite-tor-amplitude], and derived tensor and internal Hom [def-weil-derived-pullback-tensor-hom]. Let $Q_s$ be finite reduction $A_{E,n}\\to A_{E,m}$ with $1\\le m\\le n$, integral reduction $\\mathcal O_E\\to A_{E,n}$, completed integral scalar extension for a finite coefficient-field extension, rationalization, or extension at a common finite coefficient-field stage. Write $\\Lambda'$ for its target coefficient ring and $q$ for the corresponding coefficient-module functor.\nFor $B\\in D^b_{ctf}(s,\\Lambda)$ there is a natural isomorphism in $D(\\Lambda')$\n$$t_{Q,B}:q(F_\\Lambda B)\\xrightarrow{\\sim}F_{\\Lambda'}(Q_sB).$$\nFor finite reduction this is the canonical balanced sections map\n$$\\Gamma(s,B)\\otimes^L_{A_{E,n}}A_{E,m}\\longrightarrow\\Gamma(s,B\\otimes^L_{A_{E,n}}(A_{E,m})_s).$$\nThis finite-reduction assertion holds for every unbounded ambient complex $B$ of $(A_{E,n})_s$-modules, with its target $A_{E,m}$-module action, without requiring finite Tor amplitude of $A_{E,m}$ over $A_{E,n}$. Its inverse is the ringed-point derived-tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], using the identity-adjunction geometric point whose inverse image is final-object sections and whose coefficient ring map is the identity, as in [lem-sf-point-ringed-evaluation-model]. At integral reduction $t$ is the sections/derived-reduction map [lem-pod-point-sections-derived-reduction]. At integral scalar extension it is exactly $\\varphi^{-1}$ of [lem-weil-point-sections-scalar-extension], including the completion comparison, and at common field stages it is that map rationalized. At rationalization it is the identity under the defining formula for $F_E$. These specified maps respect the fibre tensor and unit constraints [lem-sf-point-fibre-derived-tensor].\nFor $C\\in D^b_{ctf}(s,\\Lambda)$ put $D_sC=R\\mathcal Hom_s(C,\\omega_{s,\\Lambda})$, where $u_\\Lambda:\\omega_{s,\\Lambda}\\xrightarrow{\\sim}\\Lambda_s$ is the identity-adjunction normalization [lem-pod-point-dualizing-complex]. Then $D_sC$, $Q_sC$ and $D_s(Q_sC)$ belong to their corresponding bounded constructible finite-Tor categories. The canonical comparison $\\delta_{Q,C}:Q_sD_sC\\to D_sQ_sC$ is therefore defined on these domains; it is the transpose of coefficient-changed evaluation with $Q_s\\omega_{s,\\Lambda}\\cong\\omega_{s,\\Lambda'}$, normalized by $u_{\\Lambda'}$ to $Q_su_\\Lambda$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+  "place": "second paragraph, site-perfect compatibility"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-point-dualizing-complex",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-point-ringed-evaluation-model",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=A_{E,n}$ and $A'=A_{E,m}$. The point of [lem-sf-point-ringed-evaluation-model] has exact inverse image $\\Gamma_s$ and identity coefficient map; it takes $A_s\\to A'_s$ to $A\\to A'$. Its scalar square identifies the canonical sections map with the inverse of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to $B$ and $A'_s$, after forgetting to $D(A)$. Thus that underlying map is invertible for every unbounded $B$. We also verify its target action. Choose a flat-term K-flat resolution $P\\to B$ by [lem-pc-kflat-resolution]. Its sections are K-flat by the evaluation-model statement. By [lem-pur-derived-change-of-rings] the scalar changes are represented by $\\Gamma_sP\\otimes_A A'$ and $P\\otimes_{A_s}A'_s$. The canonical scalar comparison of the evaluation model is a morphism between these computations in $D(A')$; its balanced section rule is $A'$-linear, and the cited statements make it independent of $P$. Forgetting an $A'$-module complex to an $A$-module complex is exact and reflects zero modules, so cohomology of its cone vanishes if and only if it vanishes before forgetting. By [lem-weil-pbc-unbounded-derived-iso-cohomology], invertibility of the underlying map therefore proves invertibility in $D(A')$. Its inverse, after forgetting, is precisely the ringed-point derived-tensor comparison, with the target action just verified. This proves the stated ambient $t_{Q,B}$ and its naturality, without any finite Tor amplitude or K-flatness assumption on $A'$ over $A$.",
+   "uses": [
+    "lem-sf-point-ringed-evaluation-model",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change); point specialization and target scalar action; derived.tex Tag 05RT (lemma-acyclic)"
+   }
+  },
+  {
+   "text": "For integral reduction, apply [lem-pod-point-sections-derived-reduction] to $B$: it is an integral bounded constructible object because it belongs to the stated finite-Tor subcategory. This gives the specified natural map $\\Gamma(s,B)\\otimes^L_{\\mathcal O_E}A_{E,n}\\to\\Gamma(s,B\\otimes^L_{\\mathcal O_E}A_{E,n})$ as an isomorphism in $D(A_{E,n})$. For a finite field extension $E\\subset L$, apply [lem-weil-point-sections-scalar-extension] to the integral object $B$ and define $t_{Q,B}=\\varphi_{L/E,B}^{-1}$. Its stated formula is exactly $\\Gamma(s,\\chi_{L/E,B})\\circ\\theta_{L/E,B}$, so this includes the specified completion comparison rather than substituting an ordinary uncompleted scalar functor. Both results assert naturality in the derived object.",
+   "uses": [
+    "lem-pod-point-sections-derived-reduction",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "Second paragraph: coefficient passage; integral reduction and completed integral scalar extension"
+   }
+  },
+  {
+   "text": "At rationalization, [def-weil-finite-coefficient-point] defines $F_E$ on objects as $\\Gamma(s,B)\\otimes_{\\mathcal O_E}E$ and on arrows by scalar linear extension. Thus both sides of $t$ are this same functor and $t$ is the identity. At a common finite field stage use the rationalized isomorphism of [lem-weil-point-sections-scalar-extension], inverted in the same direction as in Step 2. Its identity and tower equalities imply that enlargement of the common stage gives the same comparison: the two routes are the two sides of that tower equality, with the intermediate $\\varphi$ and its inverse cancelled. This is exactly the representative rule defining $F_{\\overline{\\mathbf Q}_\\ell}$ in [def-weil-finite-coefficient-point], so it is natural for common-stage morphisms. Finally [lem-sf-point-fibre-derived-tensor] states compatibility of its tensor and unit constraints with finite reduction and scalar extension in these coefficient constructions. Together with the scalar square of [lem-sf-point-ringed-evaluation-model] for Step 1, it gives the asserted tensor and unit compatibility of the specified maps at every stage.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-sf-point-fibre-derived-tensor",
+    "lem-sf-point-ringed-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "Second paragraph: coefficient passage, tensor and unit constraints, rational and common-stage comparisons"
+   }
+  },
+  {
+   "text": "We check the finite-quotient domain without requiring the quotient ring to have finite Tor dimension. If $C$ has Tor interval $[a,b]$, [lem-sf-point-tor-amplitude-realization] supplies a finite free $A$-complex $P$ supported in $[a,b]$ representing $F_A C$. By [lem-pod-point-exact-extension-sections], the extension functor $L_A$ and sections are exact, have the explicit adjunction there, and have coefficient ring $\\Gamma_s A_s=A$. Hence the hypotheses of [lem-pod-point-sections-reconstruction] hold, and its actual counit identifies $L_A P$ with $C$. A term of $L_A P$ is a finite sum of $A_s$; changing coefficients sends it to the same finite sum of $A'_s$, with the differential matrix reduced modulo $\\varpi_E^m$. This bounded free sheaf complex is K-flat by [lem-pc-bounded-above-flat-kflat-site]. The computation of [lem-pur-derived-change-of-rings] therefore represents $Q_sC$ by its termwise scalar change. The coefficient unit is constructible by [lem-weil-constant-coefficient-objects-constructible] and has Tor interval $[0,0]$ since it is the tensor unit. Taking the finite sequence of shifts and cones of its terms, [lem-weil-finite-ctf-triangulated] shows that $Q_sC$ is bounded constructible finite-Tor. Equivalently its free complex already gives the interval $[a,b]$ on tensoring with any degree-zero $A'_s$-module.",
+   "uses": [
+    "lem-sf-point-tor-amplitude-realization",
+    "lem-pod-point-exact-extension-sections",
+    "lem-pod-point-sections-reconstruction",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-weil-finite-ctf-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "Second paragraph: finite-Tor coefficient domains; bounded free point models and quotient coefficients"
+   }
+  },
+  {
+   "text": "For integral reduction, bounded constructibility of $Q_sC$ is part of the integral category in [def-weil-derived-complete-integral-detailed]; its finite Tor interval is one of the uniform reduction intervals required by [def-weil-finite-tor-amplitude]. For completed integral scalar extension, [lem-weil-integral-scalar-extension-constructible] puts $Q_sC$ in the target integral bounded constructible category, and [thm-sf-ctf-stability] states that this category equals its finite-Tor subcategory. Rationalization and finite field extension are functors between the bounded constructible categories by [def-weil-rationalization-karoubi]. Such objects are finite-Tor by the field-stage definition in [def-weil-finite-tor-amplitude]. The same holds for objects represented at a common finite coefficient-field stage by [def-weil-algebraically-closed-coefficients]. This verifies $Q_sC$ belongs to the claimed domain for every remaining $Q$.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-integral-scalar-extension-constructible",
+    "thm-sf-ctf-stability",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "Second paragraph: integral, rational and common-stage coefficient domains"
+   }
+  },
+  {
+   "text": "The point $s$ is a separated finite-type $k$-scheme, its structure map being the identity. Apply the Verdier-duality preservation of [thm-sf-ctf-stability], clause (vi), to $C$ at a finite stage. It gives $D_sC\\in D^b_{ctf}(s,\\Lambda)$. The integral and field conclusions of the same statement give this at $\\mathcal O_E$, $E$ and $\\overline{\\mathbf Q}_\\ell$. Apply it again at the target coefficient stage to $Q_sC$, whose membership was proved in Steps 4 and 5. This gives $D_s(Q_sC)$ in the target finite-Tor category. In particular $t_{Q,D_sC}$ is also on its asserted bounded finite-Tor domain. The normalization [lem-pod-point-dualizing-complex] identifies the dualizing object of this identity structure morphism with the coefficient unit, so these are exactly the $D_s$ functors in the statement.",
+   "uses": [
+    "thm-sf-ctf-stability",
+    "lem-pod-point-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "Second paragraph: point duals and their bounded finite-Tor domains"
+   }
+  },
+  {
+   "text": "Write $e_Q:Q_s\\Lambda_s\\xrightarrow{\\sim}\\Lambda'_s$ for the coefficient-unit identification. It is the scalar unit identification at finite reduction and is preserved by the completed and field-stage coefficient comparisons of [lem-fix-operation-reduction]. Using $u$ from [lem-pod-point-dualizing-complex], set\n$$w_Q=u_{\\Lambda'}^{-1}\\circ e_Q\\circ Q_su_\\Lambda:Q_s\\omega_{s,\\Lambda}\\xrightarrow{\\sim}\\omega_{s,\\Lambda'}.$$\nThus $u_{\\Lambda'}\\circ w_Q=e_Q\\circ Q_su_\\Lambda$, precisely the required normalization. Apply $Q_s$ to evaluation $D_sC\\otimes^L C\\to\\omega_{s,\\Lambda}$, precede it by the inverse coefficient-tensor comparison, and follow it by $w_Q$. The tensor comparison exists for finite reduction by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and for the completed and field coefficient constructions by [lem-fix-operation-reduction]. This gives the actual arrow\n$$Q_sD_sC\\otimes^L Q_sC\\longrightarrow Q_s\\omega_{s,\\Lambda}\\xrightarrow{w_Q}\\omega_{s,\\Lambda'}.$$\nBy [thm-sf-ctf-stability], clause (vii), the canonical internal-Hom coefficient comparison on these finite-Tor domains exists and preserves evaluation. Compose that comparison with $R\\mathcal Hom_s(1,w_Q)$. Its evaluation is the displayed arrow, so this is precisely the canonical evaluation transpose $\\delta_{Q,C}:Q_sD_sC\\to R\\mathcal Hom_s(Q_sC,\\omega_{s,\\Lambda'})=D_sQ_sC$. Steps 4--6, also applied to $D_sC$, put both endpoints in their claimed categories. This proves existence and the specified normalization; no invertibility of $\\delta$ is needed here.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "lem-pod-point-dualizing-complex",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "Second paragraph: coefficient-changed evaluation and its internal-Hom transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-point-ringed-evaluation-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-finite-coefficient-point",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-sf-point-tor-amplitude-realization",
+  "lem-pod-point-exact-extension-sections",
+  "lem-pod-point-sections-reconstruction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-finite-ctf-triangulated",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-integral-scalar-extension-constructible",
+  "thm-sf-ctf-stability",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pod-point-dualizing-complex",
+  "lem-fix-operation-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+  "place": "Second paragraph: explicit point coefficient comparison and domain argument, using the existing ringed-point and coefficient-calculus nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.MonoidalClosed.ofEquiv; CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj; CategoryTheory.MonoidalClosed.ofEquiv_curry_def; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def; CategoryTheory.Monoidal.Reflective.monoidalClosed; CategoryTheory.Monoidal.Reflective.closed; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom; CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At an algebraically closed pro etale point exact sections commute with unbounded derived tensor by a finite quotient coefficient ring via the canonical sections tensor map",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.Extension.tensorCotangentSpace; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Algebra.Generators.CotangentSpace.exact; Algebra.FormallyEtale.instTensorProduct; Algebra.Generators.Cotangent.exact; Algebra.Extension.tensorH1Cotangent",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(sections|globalSections).*(tensor|Tensor)|(tensor|Tensor).*(sections|globalSections)",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sections on an algebraically closed pro etale point commute with derived reduction of coefficients by a quotient ring as an isomorphism in the target coefficient derived category",
+   "results": "DerivedCategory.singleFunctorsPostcompQIso; Algebra.FormallyEtale.iff_comp_bijective; AlgebraicGeometry.stalkClosedPointIso; HomologicalComplexUpToQuasiIso.quotientCompQhIso; Algebra.Etale.formallyEtale; AlgebraicGeometry.stalkClosedPointIso_inv; DerivedCategory.quotientCompQhIso; Algebra.FormallyEtale.of_equiv",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.MonoidalClosed",
+   "results": "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical global sections scalar change map for modules on a ringed topos point is a derived coefficient linear isomorphism for nonflat quotient rings",
+   "results": "Module.flat_of_isLocalized_span; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; Module.Flat.of_forall_exists_factorization; Module.Flat.iff_forall_exists_factorization; Module.FaithfullyFlat; Module.Flat.of_retract; Module.Flat.tfae_equational_criterion; Module.flat_of_isLocalized_maximal",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact global sections on an algebraically closed pro etale point commute with unbounded derived coefficient reduction and preserve constructible finite Tor coefficient dual domains",
+   "results": "Profinite.NobelingProof.succ_exact; Algebra.H1Cotangent.exact_map_δ; Algebra.Generators.H1Cotangent.exact_map_δ; Algebra.Generators.H1Cotangent.exact_map_δ'; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; Algebra.Generators.H1Cotangent.exact_δ_map; Algebra.H1Cotangent.exact_δ_mapBaseChange; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary categorical, module, scheme-section or condensed results do not assert this derived pro-etale point coefficient comparison and its finite-Tor domains"
+  },
+  {
+   "tool": "grep",
+   "query": "(sections|globalSections).*(tensor|Tensor)|(tensor|Tensor).*(sections|globalSections)",
+   "results": "Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean; Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean; Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean; Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean; Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean; Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Metric.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary categorical, module, scheme-section or condensed results do not assert this derived pro-etale point coefficient comparison and its finite-Tor domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections on a geometric point commute with derived change of coefficient rings even for a nonflat quotient",
+   "results": "AlgebraicGeometry.Scheme.Γ; AlgebraicGeometry.Scheme.Γ_def; AlgebraicGeometry.LocallyRingedSpace.Γ_obj; AlgebraicGeometry.LocallyRingedSpace.Γ; AlgebraicGeometry.AffineScheme.Γ; AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec; AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary categorical, module, scheme-section or condensed results do not assert this derived pro-etale point coefficient comparison and its finite-Tor domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal exact geometric stalk functor commutes with derived extension of scalars and duality of perfect complexes",
+   "results": "CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary categorical, module, scheme-section or condensed results do not assert this derived pro-etale point coefficient comparison and its finite-Tor domains"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ee]xtendScalars|[Ss]talk.*[Tt]ensor|[Tt]ensor.*[Ss]talk",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary categorical, module, scheme-section or condensed results do not assert this derived pro-etale point coefficient comparison and its finite-Tor domains"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-point-duality-coefficient-compatibility",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-global-verdier-duality",
+   "place": "second paragraph, site-perfect coefficient compatibility: ambient finite-quotient sections comparison, specified point coefficient functors, and finite-Tor duality domains (returned item steps 1--4)",
+   "via": [
+    "lem-pod-point-duality-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-point-dual-coefficient-domains",
+  "worker": "stage1",
+  "summary": "NF retains the entire statement, proves the unbounded finite quotient comparison with its target coefficient action, assembles the specified integral/field maps, verifies finite-Tor domains using finite free point reconstruction and the existing stability theorem, and constructs the normalized evaluation transpose. No new nodes or Mathlib leaves; all non-elementary inputs already exist.",
+  "blueprint": "thm-pod-global-verdier-duality.proof.md, second paragraph beginning By lem-pod-point-dualizing-complex and the subsequent site-perfect coefficient-compatibility sentences; point coefficient domains are made explicit without using the parent compatibility theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-point-ringed-evaluation-model",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-pod-point-sections-derived-reduction",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-weil-finite-ctf-triangulated",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic point, derived coefficient or constructibility tool used only for its stated comparison/domain assertion; it supplies no replacement geometric route for the six-operations unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-point-ringed-evaluation-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-finite-ctf-triangulated",
+  "lem-weil-integral-scalar-extension-constructible",
+  "thm-sf-ctf-stability",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-ac4ad46b4",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-ac4ad46b4 (reviewer sub-agent of L); spot-checked: Read the item, all 23 cited statements and the source paragraph (main-20261015 thm-pod-global-verdier-duality.proof.md, second paragraph). No new nodes, the inherited Q14 statement is kept, there is no SGA citation and no cycle. Step 1: the unbounded finite reduction holds via the ringed-topos tensor-pullback lemma for arbitrary G (A'_s is not flat, which the step handles correctly). The target A'-action is shown by a K-flat resolution plus derived change of rings, and invertibility lifts to D(A') by the cohomology criterion. Step 2: the derived-reduction lemma applies verbatim, and t = phi^{-1} = Gamma(chi) o theta has the right direction. Step 3: rationalization is the identity by the definition of F_E; the common stage follows from the tower equality. Step 4: the finite free model, the reconstruction counit (its hypotheses are exactly lem-pod-point-exact-extension-sections), bounded flat implies K-flat, and the cone/shift closure give Q_sC in D^b_ctf over A'. Step 5: the remaining Q follow from the integral definition, scalar-extension constructibility plus ctf-stability (vii), and the field-stage definitions. Step 6: ctf-stability (vi)/(vii) at s = Spec k. Step 7: w_Q is normalized by construction and delta is the evaluation transpose; only existence is claimed. Small cases C = unit, n = m, rank-one shift and the nonflat Z/l^2 -> Z/l edge case are consistent. The 14 tool_uses are accepted as generic black boxes; their 'why' text is boilerplate. Batch-5 finding (reconstruction reaches lem-pod-point-sections-derived-reduction): not a fault. That lemma is a generic point coefficient lemma from prop-cohomological-finiteness that neither assumption gives, it is already a stmt_dep of the item on base, and the item itself lies inside the proof of thm-pod-global-verdier-duality, so it cannot cite nt-assume-poincare-duality."
+ }
+}

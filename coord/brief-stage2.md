@@ -4,6 +4,16 @@ Written by the lead (rules: decision of the human, 2026-10-11). Your prompt name
 
 ## 0. What you read
 
+Stage handoff (maintenance, 2026-10-22): a passing stage-1 split is the input to
+stage 2. The stage-1 rule against reopening a reviewed split does not prohibit
+recording its Lean statement here. When an inherited worker ending describes
+an unchanged-item failure of stage-1 `deliver.py`, check the current node,
+the stage in your current prompt and `coord/queue.tsv`, and any released repair
+note. If this is a stage-2 assignment and the node has no usable Lean record,
+continue this brief and validate with `deliver2.py`. Preserve the accepted split
+except for the changes authorized below. An old stage-1 BLOCKED ending alone
+is not a stage-2 tool failure.
+
 - Maintenance repair handoff (2026-10-16): read `coord/repair-notes/<id>.json` when present, including before an `existing: true` match. A note with `stage: "2"` and `state: "released"` records an interface repair on this item even when the dispatcher calls the newly claimed task "new". Read its diagnostic and archived binding; repair every recorded defect and show the required consumer validation in the worker report. Second readers verify that repair before delivery. Rebinding the withdrawn declaration without fixing its recorded defect is not a repair. This does not authorize stating another DAG node.
 - The node `dag/nodes/<chapter>/<id>.json`: `statement`, `kind`, `source`, `stmt_deps`, `proof` (statement nodes), `mathlib_searches`.
 - Every node in `stmt_deps`, its statement and its `lean` record (`module`, `declaration`) or `mathlib_match`. A dependency with no `lean` record whose `lean_audit.slopmaster2.state` is `closed` is already stated upstream: the `decls` of that audit record name its declarations (name, module, lines) in the slopmaster2 source, and the review packet lists them; cite those, do not state the node again (2026-10-18).
@@ -89,7 +99,7 @@ etale cohomology-pullback cases.
 - No file-local `notation`, `local instance`, `private` definition or abbreviation in a statement module; a statement must read outside its file and namespace (`Module.Basis`, not `Basis`) (F1 91b674ef5, J1 f048a280a, E1 b5d12a0ed; STATE line FILE-LOCAL NOTATION).
 - Derived tensor on schemes: new statements use the global `schemeDerivedTensorMonoidal` (def-pc-scheme-derived-tensor-structure, M1 0ec9b24af) with `⊗`, `▷`, `𝟙_`; landed K-flat-representative statements stay valid; never a second derived-tensor definition (STATE line DERIVED TENSOR ON SCHEMES).
 - No tautological conjunct (`pullback.condition`, `0 ≤ h`) and no clause the node does not state (C1 f683186fb, 52041d948; J1 6b2c20148).
-- Compile under the default 60 s limit; never raise SHEAF_FILE_TIMEOUT to pass (G1 61a26ce2c). `Additive` of a three-fold functor composite needs `set_option synthInstance.maxSize 2048` (H1 8f2941a40).
+- Compile under the default 60 s limit (the compile runs up to 300 s to show the slow declarations; over 60 s it is not accepted); never raise SHEAF_FILE_TIMEOUT to pass (G1 61a26ce2c). `Additive` of a three-fold functor composite needs `set_option synthInstance.maxSize 2048` (H1 8f2941a40).
 - Conventions added at B-1418 (STATE): PSEUDO-COHERENT, PERFECT, TOR AMPLITUDE, DERIVED PULLBACK, DERIVED FIBRES, EXTENSION BY ZERO, KOSZUL COMPLEX, P-BASIS, POWER SERIES, POPESCU FAMILY, RELATIVE SPEC AND QUASI-COHERENT ALGEBRAS, PROJ TWISTS, REGULAR and FAITHFULLY FLAT RING MAPS — read them before stating a node of these families.
 - Derived restriction to an open U of a scheme is `(SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U ⋙ Equivalence.functor (C := …) (D := …) (Scheme.Modules.overEquiv U)).mapDerivedCategory` into `schemeDerivedCategory U.toScheme` (G1 ce180b4c0, M1 f526a6fea); between opens `overMap ... |>.mapDerivedCategory`, Hom restriction `AlgebraicGeometry.derivedOpenHomRestriction`; the exactness instances `moduleOverFunctor_*`/`moduleOverMap_*` in lean/Sheaf/Paper/DerivedHomMayerVietoris.lean are shared, a restatement fails H4 (STATE line DERIVED RESTRICTION TO AN OPEN).
 - A statement you find false or untypable: correct the node by (C) of §1, following the source, with `statement_change` and the report section. Never write it weaker, never change the statement silently (H7).
@@ -196,6 +206,7 @@ The delivery changes the item's node file ONLY in the field `lean` (and in `stmt
 
 - `id` = file name, `def-<chapter prefix>-<short-name>`, not existing on `newtargets-dag`; the file in the item's chapter directory;
 - `kind`: `"definition"`; `title`; `status`: `"split"`;
+- `import_flags`: required, `[]` when a target or former target reaches the new node through the delivery; use `["unreachable"]` only when no target or former target reaches it (`tools/check_dag.py` reach check).
 - `statement`: self-contained TeX introducing its own objects and citing as `[id]` the definition node of every notion it is built from; `stmt_deps`: exactly the cited ids (existing nodes or other new nodes of the delivery);
 - `source`: `{document, place}` (the Stacks tag and label, or the document in `literature/`);
 - `proof`: `[]`, `proof_deps`: `[]`, `proof_origin`: `null`; `mathlib_match`: `null`;
@@ -204,6 +215,8 @@ The delivery changes the item's node file ONLY in the field `lean` (and in `stmt
 - `blueprint`: `{is: null, from: {node: <python3 tools/blueprint_refs.py ancestor <item>>, place: <the place in that blueprint proof the notion serves>, via: <the item's via with the item in front>}, same_as: [...]}`;
 - `lean_audit`: `{"master": {"state": "none"}, "slopmaster2": {"state": "none"}}`; `chapter`, `unit`: the item's;
 - `lean`: the record above for its module (`existing: false`), or an existing declaration (`existing: true`, no module); a declaration already landed in `lean/Sheaf` by another node is recorded with `existing: true`, `branch: "newtargets-dag"`, `module: Sheaf.<…>` (§1), also for a dependency node of (B).
+
+For a NEW definition node, the worker supplies the required `import_flags` metadata above, as required by `tools/stage2_delivery.py` since 2026-10-23. This is an exception to the general maintainer-field rule in `tools/node_fields.py`; it does not authorize changing `import_flags` on an existing item or dependency node.
 
 No other field (`reviewed`, `reviewed_lean`, notes): the merge sets `reviewed` and `reviewed_lean`. The new node must be cited by the item (its `stmt_deps`), directly or through another new node.
 

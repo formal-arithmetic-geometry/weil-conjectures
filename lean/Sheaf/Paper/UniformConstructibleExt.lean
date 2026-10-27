@@ -8,8 +8,10 @@ module
 public import Sheaf.Paper.CoefficientHeart
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.AlgebraicGeometry.CohomologicalDimension
+public import Sheaf.Paper.UniformConstructibleExtRational
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
-import Sheaf.Paper.UniformConstructibleExtRational
+import Sheaf.Paper.NormalLisseFiniteCoefficientLattice
+import all Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 import Mathlib.Algebra.CharP.CharAndCard
 import Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimension
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
@@ -388,6 +390,183 @@ theorem uniformConstructibleExt_cutoff
   apply WithTop.ne_top_iff_exists.mp
   exact ne_of_lt (WithTop.add_lt_top.mpr
     ⟨WithTop.add_lt_top.mpr ⟨hj, hS⟩, WithTop.coe_lt_top 2⟩)
+
+/-- The finite source model supplied by the rational stratum estimate has the displayed
+open-closed Ext bound against every constructible target whenever that model has a global
+lisse integral lattice. The finite model is chosen before any target.
+
+Source: blueprint `sk-lem-uniform-constructible-ext`, target-filtration reduction in the
+opening paragraph of its proof, and `det-uniform-constructible-ext-rational`, final clause
+(blueprint: sk-lem-uniform-constructible-ext).
+
+Proof: apply the rational stratum theorem once to the source, retaining its finite model
+and its conditional unrefined estimate. The finite/algebraically closed base-field bound
+and finite-type cohomological-dimension bounds make the displayed cutoff a natural number.
+For a degree above it, filter any constructible target by locally closed lisse extensions.
+Factor each target immersion through its scheme-theoretic image and apply the conditional
+stratum estimate. Covariant Ext exactness gives the same vanishing for each successive
+extension, without increasing the cutoff. Transport quotient isomorphisms and the top
+subobject to recover the target. The zero target and empty filtrations are included.
+This assertion does not claim that the chosen source model has a global lattice. -/
+theorem uniformConstructibleExt_latticeModel
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj Λ)]
+    (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
+      FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨
+      Λ = Profinite.padicAlgClCondensedRing ℓ)
+    (k : Type u) [Field k]
+    (hk : Nonempty (k ≃+* D.k₀) ∨ Nonempty (k ≃+* D.k))
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    (S Z U : Scheme.{u}) (v : S ⟶ Z) (i : Z ⟶ X) (j : U ⟶ X)
+    [IsOpenImmersion v] [IsClosedImmersion i] [IsOpenImmersion j]
+    [CompactSpace S] [QuasiSeparatedSpace S] [QuasiCompact j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj Λ) S))
+    (hL : IsLisseCoefficientModule (coefficientHeartRingObj Λ) L) :
+    ∃ (E : PadicAlgCl.FiniteIntermediateField ℓ)
+      (f : Profinite.continuousMapRingSheaf.{u} E ⟶ Λ),
+      ((∃ h : Profinite.continuousMapRingSheaf.{u} E = Λ, f = eqToHom h) ∨
+        ∃ h : Profinite.padicAlgClCondensedRing.{u} ℓ = Λ,
+          f = Profinite.padicSubfieldCondensedRingToPadicAlgCl ℓ E ≫ eqToHom h) ∧
+      ∃ Lmodel : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+          (condensedRingObj (Profinite.continuousMapRingObj E) S),
+      IsLisseCoefficientModule (Profinite.continuousMapRingObj E) Lmodel ∧
+      Nonempty ((Mod.extendScalars ((upperStarFromPoint S).map
+        ((sheafCompose (coherentTopology Profinite.{u})
+          (forget₂ RingCat.{u + 1} Ab.{u + 1})).map f))).obj Lmodel ≅ L) ∧
+      (Nonempty (RationalExtIntegralLattice
+        ((upperStarFromPoint S).map (rationalExtIntegralInclusion ℓ E)) Lmodel) →
+        ∃ d : ℕ,
+          (d : WithTop ℕ) = relativeCohomologicalDimension ℓ (Fact.out : ℓ.Prime) j +
+            cohomologicalDimension ℓ (Fact.out : ℓ.Prime) S + 2 ∧
+          ∀ N : ConstantModelConstructible (coefficientHeartRingObj Λ) X,
+            ∀ q : ℕ, d < q →
+              Subsingleton (Abelian.Ext
+                ((CondensedRing.lowerStar (coefficientHeartRingObj Λ) i).obj
+                  ((CondensedRing.openImmersionLowerShriek
+                    (coefficientHeartRingObj Λ) v).obj L)) N.obj q)) := by
+  classical
+  have : Fact D.p.Prime := ⟨D.prime⟩
+  have : CharP D.k₀ D.p := by
+    let := Fintype.ofFinite D.k₀
+    exact charP_of_card_eq_prime_pow
+      ((Nat.card_eq_fintype_card (α := D.k₀)).symm.trans
+        (D.card_base.trans D.cardinality_eq))
+  have : CharP D.k D.p := Algebra.charP_iff D.k₀ D.k D.p |>.mp inferInstance
+  have : CharP k D.p := by
+    rcases hk with ⟨⟨e⟩⟩ | ⟨⟨e⟩⟩
+    · exact charP_of_injective_ringHom e.symm.toRingHom.injective D.p
+    · exact charP_of_injective_ringHom e.symm.toRingHom.injective D.p
+  have : IsNoetherian X :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) }
+  obtain ⟨E, f, hf, Lmodel, hmodel, e, W, d, hW, hlat, hd, hc, hrestr, hvan, hglobal⟩ :=
+    uniformConstructibleExtRational k D.p ℓ hℓ.symm Λ hΛ X S Z U v i j hij L hL
+  refine ⟨E, f, hf, Lmodel, hmodel, e, ?_⟩
+  intro hlattice
+  obtain ⟨n, hn⟩ := uniformConstructibleExt_cutoff D ℓ k hk X S Z U v i j
+  refine ⟨n, hn, ?_⟩
+  intro N q hq
+  have hqd : (q : WithTop ℕ) >
+      relativeCohomologicalDimension ℓ (Fact.out : ℓ.Prime) j +
+        (cohomologicalDimension ℓ (Fact.out : ℓ.Prime) S + 2) := by
+    rw [← add_assoc, ← hn]
+    exact WithTop.coe_lt_coe.mpr hq
+  rcases coefficientHeart ℓ Λ hΛ k D.p hℓ.symm X with
+    ⟨_, _, _, _, _, _, _, _, _, _, hfil, _⟩
+  obtain ⟨m, T, hbot, htop, hle, hquot⟩ := hfil N
+  apply property_of_filtration (fun B ↦ Subsingleton (Abelian.Ext
+    ((CondensedRing.lowerStar (coefficientHeartRingObj Λ) i).obj
+      ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj Λ) v).obj L)) B q))
+    (fun B hB ↦ ext_zero_right _ hB q)
+    (fun B C e h ↦ by have := h; exact ext_iso_right _ e q)
+    (fun hS h1 h3 ↦ by have := h1; have := h3; exact ext_shortExact_right _ hS q)
+    T hbot htop hle
+  intro r
+  obtain ⟨T', b, hb, M, hM, ⟨e⟩⟩ := hquot r
+  have : IsImmersion b := hb
+  have : TopologicalSpace.NoetherianSpace T' := b.isEmbedding.isInducing.noetherianSpace
+  let V : X.Opens := ⟨(Set.range b.imageι)ᶜ,
+    b.imageι.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have hcompb : Set.range b.imageι = (Set.range V.ι)ᶜ := by
+    rw [Scheme.Opens.range_ι]
+    exact (compl_compl _).symm
+  have : Subsingleton (Abelian.Ext
+      ((CondensedRing.lowerStar (coefficientHeartRingObj Λ) i).obj
+        ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj Λ) v).obj L))
+      ((coefficientHeartLocallyClosedExtension (coefficientHeartRingObj Λ) b hb).obj M) q) :=
+    hglobal hlattice T' b.image V b.toImage b.imageι V.ι hcompb M hM q hqd
+  exact ext_iso_right _ e.symm q
+
+/-- The explicit original cutoff holds when the source is nonempty, connected and has
+normal stalks. Both finite rational and algebraic-closure coefficients are allowed;
+normality is required only for the source S, not for its closure or the ambient scheme.
+
+Source: blueprint latest, `sk-lem-uniform-constructible-ext`, the lisse-stratum estimate,
+and `thm-lisse-qlbar-representations`, clause (4), normal-scheme lattice existence
+(blueprint: sk-lem-uniform-constructible-ext).
+
+Proof: choose the finite coefficient model of the lisse source in
+uniformConstructibleExt_latticeModel. Its coefficient field and model are fixed before
+any target. The immersion S -> X makes S locally Noetherian, and S is already compact.
+The normal finite-coefficient lattice theorem gives an embedded lisse integral lattice
+in this very model. The coefficient inclusion in that theorem is definitionally the
+recorded rationalExtIntegralInclusion. To obtain the required local-freeness predicate,
+use the same pro-etale cover and transport its free modules along the cartesian
+coefficient isomorphism. The lattice inclusion, monomorphism and invertible adjoint are
+unchanged. Apply the conditional conclusion to this lattice. Its target-filtration proof
+retains the original cutoff for every constructible target simultaneously. Rank-zero
+sources are included; no lattice on the target or ambient scheme is assumed. -/
+theorem uniformConstructibleExt_normalConnectedSource
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj Λ)]
+    (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
+      FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨
+      Λ = Profinite.padicAlgClCondensedRing ℓ)
+    (k : Type u) [Field k]
+    (hk : Nonempty (k ≃+* D.k₀) ∨ Nonempty (k ≃+* D.k))
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    (S Z U : Scheme.{u}) (v : S ⟶ Z) (i : Z ⟶ X) (j : U ⟶ X)
+    [IsOpenImmersion v] [IsClosedImmersion i] [IsOpenImmersion j]
+    [CompactSpace S] [QuasiSeparatedSpace S] [QuasiCompact j]
+    [Nonempty S] [ConnectedSpace S]
+    (hnormal : ∀ z : S, IsDomain (S.presheaf.stalk z) ∧
+      IsIntegrallyClosed (S.presheaf.stalk z))
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj Λ) S))
+    (hL : IsLisseCoefficientModule (coefficientHeartRingObj Λ) L) :
+    ∃ d : ℕ,
+      (d : WithTop ℕ) = relativeCohomologicalDimension ℓ (Fact.out : ℓ.Prime) j +
+        cohomologicalDimension ℓ (Fact.out : ℓ.Prime) S + 2 ∧
+      ∀ N : ConstantModelConstructible (coefficientHeartRingObj Λ) X,
+        ∀ q : ℕ, d < q →
+          Subsingleton (Abelian.Ext
+            ((CondensedRing.lowerStar (coefficientHeartRingObj Λ) i).obj
+              ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj Λ) v).obj L))
+            N.obj q) := by
+  have : IsNoetherian X :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) }
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian (v ≫ i)
+  obtain ⟨E, f, hf, Lmodel, hmodel, e, hbound⟩ :=
+    uniformConstructibleExt_latticeModel D ℓ hℓ Λ hΛ k hk X S Z U v i j hij L hL
+  obtain ⟨M, hM, ι, hι, he⟩ :=
+    LisseRepresentation.has_lattice_of_normal ℓ S hnormal E Lmodel hmodel
+  apply hbound
+  refine ⟨⟨M, ?_, ι, hι, he⟩⟩
+  obtain ⟨𝒰, h𝒰⟩ := hM
+  refine ⟨𝒰, fun c ↦ ?_⟩
+  let φ := condensedPullbackHom (LisseRepresentation.integers ℓ E).X (𝒰.f c)
+  apply free_of_comap (inv φ)
+  exact free_of_iso (h𝒰 c) ((Mod.extendScalarsIsoComapInv φ).app _)
 
 /-- Every rational constructible sheaf has a bound on Ext uniform in all constructible
 second arguments. For `a = i ∘ v`, the bound is exactly `cd_ℓ(j) + cd_ℓ(S) + 2`.

@@ -1,0 +1,130 @@
+{
+ "id": "def-weil-pbc-reduction-augmentation",
+ "kind": "definition",
+ "title": "Normalized augmentation of the completed reduction tower",
+ "statement": "For an adic coefficient datum [def-weil-pbc-adic-coefficient-datum] and a scheme T, the quotient scalar adjunctions define a unique natural transformation from the constant strict module tower to the reduction tower whose n-th component sends x to 1 tensor x. Deriving this morphism gives a unique natural transformation from the exact derived constant tower to the specified left-derived reduction tower, normalized on every K-flat representative by its universal reduction counit and the constant-tower localization factors. These constructions are independent of any pullback or completion comparison.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YS, 06YY, 099N"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Use the tensor-unit normalized scalar adjunction at every quotient. Quotient transitions preserve one, so these units give a strict tower map. Naturality and sectionwise extensionality prove the ordinary uniqueness.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift the homotopy-level augmentation through the universal left-derived reduction counit. Its factorization equation gives the cochain formula. On a K-flat representative the counit is invertible, so this formula determines the augmentation. Every derived object has such a representative; naturality gives uniqueness on all objects.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Existing project declarations",
+  "place": "Relocation without changing signatures or bodies, extracted from def-weil-pbc-completed-pullback to make its completion comparison acyclic."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.compConstIso",
+   "results": "{\"top\": [\"CategoryTheory.Functor.compConstIso\", \"CategoryTheory.Functor.compConstIso_hom_app_app\", \"CategoryTheory.Functor.compConstIso_inv_app_app\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app\"], \"n_hits\": 4, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic Mathlib APIs found and used; the published normalized completed-ring constructions are project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant functor into a category of inverse systems is exact and left adjoint to the limit functor, so its derived functor has a derived right adjoint",
+   "results": "{\"top\": [\"CategoryTheory.Limits.instIsRightAdjointFunctorLim\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit'\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.hasExactLimitsOfShape\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit\", \"CategoryTheory.Limits.hasLimitsOfShape_iff_isLeftAdjoint_const\", \"Condensed.hasExactLimitsOfShape\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic Mathlib APIs found and used; the published normalized completed-ring constructions are project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "constLimAdj|leftDerivedNatTrans_fac|whiskeringRight",
+   "results": "{\"top\": [\"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\"], \"n_hits\": 25, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic Mathlib APIs found and used; the published normalized completed-ring constructions are project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exact constant functor into inverse systems commutes with exact termwise pullback and has limit as its right adjoint",
+   "results": "{\"top\": [\"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.Limits.colimConstAdj\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.Limits.instIsRightAdjointFunctorLim\", \"CategoryTheory.Limits.hasColimitsOfShape_iff_isRightAdjoint_const\", \"CategoryTheory.leftExactFunctor\", \"CategoryTheory.Limits.isLimitConeOfAdj\", \"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic constant/limit adjunction APIs found and used; the normalized completed-ring quotient construction and exact pullback interface are project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTowerPullback",
+  "date": "2026-10-22",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Comparison paragraph: quotient maps give a strict morphism from the constant tower; apply tower pullback and Rlim.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedReductionUnit",
+  "file": "lean/Sheaf/Paper/CompletedReductionUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedReductionTowerUnit_exists",
+  "statement": "theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :\n    ∃! τ : completedDerivedConstant d T ⟶ completedReductionTower T d,\n      HasCompletedReductionTowerUnitNormalization d T τ",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-22",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedReductionModuleUnit_exists",
+   "AlgebraicGeometry.Scheme.completedReductionModuleUnit",
+   "AlgebraicGeometry.Scheme.completedReductionTowerCounit",
+   "AlgebraicGeometry.Scheme.HasCompletedReductionTowerUnitNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionTowerUnit_exists",
+   "AlgebraicGeometry.Scheme.completedReductionTowerUnit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-ceb87",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113806-L-249289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-ceb87",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113806-L-249289",
+  "kind": "interface",
+  "note": "independent cc review: ceb877bf vs PASSed head 3303661f (9 Lean modules sha256-identical, packet diffs hash-identical, nodes differ only in lean_audit = live); Users table vs 66 computed users + the 4 landing-gate users; prior /tmp/a4sb importer compiles (38 direct importers, sources still = live, no new importers)"
+ }
+}

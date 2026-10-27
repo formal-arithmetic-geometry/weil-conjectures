@@ -152,7 +152,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-open-closed-triangle",
  "split_report": {
@@ -212,5 +223,39 @@
   "landing": "20261018T062932-L-686231",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion with complementary open\nimmersion $j:U\\hookrightarrow X$, and let $\\Lambda$ be a commutative ring,\nfor instance a finite one (more generally, the coefficients may be any\nGrothendieck abelian category with the monoidal structure used for derived\ntensor products, such as $\\Lambda$-modules). For every etale sheaf $F$ on $X$\nthe sequence\n$$\n0\\longrightarrow j_!j^{-1}F\\longrightarrow F\\longrightarrow i_*i^{-1}F\n\\longrightarrow0,\n$$\nwhose maps are the counit of $j_!\\dashv j^{-1}$ and the unit of\n$i^{-1}\\dashv i_*$, is exact. For every $K\\in D(X_{\\Et},\\Lambda)$ the counit\n$j_!j^{-1}K\\to K$ and the unit $K\\to Ri_*i^{-1}K$ of the derived adjunctions\nextend to a distinguished triangle\n$$\nj_!j^{-1}K\\longrightarrow K\\longrightarrow Ri_*i^{-1}K\n\\longrightarrow j_!j^{-1}K[1],\n$$\nwhere $Ri_*=i_*$ is the (exact) direct image of the closed immersion.",
+  "proof": [
+   {
+    "text": "The closed immersion $i$ is finite, so $i_*$ is exact and $Ri_*=i_*$ by\n[lemma-weil-pbc-finite-direct-image-exact].",
+    "uses": [
+     "lemma-weil-pbc-finite-direct-image-exact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Sheaves.* The composite of the two maps vanishes, since $j^{-1}i_*=0$ and so\n$\\operatorname{Hom}(j_!j^{-1}F,i_*i^{-1}F)=\\operatorname{Hom}(j^{-1}F,j^{-1}i_*i^{-1}F)=0$.\nThe pair $(i^{-1},j^{-1})$ jointly reflects isomorphisms, hence exactness. After\n$j^{-1}$ the sequence becomes $0\\to j^{-1}F\\to j^{-1}F\\to0\\to0$, the first map\nbeing an isomorphism by the identity $j^{-1}j_!\\cong\\operatorname{id}$ of\n[prop-weil-open-closed-recollement-adjunctions]. After $i^{-1}$ it becomes\n$0\\to0\\to i^{-1}F\\to i^{-1}i_*i^{-1}F\\to0$, using the stalkwise description of\n[def-weil-pbc-extension-by-zero] for $i^{-1}j_!=0$ and the counit isomorphism\n$i^{-1}i_*\\cong\\operatorname{id}$ for the last map. Both are short exact, so the\noriginal sequence is short exact.",
+    "uses": [
+     "prop-weil-open-closed-recollement-adjunctions",
+     "def-weil-pbc-extension-by-zero"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Complexes.* Complete the counit $j_!j^{-1}K\\to K$ to a distinguished triangle\n$j_!j^{-1}K\\to K\\xrightarrow{g}C\\to$. Applying $j^{-1}$ kills $C$, since the counit\nbecomes invertible; applying $i^{-1}$ makes $g$ invertible, since\n$i^{-1}j_!=0$. Hence the unit $C\\to Ri_*i^{-1}C$ is an isomorphism: after\n$j^{-1}$ both sides vanish ($j^{-1}Ri_*=0$), and after $i^{-1}$ it is inverse\nto the counit of $i^{-1}\\dashv Ri_*$, invertible because $Ri_*$ is fully\nfaithful; joint conservativity of $(i^{-1},j^{-1})$ concludes. By naturality\nof the unit, $g$ followed by $C\\cong Ri_*i^{-1}C\\cong Ri_*i^{-1}K$ is the unit at\n$K$, which gives the triangle (see also [def-weil-open-closed-recollement]).",
+    "uses": [
+     "def-weil-open-closed-recollement"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,398 @@
+{
+ "id": "lem-sfb-generic-orbit-dense-quotient",
+ "kind": "statement",
+ "title": "A generic geometric orbit gives a finite universal-homeomorphism quotient on a dense open",
+ "statement": "Let $e$ be a field [def-weil-field], let $B$ be a nonempty finite disjoint union of integral finite-type $e$-schemes [def-pc-integral-scheme] [def-weil-finite-type-morphism], and let $Y$ be a reduced quasi-projective finite-type $e$-scheme [def-pc-reduced-scheme] [def-kun-projective]. Here quasi-projective means admitting a locally closed immersion into finite-dimensional projective space over $e$. Let a finite group $G$ act by $e$-scheme automorphisms on $Y$. Suppose $h:Y\\to B$ is invariant, projective and surjective [def-trf-projective-bundle-morphism] [def-weil-surjective-morphism], sends every generic point to a generic point of $B$ with finite residue-field extension [def-sc-generic-point] [def-weil-residue-field], and the underlying points of each geometric generic fibre of $h$ form a single $G$-orbit [def-weil-geometric-fibre]. For every subgroup $H\\leq G$ there exist a finite surjective admissible scheme quotient $q_H:Y\\to Q_H$ [def-per-admissible-finite-scheme-quotient] [def-weil-finite-integral-morphism] and $d_H:Q_H\\to B$ with $d_H q_H=h$. Each $q_H$ has orbit geometric fibres and invariant structure sheaf and is categorical for invariant morphisms to arbitrary schemes; $Q_H$ is reduced. There is a dense open $U\\subseteq B$ containing every generic point such that $h^{-1}U\\to U$ and $Q_G\\times_B U\\to U$ are finite, and the latter is a universal homeomorphism [def-weil-universal-homeomorphism]. The generic fibre of $d_G$ over each integral component of $B$ is the spectrum of a finite purely inseparable extension of its function field [def-pc-field-tower]. No normality of $Y$ or $B$, no faithful or free group action, and no restriction on the group order are imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.151, the full quotient is a universal homeomorphism over a dense open. Quotient-existence, reduced generic algebra and explicit uniform-power localization verification extracted from returned parent Steps 8--9; auxiliary Stacks Tag 01S4 (morphisms.tex, lemma-universally-injective) and Tag 04DF (morphisms.tex, lemma-universal-homeomorphism)."
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-pc-field-tower",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-per-admissible-finite-scheme-quotient",
+  "def-sc-generic-point",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-residue-field",
+  "def-weil-surjective-morphism",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "First $Y$ is separated over $e$. Indeed its locally closed immersion $j:Y\\hookrightarrow P=\\mathbf P^n_e$ is a monomorphism. Thus $\\Delta_{Y/e}$ is the pullback of $\\Delta_{P/e}$ along $j\\times j:Y\\times_eY\\to P\\times_eP$: the pullback is $Y\\times_PY=Y$. Projective space is separated and closed immersions remain closed after base change. This checks the separatedness hypothesis of the quotient theorem without imposing any separatedness condition on $B$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NH, lemma-projective-space-separated; morphisms.tex Tag 01QR, lemma-base-change-closed-immersion; elementary diagonal pullback"
+   }
+  },
+  {
+   "text": "For every $H\\leq G$, apply the finite-type field quotient theorem to $Y/e$ and the restricted action. Its final clause supplies admissibility for every such action because $Y$ is quasi-projective. It gives a finite surjective $q_H:Y\\to Q_H$, the orbit geometric fibres, topological quotient, invariant structure sheaf, categorical property for all scheme targets, and reducedness of $Q_H$. Invariance of $h$ gives a unique factor $d_H:Q_H\\to B$ with $d_Hq_H=h$. These properties are exactly the admissible quotient definition. The identity $h=d_Hq_H$ and surjectivity of $h$ imply surjectivity of $d_H$.",
+   "uses": [
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "def-per-admissible-finite-scheme-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4, printed pp.132--133; X 2.3 Step 2, p.151; quotient theorem applied separately to each subgroup"
+   }
+  },
+  {
+   "text": "A field is Noetherian, and finite type over a Noetherian scheme is Noetherian; hence $B$ and $Y$ are Noetherian, in particular quasi-compact and locally Noetherian, so both are quasi-separated. Since $Y\\to\\operatorname{Spec}e$ factors as $Y\\to B\\to\\operatorname{Spec}e$ and is of finite type, $h$ is locally of finite type. As $Y$ is quasi-compact and quasi-separated and $B$ is quasi-separated, $h$ is quasi-compact and quasi-separated. Let $\\eta$ be the generic point of a component $B_i$ and $\\bar\\eta$ the geometric point over it. The projection $Y_{\\bar\\eta}\\to Y_\\eta$ is surjective, being the base change of the surjection $\\operatorname{Spec}\\overline{\\kappa(\\eta)}\\to\\operatorname{Spec}\\kappa(\\eta)$, and $Y_\\eta$ is homeomorphic to $h^{-1}(\\eta)$. The underlying points of $Y_{\\bar\\eta}$ form one orbit of the finite group $G$, so they are finitely many; hence $h^{-1}(\\eta)$ is finite. The generic-finiteness lemma now gives a dense open $V\\subseteq B$ containing every generic point with $h^{-1}V\\to V$ finite. By the last relative clause of the quotient theorem, $Q_G\\times_BV\\to V$ is also finite. For each of the finitely many components $B_i$, choose a nonempty affine $U_i=\\operatorname{Spec}A_i\\subseteq V\\cap B_i$; then $A_i$ is a Noetherian domain. These opens are disjoint and contain all generic points.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-scheme-fibre",
+    "def-weil-geometric-fibre",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "lem-sfb-admissible-finite-type-field-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW (lemma-generically-finite); Tags 01T6 (lemma-finite-type-noetherian) and 01T8 (lemma-permanence-finite-type); properties.tex Tag 01OY (lemma-locally-Noetherian-quasi-separated); ILO X 2.3 Step 2, printed p.151"
+   }
+  },
+  {
+   "text": "Fix $U_i=\\operatorname{Spec}A$, put $K=\\operatorname{Frac}A$, and write $Q_G\\times_BU_i=\\operatorname{Spec}C$. Finiteness and base change give the generic fibre $\\operatorname{Spec}D$, where $D=C\\otimes_AK=(A\\setminus\\{0\\})^{-1}C$ is finite-dimensional over $K$. The ring $C$ is reduced by Step 2, so $D$ is reduced: if $(c/a)^n=0$, some nonzero $b\\in A$ kills $c^n$; then $(bc)^n=0$, whence $bc=0$ and $c/a=0$. Choose an algebraic closure $\\Omega/K$. The base change $Y_{\\bar\\eta}\\to(Q_G)_{\\bar\\eta}$ is surjective. All points of its source lie in one $G$-orbit, and invariance makes their images equal; therefore its target is a singleton. Also $(Q_G)_{\\bar\\eta}\\to(Q_G)_\\eta$ is surjective, being the base change of the surjection $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$. Thus $\\operatorname{Spec}D$ is a nonempty singleton, in particular irreducible. The irreducible-spectrum criterion makes the nilradical of $D$ prime. Reducedness makes it zero, so $D$ is a domain. A finite-dimensional domain over a field is a field; denote it by $L$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, p.151, reduced generic quotient; Stacks 01WL, 01S1, 00ES; localization computation written out"
+   }
+  },
+  {
+   "text": "We show $L/K$ is purely inseparable. The finite algebra $D\\otimes_K\\Omega$ has singleton spectrum by Step 4. Its residue field is a finite-dimensional extension of $\\Omega$: the quotient by its prime is a finite-dimensional domain, hence already a field. Such an extension of an algebraically closed field is trivial. Consequently there is exactly one $\\Omega$-point of this singleton scheme, equivalently exactly one $K$-algebra map $t:L\\to\\Omega$. Existence can also be read directly from the integral geometric-point existence lemma applied to the zero prime of $L$, since the finite map $K\\to L$ is integral. Apply the unique-geometric-point pure-residue lemma to $K\\to L$, this $t$, and $K\\to\\Omega$. Every competing extension with the same kernel equals $t$, as just proved; both kernels are zero. The residue fields are therefore $K$ and $L$, and its conclusion is precisely that $L/K$ is purely inseparable. This proves the asserted generic-fibre clause for every $B_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-dl-a1-integral-geometric-point-existence",
+    "lem-dl-a1-unique-geometric-point-pure-residue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GR, lemma-algebraically-closed; geometric-point refinement in WeilConjectures/Mathlib/RingTheory/Etale/GeometricPoint.lean (the two cited DAG statements), the finite extension argument also follows 09HJ and 030K"
+   }
+  },
+  {
+   "text": "To apply the power-localization lemma we must check that $C$ itself is a domain, not merely its generic algebra. Write $h^{-1}U_i=\\operatorname{Spec}S$, finite over $A$. This is an invariant open, so its quotient is $\\operatorname{Spec}(S^G)$ and $C=S^G\\subseteq S$. The ring $S$ is reduced. Each minimal prime of $S$ is the generic point of a component of this open of $Y$ and hence maps to the generic point of $\\operatorname{Spec}A$. Thus every nonzero $a\\in A$ lies in no minimal prime of $S$. By the reduced-zerodivisor criterion multiplication by $a$ on $S$ is injective. It is then injective on $C\\subseteq S$ as well. The fraction criterion for localization gives an injection $C\\hookrightarrow C\\otimes_AK=L$. Surjectivity of $h$ ensures $S\\ne0$, so the same argument makes $A\\hookrightarrow C$ injective. Hence $C$ is a domain, and $\\operatorname{Frac}C=L$: the localization $C\\otimes_AK$ is already a field, every fraction $c/a$ belongs to $\\operatorname{Frac}C$, and every inverse of a nonzero element of $C$ belongs to this field. No commutation of invariants with nonflat base change was used.",
+   "uses": [
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EW, lemma-reduced-ring-sub-product-fields (3); ILO IX 1.4, invariant affine quotient charts; explicit generic-localization injection"
+   }
+  },
+  {
+   "text": "Now $A$ is a Noetherian domain, $C$ is a finite $A$-algebra which is a domain, and their fraction fields are $K\\subseteq L$ with $L/K$ finite purely inseparable. Apply the power-in-base localization lemma to obtain $s_i\\in A\\setminus\\{0\\}$. In characteristic zero it identifies $C[1/s_i]$ with $A[1/s_i]$. In characteristic $p>0$, each $c\\in C[1/s_i]$ has $c^{p^n}$ in the base ring for some $n$. If two homomorphisms from $C[1/s_i]$ to any field agree on $A[1/s_i]$, their values on $c$ have equal $p^n$-th powers, hence are equal: in a field $(u-v)^{p^n}=0$ implies $u=v$. Thus maps from the spectrum of any field into the source over the base are unique. The field-valued-point criterion for radicial morphisms therefore makes $\\operatorname{Spec}C[1/s_i]\\to\\operatorname{Spec}A[1/s_i]$ universally injective; in characteristic zero it is already an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-power-in-base-after-localization",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BR5, purely inseparable power calculation; morphisms.tex Tag 01S4, lemma-universally-injective, field-valued-point criterion"
+   }
+  },
+  {
+   "text": "Set $U=\\coprod_iD(s_i)\\subseteq B$. Each $s_i$ is nonzero in the component domain, so $D(s_i)$ is nonempty and contains its generic point; their union is dense and contains every generic point of $B$. Restriction preserves finiteness of both $h$ and $d_G$, by finite base change. Surjectivity of $d_G$ from Step 2 persists under restriction by the surjective-base-change lemma, applied to the open immersion $U\\hookrightarrow B$. A finite morphism is integral by the finite-algebra integrality theorem on each affine chart. Step 7 makes $d_G$ universally injective on these disjoint target components, hence globally (after any base change, points with the same image lie over the same component). The integral-radicial-surjective criterion now says that $Q_G\\times_BU\\to U$ is a universal homeomorphism. All quotient properties were supplied before shrinking and hold for every subgroup, while the generic field calculation of Steps 4--5 applies to every integral component.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S1 (lemma-base-change-surjective), 01WL (lemma-base-change-finite), 04DF (lemma-universal-homeomorphism); algebra.tex Tag 00GK (lemma-finite-is-integral); ILO X 2.3 Step 2, p.151"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-pc-scheme-fibre",
+  "def-per-admissible-finite-scheme-quotient",
+  "def-weil-finite-integral-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-proper-morphism",
+  "def-weil-radicial-morphism",
+  "lem-dl-a1-integral-geometric-point-existence",
+  "lem-dl-a1-unique-geometric-point-pure-residue",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "lem-sfb-admissible-finite-type-field-quotient",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-power-in-base-after-localization",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-zl-spectrum-irreducible-nilradical-prime",
+  "lemma-nagata-finite-type-to-separated-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.151; quotient and generic-algebra details supplied using the explicitly cited existing DAG statements and Stacks tags"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient|radicial|universallyInjective|UniversalHomeomorph",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern basic smoothness, Proj, scalar maps, field theory, or set/topological orbits; none states this geometric argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Radicial\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern basic smoothness, Proj, scalar maps, field theory, or set/topological orbits; none states this geometric argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite reduced algebra whose generic fibre is a purely inseparable field becomes radicial after localization; apply to finite group invariant scheme quotient",
+   "results": "8 hits; IsArithFrobAt.arithFrobAt, IsPurelyInseparable.isPRadical, IsArithFrobAt.exists_of_isInvariant, Algebra.FormallyUnramified.isReduced_of_field, Algebra.IsGeometricallyReduced, IsPRadical.isPurelyInseparable, Algebra.unramifiedLocus, Algebra.Unramified",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern basic smoothness, Proj, scalar maps, field theory, or set/topological orbits; none states this geometric argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective surjective generically finite morphism of reduced schemes with a finite group acting transitively on each geometric generic fibre has finite universal homeomorphism quotient on a dense open",
+   "results": "8 hits; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, AlgebraicGeometry.Scheme.Hom.discrete_fiber, CategoryTheory.PreGaloisCategory.has_decomp_quotients, AlgebraicGeometry.finite_appTop_of_universallyClosed, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, Ideal.Quotient.stabilizerHom_surjective_of_profinite",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern basic smoothness, Proj, scalar maps, field theory, or set/topological orbits; none states this geometric argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric generic orbits imply that the finite group quotient is a universal homeomorphism over a dense open",
+   "results": "8 hits; t2Space_quotient_mulAction_of_properSMul, isOpenMap_quotient_mk'_mul, Finite.of_finite_mulAction_orbitRel_quotient, MulAction.isOpenQuotientMap_quotientMk, MulAction.finite_quotient_of_finite_quotient_of_finite_quotient, MulAction.finite_quotient_of_pretransitive_of_finite_quotient, MulAction.orbitRel.Quotient.nonempty_orbit, t2Space_of_properlyDiscontinuousSMul_of_t2Space",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern basic smoothness, Proj, scalar maps, field theory, or set/topological orbits; none states this geometric argument"
+  },
+  {
+   "tool": "grep",
+   "query": "radicial|universallyInjective|UniversalHomeomorph",
+   "results": "13 hits; Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern basic smoothness, Proj, scalar maps, field theory, or set/topological orbits; none states this geometric argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.IsFinite",
+   "results": "{\"t\": \"2026-10-22T11:04:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on a quasi projective reduced scheme with a transitive geometric generic fibre has a quotient which is finite radicial over a dense open",
+   "results": "{\"t\": \"2026-10-22T11:04:51Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group acting on a quasi projective reduced scheme with a transitive geometric generic fibre has a quotient which is finite radicial over a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\"], \"digest\": \"28dfbae09f082f9c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdmissible|invariant.*quotient|quotient.*radicial|finite.*universal.*homeomorph",
+   "results": "{\"t\": \"2026-10-22T11:05:14Z\", \"tool\": \"grep\", \"query\": \"IsAdmissible|invariant.*quotient|quotient.*radicial|finite.*universal.*homeomorph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric generic transitivity of a finite group acting on a reduced projective scheme implies a purely inseparable generic quotient field",
+   "results": "{\"t\": \"2026-10-22T11:05:14Z\", \"tool\": \"leansearch\", \"query\": \"Geometric generic transitivity of a finite group acting on a reduced projective scheme implies a purely inseparable generic quotient field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.trans\", \"IsGaloisGroup.fixedPoints\", \"IsGalois.of_fixed_field\", \"IsGaloisGroup.isGalois\", \"IsGaloisGroup.to_isFractionRing\", \"Ideal.isPretransitive_of_isGalois\", \"MulAction.instIsPretransitiveElemOrbit_1\", \"Ideal.isPretransitive_of_isGaloisGroup\"], \"digest\": \"e08d9221adda898f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced finite algebra over a field with only one geometric point is a purely inseparable field extension",
+   "results": "{\"t\": \"2026-10-22T11:05:15Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced finite algebra over a field with only one geometric point is a purely inseparable field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isPurelyInseparable_of_finSepDegree_eq_one\", \"instSubsingletonAlgHomOfIsPurelyInseparable\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"IsPRadical.isPurelyInseparable\", \"Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed\", \"IsPurelyInseparable\", \"perfectClosure.isPurelyInseparable\", \"isPurelyInseparable_iff_fd_isPurelyInseparable\"], \"digest\": \"6e562f694da0fc01\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "isPurelyInseparable_iff|finSepDegree_eq_one|subsingleton.*[Aa]lg[Hh]om|isField.*[Aa]rtinian|isField.*[Ii]rreducible",
+   "results": "{\"t\": \"2026-10-22T11:08:35Z\", \"tool\": \"grep\", \"query\": \"isPurelyInseparable_iff|finSepDegree_eq_one|subsingleton.*[Aa]lg[Hh]om|isField.*[Aa]rtinian|isField.*[Ii]rreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean\", \"Mathlib/FieldTheory/JacobsonNoether.lean\", \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\"], \"digest\": \"de44250e11023fcd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional reduced commutative algebra over a field with exactly one homomorphism to an algebraic closure is a purely inseparable field extension",
+   "results": "{\"t\": \"2026-10-22T11:08:36Z\", \"tool\": \"leansearch\", \"query\": \"A finite dimensional reduced commutative algebra over a field with exactly one homomorphism to an algebraic closure is a purely inseparable field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable\", \"isSepClosed_iff_isPurelyInseparable_algebraicClosure\", \"isPurelyInseparable_iff\", \"IsPurelyInseparable.isAlgebraic\", \"IsPurelyInseparable.instOfHasExponent\", \"isPurelyInseparable_iff_fd_isPurelyInseparable\", \"separableClosure.isPurelyInseparable\", \"isPurelyInseparable_iff_natSepDegree_eq_one\"], \"digest\": \"559784a600fe1423\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReduced\", \"IsArtinianRing\"",
+   "results": "{\"t\": \"2026-10-22T11:08:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsReduced\\\", \\\"IsArtinianRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsArtinianRing.isSemisimpleRing_of_isReduced\", \"IsArtinianRing.isField_of_isReduced_of_isLocalRing\"], \"digest\": \"a55ce5c5d3631c17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "isPurelyInseparable_iff_subsingleton|finSepDegree_eq_one|card_algHom",
+   "results": "{\"t\": \"2026-10-22T11:09:06Z\", \"tool\": \"grep\", \"query\": \"isPurelyInseparable_iff_subsingleton|finSepDegree_eq_one|card_algHom\", \"sub\": \"FieldTheory/PurelyInseparable\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\"], \"digest\": \"bdafc220bf9ceb8d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isPurelyInseparable_iff_subsingleton\"",
+   "results": "{\"t\": \"2026-10-22T11:09:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"isPurelyInseparable_iff_subsingleton\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"isPurelyInseparable_iff_subsingleton_emb\"], \"digest\": \"d37f102c4e6b4d56\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field extension is purely inseparable if there is only one embedding into an algebraic closure of the base field",
+   "results": "{\"t\": \"2026-10-22T11:09:07Z\", \"tool\": \"leanfinder\", \"query\": \"A finite field extension is purely inseparable if there is only one embedding into an algebraic closure of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isPurelyInseparable_of_finSepDegree_eq_one\", \"IsPurelyInseparable\", \"instUniqueEmbOfIsPurelyInseparable\", \"isPurelyInseparable_iff_finSepDegree_eq_one\", \"IsPurelyInseparable.finSepDegree_eq_one\", \"isPurelyInseparable_iff_fd_isPurelyInseparable\", \"IsPurelyInseparable.sepDegree_eq_one\", \"instSubsingletonAlgHomOfIsPurelyInseparable\"], \"digest\": \"f7a18dab2ad94207\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isPurelyInseparable_iff_subsingleton_emb",
+   "results": "{\"t\": \"2026-10-22T11:10:04Z\", \"tool\": \"grep\", \"query\": \"theorem isPurelyInseparable_iff_subsingleton_emb\", \"sub\": \"FieldTheory/PurelyInseparable/Basic.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"446\"], \"digest\": \"f5cc30a04f9b499b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field extension E over F is purely inseparable if and only if the F embeddings of E into AlgebraicClosure E form a subsingleton",
+   "results": "{\"t\": \"2026-10-22T11:10:05Z\", \"tool\": \"leansearch\", \"query\": \"A field extension E over F is purely inseparable if and only if the F embeddings of E into AlgebraicClosure E form a subsingleton\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable\", \"isPurelyInseparable_iff\", \"IsPurelyInseparable.mk\", \"isPurelyInseparable_iff_perfectClosure_eq_top\", \"separableClosure.isPurelyInseparable\", \"instUniqueEmbOfIsPurelyInseparable\", \"isPurelyInseparable_iff_natSepDegree_eq_one\", \"isPurelyInseparable_iff_pow_mem\"], \"digest\": \"3dbe2150c85b0765\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: returned declarations concern Galois categories, field theory, or individual algebraic facts; no declaration states the invariant scheme quotient and dense-open conclusion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-smooth-galois-model",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X Lemma 2.2, printed pp.149--150, and 2.3 Step 2 through diagram (2.b), pp.150--151: finite-family form of the induced equivariant model. The common constants and group are obtained simultaneously before choosing any Sylow subgroup; for disconnected B use all its finitely many components, not separate prime-degree constant fields.; X 2.3 Step 2, printed p.151, the full quotient is a universal homeomorphism over a dense open. Quotient-existence, reduced generic algebra and explicit uniform-power localization verification extracted from returned parent Steps 8--9; auxiliary Stacks Tag 01S4 (morphisms.tex, lemma-universally-injective) and Tag 04DF (morphisms.tex, lemma-universal-homeomorphism).",
+   "via": [
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generic-orbit-dense-quotient",
+  "worker": "stage1",
+  "summary": "Q111: split entirely through existing nodes, with no new nodes. Checked all subgroup quotient clauses, Noetherian generic finiteness, reduced generic singleton algebra and pure inseparability, the injection of the invariant ring into its generic field, and the power-localization radicial criterion. Statement unchanged. No normality, tame order, freeness, or faithful action is needed. Repair of the promotion return: rebased the retained delivery onto the current live unsplit node, re-read every current cited statement and checked each old verbatim quote, and added the explicit arbitrary-base-change citation for surjectivity in Step 8. Statement, statement dependencies, ancestry and proof route remain unchanged. Review Q111 (23a5cb7d) FIX: re-applied the lost ec15f87f Step-3 repair (Stacks 02NW generic-finiteness via finite generic fibres from the single-orbit hypothesis), removing the dropped lem-per-generic-fibre-finiteness-criterion and the batch-5 lem-trf-projective-bundle-proper; Step 8 surjective-base-change citation kept.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction through the recorded via chain, specifically ILO X 2.3 Step 2 p.151: the full quotient is a universal homeomorphism over a dense open. blueprint_refs.py ancestor returns None; retain the inherited null ancestor and exact via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-dl-a1-integral-geometric-point-existence",
+    "why": "General-purpose Primes of an integral algebra lift a geometric point used with its stated hypotheses in the numbered proof step; the unit has no replacement theorem for this algebraic/geometric tool."
+   },
+   {
+    "node": "lem-dl-a1-unique-geometric-point-pure-residue",
+    "why": "General-purpose A unique geometric point at a prime has purely inseparable residue extension used with its stated hypotheses in the numbered proof step; the unit has no replacement theorem for this algebraic/geometric tool."
+   },
+   {
+    "node": "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "why": "General-purpose An integral, universally injective, surjective morphism is a universal homeomorphism used with its stated hypotheses in the numbered proof step; the unit has no replacement theorem for this algebraic/geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-power-in-base-after-localization",
+    "why": "General-purpose Powers of elements of a finite purely inseparable algebra lie in the base after localization used with its stated hypotheses in the numbered proof step; the unit has no replacement theorem for this algebraic/geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "General-purpose Stacks 02NW: a qcqs morphism locally of finite type to a Noetherian scheme with finite fibres over the generic points is finite over a dense open containing them; used with its stated hypotheses in Step 3; replaces the dropped 2026-10-19 route node lem-per-generic-fibre-finiteness-criterion and the batch-5 citation lem-trf-projective-bundle-proper (review Q111 FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-dl-a1-integral-geometric-point-existence",
+  "lem-dl-a1-unique-geometric-point-pure-residue",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "lem-weil-pbc-power-in-base-after-localization",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-23a5cb7d0",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-23a5cb7d0 (reviewer sub-agent of L); spot-checked: I read the whole 8-step proof, every cited statement, ILO X 2.3 Step 2 (PDF p.157: 'X2/G1 -> X ... universal homeomorphism over a dense open subset') and Stacks 02NW (morphisms.tex, lemma-generically-finite). There are 0 new nodes and the statement is unchanged. This re-delivery after the promotion return matches ec15f87f except that Step 8 now cites lem-weil-pbc-surjective-base-change for surjectivity of d_G on U; that citation is correct. But the ec15f87f Step-3 FIX was lost: Step 3 still cites lem-per-generic-fibre-finiteness-criterion, which is dropped (clones/live/coord/route-pivot-dropped.txt line 1617, section 2026-10-19 artin-gabber), and lem-trf-projective-bundle-proper, a node of sec-trace-formula. Neither is part of the trace-formula or Poincare-duality proofs: the first reaches only the generic 01TE lemma lem-trf-finite-residue-point-closed-in-fibre, the second is the generic fact projective implies proper. Citing the dropped node would still revive it. FIX: Step 3 is re-applied from ec15f87f. B and Y are Noetherian, hence quasi-separated (01OY). h is locally of finite type by lemma-nagata-finite-type-to-separated-target (a) and qcqs by lem-weil-pbc-qcqs-morphism-permanence (1). Fibres over generic points are finite, because each geometric generic fibre is one orbit of a finite group and surjects onto the fibre (surjective base change plus def-pc-scheme-fibre). lem-weil-pbc-generic-finite-morphism-open-neighborhood (02NW) then gives V. A graph walk of the closure of the replacement nodes (144 nodes) finds nothing in trace-formula or Poincare duality and nothing dropped. Steps 1, 2 and 4-8 are correct: separatedness via the diagonal; every clause of the quotient definition; D reduced with one point, hence a field L; a unique K-map L->Omega, hence L/K purely inseparable; C=S^G embeds in L because minimal primes lie over 0; power-in-base plus 01S4; integral, universally injective and surjective gives 04DF. Edge cases checked: G=1, H=G, trivial action, p dividing |G|, dim B=0, disconnected B, components of Y permuted by G, nontrivial inseparable L/K, characteristic 0. No SGA is cited and no forbidden Artin-Gabber tool is used. In fixes/dag/nodes/sec-six-functors-basics/lem-sfb-generic-orbit-dense-quotient.json, proof_deps is recomputed as the union of step uses and tool_uses is updated; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericOrbitDenseQuotient",
+  "declaration": "AlgebraicGeometry.exists_generic_orbit_dense_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericOrbitDenseQuotient.lean",
+  "statement": "theorem exists_generic_orbit_dense_quotient (e : Type u) [Field e] (B Y : Scheme.{u}) (b : B ⟶ Spec (.of e)) (p : Y ⟶ Spec (.of e)) [LocallyOfFiniteType b] [QuasiCompact b] [LocallyOfFiniteType p] [QuasiCompact p] [IsReduced Y] (n : ℕ) (Bᵢ : Fin (n + 1) → B.Opens) (hcover : iSup Bᵢ = ⊤) (hdisjoint : ∀ i j : Fin (n + 1), i ≠ j → Disjoint (Bᵢ i) (Bᵢ j)) (hintegral : ∀ i : Fin (n + 1), IsIntegral (Bᵢ i).toScheme) (hp : IsQuasiProjective p) (G : Type v) [Group G] [Finite G] (a : G →* Aut Y) (ha : ∀ g : G, (a g).hom ≫ p = p) (h : Y ⟶ B) (hh : h ≫ b = p) (hprojective : IsProjectiveBundle h) [Surjective h] (hinvariant : ∀ g : G, (a g).hom ≫ h = h) (hgeneric : ∀ (C : Set Y), C ∈ irreducibleComponents Y → ∀ ξ : Y, IsGenericPoint ξ C → (∃ D : Set B, D ∈ irreducibleComponents B ∧ IsGenericPoint (h ξ) D) ∧ (h.residueFieldMap ξ).hom.Finite) (horbit : ∀ (D : Set B), D ∈ irreducibleComponents B → ∀ (η : B), IsGenericPoint η D → ∀ (t : Spec (.of (AlgebraicClosure (B.residueField η))) ⟶ B), t = Spec.map (CommRingCat.ofHom (algebraMap (B.residueField η) (AlgebraicClosure (B.residueField η)))) ≫ B.fromSpecResidueField η → Nonempty ↥(pullback h t) ∧ ∀ x y : ↥(pullback h t), ∃ (g : G) (l : pullback h t ⟶ pullback h t), l ≫ pullback.fst h t = pullback.fst h t ≫ (a g).hom ∧ l ≫ pullback.snd h t = pullback.snd h t ∧ l x = y) : ∃ (Q : Subgroup G → Scheme.{u}) (q : ∀ H : Subgroup G, Y ⟶ Q H) (d : ∀ H : Subgroup G, Q H ⟶ B), (∀ H : Subgroup G, IsAdmissibleFiniteSchemeQuotient (a.comp H.subtype) (q H) ∧ Surjective (q H) ∧ q H ≫ d H = h ∧ IsReduced (Q H) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Q H), Nonempty ↥(pullback (q H) t) ∧ ∀ x y : ↥(pullback (q H) t), ∃ (g : H) (l : pullback (q H) t ⟶ pullback (q H) t), l ≫ pullback.fst (q H) t = pullback.fst (q H) t ≫ (a g).hom ∧ l ≫ pullback.snd (q H) t = pullback.snd (q H) t ∧ l x = y) ∧ ∀ (Z : Scheme.{u}) (f : Y ⟶ Z), (∀ g : H, (a g).hom ≫ f = f) → ∃! r : Q H ⟶ Z, q H ≫ r = f) ∧ (∃ U : B.Opens, Dense (U : Set B) ∧ (∀ (D : Set B), D ∈ irreducibleComponents B → ∀ η : B, IsGenericPoint η D → η ∈ U) ∧ IsFinite (h ∣_ U) ∧ IsFinite (pullback.snd (d ⊤) U.ι) ∧ (topologically IsHomeomorph).universally (pullback.snd (d ⊤) U.ι)) ∧ ∀ (D : Set B), D ∈ irreducibleComponents B → ∀ η : B, IsGenericPoint η D → ∃ (L : Type u) (_ : Field L) (ι : B.residueField η →+* L), ι.Finite ∧ ι.IsPurelyInseparable ∧ ∃ j : (d ⊤).fiber η ≅ Spec (.of L), j.hom ≫ Spec.map (CommRingCat.ofHom ι) = (d ⊤).fiberToSpecResidueField η",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7896be92d",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node. B: finite disjoint integral open cover indexed by Fin (n+1); IsIntegral includes nonemptiness. Quasi-projective: upstream IsQuasiProjective is literally the node's inline immersion definition. Projective: IsProjectiveBundle, the cited def. Generic points: residueFieldMap finite. Single geometric generic orbit: canonical algebraic-closure point, action pinned by both projections. Per subgroup: IsAdmissibleFiniteSchemeQuotient (a.comp H.subtype), surjective, q≫d=h, reduced, geometric H-orbit fibres, categorical for all Z. Dense open U containing all generics with h|U and Q_G×_B U→U finite and (topologically IsHomeomorph).universally. Generic fibre of d_G ≅ Spec L over κ(η), L/κ(η) finite purely inseparable (Mathlib RingHom.IsPurelyInseparable matches def-pc-field-tower). Edge cases n=0, dim 0, G=1, H=⊥/⊤, nonfaithful action, p | |G|, char 0, universes u/v all fine. Node differs from base only in lean; statement verbatim; sorry only; docstrings carry source, blueprint id and all 8 steps; no line over 100; no name clash; imports exist. Non-blocking note: def-sc-quasi-projective owns IsQuasiProjective but is not a stmt_dep; the node defines quasi-projectivity inline via def-kun-projective and the declaration matches it exactly. No files changed; no compile run (worker's scompile evidence used)."
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-integral-ordinary-tensor-pullback-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction: tensor/pullback normalization before the proper counit factor",
+   "via": [
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary coordinates for integral tensor and pullback, with compatibility",
+ "statement": "For D, C, E and a higher operation datum H as in [def-sf-operation-stages], and any compactified square Q, choose ordinary pro-etale tensor models aZ and aY over the completed coefficient sheaves [def-pur-integral-compact-support-coefficient-data]. There are natural isomorphisms a from ordinary pullback after constructible inclusion to the supplied proper pullback followed by inclusion, and m,n from the included supplied tensors to the ordinary tensors on included objects. They satisfy CategoryTheory.Adjunction.ComparisonCompatible for the supplied tensor-pullback comparison and the canonical ordinary ringed tensor-pullback comparison. This asserts only compatibility of left-operation functors. It makes no assertion about direct image, adjunction counits, a projection morphism, or its invertibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; tensor and pullback normalization before forming the proper counit projection"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the fixed signed ordinary tensorModel on Z and Y. The native tensorCompletionComparison supplies forward augmentations with the full representative normalization. tensorComplete_onConstructible makes each augmentation component invertible. Restrict to the full constructible categories, curry, and invert to obtain m and n. The proved ringed pullback comparison is invertible on the same domain, and its natural restriction gives a. Finite type over the specified field gives Noetherianness, compactness, quasi-separatedness, finite dimension and invertibility of the prime in global sections and residue fields.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion-comparison",
+    "lem-fix-constructible-tensor-completion-constructible",
+    "lem-sf-integral-ordinary-pullback-comparison",
+    "lem-sf-integral-tensor-pullback-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The forward augmentation square is tensorPullback_augmentation. Naturality of the target augmentation moves the two pullback completion maps to its ordinary-tensor side. Cancel ordinary pullback of the source augmentation and the pullback comparison on the completed tensor, then cancel the target augmentation. This gives the desired inverse comparison square. Substitute the supplied pullback and tensor functor equalities and the componentwise HEq normalization of the supplied tensorPullback to identify it with ComparisonCompatible.",
+   "uses": [
+    "lem-sf-integral-tensor-pullback-augmentation",
+    "def-sf-operation-stages"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-tensor-completion-comparison",
+  "lem-fix-constructible-tensor-completion-constructible",
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "lem-sf-integral-tensor-pullback-augmentation",
+  "def-sf-operation-stages"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; tensor and pullback normalization before forming the proper counit projection",
+  "note": "W9: explicit construction of ordinary comparisons and cancellation of the forward augmentation square; the augmentation square is one strict subproblem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary tensor and pullback on complete constructible integral sheaves agree compatibly with canonical completed tensor pullback comparison",
+   "results": "Eight ordinary sheaf-module pullback composition and free-module comparison results; no completed constructible tensor-pullback compatibility.",
+   "date": "2026-10-27",
+   "verdict": "No direct result; use representative normalization and descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "Twelve generic adjunction constructors, existence and equivalence results, including ofIsRightAdjoint. None identifies the completed constructible tensor/pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Generic transport API only; the left-operation compatibility still needs proof."
+  },
+  {
+   "tool": "grep",
+   "query": "ComparisonCompatible|ordinaryIntegralCompletionComparison|canonicalIntegralPullbackTensor",
+   "results": "No indexed Mathlib hits. Local project search finds the three constructions but no theorem comparing this left-operation square.",
+   "date": "2026-10-27",
+   "verdict": "A separate compatibility step is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperOperationProjection",
+  "date": "2026-10-27",
+  "group": "V6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOrdinaryTensorPullbackNormalization",
+  "file": "lean/Sheaf/Paper/IntegralOrdinaryTensorPullbackNormalization.lean",
+  "declaration": "WeilConjectures.integralOrdinaryTensorPullbackNormalization",
+  "statement": "theorem integralOrdinaryTensorPullbackNormalization\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E]\n    (H : SixFunctorHigherOperations D C E) (Q : SixFunctorCompactifiedSquare D) :\n    ∃ (aZ : ProEtaleTensorModel Q.Z.obj.left\n        ((PurCompactSupport.completed C.l E).ring Q.Z.obj.left))\n      (aY : ProEtaleTensorModel Q.Y.obj.left\n        ((PurCompactSupport.completed C.l E).ring Q.Y.obj.left))\n      (a : (sfIntegralConstructible C.l E Q.Y.obj.left).ι ⋙\n          PurCompactSupport.pull (PurCompactSupport.completed C.l E) Q.p.hom.left ≅\n        (H.integralExchange Q).stage.properPull ⋙\n          (sfIntegralConstructible C.l E Q.Z.obj.left).ι)\n      (m : (Functor.postcompose₂.obj (sfIntegralConstructible C.l E Q.Z.obj.left).ι).obj\n          (H.integralExchange Q).stage.tensorBar ≅\n        (((Functor.whiskeringLeft₂ _).obj\n          (sfIntegralConstructible C.l E Q.Z.obj.left).ι).obj\n            (sfIntegralConstructible C.l E Q.Z.obj.left).ι).obj\n              (Functor.curry.obj aZ.tensor))\n      (n : (Functor.postcompose₂.obj (sfIntegralConstructible C.l E Q.Y.obj.left).ι).obj\n          (H.integralExchange Q).stage.tensorY ≅\n        (((Functor.whiskeringLeft₂ _).obj\n          (sfIntegralConstructible C.l E Q.Y.obj.left).ι).obj\n            (sfIntegralConstructible C.l E Q.Y.obj.left).ι).obj\n              (Functor.curry.obj aY.tensor)),\n      Adjunction.ComparisonCompatible a (H.integralExchange Q).stage.tensorPullback.hom\n        (ordinaryCurriedTensorPullback (PurCompactSupport.completed C.l E)\n          Q.p.hom.left aZ aY).hom m n",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.ordinaryCurriedTensorPullback",
+   "WeilConjectures.integralOrdinaryTensorPullbackNormalization"
+  ]
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261027T012957-L-2354882",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261027T034806-L-3687251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

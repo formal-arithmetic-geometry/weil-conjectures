@@ -1,0 +1,154 @@
+{
+ "id": "def-sp-tower-p1-triangle-words",
+ "kind": "definition",
+ "title": "Canonical projection, diagonal and trace words for tower triangles",
+ "statement": "Fix a prime ell, finite coefficient extension E/Q_ell, S with ell invertible, a normalized tower Presentation p, its Maps d and comparisons h. Define qUnitIso, qLineIso and line1Iso from the normalized coefficient/line pullback comparisons and the pullback square. Define shiftedLineObject from h.line_domain. Define the two projection traces by inverse proper exchange followed by pullback of the q splitting trace. Define diagonalScalar as sourceUnitAt then pushed delta then projectionTrace, and scalarContraction by tensoring the scalar with identity and using both right unitors. Define outsideProjection in outside-first order using the two specified symmetries, diagonalProjectionAt and its explicitly factored inverse, outsideLineProjectionInverse, diagonalInsertion, diagonalTensorFactor, and expandedContraction as the corresponding actual compositions. Define unitTail to be the final projection/exchange part of eta, unitInsertion its initial supported diagonal part, and contractionTail the inverse outside projection followed by tensor with projectionTrace and the right unitor. Define pushSwap: Rp2* followed by Rq* is isomorphic to Rp1* followed by Rq*, as the right-adjoint conjugate of the specified pullback square. Define rightPullComparison: p1*GK is isomorphic to p2*GK by the square on q*K, line1Iso followed by inverse line2Iso on the shifted Tate factor, and the tensor pullback comparisons. Every word is given by its concrete Lean definition, with no data chosen from an existence statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-etale-origin-witness",
+  "def-nagata-projective-space-base-change",
+  "det-sp-tower-classes",
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Compose the recorded pullback, shift, tensor and adjunction comparisons as specified. Their sources and targets determine each composition; all inverse arrows use the fixed comparison instances. No new existence assertion or proof hole enters these definitions.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "sk-def-sp-coefficient-towers",
+    "det-sp-coefficient-towers-abelian",
+    "def-weil-pbc-etale-origin-witness",
+    "def-nagata-projective-space-base-change",
+    "det-sp-tower-classes",
+    "lem-sp-tower-p1-etale-origin-comparisons",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-etale-origin-witness",
+  "def-nagata-projective-space-base-change",
+  "det-sp-tower-classes",
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The final projection and inverse exchange in a diagonal-defined unit followed by a trace-defined counit equals the pushed base-changed trace contraction before insertion of the diagonal",
+   "results": "8 hits: LinearMap.trace_comp_comm, LinearMap.trace_eq_contract, LinearMap.trace_eq_contract', Algebra.Generators.H1Cotangent.δAux_ofComp, LinearMap.trace_eq_contract_apply, LinearMap.trace_tensorProduct, LinearMap.trace_baseChange, Algebra.Generators.CotangentSpace.compEquiv_symm_inr. These are linear trace/contraction results or cotangent identities, not tower projection/exchange words.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement or one-line specialization for these specified tower maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a section i of p, the inverse projection formula followed by pushforward of a supported class factors as tensor with its direct image, retaining the composition unit",
+   "results": "8 hits, including Functor.sheafPushforwardContinuousComp'_inv_app_val_app, SheafOfModules.pushforwardSections_unitHomEquiv and Scheme.Modules.restrictFunctorAdjCounitIso; none states the derived tensor/projection equation.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "CategoryTheory.mateEquiv_counit: the adjunction transpose formula. It supplies the elementary mate calculus but not the tower word identifications.",
+   "date": "2026-10-25",
+   "verdict": "Partial tool only."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*section|section.*projection|tensor.*mate",
+   "results": "25 hits, including monoidal rigid-category mate identities and unrelated section/projection results; no specified tower projection/exchange identity.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerP1TriangleFactorization",
+  "date": "2026-10-25",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Reduction of the triangle identities, named canonical words",
+   "via": [
+    "lem-sp-tower-p1-triangle-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1TriangleWords",
+  "file": "lean/Sheaf/Paper/TowerP1TriangleWords.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.qUnitIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.qUnitIso",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.qLineIso",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.line1Iso",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.shiftedLineObject",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.projectionTrace1",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.projectionTrace2",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.projectionTrace",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.diagonalScalar",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.scalarContraction",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.outsideProjection",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.diagonalProjectionAt",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.diagonalProjectionInverse",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.outsideLineProjectionInverse",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.diagonalInsertion",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.diagonalTensorFactor",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.expandedContraction",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.unitTail",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.unitInsertion",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.contractionTail",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.pushSwap",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.rightPullComparison"
+  ],
+  "statement": "def Presentation.qUnitIso (p : Presentation l E S hS) :\n    (SpTowerShriek.pull l E p.classes.base\n      (p.operations.geometry (ProjectiveLine S ↘ S))).obj (unit S (Arings l E S)) ≅\n        unit (ProjectiveLine S) (Arings l E (ProjectiveLine S))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477bf",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261025T164820-L-1092122",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477bf",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261025T164820-L-1092122",
+  "kind": "interface",
+  "note": "independent cc review: item towerP1TriangleFactorization (signature unchanged, proof complete from 4 sorried split lemmas) and moved defs (verbatim in TowerP1TriangleWords, re-exported) against clone + upstream defs (eta/epsilon/sourceUnit/exchange/exchangeSwap/square/projection/TensorData); scratch compile of all 6 modules with #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

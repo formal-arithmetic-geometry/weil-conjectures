@@ -13,9 +13,41 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
   "place": "Step 5: canonical small-site coordinates and proper/open construction required to state the explicit integral comparison obligation."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Whisker constantDirectUnderlying with sfCbcModelModules V. Its target underlying-set functor is definitionally the underlying sheaf of sfCbcModelModules T after the original module direct image. Naturality of the inverse comparison, applied to biproduct inclusions and projections, proves additivity on each section.",
+   "uses": [
+    "lem-sf-constant-semilinear-generator-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the local scalar compatibility lemma to the inverse underlying comparison. Together with additivity and naturality this defines a natural transformation of module sheaves.",
+   "uses": [
+    "lem-sf-integral-compactification-ordinary-scalar-action"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The two inverse identities of the underlying comparison prove bijectivity on every section. ModuleCat reflects bijectivity as invertibility; the functor from module sheaves to module presheaves reflects isomorphisms. Thus the natural transformation is an isomorphism and its hom satisfies exactly the displayed section normalization.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any other normalized isomorphism, apply the inverse of constantDirectUnderlying to its normalization equation. The inverse identities force equality of every section map; extensionality for module sheaf maps, natural transformations and isomorphisms gives uniqueness. Choose this unique isomorphism as before. The tower and derived tower transports and their exactness instances are unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constant-semilinear-generator-comparison",
+  "lem-sf-integral-compactification-ordinary-scalar-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7; Z6 constructs the normalized comparison from scalar compatibility, with biproduct additivity and sectionwise extensionality."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -86,7 +118,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-identification",
  "lean": {
@@ -123,5 +166,15 @@
   "group": "Q03",
   "result": "fix",
   "note": "Re-delivery of PASSed 494c4ff8 after a landing 60 s timeout on IntegralCompactificationBridgeCoordinates. Item node, main module and Words module are byte-identical; prior clause-by-clause PASS stands. Delta: OrdinaryCoordinates adds 3 named inferInstance instances (harmless); Coordinates replaces the HEq pin with the published DirectSquareNormalization, checked equivalent by substitution (derivedTowerModel = mapDerivedCategory, modelFactors = mapDerivedCategoryFactors). Not dropped; not landed live. The repair is slower: back to back 45.0/45.6 s vs old 30.2/33.7 s, 55.8 s at load 100. Profiler: kernel typechecks the predicate application 3 times (existsUnique 15 s, .exists aux proof 16 s, directModel 7.7 s). FIX: fixes/IntegralCompactificationBridgeCoordinates.lean names it once as def DirectModelNormalization (∃! d, DirectModelNormalization l E f d; statement and choice unchanged); fixes/def-sf-integral-compactification-site-transport.json adds it to lean.declarations plus a note. All 4 files compile clean via nt_compile --json; Coordinates 9.2/9.5 s vs 35.7 s delivered back to back."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a7042",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T203854-L-2866211",
+  "kind": "interface",
+  "note": "independent cc review: delivered item module + new ScalarAction module + importer IntegralCompactificationBridgeCoordinates compiled together in sandbox; def node vs live (only proof fields); new lemma vs constantDirectUnderlying Hom-normalization (Stacks 03D7); unit realized (empty)"
  }
 }

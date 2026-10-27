@@ -1,0 +1,227 @@
+{
+ "id": "lem-trf-tail-factorizations-tensor-kernel",
+ "kind": "statement",
+ "title": "Tail transition factorizations bound tensor kernels of colimit maps",
+ "statement": "Let $R$ be a commutative ring, let $I$ be a small nonempty directed partially ordered set, and let $(M_s,f_{st})_{s\\in I}$ be a directed system of $R$-modules with colimit $M$ and canonical maps $f_s:M_s\\to M$ [def-weil-pbc-category-colimit]. Fix $i,j\\in I$ with $i\\le j$. Assume that for every $k\\ge j$ there exists an $R$-linear map $h_k:M_k\\to M_j$ such that $h_k\\circ f_{ik}=f_{ij}$. Then for every $R$-module $L$ one has $\\ker(f_i\\otimes_R\\mathrm{id}_L)\\subseteq\\ker(f_{ij}\\otimes_R\\mathrm{id}_L)$ as submodules of $M_i\\otimes_RL$. Tensor products and their induced maps are [def-weil-pbc-module-tensor-product]. No finite-presentation or Mittag-Leffler hypothesis on these modules is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059E (proposition-ML-characterization), (3) implies (2), tensor-kernel union and factorization argument; tail-only version."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary $R$-module $L$. Put $T_s=M_s\\otimes_R L$, $t_{st}=f_{st}\\otimes_R\\mathrm{id}_L$, and $u_s=f_s\\otimes_R\\mathrm{id}_L$. By [lem-weil-pbc-tensor-commutes-with-colimits], $(M\\otimes_R L,(u_s)_s)$ is a colimit of the diagram $(T_s,t_{st})$. This applies to the given colimit cocone, so its legs are exactly the maps occurring in the asserted kernel inclusion.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E (proposition-ML-characterization), proof of (3) implies (2); tail-only adaptation using Tags 00DD and 00D7."
+   }
+  },
+  {
+   "text": "Let $z\\in\\ker(u_i)$. The nonempty directed poset $I$ is a small filtered category. Apply the zero-detection clause of [lem-weil-pbc-filtered-colimit-modules-elementwise] to the tensor-module colimit from step 1. There are $k_0\\ge i$ with $t_{i k_0}(z)=0$. This clause applies to arbitrary modules, so no finite-presentation or flatness hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E (proposition-ML-characterization), proof of (3) implies (2); tail-only adaptation using Tags 00DD and 00D7."
+   }
+  },
+  {
+   "text": "Choose a common upper bound $k\\ge k_0,j$ using directedness. Tensor functoriality [def-weil-pbc-module-tensor-product] and the system identity $f_{ik}=f_{k_0 k}\\circ f_{i k_0}$ give $t_{ik}(z)=t_{k_0 k}(t_{i k_0}(z))=t_{k_0 k}(0)=0$. Thus the zero witness can always be chosen in the tail on which the hypothesis supplies factorizations.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E (proposition-ML-characterization), proof of (3) implies (2); tail-only adaptation using Tags 00DD and 00D7."
+   }
+  },
+  {
+   "text": "Since $k\\ge j$, choose the assumed $R$-linear map $h_k:M_k\\to M_j$ with $h_k\\circ f_{ik}=f_{ij}$. By compatibility of tensor maps with composition [def-weil-pbc-module-tensor-product], $t_{ij}(z)=(h_k\\otimes_R\\mathrm{id}_L)(t_{ik}(z))=(h_k\\otimes_R\\mathrm{id}_L)(0)=0$. Hence every $z\\in\\ker(u_i)$ lies in $\\ker(t_{ij})$. Since $L$ was arbitrary, this is the asserted inclusion for every $R$-module $L$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E (proposition-ML-characterization), proof of (3) implies (2); tail-only adaptation using Tags 00DD and 00D7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059E (proposition-ML-characterization), proof of (3) implies (2); tail-only adaptation using Tags 00DD and 00D7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "zero_exact|exists_eq_zero|ker.*[dD]irect[Ll]imit|[dD]irect[Ll]imit.*ker",
+   "results": "{\"t\": \"2026-10-22T06:47:18Z\", \"tool\": \"grep\", \"query\": \"zero_exact|exists_eq_zero|ker.*[dD]irect[Ll]imit|[dD]irect[Ll]imit.*ker\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.DirectLimit.of.zero_exact (Algebra/Colimit/Module.lean:272) detects eventual zero and TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78, compatibility at 90) commutes tensor with the concrete direct limit. Neither states the universal bound from tail factorizations for an arbitrary colimit cocone; the common-upper-bound and factorization argument remains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor kernel of a colimit map is contained in kernel of a stage map admitting factorizations through every later stage",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"leansearch\", \"query\": \"Tensor kernel of a colimit map is contained in kernel of a stage map admitting factorizations through every later stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.isColimitMapCoconeOfCokernelCoforkOfπ\", \"CategoryTheory.Limits.isKernelOfComp\", \"CategoryTheory.kernelCokernelCompSequence.isColimit\", \"ModuleCat.kernelIsLimit\", \"AddCommGrpCat.kernelIsLimit\", \"CategoryTheory.Limits.instHasCokernelMapOfPreservesColimitWalkingParallelPairParallelPairOfNatHom\", \"CategoryTheory.kernelCokernelCompSequence.isLimit\", \"CategoryTheory.Limits.kernelFactorThruImage\"], \"digest\": \"cb6949c905dad391\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.DirectLimit.of.zero_exact (Algebra/Colimit/Module.lean:272) detects eventual zero and TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78, compatibility at 90) commutes tensor with the concrete direct limit. Neither states the universal bound from tail factorizations for an arbitrary colimit cocone; the common-upper-bound and factorization argument remains."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit.of, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"loogle\", \"query\": \"Module.DirectLimit.of, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.DirectLimit.of.zero_exact (Algebra/Colimit/Module.lean:272) detects eventual zero and TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78, compatibility at 90) commutes tensor with the concrete direct limit. Neither states the universal bound from tail factorizations for an arbitrary colimit cocone; the common-upper-bound and factorization argument remains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed system of modules if a fixed transition map factors through every later transition map its tensor kernel contains the kernel of the map to the direct limit",
+   "results": "{\"t\": \"2026-10-22T06:47:29Z\", \"tool\": \"leanfinder\", \"query\": \"In a directed system of modules if a fixed transition map factors through every later transition map its tensor kernel contains the kernel of the map to the direct limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitLeft_rTensor_of\", \"TensorProduct.fromDirectLimit_of_tmul\", \"TensorProduct.fromDirectLimit\", \"Submodule.FG.rTensor.directedSystem\", \"TensorProduct.directLimitLeft_tmul_of\", \"TensorProduct.toDirectLimit_tmul_of\", \"TensorProduct.directLimitRight_tmul_of\", \"TensorProduct.directLimitLeft\"], \"digest\": \"990fb87c0bf700ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.DirectLimit.of.zero_exact (Algebra/Colimit/Module.lean:272) detects eventual zero and TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78, compatibility at 90) commutes tensor with the concrete direct limit. Neither states the universal bound from tail factorizations for an arbitrary colimit cocone; the common-upper-bound and factorization argument remains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal tensor kernel bound from eventual factorizations in an arbitrary filtered colimit of modules, without finite presentation",
+   "results": "{\"t\": \"2026-10-22T06:48:05Z\", \"tool\": \"leanfinder\", \"query\": \"Universal tensor kernel bound from eventual factorizations in an arbitrary filtered colimit of modules, without finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"lTensor_mkQ\", \"rTensor_mkQ\", \"LinearMap.kerLTensorEquivOfSurjective\", \"LinearMap.tensorKerEquiv\", \"TensorProduct.map_ker\", \"LinearMap.ker_tensorProductMk\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\"], \"digest\": \"e5af5e2b52805d0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.DirectLimit.of.zero_exact (Algebra/Colimit/Module.lean:272) detects eventual zero and TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78, compatibility at 90) commutes tensor with the concrete direct limit. Neither states the universal bound from tail factorizations for an arbitrary colimit cocone; the common-upper-bound and factorization argument remains."
+  },
+  {
+   "tool": "grep",
+   "query": "directLimitLeft|zero_exact",
+   "results": "{\"t\": \"2026-10-22T06:48:05Z\", \"tool\": \"grep\", \"query\": \"directLimitLeft|zero_exact\", \"sub\": \"LinearAlgebra/TensorProduct/DirectLimit.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"78\", \"82\", \"83\", \"86\"], \"digest\": \"5f16dd387daacc9a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.DirectLimit.of.zero_exact (Algebra/Colimit/Module.lean:272) detects eventual zero and TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78, compatibility at 90) commutes tensor with the concrete direct limit. Neither states the universal bound from tail factorizations for an arbitrary colimit cocone; the common-upper-bound and factorization argument remains."
+  },
+  {
+   "tool": "grep",
+   "query": "zero_exact|exists_eq_zero|exists_eq_of_of_eq|of.*zero",
+   "results": "{\"t\": \"2026-10-22T06:48:05Z\", \"tool\": \"grep\", \"query\": \"zero_exact|exists_eq_zero|exists_eq_of_of_eq|of.*zero\", \"sub\": \"Algebra/Colimit\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Colimit/Module.lean\", \"Mathlib/Algebra/Colimit/Module.lean\", \"Mathlib/Algebra/Colimit/Module.lean\", \"Mathlib/Algebra/Colimit/Module.lean\", \"Mathlib/Algebra/Colimit/Module.lean\", \"Mathlib/Algebra/Colimit/TensorProduct.lean\", \"Mathlib/Algebra/Colimit/Ring.lean\", \"Mathlib/Algebra/Colimit/Ring.lean\"], \"digest\": \"e66959107b1113d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.DirectLimit.of.zero_exact (Algebra/Colimit/Module.lean:272) detects eventual zero and TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78, compatibility at 90) commutes tensor with the concrete direct limit. Neither states the universal bound from tail factorizations for an arbitrary colimit cocone; the common-upper-bound and factorization argument remains."
+  },
+  {
+   "tool": "grep",
+   "query": "ker.*[dD]irect[Ll]imit|[dD]irect[Ll]imit.*ker|directLimitLeft|zero_exact",
+   "results": "{\"t\": \"2026-10-23T14:58:08Z\", \"tool\": \"grep\", \"query\": \"ker.*[dD]irect[Ll]imit|[dD]irect[Ll]imit.*ker|directLimitLeft|zero_exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean\", \"Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean\", \"Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean\", \"Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean\", \"Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean\", \"Mathlib/Algebra/Colimit/Module.lean\", \"Mathlib/Algebra/Colimit/Module.lean\", \"Mathlib/Algebra/Colimit/Module.lean\"], \"digest\": \"6ac8c70d3cf5d7a8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor-colimit equivalences and eventual-zero detection give the two existing Mathlib leaves used in the proof, but the tail factorization hypothesis and common-upper-bound argument require assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor kernel of a colimit map is contained in kernel of a stage map admitting factorizations through every later stage",
+   "results": "{\"t\": \"2026-10-23T14:58:08Z\", \"tool\": \"leansearch\", \"query\": \"Tensor kernel of a colimit map is contained in kernel of a stage map admitting factorizations through every later stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.isColimitMapCoconeOfCokernelCoforkOfπ\", \"CategoryTheory.Limits.isKernelOfComp\", \"CategoryTheory.kernelCokernelCompSequence.isColimit\", \"ModuleCat.kernelIsLimit\", \"AddCommGrpCat.kernelIsLimit\", \"CategoryTheory.Limits.instHasCokernelMapOfPreservesColimitWalkingParallelPairParallelPairOfNatHom\", \"CategoryTheory.kernelCokernelCompSequence.isLimit\", \"CategoryTheory.Limits.kernelFactorThruImage\"], \"digest\": \"cb6949c905dad391\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor-colimit equivalences and eventual-zero detection give the two existing Mathlib leaves used in the proof, but the tail factorization hypothesis and common-upper-bound argument require assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit.of, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-23T14:58:08Z\", \"tool\": \"loogle\", \"query\": \"Module.DirectLimit.of, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor-colimit equivalences and eventual-zero detection give the two existing Mathlib leaves used in the proof, but the tail factorization hypothesis and common-upper-bound argument require assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed system of modules if a fixed transition map factors through every later transition map its tensor kernel contains the kernel of the map to the direct limit",
+   "results": "{\"t\": \"2026-10-23T14:58:09Z\", \"tool\": \"leanfinder\", \"query\": \"In a directed system of modules if a fixed transition map factors through every later transition map its tensor kernel contains the kernel of the map to the direct limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitLeft_rTensor_of\", \"TensorProduct.fromDirectLimit_of_tmul\", \"TensorProduct.fromDirectLimit\", \"Submodule.FG.rTensor.directedSystem\", \"TensorProduct.directLimitLeft_tmul_of\", \"TensorProduct.toDirectLimit_tmul_of\", \"TensorProduct.directLimitRight_tmul_of\", \"TensorProduct.directLimitLeft\"], \"digest\": \"990fb87c0bf700ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor-colimit equivalences and eventual-zero detection give the two existing Mathlib leaves used in the proof, but the tail factorization hypothesis and common-upper-bound argument require assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal tensor kernel bound from eventual factorizations in an arbitrary filtered colimit of modules, without finite presentation",
+   "results": "{\"t\": \"2026-10-23T15:01:21Z\", \"tool\": \"leanfinder\", \"query\": \"Universal tensor kernel bound from eventual factorizations in an arbitrary filtered colimit of modules, without finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKer\", \"TensorProduct.map_ker\", \"lTensor.toFun\", \"Module.Flat.ker_lTensor_eq\", \"lTensor_mkQ\", \"rTensor_mkQ\", \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"rTensor.toFun\"], \"digest\": \"73437cda52eada61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned tensor-kernel/right-exactness and flat-module equalizer results and ring finite-presentation descent; none assumes or concludes the tail factorization kernel bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-mittag-leffler-eventual-domination",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of lem-trf-local-term-locality, inherited local projectivity/faithfully-flat descent support chain; supporting proof of eventual domination: Tag 059E (proposition-ML-characterization), (3) implies (2), tensor-kernel union and factorization argument; tail-only version.",
+   "via": [
+    "lem-trf-mittag-leffler-eventual-domination",
+    "lem-trf-mittag-leffler-faithfully-flat-descent",
+    "lem-trf-countable-projective-faithfully-flat-descent",
+    "lem-trf-local-projective-faithfully-flat-descent",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-tail-factorizations-tensor-kernel",
+  "worker": "stage1",
+  "summary": "Q34 checked Tag 059E (3) implies (2), exposing its tensor-colimit and eventual-zero inputs as citations of existing Mathlib leaves. The common-upper-bound step proves that only tail factorizations are required, without finite presentation. No new nodes, changed hypotheses, or project Lean attachments.",
+  "blueprint": "Supporting algebra argument in the inherited local projectivity/faithfully-flat descent chain under lem-trf-local-term-locality: the kernel-union/factorization step of Tag 059E (3) implies (2). This item is not itself in the latest blueprint; ancestor and via chain retained; whole-blueprint searches found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-25f40e1c1",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-25f40e1c1 (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes. Stacks algebra.tex Tag 059E (proposition-ML-characterization), (3)=>(2), line ~21070: the kernel of f_i⊗id is the union of the stage kernels, then factorization. The item is a correct tail-only version: it needs factorizations h_k only for k>=j and no finite presentation, which this direction never uses. It is consistent with the parent eventual-domination step 2. Step 1: lem-weil-pbc-tensor-commutes-with-colimits (mathlib) gives exactly the cocone (M⊗L, f_s⊗id) for any small diagram. Step 2: the in-particular clause of lem-weil-pbc-filtered-colimit-modules-elementwise (mathlib) gives k0>=i with t_{ik0}(z)=0; a nonempty directed poset is filtered. Steps 3 and 4 are genuinely elementary (common upper bound k>=k0,j; (h_k⊗id)∘(f_ik⊗id)=f_ij⊗id by the composition clause of def-weil-pbc-module-tensor-product). proof_deps equals the union of uses; there is no cycle and no SGA. Tested a singleton I, L=0, and N-indexed zero transitions (the hypothesis fails for j=0, as it should). The duplicate search over Mittag-Leffler/059E/domination nodes (tensor-kernel-factorization, tensor-witness-eventual-factorization, least-support-stabilization, restricted-colimit-generators-kernels) found only other directions or other statements. The blueprint from/via and split_report.blueprint are present; unit and chapter are unchanged; no tool_uses are needed. Minor: the report mentions citations.json and searches.jsonl, which are not in the delivery; this is cosmetic. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.TailFactorizationsTensorKernel",
+  "declaration": "ModuleCat.ker_rTensor_colimit_leg_le_of_tail_factorizations",
+  "file": "lean/Sheaf/LinearAlgebra/TailFactorizationsTensorKernel.lean",
+  "statement": "theorem ker_rTensor_colimit_leg_le_of_tail_factorizations {R : Type u} [CommRing R] {I : Type w} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{v} R) (c : Cocone F) (hc : IsColimit c) (i j : I) (hij : i ≤ j) (hfactor : ∀ (k : I) (hjk : j ≤ k), ∃ h : F.obj k →ₗ[R] F.obj j, h.comp (F.map (homOfLE (hij.trans hjk))).hom = (F.map (homOfLE hij)).hom) (L : Type t) [AddCommGroup L] [Module R L] : LinearMap.ker (LinearMap.rTensor L (c.ι.app i).hom) ≤ LinearMap.ker (LinearMap.rTensor L (F.map (homOfLE hij)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer fix: the ring, index poset, system modules and coefficient module L are in independent universes (R : Type u, I : Type w, ModuleCat.{v} R, L : Type t) instead of all tied to u; the node imposes no universe relation and the citer lem-trf-mittag-leffler-eventual-domination uses I : Type v with ModuleCat.{max u v w} R.",
+  "fixed_by": "NT-stage2-cc-53dc396ea"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53dc396ea",
+  "group": "Q07",
+  "result": "fix",
+  "note": "The mathematics is correct against Stacks 059E (3)=>(2) tail version. Every hypothesis and conclusion clause matches: tail-only factorization h∘f_ik=f_ij, rTensor kernel inclusion for an arbitrary colimit cocone, no extra hypotheses. Docstrings carry source and blueprint; the proof is sorry only; there are no definitions; no duplicate found in Mathlib or lean/Sheaf. Finding (H3/H9 universe): the statement tied R, I and the system modules to one universe u (I : Type u, ModuleCat.{u} R), which the node does not impose and which the only citer lem-trf-mittag-leffler-eventual-domination (I : Type v, ModuleCat.{max u v w} R) cannot instantiate. FIX: universes generalized to I : Type w, ModuleCat.{v} R, L : Type t. Complete module plus lean-record.json with the verbatim statement are in fixes/; nt_compile --json of the fix exited 0 with no errors or warnings."
+ }
+}

@@ -1,0 +1,276 @@
+{
+ "id": "lem-trf-curve-delta-completion-data",
+ "kind": "statement",
+ "title": "Local normalization defect and its canonical completion comparison",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $X$ a reduced finite-type $k$-scheme of pure dimension one [def-pc-reduced-scheme, def-weil-finite-type-morphism, def-weil-pure-dimension], $x$ a closed point, and $\\nu:X^\\nu\\to X$ its componentwise normalization [def-weil-pbc-reduced-normalization]. Put $A=\\mathcal O_{X,x}$, $B=(\\nu_*\\mathcal O_{X^\\nu})_x$, and $M=B/A$, with the natural inclusion and direct image on opens. The morphism $\\nu$ is finite and surjective; its fibre at $x$ is a finite nonempty set of closed points, and $k\\to\\kappa(y)$ is an isomorphism for every point $y$ in that fibre. The ring $A$ is a reduced Noetherian local $k$-algebra of Krull dimension one, essentially of finite type over $k$ [def-weil-pbc-noetherian-ring, def-weil-pbc-krull-dimension-ring, def-weil-pbc-essentially-finite-type-algebra], with residue field $k$ via its structural map. Let $Q(A)$ be the localization at all elements $s$ for which $sa=0$ implies $a=0$. Then $B$ is a finite $A$-module and is the integral closure of $A$ in $Q(A)$ [def-weil-pbc-integral-closure, def-weil-finitely-generated-module]. The module $M$ has finite length (a finite filtration with simple successive quotients), is finite-dimensional over $k$, and its length over $A$ equals $\\dim_k M$. Put $H=\\varprojlim_n A/\\mathfrak m_A^n$ and $C=\\varprojlim_n B/\\mathfrak m_A^nB$ [def-weil-pbc-adic-completion]. The ring $H$ is reduced Noetherian complete local of dimension one with structural residue field $k$; the canonical maps identify $C=B\\otimes_A H$ with its integral closure in $Q(H)$ and induce a $k$-linear isomorphism $M\\cong C/H$. If $X$ is smooth over $k$ at $x$ [def-sbc-smooth-morphisms], then $B=A$ and $M=0$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C1R (lemma-prepare-delta-invariant), (1)--(9), and Tag 0C3V (lemma-normalization-same-after-completion); structural residue fields over algebraically closed k. Agent specialization including the simple-filtration comparison of length with k-dimension."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-sbc-smooth-morphisms",
+  "def-trf-normalization-pushforward-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-normalization-affine-stalk-closure] to the reduced finite-type scheme $X$. It gives finiteness and surjectivity of $\\nu$, the structural injection $A\\hookrightarrow B$, and identifies $B$ with the finite integral closure of $A$ in $Q(A)$. In particular these identifications use the actual direct-image stalk and respect localization. By [def-weil-pure-dimension], the hypothesis on $X$ says exactly that every irreducible component has dimension one. Thus [lem-trf-curve-normalization-coherent-support] applies: at the closed point $x$, $A$ is reduced Noetherian local of dimension one, essentially of finite type over $k$, and $k\\to\\kappa(x)$ is the structural isomorphism. It also supplies the coherent quotient sheaf $Q$ with $Q_x=B/A$ and finite closed support.",
+   "uses": [
+    "lem-trf-normalization-affine-stalk-closure",
+    "def-weil-pure-dimension",
+    "lem-trf-curve-normalization-coherent-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BXR (lemma-normalization-locally-algebraic), 0C1R (lemma-prepare-delta-invariant), (1)--(4); morphisms.tex Tag 0C3B (lemma-stalk-normalization)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-closed-map-finite-fibres], the fibre of $\\nu$ over $x$ is finite; it is nonempty by surjectivity. To check closedness of its individual points, choose an affine neighbourhood $U=\\operatorname{Spec}R$ of $x$ and use the finite integral-closure model $\\nu^{-1}U=\\operatorname{Spec}T$ from [lem-trf-normalization-affine-stalk-closure]. A prime $\\mathfrak q$ over the maximal ideal of $x$ is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal], since $T$ is integral over $R$. Hence each point is closed within the fibre. The fibre is a closed subset of $X^\\nu$ because $x$ is closed, so its points are closed in $X^\\nu$. In the stalk model they correspond to the primes of $B$ over $\\mathfrak m_A$. Each residue field is a quotient of the finite-dimensional $k$-algebra $B/\\mathfrak m_AB$, whose spanning set is given by the images of a finite $A$-generating set of $B$. Thus $\\kappa(y)/k$ is finite-dimensional, and [lem-weil-pbc-alg-closed-finite-extension-trivial] says that the structural map $k\\to\\kappa(y)$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-trf-normalization-affine-stalk-closure",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), (1), and lemma-normalize-noetherian-dim-1; algebra.tex Tags 00GS (lemma-integral-over-field), 09GR in fields.tex (lemma-algebraically-closed)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coherent-finite-support-skyscrapers] to the coherent quotient $Q$ from step 1. The scheme is Noetherian by [lem-trf-normalization-affine-stalk-closure], hence locally Noetherian as required. If $Q_x\\ne0$, this lemma gives a finite filtration of $M=Q_x$ with simple successive quotients. If $Q_x=0$, the empty filtration does so. This proves finite length in all cases.",
+   "uses": [
+    "lem-trf-coherent-finite-support-skyscrapers",
+    "lem-trf-normalization-affine-stalk-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), (4), using coherent finite closed support; algebra.tex lemma-support-point."
+   }
+  },
+  {
+   "text": "For each simple factor $L$ of this filtration, choose $0\\ne v\\in L$. Simplicity makes $A\\to L$, $a\\mapsto av$, surjective; its kernel is maximal since the quotient has no proper nonzero ideals. As $A$ is local, the kernel is $\\mathfrak m_A$. Consequently $L\\cong A/\\mathfrak m_A\\cong k$ via the structural map, so it has $k$-dimension one and $A$-length one. Inductively lift a $k$-basis from each quotient and append it to a basis of the preceding submodule: spanning follows by subtracting a lift, and independence follows by projecting a relation. Therefore a filtration with $r$ factors gives $\\dim_k M=r$, including $r=0$. Applying [lem-weil-pbc-length-additive-short-exact] to its successive short exact sequences gives $\\operatorname{length}_A M=r$ as well.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "algebra.tex Tag 00IV (lemma-length-additive); elementary cyclic description of simple modules over a local ring and basis lifting."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-curve-normalization-completion] to the reduced one-dimensional local $k$-algebra $A$ obtained in step 1, with its integral closure $B$. It states that $H=\\widehat A$ is reduced of dimension one and canonically identifies $B\\otimes_AH$ with the integral closure of $H$ in $Q(H)$. All its hypotheses, including essentially finite type, were supplied in step 1; no assertion for arbitrary reduced local rings is being used.",
+   "uses": [
+    "lem-trf-curve-normalization-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3V (lemma-normalization-same-after-completion), completion clause."
+   }
+  },
+  {
+   "text": "The Noetherian conclusion for $H$ is [lem-weil-pbc-adic-completion-noetherian]. By [lem-weil-pbc-local-completion-local-ring], $H$ is local with maximal ideal $\\mathfrak m_AH$ and its residue field is canonically $A/\\mathfrak m_A$. The latter is structurally $k$ by step 1, so their composite is the required structural residue-field identification. Since $A$ is Noetherian its maximal ideal is finitely generated. Apply [lem-weil-pbc-module-completion-complete] with the module $A$ and ideal $\\mathfrak m_A$: $H$ is complete for the powers $\\mathfrak m_A^nH=(\\mathfrak m_AH)^n$. Hence it is complete as a local ring.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "algebra.tex Tags 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion)."
+   }
+  },
+  {
+   "text": "Use [lem-trf-finite-colength-completion-comparison] for the injective finite ring map $A\\hookrightarrow B$ and the finite filtration of $M$ from step 3. It identifies $C=\\varprojlim_nB/\\mathfrak m_A^nB$ canonically with $B\\otimes_AH$, respecting the structural inclusion of $H$, and gives the isomorphism $M\\to C/H$ explicitly by $b+A\\mapsto\\iota_B(b)+H$. Combining this tensor identification with step 5 identifies this very $C$ with the integral closure of $H$ in $Q(H)$. The quotient map is $A$-linear by the cited statement; restricting scalars along $k\\to A$ makes it $k$-linear. This proves the asserted canonical comparison, rather than merely an equality of dimensions.",
+   "uses": [
+    "lem-trf-finite-colength-completion-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), (7), (9); algebra.tex Tags 00MA (lemma-completion-tensor), 00MB (lemma-completion-flat)."
+   }
+  },
+  {
+   "text": "Finally [lem-trf-curve-normalization-coherent-support] identifies the locus $N$ of normal local rings with the smooth locus and says $Q_x=0$ exactly on $N$. If $X$ is smooth at $x$, therefore $M=Q_x=B/A=0$. The structural inclusion $A\\hookrightarrow B$ then has zero quotient, so it is surjective as well as injective: under the stipulated inclusion $B=A$.",
+   "uses": [
+    "lem-trf-curve-normalization-coherent-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), (2), (4); Tag 056T (lemma-smooth-geometrically-normal), smooth implies normal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-normalization-affine-stalk-closure",
+  "def-weil-pure-dimension",
+  "lem-trf-curve-normalization-coherent-support",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-trf-coherent-finite-support-skyscrapers",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-trf-curve-normalization-completion",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-trf-finite-colength-completion-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C1R and 0C3V, specialized using existing DAG inputs; elementary structural residue-field and filtration arguments written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalization.*[Cc]ompletion|[Cc]ompletion.*normalization|deltaInvariant",
+   "results": "{\"t\": \"2026-10-22T06:07:08Z\", \"tool\": \"grep\", \"query\": \"normalization.*[Cc]ompletion|[Cc]ompletion.*normalization|deltaInvariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization morphism instances and finite length of a principal quotient do not give the geometric normalization defect and its canonical completion comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a reduced algebraic curve the quotient of normalization by the local ring has finite length unchanged by completion",
+   "results": "{\"t\": \"2026-10-22T06:07:08Z\", \"tool\": \"leansearch\", \"query\": \"For a reduced algebraic curve the quotient of normalization by the local ring has finite length unchanged by completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isFiniteLength_quotient_span_singleton\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"isReduced_localizationPreserves\", \"IsLocalRing.finite_residueField_of_compactSpace\", \"IsLocalRing.finite_quotient_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"08f082a8f9c034f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization morphism instances and finite length of a principal quotient do not give the geometric normalization defect and its canonical completion comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"length\"",
+   "results": "{\"t\": \"2026-10-22T06:07:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"length\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization morphism instances and finite length of a principal quotient do not give the geometric normalization defect and its canonical completion comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type reduced curve local normalization quotient has finite dimension over algebraically closed residue field and agrees with completed normalization quotient",
+   "results": "{\"t\": \"2026-10-22T06:07:20Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type reduced curve local normalization quotient has finite dimension over algebraically closed residue field and agrees with completed normalization quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.reduction\", \"IsLocalRing.ResidueField.finite_of_finite\", \"Polynomial.residueFieldMapCAlgEquiv\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"Algebra.QuasiFinite.instResidueField\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\"], \"digest\": \"ff31e5e3ec1b7b7a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization morphism instances and finite length of a principal quotient do not give the geometric normalization defect and its canonical completion comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*completion|completion.*normalization|deltaInvariant",
+   "results": "{\"t\": \"2026-10-23T09:24:59Z\", \"tool\": \"grep\", \"query\": \"normalization.*completion|completion.*normalization|deltaInvariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read relative normalization in Mathlib/AlgebraicGeometry/Normalization.lean:15-75,327-366; finite principal quotient in Mathlib/RingTheory/OrderOfVanishing/Basic.lean:292-302 and finite-length filtration in Mathlib/RingTheory/FiniteLength.lean:65-90. None states all local curve normalization and canonical completion clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a reduced algebraic curve normalization quotient has finite length preserved by completion",
+   "results": "{\"t\": \"2026-10-23T09:24:59Z\", \"tool\": \"leansearch\", \"query\": \"For a reduced algebraic curve normalization quotient has finite length preserved by completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isFiniteLength_quotient_span_singleton\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"IsFiniteLength.of_simple_quotient\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"e21311fe2f29c764\"} Read relative normalization in Mathlib/AlgebraicGeometry/Normalization.lean:15-75,327-366; finite principal quotient in Mathlib/RingTheory/OrderOfVanishing/Basic.lean:292-302 and finite-length filtration in Mathlib/RingTheory/FiniteLength.lean:65-90. None states all local curve normalization and canonical completion clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"length\"",
+   "results": "{\"t\": \"2026-10-23T09:24:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"length\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read relative normalization in Mathlib/AlgebraicGeometry/Normalization.lean:15-75,327-366; finite principal quotient in Mathlib/RingTheory/OrderOfVanishing/Basic.lean:292-302 and finite-length filtration in Mathlib/RingTheory/FiniteLength.lean:65-90. None states all local curve normalization and canonical completion clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a reduced one dimensional local algebra over a field commutes with completion and the normalization defect has finite length",
+   "results": "{\"t\": \"2026-10-23T09:25:00Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a reduced one dimensional local algebra over a field commutes with completion and the normalization defect has finite length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.DimensionLEOne.integralClosure\", \"Ring.DimensionLEOne.isIntegralClosure\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\"], \"digest\": \"9d1034fb32aa0115\"} Read relative normalization in Mathlib/AlgebraicGeometry/Normalization.lean:15-75,327-366; finite principal quotient in Mathlib/RingTheory/OrderOfVanishing/Basic.lean:292-302 and finite-length filtration in Mathlib/RingTheory/FiniteLength.lean:65-90. None states all local curve normalization and canonical completion clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of an algebraic curve is finite and its quotient by the structure sheaf is a finite dimensional vector space canonically unchanged by completing the local rings",
+   "results": "{\"t\": \"2026-10-23T09:27:29Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of an algebraic curve is finite and its quotient by the structure sheaf is a finite dimensional vector space canonically unchanged by completing the local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"d223853d3ef6598f\"} Read relative normalization in Mathlib/AlgebraicGeometry/Normalization.lean:15-75,327-366; finite principal quotient in Mathlib/RingTheory/OrderOfVanishing/Basic.lean:292-302 and finite-length filtration in Mathlib/RingTheory/FiniteLength.lean:65-90. None states all local curve normalization and canonical completion clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ordinary-point-delta-branches",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion, proof step 5: Appendix B genus/tree calculation. Appendix B, ordinary n-fold points and the inequality/equality characterization preceding Lemma B.1, printed pp. 56--57. Argument extracted from returned proof steps 1--3 of lem-trf-ordinary-point-delta-branches.",
+   "via": [
+    "lem-trf-ordinary-point-delta-branches",
+    "lem-trf-curve-p1-tree-local-criterion",
+    "lem-trf-valuation-exceptional-local-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-curve-delta-completion-data",
+  "worker": "stage1",
+  "summary": "Reused existing affine normalization, coherent support, finite-length, and canonical completion lemmas; wrote the residue-field and simple-filtration arguments explicitly. Statement retained verbatim. No new nodes.",
+  "blueprint": "Historical Appendix B genus/tree input via lem-trf-ordinary-point-delta-branches, extracted steps 1--3. Read latest lem-trf-local-term-locality proof: its current contracting-correspondence route no longer contains the historical semistable-alteration argument; this item supplies the already recorded historical descendant without altering that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic completion input: The completion of a Noetherian ring is Noetherian. The unit supplies no replacement for this commutative-algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-ce401e772",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-ce401e772 (reviewer sub-agent of L); spot-checked: I read the item and all 13 cited statements in full; there are no new nodes and no fixes. The statement matches clones/live verbatim, the live item is still unsplit with no proof, and no re-split note exists for this item. The transitive closure of the proof_deps (456 nodes) contains no cycle. Source: varieties.tex 0C1R (lemma-prepare-delta-invariant) (1)-(9) and 0C3V; every cited tag and label was checked in tags/tags. Steps: 1 uses normalization-affine-stalk-closure (finite surjective ν, B the finite integral closure in Q(A)), def-weil-pure-dimension and curve-normalization-coherent-support (Q coherent with finite closed support, A reduced Noetherian of dimension 1, essentially finite type, κ(x)=k). 2: the fibre is finite by finite-closed-map-finite-fibres; its points are closed because a prime of T over a maximal ideal is maximal (integral-prime-over-maximal-maximal) and the fibre lies in ν^{-1}U; κ(y) is a quotient of B/m_A B, which is finite over k, so alg-closed-finite-extension-trivial applies. 3: coherent-finite-support-skyscrapers gives the simple filtration, and r=0 is handled when Q_x=0. 4 is genuinely elementary: a simple module over the local ring A is A/m ≅ k, basis lifting gives dim_k=r and length additivity gives length=r. 5: curve-normalization-completion, all hypotheses supplied by step 1. 6: Noetherian, local with residue field k, and complete because m^n H = (mH)^n. 7: finite-colength-completion-comparison gives the canonical Ĉ ≅ B⊗H and M ≅ Ĉ/Ĥ by b+A ↦ ι(b)+Ĥ; with step 5 this Ĉ is the integral closure of H, and the map is k-linear by restriction of scalars. 8: the smooth locus is N, where Q_x=0, so B=A. Small cases checked: node (M≅k), cusp, smooth point, empty X. I accept the declared tool use lem-weil-pbc-adic-completion-noetherian (sk-thm-p1) as a generic completion input. Advisory: the existing node lem-trf-normalization-singular-skyscraper overlaps the item at non-smooth points; it predates this delivery. Step 6 source.document says varieties.tex while its place names algebra.tex tags, which is cosmetic."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CurveDeltaCompletionData",
+  "declaration": "AlgebraicGeometry.Scheme.curve_delta_completion_data",
+  "file": "lean/Sheaf/TraceFormula/CurveDeltaCompletionData.lean",
+  "statement": "theorem curve_delta_completion_data (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsReduced X] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (hpure : X.IsPureDimension 1) (x : X) (hx : IsClosed ({x} : Set X)) : IsFinite X.fromReducedNormalization ∧ Surjective X.fromReducedNormalization ∧ Nonempty {y : X.reducedNormalization // X.fromReducedNormalization y = x} ∧ Set.Finite {y : X.reducedNormalization | X.fromReducedNormalization y = x} ∧ (∀ U : X.Opens, Function.Injective (X.fromReducedNormalization.app U).hom) ∧ (∀ y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}, IsClosed ({y.val} : Set X.reducedNormalization) ∧ ∃ e : X.reducedNormalization.residueField y.val ≅ CommRingCat.of k, Spec.map e.inv = X.reducedNormalization.fromSpecResidueField y.val ≫ X.fromReducedNormalization ≫ (X ↘ Spec (.of k))) ∧ _root_.IsReduced (X.presheaf.stalk x) ∧ IsLocalRing (X.presheaf.stalk x) ∧ ringKrullDim (X.presheaf.stalk x) = 1 ∧ ((X.presheaf.germ ⊤ x (TopologicalSpace.Opens.mem_top x)).hom.comp (((Scheme.ΓSpecIso (.of k)).inv ≫ (X ↘ Spec (.of k)).appTop).hom)).EssFiniteType ∧ ∃ (hnoeth : IsNoetherianRing (X.presheaf.stalk x)) (e : X.residueField x ≅ CommRingCat.of k), Spec.map e.inv = X.fromSpecResidueField x ≫ (X ↘ Spec (.of k)) ∧ Function.Injective (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)) ∧ Module.Finite (X.presheaf.stalk x) (normalizationPushforwardStalk X x) ∧ Nonempty (normalizationPushforwardStalk X x ≃ₐ[X.presheaf.stalk x] integralClosure (X.presheaf.stalk x) (FractionRing (X.presheaf.stalk x))) ∧ (∃ r : ℕ, ∃ F : Fin (r + 1) → Submodule (X.presheaf.stalk x) (normalizationPushforwardStalk X x ⧸ (Algebra.linearMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)).range), F 0 = ⊥ ∧ F (Fin.last r) = ⊤ ∧ (∀ j : Fin r, F j.castSucc < F j.succ) ∧ (∀ j : Fin r, IsSimpleModule (X.presheaf.stalk x) (F j.succ ⧸ Submodule.comap (F j.succ).subtype (F j.castSucc))) ∧ Module.length (X.presheaf.stalk x) (normalizationPushforwardStalk X x ⧸ (Algebra.linearMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)).range) = r) ∧ @Module.Finite k (normalizationPushforwardStalk X x ⧸ (Algebra.linearMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)).range) _ _ (Module.compHom _ ((X.presheaf.germ ⊤ x (TopologicalSpace.Opens.mem_top x)).hom.comp (((Scheme.ΓSpecIso (.of k)).inv ≫ (X ↘ Spec (.of k)).appTop).hom))) ∧ @Module.finrank k (normalizationPushforwardStalk X x ⧸ (Algebra.linearMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)).range) _ _ (Module.compHom _ ((X.presheaf.germ ⊤ x (TopologicalSpace.Opens.mem_top x)).hom.comp (((Scheme.ΓSpecIso (.of k)).inv ≫ (X ↘ Spec (.of k)).appTop).hom))) = Module.length (X.presheaf.stalk x) (normalizationPushforwardStalk X x ⧸ (Algebra.linearMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)).range) ∧ _root_.IsReduced (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) ∧ IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) ∧ IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x))) (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) ∧ ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) = 1 ∧ Function.Bijective ((IsLocalRing.residue (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x))).comp ((algebraMap (X.presheaf.stalk x) (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x))).comp ((X.presheaf.germ ⊤ x (TopologicalSpace.Opens.mem_top x)).hom.comp (((Scheme.ΓSpecIso (.of k)).inv ≫ (X ↘ Spec (.of k)).appTop).hom)))) ∧ ∃ i : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) →ₐ[X.presheaf.stalk x] AdicCompletion ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x))) (normalizationPushforwardStalk X x), Function.Injective i ∧ (∀ (n : ℕ) (a : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) (b : X.presheaf.stalk x), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) n a = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)) ^ n) b → AdicCompletion.evalₐ ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x))) n (i a) = Ideal.Quotient.mk (((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x))) ^ n) (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x) b)) ∧ (∃ t : (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ⊗[X.presheaf.stalk x] normalizationPushforwardStalk X x) ≃ₐ[X.presheaf.stalk x] AdicCompletion ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x))) (normalizationPushforwardStalk X x), ∀ (a : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) (b : normalizationPushforwardStalk X x), t (a ⊗ₜ[X.presheaf.stalk x] b) = i a * algebraMap (normalizationPushforwardStalk X x) (AdicCompletion ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x))) (normalizationPushforwardStalk X x)) b) ∧ (∃ ec : AdicCompletion ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x))) (normalizationPushforwardStalk X x) ≃+* integralClosure (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) (FractionRing (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x))), ∀ a : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x), ec (i a) = algebraMap _ _ a) ∧ (∃ eM : (normalizationPushforwardStalk X x ⧸ (Algebra.linearMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)).range) ≃ₗ[X.presheaf.stalk x] (AdicCompletion ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x))) (normalizationPushforwardStalk X x) ⧸ i.toLinearMap.range), ∀ c : normalizationPushforwardStalk X x, eM (Submodule.Quotient.mk c) = Submodule.Quotient.mk (AdicCompletion.of ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x))) (normalizationPushforwardStalk X x) c)) ∧ ((∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ (X ↘ Spec (.of k)))) → Function.Bijective (algebraMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)) ∧ Subsingleton (normalizationPushforwardStalk X x ⧸ (Algebra.linearMap (X.presheaf.stalk x) (normalizationPushforwardStalk X x)).range))",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the actual normalization direct-image ring stalk and its structural algebra via the landed def-trf-normalization-pushforward-stalk. The quotient B/A, the completions H and C and the ideal m_A B are written inline with Mathlib Quotient/AdicCompletion (def-weil-pbc-adic-completion); the theorem-owned abbreviations of lem-trf-normalization-singular-skyscraper are not used (maintainer FIX, review 2026-10-24). The A-linear canonical quotient equivalence is in particular k-linear by restriction along the explicit structural k-to-A map, used also for finite dimension and finrank. The completion map is pinned at each finite quotient, the tensor equivalence on pure tensors, and the completed normalization equivalence over H. No statement correction.",
+  "fixed_by": "NT-stage2-cc-ba9fefb1e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba9fefb1e",
+  "group": "NO",
+  "result": "fix",
+  "note": "Mathematics correct clause by clause against 0C1R(1)-(9)/0C3V and the node: hypotheses exact (LOFT+QC finite type, IsPureDimension 1, closed x); ν finite/surjective, fibre finite nonempty of closed points with structural κ(y)≅k; A reduced local dim 1 Noetherian EssFiniteType with structural residue field k; B finite and ≃ₐ integral closure in FractionRing (unique so Nonempty is canonical); simple filtration with length = r = finrank_k; H reduced Noetherian complete local dim 1 with structural residue k; i pinned levelwise, tensor iso on pure tensors, ec∘i = algebraMap, eM[c] = [of c]; smooth ⇒ B=A, M=0; empty X and r=0 covered. Fault (H2/H4): statement used normalizationQuotientStalk/BaseCompletion/CompletionIdeal/StalkCompletion, owned only by theorem node lem-trf-normalization-singular-skyscraper (not a stmt_dep). FIX inlines them as Mathlib quotient/AdicCompletion terms (definitionally equal; AdicCompletion via def-weil-pbc-adic-completion). fixes/CurveDeltaCompletionData.lean + lean-record.json with new verbatim statement; nt_compile --json clean (13 s, exit 0); refit_record no refusals."
+ }
+}

@@ -1,0 +1,288 @@
+{
+ "id": "lem-trf-derived-evaluation-resolved-model",
+ "kind": "statement",
+ "title": "Resolved chain model for the iterated derived evaluation transpose",
+ "statement": "Let $R$ be a commutative ring. Use $D(R)$ [def-weil-abstract-derived-category] as the derived category of modules on the one-object site with trivial topology and ring $R$, and $H(X,Y)=R\\operatorname{Hom}_R(X,Y)$ [def-pur-derived-internal-hom]. Use direct-sum total tensor [def-pc-tensor-complex-sheaves] and product Hom complexes [def-pur-hom-complex]. For any $K,L,M\\in D(R)$ choose a K-flat complex $P$ representing $K$ [def-pc-kflat-complex] and K-injective complexes $J,I$ representing $L,M$ [def-pur-kinjective-complex]. Put $A^\\bullet=\\operatorname{Hom}^\\bullet_R(J,I)$ and let $Q$ denote localization from complexes to $D(R)$.\nThere are canonical isomorphisms in $D(R)$\n$$\\lambda_P:Q\\operatorname{Tot}(A^\\bullet\\otimes_RP)\\xrightarrow{\\sim}H(L,M)\\otimes_R^{\\mathbf L}K,\\qquad \\rho_P:Q\\operatorname{Hom}^\\bullet_R(\\operatorname{Hom}^\\bullet_R(P,J),I)\\xrightarrow{\\sim}H(H(K,L),M).$$\nOn homogeneous elements $h\\in(A^\\bullet)^a$, $x\\in P^b$, and $f\\in\\operatorname{Hom}^\\bullet_R(P,J)^c$, the rule\n$$E_P(h\\otimes x)(f)=(-1)^{bc}h(f(x))$$\ndefines a chain map $E_P:\\operatorname{Tot}(A^\\bullet\\otimes_RP)\\to\\operatorname{Hom}^\\bullet_R(\\operatorname{Hom}^\\bullet_R(P,J),I)$ for arbitrary unbounded complexes of this kind. Let $e_{K,L,M}$ be the iterated evaluation transpose of [lem-trf-closed-evaluation-naturality] in the closed symmetric monoidal structure on $D(R)$ given by [lem-sf-ringed-derived-closed-symmetric-monoidal] for this one-object site: it transposes the composite that swaps $P$ past the inner Hom and then applies the two evaluation counits. Then\n$$\\rho_P\\circ Q(E_P)=e_{K,L,M}\\circ\\lambda_P.$$\nThe isomorphisms and equality use the canonical representative identifications for the chosen representatives, with no boundedness or finite-generation assumptions.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A67 (lemma-internal-hom-evaluate), 0A60 (lemma-evaluate-and-more), and 0A61 (remark-sign-explanation): unbounded resolved representative, finite support in the tensor sum, and identification with the abstract transpose."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "lem-trf-closed-evaluation-naturality",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pc-ring-hom-extension-shared-definitions",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-trf-ringed-hom-representative-comparison",
+  "def-coef-hom-representative-evaluation",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\operatorname{Hom}^\\bullet(P,J)$ and $T=\\operatorname{Tot}(A\\otimes P)$. For fixed degrees $a,b,c$, evaluation $h\\otimes x\\mapsto(f\\mapsto(-1)^{bc}h(f(x)))$ is balanced and linear, and lands in $\\operatorname{Hom}_R(B^c,I^{a+b+c})$. The product defining the target permits one such component for every $c$. Every element of $T^n$ is a finite sum over $a+b=n$, with each tensor itself a finite sum of pure tensors. Thus these formulas sum to an actual degree-zero graded map $E:T\\to\\operatorname{Hom}^\\bullet(B,I)$; no infinite sum in $I$ is used.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A60 (lemma-evaluate-and-more), finite-support construction before equation beta"
+   }
+  },
+  {
+   "text": "For $|h|=a$, $|x|=b$, $|f|=c$, expand the target differential, including its action on $df$:\n$$d(E(h\\otimes x))(f)=(-1)^{bc}d_Ih(f(x))-(-1)^{a+bc}h(d_Jf(x))+(-1)^{a+bc+c}h(f(d_Px)).$$\nExpanding $E(dh\\otimes x+(-1)^ah\\otimes d_Px)(f)$ gives these same three terms, since $dh=d_Ih-(-1)^ahd_J$ and $(b+1)c=bc+c$. Equality on every product projection and tensor generator proves $dE=Ed$, for all integer degrees, including negative ones.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A60 (lemma-evaluate-and-more), equations alpha and beta; Tag 0A61 (remark-sign-explanation)"
+   }
+  },
+  {
+   "text": "Use the canonical representative comparisons for derived Hom with K-injective target: $QA\\simeq H(L,M)$, $QB\\simeq H(K,L)$, and $Q\\operatorname{Hom}^\\bullet(B,I)\\simeq H(QB,M)$. Their independence of the representatives is the quasi-isomorphism invariance of Hom into K-injectives. The native localization tensorator $\\mu_{X,Y}:QX\\otimes^L QY\\to Q\\operatorname{Tot}(X\\otimes Y)$ is invertible when either factor is K-flat. In particular $\\mu_{A,P}^{-1}$, followed by the comparisons $QA\\simeq H(L,M)$ and $QP\\simeq K$, gives $\\lambda_P$. The outer Hom comparison, followed by the contravariant transport of $QB\\simeq H(K,L)$, gives $\\rho_P$. This uses K-flatness of $P$, not flatness of its individual terms.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5W (section-RHom), definition by a K-injective target; Tag 0A67 (lemma-internal-hom-evaluate), chosen representatives"
+   }
+  },
+  {
+   "text": "Record explicitly the counit normalization needed below. For any complex $Y$ and K-injective $N$, let $C=\\operatorname{Hom}^\\bullet(Y,N)$, $\\gamma:QC\\simeq H(QY,QN)$, and $v:C\\otimes Y\\to N$, $g\\otimes y\\mapsto g(y)$. Then\n$$\\epsilon_{QY,QN}(\\gamma\\otimes1)=Q(v)\\mu_{C,Y}.$$\nIndeed choose a flat-term K-flat resolution $q:Y'\\to Y$. Precompose both sides with the isomorphism $1\\otimes Qq$. Naturality of $\\mu$ and the component identity $v(1\\otimes q)=v'\\bigl(\\operatorname{Hom}(q,N)\\otimes1\\bigr)$ reduce the equation to the one-K-flat chain-transpose theorem applied to the chain map $C\\to\\operatorname{Hom}^\\bullet(Y',N)$, $g\\mapsto gq$. Its transpose is exactly $g\\otimes y'\\mapsto g(qy')$. The Hom comparison is the canonical one by its quasi-isomorphism invariance, so cancellation of $1\\otimes Qq$ proves the displayed equation. This argument does not invert $\\mu_{C,Y}$ or require $Y$ to be K-flat.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-pur-rhom-well-defined",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5W (section-RHom), tensor-Hom adjunction; Tag 0A67, comparison with the representative evaluations"
+   }
+  },
+  {
+   "text": "Let $D=\\operatorname{Hom}^\\bullet(B,I)$ and write $v_{Y,N}$ for ordinary evaluation. There is an equality of chain maps\n$$v_{B,I}(E\\otimes1_B)=v_{J,I}(1_A\\otimes v_{P,J})(1_A\\otimes\\sigma_{P,B}):T\\otimes B\\to I,$$\nwith tensor associators inserted. On $h\\otimes x\\otimes f$ each side is $(-1)^{bc}h(f(x))$: ordinary evaluations introduce no signs, and the single swap introduces $(-1)^{bc}$. These generator equalities establish the whole equation, including all product components.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A61 (remark-sign-explanation), swap of the last two factors followed by two evaluations"
+   }
+  },
+  {
+   "text": "Localize the preceding chain equality and precompose with the iterated lax tensorator from $QA\\otimes^L QP\\otimes^L QB$. Naturality and associativity of this tensorator, and its compatibility with the Koszul braiding, identify the two sides with the corresponding composites in the derived category. Apply the counit equation of step 4 to $(Y,N)=(B,I),(P,J),(J,I)$. Under the comparisons of step 3 the left side becomes the uncurrying of $\\rho_P Q(E)\\lambda_P^{-1}$; the right side becomes\n$$H(L,M)\\otimes^L K\\otimes^L H(K,L)\\xrightarrow{1\\otimes\\sigma}H(L,M)\\otimes^L H(K,L)\\otimes^L K\\xrightarrow{1\\otimes\\epsilon}H(L,M)\\otimes^L L\\xrightarrow{\\epsilon}M.$$\nThe closed-evaluation lemma specifies $e_{K,L,M}$ as the unique transpose of precisely this composite. Injectivity of that adjunction bijection gives $\\rho_P Q(E)\\lambda_P^{-1}=e_{K,L,M}$, hence the asserted equation. All cancellations are of representative comparison isomorphisms or of $\\mu_{A,P}$, whose invertibility was proved in step 3; no other tensorator is inverted.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-trf-closed-evaluation-naturality",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A61 (remark-sign-explanation) and 0A67 (lemma-internal-hom-evaluate), identification of the resolved map with its transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-trf-closed-evaluation-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A60, 0A61, 0A67; explicit differential expansion and localization/counit verification of omitted comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded cochain complexes a K-flat P and K-injective J I represent the derived evaluation map by E(h tensor x)(f) = (-1)^(degree x degree f) h(f(x))",
+   "results": "8 hits; top=['CochainComplex.isKInjective_of_injective_aux', 'CategoryTheory.InjectiveResolution.extMk_hom', 'CochainComplex.cm5b.i', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'CochainComplex.cm5b', 'CochainComplex.cm5b.fac_assoc', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'CategoryTheory.ProjectiveResolution.extMk_hom']; subdirectory=; note=; digest=798562c79b79377d",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution comparison, Hom cochains and Tor do not identify this unbounded derived transpose with its signed double-Hom representative"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"tensor\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution comparison, Hom cochains and Tor do not identify this unbounded derived transpose with its signed double-Hom representative"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived evaluation comparison is represented by the signed double Hom cochain map on K-flat and K-injective resolutions",
+   "results": "8 hits; top=[\"CategoryTheory.ProjectiveResolution.Hom.hom'\", 'CategoryTheory.InjectiveResolution.Hom.hom', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'HomologicalComplex.mkHomFromDouble', 'CategoryTheory.InjectiveResolution.descHomotopy', 'CochainComplex.HomComplex.δ_ofHomotopy', 'CochainComplex.HomComplex.δ']; subdirectory=; note=; digest=cecd85159d64f46f",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution comparison, Hom cochains and Tor do not identify this unbounded derived transpose with its signed double-Hom representative"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|KFlat|evaluation|doubleHom",
+   "results": "4 hits; top=['Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean', 'Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean', 'Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean', 'Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean']; subdirectory=Algebra/Homology/DerivedCategory; note=; digest=4943c46c97776e20",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution comparison, Hom cochains and Tor do not identify this unbounded derived transpose with its signed double-Hom representative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chain tensor internal Hom adjunction identifies the resolved derived evaluation comparison with the Koszul signed formula",
+   "results": "8 hits; top=[\"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_map\", 'CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction', 'CategoryTheory.Tor_map', 'Rep.standardComplex.εToSingle₀_comp_eq', 'HomologicalComplex.rightUnitor', 'HomologicalComplex.leftUnitor', \"CategoryTheory.Tor'_obj_obj\"]; subdirectory=; note=; digest=4ecb9f02f64c9236",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution comparison, Hom cochains and Tor do not identify this unbounded derived transpose with its signed double-Hom representative"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation|uncurry|curry|homTensor",
+   "results": "16 hits; top=['Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean', 'Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean', 'Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean', 'Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean', 'Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/HomComplexInduction.lean', 'Mathlib/Algebra/Homology/Functor.lean']; subdirectory=Algebra/Homology; note=; digest=a21e3394b26bfb0c",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category counits and complex tensor constructions do not state the resolved unbounded double-evaluation equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor internal Hom adjunction evaluation counit represented by cochain evaluation on K-flat complexes",
+   "results": "8 hits; top=['CategoryTheory.Functor.closedCounit', 'CategoryTheory.exp.ev', 'CategoryTheory.ihom.ihom_adjunction_counit', 'CategoryTheory.Adjunction.derivedε', 'CategoryTheory.ihom.ev', 'CategoryTheory.Adjunction.derivedε.congr_simp', 'CategoryTheory.evaluationAdjunctionRight_counit_app_app', 'CategoryTheory.Pi.closedCounit']; subdirectory=; note=; digest=32d6aa86ac555fb0",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category counits and complex tensor constructions do not state the resolved unbounded double-evaluation equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"tensor\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category counits and complex tensor constructions do not state the resolved unbounded double-evaluation equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded complexes of modules derived tensor Hom evaluation transpose represented by Koszul signed double evaluation on K-flat and K-injective representatives",
+   "results": "8 hits; top=['HomologicalComplex.HasGoodTensor₁₂', 'HomologicalComplex.HasGoodTensor₂₃', 'HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX', 'HomologicalComplex.HasTensor', 'HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X', 'HomologicalComplex.ιTensorObj', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'HomologicalComplex.tensorObj']; subdirectory=; note=; digest=5a41ba3431723ac8",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category counits and complex tensor constructions do not state the resolved unbounded double-evaluation equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal localization of cochain complexes identifies derived double dual evaluation with graded signed ordinary evaluation",
+   "results": "8 hits; top=['HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_symm_apply', 'DerivedCategory.singleFunctorIsoCompQ', 'HomologicalComplex.dgoEquivHomologicalComplex_counitIso']; subdirectory=; note=; digest=e783a9076171f404",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category counits and complex tensor constructions do not state the resolved unbounded double-evaluation equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-evaluation-canonical-map",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting construction: the canonical evaluation map of Tag 0A67 and its compatibility with triangles. Re-split of lem-trf-derived-evaluation-canonical-map: Old proof step 3: K-injective/K-flat representative identifications and signed unbounded chain model for the already constructed transpose.",
+   "via": [
+    "lem-trf-derived-evaluation-canonical-map",
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-derived-evaluation-resolved-model",
+  "worker": "stage1",
+  "summary": "Constructed the chain map on finite-support tensor elements, expanded all differential signs, obtained canonical unbounded representative isomorphisms, checked each evaluation counit by a one-sided K-flat resolution, and identified the localized map by uniqueness of transpose. No new node or change of statement. Avoided the cyclic near-duplicate signed-model node.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting construction: the canonical evaluation map of Tag 0A67 and its compatibility with triangles. Re-split of lem-trf-derived-evaluation-canonical-map: Old proof step 3: K-injective/K-flat representative identifications and signed unbounded chain model for the already constructed transpose.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Hom invariance supplies canonical chosen K-injective comparisons; the unit contains no substitute for this generic homological tool."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Canonical lax localization tensorator, one-sided K-flat invertibility, and structural coherence are needed to localize the chain equality."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "A flat-term resolution of an arbitrary tensor parameter is used only to check a counit equation."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "The generic normalized chain-transpose statement fixes the counit on a flat-term K-flat parameter; it replaces no step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-well-defined",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-hom-kflat-chain-transpose"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-ff2b2883c",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-ff2b2883c (reviewer sub-agent of L); spot-checked: Read the item's 6 steps in full, with every cited statement and the Stacks sources. The statement and stmt_deps are byte-identical to base and side-live. The item is still unsplit live, has no repair note and adds no new nodes. The closure is acyclic. All four tool_uses are acceptable generic homological algebra; only lem-sfb-hom-kflat-chain-transpose is off-route, and it is declared. No SGA is cited. Sources: in 0A60 (more-algebra l.18164) the sign (-1)^{r+qr} equals (-1)^{bc} with b=r, c=-q-r. The 0A61 swap of the last two factors matches step 5 and the 1⊗σ_{K,B} normalization of lem-trf-closed-evaluation-naturality. The 0A67 setup matches the item, and the comparison Stacks omits is supplied by steps 4 and 6. I recomputed step 2: the coefficients (-1)^{bc}, -(-1)^{a+bc} and (-1)^{a+bc+c} agree on both sides. Step 3: μ_{A,P} is invertible because P is K-flat, and the representative comparisons are the canonical ones. Step 4: I checked the reduction through a flat-term resolution Y'→Y to the chain-transpose node (A arbitrary, P flat-term K-flat, E K-injective) and the extranaturality of the counit; μ_{C,Y} is never inverted. Step 5: both sides give (-1)^{bc}h(f(x)), and ordinary evaluation needs no sign. Step 6: the uncurrying identities follow from naturality and braiding compatibility of μ, then uniqueness of the transpose. Edge cases checked: zero ring, all degrees zero, the odd case P=R[-1], J=R[0], and unbounded complexes. Maintainer note: lem-trf-double-evaluation-signed-derived-model (O4, split and reviewed by Q93) states the same theorem. It cannot be cited here because it would close a cycle through canonical-map. The two should be merged; this is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedEvaluationResolvedModel",
+  "declaration": "DerivedCategory.derived_evaluation_resolved_model",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedEvaluationResolvedModel.lean",
+  "statement": "theorem derived_evaluation_resolved_model (R : Type u) [CommRing R] [HasDerivedCategory.{u} (RingSiteModules R)] (K L M : DerivedCategory (RingSiteModules R)) (P J I : CochainComplex (RingSiteModules R) ℤ) (hP : (HomologicalComplex.quasiIso (RingSiteModules R) (.up ℤ)).kFlat P) [J.IsKInjective] [I.IsKInjective] (eP : Q.obj P ≅ K) (eJ : Q.obj J ≅ L) (eI : Q.obj I ≅ M) : ∃ E : (coefficientTotalTensor.{u, u, u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I, P) ⟶ homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I, (∀ (a b n c j i : ℤ) (hn : a + b = n) (hj : b + c = j) (hi : j + a = i) (hi' : c + n = i) (U : (Discrete PUnit.{u + 1})ᵒᵖ) (h : ((homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I).X a).val.obj U) (x : (P.X b).val.obj U) (f : ((homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J).X c).val.obj U), (((coefficientHomComponent.{u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I n c i hi').val.app U ((E.f n).val.app U (coefficientTensorGenerator.{u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) P a b n hn U h x))).app (op (Over.mk (𝟙 U.unop)))) f = (b * c).negOnePow • (((coefficientHomComponent.{u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) J I a j i hi).val.app U h).app (op (Over.mk (𝟙 U.unop)))) ((((coefficientHomComponent.{u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) P J c b j hj).val.app U f).app (op (Over.mk (𝟙 U.unop)))) x)) ∧ ∃ (a : Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) ≅ (SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) L).obj M) (b : Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) ≅ (SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K).obj L) (c : Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I) ≅ (SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) (Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J))).obj M) (t : Q.obj ((coefficientTotalTensor.{u, u, u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I, P)) ≅ Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) ⊗ Q.obj P) (lambda : Q.obj ((coefficientTotalTensor.{u, u, u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I, P)) ≅ (SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) L).obj M ⊗ K) (rho : Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I) ≅ (SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K).obj L)).obj M), a.hom = ringedHomRepresentativeMap.{u, u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) J I ≫ (SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (eJ.inv.op, eI.hom) ∧ b.hom = ringedHomRepresentativeMap.{u, u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) P J ≫ (SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (eP.inv.op, eJ.hom) ∧ c.hom = ringedHomRepresentativeMap.{u, u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I ≫ (SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (X := (op (Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J)), Q.obj I)) (Y := (op (Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J)), M)) (𝟙 _, eI.hom) ∧ t.inv = Functor.LaxMonoidal.μ Q (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) P ≫ Q.map (SignedRingedHom.totalTensorNativeIso ⊥ (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) P).inv ∧ lambda.hom = t.hom ≫ (a.hom ⊗ₘ eP.hom) ∧ rho.hom = c.hom ≫ (SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (X := (op (Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J)), M)) (Y := (op ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K).obj L), M)) (b.inv.op, 𝟙 M) ∧ Q.map E ≫ rho.hom = lambda.hom ≫ (SignedRingedHom.adjunction ⊥ (CochainComplex.onePointRingSheaf R) ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K).obj L)).homEquiv _ M ((α_ _ _ _).hom ≫ _ ◁ ((β_ K _).hom ≫ (SignedRingedHom.adjunction ⊥ (CochainComplex.onePointRingSheaf R) K).counit.app L) ≫ (SignedRingedHom.adjunction ⊥ (CochainComplex.onePointRingSheaf R) L).counit.app M)",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The arbitrary K,L,M and all three chosen representative isomorphisms are explicit. The homogeneous formula uses the existing actual Hom product projections and sheafified tensor generators; lambda and rho are actual derived isomorphisms, normalized by the fixed K-injective augmentation, inverse native tensorator and representative transports. Only K-flatness of P and K-injectivity of J,I are assumed. No boundedness or degreewise-flatness assumption, no statement correction, no duplicate definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-376bca94e",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Clause-by-clause match: arbitrary K,L,M with representing isos eP/eJ/eI; hP is MorphismProperty.kFlat (on quasi-isos) and J,I IsKInjective, with no boundedness or finiteness assumption. E formula: degree bookkeeping via homComplexπ (p+n=q) and the tensor generator (a+b=n) is checked, sign (b*c).negOnePow = 0A60 (-1)^{bc}. a,b,c = ringedHomRepresentativeMap + homFunctor transports with correct variance; t.inv = μ_Q ≫ Q(totalTensorNativeIso.inv); λ, ρ endpoints correct; the final RHS equals closedIteratedEvaluation and is term-identical to the e of landed derived_evaluation_canonical_map. Mechanical theorem-stmt_dep finding: SignedRingedHom.adjunction = normalizedAdjunction_existsUnique.choose (theorem module of lem-weil-pbc-ringed-internal-hom-exact-restriction) → genuine dependency, PASS on the point. Statement field verbatim; only lean and 5 added landed stmt_deps differ from live; no new defs, sorry only, docstrings with source, blueprint and 6 steps; imports live; Worker report + Second reading present (self-check, disclosed). Advisory: SignedRingedHom.* not listed in the dep record's declarations. No compile run (no change); worker's server compile clean, 2.7 s."
+ }
+}

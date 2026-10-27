@@ -1,0 +1,80 @@
+# global build 2026-10-26T15:17:12Z of cf8dbab324: Sheaf.AlgebraicGeometry.SfP1ChartExchange failed
+error: Sheaf/AlgebraicGeometry/SfP1ChartExchange.lean:358:9: Application type mismatch: The argument
+  (ordinaryFiniteSinglePullbackIso A f).app K
+has type
+  (ordinaryFiniteSingleFunctor A Y ⋙ ordinaryFinitePullback A f).obj K ≅
+    ((f)^*[ModuleCat A] ⋙ ordinaryFiniteSingleFunctor A X).obj K
+but is expected to have type
+  (ordinaryFinitePullback A f).obj (ordinaryFiniteDegreeZero A Y K) ≅ ?m.86
+in the application
+  ((ordinaryFiniteSinglePullbackIso A f).app K).trans
+error: Sheaf/AlgebraicGeometry/SfP1ChartExchange.lean:361:54: Application type mismatch: The argument
+  exactLine A f a
+has type
+  D((f)^*[ModuleCat A]).obj
+      ((shiftFunctor (DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat A))) 2).obj
+        ((ordinaryFiniteSingleFunctor A Y).obj K)) ⟶
+    (shiftFunctor (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat A))) 2).obj
+      ((ordinaryFiniteSingleFunctor A X).obj M)
+but is expected to have type
+  D((f)^*[ModuleCat A]).obj
+      ((shiftFunctor (DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat A))) 2).obj
+        (ordinaryFiniteDegreeZero A Y K)) ⟶
+    (shiftFunctor (DerivedCategoryModule A X) 2).obj ((ordinaryFiniteSingleFunctor A X).obj M)
+in the application
+  (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat A) f).hom.app
+      ((shiftFunctor (DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat A))) 2).obj
+        (ordinaryFiniteDegreeZero A Y K)) ≫
+    exactLine A f a
+error: Sheaf/AlgebraicGeometry/SfP1ChartExchange.lean:384:6: Type mismatch
+  (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat A) f).hom.app
+      ((shiftFunctor (DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat A))) 2).obj
+        ((ordinaryFiniteSingleFunctor A Y).obj (Y.finiteEtaleTateLine N A hA))) ≫
+    exactLine A f (t.line f hY)
+has type
+  L((f)^*[ModuleCat A]).obj
+      ((shiftFunctor (DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat A))) 2).obj
+        ((ordinaryFiniteSingleFunctor A Y).obj (Y.finiteEtaleTateLine N A hA))) ⟶
+    (shiftFunctor (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat A))) 2).obj
+      ((ordinaryFiniteSingleFunctor A X).obj (X.finiteEtaleTateLine N A hA))
+but is expected to have type
+  (ordinaryFinitePullback A f).obj ((shiftFunctor (DerivedCategoryModule A Y) 2).obj (ordinaryFiniteLine A N hA Y)) ⟶
+    (shiftFunctor (DerivedCategoryModule A X) 2).obj (ordinaryFiniteLine A N hA X)
+error: Sheaf/AlgebraicGeometry/SfP1ChartExchange.lean:481:50: Type mismatch
+  exactLine₀ A fg d
+has type
+  D((fg)^*[ModuleCat A]).obj ((ordinaryFiniteSingleFunctor A Z).obj K) ⟶ (ordinaryFiniteSingleFunctor A X).obj M
+but is expected to have type
+  D((fg)^*[ModuleCat A]).obj (ordinaryFiniteDegreeZero A Z K) ⟶ (ordinaryFiniteSingleFunctor A X).obj M
+error: Sheaf/AlgebraicGeometry/SfP1ChartExchange.lean:481:10: Application type mismatch: The argument
+  exactLine₀ A g a
+has type
+  D((g)^*[ModuleCat A]).obj ((ordinaryFiniteSingleFunctor A Z).obj K) ⟶ (ordinaryFiniteSingleFunctor A Y).obj L
+but is expected to have type
+  D((g)^*[ModuleCat A]).obj (ordinaryFiniteDegreeZero A Z K) ⟶ (ordinaryFiniteSingleFunctor A Y).obj L
+in the application
+  D((f)^*[ModuleCat A]).map (exactLine₀ A g a)
+error: Sheaf/AlgebraicGeometry/SfP1ChartExchange.lean:538:14: Unknown identifier `exactLine₀_comp`
+error: Sheaf/AlgebraicGeometry/SfP1ChartExchange.lean:534:64: unsolved goals
+A : Type (u + 1)
+inst✝ : CommRing A
+N : ℕ
+hA : ↑N = 0
+t : OrdinaryFiniteTwistTransport A N hA
+X Y Z : Scheme
+f : X ⟶ Y
+g : Y ⟶ Z
+hZ : IsUnit ↑N
+hY : IsUnit ↑N
+fg : X ⟶ Z
+hfg : fg = f ≫ g
+c : D((fg)^*[ModuleCat A]) ≅ D((g)^*[ModuleCat A]) ⋙ D((f)^*[ModuleCat A]) :=
+  Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat A) f g fg hfg) ≪≫
+    (g)^*[ModuleCat A].mapDerivedCategoryCompIso (f)^*[ModuleCat A]
+⊢ (leftDerivedUpperStarComp (ModuleCat A) f g fg hfg).hom.app
+        ((shiftFunctor (DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat A))) 2).obj
+          (ordinaryFiniteLine A N hA Z)) ≫
+      (ordinaryFinitePullback A f).map (ordinaryFiniteShiftedLinePullback A N hA t g hZ).hom ≫
+        (ordinaryFiniteShiftedLinePullback A N hA t f hY).hom =
+    (ordinaryFiniteShiftedLinePullback A N hA t fg hZ).hom
+error: Lean exited with code 1

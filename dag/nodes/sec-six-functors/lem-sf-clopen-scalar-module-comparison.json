@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-clopen-scalar-module-comparison",
+ "kind": "statement",
+ "title": "Ordinary scalar extension comparison on an open component",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme T and an open subscheme U with the normalized coefficient restriction datum d [def-sf-clopen-restriction-data]. For every positive exponent n+1, restriction of ordinary extension of scalars is naturally isomorphic to ordinary extension of scalars after completed-coefficient restriction [lem-pur-derived-change-of-rings]. The isomorphism sends the sheafified tensor d.finite(s) tensor x to s tensor x for every local object, coefficient and section [def-weil-integral-reduction-tower]. This is only an ordinary module statement: no derived categories or chain quotient comparisons are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, ordinary pullback-tensor-product comparison and the normalized coefficient square."
+ },
+ "stmt_deps": [
+  "def-sf-clopen-restriction-data",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized comparison with raw restricted coefficients from lem-sf-clopen-scalar-raw-restriction-comparison. This is the cocontinuous sheafification step, separated to compile its generic tensor argument once.",
+   "uses": [
+    "lem-sf-clopen-scalar-raw-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift d.completion and d.finite to commutative-ring sheaf isomorphisms. The equation d.projection gives their scalar square. Apply normalized ordinaryScalarSquare to transport scalar extension along these ring isomorphisms, then transport the local recorded model to the chosen scalarReductionExtension by its object and map equations.",
+   "uses": [
+    "lem-pur-ring-iso-quotient-system-transport",
+    "lem-pur-system-scalar-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse sheafification comparison fixes pure tensors. The ring-isomorphism comparison maps r tensor x to the tensor with the transformed coefficient; cancel the finite coefficient isomorphism. The object transports preserve these sheafified tensors, yielding the displayed formula.",
+   "uses": [
+    "lem-sf-clopen-scalar-raw-restriction-comparison",
+    "lem-pur-ring-iso-quotient-system-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-clopen-scalar-raw-restriction-comparison",
+  "lem-pur-ring-iso-quotient-system-transport",
+  "lem-pur-system-scalar-model"
+ ],
+ "proof_origin": {
+  "by": "W8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, ordinary pullback-tensor-product comparison and the normalized coefficient square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a clopen component commutes with extension of scalars on sheaves of modules and its derived functor",
+   "results": "Eight hits, none supplies the coefficient-normalized comparison or the counit equation required here. Local source search found ProEtaleClopenOrdinaryScalarComparison and ProEtaleClopenScalarComparisonDescent.",
+   "verdict": "Use the existing project comparison machinery, not a duplicate generic geometric statement.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.extensionOfScalars",
+   "results": "No match; extensionOfScalars is not an identifier of the checked-out project interface.",
+   "verdict": "Use the project scalar model and its object and map equations.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Comp|Iso)|pushforwardCongr",
+   "results": "Found generic scalar restriction composition and isomorphism APIs; local searches found normalized ring-isomorphism tensor transport and K-flat descent.",
+   "verdict": "No exact statement in Mathlib; combine the existing project lemmas and pointwise module constructions.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenScalarQuotientComparison",
+  "date": "2026-10-27",
+  "group": "W8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3. Substep: Normalized scalar extension and chain quotient comparison.",
+   "via": [
+    "lem-sf-clopen-derived-compatibility",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization",
+    "lem-sf-clopen-scalar-quotient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfClopenScalarModuleComparison",
+  "file": "lean/Sheaf/Paper/SfClopenScalarModuleComparison.lean",
+  "declaration": "WeilConjectures.sf_clopen_scalar_module_comparison",
+  "statement": "theorem sf_clopen_scalar_module_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)\n    (d : SfClopenCoefficientRestriction l E T U) (n : ℕ) :\n    ∃ c : scalarReductionExtension l E T n ⋙\n        sfClopenModuleRestriction U _ _ (d.finite n) ≅\n      sfClopenModuleRestriction U (completedIntegralCoefficientSheafUnrestricted l E T)\n        (completedIntegralCoefficientSheafUnrestricted l E U.toScheme) d.completion ⋙\n        scalarReductionExtension l E U.toScheme n,\n      ∀ (M : scalarReductionSource l E T) (V : U.toScheme.ProEt)\n        (s : (integralCoefficientCommRingSheaf l E U.toScheme n).obj.obj (op V))\n        (x : M.val.obj (op ((sfClopenSiteInclusion U).obj V))),\n      ((c.hom.app M).val.app (op V))\n        (unrestrictedTowerTensorSection l E T n M\n          (op ((sfClopenSiteInclusion U).obj V)) ((d.finite n).hom.hom.app (op V) s) x) =\n      unrestrictedTowerTensorSection l E U.toScheme n\n        ((sfClopenModuleRestriction U _ _ d.completion).obj M) (op V) s x",
+  "branch": "sheaf-dag",
+  "by": "W8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T112444-L-1585705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T112444-L-1585705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

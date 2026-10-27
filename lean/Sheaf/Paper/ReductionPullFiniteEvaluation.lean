@@ -448,22 +448,51 @@ private theorem mapComplexSquare_hom_f
   rw [ConstantCompletion.mapComplexSquare_hom]
   rfl
 
+/-- The cube equation, with its functors and comparisons kept abstract. -/
+private def finiteCubeFormula
+    {C D B E V W : Type*}
+    [Category C] [Category D] [Category B] [Category E] [Category V] [Category W]
+    (DF : C ⥤ D) (DT : V ⥤ W) (EV : V ⥤ C) (EU : W ⥤ D)
+    (SV : B ⥤ C) (SU : E ⥤ D) (DG : B ⥤ E)
+    (RV : C ⥤ V) (RU : D ⥤ W) (XV : C ⥤ B) (XU : D ⥤ E)
+    (evalIso : DT ⋙ EU ≅ EV ⋙ DF)
+    (finiteEvalIsoV : RV ⋙ EV ≅ XV ⋙ SV)
+    (restrictionIso : SV ⋙ DF ≅ DG ⋙ SU)
+    (reductionIso : RV ⋙ DT ≅ DF ⋙ RU)
+    (finiteEvalIsoU : RU ⋙ EU ≅ XU ⋙ SU)
+    (finiteIso : DF ⋙ XU ≅ XV ⋙ DG) (X : C) : Prop :=
+  evalIso.hom.app (RV.obj X) ≫ DF.map (finiteEvalIsoV.hom.app X) ≫
+      restrictionIso.hom.app (XV.obj X) =
+    EU.map (reductionIso.hom.app X) ≫ finiteEvalIsoU.hom.app (DF.obj X) ≫
+      SU.map (finiteIso.hom.app X)
+
 private theorem complex_reduction_finite {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (P : CochainComplex (V.modules A) ℤ) (n : ℕ) :
-    (evaluationPullComplexIso f A n).hom.app
-        (ConstantCompletion.reductionComplex V.topology A I false P) ≫
-      ((f.modulePull A).mapHomologicalComplex (.up ℤ)).map
-        ((ConstantCompletion.quotientEvaluationComplexIso V.topology A I n).hom.app P) ≫
-      (restrictionComplexIso f A I n).hom.app
-        (((ConstantCompletion.change (ConstantCompletion.quotient V.topology A I n)
-          ).mapHomologicalComplex (.up ℤ)).obj P) =
-    ((U.evaluateModule A n).mapHomologicalComplex (.up ℤ)).map
-        ((f.moduleReductionPullComplexIso A I).hom.app P) ≫
-      (ConstantCompletion.quotientEvaluationComplexIso U.topology A I n).hom.app
-        (((f.modulePull A).mapHomologicalComplex (.up ℤ)).obj P) ≫
+    finiteCubeFormula
+      ((f.modulePull A).mapHomologicalComplex (.up ℤ))
+      ((f.towerModulePull A).mapHomologicalComplex (.up ℤ))
+      ((V.evaluateModule A n).mapHomologicalComplex (.up ℤ))
+      ((U.evaluateModule A n).mapHomologicalComplex (.up ℤ))
+      ((ConstantCompletion.res (ConstantCompletion.quotient V.topology A I n)
+        ).mapHomologicalComplex (.up ℤ))
       ((ConstantCompletion.res (ConstantCompletion.quotient U.topology A I n)
-        ).mapHomologicalComplex (.up ℤ)).map ((finiteComplexIso f A I n).hom.app P) := by
+        ).mapHomologicalComplex (.up ℤ))
+      ((f.modulePull (quotientRing A I n)).mapHomologicalComplex (.up ℤ))
+      ((ConstantCompletion.reductionTower V.topology A I false
+        ).mapHomologicalComplex (.up ℤ))
+      ((ConstantCompletion.reductionTower U.topology A I false
+        ).mapHomologicalComplex (.up ℤ))
+      ((ConstantCompletion.change (ConstantCompletion.quotient V.topology A I n)
+        ).mapHomologicalComplex (.up ℤ))
+      ((ConstantCompletion.change (ConstantCompletion.quotient U.topology A I n)
+        ).mapHomologicalComplex (.up ℤ))
+      (evaluationPullComplexIso f A n)
+      (ConstantCompletion.quotientEvaluationComplexIso V.topology A I n)
+      (restrictionComplexIso f A I n) (f.moduleReductionPullComplexIso A I)
+      (ConstantCompletion.quotientEvaluationComplexIso U.topology A I n)
+      (finiteComplexIso f A I n) P := by
+  dsimp only [finiteCubeFormula]
   have := ConstantCompletion.reductionTower_additive V.topology A I false
   have := ConstantCompletion.reductionTower_additive U.topology A I false
   dsimp only [evaluationPullComplexIso, restrictionComplexIso, finiteComplexIso,
@@ -712,6 +741,92 @@ private theorem finite_model_abstract
       (by simpa only [x, XP, YP, r, t, vU, vV, fP, Category.assoc] using hCube)
 
 
+/-- Keep normalization equations abstract until the cube is checked with abstract
+functors. This avoids specializing tensor equations during concrete kernel checking. -/
+private theorem finite_model_abstract_normalized
+    {C D B E V W C' D' B' E' V' W' : Type vModel}
+    [Category.{vComplex} C] [Category.{vComplex} D] [Category.{vComplex} B] [Category.{vComplex}
+      E] [Category.{vComplex} V] [Category.{vComplex} W]
+    [Category.{vDerived} C'] [Category.{vDerived} D'] [Category.{vDerived} B']
+      [Category.{vDerived} E'] [Category.{vDerived} V'] [Category.{vDerived} W']
+    (F : C ⥤ D)
+    (T : V ⥤ W)
+    (ev : V ⥤ C)
+    (eu : W ⥤ D)
+    (rv : C ⥤ V)
+    (ru : D ⥤ W)
+    (xv : C ⥤ B)
+    (xu : D ⥤ E)
+    (sv : B ⥤ C)
+    (su : E ⥤ D)
+    (G : B ⥤ E)
+    (DF : C' ⥤ D')
+    (DT : V' ⥤ W')
+    (EV : V' ⥤ C')
+    (EU : W' ⥤ D')
+    (SV : B' ⥤ C')
+    (SU : E' ⥤ D')
+    (DG : B' ⥤ E')
+    (RV : C' ⥤ V')
+    (RU : D' ⥤ W')
+    (XV : C' ⥤ B')
+    (XU : D' ⥤ E')
+    (QC : C ⥤ C')
+    (QD : D ⥤ D')
+    (QB : B ⥤ B')
+    (QE : E ⥤ E')
+    (QV : V ⥤ V')
+    (QW : W ⥤ W')
+    (P : C)
+    (fF : QC ⋙ DF ≅ F ⋙ QD)
+    (fT : QV ⋙ DT ≅ T ⋙ QW)
+    (fEV : QV ⋙ EV ≅ ev ⋙ QC)
+    (fEU : QW ⋙ EU ≅ eu ⋙ QD)
+    (fSV : sv ⋙ QC ≅ QB ⋙ SV)
+    (fSU : su ⋙ QD ≅ QE ⋙ SU)
+    (fG : QB ⋙ DG ≅ G ⋙ QE)
+    (cRV : QC ⋙ RV ⟶ rv ⋙ QV)
+    (cRU : QD ⋙ RU ⟶ ru ⋙ QW)
+    (cXV : QC ⋙ XV ⟶ xv ⋙ QB)
+    (cXU : QD ⋙ XU ⟶ xu ⋙ QE)
+    (evalSquare : T ⋙ eu ≅ ev ⋙ F)
+    (finiteEvalV : rv ⋙ ev ≅ xv ⋙ sv)
+    (restrictSquare : sv ⋙ F ≅ G ⋙ su)
+    (reductionSquare : rv ⋙ T ≅ F ⋙ ru)
+    (finiteEvalU : ru ⋙ eu ≅ xu ⋙ su)
+    (finiteSquare : F ⋙ xu ≅ xv ⋙ G)
+    (evalIso : DT ⋙ EU ≅ EV ⋙ DF)
+    (finiteEvalIsoV : RV ⋙ EV ≅ XV ⋙ SV)
+    (restrictionIso : SV ⋙ DF ≅ DG ⋙ SU)
+    (reductionIso : RV ⋙ DT ≅ DF ⋙ RU)
+    (finiteEvalIsoU : RU ⋙ EU ≅ XU ⋙ SU)
+    (finiteIso : DF ⋙ XU ≅ XV ⋙ DG)
+    (isoC : IsIso (cXV.app P))
+    (hRestrict : DF.map (fSV.hom.app (xv.obj P)) ≫ restrictionIso.hom.app (QB.obj (xv.obj P)) ≫
+      SU.map (fG.hom.app (xv.obj P)) ≫ fSU.inv.app (G.obj (xv.obj P)) =
+    fF.hom.app (sv.obj (xv.obj P)) ≫ QD.map (restrictSquare.hom.app (xv.obj P)))
+    (hEval : evalIso.hom.app (QV.obj (rv.obj P)) ≫ DF.map (fEV.hom.app (rv.obj P)) ≫
+      fF.hom.app (ev.obj (rv.obj P)) =
+    EU.map (fT.hom.app (rv.obj P)) ≫ fEU.hom.app (T.obj (rv.obj P)) ≫
+      QD.map (evalSquare.hom.app (rv.obj P)))
+    (hFinite : pullSquareFormula fF.hom cXU finiteSquare cXV fG.hom finiteIso P)
+    (hBV : evaluationSquareFormula cRV fEV.hom finiteEvalV cXV fSV finiteEvalIsoV P)
+    (hBU : evaluationSquareFormula cRU fEU.hom finiteEvalU cXU fSU finiteEvalIsoU (F.obj P))
+    (hReduction : comparisonSquareFormula cRV fT.hom reductionSquare fF.hom cRU
+      reductionIso P)
+    (hCube : finiteCubeFormula F T ev eu sv su G rv ru xv xu evalSquare finiteEvalV
+      restrictSquare reductionSquare finiteEvalU finiteSquare P) :
+    finiteCubeFormula DF DT EV EU SV SU DG RV RU XV XU evalIso finiteEvalIsoV
+      restrictionIso reductionIso finiteEvalIsoU finiteIso (QC.obj P) := by
+  dsimp only [pullSquareFormula] at hFinite
+  dsimp only [evaluationSquareFormula] at hBV hBU
+  dsimp only [comparisonSquareFormula] at hReduction
+  dsimp only [finiteCubeFormula] at hCube ⊢
+  exact finite_model_abstract F T ev eu rv ru xv xu sv su G DF DT EV EU SV SU DG RV RU XV XU
+    QC QD QB QE QV QW P fF fT fEV fEU fSV fSU fG cRV cRU cXV cXU
+    evalSquare finiteEvalV restrictSquare reductionSquare finiteEvalU finiteSquare
+    evalIso finiteEvalIsoV restrictionIso reductionIso finiteEvalIsoU finiteIso
+    isoC hRestrict hEval hFinite hBV hBU hReduction hCube
 
 private theorem finite_model_transport
     {C' D' B' E' V' W' : Type vModel}
@@ -735,18 +850,11 @@ private theorem finite_model_transport
     (finiteEvalIsoU : RU ⋙ EU ≅ XU ⋙ SU)
     (finiteIso : DF ⋙ XU ≅ XV ⋙ DG)
     {X Y : C'} (e : X ≅ Y)
-    (h : evalIso.hom.app (RV.obj X) ≫
-        DF.map (finiteEvalIsoV.hom.app X) ≫
-        restrictionIso.hom.app (XV.obj X) =
-      EU.map (reductionIso.hom.app X) ≫
-        finiteEvalIsoU.hom.app (DF.obj X) ≫ SU.map
-          (finiteIso.hom.app X)) :
-    evalIso.hom.app (RV.obj Y) ≫
-        DF.map (finiteEvalIsoV.hom.app Y) ≫
-        restrictionIso.hom.app (XV.obj Y) =
-      EU.map (reductionIso.hom.app Y) ≫
-        finiteEvalIsoU.hom.app (DF.obj Y) ≫ SU.map
-          (finiteIso.hom.app Y) := by
+    (h : finiteCubeFormula DF DT EV EU SV SU DG RV RU XV XU evalIso finiteEvalIsoV
+      restrictionIso reductionIso finiteEvalIsoU finiteIso X) :
+    finiteCubeFormula DF DT EV EU SV SU DG RV RU XV XU evalIso finiteEvalIsoV
+      restrictionIso reductionIso finiteEvalIsoU finiteIso Y := by
+  dsimp only [finiteCubeFormula] at h ⊢
   let α : RV ⋙ DT ⋙ EU ⟶ XV ⋙ DG ⋙
     SU :=
     Functor.whiskerLeft RV evalIso.hom ≫
@@ -765,21 +873,50 @@ private theorem finite_model_transport
     Functor.whiskerRight_app] using NatTrans.app_eq_of_iso α β e hx
 
 
+private theorem finite_model_finish
+    {C' D' B' E' V' W' : Type vModel}
+    [Category.{vDerived} C'] [Category.{vDerived} D'] [Category.{vDerived} B']
+    [Category.{vDerived} E'] [Category.{vDerived} V'] [Category.{vDerived} W']
+    (DF : C' ⥤ D')
+    (DT : V' ⥤ W')
+    (EV : V' ⥤ C')
+    (EU : W' ⥤ D')
+    (SV : B' ⥤ C')
+    (SU : E' ⥤ D')
+    (DG : B' ⥤ E')
+    (RV : C' ⥤ V')
+    (RU : D' ⥤ W')
+    (XV : C' ⥤ B')
+    (XU : D' ⥤ E')
+    (evalIso : DT ⋙ EU ≅ EV ⋙ DF)
+    (finiteEvalIsoV : RV ⋙ EV ≅ XV ⋙ SV)
+    (restrictionIso : SV ⋙ DF ≅ DG ⋙ SU)
+    (reductionIso : RV ⋙ DT ≅ DF ⋙ RU)
+    (finiteEvalIsoU : RU ⋙ EU ≅ XU ⋙ SU)
+    (finiteIso : DF ⋙ XU ≅ XV ⋙ DG)
+    (X : C')
+    (h : finiteCubeFormula DF DT EV EU SV SU DG RV RU XV XU evalIso finiteEvalIsoV
+      restrictionIso reductionIso finiteEvalIsoU finiteIso X) :
+    EU.map (reductionIso.inv.app X) ≫ evalIso.hom.app (RV.obj X) ≫
+        DF.map (finiteEvalIsoV.hom.app X) ≫ restrictionIso.hom.app (XV.obj X) =
+      finiteEvalIsoU.hom.app (DF.obj X) ≫ SU.map (finiteIso.hom.app X) := by
+  exact iso_inv_comp_of_comp_eq (EU.mapIso (reductionIso.app X)) h
+
+
 private theorem finite_model_on_resolution {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (P : CochainComplex (V.modules A) ℤ) (hP : P.IsAcyclicTensorKFlat)
     (hflat : ∀ q : ℤ, (P.X q).IsFlat) (n : ℕ) :
-    let K₀ := (ConstantCompletion.Q (V.ring A)).obj P
-    (f.evaluatePullIso A n).hom.app ((V.reduction A I).obj K₀) ≫
-        (f.pull A).map ((V.finiteEvaluationIso A I n).hom.app K₀) ≫
-        (f.finiteRestrictionPullIso A I n).hom.app ((V.finiteReduction A I n).obj K₀) =
-      (U.evaluate A n).map ((f.reductionPullIso A I).hom.app K₀) ≫
-        (U.finiteEvaluationIso A I n).hom.app ((f.pull A).obj K₀) ≫
-        (U.finiteRestriction A I n).map ((f.finitePullIso A I n).hom.app K₀) := by
-  let := ConstantCompletion.reductionTower_additive V.topology A I false
-  let := ConstantCompletion.reductionTower_additive U.topology A I false
+    finiteCubeFormula (f.pull A) (f.towerPull A) (V.evaluate A n) (U.evaluate A n)
+      (V.finiteRestriction A I n) (U.finiteRestriction A I n)
+      (f.pull (quotientRing A I n)) (V.reduction A I) (U.reduction A I)
+      (V.finiteReduction A I n) (U.finiteReduction A I n)
+      (f.evaluatePullIso A n) (V.finiteEvaluationIso A I n)
+      (f.finiteRestrictionPullIso A I n) (f.reductionPullIso A I)
+      (U.finiteEvaluationIso A I n) (f.finitePullIso A I n)
+      ((ConstantCompletion.Q (V.ring A)).obj P) := by
   have hpull := modulePull_kflat f A P hP hflat
-  exact finite_model_abstract
+  exact finite_model_abstract_normalized
     ((f.modulePull A).mapHomologicalComplex (.up ℤ))
     ((f.towerModulePull A).mapHomologicalComplex (.up ℤ))
     ((V.evaluateModule A n).mapHomologicalComplex (.up ℤ))
@@ -903,7 +1040,13 @@ theorem reductionPullFiniteEvaluation {V U : Site.{u}} (f : Morphism V U)
     (U.finiteEvaluationIso A I n)
     (f.finitePullIso A I n)
     e hp
-  exact iso_inv_comp_of_comp_eq
-    ((U.evaluate A n).mapIso ((f.reductionPullIso A I).app K)) hk
+  exact finite_model_finish
+    (f.pull A) (f.towerPull A) (V.evaluate A n) (U.evaluate A n)
+    (V.finiteRestriction A I n) (U.finiteRestriction A I n)
+    (f.pull (quotientRing A I n)) (V.reduction A I) (U.reduction A I)
+    (V.finiteReduction A I n) (U.finiteReduction A I n)
+    (f.evaluatePullIso A n) (V.finiteEvaluationIso A I n)
+    (f.finiteRestrictionPullIso A I n) (f.reductionPullIso A I)
+    (U.finiteEvaluationIso A I n) (f.finitePullIso A I n) K hk
 
 end CategoryTheory.AdicSites

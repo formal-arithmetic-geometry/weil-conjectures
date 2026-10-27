@@ -1,0 +1,152 @@
+{
+ "id": "def-pur-compact-support-realization-identity",
+ "kind": "definition",
+ "title": "Section-normalized compact-support identity direct image",
+ "status": "split",
+ "import_flags": [
+  "unreachable"
+ ],
+ "statement": "Fix a prime $\\ell$, a finite coefficient extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and a scheme $W$ in the same universe as $E$. Put $R_W=\\varprojlim_n(\\mathcal O_E/\\varpi_E^{n+1})_W$ with the canonical completed coefficient inverse-image map [def-pur-integral-compact-support-coefficient-data]. For identity base change on the small pro-etale site, the adjoint coefficient direct-image map [def-weil-pbc-proetale-operations] followed by restriction along the inverse pullback-identity isomorphism equals $1_{R_W}$. Define ordinaryPushId for module direct image along $1_W$ by the module-sheaf pushforward comparison for that inverse pullback-identity isomorphism, followed by the module pushforward identity unitor. Thus its map on a section over $U$ is restriction along $(U\\times_W W\\simeq U)^{-1}$. Define integralPushId for the actual ringed derived direct image [def-sf-integral-system-canonical-bridge] by deriving this specified ordinary isomorphism and composing the canonical derived-identity localization isomorphisms. No isomorphism is selected from an existence theorem.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Current latest sk-thm-purity-transport, Steps 2--3: ordinary proper/open compact-support coordinates and identity proper normalization."
+ },
+ "proof": [
+  {
+   "text": "Reuse IntegralSupportNormalization.ringDirectImageId, the already proved identity coefficient calculation in Sheaf.Paper.IntegralSupportNormalizationData, obtained from the finite quotient characterization of sfCompletedCoefficientMap. It identifies the actual completed coefficient adjunct with the inverse identity direct-image unitor. This is the normalized identity coefficient map used in def-zl-ordinary-open-support-normalization; import all exposes the proved private helper without changing any public interface.",
+   "uses": [
+    "def-zl-ordinary-open-support-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forget commutativity and evaluate the composite on an arbitrary site object U and section x. The resulting maps are restriction along the pullback-identity hom followed by restriction along its inverse. Contravariant functoriality and the inverse-hom identity make their composite the identity. Extensionality of ring-sheaf morphisms proves identityCoefficient.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Keep ordinaryPushId exactly as the specified pushforwardCongr₂ comparison followed by pushforwardId. Keep integralPushId as its right-derived natural isomorphism followed by the two canonical derived-identity comparisons. No construction or statement changes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-zl-ordinary-open-support-normalization"
+ ],
+ "proof_origin": {
+  "kind": "existing Lean proof and elementary identity cancellation",
+  "by": "G6",
+  "date": "2026-10-25",
+  "note": "Reuse the proved private ringDirectImageId in IntegralSupportNormalizationData; inverse-hom cancellation supplies the requested RingCat identity. The unit route and both specified unitors remain unchanged."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived direct image identity unitor sheaf modules coefficient comparison proper open realization",
+   "results": "{\"t\": \"2026-10-25T09:50:24Z\", \"tool\": \"leansearch\", \"query\": \"canonical derived direct image identity unitor sheaf modules coefficient comparison proper open realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardCongr_hom_app_app\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app\", \"SheafOfModules.pushforward_comp_id\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforward_id_comp\"], \"digest\": \"f4cd9132c6e04696\"}",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical results only; no exact compact-support realization coordinate package or section-normalized completed coefficient unitor."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIsoEquiv|pushforwardCongr₂|pushforwardId",
+   "results": "{\"t\": \"2026-10-25T09:50:54Z\", \"tool\": \"grep\", \"query\": \"conjugateIsoEquiv|pushforwardCongr₂|pushforwardId\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\"], \"digest\": \"96515795a4a8f050\"}",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical results only; no exact compact-support realization coordinate package or section-normalized completed coefficient unitor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper open compact support scalar realization system comparison lattice normalization",
+   "results": "{\"t\": \"2026-10-25T09:50:56Z\", \"tool\": \"leanfinder\", \"query\": \"proper open compact support scalar realization system comparison lattice normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.Products.isGood\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.GoodProducts.max_eq_eval\", \"Profinite.NobelingProof.GoodProducts.range\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.GoodProducts.smaller\", \"Profinite.NobelingProof.GoodProducts\", \"Profinite.NobelingProof.GoodProducts.max_eq_eval_unapply\"], \"digest\": \"30dd6987d5e96f8f\"}",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical results only; no exact compact-support realization coordinate package or section-normalized completed coefficient unitor."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "CompactSupportFactorNormalization.word|properReduction|systemComparison|encoding|realize|latticeComparison; ordinaryPushId|identityCoefficient in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search compact support realization",
+   "results": "The Q66 theorem node lem-zl-compact-support-realization-factor-normalization is the sole record containing the named realization definitions. No definition node owns this package. No upstream WeilConjectures match. The project defines the exact coordinate maps in Sheaf.Paper.CompactSupportRealizationFactorNormalization; reuse unchanged with existing:true. Identity unitor in that module uses theorem choice. CompletedOrdinaryComparisons has a unitor for the distinct pbc coefficient presentation; construct the section-normalized identity directly for PurCompactSupport.completed. Blueprint search returned 22 broader nodes, none an exact definition owner.",
+   "date": "2026-10-25",
+   "verdict": "Add definition ownership for the existing coordinate definitions; construct the missing intrinsic-presentation identity unitor."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-realization-factorization",
+  "date": "2026-10-25",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Current latest sk-thm-purity-transport, Steps 2--3: ordinary proper/open compact-support coordinates and identity proper normalization.",
+   "via": [
+    "lem-pur-compact-support-realization-factorization",
+    "lem-pur-condensed-open-counit-realization",
+    "lem-route-smooth-purity-iso-zero-of-is-open-immersion",
+    "def-pur-condensed-smooth-purity-iso",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportRealizationIdentity",
+  "declaration": "WeilConjectures.CompactSupportRealizationFactorization.integralPushId",
+  "declarations": [
+   "WeilConjectures.CompactSupportRealizationFactorization.identityCoefficient",
+   "WeilConjectures.CompactSupportRealizationFactorization.ordinaryPushId",
+   "WeilConjectures.CompactSupportRealizationFactorization.integralPushId"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportRealizationIdentity.lean",
+  "statement": "def integralPushId (W : Scheme.{u}) : ringedPush l E (𝟙 W) ≅ 𝟭 _",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "H2 repair: actual section-normalized ordinary pushforwardCongr₂/pushforwardId construction, then its derived unitor. Only the named coefficient-normalization proof is postponed; no data is chosen from ordinaryPushIdentity_existsUnique."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86fe5249a",
+  "group": "NG",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86fe5249a",
+  "group": "NG",
+  "result": "pass",
+  "note": "Reachability repair of PASSed 1c1bacf47bb0. Both Lean files byte-identical; item JSON identical (vs live only lean/stmt_deps differ, H7 n/a); the two new def nodes differ only in import_flags [] -> [\"unreachable\"], verified correct by BFS from all targets/target_former over live+snapshot (new nodes, item and its citer unreached). Changed lem-sf-integral-open-reduction-comparison is base drift (landed Y2); item imports only that module, uses no IntegralOpenReduction.* names; import exists in live. All stmt_deps/proof_deps and imports resolve. Phantom def-pur-condensed-open-counit-comparisons diagnostic absent from snapshot and live and not cited; correctly not invented. Mathematics re-read: ∃ C, IsFactorized C pins the parent's free realization a (pinned-package precedent, like landed IsFactorNormalized); alpha/limitPresentation definitional; ∀ o m b safe since CanonicalBridge/RealizationModel are section/K-flat pinned; arbitrary char-p field, finite F and Omega xi, g=id clauses, naturality all present. Sorry-only theorems, docstrings/blueprint tags, report sections OK. No compile (no file changed); worker reports clean scompile (4.1 s / 28.5 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T162503-L-463173",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

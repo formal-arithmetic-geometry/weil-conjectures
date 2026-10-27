@@ -27,81 +27,66 @@
  ],
  "proof": [
   {
-   "text": "Use the standard affine cover $X=U_0\\cup U_1$ with $U_0=\\operatorname{Spec}k[t]$ and $U_1=\\operatorname{Spec}k[s]$ from [def-sc-p1-standard]. Each affine spectrum is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii), and a finite union of quasi-compact opens is quasi-compact. The coordinate rings are Noetherian by [lem-sc-p1-polynomial-noetherian], so the definition [pqf-def-locnoeth] gives that $X$ is locally Noetherian and hence Noetherian.",
+   "text": "The existing source instance [lem-sc-projective-line-smooth-relative-dimension-one] makes the structure morphism f:P1_k -> Spec k smooth of relative dimension one. Properness [lemma-nagata-projective-space-base-change-proper] gives quasi-compactness of f, so quasi-compactness of Spec k gives CompactSpace P1_k. Smoothness implies local finite type; over the Noetherian base Spec k, LocallyOfFiniteType.isLocallyNoetherian gives local Noetherianity [pqf-def-locnoeth].",
    "uses": [
-    "def-sc-p1-standard",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-sc-p1-polynomial-noetherian",
-    "pqf-def-locnoeth"
+    "lem-sc-projective-line-smooth-relative-dimension-one",
+    "lemma-nagata-projective-space-base-change-proper",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Example Tag 01JE (schemes-example-projective-line), standard affine cover"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LineSmooth.lean",
+    "place": "ProjectiveLine.smoothOfRelativeDimension_one, lines 35-51; standard affine charts"
    }
   },
   {
-   "text": "Every point of $X$ lies in one of the two affine charts. On either chart the ring is a polynomial ring in one variable over $k$, hence regular by [lem-sc-p1-polynomial-regular]. Therefore each point has an affine neighbourhood with Noetherian regular coordinate ring, which is exactly the defining condition [def-weil-regular-scheme] for $X$ to be regular.",
+   "text": "Smoothness over the field gives regular local rings by [lem-weil-pbc-smooth-scheme-over-field-regular]. Choose an affine neighbourhood U of x. Its section ring is Noetherian by local Noetherianity. IsAffineOpen.isRegularLocalRing_localization identifies each prime localization with a regular stalk, using the affine stalk-localization identification [lem-weil-pbc-affine-open-stalk-localization]. The criterion isRegularRing_iff therefore gives IsRegularRing Gamma(P1_k,U), exactly the affine-neighbourhood clause [def-weil-regular-scheme].",
    "uses": [
-    "def-sc-p1-standard",
-    "lem-sc-p1-polynomial-regular",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
     "def-weil-regular-scheme"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Example Tag 01JE (schemes-example-projective-line), regularity from standard charts"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LineSmooth.lean",
+    "place": "ProjectiveLine.smoothOfRelativeDimension_one, lines 35-51; standard affine charts"
    }
   },
   {
-   "text": "For a point $x$ in a chart $U_i=\\operatorname{Spec}A_i$, the local ring $\\mathcal O_{X,x}$ is a localization $(A_i)_{\\mathfrak p}$ at the corresponding prime by [lem-weil-pbc-affine-open-stalk-localization]. Its dimension is the height of $\\mathfrak p$ by [lem-weil-pbc-localization-dimension-chains-below-prime], and this is at most $\\dim A_i$ by [lem-pc-ring-dimension-supremum-heights]. Since $A_i\\cong k[t]$ or $k[s]$ and [lem-sc-p1-polynomial-dimension-one] gives dimension one, every local ring has dimension at most one. At the point corresponding to the prime $(t)\\subset k[t]$, the strict chain $(0)\\subsetneq(t)$ shows the local ring has dimension at least one, so $\\dim X=1$ by [def-pc-dimension].",
+   "text": "The projective line over k is nonempty: the rational point with coordinates [1:1] lies in both standard affine charts [def-sc-p1-standard]; the existing connectedSpace instance supplies this nonemptiness. Apply the fixed-relative-dimension theorem [lem-sbc-smooth-fixed-dimension-over-field] to f to get topological dimension one. Rewrite Scheme.dim using [lem-pc-scheme-dimension-local-rings] to obtain the required local-ring dimension one [def-pc-dimension].",
    "uses": [
     "def-sc-p1-standard",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "lem-pc-ring-dimension-supremum-heights",
-    "lem-sc-p1-polynomial-dimension-one",
+    "lem-sc-projective-line-smooth-relative-dimension-one",
+    "lem-sbc-smooth-fixed-dimension-over-field",
+    "lem-pc-scheme-dimension-local-rings",
     "def-pc-dimension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tags 00KG and 00OQ, applied to the two standard affine charts"
-   }
-  },
-  {
-   "text": "The conclusions of Steps 1--3 are respectively quasi-compact and locally Noetherian, regular, and dimension exactly one; unfolding the definitions of Noetherian scheme, regular scheme, and [def-pc-dimension] yields all clauses of the statement.",
-   "uses": [
-    "def-weil-pbc-quasi-compact-scheme",
-    "pqf-def-locnoeth",
-    "def-weil-regular-scheme",
-    "def-pc-dimension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Example Tag 01JE (schemes-example-projective-line)"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LineSmooth.lean",
+    "place": "ProjectiveLine.smoothOfRelativeDimension_one, lines 35-51; standard affine charts"
    }
   }
  ],
  "proof_deps": [
-  "def-sc-p1-standard",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-sc-p1-polynomial-noetherian",
+  "lem-sc-projective-line-smooth-relative-dimension-one",
+  "lemma-nagata-projective-space-base-change-proper",
   "pqf-def-locnoeth",
-  "lem-sc-p1-polynomial-regular",
-  "def-weil-regular-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
   "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "lem-pc-ring-dimension-supremum-heights",
-  "lem-sc-p1-polynomial-dimension-one",
-  "def-pc-dimension",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-regular-scheme",
+  "def-sc-p1-standard",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-pc-dimension"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Example Tag 01JE (schemes-example-projective-line), with the standard dimension and regularity assertions"
+  "by": "agent F5",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LineSmooth.lean",
+  "place": "Assembly of existing smooth-relative-dimension, regularity, affine localization and dimension theorems; source-library proofs read on 2026-10-23"
  },
  "mathlib_searches": [
   {
@@ -170,5 +155,26 @@
   "result": "pass",
   "note": "k:Type u [Field k] = field; P1_k = recorded ProjectiveLine (Spec (.of k)) = ℙ(ULift (Fin 2); Spec k) of def-sc-p1-standard; quasi-compact = CompactSpace (mathlib_match); locally Noetherian = IsLocallyNoetherian; regular = def-weil-regular-scheme mathlib_match one-line form ∀x ∃U affine, x∈U ∧ IsRegularRing Γ(X,U) (extends IsNoetherianRing); dim = recorded Scheme.dim = 1 in WithBot ℕ∞; node diff only adds lean record; no hollow hyps, single universe"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261023T104958-L-3472528",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

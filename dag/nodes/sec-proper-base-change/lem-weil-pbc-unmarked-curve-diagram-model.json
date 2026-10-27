@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-unmarked-curve-diagram-model",
+ "kind": "statement",
+ "title": "Descent of the unmarked finite curve diagram",
+ "statement": "Let f:X→S be separated and finitely presented, η a component generic point, K/κ(η) a finite purely inseparable extension, and L_i/K a finite family of finite separable field extensions. Let A_i→B_i→Spec L_i have A_i nonempty open and B_i smooth proper geometrically irreducible of dimension at most one. Given a finite surjection ν₀:∐A_i→X_η×K compatible with structure maps, there are U∋η, a finite surjective radicial cover g:V→U, and a descended diagram ∐Y_i→X_V with finite surjection ν, finite etale T_i→V, open Y_i→Ybar_i and smooth proper Ybar_i→T_i. There is a specified Spec K→V over S with cartesian comparisons for all A_i, B_i and Spec L_i, commuting with the supplied arrows. In addition the coproduct comparison and ν₀,ν form a cartesian square with a map X_η×K→X_V. Fibres of Ybar_i→T_i at every point above η are geometrically connected of dimension at most one. There is no marked-open hypothesis or conclusion. Empty families are allowed. [def-pc-scheme] [def-pc-scheme-fibre] [def-sbc-smooth-morphisms] [def-pc-geometrically-irreducible] [def-weil-pbc-finite-purely-inseparable-extension] [def-pc-fibre-product]",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, proof of lemma-make-good-curves: reduction and diagram descent before the marked-open paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Reduce the base, transport the prescribed field extension across the reduction residue-field isomorphism and generic stalk-residue isomorphism, and apply finite radicial neighbourhood-model descent. Transport the base open through the reduction homeomorphism. Reduce the source of the cover, factoring Spec K through it. The comparison is surjective on stalks. The cover is finite surjective radicial, so its chosen point is component generic; the reduced generic stalk is a field and the normalized stalk map to K is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-weil-pbc-finite-radicial-neighbourhood-model",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the directed system of affine neighbourhoods of the chosen point, including transition compatibility with their inclusions into the cover. Spec K identifies with its limit through the normalized stalk isomorphism. Every A, B and Spec L is finitely presented and qcqs over K, since the B are proper smooth over fields and the A are opens in Noetherian schemes. Apply finite-presentation chain descent, then transport its stage to the corresponding open subscheme, including the prescribed X base change and its finite comparison.",
+   "uses": [
+    "lem-weil-pbc-affine-neighbourhood-stalk-limit",
+    "lem-weil-pbc-finite-presentation-chain-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite closed-image neighbourhood shrinking theorem for the radicial cover to find an open downstairs whose entire inverse image lies in the descended neighbourhood. Restrict every object and arrow to this inverse image. Prove the object comparison squares and the coproduct comparison by pullback pasting and universality of finite coproducts. All morphism properties persist by base change.",
+   "uses": [
+    "lem-weil-pbc-finite-images-neighbourhood-shrinking",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A field-valued point surjective on stalks induces an isomorphism from its residue field to the supplied field. Cancel the constant-field comparison square to identify the curve with the corresponding fibre, using this field isomorphism and pullback pasting. Geometric irreducibility gives connectedness of every geometric fibre and homeomorphism invariance gives the dimension bound. Universal injectivity identifies every point above eta with one in the supplied generic diagram. For n=0 the indexed statements are vacuous.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-weil-pbc-finite-radicial-neighbourhood-model",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-affine-neighbourhood-stalk-limit",
+  "lem-weil-pbc-finite-presentation-chain-descent",
+  "lem-weil-pbc-finite-images-neighbourhood-shrinking",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7; F5 proves reduction, cover construction, affine-neighbourhood transport, finite-image shrinking, restriction and fibre identification; only the general chain-descent step remains as a separate node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend a finite diagram of schemes and smooth proper curves from the generic residue field to an affine neighbourhood",
+   "results": "8 hits including spreading out and affine limit APIs; no finite curve-diagram result",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of schemes, arrows and equations over a generic residue field descends to an open neighbourhood",
+   "results": "8 hits giving locally finite presentation and generic descent ingredients, no packaged diagram",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsPullback",
+   "results": "Unknown identifier returned by service; no theorem found",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg marked curve diagram and finite diagram descent in lean/WeilConjectures and lean/Sheaf; blueprint_refs search unmarked curve diagram",
+   "results": "Existing MarkedFiniteDiagramApproximation needs a different henselian excellent setup; parent SpreadMarkedCurveDiagram uses the present item; no duplicate, no blueprint node; affine/etale finite-diagram descent theorems require all objects etale, so cannot descend the smooth proper curves.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MarkedCurveDiagramModel",
+  "date": "2026-10-25",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0GK7, proof of lemma-make-good-curves: the unmarked diagram before the paragraph beginning It remains to prove the existence of an open W",
+   "via": [
+    "lem-weil-pbc-marked-curve-diagram-model",
+    "lem-weil-pbc-spread-marked-curve-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnmarkedCurveDiagramModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnmarkedCurveDiagramModel.lean",
+  "declaration": "AlgebraicGeometry.exists_unmarked_curve_diagram_model",
+  "statement": "theorem exists_unmarked_curve_diagram_model\n    {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (η : S) (hη : ∃ Z ∈ irreducibleComponents S, IsGenericPoint η Z)\n    (K : Type u) [Field K] [Algebra (S.residueField η) K]\n    [Module.Finite (S.residueField η) K] [IsPurelyInseparable (S.residueField η) K]\n    (n : ℕ) (L : Fin n → Type u) [∀ i, Field (L i)] [∀ i, Algebra K (L i)]\n    (A B : Fin n → Scheme.{u}) (j₀ : ∀ i, A i ⟶ B i)\n    (q₀ : ∀ i, B i ⟶ Spec (.of (L i)))\n    (ν₀ : (∐ A) ⟶ pullback (f.fiberToSpecResidueField η)\n      (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) K))))\n    (hν₀ : IsFinite ν₀ ∧ Surjective ν₀)\n    (hcomm : ∀ i, Sigma.ι A i ≫ ν₀ ≫ pullback.snd _ _ =\n      j₀ i ≫ q₀ i ≫ Spec.map (CommRingCat.ofHom (algebraMap K (L i))))\n    (hL : ∀ i, Module.Finite K (L i) ∧ Algebra.IsSeparable K (L i))\n    (hj₀ : ∀ i, IsOpenImmersion (j₀ i) ∧ Nonempty (A i))\n    (hq₀ : ∀ i, Smooth (q₀ i) ∧ IsProper (q₀ i) ∧\n      GeometricallyIrreducible (q₀ i) ∧ topologicalKrullDim (B i) ≤ 1) :\n    ∃ (U : S.Opens) (_ : η ∈ U) (V : Scheme.{u}) (g : V ⟶ U.toScheme),\n      IsFinite g ∧ Surjective g ∧ UniversallyInjective g ∧\n      ∃ (T Y Ybar : Fin n → Scheme.{u})\n        (t : ∀ i, T i ⟶ V) (j : ∀ i, Y i ⟶ Ybar i)\n        (p : ∀ i, Ybar i ⟶ T i)\n        (ν : (∐ Y) ⟶ pullback f (g ≫ U.ι)),\n        IsFinite ν ∧ Surjective ν ∧\n        (∀ i, Sigma.ι Y i ≫ ν ≫ pullback.snd f (g ≫ U.ι) = j i ≫ p i ≫ t i) ∧\n        (∀ i, IsFinite (t i) ∧ Etale (t i)) ∧\n        (∀ i, IsOpenImmersion (j i)) ∧\n        (∀ i, Smooth (p i) ∧ IsProper (p i)) ∧\n        ∃ (σK : Spec (.of K) ⟶ V)\n          (hA : ∀ i, A i ⟶ Y i) (hB : ∀ i, B i ⟶ Ybar i)\n          (hT : ∀ i, Spec (.of (L i)) ⟶ T i),\n          σK ≫ g ≫ U.ι = Spec.map (CommRingCat.ofHom\n            (algebraMap (S.residueField η) K)) ≫ S.fromSpecResidueField η ∧\n          (∀ i,\n            IsPullback (hA i) (j₀ i ≫ q₀ i ≫\n              Spec.map (CommRingCat.ofHom (algebraMap K (L i))))\n              (j i ≫ p i ≫ t i) σK ∧\n            IsPullback (hB i) (q₀ i ≫\n              Spec.map (CommRingCat.ofHom (algebraMap K (L i)))) (p i ≫ t i) σK ∧\n            IsPullback (hT i) (Spec.map (CommRingCat.ofHom (algebraMap K (L i))))\n              (t i) σK ∧\n            hA i ≫ j i = j₀ i ≫ hB i ∧ hB i ≫ p i = q₀ i ≫ hT i) ∧\n        (∃ aX : pullback (f.fiberToSpecResidueField η)\n            (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) K))) ⟶\n            pullback f (g ≫ U.ι),\n          IsPullback (Limits.Sigma.map hA) ν₀ ν aX) ∧\n        ∀ i (s : T i), (t i ≫ g ≫ U.ι) s = η →\n            GeometricallyConnected ((p i).fiberToSpecResidueField s) ∧\n            topologicalKrullDim ((p i).fiber s) ≤ 1",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123106-L-1831624",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T180652-L-4018609",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

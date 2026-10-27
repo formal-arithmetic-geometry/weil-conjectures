@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-weak-sobolev-fourier-moments",
+ "kind": "statement",
+ "title": "Weak square-integrable derivatives give integrable Fourier moments",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and Lebesgue measure on $\\mathbf R^m$, where $m\\geq1$. Write $L^2(\\mathbf R^m;\\mathbf C)$ for measurable square-integrable complex functions modulo almost-everywhere equality. For $u$ in this space, let $\\widehat u$ be its Plancherel Fourier transform: the continuous extension to $L^2$ of $f\\mapsto(\\xi\\mapsto\\int e^{-2\\pi i x\\cdot\\xi}f(x)\\,dx)$ on Schwartz functions (smooth functions all of whose derivatives decrease faster than every inverse polynomial). Let $t,r\\geq0$ be integers with $t>r+m/2$. Assume that for every multi-index $\\alpha\\in\\mathbf N^m$ with $|\\alpha|\\leq t$ there is $u_\\alpha\\in L^2(\\mathbf R^m;\\mathbf C)$ satisfying $\\int u_\\alpha\\phi=(-1)^{|\\alpha|}\\int u\\,\\partial^\\alpha\\phi$ for every compactly supported smooth complex test function $\\phi$; here $|\\alpha|=\\sum_i\\alpha_i$ and $\\partial^\\alpha=\\prod_i\\partial_{x_i}^{\\alpha_i}$. Then, for every integer $0\\leq j\\leq r$, $$\\int_{\\mathbf R^m}\\|\\xi\\|^j|\\widehat u(\\xi)|\\,d\\xi<\\infty.$$ The assertion is independent of the measurable representative of $\\widehat u$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; VI §2, Sobolev lemma (2.1), printed p.289. The Euclidean weighted-Fourier integrability input for (2.1), before inverse transformation. Agent-stated supporting lemma, not a separately numbered assertion of Demailly. Supporting code read: Mathlib/Analysis/Distribution/Sobolev.lean:212–275; Mathlib/Analysis/Fourier/LpSpace.lean:47–139; Mathlib/Analysis/Fourier/FourierTransformDeriv.lean:498–524, 703–707. Online statement read in https://totomityann.github.io/pdf/lua_agbook.pdf, VI §2 (2.1), PDF page 152 (a recomposed excerpt, not the original pagination)."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose a measurable representative $h$ of $\\widehat u$; by the definition of the Plancherel transform, $h\\in L^2$. For each coordinate $i$, apply [lem-sfb-l2-weak-derivative-fourier-identity] to $u$, $u_{t e_i}$ and the multi-index $t e_i$. Its weak-derivative hypothesis is exactly the assumed test identity, since $|t e_i|=t$. Its conclusion gives $\\xi_i^t h\\in L^2$ for every $i$.",
+   "uses": [
+    "lem-sfb-l2-weak-derivative-fourier-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 (2.1), printed p.289. Agent-written Euclidean Fourier argument supporting Sobolev embedding; Mathlib/Analysis/Distribution/Sobolev.lean:241–275 supplies the related weighted L2 product calculation, not the weak-derivative bridge."
+   }
+  },
+  {
+   "text": "Put $w(\\xi)=1+\\|\\xi\\|^2$ and $M(\\xi)=\\max(1,|\\xi_1|^2,\\ldots,|\\xi_m|^2)$. Then $w\\leq(m+1)M$ and $M^t\\leq1+\\sum_i|\\xi_i|^{2t}$. Thus $$w^t|h|^2\\leq(m+1)^t\\bigl(|h|^2+\\sum_i|\\xi_i^t h|^2\\bigr).$$ The right side has finite integral by step 1 and finite additivity of the integral; integrating this nonnegative inequality shows that the measurable function $a=w^{t/2}|h|$ is square-integrable. This is elementary finite-sum arithmetic and monotonicity of the nonnegative integral; no comparison of Sobolev definitions is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 (2.1), printed p.289. Agent-written Euclidean Fourier argument supporting Sobolev embedding; Mathlib/Analysis/Distribution/Sobolev.lean:241–275 supplies the related weighted L2 product calculation, not the weak-derivative bridge."
+   }
+  },
+  {
+   "text": "Fix an integer $0\\leq j\\leq r$. Then $s=t-j>m/2$, so [lem-sfb-euclidean-bracket-integrable] gives $\\int w^{j-t}<\\infty$. Define the measurable nonnegative function $b=\\|\\xi\\|^j w^{-t/2}$. Since $\\|\\xi\\|^{2j}\\leq w^j$, one has $b^2\\leq w^{j-t}$, and integration proves $b\\in L^2$. All real powers have positive base $w\\geq1$; when $j=0$ the numerator is the constant $1$, including at $\\xi=0$.",
+   "uses": [
+    "lem-sfb-euclidean-bracket-integrable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 (2.1), printed p.289. Agent-written Euclidean Fourier argument supporting Sobolev embedding; Mathlib/Analysis/Distribution/Sobolev.lean:241–275 supplies the related weighted L2 product calculation, not the weak-derivative bridge."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-l2-product-integrable] to the real-valued functions $a,b$ of steps 2 and 3, whose measurability and square integrability have been established. Their product is exactly $ab=\\|\\xi\\|^j|h(\\xi)|$, because $w^{t/2}w^{-t/2}=1$. Hence the required Fourier moment has finite integral for each $0\\leq j\\leq r$.",
+   "uses": [
+    "lem-sfb-l2-product-integrable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 (2.1), printed p.289. Agent-written Euclidean Fourier argument supporting Sobolev embedding; Mathlib/Analysis/Distribution/Sobolev.lean:241–275 supplies the related weighted L2 product calculation, not the weak-derivative bridge."
+   }
+  },
+  {
+   "text": "If $h'$ is another measurable representative, then $h'=h$ off a null set. Multiplication by the everywhere finite weight $\\|\\xi\\|^j$ preserves this almost-everywhere equality of absolute values. Their nonnegative integrals are therefore equal, proving independence of the representative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 (2.1), printed p.289. Agent-written Euclidean Fourier argument supporting Sobolev embedding; Mathlib/Analysis/Distribution/Sobolev.lean:241–275 supplies the related weighted L2 product calculation, not the weak-derivative bridge."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-l2-weak-derivative-fourier-identity",
+  "lem-sfb-euclidean-bracket-integrable",
+  "lem-sfb-l2-product-integrable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §2, Sobolev lemma (2.1), printed p.289 (WANTED locally); agent-written weighted Fourier proof, with its weak-derivative Fourier input exposed as a separate node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fourier_memL1|weak.*deriv|memSobolev_two_iff_fourier",
+   "results": "{\"t\": \"2026-10-24T03:01:16Z\", \"tool\": \"grep\", \"query\": \"fourier_memL1|weak.*deriv|memSobolev_two_iff_fourier\", \"sub\": \"Analysis/Distribution\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"87270d2f0d2ad291\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MemSobolev.fourier_memL1 at Mathlib/Analysis/Distribution/Sobolev.lean:241 assumes Bessel-potential Sobolev membership, not the weak-partial-derivative hypothesis here. The bridge from all integer-order weak derivatives to that membership is a theorem, not a one-line specialization. Smooth-function Fourier derivative hits likewise assume classical differentiability. Read Sobolev.lean:212–275 and FourierTransformDeriv.lean:680–707."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MemSobolev\", \"fourier\"",
+   "results": "{\"t\": \"2026-10-24T03:01:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"MemSobolev\\\", \\\"fourier\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"TemperedDistribution.memSobolev_zero_iff_exists_fourier\", \"TemperedDistribution.MemSobolev.fourier_memL1\", \"TemperedDistribution.MemSobolev.fourierMultiplierCLM_of_bounded\", \"TemperedDistribution.memSobolev_iff_exists_smulLeftCLM_fourier\"], \"digest\": \"89fa4f0f11c5d1a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MemSobolev.fourier_memL1 at Mathlib/Analysis/Distribution/Sobolev.lean:241 assumes Bessel-potential Sobolev membership, not the weak-partial-derivative hypothesis here. The bridge from all integer-order weak derivatives to that membership is a theorem, not a one-line specialization. Smooth-function Fourier derivative hits likewise assume classical differentiability. Read Sobolev.lean:212–275 and FourierTransformDeriv.lean:680–707."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sobolev weak derivatives in L2 imply integrable polynomially weighted Fourier transform when the derivative order exceeds half the dimension",
+   "results": "{\"t\": \"2026-10-24T03:01:16Z\", \"tool\": \"leansearch\", \"query\": \"Sobolev weak derivatives in L2 imply integrable polynomially weighted Fourier transform when the derivative order exceeds half the dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourier_iteratedFDeriv\", \"Real.fourier_deriv\", \"Real.fourierIntegral_deriv\", \"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"Real.fourierIntegral_fderiv\", \"Real.iteratedDeriv_fourier\", \"Real.fderiv_fourier\", \"Real.fourierIntegral_iteratedFDeriv\"], \"digest\": \"63d7e6d3283bf32b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MemSobolev.fourier_memL1 at Mathlib/Analysis/Distribution/Sobolev.lean:241 assumes Bessel-potential Sobolev membership, not the weak-partial-derivative hypothesis here. The bridge from all integer-order weak derivatives to that membership is a theorem, not a one-line specialization. Smooth-function Fourier derivative hits likewise assume classical differentiability. Read Sobolev.lean:212–275 and FourierTransformDeriv.lean:680–707."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square integrable function on Euclidean space with square integrable weak derivatives through order t has integrable Fourier moments of order r if t > r + dimension/2",
+   "results": "{\"t\": \"2026-10-24T03:01:17Z\", \"tool\": \"leanfinder\", \"query\": \"A square integrable function on Euclidean space with square integrable weak derivatives through order t has integrable Fourier moments of order r if t > r + dimension/2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.iteratedFDeriv_fourierIntegral\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.integrable_fourierPowSMulRight\", \"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"Real.iteratedFDeriv_fourierIntegral\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\"], \"digest\": \"c434a4203090e5a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MemSobolev.fourier_memL1 at Mathlib/Analysis/Distribution/Sobolev.lean:241 assumes Bessel-potential Sobolev membership, not the weak-partial-derivative hypothesis here. The bridge from all integer-order weak derivatives to that membership is a theorem, not a one-line specialization. Smooth-function Fourier derivative hits likewise assume classical differentiability. Read Sobolev.lean:212–275 and FourierTransformDeriv.lean:680–707."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all weak partial derivatives up to order t of a compactly supported L2 function are L2, the Plancherel Fourier transform times norm to power j is integrable for j < t - m/2",
+   "results": "{\"t\": \"2026-10-24T03:03:09Z\", \"tool\": \"leanfinder\", \"query\": \"If all weak partial derivatives up to order t of a compactly supported L2 function are L2, the Plancherel Fourier transform times norm to power j is integrable for j < t - m/2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"VectorFourier.iteratedFDeriv_fourierIntegral\", \"Real.iteratedFDeriv_fourierIntegral\", \"VectorFourier.contDiff_fourierIntegral\"], \"digest\": \"55743c36e737e877\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MemSobolev.fourier_memL1 at Mathlib/Analysis/Distribution/Sobolev.lean:241 assumes Bessel-potential Sobolev membership, not the weak-partial-derivative hypothesis here. The bridge from all integer-order weak derivatives to that membership is a theorem, not a one-line specialization. Smooth-function Fourier derivative hits likewise assume classical differentiability. Read Sobolev.lean:212–275 and FourierTransformDeriv.lean:680–707."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sobolev weak derivatives in L2 through integer order t imply that norm xi to power j times the Plancherel Fourier transform is integrable if t > j + dimension/2",
+   "results": "{\"t\": \"2026-10-24T03:23:50Z\", \"tool\": \"leanfinder\", \"query\": \"Sobolev weak derivatives in L2 through integer order t imply that norm xi to power j times the Plancherel Fourier transform is integrable if t > j + dimension/2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"Real.iteratedFDeriv_fourierIntegral\", \"SchwartzMap.integrable_pow_mul_iteratedFDeriv\", \"Real.contDiff_fourierIntegral\"], \"digest\": \"d3b87a608a279906\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TemperedDistribution.MemSobolev.fourier_memL1 (Mathlib/Analysis/Distribution/Sobolev.lean:241) assumes Bessel-potential MemSobolev membership and treats the unweighted Fourier L1 conclusion. The weak-derivative hypothesis of this item is not that membership by definition; identifying it requires the Fourier weak-derivative theorem. Classical smooth Fourier-derivative hits likewise do not apply to the stated weak hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "fourier_memL1|weak.*deriv|memSobolev.*fourier",
+   "results": "{\"t\": \"2026-10-24T03:23:48Z\", \"tool\": \"grep\", \"query\": \"fourier_memL1|weak.*deriv|memSobolev.*fourier\", \"sub\": \"Analysis/Distribution\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"73c33973efa785dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TemperedDistribution.MemSobolev.fourier_memL1 (Mathlib/Analysis/Distribution/Sobolev.lean:241) assumes Bessel-potential MemSobolev membership and treats the unweighted Fourier L1 conclusion. The weak-derivative hypothesis of this item is not that membership by definition; identifying it requires the Fourier weak-derivative theorem. Classical smooth Fourier-derivative hits likewise do not apply to the stated weak hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bundle-sobolev-embedding",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, Sobolev lemma (2.1), printed p.289 (PDF page 289), including the preceding weak-derivative definition of the Sobolev spaces. Supporting Fourier argument: The Euclidean weighted-Fourier integrability input for (2.1), before inverse transformation.",
+   "via": [
+    "lem-sfb-bundle-sobolev-embedding",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weak-sobolev-fourier-moments",
+  "worker": "stage1",
+  "summary": "Q57: no project Lean attachment exists. Kept the statement and its hypotheses. Split the weak derivative to Fourier multiplier bridge into one strictly smaller analytic statement, and recorded inverse bracket integrability and L2 product integrability as exact Mathlib specializations. Wrote the polynomial weight estimate, exponent check and representative independence explicitly. Checked each cited statement and all small cases; the proof is agent-written and Demailly remains WANTED locally.",
+  "blueprint": "Existing inherited ancestry has from.node=null (confirmed by blueprint_refs ancestor); it points through bundle Sobolev embedding to current latest det-thm-sf-ctf-stability-direct-images proof (3). This split realizes only the Euclidean weighted Fourier input under that analytic chain. Whole-blueprint searches found no same statement. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-fc45d38c1",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-fc45d38c1 (reviewer sub-agent of L); spot-checked: Ordinary one-level split; there is no repair note. The item statement is unchanged and it matches the citer lem-sfb-bundle-sobolev-embedding together with lem-sfb-fourier-moment-representative. Steps: (1) the new weak-derivative Fourier identity, applied with α=t e_i (|α|=t, so u_{te_i} is assumed), gives ξ_i^t h ∈ L². (2) The weight estimate is elementary and I checked it: w≤(m+1)M and M^t≤1+Σξ_i^{2t}, so w^{t/2}|h| ∈ L². (3) s=t−j≥t−r>m/2, so the bracket node applies, and b²=‖ξ‖^{2j}w^{−t}≤w^{j−t}. (4) The L² product node applies to the real measurable a,b, and ab=‖ξ‖^j|h|. (5) Representative independence holds because the integrands agree a.e. New nodes: lem-sfb-l2-weak-derivative-fourier-identity is unsplit, statement-only and self-contained. It is true (distributional ∂^α, with the +2πi sign correct for the e^{−2πix·ξ} convention), and α=0 gives v=u. It is strictly smaller than the item and not a duplicate: I checked euclidean-sobolev-graph-mollification, fourier-moment-representative, the finite-field Plancherel nodes and the symbol/Gårding/Rellich/closed-range nodes. lem-sfb-euclidean-bracket-integrable: I read integrable_rpow_neg_one_add_norm_sq at JapaneseBracket.lean:147–154 with its variables at lines 39, 76 and 96; taking r=2s it is a one-line specialization. lem-sfb-l2-product-integrable: I read MemLp.integrable_mul at Integrable.lean:1085–1088 and HolderConjugate.instTwoTwo at Holder.lean:133–137; it is an exact leaf. Demailly is not in the local literature and is marked WANTED; the proof is marked agent-written. There are no SGA citations. Blueprint from/via are inherited with the item prepended to the via chain. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.WeakSobolevFourierMoments",
+  "declaration": "Real.integrable_fourier_moments_of_weak_derivatives",
+  "file": "lean/Sheaf/Analysis/WeakSobolevFourierMoments.lean",
+  "statement": "theorem integrable_fourier_moments_of_weak_derivatives {m : ℕ} (hm : 1 ≤ m) (u : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))) (t r : ℕ) (htr : (r : ℝ) + (m : ℝ) / 2 < (t : ℝ)) (hweak : ∀ α : Fin m → ℕ, (∑ i, α i) ≤ t → ∃ v : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m))), ∀ φ : EuclideanSpace ℝ (Fin m) → ℂ, ContDiff ℝ ∞ φ → HasCompactSupport φ → (∫ x, v x * φ x) = (-1 : ℂ) ^ (∑ i, α i) * ∫ x, u x * ((List.finRange m).foldr (fun i f ↦ (fun g y ↦ fderiv ℝ g y (EuclideanSpace.single i 1))^[α i] f) φ) x) : ∀ h : EuclideanSpace ℝ (Fin m) → ℂ, Measurable h → h =ᵐ[volume] (𝓕 u : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))) → ∀ j : ℕ, j ≤ r → Integrable (fun ξ ↦ ‖ξ‖ ^ j * ‖h ξ‖) volume",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7bfa7d2c7",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: m≥1 Euclidean volume; u : Lp ℂ 2; 𝓕u = Mathlib Lp.fourierTransformₗᵢ (Schwartz extension, e^{-2πi} convention); real strict threshold t>r+m/2; ∀α with |α|≤t ∃ L² v with bilinear test identity against smooth compactly supported complex φ, ∂^α as foldr of fderiv iterates (well-defined on C^∞ tests, integrands integrable so no Bochner junk); conclusion ∀ measurable h =ᵐ 𝓕u, ∀ j≤r, Integrable ‖ξ‖^j‖h ξ‖, which is exactly the hmom hypothesis of the landed citer fourier_moments_inverse_representative. Edge cases α=0, j=0, r=0, m=1, t=0 checked. Node identical to live apart from new lean field; lean.statement verbatim; lines ≤100; plain imports are the proof_deps' Mathlib matches (allowed); no defs, sorry only, docstrings with source/blueprint and 5-step plan; no competing weak-derivative notion in Sheaf or Mathlib (MemSobolev is Bessel-potential). Not compiled (no changes)."
+ }
+}

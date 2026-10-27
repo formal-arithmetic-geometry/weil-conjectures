@@ -87,7 +87,42 @@
   "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech",
+     "lines": [
+      276,
+      308
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence_of_enoughInjectives",
+     "module": "WeilConjectures.CategoryTheory.Sites.CechSpectralSequence",
+     "lines": [
+      38,
+      59
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-cech",
  "split_report": {
@@ -196,8 +231,12 @@
   ]
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\mathcal C$ be a site with fibre products, $X$ an object of\n$\\mathcal C$, $\\mathfrak U=\\{U_i\\to X\\}$ a family of morphisms generating\na covering sieve of $X$, and $F$ an abelian sheaf on $\\mathcal C$. There is\na convergent first-quadrant spectral sequence\n\n$$\nE_2^{pq}=\\check H^p(\\mathfrak U,\\underline H^q(F))\n\\Longrightarrow H^{p+q}(X,F),\n$$\n\nwhere $\\underline H^q(F)$ is the presheaf\n$V\\mapsto H^q(V,F)$ and $\\check H^p(\\mathfrak U,-)$ is\nCech cohomology with respect to $\\mathfrak U$. We apply this to the\nétale site $X_{\\Et}$ of a scheme $X$ and to the Zariski site.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal C$ be an essentially small site with fibre products, $X$ an object of\n$\\mathcal C$, $\\mathfrak U=\\{U_i\\to X\\}$ a family of morphisms generating\na covering sieve of $X$, and $F$ an abelian sheaf on $\\mathcal C$. There is\na convergent first-quadrant spectral sequence\n\n$$\nE_2^{pq}=\\check H^p(\\mathfrak U,\\underline H^q(F))\n\\Longrightarrow H^{p+q}(X,F),\n$$\n\nwhere $\\underline H^q(F)$ is the presheaf\n$V\\mapsto H^q(V,F)$ and $\\check H^p(\\mathfrak U,-)$ is\nCech cohomology with respect to $\\mathfrak U$. We apply this to the\nétale site $X_{\\Et}$ of a scheme $X$ and to the Zariski site.",
   "proof": [
    {
     "text": "Choose an injective resolution $F\\to I^{\\bullet}$ of abelian sheaves on\n$\\mathcal C$ and consider the double complex\n$C^{pq}:=C^p(\\mathfrak U,I^q)$, where\n$C^p(\\mathfrak U,G)=\\prod_{i_0,\\dots,i_p}G(U_{i_0}\\times_X\\dots\\times_XU_{i_p})$\nis the (alternating) Cech complex of the family $\\mathfrak U$ (the fibre\nproducts exist in $\\mathcal C$). For each\n$V=U_{i_0}\\times_X\\dots\\times_XU_{i_p}$ the restriction of $I^\\bullet$ to\n$\\mathcal C/V$ is again an injective resolution of $F|_V$ (restriction to\nthe localization has an exact left adjoint), so\n$H^q(I^\\bullet(V))=H^q(V,F)$. Its cohomology in the second direction is\ntherefore $C^p(\\mathfrak U,\\underline H^q(F))$, because taking cohomology\ncommutes with the products defining the Cech complex;\nso the first spectral sequence of the double complex\n[thm-sp-double-complex-spectral-sequences] has\n\n$$\nE_1^{pq}=C^p(\\mathfrak U,\\underline H^q(F)),\\qquad\nE_2^{pq}=\\check H^p(\\mathfrak U,\\underline H^q(F)).\n$$",
@@ -214,6 +253,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

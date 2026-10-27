@@ -1,0 +1,134 @@
+{
+ "id": "lem-zl-generating-system-open-transport",
+ "kind": "statement",
+ "title": "Open restriction and isomorphism transport of a generating linear system",
+ "statement": "Let X,Y,B be schemes, f:Y -> B any morphism, j:X -> Y an open immersion,\nV an open of Y, and e:M ~= P an isomorphism between invertible modules on Y.\nLet I be any finite type, let s_i be compatible global sections of M, and let t_i\nbe generating sections of M restricted to V with t_i=restriction(s_i) on global\nsections. Suppose the classifying morphism V -> P(I;B) of t is an immersion.\nPut U=j^(-1)(V), s'_i=e(s_i) on Y, and restrict s' to U using the concrete\nprescribedPointRestrictedFamily of [def-zl-prescribed-point-system-data]. This family\nis generating and its classifying morphism U -> P(I;B), over U -> X -> Y -> B, is an\nimmersion. The classifying morphism and its generation condition are those of\n[def-weil-pbc-morphism-to-projective-space-by-sections].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NE and 01NF, classification of morphisms by generating sections"
+ },
+ "stmt_deps": [
+  "def-zl-prescribed-point-system-data",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
+ ],
+ "proof": [
+  {
+   "text": "The section-normalized comparison between tensor pullback and ordinary pullback is obtained from uniqueness of left adjoints. Its equation on units identifies the two actual section maps. Compatible sections are determined by their value at the terminal open.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove naturality of the classifying morphism under an arbitrary pullback a and a section-preserving module isomorphism E. The universal pair for the integral classifying morphism pulls back, via the composition comparison, to the new pair. The uniqueness in the integral classification identifies its morphism with the old morphism composed with a. The two projective-space projections then identify the morphism over the base.",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor U -> Y through V by an open immersion a. Pull back the given epimorphism; as a left adjoint the module pullback preserves it. Use pullbackFreeIso and the isomorphism obtained from pullback composition and e to obtain a new epimorphism. Evaluate the generators at the top open: naturality of the units gives exactly prescribedPointRestrictedFamily. The preceding naturality statement identifies its classifying morphism with a followed by the old one. This is an immersion by composition.",
+   "uses": [
+    "def-zl-prescribed-point-system-data",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-zl-prescribed-point-system-data",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 2: kernel system, first infinitesimal neighbourhoods and restriction to X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a linear system generating an invertible sheaf commutes with its morphism to projective space",
+   "results": "Scheme.Modules.pullback and pullbackComp supply the functor comparisons, but no classifying-morphism naturality result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of generating sections and the classifying map to projective space is natural under open immersions and isomorphisms of invertible modules",
+   "results": "Proj.pullbackAwayιIso and its projection equations concern affine Proj charts, not invertible generating pairs.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homOfGeneratingSections|generatingSections.*pullback",
+   "results": "No matches in Mathlib. The projective classification is the existing Sheaf interface.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrescribedPointEventualJetSystem",
+  "date": "2026-10-26",
+  "group": "J9"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof paragraph 2: vanishing on the reduced finite subscheme and first-neighbourhood interpolation",
+   "via": [
+    "lem-zl-prescribed-point-eventual-jet-system",
+    "lem-zl-bertini-prescribed-point-smooth-system"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeneratingSystemOpenTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeneratingSystemOpenTransport.lean",
+  "declaration": "AlgebraicGeometry.generatingSystem_open_transport",
+  "statement": "theorem generatingSystem_open_transport\n    {B X Y : Scheme.{u}} (f : Y ⟶ B) (j : X ⟶ Y) [IsOpenImmersion j]\n    (V : Y.Opens) (M P : Y.Modules) [M.IsInvertible] [P.IsInvertible]\n    (e : M ≅ P) (I : Type u) [Finite I]\n    (s : I → M.sections) (t : I → ((Scheme.Modules.pullback V.ι).obj M).sections)\n    (hvalue : ∀ a : I, (t a).val (op ⊤) = pullbackΓ V.ι M ((s a).val (op ⊤)))\n    (ht : Epi ((((Scheme.Modules.pullback V.ι).obj M).freeHomEquiv).symm t))\n    (himm : IsImmersion (@ProjectiveSpace.homOfGeneratingSections I inferInstance\n      V.toScheme B (V.ι ≫ f) ((Scheme.Modules.pullback V.ι).obj M) inferInstance t ht))\n    (hP : ((tensorPullback ((j ⁻¹ᵁ V).ι ≫ j)).obj P).IsInvertible) :\n    let s' : I → Γ(P, ⊤) := fun a ↦ e.hom.app ⊤ ((s a).val (op ⊤))\n    ∃ ht' : Epi ((((tensorPullback ((j ⁻¹ᵁ V).ι ≫ j)).obj P).freeHomEquiv).symm\n        (prescribedPointRestrictedFamily P j (j ⁻¹ᵁ V) s')),\n      IsImmersion (@ProjectiveSpace.homOfGeneratingSections I inferInstance\n        (j ⁻¹ᵁ V).toScheme B ((j ⁻¹ᵁ V).ι ≫ j ≫ f)\n        ((tensorPullback ((j ⁻¹ᵁ V).ι ≫ j)).obj P) hP\n        (prescribedPointRestrictedFamily P j (j ⁻¹ᵁ V) s') ht')",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261026T023404-L-557776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261026T023404-L-557776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

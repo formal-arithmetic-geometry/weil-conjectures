@@ -1,0 +1,290 @@
+{
+ "id": "lem-trf-reduced-affine-injective-factor-stalk-comparison",
+ "kind": "statement",
+ "title": "Generic points and selected stalks in a reduced affine injective factorization",
+ "statement": "Let $R$ and $B$ be reduced commutative rings (no nonzero nilpotent elements), let $u:B\\hookrightarrow R$ be an injective unital ring homomorphism, and put $T=\\operatorname{Spec}R$, $Y=\\operatorname{Spec}B$, $h=\\operatorname{Spec}u:T\\to Y$ [def-weil-affine-spectrum]. Let $g:Y\\to X$ be a morphism to a scheme $X$ [def-pc-scheme], and put $f=g\\circ h$. Write $T^0,Y^0,X^0$ for the generic points [def-sc-generic-point] of irreducible components [def-weil-irreducible-components]. Suppose $T^0$ is finite, $f(T^0)\\subseteq X^0$, and $f:T^0\\to X^0$ is injective. Then $h$ induces a bijection $T^0\\to Y^0$, and $g$ maps $Y^0$ injectively into $X^0$. Moreover, for any $t\\in T$, $y=h(t)$ and $x=f(t)$, if the composite stalk map $\\mathcal O_{X,x}\\to\\mathcal O_{Y,y}\\to\\mathcal O_{T,t}$ is an isomorphism, then $\\mathcal O_{Y,y}\\to\\mathcal O_{T,t}$ is injective and both displayed maps are isomorphisms. These are the stalk maps induced by $g$ and $h$ [def-weil-pbc-module-stalk]. Empty spectra are allowed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NI, label lemma-points-in-affine, middle paragraph: the subring R′ of R, generic-point lifting, and the three local rings. Extracted comparison, with the finiteness of T^0 made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "We use specialization in the direction $a\\leadsto b$ meaning $b\\in\\overline{\\{a\\}}$. In an affine spectrum the closure of the prime $P$ is $V(P)$: a closed set $V(I)$ contains $P$ exactly when $I\\subseteq P$, which implies $V(P)\\subseteq V(I)$. Thus $P\\leadsto Q$ means $P\\subseteq Q$. The cited component theorem and the definition of generic point identify $T^0$ and $Y^0$ with the minimal primes of $R$ and $B$. We also use that comparable component generic points of $X$ are equal. Indeed specialization gives inclusion of their closures; those closures are maximal irreducible closed subsets, so they coincide, and uniqueness of the generic point in a scheme gives equality. Morphisms preserve specialization by continuity.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "Tags 00ES (algebra-lemma-irreducible), parts (1),(3), and 01IS (schemes-lemma-scheme-sober); preliminary identifications for 09NI."
+   }
+  },
+  {
+   "text": "For $Q\\in Y^0$, the injective-minimal-prime lifting theorem applied to $u:B\\hookrightarrow R$ gives a prime $P\\subset R$ with $u^{-1}(P)=Q$. Choose a minimal prime $P_0\\subseteq P$ using the prime-contains-minimal-prime theorem. The contraction $u^{-1}(P_0)$ is a prime contained in $Q$, hence equals $Q$ by minimality. Therefore every point of $Y^0$ is the image of some point of $T^0$. This argument does not require finiteness or a generic-point lifting assertion for arbitrary continuous dominant maps.",
+   "uses": [
+    "lem-weil-pbc-injective-minimal-prime-lift",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI (lemma-points-in-affine), middle paragraph: choosing a generic lift; justified by Tags 00FK (algebra-lemma-injective-minimal-primes-in-image) and 00E0 (algebra-lemma-Zariski-topology), part (4)."
+   }
+  },
+  {
+   "text": "Let $\\eta\\in T^0$, and choose a minimal prime $Q\\subseteq h(\\eta)$ of $B$. Step 2 gives $\\eta_0\\in T^0$ with $h(\\eta_0)=Q$. The specialization $Q\\leadsto h(\\eta)$ gives $f(\\eta_0)\\leadsto f(\\eta)$. Both points belong to $X^0$ by hypothesis, so Step 1 makes them equal. Injectivity of $f$ on $T^0$ implies $\\eta_0=\\eta$, whence $h(\\eta)=Q\\in Y^0$. Together with Step 2 this proves surjectivity $T^0\\to Y^0$; injectivity follows immediately from that of $f=g\\circ h$. For $\\xi\\in Y^0$, a lift $\\eta$ gives $g(\\xi)=f(\\eta)\\in X^0$. If $g(\\xi_1)=g(\\xi_2)$, lift both and apply injectivity of $f$ to conclude $\\xi_1=\\xi_2$.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI (lemma-points-in-affine), middle paragraph: generic images and injectivity inherited by the intermediate affine scheme; the minimal-prime argument is written out."
+   }
+  },
+  {
+   "text": "Fix $t$, put $y=h(t)$ and $x=f(t)$, and assume the composite stalk map is an isomorphism. Let $p\\subset R$ and $q=u^{-1}(p)\\subset B$ represent $t$ and $y$. By the affine-stalk and Spec-map-stalk theorems, identify the two affine stalks with $R_p$ and $B_q$ so that $\\beta=h_t^\\sharp$ is $b/d\\mapsto u(b)/u(d)$. Put $A=\\mathcal O_{X,x}$ and $\\alpha=g_y^\\sharp:A\\to B_q$. The composition theorem identifies $\\gamma=f_t^\\sharp$ with $\\beta\\alpha:A\\xrightarrow{\\sim}R_p$, exactly the assumed composite, without choosing an unrelated local-ring isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-scheme-stalk-map-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI (lemma-points-in-affine), middle paragraph: the three displayed local rings; Tags 01HV (schemes-lemma-spec-sheaves), 01I1 (schemes-lemma-morphism-into-affine), and 008M (sheaves-lemma-compose-f-maps-stalks)."
+   }
+  },
+  {
+   "text": "Write $c_t:\\operatorname{Spec}R_p\\to T$ and $c_x:\\operatorname{Spec}A\\to X$ for the canonical morphisms. Their images are precisely the generalizations of $t$ and $x$. They satisfy $f c_t=c_x\\operatorname{Spec}(\\gamma)$. To check this equality, the local-spectrum classification says it suffices to check the closed-point image and its normalized stalk homomorphism: both closed points map to $x$; for $f c_t$ the homomorphism is $f_t^\\sharp\\!=\\gamma$ because $c_t$ has identity normalized stalk map; for $c_x\\operatorname{Spec}(\\gamma)$ it is again $\\gamma$, by the identity normalized stalk map of $c_x$ and the Spec-map-stalk formula (localizing a ring isomorphism at its maximal ideal gives that same isomorphism). Composition of stalk maps supplies both computations. Since $\\gamma$ is an isomorphism, so is $\\operatorname{Spec}(\\gamma)$. Consequently every generalization $\\theta$ of $x$ has a preimage $z\\in T$ generalizing $t$ with $f(z)=\\theta$: lift $\\theta$ along $c_x$, pull back its preimage along $\\operatorname{Spec}(\\gamma)$, and apply $c_t$.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI (lemma-points-in-affine), middle paragraph: lifting through the selected stalk isomorphism; Tags 01J6 (schemes-lemma-morphism-from-spec-local-ring), 02NA (schemes-equation-canonical-morphism), and 01J7 (schemes-lemma-specialize-points)."
+   }
+  },
+  {
+   "text": "Let $Q\\subseteq q$ be a minimal prime of $B$, with generic point $\\xi\\leadsto y$, and let $\\eta\\in T^0$ be its lift from Step 2. Then $\\theta=g(\\xi)=f(\\eta)$ belongs to $X^0$ and specializes to $x$. Step 5 gives $z\\leadsto t$ with $f(z)=\\theta$. Choose a minimal prime of $R$ contained in the prime of $z$, giving $\\eta'\\in T^0$ with $\\eta'\\leadsto z\\leadsto t$. By continuity $f(\\eta')\\leadsto\\theta$. Both are in $X^0$, so they are equal by Step 1. Injectivity on $T^0$ forces $\\eta'=\\eta$. Thus the minimal-prime lift of $Q$ actually specializes to the prescribed $t$: its prime $P_Q$ satisfies $P_Q\\subseteq p$ and $u^{-1}(P_Q)=Q$. This is the specialization assertion not supplied by dominance alone.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI (lemma-points-in-affine), middle paragraph: the warning about the first generic lift and its identification with the lift specializing to the chosen point."
+   }
+  },
+  {
+   "text": "We prove $\\ker\\beta=0$. Write $a=b/d\\in B_q$ with $d\\notin q$ and suppose $\\beta(a)=0$. The localization zero criterion gives $s\\notin p$ with $s u(b)=0$. For any prime $L\\subset B_q$, its contraction $Q'$ to $B$ is prime and contained in $q$, since every element outside $q$ becomes a unit and a proper prime contains no unit. Choose a minimal prime $Q\\subseteq Q'$ of $B$. Step 6 supplies $P_Q\\subseteq p$ with contraction $Q$. Hence $s\\notin P_Q$ and $s u(b)=0\\in P_Q$ imply $u(b)\\in P_Q$, so $b\\in Q\\subseteq Q'$. The image $b/1$ lies in $L$, and multiplication by the unit $1/d$ shows $a\\in L$. Thus $a$ belongs to every prime of $B_q$. The radical-intersection theorem with $I=0$ says $a$ is nilpotent. The localization of the reduced ring $B$ at $q$ is reduced, so $a=0$. For two elements with equal images apply this to their difference, proving that $\\beta$ is injective.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-localization-preserves-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI (lemma-points-in-affine), middle paragraph: injectivity from minimal-prime lifting; Tag 00E0 (algebra-lemma-Zariski-topology), part (7), and Tag 01HV (schemes-lemma-spec-sheaves), part (6), for the explicit kernel computation."
+   }
+  },
+  {
+   "text": "Surjectivity of $\\gamma=\\beta\\alpha$ implies surjectivity of $\\beta$: $r=\\gamma(c)=\\beta(\\alpha(c))$ for $c=\\gamma^{-1}(r)$. Thus $\\beta$ is a ring isomorphism. The map $\\alpha$ is injective because $\\gamma$ is. For $a\\in B_q$, take $c=\\gamma^{-1}(\\beta(a))$; then $\\beta(\\alpha(c))=\\beta(a)$ and Step 7 gives $\\alpha(c)=a$. Hence $\\alpha$ is surjective and also an isomorphism. If $T$ is empty, $R$ is the zero ring and injectivity of $u$ forces $B$ to be the zero ring; the generic-point bijection is empty and the stalk assertion has no $t$. The previous arguments already treat all nonempty cases, including generic or closed selected points. The finite-$T^0$ hypothesis is retained, although the injective-ring-map lifting theorem makes it unnecessary in this comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI (lemma-points-in-affine), middle paragraph, final sentence: both local maps are isomorphisms; elementary ring-map assembly and the empty-spectrum case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-injective-minimal-prime-lift",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-scheme-stalk-map-composition",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-localization-preserves-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NI, lemma-points-in-affine, middle paragraph. The omitted generic-bijection argument, the local-spectrum lift and the reduced-localization kernel argument are expanded using the cited Stacks results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A dominant map T to Y between reduced affine schemes with finitely many generic points and a map Y to X injective on generic images of T preserves a stalk isomorphism of the composite T to X at a selected point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] {y : ↥Y}\\n  (e : (CategoryTheory.ConcreteCategory.hom sX.base) x = (CategoryTheory.ConcreteCategory.hom sY.base) y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"(X : AlgebraicGeometry.Scheme) → ↥X → Prop\", \"doc\": \"For a scheme $X$ and a point $x$ in its underlying topological space, the proposition that the germ at $x$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y] (x : ↥X),\\n  (∀ (g : ↑(Y.presheaf.obj (Opposite.op ⊤))),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n            ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.Γgerm ((Category\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f : X \\to Y$ be a morphism of schemes. If $Y$ is affine and for every germ $g$ in the stalk of $Y$'s structure sheaf at $f(x)$, the condition $f_{\\text{stalk}}(x)(g)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk_comp\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ with injective germ map, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\\\\to Y$ s\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {x : ↥X} [X.IsGermInjectiveAt x] (f g : X ⟶ Y)\\n  (e : (CategoryTheory.ConcreteCategory.hom f.base) x = (CategoryTheory.ConcreteCategory.hom g.base) x),\\n  AlgebraicGeometry.Scheme.Hom.stalkMap f x =\\n      CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkSpecializ\", \"doc\": \"Given a scheme $X$ with an injective germ at a point $x$, and two morphisms $f, g: X \\to Y$ that agree at $x$ and satisfy a compatibility condition on their induced stalk maps under specialization, the\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {x : ↥X} [X.IsGermInjectiveAt x] (f g : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) f = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) g →\\n    ∃ U, x ∈ U ∧ CategoryTheory.CategoryStruct.comp U.ι f = CategoryTheory.CategoryStruct.comp U.\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, if two morphisms $f,g : X \\\\to Y$ satisfy $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X \\\\xrightarrow{f} Y = \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n\nNo match: stalkMap_injective_of_isAffine assumes vanishing already descends; dense image/global injectivity alone is not the selected-stalk assertion, and minimal-prime lifting supplies only one part of the comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, Function.Injective",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.stalkMap_injective\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U : TopologicalSpace.Opens ↥Y} (hU : AlgebraicGeometry.IsAffineOpen U) (x : ↥X) (hx : f x ∈ U) (h : ∀ (g : ↑(Y.presheaf.obj (Opposite.op U))), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)) ((CategoryTheory.ConcreteCat\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y] (x : ↥X) (h : ∀ (g : ↑(Y.presheaf.obj (Opposite.op ⊤))), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)) ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.Γgerm (f x))) g) = 0 → (CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f : X ⟶ Y} [CompactSpace ↥X] (hfopen : IsOpenMap ⇑f) (hfinj₁ : Function.Injective ⇑f) (hfinj₂ : Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))) (x : ↥X) : Function.Injective ⇑(Categor\", \"doc\": \"If `f : X ⟶ Y` is open, injective, `X` is quasi-compact and `Y` is affine, then `f` is stalkwise\\ninjective if it is injective on global sections.\"}\n\nNo match: stalkMap_injective_of_isAffine assumes vanishing already descends; dense image/global injectivity alone is not the selected-stalk assertion, and minimal-prime lifting supplies only one part of the comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dominant.*stalk|stalk.*dominant|[Mm]inimal[Pp]rime.*[Ii]nject|[Ii]nject.*[Mm]inimal[Pp]rime",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"line\": \"109\", \"text\": \"@[stacks 00FK] theorem Ideal.exists_comap_eq_of_mem_minimalPrimes_of_injective {f : R →+* S}\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"line\": \"110\", \"text\": \"    (hf : Function.Injective f) (p) (H : p ∈ minimalPrimes R) :\"}\n\nNo match: stalkMap_injective_of_isAffine assumes vanishing already descends; dense image/global injectivity alone is not the selected-stalk assertion, and minimal-prime lifting supplies only one part of the comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced affine dominant factorization T to Y to X with finite generic points injective in X and isomorphic X to T local rings implies Y to T local ring injection and X to Y isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsIntegral X] : X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"[IsOpenImmersion f] (x) : IsIso (f.residueFieldMap x)\", \"doc\": \"For any open immersion of schemes $f: X \\\\to Y$ and any point $x \\\\in X$, the induced ring homomorphism between the residue fields, $k(f(x)) \\\\to k(x)$, is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X) [IsDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"[CompactSpace X] (hfinj : Function.Injective (f.appTop)) : IsDominant f\", \"doc\": \"Let $X$ be a compact space. If the induced map on global sections is injective, then the morphism $f$ is dominant, i.e., the image of $f$ is dense in its codomain.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [_root_.IsReduced Γ(X, ⊤)] : IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"[IsClosedImmersion f] (hf : Function.Injective f.appTop) : IsIso f\", \"doc\": \"If a morphism of schemes is a closed immersion and the induced map on global sections is injective, then the morphism is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsReduced Y] : IsReduced X\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f: X \\\\to Y$ be an open immersion. If $Y$ is a reduced scheme, then $X$ is also a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.respectsIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \": MorphismProperty.RespectsIso @IsDominant\", \"doc\": \"Every isomorphism of schemes is a dominant morphism, meaning the property of being dominant holds for all isomorphisms in the category of schemes.\"}\n\nNo match: stalkMap_injective_of_isAffine assumes vanishing already descends; dense image/global injectivity alone is not the selected-stalk assertion, and minimal-prime lifting supplies only one part of the comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity on local rings of a dominant affine scheme map when every generic point above a chosen point lifts to a generic generalization of the chosen source point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y] (x : ↥X),\\n  (∀ (g : ↑(Y.presheaf.obj (Opposite.op ⊤))),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n            ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.Γgerm ((Category\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f : X \\to Y$ be a morphism of schemes. If $Y$ is affine and for every germ $g$ in the stalk of $Y$'s structure sheaf at $f(x)$, the condition $f_{\\text{stalk}}(x)(g)\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f : X ⟶ Y} [CompactSpace ↥X],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f)) →\\n    AlgebraicGeometry.IsDominant f\", \"doc\": \"Let $X$ be a compact space. If the induced map on global sections is injective, then the morphism $f$ is dominant, i.e., the image of $f$ is dense in its codomain.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"(X : AlgebraicGeometry.Scheme) → ↥X → Prop\", \"doc\": \"For a scheme $X$ and a point $x$ in its underlying topological space, the proposition that the germ at $x$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f : X ⟶ Y} [CompactSpace ↥X],\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n      Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (Algebrai\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that the underlying topological space of $X$ is compact. If the continuous map underlying $f$ is open and injective, and the induced ring homomorphis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.specTargetImageFactorization f)))\", \"doc\": \"The application of the target-image factorization of a scheme morphism $ f $ to the entire topological space induces an injective map between the global sections of the structure sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.stalkMap_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U : TopologicalSpace.Opens ↥Y},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x : ↥X) (hx : (CategoryTheory.ConcreteCategory.hom f.base) x ∈ U),\\n      (∀ (g : ↑(Y.presheaf.obj (Opposite.op U))),\\n          (CategoryTheory.ConcreteCategory.hom (AlgebraicGe\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $x$ be a point in $X$. Let $U$ be an affine open subset of $Y$ containing the point $f(x)$. Let $f^\\\\#_x: \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x}$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X) [X.IsGermInjectiveAt x],\\n  ∃ U,\\n    ∃ (hx : x ∈ U),\\n      AlgebraicGeometry.IsAffineOpen U ∧\\n        Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx))\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$ where the germ map is injective at $x$, there exists an affine open subset $U \\\\subseteq X$ containing $x$ such that the germ map $\\\\mathcal{O}_X(U) \\\\to \\\\mathcal\"}\n\nNo match: stalkMap_injective_of_isAffine assumes vanishing already descends; dense image/global injectivity alone is not the selected-stalk assertion, and minimal-prime lifting supplies only one part of the comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*stalkMap|stalkMap.*generic|stalkMap_injective",
+   "results": "OK 7 hits; top results: Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; answer digest 9b4280e523a64015",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, Function.Injective",
+   "results": "OK 3 hits; top results: AlgebraicGeometry.IsAffineOpen.stalkMap_injective, AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective; answer digest c0ac06cc6808bef8",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dominant map of reduced affine schemes injective on generic images preserves local ring isomorphisms in a factorization",
+   "results": "OK 8 hits; top results: AlgebraicGeometry.IsDominant, AlgebraicGeometry.IsDominant.rec, AlgebraicGeometry.IsDominant.mk, AlgebraicGeometry.IsDominant.respectsIso, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.isDominant_of_of_appTop_injective, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.isDominant_iff; answer digest 223f5318d62b5bcd",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced affine injective factorization T to Y to X with finite generic points injective into generic points of X and an isomorphism on a composite stalk map",
+   "results": "OK 8 hits; top results: AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.Scheme.IsGermInjective, AlgebraicGeometry.Scheme.IsGermInjectiveAt, AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; answer digest d3c08da03f7a53ce",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If B is a subring of a reduced ring R and Spec R has finitely many generic points then generic points of Spec B lift",
+   "results": "OK 8 hits; top results: AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.Scheme.IsGermInjective.Spec, PrimeSpectrum.quasiSober, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap, Algebra.ZariskisMainProperty.of_isIntegral, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion; answer digest 242c5c4d3b01f1e1",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+  "date": "2026-10-23",
+  "group": "Q100"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting 09NI proof, middle paragraph from the subring R′ to the conclusion that both stalk maps are isomorphisms; this is an intermediate comparison, not the affine-neighbourhood conclusion of the item.",
+   "via": [
+    "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+    "lem-trf-integral-codimension-one-affine-neighbourhood",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-reduced-affine-injective-factor-stalk-comparison",
+  "worker": "stage1",
+  "summary": "Q05: expanded the middle paragraph of Stacks 09NI into eight steps, retaining the statement and all previous searches. Reused existing generic/minimal-prime, local-spectrum, localization and radical-intersection nodes; no new nodes. Proved the generic-point bijection before forcing each generic lift to specialize to the chosen t, and then proved injectivity by an explicit fraction calculation. Checked empty spectra and that no Noetherian, finite-type, separatedness or flatness hypothesis was used.",
+  "blueprint": "Supporting 09NI comparison on the inherited chain from lem-trf-local-term-locality through lem-trf-affine-source-stalk-isomorphism-neighbourhood. Steps 1-3 establish the generic-image assertions; Steps 4-8 expand precisely the subring and three-local-rings paragraph of 09NI. The current latest blueprint locality proof and unit were read; their route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Only clause (1), the affine factorization and the normalized closed-stalk identity of this generic local-spectrum tool are used. The item unit has no node supplying the generalizations parametrized by Spec of a local ring; this does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-b3a96a88f",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-b3a96a88f (reviewer sub-agent of L); spot-checked: I read the item in full, with all 8 steps; the delivery has no new nodes. It is a first split of a statement-only extraction, not a re-split: there is no repair note and the statement and stmt_deps are unchanged. Source: Stacks varieties.tex 09NI (lemma-points-in-affine), middle paragraph. The item uses (4) where the source mistypes (3). The T^0-finite hypothesis is inherited from the base, unused, and the parent supplies it. Step 1: closure of P is V(P), and components plus sobriety make comparable points of X^0 equal. Step 2: 00FK lift, then a minimal P0 below, whose contraction is Q by minimality. Step 3: h(T^0) is contained in Y^0 by Step 1 and injectivity of f. Step 4: stalks identified via affine-open-stalk-localization (c) and spec-map-stalk-localization, with gamma = beta∘alpha by stalk-map-composition (b). Step 5: f∘c_t = c_x∘Spec(gamma) via morphism-from-spec-local-ring (closed-point image and normalized stalk map); the canonical-morphism image is the set of generalizations. I cross-checked this against Mathlib Stalk.lean l.142 SpecMap_stalkMap_fromSpecStalk and l.155 range_fromSpecStalk. Step 6 writes out the eta=eta' argument, giving P_Q ⊆ p. Step 7: the zero criterion gives s u(b)=0, b lies in every contracted prime, a is nilpotent by the radical node, and B_q is reduced, so a=0. Step 8 is elementary and covers the empty case. Edge cases R=B, R=0 and the k[x,y]/(xy) branch example were checked; the parent's step 5 matches the statement. proof_deps equals the union of uses; there are four kinds of searches; no duplicate or cycle. I accept the tool_use of lem-weil-pbc-spec-local-ring-canonical-morphism (generic Spec O_{X,x}→X tool; every other off-unit citation is a Mathlib leaf or definition). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedAffineInjectiveFactorStalkComparison",
+  "declaration": "AlgebraicGeometry.reducedAffineInjectiveFactor_stalkComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedAffineInjectiveFactorStalkComparison.lean",
+  "statement": "theorem reducedAffineInjectiveFactor_stalkComparison (R B : Type u) [CommRing R] [CommRing B] [_root_.IsReduced R] [_root_.IsReduced B] (φ : B →+* R) (hφ : Function.Injective φ) (X : Scheme.{u}) (g : Spec (CommRingCat.of B) ⟶ X) (hfinite : (genericPoints (Spec (CommRingCat.of R))).Finite) (hgeneric : Set.MapsTo (Spec.map (CommRingCat.ofHom φ) ≫ g) (genericPoints (Spec (CommRingCat.of R))) (genericPoints X)) (hinjective : Set.InjOn (Spec.map (CommRingCat.ofHom φ) ≫ g) (genericPoints (Spec (CommRingCat.of R)))) : Set.BijOn (Spec.map (CommRingCat.ofHom φ)) (genericPoints (Spec (CommRingCat.of R))) (genericPoints (Spec (CommRingCat.of B))) ∧ Set.MapsTo g (genericPoints (Spec (CommRingCat.of B))) (genericPoints X) ∧ Set.InjOn g (genericPoints (Spec (CommRingCat.of B))) ∧ ∀ t : Spec (CommRingCat.of R), IsIso (g.stalkMap ((Spec.map (CommRingCat.ofHom φ)) t) ≫ (Spec.map (CommRingCat.ofHom φ)).stalkMap t) → Function.Injective ((Spec.map (CommRingCat.ofHom φ)).stalkMap t).hom ∧ IsIso (g.stalkMap ((Spec.map (CommRingCat.ofHom φ)) t)) ∧ IsIso ((Spec.map (CommRingCat.ofHom φ)).stalkMap t)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a65f4eef",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read the item node (only lean changed vs side-live), every stmt_dep record, the module and the report (Worker report + Second reading by Q46 present). The Lean matches the node clause by clause: reduced R,B; injective RingHom φ; h = Spec.map (ofHom φ); arbitrary X and g; T0/Y0/X0 = Mathlib genericPoints (= closure{x} ∈ irreducibleComponents, combining the def-sc-generic-point and def-weil-irreducible-components owners, no new def); hfinite/hgeneric (MapsTo)/hinjective (InjOn) as in the node; conclusions BijOn h, MapsTo+InjOn g, and for each t, IsIso(g.stalkMap (h t) ≫ h.stalkMap t) → injective h-stalk ∧ IsIso both, in the correct order. Scheme.Hom.stalkMap does not duplicate the def-weil-pbc-module-stalk module-stalk owner. Empty spectrum and φ=id edge cases are covered; single universe u, autoImplicit off. Statement verbatim, sorry only, docstrings have source place and blueprint id, imports exist, no name clash, no pro-étale content. No compile (no FIX). No findings."
+ }
+}

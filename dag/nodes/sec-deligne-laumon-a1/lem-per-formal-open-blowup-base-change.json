@@ -1,0 +1,300 @@
+{
+ "id": "lem-per-formal-open-blowup-base-change",
+ "kind": "statement",
+ "title": "Open formal blowups: existence, flat base change and rigidity",
+ "statement": "A Noetherian adic formal scheme means a ringed space with a finite cover by $\\operatorname{Spf}A$, where $A$ is a commutative Noetherian ring complete and separated for powers of a finitely generated ideal $K$; its points are the primes containing $K$ and its structure sheaf is the inverse limit of the structure sheaves on $\\operatorname{Spec}(A/K^n)$. A coherent formal ideal is an ideal subsheaf locally associated to a finite ideal of such an $A$ by completed localization. An open ideal contains a power of the ideal of definition. Let $\\mathfrak X$ be such a formal scheme, $\\mathfrak K$ an ideal of definition and $\\mathfrak J$ a coherent open ideal. On a chart $\\operatorname{Spf}A$, put $J=\\mathfrak J(\\operatorname{Spf}A)$. Completing the ordinary blowup $\\operatorname{Bl}_J\\operatorname{Spec}A$ along $K$ gives compatible local models which define a global Noetherian adic formal scheme $\\widehat{\\operatorname{Bl}}_{\\mathfrak J}\\mathfrak X$. It is covered by $\\operatorname{Spf}\\widehat{A[J/a]}_{K}$ for any finite set of generators $a$ of $J$, where $A[J/a]$ is the degree-zero part of $(\\bigoplus_{n\\ge0}J^n)_{aT}$ [def-nagata-global-blowup]. It restricts to this same construction on every formal open subset, including non-affine ones. For an adic morphism $h:\\mathfrak Y\\to\\mathfrak X$ whose maps on formal affine chart rings are flat, with $\\mathfrak Y$ Noetherian and ideal of definition $\\mathfrak K\\mathcal O_{\\mathfrak Y}$, there is a canonical cartesian comparison\n$$\\widehat{\\operatorname{Bl}}_{\\mathfrak J\\mathcal O_{\\mathfrak Y}}\\mathfrak Y\\ \\cong\\ \\mathfrak Y\\times_{\\mathfrak X}\\widehat{\\operatorname{Bl}}_{\\mathfrak J}\\mathfrak X.$$\nThe comparison respects the extended ideals and agrees with iterated base change and identities. Here the formal fibre product is formed by completing ordinary chart fibre products along the extended ideal of definition. These statements apply recursively to finite towers and finite disjoint unions. The blowup of the unit ideal is canonically the identity; its center is empty. Every automorphism of the formal blowup over $\\mathfrak X$ is the identity; consequently a finite tower of these blowups with fixed ordered center ideals is unique up to unique isomorphism preserving its base and these ideals. If the chart rings of $\\mathfrak X$ are quasi-excellent over $\\mathbf Q$ [def-exc-excellent-ring], the chart rings of its formal blowup are also quasi-excellent over $\\mathbf Q$.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Temkin §§2.4.3–2.4.8, printed pp.14–15, and the formal version of the flat Rees-algebra comparison; ordinary comparison is Stacks Tag 0805, divisors.tex lemma-flat-base-change-blowing-up, and affine charts are Tag 0804, lemma-blowing-up-affine. The centered rigidity is the completed chart/universal-property consequence, also used in Lemma 2.4.3. Read online 2026-10-24; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-nagata-global-blowup",
+  "def-exc-excellent-ring"
+ ],
+ "proof": [
+  {
+   "text": "On $\\operatorname{Spf}A$ put $Z=\\operatorname{Bl}_J\\operatorname{Spec}A$ and $C_a=A[J/a]$. The finite chart cover is [prop-nagata-affine-blowup-chart-cover]. Each $C_a$ is generated as an $A$-algebra by the finitely many fractions $a_i/a$ (write a degree-zero homogeneous fraction as $r/a^n$ with $r\\in J^n$); hence it is finite type and Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Apply [lem-per-completion-finite-type-base-change] to $Z$: its completion has exactly the finite cover $\\operatorname{Spf}\\widehat C_a$. The ordinary chart transitions satisfy the localization cocycle [lemma-nagata-proj-chart-ring-cocycle]; functoriality of completion preserves that equality. Thus the local completed models and their transitions are actual constructions, not objects selected by an existence assertion.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-per-completion-finite-type-base-change",
+    "lemma-nagata-proj-chart-ring-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tags 0804 (lemma-blowing-up-affine), 0805 (lemma-flat-base-change-blowing-up), 0AHY (section-formal-schemes-EGA); Temkin §§2.4.4–2.4.8 used for the formal construction, with the completion and chart arguments expanded."
+   }
+  },
+  {
+   "text": "First fix an adic flat map $A\\to B$ of the chart rings in the statement. For $g:\\operatorname{Spec}B\\to\\operatorname{Spec}A$, [thm-nagata-blowup-flat-base-change] says that the specified comparison of [def-nagata-blowup-flat-base-change-map] is an isomorphism. Complete it along $K$. By [lem-per-completion-finite-type-base-change], its target is precisely $\\operatorname{Spf}B\\times_{\\operatorname{Spf}A}\\widehat Z_K$. Explicitly its chart rings are $\\widehat C_a\\widehat\\otimes_A B\\cong\\widehat{C_a\\otimes_A B}_K$, and the left-hand charts are those of the blowup of $JB$. The extended center ideal on each side is the ideal generated by the same images of $J$. This proves the affine cartesian comparison. No tensor product is interchanged with an inverse limit without completion.",
+   "uses": [
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "lem-per-completion-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tags 0804 (lemma-blowing-up-affine), 0805 (lemma-flat-base-change-blowing-up), 0AHY (section-formal-schemes-EGA); Temkin §§2.4.4–2.4.8 used for the formal construction, with the completion and chart arguments expanded."
+   }
+  },
+  {
+   "text": "For a principal formal open of $\\operatorname{Spf}A$, [lem-per-formal-affine-principal-refinement] identifies its ring with $A_{\\{s\\}}=\\widehat{A_s}_{K}$. The map $A\\to A_{\\{s\\}}$ is flat: localization is flat by [lem-weil-pbc-localization-flat], completion of the Noetherian ring $A_s$ is flat by [lem-weil-pbc-noetherian-completion-flat], and [lem-weil-pbc-flat-ring-map-comp] composes them. Step 2 therefore identifies the restricted completed blowup with the completed blowup on this principal open. The coefficient maps of [def-nagata-blowup-flat-base-change-map] and the natural comparison of [lem-per-completion-finite-type-base-change] make these identifications compatible with further principal restrictions. Common principal refinements exist by [lem-per-formal-affine-principal-refinement]; use them on arbitrary overlaps, without assuming the overlaps affine. The transition cocycle follows on these refinements, and [lem-per-adic-formal-open-gluing] glues the local models to the required global formal blowup and glues their extended ideals. It also proves restriction to any formal open subset and independence of the chosen finite affine cover.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "def-nagata-blowup-flat-base-change-map",
+    "lem-per-completion-finite-type-base-change",
+    "lem-per-adic-formal-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tags 0804 (lemma-blowing-up-affine), 0805 (lemma-flat-base-change-blowing-up), 0AHY (section-formal-schemes-EGA); Temkin §§2.4.4–2.4.8 used for the formal construction, with the completion and chart arguments expanded."
+   }
+  },
+  {
+   "text": "We record why the extended ideal on this construction is an invertible ideal, including its injective inclusion in the structure sheaf. On $C_a$, [lemma-nagata-chart-extended-ideal-principal] gives $JC_a=(a)$ and [lemma-nagata-chart-generator-regular] says multiplication by $a$ is injective. The map $C_a\\to\\widehat C_a$ is flat by [lem-weil-pbc-noetherian-completion-flat]. By the definition in [def-weil-pbc-flat-ring-map], tensoring this injection with $\\widehat C_a$ is injective. Thus $a$ remains a non-zero-divisor and $J\\widehat C_a=(a)$. The same holds on every principal refinement, since localization followed by completion is flat, by [lem-weil-pbc-localization-flat] and [lem-weil-pbc-flat-ring-map-comp]. Consequently multiplication by $a$ is an isomorphism from the structure sheaf onto this ideal on the completed $a$-chart. The ratios $b/a$ generate the completed chart topologically, and on the overlap with the $b$-chart the ratio $b/a$ is invertible: this is the ordinary homogeneous localization overlap [lemma-nagata-proj-chart-ring-cocycle] followed by completion.",
+   "uses": [
+    "lemma-nagata-chart-extended-ideal-principal",
+    "lemma-nagata-chart-generator-regular",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lemma-nagata-proj-chart-ring-cocycle",
+    "lem-per-completion-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tags 0804 (lemma-blowing-up-affine), 0805 (lemma-flat-base-change-blowing-up), 0AHY (section-formal-schemes-EGA); Temkin §§2.4.4–2.4.8 used for the formal construction, with the completion and chart arguments expanded."
+   }
+  },
+  {
+   "text": "Let $v$ be an automorphism of this blowup over its base. It fixes all base sections and the extended ideal $J\\mathcal O$. On the $a$-chart this ideal is generated by the non-zero-divisor $a$. Near a point of that chart choose a target $b$-chart containing its image under $v$. Write $v^*b=ad$ locally, since $b$ belongs to $J$. Pulling back the relation $a=b(a/b)$ gives $a=ad\\,v^*(a/b)$. Cancellation gives $d\\,v^*(a/b)=1$. Hence the image lies in the target overlap where $a/b$ is invertible, which is contained in the target $a$-chart by Step 4. This shows $v$ preserves each $a$-chart. On that chart its continuous ring endomorphism fixes $a$ and each $b\\in J$; from $a(b/a)=b$ and injectivity of multiplication by $a$, it fixes every ratio $b/a$. It therefore fixes $C_a$ and its completion: agreement on the dense image of $C_a$ and continuity into the separated complete ring imply agreement everywhere. The affine morphism correspondence in [lem-per-completion-finite-type-base-change] and equality on covers in [lem-per-adic-formal-open-gluing] give $v=1$. This argument uses no density of the empty formal complement of the center and makes no embedding into $A_{\\{a\\}}$.",
+   "uses": [
+    "lem-per-completion-finite-type-base-change",
+    "lem-per-adic-formal-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tags 0804 (lemma-blowing-up-affine), 0805 (lemma-flat-base-change-blowing-up), 0AHY (section-formal-schemes-EGA); Temkin §§2.4.4–2.4.8 used for the formal construction, with the completion and chart arguments expanded."
+   }
+  },
+  {
+   "text": "To iterate base change, its new chart map must again be flat. On the $a$-chart put $C=A[J/a]$ and $R=C\\otimes_A B$. Since $B$ is flat over $A$, [lem-weil-pbc-flat-module-base-change] makes $R$ flat as a $C$-module. The ring $C$ is Noetherian by Step 1. Apply [lem-weil-pbc-flat-module-completion-flat] to this $C$-module and the ideal $KC$: it says that $\\widehat R_K$ is flat over $\\widehat C_K$. These are precisely the source and target completed chart rings from Step 2. Both rings are Noetherian, by [lem-weil-pbc-finite-type-algebra-noetherian] applied over $A$ and $B$ and [lem-weil-pbc-adic-completion-noetherian]. Their ideals of definition are extended from $K$ by [lem-weil-pbc-adic-completion-mod-ideal]. Thus the stage morphism has the same adic flat hypotheses as the original morphism. This supplies the induction hypothesis needed for every subsequent center.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-module-completion-flat",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tags 0804 (lemma-blowing-up-affine), 0805 (lemma-flat-base-change-blowing-up), 0AHY (section-formal-schemes-EGA); Temkin §§2.4.4–2.4.8 used for the formal construction, with the completion and chart arguments expanded."
+   }
+  },
+  {
+   "text": "For a general $h$, cover its source and target by the formal affine charts in the hypotheses. Step 2 gives local isomorphisms. On further affine refinements the comparison maps are induced by the same base coefficient maps, so their restrictions agree by Steps 2–3 and [lem-per-completion-finite-type-base-change]. Apply [lem-per-adic-formal-open-gluing] to glue them and their inverses. Equality for identities and successive base changes is likewise local: on each completed chart it follows by composing the coefficient maps, or, equivalently, reducing them modulo $K^n$ for every $n$. Extended ideals agree since each generator has the same image. For a finite tower, induct on its length. The length-zero case is the identity. At the next stage use the just-proved restriction and comparison on that stage's base, whose flat hypotheses persist by Step 6; composing the stage isomorphisms gives existence, while their difference is a base-preserving automorphism at the first unequal stage and is the identity by Step 5. This proves unique isomorphism of ordered towers with their specified ideals. Disjoint unions are obtained by the same argument component by component, including the empty union. For $J=(1)$ the sole chart has $a=1$ and $A[J/1]=A$, so its completion is $A$ and its center is $V(1)=\\varnothing$.",
+   "uses": [
+    "lem-per-completion-finite-type-base-change",
+    "lem-per-adic-formal-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tags 0804 (lemma-blowing-up-affine), 0805 (lemma-flat-base-change-blowing-up), 0AHY (section-formal-schemes-EGA); Temkin §§2.4.4–2.4.8 used for the formal construction, with the completion and chart arguments expanded."
+   }
+  },
+  {
+   "text": "Finally assume the chart rings $A$ are quasi-excellent over $\\mathbf Q$. The single affine cover of $\\operatorname{Spec}A$ satisfies the G-ring and J-2 hypotheses; [lem-trf-g-ring-affine-cover] and [lem-trf-j2-affine-cover] extend them to every affine open. Thus the base has the every-affine quasi-excellence required below. Each ordinary affine blowup is finite type over $A$ by the finite ratio generators in Step 1. Thus [lem-per-quasi-excellent-finite-type-stability] makes its affine chart rings quasi-excellent. By [lem-per-quasi-excellent-formal-affines], completion of this Noetherian quasi-excellent scheme along $K$ has quasi-excellent rings on every formal affine open. These completions cover our global construction, so every formal affine of it has quasi-excellent ring, using the affine-cover independence in [lem-per-qe-formal-regularity-locality]. All structure maps preserve the given $\\mathbf Q$-algebra structures, so the resulting charts remain over $\\mathbf Q$.",
+   "uses": [
+    "lem-trf-g-ring-affine-cover",
+    "lem-trf-j2-affine-cover",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-per-quasi-excellent-formal-affines",
+    "lem-per-qe-formal-regularity-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex; https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, quasi-excellent alternative; Temkin §2.4.3 and Theorem 2.1.6, completion and cover independence of quasi-excellence over Q."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-flat-base-change-map",
+  "def-weil-pbc-flat-ring-map",
+  "lem-per-adic-formal-open-gluing",
+  "lem-per-completion-finite-type-base-change",
+  "lem-per-formal-affine-principal-refinement",
+  "lem-per-qe-formal-regularity-locality",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-per-quasi-excellent-formal-affines",
+  "lem-trf-g-ring-affine-cover",
+  "lem-trf-j2-affine-cover",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-module-completion-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-chart-generator-regular",
+  "lemma-nagata-proj-chart-ring-cocycle",
+  "prop-nagata-affine-blowup-chart-cover",
+  "thm-nagata-blowup-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/formal-spaces.tex; https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Temkin §§2.4.3–2.4.8, read online; agent-expanded completion/gluing and rigidity argument, with ordinary scheme inputs Stacks 0804, 0805. Archival Temkin copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian adic formal blowups commute with flat adic base change and restriction to formal open subsets",
+   "results": "8 hits; AdicCompletion.flat_of_isNoetherian, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.instResLE, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.Flat.generalizingMap",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary schemes, flat modules, ring completion or regular elements; none states this theorem for adic formal schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.?scheme|blow.?up|desingulari",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary schemes, flat modules, ring completion or regular elements; none states this theorem for adic formal schemes",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic formal blowup along a coherent open ideal commutes with flat adic base change and has unique automorphism preserving the base and center",
+   "results": "8 hits; AdicCompletion.flat_of_isNoetherian, Module.Flat.isBaseChange, RingHom.Flat.isStableUnderBaseChange, RingHom.FormallyUnramified.isStableUnderBaseChange, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, Algebra.Unramified.baseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary schemes, flat modules, ring completion or regular elements; none states this theorem for adic formal schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary schemes, flat modules, ring completion or regular elements; none states this theorem for adic formal schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed Rees blowup charts flat extension of an open coherent ideal canonical rigidity",
+   "results": "8 hits; AdicCompletion.flat_of_isNoetherian, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instOfIsOpenImmersion, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AlgebraicGeometry.Flat.flat_appLE, instFlatAtPrime, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary schemes, flat modules, ring completion or regular elements; none states this theorem for adic formal schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian formal schemes adic completion of blowups flat base change rigidity",
+   "results": "8 hits; AdicCompletion.flat_of_isNoetherian; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AlgebraicGeometry.Flat; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary flatness, adic ring completion and regular elements do not state formal blowup existence/base change/rigidity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary flatness, adic ring completion and regular elements do not state formal blowup existence/base change/rigidity"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.?scheme|blow.?up|FormalScheme",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary flatness, adic ring completion and regular elements do not state formal blowup existence/base change/rigidity",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic formal blowup of a coherent open ideal canonical flat base change and trivial automorphisms",
+   "results": "8 hits; Ideal.adicTopology; IsSMulRegular.of_flat_of_isBaseChange; RingHom.Flat.isStableUnderBaseChange; AdicCompletion.flat_of_isNoetherian; Ideal.adicModuleTopology; AlgebraicGeometry.Flat.isStableUnderBaseChange; isAdic_iff; Ideal.adic_basis",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary flatness, adic ring completion and regular elements do not state formal blowup existence/base change/rigidity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-formal-resolution-gluing",
+  "date": "2026-10-24",
+  "group": "Q130"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 regular-local-model/purity branch; through the current formal-resolution descendant: Temkin §§2.4.3–2.4.8, printed pp.14–15, and the formal version of the flat Rees-algebra comparison; ordinary comparison is Stacks Tag 0805, divisors.tex lemma-flat-base-change-blowing-up, and affine charts are Tag 0804, lemma-blowing-up-affine. The centered rigidity is the completed chart/universal-property consequence, also used in Lemma 2.4.3.",
+   "via": [
+    "lem-per-rig-formal-resolution-gluing",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-formal-open-blowup-base-change",
+  "worker": "stage1",
+  "summary": "Completed the affine algebraic blowup, proved flat adic comparison, and glued via principal formal refinements. Expanded rigidity by cancellation of chart ratios, avoiding the false completed-localization embedding. Reused all ordinary blowup and quasi-excellence inputs; added only general completion/base-change and formal-open gluing statements. Statement unchanged. No Lean attachment found.",
+  "blueprint": "Ancestor proof Step 3, regular-local-model/purity branch, through the formal-resolution descendants; formal open blowup construction in Temkin §§2.4.4–2.4.6: completion and change of formal affine chart. Steps 1–3 realize the completed chart/localization construction, Steps 4–7 the rigidity and tower assembly required by the formal-resolution descendant, and Step 8 its quasi-excellence preservation. The item is not the unit key node; no unit realization changes.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-g-ring-affine-cover",
+    "why": "Generic algebraic/formal completion or ordinary blowup input for the chart construction; no statement of the perverse unit supplies this algebraic tool."
+   },
+   {
+    "node": "lem-trf-j2-affine-cover",
+    "why": "Generic algebraic/formal completion or ordinary blowup input for the chart construction; no statement of the perverse unit supplies this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-completion-flat",
+    "why": "Generic algebraic/formal completion or ordinary blowup input for the chart construction; no statement of the perverse unit supplies this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-g-ring-affine-cover",
+  "lem-trf-j2-affine-cover",
+  "lem-weil-pbc-flat-module-completion-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-167bba013",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-167bba013 (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics and both new nodes in full. The statement is unchanged from the base and the item is first split here. The base change keeps def-nagata-blowup-flat-base-change-map (Y first) and its flat hypothesis. Steps 1–8 check out: chart generation and the cocycle; the completed 0805 comparison, using C^/K^n = C/K^n; flatness of A to its completed principal localization (localization then completion); a stays a non-zero-divisor after flat completion; rigidity by cancelling a, then the local stalk map, then density and separatedness (correct); flatness preserved through the tower (flat-module-completion-flat); tower induction with base case and uniqueness via Step 5; quasi-excellence via G-ring/J-2 affine locality, 07QU and the completion of quasi-excellent schemes. The new completion/base-change node is true (finite-quotient tensor calculation, 0AHZ) and the new formal gluing node is true (gluing as in 01JA/0AHY). Neither duplicates an existing node: the def-per-adic-formal-* nodes, the Beauville–Laszlo formal-glueing nodes and lem-weil-pbc-glue-schemes were all checked. Neither restates a clause of the item or its parent. Batch 5: the closure of the two targets grows only by the two new nodes (27698 to 27700). lem-trf-g-ring-affine-cover and lem-trf-j2-affine-cover are generic affine-locality algebra and were already in the closure through quasi-excellent-finite-type-stability, so I accept them. Artin-Gabber check: neither the item nor lem-per-quasi-excellent-finite-type-stability (07QU, not Gabber finiteness) is in the closure of lem-per-artin-gabber-affine-curve, and the 07QU node is reached again through the live sfb gabber-modification chain, so I accept it. Notes for the maintainer: the item's blueprint via chain runs through nodes on the drop list and it is reached only through the sfb Gabber-alteration chain; the tool_uses 'why' texts are boilerplate; the worker's preflight timed out."
+ }
+}

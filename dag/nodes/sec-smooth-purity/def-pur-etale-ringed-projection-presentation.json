@@ -1,0 +1,137 @@
+{
+ "id": "def-pur-etale-ringed-projection-presentation",
+ "kind": "definition",
+ "title": "Small etale ringed projection presentations and native scalar restriction",
+ "status": "split",
+ "statement": "For a scheme $T$ [def-pc-scheme], use the common coefficient universe [def-weil-size-convention] and lift only the Hom universe of its small etale site [def-weil-pbc-etale-site]. Transport its topology along the canonical ULiftHom equivalence. Define presentationEquivalence by sheafCongr, nativeEquivalence at ModuleCat coefficients, and toNative as the actual constant-scalar restriction [lem-sfb-constant-scalar-restriction-tensor] followed by the inverse site equivalence. Define derivedToNative by localization in the ordinary derived categories [def-weil-abstract-derived-category]. NativeOrdinaryTensorData is a braided structure on this literal functor, whose tensorator fixes every local pure tensor and whose unit takes a constant scalar to the same constant scalar. NativeTensorData is DerivedComparisonData for that ordinary structure: its specified signed-total tensor comparison, degree-zero unit normalization and Koszul symmetry normalization. Define corner as the small constant-ring site with the canonical localized tensor [def-kun-derived-tensor]. ModelNormalized says that every flat-term K-flat representative comparison is the inverse of the localization tensorator. For GeometricData and ExactData [def-sfb-constant-module-geometric-comparison-data], define edge as its actual scalar-extension pullback, K-injective derived direct image and canonical adjunction, retaining the specified scalar-one insertion and pure-tensor comparison, in the existing corner/model/edge interface [def-weil-pbc-ringed-tensor-square-presentation]. Define transportedInverse and transportedDirect by conjugating native functors with the site equivalences; ordinaryNativeLeft and ordinaryNativeRight are the ordinary scalar comparisons followed by the explicit equivalence unit cancellation.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "def-sfb-constant-module-geometric-comparison-data",
+  "def-weil-pbc-ringed-tensor-square-presentation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0B56; canonical change of small site presentation and its normalized comparison squares"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical change of small etale site presentation identifying constant-ring module sheaves and module-valued sheaves with scalar restriction and signed derived tensor comparison",
+   "results": "[\"AlgebraicGeometry.Scheme.Etale.forget\", \"Algebra.Etale.comp\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"Algebra.FormallyEtale.of_restrictScalars\", \"RingHom.Etale.toAlgebra\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\"]",
+   "date": "2026-10-23",
+   "verdict": "no exact match; reuse the generic sheafCongr and scalar-restriction declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of small etale site presentation with constant ring module sheaves and derived tensor normalization",
+   "results": "[\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.Sheaf.isConstant_iff_of_equivalence\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"CategoryTheory.instIsConstantObjSheafSheafCompose\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"CategoryTheory.Sheaf.IsConstant.mk\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"ModuleCat.tildeInModuleCat\"]",
+   "date": "2026-10-23",
+   "verdict": "no exact match; reuse the generic sheafCongr and scalar-restriction declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "ULiftHom.*[Ee]tale|[Ee]tale.*ULiftHom",
+   "results": "[]",
+   "date": "2026-10-23",
+   "verdict": "no exact match; reuse the generic sheafCongr and scalar-restriction declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|ULiftHom",
+   "results": "[\"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\"]",
+   "date": "2026-10-23",
+   "verdict": "no exact match; reuse the generic sheafCongr and scalar-restriction declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "etale_ringed_projection_identification|NativeOrdinaryTensorData|ordinaryNativeLeft|EtaleRingedProjectionPresentation",
+   "results": "No match in lean/WeilConjectures, lean/Sheaf or dag/lean_names_upstream.json. blueprint_refs.py search: 0 blueprint nodes; generic comparison nodes reused.",
+   "date": "2026-10-23",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-ringed-projection-identification",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Current prop-sf-pf-coherence.proof.md tensor reassociation and projection-counit transposes; prop-asd-smooth-base-change.proof.md final paragraph. Mechanical ancestor is null.",
+   "via": [
+    "lem-pur-etale-ringed-projection-identification",
+    "lem-route-projection-map-associativity",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.Paper.EtaleRingedProjectionPresentation",
+  "declaration": "AlgebraicGeometry.Etale.RingedProjectionIdentification.Site",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.Site",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.topology",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.presentationEquivalence",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.nativeEquivalence",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.toNative",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.toNative_additive",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.toNative_equivalence",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.corner",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.derivedToNative",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.NativeOrdinaryTensorData",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.NativeTensorData",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.edge",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.ModelNormalized",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.transportedInverse",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.transportedDirect",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.ordinaryNativeLeft",
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.ordinaryNativeRight"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleRingedProjectionPresentation.lean",
+  "statement": "abbrev Site (T : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b85a792c",
+  "group": "Q03",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b85a792c",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read the item and its 3 new def modules (EtaleRingedProjectionPresentation, EtaleRingedDerivedNormalization, EtaleRingedDerivedIdentificationData) in full, plus the dependency sources GeometricData/ExactData/OrdinaryIdentification, NormalizedComparison/TensorNormalization, DerivedComparisonData, RingedTensorCorner/Model/Edge/tensorComparison, TensorConstraints, RingedTensorEdge.projection, etaleSetPullback/lowerStar, leftDerivedUpperStarMonoidal and rightDerivedLowerStarProjectionMap. Every node clause is rendered: arbitrary CommRing Λ:Type(u+1), the common universe of the published etale declarations; small presentation via ULiftHom + Mathlib sheafCongr; C_T = literal restriction ⋙ site transport; u_et inverse/direct/adjunction pinned by eq/HEq; c unique via constants; fixed pullA/pushA/fixedAdj pinned to the published upperStar/lowerStar adjunction. The tensor identification is DerivedComparisonData (K-flat signed total, braiding' symmetry, unit). Left/right derived comparisons are pinned by localization and right-derived-unit squares, with AdjunctionSquare giving Hom bijection, unit and counit. delta^u goes to RingedPullbackTensorData (pure mu + TensorNormalization) and the tensor square with leftDerivedUpperStarMonoidal; delta = edge.tensorComparison. Models are pinned by ModelNormalized; TensorConstraints equal alpha_ and braiding'. PublishedProjectionSquare covers all unbounded E,L and assumes no invertibility. All existentials are Prop-valued or pinned, so nothing is free. Edge cases: Λ=0, u=id, Λ=ℤ, unbounded complexes, (1,1) Koszul sign. Records: statement verbatim, node statement unchanged, stmt_deps only gain def nodes, docstrings carry source and blueprint, no name clashes, first S2 delivery, no SGA, no pro-étale substitute. Advisories: RingedTensorEdge.projection is owned by theorem lem-weil-pbc-ringed-exchange-tensor-coherence (not a stmt_dep); new def nodes cite theorem owners lem-sfb-constant-scalar-restriction-tensor / lem-kun-inverse-image-monoidal (base stmt_deps, no def-node owner). No recompile: no file changed."
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-diagram-open-model-construction",
+ "kind": "statement",
+ "title": "Concrete open comparison models with shift identities",
+ "statement": "For every inverse coefficient-ring sequence C, τ and every pair of composable open immersions s:U→V and b:V→X, the specified structure OpenModels C τ s b is nonempty. Its witness is built from the canonical ordinary extension compositor, ordinary normalized open restriction, their exact-derived representatives, and their proved adjunct, normalization and shift equations. There are no boundedness or coefficient-flatness assumptions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence: open/clopen identifications before transposition; retains original item steps 4-6 and the intrinsic-equality part of step 7; agent-formulated chain/section-model refinement, not a theorem quoted from the blueprint"
+ },
+ "stmt_deps": [
+  "def-sf-diagram-system-operation-shifts",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing additive exact ordinary open functors. Define the ordinary compositor by leftAdjointCompIso and the restriction by its inverse followed by the inverse open unit. The adjunction conjugacy unit identity proves both normalization formulas. Apply derivedMate_comparison with the exact-derived hom-equivalence factorization to identify the localized compositor and inverse restriction with the specified jComp and restrictionIso. All representatives are actual natural transformations of whole systems.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-derived-mate-comparison",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Open/clopen comparisons; categorical adjunction and localization argument implemented by J5."
+   }
+  },
+  {
+   "text": "The ordinary and derived compositor and restriction identities from the first step, their termwise shift squares, and the exact-derived open adjunction shift identity give every field of OpenModels. Assemble the original concrete structure literal; this proves Nonempty (OpenModels C τ s b), including for identity and empty opens. The remaining direct-image/projector and identity calculations in this support file are the unchanged proofs used by the final clopen model.",
+   "uses": [
+    "lem-pur-exact-adjunction-unit-shift-descent",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Open/clopen comparisons; categorical adjunction and localization argument implemented by J5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-pur-derived-mate-comparison",
+  "lem-pur-exact-adjunction-unit-shift-descent",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "C2 stage 3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence: open/clopen identifications before transposition; retains original item steps 4-6 and the intrinsic-equality part of step 7; agent-formulated chain/section-model refinement, not a theorem quoted from the blueprint",
+  "note": "Compile-time module split. Existing construction formulas and helper proof bodies are retained; no proof hole is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Termwise exact open immersion extension by zero compositor compatibility with shifts",
+   "results": "8 hits including Ext and homological-complex shift/extension identities.",
+   "date": "2026-10-27",
+   "verdict": "Retain the existing exact-localization and adjunction proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso_fac",
+   "results": "0 hits; this source-library identifier is not in the Mathlib search index.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved project declaration already used by the original proof."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|CommShift",
+   "results": "25 hits including adjunction compositor equations and termwise complex shift instances.",
+   "date": "2026-10-27",
+   "verdict": "The unchanged proof uses these existing APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits: concrete open comparison models with their termwise and derived shift equations.",
+   "via": [
+    "lem-pur-diagram-open-clopen-shift-models",
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagramOpenClopenShiftOpenSupport",
+  "file": "lean/Sheaf/Paper/DiagramOpenClopenShiftOpenSupport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.openModels_nonempty",
+  "statement": "theorem openModels_nonempty {U V X : Scheme.{u}} (s : U ⟶ V) (b : V ⟶ X)\n    [IsOpenImmersion s] [IsOpenImmersion b] : Nonempty (OpenModels C τ s b)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
+ }
+}

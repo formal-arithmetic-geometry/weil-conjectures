@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-split-lie-module-classification",
+ "kind": "statement",
+ "title": "Exhaustiveness and absolute simplicity of rational highest-weight Lie modules",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra, def-wf-semisimple-lie-algebra], and let $\\mathfrak h$ be maximal abelian with all adjoint operators diagonalizable over $\\mathbf Q$. Use its root spaces, roots $R$, normalized coroot elements $h_\\alpha$, and a simple-root base $\\Delta=\\{\\alpha_1,\\ldots,\\alpha_r\\}$ as in [lem-sfb-split-semisimple-root-decomposition]; a base is a basis of $\\mathfrak h^\\vee$ in which roots have integer coordinates all of one sign. Let $P=\\{\\lambda\\in\\mathfrak h^\\vee:\\lambda(h_\\alpha)\\in\\mathbf Z\\text{ for every }\\alpha\\in R\\}$ and $P^+=\\{\\lambda\\in P:\\lambda(h_{\\alpha_i})\\geq0\\text{ for every }i\\}$. For each $\\lambda\\in P^+$ choose a simple module $L(\\lambda)$ and a cyclic highest vector as supplied by [lem-sfb-rational-highest-weight-modules]. A Lie module is a vector space with a linear action satisfying $[x,y]v=x(yv)-y(xv)$; a highest vector of weight $\\lambda$ is nonzero, has $hv=\\lambda(h)v$, and is killed by every positive root space. Simple means nonzero with no nonzero proper invariant subspace.\n\nEvery finite-dimensional $\\mathfrak g$-module over $\\mathbf Q$ is a finite direct sum of the $L(\\lambda)$. The modules $L(\\lambda)$ are pairwise nonisomorphic, every $\\mathfrak g$-linear endomorphism of $L(\\lambda)$ is a rational scalar, and every simple module containing a highest vector of weight $\\lambda$ is isomorphic to $L(\\lambda)$. Each $L(\\lambda)$ is absolutely simple, meaning its scalar extension to every field extension of $\\mathbf Q$ is simple. The highest-weight line in $L(\\lambda)$ is one-dimensional, and any vector killed by all positive root spaces is on that line. The ordinary simultaneous $\\mathfrak h$-eigenspaces of every finite-dimensional module form a finite direct sum decomposition with weights in $P$. The empty direct sum gives the zero module. When $\\mathfrak g=0$, the only simple module is $L(0)=\\mathbf Q$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.70 proof (a),(b),(d), printed pp.507--508: Weyl complete reducibility and the standard description of semisimple Lie representations; this node states the independent Lie-theoretic input, not the integration conclusion. Split rational highest-weight classification, uniqueness and absolute simplicity: Serre, Complex Semisimple Lie Algebras, Chapter VII (WANTED locally); rational form follows from the highest-weight construction."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "lem-sfb-split-semisimple-root-decomposition",
+  "lem-sfb-rational-highest-weight-modules"
+ ],
+ "proof": [
+  {
+   "text": "First prove complete reducibility over $\\mathbf Q$. The algebra $\\mathfrak g$ is perfect: [lem-sfb-split-semisimple-root-decomposition] says its coroots span $\\mathfrak h$, each coroot is a bracket of opposite root vectors, and $[h_\\alpha,x]=2x$ for $x\\in\\mathfrak g_\\alpha$. Thus both $\\mathfrak h$ and every root space lie in the span of brackets. The same argument covers $\\mathfrak g=0$. By [lem-sfb-perfect-lie-hyperplane-criterion] it suffices to split every simple invariant hyperplane $W$ in every finite-dimensional rational module $M$ for this fixed $\\mathfrak g$. Fix such $M,W$, and write $r:\\mathfrak g\\to\\operatorname{End}_{\\mathbf Q}(M)$ for the action.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-perfect-lie-hyperplane-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(a), printed p.507, Weyl input; Lemma 22.40, printed pp.476-477, in its Lie-module form. Perfectness follows directly from the supplied root brackets."
+   }
+  },
+  {
+   "text": "If $r=0$, any linear complement of $W$ is invariant. Otherwise let $\\mathfrak a=r(\\mathfrak g)$, a nonzero finite-dimensional rational Lie algebra with the commutator bracket. The map $r:\\mathfrak g\\twoheadrightarrow\\mathfrak a$ preserves brackets, so [lem-sfb-semisimple-lie-surjective-image] makes $\\mathfrak a$ semisimple. Its inclusion in $\\operatorname{End}_{\\mathbf Q}(M)$ is faithful. Hence [lem-sfb-faithful-semisimple-trace-form] gives a nondegenerate form $B(x,y)=\\operatorname{Tr}_M(xy)$ on $\\mathfrak a$. Choose a basis $x_1,\\ldots,x_d$ and its $B$-dual basis $x^1,\\ldots,x^d$, and define the actual endomorphism $c=\\sum_i x_i x^i$ of $M$. Here $d=\\dim\\mathfrak a>0$.",
+   "uses": [
+    "lem-sfb-semisimple-lie-surjective-image",
+    "lem-sfb-faithful-semisimple-trace-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 22c, The Casimir operator, printed p.475: pass to the image of a representation before defining its Casimir; Proposition 22.41, printed p.477."
+   }
+  },
+  {
+   "text": "Trace cyclicity [lem-pc-finite-dimensional-trace-cyclic] gives $B([z,x],y)+B(x,[z,y])=0$ by expanding the brackets. If $[z,x_i]=\\sum_j a_{ji}x_j$, pairing with the dual basis gives $[z,x^i]=-\\sum_j a_{ij}x^j$. Therefore\n$$[z,c]=\\sum_{i,j}a_{ji}x_jx^i-\\sum_{i,j}a_{ij}x_ix^j=0$$\nby interchanging $i,j$. Thus $c$ commutes with the action. The matrix definition [def-weil-endomorphism-trace] also gives $\\operatorname{Tr}_M(c)=\\sum_i B(x_i,x^i)=d$. These are finite sums over a rational basis; no integration to an algebraic group is used.",
+   "uses": [
+    "lem-pc-finite-dimensional-trace-cyclic",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 22c, printed p.475: the dual-basis Casimir commutation and trace calculation, written out in matrices."
+   }
+  },
+  {
+   "text": "The action on $M/W$ is zero: its endomorphisms are scalars, hence their commutators vanish, and $\\mathfrak g$ is perfect by step 1. Consequently every $x\\in\\mathfrak a$ maps $M$ into $W$, so $c(M)\\subseteq W$. In a basis adapted to $W$, the quotient block of $c$ is zero; hence $\\operatorname{Tr}_W(c|_W)=d\\ne0$. Put $a=c|_W$. This is a nonzero equivariant endomorphism of the simple module $W$, so its invariant kernel is zero. Since $W$ is finite-dimensional, $a$ is invertible. The map $p=a^{-1}c:M\\to W$ is equivariant and restricts to $1_W$. Thus $D=\\ker p$ is invariant and $M=W\\oplus D$, as seen from $m=p(m)+(m-p(m))$. This verifies the antecedent of [lem-sfb-perfect-lie-hyperplane-criterion]. It follows that every invariant subspace of every finite-dimensional rational $\\mathfrak g$-module has an invariant complement. Induct on dimension: in a nonzero module choose an invariant subspace of least positive dimension, which is simple, split it off and apply the induction hypothesis to its smaller complement. The zero-dimensional base is the empty sum. This gives a finite direct sum of simple rational modules.",
+   "uses": [
+    "lem-sfb-perfect-lie-hyperplane-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40 and Proposition 22.41, printed pp.476-477. The rational-field argument replaces scalar Schur by the invariant kernel and finite-dimensional invertibility of c restricted to W."
+   }
+  },
+  {
+   "text": "We next determine the ordinary Cartan weights without assuming them in advance. Fix any rational endomorphisms $E,F,H$ of a finite-dimensional space satisfying $[H,E]=2E$, $[H,F]=-2F$, $[E,F]=H$. By [lem-sfb-sl2-invariant-complement], repeated choice of a least-dimensional nonzero invariant subspace and splitting decomposes this space into simple modules for these three operators. Fix one such simple rational summand $S$. Over $\\overline{\\mathbf Q}$, the characteristic polynomial of $H$ has a root, giving an eigenvector $u\\ne0$. The nonzero vectors $E^ju$ have distinct $H$-eigenvalues $\\mu+2j$, by $HE^j=E^jH+2jE^j$, so finite dimension forces a last nonzero one. It is killed by $E$. Regard the three operators as a representation of the trace-zero $2$ by $2$ matrix Lie algebra, with standard $h=\\operatorname{diag}(1,-1)\\ne0$. Apply [lem-sfb-sl2-primitive-lowering-string] over $\\overline{\\mathbf Q}$ to this vector: its $H$-eigenvalue is an integer $n\\ge0$. The rational matrix system $(H-n)w=0$, $Ew=0$ therefore has a nonzero solution over $\\overline{\\mathbf Q}$. Gaussian elimination has the same pivots after a field extension, so it already has a nonzero rational solution $w\\in S$.",
+   "uses": [
+    "lem-sfb-sl2-invariant-complement",
+    "lem-sfb-sl2-primitive-lowering-string"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(d), printed pp.507-508, integral weight grading prerequisite. Explicit rank-one argument by Q80; primitive weight integrality is the existing Mathlib leaf (Sl2.lean, exists_nat)."
+   }
+  },
+  {
+   "text": "For this rational $w$, [lem-sfb-sl2-primitive-lowering-string] gives $F^iw\\ne0$ for $0\\le i\\le n$ and $EF^{i+1}w=(i+1)(n-i)F^iw$. The bracket $HF-FH=-2F$ gives $HF^iw=(n-2i)F^iw$ by induction. By [lem-sfb-sl2-primitive-string-vanishing], $F^{n+1}w=0$. Thus the span of $w,Fw,\\ldots,F^nw$ is nonzero and stable under all three operators. It equals $S$ by simplicity. Its spanning vectors are independent, being eigenvectors with distinct eigenvalues. Consequently $H$ is diagonalizable with integer eigenvalues on $S$, and therefore on the original direct sum. This proves the rank-one conclusion for every rational triple, including the zero action (where each simple summand has $n=0$).",
+   "uses": [
+    "lem-sfb-sl2-primitive-lowering-string",
+    "lem-sfb-sl2-primitive-string-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(d), printed pp.507-508, rank-one input; Mathlib/Algebra/Lie/Sl2.lean, primitive lowering formula and terminal vanishing (the two cited leaves)."
+   }
+  },
+  {
+   "text": "For an arbitrary finite-dimensional $\\mathfrak g$-module $V$, choose normalized simple-root triples $e_i,f_i,h_i$ using [lem-sfb-split-semisimple-root-decomposition]. Their actions satisfy step 5's three identities, so step 6 makes each $h_i$ diagonalizable over $\\mathbf Q$ with integer eigenvalues. The root pairing from that node and [lem-sfb-root-base-rational-integral-spans] show that the $h_i$ form a rational basis of $\\mathfrak h$ and every coroot is an integral combination of them. Since the $h_i$ commute, their eigenspace decompositions refine each other: the spectral projectors of $h_i$ are the polynomials $\\prod_{b\\ne a}(h_i-b)/(a-b)$ over its distinct eigenvalues, and commute with every $h_j$. Applying these finitely many commuting projectors gives a finite direct sum of common eigenspaces. A nonzero common eigenspace defines the linear weight $\\mu$ by its eigenvalues on the basis $h_i$. Since these eigenvalues are integers, evaluating on integral combinations proves $\\mu(h_\\alpha)\\in\\mathbf Z$ for every root, that is $\\mu\\in P$. The basis of $\\mathfrak h$ shows these are precisely its ordinary simultaneous eigenspaces.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-root-base-rational-integral-spans"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(d), printed pp.507-508, the P(root system)-gradation. Rational simultaneous spectral projections and integral coroot coordinates are spelled out."
+   }
+  },
+  {
+   "text": "Let $S$ be a nonzero finite-dimensional simple $\\mathfrak g$-module. Its finite weight set from step 7 has a maximal element $\\lambda$ for the order $\\mu\\le\\nu$ meaning $\\nu-\\mu\\in\\mathbf Z_{\\ge0}\\Delta$. This is a partial order by independence of $\\Delta$. For $v\\in S_\\lambda\\setminus\\{0\\}$ and $x\\in\\mathfrak g_\\alpha$, the identity $h(xv)=x(hv)+[h,x]v$ puts $xv$ in weight $\\lambda+\\alpha$. If $\\alpha$ is positive, maximality forces $xv=0$. For each simple triple, $h_i\\ne0$ since $\\alpha_i(h_i)=2$. Thus [lem-sfb-sl2-primitive-lowering-string], now with $A=\\mathfrak g$, gives $\\lambda(h_i)\\in\\mathbf Z_{\\ge0}$. Together with step 7, $\\lambda\\in P^+$. The invariant span of all products of elements of $\\mathfrak g$ applied to $v$ is nonzero, so equals $S$. The associative algebra $U$ and left ideal $I_\\lambda$ in [lem-sfb-verma-monomial-weight-basis] therefore give a surjection $M(\\lambda)\\to S$, $u+I_\\lambda\\mapsto uv$: each generator of $I_\\lambda$ kills $v$.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-sl2-primitive-lowering-string",
+    "lem-sfb-verma-monomial-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(b),(d), printed pp.507-508, standard Lie representation input. Agent expansion of the maximal-weight and explicit Verma quotient argument; Serre, Complex Semisimple Lie Algebras, Chapter VII, WANTED locally."
+   }
+  },
+  {
+   "text": "For any $\\eta$, the basis of [lem-sfb-verma-monomial-weight-basis] makes $M(\\eta)$ a direct sum of weight spaces, with top space $\\mathbf Qv_\\eta$ and all weights in $\\eta-\\mathbf Z_{\\ge0}\\Delta$. Every vector has finite weight support. If $N$ is an invariant proper subspace and $z\\in N$, choose $h\\in\\mathfrak h$ separating the distinct weights in that support together with $\\eta$. Such an $h$ exists over $\\mathbf Q$: the product of their nonzero pairwise differences is a nonzero polynomial, which cannot vanish at every rational point (induct on the number of variables). Lagrange interpolation in $h$ extracts the $\\eta$ component of $z$ and preserves $N$. That component must be zero, or $N$ contains $v_\\eta$ and hence all of $M(\\eta)$. The sum $J$ of all proper invariant subspaces thus has zero top component and is proper. It contains every proper subspace, so is the unique maximal one. The kernel of every simple quotient is maximal and hence equals $J$. Apply this to step 8's quotient $S$ and the chosen simple cyclic $L(\\lambda)$ of [lem-sfb-rational-highest-weight-modules]: both are $M(\\lambda)/J$. This also proves that any simple module, even if initially not assumed finite-dimensional, with a highest vector of weight $\\lambda$ is isomorphic to $L(\\lambda)$, because that vector generates it. The top weight space of $L(\\lambda)$ is one-dimensional, being the nonzero image of the top space of $M(\\lambda)$; no other weight maps into that space, by the same finite-support projectors.",
+   "uses": [
+    "lem-sfb-verma-monomial-weight-basis",
+    "lem-sfb-rational-highest-weight-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(b),(d), printed pp.507-508; explicit rational Verma simple-quotient proof supplied by Q80. Serre, Complex Semisimple Lie Algebras, Chapter VII, WANTED locally."
+   }
+  },
+  {
+   "text": "Write $Z=\\{w\\in L(\\lambda):\\mathfrak n^+w=0\\}$. It is preserved by $\\mathfrak h$: for a positive root vector $x$, $x(hw)=h(xw)-[h,x]w=0$. Thus the finite spectral projectors from step 7 show $Z$ is a sum of its ordinary weight spaces. If $0\\ne w\\in Z$ has weight $\\mu$, simplicity says it generates $L(\\lambda)$. The same left-ideal argument gives a surjection $M(\\mu)\\to L(\\lambda)$. By [lem-sfb-verma-monomial-weight-basis], its target has weights in $\\mu-\\mathbf Z_{\\ge0}\\Delta$, so the occurring weight $\\lambda$ satisfies $\\lambda\\le\\mu$. On the other hand, [lem-sfb-rational-highest-weight-modules] puts every weight of $L(\\lambda)$ below $\\lambda$, so $\\mu\\le\\lambda$. Hence $\\mu=\\lambda$. Step 9's multiplicity-one result now gives $Z=L(\\lambda)_\\lambda=\\mathbf Qv_\\lambda$.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-verma-monomial-weight-basis",
+    "lem-sfb-rational-highest-weight-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(b),(d), printed pp.507-508, highest-weight input. Agent argument via the two opposite Verma cone inequalities, not an assertion about algebraic group invariants."
+   }
+  },
+  {
+   "text": "An isomorphism $L(\\lambda)\\to L(\\mu)$ sends the common positive-root kernel onto the corresponding kernel and preserves the $\\mathfrak h$-action. By step 10 these are lines of weights $\\lambda,\\mu$, so $\\lambda=\\mu$. Conversely the fixed choice is the same module when the weights agree. Every equivariant endomorphism of $L(\\lambda)$ preserves its top line and hence sends $v_\\lambda$ to $a v_\\lambda$ for some $a\\in\\mathbf Q$. It then agrees with $a$ times the identity on every product $x_1\\cdots x_t v_\\lambda$, which span the module. Thus its endomorphisms are exactly rational scalars.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent consequences of steps 9-10 and the cyclicity already supplied; scalar a=0 is included."
+   }
+  },
+  {
+   "text": "Let $K/\\mathbf Q$ be any field extension. Tensor the ordinary weight decomposition of $L=L(\\lambda)$ to obtain $L_K=\\bigoplus_\\mu K\\otimes L_\\mu$. A rational element of $\\mathfrak h$ separating this finite weight set still separates it over $K$, so the same Lagrange projectors show any $\\mathfrak g_K$-invariant $K$-subspace is a direct sum of its intersections with these spaces. Choose a finite rational basis $x_1,\\ldots,x_N$ of $\\mathfrak n^+$ using [lem-sfb-split-semisimple-root-decomposition]. Its common kernel is the kernel of the single rational matrix $L\\to L^N$, $w\\mapsto(x_jw)_j$. Row reduction over $\\mathbf Q$ computes that kernel; its pivots stay nonzero over $K$, so its kernel after extension is $K\\otimes Z=Kv_\\lambda$ by step 10. If $W\\subset L_K$ is a nonzero invariant subspace, choose a maximal weight among its nonzero weight intersections. Any nonzero vector in that intersection is killed by every positive root space, by the root-weight shift calculation in step 8. It lies in $Kv_\\lambda$, so $W$ contains $v_\\lambda$. The cyclic products from [lem-sfb-rational-highest-weight-modules] still span after tensoring, giving $W=L_K$. Also $L_K\\ne0$, since $v_\\lambda$ is part of a rational basis and remains nonzero. This proves absolute simplicity for arbitrary, including transcendental, field extensions.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-rational-highest-weight-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70(b),(d), printed pp.507-508, split rational highest-weight input; explicit finite-matrix scalar-extension proof by Q80. No algebraic-closedness or semisimplicity of the extended module is assumed."
+   }
+  },
+  {
+   "text": "The finite simple-summand decomposition from step 4 and steps 8-9 express every finite-dimensional module as a finite direct sum of the selected $L(\\lambda)$. Steps 7 and 9-12 prove every other asserted clause. For the zero module use the empty sum. If $\\mathfrak g=0$, then $\\mathfrak h=0$ and $R=\\Delta=\\varnothing$, so $P=P^+=\\{0\\}$. Every subspace is invariant; a nonzero simple module must have dimension one. The specified choice [lem-sfb-rational-highest-weight-modules] is $L(0)=\\mathbf Q$, its highest line and positive-root kernel are its whole space, and extension to $K$ gives the one-dimensional simple trivial module $K$.",
+   "uses": [
+    "lem-sfb-rational-highest-weight-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly; Theorem 23.70(a),(b),(d), printed pp.507-508; rank-zero convention in the existing rational highest-weight construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-semisimple-root-decomposition",
+  "lem-sfb-perfect-lie-hyperplane-criterion",
+  "lem-sfb-semisimple-lie-surjective-image",
+  "lem-sfb-faithful-semisimple-trace-form",
+  "lem-pc-finite-dimensional-trace-cyclic",
+  "def-weil-endomorphism-trace",
+  "lem-sfb-sl2-invariant-complement",
+  "lem-sfb-sl2-primitive-lowering-string",
+  "lem-sfb-sl2-primitive-string-vanishing",
+  "lem-sfb-root-base-rational-integral-spans",
+  "lem-sfb-verma-monomial-weight-basis",
+  "lem-sfb-rational-highest-weight-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.70 proof (a),(b),(d), printed pp.507-508; Section 22c, Casimir operator, Lemma 22.40 and Proposition 22.41, printed pp.475-477. Expanded rational Lie-module, Verma-quotient and arbitrary-field scalar-extension arguments by Q80; Serre Chapter VII WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional module of a split semisimple Lie algebra in characteristic zero is a direct sum of absolutely simple highest weight modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a nilpotent Lie algebra $ \\\\mathfrak{g} $, the supremum (sum) of all generalized weight spaces $ \\\\text{Gen}_\\\\chi(M) $ associated to weights $ \\\\chi $ equals \"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a commutative ring $ K $, the supremum (sum) of all generalized weight spaces associated to weight functions $ \\\\chi : L \\\\to K $ equals the entire module $ \"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {L : Type u_2} [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [LieModule.IsTriangularizable k L V] (A : LieIde\", \"doc\": \"Let $ V $ be a triangularizable Lie module over a Lie algebra $ \\\\mathfrak{g} $ over a field $ k $. If $ A $ is a coatom Lie ideal of $ \\\\mathfrak{g} $ (i.e., a maximal proper Lie ideal) and the weight \"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (L : Type u_2) [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] (V : Type u_3)\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [Nontrivial V] [LieAlgebra.IsSolvable L] [LieMod\", \"doc\": \"Let $\\\\mathfrak{g}$ be a solvable Lie algebra over a field $k$, and let $V$ be a triangularizable $\\\\mathfrak{g}$-module. Then there exists a linear functional $\\\\chi \\\\in \\\\mathfrak{g}^*$ (the dual space \"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"For any non-empty type $\\\\iota$, the Lie module structure on the space of functions $b.\\\\text{support} \\\\oplus \\\\iota \\\\to K$ over the Geck-constructed Lie algebra $\\\\mathfrak{g}_b$ associated to the root p\"}\n  {\"name\": \"LieModule.finite_genWeightSpace_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"If $ M $ is a Noetherian $ R $-module over a nilpotent Lie algebra $ \\\\mathfrak{g} $, then the set of weight functions $ \\\\chi : \\\\mathfrak{g} \\\\to R $ for which the generalized weight space $ \\\\text{Gen}_\"}\n  {\"name\": \"LieModule.iSup_genWeightSpaceOf_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [LieModule.IsTriangularizable R L M] (x : L),\", \"doc\": \"For a triangularizable Lie module $ M $ over a commutative ring $ R $ with nilpotent Lie algebra $ \\\\mathfrak{g} $, and for any element $ x \\\\in \\\\mathfrak{g} $, the supremum (sum) of all generalized wei\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieModule\", \"IsSemisimple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "grep",
+   "query": "highestWeight|highest_weight|Weyl.*[Tt]heorem|[Cc]omplete.*[Rr]educib",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"34\", \"text\": \"- `SemistandardYoungTableau.highestWeight (μ : YoungDiagram)`: the semistandard Young tableau whose\"}\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"130\", \"text\": \"def highestWeight (μ : YoungDiagram) : SemistandardYoungTableau μ where\"}\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"139\", \"text\": \"theorem highestWeight_apply {μ : YoungDiagram} {i j : ℕ} :\"}\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"140\", \"text\": \"    highestWeight μ i j = if (i, j) ∈ μ then i else 0 :=\"}\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"144\", \"text\": \"  ⟨highestWeight μ⟩\"}\n  {\"file\": \"Mathlib/Geometry/Convex/Cone/DualFinite.lean\", \"line\": \"21\", \"text\": \"In finite dimensional vector spaces, `FG` is equivalent to `DualFG` by the Minkowski-Weyl theorem.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple modules of a split semisimple rational Lie algebra are classified by dominant integral highest weights and have scalar endomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_end\", \"module\": \"Mathlib.RingTheory.SimpleModule.WedderburnArtin\", \"type\": \":\\n  ∃ (n : ℕ) (S : Fin n → Submodule R M) (d : Fin n → ℕ),\\n    (∀ i, IsSimpleModule R (S i)) ∧\\n      (∀ i, NeZero (d i)) ∧ Nonempty (End R M ≃+* Π i, Matrix (Fin (d i)) (Fin (d i)) (End R (S i)))\", \"doc\": \"If $ M $ is a semisimple module over a ring $ R $, then there exist natural numbers $ n $ and $ d_1, \\\\ldots, d_n $, and simple submodules $ S_1, \\\\ldots, S_n $ of $ M $, such that the endomorphism ring\"}\n  {\"name\": \"IsSemisimpleModule.exists_end_ringEquiv\", \"module\": \"Mathlib.RingTheory.SimpleModule.WedderburnArtin\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : Type v) [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsSemisimpleModule R M]\\n  [Module.Finite R M],\\n  ∃ n S d,\\n    (∀ (i : Fin n), IsSimpleModule R ↥(S i)) ∧\\n      (∀ (i : Fin n), NeZero (d i)) ∧\\n        Nonempty (Module.End R M ≃+* ((i : Fin n) → Matrix (Fin \", \"doc\": \"Let $R$ be a ring and $M$ be a finitely generated semisimple $R$-module. Then the endomorphism ring $\\\\text{End}_R(M)$ is isomorphic to a finite product of matrix rings. Specifically, there exist simpl\"}\n  {\"name\": \"IsSemisimpleModule\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"(R : Type u_2) → [inst : Ring R] → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"A module $ M $ over a ring $ R $ is semisimple if it is a direct sum of simple submodules, where a simple submodule has no nontrivial proper submodules.\"}\n  {\"name\": \"IsSemisimpleModule.exists_end_algEquiv\", \"module\": \"Mathlib.RingTheory.SimpleModule.WedderburnArtin\", \"type\": \"∀ (R₀ : Type u_1) (R : Type u) [inst : CommSemiring R₀] [inst_1 : Ring R] [inst_2 : Algebra R₀ R] (M : Type v)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R₀ M] [inst_5 : Module R M] [inst_6 : IsScalarTower R₀ R M]\\n  [IsSemisimpleModule R M] [Module.Finite R M],\\n  ∃ n S d,\\n    (∀ (i : Fin n), IsSim\", \"doc\": \"Let $ R_0 $ be a commutative semiring, $ R $ a ring equipped with an $ R_0 $-algebra structure, and $ M $ a finite semisimple $ R $-module. Then there exist a natural number $ n $, a family $ (S_i)_{i\"}\n  {\"name\": \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end\", \"module\": \"Mathlib.RingTheory.SimpleModule.WedderburnArtin\", \"type\": \":\\n  ∃ (n : ℕ) (S : Fin n → Submodule R M) (d : Fin n → ℕ),\\n    (∀ i, IsSimpleModule R (S i)) ∧\\n      (∀ i, NeZero (d i)) ∧ Nonempty (End R M ≃ₐ[R₀] Π i, Matrix (Fin (d i)) (Fin (d i)) (End R (S i)))\", \"doc\": \"If $ M $ is a semisimple $ R $-module, then its endomorphism ring $ \\\\mathrm{End}_R(M) $ is isomorphic to a product of matrix algebras over the endomorphism rings of its simple submodules. Specifically\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsSimple R L] : IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"IsSemisimpleRing.isSemisimpleModule\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"[IsSemisimpleRing R] : IsSemisimpleModule R M\", \"doc\": \"Every module over a semisimple ring is a semisimple module. Specifically, if $ R $ is a semisimple ring, then any $ R $-module $ M $ decomposes as a direct sum of simple submodules, where a simple sub\"}\n  {\"name\": \"instIsSemisimpleModuleOfIsSimpleModule\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"[IsSimpleModule R M] : IsSemisimpleModule R M\", \"doc\": \"Any simple module over a ring $ R $ is a semisimple module, since a simple module (having no nontrivial proper submodules) can be expressed as a direct sum of simple submodules (itself).\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All representations of a split semisimple Lie algebra have ordinary integral Cartan weights",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.instLinearWeightsOfCharZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a commutative ring $ R $ with characteristic zero, a nilpotent Lie algebra $ L $ over $ R $, and an abelian group $ M $ equipped with compatible $ R $-module and Lie module structures over $ L $, \"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"LieSubalgebra.root\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} → [inst_4 : H.IsCartanSubalgebra] → Finset (LieModule.Weight K (↥H) L)\", \"doc\": \"The finite set of non-zero weights $\\\\alpha \\\\in \\\\text{Weight}(K, \\\\mathfrak{h}, \\\\mathfrak{g})$ associated with the Lie subalgebra $\\\\mathfrak{h}$, where each weight $\\\\alpha$ satisfies $\\\\alpha \\\\neq 0$ (i.\"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieAlgebra.IsKilling.chainTopCoeff_zero_right\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_6 : H.IsCartanSubalgebra]\\n  [LieModule.IsTriangularizable K (↥H) L] (α : LieModule.Weight \", \"doc\": \"For a non-trivial Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, and for any non-zero linear functional $\\\\alpha \\\\in \\\\mathfrak{g}^*$, the top coefficient in the chain ass\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system associated with a Lie algebra over a field via its non-degenerate Killing form is reduced. Specifically, for a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a Cartan subalgebra $\\\\ma\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"LieAlgebra.IsKilling.chainBotCoeff_zero_right\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_6 : H.IsCartanSubalgebra]\\n  [LieModule.IsTriangularizable K (↥H) L] (α : LieModule.Weight \", \"doc\": \"For a non-trivial Lie algebra $ L $ and a non-zero linear functional $ \\\\alpha: L \\\\to R $, the coefficient $ \\\\text{chainBotCoeff}(\\\\alpha, 0) $ associated with the zero weight in the chain of generalize\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional rational representations of split semisimple Lie algebras are completely reducible with absolutely simple highest weight constituents",
+   "results": "8 hits including RootPairing.GeckConstruction.instIsIrreducible, LieModule.instIsTriangularizableOfIsAlgClosed, LieAlgebra.IsKilling.instSemisimple and generalized-weight spanning lemmas.",
+   "date": "2026-10-24",
+   "verdict": "no match: Geck adjoint-module irreducibility and generalized nilpotent weights do not give all rational modules or highest-weight classification."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieModule, \"semisimple\"",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "highestWeight|highest_weight|complete.?reducib|Whitehead",
+   "results": "OK, 0 hits in Mathlib/Algebra/Lie.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Highest weights classify simple modules of split semisimple Lie algebras over rational numbers",
+   "results": "8 hits: LieModule.Weight.mk.congr_simp, LieAlgebra.IsKilling.span_weight_eq_top, LieModule.LinearWeights.mk, LieModule.Weight.mk, LieModule.instLinearWeightsOfIsLieAbelian, LieModule.weightSpace.congr_simp, LieModule.instLinearWeightsOfCharZero, LieModule.Weight.",
+   "date": "2026-10-24",
+   "verdict": "no match: these construct or compare weights; they do not classify simple representations or prove complete reducibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-charzero-lie-group-integration",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Theorem 23.70 proof (a),(b),(d), printed pp.507--508: Weyl complete reducibility and the standard description of semisimple Lie representations; this node states the independent Lie-theoretic input, not the integration conclusion. Split rational highest-weight classification, uniqueness and absolute simplicity: Serre, Complex Semisimple Lie Algebras, Chapter VII (WANTED locally); rational form follows from the highest-weight construction.",
+   "via": [
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-lie-module-classification",
+  "worker": "stage1",
+  "summary": "Proved the unchanged classification in thirteen explicit steps using existing DAG nodes only. Casimir plus the perfect-Lie hyperplane criterion gives rational complete reducibility. Existing sl2 complements and primitive-string leaves give ordinary integral weights, followed by unique simple Verma quotient, singular-line uniqueness, scalar endomorphisms and an arbitrary-extension finite-matrix proof of absolute simplicity. No new nodes, no integration theorem used, no Lean written or compiled. Read every cited statement and saved verbatim quotations.",
+  "blueprint": "The existing blueprint.from.place chain supports the highest-weight Lie input to Milne 23.70 used by lem-sfb-split-charzero-lie-group-integration, ultimately det-thm-sf-ctf-stability-direct-images proof (3). The ancestor command returns null for this legacy-created chain; preserve it and the existing via list. Searched the current latest blueprint and all blueprint-indexed nodes: no equivalent highest-weight classification node. Steps 1-4 realize Weyl input in 23.70(a); steps 5-10 the integral weight grading and simple classification in (b),(d); steps 11-13 its scalar/absolute-simplicity consequences."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-44955433b",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-44955433b (reviewer sub-agent of L); spot-checked: I read the item, all 13 steps and every cited node's statement in full, plus Milne at Lemma 22.40, Prop 22.41 (pp.476-477) and Thm 23.70 (pp.507-508). The delivery adds no new nodes and leaves the statement and stmt_deps unchanged. Steps 1-4 (complete reducibility over Q): perfectness follows from the coroots spanning h together with x=1/2[h_a,x]. The image algebra a=r(g) is semisimple (surjective-image node) and has a nondegenerate trace form (faithful-trace-form node). I checked the Casimir commutation (dual-basis signs) and Tr c=dim a. Because g is perfect it acts as zero on the 1-dimensional M/W, so c(M) is inside W. Then c restricted to W is nonzero and invertible on the simple W, which replaces Milne's algebraically-closed Schur step validly over Q. The perfect-Lie hyperplane criterion and the induction on dimension finish this part. Steps 5-7: the sl2-invariant-complement node applies with no nilpotence or diagonalizability assumed. The lowering-string leaf over Qbar gives an integer eigenvalue, and row reduction gives a rational primitive vector. The string-vanishing leaf closes the string, so H is diagonalizable with integer eigenvalues. root-base-rational-integral-spans gives integral weights in P. Steps 8-12: a maximal weight gives a dominant highest vector and a surjection from M(lambda) (I checked the generators of the left ideal). In the Verma module the finite-support Lagrange projectors show the sum of proper submodules is proper, so the simple quotient is unique. Both inequalities lambda<=mu<=lambda pin the singular line. Scalar endomorphisms follow from cyclicity. Absolute simplicity holds for arbitrary K because the rational matrix kernel commutes with extension. I checked the edge cases g=0, r=0, M=0, lambda on walls, infinite-dimensional Verma modules and transcendental K. The closure has no cycle and no integration. Route: all cited statements are in sk-thm-sf-ctf-stability, apart from a Mathlib leaf (trace cyclicity) and a trace definition, so no tool_uses are needed. Possible duplicates: char-zero-complete-reducibility and scalar-endomorphisms-absolute-simplicity concern group schemes, not Q-Lie modules. Batch-5: perfect-lie-hyperplane-criterion and sl2-invariant-complement reach sec-trace-formula only through the Mathlib linear-algebra leaves lem-trf-finite-dimensional-short-exact-dimension (ModuleCat.free_shortExact_finrank_add) and lem-trf-vector-subspace-complement. These are general facts, not given by either assumption and not steps of the trace-formula or Poincare-duality proofs, so the citations are acceptable. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.SplitLieModuleClassification",
+  "declaration": "LieAlgebra.split_lie_module_classification",
+  "file": "lean/Sheaf/Algebra/Lie/SplitLieModuleClassification.lean",
+  "statement": "theorem split_lie_module_classification (g : Type u) [LieRing g] [LieAlgebra ℚ g] [FiniteDimensional ℚ g] [HasTrivialRadical ℚ g] (H : LieSubalgebra ℚ g) [IsLieAbelian H] (hmax : ∀ A : LieSubalgebra ℚ g, H ≤ A → IsLieAbelian A → A = H) (hsplit : ∀ h : H, (⨆ a : ℚ, (ad ℚ g (h : g)).eigenspace a) = ⊤) (R : Set (Module.Dual ℚ H)) (hR : ∀ α : Module.Dual ℚ H, α ∈ R ↔ α ≠ 0 ∧ LieModule.weightSpace g (α : H → ℚ) ≠ ⊥) (c : R → H) (hc : ∀ α : R, (c α : g) ∈ Submodule.span ℚ {z : g | ∃ x y : g, x ∈ LieModule.weightSpace g (α.1 : H → ℚ) ∧ y ∈ LieModule.weightSpace g ((-α.1) : H → ℚ) ∧ ⁅x, y⁆ = z} ∧ α.1 (c α) = 2) (Δ : Finset R) (b : Module.Basis Δ ℚ (Module.Dual ℚ H)) (hb : ∀ i : Δ, b i = i.1.1) (hcoords : ∀ α : R, (∃ n : Δ → ℕ, α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1) ∨ (∃ n : Δ → ℕ, -α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1)) (P : Submodule ℤ (Module.Dual ℚ H)) (hP : ∀ μ : Module.Dual ℚ H, μ ∈ P ↔ ∀ α : R, ∃ n : ℤ, μ (c α) = (n : ℚ)) (D : Set P) (hD : ∀ lam : P, lam ∈ D ↔ ∀ i : Δ, 0 ≤ (lam : Module.Dual ℚ H) (c i)) (L : D → Type v) [∀ lam : D, AddCommGroup (L lam)] [∀ lam : D, Module ℚ (L lam)] [∀ lam : D, LieRingModule g (L lam)] [∀ lam : D, LieModule ℚ g (L lam)] [∀ lam : D, FiniteDimensional ℚ (L lam)] [∀ lam : D, LieModule.IsIrreducible ℚ g (L lam)] (vtop : ∀ lam : D, L lam) (hvtop : ∀ lam : D, vtop lam ≠ 0 ∧ (∀ h : H, ⁅(h : g), vtop lam⁆ = (lam.1 : Module.Dual ℚ H) h • vtop lam) ∧ (∀ α : R, (∃ n : Δ → ℕ, α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1) → ∀ x : g, x ∈ LieModule.weightSpace g (α.1 : H → ℚ) → ⁅x, vtop lam⁆ = 0) ∧ LieSubmodule.lieSpan ℚ g ({vtop lam} : Set (L lam)) = ⊤) : (∀ (V : Type w) [AddCommGroup V] [Module ℚ V] [LieRingModule g V] [LieModule ℚ g V] [FiniteDimensional ℚ V], ∃ (n : ℕ) (lam : Fin n → D) (N : Fin n → LieSubmodule ℚ g V), DirectSum.IsInternal (fun i : Fin n ↦ (N i).toSubmodule) ∧ (∀ i : Fin n, Nonempty (N i ≃ₗ⁅ℚ,g⁆ L (lam i)))) ∧ (∀ lam mu : D, Nonempty (L lam ≃ₗ⁅ℚ,g⁆ L mu) ↔ lam = mu) ∧ (∀ (lam : D) (f : L lam →ₗ⁅ℚ,g⁆ L lam), ∃ a : ℚ, ∀ m : L lam, f m = a • m) ∧ (∀ (lam : D) (S : Type w) [AddCommGroup S] [Module ℚ S] [LieRingModule g S] [LieModule ℚ g S] [LieModule.IsIrreducible ℚ g S] (v : S), v ≠ 0 → (∀ h : H, ⁅(h : g), v⁆ = (lam.1 : Module.Dual ℚ H) h • v) → (∀ α : R, (∃ n : Δ → ℕ, α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1) → ∀ x : g, x ∈ LieModule.weightSpace g (α.1 : H → ℚ) → ⁅x, v⁆ = 0) → Nonempty (S ≃ₗ⁅ℚ,g⁆ L lam)) ∧ (∀ (lam : D) (K : Type t) [Field K] [Algebra ℚ K], LieModule.IsIrreducible K (K ⊗[ℚ] g) (K ⊗[ℚ] L lam)) ∧ (∀ lam : D, Module.finrank ℚ (LieModule.weightSpace (L lam) ((lam.1 : Module.Dual ℚ H) : H → ℚ)) = 1 ∧ (LieModule.weightSpace (L lam) ((lam.1 : Module.Dual ℚ H) : H → ℚ)).toSubmodule = Submodule.span ℚ {vtop lam} ∧ ∀ m : L lam, (∀ α : R, (∃ n : Δ → ℕ, α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1) → ∀ x : g, x ∈ LieModule.weightSpace g (α.1 : H → ℚ) → ⁅x, m⁆ = 0) → m ∈ Submodule.span ℚ {vtop lam}) ∧ (∀ (V : Type w) [AddCommGroup V] [Module ℚ V] [LieRingModule g V] [LieModule ℚ g V] [FiniteDimensional ℚ V], ∃ Ω : Finset (Module.Dual ℚ H), (∀ μ ∈ Ω, μ ∈ P ∧ LieModule.weightSpace V (μ : H → ℚ) ≠ ⊥) ∧ DirectSum.IsInternal (fun μ : Ω ↦ (LieModule.weightSpace V (μ.1 : H → ℚ)).toSubmodule)) ∧ (Subsingleton g → (∀ lam : D, ∃ e : L lam ≃ₗ[ℚ] ℚ, e (vtop lam) = 1 ∧ ∀ (x : g) (m : L lam), ⁅x, m⁆ = 0) ∧ ∀ (S : Type w) [AddCommGroup S] [Module ℚ S] [LieRingModule g S] [LieModule ℚ g S] [LieModule.IsIrreducible ℚ g S], Nonempty (S ≃ₗ[ℚ] ℚ))",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-252f1185e",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim equal to the file signature; one theorem, one sorry, no defs; source/blueprint docstrings with all 13 steps; report has Worker report and Second reading by Q79. Hypotheses (HasTrivialRadical, hmax, per-element ad eigenspace splitting, R/hR, coroots c/hc as bracket-span with value 2, basis Δ with sign-coherent N-coordinates, P/hP, D/hD, chosen irreducible fin-dim L with cyclic highest vtop) match the node and the binders of exists_splitSemisimple_rootDecomposition / exists_rational_highestWeight_module, with nothing stronger. All 8 conjuncts match: complete reducibility via IsInternal of Lie submodules iso to L(lam_i); pairwise non-iso iff; rational scalar endomorphisms; uniqueness for arbitrary irreducible S with a highest vector; absolute irreducibility over every field K via Mathlib BaseChange instances; top weight line of finrank 1 equal to span vtop, plus the n+ kernel; ordinary weight decomposition with weights in P; Subsingleton g case. Edge cases (g=0, zero module, n=0, zero endomorphism, transcendental K) and independent universes u,v,w,t checked. No new defs, no H4 duplicate. Not recompiled per instruction."
+ }
+}

@@ -1,0 +1,242 @@
+{
+ "id": "lem-a1-space-finite-affine-subatlas",
+ "kind": "statement",
+ "title": "Finite affine component subatlases of quasi-compact point spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Z$ be an algebraic space over $S$ [def-trf-algebraic-space], and give $|Z|$ its field-valued point classes and atlas topology [def-a1-space-point-topology]. Suppose $|Z|$ is quasi-compact, meaning that every open covering has a finite subcover. For any representable surjective etale atlas $p:h_U\\to Z$ with $U=\\coprod_{d\\in D}U_d$ a set-indexed disjoint union of affine $S$-schemes, there is a finite subset $D_0\\subseteq D$ such that the open subscheme $U'=\\coprod_{d\\in D_0}U_d\\subseteq U$ is quasi-compact and $p|_{U'}:h_{U'}\\to Z$ is representable surjective etale. Open subschemes use [def-weil-open-immersion]; the coproduct has its usual scheme topology, in which its summands are pairwise disjoint open subschemes covering $U$. This includes $Z=\\varnothing$, when $D_0=\\varnothing$ is permitted and $U'$ is the empty quasi-compact scheme. Independently, for any continuous morphism on point spaces $|B|\\to|C|$ induced by a morphism of algebraic spaces $B\\to C$, if it is surjective and $|B|$ is quasi-compact, then $|C|$ is quasi-compact. In particular any representable surjective etale atlas from a quasi-compact scheme has quasi-compact target point space.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03E4 (lemma-quasi-compact-space), finite-subcover construction and continuous-surjection implication; Tag 03FX (lemma-cover-by-union-affines), disjoint affine atlas."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-open-immersion",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "For the given atlas p, use lem-a1-space-affine-etale-cover to identify the existing final point topology with the atlas topology and obtain that schemePointMap p is open. Scheme-test surjectivity gives surjectivity of schemePointMap p directly: test on a field-valued representative, choose a point of the surjective scheme test, and use its residue field to compare classes. Residue-field functoriality proves schemePointMap (yoneda.map i ≫ p) = schemePointMap p ∘ i on ordinary scheme points.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E4 (lemma-quasi-compact-space), finite-subcover construction and continuous-surjection implication; Tag 03FX (lemma-cover-by-union-affines), disjoint affine atlas."
+   }
+  },
+  {
+   "text": "The images schemePointMap p (V d) are open and cover |Z|, since p is point-surjective and the given opens cover U. Apply Mathlib IsCompact.elim_finite_subcover to the compact whole point space. Let D₀ be the resulting finite set and W the open supremum of V d for d in D₀. Every point class has a preimage in W by the finite-subcover inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E4 (lemma-quasi-compact-space), finite-subcover construction and continuous-surjection implication; Tag 03FX (lemma-cover-by-union-affines), disjoint affine atlas."
+   }
+  },
+  {
+   "text": "The finite union W is compact: each V d is compact by lem-weil-pbc-affine-scheme-qcqs, and Mathlib Set.Finite.isCompact_biUnion proves compactness of their finite union. The carrier of W.toScheme is that subtype. This works for an empty chosen set without a nonemptiness assumption; disjointness is not needed for compactness of a finite union.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E4 (lemma-quasi-compact-space), finite-subcover construction and continuous-surjection implication; Tag 03FX (lemma-cover-by-union-affines), disjoint affine atlas."
+   }
+  },
+  {
+   "text": "The inclusion W.ι is an open immersion and hence etale. Scheme pullbacks and Yoneda transport show that yoneda.map of an etale scheme morphism is representable etale; compose with p using isEtale_comp. Regard W.toScheme over S as its existing representable algebraic space using def-trf-scheme-algebraic-space. The representable point-surjectivity criterion in lem-a1-space-point-open-calculus then turns the point-surjectivity from the finite subcover into IsSurjective for the restricted map. A scheme point y supplies the class of its residue field in h_W, so the ordinary scheme-source surjectivity suffices for that criterion.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-trf-scheme-algebraic-space",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 03E4 (lemma-quasi-compact-space), restriction of the atlas; Tags 02GP (lemma-open-immersion-etale) and 02GN (lemma-composition-etale)."
+   }
+  },
+  {
+   "text": "For the independent continuous-surjection assertion, install the given CompactSpace instance and apply Mathlib Function.Surjective.compactSpace, the range-image specialization of lem-weil-pbc-continuous-image-quasi-compact. For a scheme atlas, continuity follows directly from its term in the supremum defining pointTopologicalSpace; the residue-field argument of step 1 supplies surjectivity. Apply the same Mathlib theorem to the compact scheme. No algebraic-space compactness instance on the representable point classes is needed.",
+   "uses": [
+    "lem-weil-pbc-continuous-image-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E4 (lemma-quasi-compact-space), finite-subcover construction and continuous-surjection implication; Tag 03FX (lemma-cover-by-union-affines), disjoint affine atlas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-trf-scheme-algebraic-space",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-continuous-image-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03E4 (lemma-quasi-compact-space), finite-subcover construction and continuous-surjection implication; Tag 03FX (lemma-cover-by-union-affines), disjoint affine atlas.; Lean realization by Q4, using Mathlib finite subcovers, finite compact unions, and the existing point-surjectivity criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For any algebraic space with compact underlying point space every etale atlas which is a disjoint union of affine schemes has a finite union of components that is a quasicompact surjective etale atlas",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{U : Set X} : IsCompact U ∧ IsOpen U ↔ ∃ s : Set X.affineOpens, s.Finite ∧ U = ⋃ i ∈ s, i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both quasi-compact and open if and only if there exists a finite collection $ s $ of affine open subsets of $ X $ such that $ U $ is the union of all elements in $ \"}\n  {\"name\": \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{U : X.Opens} : IsCompact (X := X) U ↔ ∃ s : Set X.affineOpens, s.Finite ∧ U = ⨆ i ∈ s, (i : X.Opens)\", \"doc\": \"An open subset $ U $ of a scheme $ X $ is quasi-compact if and only if there exists a finite set $ S $ of affine open subsets of $ X $ such that $ U $ equals the union of all elements in $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"[QuasiCompactCover 𝒰] {U : S.Opens} (hU : IsCompact (U : Set S)) :\\n  ∃ (n : ℕ) (f : Fin n → 𝒰.I₀) (V : ∀ i, (𝒰.X (f i)).Opens), (∀ i, IsAffineOpen (V i)) ∧ ⋃ i, 𝒰.f (f i) '' (V i) = U\", \"doc\": \"For any quasi-compact hypercover $\\\\mathcal{U}$ of a scheme $S$ and a compact open subset $U \\\\subseteq S$, there exist a natural number $n$, elements $f_1, \\\\ldots, f_n$ in the zeroth component $\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : Set ↥X}, IsCompact U ∧ IsOpen U ↔ ∃ s, s.Finite ∧ U = ⋃ i ∈ s, ↑↑i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both compact and open if and only if there exists a finite set $ s $ of affine open subsets of $ X $ such that $ U $ is the union of these affine open subsets.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.OpenCover) [Finite 𝒰.I₀] [H : ∀ i, CompactSpace (𝒰.X i)] : CompactSpace X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that the index set is finite and each open subscheme $U_i$ is compact, then $X$ itself is a compact topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : OpenCover X) [H : CompactSpace X] : OpenCover X\", \"doc\": \"For any compact scheme $X$ and any open cover $\\\\mathcal{U}$ of $X$ (defined by a jointly surjective family of open immersions), there exists a finite subset $t$ of the indexing set such that the union\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"{𝒰 : S.Cover K} [Scheme.JointlySurjective K] [∀ i, AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀] :\\n  QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicompact algebraic space admits a finite affine subatlas of any disjoint union affine atlas; continuous surjections preserve quasicompactness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  IsCompact ↑U →\\n    ∃ n f V,\\n      (∀ (i : Fin n), AlgebraicGeometry.IsAffineOpen (V i)) ∧\\n        ⋃ i, ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f (f i)).base) '' ↑(V i\", \"doc\": \"For any quasi-compact hypercover $\\\\mathcal{U}$ of a scheme $S$ and a compact open subset $U \\\\subseteq S$, there exist a natural number $n$, elements $f_1, \\\\ldots, f_n$ in the zeroth component $\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompactCover_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S),\\n  AlgebraicGeometry.QuasiCompactCover 𝒰 ↔\\n    ∀ {U : S.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"A pre-zero hypercover $\\\\mathcal{U}$ of a scheme $S$ is quasi-compact if and only if for every affine open subset $U \\\\subseteq S$, the open set $U$ is the union of images of finitely many compact open \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} [self : AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"For a scheme $ S $ and a quasi-compact pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, if $ U $ is an affine open subset of $ S $, then $ U $ is covered by the images of finitely many compact open subse\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"For a scheme $S$ with a quasi-compact pre-zero hypercover $\\\\mathcal{U}$, every affine open subset $U \\\\subseteq S$ is covered by finitely many compact open subsets under the structure maps of $\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, IsCompact ↑U ↔ ∃ s, s.Finite ∧ U = ⨆ i ∈ s, ↑i\", \"doc\": \"An open subset $ U $ of a scheme $ X $ is quasi-compact if and only if there exists a finite set $ S $ of affine open subsets of $ X $ such that $ U $ equals the union of all elements in $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"CompactSpace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|finite.*subatlas|quasi.?compact.*atlas",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose finitely many affine components of an etale scheme atlas covering the compact point space of an algebraic space, including the empty space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  IsCompact ↑U →\\n    ∃ n f V,\\n      (∀ (i : Fin n), AlgebraicGeometry.IsAffineOpen (V i)) ∧\\n        ⋃ i, ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f (f i)).base) '' ↑(V i\", \"doc\": \"For any quasi-compact hypercover $\\\\mathcal{U}$ of a scheme $S$ and a compact open subset $U \\\\subseteq S$, there exist a natural number $n$, elements $f_1, \\\\ldots, f_n$ in the zeroth component $\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"For a scheme $S$ with a quasi-compact pre-zero hypercover $\\\\mathcal{U}$, every affine open subset $U \\\\subseteq S$ is covered by finitely many compact open subsets under the structure maps of $\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} [self : AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"For a scheme $ S $ and a quasi-compact pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, if $ U $ is an affine open subset of $ S $, then $ U $ is covered by the images of finitely many compact open subse\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompactCover_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S),\\n  AlgebraicGeometry.QuasiCompactCover 𝒰 ↔\\n    ∀ {U : S.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"A pre-zero hypercover $\\\\mathcal{U}$ of a scheme $S$ is quasi-compact if and only if for every affine open subset $U \\\\subseteq S$, the open set $U$ is the union of images of finitely many compact open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) [H : CompactSpace ↥X] (x : ↥⋯.choose),\\n  𝒰.finiteSubcover.f x = 𝒰.f (AlgebraicGeometry.Scheme.Cover.idx 𝒰 ↑x)\", \"doc\": \"For any compact scheme $X$ and open cover $\\\\mathcal{U}$ of $X$, under the compactness assumption, the function $f$ of the finite subcover evaluated at a point $x \\\\in X$ equals the original cover's fun\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic space has a finite subfamily of any affine etale atlas covering it",
+   "results": "{\"t\": \"2026-10-23T04:09:40Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact algebraic space has a finite subfamily of any affine etale atlas covering it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\"], \"digest\": \"a9156c5af4c1be27\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite affine cover results do not state this algebraic-space point-topology assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"CompactSpace\"",
+   "results": "{\"t\": \"2026-10-23T04:10:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"CompactSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite affine cover results do not state this algebraic-space point-topology assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|finite.*subatlas|quasi.?compact.*atlas",
+   "results": "{\"t\": \"2026-10-23T04:10:17Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|finite.*subatlas|quasi.?compact.*atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite affine cover results do not state this algebraic-space point-topology assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective etale atlas of a quasi compact algebraic space admits a finite affine subatlas",
+   "results": "{\"t\": \"2026-10-23T04:10:19Z\", \"tool\": \"leansearch\", \"query\": \"A surjective etale atlas of a quasi compact algebraic space admits a finite affine subatlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"17703062d01b22ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite affine cover results do not state this algebraic-space point-topology assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite selection of affine components in an etale presentation of an algebraic space whose underlying topological space is compact",
+   "results": "{\"t\": \"2026-10-23T04:11:19Z\", \"tool\": \"leanfinder\", \"query\": \"Finite selection of affine components in an etale presentation of an algebraic space whose underlying topological space is compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\"], \"digest\": \"d3147d8411864fa7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite affine cover results do not state this algebraic-space point-topology assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSpace_of_isAffine|isCompact_iff_finite_and_eq_biUnion_affineOpens",
+   "results": "{\"t\": \"2026-10-23T04:17:47Z\", \"tool\": \"grep\", \"query\": \"compactSpace_of_isAffine|isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\"], \"digest\": \"7c048617671ed343\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite affine cover results do not state this algebraic-space point-topology assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-etale-open-image",
+  "date": "2026-10-22",
+  "group": "N7"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The geometric representability branch beneath lem-a1-affine-hc0, via 03XX and its lemma-neighbourhood-scheme (03XW): first paragraph, open image and its quasi-compactness; fourth paragraph, inverse image of that open. Refines the returned open-image proof: steps 9 and 10: continuous surjections and finite affine component selection.",
+   "via": [
+    "lem-a1-space-etale-open-image",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-finite-affine-subatlas",
+  "worker": "stage1",
+  "summary": "Expanded the 03E4 finite-subcover construction into six steps. All geometric input is already in the DAG; no new node is needed. Scheme-test pullbacks justify restriction, the finite-union compactness argument is explicit, and the independent continuous-surjection assertion and empty case are included. Statement and statement dependencies retained.",
+  "blueprint": "The auxiliary 03XX/03XW geometric representability branch below lem-a1-affine-hc0, inherited through lem-a1-space-etale-open-image: its steps 9-10, continuous surjections and finite affine component selection, are realized here by steps 1-5 (finite subatlas) and 6 (continuous-surjection implication)."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-e72cebcaf",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-e72cebcaf (reviewer sub-agent of L); spot-checked: PASS: I read the item, all nine cited node statements and Stacks spaces-properties 03E4 (lemma-quasi-compact-space, l.633-648) and 03FX (lemma-cover-by-union-affines, l.701-723); the tag/label pairs match tags/tags. The delivery is one commit containing the item and the report: no new nodes, no repair note for this item, no SGA anywhere. The statement agrees with 03E4 specialised to an atlas made of disjoint affine components, with no added hypotheses. The four stmt_deps cover every notion. Step 1: T×_Z V = (T×_Z U)×_U V by pasting; open-immersion base change and etale-open-restriction (with B=T) make h_V→Z representable étale. Steps 2-5: the point images O_d are open by point-open-calculus; the image of h_{U_d} equals the image of the scheme points of U_d as a set, since every Spec K→U_d factors through some Spec κ(x). Then a finite subcover, finite unions of affine-qc pieces, and point-surjective⇒representable-surjective. Step 6 uses the continuous image of a qc space. proof_deps equals the union of the uses. Edge cases checked: Z=∅ forces U=∅ and D_0=∅ works; D infinite with |Z| a single point; empty Spec 0 components; B=∅. No affine-intersection or separatedness is used. Duplicate search over dag/nodes (03E4, qc scheme atlas): finite-qc-atlas-assembly, affine-etale-cover and qc-map-affine-etale-neighbourhood are distinct. The only citer, lem-a1-space-etale-open-image step 4, uses exactly the two clauses the item states. Advisory: step 6's continuity of |T|→|C| follows from def-a1-space-point-topology, which is a stmt_dep but not in that step's uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFiniteAffineSubatlas",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finite_affine_subatlas",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.exists_finite_affine_subatlas",
+   "AlgebraicGeometry.AlgebraicSpace.compactSpace_points_of_surjective",
+   "AlgebraicGeometry.AlgebraicSpace.compactSpace_points_of_scheme_atlas"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFiniteAffineSubatlas.lean",
+  "statement": "theorem exists_finite_affine_subatlas {S : Scheme.{u}} (Z : AlgebraicSpace S) (hZ : CompactSpace (Point Z.obj.obj)) (U : Over S) (p : yoneda.obj U ⟶ Z.obj.obj) (hp : IsEtale p) (hs : IsSurjective p) {D : Type v} (V : D → U.left.Opens) (hV : ∀ d : D, IsAffineOpen (V d)) (hd : Pairwise (fun d e : D ↦ Disjoint (V d) (V e))) (hc : (⨆ d : D, V d) = ⊤) : ∃ (D₀ : Set D) (W : U.left.Opens), D₀.Finite ∧ W = (⨆ d ∈ D₀, V d) ∧ CompactSpace W.toScheme ∧ IsEtale (yoneda.map (Over.homMk (U := Over.mk (W.ι ≫ U.hom)) (V := U) W.ι rfl) ≫ p) ∧ IsSurjective (yoneda.map (Over.homMk (U := Over.mk (W.ι ≫ U.hom)) (V := U) W.ι rfl) ≫ p)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The specified disjoint affine summands are their pairwise disjoint affine open images in the atlas scheme. W is the open union indexed by the finite subset D₀, with the restricted scheme structure. The other two declarations give the independent continuous-surjection assertion and its scheme-atlas consequence. The added landed statement dependency def-sfb-proper-curve-moduli supplies the existing mapPoint definition; no new notion or statement correction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30b8340ff",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps with their Lean (AlgebraicSpace IsEtale/IsSurjective/IsRepresentableWith, pointTopologicalSpace/Point, Opens.ι/IsOpenImmersion, mapPoint in def-sfb-proper-curve-moduli), Stacks 03E4/03FX, module and report (Worker report + Second reading by N7 present). Clause by clause: CompactSpace on Point with the atlas topology; representable étale-surjective p; summands as pairwise disjoint affine opens covering U (the node's own coproduct description); conclusion gives finite D₀, W = ⨆_{D₀} V, CompactSpace W.toScheme, IsEtale/IsSurjective of the literal restriction yoneda.map(homMk W.ι) ≫ p; the independent continuous-surjection theorem and the scheme-atlas 'in particular' are stated separately with no added hypotheses; universe u and free index universe v. Edge cases covered: Z empty (D₀ empty), D empty, Spec 0 summands, B empty. Live diff: only lean and stmt_deps (+ landed def-sfb-proper-curve-moduli owning mapPoint, permitted). lean.statement verbatim; all proofs sorry; docstrings with source and blueprint; no duplicate (points_compactSpace_iff is a different, weaker iff). Advisory only: redundant Compactness.Compact import; statement text does not cite def-sfb-proper-curve-moduli. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T082736-L-2217896",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

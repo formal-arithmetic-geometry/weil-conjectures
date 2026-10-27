@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-stack-algebra-smooth-image",
+ "kind": "statement",
+ "title": "Quasi-coherent algebra image factorization on smooth tests",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal X$ be an algebraic stack over $k$ [def-sfb-algebraic-moduli-stack], and let $u:\\mathcal A\\to\\mathcal B$ be a morphism of arbitrary quasi-coherent commutative $\\mathcal O_{\\mathcal X}$-algebras [def-sfb-stack-quasi-coherent-algebra]. There is a quasi-coherent commutative algebra $\\mathcal C$ and a factorization $\\mathcal A\\xrightarrow{q}\\mathcal C\\xrightarrow{j}\\mathcal B$ of $u$ such that $q$ is a surjection in the big-fppf-sheaf sense and $j$ is the image inclusion in the category of quasi-coherent modules. For every smooth scheme test $a:T\\to\\mathcal X$, restriction identifies this factorization with the ordinary image factorization of the morphism of quasi-coherent $\\mathcal O_T$-algebras $a^*\\mathcal A\\to a^*\\mathcal B$; in particular $\\mathcal C(T)\\to\\mathcal B(T)$ is injective. More generally, for every smooth morphism $a:Z\\to\\mathcal X$ from an algebraic stack, the induced map $\\Gamma(Z,a^*\\mathcal C)\\to\\Gamma(Z,a^*\\mathcal B)$ is injective. Here restrictions and global sections use [def-sfb-stack-quasi-coherent-algebra], and quasi-coherent tensor pullback agrees with precomposition restriction as in [lem-sfb-stack-quasi-coherent-scheme-restriction]. Smoothness means smoothness on scheme charts [def-sbc-smooth-morphisms]. No Noetherian, finite-generation, quasi-compactness or injectivity hypothesis on $u$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WV (lemma-quasi-coherent-algebraic-stack), (1)--(4): the quasi-coherent abelian category and its right exact inclusion into big-fppf module sheaves. Smooth-test image computation and preservation of image monomorphisms: stacks-cohomology.tex Tags 076X (lemma-flat-pullback-quasi-coherent) and 0GQF (lemma-quasi-coherent-check-exact); smooth chart pullback is exact. The algebra structure on the module image is induced by multiplication and the unit. This is not an assertion that the image inclusion is injective on arbitrary nonflat big-site tests."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Forget the algebra structures. In the abelian category $\\operatorname{QCoh}(\\mathcal X)$ form $K=\\ker u$ and $C=\\operatorname{coker}(K\\to A)$, with $u=jq$, $q:A\\to C$ epi and $j:C\\to B$ mono. This is the image factorization: the abelian coimage-image identification gives $C=\\operatorname{Im}u$. The existing flat-atlas/cokernel theorem identifies the cokernel $q$ with the ambient fppf module-sheaf cokernel, so $q$ is locally surjective for fppf coverings. It does not assert that $j$ is mono in that ambient category.",
+   "uses": [
+    "lem-sfb-stack-qcoh-abelian",
+    "lem-sfb-stack-qcoh-flat-atlas-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06WV(2)--(4), categorical image and right exact inclusion"
+   }
+  },
+  {
+   "text": "Construct the algebra on $C$. The structure module and all tensor products here are quasi-coherent by the flat-atlas theorem. Write $i:K\\to A$ and $h=q\\mu_A:A\\otimes A\\to C$. Since $u$ is an algebra map, $jh(i\\otimes1)=\\mu_B(ui\\otimes u)=0$, and monicity of $j$ in quasi-coherent modules gives $h(i\\otimes1)=0$; likewise $h(1\\otimes i)=0$. Tensor preserves cokernels, so first descend $h$ through $q\\otimes1$ to $C\\otimes A$. Its composite with $1\\otimes i$ is zero after precomposition with the epi $q\\otimes1_K$, hence is zero. Descend again through $1\\otimes q$ to a multiplication $\\mu_C:C\\otimes C\\to C$. Define $\\eta_C=q\\eta_A$. The equations $\\mu_C(q\\otimes q)=q\\mu_A$ and $\\eta_C=q\\eta_A$ make $q$ multiplicative and unital. Associativity, commutativity and the unit identities follow by precomposition with $q^{\\otimes3}$, $q^{\\otimes2}$ and $q$, respectively; these are epi because tensor preserves cokernels, and their two sides reduce to the corresponding identities in $A$. Similarly precomposing with $q^{\\otimes2}$ and $q$ proves $j\\mu_C=\\mu_B(j\\otimes j)$ and $j\\eta_C=\\eta_B$. Thus $A\\to C\\to B$ is a factorization by commutative algebras with the underlying module maps of step 1.",
+   "uses": [
+    "lem-sfb-stack-qcoh-abelian",
+    "lem-sfb-stack-qcoh-flat-atlas-exactness",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06WV(4),(5); sites-modules.tex Tag 03EP (lemma-tensor-commute-colimits); explicit algebra assembly"
+   }
+  },
+  {
+   "text": "Let $a:T\\to\\mathcal X$ be smooth with $T$ a scheme. Exact smooth restriction preserves $K=\\ker u$ and $C=\\operatorname{coker}(K\\to A)$; hence $C_a$ is the quasi-coherent module image of $u_a:A_a\\to B_a$, with its quotient and inclusion. Kernels and cokernels of maps of quasi-coherent $\\mathcal O_T$-modules, formed in all $\\mathcal O_T$-modules, are quasi-coherent, so this is also the image in all $\\mathcal O_T$-modules. The scheme-test comparison identifies structure modules, tensors and these maps. The ordinary scheme algebra-image theorem puts the inherited image algebra structure on that same module. It agrees with the multiplication just constructed: both become $q_a\\mu_{A_a}$ after the locally surjective map $q_a\\otimes q_a$, and both units equal $q_a\\eta_{A_a}$. Consequently the entire restricted algebra factorization is the ordinary image factorization. Its inclusion is injective on every Zariski open, in particular on $T$. By $F(a)=\\Gamma(T,F_a)$ this proves $C(T)\\to B(T)$ injective.",
+   "uses": [
+    "lem-sfb-stack-smooth-qcoh-exact",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-weil-pbc-ringed-space-algebra-image",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "076X and 0GQF; scheme algebra image: sheaves.tex 0087 and modules.tex 01AG; kernels and cokernels of quasi-coherent modules: schemes.tex 01IC"
+   }
+  },
+  {
+   "text": "Finally let $a:Z\\to\\mathcal X$ be smooth with $Z$ an algebraic stack. By the scheme-restriction lemma, precomposition $a^*$ is the quasi-coherent tensor pullback, so $a^*C$ and $a^*B$ are quasi-coherent algebras and exact smooth pullback makes $a^*j$ mono in $\\operatorname{QCoh}(Z)$. Choose a smooth surjective scheme atlas $p:U\\to Z$. Exact smooth scheme restriction makes $p^*a^*j$ a monomorphism of ordinary quasi-coherent modules on $U$, so its map on sections is injective; by $F(p)=\\Gamma(U,F_p)$ these are the sections over $U$ used below. If $s,t\\in\\Gamma(Z,a^*C)$ have equal images, their pullbacks to $U$ agree by this injectivity. The smooth-cover section-descent theorem applied to the quasi-coherent algebra $a^*C$ says that equality can be checked on this atlas, so $s=t$. This proves the final injectivity assertion without assuming any big-fppf image inclusion is sectionwise injective on nonflat tests.",
+   "uses": [
+    "lem-sfb-stack-smooth-qcoh-exact",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-smooth-cover-section-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "076X and 0GQF; smooth-cover section descent, stacks-sheaves.tex 076S"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-qcoh-abelian",
+  "lem-sfb-stack-qcoh-flat-atlas-exactness",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-stack-smooth-qcoh-exact",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-weil-pbc-ringed-space-algebra-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-smooth-cover-section-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06WV, 076X, 0GQF and 03EP; explicit assembly of the algebra structure on the abelian module image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Images of quasi coherent algebra maps on an algebraic stack are quasi coherent and computed on smooth scheme charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme image factorizations, general sheaf images and quasicoherent presentation data. None proves quasi-coherent algebra image factorization on algebraic stacks with smooth-test exactness in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Factor a morphism of commutative algebra sheaves on an algebraic stack into a surjection and a smooth locally injective image inclusion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X ⟶ AlgebraicGeometry.Spec A) → X ⟶ AlgebraicGeometry.Spec (AlgebraicGeometry.specTargetImage f)\", \"doc\": \"For a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, this defines the canonical morphism from $X$ to the scheme-theoretic image of $f$. The scheme-theoretic image is the affine scheme $\\\\operat\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism between schemes $ X $ and $ Y $ is an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.specTargetImageFactorization f)))\", \"doc\": \"The application of the target-image factorization of a scheme morphism $ f $ to the entire topological space induces an injective map between the global sections of the structure sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_comp\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.specTargetImageFactorization f)\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.specTargetImageRingHom f)) =\\n    f\", \"doc\": \"For any morphism $ f $ of schemes, the composition of the factorization through the target's image $ \\\\operatorname{specTargetImageFactorization}(f) $ and the morphism induced by the associated ring ho\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme image factorizations, general sheaf images and quasicoherent presentation data. None proves quasi-coherent algebra image factorization on algebraic stacks with smooth-test exactness in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"image\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme image factorizations, general sheaf images and quasicoherent presentation data. None proves quasi-coherent algebra image factorization on algebraic stacks with smooth-test exactness in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*image|image.*quasi.?coherent|algebraic.?stack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme image factorizations, general sheaf images and quasicoherent presentation data. None proves quasi-coherent algebra image factorization on algebraic stacks with smooth-test exactness in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent image factorization on smooth presentations of algebraic stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.imageFactorization\", \"module\": \"Mathlib.CategoryTheory.Sites.Subsheaf\", \"type\": \"{F F' : Sheaf J (Type (max v u))} (f : F ⟶ F') : Limits.ImageFactorisation f\", \"doc\": \"For any morphism $ f: F \\to F' $ between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $ J $, there exists a factorization of $ f $ through its image sheaf $\\\\text{Image}(f\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"CategoryTheory.Limits.ImageFactorisation\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Images\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → {X Y : C} → (X ⟶ Y) → Type (max u v)\", \"doc\": \"The image factorization of a morphism $ f: X \\to Y $ in a category, which factors $ f $ as an epimorphism followed by a monomorphism.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"CategoryTheory.imageMonoFactorization\", \"module\": \"Mathlib.CategoryTheory.Sites.Subsheaf\", \"type\": \"{F F' : Sheaf J (Type w)} (f : F ⟶ F') : Limits.MonoFactorisation f\", \"doc\": \"For any morphism $ f: F \\to F' $ between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $ J $, this constructs a factorization of $ f $ through its image sheaf $\\\\text{Image\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"CategoryTheory.Abelian.OfCoimageImageComparisonIsIso.imageFactorisation\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \"{X Y : C} (f : X ⟶ Y) [IsIso (Abelian.coimageImageComparison f)] : ImageFactorisation f\", \"doc\": \"Given a morphism $ f : X \\to Y $ in an abelian category where the canonical coimage-image comparison morphism is an isomorphism, this constructs the image factorization of $ f $ by expressing it as the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme image factorizations, general sheaf images and quasicoherent presentation data. None proves quasi-coherent algebra image factorization on algebraic stacks with smooth-test exactness in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-algebra-pushforward",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Quasi-coherent algebra image factorization on smooth tests",
+   "via": [
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-algebra-smooth-image",
+  "worker": "stage1",
+  "summary": "Kept the statement, constructed the abelian coimage, descended multiplication through its cokernel twice, and checked smooth-scheme images and smooth-stack global sections separately. Reused existing tensor/cokernel/atlas and scheme algebra-image nodes; added only abelianity and exact smooth pullback prerequisites.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), adequate-moduli algebra-pushforward prerequisite chain. Read latest direct-images proof (3). ancestor reports None for the inherited chain; retained its null ancestor and explicit place/via.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "General ringed-site tensor/cokernel preservation for descending multiplication; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-space-algebra-image",
+    "why": "General scheme/topological algebra-image identification, used only after smooth scheme restriction."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic scheme fact (01IC) that kernels of maps of quasi-coherent modules are quasi-coherent, used in step 3 to compare the QCoh(T) image with the module image; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic scheme fact (01IC) that cokernels and images of maps of quasi-coherent modules are quasi-coherent, used in step 3 for the same comparison; no same-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-space-algebra-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-a524c5004",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-a524c5004 (reviewer sub-agent of L); spot-checked: First split; live and side-live still have the item unsplit, so it is not superseded. There is no re-split note. Statement and stmt_deps unchanged. No SGA source. Sources read: stacks-sheaves 06WV (all 7 parts and proof), stacks-cohomology 076X and 0GQF (statements and proofs). New lem-sfb-stack-qcoh-abelian = 06WV(2) over an arbitrary scheme S. New lem-sfb-stack-smooth-qcoh-exact = 076X for smooth morphisms; its scheme clause holds via the QCoh(Sch/T)_fppf = QCoh(T_Zar) equivalence. Both new nodes are true, introduce their own objects, are statement-only with three kinds of Mathlib search, and are not restatements of the item. Not duplicates: flat-atlas-exactness makes no kernel claim; smooth-atlas-algebra-descent is algebra descent; the groupoid nodes need scheme groupoids; Q160's LQC nodes are about big-etale flat-compatible modules. Step 1: abelian coimage = image in QCoh, with cokernel and local surjectivity from flat-atlas-exactness; correct. Step 2: jh(i⊗1)=μ_B(ui⊗u)=0 and descent twice through right exact tensor; correct. Step 3: correct after the repair. Step 4: atlas p meets the section-descent hypotheses; correct after the repair. Fixes (C1/C3, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-algebra-smooth-image.json): step 3 now cites lem-weil-pbc-quasi-coherent-module-kernel and -cokernel-image (01IC), needed to identify the QCoh(T) image with the Mod(O_T) image that ringed-space-algebra-image describes. Step 4 now cites lem-sfb-stack-quasi-coherent-scheme-restriction for precomposition = tensor pullback and F(p)=Γ(U,F_p). proof_deps resynced; the two 01IC nodes added to split_report.tool_uses. Tool uses accepted: 03EP tensor colimits, ringed-space algebra image, 01IC kernel/cokernel; all generic. Batch-5: all six flags reach sec-trace-formula only through the general definitions def-trf-space-quasi-coherent-module and def-trf-algebraic-space. The two definition stmt_deps were already stmt_deps of the base item. These are foundations, not steps of the trace-formula or Poincare duality proofs, so accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackAlgebraSmoothImage",
+  "declaration": "CategoryTheory.exists_moduliAlgebraSmoothImage",
+  "declarations": [
+   "CategoryTheory.moduliAlgebraImageModuleMap",
+   "CategoryTheory.moduliAlgebraImageQCohMap",
+   "CategoryTheory.exists_moduliAlgebraSmoothImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackAlgebraSmoothImage.lean",
+  "statement": "theorem exists_moduliAlgebraSmoothImage (k : Type u) [Field k] (X : BasedCategory.{v, w} (Over (Spec (.of k)))) (hX : IsAlgebraicModuliStack X) {A B : ModuliAlgebraSheaf X hX.1.1} (f : A ⟶ B) (hA : IsQuasicoherentModuliAlgebra A) (hB : IsQuasicoherentModuliAlgebra B) : ∃ (C : ModuliAlgebraSheaf X hX.1.1) (hC : IsQuasicoherentModuliAlgebra C) (q : A ⟶ C) (j : C ⟶ B), q ≫ j = f ∧ IsSurjectiveModuliAlgebra q ∧ (∃ (I : ImageFactorisation (moduliAlgebraImageQCohMap f hA hB)) (e : (⟨moduliAlgebraModule C, hC⟩ : ModuliQCoh X hX.1.1) ≅ I.F.I), e.hom ≫ I.F.m = moduliAlgebraImageQCohMap j hC hB ∧ moduliAlgebraImageQCohMap q hA hC ≫ e.hom = I.F.e) ∧ (∀ (T : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj T)) X), ModuliSpaceTest @Smooth a → ∀ R : ModuliSchemeRestriction X hX.1.1, ∃ (I : ImageFactorisation ((R.restriction (a.obj (CostructuredArrow.mk (𝟙 (yoneda.obj T))))).map (moduliAlgebraImageQCohMap f hA hB))) (e : (R.restriction (a.obj (CostructuredArrow.mk (𝟙 (yoneda.obj T))))).obj ⟨moduliAlgebraModule C, hC⟩ ≅ I.F.I), e.hom ≫ I.F.m = (R.restriction (a.obj (CostructuredArrow.mk (𝟙 (yoneda.obj T))))).map (moduliAlgebraImageQCohMap j hC hB) ∧ (R.restriction (a.obj (CostructuredArrow.mk (𝟙 (yoneda.obj T))))).map (moduliAlgebraImageQCohMap q hA hC) ≫ e.hom = I.F.e) ∧ (∀ (T : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj T)) X), ModuliSpaceTest @Smooth a → Function.Injective (j.right.hom.app (op (a.obj (CostructuredArrow.mk (𝟙 (yoneda.obj T))))))) ∧ (∀ (Z : BasedCategory.{v', w'} (Over (Spec (.of k)))) (_ : IsAlgebraicModuliStack Z) (a : BasedFunctor Z X), (∃ (U : Over (Spec (.of k))) (p : BasedFunctor (discreteModuli (yoneda.obj U)) Z), IsSmoothModuliAtlas Z U p ∧ ModuliSpaceTest @Smooth (p.comp a)) → Function.Injective ((Functor.sectionsFunctor Z.objᵒᵖ).map (Functor.whiskerRight (Functor.whiskerLeft a.toFunctor.op j.right.hom) (forget CommRingCat))))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0074aec71",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause match. Field k; X algebraic over Spec k; arbitrary quasi-coherent ModuliAlgebraSheaf A, B with no extra hypotheses; q ≫ j = f; q locally fppf-surjective (IsSurjectiveModuliAlgebra); QCoh ImageFactorisation with iso e commuting with both arrows. Smooth scheme tests via ModuliSpaceTest @Smooth (same content as SpaceMapIsSmooth): for every ModuliSchemeRestriction R, an image factorisation in all ordinary O_T-modules commuting with both arrows; C(T)→B(T) injective on the actual component. Smooth Z→X stated as an atlas of Z with smooth composite, equivalent by locality on the source and including non-representable maps, with independent universes v' w'; Γ is compatible families of the literal precomposition, matching the node. Added stmt_dep def-sfb-dm-stack-morphism-properties is landed, allowed by brief-stage2 §5. Statement field verbatim. Helper module maps are real (Under.w, map_mul) and not duplicates. Only sorry is the item theorem, whose docstring has a 4-step proof; source and blueprint docstrings present; proof-dep import modules exist. Note: algebra identification on scheme tests is stated at module level; the image algebra is determined because q⊗q is epi, and the recorded interface has no algebra-level restriction, so accepted. No file changed, so no compile; worker reports clean scompile and dry run."
+ }
+}

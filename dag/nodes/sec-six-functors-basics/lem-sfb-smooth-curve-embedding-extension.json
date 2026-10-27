@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-smooth-curve-embedding-extension",
+ "kind": "statement",
+ "title": "Extending an embedding into the function field of a smooth curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure]. Let $C$ be a smooth connected $k$-curve of dimension one [def-sc-curves], with function field $k(C)$ [def-sc-function-field], and let $Y$ be an integral proper $k$-scheme [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-scheme-over-base], with function field $k(Y)=\\mathcal O_{Y,\\eta_Y}$. For every $k$-embedding $\\varphi:k(Y)\\hookrightarrow k(C)$ [def-pc-field-extension], there exists a $k$-morphism $F:C\\to Y$ such that $F(\\eta_C)=\\eta_Y$ and the local-ring map $F^*:k(Y)\\to k(C)$ is exactly $\\varphi$. More precisely, if $i_C:\\operatorname{Spec}k(C)\\to C$ and $i_Y:\\operatorname{Spec}k(Y)\\to Y$ are the generic-point morphisms [def-sc-generic-point], [def-weil-affine-spectrum], then\n$$F\\circ i_C=i_Y\\circ\\operatorname{Spec}(\\varphi).$$\nFor every nonempty affine open $V=\\operatorname{Spec}A\\subseteq Y$, this composite factors through $V$ by the map associated with $A\\hookrightarrow k(Y)\\xrightarrow{\\varphi}k(C)$; on generic stalks it sends $a/b$ to $\\varphi(a)/\\varphi(b)$. Properness of $C$ and smoothness or dimension one of $Y$ are not assumed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), third proof paragraph, converse construction; Morphisms Tag 0BX7 (morphisms-lemma-extend-across), applied at every point of the smooth connected curve. Extracts old steps 1, 6 and the extension part of step 7."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-over-base",
+  "def-pc-field-extension",
+  "def-sc-generic-point",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-smooth-connected-curve-local-rings] to $C$. It is integral, its generic stalk is the field $k(C)$, and every other point $P$ is closed with DVR stalk of fraction field $k(C)$. Each stalk is a valuation ring: at $\\eta_C$ every nonzero element already belongs to the field; at $P$, write $z=ut^n$ as in clause 3. If $n\\geq0$, then $z\\in\\mathcal O_{C,P}$; if $n<0$, then $z^{-1}=u^{-1}t^{-n}\\in\\mathcal O_{C,P}$. Thus the valuation-stalk extension theorem applies to the source $C$.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (theorem-curves-rational-maps), converse construction in the third proof paragraph; Tag 0BXY (lemma-extend-over-dvr), source local-ring hypothesis."
+   }
+  },
+  {
+   "text": "Put $h=i_Y\\circ\\operatorname{Spec}(\\varphi):\\operatorname{Spec}k(C)\\to Y$. Contravariance of the affine spectrum [def-weil-affine-spectrum] and the fact that $\\varphi$ fixes $k$ make this a $k$-morphism. For any nonempty affine open $V=\\operatorname{Spec}A\\subseteq Y$, [lem-sc-integral-function-field-affine-fraction] gives $\\eta_Y\\in V$ and the injective germ map $j:A\\hookrightarrow k(Y)=\\operatorname{Frac}(A)$. The generic-point morphism $i_Y$ is the canonical morphism $\\operatorname{Spec}\\mathcal O_{Y,\\eta_Y}\\to Y$ of [lem-weil-pbc-spec-local-ring-canonical-morphism] at $\\eta_Y$; by its affine description it factors through $V$ as $\\operatorname{Spec}(j)$. Hence $h$ factors through $V$ as $\\operatorname{Spec}(\\varphi\\circ j)$, since $\\operatorname{Spec}(j)\\circ\\operatorname{Spec}(\\varphi)=\\operatorname{Spec}(\\varphi\\circ j)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01RW (definition-function-field), 01RV (lemma-integral-scheme-rational-functions), with Schemes Tag 01HV (lemma-spec-sheaves), generic affine localization."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-valuation-stalk-proper-target-extension] with $X=C$ and with the $k$-morphism $h$ constructed in step 2. The source is integral and has valuation local rings by step 1; the target is proper over $k$ by hypothesis. It yields a $k$-morphism $F:C\\to Y$ satisfying $F\\circ i_C=h=i_Y\\circ\\operatorname{Spec}(\\varphi)$. This is the required extension identity.",
+   "uses": [
+    "lem-sfb-valuation-stalk-proper-target-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX7 (lemma-extend-across), generic-point extension specialized to the valuation local rings of the curve; the global extension is precisely the cited node."
+   }
+  },
+  {
+   "text": "By clause (1) of [lem-weil-pbc-spec-local-ring-canonical-morphism], the sole point of $\\operatorname{Spec}k(C)$ maps under $i_C$ to $\\eta_C$, under $\\operatorname{Spec}(\\varphi)$ to the sole point of $\\operatorname{Spec}k(Y)$, and under $i_Y$ to $\\eta_Y$. Evaluating the identity in step 3 therefore gives $F(\\eta_C)=\\eta_Y$. By clause (2) of the same node, on their generic stalks the canonical morphisms $i_C,i_Y$ induce identity maps, and by [lem-weil-pbc-spec-map-stalk-localization] (with $Q=0$) the stalk map of $\\operatorname{Spec}(\\varphi)$ at its point is $\\varphi$. Taking the stalk maps of that same identity consequently gives $F^*=\\varphi$. Explicitly, on $V=\\operatorname{Spec}A$ as in step 2, the map on $A$ is $\\varphi\\circ j$; every generic germ is $j(a)/j(b)$ with $b\\ne0$ by [lem-sc-integral-function-field-affine-fraction], and its image is $\\varphi(j(a))/\\varphi(j(b))$ because a ring homomorphism preserves inverses. The denominator is nonzero since $j$ and $\\varphi$ are injective. This proves every affine and generic-stalk clause.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (theorem-curves-rational-maps), third proof paragraph, induced generic-stalk homomorphism; Morphisms Tags 01RV/01RW and Schemes Tag 01HV for the affine fraction description."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "def-weil-affine-spectrum",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-valuation-stalk-proper-target-extension",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-spec-map-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (theorem-curves-rational-maps), converse in third proof paragraph, using Morphisms Tag 0BX7 (lemma-extend-across) in the generality of the existing valuation-stalk extension node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_hom_of_valuationRing_stalk|functionField.*(extend|exists_hom)|ext_of_isDominant_of_isSeparated",
+   "results": "{\"t\": \"2026-10-23T04:15:29Z\", \"tool\": \"grep\", \"query\": \"exists_hom_of_valuationRing_stalk|functionField.*(extend|exists_hom)|ext_of_isDominant_of_isSeparated\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"ce7e8e5dccdaf9da\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.ofFunctionField constructs only a rational map; valuative criterion gives local lifts, not this global smooth-curve extension with its specified field map. The project extension theorem is already represented by lem-sfb-valuation-stalk-proper-target-extension, a tool for the future proof, not an exact attachment to this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field embedding into the function field of a nonsingular curve gives a morphism to any integral proper target",
+   "results": "{\"t\": \"2026-10-23T04:15:29Z\", \"tool\": \"leansearch\", \"query\": \"A field embedding into the function field of a nonsingular curve gives a morphism to any integral proper target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed\", \"Field.Emb\"], \"digest\": \"52145be1a46917d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.ofFunctionField constructs only a rational map; valuative criterion gives local lifts, not this global smooth-curve extension with its specified field map. The project extension theorem is already represented by lem-sfb-valuation-stalk-proper-target-extension, a tool for the future proof, not an exact attachment to this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-23T04:15:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"functionField\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.ofFunctionField constructs only a rational map; valuative criterion gives local lifts, not this global smooth-curve extension with its specified field map. The project extension theorem is already represented by lem-sfb-valuation-stalk-proper-target-extension, a tool for the future proof, not an exact attachment to this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every embedding from the function field of an integral proper scheme into the function field of a smooth connected curve extends to a morphism from the curve",
+   "results": "{\"t\": \"2026-10-23T04:15:33Z\", \"tool\": \"leanfinder\", \"query\": \"Every embedding from the function field of an integral proper scheme into the function field of a smooth connected curve extends to a morphism from the curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\"], \"digest\": \"0d57598a20197622\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.ofFunctionField constructs only a rational map; valuative criterion gives local lifts, not this global smooth-curve extension with its specified field map. The project extension theorem is already represented by lem-sfb-valuation-stalk-proper-target-extension, a tool for the future proof, not an exact attachment to this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected one dimensional scheme has valuation local rings, so embeddings of function fields extend uniquely to maps into any integral proper scheme",
+   "results": "{\"t\": \"2026-10-23T04:16:51Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected one dimensional scheme has valuation local rings, so embeddings of function fields extend uniquely to maps into any integral proper scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\"], \"digest\": \"e710461df81ef44b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.ofFunctionField constructs only a rational map; valuative criterion gives local lifts, not this global smooth-curve extension with its specified field map. The project extension theorem is already represented by lem-sfb-valuation-stalk-proper-target-extension, a tool for the future proof, not an exact attachment to this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_hom_of_valuationRing_stalk|fromFunctionField_ofFunctionField|ofFunctionField",
+   "results": "{\"t\": \"2026-10-23T09:34:25Z\", \"tool\": \"grep\", \"query\": \"exists_hom_of_valuationRing_stalk|fromFunctionField_ofFunctionField|ofFunctionField\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"a2303abacc5e8a43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct rational maps or give pointwise valuative lifts; they do not extend the specified generic-point map to a morphism on the entire smooth curve"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a map from the generic point of a regular curve to a proper scheme",
+   "results": "{\"t\": \"2026-10-23T09:34:26Z\", \"tool\": \"leansearch\", \"query\": \"Extend a map from the generic point of a regular curve to a proper scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.mk\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"48ec08d8866791de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct rational maps or give pointwise valuative lifts; they do not extend the specified generic-point map to a morphism on the entire smooth curve"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-23T09:34:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"functionField\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct rational maps or give pointwise valuative lifts; they do not extend the specified generic-point map to a morphism on the entire smooth curve"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every embedding of function fields from an integral proper scheme into a smooth connected curve extends to a morphism of schemes",
+   "results": "{\"t\": \"2026-10-23T09:34:35Z\", \"tool\": \"leanfinder\", \"query\": \"Every embedding of function fields from an integral proper scheme into a smooth connected curve extends to a morphism of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"a885046513361078\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct rational maps or give pointwise valuative lifts; they do not extend the specified generic-point map to a morphism on the entire smooth curve"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral scheme whose stalks are valuation rings admits extension of any generic point morphism into a proper scheme",
+   "results": "{\"t\": \"2026-10-23T09:35:15Z\", \"tool\": \"leanfinder\", \"query\": \"An integral scheme whose stalks are valuation rings admits extension of any generic point morphism into a proper scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.iff\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"78c33fe6e735306b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct rational maps or give pointwise valuative lifts; they do not extend the specified generic-point map to a morphism on the entire smooth curve"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-curve-function-field-morphisms",
+  "date": "2026-10-23",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, second sentence: the intermediate field and its embeddings correspond to curve morphisms. Repair extraction: Tag 0BY1 (curves-theorem-curves-rational-maps), third proof paragraph, converse construction; Morphisms Tag 0BX7 (morphisms-lemma-extend-across), applied at every point of the smooth connected curve. Extracts old steps 1, 6 and the extension part of step 7.",
+   "via": [
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-curve-embedding-extension",
+  "worker": "stage1",
+  "summary": "Q15 checked Stacks 0BY1 and 0BX7, the project valuation-stalk theorem and all cited statements. Four steps establish valuation local rings, construct the specified generic map on affines, apply the existing global extension, and compute the image and map on generic stalks. No new nodes; no statement correction. Two elementary steps spell out Spec composition and the fraction calculation.",
+  "blueprint": "Realizes the inherited auxiliary curve/function-field argument under det-thm-sf-ctf-stability-direct-images proof (3): the converse construction of Stacks 0BY1 as extracted by lem-sfb-proper-curve-function-field-morphisms. The latest blueprint direct-image proof still has that id in its frontmatter; no unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic local geometry of a smooth connected curve supplies integrality, the generic field and the closed DVR stalks; no same-unit node supplies these hypotheses."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic affine localization for an arbitrary integral scheme identifies the coordinate ring inside its function field and every element as a fraction; used only to calculate the prescribed generic map."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Canonical morphism Spec O_{Y,y} -> Y (affine description, image of the closed point, identity stalk map) identifies the generic-point morphisms i_C, i_Y used in steps 2 and 4; no node of unit sk-thm-sf-ctf-stability states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-03a17102f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-03a17102f (reviewer sub-agent of L); spot-checked: The mathematics is correct. Read Stacks 0BY1 (curves.tex:158-206, converse in the third paragraph), 0BXY (curves.tex:54-67) and 0BX7 (morphisms.tex:10425-10472); no SGA is used. Step 1: lem-sc-smooth-connected-curve-local-rings clauses 1-3 give an integral C whose stalks are k(C) or DVRs, and the sign of n in u t^n gives the valuation-ring alternative. Step 3: lem-sfb-valuation-stalk-proper-target-extension (same unit, Lean attached) applies with X=C, Y proper over k and h a k-morphism, and gives F∘i_C=h. Step 4: the fraction arithmetic is correct. Small cases checked: A^1→P^1 with t↦1/t extends; an affine target fails, so target properness is needed; Y=Spec k gives the structure map; Frobenius t↦t^p is allowed. Not a duplicate of the parent proper-curve-function-field-morphisms, of lem-trf-algclosed-curve-model or of curve-intermediate-field-realization; no cycle. One fault (C1/C4): step 2 ('by the definition of the generic-point morphism, i_Y factors through V as Spec(j)') and step 4 (i_C sends the point to η_C; identity generic stalk maps; the stalk map of Spec φ is φ) cited nothing, and def-sc-generic-point and def-weil-affine-spectrum do not define that morphism. FIX: steps 2 and 4 now cite lem-weil-pbc-spec-local-ring-canonical-morphism (affine description, clauses (1) and (2)), and step 4 also cites lem-weil-pbc-spec-map-stalk-localization with Q=0. Both are added to proof_deps, and a tool_use is added for the sk-thm-p1 canonical-morphism node. The statement is unchanged. Advisory: the item statement's citation for 'generic-point morphisms' could also point to the canonical-morphism node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCurveEmbeddingExtension",
+  "declaration": "AlgebraicGeometry.Scheme.exists_hom_of_smooth_connected_curve_functionField_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveEmbeddingExtension.lean",
+  "statement": "theorem exists_hom_of_smooth_connected_curve_functionField_embedding (k : Type u) [Field k] [IsAlgClosed k] (C Y : Scheme.{u}) [C.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsConnectedCurve (C ↘ Spec (.of k))] [Smooth (C ↘ Spec (.of k))] [IsIntegral Y] [IsProper (Y ↘ Spec (.of k))] : ∃ hC : IsIntegral C, ∀ (φ : Y.functionField →+* C.functionField), Spec.map (CommRingCat.ofHom φ) ≫ Y.fromSpecFunctionField ≫ (Y ↘ Spec (.of k)) = C.fromSpecFunctionField ≫ (C ↘ Spec (.of k)) → ∃ (F : C ⟶ Y) (hη : F (genericPoint C) = genericPoint Y), F.IsOver (Spec (.of k)) ∧ (Y.presheaf.stalkSpecializes (specializes_of_eq hη) ≫ F.stalkMap (genericPoint C)) = CommRingCat.ofHom φ ∧ C.fromSpecFunctionField ≫ F = Spec.map (CommRingCat.ofHom φ) ≫ Y.fromSpecFunctionField ∧ (∀ (V : Y.Opens) (hV : IsAffineOpen V) (_ : Nonempty V), Spec.map (Y.germToFunctionField V ≫ CommRingCat.ofHom φ) ≫ hV.fromSpec = C.fromSpecFunctionField ≫ F) ∧ (∀ (a b : Y.functionField), b ≠ 0 → (Y.presheaf.stalkSpecializes (specializes_of_eq hη) ≫ F.stalkMap (genericPoint C)) (a / b) = φ a / φ b)",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ee631458",
+  "group": "NY",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 0BY1 converse/0BX7: k alg closed; C with IsConnectedCurve+Smooth (def-sc-curves record checked: separated, finite type, connected, dim=1); Y IsIntegral+IsProper; no extra hypotheses (C not proper, Y any dim). IsIntegral C is a Prop conclusion, true for smooth connected curves. k-embedding = canonical Spec square over Spec k (fully faithful, equivalent to fixing k). Conclusion: F IsOver k, F(eta_C)=eta_Y, stalk map via stalkSpecializes transport = phi, fromSpecFunctionField identity, factorization through every nonempty affine V via germToFunctionField and hV.fromSpec, fraction formula for all a,b with b≠0 (implied, not stronger). Edge cases empty/Spec k/Frobenius/universes OK. Not a duplicate of exists_hom_of_valuationRing_stalk, proper_curve_function_field_morphisms or RationalMap.ofFunctionField. Statement verbatim, sorry only, docstrings give source+blueprint+proof steps, imports exist, report sections present. No files changed, no compile."
+ }
+}

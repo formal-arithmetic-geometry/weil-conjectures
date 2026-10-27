@@ -1,0 +1,150 @@
+{
+ "id": "lem-coef-integral-dualizing-roos-model",
+ "kind": "statement",
+ "title": "A strict Roos model of the finite dualizing tower",
+ "statement": "Fix the finite-field datum $D$ with algebraically closed field $k$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $R$ and chosen uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Set $A_n=R/\\varpi^{n+1}$ for $n\\in\\mathbf N$, and let $\\omega_n=Ra_n^!(A_n)_s$ be the prescribed finite dualizing term [lem-coef-finite-dualizing]. There exist a normalized DVR tower $T$ [def-coef-normalized-dvr-tower] and isomorphisms $e_n:T.M_n\\cong\\omega_n$ that identify every transition with the scalar adjunct of the counit-defined finite coefficient comparison. Write $L$ for the value of the published total right derived inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit] on $T$. There exist maps $p:L\\to\\prod_n \\operatorname{ev}_nT$ and $\\delta:\\prod_n\\operatorname{ev}_nT\\to L[1]$ making the Roos triangle of the actual derived evaluation transitions distinguished. The countable-product witness is the published integralOperationsDerivedCountableProducts.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "First paragraph, inverse-limit assertion and finite coefficient compatibility; strict representative construction expanded from the existing DAG step 1."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "lem-coef-finite-dualizing",
+  "def-coef-normalized-dvr-tower",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Take the scalar adjuncts of the counit-defined finite comparisons. Their invertibility and unit/cocycle identities give normalization and the finite transition identities.",
+   "uses": [
+    "lem-coef-finite-dualizing",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Represent each successive derived transition by a roof, retaining its source complex and forward chain map. Compose longer maps, restrict to completed coefficients and form the complex of strict towers. Its evaluations and the roof isomorphisms give T and e, including the displayed transition equation.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply total derived inverse limit to this strict tower. Its Roos triangle is stated using its auxiliary derived evaluation. The localization comparison uniquely identifies that evaluation, its maps and transitions with normalizedDVRTowerEvaluation. Transport the product and triangle; uniqueness of products identifies the product witness with the published one.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-finite-dualizing",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "First paragraph, inverse-limit assertion and finite coefficient compatibility; strict representative construction expanded from the existing DAG step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral dualizing complex derived inverse limit finite coefficient dualizing complexes compact support adjunction",
+   "results": "8 hits: condensed adjunctions and localCohomology.diagram; no result constructs the specified normalized finite-dualizing tower or its mapping-limit adjunction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|NormalizedDVRTower",
+   "results": "10 hits, comments about dualizing categorical definitions. No matching statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit normalized dualizing tower finite Tor amplitude and derived compact support duality",
+   "results": "8 hits: tensor direct-limit equivalences and InverseSystem.piEquivLim; none states these ringed-site assertions.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizing",
+  "date": "2026-10-25",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "First paragraph, inverse-limit assertion and finite coefficient compatibility; strict representative construction expanded from the existing DAG step 1.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingRoosModel",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingRoosModel.lean",
+  "declaration": "WeilConjectures.integralDualizing_roos_model",
+  "statement": "theorem integralDualizing_roos_model (D : FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] :\n    ∃ (T : NormalizedDVRTower l E X D hl)\n      (e : ∀ n : ℕ, T.M n ≅ integralDualizingFiniteTerm l E D X n),\n      (∀ {m n : ℕ} (h : n ≤ m),\n        T.tau h ≫ (normalizedDVRRes l E X h).map (e n).hom =\n          (e m).hom ≫\n            (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _\n              (integralDualizingFiniteComparison l E D X hl h)) ∧\n      (letI : HasCountableProducts (completedIntegralDerivedCategory l E X D hl) :=\n        integralOperationsDerivedCountableProducts l E X\n       ∃ (p : (integralDualizingLimit l E X).obj T.tower ⟶\n          ∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)\n         (δ : (∏ᶜ fun n : ℕ ↦\n          (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) ⟶\n          ((integralDualizingLimit l E X).obj T.tower)⟦(1 : ℤ)⟧),\n         IsDerivedLimitTriangle\n           (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower)\n           ((integralDualizingLimit l E X).obj T.tower) p δ)",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.integralDualizingRingSheafify",
+   "WeilConjectures.integralDualizingCoefficients",
+   "WeilConjectures.integralDualizingScalar",
+   "WeilConjectures.integralDualizingSections",
+   "WeilConjectures.integralDualizingSections_additive",
+   "WeilConjectures.integralDualizingDerivedSections",
+   "WeilConjectures.integralDualizingGlobalHom",
+   "WeilConjectures.integralDualizingLimit",
+   "WeilConjectures.integralDualizingCompactification",
+   "WeilConjectures.integralDualizingCompactTower",
+   "WeilConjectures.integralDualizingCompactSections",
+   "WeilConjectures.IntegralDualizingLimitPresentation",
+   "WeilConjectures.integralDualizing_roos_model"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-58c4e",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261025T124537-L-2065790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-58c4e",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261025T124537-L-2065790",
+  "kind": "interface",
+  "note": "independent cc review: delivered 4 modules + 4 node files vs live clone: verbatim def move (diff), item stmt byte-identical, 10 importers compiled rc 0, axioms probe, FiniteBounds import-deletion variants, sorry statements vs ringedStrictTowerHomotopyLimit spec and item conclusions"
+ }
+}

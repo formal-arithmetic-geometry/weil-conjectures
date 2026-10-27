@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-continuous-section-exact-triangles",
+ "kind": "statement",
+ "title": "Exact continuous realizations and restriction triangles",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E$, and $F\\in\\{E,\\Omega\\}$. Let $\\Pi$ be a profinite group (compact, Hausdorff and totally disconnected), and let $V$ be a finite-dimensional norm-topological $E$-vector space with a jointly continuous $E$-linear $\\Pi$-action [def-pod-l-adic-representations]. Let $U\\subseteq V$ be a $\\Pi$-stable $E$-subspace, and put $Q=V/U$ with the induced action and usual finite-dimensional topology. Put $C_F(S)=C(S,F)$ [def-sfb-continuous-map-condensed-ring] and $W_F(S)=C(S,F\\otimes_E W)$ for $W=U,V,Q$, with finite-dimensional product norm topologies. Use the induced condensed actions in internal modules [sk-def-sfb-module-objects, def-sfb-condensed-action-module] and their derived categories [def-weil-abstract-derived-category]. The canonical sequence\n$$0\\longrightarrow U_F\\longrightarrow V_F\\longrightarrow Q_F\\longrightarrow0$$\nis short exact in $\\mathcal A_{C_F}(\\Pi)$ and split exact after forgetting the action, by a splitting natural in the profinite parameter $S$. It gives the distinguished triangle $U_F[0]\\to V_F[0]\\to Q_F[0]\\to U_F[1]$ [def-weil-triangulated-category, def-weil-pbc-triangles-with-shift]. For every topological group $H$ and continuous homomorphism $u:H\\to\\Pi$, the canonical derived restriction transformation $b_u$ of [lem-sfb-condensed-derived-restriction-calculus] gives a morphism of the $R\\Gamma_\\Pi$ and $R\\Gamma_H\\operatorname{Res}_u$ images of this triangle, with components $b_u(U_F)$, $b_u(V_F)$, $b_u(Q_F)$, including the square on the connecting arrow. The splitting need not be equivariant; no completeness of $\\Omega$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice analytic input; agent expansion, returned comparison proof step 5: continuous subquotients, E-linear splitting, all-continuous scalar realizations and connecting square. Agent-formulated extraction; not asserted to be a theorem stated in the blueprint."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-pod-l-adic-representations",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift",
+  "def-sfb-continuous-representation-condensation"
+ ],
+ "proof": [
+  {
+   "text": "Write $i:U\\to V$ and $q:V\\to Q$. By [lem-sfb-continuous-representation-subquotients], $U,Q$ have their usual finite-dimensional topologies, their induced actions are jointly continuous, and $i,q$ are continuous equivariant linear maps. Choose an $E$-basis $(e_j)$ of $Q$ and lifts $v_j\\in V$. Its coordinate map is a homeomorphism, by the usual finite-dimensional topology in the hypotheses. Apply [lem-sfb-topological-basis-lift-section] with $A=E$, $M=V$, $N=Q$: $s(\\sum_j a_je_j)=\\sum_j a_jv_j$ is a continuous linear section of $q$. Define $r(v)\\in U$ by $i(r(v))=v-s(q(v))$. This lies in $U$ because its image under $q$ is zero, and is continuous into the subspace topology because the displayed $V$-valued map is continuous. Direct substitution gives $ri=1$, $rs=0$, $qi=0$, $qs=1$ and $ir+sq=1$. No equivariance is claimed for $s$ or $r$.",
+   "uses": [
+    "lem-sfb-continuous-representation-subquotients",
+    "lem-sfb-topological-basis-lift-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice analytic input; explicit agent expansion of continuous-section exactness, not a theorem asserted in this blueprint paragraph."
+   }
+  },
+  {
+   "text": "Choose a basis $(u_a)$ of $U$. Then $(i(u_a),v_j)$ is a basis of $V$: applying $q$ to a linear relation kills all coefficients of the $v_j$, and subtracting $s(q(v))$ expresses every remaining vector in $U$. For any of these bases $(w_k)$ of $W=U,V,Q$, identify $F\\otimes_E W$ with $F^{\\{k\\}}$ by $f\\otimes\\sum_k a_kw_k\\mapsto(fa_k)_k$, with inverse $(c_k)\\mapsto\\sum_k c_k\\otimes w_k$. The first formula is balanced, and the two composites are identities by distributivity. These are precisely the product norm coordinates stipulated in the statement. The tensor extensions $i_F,q_F,s_F,r_F$ have finite matrices with entries in $E\\subset F$, hence are continuous: each output coordinate is a finite sum of constant multiples of input coordinates. The five identities of step 1 hold after tensor extension. For $W=U,V,Q$, the matrix entries $a_{kl}(g)$ of the action are continuous $E$-valued functions of $g$, obtained by acting on $w_l$ and taking coordinates. Their images in $F$ are continuous because the extended norm restricts to the norm on $E$. Thus $(g,(x_l))\\mapsto(\\sum_l a_{kl}(g)x_l)_k$ is jointly continuous over $F$. The group laws and equivariance of $i_F,q_F$ follow on pure tensors, hence on their finite sums. Only finite sums and products occur; no completeness of $F$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice analytic input; explicit agent expansion of continuous-section exactness, not a theorem asserted in this blueprint paragraph."
+   }
+  },
+  {
+   "text": "Use [def-sfb-continuous-representation-condensation] for the jointly continuous actions of step 2. It gives the internal action modules $U_F,V_F,Q_F$ and the equivariant morphisms induced by $i_F,q_F$. For the trivial group the same realization statement gives underlying internal-module morphisms induced by $s_F,r_F$; restriction to the trivial group leaves the section realization unchanged. On every profinite $S$, their formulas are postcomposition. In particular $q_{F,*}s_{F,*}=1$, $r_{F,*}i_{F,*}=1$, $r_{F,*}s_{F,*}=0$, and $i_{F,*}r_{F,*}+s_{F,*}q_{F,*}=1$. These identities exhibit the underlying module $V_F$ as the direct sum of $U_F$ and $Q_F$, with the given inclusion and projection. All maps commute with precomposition $S'\\to S$, since $(s_F\\circ f)\\circ t=s_F\\circ(f\\circ t)$, and likewise for $r_F,i_F,q_F$. Therefore this is a split short exact sequence of internal modules, with splitting natural in $S$. The forgetful functor detects exactness by [lem-sfb-condensed-derived-restriction-calculus], so the equivariant sequence is short exact as well. This uses a splitting only after forgetting the action.",
+   "uses": [
+    "def-sfb-continuous-representation-condensation",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice analytic input; explicit agent expansion of continuous-section exactness, not a theorem asserted in this blueprint paragraph."
+   }
+  },
+  {
+   "text": "The action category is abelian by [lem-sfb-condensed-derived-restriction-calculus]. Regard the short exact sequence of step 3 as a degreewise short exact sequence of complexes concentrated in degree zero. Apply [lem-weil-pbc-complex-ses-triangle] to obtain its canonical distinguished triangle $T=(U_F[0]\\to V_F[0]\\to Q_F[0]\\xrightarrow{\\delta}U_F[1])$. By the restriction calculus, $R\\Gamma_\\Pi$ and $R\\Gamma_H D(\\operatorname{Res}_u)$ are triangulated, so their images of $T$ are distinguished triangles with the canonical shift comparisons. The exactness needed here concerns the action and derived categories; it does not assert that taking invariants is exact.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, label lemma-derived-canonical-delta-functor, applied in degree zero; derived invariants and exact restriction from the cited calculus."
+   }
+  },
+  {
+   "text": "Put $A=R\\Gamma_\\Pi$ and $B=R\\Gamma_H D(\\operatorname{Res}_u)$. The natural transformation $b_u:A\\to B$ of [lem-sfb-condensed-derived-restriction-calculus] is natural in derived morphisms and commutes with the canonical shifts. Naturality at $i_F[0]$ and $q_F[0]$ gives the first two triangle squares. Naturality at the actual derived boundary $\\delta:Q_F[0]\\to U_F[1]$ gives $b_u(U_F[1])\\circ A(\\delta)=B(\\delta)\\circ b_u(Q_F[0])$. After the canonical shift identifications, its left component is $b_u(U_F[0])[1]$. This is exactly the connecting-arrow square. Hence the three specified components form a morphism of the image triangles. This argument applies to every topological $H$ and continuous $u$; it uses the derived restriction transformation, with no identification with underived continuous cochains.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice analytic input; explicit agent expansion of continuous-section exactness, not a theorem asserted in this blueprint paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-continuous-representation-condensation",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-continuous-representation-subquotients",
+  "lem-sfb-topological-basis-lift-section",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), continuous-coefficient auxiliary extracted by the parent split; proof supplied here from explicit finite matrices and existing DAG statements, with Stacks Tag 0152 for the short-exact triangle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions from profinite sets to scalar extensions of finite dimensional ell adic representations preserve short exact sequences even for noncomplete extension fields",
+   "results": "8 hits: AdicCompletion.map_exact, Profinite.NobelingProof.succ_exact, Profinite.NobelingProof.CC_exact, Condensed.profiniteSolid, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.factorPow_comp_extend, Hausdorffification.lift",
+   "date": "2026-10-22",
+   "verdict": "no match: exact limits, ordinary module exactness and adic-completion theorems do not give this all-continuous realization and canonical triangle morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of finite dimensional continuous representations yields an exact sequence of internal condensed modules of continuous sections with product norm topology",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod, CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact, Condensed.instAB5CondensedMod, CondensedMod.IsSolid, instAbelianCondensedMod, Profinite.NobelingProof.CC_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: exact limits, ordinary module exactness and adic-completion theorems do not give this all-continuous realization and canonical triangle morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Exact\"",
+   "results": "2 hits: Condensed.hasExactLimitsOfShape, Condensed.hasExactColimitsOfShape",
+   "date": "2026-10-22",
+   "verdict": "no match: exact limits, ordinary module exactness and adic-completion theorems do not give this all-continuous realization and canonical triangle morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "(ContinuousMap|Condensed).*(shortExact|short_exact|map_exact)|(shortExact|short_exact|map_exact).*(ContinuousMap|Condensed)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: exact limits, ordinary module exactness and adic-completion theorems do not give this all-continuous realization and canonical triangle morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of condensed continuous section realization of finite dimensional representations under noncomplete scalar extension",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions into finite dimensional scalar extensions preserve short exact sequences of continuous representations and give natural restriction morphisms of derived invariants triangles",
+   "results": "8 hits: groupCohomology.infNatTrans_app, groupCohomology.infNatTrans, groupCohomology.map_cochainsFunctor_shortExact, Rep.Tor_map, groupCohomology.H1InfRes, groupCohomology.resNatTrans_app, groupCohomology.H1InfRes_f, groupCohomology.H1InfRes_exact",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary discrete group cochains and general exact functors do not identify these continuous-section internal modules and their derived restriction triangles; complete-field continuous splitting alone is only an ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "(ContinuousMap|Condensed).*(shortExact|short_exact|map_exact)|(shortExact|short_exact|map_exact).*(ContinuousMap|Condensed)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary discrete group cochains and general exact functors do not identify these continuous-section internal modules and their derived restriction triangles; complete-field continuous splitting alone is only an ingredient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous section realization of a finite dimensional continuous representation preserves short exact sequences and restriction maps commute with derived connecting arrows",
+   "results": "8 hits: groupHomology.map_chainsFunctor_shortExact, CategoryTheory.Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi, ContinuousMap.continuous_restrict, ContinuousOn.clm_bundle_apply, CategoryTheory.Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono, ContAction.res, CategoryTheory.ShortComplex.ShortExact.map_of_exact, hasFDerivAt_of_restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary discrete group cochains and general exact functors do not identify these continuous-section internal modules and their derived restriction triangles; complete-field continuous splitting alone is only an ingredient."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, Function.Exact",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary discrete group cochains and general exact functors do not identify these continuous-section internal modules and their derived restriction triangles; complete-field continuous splitting alone is only an ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Short exact sequence finite dimensional vector spaces has continuous linear splitting over incomplete normed field with product topology",
+   "results": "8 hits: ContinuousLinearMap.coe_equivProdOfSurjectiveOfIsCompl, ContinuousLinearMap.exists_right_inverse_of_surjective, ContinuousLinearMap.ker_closedComplemented_of_finiteDimensional_range, lequivProdOfLeftSplitExact, lequivProdOfRightSplitExact, ContinuousLinearMap.coprodSubtypeLEquivOfIsCompl, Submodule.ClosedComplemented.of_quotient_finiteDimensional, ContinuousLinearMap.range_eq_map_coprodSubtypeLEquivOfIsCompl",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary discrete group cochains and general exact functors do not identify these continuous-section internal modules and their derived restriction triangles; complete-field continuous splitting alone is only an ingredient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dense-lattice-derived-invariants-comparison",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), dense-lattice analytic input; agent expansion, returned comparison proof step 5: continuous subquotients, E-linear splitting, all-continuous scalar realizations and connecting square.",
+   "via": [
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-continuous-section-exact-triangles",
+  "worker": "stage1",
+  "summary": "Preserved every clause and hypothesis. Proved the E-linear splitting and its F-valued continuous section realization by finite coordinates, then used existing exactness detection and canonical derived restriction calculus. No new nodes: all non-elementary inputs already exist. No completeness of Omega, equivariant splitting, or continuous-cochain acyclicity is assumed.",
+  "blueprint": "Realizes paragraph (3) of the recorded main-20261015 direct-image proof via the parent dense-lattice analytic auxiliary, specifically continuous subquotients, E-linear splitting, all-continuous scalar realization, and the connecting square. The auxiliary is agent-formulated; blueprint.from.node remains null as in the live item and the ancestor tool.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-continuous-representation-subquotients",
+    "why": "Generic finite-dimensional E-representation subquotient topology and continuity; the direct-image unit does not supply this topological linear-algebra lemma."
+   },
+   {
+    "node": "lem-sfb-topological-basis-lift-section",
+    "why": "Generic continuous lifting through a surjection onto a finite free module with a coordinate homeomorphism; supplies the underlying E-linear section and is not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-continuous-representation-subquotients",
+  "lem-sfb-topological-basis-lift-section"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-5d09b8cc4",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-5d09b8cc4 (reviewer sub-agent of L); spot-checked: I read the item in full: statement, 5 steps, split_report. There are no new nodes and no repair note. The statement and stmt_deps match clones/live and side-live exactly, where the item is still unsplit. The coefficient category is consistent: C_F=C(-,F) in the item is the same ring the condensation definition uses through the norm-continuous monodromy data. Step 1: the subquotients lemma gives U and V/U their usual topologies and makes i and q continuous and equivariant. The lift lemma applies with A=E, M=V, N=Q (the empty basis is allowed) and gives a continuous linear section s. r=i^{-1}(1-sq) is continuous, and all five identities hold. Step 2 is genuinely elementary: the coordinates of F⊗_E W come from an E-basis, the extended maps are constant matrices, and the action entries are continuous because E→Ω is continuous. It never uses completeness of Ω, and the product topology does not depend on the basis. Step 3: the condensation definition says a continuous equivariant linear map gives a unique morphism acting by postcomposition, and that restricting the group leaves the realization unchanged. Applied with the trivial group, this turns the pointwise split identities into morphism identities. The splitting is non-equivariant and natural in S. The calculus says forgetting the action detects exactness. Step 4: the ses-triangle Mathlib leaf gives the triangle in degree 0, consistent with the δ=-p∘q^{-1} of Stacks 0152 (derived.tex:3965). The calculus makes RΓ and D(u*) triangulated. Step 5: b_u commutes with shifts and with distinguished triangles including connecting morphisms, which gives the third square. The phrase 'natural in derived morphisms' is a slightly free paraphrase, but the same statement's triangle clause covers it. Edge cases checked: V=0, U=0, U=V, F=E and F=Ω, trivial Π, H and u, the citer's discrete H=Z^r, S=∅, and a non-split unipotent V where the proof never forces δ=0. Batch-5 flag: the new citation lem-sfb-continuous-representation-subquotients reaches only def-pod-l-adic-representations, a general definition the item's statement already cites. Its 27-node closure has no other sec-trace-formula/poincare node, so the citation lies outside the assumptions; accepted. Accepted tool_uses: subquotients (sk-lem-coefficient-heart) and topological basis lift (sk-lem-stratified-lattice) are generic black-box linear algebra. No SGA source is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousSectionExactTriangles",
+  "declaration": "Profinite.CondensedAction.continuousSection_exact_triangles",
+  "declarations": [
+   "Profinite.CondensedAction.RestrictionTriangleCompatible",
+   "Profinite.CondensedAction.ContinuousSectionExactTriangles",
+   "Profinite.CondensedAction.continuousSection_exact_triangles"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousSectionExactTriangles.lean",
+  "statement": "theorem continuousSection_exact_triangles (ℓ : ℕ) [Fact ℓ.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (E : IntermediateField ℚ_[ℓ] Ω) [FiniteDimensional ℚ_[ℓ] E] (P : ProfiniteGrp.{u}) (V : Type (u + 1)) [AddCommGroup V] [Module E V] (ρ : Representation E P V) (_hV : Representation.IsContinuousCoefficient ℓ E P V ((LinearMap.GeneralLinearGroup.generalLinearEquiv E V).toMonoidHom.comp ρ.asGroupHom)) (U : Submodule E V) (hU : ∀ p : P, U ≤ U.comap (ρ p)) : ContinuousSectionExactTriangles E E P V ρ U hU ∧ ContinuousSectionExactTriangles E Ω P V ρ U hU",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two definition helpers expand precisely this node’s conclusion, with the recorded continuous realizations, canonical tensor maps, internal-module splitting and canonical triangleOfSES. Both F=E and F=Omega are asserted; no completeness is imposed. Added the already landed def-sfb-continuous-representation-condensation to stmt_deps because its Realization, RepresentsMap, Extended and extendedRepresentation occur in the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d624f6909",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Read item node (only lean + stmt_deps changed; added landed def-sfb-continuous-representation-condensation, used in signature), all 9 stmt_dep records, side-live sources of ContinuousRepresentationCondensation, CondensedDerivedInvariants (derived/groupDerived/groupMap/groupMapShift/forgetExact), CondensedEquivariantBarData, LAdic.IsContinuousCoefficient, Mathlib triangleOfSES/TriangleMorphism. Clause match: F∈{E,Ω} as two conjuncts, no CompleteSpace; subfield norm on E = spectral norm on finite ext; actual U, V⧸U, subrepresentation/quotient; Realizations pinned on sections (unique up to iso) and maps pinned by RepresentsMap of baseChange subtype/mkQ; ShortExact in Equivariant; Nonempty Splitting after forgetAction (natural in S, non-equivariant); triangleOfSES distinguished; triangle morphism with homs = groupMap.app incl. comm₃ connecting square, ∀ topological H : Type u. Edge cases U=0,U=V,V=0, empty S, trivial groups OK; V:Type(u+1) forced by Realization. Statement verbatim; no hollow defs; sorry only; docstrings with source+blueprint and 5 proof steps; report sections present. Advisory: groupMap/derived owned by def-sfb-condensed-derived-invariants reached transitively via cited calculus node. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,328 @@
+{
+ "id": "lem-trf-finite-curve-quotient-stalk-euler",
+ "kind": "statement",
+ "title": "Finite curve modification quotient: finite support, germs and Euler characteristic",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a proper reduced $k$-scheme of pure dimension one [def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-pure-dimension], and let $f:Y\\to X$ be a finite surjective $k$-morphism [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. Suppose there is an open subset $N\\subseteq X$ containing the generic point of every irreducible component [def-weil-irreducible-components] such that $f^{-1}(N)\\to N$ is an isomorphism. Put $B=f_*\\mathcal O_Y$ and $F=\\operatorname{coker}(\\mathcal O_X\\to B)$, with direct image and cokernel in the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]; thus $B(U)=\\mathcal O_Y(f^{-1}U)$ and the cokernel is the sheafification of the sectionwise quotient. Then $\\mathcal O_X\\to B$ is injective, $B$ and $F$ are coherent [pqf-def-coherent], and\n$$0\\longrightarrow\\mathcal O_X\\longrightarrow B\\longrightarrow F\\longrightarrow0$$\nis a short exact sequence. The support $S=\\{y\\in X:F_y\\ne0\\}$, where $F_y=\\varinjlim_{y\\in U}F(U)$, is a finite set of closed points. The $k$-linear germs map is an isomorphism\n$$\\Gamma(X,F)\\xrightarrow{\\ \\sim\\ }\\bigoplus_{y\\in S}F_y.$$\nEvery stalk $F_y$ is finite-dimensional over $k$, $H^q(X,F)=0$ for $q>0$ [def-sc-ringed-space-module-cohomology], and\n$$\\chi(X,F)=\\sum_{y\\in S}\\dim_k F_y=\\sum_{y\\in X\\text{ closed}}\\dim_k F_y$$\n[def-pc-euler-characteristic]. The sum over closed points has only finitely many nonzero terms. Neither connectedness nor nodality nor normality of $Y$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C1R (lemma-prepare-delta-invariant), injectivity and finite-support normalization-sequence argument, generalized here to a finite surjective map that is an isomorphism near every component generic point; Tag 0AYT (lemma-chi-tensor-finite), parts (2)--(4)."
+ },
+ "stmt_deps": [
+  "def-pc-euler-characteristic",
+  "def-pc-reduced-scheme",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-proper-morphism",
+  "def-weil-pure-dimension",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-surjective-morphism",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-proper-field-invertible-coherent] to $X$ and the invertible module $\\mathcal O_X$ (trivial rank-one frame). Thus $X$ is Noetherian and $\\mathcal O_X$ is coherent. By [def-weil-finite-integral-morphism], $B=f_*\\mathcal O_Y$ is quasi-coherent of finite type, so [pqf-lem-coherent-ft-locnoeth] makes $B$ coherent. The canonical structure map is $\\mathcal O_X$-linear. Its sheaf cokernel $F$ is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](1). No reducedness or normality of $Y$ enters this argument.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "def-sc-invertible-module",
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ (lemma-coherent-Noetherian) and 01Y0 (lemma-coherent-abelian-Noetherian); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "The finite morphism $f$ is affine by [def-weil-finite-integral-morphism], hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence](3). Its topological image is all of $X$, hence dense. As $X$ is reduced, [lemma-nagata-reduced-dense-image-schematic] says its scheme-theoretic image is $X$. For a quasi-compact morphism the ideal defining that image is the actual kernel of $\\mathcal O_X\\to f_*\\mathcal O_Y$, by [def-nagata-scheme-theoretic-image]. Therefore this kernel is zero, proving the required injectivity.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S7 (lemma-affine-separated), 01R8 (lemma-quasi-compact-scheme-theoretic-image) and 056D (lemma-reduced-scheme-theoretically-dense); reduced dense-image criterion as in the current blueprint lemma-nagata-reduced-dense-image-schematic."
+   }
+  },
+  {
+   "text": "In the abelian category of module sheaves [def-weil-sheaf-of-modules-category], the cokernel projection $B\\to F$ is epic and its kernel is the image of $\\mathcal O_X\\to B$. Together with Step 2 this is precisely the short exact sequence in [def-weil-pbc-exact-sequence]. Over $N$ the given scheme isomorphism identifies the structure map with the identity of $\\mathcal O_N$. Hence the cokernel is zero on $N$: locally every section of $B$ is in the image there, so its class in the sheafified quotient is zero. Thus $S\\subseteq E:=X\\setminus N$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), proof of the normalization short exact sequence, applied to the stated isomorphism locus N."
+   }
+  },
+  {
+   "text": "Every point $x$ of $E$ is closed in $X$. Indeed the Noetherian closed-subset component theorem [lem-sc-noetherian-closed-subset-finite-components], applied first to $X$, puts $x$ in an irreducible component $C$ of dimension one. It is not the generic point of $C$, since that point lies in $N$. Thus $\\overline{\\{x\\}}\\subsetneq C$. If $y\\ne x$ were a specialization of $x$, sobriety and its uniqueness clause [lem-sc-scheme-sober] give $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x\\}}\\subsetneq C$, contradicting dimension one [def-weil-pure-dimension]. Apply the same Noetherian closed-subset component theorem to the closed subset $E$. Each of its finitely many irreducible components has a generic point by sobriety, and that point is closed in $X$ by the preceding argument; hence each component is a singleton. Therefore $E$, and thus $S\\subseteq E$, is finite and consists of closed points. In particular $S$ is closed and has dimension at most zero; the empty case is included.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), proof: the non-isomorphism locus in a Noetherian curve is discrete closed; properties.tex Tag 0BA8 (lemma-Noetherian-irreducible-components), schemes.tex Tag 01IS (lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coherent-finite-support-skyscrapers] using Step 1 and Step 4. It gives the canonical module-sheaf isomorphism $F\\simeq\\bigoplus_{y\\in S}\\mathscr S_y(F_y)$ whose components send sections to germs. Evaluate it on $X$. Since $S$ is finite, the sum is also the finite product, and its sections are componentwise tuples; by the explicit skyscraper sections each summand contributes exactly $F_y$. Thus the resulting isomorphism is exactly the displayed germs map $\\Gamma(X,F)\\to\\bigoplus_{y\\in S}F_y$. The scalar action in that node is through structure-sheaf germs, so the map is $k$-linear.",
+   "uses": [
+    "lem-trf-coherent-finite-support-skyscrapers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), part (2); Tag 0C1R (lemma-prepare-delta-invariant), finite closed-support skyscraper description."
+   }
+  },
+  {
+   "text": "By [lem-sfb-coherent-zero-dimensional-support], applied to the coherent module $F$ on the locally Noetherian scheme $X$ with the zero-dimensional support of Step 4, $H^q(X,F)=0$ for all $q>0$. Apply [lem-pc-coherent-hi] to $X\\to\\operatorname{Spec}k$: the field $k$ is Noetherian (its ideals are $0$ and $k$), so $H^0(X,F)$ is a finite $k$-module. The degree-zero comparison [lem-sc-open-cohomology-zero-sections], with $U=X$, identifies it with $\\Gamma(X,F)$. Hence this section space is finite-dimensional. Step 5 identifies every $F_y$ for $y\\in S$ with a direct summand of that finite-dimensional vector space, so each has finite dimension. For $y\\notin S$, $F_y=0$ by the definition of $S$, which covers every other stalk.",
+   "uses": [
+    "lem-sfb-coherent-zero-dimensional-support",
+    "lem-pc-coherent-hi",
+    "lem-sc-open-cohomology-zero-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), parts (2)--(4); coherent.tex Tags 0B3J (lemma-coherent-support-dimension-0) and 02O6 (lemma-proper-over-affine-cohomology-finite)."
+   }
+  },
+  {
+   "text": "By [def-pc-euler-characteristic] and Step 6, all positive-degree terms in the Euler sum vanish, so $\\chi(X,F)=\\dim_k\\Gamma(X,F)$. The dimension of the finite direct sum in Step 5 is the sum of the dimensions of its summands: concatenate finite bases of the $F_y$. This gives $\\chi(X,F)=\\sum_{y\\in S}\\dim_kF_y$. Every closed point outside $S$ has zero stalk, so extending this finite sum to all closed points adds only zero terms. If $S$ is empty, Step 5 gives the zero section space and every asserted sum is zero.",
+   "uses": [
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), parts (2)--(4), and the finite-dimensional direct-sum dimension formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-euler-characteristic",
+  "def-sc-invertible-module",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pure-dimension",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-open-cohomology-zero-sections",
+  "lem-sc-scheme-sober",
+  "lem-sfb-coherent-zero-dimensional-support",
+  "lem-trf-coherent-finite-support-skyscrapers",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C1R and 0AYT: finite modification generalization of the normalization-sequence argument, assembled from the cited existing generic tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism to a reduced proper curve which is an isomorphism near every generic point has an injective structure sheaf map and coherent quotient with finite closed support and Euler characteristic equal to the sum of stalk dimensions",
+   "results": "{\"t\": \"2026-10-22T06:10:17Z\", \"tool\": \"leanfinder\", \"query\": \"A finite surjective morphism to a reduced proper curve which is an isomorphism near every generic point has an injective structure sheaf map and coherent quotient with finite closed support and Euler characteristic equal to the sum of stalk dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.germ_injective_of_isIntegral\"], \"digest\": \"bea45d3840d3687b\"}; Read all returned signatures: relative normalization, germs and restriction-vanishing results do not give coherent defect support or its Euler/stalk calculation; the AlgebraicGeometry grep and Loogle Euler query returned no hits. The second semantic phrasing still found restriction-vanishing results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*quotient|quotient.*normalization|finiteSupport.*cohomology|eulerChar|eulerCharacteristic",
+   "results": "{\"t\": \"2026-10-22T06:10:28Z\", \"tool\": \"grep\", \"query\": \"normalization.*quotient|quotient.*normalization|finiteSupport.*cohomology|eulerChar|eulerCharacteristic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures: relative normalization, germs and restriction-vanishing results do not give coherent defect support or its Euler/stalk calculation; the AlgebraicGeometry grep and Loogle Euler query returned no hits. The second semantic phrasing still found restriction-vanishing results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"euler\"",
+   "results": "{\"t\": \"2026-10-22T06:10:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"euler\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures: relative normalization, germs and restriction-vanishing results do not give coherent defect support or its Euler/stalk calculation; the AlgebraicGeometry grep and Loogle Euler query returned no hits. The second semantic phrasing still found restriction-vanishing results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite birational morphism of reduced proper curves the normalization defect sheaf has finite support and its Euler characteristic is the sum of its stalk dimensions",
+   "results": "{\"t\": \"2026-10-22T06:10:29Z\", \"tool\": \"leansearch\", \"query\": \"For a finite birational morphism of reduced proper curves the normalization defect sheaf has finite support and its Euler characteristic is the sum of its stalk dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"995cdcc096a58f5e\"}; Read all returned signatures: relative normalization, germs and restriction-vanishing results do not give coherent defect support or its Euler/stalk calculation; the AlgebraicGeometry grep and Loogle Euler query returned no hits. The second semantic phrasing still found restriction-vanishing results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a coherent module on a proper curve supported at finitely many closed points are the direct sum of its stalks and higher cohomology vanishes",
+   "results": "{\"t\": \"2026-10-22T06:10:43Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of a coherent module on a proper curve supported at finitely many closed points are the direct sum of its stalks and higher cohomology vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"b55785354e74defe\"}; Read all returned signatures: relative normalization, germs and restriction-vanishing results do not give coherent defect support or its Euler/stalk calculation; the AlgebraicGeometry grep and Loogle Euler query returned no hits. The second semantic phrasing still found restriction-vanishing results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSupport.*cohomology|eulerChar|eulerCharacteristic|coherent.*skyscraper",
+   "results": "{\"t\": \"2026-10-23T09:34:19Z\", \"tool\": \"grep\", \"query\": \"finiteSupport.*cohomology|eulerChar|eulerCharacteristic|coherent.*skyscraper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Semantic hits concern finite fibres, normalization and structure-sheaf germs, not the coherent quotient/Euler assertion. Grep and Loogle have no hits. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a coherent sheaf supported at finitely many closed points are the direct sum of its stalks and higher cohomology vanishes",
+   "results": "{\"t\": \"2026-10-23T09:34:20Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of a coherent sheaf supported at finitely many closed points are the direct sum of its stalks and higher cohomology vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv\", \"AlgebraicGeometry.germ_stalkClosedPointIso_hom\", \"TopCat.Presheaf.Γgerm\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"CategoryTheory.Sheaf.coneΓ_pt\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.sections\"], \"digest\": \"ef559a933fbfad24\"}; Semantic hits concern finite fibres, normalization and structure-sheaf germs, not the coherent quotient/Euler assertion. Grep and Loogle have no hits. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"euler\"",
+   "results": "{\"t\": \"2026-10-23T09:34:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"euler\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Semantic hits concern finite fibres, normalization and structure-sheaf germs, not the coherent quotient/Euler assertion. Grep and Loogle have no hits. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism to a reduced proper curve that is an isomorphism near component generic points has coherent quotient with finite support and Euler characteristic the sum of stalk dimensions",
+   "results": "{\"t\": \"2026-10-23T09:34:30Z\", \"tool\": \"leanfinder\", \"query\": \"A finite surjective morphism to a reduced proper curve that is an isomorphism near component generic points has coherent quotient with finite support and Euler characteristic the sum of stalk dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\"], \"digest\": \"4c25a81115bff79c\"}; Semantic hits concern finite fibres, normalization and structure-sheaf germs, not the coherent quotient/Euler assertion. Grep and Loogle have no hits. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The defect of a finite modification of a proper reduced one-dimensional scheme is a coherent module of finite closed support with global sections equal to its stalk sum",
+   "results": "{\"t\": \"2026-10-23T09:39:19Z\", \"tool\": \"leanfinder\", \"query\": \"The defect of a finite modification of a proper reduced one-dimensional scheme is a coherent module of finite closed support with global sections equal to its stalk sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"909b2442fc919ae2\"}; Semantic hits concern finite fibres, normalization and structure-sheaf germs, not the coherent quotient/Euler assertion. Grep and Loogle have no hits. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-reduced-curve-normalization-genus",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion, proof step 5: Appendix B genus/tree calculation. Appendix B, Lemma B.1 and its normalization exact sequence, printed p. 57; same Euler-characteristic identity for possibly disconnected curves. Returned proof steps 3--7 of lem-trf-reduced-curve-normalization-genus: the normalization quotient and its finite-support Euler contribution.",
+   "via": [
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-trf-curve-p1-tree-local-criterion",
+    "lem-trf-valuation-exceptional-local-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-curve-quotient-stalk-euler",
+  "worker": "stage1",
+  "summary": "Proved injectivity by reduced schematic density, coherence by finite algebra and cokernel closure, boundary finiteness by Noetherian dimension-one topology, and the canonical germs/Euler formulas using existing finite-support tools. Statement hypotheses retained; no new nodes.",
+  "blueprint": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion, proof step 5: Appendix B genus/tree calculation. Appendix B, Lemma B.1 and its normalization exact sequence, printed p. 57; same Euler-characteristic identity for possibly disconnected curves. Returned proof steps 3--7 of lem-trf-reduced-curve-normalization-genus: the normalization quotient and its finite-support Euler contribution. This refines the historical normalization exact-sequence/Euler input; no replacement of the current contracting-correspondence route. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Noetherianity and coherence on a proper field scheme; used with the trivial line bundle; independent generic preparation. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Convert the finite-type quasi-coherent algebra furnished by finiteness to a coherent module. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Coherence of the actual sheaf cokernel; generic coherent-module closure. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "An affine map is quasi-compact and quasi-separated, needed for schematic-image injectivity. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "lemma-nagata-reduced-dense-image-schematic",
+    "why": "Reduced dense-image criterion for the structure-map kernel; no normalization hypothesis. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Finite component decomposition of the boundary; generic Noetherian topology. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic points and their uniqueness turn zero-dimensional components into singletons. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "lem-sfb-coherent-zero-dimensional-support",
+    "why": "Higher module-cohomology vanishing for coherent zero-dimensional support. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Proper coherent finiteness over Spec k gives finite-dimensional global sections. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   },
+   {
+    "node": "lem-sc-open-cohomology-zero-sections",
+    "why": "Identify zeroth derived sections with ordinary sections at the full open. The local-term unit has no corresponding general coherent-sheaf/topological lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-proper-field-invertible-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-sfb-coherent-zero-dimensional-support",
+  "lem-pc-coherent-hi",
+  "lem-sc-open-cohomology-zero-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-fe236ec14",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-fe236ec14 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, every cited statement, and Stacks varieties.tex 0C1R (lemma-prepare-delta-invariant) with its proof. The item statement is byte-identical to live (unsplit). The only change outside the proof is the stmt_dep def-weil-pbc-exact-sequence, which is correct because the statement asserts a short exact sequence. No new nodes, no repair note, no SGA citation. Step 1: the proper-field lemma with O_X makes X Noetherian; the finite-morphism def gives B quasi-coherent of finite type, hence coherent (01XZ node); the coherent cokernel node makes F coherent. Step 2: finite implies affine, hence qcqs (affine-permanence (3)), surjective gives dense image, and X reduced gives SIm=X by the reduced-dense-image lemma; the schematic-image def says the kernel ideal is the actual kernel for quasi-compact maps, so O_X→B is injective. Step 3 (elementary): the sequence comes from the abelian cokernel, F|_N=0, so S⊆X∖N. Step 4: each x∉N is closed, because a specialization y≠x would give cl{y}⊊cl{x}⊊C (sober uniqueness), contradicting pure dimension 1; the components of the closed set E are therefore closed points, so E is finite. Step 5: the finite-support skyscraper node, evaluated at X, gives the k-linear germs isomorphism. Step 6: zero-dimensional support gives H^q=0 for q>0 (Zariski convention), 02O6 over Spec k gives H^0 finite, and H^0=Γ; stalks are summands of Γ, so finite-dimensional. Step 7: χ=dim Γ=Σ dim F_y. Edge cases checked: f an isomorphism, the nodal cubic (defect 1), a node with a degree-2 residue field, nonreduced Y with an embedded thickening, and empty X. Duplicate search (0C1R, delta-invariant, normalization sequence): existing nodes all need k algebraically closed, the normalization or nodality, so none duplicates the item. I accept all ten off-unit generic tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCurveQuotientStalkEuler",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_curve_quotient_stalk_euler",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.finiteCurveQuotient",
+   "AlgebraicGeometry.Scheme.Modules.finiteCurveQuotientSections",
+   "AlgebraicGeometry.Scheme.Modules.finiteCurveQuotientStalk",
+   "AlgebraicGeometry.Scheme.Modules.finite_curve_quotient_stalk_euler"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCurveQuotientStalkEuler.lean",
+  "statement": "theorem finite_curve_quotient_stalk_euler (k : Type u) [Field k] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [IsReduced X] (hdim : X.IsPureDimension 1) (f : Y ⟶ X) [f.IsOver (Spec (.of k))] [IsFinite f] [Surjective f] (N : X.Opens) (hN : ∀ (Z : Set X), Z ∈ irreducibleComponents X → ∀ x : X, IsGenericPoint x Z → x ∈ N) (hiso : IsIso (morphismRestrict f N)) : Mono (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom) ∧ RingedSpace.IsCoherent X.toRingedSpace ((pushforward f).obj (SheafOfModules.unit Y.ringCatSheaf)) ∧ RingedSpace.IsCoherent X.toRingedSpace (finiteCurveQuotient f) ∧ (ShortComplex.mk (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom) (cokernel.π (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)) (cokernel.condition _)).ShortExact ∧ (∀ x : X, FiniteDimensional k (finiteCurveQuotientStalk k f x)) ∧ (∀ q : ℕ, 0 < q → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (finiteCurveQuotient f))) ∧ ∃ S : Finset X, (∀ x : X, x ∈ S ↔ ¬ Subsingleton ((finiteCurveQuotient f).presheaf.stalk x)) ∧ (∀ x ∈ S, IsClosed ({x} : Set X)) ∧ (∃ e : finiteCurveQuotientSections k f ≃ₗ[k] ⨁ x : {x : X // x ∈ S}, finiteCurveQuotientStalk k f x.val, ∀ (s : finiteCurveQuotientSections k f) (x : {x : X // x ∈ S}), e s x = (finiteCurveQuotient f).presheaf.germ ⊤ x.val (Set.mem_univ x.val) s) ∧ (finiteCurveQuotient f).eulerChar k = ∑ x ∈ S, (Module.finrank k (finiteCurveQuotientStalk k f x) : ℤ) ∧ (finiteCurveQuotient f).eulerChar k = ∑ᶠ x : {x : X // IsClosed ({x} : Set X)}, (Module.finrank k (finiteCurveQuotientStalk k f x.val) : ℤ) ∧ (Set.Finite {x : {x : X // IsClosed ({x} : Set X)} | (Module.finrank k (finiteCurveQuotientStalk k f x.val) : ℤ) ≠ 0})",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c38e819ea",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Fresh S2 delivery (first after Q66 S1 land 1bc177cf). Item changed only in lean; all 12 stmt_dep records identical to side-live. Hypotheses match node exactly (Field k, X.Over/IsProper, IsReduced, IsPureDimension 1, IsFinite+Surjective k-morphism, N with hN over irreducibleComponents/IsGenericPoint, IsIso morphismRestrict f N); no extra assumptions; universe u forced by Spec(.of k). Conclusions: Mono unitToPushforwardObjUnit, IsCoherent of Scheme.Modules.pushforward (=SheafOfModules.pushforward, same target) and of actual cokernel, ShortExact with cokernel.π, Finset S ↔ ¬Subsingleton stalk + closed, k-LinearEquiv pinned to germ, all stalks finite-dim, moduleCohomology q>0 zero, eulerChar = Σ_S finrank = finsum over closed points + Set.Finite nonzero. Helpers are real data (cokernel abbrev, restrictScalars of globalSectionsFunctor / moduleStalkFunctor along globalSectionsRingHom), k-action consistent with eulerChar. Docstrings with source/blueprint/7 steps, sorry only in theorem, statement verbatim, ≤100 cols, proof-dep imports. Edge cases (empty X, iso f, reducible X, nonreduced Y, residue extensions, q=0) covered. No recompile (no change)."
+ }
+}

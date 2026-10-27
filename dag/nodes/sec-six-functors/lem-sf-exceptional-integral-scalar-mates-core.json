@@ -1,0 +1,103 @@
+{
+ "id": "lem-sf-exceptional-integral-scalar-mates-core",
+ "kind": "statement",
+ "title": "Exceptional integral scalar mates: core data before ramified witness",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Under the hypotheses of lem-sf-exceptional-integral-scalar-mates, there exist Mates data, reduction mates at every finite level, and SystemMates data for every integral coefficient extension; the final existence of an explicit ramified index witness is omitted.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22 and Proposition 5.26; the non-index clauses of the integral scalar construction."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct the finite and integral scalar mates by the ten-step system transport, reconstruction, and proper/open realization argument of the parent node, stopping before the independent arithmetic ramified-index witness.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Lemma 5.22 and Proposition 5.26."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": "split from the parent theorem by stage-3 worker Z5",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "system scalar mate reduction reconstruction",
+   "results": "no direct match",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "generic categorical matches only",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptionalIntegralScalarMates_core",
+   "results": "no prior declaration",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalIntegralScalarMates",
+  "date": "2026-10-27",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-integral-scalar-mates",
+   "place": "The first three clauses of the conclusion, before the final explicit ramified witness."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalIntegralScalarMates",
+  "file": "lean/Sheaf/Paper/ExceptionalIntegralScalarMates.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.exceptionalIntegralScalarMates_core",
+  "statement": "theorem exceptionalIntegralScalarMates_core\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]\n    [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]\n    [QuasiCompact f] (c : Compactification f)\n    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))\n    (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))\n    (transport : Transported l Ω D hl c operation left) :\n    ∃ d : Mates l Ω c operation left,\n      ∃ red : ∀ (E : FieldStage.{u} l) (n : ℕ),\n        ReductionMates l Ω D hl c operation left transport d E n,\n      ∀ (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier),\n        Nonempty (SystemMates l Ω D hl c operation left transport d red E L i)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T013014-L-2358101",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6ba87",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T034704-L-3674379",
+  "kind": "proof",
+  "note": "independent cc review: delivered ExceptionalIntegralScalarMates.lean + node lem-sf-exceptional-integral-scalar-mates against clone 368903d5532, unit sk-thm-sf-compatibility (realized empty), import graph (0 importers), scratch #print axioms",
+  "sorry_before": [
+   "WeilConjectures.ExceptionalIntegralScalar.exceptionalIntegralScalarMates",
+   "WeilConjectures.ExceptionalIntegralScalar.exceptionalIntegralScalarMates_core",
+   "WeilConjectures.ExceptionalIntegralScalar.ramifiedRecovery"
+  ],
+  "sorry_after": [
+   "WeilConjectures.ExceptionalIntegralScalar.exceptionalIntegralScalarMates_core",
+   "WeilConjectures.ExceptionalIntegralScalar.ramifiedRecovery"
+  ]
+ }
+}

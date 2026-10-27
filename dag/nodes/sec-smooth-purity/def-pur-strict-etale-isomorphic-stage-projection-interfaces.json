@@ -1,0 +1,104 @@
+{
+ "id": "def-pur-strict-etale-isomorphic-stage-projection-interfaces",
+ "kind": "definition",
+ "title": "Strict étale isomorphic-stage projection interfaces",
+ "statement": "For strict compact-support presentations and a coefficient change, define the normalized quotient projection record, its open/proper composite projection, and the compact-support transport projection record with its evaluation and quotient cubes. These records contain only data and normalization equations; they assert no existence.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15 and Lemma 5.22; normalized compact-support projection and quotient cubes."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-strict-etale-coefficient-transport-interfaces"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of inverse systems of sheaves along a monotone map and coefficient ring isomorphisms commutes with derived compact support and quotient tensor",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.pushforwardNatIso_inv; scheme restriction isomorphisms. Ordinary tools, no strict derived-system projection cube.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; inspected result signatures."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv, mateEquiv_counit, mateEquiv_vcomp and generic mate identities.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical tools do not construct the strict coefficient transports or their geometric cube."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of finite free coefficients commutes with right adjoints of compact support on derived sheaf systems",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; sheafificationCompPullback; ordinary sheaf pullback/pushforward adjunctions.",
+   "date": "2026-10-26",
+   "verdict": "No strict coefficient-system geometric realization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*[Ii]somorphic|[Cc]ofinal.*[Pp]rojection|mate.*cube",
+   "results": "msearch: zero Mathlib hits. Repository search found the existing alternate SystemProjection cofinal interface, but no bridge to the StrictEtale transport records.",
+   "date": "2026-10-26",
+   "verdict": "New bridge required. Generic exchangeMate_cube is used to assemble the parent exceptional comparison, not restated here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictEtaleIsomorphicStageProjection",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Former strict coefficient-system construction, parent cofinal step: identity-on-representatives quotient identifications and geometric projection squares before taking the exceptional mate.",
+   "via": [
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictEtaleIsomorphicStageProjectionInterfaces",
+  "file": "lean/Sheaf/Paper/StrictEtaleIsomorphicStageProjectionInterfaces.lean",
+  "declaration": "AlgebraicGeometry.StrictEtaleQuotientProjection",
+  "declarations": [
+   "AlgebraicGeometry.StrictEtaleQuotientProjection",
+   "AlgebraicGeometry.StrictEtaleQuotientProjection.projection",
+   "AlgebraicGeometry.StrictEtaleTransportProjection"
+  ],
+  "statement": "structure StrictEtaleQuotientProjection {O : Type (u + 1)} [CommRing O] {ell : O} {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} (S : StrictEtaleCompactSupport O ell c)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3f2d5",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T023216-L-530734",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3f2d5",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T023216-L-530734",
+  "kind": "interface",
+  "note": "independent cc review: moved Interfaces declarations vs published item module (diff identical); item proof vs two new sorried lemmas and their nodes; importer EtaleCoefficientSystemAdjoint compiled against delivery vs published (no errors, both >60s under load ~88)"
+ }
+}

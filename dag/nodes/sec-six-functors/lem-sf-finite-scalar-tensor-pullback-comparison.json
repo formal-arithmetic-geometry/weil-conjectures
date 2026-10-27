@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-pullback-comparison",
+ "kind": "statement",
+ "title": "Constant-scalar tensor comparison commutes with pro-etale inverse image",
+ "statement": "Let R be a finite commutative ring, p:X→Y any scheme morphism, and aX,aY the representative-normalized unbounded intrinsic tensor models [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Write EX,EY for the specified associated-module-sheaf derived equivalences [def-weil-proetale-inverse-image]. Let alpha: EY.functor ⋙ Lp_intrinsic^* ≅ Lp_fixed^* ⋙ EX.functor be the inverse mate of the constant-section-normalized right derived direct-image comparison, after identifying the two intrinsic direct-image presentations by the coefficient Hom bijection [lem-stage3-inverse-mate-equivalences]. There exist natural tensor isomorphisms tX:EX(M tensor_fixed N)≅aX(EX(M),EX(N)) and tY analogously, such that alpha, the published fixed-scalar inverse-image tensor comparison, and the canonical intrinsic inverse-image tensor comparison satisfy ComparisonCompatible [lem-sp-categorical-projection-mate-square]. This asserts only tensor and inverse-image compatibility, for all unbounded pairs; no projection map or its invertibility occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 07A6 (lemma-adjoint); constant-scalar tensor square in step 1 of lem-sf-finite-scalar-proper-projection-presentation"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-proetale-inverse-image",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-sp-categorical-projection-mate-square",
+  "def-sf-finite-scalar-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Construct tX and tY from the unique normalized single-site tensor realization, whose ordinary and signed-total tensor maps and descent are proved.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the two sides of ComparisonCompatible as natural transformations on the product of fixed derived categories. The representative square identifies their components at flat-term K-flat pairs.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve each of two arbitrary derived objects by a flat-term K-flat complex. Naturality along the resulting pair of localization isomorphisms and cancellation transfer the representative equation to that pair. Natural transformation extensionality and currying give ComparisonCompatible for all inputs.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-realization",
+  "lem-sf-finite-scalar-tensor-pullback-representatives",
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4: construct each tensor realization and reduce the inverse-image square to resolving pairs; extend to all derived inputs by naturality along flat K-flat resolutions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between sheaves of modules over a constant ring and module valued sheaves identifies derived tensor products and counit projection formula maps",
+   "results": "Eight ordinary sheaf-of-modules unit, tensor and pushforward results. None supplies the normalized unbounded scalar tensor-pullback comparison.",
+   "date": "2026-10-27",
+   "verdict": "No specialized comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.isoMk",
+   "results": "Arrow.isoMk and its four endpoint equations construct the final arrow isomorphism, but do not identify tensor comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the constructor in the parent; it does not close this tensor step."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]omparison.*[Mm]ate|[Cc]omparison[Cc]ompatible",
+   "results": "Mathlib service returned no hits. Repository search found ProjectionMapMate.ComparisonCompatible and ConstantModuleDerivedProjectionIdentification; the latter uses generic restriction data, not the specified pro-etale realization and supplied tensor models.",
+   "date": "2026-10-27",
+   "verdict": "The categorical projection assembly exists; its pro-etale tensor-square specialization is the remaining step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived equivalence from module valued sheaves to modules over the constant ring sheaf preserves the tensor pullback comparison normalized by the direct image adjunction",
+   "results": "Eight ordinary pullback and adjunction lemmas; none compares the specified derived scalar realization and tensor models.",
+   "date": "2026-10-27",
+   "verdict": "No specialized derived tensor square found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarProperProjectionPresentation",
+  "date": "2026-10-27",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-proper-projection-presentation",
+   "place": "Step 1 and the tensor compatibility part of step 2; projection transposes and final arrow assembly are proved in the parent.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorPullbackComparison",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorPullbackComparison.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorPullbackComparison",
+  "declarations": [
+   "WeilConjectures.finiteScalarTensorPullbackComparison"
+  ],
+  "statement": "theorem finiteScalarTensorPullbackComparison\n    (R : Type u) [CommRing R] [Finite R]\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (aX : ProEtaleTensorModel X (proEtaleConstantRing X R))\n    (aY : ProEtaleTensorModel Y (proEtaleConstantRing Y R)) :\n    ∃ (tX : (postcompose₂.obj (sfIntrinsicDerivedEquivalence X R).functor).obj\n          (ProEtale.derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1} R)) X) ≅\n        (((whiskeringLeft₂ _).obj (sfIntrinsicDerivedEquivalence X R).functor).obj\n          (sfIntrinsicDerivedEquivalence X R).functor).obj (curry.obj aX.tensor))\n      (tY : (postcompose₂.obj (sfIntrinsicDerivedEquivalence Y R).functor).obj\n          (ProEtale.derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1} R)) Y) ≅\n        (((whiskeringLeft₂ _).obj (sfIntrinsicDerivedEquivalence Y R).functor).obj\n          (sfIntrinsicDerivedEquivalence Y R).functor).obj (curry.obj aY.tensor)),\n      Adjunction.ComparisonCompatible (finiteScalarPullbackComparison R p)\n        (ProEtale.leftDerivedUpperStarTensorComparison\n          (ModuleCat.{u + 1} (ULift.{u + 1} R)) p)\n        (finiteScalarCurriedTensorPullback R p aX aY) tX tY",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261027T012949-L-2352656",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged); moved defs vs clone bodies (verbatim); 7 delivered modules + direct importer FiniteScalarProperProjectionPresentation compiled in sandbox; hole statement vs its node and the pinned definitions it uses"
+ }
+}

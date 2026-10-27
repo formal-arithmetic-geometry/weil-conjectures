@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-proper-curve-function-field-morphisms",
+ "kind": "statement",
+ "title": "Nonconstant maps of smooth proper curves and function-field embeddings",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure], and let $X,Y$ be smooth proper integral $k$-curves of dimension one [def-sc-curves], [def-pc-integral-scheme]. Their function fields $k(X),k(Y)$ [def-sc-function-field] are finitely generated extensions of $k$ of transcendence degree one [def-pc-field-extension], [def-kun-transcendence-degree]. A $k$-morphism $f:X\\to Y$ is called nonconstant when it does not factor through a $k$-rational point of $Y$. Every such $f$ sends the generic point of $X$ to that of $Y$ and induces a $k$-embedding $f^*:k(Y)\\hookrightarrow k(X)$; the resulting extension $k(X)/f^*k(Y)$ is finite [def-pc-field-tower]. The assignment $f\\mapsto f^*$ is a bijection between nonconstant $k$-morphisms $X\\to Y$ and $k$-embeddings $k(Y)\\hookrightarrow k(X)$. It respects identities and composition: $(g\\circ f)^*=f^*\\circ g^*$ whenever $g:Y\\to Z$ is another nonconstant morphism between such curves.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), equivalence of categories (1) and (6) and the fully faithful functor in the third paragraph of its proof; smooth curves are nonsingular. Finiteness follows from finite generation and transcendence degree one."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree",
+  "def-pc-field-tower"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-curve-function-field-arithmetic] to $X$ and $Y$ (integral, finite type, dimension one). This gives finite generation and transcendence degree one for both function fields.",
+   "uses": [
+    "lem-sfb-curve-function-field-arithmetic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), third proof paragraph; explicit generic-point construction, valuative extension and equalizer uniqueness"
+   }
+  },
+  {
+   "text": "For a nonconstant $f:X\\to Y$, [lem-sfb-curve-nonconstant-generic-criterion] gives $f(\\eta_X)=\\eta_Y$ and its actual generic-stalk $k$-embedding $f^*$. Apply the field-extension clause of [lem-sfb-curve-function-field-arithmetic] to this embedding: $[k(X):f^*k(Y)]<\\infty$.",
+   "uses": [
+    "lem-sfb-curve-nonconstant-generic-criterion",
+    "lem-sfb-curve-function-field-arithmetic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), third proof paragraph; explicit generic-point construction, valuative extension and equalizer uniqueness"
+   }
+  },
+  {
+   "text": "Given a $k$-embedding $\\varphi:k(Y)\\hookrightarrow k(X)$, $X$ is connected because it is irreducible. Thus [lem-sfb-smooth-curve-embedding-extension] gives $F:X\\to Y$ with $F(\\eta_X)=\\eta_Y$ and $F^*=\\varphi$. By [lem-sfb-curve-nonconstant-generic-criterion], $F$ is nonconstant.",
+   "uses": [
+    "lem-sfb-smooth-curve-embedding-extension",
+    "lem-sfb-curve-nonconstant-generic-criterion",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), third proof paragraph; explicit generic-point construction, valuative extension and equalizer uniqueness"
+   }
+  },
+  {
+   "text": "If $f^*=g^*$, their generic restrictions coincide: on an affine neighbourhood $\\operatorname{Spec}A$ of $\\eta_Y$, both are given by $A\\hookrightarrow k(Y)\\xrightarrow{f^*}k(X)$, by [def-weil-affine-spectrum]. The map $i_X:\\operatorname{Spec}k(X)\\to X$ has dense image $\\{\\eta_X\\}$ by [def-sc-generic-point]. Apply [lem-sfb-relative-separated-dominant-ext] with $T=X$, $W=\\operatorname{Spec}k(X)$ and $S=\\operatorname{Spec}k$: $X$ is reduced and $Y/k$ is separated since proper. Hence $f=g$; together with step 3 this proves bijectivity.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-generic-point",
+    "lem-sfb-relative-separated-dominant-ext",
+    "def-pc-integral-scheme",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), third proof paragraph; explicit generic-point construction, valuative extension and equalizer uniqueness"
+   }
+  },
+  {
+   "text": "The identity sends generic point to generic point; so do composites of two nonconstant maps, by [lem-sfb-curve-nonconstant-generic-criterion]. The same criterion shows these maps are nonconstant. On a germ represented by a section $a$, identity pullback fixes $a$, and composite pullback is successive pullback, by [def-pc-scheme] and [def-weil-pbc-module-stalk]. Taking germs gives $(\\operatorname{id}_X)^*=\\operatorname{id}_{k(X)}$ and $(g\\circ f)^*(a)=f^*(g^*(a))$.",
+   "uses": [
+    "lem-sfb-curve-nonconstant-generic-criterion",
+    "def-pc-scheme",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), third proof paragraph; explicit generic-point construction, valuative extension and equalizer uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-curve-function-field-arithmetic",
+  "lem-sfb-curve-nonconstant-generic-criterion",
+  "lem-sfb-smooth-curve-embedding-extension",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-generic-point",
+  "lem-sfb-relative-separated-dominant-ext",
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), third proof paragraph; explicit generic-point construction, valuative extension and equalizer uniqueness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For smooth proper integral curves over an algebraically closed field, nonconstant morphisms correspond contravariantly to embeddings of their function fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map/function-field constructions do not extend to everywhere-defined maps of proper smooth curves or supply this full correspondence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"Hom\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map/function-field constructions do not extend to everywhere-defined maps of proper smooth curves or supply this full correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*(fullyFaithful|homEquiv|nonconstant)|nonconstant.*functionField",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map/function-field constructions do not extend to everywhere-defined maps of proper smooth curves or supply this full correspondence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every embedding of function fields of nonsingular complete curves extends uniquely to a morphism of curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[IrreducibleSpace X] (f : X ⤏ Y) : Spec X.functionField ⟶ Y\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) [IrreducibleSpace X] {U : X.Opens} (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Embeddings\", \"type\": \"[CharZero K] [Algebra.IsAlgebraic ℚ K] [IsAlgClosed A] : Nonempty (K →+* A)\", \"doc\": \"Every algebraic extension $ K $ of the rational numbers $ \\\\mathbb{Q} $ with characteristic zero admits a ring homomorphism (field embedding) into any algebraically closed field $ A $. This asserts tha\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[IsIntegral X] [LocallyOfFiniteType sY] (f : Spec X.functionField ⟶ Y) (h : f ≫ sY = X.fromSpecStalk _ ≫ sX) : X ⤏ Y\", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.rec\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsPreimmersion f → Sort u} →\\n      ([toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f] →\\n          (isEmbedding : Topology.IsEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → motive ⋯) →\\n        \", \"doc\": \"For any type family $ P $ indexed by preimmersions between schemes, if we have a function that assigns to each morphism $ f $ (with an embedding underlying map and surjective stalk maps) an element of\"}\n  {\"name\": \"Field.embEquivOfIsAlgClosed\", \"module\": \"Mathlib.FieldTheory.SeparableDegree\", \"type\": \"[Algebra.IsAlgebraic F E] [IsAlgClosed K] : Emb F E ≃ (E →ₐ[F] K)\", \"doc\": \"Given an algebraic field extension $ E $ of $ F $ and an algebraically closed field $ K $ containing $ F $, there is a bijection between the set of $ F $-embeddings from $ E $ to $ K $ and the set of \"}\n  {\"name\": \"NumberField.InfinitePlace.Completion.bijective_extensionEmbedding_of_isComplex\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Completion\", \"type\": \"{v : InfinitePlace K} (hv : IsComplex v) : Function.Bijective (extensionEmbedding v)\", \"doc\": \"If $ v $ is a complex infinite place of a number field $ K $, then the unique ring homomorphism extending the isometric embedding $ K \\\\to \\\\mathbb{C} $ to the completion $ \\\\widehat{K}_v $ is bijective,\"}\n  {\"name\": \"Field.embEquivOfAdjoinSplits\", \"module\": \"Mathlib.FieldTheory.SeparableDegree\", \"type\": \"{S : Set E} (hS : adjoin F S = ⊤) (hK : ∀ s ∈ S, IsIntegral F s ∧ Splits ((minpoly F s).map (algebraMap F K))) :\\n  Emb F E ≃ (E →ₐ[F] K)\", \"doc\": \"If the intermediate field $ E $ is generated by a subset $ S $ over $ F $, every element of $ S $ is integral over $ F $, and the minimal polynomial of each element of $ S $ splits in $ K $, then ther\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map/function-field constructions do not extend to everywhere-defined maps of proper smooth curves or supply this full correspondence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a field homomorphism between function fields to a map of regular proper curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"RatFunc.liftAlgHom\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"{K : Type u} →\\n  [inst : CommRing K] →\\n    [inst_1 : IsDomain K] →\\n      {L : Type u_1} →\\n        {S : Type u_3} →\\n          [inst_2 : Field L] →\\n            [inst_3 : CommSemiring S] →\\n              [inst_4 : Algebra S (Polynomial K)] →\\n                [inst_5 : Algebra S L] →\\n                  (φ \", \"doc\": \"Given a commutative ring $ K $, a field $ L $, a commutative semiring $ S $, and an $ S $-algebra homomorphism $ \\\\varphi : K[X] \\\\to L $ that preserves non-zero divisors, this constructs an $ S $-algeb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map/function-field constructions do not extend to everywhere-defined maps of proper smooth curves or supply this full correspondence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-frobenius-separable-factorization",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, second sentence: the intermediate field and its embeddings correspond to curve morphisms.",
+   "via": [
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-curve-function-field-morphisms",
+  "worker": "stage1",
+  "summary": "Repair of the released 2026-10-22 re-split order: three independent statement-only tasks separate field arithmetic, the nonconstant generic-point criterion, and global extension of field embeddings. Reused the existing Mathlib leaf for relative separated uniqueness. The statement is unchanged; all nine old arguments are retained and assigned in report.md; the assembly is below 3000 characters. Rechecked the retained delivery against the current shared DAG after the side-completion return; preserved current metadata, reread every assembly citation, documented the newly arrived 09GH overlap, and repaired TeX escaping.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, second sentence: the intermediate field and its embeddings correspond to curve morphisms."
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-790188e41",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-790188e41 (reviewer sub-agent of L); spot-checked: Re-split under the released note of 2026-10-22 (keep_plan). Compared with the live and side-live item, only proof, proof_deps and split_report change; statement, stmt_deps, lean and blueprint are unchanged. The three new nodes are byte-identical to the previous head 0be00ac9bc5f. The reader approved that head, but the landing refused it with 'side completion never promoted; L promotes it' (the promotion loop, not a content fault). This head adds only a summary sentence and non-duplicate paragraphs in the report. No cited statement changed since then. I still reread the mathematics. Re-split: old steps 2 and 5 are now lem-sfb-curve-function-field-arithmetic: trdeg=dim via Stacks 0B1C, and equal finite trdeg gives a finite degree via 030H and 09GH, with no separability; I tested k(t)/k(t^p) and Spec k. Old steps 3 and 4, and the nonconstancy tests at the end of steps 7 and 9, are now lem-sfb-curve-nonconstant-generic-criterion; I checked both directions: a closed nongeneric point with kappa=k and factorisation through a reduced source, and in the other direction a k-point at eta contradicting trdeg 1. Old steps 1, 6 and the extension part of 7 are now lem-sfb-smooth-curve-embedding-extension: DVR local rings, the affine Spec construction and lem-sfb-valuation-stalk-proper-target-extension (0BX7, morphisms.tex); A1 to P1 with t to 1/t extends, the same map into A1 does not. Old step 8 is replaced by the same-unit Mathlib leaf lem-sfb-relative-separated-dominant-ext. Its hypotheses hold in assembly step 4: dense i_X, X reduced, Y/k separated because proper, s f = s g. The generic-restriction identification is written out in that step. The assembly has 5 steps and 1741 characters. The three nodes are of comparable size (868 to 1159 characters) and none restates the item. Sources: Stacks 0BY1 (curves.tex:150-228, third paragraph), 0BX7, 0B1C, 09GH, 030H. No SGA. All three kinds of Mathlib search are recorded. No duplicate in the snapshot or the live clones (lem-trf-algclosed-fg-field-finite needs L algebraically closed; valuation-stalk and rational-map-extension are different statements). proof_deps equals the union of the uses, and the route stays in unit sk-thm-sf-ctf-stability. Advisory: the item's tool_uses still lists three nodes from the old proof that the assembly no longer cites; the merge owns that field. If the landing refuses again with the same promotion message, L should promote. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.ProperFunctionFieldMorphisms",
+  "declaration": "AlgebraicGeometry.proper_curve_function_field_morphisms",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.curveFunctionFieldBaseMap",
+   "AlgebraicGeometry.proper_curve_function_field_morphisms",
+   "AlgebraicGeometry.proper_curve_function_field_identity",
+   "AlgebraicGeometry.proper_curve_function_field_composition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ProperFunctionFieldMorphisms.lean",
+  "statement": "theorem proper_curve_function_field_morphisms (k : Type u) [Field k] [IsAlgClosed k] (X Y : Scheme.{u}) (sX : X ⟶ Spec (.of k)) (sY : Y ⟶ Spec (.of k)) [IsIntegral X] [IsIntegral Y] [IsCurve sX] [IsCurve sY] [Smooth sX] [Smooth sY] [IsProper sX] [IsProper sY] (hXdim : topologicalKrullDim X = 1) (hYdim : topologicalKrullDim Y = 1) : (@IntermediateField.FG k _ X.functionField _ sX.curveFunctionFieldBaseMap.toAlgebra ⊤ ∧ @Algebra.trdeg k X.functionField _ _ sX.curveFunctionFieldBaseMap.toAlgebra = 1) ∧ (@IntermediateField.FG k _ Y.functionField _ sY.curveFunctionFieldBaseMap.toAlgebra ⊤ ∧ @Algebra.trdeg k Y.functionField _ _ sY.curveFunctionFieldBaseMap.toAlgebra = 1) ∧ (∀ (f : X ⟶ Y) (_ : f ≫ sY = sX) (_ : ¬ ∃ y : Spec (.of k) ⟶ Y, y ≫ sY = 𝟙 _ ∧ sX ≫ y = f), ∃ hf : f (genericPoint X) = genericPoint Y, Function.Injective (f.functionFieldMap hf).hom ∧ (f.functionFieldMap hf).hom.comp sY.curveFunctionFieldBaseMap = sX.curveFunctionFieldBaseMap ∧ @Module.Finite Y.functionField X.functionField _ _ (@Algebra.toModule _ _ _ _ (f.functionFieldMap hf).hom.toAlgebra)) ∧ (∀ φ : Y.functionField →+* X.functionField, φ.comp sY.curveFunctionFieldBaseMap = sX.curveFunctionFieldBaseMap → ∃! f : {f : X ⟶ Y // f ≫ sY = sX ∧ ¬ ∃ y : Spec (.of k) ⟶ Y, y ≫ sY = 𝟙 _ ∧ sX ≫ y = f}, ∃ hf : f.val (genericPoint X) = genericPoint Y, (f.val.functionFieldMap hf).hom = φ)",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main theorem states the canonical generic-stalk correspondence by its graph (a unique nonconstant base morphism for every base-compatible field homomorphism), including finite generation, transcendence degree one and finiteness. Identity and composition are the other two theorem declarations. The sole helper constructs the scalar map k to the generic stalk from ΓSpecIso, the structure map on global sections, and the germ; no data is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b9589243",
+  "group": "O3",
+  "result": "pass",
+  "note": "All node clauses matched in Lean: alg-closed k; integral smooth proper IsCurve schemes with topologicalKrullDim=1; field-FG and trdeg=1 over the canonical k→k(X) map; nonconstant = no factorization through a k-point (exact); forward clause gives generic point to generic point, the actual Hom.functionFieldMap, injective, k-compatible, Module.Finite; unique nonconstant k-morphism for every k-compatible ring hom (graph form = bijection); identity is nonconstant with map RingHom.id; composition in contravariant order. No extra hypotheses, general universe, char p included; agrees with Stacks 0BY1. lean.statement verbatim, record complete, docstrings carry steps 1-9, only sorry proofs, lines <=100, not superseded (live node has no lean record). Advisory: curveFunctionFieldBaseMap is defeq to the existing Scheme.functionFieldAlgebra (def-pc-residue-trace-pairing, not addable to stmt_deps under H2); Hom.functionFieldMap is a non-stmt_dep decl accepted in earlier reviews. No FIX, no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,58 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-ringed-site-cohomology-fmap-calculus.json`: statement unchanged; split into thirteen proof steps, using twenty existing dependency nodes. Mathlib verdict: no match for the full statement.
+- `citations.json`: forty step/node entries, with quotations copied verbatim from the existing node statements.
+- `report.md`: this report. `searches.jsonl` contains the actual msearch results. No new nodes or Mathlib leaves.
+
+Attachments: none. Searching `lean/WeilConjectures/` for the exact blueprint tag found no declaration. The module-cohomology fmap files found by the conceptual search concern scheme/ringed-space module categories; the étale `cohomologyMap` files concern abelian étale sheaves. Neither states this full arbitrary ringed-topos theorem with the requested normalization, so an ATTACH would be incorrect.
+
+WANTED: none. The Stacks source files needed are available locally.
+
+The imported node had no proof. Its statement and statement dependencies are retained. In particular, no flatness hypothesis was added, no arbitrary ringed-topos morphism was replaced by a morphism presented on the given sites, and the acyclic-resolution assertion does not assume that its pushed-forward resolution resolves the pushed-forward module. The inverse comparison in the final part of the middle paragraph has been checked in its stated direction. There was no statement dispute or source error to repair.
+
+Nothing remains unfinished within this stage-1 split. Lean implementation is outside this brief.
+
+## Sources and searches
+
+I read the current `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/` unit and direct-image proof. This is a general homological prerequisite of the inherited alteration/direct-image chain, specifically the coefficient-map square used by `lem-sfb-qcoh-cohomology-etale-pullback-naturality`; it replaces no unit-level argument. The chapter/unit records were also read. The item already has a detailed `blueprint.from.place`, which is retained. `tools/blueprint_refs.py ancestor` reports a null ancestor for this inherited chain; no invented ancestor was inserted. Whole-blueprint searches for cohomology functoriality, coefficient resolutions, and ringed cohomology found no exact counterpart. `same_as` remains empty.
+
+The principal mathematical sources read were:
+
+- `sites-cohomology.tex`, `section-derived-functors` (injective-resolution derived sections); Tag 072Z, `lemma-direct-image-injective-sheaf`; Tag 0731, `lemma-limp-acyclic`; Tag 0D6E, `lemma-derived-pushforward-composition`; Tag 03FD, `lemma-cohomology-modules-abelian-agree`; and the restriction discussion and Tag 08FI, `lemma-restrict-K-injective-to-open`.
+- `cohomology.tex`, Tags 01F8, `lemma-functoriality`, and 01FB, `remark-explain-arrow`. These supply the resolution roof for ringed spaces. The extension to ringed sites and the full composition/normalization calculation here are agent-written, as recorded in `proof_origin`.
+- `derived.tex`, Tags 013K, `lemma-injective-resolutions-exist`; 013P, `lemma-morphisms-lift`; 013S, `lemma-morphisms-equal-up-to-homotopy`; 015C, `lemma-F-acyclic`; and 015E, `lemma-leray-acyclicity`.
+- `sites-modules.tex`, the localized restriction and extension-by-zero lemmas 03DI/03DJ, and the direct-image definition 03D6. I checked tag/label correspondence against `tags/tags`.
+
+I reused the item's recorded searches and ran two further semantic phrasings through msearch, plus LeanSearch, two Loogle queries, and two source grep queries. The services returned answers; no unavailable service was called a negative search. The hits `SheafOfModules.pushforwardComp` and `pushforwardSections` are underived. `CategoryTheory.Functor.rightDerivedNatTrans_comp` is composition along one fixed localization, not the varying-site coefficient-map assertion. I read `Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:105–140` and `Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:110–195`. General resolution-lift hits are ingredients already represented by the existing DAG nodes. Thus none makes the item a Mathlib leaf.
+
+## Not duplicates
+
+No new nodes. DAG searches found and reused the global-acyclicity, derived-composition, lifting, homotopy, Leray and localization nodes instead of duplicating them. In particular, the scheme-only `lem-weil-pbc-injective-module-abelian-acyclic` was rejected as too narrow for the last step; the statement of `lem-sc-injective-module-abelian-acyclic-zariski` is actually for every ringed site and supplies precisely what is needed.
+
+## Review by Q81
+
+I checked the split against delivery-errors B–E with the source and dependency statements open. Since there are no new nodes, B's new-node statement, definition and Mathlib-leaf requirements introduce no additional objects to audit. The item remains self-contained, retains its original notions and hypotheses, and has a nonempty proof rather than clauses moved into replacement nodes. Its mathematical content is assembled in the steps themselves.
+
+Step 1 uses the statement of `def-weil-pbc-ringed-topos-morphism` for the adjunction, finite-limit preservation and scalar action. The section identity is written as the adjunction applied to the terminal sheaf. `lem-weil-pbc-complex-injective-resolution-mono` supplies resolutions with a specified lower bound, so applying it at zero gives the nonnegative resolutions. `lem-weil-pbc-lift-along-injective-quasi-iso` requires degreewise monicity: this holds for the augmentation of a nonnegative resolution. I did not apply its strict lifting conclusion to an arbitrary replacement map.
+
+Step 2 uses the literal global-sections vanishing in `lem-sfb-ringed-topos-injective-pushforward-global-acyclic`. Leray clause 1 supplies acyclicity of the target injective terms. Both complexes are bounded below, and `lem-weil-pbc-leray-acyclicity-quasi-iso` then supplies exactly the required quasi-isomorphism on sections. This avoids the false inference that nonflat direct image preserves module injectives.
+
+Steps 3–4 use the K-injectivity statement of `lem-weil-pbc-bounded-below-injectives-kinjective` and the Hom bijection stated by `lem-sp-kinjective-comparison-principle` when a replacement is merely a quasi-isomorphism. The uniqueness theorem `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` only needs that quasi-isomorphism and the injective bounded-below target; all these conditions hold. `lem-weil-pbc-homotopic-maps-equal-cohomology` explicitly covers additive functors, so it applies to pushforward and sections. Step 4's identity lifts come from `lem-weil-pbc-injective-resolution-lift-exists`, and the statement of `lem-weil-pbc-derived-functor-map-via-lift` identifies their cohomology maps with the canonical resolution identifications. The equations before cancellation are written out.
+
+Step 5 is the elementary linear-map and degree-zero kernel calculation. Its scalar identification uses the ringed-topos definition already cited, and its sum of lifts has the correct augmentation. Step 6 uses the resolution formula of `lem-weil-pbc-derived-functor-map-via-lift`, whose hypotheses are precisely injective resolutions and an augmentation-compatible lift.
+
+Step 7 uses the same replacement-existence and K-injective comparison nodes. I opened the statement of `lem-weil-pbc-ringed-topoi-derived-pushforward-composition`: its normalization explicitly says that `g_*lambda` is a quasi-isomorphism for K-injective I and a K-injective replacement of f_*I. This is the assertion used, not merely the existence of an abstract derived isomorphism. Bounded-below injective complexes meet its K-injective hypotheses. The composite coefficient augmentation is displayed. Step 8 then applies the cited homotopy/cohomology equality and carries out the six-map cancellation, rather than saying that composition compatibility is automatic.
+
+Step 9 is naturality of the given section-preserving 2-isomorphism, with the transported replacement written as lambda times theta inverse. It proves equality of the actual section roofs; independence removes the special choices. Coefficient naturality is then composition with the identity case. No extra geometric 2-isomorphism hypothesis is being assumed beyond the statement's one.
+
+Step 10 uses strict lifting only across the monic augmentations of the two nonnegative acyclic resolutions, and uniqueness into the injective replacement to compare the two maps out of K. Leray clause 2 states that its comparison is induced by precisely such a lift into an injective resolution. The displayed equation therefore proves the normalization under those specific comparisons. No acyclicity of f_*L' is needed. Step 11 specializes this equation, using the existing global-acyclicity node and Leray clause 1, and shows T times c is the identity. This verifies that the claimed map is c inverse, not c.
+
+Step 12 uses `lem-pur-site-restriction-module-adjunction-exact`, whose statement gives exact restriction and an exact left adjoint on a general slice, not just an open subspace or subterminal object. Preservation of injectives is proved in three lines from that statement and the injective definition; it needs no new node. The unit evaluated on sections is restriction by the formula in `def-pur-localized-ringed-site`. Thus the chain unit fits step 10 and computes the claimed restriction.
+
+For step 13 I checked the exact-forgetting clause of `lem-weil-pbc-module-sheaves-colimits-forgetful`, the general-site vanishing in `lem-sc-injective-module-abelian-acyclic-zariski`, and the object-evaluation comparison in `lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison`. The abelian injective resolution is compared with the forgotten module resolution by one sheaf chain map. Its evaluations at the terminal object and U commute with restriction, so the desired square is a square of complexes before cohomology. Leray clause 2 gives the canonical comparison from that lift. `lem-weil-pbc-site-restriction-injectives` states the exact restriction/left-adjoint input for abelian sheaves, so the same elementary adjunction argument identifies the slice computation. In particular the proof never treats a forgotten injective module as an injective abelian sheaf.
+
+All universes are the single common coefficient universe already assumed; the sites and their slices remain small. All use of quasi-isomorphism invariance after a nonexact functor has an acyclicity or homotopy-equivalence justification. I tested the formulas for zero modules and the zero coefficient map, for the identity morphism, and on one-point ringed spaces. For the nonflat structural map Z to F_2, a nonzero injective F_2-vector space need not be injective over Z; the proof still works because sections on a point are exact. For a map from a space with nonzero higher constant-sheaf cohomology to a point, f_*I need not resolve f_*N; that extra condition occurs only in step 11, not in the construction or step 10. The localization proof applies to a general object U without silently adding subterminality. These tests required no statement correction.
+
+Every step/node pair has a verbatim statement quotation in citations.json. No non-elementary step exceeds 2000 characters; I checked that the composition and acyclic-normalization calculations do not conceal an extra comparison lemma. Off-unit generic inputs are declared in split_report.tool_uses, not in maintainer-owned tool_uses. The server review_split check passed with zero new nodes, and check_dag reported no finding introduced by the sandbox or its node. Full delivery dry run follows this report.

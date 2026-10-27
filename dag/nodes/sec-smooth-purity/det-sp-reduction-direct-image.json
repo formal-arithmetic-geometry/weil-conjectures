@@ -24,10 +24,13 @@
  ],
  "proof": [
   {
-   "text": "Put $p=\\bar f$, $N=j_!^AM$, and use the natural maps $\\gamma,e,b=Rp_{*,B}(e)\\gamma$ of [def-sp-reduction-direct-image-comparison]. By [lem-sp-supported-etale-tensor-origin], choose bounded etale $K,H=K\\otimes_A^LB$ with $\\nu^*K\\simeq N$ and $\\nu^*H\\simeq N\\otimes_A^LB$.",
+   "text": "Transport intrinsic bounded constructibility and finite Tor amplitude through the exact realization equivalence. Finite support of homology is equivalent to t-structure boundedness. Exact realization commutes with homology, and the intrinsic Tor transport identifies the Tor tests. Convert the fixed constant-model constructibility predicate to the finite-stratification predicate, including the empty-scheme case. Apply the supported-etale-tensor-origin theorem to obtain L, its comparison isomorphism, and bounded K=j_!L and H=K tensor B. The canonical open-presentation and realization comparisons give an isomorphism from the intrinsic comparison image of K to j_!M.",
    "uses": [
-    "def-sp-reduction-direct-image-comparison",
-    "lem-sp-supported-etale-tensor-origin"
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "new-etale-proetale-exceptional-object-comparison",
+    "lem-sp-supported-etale-tensor-origin",
+    "def-fix-proper-etale-origin-scalar-data"
    ],
    "elementary": false,
    "source": {
@@ -36,12 +39,12 @@
    }
   },
   {
-   "text": "By [lem-kun-0f10] and [def-kun-cd], $p$ has one torsion abelian bound $c$. The module/abelian derived comparison identifies underlying $R^qp_{*,A}F$ with $R^qp_*F$ for every module sheaf $F$; $F$ is $\\ell$-primary torsion, so this vanishes for $q>c$. Also $A$ is Noetherian (its ideal set is finite), and $B$ is finitely presented over $A$: a finite free surjection onto the finite set $B$ has finite kernel. Thus [lem-sf-projection-finite-constant] applied to bounded $K$ makes the etale counit projection $\\pi_K$ invertible.",
+   "text": "Choose d bounding the dimension of the proper source. The already-proved source-library isZero_rightDerived_lowerStar_of_two_mul_lt gives the module-sheaf cohomological bound 2d for the finite, hence additively torsion, coefficient ring. This is the module-coefficient implementation of the relative cohomological-dimension input, and the homology/right-derived comparison identifies its output with H^q(Rp_*(F[0])). A finite ring is Noetherian, and the finite B-module with its A-action is finitely presented. Apply finiteConstantProjectionComponent_isIso to bounded-above K and this module. That theorem uses finite-free approximation and a finite cohomological window; no finite projective dimension is assumed. Transport along the exact constant/restriction comparison to the scalar coefficient and compose with the coefficient-pullback isomorphism. This proves invertibility of the actual etale projection pi_e.",
    "uses": [
+    "lem-kun-dimension-finite-type",
     "lem-kun-0f10",
-    "def-kun-cd",
-    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-    "lem-sf-projection-finite-constant"
+    "lem-sf-projection-finite-constant",
+    "def-fix-proper-etale-origin-scalar-data"
    ],
    "elementary": false,
    "source": {
@@ -50,11 +53,10 @@
    }
   },
   {
-   "text": "After restriction of scalars and its direct-image isomorphism $d$, [lem-sp-direct-image-change-ring-transpose] identifies $d\\,r(\\gamma_N)$ by transpose $\\varepsilon_N\\otimes1$. Since $K,H\\in D^+$, [lem-sp-direct-image-etale-mate-isomorphism] gives the same transpose for the invertible transport of $\\pi_K$. Injectivity of adjunction makes these maps equal. Restriction reflects isomorphisms, hence $\\gamma_N$ is invertible; so is $b=Rp_{*,B}(e)\\gamma_N$.",
+   "text": "Use the existing etale-origin scalar projection square, which identifies the specified B-linear scalar mate after restriction with pi_e and the canonical tensor and direct-image comparisons. Both K and H are bounded below by step 1. Cancel the two invertible source factors in that square. The resulting formula makes the restricted mate invertible by step 2. Restriction reflects isomorphisms, so the mate is invertible. Naturality transports this conclusion along the canonical isomorphism from the comparison image of K to j_!M. Compose with proper image of the named open scalar isomorphism, obtaining invertibility of reductionDirectImageComparison.",
    "uses": [
-    "lem-sp-direct-image-change-ring-transpose",
-    "lem-sp-direct-image-etale-mate-isomorphism",
-    "def-weil-pbc-proetale-operations",
+    "lem-fix-etale-origin-scalar-projection-square",
+    "def-fix-proper-etale-origin-scalar-data",
     "lem-weil-pbc-ring-sheaf-change-adjunction",
     "def-sp-reduction-direct-image-comparison"
    ],
@@ -65,11 +67,14 @@
    }
   },
   {
-   "text": "The restricted $Rf_!$ adjunction gives $Rf_{!,A}M$ and $Rf_{!,B}M_B$ in their respective $\\Dctf$ categories. Scalar extension preserves $\\Dctf$, so the source belongs too. Fullness gives the claimed isomorphism there; naturality is part of the comparison construction.",
+   "text": "The existing finite-coefficient compact-support preservation argument gives constructible finite-Tor membership for compact support in fixed-module coordinates. The canonical compact realization isomorphism and properOriginPushIso transport it to precisely reductionCompactSupport. The realization equivalence preserves and reflects the intrinsic membership predicate of step 1. Apply this over A to M, then scalar preservation on Y for the source; apply scalar preservation on X and compact-support preservation over B for the target. Flatten these two membership statements into the seven conjuncts of reductionDirectImage_isIso.",
    "uses": [
     "sk-prop-sf-rf-shriek-preservation",
-    "det-sp-scalar-extension-functor",
-    "def-sp-reduction-direct-image-comparison"
+    "lem-finite-compact-support-scalar-transport",
+    "def-fix-proper-etale-origin-scalar-data",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "det-sp-scalar-extension-functor"
    ],
    "elementary": false,
    "source": {
@@ -78,7 +83,7 @@
    }
   },
   {
-   "text": "For $A\\to B\\to C$, apply the proper scalar cocycle at $N$ and the open scalar cocycle at $M$. Write $T=T^{B,C}$ and suppress only the associators in these two equations. Naturality of $\\gamma^{B,C}$ at $e^{A,B}_M$ gives\n$$\\begin{aligned}\nb_{B,C}(M_B)T(b_{A,B}(M))\n&=Rp_C(e^{B,C})\\gamma^{B,C}T(Rp_Be^{A,B})T(\\gamma^{A,B})\\\\\n&=Rp_C(e^{B,C})Rp_C(Te^{A,B})\\gamma^{B,C}T(\\gamma^{A,B})\\\\\n&=Rp_C(e^{A,C})\\gamma^{A,C}=b_{A,C}(M).\n\\end{aligned}$$\nReinserting the two cocycles' associators and using naturality of $\\alpha$ yields exactly $b_{A,C}\\alpha_{Rf_{!,A}M}=Rf_{!,C}(\\alpha_M)b_{B,C}(M_B)(b_{A,B}(M))_C$.",
+   "text": "Apply the proper scalar cocycle at j_!M and the open scalar cocycle at M. The private categorical pasting lemma expands the two composites, uses the proper cocycle, maps the open cocycle through the final proper functor, then rewrites by naturality of the second proper comparison at the first open comparison. Associativity and functoriality give exactly the stated coefficient cocycle, including both specified scalar associators. This calculation works for every M; its extra standing hypotheses are retained unchanged.",
    "uses": [
     "lem-sp-proetale-direct-image-scalar-cocycle",
     "lem-sp-proetale-open-scalar-cocycle",
@@ -93,25 +98,29 @@
   }
  ],
  "proof_deps": [
-  "def-sp-reduction-direct-image-comparison",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "new-etale-proetale-exceptional-object-comparison",
   "lem-sp-supported-etale-tensor-origin",
+  "def-fix-proper-etale-origin-scalar-data",
+  "lem-kun-dimension-finite-type",
   "lem-kun-0f10",
-  "def-kun-cd",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
   "lem-sf-projection-finite-constant",
-  "lem-sp-direct-image-change-ring-transpose",
-  "lem-sp-direct-image-etale-mate-isomorphism",
-  "def-weil-pbc-proetale-operations",
+  "lem-fix-etale-origin-scalar-projection-square",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sp-reduction-direct-image-comparison",
   "sk-prop-sf-rf-shriek-preservation",
+  "lem-finite-compact-support-scalar-transport",
   "det-sp-scalar-extension-functor",
   "lem-sp-proetale-direct-image-scalar-cocycle",
   "lem-sp-proetale-open-scalar-cocycle"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-  "place": "Steps 1-4, refined 2026-10-21: bounded etale tensor origin; existing finite-window projection; normalized counit transposes; separate proper/open cocycles"
+  "by": "worker",
+  "group": "S5",
+  "date": "2026-10-24",
+  "document": "lean/Sheaf/SecSmoothPurity/ReductionDirectImage.lean",
+  "place": "Complete Lean assembly: intrinsic/fixed transport, supported etale tensor origin, existing finite-window constant projection, normalized etale-origin scalar square, compact-support preservation, categorical cocycle paste. Unit compactification/free-resolution route retained."
  },
  "mathlib_searches": [
   {
@@ -263,7 +272,18 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sp-reduction",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.SecSmoothPurity.ReductionDirectImage",
   "declaration": "AlgebraicGeometry.ProEtale.reductionDirectImage_isIso",
@@ -286,5 +306,15 @@
   "group": "N6",
   "result": "pass",
   "note": "Re-delivery fixes R1-R3. R1: new definition node def-sp-reduction-direct-image-comparison owns ReductionDirectImageComparison.lean; the four helpers moved unchanged (diffed), the existing gamma/openExtension/openScalarIso/openSquarePullbackModel are re-exported rather than copied, the node text states the full unit-preservation rule, the H12 fields pass, and the item no longer cites the exchange theorem nodes. R2: a real clause-by-clause second reading. R3: lean.notes keep the old shared declarations; the rebound IsConstructibleProEtaleModuleSheaf and Has(Finite)ProEtaleTorAmplitude are real and verbatim. Item: only lean and stmt_deps changed; theorem signatures unchanged and re-checked (hypotheses, Dctf for both endpoints, NatTrans naturality, alpha-cocycle orientation, edge cases, universes). Two sorry, no hollow definitions, docstrings and lines OK. nt_compile.py on both files: 6.1 s and 4.1 s, exit 0, no diagnostics. Observations only: openSquarePullbackModel_existsUnique (general A) is still a sorry under lem-trf-open-square-exchange, whose statement covers only A_{E,n}; the shared constructibility/Tor records keep switching encodings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-020ab",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T191034-L-233101",
+  "kind": "interface",
+  "note": "independent cc review: delivered ReductionDirectImage.lean vs clone (signatures byte-identical, 11 private proved helpers), node det-sp-reduction-direct-image proof fields vs Lean, unit sk-lem-sp-reduction route, sandbox compile of the module + #print axioms + 16 direct importers"
  }
 }

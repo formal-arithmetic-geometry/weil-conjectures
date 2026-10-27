@@ -288,7 +288,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-acd38f7eb (reviewer sub-agent of L); spot-checked: This delivery answers the human's 2026-10-21 re-split note. It is not dropped and uses no SGA. Statement, stmt_deps and Lean/reviewed metadata are byte-identical to live; only proof, proof_deps, proof_origin and split_report change. The item and both new node JSONs are byte-identical to head 03345003a, which was superseded before landing (not returned), so A6 does not apply; I reviewed it independently. The old proof (8458 chars, 7 steps) becomes a 2786-char, 6-step assembly. Old step 2 (sections exactness) became lem-pe-profinite-sections-finite-quotient. Old steps 4-5 (K-flat P_r, signed interchange, cone differential, naturality, descent) became lem-pe-scalar-cone-tensor-model. Old step 3 is now cited through existing nodes: 00X6 site inverse image, upper-star exact, def-sfb-modobj-transport and det-prop-sfb-module-pullback-exact-lifted, whose hypotheses (right-exact R⊗− from sheaf-tensor-closed, U∘G=F∘U) I checked. The arithmetic of old steps 1 and 6 stays explicit, and old step 7 is now step 6. Nothing was blurred, and neither node restates an item clause. New step 3 checks the ambient hypotheses (free-abelian flat cover, sheaf/module inheritance, closedness). Sections node: kernel via the homeomorphism onto ker g, lifts over the finite discrete T2, sectionwise exactness implies condensed exactness. Tested with S empty or a point, T2=0; the homeomorphism hypothesis is necessary. Its use in step 1 is valid (|x|<|a|^r makes a^rA open, division continuous), and in step 5 because all three rings are finite discrete. Scalar node, checked by hand: Tot(C⊗P_b)^n=C^n⊕C^{n+1} with d(y,x)=(dy+(−1)^{n+1}bx,dx), and φ(y,x)=(y,(−1)^{n+1}x) gives a natural iso to the cone of def-weil-abstract-derived-category. K-flatness follows from unit plus cone, with no regularity needed; tested b=0 and b=1. The node matches the sorry-free TensorMappingCone.lean:37-158. Duplicate checks: finite-integral-condensed-resolution (constructed O^r only), pur constant two-term, pod module cones, pe-principal-reduction-cone-calculus (specific O_{E,X} tower model, not the abstract tensor-unit fact); none duplicates either node. All 18 off-unit tool_uses are declared and accepted. No fixes. Notes: attach the TensorMappingCone declarations at stage 2. The sibling O2 node lem-pe-principal-reduction-cone-calculus restates this item's natural-cone clause; there is no cycle, but its prover should cite this item."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -336,5 +347,36 @@
   "landing": "20261021T060957-L-1681516",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $E/\\Ql$ be finite with uniformizer $\\pi_E$ and $n\\geq1$. For every scheme $X$\nthe sequence of $\\mathcal O_{E,X}$-module sheaves on $X_{\\Proet}$\n\n$$\n0\\to\\mathcal O_{E,X}\\xrightarrow{\\ \\pi_E^n\\ }\\mathcal O_{E,X}\\to(\\mathcal O_E/\\pi_E^n)_X\\to0\n$$\n\nis exact. Consequently, for $K\\in D(X_{\\Proet},\\mathcal O_E)$,\n$K_n=K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}(\\mathcal O_E/\\pi_E^n)_X$ is\nisomorphic to the cone of $\\pi_E^n\\colon K\\to K$, naturally in $K$, and for\n$1\\leq m\\leq n$ there are triangles\n$K_m\\xrightarrow{\\pi_E^{n}}K_{n+m}\\to K_n\\to$, in particular\n$K_1\\to K_{n+1}\\to K_n\\to$.",
+  "proof": [
+   {
+    "text": "*On the point.* For a profinite set $S$ the sequence\n$0\\to C(S,\\mathcal O_E)\\xrightarrow{\\pi_E^n}C(S,\\mathcal O_E)\\to\nC(S,\\mathcal O_E/\\pi_E^n)\\to0$ is exact: $\\pi_E^n$ is injective on\n$\\mathcal O_E$; a continuous function divisible by $\\pi_E^n$ pointwise has a\ncontinuous quotient, since division by $\\pi_E^n$ is a homeomorphism\n$\\pi_E^n\\mathcal O_E\\to\\mathcal O_E$; and a continuous, i.e. locally constant,\nfunction $S\\to\\mathcal O_E/\\pi_E^n$ lifts to a locally constant function to\n$\\mathcal O_E$ by lifting its finitely many values. So the sequence of condensed\n$\\underline{\\mathcal O_E}$-modules is exact ([det-def-sfb-condensed-ring]).",
+    "uses": [
+     "det-def-sfb-condensed-ring"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*On $X$.* The pullback $p_X^*$ of module objects is exact\n([det-prop-sfb-module-pullback-exact-main]) and carries\n$\\underline{\\mathcal O_E}$, $\\underline{\\mathcal O_E/\\pi_E^n}$ to $\\mathcal O_{E,X}$,\n$(\\mathcal O_E/\\pi_E^n)_X$ ([det-def-sfb-pulled-back-coefficients]), so the\ndisplayed sequence is exact. It is a resolution of $(\\mathcal O_E/\\pi_E^n)_X$ by\nfree modules of rank one, hence K-flat; this is the sheaf version of\n[lem-weil-pbc-standard-quotients-perfect]. Tensoring $K$ with it gives\n$K_n\\simeq\\operatorname{cone}(\\pi_E^n\\colon K\\to K)$, naturally in $K$.",
+    "uses": [
+     "det-def-sfb-pulled-back-coefficients",
+     "lem-weil-pbc-standard-quotients-perfect"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Triangles.* The sequence\n$0\\to\\mathcal O_E/\\pi_E^m\\xrightarrow{\\pi_E^n}\\mathcal O_E/\\pi_E^{n+m}\\to\n\\mathcal O_E/\\pi_E^n\\to0$ is exact (multiplication by $\\pi_E^n$ is injective modulo\n$\\pi_E^{n+m}$ on $\\mathcal O_E/\\pi_E^m$ because $\\mathcal O_E$ is a discrete\nvaluation ring), and after pullback it is an exact sequence of\n$\\mathcal O_{E,X}$-modules, by the same argument on the point. Applying the\ntriangulated functor $K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}-$ gives the\ntriangle $K_m\\to K_{n+m}\\to K_n\\to$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

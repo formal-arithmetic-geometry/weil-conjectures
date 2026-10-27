@@ -21,50 +21,45 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-open-cover-cohomology-detection] to the given cover and to $K=M,N$. Its degreewise vanishing criterion gives $\\mathcal H^a(M)=\\mathcal H^a(N)=0$ for $a\\ne0$. Its ringed-site identifications supply the same constant coefficients, exact restrictions and overlap sites as in the statement, and make the Zariski cover and all its pullbacks site coverings. This includes the empty cover.",
-   "uses": [
-    "lem-pur-open-cover-cohomology-detection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04IX, definition-localize-ringed-site, part (4); Sites Tag 00VR, definition-sheaf. Agent-formulated combination with the two small-site localization equivalences; source details and the full inherited argument are retained in report.md."
-   }
-  },
-  {
-   "text": "The module-sheaf categories are abelian [def-weil-sheaf-of-modules-category]. Apply [lem-pur-good-truncation-exact-normalization] in the abelian module-sheaf category on $T_\\tau$, and on each open and intersection. It gives the specified good-truncation isomorphisms $\\epsilon_M,\\epsilon_N$, natural in all derived maps. Apply its exact-functor formula with the open restrictions of Step 1: these isomorphisms commute with restriction and with iterated restriction. Put $F=\\mathcal H^0(M)$ and $G=\\mathcal H^0(N)$. The same lemma gives the Hom bijection $a\\mapsto b=\\mathcal H^0(a)$, characterized by $b[0]=\\epsilon_Na\\epsilon_M^{-1}$, and its restriction square. Thus compatible local derived maps correspond exactly to compatible local module-sheaf maps.",
+   "text": "Work directly in the fixed-ring module-valued sheaf categories of the statement [def-weil-sheaf-of-modules-category]. The existing upperStarIsoLocalizationRestriction identifies inverse image along each open with sectionwise localization restriction on each small site [lem-weil-pbc-etale-site-localization-open, lem-weil-proetale-weakly-etale-localization]. The jointly surjective open family is an etale covering and belongs to the pro-etale precoverage by zariskiPrecoverage_le_proetalePrecoverage. Existing localization-restriction conservativity makes these exact inverse images jointly conservative, hence jointly faithful by preservation of equalizers. Applying this to F -> 0 detects zero sheaves, including the empty cover. Applying it to each cohomology sheaf, with the exact restriction comparison, detects global concentration.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "lem-pur-good-truncation-exact-normalization"
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118, section-truncations, canonical cochain truncation at zero; Derived Categories Tag 06XS, lemma-negative-exts (2). Agent-formulated normalization and exact-functor compatibility, with inherited derivation and further localization references in report.md."
-   }
+   "elementary": false
   },
   {
-   "text": "For compatible $(a_i)$ let $b_i$ be their sheaf maps from Step 2. The covering and fiber products supplied in Step 1 allow [lem-pur-sheaf-hom-cover-gluing] to give a unique global $b:F\\to G$. Set $a=\\epsilon_N^{-1}b[0]\\epsilon_M$. The restriction square gives $a|_{U_i}=a_i$. Conversely two global derived maps with equal restrictions give sheaf maps with equal restrictions; uniqueness of $b$ and the Hom bijection make them equal. This proves the claimed bijection, its identification with sheaf-map gluing, and the equality test. On the empty scheme Step 1 makes all module sheaves zero, Step 2 identifies $M,N$ with zero objects, and the empty-cover gluing assertion still gives the unique map.",
+   "text": "Apply [lem-pur-good-truncation-exact-normalization] to construct the canonical identifications and the explicit good-truncation roof for every heart object, and obtain bijectivity of a -> H^0(a). Its exact-functor formula gives compatibility of the normalization with open restriction. The natural cohomology comparisons transport local derived maps to maps between restrictions of H^0(M) and H^0(N). The compositor and natural-isomorphism coherence in [lem-pur-exact-derived-cohomology-coherence] proves that this transport respects the specified nested-open comparison openComp.",
    "uses": [
-    "lem-pur-sheaf-hom-cover-gluing"
+    "lem-pur-good-truncation-exact-normalization",
+    "lem-pur-exact-derived-cohomology-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EM, lemma-internal-hom, and Sites Tag 04TQ, lemma-glue-maps; apply the cited module-map gluing statement to the covering of the final object."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Glue the transported fixed-ring sheaf maps by the sheaf axiom for the presheaf of morphisms [def-weil-pbc-sites-and-cohomology]: Mathlib Presheaf.IsSheaf.hom and Presieve.isSheafFor_arrows_iff. The proof adapts the proved source Etale.Derived.HeartGluing and ProEtale.Adic.LisseCover.SheafGluing constructions to an arbitrary universe for the index family. Factor a pair of maps to U_i and U_j through their scheme-theoretic open intersection. Naturality of the local map under the resulting site-object isomorphism and the existing upperStar/localization compositor coherence convert the given intersection equality into presheaf-Hom compatibility. The sheaf amalgamation yields a global map; joint faithfulness proves uniqueness. Lift it along the H^0 bijection from Step 2. The converse compatibility follows from naturality of openComp; naturality of the cohomology comparison gives the restriction square, and the same H^0 bijection and joint faithfulness give the equality test. No boundedness or nonemptiness hypothesis is added.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-pur-good-truncation-exact-normalization"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-open-cover-cohomology-detection",
   "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-pur-good-truncation-exact-normalization",
-  "lem-pur-sheaf-hom-cover-gluing"
+  "lem-pur-exact-derived-cohomology-coherence",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Assembly of Tag 06XS (degree-zero fully faithful embedding), Homology Tag 0118 (explicit good truncations), and Modules on Sites Tags 03DJ and 03EM with Sites Tag 04TQ. Local vanishing and naturality are written out; this assembly is not asserted to be a verbatim Stacks lemma."
+  "place": "Tag 06XS and Homology Tag 0118 for degree-zero normalization; Sites Tag 04TQ for morphism gluing. M7 uses the proved fixed-ring sheaf localization/conservativity APIs and the Mathlib presheaf-Hom sheaf theorem directly, avoiding the ringed-module coefficient bridge. The arbitrary-index site gluing arguments are adaptations of the existing proved source HeartGluing and SheafGluing files."
  },
  "mathlib_searches": [
   {
@@ -168,9 +163,7 @@
  "tool_uses": [
   "lem-weil-pbc-etale-site-localization-open",
   "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-truncation-descends",
-  "lem-pur-sheaf-hom-cover-gluing"
+  "lem-pur-site-restriction-module-adjunction-exact"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -206,5 +199,26 @@
   "result": "pass",
   "note": "Checked every node clause against Conclusion/HasCanonicalIdentifications. Covered: local-to-global concentration; the good-truncation roof, which pins e uniquely; naturality and restriction via the canonical comparison isos; the compat ↔ ∃! bijection with endpoints transported canonically by openComp; the H⁰ bijection and restriction square; and the equality test. Both sites use canonical upperStar/upperStarComp. Etale coefficients equal Etale.DerivedCategoryModule by rfl. Pro-etale uses the fixed-ring presentation, made equivalent by def-weil-pbc-proetale-modules' own finiteCoefficientRealization. Empty cover/scheme and zero ring are covered; wI is free; no forced universes. Gates: no hollow definitions; the only sorry is the main theorem; docstrings carry source and blueprint; lean.statement is verbatim; only the lean field changed. nt_compile: clean in 8.4 s; axioms are standard plus sorryAx. Non-blocking: the second reading was by the same worker."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261025T163906-L-892647",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,128 @@
+{
+ "id": "lem-trf-etale-line-presentation-scheme-restriction",
+ "kind": "statement",
+ "title": "A cartesian line presentation agrees with Zariski restriction",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], $P$ a coherent etale line presentation [def-trf-cartesian-line-presentation], and $W\\to X$ any representable etale scheme test. The ordinary module $P_W$ is isomorphic to the Zariski restriction of $P.line$ along $W\\to X$ [def-trf-space-module-scheme-restriction]. No section algebra, morphism to a scheme or cover of X is needed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03G7, restriction to scheme tests; descent.tex Tags 03DX and 03FH."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-cartesian-line-presentation",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For every open V of W, tensorOpenSectionIso identifies sections of P_W on V with global sections of its tensor pullback to V. The cartesian family comparison and P.etaleSections identify these with the sections of P.line on the open-subscheme test V.",
+   "uses": [
+    "new-etale-tensor-open-section-iso",
+    "def-trf-cartesian-line-presentation",
+    "def-trf-space-module-scheme-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparisons are additive and linear over regular functions. Coherence of the family and the unit-normalized open-section comparison identify open restriction with sectionMap. P.etaleSections_naturality then gives naturality on all open inclusions. Assemble the pointwise linear equivalences and their inverses into mutually inverse module-sheaf morphisms.",
+   "uses": [
+    "new-etale-tensor-open-section-naturality",
+    "def-trf-cartesian-line-presentation",
+    "def-trf-space-module-scheme-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-etale-tensor-open-section-iso",
+  "def-trf-cartesian-line-presentation",
+  "def-trf-space-module-scheme-restriction",
+  "new-etale-tensor-open-section-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03G7, restriction to scheme tests; descent.tex Tags 03DX and 03FH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of the canonical open immersion into relative Proj of a section algebra along an etale covering",
+   "results": "8 hits, including Proj.fromOfGlobalSections, Proj.pullbackAwayιIso, Proj.instIsOpenImmersionAwayι. No section-algebra presentation or space descent theorem.",
+   "verdict": "No exact match; use the project section-algebra and canonical-map interfaces.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent graded algebra sheaf has affine homogeneous section presentations and evaluation maps compatible with etale base change",
+   "results": "8 hits on SheafOfModules.IsQuasicoherent and QuasicoherentData presentations; none treats the requested graded section-algebra adapters.",
+   "verdict": "No exact match.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subfunctor.isSheaf_iff",
+   "results": "CategoryTheory.Subfunctor.isSheaf_iff in Mathlib.CategoryTheory.Sites.Subsheaf: membership of a subsheaf is local.",
+   "verdict": "Used for the proved generation-locus descent. No graded adapter or open-map descent match.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "SectionProjModel|section_proj_etale_embedding|IsOpenImmersion.*etale|sectionGrade_internal|tensorOpenSectionIso",
+   "results": "Project: SectionProjModel only in the item; no exact comparison or restriction theorem. Existing ingredients: RelativeProjAlgebra.affineData, sectionGrade_internal, tensorOpenSectionIso, isOpenImmersion_of_etale_cover; Mathlib etale instance for open immersions.",
+   "verdict": "Ingredients found; no duplicate of a new statement.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.SectionProjEtaleEmbedding",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-section-proj-etale-embedding",
+   "place": "Proof Steps 1-5, separated into independently reusable adapter and geometric steps.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.EtaleLinePresentationSchemeRestriction",
+  "file": "lean/Sheaf/TraceFormula/EtaleLinePresentationSchemeRestriction.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleLinePresentation_schemeRestriction",
+  "statement": "theorem etaleLinePresentation_schemeRestriction (X : AlgebraicSpace S)\n    (P : EtaleLinePresentation X) (W : X.EtaleSite) :\n    Nonempty (P.module W.obj ≅ (schemeRestriction X W).obj P.line)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0119d",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T082953-L-2244986",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0119d",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T082953-L-2244986",
+  "kind": "interface",
+  "note": "independent cc review: item signature byte-identical to clone; relocated SectionProjModel byte-identical with change record, 0 importers; 4 new sorry statements read against SpaceSectionAlgebra/GradedAlgebraData/PullbackData/EtaleLinePresentation defs (true); #print axioms on item and descent theorem (sorryAx only via new holes/upstream)"
+ }
+}

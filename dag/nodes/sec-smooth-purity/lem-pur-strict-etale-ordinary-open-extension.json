@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-strict-etale-ordinary-open-extension",
+ "kind": "statement",
+ "title": "Ordinary open extension of strict etale quotient systems",
+ "statement": "Let O be a commutative ring, t in O, j:X→Z an open immersion of schemes, I any ordinary geometric coefficient-system image datum for j, and PX,PZ coefficient-evaluation packages [def-per-strict-etale-system-interfaces, def-pur-coefficient-system-image-data]. There exist additive exact functors j! on strict systems and j!,n on modules over the constant sheaves O/(t^(n+1)), left adjoint to I.inverse and (I.lift n).modules respectively. There are evaluation isomorphisms j! eZ,n ≅ eX,n j!,n whose mates are I.inverseEvaluation, and coefficient restriction isomorphisms ResX,mn j!,m ≅ j!,n ResZ,mn whose mates are the inverses of I.restrictInverse. The strict transition of j!M, followed by the restricted evaluation isomorphism at n, equals evaluation at m followed by j!,m of the strict transition of M and the coefficient restriction isomorphism. This holds for all n≤m. No regularity or completeness hypothesis is required. All data and equations are ordinary, before passage to complexes or derived categories.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "section-extension-by-zero, definition-extension-zero and equation-j-p-shriek (03S2); sites-modules.tex lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI/03DJ); Zheng, Constructions 4.1 and 5.15."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-coefficient-system-image-data"
+ ],
+ "proof": [
+  {
+   "text": "At each exponent use the constant-ring module-sheaf equivalence to transport openImmersionLowerShriek, its adjunction and exactness to the constant quotient-ring sheaf presentation. Identify its right adjoint with the specified algebraic inverse image by the canonical inverse-image comparison.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each quotient-ring homomorphism, restriction of scalars leaves underlying additive sheaves and section maps unchanged. The presheaf formula for open extension has the same summands in both orders; on a summand the scalar action is multiplication by the image of that scalar. The identity on these additive groups is thus a module isomorphism, compatible with restrictions. Sheafify it; the inverse is induced by the same identities. Under the open adjunction its transpose restricts the open unit on each summand. Transport through the constant-ring equivalence. I.restrictInverseUnderlying fixes the other comparison on the same underlying sheaves, so uniqueness of transpose proves the asserted mate equality. This proves the needed open comparison directly, without the general compact-support coefficient-change theorem.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-cbc-constant-ring-module-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend every level of M by the transported j!,n; define the successor transition by extending M.transition and composing with the coefficient-restriction isomorphism. On maps act levelwise. Naturality proves the transition and functor equations. The level Hom transposes, using I.inverseEvaluation, carry compatible families to compatible families by the mate identities, and hence give the system adjunction and its evaluation mate. Exactness is checked levelwise because kernels and cokernels in strict systems are levelwise. The successor transition identity is definitional; iteration, identity and composition give it for all n≤m. For the zero ring and empty open the same maps and transposes apply.",
+   "uses": [
+    "lem-pur-system-grothendieck",
+    "lem-pur-coefficient-evaluation-strict-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-constant-ring-module-sheaves",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pur-system-grothendieck",
+  "lem-pur-coefficient-evaluation-strict-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "section-extension-by-zero, definition-extension-zero and equation-j-p-shriek (03S2); sites-modules.tex lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI/03DJ); Zheng, Constructions 4.1 and 5.15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on strict systems of quotient ring sheaves with derived evaluation and coefficient restriction compatibility",
+   "results": "IsAdicComplete.StrictMono.extend; IsAdicComplete.StrictMono.extend_eq; IsAdicComplete.StrictMono.lift; IsAdicComplete.StrictMono.factorPow_comp_extend; localCohomology.diagram; IsAdicComplete.StrictMono.of_lift; IsAdicComplete.StrictMono.mkQ_comp_lift; IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-25",
+   "verdict": "No match: adic-completion and local-cohomology results do not construct sheaf extension by zero."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero on inverse systems of module sheaves commutes with restriction of scalars and evaluation",
+   "results": "ContinuousLinearMap.restrictScalars_zero; LinearMap.restrictScalars_zero; PresheafOfModules.restrictScalarsObj; SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; Finsupp.restrictSupportEquiv_symm_apply_coe; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-25",
+   "verdict": "No match: restriction of scalars APIs do not assemble open extension on strict systems."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictedInverse|strictEtaleOrdinaryOpen|derivedMate_comparison",
+   "results": "Zero hits.",
+   "date": "2026-10-25",
+   "verdict": "No match in the service; local source search finds a pro-etale sequence-site ordinary package, not this etale package with specified image and evaluation data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactSupportConstruction",
+  "date": "2026-10-25",
+  "group": "H7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Steps 2–3; the corresponding construction, scalar or finite-level coproduct step of lem-pur-etale-tower-brown-adjunction.",
+   "via": [
+    "lem-pur-etale-compact-support-construction",
+    "lem-pur-etale-tower-brown-adjunction",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictEtaleOpenExtension",
+  "file": "lean/Sheaf/Paper/StrictEtaleOpenExtension.lean",
+  "declaration": "AlgebraicGeometry.strictEtaleOrdinaryOpen_exists",
+  "statement": "theorem strictEtaleOrdinaryOpen_exists : Nonempty (StrictEtaleOrdinaryOpen O t j I PX PZ)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.StrictEtaleOrdinaryOpen",
+   "AlgebraicGeometry.strictEtaleOrdinaryOpen_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261025T180733-L-4025513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261025T180733-L-4025513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

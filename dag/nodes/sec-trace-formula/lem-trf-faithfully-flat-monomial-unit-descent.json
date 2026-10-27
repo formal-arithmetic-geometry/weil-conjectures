@@ -1,0 +1,192 @@
+{
+ "id": "lem-trf-faithfully-flat-monomial-unit-descent",
+ "kind": "statement",
+ "title": "Faithfully flat descent of monomial recognition for localized units",
+ "statement": "Let $A$ be a nonzero commutative integral domain, $B$ a commutative ring, and $\\varphi:A\\to B$ a faithfully flat ring homomorphism [def-weil-pbc-faithfully-flat-ring-map]. Let $P$ be a finitely generated commutative monoid, written additively, and let $a:P\\to(A,\\cdot)$ satisfy $a(0)=1$, $a(p+q)=a(p)a(q)$ and $a(p)\\neq0$ for every $p\\in P$. Fix generators $p_1,\\ldots,p_r$ of $P$ and put $s=\\prod_i a(p_i)$, with empty product $1$. Suppose that for every $q\\in P$ and $b,c\\in B$ satisfying $bc=\\varphi(a(q))$, there exist $p\\in P$ and $v\\in B^\\times$ with $b=v\\varphi(a(p))$. Let $\\ell:A\\to A[1/s]$ be localization at $1,s,s^2,\\ldots$: its elements are fractions $f/s^m$, and $f/s^m=g/s^n$ means $s^h(s^nf-s^mg)=0$ for some $h\\geq0$. Then\n$$\\ell^{-1}\\bigl(A[1/s]^\\times\\bigr)=\\{u a(p):u\\in A^\\times,\\ p\\in P\\}.$$\nThis includes $P=\\{0\\}$, the empty generating list, $s=1$, and $B$ equal to a faithfully flat completion of $A$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-extracted faithfully flat algebra criterion for Expose VI 1.4 and 1.6, printed pp. 69--70; parent split, original steps 5--6. Ideal descent uses Stacks Tag 05CK (lemma-faithfully-flat-universally-injective). The complete-toric factor theorem is an explicit hypothesis here, not claimed as proved in this criterion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $q_0=\\sum_{i=1}^r p_i$, so $s=a(q_0)\\neq0$. Suppose $\\ell(f)$ is a unit and write its inverse as $g/s^m$. The stated fraction equality gives $s^h(fg-s^m)=0$ for some $h\\geq0$. Since $A$ is a domain and $s\\neq0$, cancellation gives $fg=s^m=a(mq_0)$, where $mq_0$ denotes the sum of $m$ copies of $q_0$. This also proves $f\\neq0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebraic descent argument serving Expose VI 1.4 and 1.6, printed pp. 69--70; the complete-toric factorization remains an explicit hypothesis."
+   }
+  },
+  {
+   "text": "Apply the assumed factorization property to $q=mq_0$, $b=\\varphi(f)$ and $c=\\varphi(g)$; their product is $\\varphi(a(q))$ by step 1. It gives $p\\in P$ and $v\\in B^\\times$ such that $\\varphi(f)=v\\varphi(a(p))$. Multiplication by $v$ and by $v^{-1}$ gives both inclusions between the principal ideals, hence $(\\varphi(f))B=(\\varphi(a(p)))B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebraic descent argument serving Expose VI 1.4 and 1.6, printed pp. 69--70; the complete-toric factorization remains an explicit hypothesis."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-faithfully-flat-ideal-contraction] for the two ideals $(f)$ and $(a(p))$ of $A$. Their extensions are the equal principal ideals from step 2: the extension of $(x)$ is $(\\varphi(x))$, since every generator $\\varphi(tx)$ is a multiple of $\\varphi(x)$ and $\\varphi(x)$ itself is an image generator. Contracting therefore gives $(f)=(a(p))$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CK, lemma-faithfully-flat-universally-injective, ideal-contraction assertion."
+   }
+  },
+  {
+   "text": "Choose $d,e\\in A$ with $f=d a(p)$ and $a(p)=ef$ from the equality of principal ideals. Substituting gives $a(p)=ed a(p)$; as $a(p)\\neq0$, cancellation yields $ed=1$. Commutativity makes $d$ a unit with inverse $e$, and $f=d a(p)$ proves the required inclusion into the right-hand set.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebraic descent argument serving Expose VI 1.4 and 1.6, printed pp. 69--70; the complete-toric factorization remains an explicit hypothesis."
+   }
+  },
+  {
+   "text": "Conversely let $f=u a(p)$ with $u\\in A^\\times$. Write $p=\\sum_i n_i p_i$, with $n_i\\in\\mathbf N$, using the generating hypothesis. Set $N=\\sum_i n_i$ and $t=\\prod_i a(p_i)^{N-n_i}$. Each $n_i\\leq N$, and multiplicativity gives $a(p)t=s^N$. Thus $\\ell(f)$ has inverse $(u^{-1}t)/s^N$. For the empty generating list $p=0$, $N=0$, $t=s=1$, so the same formula gives inverse $u^{-1}$. This proves the reverse inclusion and the equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebraic descent argument serving Expose VI 1.4 and 1.6, printed pp. 69--70; the complete-toric factorization remains an explicit hypothesis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-faithfully-flat-ideal-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-written algebraic descent argument serving Expose VI 1.4 and 1.6, printed pp. 69--70; the complete-toric factorization remains an explicit hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a faithfully flat ring map, if factors of monomials in the target are unit times monomials, then elements becoming units after localizing all monoid generators are unit times monomials in the source.",
+   "results": "{\"t\": \"2026-10-22T05:58:00Z\", \"tool\": \"leanfinder\", \"query\": \"For a faithfully flat ring map, if factors of monomials in the target are unit times monomials, then elements becoming units after localizing all monoid generators are unit times monomials in the source.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.isUnit_piRingHom_algebraMap_comp_piEvalRingHom\", \"Algebra.PreSubmersivePresentation.localizationAway_map\", \"IsLocalization.Away.mk\", \"Algebra.Generators.localizationAway\", \"Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero\", \"IsLocalization.isUnit_comp\", \"IsLocalization.Away.mul_of_isUnit\", \"Algebra.Presentation.localizationAway_relation\"], \"digest\": \"5ad586c9143bce0c\"}; Read hits: localization unit/divisibility criteria give only part of the argument; MvPolynomial.dvd_monomial_one_iff_exists concerns ordinary polynomials, not a general chart and faithfully flat descent of its unit-monomial factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*[Uu]nit|[Uu]nit.*monomial|FaithfullyFlat.*[Aa]ssociated|[Aa]ssociated.*FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-22T05:58:58Z\", \"tool\": \"grep\", \"query\": \"monomial.*[Uu]nit|[Uu]nit.*monomial|FaithfullyFlat.*[Aa]ssociated|[Aa]ssociated.*FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean\", \"Mathlib/Algebra/MvPolynomial/Equiv.lean\", \"Mathlib/Algebra/MvPolynomial/Equiv.lean\", \"Mathlib/Algebra/MvPolynomial/Equiv.lean\", \"Mathlib/Algebra/MvPolynomial/Equiv.lean\", \"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\"], \"digest\": \"82d415ca879a5ea2\"}; Read hits: localization unit/divisibility criteria give only part of the argument; MvPolynomial.dvd_monomial_one_iff_exists concerns ordinary polynomials, not a general chart and faithfully flat descent of its unit-monomial factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent through a faithfully flat ring homomorphism of the property that every element invertible in a monomial localization is a unit times a chart monomial.",
+   "results": "{\"t\": \"2026-10-22T05:58:58Z\", \"tool\": \"leansearch\", \"query\": \"Descent through a faithfully flat ring homomorphism of the property that every element invertible in a monomial localization is a unit times a chart monomial.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: localization unit/divisibility criteria give only part of the argument; MvPolynomial.dvd_monomial_one_iff_exists concerns ordinary polynomials, not a general chart and faithfully flat descent of its unit-monomial factors.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, IsUnit",
+   "results": "{\"t\": \"2026-10-22T05:58:59Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.Away, IsUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalization.atUnit\", \"IsLocalization.Away.algebraMap_isUnit\", \"IsLocalization.away_of_isUnit_of_bijective\", \"IsLocalization.Away.isUnit_of_dvd\", \"IsLocalization.Away.algebraMap_pow_isUnit\", \"IsLocalization.Away.lift\", \"IsLocalization.Away.mul_of_isUnit\", \"IsLocalization.Away.mul_of_isUnit'\"], \"digest\": \"843fcf25de5ac7fb\"}; Read hits: localization unit/divisibility criteria give only part of the argument; MvPolynomial.dvd_monomial_one_iff_exists concerns ordinary polynomials, not a general chart and faithfully flat descent of its unit-monomial factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let A be a domain and A to B faithfully flat. Given a finitely generated monoid chart a with nonzero monomials, and assuming every factor of an image monomial in B is associated to an image monomial, prove f is a unit after inverting the product of the generators iff f is associated in A to a chart monomial.",
+   "results": "{\"t\": \"2026-10-22T05:59:57Z\", \"tool\": \"leanfinder\", \"query\": \"Let A be a domain and A to B faithfully flat. Given a finitely generated monoid chart a with nonzero monomials, and assuming every factor of an image monomial in B is associated to an image monomial, prove f is a unit after inverting the product of the generators iff f is associated in A to a chart monomial.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.associated_sec_fst\", \"IsLocalization.Away.algebraMap_isUnit_iff\", \"Algebra.Presentation.localizationAway_relation\", \"IsLocalization.isUnit_piRingHom_algebraMap_comp_piEvalRingHom\", \"IsLocalization.Away.of_associated\", \"IsLocalization.Away.iff_of_associated\", \"IsLocalization.Away.mul_of_associated\", \"IsLocalization.algebraMap_isUnit_iff\"], \"digest\": \"af47ef360fe751d6\"}; Read hits: localization unit/divisibility criteria give only part of the argument; MvPolynomial.dvd_monomial_one_iff_exists concerns ordinary polynomials, not a general chart and faithfully flat descent of its unit-monomial factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, IsUnit",
+   "results": "{\"t\": \"2026-10-23T09:57:36Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.Away, IsUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalization.atUnit\", \"IsLocalization.Away.algebraMap_isUnit\", \"IsLocalization.away_of_isUnit_of_bijective\", \"IsLocalization.Away.isUnit_of_dvd\", \"IsLocalization.Away.algebraMap_pow_isUnit\", \"IsLocalization.Away.lift\", \"IsLocalization.Away.mul_of_isUnit\", \"IsLocalization.Away.mul_of_isUnit'\"], \"digest\": \"843fcf25de5ac7fb\"}; Read the returned declarations: general flatness, localization, fraction association or polynomial-specific statements do not state the full chart-factorization descent criterion. The ideal-contraction hit is already the existing cited Mathlib leaf; the localization unit criterion is proved directly from the fraction equality in step 1.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*[Uu]nit|[Uu]nit.*monomial|FaithfullyFlat.*[Aa]ssociated|[Aa]ssociated.*FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T09:57:36Z\", \"tool\": \"grep\", \"query\": \"monomial.*[Uu]nit|[Uu]nit.*monomial|FaithfullyFlat.*[Aa]ssociated|[Aa]ssociated.*FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean\"], \"digest\": \"7182f5f926e9252a\"}; Read the returned declarations: general flatness, localization, fraction association or polynomial-specific statements do not state the full chart-factorization descent criterion. The ideal-contraction hit is already the existing cited Mathlib leaf; the localization unit criterion is proved directly from the fraction equality in step 1.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of monomial recognition for localized units along a faithfully flat ring map",
+   "results": "{\"t\": \"2026-10-23T09:57:37Z\", \"tool\": \"leansearch\", \"query\": \"Descent of monomial recognition for localized units along a faithfully flat ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"isUnit_of_map_unit\", \"RingHom.Flat.holdsForLocalizationAway\", \"IsLocalHom.mk\", \"IsLocalization.atUnits\", \"Module.Flat.localizedModule\", \"IsLocalization.submonoid_map_le_is_unit\", \"IsLocalizedModule.recOn\"], \"digest\": \"416a0ca1f290d880\"}; Read the returned declarations: general flatness, localization, fraction association or polynomial-specific statements do not state the full chart-factorization descent criterion. The ideal-contraction hit is already the existing cited Mathlib leaf; the localization unit criterion is proved directly from the fraction equality in step 1.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of the property that every element invertible after localizing monoid generators is a unit times a monoid element",
+   "results": "{\"t\": \"2026-10-23T09:57:37Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat descent of the property that every element invertible after localizing monoid generators is a unit times a monoid element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.locally_of_exists\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"LocalizationPreserves\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.flat_of_isLocalized_span\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\"], \"digest\": \"fecc35767c95b84a\"}; Read the returned declarations: general flatness, localization, fraction association or polynomial-specific statements do not state the full chart-factorization descent criterion. The ideal-contraction hit is already the existing cited Mathlib leaf; the localization unit criterion is proved directly from the fraction equality in step 1.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a domain with a finitely generated multiplicative monoid chart, invertibility after inverting its generators descends as association to a chart element through a faithfully flat extension satisfying monomial factorization",
+   "results": "{\"t\": \"2026-10-23T09:59:13Z\", \"tool\": \"leanfinder\", \"query\": \"In a domain with a finitely generated multiplicative monoid chart, invertibility after inverting its generators descends as association to a chart element through a faithfully flat extension satisfying monomial factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_reduced_fraction'\", \"IsLocalization.Away.associated_sec_fst\", \"IsLocalization.Away.of_associated\", \"IsLocalization.Away.mk\", \"IsLocalization.Away.mul_of_associated\", \"IsLocalization.Away.iff_of_associated\", \"Algebra.Generators.localizationAway\", \"Algebra.essFiniteType_cond_iff\"], \"digest\": \"3eb7964574f7987f\"}; Read the returned declarations: general flatness, localization, fraction association or polynomial-specific statements do not state the full chart-factorization descent criterion. The ideal-contraction hit is already the existing cited Mathlib leaf; the localization unit criterion is proved directly from the fraction equality in step 1.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_isUnit_iff|comap_map_eq_self_of_faithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T09:59:13Z\", \"tool\": \"grep\", \"query\": \"algebraMap_isUnit_iff|comap_map_eq_self_of_faithfullyFlat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Localization/Defs.lean\", \"Mathlib/RingTheory/Ideal/Pure.lean\"], \"digest\": \"f0868e0a8977e364\"}; Read the returned declarations: general flatness, localization, fraction association or polynomial-specific statements do not state the full chart-factorization descent criterion. The ideal-contraction hit is already the existing cited Mathlib leaf; the localization unit criterion is proved directly from the fraction equality in step 1.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-divisorial-structure",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), retained nearby-duality alteration ancestry, via the log-blowup normalization argument: Agent-extracted faithfully flat algebra criterion for Expose VI 1.4 and 1.6, printed pp. 69--70; parent split, original steps 5--6. Ideal descent uses Stacks Tag 05CK (lemma-faithfully-flat-universally-injective). The complete-toric factor theorem is an explicit hypothesis here, not claimed as proved in this criterion.",
+   "via": [
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-faithfully-flat-monomial-unit-descent",
+  "worker": "stage1",
+  "summary": "Q141: checked the live Lean source and current blueprint; retained the statement, wrote the fraction-clearing, upstairs factorization, ideal-contraction, cancellation and explicit inverse arguments. Reused the existing Mathlib ideal-contraction leaf; no new nodes. Tested empty generators, trivial monoid, zero input, unit generators and a completion target.",
+  "blueprint": "Retains the recorded lem-trf-local-term-locality proof (1)--(2) nearby-duality alteration ancestry via lem-trf-log-regular-divisorial-structure: makes explicit its original steps 5--6, now parent step 3, the algebraic descent from the completed chart. Current latest ancestor text has no separate monomial-recognition assertion; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-0a532047f",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-0a532047f (reviewer sub-agent of L); spot-checked: The statement is unchanged from the base and has no new nodes. Read all 5 steps. Step 1: from s^h(fg−s^m)=0, domain cancellation gives fg=s^m=a(mq0). Step 2: the upstairs factorization gives (φf)=(φa(p)). Step 3: lem-weil-pbc-faithfully-flat-ideal-contraction (Mathlib Ideal.comap_map_eq_self_of_faithfullyFlat; Stacks 05CK, label lemma-faithfully-flat-universally-injective, read: 'R ∩ IS = I') gives (f)=(a(p)). Step 4: cancelling a(p)≠0 gives ed=1. Step 5: the explicit inverse u^{-1}t/s^N with a(p)t=s^N, checked. Edge cases: P={0} or r=0 (s=1, preimage A^×); f=0 excluded; zero divisors in B never used; the domain hypothesis is needed. The parent lem-trf-log-regular-divisorial-structure (step 3, B=Â) uses it consistently with lem-trf-complete-toric-monomial-factors, whose conclusion has exactly the form of the item's factorization hypothesis. Checked ILO VI 1.4/1.6 (PDF pp. 75–76); the agent-written origin is labelled honestly. A DAG search for faithfully flat with monomial/monoid finds no duplicate, so same_as [] is right. First delivery, not a re-split note case. No SGA, no tool_uses needed."
+ }
+}

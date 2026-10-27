@@ -1,0 +1,353 @@
+{
+ "id": "lem-sf-proper-refinement-forget-supports",
+ "kind": "statement",
+ "title": "Proper refinement comparisons preserve the canonical forget-supports map",
+ "statement": "Let $A$ be a finite commutative ring, $h:T\\to B$ a proper morphism [def-weil-proper-morphism] of arbitrary schemes [def-pc-scheme], and work in $D(V_{\\mathrm{et}},A)$ for every scheme $V$ [def-weil-pbc-derived-categories]. Write $F_a=La^*$ and $R_a=Ra_*$ with the canonical adjunctions of [def-kun-unbounded-exchange], and $\\kappa_{b,a}:R_bR_a\\xrightarrow{\\sim}R_{ba}$ for the canonical direct-image compositor [lem-weil-derived-direct-image-composition], clause (5). A compactification $c=(j_c:T\\hookrightarrow Z_c,r_c:Z_c\\to B)$ means that $j_c$ is a quasi-compact open immersion [def-weil-open-immersion], $r_c$ is proper, and $r_cj_c=h$ [def-weil-pbc-projection-compactification]. Put $J_c=D(j_{c!})$ [def-weil-pbc-extension-by-zero], with open-adjunction unit $u_c:1\\xrightarrow{\\sim}F_{j_c}J_c$ as in [lem-asd-open-base-change-unit-mate]. Define $t_c:J_c\\to R_{j_c}$ to be the $F_{j_c}\\dashv R_{j_c}$ adjunct of $u_c^{-1}$ [def-weil-pbc-adjunction-mate], and define\n$$\\gamma_c=R_{r_c}(t_c);\\kappa_{r_c,j_c}:R_{r_c}J_c\\xrightarrow{\\sim}R_h.$$\nThis is the proper forget-supports isomorphism [def-sp-unbounded-proper-shriek-star-comparison] computed with $c$.\n\nLet $d=(j_d,r_d)$ be a second compactification and let $q:Z_c\\to Z_d$ be a proper map with $qj_c=j_d$ and $r_dq=r_c$, such that the square $(1_T,j_c,j_d,q)$ is Cartesian. Let $b_q:F_qJ_d\\xrightarrow{\\sim}J_c$ be the inverse of the termwise open-extension base-change isomorphism of [lem-asd-open-base-change-unit-mate] for this square. With $\\eta_q$ the unit of $F_q\\dashv R_q$, define the specified refinement comparison\n$$\\rho_q=R_{r_d}(\\eta_q J_d);R_{r_d}R_q(b_q);(\\kappa_{r_d,q}J_c):R_{r_d}J_d\\longrightarrow R_{r_c}J_c.$$\nThen, as derived natural transformations in application order,\n$$\\rho_q;\\gamma_c=\\gamma_d.$$\nIn particular $\\rho_q$ is invertible. For compactifications $c,d$ and a common refinement $e$ with proper maps $q_c:Z_e\\to Z_c$ and $q_d:Z_e\\to Z_d$ whose squares over $T$ are Cartesian, let $I_{c,d}=\\rho_{q_c};\\rho_{q_d}^{-1}:R_{r_c}J_c\\xrightarrow{\\sim}R_{r_d}J_d$. Then\n$$I_{c,d};\\gamma_d=\\gamma_c.$$\nThis applies in particular to the canonical common refinement $\\operatorname{inf}(c,d)$ used by rightDerivedLowerShriekOfCompactificationIso, hence to the actual comparison with a chosen compactification. There is no boundedness, Noetherian, nonempty-base, or finite-type-base assumption.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, sentence \"the exchange map is obtained from the same pullback counits on the Cartesian square\": normalization of the proper forget-supports map through the actual compactification comparisons. Agent-written formal refinement sublemma; actual comparison formula read in lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekIndependenceUnbounded.lean, rightDerivedLowerShriekOfCompactificationComparison and rightDerivedLowerShriekOfCompactificationIso; forget-supports formula in LowerShriekToLowerStar.lean. Open comparison is Stacks Tag 03S6, etale-cohomology.tex, lemma-shriek-base-change; the statement here is its derived mate normalization, not a quotation of that tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-unbounded-exchange",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-extension-by-zero",
+  "lem-asd-open-base-change-unit-mate",
+  "def-weil-pbc-adjunction-mate",
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "First fix the normalization of composition, not just an isomorphism of endpoints. The categories of constant-$A$ module sheaves are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]; every inverse image is exact additive with the specified direct-image right adjoint by [prop-weil-pbc-inverse-image-modules-exact]. The sheaf pullback compositor is conjugate to sheaf direct-image composition by [lem-weil-pbc-inverse-image-composition-module-linear]. Apply [lem-sfb-derived-composition-adjunction-normalization] to these exact functors and their specified adjoints. It identifies the resolution-defined derived compositor with the conjugate of the descended pullback compositor. Thus the $\\kappa$ of clause (5) of [lem-weil-derived-direct-image-composition], in our inverse orientation, identifies the single-map adjunction with the composite adjunction of [def-weil-pbc-composite-adjunction]. In particular, under $a_{b,a}:F_{ba}\\simeq F_aF_b$ its counit is $F_a(\\varepsilon_b R_a);\\varepsilon_a$. The descended pullback compositor is the one used in [lem-kun-derived-pullback-composition-monoidal], whose associativity clause removes parenthesization ambiguity. All hypotheses here concern ordinary unbounded constant-ring categories on arbitrary schemes.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-pbc-composite-adjunction",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, common pullback counits and direct-image composition; Stacks Tags 03D8 (sites-modules.tex, lemma-push-pull-composition-modules) and 0DV0 (categories.tex, lemma-compose-counits); derived normalization as in the cited node."
+   }
+  },
+  {
+   "text": "For $K\\in D(T_{\\mathrm{et}},A)$ put $X=J_dK$ and $C=a_{q,j_c}:F_{j_d}\\simeq F_{j_c}F_q$. In [lem-asd-open-base-change-unit-mate] take $j=j_d$, $a=q$, $j'=j_c$, $u=1_T$. Its $B_K:J_cK\\simeq F_qJ_dK$ is $b_{q,K}^{-1}$, and its square comparison $c_X$ is $C_X$ after the canonical identity identifications. In application order its equation is\n$$u_{c,K};F_{j_c}(B_K)=u_{d,K};C_X.$$\nPostcompose by $F_{j_c}(b_{q,K});u_{c,K}^{-1}$ and precompose by $u_{d,K}^{-1}$. The inverse pairs cancel, giving\n$$C_X;F_{j_c}(b_{q,K});u_{c,K}^{-1}=u_{d,K}^{-1}.$$\nThis uses exactly the supplied Cartesian square, and does not assert any base-change theorem for a non-Cartesian refinement.",
+   "uses": [
+    "lem-asd-open-base-change-unit-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, open-unit normalization; Stacks Tag 03S6, etale-cohomology.tex, lemma-shriek-base-change, with the explicit derived unit equation of the cited node."
+   }
+  },
+  {
+   "text": "Write $z=b_{q,K};t_{c,K}:F_qX\\to R_{j_c}K$, $v=\\eta_{q,X};R_q(z):X\\to R_qR_{j_c}K$, and $s=v;\\kappa_{q,j_c,K}:X\\to R_{j_d}K$. By the normalization in step 1 and the composite Hom bijection of [def-weil-pbc-composite-adjunction], the transpose of $s$ under $F_{j_d}\\dashv R_{j_d}$ is\n$$C_X;F_{j_c}\\bigl(F_q(v);\\varepsilon_{q,R_{j_c}K}\\bigr);\\varepsilon_{j_c,K}.$$\nThe inner factor is $z$: expand $v$, move $F_qR_q(z)$ through $\\varepsilon_q$ by its naturality, and cancel $F_q(\\eta_{q,X});\\varepsilon_{q,F_qX}=1$. Hence this transpose equals\n$$C_X;F_{j_c}(b_{q,K});F_{j_c}(t_{c,K});\\varepsilon_{j_c,K}\n=C_X;F_{j_c}(b_{q,K});u_{c,K}^{-1}=u_{d,K}^{-1}.$$\nThe first equality is the definition of $t_c$ as the adjunct of $u_c^{-1}$; the second is step 2. By the bijective transpose correspondence [def-weil-pbc-adjunction-mate], this is also the transpose of $t_{d,K}$, so $s=t_{d,K}$. The formulas are natural in $K$, giving an equality of derived natural transformations.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, substitute the specified units and counits; refinement_derivedOpenImmersionLowerShriekToLowerStar_app in CompactificationRefinementLowerStar.lean (formal calculation, not a Lean attachment)."
+   }
+  },
+  {
+   "text": "Expand $\\rho_q;\\gamma_c$ at $K$. Naturality of $\\kappa_{r_d,q}$ at $t_{c,K}$ moves this map through the compositor. Associativity in [lem-weil-derived-direct-image-composition] says\n$$(\\kappa_{r_d,q}R_{j_c});\\kappa_{r_c,j_c}\n=(R_{r_d}\\kappa_{q,j_c});\\kappa_{r_d,j_d},$$\nsince $r_dq=r_c$ and $qj_c=j_d$. Functoriality and this identity therefore give\n$$\\begin{aligned}\n\\rho_{q,K};\\gamma_{c,K}\n&=R_{r_d}\\bigl(\\eta_{q,J_dK};R_q(b_{q,K});R_q(t_{c,K});\\kappa_{q,j_c,K}\\bigr);\\kappa_{r_d,j_d,K}\\\\\n&=R_{r_d}(t_{d,K});\\kappa_{r_d,j_d,K}=\\gamma_{d,K}.\n\\end{aligned}$$\nThe middle equality is the preceding transpose calculation. Naturality of every factor upgrades the componentwise equation to the required equality.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, direct-image composition and common counits; rightDerivedLowerShriekOfCompactificationComparison_app_comp_toLowerStar in CompactificationRefinementLowerStar.lean."
+   }
+  },
+  {
+   "text": "The maps $\\gamma_c,\\gamma_d$ are the canonical proper isomorphisms specified in [def-sp-unbounded-proper-shriek-star-comparison], with the displayed compactification formulas. Step 4 gives $\\rho_q=\\gamma_d;\\gamma_c^{-1}$, so $\\rho_q$ is invertible. Apply step 4 to the two supplied Cartesian proper refinements from $e$. It gives $\\rho_{q_c};\\gamma_e=\\gamma_c$ and $\\rho_{q_d};\\gamma_e=\\gamma_d$. The second equation implies $\\rho_{q_d}^{-1};\\gamma_d=\\gamma_e$, and hence\n$$I_{c,d};\\gamma_d=\\rho_{q_c};\\rho_{q_d}^{-1};\\gamma_d=\\rho_{q_c};\\gamma_e=\\gamma_c.$$\nOnly inverses of the specified proper comparisons are used.",
+   "uses": [
+    "def-sp-unbounded-proper-shriek-star-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, passage to proper forget-supports isomorphisms; LowerShriekToLowerStar.lean and the definition of the common-refinement comparison."
+   }
+  },
+  {
+   "text": "Finally identify the particular comparison mentioned in the statement. Properness makes $h$ separated and of finite type, in particular quasi-compact, and $c$ supplies an open-then-proper factorization. Thus the last clause of [lem-pur-etale-graph-comparison-base-change] applies: on quasi-compact maps its comparison equals $\\rho_{q_c};\\rho_{q_d}^{-1}$, and is explicitly the source-library rightDerivedLowerShriekOfCompactificationIso. The definition in LowerShriekIndependenceUnbounded.lean uses precisely the two maps from $\\operatorname{inf}(c,d)$, in this order. Step 5 therefore proves the stated equation for this actual comparison, including when $d$ is the chosen compactification. This is an application to the specified comparison, not a replacement by an arbitrary isomorphism. No argument imposed boundedness, Noetherianity, a nonempty base, or a finite-type base.",
+   "uses": [
+    "lem-pur-etale-graph-comparison-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, actual chosen compactification; LowerShriekIndependenceUnbounded.lean, rightDerivedLowerShriekOfCompactificationIso and rightDerivedLowerShriekIso; graph-comparison identification in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-pbc-composite-adjunction",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-asd-open-base-change-unit-mate",
+  "def-weil-pbc-adjunction-mate",
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "lem-pur-etale-graph-comparison-base-change",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, sentence \"the exchange map is obtained from the same pullback counits on the Cartesian square\": normalization of the proper forget-supports map through the actual compactification comparisons. Agent-written formal refinement sublemma; actual comparison formula read in lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekIndependenceUnbounded.lean, rightDerivedLowerShriekOfCompactificationComparison and rightDerivedLowerShriekOfCompactificationIso; forget-supports formula in LowerShriekToLowerStar.lean. Open comparison is Stacks Tag 03S6, etale-cohomology.tex, lemma-shriek-base-change; the statement here is its derived mate normalization, not a quotation of that tag.",
+  "why": "Explicit formal supplement to the latest blueprint common-counit sentence, checked against the source-library refinement formulas and the cited existing normalization lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unit defined comparison of compactifications of a proper morphism commutes with the forget supports maps to ordinary derived direct image",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+     "CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom",
+     "AlgebraicGeometry.Scheme.Hom.appLE_map",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state this normalized derived compactification comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper refinement comparison extension by zero pushforward agrees with forget support under direct image composition",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Function.support_comp_subset",
+     "Function.support_comp_eq_of_range_subset",
+     "Function.support_comp_eq_preimage",
+     "Function.support_extend_zero_subset",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "HasCompactSupport.tsupport_extend_zero",
+     "tsupport_comp_eq",
+     "Function.support_comp_eq"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state this normalized derived compactification comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"conjugate\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state this normalized derived compactification comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*(comparison|[Cc]ompar)|forget.*[Ss]upport",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/LinearAlgebra/Finsupp/Pi.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state this normalized derived compactification comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.conjugateEquiv",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.conjugateEquiv_leftUnitor_hom",
+     "CategoryTheory.conjugateEquiv_rightUnitor_hom",
+     "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+     "CategoryTheory.conjugateEquiv_whiskerLeft",
+     "CategoryTheory.conjugateEquiv_whiskerRight",
+     "CategoryTheory.conjugateEquiv_associator_hom",
+     "CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+     "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: generic adjunction identities and underived sheaf comparisons do not state the specified unbounded etale compactification refinement compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*counit|comp_counit_app|rightDerivedFunctorCompIso",
+   "results": {
+    "hits": 16,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+     "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: generic adjunction identities and underived sheaf comparisons do not state the specified unbounded etale compactification refinement compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse base change mate for an open immersion intertwines extension by zero to derived pushforward through the unit of pullback pushforward adjunction",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc",
+     "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_assoc",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: generic adjunction identities and underived sheaf comparisons do not state the specified unbounded etale compactification refinement compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proper-self-exchange-forget-supports",
+  "date": "2026-10-27",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "First triangle, sentence \"the exchange map is obtained from the same pullback counits on the Cartesian square\": normalization of the proper forget-supports map through the actual compactification comparisons.",
+   "via": [
+    "lem-sf-proper-self-exchange-forget-supports",
+    "lem-sf-p1-projection-trace-transport-false-tail"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-proper-refinement-forget-supports",
+  "worker": "stage1",
+  "summary": "Kept the full live statement. Used existing Grothendieck, exact inverse-image and derived-adjunction normalization lemmas; inverted the explicit open base-change unit equation; calculated the refinement transpose; pasted direct-image compositors; cancelled the two proper forget-supports isomorphisms. No new nodes or Mathlib leaves. Verified the specified source-library comparison through its existing DAG identification.",
+  "blueprint": "Latest thm-amb-p1-adjunction.proof.md, first triangle: the exchange map is obtained from the same pullback counits on the Cartesian square. The inherited created.item chain terminates at a module name; blueprint_refs ancestor returns None, so its null ancestor is retained with the exact source place rather than inventing a chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic normalization/comparison tool for ordinary unbounded constant-ring module categories; this unit does not restate this fact, and no exceptional adjunction or trace theorem is used."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic normalization/comparison tool for ordinary unbounded constant-ring module categories; this unit does not restate this fact, and no exceptional adjunction or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic normalization/comparison tool for ordinary unbounded constant-ring module categories; this unit does not restate this fact, and no exceptional adjunction or trace theorem is used."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic normalization/comparison tool for ordinary unbounded constant-ring module categories; this unit does not restate this fact, and no exceptional adjunction or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic normalization/comparison tool for ordinary unbounded constant-ring module categories; this unit does not restate this fact, and no exceptional adjunction or trace theorem is used."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "Generic normalization/comparison tool for ordinary unbounded constant-ring module categories; this unit does not restate this fact, and no exceptional adjunction or trace theorem is used."
+   },
+   {
+    "node": "lem-asd-open-base-change-unit-mate",
+    "why": "Generic normalization/comparison tool for ordinary unbounded constant-ring module categories; this unit does not restate this fact, and no exceptional adjunction or trace theorem is used."
+   },
+   {
+    "node": "lem-pur-etale-graph-comparison-base-change",
+    "why": "Generic normalization/comparison tool for ordinary unbounded constant-ring module categories; this unit does not restate this fact, and no exceptional adjunction or trace theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-derived-direct-image-composition",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-asd-open-base-change-unit-mate",
+  "lem-pur-etale-graph-comparison-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NC-f82935e54",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-f82935e54 (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, no new nodes, statement unchanged. Every cited statement was read. Orientations were checked against LowerShriekIndependenceUnbounded.lean: the comparison (l.110) is unit, then inverse open base change, then rightDerivedFunctorCompIso' and goes coarse→fine like ρ_q; the Iso (l.209) is infFst-comparison ≫ infSnd-comparison⁻¹, which equals I_{c,d}. The Cartesian property of inf comes from isPullback_infFst/Snd, which are sorry-free. Step 2: lem-asd-open-base-change-unit-mate with j=j_d, a=q, j'=j_c, u=1 gives B=b_q⁻¹ and c_X=C_X; inverting gives C;F(b);u_c⁻¹=u_d⁻¹ (types checked). Step 3: the composite-adjunction transpose of s is C;F_{j_c}(z);ε_{j_c}, using the triangle identity and naturality; this equals u_d⁻¹, the transpose of t_d. Step 4: inverting the associativity clause of lem-weil-derived-direct-image-composition gives (κ_{r_d,q}R_{j_c});κ_{r_c,j_c}=(R_{r_d}κ_{q,j_c});κ_{r_d,j_d}; with κ-naturality this yields γ_d. Step 5: the cancellation is correct. Step 1: the normalization lemma's hypotheses (Grothendieck abelian, exact L) are supplied, and conjugacy comes from 03D8-module-linear. Tested q=id, c=d, e=c, K=0 and empty schemes. No duplicate found: rg over the forget-supports, refinement and API names; the near candidates need Noetherian, field or pro-étale hypotheses. Batch-5 flag on lem-pur-etale-graph-comparison-base-change: its closure reaches the sec-poincare-duality node lem-pod-lisse-module-sheaves-as-module-objects only through the proper base change chain. That node is a generic fact (lisse sheaves = module objects of FLC), not PD. Step 6 uses the graph lemma only to identify the compactification-independence comparison of Rf_! with ρ_{q_c};ρ_{q_d}⁻¹, which neither assumption gives and which is not a step of the trace formula or PD proofs, so I accept it. Accepted tool_uses: the 8 declared off-unit nodes. The 'why' for the graph lemma is imprecise but harmless."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLowerStar",
+  "declaration": "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison_app_comp_toLowerStar",
+  "declarations": [
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison_app_comp_toLowerStar",
+   "AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison_app",
+   "AlgebraicGeometry.Etale.map_derivedOpenImmersionLowerShriekToLowerStar_app_counit",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationIso",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar"
+  ],
+  "statement": "lemma rightDerivedLowerShriekOfCompactificationComparison_app_comp_toLowerStar\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :\n    (rightDerivedLowerShriekOfCompactificationComparison A r hcart).app M ≫\n        R((c.g)_*[A]).map ((derivedOpenImmersionLowerShriekToLowerStar A c.i).app M) ≫\n        (rightDerivedLowerStarCompHom A c.i c.g f c.comm).app M =\n      R((d.g)_*[A]).map ((derivedOpenImmersionLowerShriekToLowerStar A d.i).app M) ≫\n        (rightDerivedLowerStarCompHom A d.i d.g f d.comm).app M",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "Existing upstream declarations, specialized to A = ModuleCat.{u + 1} Λ for a finite commutative ring Λ and to proper f. The primary theorem is exactly ρ_q;γ_c=γ_d, componentwise for every derived object; NatTrans.ext gives the natural-transformation formulation. Its implicit binders are the coefficient category, arbitrary schemes X,Y, f, compactifications c,d, a refinement r, and its Cartesian square hcart. The second listed declaration supplies invertibility. Applying the primary theorem to e→c and e→d and cancelling the second comparison gives the arbitrary-common-refinement equation. The third listed theorem supplies the actual inf comparison equation directly; rightDerivedLowerShriekOfCompactificationIso is definitionally the infFst comparison followed by the inverse infSnd comparison. The fourth and fifth declarations fix exactly the unit/base-change/compositor and adjunct normalizations in the node; rightDerivedLowerShriekIsoRightDerivedLowerStar is its proper forget-supports isomorphism. All signatures and definitions were read in the live source; scompile.py --source confirmed the main module. No new module, helper or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c78187091",
+  "group": "NA",
+  "result": "pass",
+  "note": "Existing attachment; node changed only in lean, report has Worker report + Second reading by NA, lean record complete and statement verbatim (CompactificationRefinementLowerStar.lean:194, proved, same in live tree). Checked definitions: comparison = unit ; inverse refinementLowerShriekBaseChangeDerivedIso ; compositor (identified with conjugate rightDerivedLowerStarCompHom by _app lemma); derivedOpenImmersionLowerShriekToLowerStar transpose = u^-1 (= t_c); hcart IsPullback c.i (𝟙 X) r.hom d.i matches the Cartesian square; direction d→c correct. Primary identity is more general (any coefficient category, any f); IsIso instance (finite Λ) gives invertibility; the arbitrary-e clause is a 2-line deduction; the inf/chosen clause is the theorem at :222 (QuasiCompact from proper); Iso = infFst comparison ; inv infSnd comparison = I_{c,d}. Compactification lacks qc of i, so the Lean covers a superset. Edge cases OK; no extra hypotheses; no duplicate; pro-étale stmt_dep records untouched and not needed. No compile (no file changed)."
+ }
+}

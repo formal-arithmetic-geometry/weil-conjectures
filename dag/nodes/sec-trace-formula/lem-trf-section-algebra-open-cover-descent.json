@@ -1,0 +1,145 @@
+{
+ "id": "lem-trf-section-algebra-open-cover-descent",
+ "kind": "statement",
+ "title": "Normalized section algebras descend over affine base opens",
+ "statement": "Let $h:Z\\to S$ be a quasi-compact separated morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism, def-weil-proper-morphism], and let $N$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module]. Let $I$ be any index type and let $(U_i)_{i\\in I}$ be an affine open cover of $S$. Write $j_i:Z_i=h^{-1}(U_i)\\hookrightarrow Z$, $h_i:Z_i\\to U_i$, and $N_i=j_i^*N$, with the actual tensor pullback [def-pc-module-pullback]. Suppose for every $i$ a relative section algebra $A_i$ for $(h_i,N_i)$ is given [def-sfb-relative-section-algebra-canonical-map]. Then there exists a relative section algebra $A$ for $(h,N)$ and, for every $i$, a coefficientwise pullback datum $D_i$ from $A.data$ to $A_i.data$ along $U_i\\hookrightarrow S$ [def-nagata-graded-algebra-pullback-data, def-nagata-relative-proj]. For every affine open $V\\subset S$, affine open $W\\subset U_i$ with $W\\subset (U_i\\hookrightarrow S)^{-1}(V)$, every $n\\geq0$, and every homogeneous $a\\in A(V)_n$, the section associated to $D_i(a)$ in $\\Gamma(h_i^{-1}W,N_i^{\\otimes n})$ is the restriction of the specified tensor-power comparison applied to $1\\otimes\\operatorname{sectionEquiv}_{V,n}(a)$. The section $1\\otimes s$ means the normalized tensor-pullback section, and the comparison is boundaryPullbackPowIso [def-sc-tensor-pullback-power-comparison], including its degree-zero unit comparison. Tensor powers use [def-pur-sheaf-tensor-product]. There is no generation or canonical-map hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (lemma-characterize-relatively-ample), (3) implies (5), section-algebra paragraph; Constructions Tag 01O9(3)."
+ },
+ "stmt_deps": [
+  "def-nagata-graded-algebra-pullback-data",
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sfb-relative-section-algebra-canonical-map",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For each affine V in S take the externally graded ring whose degree n component is Gamma(h inverse V, N tensor n). Multiplication is tensor multiplication of sections, and the unit is the section 1 of the degree-zero structure module. Additivity, the associativity, symmetry and unit identities of tensor powers give the graded ring laws. Restriction of sections gives the ring restriction maps and their identities. Each homogeneous sheaf h_*(N tensor n) restricts on U_i to the corresponding sheaf for the restricted morphism: the normalized pullback unit is 1 tensor s, followed by the tensor-power comparison. This gives the displayed section formula, including n = 0. The given local section identifications identify these sheaves with the local quasi-coherent homogeneous pieces. Quasi-coherence is local on the base, so all global pieces are quasi-coherent. On affine inclusions their restriction maps consequently exhibit scalar extension; thus the externally graded section rings form the existing GradedAlgebraData. The identity maps on homogeneous sections give sectionEquiv and its scalar, unit, multiplication and restriction laws. On an affine W of U_i mapping into V, the same restriction formula defines a graded ring map into A_local i by its inverse section identifications. It respects multiplication and the unit and is coefficientwise base change by quasi-coherence. Restriction on either side commutes with it because all maps are restrictions of the same sections. This is PullbackData with exactly the required normalization. Empty schemes and empty covers cause no exception: all section modules on the empty scheme are zero.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-tensor-pullback-power-comparison",
+    "def-weil-pbc-graded-sheaf-structures",
+    "def-weil-pbc-quasi-coherent-algebra",
+    "pqf-def-coherent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (3) implies (5), expanded using Constructions Tag 01O9(3); original gluing node steps 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The graded section algebra of tensor powers of an invertible module is quasi coherent if its restrictions on an affine open cover are quasi coherent",
+   "results": "OK 8 hits, all generic SheafOfModules quasicoherence constructors, predicates, recursors or presentation fields, including IsQuasicoherent.mk and QuasicoherentData.mk.",
+   "date": "2026-10-26",
+   "verdict": "No match. These require an existing module/presentation; they do not construct the normalized affine-basis graded section algebra or its open comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical relative section algebra of tensor powers restricts to base open subsets and its canonical Proj map is an open immersion locally on a cover",
+   "results": "OK 8 hits: Proj.instIsOpenImmersionAwayι, Proj.fromOfGlobalSections_morphismRestrict, Proj.fromOfGlobalSections_resLE, Proj.fromOfGlobalSections, Proj.toBasicOpenOfGlobalSections, ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, Proj.awayι, Proj.openCoverOfMapIrrelevantEqTop.",
+   "date": "2026-10-26",
+   "verdict": "No match. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:435-515: these concern a fixed graded ring and its absolute Proj charts, not the relative section algebra and normalized tensor evaluations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "results": "OK 1 hit: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic.",
+   "date": "2026-10-26",
+   "verdict": "No match. The statement restricts an absolute Proj morphism to a basic open; it does not construct or compare the relative section algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionAlgebra|section_algebra|generationLocus|relProj",
+   "results": "msearch returned OK 0 hits. Local rg additionally found the ProjectiveSpectrum Basic absolute chart constructions and the project RelativeSectionAlgebra definitions; no existing descent theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match in Mathlib; the project definitions and specialized projective-polarization section ring do not state the affine-base-cover descent assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalProjOpenCoverGluing",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The polarized descent input in the specialization chain below lem-trf-local-term-locality, through lem-trf-algebraic-space-ample-local: its scheme-base-change step invokes Stacks 0893. This node supplies the affine-open-cover criterion 01VJ (3) implies (1) used at the beginning and end of the proof of 0893. Re-split of lem-trf-scheme-relative-ample-affine-cover: old proof steps 5-6, comparison of section algebras/evaluations and descent of the open canonical map. Stage-3 reduction of canonical-proj-open-cover-gluing, step 1: construct the graded section algebra and normalized open comparisons.",
+   "via": [
+    "lem-trf-canonical-proj-open-cover-gluing",
+    "lem-trf-scheme-relative-ample-affine-cover",
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionAlgebraOpenCoverDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionAlgebraOpenCoverDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_section_algebra_open_cover_descent",
+  "statement": "theorem exists_section_algebra_open_cover_descent {Z S : Scheme.{u}} (h : Z ⟶ S)\n    [QuasiCompact h] [IsSeparated h] (N : Z.Modules) [N.IsInvertible]\n    {I : Type v} (U : I → S.Opens) (hU : ∀ i : I, IsAffineOpen (U i))\n    (hcover : iSup U = ⊤)\n    (A_local : ∀ i : I, RelativeSectionAlgebra (h ∣_ U i)\n      ((tensorPullback (h ⁻¹ᵁ U i).ι).obj N)) :\n    ∃ A : RelativeSectionAlgebra h N, ∀ i : I,\n      ∃ D : Scheme.GradedAlgebraData.PullbackData (U i).ι A.data (A_local i).data,\n        ∀ (V : S.affineOpens) (W : (U i).toScheme.affineOpens)\n          (hle : W.1 ≤ (U i).ι ⁻¹ᵁ V.1) (n : ℕ) (a : A.data.grading V n),\n        (A_local i).sectionEquiv W n\n            ⟨D.map hle a, (D.map hle).map_mem a.property⟩ =\n          (((tensorPullback (h ⁻¹ᵁ U i).ι).obj N).tensorPow n).val.map\n            (homOfLE (by\n              intro x hx\n              change h ((h ⁻¹ᵁ U i).ι x) ∈ V.1\n              rw [← Scheme.Hom.comp_apply, ← morphismRestrict_ι]\n              exact hle hx)).op\n            ((boundaryPullbackPowIso (h ⁻¹ᵁ U i).ι N n).hom.app _\n              (tensorPullbackSection (h ⁻¹ᵁ U i).ι (N.tensorPow n) (h ⁻¹ᵁ V.1)\n                (A.sectionEquiv V n a)))",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T080823-L-1608203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T080823-L-1608203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

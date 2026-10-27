@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-algebraic-stack-rim-schlessinger",
+ "kind": "statement",
+ "title": "Algebraic stacks satisfy Rim–Schlessinger infinitesimal gluing",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and use schemes in the universes of [def-pc-scheme, def-weil-size-convention]. Let $\\mathcal X$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack]. Write $\\mathcal X(T)$ for its fibre groupoid on an $S$-scheme $T$. A commutative local ring has a unique maximal ideal, and an Artinian ring satisfies the descending chain condition on ideals. For every pushout $T'=T\\amalg_Z Z'$ in $S$-schemes in which all four schemes are spectra of Artinian local rings and are of finite type over $S$ [def-weil-finite-type-morphism], and $Z\\to Z'$ is a closed immersion defined by a nilpotent ideal, the restriction functor\n$$\\mathcal X(T')\\longrightarrow\\mathcal X(T)\\times_{\\mathcal X(Z)}\\mathcal X(Z')$$\nis an equivalence of groupoids. The groupoid on the right consists of triples $(a,b,\\phi:a|_Z\\xrightarrow{\\sim}b|_Z)$, with arrows pairs of isomorphisms commuting with $\\phi$; the functor uses the canonical pullback comparison. No finite type or separation hypothesis on $\\mathcal X\\to S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07WQ (lemma-algebraic-stack-RS), with condition (RS) of Tag 07WP (definition-RS). Affine Noetherian base specialization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=T'$. The map $Z\\to T$ is affine, since both schemes are affine. Write $Z'=\\operatorname{Spec}A'$ and $Z=\\operatorname{Spec}(A'/I)$, with $I^N=0$. Every prime of $A'$ contains $I$: if $x\\in I$, then $x^N=0$ lies in the prime, so primality gives $x$ in it. The quotient-spectrum homeomorphism therefore makes $Z\\to Z'$ a thickening. The geometric pushout theorem identifies the given scheme pushout $P$ with the algebraic-space pushout of $T$ and $Z'$ along $Z$, and makes $T\\to P$ a thickening. All identifications fix the original cocone maps, by uniqueness of pushouts.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-sfb-space-affine-thickening-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tags 07WQ (lemma-algebraic-stack-RS), 07WN (lemma-pushout), and 07SY (scheme pushouts are space pushouts)."
+   }
+  },
+  {
+   "text": "We will also use this universal property after every flat scheme map $B\\to P$. Set $T_B=B\\times_PT$, $Z'_B=B\\times_PZ'$, $Z_B=B\\times_PZ$. The flat counit of scheme pushout patching says exactly that $B$ is the scheme pushout $T_B\\amalg_{Z_B}Z'_B$. The map $Z_B\\to Z'_B$ is a thickening by base change, and $Z_B\\to T_B$ is affine by affine base change. Thus the geometric pushout theorem makes this square a pushout for algebraic-space targets too. This argument requires no finite-presentation hypothesis on $B\\to P$.",
+   "uses": [
+    "lem-sfb-scheme-pushout-flat-patching",
+    "lem-sfb-space-thickening-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-space-affine-thickening-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07WN full-faithfulness argument; Tag 07RX (lemma-equivalence-categories-schemes-over-pushout-flat), flat counit; Tag 07SY. Expanded flat-base version."
+   }
+  },
+  {
+   "text": "The etale-stack convention for $\\mathcal X$ has fppf descent by the smooth-atlas descent theorem. For any flat $B\\to P$ and $c,d\\in\\mathcal X(B)$, that theorem also identifies $I=\\operatorname{Isom}_B(c,d)$ as an algebraic space over $B$. Compatible isomorphisms on $T_B$ and $Z'_B$ are compatible sections of $I$ on those schemes. Step 2 glues their underlying maps uniquely to $s:B\\to I$. Its composite to $B$ restricts to the original cocone maps, so the same pushout uniqueness, now with target $B$, gives $s$ a section. This establishes bijectivity on every isomorphism set, hence full faithfulness of the restriction functor for every flat $B\\to P$, including $B=P$.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-etale-smooth-atlas-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WN (lemma-pushout), first paragraph, with Isom(c,d) for arbitrary objects; algebraic.tex Tag 045G (lemma-representable-diagonal), criteria.tex Tag 076V."
+   }
+  },
+  {
+   "text": "Fix a triple $(a,b,\\phi)$ as in the statement and choose a smooth surjective scheme atlas $U\\to\\mathcal X$. By its definition, $V=T\\times_{a,\\mathcal X}U$ and $W=Z'\\times_{b,\\mathcal X}U$ are algebraic spaces smooth and surjective over $T,Z'$. Their objects over a test scheme consist of a base map, a map to $U$, and an isomorphism to the pulled-back object $a$ or $b$. Composing that isomorphism with $\\phi$ identifies $V\\times_TZ$ with $W\\times_{Z'}Z$; call this common space $H$. This identification retains the map to $U$, so the two projections $H\\to U$ agree. Smoothness gives flatness and local finite presentation of both $V\\to T$ and $W\\to Z'$.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WN, second paragraph: pull back a smooth atlas and use the given isomorphism to identify the restrictions."
+   }
+  },
+  {
+   "text": "Form the geometric pushout $V'=V\\amalg_HW$. Its canonical restrictions to $T,Z'$ recover $V,W$, with precisely the chosen identification over $Z$. The theorem also makes $V\\to V'$ a thickening. Since the maps $V\\to U$ and $W\\to U$ agree on $H$, the pushout universal property produces a unique map $V'\\to U$. Only these stated geometric properties of the pushout are used here; the flat scheme chart in the next step will provide the covering needed for descent.",
+   "uses": [
+    "lem-sfb-space-affine-thickening-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WN, construction of the pushout and its map to the atlas; Tag 07VX/07W0. Only geometric pushout recovery is used here."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme chart $V_1\\to V$. The compatible-chart theorem supplies a surjective etale scheme chart $W_1\\to W$, an identified overlap $H_1=V_1\\times_TZ\\cong W_1\\times_{Z'}Z$, and a scheme $E=V_1\\amalg_{H_1}W_1$ with a surjective etale map $E\\to V'$. The maps $V_1\\to T$ and $W_1\\to Z'$ are smooth by composition of an etale map with a smooth map; hence they are flat and locally finitely presented. Scheme pushout patching therefore says $E\\to P$ is flat and locally finitely presented. The maps $T\\to P$ and $V\\to V'$ are thickenings, so their maps on point spaces are onto; since $V\\to T$ is surjective, $V'\\to P$ is surjective. Consequently $E\\to P$ is surjective as well and is an fppf covering. This is why no additional smooth-pushout lemma is needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-scheme-pushout-flat-patching",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WN, last paragraph, choosing a scheme cover of the patched atlas; spaces-pushouts.tex Tags 07W0/07W2 and more-morphisms.tex Tag 07RX(3). It suffices to obtain an fppf cover, without asserting smoothness of the pushout."
+   }
+  },
+  {
+   "text": "Pull the atlas object in $\\mathcal X(U)$ back along $E\\to V'\\to U$, obtaining $c\\in\\mathcal X(E)$. By the defining triple description of $V,W$, their tautological isomorphisms identify the restrictions of $c$ to $E\\times_PT$ and $E\\times_PZ'$ with the restrictions of $a,b$. On $E\\times_PZ$ those identifications commute with $\\phi$, because the identification of $H$ was defined by composition with $\\phi$ and the pushout recovery maps preserve it. Thus $c$ maps to the specified triple over $E$, with an isomorphism of triples, not just equality of isomorphism classes.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-space-affine-thickening-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WN, final paragraph: the atlas object and its two compatible restrictions. Explicit pullback of the object replaces an invocation of 2-Yoneda."
+   }
+  },
+  {
+   "text": "On $E_2=E\\times_PE$, the two pullbacks of $c$ have images canonically isomorphic through the fixed triple $(a,b,\\phi)$. The map $E_2\\to P$ is flat, and likewise $E_3=E\\times_PE\\times_PE\\to P$ is flat, by base change and composition of flat maps. Step 3 therefore lifts the isomorphism on $E_2$ uniquely to an isomorphism between those pullbacks of $c$. Its inverse and its cocycle equality on $E_3$ follow by faithfulness, since their images are the inverse and cocycle of the fixed triple. Effective fppf descent yields $c_0\\in\\mathcal X(P)$. The compatible identifications with $a$ and $b$ descend along the base changes of the fppf cover $E\\to P$, using the fppf sheaf property for isomorphisms. Their compatibility with $\\phi$ is an equality of sections and holds after that cover, hence holds globally. Thus $c_0$ maps to the given triple. Essential surjectivity together with Step 3 proves the equivalence. No finiteness or separation of $\\mathcal X\\to S$ was used.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-etale-smooth-atlas-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WN, local essential surjectivity and descent, expanding the argument of stacks.tex Tag 046N (lemma-characterize-essentially-surjective-when-ff)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-sfb-space-affine-thickening-pushout",
+  "lem-sfb-scheme-pushout-flat-patching",
+  "lem-sfb-space-thickening-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-pushout-compatible-etale-charts",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tags 07WQ and 07WN (lemma-algebraic-stack-RS and lemma-pushout), expanded by compatible scheme charts 07W0/07W2 and flat scheme patching 07RX(3). The final atlas cover need only be fppf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack preserves pushouts of Artinian local schemes along nilpotent closed immersions as two fiber products of groupoids",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.FinitaryExtensive AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes in algebraic geometry is finitary extensive, meaning it has finite coproducts that are disjoint and stable under pullbacks, ensuring that coproduct decompositions correspond to\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f]\\n  [AlgebraicGeometry.IsLocallyArtinian Y], AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If $ f: X \\\\to Y $ is an immersion of schemes and $ Y $ is locally Artinian (i.e., every point of $ Y $ has an open neighborhood with Artinian coordinate ring), then $ X $ is also locally Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOp\", \"doc\": \"For a functor $ F : J \\to \\text{Sch} $ from a small category $ J $ to the category of schemes, if the morphism property defining the colimit is Zariski-local at the source, then the colimit of $ F $ exi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.HasPullbacks\", \"doc\": \"For any two open immersions $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ in the category of schemes, there exists a pullback of $ f $ and $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.instPreservesColimitOverSchemeTopMorphismPropertyOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOp\", \"doc\": \"For any functor $F$ and morphism property $P$ on schemes, the functor $F$ preserves colimits when applied to the forgetful functor from the Over category equipped with the morphism property $P$ to the\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.Limits.HasFiniteLimits AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes satisfies all finite limit conditions, including the existence of terminal objects, binary products, and pullbacks, as required by the inductive definition of having finite lim\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.instHasPullbacks\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"CategoryTheory.Limits.HasPullbacks AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes admits pullbacks for every cospan diagram, meaning that for any pair of morphisms with a common codomain, there exists a pullback object in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {S : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasFiniteCoproducts (P.Over ⊤ S)\", \"doc\": \"The category of morphisms over schemes with the top morphism property (which is always true for any morphism) has finite coproducts.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, open-cover gluing and tensor-product pushouts do not give the groupoid equivalence for nilpotent Artinian pushouts and arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rim Schlessinger infinitesimal gluing of objects of an algebraic stack over a Noetherian ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.glued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"Given gluing data $ D $ for schemes, the glued scheme is defined as the colimit (multicoequalizer) of the diagram constructed from $ D $, which identifies overlapping open subsets via specified isomor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → CategoryTheory.GlueData AlgebraicGeometry.Scheme\", \"doc\": \"The function maps the inductive type representing gluing data for schemes (involving open subsets and isomorphisms) to the categorical gluing data structure for the category of schemes, enabling the u\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData → CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace\", \"doc\": \"The function maps the inductive gluing data for locally ringed spaces (involving open covers and compatible transition maps) to the categorical gluing data structure in the category of locally ringed \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue locally ringed spaces, typically involving open covers and compatible transition maps between local pieces.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) → AlgebraicGeometry.Scheme.Gl\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.IsPreimmersion (I.glueDataObjι U)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the morphism associated to the gluing data of the closed subscheme defined by $\\\\mathcal{I}$ is a preimme\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, open-cover gluing and tensor-product pushouts do not give the groupoid equivalence for nilpotent Artinian pushouts and arbitrary algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schlessinger\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, open-cover gluing and tensor-product pushouts do not give the groupoid equivalence for nilpotent Artinian pushouts and arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic stacks satisfy Rim Schlessinger equivalence for Artinian pushouts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsPushout.isAlgebraic\", \"module\": \"Mathlib.RingTheory.Algebraic.Integral\", \"type\": \"[h : IsPushout R S R' S'] : Algebra.IsAlgebraic R' S'\", \"doc\": \"If $ S' $ is a pushout of $ R $-algebras $ S $ and $ R' $, then $ S' $ is algebraic over $ R' $. This means that every element of $ S' $ satisfies a polynomial equation with coefficients in $ R' $.\"}\n  {\"name\": \"Algebra.IsPushout.isAlgebraic'\", \"module\": \"Mathlib.RingTheory.Algebraic.Integral\", \"type\": \"[IsPushout R R' S S'] : Algebra.IsAlgebraic R' S'\", \"doc\": \"If $ S' $ is a pushout of $ R $-algebras $ R' $ and $ S $, then $ S' $ is algebraic over $ R' $.\"}\n  {\"name\": \"Algebra.IsPushout.of_equiv\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \"[h : IsPushout R R' S S'] {T : Type*} [CommSemiring T] [Algebra R' T] [Algebra S T] [Algebra R T] [IsScalarTower R S T]\\n  [IsScalarTower R R' T] (e : S' ≃ₐ[R'] T) (he : e.toRingHom.comp (algebraMap S S') = algebraMap S T) :\\n  IsPushout R R' S T\", \"doc\": \"Given commutative semirings $ R, R', S, S' $ with compatible $ R $-algebra structures and a pushout $ S' $ of $ R \\\\to R' $ and $ R \\\\to S $, if there exists an $ R' $-algebra equivalence $ e : S' \\\\sime\"}\n  {\"name\": \"Algebra.IsPushout.comp_iff\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \"{T' : Type*} [CommSemiring T'] [Algebra R T'] [Algebra S' T'] [Algebra S T'] [Algebra T T'] [Algebra R' T']\\n  [IsScalarTower R T T'] [IsScalarTower S T T'] [IsScalarTower S S' T'] [IsScalarTower R R' T'] [IsScalarTower R S' T']\\n  [IsScalarTower R' S' T'] [Algebra.IsPushout R S R' S'] : Algebra.IsPus\", \"doc\": \"Given commutative semirings $ R, S, R', S', T' $ with compatible algebra structures $ R \\\\to S $, $ R \\\\to R' $, and scalar tower conditions between all relevant pairs, the pushout property $ S' $ in th\"}\n  {\"name\": \"CommRingCat.isPushout_iff_isPushout\", \"module\": \"Mathlib.Algebra.Category.Ring.Constructions\", \"type\": \"{R S : Type u} [CommRing R] [CommRing S] [Algebra R S] {R' S' : Type u} [CommRing R'] [CommRing S'] [Algebra R R']\\n  [Algebra S S'] [Algebra R' S'] [Algebra R S'] [IsScalarTower R R' S'] [IsScalarTower R S S'] :\\n  IsPushout (ofHom <| algebraMap R R') (ofHom <| algebraMap R S) (ofHom <| algebraMap R'\", \"doc\": \"A square diagram in the category of commutative rings forms a pushout if and only if the corresponding diagram in the category of $ R $-algebras satisfies the universal property of a pushout, given co\"}\n  {\"name\": \"Algebra.IsPushout.isIntegral'\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \"[IsPushout R A S SA] : Algebra.IsIntegral A SA\", \"doc\": \"Given a pushout of $ R $-algebras with structures $ R \\\\to A $, $ R \\\\to S' $, and induced $ A \\\\to S' $, the algebra $ S' $ is integral over $ A $.\"}\n  {\"name\": \"Algebra.IsAlgebraic.instIsPushout\", \"module\": \"Mathlib.RingTheory.Algebraic.Integral\", \"type\": \": IsPushout R R' S S'\", \"doc\": \"Given commutative semirings $ R, S, R', S' $ with algebra structures $ R \\\\to S $, $ R \\\\to R' $, and compatible scalar tower conditions, if the algebras are algebraic, then $ S' $ satisfies the univers\"}\n  {\"name\": \"Algebra.IsAlgebraic.instIsPushout_1\", \"module\": \"Mathlib.RingTheory.Algebraic.Integral\", \"type\": \": IsPushout R S R' S'\", \"doc\": \"Given commutative semirings $ R, S, R', S' $ with algebra structures $ R \\to S $, $ R \\to R' $, and compatible scalar tower conditions, $ S' $ satisfies the universal property of a pushout in the catego\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, open-cover gluing and tensor-product pushouts do not give the groupoid equivalence for nilpotent Artinian pushouts and arbitrary algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|Rim|[Ss]tack.*[Pp]ushout|[Pp]ushout.*[Ss]tack",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Tactic/Push.lean\", \"line\": \"390\", \"text\": \"`#push_discr_tree X` shows the discrimination tree of all lemmas used by `push X`.\"}\n  {\"file\": \"Mathlib/Tactic/FunProp/Types.lean\", \"line\": \"108\", \"text\": \"  /-- discrimination tree keys used to index this theorem -/\"}\n  {\"file\": \"Mathlib/Tactic/FunProp/Types.lean\", \"line\": \"116\", \"text\": \"  /-- Discrimination tree indexing theorems. -/\"}\n  {\"file\": \"Mathlib/Tactic/Attr/Register.lean\", \"line\": \"150\", \"text\": \"* It unfolds non-primitive coherence isomorphisms, like the tensor strengths `tensorμ`, `tensorδ`.\"}\n  {\"file\": \"Mathlib/Tactic/Attr/Register.lean\", \"line\": \"162\", \"text\": \"* It regards `TensorProduct.map`, `TensorProduct.assoc`, `TensorProduct.comm` as the primitive\"}\n  {\"file\": \"Mathlib/Tactic/FunProp/Decl.lean\", \"line\": \"30\", \"text\": \"  /-- path for discrimination tree -/\"}\n  {\"file\": \"Mathlib/Tactic/FunProp/Decl.lean\", \"line\": \"37\", \"text\": \"/-- Discrimination tree for function properties. -/\"}\n  {\"file\": \"Mathlib/Tactic/FunProp/Decl.lean\", \"line\": \"39\", \"text\": \"  /-- Discrimination tree for function properties. -/\"}\n  {\"file\": \"Mathlib/Tactic/DeprecateTo.lean\", \"line\": \"54\", \"text\": \"  let nd := mkNode `str #[mkAtom (\\\"\\\\\\\"\\\" ++ dat.trimAsciiEnd ++ \\\"\\\\\\\"\\\")]\"}\n  {\"file\": \"Mathlib/Tactic/FindSyntax.lean\", \"line\": \"81\", \"text\": \"        (nm, rem.trimAscii.copy)\"}\n  {\"file\": \"Mathlib/Tactic/Convert.lean\", \"line\": \"23\", \"text\": \"e : Prime (2 * n + 1)\"}\n  {\"file\": \"Mathlib/Tactic/Convert.lean\", \"line\": \"24\", \"text\": \"⊢ Prime (n + n + 1)\"}\n  {\"file\": \"Mathlib/Tactic/Convert.lean\", \"line\": \"178\", \"text\": \"  applied. For example, if the main goal is `⊢ Prime (n + n + 1)` and `e : Prime (2 * n + 1)`, then\"}\n  {\"file\": \"Mathlib/Tactic/Convert.lean\", \"line\": \"190\", \"text\": \"example {n : ℕ} (e : Prime (2 * n + 1)) :\"}\n  {\"file\": \"Mathlib/Tactic/Convert.lean\", \"line\": \"191\", \"text\": \"    Prime (n + n + 1) := by\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/TryPremises.lean\", \"line\": \"35\", \"text\": \"/-- Combine the results of looking up in various discrimination trees into an Array\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/TryPremises.lean\", \"line\": \"37\", \"text\": \"discrimination tree. -/\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/TryPremises.lean\", \"line\": \"198\", \"text\": \"    <div> initializing discrimination trees ⏳️ </div>\"}\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/MonoidalComp.lean\", \"line\": \"25\", \"text\": \"in principle, be defined by using the primitive three-components associator\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/FindPremises.lean\", \"line\": \"18\", \"text\": \"## Discrimination tree lookup\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/FindPremises.lean\", \"line\": \"20\", \"text\": \"This file defines how to build and match with the discrimination trees, for premises that are\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/FindPremises.lean\", \"line\": \"27\", \"text\": \"When importing all of mathlib, building the discrimination trees takes on the order of 10-15\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/FindPremises.lean\", \"line\": \"30\", \"text\": \"1. Looping through the environment, and computing all of the discrimination tree entries is\"}\n  {\"file\": \"Mathlib/Tactic/ClickSuggestions/FindPremises.lean\", \"line\": \"32\", \"text\": \"2. Building the final discrimination tree by inserting all of the computed entries is less\"}\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/Coherence/Normalize.lean\", \"line\": \"32\", \"text\": \"Currently, the primary application of the normalization tactic in mind is drawing string diagrams,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, open-cover gluing and tensor-product pushouts do not give the groupoid equivalence for nilpotent Artinian pushouts and arbitrary algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bSchlessinger\\b|\\bRim\\b|[Ss]tack.*[Pp]ushout|[Pp]ushout.*[Ss]tack",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/PullbackCone.lean\", \"line\": \"69\", \"text\": \"* [Stacks: Pushouts](https://stacks.math.columbia.edu/tag/0025)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean\", \"line\": \"67\", \"text\": \"* [Stacks: Pushouts](https://stacks.math.columbia.edu/tag/0025)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"line\": \"20\", \"text\": \"* [Stacks: Pushouts](https://stacks.math.columbia.edu/tag/0025)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limits, open-cover gluing and tensor-product pushouts do not give the groupoid equivalence for nilpotent Artinian pushouts and arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stack objects glue across an Artinian local pushout along a nilpotent closed immersion",
+   "results": "Read search output: AlgebraicGeometry.IsLocallyArtinian; AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι; AlgebraicGeometry.Scheme.GlueData; AlgebraicGeometry.Scheme.GlueData.toGlueData; AlgebraicGeometry.Scheme.GlueData.glued; AlgebraicGeometry.IsLocallyArtinian.of_isImmersion; AlgebraicGeometry.Scheme.GlueData.gluedScheme; AlgebraicGeometry.Scheme.LocalRepresentability.glueData. No algebraic-stack infinitesimal gluing equivalence among the hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bSchlessinger\\b|\\bRim\\b|[Ss]tack.*[Pp]ushout|[Pp]ushout.*[Ss]tack",
+   "results": "Read search output: Mathlib/CategoryTheory/Limits/Shapes/Pullback/PullbackCone.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean. No algebraic-stack infinitesimal gluing equivalence among the hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack sends Artinian pushouts along nilpotent closed immersions to two fibre products of groupoids",
+   "results": "Read search output: AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right; AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsLocallyArtinian.of_isImmersion; AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left; Algebra.IsAlgebraic.instIsPushout_1; AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget; AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme. No algebraic-stack infinitesimal gluing equivalence among the hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schlessinger\"",
+   "results": "Read search output: no hits. No algebraic-stack infinitesimal gluing equivalence among the hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rim Schlessinger condition for an arbitrary algebraic stack over a scheme",
+   "results": "Read search output: AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme; AlgebraicGeometry.IsEtale; AlgebraicGeometry.UniversallyOpen; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.UniversallyInjective; AlgebraicGeometry.Flat; AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme. No algebraic-stack infinitesimal gluing equivalence among the hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-versal-ring-existence",
+  "date": "2026-10-23",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Existence of a versal ring at a finite-residue-field stack point. Supporting input for versal-ring existence: Algebraic stacks satisfy Rim–Schlessinger infinitesimal gluing.",
+   "via": [
+    "lem-sfb-stack-versal-ring-existence",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-stack-rim-schlessinger",
+  "worker": "stage1",
+  "summary": "Expanded the proof of 07WQ through 07WN, reusing existing geometric pushouts, compatible etale charts, flat scheme patching and fppf descent. Proved full faithfulness after every flat scheme base change, constructed an fppf scheme cover of the glued atlas, retained all comparison isomorphisms and descended the compatible object. No new nodes; statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Existence of a versal ring at a finite-residue-field stack point. Supporting input for versal-ring existence: Algebraic stacks satisfy Rim–Schlessinger infinitesimal gluing. Steps 1-8 supply this Rim-Schlessinger prerequisite through its source proof, without changing the inherited route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-8ec223581",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-8ec223581 (reviewer sub-agent of L); spot-checked: I read the 8-step split of 07WQ in full. The proof expands Stacks 07WN (artin.tex lemma-pushout), which I read with its proof. There are no new nodes. The statement and stmt_deps are byte-identical to the live version. The added 'nilpotent ideal' hypothesis is automatic for local Artinian spectra, so the target is not weakened. The item is not superseded (live status: unsplit), there is no re-split note, and there is no cycle. Step checks: (1) the space-pushout node applies with the thickening Z→Z' (via 00E5 and the nilpotent-prime argument) and the affine map Z→T (01SH). It makes P the space pushout and T→P a thickening. (2) The flat-W clause of the flat-patching node (07RX), together with thickening base change and affine base change, makes every flat B over P a space pushout. (3) Isom_B(c,d) is an algebraic space; gluing sections of it gives full faithfulness for every flat B. (4)-(5) Atlas pullbacks V and W over T and Z', identified through phi; the pushout V' has its recovery isomorphisms and a map V'→U. (6) Compatible étale charts (07W0/07W2) give a scheme E. V_1→T and W_1→Z' are smooth, so flat patching makes E→P flat and lfp; surjectivity comes from the thickening homeomorphism. So E→P is an fppf cover. This replaces the 07W3 smoothness of V' with exactly what descent needs. (7) The pulled-back atlas object gives an isomorphism of triples over E. (8) Descent datum by flat full faithfulness on E2/E3, effective fppf descent, and descent of the identifications with a, b and phi. Edge cases checked: the k⊂k[ε] square and the dual-number fibre-product square. Duplicate grep for 07WN/07WQ/RS: none. Batch-5: def-trf-algebraic-space, def-trf-projective-bundle-morphism and the finite-presentation kernel lemma are generic definitions or generic algebra and not trace-formula or Poincaré proof steps, so all listed citations are accepted. def-trf-algebraic-space is a cross-unit tool use, to be recorded by the maintainer. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicStackRimSchlessinger",
+  "declaration": "CategoryTheory.algebraicModuliStack_rimSchlessinger",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicStackRimSchlessinger.lean",
+  "statement": "theorem algebraicModuliStack_rimSchlessinger (R : Type u) [CommRing R] [IsNoetherianRing R] (F : BasedCategory.{v, w} (Over (Spec (.of R)))) (hF : IsAlgebraicModuliStack F) (A B C D : CommRingCat.{u}) [IsLocalRing A] [IsArtinianRing A] [IsLocalRing B] [IsArtinianRing B] [IsLocalRing C] [IsArtinianRing C] [IsLocalRing D] [IsArtinianRing D] (sA : Spec A ⟶ Spec (.of R)) (sB : Spec B ⟶ Spec (.of R)) (sC : Spec C ⟶ Spec (.of R)) (sD : Spec D ⟶ Spec (.of R)) [LocallyOfFiniteType sA] [QuasiCompact sA] [LocallyOfFiniteType sB] [QuasiCompact sB] [LocallyOfFiniteType sC] [QuasiCompact sC] [LocallyOfFiniteType sD] [QuasiCompact sD] (q : C ⟶ A) (hq : Function.Surjective q.hom) (hn : IsNilpotent (RingHom.ker q.hom)) (i : Over.mk sA ⟶ Over.mk sB) (j : Over.mk sA ⟶ Over.mk sC) (hj : j.left = Spec.map q) (k : Over.mk sB ⟶ Over.mk sD) (l : Over.mk sC ⟶ Over.mk sD) (hsq : IsPushout i j k l) (x : Functor.Fiber F.p (Over.mk sA)) (y : Functor.Fiber F.p (Over.mk sB)) (z : Functor.Fiber F.p (Over.mk sC)) (a : x.val ⟶ y.val) (b : x.val ⟶ z.val) (ha : F.p.IsHomLift i a) (hb : F.p.IsHomLift j b) : ∃ (t : Functor.Fiber F.p (Over.mk sD)) (c : y.val ⟶ t.val) (d : z.val ⟶ t.val), F.p.IsHomLift k c ∧ F.p.IsHomLift l d ∧ IsPushout a b c d",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Total-category formulation of the canonical fibre restriction equivalence: every span over the overlap with its specified lifted arrows extends to a pushout over the given base pushout. In a category fibred in groupoids this retains precisely the compatible triples and their isomorphisms; the pushout universal property includes full faithfulness. All four Artinian-local and finite-type conditions are retained. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e67ff4d8b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Only lean changed vs live; statement verbatim; sole sorry is the theorem; docstrings carry 07WQ/07WP/07WN, blueprint id and all 8 proof steps. Clauses checked: Noetherian R, Spec R base in Scheme.{u}, IsAlgebraicModuliStack F (IsFibredInGroupoids+etale stack+alg-space diagonal+smooth atlas, nothing extra), four local Artinian spectra with LocallyOfFiniteType+QuasiCompact structure maps, IsPushout in Over S, j = Spec.map q with q surjective and nilpotent kernel. The total-category IsPushout a b c d over arrows lying over i,j,k,l is equivalent to the restriction equivalence (both directions checked using strongly cartesian arrows); same convention as IsModuliStack and ArtinCriterion.RimSchlessinger. Edge cases: q iso, automatic nilpotence, empty fibres, automorphisms kept. H4: no duplicate (integer-base predicate and deformation-category IsRimSchlessinger are different). Proof-dep plain imports exist. Advisory: second-reading section written by the same worker. No compile (no file changed)."
+ }
+}

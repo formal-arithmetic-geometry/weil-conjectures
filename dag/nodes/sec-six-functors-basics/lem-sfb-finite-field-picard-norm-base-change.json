@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-finite-field-picard-norm-base-change",
+ "kind": "statement",
+ "title": "Picard norm for a finite field extension and scheme pullback",
+ "statement": "Let $k$ be a field [def-weil-field] and $K/k$ a finite field extension [def-pc-field-extension, def-pc-field-tower] of degree $d=[K:k]\\geq1$. For every $k$-scheme $Z$ [def-pc-scheme] put $Z_K=Z\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ and let $p_Z:Z_K\\to Z$ be the projection [def-pc-fibre-product]. Write $\\operatorname{Pic}(W)$ for the isomorphism classes $[A]$ of invertible $\\mathcal O_W$-modules [def-sc-invertible-module], with tensor product [def-pur-sheaf-tensor-product]. Tensor inverse image [def-pc-module-pullback] induces the maps denoted by $h^*$ on these classes. There are maps\n$$\\operatorname{Nm}_{K/k,Z}:\\operatorname{Pic}(Z_K)\\longrightarrow\\operatorname{Pic}(Z)$$\nwith the following properties. They preserve tensor products and the structure-sheaf class. For every invertible module $A$ on $Z$,\n$$\\operatorname{Nm}_{K/k,Z}([p_Z^*A])=[A^{\\otimes d}].$$\nFor every morphism of $k$-schemes $h:W\\to Z$, let $h_K:W_K\\to Z_K$ be its base change [def-pc-base-change]. For every invertible module $F$ on $Z_K$ one has\n$$h^*\\operatorname{Nm}_{K/k,Z}([F])=\\operatorname{Nm}_{K/k,W}([h_K^*F]).$$\nNo separability, smoothness, finite-type, separatedness, reducedness or Noetherian hypothesis is imposed on this norm assertion.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BCY (lemma-norm-invertible), 0BD2 (lemma-finite-locally-free-has-norm), and 0BUT (lemma-finite-trivialize-invertible-upstairs). The line-class base-change clause follows by applying the arbitrary-base-change assertion of 0BD2 to the transition functions in the proof of 0BCY."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-pc-base-change",
+  "def-sc-picard-group",
+  "lem-sc-pic-group",
+  "lem-pc-pic-presheaf-functorial"
+ ],
+ "proof": [
+  {
+   "text": "Fix once for all a $k$-basis $b_1,\\ldots,b_d$ of $K$ [def-weil-vector-space-dimension]. For an affine open $U=\\operatorname{Spec}R$ of any $k$-scheme $Z$, [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra] identify $p_Z^{-1}U$ with $\\operatorname{Spec}(R\\otimes_k K)$. The elements $1\\otimes b_a$ form an $R$-basis: the maps $R^d\\to R\\otimes_k K$, $(r_a)\\mapsto\\sum_a r_a\\otimes b_a$, and $r\\otimes x\\mapsto(r\\lambda_a(x))_a$ are inverse, where $\\lambda_a$ are the coordinate functionals of the chosen basis. Thus $p_Z$ is finite by [def-weil-finite-integral-morphism]. These coordinate isomorphisms commute with restrictions between affine opens: restriction sends $r\\otimes x$ to $(r|_{U'})\\otimes x$, by the projection formulas in the affine fibre-product statement. For a general open $V\\subseteq Z$, decompose a section on $p_Z^{-1}V$ on an affine cover of $V$. On affine refinements of the overlaps uniqueness of its $d$ coordinates makes the local coefficients agree; the sheaf axiom glues them. This gives, on every $V$, mutually inverse restriction-compatible maps $\\Gamma(p_Z^{-1}V,\\mathcal O)=\\Gamma(V,\\mathcal O)^d$. In particular no affine-intersection assumption is needed.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+   }
+  },
+  {
+   "text": "For $c\\in\\Gamma(p_Z^{-1}V,\\mathcal O)$ write $c(1\\otimes b_a)=\\sum_t M_V(c)_{ta}(1\\otimes b_t)$ using step 1, and define $\\nu_{Z,V}(c)=\\det M_V(c)$. All coefficients restrict, so these maps commute with restriction. The multiplication matrices satisfy $M_V(cc')=M_V(c)M_V(c')$; multiplicativity of the determinant in [lem-sfb-matrix-cramer-determinant-identities], with $n=d\\geq1$, gives $\\nu(cc')=\\nu(c)\\nu(c')$. In the determinant expansion of [def-weil-pbc-matrix-determinant], the identity matrix has determinant $1$ and the scalar matrix $aI_d$ has determinant $a^d$: all nonidentity permutations have a zero off-diagonal factor. Consequently $\\nu(1)=1$ and $\\nu(p_Z^\\sharp a)=a^d$. In particular $\\nu(u)$ is a unit when $u$ is a unit, since $\\nu(u)\\nu(u^{-1})=1$. Only these multiplicative and power identities will be used; a pointwise vanishing criterion is unnecessary.",
+   "uses": [
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+   }
+  },
+  {
+   "text": "Let $F$ be invertible on $Z_K$. Since $p_Z$ is finite, [lem-sfb-finite-trivialize-invertible-upstairs] supplies an open cover $(V_i)$ of $Z$ and frames $e_i$ of $F$ on $p_Z^{-1}V_i$. Write $e_i=u_{ij}e_j$. Apply [lem-sfb-norm-frame-tensor-section-gluing] to $p_Z$ and the restriction-compatible multiplicative maps of step 2. Its hypotheses require no flatness or vanishing condition. It gives an invertible module $N$ on $Z$ and frames $f_i$ satisfying $f_i=\\nu_Z(u_{ij})f_j$. We will define $\\operatorname{Nm}_{K/k,Z}([F])=[N]$, after checking independence of the presentation in the next step.",
+   "uses": [
+    "lem-sfb-finite-trivialize-invertible-upstairs",
+    "lem-sfb-norm-frame-tensor-section-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+   }
+  },
+  {
+   "text": "Compare two choices of cover and frames on their common refinement $(V_i\\cap V'_j)$. Changing frames there from $e_i$ to $e'_i=a_i e_i$ changes the transitions to $u'_{ij}=a_i u_{ij}a_j^{-1}$. Multiplicativity gives $v'_{ij}=\\nu(a_i)v_{ij}\\nu(a_j)^{-1}$, where $v_{ij}=\\nu(u_{ij})$. Hence the local isomorphisms $f'_i\\mapsto\\nu(a_i)f_i$ agree on overlaps: both images of $f'_i=v'_{ij}f'_j$ are $\\nu(a_i)v_{ij}f_j$. Part (1) of [lem-weil-pbc-glue-sheaves-of-modules] glues these maps and their inverses to inverse global maps. Refining a cover just restricts its transition equations, so the same argument also compares the original two covers. If $F\\simeq F'$, transport the frames through this isomorphism; their transitions are identical. Thus the construction depends only on $[F]$ and defines the displayed map.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+   }
+  },
+  {
+   "text": "For invertible $F,G$ choose a common cover trivializing both upstairs. Their tensor product is invertible by [lem-weil-pbc-invertible-pullback-tensor](1). The frame $e_i\\otimes g_i$ has transition $u_{ij}w_{ij}$: this follows from bilinearity [def-pur-sheaf-tensor-product]; it is a frame by tensoring the two frame isomorphisms and the unit isomorphism $\\mathcal O\\otimes\\mathcal O\\simeq\\mathcal O$ of [lem-weil-pbc-module-tensor-symmetric-monoidal]. The restriction comparisons needed here are the open-immersion case of (2) of [lem-weil-pbc-invertible-pullback-tensor]. Its norm therefore has transition $\\nu(u_{ij})\\nu(w_{ij})$, the same as $N(F)\\otimes N(G)$. The maps between the corresponding tensor frames glue to an isomorphism by [lem-weil-pbc-glue-sheaves-of-modules](1). For the structure sheaf take its global frame $1$; all transitions and their norms are $1$, and the resulting frame maps glue it to $\\mathcal O_Z$. This proves both multiplicativity assertions.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+   }
+  },
+  {
+   "text": "Choose local frames $a_i$ of an invertible module $A$ on $Z$, with transitions $\\alpha_{ij}$. Tensor inverse image [def-pc-module-pullback] sends the frame isomorphism to a frame $p_Z^*a_i$ of $p_Z^*A$, whose transition is $p_Z^\\sharp\\alpha_{ij}$; invertibility is also asserted by [lem-weil-pbc-invertible-pullback-tensor](1). Step 2 makes its norm transition $\\alpha_{ij}^d$. The tensor-power assertion of [lem-sfb-norm-frame-tensor-section-gluing], applied with $p=\\mathrm{id}_Z$, $\\nu=\\mathrm{id}$, $M=A$, $n=d\\geq1$, gives frames $a_i^{\\otimes d}$ of $A^{\\otimes d}$ with exactly these transitions. Matching the norm frames with these tensor frames and using [lem-weil-pbc-glue-sheaves-of-modules](1) gives $N(p_Z^*A)\\simeq A^{\\otimes d}$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sfb-norm-frame-tensor-section-gluing",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+   }
+  },
+  {
+   "text": "For $h:W\\to Z$ and an open $V\\subseteq Z$, write $h^\\sharp$ and $h_K^\\sharp$ for pullback of regular functions to the inverse-image opens. We claim $h^\\sharp\\nu_{Z,V}(c)=\\nu_{W,h^{-1}V}(h_K^\\sharp c)$. It suffices to restrict to affine opens $T\\subseteq h^{-1}U$, with $U\\subseteq V$ affine. The fibre-product identifications of [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-open-fibre-product] turn $h_K^\\sharp$ into $R\\otimes_k K\\to S\\otimes_k K$, $r\\otimes x\\mapsto h^\\sharp(r)\\otimes x$, where $R=\\Gamma(U,\\mathcal O)$ and $S=\\Gamma(T,\\mathcal O)$. It preserves the fixed basis $1\\otimes b_a$, so the multiplication matrix becomes $(h^\\sharp(M_U(c)_{ta}))_{ta}$. Applying a ring map to the finite sum $\\det M=\\sum_{\\sigma\\in S_d}\\operatorname{sgn}(\\sigma)\\prod_a M_{a,\\sigma(a)}$ [def-weil-pbc-matrix-determinant] gives the determinant of this new matrix. This proves the claimed equality on $T$; these $T$ cover $h^{-1}V$, so the sheaf equality axiom proves it globally. This is a polynomial identity over arbitrary commutative rings and requires no flatness of $h$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+   }
+  },
+  {
+   "text": "Use the cover and frames for $F$ from step 3. By [def-pc-module-pullback] the pullback $h_K^*F$ has frames $h_K^*e_i$ over $p_W^{-1}(h^{-1}V_i)$, with transitions $h_K^\\sharp u_{ij}$. Here the two inverse-image opens agree by $p_Zh_K=hp_W$. By [lem-weil-pbc-invertible-pullback-tensor](1), both $h_K^*F$ and $h^*N(F)$ are invertible. Their norm and pullback frames have transitions respectively $\\nu_W(h_K^\\sharp u_{ij})$ and $h^\\sharp\\nu_Z(u_{ij})$; these are equal by step 7. Matching these frames gives local isomorphisms that agree on every overlap, and [lem-weil-pbc-glue-sheaves-of-modules](1) glues them and their inverses. Thus $h^*N(F)\\simeq N(h_K^*F)$ and the asserted equality of Picard classes follows. All constructions use the same fixed basis of $K/k$ for every $Z$. Empty schemes cause no exception: the empty-cover sheaf axiom gives the unique module class and all equalities; for $d=1$ the matrices are $1\\times1$. Nilpotents and inseparability do not affect any calculation.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-vector-space-dimension",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-matrix-cramer-determinant-identities",
+  "def-weil-pbc-matrix-determinant",
+  "lem-sfb-finite-trivialize-invertible-upstairs",
+  "lem-sfb-norm-frame-tensor-section-gluing",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD2 (lemma-finite-locally-free-has-norm), determinant construction, specialized using one fixed k-basis of K; Tag 0BCY (lemma-norm-invertible), transition-function construction and its omitted verifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The norm homomorphism on Picard groups for a finite locally free morphism commutes with arbitrary base change and sends a pulled back line bundle to its degree tensor power",
+   "results": "{\"t\": \"2026-10-24T01:59:23Z\", \"tool\": \"leanfinder\", \"query\": \"The norm homomorphism on Picard groups for a finite locally free morphism commutes with arbitrary base change and sends a pulled back line bundle to its degree tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapRingHom\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"CommRing.Pic.mapAlgebra_apply\", \"CommRing.Pic.mapRingHom_algebraMap\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"prod_galRestrict_eq_norm\", \"Ideal.relNorm_map_algEquiv\"], \"digest\": \"81808a99f8d88407\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; ring-element and ideal norms, scalar extension on ring Picard groups, and unrelated analytic norms do not give a norm of scheme line bundles with this base-change identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"mapAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T02:00:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"mapAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapAlgebra_self\", \"CommRing.Pic.mapAlgebra_self_apply\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"CommRing.Pic.mapAlgebra_apply\"], \"digest\": \"f6b8c6051cd6dfba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; ring-element and ideal norms, scalar extension on ring Picard groups, and unrelated analytic norms do not give a norm of scheme line bundles with this base-change identity."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*[Nn]orm|[Nn]orm.*Pic|norm.*[Ii]nvertible|[Ii]nvertible.*norm",
+   "results": "{\"t\": \"2026-10-24T02:00:00Z\", \"tool\": \"grep\", \"query\": \"Pic.*[Nn]orm|[Nn]orm.*Pic|norm.*[Ii]nvertible|[Ii]nvertible.*norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/CStarAlgebra/Matrix.lean\", \"Mathlib/Geometry/Euclidean/MongePoint.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/Analysis/Seminorm.lean\", \"Mathlib/Analysis/ODE/PicardLindelof.lean\", \"Mathlib/Analysis/ODE/PicardLindelof.lean\", \"Mathlib/Analysis/LocallyConvex/ContinuousOfBounded.lean\"], \"digest\": \"68e9b8ec878eb67e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; ring-element and ideal norms, scalar extension on ring Picard groups, and unrelated analytic norms do not give a norm of scheme line bundles with this base-change identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Norm of an invertible sheaf along a finite flat morphism with constant degree, compatible with pullback of schemes",
+   "results": "{\"t\": \"2026-10-24T02:00:00Z\", \"tool\": \"leansearch\", \"query\": \"Norm of an invertible sheaf along a finite flat morphism with constant degree, compatible with pullback of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.norm\", \"Ideal.relNorm_eq_pow_of_isMaximal\", \"Ideal.relNorm\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"Ideal.relNorm_map_algEquiv\", \"Algebra.norm_localization\", \"norm_inv'\", \"Algebra.norm_inv\"], \"digest\": \"97090b649daaddf0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; ring-element and ideal norms, scalar extension on ring Picard groups, and unrelated analytic norms do not give a norm of scheme line bundles with this base-change identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite flat transfer of line bundles defines a Picard norm that is natural in the base scheme",
+   "results": "{\"t\": \"2026-10-24T02:01:10Z\", \"tool\": \"leanfinder\", \"query\": \"Finite flat transfer of line bundles defines a Picard norm that is natural in the base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapRingHom\", \"CommRing.Pic.mapAlgebra_apply\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"Ideal.relNorm_relNorm\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"Algebra.norm_localization\"], \"digest\": \"a98c1bea94cf5d7d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; ring-element and ideal norms, scalar extension on ring Picard groups, and unrelated analytic norms do not give a norm of scheme line bundles with this base-change identity."
+  },
+  {
+   "tool": "grep",
+   "query": "norm|Norm|Picard|Pic\\.",
+   "results": "{\"t\": \"2026-10-24T02:01:10Z\", \"tool\": \"grep\", \"query\": \"norm|Norm|Picard|Pic\\\\.\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\"], \"digest\": \"8982d2c1f0a0c398\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; ring-element and ideal norms, scalar extension on ring Picard groups, and unrelated analytic norms do not give a norm of scheme line bundles with this base-change identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field extension gives norm maps on line bundles on every scheme, commuting with scheme pullback and taking the norm of a pullback to the degree tensor power",
+   "results": "{\"t\": \"2026-10-24T02:01:45Z\", \"tool\": \"leanfinder\", \"query\": \"A finite field extension gives norm maps on line bundles on every scheme, commuting with scheme pullback and taking the norm of a pullback to the degree tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.intNormAux\", \"FiniteField.algebraMap_norm_eq_prod_pow\", \"FiniteField.algebraMap_norm_eq_pow\", \"prod_galRestrict_eq_norm\", \"FiniteField.algebraMap_norm_eq_pow_sum\", \"Algebra.norm_algebraMap\", \"Ideal.relNorm_algebraMap'\", \"groupCohomology.norm_ofAlgebraAutOnUnits_eq\"], \"digest\": \"e337cb440fe8a081\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; ring-element and ideal norms, scalar extension on ring Picard groups, and unrelated analytic norms do not give a norm of scheme line bundles with this base-change identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Norm of invertible modules along scalar extension by a finite field extension commutes with base change",
+   "results": "{\"t\": \"2026-10-24T02:01:46Z\", \"tool\": \"leansearch\", \"query\": \"Norm of invertible modules along scalar extension by a finite field extension commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instNormedAddCommGroupRestrictScalars\", \"ContinuousMultilinearMap.norm_restrictScalars\", \"Module.RestrictScalars.normedSpaceOrig\", \"Algebra.norm_norm\", \"instSeminormedAddCommGroupRestrictScalars\", \"Ideal.relNorm_map_algEquiv\", \"Subalgebra.LinearDisjoint.norm_algebraMap\", \"RestrictScalars.normedSpace\"], \"digest\": \"421d987138cf7f70\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; ring-element and ideal norms, scalar extension on ring Picard groups, and unrelated analytic norms do not give a norm of scheme line bundles with this base-change identity."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*[Nn]orm|[Nn]orm.*Pic|norm.*[Ii]nvertible",
+   "results": "{\"t\": \"2026-10-24T02:34:50Z\", \"tool\": \"grep\", \"query\": \"Pic.*[Nn]orm|[Nn]orm.*Pic|norm.*[Ii]nvertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Abelian.lean\", \"Mathlib/Geometry/Euclidean/MongePoint.lean\", \"Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean\", \"Mathlib/CategoryTheory/Abelian/Subcategory.lean\", \"Mathlib/CategoryTheory/Abelian/Subcategory.lean\", \"Mathlib/CategoryTheory/Abelian/Subcategory.lean\", \"Mathlib/CategoryTheory/Abelian/Subcategory.lean\"], \"digest\": \"35e778170aee7219\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; scalar extension of ring Picard groups, algebra-element norms, linear base change, and NormalEpiCategory do not assert a scheme Picard norm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Norm of line bundles under finite locally free morphisms commutes with base change",
+   "results": "{\"t\": \"2026-10-24T02:34:50Z\", \"tool\": \"leansearch\", \"query\": \"Norm of line bundles under finite locally free morphisms commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.toDualBaseChange\", \"IsBaseChange.finitePow\", \"Subalgebra.LinearDisjoint.norm_algebraMap\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"LinearEquiv.baseChange_trans\", \"Algebra.norm_localization\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"LinearMap.baseChange_comp\"], \"digest\": \"a294f6605f2e81c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; scalar extension of ring Picard groups, algebra-element norms, linear base change, and NormalEpiCategory do not assert a scheme Picard norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"norm\"",
+   "results": "{\"t\": \"2026-10-24T02:34:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"norm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsNormalEpiCategory\", \"CategoryTheory.regularEpiCategoryOfNormalEpiCategory\", \"CategoryTheory.IsNormalEpiCategory.mk\", \"CategoryTheory.IsNormalEpiCategory.normalEpiOfEpi\", \"CategoryTheory.NormalEpiCategory.hasCoequalizers\", \"CategoryTheory.NormalEpiCategory.hasColimit_parallelPair\", \"CategoryTheory.NormalEpiCategory.pushout_of_epi\", \"CategoryTheory.NormalEpiCategory.preservesMonomorphisms_of_preservesKernels\"], \"digest\": \"b023e60206f39186\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; scalar extension of ring Picard groups, algebra-element norms, linear base change, and NormalEpiCategory do not assert a scheme Picard norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field extension induces a multiplicative norm on scheme Picard groups natural under arbitrary scheme pullback",
+   "results": "{\"t\": \"2026-10-24T02:34:52Z\", \"tool\": \"leanfinder\", \"query\": \"A finite field extension induces a multiplicative norm on scheme Picard groups natural under arbitrary scheme pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.relPic\", \"Algebra.intNormAux\", \"CommRing.Pic.mapAlgebra_apply\", \"prod_galRestrict_eq_norm\", \"CommRing.Pic.mapRingHom\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"FiniteField.algebraMap_norm_eq_prod_pow\"], \"digest\": \"662e3f652869772b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; scalar extension of ring Picard groups, algebra-element norms, linear base change, and NormalEpiCategory do not assert a scheme Picard norm."
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]orm|[Tt]ransfer|mapAlgebra",
+   "results": "{\"t\": \"2026-10-24T02:36:58Z\", \"tool\": \"grep\", \"query\": \"[Nn]orm|[Tt]ransfer|mapAlgebra\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"555\", \"565\", \"569\", \"570\", \"572\"], \"digest\": \"1c7627917f9c5b4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; scalar extension of ring Picard groups, algebra-element norms, linear base change, and NormalEpiCategory do not assert a scheme Picard norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfer homomorphism from Picard group of a finite flat cover to Picard group of the base",
+   "results": "{\"t\": \"2026-10-24T02:37:00Z\", \"tool\": \"leanfinder\", \"query\": \"Transfer homomorphism from Picard group of a finite flat cover to Picard group of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapRingHom\", \"CommRing.relPic\", \"CommRing.Pic.mapAlgebra_apply\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"CommRing.Pic.mapRingHom_algebraMap\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"Submodule.unitsToPic\"], \"digest\": \"d89c31249263b57b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; scalar extension of ring Picard groups, algebra-element norms, linear base change, and NormalEpiCategory do not assert a scheme Picard norm."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-torsor-picard-rational-surjectivity",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Norm step in the auxiliary Picard descent argument of lem-sfb-torus-torsor-picard-rational-surjectivity: finite splitting-field scalar extension; commute the Picard norm with the torsor projection and norm the pulled-back original line. Realized by the transition-function construction of Stacks 0BCY and the determinant calculation of 0BD2.",
+   "via": [
+    "lem-sfb-torus-torsor-picard-rational-surjectivity",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-field-picard-norm-base-change",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and clause. Constructed the determinant function norm directly in one fixed field basis, reused finite upstairs trivialization and norm-frame gluing, wrote the omitted choice-independence, tensor and degree calculations, and proved arbitrary pullback compatibility entry by entry. No new node: all non-elementary inputs already have DAG nodes.",
+  "blueprint": "This auxiliary node has no imported blueprint ancestor (blueprint_refs.py ancestor returned None). Its recorded via chain is retained. It serves the finite-splitting-field norm paragraph in lem-sfb-torus-torsor-picard-rational-surjectivity, below the generic-ampleness auxiliary branch of sk-thm-sf-ctf-stability. The latest blueprint unit and chapter were read; no unit/chapter route or statement is changed. Whole-blueprint searches norm-invertible and norm homomorphism had zero matches; the broader finite field search gave no Picard norm statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic sheaf-module gluing or tensor/pullback structure used for explicit frame comparisons; no same-unit statement supplies this general fact and it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic sheaf-module gluing or tensor/pullback structure used for explicit frame comparisons; no same-unit statement supplies this general fact and it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "why": "Generic sheaf-module gluing or tensor/pullback structure used for explicit frame comparisons; no same-unit statement supplies this general fact and it does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-20f13896d",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-20f13896d (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, no new nodes. The statement and stmt_deps are identical to the live unsplit node, and there is no repair note. I read Stacks divisors.tex 0BUT (l.3617), 0BCY (l.3655) and 0BD2 (l.3789). The split is a correct write-out of the determinant norm for p_Z: Z_K→Z in one fixed k-basis of K. Step 1 identifies the affine charts as Spec(R⊗K) through the two Mathlib fibre-product leaves, writes the coordinate maps and shows p_Z finite. Step 2 checks M(cc')=M(c)M(c') and uses det_mul with d≥1, giving ν(1)=1 and ν(p^♯a)=a^d. Step 3 applies the 0BUT and norm-frame nodes, and their hypotheses hold. Steps 4–6 supply the checks Stacks omits (independence of choices, multiplicativity, Nm(p^*A)=A^{⊗d}) through explicit transition-unit algebra and gluing clause (1). Step 7 checks that h_K=h^♯⊗id acts entrywise on the multiplication matrices, so a ring map commutes with det. Step 8 compares frames over p_W^{-1}h^{-1}V_i. The base-change morphism is h×id_{Spec K}, as in def-pc-base-change, and the category is invertible modules up to isomorphism on both sides. The statement is existential over the family, so a fixed basis is enough; no separability or Noetherian hypothesis is needed. The only citer, the torus-torsor Picard step, uses exactly the delivered clauses. No duplicate found: lem-pur-finite-flat-kummer-norm-degree is Noetherian with no base change, and the function-norm node has no line-class base change. I accept the three declared tool_uses: glue-sheaves-of-modules, invertible-pullback-tensor and module-tensor-symmetric-monoidal. No SGA source is used. One cosmetic point: the determinant formula in step 7 is the transposed expansion of the one in the cited node, which does not affect the argument. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFieldPicardNormBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Pic.exists_finiteFieldNorm_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFieldPicardNormBaseChange.lean",
+  "statement": "theorem exists_finiteFieldNorm_baseChange (k K : Type u) [Field k] [Field K] [Algebra k K] [Module.Finite k K] : ∃ Nm : ∀ Z : Over (Spec (CommRingCat.of k)), (pullback Z.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Pic →* Z.left.Pic, (∀ (Z : Over (Spec (CommRingCat.of k))) (A : Z.left.Pic), Nm Z (map (pullback.fst Z.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) A) = A ^ Module.finrank k K) ∧ (∀ (W Z : Over (Spec (CommRingCat.of k))) (h : W ⟶ Z) (F : (pullback Z.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Pic), map h.left (Nm Z F) = Nm W (map (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map h).left) F))",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4feb2d3f6",
+  "group": "Q19",
+  "result": "pass",
+  "note": "All clauses match the node: k,K fields with Module.Finite; Z_K=pullback Z.hom (Spec.map algebraMap); a single ∃ Nm family of →* Pic(Z_K)→Pic(Z) gives ⊗ and unit; degree clause Nm(map pullback.fst A)=A^finrank (npow = class of tensor power); base change map h.left∘Nm_Z = Nm_W∘map h_K with h_K=(Over.pullback φ).map h, correct direction. No extra hypotheses or universe restriction; edge cases (empty schemes, d=1, inseparable, nonflat h) covered; not hollow (constant 1 fails the degree clause). Mechanical theorem-stmt_dep finding judged PASS: →* and ^ need Pic.instCommGroup (owned by lem-sc-pic-group, which carries the group-law proofs), and Pic.map (owned by lem-pc-pic-presheaf-functorial) is typed through the theorem IsInvertible.pullback, so the statement depends on objects those theorems construct. Statement field verbatim; node diff vs live is only stmt_deps+lean; docstrings carry source tags, blueprint id and 8 steps; sorry only; imports exist; no duplicate Picard norm found; report has Worker report and Second reading by Q19. No compile (no file changed)."
+ }
+}

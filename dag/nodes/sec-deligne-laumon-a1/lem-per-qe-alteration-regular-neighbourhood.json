@@ -1,0 +1,282 @@
+{
+ "id": "lem-per-qe-alteration-regular-neighbourhood",
+ "kind": "statement",
+ "title": "Alteration neighbourhoods regular above a prescribed quasi-excellent closed fibre",
+ "statement": "Let $B$ be a commutative Noetherian integral domain [def-weil-pbc-noetherian-ring], $\\mathfrak q\\subseteq B$ a prime ideal, and $J\\subseteq B$ an ideal. Assume $B_{\\mathfrak q}$ is excellent and $B/J$ is quasi-excellent [def-weil-pbc-localization-at-prime, def-exc-excellent-ring]. Then there are $b\\in B\\setminus\\mathfrak q$ and finitely many integral Noetherian schemes $X_i$ with dominant generically finite morphisms $\\varphi_i:X_i\\to Y=\\operatorname{Spec}B[1/b]$ of finite type [def-pc-integral-scheme, pqf-def-locnoeth, def-weil-affine-spectrum, def-weil-ring-localization-away, def-weil-finite-type-morphism], such that each local ring at a point of $\\varphi_i^{-1}V(JB[1/b])$ is regular local [def-weil-regular-scheme]. Dominant means dense image, and generically finite means a finite extension of function fields. In addition there is an integral Noetherian scheme $V$, a proper surjective generically finite morphism $p:V\\to Y$ [def-weil-proper-morphism, def-weil-surjective-morphism], an open cover $V=\\bigcup_i V_i$, and $Y$-morphisms $V_i\\to X_i$.",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-regular-scheme",
+  "def-weil-ring-localization-away",
+  "def-weil-surjective-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Excellence of $B_{\\mathfrak q}$ includes quasi-excellence by [def-exc-excellent-ring]. Apply [lem-per-qe-weak-uniformization-cover] to the nonempty integral scheme $S=\\operatorname{Spec}B_{\\mathfrak q}$. Obtain regular integral charts $T_i\\to S$ and an integral proper-surjective generically finite witness $P\\to S$ with its indexed open cover and maps.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-per-qe-weak-uniformization-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.4, first proof paragraph; Definition 3.2 and Theorem 3.3"
+   }
+  },
+  {
+   "text": "Apply [lem-per-local-alteration-diagram-spreading] to that whole diagram. Write $a\\notin\\mathfrak q$, $Y_a=\\operatorname{Spec}B[1/a]$, and $f_i:T_{a,i}\\to Y_a$ for the resulting models. All integral, finite-type, generic-field and covering-witness conditions already hold, but regularity away from $S$ has not been asserted.",
+   "uses": [
+    "lem-per-local-alteration-diagram-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.4, first proof paragraph, the choice of tilde b"
+   }
+  },
+  {
+   "text": "If $t\\in T_{a,i}$ maps to a prime $\\mathfrak r\\subseteq\\mathfrak q$, it survives the base change to $B_{\\mathfrak q}$. On an affine chart $\\operatorname{Spec}C$ containing $t$, with prime $\\mathfrak p$, every element of $B\\setminus\\mathfrak q$ lies outside $\\mathfrak p$. Thus localization by these elements followed by localization at $\\mathfrak p$ gives exactly $C_{\\mathfrak p}$: those elements were already units there. The corresponding local ring on the regular scheme $T_i$ equals $\\mathcal O_{T_{a,i},t}$. Consequently this ambient local ring is regular.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.4, equation (4.3), with the affine localization argument expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-per-j2-closed-fibre-regular-locus] to $T_{a,i}\\to\\operatorname{Spec}B$ and $J$. This map is finite type, since $B[1/a]=B[u]/(au-1)$, and $B/J$ is J-2 by [def-exc-excellent-ring]. Hence $W_i=f_i^{-1}V(JB[1/a])\\setminus\\operatorname{Reg}(T_{a,i})$ is closed. It is constructible by [def-weil-constructible-subset], since $T_{a,i}$ is Noetherian. The affine local presentations of $f_i$ are finite presentations by [lem-weil-pbc-finite-type-noetherian-finite-presentation]; the Noetherian source is quasi-separated, so $f_i$ is quasi-compact and locally finitely presented. Chevalley [lem-weil-pbc-chevalley-constructible-image] now makes $E_i=f_i(W_i)$ constructible in the affine target $Y_a$.",
+   "uses": [
+    "lem-per-j2-closed-fibre-regular-locus",
+    "def-exc-excellent-ring",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-chevalley-constructible-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.4, definition of W and application of Lemma 4.2 and Chevalley"
+   }
+  },
+  {
+   "text": "The affine target $Y_a$ is spectral by [lem-weil-pbc-qcqs-scheme-spectral]. If $\\mathfrak qB[1/a]\\in\\overline{E_i}$, [lem-weil-pbc-spectral-proconstructible-closure-specialization], applied to the one-member family $E_i$, gives $e\\in E_i$ generalizing $\\mathfrak q$. Choose $t\\in W_i$ over $e$. Its image in $\\operatorname{Spec}B$ is a prime contained in $\\mathfrak q$, so Step 3 makes its local ring regular, contradicting $t\\in W_i$. Thus $\\mathfrak q$ avoids every $\\overline{E_i}$. Their finite union has an open complement containing $\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.4, constructible image closure and contradiction to (4.3)"
+   }
+  },
+  {
+   "text": "Choose a basic neighbourhood $D(b)\\subseteq D(a)\\setminus\\bigcup_i\\overline{E_i}$ of $\\mathfrak q$; explicitly choose $D(c)$ inside that open in $\\operatorname{Spec}B$ and set $b=ac$. Then $b\\notin\\mathfrak q$. Restrict the model diagram to $D(b)$. By the permanence clause of [lem-per-local-alteration-diagram-spreading] it retains every structural and witness condition. Any point above $V(JB[1/b])$ with a nonregular local ring would belong to some $W_i$ and map into $E_i\\cap D(b)$, which is empty. Open restriction leaves local rings unchanged. These restricted charts and witness are the required $X_i,V,V_i$.",
+   "uses": [
+    "lem-per-local-alteration-diagram-spreading"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.4, final shrink and the computation W_b,i = W_a,i intersect X_b,i"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-constructible-subset",
+  "lem-per-j2-closed-fibre-regular-locus",
+  "lem-per-local-alteration-diagram-spreading",
+  "lem-per-qe-weak-uniformization-cover",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Lemma 4.4, printed pp.5–6; source read online but not archived in literature. Its argument is expanded in Steps 1–6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-alteration-regular-neighbourhood: A Noetherian domain with excellent localization and quasi excellent closed fibre admits an alteration covering regular above the closed fibre on a neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth or etale neighbourhoods and Noetherian schemes, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth or etale neighbourhoods and Noetherian schemes, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|quasi.?excellent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth or etale neighbourhoods and Noetherian schemes, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-alteration-regular-neighbourhood: A Noetherian domain with excellent localization and quasi excellent closed fibre admits an alteration covering regular above the closed fibre on a neighbourhood",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"completeIntegralClosure_eq_integralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral\", \"type\": \"[IsNoetherianRing R] [IsDomain R] [IsFractionRing R S] : completeIntegralClosure R S = integralClosure R S\", \"doc\": \"Given a Noetherian domain $ R $ and its fraction ring $ S $, the complete integral closure of $ R $ in $ S $ (the subalgebra of elements almost integral over $ R $) coincides with the integral closure\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R : CommRingCat} [IsNoetherianRing R] : IsLocallyNoetherian (Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"RingHom.QuasiFinite.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.QuasiFinite\", \"type\": \": PropertyIsLocal QuasiFinite\", \"doc\": \"The property of a ring homomorphism between commutative rings being quasi-finite is local, meaning it can be checked on a cover or via localization.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsLocallyNoetherian X → Sort u} →\\n    (t : AlgebraicGeometry.IsLocallyNoetherian X) →\\n      ((component_noetherian : ∀ (U : ↑X.affineOpens), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))) →\\n          motive ⋯) →\\n        motive t\", \"doc\": \"Given a scheme $X$ and a proof that it is locally Noetherian, this function allows reducing arguments to the case where every affine open subset $U \\\\subseteq X$ has an associated Noetherian ring $\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth or etale neighbourhoods and Noetherian schemes, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-alteration-regular-neighbourhood: Spread regular alterations from a prime localization and remove the singular locus above an ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] [IsLocalization.AtPrime S p] {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs →\\n    (∀ r ∈ rs, r ∈ p) → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraM\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ its localization at the complement of a prime ideal $ p $, and $ rs $ a list of elements in $ R $. If $ rs $ forms a weakly regular sequence in $ R $ and every e\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [IsScalarTower R S N] (p : Ideal R) [inst_9 : p.IsP\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ and $ N $ be $ R $-modules, and $ p $ a prime ideal of $ R $. Suppose $ N $ is a non-trivial finitely generated $ S $-module obtained by localizing $ M $ at \"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth or etale neighbourhoods and Noetherian schemes, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Rotthaus|Hilfssatz|quasi.?excellent|Nishimura|IsGRing|alteration",
+   "results": "{\"t\": \"2026-10-24T03:50:52Z\", \"tool\": \"grep\", \"query\": \"Rotthaus|Hilfssatz|quasi.?excellent|Nishimura|IsGRing|alteration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: whole-Mathlib grep returned no occurrences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-alteration-regular-neighbourhood: An excellent prime localization and quasi excellent quotient of a Noetherian domain admit finite alteration charts regular above the quotient after shrinking",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension 0\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ makes $ S $ a standard smooth algebra over $ R $ of relative dimension 0, then this property is preserved under localization at any element of $ R $. Specificall\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth/etale neighborhoods, local rings or spreading a morphism; none gives this alteration cover regular along the prescribed closed fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth/etale neighborhoods, local rings or spreading a morphism; none gives this alteration cover regular along the prescribed closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|quasi.?excellent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth/etale neighborhoods, local rings or spreading a morphism; none gives this alteration cover regular along the prescribed closed fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-alteration-regular-neighbourhood: An excellent prime localization admits an alteration cover regular above a quasi excellent closed fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.Localizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : Type u\", \"doc\": \"For a prime ideal $ P $ in the prime spectrum of a commutative ring $ R $, the localization of $ R $ at the submonoid of elements not in $ P $, resulting in a ring where all elements outside $ P $ bec\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) (x : U) :\\n  IsLocalization.AtPrime (Localizations R x) (x : PrimeSpectrum.Top R).asIdeal\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ is equipped with a canonical $ R $-algebra structure. Th\"}\n  {\"name\": \"Localization.AtPrime.isLocalRing\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \": IsLocalRing (Localization P.primeCompl)\", \"doc\": \"For a semiring $ R $ and a prime ideal $ P $, the localization of $ R $ at the complement of $ P $ forms a local ring. This means the localized ring has a unique maximal ideal, which corresponds to th\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : IsLocalRing <| Localizations R P\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ forms a local ring. This localization inverts all elemen\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.commRingLocalizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : CommRing <| Localizations R P\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ forms a commutative ring. This localization inverts all \"}\n  {\"name\": \"instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Instances\", \"type\": \"[Algebra.IsIntegral R S] : Algebra.IsIntegral Rₚ Sₚ\", \"doc\": \"If $ S $ is integral over $ R $, then the localization of $ S $ at the complement of a prime ideal $ P $ is integral over the localization of $ R $ at $ P $. This instance asserts that integrality is \"}\n  {\"name\": \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"module\": \"Mathlib.RingTheory.Localization.LocalizationLocalization\", \"type\": \"(p : Ideal (Localization M)) [p.IsPrime] :\\n  Localization.AtPrime (p.comap (algebraMap R (Localization M))) ≃ₐ[R] Localization.AtPrime p\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in the localization $R_M$, the localization of $R_M$ at $\\\\mathfrak{p}$ is canonically isomorphic as an $R$-algebra to the localization of $R$ at the contraction of $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth/etale neighborhoods, local rings or spreading a morphism; none gives this alteration cover regular along the prescribed closed fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-alteration-regular-neighbourhood: Spread local uniformization and avoid singular points over a closed subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth/etale neighborhoods, local rings or spreading a morphism; none gives this alteration cover regular along the prescribed closed fibre."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-complete-pair-lifting",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J.",
+   "via": [
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-qe-alteration-regular-neighbourhood",
+  "worker": "stage1",
+  "summary": "Read Kurano–Shimomoto Lemma 4.4, Lemma 4.2/Claim 4.3 and Definition 3.2 online, and ILO VII 1.1 / II 3.2.1 in the archived volume. Split into regular local alteration cover, spreading the whole witness diagram, the ambient regular locus along the J-2 fibre, Chevalley and closure-by-specialization, and a principal shrink. Three statement-only lemmas; no Mathlib matches. Kept the statement unchanged; corrected stale bibliographic claim that a source PDF was in this sandbox.",
+  "blueprint": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J. Steps 1–6 supply this neighbourhood ingredient of the existing completion proof; the perverse unit/chapter route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-chevalley-constructible-image",
+    "why": "Chevalley gives constructibility of the bad-locus image; a generic scheme-theoretic tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Noetherian finite-type affine presentations are finite presentations, needed to apply Chevalley."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "The affine target is spectral, as needed for the closure-specialization tool."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "A closure point of a constructible image specializes from that image; used to exclude q from each bad-image closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-39a8d6cdc",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-39a8d6cdc (reviewer sub-agent of L); spot-checked: Read in full: the item, its six steps, the three new nodes and every cited statement. The item's statement and stmt_deps are unchanged from the base, which had no proof, and there is no re-split note. ILO VII Thm 1.1 and II Thm 3.2.1 (ℓ=1, Zariski normal form, Y integral and proper surjective) support lem-per-qe-weak-uniformization-cover. Regular connected means integral, and alt objects are dominant and generically finite. Same-index Tᵢ/Pᵢ is fine with a repeated family. Kurano–Shimomoto is not archived (WANTED). I checked lem-per-j2-closed-fibre-regular-locus independently (Nagata criterion on Z; k[e]/e² case gives ∅) and lem-per-local-alteration-diagram-spreading by the limit argument (01ZM/081F/07RR, integral closure models, flat monomorphism base change, cover by constructible-image shrink, permanence on D(b)). Steps: S1 excellent⇒QE, so weak uniformization applies to Spec B_q. S2 spreading hypotheses hold. S3 the local-ring equality is elementary. S4 J-2 node with A=B, I=J, finite type over B; closed ⇒ constructible on a Noetherian space; Chevalley via finite type (includes quasi-compact) plus Noetherian finite presentation, affine target. S5 spectral plus closure-specialization; a generalization of q gives a contradiction via S3. S6 D(c) and b=ac, permanence, empty Eᵢ∩D(b). No duplicates: the existing alteration nodes need ℓ invertible or give étale covers; the spreading and J-2 neighbours differ. No new node restates the item. Accepted tool_uses: Chevalley, finite-type⇒finite presentation, qcqs spectral, closure-specialization. Maintainer note: the item's source.place still claims 'obtained in sandbox sources/kurano40.pdf', though the report says it was corrected."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QEAlterationRegularNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_qe_alteration_regular_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/QEAlterationRegularNeighbourhood.lean",
+  "statement": "theorem exists_qe_alteration_regular_neighbourhood (B : Type u) [CommRing B] [IsNoetherianRing B] [IsDomain B] (q : Ideal B) [q.IsPrime] (J : Ideal B) (hq : IsExcellent (Localization.AtPrime q)) (hJ : IsQuasiExcellent (B ⧸ J)) : ∃ b : B, b ∉ q ∧ ∃ (n : ℕ) (X : Fin n → Scheme.{u}) (φ : ∀ i : Fin n, X i ⟶ Spec (.of (Localization.Away b))), (∀ i : Fin n, ∃ (_ : IsIntegral (X i)), IsNoetherian (X i) ∧ IsDominant (φ i) ∧ RingHom.Finite ((φ i).stalkMap (genericPoint (X i))).hom ∧ LocallyOfFiniteType (φ i) ∧ QuasiCompact (φ i) ∧ ∀ x : X i, Ideal.map (algebraMap B (Localization.Away b)) J ≤ (φ i x).asIdeal → IsRegularLocalRing ((X i).presheaf.stalk x)) ∧ ∃ (V : Scheme.{u}) (_ : IsIntegral V) (p : V ⟶ Spec (.of (Localization.Away b))), IsNoetherian V ∧ IsProper p ∧ Surjective p ∧ RingHom.Finite (p.stalkMap (genericPoint V)).hom ∧ ∃ (U : Fin n → V.Opens) (g : ∀ i : Fin n, (U i).toScheme ⟶ X i), (⨆ i : Fin n, U i) = ⊤ ∧ ∀ i : Fin n, g i ≫ φ i = (U i).ι ≫ p",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8aa1cefeb",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Only the lean record differs from the live node (no new nodes, no dependency repairs, no statement_change); lean.statement verbatim, single sorry, autoImplicit false. Every clause matches the node: Noetherian domain B, prime q, ideal J; IsExcellent (Localization.AtPrime q) and IsQuasiExcellent (B ⧸ J) are the recorded def-exc-excellent-ring declarations; ∃ b ∉ q; Fin n charts with IsIntegral, IsNoetherian, IsDominant, LocallyOfFiniteType ∧ QuasiCompact; generic finiteness via the canonical stalkMap at the generic point (equal to the function-field extension because the map is dominant or surjective); IsRegularLocalRing of the ambient stalk on the preimage of V(J B[1/b]); integral Noetherian V with IsProper, Surjective and generically finite p; same-index open cover ⨆ U i = ⊤ with g i ≫ φ i = ι ≫ p. Read all 11 statement-dependency records; no duplicate notion. Edge cases J=⊤, J=⊥, q=0, b≠0, n=0 and universes (Type u, Scheme.{u}) are correct. Docstrings carry the source place, blueprint tag and all six proof steps; proof-only import ProconstructibleClosureSpecialization exists live. Not recompiled because no file was changed. Maintainer note: source.place still claims a sandbox PDF (stage-1 leftover)."
+ }
+}

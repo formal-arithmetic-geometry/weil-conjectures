@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalizationData
 
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphCoherence
+public import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphCoherence
 
 /-!
 # Normalization of compact supports for an etale morphism
@@ -134,7 +134,10 @@ structure EtaleCompactSupportNormalization (A : Type (u + 1)) [CommRing A] where
           (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) f inferInstance)).counit =
         adj.counit
 
-private theorem counitPreservingComparison
+/-- The right-adjoint comparison is uniquely determined by preservation of the counit.
+Source: adjunction conjugacy; SGA 4 XVII 5.2.2
+(blueprint: lem-asd-etale-compact-support-normalization). -/
+theorem counitPreservingComparison
     {C D : Type*} [Category C] [Category D]
     {L S : C ⥤ D} {R T : D ⥤ C}
     (e : L ≅ S) (adj : L ⊣ R) (sumAdj : S ⊣ T) :
@@ -160,7 +163,10 @@ private theorem counitPreservingComparison
   apply (cancel_epi (e.hom.app (R.obj Y))).1
   exact (NatTrans.congr_app hq' Y).trans (NatTrans.congr_app hq Y).symm
 
-private theorem comparison_vComp
+/-- Comparisons of two squares are preserved by vertical composition.
+Source: functoriality and associativity; SGA 4 XVII 6.2.11
+(blueprint: lem-asd-etale-compact-support-normalization). -/
+theorem comparison_vComp
     {C₀ C₁ C₂ C₃ C₄ C₅ : Type*}
     [Category C₀] [Category C₁] [Category C₂]
     [Category C₃] [Category C₄] [Category C₅]
@@ -184,34 +190,18 @@ private theorem comparison_vComp
     Functor.comp_obj, Functor.comp_map, Category.id_comp, Category.comp_id, Category.assoc]
   rw [h₁K, ← G₁.map_comp_assoc, h₀K, G₁.map_comp, Category.assoc]
 
-/-- The canonical compact-support-to-sum normalization, including its degree-zero,
-refinement, sum/evaluation adjunction, base-change and identity/composition normalizations.
+/-- The canonical graph normalization, with its actual comparison maps exposed.
+This is the specified witness of `nonempty_etaleCompactSupportNormalization`, constructed
+from `canonicalEtaleCompactSupportCore` and graph coherence. Vertical pasting supplies
+composition, and conjugacy supplies the unique counit-preserving adjoint comparison.
 Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6
-(blueprint: lem-asd-etale-compact-support-normalization).
-
-Proof:
-1. Construct the clopen compactification graph and its actual projection. Transpose the
-   inverse specified sum exchange followed by that projection under proper direct image.
-   Descend this sheaf transformation degreewise through the localization; the component
-   formula is proved on every homotopy representative.
-2. The graph sheaf normalization identifies its composite into direct image with the
-   canonical graph-extension arrow. The derived graph isomorphism theorem gives the
-   uniquely specified inverse. Together they form canonicalEtaleCompactSupportCore.
-   For finite etale morphisms the derived isomorphism is proved by sheaf normalization,
-   preservation of K-injectives and cancellation of the derived-composition unit.
-3. The graph coherence theorem supplies the single-base-change, proper-refinement and
-   identity equations for this fixed inverse. Two applications of the single-square
-   equation prove the displayed vertical composite by functoriality and associativity.
-4. For any chosen compact-support adjunction, conjugate the inverse comparison under it
-   and the degreewise sum/evaluation adjunction. The conjugacy counit law proves the
-   specified equality. Cancel the invertible comparison and use injectivity of the sum
-   adjunction bijection to prove uniqueness of the right-adjoint isomorphism. -/
-theorem nonempty_etaleCompactSupportNormalization
+(blueprint: lem-asd-etale-compact-support-normalization). -/
+noncomputable def canonicalEtaleCompactSupportNormalization
     (A : Type (u + 1)) [CommRing A] [Finite A] :
-    Nonempty (EtaleCompactSupportNormalization A) := by
+    EtaleCompactSupportNormalization A := by
   let core := canonicalEtaleCompactSupportCore A
   have coh := etaleCompactSupportGraph_coherence A
-  exact ⟨{
+  exact {
     comparison := core.comparison
     sheafComparison := core.sheafComparison
     sheaf_normalization := core.sheaf_normalization
@@ -241,6 +231,33 @@ theorem nonempty_etaleCompactSupportNormalization
       exact counitPreservingComparison (core.comparison f c) adj
         (Adjunction.mapDerivedCategoryAdjunction
           (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) f inferInstance))
-  }⟩
+  }
+
+/-- The canonical compact-support-to-sum normalization, including its degree-zero,
+refinement, sum/evaluation adjunction, base-change and identity/composition normalizations.
+Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6
+(blueprint: lem-asd-etale-compact-support-normalization).
+
+Proof:
+1. Construct the clopen compactification graph and its actual projection. Transpose the
+   inverse specified sum exchange followed by that projection under proper direct image.
+   Descend this sheaf transformation degreewise through the localization; the component
+   formula is proved on every homotopy representative.
+2. The graph sheaf normalization identifies its composite into direct image with the
+   canonical graph-extension arrow. The derived graph isomorphism theorem gives the
+   uniquely specified inverse. Together they form canonicalEtaleCompactSupportCore.
+   For finite etale morphisms the derived isomorphism is proved by sheaf normalization,
+   preservation of K-injectives and cancellation of the derived-composition unit.
+3. The graph coherence theorem supplies the single-base-change, proper-refinement and
+   identity equations for this fixed inverse. Two applications of the single-square
+   equation prove the displayed vertical composite by functoriality and associativity.
+4. For any chosen compact-support adjunction, conjugate the inverse comparison under it
+   and the degreewise sum/evaluation adjunction. The conjugacy counit law proves the
+   specified equality. Cancel the invertible comparison and use injectivity of the sum
+   adjunction bijection to prove uniqueness of the right-adjoint isomorphism. -/
+theorem nonempty_etaleCompactSupportNormalization
+    (A : Type (u + 1)) [CommRing A] [Finite A] :
+    Nonempty (EtaleCompactSupportNormalization A) := by
+  exact ⟨canonicalEtaleCompactSupportNormalization A⟩
 
 end AlgebraicGeometry.Etale

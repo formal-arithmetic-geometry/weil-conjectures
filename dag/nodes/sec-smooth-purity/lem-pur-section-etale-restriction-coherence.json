@@ -1,0 +1,229 @@
+{
+ "id": "lem-pur-section-etale-restriction-coherence",
+ "kind": "statement",
+ "title": "Counit-normalized restriction on smooth section invariants and deformation endpoints",
+ "statement": "Fix the finite coefficient conventions [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$, arbitrary finite $E/\\mathbf Q_\\ell$, $\\ell\\ne\\operatorname{char}k$, and $n\\geq1$. All schemes in this statement are separated finite-type $k$-schemes and all maps are separated and finite type [def-weil-scheme-morphism-properties]. Use constructible exceptional inverse image [def-weil-exceptional-inverse-image] and derived pullback [def-weil-derived-pullback-tensor-hom]. Write $\\omega_g=Rg^!A$ and $C(g,s)=Ls^*\\omega_g$ [def-pur-section-invariant].\n\nLet $g:T\\to B$ be smooth of pure dimension $d\\geq0$ [def-sbc-smooth-morphisms] with a closed section $s$. Let $a:T'\\to T$ be etale over $B$ [def-weil-etale-morphism], let $g'=ga$, and let $s':B\\to T'$ be a closed section with $as'=s$ whose square of centres over $1_B$ is Cartesian. Let $c_{g,a}:R(ga)^!\\xrightarrow{\\sim}Ra^!Rg^!$ be the specified conjugate compositor [pur9-def-upper-shriek-composition], and use the counit-normalized etale comparison $\\rho_a:Ra^!\\xrightarrow{\\sim}La^*$ of [lem-pur-finite-etale-dualizing-normalization]. Define\n$$R_a:C(g',s')\\xrightarrow{Ls'^*(\\rho_a c_{g,a})}Ls'^*La^*\\omega_g\\xrightarrow{\\sim}C(g,s),$$\nwhere the last arrow is the canonical pullback-composition constraint for $as'=s$. This is an isomorphism. For a composable second map of section pairs $b$, $R_{ab}=R_aR_b$ and $R_1=1$, with the canonical constraints; in particular this applies to open neighbourhoods of the section. These equations commute with the canonical section comparisons under base change $B'\\to B$ between the stated schemes.\n\nLet $n:N_{s'}\\xrightarrow{\\sim}N_s$ be the induced normal-bundle map [def-pur-normal-bundle]. The canonical map $D_{s'}T'\\to D_sT$ [def-pur-dnc-section-family], on homogeneous generators $t\\mapsto t$ and $f/t\\mapsto a^*f/t$, is etale and preserves the augmented sections. Pullback of the same counit-normalized comparison to its section gives a family isomorphism $\\widetilde R_a:F_{g',s'}\\to F_{g,s}$ over $\\mathbf A^1_B$, for the family objects of [thm-pur-dnc-invariance]. Its restrictions at $1$ and $0$ are respectively $R_a$ and $R_n$, under the canonical fibre comparisons of [lem-pur-dnc-section-geometry]. For the uniquely normalized deformation maps one has\n$$R_n\\delta_{g',s'}=\\delta_{g,s}R_a.$$\nThe family, endpoint and composition equations are compatible with further open restriction, base restriction, and composition of etale maps of pairs. They include the rank-zero standard pair with identity comparisons. No Tate orientation or identification of $C(g,s)$ with a coefficient line is chosen.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Composition-coherence Step 1, smooth base-change coherence and normalized DNC uniqueness; chart proof Step 3, comparison of actual section and family adjunctions; returned Steps 1–5 and 8, locality part"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-dnc-section-family",
+  "def-pur-normal-bundle",
+  "def-pur-section-invariant",
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-etale-morphism",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "pur9-def-upper-shriek-composition",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof": [
+  {
+   "text": "Transport the ordinary-etale functoriality equations through sourceComparison and the comparison pullback functor. Cancel the adjacent inverse and direct source comparisons. This proves actual pro-etale restriction identities and composition.",
+   "uses": [
+    "lem-pur-section-restriction-etale-functorial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use coefficientwise Rees composition to prove deformationMap composition and its mixed base-change square. Prove deformationMap identity on affine Rees charts using extendedReesAlgebraMap_id. Cancel the mono closed zero-fibre inclusion in the geometric endpoint formula to obtain normalMap identity, composition and mixed base-change naturality. Extensionality of EtaleMap then identifies induced family and normal composites; apply the restriction functoriality already proved to these pairs.",
+   "uses": [
+    "lem-pur-section-rees-map-composition",
+    "def-pur-section-restriction-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the section base-comparison laws for the cohomological base square and BasePasting. Adjoin the two geometric naturality equations proved in the preceding step to obtain BaseCompatibility.",
+   "uses": [
+    "lem-pur-section-base-comparison-laws"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the four fibre squares, then use normalized specialization with precisely those hypotheses. Combine its restriction and base-change delta equations with the corresponding endpoint squares to obtain Endpoints and NormalizedBase. Take the standard rank-zero clause and assemble Composition, BaseCompatibility, Endpoints, NormalizedBase, BasePasting and RankZero.",
+   "uses": [
+    "lem-pur-section-fibre-squares",
+    "lem-pur-section-normalized-specialization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-section-restriction-data",
+  "lem-pur-section-base-comparison-laws",
+  "lem-pur-section-fibre-squares",
+  "lem-pur-section-normalized-specialization",
+  "lem-pur-section-rees-map-composition",
+  "lem-pur-section-restriction-etale-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3, composition-coherence Step 1 and DNC normalized uniqueness; Lean reduction by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized exceptional inverse image along etale maps induces coherent restriction isomorphisms on smooth section invariants and their deformation families",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_inv\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a point $x$ in a manifold with corners $M$, the composition of the colimit inclusion morphism associated to open neighborhoods of $x$ with the inverse of the forgetful functor isomorphism (which f\"}\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_inv_apply\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a smooth sheaf of commutative rings on a manifold with corners, the inverse of the forgetful functor's stalk isomorphism applied to the colimit inclusion morphism equals the concrete category homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (X_1 : X.Opensᵒᵖ),\\n  AlgebraicGeometry.Scheme.restrictFunctorΓ.inv.app X_1 = X.presheaf.map (CategoryTheory.eqToHom ⋯)\", \"doc\": \"For any scheme $X$ and open subset $U$ of $X$, the inverse of the natural isomorphism between the composition of the opposite restriction functor and the global sections functor, and the presheaf of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  X.restrictFunctor.op.comp ((CategoryTheory.Over.forget X).op.comp AlgebraicGeometry.Scheme.Γ) ≅ X.presheaf\", \"doc\": \"The composition of the opposite restriction functor from open subsets of a scheme $X$ to the over category $\\\\mathcal{T}/X$, followed by the opposite forgetful functor to topological spaces and the glo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"} Generic mate pasting is relevant but does not supply the normalized constructible exceptional restriction, its section pullback, and its deformation endpoint equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"Suppose we have a square of functors (where the top and bottom are adjunctions `L₁ ⊣ R₁`\\nand `L₂ ⊣ R₂` respectively).\\n\\n```\\n      C ↔ D\\n    G ↓   ↓ H\\n      E ↔ F\\n```\\n\\nThen we have a bijection between n\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the mates correspondence.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the inverse mates correspondence.\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the mates correspondence.\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the inverse mates correspondence.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, \", \"doc\": \"The mates equivalence commutes with vertical composition.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_hcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, \", \"doc\": \"The mates equivalence commutes with horizontal composition of squares.\"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo\", \"doc\": \"When all four functors in a square are left adjoints, the mates operation can be iterated:\\n\\n```\\n         L₁                  R₁                  R₁\\n      C --→ D             C ←-- D             C ←-- \"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"\"} Generic mate pasting is relevant but does not supply the normalized constructible exceptional restriction, its section pullback, and its deformation endpoint equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionInvariant|exceptional.*[Rr]estriction|deformationToNormalCone",
+   "results": "[grep] OK 0 hit(s) Generic mate pasting is relevant but does not supply the normalized constructible exceptional restriction, its section pullback, and its deformation endpoint equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Section pullback of exceptional adjunction etale precomposition agrees with base restriction and deformation comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens) {Z : AlgebraicGeometry.Scheme} (h : X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackRestrictIsoRestrict f U).inv\\n      (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst f U.ι) h) =\\n    Category\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $U$ be an open subscheme of $Y$. Let $p_1: X \\\\times_Y U \\\\to X$ be the projection from the pullback. Let $\\\\iota': X|_{f^{-1}(U)} \\\\to X$ be the inclusi\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.Over.mapPullbackAdj\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.OverAdjunction\", \"type\": \"(f : X ⟶ Y) [P.HasPullbacksAlong f] [P.IsStableUnderBaseChangeAlong f] [Q.HasOfPostcompProperty Q] (hPf : P f)\\n  (hQf : Q f) : Over.map Q hPf ⊣ Over.pullback P Q f\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{T}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{T}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{T}$, and morphism properties $P$ and $Q$ on $\\\\mathcal{T}$, if $P$\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Limits.pullbackComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [HasPullback f g] [HasPullback (G.map f) (G.map g)] :\\n  G.obj (pullback f g) ⟶ pullback (G.map f) (G.map g)\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$ with a pullback $P = X \\times_Z Y$, and a functor $G : \\\\mathcal{C} \\to \\\\mathcal{D}$ that preserves the pullback of $G(f)$ and $G\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.mapPullbackAdj\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \"{C : Type u₁} →\\n  {inst : CategoryTheory.Category.{v₁, u₁} C} →\\n    {Y X : C} →\\n      (f : Y ⟶ X) →\\n        [self : CategoryTheory.ChosenPullbacksAlong f] →\\n          CategoryTheory.Over.map f ⊣ CategoryTheory.ChosenPullbacksAlong.pullback f\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a morphism $f : Y \\\\to X$ in $\\\\mathcal{C}$, there is an adjunction between the functor $\\\\text{Over.map}\\\\, f : \\\\mathcal{C}/X \\\\to \\\\mathcal{C}/Y$ that composes morphisms\"}\n  {\"name\": \"CategoryTheory.Over.mapPullbackAdj\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Pullback\", \"type\": \"{X Y : C} (f : X ⟶ Y) [HasPullbacksAlong f] : Over.map f ⊣ pullback f\", \"doc\": \"For a morphism $ f : X \\to Y $ in a category $\\\\mathcal{C}$ with pullbacks along $f$, the pullback functor from the over category $\\\\mathcal{C}/Y$ to $\\\\mathcal{C}/X$ is left adjoint to the map functor in\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : pullback f U.ι ≅ f ⁻¹ᵁ U\", \"doc\": \"Let $X$ and $Y$ be schemes, $f: X \\\\to Y$ be a morphism between them, and $U$ be an open subset of $Y$. Let $\\\\iota : U \\\\to Y$ be the canonical inclusion morphism of the corresponding open subscheme. Th\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    {I J : C} →\\n      (f : I ⟶ J) →\\n        {inst_1 : CategoryTheory.ChosenPullbacksAlong f} →\\n          [self : CategoryTheory.ExponentiableMorphism f] →\\n            CategoryTheory.ChosenPullbacksAlong.pullback f ⊣ CategoryTheory.Exponent\", \"doc\": \"Given an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the pullback functor along $ f $ from the over-category $ \\\\mathcal{C}/J $ to $ \\\\mathcal{C}/I $ is left adjoint to the pushf\"} Generic mate pasting is relevant but does not supply the normalized constructible exceptional restriction, its section pullback, and its deformation endpoint equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary pullback of a smooth morphism restricted to a closed section commutes with etale changes of pairs through the right adjoint counit mates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackRestrictIsoRestrict f U).hom (f ∣_ U) =\\n    CategoryTheory.Limits.pullback.snd f U.ι\", \"doc\": \"For any schemes $X$ and $Y$, a morphism $f: X \\to Y$, and an open subset $U$ of $Y$, the composition of the homomorphism from the pullback isomorphism with the restriction of $f$ to $U$ equals the seco\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackRestrictIsoRestrict f U).hom\\n      ((TopologicalSpace.Opens.map f.base).obj U).ι =\\n    CategoryTheory.Limits.pullback.fst f U.ι\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and $U$ be an open subset of $Y$. Let $\\\\phi$ be the canonical isomorphism `pullbackRestrictIsoRestrict f U` which identifies the pullback $X \\\\times_Y Y|_U$ w\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_snd_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For indices $i, j, k$ in the zeroth component of an open cover $\\\\mathcal{U}$ of a scheme $X$, the composition of the morphism $t'$ with the second projections twice equals the composition of the first\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom (CategoryTheory.Limits.pullback.snd f I.subschemeι) =\\n    (I.comap f).subschemeMap I f ⋯\", \"doc\": \"Given a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the homomorphism component of the isomorphism between the comap subscheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.lift_comp_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (i : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.Limits.pullback.lift\\n        (CategoryTheo\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and index $i \\\\in \\\\mathcal{U}.I_0$, the composition of the second projection from the pullback $X \\\\times_Z Y$ t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the morphism $t'$ (constructed from horizontal p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the morphism $t'$ (constructed via horizontal pa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the morphism $t'\\\\mathcal{U} f g i j k$ with thre\"} Generic mate pasting is relevant but does not supply the normalized constructible exceptional restriction, its section pullback, and its deformation endpoint equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionInvariant|exceptional.*[Rr]estriction|deformationToNormalCone",
+   "results": "OK, zero hits in Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale locality of dualizing complexes restricted to smooth sections is compatible with normalized deformation to normal bundles",
+   "results": "Eight hits on localization of normalization diagrams and etale ring/scheme maps: Scheme.Hom.preservesLocalization_normalizationDiagramMap, RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.of_isLocalization, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.FormallyEtale.localization_base, Scheme.Etale, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat. None states the derived comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": "Service unavailable: HTTP 502 Bad Gateway.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized etale exceptional inverse image restriction isomorphisms on smooth section invariants and deformation to the normal cone commute with composition and base change",
+   "results": "Eight normalization-scheme hits (Scheme.Hom.toNormalization_fromNormalization, normalizationDiagramMap and related identities); none concerns exceptional inverse image or section/DNC comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image for an etale morphism is the ordinary pullback functor with counit compatible composition",
+   "results": "Eight hits about Scheme.Etale.forget, instHasPullbacksEtale, forgetFullyFaithful, instFullEtaleOverForget, IsEtale.instHasOfPostcompPropertyScheme, IsEtale.instFormallyUnramified, instCategoryEtale and IsEtale.instIsStableUnderBaseChangeScheme. These only concern scheme-morphism properties; no exceptional or DNC comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-diagonal-dnc-chart-normalization",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Composition-coherence Step 1, smooth base-change coherence and normalized DNC uniqueness; chart proof Step 3, comparison of actual section and family adjunctions; returned Steps 1–5 and 8, locality part",
+   "via": [
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-section-etale-restriction-coherence",
+  "worker": "stage1",
+  "summary": "Q146: kept the statement unchanged; supplied eight proof steps using existing nodes only. Explicitly expanded the normalized compositor equation, deduced arbitrary-base-change compatibility by cancelling the canonical tensor-composition map, reused the full Rees geometry lemma, and proved endpoint naturality by uniqueness of the family map normalized at t=1. No new nodes or Mathlib leaves.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1, locality/coherence of the DNC and smooth-base-change constituents; det-sp-orientation-charts proof Step 3, actual section and deformation adjunctions. Steps 1--3 provide normalized restriction coherence; 4--5 provide Rees geometry and family endpoints; 6--8 provide normalized DNC naturality and all further restrictions.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-section-rees-base-change-etale",
+    "why": "Generic geometric Rees base-change theorem for smooth closed sections on Noetherian schemes, independent of coefficients, adjunctions, orientations or the trace-formula unit. It supplies the missing etale map-of-pairs geometry without changing the diagonal/DNC route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic permanence of smooth relative dimension under composition and arbitrary base change supplies dimensions for the section and family pairs."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic canonical derived module pullback composition is required to identify actual section objects, rather than choosing isomorphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-section-rees-base-change-etale",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-84074413a",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-84074413a (reviewer sub-agent of L); spot-checked: I read the item, all 14 cited statements, and the main-20261015 sk-prop-sp-orientation-charts proof Step 3, whose route (compose adjunctions, ét ! = *, étale Rees map, normalize at t=1, uniqueness) the eight steps make explicit. The split has no new nodes, keeps the statement unchanged and cites no SGA. Recomputed: Step 2 gives E_{ab,g}=Lb^*E_{a,g}E_{b,ga}, from normalization clause (2), c-associativity (comp-composition α transferred by mate-pasting (2)-(4)) and naturality of ρ_b, so R_{ab}=R_aR_b in the right order. Step 3 is the tensor-pasting σ equality with clauses (2),(3) (η_{a0}β_{a,u}=Lu'^*η_a), cancelling the invertible σ, with no flatness used. Step 4: the Rees lemma's hypotheses all hold (B Noetherian, a separated étale, Cartesian centres). Steps 6-7: the normalization at t=1 plus uniqueness argument is sound and not circular; q=θ_0(i_0^*κ)^{-1} is identified with δ through charts (q_U=R_{n_e}^{-1}R_e), and R_nδ'=δR_a has the right directions. This matches what the citer lem-pur-diagonal-dnc-chart-normalization Step 2 uses. Edge cases checked: a=1, open immersions, d=0, empty B, non-flat base change. Duplicate search over the Rees/I/t nodes: lem-pur-dnc-etale-rees-chart covers the standard chart only; lem-pur-noetherian-etale-section-specialization is the Z/ℓ^n ordinary κ/δ; neither is a duplicate. Tool uses accepted: trf Rees base change, smooth-dimension permanence, derived pullback composition. Batch-5: the tensor-pasting and constancy flags add no trace-formula or Poincaré-duality nodes beyond the closure of the unchanged stmt_deps; their chains end in generic lisse-module or completed-scalar algebra. lem-trf-section-rees-base-change-etale adds only 7 coefficient-free Rees/centred-coordinate geometry nodes, which neither assumption gives, so it is accepted. Advisory only: the Rees lemma's Spec Sym(I/I²) normal bundle equals def-pur-normal-bundle's Spec gr_I canonically for a regular section."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PuritySectionEtaleRestriction",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionRestriction.coherence",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.SectionRestriction.coherence"
+  ],
+  "file": "lean/Sheaf/Paper/PuritySectionEtaleRestriction.lean",
+  "statement": "theorem coherence (P : PurityFiniteSetting.{u}) : Composition P ∧ BaseCompatibility P ∧ Endpoints P ∧ NormalizedBase P ∧ BasePasting P ∧ RankZero P",
+  "branch": "sheaf-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The unchanged coherence statement is proved from ordinary-etale functoriality, coefficientwise Rees composition, section base-comparison laws, fibre squares and normalized specialization. The main proof performs pro-etale conjugation, induced family and normal functoriality, mixed Rees naturality and normal-map cancellation, and assembles all six assertions. The published constructions are re-exported from PuritySectionRestrictionData."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4faa6bec",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean. R_a = pull s' of (congr then FiniteEtaleNormalization.sourceEtale, i.e. comp at the unit then rho at omega_g, clause (3)), then the inverse pullback-composition map, carried to the pro-etale objects by the recorded Dnc.sourceComparison. R_ab = R_a R_b and R_1 = 1 are in the right order. The base-change square holds for arbitrary b without flatness and uses the recorded Dnc.sectionBaseChange. The Rees map is the actual pairMap (upstream deformationSpaceMap). n is the Classical.choose of SectionReesBaseChange.etale's existence statement and is unique because the zero-fibre inclusion is mono. Endpoints at 1 and 0 use the recorded fibreOne/fibreZero; R_n delta' = delta R_a with delta from existsUnique_dncInvariance. NormalizedBase, BasePasting and RankZero cover the further-restriction and rank-zero clauses. Edge cases (empty base, d = 0, identity maps, non-flat b, n = 1) need no extra hypothesis; universes are unchanged. No hollow definitions; the five sorry theorems have proof docstrings; the statement field is verbatim. Advisories only: C(g,s) is Dnc.sourceSection rather than the def-pur-section-invariant record sectionInvariantFinite (forced by delta's typing); pairMap/etale are owned by lem-trf-section-rees-base-change-etale, a proof_dep only. No change made, so not recompiled; the worker reports a clean compile and dry run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ddfa7",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261025T124427-L-2011778",
+  "kind": "interface",
+  "note": "independent cc review: ddfa79a66945 Lean+node files byte-identical to C-31f1d-passed 31f1d1e1064f on an unchanged base; data module vs live item module (signatures/bodies preserved, four C9 geometry proofs re-landed); 4 sorried step statements vs item predicates; direct importers GeneralChartComparisons + SectionDncIntegrationSquare compiled"
+ }
+}

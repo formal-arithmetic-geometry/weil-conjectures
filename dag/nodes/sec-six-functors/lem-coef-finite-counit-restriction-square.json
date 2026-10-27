@@ -1,0 +1,414 @@
+{
+ "id": "lem-coef-finite-counit-restriction-square",
+ "kind": "statement",
+ "title": "Restriction-form finite counit square and quotient targets",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $a:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-scheme-morphism-properties], and fix one compactification $a=pj$. Write $F_n=Rp_{*,n}j_!$ for compact support on ordinary small pro-etale module derived categories [def-weil-integral-rational-qbar-compact-support].\n\nWrite $G_n=Ra_n^!$ for the finite constructible comparison-class exceptional functor [def-weil-exceptional-inverse-image], $\\omega_n=G_n(A_n)_s$, and $\\varepsilon_n:F_n\\omega_n\\to(A_n)_s$ for its counit. For $m\\ge n\\ge1$, set $T_W=-\\otimes^L_{(A_m)_W}(A_n)_W$, let $\\operatorname{Res}_{m,n}$ be scalar restriction, and let $\\eta$ be the unit of $T_s\\dashv\\operatorname{Res}_{m,n}$ [def-coef-normalized-dvr-tower]. Use the specified finite pro-etale realizations of the counit-defined comparison and compact-support coefficient isomorphism [lem-coef-finite-dualizing]:\n$$u_{m,n}:T_X\\omega_m\\xrightarrow{\\sim}\\omega_n,\\qquad c_{m,n}:T_sF_m\\omega_m\\xrightarrow{\\sim}F_nT_X\\omega_m.$$\nDefine the morphisms in $D(s_{\\mathrm{proet}},A_m)$\n$$d_{m,n}=\\operatorname{Res}_{m,n}\\bigl(F_n(u_{m,n})\\circ c_{m,n}\\bigr)\\circ\\eta_{F_m\\omega_m},$$\n$$v_{m,n}=\\operatorname{Res}_{m,n}(\\lambda_{m,n})\\circ\\eta_{(A_m)_s},$$\nwhere $\\lambda_{m,n}:T_s(A_m)_s\\xrightarrow{\\sim}(A_n)_s$ is the canonical scalar-unit isomorphism. Then\n$$\\operatorname{Res}_{m,n}(\\varepsilon_n)\\circ d_{m,n}=v_{m,n}\\circ\\varepsilon_m.$$\nUse derived point sections and constant-$R$ restriction [def-weil-finite-coefficient-point]. There are canonical target isomorphisms\n$$\\iota_n:\\operatorname{Res}^{A_n}_R R\\Gamma(s,(A_n)_s)\\xrightarrow{\\sim}A_n[0],$$\ngiven by the regular coefficient module and its constant sections, under which $R\\Gamma(s,v_{m,n})$ is the actual $R$-linear quotient $q_{m,n}[0]:A_m[0]\\to A_n[0]$. Thus, with $C_n=\\operatorname{Res}^{A_n}_R R\\Gamma(s,F_n\\omega_n)$, $\\bar d_{m,n}=R\\Gamma(s,d_{m,n})$ and $e_n=\\iota_n\\circ R\\Gamma(s,\\varepsilon_n)$, one has\n$$e_n\\circ\\bar d_{m,n}=q_{m,n}[0]\\circ e_m\\quad\\text{in }D(R).$$\nThe sheaf-level and section-level assertions include $m=n$ and agree with successive quotient compositions. They involve only the finite exceptional counits, the chosen compactification and scalar adjunctions; no strict dualizing representative or test object is chosen.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+  "place": "Proof paragraph 2, final sentences: dualizing comparisons defined by their counits identify the specified natural maps; restriction-form counit identity and actual quotient targets after point sections (returned trace-rectification step 5).",
+  "note": "Agent-formulated extraction of the retained returned proof, following the blueprint paragraph on specified finite maps. Complete original argument and extraction map are retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-finite-dualizing",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof": [
+  {
+   "text": "Put $b_{m,n}=F_n(u_{m,n})\\circ c_{m,n}$. Apply [lem-coef-finite-dualizing] with its $A=A_m$, $B=A_n$. Its counit identity, including the canonical scalar-unit identification $\\lambda_{m,n}$, gives $\\varepsilon_n\\circ F_n(u_{m,n})=\\lambda_{m,n}\\circ T_s(\\varepsilon_m)\\circ c_{m,n}^{-1}$. Compose on the right with $c_{m,n}$ to obtain $\\varepsilon_n\\circ b_{m,n}=\\lambda_{m,n}\\circ T_s(\\varepsilon_m)$. The same node specifies the finite pro-etale realization, so this is an equality for the counits and the chosen compact-support comparisons in the statement, without assuming an exceptional adjoint on arbitrary pro-etale inputs.",
+   "uses": [
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph, final sentences: comparisons defined by their counits identify the specified natural maps; expanded restriction-form calculation."
+   }
+  },
+  {
+   "text": "Write $\\operatorname{Res}=\\operatorname{Res}_{m,n}$ and $\\eta=\\eta^{m,n}$. The tensor-restriction adjunction of [def-coef-normalized-dvr-tower] has natural unit, so $\\operatorname{Res}(T_s\\varepsilon_m)\\circ\\eta_{F_m\\omega_m}=\\eta_{(A_m)_s}\\circ\\varepsilon_m$. Functoriality of restriction and step 1 therefore give the explicit calculation $$\\operatorname{Res}(\\varepsilon_n)\\circ d_{m,n}=\\operatorname{Res}(\\varepsilon_n\\circ b_{m,n})\\circ\\eta_{F_m\\omega_m}=\\operatorname{Res}(\\lambda_{m,n})\\circ\\operatorname{Res}(T_s\\varepsilon_m)\\circ\\eta_{F_m\\omega_m}=v_{m,n}\\circ\\varepsilon_m.$$ Only naturality of the unit and associativity of composition are used here.",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph, final sentences: comparisons defined by their counits identify the specified natural maps; expanded restriction-form calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-pod-point-exact-extension-sections] at the finite pair $(A_n,(A_n)_s)$. Its exact sections functor computes derived sections termwise, and its constant-value ring isomorphism $A_n\\xrightarrow{\\sim}\\Gamma(s,(A_n)_s)$ identifies the regular module with its constant sections. The inverse, placed in degree zero and restricted along $R\\to A_n$, is precisely $\\iota_n$. This uses the finite constant coefficient sheaf, not the completed integral sheaf, and gives an isomorphism of objects of $D(R)$, rather than just a cohomology-group identification.",
+   "uses": [
+    "lem-pod-point-exact-extension-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph, final sentences: comparisons defined by their counits identify the specified natural maps; expanded restriction-form calculation."
+   }
+  },
+  {
+   "text": "Compute $v_{m,n}$ on the regular sheaf $(A_m)_s$ itself. It is free of rank one over itself and concentrated in degree zero, so its tensor with $(A_n)_s$ already computes the derived tensor. The unit formula in [def-coef-normalized-dvr-tower] sends a local section $a$ to $a\\otimes1$, and $\\lambda_{m,n}$ sends $a\\otimes b$ to $q_{m,n}(a)b$. Hence $v_{m,n}$ is exactly the constant-sheaf quotient map $a\\mapsto q_{m,n}(a)$. Evaluating on constant sections with the identifications of step 3 gives $$\\iota_n\\circ R\\Gamma(s,v_{m,n})=q_{m,n}[0]\\circ\\iota_m,$$ with all finite objects and morphisms restricted to $R$ as in the statement.",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph, final sentences: comparisons defined by their counits identify the specified natural maps; expanded restriction-form calculation."
+   }
+  },
+  {
+   "text": "Apply derived point sections followed by constant-$R$ restriction to the equality in step 2. These are functors, so preserve its composites. Composing the resulting equality on the left with $\\iota_n$ and substituting step 4 gives $$e_n\\circ\\bar d_{m,n}=\\iota_nR\\Gamma(s,\\varepsilon_n)R\\Gamma(s,d_{m,n})=\\iota_nR\\Gamma(s,v_{m,n})R\\Gamma(s,\\varepsilon_m)=q_{m,n}[0]\\circ e_m.$$ This is an equality in $D(R)$ itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph, final sentences: comparisons defined by their counits identify the specified natural maps; expanded restriction-form calculation."
+   }
+  },
+  {
+   "text": "For successive levels $r\\ge m\\ge n$, suppress only the canonical iterated-tensor associators. Work first on the ordinary etale realizations and then transport by [lem-coef-finite-dualizing]. The finite-Tor constructibility of every $\\omega_j$ is supplied by [lem-coef-dualizing-construction]; the isomorphism $T_X^{r,m}\\omega_r\\cong\\omega_m$ in [lem-coef-finite-dualizing] verifies the finite-Tor input hypothesis for each coefficient comparison below. Naturality and successive-reduction compatibility of $c$ in [lem-fix-compact-support-coefficient-change], and the cocycle for $u$ in [lem-coef-finite-dualizing], give $$\\begin{aligned}b_{r,n}&=F_n(u_{m,n}\\circ T_X^{m,n}u_{r,m})\\circ c_{r,n}\\\\&=F_n(u_{m,n})\\circ F_n(T_X^{m,n}u_{r,m})\\circ c^{m,n}_{T_X^{r,m}\\omega_r}\\circ T_s^{m,n}(c_{r,m})\\\\&=b_{m,n}\\circ T_s^{m,n}(b_{r,m}).\\end{aligned}$$ In the last equality use $F_n(T_X^{m,n}u_{r,m})\\circ c^{m,n}_{T_X^{r,m}\\omega_r}=c^{m,n}_{\\omega_m}\\circ T_s^{m,n}(F_m u_{r,m})$. Taking transposes under the composite tensor-restriction adjunction of [def-coef-normalized-dvr-tower] yields $d_{r,n}=\\operatorname{Res}_{r,m}(d_{m,n})\\circ d_{r,m}$: this is the ordinary composition rule for transposes $h\\mapsto\\operatorname{Res}(h)\\circ\\eta$, obtained by substituting this formula twice and using unit naturality. The identity normalizations of $u$ and $c$ likewise give $d_{n,n}=1$. Step 4 identifies every $v$ with the quotient sheaf map, whose identity and composite are $q_{n,n}=1$ and $q_{r,n}=q_{m,n}q_{r,m}$. Applying the same sections functor gives all identity and composition assertions at section level. Every construction used above is finite; no representative of a strict dualizing tower or test object was selected.",
+   "uses": [
+    "lem-fix-compact-support-coefficient-change",
+    "lem-coef-finite-dualizing",
+    "def-coef-normalized-dvr-tower",
+    "lem-coef-dualizing-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph, final sentences: comparisons defined by their counits identify the specified natural maps; expanded restriction-form calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-dualizing",
+  "def-coef-normalized-dvr-tower",
+  "lem-pod-point-exact-extension-sections",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-coef-dualizing-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second paragraph, final sentences: comparisons defined by their counits identify the specified natural maps; expanded restriction-form calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived point sections of a finite exceptional counit commute with coefficient quotient maps after the scalar extension restriction adjunction.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "ModuleCat.RestrictionCoextensionAdj.counit'",
+     "ModuleCat.restrictCoextendScalarsAdj",
+     "CategoryTheory.Adjunction.derivedε",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+     "ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+     "ModuleCat.ExtendRestrictScalarsAdj.homEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and abstract counit naturality are ingredients, but do not state the finite exceptional counit square and its canonical point-section quotient targets"
+  },
+  {
+   "tool": "grep",
+   "query": "(counit.*quotient|quotient.*counit|sections.*restrictScalars)",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Coalgebra/Quotient.lean",
+     "Mathlib/CategoryTheory/Skeletal.lean",
+     "Mathlib/CategoryTheory/Skeletal.lean",
+     "Mathlib/CategoryTheory/Category/ReflQuiv.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and abstract counit naturality are ingredients, but do not state the finite exceptional counit square and its canonical point-section quotient targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"unit\", \"naturality\"",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Equivalence.counitInv_naturality",
+     "CategoryTheory.Equivalence.counit_naturality",
+     "CategoryTheory.Equivalence.counitInv_naturality_assoc",
+     "CategoryTheory.Equivalence.counit_naturality_assoc",
+     "CategoryTheory.Adjunction.counit_naturality",
+     "CategoryTheory.Adjunction.counit_naturality_assoc",
+     "CategoryTheory.Comonad.counit_naturality",
+     "CategoryTheory.Comonad.counit_naturality_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and abstract counit naturality are ingredients, but do not state the finite exceptional counit square and its canonical point-section quotient targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dualizing exceptional counits after derived compact support and point sections are compatible with quotient coefficient maps using the projection transpose and tensor restriction unit.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "LightCondensed.ihomPoints_symm_comp",
+     "CompHausLike.LocallyConstant.counitAppApp",
+     "CompHausLike.LocallyConstant.adjunction_left_triangle",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "CompHausLike.LocallyConstant.incl_of_counitAppApp",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "Condensed.profiniteSolidCounit",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and abstract counit naturality are ingredients, but do not state the finite exceptional counit square and its canonical point-section quotient targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exceptional adjunction counit defined coefficient change induces a commutative restriction scalar counit square, whose point sections target map is the ordinary coefficient ring quotient.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+     "ModuleCat.RestrictionCoextensionAdj.counit'_app",
+     "ModuleCat.RestrictionCoextensionAdj.counit'",
+     "ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+     "ModuleCat.ExtendRestrictScalarsAdj.counit",
+     "ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+     "ModuleCat.instIsRightAdjointRestrictScalars",
+     "ModuleCat.RestrictionCoextensionAdj.unit'_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions and abstract counit naturality are ingredients, but do not state the finite exceptional counit square and its canonical point-section quotient targets"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*quotient|quotient.*counit|dualizing.*counit",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Coalgebra/Quotient.lean",
+     "Mathlib/CategoryTheory/Skeletal.lean",
+     "Mathlib/CategoryTheory/Skeletal.lean",
+     "Mathlib/CategoryTheory/Category/ReflQuiv.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction naturality is an ingredient; the hits do not state the finite exceptional counit square together with its specified point-section quotient targets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of finite dualizing counits with change of coefficients and canonical quotient targets after derived point sections",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε",
+     "Pi.counit_coe_dFinsupp",
+     "CoalgHomClass.counit_comp_apply",
+     "CoalgebraStruct.counit",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CoalgCat.counit_def",
+     "ModuleCat.RestrictionCoextensionAdj.counit'",
+     "IsBaseChange.dual"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction naturality is an ingredient; the hits do not state the finite exceptional counit square together with its specified point-section quotient targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit_naturality\"",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Equivalence.counit_naturality",
+     "CategoryTheory.Equivalence.unit_naturality",
+     "CategoryTheory.Equivalence.counit_naturality_assoc",
+     "CategoryTheory.Equivalence.unit_naturality_assoc",
+     "CategoryTheory.Adjunction.counit_naturality",
+     "CategoryTheory.Adjunction.unit_naturality",
+     "CategoryTheory.Adjunction.counit_naturality_assoc",
+     "CategoryTheory.Adjunction.unit_naturality_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction naturality is an ingredient; the hits do not state the finite exceptional counit square together with its specified point-section quotient targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite exceptional dualizing counits commute with restriction of quotient coefficients and point sections give the actual quotient ring map",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Ideal.to_quotient_square_comp_toCotangent",
+     "Ideal.quotientToQuotientRangePowQuotSuccAux_mk",
+     "Ideal.quotientToQuotientRangePowQuotSucc_mk",
+     "Algebra.Generators.cotangentCompAwaySec_apply",
+     "Ideal.quotient_mk_maps_eq",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "Algebra.Generators.map_comp_cotangentCompAwaySec"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction naturality is an ingredient; the hits do not state the finite exceptional counit square together with its specified point-section quotient targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking scalar adjunction transpose of a coefficient change compatible trace gives a commutative square; constant coefficient point sections identify trace targets with quotient rings",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Algebra.intTraceAux",
+     "trace_quotient_eq_trace_localization_quotient",
+     "Algebra.traceMatrix_localizationLocalization",
+     "Algebra.trace_quotient_mk",
+     "Algebra.map_intTraceAux",
+     "Algebra.trace_localization",
+     "Algebra.trace_quotient_eq_of_isDedekindDomain",
+     "Algebra.trace_comp_trace"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction naturality is an ingredient; the hits do not state the finite exceptional counit square together with its specified point-section quotient targets"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-tower-trace-rectification",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, final sentences: dualizing comparisons defined by their counits identify the specified natural maps; restriction-form counit identity and actual quotient targets after point sections (returned trace-rectification step 5).",
+   "via": [
+    "lem-coef-tower-trace-rectification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-finite-counit-restriction-square",
+  "worker": "stage1",
+  "summary": "Six-step explicit counit and scalar-unit calculation, using the existing finite dualizing, exact point extension/sections, and compact-support coefficient coherence nodes. Statement retained verbatim. No new nodes are needed; identity levels and successive quotients are checked on the specified maps. Searches of the current upstream project found no exact attachment.",
+  "blueprint": "prop-coef-integral-dualizing proof paragraph 2, final sentences: steps 1--2 give the restriction-form finite counit identity; steps 3--5 identify the actual quotient targets after point sections; step 6 verifies coherent identities and successive reductions.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-point-exact-extension-sections",
+    "why": "Generic point sections tool giving exact sections and the specified constant-value coefficient ring isomorphism; this unit has no separate statement of that normalization."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Generic coefficient-comparison coherence tool used for successive quotients of the chosen compact-support maps, as required by the finite-dualizing route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-point-exact-extension-sections",
+  "lem-fix-compact-support-coefficient-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-c0538d97f",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-c0538d97f (reviewer sub-agent of L); spot-checked: Read in full against blueprint master prop-coef-integral-dualizing proof paragraph 2, last sentences (the dualizing comparisons are defined by their counits, so the four lines identify the specified natural maps); main-20261015 proof.md has the same text. Statement verbatim against the live unsplit node; no new nodes; no repair note applies, so the re-split rule does not apply. Step 1: the counit identity of lem-coef-finite-dualizing (indices swapped: its A=A_m, B=A_n), composed with c, gives eps_n b = lambda T eps_m. Its pro-etale form uses the node's realization sentence and the transported counit of def-weil-exceptional-inverse-image. Step 2: unit naturality; calculation checked. Step 3: lem-pod-point-exact-extension-sections, finite alternative (exact Gamma_s and constant-value ring isomorphism) gives iota_n. Step 4: on the free sheaf (A_m)_s, v = (a -> a⊗1 -> q(a)), so iota_n RGamma(v) = q[0] iota_m. Step 5: functoriality. Step 6: b_{r,n} = b_{m,n} T(b_{r,m}) checked from the u-cocycle, the successive-reduction compatibility of c and naturality of c; finite-Tor of omega comes from lem-coef-dualizing-construction. The transpose rule d_{r,n} = Res(d_{m,n}) d_{r,m} checked via unit naturality and the composite adjunction unit. Advisory: c_{n,n} = 1 is not verbatim in lem-fix but is immediate. Edge cases checked: m=n, n=1, X empty, X=s, the nonflat A_2->A_1 (only underived tensor is on a free module). Off-route tool uses lem-pod-point-exact-extension-sections and lem-fix-compact-support-coefficient-change are declared and accepted as generic black-box tools. No duplicate found by grep -R over the snapshot DAG; no cycle; no SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteCounitRestrictionSquare",
+  "declaration": "WeilConjectures.FiniteCounitRestriction.finiteCounitRestrictionSquare",
+  "declarations": [
+   "WeilConjectures.FiniteCounitRestriction.siteSmall",
+   "WeilConjectures.FiniteCounitRestriction.etaleExceptional",
+   "WeilConjectures.FiniteCounitRestriction.etaleOmega",
+   "WeilConjectures.FiniteCounitRestriction.etaleSupport",
+   "WeilConjectures.FiniteCounitRestriction.etaleAdjunction",
+   "WeilConjectures.FiniteCounitRestriction.etaleCounit",
+   "WeilConjectures.FiniteCounitRestriction.comparison",
+   "WeilConjectures.FiniteCounitRestriction.compactComparison",
+   "WeilConjectures.FiniteCounitRestriction.etaleTransition",
+   "WeilConjectures.FiniteCounitRestriction.etaleUnitTransition",
+   "WeilConjectures.FiniteCounitRestriction.realization",
+   "WeilConjectures.FiniteCounitRestriction.omega",
+   "WeilConjectures.FiniteCounitRestriction.omegaOrigin",
+   "WeilConjectures.FiniteCounitRestriction.omegaPlus",
+   "WeilConjectures.FiniteCounitRestriction.value",
+   "WeilConjectures.FiniteCounitRestriction.valueOrigin",
+   "WeilConjectures.FiniteCounitRestriction.unitOrigin",
+   "WeilConjectures.FiniteCounitRestriction.counit",
+   "WeilConjectures.FiniteCounitRestriction.transition",
+   "WeilConjectures.FiniteCounitRestriction.unitTransition",
+   "WeilConjectures.FiniteCounitRestriction.integralRing",
+   "WeilConjectures.FiniteCounitRestriction.integralQuotient",
+   "WeilConjectures.FiniteCounitRestriction.integralRestrictionComp",
+   "WeilConjectures.FiniteCounitRestriction.sections",
+   "WeilConjectures.FiniteCounitRestriction.sections_additive",
+   "WeilConjectures.FiniteCounitRestriction.sections_limits",
+   "WeilConjectures.FiniteCounitRestriction.sections_colimits",
+   "WeilConjectures.FiniteCounitRestriction.finiteSections",
+   "WeilConjectures.FiniteCounitRestriction.quotientModule",
+   "WeilConjectures.FiniteCounitRestriction.quotientMap",
+   "WeilConjectures.FiniteCounitRestriction.sectionTransition",
+   "WeilConjectures.FiniteCounitRestriction.sectionUnitTransition",
+   "WeilConjectures.FiniteCounitRestriction.ordinaryUnitIso",
+   "WeilConjectures.FiniteCounitRestriction.constantSections",
+   "WeilConjectures.FiniteCounitRestriction.targetSingleIso",
+   "WeilConjectures.FiniteCounitRestriction.targetConstantMap",
+   "WeilConjectures.FiniteCounitRestriction.restrictionUnit",
+   "WeilConjectures.FiniteCounitRestriction.restrictionComp",
+   "WeilConjectures.FiniteCounitRestriction.finiteCounitRestrictionSquare"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteCounitRestrictionSquare.lean",
+  "statement": "theorem finiteCounitRestrictionSquare (_hl : l ≠ D.p) : (∀ {m n : ℕ} (h : n ≤ m), transition l E D X c h ≫ (Sheaf.derivedRestrictScalars.{u} (ProEt.topology (Spec (.of D.k))) (finiteDualizingQuotient l E h)).map (counit l E D X c n) = counit l E D X c m ≫ unitTransition l E D h) ∧ (∀ n : ℕ, transition l E D X c (le_refl n) ≫ (restrictionUnit l E D n).hom.app (value l E D X c n) = 𝟙 _) ∧ (∀ n : ℕ, unitTransition l E D (le_refl n) ≫ (restrictionUnit l E D n).hom.app (𝟙_ _) = 𝟙 _) ∧ (∀ {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m), transition l E D X c (hmn.trans hrm) ≫ (restrictionComp l E D hrm hmn).inv.app (value l E D X c n) = transition l E D X c hrm ≫ (Sheaf.derivedRestrictScalars.{u} (ProEt.topology (Spec (.of D.k))) (finiteDualizingQuotient l E hrm)).map (transition l E D X c hmn)) ∧ (∀ {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m), unitTransition l E D (hmn.trans hrm) ≫ (restrictionComp l E D hrm hmn).inv.app (𝟙_ _) = unitTransition l E D hrm ≫ (Sheaf.derivedRestrictScalars.{u} (ProEt.topology (Spec (.of D.k))) (finiteDualizingQuotient l E hrm)).map (unitTransition l E D hmn)) ∧ ∃ ι : ∀ n : ℕ, (finiteSections l E D n).obj (𝟙_ _) ≅ (DerivedCategory.singleFunctor (ModuleCat.{u + 1} (integralRing l E)) 0).obj (quotientModule l E n), (∀ n : ℕ, targetConstantMap l E D n ≫ (ι n).hom = 𝟙 _) ∧ (∀ {m n : ℕ} (h : n ≤ m), sectionUnitTransition l E D h ≫ (ι n).hom = (ι m).hom ≫ (DerivedCategory.singleFunctor (ModuleCat.{u + 1} (integralRing l E)) 0).map (quotientMap l E h)) ∧ (∀ {m n : ℕ} (h : n ≤ m), sectionTransition l E D X c h ≫ (finiteSections l E D n).map (counit l E D X c n) ≫ (ι n).hom = (finiteSections l E D m).map (counit l E D X c m) ≫ (ι m).hom ≫ (DerivedCategory.singleFunctor (ModuleCat.{u + 1} (integralRing l E)) 0).map (quotientMap l E h)) ∧ (∀ n : ℕ, sectionTransition l E D X c (le_refl n) = 𝟙 _) ∧ (∀ n : ℕ, sectionUnitTransition l E D (le_refl n) = 𝟙 _) ∧ (∀ {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m), sectionTransition l E D X c (hmn.trans hrm) = sectionTransition l E D X c hrm ≫ sectionTransition l E D X c hmn) ∧ (∀ {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m), sectionUnitTransition l E D (hmn.trans hrm) = sectionUnitTransition l E D hrm ≫ sectionUnitTransition l E D hmn)",
+  "branch": "sheaf-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical maps for any retained compactification, using the recorded finite coefficients and ordinary-etale exceptional/scalar adjunctions, then the specified pro-etale realizations. Includes the actual quotient target in degree zero, constant-section normalization, and identity/composition at both levels. Natural index n denotes positive exponent n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e35e4c00",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Read node, report, module in full, and dep Lean (FiniteDualizing, SfFiniteExceptionalInverseImage, FiniteCoefficientPoint, ExceptionalCoefficientMaps, Compactification.Defs, LowerShriekIndependenceUnbounded). All clauses render the node: sheaf-level Res(eps_n)d = v eps_m for all n<=m, identity and successive-quotient laws for d and v via restrictionUnit/restrictionComp, section level with iota fixed as inverse of the actual constant-section map, RGamma(v) = q[0], e_n dbar = q[0] e_m in D(R), section identity/cocycles. Hypotheses exact (l != p, E finite over Q_l, X sep/ft instances included); index n means exponent n+1 so exactly n>=1. Arbitrary c threaded correctly: HasCompactification is a Prop so letI does not pin c; the adjunction is transported by rightDerivedLowerShriekIso c, and compactSupportMap and compactSupportSiteComparison take c. lean.statement verbatim, declarations complete, single sorry, no hollow defs, docstrings with source/blueprint and 6 proof steps, lines <=100, node changed only in lean. Advisories: helper copies of finiteDualizing* generalized to arbitrary c (dep pinned to its chosen compactification); fixed-coefficient model vs intrinsic recorded Res/point sections (equivalent); uncited helper owners (def-per-exceptional-coefficient-maps, def-pur-exceptional-coefficient-normalizations, def-weil-pbc-witness-compatibility, def-weil-pbc-normalized-origin-scalar-comparisons, def-sf-compact-support-site-comparison-construction, lem-weil-boundary-dualizing-composition) are the same transports the cited lem-coef-finite-dualizing uses; second reading is the group's own. No compile run (no change)."
+ }
+}

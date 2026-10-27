@@ -22,6 +22,10 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
+-- Match the proposition arguments of the cached degree-zero and class constructions.
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+
 /-- Constants adjunction followed by evaluation of an A-linear map at one. -/
 private noncomputable def constantModuleHomEquiv (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
@@ -158,6 +162,7 @@ theorem ordinaryFiniteClass_bijective_arbitraryBase (A : Type (u + 1)) [CommRing
   have h := bijective_extToSheafHOf_arbitraryBase A (ordinaryFiniteIntegralGenerator A T)
     (integralGenerator_bijective A T) n F
   unfold ordinaryFiniteClass
-  exact h.comp Ext.homEquiv.symm.bijective
+  exact h.comp
+    (ordinaryFiniteExtHomEquiv A T (ordinaryFiniteConstant A T) F n).symm.bijective
 
 end AlgebraicGeometry.Etale

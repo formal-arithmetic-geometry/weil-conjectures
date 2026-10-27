@@ -10,7 +10,7 @@ public import Sheaf.Paper.RefinementCoefficientRealization
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Sheaf.Paper.FiniteCoefficientIntrinsicConstructibility
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 
@@ -28,6 +28,57 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+-- The finite truncation argument only needs constructible comparison and full faithfulness.
+-- Keep this local so that the unrelated perfect-duality and smooth-trace theory is not imported.
+open ProEtale ProEtale.DerivedCategory in
+open scoped CategoryTheory.Functor in
+private theorem origin_boundedConstructible_isTriangulated
+    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+    (boundedConstructible (ModuleCat.{u + 1} Λ) X).IsTriangulated := by
+  let F := D(ν^*(X)[ModuleCat.{u + 1} Λ])
+  have : (boundedConstructible (ModuleCat.{u + 1} Λ) X).IsTriangulatedClosed₃ := by
+    refine ObjectProperty.IsTriangulatedClosed₃.mk' fun T hT ⟨A, hA, ⟨e₁⟩⟩ ⟨B, hB, ⟨e₂⟩⟩ ↦ ?_
+    obtain ⟨f, hf⟩ := (bijective_comparisonUpperStar_mapDerivedCategory_map A B hB.1.1).2
+      (e₁.hom ≫ T.mor₁ ≫ e₂.inv)
+    obtain ⟨Z, g, h, hZ⟩ := Pretriangulated.distinguished_cocone_triangle f
+    obtain ⟨e, -, -⟩ := Pretriangulated.exists_iso_of_arrow_iso _ T
+      (F.map_distinguished _ hZ) hT (Arrow.isoMk e₁ e₂ (by
+        have hf' : F.map f = e₁.hom ≫ T.mor₁ ≫ e₂.inv := hf
+        change e₁.hom ≫ T.mor₁ = F.map f ≫ e₂.hom
+        simp [hf']))
+    exact ⟨Z, (Etale.DerivedCategory.boundedConstructible _ X).ext_of_isTriangulatedClosed₃ _
+      hZ hA hB, ⟨Pretriangulated.Triangle.π₃.mapIso e⟩⟩
+  have : (boundedConstructible (ModuleCat.{u + 1} Λ) X).IsStableUnderShift ℤ :=
+    ⟨fun n ↦ ⟨fun K ⟨A, hA, ⟨e⟩⟩ ↦ ⟨A⟦n⟧,
+      (Etale.DerivedCategory.boundedConstructible _ X).le_shift n _ hA,
+      ⟨(F.commShiftIso n).app A ≪≫ (shiftFunctor _ n).mapIso e⟩⟩⟩⟩
+  have : (boundedConstructible (ModuleCat.{u + 1} Λ) X).IsTriangulatedClosed₂ :=
+    ObjectProperty.IsTriangulatedClosed₂.of_isTriangulatedClosed₃
+  obtain ⟨Z, hZ, hZP⟩ := ObjectProperty.ContainsZero.exists_zero
+    (P := Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X)
+  exact { exists_zero := ⟨F.obj Z, F.map_isZero hZ,
+    boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hZP⟩ }
+
+open ProEtale ProEtale.DerivedCategory in
+open scoped CategoryTheory.Functor in
+private theorem origin_boundedConstructible_of_homology
+    {X : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : _root_.DerivedCategory.TStructure.t.bounded K)
+    (hH : ∀ n, ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F ∧
+      Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F ≅
+        (_root_.DerivedCategory.homologyFunctor _ n).obj K)) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X K := by
+  let := origin_boundedConstructible_isTriangulated X Λ
+  let P : ObjectProperty (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
+    fun G ↦ ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F ∧
+      Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F ≅ G)
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e ⟨F, hF, ⟨e'⟩⟩ ↦ ⟨F, hF, ⟨e' ≪≫ e⟩⟩⟩
+  refine _root_.DerivedCategory.prop_of_bounded _ P (fun G ⟨F, hF, ⟨e⟩⟩ ↦ ?_) K hK hH
+  exact ⟨_, Etale.DerivedCategory.boundedConstructible_singleFunctor_obj _ 0,
+    ⟨((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _ ≪≫
+      (_root_.DerivedCategory.singleFunctor _ 0).mapIso e⟩⟩
 
 private def restrictCancelIso (X : Scheme.{u})
     {R S : Sheaf (ProEt.topology X) RingCat.{u + 1}} (α : R ⟶ S) (β : S ⟶ R)
@@ -189,7 +240,7 @@ theorem finiteCoefficient_constructibleDerived_origin_presentation
     exact intrinsic_constructible_of_iso X B
       ((pbcRestrict e.hom).mapIso eH.symm) (hconstructible i)
   obtain ⟨L, hL, ⟨eL⟩⟩ :=
-    ProEtale.DerivedCategory.boundedConstructible_of_homology B hJ
+    origin_boundedConstructible_of_homology B hJ
       (fun i ↦ ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj B (hH i))
   have hLP : Etale.DerivedCategory.isBoundedConstructible B X L := by
     refine ⟨fun i ↦ (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2

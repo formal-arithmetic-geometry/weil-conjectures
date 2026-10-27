@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-relative-birational-group-law",
+ "kind": "definition",
+ "title": "Relative rational maps and birational group laws",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X,Y$ schemes over $S$. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. A subset $U\\subseteq X$ is $S$-dense when its inverse image in $X_s$ is dense for every $s\\in S$. A representative of an $S$-rational map $X\\dashrightarrow Y$ consists of an $S$-dense open $D\\subseteq X$ and an $S$-morphism $D\\to Y$. Two representatives agree when their restrictions to an $S$-dense common open agree; relative rational maps are the quotient by this agreement. Such a map is $S$-birational when it is represented, after restriction, by an open immersion [def-weil-open-immersion] with $S$-dense image (equivalently, an isomorphism between $S$-dense opens). For a representative $m:X\\times_S X\\dashrightarrow X$, its universal translations are $(x,y)\\mapsto(x,m(x,y))$ and $(x,y)\\mapsto(m(x,y),y)$. The representative is associative when $(xy)z=x(yz)$ wherever both composites are defined, as morphisms of schemes, equivalently on points valued in every test $S$-scheme. It is an $S$-birational group law when both universal translations are $S$-birational and it is associative.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 2.5, S-density and S-rational maps; 5.1 Definition 1, printed p.112 (PDF p.118); primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative rational maps defined on opens dense in every scheme theoretic fibre and birational group laws",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mk\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (domain : X.Opens) → Dense ↑domain → (↑domain ⟶ Y) → X.PartialMap Y\", \"doc\": \"Given schemes $X$ and $Y$, an open subset $U$ of $X$ that is dense, and a morphism of schemes from $U$ to $Y$, this constructor produces a partial map from $X$ to $Y$ defined on the dense open subset \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(X Y : Scheme.{u}) : Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) (U : X.Opens) (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) : X.PartialMap Y\", \"doc\": \"Given a partial map $f$ from a scheme $X$ to a scheme $Y$, and a dense open subset $U$ of $X$ that is contained in the domain of $f$, this function constructs a new partial map from $X$ to $Y$ by rest\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toPartialMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.Hom Y) : X.PartialMap Y\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is converted into a partial map from $ X $ to $ Y $, defined on the entire underlying topological space of $ X $, which is dense by default.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : Dense (X := X) f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) (U : X.Opens) (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').toRationalMap = f.toRationalMap\", \"doc\": \"For schemes $X$ and $Y$, if $f$ is a partial map from $X$ to $Y$ and $U$ is a dense open subset of $X$ contained in the domain of $f$, then the rational map obtained by restricting $f$ to $U$ is equal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) [IrreducibleSpace X] {U : X.Opens} (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"Sort u_1 →\\n  {X Y : AlgebraicGeometry.Scheme} → X.PartialMap Y → {X' Y' : AlgebraicGeometry.Scheme} → X'.PartialMap Y' → Sort u_1\", \"doc\": \"The type of rational maps between two schemes, defined as equivalence classes of partial maps with dense domains. Two partial maps are considered equivalent if they agree on a dense open subset of the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching relative notion. Mathlib PartialMap and RationalMap require total-space density, not density in every fibre; IsDominant also concerns the total space. The DAG, blueprint, WeilConjectures and Sheaf searches find no existing definition of relative rational maps or birational group laws."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subset of a scheme over a base is dense in every fiber",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U V : X.Opens},\\n  Dense ↑U → ∀ (hU' : U ≤ V), AlgebraicGeometry.IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsDominant f ↔ DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is dominant if and only if the underlying continuous function of its base map $ f_{\\\\text{base}} : X \\to Y $ has dense image in $ Y $, i.e., the closure of the image\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching relative notion. Mathlib PartialMap and RationalMap require total-space density, not density in every fibre; IsDominant also concerns the total space. The DAG, blueprint, WeilConjectures and Sheaf searches find no existing definition of relative rational maps or birational group laws."
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeRational|FiberwiseDense|FibrewiseDense|BirationalGroupLaw",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching relative notion. Mathlib PartialMap and RationalMap require total-space density, not density in every fibre; IsDominant also concerns the total space. The DAG, blueprint, WeilConjectures and Sheaf searches find no existing definition of relative rational maps or birational group laws."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-birational-group-envelope",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Relative rational multiplication and the universal translations in BLR 5.1 Definition 1.",
+   "via": [
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeBirationalGroupLaw",
+  "declaration": "AlgebraicGeometry.RelativeGroupLaw.IsFiberwiseDense",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeBirationalGroupLaw.lean",
+  "statement": "def IsFiberwiseDense {S : Scheme.{u}} (X : Over S) (U : Set X.left) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.RelativeGroupLaw.IsFiberwiseDense",
+   "AlgebraicGeometry.RelativeGroupLaw.Representative",
+   "AlgebraicGeometry.RelativeGroupLaw.Representative.source",
+   "AlgebraicGeometry.RelativeGroupLaw.Representative.inclusion",
+   "AlgebraicGeometry.RelativeGroupLaw.Representative.Agrees",
+   "AlgebraicGeometry.RelativeGroupLaw.RationalMap",
+   "AlgebraicGeometry.RelativeGroupLaw.IsBirationalOnDomain",
+   "AlgebraicGeometry.RelativeGroupLaw.leftTranslation",
+   "AlgebraicGeometry.RelativeGroupLaw.rightTranslation",
+   "AlgebraicGeometry.RelativeGroupLaw.IsAssociative",
+   "AlgebraicGeometry.RelativeGroupLaw.IsBirationalGroupLaw"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-395786d76",
+  "group": "Q110",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-395786d76",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Every clause matches the item and BLR 4.3 Thm 6 / 5.1 Thm 5: DVR R and its fraction field; Y smooth/LOFT/QC/separated with nonempty special fibre; G with Y_E≅G via e; representative m whose domain contains the whole generic fibre and agrees with μ_G there; hLaw has the birational translations and associativity on test-scheme points; conclusion is M smooth/LOFT/QC/separated, j an open immersion with T-dense image, j_E a group iso via a, and μ restricting to m on all of its domain (true because the domain is reduced with dense generic fibre and M is separated). The new def node def-sfb-relative-birational-group-law is real (fibrewise density, Representative/Agrees/Quot, translations, IsBirationalOnDomain, IsAssociative), with docstrings and correct stmt_deps. No duplicate on live or side-live; Mathlib RationalMap uses total-space density. lean.statement is verbatim; universes are uniform; the body is only sorry. Only the item's lean field and one new stmt_dep changed; statement and proof_deps are unchanged. Nothing compiled because no file changed. Note: NZ/Q42 strictification (landing-RETURNed, not landed) use the same node id and module path with different declarations, and NF/Q04/Q39 copies were retired. First lander owns the notion; later ones must rebind (H4)."
+ }
+}

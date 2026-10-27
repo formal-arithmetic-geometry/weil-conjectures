@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "Put $X'=X\\times_TT'$ and let $r:X'\\to X$ be the projection. By [lem-trf-space-fibre-products-etale-covers] and [lem-trf-space-chartwise-etale-permanence], $r$ is representable etale. The open inclusion $V'\\to X'$ is representable etale: on every scheme base change it is an open immersion, hence etale by clause (1) of [lem-weil-pbc-etale-composition-cancellation]. Thus $q:V'\\to X$ is representable etale by the same algebraic-space permanence statement. Since $T'$ is affine, the given factorization of $V'\\to T'$ is a quasi-compact open immersion into an affine scheme, using clause (2) of [lem-weil-pbc-affine-morphism-permanence]. That affine scheme is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so $V'$ is quasi-compact. Apply [lem-a1-space-etale-open-image] to $q$ to obtain the quasi-compact open subspace $W\\subseteq X$ with $|W|=q(|V'|)$. It remains to prove that this particular $W$ is a scheme.",
+   "text": "Put $X'=X\\times_TT'$ and let $r:X'\\to X$ be the projection. By [lem-trf-space-fibre-products-etale-covers] and [lem-trf-space-chartwise-etale-permanence], $r$ is representable etale. The open inclusion $V'\\to X'$ is representable etale: on every scheme base change it is an open immersion, hence etale by clause (1) of [lem-weil-pbc-etale-composition-cancellation]. So $q:V'\\to X$ is representable etale by the same permanence node. As $T'$ is affine, the given quasi-compact open immersion of $V'$ goes into an affine scheme by clause (2) of [lem-weil-pbc-affine-morphism-permanence], which is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; so $V'$ is quasi-compact. [lem-a1-space-etale-open-image] applied to $q$ gives a quasi-compact open subspace $W\\subseteq X$ with $|W|=q(|V'|)$. It remains to prove $W$ a scheme.",
    "uses": [
     "lem-trf-space-fibre-products-etale-covers",
     "lem-trf-space-chartwise-etale-permanence",
@@ -31,11 +31,11 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, first paragraph: construct W"
+    "place": "Tag 03XW (lemma-neighbourhood-scheme), first paragraph"
    }
   },
   {
-   "text": "For each integer $n\\geq0$, let $P(n)$ assert the claimed schematicity for every diagram in the statement whose affine etale map $a$ has fibre degrees bounded by $n$ [def-weil-pbc-fibre-degree-bound]. These quantify over all schemes and diagrams, so they may be applied with a new target. The map $a$ is locally quasi-finite: every etale scheme chart of $T'$ has etale composite to $T$ by [lem-weil-pbc-etale-composition-cancellation], so [lem-a1-etale-space-locally-quasi-finite], applied to the scheme $T'$ as an algebraic space and then its identity chart, gives this. Its source $T'$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Hence [lem-weil-pbc-lqf-qc-source-bounded-fibres] supplies such an $n$. We prove $P(n)$ by strong induction. If $n=0$, every fibre is the spectrum of the zero algebra, hence empty; a point of $T'$ would lie in a nonempty fibre. Thus $T'=\\varnothing$, $V'=\\varnothing$, and $W$ is the empty scheme. In the remaining steps fix $n\\geq1$ and assume $P(m)$ for $m<n$.",
+   "text": "For $n\\geq0$ let $P(n)$ assert this for every diagram of the statement (all $S,T,T',X,V'$) whose $a$ has fibre degrees bounded by $n$ [def-weil-pbc-fibre-degree-bound]. The map $a$ is locally quasi-finite: each etale scheme chart of $T'$ has etale composite to $T$ by [lem-weil-pbc-etale-composition-cancellation], so [lem-a1-etale-space-locally-quasi-finite], applied to $T'$ and its identity chart, gives it. Its source is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so [lem-weil-pbc-lqf-qc-source-bounded-fibres] gives such an $n$. Use strong induction. If $n=0$, every fibre has zero coordinate algebra, so is empty; each point of $T'$ lies in its fibre, so $T'=V'=\\varnothing$ and $W$ is the empty scheme. Fix $n\\geq1$ and assume $P(m)$ for $m<n$.",
    "uses": [
     "def-weil-pbc-fibre-degree-bound",
     "lem-weil-pbc-etale-composition-cancellation",
@@ -46,131 +46,42 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, second paragraph: precise induction and bound-zero base case"
+    "place": "Tag 03XW (lemma-neighbourhood-scheme), second paragraph"
    }
   },
   {
-   "text": "Let $T''=T'\\times_TT'$ with projections $\\pi_0,\\pi_1$. It is affine by [lem-weil-pbc-fibre-product-affine-spectra]. The map $a$ is affine, hence separated, by [lem-weil-pbc-morphism-affine-schemes-affine] and clause (3) of [lem-weil-pbc-affine-morphism-permanence]; separated means its diagonal is closed [def-weil-proper-morphism]. Its diagonal $\\delta:T'\\to T''$ is also open, since etale implies unramified [def-weil-etale-morphism], and [def-weil-unramified-morphism] defines unramified using the open diagonal. Therefore $T''=\\delta(T')\\amalg T^*$ as open and closed subschemes. The complement $T^*$ is affine: on $T''=\\operatorname{Spec}R$ its clopen subset is $D(e)$ for an idempotent $e$ by [lem-weil-pbc-spec-clopen-idempotent], represented by $\\operatorname{Spec}R_e$ by [lem-weil-pbc-principal-localization-open-immersion]. The restriction $b=\\pi_1|_{T^*}:T^*\\to T'$ is etale, since $\\pi_1$ is a base change of $a$ and the inclusion of $T^*$ is open; use [lem-trf-space-chartwise-etale-permanence] and [lem-weil-pbc-etale-composition-cancellation].",
+   "text": "For $n\\geq1$, apply [lem-a1-affine-etale-diagonal-complement-degree]. It gives affine $T^*=(T'\\times_TT')\\setminus\\Delta(T')$ and etale $b=\\pi_1|_{T^*}$ of fibre degree at most $n-1$. If $n=1$, it makes $a$ an open immersion. Its scheme base changes are open immersions by [lem-weil-pbc-open-immersion-base-change], hence so is $X'\\to X$ on scheme tests; $W$ is then the scheme $V'$.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-morphism-affine-schemes-affine",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "def-weil-proper-morphism",
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism",
-    "lem-weil-pbc-spec-clopen-idempotent",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-trf-space-chartwise-etale-permanence",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, third paragraph: affine diagonal complement"
-   }
-  },
-  {
-   "text": "The fibre degrees of $\\pi_1:T''\\to T'$ are bounded by $n$ by [lem-weil-pbc-fibre-degree-base-change]. For any field-valued point $\\operatorname{Spec}K\\to T'$, [lem-weil-pbc-fibre-degree-bound-field-points] makes its fibre a finite $K$-scheme of degree at most $n$. The clopen decomposition of step 3 pulls back to the disjoint union of the diagonal section $\\operatorname{Spec}K$ and the fibre of $T^*$. A finite scheme over a field is affine; its coordinate algebra therefore decomposes as $K\\times C$, where $C$ is the finite-dimensional algebra of the complementary fibre. The vector-space identity $\\dim_K(K\\times C)=1+\\dim_K C$ gives $\\dim_K C\\leq n-1$. The converse direction of [lem-weil-pbc-fibre-degree-bound-field-points], applied to $b$, now bounds every fibre degree of $b$ by $n-1$. This calculation works over every field without assuming that residue fields are algebraically closed.",
-   "uses": [
-    "lem-weil-pbc-fibre-degree-base-change",
-    "lem-weil-pbc-fibre-degree-bound-field-points"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, third paragraph: explicit subtraction of the diagonal degree"
-   }
-  },
-  {
-   "text": "If $n=1$, the previous calculation forces $T^*=\\varnothing$ (a point of $T^*$ would give a nonempty fibre). Hence $\\delta:T'\\to T''$ is an isomorphism. The fibre-product universal property then says $a$ is a monomorphism: any pair of maps with equal composites through $a$ gives a map to $T''$, which factors uniquely through $\\delta$, so the two maps agree. The etale definition [def-weil-etale-morphism] supplies flatness and local finite presentation. By [lem-pe-flat-lfp-monomorphism-open], $a$ is an open immersion. Its base change $r:X'\\to X$ is an open immersion: each scheme test is a base change of $a$, hence is an open immersion by [lem-weil-pbc-open-immersion-base-change]. Thus the composite open inclusion $V'\\to X$ identifies $W$ with the scheme $V'$. This proves $P(1)$. We may now assume $n>1$.",
-   "uses": [
-    "def-weil-etale-morphism",
-    "lem-pe-flat-lfp-monomorphism-open",
+    "lem-a1-affine-etale-diagonal-complement-degree",
     "lem-weil-pbc-open-immersion-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, second paragraph: bound-one base case, with diagonal verification"
+    "place": "Tag 03XW (lemma-neighbourhood-scheme), second and third paragraphs"
    }
   },
   {
-   "text": "Write $X''=X\\times_TT''$, $X^*=X\\times_TT^*$, and let $p_i:X''\\to X'$ be induced by $\\pi_i$. Put $Z=p_0^{-1}(V')\\cap X^*$. As a space over $T^*$ this is the scheme $T^*\\times_{\\pi_0,T'}V'$. Its map to $T^*$ is quasi-affine by [lem-trf-quasi-affine-base-change]; the base change here uses $\\pi_0$, whereas $X^*\\to X'$ uses $\\pi_1$. The space $Z$ is open in $X^*=T^*\\times_{b,T'}X'$, because it is the pullback of the open $V'\\subseteq X'$ along the other projection. By [lem-a1-space-separated-lqf-permanence], $X'\\to T'$ is separated and chartwise locally quasi-finite. The map $b:T^*\\to T'$ is etale between affine schemes and its fibre degrees are bounded by $n-1$. All hypotheses of $P(n-1)$ therefore hold for $(T',T^*,X',Z)$. It gives a quasi-compact open scheme $H\\subseteq X'$ with $|H|=p_1(|Z|)$.",
+   "text": "For $n>1$, use [lem-a1-etale-saturation-quasi-affine-pullback] with $Z=p_0^{-1}(V')\\cap(X\\times_TT^*)$. Its first conclusion verifies all remaining hypotheses of $P(n-1)$ for $(T',T^*,X',Z)$, with $\\pi_0$ defining $Z$ and $\\pi_1$ defining $b$. Induction supplies its quasi-compact schematic image $H\\subseteq X'$. The same node now identifies $W\\times_TT'=V'\\cup H$ and makes it a quasi-compact scheme quasi-affine over $T'$.",
    "uses": [
-    "lem-trf-quasi-affine-base-change",
-    "lem-a1-space-separated-lqf-permanence"
+    "lem-a1-etale-saturation-quasi-affine-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, third paragraph: induction diagram and all omitted hypothesis checks"
+    "place": "Tag 03XW (lemma-neighbourhood-scheme), third and fourth paragraphs"
    }
   },
   {
-   "text": "Apply the base-change image clause of [lem-a1-space-etale-open-image] to $q:V'\\to X$ and $r:X'\\to X$. It identifies the inverse image $P=W\\times_XX'=T'\\times_TW$ with the image open of $V'\\times_XX'\\to X'$. The latter source is $p_0^{-1}(V')\\subseteq X''$, mapping by $p_1$. On the diagonal component of $X''=X'\\amalg X^*$ its image is $V'$, and on the complementary component its image is $H$ by step 6. The inclusion-preserving open-subspace correspondence in the same lemma therefore gives $P=V'\\cup H$. This is a Zariski covering by two open schemes: after a map from any scheme, the two open pullbacks cover that scheme, since their point sets do. The sheaf $P$ is an algebraic space, hence an fppf sheaf by [def-trf-algebraic-space], and in particular a Zariski sheaf. Apply [lem-pc-schemes-criterion] to the two open subfunctors $V',H\\subseteq P$ to obtain a scheme representing $P$. Its underlying space is quasi-compact, as a union of two quasi-compact open subsets.",
+   "text": "Apply [lem-a1-space-etale-open-image] to $a$ to obtain its open image $B$. The image of $W$ in $T$ lies in $B$, since every point of $W$ comes from $V'$ and $V'\\to T$ factors through $T'$. Apply [lem-a1-open-image-quasi-affine-scheme-descent] to the quasi-affine pullback just obtained: it represents $W$ by a scheme over $B$, hence over $S$. This proves $P(n)$; strong induction and the chosen bound complete the proof.",
    "uses": [
-    "lem-a1-space-etale-open-image",
-    "def-trf-algebraic-space",
-    "lem-pc-schemes-criterion"
+    "lem-a1-open-image-quasi-affine-scheme-descent",
+    "lem-a1-space-etale-open-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, fourth paragraph: saturation identity and gluing the two schemes"
-   }
-  },
-  {
-   "text": "Apply [lem-a1-space-separated-lqf-permanence] to $W\\subseteq X$ and to base change by $T'\\to T$. It makes the scheme map $P\\to T'$ separated and locally quasi-finite. The target $T'$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], and $P$ is quasi-compact by step 7, so [lem-weil-pbc-qcqs-morphism-permanence], clause (1), makes $P\\to T'$ quasi-compact. By [lem-weil-pbc-lqf-locally-finite-type] it is locally of finite type. The four hypotheses of [lemma-nagata-quasi-affine-morphism-of-quasi-finite] now hold for this scheme map, so $P\\to T'$ is quasi-affine. No Noetherian, finite-presentation, or finiteness assumption on $X$ has been inserted.",
-   "uses": [
-    "lem-a1-space-separated-lqf-permanence",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-lqf-locally-finite-type",
-    "lemma-nagata-quasi-affine-morphism-of-quasi-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, fourth paragraph: obtain a quasi-affine descent object"
-   }
-  },
-  {
-   "text": "Let $B\\subseteq T$ be the open image of $a$, supplied by [lem-a1-space-etale-open-image] applied to schemes. Then $p:T'\\to B$ is surjective etale. It is also affine: $T'\\times_TB=T'$ since $a$ factors through $B$, and affineness follows by base change from the affine map $a$ using [lem-weil-pbc-affine-morphism-permanence]. The sheaf $W$ factors through $B$: its point image in $T$ lies in $B$, since $|W|=q(|V'|)$ and $V'\\to T$ factors through $T'$. Thus $W\\cap(X\\times_TB)$ and $W$ have the same point subset of $X$, and the open-subspace correspondence of that same image lemma identifies them. For every affine open $C\\subseteq B$, $p^{-1}(C)$ is affine and surjects onto $C$. With flatness and local finite presentation from [def-weil-etale-morphism], this verifies the singleton fpqc-covering condition [def-weil-pbc-fpqc-covering] and the fppf-covering condition [def-pc-fppf-site]. The base $B$ need not be affine.",
-   "uses": [
-    "lem-a1-space-etale-open-image",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "def-weil-etale-morphism",
-    "def-weil-pbc-fpqc-covering",
-    "def-pc-fppf-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, last paragraph: construct the correct base B and both covering conditions"
-   }
-  },
-  {
-   "text": "Regard $W$ over $B$ as the sheaf assigning to $Q\\to B$ the $S$-morphisms $Q\\to W$ compatible with the maps to $B$. This is an fppf sheaf: compatible maps to $W$ glue uniquely because $W$ is an algebraic space [def-trf-algebraic-space], and equality of their composites to $B$ is also local. Its pullback along $p$ is represented by $P=T'\\times_BW=T'\\times_TW$, the scheme of step 7. Apply [lem-trf-fppf-sheaf-representability-descent-data] to the fppf covering $\\{p:T'\\to B\\}$. It gives a scheme descent datum on $P/T'$. On the double overlap its comparison is the natural interchange of $P\\times_BT'$ with $T'\\times_BP$ representing the same sheaf $T'\\times_BW\\times_BT'$; on the triple overlap both composites keep the same section of $W$ and the same three base coordinates. This is its cocycle. The statement of the cited node, rather than a claim that fpqc is a site, supplies both this datum and the criterion that its effectivity is equivalent to representability of the sheaf $W$ over $B$.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "lem-trf-fppf-sheaf-representability-descent-data"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, last paragraph: sheaf descent datum and cocycle"
-   }
-  },
-  {
-   "text": "The map $p:T'\\to B$ is an fpqc covering by step 9, and $P\\to T'$ is quasi-affine by step 8. Apply [lem-trf-quasi-affine-fpqc-effective-descent] to the datum of step 10. It is effective. The representability-if-effective clause of [lem-trf-fppf-sheaf-representability-descent-data] now represents $W$ by a scheme over $B$, hence over $S$. We have proved $P(n)$ under the induction hypotheses. Strong induction and the bound from step 2 prove schematicity for the original diagram. Together with step 1 this is exactly the quasi-compact open image asserted in the statement.",
-   "uses": [
-    "lem-trf-quasi-affine-fpqc-effective-descent",
-    "lem-trf-fppf-sheaf-representability-descent-data"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XW, lemma-neighbourhood-scheme, last paragraph: effective descent and induction conclusion"
+    "place": "Tag 03XW (lemma-neighbourhood-scheme), last paragraph"
    }
   }
  ],
@@ -184,28 +95,10 @@
   "def-weil-pbc-fibre-degree-bound",
   "lem-a1-etale-space-locally-quasi-finite",
   "lem-weil-pbc-lqf-qc-source-bounded-fibres",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-morphism-affine-schemes-affine",
-  "def-weil-proper-morphism",
-  "def-weil-etale-morphism",
-  "def-weil-unramified-morphism",
-  "lem-weil-pbc-spec-clopen-idempotent",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "lem-weil-pbc-fibre-degree-base-change",
-  "lem-weil-pbc-fibre-degree-bound-field-points",
-  "lem-pe-flat-lfp-monomorphism-open",
+  "lem-a1-affine-etale-diagonal-complement-degree",
   "lem-weil-pbc-open-immersion-base-change",
-  "lem-trf-quasi-affine-base-change",
-  "lem-a1-space-separated-lqf-permanence",
-  "def-trf-algebraic-space",
-  "lem-pc-schemes-criterion",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-lqf-locally-finite-type",
-  "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
-  "def-weil-pbc-fpqc-covering",
-  "def-pc-fppf-site",
-  "lem-trf-fppf-sheaf-representability-descent-data",
-  "lem-trf-quasi-affine-fpqc-effective-descent"
+  "lem-a1-etale-saturation-quasi-affine-pullback",
+  "lem-a1-open-image-quasi-affine-scheme-descent"
  ],
  "proof_origin": {
   "by": "document",
@@ -307,10 +200,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-etale-quasi-affine-image-scheme",
   "worker": "stage1",
-  "summary": "Retained the exact statement of Stacks 03XW. Wrote the bounded-fibre induction, diagonal-complement degree calculation, both base cases, full induction diagram, saturation/gluing and quasi-affine descent over the open image B. Reused existing scheme and descent nodes, with two new general algebraic-space tools.",
+  "summary": "Repair of the human re-split order: extracted three statement-only arguments of comparable original proof size (old steps 3-5, 6-8, and 9-11); preserved the statement and the original Stacks 03XW bounded-degree induction route. The report retains all eleven original arguments verbatim for the future workers. Landing-return repair: rebuilt against the current server DAG; re-read all cited statements and checked the preserved quotations. Made the open-image existence citation explicit in the final assembly step; retained current live statement and all live metadata.",
   "blueprint": "Realizes the geometric representability branch recorded under lem-a1-affine-hc0, via lem-a1-separated-etale-space-scheme and lem-a1-separated-locally-qf-space-representable: the 03XW ingredient of the final paragraph of 03XX. No chapter or unit route is changed. The current main-20261015 affine-hc0 blueprint has only the cohomological statement; this historical auxiliary ancestry is retained.",
   "tool_uses": [
    {
@@ -323,38 +216,6 @@
    },
    {
     "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
-    "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
-   },
-   {
-    "node": "lem-weil-pbc-fibre-degree-base-change",
-    "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
-   },
-   {
-    "node": "lem-weil-pbc-fibre-degree-bound-field-points",
-    "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
-   },
-   {
-    "node": "lem-trf-quasi-affine-base-change",
-    "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
-   },
-   {
-    "node": "lem-pc-schemes-criterion",
-    "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
-   },
-   {
-    "node": "lem-weil-pbc-lqf-locally-finite-type",
-    "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
-   },
-   {
-    "node": "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
-    "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
-   },
-   {
-    "node": "lem-trf-fppf-sheaf-representability-descent-data",
-    "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
-   },
-   {
-    "node": "lem-trf-quasi-affine-fpqc-effective-descent",
     "why": "General scheme/algebraic-space/descent tool used in the proof of Stacks 03XW; this auxiliary item does not replace any step of its unit route, and its unit contains no alternative version of this general fact."
    }
   ]
@@ -373,12 +234,12 @@
   "lem-trf-quasi-affine-fpqc-effective-descent"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NS-4224146c6",
-  "group": "NS",
+  "reviewer": "NT-cc-Q126-6d100679d",
+  "group": "Q126",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-4224146c6 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, the parent, every cited statement, and Stacks 03XW (spaces-morphisms.tex l.10469-10586) with its cited lemmas (more-morphisms quasi-finite-separated-quasi-affine; spaces-properties 03BX/03BZ/03IR/03H4/03H5/03E4; spaces-morphisms 03KL/03XL/03KQ/03XK/03XJ, all resolved through tags/tags). The item's statement matches 03XW hypothesis by hypothesis. V' is assumed to be a scheme, and the factorization form of quasi-affine equals Stacks' notion over the affine base T'. The 11 steps are a correct and complete expansion of the source. Step 2: bounded-fibre induction, including n=0. Steps 3-4: the clopen diagonal complement T* is affine; the bound n-1 comes from the K×C dimension count via fibre-degree-bound-field-points in both directions. Step 5: n=1, etale mono gives an open immersion (pe-flat-lfp-monomorphism-open). Step 6: P(n-1) is applied to (T',T*,X',Z) with the pi_0/pi_1 roles kept apart. Step 7: P=V'∪H, a scheme by 01JJ. Step 8: P->T' is quasi-affine by the Nagata lemma. Steps 9-11: the fpqc/fppf cover T'->B of the non-affine open image B, the 02W5 descent datum, and effectivity by 0247. No cycle, no proof-internal citations. New lem-a1-space-etale-open-image (topology, open-subspace correspondence, open etale image, base-change identity, quasi-compactness) and lem-a1-space-separated-lqf-permanence are both true; I tested them on empty, identity, open-inclusion and nonreduced base-change cases. Neither is a duplicate (the only analogues, etale-morphism-open-map and separated-lqf-base-change, are scheme-only), and neither restates the item. Batch-5 check: the dependency closure (417 nodes) of all cited sec-trace-formula nodes contains only general Stacks foundations of algebraic spaces, descent and quasi-affine morphisms. It has no trace-formula, Poincare-duality or cohomological node and no assumption leaf. Each listed citation (space-fibre-products-etale-covers, space-chartwise-etale-permanence, def-trf-algebraic-space, quasi-affine-base-change, fppf-sheaf-representability-descent-data, quasi-affine-fpqc-effective-descent, and a1-etale-space-locally-quasi-finite, whose closure reaches only the definition) is outside the assumed statements. Existing batch-5 nodes, including the parent, already cite two of them. I accept the 11 declared generic tool_uses. No SGA source is cited. Minor implicit elementary points: converting between the two forms of quasi-affine, and representable etale implying chartwise etale. No fixes were written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-6d100679d (reviewer sub-agent of L); spot-checked: Landing-return re-delivery of 7617eb6f, which got a maintainer FIX (in runs/1/…7617eb6fa02b) that was lost at landing. The base (dagsnap ad32718) still has the 11-step NS item and none of the new nodes, so the delivery is not superseded. Diffed against the old head: the only change is that item step 5 now also cites lem-a1-space-etale-open-image to construct B. That use is valid: it applies to the representable étale map a of schemes, and an open subspace of a scheme is an open subscheme. The three new nodes are byte-identical to the old head, so the old faults remain. Cited statements unchanged. Re-read Stacks 03XW, all four paragraphs. Old steps 3-5 → diagonal node, 6-8 → saturation node, 9-11 → descent node; sizes about 2.8k/2.4k/2.5k chars, all 11 old steps verbatim in the report. Neither the saturation node nor the descent node restates the item: the first assumes the inductive H, the second a quasi-affine P. Diagonal node: Δ is clopen, T* = D(e) is affine, the fibre algebra is K×C with dim C ≤ n−1 over any field, and n=1 gives flat+lfp+mono ⇒ open immersion. Tested on ∅, the identity, ⨿_d T and separable L/K. Saturation node: Z = T*×_{π0}V' is open in X'×_{π1}T*; P = V'∪H; P→T' is quasi-affine by the Nagata lemma. Descent node: B is not assumed affine; p is affine surjective étale, fpqc and fppf; the 02W5 datum is effective by 0247. Re-ran the duplicate search (rg -L over the current base): none found. No SGA; tool_uses accepted. FIX re-applies the earlier repairs: (1) diagonal node stmt_deps += def-weil-open-immersion, def-weil-closed-immersion; (2) saturation node stmt_deps += def-weil-closed-immersion, def-pc-fibre-product; (3) item steps 1-2 restored to the full old arguments, which the re-split note forbids shortening: open-inclusion etaleness via clause (1), affine permanence (2), lqf via the identity chart, and the n=0 empty-fibre case. The new step-5 citation is kept. Uses/proof_deps/statement unchanged; the proof is 2812 chars (≤ 3000).; 3 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -403,5 +264,16 @@
   "existing": false,
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleQuasiAffineImageScheme.lean"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

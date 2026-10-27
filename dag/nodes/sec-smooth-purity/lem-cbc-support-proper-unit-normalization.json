@@ -1,0 +1,128 @@
+{
+ "id": "lem-cbc-support-proper-unit-normalization",
+ "kind": "statement",
+ "title": "Proper direct image preserves the normalized quotient completion unit",
+ "statement": "Fix the adic coefficient datum $A,I$ of [def-weil-pbc-adic-coefficient-datum]. For every scheme $T$ let $D(T)$ be the unbounded derived category of modules over the constant coefficient sheaf $\\underline A_T$, let $\\mathcal R_T$ be its strict quotient reduction tower, $L_T=R\\lim_T$, and $\\eta_T:1\\to L_T\\mathcal R_T$ the specified quotient completion unit of [lem-sp-completion-mate-comparison]. For any scheme morphism $p:U\\to Y$ use the derived constant-coefficient direct image $p_*$, strict tower direct image $R_p$, and prescribed comparison $a_p:p_*L_U\\xrightarrow{\\sim}L_YR_p$ of that node. For $K\\in D(U)$ let $\\pi_{p,K}:\\mathcal R_Y(p_*K)\\to R_p(\\mathcal R_UK)$ be the adjunct of reduction of the ambient counit under its normalized reduction/pullback isomorphism. Then\n$$a_p(\\mathcal R_UK)\\circ p_*(\\eta_U(K))=L_Y(\\pi_{p,K})\\circ\\eta_Y(p_*K).$$\nThis is equality of the prescribed morphisms in $D(Y)$ with every strict quotient transition retained. Neither completeness of $K$ nor faithfulness of evaluation is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+  "place": "Final compatibility paragraph; proper-unit subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower. Underlying Stacks 099M, 099N (proetale.tex, lemma-naive-completion, lemma-pushforward-Noetherian-case) and 0A07 (sites-cohomology.tex, lemma-Rf-commutes-with-Rlim). The formal proof uses the strict augmentation/pullback square and the general unit/mate identities."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Take adjunction mates of supportReductionAugmentationPull using the ambient and strict tower pullback/direct-image adjunctions. The mate naturality identity gives augmentation at p_*K followed by projection equal to the diagonal direct-image mate followed by strict direct image of augmentation at K. Identify the projection with the prescribed adjunct by mateEquiv_counit.",
+   "uses": [
+    "lem-cbc-support-reduction-augmentation-pull",
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Final compatibility paragraph; proper-unit subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower. Underlying Stacks 099M, 099N (proetale.tex, lemma-naive-completion, lemma-pushforward-Noetherian-case) and 0A07 (sites-cohomology.tex, lemma-Rf-commutes-with-Rlim). The formal proof uses the strict augmentation/pullback square and the general unit/mate identities."
+   }
+  },
+  {
+   "text": "The twofold mate of diagonalPullIso equals its conjugate under the composite adjunctions, which is by definition directLimitIso. Apply the unit equation for mates to the inner mate. This identifies direct image of the diagonal unit followed by directLimitIso with the target diagonal unit followed by inverse limit of the diagonal mate.",
+   "uses": [
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Final compatibility paragraph; proper-unit subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower. Underlying Stacks 099M, 099N (proetale.tex, lemma-naive-completion, lemma-pushforward-Noetherian-case) and 0A07 (sites-cohomology.tex, lemma-Rf-commutes-with-Rlim). The formal proof uses the strict augmentation/pullback square and the general unit/mate identities."
+   }
+  },
+  {
+   "text": "Expand the completion unit into its diagonal unit and inverse limit of augmentation. Move augmentation past directLimitIso by naturality and apply the unit equation from step 2. Compose the two inverse-limit maps and substitute the strict augmentation/projection equation of step 1. Functoriality gives the displayed equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Final compatibility paragraph; proper-unit subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower. Underlying Stacks 099M, 099N (proetale.tex, lemma-naive-completion, lemma-pushforward-Noetherian-case) and 0A07 (sites-cohomology.tex, lemma-Rf-commutes-with-Rlim). The formal proof uses the strict augmentation/pullback square and the general unit/mate identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-support-reduction-augmentation-pull",
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+  "place": "Final compatibility paragraph; proper-unit subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower. Underlying Stacks 099M, 099N (proetale.tex, lemma-naive-completion, lemma-pushforward-Noetherian-case) and 0A07 (sites-cohomology.tex, lemma-Rf-commutes-with-Rlim). D7 isolates the proper-unit equation already present in the parent proof, without the open extension or the reconstruction cancellation. Whole-blueprint searches for completion unit and quotient augmentation found only the intrinsic/completed pullback and proper-base-change unit statements in sec-proper-base-change; none states this proper direct-image equation in the prescribed constant-coefficient model. D7 subsequently proves this theorem using general mate identities and isolates only the strict reduction/pullback augmentation square as the remaining hole. The analogous existing lem-pur-strict-reduction-projection-completion-unit was read but uses CategoryTheory.AdicSites sites and ConstantCompletion.quotientPresentation, so is not directly applicable to OrderedExchange.reductionData. The actual general mates_naturality helper is imported privately from ConstantTowerDirectImageNormalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "direct image derived inverse limit comparison compatibility quotient completion unit projection formula",
+   "results": "Eight results on algebraic adic completion; no strict derived tower normalization.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "One match: CategoryTheory.unit_mateEquiv in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-26",
+   "verdict": "Useful general unit/mate identity, but does not supply strict quotient augmentation compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "supportProperUnitNormalization|constantTowerDirectImageNormalization|limit_comparison_diagonal",
+   "results": "No hits in msearch. Repository rg finds ConstantTowerDirectImageNormalization and its private general mate helpers, but that file uses the small-model strict tower realization rather than this prescribed OrderedExchange realization.",
+   "date": "2026-10-26",
+   "verdict": "No directly applicable declaration in the prescribed coefficient model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedSupportIntermediateTower",
+  "date": "2026-10-26",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Final compatibility paragraph, via step 4 of lem-cbc-completed-support-intermediate-tower"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportProperUnitNormalization",
+  "file": "lean/Sheaf/Paper/SupportProperUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.supportProperUnitNormalization",
+  "statement": "theorem supportProperUnitNormalization {A : Type (t + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) {U Y : Scheme.{t}} (p : U ⟶ Y)\n    (K : D (A := A) U) :\n    (push (A := A) p).map ((unit d U).app K) ≫\n        (directLimitIso (A := A) p).hom.app ((reduction d U).obj K) =\n      (unit d Y).app ((push (A := A) p).obj K) ≫\n        (rlim (A := A) Y).map (projection d p K)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T210224-L-3496541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T210224-L-3496541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

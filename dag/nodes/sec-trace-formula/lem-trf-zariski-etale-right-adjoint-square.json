@@ -1,0 +1,116 @@
+{
+ "id": "lem-trf-zariski-etale-right-adjoint-square",
+ "kind": "statement",
+ "title": "Restriction of small-etale module direct image to Zariski opens",
+ "statement": "For any scheme morphism a:U→T and Zariski-etale module contexts cU,cT [def-sfb-scheme-zariski-etale-module-constructions], the canonical small-etale module direct image [def-trf-space-etale-module-functors] has a left adjoint. There is a natural isomorphism a_et,* followed by cT.restriction ≅ cU.restriction followed by a_*. On each module G and open W its component is G applied contravariantly to gabberPreimageEtaleIso(a,W). No quasi-coherence or compactness is assumed.",
+ "stmt_deps": [
+  "def-sfb-scheme-zariski-etale-module-constructions",
+  "def-trf-space-etale-module-functors",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03FH (2); assigned parent proof step 1 and the small-site module adjunction input of step 2."
+ },
+ "proof": [
+  {
+   "text": "Apply the ringed module adjunction to the scheme base-change morphism of small etale sites. Use the affine etale basis to keep sheafification and module pullback in the section universe u. This supplies the right-adjoint proof hp.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each open W the canonical scheme pullback is isomorphic to the inverse-image open. Apply G contravariantly to gabberPreimageEtaleIso. Pullback of regular functions identifies the two scalar actions. The universal property of scheme pullback makes this natural in W, and morphism naturality makes it natural in G. Applying G to the inverse isomorphism verifies both inverse identities. These maps assemble the required natural isomorphism.",
+   "uses": [
+    "lem-trf-zariski-etale-tensor-sections",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03FH (2); assigned parent proof step 1 and the small-site module adjunction input of step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of small etale sheaves of modules to Zariski opens commutes with scheme direct image with its scalar action",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrict_map, restrict_obj, restrict, restrictAdjunction, restrictAdjunction_unit_app_app, restrictAdjunction_counit_app_app; ModuleCat.Tilde.toOpen_res and res_apply.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.pullback",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-26",
+   "verdict": "General adjunction machinery, not the stated scheme-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "zariskiEtalePushforwardComparison|gabberPreimageEtaleIso",
+   "results": "SchemeZariskiEtaleQuasiCoherentEquivalence defines the mate; ZariskiEtaleFunctorComparisonSquare is the assigned unfinished assembly. No separate theorem of this step.",
+   "date": "2026-10-26",
+   "verdict": "No existing independent lemma for this step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ZariskiEtaleFunctorComparisonSquare",
+  "group": "N3",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-zariski-etale-functor-comparison-square",
+   "place": "Tag 03FH (2); assigned parent proof step 1 and the small-site module adjunction input of step 2.",
+   "via": [
+    "lem-trf-zariski-etale-functor-comparison-square"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ZariskiEtaleRightAdjointSquare",
+  "file": "lean/Sheaf/TraceFormula/ZariskiEtaleRightAdjointSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.zariskiEtale_rightAdjoint_square",
+  "statement": "theorem zariskiEtale_rightAdjoint_square {U T : Scheme.{u}} (a : U ⟶ T)\n    (cU : ZariskiEtaleModuleContext U) (cT : ZariskiEtaleModuleContext T) :\n    ∃ (hp : (smallEtaleModulePushforward a).IsRightAdjoint)\n      (r : smallEtaleModulePushforward a ⋙ cT.restriction ≅\n        cU.restriction ⋙ pushforward a),\n      ∀ (G : SmallEtaleModules U) (W : T.Opens),\n        (r.hom.app G).app W =\n          G.val.presheaf.map (AlgebraicGeometry.gabberPreimageEtaleIso a W).hom.op",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T082559-L-2192494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T082559-L-2192494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

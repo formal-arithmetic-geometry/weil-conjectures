@@ -1,0 +1,111 @@
+{
+ "id": "def-sf-constant-tower-normalization-data",
+ "kind": "definition",
+ "title": "Canonical constant-tower diagonal and derived direct-image comparison data",
+ "status": "split",
+ "statement": "Let $A$ be an arbitrary commutative ring and $X,Y$ schemes. Use the constant-coefficient module categories $\\mathcal M_X$, strict tower categories $\\mathcal T_X=\\operatorname{Fun}(\\mathbb N^{op},\\mathcal M_X)$, ordinary functors $f^*,f_*$ and their termwise tower functors, and the specified derived tower functors $G_f,R_f$ of [def-cbc-strict-constant-tower-operations]. Write $\\Delta_X:\\mathcal M_X\\to\\mathcal T_X$ for the ordinary constant-diagram functor. Define $\\delta_X=D(\\Delta_X)$ by exact localization and $\\operatorname{push}_f=Rf_*$ by total right derivation. Define $\\delta\\operatorname{Pull}_f:\\delta_Y G_f\\xrightarrow{\\sim}D(f^*)\\delta_X$ to be exact localization of $\\Delta_Y f^*_{\\mathrm{tower}}\\cong f^*\\Delta_X$, with the exact-composition identifications and the inverse of the ordinary constant-diagram composition isomorphism, whose components are identities. The ordinary diagonal preserves K-injective complexes via its adjunction with exact evaluation at index zero; retain the existing instance of this fact. Define $\\chi_f:\\operatorname{push}_f\\delta_Y\\xrightarrow{\\sim}\\delta_X R_f$ to be the composite $Rf_*D(\\Delta_Y)\\cong R(f_*\\Delta_Y)\\cong R(\\Delta_X f_{*,\\mathrm{tower}})\\cong R\\Delta_X R_f\\cong D(\\Delta_X)R_f$, using the universal derived-unit composition isomorphisms and the ordinary constant-diagram composition isomorphism in the middle. These are the existing canonical constructions, re-exported by definitional aliases; no completeness hypothesis or conclusion of a normalization theorem is part of this data.",
+ "stmt_deps": [
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K (total right derived functors) and 08BJ (adjoints preserve K-injectives), with sites-cohomology.tex Tag 07A7 (remark-base-change). The exact constant-diagram and universal-derived-composition formulas are the existing definitions delta, push, deltaPull and chi in lean/Sheaf/Paper/ConstantTowerDirectImageNormalization.lean, lines 1016–1100; this node owns their definition-only re-export interface, not the normalization theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant diagram derived direct image comparison on pro-etale module sheaves with arbitrary commutative coefficients",
+   "results": "{\"t\": \"2026-10-22T10:21:31Z\", \"tool\": \"leansearch\", \"query\": \"constant diagram derived direct image comparison on pro-etale module sheaves with arbitrary commutative coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"PresheafOfModules.pushforward_obj_map_apply'\", \"SheafOfModules.pushforwardCongr\", \"PresheafOfModules.Hom.naturality\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"PresheafOfModules.Derivation'.d_app\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"dc674b33f5e01864\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic sheaf or derived-functor API only; the concrete comparisons already exist in ConstantTowerDirectImageNormalization and are reused by abbreviation, not reconstructed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived diagonal of constant towers commutes with derived direct image canonical comparison",
+   "results": "{\"t\": \"2026-10-22T10:21:32Z\", \"tool\": \"leanfinder\", \"query\": \"derived diagonal of constant towers commutes with derived direct image canonical comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"localCohomology.diagramComp\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\"], \"digest\": \"7b61021143b6397c\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic sheaf or derived-functor API only; the concrete comparisons already exist in ConstantTowerDirectImageNormalization and are reused by abbreviation, not reconstructed."
+  },
+  {
+   "tool": "grep",
+   "query": "compConstIso|rightDerivedFunctorCompIso",
+   "results": "{\"t\": \"2026-10-22T10:21:30Z\", \"tool\": \"grep\", \"query\": \"compConstIso|rightDerivedFunctorCompIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Functor/Const.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\"], \"digest\": \"cba148e0013bab45\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic sheaf or derived-functor API only; the concrete comparisons already exist in ConstantTowerDirectImageNormalization and are reused by abbreviation, not reconstructed."
+  },
+  {
+   "tool": "grep",
+   "query": "ConstantNormalization\\.(delta|push|deltaPull|chi)|namespace.*DiagonalNormalization; rg in lean/WeilConjectures and lean/Sheaf; rg -l in dag/nodes; tools/blueprint_refs.py search constant-tower",
+   "results": "No matching declaration in WeilConjectures. Sheaf has ConstantNormalization.delta, push, deltaPull, chi and delta_preservesKInjective in Paper/ConstantTowerDirectImageNormalization.lean; references occur in SemilinearProperOpenMatePasting and VaryingRingProperOpenArrows. Only lem-sf-cbc-constant-tower-direct-image-normalization and lem-pur-supported-constant-exchange-normalization node files mention the qualified helper names; neither is a definition node. Blueprint search returns det-sp-tower-classes and lem-weil-pbc-intrinsic-to-tower-complete, not these constructions. No existing DiagonalNormalization namespace or definition node owns this interface.",
+   "date": "2026-10-22",
+   "verdict": "Use aliases of the existing constructions, and supply their missing definition-node ownership as requested by independent return H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-semilinear-evaluation-derived-adjunction",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; intrinsic semilinear proper/open realization, returned proof step 5: Derived evaluation factors through the normalized constant diagonal; canonical constant-diagonal comparisons used to state derived evaluation factorization",
+   "via": [
+    "lem-sf-semilinear-evaluation-derived-adjunction",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantTowerNormalizationData",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.DiagonalNormalization.delta",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.DiagonalNormalization.delta",
+   "AlgebraicGeometry.ProEtale.StrictTower.DiagonalNormalization.push",
+   "AlgebraicGeometry.ProEtale.StrictTower.DiagonalNormalization.deltaPull",
+   "AlgebraicGeometry.ProEtale.StrictTower.DiagonalNormalization.diagonalPreservesKInjective",
+   "AlgebraicGeometry.ProEtale.StrictTower.DiagonalNormalization.chi"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantTowerNormalizationData.lean",
+  "statement": "abbrev delta (X : Scheme.{u}) : DerivedCategory (Modules A X) ⥤ Derived A X",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Definition-only ownership interface requested by return L H2 at immutable head 7a73e5956277. Every declaration is a transparent alias of existing canonical data or its existing K-injective instance. No theorem conclusion is used to choose these maps; no construction is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ab907b07",
+  "group": "NJ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ab907b07",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 7a73e5956277. Diff vs prior snapshot: item module only renames ConstantNormalization.{delta,push,deltaPull,chi} -> new definition-owned StrictTower.DiagonalNormalization aliases and demotes the theorem module to a plain import; stmt_deps cite new def node def-sf-constant-tower-normalization-data instead of theorem lem-sf-cbc-constant-tower-direct-image-normalization, which is now only a proof dep (live main already has it in proof_deps, so proof_deps equal live). New module: abbrevs whose bodies are exactly the original defs (checked against ConstantTowerDirectImageNormalization.lean l.1016-1100) plus the K-injective instance re-exported by term; same universes (A : Type (u+1), Scheme.{u}); no choose/arbitrary map; source/blueprint docstrings; node is kind definition citing def-cbc-strict-constant-tower-operations, Stacks 070K/08BJ/07A7. No existing owner of these decls in side-live/main (grep); module path and namespace unused. Statement/proof verbatim; lean.statement verbatim; all nine clauses re-confirmed by definitional unfolding; edge cases (n=0, zero rings, non-flat transitions, empty U) unchanged. Report has Worker report and Second reading by NJ. No compile (no file changed). Advisories: mixed composition-order notation in new node prose; pre-existing unused proof_dep on live; noisy retry logs."
+ }
+}

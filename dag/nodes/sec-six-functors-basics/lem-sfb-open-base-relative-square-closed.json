@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-open-base-relative-square-closed",
+ "kind": "statement",
+ "title": "Open base restriction preserves closed relative squares and their diagonals",
+ "statement": "Let $A,B,C$ be schemes [def-pc-scheme] with morphisms $p:A\\to B$, $q:C\\to B$, $f:A\\to C$ satisfying $q\\circ f=p$. Write $D=A\\times_C A$, $p_2=p\\circ\\operatorname{pr}_1:D\\to B$ and $\\delta:A\\to D$ for the diagonal [def-pc-fibre-product]. For every scheme $T$ and morphism $h:T\\to B$, set $A_T=A\\times_BT$, $C_T=C\\times_BT$, let $f_T:A_T\\to C_T$ be induced by $f$, and put $D_T=A_T\\times_{C_T}A_T$. There is a canonical isomorphism $D_T\\cong D\\times_BT$ compatible with both projections to $A$ and with the structure map to $T$; under it the diagonal of $f_T$ is the base change of $\\delta$. If $T=W\\subseteq B$ is an open subscheme [def-weil-open-immersion], then $A_W$, $C_W$ and $D_W$ identify over $A,C,D$ with the inverse-image open subschemes $p^{-1}(W)$, $q^{-1}(W)$ and $p_2^{-1}(W)$, respectively. Under these identifications the maps $A_W\\to W$ and $D_W\\to W$ are the restrictions of $p$ and $p_2$. If the underlying maps of $p$ and $p_2$ are closed (send closed subsets to closed subsets), these two restricted maps are closed. For any $h:T\\to B$ factoring through $W$, the canonical isomorphisms $A_W\\times_WT\\cong A\\times_BT$ and $C_W\\times_WT\\cong C\\times_BT$ identify the induced morphisms and their diagonals.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, first sentence: replacement by an open preserves assumptions (2) and (3), and subsequent base-change of the diagonal; original item step 5 and the comparison in step 7."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $r_1,r_2:D_T\\to A_T$ for the projections, $a_i:D_T\\to A$ for their composites, and $t_i:D_T\\to T$ for their structure maps. The equality $f_T r_1=f_T r_2$ gives $f a_1=f a_2$ and $t_1=t_2=:t$ by composing with the projections of $C_T$. Thus $(a_1,a_2):D_T\\to D$ exists, and $p_2(a_1,a_2)=p a_1=h t$. The fibre-product universal property therefore defines $e=((a_1,a_2),t):D_T\\to D\\times_B T$. This constructs the comparison and its required projection equations.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001V, categories-definition-fibre-products: universal property; explicit comparison needed in Tag 05X9."
+   }
+  },
+  {
+   "text": "Conversely, let $d:D\\times_B T\\to D$ and $t:D\\times_B T\\to T$ be the projections and put $b_i=\\operatorname{pr}_i d$. We have $f b_1=f b_2$ and $p b_i=h t$ (for $i=2$, use $p=qf$). Hence $u_i=(b_i,t):D\\times_B T\\to A_T$ exist. Their images in $C_T$ agree since both have projections $f b_1=f b_2$ and $t$. This defines $v=(u_1,u_2):D\\times_B T\\to D_T$. The two composites $ev$ and $ve$ have the identity projections at every fibre product, so uniqueness in the universal property makes them identities. Thus $e$ is the canonical isomorphism, compatible with both maps to $A$ and with the map to $T$. All pairs here denote morphisms defined by universal properties, not pairs of underlying scheme points.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001V, categories-definition-fibre-products: uniqueness of the morphism to a fibre product."
+   }
+  },
+  {
+   "text": "Let $a:A_T\\to A$ and $t:A_T\\to T$ be the projections. The diagonal $\\delta_T:A_T\\to D_T$ has both projections equal to $\\mathrm{id}_{A_T}$. Consequently $e\\delta_T$ has $D$-projection $(a,a)=\\delta a$ and $T$-projection $t$. The base change of $\\delta$ is precisely the unique morphism $(\\delta a,t):A_T\\to D\\times_B T$. Their projections coincide, so they are equal. This verifies compatibility of the specified diagonal morphisms.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001V, categories-definition-fibre-products; Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, proof: base change of the diagonal."
+   }
+  },
+  {
+   "text": "Now let $h:W\\hookrightarrow B$ be the inclusion of an open subscheme. Apply [lem-weil-pbc-open-preimage-fibre-product] to $p$, $q$ and $p_2$. It identifies $A\\times_B W$, $C\\times_B W$ and $D\\times_B W$ with $p^{-1}(W)$, $q^{-1}(W)$ and $p_2^{-1}(W)$, with their inclusions and restriction morphisms as the two projections. Combine the last identification with $e$ from steps 1--2 for $T=W$ to identify $D_W$ as well. The asserted maps to $W$ are the restrictions because the cited statement identifies those projections, not merely their sources. The induced map $f_W$ agrees with restriction of $f$: both have $C$-projection $f a$ and the same $W$-projection, and are equal by uniqueness.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR, schemes-lemma-open-fibre-product, with the second factor an open in the base; Tag 05X9, first sentence of the proof."
+   }
+  },
+  {
+   "text": "For $r=p$ or $r=p_2$, let $Z$ be any closed subset of $r^{-1}(W)$. In the subspace topology write $Z=F\\cap r^{-1}(W)$ for a closed subset $F$ of the original source. Directly by membership, $r(Z)=r(F)\\cap W$. Since $r$ is closed by hypothesis, $r(F)$ is closed in $B$, and its intersection with $W$ is closed in $W$. Therefore the restricted map $r^{-1}(W)\\to W$ is closed. Step 4 identifies these with the two maps in the statement. This argument invokes neither universal closedness nor closedness after arbitrary base change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, proof, first sentence: assumption (2) and (3) survive replacement by an open."
+   }
+  },
+  {
+   "text": "Finally write $h=j k$ with $k:T\\to W$ and $j:W\\hookrightarrow B$. For either $X=A$ or $X=C$ with structure map $s:X\\to B$, define $\\alpha:(X\\times_B W)\\times_W T\\to X\\times_B T$ by $((x,w),t)\\mapsto(x,t)$ and $\\beta:X\\times_B T\\to(X\\times_B W)\\times_W T$ by $(x,t)\\mapsto((x,k t),t)$. These are notation for the unique morphisms determined by their projections. The equations $s x=j k t$ and $w=k t$ give their existence and show that their composites have the identity projections, hence are identities. For $X=A,C$, the two possible composites with $f$ both have projections $f x$ and $t$, so $\\alpha$ identifies the induced morphisms. The two induced comparisons of relative self-products have the corresponding two $A$-projections; each diagonal has both projections equal to the source identity. Uniqueness therefore identifies their diagonals as well.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001V, categories-definition-fibre-products: iterate the universal property; Tag 05X9, arbitrary base change after open replacement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-preimage-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, proof, first sentence and diagonal base-change sentence; explicit universal-property and closed-subspace arguments supplied by Q13, using Tags 001V and 01JR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isClosedMap.*restrict|restrict.*isClosedMap|diagonal.*[Bb]ase[Cc]hange|pullback.*diagonal|diagonal.*pullback",
+   "results": "{\"t\": \"2026-10-23T04:27:35Z\", \"tool\": \"grep\", \"query\": \"isClosedMap.*restrict|restrict.*isClosedMap|diagonal.*[Bb]ase[Cc]hange|pullback.*diagonal|diagonal.*pullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"c26a8c62b3ff79e2\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: pullbackRestrictIsoRestrict and isPullback_morphismRestrict cover individual restriction squares only; the relative self-product comparison, diagonal compatibility and preservation of ordinary closed maps are additional arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a commutative triangle of schemes to an open base preserves closedness of the source and relative self product structure maps and identifies the base changed diagonal.",
+   "results": "{\"t\": \"2026-10-23T04:27:36Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of a commutative triangle of schemes to an open base preserves closedness of the source and relative self product structure maps and identifies the base changed diagonal.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"AlgebraicGeometry.instIsClosedImmersionMorphismRestrict\", \"AlgebraicGeometry.IsSeparated.instResLE\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\"], \"digest\": \"42e264487ec2dea7\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: pullbackRestrictIsoRestrict and isPullback_morphismRestrict cover individual restriction squares only; the relative self-product comparison, diagonal compatibility and preservation of ordinary closed maps are additional arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedMap\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T04:27:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedMap\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: pullbackRestrictIsoRestrict and isPullback_morphismRestrict cover individual restriction squares only; the relative self-product comparison, diagonal compatibility and preservation of ordinary closed maps are additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative triangle of schemes restricted to an open of the base has source and relative self product equal to the inverse image open subschemes. Closed source and self product structure maps stay closed and diagonal commutes with this base change.",
+   "results": "{\"t\": \"2026-10-23T04:27:43Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative triangle of schemes restricted to an open of the base has source and relative self product equal to the inverse image open subschemes. Closed source and self product structure maps stay closed and diagonal commutes with this base change.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.isPullback_morphismRestrict\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.hy\", \"AlgebraicGeometry.isPullback_opens_inf\", \"AlgebraicGeometry.isPullback_opens_inf_le\"], \"digest\": \"8bd00bf846f2ce45\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: pullbackRestrictIsoRestrict and isPullback_morphismRestrict cover individual restriction squares only; the relative self-product comparison, diagonal compatibility and preservation of ordinary closed maps are additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a family of morphisms over an open in the base. The relative square and its diagonal restrict canonically, and closed maps remain closed on that open base.",
+   "results": "{\"t\": \"2026-10-23T04:27:46Z\", \"tool\": \"leanfinder\", \"query\": \"Restrict a family of morphisms over an open in the base. The relative square and its diagonal restrict canonically, and closed maps remain closed on that open base.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.opensDiagram_map\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.isPullback_morphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.Scheme.Hom.resLE_appLE\", \"AlgebraicGeometry.morphismRestrict_appLE\", \"AlgebraicGeometry.morphismRestrict_app'\", \"AlgebraicGeometry.Scheme.Hom.resLE_eq_morphismRestrict\"], \"digest\": \"c24abb453a360725\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: pullbackRestrictIsoRestrict and isPullback_morphismRestrict cover individual restriction squares only; the relative self-product comparison, diagonal compatibility and preservation of ordinary closed maps are additional arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedMap.*restrict|restrict.*IsClosedMap|pullbackRestrictIsoRestrict|diagonalRestrictIsoDiagonal",
+   "results": "{\"t\": \"2026-10-23T09:33:23Z\", \"tool\": \"grep\", \"query\": \"IsClosedMap.*restrict|restrict.*IsClosedMap|pullbackRestrictIsoRestrict|diagonalRestrictIsoDiagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"eb819d6f8aabd7f1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: hits concern individual open restrictions, projection identities, or stronger universal closedness. The relative comparison, its diagonal and iterated-base-change coherence still require the explicit universal-property argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base restriction of a commutative triangle of schemes preserves relative self products and diagonals and restriction to an open base preserves closed maps",
+   "results": "{\"t\": \"2026-10-23T09:33:24Z\", \"tool\": \"leansearch\", \"query\": \"Base restriction of a commutative triangle of schemes preserves relative self products and diagonals and restriction to an open base preserves closed maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.resLE_comp_resLE\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.morphismRestrictRestrict\", \"AlgebraicGeometry.Scheme.restrictRestrictComm\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.morphismRestrict_appLE\"], \"digest\": \"e5fd040962551b55\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: hits concern individual open restrictions, projection identities, or stronger universal closedness. The relative comparison, its diagonal and iterated-base-change coherence still require the explicit universal-property argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedMap\", \"restrict\"",
+   "results": "{\"t\": \"2026-10-23T09:33:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedMap\\\", \\\"restrict\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsClosedMap.domRestrict\", \"IsClosedMap.restrict\", \"IsClosedMap.codRestrict\", \"IsClosedMap.mapsToRestrict\", \"IsClosedMap.restrictPreimage\", \"TopologicalSpace.IsOpenCover.isClosedMap_iff_restrictPreimage\", \"IsValuativeTopology.isClosedMap_restrict\", \"isClosedMap_restrict_of_compactSpace\"], \"digest\": \"4ae554a6b65aebd1\"}",
+   "date": "2026-10-23",
+   "verdict": "Partial match: IsClosedMap.restrictPreimage covers the topological closed-map clause alone; it does not state the scheme or diagonal comparisons. This clause is proved directly in step 5."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative self fibre product under change of the base scheme, diagonal compatibility, and closed maps restricted over an open subset of their target",
+   "results": "{\"t\": \"2026-10-23T09:33:32Z\", \"tool\": \"leanfinder\", \"query\": \"Relative self fibre product under change of the base scheme, diagonal compatibility, and closed maps restricted over an open subset of their target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.universallyClosed_snd\", \"AlgebraicGeometry.universallyClosed_fst\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.t'\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"AlgebraicGeometry.IsSeparated.instFstScheme\"], \"digest\": \"05dabe8c7702fdc1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: hits concern individual open restrictions, projection identities, or stronger universal closedness. The relative comparison, its diagonal and iterated-base-change coherence still require the explicit universal-property argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For schemes A to C to B, (A times B T) times (C times B T) (A times B T) is isomorphic to (A times C A) times B T, compatibly with the diagonal and open restriction",
+   "results": "{\"t\": \"2026-10-23T09:39:18Z\", \"tool\": \"leanfinder\", \"query\": \"For schemes A to C to B, (A times B T) times (C times B T) (A times B T) is isomorphic to (A times C A) times B T, compatibly with the diagonal and open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst_assoc\", \"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd_assoc\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\"], \"digest\": \"050be1d9391b8a5e\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: hits concern individual open restrictions, projection identities, or stronger universal closedness. The relative comparison, its diagonal and iterated-base-change coherence still require the explicit universal-property argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universal-unramified-radicial-open",
+  "date": "2026-10-23",
+  "group": "Q158"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: second sentence, applying Tag 05XA to construct W_2; Tag 05XA proof, final application of Tag 05X9 after verifying closedness of the source and its relative self-product.; Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, first sentence: replacement by an open preserves assumptions (2) and (3), and subsequent base-change of the diagonal; original item step 5 and the comparison in step 7.",
+   "via": [
+    "lem-sfb-universal-unramified-radicial-open",
+    "lem-sfb-universal-closed-immersion-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-open-base-relative-square-closed",
+  "worker": "stage1",
+  "summary": "Q13: preserved the statement; wrote six explicit steps for the comparison, inverse, diagonal, open restrictions, closed images and iterated base change. Reused the existing Mathlib leaf for open preimages. No new nodes; no Lean written or compiled.",
+  "blueprint": "Existing inherited provenance refers to det-thm-sf-ctf-stability-direct-images (3), along the universal-open-locus prerequisite chain. In latest blueprint (7284bb09), (3) assembles direct image via compactification and no longer contains the old alteration paragraph. This auxiliary item realizes its immediate parent’s Tag 05X9 first-sentence restriction and later diagonal comparison; no unit route or blueprint text changed. blueprint_refs.py ancestor returns None, retained as inherited."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-b06fd2e7a",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-b06fd2e7a (reviewer sub-agent of L); spot-checked: PASS, with no fixes. The delivery changes no statement and adds no new nodes. The item stays unsplit and without a proof in clones/live and clones/side-live, and no repair note exists for it. Its statement, stmt_deps and blueprint fields are unchanged from live, and proof_deps equals the union of the steps' uses. I checked the source in Stacks: Tag 05X9 at spaces-more-morphisms.tex line 11566. Its first proof sentence keeps assumptions (2) and (3) under open replacement, and the proof later uses the base change of the diagonal. The item's hypotheses are ordinary closedness of p and p2, which matches. The tags in the step sources, 01JR (schemes.tex line 3198) and 001V (categories.tex line 716), are correct. I checked each step by hand. Steps 1 and 2: e is defined because f_T r_1 = f_T r_2 gives f a_1 = f a_2 and t_1 = t_2. The inverse v needs p b_2 = q f b_2 = q f b_1 = h t, which holds. Both ev and ve have identity projections, so they are identities. Step 3: e composed with the diagonal of f_T has projections (delta a, t), so it equals the base change of delta. Step 4: the leaf lem-weil-pbc-open-preimage-fibre-product (isPullback_morphismRestrict) gives the restriction maps as projections, applied to p, q and p2. Step 5: for Z = F ∩ r^{-1}(W) we get r(Z) = r(F) ∩ W, which is closed in W; the step needs no base-change stability of closed maps. Step 6: the iterated base-change maps alpha and beta are well defined from h = j k, and the comparison of the diagonals follows from uniqueness. The parent lem-sfb-universal-unramified-radicial-open, in steps 2 to 4, uses only clauses that this statement provides. Edge cases: W empty, W = B, f = id and A empty all hold. Both cited nodes are Mathlib leaves, so there is no route issue and no tool_use to accept. On duplicates: lemma-nagata-diagonal-base-change only covers a change of the diagonal's own base, and lem-weil-pbc-over-pullback-diagonal-closed-immersion states a different claim (closed immersion iff separated), so neither duplicates the item. The Mathlib searches cover grep, leansearch and loogle/leanfinder; only IsClosedMap.restrictPreimage matches, and it covers just the topological clause. No SGA source is cited. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenBaseRelativeSquareClosed",
+  "declaration": "AlgebraicGeometry.openBaseRelativeSquareClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenBaseRelativeSquareClosed.lean",
+  "statement": "theorem openBaseRelativeSquareClosed {A B C : Scheme.{u}} (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (hf : f ≫ q = p) : (∀ (T : Scheme.{u}) (h : T ⟶ B), ∃ fT : pullback p h ⟶ pullback q h, fT ≫ pullback.fst q h = pullback.fst p h ≫ f ∧ fT ≫ pullback.snd q h = pullback.snd p h ∧ ∃ e : pullback fT fT ≅ pullback (pullback.fst f f ≫ p) h, e.hom ≫ pullback.fst (pullback.fst f f ≫ p) h ≫ pullback.fst f f = pullback.fst fT fT ≫ pullback.fst p h ∧ e.hom ≫ pullback.fst (pullback.fst f f ≫ p) h ≫ pullback.snd f f = pullback.snd fT fT ≫ pullback.fst p h ∧ e.hom ≫ pullback.snd (pullback.fst f f ≫ p) h = pullback.fst fT fT ≫ pullback.snd p h ∧ pullback.diagonal fT ≫ e.hom ≫ pullback.fst (pullback.fst f f ≫ p) h = pullback.fst p h ≫ pullback.diagonal f ∧ pullback.diagonal fT ≫ e.hom ≫ pullback.snd (pullback.fst f f ≫ p) h = pullback.snd p h) ∧ (∀ W : B.Opens, ∃ fW : pullback p W.ι ⟶ pullback q W.ι, fW ≫ pullback.fst q W.ι = pullback.fst p W.ι ≫ f ∧ fW ≫ pullback.snd q W.ι = pullback.snd p W.ι ∧ (pullbackRestrictIsoRestrict p W).hom ≫ (p ⁻¹ᵁ W).ι = pullback.fst p W.ι ∧ (pullbackRestrictIsoRestrict q W).hom ≫ (q ⁻¹ᵁ W).ι = pullback.fst q W.ι ∧ (pullbackRestrictIsoRestrict p W).hom ≫ morphismRestrict p W = pullback.snd p W.ι ∧ ∃ dW : pullback fW fW ≅ ((pullback.fst f f ≫ p) ⁻¹ᵁ W).toScheme, dW.hom ≫ ((pullback.fst f f ≫ p) ⁻¹ᵁ W).ι ≫ pullback.fst f f = pullback.fst fW fW ≫ pullback.fst p W.ι ∧ dW.hom ≫ ((pullback.fst f f ≫ p) ⁻¹ᵁ W).ι ≫ pullback.snd f f = pullback.snd fW fW ≫ pullback.fst p W.ι ∧ dW.hom ≫ morphismRestrict (pullback.fst f f ≫ p) W = pullback.fst fW fW ≫ pullback.snd p W.ι ∧ (IsClosedMap p.base ∧ IsClosedMap (pullback.fst f f ≫ p).base → IsClosedMap (morphismRestrict p W).base ∧ IsClosedMap (morphismRestrict (pullback.fst f f ≫ p) W).base) ∧ ∀ (T : Scheme.{u}) (k : T ⟶ W.toScheme), ∃ (a : pullback (pullback.snd p W.ι) k ≅ pullback p (k ≫ W.ι)) (c : pullback (pullback.snd q W.ι) k ≅ pullback q (k ≫ W.ι)) (F : pullback p (k ≫ W.ι) ⟶ pullback q (k ≫ W.ι)) (g : pullback (pullback.snd p W.ι) k ⟶ pullback (pullback.snd q W.ι) k), a.hom ≫ pullback.fst p (k ≫ W.ι) = pullback.fst (pullback.snd p W.ι) k ≫ pullback.fst p W.ι ∧ a.hom ≫ pullback.snd p (k ≫ W.ι) = pullback.snd (pullback.snd p W.ι) k ∧ c.hom ≫ pullback.fst q (k ≫ W.ι) = pullback.fst (pullback.snd q W.ι) k ≫ pullback.fst q W.ι ∧ c.hom ≫ pullback.snd q (k ≫ W.ι) = pullback.snd (pullback.snd q W.ι) k ∧ F ≫ pullback.fst q (k ≫ W.ι) = pullback.fst p (k ≫ W.ι) ≫ f ∧ F ≫ pullback.snd q (k ≫ W.ι) = pullback.snd p (k ≫ W.ι) ∧ g ≫ pullback.fst (pullback.snd q W.ι) k = pullback.fst (pullback.snd p W.ι) k ≫ fW ∧ g ≫ pullback.snd (pullback.snd q W.ι) k = pullback.snd (pullback.snd p W.ι) k ∧ g ≫ c.hom = a.hom ≫ F ∧ ∃ d : pullback g g ≅ pullback F F, d.hom ≫ pullback.fst F F = pullback.fst g g ≫ a.hom ∧ d.hom ≫ pullback.snd F F = pullback.snd g g ≫ a.hom ∧ pullback.diagonal g ≫ d.hom = a.hom ≫ pullback.diagonal F)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3aaa8abd6",
+  "group": "Q27",
+  "result": "pass",
+  "note": "First S2 delivery: live and side-live have the node unsplit with no lean record; ledger shows only Q13's S1 merge. Snapshot dag differs from side-live only in the item node, and only by the added lean record; lean.statement is byte-identical to the file signature. Read against Stacks 05X9 (first proof sentence: open replacement keeps (2)/(3); base change of the diagonal). Every clause checked: fT, e, the diagonal equations, fW, the pullbackRestrictIsoRestrict/morphismRestrict identifications, dW over D, IsClosedMap (p∣_W) and (p₂∣_W) from ordinary closedness (no UniversallyClosed), and the iterated base change a, c, F, g, d with g≫c=a≫F and diagonal g≫d=a≫diagonal F. All are true, each canonical map is pinned by its projections, nothing weaker or stronger than the node. One universe u, consistent with the parent exists_universalUnramifiedRadicialOpen; edge cases W=∅/⊤, T=∅, f=𝟙, empty A or C fine. No defs, one sorry, source/blueprint docstrings with the six steps, Mathlib-only imports, no duplicate in Sheaf/WeilConjectures or Mathlib. No FIX, so no compile; the worker reports a clean compile."
+ }
+}

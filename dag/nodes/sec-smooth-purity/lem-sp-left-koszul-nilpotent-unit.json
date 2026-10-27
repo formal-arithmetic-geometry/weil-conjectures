@@ -1,0 +1,165 @@
+{
+ "id": "lem-sp-left-koszul-nilpotent-unit",
+ "kind": "statement",
+ "title": "Termwise nilpotence for the canonical left Koszul unit",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $T$, and the completed coefficient sheaf $R$ with uniformizer $\\pi$. Let $C(P)=\\mathsf R_j(L_j\\otimes_R P)$ and $u_P:P\\to C(P)$ be the specified left-Koszul completion and zero-homotopy unit [def-sp-power-torsion-limit-models]. There is a natural transformation $\\eta:\\mathrm{id}\\to C$ on all strict unbounded $R$-complexes whose component at $P$ is $u_P$. For every such $P$ and every $r\\geq1$ such that $\\pi^r$ kills every section of every term of $P$, the chain map $u_P$ is a quasi-isomorphism. No outer tower or completeness assertion is part of this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+ },
+ "stmt_deps": [
+  "def-sp-power-torsion-limit-models",
+  "sk-def-sp-coefficient-towers",
+  "def-sp-completed-uniformizer-section"
+ ],
+ "proof": [
+  {
+   "text": "The pro-etale module category has exact countable products. Apply the generic nilpotent-action theorem with the completed coefficient sheaf and its uniformizer. Use its natural unit on all complexes and its nilpotent-action conclusion separately for each given exponent.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sp-nilpotent-action-koszul-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+   }
+  },
+  {
+   "text": "Transport the generic right tensor by the signed tensor symmetry. It sends the degree-zero inclusion x tensor 1 to 1 tensor x. Identify the two Roos functors as the same shifted mapping cone of one minus product shift; on maps their product maps and shifted cone maps agree. The coordinate normalization pins the transported map to u_P with zero homotopy. These identifications transport naturality and the quasi-isomorphism conclusion.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-sp-power-torsion-limit-models",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-sp-power-torsion-limit-models",
+  "lem-sp-nilpotent-action-koszul-unit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of unbounded complexes using Koszul complexes and homotopy inverse limits",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HasDerivedCategory",
+     "HasDerivedCategory.standard",
+     "HomologicalComplex.instHasLimit",
+     "DerivedCategory",
+     "HomologicalComplexUpToQuasiIso",
+     "HomologicalComplex.instHasLimitsOfShape",
+     "HomologicalComplexUpToQuasiIso.Q",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and quasi isomorphism of the Koszul completion unit of a nilpotent complex using tensor symmetry",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "HomologicalComplex.leftUnitor'_inv",
+     "HomologicalComplex.leftUnitor'_inv_comm",
+     "HomologicalComplex.rightUnitor'_inv_comm",
+     "HomologicalComplex.leftUnitor'_inv_comm_assoc",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "HomologicalComplex.leftUnitor",
+     "CochainComplex.cm5b.instQuasiIsoIntP"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.complete|[Kk]oszul|[Rr]oos",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+     "Mathlib/RingTheory/Regular/RegularSequence.lean",
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PowerTorsionSheafLimitComplete",
+  "date": "2026-10-25",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7.",
+   "via": [
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PowerTorsionKoszulUnit",
+  "file": "lean/Sheaf/Paper/PowerTorsionKoszulUnit.lean",
+  "declaration": "WeilConjectures.PowerTorsionLimit.left_koszul_nilpotent_unit",
+  "statement": "theorem left_koszul_nilpotent_unit :\n    ∃ η : 𝟭 (CochainComplex (integralTowerModules l E T) ℤ) ⟶ completion l E T,\n      (∀ P, η.app P = unit l E T P) ∧\n      ∀ (P : CochainComplex (integralTowerModules l E T) ℤ) (r : ℕ), 1 ≤ r →\n        (∀ (a : ℤ) (U : T.ProEtᵒᵖ) (x : (P.X a).val.obj U),\n          (@id ((completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)\n            ((uniformizer l E T).val U)) ^ r • x = 0) →\n        QuasiIso (unit l E T P)",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4bce",
+  "group": "Y6",
+  "result": "fix",
+  "landing": "20261025T164846-L-1111894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4bce",
+  "group": "Y6",
+  "result": "fix",
+  "landing": "20261025T164846-L-1111894",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to published; moved Models defs diffed verbatim vs old item module; 3 new sorry statements read against nodes and the inherited item statement (sign (-1)^{pq} recomputed, nilpotent s^r=0 argument, K-flat span); #print axioms on scratch compile of all 5 modules (sorryAx only via the new steps)"
+ }
+}

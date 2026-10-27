@@ -1,0 +1,347 @@
+{
+ "id": "lem-trf-completed-chart-coefficient-surjection",
+ "kind": "statement",
+ "title": "Coefficient construction and surjectivity for a completed monomial chart",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero Noetherian local commutative ring [def-weil-pbc-noetherian-ring], $k=A/\\mathfrak m$, and $P$ a fine saturated sharp additive monoid [def-trf-fs-log-blowup]; sharp means that $0$ is its only invertible element. Let $a:(P,+)\\to(A,\\cdot)$ be a monoid homomorphism with $a(q)\\in\\mathfrak m$ for every $q\\ne0$, and put $I=(a(q):q\\ne0)A$. Suppose $R=A/I$ is regular local [def-weil-regular-scheme], let $n=\\dim R$, and choose lifts $u_1,\\ldots,u_n\\in A$ of a regular system of parameters of $R$ [def-weil-pbc-regular-system-of-parameters]. Put $S=\\widehat A=\\varprojlim_j A/\\mathfrak m^j$ [def-weil-pbc-adic-completion], and write $\\widehat a(q),\\widehat u_i$ for the canonical images in $S$. Then $\\mathfrak m=I+(u_1,\\ldots,u_n)$, and $S$ is a complete Noetherian local ring with maximal ideal $\\mathfrak mS$, residue field $k$, and $\\dim S=\\dim A$ [def-weil-pbc-krull-dimension-ring]. There exist a coefficient ring $L$ and a homomorphism $\\lambda:L\\to S$ inducing an isomorphism on residue fields as follows: if $A$ contains a field, one can take $L=k$ and $\\lambda$ a section of $S\\to k$; if $A$ contains no field, $k$ has prime characteristic $p$ and one can take a Cohen ring $L=C$ with $C/pC\\cong k$ [def-weil-pbc-cohen-ring]. Write $E=L[P][T_1,\\ldots,T_n]$ for the ring of finite sums $cz^qT^e$, with multiplication $z^qz^{q'}=z^{q+q'}$, and $\\mathfrak a=(\\mathfrak m_L,z^q\\ (q\\ne0),T_1,\\ldots,T_n)$, where $\\mathfrak m_k=0$ and $\\mathfrak m_C=pC$. The map $E\\to S$, $cz^qT^e\\mapsto\\lambda(c)\\widehat a(q)\\widehat u^e$, extends to a continuous surjective local homomorphism $\\phi:B=\\varprojlim_j E/\\mathfrak a^j\\to S$. It satisfies $\\phi(z^q)=\\widehat a(q)$ and $\\phi(T_i)=\\widehat u_i$. Moreover $B$ is $\\mathfrak aB$-adically complete, $\\phi(\\mathfrak aB)=\\mathfrak mS$, and $\\phi(J)=\\mathfrak mS$ for $J=(z^q\\ (q\\ne0),T_1,\\ldots,T_n)B$. The assertions include $P=\\{0\\}$ and $n=0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70, coefficient-and-surjection part of the local chart construction (agent refinement of the displayed models). Also literature/stacks-project/algebra.tex, Tag 032A, theorem-cohen-structure-theorem, coefficient-ring construction and final paragraph. Extracted from old completed-chart Step 2: parameter lifts, maximal ideal, completion properties, coefficient field/Cohen ring, finite-level maps, inverse limit and complete-source surjectivity."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-fs-log-blowup",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-cohen-ring",
+  "def-trf-complete-toric-model"
+ ],
+ "proof": [
+  {
+   "text": "The images of the $u_i$ generate the maximal ideal $\\mathfrak m/I$ of $R$ by [def-weil-pbc-regular-system-of-parameters]. Thus every $x\\in\\mathfrak m$ differs from an $A$-linear combination of the $u_i$ by an element of $I$. Conversely $I$ and every $u_i$ lie in $\\mathfrak m$. Hence $\\mathfrak m=I+(u_1,\\ldots,u_n)$.",
+   "uses": [
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KU, definition-regular-local: parameters generate the maximal ideal; quotient-ideal calculation"
+   }
+  },
+  {
+   "text": "Since $A$ is Noetherian, $\\mathfrak m$ is finitely generated [def-weil-pbc-noetherian-ring]. Apply [lem-weil-pbc-adic-completion-mod-ideal] to $(A,\\mathfrak m)$: $S$ is $\\mathfrak mS$-adically complete and its first-coordinate map identifies $S/\\mathfrak mS$ with $k$. By [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring], $S$ is Noetherian local with maximal ideal $\\mathfrak mS$. It is nonzero because its residue field is $k$. Finally [lem-weil-pbc-completion-dimension] gives $\\dim S=\\dim A$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-completion-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GG lemma-hathat-finitely-generated, 0316 lemma-completion-Noetherian-Noetherian, 05GI lemma-radical-completion; dimension: more-algebra.tex Tag 07NV lemma-completion-dimension"
+   }
+  },
+  {
+   "text": "Suppose $A$ contains a field. Its composite map to the nonzero ring $S$ is injective, since a unital map from a field to a nonzero ring has zero kernel. Apply [lem-weil-pbc-cohen-coefficient-ring-exists] to $S$, obtaining a subring $\\Lambda$ with $\\Lambda\\cap\\mathfrak mS=p\\Lambda$ and residue field $k$, where $p=\\operatorname{char}k$. If $p=0$, this intersection is zero by that node. If $p>0$, the field contained in $S$ has characteristic $p$: its unital map to $k$ is injective. Thus $pS=0$, so again $\\Lambda\\cap\\mathfrak mS=p\\Lambda=0$. The stated residue isomorphism is now $\\Lambda\\xrightarrow{\\sim}k$ itself. Its inverse followed by inclusion defines $\\lambda:k\\to S$, a section of $S\\to k$. Set $L=k$.",
+   "uses": [
+    "lem-weil-pbc-cohen-coefficient-ring-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032A theorem-cohen-structure-theorem (1); Tag 0326 definition-coefficient-ring and following remarks, case (1)"
+   }
+  },
+  {
+   "text": "Suppose $A$ contains no field. If $\\operatorname{char}k=0$, every positive integer has nonzero residue and hence is a unit in $A$; the prime-ring map therefore extends to a unital injection $\\mathbf Q\\to A$, a contradiction. Consequently $\\operatorname{char}k=p$ for a prime $p$. Choose a Cohen ring $C$ and $e:C/pC\\xrightarrow{\\sim}k$ using [lem-weil-pbc-cohen-rings-exist]. Apply [lem-weil-pbc-cohen-ring-lift-complete-local] to the complete local ring $S$ and this residue isomorphism. It gives $\\lambda:C\\to S$ reducing to $e$. Set $L=C$. This does not require $A$ to be a domain or $\\lambda$ to be injective; it includes rings where a power of $p$ vanishes.",
+   "uses": [
+    "lem-weil-pbc-cohen-rings-exist",
+    "lem-weil-pbc-cohen-ring-lift-complete-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0328 lemma-cohen-rings-exist; Tag 032A theorem-cohen-structure-theorem, positive-residue-characteristic construction"
+   }
+  },
+  {
+   "text": "Choose finitely many nonzero generators $q_1,\\ldots,q_r$ for $P$, deleting $0$ from a finite generating list [def-trf-fs-log-blowup]. Every $q\\ne0$ is a nonempty sum of these generators, so $z^q$ is divisible by some $z^{q_i}$. Therefore $\\mathfrak a=(\\mathfrak m_L,z^{q_1},\\ldots,z^{q_r},T_1,\\ldots,T_n)$ is finitely generated: $\\mathfrak m_L$ is zero or $(p)$. By [lem-weil-pbc-adic-completion-mod-ideal], $B$ is $\\mathfrak aB$-adically complete and $B/\\mathfrak aB\\cong E/\\mathfrak a$. Sharpness implies a sum involving a nonzero element cannot equal $0$: if $q+q'=0$, $q$ is invertible. Consequently the constant-coefficient map sending every nonzero monomial and every $T_i$ to zero is a ring map $E\\to L/\\mathfrak m_L$ with kernel $\\mathfrak a$. Thus $E/\\mathfrak a\\cong k$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG lemma-hathat-finitely-generated; finite generators and constant-coefficient quotient of the displayed Expose VI 1.6 model"
+   }
+  },
+  {
+   "text": "Define $f:E\\to S$ by finite-sum evaluation $cz^qT^e\\mapsto\\lambda(c)\\widehat a(q)\\widehat u^e$. Additivity is termwise; multiplicativity follows from $a(q+q')=a(q)a(q')$ and commutativity. The generators of $\\mathfrak a$ map into $\\mathfrak mS$, so $f(\\mathfrak a^j)\\subseteq(\\mathfrak mS)^j$. There are therefore compatible quotient maps $f_j:E/\\mathfrak a^j\\to S/(\\mathfrak mS)^j$. For $b=(b_j)_j\\in B$, the sequence $(f_j(b_j))_j$ is compatible. Completeness of $S$ identifies it with a unique element $\\phi(b)\\in S$ [def-weil-pbc-adic-completion, lem-weil-pbc-adic-completion-mod-ideal]. Componentwise ring operations prove that $\\phi$ is a ring map and restricts to $f$. In particular it has the prescribed values on $z^q$ and $T_i$. Since $\\phi(\\mathfrak aB)\\subseteq\\mathfrak mS$, it carries $(\\mathfrak aB)^j$ into $(\\mathfrak mS)^j$ and is continuous.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0317 definition-complete and Tag 05GG lemma-hathat-finitely-generated; direct componentwise inverse-limit construction"
+   }
+  },
+  {
+   "text": "The reduction of $\\phi$ modulo $\\mathfrak mS$ is exactly $B\\to B/\\mathfrak aB\\cong L/\\mathfrak m_L\\xrightarrow{\\sim}k$. Hence $\\phi^{-1}(\\mathfrak mS)=\\mathfrak aB$. To check that $B$ is local, take $b\\notin\\mathfrak aB$. Its first coordinate is nonzero in the field $E/\\mathfrak a$. For each $j$, lift the inverse of this coordinate to $E/\\mathfrak a^j$; the product with $b_j$ is $1+h$ with $h\\in\\mathfrak a/\\mathfrak a^j$ and $h^j=0$. The finite series $\\sum_{i=0}^{j-1}(-h)^i$ corrects the lift to an inverse of $b_j$. These inverses are unique and commute with reduction. They form an inverse to $b$ in $B$. Since $\\mathfrak aB$ is maximal, its complement consists of units and it is the unique maximal ideal. Thus $\\phi$ is local.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GI lemma-radical-completion, proof (coordinate inverses); geometric-series argument written out"
+   }
+  },
+  {
+   "text": "Write $\\phi_*(H)$ for the ideal of $S$ generated by images of an ideal $H\\subseteq B$, without yet asserting equality with the set image. Step 1 gives $\\phi_*(J)=\\mathfrak mS$, since the displayed generators map to $\\widehat a(q)$ and $\\widehat u_i$. As $J\\subseteq\\mathfrak aB$ and $\\lambda(\\mathfrak m_L)\\subseteq\\mathfrak mS$, also $\\phi_*(\\mathfrak aB)=\\mathfrak mS$. Apply [lem-weil-pbc-complete-source-surjective-mod-ideal] with source $B$, ideal $\\mathfrak aB$ and target $S$. The source is precomplete by Step 5, the target is Hausdorff for the image ideal $\\mathfrak mS$ by Step 2, and the composite $B\\to S/\\mathfrak mS=k$ is surjective because its restriction to $L$ is. Therefore $\\phi$ is surjective. For a surjective ring map the set image of an ideal is an ideal: in a finite sum $\\sum s_i\\phi(h_i)$ lift each $s_i$ to $b_i\\in B$, obtaining $\\phi(\\sum b_ih_i)$. Thus $\\phi(J)=\\phi(\\mathfrak aB)=\\mathfrak mS$, as claimed.",
+   "uses": [
+    "lem-weil-pbc-complete-source-surjective-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0315 lemma-completion-generalities, lifting method; Mathlib/RingTheory/AdicCompletion/Functoriality.lean, surjective_of_mk_map_comp_surjective, lines 447-459"
+   }
+  },
+  {
+   "text": "The arguments allow $P=\\{0\\}$: the list $q_i$ is empty and $I=0$. They also allow $n=0$, when Step 1 says $\\mathfrak m=I$. If both hold, $\\mathfrak m=0$, $A=k$ is a field, $S=k$, $E=B=k$, and $\\phi$ is the identity with both ideals zero. In the no-field case the combination $P=\\{0\\},n=0$ cannot occur, since it would force $A$ to be a field. No other step used a nonempty generating list.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), displayed models; empty-list checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-weil-pbc-cohen-rings-exist",
+  "lem-weil-pbc-cohen-ring-lift-complete-local",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p.70; construction supplied explicitly using Stacks Tags 032A, 0328, 05GG, 05GI, 0316 and 07NV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local ring whose maximal ideal is generated by a sharp monoid chart and parameters admits a surjection from the completed monoid polynomial algebra over a coefficient field or Cohen ring.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.evalOneₐ_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R), Function.Surjective ⇑(AdicCompletion.evalOneₐ I)\", \"doc\": \"The evaluation map from the I-adic completion of a commutative ring $ R $ to the quotient ring $ R/I $, defined as the projection to the first component in the inverse limit $ \\\\varprojlim R/I^n $, is \"}\n  {\"name\": \"AdicCompletion.surjective_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ), Function.Surjective ⇑(AdicCompletion.evalₐ I n)\", \"doc\": \"For any natural number $ n $, the canonical $ R $-algebra homomorphism from the $ I $-adic completion of $ R $ to the quotient ring $ R/I^n $ is surjective, meaning every element of $ R/I^n $ is the i\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"IsLocalRing.exists_surjective_of_not_isLocalRing\", \"module\": \"Mathlib/RingTheory/LocalRing/NonLocalRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [Nontrivial R], ¬IsLocalRing R → ∃ K₁ K₂ x x_1 f, Function.Surjective ⇑f\", \"doc\": \"For any nontrivial commutative ring $ R $ that is not a local ring, there exist fields $ K₁ $ and $ K₂ $ and a surjective ring homomorphism $ f : R \\to K₁ \\times K₂ $.\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_surjective\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R),\\n  Function.Surjective ⇑Valued.v\", \"doc\": \"The valuation function on the adic completion of the fraction field of a Dedekind domain at a height one prime ideal is surjective onto the multiplicative integers with zero (\\\\mathbb{Z}^\\\\times_0).\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a surjective completed monoid algebra map to a complete local ring using a Cohen coefficient ring and prescribed generators of the maximal ideal.",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MonoidAlgebra, Function.Surjective",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.*(Monoid|surject)|Monoid.*(coefficient|surject)|coefficient.*AdicCompletion",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"line\": \"154\", \"text\": \"  · let E := MonoidHom.liftOfSurjective _ (ZMod.unitsMap_surjective hd) ⟨_, h⟩\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Basic.lean\", \"line\": \"778\", \"text\": \"  f.toAddMonoidHom.addSubmonoidMap_surjective S.toAddSubmonoid\"}\n  {\"file\": \"Mathlib/NumberTheory/ArithmeticFunction/Carmichael.lean\", \"line\": \"87\", \"text\": \"  exact MonoidHom.exponent_dvd <| ZMod.unitsMap_surjective h\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Tower.lean\", \"line\": \"327\", \"text\": \"lemma toMonoidHom_symm_extendScalarsHomOfSurjective (h : Function.Surjective (algebraMap R S)) :\"}\n  {\"file\": \"Mathlib/Algebra/HierarchyDesign.lean\", \"line\": \"90\", \"text\": \"  like `Function.Injective.monoid` and `Function.Surjective.monoid`.\"}\n  {\"file\": \"Mathlib/Algebra/Module/Congruence/Defs.lean\", \"line\": \"155\", \"text\": \"    [AddCommMonoid N] [Module S M] [Module S N] (f : M →ₗ[S] N) (hf : Function.Surjective f) :\"}\n  {\"file\": \"Mathlib/Algebra/Module/Submodule/Map.lean\", \"line\": \"671\", \"text\": \"    Function.Surjective (f.submoduleMap p) := f.toAddMonoidHom.addSubmonoidMap_surjective _\"}\n  {\"file\": \"Mathlib/Algebra/Module/Submodule/Range.lean\", \"line\": \"63\", \"text\": \"theorem range_toAddSubmonoid [RingHomSurjective τ₁₂] (f : M →ₛₗ[τ₁₂] M₂) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/WithVal.lean\", \"line\": \"429\", \"text\": \"  simp [valueGroup, valueMonoid, ← (WithVal.ofVal_surjective v).range_comp]\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"line\": \"238\", \"text\": \"  MonoidHom.surjective_of_card_ker_le_div _ <| by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean\", \"line\": \"53\", \"text\": \"    exact AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact _ _ _ _\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean\", \"line\": \"75\", \"text\": \"    exact AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact _ _ _ _\"}\n  {\"file\": \"Mathlib/Algebra/Exact/Basic.lean\", \"line\": \"544\", \"text\": \"  AddMonoidHom.exact_iff_of_surjective_of_bijective_of_injective\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ModuleTopology.lean\", \"line\": \"466\", \"text\": \"  AddMonoidHom.isOpenQuotientMap_of_isQuotientMap <| isQuotientMap_of_surjectiveₛₗ hσ φ hφ\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Ker.lean\", \"line\": \"628\", \"text\": \"  MonoidHom.range_eq_top.mpr e.surjective\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Map.lean\", \"line\": \"504\", \"text\": \"  f.submonoidComap_surjective_of_surjective H'.toSubmonoid hf\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Map.lean\", \"line\": \"514\", \"text\": \"  f.submonoidMap_surjective H.toSubmonoid\"}\n  {\"file\": \"Mathlib/Algebra/Ring/InjSurj.lean\", \"line\": \"317\", \"text\": \"/-- A type endowed with `0`, `1` and `+` is an additive monoid with one, if it admits a surjective\"}\n  {\"file\": \"Mathlib/Algebra/Group/Submonoid/Operations.lean\", \"line\": \"677\", \"text\": \"theorem mrange_eq_top {f : F} : mrange f = (⊤ : Submonoid N) ↔ Surjective f :=\"}\n  {\"file\": \"Mathlib/Algebra/Group/Submonoid/Operations.lean\", \"line\": \"874\", \"text\": \"lemma submonoidComap_surjective_of_surjective (f : M →* N) (N' : Submonoid N) (hf : Surjective f) :\"}\n  {\"file\": \"Mathlib/Algebra/Group/Submonoid/Operations.lean\", \"line\": \"892\", \"text\": \"theorem submonoidMap_surjective (f : M →* N) (M' : Submonoid M) :\"}\n  {\"file\": \"Mathlib/Algebra/Group/Submonoid/Operations.lean\", \"line\": \"1190\", \"text\": \"  map_comap_eq_self (MonoidHom.mrange_eq_top_of_surjective _ h ▸ le_top)\"}\n  {\"file\": \"Mathlib/Algebra/Group/Graph.lean\", \"line\": \"15\", \"text\": \"Let `f : G → H × I` be a homomorphism to a product of monoids. Assume that `f` is surjective on the\"}\n  {\"file\": \"Mathlib/Algebra/Group/Graph.lean\", \"line\": \"64\", \"text\": \"Let `f : G → H × I` be a homomorphism to a product of monoids. Assume that `f` is surjective on the\"}\n  {\"file\": \"Mathlib/Algebra/Group/Graph.lean\", \"line\": \"69\", \"text\": \"Let `f : G → H × I` be a homomorphism to a product of monoids. Assume that `f` is surjective on the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure theorem with chosen monomial generators and residue parameters gives a continuous surjective formal toric algebra homomorphism.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.surjective_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ), Function.Surjective ⇑(AdicCompletion.evalₐ I n)\", \"doc\": \"For any natural number $ n $, the canonical $ R $-algebra homomorphism from the $ I $-adic completion of $ R $ to the quotient ring $ R/I^n $ is surjective, meaning every element of $ R/I^n $ is the i\"}\n  {\"name\": \"AdicCompletion.evalOneₐ_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R), Function.Surjective ⇑(AdicCompletion.evalOneₐ I)\", \"doc\": \"The evaluation map from the I-adic completion of a commutative ring $ R $ to the quotient ring $ R/I $, defined as the projection to the first component in the inverse limit $ \\\\varprojlim R/I^n $, is \"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Surjective ⇑P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"surjective_of_mk_map_comp_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {S : Type u_6} [inst_1 : CommRing S] (f : R →+* S)\\n  [IsPrecomplete I R] [haus : IsHausdorff (Ideal.map f I) S],\\n  Function.Surjective ⇑((Ideal.Quotient.mk (Ideal.map f I)).comp f) → Function.Surjective ⇑f\", \"doc\": \"Let $ R $ and $ S $ be commutative rings, $ I $ an ideal of $ R $, and $ f : R \\to S $ a ring homomorphism. If $ R $ is precomplete with respect to $ I $, $ S $ satisfies the Hausdorff condition with r\"}\n  {\"name\": \"surjective_fontaineTheta\", \"module\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) R],\\n  Function.Surjective ⇑(frobenius (ModP R p) p) → Function.Surjective ⇑(WittVector.fontaineTheta R p)\", \"doc\": \"If the Frobenius endomorphism on the ring $ R/pR $ is surjective, then the Fontaine theta homomorphism from the Witt vectors over the pretilt of $ R $ to $ R $ is surjective.\"}\n  {\"name\": \"AdicCompletion.kerProj_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {A : Type u_4} [inst_2 : CommRing A]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R S] {f : S →ₐ[R] A} (hf : Function.Surjective ⇑f),\\n  Function.Surjective ⇑(AdicCompletion.kerProj hf)\", \"doc\": \"If $ f : S \\\\to A $ is a surjective $ S $-algebra homomorphism, then the kernel projection associated with $ f $ is surjective.\"}\n  {\"name\": \"Algebra.FormallySmooth.comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"Given a formally smooth $ R $-algebra $ A $, a ring $ B $ with an ideal $ I $ satisfying $ I^2 = 0 $, the composition of the quotient map $ B \\to B/I $ with the algebra homomorphism $ A \\to B $ is surje\"}\n  {\"name\": \"Algebra.Generators.Cotangent.surjective_map_ofComp\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The cotangent module homomorphism induced by the composition of algebra extensions is surjective, i.e., the map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to \\\\ker(\\\\phi')/\\\\ker(\\\\phi')^2$ associated to the composed exten\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen|coefficient.*(ring|field)|MonoidAlgebra.*(completion|surject)|completion.*MonoidAlgebra",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"top\": [\"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/Noetherian/OfPrime.lean\", \"Mathlib/RingTheory/Polynomial/Chebyshev.lean\", \"Mathlib/RingTheory/Polynomial/Chebyshev.lean\", \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\", \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen coefficient ring and monoid generators give a continuous surjective map from an adic completed monoid algebra to a complete local ring.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AdicCompletion.map_surjective\", \"AdicCompletion.liftRingHom.congr_simp\", \"AdicCompletion.evalOneₐ_surjective\", \"AdicCompletion.of_surjective_iff\", \"AdicCompletion.of_surjective\", \"AdicCompletion.instCommRing\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"AdicCompletion.mkₐ\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a monoid algebra evaluation map to adic completions and prove it surjective from generators of the maximal ideal and a residue field isomorphism.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AdicCompletion.surjective_evalₐ\", \"AdicCompletion.evalOneₐ_surjective\", \"AdicCompletion.eval_surjective\", \"AdicCompletion.evalₐ\", \"AdicCompletion.evalOneₐ\", \"AdicCompletion.kerProj_surjective\", \"AdicCompletion.evalₐ_of\", \"AdicCompletion.factorₐ_evalₐ_one\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, AddMonoidAlgebra, Function.Surjective",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local ring with a sharp finitely generated monoid chart and parameter generators is a quotient of the completed monoid polynomial ring over a coefficient field or Cohen ring.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"HenselianLocalRing\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsLocalRing.finite_quotient_iff\", \"IsDiscreteValuationRing.TFAE\", \"IsAdicComplete.henselianRing\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenRing|cohen_structure|coefficient_subring|coefficientField|MonoidAlgebra.*completion|completion.*MonoidAlgebra",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-completed-chart",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-cycle duality alteration ancestry through trace specialization; Expose VI 1.6 local chart input. In lem-trf-log-regular-completed-chart, former Step 2: coefficient selection, completion and prescribed monomial/parameter surjection.",
+   "via": [
+    "lem-trf-log-regular-completed-chart",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-completed-chart-coefficient-surjection",
+  "worker": "stage1",
+  "summary": "Wrote the coefficient choice, finite-sum evaluation and compatible quotient construction explicitly. Reused existing completion, coefficient and surjectivity nodes; no new nodes. Distinguished generated image ideals before surjectivity from set images afterward and checked all empty cases. No statement correction.",
+  "blueprint": "Realizes the coefficient-and-surjection input in the Expose VI 1.6 local-chart construction, below lem-trf-local-term-locality via the recorded alteration/duality ancestry; specifically former Step 2 of lem-trf-log-regular-completed-chart. Blueprint searches found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-regular-system-of-parameters",
+    "why": "Generic commutative algebra input: Regular system of parameters. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "def-weil-pbc-noetherian-ring",
+    "why": "Generic commutative algebra input: Noetherian ring. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Generic commutative algebra input: The completion along a finitely generated ideal is complete with the same quotient. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative algebra input: The completion of a Noetherian ring is Noetherian. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic commutative algebra input: The completion of a Noetherian local ring is local with the same residue field. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic commutative algebra input: The completion of a Noetherian local ring has the same dimension. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "why": "Generic commutative algebra input: Cohen structure theorem: a complete local ring has a coefficient ring. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-rings-exist",
+    "why": "Generic commutative algebra input: Cohen rings exist. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-ring-lift-complete-local",
+    "why": "Generic commutative algebra input: Lifting a prescribed Cohen-ring residue isomorphism. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "def-weil-pbc-adic-completion",
+    "why": "Generic commutative algebra input: I-adic completion of a ring. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-complete-source-surjective-mod-ideal",
+    "why": "Generic commutative algebra input: Surjectivity modulo an ideal implies surjectivity from a precomplete ring. The local-term unit supplies no replacement for this algebraic fact; the Expose VI local-chart route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-weil-pbc-cohen-rings-exist",
+  "lem-weil-pbc-cohen-ring-lift-complete-local",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-c8c438656",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-c8c438656 (reviewer sub-agent of L); spot-checked: Read all 9 steps and every cited statement. Statement and stmt_deps are identical to the NI-created unsplit node, so nothing is weakened. This is a first one-level split with no new nodes, not a 2026-10-21 re-split. Sources: ILO Exposé VI 1.6(i)-(ii) gives the models only, so proof_origin=agent is right. I also read Stacks 032A theorem-cohen-structure-theorem; no SGA cited. Checks by step: S1 m=I+(u) follows from regular-system-of-parameters (m/I generated by the u_i). S2: S is complete, Noetherian and local with maximal ideal mS, residue field k and dim S=dim A. S3: coefficient-ring clause (3) plus char F=p gives pS=0, so Lambda=k. S4: char k=0 would put Q inside A, so k has prime characteristic and the Cohen-lift hypotheses hold, with no injectivity of C->S needed. S5: the augmentation ideal is finitely generated, and sharpness makes the constant-term map multiplicative with kernel the augmentation ideal, so E/a=k. S6: f maps a into mS (lambda(p) in mS), giving compatible f_j and a limit map phi into the complete S. S7: inverses built level by level with geometric series make B local and phi local. S8: the complete-source surjectivity hypotheses all hold (B precomplete, S Hausdorff for mS, B->k onto on L), and images of ideals under a surjection are ideals, so phi(J)=phi(aB)=mS. S9: P={0} and n=0 each checked, together giving the identity of k; also checked Z_p, Z/p^2, k[[x]] and a(1)=0. Duplicate search: lem-trf-cohen-monoid-surjection-principal-kernel, polynomial-power-series-monoid-completion, formal-monoid-extension-model and sfb tame model are not this surjection. lem-per-formal-monoid-adic-evaluation overlaps only the elementary construction in Step 6 (advisory). The worker-written tool_uses list only generic sk-thm-p1 algebra and definition nodes; accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedChartCoefficientSurjection",
+  "declaration": "AddMonoidAlgebra.exists_completedChart_coefficient_surjection",
+  "declarations": [
+   "AddMonoidAlgebra.CompletedChartSurjection",
+   "AddMonoidAlgebra.exists_completedChart_coefficient_surjection"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompletedChartCoefficientSurjection.lean",
+  "statement": "theorem exists_completedChart_coefficient_surjection (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (P : Type v) [AddCommMonoid P] (_hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (_hsharp : ∀ q : P, IsAddUnit q → q = 0) (a : Multiplicative P →* A) (_ha : ∀ q : P, q ≠ 0 → a (.ofAdd q) ∈ IsLocalRing.maximalIdeal A) (I : Ideal A) (_hI : I = Ideal.span {x | ∃ q : P, q ≠ 0 ∧ x = a (.ofAdd q)}) [IsRegularLocalRing (A ⧸ I)] (n : ℕ) (u : Fin n → A) (_hu : IsLocalRing.IsRegularSystemOfParameters (List.ofFn (fun i ↦ Ideal.Quotient.mk I (u i)))) : IsLocalRing.maximalIdeal A = I ⊔ Ideal.span (Set.range u) ∧ IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal A) A) = (IsLocalRing.maximalIdeal A).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) ∧ IsAdicComplete ((IsLocalRing.maximalIdeal A).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))) (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ Function.Bijective (IsLocalRing.ResidueField.map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))) ∧ ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) = ringKrullDim A ∧ ((∃ (K : Type u) (_ : Field K), Nonempty (K →+* A)) → ∃ coeffMap : IsLocalRing.ResidueField A →+* AdicCompletion (IsLocalRing.maximalIdeal A) A, (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal A)).toRingHom.comp coeffMap = RingHom.id (IsLocalRing.ResidueField A) ∧ CompletedChartSurjection A P a n u (IsLocalRing.ResidueField A) coeffMap) ∧ ((¬ ∃ (K : Type u) (_ : Field K), Nonempty (K →+* A)) → ∃ p : ℕ, Nat.Prime p ∧ CharP (IsLocalRing.ResidueField A) p ∧ ∃ (C : Type u) (_ : CommRing C) (_ : IsLocalRing C), IsCohenRing p C ∧ ∃ (e : (C ⧸ Ideal.span {(p : C)}) ≃+* IsLocalRing.ResidueField A) (coeffMap : C →+* AdicCompletion (IsLocalRing.maximalIdeal A) A), (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal A)).toRingHom.comp coeffMap = e.toRingHom.comp (Ideal.Quotient.mk _) ∧ CompletedChartSurjection A P a n u C coeffMap)",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d25ab7e7e",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 0ab413c9cdf (H2) is correctly repaired: stmt_dep is now the landed def owner def-trf-complete-toric-model, whose public module abbreviates CompletedLocalModel/localModelCompletionIdeal/completedLocalModelBoundaryIdeal; the theorem node is no longer cited. Node diff vs live: only lean and that stmt_dep; proof/proof_deps unchanged; lean.statement verbatim. Clause-by-clause match: Noetherian local A; fs (IsFineSaturatedMonoid on Multiplicative P) and sharp P; a: Multiplicative P →* A into m; I pinned; IsRegularLocalRing (A/I); IsRegularSystemOfParameters includes length = dim; m = I ⊔ span u; S Noetherian, local, max ideal mS, mS-adically complete, residue bijective, dim S = dim A; field case L = ResidueField A with section of evalOne; no-field case p prime, CharP, Cohen C : Type u, e, λ reduces to e, no injectivity (universes fit exists_cohenRing and exists_cohenRing_lift); CompletedChartSurjection gives B local with max ideal aB, aB-complete, φ local, surjective and continuous for the adic topologies, exact eval₂Hom/liftNCRingHom evaluation, z^q and T_i values, set images of aB and J (extended ideal, not closure) equal to mS. Edge cases P={0}, n=0, both, and Z/p² checked. No hollow defs, sorry only, docstrings with source and blueprint, report sections present. No file changed, so no compile. Advisory only: could use the ToricMonoid.* abbrev names."
+ }
+}

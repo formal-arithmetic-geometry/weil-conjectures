@@ -1,0 +1,235 @@
+{
+ "id": "lem-per-clean-pair-subflag-parameters",
+ "kind": "statement",
+ "title": "Simultaneous parameters for a clean regular pair and a regular subflag",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian regular local ring [def-weil-regular-scheme]. Let $P,Q,K\\subsetneq R$ be ideals with $P+Q\\subseteq K$, and assume that $R/P$, $R/Q$, $R/(P+Q)$ and $R/K$ are regular local. There is a regular system of parameters $t_1,\\ldots,t_d$ [def-weil-pbc-regular-system-of-parameters], an integer $0\\le l\\le d$, and subsets $A,B\\subseteq\\{1,\\ldots,l\\}$ such that $K=(t_1,\\ldots,t_l)$, $P=(t_a:a\\in A)$ and $Q=(t_b:b\\in B)$. Zero ideals, $P=Q$, $K=P+Q$, and dimension zero are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 4.2.6, printed p.120, with extension of the parameters in the regular quotient by P+Q to accommodate the regular subscheme defined by K; used in Proposition 4.2.8(iii), printed p.121."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=R/\\mathfrak m$, $V=\\mathfrak m/\\mathfrak m^2$, $S=P+Q$, and $U_L=(L+\\mathfrak m^2)/\\mathfrak m^2\\subseteq V$ for $L=P,Q,S,K$. All these ideals lie in $\\mathfrak m$ since $S\\subseteq K\\subsetneq R$. By [lem-weil-pbc-regular-local-cotangent-dimension], $V$ has finite dimension $d=\\dim R$. Apply [lem-weil-pbc-regular-local-quotient-independent-generators] to each $L$: it has generators $g_i$ with independent classes in $V$. Consequently $L\\cap\\mathfrak m^2=\\mathfrak mL$: if $x=\\sum a_i g_i$ has zero class in $V$, independence gives $a_i\\in\\mathfrak m$ for all $i$, and the reverse inclusion follows from $L\\subseteq\\mathfrak m$. Thus the natural map $L/\\mathfrak mL\\to U_L$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-weil-pbc-regular-local-quotient-independent-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR, lemma-regular-quotient-regular, proof; cotangent dimension discussion before Tag 00KU, definition-regular-local; also ILO VIII Lemma 4.2.6, printed p.120, first paragraph of proof."
+   }
+  },
+  {
+   "text": "Every $w\\in U_P\\cap U_Q$ has a representative in $P\\cap Q$. Indeed choose $p\\in P$, $q\\in Q$ representing $w$. Then $p-q\\in S\\cap\\mathfrak m^2=\\mathfrak mS=\\mathfrak mP+\\mathfrak mQ$ by step 1 and distributivity of ideal multiplication. Write $p-q=u+v$ with $u\\in\\mathfrak mP$, $v\\in\\mathfrak mQ$. The element $c=p-u=q+v$ lies in $P\\cap Q$ and still represents $w$, since $u,v\\in\\mathfrak m^2$. This explicitly supplies the common lifts needed below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 4.2.6, printed p.120, last paragraph: the reduction of the intersection-sum exact sequence modulo the maximal ideal; written here directly using step 1."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-vector-space-basis-through-vector] applied to the vector space $U_P\\cap U_Q$, choose a basis $C$ of that intersection. Use step 2 to lift its members to elements $c_i\\in P\\cap Q$. Apply the same basis-extension statement in $U_P$ and $U_Q$ to obtain bases $C\\sqcup X$ of $U_P$ and $C\\sqcup Y$ of $U_Q$, and lift $X$ to elements $x_i\\in P$ and $Y$ to elements $y_i\\in Q$. The family $C\\sqcup X\\sqcup Y$ is a basis of $U_P+U_Q=U_S$. For independence, a relation makes the $X$-combination lie in $U_P\\cap U_Q=\\operatorname{span}_k C$; independence of $C\\sqcup X$ kills its $X$ coefficients. Independence of $C\\sqcup Y$ kills the remaining coefficients. Spanning follows by adding the two displayed spans.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 4.2.6, printed p.120: independent cotangent directions for the transverse pair, after lifting the common directions; the common directions are handled together rather than by successive quotients."
+   }
+  },
+  {
+   "text": "As $U_S\\subseteq U_K\\subseteq V$, apply [lem-weil-pbc-vector-space-basis-through-vector] first in $U_K$ to extend $C\\sqcup X\\sqcup Y$ to a basis $C\\sqcup X\\sqcup Y\\sqcup Z$, and then in $V$ to extend that basis by $T$. Lift $Z$ to elements $z_i\\in K$, and lift $T$ to elements $v_i\\in\\mathfrak m$. Retain the already chosen lifts of $C,X,Y$. These families are finite because $V$ is finite dimensional. Let $t$ be their concatenation in the order $(c_i),(x_i),(y_i),(z_i),(v_i)$, and let $l$ be the total length of the first four blocks. Its classes are a basis of $V$, and the first $l$ classes are a basis of $U_K$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 4.2.6, printed p.120, completion of cotangent directions to parameters; extension through the intermediate subspace for K in the setting of Proposition 4.2.8(iii), printed p.121."
+   }
+  },
+  {
+   "text": "Use the isomorphisms of step 1: the chosen $c_i,x_i$ span $P/\\mathfrak mP$, the $c_i,y_i$ span $Q/\\mathfrak mQ$, and the first $l$ entries of $t$ span $K/\\mathfrak mK$. These are finite $R$-modules since $R$ is Noetherian. Apply [lem-weil-pbc-nakayama-local-generators] to each ideal as an $R$-module. It gives $P=(c_i,x_i)$, $Q=(c_i,y_i)$, and $K=(t_1,\\ldots,t_l)$. Apply that same statement to the finite module $\\mathfrak m$ and the full cotangent basis: $(t)=\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV, lemma-NAK, local generation form, applied to the four finite modules P, Q, K and the maximal ideal."
+   }
+  },
+  {
+   "text": "The list $t$ has length $d$, because its classes form a basis of the $d$-dimensional space $V$. Together with $(t)=\\mathfrak m$, this is exactly a regular system of parameters by [def-weil-pbc-regular-system-of-parameters]. Take $A$ to be the positions of the $c_i,x_i$ blocks and $B$ the positions of the $c_i,y_i$ blocks. Both are subsets of $\\{1,\\ldots,l\\}$, and step 5 gives all three required ideal equalities. Empty blocks are permitted throughout, so no step excludes $P=0$, $Q=0$, $P=Q$, $K=S$, or $d=0$.",
+   "uses": [
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KU, definition-regular-local; the regular-parameter definition and the final ordering of the constructed basis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-regular-local-quotient-independent-generators",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 4.2.6, printed p.120: the intersection-sum cotangent argument, reorganized into simultaneous bases; the regular subflag is incorporated by an extra basis extension through the image of K. Stacks Tags 00NR and 00DV supply the algebraic inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "regular.*(parameter|quotient)|cotangent|simultaneous",
+   "results": "{\"t\": \"2026-10-24T00:24:35Z\", \"tool\": \"grep\", \"query\": \"regular.*(parameter|quotient)|cotangent|simultaneous\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"bac72957707388b4\"}; Read the returned signatures. They concern normalization, smooth presentations, regular sequences, cotangent dimensions or module bases; none asserts the simultaneous local-parameter conclusion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two cleanly intersecting regular closed subschemes and a regular subscheme of their intersection can be defined by subsets of one regular system of parameters",
+   "results": "{\"t\": \"2026-10-24T00:24:35Z\", \"tool\": \"leansearch\", \"query\": \"Two cleanly intersecting regular closed subschemes and a regular subscheme of their intersection can be defined by subsets of one regular system of parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.Scheme.zeroLocus_inf\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf_of_nonempty\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_sup\", \"AlgebraicGeometry.Scheme.zeroLocus_iUnion\"], \"digest\": \"ab21af2c187b9292\"}; Read the returned signatures. They concern normalization, smooth presentations, regular sequences, cotangent dimensions or module bases; none asserts the simultaneous local-parameter conclusion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\"",
+   "results": "{\"t\": \"2026-10-24T00:24:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsRegularLocalRing\", \"IsRegularLocalRing.toIsLocalRing\", \"IsRegularLocalRing.of_isRegularRing_of_isLocalRing\", \"IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing\", \"IsRegularLocalRing.toIsNoetherian\", \"IsRegularLocalRing.of_ringEquiv\", \"IsRegularLocalRing.spanFinrank_maximalIdeal\", \"IsRegularRing.isRegularLocalRing_localization\"], \"digest\": \"67009090762d2789\"}; Read the returned signatures. They concern normalization, smooth presentations, regular sequences, cotangent dimensions or module bases; none asserts the simultaneous local-parameter conclusion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular local ring two ideals with regular quotients and regular sum quotient admit simultaneous regular parameters adapted to a further regular closed subscheme inside their intersection",
+   "results": "{\"t\": \"2026-10-24T00:24:36Z\", \"tool\": \"leanfinder\", \"query\": \"In a regular local ring two ideals with regular quotients and regular sum quotient admit simultaneous regular parameters adapted to a further regular closed subscheme inside their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsRegular.cons'\", \"RingTheory.Sequence.isRegular_iff\"], \"digest\": \"fc97c2539c76beee\"}; Read the returned signatures. They concern normalization, smooth presentations, regular sequences, cotangent dimensions or module bases; none asserts the simultaneous local-parameter conclusion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parameter|quotient|cotangent",
+   "results": "{\"t\": \"2026-10-24T00:26:10Z\", \"tool\": \"grep\", \"query\": \"parameter|quotient|cotangent\", \"sub\": \"RingTheory/RegularLocalRing\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\"], \"digest\": \"061cb119cca8e9f7\"}; Read the returned signatures. They concern normalization, smooth presentations, regular sequences, cotangent dimensions or module bases; none asserts the simultaneous local-parameter conclusion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous coordinate bases for two cleanly intersecting regular immersions and a regular flag inside the intersection in a Noetherian regular local ring",
+   "results": "{\"t\": \"2026-10-24T00:27:26Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous coordinate bases for two cleanly intersecting regular immersions and a regular flag inside the intersection in a Noetherian regular local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Module.exists_basis_of_basis_baseChange\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl_apply\", \"Algebra.Generators.basisCotangentAway\", \"Algebra.SubmersivePresentation.basisKaehler\"], \"digest\": \"b1f8b2be6c0e132d\"}; Read the returned signatures. They concern normalization, smooth presentations, regular sequences, cotangent dimensions or module bases; none asserts the simultaneous local-parameter conclusion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular local ring two ideals whose quotients and sum quotient are regular have simultaneous parameters adapted to a larger regular quotient ideal",
+   "results": "{\"t\": \"2026-10-24T01:13:00Z\", \"tool\": \"leanfinder\", \"query\": \"Regular local ring two ideals whose quotients and sum quotient are regular have simultaneous parameters adapted to a larger regular quotient ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.IsWeaklyRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsRegular.recIterModByRegularWithRing\", \"RingTheory.Sequence.IsRegular.cons'\", \"RingTheory.Sequence.isWeaklyRegular_append_iff'\", \"RingTheory.Sequence.IsWeaklyRegular.cons'\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\"], \"digest\": \"8b91c4000d00bb43\"}; Read the returned signatures. Regular-sequence recursion and permutation, regular-local definitions, and Oka predicates do not state simultaneous adapted parameters. The grep returned no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-24T01:13:01Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsRegularLocalRing\", \"IsRegularLocalRing.toIsLocalRing\", \"IsRegularLocalRing.of_isRegularRing_of_isLocalRing\", \"IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing\", \"IsRegularLocalRing.toIsNoetherian\", \"IsRegularLocalRing.of_ringEquiv\", \"IsRegularLocalRing.spanFinrank_maximalIdeal\", \"IsRegularRing.isRegularLocalRing_localization\"], \"digest\": \"97e2e1879adec364\"}; Read the returned signatures. Regular-sequence recursion and permutation, regular-local definitions, and Oka predicates do not state simultaneous adapted parameters. The grep returned no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parameter|quotient",
+   "results": "{\"t\": \"2026-10-24T01:13:01Z\", \"tool\": \"grep\", \"query\": \"parameter|quotient\", \"sub\": \"RingTheory/RegularLocalRing\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures. Regular-sequence recursion and permutation, regular-local definitions, and Oka predicates do not state simultaneous adapted parameters. The grep returned no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous regular system of parameters for two cleanly intersecting regular local quotients and a regular subflag",
+   "results": "{\"t\": \"2026-10-24T01:13:02Z\", \"tool\": \"leansearch\", \"query\": \"Simultaneous regular system of parameters for two cleanly intersecting regular local quotients and a regular subflag\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"LocalSubring.mk.noConfusion\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.isWeaklyRegular_append_iff\", \"LocalSubring.noConfusionType\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"IsLocalization.isRegular_mk'\"], \"digest\": \"e30e53424e508f50\"}; Read the returned signatures. Regular-sequence recursion and permutation, regular-local definitions, and Oka predicates do not state simultaneous adapted parameters. The grep returned no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two clean regular ideals are generated by subsets of a common minimal generating set of the maximal ideal",
+   "results": "{\"t\": \"2026-10-24T01:13:03Z\", \"tool\": \"leanfinder\", \"query\": \"Two clean regular ideals are generated by subsets of a common minimal generating set of the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"Ideal.IsOka\", \"Ideal.isOka_fg\", \"Ideal.IsLocal\", \"RingTheory.Sequence.IsRegular.top_ne_smul\", \"IdealFilter.IsGabriel\", \"Ideal.IsMinimalPrimaryDecomposition\", \"Ideal.isOka_isPrincipal\"], \"digest\": \"d887e9bdbd819c47\"}; Read the returned signatures. Regular-sequence recursion and permutation, regular-local definitions, and Oka predicates do not state simultaneous adapted parameters. The grep returned no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-weak-boundary-family-blowup",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model/purity: supporting geometric modification, ILO VIII VIII Lemma 4.2.6, printed p.120, with extension of the parameters in the regular quotient by P+Q to accommodate the regular subscheme defined by K; used in Proposition 4.2.8(iii), printed p.121.",
+   "via": [
+    "lem-per-weak-boundary-family-blowup",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-clean-pair-subflag-parameters",
+  "worker": "stage1",
+  "summary": "Q17: read ILO VIII Lemma 4.2.6 and Proposition 4.2.8, Stacks 00NR and 00DV; proved the common-lift step explicitly and assembled parameters by basis extensions through the image of K. Reused existing independent-generator, Nakayama, cotangent-dimension and basis-extension nodes. No new nodes, no statement change, no Lean writing or compilation.",
+  "blueprint": "Supports the inherited ancestor lem-per-artin-gabber-affine-curve via its regular-purity/modification dependency chain: specifically lem-per-weak-boundary-family-blowup, the simultaneous coordinate input to ILO VIII Proposition 4.2.8(iii). Steps 1-3 realize ILO VIII Lemma 4.2.6; steps 4-6 include the regular subflag K by basis extension. The current latest blueprint was searched globally; no blueprint node states this simultaneous ideal conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-60e0dedf4",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-60e0dedf4 (reviewer sub-agent of L); spot-checked: First split of an existing unsplit statement node: 6 steps, no new nodes, statement and stmt_deps unchanged, and proof_deps equal to the union of the step uses. Checked against ILO VIII Lemma 4.2.6 (printed p.120): cotangent kernel I/mI, the transversal case, and the exact sequence used to find common parameters. Step 1 meets the hypotheses of lem-weil-pbc-regular-local-quotient-independent-generators (I in m, R/I regular) for P, Q, P+Q and K. It derives L∩m²=mL correctly from independence of the generators. Step 2 gives the common lift c=p−u=q+v explicitly from (P+Q)∩m²=mP+mQ. Steps 3 and 4 cite basis extension for every independent subset; I redid the independence argument for C⊔X⊔Y through U_P∩U_Q=span C. Step 5 applies Nakayama to the finite modules P, Q, K and m; the first l entries lie in K. Step 6 gives length d=dim m/m² and generation of m, as the definition requires. Checked edge cases d=0, P=0, P=Q, K=P+Q and K=m, and k[[x,y]] examples, including the excluded tangent pair (x),(x+y²). No duplicate: boundary-regular-flag-parameters and trf complementary-quotients-tor state different things. No SGA citations, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CleanPairSubflagParameters",
+  "declaration": "IsLocalRing.exists_cleanPair_subflag_parameters",
+  "file": "lean/Sheaf/RingTheory/CleanPairSubflagParameters.lean",
+  "statement": "theorem exists_cleanPair_subflag_parameters {R : Type u} [CommRing R] [IsRegularLocalRing R] (P Q K : Ideal R) (hP : P ≠ ⊤) (hQ : Q ≠ ⊤) (hK : K ≠ ⊤) (hPQK : P ⊔ Q ≤ K) (hPreg : IsRegularLocalRing (R ⧸ P)) (hQreg : IsRegularLocalRing (R ⧸ Q)) (hPQreg : IsRegularLocalRing (R ⧸ (P ⊔ Q))) (hKreg : IsRegularLocalRing (R ⧸ K)) : ∃ (d : ℕ) (t : Fin d → R), IsRegularSystemOfParameters (List.ofFn t) ∧ ∃ l : ℕ, l ≤ d ∧ ∃ A B : Set (Fin d), A ⊆ {i | i.val < l} ∧ B ⊆ {i | i.val < l} ∧ K = Ideal.span (t '' {i | i.val < l}) ∧ P = Ideal.span (t '' A) ∧ Q = Ideal.span (t '' B)",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03e3918f0",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Every assumption (CommRing + IsRegularLocalRing R; P,Q,K ≠ ⊤; P ⊔ Q ≤ K; four quotient-regularity hypotheses) and every conclusion part (∃ d, t : Fin d → R with IsRegularSystemOfParameters (List.ofFn t), so length = dim and span = m; l ≤ d; A,B ⊆ first l indices; K, P, Q as spans of t-images) matches the node in order, with no stronger assumption or universe coupling. Edge cases d=0, zero ideals, P=Q, K=P+Q, K=m covered; clean-intersection hypothesis kept. lean.statement matches the file verbatim; node equals live apart from lean; stmt_dep records unchanged. No duplicate (boundary-regular-flag theorem needs nested ideals). No definitions, sorry only, docstrings with source, blueprint id and the 6 steps; plain imports serve proof deps. No file changed, so no compile."
+ }
+}

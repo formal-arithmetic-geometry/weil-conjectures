@@ -19,88 +19,58 @@
  ],
  "proof": [
   {
-   "text": "Write $P=\\operatorname{Proj}(A)$ and $s_f=\\psi(f)$ for homogeneous $f$ of positive degree $e$. The canonical $r$ and graded comparison in the statement are obtained by extending $\\psi$ after inverting $f$ on $T_{s_f}$. Explicitly, in degree $m\\ge0$ this extension sends $b/f^q\\in(A_f)_m$, with $b\\in A_{m+qe}$, to $\\psi(b)/s_f^q$. Here division means the inverse of tensoring with the generator $s_f^q$; degree zero gives the functions map defining $r$ on this chart. The formula is forced by $f\\cdot f^{-1}=1$ and the prescribed image of every $b/1$. The twisting-sheaf definition identifies these fractions with chart sections and identifies the global section $b$ with $b/1$. In particular $\\theta_m(r^*b)=\\psi(b)$ for $b\\in A_m$.",
+   "text": "The given canonical $r$ has $r^{-1}D_+(f)=T_{\\psi(f)}$ and scalar chart map $b/f^q\\mapsto\\psi(b)/\\psi(f)^q$. Apply [lem-trf-proj-localized-graded-comparison] to this same $r$ on $U(\\psi)$. Taking $q=0$ in its chart normalization sends $b/1$ to $\\psi(b)$, on each $T_{\\psi(f)}$. These opens cover $U(\\psi)$ by definition, so the section identity holds on $U(\\psi)$; its glued family has $\\theta_m(r^*b)=\\psi(b)$. The same family respects graded multiplication in all nonnegative degrees. Restrict it to $V$: on each $V\\cap T_{\\psi(f)}$ the fraction formula is unchanged, and the multiplication equations restrict as identities of sheaf maps.",
    "uses": [
-    "def-weil-pbc-proj-twisting-sheaf",
-    "def-sc-invertible-section-ring",
-    "def-sc-section-generating-locus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
-   }
-  },
-  {
-   "text": "The opens $W_a=V\\cap T_{\\psi(a)}$, for $a\\in A_d$, cover $V$. Indeed at any $x\\in V$ trivialize the invertible module $L^{\\otimes d}$ and write the germs of $\\psi(a)$ as coefficients $c_a$ times its basis. Generation says that a finite sum $\\sum h_ac_a=1$ in the local ring $\\mathcal O_{T,x}$. If all $c_a$ lay in its maximal ideal so would this sum; hence one is a unit. The corresponding section generates on a neighbourhood of $x$, exactly membership in its generating locus. Tensor powers are locally rank one because tensoring a local basis of $L$ with itself gives a basis. No finite subcover or quasi-compactness is used.",
-   "uses": [
-    "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product",
-    "def-sc-section-generating-locus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
-   }
-  },
-  {
-   "text": "For $a\\in A_d$, multiplication by $a$ gives an isomorphism $\\mathcal O_{D_+(a)}\\to\\mathcal O_P(d)|_{D_+(a)}$. To see this on a basis of subopens $D_+(g)\\subseteq D_+(a)$, use the twisting-sheaf chart formula: the map is $(A_g)_0\\to(A_g)_d$, $u\\mapsto au$. The element $a$ is invertible in $A_g$, with inverse homogeneous of degree $-d$, so $v\\mapsto a^{-1}v$ is its inverse. For completeness, a relation $g^N=ca$ gives $a^{-1}=c/g^N$ of degree $-d$. Localization restrictions commute with multiplication by both $a$ and $a^{-1}$, so these inverse maps define inverse sheaf maps. The global degree-$d$ section $a$ is precisely this basis section, since it restricts to $a/1$.",
-   "uses": [
-    "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
-   }
-  },
-  {
-   "text": "Restrict to $W_a$. The canonical chart construction has $r(W_a)\\subseteq D_+(a)$. Pullback of the inverse maps of Step 3 again gives inverse maps. In the tensor definition of pullback the basis is $1\\otimes a$, since $\\mathcal O_{W_a}\\otimes_{r^{-1}\\mathcal O_P}r^{-1}\\mathcal O_P\\simeq\\mathcal O_{W_a}$ by $u\\otimes v\\mapsto u\\,r^\\sharp(v)$, inverse $u\\mapsto u\\otimes1$. Meanwhile the nonvanishing-section trivialization applied to $L^{\\otimes d}$ identifies $L^{\\otimes d}|_{W_a}$ with $\\mathcal O_{W_a}$ through the basis $\\psi(a)$. Step 1 shows that $\\theta_d$ sends $1\\otimes a$ to $\\psi(a)$, so in these bases it is the identity. It is therefore invertible on every $W_a$. Its local inverses agree on intersections because they invert the same map, and glue by the sheaf condition to a global inverse on $V$.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-nonvanishing-section-trivializes"
+    "lem-trf-proj-localized-graded-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), proof: extension to the localized graded algebra; Tag 01N8 (lemma-converse-construction), local bases and gluing."
    }
   },
   {
-   "text": "If another $\\mathcal O_V$-linear comparison carries every pulled-back $a\\in A_d$ to $\\psi(a)|_V$, its restriction to $W_a$ agrees with $\\theta_d$ on the basis $1\\otimes a$ of Step 4. Linearity makes the two maps agree on every section on every subopen of $W_a$. Since the $W_a$ cover $V$, the sheaf condition makes the maps equal on $V$. This proves uniqueness among all comparisons, not just among isomorphisms. For empty $V$ all these sheaves have exactly one section on the empty open and the same argument gives the unique isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
-   }
-  },
-  {
-   "text": "Finally check graded multiplication directly, without assuming multiplication of Proj twists is globally invertible. On a canonical chart $T_{s_f}$, take fractions $b/f^p$ and $c/f^q$ of degrees $m$ and $n$. Multiplication of the shifted modules is multiplication in $A_f$, hence their product is $bc/f^{p+q}$. The formula of Step 1 gives\n$$\\frac{\\psi(bc)}{s_f^{p+q}}=\\frac{\\psi(b)}{s_f^p}\\,\\frac{\\psi(c)}{s_f^q},$$\nbecause $\\psi$ is a graded ring map and multiplication in the section ring is tensor multiplication. The tensor definition of pullback extends this identity bilinearly to coefficients in $\\mathcal O_T$; the sheaf tensor product is the sheafification of the sectionwise tensor, so pure-tensor equality gives equality of the two sheaf maps. The charts cover $U(\\psi)$, so the equality holds there and after restriction to any common open. In particular the isomorphisms in any positive generated degrees are the components of this same multiplication-compatible comparison, as required.",
+   "text": "Apply [lem-trf-proj-generated-pullback-frames] with $X=V$, $M=L^{\\otimes d}|_V$, $s_a=\\psi(a)|_V$, and $g=r|_V$. For every $a\\in A_d$ the inverse image is $V\\cap T_{\\psi(a)}$ by Step 1, since $d>0$; stalk generation is the hypothesis. For a local basis $e$ of $L$, the inverse to $u\\mapsto u e^{\\otimes d}$ sends $(u_1e)\\otimes\\cdots\\otimes(u_de)$ to $u_1\\cdots u_d$; the tensor relations make this well-defined. Thus $M$ is locally free of rank one. We obtain an open cover $W_a=V\\cap T_{\\psi(a)}$ with source basis $e_a=1\\otimes a$ and target basis $s_a$. Step 1 gives $\\theta_d(e_a)=s_a$.",
    "uses": [
-    "def-weil-pbc-proj-twisting-sheaf",
-    "def-sc-invertible-section-ring",
-    "def-pc-module-pullback",
+    "lem-trf-proj-generated-pullback-frames",
+    "def-sc-invertible-module",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), proof: extension to the localized graded algebra; Tag 01N8 (lemma-converse-construction), local bases and gluing."
+   }
+  },
+  {
+   "text": "On $W_a$ the inverse map is explicitly $u s_a\\mapsto u e_a$ on every subopen. This is linear, commutes with restrictions, and is inverse to $\\theta_d$ because $\\theta_d(u e_a)=u s_a$. Writing the local inverses as $\\eta_a$, on $W_a\\cap W_b$ one has $\\eta_a=\\eta_a\\circ\\theta_d\\circ\\eta_b=\\eta_b$, so they agree on overlaps. The morphism-gluing clause of [lem-weil-pbc-glue-sheaves-of-modules] glues them to a map on $V$; its locality clause shows both composites are identities. Thus $\\theta_d$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 04TN (lemma-glue-maps), module version of Tag 00AM (lemma-glue-sheaves-structures); local inverses of Constructions Tag 01N8."
+   }
+  },
+  {
+   "text": "If $\\tau$ has the prescribed images of every $a\\in A_d$, then on $W_a$ it sends $e_a$ to $s_a$, just as $\\theta_d$ does. Since every source section there is uniquely $u e_a$, linearity makes the maps equal on all subopens of $W_a$. The locality clause of [lem-weil-pbc-glue-sheaves-of-modules] gives $\\tau=\\theta_d$. This includes all module maps, with no isomorphism hypothesis on $\\tau$. On empty $V$ the empty-cover gluing statement gives the same unique map and inverse. For positive degrees generated on possibly different opens $V_d,V_e$, restrict the single family of Step 1 to $V_d\\cap V_e$. Its multiplication equation is the required compatibility of those comparisons. Thus all clauses hold.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N8 (lemma-converse-construction), last uniqueness assertion; Tag 01NK (lemma-invertible-map-into-proj), final assertion."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proj-twisting-sheaf",
-  "def-sc-invertible-section-ring",
-  "def-sc-section-generating-locus",
+  "lem-trf-proj-localized-graded-comparison",
+  "lem-trf-proj-generated-pullback-frames",
   "def-sc-invertible-module",
   "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-proj-graded-module-sheaf-exists",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-nonvanishing-section-trivializes"
+  "lem-weil-pbc-glue-sheaves-of-modules"
  ],
  "proof_origin": {
   "by": "document",
@@ -206,33 +176,30 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-proj-invertible-map-twist-iso",
   "worker": "stage1",
-  "summary": "Proved the generated-open twist comparison directly: localized graded comparison, generating-open cover, explicit inverse multiplication on Proj twists, tensor pullback of bases, uniqueness, and multiplication on homogeneous fractions. Reused existing nodes only; no new nodes or Mathlib leaves. Removed unused quasi-compactness and ampleness statement dependencies; the statement itself is unchanged.",
-  "blueprint": "Realizes the section-algebra/Proj criterion under lem-trf-local-term-locality: canonical generation-locus morphism, Tag 01N8 local pullback comparison, and Tag 01NK uniqueness/compatibility.",
+  "summary": "Repair of returned head 4679f099bae after landing refused an unpromoted side completion. Reapplied the retained two-node re-split against the current DAG and released stage-1 repair order; reread every current cited statement and checked all verbatim citation witnesses. Added explicit tensor-basis inverse and overlap-inverse calculations. Rechecked the two additional source-tag siblings in the refreshed DAG and documented why neither supplies the new statements. All six original arguments remain in the two statement-only tasks and short assembly; statement, statement dependencies, and upstream Lean metadata are unchanged. Current-return repair for 8bbeb61438e: reread the current cited statements and source tags, preserve both independent tasks, and explicitly derive section normalization from q=0 before restricting the comparison to V; the delivery tool rebases on its fresh current-DAG fetch. Repair of current return ab4c5544fad: reread all current cited statements, confirm the retained original still matches the DAG, and rebase through the delivery tool. Make explicit descent of section normalization from the chart cover and multiplication compatibility on intersections of different generated opens. Compare the newly present line-Proj chart-pullback sibling in the report; preserve both independent statement-only child tasks.",
+  "blueprint": "Realizes the inherited section-algebra/Proj ampleness-criterion branch below lem-trf-local-term-locality; old Steps 1 and 6 go to the localized comparison node, old Steps 2 and 3 and pullback bases in Step 4 go to the frame node; old Steps 4 and 5 use the existing module morphism-gluing node. The blueprint ancestor text itself contains the contracting-correspondence route, not a direct Proj lemma.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
-    "why": "Step 3 uses its explicit localization restriction and denominator relation to construct inverse sheaf maps on a basic-open basis; this general graded-module sheaf theorem is not supplied by the unit."
-   },
-   {
-    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
-    "why": "Step 4 uses the generic trivialization by a nonvanishing invertible-module section, with no quasi-compactness assumption; this is a general sheaf tool."
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic existence and uniqueness of gluing module morphisms from an arbitrary open cover, for the local inverses and equality of comparisons; no such sheaf tool is stated by this unit."
    }
   ]
  },
  "tool_uses": [
   "lem-weil-pbc-proj-graded-module-sheaf-exists",
-  "lem-weil-pbc-nonvanishing-section-trivializes"
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-glue-sheaves-of-modules"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q114-95369c168",
-  "group": "Q114",
+  "reviewer": "NT-cc-Q158-7bafe5249",
+  "group": "Q158",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q114-95369c168 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all cited DAG statements, unit/chapter route, and Stacks Tags 01NK/01N8. Six steps are mathematically sound, dependencies and tool uses are valid, edge cases checked, no duplicate or route violation found, and no new nodes were delivered. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-7bafe5249 (reviewer sub-agent of L); spot-checked: Fifth head of the Q158 re-split; eeb4, 4679, 8bbe and ab4c were all reader PASSes, and each return was a landing/promotion refusal, not a mathematical fault. Against ab4c, both new nodes (localized-graded-comparison, generated-pullback-frames) are identical in every field. The item changes only in proof Steps 1 and 4; statement, stmt_deps, proof_deps and source are unchanged. New Step 1: the q=0 chart normalization holds on each T_psi(f), and these opens cover U(psi), so theta_m(r^*b)=psi(b) holds by locality of sections. New Step 4: comparisons in degrees generated on different opens V_d and V_e are restrictions of the single Step-1 family, and its multiplication equation on V_d∩V_e gives the compatibility clause. Both are correct. The old snapshot DAG is gone, so I re-read every cited statement on the current base: def-pc-proj, def-pc-module-pullback, def-sc-invertible-module, def-sc-invertible-section-ring, def-sc-section-generating-locus, def-sc-local-free-generator, def-weil-pbc-proj-twisting-sheaf (clause 3 gives s|D+(f)=s/1) and lem-weil-pbc-glue-sheaves-of-modules (clause 1: morphism gluing and equality on an arbitrary cover, empty cover allowed). All clauses the assembly uses are present. I re-read Stacks constructions.tex:3217 (01NK statement, Moreover clause and proof): the item equals 01NK's final assertion plus 01N8 uniqueness and graded compatibility, with nothing weakened. Steps 2-3: the frames node is applied with X=V, M=L^{⊗d}|V, s_a=psi(a)|V and g=r|V. Invertibility of M follows from the written tensor-basis inverse, the local inverses are u s_a↦u e_a, and the overlap identity is eta_a=eta_a theta eta_b=eta_b. Step 4 proves uniqueness among all linear maps tau. Both new nodes are true and are not restatements of the parent. In the localized node, fractions are well defined and multiplicativity is psi(bc)/psi(f)^{p+q}. In the frames node, a finite combination equal to 1 forces some coefficient to be a unit, so infinite families are fine; D_+(h)⊆D_+(a) gives h^N=ca. Edge cases checked: empty V, zero or nilpotent a, q=0, m=0, d>1. Re-split mapping: old Steps 1 and 6 go to the localized node, old Steps 2, 3 and the Step-4 bases to the frames node, and old Steps 4/5 are written out in item Steps 3/4; nothing dropped. Duplicates: rg -L for 01NK/01N8 finds the same 42 files; also checked lem-sfb-graded-proj-quotient-twist-comparison (surjection of degree-1-generated graded rings, Proj target) and lem-sfb-invertible-twist-open-restriction; neither is a duplicate. tool_use of the gluing node accepted. No SGA citation. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -263,5 +230,16 @@
   "existing": false,
   "note": "The canonical morphism and its comparison on V are specified together by the characterizing properties of Stacks 01NK (basic-open inverse images, homogeneous sections, and graded multiplication). The degree-d component is an isomorphism and is unique among all maps with the prescribed degree-d section images. Auxiliary definitions give explicit canonical section maps and equations, without choosing any map from existence."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

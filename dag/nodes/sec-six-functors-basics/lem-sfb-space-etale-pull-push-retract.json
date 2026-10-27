@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-space-etale-pull-push-retract",
+ "kind": "statement",
+ "title": "Split etale pull-push counit for quasi-coherent modules",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $f:X\\to Y$ be a quasi-compact separated etale morphism, with quasi-compactness and separatedness as in [lem-trf-space-qc-separated-etale-local]. Use module sheaves [def-weil-sheaf-of-modules-category] on the small etale structure sheaves and the canonical tensor pullback/direct image adjunction $f^*\\dashv f_*$ of [def-trf-space-etale-module-functors]. For every quasi-coherent $\\mathcal O_X$-module $F$ [def-trf-space-quasi-coherent-module], its adjunction counit $\\epsilon_F:f^*f_*F\\to F$ admits an $\\mathcal O_X$-linear section: there is a module morphism $s_F:F\\to f^*f_*F$ with $\\epsilon_F\\circ s_F=\\operatorname{id}_F$. In particular $F$ is a retract of $f^*f_*F$. No finiteness or Noetherian hypothesis on the spaces or on $F$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0HAP, lemma-etale-pull-push-split, statement."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-quasi-coherent-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=X\\times_YX$, with $p$ the first projection and $q$ the second. Apply [lem-trf-space-etale-module-pushforward-restriction] to the square with bottom map $f:X\\to Y$. Since $f$ is etale, it gives a natural $\\mathcal O_X$-linear isomorphism $\\beta:f^*f_*F\\simeq q_*p^*F$. More concretely, on an etale scheme $u:T\\to X$, let $T_Y$ denote $T\\xrightarrow{u}X\\xrightarrow{f}Y$ and $W_T=X\\times_YT$. The same node identifies $(f^*f_*F)(T)=(f_*F)(T_Y)$ with compatible sections of $F$ on the etale scheme charts of $W_T$, or equivalently sections of $p^*F$ over $W_T$. These are compatible with restriction in $T$. Fibre products and their etale projections exist by [lem-trf-space-fibre-products-etale-covers]; sections on space objects and sheaf gluing there are justified by [lem-trf-space-enlarged-etale-ringed-site-model]. We use the actual restriction comparison, not an unspecified isomorphism.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03LX (lemma-pushforward-etale-base-change-modules), 03LV (lemma-etale-exact-pullback), 03LW (equation-restrict-modules), 03G1 (lemma-compare-etale-sites); Tag 0HAP first sentence, with the affine-base-change reference corrected to etale base change."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-separated-etale-diagonal-complement], $\\Delta:X\\to W$ is open and closed. Let $C$ be its open and closed complement. Pulling this partition back along $W_T\\to W$, $(x,t)\\mapsto(x,u(t))$, gives a partition $W_T=D_T\\amalg C_T$. Its first part is the graph $d_T:T\\to W_T$, $t\\mapsto(u(t),t)$: on every test scheme the equation defining the pullback is exactly $x=u(t)$. Thus $D_T\\simeq T$ and $p\\circ d_T=u$, whereas the second projection composed with $d_T$ is $\\operatorname{id}_T$. On every scheme chart the two parts are complementary open subsets, so they give a disjoint open cover without any finiteness hypothesis on $T$ or on the spaces.",
+   "uses": [
+    "lem-sfb-space-separated-etale-diagonal-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0HAP (lemma-etale-pull-push-split), open and closed diagonal; openness also spaces-morphisms.tex Tag 05W1 (lemma-diagonal-unramified-morphism), part (1)."
+   }
+  },
+  {
+   "text": "For $t\\in F(T)$ define $a_T(t)$ as follows. On $D_T\\simeq T$ take $t$, using $p\\circ d_T=u$ and the etale restriction identification of step 1; on $C_T$ take zero. These sections glue uniquely: on each etale scheme chart $E\\to W_T$ restrict $t$ to the open part $E\\times_{W_T}D_T$, and use zero on $E\\times_{W_T}C_T$; their intersection is empty, so the sheaf axiom gives a unique section on $E$. Uniqueness makes these sections compatible on all chart maps. This constructs the compatible family $a_T(t)$ appearing in step 1 using only the sheaf axiom for [def-weil-sheaf-of-modules-category]. No claim about quasi-coherence of a complementary summand is needed.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0HAP, direct-summand construction, written sectionwise using sites-modules.tex Tag 03CV (definition-sheaf-modules)."
+   }
+  },
+  {
+   "text": "The maps $a_T$ are linear for $\\mathcal O_X(T)$ acting through the second projection $W_T\\to T$: on $D_T$ that projection is the identity and the scalar action is the usual action on $t$, while on $C_T$ every scalar kills zero. Sums and scalar multiples of the glued sections therefore have the prescribed restrictions and equal the corresponding glued section by uniqueness. For a map $T'\\to T$ over $X$, the inverse image of $D_T$ is $D_{T'}$ (the equation $x=u(t)$ pulls back to the same equation for $T'$), and likewise for the complement. Restricting $a_T(t)$ consequently gives $a_{T'}(t|_{T'})$, again by uniqueness. Thus step 1 turns the $a_T$ into an $\\mathcal O_X$-module morphism $s_F:F\\to f^*f_*F$. This is the definition of a linear sheaf morphism in [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0HAP, the inclusion of the diagonal summand; sites-modules.tex Tag 03CV, module morphisms and restrictions."
+   }
+  },
+  {
+   "text": "Identify the given counit, not merely a retraction of the underlying object. For $m\\in(f_*F)(T_Y)$ let $\\pi_T(m)\\in F(T)$ be its chart projection for $(T,\\operatorname{id}_{T_Y})$ in [def-trf-space-etale-module-functors]. This is restriction of the compatible family to $d_T$. Write $B=f_*F$ and $P=f^*$. The adjunction triangle $f_*(\\epsilon_F)\\circ\\eta_B=\\operatorname{id}_B$, evaluated at $T_Y$ and then at this chart projection, gives\n$$\\epsilon_F(T)\\bigl(\\pi_T(\\eta_B(m))\\bigr)=\\pi_T(m).$$\nHere the projection on the left has value in $(PB)(T)$. By the chart-unit tensor formula of [def-trf-space-etale-module-functors] and its etale normalization in [lem-trf-space-chart-adjunction-tensor-realization], this value is $1\\otimes m$, which corresponds to $m$ under $(PB)(T)=B(T_Y)$, the restriction identification of [lem-trf-space-etale-module-pushforward-restriction]. Thus $\\epsilon_F(T)$ is exactly restriction to $D_T$. By construction $a_T(t)|_{D_T}=t$, so $\\epsilon_F(T)s_F(T)(t)=t$. This holds for every etale scheme $T\\to X$ and every section $t$, hence $\\epsilon_F\\circ s_F=\\operatorname{id}_F$. Empty charts and the zero module obey the same formulas. This proves the claimed retract under all the stated hypotheses.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0HAP, final displayed composite and omitted map check, expanded using sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules) and spaces-properties.tex Tags 03LV, 03LW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-etale-module-functors",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-space-separated-etale-diagonal-complement",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0HAP (lemma-etale-pull-push-split), using Tag 03LX for its base-change comparison and writing out the omitted counit calculation from the adjunction triangle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ss]plit|[Ss]plit.*pullback|counit.*[Ss]plit",
+   "results": "{\"t\": \"2026-10-23T18:46:38Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Ss]plit|[Ss]plit.*pullback|counit.*[Ss]plit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\"], \"digest\": \"20b40740f78036f8\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give adjunctions, open-immersion counit isomorphisms, split pullback projections, or fully faithful adjunction criteria. None supplies the section of the module counit for a general quasi-compact separated etale algebraic-space morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"SplitEpi\"",
+   "results": "{\"t\": \"2026-10-23T18:46:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"SplitEpi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback.instIsSplitEpiFst\", \"CategoryTheory.Limits.pullback.instIsSplitEpiSnd\"], \"digest\": \"b1c073c849c6f7b3\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give adjunctions, open-immersion counit isomorphisms, split pullback projections, or fully faithful adjunction criteria. None supplies the section of the module counit for a general quasi-compact separated etale algebraic-space morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent sheaf is a direct summand of its pullback pushforward along a quasi compact separated etale morphism",
+   "results": "{\"t\": \"2026-10-23T18:46:39Z\", \"tool\": \"leansearch\", \"query\": \"A quasi coherent sheaf is a direct summand of its pullback pushforward along a quasi compact separated etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.Presentation\", \"SheafOfModules.IsQuasicoherent.casesOn\"], \"digest\": \"7e42ee3ad9a982f1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give adjunctions, open-immersion counit isomorphisms, split pullback projections, or fully faithful adjunction criteria. None supplies the section of the module counit for a general quasi-compact separated etale algebraic-space morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact separated etale map of algebraic spaces the counit from pullback of pushforward of a quasi coherent module to that module admits a section",
+   "results": "{\"t\": \"2026-10-23T18:46:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact separated etale map of algebraic spaces the counit from pullback of pushforward of a quasi coherent module to that module admits a section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"d619574446812a6f\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give adjunctions, open-immersion counit isomorphisms, split pullback projections, or fully faithful adjunction criteria. None supplies the section of the module counit for a general quasi-compact separated etale algebraic-space morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Algebraic.Space|Etale.*[Ss]plit|[Ss]plit.*Etale",
+   "results": "{\"t\": \"2026-10-23T18:47:19Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|Algebraic.Space|Etale.*[Ss]plit|[Ss]plit.*Etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give adjunctions, open-immersion counit isomorphisms, split pullback projections, or fully faithful adjunction criteria. None supplies the section of the module counit for a general quasi-compact separated etale algebraic-space morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module is a retract of f star f lower star of itself for a separated quasi compact etale map using the open and closed diagonal",
+   "results": "{\"t\": \"2026-10-23T18:47:21Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi coherent module is a retract of f star f lower star of itself for a separated quasi compact etale map using the open and closed diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"0306baac68b840b1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give adjunctions, open-immersion counit isomorphisms, split pullback projections, or fully faithful adjunction criteria. None supplies the section of the module counit for a general quasi-compact separated etale algebraic-space morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Algebraic.Space|Etale.*[Ss]plit|[Ss]plit.*Etale",
+   "results": "{\"t\": \"2026-10-23T19:31:56Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|Algebraic.Space|Etale.*[Ss]plit|[Ss]plit.*Etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and the relevant Mathlib source. Pullback projections split categorically, but this is not a module counit theorem; scheme Zariski open-immersion counit isomorphisms and adjunction/etaleness instances do not give the stated algebraic-space small-etale splitting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"SplitEpi\"",
+   "results": "{\"t\": \"2026-10-23T19:31:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"SplitEpi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback.instIsSplitEpiFst\", \"CategoryTheory.Limits.pullback.instIsSplitEpiSnd\"], \"digest\": \"b1c073c849c6f7b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and the relevant Mathlib source. Pullback projections split categorically, but this is not a module counit theorem; scheme Zariski open-immersion counit isomorphisms and adjunction/etaleness instances do not give the stated algebraic-space small-etale splitting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent sheaf is a direct summand of its pullback pushforward along a quasi compact separated etale morphism",
+   "results": "{\"t\": \"2026-10-23T19:31:57Z\", \"tool\": \"leansearch\", \"query\": \"A quasi coherent sheaf is a direct summand of its pullback pushforward along a quasi compact separated etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.Presentation\", \"SheafOfModules.IsQuasicoherent.casesOn\"], \"digest\": \"7e42ee3ad9a982f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and the relevant Mathlib source. Pullback projections split categorically, but this is not a module counit theorem; scheme Zariski open-immersion counit isomorphisms and adjunction/etaleness instances do not give the stated algebraic-space small-etale splitting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact separated etale map of algebraic spaces the counit from pullback of pushforward of a quasi coherent module to that module admits a section",
+   "results": "{\"t\": \"2026-10-23T19:31:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact separated etale map of algebraic spaces the counit from pullback of pushforward of a quasi coherent module to that module admits a section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"d619574446812a6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and the relevant Mathlib source. Pullback projections split categorically, but this is not a module counit theorem; scheme Zariski open-immersion counit isomorphisms and adjunction/etaleness instances do not give the stated algebraic-space small-etale splitting."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ss]plit|[Ss]plit.*pullback|counit.*[Ss]plit",
+   "results": "{\"t\": \"2026-10-23T19:33:49Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Ss]plit|[Ss]plit.*pullback|counit.*[Ss]plit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\"], \"digest\": \"20b40740f78036f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and the relevant Mathlib source. Pullback projections split categorically, but this is not a module counit theorem; scheme Zariski open-immersion counit isomorphisms and adjunction/etaleness instances do not give the stated algebraic-space small-etale splitting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module is a retract of f star f lower star of itself for a separated quasi compact etale map using the open and closed diagonal",
+   "results": "{\"t\": \"2026-10-23T19:33:50Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi coherent module is a retract of f star f lower star of itself for a separated quasi compact etale map using the open and closed diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"0306baac68b840b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and the relevant Mathlib source. Pullback projections split categorically, but this is not a module counit theorem; scheme Zariski open-immersion counit isomorphisms and adjunction/etaleness instances do not give the stated algebraic-space small-etale splitting."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-quasicoherent-tor-amplitude-test",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input in Tag 08IL, proof, first paragraph: G is a direct summand of j^*j_*G by spaces-cohomology lemma-etale-pull-push-split (Tag 0HAP).",
+   "via": [
+    "lem-sfb-space-quasicoherent-tor-amplitude-test",
+    "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-etale-pull-push-retract",
+  "worker": "stage1",
+  "summary": "Reused the existing etale restriction/base-change and clopen-diagonal statements. Constructed the section by graph/zero gluing on every scheme chart and checked linearity, restriction naturality and the specified counit by its adjunction triangle. Corrected the source proof reference from affine base change to etale base change; the item statement is unchanged. No new nodes.",
+  "blueprint": "Supporting Tag 08IL direct-summand input recorded in blueprint.from.place, below the existing sk-thm-sf-ctf-stability helper chain. The ancestor tool returns None, retained as null. Steps 1-5 realize precisely Tag 0HAP used in that input, without changing a chapter or unit route. Whole-blueprint searches for 0HAP, etale pull, direct summand and counit found no equivalent blueprint statement; same_as remains empty.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic ordinary small-etale module restriction/base-change comparison for arbitrary algebraic spaces, needed for the self-square; no same-unit node supplies this etale-localization interface."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product closure and etale projection facts needed to form the self-square and its chart pullbacks; no replacement of a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic extension of small-etale sheaves to etale algebraic-space objects, used only to interpret compatible sections and gluing on W_T."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic normalization of the specified chart adjunction on etale local tensors; used only to identify the given counit with graph restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-205f671f5",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-205f671f5 (reviewer sub-agent of L); spot-checked: I read the 0-node, 5-step split in full. The statement and stmt_deps are identical to the live copy, which is still unsplit, so no other group has superseded it. Source: Stacks 0HAP. Its proof cites affine base change 07U8, but that lemma needs f affine (the punctured-plane immersion is a counterexample); the delivery correctly uses étale base change 03LX through lem-trf-space-etale-module-pushforward-restriction and reports this under Source error. Step 1: the self-square with g=f gives the section-level identification of f^*f_*F with sections of F over X×_Y T, which the cited node states. Step 2: the clopen-diagonal clause of lem-sfb-space-separated-etale-diagonal-complement applies (f separated and étale); its pullback to X×_Y T is the graph of u. Steps 3 and 4 are genuinely elementary: disjoint two-open gluing, then linearity through q_T with q_T∘d_T=id, and naturality because preimages of graphs are graphs. Step 5: the triangle identity, the chart-unit formula 1⊗m and the étale clause of the tensor realization show that the specified counit is restriction to the graph, so ε∘s=id. This supplies the source's 'details omitted'. Edge cases checked: empty X, f=id, Y⊔Y→Y and infinite disjoint unions. Quasi-coherence and quasi-compactness are unused but kept in the statement, so nothing is weakened. No duplicate: 0HAP occurs only in the item and its one citer; same-unit lem-sfb-space-higher-image-etale-restriction lacks the section formula, and the flat base-change node needs scheme bases. I accept the 4 trf tool_uses as generic foundations of étale modules on algebraic spaces. Batch-5: the 5 flagged citations are generic space foundations (the diagonal node is already cited by 4 base sfb nodes, and its path ends at def-trf-algebraic-space); none of their closures reaches the trace-formula or PD assumptions or their proofs. No SGA cited. Maintainer note: the diagonal node's source should be Tag 05W1, not 03HK."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtalePullPushRetract",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_section_moduleTensorAdjunction_counit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtalePullPushRetract.lean",
+  "statement": "theorem exists_section_moduleTensorAdjunction_counit {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hfqc : IsQuasiCompactPresheafMap f.hom.hom) (hfsep : IsSeparatedPresheafMap f.hom.hom) (hfet : IsEtale f.hom.hom) (F : X.Modules) [SheafOfModules.IsQuasicoherent F] : ∃ s : F ⟶ (moduleTensorPullback f).obj ((moduleDirectImage f).obj F), s ≫ (moduleTensorAdjunction f).counit.app F = 𝟙 F",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36b872ebf",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read item node, Stacks 0HAP (spaces-cohomology l.1804-1833), all 7 stmt_dep records and live declarations (moduleTensorPullback = leftAdjoint of moduleDirectImage, moduleTensorAdjunction = ofIsRightAdjoint, IsQuasiCompact/IsSeparatedPresheafMap, IsEtale, QCoh slice instances). Hypotheses qc/sep/etale on f.hom.hom and [SheafOfModules.IsQuasicoherent F] match the node and the landed citer pattern; conclusion ∃ s, s ≫ counit.app F = 𝟙 F is ε∘s=id for the specified adjunction. Single universe u, no extra assumptions; edge cases (empty X, zero module, f=id, Y⊔Y→Y, non-surjective) covered. Node diff vs live = lean field only; statement verbatim; imports = stmt_dep public + proof_dep plain modules; no defs, sorry-only body, source/blueprint docstrings and 5-step proof present; report sections present. No compile needed (no change). No findings."
+ }
+}

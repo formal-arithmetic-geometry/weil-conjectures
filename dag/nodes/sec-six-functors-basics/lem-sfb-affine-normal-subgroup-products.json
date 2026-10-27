@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-affine-normal-subgroup-products",
+ "kind": "statement",
+ "title": "Products and dimension growth of affine normal subgroups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed and normal subgroup schemes as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme]. Let $G$ be a separated finite-type $k$-group scheme, with no affineness or commutativity assumption. If $M,N\\subseteq G$ are smooth connected affine closed normal subgroup schemes, there is a smooth connected affine closed normal subgroup scheme $P\\subseteq G$ containing both, such that for every commutative $k$-algebra $R$, an element $g\\in G(R)$ belongs to $P(R)$ if and only if, after a faithfully flat finitely presented extension $R\\to R'$, its restriction is a product $mn$ with $m\\in M(R')$ and $n\\in N(R')$. Here faithfully flat means that tensoring is exact and detects zero modules, and finitely presented means a quotient of a polynomial $R$-algebra in finitely many variables by a finitely generated ideal. Moreover the topological Krull dimensions [def-kun-topological-krull-dimension] of closed subgroup schemes of $G$ are finite nonnegative integers bounded by $\\dim G$, and for every strict closed inclusion $J\\subsetneq K$ of smooth connected subgroup schemes of $G$ one has $\\dim J<\\dim K$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 5(f), product as image of a semidirect product, printed pp.111--112; Proposition 8.1 (affine, smooth and connected extensions and quotients), printed p.149; Lemma 6.41 and greatest-dimension argument of Proposition 6.42, printed p.134. No Stacks tag states this algebraic-group product assertion. Proposition 1.35 and the dimension discussion, printed p.17, identify connected components with irreducible components; smoothness excludes a proper nilpotent thickening in the equal-dimension case."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Normality of $M$ makes conjugation $N\\times M\\to M$ a morphism: on affine test schemes conjugation in $G$ factors through the closed subgroup $M$ by [def-sc-group-scheme-subgroup], and the unique factorizations glue. On $D=M\\times_kN$ define $(m,n)(m\\prime,n\\prime)=(m(nm\\prime n^{-1}),nn\\prime)$, unit $(1,1)$ and inverse $(n^{-1}m^{-1}n,n^{-1})$. The conjugation identity $(nn\\prime)m(nn\\prime)^{-1}=n(n\\prime mn\\prime^{-1})n^{-1}$ verifies associativity; the displayed inverse gives both inverse laws. Multiplication in $G$ gives a homomorphism $f:D\\to G$, $f(m,n)=mn$, since $m(nm\\prime n^{-1})nn\\prime=mnm\\prime n\\prime$. If $M=\\operatorname{Spec}A$ and $N=\\operatorname{Spec}B$, [lem-weil-pbc-fibre-product-affine-spectra] gives $D=\\operatorname{Spec}(A\\otimes_kB)$; it is finite type by [lem-sfb-finite-type-composition-base-change]. It is separated: the diagonal of an affine scheme is induced by the surjective multiplication map on its coordinate tensor square, hence is a closed immersion by [def-weil-closed-immersion].",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 5(f), printed p.111: semidirect product and multiplication homomorphism."
+   }
+  },
+  {
+   "text": "The second projection $r:D\\to N$ is a homomorphism, has kernel $M\\times\\{1\\}$, and has section $n\\mapsto(1,n)$; in particular it is surjective. A $k$-basis of $A$ makes $A\\otimes_kB$ a free $B$-module. Tensoring with a free module preserves exact sequences, so this is a flat ring map; [lem-weil-pbc-flat-ring-map-iff-flat-affine] gives flatness of $r$. The kernel square follows on every test algebra by setting $n=1$, and its inclusion is closed by the affine quotient description in [def-weil-closed-immersion]. Apply [lem-sfb-exact-algebraic-group-property-permanence] to $1\\to M\\to D\\xrightarrow{r}N\\to1$. Its hypotheses are now verified, and $M,N$ are smooth and connected by assumption. Thus $D$ is smooth and connected.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-closed-immersion",
+    "lem-sfb-exact-algebraic-group-property-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 5(f), p.111; Proposition 8.1(a), p.149, applied to the split extension."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $f:D\\to G$: both groups are separated and of finite type, without an affineness assumption on $G$. Obtain $D\\xrightarrow{q}P\\xrightarrow{j}G$ with $j$ a closed immersion and $q$ flat, surjective and finitely presented, having the same scheme-theoretic kernel $K$ as $f$. The lemma makes $K$ a closed normal subgroup of $D$ and $P$ a separated finite-type group scheme. The exact sequence $1\\to K\\to D\\to P\\to1$ and [lem-sfb-exact-algebraic-group-property-permanence] show that $P$ is affine, smooth and connected. No smoothness or connectedness of $K$ is used: only the quotient clauses of permanence are applied. The maps $m\\mapsto q(m,1)$ and $n\\mapsto q(1,n)$ factor the given inclusions of $M,N$ into $G$, so $P$ contains both.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-exact-algebraic-group-property-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39, p.108; Section 5(f), p.111; Proposition 8.1(b), p.149."
+   }
+  },
+  {
+   "text": "Write $P=\\operatorname{Spec}C$ and $D=\\operatorname{Spec}E$. By [lem-pc-affine-finite-type-algebra], $C,E$ are finite-type $k$-algebras. The field $k$ is Noetherian (its only ideals are $0,k$), so [lem-weil-pbc-finite-type-algebra-noetherian] makes $C$ Noetherian. The $k$-algebra generators of $E$ also generate it over $C$ through $q$, and [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes $C\\to E$ finitely presented. By [lem-weil-pbc-flat-ring-map-iff-flat-affine] it is flat; by surjectivity of $q$ and [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] it is faithfully flat. For $p\\in P(R)$ put $R\\prime=R\\otimes_CE$. This extension is faithfully flat by [lem-weil-pbc-faithfully-flat-base-change]. It is finitely presented: tensor a presentation $E=C[x_1,\\ldots,x_t]/(h_1,\\ldots,h_s)$ to obtain $R\\prime=R[x_1,\\ldots,x_t]/(h_1^R,\\ldots,h_s^R)$. The canonical map $E\\to R\\prime$ is a point $(m,n)\\in D(R\\prime)=M(R\\prime)\\times N(R\\prime)$ above $p$. Consequently $j(p)|_{R\\prime}=mn$.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 5(f), p.111 and Proposition 5.46, p.110; finite-presentation refinement: Stacks Tag 00FP, algebra.tex, lemma-Noetherian-finite-type-is-finite-presentation."
+   }
+  },
+  {
+   "text": "Conversely, suppose $g\\in G(R)$ has $g|_{R\\prime}=mn$ over a faithfully flat finitely presented extension $R\\to R\\prime$. The point $p\\prime=q(m,n)$ of $P(R\\prime)$ maps to $g|_{R\\prime}$. On $R\\prime\\otimes_RR\\prime$ its two restrictions are equal because their images under the closed immersion $j$ are both the restriction of $g$, and a closed immersion is injective on points of every test algebra by its surjective affine-ring description [def-weil-closed-immersion]. The single affine faithfully flat morphism $\\operatorname{Spec}R\\prime\\to\\operatorname{Spec}R$ is fpqc: it is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine], surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum], and each affine open $V$ of $\\operatorname{Spec}R$ is quasi-compact and covered by principal opens of $\\operatorname{Spec}R$ contained in $V$, so finitely many $D(a_i)$ suffice. Their inverse images $D(a_i)$ in $\\operatorname{Spec}R\\prime$ are affine and their images cover $V$, as required by [def-weil-pbc-fpqc-covering]. The existence and uniqueness clauses of [lem-weil-pbc-fpqc-representable-descent], applied to $P$ and to $G$, descend $p\\prime$ to $p\\in P(R)$ with $j(p)=g$. This proves both directions of the stated criterion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 5(f), p.111; local-to-global membership: Stacks Tag 023Q, descent.tex, lemma-fpqc-universal-effective-epimorphisms."
+   }
+  },
+  {
+   "text": "For any $k$-algebra $R$, $h\\in G(R)$ and $p\\in P(R)$, step 4 supplies $R\\to R\\prime$ and $p|_{R\\prime}=mn$ inside $G(R\\prime)$. Then $hph^{-1}|_{R\\prime}=(hmh^{-1})(hnh^{-1})$. Both factors lie respectively in $M(R\\prime)$ and $N(R\\prime)$ by their normality in [def-sc-group-scheme-subgroup]. Step 5 gives $hph^{-1}\\in P(R)$. Hence $P(R)$ is normal in $G(R)$ for every $R$, precisely normality of the subgroup scheme. This uses local membership, not the generally false identity $P(R)=M(R)N(R)$ without extending $R$.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 5(f), pp.111--112: product subgroup; normality checked on every algebra."
+   }
+  },
+  {
+   "text": "By [lem-kun-dimension-finite-type], $\\dim G$ is finite, with the chain convention of [def-kun-topological-krull-dimension]. A closed subgroup $H\\hookrightarrow G$ has its underlying space homeomorphic to a closed subset by [def-weil-closed-immersion]. Every chain of irreducible closed subsets in $H$ is therefore a chain in $G$, so $\\dim H\\le\\dim G$. It is nonempty because the identity section maps $\\operatorname{Spec}k$ into $H$, so it has a chain of length zero. Thus its dimension is a finite nonnegative integer, even if $H$ is nonreduced or disconnected.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-krull-dimension",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Dimension discussion, printed p.17; finite-type finiteness is the existing dimension node; the closed-subset bound follows directly from chains."
+   }
+  },
+  {
+   "text": "Let $J\\subsetneq K$ be a strict closed inclusion of smooth connected subgroup schemes. As a closed subset of $G$, $K$ has finite dimension by step 7. Apply [lem-sfb-locally-algebraic-group-identity-component] to $K$: connectedness makes its identity component all of $K$, so $|K|$ is irreducible. Smoothness over $k$ gives reducedness of $J$ and $K$ by [sbc-lem-smooth-geometrically-reduced]. If the support of $J$ were all of $K$, uniqueness of the reduced induced closed subscheme in [lem-weil-pbc-reduced-induced-closed-subscheme], applied to $J\\hookrightarrow K$ and $\\mathrm{id}_K$, would identify this inclusion with an isomorphism, contrary to strictness. Hence $|J|$ is a proper closed subset of $|K|$. Every irreducible closed chain in $|J|$ can be extended by the last term $|K|$, with a strict final inclusion. Therefore every length $r$ occurring in $J$ satisfies $r+1\\le\\dim K$. Since $J$ is nonempty and finite dimensional, its possible lengths have a maximum, giving $\\dim J+1\\le\\dim K$, as required.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.35 and dimension discussion, p.17; greatest-dimension argument of Proposition 6.42, p.134; uniqueness of the reduced support: Stacks Tag 01J3, schemes.tex, lemma-reduced-closed-subscheme."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-sfb-exact-algebraic-group-property-permanence",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-kun-dimension-finite-type",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 5(f), pp.111--112; Theorem 5.39, p.108; Proposition 8.1, p.149; Corollary 1.35, p.17 and Proposition 6.42, p.134. Affine local lifting and the strict-dimension chain argument expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Products of two smooth connected affine normal subgroups in a possibly non-affine algebraic group are smooth connected affine normal subgroups",
+   "results": "{\"t\": \"2026-10-24T07:37:19Z\", \"tool\": \"leanfinder\", \"query\": \"Products of two smooth connected affine normal subgroups in a possibly non-affine algebraic group are smooth connected affine normal subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.prod_subgroupOf_prod_normal\", \"Subgroup.prod_normal\", \"solvable_prod\", \"Subgroup.top_prod_top\", \"Subgroup.normal_mul\", \"Subgroup.Normal.pathComponentOne\", \"Prod.instLieAddGroup\", \"Prod.instLieGroup\"], \"digest\": \"e56cead54030a102\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict inclusion of smooth connected algebraic subgroup schemes increases dimension and products of affine normal subgroups are affine",
+   "results": "{\"t\": \"2026-10-24T07:37:16Z\", \"tool\": \"leansearch\", \"query\": \"Strict inclusion of smooth connected algebraic subgroup schemes increases dimension and products of affine normal subgroups are affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.prod_mono\", \"AddSubgroup.prod_mono\", \"QuotientAddGroup.strictMono_comap_prod_map\", \"AddSubgroup.map_subtype_lt_map_subtype\", \"AlgebraicGeometry.instIsAffineHomιBasicOpen\", \"QuotientGroup.strictMono_comap_prod_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.strictMono_ideal\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\"], \"digest\": \"4f2365dfbeee4edf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"topologicalKrullDim\"",
+   "results": "{\"t\": \"2026-10-24T07:37:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"topologicalKrullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "subgroup.*(affine|dimension)|affine.*subgroup",
+   "results": "{\"t\": \"2026-10-24T07:37:15Z\", \"tool\": \"grep\", \"query\": \"subgroup.*(affine|dimension)|affine.*subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product of normal linear algebraic subgroups is linear and dimension bounds make ascending chains of connected smooth subgroups terminate",
+   "results": "{\"t\": \"2026-10-24T07:37:21Z\", \"tool\": \"leanfinder\", \"query\": \"The product of normal linear algebraic subgroups is linear and dimension bounds make ascending chains of connected smooth subgroups terminate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsVirtuallyNilpotent\", \"upperCentralSeriesAux\", \"instNormalCommutatorClosure\", \"isSolvable_iff_commutator_lt\", \"OpenNormalSubgroup.instMaxOfContinuousMul\", \"NonarchimedeanGroup.instTotallySeparated\", \"lowerCentralSeries_pi_le\", \"lowerCentralSeries_pi_of_finite\"], \"digest\": \"a452852693a323b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic image of a homomorphism of algebraic groups is closed and the map to its image is faithfully flat",
+   "results": "{\"t\": \"2026-10-24T08:06:41Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme theoretic image of a homomorphism of algebraic groups is closed and the map to its image is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"8704e721b6206f99\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; abstract group extensions, morphism cancellation, Hopf structures and general flat/connected maps do not assert permanence for algebraic group exact sequences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Products of smooth connected affine normal subgroup schemes are affine smooth connected and strict inclusions increase Krull dimension",
+   "results": "{\"t\": \"2026-10-24T08:07:05Z\", \"tool\": \"leansearch\", \"query\": \"Products of smooth connected affine normal subgroup schemes are affine smooth connected and strict inclusions increase Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.prod_mono\", \"Subgroup.prod_subgroupOf_prod_normal\", \"Subgroup.prod_mono_left\", \"AddSubgroup.prod_addSubgroupOf_prod_normal\", \"Module.length_prod\", \"Subgroup.prod_normal\", \"Subgroup.prod_le_iff\", \"AddSubgroup.prod_normal\"], \"digest\": \"3d53d97b33d89283\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract subgroup products, scheme image definitions, generic flat morphisms, and Hopf structure; none states affine normal subgroup products with dimension growth."
+  },
+  {
+   "tool": "grep",
+   "query": "subgroup.*(affine|dimension)|affine.*subgroup|GrpObj.*topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-24T08:08:38Z\", \"tool\": \"grep\", \"query\": \"subgroup.*(affine|dimension)|affine.*subgroup|GrpObj.*topologicalKrullDim\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract subgroup products, scheme image definitions, generic flat morphisms, and Hopf structure; none states affine normal subgroup products with dimension growth."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"topologicalKrullDim\"",
+   "results": "{\"t\": \"2026-10-24T08:08:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"topologicalKrullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract subgroup products, scheme image definitions, generic flat morphisms, and Hopf structure; none states affine normal subgroup products with dimension growth."
+  },
+  {
+   "tool": "grep",
+   "query": "flat_and_surjective_iff_faithfullyFlat_of_isAffine|HasOfPostcompProperty.*IsAffineHom|instIsSeparatedOfIsAffine",
+   "results": "{\"t\": \"2026-10-24T08:09:57Z\", \"tool\": \"grep\", \"query\": \"flat_and_surjective_iff_faithfullyFlat_of_isAffine|HasOfPostcompProperty.*IsAffineHom|instIsSeparatedOfIsAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"e25bb0ac6cfd8f67\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract subgroup products, scheme image definitions, generic flat morphisms, and Hopf structure; none states affine normal subgroup products with dimension growth."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-barsotti-chevalley-decomposition",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Proposition 8.2 through Lemma 6.41 and Proposition 6.42: product construction and strict dimension comparison used in steps 1--2 of lem-sfb-barsotti-chevalley-decomposition; below the affine-normal-part input on the branch of det-thm-sf-ctf-stability-direct-images proof (3).",
+   "via": [
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-normal-subgroup-products",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed the semidirect product explicitly; reused the general homomorphism-factorization node and split off only the independent exact-sequence permanence theorem. Expanded faithfully flat finite-presentation point lifting, descent of membership, normality and strict dimension growth. No positive-characteristic kernel smoothness is assumed.",
+  "blueprint": "The item realizes the product and maximal-dimension input in Milne Proposition 8.2, used in steps 1--2 of lem-sfb-barsotti-chevalley-decomposition, on the direct-image preservation branch of det-thm-sf-ctf-stability-direct-images proof (3). The recorded ancestor chain currently ends with blueprint.from.node=null; retained that computed ancestor rather than inventing a blueprint import."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NA-212168a2c",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-212168a2c (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, the new node and every cited statement against Milne iAG2017, using pdftotext of the literature copy. Sources: §5f (the image of N⋊H → G, quotient map, membership after a faithfully flat extension) and Prop 8.1, whose proof cites 1.62, 2.70, 5.29 and 5.59; I read all four. I also read Lemma 6.41, Prop 6.42 and Prop 8.2. The item statement is unchanged from the base. Step checks: step 1's semidirect law, inverses and homomorphism identity are correct, and D is affine, of finite type and separated. In step 2, r is flat because A⊗B is free over B, has kernel M×1, and the extension clause makes D smooth and connected. Step 3 uses the factorization node's real non-affine statement (flat surjective q, closed j, kernel K) and only the quotient clauses, so P is affine, smooth and connected without any assumption on the kernel. Step 4: E is finitely presented over the Noetherian C, and R⊗_C E is faithfully flat and finitely presented. Step 5: j is injective on points, the single map Spec R' → Spec R meets def-weil-pbc-fpqc-covering via finitely many D(a_i), and representable descent gives j(p) = g. Step 6 gives normality by local membership. Step 7 bounds dim H ≤ dim G and gives dim H ≥ 0 from the identity section. Step 8: K is irreducible (identity-component node, k algebraically closed), J and K are reduced because smooth, and uniqueness of the reduced induced structure gives |J| ⊊ |K|, so a chain extends and dim J < dim K. Small cases: SL_2·G_m = GL_2, where R' is needed for an n-th root of det; M = N; G an abelian variety; α_p ⊂ G_a is excluded by smoothness. The new node is exactly Milne 8.1 with exactness written out, true (Frobenius/μ_p shows why the quotient clause needs no smooth kernel), and self-contained, statement-only and not a restatement of the item. Duplicate search: affine-normal-quotient-geometry (affine G only) and smooth-affine-normal-quotient-lifts (smooth kernel, constructive) are not duplicates. Batch 5: the newly cited factorization node reaches lem-trf-fppf-covering-base-change, a mathlib leaf on base change of fppf coverings. That is a general fact outside the trace-formula and Poincaré-duality assumptions and their proofs, so it is not a reason to return. Tool uses for the maintainer to record: lem-pc-affine-finite-type-algebra, lem-kun-dimension-finite-type, sbc-lem-smooth-geometrically-reduced, lem-weil-pbc-reduced-induced-closed-subscheme (general scheme facts). No SGA; blueprint.from.node = null inherited from the item's ancestor chain. Minor, not a fault: normality of M×1 in D (step 2) is left as elementary."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineNormalSubgroupProducts",
+  "declaration": "AlgebraicGeometry.affineNormalSubgroup_products",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineNormalSubgroupProducts.lean",
+  "statement": "theorem affineNormalSubgroup_products {k : Type u} [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] : (∀ (M N : Grp (Over (Spec (.of k)))) (iM : M ⟶ G) (iN : N ⟶ G) [IsClosedSubgroupScheme iM.hom.hom] [IsNormalSubgroupScheme iM.hom.hom] [IsClosedSubgroupScheme iN.hom.hom] [IsNormalSubgroupScheme iN.hom.hom] [Smooth M.X.hom] [ConnectedSpace M.X.left] [IsAffine M.X.left] [Smooth N.X.hom] [ConnectedSpace N.X.left] [IsAffine N.X.left], ∃ (P : Grp (Over (Spec (.of k)))) (iP : P ⟶ G), IsClosedSubgroupScheme iP.hom.hom ∧ IsNormalSubgroupScheme iP.hom.hom ∧ Smooth P.X.hom ∧ ConnectedSpace P.X.left ∧ IsAffine P.X.left ∧ (∃ a : M ⟶ P, a ≫ iP = iM) ∧ (∃ b : N ⟶ P, b ≫ iP = iN) ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G.X), (∃ p : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ P.X, p ≫ iP.hom.hom = g) ↔ ∃ (R' : Type u) (_ : CommRing R') (_ : Algebra k R') (φ : R →ₐ[k] R'), φ.toRingHom.FaithfullyFlat ∧ φ.toRingHom.FinitePresentation ∧ ∃ (m : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R'))) ⟶ M.X) (n : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R'))) ⟶ N.X), Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ g.left = ((m ≫ iM.hom.hom) * (n ≫ iN.hom.hom)).left) ∧ (∀ (H : Grp (Over (Spec (.of k)))) (i : H ⟶ G) [IsClosedSubgroupScheme i.hom.hom], ∃ d : ℕ, topologicalKrullDim H.X.left = (d : WithBot ℕ∞) ∧ (d : WithBot ℕ∞) ≤ topologicalKrullDim G.X.left) ∧ (∀ (J K : Grp (Over (Spec (.of k)))) (iK : K ⟶ G) (j : J ⟶ K) [IsClosedSubgroupScheme iK.hom.hom] [IsClosedSubgroupScheme j.hom.hom] [Smooth J.X.hom] [ConnectedSpace J.X.left] [Smooth K.X.hom] [ConnectedSpace K.X.left], ¬ IsIso j.hom.hom.left → topologicalKrullDim J.X.left < topologicalKrullDim K.X.left)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-122d744c5",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by NQ), module and all stmt_dep records (IsSubgroupScheme/IsClosedSubgroupScheme/IsNormalSubgroupScheme in GroupScheme.Defs, GrpObj, Smooth, ConnectedSpace, LocallyOfFiniteType∧QuasiCompact, IsSeparated, IsAffine, topologicalKrullDim, IsAlgClosed). Node differs from live only in lean; statement field verbatim in file. Clause-by-clause match: M,N closed normal smooth connected affine; ∃P same with homomorphic factorizations of iM,iN; fppf-local product criterion with φ : R →ₐ[k] R' FaithfullyFlat ∧ FinitePresentation and g|R' = m·n; closed-subgroup dims = d:ℕ ≤ dim G; strict closed J→K of smooth connected groups gives dim J < dim K. Assuming K closed in G is implied (smooth connected ⇒ finite type; monomorphic homomorphism of algebraic groups is a closed immersion), so it is not a strengthening. True per Milne §5(f), Prop 8.1, p.17, Prop 6.42. Edge cases R=0, M=N, trivial factors, infinitesimal/disconnected H, char p, universe u all fine. Only sorry, docstrings with source/blueprint, no hollow defs, no pro-etale substitute, imports exist live; no duplicate found. No recompile (nothing changed)."
+ }
+}

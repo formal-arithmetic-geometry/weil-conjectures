@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-clopen-scalar-comparison-coherence",
+ "kind": "statement",
+ "title": "Coherence of a normalized clopen scalar comparison",
+ "statement": "Let X be a scheme and j_i:Y_i→X a finite pairwise disjoint clopen cover. Use the actual small pro-etale module sheaves, scalar extension presentations p_a and their normalized successive compositor n, exact restrictions r_i and r_D,i, canonical cochain computation morphisms c_a(P), normalized identity units, and scalar comparison interfaces of [def-pur-clopen-derived-scalar-comparison-data]. Fix arbitrary p,n,q,m, identity units U,V and a comparison family d satisfying sections, degree, representative, computed, extended and unique. Then Coherence(j_i,n,m_i,U,V_i,d_i) holds for every i: for all composable coefficient maps a:R→S and b:S→T, the two paths comparing restriction of successive scalar extension with scalar extension by a_i≫b_i agree, both ordinarily and in the derived category, after the canonical functor.map_comp equality transport. Their ordinary common map sends z⊗(s⊗x) to (b_i(s)z)⊗x. For identity coefficient maps the derived and ordinary comparisons commute with U,V after functor.map_id transport. All maps are linear over the target component coefficient ring.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0G7E; sites-modules.tex Tag 03EK and 05V4; indicated part of parent proof."
+ },
+ "stmt_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Prove ordinary composition by canceling the inverse ambient compositor. By the normalized extension/restriction adjunction, it suffices to test tensors 1 tensor x. The comparison sections formulas, naturality of the adjunction unit, and both compositor tensor formulas then identify both sides. Functor.map_comp transport preserves these tensors. The general composite-sections formula follows directly from ordinary_hom and Comparison.sections. The ordinary identity equation follows from the same tensor extensionality, Comparison.sections and the two Units.sections formulas.",
+   "uses": [
+    "def-pur-clopen-derived-scalar-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a coefficient ring R, use the K-flat resolution theorem: every complex K admits a quasi-isomorphism P to K with P K-flat and flat terms. Localization.natTrans_ext reduces equality of derived natural transformations to complexes. Precompose the equality at K by the invertible image of Q(P to K), and naturality reduces it to equality at Q P. Flatness and K-flatness of each component restriction follow from clopen_total_tensor_kflat_detection.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-clopen-total-tensor-kflat-detection",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package each side of the derived composition equation as a natural transformation from successive scalar extension followed by restriction to restriction followed by composite scalar extension. Apply fixed-model composition with the proved ordinary composition equation, and extend by the preceding naturality argument. Do the same for the two identity paths using fixed-model identity and the proved ordinary multiplication equation. Evaluate the resulting natural-transformation equalities at an arbitrary derived object and assemble all five fields of Coherence.",
+   "uses": [
+    "lem-pur-clopen-scalar-composition-model",
+    "lem-pur-clopen-scalar-identity-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data",
+  "lem-pc-kflat-resolution",
+  "lem-pur-clopen-total-tensor-kflat-detection",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-clopen-scalar-composition-model",
+  "lem-pur-clopen-scalar-identity-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0D6D: ordinary generator calculations and naturality extension written in Lean; two fixed-model counit calculations isolated. G3, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between derived functors extends uniquely from flat K-flat complexes and respects composition and identity",
+   "results": "Generic leftDerivedNatTrans and mapDerivedCategoryFactors hits; no theorem states the clopen scalar comparison or its normalized coherence.",
+   "date": "2026-10-24",
+   "verdict": "Use generic universal-derived and localization APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "One exact hit in Mathlib.CategoryTheory.Functor.Derived.LeftDerived.",
+   "date": "2026-10-24",
+   "verdict": "Used for the scalar identity unit; does not itself provide comparison descent or coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyInjective_whisker|liftNatIso|mapHomologicalComplexIdIso",
+   "results": "Mathlib.CategoryTheory.Sites.PreservesLocallyBijective and Mathlib.CategoryTheory.Localization.Predicate contain generic tools.",
+   "date": "2026-10-24",
+   "verdict": "Ordinary sheafification and derived localization tools exist; their application and coherence remain explicit work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism on flat K-flat models descends to derived module sheaves and is compatible with scalar composition",
+   "results": "Generic localization and derived functor search; precise comparison and explicit coherence remain stated separately.",
+   "date": "2026-10-24",
+   "verdict": "No full match for the new assertions; use existing generic tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarCompositor",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-derived-scalar-compositor",
+   "place": "Coherence of a normalized clopen scalar comparison"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenScalarComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenScalarComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_scalar_comparison_coherence",
+  "statement": "theorem clopen_scalar_comparison_coherence\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hd : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hc : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (p : Presentations.{t, u} X)\n    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := X.ProEt) (J := topology X) (hD := derived.{t, u} X) @p)\n    (q : ∀ i, Presentations.{t, u} (Y i))\n    (m : ∀ i, Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := (Y i).ProEt) (J := topology (Y i)) (hD := derived.{t, u} (Y i))\n      (fun {R S} a ↦ q i (R := R) (S := S) a))\n    (U : Units.{t, u} @p)\n    (V : ∀ i, Units.{t, u} (fun {R S} a ↦ q i (R := R) (S := S) a))\n    (d : ∀ i, Comparison.{t, u} (j i) @p\n      (fun {R S} a ↦ q i (R := R) (S := S) a))\n    (hnorm : ∀ i, (d i).sections ∧ (d i).degree ∧ (d i).representative ∧\n      (d i).computed ∧ (d i).extended ∧ (d i).unique) :\n    ∀ i, Coherence.{t, u} (j i) n (m i) U (V i) (d i)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202044-L-2669482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

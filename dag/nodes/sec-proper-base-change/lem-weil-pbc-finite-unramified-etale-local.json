@@ -43,7 +43,8 @@
   {
    "text": "*Etale localization.* Apply [lem-weil-pbc-unramified-etale-local-decomposition] to $f:Y\\to X$, $s:=x$ and the points $y_1,\\ldots,y_n$ (step 1): there are an etale $g:U\\to X$, a point $u\\in U$ with $g(u)=x$, and a decomposition $Y_U:=Y\\times_XU=W\\amalg\\coprod_{i=1}^n\\coprod_{j=1}^{m_i}V_{i,j}$ into pairwise disjoint open and closed subschemes covering $Y_U$, such that each $V_{i,j}\\hookrightarrow Y_U\\xrightarrow{\\mathrm{pr}_2}U$ is a closed immersion. Since $f^{-1}(\\{x\\})=\\{y_1,\\ldots,y_n\\}$, the final clause of that lemma says that no point of $W$ lies over $u$: $u\\notin\\mathrm{pr}_2(W)$.",
    "uses": [
-    "lem-weil-pbc-unramified-etale-local-decomposition"
+    "lem-weil-pbc-unramified-etale-local-decomposition",
+    "lem-weil-pbc-finite-unramified-etale-local-input"
    ],
    "elementary": false,
    "source": {
@@ -81,7 +82,8 @@
    "text": "*The decomposition over $U'$.* Since $\\mathrm{pr}_2(W)=Z$ is disjoint from $U'$, $W\\cap Y'=\\emptyset$. Let $J=\\{(i,j):1\\le i\\le n,1\\le j\\le m_i\\}$, a finite set, and for $(i,j)\\in J$ put $V'_{i,j}=V_{i,j}\\cap Y'$, an open and closed subscheme of $Y'$; the $V'_{i,j}$ are pairwise disjoint and cover $Y'=Y\\times_XU'$, because $W,V_{i,j}$ do so in $Y_U$ and $W\\cap Y'=\\emptyset$. Writing $p_{i,j}:V_{i,j}\\to U$ for the closed immersion of step 2, $V'_{i,j}=p_{i,j}^{-1}(U')$ and, by [lem-weil-pbc-open-fibre-product] (for $p_{i,j}$ and $\\iota$ over $U$), $V'_{i,j}$ with $p_{i,j}|_{V'_{i,j}}:V'_{i,j}\\to U'$ is the fibre product $V_{i,j}\\times_UU'$ with its second projection. By [lem-weil-pbc-closed-immersion-base-change] this projection is a closed immersion, and it is the composite $V'_{i,j}\\hookrightarrow Y\\times_XU'\\xrightarrow{\\mathrm{pr}_2}U'$. So $(g',u,J,(V'_{i,j})_{(i,j)\\in J})$ is as claimed. (If $n=0$ then $J=\\emptyset$ and $Y\\times_XU'=\\emptyset$, which is allowed.)",
    "uses": [
     "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-closed-immersion-base-change"
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-finite-unramified-etale-local-reduction"
    ],
    "elementary": false,
    "source": {
@@ -98,7 +100,9 @@
   "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-open-fibre-product",
   "def-pc-fibre-product",
-  "lem-weil-pbc-closed-immersion-base-change"
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-unramified-etale-local-input",
+  "lem-weil-pbc-finite-unramified-etale-local-reduction"
  ],
  "proof_origin": {
   "by": "document",
@@ -157,7 +161,32 @@
   "item": "lem-weil-pbc-finite-etale-etale-local-split",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_etale_closed_immersion_decomposition_of_finite_unramified"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_etale_closed_immersion_decomposition_of_finite_unramified",
+     "module": "WeilConjectures.AlgebraicGeometry.FiniteUnramifiedEtaleLocal",
+     "lines": [
+      30,
+      73
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {

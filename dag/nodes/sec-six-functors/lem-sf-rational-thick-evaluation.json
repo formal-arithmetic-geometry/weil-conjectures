@@ -20,192 +20,41 @@
  ],
  "proof": [
   {
-   "text": "Put $t=\\varpi_E$, $B_n=(\\mathcal O_E/t^n)_{\\mathcal S}$ and $H=R\\mathcal Hom_{\\mathcal R}$. The coefficient ring $\\mathcal O_E$ is Noetherian (it is a DVR), so [lem-weil-pbc-constant-completion-equivalence] applies on $\\mathcal S$: on a slice the constant finite coefficient sheaves and their inverse limit restrict sectionwise, by [def-pur-localized-ringed-site]. In particular $\\mathcal R/t^n\\mathcal R=B_n$. Let $C(A)=R\\lim_n\\operatorname{Res}_n(A\\otimes^L_{\\mathcal R}B_n)$, with the quotient unit $\\eta_A:A\\to C(A)$. The Koszul/quotient comparison of [lem-weil-pbc-constant-completion-equivalence] and the universal property of [lem-weil-pbc-ringed-koszul-completion-reflector] identify $C$ with the reflector onto locally derived $(t)$-complete objects. Thus the derived completeness in the statement is this condition: its Roos triangle is the quotient-tower completion triangle, and $\\eta_A$ is an isomorphism precisely on complete objects. These cited results are for arbitrary small sites, so they apply directly on the slice, without a compactness or constructibility hypothesis.",
+   "text": "Apply lem-sf-integral-completed-evaluation to obtain the integral linear exact functors, completeness, uniquely normalized evaluation and its invertible coefficient component. Install the supplied shifts.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "def-pur-localized-ringed-site",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "def-weil-derived-complete"
+    "lem-sf-integral-completed-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099L and 099M (proetale.tex); Tag 0A0E (algebraization.tex); quotient completion and its unit"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $A\\otimes^L B$ for ordinary derived tensor over $\\mathcal R$. For flat-term K-flat representatives $P,Q$, the levelwise balanced tensor identification\n$$ (P\\otimes_{\\mathcal R}B_n)\\otimes_{B_n}(Q\\otimes_{\\mathcal R}B_n)\\cong (P\\otimes_{\\mathcal R}Q)\\otimes_{\\mathcal R}B_n $$\nsends $(p\\otimes a)\\otimes(q\\otimes b)$ to $(p\\otimes q)\\otimes ab$, and its inverse sends $(p\\otimes q)\\otimes a$ to $(p\\otimes1)\\otimes(q\\otimes a)$. The maps commute with differentials and quotient transitions. Tensor of two K-flat complexes is K-flat directly from its definition: tensoring an acyclic complex first with $Q$ and then with $P$ remains acyclic. Consequently [lem-weil-pbc-site-derived-tensor-descent] and [lem-pur-kflat-change-of-rings] identify the completed operation of [def-pur-integral-derived-operations] with $C(A\\otimes^L B)$, naturally in both variables. In particular its completion unit is the ordinary quotient unit, not an arbitrary lift to a Roos fiber.",
+   "text": "Apply lem-sf-completed-evaluation-rational-descent to obtain rational exact functors, their shifts and a shift-compatible rational transformation satisfying the intertwining equation.",
    "uses": [
-    "def-pc-kflat-complex",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-kflat-change-of-rings",
-    "def-pur-integral-derived-operations"
+    "lem-sf-completed-evaluation-rational-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YU and 0G7E; balanced tensor reassociation followed by quotient completion"
-   }
+   "elementary": false
   },
   {
-   "text": "Ordinary derived tensor is exact in each variable. Indeed represent a triangle by a cone of a map between flat-term K-flat complexes using the resolving equivalence of [lem-weil-pbc-site-derived-tensor-descent]; its cone is still K-flat by [lem-pc-kflat-closure]. Apply [lem-pc-tensor-mapping-cone-iso] to a fixed K-flat representative of the other argument: the image is its cone triangle, with the usual tensor shift signs. Restriction of scalars retains the underlying abelian sheaf, hence preserves kernels and cokernels [def-pc-sheaf-restrict-scalars]. Reduction and restriction of scalars therefore give an exact functor to the derived category of strict towers: at the representative level the quotient maps commute with all cone inclusions and projections. The exact $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] shows that $C$ is exact, including its natural shift comparison. Hence $-\\widehat\\otimes^L M=C(-\\otimes^L M)$ is exact. The unit $\\eta$ commutes with shifts because its maps into every finite quotient do, and the same strict-tower functor gives its map into $R\\lim$.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-kflat-closure",
-    "lem-pc-tensor-mapping-cone-iso",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A3 (tensor cone comparison); Tags 0940 and 0941 (exact derived inverse limit)"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-ringed-internal-hom-exact-restriction], $L\\mapsto H(L,\\mathcal R)$ and $L\\mapsto H(L,M)$ send triangles to reversed distinguished triangles, with the contravariant shift comparisons $H(L[1],N)\\cong H(L,N)[-1]$. Combining this with Step 3 proves exactness of $\\Phi$ and $\\Psi$. The scalar action on the derived category is the componentwise one of [lem-weil-linear-abelian-derived-category]. Precomposing a map by $a f$ in either Hom model multiplies the resulting map by $a\\in\\mathcal O_E$; tensor and the tower maps do the same. Thus both functors are $\\mathcal O_E$-linear, as are their shift comparisons. Step 1 converts the hypothesis on $M$ into local derived completeness; [lem-sf-ringed-rhom-derived-complete] then proves that $\\Psi(L)=H(L,M)$ is derived complete for every $L$, including on a slice.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-linear-abelian-derived-category",
-    "lem-sf-ringed-rhom-derived-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (RHom triangulated), Tag 099A (algebraization.tex); linearity on complex representatives"
-   }
-  },
-  {
-   "text": "Use the ordinary evaluation transformation of [lem-sfb-ringed-site-duality-maps], with the Koszul symmetry to order the source as $H(L,\\mathcal R)\\otimes^L M$. Denote it by $e_L:H(L,\\mathcal R)\\otimes^L M\\to H(L,M)$. Its adjunct evaluates the first Hom on $L$, then multiplies by $M$. Step 4 makes its target complete. Therefore the reflector property in Step 1 gives a unique map\n$$\\theta_{L,M}:C(H(L,\\mathcal R)\\otimes^L M)\\longrightarrow H(L,M),\\qquad\\theta_{L,M}\\eta=e_L.$$\nThis is the completed evaluation comparison of the statement by Step 2. For $f:L\\to L'$, the two maps from $C(H(L',\\mathcal R)\\otimes^L M)$ to $H(L,M)$ obtained from the naturality square have equal precomposition with $\\eta$, by naturality of $e$; the reflector bijection makes them equal. Thus $\\theta$ is natural in $L$.",
-   "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JD, 08JE and 0A98 (ordinary evaluation); Tag 0A0E (algebraization.tex), uniqueness of completion extension"
-   }
-  },
-  {
-   "text": "Check shifts first for ordinary $e$, using the source order $M\\otimes^L H(L,\\mathcal R)$ of [lem-sfb-ringed-site-duality-maps]. Choose a K-flat complex $P$ for $L$, a flat-term K-flat $Q$ for $M$, and K-injectives $I_{\\mathcal R},I_M$ for the two targets. Represent the canonical derived map $Q\\otimes I_{\\mathcal R}\\to M$ by a chain map $u:Q\\otimes I_{\\mathcal R}\\to I_M$; this is possible since the target is K-injective. The evaluation model sends $q\\otimes\\phi$ to $(x\\mapsto u(q\\otimes\\phi(x)))$. For $\\phi$ of Hom degree $a$, the comparison $\\operatorname{Hom}^\\bullet(P[1],I)\\to\\operatorname{Hom}^\\bullet(P,I)[-1]$ sends $\\phi$ to $(-1)^a\\phi$, as follows by substituting into $d\\phi=d_I\\phi-(-1)^a\\phi d_P$. For $q\\in Q^b$, the tensor comparison $Q\\otimes D[-1]\\to(Q\\otimes D)[-1]$ contributes $(-1)^b$. Thus shifting before evaluation contributes $(-1)^{a+b}$, exactly the Hom comparison after evaluation in degree $a+b$. This proves the shift square; the symmetry gives the same square in the source order of $\\Phi$. Integer shifts follow by iteration and inversion. These identities descend from the representative models, so do not assume an equality of transformations merely from agreement on perfect generators.",
-   "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-kflat-resolution",
-    "def-pur-kinjective-complex",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9, 08JD and 0A98; Hom differential in Section 0A8X and total tensor signs"
-   }
-  },
-  {
-   "text": "Apply $C$ to the ordinary shift square of Step 6. By Step 3, the unit $\\eta$ is compatible with the exact shift comparisons of $C$. The two sides of the desired completed shift square for $\\theta$ are maps into the complete object $H(L,M)[-1]$; their precompositions with $\\eta$ are the two sides of the ordinary square, hence equal. The bijection of [lem-weil-pbc-ringed-koszul-completion-reflector] makes the completed square commute. Shifts of complete objects are complete: apply the vanishing condition in Step 1 and the shift formula of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Hence $\\theta$ commutes with all integer shifts.",
-   "uses": [
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A0E (algebraization.tex); Tag 08JC, completion extension and shifts"
-   }
-  },
-  {
-   "text": "By [def-weil-linear-scalar-localization], a morphism in $\\mathcal T[1/t]$ is a fraction $Q(f)/t^n$. For $F=\\Phi,\\Psi$, set $\\overline F(L)=F(L)$ and $\\overline F(Q(f)/t^n)=Q(F(f))/t^n$, reversing arrows. This is well defined: any equality of fractions becomes an integral equality after multiplication by a power of $t$, and Step 4 makes $F$ preserve that equality. Composition, identities and naturality of $Q\\theta$ follow by the same fraction formula. The shift comparisons descend likewise. By [lem-weil-linear-scalar-localization-triangulated], every localized distinguished triangle is isomorphic to the image of an integral distinguished triangle. Step 4 sends the latter to a reversed distinguished triangle, so the descended functors are exact. Step 7 shows that $Q\\theta$ is compatible with their shifts.",
-   "uses": [
-    "def-weil-linear-scalar-localization",
-    "lem-weil-linear-scalar-localization-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05R6 (derived.tex), localized triangles; scalar-fraction calculation"
-   }
-  },
-  {
-   "text": "At $L=\\mathcal R[0]$, evaluation at $1$ identifies $H(\\mathcal R,N)$ with $N$: on a K-injective representative the map $\\phi\\mapsto\\phi(1)$ has inverse $n\\mapsto(r\\mapsto rn)$ and commutes with differentials. Thus $e_{\\mathcal R}$ is the unit action $\\mathcal R\\otimes^L M\\to M$. Steps 1 and 2 identify $\\theta_{\\mathcal R,M}$ with $\\eta_M^{-1}:C(M)\\to M$, which exists by the completeness hypothesis on $M$. Hence $\\mathcal R[0]\\in\\mathcal S_M$. The two functors take zero to zero and $\\theta_0$ is its identity, so $0\\in\\mathcal S_M$.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-sfb-ringed-site-duality-maps",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JD, coefficient-unit evaluation; Tag 0A0E (algebraization.tex)"
-   }
-  },
-  {
-   "text": "Write $\\alpha_L=Q\\theta_{L,M}$. Naturality under an isomorphism identifies its two components by conjugating with the isomorphisms furnished by $\\overline\\Phi,\\overline\\Psi$, so membership is invariant under localized isomorphisms. Since these functors are additive, the inclusions and projections of a finite direct sum identify $\\alpha_{A\\oplus B}$ with $\\alpha_A\\oplus\\alpha_B$; the inverse is $\\alpha_A^{-1}\\oplus\\alpha_B^{-1}$. Step 7 identifies $\\alpha_{L[n]}$ with $\\alpha_L[-n]$ through the shift comparisons. This proves closure under finite sums and shifts in both directions.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/sk-prop-sf-dualizable-biduality.proof.md",
-    "place": "Naturality, additive biproduct identities, and Step 7"
-   }
-  },
-  {
-   "text": "Suppose $i:A\\to B$ and $p:B\\to A$ are morphisms in $\\mathcal T[1/t]$ with $p i=1_A$ and $\\alpha_B$ invertible. Contravariance gives $\\overline F(i)\\overline F(p)=1_{\\overline F(A)}$ for both functors. Define\n$$\\beta_A=\\overline\\Phi(i)\\,\\alpha_B^{-1}\\,\\overline\\Psi(p):\\overline\\Psi(A)\\to\\overline\\Phi(A).$$\nNaturality gives $\\alpha_A\\overline\\Phi(i)=\\overline\\Psi(i)\\alpha_B$ and $\\overline\\Psi(p)\\alpha_A=\\alpha_B\\overline\\Phi(p)$. Substitution shows $\\alpha_A\\beta_A=\\overline\\Psi(i)\\overline\\Psi(p)=1$ and $\\beta_A\\alpha_A=\\overline\\Phi(i)\\overline\\Phi(p)=1$. Thus $A\\in\\mathcal S_M$. This allows retract maps with denominators and assumes no integral splitting or ambient idempotent completeness.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/sk-prop-sf-dualizable-biduality.proof.md",
-    "place": "Explicit natural-transformation retract inverse"
-   }
-  },
-  {
-   "text": "Let $L_1\\to L_2\\to L_3\\to L_1[1]$ be a distinguished triangle in $\\mathcal T[1/t]$. Exactness gives the two reversed image triangles, with vertices $\\overline\\Phi(L_3),\\overline\\Phi(L_2),\\overline\\Phi(L_1)$ and the corresponding $\\overline\\Psi$ vertices. Naturality supplies the first two commuting squares, and shift compatibility supplies the last square (including its contravariant triangle sign). Consequently $(\\alpha_{L_3},\\alpha_{L_2},\\alpha_{L_1})$ is a morphism of distinguished triangles. If two components are invertible, [lem-sf-triangle-morphism-iso] makes the third invertible. This proves the stated two-out-of-three extension property. Together with Steps 9–11 it proves every closure assertion for $\\mathcal S_M$.",
+   "text": "Evaluate the intertwining equation on each unchanged rational object. The comparison isomorphisms identify evaluationLocus with the opposite of the descended transformation’s isomorphism locus. The proved source-library NatTrans.isoLocus instances make this triangulated and stable under retracts; op reverses the retract. This is the triangle-morphism argument of lem-sf-triangle-morphism-iso assembled in the source library. Retract stability implies closure under isomorphisms.",
    "uses": [
     "lem-sf-triangle-morphism-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014A, lemma-third-isomorphism-triangle (derived.tex)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The coefficient component remains invertible under q. For a finite diagram the triangulated isomorphism locus contains its product. Transport this membership through the canonical biproduct colimit-to-limit isomorphism and the given colimit presentation. This includes the empty diagram and zero. Assemble all conjuncts with exactly the supplied shifts.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "def-weil-derived-complete",
-  "def-pc-kflat-complex",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-kflat-change-of-rings",
-  "def-pur-integral-derived-operations",
-  "lem-pc-kflat-closure",
-  "lem-pc-tensor-mapping-cone-iso",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-linear-abelian-derived-category",
-  "lem-sf-ringed-rhom-derived-complete",
-  "lem-sfb-ringed-site-duality-maps",
-  "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-resolution",
-  "def-pur-kinjective-complex",
-  "prop-pur-kinjective-resolutions-exist",
-  "def-pur-derived-internal-hom",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-linear-scalar-localization",
-  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-sf-integral-completed-evaluation",
+  "lem-sf-completed-evaluation-rational-descent",
   "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/sk-prop-sf-dualizable-biduality.proof.md",
-  "place": "Perfect complexes are dualizable, first paragraph: exact functors preserving direct summands; expanded for completed/rational ambient operations using Stacks Tags 08JC, 099A, 099M and 0A0E."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/sk-prop-sf-dualizable-biduality.proof.md",
+  "place": "W3: isolate integral evaluation (Steps 1–7 and 9) and rational descent (Step 8); prove Steps 10–12 using the existing source-library isoLocus API and finite biproducts."
  },
  "mathlib_searches": [
   {
@@ -293,7 +142,18 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "lem-sf-rational-thick-evaluation",
@@ -368,21 +228,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pc-kflat-closure",
-  "lem-pc-tensor-mapping-cone-iso",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-linear-abelian-derived-category",
-  "lem-sfb-ringed-site-duality-maps",
-  "lem-pc-kflat-resolution",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-linear-scalar-localization-triangulated",
   "lem-sf-triangle-morphism-iso"
  ],
  "reviewed": {
@@ -421,7 +266,8 @@
   "branch": "newtargets-dag",
   "by": "Q21",
   "date": "2026-10-17",
-  "existing": false
+  "existing": false,
+  "note": "W3: the supporting scalar and evaluation declarations are now in RationalEvaluationData and publicly re-exported here, verbatim; rationalThickEvaluation itself remains in this module."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -430,5 +276,15 @@
   "group": "Q21",
   "result": "pass",
   "note": "Statement, dependencies, constructions, universes, edge cases, docstrings, report sections, and compiler evidence all checked successfully."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d9cee",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261025T101757-L-3735317",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to published; relocated block verbatim substring of published module; two new sorry statements vs node Steps 1-7/9 and 8; delivery + both direct importers compiled in sandbox; axioms checked"
  }
 }

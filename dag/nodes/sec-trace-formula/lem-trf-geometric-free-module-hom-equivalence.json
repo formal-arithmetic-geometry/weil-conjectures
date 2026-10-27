@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-geometric-free-module-hom-equivalence",
+ "kind": "statement",
+ "title": "Normalized Hom bijection for a transported free module sheaf",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology] and let $f:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ be a geometric morphism [def-trf-geometric-morphism], with $L=f^{-1}\\dashv R=f_*$. Let $B$ be a sheaf of commutative rings on $\\mathcal C$ and $E$ a sheaf of sets there. Give $LB$ and $LM$ their ring and module operations by applying $L$ through its finite-product comparisons [def-weil-pbc-algebraic-inverse-image, def-weil-sheaf-of-modules-category]. Let $B[E]$ be the module sheafification [def-weil-presheaf-modules-sheafification] of the sectionwise free modules $U\\mapsto B(U)[E(U)]$ [def-weil-pbc-free-module], with restrictions $\\sum b_e[e]\\mapsto\\sum(b_e|_V)[e|_V]$ and generator $i:E\\to|B[E]|$. For an $LB$-module sheaf $H$, let $R_BH$ have underlying sheaf $R|H|$ and scalar action induced by $B\\to RLB$ and the direct image of the action of $H$. The module and set adjunctions induce a natural chain of bijections $$\\operatorname{Hom}_{LB}(L(B[E]),H)\\cong\\operatorname{Hom}_{B}(B[E],R_BH)\\cong\\operatorname{Hom}(E,R|H|)\\cong\\operatorname{Hom}(LE,|H|).$$ The first bijection is the set-sheaf adjunction restricted to linear maps. The composite bijection is exactly $h\\mapsto |h|\\circ Li$, after identifying $|L(B[E])|=L|B[E]|$. In particular $L(B[E])$ with generator $Li$ represents maps from $LE$ to underlying module sheaves, naturally in $E$ and $H$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TQ, lemma-pullback-differentials, proof: free-module identifications; the normalized Hom-bijection justification of those identifications."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Remove the harmless ULift wrappers from the given algebraic inverse-image presentation using explicit up/down natural isomorphisms. Construct the right module functor by the proved imageFunctor and imageFunctorUnderlying helpers of geometric module construction, applied to the right adjoint and to the adjunct of the coefficient comparison. The adjunct_binary and adjunct_constant identities show that this coefficient map preserves addition, multiplication and one. The construction gives the direct-image addition and the scalar action restricted along that coefficient map. Its product comparison equations imply precisely the addition and scalar graph clauses in the statement; restore the ULift wrappers at the end. These helpers work for the independent object and morphism universes in the statement, so no site functor is needed.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 03D3, lemma-pullback-module and lemma-adjoint-push-pull-modules: transported operations and restriction along the unit"
+   }
+  },
+  {
+   "text": "For an arbitrary module M, turn the addition and scalar graph clauses of its given inverse-image presentation into product-comparison equations by testing on the universal pair of projections. Use the proved binary_mate_iso_iff and linear_iff helpers of geometric module transport: under the normalized set-sheaf adjunct, commuting with addition and scalar multiplication on one side is equivalent to commuting with both operations on the other side. Their conjunction therefore restricts the underlying set Hom equivalence to linear morphisms via restrictHomEquiv. Its map equation is the original adjunct formula. Take M=B[E] and restore the lifted underlying-sheaf isomorphism to get A.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, including restriction of the underlying adjunction to linear maps"
+   }
+  },
+  {
+   "text": "Put $P=|B[E]|$ and omit the forgetful bars on underlying morphisms. The free-module sheaf universal property gives the second bijection, sending $\\beta$ to $\\beta\\circ i$. The inverse of the set-adjunction bijection for $E,H$ gives the third, sending $a:E\\to R|H|$ to $\\varepsilon_{|H|}\\circ L(a)$. Consequently the composite sends $h$ to $\\varepsilon_{|H|}\\circ LR(h)\\circ L(\\eta_P)\\circ L(i)$. Naturality of the counit gives $\\varepsilon_{|H|}\\circ LR(h)=h\\circ\\varepsilon_{LP}$, and the triangle identity gives $\\varepsilon_{LP}\\circ L(\\eta_P)=1_{LP}$. The result is exactly $h\\circ L(i)$. Each arrow is bijective, so restriction to $Li$ is bijective for every $H$, as required for the asserted representing property.",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof (extension from generators), and Tag 08TQ, lemma-pullback-differentials, proof (free-module comparisons); explicit adjunction normalization"
+   }
+  },
+  {
+   "text": "For a morphism $u:E'\\to E$, the free universal property defines $B[u]:B[E']\\to B[E]$ by $B[u]\\circ i_{E'}=i_E\\circ u$. Functoriality of $L$ and the formula from step 3 give $(h\\circ L(B[u]))\\circ L(i_{E'})=(h\\circ L(i_E))\\circ L(u)$. For an $LB$-linear $v:H\\to H'$, they give $(v\\circ h)\\circ L(i_E)=v\\circ(h\\circ L(i_E))$. These equalities prove naturality of the composite in $E$ and $H$. The individual arrows are natural as well: step 2 gives module-adjunction naturality, the free universal property gives naturality of restriction to $i$, and the given set adjunction gives naturality of its inverse. Thus the displayed chain and the generator-normalized representing bijection have all the claimed naturality.",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property",
+    "lem-weil-pbc-geometric-module-transport",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04BL and 03D3, naturality of generator restriction and of the restricted set adjunction; elementary composition calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-trf-free-module-sheaf-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3 and 04BL (lemma-pullback-module, lemma-adjoint-push-pull-modules, lemma-universal-module), supplying the generator-normalized Hom calculation behind the free-module identifications in Tag 08TQ, lemma-pullback-differentials. Lean implementation uses the proved private construction and transport APIs through proof-only import all, with explicit ULift comparison isomorphisms and product-mate calculations; all four original argument steps are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A left exact left adjoint on sheaves transports a free module to an object representing maps from the inverse image of its generator sheaf",
+   "results": "8 hits; LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, PresheafOfModules.freeAdjunction, LightCondensed.free, SheafOfModules.freeFunctor, Condensed.free, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification. No match: pullbackObjFreeIso is for a continuous final site functor and a constant type I, not an arbitrary geometric morphism and arbitrary sheaf E; read Sheaf/PullbackFree.lean:100-128. Presheaf freeAdjunction and condensed fixed-ring adjunctions do not state the transported, generator-normalized Hom bijection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport the free forgetful adjunction on module sheaves along an arbitrary geometric morphism, with generator normalization of the Hom bijection",
+   "results": "8 hits; LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, PresheafOfModules.freeAdjunction, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.freeAdjunction_homEquiv. No match: pullbackObjFreeIso is for a continuous final site functor and a constant type I, not an arbitrary geometric morphism and arbitrary sheaf E; read Sheaf/PullbackFree.lean:100-128. Presheaf freeAdjunction and condensed fixed-ring adjunctions do not state the transported, generator-normalized Hom bijection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "5 hits; SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc. No match: pullbackObjFreeIso is for a continuous final site functor and a constant type I, not an arbitrary geometric morphism and arbitrary sheaf E; read Sheaf/PullbackFree.lean:100-128. Presheaf freeAdjunction and condensed fixed-ring adjunctions do not state the transported, generator-normalized Hom bijection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|free.*[Aa]djunction",
+   "results": "12 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean. No match: pullbackObjFreeIso is for a continuous final site functor and a constant type I, not an arbitrary geometric morphism and arbitrary sheaf E; read Sheaf/PullbackFree.lean:100-128. Presheaf freeAdjunction and condensed fixed-ring adjunctions do not state the transported, generator-normalized Hom bijection.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric morphism inverse image module adjunction identifies morphisms from a transported free sheaf by restricting to transported generators",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric morphism of sheaf topoi, inverse image of a free module sheaf represents maps from the inverse image of its generator sheaf, by the underlying set adjunction",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctor_map, PresheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv. No match for the full item: SheafOfModules.freeHomEquiv is indexed by a constant type (Sheaf/Free.lean:61), and pullbackObjFreeIso assumes a continuous final site functor and a constant type (Sheaf/PullbackFree.lean:118-128). PresheafOfModules.freeHomEquiv (Presheaf/Free.lean:87) concerns presheaves; freeForgetAdjunction concerns fixed-ring condensed sheaves. None directly gives the arbitrary geometric-morphism transported, generator-normalized chain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "5 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc. No match for the full item: SheafOfModules.freeHomEquiv is indexed by a constant type (Sheaf/Free.lean:61), and pullbackObjFreeIso assumes a continuous final site functor and a constant type (Sheaf/PullbackFree.lean:118-128). PresheafOfModules.freeHomEquiv (Presheaf/Free.lean:87) concerns presheaves; freeForgetAdjunction concerns fixed-ring condensed sheaves. None directly gives the arbitrary geometric-morphism transported, generator-normalized chain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|freeAdjunction_homEquiv|freeHomEquiv",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean. No match for the full item: SheafOfModules.freeHomEquiv is indexed by a constant type (Sheaf/Free.lean:61), and pullbackObjFreeIso assumes a continuous final site functor and a constant type (Sheaf/PullbackFree.lean:118-128). PresheafOfModules.freeHomEquiv (Presheaf/Free.lean:87) concerns presheaves; freeForgetAdjunction concerns fixed-ring condensed sheaves. None directly gives the arbitrary geometric-morphism transported, generator-normalized chain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction between inverse image and direct image of sheaves restricts to linear maps and identifies maps from a free module sheaf with maps from its generating sheaf",
+   "results": "Unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generator normalized free forgetful adjunction for sheaves of modules transported along a finite limit preserving left adjoint between sheaf categories",
+   "results": "8 hits: LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.mapFree, PresheafOfModules.sheafificationAdjunction, LightCondensed.free, SheafOfModules.freeFunctor. No match for the full item: SheafOfModules.freeHomEquiv is indexed by a constant type (Sheaf/Free.lean:61), and pullbackObjFreeIso assumes a continuous final site functor and a constant type (Sheaf/PullbackFree.lean:118-128). PresheafOfModules.freeHomEquiv (Presheaf/Free.lean:87) concerns presheaves; freeForgetAdjunction concerns fixed-ring condensed sheaves. None directly gives the arbitrary geometric-morphism transported, generator-normalized chain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-inverse-image-free-module",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Underived input: inverse image preserves sheaf differentials; comparison of the free-module terms in the cokernel presentation. Re-split of lem-trf-geometric-inverse-image-free-module: old steps 2-3 (module adjunction and generator-normalized Hom computation).",
+   "via": [
+    "lem-trf-geometric-inverse-image-free-module",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-geometric-free-module-hom-equivalence",
+  "worker": "stage1",
+  "summary": "Reuse the existing geometric-module construction and transport adjunction and the free-module sheaf universal property; compute the composite using counit naturality and the triangle identity, then write both naturality squares. Statement unchanged; no new nodes.",
+  "blueprint": "lem-trf-local-term-locality, proof of (1)-(2): normal-cone specialization; through the inherited cotangent/differentials dependency chain, realize lem-trf-geometric-inverse-image-free-module old steps 2-3, the restricted module adjunction and normalized Hom computation for the free-module comparisons of Tag 08TQ.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometric-module-construction",
+    "why": "Generic construction for arbitrary small sites and a left-exact set adjunction, used with A=S=LB and c=id to realize the module operations already specified by the item; no trace-formula node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-transport",
+    "why": "Generic normalized module Hom adjunction for arbitrary small sites, used with A=S=LB and c=id; the free-module statement is then computed in this item, so no trace-formula route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-f22d89a1a",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-f22d89a1a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item only, 0 new nodes, statement and stmt_deps unchanged, and the item is still unsplit in live and side-live. It was created by NL's 2026-10-22 re-split of lem-trf-geometric-inverse-image-free-module (old parent steps 2-3) and has no repair note of its own. The proof carries both old steps in full and adds an explicit counit/triangle computation, which I re-derived: h ↦ ε∘L(R(h)η_P i) = h∘ε_{LP}∘Lη_P∘Li = h∘Li. Step 1: in geometric-module-construction with R=B, A=S=LB, eR=c=id, the adjunct of id is η_B, so P(H) is the item's R_B H and eI is linear onto the item's LM. Step 2: the transport statement's bijection, with |B(α)|;eP = adj(eI⁻¹;|α|), is exactly the restricted set adjunction. Step 3: lem-trf-free-module-sheaf-universal-property applied to R_B H, then the inverse set adjunction. Step 4: naturality is elementary. Sources: Stacks 03D3 (sites-modules l.1044), 08TQ (l.6062, where the free identifications are asserted without proof; agent origin is correctly declared) and 04BL (l.5951), with tags checked in tags/tags. Small cases E=∅, E=1, B=0 and f=id are consistent. There is no cycle (closure of 125 nodes), no duplicate in the DAG, and no SGA. Nothing is in route-pivot-dropped. I accept the tool uses lem-weil-pbc-geometric-module-transport (already accepted on the parent) and lem-weil-pbc-geometric-module-construction (already a stmt_dep of transport); both are generic. Maintainer note: the parent's carried transport tool_use is now stale."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.GeometricFreeModuleHomEquivalence",
+  "declaration": "CategoryTheory.SheafFreeModule.geometricFreeModule_hom_chain",
+  "declarations": [
+   "CategoryTheory.SheafFreeModule.inverseFreeRestriction",
+   "CategoryTheory.SheafFreeModule.directModuleTranspose",
+   "CategoryTheory.SheafFreeModule.geometricFreeModule_hom_chain"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/GeometricFreeModuleHomEquivalence.lean",
+  "statement": "theorem geometricFreeModule_hom_chain (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))) {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}} (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} f.inverse B BI) : ∃ (P : ringedSiteModules.{w, w, vD, uD} (ring BI) ⥤ ringedSiteModules.{w, w, vC, uC} (ring B)) (eP : P ⋙ moduleSets B ≅ moduleSets BI ⋙ f.direct), (∀ (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (T : Sheaf J (Type w)) (a b t : T ⟶ (moduleSets B).obj (P.obj H)), (∀ (U : Cᵒᵖ) (x : T.obj.obj U), @id ((P.obj H).val.obj U) (t.hom.app U x).down = @id ((P.obj H).val.obj U) (a.hom.app U x).down + @id ((P.obj H).val.obj U) (b.hom.app U x).down) → ∀ (V : Dᵒᵖ) (x : (f.inverse.obj T).obj.obj V), @id (H.val.obj V) ((directModuleTranspose f (eP.app H) t).hom.app V x).down = @id (H.val.obj V) ((directModuleTranspose f (eP.app H) a).hom.app V x).down + @id (H.val.obj V) ((directModuleTranspose f (eP.app H) b).hom.app V x).down) ∧ (∀ (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (T : Sheaf J (Type w)) (a : T ⟶ (sheafCompose J (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).obj B) (b t : T ⟶ (moduleSets B).obj (P.obj H)), (∀ (U : Cᵒᵖ) (x : T.obj.obj U), @id ((P.obj H).val.obj U) (t.hom.app U x).down = @id (B.obj.obj U) (a.hom.app U x).down • @id ((P.obj H).val.obj U) (b.hom.app U x).down) → ∀ (V : Dᵒᵖ) (x : (f.inverse.obj T).obj.obj V), @id (H.val.obj V) ((directModuleTranspose f (eP.app H) t).hom.app V x).down = @id (BI.obj.obj V) ((f.inverse.map a ≫ F.ringUnderlying.hom).hom.app V x).down • @id (H.val.obj V) ((directModuleTranspose f (eP.app H) b).hom.app V x).down) ∧ ∃ (A : ∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)), (F.modules.obj ((free B).obj E) ⟶ H) ≃ ((free B).obj E ⟶ P.obj H)) (G : ∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)), ((free B).obj E ⟶ P.obj H) ≃ (E ⟶ (moduleSets B).obj (P.obj H))), (∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (h : F.modules.obj ((free B).obj E) ⟶ H), (moduleSets B).map (A E H h) ≫ eP.hom.app H = f.adj.homEquiv _ _ (F.moduleUnderlying.inv.app ((free B).obj E) ≫ (moduleSets BI).map h)) ∧ (∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (b : (free B).obj E ⟶ P.obj H), G E H b = generator B E ≫ (moduleSets B).map b) ∧ (∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (h : F.modules.obj ((free B).obj E) ⟶ H), (f.adj.homEquiv E ((moduleSets BI).obj H)).symm (G E H (A E H h) ≫ eP.hom.app H) = inverseFreeRestriction f F E H h) ∧ (∀ (E E' : Sheaf J (Type w)) (u : E' ⟶ E) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (h : F.modules.obj ((free B).obj E) ⟶ H), A E' H (F.modules.map ((free B).map u) ≫ h) = (free B).map u ≫ A E H h) ∧ (∀ (E : Sheaf J (Type w)) (H H' : ringedSiteModules.{w, w, vD, uD} (ring BI)) (v : H ⟶ H') (h : F.modules.obj ((free B).obj E) ⟶ H), A E H' (h ≫ v) = A E H h ≫ P.map v) ∧ (∀ (E E' : Sheaf J (Type w)) (u : E' ⟶ E) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (b : (free B).obj E ⟶ P.obj H), G E' H ((free B).map u ≫ b) = u ≫ G E H b) ∧ (∀ (E : Sheaf J (Type w)) (H H' : ringedSiteModules.{w, w, vD, uD} (ring BI)) (v : H ⟶ H') (b : (free B).obj E ⟶ P.obj H), G E H' (b ≫ P.map v) = G E H b ≫ (moduleSets B).map (P.map v)) ∧ (∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)), Function.Bijective (inverseFreeRestriction f F E H)) ∧ (∀ (E E' : Sheaf J (Type w)) (u : E' ⟶ E) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (h : F.modules.obj ((free B).obj E) ⟶ H), inverseFreeRestriction f F E' H (F.modules.map ((free B).map u) ≫ h) = f.inverse.map u ≫ inverseFreeRestriction f F E H h) ∧ (∀ (E : Sheaf J (Type w)) (H H' : ringedSiteModules.{w, w, vD, uD} (ring BI)) (v : H ⟶ H') (h : F.modules.obj ((free B).obj E) ⟶ H), inverseFreeRestriction f F E H' (h ≫ v) = inverseFreeRestriction f F E H h ≫ (moduleSets BI).map v)",
+  "branch": "sheaf-dag",
+  "by": "Q63",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07767b95c",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Node unchanged except lean; stmt_dep snapshots identical to live; lean.statement verbatim in file. Clause check: ∃P with eP is R_B H, pinned by add/smul transpose graph clauses for all T (forces direct-image addition and the action through the adjunct of ringUnderlying = B→RLB); A pinned to f.adj.homEquiv with moduleUnderlying.inv in the correct direction; G = generator restriction; third arrow = homEquiv.symm; composite = inverseFreeRestriction = L(i)≫inv≫|h| (re-derived via counit naturality + triangle); naturality of A, G and the composite in u and v; Bijective representing property. Edge cases E=∅, B=0, f=id, empty sites fine; no extra hypotheses or universes beyond the parent's. Helpers have real data; source tags 03D2/03D3/04BL/08TQ verified; docstrings carry the 4-step proof; sorry only. Advisory: ring/moduleSets/free/generator come from the parent theorem module InverseImageFreeModule, whose proof_deps cite the item (cycle, as with Q99/Q72 PASS) → maintainer split note. No compile (no file changed); worker reports clean 18.1 s/14.6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261024T022003-L-2887306",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,45 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-deligne-laumon-a1/lem-per-generated-topology-slice.json: statement, split; the statement and statement dependencies are unchanged. Five explicit proof steps replace the empty proof. The earlier searches are retained, with their incorrect exact-match verdicts corrected.
+- dag/nodes/sec-deligne-laumon-a1/lem-per-coverage-generated-sieve-induction.json: statement, Mathlib leaf. General induction on covering sieves of a coverage, without composition stability or categorical pullbacks. The exact recursor is CategoryTheory.Coverage.Saturate.rec (generated at Coverage.lean:197--203), applied after Coverage.mem_toGrothendieck:262--264; Coverage.toGrothendieck_eq_sInf:299--311 identifies the generated topology.
+- citations.json: verbatim statement quotations for all five step/node citation pairs.
+- searches.jsonl: actual searches run with the prescribed msearch.py, including a second semantic phrasing; all services answered. A grep restricted to one file returned malformed file fields in the search wrapper; the subsequent directory grep returned the correct paths and lines and is the one recorded in the leaf.
+
+Attachments: none. Searches for the item's blueprint tag, over_toGrothendieck_eq, and coverage saturation in lean/WeilConjectures found no completed project declaration giving this item or the new leaf. The Picard project files use the stronger Mathlib theorem only in special cases.
+
+WANTED: none. All sources used are available locally.
+
+The issue was already identified by the Q93 maintainer review: Mathlib's IsStableUnderBaseChange (Precoverage.lean:89--100) quantifies over every indexed presentation and every family of IsPullback squares. The item has only chosen-pullback stability. The theorem at Over.lean:546 is therefore a candidate, not an exact leaf. I preserved the weaker intended statement and did not attempt to infer that stronger class. Instead, a chosen pullback family provides exactly the factorization witnesses for Coverage.pullback (Coverage.lean:158--163), and the proof at Over.lean:549--563 works with this coverage.
+
+Nothing remains unfinished in this stage-1 split. No Lean was written and no compiler, Lake, or build command was run. No repository or launcher file was changed. All output is in the assigned sandbox.
+
+## Not duplicates
+
+lem-per-coverage-generated-sieve-induction vs lem-per-generated-precoverage-covering-sieve: the existing theorem requires isomorphisms, composition stability and base-change stability and gives a single designated presieve inside each covering sieve. The new theorem only requires the coverage factorization condition and gives induction using generators, maximal sieves and local character; no designated presieve inside every cover is asserted.
+
+lem-per-coverage-generated-sieve-induction vs lem-per-generated-topology-slice: the new theorem concerns any predicate on covering sieves in one category and says nothing about slices or localization. Steps 1 and 3--5 perform the slice argument; it has not been moved into the new node.
+
+Whole-DAG statement searches for coverage with induction/local character/saturation, and declaration searches for Coverage.Saturate, Coverage.mem_toGrothendieck and saturate_iff_saturate_toPrecoverage, found no existing general induction node. Blueprint searches for precoverage, coverage, coverage generated, generated topology and saturation induction found no match; the sieve search's eight hits concerned other statements. The specialized twisted-site sieve geometry, slice-site localization and alteration-cover calculus statements do not give this induction theorem. No Stacks source tag is attached to the new Mathlib leaf, so there is no same-tag duplicate pair to distinguish.
+
+## Review by Q67
+
+I read the item and its candidate record, the parent alteration-site localization split and its Q93 review, the chapter and unit records, and the current latest blueprint's chapter/unit text and Artin--Gabber statement and proof. This is a generic tool on the existing finiteness/duality branch; none of the chapter or unit route is replaced. The item's blueprint origin is retained, the new leaf records the same ancestor through this item, and neither has a blueprint duplicate.
+
+For the item I read Mathlib Sites/Over.lean:45--213,248--259,540--573 and Sites/Precoverage.lean:89--135. For the new leaf I read Sites/Coverage.lean:65--76 (factorization),158--163 (coverage hypothesis),197--203 (all three constructors),239--264 (comparison to precoverage saturation and covering membership),299--311 (smallest topology). The generated Saturate.rec is returned explicitly by LeanSearch, and Loogle returns the constructors and membership theorem. Its motive specializes to a predicate of an object and sieve; proof dependence is unnecessary. The leaf carries no proof, no proof dependencies and no assertion about localization.
+
+I also read Stacks sites.tex at sites-definition-localize (00Y0), sites-definition-sieve-generated (00Z1) and sites-definition-topology (00Z4), checking tags in tags/tags. These support the meanings of slice coverings, generated sieves, and topology axioms, rather than being substituted for a missing theorem.
+
+Step 1 needs no theorem citation: every arrow to Y determines the structure map to T, and every factorization through r lifts by giving its intermediate domain the composite with r. I checked both directions of the presieve and sieve correspondences. Pullback membership on either side is exactly membership of f composed with u. Thus generation and pullback identities are derived explicitly, without assuming categorical pullbacks for arbitrary arrows.
+
+Step 2 cites the new leaf solely for its explicitly stated coverage condition. For a chosen projection p_r the other projection q_r gives f p_r = r q_r. Every arrow of the chosen presieve has such a witness, even if different generators yield the same projection. This proves precisely the hypothesis needed for Step 4, and never asks for an alternate pullback family to remain in K. It is elementary from the hypothesis and the leaf's displayed condition.
+
+Step 3 cites def-weil-pbc-topos for all three topology axioms. I opened that node: it really defines sieves, pullback and maximality/pullback stability/local character. It does not define the smallest generated topology, so the step explicitly takes minimality from the item's own definition. The forced structure maps quantify over all arrows entering (Y,s); there is no omitted class of tests for local character. Every generator of K_T maps to a generator of J_K, giving the first inclusion.
+
+Step 4 cites the new leaf for the actual induction principle and def-weil-pbc-topos for maximal covering sieves in L. Its predicate quantifies over every s:Y to T, which is essential because the local-character premise changes Y to Z. The generator case uses equality of generated sieves established in Step 1. It assumes no composition or isomorphism closure. Step 5 checks the remaining premise rather than using it circularly: evaluate the induction hypothesis for f at s composed with f, use the displayed pullback identity, and apply exactly the local-character axiom of def-weil-pbc-topos. That proves the reverse inclusion.
+
+I checked every citation against the statement, not the cited node's proof, and copied its relevant full statement verbatim into citations.json. The only non-elementary input is the generic coverage induction, which is a Mathlib leaf. Slice identities and the coverage witnesses are elementary calculations, so I did not manufacture separate lemma nodes for them. Each proof step is below 1000 characters, with no hidden long-step comparison.
+
+Small cases: if K has no members, the generated topology has only maximal sieves and the slice equality holds, including at an object with no maps to T (the induction predicate there is vacuous). An empty designated presieve satisfies the coverage witness condition using the assumed empty chosen pullback; its empty sieve may cover and the induction still works, without any nonemptiness assumption. For the terminal one-object category all presieve/sieve correspondences are the identity. If pullback objects have distinct isomorphic representatives or generators admit duplicate indexing, the proof still uses only the designated chosen family, exactly as required by the item's final sentence. For arbitrary categories no global pullbacks or terminal object were used. The new leaf's weaker factorization hypothesis covers all these cases.
+
+I checked delivery-errors B--E against the files: complete standalone leaf and notions, exact Mathlib sources and lines, no unrun recorded search, genuine smaller tool rather than a clause of the item, actual hypotheses at each application, explicit induction base and step, unchanged statement, no SGA reference, and no cycle introduced by the leaf's definition-only dependencies. I corrected the inherited search verdicts and a draft coverage-definition line reference (the structure is at 158--163). These are source/citation corrections, not a statement dispute.

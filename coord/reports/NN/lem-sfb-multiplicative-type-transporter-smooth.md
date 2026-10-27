@@ -1,0 +1,61 @@
+# Stage-1 delivery: lem-sfb-multiplicative-type-transporter-smooth
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-multiplicative-type-transporter-smooth.json`: item, statement unchanged, now split into eight proof steps using existing nodes; no Mathlib match.
+- `citations.json`: one literal statement quotation for every occurrence of a cited node in the proof.
+- `report.md`: this report.
+
+There are zero new nodes and zero new Mathlib leaves. `searches.jsonl` is the search command's original log; `write_split.py` is sandbox-only working material.
+
+## Attachments
+
+None. I searched `lean/WeilConjectures/` for the exact blueprint tag and for transporter, Transporter and multiplicative-type variants. The only transporter hits concern equivariant orbit models, not subgroup-scheme transporters. I found no project declaration for the item. The upstream source and all repository files were read only; no git, compiler, Lean writing or Lake command was run there.
+
+## Literature wanted
+
+WANTED: Conrad, *Reductive group schemes*, https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf, Proposition 2.1.2, printed pp.56--60, Appendix B.1, printed pp.280--281, Remark B.2.4 and Corollary B.2.6, printed pp.285--287, for this item; local archive `literature/conrad-reductive-group-schemes.pdf` is absent. I read the online source and did not download or modify literature. The proof is honestly marked `proof_origin.by = agent`, since the explicit coefficient construction and homomorphism lifting assembly adapt that source.
+
+## What needed attention
+
+The imported statement is correct, including containment rather than equality and possibly nonreduced subgroups. No `STATEMENT-DISPUTED` correction is needed. It previously had no proof. I retained its statement, inherited provenance and searches and added only actual logged searches performed with the supplied command. The inherited blueprint ancestor is null; `blueprint_refs.py ancestor` confirms this. I retained the existing detailed `from.place` and `via` chain, rather than inventing an ancestor. The current latest blueprint unit and its direct-images proof (3) were read. This is the supporting transporter input below triangular maximal-torus conjugacy; it changes no chapter or unit route.
+
+The tempting field-only closed-factorization lemma does not cover a general Noetherian base, and the square-zero homomorphism existence lemma into a smooth target does not apply to a nonsmooth multiplicative-type target. Neither is cited. Instead the proof constructs an actual coefficient ideal after splitting and lifts the residual homomorphism into the possibly nonsmooth target by character duality. The supplied split-diagonalizable conjugacy theorem applies to the resulting two maps with equal reductions, and does not require either map to be a closed immersion.
+
+## Searches and reuse
+
+Whole-DAG keyword searches covered transporter, multiplicative type, diagonalizable homomorphisms, square-zero conjugacy, closed-factorization loci and descent. I opened the relevant existing nodes, including the field-only candidates, before choosing citations. Whole-blueprint searches for `transporter` and `diagonalizable` both returned zero equivalent imported nodes. The Lean source searches found no attachment. The item was searched using leanfinder twice, leansearch, loogle and grep, all through the required `msearch.py NN lem-sfb-multiplicative-type-transporter-smooth` command; the exact records are appended from `searches.jsonl` to `mathlib_searches`. The Loogle query was rejected for an unknown identifier and supplies no evidence of absence; the independent semantic and source searches supply the no-match verdict. Semantic hits are ordinary scheme smoothness, Yoneda for group objects or manifold Lie groups. Source hits are finite-flat rank documentation. None states the transporter theorem or a one-line specialization. No searches were invented or repeated from a previous sandbox attempt: initially there was no item copy, report or search log in this sandbox.
+
+## Not duplicates
+
+No new node was created. Existing relative character duality, infinitesimal conjugacy, idempotent lifting, cover calculus, affine descent and closed-immersion descent were reused instead of creating clause nodes. In particular the centralizer theorem is a different functor and is not used as a replacement for the transporter.
+
+## Review by NN
+
+I read Conrad Proposition 2.1.2 and its proof, rather than inferring the theorem from its later use. It explicitly allows containment and both multiplicative-type subgroups and proves smoothness without a conjugacy or nonemptiness hypothesis. I also read the relative character discussion in Appendix B.1 and the homomorphism deformation statement in Corollary B.2.6. I read the local Stacks text for affine descent (0245, `descent.tex`, lemma-affine), closed-immersion descent (02L6, lemma-descending-property-closed-immersion), finite type over a Noetherian ring (00FP, `algebra.tex`, lemma-Noetherian-finite-type-is-finite-presentation), and idempotent lifting (00J9, lemma-lift-idempotents). These support the exact existing nodes used. There are no new nodes requiring separate source reviews. The proof cites Conrad, not SGA; references in Conrad's surrounding text are not imported into the proof.
+
+For step 1 I checked the fppf-site definition and its site transitivity axiom, the actual base-change covering statement, the finite affine refinement statement and the coproduct-cover encoding statement. The refinement applies because S is affine, and it is finite even though the initial splitting cover need not be. The fibre-product statement gives the ring of the affine group after base change. The closed-immersion affine criterion supplies the quotient presentation of the target subgroup; it is not merely a definition of a subgroup.
+
+For step 2 I checked that the ring-diagonalizable definition really gives a free group-algebra basis over every ring. The affine adjunction and affine fibre-product statements give the coordinate map of conjugation. Vanishing of all coefficients of the pulled-back target ideal gives factorization, not just containment of underlying points. The universal group point over B[M] tests the full subgroup functor, including nilpotents. Quotient spectra give the closed immersion, and morphism gluing gives all test schemes. This is a written finite-support calculation, so I marked it elementary relative to those cited statements; it is not a renamed representability clause in a new node.
+
+For step 3 I checked the general Yoneda bijection, rather than a fully-faithful-only surrogate. It supplies the unique overlap isomorphisms and their cocycle. The coproduct encoding applies to the fppf cover of the ambient G obtained by base change, and fpqc covering base change is explicitly cited. Effective affine descent supplies the scheme and map, closed-immersion descent supplies closedness, and representable fpqc descent supplies the unique glued factorization. This also proves that containment is local on the cover, rather than assuming it. None of these nodes supplies an unmentioned quotient or an algebraic-space representability theorem.
+
+For step 4 I verified that the final base ring is the original Noetherian A; no Noetherian assumption on arbitrary test algebras or on an arbitrary later base change is used. A quotient of a finitely generated algebra has the displayed generating set. Thus 00FP applies both to C and to its quotient, giving finite presentation. Tensoring a finite polynomial presentation gives the base-changed presentation directly, without a flatness assumption.
+
+For step 5 I checked the exact orientation of character duality: a homomorphism D(M) to D(N) is induced by N to M. Its locally constant character map has finitely many values because N has finitely many generators and each image is a finite group-algebra sum. Hence there is a finite clopen partition. The cited idempotent theorem gives unique lifts through a square-zero ideal; orthogonality and the sum-one relation follow from that uniqueness. The piecewise monomial maps are genuine group homomorphisms and glue. This avoids any smoothness assumption on H'. I corrected the proof to say explicitly why the nonzero-ring condition holds on each nonempty component and to handle B=0 separately.
+
+For step 6 I checked every hypothesis of the existing infinitesimal conjugacy node: arbitrary commutative test ring B, square-zero K, finitely generated character group, affine smooth ambient group of finite presentation, and two supplied group homomorphisms with exactly equal reductions. The finite presentation comes from step 4, and the base-change smoothness follows by pairing an ambient lift with the fixed base structure. The correction is on the left: Int(u) Int(g)=Int(ug), so ug reduces to g0 and lies in the desired containment transporter. No subgroup-isomorphism lifting theorem is hidden here.
+
+For step 7 I checked that smooth fpqc descent assumes a flat, quasi-compact, surjective morphism. The finite affine cover is flat and surjective from the fppf definition; the affine qcqs and morphism permanence statements give quasi-compactness. I made the disjoint-component lifting argument explicit: lift the test's finite clopen partition using the same idempotent lemma and glue the component lifts. Thus the cited smoothness definition is sufficient, and no smoothness-locality theorem is silently used.
+
+For step 8 I checked arbitrary S', not only affine, Noetherian or flat base changes. The fibre-product mapping property identifies the test points, and the containment condition is literally the same condition after every V-scheme extension. Yoneda identifies the representing inclusion and gives coherence of comparisons. This proof does not assert that tensor product preserves kernels of arbitrary module maps.
+
+I tested the statements and proof on H=1 (the transporter is all of G), H'=1 with nontrivial H over a field (empty transporter), H=H'=G when G is a torus (all of G), unequal rank tori, torsion M including mu_p in characteristic p, nonreduced square-zero base rings, a disconnected ring with different character maps on its clopen components, K=0, B=0 and the empty base change. The arguments use the full free basis and functorial containment in all these cases. No small case forces reducedness, smoothness of the subgroups, equal ranks or nonemptiness. I also inspected 11,052 reachable references for a path back to this item and found none among the available nodes. Ten stale or unavailable inherited references outside this delivery prevented treating that local traversal as a complete global audit; the required server preflight accepted the delivery. No direct citation of this item is missing. Every step is under 2000 characters; there is no long step hiding another lemma. `proof_deps` is exactly the union of `uses`, and each citation quote is the literal statement of its cited node.
+
+B1--B9 were checked: no new nodes, no proof sketches stored as new statements, complete objects and hypotheses retained, proper TeX, exact source places, and only actual logged searches. C1--C8 were checked by opening every cited statement and by the per-step audit above; off-unit generic scheme tools are declared in `split_report.tool_uses`. D1--D5 were checked: the steps construct and prove the item and do not move any clause into a fresh node. E1--E7 were checked by tracking base rings, full subgroup schemes, morphism factorization, the orientation of character maps and the correction product ug. No source error or unresolved mathematical gap was found.
+
+## Validation and unfinished work
+
+Server `srvcheck.py ... review_split` passed before the report was written. The required full delivery dry run and push follow; their results are recorded below when completed. No Lean was written or compiled. No mathematical part remains unfinished at the one-level stage-1 split required by the brief.
+
+Full `deliver.py NN lem-sfb-multiplicative-type-transporter-smooth --no-push` exited successfully: `OK (not pushed)` at aee4fc9b8a9, preflight passed. A final dry run follows this report update, then the authorized direct push.

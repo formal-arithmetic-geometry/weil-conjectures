@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-integral-residue-stratum-scalar",
+ "kind": "statement",
+ "title": "Constant integral scalar normalization under the stratum coefficient isomorphism",
+ "statement": "Let T and S be schemes, g:S→T any morphism, l a prime, E/Q_l a finite extension, d an adic datum on O_E with uniformizer-generated ideal, and c an IntegralResidueCoefficientModel on S [lem-weil-pbc-integral-residue-coefficient-model]. For every pro-etale object V over T and a in ULift(O_E), take the constant scalar a in the integral completed coefficient sheaf on T [def-weil-pbc-integral-stratified-perfect-models], via exchangeScalar [lem-weil-pbc-strict-tower-exchange-mate-normalization], transport it through the direct-image unit for inverse image and the isomorphism integralResidueStratumCoefficient [lem-weil-pbc-integral-residue-stratum-input]. The resulting section over g*V equals the image of the constant scalar a under completedAdicScalar on S. This is an equality of sections of coefficient ring sheaves, without module functors or complexes.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-integral-residue-coefficient-model",
+  "lem-weil-pbc-integral-residue-stratum-input",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Compose both sections with every finite coefficient projection. Use the finite projection normalization of the integral datum inverse-image isomorphism and the inherited normalization of purCoefficientIso. The integralDetailedLevelComparison sends the class of ULift.up a to ULift.up of the class of a by integralCoefficientULift_exists.",
+   "uses": [
+    "lem-weil-pbc-integral-residue-stratum-input",
+    "def-weil-pbc-integral-stratified-perfect-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+   }
+  },
+  {
+   "text": "Use c.completed_projection to replace the inverse completed comparison followed by a finite projection with c.finite, and c.finite_constants to identify its value on the constant scalar. The defining projection equation of completedAdicScalar gives the same result for the right side. Joint monicity of the limit projections proves the section equality. This applies to arbitrary g and to empty schemes.",
+   "uses": [
+    "lem-weil-pbc-integral-residue-coefficient-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+   }
+  },
+  {
+   "text": "The generic normalized inverse-image scalar identity exchangeScalar_comm, transported through the inverse-image/direct-image adjunction, gives the equality on constant sections after base change. Factor integralResidueStratumCoefficient into the integral inverse-image isomorphism and the same-site comparison already proved. The adjunction unit for the identity coefficient comparison followed by the integral coefficient isomorphism is the direct-image scalar map for that isomorphism. Compose the two section equalities.",
+   "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-residue-stratum-input",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "lem-weil-pbc-integral-residue-coefficient-model",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf of a flat module is a flat sheaf of modules and inverse image commutes with constant module sheafification",
+   "results": "constantSheaf, PresheafOfModules.sheafify, SheafOfModules.sheafificationCompPullback, constantCommuteCompose.",
+   "date": "2026-10-27",
+   "verdict": "These give the ordinary sheafification tools, but no result compares the specified normalized completed coefficient presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant perfect complexes are preserved by inverse image and restriction of scalars along a ring equivalence, including universe lift",
+   "results": "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv, restrictScalarsEquivalenceOfRingEquiv and Equivalence.mapHomologicalComplex.",
+   "date": "2026-10-27",
+   "verdict": "No normalized module-sheaf comparison; the algebraic lift is proved in the parent instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Adjunction.leftAdjointUniq and its unit/counit equations.",
+   "date": "2026-10-27",
+   "verdict": "Provides uniqueness after identifying the scalar restriction right adjoints; no theorem states this particular square."
+  },
+  {
+   "tool": "grep",
+   "query": "uliftFunctor|restrictScalarsEquivalenceOfRingEquiv|mapDerivedCategoryCompIso",
+   "results": "Mathlib/Algebra/Category/Grp/Ulift.lean and Grp/Colimits.lean; 25 hits on universe-lift constructions. Also inspected local ordinary coefficient and inverse-image comparison APIs.",
+   "date": "2026-10-27",
+   "verdict": "No normalized completed coefficient module-sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueStratumConstant",
+  "date": "2026-10-27",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Scalar-map normalization in the ordinary constant-module comparison for the integral-lattice step of the finite-extension theorem.",
+   "via": [
+    "lem-weil-pbc-integral-residue-stratum-ordinary",
+    "lem-weil-pbc-integral-residue-stratum-constant",
+    "lem-weil-pbc-integral-residue-stratum-lift",
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueStratumScalar",
+  "file": "lean/Sheaf/Paper/IntegralResidueStratumScalar.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralResidueStratum_scalar",
+  "statement": "theorem integralResidueStratum_scalar\n    (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (S : Scheme.{u}) (g : S ⟶ T)\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (_hd : d.ideal = Ideal.span {Padic.coefficientExtensionUniformizer l E})\n    (c : IntegralResidueCoefficientModel l E d S)\n    (V : T.ProEtᵒᵖ) (a : PbcIntegralRing l E) :\n    (integralResidueStratumCoefficient T l E S g d c).hom.hom.app\n        ((proEtaleBaseChange g).op.obj V)\n      ((proEtaleRingDirectImageMap g (pbcAdicCompletion T (pbcIntegralDatum l E))\n          ((adicTowerInverseImage g).obj (pbcAdicCompletion T (pbcIntegralDatum l E)))\n          (Iso.refl _)).hom.app V\n        ((exchangeScalar (pbcIntegralDatum l E) T).hom.app V\n          ((adicLisseConstantUnit T (PbcIntegralRing l E)).app V a))) =\n      (completedAdicScalar S d).hom.app ((proEtaleBaseChange g).op.obj V)\n        ((adicLisseConstantUnit S (PbcIntegralRing l E)).app\n          ((proEtaleBaseChange g).op.obj V) a)",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T034701-L-3674009",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T034701-L-3674009",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

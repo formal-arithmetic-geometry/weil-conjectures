@@ -1,0 +1,241 @@
+{
+ "id": "lem-route-sp-integers-map-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "via": [],
+   "place": "Integral-twist paragraph of det-prop-sfb-cartesian-coefficients-twists.proof.md: the module structure over O_E,Y is matched with O_E,X via the pulled-back coefficients; the auxiliary integral subextension map used by its Lean realization, specified in the Tate-twist colimit over E."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The integral coefficient inclusion is the unique ring map over E_X -> F_X.",
+ "statement": "Let $\\ell$ be a prime, fix an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its extending absolute value, and let $\\mathbf Q_\\ell\\subseteq E\\subseteq F\\subseteq\\Omega$ be finite subextensions, with their restricted absolute values and topologies [def-sfb-padic-subfield-condensed-ring]. Write $\\mathcal O_H=\\{x\\in H:|x|\\le1\\}$ with its subspace topology, for $H=E,F$, and $\\underline{\\mathcal O_H}(S)=C(S,\\mathcal O_H)$ for its condensed ring [def-sfb-padic-integers-condensed-ring]. Let $X$ be any scheme, using the small pro-étale site and universes of [def-weil-pbc-proetale-site, def-weil-size-convention]. Put $\\mathcal O_{H,X}=p_X^*\\underline{\\mathcal O_H}$ and $H_X=p_X^*\\underline H$, with the transported ring-object structures [sk-def-sfb-pulled-back-coefficients]. Let $a_{H,X}:\\mathcal O_{H,X}\\to H_X$ be the canonical integral inclusion [def-sfb-integers-to-subfield], and let $i_{E,F,X}:E_X\\to F_X$ be the coefficient map induced by the specified field inclusion [def-sfb-subfield-coefficient-map]. There exists exactly one morphism $\\varphi:\\mathcal O_{E,X}\\to\\mathcal O_{F,X}$ of underlying abelian sheaves such that it preserves the unit and multiplication of these ring objects and\n$$a_{F,X}\\circ\\varphi=i_{E,F,X}\\circ a_{E,X}.$$\nHere preservation of the ring-object structure is the Lean predicate $\\mathrm{IsMonHom}(\\varphi)$, not the categorical monomorphism predicate.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.md",
+  "place": "det-prop-sfb-cartesian-coefficients-twists: the Lean of this node (its module Sheaf.Paper.CartesianCoefficientTwists uses) reaches AlgebraicGeometry.ProEtale.spIntegersMap_existsUnique, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spIntegersMap_existsUnique (module Sheaf.Paper.ProEtaleTateTwists, lines 271-286, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sfb-padic-subfield-condensed-ring",
+  "def-sfb-padic-integers-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-integers-to-subfield",
+  "def-sfb-subfield-coefficient-map"
+ ],
+ "proof": [
+  {
+   "text": "Let $j:E\\hookrightarrow F$ be the given inclusion. By [def-sfb-padic-subfield-condensed-ring], both absolute values are restrictions of the same value on $\\Omega$, so $|j(x)|_F=|x|_E$. By [def-sfb-padic-integers-condensed-ring], membership in either integer ring is precisely the inequality $|x|\\le1$. Thus $r:\\mathcal O_E\\to\\mathcal O_F$, $x\\mapsto j(x)$, is well defined and preserves all ring operations. For $x,y\\in\\mathcal O_E$, $|r(x)-r(y)|_F=|x-y|_E$, so it is continuous in the specified subspace topologies. The ordinary inclusions $a_H:\\mathcal O_H\\hookrightarrow H$ satisfy $a_F\\circ r=j\\circ a_E$ by evaluation at each $x$.",
+   "uses": [
+    "def-sfb-padic-subfield-condensed-ring",
+    "def-sfb-padic-integers-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral coefficients and inclusions in the colimit over finite subextensions; explicit restriction argument in the attached Lean docstring"
+   }
+  },
+  {
+   "text": "Apply [def-sfb-continuous-map-condensed-ring-map] to $r$. This gives a ring-object morphism $b:\\underline{\\mathcal O_E}\\to\\underline{\\mathcal O_F}$ whose component at a profinite set $S$ sends $f$ to $r\\circ f$. The integral inclusion $a_H$ induces the postcomposition map $\\underline a_H$ of [def-sfb-integers-to-subfield-point], and the field map induces $\\underline j$ of [def-sfb-qlbar-subextension-map]. Both composites in $\\underline a_F\\circ b=\\underline j\\circ\\underline a_E$ send $f$ to the identical function $S\\to F$, so they are equal as natural transformations.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "def-sfb-integers-to-subfield-point",
+    "def-sfb-qlbar-subextension-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/def-sfb-continuous-map-condensed-ring-map.proof.md",
+    "place": "Postcomposition construction and its strict functoriality"
+   }
+  },
+  {
+   "text": "Use the functor on ring objects of [sk-def-sfb-pulled-back-coefficients] and put $\\varphi=p_X^*b$. It preserves unit and multiplication. Functoriality applied to the equality of step 2 gives $p_X^*(\\underline a_F)\\circ\\varphi=p_X^*(\\underline j)\\circ p_X^*(\\underline a_E)$. By [def-sfb-integers-to-subfield], $p_X^*(\\underline a_H)=a_{H,X}$ for $H=E,F$. By [def-sfb-subfield-coefficient-map], $i_{E,F,X}$ is the coefficient change of $\\underline j$, which by [def-sfb-coefficient-map] is $p_X^*(\\underline j)$. So these three maps are exactly $a_{F,X}$, $i_{E,F,X}$ and $a_{E,X}$, respectively. This proves existence with the required square and the specified coefficient objects.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-integers-to-subfield",
+    "def-sfb-subfield-coefficient-map",
+    "def-sfb-coefficient-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-integers-to-subfield.proof.md",
+    "place": "Applying the monoidal coefficient functor; parent integral-twist paragraph"
+   }
+  },
+  {
+   "text": "The point functor $u:S\\mapsto\\operatorname{Spec}LC(S,\\mathbf Z)$ preserves finite limits and coverings and is continuous by clause 1 of [sk-def-sfb-pullback-from-point]. Profinite sets have the point as terminal object and fibre products with their usual subspace topology (closed subspaces of finite products of compact Hausdorff totally disconnected spaces); hence they have finite limits. Work in a common larger sheaf universe, as in that node. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to $u$: the sheafified Kan-extension functor $p^*$ preserves finite limits on abelian sheaves. The functor $\\pi_X^*$ for $\\pi_X:X\\to\\operatorname{Spec}\\mathbf Z$ preserves finite limits by [lem-sfb-finite-upper-star-exact]. Clause 4 of the first node identifies $p_X^*=\\pi_X^*\\circ p^*$. A composite of these two functors therefore preserves finite limits: its comparison maps are composites of the two invertible finite-limit comparisons.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-sfb-finite-upper-star-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X6, proposition-get-morphism; applied to the blueprint point functor and composed with the scheme inverse image"
+   }
+  },
+  {
+   "text": "The map $\\underline a_F$ of step 2 is a categorical monomorphism. Indeed if $v,w:G\\to\\underline{\\mathcal O_F}$ have equal composites with it, then for every profinite $S$ and $z\\in G(S)$ the functions $v_S(z)$ and $w_S(z)$ have the same values in $F$. Injectivity of the subset inclusion $\\mathcal O_F\\hookrightarrow F$ makes them equal in $\\mathcal O_F$, so $v=w$. A map $m:A\\to B$ is monic exactly when its square with both parallel sides $m$ and both other sides $\\mathrm{id}_A$ is a pullback: the pullback universal property is precisely cancellation of $m$. The finite-limit preservation in step 4 sends this square for $\\underline a_F$ to that square for $p_X^*\\underline a_F=a_{F,X}$. Thus $a_{F,X}$ is monic as an underlying abelian-sheaf morphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-integers-to-subfield-point.md",
+    "place": "Section formula for the inclusion; elementary cancellation and pullback characterization of a monomorphism"
+   }
+  },
+  {
+   "text": "If $\\psi$ is another ring-object morphism satisfying the prescribed square, then $a_{F,X}\\circ\\psi=i_{E,F,X}\\circ a_{E,X}=a_{F,X}\\circ\\varphi$. By the cancellation proved in step 5, $\\psi=\\varphi$. This is uniqueness of the underlying morphism, and the property of preserving unit and multiplication contributes no additional choice.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Canonical field-extension transitions; cancellation argument in the attached Lean docstring"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-padic-subfield-condensed-ring",
+  "def-sfb-padic-integers-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-integers-to-subfield-point",
+  "def-sfb-qlbar-subextension-map",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-integers-to-subfield",
+  "def-sfb-subfield-coefficient-map",
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-sfb-finite-upper-star-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Explicit auxiliary argument implementing the integral coefficient transition implicit in the Tate-twist formulas, using the attached Lean docstring and Stacks Tag 00X6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite extension inclusion induces a unique map of condensed rings of integers commuting with the field inclusions",
+   "results": "Hits: NumberField.RingOfIntegers.mapRingHom, NumberField.RingOfIntegers.mapRingHom_apply, NumberField.RingOfIntegers.mapAlgHom, NumberField.inst_ringOfIntegersAlgebra, NumberField.RingOfIntegers.extension_algebra_isIntegral, NumberField.RingOfIntegers.mapRingEquiv, NumberField.RingOfIntegers.algEquiv, NumberField.RingOfIntegers.mapAlgEquiv",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic categorical ingredients or other integer-ring constructions do not state the project-specific pulled-back condensed coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "padicIntegers|integersMap|condensedRingObj",
+   "results": "Hits: Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/Hensel.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/RingTheory/DividedPowers/Padic.lean",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic categorical ingredients or other integer-ring constructions do not state the project-specific pulled-back condensed coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite p-adic subfields E contained in F the pulled back condensed integral coefficient ring has a unique ring morphism over E to F",
+   "results": "Hits: PadicInt.lift_unique, PadicInt.algebra, PadicAlgCl, PadicAlgCl.coe_eq, BDeRhamPlus, PadicInt.toZModPow_eq_iff_ext, PadicInt.lift, Padic.adicCompletionEquiv",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic categorical ingredients or other integer-ring constructions do not state the project-specific pulled-back condensed coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mono, CategoryTheory.Functor",
+   "results": "Hits: CategoryTheory.NatTrans.mono_of_mono_app, CategoryTheory.Functor.map_mono, CategoryTheory.Functor.mono_of_mono_map, CategoryTheory.Functor.PreservesMonomorphisms.mk, CategoryTheory.Functor.PreservesMonomorphisms.preserves, CategoryTheory.Functor.ReflectsMonomorphisms.mk, CategoryTheory.Functor.ReflectsMonomorphisms.reflects, CategoryTheory.Functor.mono_map_iff_mono",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic categorical ingredients or other integer-ring constructions do not state the project-specific pulled-back condensed coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesMonomorphisms_of_preserves|mono_iff_injective|mono_of_injective",
+   "results": "Hits: Mathlib/CategoryTheory/Topos/Sheaf.lean, Mathlib/CategoryTheory/Topos/Sheaf.lean, Mathlib/CategoryTheory/Subfunctor/SubmonoidFunctor.lean, Mathlib/CategoryTheory/Subfunctor/Image.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Types/Monomorphisms.lean, Mathlib/CategoryTheory/Types/Monomorphisms.lean. Scope: CategoryTheory",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic categorical ingredients or other integer-ring constructions do not state the project-specific pulled-back condensed coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any left exact inverse image functor on abelian sheaves preserves monomorphisms and a sectionwise injective morphism of sheaves is monic",
+   "results": "Hits: CategoryTheory.Sheaf.mono_of_injective, CategoryTheory.Sheaf.mono_of_isLocallyInjective, CategoryTheory.Sheaf.Hom.mono_of_presheaf_mono, CategoryTheory.presheaf_mono_of_mono, CategoryTheory.instMonoSheafTypeImageι, CategoryTheory.Sheaf.Hom.mono_iff_presheaf_mono, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, PresheafOfModules.mono_of_injective",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic categorical ingredients or other integer-ring constructions do not state the project-specific pulled-back condensed coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous maps into nested valuation subrings induce a commuting square of condensed rings and inverse image preserves the injective inclusion",
+   "results": "Hits: ValuationSubring.mapOfLE_comp_valuation, ValuationSubring.mapOfLE_valuation_apply, ValuationSubring.mapOfLE, ValuationSubring.comap_comap, ValuationSubring.inclusion, Valuation.comap_comp, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic categorical ingredients or other integer-ring constructions do not state the project-specific pulled-back condensed coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*[Ff]inite[Ll]imits|[Pp]reserves[Ff]inite[Ll]imits",
+   "results": "Hits: Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean. Scope: CategoryTheory/Sites",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic categorical ingredients or other integer-ring constructions do not state the project-specific pulled-back condensed coefficient square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "det-prop-sfb-cartesian-coefficients-twists",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistConstructions",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistConstructions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spIntegersMap_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spIntegersMap_existsUnique"
+  ],
+  "statement": "theorem spIntegersMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ}\n    (h : E ≤ F) :\n    ∃! φ : condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X ⟶\n        condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ F.1) X,\n      IsMonHom φ ∧\n      φ ≫ padicIntegersToPadicSubfield X ℓ F =\n        padicIntegersToPadicSubfield X ℓ E ≫\n          coefficientMap.{u} (Profinite.padicSubfieldRingObjMap ℓ h) X := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-sp-integers-map-exists-unique",
+  "worker": "stage1",
+  "summary": "Replaced the provisional machine signature by a self-contained statement exactly matching the attached sorried theorem. Wrote the continuous integral inclusion, its condensed and pulled-back commuting squares, finite-limit preservation, categorical monicity and cancellation explicitly. No new nodes; all substantive tools already exist. Logged Mathlib searches found no full match. IsMonHom and categorical Mono are kept distinct.",
+  "blueprint": "Parent integral-twist paragraph uses the pulled-back integral coefficient ring; steps 1–3 specify its canonical subextension transitions required by the Lean realization. Steps 4–6 justify the unique characterization. This realizes the Tate-twist field colimit convention and makes no change to the vector-bundle purity unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic site-theoretic coefficient tool: supplies finite-limit preserving abelian inverse image for the point functor; used only to justify cancellation after coefficient pullback, without replacing a purity step."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Generic site-theoretic coefficient tool: supplies finite-limit preservation for the scheme structure morphism; used only to justify cancellation after coefficient pullback, without replacing a purity step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-sfb-finite-upper-star-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NN-9d6dc6275",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-9d6dc6275 (reviewer sub-agent of L); spot-checked: I read the whole item. The NL statement matches the attached Lean spIntegersMap_existsUnique (ProEtaleTateTwists.lean:271-286). In it, φ is an underlying Ab-sheaf morphism with IsMonHom ∧ square; padicIntegersToPadicSubfield = p_X^*(forget₂ of the O_E→E inclusion); padicSubfieldRingObjMap = forget₂ of postcomposition with E⊆F. X is arbitrary, ℓ is prime, E≤F are finite intermediate fields with the norm restricted from Q̄_ℓ. The coefficient category is ring objects of Sh(X_proét,Ab) via p_X^*. The rewrite is neither weaker nor stronger. Steps: (1) r:O_E→O_F is well defined and isometric, from the two padic condensed-ring defs. (2) The square holds sectionwise, by the postcomposition statements of continuous-map-condensed-ring-map, integers-to-subfield-point and qlbar-subextension-map. (3) p_X^* is a functor on ring objects. (4) sk-def-sfb-pullback-from-point clause 1 gives u finite-limit and cover preserving. lem-weil-pbc-left-exact-site-inverse-image-tensor (the Stacks 00X6 content; on route, since sk-prop-an cites sk-thm-properbasechange) makes p^* exact. lem-sfb-finite-upper-star-exact covers every scheme morphism, so π_X^* is exact. Clause 4 gives p_X^*=π_X^*∘p^*. (5) The condensed inclusion is monic sectionwise, and the kernel-pair square is preserved. (6) Cancellation gives uniqueness. Universe bookkeeping is fine under def-weil-size-convention. Small cases checked: E=F, E=Q_ℓ, X=∅, S=∅. There are no new nodes. DAG searches found no duplicate of this map and no existing node stating that p_X^* is exact. Searches recorded with three kinds of tools. Accepted tool use: lem-sfb-finite-upper-star-exact, a generic black box with no node in sk-prop-an. The left-exact-site lemma is on route, so its declaration is harmless. FIX (C4): step 3 identified i_{E,F,X} with p_X^*(ι) through def-sfb-subfield-coefficient-map, which only says 'coefficient change'; p_X^* is the statement of def-sfb-coefficient-map. I added that node to step 3's uses and to proof_deps, with one sentence in the text. The corrected file is in fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

@@ -1,0 +1,276 @@
+{
+ "id": "def-pur-native-constant-support-model",
+ "kind": "definition",
+ "title": "Native compact-support reduction lift restricted to discrete constants",
+ "status": "split",
+ "statement": "Fix $\\ell,E$ and the strict constant integral tower operations [def-pur-constant-scalar-tower-mates]. On a small pro-etale site $W$, use the completed integral coefficient sheaf [def-weil-completed-integral-coefficients] and its native varying quotient-ring sequence site [lem-pur-system-ringed-sequence-site]. Define $V_W$ to be exact restriction of the native quotient modules first to completed coefficient towers and then to the discrete constant integral ring; write $DV_W$ for its exact localization. Its proper-image identification is the unique derived identity-on-sections comparison commuting with both whole-cochain derived units; its open identification is exact descent of the open-adjunction mate of the ordinary inverse-image restriction square. For a recorded coefficient derived-system calculus $S$ [def-coef-derived-system-calculus-data], put $D_E(M)=DV_WS.\\mathrm{reduction}(M)$. Define the native strict compact-support lift [lem-weil-compact-support-reduction-tower-functor], after restriction to constants, to be $DV_Y\\,RP^{\\rm native}_p\\,j^{\\rm native}_!\\,S.\\mathrm{reduction}$; its canonical identification with $I_A^cD_E$ is obtained from those two fixed proper/open comparisons. Define also ordinary quotient-system extension as the left adjoint of the actual ordinary inverse limit after completed restriction. The unique comparison of its right derived limit with the recorded system limit is normalized on every whole-system cochain unit; the resulting reduction counit is its mate under the ordinary extension/limit and recorded derived reduction/limit adjunctions. Its finite evaluation is the specified native separately derived proper/open evaluation [def-weil-compact-support-native-system-evaluation].",
+ "stmt_deps": [
+  "def-pur-constant-scalar-tower-mates",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "def-coef-derived-system-calculus-data",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-compact-support-native-system-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), 0940 (section-derived-limits), 0B56 (equation-projection-formula-map); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor). Auxiliary in the item proof Steps 2--6."
+ },
+ "proof": [
+  {
+   "text": "Apply nativeSequenceRestriction_properties from the extracted, completely proved module. For the ordinary-limit adjunction, form the natural map from the constant completed commutative ring sheaf to the quotient-ring sequence using its actual limit projections. The limit cone equations give compatibility with adjacent quotient maps. Identify coefficientSequenceRestriction with sequence-to-strict-system equivalence followed by the generic restricted tower functor, using the sectionwise uniqueness theorem for coefficientSequenceRestriction. The existing extensionTowerAdjunction makes the latter functor right adjoint; compose with the equivalence and the diagonal/limit adjunction. This proves ordinaryLimit_rightAdjoint.",
+   "uses": [
+    "lem-pur-native-sequence-restriction-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply nativeSequenceRestriction_properties from the extracted, completely proved module. For a K-injective native sequence complex I, the additive sequence-to-strict-system equivalence preserves K-injectivity. Apply restricted tower resolution acyclicity to any K-injective resolution j of its restricted tower. Transport the result along the induced isomorphism of complexes from the preceding functor identification: lim(j) is a quasi-isomorphism. Naturality of the derived-limit unit and its invertibility on the K-injective target show that the unit is invertible already on the restricted I.",
+   "uses": [
+    "lem-pur-native-sequence-restriction-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the canonical right-derived pullback comparison for the exact restriction functor and the identity ordinary-composite square. On every K-injective I its unit equation and the preceding acyclicity show it is invertible. Every derived object is isomorphic to one represented by a K-injective complex, so naturality makes the comparison invertible everywhere. The canonical comparison equation is exactly the required whole-cochain unit normalization. The right-derived universal-property hom-ext lemma gives uniqueness, proving reductionRightComparison_existsUnique. The derived proper comparison is treated in the next steps, and the ordinary proper comparison is constructed in Step 6. The inverse/open mates are handled in Steps 7 and 8.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-constant-scalar-tower-mates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a K-injective resolution j:VI→T for the exact constant restriction of a K-injective native sequence complex I. The new nativeConstantRestriction_push_quasiIso says that towerDirectImage maps j to a quasi-isomorphism. The canonical derived-unit naturality square then identifies the unit on VI followed by the derived image of Q(j) with Q(g_*j) followed by the unit on T. All other maps are invertible, so cancellation proves invertibility of the unit on VI. Restriction is not asserted to preserve K-injectivity.",
+   "uses": [
+    "lem-pur-native-constant-restriction-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ExactDerivedSquare.square_exists to the ordinary section-normalized proper square, with the preceding acyclicity. The result is an isomorphism on unbounded derived categories satisfying the canonical whole-cochain unit equation. Expanding only unitCompatible and derivedUnit identifies this equation with the statement. Apply square_unique to any second normalized isomorphism, which proves uniqueness. Thus systemProper_existsUnique is proved from the separate acyclicity step and the existing ordinary comparison.",
+   "uses": [
+    "lem-pur-derived-square-normalization-naturality",
+    "def-pur-constant-scalar-tower-mates",
+    "lem-pur-native-constant-restriction-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For ordinary proper comparison, compose the constant-to-completion map with each actual completion projection. The limit-lift equations identify this with the constant quotient map. Construct the strict constant tower explicitly by continuous module pushforward along each vertical inclusion, with horizontal maps induced by the original module presheaf. The sectionwise characterization of coefficientSequenceRestriction identifies this explicit functor with systemRestriction on both objects and morphisms. At every level, compose continuous module pushforwards; naturality of the constant-section direct-image map in the coefficient quotient identifies the structural ring maps. The resulting comparison is identity on every section. These level isomorphisms commute with all horizontal maps and all module morphisms, so assemble to an isomorphism of whole strict-tower functors. Extensionality on the module sections proves uniqueness. No flatness, nonempty-site or boundedness hypothesis is used.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-native-constant-section-restriction",
+    "def-sp-varying-ring-operations",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the actual ULift quotient homomorphisms from the integral coefficient ring to each positive finite level. Quotient factorization proves compatibility with adjacent maps. The explicit constantTowerFunctor, whose levels and transitions are the original section maps, is an OrdinaryScalarRestriction: its level isomorphisms are the identity coefficient-restriction identifications, and exactness follows from systemRestriction_eq and systemRestriction_exact. Apply ordinaryScalarAdjunctions to this explicitly constructed record. Its proper comparison and the given proper comparison coincide by sectionwise extensionality, since both are identity on every fibre-product section. The generic unit equation then identifies the inverse mate with the inverse of its pullback comparison. This proves invertibility, and systemRestriction_eq transports it to the exact systemPullMap defined in this module.",
+   "uses": [
+    "def-pur-constant-scalar-tower-mates",
+    "def-pur-native-constant-section-restriction",
+    "def-sp-varying-ring-operations",
+    "def-weil-completed-integral-coefficients",
+    "lem-sf-semilinear-scalar-adjunctions",
+    "lem-sf-semilinear-scalar-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The native open adjunction has invertible unit. In the scalar-adjunction package of Step 7, the open-unit equation therefore makes the constant-tower open unit invertible on each restricted native module. Its left triangle makes the constant-tower counit invertible on the extension of that module. Naturality along the package open comparison transports this invertibility to the restriction of the native extension. Transport this assertion using systemRestriction_eq. Finally, expand the specified inverse open mate: its factors are the scalar restriction of the invertible native unit, the inverse pullback comparison proved in Step 7, and the counit just shown invertible. Their composite is invertible. This uses no assumption that every mate of an isomorphism is invertible, and includes the empty open.",
+   "uses": [
+    "lem-sf-semilinear-scalar-adjunctions",
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-pur-constant-scalar-tower-mates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-constant-scalar-tower-mates",
+  "def-pur-native-constant-section-restriction",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-derived-square-normalization-naturality",
+  "lem-pur-native-constant-restriction-acyclicity",
+  "lem-pur-native-sequence-restriction-properties",
+  "lem-sf-semilinear-scalar-adjunctions",
+  "lem-sf-semilinear-scalar-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941 for the retained limit argument; Tag 0D6E for the derived proper comparison. Ordinary proper comparison constructed by constant quotient naturality, continuous module pushforward composition and sectionwise extensionality. Inverse/open mates use the normalized generic ordinaryScalarAdjunctions (sites-modules.tex, Tag 03D7), uniqueness of the identity-on-sections proper square, the native invertible open unit, and the open triangle identity."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "systemProper|systemOpenMap|coefficientSequenceRestriction",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact declaration: these supply component APIs, not this normalized whole-diagram comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a native varying coefficient reduction system to constant integral coefficients commutes with separately derived proper direct image and extension by zero",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsIntegralHom.instMorphismRestrict",
+     "AlgebraicGeometry.StructureSheaf.res_const",
+     "Derivation.restrictScalars.congr_simp",
+     "AlgebraicGeometry.StructureSheaf.res_const'",
+     "Polynomial.coeff_restriction'",
+     "Polynomial.coeff_restriction",
+     "RestrictScalars",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact declaration: these supply component APIs, not this normalized whole-diagram comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction from quotient system module sheaves to strict constant integral towers normalized on the direct image unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "ModuleCat.tilde",
+     "AlgebraicGeometry.Scheme.Modules.restrict",
+     "SheafOfModules.Presentation.map_π_eq",
+     "SheafOfModules.Presentation.map",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+     "SheafOfModules.restrictScalars",
+     "ModuleCat.Tilde.res_apply",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagram"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact declaration: these supply component APIs, not this normalized whole-diagram comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"constantScalarTowerMates|systemProperOrdinary|nativeConstantSupport|reductionBalancing|ordinaryBalancing\" lean/WeilConjectures lean/Sheaf; rg -l \"native.constant.support|constant.scalar.tower.mates|strict.scalar.reduction.balancing\" dag/nodes; tools/blueprint_refs.py search (the corresponding notion)",
+   "results": "No matching declaration or DAG node. The three blueprint searches each returned 0 nodes.",
+   "date": "2026-10-22",
+   "verdict": "No exact existing notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-strict-scalar-mate",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Finite scalar proper/open mate on strict reduction towers (returned comparison Steps 3, 4); Native compact-support reduction lift restricted to discrete constants",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.NativeConstantSupportModel",
+  "declaration": "WeilConjectures.PurStrictScalar.support",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.constantRestriction",
+   "WeilConjectures.PurStrictScalar.towerConstantRestriction",
+   "WeilConjectures.PurStrictScalar.towerConstantRestriction_exact",
+   "WeilConjectures.PurStrictScalar.toConstant",
+   "WeilConjectures.PurStrictScalar.systemRestriction",
+   "WeilConjectures.PurStrictScalar.systemRestriction_exact",
+   "WeilConjectures.PurStrictScalar.systemRestriction_limits",
+   "WeilConjectures.PurStrictScalar.systemRestriction_colimits",
+   "WeilConjectures.PurStrictScalar.systemRestriction_additive",
+   "WeilConjectures.PurStrictScalar.pushRestriction_zero",
+   "WeilConjectures.PurStrictScalar.restrictionPush_zero",
+   "WeilConjectures.PurStrictScalar.systemU",
+   "WeilConjectures.PurStrictScalar.systemProperOrdinary_existsUnique",
+   "WeilConjectures.PurStrictScalar.systemProperOrdinary",
+   "WeilConjectures.PurStrictScalar.nativePush_additive",
+   "WeilConjectures.PurStrictScalar.systemProper_existsUnique",
+   "WeilConjectures.PurStrictScalar.systemProper",
+   "WeilConjectures.PurStrictScalar.systemPullMap",
+   "WeilConjectures.PurStrictScalar.systemPullMap_isIso",
+   "WeilConjectures.PurStrictScalar.systemOpenMap",
+   "WeilConjectures.PurStrictScalar.systemOpenMap_isIso",
+   "WeilConjectures.PurStrictScalar.systemOpen",
+   "WeilConjectures.PurStrictScalar.reduction",
+   "WeilConjectures.PurStrictScalar.ordinaryLimit",
+   "WeilConjectures.PurStrictScalar.ordinaryLimit_rightAdjoint",
+   "WeilConjectures.PurStrictScalar.ordinaryLimit_isRightAdjoint",
+   "WeilConjectures.PurStrictScalar.ordinaryReduction",
+   "WeilConjectures.PurStrictScalar.ordinaryReductionAdj",
+   "WeilConjectures.PurStrictScalar.ordinaryReduction_additive_data",
+   "WeilConjectures.PurStrictScalar.ordinaryLimit_additive",
+   "WeilConjectures.PurStrictScalar.ordinaryReduction_additive",
+   "WeilConjectures.PurStrictScalar.reductionRightComparison_existsUnique",
+   "WeilConjectures.PurStrictScalar.reductionRightComparison",
+   "WeilConjectures.PurStrictScalar.systemReductionCounit",
+   "WeilConjectures.PurStrictScalar.support",
+   "WeilConjectures.PurStrictScalar.supportModel",
+   "WeilConjectures.PurStrictScalar.nativeSequence_kInjective"
+  ],
+  "file": "lean/Sheaf/Paper/NativeConstantSupportModel.lean",
+  "statement": "def support {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e13bc1e9",
+  "group": "N6",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e13bc1e9",
+  "group": "N6",
+  "result": "pass",
+  "note": "Delta vs PASSed-then-L-refused 3e8ec: duplicate FiniteCompactSupportScalarData.lean removed; ConstantScalarTowerAdjunction now public-imports the parent Sheaf.Paper.IntegralCompactSupportCoefficientComparison; def-pur-finite-compact-support-scalar-data is existing:true on that module (all other Lean byte-identical). Checked: record statement verbatim in live parent, 21/21 declarations present; delivered modules use no parent decl outside the record (only short-name match 'reduction' is the own PurStrictScalar.reduction); no full-name clash; DAG and import graph acyclic; all proofs sorry; item signature clauses (IsIso on D^b_ctf, evaluation = finiteTensorMap, finite isos, transition squares) as before. Maintainer notes: (1) stage 3: parent lem-pur-compact-support-integral-coefficient-comparison has this item in proof_deps while the item imports the parent module (cycle import omitted per stages/2 §3 rule 7) - relocate the 21 finite decls upstream into a def-pur-finite-compact-support-scalar-data module or prove dependent parent clauses in a separate module before the parent's stage 3; (2) advisory H9: the parent import sits in ConstantScalarTowerAdjunction, whose node does not cite the def node; (3) the 21 decls are listed in two node records. No fix; nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T195403-L-2941333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

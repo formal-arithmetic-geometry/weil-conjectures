@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-scalar-cochain-averaging-primitives",
+ "kind": "statement",
+ "title": "Parametrized finite and complete scalar cocycle averaging primitives",
+ "statement": "Fix a prime $\\ell$ and a nonarchimedean normed field $V$ containing $\\mathbf Q_\\ell$ isometrically [def-weil-l-adic-numbers]. Let $G$ be a profinite group, meaning a compact Hausdorff topological group with a basis of open normal subgroups, every finite continuous quotient of which has order prime to $\\ell$. Let $P$ be a profinite space, meaning a compact Hausdorff space with a clopen basis. All spaces use [def-weil-size-convention]. Write $C^r(P,G;V)=C(P\\times G^r,V)$ for all continuous maps, with trivial group action, $d^0=0$, and for $r\\geq1$\n$$(dc)(s;g_1,\\ldots,g_{r+1})=c(s;g_2,\\ldots,g_{r+1})+\\sum_{a=1}^r(-1)^a c(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{r+1})+(-1)^{r+1}c(s;g_1,\\ldots,g_r).$$\nFor every $n\\geq1$, if a cocycle $c\\in C^n(P,G;V)$ factors in the group coordinates through $Q=G/U$ for an open normal $U$, its descended cochain $\\bar c$ has the primitive\n$$b(s;g_1,\\ldots,g_{n-1})={(-1)^n\\over |Q|}\\sum_{h\\in Q}\\bar c(s;\\bar g_1,\\ldots,\\bar g_{n-1},h).$$\nThis is a continuous cochain factoring through the same quotient, with $db=c$ and $\\|b\\|_\\infty\\leq\\|c\\|_\\infty$. No completeness of $V$ is required in this assertion.\nIf $V$ is complete, let $I_G:C(G,V)\\to V$ be the normalized translation-invariant $V$-linear integral with supremum-norm bound one of [lem-sfb-prime-to-ell-complete-scalar-integral] (for $B=V$ and $K=G$). Then the $V$-linear maps $h_{V,G}^n:C^n(*,G;V)\\to C^{n-1}(*,G;V)$ given by\n$$(h_{V,G}^n c)(g_1,\\ldots,g_{n-1})=(-1)^n I_G(h\\mapsto c(g_1,\\ldots,g_{n-1},h))$$\nare contractions. For every profinite $P$, applying $h_{V,G}^n$ fibrewise sends continuous $P$-families to continuous $P$-families, is $C(P,V)$-linear, commutes with continuous changes of parameter, and has supremum-norm bound one. For every cocycle $c$ in such a family, $d h_{V,G}^n c=c$. These conclusions include $n=1$, where the cocycle is zero, and the empty $P$, where all cochains are zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is motivation only; agent-formulated analytic lemma extracted from old proof steps 2–3: finite quotient averaging, complete scalar averaging, signs, parameter continuity and norm bounds. WANTED: exact norm-topological reference."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-size-convention",
+  "lem-sfb-prime-to-ell-complete-scalar-integral"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-sfb-finite-quotient-contractive-average, installing the normed Padic algebra structure from the specified isometric embedding. Form the signed finite sum of last-variable quotient restrictions as a continuous map bbar; pull it back to b. The factorization hypothesis places every last-variable slice in the averaging submodule D. Its finite-sum formula identifies b pointwise with the signed average. Apply lem-sfb-invariant-average-cochain-identity to E=D, pointwise evaluation, and the stated normalized invariant average. Its contraction bound followed by the continuous-map supremum-norm estimate gives the norm bound, including empty P.",
+   "uses": [
+    "lem-sfb-finite-quotient-contractive-average",
+    "lem-sfb-invariant-average-cochain-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the supplied continuous linear functional I, curry the cochain after the continuous map ((s,g),h) to (s,snoc g h), compose with I and multiply by the sign. This constructs H explicitly as a linear map of continuous-map spaces, without choosing any witness from an existence theorem. Evaluation gives the stated slice formula, C(P,V)-linearity and naturality. Contractivity of I and the pointwise supremum estimate give the norm bound.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sfb-invariant-average-cochain-identity with E=C(G,V), faithful pointwise evaluation, A=I and oneE=1. Left translations are continuous and preserve the integral by its supplied hypothesis. The result is exactly the primitive identity. The general algebraic calculation includes n=0 and the continuous-map norm inequalities require no nonemptiness of P.",
+   "uses": [
+    "lem-sfb-invariant-average-cochain-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-quotient-contractive-average",
+  "lem-sfb-invariant-average-cochain-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is geometric motivation only. Agent-written analytic expansion of lem-sfb-scalar-cochain-averaging-primitives, proof steps 3 and 4: signed last-variable averaging calculation; exact analytic reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Parametrized trivial continuous cocycles of pro prime to ell groups over complete nonarchimedean fields admit norm bounded primitives by averaging",
+   "results": {
+    "t": "2026-10-22T06:03:53Z",
+    "tool": "leanfinder",
+    "query": "Parametrized trivial continuous cocycles of pro prime to ell groups over complete nonarchimedean fields admit norm bounded primitives by averaging",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+     "groupCohomology.cocycles₂_map_one_fst",
+     "groupCohomology.cocycles₁_map_one",
+     "groupCohomology.map_one_of_isCocycle₁",
+     "PadicInt.mahlerTerm",
+     "groupCohomology.map_one_fst_of_isCocycle₂",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "groupCohomology.exists_mul_galRestrict_of_norm_eq_one"
+    ],
+    "digest": "c4d6b7af88999345"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite invariant projections and continuous-cohomology definitions do not give these parametrized cochain primitives and nonarchimedean bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousCohomology\", \"cocycles\"",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "loogle",
+    "query": "\"ContinuousCohomology\", \"cocycles\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.cocycles",
+     "ContinuousCohomology.cocyclesMap_id",
+     "ContinuousCohomology.cocyclesMap",
+     "ContinuousCohomology.cocyclesMap_comp",
+     "ContinuousCohomology.cocyclesMap_comp_assoc",
+     "ContinuousCohomology.cocycles₀IsoAux",
+     "ContinuousCohomology.cocycles₀IsoAux'",
+     "ContinuousCohomology.cocycles₀Iso"
+    ],
+    "digest": "22aeb8c4298dd066"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite invariant projections and continuous-cohomology definitions do not give these parametrized cochain primitives and nonarchimedean bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "(averag|integral).*(cocycle|cochain)|(cocycle|cochain).*(averag|integral)",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "grep",
+    "query": "(averag|integral).*(cocycle|cochain)|(cocycle|cochain).*(averag|integral)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite invariant projections and continuous-cohomology definitions do not give these parametrized cochain primitives and nonarchimedean bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Averaging over a finite group or a profinite group gives continuous bounded primitives for trivial coefficient cocycles with compact parameters",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "leansearch",
+    "query": "Averaging over a finite group or a profinite group gives continuous bounded primitives for trivial coefficient cocycles with compact parameters",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Representation.averageMap",
+     "MeasureTheory.continuous_integral_apply_inv_mul",
+     "MeasureTheory.continuous_integral_apply_neg_add",
+     "ContinuousCohomology.I_obj_V_isAddCommGroup",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "tendsto_birkhoffAverage_apply_sub_birkhoffAverage'",
+     "groupCohomology.cocycles",
+     "ProfiniteGrp.ofFiniteGrp"
+    ],
+    "digest": "44c454a3537caebd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite invariant projections and continuous-cohomology definitions do not give these parametrized cochain primitives and nonarchimedean bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracting homotopy by summing or integrating the last variable of inhomogeneous continuous group cochains",
+   "results": {
+    "t": "2026-10-22T06:03:53Z",
+    "tool": "leanfinder",
+    "query": "Contracting homotopy by summing or integrating the last variable of inhomogeneous continuous group cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkCoinductive",
+     "CochainComplex.HomComplex.δ_ofHomotopy",
+     "CochainComplex.HomComplex.δ_neg_one_cochain",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy_refl",
+     "Homotopy.mkCoinductiveAux₂_add_one",
+     "ContinuousCohomology.MultiInd.complex",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "Homotopy.mkCoinductiveAux₂"
+    ],
+    "digest": "568f1e5e16ee430b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite invariant projections and continuous-cohomology definitions do not give these parametrized cochain primitives and nonarchimedean bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "(averag|integral).*(cocycle|cochain)|(cocycle|cochain).*(averag|integral)",
+   "results": {
+    "t": "2026-10-23T04:08:04Z",
+    "tool": "grep",
+    "query": "(averag|integral).*(cocycle|cochain)|(cocycle|cochain).*(averag|integral)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions of group cochains, degree-one cohomology, or cyclic cohomology; no parametrized signed averaging primitive with this norm bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousCohomology\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-23T04:08:05Z",
+    "tool": "loogle",
+    "query": "\"ContinuousCohomology\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions of group cochains, degree-one cohomology, or cyclic cohomology; no parametrized signed averaging primitive with this norm bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite group cocycles with trivial p adic coefficients have primitives given by the signed average of the last variable",
+   "results": {
+    "t": "2026-10-23T04:08:05Z",
+    "tool": "leansearch",
+    "query": "Finite group cocycles with trivial p adic coefficients have primitives given by the signed average of the last variable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cocycles₁",
+     "groupCohomology.H1IsoOfIsTrivial",
+     "groupCohomology.cocycles",
+     "groupCohomology.mem_cocycles₁_def",
+     "groupCohomology.cocyclesOfIsCocycle₁",
+     "groupCohomology.mem_cocycles₁_iff",
+     "groupCohomology.π_comp_H0IsoOfIsTrivial_hom_apply",
+     "groupCohomology.H1π_eq_zero_iff"
+    ],
+    "digest": "8586f06db2981e09"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions of group cochains, degree-one cohomology, or cyclic cohomology; no parametrized signed averaging primitive with this norm bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trivial continuous group cochains admit a norm one contraction by averaging the last argument with a normalized invariant nonarchimedean integral",
+   "results": {
+    "t": "2026-10-23T04:08:07Z",
+    "tool": "leanfinder",
+    "query": "Trivial continuous group cochains admit a norm one contraction by averaging the last argument with a normalized invariant nonarchimedean integral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.const",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "ContinuousCohomology.MultiInd.d_zero",
+     "ContinuousCohomology.const_app_hom",
+     "ContinuousCohomology.kerHomogeneousCochainsZeroEquiv",
+     "continuousCohomology",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.MultiInd.complex"
+    ],
+    "digest": "7c89316fce1c2481"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions of group cochains, degree-one cohomology, or cyclic cohomology; no parametrized signed averaging primitive with this norm bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracting homotopy of inhomogeneous group cochains for a finite group by division by its order",
+   "results": {
+    "t": "2026-10-23T04:08:08Z",
+    "tool": "leanfinder",
+    "query": "Contracting homotopy of inhomogeneous group cochains for a finite group by division by its order",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.FiniteCyclicGroup.groupCohomologyπEven",
+     "inhomogeneousCochains.d_hom_apply",
+     "inhomogeneousCochains.d",
+     "groupCohomology.inhomogeneousCochains",
+     "groupHomology.inhomogeneousChains.d",
+     "Rep.FiniteCyclicGroup.resolution.π_f",
+     "Rep.FiniteCyclicGroup.moduleCatCochainComplex",
+     "Rep.FiniteCyclicGroup.groupCohomologyπOdd"
+    ],
+    "digest": "2e7aedf70092cd32"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions of group cochains, degree-one cohomology, or cyclic cohomology; no parametrized signed averaging primitive with this norm bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion, old proof steps 2–3: finite quotient averaging, complete scalar averaging, signs, parameter continuity and norm bounds",
+   "via": [
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scalar-cochain-averaging-primitives",
+  "worker": "stage1",
+  "summary": "Reused the existing finite-quotient contractive average and complete scalar integral, including the latter's full compact-parameter clause. Wrote the signed last-variable cocycle calculation, checked degree one and empty parameter spaces. No new node, statement change, Lean writing or compilation.",
+  "blueprint": "All four steps supply the analytic scalar averaging input of paragraph (3) of det-thm-sf-ctf-stability-direct-images. The current blueprint supplies geometric context only. blueprint_refs.py ancestor returns None; retained the inherited null ancestor and via chain; whole-blueprint searches for averaging and continuous cocycle found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-59c917dc9",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-59c917dc9 (reviewer sub-agent of L); spot-checked: The item is a statement-only node created by the parent re-split (lem-sfb-prime-to-ell-cochain-finite-quotient-descent). It has no repair note of its own and is still unsplit in live and side-live, so nothing supersedes it. The statement and stmt_deps are unchanged from live. The delivery adds 4 steps and no new nodes; proof_deps equals the union of the step uses. Both cited nodes are in the same unit sk-thm-sf-ctf-stability: lem-sfb-finite-quotient-contractive-average (A on D, no completeness) and lem-sfb-prime-to-ell-complete-scalar-integral (reviewed; includes the P-parameter continuity, C(P)-linearity and naturality clause). There is no cycle, no tool_uses and no SGA. Source: blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), which gives motivation only, so proof_origin=agent and the WANTED line are correct. Step 1: continuity of c-bar follows from finite discrete Q^n and slice lifts; the bound is pointwise. Step 2: the parameter clause is applied with R=P×G^{n-1}, which is profinite. C(P)-linearity comes via the projection, naturality via u×id, and the contraction from the pointwise bound. Step 3: I redid the computation from dc(g_1..g_n,h)=0. Averaging and left invariance on the a=n term give d(Tc)=(-1)^n c, so d((-1)^n Tc)=c. Every translated function stays in D, so 'elementary' is fair. Step 4: for n=1, averaging c(h)-c(gh)+c(g)=0 gives c=0, consistent with d^0=0. Edge cases checked: empty P (every space is {0}); trivial G for n even and odd; prime-to-ℓ |Q| with |Q|^{-1} of norm 1. The rg -L duplicate search found only the finite-index transfer, the condensed averaging summand and the rectangle detection nodes, none of which is a duplicate. The parent's steps 2 and 4 use exactly the item's finite and complete clauses. Advisory: the report mentions citations.json and searches.jsonl, which are not committed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.ScalarCochainAveragingPrimitives",
+  "declaration": "WeilConjectures.scalar_cochain_averaging_primitives",
+  "declarations": [
+   "WeilConjectures.scalarCochainDifferential",
+   "WeilConjectures.scalarCochainLastSlice",
+   "WeilConjectures.scalar_cochain_averaging_primitives"
+  ],
+  "file": "lean/Sheaf/Analysis/ScalarCochainAveragingPrimitives.lean",
+  "statement": "theorem scalar_cochain_averaging_primitives (ell : ℕ) [Fact ell.Prime] (V : Type v) [NormedField V] (iota : Padic ell →+* V) (hiota : Isometry iota) (hultra : ∀ x y : V, ‖x + y‖ ≤ max ‖x‖ ‖y‖) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] (hbasis : ∀ W : Set G, IsOpen W → (1 : G) ∈ W → ∃ U : OpenNormalSubgroup G, (U : Set G) ⊆ W) (hprime : ∀ U : OpenNormalSubgroup G, Nat.Coprime (Nat.card (G ⧸ U.toSubgroup)) ell) : (∀ (n : ℕ) (P : Profinite.{w}) (c : C(P × (Fin (n + 1) → G), V)) (U : OpenNormalSubgroup G) (cbar : C(P × (Fin (n + 1) → G ⧸ U.toSubgroup), V)), (∀ (s : P) (g : Fin (n + 1) → G), c (s, g) = cbar (s, fun j ↦ QuotientGroup.mk (g j))) → (∀ (s : P) (g : Fin (n + 2) → G), scalarCochainDifferential (n + 1) c s g = 0) → ∃ (b : C(P × (Fin n → G), V)) (bbar : C(P × (Fin n → G ⧸ U.toSubgroup), V)), (∀ (s : P) (g : Fin n → G ⧸ U.toSubgroup), bbar (s, g) = (-1 : V) ^ (n + 1) * (Nat.card (G ⧸ U.toSubgroup) : V)⁻¹ * ∑' h, cbar (s, Fin.snoc g h)) ∧ (∀ (s : P) (g : Fin n → G), b (s, g) = bbar (s, fun j ↦ QuotientGroup.mk (g j))) ∧ (∀ (s : P) (g : Fin (n + 1) → G), scalarCochainDifferential n b s g = c (s, g)) ∧ ‖b‖ ≤ ‖c‖) ∧ (∀ [CompleteSpace V] (I : C(G, V) →L[V] V), (∀ f : C(G, V), ‖I f‖ ≤ ‖f‖) → I 1 = 1 → (∀ (a : G) (f : C(G, V)), I (f.comp ⟨fun h ↦ a * h, continuous_const.mul continuous_id⟩) = I f ∧ I (f.comp ⟨fun h ↦ h * a, continuous_id.mul continuous_const⟩) = I f) → (∀ (U : OpenNormalSubgroup G) (g : G ⧸ U.toSubgroup → V) (f : C(G, V)), (∀ h : G, f h = g (QuotientGroup.mk h)) → I f = (Nat.card (G ⧸ U.toSubgroup) : V)⁻¹ * ∑' q, g q) → ∃ H : (n : ℕ) → (P : Profinite.{w}) → C(P × (Fin (n + 1) → G), V) →ₗ[V] C(P × (Fin n → G), V), (∀ (n : ℕ) (P : Profinite.{w}) (c : C(P × (Fin (n + 1) → G), V)) (s : P) (g : Fin n → G), H n P c (s, g) = (-1 : V) ^ (n + 1) * I (scalarCochainLastSlice n c s g)) ∧ (∀ (n : ℕ) (P : Profinite.{w}) (c : C(P × (Fin (n + 1) → G), V)), ‖H n P c‖ ≤ ‖c‖) ∧ (∀ (n : ℕ) (P : Profinite.{w}) (a : C(P, V)) (c : C(P × (Fin (n + 1) → G), V)), H n P ((a.comp ContinuousMap.fst) * c) = (a.comp ContinuousMap.fst) * H n P c) ∧ (∀ (n : ℕ) (P P' : Profinite.{w}) (a : C(P', P)) (c : C(P × (Fin (n + 1) → G), V)), H n P' (c.comp (a.prodMap (ContinuousMap.id (Fin (n + 1) → G)))) = (H n P c).comp (a.prodMap (ContinuousMap.id (Fin n → G)))) ∧ (∀ (n : ℕ) (P : Profinite.{w}) (c : C(P × (Fin (n + 1) → G), V)), (∀ (s : P) (g : Fin (n + 2) → G), scalarCochainDifferential (n + 1) c s g = 0) → ∀ (s : P) (g : Fin (n + 1) → G), scalarCochainDifferential n (H n P c) s g = c (s, g)))",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8dab658e1",
+  "group": "NU",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; lean.statement verbatim in file; item not Lean-closed live. Differential via Fin.contractNth matches node display (inner signs (-1)^a, last face (-1)^(r+1), d^0=0). Finite clause: sign (-1)^(n+1) with Lean degree n+1, |Q|^-1 tsum over finite quotient, b factors through same U, db=c, norm bound, no completeness; continuous cbar loses no case. Complete clause quantifies I with exactly the live primeToEll_completeScalar_integral properties (uniquely determined, not arbitrary); H pinned pointwise by signed last-slice integral; norm, C(P,V)-linearity, naturality, d(Hc)=c. Edge cases n=1, empty P/P', trivial G, ell=2, norm of |Q|^-1 = 1 checked. Docstrings and 4-step plan present; sorry only; no SGA; no duplicate differential or lemma found. No fixes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T081418-L-1951781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

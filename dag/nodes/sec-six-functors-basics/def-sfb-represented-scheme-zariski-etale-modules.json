@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-represented-scheme-zariski-etale-modules",
+ "kind": "definition",
+ "title": "Represented-scheme Zariski and etale module extension, restriction and unit",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $T$ a scheme over $S$. Regard $T$ as its represented algebraic space $h_T$ [def-trf-scheme-algebraic-space], with the small etale ringed site of [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category] with section modules in the same universe as the scheme rings, without equating that universe to the larger object universe of the presented site. The functor $i_T:T_{\\mathrm{et}}\\to(h_T)_{\\mathrm{et}}$ from the ordinary small etale site [def-weil-pbc-etale-site] sends $v:V\\to T$ to its Yoneda chart $h_V\\to h_T$ and sends a morphism to its Yoneda map. It is continuous and preserves the section rings of regular functions. Define $I_T$ to be restriction of module sheaves along $i_T$ with this identity ring map; it is an equivalence of the two presentations of the small etale module category. On the ordinary scheme site use the ring, Zariski restriction, tensor extension and proof-only context of [def-sfb-scheme-zariski-etale-module-constructions]. Let $c_T$ be the canonical proof context asserting continuity of the open-subscheme inclusion and existence of the tensor left adjoint to restriction; it supplies no additional module, ring, functor or map. Write $r_T$ and $e_T$ for its specified restriction and tensor extension. Define $R_T=r_T\\circ I_T$ (first $I_T$, then $r_T$), and $E_T=I_T^{-1}\\circ e_T$ (first $e_T$, then $I_T^{-1}$). Thus $R_T:\\operatorname{Mod}((h_T)_{\\mathrm{et}},\\mathcal O)\\to\\operatorname{Mod}(T_{\\mathrm{Zar}},\\mathcal O_T)$ is actual restriction to open subschemes and $E_T$ is its canonical ringed-site tensor extension. Equip $E_T\\dashv R_T$ with the composite of the ordinary tensor-extension/restriction adjunction and the inverse equivalence adjunction of $I_T$. Its unit and counit are those of this composite, not arbitrary natural maps. In tensor coordinates the unit inserts $1\\otimes m$; for a general Zariski module the extension is sheafified tensor pullback. For a quasi-coherent module no sheafification is needed in the usual tensor-section description. No quasi-coherence, quasi-compactness, nonemptiness, or nonzero-ring assumption is imposed in defining these functors and their adjunction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-scheme-algebraic-space",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "def-sfb-scheme-zariski-etale-module-constructions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03FH (remark-change-topologies-ringed-sites), 03DX (proposition-equivalence-quasi-coherent, small etale case), and 0GN7 (lemma-fully-faithful-associated, restriction to opens and the adjunction); Yoneda identifies the two presentations of the same small etale ringed site."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Represented scheme Zariski to small etale module extension and restriction adjunction with its unit",
+   "results": "[leansearch] OK 8 hit(s)\nModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.RestrictionCoextensionAdj.unit'; ModuleCat.restrictCoextendScalarsAdj; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; ModuleCat.RestrictionCoextensionAdj.unit'_app; ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction for the represented-scheme site; generic scalar change and ordinary scheme restriction only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor extension of Zariski modules to the small etale module site of a represented scheme is left adjoint to restriction to open subschemes",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib represented-site construction. Use the existing project declarations, without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep zariskiEtale|evaluationZariski|representedSchemeModuleExtension AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n evaluationSchemeEtale|evaluationEtaleRestriction|evaluationContext|evaluationZariski lean/WeilConjectures lean/Sheaf/TraceFormula/GradedEvaluationZariskiEtaleComparison.lean; rg -l represented-scheme Zariski|represented scheme.*extension dag/nodes; tools/blueprint_refs.py search Zariski etale module extension",
+   "results": "No upstream WeilConjectures matches. Sheaf/TraceFormula/GradedEvaluationZariskiEtaleComparison.lean defines evaluationSchemeEtale at line 53, evaluationSchemeEtale_continuous at 72, evaluationEtaleRestriction at 79, evaluationEtaleRestriction_isEquivalence at 89, evaluationContext at 98, evaluationZariskiRestriction at 103, evaluationZariskiExtension at 109, and evaluationZariskiAdjunction at 114. No definition-node owner for these declarations. def-sfb-scheme-zariski-etale-module-constructions owns only the ordinary scheme-site constructions; representedSchemeModuleExtension in AffineEtaleNaiveCotangentPresentation has target SmallModules instead of Modules. Blueprint search: 0 blueprint nodes match Zariski etale module extension.",
+   "date": "2026-10-24",
+   "verdict": "Existing project declarations in a theorem module, no independent definition node. Give them a definition-node owner in place, including their supporting instances."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-acyclic-global-module-sections",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Geometric prerequisites to Tag 07V6: separatedness and universal injectivity of the absolute canonical map, before the affine presentation argument. Tag 07V4 first reduction to field base change, and Tag 07V5 transfer of H1 vanishing to the integral scheme cover, using Tag 07V0. Supporting module computation for Tag 07V0(2): Tag 07UZ, before the field-base-change reductions in Tags 07V4 and 07V5. Definition ownership for the represented-scheme tensor extension and its unit used in the Tag 07UZ module-section map.",
+   "via": [
+    "lem-sfb-space-acyclic-global-module-sections",
+    "lem-sfb-space-h1-vanishing-affine-base-change",
+    "lem-sfb-space-acyclic-affinization-geometry",
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.TraceFormula.GradedEvaluationZariskiEtaleComparison",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.evaluationZariskiExtension",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.evaluationSchemeEtale",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationSchemeEtale_continuous",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationEtaleRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationEtaleRestriction_isEquivalence",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationContext",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationZariskiRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationZariskiExtension",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationZariskiAdjunction"
+  ],
+  "statement": "def evaluationZariskiExtension (T : Over S) : T.left.Modules ⥤ (schemeSpace T).Modules",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "New definition-node owner for the existing declarations in place, including the supporting continuity instance, equivalence instance, and proof-only context. No source is copied or moved and no comparison theorem conclusion is used to define the item. evaluationContext has only continuity and right-adjoint proof fields, so its postponed proof does not hide module or functor data. The specified composite adjunction retains its actual unit and counit. This record does not assert the graded-evaluation theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fe85199c",
+  "group": "Q47",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fe85199c",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Re-delivery after 45fa0bda (H2). Item Lean file byte-identical (sha 1d26477b), statement unchanged; stmt_deps now cite new def node def-sfb-represented-scheme-zariski-etale-modules (existing:true, owns the 8 evaluation* declarations in place in GradedEvaluationZariskiEtaleComparison; read against Lean lines 47-117 and Stacks 03FH/03DX/0GN7; sorries are Prop-only; deps are def nodes, no cycle; no other owner in side-live, blueprint-index or other pending runs) plus def-sfb-space-absolute-quasi-separated; theorem node dropped. Other dependency nodes identical to side-live (E1 record not rebound). Clause check of the statement re-confirmed (qcqs, H1 hypothesis for all quasi-coherent F, A pinned by limit cone and hp, unit of composite tilde/extension/tensor adjunction, IsIso natural); edge cases M=0, X empty (A=0), infinite rank, no flatness. Advisories: schemeSpace and ZariskiEtaleModuleContext.adjunction reached only through the new node's def deps; reused docstrings keep the old blueprint tag. No compile (nothing changed)."
+ }
+}

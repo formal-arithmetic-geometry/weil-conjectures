@@ -16,126 +16,37 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-a1-affine-groupoid-integral-invariants] with the given groupoid: $C\\hookrightarrow A$ is integral. It is injective because $C$ is the displayed subring of $A$. Lying over [lem-weil-pbc-integral-injective-lying-over] therefore gives a prime of $A$ over every prime of $C$, proving surjectivity of $|U|\\to|M|$. This includes $A=0$, when both spectra are empty.",
-   "uses": [
-    "lem-a1-affine-groupoid-integral-invariants",
-    "lem-weil-pbc-integral-injective-lying-over"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BL (groupoids-lemma-points)"
-   }
-  },
-  {
-   "text": "Fix an algebraically closed field $k$ and a map $c:C\\to k$. Put $\\mathfrak p=\\ker c$. Lying over supplies $\\mathfrak q\\subset A$ over $\\mathfrak p$. The map $c$ extends to $\\kappa(\\mathfrak p)\\to k$ by sending a fraction to the quotient of its images. By [lem-a1-integral-residue-extension-algebraic], $\\kappa(\\mathfrak q)/\\kappa(\\mathfrak p)$ is algebraic. Apply [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] to extend that embedding to $\\kappa(\\mathfrak q)\\to k$. Composing $A\\to\\kappa(\\mathfrak q)\\to k$ lifts $c$. The affine spectrum correspondence identifies this with a $k$-point of $U$ over the prescribed $k$-point of $M$.",
+   "text": "By [lem-a1-affine-groupoid-integral-invariants], $C\\hookrightarrow A$ is integral; it is injective since $C$ is the displayed subring. Apply [lem-weil-pbc-integral-injective-lying-over] to obtain surjectivity on ordinary points. For an algebraically closed field $k$ and $d:C\\to k$, lying over gives a prime $\\mathfrak q\\subset A$ over $\\ker d$; [lem-dl-a1-integral-geometric-point-existence], applied to the integral map $C\\to A$, to $\\phi=d$ and to $\\mathfrak q$, gives $a:A\\to k$ extending $d$ (with kernel $\\mathfrak q$). So the map on $k$-points is surjective for every algebraically closed $k$. The zero-ring case is included.",
    "uses": [
     "lem-a1-affine-groupoid-integral-invariants",
     "lem-weil-pbc-integral-injective-lying-over",
-    "lem-a1-integral-residue-extension-algebraic",
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-dl-a1-integral-geometric-point-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BL (groupoids-lemma-points)"
+   }
+  },
+  {
+   "text": "Fix $a_0,a_1:A\\to k$ with common restriction $d:C\\to k$. Apply [lem-a1-affine-groupoid-basechange-polynomial-norm] with $D=k$ to get the finite locally free groupoid on $A_k=A\\otimes_Ck$, $B_k=B\\otimes_Ck$. The maps $\\alpha_j(a\\otimes\\lambda)=a_j(a)\\lambda$ are $k$-algebra maps. Every $g=N_{\\sigma_k}(\\tau_k(f))$ lies in the scalar image of $k$, hence $\\alpha_0(g)=\\alpha_1(g)$. If no arrow joins $\\alpha_1$ to $\\alpha_0$, [lem-a1-affine-groupoid-norm-prime-separation] supplies $f$ for which this same norm satisfies $\\alpha_0(g)=0\\ne\\alpha_1(g)$, a contradiction. Thus such an arrow exists.",
+   "uses": [
+    "lem-a1-affine-groupoid-basechange-polynomial-norm",
+    "lem-a1-affine-groupoid-norm-prime-separation",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BL (groupoids-lemma-points)"
+   }
+  },
+  {
+   "text": "Restrict its map $B_k\\to k$ along $B\\to B_k$ to get an original arrow from $a_1$ to $a_0$. Conversely an arrow $\\gamma:B\\to k$ whose endpoints restrict to $d$ extends by $b\\otimes\\lambda\\mapsto\\gamma(b)\\lambda$. Every arrow preserves the restriction to $C$, since $\\sigma|_C=\\tau|_C$. Identity, inverse and composition make the one-arrow relation reflexive, symmetric and transitive, so it equals the generated equivalence relation. Inversion gives the desired endpoint order. This proves the geometric fibre assertion.",
+   "uses": [
+    "def-weil-module-base-change",
     "def-weil-affine-spectrum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BL (groupoids-lemma-points)"
-   }
-  },
-  {
-   "text": "To compare two lifts $a_0,a_1:A\\to k$ of $c$, form $A'=A\\otimes_C k$, $B'=B\\otimes_C k$ and $\\sigma',\\tau':A'\\to B'$. The affine tensor-product base-change formula [lem-sbc-finite-affine-tensor-base-change], with one summand, identifies these with the schemes obtained by base change from $M$ to $\\operatorname{Spec}k$. The structure maps are over $M$: the two maps from $R$ agree on $C$; also $s\\circ e=t\\circ e=1$, inversion interchanges $s,t$, and composition preserves the common $M$-image. Thus their base changes satisfy the same groupoid identities. The maps $a_j$ extend to $k$-algebra maps $\\alpha_j:A'\\to k$, $\\alpha_j(a\\otimes\\lambda)=a_j(a)\\lambda$. Finite, flat, and locally finite presentation are separately preserved by arbitrary base change by the three cited permanence statements, so $s',t'$ satisfy exactly the finite locally free definition. On each local free norm chart, tensoring a basis gives a basis over the new ring. This also gives the chartwise multiplication matrices used below.",
-   "uses": [
-    "lem-sbc-finite-affine-tensor-base-change",
-    "lem-pd-finite-locally-free-norm-charts",
-    "def-weil-finite-integral-morphism",
-    "def-pc-fibre-product",
-    "def-weil-module-base-change",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-pc-finite-locally-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BL (groupoids-lemma-points)"
-   }
-  },
-  {
-   "text": "Use the norm sections of [lem-pd-finite-locally-free-norm-charts]. Their compatibility with scalar extension is a direct determinant calculation: on a free chart the matrix of multiplication by $b\\otimes1$ is obtained by applying the scalar ring map to every entry of the matrix for $b$. The permutation-sum formula for the determinant [def-weil-endomorphism-determinant] therefore gives $N(b)\\otimes1=N(b\\otimes1)$. The same calculation holds after any substitution in a polynomial ring. It holds globally since the pulled-back free charts cover and the norm sections restrict to these determinants. No freeness on the whole affine scheme or constant rank is needed.",
-   "uses": [
-    "lem-pd-finite-locally-free-norm-charts",
-    "def-weil-endomorphism-determinant",
-    "def-weil-module-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BL norm argument; Tag 03BH uses compatibility with base change; determinant construction in Divisors Tag 0BD2"
-   }
-  },
-  {
-   "text": "For any $f\\in A'$ write $f=\\sum_{j=1}^m a_j'\\otimes\\lambda_j$ and put $F=\\sum_j a_j'T_j\\in A[T_1,\\ldots,T_m]$. Extend the original groupoid by adjoining these same polynomial variables to both rings. This is its product with affine $m$-space over $\\operatorname{Spec}\\mathbf Z$, hence still a groupoid with finite locally free source and target (finite, flat and locally finite presentation are preserved separately as in step 3). Apply [lem-a1-affine-groupoid-invariant-norm] to obtain $G=N_{\\sigma[T]}(\\tau[T](F))\\in C[T_1,\\ldots,T_m]$: polynomial source and target images agree exactly when their coefficients agree. Substitute $a\\mapsto a\\otimes1$ and $T_j\\mapsto1\\otimes\\lambda_j$. By step 4 the resulting element is $g=N_{\\sigma'}(\\tau'(f))\\in A'$. Since every coefficient of $G$ belongs to $C$, this substitution sends $G$ to the scalar $c[T](G)(\\lambda_1,\\ldots,\\lambda_m)\\in k\\subset A'$. Consequently $\\alpha_0(g)=\\alpha_1(g)$. This proves the needed scalar equality for these particular norms directly, without assuming invariants commute with nonflat scalar extension.",
-   "uses": [
-    "lem-a1-affine-groupoid-invariant-norm",
-    "lem-pd-finite-locally-free-norm-charts",
-    "def-weil-endomorphism-determinant",
-    "def-weil-module-base-change",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BL norm argument; polynomial lifting as in the proof of Tag 03BK (groupoids-lemma-invariants-base-change), (2)(a)"
-   }
-  },
-  {
-   "text": "Let $D_1=B'\\otimes_{A',\\alpha_1}k$, using $\\sigma'$ for the $A'$-algebra structure. The affine tensor formula identifies $\\operatorname{Spec}D_1$ with the source fibre of $s'$ over $\\alpha_1$. It is finite-dimensional over $k$ by tensoring finite module generators of $B'$; hence its structure morphism is finite and it has finitely many points by [lem-weil-pbc-finite-closed-map-finite-fibres]. Finite implies integral by [pqf-lem-finite-integral-lft], and every prime over the maximal ideal $(0)$ of $k$ is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal]. Also $D_1$ is finitely generated as a $k$-algebra (a finite module generating set already generates it as an algebra), so [lem-weil-pbc-closed-point-residue-field-base] gives residue field $k$ at each of these closed points. Thus the points correspond to a finite list of all $k$-algebra maps $\\beta_i:B'\\to k$ with $\\beta_i\\sigma'=\\alpha_1$. This list is nonempty because it contains the identity arrow at $\\alpha_1$.",
-   "uses": [
-    "lem-sbc-finite-affine-tensor-base-change",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "pqf-lem-finite-integral-lft",
-    "lem-weil-pbc-integral-prime-over-maximal-maximal",
-    "lem-weil-pbc-closed-point-residue-field-base"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BL, paragraph beginning Since s is finite"
-   }
-  },
-  {
-   "text": "Suppose no arrow has source $\\alpha_1$ and target $\\alpha_0$. For the finite list in step 6 put $\\alpha_i'=\\beta_i\\tau'$, $\\mathfrak m_i=\\ker\\alpha_i'$ and $\\mathfrak m_0=\\ker\\alpha_0$. These kernels are maximal because all the maps are $k$-algebra maps to $k$, hence surjective. The kernels are unequal: two such maps with the same kernel identify the quotient with $k$ identically on its subfield $k$, so are equal, contrary to the assumption. Distinct maximal ideals do not contain each other, so $\\mathfrak m_0\\not\\subset\\mathfrak m_i$ for each $i$. Prime avoidance [lem-weil-pbc-prime-avoidance] therefore supplies $f\\in\\mathfrak m_0$ outside all $\\mathfrak m_i$. Equivalently, $\\alpha_0(f)=0$ whereas $\\alpha_i'(f)\\ne0$ for every $i$.",
-   "uses": [
-    "lem-weil-pbc-prime-avoidance"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BL, prime-avoidance paragraph, referring to Algebra Tag 00DS"
-   }
-  },
-  {
-   "text": "Apply the local norm prime criterion [lem-pd-finite-free-norm-prime-criterion] to $\\tau'(f)$. More explicitly, choose a free affine norm chart around the point $\\ker\\alpha_1$; restriction does not change its source fibre, so all primes over this point are the points listed in step 6. At each of them the value of $\\tau'(f)$ is $\\beta_i\\tau'(f)=\\alpha_i'(f)\\ne0$. The criterion and the chart description of the norm imply $\\alpha_1(g)\\ne0$ for $g=N_{\\sigma'}(\\tau'(f))$. Around $\\ker\\alpha_0$ use another free norm chart. The identity arrow at $\\alpha_0$ is a prime in its source fibre and evaluates $\\tau'(f)$ to $\\alpha_0(f)=0$. The same criterion gives $\\alpha_0(g)=0$. This contradicts the scalar equality in step 5. Thus an arrow with source $\\alpha_1$ and target $\\alpha_0$ exists.",
-   "uses": [
-    "lem-pd-finite-free-norm-prime-criterion",
-    "lem-pd-finite-locally-free-norm-charts"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BL, norm nonvanishing argument; its determinant references are supplied by the cited norm-prime criterion"
-   }
-  },
-  {
-   "text": "A $k$-arrow in the scalar-extended groupoid gives an original $k$-arrow by precomposing $B\\to B'$. Conversely an original $k$-arrow $\\gamma:B\\to k$ whose endpoints restrict to $c$ extends by $b\\otimes\\lambda\\mapsto\\gamma(b)\\lambda$, so step 8 gives an arrow relating any two original lifts. An arrow always preserves the restrictions to $C$ since $\\sigma|_C=\\tau|_C$. Identity, inverse and composition in $R(k)\\rightrightarrows U(k)$ make the relation of being joined by one arrow reflexive, symmetric and transitive. Therefore it equals the equivalence relation generated by $s,t$, and steps 2 and 8 prove exactly the surjectivity and fibre assertion on $k$-points.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-module-base-change"
-   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
@@ -143,12 +54,11 @@
    }
   },
   {
-   "text": "Finally let $u_0,u_1\\in|U|$ have the same image $m\\in|M|$. By integrality and [lem-a1-integral-residue-extension-algebraic], both $\\kappa(u_j)/\\kappa(m)$ are algebraic. Choose an algebraic closure $k$ of $\\kappa(m)$ [def-weil-algebraic-closure]. By [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] embed both residue fields into this same $k$, extending its fixed inclusion of $\\kappa(m)$. The composites $A\\to\\kappa(u_j)\\to k$ have underlying points $u_j$ and the same restriction $C\\to\\kappa(m)\\to k$. By step 9 they are joined by a $k$-arrow. Its underlying point in $R$ has the two required endpoints; invert the arrow if necessary to match the order $s(r)=u_0$, $t(r)=u_1$. Conversely, an underlying point $r\\in|R|$ has equal $M$-images under $s,t$, since the two ring maps $C\\to B$ are equal. Together with step 1 this proves the entire assertion on ordinary points.",
+   "text": "For ordinary points $u_0,u_1$ above $m$, with prime $\\mathfrak p\\subset C$, let $k$ be an algebraic closure of $\\kappa(m)$ [def-weil-residue-field, def-weil-algebraic-closure] and $\\phi:C\\to\\kappa(m)\\to k$; its kernel is $\\mathfrak p$. Since $C\\to A$ is integral (step 1) and both primes $u_j$ contract to $\\mathfrak p$, [lem-dl-a1-integral-geometric-point-existence] gives maps $a_j:A\\to k$ extending $\\phi$ with kernels $u_j$, so with equal restrictions to $C$. Steps 2-3 give a $k$-arrow; its underlying point $r\\in|R|$ has endpoints $u_0,u_1$, as follows by taking inverse images of its kernel under $\\sigma,\\tau$. Conversely any $r$ has endpoints with the same image in $|M|$, because the two homomorphisms $C\\to B$ agree. Together with step 1, this proves the ordinary fibre assertion.",
    "uses": [
-    "lem-a1-affine-groupoid-integral-invariants",
-    "lem-a1-integral-residue-extension-algebraic",
+    "lem-dl-a1-integral-geometric-point-existence",
+    "def-weil-residue-field",
     "def-weil-algebraic-closure",
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
     "def-weil-affine-spectrum"
    ],
    "elementary": false,
@@ -161,26 +71,12 @@
  "proof_deps": [
   "lem-a1-affine-groupoid-integral-invariants",
   "lem-weil-pbc-integral-injective-lying-over",
-  "lem-a1-integral-residue-extension-algebraic",
-  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-  "def-weil-affine-spectrum",
-  "lem-sbc-finite-affine-tensor-base-change",
-  "lem-pd-finite-locally-free-norm-charts",
-  "def-weil-finite-integral-morphism",
-  "def-pc-fibre-product",
+  "lem-dl-a1-integral-geometric-point-existence",
+  "lem-a1-affine-groupoid-basechange-polynomial-norm",
+  "lem-a1-affine-groupoid-norm-prime-separation",
   "def-weil-module-base-change",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-pc-finite-locally-free",
-  "def-weil-endomorphism-determinant",
-  "lem-a1-affine-groupoid-invariant-norm",
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
-  "pqf-lem-finite-integral-lft",
-  "lem-weil-pbc-integral-prime-over-maximal-maximal",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-prime-avoidance",
-  "lem-pd-finite-free-norm-prime-criterion",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
   "def-weil-algebraic-closure"
  ],
  "proof_origin": {
@@ -270,63 +166,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-affine-groupoid-orbit-fibres",
   "worker": "stage1",
-  "summary": "Checked Stacks 03BL against the entire item. Reused integrality, lying over, local norm construction, norm prime criterion, finite-fibre geometry and prime avoidance. Added only invariant norms (03BH) and the exact Mathlib leaf for integral residue extensions. The polynomial lift shows the separating norm is scalar without asserting general invariants commute with nonflat base change. No statement changes; no project Lean attachment exists.",
-  "blueprint": "This item expands the historical Tag 03XX affine-quotient support branch recorded in blueprint.from, via lem-a1-finite-flat-affine-relation-quotient. Steps 1-2 prove the two surjectivity assertions of its 03BL input; steps 3-9 prove geometric orbit fibres by norm separation; step 10 recovers ordinary orbit fibres. The current main-20261015 ancestor lem-a1-affine-hc0 states compact-support vanishing, not this generic quotient theorem; the ancestry is historical and its maintainer-owned fields are preserved.",
+  "summary": "Repair of the landing return for delivery 9eb5adb4a65, rebased by the delivery tool onto the current live DAG. The live item is identical to the retained original-item.json and still carries the released human stage-1 re-split order. Re-read every current cited statement and verified every citation quote against it. Retain the three separate statement-only tasks and all ten archived arguments; the unchanged parent statement is proved by four assembly steps below 3000 characters. No citation adjustment was needed because all cited interfaces still match. Reviewer FIX (2026-10-23): the delivered third new node (common-algebraic-closure lifts) duplicated the existing Lean-closed node lem-dl-a1-integral-geometric-point-existence (RingHom.PointsOver.exists_ker_eq) together with lying over; it is dropped and steps 1 and 4 cite lem-dl-a1-integral-geometric-point-existence directly.",
+  "blueprint": "Historical Tag 03XX affine-quotient support branch, via lem-a1-finite-flat-affine-relation-quotient, with Tag 03BL as the source. Current steps: (1) integral invariants, lying over and algebraically closed lifting via lem-dl-a1-integral-geometric-point-existence; (2) polynomial norm scalar specialization contradicts finite-fibre norm separation; (3) tensor arrow correspondence and groupoid equivalence relation; (4) lifting into one algebraic closure via lem-dl-a1-integral-geometric-point-existence and passage to ordinary points. Old steps 1,2,10 are carried by lying over and the existing Lean-closed lifting node; old 3,4,5 feed scalar polynomial norms; old 6,7,8 feed norm separation; old 9 remains elementary assembly. The current main-20261015 ancestor lem-a1-affine-hc0 has a compact-support statement, so the recorded ancestry is historical. Preserve the inherited ancestor, chapter, unit and maintainer-owned fields.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-integral-injective-lying-over",
     "why": "Generic integral ring-map lying over, used for surjectivity; no Rankin unit node states it."
    },
    {
-    "node": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "why": "Generic field-extension embedding, used to lift residue-field points; no Rankin unit node states it."
-   },
-   {
-    "node": "lem-sbc-finite-affine-tensor-base-change",
-    "why": "Generic affine tensor-product formula, used with one summand to identify fibres and scalar extension; no Rankin unit node states it."
-   },
-   {
-    "node": "lem-pd-finite-locally-free-norm-charts",
-    "why": "Generic norm construction on local free affine charts, with varying rank; no Rankin unit node gives it."
-   },
-   {
-    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "why": "Generic finiteness of fibres of a finite scheme morphism, used only for listing arrows."
-   },
-   {
-    "node": "pqf-lem-finite-integral-lft",
-    "why": "Generic finite-implies-integral theorem for the finite geometric source fibre."
-   },
-   {
-    "node": "lem-weil-pbc-integral-prime-over-maximal-maximal",
-    "why": "Generic integral-extension maximal-prime theorem, used to verify the listed fibre points are closed."
-   },
-   {
-    "node": "lem-weil-pbc-closed-point-residue-field-base",
-    "why": "Generic closed-point residue-field theorem over an algebraically closed base, used only on the finite source fibre."
-   },
-   {
-    "node": "lem-weil-pbc-prime-avoidance",
-    "why": "Generic finite prime avoidance, applied to explicitly distinct maximal ideals."
-   },
-   {
-    "node": "lem-pd-finite-free-norm-prime-criterion",
-    "why": "Generic algebra norm prime criterion, used on separate local free charts at the two points."
-   },
-   {
-    "node": "lem-weil-pbc-finite-morphism-permanence",
-    "why": "Generic stability of finite morphisms under arbitrary base change, used to check every hypothesis of the norm lemma after scalar extension."
-   },
-   {
-    "node": "lem-weil-pbc-flat-morphism-base-change",
-    "why": "Generic flat base-change theorem, used to check finite local freeness after scalar extension."
-   },
-   {
-    "node": "lem-weil-pbc-qcqs-morphism-permanence",
-    "why": "Only clause (3), stability of locally finite presentation under arbitrary base change, is used to check finite local freeness."
+    "node": "lem-dl-a1-integral-geometric-point-existence",
+    "why": "Generic integral ring-map lift to an algebraically closed field with prescribed kernel (Lean-closed, RingHom.PointsOver.exists_ker_eq); no Rankin unit node states it."
    }
   ]
  },
@@ -343,15 +195,16 @@
   "lem-pd-finite-free-norm-prime-criterion",
   "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-qcqs-morphism-permanence"
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-dl-a1-integral-geometric-point-existence"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q05-d819aeabb",
-  "group": "Q05",
+  "reviewer": "NT-cc-NM-74e3d9e43",
+  "group": "NM",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-d819aeabb (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, the statement of every cited node, the parent's steps 3 and 7, the unit record, and Stacks groupoids.tex 03BH-03BL in full. The item matches 03BL; the source/target orientation is swapped, which the inverse makes equivalent, and nothing is weakened. All ten steps are correct with their hypotheses checked. Step 1: integral-invariants (03BJ) plus lying over, injective because C is a subring of A. Step 2: residue extension plus embedding into an arbitrary algebraically closed k. Step 3: finite, flat and lfp base-change permanence. Step 4: elementary determinant scalar extension; the norm-charts node is existential, and comparing on pulled-back charts uses basis independence and gluing, which is a few lines. Step 5 replaces 03BK(2) with a polynomial lift: G in C[T], phi(G) = 1 tensor (sum c(c_a) lambda^a) is a scalar, so alpha_0(g) = alpha_1(g). This is correct and avoids non-flat invariants. Steps 6-8: finite fibre with residue fields k, prime avoidance on distinct maximal ideals, and the norm prime criterion on free charts, which fill Stacks' 'future reference' gaps. Steps 9-10: the one-arrow relation is an equivalence relation, and ordinary points follow through a common algebraic closure. The new node invariant-norm is exactly 03BH, statement only, with no duplicate found by grep for 03BH, determinant trick or groupoid norms. The new leaf instIsAlgebraicResidueFieldOfIsIntegral was checked at Instances.lean:62-83 (LiesOver, line 70, no injectivity needed). All declared tool_uses are accepted as generic tools. There are no SGA citations. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-74e3d9e43 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks groupoids.tex 03BK and 03BL (lines 4366-4560, plus the determinant trick 03BH). I also read the released human re-split note (at least 2 new nodes, at most 3000 characters, keep_plan), the base 10-step proof, the item, all three new nodes and the statement of every cited node. The item's statement and stmt_deps are byte-identical to live. Live is still the 10-step split, so this delivery is not superseded. This head is byte-identical in its mathematics to the previous head 9eb5adb4a651; only the split_report text changed. Both repairs below were already made by the review of 9eb5 and were lost on re-delivery. I found the duplicate independently and re-applied both fixes. Mapping of the old steps: 3-5 go to basechange-polynomial-norm, 6-8 to norm-prime-separation, 9 is the elementary parent step 3, and 1, 2 and 10 go to lying over, an existing Lean-closed node and parent steps 1 and 4. No argument was blurred. The two remaining new nodes are of comparable size, about 2.7k and 2.5k characters of old proof. basechange-polynomial-norm is correct: B[T]⊗_{A[T]}A_D = B_D, and G ∈ C[T] specialises to η_D(d[T](G)(d)) without any flatness; I checked m=0 and D=0. norm-prime-separation is correct: E_1 is finite with residue fields k, the identity arrow lies in 𝓑_1, distinct k-points have distinct maximal kernels, prime avoidance applies, and the norm criterion gives α_1(g)≠0, while the identity arrow at α_0 gives α_0(g)=0. I tested it on k×k with identity arrows only and on k[ε]/ε². Fault 1 (C5/D1): lem-a1-affine-groupoid-common-algebraic-closure-lifts restates lying over together with the existing Lean-closed lem-dl-a1-integral-geometric-point-existence (slopmaster2 RingHom.PointsOver.exists_ker_eq, closed, lines 218-231). That node gives clause (1) with lying over and clause (2) when applied twice to C→κ(p)→k̄. I dropped the node, rewrote parent steps 1 and 4 to cite the closed node (plus def-weil-residue-field and def-weil-algebraic-closure), recomputed proof_deps (proof now 2535 characters) and added the tool use to split_report. Fault 2 (E1/B2): basechange-polynomial-norm did not say that the base-changed maps are over Spec D, which norm-prime-separation needs as k-morphisms. The fixed statement says the base-changed groupoid is over Spec D, with source Spec σ_D and target Spec τ_D, both finite locally free. Accepted tool uses: lying over and lem-dl-a1-integral-geometric-point-existence, both generic and closed. No SGA citation and no cycle. The historical blueprint ancestry is inherited.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres",
@@ -373,5 +226,16 @@
   "result": "fix",
   "note": "Statement matches Stacks 03BL clause by clause; immutable modules and corrected theorem compile cleanly. Complete fixes reuse landed IsGroupoidScheme, remove the concurrent duplicate, and supply a real second-reading report. Apply fixes with --drop-nodes def-a1-scheme-groupoid.; dropped duplicate new node(s) def-a1-scheme-groupoid (--drop-nodes; not merged, the item points at the landed declaration)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

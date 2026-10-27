@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-continuous-partials-frechet-criterion",
+ "kind": "statement",
+ "title": "Continuous coordinate partials give a continuous real differential",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $m\\geq1$, let $U\\subseteq\\mathbf R^m$ be open, and let $f:U\\to\\mathbf C$. Suppose that for every $1\\leq j\\leq m$ the real one-variable derivative $\\partial_j f(x)=\\left.\\frac{d}{dt}f(x+te_j)\\right|_{t=0}$ exists for every $x\\in U$, and that each function $\\partial_j f:U\\to\\mathbf C$ is continuous. Here $e_j$ is the $j$-th standard coordinate vector. Then $f$ is continuous and real Frechet differentiable on $U$, with $$Df(x)[h]=\\sum_{j=1}^m h_j\\partial_j f(x)\\qquad(x\\in U,\\ h\\in\\mathbf R^m).$$ The map $x\\mapsto Df(x)$ is continuous for the operator norm on real-linear maps $\\mathbf R^m\\to\\mathbf C$.",
+ "source": {
+  "document": "literature/rudin-principles-of-mathematical-analysis.pdf",
+  "place": "WANTED: third edition, Theorem 9.21, continuous partial derivatives imply differentiability. Agent-formulated complex-valued version; this book is not present locally and has not been read."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in U$ and write $a_j=\\partial_jf(x)$ and $A_xh=\\sum_j h_ja_j$. This is real-linear and $|A_xh|\\leq(\\sum_j|a_j|)\\|h\\|$, since $|h_j|\\leq\\|h\\|$ for the Euclidean norm; thus it is continuous. Given $\\varepsilon>0$, openness of $U$ and continuity of the finitely many partials at $x$ give $\\delta>0$ such that $B(x,\\delta)\\subseteq U$ and $|\\partial_jf(z)-a_j|\\leq\\varepsilon/m$ for every $z$ in that ball and every $j$. For $\\|h\\|<\\delta$ put $p_0=x$, $p_j=x+\\sum_{k\\leq j}h_ke_k$. Every point $p_{j-1}+t h_je_j$, $0\\leq t\\leq1$, lies in this ball: its squared distance from $x$ is $\\sum_{k<j}h_k^2+t^2h_j^2\\leq\\|h\\|^2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/MeanValue.lean",
+    "place": "norm_image_sub_le_of_norm_deriv_le_segment_01', lines 346–349; real scalar field and complex target."
+   }
+  },
+  {
+   "text": "For each $j$ define $q_j(t)=f(p_{j-1}+t h_je_j)-t h_ja_j$ on the open preimage of $U$ under this affine line, which contains $[0,1]$. Its real derivative is $$q_j^{\\prime}(t)=h_j(\\partial_jf(p_{j-1}+t h_je_j)-a_j).$$ This uses only the one-variable partial derivative from the hypothesis: for $h_j\\ne0$, substitute $s=h_ju$ in its defining difference quotient at $p_{j-1}+t h_je_j$, and subtract the derivative $h_ja_j$; for $h_j=0$, $q_j$ is constant. Extend $q_j$ and this derivative arbitrarily away from their open domain. At each point of $[0,1]$ the relative derivative is therefore unchanged, including both endpoints. The derivative bound from step 1 is $|q_j^{\\prime}(t)|\\leq |h_j|\\varepsilon/m$. Apply the unit-interval derivative-bound lemma with $C=|h_j|\\varepsilon/m\\geq0$ to obtain $$|f(p_j)-f(p_{j-1})-h_ja_j|\\leq |h_j|\\varepsilon/m.$$ No continuity of $f$ in several variables has been assumed.",
+   "uses": [
+    "lem-sfb-unit-interval-derivative-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/MeanValue.lean",
+    "place": "norm_image_sub_le_of_norm_deriv_le_segment_01', lines 346–349; real scalar field and complex target."
+   }
+  },
+  {
+   "text": "Sum the increments, using $p_m=x+h$ and cancellation of consecutive values of $f$. The triangle inequality gives $$|f(x+h)-f(x)-A_xh|\\leq\\frac{\\varepsilon}{m}\\sum_j|h_j|\\leq\\varepsilon\\|h\\|.$$ For every $\\varepsilon>0$ this holds for all sufficiently small $h$, so the remainder divided by $\\|h\\|$ tends to zero as $h\\to0$, $h\\ne0$. This is exactly real Frechet differentiability at $x$ with differential $A_x$. It also proves continuity at $x$: use the same estimate with $\\varepsilon=1$ to bound $|f(x+h)-f(x)|$ by $(1+\\sum_j|a_j|)\\|h\\|$. Since $x$ was arbitrary the conclusions hold on $U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/MeanValue.lean",
+    "place": "norm_image_sub_le_of_norm_deriv_le_segment_01', lines 346–349; real scalar field and complex target."
+   }
+  },
+  {
+   "text": "For $x,y\\in U$ and $\\|h\\|\\leq1$, the differential formula gives $$|(A_y-A_x)h|\\leq\\sum_j|h_j|\\,|\\partial_jf(y)-\\partial_jf(x)|\\leq\\sum_j|\\partial_jf(y)-\\partial_jf(x)|.$$ Taking the supremum over the unit ball yields the same bound for $\\|A_y-A_x\\|_{\\mathrm{op}}$. At each fixed $x$ the right side tends to zero as $y\\to x$ in $U$, being a finite sum of continuous functions vanishing at $x$. Thus $x\\mapsto Df(x)=A_x$ is continuous in operator norm.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/MeanValue.lean",
+    "place": "norm_image_sub_le_of_norm_deriv_le_segment_01', lines 346–349; real scalar field and complex target."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unit-interval-derivative-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Analysis/Calculus/MeanValue.lean",
+  "place": "Agent coordinate-telescoping proof using norm_image_sub_le_of_norm_deriv_le_segment_01', lines 346–349. Rudin Theorem 9.21 is wanted, not read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A function of two real variables with continuous partial derivatives is Frechet differentiable with derivative equal to the sum of its partial derivatives",
+   "results": "{\"t\": \"2026-10-24T03:23:54Z\", \"tool\": \"leanfinder\", \"query\": \"A function of two real variables with continuous partial derivatives is Frechet differentiable with derivative equal to the sum of its partial derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Differentiable.fderiv_two\", \"Continuous.fderiv_one\", \"ContDiffWithinAt.fderivWithin'\", \"ContDiffWithinAt.hasFDerivWithinAt_nhds\", \"Continuous.fderiv\", \"ContDiffWithinAt.fderivWithin''\", \"ContinuousLinearMap.coe_deriv₂\", \"HasGradientAt.hasDerivAt'\"], \"digest\": \"cf88f051e3409dcc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: contDiffAt_one_iff (ContDiff/Defs.lean:1133) assumes a full Frechet derivative, and hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt (MeanValue.lean:807) also assumes full derivatives nearby. Rademacher.lean:266 requires a Lipschitz hypothesis and a dense set of directions, not just coordinate directions. differentiableAt_euclidean concerns components in the codomain. These do not yield this domain-coordinate criterion by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hasFDerivAt\", \"partial\"",
+   "results": "{\"t\": \"2026-10-24T03:23:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"hasFDerivAt\\\", \\\"partial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"OpenPartialHomeomorph.hasFDerivAt_symm\"], \"digest\": \"df195e1571c50405\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: contDiffAt_one_iff (ContDiff/Defs.lean:1133) assumes a full Frechet derivative, and hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt (MeanValue.lean:807) also assumes full derivatives nearby. Rademacher.lean:266 requires a Lipschitz hypothesis and a dense set of directions, not just coordinate directions. differentiableAt_euclidean concerns components in the codomain. These do not yield this domain-coordinate criterion by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "hasFDerivAt.*(partial|of_has)|continuous.*partial|partial.*continuous",
+   "results": "{\"t\": \"2026-10-24T03:23:50Z\", \"tool\": \"grep\", \"query\": \"hasFDerivAt.*(partial|of_has)|continuous.*partial|partial.*continuous\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/InverseFunctionTheorem/ApproximatesLinearOn.lean\", \"Mathlib/Analysis/Calculus/InverseFunctionTheorem/ApproximatesLinearOn.lean\", \"Mathlib/Analysis/Calculus/InverseFunctionTheorem/FDeriv.lean\", \"Mathlib/Analysis/Calculus/Rademacher.lean\", \"Mathlib/Analysis/Calculus/Rademacher.lean\", \"Mathlib/Analysis/Calculus/Rademacher.lean\", \"Mathlib/Analysis/Calculus/FDeriv/OfCompLeft.lean\"], \"digest\": \"18032452cc1ac687\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: contDiffAt_one_iff (ContDiff/Defs.lean:1133) assumes a full Frechet derivative, and hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt (MeanValue.lean:807) also assumes full derivatives nearby. Rademacher.lean:266 requires a Lipschitz hypothesis and a dense set of directions, not just coordinate directions. differentiableAt_euclidean concerns components in the codomain. These do not yield this domain-coordinate criterion by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous coordinate directional derivatives imply differentiability of a multivariable real function",
+   "results": "{\"t\": \"2026-10-24T03:24:20Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous coordinate directional derivatives imply differentiability of a multivariable real function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"differentiableAt_euclidean\", \"HasGradientAt.differentiableAt\", \"differentiableWithinAt_euclidean\", \"HasGradientWithinAt.differentiableWithinAt\", \"contDiffAt_one_iff\", \"Continuous.fderiv\", \"contDiff_one_iff_hasFDerivAt\", \"ContDiffOn.continuousOn_fderivWithin_apply\"], \"digest\": \"a347c2b29d1bc64b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: contDiffAt_one_iff (ContDiff/Defs.lean:1133) assumes a full Frechet derivative, and hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt (MeanValue.lean:807) also assumes full derivatives nearby. Rademacher.lean:266 requires a Lipschitz hypothesis and a dense set of directions, not just coordinate directions. differentiableAt_euclidean concerns components in the codomain. These do not yield this domain-coordinate criterion by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A function on an open subset of real product space with continuous partial derivatives is continuously Frechet differentiable",
+   "results": "{\"t\": \"2026-10-24T03:24:19Z\", \"tool\": \"leansearch\", \"query\": \"A function on an open subset of real product space with continuous partial derivatives is continuously Frechet differentiable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiff.contDiff_fderiv_apply\", \"contDiffOn_fderivWithin_apply\", \"hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt\", \"ContDiff.continuous_fderiv_apply\", \"IsContDiffImplicitAt.hasFDerivAt\", \"ContDiff.continuous_fderiv\", \"ContDiffOn.continuousOn_fderivWithin\", \"hasFDerivWithinAt_pi'\"], \"digest\": \"fb6deb53d24627cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: contDiffAt_one_iff (ContDiff/Defs.lean:1133) assumes a full Frechet derivative, and hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt (MeanValue.lean:807) also assumes full derivatives nearby. Rademacher.lean:266 requires a Lipschitz hypothesis and a dense set of directions, not just coordinate directions. differentiableAt_euclidean concerns components in the codomain. These do not yield this domain-coordinate criterion by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "hasFDerivAt.*(line|coord|basis)|HasLineDerivAt.*Continuous|continuousAt.*lineDeriv|hasFDerivAt.*hasFDerivAt",
+   "results": "{\"t\": \"2026-10-24T03:24:19Z\", \"tool\": \"grep\", \"query\": \"hasFDerivAt.*(line|coord|basis)|HasLineDerivAt.*Continuous|continuousAt.*lineDeriv|hasFDerivAt.*hasFDerivAt\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/Rademacher.lean\", \"Mathlib/Analysis/Calculus/Rademacher.lean\", \"Mathlib/Analysis/Calculus/Rademacher.lean\", \"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\", \"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\", \"Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean\", \"Mathlib/Analysis/Calculus/Deriv/Mul.lean\", \"Mathlib/Analysis/Calculus/Deriv/Mul.lean\"], \"digest\": \"a0fadab5065dca75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: contDiffAt_one_iff (ContDiff/Defs.lean:1133) assumes a full Frechet derivative, and hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt (MeanValue.lean:807) also assumes full derivatives nearby. Rademacher.lean:266 requires a Lipschitz hypothesis and a dense set of directions, not just coordinate directions. differentiableAt_euclidean concerns components in the codomain. These do not yield this domain-coordinate criterion by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt|theorem contDiffAt_one_iff",
+   "results": "{\"t\": \"2026-10-24T03:27:30Z\", \"tool\": \"grep\", \"query\": \"theorem hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt|theorem contDiffAt_one_iff\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/MeanValue.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Defs.lean\"], \"digest\": \"66175c960455702e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: contDiffAt_one_iff (ContDiff/Defs.lean:1133) assumes a full Frechet derivative, and hasStrictFDerivAt_of_hasFDerivAt_of_continuousAt (MeanValue.lean:807) also assumes full derivatives nearby. Rademacher.lean:266 requires a Lipschitz hypothesis and a dense set of directions, not just coordinate directions. differentiableAt_euclidean concerns components in the codomain. These do not yield this domain-coordinate criterion by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "integral_eq_sub.*deriv|integral.*deriv.*continuous",
+   "results": "{\"t\": \"2026-10-24T03:55:37Z\", \"tool\": \"grep\", \"query\": \"integral_eq_sub.*deriv|integral.*deriv.*continuous\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/Rademacher.lean\"], \"digest\": \"7091f6b966d1c409\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "fundamental theorem calculus continuous derivative vector valued integral remainder",
+   "results": "{\"t\": \"2026-10-24T03:55:37Z\", \"tool\": \"leansearch\", \"query\": \"fundamental theorem calculus continuous derivative vector valued integral remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"intervalIntegral.integral_unitInterval_deriv_eq_sub\", \"intervalIntegral.derivWithin_integral_right\", \"intervalIntegral.integral_eq_sub_of_hasDeriv_right\", \"intervalIntegral.integral_hasDerivAt_right\", \"intervalIntegral.integral_derivWithin_uIcc_of_contDiffOn_uIcc\", \"Continuous.integral_hasStrictDerivAt\", \"intervalIntegral.integral_deriv_of_contDiffOn_uIcc\", \"intervalIntegral.integral_deriv_of_contDiffOn_Icc\"], \"digest\": \"5ca97f2f94e03c3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "HasDerivAt.integral_eq_sub",
+   "results": "{\"t\": \"2026-10-24T03:55:37Z\", \"tool\": \"loogle\", \"query\": \"HasDerivAt.integral_eq_sub\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HasDerivAt.integral_eq_sub'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous partial derivatives imply Frechet differentiability on an open subset of R^m with derivative sum of coordinate partials",
+   "results": "{\"t\": \"2026-10-24T03:55:38Z\", \"tool\": \"leanfinder\", \"query\": \"continuous partial derivatives imply Frechet differentiability on an open subset of R^m with derivative sum of coordinate partials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffOn.fderiv_of_isOpen\", \"ContDiffOn.deriv_of_isOpen\", \"DiffContOnCl.differentiableAt\", \"contDiffOn_infty_iff_fderiv_of_isOpen\", \"ContDiffOn.continuousOn_fderiv_of_isOpen\", \"ContDiffWithinAt.fderivWithin'\", \"contDiffOn_infty_iff_deriv_of_isOpen\", \"ContDiffOn.continuousOn_deriv_of_isOpen\"], \"digest\": \"dfe2299f14f72d22\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: hasStrictFDerivAt_uncurry_coprod (FDeriv/Partial.lean:59–65) covers two blocks and would require induction for arbitrary m; mean-value inequalities provide smaller inputs, not the whole criterion. Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_image_sub_le.*deriv|norm_image_sub_le.*hasDeriv|norm_image_sub_le.*norm_deriv",
+   "results": "{\"t\": \"2026-10-24T03:56:08Z\", \"tool\": \"grep\", \"query\": \"norm_image_sub_le.*deriv|norm_image_sub_le.*hasDeriv|norm_image_sub_le.*norm_deriv\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/Taylor.lean\", \"Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean\", \"Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean\", \"Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean\", \"Mathlib/Analysis/Calculus/MeanValue.lean\", \"Mathlib/Analysis/Calculus/MeanValue.lean\", \"Mathlib/Analysis/Calculus/MeanValue.lean\", \"Mathlib/Analysis/Calculus/MeanValue.lean\"], \"digest\": \"cec7cbb2ab45de6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "vector valued real function bounded derivative norm mean value inequality",
+   "results": "{\"t\": \"2026-10-24T03:56:09Z\", \"tool\": \"leansearch\", \"query\": \"vector valued real function bounded derivative norm mean value inequality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"norm_image_sub_le_of_norm_deriv_le_segment'\", \"norm_image_sub_le_of_norm_deriv_right_le_segment\", \"Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le'\", \"Convex.norm_image_sub_le_of_norm_fderivWithin_le'\", \"norm_image_sub_le_of_norm_deriv_le_segment_01'\", \"norm_image_sub_le_of_norm_deriv_le_segment_01\", \"Convex.norm_image_sub_le_of_norm_fderivWithin_le\", \"Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le\"], \"digest\": \"93beba2615026413\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm_image_sub_le\", \"deriv\"",
+   "results": "{\"t\": \"2026-10-24T03:56:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"norm_image_sub_le\\\", \\\"deriv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"norm_image_sub_le_of_norm_deriv_le_segment\", \"norm_image_sub_le_of_norm_deriv_le_segment_01\", \"norm_image_sub_le_of_norm_deriv_le_segment'\", \"norm_image_sub_le_of_norm_deriv_le_segment_01'\", \"norm_image_sub_le_of_norm_deriv_right_le_segment\", \"Convex.norm_image_sub_le_of_norm_derivWithin_le\", \"Convex.norm_image_sub_le_of_norm_deriv_le\", \"Convex.norm_image_sub_le_of_norm_hasDerivWithin_le\"], \"digest\": \"f8ec0f01a3d3b9c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a vector valued real function has derivative bounded by C on an interval then norm of difference at endpoints is at most C times distance",
+   "results": "{\"t\": \"2026-10-24T03:56:11Z\", \"tool\": \"leanfinder\", \"query\": \"If a vector valued real function has derivative bounded by C on an interval then norm of difference at endpoints is at most C times distance\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"norm_image_sub_le_of_norm_deriv_le_segment\", \"norm_image_sub_le_of_norm_deriv_le_segment'\", \"norm_image_sub_le_of_norm_deriv_le_segment_01'\", \"norm_image_sub_le_of_norm_deriv_le_segment_01\", \"norm_image_sub_le_of_norm_deriv_right_le_segment\", \"Convex.norm_image_sub_le_of_norm_hasDerivWithin_le\", \"Convex.norm_image_sub_le_of_norm_deriv_le\", \"Convex.norm_image_sub_le_of_norm_derivWithin_le\"], \"digest\": \"6f369f616e017f95\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: hasStrictFDerivAt_uncurry_coprod (FDeriv/Partial.lean:59–65) covers two blocks and would require induction for arbitrary m; mean-value inequalities provide smaller inputs, not the whole criterion. Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem norm_image_sub_le_of_norm_deriv_le_segment_01",
+   "results": "{\"t\": \"2026-10-24T03:57:18Z\", \"tool\": \"grep\", \"query\": \"^theorem norm_image_sub_le_of_norm_deriv_le_segment_01\", \"sub\": \"Analysis/Calculus/MeanValue.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"346\", \"354\"], \"digest\": \"6966d262d658e98b\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "grep",
+   "query": "hasStrictFDerivAt_uncurry_coprod|continuous.*partial|partial.*continuous",
+   "results": "{\"t\": \"2026-10-24T03:57:18Z\", \"tool\": \"grep\", \"query\": \"hasStrictFDerivAt_uncurry_coprod|continuous.*partial|partial.*continuous\", \"sub\": \"Analysis/Calculus/FDeriv/Partial.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"18\", \"59\"], \"digest\": \"11ce500835f48b6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: hasStrictFDerivAt_uncurry_coprod (FDeriv/Partial.lean:59–65) covers two blocks and would require induction for arbitrary m; mean-value inequalities provide smaller inputs, not the whole criterion. Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "existence and continuity of partial derivatives along every coordinate of a finite product gives total differentiability",
+   "results": "{\"t\": \"2026-10-24T03:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"existence and continuity of partial derivatives along every coordinate of a finite product gives total differentiability\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"differentiable_pi\", \"differentiableAt_pi\", \"differentiable_pi''\", \"differentiableOn_pi\", \"differentiableAt_pi''\", \"differentiableOn_pi''\", \"differentiableAt_euclidean\", \"hasDerivAt_pi\"], \"digest\": \"489999ae24348144\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: hasStrictFDerivAt_uncurry_coprod (FDeriv/Partial.lean:59–65) covers two blocks and would require induction for arbitrary m; mean-value inequalities provide smaller inputs, not the whole criterion. Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem norm_image_sub_le_of_norm_deriv_le_segment_01",
+   "results": "{\"t\": \"2026-10-24T03:58:02Z\", \"tool\": \"grep\", \"query\": \"theorem norm_image_sub_le_of_norm_deriv_le_segment_01\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/MeanValue.lean\", \"Mathlib/Analysis/Calculus/MeanValue.lean\"], \"digest\": \"d85523247acab2b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm_image_sub_le_of_norm_deriv_le_segment_01\"",
+   "results": "{\"t\": \"2026-10-24T03:58:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"norm_image_sub_le_of_norm_deriv_le_segment_01\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"norm_image_sub_le_of_norm_deriv_le_segment_01\", \"norm_image_sub_le_of_norm_deriv_le_segment_01'\"], \"digest\": \"627f5f24ddd6e0be\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the m-coordinate criterion: Search results read; the unit-interval bound is recorded separately as lem-sfb-unit-interval-derivative-bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cauchy-green-annulus-formula",
+  "date": "2026-10-24",
+  "group": "NG"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: I §3.C, formula (3.14) and Cauchy--Riemann criterion, printed pp.23--24; I §3.E, Lemma (3.29), smooth scalar case p=0, printed pp.28--29. The point a is translated to 0; only local solvability, not solvability on all of U, is asserted. Supporting scalar Dolbeault step: I §8, Exercise 8.5: the partial convolution F_J=(psi f_J) star_k (1/(pi z_k)) used to remove the highest antiholomorphic differential; analytic right-inverse and parameter commutation input; supporting Cauchy--Green reproduction of compactly supported test functions; Nonsingular Green/Stokes input on the punctured disk, before substituting u(zeta)/(z-zeta). Supporting input for the polar-rectangle proof: Continuous coordinate partials give a continuous real differential.",
+   "via": [
+    "lem-sfb-cauchy-green-annulus-formula",
+    "lem-sfb-cauchy-green-test-function",
+    "lem-sfb-cauchy-transform-parameters",
+    "lem-sfb-local-scalar-dolbeault",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-continuous-partials-frechet-criterion",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Gave a coordinate-segment telescoping proof, using one Mathlib leaf for the complex-valued one-variable derivative bound. Wrote the local remainder estimate, continuity of f, and operator-norm continuity explicitly; no multivariable continuity of f is assumed. Searched the current project, DAG, whole blueprint and Mathlib. Rudin is absent, so the proof is marked agent-written.",
+  "blueprint": "Realizes the continuous-partials prerequisite used in step 1 of lem-sfb-cauchy-green-annulus-formula along the inherited direct-image-supporting lineage. blueprint_refs.py ancestor returns None for this inherited chain; retain its null ancestor and via list, with the precise supporting place. The latest blueprint direct-images proof (3) was read; no unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-e738cfb1a",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-e738cfb1a (reviewer sub-agent of L); spot-checked: I read the item and the new leaf in full; no faults, no fixes. The item statement, stmt_deps and blueprint field are byte-identical to clones/live, where the item is still unsplit (no parallel split). Rudin 9.21 is WANTED and not local, and the proof is marked agent-written. Step 1: one delta from openness and continuity of the m partials; the broken-line points have squared distance from x at most |h|^2, so they stay in the ball; m>=1. Step 2: the derivative h_j(d_j f(y)-a_j) of q_j comes from substituting u=h_j s into the one-variable partial, and q_j is constant when h_j=0. The derivative on the open preimage gives the relative derivative on [0,1], endpoints included. The leaf applies with C=|h_j|eps/m>=0, and f is never assumed continuous beforehand. Step 3: the increments telescope and sum_j |h_j| <= m|h| gives the little-o bound; eps=1 gives continuity. Step 4: the operator norm of A_y-A_x is at most sum_j |d_j f(y)-d_j f(x)|. New node lem-sfb-unit-interval-derivative-bound: I checked MeanValue.lean:346-349 norm_image_sub_le_of_norm_deriv_le_segment_01' with E=C; the displayed limit is the slope form of HasDerivWithinAt on Icc, the bound is on Ico, and C>=0 is a harmless extra hypothesis. It has no proof or proof_deps, is not a clause of the item, and its blueprint field is null-ancestor with the via chain and same_as=[]. Duplicate search: grep -R over all dag/nodes for mean value, norm_image_sub_le, continuous partial and related terms, plus the nearby sfb analysis nodes (real-smooth-differentiation, second-derivative-symmetry, rectangle-divergence and others); none states the leaf or the criterion. hasStrictFDerivAt_uncurry_coprod only covers two blocks, so the item stays split rather than Mathlib. The parent cauchy-green-annulus step 1 is served exactly. No SGA, no cycle, no tool_uses needed."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Calculus.ContinuousPartialsFrechetCriterion",
+  "declaration": "Complex.continuous_partials_frechet_criterion",
+  "file": "lean/Sheaf/Analysis/Calculus/ContinuousPartialsFrechetCriterion.lean",
+  "statement": "theorem continuous_partials_frechet_criterion (m : ℕ) (hm : 1 ≤ m) (U : Set (EuclideanSpace ℝ (Fin m))) (hU : IsOpen U) (f : EuclideanSpace ℝ (Fin m) → ℂ) (p : Fin m → EuclideanSpace ℝ (Fin m) → ℂ) (hp : ∀ (j : Fin m) (x : EuclideanSpace ℝ (Fin m)), x ∈ U → HasDerivAt (fun t : ℝ ↦ f (x + t • EuclideanSpace.single j 1)) (p j x) 0) (hcp : ∀ j : Fin m, ContinuousOn (p j) U) : ContinuousOn f U ∧ DifferentiableOn ℝ f U ∧ (∀ (x : EuclideanSpace ℝ (Fin m)), x ∈ U → ∀ h : EuclideanSpace ℝ (Fin m), fderiv ℝ f x h = ∑ j : Fin m, h j • p j x) ∧ ContinuousOn (fderiv ℝ f) U",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3338db9fd",
+  "group": "NC",
+  "result": "pass",
+  "note": "Diffed node vs clones/live and side-live: only the lean field is added; no rebind, dep or new-node changes, no parallel landing. H3 match: m≥1, open U ⊆ EuclideanSpace ℝ (Fin m), f and p arbitrary extensions (U open), HasDerivAt along EuclideanSpace.single j 1 at 0 for x∈U, ContinuousOn (p j) U; conclusions ContinuousOn f U, DifferentiableOn ℝ f U, fderiv formula ∀ h, ContinuousOn (fderiv ℝ f) U in op norm. Nothing stronger assumed, no universes or instances. Edge cases U=∅, m=1, m=0 excluded per node. lean.statement verbatim, sorry only, docstrings carry source place, blueprint tag and 4-step proof; plain MeanValue import = proof_dep module. No duplicate in Mathlib or lean/Sheaf. Report has Worker report + Second reading by NC. Advisory: Complex namespace is cosmetic. Not recompiled (no change)."
+ }
+}

@@ -1,0 +1,243 @@
+{
+ "id": "lem-pur-scalar-iterated-mates-adjunct",
+ "kind": "statement",
+ "title": "Adjunct normal form of the iterated scalar mates",
+ "statement": "Let $\\varphi:A\\to B$ be a unital map of finite commutative rings, and let $X\\xrightarrow rY\\xrightarrow sZ$ be arbitrary scheme morphisms [def-pc-scheme]. Work in the ordinary unbounded small-etale derived categories $D_R(T)=D(T_{\\mathrm{et}},R)$ [def-weil-pbc-derived-categories]. Write $Q_T=-\\otimes_A^{\\mathbf L}B$ [lem-pur-derived-change-of-rings], $P_{u,R}=u_R^*$ for exact constant-ring inverse image [prop-weil-pbc-inverse-image-modules-exact], and $R_{u,R}=Ru_{*,R}$, with canonical adjunction $P_{u,R}\\dashv R_{u,R}$ and counit $\\varepsilon_{u,R}$ [def-kun-projection-formula-map]. Use the normalized isomorphism $\\lambda_u:P_{u,B}Q_T\\cong Q_WP_{u,A}$ for $u:W\\to T$ [def-pur-etale-scalar-pullback-iso], and write $\\chi_u:Q_TR_{u,A}\\to R_{u,B}Q_W$ for its counit-defined mate [def-pur-etale-scalar-mate]. For $M\\in D_A(X)$ put $U=R_{r,A}M$, $V=R_{s,A}U$. For any $h:Q_ZV\\to R_{s,B}R_{r,B}Q_XM$, define its composite-adjunction adjunct by\n$$\\operatorname{Adj}_B(h)=\\varepsilon_{r,B,Q_XM}\\circ P_{r,B}(\\varepsilon_{s,B,R_{r,B}Q_XM})\\circ P_{r,B}P_{s,B}(h),$$\nusing the composite adjunction [def-weil-pbc-composite-adjunction].\nPut\n$$G_M=R_{s,B}(\\chi_{r,M})\\circ\\chi_{s,U}:Q_ZV\\longrightarrow R_{s,B}R_{r,B}Q_XM.$$\nThen $\\operatorname{Adj}_B(G_M)=T_M$, where\n$$T_M=Q_X(\\varepsilon_{r,A,M})\\circ Q_X(P_{r,A}(\\varepsilon_{s,A,U}))\\circ\\lambda_{r,P_{s,A}V}\\circ P_{r,B}(\\lambda_{s,V}):P_{r,B}P_{s,B}Q_ZV\\longrightarrow Q_XM.$$\nThe equality concerns the specified scalar mates, without assuming either mate invertible or imposing boundedness, properness or coefficient flatness.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E46, label remark-compose-base-change: the adjunct of the successive two square mates; explicit coefficient-change specialization of the omitted verification"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-projection-formula-map",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-pur-etale-scalar-mate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For $u=r,s$ and an object $K$ on its source, the definition [def-pur-etale-scalar-mate] and the adjunct-counit identity [lem-weil-pbc-adjunct-counit-identity] give\n$$\\varepsilon_{u,B,Q_WK}\\circ P_{u,B}(\\chi_{u,K})=Q_W(\\varepsilon_{u,A,K})\\circ\\lambda_{u,R_{u,A}K}.\\tag{E}$$\nHere $u:W\\to T$; use $(u,K)=(r,M)$ and $(s,U)$. This applies to the specified mate, without an isomorphy assumption.",
+   "uses": [
+    "def-pur-etale-scalar-mate",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change, omitted verification, specialized to coefficient squares; Categories Tag 0037, definition-adjoint and following paragraph"
+   }
+  },
+  {
+   "text": "Put $N=R_{r,B}Q_XM$ and $a=\\chi_{r,M}:Q_YU\\to N$. The counit of the given adjunction [def-kun-projection-formula-map] is a natural transformation, so its naturality axiom at $a$ is\n$$\\varepsilon_{s,B,N}\\circ P_{s,B}R_{s,B}(a)=a\\circ\\varepsilon_{s,B,Q_YU}.$$\nExpand $G_M$ and the displayed definition of $\\operatorname{Adj}_B$, distribute $P_{r,B}P_{s,B}$ over composition, and substitute this equation:\n$$\\operatorname{Adj}_B(G_M)=\\varepsilon_{r,B,Q_XM}\\circ P_{r,B}(a)\\circ P_{r,B}(\\varepsilon_{s,B,Q_YU}\\circ P_{s,B}(\\chi_{s,U})).$$",
+   "uses": [
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change, omitted verification, specialized to coefficient squares; Categories Tag 0037, definition-adjoint and following paragraph"
+   }
+  },
+  {
+   "text": "Substitute (E) for $(s,U)$ into the final factor of step 2 and for $(r,M)$ into its first two factors. Functoriality and associativity give\n$$\\operatorname{Adj}_B(G_M)=Q_X(\\varepsilon_{r,A,M})\\circ\\lambda_{r,U}\\circ P_{r,B}(Q_Y(\\varepsilon_{s,A,U}))\\circ P_{r,B}(\\lambda_{s,V}).$$\nAll substitutions are equalities of arrows in $D_B(X)$; no inverse of $\\chi_r$ or $\\chi_s$ has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change, omitted verification, specialized to coefficient squares; Categories Tag 0037, definition-adjoint and following paragraph"
+   }
+  },
+  {
+   "text": "By [def-pur-etale-scalar-pullback-iso], $\\lambda_r$ is a natural isomorphism. Its naturality axiom at $\\varepsilon_{s,A,U}:P_{s,A}V\\to U$ reads\n$$\\lambda_{r,U}\\circ P_{r,B}(Q_Y(\\varepsilon_{s,A,U}))=Q_X(P_{r,A}(\\varepsilon_{s,A,U}))\\circ\\lambda_{r,P_{s,A}V}.$$\nSubstituting this into step 3 gives exactly $T_M$. The two naturality equations and (E) hold for every object of the unbounded categories, so no boundedness, properness or coefficient-flatness condition enters.",
+   "uses": [
+    "def-pur-etale-scalar-pullback-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change, omitted verification, specialized to coefficient squares; Categories Tag 0037, definition-adjoint and following paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-scalar-mate",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "def-kun-projection-formula-map",
+  "def-pur-etale-scalar-pullback-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E46, remark-compose-base-change: explicit omitted verification by the Categories Tag 0037 transpose formula and naturality; blueprint main-20261015 cor-pur-vector-bundle-purity.proof.md paragraph 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarMate|scalarPullbackIso|rightDerivedFunctorCompIso",
+   "results": "{\"t\": \"2026-10-22T06:37:22Z\", \"tool\": \"grep\", \"query\": \"scalarMate|scalarPullbackIso|rightDerivedFunctorCompIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunct of iterated scalar extension counit mates for two geometric derived adjunctions equals the expanded scalar composite counit",
+   "results": "{\"t\": \"2026-10-22T06:37:23Z\", \"tool\": \"leansearch\", \"query\": \"Adjunct of iterated scalar extension counit mates for two geometric derived adjunctions equals the expanded scalar composite counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"CategoryTheory.mateEquiv\", \"ModuleCat.RestrictionCoextensionAdj.counit'\"], \"digest\": \"9d7291b44f6e9a65\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-22T06:37:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_inv_app_left\"], \"digest\": \"5c0344c60218e48c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct of a coefficient change mate transported along the canonical derived pushforward composition isomorphism is the scalar extension of the composite counit preceded by the two scalar pullback comparisons",
+   "results": "{\"t\": \"2026-10-22T06:37:30Z\", \"tool\": \"leanfinder\", \"query\": \"The adjunct of a coefficient change mate transported along the canonical derived pushforward composition isomorphism is the scalar extension of the composite counit preceded by the two scalar pullback comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"ModuleCat.homEquiv_extendScalarsComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"60998f41252b167f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|comp_counit_app",
+   "results": "{\"t\": \"2026-10-22T06:37:38Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_hcomp|mateEquiv_vcomp|comp_counit_app\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"f68e2d48236f4896\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "{\"t\": \"2026-10-22T06:37:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp_counit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit_app\"], \"digest\": \"e29c8b5d96b9ac85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transporting the adjunct of a derived scalar change natural transformation through canonical pullback and pushforward compositors gives a pasted counit formula",
+   "results": "{\"t\": \"2026-10-22T06:37:39Z\", \"tool\": \"leansearch\", \"query\": \"Transporting the adjunct of a derived scalar change natural transformation through canonical pullback and pushforward compositors gives a pasted counit formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit_naturality_assoc\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.counit_naturality\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.PullbackShift.adjunction_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\"], \"digest\": \"ff3ee71e5a8eac57\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the counit of a composite adjunction and scalar pullback comparison computes the transpose of two iterated derived scalar coefficient mates",
+   "results": "{\"t\": \"2026-10-22T06:37:48Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the counit of a composite adjunction and scalar pullback comparison computes the transpose of two iterated derived scalar coefficient mates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm\", \"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.Adjunction.ε_comp_map_ε\"], \"digest\": \"5ac8b45a9daf43bc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|counit_naturality|homEquiv_counit",
+   "results": "{\"t\": \"2026-10-22T07:50:36Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_counit|counit_naturality|homEquiv_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"4d9a2ded26c9d045\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic mate, composite-counit or module-change-of-rings identities; obtaining this specified etale scalar adjunct formula still requires the two explicit naturality substitutions and the two single-mate identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "{\"t\": \"2026-10-22T07:50:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\"], \"digest\": \"8e33c4df1a4bdb3e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic mate, composite-counit or module-change-of-rings identities; obtaining this specified etale scalar adjunct formula still requires the two explicit naturality substitutions and the two single-mate identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunct under a composite adjunction of two successive mates of natural transformations equals the composite of the two counits and left comparisons",
+   "results": "{\"t\": \"2026-10-22T07:50:36Z\", \"tool\": \"leansearch\", \"query\": \"Adjunct under a composite adjunction of two successive mates of natural transformations equals the composite of the two counits and left comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.comp_unit_app\", \"CategoryTheory.Bicategory.Adjunction.compCounit\", \"CategoryTheory.Bicategory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.comp_unit\", \"CategoryTheory.Bicategory.Adjunction.comp_unit\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans_app\"], \"digest\": \"58d96870fc2b9013\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic mate, composite-counit or module-change-of-rings identities; obtaining this specified etale scalar adjunct formula still requires the two explicit naturality substitutions and the two single-mate identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct of two successive scalar change mates is computed by counit naturality and naturality of the scalar pullback comparison",
+   "results": "{\"t\": \"2026-10-22T07:50:42Z\", \"tool\": \"leanfinder\", \"query\": \"The adjunct of two successive scalar change mates is computed by counit naturality and naturality of the scalar pullback comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_apply_app\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.conjugateEquiv_symm_apply_app\"], \"digest\": \"26f7b0c7b788f09b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic mate, composite-counit or module-change-of-rings identities; obtaining this specified etale scalar adjunct formula still requires the two explicit naturality substitutions and the two single-mate identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "{\"t\": \"2026-10-22T07:51:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_hcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\"], \"digest\": \"7deb50fb1122da8a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic mate, composite-counit or module-change-of-rings identities; obtaining this specified etale scalar adjunct formula still requires the two explicit naturality substitutions and the two single-mate identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-direct-image-scalar-composition",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Proof, paragraph 2: coefficient reduction and composition of adjunctions before transposing; iterated-mates adjunct (old direct-image scalar-composition steps 3, 5 and 6)",
+   "via": [
+    "lem-pur-etale-direct-image-scalar-composition",
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-scalar-iterated-mates-adjunct",
+  "worker": "stage1",
+  "summary": "Expanded the successive scalar mates using the existing adjunct-counit identity, then wrote the counit and scalar/pullback naturality squares explicitly. The full calculation uses four existing nodes and creates no new lemmas. Checked types, arbitrary unbounded inputs, nonflat coefficients, identity morphisms and zero objects. Statement and specified normalizations are unchanged.",
+  "blueprint": "cor-pur-vector-bundle-purity, current main-20261015 proof paragraph 2: coefficient reduction, composition of adjunctions and transposition. The inherited ancestor place is realized by computing the adjunct of the iterated mates, not by asserting their invertibility."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-55ef7bbd4",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-55ef7bbd4 (reviewer sub-agent of L); spot-checked: I read the item's four steps, every cited statement (def-pur-etale-scalar-mate, def-pur-etale-scalar-pullback-iso, lem-weil-pbc-adjunct-counit-identity, def-kun-projection-formula-map, def-weil-pbc-composite-adjunction and the stmt_deps), Stacks sites-cohomology 0E46 (l.4062, where the verification is omitted, so proof_origin=agent is right), categories 0037 (l.3344) and blueprint main-20261015 cor-pur-vector-bundle-purity paragraph 2. The delivery has no new nodes. Statement, stmt_deps, blueprint, source and created are byte-identical to the node created by Q149 2572f0c6. Live and side-live show the item unsplit, with no repair note, so neither the re-split rule nor supersession applies. Step 1: (E) follows from the mate definition (χ is the transpose of Q(ε)∘λ) and the ⇒ direction of the adjunct-counit identity; I checked its instances at (s,U) and (r,M). Step 2: naturality of ε_s at a=χ_{r,M}; I re-derived it. Step 3: the two (E) substitutions; no χ is inverted. Step 4: naturality of λ_r at ε_{s,A,U} gives exactly T_M. The composite counit order matches def-weil-pbc-composite-adjunction. Edge cases checked: r or s equal to the identity, φ=id, B=0, M=0, non-flat Z/4→Z/2, unbounded M. Every proof dependency is a definition or a Mathlib leaf, so there is no route issue and no tool_uses. Duplicate search: sibling lem-pur-scalar-composite-mate-adjunct is about a different arrow (F_M via κ); lem-sp-finite-tower-scalar-mates requires invertible a_r; lem-pur-ordinary-derived-composite-transpose and lem-trf-iterated-square-mates are different statements. Advisory: the item also follows from lem-weil-pbc-mate-pasting (2) plus the mate formula, but the direct calculation is complete. Searches cover all three kinds. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarIteratedMatesAdjunct",
+  "declaration": "AlgebraicGeometry.Etale.scalarMate_iterated_adjunct",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarIteratedAdjunct",
+   "AlgebraicGeometry.Etale.scalarMate_iterated_adjunct"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarIteratedMatesAdjunct.lean",
+  "statement": "theorem scalarMate_iterated_adjunct {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z) (M : DerivedCategoryModule A X) : scalarIteratedAdjunct φ r s M ((scalarMate φ s).app (R(lowerStar (ModuleCat.{u + 1} A) r).obj M) ≫ R(lowerStar (ModuleCat.{u + 1} B) s).map ((scalarMate φ r).app M)) = L(upperStar (ModuleCat.{u + 1} B) r).map ((scalarPullbackIso φ s).hom.app (R(lowerStar (ModuleCat.{u + 1} A) s).obj (R(lowerStar (ModuleCat.{u + 1} A) r).obj M))) ≫ (scalarPullbackIso φ r).hom.app (L(upperStar (ModuleCat.{u + 1} A) s).obj (R(lowerStar (ModuleCat.{u + 1} A) s).obj (R(lowerStar (ModuleCat.{u + 1} A) r).obj M))) ≫ (scalarExtension φ X).map (L(upperStar (ModuleCat.{u + 1} A) r).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) s).counit.app (R(lowerStar (ModuleCat.{u + 1} A) r).obj M))) ≫ (scalarExtension φ X).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) r).counit.app M)",
+  "branch": "sheaf-dag",
+  "by": "Q75",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper scalarIteratedAdjunct explicitly defines Adj_B(h) for every arrow h with the specified endpoints. The theorem expands G_M and T_M using the recorded normalized scalarPullbackIso and scalarMate. Exact inverse image is represented by its total left derived functor, canonically identified with termwise inverse image by leftDerivedUpperStarIsoMapDerivedCategory, as in the recorded scalar-mate interface. No statement correction or additional hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0512b9f05",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Clause-by-clause match: Q=scalarExtension (canonical left adjoint of derived restriction, i.e. −⊗^L_A B), P/R/ε=L(upperStar)/R(lowerStar)/counit of derivedUpperStarLowerStarAdjunction, λ=scalarPullbackIso (P_B Q≅Q P_A, direction checked), χ=scalarMate (mateEquiv of λ.hom, Q R_A→R_B Q). Helper scalarIteratedAdjunct is real data equal to the displayed Adj_B formula (= Adjunction.comp counit via comp_counit_app, order as in def-weil-pbc-composite-adjunction). G_M and the four T_M factors typed and ordered correctly. Finite only on theorem as in node; no invertibility/boundedness/flatness; universes u+1/u per deps. Edge cases (identity r/s, B=0, M=0, non-flat φ, unbounded M) covered. Node diff vs side-live: only lean field added; lean.statement verbatim in file; item not landed live; docstrings carry source place + blueprint tag; sorry only. Advisories: scalarExtension/derivedUpperStarLowerStarAdjunction not in deps' declarations lists but are the functors typing the recorded λ, χ; two likely-redundant stmt_dep imports. Not recompiled (no change); worker compile 5.1/5.3 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261022T143152-L-983701",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.scalarMate_iterated_adjunct"
+  ],
+  "sorry_after": []
+ }
+}

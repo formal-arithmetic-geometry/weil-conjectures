@@ -106,7 +106,18 @@
   "def-tw-eigenvalue"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-r-real-linear",
  "split_report": {
@@ -123,5 +134,23 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-9595de9fc (reviewer sub-agent of L); spot-checked: I read the master and main-20261015 sources for lem-tw-multiplicativity, def-tw-eigenvalue, the unit sk-r-real-linear (_section.md and proof), the three cited nodes in full, and both DAG citers. The STATEMENT-DISPUTED finding is correct. def-tw-eigenvalue's normalization v(q)=1 cannot hold because q=p^a is an l-adic unit; for example |2|_3=1 when q=2 and l=3. The repaired statement uses |iota(gamma)|=q^{w/2} with w real, which is the convention of the unit, of def-weil-frobenius-module-weights and of both citers (lem-tw-dual-negation and lem-tw-tate-twist-weight-shift with q_y=q^m). This does not weaken the item: integer weights become real weights, eigenvalues become arbitrary scalars, and both the product and the inverse clauses are kept. The change is named under the Source error heading. Steps 1 and 2 are elementary and use only what the statements of def-weil-complex-absolute-value (|zw|=|z||w|, |1|=1) and def-weil-real-power (positivity, x^{y1+y2}=x^{y1}x^{y2}, x^y=exp(y log x)) actually say. I checked the cases weights 0, q (weight 2), q^{-1}, roots of unity, a non-integral weight, alpha=0 (excluded because q^{w/2}>0), and the tate-twist shift. There are no new nodes and no duplicate in the DAG. No route departure, cycle or SGA use, and no tool_uses. The Mathlib lines named in the report (Complex.norm_mul Norm.lean:73, norm_inv :77, Real.rpow_add :207, rpow_neg :259) are correct. Follow-up for the maintainer: record the def-tw-eigenvalue normalization error in coord/HUMAN.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "proof"
+  ],
+  "statement": "If $\\alpha,\\beta$ are eigenvalues of weights $w_1,w_2$ (as in\n[def-tw-eigenvalue]), then $\\alpha\\beta$ has weight\n$w_1+w_2$, and $\\alpha^{-1}$ has weight $-w_1$ when\n$\\alpha\\neq0$.",
+  "proof": [
+   {
+    "text": "Since $\\iota$ is a ring homomorphism and the complex modulus is\nmultiplicative, the absolute value $|\\cdot|_\\iota$ of [def-tw-eigenvalue]\nis multiplicative:\n$|\\iota(\\alpha\\beta)|=|\\iota(\\alpha)||\\iota(\\beta)|=q^{w_1/2}q^{w_2/2}=q^{(w_1+w_2)/2}$,\nand, for $\\alpha\\neq0$,\n$|\\iota(\\alpha^{-1})|=|\\iota(\\alpha)|^{-1}=q^{-w_1/2}$.",
+    "uses": [
+     "def-tw-eigenvalue"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

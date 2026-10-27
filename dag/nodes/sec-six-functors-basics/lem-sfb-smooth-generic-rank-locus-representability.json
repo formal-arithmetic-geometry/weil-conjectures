@@ -1,0 +1,400 @@
+{
+ "id": "lem-sfb-smooth-generic-rank-locus-representability",
+ "kind": "statement",
+ "title": "Representability of fixed generic-fibre free-rank loci",
+ "statement": "Let $S,X$ be affine schemes [def-pc-scheme], [def-weil-affine-spectrum], let $g:X\\to S$ be smooth [def-sbc-smooth-morphisms] with geometrically irreducible nonempty fibres [def-pc-geometrically-irreducible], and let $E$ be a finitely presented quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-pbc-module-finite-type-presentation]. For a scheme $T\\to S$ put $X_T=X\\times_ST$ and let $E_T$ be tensor pullback [def-pc-fibre-product], [def-pc-module-pullback]. For $r\\geq0$ define $H_r(T)$ to be a singleton if, for every $t\\in T$, $E_T$ is free of rank $r$ on an open neighbourhood in $X_T$ of the unique generic point $\\xi_t$ of $(X_T)_t$, and empty otherwise. Free of rank $r$ means isomorphic to $\\mathcal O_{X_T}^{\\oplus r}$ on that neighbourhood. A generic point is a point whose closure is the whole fibre [def-sc-generic-point]. Then $H_r$ is represented on all $S$-schemes by a locally closed immersion $S_r\\to S$ of finite presentation. A locally closed immersion means a closed immersion followed by an open immersion [def-weil-closed-immersion]; finite presentation means locally of finite presentation, quasi-compact and quasi-separated [def-sbc-locally-finite-presentation], [def-weil-quasi-separated-morphism].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05UC (lemma-free-at-generic-points-representable), with the functor of situation-free-at-generic-points and equation-free-at-generic-points."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sc-generic-point",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "We use the following geometry also after arbitrary base change and restriction to source and base opens. Smoothness is preserved by these operations, and implies flatness and local finite presentation. Smooth fibres are geometrically reduced; combined with the assumed geometric irreducibility and nonemptiness this makes every fibre geometrically integral. Thus its generic point has a field as its local ring within the fibre. Define $p(s)=\\dim_{\\kappa(\\xi_s)}(E_{\\xi_s}\\otimes\\kappa(\\xi_s))$. For $t\\mapsto s$, the generic point of $X_t$ maps to that of $X_s$: on affine fibre rings the field extension gives an injective map of domains, and localization to their fraction fields still is injective. Tensoring a vector-space basis with the resulting field extension shows $p(t)=p(s)$. Here all sheaf pullbacks have the tensor description on affine opens. Consequently $H_r(T)$ implies $p(h(t))=r$ for every $t\\in T$. Pulling back a free neighbourhood preserves freeness and contains the new generic point, so $H_r$ is stable under arbitrary base change. Its predicate is Zariski local on $T$, directly from its neighbourhood definition.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-smooth-flat",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UC, generic fibre ranks paragraph; situation-free-at-generic-points and equation-free-at-generic-points"
+   }
+  },
+  {
+   "text": "Write $X=\\operatorname{Spec}B$, $S=\\operatorname{Spec}A$, and $M=\\Gamma(X,E)$. The affine finite-presentation criterion makes $M$ finitely presented, hence finitely generated. A finite generating list of length $N$ gives $p(s)\\leq N$ for all $s$. Fix $s$. Choose $p(s)$ elements of $M$ whose images are a basis of $M\\otimes_B\\kappa(\\xi_s)$, by selecting a basis from the images of a generating list. Stalks are module localizations, and Nakayama over $B_{\\xi_s}$ says these elements generate $M_{\\xi_s}$. The cokernel of their map $B^{\\oplus p(s)}\\to M$ is finitely generated and vanishes on localization at $\\xi_s$. Each of finitely many cokernel generators is killed by an element outside $\\xi_s$; their product $b\\notin\\xi_s$ kills the cokernel. We have a surjection $\\mathcal O_{D(b)}^{\\oplus p(s)}\\twoheadrightarrow E|_{D(b)}$. The image of $D(b)$ in $S$ is open, since $g$ is flat and locally finitely presented. Choose an affine neighbourhood $V_s$ of $s$ inside this image, and put $U_s=D(b)\\times_S V_s$. Both $U_s,V_s$ are affine. Their morphism is smooth, has nonempty geometrically integral fibres, and carries the displayed generating surjection. For each $t\\in V_s$, its fibre open $U_{s,t}$ is nonempty and has the same generic point as $X_t$. This remains true after any base change. Therefore restricting to $U_s$ leaves every $H_r$ unchanged over $V_s$, and $p(t)\\leq p(s)$ there.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sbc-affine-module-germ-localization",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UC, open-source replacement and local generating-surjection paragraphs"
+   }
+  },
+  {
+   "text": "Consider any such chart $U\\to V$ with a fixed surjection $u:\\mathcal O_U^{\\oplus n}\\twoheadrightarrow E|_U$. Its global-isomorphism predicate after base change equals $H_n$. Only the forward implication needs work. Test on affine opens $T=\\operatorname{Spec}R$ of an arbitrary $V$-scheme. Write $U_T=\\operatorname{Spec}C$ and $L=\\Gamma(U_T,E_T)$. The affine flatness and presentation criteria make $R\\to C$ flat and finitely presented; its fibres are geometrically integral and nonempty by step 1. The tensor pullback formula and preservation of finite module presentation make $L$ finitely presented. Suppose $H_n(T)$ holds. For every prime $\\mathfrak p\\subset R$, $\\mathfrak q=\\mathfrak p C$ is prime and contracts to $\\mathfrak p$: $C/\\mathfrak pC=C\\otimes_RR/\\mathfrak p$ is flat over the domain $R/\\mathfrak p$, hence torsion-free, so it embeds into its localization $C\\otimes_R\\kappa(\\mathfrak p)$, the fibre ring, which is a nonzero domain; torsion-freeness of this nonzero module also makes $R/\\mathfrak p\\to C/\\mathfrak pC$ injective. At $\\mathfrak q$, $L_{\\mathfrak q}$ is free of rank $n$ over $C_{\\mathfrak q}$; it is flat over $R_{\\mathfrak p}$ by smooth flatness. The localized surjection is an isomorphism: in chosen bases it is a surjective square matrix, whose right inverse makes its determinant a unit, so its adjugate gives an inverse. In particular its residue-field map is an isomorphism. Apply [lem-sfb-local-flat-generic-basis-universal-injectivity] at $\\mathfrak p,\\mathfrak q$. On some $D(f)$ containing $\\mathfrak p$ the specified $u$ is universally injective over $R_f$, hence injective by taking the tensor test module $R_f$. It remains surjective, so is an isomorphism there. These $D(f)$ cover $T$, proving $u_T$ is an isomorphism. Conversely an isomorphism $u_T$ trivializes $E_T$ everywhere on $U_T$ and immediately implies $H_n(T)$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-pc-fp-module-base-change",
+    "lem-sfb-local-flat-generic-basis-universal-injectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UC, equality with F_iso; Tag 05IA (lemma-induction-step-fp), implication (1) to (2)"
+   }
+  },
+  {
+   "text": "For $n=p(s)$ apply [lem-sfb-flat-integral-free-surjection-iso-locus] to $U_s\\to V_s$ and its generating surjection. Flatness and finite presentation follow from smoothness and the affine criteria used in step 3; the source is affine over the affine base and the target module is finitely presented. This gives a closed immersion of finite presentation representing $H_{p(s)}$ over $V_s$, by step 3. For $q>p(s)$, $H_q$ over $V_s$ is the empty functor: a nonempty test scheme satisfying it would have a point $t$ with $q=p(h(t))\\leq p(s)$, a contradiction. On the empty test scheme both predicates hold vacuously, as does factorization through the empty scheme.",
+   "uses": [
+    "lem-sfb-flat-integral-free-surjection-iso-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UC, generating-surjection paragraph applying Tag 05PF (theorem-flattening-map)"
+   }
+  },
+  {
+   "text": "We prove, simultaneously for all $r$, representability by a finitely presented locally closed immersion over every quasi-compact open $B\\subseteq S$, by induction on an upper bound $m$ for $p$ on $B$. Such a $B$ has a finite cover by principal affine opens of $S$, with affine intersections, so is quasi-separated. The empty $B$ is immediate. For a nonempty $B$ take the actual maximum $m$; it exists by the finite bound $N$ in step 2. At a point with $p(s)=m$, step 4 gives a closed finitely presented representative of $H_m$ on a neighbourhood inside $B$. At a point with $p(s)<m$, it gives the empty representative on a neighbourhood. Apply [lem-sc-local-finitely-presented-immersion-locus] using the base-change stability and source-locality proved in step 1, to glue these representatives to an immersion $Z_m\\to B$ locally of finite presentation. All its base restrictions just constructed are closed immersions. Closed immersion is local on the target, so $Z_m\\to B$ is closed. Its local defining ideals are of finite type by [lem-trf-closed-immersion-finite-presentation-ideal]; these local finite-generation statements give a finite-type ideal sheaf on $B$, and the same criterion shows $Z_m\\to B$ is of finite presentation. Its underlying set is exactly $\\{s:p(s)=m\\}$: the residue-field test at $s$ belongs to $H_{p(s)}$, indeed on the affine integral fibre choose lifts of a basis over its fraction field. Their map from a finite free module to the finitely presented fibre module is bijective at the zero prime. By [lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads] it is bijective after inverting a nonzero element, giving a free neighbourhood of the fibre generic point. It cannot belong to another $H_r$, by step 1.",
+   "uses": [
+    "lem-sc-local-finitely-presented-immersion-locus",
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "lem-trf-closed-immersion-finite-presentation-ideal",
+    "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UC, maximum-rank induction paragraph and final finite-presentation paragraph"
+   }
+  },
+  {
+   "text": "The open complement $B'=B\\setminus |Z_m|$ is quasi-compact. Indeed take a finite affine cover of $B$. On each member the ideal of $Z_m$ is quasi-coherent and of finite type by the ideal criterion in step 5, so its sections there form a finitely generated ideal by [lem-weil-pbc-quasi-coherent-finite-type-affine] (a), so its complement is a finite union of principal opens. Each principal open is affine and quasi-compact, and a finite union of such spaces is quasi-compact. Now $p\\leq m-1$ on $B'$. If $m=0$, $B'$ is empty and all $H_r$ except $H_0$ are empty. Otherwise apply the induction hypothesis to $B'$, a quasi-compact open of the original affine $S$. For $r<m$, the predicate $H_r(T)$ for $T\\to B$ forces the image of every point into $B'$, by step 1. The open-factorization lemma then factors this map uniquely through $B'$. Conversely a test map through $B'$ has exactly the same generic-freeness predicate there. Thus the representative supplied by induction over $B'$ also represents $H_r$ over $B$. For $r>m$ the functor is empty, and $r=m$ was settled in step 5.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UC, rank induction and quasi-compact-open-complement argument"
+   }
+  },
+  {
+   "text": "The inclusion $B'\\hookrightarrow B$ in step 6 is finitely presented: apply [lem-nagata-qc-open-basechanged-affine-chart-fp] with its base $S$ the original affine $S=\\operatorname{Spec}A$, its test scheme $T=B$, its affine chart $\\operatorname{Spec}A\\to S$ the identity, and its quasi-compact open $W=B'\\subseteq X_T=B$. The needed quasi-compactness and quasi-separatedness of $B$ were checked in step 5. Composition preserves finite presentation and immersions by [lem-weil-pbc-proper-fp-permanence], clauses (d) and (e). Hence every representative inherited from $B'$ is a finitely presented locally closed immersion into $B$. This completes the induction. Finally take $B=S$, which is quasi-compact since affine, to obtain $S_r\\to S$ for every $r\\geq0$. All comparisons were on arbitrary test schemes, using affine open covers only to test module isomorphisms, so this represents $H_r$ on all $S$-schemes, including nonreduced and nonaffine ones.",
+   "uses": [
+    "lem-nagata-qc-open-basechanged-affine-chart-fp",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UC, final finite-presentation paragraph; Morphisms Tags 01TU and 01TR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-smooth-flat",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-pc-fp-module-base-change",
+  "lem-sfb-local-flat-generic-basis-universal-injectivity",
+  "lem-sfb-flat-integral-free-surjection-iso-locus",
+  "lem-sc-local-finitely-presented-immersion-locus",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-nagata-qc-open-basechanged-affine-chart-fp",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05UC (lemma-free-at-generic-points-representable), affine finite-presentation case; its alternative Tag 05IA generic injectivity argument and finite-rank induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism with geometrically irreducible fibres and a finitely presented quasi coherent module the functor of being free of fixed rank near every fibre generic point is represented by a finitely presented locally closed immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module free-locus openness on the source and locally constant rank do not represent the relative base functor near generic points of all fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the constant generic rank stratum for a finitely presented sheaf on a smooth family with irreducible fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"Module.Grassmannian.mk\", \"module\": \"Mathlib.RingTheory.Grassmannian\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {M : Type v} →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {k : ℕ} →\\n            (toSubmodule : Submodule R M) →\\n              Module.Finite R (M ⧸ toSubmodule) →\\n                Module.Projective R (M ⧸ toSubmodule) →\\n      \", \"doc\": \"Given a submodule $ P $ of the $ R $-module $ M $, this constructor forms an element of the Grassmannian $ \\text{Gr}(k,M) $ by verifying: (1) the quotient module $ M/P $ is finitely generated, (2) $ M/\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.recOn\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {F : CategoryTheory.Sheaf J D} →\", \"doc\": \"Given a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ under a Grothendieck topology $ J $, if $ F $ lies in the essential image of the constant sheaf functor, then any property \"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.QuasicoherentData\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.casesOn\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {F : CategoryTheory.Sheaf J D} →\", \"doc\": \"Given a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ under a Grothendieck topology $ J $, if $ F $ lies in the essential image of the constant sheaf functor, then any property \"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsFiniteType\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module free-locus openness on the source and locally constant rank do not represent the relative base functor near generic points of all fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"LieModule.posFittingComp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) (L : Type u_3) (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] : LieSubmodule R L M\", \"doc\": \"If `M` is a representation of a nilpotent Lie algebra `L` with coefficients in `R`, then\\n`posFittingComp R L M` is the span of the positive Fitting components of the action of `x` on `M`,\\nas `x` range\"}\n  {\"name\": \"LieModule.posFittingCompOf\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) {L : Type u_3} (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] (x : L) : LieSubmodule R L M\", \"doc\": \"If `M` is a representation of a nilpotent Lie algebra `L`, and `x : L`, then\\n`posFittingCompOf R M x` is the infimum of the decreasing system\\n`range φₓ ⊇ range φₓ² ⊇ range φₓ³ ⊇ ⋯` where `φₓ : End R M\"}\n  {\"name\": \"LieModule.posFittingComp_eq_bot_of_isNilpotent\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) (L : Type u_3) (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] [LieModule.IsNilpotent L M] : LieModule.posFittingComp R L M = ⊥\", \"doc\": \"\"}\n  {\"name\": \"LieModule.posFittingCompOf_eq_bot_of_isNilpotent\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) {L : Type u_3} (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] [LieModule.IsNilpotent L M] (x : L) : LieModule.posFittingCompOf R M x = ⊥\", \"doc\": \"\"}\n  {\"name\": \"LieModule.posFittingCompOf_le_lowerCentralSeries\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) {L : Type u_3} (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] (x : L) (k : ℕ) : LieModule.posFittingCompOf R M x ≤ LieModule.lowerCentralSeries R L M k\", \"doc\": \"\"}\n  {\"name\": \"LieModule.posFittingCompOf_le_posFittingComp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) (L : Type u_3) (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] (x : L) : LieModule.posFittingCompOf R M x ≤ LieModule.posFittingComp R L M\", \"doc\": \"\"}\n  {\"name\": \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) (L : Type u_3) (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M] : ⨅ k, LieModule.lowerCentralSeries R L M k = LieModule.posFittingComp R L M\", \"doc\": \"See also `LieModule.iSup_ucs_eq_genWeightSpace_zero`.\"}\n  {\"name\": \"LieModule.posFittingComp_le_iInf_lowerCentralSeries\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) (L : Type u_3) (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] : LieModule.posFittingComp R L M ≤ ⨅ k, LieModule.lowerCentralSeries R L M k\", \"doc\": \"\"}\n  {\"name\": \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) (L : Type u_3) (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M] (x : L) : IsCompl (LieModule.genWeightSpaceOf M 0 x) (LieModule.posFittingCompOf R M\", \"doc\": \"\"}\n  {\"name\": \"LieModule.map_posFittingComp_eq\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" {R : Type u_2} {L : Type u_3} {M : Type u_4} [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] {M₂ : Type u_5} [AddCommGroup M₂] [Module R M₂] [LieRingModule L M₂] [LieModule R L M₂] (e : M ≃ₗ⁅R,L⁆ M₂) : LieSubmodul\", \"doc\": \"\"}\n  {\"name\": \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) (L : Type u_3) (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M] : IsCompl (LieModule.genWeightSpace M 0) (LieModule.posFittingComp R L M)\", \"doc\": \"This is the Fitting decomposition of the Lie module `M`.\"}\n  {\"name\": \"LieModule.mem_posFittingComp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \" (R : Type u_2) (L : Type u_3) (M : Type u_4) [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] [LieRing.IsNilpotent L] (m : M) : m ∈ LieModule.posFittingComp R L M ↔ m ∈ ⨆ x, LieModule.posFittingCompOf R M x\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module free-locus openness on the source and locally constant rank do not represent the relative base functor near generic points of all fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*rank|rank.*strat|flattening|Fitting",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: module free-locus openness on the source and locally constant rank do not represent the relative base functor near generic points of all fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus on the base where a module on a smooth irreducible fibre family is locally free of rank r near the fibre generic points is a locally closed subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"Module.freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"(R : Type uR) → (M : Type uM) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → Set (PrimeSpectrum R)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p}$ in the prime spectrum of a commutative ring $R$ such that the localization of the $R$-module $M$ at $\\\\mathfrak{p}$ (i.e., the module obtained by inverting all el\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Module.mem_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {p : PrimeSpectrum R},\\n  p ∈ Module.freeLocus R M ↔ Module.Free (Localization.AtPrime p.asIdeal) (LocalizedModule p.asIdeal.primeCompl M)\", \"doc\": \"A prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative ring $R$ belongs to the free locus of an $R$-module $M$ if and only if the localization of $M$ at $\\\\mathfrak{p}$ forms a free module\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any immersion $ f : X \\\\to Y $ of schemes, the image of $ f $ is a locally closed subset of $ Y $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module free-locus openness on the source and locally constant rank do not represent the relative base functor near generic points of all fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*rank|rank.*strat|flattening|Fitting",
+   "results": "OK 25 hit(s); Mathlib/Algebra/Lie/Weights/Killing.lean, Mathlib/Algebra/Lie/Weights/Killing.lean, Mathlib/Algebra/Lie/Weights/Killing.lean, Mathlib/Algebra/Lie/Weights/Killing.lean, Mathlib/Algebra/Lie/Weights/Killing.lean, Mathlib/Algebra/Lie/Weights/Basic.lean, Mathlib/Algebra/Lie/Weights/Basic.lean, Mathlib/Algebra/Lie/Weights/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus openness and local representability infrastructure do not state the relative generic-fibre rank functor or construct its base stratum"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"freeLocus\"",
+   "results": "OK 12 hit(s); Module.freeLocus, Module.isOpen_freeLocus, Module.freeLocus_eq_univ, Module.freeLocus_eq_univ_iff, Module.freeLocus_congr, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.comap_freeLocus_le, Module.mem_freeLocus_iff_tensor",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus openness and local representability infrastructure do not state the relative generic-fibre rank functor or construct its base stratum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed generic rank functor for a smooth geometrically integral fibre family is represented by a locally closed subscheme",
+   "results": "OK 8 hit(s); AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.IsSmooth.recOn, Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, FixedPoints.rank_le_card, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus openness and local representability infrastructure do not state the relative generic-fibre rank functor or construct its base stratum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of fixed generic fibre free rank strata of a finitely presented sheaf on a smooth morphism with geometrically irreducible fibres",
+   "results": "OK 8 hit(s); AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, Algebra.isOpen_smoothLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus openness and local representability infrastructure do not state the relative generic-fibre rank functor or construct its base stratum"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-complete-devissage-dimension-flattening",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 05UF (lemma-flat-dimension-n-representable), with complete devissage in Tags 05HH and 05HX; chart formulation from spaces-flat.tex Tag 0CWS. Supporting proof of 05UF: induction on the length of the algebraic devissage, first finite direct image, generic-basis universal injectivity, and generic-rank strata.",
+   "via": [
+    "lem-sfb-affine-complete-devissage-dimension-flattening",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-generic-rank-locus-representability",
+  "worker": "stage1",
+  "summary": "Read Stacks 05UC, 05IA, 05PF and 05K5. Keep the statement unchanged; prove the generic-point/global-isomorphism comparison using the existing local-flat generic-basis node, construct local closed maximum-rank representatives, and give the bounded-rank induction with explicit quasi-compact complements. One new statement-only prerequisite records 05PF for finite-free quotients on affine flat geometrically integral-fibre families.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 05UF (lemma-flat-dimension-n-representable), with complete devissage in Tags 05HH and 05HX; chart formulation from spaces-flat.tex Tag 0CWS. Supporting proof of 05UF: induction on the length of the algebraic devissage, first finite direct image, generic-basis universal injectivity, and generic-rank strata. The inherited direct-image/alteration prerequisite chain is unchanged. This split supplies the generic-rank-stratum input in 05UF via the proof of 05UC. Current blueprint read at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, direct-image and compactification paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme/module tool: Proper and smooth morphisms are stable under base change. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme/module tool: Smoothness under restriction to open subschemes, composition with an open immersion, and isomorphism. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme/module tool: Smooth morphisms are flat. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme/module tool: Smooth morphisms have geometrically reduced fibres. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "def-pc-geometrically-irreducible",
+    "why": "Generic scheme/module tool: Geometric properties. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic scheme/module tool: Sections of the pullback of a quasi-coherent module over an affine open. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic scheme/module tool: Modules of finite presentation are quasi-coherent; a quasi-coherent module is of finite type (finite presentation) on an affine open iff its sections there are a finite (finitely presented) module (Stacks 01BO, 01PB, 01PC). Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-sbc-affine-module-germ-localization",
+    "why": "Generic scheme/module tool: Quasi-coherent affine module germs are localization maps. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Generic scheme/module tool: Nakayama: generators of a finite module over a local ring are detected modulo the maximal ideal. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic scheme/module tool: Flat finite-presentation morphisms are open. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic scheme/module tool: Flatness of a scheme morphism on affine charts. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic scheme/module tool: A morphism locally of finite presentation is of finite presentation on every pair of affine opens. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-pc-fp-module-base-change",
+    "why": "Generic scheme/module tool: Base change of a finitely presented module. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-sc-local-finitely-presented-immersion-locus",
+    "why": "Generic scheme/module tool: Gluing locally finitely presented immersion representatives. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "why": "Generic scheme/module tool: Closed immersion, finiteness and etaleness are local on the target. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-trf-closed-immersion-finite-presentation-ideal",
+    "why": "Generic scheme/module tool: Finite presentation of a closed immersion and finite type of its ideal. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads",
+    "why": "Generic scheme/module tool: A map from a finite to a finitely presented module that is bijective at a prime is bijective after inverting one element. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Generic scheme/module tool: Principal opens cover Spec R iff unit ideal; Spec R is quasi-compact. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic scheme/module tool: A morphism with image in an open subscheme factors uniquely through it. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-nagata-qc-open-basechanged-affine-chart-fp",
+    "why": "Generic scheme/module tool: Quasi-compact opens in base changes of finitely presented affine charts. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme/module tool: Permanence of proper, separated, finite type, finitely presented morphisms and of immersions. Used only for its stated local algebra or gluing/permanence fact in the 05UC prerequisite proof; it does not replace a unit-level six-functor argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-smooth-flat",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-pc-fp-module-base-change",
+  "lem-sc-local-finitely-presented-immersion-locus",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-nagata-qc-open-basechanged-affine-chart-fp",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-65d525ef3",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-65d525ef3 (reviewer sub-agent of L); spot-checked: Read Stacks flat.tex 05UC (l.7631), situation-free-at-generic-points, 05PF theorem-flattening-map, situation-iso, 05IA and 05K5. The item is the affine, finite-presentation case of 05UC and its statement is unchanged. The 7 steps follow the 05UC route: generator chart via Nakayama and openness, the 05IA comparison H_n = F_iso through lem-sfb-local-flat-generic-basis-universal-injectivity (every hypothesis checked), 05PF through the new node, Zariski gluing, closedness and finite presentation through the ideal criterion, the underlying set {p=m} through the spreading lemma, and the max-rank induction over quasi-compact opens B. B'->B is of finite presentation through lem-nagata-qc-open-basechanged-affine-chart-fp, with its parameters checked. New node lem-sfb-flat-integral-free-surjection-iso-locus = 05PF with F = O^n: flat, pure by 05K5, n=0 trivial. Tested on k[eps] with G = O/eps, u iso, u = 0. Searches for 05PF/05K5/05UC/05IA/iso-locus found no duplicate, and the node is not a clause of the item. Batch-5: both listed citations are generic flat algebra or scheme theory (05IA universal injectivity; fp closed immersion iff finite-type ideal), not steps of the trace-formula or Poincare-duality proofs; accepted. No SGA source. Fixes in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-generic-rank-locus-representability.json: step 3 now proves pC is prime and contracts to p (flatness makes C/pC torsion-free over R/p, so it embeds in the fibre ring; E1-type gap); step 6 now cites lem-weil-pbc-quasi-coherent-finite-type-affine (a) for the finitely generated ideal on affine members (C1), added to uses; proof_deps unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGenericRankLocus",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_smooth_generic_rank_locus",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGenericRankLocus.lean",
+  "statement": "theorem exists_smooth_generic_rank_locus {X S : Scheme.{u}} [IsAffine X] [IsAffine S] (g : X ⟶ S) [Smooth g] [GeometricallyIrreducible g] (E : X.Modules) [E.IsQuasicoherent] [E.IsFinitePresentation] (r : ℕ) : ∃ (Sᵣ : Scheme.{u}) (i : Sᵣ ⟶ S), IsImmersion i ∧ LocallyOfFinitePresentation i ∧ QuasiCompact i ∧ QuasiSeparated i ∧ ∀ (T : Scheme.{u}) (h : T ⟶ S), (∀ (t : T) (ξ : (pullback.snd g h).fiber t), IsGenericPoint ξ Set.univ → ∃ W : (Limits.pullback g h).Opens, (pullback.snd g h).fiberι t ξ ∈ W ∧ Nonempty (((tensorPullback (pullback.fst g h)).obj E).over W ≅ SheafOfModules.free (ULift.{u} (Fin r)))) ↔ ∃! k : T ⟶ Sᵣ, k ≫ i = h",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18c4ca2d5",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, 12 stmt_dep lean records, Stacks flat.tex situation-free-at-generic-points + 05UC, module, report. Lean matches the node clause by clause: IsAffine X/S, Smooth g, GeometricallyIrreducible g (IrreducibleSpace fibres incl. nonempty), E IsQuasicoherent+IsFinitePresentation, r:ℕ, X_T=pullback g h, E_T=(tensorPullback fst).obj E (recorded def-pc-module-pullback), ∀ generic ξ of the fibre (unique since irreducible+sober), ambient open W ∋ fiberι t ξ with E_T.over W ≅ free (ULift (Fin r)), conclusion IsImmersion (=closed then open, isImmersion_iff_exists) ∧ LFP ∧ QC ∧ QS ∧ ∀ T h, P ↔ ∃! k, k≫i=h. No extra assumptions, no unbound universes; lean.statement verbatim; node unchanged vs live except the lean record. Downstream smoothGenericFreeRankCondition is the identical predicate (consumer module, import would cycle): no duplicate definition. No definitions, only sorry, docstrings with 05UC + blueprint + 7 proof steps; imports exist. Empty T and r=0 edge cases OK. No compile (no file changed). Minor stage-1 note: no stmt_dep for quasi-compact morphisms."
+ }
+}

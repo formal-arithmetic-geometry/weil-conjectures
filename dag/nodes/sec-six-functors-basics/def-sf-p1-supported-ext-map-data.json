@@ -1,0 +1,108 @@
+{
+ "id": "def-sf-p1-supported-ext-map-data",
+ "kind": "definition",
+ "title": "Canonical supported Ext representative on the projective-line product",
+ "statement": "Let \\(A\\) be a commutative ring, \\(N\\in\\mathbb N\\) with \\(N=0\\) in \\(A\\), and \\(S\\) a scheme. Write \\(P=\\mathbb P^1_S\\), \\(W=P\\times_S P\\), and \\(i:P\\to W\\) for the diagonal. Use the constant sheaf, finite Tate line and degree-zero complexes of [def-asd-ordinary-finite-p1-kummer-class], the ordinary derived direct image of [def-asd-ordinary-finite-p1-arrows], and the exact supported Ext realization of [def-asd-ordinary-supported-kummer-system]. For any \\(\\kappa\\in\\operatorname{Ext}^2(i_*A_P,\\mathcal L_W)\\), define supportedMap from \\(Ri_*A_P[0]\\) to \\(\\mathcal L_W[0][2]\\) as the canonical exact-direct-image/single-functor comparison followed by the derived morphism representing \\(\\kappa\\). This is the existing supportedExactDerivedMap specialized to \\(i\\), the constant sheaf on \\(P\\), and the finite Tate line on \\(W\\). Both endpoints are the fixed ordinaryFinitePushforward, ordinaryFiniteUnit and shifted ordinaryFiniteLine endpoints. No existence witness or integral identity is used; the construction, signature and irreducibility attribute are unchanged from its original module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal Ext realization before the two coordinate integrals; the existing supportedMap construction separated from integral transport data."
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-supported-kummer-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompRightDerivedFunctorIso",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "The exact construction is already supportedExactDerivedMap in the library; preserve its existing projective-line specialization verbatim."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.homEquiv",
+   "results": "CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.homEquiv_chgUniv",
+   "date": "2026-10-27",
+   "verdict": "Ext.homEquiv provides the realization. The library already packages the exact-direct-image comparison followed by it as supportedExactDerivedMap; retain its existing projective-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact direct image functor Ext class realization derived single functor comparison",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Abelian.Ext.mapExactFunctor_add, CategoryTheory.Functor.mapExtAddHom_apply, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.mapExtLinearMap_coe",
+   "date": "2026-10-27",
+   "verdict": "The exact construction is already supportedExactDerivedMap in the library; preserve its existing projective-line specialization verbatim."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfDiagonalKernelIntegrals",
+  "date": "2026-10-27",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The maps preceding the two coordinate integral computations: the supported diagonal morphism, the two section identifications, and inverse projection exchanges.",
+   "via": [
+    "def-sf-p1-integral-transport-data",
+    "lem-sf-p1-integral-transport",
+    "lem-sf-p1-coordinate-integrals",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1SupportedExtMapData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1SupportedExtMapData.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.supportedMap",
+  "statement": "def supportedMap (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)\n    (S : Scheme.{u})\n    (κ : Ext\n      ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n        (ordinaryFiniteConstant A (ProjectiveLine S)))\n      (Scheme.finiteEtaleTateLine\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2) :\n    (ordinaryFinitePushforward A (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n        (ordinaryFiniteUnit A (ProjectiveLine S)) ⟶\n      (ordinaryFiniteLine A N hA\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SfP1Transport.supportedMap"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fda89",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261026T222540-L-666663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fda89",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261026T222540-L-666663",
+  "kind": "interface",
+  "note": "independent cc review: SfDiagonalKernelIntegrals.triangles assembly vs lem-sf-diagonal-kernel-integral-triangles; moved defs vs clone (verbatim, unit reassociated per change record); new sorry statements vs proved CoordinateTrace.contractions and coherence; 3b 8/8 importers OK"
+ }
+}

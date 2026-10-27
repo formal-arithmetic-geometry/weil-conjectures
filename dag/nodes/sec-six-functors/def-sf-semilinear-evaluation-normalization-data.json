@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-semilinear-evaluation-normalization-data",
+ "kind": "definition",
+ "title": "The existing intrinsic evaluation and its normalized comparison data",
+ "statement": "For an inverse coefficient system and n, levelTower is actual evaluation at n followed by the constant strict diagram, and E is its exact localization. Retain the existing normalized ordinary and derived inverse-image, direct-image and open-extension comparisons, with their proved isomorphism properties. No coefficient lift is chosen. The compatibility of gamma with these comparisons remains the separate existing theorem gamma_evaluation.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Zheng, section 4.1 and 4.10; Stacks Project, Tags 015F and 0F7B: exact evaluation and adjunction mate comparisons."
+ },
+ "stmt_deps": [
+  "def-sp-semilinear-constant-ring-operations",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "proof": [
+  {
+   "text": "Retain the actual existing construction and section normalization. Its exactness and specified adjunction comparisons are the existing proofs from the listed dependencies; this refactoring changes only file ownership. The remaining gamma compatibility theorem is not used in the construction.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sf-exact-localization-inverse-mate",
+    "lem-sf-cbc-constant-tower-direct-image-normalization",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-sf-exact-localization-inverse-mate",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
+  "lem-pod-derived-exact-square-composition"
+ ],
+ "proof_origin": {
+  "by": "C2 stage 3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Zheng, section 4.1 and 4.10; Stacks Project, Tags 015F and 0F7B: exact evaluation and adjunction mate comparisons. File split only; all existing public construction bodies and theorem proofs in this support module remain verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct exact restriction of scalars and evaluation functors on module systems, then their derived functors",
+   "results": "8 hits: RestrictScalars, ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalarsObj",
+   "date": "2026-10-27",
+   "verdict": "The ordinary restriction-of-scalars ingredients exist. Retain the existing chosen system construction and its proved comparison API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.evaluation",
+   "results": "12 hits: CategoryTheory.evaluation, CategoryTheory.evaluation_obj_obj, CategoryTheory.Functor.constCompEvaluationObj, CategoryTheory.comp_evaluation",
+   "date": "2026-10-27",
+   "verdict": "Evaluation and its constant-diagram comparisons are already available; retain the existing semilinear realization."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*(preserves|[Aa]dditive)|restrictScalars",
+   "results": "25 hits: Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean, Mathlib/NumberTheory/FunctionField.lean, Mathlib/NumberTheory/FunctionField.lean",
+   "date": "2026-10-27",
+   "verdict": "The additive evaluation instance is present; no new mathematical construction is needed in this file split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits: intrinsic proper/open mate and pasting argument (parent step 2); The coefficient-comparison constructions already used in the intrinsic mate-pasting module, factored to satisfy the compile limit.",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SemilinearProperOpenEvaluationSupport",
+  "file": "lean/Sheaf/SixFunctors/SemilinearProperOpenEvaluationSupport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.levelTower",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.levelTower",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.E",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPushOrdinary_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPullInv",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPullInv_isIso",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalP",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalR",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalR_isIso",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalJInv",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalJInv_isIso",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalJ"
+  ],
+  "statement": "abbrev levelTower (n : ℕ) (X : Scheme.{u}) :\n    Modules C τ X ⥤ StrictTower.Towers (C n) X",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27",
+  "note": "Existing constructions moved without changing their public headers, bodies or proof terms; no new sorry and no replacement of the remaining gamma compatibility theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
+ }
+}

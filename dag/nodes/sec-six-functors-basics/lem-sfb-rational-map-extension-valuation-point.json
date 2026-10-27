@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-rational-map-extension-valuation-point",
+ "kind": "statement",
+ "title": "Extension to a neighbourhood of one valuation-stalk point",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $X,Y$ be $S$-schemes [def-weil-scheme-over-base]. Suppose that $X$ is integral [def-pc-integral-scheme] and Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact. Let $Y\\to S$ be proper [def-weil-proper-morphism], let $U\\subseteq X$ be a dense open subscheme [def-weil-open-immersion], and let $f:U\\to Y$ be an $S$-morphism. Let $x\\in X$ be a point for which $\\mathcal O_{X,x}$ is a valuation ring [def-trf-valuation-ring]: for every nonzero element $z$ of its fraction field, either $z$ or $z^{-1}$ belongs to $\\mathcal O_{X,x}$. There exist an open subscheme $V\\subseteq X$ containing $U$ and $x$ and an $S$-morphism $F:V\\to Y$ with $F|_U=f$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BX7 (morphisms-lemma-extend-across), integral Noetherian specialization; the point lies in the closure of U because U is dense. No assumption that all stalks are valuation rings, no field-base hypothesis, and no absolute separatedness hypothesis."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [def-pc-integral-scheme], $X$ is nonempty and irreducible; apply [lem-sc-scheme-sober] to the irreducible closed subset $X$ itself to obtain its unique generic point $\\eta$. Put $A=\\mathcal O_{X,x}$ and $K=\\mathcal O_{X,\\eta}$. By [lem-sc-integral-scheme-stalks-in-function-field], $K$ is a field of fractions of $A$ via the specialization homomorphism $\\rho_x:A\\to K$. Since $X$ is nonempty and $U$ is dense, $U$ is nonempty, and hence $\\eta\\in U$. Write $c_x:\\operatorname{Spec}A\\to X$ and $i_\\eta:\\operatorname{Spec}K\\to X$ for the canonical local-scheme morphisms of [lem-weil-pbc-spec-local-ring-canonical-morphism]. Put $j=\\operatorname{Spec}(\\rho_x):\\operatorname{Spec}K\\to\\operatorname{Spec}A$. Then $c_x\\circ j=i_\\eta$: on an affine neighbourhood $\\operatorname{Spec}R$ of $x$, both are induced by the germ map $R\\to K$, one directly and one through $R\\to A\\to K$. The generic morphism $i_\\eta$ factors through $U$; call this factor $i_U$. Set $h=f\\circ i_U$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX7, proof, unique generic point and fraction field before the valuative square; canonical maps as in schemes.tex Tag 01J6 (schemes-lemma-morphism-from-spec-local-ring), Equation 02NA"
+   }
+  },
+  {
+   "text": "Let $a_X:X\\to S$ and $a_Y:Y\\to S$ be the structure morphisms. The square with top $h:\\operatorname{Spec}K\\to Y$, left $j$, bottom $a_X\\circ c_x$, and right $a_Y$ commutes: $a_Yh=a_Xi_\\eta=a_Xc_xj$, because $f$ is over $S$. The ring $A$ is a valuation ring by hypothesis and $K$ is its fraction field by step 1. Apply [lemma-nagata-proper-valuative-criterion-existence-api] to proper $a_Y$. Obtain $t:\\operatorname{Spec}A\\to Y$ satisfying $t\\circ j=h$ and $a_Y\\circ t=a_X\\circ c_x$. Only existence is needed.",
+   "uses": [
+    "lemma-nagata-proper-valuative-criterion-existence-api"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX7, proof, valuative square, invoking Tag 0BX5 (morphisms-lemma-characterize-proper)"
+   }
+  },
+  {
+   "text": "Properness of $a_Y$ includes finite type, hence locally finite type, by [def-weil-proper-morphism]. The source $X$ is locally Noetherian by hypothesis. Apply [lem-sfb-local-ring-map-spread] with $T=X$, $Z=Y$, point $x$, and local-scheme map $t$ from step 2. It gives an open neighbourhood $W$ of $x$ and a morphism $g:W\\to Y$ such that $a_Yg=a_X|_W$ and $g\\circ c_{x,W}=t$, with $c_{x,W}$ the factorization of $c_x$ through $W$. In particular $g$ is an $S$-morphism.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-local-ring-map-spread"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX7, proof, spreading t by Tag 0BX6 (morphisms-lemma-morphism-defined-local-ring), case (2)(c)"
+   }
+  },
+  {
+   "text": "Put $D=U\\cap W$. It contains $\\eta$, since $W$ contains $x$ and is nonempty. Thus $D$ is integral: every nonempty affine open of $D$ is an affine open of $X$ with domain coordinate ring, as in [def-pc-integral-scheme]. In particular $D$ is reduced. Let $i_D:\\operatorname{Spec}K\\to D$ be the factor of $i_\\eta$. Its image is the generic point $\\eta$, hence is dense in $D$. On $\\operatorname{Spec}K$ the two maps $f|_D,g|_D$ agree: the first composite with $i_D$ is $h$, and the second is $g\\circ c_{x,W}\\circ j=t\\circ j=h$. Here $c_{x,W}j$ is the factor of $i_\\eta$ through $W$, by step 1 and uniqueness of factorization through an open immersion. Their composites to $S$ are both $a_X|_D$. Properness makes $a_Y$ separated by [def-weil-proper-morphism], so [lem-sfb-relative-separated-dominant-ext] applied to the reduced source $D$ and dense-image test morphism $i_D$ gives $f|_D=g|_D$. This uses relative separatedness of $Y\\to S$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-proper-morphism",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX7, proof, final closed-equalizer argument; schemes.tex Tag 01KM (schemes-lemma-where-are-they-equal) in the relative dominant-morphism form"
+   }
+  },
+  {
+   "text": "Take $V=U\\cup W$. By [lem-weil-pbc-scheme-morphism-gluing], the equality on $D$ gives a morphism $F:V\\to Y$ restricting to $f$ on $U$ and $g$ on $W$. The two morphisms $a_YF$ and $a_X|_V$ agree on both members $U,W$ of this open cover, so the uniqueness clause of the same gluing node gives $a_YF=a_X|_V$. Therefore $F$ is over $S$, $F|_U=f$, and $V$ contains $U$ and $x$, as required.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX7, proof, final sentence U union W; schemes.tex Tag 01JB (schemes-lemma-glue) and the morphism gluing property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "def-weil-proper-morphism",
+  "lem-sfb-local-ring-map-spread",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BX7 (morphisms-lemma-extend-across), proof, integral Noetherian case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism on a dense open of a Noetherian scheme to a proper target extends across a point whose local ring is a valuation ring",
+   "results": "{\"t\": \"2026-10-22T05:08:43Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism on a dense open of a Noetherian scheme to a proper target extends across a point whose local ring is a valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.iff\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\"], \"digest\": \"df1b35278c91e7a9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion hits extend over Spec of the stalk, while PartialMap.ofFromSpecStalk and its domain lemma spread an already supplied stalk morphism; none alone gives an extension on an open containing the whole original U over an arbitrary base. The alternative domain phrasing found no such theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ValuativeCriterion\", \"Existence\"",
+   "results": "{\"t\": \"2026-10-22T05:08:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"ValuativeCriterion\\\", \\\"Existence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.instIsLocalHomCarrierRingHomHomHomCommRingCat\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\"], \"digest\": \"023cd7bad2f1aca0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion hits extend over Spec of the stalk, while PartialMap.ofFromSpecStalk and its domain lemma spread an already supplied stalk morphism; none alone gives an extension on an open containing the whole original U over an arbitrary base. The alternative domain phrasing found no such theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*across|valuation.*stalk|stalk.*valuation|ofFromSpecStalk",
+   "results": "{\"t\": \"2026-10-22T05:08:40Z\", \"tool\": \"grep\", \"query\": \"extend.*across|valuation.*stalk|stalk.*valuation|ofFromSpecStalk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"2dfc05c19c206ff0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion hits extend over Spec of the stalk, while PartialMap.ofFromSpecStalk and its domain lemma spread an already supplied stalk morphism; none alone gives an extension on an open containing the whole original U over an arbitrary base. The alternative domain phrasing found no such theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a rational map to a proper scheme across a valuation ring point",
+   "results": "{\"t\": \"2026-10-22T05:08:41Z\", \"tool\": \"leansearch\", \"query\": \"Extend a rational map to a proper scheme across a valuation ring point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"ValuativeExtension.mk\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"ValuativeExtension\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"Valuation.HasExtension.ofComapInteger\"], \"digest\": \"6f8cc0a0e7223bc5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion hits extend over Spec of the stalk, while PartialMap.ofFromSpecStalk and its domain lemma spread an already supplied stalk morphism; none alone gives an extension on an open containing the whole original U over an arbitrary base. The alternative domain phrasing found no such theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The domain of definition of a rational map into a proper scheme contains every point with valuation local ring",
+   "results": "{\"t\": \"2026-10-22T05:08:42Z\", \"tool\": \"leanfinder\", \"query\": \"The domain of definition of a rational map into a proper scheme contains every point with valuation local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\"], \"digest\": \"cfa44dae70dd99ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion hits extend over Spec of the stalk, while PartialMap.ofFromSpecStalk and its domain lemma spread an already supplied stalk morphism; none alone gives an extension on an open containing the whole original U over an arbitrary base. The alternative domain phrasing found no such theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map from an integral Noetherian scheme to a proper scheme over any base extends to an open containing its domain and a point with valuation local ring",
+   "results": "{\"t\": \"2026-10-22T05:30:15Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map from an integral Noetherian scheme to a proper scheme over any base extends to an open containing its domain and a point with valuation local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"44bc5edcf6f29395\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: valuative-criterion declarations give the stalk lift, and spreading/partial-map declarations give only a neighbourhood. The whole original U must still be retained by relative separatedness and gluing. RationalMap.toPartialMap requires absolute separatedness, unavailable here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ValuativeCriterion\"",
+   "results": "{\"t\": \"2026-10-22T05:30:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"ValuativeCriterion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\"], \"digest\": \"5d68585847e23d64\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: valuative-criterion declarations give the stalk lift, and spreading/partial-map declarations give only a neighbourhood. The whole original U must still be retained by relative separatedness and gluing. RationalMap.toPartialMap requires absolute separatedness, unavailable here."
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*across|valuation.*stalk|stalk.*valuation|ofFromSpecStalk",
+   "results": "{\"t\": \"2026-10-22T05:30:24Z\", \"tool\": \"grep\", \"query\": \"extend.*across|valuation.*stalk|stalk.*valuation|ofFromSpecStalk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"436d091abc315c2b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: valuative-criterion declarations give the stalk lift, and spreading/partial-map declarations give only a neighbourhood. The whole original U must still be retained by relative separatedness and gluing. RationalMap.toPartialMap requires absolute separatedness, unavailable here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a morphism on an open subset to a neighbourhood of a point with valuation local ring when the target is proper over a base",
+   "results": "{\"t\": \"2026-10-22T05:30:25Z\", \"tool\": \"leansearch\", \"query\": \"Extend a morphism on an open subset to a neighbourhood of a point with valuation local ring when the target is proper over a base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"ValuativeExtension\", \"ValuativeExtension.mk\", \"ValuativeExtension.rec\", \"ValuativeExtension.recOn\", \"ValuativeExtension.casesOn\", \"Valuation.HasExtension.ofComapInteger\", \"Valuation.HasExtension.instIsLocalHomValuationInteger\"], \"digest\": \"f30ee3c877c996c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: valuative-criterion declarations give the stalk lift, and spreading/partial-map declarations give only a neighbourhood. The whole original U must still be retained by relative separatedness and gluing. RationalMap.toPartialMap requires absolute separatedness, unavailable here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The domain of definition of a rational map to a proper relative scheme contains any point whose stalk is a valuation ring",
+   "results": "{\"t\": \"2026-10-22T05:31:01Z\", \"tool\": \"leanfinder\", \"query\": \"The domain of definition of a rational map to a proper relative scheme contains any point whose stalk is a valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\"], \"digest\": \"522a4360422ec553\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: valuative-criterion declarations give the stalk lift, and spreading/partial-map declarations give only a neighbourhood. The whole original U must still be retained by relative separatedness and gluing. RationalMap.toPartialMap requires absolute separatedness, unavailable here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-surface-rational-map-point-resolution",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), through the alteration and stable-pointed-curve rigidity chain recorded in blueprint.from.via; Stacks Tag 0C5H proof, first sentence: extend the rational map across every codimension-one point before resolving the remaining finite set of points.",
+   "via": [
+    "lem-sfb-surface-rational-map-point-resolution",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-rational-map-extension-valuation-point",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0BX7 for the integral Noetherian case. Reused the fraction-field, canonical local-scheme, valuative lifting, Noetherian spreading and gluing nodes. Added one exact Mathlib leaf for relative separated dominant-map detection. Kept the arbitrary base and original full open U; no absolute separatedness and no valuation assumptions away from x. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), through the alteration and stable-pointed-curve rigidity chain recorded in blueprint.from.via; Stacks Tag 0C5H proof, first sentence: extend the rational map across every codimension-one point before resolving the remaining finite set of points. The five steps implement the extension across one codimension-one valuation-stalk point needed before the finite-point resolution argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic tool: its canonical maps and affine localization formula construct the valuative square. The current unit has no replacement for this scheme-theoretic construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-df97c5832",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-df97c5832 (reviewer sub-agent of L); spot-checked: I checked the item against Stacks morphisms.tex 0BX7 (lines 10424-10479). The statement and stmt_deps are byte-identical to live (live is still unsplit), and the item is the integral Noetherian case of 0BX7. The source proof's 'shrink X, detail omitted' step is avoided: the proof works on all of X and keeps the whole of U by gluing in step 5. Step 1: sober plus the stalks-in-function-field node (clause 2, and η in every nonempty open) make K = Frac(A) via rho_x. The affine formula of the canonical-morphism node gives c_x∘j = i_η, and its clause (1) factors i_η through U. Step 2: the Nagata existence api (Lean-closed) applies to the commuting square a_Y h = a_X c_x j. Its blueprint_update (universally-closed iff) still implies this consequence through def-weil-proper-morphism; this is a note, not a fault. Step 3: the hypotheses of lem-sfb-local-ring-map-spread hold (X locally Noetherian, a_Y locally of finite type), and its output W, g is what the step takes. Step 4: D = U∩W is integral and reduced, Spec K→D has dense image {η}, and both maps compose to h (an open immersion is a monomorphism). The new leaf then uses only the relative separatedness of Y→S. Step 5: gluing existence and uniqueness show F is over S. Edge cases checked: x in U, x = η, an arbitrary non-separated S. The new node lem-sfb-relative-separated-dominant-ext is an exact match of Mathlib AlgebraicGeometry.ext_of_isDominant_of_isSeparated, Separated.lean:295-298 (IsDominant = DenseRange, UnderlyingMap.lean:217); it is self-contained and passes B1-B7. Small cases: dual numbers and a non-dense test map show both hypotheses are needed. The closest existing node is lemma-nagata-ext-scheme-theoretically-dominant-separated. It is the scheme-theoretic analogue, off-unit and not closed, so it is not a duplicate. The tool use of lem-weil-pbc-spec-local-ring-canonical-morphism (sk-thm-p1) is accepted. No SGA is cited. The item and its citer are not on the dropped list. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalMapExtensionValuationPoint",
+  "declaration": "AlgebraicGeometry.exists_extension_at_valuation_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalMapExtensionValuationPoint.lean",
+  "statement": "theorem exists_extension_at_valuation_stalk (S X Y : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (a : X ⟶ S) (b : Y ⟶ S) [IsProper b] (U : X.Opens) (hU : Dense (U : Set X)) (f : U.toScheme ⟶ Y) (hf : f ≫ b = U.ι ≫ a) (x : X) [ValuationRing (X.presheaf.stalk x)] : ∃ (V : X.Opens) (hUV : U ≤ V), x ∈ V ∧ ∃ F : V.toScheme ⟶ Y, F ≫ b = V.ι ≫ a ∧ X.homOfLE hUV ≫ F = f",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22b3926c6",
+  "group": "O1",
+  "result": "pass",
+  "note": "Statement matches Stacks 0BX7 (integral Noetherian case) and the node clause by clause: S X Y : Scheme.{u}; explicit structure maps a, b with S-morphism given as f ≫ b = U.ι ≫ a (Hom.isOver_iff form); [IsIntegral X]; [IsNoetherian X] = locally Noetherian + compact; [IsProper b] only, no absolute separatedness; dense U : X.Opens; [ValuationRing (X.presheaf.stalk x)] at x only, IsDomain instance from integrality via FunctionField; conclusion ∃ V ≥ U, x ∈ V, ∃ F over S with homOfLE ≫ F = f, no extra uniqueness. Node changes only the lean key; lean.statement verbatim in file; sorry only, no defs; source and blueprint docstrings with the 5 proof steps. All stmt_deps are Mathlib leaves (valuation-ring and scheme-over-base have mathlib_match but no lean record, acceptable). No duplicate in Sheaf/WeilConjectures/Mathlib; citer SurfaceRationalMapPointResolution uses the same conventions. Not in the route-pivot dropped list. Edge cases x∈U, generic x, arbitrary S checked. Private proof-only imports advisory. No recompile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261023T131951-L-2177335",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_extension_at_valuation_stalk"
+  ],
+  "sorry_after": []
+ }
+}

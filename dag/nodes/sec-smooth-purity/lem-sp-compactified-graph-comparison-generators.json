@@ -1,0 +1,226 @@
+{
+ "id": "lem-sp-compactified-graph-comparison-generators",
+ "kind": "statement",
+ "title": "Compatibility of a compactified graph map with a generator-preserving site comparison",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let A,e,c,F,adj be as in the pro-etale compactification graph construction: A is a finite commutative ring, e:U -> T separated etale of finite type, c=(i:U -> Z,p:Z -> T) a compactification, and adj:F left adjoint to pro-etale restriction along e. Let C_X and R_X be the canonical site-comparison inverse and direct images [def-weil-pbc-site-comparison-morphism]. Suppose sigma:e_!^et followed by C_T is isomorphic to C_U followed by F and its action on every raw lift generator is the pro-etale adjunction-unit generator of eta_U(m), after the comparison unit on T. Let G:F -> i_!^proet followed by p_*^proet have value the open-extension unit on the clopen graph specified by both projections, and zero on every complementary open, for every input sheaf and lift generator. Then for every etale sheaf M, sigma_M followed by G_(C_U M) equals C_T(G_M^et) followed by d_(i_!^et M) followed by p_*^proet(o_M). Here G^et is the existing canonical etaleCompactificationGraphMap [def-f7-etale-compactification-graph-map], o is the canonical open comparison [lem-cbc-proetale-extension-zero-comparison], and d is exactly mateEquiv of the inverse of the canonical comparisonCoefficientPullbackIso [def-weil-pbc-adjunction-mate, lem-weil-pbc-comparison-pullback]. No invertibility of d is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-compactification",
+  "def-weil-pbc-proetale-site",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-f7-etale-compactification-graph-map",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-etale-sum-extension"
+ ],
+ "proof": [
+  {
+   "text": "We compute the mate $d$ before using graphs. Direct-image evaluation [def-weil-pbc-direct-image, def-weil-proetale-inverse-image, def-weil-pbc-site-comparison-morphism] identifies $R_Tp_*^{\\mathrm{proet}}=p_*^{\\mathrm{et}}R_{\\overline U}$: both evaluate a pro-etale sheaf on $\\overline U\\times_TW$ for etale $W$. The canonical $a^0:C_{\\overline U}p_{\\mathrm{et}}^*\\cong p_{\\mathrm{proet}}^*C_T$ is the left-adjoint comparison of this identity, as in [lem-weil-pbc-comparison-pullback]. By the defining mate formula [def-weil-pbc-adjunction-mate], the transpose of $d_{p,F}$ under $p_{\\mathrm{proet}}^*\\dashv p_*^{\\mathrm{proet}}$ is $C_{\\overline U}(\\varepsilon^{\\mathrm{et}}_{p,F})(a^0_{p_*^{\\mathrm{et}}F})^{-1}$. By the normalization of $a^0$ as conjugate of the identity of right adjoints [lem-weil-pbc-conjugate-iso-unit-equation, def-weil-pbc-composite-adjunction], for every $X$ one has $R_T(\\eta^{\\mathrm{proet}}_{p,C_TX})\\eta_{T,X}=p_*^{\\mathrm{et}}R_{\\overline U}(a^0_X)\\,p_*^{\\mathrm{et}}(\\eta_{\\overline U,p_{\\mathrm{et}}^*X})\\,\\eta^{\\mathrm{et}}_{p,X}$. Expand $d_{p,F}=p_*^{\\mathrm{proet}}(C_{\\overline U}(\\varepsilon^{\\mathrm{et}}_{p,F})(a^0)^{-1})\\eta^{\\mathrm{proet}}_{p,C_Tp_*^{\\mathrm{et}}F}$ and apply this with $X=p_*^{\\mathrm{et}}F$: the factors $a^0$ and $(a^0)^{-1}$ cancel, so $R_T(d_{p,F})\\eta_{T,p_*^{\\mathrm{et}}F}=p_*^{\\mathrm{et}}(R_{\\overline U}C_{\\overline U}(\\varepsilon^{\\mathrm{et}}_{p,F})\\eta_{\\overline U,p^*p_*F})\\eta^{\\mathrm{et}}_{p,p_*F}$. Naturality of $\\eta_{\\overline U}$ rewrites this as $p_*^{\\mathrm{et}}(\\eta_{\\overline U,F})\\,p_*^{\\mathrm{et}}(\\varepsilon^{\\mathrm{et}}_{p,F})\\eta^{\\mathrm{et}}_{p,p_*F}$, and the $p$ triangle identity removes the last two factors. Hence\n$$R_T(d_{p,F})\\eta_{T,p_*^{\\mathrm{et}}F}=p_*^{\\mathrm{et}}(\\eta_{\\overline U,F}).$$\nThis computes the specified counit mate, with no invertibility assumption on $d$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+   }
+  },
+  {
+   "text": "The canonical etale graph map is defined by an etale base-change factor, a map q^* -> s_! for the clopen graph s, and the unit-preserving left-adjoint comparison s_! v_! = i_!. The base-change factor keeps the lift. The middle map is the graph inverse-image unit followed by the inverse of s_! -> s_*, so on a section it is the unique extension of m by zero off s. The last comparison preserves that value by its adjunction unit equation. Thus the formula in the existing definition has precisely the graph values m and zero used in Tag 0F4L.",
+   "uses": [
+    "def-f7-etale-compactification-graph-map",
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+   }
+  },
+  {
+   "text": "For $F=j_!^{\\mathrm{et}}M$, set $h_M=R_{\\overline U}(o_M)\\eta_{\\overline U,F}:F\\to R_{\\overline U}j_!^{\\mathrm{proet}}C_UM$. The open unit normalization [lem-sf-open-comparison-unit-normalization], together with localized comparison [lem-weil-pbc-localize-ringed-site-morphism], says that the restriction of $h_M$ to $U$, under $j^*j_!M\\cong M$ on both sites, is precisely $\\eta_{U,M}$. Indeed [lem-pur-comparison-pullback-open-unit] identifies the restriction of $\\eta_{\\overline U,F}$ with the comparison unit on $F|_U$; then the open-unit equation for $o$ identifies that restricted map with $\\eta_{U,M}$, using naturality in the open-unit isomorphism $M\\cong j^*F$. The pro-etale open unit is an isomorphism by [lem-exc-proetale-open-unit]. Now take a raw generator $(W,t,m)$ and its etale graph extension $z=G_M^{\\mathrm{et}}(t,m)$ on $H=\\overline U\\times_TW$. Restricting $h_M(z)$ to $\\Gamma_t(W)$ gives $\\eta_{U,M}(m)$ by the restriction equation, since the graph factors through $U$. Restricting to $D=H\\setminus\\Gamma_t(W)$ gives zero by naturality and additivity of $h_M$. The target is a sheaf, so its disjoint-open-cover axiom identifies $h_M(z)$ with the unique pro-etale graph extension of $\\eta_{U,M}(m)$.",
+   "uses": [
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-pur-comparison-pullback-open-unit",
+    "lem-exc-proetale-open-unit",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+   }
+  },
+  {
+   "text": "Transpose both sides under C_T left adjoint to R_T. The assumed generator equation for sigma identifies the left transpose on (b,m) with the graph extension of eta_U(m). Naturality of the comparison unit and the mate identity in Step 1 identify the right transpose with the etale graph map followed by p_*(R_Z(o) eta_Z). Steps 2 and 3 give the same graph and complementary values, so disjoint-open sheaf separation identifies the sections. Transpose again under the etale sum adjunction: equality on every b and m is equality of the resulting sheaf maps. The two injective adjunction Hom bijections therefore identify the original maps. This is natural in the input sheaf.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-f7-etale-compactification-graph-map",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-pur-comparison-pullback-open-unit",
+  "lem-exc-proetale-open-unit",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale pro etale site comparison commutes with a graph supported section extended by zero under the adjunction counit mate",
+   "results": "{\"t\": \"2026-10-26T08:08:09Z\", \"tool\": \"leansearch\", \"query\": \"Etale pro etale site comparison commutes with a graph supported section extended by zero under the adjunction counit mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CompHausLike.LocallyConstant.counit\", \"CategoryTheory.mateEquiv\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.Equivalence.sheafCongr.counitIso\"], \"digest\": \"f2105c37e09018ac\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the results supply generic gluing, adjunction or sheafification tools, not this normalized compactification-graph assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-26T08:08:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the results supply generic gluing, adjunction or sheafification tools, not this normalized compactification-graph assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "compactifi.*graph|graph.*compactifi",
+   "results": "{\"t\": \"2026-10-26T08:08:10Z\", \"tool\": \"grep\", \"query\": \"compactifi.*graph|graph.*compactifi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the results supply generic gluing, adjunction or sheafification tools, not this normalized compactification-graph assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleProEtaleGraphSheafSquare",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "det-sp-tower-gluing, Local pairs and Levels: same-lift site comparison for the etale fibre sums; isolates Steps 4-6 of lem-sp-et-proet-graph-sheaf-square.",
+   "via": [
+    "lem-sp-et-proet-graph-sheaf-square",
+    "lem-sp-varying-ring-graph-summand",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactifiedGraphComparisonGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactifiedGraphComparisonGenerators.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.compactified_graph_comparison_of_generators",
+  "statement": "theorem compactified_graph_comparison_of_generators\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] [IsSeparated e]\n    [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e)\n    (F : Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A) ⥤\n      Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))\n    (adj : F ⊣ localizationRestriction (ModuleCat.{u + 1} A) e inferInstance)\n    (σ : Etale.etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance ⋙\n      comparisonUpperStar (ModuleCat.{u + 1} A) T ≅\n        comparisonUpperStar (ModuleCat.{u + 1} A) U ⋙ F)\n    (hσ : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (b : U.Etale)\n      (m : M.obj.obj (op b)),\n      (((comparisonLowerStar (ModuleCat.{u + 1} A) T).map\n        (σ.hom.app M)).hom.app\n          (op ((MorphismProperty.Over.map (P := @Etale) ⊤\n            (inferInstance : Etale e)).obj b)))\n        ((((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app\n          ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).obj M)).hom.app\n            (op ((MorphismProperty.Over.map (P := @Etale) ⊤\n              (inferInstance : Etale e)).obj b)))\n          ((((Etale.etaleLowerShriekAdjunction (ModuleCat.{u + 1} A) e\n            inferInstance).unit.app M).hom.app (op b)) m)) =\n        ((adj.unit.app\n          ((comparisonUpperStar (ModuleCat.{u + 1} A) U).obj M)).hom.app\n            (op ((Scheme.toProEt U).obj b)))\n          ((((comparisonAdjunction (ModuleCat.{u + 1} A) U).unit.app M).hom.app (op b)) m))\n    (G : F ⟶\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g)\n    (hG :\n  ∀ (M : Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A)) (b : U.ProEt),\n    ∃ γ :\n      (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n        (inferInstance : WeaklyEtale c.i)).obj b ⟶\n      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ c.g).obj\n        ((MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n          (inferInstance : WeaklyEtale e)).obj b),\n      γ.left ≫ pullback.fst (b.hom ≫ e) c.g = 𝟙 b.left ∧\n      γ.left ≫ pullback.snd (b.hom ≫ e) c.g = b.hom ≫ c.i ∧\n      IsOpenImmersion γ.left ∧ IsClosedImmersion γ.left ∧\n      ∀ m : M.obj.obj (op b),\n        (((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).obj M).obj.map γ.op)\n          (((G.app M).hom.app\n            (op ((MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n              (inferInstance : WeaklyEtale e)).obj b)))\n            ((adj.unit.app M).hom.app (op b) m)) =\n          (((openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) c.i).unit.app M).hom.app\n            (op b) m) ∧\n        ∀ (D : c.Z.ProEt)\n          (k : D ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ c.g).obj\n            ((MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n              (inferInstance : WeaklyEtale e)).obj b)),\n          IsOpenImmersion k.left → Set.range k.left = (Set.range γ.left)ᶜ →\n          (((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).obj M).obj.map k.op)\n            (((G.app M).hom.app\n              (op ((MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n                (inferInstance : WeaklyEtale e)).obj b)))\n              ((adj.unit.app M).hom.app (op b) m)) = 0) :\n    ∀ M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A),\n        σ.hom.app M ≫\n          G.app ((comparisonUpperStar (ModuleCat.{u + 1} A) U).obj M) =\n        (comparisonUpperStar (ModuleCat.{u + 1} A) T).map\n            ((Etale.etaleCompactificationGraphMap A e c).app M) ≫\n          ((mateEquiv\n            (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g)\n            (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g)\n            (TwoSquare.mk (comparisonUpperStar (ModuleCat.{u + 1} A) T)\n              (Etale.upperStar (ModuleCat.{u + 1} A) c.g)\n              (upperStar (ModuleCat.{u + 1} A) c.g)\n              (comparisonUpperStar (ModuleCat.{u + 1} A) c.Z)\n              (comparisonCoefficientPullbackIso (ModuleCat.{u + 1} A) c.g).inv)).natTrans).app\n            ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).obj M) ≫\n          (lowerStar (ModuleCat.{u + 1} A) c.g).map\n            ((openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A)\n              c.i).hom.app M)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sp-compactified-graph-comparison-generators",
+  "worker": "stage3",
+  "summary": "Compatibility of a compactified graph map with a generator-preserving site comparison",
+  "blueprint": "det-sp-tower-gluing, Local pairs and Levels: same-lift site comparison for the etale fibre sums; isolates Steps 4-6 of lem-sp-et-proet-graph-sheaf-square.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Generic site-comparison/open-unit tool already used by the parent; fixes the actual unit and mate values on the graph."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic site-comparison/open-unit tool already used by the parent; fixes the actual unit and mate values on the graph."
+   },
+   {
+    "node": "lem-pur-comparison-pullback-open-unit",
+    "why": "Generic site-comparison/open-unit tool already used by the parent; fixes the actual unit and mate values on the graph."
+   },
+   {
+    "node": "lem-exc-proetale-open-unit",
+    "why": "Generic site-comparison/open-unit tool already used by the parent; fixes the actual unit and mate values on the graph."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic site-comparison/open-unit tool already used by the parent; fixes the actual unit and mate values on the graph."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic site-comparison/open-unit tool already used by the parent; fixes the actual unit and mate values on the graph."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-unit-iso",
+    "why": "Generic site-comparison/open-unit tool already used by the parent; fixes the actual unit and mate values on the graph."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T091719-L-3367426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T091719-L-3367426",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

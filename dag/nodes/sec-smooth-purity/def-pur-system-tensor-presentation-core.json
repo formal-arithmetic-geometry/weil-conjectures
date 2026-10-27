@@ -1,0 +1,125 @@
+{
+ "id": "def-pur-system-tensor-presentation-core",
+ "kind": "definition",
+ "title": "Normalized strict-system presentation interfaces",
+ "statement": "For the prime, coefficient extension and pro-etale sequence categories of [def-pur-system-tensor-mate-arrows] and semilinear data of [lem-coef-semilinear-derived-sections], retain the identity reindexing, comparison with geometric inverse-image coefficients and the section-normalized open localization. Define a core comparison between any two normalized tensor-operation packages o and d: natural pullback, open-extension and tensor isomorphisms, the identity signed-total tensor-model equation for every K-flat pair, proper and open unit and counit equations, the canonical pullback-composition equation, and the tensor-pullback mu equation. It omits the projection, inverse-open-tensor and forward-open-tensor equations. Full comparisons extend the core and add those three equations; the identity-reindexing functor factors are suppressed definitionally. These are data interfaces only; no existence is asserted here. The slice functor is [def-pur-proetale-slice-to]; the valuation coefficients and universe transport are [def-weil-l-adic-coefficient-extension] and [def-weil-size-convention].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56 equation-projection-formula-map; the agent presentation comparison Steps 1--9 in lem-pur-system-tensor-presentation-identification. These tags specify the mate word, not the concrete presentation theorem."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-coef-semilinear-derived-sections",
+  "def-pur-system-tensor-mate-arrows",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proper-open-projection-mate",
+  "def-exchange-projection",
+  "def-pur-proetale-slice-to"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of left adjoints normalized by adjunction unit and counit",
+   "results": "Adjunction.homEquiv_leftAdjointUniq_hom_app and unit_leftAdjointUniq_hom_app supply adjoint normalization; no full strict-system presentation theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the adjunction uniqueness API; the concrete K-flat and geometric realization steps are absent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits, including leftAdjointUniq, unit_leftAdjointUniq_hom_app, leftAdjointUniq_hom_app_counit and transitivity.",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction comparisons exist, but do not package these concrete systems and tensor models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two normalized choices of derived tensor and pullback operations on sheaves have a canonical comparison preserving adjunction units and K-flat models",
+   "results": "8 hits concerning sheaf module pullback, pullbackPushforwardAdjunction and pullbackComp; no comparison of the complete system models.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorModelIso|TensorComparisonModel; TensorPresentationComparison|SemilinearPresentationComparison",
+   "results": "Mathlib grep via msearch: zero hits. Project rg finds the definitions only in the item; SemilinearSystemModels and CochainTensorModelRigidity provide representative interfaces and rigidity. Blueprint search for tensor presentation: zero matches.",
+   "date": "2026-10-26",
+   "verdict": "Existing interfaces are reused; the two strictly partial existence steps have no separate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemTensorPresentationIdentification",
+  "date": "2026-10-26",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Proof of prop-pur-adic-reconstruction-trace-coherence, the projection-composition equality used in the arbitrary-input mate calculation; the proper/open tensor interchange in Step 3 of its child lem-pur-system-level-projection-formula-coherence. Comparison of the simultaneous coefficient categories and tensor/projection/open factors (old Steps 1 and 3). Strict-system presentation comparison: Normalized strict-system presentation interfaces.",
+   "via": [
+    "lem-pur-system-tensor-presentation-identification",
+    "lem-pur-system-clopen-tensor-compatibility",
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemTensorPresentationData",
+  "file": "lean/Sheaf/Paper/SystemTensorPresentationData.lean",
+  "declaration": "WeilConjectures.SystemTensorMate.TensorPresentationCore",
+  "statement": "structure TensorPresentationCore (o d : TensorOperations l E)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.SystemTensorMate.presentationReindexing",
+   "WeilConjectures.SystemTensorMate.presentationDirectComparison",
+   "WeilConjectures.SystemTensorMate.TensorPresentationComparison",
+   "WeilConjectures.SystemTensorMate.PresentationSections",
+   "WeilConjectures.SystemTensorMate.GeometricPresentationComparison",
+   "WeilConjectures.SystemTensorMate.OpenPresentationComparison",
+   "WeilConjectures.SystemTensorMate.SemilinearPresentationComparison",
+   "WeilConjectures.SystemTensorMate.TensorPresentationCore"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0baea",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261025T205953-L-3430927",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0baea",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261025T205953-L-3430927",
+  "kind": "interface",
+  "note": "independent cc review: item tensorPresentationIdentification + extracted SystemTensorPresentationData interfaces + core/realization split statements against node lem-pur-system-tensor-presentation-identification, clone version and TensorOperations (SystemTensorMateArrows)"
+ }
+}

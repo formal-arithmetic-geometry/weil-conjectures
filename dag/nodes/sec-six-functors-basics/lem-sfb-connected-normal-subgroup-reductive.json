@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-connected-normal-subgroup-reductive",
+ "kind": "statement",
+ "title": "Connected smooth normal subgroups of reductive groups are reductive",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a reductive affine $F$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], where reductivity has the meaning of [def-sfb-reductive-torus-centralizer-terminology]: $G$ is smooth and connected and has no nontrivial smooth connected closed normal unipotent subgroup. Here smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme], and unipotent means that in a faithful finite-dimensional matrix representation every geometric point $u$ satisfies $(u-I)^n=0$ for some $n\\geq1$. Let $M\\subseteq G$ be a smooth connected closed normal subgroup scheme [def-sc-group-scheme-subgroup]. Then $M$ is reductive. The trivial subgroup is included; no characteristic-zero or semisimplicity hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 21.53, printed p.441: every connected normal subgroup variety of a reductive group is reductive. Group variety means smooth algebraic group; smoothness of M is retained explicitly."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}A$. By [lem-weil-pbc-lft-affine-pairs], $A$ is a finitely generated $F$-algebra. The closed immersion $M\\hookrightarrow G$ gives $M=\\operatorname{Spec}(A/I)$ by [def-weil-closed-immersion]. Images of generators of $A$ generate $A/I$, so $M$ is affine of finite type by [def-weil-finite-type-morphism]. It is smooth and connected by hypothesis. Apply [lem-sfb-unipotent-radical-existence] to $M$, obtaining its largest smooth connected closed normal unipotent subgroup $U$. The composite $U\\hookrightarrow M\\hookrightarrow G$ is a closed immersion: its coordinate map is a composite of surjections. Hence $U$ is also affine of finite type as a closed subgroup of $G$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-unipotent-radical-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.46, p.135; affine closed-subscheme description: Stacks Tag 01QO, morphisms.tex lemma-characterize-closed-immersion."
+   }
+  },
+  {
+   "text": "Fix $g\\in G(F)$. Normality of $M$ in [def-sc-group-scheme-subgroup] makes $c_g:m\\mapsto gmg^{-1}$ an $F$-group-scheme automorphism of $M$, with inverse $c_{g^{-1}}$. Its image subgroup $V=c_g(U)$ is isomorphic to $U$; it is closed, smooth and connected by the definitions [def-weil-closed-immersion, def-sbc-smooth-morphisms, def-weil-connected-scheme]. For every $F$-algebra $B$, normality follows from $m c_g(u)m^{-1}=c_g(c_g^{-1}(m)u c_g^{-1}(m)^{-1})$ for $m\\in M(B)$ and $u\\in U(B)$. If $r$ is a faithful unipotent representation of $U$, then $r\\circ(c_g|_U)^{-1}$ is one of $V$, with the identical matrices over every algebraically closed extension field [def-sfb-solvable-group-structure]. The largest-subgroup assertion of [lem-sfb-unipotent-radical-existence] gives $c_g(U)\\subseteq U$ as subgroup schemes. Apply the same assertion to $g^{-1}$ and conjugate back to get $U\\subseteq c_g(U)$. Thus $c_g(U)=U$ as closed subgroup schemes of $G$.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "def-weil-closed-immersion",
+    "def-sbc-smooth-morphisms",
+    "def-weil-connected-scheme",
+    "def-sfb-solvable-group-structure",
+    "lem-sfb-unipotent-radical-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.46, p.135: largest-subgroup uniqueness; Corollary 1.85 and Proposition 1.90, pp.32--33: conjugation stability before the smooth-ambient normality test."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-ambient-normality-geometric] with $k=F$, $J=G$ and $N=U$, choosing $F$ itself as algebraic closure. The ambient group $G$ is smooth and affine of finite type, $U$ is a closed affine finite-type subgroup by step 1, and step 2 establishes its scheme-theoretic stability under every $g\\in G(F)$. The cited statement therefore gives normality of $U$ in $G$ on all commutative $F$-algebras, including nonreduced algebras.",
+   "uses": [
+    "lem-sfb-smooth-ambient-normality-geometric"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.85, printed p.32 (the criterion used in Proposition 1.90, p.33)."
+   }
+  },
+  {
+   "text": "Now $U\\subseteq G$ is smooth, connected, closed, normal and unipotent. The definition [def-sfb-reductive-torus-centralizer-terminology] is stated after extension to an algebraic closure $\\iota:F\\to\\overline F$ [def-weil-algebraic-closure]. Since $F$ is algebraically closed, every element of $\\overline F$ is a root of a polynomial over $\\iota(F)$, which splits over $\\iota(F)$; so $\\iota$ is an isomorphism, and extension along it identifies $G_{\\overline F},M_{\\overline F},U_{\\overline F}$ with $G,M,U$, preserving closed immersions, normality, smoothness, connectedness and the matrices of faithful representations. Reductivity of $G$ therefore forces $U=1$. For every smooth connected closed normal unipotent subgroup $W\\subseteq M_{\\overline F}\\cong M$, the containment assertion of [lem-sfb-unipotent-radical-existence] gives $W\\subseteq U=1$, so $W=1$. Together with the given smoothness, connectedness of $M_{\\overline F}\\cong M$ and the affine finite-type conclusion of step 1, this is exactly reductivity of $M$ in the same definition. For $M=1$ the argument gives $U=W=1$ as well.",
+   "uses": [
+    "def-sfb-reductive-torus-centralizer-terminology",
+    "def-weil-algebraic-closure",
+    "lem-sfb-unipotent-radical-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.46, printed p.135: reductivity is triviality of the unipotent radical; Corollary 21.53, printed p.441, conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-unipotent-radical-existence",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-solvable-group-structure",
+  "lem-sfb-smooth-ambient-normality-geometric",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Alternative proof of Corollary 21.53 from Section 6.46 and Corollary 1.85: write out invariance of the largest unipotent normal subgroup under conjugation. This is a node-level argument, not a change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected closed normal subgroup of a reductive algebraic group over an algebraically closed field is reductive",
+   "results": "{\"t\": \"2026-10-23T23:42:02Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected closed normal subgroup of a reductive algebraic group over an algebraically closed field is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.HasTrivialRadical\", \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"LieAlgebra.IsSimple.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_iff\", \"instNormalCommutatorClosure\"], \"digest\": \"f58ed20775a07f6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reductive\"",
+   "results": "{\"t\": \"2026-10-23T23:41:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"reductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eductive|unipotentRadical|unipotent_radical",
+   "results": "{\"t\": \"2026-10-23T23:41:55Z\", \"tool\": \"grep\", \"query\": \"[Rr]eductive|unipotentRadical|unipotent_radical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected normal subgroup variety of a reductive group is reductive",
+   "results": "{\"t\": \"2026-10-23T23:41:56Z\", \"tool\": \"leansearch\", \"query\": \"A connected normal subgroup variety of a reductive group is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.Normal\", \"instNormalCommutator\", \"Subgroup.normalCore_isClosed\", \"Subgroup.Normal.mk\", \"Subgroup.Normal.recOn\", \"Subgroup.normal_of_characteristic\", \"AddSubgroup.Normal.addSubgroupOf\", \"Subgroup.commutator_normal\"], \"digest\": \"397bcc8d4ba69815\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unipotent radical of a connected normal subgroup of a reductive affine algebraic group is trivial",
+   "results": "{\"t\": \"2026-10-23T23:42:00Z\", \"tool\": \"leanfinder\", \"query\": \"The unipotent radical of a connected normal subgroup of a reductive affine algebraic group is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.HasTrivialRadical\", \"LieAlgebra.HasTrivialRadical.radical_eq_bot\", \"normalizerCondition_of_isNilpotent\", \"LieAlgebra.hasTrivialRadical_iff\", \"frattini_nilpotent\", \"LieAlgebra.instHasTrivialRadicalOfSubsingleton\"], \"digest\": \"3eb5f7a4c18314ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eductive|unipotentRadical|unipotent_radical",
+   "results": "{\"t\": \"2026-10-24T00:06:00Z\", \"tool\": \"grep\", \"query\": \"[Rr]eductive|unipotentRadical|unipotent_radical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract or topological subgroups, Frattini groups and Lie-algebra radicals, not reductive affine group schemes; Loogle and AlgebraicGeometry grep have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected normal algebraic subgroup of a reductive algebraic group is reductive",
+   "results": "{\"t\": \"2026-10-24T00:06:00Z\", \"tool\": \"leansearch\", \"query\": \"A connected normal algebraic subgroup of a reductive algebraic group is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.Normal\", \"AddSubgroup.normal_of_comm\", \"Subgroup.normalCore_isClosed\", \"Subgroup.Normal.recOn\", \"Subgroup.Normal.casesOn\", \"Subgroup.Normal.rec\", \"Subgroup.normal_of_comm\", \"Subgroup.normal_of_characteristic\"], \"digest\": \"66793744cfb23211\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract or topological subgroups, Frattini groups and Lie-algebra radicals, not reductive affine group schemes; Loogle and AlgebraicGeometry grep have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reductive\"",
+   "results": "{\"t\": \"2026-10-24T00:06:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"reductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract or topological subgroups, Frattini groups and Lie-algebra radicals, not reductive affine group schemes; Loogle and AlgebraicGeometry grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected closed normal subgroup of a reductive algebraic group over an algebraically closed field is reductive",
+   "results": "{\"t\": \"2026-10-24T00:06:01Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected closed normal subgroup of a reductive algebraic group over an algebraically closed field is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.HasTrivialRadical\", \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"LieAlgebra.IsSimple.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_iff\", \"instNormalCommutatorClosure\"], \"digest\": \"f58ed20775a07f6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract or topological subgroups, Frattini groups and Lie-algebra radicals, not reductive affine group schemes; Loogle and AlgebraicGeometry grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unipotent radical of a connected normal algebraic subgroup of a reductive group is trivial",
+   "results": "{\"t\": \"2026-10-24T00:07:09Z\", \"tool\": \"leanfinder\", \"query\": \"The unipotent radical of a connected normal algebraic subgroup of a reductive group is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frattini\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.HasTrivialRadical\", \"LieAlgebra.HasTrivialRadical.radical_eq_bot\", \"LieAlgebra.hasTrivialRadical_iff\", \"normalizerCondition_of_isNilpotent\", \"LieAlgebra.IsSimple.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_of_no_solvable_ideals\"], \"digest\": \"d5329a8513bdfe72\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract or topological subgroups, Frattini groups and Lie-algebra radicals, not reductive affine group schemes; Loogle and AlgebraicGeometry grep have no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Construction 23.17 and assertions 23.19--23.24, printed pp.490--492, including the final root-subgroup and Weyl-conjugacy paragraph completing 23.18; generation in Section 2h and 21.62. The based-root-datum assertion records the roots and coroots of the displayed rank-one graphs under the first torus projection. Supporting input for the compatible-graph proof: Argument of 23.24 and the final paragraph completing 23.18, printed p.492, in the general form of a surjective reductive homomorphism with an isomorphism on maximal tori and lifted simple root groups; rank comparison and Weyl conjugation use 21.51 and 21.39, and the big cells use 21.84. This is a supporting criterion, not the isogeny existence theorem. Supporting kernel-finiteness step: Milne Corollary 17.85 and Corollary 21.53, applied to the reduced identity component of a closed normal subgroup. Supporting structural lemma: Corollary 21.53, printed p.441: every connected normal subgroup variety of a reductive group is reductive. Group variety means smooth algebraic group; smoothness of M is retained explicitly.",
+   "via": [
+    "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+    "lem-sfb-torus-simple-root-isomorphism-criterion",
+    "lem-sfb-compatible-rank-one-graph-geometry",
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-connected-normal-subgroup-reductive",
+  "worker": "stage1",
+  "group": "Q119",
+  "summary": "Statement retained. Added the statement-only existence of the unipotent radical; proved its conjugation invariance in the item, used the existing smooth-ambient geometric normality criterion, and concluded by reductivity. Source Corollary 21.53 has a Ru(G)/Ru(N) typographical slip in its proof; the alternative proof avoids that slip and the semisimple-quotient detour.",
+  "blueprint": "Latest main-20261024 sk-thm-sf-ctf-stability-direct-images.proof.md clause (3), through the inherited alteration/moduli/root-datum supporting chain described in blueprint.from.place. This item supplies Corollary 21.53 in the normal-subgroup torus-finiteness input. The ancestor command reports null, retained; new node extends the inherited via chain. Searches unipotent radical, unipotent, normal subgroup and radical found no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-45bd7e7b5",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-45bd7e7b5 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, the new node lem-sfb-unipotent-radical-existence, every cited statement, and Milne iAG2017 §6.41-6.46 (pp.134-135) and Cor. 21.53 (p.441). The new node states existence of the largest smooth connected closed normal unipotent subgroup of a smooth connected affine group over an algebraically closed field, as subgroup schemes. This matches Milne 6.42/6.46 and is true: the product of two such subgroups is again one, and one of maximal dimension contains every other. I checked it on 1, G_m^r, G_a, GL_n, SL_n and B_n; the non-smooth α_p and μ_p are excluded. A DAG-wide scan of the statements mentioning unipotent finds no duplicate: other nodes only name R_u, perfect-solvable-unipotent-torus is the solvable case, and reductive-radical-quotient is the solvable radical. The new node is not a clause of the item. Step 1: finite type via lft-affine-pairs and the closed immersion is fine. Step 2: c_g(U) is closed, smooth, connected, normal in M (identity checked) and unipotent, so maximality applied to g and g⁻¹ gives c_g(U)=U. Step 3 applies smooth-ambient-normality-geometric exactly as stated (J=G smooth, k̄=F). Step 4 is correct in substance, but def-sfb-reductive-torus-centralizer-terminology is stated after extension to an algebraic closure, and the step never identifies G_F̄≅G, M_F̄≅M. FIX: step 4 now adds that sentence, citing def-weil-algebraic-closure (ι:F→F̄ is an isomorphism because F is algebraically closed), and def-weil-algebraic-closure is added to the step uses and proof_deps. Statement, stmt_deps, other steps and the new node are unchanged. No SGA source, no tool_uses, and Milne's R_u(G)/R_u(N) typo in Cor. 21.53 is correctly identified.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ConnectedNormalSubgroupReductive",
+  "declaration": "AlgebraicGeometry.isReductive_of_smooth_connected_closed_normal_subgroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ConnectedNormalSubgroupReductive.lean",
+  "statement": "theorem isReductive_of_smooth_connected_closed_normal_subgroup {F : Type u} [Field F] [IsAlgClosed F] (G M : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) [Smooth M.X.hom] [ConnectedSpace M.X.left] (i : M ⟶ G) [IsClosedSubgroupScheme i.hom.hom] [IsNormalSubgroupScheme i.hom.hom] : ReductiveTorusCentralizer.IsReductive M",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3941016df",
+  "group": "NS",
+  "result": "pass",
+  "note": "Only the item node's lean field changed (was null); one new module, sorry-only, record statement verbatim in the file. Clause by clause: IsAlgClosed F in arbitrary universe u; G and M as Grp (Over (Spec F)); hG uses the landed IsReductive (IsAlgebraic + Smooth + connected after base change to the algebraic closure + no nontrivial smooth connected closed normal unipotent subgroup there); M Smooth and ConnectedSpace; i closed and normal subgroup scheme per GroupScheme/Defs (all F-algebras, closed immersion); conclusion IsReductive M, nothing weakened. No added hypotheses (no affine/finite-type on M, no char/semisimple/nontrivial). Base-changed connectedness and affine finite type of M follow from F algebraically closed and the closed immersion into G. Edge cases M=1, M=G, torus G, char p covered; non-smooth mu_p/alpha_p excluded as the node requires. No duplicate in side-live Sheaf. Docstrings carry source, blueprint tag and the 4 proof steps. Report sections present. No fixes, so no compile; worker reports a clean 1.7 s compile."
+ }
+}

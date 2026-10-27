@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-closed-section-neighborhood-extension",
+ "kind": "statement",
+ "title": "Closed-subset sections extend to a neighborhood",
+ "statement": "Let $X$ be a paracompact Hausdorff topological space, where paracompact means that every open cover admits a locally finite open refinement. Let $G$ be a sheaf of abelian groups on its open-subset site [def-weil-pbc-sites-and-cohomology], let $S\\subseteq X$ be closed, and let $i:S\\hookrightarrow X$ be the inclusion with the subspace topology. Write $G|_S=i^{-1}G$ for the inverse-image sheaf: a section on $S$ is a family of germs in $G_x$, locally represented on $S$ by sections of $G$ on open subsets of $X$. For every $s\\in\\Gamma(S,G|_S)$ there exist an open neighborhood $U\\supseteq S$ in $X$ and $t\\in G(U)$ whose restriction to $S$ is $s$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. IV §4, Lemma (4.6)(a), Theorem (4.7), Corollary (4.8), printed pp.203--204. The printed occurrence of a neighborhood of A in (4.7) means a neighborhood of S."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, take $U=X$ and $t=0$. Otherwise, by the stated local-representative description of $i^{-1}G$, choose for each $a\\in S$ an open $U_a\\ni a$ and $s_a\\in G(U_a)$ whose germ at every $x\\in S\\cap U_a$ is $s(x)$. Thus $(U_a)_{a\\in S}$ covers $S$. Recall explicitly that two germs represented by sections are equal exactly when the sections agree after restriction to some common open neighborhood of the point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Theorem (4.7), proof, printed pp.203--204; Corollary (4.8). Germ convention: Stacks, sheaves.tex, Section 0078 (section-stalks), the equivalence relation defining a stalk."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-paracompact-closed-cover-refinement] to this cover of the closed set $S$. Obtain open $W_a\\subseteq U_a$ covering $S$, locally finite in all of $X$.",
+   "uses": [
+    "lem-sfb-paracompact-closed-cover-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4.B, Definition (4.5), Lemma (4.6)(a), printed p.203; precise_refinement_set in Mathlib."
+   }
+  },
+  {
+   "text": "For $x\\in S$, an open neighborhood meeting only finitely many $W_a$ shows that only finitely many $W_a$ contain $x$. Apply [lem-sfb-paracompact-point-finite-shrinking] to get open $V_a$ covering $S$ with $\\overline{V_a}\\subseteq W_a\\subseteq U_a$. Since $V_a\\subseteq W_a$, the same neighborhoods show that $(V_a)$ is locally finite in $X$.",
+   "uses": [
+    "lem-sfb-paracompact-point-finite-shrinking"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4.B, shrinking discussion, Definition (4.5), Lemma (4.6)(a), printed p.203; exists_subset_iUnion_closure_subset in Mathlib."
+   }
+  },
+  {
+   "text": "Put $O=\\bigcup_a V_a$ and $E=\\{x\\in O:(s_a)_x=(s_b)_x\\text{ whenever }x\\in\\overline{V_a}\\cap\\overline{V_b}\\}$. The germs in this formula are defined because $\\overline{V_a}\\subseteq U_a$. For $x\\in S$, both germs in each required equality are $s(x)$, so $S\\subseteq E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Theorem (4.7), proof, printed pp.203--204; Corollary (4.8)."
+   }
+  },
+  {
+   "text": "The set $E$ is open. Fix $p\\in E$ and choose an open neighborhood $N$ meeting only finitely many $V_a$; write $J$ for those indices. If $a\\notin J$, the open set $N$ also misses $\\overline{V_a}$, by the definition of closure. Remove from $N$ the finitely many closed sets $\\overline{V_a}$ for $a\\in J$ with $p\\notin\\overline{V_a}$. The resulting open neighborhood $N_0$ meets only closures indexed by $L=\\{a\\in J:p\\in\\overline{V_a}\\}$. For each of the finitely many pairs $a,b\\in L$, membership $p\\in E$ and the germ equivalence relation give an open $N_{ab}\\ni p$ inside $U_a\\cap U_b$ on which $s_a$ and $s_b$ agree. Intersect $N_0$, $O$, and all $N_{ab}$. This is an open neighborhood of $p$ contained in $E$: any pair of closures through a point of this intersection has indices in $L$, and the corresponding sections agree there. Thus $E$ is an open neighborhood of $S$. The locally finite family and its closure containment are exactly those supplied by [lem-sfb-paracompact-closed-cover-refinement] and [lem-sfb-paracompact-point-finite-shrinking]; the argument uses only finite intersections, not compactness of $S$.",
+   "uses": [
+    "lem-sfb-paracompact-closed-cover-refinement",
+    "lem-sfb-paracompact-point-finite-shrinking"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Theorem (4.7), proof, printed pp.203--204; Corollary (4.8)."
+   }
+  },
+  {
+   "text": "On the open cover $(E\\cap V_a)_a$ of $E$, restrict $s_a$. On a pairwise intersection, their germs agree at every point by the definition of $E$, hence the sections agree by [lem-weil-pbc-sheaf-sections-determined-by-germs], applied to the underlying sheaf of sets. The sheaf equalizer axiom in [def-weil-pbc-sites-and-cohomology](1) now glues them to $t\\in G(E)$. For $x\\in S$, choose $a$ with $x\\in V_a$; then $t_x=(s_a)_x=s(x)$. In the specified family-of-germs description of $i^{-1}G$, this says exactly $t|_S=s$. Take $U=E$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-sections-determined-by-germs",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Theorem (4.7), proof, printed pp.203--204; Corollary (4.8)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-paracompact-closed-cover-refinement",
+  "lem-sfb-paracompact-point-finite-shrinking",
+  "lem-weil-pbc-sheaf-sections-determined-by-germs",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "IV §4.B, Lemma (4.6)(a), Theorem (4.7) and Corollary (4.8), printed pp.203--204, read online; the finite-neighborhood argument is written out, with the refinement and shrinking inputs matched to Mathlib. Agent-written expansion under the brief's WANTED policy because the cited PDF is absent locally, although its online source proof was read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(closed.*neighbo|neighbo.*closed|section.*extend|extend.*section)",
+   "results": "OK 3 hits: Mathlib/Topology/Sheaves/EtaleSpace.lean, Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean, Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean.  Source directory Mathlib/Topology/Sheaves",
+   "date": "2026-10-24",
+   "verdict": "no match: stalk extensionality and compatible gluing do not supply a common neighborhood of a possibly noncompact closed subset"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every section of a sheaf on a closed subset of a paracompact Hausdorff space extends to some open neighborhood of the closed subset",
+   "results": "OK 8 hits: TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types, TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.section_ext, TopCat.Presheaf.IsSheaf.section_ext, TopCat.Sheaf.forget, TopCat.Presheaf.IsSheaf. ",
+   "date": "2026-10-24",
+   "verdict": "no match: stalk extensionality and compatible gluing do not supply a common neighborhood of a possibly noncompact closed subset"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsClosed\"",
+   "results": "OK 7 hits: CategoryTheory.Sheaf.instIsClosedUnderLimitsOfShapeFunctorOppositeIsSheaf, SheafOfModules.instIsClosedUnderIsomorphismsIsFinitePresentation, SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, CategoryTheory.GrothendieckTopology.isClosed_χ_app_apply_of_isSheaf_of_isSeparated. ",
+   "date": "2026-10-24",
+   "verdict": "no match: stalk extensionality and compatible gluing do not supply a common neighborhood of a possibly noncompact closed subset"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed subset S of a paracompact Hausdorff space X and any sheaf F, sections of the inverse image sheaf on S come from sections on a neighborhood",
+   "results": "OK 8 hits: TopCat.Presheaf.section_ext, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Presheaf.IsSheaf.section_ext, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom, TopCat.Sheaf.interUnionPullbackConeLift, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, StructureGroupoid.LocalInvariantProp.section_spec, TopCat.Sheaf.extend_hom_app. ",
+   "date": "2026-10-24",
+   "verdict": "no match: stalk extensionality and compatible gluing do not supply a common neighborhood of a possibly noncompact closed subset"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*neighbo|neighbo.*closed|section.*extend|extend.*section",
+   "results": "OK 3 hits: Mathlib/Topology/Sheaves/EtaleSpace.lean, Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean, Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean.  Source directory Mathlib/Topology/Sheaves",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give local germ representation, stalk extensionality or gluing of already compatible sections; none constructs a neighborhood of an arbitrary closed subset"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsClosed\"",
+   "results": "OK 7 hits: CategoryTheory.Sheaf.instIsClosedUnderLimitsOfShapeFunctorOppositeIsSheaf, SheafOfModules.instIsClosedUnderIsomorphismsIsFinitePresentation, SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, CategoryTheory.GrothendieckTopology.isClosed_χ_app_apply_of_isSheaf_of_isSeparated. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give local germ representation, stalk extensionality or gluing of already compatible sections; none constructs a neighborhood of an arbitrary closed subset"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf section on a closed subset of a paracompact Hausdorff topological space extends to some open neighborhood",
+   "results": "OK 8 hits: TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, TopCat.Sheaf.existsUnique_gluing', TopCat.Presheaf.section_ext, TopCat.Sheaf.existsUnique_gluing, Set.InjOn.exists_isOpen_superset, TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types, TopCat.Presheaf.IsSheaf.section_ext. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give local germ representation, stalk extensionality or gluing of already compatible sections; none constructs a neighborhood of an arbitrary closed subset"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every section of a sheaf on a closed subset of a paracompact Hausdorff space extends to an open neighborhood",
+   "results": "OK 8 hits: TopCat.Presheaf.IsSheaf.section_ext, TopCat.PrelocalPredicate.sheafify, StructureGroupoid.LocalInvariantProp.section_spec, TopCat.subpresheafToTypes.isSheaf, TopCat.subsheafToTypes, TopCat.PrelocalPredicate.sheafifyOf, TopCat.PrelocalPredicate.sheafify_inductionOn, skyscraperSheaf. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give local germ representation, stalk extensionality or gluing of already compatible sections; none constructs a neighborhood of an arbitrary closed subset"
+  },
+  {
+   "tool": "grep",
+   "query": "neighbo.*(section|[Ss]heaf)|section.*neighbo|[Pp]aracompact",
+   "results": "OK 3 hits: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean.  Source directory Mathlib/Topology/Sheaves",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give local germ representation, stalk extensionality or gluing of already compatible sections; none constructs a neighborhood of an arbitrary closed subset"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction map from the filtered colimit of sections over neighborhoods of a closed subspace to sections of the inverse image sheaf is surjective for a paracompact Hausdorff space",
+   "results": "OK 8 hits: TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective, TopCat.Presheaf.stalkToFiber_surjective, TopCat.Presheaf.isLocallySurjective_iff, TopCat.stalkToFiber_surjective, TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, TopCat.Presheaf.IsLocallySurjective, CategoryTheory.coherentTopology.isLocallySurjective_iff. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give local germ representation, stalk extensionality or gluing of already compatible sections; none constructs a neighborhood of an arbitrary closed subset"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-function-modules-acyclic",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound. Supporting input for smooth-module acyclicity: IV §4, Lemma (4.6)(a), Theorem (4.7), Corollary (4.8), printed pp.203--204. The printed occurrence of a neighborhood of A in (4.7) means a neighborhood of S.",
+   "via": [
+    "lem-sfb-smooth-function-modules-acyclic",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-section-neighborhood-extension",
+  "worker": "stage1",
+  "summary": "Read Demailly IV §4.B online and kept the statement unchanged. Expanded the local-representative, locally finite refinement, closure-shrinking, finite agreement-neighborhood and gluing argument. Added two exact/one-line-specialization Mathlib leaves and reused the existing germ-extensionality node and sheaf definition. Searches, source hypotheses, edge cases and citation quotes checked by Q58.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the inherited smooth-module/Dolbeault/Kodaira/alteration prerequisite chain. This item realizes the closed-section extension input of lem-sfb-smooth-function-modules-acyclic, using Demailly IV §4.B (4.6)(a)--(4.8); it changes no unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-69dd0b8b1",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-69dd0b8b1 (reviewer sub-agent of L); spot-checked: The item statement is unchanged; it is the paracompact Hausdorff closed-subset extension (Demailly IV (4.7)/(4.8) and Godement II.3.3.1). Demailly is WANTED locally, so I checked the proof independently against the standard argument, and proof_origin=agent is correct. The steps are correct. Step 2 uses the precise locally finite refinement, indexed by S. In step 3, point-finiteness follows from local finiteness, the shrinking gives cl V_a ⊆ W_a, and (V_a) stays locally finite. In step 4, the agreement locus E lies in O and contains S. Step 5 shows E is open at every p by a finite argument: N meets finitely many V_a, the closures not through p are removed, then intersect with the N_ab. Step 6 glues on (E∩V_a) using lem-weil-pbc-sheaf-sections-determined-by-germs and the equalizer axiom of def-weil-pbc-sites-and-cohomology (1), and t_x=s(x) on S. proof_deps is exactly the union of the uses, and there is no cycle. The new leaf lem-sfb-paracompact-closed-cover-refinement matches precise_refinement_set (Paracompact.lean:97-102) exactly; LocallyFinite is defined at LocallyFinite.lean:27-30. The new leaf lem-sfb-paracompact-point-finite-shrinking is a one-line specialization of exists_subset_iUnion_closure_subset (ShrinkingLemma.lean:213-218), with NormalSpace from NormalSpace.of_paracompactSpace_r1Space (Paracompact.lean:299-300) and T2 giving R1. I tested both leaves with S empty, I empty, X empty, an infinite discrete X and a finite cover. The duplicate search over dag/nodes found no node stating either leaf. Neither leaf restates a clause of the item, and there is no SGA. Advisory: the def-kun-subspace-topology stmt_dep in the leaves is unused but harmless, and the null blueprint.from.node is inherited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ClosedSectionNeighborhoodExtension",
+  "declaration": "TopCat.Sheaf.exists_neighborhood_extension_of_isClosed",
+  "file": "lean/Sheaf/Topology/ClosedSectionNeighborhoodExtension.lean",
+  "statement": "theorem exists_neighborhood_extension_of_isClosed {X : TopCat.{u}} [ParacompactSpace X] [T2Space X] (G : X.Sheaf AddCommGrpCat.{u}) (S : Set X) (hS : IsClosed S) (s : ((pullback AddCommGrpCat.{u} (TopCat.ofHom ⟨(Subtype.val : S → X), continuous_subtype_val⟩)).obj G).obj.obj (op (⊤ : Opens S))) : ∃ (U : Opens X) (hSU : S ⊆ (U : Set X)) (t : G.obj.obj (op U)), ((pullback AddCommGrpCat.{u} (TopCat.ofHom ⟨(Subtype.val : S → X), continuous_subtype_val⟩)).obj G).obj.map (homOfLE (fun (x : S) (_ : x ∈ (⊤ : Opens S)) ↦ hSU x.property)).op ((((pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨(Subtype.val : S → X), continuous_subtype_val⟩)).unit.app G).hom.app (op U)) t) = s",
+  "branch": "sheaf-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84da56ff3",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Clause-by-clause check of node vs TopCat.Sheaf.exists_neighborhood_extension_of_isClosed: ParacompactSpace+T2Space, G : X.Sheaf AddCommGrpCat.{u}, closed S, i = Subtype.val, G|_S = TopCat.Sheaf.pullback (sheafified inverse image, Functors.lean l.91/98), ∃ U ⊇ S, t ∈ G(U) with (unit at op U then restriction ⊤ ≤ i⁻¹U) t = s: correct direction, equality on all of S, quantifier order kept, no extra hypotheses. Item node differs from side-live only by the new lean record; stmt_dep record unchanged; lean.statement verbatim in file. Edge cases S=∅/X=∅/S=X/noncompact are covered; the single universe u is forced by Mathlib pullback and matches the consumer SoftAbelianSheafAcyclic. No definitions, proof sorry, docstrings with source place and blueprint tag, 6 proof steps; no existing declaration found; report has Worker report and Second reading by Q121. Not recompiled (no file changed)."
+ }
+}

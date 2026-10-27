@@ -1,0 +1,131 @@
+{
+ "id": "lem-zl-ind-open-realization",
+ "kind": "statement",
+ "title": "Realization of represented open ind-extension",
+ "statement": "Fix a finite-field datum D [def-weil-finite-field-fiber], a prime l≠D.p, an algebraic closure Ω of Q_l, and finite-type k₀-schemes X₀,Y₀. Let j₀:X₀→Y₀ be a quasi-compact open immersion and let j be its geometric base change [def-zl-weil-geometric-fiber-properties]. Let S be any normalized compact-support coefficient action [def-weil-compact-support-coefficient-action] for the compactification (j,id). For constructible Weil sheaves F on X₀ and G on Y₀ [def-weil-weil-sheaf-complex], and any representation e:y_Y(G)≅j_!(y_X(F)) in the specified equivariant ind-category [def-zl-weil-ind-sheaf-category], there is an isomorphism G.carrier≅S(F.carrier) in the existing common-stage constructible category. There is no proper image, cohomology degree or composite compactification in this statement. No absolute separatedness is assumed.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-geometric-fiber-properties",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "source": {
+  "document": "SGA 4, XVII, §5.1; Bhatt–Scholze, Definition 6.7.6 and Lemma 6.7.7",
+  "place": "Exact extension by zero, the open adjunction, and normalized completed coefficient realization."
+ },
+ "proof": [
+  {
+   "text": "For the identity-proper compactification, the projection-normalized completed realization identifies the integral operation with exact extension by zero. At each positive quotient it is precisely the ordinary open extension. Its open unit and counit commute with coefficient extension, so raw rationalization and common-stage descent give the same adjunction and preserve the standard heart. No absolute separatedness enters this local open construction.",
+   "uses": [
+    "def-weil-compact-support-coefficient-action",
+    "def-weil-constructible-heart",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-cbc-completed-extension-zero-comparison",
+    "sk-lem-sf-open-ctf",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the heart adjunction through AsSmall and extend by filtered colimits. The Yoneda Kan unit identifies the extension on represented objects. The fixed-pair adjunction uses the left mate of the prescribed Frobenius pullback square, hence uniqueness of left adjoints identifies it with the specified ind open extension. Full faithfulness identifies any represented G with this heart extension; applying the heart inclusion gives the stated iso. The zero object, empty open, identity open and arbitrary representatives are covered.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-constructible-heart",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-cbc-completed-extension-zero-comparison",
+  "sk-lem-sf-open-ctf",
+  "lem-fix-operation-reduction",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "SGA 4, XVII, §5.1; Bhatt–Scholze, Definition 6.7.6 and Lemma 6.7.7",
+  "place": "Exact extension by zero, the open adjunction, and normalized completed coefficient realization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero on an ind category of constructible sheaves agrees with the constructible extension by zero under the Yoneda embedding",
+   "results": "8 generic hits: Ind.yoneda, Ind.yoneda.fullyFaithful, Presheaf.isExtensionAlongYoneda and generic Yoneda results.",
+   "date": "2026-10-25",
+   "verdict": "No exact realization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "12 hits including rightDerivedZeroIsoSelf, injective vanishing, and NatTrans.rightDerived.",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*(rightDerived|Adjunction)|rightDerived.*Ind",
+   "results": "25 generic hits; CategoryTheory/Abelian/RightDerived.lean and adjunction files. Direct project rg found only the three representability/interchange statement modules.",
+   "date": "2026-10-25",
+   "verdict": "No existing normalized realization comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompactSupportCohomology",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "First paragraph, the proper/open construction of higher compact-support images. Realization of represented open ind-extension",
+   "via": [
+    "def-zl-weil-compact-support-cohomology",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilIndOpenRealization",
+  "file": "lean/Sheaf/Paper/WeilIndOpenRealization.lean",
+  "declaration": "WeilConjectures.zlIndWeilOpenShriek_realization",
+  "statement": "theorem zlIndWeilOpenShriek_realization\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (j₀ : X₀ ⟶ Y₀) [IsOpenImmersion j₀.left] [QuasiCompact j₀.left]\n    (S : SfCompactSupportCoefficientAction l D.k (zlRealizationPrimeUnit D l hl) Ω\n      (.ofIsOpenImmersion (zlFiberMap D j₀)))\n    (F : sfCommonStageWeilSheaf D l hl X₀ Ω)\n    (G : sfCommonStageWeilSheaf D l hl Y₀ Ω)\n    (e : (zlWeilIndEmbedding D l hl Ω Y₀).obj G ≅\n      (zlIndWeilOpenShriek D l hl Ω j₀).obj\n        ((zlWeilIndEmbedding D l hl Ω X₀).obj F)) :\n    Nonempty (G.obj.carrier ≅ S.system.functor.obj F.obj.carrier)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T041146-L-1034267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T041146-L-1034267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

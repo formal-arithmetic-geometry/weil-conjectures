@@ -1,0 +1,160 @@
+{
+ "id": "lem-trf-isomorphism-quotient-roos-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent); extracted Quotient product and cocone comparison, original steps 1 and 5",
+   "via": [
+    "lem-trf-isomorphism-multiplication-cone-descent",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quotient product and cocone comparison, original steps 1 and 5",
+ "statement": "Fix the prime, finite coefficient extension and scheme isomorphism $g:X\\to Y$ with the strict quotient notation of [def-trf-isomorphism-strict-quotient-models]. For every flat-term K-flat complex $Q$, the canonical countable-product comparison $\\phi_D:G_{\\rm cx}\\prod_nD_n(Q)\\to\\prod_nG_{\\rm cx}D_n(Q)$ is invertible and satisfies $\\phi_D\\circ G_{\\rm cx}(1-s_D)=(1-s_{GD})\\circ\\phi_D$. There is a natural isomorphism $\\eta:G_{\\rm cx}H D\\simeq HG_{\\rm tow}D$ whose composition with the first mapping-cocone projection is $G$ of that projection followed by $\\phi_D$, and whose composition with the shifted second projection in degree $p+1$ is $G$ of that second projection followed by the degree-$p$ component of $\\phi_D$, for every integer $p$. These equations specify both diagonal coordinates and zero mixed coordinates of the actual mapping cocone.",
+ "stmt_deps": [
+  "def-trf-isomorphism-strict-quotient-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), with sites-modules.tex Tags 03CZ/03EK; explicit strict quotient/cone argument, original multiplication-cone node steps Quotient product and cocone comparison, original steps 1 and 5"
+ },
+ "proof": [
+  {
+   "text": "Construct the completed-coefficient module inverse-image equivalence with SheafOfModules.pushforwardPushforwardEquivalence. Use the canonical site equivalence and the inverse of the completed coefficient isomorphism. The two coefficient identities follow from c followed by its inverse being the identity and the induced sheaf adjunction triangle. This is the same equivalence constructed internally in isoSectionwiseModuleInverseImage_exact, retained in a proved private helper.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The induced equivalence of cochain complexes preserves countable products, hence its canonical piComparison is an isomorphism. To prove the difference square, compose with each product projection, use towerTransitionEndomorphism_eq_iff to expand 1-s, piComparison_comp_π for the product arrow, and additivity and functoriality. Both sides become G(pr_n)-G(pr_(n+1)) followed by G(t_n). This argument is proved for arbitrary additive functors and strict towers in the private quotientDifferenceSquare helper before specializing to the quotient tower.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-trf-isomorphism-strict-quotient-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply podReindexingRoosComparison to the module inverse-image equivalence and an arbitrary strict tower. The canonical scalarRoosMap is invertible, and podReindexingRoosNaturality assembles its asIso components into a natural isomorphism on the category of strict towers. Whisker this isomorphism by the functor sending a good complex to its actual quotient tower.",
+   "uses": [
+    "lem-pod-reindexing-roos-comparison",
+    "def-trf-isomorphism-strict-quotient-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first projection formula is podReindexingRoosCoordinates applied to that quotient tower. Its second formula in degree p+1, simplified by (p+1)-1=p, is precisely the required shifted-coordinate formula. Thus the same natural isomorphism satisfies both specified diagonal equations, without any derived-limit normalization or exactness-of-products assertion.",
+   "uses": [
+    "lem-pod-reindexing-roos-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-isomorphism-strict-quotient-models",
+  "lem-pod-reindexing-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, strict product/cocone comparison; P2 reuses the already proved projection-normalized additive-equivalence Roos comparison (2026-10-26)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict quotient towers, scalar extension along a ring isomorphism, and natural product comparison on mapping cocones and derived limits",
+   "results": "8 hits, including CategoryTheory.Limits.Cocones.extendIso, Submodule.Quotient.isScalarTower, and CategoryTheory.Limits.IsLimit.extendIso; no strict coefficient-system or normalized Roos assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "11 hits: piComparison, piComparison_comp_π, map_lift_piComparison and instIsIsoPiComparison in Mathlib.CategoryTheory.Limits.Shapes.Products and Preserves.Shapes.Products; these supply the product API, not the entire tower/cocone/normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionRingIso|mapHomologicalComplexIso|ReductionPresentation",
+   "results": "11 hits, including CochainComplex.mappingCone.mapHomologicalComplexIso in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:639 and its descShortComplex compatibility; no strict quotient-system normalization. The source was read.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication identifies strict quotient pullback towers under a scheme isomorphism; inverse image commutes with their Roos cocone; simultaneous reduction realizes completion",
+   "results": "8 hits concerning Scheme.Pullback.pullbackP1Iso and open-cover pullback refinements. None addresses these module-sheaf strict systems.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.IsomorphismMultiplicationConeDescent",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.IsomorphismQuotientRoosComparison",
+  "file": "lean/Sheaf/TraceFormula/IsomorphismQuotientRoosComparison.lean",
+  "declaration": "WeilConjectures.isomorphismQuotientRoosComparison",
+  "declarations": [
+   "WeilConjectures.isomorphismQuotientRoosComparison"
+  ],
+  "statement": "theorem isomorphismQuotientRoosComparison\n    {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :\n    (∀ Q : (integralOperationsGoodComplex l E Y).FullSubcategory,\n      IsIso (trfQuotientProductComparison l E g Q.obj)) ∧\n    (∀ Q : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        (trfInverseImageComplex l E g).map (trfQuotientDifference l E Y Q.obj) ≫\n            trfQuotientProductComparison l E g Q.obj =\n          trfQuotientProductComparison l E g Q.obj ≫ trfInverseQuotientDifference l E g Q.obj) ∧\n    ∃ (eta : (integralOperationsGoodComplex l E Y).ι ⋙\n          trfQuotientTowerFunctor l E Y ⋙ integralOperationsRoosFunctor ⋙\n            trfInverseImageComplex l E g ≅\n        (integralOperationsGoodComplex l E Y).ι ⋙ trfQuotientTowerFunctor l E Y ⋙\n          trfInverseImageTower l E g ⋙ integralOperationsRoosFunctor),\n      (∀ Q : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        eta.hom.app Q ≫ CochainComplex.mappingCocone.fst\n            (trfInverseQuotientDifference l E g Q.obj) =\n          (trfInverseImageComplex l E g).map\n              (CochainComplex.mappingCocone.fst (trfQuotientDifference l E Y Q.obj)) ≫\n            trfQuotientProductComparison l E g Q.obj) ∧\n      -- Equality on the shifted b coordinate; together these specify a diagonal map.\n      (∀ (Q : (integralOperationsGoodComplex l E Y).FullSubcategory) (p : ℤ),\n        (eta.hom.app Q).f (p + 1) ≫\n            (CochainComplex.mappingCocone.snd\n              (trfInverseQuotientDifference l E g Q.obj)).v (p + 1) p\n                (add_neg_cancel_right p 1) =\n          (inverseImageIntegralModules l E g).map\n              ((CochainComplex.mappingCocone.snd\n                (trfQuotientDifference l E Y Q.obj)).v (p + 1) p\n                  (add_neg_cancel_right p 1)) ≫\n            (trfQuotientProductComparison l E g Q.obj).f p)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.TraceFormula.IsomorphismMultiplicationConeDescent",
+  "worker": "stage3",
+  "summary": "A strict part of the existing ten-step argument, extracted without changing the parent statement. Complete proof in words accompanies the exact Lean statement.",
+  "blueprint": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent); extracted Quotient product and cocone comparison, original steps 1 and 5"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29c11",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T092852-L-3475163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T111919-L-1773782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

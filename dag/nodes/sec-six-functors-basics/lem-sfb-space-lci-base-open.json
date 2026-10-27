@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-space-lci-base-open",
+ "kind": "statement",
+ "title": "Universal base open with local-complete-intersection fibres for a flat closed family",
+ "statement": "Algebraic spaces and their etale scheme charts are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention] and underlying point topology [def-a1-space-point-topology]. Flatness and local finite presentation are tested on etale scheme charts by [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Fibre products of algebraic spaces use [lem-trf-space-fibre-products-etale-covers], agreeing on schemes with [def-pc-fibre-product]. For a point $s$ of the scheme base, a geometric fibre is $X\\times_S\\operatorname{Spec}\\overline{\\kappa(s)}$, with the field and geometric-point conventions of [def-weil-geometric-fibre]. A scheme over a field is a local complete intersection if it has an affine open cover by spectra of finitely generated local-complete-intersection algebras [def-weil-pbc-complete-intersection-over-field]; for an algebraic space over a field this condition is tested on etale scheme charts. Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to S$ be a flat locally finitely presented morphism of algebraic spaces whose underlying map $|X|\\to|S|$ is closed. There exists an open subscheme $W_f\\subseteq S$ such that for every scheme morphism $g:T\\to S$, $g$ factors through $W_f$ if and only if every fibre of $X\\times_ST\\to T$ is a local complete intersection over its residue field. Formation of $W_f$ commutes with arbitrary base change between schemes. Equivalently, $s\\in W_f$ if and only if $X_s$ is a local complete intersection over $\\kappa(s)$; the same condition can be checked on a geometric fibre. No dimension, properness, connectedness, or nonemptiness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 06CE (lemma-where-lci), specialized to Y=Z=S and q=id; Tag 06CA (lemma-base-change-lci-fibres) and Tag 06C9 (lemma-flat-lci); fibre interpretation by morphisms.tex Tag 01UF (lemma-syntomic-flat-fibres), on etale charts."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-pc-scheme",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-fibrewise-lci-source-locus] to the given flat locally finitely presented $f$. Write $U=U_f$, and $B=|X|\\setminus|U|$. Thus $B$ is closed. For every scheme base change $T\\to S$, its inverse image $B_T$ is the complement of $|U_{f_T}|$ in $|X_T|$. The same cited statement gives $B_T=\\varnothing$ if and only if all fibres of $f_T$ are local complete intersections. In particular, this criterion applies when $T$ is the spectrum of a residue field or of an algebraically closed extension of it.",
+   "uses": [
+    "lem-sfb-space-fibrewise-lci-source-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CE (lemma-where-lci), proof specialized to Y=Z=S."
+   }
+  },
+  {
+   "text": "Since the underlying map $|f|$ is closed by hypothesis, $C=|f|(B)$ is a closed subset of $|S|$. Put $W=|S|\\setminus C$ and give $W$ the open subscheme structure obtained by restricting the structure sheaf of $S$. By construction $s\\in W$ exactly when no point of $B$ lies above $s$. This uses only the given closed-map hypothesis and the definition of an open subscheme [def-pc-scheme].",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CE (lemma-where-lci), proof specialized to Y=Z=S."
+   }
+  },
+  {
+   "text": "Fix a scheme morphism $g:T\\to S$, put $X_T=X\\times_ST$, and denote its projections by $h:X_T\\to X$ and $f_T:X_T\\to T$. We claim $|f_T|(B_T)=|g|^{-1}(C)$. The inclusion from left to right follows by projecting a point of $B_T=h^{-1}(B)$. Conversely let $t\\in T$ have image $s\\in C$, and choose $x\\in B$ above $s$. Take a surjective etale scheme atlas $a:V\\to X$ from [def-trf-algebraic-space], and a point $v\\in V$ above $x$. Apply [lem-a1-space-fibre-product-point] to the scheme maps $V\\to S$ and $T\\to S$ and the points $v,t$. It gives a point of $V\\times_ST$ over $v,t$, represented after a common field extension; its projections still have the original underlying points $v,t$. The morphism $V\\times_ST\\to X_T$ supplied by the fibre-product universal property [lem-trf-space-fibre-products-etale-covers] sends this point to some $x_T$ over $x,t$. Since $x\\in B$, we have $x_T\\in h^{-1}(B)=B_T$. Thus $t\\in|f_T|(B_T)$, proving the reverse inclusion.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-fibre-product-point",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CE (lemma-where-lci), proof specialized to Y=Z=S."
+   }
+  },
+  {
+   "text": "By step 3, $B_T$ is empty exactly when $|g|(T)\\subseteq W$. Indeed a set is empty if and only if its image under a function is empty. The latter containment is equivalent to factorization of $g$ through the open subscheme $W$: by [lem-weil-pbc-open-preimage-fibre-product], the pullback $T\\times_SW$ is the open subscheme $g^{-1}(W)$ of $T$; it equals $T$ exactly under that containment, yielding the required factorization, and any factorization gives the containment. Combining this with step 1 proves the stated universal property for all scheme morphisms $g$.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CE (lemma-where-lci), proof specialized to Y=Z=S."
+   }
+  },
+  {
+   "text": "For any $g:T\\to S$, define the subset $W_T=|T|\\setminus|f_T|(B_T)$. Step 3 gives $W_T=g^{-1}(W)$, so it is open even though $f_T$ need not be closed. Its open subscheme is $W\\times_ST$ by [lem-weil-pbc-open-preimage-fibre-product]. For every further scheme map $R\\to T$, composition with $g$ and step 4 show that it factors through this open exactly when all fibres of $X\\times_SR\\to R$ are local complete intersections. By the fibre-product universal property [lem-trf-space-fibre-products-etale-covers], this family is $X_T\\times_TR\\to R$. Thus $W_T$ has the required universal property for the base-changed family. Uniqueness follows by applying the universal properties of two candidate opens to their own inclusions into the base. Consequently formation of the universal open commutes with arbitrary scheme base change.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CE (lemma-where-lci), proof specialized to Y=Z=S."
+   }
+  },
+  {
+   "text": "Take $T=\\operatorname{Spec}\\kappa(s)$ in step 4. Its map to $S$ factors through $W$ exactly when $s\\in W$, while its family has just the fibre $X_s$; hence $s\\in W$ if and only if $X_s$ is a local complete intersection. Taking instead $T=\\operatorname{Spec}\\Omega$ for any algebraically closed field extension $\\Omega/\\kappa(s)$ gives the same image point $s$ and the geometric fibre $X\\times_S\\operatorname{Spec}\\Omega$. Step 4 therefore gives the equivalent geometric-fibre criterion, with no separability restriction. If $X_s$ is empty, the fibre condition is vacuous and $s\\in W$, exactly as the complement construction prescribes. If $X$ is empty then $B=C=\\varnothing$ and $W=S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CE (lemma-where-lci), proof specialized to Y=Z=S."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-fibrewise-lci-source-locus",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-a1-space-fibre-product-point",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-open-preimage-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 06CE (lemma-where-lci), proof specialized to Y=Z=S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed flat finitely presented morphism of algebraic spaces the base locus where the family is a local complete intersection is open and commutes with every base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal open subset of the base on which a proper flat family is syntomic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed flat finitely presented morphism of algebraic spaces the base locus where the family is a local complete intersection is open and commutes with every base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Syntomic\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "where.*lci|syntomicLocus|lciLocus|IsSyntomic",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-smooth-open",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Universal base open with local-complete-intersection fibres for a flat closed family.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-lci-base-open",
+  "worker": "stage1",
+  "summary": "Followed Stacks 06CE: construct the base open as the complement of the closed image of the bad source locus. Added one source-locus prerequisite for algebraic spaces (06CA), and used existing scheme point lifting and open-preimage results. Proved the bad-image equality under arbitrary base change explicitly, without assuming universal closedness. Only TeX escaping in the statement was corrected; the mathematical statement is unchanged. Repair of the returned side-completion delivery: re-read the current live prerequisites and retained the 06CE proof; made the existing point-topology statement dependency explicit and clarified field extension in point lifting. The delivery is rebuilt on the current live DAG, where this item remains unsplit. Current returned-head repair (97aa80c6ebd): explicitly distinguished algebraic-space fibre products from the scheme-only fibre-product definition and wrote the geometric-fibre formula; added the existing space fibre-product lemma as a statement dependency. This changes only the cited construction, with no change of hypotheses, conclusions or proof route. Repair of returned head 1a88ccac55a: reread all current cited statements and verified the retained verbatim citation quotes. Step 5 now constructs the base-changed open explicitly as the complement of the bad image and proves that it is open by the point-image equality, before identifying its universal property. Thus base-change formation is justified even when the changed family is not closed. Rebuilt against the current server DAG; no mathematical hypothesis or conclusion changed.",
+  "blueprint": "Realizes the Tag 06CE input used in the isolated-lci curve-stack intersection construction below det-thm-sf-ctf-stability-direct-images, proof (3), through the existing blueprint.from chain. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Generic point lifting in a fibre product over an algebraic space, applied with both sources and target schemes; the unit has no point-lifting input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of sheaf fibre products of algebraic spaces, not any trace-formula assertion."
+   },
+   {
+    "node": "lem-weil-pbc-open-preimage-fibre-product",
+    "why": "Generic identification of a scheme open preimage with the fibre product, used for factorization and base change of the resulting open."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-fibre-product-point",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-open-preimage-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-99551bde9",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-99551bde9 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the new node lem-sfb-space-fibrewise-lci-source-locus, and the statement of every cited node in full. Compared with the earlier PASSed head 1a88ccac, the new node is unchanged; in the item only step 5 and the split_report summary changed. Step 5 now defines W_T = |T| minus the image of B_T, shows W_T = g^{-1}(W) using step 3, and only then applies the open-preimage fibre-product lemma. That is correct. Sources read in local Stacks: 06CE (spaces-more-morphisms l.11836), 06CA (l.11383), 06C9 (l.11252), and 01UF and 02V3 in morphisms. With Y=Z=S and q=id, 06CE has exactly the item's hypotheses (flat, lfp, |f| closed). Because f_T is flat and lfp, 'f_T lci' and 'all fibres of f_T lci' agree by 06C9 and 01UF, so the target is not weakened. The citer lem-sfb-isolated-lci-curve-smooth-open gets the clause it uses. Step checks: step 1 uses the source-locus clauses U_{f_T}=U_f x_S T and U=X iff all fibres lci; step 2 is the closed image under the closed-map hypothesis; step 3 applies lem-a1-space-fibre-product-point only to schemes (atlas V and T over S) and then maps into X_T by the fibre-product universal property; step 4 gets factorisation from the open-preimage Mathlib leaf; step 5 gets base change and uniqueness without assuming f_T closed; step 6 gives the kappa(s) and geometric-fibre criteria, including empty fibres and empty X. The new node is 06CA for algebraic spaces together with chart compatibility with 02V3. It is true, assumes no closedness (so it does not restate the item, D1), is statement-only and self-contained, and has single-escaped TeX. Small cases: k[e]/(e^2) is inside the locus; k[x,y]/(x^2,xy,y^2) is outside and stays outside after field extension. Duplicate search with rg -L for 06CA/06CE and the lci/syntomic titles found no algebraic-space source locus. Neither file cites SGA. Batch 5: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, def-a1-space-open-subspace, def-a1-space-point-topology, lem-a1-space-fibre-product-point and lem-trf-syntomic-locus-base-change (02V3) are general Stacks foundations. Neither assumption provides them and none does a step of the trace-formula or Poincare-duality proof, so I accepted each. I accept the three generic tool uses. No changes."
+ }
+}

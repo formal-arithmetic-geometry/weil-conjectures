@@ -1,0 +1,119 @@
+{
+ "id": "def-integral-kernel-unit-counit",
+ "kind": "definition",
+ "title": "Types and component normalization of the integral diagonal maps",
+ "statement": "Define the pair of transformations between the precise restricted functors. Identify the prescribed positive twist-shift with the ambient diagonal twist using the section-module equivalence. Require its components to equal the fixed diagonal insertion and inverse-projection trace formulas; the only existential choices in this predicate are invertibility proofs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), diagonal unit, trace counit and the two triangle identities"
+ },
+ "stmt_deps": [
+  "def-integral-kernel-tate-comparisons",
+  "def-sfb-projective-ambient-unit-counit-composites"
+ ],
+ "proof": [
+  {
+   "text": "Define the pair of transformations between the precise restricted functors. Identify the prescribed positive twist-shift with the ambient diagonal twist using the section-module equivalence. Require its components to equal the fixed diagonal insertion and inverse-projection trace formulas; the only existential choices in this predicate are invertibility proofs.",
+   "uses": [
+    "def-integral-kernel-tate-comparisons",
+    "def-sfb-projective-ambient-unit-counit-composites"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-integral-kernel-tate-comparisons",
+  "def-sfb-projective-ambient-unit-counit-composites"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), diagonal unit, trace counit and the two triangle identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A diagonal class and normalized projective line traces extend from completed integral coefficients to a family of coefficient rings",
+   "results": "8 hits: Algebra.normalizedTrace_algebraMap_of_lifts, Algebra.normalizedTrace, Algebra.normalizedTrace_surjective, Algebra.normalizedTrace_map, Algebra.normalizedTrace_algebraMap, Algebra.normalizedTrace_algebraMap_apply, Algebra.normalizedTrace_algebraMap_apply_eq_self, Algebra.normalizedTrace_trans",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "1 hits: CategoryTheory.NatTrans.ext",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(integral|trace)|unitCounit.*exists",
+   "results": "7 hits: Mathlib/LinearAlgebra/Matrix/ToLin.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple.lean, Mathlib/Algebra/DirectSum/LinearMap.lean",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pair of natural transformations satisfying the two triangle identities defines an adjunction",
+   "results": "8 hits, including CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.mk, CategoryTheory.Adjunction.CoreUnitCounit.mk.",
+   "date": "2026-10-25",
+   "verdict": "The general unit-counit constructor closes the assembly; it does not construct the geometric Tate comparisons, coefficient family, natural transformations, or contraction formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralProjectiveLineAdjunction",
+  "date": "2026-10-25",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "Paragraph (1), Types and component normalization of the integral diagonal maps",
+   "via": [
+    "lem-sfb-integral-projective-line-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralKernelUnitCounit",
+  "file": "lean/Sheaf/SixFunctors/IntegralKernelUnitCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralAmbientTwistIso",
+  "statement": "def integralAmbientTwistIso {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    pullTwistShift ℓ E f 1 ≅\n      moduleObjectDerivedPullback (Profinite.padicIntegersRingObj ℓ E.val) f ⋙\n        RationalP1.twist (Profinite.padicIntegersRingObj ℓ E.val) X\n          (spIntegralTwist X ℓ E)",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralAmbientTwistIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.IntegralUnitCounitType",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.IntegralUnitCounitNormalized"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T202418-L-2714738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T202418-L-2714738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-space-integral-universally-closed",
+ "kind": "statement",
+ "title": "Integral morphisms of algebraic spaces are affine and universally closed",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:Y\\to X$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Assume $f$ is integral: for every scheme $T\\to X$, the fibre product $Y\\times_XT$ is represented by a scheme integral over $T$ [def-weil-finite-integral-morphism, lem-trf-space-fibre-products-etale-covers]. Then $f$ is affine, meaning that these scheme base changes are affine [pqf-def-affine-morphism], and universally closed: for every algebraic space $X\\prime\\to X$, the map $|Y\\times_XX\\prime|\\to|X\\prime|$ is closed, with the atlas topology on field-valued point classes [def-a1-space-point-topology]. No finite-type, surjectivity, quasi-compactness of $X$, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0415 (lemma-integral-universally-closed), implication (1) to (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "pqf-def-affine-morphism",
+  "def-a1-space-point-topology",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "For every scheme $T\\to X$, the hypothesis gives an integral scheme morphism $Y\\times_XT\\to T$. By [def-weil-finite-integral-morphism] it is affine. This is exactly the scheme-test definition of affineness in the statement, so $f$ is affine.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0415 (lemma-integral-universally-closed), forward implication, expanded using Tag 03IT (lemma-universally-closed-local), proof of (3) to (4)."
+   }
+  },
+  {
+   "text": "Fix any algebraic space $X\\prime\\to X$ and put $Z=Y\\times_XX\\prime$, with projection $g:Z\\to X\\prime$. These fibre products exist by [lem-trf-space-fibre-products-etale-covers]. For any representable etale scheme test $a:T\\to X\\prime$, put $V=Y\\times_XT$. It is a scheme integral over $T$ by the hypothesis. The fibre-product universal property identifies $V$ with $Z\\times_{X\\prime}T$; write $q:V\\to Z$ and $h:V\\to T$ for the projections. By [pqf-lem-integral-univclosed], $h$ is universally closed, hence its underlying point map is closed. By [lem-a1-space-affine-etale-cover], the scheme map $q$ induces a continuous map $|V|\\to|Z|$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "pqf-lem-integral-univclosed",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0415 (lemma-integral-universally-closed), forward implication, expanded using Tag 03IT (lemma-universally-closed-local), proof of (3) to (4)."
+   }
+  },
+  {
+   "text": "Let $C\\subseteq|Z|$ be closed. We claim $|a|^{-1}(|g|(C))=|h|(|q|^{-1}(C))$. One inclusion follows from $gq=ah$. For the other, choose $t\\in|T|$ and $z\\in C$ with $a(t)=g(z)$. By [def-a1-algebraic-space-point-classes], representatives of $t$ and $z$ agree in $X\\prime$ after a common field extension $M$. Their two maps from $\\operatorname{Spec}M$ therefore give a map to $Z\\times_{X\\prime}T=V$ by the fibre-product universal property [lem-trf-space-fibre-products-etale-covers]. Its point class projects to $z$ and $t$, so it belongs to $|q|^{-1}(C)$ and proves the claimed inclusion. This uses equality of point classes, not a cartesian equality of underlying topological spaces.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0415 (lemma-integral-universally-closed), forward implication, expanded using Tag 03IT (lemma-universally-closed-local), proof of (3) to (4)."
+   }
+  },
+  {
+   "text": "Continuity of $|q|$ makes $|q|^{-1}(C)$ closed, and closedness of $|h|$ makes its image closed in $|T|$. By step 3 this image is $|a|^{-1}(|g|(C))$. This holds for every representable etale scheme test $a:T\\to X\\prime$. The final-topology definition [def-a1-space-point-topology], applied to complements, says precisely that $|g|(C)$ is closed in $|X\\prime|$. Thus $g$ is closed for every $X\\prime\\to X$, proving universal closedness without any additional hypothesis.",
+   "uses": [
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0415 (lemma-integral-universally-closed), forward implication, expanded using Tag 03IT (lemma-universally-closed-local), proof of (3) to (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-point-topology",
+  "def-weil-finite-integral-morphism",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "pqf-lem-integral-univclosed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0415 (lemma-integral-universally-closed), forward implication, expanded using Tag 03IT (lemma-universally-closed-local), proof of (3) to (4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral morphism of algebraic spaces is universally closed and affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsIntegralHom f ↔ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if and only if it is universally closed and affine. That is, $ f $ is integral precisely when it satisfies both the universal closedness condition (ever\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsAffine Y],\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).IsIntegral\", \"doc\": \"If $ f: X \\\\to Y $ is a universally closed morphism of schemes and $ Y $ is affine, then the induced ring homomorphism on global sections $ \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ is in\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"Every integral morphism of schemes is affine, i.e., if $ f: X \\\\to Y $ is an integral morphism of schemes, then $ f $ is necessarily an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegralHom_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsIntegralHom f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any schemes $X$ and $Y$ and a morphism $f : X \\to Y$, $f$ is an integral morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Every closed immersion of schemes is an integral morphism of schemes.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralHom.instUniversallyClosed and iff_universallyClosed_and_isAffineHom concern schemes; they do not assert closedness after algebraic-space base change on atlas point spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable morphism of algebraic spaces is integral if and only if it is affine and universally closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsIntegralHom f ↔ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if and only if it is universally closed and affine. That is, $ f $ is integral precisely when it satisfies both the universal closedness condition (ever\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsAffine Y],\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).IsIntegral\", \"doc\": \"If $ f: X \\\\to Y $ is a universally closed morphism of schemes and $ Y $ is affine, then the induced ring homomorphism on global sections $ \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ is in\"}\n  {\"name\": \"AlgebraicGeometry.isIntegralHom_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsIntegralHom f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any schemes $X$ and $Y$ and a morphism $f : X \\to Y$, $f$ is an integral morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"Every integral morphism of schemes is affine, i.e., if $ f: X \\\\to Y $ is an integral morphism of schemes, then $ f $ is necessarily an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Every closed immersion of schemes is an integral morphism of schemes.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralHom.instUniversallyClosed and iff_universallyClosed_and_isAffineHom concern schemes; they do not assert closedness after algebraic-space base change on atlas point spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"UniversallyClosed\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsIntegralHom f] : AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} : AlgebraicGeometry.IsIntegralHom f ↔ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.eq_universallyClosed_inf_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \" : @AlgebraicGeometry.IsIntegralHom = @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.IsAffineHom\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralHom.instUniversallyClosed and iff_universallyClosed_and_isAffineHom concern schemes; they do not assert closedness after algebraic-space base change on atlas point spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|integral.*universally.closed|universally.closed.*integral",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"20\", \"text\": \"  If `X` is an integral scheme that is universally closed over `Spec K`, then `Γ(X, ⊤)` is a field.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"22\", \"text\": \"  If `X` is an integral scheme that is universally closed and of finite type over `Spec K`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"148\", \"text\": \"/-- If `X` is an integral scheme that is universally closed over `Spec K`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"159\", \"text\": \"/-- If `X` is an integral scheme that is universally closed and of finite type over `Spec K`,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralHom.instUniversallyClosed and iff_universallyClosed_and_isAffineHom concern schemes; they do not assert closedness after algebraic-space base change on atlas point spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral morphism of algebraic spaces stays closed on point spaces after every algebraic space base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ that is universally closed satisfies the property that for every base change, the induced continuous map on the underlying topological spaces is a closed map. In ot\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsIntegralHom @IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is an integral morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"PrimeSpectrum.isClosedMap_comap_of_isIntegral\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(hf : f.IsIntegral) : IsClosedMap (comap f)\", \"doc\": \"If $ f : R \\\\to S $ is an integral ring homomorphism between commutative semirings, then the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, which sends a prime ideal $ \\\\mathfrak{p} \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} : IsIntegralHom f ↔ UniversallyClosed f ∧ IsAffineHom f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if and only if it is universally closed and affine. That is, $ f $ is integral precisely when it satisfies both the universal closedness condition (ever\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralHom.instUniversallyClosed and iff_universallyClosed_and_isAffineHom concern schemes; they do not assert closedness after algebraic-space base change on atlas point spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsIntegralHom.*(UniversallyClosed|IsAffineHom)",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: the integral/universally closed hits are scheme results; use the existing scheme Mathlib leaf only after taking scheme tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral morphisms of algebraic spaces induce closed maps after every algebraic space base change",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.UniversallyClosed.mk, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, PrimeSpectrum.isIntegral_of_isClosedMap_comap_mapRingHom",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: the integral/universally closed hits are scheme results; use the existing scheme Mathlib leaf only after taking scheme tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"UniversallyClosed\"",
+   "results": "3 hits: AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom, AlgebraicGeometry.IsIntegralHom.eq_universallyClosed_inf_isAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: the integral/universally closed hits are scheme results; use the existing scheme Mathlib leaf only after taking scheme tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral morphism of algebraic spaces is affine and universally closed",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsIntegralHom.toIsAffineHom, AlgebraicGeometry.isIntegralHom_iff, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: the integral/universally closed hits are scheme results; use the existing scheme Mathlib leaf only after taking scheme tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable integral maps of etale sheaves are closed on the quotient topology defined by scheme atlases",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.isClosedEmbedding_isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: the integral/universally closed hits are scheme results; use the existing scheme Mathlib leaf only after taking scheme tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-acyclic-affinization-geometry",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Geometric prerequisites to Tag 07V6: separatedness and universal injectivity of the absolute canonical map, before the affine presentation argument. Tag 07V5 final paragraph: integral morphisms are affine and universally closed by Tag 0415, before applying the existing absolute separation-descent lemma.",
+   "via": [
+    "lem-sfb-space-acyclic-affinization-geometry",
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-integral-universally-closed",
+  "worker": "stage1",
+  "summary": "Proved affineness on scheme tests and universal closedness by closed scheme-test images and the final atlas topology. Wrote the common-field-extension proof of the image/preimage equality explicitly. Reused existing DAG nodes throughout; no new nodes or statement changes.",
+  "blueprint": "The inherited from.node is null (blueprint_refs.py ancestor confirms this); the inherited place names det-thm-sf-ctf-stability-direct-images, paragraph (3). Read its current latest file sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), preserving its alteration/moduli support route. This split supplies the Tag 0415 integral-map input at the end of the inherited place. Whole-blueprint searches found no algebraic-space equivalent; pqf-lem-integral-univclosed is only the scheme specialization.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic continuity of maps from schemes into an algebraic space with its atlas topology; the unit has no replacement topology theorem."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of algebraic-space fibre products for the arbitrary base change and its scheme tests, used without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-8014ab6e0",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-8014ab6e0 (reviewer sub-agent of L); spot-checked: Read the item and its 4 steps in full; the delivery has no new nodes and leaves the statement unchanged. Stacks Tag 0415 (spaces-morphisms l.9230) proves the result by checking on scheme tests (03IT, l.1373) and then citing 01WM; the delivery spells out that reduction correctly. Step 1: an integral scheme map is affine by the definition in def-weil-finite-integral-morphism (elementary). Step 2: lem-trf-space-fibre-products-etale-covers gives the fibre products, so V=Y×_X T≅Z×_{X'}T; pqf-lem-integral-univclosed (01WM, integral implies universally closed) makes h closed; lem-a1-space-affine-etale-cover makes |q| continuous, and def-a1-space-point-topology identifies its topology with the atlas topology. Step 3: proves |a|^{-1}(|g|C)=|h|(|q|^{-1}C) directly, using the common-field-extension relation of def-a1-algebraic-space-point-classes and the universal property of the fibre product; this is the needed half of 03H4. Step 4: closedness follows from the final topology over all representable étale scheme tests. Edge cases checked: empty X' or C, identity map, non-surjective closed immersion, non-reduced V, integral but not finite maps, and X' not a scheme. Duplicate search: lem-sfb-finite-space-morphism-topology covers only the finite case and lem-sfb-integral-stack-closed-point-topology is a special case (stacks of finite type over a field), so neither is a duplicate. Not superseded: the item is still unsplit in clones/live and side-live. The only citer (acyclic-affinization-geometry) uses the same sense of universally closed. No SGA citation. Accepted tool_uses: lem-a1-space-affine-etale-cover and lem-trf-space-fibre-products-etale-covers, both generic algebraic-space tools. Batch-5: def-a1-algebraic-space-point-classes and lem-a1-space-affine-etale-cover reach def-trf-algebraic-space only through the general definition of an algebraic space, which the statement already cites. Neither is part of the trace formula, Poincaré duality or their proofs, so no change is needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralSpaceUniversallyClosed",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_and_universallyClosed_of_integral",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralSpaceUniversallyClosed.lean",
+  "statement": "theorem affine_and_universallyClosed_of_integral {S : Scheme.{u}} {Y X : AlgebraicSpace S} (f : Y ⟶ X) (hf : IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) f.hom.hom) : MapIsAffine f ∧ MapIsUniversallyClosed f",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e76c8eb6",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Checked node vs Lean clause by clause: hf = IsRepresentableWith (IsIntegralHom p.left) gives actual integral pullback squares over every scheme T→X; MapIsAffine (owner def-sfb-space-affine-quasifinite-properties) is equivalent to all scheme base changes affine (affine-local on target); MapIsUniversallyClosed (owner def-sfb-space-morphism-properties) is closedness of mapPoint of pullback.snd for every algebraic-space base change in the final atlas topology. No extra hypotheses; single universe u; edge cases (empty spaces/closed sets, identity, closed immersions, integral non-finite, non-qc, non-schematic X') covered; lean.statement verbatim; sorry-only; docstrings carry Tag 0415/03IT, blueprint id and 4 proof steps; report has Worker report and Second reading by Q48; node diff vs live = lean + two landed def-owner stmt_deps only; no duplicate in Mathlib/Sheaf. No files changed, no compile needed."
+ }
+}

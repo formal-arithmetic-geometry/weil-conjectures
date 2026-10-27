@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-reindexing-ordinary-mate-sections",
+ "kind": "statement",
+ "title": "Ordinary isomorphism-square mate on completed-module sections",
+ "statement": "For an adic coefficient datum d and a chosen Cartesian scheme square (v,p prime,p,g) with v and g scheme isomorphisms, the specified purReindexingModuleMate is invertible. On M and a test V over Y, its value after the inverse-image unit for g is restriction of the inverse-image unit for v along the canonical fibre-product pasting isomorphism purReindexingTestSquare(sq.w). This statement concerns the ordinary module mate only and asserts no tower or derived exchange result. The coefficient datum and the concrete canonical maps are those of [def-weil-pbc-adic-coefficient-datum] and [def-pur-completed-reindexing-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/proetale.tex",
+  "place": "Stacks Tag 07A7, remark-base-change; extracted argument step 6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-strict-tower-operations",
+  "def-weil-pbc-cartesian-square",
+  "def-pur-completed-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "For each test over Y prime restrict sections along (v,1) between the two fibre products. Its inverse is (inv v,1), because commutativity and cancellation of g give the required equality over Y prime. Coefficient composition gives module linearity, and fibre-product functoriality gives naturality in tests and modules.",
+   "uses": [
+    "lem-pur-completed-module-section-reindexing",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the comma-normalized section reindexing of lem-pur-completed-module-section-reindexing. The transpose of this restriction map is the canonical pullback-square identification followed by the pulled counit: both restrict a local section along (v,W to V). The tensor-unit normalization and sheafification extend the local equation. Uniqueness of adjunction transpose therefore identifies it with purReindexingModuleMate and yields exactly its stated unit-normalized section formula.",
+   "uses": [
+    "lem-pur-completed-module-section-reindexing",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-module-section-reindexing",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "agent-written specialization of the cited Stacks argument and extracted parent proof; preserves actual canonical normalization maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "For an isomorphism of schemes, completed coefficient module pullback agrees with section reindexing and preserves derived inverse limits, quotient augmentation and adjunction base change mates",
+   "results": "Eight results give ordinary scheme module pullback and generic sheaf pullback constructions; none concerns the project completed pro-etale coefficient operations or their specified normalizations.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Inverse image of module sheaves under a site equivalence, preservation of derived inverse limit and compatibility of base change mates with derived functors",
+   "results": "ExactFunctor derived descent APIs are available; no theorem identifies these published completed-ring operations and their specified normalization maps in one specialization.",
+   "date": "2026-10-25",
+   "verdict": "not a one-line Mathlib specialization"
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor",
+   "results": "General equivalence infrastructure does not state the completed coefficient section and derived-unit normalization equations.",
+   "date": "2026-10-25",
+   "verdict": "not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*mate|pushforwardPushforwardEquivalence|limit\\.post",
+   "results": "Sheaf.PushforwardContinuous supplies the action-transport equivalence, and limit.post supplies the ordinary limit map. Neither states the comparison with the project tensor pullback, completed quotient augmentation or specified derived mates.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurCompletedReductionReindexing",
+  "group": "W2",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Stacks Tag 07A7, remark-base-change; extracted argument step 6; constituent scheme-isomorphism normalization",
+   "via": [
+    "lem-pur-isomorphism-completed-reduction-reindexing",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurReindexingOrdinaryMate",
+  "file": "lean/Sheaf/Paper/PurReindexingOrdinaryMate.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purReindexingOrdinaryMate",
+  "statement": "theorem purReindexingOrdinaryMate {X' X Y' Y : Scheme.{t}} {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y} [IsIso v] [IsIso g] (sq : ChosenCartesianSquare v p' p g) : PurCompletedReindexingSquareOrdinary d sq ∧ PurCompletedReindexingSquareSections d sq",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 4 split statements + relocated Data defs against the clone's old item module, the CompletedPullback/CompletedPullbackInterface definitions, the node JSONs and the 3 direct importers (all compiled against the delivered modules)"
+ }
+}

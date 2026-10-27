@@ -1,0 +1,229 @@
+{
+ "id": "lem-sf-native-weil-pullback-star-preservation",
+ "kind": "statement",
+ "title": "Bounded constructible preservation for native Weil pullback and ordinary direct image",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $f_0:X_0\\to Y_0$ be a separated finite-type morphism between separated finite-type $k_0$-schemes. Use $D(\\mathcal W_X)$, $D(\\mathcal W_Y)$ and their bounded constructible full subcategories $\\mathrm{WC}^{\\mathrm{der}}(X_0)$, $\\mathrm{WC}^{\\mathrm{der}}(Y_0)$ from [def-sf-native-weil-derived-framework]. The actual ambient termwise pullback and right-derived ordinary direct image preserve these subcategories: for every $L\\in\\mathrm{WC}^{\\mathrm{der}}(Y_0)$ and $K\\in\\mathrm{WC}^{\\mathrm{der}}(X_0)$,\n$$f^*L\\in\\mathrm{WC}^{\\mathrm{der}}(X_0),\\qquad Rf_*K\\in\\mathrm{WC}^{\\mathrm{der}}(Y_0).$$\nTheir restrictions are the actual functors `AlgebraicGeometry.WeilComplex.upperStar f₀` and `AlgebraicGeometry.WeilComplex.derivedLowerStar f₀`. In particular these conclusions assert both boundedness and constructibility of every cohomology sheaf for each displayed ambient object.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.md",
+  "place": "Clauses 1 and 3, native derived-Weil realization; live lean/WeilConjectures/WeilSheaf/Category.lean:472-480 (pullback restriction and preservation) and LowerStar.lean:144-156, 171-179 (AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar and its restriction). These live declarations specify the assertion in this model; no equivalence with the geometric coefficient categories is presumed."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof": [
+  {
+   "text": "For an ambient derived Weil complex L satisfying the object predicate, form the full-subcategory object (L,hL). Apply the existing restricted pullback WeilComplex.upperStar f of [def-sf-native-weil-derived-framework]. By its actual liftFullSubcategory construction its underlying object is the ambient termwise pullback of L. The membership witness of this object is the required bounded constructibility assertion. This reuses the existing native pullback proof; no coefficient realization is required.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/Category.lean and lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+    "place": "WeilComplex.upperStar (Category.lean:472-480); WeilComplex.objectProperty_rightDerivedLowerStar and WeilComplex.derivedLowerStar (LowerStar.lean:144-156, 171-179)."
+   }
+  },
+  {
+   "text": "Apply the existing native theorem WeilComplex.objectProperty_rightDerivedLowerStar f to K and hK. Its hypotheses are satisfied: separatedness of f implies quasi-separatedness, and all finite-type and quasi-compactness hypotheses are explicitly assumed. This is the preservation witness used by the actual restricted functor WeilComplex.derivedLowerStar f of [def-sf-native-weil-derived-framework], whose source proof uses native derived-forgetting and bounded devissage. No assertion of transitive sorry-freeness is made.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/Category.lean and lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+    "place": "WeilComplex.upperStar (Category.lean:472-480); WeilComplex.objectProperty_rightDerivedLowerStar and WeilComplex.derivedLowerStar (LowerStar.lean:144-156, 171-179)."
+   }
+  },
+  {
+   "text": "Unfold the two actual restricted functors of [def-sf-native-weil-derived-framework]. Each is liftFullSubcategory of the displayed ambient functor. Its composite with the target inclusion is definitionally equal to the source inclusion followed by the ambient functor: the objects and morphisms coincide. Both equalities are rfl in Lean.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/Category.lean and lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+    "place": "WeilComplex.upperStar (Category.lean:472-480); WeilComplex.objectProperty_rightDerivedLowerStar and WeilComplex.derivedLowerStar (LowerStar.lean:144-156, 171-179)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/WeilSheaf/Category.lean and lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+  "place": "WeilComplex.upperStar (Category.lean:472-480); WeilComplex.objectProperty_rightDerivedLowerStar and WeilComplex.derivedLowerStar (LowerStar.lean:144-156, 171-179).",
+  "note": "R3 stage-3 shorter route: reuse the native preservation proofs already present in the source library and the literal full-subcategory lifts. The unit statement and its route are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image and right derived direct image preserve bounded constructible complexes of proetale Weil sheaves over finite fields",
+   "results": "8 hits: Condensed.lanSheafProfinite; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; AlgebraicGeometry.Scheme.Hom.isConstructible_image; Condensed.ofSheafForgetProfinite; CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts; LightCondensed.ofSheafForgetLightProfinite; CategoryTheory.GrothendieckTopology.W_inverseImage_whiskeringLeft; CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finiteness theorem for ordinary pushforward of bounded constructible adic Weil complexes and exact pullback",
+   "results": "8 hits: SSet.finite_of_isPullback; MeasureTheory.IsFiniteMeasure_comap; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; TopCat.Sheaf.pullbackPushforwardAdjunction; TopCat.Presheaf.pushforwardPullbackAdjunction; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Derived\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "objectProperty_rightDerivedLowerStar|WeilComplex|IsAdicConstructibleSheaf",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicConstructibleSheaf|finiteLowerStar|ProEtaleWeilSheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states native Frobenius-equivariant bounded constructible preservation; generic pullback/derived-category declarations do not state it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback and ordinary derived pushforward of bounded constructible pro etale adic sheaves",
+   "results": "8 hits: TopCat.Sheaf.pullback; SheafOfModules.PullbackConstruction.adjunction; TopCat.Presheaf.pushforwardPullbackAdjunction; SheafOfModules.pullback; CategoryTheory.Functor.sheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states native Frobenius-equivariant bounded constructible preservation; generic pullback/derived-category declarations do not state it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicConstructibleSheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states native Frobenius-equivariant bounded constructible preservation; generic pullback/derived-category declarations do not state it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image and total right derived direct image preserve bounded constructible native Frobenius equivariant pro etale adic complexes",
+   "results": "8 hits: BDeRhamPlus; BDeRham; localCohomology.diagram; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; localCohomology.ofSelfLERadical; localCohomology; localCohomology.isoSelfLERadical",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states native Frobenius-equivariant bounded constructible preservation; generic pullback/derived-category declarations do not state it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness and constructibility of derived direct image of ell adic sheaves with an invertible Frobenius action",
+   "results": "8 hits: BDeRhamPlus; BDeRham; SheafOfModules.IsFiniteType; Condensed.finFree; LightCondMod.ofSheafLightProfinite; localCohomology; Condensed.profiniteSolid; CondensedMod.ofSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states native Frobenius-equivariant bounded constructible preservation; generic pullback/derived-category declarations do not state it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.WeilComplex.upperStarDerivedLowerStarAdjunction",
+   "file": "lean/WeilConjectures/WeilSheaf/Localization.lean",
+   "line": 191,
+   "note": "Exact project declaration has no sorry in its own body; no transitive sorry-free claim is made."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Steps 1-2 use the ordinary derived adjunction and tensor-Hom exchange; fix-lem-tensor-adjunction.proof.md step 1 tests against L and uses f^*L and Rf_*RHom. This node supplies bounded constructible preservation needed to type those operations in the native derived-Weil category. The audit seed has no created.item ancestor; the explicitly named source route supplies this breadcrumb.",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-pullback-star-preservation",
+  "worker": "stage1",
+  "summary": "Q40 repair of the human re-split order: two comparable statement-only tasks isolate native encoding/derived operations (old steps 3,4,7) and predicate/cohomology detection (old steps 5,6). Existing coefficient-ring realization carries old step 2. Geometry, coefficient stability and the literal restriction identification remain as the short assembly. Statement and statement dependencies are unchanged; the full returned argument is retained verbatim in report.md.",
+  "blueprint": "The audit seed has no imported ancestor (blueprint_refs ancestor returns None). This supplies the f^*L and Rf_* terms in fix-lem-tensor-adjunction.proof.md Step 1, through det-thm-sf-ctf-stability-direct-images clauses (1) and (3), in the native realization requested by the parent lem-sf-weil-verdier-exchange. Q40 partitions the returned proof as recorded in report.md; all nine old steps are accounted for.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic base-change stability needed to verify the geometric schemes; it does not replace a biduality argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity verifies the coefficient-heart hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic qcqs criterion verifies the field Tor-comparison hypotheses."
+   },
+   {
+    "node": "det-thm-sf-ctf-stability-direct-images",
+    "why": "Underlying geometric stability, clauses (1) and (3), is precisely the source route named by this native-preservation seed; it is used after explicit identification of its coefficient model, not as a replacement biduality proof."
+   },
+   {
+    "node": "lem-sf-locally-finite-coefficient-ring-realization",
+    "why": "Canonical native coefficient-ring realization, already present in the DAG, supplies exactly the old coefficient comparison; it is a generic model comparison, not a different biduality route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-c42891684",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-c42891684 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the released keep_plan repair note (re-split of 2026-10-21; the live item is still the Q33 9-step split, so nothing supersedes this delivery). The re-split is distributed faithfully. Old step 2 (B_T ≅ p_T^*Ω) is carried exactly by the existing node lem-sf-locally-finite-coefficient-ring-realization, which is on live. Old steps 3, 4 and 7 go to lem-sf-native-encoding-derived-operations (2.5k characters) and old steps 5 and 6 to lem-sf-native-forget-constructible-criterion (2.5k characters), so the two new nodes are of comparable size. Old steps 1, 8 and 9 are pure applications and stay in a 2246-character assembly. Neither new node restates the item: one has no constructibility conclusion, the other no morphism. Mathematics checked. Module objects in Ω-vector-space sheaves match sectionwise B_T-modules through locally constant scalars. The Frobenius exchange F_Y^*f_* ≅ f_*F_X^* holds via f̄F_X=F_Yf̄. Local stratifications refine to a global one on a Noetherian qcqs T. A finitely presented Ω-module is Ω^r. Forgetting is exact and reflects zero. D^b_c=D_ctf with Tor in [a-1,b] by det-def-localizing-closure-ctf-equals-bc(2). The geometric hypotheses meet sk-def-sfb-dc-setting through the three generic tool nodes. No SGA source is cited. Searches cover four kinds. One C4 FIX: det-thm-sf-ctf-stability-direct-images (1),(3) concerns Lf^* and Rf_* of sk-def-sfb-module-derived-pushpull, but the encoding node named its f_R^* only as R_X⊗f^{-1}(-). The corrected node now identifies f_{R*}, f_R^*, Rf_{R*} and the termwise Lf^* with those definitions and adds both ids to stmt_deps. Advisory: the encoding node overlaps lem-sf-finite-span-module-derived-comparison but is a strictly larger assertion (it adds the Frobenius-forgetting derived comparisons); its worker should cite that node and lem-sf-fixed-pair-derived-forget-comparison. The declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativePullbackStarPreservation",
+  "declaration": "AlgebraicGeometry.WeilComplex.native_pullback_star_preservation",
+  "file": "lean/Sheaf/WeilSheaf/NativePullbackStarPreservation.lean",
+  "statement": "theorem native_pullback_star_preservation (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] : (∀ L : DerivedCategory (ProEtaleWeilSheaf k₀ l Y), objectProperty k₀ l Y L → objectProperty k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l f).mapDerivedCategory.obj L)) ∧ (∀ K : DerivedCategory (ProEtaleWeilSheaf k₀ l X), objectProperty k₀ l X K → objectProperty k₀ l Y ((ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor.obj K)) ∧ (upperStar (k₀ := k₀) (l := l) f ⋙ (objectProperty k₀ l X).ι = (objectProperty k₀ l Y).ι ⋙ (ProEtaleWeilSheaf.upperStar k₀ l f).mapDerivedCategory) ∧ (derivedLowerStar (k₀ := k₀) (l := l) f ⋙ (objectProperty k₀ l Y).ι = (objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor)",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f95c4c1a",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read the node, the stmt_dep def-sf-native-weil-derived-framework (lean existing:true, 18 declarations) and the live Category.lean (upperStar/objectProperty) and LowerStar.lean (objectProperty_rightDerivedLowerStar, derivedLowerStar). Every hypothesis matches the node: finite k0, Fact l.Prime, Fact (ringChar k0 ≠ l), separated + locally finite type + quasi-compact for f and for both structure maps; QuasiSeparated f by instance; no stronger assumption; one universe u, as in the framework. The four conjuncts are pullback preservation (termwise mapDerivedCategory), ordinary rightDerivedFunctor direct-image preservation, and functor equalities restricted ⋙ ι = ι ⋙ ambient, which hold because liftFullSubcategory ⋙ ι is the ambient composite (Iso.refl upstream). objectProperty = bounded ⊓ constructible cohomology, so both boundedness and constructibility are asserted. Edge cases (empty schemes, zero complex, identity and open immersions) covered. H4: upstream has clause 2 alone and clause 1 only as a witness inside upperStar; no aggregate declaration, so the new module is right. Node differs from live only in lean; statement field verbatim; docstrings carry the source, the blueprint tag and the 4 proof steps; sorry only; proof imports exist; report has Worker report and Second reading by Q68. Not recompiled (no change); worker reports a clean scompile. Advisory: stage 3 can close the clauses from upstream."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261024T223344-L-1594489",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

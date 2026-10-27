@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-flat-projective-twist-base-change-data",
+ "kind": "statement",
+ "title": "Flat projective twists: finite presentation, flatness and base-change identifications",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $n\\geq0$, and $i:Z\\hookrightarrow\\mathbf P^n_T$ a closed immersion [def-weil-closed-immersion], where relative projective space is [def-nagata-relative-projective-space]. Let $\\pi:\\mathbf P^n_T\\to T$ be the structural morphism and put $f=\\pi\\circ i$. Suppose $f:Z\\to T$ is flat [def-weil-flat-morphism] and finitely presented, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. For each $d\\in\\mathbf Z$, the restrictions on affine base opens of $i^*\\mathcal O_{\\mathbf P^n_T}(d)$, with twists and module pullback as in [def-pc-projective-space-twist, def-pc-module-pullback], glue canonically to an invertible module $\\mathcal F_d$ [def-sc-invertible-module] on $Z$. Then $f$ is proper [def-weil-proper-morphism]; each $\\mathcal F_d$ is of finite presentation [def-weil-pbc-module-finite-type-presentation] and flat over $T$, meaning $(\\mathcal F_d)_z$ is a flat $\\mathcal O_{T,f(z)}$-module [def-weil-pbc-flat-ring-map] for every $z\\in Z$. There are canonical identifications $\\mathcal F_d\\cong\\mathcal F_1^{\\otimes d}$ for $d\\geq0$ and $\\mathcal F_d\\cong(\\mathcal F_1^\\vee)^{\\otimes(-d)}$ for $d<0$. For every morphism $h:T'\\to T$, the pullback $Z'=Z\\times_TT'$ [def-pc-fibre-product] has its induced closed embedding $i':Z'\\hookrightarrow\\mathbf P^n_{T'}$, and the projection $h_Z:Z'\\to Z$ satisfies $h_Z^*\\mathcal F_d\\cong i'^*\\mathcal O_{\\mathbf P^n_{T'}}(d)$ for every integer $d$, compatibly with these tensor-power identifications.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01MT (lemma-apply-modules), tensor powers and rank-one local bases, applied after affine base restriction; morphisms.tex Tag 01WC (lemma-locally-projective-proper). Base flatness and arbitrary-base-change compatibility are the transition-function calculation in returned proof step 2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-relative-projective-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-fibre-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The comparison [lem-trf-free-projective-bundle-base-change-space] identifies the relative-Proj projective space in the hypothesis with the base-change projective space over $T$, preserving the structural morphism. Thus $i$ exhibits $f$ as H-projective. Moreover $f$ is quasi-compact by the assumed finite presentation. It is therefore projective in [def-pc-projective-morphism], and [lem-pc-projective-proper] gives properness. No finiteness or Noetherian condition on $T$ is used.",
+   "uses": [
+    "lem-trf-free-projective-bundle-base-change-space",
+    "def-pc-projective-morphism",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC, lemma-locally-projective-proper; Definition 01W8, definition-projective"
+   }
+  },
+  {
+   "text": "For each affine base open $V=\\operatorname{Spec}A$, use the standard opens $D_+(x_j)$ of $\\mathbf P^n_V$ in [def-nagata-relative-projective-space]. Their inverse images $W_{V,j}\\subset Z$ cover $Z$. By [def-pc-projective-space-twist], the degree-$d$ twist has basis $e_j^{(d)}$ with $e_j^{(d)}=(x_j/x_k)^d e_k^{(d)}$ on intersections. The tensor formula [def-pc-module-pullback] makes its pullback free on $W_{V,j}$ with basis $u_j^{(d)}=1\\otimes e_j^{(d)}$: the trivialization is $a\\otimes(b e_j^{(d)})\\mapsto a\\,i^\\sharp(b)$ and its inverse sends $a$ to $a\\otimes e_j^{(d)}$. Its transitions are $(i^\\sharp(x_j/x_k))^d$. The relative-projective-space charts agree under restriction on the base; hence on an affine refinement of two intersecting base opens these are the same transition rules. They satisfy the cocycle identity since $(x_j/x_k)^d(x_k/x_l)^d=(x_j/x_l)^d$. The ratios are units on these intersections, also for negative $d$. Apply the sheaf-gluing clause (2) of [lem-weil-pbc-glue-sheaves-of-modules] to obtain $\\mathcal F_d$, and clause (1) to glue the local identifications with the prescribed pullbacks. The same clause glues their inverses and proves uniqueness, so the construction is canonical. These free rank-one charts make $\\mathcal F_d$ invertible in [def-sc-invertible-module].",
+   "uses": [
+    "def-nagata-relative-projective-space",
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MS (lemma-when-invertible), 01MT (lemma-apply-modules), rank-one charts; sheaves.tex Tags 00AL/00AM and 04TN, gluing sheaves and maps"
+   }
+  },
+  {
+   "text": "On every $W_{V,j}$ the presentation $0\\longrightarrow\\mathcal O_{W_{V,j}}\\xrightarrow{a\\mapsto a u_j^{(d)}}\\mathcal F_d|_{W_{V,j}}\\longrightarrow0$ has one generator and no relations. This is finite presentation by [def-weil-pbc-module-finite-type-presentation]. For $z\\in W_{V,j}$ the basis gives an $\\mathcal O_{T,f(z)}$-linear isomorphism $(\\mathcal F_d)_z\\cong\\mathcal O_{Z,z}$. The latter is flat over $\\mathcal O_{T,f(z)}$ by [def-weil-flat-morphism]. Under this isomorphism the two maps obtained by tensoring any injection with these modules are conjugate; hence injectivity for one is injectivity for the other. By [def-weil-pbc-flat-ring-map], $(\\mathcal F_d)_z$ is flat over the base. This argument works for every integer $d$.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-flat-morphism",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Definition 01BN, definition-finite-presentation; morphisms.tex Definition 01U3, definition-flat; algebra.tex Definition 00HB, definition-flat"
+   }
+  },
+  {
+   "text": "For $d\\geq0$, on $W_{V,j}$ send $u_j^{(d)}$ to $(u_j^{(1)})^{\\otimes d}$, with the zeroth tensor power defined as $\\mathcal O_Z$ and $u_j^{(0)}$ sent to $1$. Both sides have transition $(i^\\sharp(x_j/x_k))^d$, so these isomorphisms and their inverses glue by [lem-weil-pbc-glue-sheaves-of-modules]. For $d=-m<0$, let $v_j$ be the dual basis of $\\mathcal F_1^\\vee$ in [def-sc-invertible-module], so $v_j(u_j^{(1)})=1$. If $u_j^{(1)}=r_{jk}u_k^{(1)}$, evaluation gives $v_j=r_{jk}^{-1}v_k$. Consequently $u_j^{(-m)}\\mapsto v_j^{\\otimes m}$ has identical transition $r_{jk}^{-m}$ on both sides and glues, together with its inverse. The tensor powers here are [def-pur-sheaf-tensor-product]; on free rank-one modules multiplication of coefficients identifies each tensor power with the module generated by the indicated pure tensor. Thus these are the asserted canonical power and dual-power identifications.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MT, lemma-apply-modules, multiplication and powers; sheaves.tex Tag 04TN, lemma-glue-maps"
+   }
+  },
+  {
+   "text": "For arbitrary $h:T'\\to T$, apply [lemma-nagata-relative-proj-base-change-arbitrary] to the standard polynomial algebra defining $\\mathbf P^n_T$. On affine opens $\\operatorname{Spec}B\\subset T'$ mapping into $\\operatorname{Spec}A\\subset T$, the coefficientwise pullback algebra is $B\\otimes_A A[x_0,\\ldots,x_n]\\cong B[x_0,\\ldots,x_n]$, by $b\\otimes\\sum a_\\alpha x^\\alpha\\mapsto\\sum b h^\\sharp(a_\\alpha)x^\\alpha$. Its inverse sends $b x^\\alpha$ to $b\\otimes x^\\alpha$. These maps preserve degree, unit and multiplication and commute with restriction in both affine opens, so they are an identification of $\\operatorname{Sym}_{\\mathcal O_{T'}}(\\mathcal O_{T'}^{\\oplus(n+1)})$ with the coefficientwise pullback $h^*\\operatorname{Sym}_{\\mathcal O_T}(\\mathcal O_T^{\\oplus(n+1)})$ in the sense of [def-nagata-graded-algebra-pullback-data]. Thus the relative-Proj isomorphism identifies $\\mathbf P^n_{T'}$ with $T'\\times_T\\mathbf P^n_T$ and sends every coordinate ratio to the same coordinate ratio with coefficients in $B$. These affine descriptions cover $T'$ and agree on restrictions. The fibre-product universal property identifies $Z\\times_TT'$ with $Z\\times_{\\mathbf P^n_T}\\mathbf P^n_{T'}$. Its projection $i'$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change].",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "def-nagata-graded-algebra-pullback-data",
+    "def-nagata-relative-projective-space",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O3, lemma-relative-proj-base-change; morphisms.tex Tag 01QR, lemma-base-change-closed-immersion"
+   }
+  },
+  {
+   "text": "On the inverse image of $W_{V,j}$ in $Z'$, [def-pc-module-pullback] gives the basis $1\\otimes u_j^{(d)}$ of $h_Z^*\\mathcal F_d$. The module $i'^*\\mathcal O_{\\mathbf P^n_{T'}}(d)$ has the corresponding basis $u_j'{}^{(d)}$ from [def-pc-projective-space-twist]. Send $1\\otimes u_j^{(d)}$ to $u_j'{}^{(d)}$ linearly. By step 5 the two transition factors are both $h_Z^\\sharp(r_{jk})^d$, because ring maps preserve products and inverses of units. Thus these maps and their inverses glue by [lem-weil-pbc-glue-sheaves-of-modules] to the required canonical isomorphism for every $d\\in\\mathbf Z$. To check compatibility with step 4, trivialize on these same opens: for $d\\geq0$ either composite sends the pulled-back basis to $(u_j'{}^{(1)})^{\\otimes d}$, including $1$ for $d=0$; for $d=-m$ either composite sends it to $(v'_j)^{\\otimes m}$, where $v'_j(u_j'{}^{(1)})=1$. The local tensor comparison is $(a\\otimes u)\\otimes(b\\otimes v)\\mapsto ab\\otimes(u\\otimes v)$, and the dual comparison sends the pulled-back dual basis to $v'_j$. These are isomorphisms on the displayed bases. Hence the diagrams agree locally, and the uniqueness clause of the same gluing lemma proves their global commutativity.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O3, lemma-relative-proj-base-change, coefficientwise comparison; sheaves.tex Definition 0095 and Tag 04TN, lemma-glue-maps; generator calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-graded-algebra-pullback-data",
+  "def-nagata-relative-projective-space",
+  "def-pc-module-pullback",
+  "def-pc-projective-morphism",
+  "def-pc-projective-space-twist",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-pc-projective-proper",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MS, 01MT and 01O3; explicit transition-function assembly using the cited DAG statements. Properness follows morphisms.tex Tag 01WC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented closed subscheme of relative projective space is proper; all integer twisting line bundles are finitely presented and flat over the base, commute with arbitrary base change, and field fibres are Noetherian",
+   "results": "{\"t\": \"2026-10-22T06:03:01Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented closed subscheme of relative projective space is proper; all integer twisting line bundles are finitely presented and flat over the base, commute with arbitrary base change, and field fibres are Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\"], \"digest\": \"3a1c32f734545283\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj, properness, stalk rank and homogeneous-ideal declarations do not give this combination of conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T06:02:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInvertible\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"VectorField.pullback_eq_of_not_isInvertible\", \"VectorField.pullbackWithin_eq_of_not_isInvertible\"], \"digest\": \"21a371168037510a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits, if any, concern formal power-series Hilbert polynomials or unrelated invertibility; no scheme/graded-quotient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "twist|[Ii]sInvertible|[Tt]ensorPow",
+   "results": "{\"t\": \"2026-10-22T06:02:50Z\", \"tool\": \"grep\", \"query\": \"twist|[Ii]sInvertible|[Tt]ensorPow\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching declarations in the searched source directory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integer twists on a flat projective scheme are invertible flat finitely presented sheaves compatible with base change",
+   "results": "{\"t\": \"2026-10-22T06:02:51Z\", \"tool\": \"leansearch\", \"query\": \"Integer twists on a flat projective scheme are invertible flat finitely presented sheaves compatible with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Invertible.instProjective\", \"Module.Flat.of_projective\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"3490af7d9fce09ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern flat modules, Krull dimension, incidence-algebra Euler characteristics or basic Proj, not this complete statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented closed subscheme of projective space over any scheme, Euler characteristics of integer twists are locally constant and unchanged at arbitrary field-valued points",
+   "results": "{\"t\": \"2026-10-22T06:01:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat finitely presented closed subscheme of projective space over any scheme, Euler characteristics of integer twists are locally constant and unchanged at arbitrary field-valued points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"ModuleCat.Tilde.res_const\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.one_apply\"], \"digest\": \"039b909bac928e37\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj, properness, stalk rank and homogeneous-ideal declarations do not give this combination of conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProjectiveSpectrum, Module.Flat",
+   "results": "{\"t\": \"2026-10-23T04:10:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.ProjectiveSpectrum, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.ProjectiveSpectrum'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unknown Loogle identifier; no result was obtained from this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integer twists on a flat finitely presented projective scheme are invertible finitely presented and flat over the base and commute with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T04:10:23Z\", \"tool\": \"leanfinder\", \"query\": \"Integer twists on a flat finitely presented projective scheme are invertible finitely presented and flat over the base and commute with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Module.Flat.projective_of_finitePresentation\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.FormallyUnramified.projective_of_restrictScalars\"], \"digest\": \"4daff397d32c304b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat morphisms, flat modules or intersections of Proj charts, not integer twisting sheaves with all of the stated conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "twist|[Ii]sInvertible|[Tt]ensorPow",
+   "results": "{\"t\": \"2026-10-23T04:10:58Z\", \"tool\": \"grep\", \"query\": \"twist|[Ii]sInvertible|[Tt]ensorPow\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat morphisms, flat modules or intersections of Proj charts, not integer twisting sheaves with all of the stated conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Twisting line bundles on relative projective space commute with arbitrary change of base and are relatively flat on a flat subscheme",
+   "results": "{\"t\": \"2026-10-23T04:10:58Z\", \"tool\": \"leansearch\", \"query\": \"Twisting line bundles on relative projective space commute with arbitrary change of base and are relatively flat on a flat subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"AlgebraicGeometry.Flat.instMorphismRestrict\"], \"digest\": \"f80ce8410dd76858\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat morphisms, flat modules or intersections of Proj charts, not integer twisting sheaves with all of the stated conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the Serre sheaf O(d) on projective space to a flat scheme is finitely presented and flat over the base for all integers d",
+   "results": "{\"t\": \"2026-10-23T04:11:04Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of the Serre sheaf O(d) on projective space to a flat scheme is finitely presented and flat over the base for all integers d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"Module.Flat.projective_of_finitePresentation\", \"AlgebraicGeometry.Proj.toSheafedSpace\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"eb11db6a060689c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat morphisms, flat modules or intersections of Proj charts, not integer twisting sheaves with all of the stated conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Proj\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T04:12:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Proj\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\"], \"digest\": \"1289574a999e633d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat morphisms, flat modules or intersections of Proj charts, not integer twisting sheaves with all of the stated conclusions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-projective-hilbert-polynomial-locality",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Local constancy and base change of projective fibre Hilbert polynomials; re-split of the returned proof: returned step 1 (properness over the arbitrary base) and step 2 (all twist constructions and compatibilities)",
+   "via": [
+    "lem-sfb-flat-projective-hilbert-polynomial-locality",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-projective-twist-base-change-data",
+  "worker": "stage1",
+  "summary": "Clarified that f is the structural composite of the embedding with projective-space projection; the literal wording previously allowed unrelated f. Six steps assemble existing properness, module-gluing and relative-Proj base-change results with explicit rank-one transition calculations. Finite presentation, base flatness, negative twists and tensor-power compatibility are written out. No new nodes. Existing Mathlib searches retained and new logged searches read.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images proof (3), alteration input via the projective Hilbert polynomial prerequisite: properness of the projective family and the twist properties used by cohomological base change. The inherited created.item chain breaks at the stage-3 module name Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs ancestor returns None; the inherited explicit place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-free-projective-bundle-base-change-space",
+    "why": "Generic comparison of the two existing projective-space interfaces, needed to apply projective properness to the relative-Proj embedding; the unit supplies no replacement comparison."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic projective-implies-proper theorem for the projective family in the Hilbert-polynomial prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic gluing of module sheaves and maps for the specified local twist frames and their tensor/base-change comparisons."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Generic coefficientwise relative-Proj base change identifies the ambient projective spaces for arbitrary bases."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic stability of closed immersions under base change supplies the induced embedding."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-free-projective-bundle-base-change-space",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-e7fdad814",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-e7fdad814 (reviewer sub-agent of L); spot-checked: I read the item's six steps, every cited statement and the Stacks sources (01MS/01MT constructions l.1769/1815, 01WC morphisms l.10580, 01O3 constructions l.4081, 01QR, 01U3 l.4640, 00HB, 01BN, 04TN). The delivery creates no new nodes. On live the item is unsplit with no repair note, so this is its first split and not a re-split. Statement change: f is now defined as π∘i. I checked the counterexample to the literal base wording: T=A^1⊔pt, n=0, Z=A^1 mapped to the point; this f is flat and finitely presented but not proper. The parent hilbert-polynomial-locality already means the structural map, so the change weakens nothing a citer uses. Step checks: (1) θ from the trf comparison has q∘θ=p, so f is H-projective; f is quasi-compact by hypothesis, so def-pc-projective-morphism and lem-pc-projective-proper give properness. (2) Charts give rank-one bases with transitions i♯(x_j/x_k)^d, which are units and satisfy the cocycle condition; the ratio is defined on all of P^n_T, so no affine intersections are assumed; gluing uses clauses (2) and (1). (3) Finite presentation via O^0→O^1, and flatness by conjugating with O_{Z,z}; genuinely elementary. (4) d=0 convention given; I verified the dual relation v_j=r_jk^{-1}v_k. (5) Base change and closed immersion are correct. (6) Base change of F_d and the compatibilities are checked on bases and glued by uniqueness. Fault, repaired (C4/C1): step 5 computed the coefficientwise pullback on affines as B⊗_A A[x] with no node for that fact. The FIX adds a sentence citing def-nagata-graded-algebra-pullback-data, the exact interface for an identification with g^*A; that node is added to step 5 uses and to proof_deps. Batch 5: lem-trf-free-projective-bundle-base-change-space is a generic comparison of the two P^r interfaces; its proof closure is generic (nagata/pbc symmetric-algebra/gluing) and reaches neither the trace formula nor Poincaré duality, and neither assumption gives it. Accepted as a general-definition comparison; no non-trf duplicate exists in the DAG. The tool_uses for it and for lem-pc-projective-proper are justified. Small cases checked: n=0, d=0, d=-1, empty Z or T, non-Noetherian T, non-flat h. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatProjectiveTwistBaseChangeData",
+  "declaration": "AlgebraicGeometry.FlatProjectiveTwist.flat_projective_twist_base_change_data",
+  "declarations": [
+   "AlgebraicGeometry.FlatProjectiveTwist.comparison",
+   "AlgebraicGeometry.FlatProjectiveTwist.relativeTwist",
+   "AlgebraicGeometry.FlatProjectiveTwist.twist",
+   "AlgebraicGeometry.FlatProjectiveTwist.chart",
+   "AlgebraicGeometry.FlatProjectiveTwist.frame",
+   "AlgebraicGeometry.FlatProjectiveTwist.framePower",
+   "AlgebraicGeometry.FlatProjectiveTwist.signedPower",
+   "AlgebraicGeometry.FlatProjectiveTwist.powerFrame",
+   "AlgebraicGeometry.FlatProjectiveTwist.PowerData",
+   "AlgebraicGeometry.FlatProjectiveTwist.projectiveMap",
+   "AlgebraicGeometry.FlatProjectiveTwist.IsFrameComparison",
+   "AlgebraicGeometry.FlatProjectiveTwist.flat_projective_twist_base_change_data"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatProjectiveTwistBaseChangeData.lean",
+  "statement": "theorem flat_projective_twist_base_change_data {T Z : Scheme.{u}} (n : ℕ) (i : Z ⟶ RelativeProjectiveSpace.scheme T n) [IsClosedImmersion i] [Flat (i ≫ RelativeProjectiveSpace.π T n)] [LocallyOfFinitePresentation (i ≫ RelativeProjectiveSpace.π T n)] [QuasiCompact (i ≫ RelativeProjectiveSpace.π T n)] [QuasiSeparated (i ≫ RelativeProjectiveSpace.π T n)] : IsProper (i ≫ RelativeProjectiveSpace.π T n) ∧ (∀ d : ℤ, (twist i d).IsInvertible ∧ (twist i d).IsFinitePresentation ∧ ∀ z : Z, Module.Flat (T.presheaf.stalk ((i ≫ RelativeProjectiveSpace.π T n) z)) ((ModuleCat.restrictScalars ((i ≫ RelativeProjectiveSpace.π T n).stalkMap z).hom).obj ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj (twist i d)))) ∧ ∃ D : PowerData i, ∀ (T' : Scheme.{u}) (h : T' ⟶ T), ∃ i' : pullback (i ≫ RelativeProjectiveSpace.π T n) h ⟶ RelativeProjectiveSpace.scheme T' n, i' ≫ RelativeProjectiveSpace.π T' n = pullback.snd (i ≫ RelativeProjectiveSpace.π T n) h ∧ IsPullback (pullback.fst (i ≫ RelativeProjectiveSpace.π T n) h) i' i (projectiveMap n h) ∧ IsClosedImmersion i' ∧ ∃ (D' : PowerData i') (β : ∀ d : ℤ, (tensorPullback (pullback.fst (i ≫ RelativeProjectiveSpace.π T n) h)).obj (twist i d) ≅ twist i' d) (κ : ∀ d : ℤ, (tensorPullback (pullback.fst (i ≫ RelativeProjectiveSpace.π T n) h)).obj (signedPower (twist i 1) d) ≅ signedPower (twist i' 1) d), (∀ (d : ℤ) (j : ULift.{u} (Fin (n + 1))), IsFrameComparison _ (β d) (frame i d j) (frame i' d j)) ∧ (∀ (d : ℤ) (j : ULift.{u} (Fin (n + 1))), IsFrameComparison _ (κ d) (powerFrame D.dualIso d j) (powerFrame D'.dualIso d j)) ∧ (∀ d : ℤ, (tensorPullback (pullback.fst (i ≫ RelativeProjectiveSpace.π T n) h)).map (D.iso d).hom ≫ (κ d).hom = (β d).hom ≫ (D'.iso d).hom)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual tensor pullbacks of the recorded twist, transported through the uniquely affine-normalized relative-projective-space comparison. PowerData specifies positive/negative tensor powers and internal-Hom duality on standard local bases. The final normalized comparison square includes every integer degree and arbitrary base morphism; stalk scalar restriction uses f.stalkMap."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f8764068",
+  "group": "NE",
+  "result": "pass",
+  "note": "First Lean delivery of the item; only the new module FlatProjectiveTwistBaseChangeData.lean and the node's lean field differ from side-live; lean.statement matches the signature verbatim. Hypotheses: IsClosedImmersion i, Flat/LFP/QC/QS on f=i≫π, nothing stronger. Conclusions: IsProper f; for all d IsInvertible, IsFinitePresentation and stalk flatness over T.stalk(f z) via f.stalkMap. F_d = tensorPullback i of tensorPullback(comparison) of ProjectiveSpace.twist; comparison = Classical.choose of ∃! existsUnique_freeProjectiveBundleBaseChangeSpace (pinned by over-structure and affine Proj formulas, so canonical). PowerData pins iso d and the dual on chart frames (x_j^d ↦ pure tensor, evaluation u_j⊗v_j ↦ 1, as in Stacks 01MT). Base change: i' unique via IsPullback with the canonical projectiveMap, closed immersion; β and κ pinned by IsFrameComparison; compatibility square for all d∈ℤ. Edge cases n=0, d=0, d<0, empty schemes, non-Noetherian T covered; Scheme.{u} convention. No duplicate found (HilbertUniformSectionBound.twist is an alias; NormalizedSignedTensorPowers differs). Docstrings carry source and blueprint, the only proof is the final sorry. Not recompiled (no FIX; worker reported a clean compile). Advisory: comparison comes from the proof_dep theorem lem-trf-free-projective-bundle-base-change-space, which is not in stmt_deps; canonical .choose of an ∃!, so a note, not a RETURN."
+ }
+}

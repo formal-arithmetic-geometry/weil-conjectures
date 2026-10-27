@@ -1,0 +1,156 @@
+{
+ "id": "def-sp-reduction-monoidal-comparison-data",
+ "kind": "definition",
+ "title": "Strict and derived normalized reduction comparison interfaces",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, and a scheme T. Use the existing integral section ring, normalized reduction record and strict coefficient towers. Define their canonical sequence-site realization and the same ordinary and derived tensor operations. SpReductionMonoidalData records the source and target closed tensor models, normalized symmetries and coherence, the derived tensor comparison, strong monoidal data, ordinary tensor balancing and a natural chain isomorphism. SpReductionMonoidalTower adds its tensorator, forward/inverse generator, summand, total/system/level K-flat and derived representative equations. SpReductionPullbackData and SpReductionPullbackTower record the actual integral, level and sequence inverse images and their constant-section, completion-projection, system-ring, evaluation, ordinary-generator and derived-counit equations. SpReductionPullbackCoherence records normalized tensor pullback models, their monoidal structures and the tensor and unit commutative diagrams. These are exactly the existing interfaces, with all sections, universes, operations and equations unchanged; no existence assertion is part of this definition node.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL (sites-modules.tex), 07A4, 0G7E and 0D6D; blueprint/latest integral direct-image proof (3)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-sp-reduction-tower-normalized",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-coefficient-towers-abelian",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-proetale-inverse-image",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars strong monoidal K flat complexes of sheaf modules",
+   "results": "8 hits: light condensed monoidal structures and ordinary module flatness; no coherent derived reduction system comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CoreMonoidal\"",
+   "results": "CoreMonoidal and its structural projections and constructors only.",
+   "date": "2026-10-25",
+   "verdict": "Generic monoidal interface; no normalized reduction-system comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of scalars to inverse systems preserves tensor products with K flat representative comparisons",
+   "results": "8 hits: ordinary module flatness, direct-limit tensor maps, and Kan-extension exactness.",
+   "date": "2026-10-25",
+   "verdict": "No match for the derived system comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "sp_reduction_derived_monoidal|kFlat_total_tensor_model|changeOfRings_isKFlat_independentCoefficients",
+   "results": "Mathlib service: 0 hits. Local rg: existing total-tensor and scalar-extension lemmas supply the two representative-class proofs. No existing strict reduction balancing, normalized descent or geometric square theorem.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the two existing representative-class theorems; state only the three missing comparison steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityReductionDerivedMonoidalTower",
+  "date": "2026-10-25",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-reduction-derived-monoidal-tower",
+   "place": "Comparison interfaces and original proof steps 1--8",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityReductionMonoidalData",
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionMonoidalData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpReductionMonoidalData",
+  "statement": "structure SpReductionMonoidalData (D : SpCoefficientTowersAbelian l E T)\n    (r : SpReductionTower l E T D)",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spMonoidalSiteSmall",
+   "AlgebraicGeometry.ProEtale.spMonoidalRingSheafify",
+   "AlgebraicGeometry.ProEtale.spMonoidalSequenceSmall",
+   "AlgebraicGeometry.ProEtale.spMonoidalSequenceSheafify",
+   "AlgebraicGeometry.ProEtale.spMonoidalSequenceLocallyBijective",
+   "AlgebraicGeometry.ProEtale.spMonoidalSystemRing",
+   "AlgebraicGeometry.ProEtale.spMonoidalSystems",
+   "AlgebraicGeometry.ProEtale.spMonoidalSystemsDerived",
+   "AlgebraicGeometry.ProEtale.spMonoidalTowerEquivalence",
+   "AlgebraicGeometry.ProEtale.SpIntegralClosed",
+   "AlgebraicGeometry.ProEtale.SpSystemClosed",
+   "AlgebraicGeometry.ProEtale.spMonoidalTowerFunctorAdditive",
+   "AlgebraicGeometry.ProEtale.spMonoidalTowerInverseAdditive",
+   "AlgebraicGeometry.ProEtale.spMonoidalDerivedEquivalence",
+   "AlgebraicGeometry.ProEtale.spMonoidalReduction",
+   "AlgebraicGeometry.ProEtale.spMonoidalOrdinary",
+   "AlgebraicGeometry.ProEtale.spMonoidalOrdinaryAdditive",
+   "AlgebraicGeometry.ProEtale.spMonoidalCounit",
+   "AlgebraicGeometry.ProEtale.spMonoidalGenerator",
+   "AlgebraicGeometry.ProEtale.spMonoidalIntegralTotal",
+   "AlgebraicGeometry.ProEtale.spMonoidalSystemTotal",
+   "AlgebraicGeometry.ProEtale.SpReductionMonoidalData",
+   "AlgebraicGeometry.ProEtale.SpReductionMonoidalTensor",
+   "AlgebraicGeometry.ProEtale.SpReductionForward",
+   "AlgebraicGeometry.ProEtale.SpReductionInverse",
+   "AlgebraicGeometry.ProEtale.SpReductionSummand",
+   "AlgebraicGeometry.ProEtale.SpReductionTotalKflat",
+   "AlgebraicGeometry.ProEtale.SpReductionSystemKflat",
+   "AlgebraicGeometry.ProEtale.SpReductionLevelKflat",
+   "AlgebraicGeometry.ProEtale.SpReductionDerived",
+   "AlgebraicGeometry.ProEtale.SpReductionMonoidalTower",
+   "AlgebraicGeometry.ProEtale.spMonoidalSequenceInverseImage",
+   "AlgebraicGeometry.ProEtale.spMonoidalInverseSection",
+   "AlgebraicGeometry.ProEtale.spMonoidalPullSection",
+   "AlgebraicGeometry.ProEtale.spMonoidalSystemPullSection",
+   "AlgebraicGeometry.ProEtale.spMonoidalPullCoefficient",
+   "AlgebraicGeometry.ProEtale.spMonoidalConstantSection",
+   "AlgebraicGeometry.ProEtale.spMonoidalEvaluation",
+   "AlgebraicGeometry.ProEtale.SpReductionPullbackData",
+   "AlgebraicGeometry.ProEtale.SpPullbackConstant",
+   "AlgebraicGeometry.ProEtale.SpPullbackProjection",
+   "AlgebraicGeometry.ProEtale.SpPullbackSystemRing",
+   "AlgebraicGeometry.ProEtale.SpPullbackEvaluationSection",
+   "AlgebraicGeometry.ProEtale.SpPullbackOrdinarySection",
+   "AlgebraicGeometry.ProEtale.SpPullbackDerived",
+   "AlgebraicGeometry.ProEtale.SpReductionPullbackTower",
+   "AlgebraicGeometry.ProEtale.SpReductionPullbackCoherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "independent cc review: item theorem's assembly proof and the 47 relocated interface declarations (byte-identical to the clone apart from blueprint tags) against node lem-sp-reduction-derived-monoidal-tower, the new def node and the three new sorry nodes (strict balancing, descent, geometric square)"
+ }
+}

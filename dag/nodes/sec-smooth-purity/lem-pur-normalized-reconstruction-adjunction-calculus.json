@@ -19,9 +19,9 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-normalized-actual-reconstruction-maps] for each $W$. Reduction lands in $\\mathscr N_W$, total limit sends $\\mathscr N_W$ into $\\mathscr C_W$, and the actual $u_K,e_N$ are natural isomorphisms there. Its projection formula identifies the coefficient comparisons with the scalar-extension adjoints of the actual total-limit projections.",
+   "text": "Apply the existing actual reduction/limit reconstruction proof, exposed as purNormalizedReconstructionOfScheme, retaining purNormalizedReconstruction with its original signature. Restrict the actual unit and counit to the complete and normalized subcategories.",
    "uses": [
-    "lem-pur-normalized-actual-reconstruction-maps"
+    "lem-pod-unrestricted-normalized-reconstruction"
    ],
    "elementary": false,
    "source": {
@@ -53,13 +53,14 @@
   }
  ],
  "proof_deps": [
+  "lem-pod-unrestricted-normalized-reconstruction",
   "lem-pur-normalized-actual-reconstruction-maps",
   "lem-pur-adjoint-equivalence-conjugation-calculus"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
-  "place": "sole proof paragraph, with reconstruction maps and abstract conjugation calculations separated into independent statement-only tasks"
+  "place": "sole proof paragraph, with reconstruction maps and abstract conjugation calculations separated into independent statement-only tasks; Y6 exposes the unused-hypothesis generality of the existing reconstruction proof, keeping every original declaration signature."
  },
  "mathlib_searches": [
   {
@@ -224,21 +225,26 @@
   "result": "pass",
   "note": "Delivery changes only the item node's lean field and adds one module; lean.statement is verbatim in the file and all 15 declarations exist; report has Worker report and Second reading by Q90. Checked every clause against the node and the dependencies' declarations: S (CoefficientDerivedSystemCalculus) fixes the actual adjunction through counit_projection and unit_projection, so quantifying over it adds no assumption; normalized = IsNormalizedCoefficientSequence (the dependency's own predicate, m=n included), complete = IntegralOnSlice.IsComplete none; the restricted functors, adjunction (restrictFullyFaithful with refl squares) and toEquivalence keep the actual u and e; Q-restrictions give exactly N'_W and C'_W, with Q=top the full case. Checked by hand the counit formula, transpose (naturality of e and epsilon plus a triangle identity), composition component and the transformation square. Edge cases n=0 meaning B_1, m=n, Q=bot/top, identity functors, independent tX/tY/tZ universes all covered. No hollow definitions, all proofs sorry, docstrings with source and blueprint tag, no stronger assumptions. Compile not reproduced: nt_compile --json timed out 4 times at its 60 s per-file limit on the side-only dependency CoefDerivedSystemEvaluationCalculus.lean (load 164-195; that dependency's review recorded 33.8 s), so the delivered file was never reached; judged from the delivery's recorded clean compile and preflight plus a hand check of the elaboration-sensitive Mathlib signatures. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P5",
+  "group": "Y6",
   "result": "pass",
-  "landing": "20261021T170756-L-2758743",
+  "landing": "20261025T144406-L-1236871",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.purNormalizedReconstruction",
-   "WeilConjectures.purNormalizedReconstructionAdjunctionCalculus",
-   "WeilConjectures.purRestrictedUnitCounit"
-  ],
-  "sorry_after": []
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

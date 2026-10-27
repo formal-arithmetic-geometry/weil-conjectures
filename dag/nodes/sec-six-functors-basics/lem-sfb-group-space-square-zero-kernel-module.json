@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-group-space-square-zero-kernel-module",
+ "kind": "statement",
+ "title": "Square-zero infinitesimal points of a group space form a module",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $G$ be a group algebraic space over $S$ [def-trf-algebraic-space], with identity $e:S\\to G$, multiplication and inverse satisfying the group identities; commutativity and smoothness are not assumed. Let $j:T_0\\hookrightarrow T=\\operatorname{Spec}A$ be a first order thickening of affine $S$-schemes [def-sbc-first-order-thickening], defined by an ideal $I\\subseteq A$ with $I^2=0$, so $T_0=\\operatorname{Spec}(A/I)$. Write $G(T)=\\operatorname{Mor}_S(T,G)$, $e_T$ for its identity, $e_0:T_0\\to S\\xrightarrow{e}G$, and $K=\\ker(G(T)\\to G(T_0))$. Let $\\Omega^1_{G/S}$ denote the sheaf of relative Kahler differentials on the small etale site: it represents $S$-derivations from the structure sheaf into module sheaves [def-weil-sheaf-of-modules-category]; let $e_0^*\\Omega^1_{G/S}$ be its tensor pullback to $T_0$, and $\\widetilde I$ the module sheaf associated to the $A/I$-module $I$. There is a canonical additive-group isomorphism $$K\\ \\cong\\ \\operatorname{Hom}_{\\mathcal O_{T_0}}(e_0^*\\Omega^1_{G/S},\\widetilde I).$$ It sends $e_T$ to zero and the product of two elements of $K$ to the sum of their images. Thus $K$ has a canonical $A/I$-module structure with its original group law as addition, and for every integer $r\\geq0$ the pointwise $r$th-power map on $K$ is scalar multiplication by $r$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0618 (lemma-difference-derivation) and 04D0 (lemma-action-by-derivations), specialized to the identity map and the trivial thickening G in G. The group-law compatibility is the agent extension of groupoids.tex Tag 0BF5 (lemma-group-scheme-addition-tangent-vectors) from field tangent vectors to arbitrary square-zero ideals and algebraic spaces."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-first-order-thickening",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-relative-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Multiplication by $A$ on $I$ factors through $A/I$: two lifts of a scalar differ by an element of $I$, whose product with $I$ is zero. Apply [lem-sfb-space-square-zero-lift-linearization] with $X=G$, $a=e_T$ and $\\mathcal J=\\widetilde I$. Its hypotheses require only a first order thickening and the chosen lift, both supplied here. The set $L_G(e_0)$ is exactly $K$. We obtain a canonical pointed bijection $\\delta:K\\to M$, where $M=\\operatorname{Hom}_{\\mathcal O_{T_0}}(e_0^*\\Omega^1_{G/S},\\widetilde I)$, and $\\delta(e_T)=0$. This step does not assume local finite presentation or smoothness.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), and 04D0 (lemma-action-by-derivations), with the target thickening X in X. Naturality under postcomposition is the chain rule for the difference of ring-sheaf maps."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-square-zero-lift-linearization] also to $P=G\\times_SG$, with chosen lift $(e_T,e_T)$ and reduction $(e_0,e_0)$. Write $M_P$ for its module of differences. The two projections induce $A/I$-linear maps $q_1,q_2:M_P\\to M$. The combined map $q=(q_1,q_2):M_P\\to M\\times M$ is bijective: the pointed bijections of the cited lemma identify it with the bijection $L_P((e_0,e_0))\\to K\\times K$ sending a map to its two projections, whose inverse pairs the maps. Hence $q$ is a linear isomorphism. Indeed $q^{-1}(v+w)=q^{-1}(v)+q^{-1}(w)$ and $q^{-1}(cv)=cq^{-1}(v)$ follow by applying the injective linear map $q$ to the two sides. Postcomposition by $m:P\\to G$ induces a linear map $m_*:M_P\\to M$ by the same cited lemma. Thus $F=m_*q^{-1}:M\\times M\\to M$ is linear, and naturality gives $\\delta(xy)=F(\\delta(x),\\delta(y))$. No product formula for differentials or choice of etale coordinates has been assumed.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), and 04D0 (lemma-action-by-derivations), with the target thickening X in X. Naturality under postcomposition is the chain rule for the difference of ring-sheaf maps."
+   }
+  },
+  {
+   "text": "The two unit identities determine $F$. For $v\\in M$, let $x=\\delta^{-1}(v)$. The preceding naturality calculation and $m(x,e_T)=x$ give $F(v,0)=v$; similarly $m(e_T,x)=x$ gives $F(0,v)=v$. Linearity now gives $F(v,w)=F((v,0)+(0,w))=v+w$. Consequently $\\delta(xy)=\\delta(x)+\\delta(y)$ for every $x,y\\in K$. This is precisely the argument of Stacks Tag 0BF5, with the linearity justified in step 2 for arbitrary square-zero coefficients rather than only residue-field tangent vectors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF5 (lemma-group-scheme-addition-tangent-vectors), proof by linearity and the two unit identities; agent extension to arbitrary square-zero ideals using steps 1 and 2."
+   }
+  },
+  {
+   "text": "The bijection $\\delta$ preserving identity and products identifies $K$ with the additive abelian group of $M$ (and sends inverses to negatives). Transfer the $A/I$-module action by $c\\cdot x=\\delta^{-1}(c\\delta(x))$. Each module identity follows after applying $\\delta$; its addition is the original multiplication on $K$. For powers, induction gives $\\delta(x^0)=\\delta(e_T)=0$ and $\\delta(x^{r+1})=\\delta(x^r)+\\delta(x)=(r+1)\\delta(x)$. Thus the $r$th-power map is scalar multiplication by $r$, including $r=0$. The construction uses only the fixed identity section and the canonical difference maps, so is canonical.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF5 (lemma-group-scheme-addition-tangent-vectors), proof by linearity and the two unit identities; agent extension to arbitrary square-zero ideals using steps 1 and 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-square-zero-lift-linearization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex; literature/stacks-project/groupoids.tex",
+  "place": "Tags 0618, 04D0, and the linearity-and-unit argument of 0BF5; generalized from field tangent vectors to arbitrary square-zero ideals and algebraic spaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of points of a group algebraic space across a square zero thickening is the module of homomorphisms from the cotangent space at the identity to the square zero ideal, with addition given by the group law",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.ker_infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), P.infinitesimal.ker = P.ker.cotangentIdeal\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the kernel of the infinitesimal extension $ P_{\\text{infinitesimal}} $ coincides with the cotangent ideal of the\"}\n  {\"name\": \"AlgHom.ker_kerSquareLift\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {A : Type u_1} {B : Type u_2} [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (f : A →ₐ[R] B),\\n  RingHom.ker f.kerSquareLift.toRingHom = (RingHom.ker f.toRingHom).cotangentIdeal\", \"doc\": \"For an algebra homomorphism $ f : A \\\\to B $ over a commutative ring $ R $, the kernel of the ring homomorphism obtained from the kernel square lift of $ f $ is equal to the cotangent ideal of the kern\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.Cotangent.ker_mk\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Algebra.Extension.Cotangent.mk.ker = P.ker • ⊤\", \"doc\": \"The kernel of the canonical quotient map from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ is equal to the square of the ideal $\\\\ker(\\\\phi)^2$.\"}\n  {\"name\": \"Algebra.Extension.Cotangent.val\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → {P : Algebra.Extension R S} → P.Cotangent → P.ker.Cotangent\", \"doc\": \"The canonical projection map from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$, which sends each element of the kernel to its equivalence class in the quotient modul\"}\n  {\"name\": \"Algebra.Extension.Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The cotangent module of the kernel ideal $\\\\ker(\\\\phi)$ of the canonical ring homomorphism $\\\\phi: R \\\\to S$ in an $R$-algebra extension, defined as the quotient $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$. This generalize\"}\n  {\"name\": \"Algebra.Extension.Cotangent.of\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → {P : Algebra.Extension R S} → P.ker.Cotangent → P.Cotangent\", \"doc\": \"The canonical map sending each element of the cotangent module of the kernel ideal $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the corresponding element in the cotangent module of the algebra extension $\\\\ker(\\\\phi)/\\\\\"}\n  {\"name\": \"Algebra.Extension.Cotangent.val_mk\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  (x : ↥P.ker), (Algebra.Extension.Cotangent.mk x).val = P.ker.toCotangent x\", \"doc\": \"For any element $x$ in the kernel ideal $\\\\ker(\\\\phi)$ of an $R$-algebra extension, the composition of the canonical quotient map $\\\\text{mk}$ from $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroEquivLift and KaehlerDifferential.linearMapEquivDerivation concern ring maps; neither provides algebraic-space descent or compatibility with the group law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal points reducing to the identity in a group scheme form an additive module of derivations with values in a square zero ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    {B : Type w} →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R B] →\\n                (I : Ideal B) →\\n                  [inst_5 : Algebra A B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"derivationToSquareZeroOfLift\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    {B : Type w} →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R B] →\\n                (I : Ideal B) →\\n                  [inst_5 : Algebra A B\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring, forming a scalar tower with algebra homomorphisms $R \\\\to A \\\\to B$. Let $I$ be an ideal of $B$ such that $I^2 = \\\\{0\\\\}$. Let $f: \"}\n  {\"name\": \"liftOfDerivationToSquareZero\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    {B : Type w} →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R B] →\\n                (I : Ideal B) →\\n                  [inst_5 : Algebra A B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\to I $ over $ R $, this constructs an $ R $-algebra homomor\"}\n  {\"name\": \"derivationOfSectionOfKerSqZero\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra R S] →\\n                (f : P →ₐ[R] S) →\\n                  RingHom.ker f ^ 2 = ⊥\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings, where $P$ and $S$ are $R$-algebras. Given an $R$-algebra homomorphism $f: P \\\\to S$ whose kernel $\\\\ker(f)$ is a square-zero ideal (i.e., $(\\\\ker(f))^2 = \\\\{0\\\\}\"}\n  {\"name\": \"derivationToSquareZeroEquivLift_apply_coe_apply\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (d : Derivation R A ↥I) (x : A),\\n  ↑((derivationToSq\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring. Suppose that $A$ is an $R$-algebra, and $B$ is an $A$-algebra and an $R$-algebra, such that the scalar actions form a tower (i.\"}\n  {\"name\": \"liftOfDerivationToSquareZero_apply\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] [inst_6 : IsScalarTower R A B]\\n  (hI : I ^ 2 = ⊥) (f : Derivation R A ↥I) (x : A),\\n  (liftOfDerivation\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\\\to I $ over $ R $, there exists an $ R $-algebra homomorph\"}\n  {\"name\": \"derivationQuotKerSq\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (P : Type u_2) →\\n    (S : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                [inst_5 : Algebra R S] →\\n                  [inst_6 : IsSc\", \"doc\": \"An R-linear derivation from R to the tensor product of S with the module of Kähler differentials $\\\\Omega_{P/R}$, where the target module is constructed as the quotient of P by the square of the kernel\"}\n  {\"name\": \"derivationOfSectionOfKerSqZero_apply_coe\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra R S] (f : P →ₐ[R] S) (hf' : RingHom.ker f ^ 2 = ⊥) (g : S →ₐ[R] P)\\n  (hg : f.comp g = AlgHom.id R S) (x : P), ↑((derivationOfSectionOfKerSqZero f \", \"doc\": \"For commutative rings $ R $, $ P $, and $ S $ with $ R $-algebra structures, let $ f : P \\\\to S $ be an $ R $-algebra homomorphism whose kernel satisfies $ \\\\ker(f)^2 = 0 $, and let $ g : S \\\\to P $ be a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroEquivLift and KaehlerDifferential.linearMapEquivDerivation concern ring maps; neither provides algebraic-space descent or compatibility with the group law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernel of restriction of group scheme points for a square zero ideal is Hom of differentials into the ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) : IdealSheafData Y\", \"doc\": \"For a morphism of schemes $f : X \\\\to Y$, the kernel of $f$ is the ideal sheaf data on $Y$ constructed from the kernels of the ring homomorphisms on sections over affine open sets. Specifically, for ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) [QuasiCompact f] (U : Y.Opens) (V : U.toScheme.affineOpens) :\\n  (f ∣_ U).ker.ideal V = f.ker.ideal ⟨U.ι ''ᵁ V, V.2.image_of_isOpenImmersion _⟩\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact morphism of schemes, and let $U$ be an open subset of $Y$. For any affine open subset $V$ of the open subscheme $Y|_U$, the ideal associated to the kernel of the re\"}\n  {\"name\": \"AddMonoidHom.ker_rangeRestrict\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Ker\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_5} [inst_1 : AddGroup N] (f : G →+ N), f.rangeRestrict.ker = f.ker\", \"doc\": \"For additive groups $G$ and $N$, and an additive group homomorphism $f : G →+ N$, the kernel of the restriction of $f$ to its image subgroup $f(G) ⊆ N$ is equal to the kernel of the original homomorph\"}\n  {\"name\": \"RingHom.ker_rangeSRestrict\", \"module\": \"Mathlib.RingTheory.Ideal.Maps\", \"type\": \"(f : R →+* S) : ker f.rangeSRestrict = ker f\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $, the kernel of the restriction of $ f $ to its image subsemiring $ f(R) \\\\subseteq S $ is equal to the kernel of $ f $. In symbols, $ \\\\ker(f|_{f(R)}) = \\\\ker(f)\"}\n  {\"name\": \"Algebra.Extension.Cotangent.ker_mk\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": LinearMap.ker (mk (P := P)) = P.ker • ⊤\", \"doc\": \"The kernel of the canonical quotient map from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ is equal to the square of the ideal $\\\\ker(\\\\phi)^2$.\"}\n  {\"name\": \"retractionOfSectionOfKerSqZero\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \": S ⊗[P] Ω[P⁄R] →ₗ[P] RingHom.ker (algebraMap P S)\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings. Let $f: P \\\\to S$ be an $R$-algebra homomorphism with kernel $I = \\\\ker(f)$, and assume that $I$ is a square-zero ideal (i.e., $I^2 = \\\\{0\\\\}$). Suppose there e\"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"Ideal.map_toCotangent_ker\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": (LinearMap.ker I.toCotangent).map I.subtype = I ^ 2\", \"doc\": \"The image of the kernel of the canonical quotient map $ I \\\\to I/I^2 $ (where $ I $ is an ideal in a commutative ring) under the inclusion $ I \\\\subseteq R $ is equal to the square of the ideal $ I $, i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroEquivLift and KaehlerDifferential.linearMapEquivDerivation concern ring maps; neither provides algebraic-space descent or compatibility with the group law."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"Derivation\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Derivation.liftKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {M : Type u_1} [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] (D : Derivation R S M) : Ω[S⁄R] →ₗ[S] M\", \"doc\": \"The linear map from `Ω[S⁄R]`, associated with a derivation.\"}\n  {\"name\": \"Derivation.liftKaehlerDifferential_D\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] : (KaehlerDifferential.D R S).liftKaehlerDifferential = LinearMap.id\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.span_range_derivation\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] : Submodule.span S (Set.range ⇑(KaehlerDifferential.D R S)) = ⊤\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.derivationQuotKerTotal\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] : Derivation R S ((S →₀ S) ⧸ KaehlerDifferential.kerTotal R S)\", \"doc\": \"The (universal) derivation into `(S →₀ S) ⧸ KaehlerDifferential.kerTotal R S`.\"}\n  {\"name\": \"KaehlerDifferential.linearMapEquivDerivation\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] {M : Type u_1} [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] : (Ω[S⁄R] →ₗ[S] M) ≃ₗ[S] Derivation R S M\", \"doc\": \"The `S`-linear maps from `Ω[S⁄R]` to `M` are (`S`-linearly) equivalent to `R`-derivations\\nfrom `S` to `M`.\"}\n  {\"name\": \"Derivation.liftKaehlerDifferential_comp_D\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {M : Type u_1} [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] (D' : Derivation R S M) (x : S) : D'.liftKaehlerDifferential ((KaehlerDifferential.D R S) x) = D' x\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.linearMapEquivDerivation_apply_apply\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] {M : Type u_1} [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] (m : Ω[S⁄R] →ₗ[S] M) (x : S) : ((KaehlerDifferential.linearMapEquivDerivation R S) m) x = m ((KaehlerDifferential.D R S) x)\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (x : S) : (KaehlerDifferential.derivationQuotKerTotal R S) x = (KaehlerDifferential.kerTotal R S).mkQ fun₀ | x => 1\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.linearMapEquivDerivation_symm_apply\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] {M : Type u_1} [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] (D : Derivation R S M) : (KaehlerDifferential.linearMapEquivDerivation R S).symm D = D.liftKaehlerDifferential\", \"doc\": \"\"}\n  {\"name\": \"Derivation.liftKaehlerDifferential_comp\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {M : Type u_1} [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] (D : Derivation R S M) : D.liftKaehlerDifferential.compDer (KaehlerDifferential.D R S) = D\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.derivationQuotKerTotal_lift_comp_linearCombination\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] : (KaehlerDifferential.derivationQuotKerTotal R S).liftKaehlerDifferential ∘ₗ Finsupp.linearCombination S ⇑(KaehlerDifferential.D R S) = (KaehlerDifferential.kerTotal R S).mkQ\", \"doc\": \"\"}\n  {\"name\": \"Derivation.liftKaehlerDifferential_unique\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {M : Type u_1} [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] (f f' : Ω[S⁄R] →ₗ[S] M) (hf : f.compDer (KaehlerDifferential.D R S) = f'.compDer (KaehlerDifferential.D R S)) : f = f'\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroEquivLift and KaehlerDifferential.linearMapEquivDerivation concern ring maps; neither provides algebraic-space descent or compatibility with the group law."
+  },
+  {
+   "tool": "grep",
+   "query": "(square.?zero|infinitesimal|derivation).*(group.?scheme|algebraic.?space)|(group.?scheme|algebraic.?space).*(square.?zero|infinitesimal|derivation)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroEquivLift and KaehlerDifferential.linearMapEquivDerivation concern ring maps; neither provides algebraic-space descent or compatibility with the group law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary algebraic space X over S, lifts across a square zero thickening with a fixed lift form the module Hom of pulled back relative differentials into the ideal, naturally in X",
+   "results": "Actual search returned 8 hits: derivationToSquareZeroOfLift, KaehlerDifferential.endEquivAuxEquiv, Algebra.Extension.CotangentSpace.map, Algebra.Extension.homInfinitesimal, derivationToSquareZeroEquivLift, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivationToSquareZeroEquivLift\"",
+   "results": "Actual search returned 3 hits: derivationToSquareZeroEquivLift, derivationToSquareZeroEquivLift_apply_coe_apply, derivationToSquareZeroEquivLift_symm_apply_apply_coe. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an arbitrary algebraic space, first order lifts relative to a fixed lift are Hom from relative differentials to the square zero ideal, naturally under postcomposition",
+   "results": "Actual search returned 8 hits: derivationToSquareZeroEquivLift, derivationToSquareZeroEquivLift_symm_apply_apply_coe, liftOfDerivationToSquareZero, derivationToSquareZeroOfLift, derivationToSquareZeroOfLift_apply, DualNumber.lift, derivationToSquareZeroEquivLift_apply_coe_apply, DualNumber.coe_lift_symm_apply. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The difference from a fixed lift of a morphism to an algebraic space across a square zero thickening is a derivation, and postcomposition induces a linear map on these differences",
+   "results": "Actual search returned 8 hits: derivationToSquareZeroOfLift, derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero, derivationToSquareZeroOfLift_apply, PresheafOfModules.DifferentialsConstruction.derivation', derivationOfSectionOfKerSqZero, derivationToSquareZeroEquivLift_apply_coe_apply, derivationOfSectionOfKerSqZero_apply_coe. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "derivationToSquareZeroEquivLift|linearMapEquivDerivation",
+   "results": "Actual search returned 8 hits: Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Unramified/Basic.lean, Mathlib/RingTheory/Unramified/Basic.lean. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-invertible-multiplication",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Invertible multiplication on a smooth commutative group space. Supporting infinitesimal input: Square-zero infinitesimal points of a group space form a module.",
+   "via": [
+    "lem-sfb-smooth-group-invertible-multiplication",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-group-space-square-zero-kernel-module",
+  "worker": "stage1",
+  "summary": "Checked arbitrary, possibly noncommutative and nonsmooth group spaces. Isolated the general square-zero lift correspondence with postcomposition linearity; proved the product comparison via the product universal property, then derived addition from the two unit laws. Existing lift pseudotorsors require local finite presentation and cannot be applied. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Invertible multiplication on a smooth commutative group space. Supporting infinitesimal input: Square-zero infinitesimal points of a group space form a module."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-8ed922fd0",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-8ed922fd0 (reviewer sub-agent of L); spot-checked: First split of the item. The item statement and blueprint record are byte-identical to the base. I read Stacks spaces-more-morphisms 0618 (lemma-difference-derivation), 0619 (equation-D) and 04D0 (lemma-action-by-derivations) with its proof via first-order-thickening-maps, plus groupoids 0BF5. The new node lem-sfb-space-square-zero-lift-linearization is 0618+04D0 specialised to Y=Y'=X, B=S, where C_{Y/Y'}=0 makes condition (2) automatic. The bijection δ_a(b)=b♯−a♯ ↔ Hom(a0^*Ω_{X/S},J) is correct without finite presentation or smoothness. Naturality (ub)♯−(ua)♯=(b♯−a♯)∘u♯ and the functoriality of u_* are correct. The node is statement-only and self-contained: Ω and module pullback are defined inline, and the four cited definitions say what they are cited for. Tested on J=0, X=S, empty T and G_a. Duplicate search over the DAG (0618/04D0/061C/0BF5/05ZN, square-zero+derivation) found no duplicate: the pseudotorsor nodes need finite presentation; the ringed-realization and first-order-description nodes give only ring map ↔ morphism; the ag/sc nodes are field or dual-number group schemes only. In the item, step 1 identifies L_G(e0) with K. Step 2 builds q=(pr1_*,pr2_*), which is bijective by the product universal property and linear, and naturality for m gives δ(xy)=F(δx,δy). Steps 3 and 4 are elementary (the 0BF5 unit argument, transport of structure, induction on powers including r=0). Checked on G_a, G_m, characteristic p, trivial G and I=0; no commutativity, smoothness or affineness of G is used. Not a relabelling and not circular. The parent smooth-group-invertible-multiplication uses only the unchanged statement. Batch-5 flag on def-trf-algebraic-space: it is the general definition of an algebraic space (025Y) and was already in the item's base stmt_deps, so it is outside the trace-formula and Poincaré-duality assumptions; accepted. No tool_uses and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupSpaceSquareZeroKernelModule",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.groupSpace_squareZero_kernel_module",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.groupPointMap",
+   "AlgebraicGeometry.AlgebraicSpace.differenceChart",
+   "AlgebraicGeometry.AlgebraicSpace.differenceIdeal",
+   "AlgebraicGeometry.AlgebraicSpace.differenceIdealOnReduction",
+   "AlgebraicGeometry.AlgebraicSpace.differenceHom",
+   "AlgebraicGeometry.AlgebraicSpace.IsSquareZeroDifference",
+   "AlgebraicGeometry.AlgebraicSpace.quotientTest",
+   "AlgebraicGeometry.AlgebraicSpace.quotientTestArrow",
+   "AlgebraicGeometry.AlgebraicSpace.squareZeroPointKernel",
+   "AlgebraicGeometry.AlgebraicSpace.quotientChartScalar",
+   "AlgebraicGeometry.AlgebraicSpace.groupSpace_squareZero_kernel_module"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupSpaceSquareZeroKernelModule.lean",
+  "statement": "theorem groupSpace_squareZero_kernel_module {A : Type u} [CommRing A] (G : AlgebraicSpace S) (F : (Over S)ᵒᵖ ⥤ GrpCat.{u}) (e : F ⋙ forget GrpCat ≅ G.obj.obj) (s : Spec (.of A) ⟶ S) (I : Ideal A) (_hj : IsFirstOrderThickening (quotientTestArrow s I).left) : ∃! δ : squareZeroPointKernel F s I ≃ differenceHom (quotientTestArrow s I) (groupPointMap G F e (Over.mk s) 1), (∀ x : squareZeroPointKernel F s I, IsSquareZeroDifference (quotientTestArrow s I) (groupPointMap G F e (Over.mk s) 1) (groupPointMap G F e (Over.mk s) x.val) (δ x)) ∧ δ 1 = 0 ∧ (∀ x y : squareZeroPointKernel F s I, δ (x * y) = δ x + δ y) ∧ ∃ (C : AddCommGroup (squareZeroPointKernel F s I)) (M : @Module (A ⧸ I) (squareZeroPointKernel F s I) _ C.toAddCommMonoid), C.zero = 1 ∧ (∀ x y : squareZeroPointKernel F s I, C.add x y = x * y) ∧ (∀ (c : A ⧸ I) (x : squareZeroPointKernel F s I) (U : (schemeSpace (quotientTest s I)).EtaleSite) (v : ((moduleTensorPullback (groupSchemeMap (quotientTestArrow s I) ≫ groupPointMap G F e (Over.mk s) 1)).obj (relativeOmega G)).val.obj (op U)), (δ (@SMul.smul _ _ M.toSMul c x)).val.app (op U) v = quotientChartScalar s I U c • (δ x).val.app (op U) v) ∧ (∀ (r : ℕ) (x : squareZeroPointKernel F s I), @SMul.smul _ _ M.toSMul (r : A ⧸ I) x = x ^ r)",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-696454075",
+  "group": "NP",
+  "result": "fix",
+  "note": "Statement checked clause by clause against Stacks 0618/0619/04D0 and 0BF5: group-functor encoding (no commutativity or smoothness), Spec A / Spec(A/I) test with IsFirstOrderThickening (equivalent to I^2=0), K = ker F.map j, relativeOmega = Omega of p^{-1}O_S -> O_G on the small model, e0^*Omega and j^*ker(O_T -> j_*O_T0) = I, exists-unique delta normalized by beta^*x - alpha^*x (sign b#-a#, cartesian U0 required, not vacuous and determines delta), delta 1 = 0, delta(xy) = delta x + delta y, existential AddCommGroup/Module pinned by zero=1, add=mul and componentwise scalar formula, r-th power = r smul for r in N. Edge cases I=0, A=0, trivial G, G_a, G_m, char p, noncommutative G all fine; single universe u. No hollow defs, sorry only, docstrings and statement records verbatim, item changed only in lean and stmt_deps. Finding H2/H12: new node def-sfb-space-relative-differentials cited lemma node lem-trf-topos-inverse-image-differentials only for the plain defs SheafDifferentials.omega/derivation, which are owned by def-sfb-sheaf-differentials (Q150, landed 01:40 UTC, on the base). FIX: fixes/def-sfb-space-relative-differentials.json replaces that stmt_dep and the statement citation; check_new_node reports no failures. No Lean changed, so no compile."
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-integral-twist-common-scalar-model",
+ "kind": "statement",
+ "title": "Common ordinary twist and successive scalar chain model",
+ "statement": "Let l,S,E,F,G,iota,kappa,m and W_H be as in the integral twist setting [def-coefficient-twists-detailed, def-weil-integral-scalar-extension]. Let C be an integral constructible object [def-weil-derived-complete-integral-detailed], P a flat-term K-flat complex [lem-pc-kflat-resolution] and e:Q(P)~C. Write T for ordinary scalar extension, chi for the fixed ordinary-to-completed comparison [lem-weil-finite-free-completed-scalar-comparison], mu for the derived component of CompletedLineTensor.associatorData [lem-pur-completed-line-tensor-coherence], and alpha for the published integralTwistOrdinaryBeta [lem-weil-integral-twist-derived-scalar]. There exists a chain isomorphism a:T_GF T_FE(W_E P)~W_G(T_GE P) sending c tensor (b tensor (x tensor y)) to (c*kappa(b) tensor x) tensor theta_GE(y). Its derived computation, including T_GF T_FE(W_E(e.inv)), both universal scalar counits, the exact-twist factorization maps, and W_G(Q(completionChain) >> inverse resolving comparison >> B_GE(e.hom)), is exactly mu_W_E(C) >> alpha_GE,C >> W_G(chi_GE,C). All maps and factors are the specified ones, as written verbatim in the attached Lean signature. This is the ordinary right-path model normalization; it asserts neither the completed twist tower nor its unit laws nor any rationalized equality.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Final sentence: integral twists levelwise modulo uniformizer powers and at common finite coefficient stages."
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pc-kflat-resolution",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-weil-integral-twist-derived-scalar"
+ ],
+ "proof": [
+  {
+   "text": "The twist line is locally free of rank one and its inverse is its dual. The flat-model clause of ordinary signed-line comparison shows that W_E(P) remains K-flat with flat terms.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-ordinary-line-derived-scalar-comparison",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise modulo uniformizer powers and at common finite coefficient stages."
+   }
+  },
+  {
+   "text": "Compose scalarAssociatorComplex on W_E(P) with the single E-to-G twist chain comparison. The scalar associator tensor formula followed by the single twist formula gives c tensor (b tensor (x tensor y)) mapped to (c*kappa(b) tensor x) tensor theta_GE(y). These are maps after sheafification, so local tensor generation proves the formula without any global-section generation assumption.",
+   "uses": [
+    "lem-pur-completed-line-tensor-coherence",
+    "lem-weil-integral-twist-derived-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise modulo uniformizer powers and at common finite coefficient stages."
+   }
+  },
+  {
+   "text": "Apply the ordinary associator counit equation to the good twisted P. Naturality transports W_E(e.inv) and the exact-twist factorization through mu. Substitute the single-extension twist counit equation. The inverse target factorization cancels. The ordinary-to-completed comparison representative equation identifies the remaining counit followed by Q(completionChain) and inverse resolving comparison with chi on Q(P). Naturality moves e.hom to C and cancels e.inv e.hom. The remaining composite is mu_W_E(C) >> alpha_GE,C >> W_G(chi_GE,C). Only derived comparison maps, not a chain inverse to completion, have been inverted.",
+   "uses": [
+    "lem-pur-completed-line-tensor-coherence",
+    "lem-weil-integral-twist-derived-scalar",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise modulo uniformizer powers and at common finite coefficient stages."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-ordinary-line-derived-scalar-comparison",
+  "def-coefficient-twists-detailed",
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-weil-integral-twist-derived-scalar",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Final sentence: integral twists levelwise modulo uniformizer powers and at common finite coefficient stages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K-flat chain representative of successive scalar extensions followed by tensor with an invertible sheaf and the canonical completion comparison",
+   "results": "Algebra.FormallyUnramified.flat_of_restrictScalars; Module.Flat.iff_flat_tensorProduct; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; RingHom.Flat; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp; Module.FaithfullyFlat.instTensorProduct; LinearMap.tensorKerEquiv_apply",
+   "date": "2026-10-25",
+   "verdict": "no match: the results do not identify the specified completed-sheaf twist beta or its normalized K-flat representative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat chain model for ordinary scalar associator followed by Tate twist and the natural completion map",
+   "results": "HomologicalComplex.ιTensorObj; HomologicalComplex.associator; HomologicalComplex.unit_tensor_d₁; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.HasTensor; HomologicalComplex.leftUnitor; HomologicalComplex.leftUnitor'_inv_comm_assoc",
+   "date": "2026-10-25",
+   "verdict": "no match: the results do not identify the specified completed-sheaf twist beta or its normalized K-flat representative."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp_hom_app_one_tmul",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul",
+   "date": "2026-10-25",
+   "verdict": "no match: the results do not identify the specified completed-sheaf twist beta or its normalized K-flat representative."
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*scalar.*tower|ordinary.*twist.*counit|KFlat.*twist in Mathlib, WeilConjectures and Sheaf/Paper",
+   "results": "No Mathlib match; existing CompletedLineTensorCoherence and IntegralTwistDerivedScalar provide the constituent comparisons, but do not identify their independently characterized normalizations.",
+   "date": "2026-10-25",
+   "verdict": "no match: the common-model descent and the normalization of the published beta require the interface arguments recorded in this node."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTwistScalarCoherence",
+  "date": "2026-10-25",
+  "group": "D9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "Final sentence: integral twists levelwise modulo uniformizer powers and at common finite coefficient stages.",
+   "via": [
+    "lem-weil-integral-twist-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTwistCommonScalarModel",
+  "file": "lean/Sheaf/Paper/IntegralTwistCommonScalarModel.lean",
+  "declaration": "WeilConjectures.integral_twist_common_scalar_model",
+  "statement": "theorem integral_twist_common_scalar_model (m : ℤ) :\n    (∀ (C : sfIntegralConstructibleCategory l E S)\n      (P : (integralOperationsGoodComplex l E S).FullSubcategory)\n      (e : DerivedCategory.Q.obj P.obj ≅ C.obj),\n      ∃ a : (completedOrdinaryScalarComplex l F G κ S).obj\n          ((completedOrdinaryScalarComplex l E F ι S).obj\n            (((integralSheafTwist l E S m).mapHomologicalComplex (.up ℤ)).obj P.obj)) ≅\n        ((integralSheafTwist l G S m).mapHomologicalComplex (.up ℤ)).obj\n          ((completedOrdinaryScalarComplex l E G (κ.comp ι) S).obj P.obj),\n        (∀ (i : ℤ) (U : S.ProEtᵒᵖ)\n          (b : (completedIntegralCommRingSheafUnrestricted l F S).obj.obj U)\n          (c : (completedIntegralCommRingSheafUnrestricted l G S).obj.obj U)\n          (x : (P.obj.X i).val.obj U) (y : (integralTwistLine l E S m).val.obj U),\n          (a.hom.f i).val.app U\n              (completedScalarTensorSection l F G κ S _ U c\n                (completedScalarTensorSection l E F ι S _ U b\n                  (SheafOfModules.siteSheafTensorTmul\n                    (A := completedIntegralCommRingSheafUnrestricted l E S) _ _ U x y))) =\n            SheafOfModules.siteSheafTensorTmul\n              (A := completedIntegralCommRingSheafUnrestricted l G S) _ _ U\n              (completedScalarTensorSection l E G (κ.comp ι) S _ U\n                (c * (completedCoefficientMap l F G κ S).hom.app U b) x)\n              ((twistScalarMaps l E S G (κ.comp ι) m).val.app U y)) ∧\n        (completedDerivedScalarExtension l F G κ S).map\n            ((completedDerivedScalarExtension l E F ι S).map\n              ((integralSheafTwist l E S m).mapDerivedCategory.map e.inv)) ≫\n          (completedDerivedScalarExtension l F G κ S).map\n            ((completedDerivedScalarExtension l E F ι S).map\n              ((integralSheafTwist l E S m).mapDerivedCategoryFactors.hom.app P.obj)) ≫\n          (completedDerivedScalarExtension l F G κ S).map\n            (completedScalarCounit l E F ι S\n              (((integralSheafTwist l E S m).mapHomologicalComplex (.up ℤ)).obj P.obj)) ≫\n          completedScalarCounit l F G κ S\n            ((completedOrdinaryScalarComplex l E F ι S).obj\n              (((integralSheafTwist l E S m).mapHomologicalComplex (.up ℤ)).obj P.obj)) ≫\n          DerivedCategory.Q.map a.hom ≫\n          (integralSheafTwist l G S m).mapDerivedCategoryFactors.inv.app\n            ((completedOrdinaryScalarComplex l E G (κ.comp ι) S).obj P.obj) ≫\n          (integralSheafTwist l G S m).mapDerivedCategory.map\n            ((DerivedCategory.Q.map\n                ((completedScalarChainComparison l E G (κ.comp ι) S).app P.obj) ≫\n              (integralScalarExtensionComparisonOfUniverses l E G (κ.comp ι) S).inv.app P) ≫\n              (integralScalarExtensionOfUniverses l E G (κ.comp ι) S).map e.hom) =\n        (CompletedLineTensor.associatorData l E S F ι G κ).derived.hom.app\n            ((integralSheafTwist l E S m).mapDerivedCategory.obj C.obj) ≫\n          (integralTwistOrdinaryBeta l E G (κ.comp ι) S m).hom.app C ≫\n          (integralSheafTwist l G S m).mapDerivedCategory.map\n            ((completedScalarComparison l E G (κ.comp ι) S).app C.obj))",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Supplies the existing generic normalized line/scalar or K-flat comparison used in this step; this unit supplies no replacement for that generic tool."
+   },
+   {
+    "node": "lem-pur-ordinary-line-derived-scalar-comparison",
+    "why": "Supplies the existing generic normalized line/scalar or K-flat comparison used in this step; this unit supplies no replacement for that generic tool."
+   },
+   {
+    "node": "lem-pur-completed-line-tensor-coherence",
+    "why": "Supplies the existing generic normalized line/scalar or K-flat comparison used in this step; this unit supplies no replacement for that generic tool."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Supplies the existing generic normalized line/scalar or K-flat comparison used in this step; this unit supplies no replacement for that generic tool."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-57f2d",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T162228-L-375740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-57f2d",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T162228-L-375740",
+  "kind": "interface",
+  "note": "independent cc review: item proof (8 clauses, no sorry) and two new sorried interface theorems against the item statement, CompletedLineTensor/integral_twist_derived_scalar specifications, the node files and unit sk-prop-sf-existence (realized empty); sandbox build of delivered modules plus importers QbarTwistCommonStage (ok) and AdicScalarTraceCoherence (ok at 71 s vs published 66 s under load, pre-existing borderline 60 s)"
+ }
+}

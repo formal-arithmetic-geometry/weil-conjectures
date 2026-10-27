@@ -19,45 +19,37 @@
  },
  "proof": [
   {
-   "text": "Choose a closed immersion $j:Y\\to\\mathbf P(B;k)$ with $j^*\\mathcal O(1)\\cong L^{\\otimes r}$ from very ampleness. Pull its coordinate sections back to sections $t_b$; their nonvanishing loci cover $Y$.",
+   "text": "Choose the fixed closed immersion j:Y → P(B;k) and section-preserving isomorphism from very ampleness. Construct the ideal-coordinate products explicitly using the ideal inclusion and tensor-power isomorphism. Apply the product-coordinate relations lemma: these products vanish on Z, their restrictions cover U by generating loci, and their ratios agree with the ratios of j.",
    "uses": [
     "def-sc-ample",
-    "lem-weil-pbc-projective-space-standard-charts"
+    "lem-zl-bertini-product-coordinate-relations"
    ],
    "elementary": false
   },
   {
-   "text": "At $x\\in U$, restriction of the ideal inclusion is an isomorphism. Hence the images of the given ideal-twist generators generate $L^{\\otimes(n-r)}$ at $x$. Choose such an image $a$ nonvanishing at $x$, and choose $t_b$ nonvanishing at $x$. The products $a\\otimes t_c$, transported through $L^{\\otimes(n-r)}\\otimes L^{\\otimes r}\\cong L^{\\otimes n}$, vanish on $Z$. The tensor fibre formula says that the nonvanishing locus of $a\\otimes t_b$ is the intersection of the two nonvanishing loci. It lies in $U$.",
+   "text": "The span assumption writes every global product as a finite k-linear combination of the specified sections. Pull this identity back to U, converting k scalars through GammaSpecIso and the structure map. The generatingSections_pair theorem supplies the section-preserving universal pair for the specified morphism f. The projective pair chart frame and ratio formulas then show that on f^(-1)D_+(T_q) each product is f^*A_aqb times the q-th section, where A_aqb is the corresponding linearRatio.",
    "uses": [
-    "lem-weil-pbc-invertible-generating-sections-fibre",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-sc-closed-immersion-ideal-tensor-sections"
+    "lem-pc-complete-linear-system-closed",
+    "lem-weil-pbc-projective-pair-chart-frame",
+    "lem-weil-pbc-projective-pair-chart-relation",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Every product is a constant linear combination of the specified $s_a$ by the span assumption. On the projective target, divide these linear forms by one coordinate and invert the form corresponding to $a\\otimes t_b$. The ratios $(a\\otimes t_c)/(a\\otimes t_b)$ then define a morphism to the $b$-th standard affine chart of $\\mathbf P(B;k)$. Construct it from the polynomial coordinate ring. The coordinate formulas for a generating system identify its inverse image with the nonvanishing locus of $a\\otimes t_b$.",
+   "text": "At any x in U choose a product generating at x and a standard chart q containing f(x). On W=D(A_aqb) the denominator is a unit. Normalize all the linear forms by it and use homOfSections to construct h:W → P(B;k), with b-th coordinate 1. On V=f^(-1)W the q-th section is a free generator, so cancellation in the product ratio identities yields j^*(T_c/T_b) f^*A_aqb=f^*A_aqc. The normalized h and j|_V have equal base maps and coordinate ratios, hence are equal by projective-chart ratio extensionality.",
    "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-projective-morphism-chart-preimage",
-    "lem-weil-pbc-projective-space-functor-of-points"
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-projective-space-chart-ratio-extensionality",
+    "lem-weil-pbc-morphism-into-affine-scheme"
    ],
    "elementary": false
   },
   {
-   "text": "On this inverse image, both tensor factors are generators. Trivialize by them: the pulled-back ratios cancel the first factor and equal $t_c/t_b$. Maps into the affine chart are determined by the base functions and these ratios, so the composite with the constructed chart morphism equals the restriction of $j$. That restriction is an immersion. Immersion cancellation proves that the specified coordinate morphism is an immersion over this target open.",
+   "text": "The restriction V → Y → P(B;k) is an immersion, so f|_V followed by h is an immersion. Cancel h to conclude f|_V is an immersion, and compose with W → P(I;k). The chosen W contains f(x), by the free-generator criterion for the nonzero linear form. Apply target locality near the image for every x. The empty-source case is covered without a separate nonemptiness assumption.",
    "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-weil-pbc-morphism-into-affine-scheme",
     "lem-weil-pbc-proper-fp-permanence",
-    "lem-zl-immersion-cancellation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "These target opens cover the image, since a product nonvanishing at each $x\\in U$ was chosen. Apply locality near the image. If $U$ is empty, the same image-cover argument is vacuous and gives the assertion.",
-   "uses": [
+    "lem-zl-immersion-cancellation",
     "lem-zl-immersion-near-image-locality"
    ],
    "elementary": false
@@ -66,7 +58,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0FD5, lemma-generate-over-complement, last three paragraphs; fixed very ample power and chart cancellation variant"
+  "place": "Tag 0FD5, lemma-generate-over-complement, proof of the claim and the displayed product fractions; normalized projective chart factorization and immersion cancellation, with existing native section APIs"
  },
  "status": "split",
  "mathlib_match": null,
@@ -121,13 +113,14 @@
  ],
  "proof_deps": [
   "def-sc-ample",
-  "lem-weil-pbc-projective-space-standard-charts",
-  "lem-weil-pbc-invertible-generating-sections-fibre",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-sc-closed-immersion-ideal-tensor-sections",
+  "lem-zl-bertini-product-coordinate-relations",
+  "lem-pc-complete-linear-system-closed",
+  "lem-weil-pbc-projective-pair-chart-frame",
+  "lem-weil-pbc-projective-pair-chart-relation",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-projective-space-chart-ratio-extensionality",
   "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-projective-morphism-chart-preimage",
-  "lem-weil-pbc-projective-space-functor-of-points",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-zl-immersion-cancellation",
   "lem-zl-immersion-near-image-locality"
@@ -153,14 +146,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U7",
+  "group": "M8",
   "result": "pass",
-  "landing": "20261020T131158-L-1254126",
+  "landing": "20261026T092049-L-3398262",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

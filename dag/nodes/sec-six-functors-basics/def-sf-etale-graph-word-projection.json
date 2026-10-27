@@ -1,0 +1,198 @@
+{
+ "id": "def-sf-etale-graph-word-projection",
+ "kind": "definition",
+ "title": "Projection on a proper/open/proper word and the graph composition tail",
+ "statement": "Let A be a commutative ring and f:X→Y a scheme morphism with a supplied proper/open/proper presentation t=(a,e,p), f=a≫e≫p [def-pur-etale-graph-presentation-maps]. Define the forward graph-word projection on arbitrary unbounded M,K by the proper projection for p, Rp_* of the open tensor comparison for e, Rp_*De_! of the proper projection for a, followed by the canonical inverse pullback compositor from La*Le*Lp*K to Lf*K. For composable f,g and supplied compactifications cf,cg,ch, define the first graph presentation S=(h,e,psi≫cg.g) in the product ch.Z ×_Z cg.Z exactly as in sfGraphCompactSupportCompIso. Define its tail isomorphism by the same explicit e3 followed by the inverse graph comparison e2 for cf. Then the existing specified graph compositor is the first graph comparison followed by this tail. The data is constructed explicitly; no existence witness is selected. The transparent wrappers sfCompactProjection and sfGraphPresentationComparison display the existing projection and graph comparison at their canonical explicit functor endpoints; they introduce no mathematical data.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "nonempty_iso_rightDerivedLowerShriekOfCompactification, eA/eC/eB; nonempty_iso_rightDerivedLowerShriek_comp, e1/e3/e2. Tensor calculation: literature/stacks-project/sites-cohomology.tex, equation-projection-formula-map and lemma-j-shriek-and-tensor; literature/stacks-project/more-etale.tex, lemma-shriek-proper-and-open."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-presentation-maps",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-etale-unbounded-compact-support-composition",
+  "def-kun-derived-tensor",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Compose the existing proper projection, inverse open projection isomorphism and inner proper projection, then tensor the inverse composite pullback comparison. These arrows have the specified graph-word endpoints.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+    "place": "nonempty_iso_rightDerivedLowerShriekOfCompactification, eA/eC/eB; nonempty_iso_rightDerivedLowerShriek_comp, e1/e3/e2. Tensor calculation: literature/stacks-project/sites-cohomology.tex, equation-projection-formula-map and lemma-j-shriek-and-tensor; literature/stacks-project/more-etale.tex, lemma-shriek-proper-and-open."
+   }
+  },
+  {
+   "text": "Construct the product of the proper parts, its open over X and the graph h=(ch.i,f cg.i,1). Its projection to X is proper and separated, so h is proper since its composite with that projection is the identity. In the further open over Y form h′ lifting h and f; it is proper by proper-to-separated. All opens are base changes of the supplied opens.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+    "place": "nonempty_iso_rightDerivedLowerShriekOfCompactification, eA/eC/eB; nonempty_iso_rightDerivedLowerShriek_comp, e1/e3/e2. Tensor calculation: literature/stacks-project/sites-cohomology.tex, equation-projection-formula-map and lemma-j-shriek-and-tensor; literature/stacks-project/more-etale.tex, lemma-shriek-proper-and-open."
+   }
+  },
+  {
+   "text": "Copy the explicit e3 graph word (proper graph/open interchange, open composition on the intersection, outer proper composition, inverse Cartesian proper/open exchange), followed by the whiskered inverse e2. The factorization theorem is reflexivity after unfolding only these explicit definitions, since the original graph compositor was constructed as e1 e3 e2 inverse.",
+   "uses": [
+    "lem-etale-unbounded-compact-support-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+    "place": "nonempty_iso_rightDerivedLowerShriekOfCompactification, eA/eC/eB; nonempty_iso_rightDerivedLowerShriek_comp, e1/e3/e2. Tensor calculation: literature/stacks-project/sites-cohomology.tex, equation-projection-formula-map and lemma-j-shriek-and-tensor; literature/stacks-project/more-etale.tex, lemma-shriek-proper-and-open."
+   }
+  },
+  {
+   "text": "The projection wrapper equals the original component by reflexivity. Its invertibility follows from the finite-coefficient ambient projection theorem.",
+   "uses": [
+    "lem-sf-etale-ambient-adjoint-projection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Implement the graph word as the constant-ModuleCat specialization of sfGraphProjectionWord with the same explicit graph factors. The generic function composes the same three canonical projection components. Its two inverse pullback compositor components equal the original compositor component: the functor associator is the identity, and iso-whiskering evaluates the first inverse compositor at Lp K. Thus the construction retains exactly the original mathematical map. Scope the reflexive-quiver instance choice during the two projection definitions, without changing their public signatures.",
+   "uses": [
+    "def-sf-etale-explicit-graph-projection-word"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-etale-unbounded-compact-support-composition",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "def-sf-etale-explicit-graph-projection-word"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "Parent steps 4 and 6--7; explicit graph data and compositor factorization from E4. D9: specialize the explicit generic successive graph projection, using the same canonical components and scoped quiver-instance choice; no projection is inverted or object chosen."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula compatibility of a graph compactification composition isomorphism on derived categories",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι and variants; CategoryTheory.CostructuredArrow.ιCompGrothendieckProj; localCohomology.diagramComp. No compact-support projection compatibility.",
+   "date": "2026-10-25",
+   "verdict": "No match. The returned declarations concern scheme Proj or unrelated categorical projections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open graph comparison isomorphism respects the derived projection formula",
+   "results": "8 hits: PresheafedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset; PresheafedSpace.IsOpenImmersion.isoOfRangeEq; IsProper.instRespectsIsoScheme; Scheme.Pullback.pullbackP1Iso_hom_snd; morphismRestrictOpensRange and other scheme open/flat comparisons.",
+   "date": "2026-10-25",
+   "verdict": "No match: no derived compact-support graph-word comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comp|comp.*projection",
+   "results": "msearch grep: 25 unrelated hits in representation theory, projections and gluing. Project rg: CompactificationProjectionComposition.projectionMapOfCompactification_tower_comp is proved, but only covers a compatible tower; ShriekTensorComposition.projectionMap_compactification_comp requires quasi-compactness and a different compositor. SfGraphCompactSupportCompIso has no projection compatibility theorem. Blueprint_refs search graph projection returns 0 blueprint nodes. DAG/source name search for the three new node ids returns no matches.",
+   "date": "2026-10-25",
+   "verdict": "Existing proper/open tower result cannot replace the arbitrary-base graph comparison. The two new lemmas isolate graph-model and tail squares from the existing node plan; no duplicate found in the blueprint/DAG graph/projection search."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfEtaleCompactProjectionCoherence",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "thm-asd-smooth-tensor.proof.md, paragraph 3, projection formula and composite counits; Parent steps 4 and 6--7; explicit data for its graph word and factorization",
+   "via": [
+    "lem-sf-etale-compact-projection-coherence",
+    "lem-sf-exceptional-tensor-transitivity",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfGraphProjectionData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfGraphProjectionData.lean",
+  "declaration": "AlgebraicGeometry.Etale.sfGraphWordProjection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfGraphWordProjection",
+   "AlgebraicGeometry.Etale.sfCompositionGraphPresentation",
+   "AlgebraicGeometry.Etale.sfGraphCompositionTailIso",
+   "AlgebraicGeometry.Etale.sfGraphCompactSupportCompIso_factor",
+   "AlgebraicGeometry.Etale.sfCompactProjection",
+   "AlgebraicGeometry.Etale.sfGraphPresentationComparison",
+   "AlgebraicGeometry.Etale.sfCompactProjection_eq",
+   "AlgebraicGeometry.Etale.sfCompactProjection_isIso"
+  ],
+  "statement": "def sfGraphWordProjection\n    (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (t : EtaleGraphPresentation f)\n    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :\n    ((derivedTensor (ModuleCat.{u + 1} A) Y).obj ((t.functor A).obj M)).obj K ⟶\n      (t.functor A).obj\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj\n          ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25",
+  "note": "The data module explicitly constructs all three definitions and proves the compositor factorization by rfl. The lean.statement field gives the principal graph-word projection signature; the additional public declarations are the graph presentation, its tail, and the defining factorization theorem. No data is selected from a theorem with sorry."
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "def-sf-etale-graph-word-projection",
+  "worker": "stage3 E4",
+  "summary": "Extracted a strict component of the parent graph projection calculation, with explicit Lean arrows and the original graph normalizations.",
+  "blueprint": "thm-asd-smooth-tensor.proof.md, paragraph 3: projection formula and compatibility with composition; this is a component of the parent graph-pasting plan.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic geometric or tensor-comparison identity used in this graph-word calculation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic geometric or tensor-comparison identity used in this graph-word calculation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Generic geometric or tensor-comparison identity used in this graph-word calculation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic geometric or tensor-comparison identity used in this graph-word calculation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-etale-unbounded-compact-support-composition",
+    "why": "Generic geometric or tensor-comparison identity used in this graph-word calculation; it does not replace a step of the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T201732-L-2609286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-30781",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T065448-L-2996235",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs node lem-sf-etale-graph-composition-tail-projection; new sfGraphWordProjection body vs old (equal up to associator 𝟙 + isoWhiskerLeft components); new nodes' lean.statement vs Lean; 4 delivered modules + 8 unchanged consumers compiled in sandbox; #print axioms"
+ }
+}

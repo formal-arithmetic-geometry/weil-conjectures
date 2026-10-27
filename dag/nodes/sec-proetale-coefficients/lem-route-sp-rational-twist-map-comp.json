@@ -1,0 +1,240 @@
+{
+ "id": "lem-route-sp-rational-twist-map-comp",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sp-tate-twist",
+   "via": [
+    "lem-sp-ell-point-reduction-ring-map"
+   ],
+   "place": "The formulas for the integral inverse limit and for E_X(1), and the specified transition diagram needed to pass to the colimit over finite extensions E."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Field-extension transitions compose.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, and an arbitrary scheme $X$, with its small pro-etale site [def-weil-pbc-proetale-site]. Let $E\\subseteq F\\subseteq H$ be finite intermediate extensions, with rings of integers as in [def-weil-l-adic-coefficient-extension]. Write $A_K=K_X$ and $R_K=\\mathcal O_{K,X}$ for the pulled-back condensed coefficient rings [sk-def-sfb-pulled-back-coefficients], and $a_K:R_K\\to A_K$ for [def-sfb-integers-to-subfield], for $K=E,F,H$. Write $c_{KL}:A_K\\to A_L$ for the field inclusions [def-sfb-subfield-coefficient-map], $r_{KL}:R_K\\to R_L$ for the uniquely characterized integral maps of [lem-route-sp-integers-map-exists-unique], and $q_{KL,n}:B_{K,n}\\to B_{L,n}$ for the uniquely characterized quotient maps of [lem-route-sp-ell-map-exists-unique], where $B_{K,n}=(\\mathcal O_K/\\ell^{n+1})_X$ and $d_{K,n}:R_K\\to B_{K,n}$ is reduction.\n\nLet $M_n=\\mu_{\\ell^{n+1},X}$, with its power transitions [def-pur-roots-of-unity-sheaf]. Form $L_K=\\varprojlim_{n\\geq0}(B_{K,n}\\otimes_{\\mathbf Z_X}M_n)$ in $R_K$-modules, with transitions reduction on $B$ tensored with the power map on $M$, and let $p_{K,n}$ be its projections [def-pur-sheaf-inverse-limit, def-pur-sheaf-tensor-product]. Let $u_{KL}:L_K\\to L_L$ be the unique morphism of underlying abelian sheaves satisfying $p_{L,n}\\circ u_{KL}=(q_{KL,n}\\otimes1)\\circ p_{K,n}$ for all $n$ [lem-route-sp-integral-twist-map-exists-unique]. Put $T_K=A_K\\otimes_{R_K}L_K$, with the defining tensor quotient $e_K:A_K\\otimes_{\\mathbf Z_X}L_K\\to T_K$. Let $j_{KL}:T_K\\to T_L$ be the unique morphism of abelian sheaves with\n$$j_{KL}\\circ e_K=e_L\\circ(c_{KL}\\otimes u_{KL})$$\nas in [lem-route-sp-rational-twist-map-exists-unique]. Then these specified rational transitions compose:\n$$j_{EH}=j_{FH}\\circ j_{EF}.$$\nThis is the equality of underlying abelian-sheaf morphisms denoted by $\\mathrm{spRationalTwistMap}\\ X\\ \\ell\\ (h.\\mathrm{trans}\\ k)=\\mathrm{spRationalTwistMap}\\ X\\ \\ell\\ h\\;\\gg\\;\\mathrm{spRationalTwistMap}\\ X\\ \\ell\\ k$ for $h:E\\leq F$ and $k:F\\leq H$. No invertibility hypothesis on $\\ell$ on $X$ is needed for this composition assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "lem-sp-ell-point-reduction-ring-map: the Lean of this node (declared in its module Sheaf.Paper.ProEtaleTateTwists) reaches AlgebraicGeometry.ProEtale.spRationalTwistMap_comp, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spRationalTwistMap_comp (module Sheaf.Paper.ProEtaleTateTwists, lines 364-374, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-integers-to-subfield",
+  "def-sfb-subfield-coefficient-map",
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "lem-route-sp-rational-twist-map-exists-unique"
+ ],
+ "proof": [
+  {
+   "text": "The condensed inclusions compose by the strict functoriality in [def-sfb-qlbar-subextension-map]. Their pullbacks therefore give $c_{FH}\\circ c_{EF}=c_{EH}$: coefficient change is application of the inverse-image functor [def-sfb-coefficient-map, sk-def-sfb-pulled-back-coefficients]. By [lem-route-sp-integers-map-exists-unique] the maps $r_{KL}$ preserve the ring structure and satisfy $a_Lr_{KL}=c_{KL}a_K$. Consequently $a_Hr_{FH}r_{EF}=c_{FH}a_Fr_{EF}=c_{FH}c_{EF}a_E=c_{EH}a_E$. The composite of the two ring maps is a ring map, since it preserves unit and multiplication successively. Thus it satisfies both defining conditions for $r_{EH}$; the uniqueness clause of the same cited statement gives $r_{FH}r_{EF}=r_{EH}$.",
+   "uses": [
+    "def-sfb-qlbar-subextension-map",
+    "def-sfb-coefficient-map",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-route-sp-integers-map-exists-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "integral inverse limit, rationalization and colimit over finite E; expanded field-extension composition argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean:364-374"
+   }
+  },
+  {
+   "text": "For each $n\\geq0$, [lem-route-sp-ell-map-exists-unique] gives $q_{KL,n}d_{K,n}=d_{L,n}r_{KL}$. Hence $q_{FH,n}q_{EF,n}d_{E,n}=q_{FH,n}d_{F,n}r_{EF}=d_{H,n}r_{FH}r_{EF}=d_{H,n}r_{EH}$. The uniqueness clause, now for the pair $E\\subseteq H$, gives $q_{FH,n}q_{EF,n}=q_{EH,n}$. In particular this argument does not assume the quotient inclusion is injective or that reduction is surjective on sections of every pro-etale object.",
+   "uses": [
+    "lem-route-sp-ell-map-exists-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "integral inverse limit, rationalization and colimit over finite E; expanded field-extension composition argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean:364-374"
+   }
+  },
+  {
+   "text": "Use the projection equations of [lem-route-sp-integral-twist-map-exists-unique]. At every $n$ they give $p_{H,n}u_{FH}u_{EF}=(q_{FH,n}\\otimes1)p_{F,n}u_{EF}=(q_{FH,n}\\otimes1)(q_{EF,n}\\otimes1)p_{E,n}=(q_{EH,n}\\otimes1)p_{E,n}$. The middle tensor identity follows from [def-pur-sheaf-tensor-product]: on the presheaf tensors both composites send $b\\otimes m$ to $q_{FH,n}(q_{EF,n}(b))\\otimes m$, hence agree on finite sums and after sheafification. Thus $u_{FH}u_{EF}$ satisfies precisely the equations characterizing $u_{EH}$; uniqueness in the cited integral-map statement gives $u_{FH}u_{EF}=u_{EH}$. No exactness or surjectivity of inverse limits is used.",
+   "uses": [
+    "lem-route-sp-integral-twist-map-exists-unique",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "integral inverse limit, rationalization and colimit over finite E; expanded field-extension composition argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean:364-374"
+   }
+  },
+  {
+   "text": "Apply the normalization equations of [lem-route-sp-rational-twist-map-exists-unique] successively. They give $(j_{FH}j_{EF})e_E=j_{FH}e_F(c_{EF}\\otimes u_{EF})=e_H(c_{FH}\\otimes u_{FH})(c_{EF}\\otimes u_{EF})=e_H(c_{EH}\\otimes u_{EH})$. For the last equality use the two identities already proved; tensor bifunctoriality here is the direct calculation $a\\otimes t\\mapsto c_{FH}(c_{EF}(a))\\otimes u_{FH}(u_{EF}(t))$ on presheaf pure tensors, extended to sums and sheafification [def-pur-sheaf-tensor-product]. Therefore $j_{FH}j_{EF}$ satisfies the defining tensor equation for the pair $E\\subseteq H$. The uniqueness clause of the rational-map statement implies $j_{FH}j_{EF}=j_{EH}$, which is the required equality. This compares morphisms via their tensor quotient, without assuming all sections of the sheafified tensor are pure tensors.",
+   "uses": [
+    "lem-route-sp-rational-twist-map-exists-unique",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "integral inverse limit, rationalization and colimit over finite E; expanded field-extension composition argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean:364-374"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "def-pur-sheaf-tensor-product",
+  "lem-route-sp-rational-twist-map-exists-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "integral inverse limit, rationalization and colimit over finite E; expanded field-extension composition argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean:364-374"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of field extension transition maps on rational Tate twists constructed from inverse limits and extension of scalars",
+   "results": "8 hits: galRestrict'_comp, Algebra.Extension.H1Cotangent.map_comp, InfiniteGalois.proj_of_le, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, finGaloisGroupMap.map_comp, InfiniteGalois.proj, InfiniteGalois.mk_toAlgEquivAux, InfiniteGalois.algEquivToLimit",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.hom_ext, CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "spRationalTwistMap|spIntegralTwistMap|Tate.*[Tt]wist|tateTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The transition maps between rational Tate twists for inclusions of finite p-adic fields compose",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Cover.trans_comp, PadicComplex.instIsScalarTowerPadicPadicAlgCl, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap_map_pow, AdicCompletion.transitionMap_comp_eval, Padic.comap_mulValuation_eq_padicValuation, IsLocalRing.ResidueField.mapEquiv_trans, AdicCompletion.transitionMap.congr_simp",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps induced on tensor products by composable coefficient ring inclusions and maps of inverse limits satisfy composition",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_naturality, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.map_comp, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap_comp_eval, AdicCompletion.map_comp_apply, AdicCompletion.ofTensorProduct, AdicCompletion.transitionMap_comp_eval_apply",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|[Tt]wist|extendScalars",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.map_comp",
+   "results": "1 hits: AdicCompletion.map_comp",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_comp|theorem transitionMap_comp_reduceModIdeal",
+   "results": "5 hits: Mathlib/RingTheory/AdicCompletion/Functoriality.lean, Mathlib/RingTheory/AdicCompletion/Functoriality.lean, Mathlib/RingTheory/AdicCompletion/Functoriality.lean, Mathlib/RingTheory/AdicCompletion/Functoriality.lean, Mathlib/RingTheory/AdicCompletion/Functoriality.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem trans_comp",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: completion maps for modules over a fixed ring and cover transition maps do not identify the specified pro-etale Tate twists or their normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sp-ell-point-reduction-ring-map",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sp-tate-twist",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistConstructions",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistConstructions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spRationalTwistMap_comp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spRationalTwistMap_comp"
+  ],
+  "statement": "theorem spRationalTwistMap_comp {E F H : PadicAlgCl.FiniteIntermediateField ℓ}\n    (h : E ≤ F) (k : F ≤ H) :\n    spRationalTwistMap X ℓ (h.trans k) =\n      spRationalTwistMap X ℓ h ≫ spRationalTwistMap X ℓ k := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-sp-rational-twist-map-comp",
+  "worker": "stage1",
+  "summary": "Replaced the provisional signature/docstring wrapper by a self-contained statement with exactly the Lean hypotheses; expanded composition through integral coefficient maps, finite quotient maps, integral twist maps, and the rational tensor normalization. All four uniqueness interfaces already exist; no new nodes. Searches found no complete Mathlib specialization. Avoided the broad Tate-twist definition because its current dependency graph reaches this item.",
+  "blueprint": "Realizes functoriality of the specified finite-extension transitions implicit in the integral inverse limit, rationalization and field-colimit formulas of sk-def-sp-tate-twist. The current blueprint has no separate proof of this transition law.",
+  "tool_uses": [
+   {
+    "node": "lem-route-sp-integers-map-exists-unique",
+    "why": "The existing unique-map interface is a generic tool for composing the specified coefficient/twist transitions of this unit; it lives in sk-prop-an because its route sorry was first discovered there, but no other node in this unit supplies this interface."
+   },
+   {
+    "node": "lem-route-sp-ell-map-exists-unique",
+    "why": "The existing unique-map interface is a generic tool for composing the specified coefficient/twist transitions of this unit; it lives in sk-prop-an because its route sorry was first discovered there, but no other node in this unit supplies this interface."
+   },
+   {
+    "node": "lem-route-sp-integral-twist-map-exists-unique",
+    "why": "The existing unique-map interface is a generic tool for composing the specified coefficient/twist transitions of this unit; it lives in sk-prop-an because its route sorry was first discovered there, but no other node in this unit supplies this interface."
+   },
+   {
+    "node": "lem-route-sp-rational-twist-map-exists-unique",
+    "why": "The existing unique-map interface is a generic tool for composing the specified coefficient/twist transitions of this unit; it lives in sk-prop-an because its route sorry was first discovered there, but no other node in this unit supplies this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "lem-route-sp-rational-twist-map-exists-unique"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NG-d72e1681b",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-d72e1681b (reviewer sub-agent of L); spot-checked: PASS, no fixes written; full checks are in review.md. I read the item, every cited node statement, the blueprint sk-def-sp-tate-twist/_section.md l.14-21 (the integral limit, inverting ell, then the colimit over E, which needs the transitions to compose) and ProEtaleTateTwists.lean l.233-374. Statement: r,q,u,j are exactly the .choose maps of the four _existsUnique theorems, with the same objects (exponent n+1, B tensored with mu, limit in R_K-modules, extendScalars along a_K), the same equations and the same order of composition. Hypotheses equal the Lean ones (prime ell, any scheme X, E<=F<=H); no invertibility of ell is assumed or needed, and the target is not weakened. Step 1: the composite c_FH c_EF = c_EH comes from the strict functoriality in def-sfb-qlbar-subextension-map and from p_X^* being a functor (def-sfb-coefficient-map, sk-def-sfb-pulled-back-coefficients); I checked a_H r_FH r_EF = c_EH a_E, that the composite is still a ring map, and the uniqueness in the integers node. Step 2: q_FH q_EF d_E = d_H r_EH, then uniqueness; no epi or injectivity claim is needed. Step 3: the projection equations hold for the composite, with (q tensor 1)(q tensor 1) = (q q) tensor 1 checked on presheaf pure tensors and passed through sheafification (def-pur-sheaf-tensor-product), then uniqueness. Step 4: the tensor normalization holds for the composite, using bifunctoriality and steps 1 and 3, then uniqueness through the tensor quotient; it does not assume sections are pure tensors. Each step is a few lines of substitution plus a cited uniqueness, so elementary:true is justified. There are no new nodes, and no cycle (I computed the 299 ancestors over stmt/proof/step deps; the item is not among them). Duplicate search (spRationalTwistMap, spIntegralTwistMap, tate-twist): only the id node, the four exists-unique interfaces, the pullback-compatibility node det-prop-sfb-cartesian-coefficients-twists and the qbar-action node turned up, so same_as=[] is correct. Edge cases E=F, F=H, n=0, X empty, ell not invertible on X, and ramified E all hold. I accept the four tool_uses (lem-route-sp-{integers,ell,integral-twist,rational-twist}-map-exists-unique): they sit in unit sk-prop-an only because their sorries were found there first, they are this unit's own defining interfaces in the same Lean file, and no node of sk-def-sp-tate-twist provides them. Advisory: those four cited nodes are still provisional; when stage 1 rewrites them in words it must keep the exact ∃! formulas this item uses."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-nodal-finite-quasi-splitting",
+ "kind": "statement",
+ "title": "Finite Galois quasi-splitting of an already semistable curve",
+ "statement": "Let $k$ be a field and let $S$ be a normal integral projective finite-type $k$-scheme. Let $f:Q\\to S$ be H-projective, flat and finitely presented, with all geometric fibres nonempty connected reduced curves of pure dimension one, and with smooth geometrically integral generic fibre. Suppose every singular point of a geometric fibre has completed local ring $\\Omega[[u,v]]/(uv)$ over its algebraically closed residue field $\\Omega$. Let a finite group $H$ act on $k,Q,S$ compatibly with $f$. There are a finite group $J$, a surjection $\\rho:J\\to H$, a normal integral projective finite-type $k$-scheme $S'$, an equivariant finite surjective generically etale morphism $b:S'\\to S$, and a compatible $J$-action on $Q'=Q\\times_S S'$. Writing $N=\\ker\\rho$, one has $k(S')^N=k(S)$. Every fibre of $Q'\\to S'$ is quasi-split: its singular points and both points above each singular point in the normalization are rational over the residue field of the base point. A point is rational when its residue-field map from that field is an isomorphism. This includes smooth fibres, with empty sets of singular points. More generally, for any quasi-split nodal family, quasi-splitting is preserved by arbitrary base change of its base: over each new residue field all singular points and both normalization branches above them remain rational.\n\nField, integral scheme, proper morphism, finite type, geometric integrality, projectivity, finite morphism, surjectivity, function field and field extensions use [def-weil-field], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-pc-geometrically-irreducible], [def-kun-projective], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-sc-function-field], [def-pc-field-extension] and [def-pc-field-tower]. H-projective means admitting a closed immersion into a finite-dimensional projective space over the target; it does not refer to a group named H. A normal scheme has integrally closed domains as local rings. An alteration is a proper surjective morphism of integral schemes, finite over a dense open of the target. A purely inseparable extension in characteristic p>0 means that every element has some p-power in the smaller field; in characteristic zero it means equality. All group actions below are by scheme or field automorphisms, and are allowed to be nonfaithful.\n\nFlatness, finite presentation, smoothness, geometric fibres, closed immersions, fibre products and dimension use [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], [def-sbc-smooth-morphisms], [def-weil-geometric-fibre], [def-weil-closed-immersion], [def-pc-fibre-product] and [def-kun-topological-krull-dimension]. Etale uses [def-weil-etale-morphism].\n\nNormalization, maximal-ideal-adic completion and formal power series use [def-weil-pbc-reduced-normalization], [def-weil-pbc-adic-completion] and [def-weil-pbc-multivariate-power-series].",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong (1997), Lemmas 5.6 and 5.7 and the preceding definition, printed pp.614--615, and the base-change preservation used in Theorem 5.9 proof, p.617. Finite normalization of the output base is permitted, and preserves quasi-splitting by base change. Local de Jong PDF WANTED; publisher PDF read online.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-kun-projective",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-kun-topological-krull-dimension",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-pure-dimension",
+  "def-sfb-quasi-split-nodal-fibres"
+ ],
+ "proof": [
+  {
+   "text": "For a flat finitely presented nodal family $g:C\\to V$, use the branch-scheme criterion. For an arbitrary base change $V'\\to V$ and $v'\\mapsto v$, write $F=\\kappa(v)$, $E=\\kappa(v')$. The branch-cover base-change identification gives $(B_{g_{V'}})_{v'}=(B_g)_v\\times_F E$. For a quasi-split fibre this is a disjoint union of $\\operatorname{Spec}E$, since $F\\otimes_F E=E$; the criterion makes every node and both branches $E$-rational. Thus quasi-splitting is preserved by arbitrary base change, without a Noetherian hypothesis on $V'$.",
+   "uses": [
+    "lem-sfb-nodal-branch-quasi-split-spreading",
+    "lem-sfb-nodal-branch-double-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Definition before Lemma 5.7, pp.614--615; preservation used in Theorem 5.9, p.617."
+   }
+  },
+  {
+   "text": "Each intermediate normal integral projective finite-type $k$-base $V$ is Noetherian and finite dimensional, by finite type over the Noetherian field $k$ and the dimension lemma. With empty marking, the pulled-back family remains flat finitely presented and nodal by semistable base change. Projectivity survives base change and implies properness, so its branch scheme is finite. Induct simultaneously over every such base $V$, its finite group $G$, and every projective flat finitely presented nodal family $C\\to V$ with reduced pure one-dimensional geometric fibres and compatible $G$-actions on $k,V,C$, without generic smoothness. The claim is the finite equivariant quasi-splitting cover with surjective group map and exact kernel fixed field. Use strong induction on the bad closure dimension, with empty closure the identity case.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-trf-semistable-marked-base-change",
+    "lem-pc-projective-base-change",
+    "lem-pc-projective-proper",
+    "lem-sfb-nodal-branch-double-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.7 hypotheses and finite-dimensional induction, p.615."
+   }
+  },
+  {
+   "text": "For the current family $g:C\\to V$, put $A=\\{v:C_v\\text{ is not quasi-split}\\}$ and $Z=\\overline A$. Generic spreading is supplied by the branch-spreading lemma. The bad-locus lemma puts the finitely many component generic points $s_i$ of $Z$ in $A$. If $Z$ is empty, take the identity cover and group map. Otherwise set $E_i=(B_g)_{s_i}$, finite etale by the branch-cover lemma.",
+   "uses": [
+    "lem-sfb-nodal-branch-quasi-split-spreading",
+    "lem-sfb-finite-bad-locus-dimension-drop",
+    "lem-sfb-nodal-branch-double-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.7 first paragraph and beginning of second paragraph, p.615."
+   }
+  },
+  {
+   "text": "Apply equivariant finite residue domination to $V$, its current group $G$, the $s_i$ and $E_i$. It gives $a:W\\to V$, $\\sigma:J\\twoheadrightarrow G$, a normal integral projective finite-type base, a finite surjective generically etale cover, and $k(W)^{\\ker\\sigma}=k(V)$. Every branch fibre above every $s_i$ splits, so every such curve fibre is quasi-split by the criterion and branch base change. Give $C\\times_V W$ the action $j(c,w)=(\\sigma(j)c,jw)$; both projections are equivariant because their coordinates have the same image in $V$.",
+   "uses": [
+    "lem-sfb-equivariant-finite-residue-domination",
+    "lem-sfb-nodal-branch-quasi-split-spreading",
+    "lem-sfb-nodal-branch-double-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.7 application of Lemma 5.6, pp.614--615."
+   }
+  },
+  {
+   "text": "On $W$, Step 1 gives $A_W\\subseteq a^{-1}(A)$, and Step 2 with branch spreading verifies the spreading hypothesis on every integral reduced closed subscheme of $W$. Step 4 splits all points over the $s_i$, so the bad-locus lemma makes $Z_W=\\overline{A_W}$ empty or of smaller dimension. Apply induction on $W$ and compose the resulting cover with $a$. The cover-composition lemma gives finiteness, surjectivity, generic etaleness and the exact composite-kernel fixed field. Start at $(V,G,C)=(S,H,Q)$; fibre-product associativity identifies the final family with $Q\\times_S S'$. Induction gives its quasi-split fibres; Step 1 supplies the independent base-change clause.",
+   "uses": [
+    "lem-sfb-nodal-branch-quasi-split-spreading",
+    "lem-sfb-finite-bad-locus-dimension-drop",
+    "lem-sfb-equivariant-finite-cover-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.7 final induction, p.615, with Situation 5.3 and Remarks 2.3(iii)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-branch-quasi-split-spreading",
+  "lem-sfb-nodal-branch-double-cover",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-trf-semistable-marked-base-change",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-sfb-finite-bad-locus-dimension-drop",
+  "lem-sfb-equivariant-finite-residue-domination",
+  "lem-sfb-equivariant-finite-cover-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong Lemma 5.7, printed pp.614--615, and Remarks 2.3(iii), p.602; reassembly after extracting branch criterion/spreading, finite bad-locus dimension drop, and equivariant finite-cover composition as independent statement-only obligations. Primary publisher scan read online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semistable family of curves becomes quasi split after a finite generically etale Galois alteration of its excellent base",
+   "results": "{\"t\": \"2026-10-22T03:10:08Z\", \"tool\": \"leanfinder\", \"query\": \"A semistable family of curves becomes quasi split after a finite generically etale Galois alteration of its excellent base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.comp\", \"Algebra.FormallyEtale.of_isSeparable_aux\"], \"digest\": \"db008584d865f024\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; none constructs this equivariant scheme or family, and none specializes to the statement in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "{\"t\": \"2026-10-22T03:10:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; none constructs this equivariant scheme or family, and none specializes to the statement in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?split|semistable|nodal.*(branch|split)",
+   "results": "{\"t\": \"2026-10-22T03:10:04Z\", \"tool\": \"grep\", \"query\": \"quasi.?split|semistable|nodal.*(branch|split)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; none constructs this equivariant scheme or family, and none specializes to the statement in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneously make the singular points and normalization branches of every nodal fibre rational by finite base extension",
+   "results": "{\"t\": \"2026-10-22T03:10:05Z\", \"tool\": \"leansearch\", \"query\": \"Simultaneously make the singular points and normalization branches of every nodal fibre rational by finite base extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\"], \"digest\": \"7cb1371c3c6d805b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; none constructs this equivariant scheme or family, and none specializes to the statement in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "de Jong finite Galois quasi splitting of nodal curves over finite dimensional excellent integral schemes",
+   "results": "{\"t\": \"2026-10-22T03:10:09Z\", \"tool\": \"leanfinder\", \"query\": \"de Jong finite Galois quasi splitting of nodal curves over finite dimensional excellent integral schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"WeierstrassCurve.IsGoodReduction\", \"Algebra.Smooth.exists_finiteType\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"8dfbf3670d5dbf6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; none constructs this equivariant scheme or family, and none specializes to the statement in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?split|semistable|nodal.*branch",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"grep\", \"query\": \"quasi.?split|semistable|nodal.*branch\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale permanence, elliptic-curve point maps and Galois field facts do not state this family quasi-splitting theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiSplit\"",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"quasiSplit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale permanence, elliptic-curve point maps and Galois field facts do not state this family quasi-splitting theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Galois quasi splitting of a nodal family of projective curves by noetherian induction",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"leansearch\", \"query\": \"Finite Galois quasi splitting of a nodal family of projective curves by noetherian induction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian\", \"IsGalois.is_separable_splitting_field\", \"AlgebraicGeometry.IsNoetherian.casesOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"FiniteGaloisIntermediateField.recOn\", \"instFiniteGaloisField\", \"Polynomial.instFintypeGal\", \"IsGalois.tfae\"], \"digest\": \"ced561f988963067\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale permanence, elliptic-curve point maps and Galois field facts do not state this family quasi-splitting theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every semistable curve family admits a finite generically etale equivariant Galois base change making all nodes and branches rational",
+   "results": "{\"t\": \"2026-10-22T03:43:48Z\", \"tool\": \"leanfinder\", \"query\": \"Every semistable curve family admits a finite generically etale equivariant Galois base change making all nodes and branches rational\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"RingHom.Etale.isStableUnderBaseChange\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.Affine.Point.map_some\"], \"digest\": \"4468278e6d1bef13\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale permanence, elliptic-curve point maps and Galois field facts do not state this family quasi-splitting theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Make all singularities and tangent directions of every fibre of a nodal curve family rational by finite separable cover of base",
+   "results": "{\"t\": \"2026-10-22T03:43:52Z\", \"tool\": \"leanfinder\", \"query\": \"Make all singularities and tangent directions of every fibre of a nodal curve family rational by finite separable cover of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Projective.map_nonsingular\"], \"digest\": \"7f4d2554bcb67875\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale permanence, elliptic-curve point maps and Galois field facts do not state this family quasi-splitting theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-single-curve-nodal-reduction",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong (1997), Lemmas 5.6 and 5.7 and the preceding definition, printed pp.614--615. Finite normalization of the output base is permitted, and preserves quasi-splitting by base change.",
+   "via": [
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-finite-quasi-splitting",
+  "worker": "stage1",
+  "summary": "Repair of the 7209-character returned proof: statement unchanged; three comparable independent statement-only nodes carry returned steps 1/4, 5/7/8, and the composition/kernel parts of 9/10. The item now has five assembly steps totalling 2960 characters. Original arguments and citations are retained verbatim with an allocation map in report.md. All new nodes searched by all required methods and a second semantic phrasing; no Mathlib match or finished Lean attachment. Landing-return repair: compared the retained baseline with the current DAG (identical item), reread every current assembly dependency and checked all 17 citation quotations. Made the simultaneous induction claim and the spreading hypothesis on all closed strata of the new base explicit. Current-base server dry run precedes the replacement push. Latest landing-return retry (5799d210318): reopened every current cited statement; all 17 quotes remain valid. The induction now explicitly includes compatibility of the group action, and Step 5 explicitly names the bad-locus lemma. Landing-return retry for 88973a0e9fb: retained statements and search log; current repository item equals returned baseline and all 17 quotes remain verbatim. Step 1 now introduces its family and Step 2 explicitly supplies reduced pure one-dimensional geometric fibres and compatible actions on k,V,C to every induction instance.",
+  "blueprint": "Nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports. The inherited chain is below det-thm-sf-ctf-stability-direct-images proof (3), via the one-curve alteration prerequisite. This repair keeps de Jong Lemma 5.7 first-paragraph spreading, second-paragraph residual splitting/dimension induction, and Situation 5.3 exact invariants.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme or commutative-algebra fact used exactly as stated in the indicated step; no node of this unit supplies it and no trace-formula or duality result is used."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic scheme or commutative-algebra fact used exactly as stated in the indicated step; no node of this unit supplies it and no trace-formula or duality result is used."
+   },
+   {
+    "node": "lem-trf-semistable-marked-base-change",
+    "why": "Use only the unmarked nodal-family base-change assertion, with empty marking; no stable-modification or trace-formula conclusion is used."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Projectivity of the pulled-back family is a generic scheme-morphism tool."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Properness makes the branch scheme finite; this is generic geometry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-trf-semistable-marked-base-change",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-sbc-generic-fibre-iso-spread-base-open",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "pqf-lem-finite-integral-lft",
+  "pqf-lem-incomparability",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-dd3765a12",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-dd3765a12 (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the 2026-10-21 re-split. Head da963185 was PASSed; 5799d210 and 88973a0e were each FIXed to add the group action to the Step 2 induction. All three landings were refused because a side completion had not been promoted, not because of the mathematics. clones/live and clones/side-live still hold the 10-step base proof, so nothing supersedes this head. The three new nodes are byte-identical (sha256) to 88973a0e: lem-sfb-nodal-branch-quasi-split-spreading, lem-sfb-finite-bad-locus-dimension-drop and lem-sfb-equivariant-finite-cover-composition. The item statement, its uses lists and Steps 3-5 are unchanged. Step 1 now names its flat finitely presented nodal family. Step 2 now carries the compatible G-actions on k, V and C, which keeps my 88973 FIX, and also requires reduced pure one-dimensional geometric fibres. The spreading criterion needs that hypothesis. Semistable marked base change with empty marking keeps the families in this class, and reducedness of geometric fibres survives base change. I re-read the current statements of branch-double-cover, residue-domination, semistable-marked-base-change, def-sfb-quasi-split-nodal-fibres and def-sfb-nodal-branch-scheme, and re-checked all three new statements. Branch spreading: (B_f)_v = X_v^nu x D_v is finite etale, and it is a disjoint union of copies of Spec kappa(v) exactly when the fibre is quasi-split; B_f is finite because f is proper, so the affine generic-fibre spread applies. Bad locus: maximal points of Z lie in A by density; Z_W misses the preimage of each s_i by incomparability; chains drop strictly, with no flatness needed. Cover composition: the closed image of the non-etale locus misses the generic point of V, and F^R = (F^P)^{R/P} = M^{ker sigma} = K because tau is surjective. Edge cases checked: n=0, non-split nodes, characteristic 2, empty Z, d=0, reducible Z, identity covers and nonfaithful actions. The re-split note is met: old steps 1/4, 5/7/8 and 9/10 became the three new nodes, and old steps 2, 3 and 6 stay in the item unshortened. Sources: de Jong 1997, pp. 614-617; no SGA source is cited. Batch-5 flags: def-trf-first-fitting-singular-subscheme and def-sfb-nodal-branch-scheme are general definitions, not steps of the trace-formula or Poincare-duality proofs, so I accept them. The generic tool_uses are accepted. No changes. Maintainer: L still has to promote the side completion, or the landing will be refused again."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEquivariantQuasiSplitNodalFibres",
+  "declaration": "AlgebraicGeometry.exists_finite_equivariant_quasiSplitNodalFibres",
+  "declarations": [
+   "AlgebraicGeometry.exists_finite_equivariant_quasiSplitNodalFibres",
+   "AlgebraicGeometry.HasQuasiSplitNodalFibres.baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEquivariantQuasiSplitNodalFibres.lean",
+  "statement": "theorem exists_finite_equivariant_quasiSplitNodalFibres (k : Type u) [Field k] (S Q : Scheme.{u}) (pS : S ⟶ Spec (.of k)) [IsIntegral S] [IsHProjective pS] (hnormal : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (f : Q ⟶ S) [IsHProjective f] [Flat f] [LocallyOfFinitePresentation f] (hnodal : HasNodalGeometricFibres f) (hfibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S), IsReduced (pullback f g) ∧ (pullback f g).IsPureDimension 1) [Smooth (f.fiberToSpecResidueField (genericPoint S))] [GeometricallyIntegral (f.fiberToSpecResidueField (genericPoint S))] (H : Type v) [Group H] [Finite H] (σk : H →* (k ≃+* k)) (σQ : H →* Aut Q) (σS : H →* Aut S) (hS : ∀ h : H, (σS h).hom ≫ pS = pS ≫ Spec.map (CommRingCat.ofHom (σk h⁻¹).toRingHom)) (hQ : ∀ h : H, (σQ h).hom ≫ f ≫ pS = f ≫ pS ≫ Spec.map (CommRingCat.ofHom (σk h⁻¹).toRingHom)) (heq : ∀ h : H, (σQ h).hom ≫ f = f ≫ (σS h).hom) : ∃ (J : Type (max u v)) (_ : Group J) (_ : Finite J) (ρ : J →* H), Function.Surjective ρ ∧ ∃ (S' : Scheme.{u}) (_ : IsIntegral S') (b : S' ⟶ S) (τS : J →* Aut S') (τQ : J →* Aut (pullback f b)), IsHProjective (b ≫ pS) ∧ (∀ s : S', IsDomain (S'.presheaf.stalk s) ∧ IsIntegrallyClosed (S'.presheaf.stalk s)) ∧ IsFinite b ∧ Surjective b ∧ (∃ U : S.Opens, Dense (U : Set S) ∧ Etale (b ∣_ U)) ∧ (∀ j : J, (τS j).hom ≫ b = b ≫ (σS (ρ j)).hom) ∧ (∀ j : J, (τQ j).hom ≫ pullback.fst f b = pullback.fst f b ≫ (σQ (ρ j)).hom) ∧ (∀ j : J, (τQ j).hom ≫ pullback.snd f b = pullback.snd f b ≫ (τS j).hom) ∧ (∃ hb : b (genericPoint S') = genericPoint S, ∀ z : S'.functionField, (∃ a : S.functionField, (S.presheaf.stalkSpecializes (specializes_of_eq hb) ≫ b.stalkMap (genericPoint S')).hom a = z) ↔ ∀ j : ρ.ker, (Scheme.functionFieldAut (τS j.val)).hom z = z) ∧ HasQuasiSplitNodalFibres (pullback.snd f b)",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The second declaration states the independent arbitrary-base-change clause. Reuses the three landed nodal-fibre, pure-dimension and quasi-split-fibre definitions added to stmt_deps; no statement or proof text changed. The fixed-field equality uses the actual map on generic stalks and the induced scheme automorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5605da0c",
+  "group": "NB",
+  "result": "pass",
+  "note": "First S2 delivery; live node split with no lean record, not dropped, no repair note. Node diff is only the lean record plus 3 landed stmt_deps (nodal geometric fibres, pure dimension, quasi-split nodal fibres); lean.statement verbatim; only sorry proofs. Every hypothesis matches the node: normal integral H-projective S; H-projective flat LFP f; HasNodalGeometricFibres plus reduced/pure-1 fibres; smooth geometrically integral generic fibre; semilinear H-actions with Spec.map(σk h⁻¹), checked to be a homomorphism and identical to the landed citer. Every conclusion matches: finite J surjecting onto H; normal integral H-projective S'; b finite, surjective, étale over a dense open of S; equivariant τS and τQ on both projections; ker ρ fixed field = image of k(S) via the generic-stalk map and functionFieldAut; HasQuasiSplitNodalFibres of the pullback. The separate baseChange theorem has no extra base hypotheses. Edge cases checked (smooth fibre, self-node, non-split node, char 2, empty base, dim 0, identity cover). Imports match statement deps and stated proof deps; docstrings carry source, blueprint and the 10 steps. Not recompiled per instructions (no file changed); the only compile evidence is the worker's reported clean compile. Advisory: hQ is redundant given hS and heq."
+ }
+}

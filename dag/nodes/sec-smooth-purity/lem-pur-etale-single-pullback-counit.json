@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-etale-single-pullback-counit",
+ "kind": "statement",
+ "title": "Canonical single pullback and the derived counit",
+ "statement": "Let B be a symmetric closed monoidal Grothendieck abelian coefficient category with additive tensor and functorial flat resolutions, let v:X′→X be a scheme morphism, U its exact inverse image, and L a B-valued etale sheaf on X. Let e be exactly singleFunctorObjIsoQh, γ exactly singleFunctorCompLeftDerivedUpperStarIso, ε the left derived counit, q,q′ the homotopy quotients, s degree-zero cochain inclusion, and c the single/termwise-U comparison. Then LU(e(L).hom);ε(q(sL));Qh(q′(c(L).hom)) = γ(L).hom;e(UL).hom. No flatness assumption on U or L is required. Inverse image is that of [prop-weil-pbc-inverse-image-modules-exact] and the derived and single functors are those of [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, exact-functor derived comparison; upstream definitions mapDerivedCategoryFactorsh and mapDerivedCategorySingleFunctor."
+ },
+ "stmt_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Express ε through leftDerivedFunctorIsoMapDerivedCategory_hom_fac and use the naturality of that exact-functor comparison to move e(L). Expand the definitions of mapDerivedCategoryFactorsh and mapDerivedCategorySingleFunctor. Cancel the mapped inverse and forward quotient/Qh comparison components. The comparison for the homotopy quotient has identity components, whose Qh image is an identity. Naturality of the inverse quotient/Qh comparison moves Qh(q′c) to the cochain localization. The remaining composite is exactly γ(L) followed by e(UL).",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-abstract-derived-category",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, exact-functor derived comparison; upstream definitions mapDerivedCategoryFactorsh and mapDerivedCategorySingleFunctor. Written explicitly in Lean by N1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The single functor comparison for an exact monoidal functor commutes with derived tensor products",
+   "results": "Eight hits including Tor_map and localization monoidal structure constructors; none gives this specified component identity. Existing source comparisons are used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleMapHomologicalComplex\"",
+   "results": "Eleven hits including singleMapHomologicalComplex and its degree-zero component equations, which the proof uses; none gives this homotopy/derived tensor comparison identity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Tt]ensor.*[Pp]ullback",
+   "results": "No search-service hit. Local source search found the existing counit tensor square, explicit flat single factorization, and exact-functor single comparisons; these are used rather than reproved.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSingleTensoratorPullback",
+  "date": "2026-10-27",
+  "group": "N1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Unit multiples, permutations and elementary shears: canonical derived tensor coherence needed for the degree-zero supported pairing and its pullback; Tensor equation for the canonical single/pullback comparison. Support identity: Canonical single pullback and the derived counit; proved support lemma for the assigned two-step comparison argument.",
+   "via": [
+    "lem-pur-etale-single-tensorator-pullback",
+    "lem-pur-etale-single-functor-monoidal-compatibility",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSinglePullbackCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSinglePullbackCounit.lean",
+  "declaration": "AlgebraicGeometry.Etale.singleFunctorObjIsoQh_pullback_counit",
+  "statement": "theorem singleFunctorObjIsoQh_pullback_counit\n    {X' : AlgebraicGeometry.Scheme.{u}} (v : X' ⟶ X)\n    (L : Sheaf X.smallEtaleTopology B) :\n    (upperStar B v).leftDerivedFunctor.map (singleFunctorObjIsoQh L).hom ≫\n      (upperStar B v).leftDerivedFunctorCounit.app\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj\n          ((HomologicalComplex.single _ (.up ℤ) 0).obj L)) ≫\n      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map\n        ((HomologicalComplex.singleMapHomologicalComplex (upperStar B v)\n          (.up ℤ) 0).hom.app L)) =\n      (singleFunctorCompLeftDerivedUpperStarIso B v).hom.app L ≫\n        (singleFunctorObjIsoQh ((upperStar B v).obj L)).hom ",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T235923-L-1469189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T235923-L-1469189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "id": "lem-sfb-field-product-square-power",
+ "kind": "statement",
+ "title": "A tensor power has a square difference from the parameter base over a field",
+ "statement": "Let $k$ be a field [def-weil-field], put $S=\\operatorname{Spec}k$, and let $X_i\\to S$ for $i=1,2,3$ be morphisms of schemes [def-pc-scheme] that are smooth separated morphisms of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. Assume each $X_i$ is geometrically integral over $k$ [def-pc-geometrically-irreducible], meaning integral after every field extension. Separated means that the diagonal is a closed immersion. Put $C=X_1\\times_SX_2\\times_SX_3$, $P=X_1\\times_SX_1\\times_SX_2\\times_SX_2$, and $\\pi:P\\times_SX_3\\to P$. At coordinates $(x_0,x_1,y_0,y_1,z)$ write $r_{ab}(x_0,x_1,y_0,y_1,z)=(x_a,y_b,z)$ for $a,b\\in\\{0,1\\}$. For an invertible module $A$ on $C$, define its square difference by $$D(A)=r_{00}^*A\\otimes r_{11}^*A\\otimes(r_{01}^*A)^{-1}\\otimes(r_{10}^*A)^{-1}.$$ Here inverse means the dual invertible module [def-sc-invertible-module], and all products, pullbacks and tensors are those of [def-pc-fibre-product, def-pc-module-pullback, def-pur-sheaf-tensor-product]. For every invertible $A$ on $C$ there are an integer $n\\geq1$ and an invertible module $N$ on $P$ such that $$D(A^{\\otimes n})\\cong\\pi^*N.$$",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Guo Proposition 5.2(ii), field case, specialized to smooth separated finite-presentation geometrically integral factors; March 31, 2026 author version, printed pp.11-12, read online; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-geometrically-irreducible",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-extension square lemma to the given $k$, the three smooth separated finite-presentation geometrically integral factors, and $A$. It gives a finite extension $K/k$, an invertible $N_K$ on $P_K$, and an isomorphism $D(A_K)\\cong\\pi_K^*N_K$.",
+   "uses": [
+    "lem-sfb-field-square-after-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2(ii), Claim 5.2.1 and its first application, pp.11-12"
+   }
+  },
+  {
+   "text": "Let $d=[K:k]$. The Picard norm for the finite field extension, applied to $Z=P$ and to $Z=P\\times_kX_3$, commutes with arbitrary pullback and sends the pullback of an invertible module to its $d$-fold tensor power. Pullback and tensor product commute with the four maps $r_{ab}$, so the pullback of $D(A)$ to $K$ is canonically $D(A_K)$; expanding the four factors also gives $D(A^{\\otimes d})\\cong D(A)^{\\otimes d}$.",
+   "uses": [
+    "lem-sfb-finite-field-picard-norm-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BD2, together with the tensor/pullback identities in the square-difference definition"
+   }
+  },
+  {
+   "text": "Apply the norm to the isomorphism from Step 1. Naturality for $\\pi$ gives $\\operatorname{Nm}(D(A_K))\\cong\\pi^*\\operatorname{Nm}(N_K)$. By Step 2, the left side is $D(A)^{\\otimes d}$, hence isomorphic to $D(A^{\\otimes d})$. Taking $n=d\\geq1$ and $N=\\operatorname{Nm}_{K/k,P}(N_K)$ proves the required assertion.",
+   "uses": [
+    "lem-sfb-finite-field-picard-norm-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BD2, norm pullback compatibility and norm of a pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-square-after-finite-extension",
+  "lem-sfb-finite-field-picard-norm-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Proposition 5.2(ii), Claim 5.2.1 and finite-extension norm descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "theorem.of.the.square|Picard.admiss|squareDifference",
+   "results": "{\"t\": \"2026-10-24T03:15:56Z\", \"tool\": \"grep\", \"query\": \"theorem.of.the.square|Picard.admiss|squareDifference\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; tensor algebra, pullback carrier and normalization declarations do not assert the stated geometric square identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on a product of three smooth geometrically integral varieties satisfies the theorem of the square after a positive tensor power",
+   "results": "{\"t\": \"2026-10-24T03:15:56Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle on a product of three smooth geometrically integral varieties satisfies the theorem of the square after a positive tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.ext_threefold\", \"Trivialization.coordChangeL_prod\", \"TensorProduct.ext_threefold'\", \"Algebra.FormallySmooth.instTensorProduct\", \"TensorProduct.prodRight\", \"TensorPower.mul_assoc\", \"ModuleCat.MonoidalCategory.tensor_ext₃'\", \"Algebra.TensorProduct.tmul_pow\"], \"digest\": \"e7d58f088d6caec4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; tensor algebra, pullback carrier and normalization declarations do not assert the stated geometric square identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-24T03:15:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Invertible\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"VectorField.pullback_eq_of_not_isInvertible\", \"VectorField.pullbackWithin_eq_of_not_isInvertible\"], \"digest\": \"21a371168037510a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; tensor algebra, pullback carrier and normalization declarations do not assert the stated geometric square identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the product of three smooth geometrically integral varieties over a field, a positive power of any line bundle has its four term square difference pulled back from the first two doubled factors",
+   "results": "{\"t\": \"2026-10-24T03:15:57Z\", \"tool\": \"leanfinder\", \"query\": \"On the product of three smooth geometrically integral varieties over a field, a positive power of any line bundle has its four term square difference pulled back from the first two doubled factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_fst\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\"], \"digest\": \"aafb2b7a190476c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; tensor algebra, pullback carrier and normalization declarations do not assert the stated geometric square identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-group-square-power",
+  "date": "2026-10-24",
+  "group": "Q138"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Guo Proposition 5.2(ii), field case: Claim 5.2.1 supplies the finite-extension square, and the following norm argument descends it to $k$; the three proof steps realize these two paragraphs.",
+   "via": [
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-product-square-power",
+  "worker": "stage1",
+  "summary": "Audited the imported field-case square statement against Guo Proposition 5.2(ii). Added one statement-only intermediate node for Claim 5.2.1 (finite-extension square). The item proof applies that claim and then uses the existing finite-field Picard norm/base-change node to descend by the norm, with the square-difference tensor identity written explicitly. No Mathlib declaration states either geometric square theorem.",
+  "blueprint": "Guo Proposition 5.2(ii), Claim 5.2.1 and the ensuing norm descent paragraph; the steps realize the finite-extension square and norm descent."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-847dcd411",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-847dcd411 (reviewer sub-agent of L); spot-checked: I read Guo's PDF at printed pp.11-12: §5.1 s(L;X1,X2), Proposition 5.2(ii), Claim 5.2.1 with its proof, and the norm descent line. There is no local copy; I fetched the PDF from the URL recorded in the node and extracted the text into /tmp. The item is the field case of 5.2(ii) with stronger hypotheses (smooth implies geometrically normal), and its signs match Guo's r_J. The new node lem-sfb-field-square-after-finite-extension is Claim 5.2.1: n=1 after a finite K/k. It does not restate the item. The item's steps are the norm descent, which is real work (no D1/D2 fault). Steps 2-3 use exactly three clauses of lem-sfb-finite-field-picard-norm-base-change: multiplicativity, Nm(p^*A)=A^{⊗d}, and base change along π. I checked p^*D(A)=D(A_K), D(A^{⊗d})≅D(A)^{⊗d} and the case d=1. Small cases tested: point factors, X3=Spec k, X1=Spec k, and an elliptic curve with m^*O(0). The duplicate search over the DAG and the blueprint found only lem-sfb-normal-product-square-descent (Guo 5.2(i)), which is not this claim. No SGA citation. FIX, three repairs: (1) B4: item step 2 had \\times decoded as a TAB, restored; (2) B2/B3: the new node's D(A) was given only as 'signs +,+,-,-' with no order, now written out explicitly with typed r_ab and an explicit A_K/D(A_K); (3) B3: the new node lacked a gloss for separated and a node for 'finite'; added the gloss and def-pc-field-tower (statement and stmt_deps). Maintainer note: add Guo's amplenew-1.pdf to literature/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldProductSquarePower",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_fieldProductSquare_tensorPower",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldProductSquarePower.lean",
+  "statement": "theorem exists_fieldProductSquare_tensorPower (k : Type u) [Field k] (X₁ X₂ X₃ : Over (Spec (CommRingCat.of k))) [Smooth X₁.hom] [Smooth X₂.hom] [Smooth X₃.hom] [IsSeparated X₁.hom] [IsSeparated X₂.hom] [IsSeparated X₃.hom] [LocallyOfFinitePresentation X₁.hom] [LocallyOfFinitePresentation X₂.hom] [LocallyOfFinitePresentation X₃.hom] [QuasiCompact X₁.hom] [QuasiCompact X₂.hom] [QuasiCompact X₃.hom] [GeometricallyIntegral X₁.hom] [GeometricallyIntegral X₂.hom] [GeometricallyIntegral X₃.hom] : let C := (X₁ ⨯ X₂) ⨯ X₃ let P := (X₁ ⨯ X₁) ⨯ (X₂ ⨯ X₂) let Q := P ⨯ X₃ let x (a : Bool) : Q ⟶ X₁ := prod.fst ≫ prod.fst ≫ (if a then prod.snd else prod.fst) let y (b : Bool) : Q ⟶ X₂ := prod.fst ≫ prod.snd ≫ (if b then prod.snd else prod.fst) let r (a b : Bool) : Q ⟶ C := prod.lift (prod.lift (x a) (y b)) prod.snd let D (M : C.left.Modules) : Q.left.Modules := (((tensorPullback (r false false).left).obj M ⊗ (tensorPullback (r true true).left).obj M) ⊗ dual ((tensorPullback (r false true).left).obj M)) ⊗ dual ((tensorPullback (r true false).left).obj M) ∀ (A : C.left.Modules), A.IsInvertible → ∃ (n : ℕ), 1 ≤ n ∧ ∃ (N : P.left.Modules), N.IsInvertible ∧ Nonempty (D (A.tensorPow n) ≅ (tensorPullback (prod.fst : Q ⟶ P).left).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e104bb7e6",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Clause-by-clause check of FieldProductSquarePower.lean against node and stmt_dep records: k field, Over (Spec k); Smooth/IsSeparated/LFP+QuasiCompact (QS from separated = exactly f.p.)/GeometricallyIntegral; C, P, Q = Over products; x/y/r coordinates with false/true = 0/1, D = r00*⊗r11*⊗dual r01*⊗dual r10* via recorded tensorPullback and dual; ∀ invertible A ∃ n≥1 ∃ invertible N, Nonempty(D(A^n) ≅ π*N). No extra hypotheses. ⊗ resolves to the Modules/Invertible instance (Scheme.Modules is a def), consistent with tensorPow/dual. Edge cases n=0/1, point factors, empty scheme, universes OK. Statement verbatim, docstrings with source and blueprint, proof steps given, sorry only, only the lean field changed vs side-live. Advisory: CochainTensorUniverses import appears unused (H9); Guo PDF still missing from literature/."
+ }
+}

@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-zariski-square-zero-scheme-realization",
+ "kind": "statement",
+ "title": "Zariski square-zero ring-sheaf extensions with quasi-coherent kernel are schemes",
+ "statement": "Let $f:X\\to B$ be a morphism of schemes [def-pc-scheme] and $G$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. On the Zariski space $|X|$ let $0\\to G\\xrightarrow{i}\\mathcal E\\xrightarrow{p}\\mathcal O_X\\to0$ be an exact sequence of underlying additive sheaves, where $\\mathcal E$ is a sheaf of commutative unital $f^{-1}\\mathcal O_B$-algebras, $p$ is an algebra map, and $i(G)$ is an ideal of square zero with the prescribed quotient $\\mathcal O_X$-module action. Here exactness refers to underlying additive sheaves [def-weil-sheaf-of-modules-category]. Then $X_{\\mathcal E}=(|X|,\\mathcal E)$ is a scheme, its quotient map gives a first order thickening $X\\hookrightarrow X_{\\mathcal E}$ [def-sbc-first-order-thickening] over $B$, and every first order thickening over $B$ is obtained this way with its actual kernel. For every affine open $U=\\operatorname{Spec}A\\subset X$, the map $\\mathcal E(U)\\to A$ is surjective with kernel $G(U)$ and $(U,\\mathcal E|_U)\\cong\\operatorname{Spec}\\mathcal E(U)$ canonically. Maps of these ring extensions reducing to the identity of $\\mathcal O_X$ correspond contravariantly and bijectively to morphisms of the associated thickenings over $B$ restricting to the identity on $X$. The construction and this correspondence commute with open restriction.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05YV (lemma-first-order-thickening), statement and affine construction in the proof; morphisms are morphisms of the resulting locally ringed spaces."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-first-order-thickening",
+  "def-sfb-zariski-square-zero-extension"
+ ],
+ "proof": [
+  {
+   "text": "Taking stalks gives exact square-zero ring extensions $0\\to G_x\\to\\mathcal E_x\\to\\mathcal O_{X,x}\\to0$, by the short-exact-stalkwise criterion. In any surjective ring map with square-zero kernel, an element is a unit exactly when its image is: if $ab=1+k$ with $k^2=0$, then $b(1-k)$ is an inverse to $a$; the converse follows by applying the ring map. Thus the nonunits of $\\mathcal E_x$ are exactly the inverse image of the maximal ideal of $\\mathcal O_{X,x}$, and form its unique maximal ideal. Consequently $Z=(|X|,\\mathcal E)$ is a locally ringed space and $(\\mathrm{id}_{|X|},p):X\\to Z$ is local on stalks.",
+   "uses": [
+    "lem-sc-abelian-sheaf-short-exact-stalkwise",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, opening sentence: the extension is a locally ringed space; unit calculation supplied"
+   }
+  },
+  {
+   "text": "Fix an arbitrary affine open $U=\\operatorname{Spec}A\\subset X$ and put $R=\\mathcal E(U)$ and $I=G(U)$. The sequence restricts to a short exact sequence of abelian sheaves on $U$: local lifts witnessing a sheaf epimorphism remain local lifts on an open subset, and kernels are unchanged by restriction. Affine vanishing gives $H^1(U,G|_U)=0$ in modules, and the Zariski module-to-abelian comparison gives the same vanishing for its underlying abelian sheaf. Apply the right-derived long exact sequence to global sections of the restricted abelian-sheaf sequence. Its initial segment, using $R^0\\Gamma=\\Gamma$, is $0\\to I\\to R\\to A\\to H^1(U,G)=0$. Hence $q:R\\to A$ is surjective with kernel $I$. The ideal $I$ has square zero, since its multiplication is computed sectionwise in $\\mathcal E$.",
+   "uses": [
+    "pqf-lem-affine-vanishing",
+    "lem-sc-zariski-module-abelian-cohomology-agree",
+    "def-sc-zariski-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, affine section extension; Tag 01XB (coherent.tex, lemma-quasi-coherent-affine-cohomology-zero), Tag 03FD (sites-cohomology.tex, lemma-cohomology-modules-abelian-agree), and Tags 015B/05TE for the long exact sequence"
+   }
+  },
+  {
+   "text": "Apply the locally ringed space--affine adjunction to $Z|_U$ and the identity of $R=\\Gamma(U,\\mathcal E)$. It gives a canonical morphism $h:Z|_U\\to\\operatorname{Spec}R$. Naturality of the adjunction shows that $h\\circ (X|_U\\to Z|_U)$ is $\\operatorname{Spec}q$ under $X|_U=\\operatorname{Spec}A$, because both correspond to $q:R\\to A$. The surjection $q$ defines a closed immersion. Every prime of $R$ contains $I$: for $a\\in I$ one has $a^2=0$, so primality forces $a$ into the prime. Conversely inverse image under $q$ identifies primes of $A=R/I$ with these primes of $R$. Thus $\\operatorname{Spec}q$ is surjective and, being a closed immersion, is a homeomorphism. The map $X|_U\\to Z|_U$ is the identity on points, so $h$ is a homeomorphism as well.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, canonical morphism and the displayed square; Tag 01I1 (schemes.tex, lemma-morphism-into-affine). The identity of R is used, correcting the displayed proof text B-to-Gamma typo"
+   }
+  },
+  {
+   "text": "Let $x\\in U$, let $\\mathfrak m\\subset A$ be its prime, and set $\\mathfrak p=q^{-1}(\\mathfrak m)\\subset R$. Localize the section sequence of step 2 at $R\\setminus\\mathfrak p$. Localization preserves short exact sequences, so its row is $0\\to I_{\\mathfrak p}\\to R_{\\mathfrak p}\\to A_{\\mathfrak m}\\to0$. Here the image of $R\\setminus\\mathfrak p$ in $A$ is exactly $A\\setminus\\mathfrak m$: lift any denominator by surjectivity of $q$. Regard the bottom stalk row from step 1 as $R$-modules using germs. Its vertical comparison with this row sends a fraction to the germ of its numerator times the inverse germ of its denominator. For the kernel this is the prescribed quotient action; therefore $I_{\\mathfrak p}\\to G_x$ is the localization isomorphism from the affine-module germ theorem, applied to the quasi-coherent $G|_U$. For the quotient, $A_{\\mathfrak m}\\to\\mathcal O_{X,x}$ is the affine-module germ theorem applied to $\\mathcal O_X|_U$ (represented by the module $A$). Its quasi-coherence follows directly from the affine-local definition. The middle map $R_{\\mathfrak p}\\to\\mathcal E_x$ is $h_x^\\sharp$ under the spectrum stalk formula, because the adjunction map is the identity on global sections. All squares commute on fractions by the formulas just given. The short five lemma on additive groups makes this middle ring map an isomorphism.",
+   "uses": [
+    "lem-sc-p1-localization-short-exact",
+    "lem-sbc-affine-module-germ-localization",
+    "pqf-def-coherent",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, displayed short exact stalk diagram and its comparison; Schemes Tag 01HV (lemma-spec-sheaves), localization exactness, and the short five lemma"
+   }
+  },
+  {
+   "text": "Over the homeomorphism $h$, the ring-sheaf map $\\mathcal O_{\\operatorname{Spec}R}\\to h_*(\\mathcal E|_U)$ has bijective stalks by step 4; inverse image of open sets under a homeomorphism identifies the two neighbourhood systems, hence identifies the pushforward stalk with $\\mathcal E_x$. The sheaf-of-sets stalk criterion makes the map bijective on every open. Its sectionwise inverses preserve ring operations and restrictions, since the original maps do. They therefore give an inverse morphism of ringed spaces, and are local on stalks because they are ring isomorphisms. Thus $h$ is canonically an isomorphism of locally ringed spaces. Every point of $Z$ lies in such a $U$, so $Z$ is a scheme by the definition. This proves both claimed affine assertions for every affine open, not just one chosen cover. The quotient morphism $X\\to Z$ is a closed immersion (identity on points and a surjective structure-sheaf map) and its defining ideal is $i(G)$ with square zero. It is therefore a first order thickening.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+    "def-weil-locally-ringed-space-morphism",
+    "def-pc-scheme",
+    "def-weil-closed-immersion",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, conclusion from the stalk comparison; Sheaves Tag 007T (lemma-points-exactness), part (3)"
+   }
+  },
+  {
+   "text": "The given $f^{-1}\\mathcal O_B$-algebra structure is, by the inverse-image/direct-image adjunction, a map $\\mathcal O_B\\to f_*\\mathcal E$, hence a morphism of ringed spaces $Z\\to B$ with point map $|f|$. This map is local: if the image of $b\\in\\mathcal O_{B,f(x)}$ in $\\mathcal E_x$ is a unit, its image in $\\mathcal O_{X,x}$ is a unit, so $b$ is a unit by locality of $f$; all ring maps preserve units. The structure map is thus a scheme morphism. Since $p$ is an algebra map, its composite with $X\\to Z$ is exactly $f$, on both points and ring maps. This equips the first order thickening with the asserted structure over $B$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-topological-inverse-image",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, base algebra structure and conclusion over S; locality is checked using the unit calculation of step 1"
+   }
+  },
+  {
+   "text": "Conversely let $j:X\\hookrightarrow Y$ be any first order thickening over $B$. It is a homeomorphism by the definition of a finite order thickening, so identify its point space with $|X|$. Let $J=\\ker(\\mathcal O_Y\\to j_*\\mathcal O_X)$ be its actual ideal sheaf. The closed-immersion ideal theorem says that $J$ is quasi-coherent over $\\mathcal O_Y$; the first order hypothesis says $J^2=0$. In the closed-immersion annihilated-module theorem, take the quasi-coherent module to be $J$ itself: its annihilation hypothesis is exactly $J^2=0$. The theorem gives a quasi-coherent $j^*J$ on $X$ and an isomorphism $J\\to j_*j^*J$. Since $j$ is the identity after identifying spaces, this identifies the actual underlying sheaf $J$ with a quasi-coherent $\\mathcal O_X$-module. Its quotient action is the prescribed one: any two lifts of a local scalar differ by a section of $J$, whose product with $J$ is zero. The structure sheaf $\\mathcal O_Y$, its actual kernel and quotient, and its map from $f^{-1}\\mathcal O_B$ are consequently extension data of the kind assumed. Applying the construction recovers $Y$ with these data, since it uses exactly this space and sheaf.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, moreover clause; Tag 01QY (morphisms.tex, lemma-i-star-equivalence) supplies quasi-coherence with the quotient action"
+   }
+  },
+  {
+   "text": "For two extension sheaves $\\mathcal E_1,\\mathcal E_2$, a map $\\alpha:\\mathcal E_2\\to\\mathcal E_1$ of the base algebras commuting with their quotient maps gives a ringed-space morphism $(|X|,\\mathcal E_1)\\to(|X|,\\mathcal E_2)$ with identity point map. It is local: in either stalk an element is a unit precisely when its image in $\\mathcal O_{X,x}$ is a unit by step 1, and the reduction of $\\alpha$ is the identity. It is over $B$ by the algebra condition and restricts to $\\mathrm{id}_X$ by the quotient condition. Conversely any such scheme morphism has identity point map, because both thickening inclusions identify their spaces with $|X|$. Its structure-sheaf map is therefore exactly such an $\\alpha$. These operations are inverse on the point maps and on every component of the sheaf maps. The composition formula for ringed-space morphisms gives the stated contravariance.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, morphism enhancement from the definition of locally ringed space morphisms; unit calculation of step 1"
+   }
+  },
+  {
+   "text": "For an open subset $V\\subseteq |X|$, restriction of the construction is literally $(V,\\mathcal E|_V)$ and the inclusion is the restricted quotient map. The restricted kernel is $G|_V$, still quasi-coherent by its affine-local definition. The maps correspondence of step 8 sends $\\alpha$ to its component sheaf map and therefore sends its restriction to $\\alpha|_V$. The canonical affine identifications also respect further open restrictions: the adjunction morphism of step 3 is natural, and the comparisons in step 4 use only germs and inverses of denominators, both of which commute with restriction. No affine-intersection assumption is needed; restrictions may be checked on affine neighbourhoods inside any intersection. This proves all claimed restriction compatibilities.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV, construction on arbitrary affine opens; naturality and restriction enhancement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-sheaf-short-exact-stalkwise",
+  "def-weil-locally-ringed-space-morphism",
+  "pqf-lem-affine-vanishing",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "def-sc-zariski-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "lem-sc-p1-localization-short-exact",
+  "lem-sbc-affine-module-germ-localization",
+  "pqf-def-coherent",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-short-five-lemma",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+  "def-pc-scheme",
+  "def-sbc-first-order-thickening",
+  "def-weil-pbc-topological-inverse-image",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05YV (lemma-first-order-thickening), proof; the converse quasi-coherence is made explicit using 01QY; morphisms and open restriction are checked directly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A square zero extension of the structure sheaf of a scheme by a quasi coherent module is the structure sheaf of a scheme thickening",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"ModuleCat.tilde\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → (AlgebraicGeometry.Spec { carrier := R, commRing := inst }).Modules\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-module $ M $, the tilde sheaf $ \\\\widetilde{M} $ on $ \\\\operatorname{Spec}(R) $ is constructed by localizing $ M $ over open sets in the Zariski topology. Sec\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → ↑X.affineOpens → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.isSheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (M : X.Modules), M.presheaf.IsSheaf\", \"doc\": \"For any sheaf of modules $ M $ over the structure sheaf of a scheme $ X $, the underlying presheaf of abelian groups on $ X $ satisfies the sheaf condition with respect to open covers of the topologic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Presheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The presheaf of modules over the ring sheaf associated to a scheme $X$, constructed by taking the underlying presheaf of rings from the structure sheaf (which assigns commutative rings to open sets) a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.sheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"(X : AlgebraicGeometry.Scheme) → TopCat.Sheaf CommRingCat ↑X.toPresheafedSpace\", \"doc\": \"The sheaf of a scheme $X$ is constructed by first mapping $X$ to its underlying sheafed space (a topological space equipped with a sheaf of commutative rings satisfying the sheaf condition for open co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme constructors and subschemes, not realization of a ring-sheaf extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"thickening\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme constructors and subschemes, not realization of a ring-sheaf extension"
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero|squareZero|thickening",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"189\", \"text\": \"With `X ⟶ Y` formally unramified and `Z' ⟶ Z` an infinitesimal thickening, there exists at most\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme constructors and subschemes, not realization of a ring-sheaf extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realizing extensions of sheaves of rings with quasi coherent square zero kernel as schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace) →\\n  (∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n      ∃ U R,\\n        Nonempty (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))) →\\n    AlgebraicGeometry.Scheme\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood for which the restriction is isomorphic to the affine scheme associated to some commutative ring. This isomorphism is \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"AlgebraicGeometry.Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(R : CommRingCat) : Scheme\", \"doc\": \"The function constructs the scheme $\\\\operatorname{Spec}(R)$ associated to a commutative ring $R$ by equipping the prime spectrum with the Zariski topology and structure sheaf $\\\\mathcal{O}_{\\\\operatorna\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme constructors and subschemes, not realization of a ring-sheaf extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally ringed space whose reduction is a scheme and whose nilpotent ideal is quasi coherent is a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  (∀ (x : ↑X.toTopCat),\\n      ∃ R f,\\n        x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n          AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f) →\\n    AlgebraicGeometry.Scheme\", \"doc\": \"A locally ringed space $ X $ is a scheme if every point $ x \\\\in X $ is contained in the image of an open immersion from the spectrum of some commutative ring $ R $. This establishes that $ X $ is loca\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace}\\n  {local_affine :\\n    ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n      ∃ U R,\\n        Nonempty (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))}\\n  {toLocallyRingedSpace_1 : AlgebraicGeomet\", \"doc\": \"Two schemes are equal if they have the same underlying locally ringed space and satisfy the same local affine conditions, i.e., for every point, there exists an open neighborhood isomorphic to an affi\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme constructors and subschemes, not realization of a ring-sheaf extension"
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero.*sheaf|sheaf.*square.zero|thickening",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/NumberTheory/WellApproximable.lean, Mathlib/NumberTheory/WellApproximable.lean, Mathlib/NumberTheory/WellApproximable.lean, Mathlib/NumberTheory/WellApproximable.lean, Mathlib/NumberTheory/WellApproximable.lean, Mathlib/Analysis/Complex/Poisson.lean, Mathlib/Analysis/Complex/Poisson.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and subscheme constructors, affine scheme properties, or metric thickenings do not realize an arbitrary Zariski ring-sheaf extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of rings surjecting onto the structure sheaf with quasi coherent square zero kernel is a scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.Scheme.mk, AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Scheme.ringCatSheaf, AlgebraicGeometry.Scheme.sheaf, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.Spec_sheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and subscheme constructors, affine scheme properties, or metric thickenings do not realize an arbitrary Zariski ring-sheaf extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An infinitesimal extension of an affine scheme by a quasi coherent module is affine with sections equal to the extension ring",
+   "results": "8 hits: AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.affineAnd, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.instCategoryAffineScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and subscheme constructors, affine scheme properties, or metric thickenings do not realize an arbitrary Zariski ring-sheaf extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero extension of the Zariski structure sheaf by a quasi coherent module is a scheme thickening",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj, AlgebraicGeometry.Scheme.Modules.instCategory, AlgebraicGeometry.Scheme.kerFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and subscheme constructors, affine scheme properties, or metric thickenings do not realize an arbitrary Zariski ring-sheaf extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-square-zero-lift-torsor",
+  "date": "2026-10-23",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: general first-order lift classification before specializing to the tangent of a proper scheme. Supporting input: Zariski square-zero ring-sheaf extensions with quasi-coherent kernel are schemes.",
+   "via": [
+    "lem-sfb-scheme-square-zero-lift-torsor",
+    "lem-sfb-proper-scheme-deformation-hull",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-zariski-square-zero-scheme-realization",
+  "worker": "stage1",
+  "summary": "Split 05YV by its affine section/stalk construction; made the base locality, actual-kernel converse, maps and restriction clauses explicit. Reused all supporting DAG statements, with no new nodes. No exact finished project declaration or Mathlib realization theorem was found. Corrected the source proof typo (identity of the global extension ring, not a map from its quotient).",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: general first-order lift classification before specializing to the tangent of a proper scheme. Supporting input: Zariski square-zero ring-sheaf extensions with quasi-coherent kernel are schemes. The steps realize this supporting Zariski prerequisite via 05YV. The inherited ancestor is null (blueprint_refs.py ancestor confirms None), so no invented ancestor was supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-sheaf-short-exact-stalkwise",
+    "why": "Generic Zariski sheaf, affine quasi-coherent module, or cohomology theorem used exactly as stated in the square-zero construction; this deformation prerequisite in the alteration unit does not replace the unit route."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic Zariski sheaf, affine quasi-coherent module, or cohomology theorem used exactly as stated in the square-zero construction; this deformation prerequisite in the alteration unit does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-zariski-module-abelian-cohomology-agree",
+    "why": "Generic Zariski sheaf, affine quasi-coherent module, or cohomology theorem used exactly as stated in the square-zero construction; this deformation prerequisite in the alteration unit does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic Zariski sheaf, affine quasi-coherent module, or cohomology theorem used exactly as stated in the square-zero construction; this deformation prerequisite in the alteration unit does not replace the unit route."
+   },
+   {
+    "node": "lem-sbc-affine-module-germ-localization",
+    "why": "Generic Zariski sheaf, affine quasi-coherent module, or cohomology theorem used exactly as stated in the square-zero construction; this deformation prerequisite in the alteration unit does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "why": "Generic Zariski sheaf, affine quasi-coherent module, or cohomology theorem used exactly as stated in the square-zero construction; this deformation prerequisite in the alteration unit does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-sheaf-short-exact-stalkwise",
+  "pqf-lem-affine-vanishing",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-755a54927",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-755a54927 (reviewer sub-agent of L); spot-checked: I read the item in full, with all 9 steps, all 20 cited statements and Stacks 05YV (statement and whole proof); the details are in review.md. The delivery adds 0 new nodes, and the statement and stmt_deps match live, where the item is still unsplit; there is no re-split note, so that rule does not apply. The item JSON is byte-identical to the earlier head b44fa465, which this push superseded. The only change is in the report: the tag 01IB becomes 01IA, which is correct (01IA = schemes-lemma-quasi-coherent-affine). The cited statements are textually unchanged between the two bases. The report's source error is real: the proof of 05YV writes 'B -> Gamma(U,A)' where it must be the identity of A, since there is no unital map F_2 -> Z/4; step 3 uses the identity. Step checks: step 1, an element is a unit when its image is (ab=1+k, k^2=0), so the stalks are local. Step 2, E is not an O_X-module, so the step works in Ab(U_Zar): the module-to-abelian comparison (03FD) carries over the 01XB vanishing, and the long exact sequence then gives R->A surjective with kernel I. Step 3, the adjunction (01I1) allows any locally ringed source; every prime contains the square-zero ideal I, so h is a homeomorphism. Step 4, the image of R minus p is A minus m because q is surjective; I_p = G(U)_m through the quotient action; the germ-localization node has no finiteness hypothesis; only clause (1) of the Spec-stalk node is used; the five lemma is applied in Ab. Step 5, the 007T criterion is applied over the homeomorphism. Step 7, 01QY(2) applies to F = J because J*J = 0, with no Noetherian assumption. Steps 6, 8 and 9 really are elementary, and step 9 does not assume affine intersections. Duplicates: the scheme-etale chart construction and the space square-zero realization or description nodes all work on etale sites, so none is a substitute, and there is no cycle. No SGA is cited. I accept the six generic tool_uses. Edge cases: empty X, G=0, A+M with M infinitely generated, the non-split extension Z/4->F_2, and the dual numbers for the converse. Maintainer note: blueprint.from.node is null; this comes from the Q84 chain of created nodes and is base metadata, not a fault of this split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiSquareZeroSchemeRealization",
+  "declaration": "AlgebraicGeometry.zariski_square_zero_scheme_realization",
+  "declarations": [
+   "AlgebraicGeometry.ZariskiSquareZeroExtension.RealizesOpen",
+   "AlgebraicGeometry.ZariskiSquareZeroExtension.IsOpenExtensionMap",
+   "AlgebraicGeometry.zariski_square_zero_scheme_realization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiSquareZeroSchemeRealization.lean",
+  "statement": "theorem zariski_square_zero_scheme_realization {X B : Scheme.{u}} (f : X ⟶ B) : (∀ (G : X.Modules) [G.IsQuasicoherent] (D : ZariskiSquareZeroExtension f G), (∃ (Y : Scheme.{u}) (e : Y.toSheafedSpace ≅ D.space) (j : X ⟶ Y) (q : Y ⟶ B), D.Realizes Y e j q) ∧ (∀ (U : X.Opens), IsAffineOpen U → Function.Surjective (D.quotient.app (op U)) ∧ ∃ (L : LocallyRingedSpace.{u}) (e : L.toSheafedSpace ≅ D.space.restrict U.isOpenEmbedding), ∃ h : L ⟶ Spec.toLocallyRingedSpace.obj (op (D.algebra.obj.obj (op U))), IsIso h ∧ toSpecΓ (D.algebra.obj.obj (op U)) ≫ LocallyRingedSpace.Γ.map h.op = D.algebra.obj.map (eqToHom U.isOpenEmbedding_obj_top).op ≫ e.hom.hom.c.app (op ⊤)) ∧ (∀ U : X.Opens, ∃ (Y : Scheme.{u}) (e : Y.toSheafedSpace ≅ D.space.restrict U.isOpenEmbedding) (j : U.toScheme ⟶ Y) (q : Y ⟶ B), D.RealizesOpen U Y e j q) ∧ (∀ (U V : X.Opens) (h : V ≤ U) (Y Z : Scheme.{u}) (e : Y.toSheafedSpace ≅ D.space.restrict U.isOpenEmbedding) (d : Z.toSheafedSpace ≅ D.space.restrict V.isOpenEmbedding) (j : U.toScheme ⟶ Y) (k : V.toScheme ⟶ Z) (q : Y ⟶ B) (r : Z ⟶ B), D.RealizesOpen U Y e j q → D.RealizesOpen V Z d k r → ∃! a : Z ⟶ Y, IsOpenImmersion a ∧ a ≫ q = r ∧ k ≫ a = X.homOfLE h ≫ j ∧ schemeToRinged.map a ≫ e.hom ≫ D.space.ofRestrict U.isOpenEmbedding = d.hom ≫ D.space.ofRestrict V.isOpenEmbedding)) ∧ (∀ (Y : Scheme.{u}) (j : X ⟶ Y) (q : Y ⟶ B), IsFirstOrderThickening j → j ≫ q = f → ∃ (G : X.Modules) (_ : G.IsQuasicoherent) (D : ZariskiSquareZeroExtension f G) (e : Y.toSheafedSpace ≅ D.space), D.Realizes Y e j q) ∧ (∀ (G H : X.Modules) [G.IsQuasicoherent] [H.IsQuasicoherent] (D : ZariskiSquareZeroExtension f G) (E : ZariskiSquareZeroExtension f H) (U : X.Opens) (Y Z : Scheme.{u}) (e : Y.toSheafedSpace ≅ D.space.restrict U.isOpenEmbedding) (d : Z.toSheafedSpace ≅ E.space.restrict U.isOpenEmbedding) (j : U.toScheme ⟶ Y) (k : U.toScheme ⟶ Z) (q : Y ⟶ B) (r : Z ⟶ B), D.RealizesOpen U Y e j q → E.RealizesOpen U Z d k r → (∀ a : D.space.restrict U.isOpenEmbedding ⟶ E.space.restrict U.isOpenEmbedding, D.IsOpenExtensionMap E U a → ∃! g : Y ⟶ Z, j ≫ g = k ∧ g ≫ r = q ∧ schemeToRinged.map g ≫ d.hom = e.hom ≫ a) ∧ (∀ g : Y ⟶ Z, j ≫ g = k → g ≫ r = q → D.IsOpenExtensionMap E U (e.inv ≫ schemeToRinged.map g ≫ d.hom)))",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1d84f876",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Read item, new def node def-sfb-zariski-square-zero-extension, both modules, all 5 stmt_dep records, report, 05YV split. Item JSON vs side-live differs only in lean and stmt_deps (new def node added). Statements verbatim. No parallel landing; proof imports exist. Hypotheses: Mathlib IsQuasicoherent G; exactness = injective + kernel=image + local surjectivity; scalar/square_zero; base O_B→f_*E with base_quotient = f.c; no extra assumptions (Z/4 and non-finite cases admitted). Conclusions: realization pinned to the literal (|X|,E) by reduction/toBase equalities and IsFirstOrderThickening; affine surjectivity plus IsIso h normalized by toSpecΓ, the canonical Γ-Spec adjoint of id_E(U); converse with actual kernel; ∃!/inverse clauses give a contravariant bijection of maps on every open; restriction realizations with unique normalized open immersions, compatibility formal. No hollow defs, docstrings OK, sorry only on the main theorem, no étale substitute. Advisory: RealizesOpen/IsOpenExtensionMap are helper defs in the theorem module; IsExtensionMap unused; square_zero redundant. No compile (no FIX)."
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-ringed-singleton-koszul-cone",
+ "kind": "statement",
+ "title": "The singleton dual Koszul tensor has normalized scalar-cone coordinates",
+ "statement": "Let (C,J,O) be a small ringed site with a commutative ring sheaf and let a be a global section. For any possibly unbounded module-sheaf complex P, let I=O[0], B=Tot(P tensor I), and f_n=Tot(1 tensor single(a^(n+1))) on B [def-weil-pbc-ringed-koszul-system]. There are chain isomorphisms from Tot(P tensor Q_n) to cone(f_n), where Q_n is the dual singleton Koszul complex. The specified tensor unit followed by this isomorphism is the inverse right unitor P to B followed by the cone inclusion of B. Composing the isomorphism with the second cone projection is zero on all summands of nonzero Koszul degree. These second projections commute with all successor transitions. The second projections are graded maps, not asserted to be chain maps. No residue, quotient, regularity or K-flatness is involved.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), singleton augmentation; also proetale.tex, Section derived-completion-noetherian (099L) and Lemma naive-completion (099M)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved coefficient comparison ringedSingletonCoefficientCone. It identifies every dual singleton Koszul coefficient complex with the scalar cone, carries its dual unit to the cone inclusion, and gives successor compatibility of the second graded projections. This is the coefficient-only part of the original finite free duality calculation; it is fully proved in a separate module so that each file compiles within the required limit.",
+   "uses": [
+    "lem-sfb-ringed-singleton-coefficient-cone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the coefficient isomorphism by P and compose with the explicit chain isomorphism CochainComplex.mapBifunctorMappingCone₂Iso P f (curriedTensor _), the construction underlying the additive total tensor cone comparison. Its public inclusion equation and functoriality give the normalized tensor-unit equation. The scalar endomorphism is the specified ringedSingletonKoszulPower by its definition.",
+   "uses": [
+    "lem-sfb-additive-total-tensor-cone-comparison",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the second-projection formula on each total-tensor summand using HomologicalComplex.ι_mapBifunctorMap, mappingCone.lift_f_snd_v and mapBifunctorMappingCone₂Iso.ι_p₂_v. It is tensoring the coefficient isomorphism followed by the coefficient second projection. For nonzero coefficient degree j its target is the zero jth term of O[0], proving the required vanishing.",
+   "uses": [
+    "lem-sfb-additive-total-tensor-cone-comparison",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply total-tensor summand extensionality. On each summand the second-projection formula of the preceding step reduces successor compatibility to the corresponding coefficient projection equation from ringedSingletonCoefficientCone. Functoriality of tensor with the fixed module P^p gives the equality. Normalize the public tensor aliases once to express the resulting isomorphisms and all three identities in the original statement.",
+   "uses": [
+    "lem-sfb-ringed-singleton-coefficient-cone",
+    "lem-sfb-additive-total-tensor-cone-comparison",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-singleton-coefficient-cone",
+  "lem-sfb-additive-total-tensor-cone-comparison",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free dual identification; chain-level tensor comparison and projection API in WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone. J4: normalized degree-zero units imply successor second-projection compatibility, without an explicit negative-transition calculation. The coefficient-only part is fully proved in RingedSingletonCoefficientCone after local definition improvements; no new sorry is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chain map from tensor with a two term Koszul complex to a quotient complex killed by the scalar",
+   "results": "Eight unrelated differential and cotangent-complex results; no finite sheaf tensor augmentation.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor product with a two term Koszul complex is the mapping cone of multiplication on a complex",
+   "results": "mappingCone, HomologicalComplex.tensorObj, tensorHom, HasTensor and tensor-unit existence; no normalized singleton-dual cone presentation.",
+   "date": "2026-10-26",
+   "verdict": "Basic cone and tensor APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorDesc",
+   "results": "mapBifunctorDesc, ι_mapBifunctorDesc and its reassociated version.",
+   "date": "2026-10-26",
+   "verdict": "Useful summand API, no singleton dual comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]one|[Cc]one.*Koszul",
+   "results": "No Mathlib search-service hits. Local library search found PrincipalKoszulDualTowerComparison, RingedNegativeKoszulDuality and AdditiveTotalTensorConeComparison. The first normalizes the unit but does not specify nonzero-degree summands for arbitrary P; specialize to the coefficient complex before tensoring.",
+   "date": "2026-10-26",
+   "verdict": "Existing comparisons are tools, not the complete normalized projection assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalKoszulFiniteAugmentation",
+  "date": "2026-10-26",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Reduction paragraph: the finite residue reduction is the cone of multiplication by the uniformizer; strict finite augmentation maps; The singleton dual Koszul tensor has normalized scalar-cone coordinates",
+   "via": [
+    "lem-sfb-internal-koszul-finite-augmentation",
+    "lem-sfb-internal-koszul-quotient-resolution",
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSingletonKoszulCone",
+  "file": "lean/Sheaf/CategoryTheory/RingedSingletonKoszulCone.lean",
+  "declaration": "CategoryTheory.ringedSingletonKoszulCone",
+  "statement": "theorem ringedSingletonKoszulCone\n    (a : (O.obj ⋙ forget CommRingCat).sections) (P : ringedSiteComplex O) :\n    ∃ e : ∀ n : ℕ,\n        ((ringedKoszulTensorTower O 1 (fun _ ↦ a)).obj P).obj (op n) ≅\n          CochainComplex.mappingCone (ringedSingletonKoszulPower O a P n),\n      (∀ n, ringedKoszulTensorUnitComponent O 1 (fun _ ↦ a) P (op n) ≫\n        (e n).hom = (ringedKoszulRightUnitIso O P).inv ≫\n          CochainComplex.mappingCone.inr (ringedSingletonKoszulPower O a P n)) ∧\n      (∀ (n : ℕ) (p j : ℤ), j ≠ 0 →\n        HomologicalComplex.ιMapBifunctor P\n            ((ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n))\n            (curriedTensor _) (.up ℤ) p j (p + j) rfl ≫\n          (e n).hom.f (p + j) ≫\n            (CochainComplex.mappingCone.snd\n              (ringedSingletonKoszulPower O a P n)).v\n                (p + j) (p + j) (add_zero _) = 0) ∧\n      (∀ (n : ℕ) (q : ℤ),\n        (((ringedKoszulTensorTower O 1 (fun _ ↦ a)).obj P).map\n          (homOfLE (Nat.le_add_right n 1)).op).f q ≫ (e n).hom.f q ≫\n            (CochainComplex.mappingCone.snd\n              (ringedSingletonKoszulPower O a P n)).v q q (add_zero _) =\n          (e (n + 1)).hom.f q ≫\n            (CochainComplex.mappingCone.snd\n              (ringedSingletonKoszulPower O a P (n + 1))).v q q (add_zero _))",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringedSingletonKoszulPower",
+   "CategoryTheory.ringedSingletonKoszulCone"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261026T024100-L-637444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T091814-L-3377183",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

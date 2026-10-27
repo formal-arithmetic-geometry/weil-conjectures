@@ -1,0 +1,323 @@
+{
+ "id": "lem-per-char-zero-smooth-coefficient-system",
+ "kind": "statement",
+ "title": "Smooth transition coefficient subrings of a characteristic-zero field",
+ "statement": "Let $k$ be a field of characteristic zero [def-weil-field]. There exist a small nonempty directed partially ordered set $D$ and subrings $R_i\\subseteq k$ containing $\\mathbf Q$, for $i\\in D$, with the following properties. Each $R_i$ is a finite type $\\mathbf Q$-algebra [def-weil-pbc-finite-type-algebra] and is smooth over $\\mathbf Q$ [def-weil-pbc-smooth-ring-map]. If $i\\leq j$ then $R_i\\subseteq R_j$, and this inclusion is smooth. The union of these subrings is $k$, and the inclusions exhibit $k$ as their ring colimit [def-weil-pbc-category-colimit]. Each inclusion $R_i\\to k$ is regular [def-weil-pbc-g-ring]. No claim is made that every inclusion between arbitrary smooth $\\mathbf Q$-subalgebras of $k$ is smooth.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Q-universal_Desingularization.pdf",
+  "place": "Bierstone--Milman--Temkin, Theorem 7.5(1), proof for fields, with Definition 7.2 and Remark 7.3(1): take affine rational models of Spec(k), then their schematic images in k. Regularity of projections is Definition 7.2; regular finite-type transitions are smooth. Read online 2026-10-24; archival copy WANTED. No specialized Stacks tag; underlying smooth-colimit regularity is Tag 07EP, more-algebra-lemma-colimit-smooth-regular."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Identify $\\mathbf Q$ with its prime subfield in $k$. By [lem-exc-transcendence-basis-exists], choose a transcendence basis $B\\subseteq k$ over $\\mathbf Q$ [def-weil-pbc-transcendence-basis]. Put $A_T=\\mathbf Q[t\\mid t\\in T]\\subseteq k$ and $F_T=\\mathbf Q(T)=\\operatorname{Frac}(A_T)$ for each finite $T\\subseteq B$. Algebraic independence identifies $A_T$ with a polynomial ring. The extension $k/\\mathbf Q(B)$ is algebraic and separable: an irreducible polynomial in characteristic zero has nonzero derivative of smaller degree, hence is relatively prime to its derivative. This also proves separability for every algebraic extension of any $F_T$ used below.",
+   "uses": [
+    "lem-exc-transcendence-basis-exists",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030F, lemma-transcendence-degree; elementary derivative argument following Tag 09H0, lemma-irreducible-polynomials."
+   }
+  },
+  {
+   "text": "Given a finite subset $S\\subseteq k$ and a prescribed finite $T_0\\subseteq B$, [lem-weil-pbc-separating-transcendence-basis-finite-subextension] supplies a finite $T\\subseteq B$ such that $F_T(S)/F_T$ is finite separable. Replace $T$ by $U=T\\cup T_0$. The same finitely many elements of $S$ are algebraic over $F_U$: their polynomials over $F_T$ remain nonzero over $F_U$. Successively adjoining these elements gives a finite-dimensional extension $L=F_U(S)$ of $F_U$ (products of the bounded powers of the generators span it). Its separability follows from the characteristic-zero derivative argument in Step 1. Thus the finite-subextension conclusion can always be arranged with $U\\supseteq T_0$.",
+   "uses": [
+    "lem-weil-pbc-separating-transcendence-basis-finite-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030U, lemma-separable-extension-preserves-reducedness, second proof paragraph, finite-subset observation; prescribed variables added explicitly."
+   }
+  },
+  {
+   "text": "The polynomial domain $A_U$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], since $\\mathbf Q$ has only the ideals $0$ and $\\mathbf Q$. Apply [lem-weil-pbc-spread-finite-separable-extension] to $A_U$, its fraction field $F_U$, and the finite separable extension $L$ of Step 2. Obtain $0\\ne c\\in A_U$ and a domain $C$, finite etale over $A_U[1/c]$, with its specified fraction-field identification $\\operatorname{Frac}(C)=L$. Use this identification to regard $C$ as a subring of $L\\subseteq k$. Write each $s\\in S$ as $a_s/b_s$ with $a_s,b_s\\in C$ and $b_s\\ne0$, and put $b=\\prod_{s\\in S}b_s$ (the empty product is $1$). Then $R=C[1/b]\\subseteq k$ contains $S$, since $a_s/b_s=a_s\\prod_{s'\\ne s}b_{s'}/b$. By [lem-weil-pbc-etale-algebra-finite-presentation-localization], $R$ is etale over $A_U[1/c]$. The identity of $A_U$ is etale: take the monic polynomial $Q(Z)=Z$ in [lem-weil-pbc-standard-etale-monic-derivative], whose algebra is $A_U[Z,Y]/(Z,Y-1)=A_U$. The localization clause of [lem-weil-pbc-etale-algebra-finite-presentation-localization] applied to this identity makes $A_U\\to A_U[1/c]$ etale. Composition [lem-weil-pbc-etale-composition-cancellation] shows $\\operatorname{Spec}R\\to\\operatorname{Spec}A_U$ is etale. We have proved: every finite $S$ is contained in such an $R$, with $U$ containing any prescribed $T_0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-spread-finite-separable-extension",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Finite separable spreading in existing node lem-weil-pbc-spread-finite-separable-extension; Tags 00FN (lemma-Noetherian-permanence), 00UC (lemma-standard-etale), 00U2 (lemma-etale); explicit numerator/denominator calculation."
+   }
+  },
+  {
+   "text": "Let $D$ be the set of pairs $(T,R)$ where $T\\subseteq B$ is finite, $R\\subseteq k$ is a subring containing $A_T$, and $\\operatorname{Spec}R\\to\\operatorname{Spec}A_T$ is etale. Order it by $(T,R)\\leq(U,R')$ if $T\\subseteq U$ and $R\\subseteq R'$. This is a partial order: reflexivity and transitivity are those of inclusion; mutual inequalities force equality of both components. It is small because it is a subset of the product of the finite subsets of $B$ with the set of subrings of $k$. It is nonempty by Step 3 with $S=T_0=\\varnothing$. Each $A_T\\to R$ is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Compose it with the smooth polynomial map $\\mathbf Q\\to A_T$ of [lem-weil-pbc-polynomial-ring-smooth], using [lem-weil-pbc-smooth-ring-map-base-change-composition]. Thus $R$ is smooth over $\\mathbf Q$, and in particular finitely presented and of finite type by [def-weil-pbc-smooth-ring-map].",
+   "uses": [
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GK (lemma-etale-smooth-unramified), 01V6 (lemma-smooth-characterize); algebra.tex Tags 00T6, 00T7, 00TD; definition of smooth ring map 00T2."
+   }
+  },
+  {
+   "text": "Fix $(T,R)\\in D$ and a finite $U\\supseteq T$ in $B$. The prime $0\\subset R$ contracts to $0\\subset A_T$ since both are subrings of $k$. Apply [lem-weil-pbc-etale-algebra-residue-field-separable] at this prime: $E=\\operatorname{Frac}(R)$ is finite separable, in particular algebraic, over $F_T$. The elements of $U\\setminus T$ are algebraically independent over $F_T$: a polynomial relation with rational-function coefficients in $T$ becomes a nonzero polynomial relation among the distinct elements of $U$ after multiplying by a common nonzero denominator in $A_T$, contrary to independence of $B$. By [lem-zl-independence-algebraic-base] they remain independent over $E$, hence over its subring $R$. Consequently the subring $R[U\\setminus T]\\subseteq k$ is the polynomial ring over $R$ on these variables. It is also the base change $A_U\\otimes_{A_T}R$: the homomorphism sends $p\\otimes r$ to $pr$; the inverse writes a polynomial uniquely as a sum of monomials in $U\\setminus T$ with coefficients in $R$, sending each term $rM$ to $M\\otimes r$. Thus [lem-weil-pbc-etale-ring-base-change] makes this subring etale over $A_U$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "lem-zl-independence-algebraic-base",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U3 (lemma-etale-over-field) and 00U2 (lemma-etale), base change; Mathlib Algebra.IsAlgebraic.algebraicIndependent_iff, AlgebraicIndependent/AlgebraicClosure.lean:96; polynomial and tensor identifications written explicitly."
+   }
+  },
+  {
+   "text": "For $(T,R)\\leq(U,R')$, the intermediate ring $P=R[U\\setminus T]$ of Step 5 lies in $R'$, since $R'\\supseteq R$ and $R'\\supseteq A_U$. Both $P$ and $R'$ are etale over $A_U$. The map $\\operatorname{Spec}R'\\to\\operatorname{Spec}P$ commutes with their maps to $\\operatorname{Spec}A_U$, so [lem-weil-pbc-etale-composition-cancellation](3) makes it etale. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $P\\to R'$ is smooth. The map $R\\to P$ is a finite polynomial extension by Step 5, hence smooth by [lem-weil-pbc-polynomial-ring-smooth]. Composition [lem-weil-pbc-smooth-ring-map-base-change-composition] proves that the transition inclusion $R\\to R'$ is smooth. This argument applies to our componentwise order on pairs, and makes no assertion about arbitrary inclusions between smooth rational subalgebras.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GW (lemma-etale-permanence), followed by etale-to-smooth and algebra.tex Tag 00TD (lemma-compose-smooth)."
+   }
+  },
+  {
+   "text": "For $(T,R),(T',R')\\in D$, choose finite lists of $\\mathbf Q$-algebra generators of $R$ and $R'$, which exist by Step 4. Apply Step 3 to the union $S$ of these lists and to $T_0=T\\cup T'$. It gives $(U,R'')\\in D$ with $U\\supseteq T\\cup T'$ and $S\\subseteq R''$. Since $R''$ contains $\\mathbf Q$ and both generating lists, it contains both $R$ and $R'$. Thus $(U,R'')$ is an upper bound in the specified order. Together with nonemptiness this proves directedness. Apply Step 3 also to $S=\\{x\\}$ for each $x\\in k$ to obtain $\\bigcup_{(T,R)\\in D}R=k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary assembly of Steps 3 and 4: finite generating lists, common upper bound, and singleton coverage."
+   }
+  },
+  {
+   "text": "The inclusions form a ring cocone with vertex $k$. Given compatible ring homomorphisms $h_i:R_i\\to H$, define $h:k\\to H$ by $h(x)=h_i(x)$ at any stage containing $x$. If two stages contain $x$, a common upper bound and compatibility give the same value, so $h$ is well defined. For $x,y\\in k$, put their stages in a common upper stage; the ring-map identities there give $h(x+y)=h(x)+h(y)$, $h(xy)=h(x)h(y)$, and preservation of $0,1$. Its restrictions are the $h_i$, and coverage makes it unique. This is precisely the ring colimit universal property of [def-weil-pbc-category-colimit]. For any fixed index $i$, the tail $\\{j\\mid i\\leq j\\}$ still covers $k$: put $i$ and a stage containing $x$ into a common upper bound. The same argument gives $k$ as the colimit of this tail in commutative $R_i$-algebras, since the unique assembled ring map respects the specified map out of $R_i$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary cocone universal-property argument, also for each tail; BMT Theorem 7.5(1), field case, written as a union of coefficient rings."
+   }
+  },
+  {
+   "text": "Fix $i$ and write $R=R_i\\subseteq k$, a domain with fraction field $E=\\operatorname{Frac}(R)\\subseteq k$. Flatness: the only prime of $k$ is $0$, its contraction to $R$ is $0$, and the induced localization map is $R_{(0)}=E\\to k_{(0)}=k$. It is flat by [lem-weil-pbc-module-over-field-flat], since $k$ is an $E$-vector space, so $R\\to k$ is flat by [lem-weil-pbc-flat-map-local-criterion]. Fibres: let $\\mathfrak p\\subset R$ be prime. If $\\mathfrak p\\ne0$, choose $0\\ne a\\in\\mathfrak p$. In $k\\otimes_R\\kappa(\\mathfrak p)$ one has $1\\otimes1=a^{-1}a\\otimes1=a^{-1}\\otimes\\bar a=0$, so this fibre is the zero ring. If $\\mathfrak p=0$, then $\\kappa(0)=E$ and the fibre is $k$: the map $x\\otimes(r/s)\\mapsto xr/s$ has inverse $x\\mapsto x\\otimes1$, and the second composite is the identity because every nonzero $s\\in R$ is already invertible in $k$. Both fibres are Noetherian: the zero ring has one ideal, and a field has only $0$ and the unit ideal. Geometric regularity: $\\kappa(\\mathfrak p)$ has characteristic $0$, so by [def-weil-pbc-finite-purely-inseparable-extension] its only finite purely inseparable extension is $\\kappa(\\mathfrak p)$ itself. It remains to show that each fibre is a regular ring. The zero ring is Noetherian and has no prime ideals, so it is vacuously regular. The field $k$ is regular by [lem-weil-pbc-field-regular-ring]. Hence $R_i\\to k$ is regular in the sense of [def-weil-pbc-g-ring], for every $i$, and all clauses are proved.",
+   "uses": [
+    "lem-weil-pbc-flat-map-local-criterion",
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-field-regular-ring",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Definition 07BZ (regular ring map, definition-regular), with Algebra Definition 0382 for geometric regularity; direct verification for the inclusion of a domain into a characteristic-zero field (reviewer FIX in place of Tag 07EP)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-transcendence-basis-exists",
+  "def-weil-pbc-transcendence-basis",
+  "lem-weil-pbc-separating-transcendence-basis-finite-subextension",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-spread-finite-separable-extension",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-zl-independence-algebraic-base",
+  "lem-weil-pbc-etale-ring-base-change",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-module-over-field-flat",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-field-regular-ring",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Q-universal_Desingularization.pdf",
+  "place": "BMT Definition 7.2 and Theorem 7.5(1), field case, pp.18--21; independent explicit construction with a fixed transcendence basis and etale coefficient subrings. Archival copy unavailable; WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A characteristic zero field is a directed union of smooth finitely generated rational subalgebras with smooth transition inclusions",
+   "results": "8 hits: Field.Emb.Cardinal.directed_filtration, Algebra.Smooth.exists_subalgebra_fg, Algebra.Smooth.exists_subalgebra_finiteType, LibraryNote.Design_choices_about_smooth_algebraic_structures, Field.Emb.Cardinal.iSup_adjoin_eq_top, Field.Emb.Cardinal.filtration_apply, Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg; ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent is present but does not supply a field-covering diagram with smooth transition inclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Subalgebra",
+   "results": "2 hits: Algebra.Smooth.exists_subalgebra_fg, TensorProduct.toIntegralClosure_bijective_of_smooth; ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent is present but does not supply a field-covering diagram with smooth transition inclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*(subalgebra|[Tt]ransition)|([Ss]ubalgebra|transition).*smooth",
+   "results": "0 hits: ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent is present but does not supply a field-covering diagram with smooth transition inclusions",
+   "subdirectory": "FieldTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every characteristic zero field admits a filtered system of finite type smooth Q subalgebras whose inclusion maps are smooth",
+   "results": "8 hits: Algebra.Smooth.exists_subalgebra_finiteType, Algebra.IsStandardSmooth.finitePresentation, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Algebra.Smooth.exists_finiteType, Algebra.Smooth.exists_subalgebra_fg, Algebra.Smooth.formallySmooth, Subfield.bot_eq_of_charZero, Algebra.FormallySmooth.of_perfectField; ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent is present but does not supply a field-covering diagram with smooth transition inclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field extension in characteristic zero has a cofinal diagram of finitely generated subrings ordered by inclusions which are smooth maps",
+   "results": "8 hits: Field.Emb.Cardinal.directed_filtration, Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor, Field.Emb.Cardinal.filtration_apply, Algebra.FormallySmooth.of_algebraicIndependent, Field.Emb.Cardinal.filtration, Field.Emb.Cardinal.factor, Algebra.FormallySmooth.of_perfectField, Field.Emb.Cardinal.filtration_succ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent is present but does not supply a field-covering diagram with smooth transition inclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A characteristic zero field is a directed colimit of smooth finitely generated Q subrings and all transition inclusions can be chosen smooth",
+   "results": "{\"t\": \"2026-10-24T08:01:23Z\", \"tool\": \"leanfinder\", \"query\": \"A characteristic zero field is a directed colimit of smooth finitely generated Q subrings and all transition inclusions can be chosen smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.Emb.Cardinal.directed_filtration\", \"Field.DirectLimit.field\", \"DirectLimit.instFieldOfRingHomClass\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"EqualCharZero.algebraRat\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Field.DirectLimit.exists_inv\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"3ca44f938031665f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field colimits, prime-field and smooth-descent hits do not assert smoothness of transition inclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A characteristic zero field is a directed union of smooth rational subalgebras with smooth transition maps",
+   "results": "{\"t\": \"2026-10-24T08:01:23Z\", \"tool\": \"leansearch\", \"query\": \"A characteristic zero field is a directed union of smooth rational subalgebras with smooth transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"algebraRat.charZero\", \"Subfield.bot_eq_of_charZero\", \"algebraRat.charP_zero\", \"DirectLimit.instFieldOfRingHomClass\", \"IntermediateField.charZero\", \"NumberField.to_charZero\", \"PerfectField.ofCharZero\", \"NumberField.mk\"], \"digest\": \"154b37905723e5e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field colimits, prime-field and smooth-descent hits do not assert smoothness of transition inclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*(subalgebra|transition)|([Ss]ubalgebra|transition).*smooth",
+   "results": "{\"t\": \"2026-10-24T08:01:23Z\", \"tool\": \"grep\", \"query\": \"smooth.*(subalgebra|transition)|([Ss]ubalgebra|transition).*smooth\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field colimits, prime-field and smooth-descent hits do not assert smoothness of transition inclusions",
+   "subdirectory": "FieldTheory"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elkik-rational-smooth-models",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Temkin Proposition 3.3.5, printed p.25, first sentence invoking BMT 7.5; coefficient-ring form of the rational approximation used below the ancestor Artin--Gabber regular-model branch.",
+   "via": [
+    "lem-per-elkik-rational-smooth-models",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-char-zero-smooth-coefficient-system",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed a small directed poset of pairs (finite subset of a fixed transcendence basis, etale polynomial subring inside k), proved smoothness of transitions using independence under algebraic scalar extension, proved coverage and the colimit universal property, and proved regularity of each R_i -> k directly (flatness by the local criterion, fibres 0 or k, trivial purely inseparable extensions in characteristic zero); no smooth-colimit regularity node is cited (reviewer FIX). All inputs already exist in the DAG; no new nodes.",
+  "blueprint": "Realizes the rational coefficient approximation required in the regular-model branch below lem-per-artin-gabber-affine-curve, via lem-per-elkik-rational-smooth-models: BMT 7.5(1) field approximation in the first sentence of Temkin Proposition 3.3.5. The smooth-transition system is constructed explicitly, not replaced by the arbitrary smooth-subalgebra diagram.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separating-transcendence-basis-finite-subextension",
+    "why": "Selects finitely many basis variables for a finite set of field elements; the unit has no field-approximation lemma of this granularity."
+   },
+   {
+    "node": "lem-weil-pbc-spread-finite-separable-extension",
+    "why": "Spreads a finite separable extension over a polynomial domain to an etale model; used as a commutative-algebra tool, not a replacement of the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic algebraic-geometry input with exactly the cited statement; no counterpart in this unit supplies this operation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Converts between the scheme-etale input and the precise ring-smooth notion in the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separating-transcendence-basis-finite-subextension",
+  "lem-weil-pbc-spread-finite-separable-extension",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-3402a7773",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-3402a7773 (reviewer sub-agent of L); spot-checked: I read all nine steps and every cited statement. The mechanical finding is confirmed: Step 9 cites lem-per-smooth-colimit-regular (Stacks 07EP), which is on the 2026-10-19 artin-gabber drop list (route-pivot-dropped.txt line 1896, created for the dropped lem-per-regular-strict-local-model), and no step justifies it. Q42 returned the same citation. Repair (fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-char-zero-smooth-coefficient-system.json): Step 9 is rewritten to prove that R_i -> k is regular directly. Flatness: the only prime of k contracts to 0 and Frac(R) -> k is flat (lem-weil-pbc-flat-map-local-criterion, lem-weil-pbc-module-over-field-flat). Fibres: 0 for p nonzero and k for p=0, both Noetherian. In characteristic 0 the only finite purely inseparable extension is trivial (def-weil-pbc-finite-purely-inseparable-extension), the zero ring is vacuously regular and k is regular (lem-weil-pbc-field-regular-ring). The source is now 07BZ (more-algebra.tex 10375) and 0382. proof_deps and split_report.summary were updated, and no cited node is on the drop list. Other checks: Steps 1-2 transcendence basis, characteristic-0 separability and enlarging T to U; Step 3 spreading over the Noetherian domain A_U, the common denominator, A_U -> A_U[1/c] etale via Q(Z)=Z, composition; Step 4 the small poset of pairs and etale implies smooth; Step 5 Frac R / F_T finite separable, independence over E by lem-zl-independence-algebraic-base, R[U\\T] = A_U tensor R and etale base change; Step 6 cancellation gives smooth transitions; Steps 7-8 directedness, coverage and the ring colimit. Edge cases: k=Q, algebraic k, Q(t), infinite transcendence degree, empty S. The four declared tool_uses are generic commutative algebra and accepted. No SGA is used and there are no new nodes. Maintainer: with the drop list excluded, the item and its citer lem-per-elkik-rational-smooth-models are not reached from any nt-target-*. Their only path runs through lem-sfb-field-log-smooth-gabber-modification, which still cites the dropped lem-per-gabber-absolute-equivariant-modification. Consider withdrawing that branch.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.CharZeroSmoothCoefficientSystem",
+  "declaration": "FieldTheory.exists_charZero_smooth_coefficient_system",
+  "declarations": [
+   "FieldTheory.coefficientSubalgebraDiagram",
+   "FieldTheory.coefficientSubalgebraCocone",
+   "FieldTheory.exists_charZero_smooth_coefficient_system"
+  ],
+  "file": "lean/Sheaf/FieldTheory/CharZeroSmoothCoefficientSystem.lean",
+  "statement": "theorem exists_charZero_smooth_coefficient_system (k : Type u) [Field k] [CharZero k] : ∃ (D : Type u) (_ : PartialOrder D), Nonempty D ∧ IsDirected D (· ≤ ·) ∧ ∃ (R : D → Subalgebra ℚ k) (hR : Monotone R), (∀ i : D, RingHom.FiniteType (algebraMap ℚ (R i)) ∧ Algebra.Smooth ℚ (R i)) ∧ (∀ (i j : D) (h : i ≤ j), @Algebra.Smooth (R i) _ (R j) _ (Subalgebra.inclusion (hR h)).toRingHom.toAlgebra) ∧ (∀ x : k, ∃ i : D, x ∈ R i) ∧ Nonempty (IsColimit (coefficientSubalgebraCocone R hR)) ∧ (∀ i : D, RingHom.IsRegular (R i).val.toRingHom)",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two helpers construct the canonical inclusion diagram and cocone with real data; the theorem states every clause, including smooth transition inclusions and regular projections. Rational subalgebras are precisely subrings containing the prime subfield. All index and ring objects live in the field universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98a885004",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Node diff vs side-live/live: only the lean record added. Statement matches the node clause by clause: Field+CharZero only; D : Type u with PartialOrder, Nonempty, IsDirected; R : D → Subalgebra ℚ k Monotone; RingHom.FiniteType (algebraMap ℚ (R i)) ∧ Algebra.Smooth ℚ (R i); transition smoothness via the canonical Subalgebra.inclusion toAlgebra, only for i ≤ j; coverage; Nonempty IsColimit of the real inclusion cocone in CommRingCat.{u}; RingHom.IsRegular (R i).val (recorded GRing declaration). Helpers have real data, no clash; upstream smoothSubalgebraDiagram is indexed only by the set of all smooth finitely generated subalgebras, so it does not apply. Edge cases k=ℚ, infinite algebraic, infinite transcendence degree, zero fibres OK. sorry-only proof, docstrings with source and blueprint id plus all 9 steps, imports exist, report sections present. No compile needed (no file changed)."
+ }
+}

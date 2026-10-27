@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-descent",
+ "kind": "statement",
+ "title": "Normalized derived tensor descent with abstract coefficient categories",
+ "statement": "For a symmetric monoidal closed Grothendieck abelian coefficient category B with functorial flat resolutions, a scheme T and a target complex category H, let F be a complex realization and LF its derived realization, with an exact localization factor isomorphism. A specified K-flat source representative class P, its preservation in a specified target resolving class, fully faithful resolving restriction, a signed-total tensor comparison, and a target tensor model determine a unique representative-normalized derived tensor isomorphism. Its actual normalization equation is proved in curried notation. The fixed source localization tensor identification is the inverse localization tensorator [lem-sf-finite-scalar-tensor-resolution]; the generic descent is [lem-weil-pbc-tensor-comparison-descent-representatives].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 07A4; sites-modules.tex Tag 0GMW; categories.tex Tags 04VI–04VK"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-sf-finite-scalar-tensor-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Invert the source localization tensorator on the K-flat class using the proved fixed representative API, keeping the coefficient category abstract. Use the supplied intrinsic model representative and signed-total comparison. Preserve the published source abelian and localization category data.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex",
+    "lem-sf-finite-scalar-tensor-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorComparisonDescent, which gives existence and uniqueness with the actual representative equation. Choose this uniquely determined isomorphism, curry it, and prove that currying leaves its components unchanged.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-sf-finite-scalar-tensor-resolution",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 07A4; sites-modules.tex Tag 0GMW; categories.tex Tags 04VI–04VK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module sheaves over a constant ring identifies derived tensor products compatibly with inverse image",
+   "results": "Eight ordinary sheaf monoidal and free condensed module results; no specified unbounded realization square.",
+   "date": "2026-10-27",
+   "verdict": "Use the concrete realization and project representative descent APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaves identifies unbounded derived tensor functors uniquely on flat K flat representatives",
+   "results": "Eight hits about flat module kernels, sheaf pushforward congruence, sheaf equality and ordinary module pullback adjunctions; no exact normalized derived tensor statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "The tensorator and its monoidal isomorphism API were found; no scalar realization compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing localization tensorator."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparisonNatTrans|resolvingRepresentativesFullyFaithfulWhiskering",
+   "results": "Mathlib service found no hits. Repository search located the proved total comparison and resolving restriction APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use the project general constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackComparison",
+  "date": "2026-10-27",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-comparison",
+   "place": "Fully faithful representative descent and staged coefficient specialization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorDescent",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorDescent.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorRealizationForCoefficients",
+  "statement": "def finiteScalarTensorRealizationForCoefficients\n    (B : Type u₁) [Category.{u + 1} B] [Abelian B]\n    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]\n    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]\n    [Abelian.HasFunctorialFlatResolution B] (T : Scheme.{u})\n    {H : Type u₂} [Category.{v₂} H] {E : Type u₄} [Category.{v₄} E]\n    (q' : H ⥤ E) (F : CochainComplex (Sheaf (ProEt.topology T) B) ℤ ⥤ H)\n    (LF : DerivedCategory (Sheaf (ProEt.topology T) B) ⥤ E)\n    (eps : DerivedCategory.Q ⋙ LF ≅ F ⋙ q')\n    (P : ObjectProperty (CochainComplex (Sheaf (ProEt.topology T) B) ℤ))\n    (hP : ∀ Q, P Q → (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)\n    (S : ObjectProperty H) (hF : ∀ X, P X → S (F.obj X))\n    (ff : ((whiskeringLeft (P.FullSubcategory × P.FullSubcategory)\n      (DerivedCategory (Sheaf (ProEt.topology T) B) ×\n        DerivedCategory (Sheaf (ProEt.topology T) B)) E).obj\n      ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q))).FullyFaithful)\n    (t' : H × H ⥤ H) (T' : E × E ⥤ E)\n    (r' : (S.ι.prod S.ι) ⋙ t' ⋙ q' ≅ ((S.ι ⋙ q').prod (S.ι ⋙ q')) ⋙ T')\n    (b : uncurry.obj ((curriedTensor (Sheaf (ProEt.topology T) B)).map₂HomologicalComplex\n        (.up ℤ) (.up ℤ) (.up ℤ)) ⋙ F ≅ (F.prod F) ⋙ t') :\n    (postcompose₂.obj LF).obj (ProEtale.derivedTensor B T) ≅\n      (((whiskeringLeft₂ E).obj LF).obj LF).obj (curry.obj T')",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarCurryRealizationIso",
+   "WeilConjectures.finiteScalarCurryRealizationIso_hom_app",
+   "WeilConjectures.finiteScalarTensorRealizationOfRepresentatives",
+   "WeilConjectures.finiteScalarTensorRealizationOfRepresentatives_fac",
+   "WeilConjectures.finiteScalarTensorRealizationForCoefficients"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged); moved defs vs clone bodies (verbatim); 7 delivered modules + direct importer FiniteScalarProperProjectionPresentation compiled in sandbox; hole statement vs its node and the pinned definitions it uses"
+ }
+}

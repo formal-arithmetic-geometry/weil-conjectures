@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-homogeneous-primary-test",
+ "kind": "statement",
+ "title": "Testing primaryness of a homogeneous ideal on homogeneous factors",
+ "statement": "Let $R=\\bigoplus_{d\\ge0}R_d$ be a commutative ring graded by the nonnegative integers: every element has a unique finite decomposition into elements of the additive subgroups $R_d$, $1\\in R_0$, and $R_aR_b\\subseteq R_{a+b}$. Assume $R$ is Noetherian [def-weil-pbc-noetherian-ring]. Let $J\\subsetneq R$ be a homogeneous ideal, meaning that each homogeneous component of every element of $J$ lies in $J$. An element is homogeneous if it belongs to some $R_d$. Suppose that for every pair of homogeneous elements $a,b\\in R$, if $ab\\in J$ and $a\\notin J$, then $b^h\\in J$ for some integer $h\\ge1$. Then $J$ is primary: for arbitrary $u,v\\in R$, if $uv\\in J$ and $u\\notin J$, then $v^n\\in J$ for some integer $n\\ge1$.",
+ "source": {
+  "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+  "place": "Proposition 20.24, printed p.122 (PDF p.130), specialized to M=R and the proper homogeneous submodule J. nil(R/J)=sqrt(J), since a power annihilates R/J exactly when it sends 1 into J. Local PDF WANTED; authors PDF read online at https://web.mit.edu/18.705/www/13Ed.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix arbitrary $u,v\\in R$ with $uv\\in J$ and $u\\notin J$. Write $u=\\sum_i u_i$ and $v=\\sum_j v_j$ in their finite homogeneous decompositions, inserting zero components where necessary. Some $u_i$ lies outside $J$, since otherwise their sum would belong to $J$. Let $t$ be the least such degree, set $q=\\sum_{i<t}u_i\\in J$, and put $w=u-q$. Then $vw=uv-vq\\in J$, $w_i=0$ for $i<t$, and $w_t=u_t\\notin J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Proposition 20.24, printed p.122 (PDF page index 129), specialized to M=R. Local PDF WANTED; read authors PDF online at https://web.mit.edu/18.705/www/13Ed.pdf. Lowest-component argument expanded with the correct power."
+   }
+  },
+  {
+   "text": "Suppose first that every nonzero component $v_j$ has a positive power in $J$, and choose $e_j\\ge1$ with $v_j^{e_j}\\in J$ for each such degree. Set $N=1+\\sum_j(e_j-1)\\ge1$, taking $N=1$ when $v=0$. Expand $v^N=(\\sum_j v_j)^N$ by distributivity. Every term is a product of $N$ components; if each $v_j$ occurred at most $e_j-1$ times, it would have at most $N-1$ factors. Thus some $v_j^{e_j}$ divides every term. Every term and hence $v^N$ lies in $J$. This gives the required conclusion in this case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Proposition 20.24, printed p.122 (PDF page index 129), specialized to M=R. Local PDF WANTED; read authors PDF online at https://web.mit.edu/18.705/www/13Ed.pdf. Lowest-component argument expanded with the correct power."
+   }
+  },
+  {
+   "text": "It remains to exclude the case where some component has no positive power in $J$. Let $s$ be the least degree with this property and put $c=v_s$. For each nonzero $v_j$ with $j<s$, choose $e_j\\ge1$ with $v_j^{e_j}\\in J$. Put $a=\\sum_{j<s}v_j$ and $k=1+\\sum_{j<s,\\,v_j\\ne0}(e_j-1)\\ge1$. The same distributive expansion as in step 2 shows $a^k\\in J$; for an empty sum this says $0^1\\in J$. Set $z=v-a$. Its components below $s$ vanish and its degree-$s$ component is $c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Proposition 20.24, printed p.122 (PDF page index 129), specialized to M=R. Local PDF WANTED; read authors PDF online at https://web.mit.edu/18.705/www/13Ed.pdf. Lowest-component argument expanded with the correct power."
+   }
+  },
+  {
+   "text": "Expand $(v-a)^k w$. The term with no factor $v$ is $(-a)^k w\\in J$, since $a^k\\in J$. Every other term contains at least one factor $v$, and therefore is a multiple of $vw\\in J$. Additive closure of $J$ gives $z^k w\\in J$. This argument uses commutativity to reorder factors; it does not assert that $zw$ itself belongs to $J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Proposition 20.24, printed p.122 (PDF page index 129), specialized to M=R. Local PDF WANTED; read authors PDF online at https://web.mit.edu/18.705/www/13Ed.pdf. Lowest-component argument expanded with the correct power."
+   }
+  },
+  {
+   "text": "In the finite distributive expansion of $z^k w$, each of the $k$ components chosen from $z$ has degree at least $s$, and the component chosen from $w$ has degree at least $t$. Their total degree equals $ks+t$ only when every chosen $z$-degree is $s$ and the chosen $w$-degree is $t$. Hence the degree-$(ks+t)$ component is exactly $c^k u_t$. (This identity still holds when that product is zero.) Since $J$ is homogeneous and $z^k w\\in J$, we obtain $c^k u_t\\in J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Proposition 20.24, printed p.122 (PDF page index 129), specialized to M=R. Local PDF WANTED; read authors PDF online at https://web.mit.edu/18.705/www/13Ed.pdf. Lowest-component argument expanded with the correct power."
+   }
+  },
+  {
+   "text": "Both $u_t\\in R_t$ and $c^k\\in R_{ks}$ are homogeneous, and $u_t\\notin J$. Apply the hypothesis of the item to the pair $(u_t,c^k)$, using commutativity and step 5. It yields $(c^k)^h=c^{kh}\\in J$ for some $h\\ge1$. As $kh\\ge1$, this contradicts the defining choice of $s$. The remaining case is impossible, so step 2 always supplies a positive power of $v$ in $J$. As $u,v$ were arbitrary and $J$ is proper, this proves primaryness with exactly the asserted meaning.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Proposition 20.24, printed p.122 (PDF page index 129), specialized to M=R. Local PDF WANTED; read authors PDF online at https://web.mit.edu/18.705/www/13Ed.pdf. Lowest-component argument expanded with the correct power."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+  "place": "Agent-written proof following Proposition 20.24, printed p.122 (PDF page index 129), specialized to M=R, with the lowest-component argument corrected to keep the power k (see the split report). Local PDF WANTED; authors PDF read online at https://web.mit.edu/18.705/www/13Ed.pdf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper homogeneous ideal in a Noetherian nonnegatively graded commutative ring is primary if homogeneous products ab in the ideal and a outside the ideal imply b is in its radical",
+   "results": "{\"t\": \"2026-10-23T14:09:40Z\", \"tool\": \"leanfinder\", \"query\": \"A proper homogeneous ideal in a Noetherian nonnegatively graded commutative ring is primary if homogeneous products ab in the ideal and a outside the ideal imply b is in its radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.IsPrime.homogeneousCore\", \"Ideal.IsHomogeneous.radical_eq\", \"HomogeneousIdeal.radical\", \"Ideal.IsHomogeneous.radical\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"HomogeneousIdeal.mem_irrelevant_of_mem\"], \"digest\": \"59d768aabf1ce12d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Ideal.IsHomogeneous.isPrime_iff, Ideal.IsPrime.homogeneousCore and Ideal.IsHomogeneous.radical in GradedAlgebra/Radical.lean:135-165, the core construction in Homogeneous/Ideal.lean:113-150, and the primary definitions and quotient criterion in RingTheory/IsPrimary.lean:48-123 and Ideal/IsPrimary.lean:33-44. Prime criteria require prime products; the ungraded primary criterion still quantifies over all elements. None gives this homogeneous primary test or preservation of primaryness by the core."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomogeneous\", \"IsPrimary\"",
+   "results": "{\"t\": \"2026-10-23T14:09:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsHomogeneous\\\", \\\"IsPrimary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Ideal.IsHomogeneous.isPrime_iff, Ideal.IsPrime.homogeneousCore and Ideal.IsHomogeneous.radical in GradedAlgebra/Radical.lean:135-165, the core construction in Homogeneous/Ideal.lean:113-150, and the primary definitions and quotient criterion in RingTheory/IsPrimary.lean:48-123 and Ideal/IsPrimary.lean:33-44. Prime criteria require prime products; the ungraded primary criterion still quantifies over all elements. None gives this homogeneous primary test or preservation of primaryness by the core."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrimary|isPrimary|homogeneousCore",
+   "results": "{\"t\": \"2026-10-23T14:09:40Z\", \"tool\": \"grep\", \"query\": \"IsPrimary|isPrimary|homogeneousCore\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Subsemiring.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Subsemiring.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Subsemiring.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Subsemiring.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Subsemiring.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\"], \"digest\": \"0ffa34bd012b53e7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Ideal.IsHomogeneous.isPrime_iff, Ideal.IsPrime.homogeneousCore and Ideal.IsHomogeneous.radical in GradedAlgebra/Radical.lean:135-165, the core construction in Homogeneous/Ideal.lean:113-150, and the primary definitions and quotient criterion in RingTheory/IsPrimary.lean:48-123 and Ideal/IsPrimary.lean:33-44. Prime criteria require prime products; the ungraded primary criterion still quantifies over all elements. None gives this homogeneous primary test or preservation of primaryness by the core."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous ideal is primary if the primary condition holds for homogeneous elements",
+   "results": "{\"t\": \"2026-10-23T14:09:41Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous ideal is primary if the primary condition holds for homogeneous elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.IsPrime.isPrimary\", \"Ideal.IsPrimary\", \"HomogeneousIdeal.irrelevant\", \"HomogeneousIdeal\", \"Ideal.IsHomogeneous\", \"Ideal.IsPrime.homogeneousCore\"], \"digest\": \"a53bdecf1ecc8af6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Ideal.IsHomogeneous.isPrime_iff, Ideal.IsPrime.homogeneousCore and Ideal.IsHomogeneous.radical in GradedAlgebra/Radical.lean:135-165, the core construction in Homogeneous/Ideal.lean:113-150, and the primary definitions and quotient criterion in RingTheory/IsPrimary.lean:48-123 and Ideal/IsPrimary.lean:33-44. Prime criteria require prime products; the ungraded primary criterion still quantifies over all elements. None gives this homogeneous primary test or preservation of primaryness by the core."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrimary|isPrimary",
+   "results": "{\"t\": \"2026-10-23T14:12:32Z\", \"tool\": \"grep\", \"query\": \"IsPrimary|isPrimary\", \"sub\": \"RingTheory/IsPrimary.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"27\", \"51\", \"52\", \"57\"], \"digest\": \"02b3c5e102580664\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Ideal.IsHomogeneous.isPrime_iff, Ideal.IsPrime.homogeneousCore and Ideal.IsHomogeneous.radical in GradedAlgebra/Radical.lean:135-165, the core construction in Homogeneous/Ideal.lean:113-150, and the primary definitions and quotient criterion in RingTheory/IsPrimary.lean:48-123 and Ideal/IsPrimary.lean:33-44. Prime criteria require prime products; the ungraded primary criterion still quantifies over all elements. None gives this homogeneous primary test or preservation of primaryness by the core."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primaryness of a homogeneous ideal can be checked on homogeneous ring elements: every homogeneous zero divisor in the quotient is nilpotent",
+   "results": "{\"t\": \"2026-10-23T14:12:34Z\", \"tool\": \"leanfinder\", \"query\": \"Primaryness of a homogeneous ideal can be checked on homogeneous ring elements: every homogeneous zero divisor in the quotient is nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.IsPrime.homogeneousCore\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"ProjectiveSpectrum.isPrime\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"HomogeneousIdeal.irrelevant\", \"Ideal.IsHomogeneous\"], \"digest\": \"25c3a3a519636c97\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Ideal.IsHomogeneous.isPrime_iff, Ideal.IsPrime.homogeneousCore and Ideal.IsHomogeneous.radical in GradedAlgebra/Radical.lean:135-165, the core construction in Homogeneous/Ideal.lean:113-150, and the primary definitions and quotient criterion in RingTheory/IsPrimary.lean:48-123 and Ideal/IsPrimary.lean:33-44. Prime criteria require prime products; the ungraded primary criterion still quantifies over all elements. None gives this homogeneous primary test or preservation of primaryness by the core."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrimary|isPrimary",
+   "results": "{\"t\": \"2026-10-23T14:44:54Z\", \"tool\": \"grep\", \"query\": \"IsPrimary|isPrimary\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected GradedAlgebra/Radical.lean:43-165, Homogeneous/Ideal.lean:113-180 and RingTheory/IsPrimary.lean:48-123; homogeneous prime criteria and ungraded primary criteria do not state the homogeneous primary test."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Primary homogeneous ideals can be tested using products of homogeneous elements",
+   "results": "{\"t\": \"2026-10-23T14:44:54Z\", \"tool\": \"leansearch\", \"query\": \"Primary homogeneous ideals can be tested using products of homogeneous elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.homogeneous_span\", \"Ideal.IsHomogeneous.isPrime_iff\", \"HomogeneousIdeal\", \"Ideal.IsHomogeneous.mul\", \"Ideal.IsHomogeneous.iff_exists\", \"Ideal.mul_homogeneous_element_mem_of_mem\", \"HomogeneousIdeal.toIdeal_mul\"], \"digest\": \"676724b18c211d2f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected GradedAlgebra/Radical.lean:43-165, Homogeneous/Ideal.lean:113-180 and RingTheory/IsPrimary.lean:48-123; homogeneous prime criteria and ungraded primary criteria do not state the homogeneous primary test."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomogeneous\", \"IsPrimary\"",
+   "results": "{\"t\": \"2026-10-23T14:44:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsHomogeneous\\\", \\\"IsPrimary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected GradedAlgebra/Radical.lean:43-165, Homogeneous/Ideal.lean:113-180 and RingTheory/IsPrimary.lean:48-123; homogeneous prime criteria and ungraded primary criteria do not state the homogeneous primary test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous ideal in a nonnegatively graded commutative ring is primary if homogeneous zero divisors modulo it are nilpotent",
+   "results": "{\"t\": \"2026-10-23T14:44:56Z\", \"tool\": \"leanfinder\", \"query\": \"A homogeneous ideal in a nonnegatively graded commutative ring is primary if homogeneous zero divisors modulo it are nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"HomogeneousIdeal.irrelevant\", \"Ideal.IsPrime.homogeneousCore\", \"ProjectiveSpectrum.isPrime\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"HomogeneousIdeal.radical\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\"], \"digest\": \"1efc7330a08b6c8e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected GradedAlgebra/Radical.lean:43-165, Homogeneous/Ideal.lean:113-180 and RingTheory/IsPrimary.lean:48-123; homogeneous prime criteria and ungraded primary criteria do not state the homogeneous primary test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper graded ideal is primary if for homogeneous a and b with ab in it either a is in it or a positive power of b is in it",
+   "results": "{\"t\": \"2026-10-23T14:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"A proper graded ideal is primary if for homogeneous a and b with ab in it either a is in it or a positive power of b is in it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.IsPrime.homogeneousCore\", \"Ideal.IsHomogeneous\", \"HomogeneousIdeal.irrelevant_le\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"HomogeneousIdeal\", \"Ideal.IsHomogeneous.radical\"], \"digest\": \"631ca75b0628276d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected GradedAlgebra/Radical.lean:43-165, Homogeneous/Ideal.lean:113-180 and RingTheory/IsPrimary.lean:48-123; homogeneous prime criteria and ungraded primary criteria do not state the homogeneous primary test."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-primary-homogeneous-core",
+  "date": "2026-10-23",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED. Supporting prerequisite: Proposition 1.0.3, technical claim on printed pp.32--33 and its primary-decomposition proof on pp.36--37; agent formulation also records the complementary Hilbert slope and permits the empty complement; algebra input to the primary-decomposition proof: homogeneous factors in one projective coordinate ring, retaining embedded factors. Supporting input: Exercise 20.26, printed p.122, and its solution, printed p.229, using Proposition 20.24, printed p.122. Local PDF WANTED; authors PDF read online at https://web.mit.edu/18.705/www/13Ed.pdf. Specialize the module statement to M=R. Supporting criterion: Altman--Kleiman Proposition 20.24, printed p.122, for homogeneous ideals (M=R), invoked in the solution of Exercise 20.26.",
+   "via": [
+    "lem-sfb-primary-homogeneous-core",
+    "lem-sfb-homogeneous-primary-decomposition",
+    "lem-sfb-component-primary-complement-separation",
+    "lem-sfb-component-projection-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homogeneous-primary-test",
+  "worker": "stage1",
+  "summary": "Q134: proved the homogeneous primary test by finite expansions and least homogeneous components, without new nodes or unproved supporting results. Expanded the source's final power argument correctly. No statement change. Noetherianity retained though unused in this ideal special case.",
+  "blueprint": "The inherited provenance has from.node=null (confirmed by blueprint_refs.py ancestor). The place records det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli/Gieseker prerequisites, through homogeneous primary decomposition and homogeneous cores. This split realizes the supporting Altman--Kleiman Proposition 20.24 criterion; the current latest blueprint unit was read and no route was changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-afb70d9fd",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-afb70d9fd (reviewer sub-agent of L); spot-checked: Read all six steps in full and found them correct. Step 1 takes the least degree t with u_t outside J, so w=u−Σ_{i<t}u_i has vw∈J. Step 2 is a pigeonhole bound with N=1+Σ(e_j−1). Step 3 takes the least degree s with c=v_s having no power in J, so a^k∈J. Step 4 expands (v−a)^k w binomially to get z^k w∈J. Step 5 shows the degree-(ks+t) component is c^k u_t. Step 6 applies the item's own hypothesis to (u_t,c^k) and contradicts the choice of s. For M=R the statement is exactly Altman–Kleiman Prop 20.24 (nil(R/J)=√J); it is unchanged from live, Noetherianity is kept, and properness and homogeneity are used. The source-error counterexample K[t], Q=(t^2) is valid, and the delivered proof does not rely on the printed sentence. Small cases checked: (t^2), (xy) where the hypothesis fails, the zero ideal in a domain, v=0, empty prefix. No new nodes and no citations needed; proof_deps=[]. No duplicate in the DAG: the homogeneous-ideal-radical, primary-homogeneous-core (the parent, which cites this item), homogeneous-primary-decomposition and graded devissage nodes state other facts. Mathlib searches are real, with no match. Live and side-live still have the item unsplit and there is no repair note. No SGA, no tool_uses. FIX: proof_origin.by was 'document', but the PDF is WANTED and not in literature/, and the proof departs from the printed argument; brief §4 requires 'agent', as on the sibling Altman–Kleiman nodes. The whole corrected item is in fixes/dag/nodes/sec-six-functors-basics/; only proof_origin changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomogeneousPrimaryTest",
+  "declaration": "Ideal.IsHomogeneous.isPrimary_of_homogeneous_factors",
+  "file": "lean/Sheaf/RingTheory/HomogeneousPrimaryTest.lean",
+  "statement": "theorem isPrimary_of_homogeneous_factors {R : Type u} [CommRing R] [IsNoetherianRing R] (𝒜 : ℕ → AddSubgroup R) [GradedRing 𝒜] {J : Ideal R} (hJ : J.IsHomogeneous 𝒜) (hJ_ne_top : J ≠ ⊤) (homogeneous_primary : ∀ {a b : R}, SetLike.IsHomogeneousElem 𝒜 a → SetLike.IsHomogeneousElem 𝒜 b → a * b ∈ J → a ∉ J → ∃ h : ℕ, 1 ≤ h ∧ b ^ h ∈ J) : J.IsPrimary",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2860b3956",
+  "group": "Q156",
+  "result": "fix",
+  "note": "Lean exact: GradedRing 𝒜 (ℕ→AddSubgroup R) is the graded ring, IsNoetherianRing (dep record) is kept, IsHomogeneous + J≠⊤, the homogeneous-factor test has ∃ h≥1, and the conclusion J.IsPrimary matches the node via isPrimary_iff + properness (n≥1). Universe u is free, there are no extra assumptions, edge cases are OK, the six-step A–K 20.24 proof is correct, there is no duplicate in Mathlib/Sheaf/WeilConjectures, the node changes only in its lean field, lean.statement is verbatim, docstrings are OK, the proof is sorry. Sole fault H11: the Second reading section is dispatcher wording (no real reading). FIX: fixes/lem-sfb-homogeneous-primary-test.report.md = worker report verbatim + a clause-by-clause second reading. No Lean change, so no compile."
+ }
+}

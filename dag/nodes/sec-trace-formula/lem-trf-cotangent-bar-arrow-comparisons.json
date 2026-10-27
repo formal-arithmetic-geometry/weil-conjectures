@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-cotangent-bar-arrow-comparisons",
+ "kind": "statement",
+ "title": "Bar prism comparisons for the two cotangent functoriality arrows",
+ "statement": "Let $A\\to B\\to C$ be homomorphisms of commutative rings. Use the small identity-cover polynomial presentation sites, presheaves $F_1=F_{B/A}$, $F_2=F_{C/A}$, $F_3=F_{C/B}$ and pair-site short exact sequence $0\\to M_1\\xrightarrow a M_2\\xrightarrow b M_3\\to0$ of [lem-trf-cotangent-differential-presheaf-ses]. Put $X_i=K_{\\mathcal E}^C(M_i)$ and let $c_i,\\theta,\\alpha_i$ be the canonical comparisons of [lem-trf-cotangent-bar-term-identifications], with bar maps as in [def-trf-derived-colimit-bar-system]. Define $h_1:\\mathcal C_{B/A}\\to\\mathcal C_{C/A}$ by $(P\\to B)\\mapsto(P\\to C)$, and $t_1:F_1\\otimes_B C\\to h_1^{-1}F_2$ by the identity identification of differential values. Define $h_2:\\mathcal C_{C/A}\\to\\mathcal C_{C/B}$ by $(Q\\to C)\\mapsto(Q\\otimes_A B\\to C)$, and $t_2:F_2\\to h_2^{-1}F_3$ by $\\mathrm dq\\otimes c\\mapsto\\mathrm d(q\\otimes1)\\otimes c$. In the opposite presentation categories, the maps $P\\to Q$ and $Q\\otimes_A B\\to Q\\otimes_P B$ define natural transformations $u_2\\Rightarrow h_1u_1$ and $u_3\\Rightarrow h_2u_2$, respectively. The following identities hold in $D(C)$:\n$$c_2K_{\\mathcal E}(a)=K(h_1,t_1)c_1,\\qquad c_3K_{\\mathcal E}(b)=K(h_2,t_2)c_2.$$\nHere $K(h_i,t_i)$ is the derived map represented by reindexing bar chains and applying $t_i$ to the coefficient. Under $\\theta$ and the scalar-change comparison, $K(h_1,t_1)$ is the scalar-adjoint standard cotangent map for $(A\\to B)\\to(A\\to C)$, with tensor-generator rule $\\mathrm dp\\otimes r\\otimes c\\mapsto\\mathrm dp\\otimes rc$. Under $\\theta$, $K(h_2,t_2)$ is the standard map for $(A\\to C)\\to(B\\to C)$. Equivalently, if $f:L_{B/A}\\otimes_B^{\\mathbf L}C\\to L_{C/A}$ and $g:L_{C/A}\\to L_{C/B}$ are the standard maps of [lem-trf-cotangent-resolution-coherence], then\n$$\\alpha_2K_{\\mathcal E}(a)=f\\alpha_1,\\qquad\\alpha_3K_{\\mathcal E}(b)=g\\alpha_2.$$\nThe identities hold for arbitrary ring maps, without injectivity or flatness assumptions.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QL (section-functoriality), standard and sheaf descriptions of the maps, applied to the two maps in Tag 08QU (lemma-triangle-ses); sites-cohomology Tags 08PG/08PH (example-left-derived-colimits/example-morphism-categories), with the bar natural-transformation comparison."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-differential-presheaf-ses",
+  "lem-trf-cotangent-bar-term-identifications",
+  "def-trf-derived-colimit-bar-system",
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Work on the common small presentation skeletons stipulated in the differential-presheaf lemma; transport all formulas along their chosen presentation isomorphisms. If $P=A[x_s]$ then $h_1(P)$ is still polynomial over $A$; if $Q=A[z_t]$ then $h_2(Q)=B[z_t]$. Both augment to $C$. The coefficient maps $t_1,t_2$ are well-defined by the universal differential relations and tensor balancing. For a pair map $(\\phi,\\psi)$ before opposites, $\\psi\\iota=\\iota'\\phi$ for $\\iota:P\\to Q$. Hence these inclusions reverse to a natural transformation $\\eta_1:u_2\\Rightarrow h_1u_1$. Put $D=Q\\otimes_P B$. The map $\\mu:Q\\otimes_A B\\to D$, $q\\otimes b\\mapsto q\\otimes b$, commutes with augmentations; for a pair map both composites send $q\\otimes b$ to $\\psi(q)\\otimes b$. It reverses to $\\eta_2:u_3\\Rightarrow h_2u_2$. Naturality of $t_1,t_2$ follows since either route sends a differential generator to the differential of its image, with the same scalar. The universal construction of differentials states that these generators span.",
+   "uses": [
+    "lem-trf-cotangent-differential-presheaf-ses",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), presentation-category description; Tag 08QU (lemma-triangle-ses), generator maps on the pair site."
+   }
+  },
+  {
+   "text": "Apply the bar theorem's natural-transformation clause over $C$ with $v=u_2$, $w=h_1u_1$, $G=F_2$, $F=M_1$ and $t=u_1^{-1}t_1$. The coefficient map $F_2(\\eta_1)t$ sends $(\\mathrm dp\\otimes r)\\otimes c$ to $\\mathrm d\\iota(p)\\otimes rc$, exactly $a_U$ in the differential-presheaf lemma. Thus its two homotopic maps are $K(u_2,1)K_{\\mathcal E}(a)$ and $K(h_1,t_1)K(u_1,1)$. Composition of bar maps is the generatorwise composition asserted by that theorem. The term-identification lemma identifies the two reindexing maps with $c_2$ and $c_1$ (for $c_1$, use $F_1\\otimes_B C$). Equality of the localized homotopic maps gives $c_2K_{\\mathcal E}(a)=K(h_1,t_1)c_1$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-differential-presheaf-ses",
+    "lem-trf-cotangent-bar-term-identifications"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); natural-transformation prism expansion in the cited bar theorem."
+   }
+  },
+  {
+   "text": "For the second prism use $v=u_3$, $w=h_2u_2$, $G=F_3$, $F=M_2$ and $t=u_2^{-1}t_2$. The restriction $F_3(\\eta_2)$ is induced by $\\mu:Q\\otimes_A B\\to D$ and sends $\\mathrm d(q\\otimes1)\\otimes c$ to $\\mathrm d(q\\otimes1)\\otimes c$ in $\\Omega_{D/B}\\otimes_D C$. Under the differential-presheaf lemma's third identification this is $\\mathrm d_{Q/P}q\\otimes c$, exactly $b_U(\\mathrm d_{Q/A}q\\otimes c)$. Consequently $F_3(\\eta_2)t=b$ on the generating differentials and hence everywhere. The bar theorem gives equality of $K(u_3,1)K_{\\mathcal E}(b)$ and $K(h_2,t_2)K(u_2,1)$ in $D(C)$. Substitution of the stated $c_3,c_2$ yields $c_3K_{\\mathcal E}(b)=K(h_2,t_2)c_2$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-differential-presheaf-ses",
+    "lem-trf-cotangent-bar-term-identifications"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); natural-transformation prism expansion in the cited bar theorem."
+   }
+  },
+  {
+   "text": "Apply the sheaf-model functoriality identity to the square $(A\\to C)\\to(B\\to C)$ with vertical maps $A\\to B$ and $1_C$. Its indexing functor and coefficient map are exactly $h_2,t_2$, so $\\theta_{C/B}K(h_2,t_2)=g\\theta_{C/A}$. For the square $(A\\to B)\\to(A\\to C)$ with base map $1_A$, its indexing functor sends $P$ to $P\\otimes_A A$, canonically isomorphic to $h_1(P)=P$ by $p\\otimes a\\mapsto ap$. These isomorphisms commute with every presentation map and send $\\mathrm d(p\\otimes1)$ to $\\mathrm dp$. The bar theorem's natural-isomorphism clause therefore identifies this square's semilinear bar map with $\\gamma=K(h_1,t_0)$, where $t_0(\\mathrm dp\\otimes r)=\\mathrm dp\\otimes\\beta(r)$ and $\\beta:B\\to C$. Writing $\\gamma^{\\rm std}:L_{B/A}\\to\\operatorname{Res}_{\\beta}L_{C/A}$ for the standard map, the sheaf-model identity says $\\theta_{C/A}\\gamma=\\gamma^{\\rm std}\\theta_{B/A}$ in $D(B)$, with target scalars restricted. The coherence lemma fixes these standard maps for both squares.",
+   "uses": [
+    "lem-trf-cotangent-sheaf-model",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), presentation-category description; Tag 08QU (lemma-triangle-ses), generator maps on the pair site."
+   }
+  },
+  {
+   "text": "Put $Y=K_{\\mathcal C_{B/A}}^B(F_1)$ and $Z=K_{\\mathcal C_{B/A}}^C(F_1\\otimes_B C)$, and write $\\Phi:Z\\simeq Y\\otimes_B^{\\mathbf L}C$ for the scalar-change comparison. The term-identification lemma gives flatness of every $F_1(P)$; the objectwise-flat bar lemma then gives K-flatness with flat terms of both $F_1[0]$ and $Y$. Thus the bar scalar-unit-transpose lemma applies: if $j:Y\\to\\operatorname{Res}_{\\beta}Z$ sends $(\\sigma,x)$ to $(\\sigma,x\\otimes1)$, its adjunct is $\\Phi^{-1}$. This is the same $\\Phi$ as the change-of-rings lemma, with its displayed generator formula. Set $T=K(h_1,t_1)$. On generators $Tj=\\gamma$ from step 4. Naturality of the normalized adjunction in its target implies that the adjunct of $\\gamma$ is $T\\Phi^{-1}$. Transposing the equality of step 4, and using naturality in its source as well, gives\n$$\\theta_{C/A}T\\Phi^{-1}=f(\\theta_{B/A}\\otimes^{\\mathbf L}1),$$\nwhere $f$ is the scalar adjunct of $\\gamma^{\\rm std}$. Equivalently $\\theta_{C/A}T=f(\\theta_{B/A}\\otimes^{\\mathbf L}1)\\Phi$. In these tensor representatives the coefficient rule is $(\\mathrm dp\\otimes r)\\otimes c\\mapsto\\mathrm dp\\otimes\\beta(r)c$, by the definition of $t_1$. This proves the asserted scalar-adjoint identification without assuming $\\beta$ flat.",
+   "uses": [
+    "lem-trf-cotangent-bar-term-identifications",
+    "lem-trf-objectwise-flat-bar-kflat",
+    "lem-trf-bar-scalar-unit-transpose",
+    "lem-trf-derived-colimit-change-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08Q8 (lemma-change-of-rings), 07A6 (lemma-adjoint), with the normalized bar scalar-unit transpose of the cited nodes; cotangent Tag 08QL, scalar adjunct of the first arrow."
+   }
+  },
+  {
+   "text": "Finally substitute the term-identification lemma's formulas $\\alpha_1=(\\theta_{B/A}\\otimes^{\\mathbf L}1)\\Phi c_1$, $\\alpha_2=\\theta_{C/A}c_2$ and $\\alpha_3=\\theta_{C/B}c_3$ into steps 2--5. Associativity gives $\\alpha_2K_{\\mathcal E}(a)=f\\alpha_1$ and $\\alpha_3K_{\\mathcal E}(b)=g\\alpha_2$. The prism applications used only smallness and naturality; the scalar comparison used flat values of $F_1$, already supplied independently of $B\\to C$. Thus every identity holds for arbitrary ring maps.",
+   "uses": [
+    "lem-trf-cotangent-bar-term-identifications"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), presentation-category description; Tag 08QU (lemma-triangle-ses), generator maps on the pair site."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cotangent-differential-presheaf-ses",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-cotangent-bar-term-identifications",
+  "lem-trf-cotangent-sheaf-model",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-objectwise-flat-bar-kflat",
+  "lem-trf-bar-scalar-unit-transpose",
+  "lem-trf-derived-colimit-change-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QL and 08QU; explicit pair-site prism assembly using sites-cohomology Tags 08PG/08PH and the already stated scalar-adjunction lemmas. The verification omitted at the end of 08QL is supplied by lem-trf-cotangent-sheaf-model, not assumed anew."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The two maps of the differential presheaf exact sequence on polynomial presentations identify with standard cotangent complex functoriality maps by bar prism homotopy",
+   "results": "8 hits; top=['Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Generators.H1Cotangent.δ', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.H1Cotangent.δ', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex']; note=; digest=6489842ec08311ae. Full output retained in lem-trf-cotangent-bar-arrow-comparisons.search-0.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: the returned CotangentSpace and H1Cotangent maps concern single presentation complexes; ordinary colim_map and presentation homotopies (Extension/Cotangent/Basic.lean:250-265) do not identify the pair-site derived maps with both standard cotangent arrows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"map\"",
+   "results": "12 hits; top=['Ideal.mapCotangent', 'Ideal.map_toCotangent_ker', 'IsLocalRing.CotangentSpace.map_eq_top_iff', 'Ideal.mapCotangent_surjective_of_comap_eq', 'Ideal.mapCotangent_toCotangent', 'Ideal.mapCotangent_ker_of_surjective', 'Ideal.comap_cotangentIdeal', 'KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange']; note=; digest=e2413b73e1105953. Full output retained in lem-trf-cotangent-bar-arrow-comparisons.search-1.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: the returned CotangentSpace and H1Cotangent maps concern single presentation complexes; ordinary colim_map and presentation homotopies (Extension/Cotangent/Basic.lean:250-265) do not identify the pair-site derived maps with both standard cotangent arrows."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(functorial|triangle|homotop)|KaehlerDifferential.*map_comp [sub=RingTheory]",
+   "results": "3 hits; top=['Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean']; note=; digest=2856d4c6a3c8c8a9. Full output retained in lem-trf-cotangent-bar-arrow-comparisons.search-2.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: the returned CotangentSpace and H1Cotangent maps concern single presentation complexes; ordinary colim_map and presentation homotopies (Extension/Cotangent/Basic.lean:250-265) do not identify the pair-site derived maps with both standard cotangent arrows."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functoriality arrows of the transitivity triangle for cotangent complexes agree with polynomial presentation derived colimit maps",
+   "results": "8 hits; top=['CategoryTheory.Limits.colim_map', 'CategoryTheory.ShortComplex.colimitCocone', 'CategoryTheory.Limits.colimit.toCostructuredArrow', 'CategoryTheory.Limits.colimMap_eq', 'CategoryTheory.Limits.ColimitPresentation.map', 'CategoryTheory.Limits.ColimitPresentation.map_diag', 'CategoryTheory.Limits.ColimitPresentation.w', 'CategoryTheory.Limits.ColimitPresentation.map_ι']; note=; digest=f3e90e69647bdfe8. Full output retained in lem-trf-cotangent-bar-arrow-comparisons.search-3.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: the returned CotangentSpace and H1Cotangent maps concern single presentation complexes; ordinary colim_map and presentation homotopies (Extension/Cotangent/Basic.lean:250-265) do not identify the pair-site derived maps with both standard cotangent arrows."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation of polynomial presentation index functors identifies derived colimit maps on differentials with canonical ring square cotangent maps",
+   "results": "8 hits; top=['Algebra.Presentation.differentials.comm₁₂', 'Algebra.PreSubmersivePresentation.cotangentComplexAux_apply', 'Algebra.Generators.H1Cotangent.δAux_toAlgHom', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Presentation.differentials.comm₂₃', 'Algebra.Generators.repr_CotangentSpaceMap', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex']; note=; digest=c4ebb7f63334ad87. Full output retained in lem-trf-cotangent-bar-arrow-comparisons.search-4.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: the returned CotangentSpace and H1Cotangent maps concern single presentation complexes; ordinary colim_map and presentation homotopies (Extension/Cotangent/Basic.lean:250-265) do not identify the pair-site derived maps with both standard cotangent arrows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"map\"",
+   "results": "12 hits; top=['Ideal.mapCotangent', 'Ideal.map_toCotangent_ker', 'IsLocalRing.CotangentSpace.map_eq_top_iff', 'Ideal.mapCotangent_surjective_of_comap_eq', 'Ideal.mapCotangent_toCotangent', 'Ideal.mapCotangent_ker_of_surjective', 'Ideal.comap_cotangentIdeal', 'KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange']; digest=e2413b73e1105953. Read returned declarations and local candidate source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maps of the pair presentation differential sequence agree with cotangent complex functoriality via natural transformations and derived colimit bar maps",
+   "results": "8 hits; top=['Algebra.Presentation.differentials.comm₁₂', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.H1Cotangent.map', 'Algebra.Generators.H1Cotangent.δ_eq_δ', 'Algebra.Extension.CotangentSpace.map_cotangentComplex']; digest=4c1bca89d134df9c. Read returned declarations and local candidate source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(functorial|triangle|homotop)|KaehlerDifferential.*map_comp [sub=RingTheory]",
+   "results": "3 hits; top=['Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean']; digest=ace7111b5eaf99df. Read returned declarations and local candidate source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical functoriality maps on cotangent complexes computed using a bar construction on polynomial algebra presentations",
+   "results": "8 hits; top=['Algebra.Extension.H1Cotangent.map_comp', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Ideal.mapCotangent', 'Algebra.Extension.Cotangent.map_sub_map', 'Algebra.Extension.CotangentSpace.map_tmul', 'Ideal.mapCotangent_toCotangent', 'Algebra.Extension.cotangentComplex']; digest=1c7f915608cc5c02. Read returned declarations and local candidate source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between index functors give chain homotopic maps of category bar complexes with differential module coefficients",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.natTransHσ', 'Homotopy.mkInductiveAux₂', 'Homotopy.mkInductive', 'AlgebraicTopology.DoldKan.homotopyPInftyToId_hom', 'Homotopy.mkInductiveAux₃', 'Homotopy.mkInductiveAux₁', 'AlgebraicTopology.DoldKan.homotopyPInftyToId', 'Homotopy.nullHomotopicMap']; digest=f06917431e44a305. Read returned declarations and local candidate source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "natTransHσ|homotopyPInftyToId|mkInductiveAux₂|nullHomotopicMap",
+   "results": "25 hits; top=['Mathlib/AlgebraicTopology/DoldKan/Faces.lean', 'Mathlib/AlgebraicTopology/DoldKan/Faces.lean', 'Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean', 'Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean', 'Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean', 'Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean', 'Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean', 'Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean']; digest=267b285bc7f52d88. Read returned declarations and local candidate source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-transitivity-triangle",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Re-split component: old steps 5--6: both index-functor prism comparisons and their agreement with the prescribed arrows.",
+   "via": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-bar-arrow-comparisons",
+  "worker": "stage1",
+  "summary": "Q128: six-step proof from existing DAG statements, no new nodes. Checked opposite-category variance, both coefficient endpoint equalities, both ring squares, and the normalized scalar adjunct; retained the statement and existing provenance. Logged fresh Mathlib searches find no match.",
+  "blueprint": "Supporting ring input along blueprint.from: cotangent transitivity, former steps 5--6 of lem-trf-cotangent-transitivity-triangle. Steps 1--3 carry the pair-site index comparisons and steps 4--6 identify the standard arrows. The unit and chapter route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-f95119f30",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-f95119f30 (reviewer sub-agent of L); spot-checked: I read every step of the item and every cited statement in full, including lower-shriek for c_i = K(u_i,1). The split has 6 steps, no new nodes, an unchanged statement, and proof_deps equal to the union of the step uses; there is no cycle and no SGA source. I checked the two cases of the prism clause of lem-trf-derived-colimit-bar. Case 1, eta_1 from P->Q: G(eta)t equals a_U. Case 2, eta_2 from mu: Q(x)_A B -> Q(x)_P B: G(eta)t equals b_U through the third identification of the ses node. Together with composition these give c_2K(a)=K(h_1,t_1)c_1 and c_3K(b)=K(h_2,t_2)c_2. Step 4 uses lem-trf-cotangent-sheaf-model, which supplies the agreement that Stacks 08QL (cotangent.tex l.867-960) omits. For the square (A->C)->(B->C) its u,t are exactly h_2,t_2. For the square (A->B)->(A->C) it gives gamma=K(h_1,t_0), using the natural-isomorphism clause for P(x)_A A = P. Step 5: F_1 has free values, so the objectwise-flat lemma gives K-flatness and lem-trf-bar-scalar-unit-transpose applies; there adj(j)=Phi^{-1}, with the same Phi as in change-rings. Since Res(T)j=gamma, transposing step 4 gives theta T = f(theta(x)1)Phi without flatness of B->C. Step 6 is associativity with the alpha_i of term-identifications. Small cases checked: Z[x]->Z, Z->Z/2, A=B=C, C=0. The sibling bar-diagram-compatibility concerns morphisms of triples, so it is not a duplicate. Nothing to repair."
+ }
+}

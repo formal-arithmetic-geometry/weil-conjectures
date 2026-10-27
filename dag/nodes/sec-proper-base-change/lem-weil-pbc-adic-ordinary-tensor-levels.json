@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-adic-ordinary-tensor-levels",
+ "kind": "statement",
+ "title": "Explicit algebraic quotient level maps and their K-flat invertibility",
+ "statement": "Let A be a commutative ring, I an ideal, and P a cochain complex of A-modules [def-weil-abstract-derived-category]. For any chosen left adjoints L_n to the exact derived restrictions along A→A/I^(n+1) [lem-weil-pbc-finite-perfect-adic-quotient-diagram], define T(P)_n=P tensor_A A/I^(n+1), with quotient-homomorphism transitions. Define c_n:Res_n(L_n(Q(P)))→Q(T(P)_n) by restricting the adjoint transpose of the localized ordinary scalar-insertion unit, followed by the exact restriction factorization and tensor symmetry. This is a concrete map for every P, carrying the derived unit to localized ordinary insertion. If P is K-flat in the two-sided total-tensor sense [def-sfb-preserves-kflat-quasi-iso], c_n is invertible. Record its canonical isomorphism with this very underlying map. No boundedness or sheaf hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09AW, canonical adic quotient transitions; Tag 06Y6, scalar extension on K-flat representatives. Extracted from parent proof steps 2 and 3."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-finite-perfect-adic-quotient-diagram",
+  "def-sfb-preserves-kflat-quasi-iso"
+ ],
+ "proof": [
+  {
+   "text": "The free module on the underlying set gives a functorial flat resolution in the same module universe: the counit sends the basis vector at x to x. Module categories have exact integer-indexed colimits. Scalar extension preserves K-flat quasi-isomorphisms by the stated source theorem. Apply the exact-right-adjoint K-flat representative criterion to extension and exact restriction along the nth quotient map, and to the supplied derived adjunction. Its transpose of the localized ordinary unit is invertible.",
+   "uses": [
+    "lem-pc-extension-kflat-quasi-iso",
+    "lem-sfb-exact-right-adjoint-kflat-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the scalar-extension tensor back to A. The identity additive equivalence is A-linear by tensor induction. Compose with tensor symmetry to identify the restricted extension with tensor on the right by the quotient module. Apply this natural comparison degreewise, then the exact scalar restriction factorization through localization. The resulting level map is defined on every complex, and is invertible on K-flat complexes. Applying the adjunction Hom bijection to its defining transpose cancels the exact factorization and yields precisely the localized scalar-insertion unit equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-extension-kflat-quasi-iso",
+  "lem-sfb-exact-right-adjoint-kflat-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09AW, canonical adic quotient transitions; Tag 06Y6, scalar extension on K-flat representatives. Extracted from parent proof steps 2 and 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The transpose of localized ordinary scalar extension unit is an isomorphism on K-flat complexes and is natural in coefficient quotient maps",
+   "results": "8 hits, including Module.Dual.transpose, localization-module scalar equivalences and Functor.mapHomologicalComplexUpToQuasiIsoFactors; no normalized quotient comparison.",
+   "verdict": "Use the project exact-right-adjoint K-flat criterion, not a new K-flat existence assertion.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat tensor complex represents derived quotient scalar extension compatibly with quotient transition maps",
+   "results": "8 hits about Module.Flat tensor exactness; none about derived quotient transitions.",
+   "verdict": "No Mathlib statement for these normalized derived quotient maps.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModuleCat.extendScalars\", \"DerivedCategory\"",
+   "results": "0 hits.",
+   "verdict": "No direct comparison.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*[Tt]ranspose|[Tt]ensor.*[Qq]uotient.*[Dd]iagram",
+   "results": "0 Mathlib hits. Read ModuleCat.ChangeOfRings, Homology.Additive and Functor.OfSequence.",
+   "verdict": "These supply the ordinary functors and sequential assembly, not the derived unit normalization.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicFlatTensorComparison",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof of Tag 09C6, the displayed completed quotient complex before the inverse-limit argument: Explicit algebraic quotient level maps and their K-flat invertibility.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-flat-tensor-comparison",
+    "lem-weil-pbc-finite-perfect-adic-canonical-comparison",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicOrdinaryTensorDiagram",
+  "file": "lean/Sheaf/Paper/AdicOrdinaryTensorDiagram.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicOrdinaryTensorLevelComparison",
+  "statement": "def adicOrdinaryTensorLevelComparison\n    {A : Type t} [CommRing A] (I : Ideal A)\n    (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤\n      DerivedCategory (ModuleCat.{t} (A ⧸ I ^ (n + 1))))\n    (adj : ∀ n : ℕ, L n ⊣ DerivedCategory.adicLevelRestriction I n)\n    (P : CochainComplex (ModuleCat.{t} A) ℤ) (hP : P.IsKFlatForTotalTensor) (n : ℕ) :\n    (DerivedCategory.adicLevelRestriction I n).obj ((L n).obj (DerivedCategory.Q.obj P)) ≅\n      DerivedCategory.Q.obj ((adicOrdinaryTensorComplexDiagram I P).obj (op n))",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicOrdinaryCoefficientDiagram",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorFunctor",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorFunctor_additive",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorComplexDiagram",
+   "AlgebraicGeometry.Scheme.adicOrdinaryExtend_additive",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTranspose_isIso",
+   "AlgebraicGeometry.Scheme.adicOrdinaryRestrictedTensorIso",
+   "AlgebraicGeometry.Scheme.adicOrdinaryQuotientComplexIso",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorLevelMap",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorLevelMap_isIso",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorLevelComparison",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorLevelMap_unit"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T064434-L-2176103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T064434-L-2176103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-ample-curve-two-section-pencil",
+ "kind": "statement",
+ "title": "Orbit-separated two-section pencils from an ample power",
+ "statement": "Let $F$ be any field [def-weil-field], including a finite field. Let $Y$ be a nonempty projective finite-type $F$-scheme of topological Krull dimension at most one [def-kun-projective, def-weil-finite-type-morphism, def-kun-topological-krull-dimension], and let $L$ be an ample invertible $\\mathcal O_Y$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Let $G$ be a finite group acting on $Y$ by $F$-automorphisms; faithfulness is not required. Using module pullback and sheaf tensor product [def-pc-module-pullback, def-pur-sheaf-tensor-product], put $B=\\bigotimes_{g\\in G}g^*L$. For $d\\geq1$ and $a\\in\\Gamma(Y,L^{\\otimes d})$, put $\\mathcal N_G(a)=\\bigotimes_{g\\in G}g^*a\\in\\Gamma(Y,B^{\\otimes d})$, using the canonical permutation of tensor factors. There exist $d\\geq1$ and $a,b\\in\\Gamma(Y,L^{\\otimes d})$ such that the two closed subsets $\\bigcup_{g\\in G}g^{-1}Z(a)$ and $\\bigcup_{g\\in G}g^{-1}Z(b)$ are disjoint; here $Z(a)$ is the locus where the residue-field value of $a$ is zero. The sections $a,b$ generate $L^{\\otimes d}$, and $\\mathcal N_G(a),\\mathcal N_G(b)$ generate $B^{\\otimes d}$ [def-weil-pbc-generating-sections]. Both morphisms $[a:b]$ and $[\\mathcal N_G(a):\\mathcal N_G(b)]:Y\\to\\mathbf P^1_F$ given by those sections are finite [def-weil-pbc-morphism-to-projective-space-by-sections, def-weil-finite-integral-morphism]; the latter is $G$-invariant. No smoothness, reducedness, irreducibility, or infinitude of $F$ is assumed.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "§3.4(b), printed p.606, the special-fibre finite-pencil input, strengthened to disjoint orbit zero loci for products of translates. Supporting local source: Stacks coherent.tex, Tag 02O1, lemma-kill-by-twisting, for high-power restriction to a finite zero locus. Agent formulation replacing the quotient-dependent input of de Jong §3.4. Local PDF WANTED; publisher PDF read at https://www.numdam.org/item/10.5802/aif.1575.pdf."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The field $F$ is Noetherian since its only ideals are $(0)$ and $(1)$; $\\operatorname{Spec}F$ is a one-point Noetherian affine scheme. Thus $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-sfb-ample-orbit-affine-pair] to obtain $p,q>0$, sections $u,v$, affine opens $U=Y_u,V=Y_v$, and the finite $G$-stable set $T=\\bigcup_g g^{-1}Z(u)\\subseteq V$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-ample-orbit-affine-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 09NV (lemma-ample-finite-set-in-principal-affine); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian); preparation packaged in the first new node."
+   }
+  },
+  {
+   "text": "Set $d=pq>0$, $a=u^{\\otimes q}$ and $b=v^{\\otimes p}$. The tensor identifications of [lem-weil-pbc-invertible-pullback-tensor] put both in $L^{\\otimes d}$. In a one-dimensional residue fibre, a positive tensor power vanishes exactly when its scalar coefficient vanishes. Hence $Y_a=U$, $Y_b=V$, and $\\bigcup_g g^{-1}Z(a)=T$. If $y\\in T$ then $hy\\in T\\subseteq V$ for every $h$, so $b(hy)\\ne0$. Thus the two orbit zero unions are disjoint, and the identity element gives $Z(a)\\cap Z(b)=\\varnothing$. By [lem-weil-pbc-invertible-generating-sections-fibre], $a,b$ generate $L^{\\otimes d}$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-invertible-generating-sections-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CA (tensor associativity), 01CB (lemma-stalk-tensor-product), 01CY (lemma-s-open); original steps 5-6."
+   }
+  },
+  {
+   "text": "$Y$ is proper over $F$ by [lem-kun-projective-implies-proper]. The tensor closure in [lem-weil-pbc-invertible-pullback-tensor] makes $M=L^{\\otimes d}$ invertible. Apply [lem-sfb-proper-orbit-pair-finite-norm] to $M$ and the affine, orbit-separated pair from step 2. Put $C=\\bigotimes_g g^*M$. The criterion gives invertibility of $C$, generation by its norm pair, and finite ordinary and invariant norm coordinate maps. The section-compatible pullback-tensor isomorphisms of [lem-weil-pbc-invertible-pullback-tensor], followed by associating and permuting the finitely many tensor factors, give $\\beta:C\\cong B^{\\otimes d}$. They send $\\bigotimes_g g^*a$ to $\\mathcal N_G(a)$ and $\\bigotimes_g g^*b$ to $\\mathcal N_G(b)$ under the definition of those sections. Thus $B^{\\otimes d}$ is invertible and its norm pair generates. Equivalence of generating pairs in [lem-weil-pbc-projective-space-functor-of-points] identifies the two norm coordinate morphisms over $\\mathbf Z$; together with their identical structure map to $\\operatorname{Spec}F$, this identifies them over $F$. Finiteness and scheme-level $G$-invariance therefore hold for the stated norm map; the ordinary map is the supplied $[a:b]$.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-sfb-proper-orbit-pair-finite-norm",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-projective-space-functor-of-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE (lemma-projective-space); modules.tex Tag 01CD (lemma-tensor-product-pullback), tensor associativity/symmetry; original steps 7-10 packaged in the second new node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-ample-orbit-affine-pair",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-proper-orbit-pair-finite-norm",
+  "lem-weil-pbc-projective-space-functor-of-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Agent-written orbit-separation and norm argument using Tag 09NV (lemma-ample-finite-set-in-principal-affine), followed by Tags 01NE, 01KP, 01S8, 01W6 and 01WN. This supplies the special-fibre pencil input of de Jong §3.4(b); no quotient or infinite-field argument is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a projective scheme of dimension at most one over any field a positive power of an ample line bundle is generated by two global sections and defines a finite map to the projective line",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m →\\n    0 < m →\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec \", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous map from the projective spectrum $ \\\\operatorname{Proj}(A) $ to the prime spectrum $ \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAmple\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "two.*sections|sections.*[Pp]rojective[Ll]ine|pencil|finite.*[Pp]rojective[Ss]pace",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Extension.lean\", \"line\": \"31\", \"text\": \"* `LieAlgebra.Extension.oneCochainOfTwoSplitting`: A 1-cochain attached to a pair of linear sections\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"line\": \"82\", \"text\": \"/-- Two isomorphic sheaves of modules have equivalent families of generating sections. -/\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/LocalPredicate.lean\", \"line\": \"325\", \"text\": \"/-- The `stalkToFiber` map is injective at `x` if any two allowed sections which agree at `x`\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean\", \"line\": \"36\", \"text\": \"This section is split into two sections. The first one, `ExactSequence` defines the left exact\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Stalks.lean\", \"line\": \"454\", \"text\": \"/-- If two sections have the same germ at `x`,\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Stalks.lean\", \"line\": \"518\", \"text\": \"preserves limits and filtered colimits. Then two sections who agree on every stalk must be equal.\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Defs.lean\", \"line\": \"47\", \"text\": \"We also define two useful notions for set-valued functions: `HasOpenLowerSections` (which says that\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean\", \"line\": \"86\", \"text\": \"  -- and cut off the two sections `σ` and `σ'` using this indicator function.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"line\": \"52\", \"text\": \"* `IsLocalFrameOn.eq_iff_coeff hs`: two sections `t` and `t'` are equal at `x` if and only if their\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"line\": \"237\", \"text\": \"/-- Two sections `s` and `t` are equal at `x` if and only if their coefficients w.r.t. some local\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"line\": \"16\", \"text\": \"It consists of an object `I`, a weak equivalence `π : I ⟶ A` equipped with two sections\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"line\": \"50\", \"text\": \"`π : I ⟶ A` equipped with two sections. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"line\": \"134\", \"text\": \"data of a weak equivalence `π : I ⟶ A` equipped with two sections -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/LocallyInjective.lean\", \"line\": \"69\", \"text\": \"whenever two sections of `F₁` are sent to the same section of `F₂`, then these two\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"line\": \"227\", \"text\": \"/-- If two global sections agree after restriction to each member of an open cover, then\"}\n  {\"file\": \"Mathlib/Order/Filter/CountableSeparatingOn.lean\", \"line\": \"62\", \"text\": \"Two functions are equal along a filter with countable intersections property if the preimages of all\"}\n  {\"file\": \"Mathlib/Order/Filter/CountableSeparatingOn.lean\", \"line\": \"234\", \"text\": \"In this section we show that two functions are equal along a filter with countable intersections\"}\n  {\"file\": \"Mathlib/Data/Set/Constructions.lean\", \"line\": \"36\", \"text\": \"  /-- `inter_mem` states that any two intersections of sets in `S` is also in `S`. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf on a projective curve has a tensor power generated by two sections over a finite field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.GeneratingSections.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given an index set $I$ and a family of sections $s_i$ of the sheaf of modules $M$ over a ringed space, if the canonical homomorphism from the free sheaf generated by $I$ to $M$, induced by the section\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pow_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(n : ℕ) : (s ^ n).1 x = s.1 x ^ n\", \"doc\": \"For any natural number $ n $ and section $ s $ of the structure sheaf on the projective spectrum, the equality $ (s^n)(x) = (s(x))^n $ holds for all points $ x $, where $ s^n $ denotes the $ n $-th po\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.s\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, this function assigns to each index in the index set $I$ a \"}\n  {\"name\": \"Module.Invertible.instFinite\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Module.Finite R M\", \"doc\": \"An invertible module over a commutative semiring is finitely generated.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.ext\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(h : s.1 = t.1) : s = t\", \"doc\": \"If two sections of the structure sheaf on the projective spectrum have equal first components, then the sections themselves are equal.\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"{U : Opens (ProjectiveSpectrum.top 𝒜)} (f : ∀ x : U, at x.1) : Prop\", \"doc\": \"A function $ f $ defined on an open set $ U $ of the projective spectrum is a section of the structure sheaf if there exists a degree $ i $, homogeneous elements $ r, s $ of degree $ i $ in the graded\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"A predicate asserting that, given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, the generating sections of $M$ \"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat}\\n  {inst_2 : J.WEqualsLocallyBijective AddCommGrpCat}\\n  {inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$ with finitely generated sections $\\\\sigma$, the index set $\\\\s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|isAmple|IsVeryAmple",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group acting on a projective curve over any field, an ample line bundle has a power with two sections whose products of group translates have no common zero and define a finite invariant pencil",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"∀ {K : Type u_3} [inst : Field K],\\n  Configuration.Nondegenerate (Projectivization K (Fin 3 → K)) (Projectivization K (Fin 3 → K))\", \"doc\": \"The projective plane over a field $ K $, constructed as the set of lines in $ K^3 $, forms a non-degenerate configuration of points and lines. This means the configuration avoids trivial arrangements \"}\n  {\"name\": \"WeierstrassCurve.Projective.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The quotient of the type of triples $(x_0, x_1, x_2)$ in $R^3$ by the equivalence relation identifying triples that are scalar multiples of each other under the action of the multiplicative group of u\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (y : Polynomial R),\\n  WeierstrassCurve.Affine.CoordinateRing.YClass W' y ≠ 0\", \"doc\": \"For a non-trivial base ring $ R $, the element $ Y - y $ in the coordinate ring of an affine Weierstrass curve (defined as the quotient ring $ R[X,Y] $ modulo the Weierstrass polynomial ideal) is not \"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.mk_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} [inst_1 : Nontrivial R] {X Y : R}\\n  (h : W'.NonsingularLift ⟦![X, Y, 1]⟧), { point := ⟦![X, Y, 1]⟧, nonsingular := h } ≠ 0\", \"doc\": \"For a non-trivial commutative ring $ R $, if $[X:Y:1]$ is a nonsingular point on the projective Weierstrass curve, then the point constructed via the $\\\\text{mk}$ constructor is not equal to the zero e\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (x : R),\\n  WeierstrassCurve.Affine.CoordinateRing.XClass W' x ≠ 0\", \"doc\": \"For any element $x$ in a non-trivial ring $R$, the equivalence class of $X - x$ in the coordinate ring of an affine Weierstrass curve $W'$ over $R$ is non-zero. This follows from the construction of t\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAmple\", \"MulAction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bnorm\\b.*section|orbit.*pencil|invariant.*pencil",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Analysis/Matrix/Normed.lean\", \"line\": \"428\", \"text\": \"For a matrix over a field, the norm defined in this section agrees with the operator norm on\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a possibly reducible projective curve over a finite field choose two ample sections with disjoint finite group orbit zero loci",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : Set X\", \"doc\": \"For an open subset $U$ of a scheme $X$ and a set $s$ of sections of the structure sheaf over $U$, this function returns the set of points in $X$ where all sections in $s$ vanish. It is defined by appl\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : Set X\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ and a set $ s $ of sections over $ U $, the zero locus $ \\\\text{ZeroLocus}(U, s) $ is the set of all points $ x \\\\in U $ such that the germ of every \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : X.zeroLocus s = ⋂ f ∈ s, (X.basicOpen f).carrierᶜ\", \"doc\": \"For a scheme $X$, an open subset $U$ of $X$, and a set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ is defined as the intersection of the complements of the basic open sets a\"}\n  {\"name\": \"ProjectiveSpectrum.zeroLocus_singleton_mul\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(f g : A) : zeroLocus 𝒜 ({f * g} : Set A) = zeroLocus 𝒜 { f } ∪ zeroLocus 𝒜 { g }\", \"doc\": \"For any elements $ f, g $ in a graded ring $ A $, the zero locus of the singleton set $ \\\\{f g\\\\} $ in the projective spectrum $ \\\\text{Proj}(A) $ is equal to the union of the zero loci of $ \\\\{f\\\\} $ and \"}\n  {\"name\": \"ProjectiveSpectrum.zeroLocus_union\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(s s' : Set A) : zeroLocus 𝒜 (s ∪ s') = zeroLocus _ s ∩ zeroLocus _ s'\", \"doc\": \"For any subsets $ s $ and $ s' $ of a graded ring $ A $, the zero locus of $ s \\\\cup s' $ in the projective spectrum $ \\\\text{Proj}(A) $ is equal to the intersection of the zero loci of $ s $ and $ s' $\"}\n  {\"name\": \"ProjectiveSpectrum.zeroLocus_sup_homogeneousIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(I J : HomogeneousIdeal 𝒜) : zeroLocus 𝒜 ((I ⊔ J : HomogeneousIdeal 𝒜) : Set A) = zeroLocus _ I ∩ zeroLocus _ J\", \"doc\": \"For any homogeneous ideals $I$ and $J$ in a graded ring $\\\\mathcal{A}$, the zero locus of the sum $I + J$ in the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ is equal to the intersection of the zero \"}\n  {\"name\": \"AlgebraicGeometry.Proj.zero_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": (0 : (Proj.structureSheaf 𝒜).1.obj V).1 x = 0\", \"doc\": \"For the structure sheaf $\\\\mathcal{O}$ on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, the zero element $0 \\\\in \\\\mathcal{O}(V)$ satisfies $0(x) = 0$ for all points \"}\n  {\"name\": \"ProjectiveSpectrum.zeroLocus_sup_ideal\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(I J : Ideal A) : zeroLocus 𝒜 ((I ⊔ J : Ideal A) : Set A) = zeroLocus _ I ∩ zeroLocus _ J\", \"doc\": \"For any two ideals $I$ and $J$ in a graded ring $A$, the zero locus of their sum $I + J$ in the projective spectrum $\\\\operatorname{Proj}(A)$ is equal to the intersection of the zero loci of $I$ and $J\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf on a projective scheme of dimension at most one has two sections in a common power with disjoint group saturated zero sets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {U : TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜)} →\\n                ((x : ↥U) → Ho\", \"doc\": \"A function $ f $ defined on an open set $ U $ of the projective spectrum is a section of the structure sheaf if there exists a degree $ i $, homogeneous elements $ r, s $ of degree $ i $ in the graded\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.sectionInBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (x : ↑(ProjectiveSpectrum.top 𝒜)) →\\n                (f : HomogeneousLocalization.NumDenSa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a point $x$ in its projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$, this defines a section over the basic open set $D_+(f.\\\\text{den})$ (where $f$ is a homogeneous lo\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (q :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"The homogeneous ideal of elements with zero zeroth component (the irrelevant ideal) is not contained within the homogeneous ideal defined by the condition that all homogeneous fractions $\\\\frac{(\\\\text{\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "grep",
+   "query": "pencil|two.*sections|orbit.*zero",
+   "results": "Read 1 returned hits: Mathlib/AlgebraicGeometry/Cover/Open.lean. Searched Mathlib/AlgebraicGeometry/",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, section localization and cover-equality lemmas do not assert existence of two sections with disjoint orbit zero loci or finite invariant pencils"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf on a projective curve over a finite field has two global sections in a common power with disjoint group saturated zeros",
+   "results": "Read 8 returned hits: AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction.",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, section localization and cover-equality lemmas do not assert existence of two sections with disjoint orbit zero loci or finite invariant pencils"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample line bundle on a projective scheme of dimension at most one over any field has two sections in one tensor power whose finite group orbit zero loci are disjoint",
+   "results": "Read 8 returned hits: AlgebraicGeometry.Proj, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.Proj.affineOpenCover.",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, section localization and cover-equality lemmas do not assert existence of two sections with disjoint orbit zero loci or finite invariant pencils"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive tensor power of an ample invertible sheaf has two sections defining a finite morphism to projective line invariant under a finite group action",
+   "results": "Read 8 returned hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen.",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, section localization and cover-equality lemmas do not assert existence of two sections with disjoint orbit zero loci or finite invariant pencils"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-local-curve-pencils",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "§3.4(b), printed p.606, the special-fibre finite-pencil input, strengthened to disjoint orbit zero loci for products of translates. Supporting local source: Stacks coherent.tex, Tag 02O1, lemma-kill-by-twisting, for high-power restriction to a finite zero locus. This is the norm-section replacement inside the same local-pencil construction; no quotient existence is assumed.",
+   "via": [
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ample-curve-two-section-pencil",
+  "worker": "stage1",
+  "summary": "Repair of the superseded S2 rebind on the S1 lane. Follow the released stage-1 human re-split order: create two independent statement-only lemmas, a Noetherian ample orbit-boundary preparation and a proper affine-pair norm-pencil criterion. Retain every original argument in the report, with original steps 1-4 assigned to the first node, 7-10 to the second, and 5-6 in the short assembly. Item statement and Q16 owning Lean record preserved. Two new unsplit nodes, no Mathlib leaf. Rebased for the L promotion return onto the current live DAG: all eight retained full-statement citation quotes still agree verbatim. Clarified that Spec F supplies the Noetherian base in step 1 and that the same section-compatible tensor comparison transports both norm sections and identifies their F-morphism in step 3. The two independent new nodes and the complete retained ten-step argument are preserved. Rechecked on 2026-10-23 after the promotion return: current live retains the ten-step proof and neither auxiliary node; every assembly citation still matches its retained quote. Step 3 now explicitly verifies invertibility of the supplied module before applying the proper-pair criterion. Delivery tooling rebuilds the packet on current origin/sheaf-dag.",
+  "blueprint": "The item is a created auxiliary node, with inherited blueprint.from.node null (confirmed by blueprint_refs.py ancestor). The split realizes its existing from.place: the special-fibre finite-pencil input in de Jong §3.4(b), strengthened to disjoint orbit zero loci in the quotient-free norm construction, below the unchanged constructibility/alteration unit route. The inherited ancestor is null; the same de Jong special-fibre norm-pencil input is now distributed into two auxiliary work items without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic pullback and tensor product of invertible modules, and their fibres used as a black box for this ample-pencil input; this auxiliary item has no such result in its own constructibility unit. The parent alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Generic generating sections of an invertible module: the fibre criterion used as a black box for this ample-pencil input; this auxiliary item has no such result in its own constructibility unit. The parent alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Generic projective space over z represents invertible modules with generating sections used as a black box for this ample-pencil input; this auxiliary item has no such result in its own constructibility unit. The parent alteration route is unchanged."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective morphisms are proper used as a black box for this ample-pencil input; this auxiliary item has no such result in its own constructibility unit. The parent alteration route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-kun-projective-implies-proper",
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-23b9f7acb",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-23b9f7acb (reviewer sub-agent of L); spot-checked: Third push of the re-split ordered by the released stage-1 human note of 2026-10-22 (live coord/repair-notes). The live item still has the old ten-step NH proof and neither new id exists live, so the delivery is not superseded. Both new nodes are byte-identical to the earlier PASSed pushes 4e92 and 2f5f. Against 2f5f the item changes only in assembly step 3, which adds that M=L^d is invertible by clause (1) of the already-cited lem-weil-pbc-invertible-pullback-tensor; the split_report summary is also extended. The item statement and the lean/reviewed records are unchanged. The assembly is 2159 chars (374/586/1199). Old steps 5-6 (common power d=pq, orbit separation from G-stability of T inside V, generation) stay in assembly step 2 with the same content. Node A (old steps 1-4) is true: I read Stacks 09NV (properties.tex:5293); a chain A⊊D⊊C_i gives dim Z≤0, so Z is a finite set of closed points; h^-1T=T; a second 09NV use covers E∪T. Node B (old steps 7-10) is true: Z(A) is the orbit union of Z(a); the chart preimages are affine because Y is separated; the maps are affine and proper, hence finite by 01WN (morphisms.tex:11162, read); invariance follows from reindexing g↦gh, pair equivalence and fibre-product uniqueness. Step 3 transports through β: ⊗g*(L^d)≅B^d, which matches the item's definition of N_G. Edge cases checked: dim 0 (T empty), empty Y, trivial or non-faithful G, nonreduced Y, finite F, and P^1 with t↦1/t. The two nodes are of comparable size and neither restates the item. Duplicate candidates read; none matches. No SGA is used. The generic tool_uses are accepted. Advisory: def-sfb-pencil-orbit-bundle-norm exists but is not cited (inline construction, as on base). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleCurveTwoSectionPencil",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_ample_curve_two_section_pencil",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.pencilGroupElements",
+   "AlgebraicGeometry.Scheme.Modules.pencilTranslateTensor",
+   "AlgebraicGeometry.Scheme.Modules.pencilOrbitBundle",
+   "AlgebraicGeometry.Scheme.Modules.pencilUnitPowerIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilTranslatePowerIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilTranslateSection",
+   "AlgebraicGeometry.Scheme.Modules.pencilNormSection",
+   "AlgebraicGeometry.Scheme.Modules.pencilSectionPair",
+   "AlgebraicGeometry.Scheme.Modules.pencilCoordinateMorphism",
+   "AlgebraicGeometry.Scheme.Modules.exists_ample_curve_two_section_pencil"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleCurveTwoSectionPencil.lean",
+  "statement": "theorem exists_ample_curve_two_section_pencil (F : Type u) [Field F] (Y : Scheme.{u}) [Nonempty Y] (f : Y ⟶ Spec (CommRingCat.of F)) [IsHProjective f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : topologicalKrullDim Y ≤ 1) (L : Y.Modules) [L.IsInvertible] (hL : IsAmple Y L) (G : Type v) [Group G] [Finite G] (ρ : G →* Aut Y) (hρ : ∀ g : G, (ρ g).hom ≫ f = f) : ∃ d : ℕ, 0 < d ∧ ∃ a b : (L.tensorPow d).sections, Disjoint (⋃ g : G, (ρ g).hom ⁻¹' (nonvanishingLocus (L.tensorPow d) (a.val (op ⊤)))ᶜ) (⋃ g : G, (ρ g).hom ⁻¹' (nonvanishingLocus (L.tensorPow d) (b.val (op ⊤)))ᶜ) ∧ ∃ (hB : ((pencilOrbitBundle (fun g ↦ ρ g) L).tensorPow d).IsInvertible) (ha : Epi ((L.tensorPow d).freeHomEquiv.symm (pencilSectionPair (L.tensorPow d) a b))) (hN : Epi (((pencilOrbitBundle (fun g ↦ ρ g) L).tensorPow d).freeHomEquiv.symm (pencilSectionPair _ (pencilNormSection (fun g ↦ ρ g) L d a) (pencilNormSection (fun g ↦ ρ g) L d b)))), IsFinite (pencilCoordinateMorphism f (L.tensorPow d) inferInstance a b ha) ∧ IsFinite (pencilCoordinateMorphism f _ hB (pencilNormSection (fun g ↦ ρ g) L d a) (pencilNormSection (fun g ↦ ρ g) L d b) hN) ∧ ∀ g : G, (ρ g).hom ≫ pencilCoordinateMorphism f _ hB (pencilNormSection (fun g ↦ ρ g) L d a) (pencilNormSection (fun g ↦ ρ g) L d b) hN = pencilCoordinateMorphism f _ hB (pencilNormSection (fun g ↦ ρ g) L d a) (pencilNormSection (fun g ↦ ρ g) L d b) hN",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The auxiliary definitions implement the orbit bundle and norm already introduced by this node, using the existing tensor pullback, symmetric tensor powers and coordinate morphism; no independent notion or arbitrary comparison is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-646b69305",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Every node clause matches the Lean with no extra hypothesis: IsHProjective, LocallyOfFiniteType+QuasiCompact, topologicalKrullDim Y ≤ 1, IsInvertible+IsAmple, ρ : G →* Aut Y with hρ over F (no faithfulness). Conclusion: 0<d; disjoint ⋃g preimages of the nonvanishingLocus complements; Epi generation for (a,b) and for the norm pair; IsFinite for both homOfGeneratingSections wrappers to P^1_F; invariance as scheme-morphism equality. hB/ha/hN are Prop witnesses. Helpers have real data: orbit tensor of tensorPullback, sections from the 1⊗s-normalized unit, transport by boundaryPullbackPowIso+tensorPowTensorObjIso. The chosen-adjunction comparison does not affect any clause because the same iso transports both sections. Edge cases checked: Spec F, finite F, trivial or nonfaithful G, nonreduced Y, d=0 excluded. Docstrings, 10 proof steps, statement verbatim, declaration inventory and node unchanged vs side-live all OK. No file changed, so no compile; worker reports a clean compile. Advisory: boundaryPullbackPowIso (owner def-sc-tensor-pullback-power-comparison) and tmulSection (lem-sc-pullback-tensor-unit-section) are outside stmt_deps, which S2 cannot add; maintainer note. The second-reading section is a self-audit."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,357 @@
+{
+ "id": "lem-sf-direct-image-tor-amplitude-noetherian",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "the Lean proof of det-thm-sfb-proper-base-change-integral's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: reductions of an O_E-complex modulo powers of the maximal ideal: Tor amplitude bounds for Rf_* at the integral stage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tor amplitude of Rf_* for N-torsion complexes over a Noetherian ring",
+ "statement": "Let $k$ be a field and $\\Lambda$ a Noetherian commutative ring [def-weil-pbc-noetherian-ring]. Let $f\\colon X\\to Y$ be a separated morphism [def-weil-proper-morphism] of quasi-compact $k$-schemes locally of finite type [def-weil-scheme-over-base, def-weil-finite-type-morphism], with $\\dim X\\le d$ for $d\\in\\mathbf N$ [def-kun-topological-krull-dimension]. Let $K\\in D(X_{\\mathrm{et}},\\Lambda)$ [def-weil-pbc-derived-categories] be bounded constructible [def-weil-pbc-constructible-complexes] with Tor amplitude in $[a,b]$ for integers $a,b$ [def-kun-tor-amplitude], and suppose $N\\cdot\\mathrm{id}_K=0$ for an integer $N\\ge1$ invertible on $Y$. Then the module-sheaf derived direct image $Rf_*K$ [def-weil-pbc-direct-image] has Tor amplitude in $[a,b+2d]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md",
+  "place": "det-thm-sfb-proper-base-change-integral: reductions of an O_E-complex modulo powers of the maximal ideal: Tor amplitude bounds for Rf_* at the integral stage; Lean: upstream file lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean, declaration AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing (module WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage, lines 129-139, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing equivalence between the all-cohomology and t-structure definitions of Tor amplitude. The tensor-unit test gives K.IsGE a and K.IsLE b. Bounded constructibility also supplies boundedness for the constant projection theorem. If a > b, the standard t-structure implies K is zero; the additive derived direct image, tensor, and homology functors preserve zero, giving the entire conclusion in this case. In the remaining case a <= b.",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "lem-kun-tensor-unit",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean",
+    "place": "W2 proof of torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing; the original six-step constant-module projection and stalk argument"
+   }
+  },
+  {
+   "text": "For every field extension s:Spec L -> Spec k, the existing source theorem topologicalKrullDim_pullback_le_of_field gives dim(X times_k L) <= dim X <= d. Transport along the canonical isomorphism from any cartesian square to this pullback. This supplies precisely the uniform field-extension hypothesis of the torsion abelian higher-direct-image theorem, with the same d. No local-dimension calculation is needed.",
+   "uses": [
+    "lem-sf-field-extension-dimension-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean",
+    "place": "W2 proof of torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing; the original six-step constant-module projection and stalk argument"
+   }
+  },
+  {
+   "text": "Let F be a module sheaf whose underlying abelian sheaf is torsion. The torsion-abelian higher-image bound and step 2 show vanishing above 2d. The higher-direct-image forgetful comparison transfers this to the underlying abelian sheaf of the module higher direct image. Faithfulness of the additive forgetful functor detects zero via its identity morphism. The total-derived/plus single-object comparison gives the identical vanishing for H^q(Rf_*(F[0])); for positive q use q.toNat and the equality of its integer cast with q. In negative degrees, the existing left t-exactness theorem for Rf_* gives vanishing. This establishes the heart interval [0,2d] without any torsion-ring hypothesis.",
+   "uses": [
+    "lem-kun-torsion-abelian-direct-image-dimension-bound",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-sp-derived-functor-single-identification",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean",
+    "place": "W2 proof of torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing; the original six-step constant-module projection and stalk argument"
+   }
+  },
+  {
+   "text": "For any ordinary module M put E = K tensor^L M_X[0]. The Tor hypothesis gives its cohomology interval [a,b]. Additivity of tensorRight sends N id_K = 0 to N id_E = 0, and additivity of each homology functor gives the same annihilator on H^r(E). Evaluation at every etale object sends this identity to N x = 0 on every section, proving the underlying abelian cohomology sheaf is torsion since N is nonzero. Take S to be the class of module sheaves with torsion underlying abelian sheaf. It is invariant under isomorphism and contains zero. Apply bounded_heart_amplitude to Rf_*, this S, the heart interval [0,2d] from step 3, and E, obtaining vanishing of H^i(Rf_* E) outside [a,b+2d].",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "def-kun-derived-tensor",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pur-bounded-heart-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean",
+    "place": "W2 proof of torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing; the original six-step constant-module projection and stalk argument"
+   }
+  },
+  {
+   "text": "Equip X and Y with the structure maps aX and aY and f with its over-base instance from hf. Apply isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object to K, its boundedness, Tor interval [a,b], N, hN and hNY. Compose its isomorphism with the constant inverse-image comparison leftDerivedUpperStarSingleConstantSheafIso. It identifies Rf_*K tensor^L M_Y[0] with Rf_*E. Apply homology and step 4 to get the constant-module vanishing on Y for every M, with no finite generation assumption.",
+   "uses": [
+    "lem-sf-projection-torsion-object-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean",
+    "place": "W2 proof of torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing; the original six-step constant-module projection and stalk argument"
+   }
+  },
+  {
+   "text": "For every geometric point of Y, exactness of its sheafFiber functor and its derived homology comparison carry the vanishing from step 5 to the derived geometric stalk. The constant-single tensor comparison identifies it with the tensor of the stalk of Rf_*K with M[0]. The first equivalence of geometricStalk_torAmplitude_test, with a <= b+2d, upgrades these ordinary-module tests at every geometric point to the full Tor interval for Rf_*K, tested against all module sheaves. Convert back by hasTorAmplitudeIn_iff_torAmplitudeIn.",
+   "uses": [
+    "lem-sf-etale-module-stalk-cohomology-test",
+    "lem-sfb-geometric-stalk-tensor-constant-single",
+    "lem-sf-etale-stalk-tor-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean",
+    "place": "W2 proof of torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing; the original six-step constant-module projection and stalk argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-tor-amplitude",
+  "lem-kun-tensor-unit",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sf-field-extension-dimension-upper-bound",
+  "lem-kun-torsion-abelian-direct-image-dimension-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "def-kun-derived-tensor",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-bounded-heart-amplitude",
+  "lem-sf-projection-torsion-object-constant",
+  "lem-sf-etale-module-stalk-cohomology-test",
+  "lem-sfb-geometric-stalk-tensor-constant-single",
+  "lem-sf-etale-stalk-tor-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md",
+  "place": "The existing Noetherian-coefficient constant-module projection/stalk route, implemented in Lean by W2; field-extension dimensions are supplied directly by the existing source-library theorem instead of local-dimension calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of derived pushforward of etale sheaves, cohomological dimension bound 2d",
+   "results": "Scheme.Modules.pushforward, TopCat.Sheaf.pushforward, SheafOfModules.pushforward: underived only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a complex is preserved by derived pushforward up to shift by twice the dimension",
+   "results": "DerivedCategory.TStructure.t, isGE_Q_obj_iff, IsGE (Mathlib.Algebra.Homology.DerivedCategory.TStructure): t-structure only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'torAmplitude|TorAmplitude' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Functor.rightDerived",
+   "results": "loogle: unknown identifier 'Sheaf'; no hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|projectionFormula|ProjectionFormula",
+   "results": "no hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of derived pushforward of etale torsion sheaves",
+   "results": "TopCat.Sheaf.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardSections, SheafOfModules.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf, PresheafOfModules.pushforward₀, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of derived direct image of torsion etale module complexes over a Noetherian coefficient ring",
+   "results": "Algebra.etaleLocus_eq_compl_support, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.comp, Algebra.smoothLocus_eq_compl_support_inter, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, tensorObj",
+   "results": "loogle: unknown identifier 'tensorObj'; no hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological dimension bounds finite flat dimension after pushforward of a complex of sheaves",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CategoryTheory.hasInjectiveDimensionLT_of_ge, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.instHasInjectiveDimensionLTSucc, CategoryTheory.instHasInjectiveDimensionLTHAddNat_1",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage",
+     "lines": [
+      118,
+      139
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean",
+  "declaration": "AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing",
+  "declarations": [
+   "AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing"
+  ],
+  "statement": "theorem torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing [IsNoetherianRing Λ]\n    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]\n    [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)\n    [IsSeparated f] (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)\n    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (N : ℕ)\n    [NeZero N] (hN : N • 𝟙 K = 0) (hNY : IsUnit (N : Γ(Y, ⊤)))\n    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K)\n    (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :\n    torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))\n      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; the finite-ring case is torAmplitudeIn_rightDerivedLowerStar (node sk-thm-sf-direct-image-tor-amplitude); here the residue test is replaced by geometric stalks and a projection formula with arbitrary constant coefficients"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-direct-image-tor-amplitude-noetherian",
+  "worker": "stage1",
+  "summary": "Retained all hypotheses and the exact [a,b+2d] conclusion of the upstream sorried theorem. Reused the arbitrary-field torsion-abelian dimension bound, bounded-heart amplitude and geometric-stalk Tor test. Isolated one genuine constant-module projection lemma; did not apply the Artinian residue test or a torsion-ring theorem directly to the Noetherian ring. Checked empty intervals and empty schemes, recorded actual Mathlib searches and statement quotations.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral: the integral-stage reductions require direct-image Tor bounds; this item supplies the Noetherian variant described by the upstream theorem. Its steps realize the docstring's constant-coefficient projection argument followed by geometric-stalk detection. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Tests the input Tor condition with the constant tensor unit. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Handles an empty input interval by identifying an acyclic derived object with zero. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Verifies that scalar extension preserves local dimensions for the torsion higher-image theorem. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Passes from pointwise dimensions after scalar extension to the same global bound d. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-kun-torsion-abelian-direct-image-dimension-bound",
+    "why": "Gives higher-image vanishing for the underlying N-torsion abelian cohomology sheaves over an arbitrary field. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Verifies the Grothendieck abelian hypothesis of the bounded-below right-derived statements. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Verifies the existence of the ordinary injective resolutions defining the higher direct images. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Supplies K-injective resolutions required for the total right-derived comparisons and triangulated structure. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Identifies classical higher direct images with cohomology of the bounded-below derived image of a degree-zero sheaf. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "Identifies bounded-below and total right-derived direct images on the same objects. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Transfers that abelian vanishing to module-valued higher direct images for an arbitrary coefficient ring. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Supplies the lower end of the degree-zero direct-image interval. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Supplies exactness needed by the finite cohomological induction. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-pur-bounded-heart-amplitude",
+    "why": "Extends the interval on N-torsion sheaves to a bounded complex with N-torsion cohomology; avoids an all-coefficients finite-cd assumption. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-sf-etale-module-stalk-cohomology-test",
+    "why": "Transfers cohomological intervals to geometric stalks of module complexes. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-sfb-geometric-stalk-tensor-constant-single",
+    "why": "Identifies the stalk of a constant-module tensor with tensoring the derived stalk. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-sf-etale-stalk-tor-test",
+    "why": "Converts all ordinary-module tests at geometric stalks into the full sheaf Tor-amplitude condition. This is a generic tool; the integral proper-base-change unit has no separate statement of this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-tensor-unit",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-kun-torsion-abelian-direct-image-dimension-bound",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-bounded-heart-amplitude",
+  "lem-sf-etale-module-stalk-cohomology-test",
+  "lem-sfb-geometric-stalk-tensor-constant-single",
+  "lem-sf-etale-stalk-tor-test"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-8bbfdf313",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-8bbfdf313 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the new node and every cited statement, and made no fixes. Item statement: matches upstream DirectImage.lean:117-139 hypothesis by hypothesis (Noetherian Λ, any field k, qc lft structure maps, separated f, d∈ℕ, N·id=0 with N a unit on Y, bounded constructible K, Tor amplitude [a,b] to [a,b+2d]); against live the only edits are definition citations. Live and side-live still have the item unsplit, there is no re-split note, and no SGA source is cited. Steps: S1 tests the tensor unit and gets K≅0 when a>b (05RT). S2 uses 02FY(1) on X→Spec k and 0B7I to get dim X_L ≤ d, the hypothesis of lem-kun-torsion-abelian-direct-image-dimension-bound over an arbitrary field. S3 uses the forget comparison, negative vanishing 05TC and the plus/total comparison to get H^p(Rf_*F)=0 off [0,2d] for N-killed F, with no all-module cd assumption. S4 applies lem-pur-bounded-heart-amplitude (T triangulated, the class of N-killed sheaves, E_M killed by N by additivity) to get [a,b+2d]. S5 cites the new node with u≤v from S1. S6 combines exact stalks, the constant-single stalk tensor and lem-sf-etale-stalk-tor-test to get the full all-sheaf amplitude. proof_deps equals the union of uses, all ids exist and are unmerged, there is no cycle, and every step is under 2000 chars. New node lem-sf-projection-torsion-object-constant is a true, self-contained derived isomorphism. Proof line I checked: Rf_* of objects with N-torsion cohomology is bounded above; finite-free M follows from lem-sf-projection-bounded-finite-free-constant; f.g. M by finite-free resolution and stupid truncation, since both cones lie in degrees ≤ v+2d−n−1; arbitrary M by filtered colimits with qcqs R^qf_* continuity. Small cases checked: f=id, N=1, M=Λ, Λ=ℤ with E=ℤ/ℓ and M=ℚ. B1-B9 hold: statement only, 0F12 honestly marked as an agent-stated extension, six searches recorded. It is not a duplicate of lem-sf-projection-finite-constant (all-module cd, f.p. M), lem-kun-0f12, 0f0g, 0f0f, lem-etale-proper-projection-formula-finite, lem-per-excellent-etale-constant-projection, lem-exc-constant-tensor or lemma-weil-pbc-perfect-projection-formula, and it does not restate a clause of the item. The 17 declared tool_uses are generic inputs and I accept them. Maintainer note: the new node has blueprint.from.node null because blueprint_refs ancestor returns None for this maintainer-created item (created.item null), even though the item's own from.node is det-thm-sfb-proper-base-change-integral. Advisory: lem-sp-derived-functor-single-identification in step 3 is redundant but harmless."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261023T135718-L-2962683",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-closed-test-chain-mate-data",
+ "kind": "definition",
+ "title": "Explicit ordinary and cochain closed-test mate constructions",
+ "statement": "For the commutative condensed ring and scheme squares in [def-sfb-closed-test-kinjective-section-maps] and [def-sfb-closed-test-derived-exchange-maps], use the ordinary pullback compositor to define ordinarySquare, its specified adjunction mate ordinaryExchange, the actual testSectionArrow and unit testSectionUnit, terminalSections and globalLocalizationModel, ordinary and derived direct-image pasting squares, evaluatedExchange, chainMate, sectionChain, evaluatedChainMate and pushEvaluationChain. pastingAdjunctionCompatible records conjugacy under the specified adjunctions. These are the original constructions of lem-sfb-closed-test-chain-mate-restriction, with identical signatures and bodies, extracted to an acyclic interface; no proof is used to choose any data.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-exc-closed-site-lift",
+  "sk-def-pe-wlocal",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-adjunction-square-exchange",
+  "def-sfb-proetale-inverse-image-unit-section",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-right-derived-functor",
+  "def-pur-localized-ringed-site",
+  "def-sfb-closed-test-kinjective-section-maps",
+  "def-sfb-closed-test-derived-exchange-maps",
+  "def-sfb-module-upper-star-comp",
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-condensed-module-sections"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BL, lemma-closed-immersion-affines-apply; derived.tex Tag 09T5, lemma-derived-adjoint-functors, and sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition; agent unit–counit calculation, returned proof steps 5–7."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Verbatim constructions extracted from Sheaf.Paper.ClosedTestChainMateRestriction for acyclic normalization statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction square exchange mate unit compatibility sections pullback",
+   "results": "General mate unit identities",
+   "date": "2026-10-25",
+   "verdict": "Existing project constructions are reused verbatim."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"unit\"",
+   "results": "General adjunction identities",
+   "date": "2026-10-25",
+   "verdict": "Existing project constructions are reused verbatim."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinarySquare|testSectionUnit|chainMate",
+   "results": "The constructions already exist in the assigned item",
+   "date": "2026-10-25",
+   "verdict": "Existing project constructions are reused verbatim."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClosedTestChainMateRestriction",
+  "date": "2026-10-25",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-closed-test-chain-mate-restriction",
+   "place": "Existing ordinary and cochain constructions; no new mathematical definition.",
+   "via": [
+    "lem-sfb-closed-test-chain-mate-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedTestChainMateData",
+  "file": "lean/Sheaf/Paper/ClosedTestChainMateData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.ordinarySquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.ordinarySquare",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.ordinaryExchange",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.testSectionArrow",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.testSectionUnit",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.terminalSections",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.globalLocalizationModel",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.directSquare",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.derivedDirectSquare",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.evaluatedExchange",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.chainMate",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.sectionChain",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.evaluatedChainMate",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.pushEvaluationChain",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.pastingAdjunctionCompatible",
+   "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.evaluationAdditive"
+  ],
+  "statement": "def ordinarySquare {X U T Z : Scheme.{u}} {f : X ⟶ U} {s : Z ⟶ U}\n    {h : T ⟶ X} {fZ : T ⟶ Z} (w : CommSq h fZ f s) :\n    CondensedRing.upperStar Λ s ⋙ CondensedRing.upperStar Λ fZ ≅\n      CondensedRing.upperStar Λ f ⋙ CondensedRing.upperStar Λ h",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-25"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-13773",
+  "group": "S7",
+  "result": "fix",
+  "landing": "20261025T123833-L-1907732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-13773",
+  "group": "S7",
+  "result": "fix",
+  "landing": "20261025T123833-L-1907732",
+  "kind": "interface",
+  "note": "independent cc review: Data module declaration blocks vs published item (verbatim); new sorry statements vs item conjuncts 1/3 (byte-identical); node stmt_deps vs owners of names used; sandbox run_set + #print axioms"
+ }
+}

@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-space-inverse-module-derived-limit",
+ "kind": "statement",
+ "title": "Bounded quasi-coherent derived limit of an infinitesimal module system",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Separated, finite type and proper morphisms use [def-sfb-space-morphism-properties]. Finite presentation means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it has a presentation $\\mathcal O^r\\to\\mathcal O^s\\to F\\to0$ with $r,s$ finite. Base-flatness means flatness of stalks on etale scheme charts over the corresponding local rings of the base [def-pc-scheme-module-flat-over]. Proper support means there exist a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $G$ on $Z$ such that $i_*G\\simeq F$ [def-sfb-space-proper-quot-functor]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels are locally nilpotent, meaning every element of each kernel is nilpotent, and set $A=\\varprojlim_n A_n$. Let $X\\to\\operatorname{Spec}A$ be separated and finitely presented, put $X_n=X\\times_A\\operatorname{Spec}A_n$. For every $n\\geq1$ let $M_n$ be a finitely presented quasi-coherent $\\mathcal O_{X_n}$-module, flat over $A_n$, with support proper over $A_n$, with specified isomorphisms $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$ for $n\\geq2$. Use unbounded derived categories of module sheaves [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology. Regard $M_n$ as a module on $X$ by direct image along $X_n\\hookrightarrow X$; the given transition isomorphisms followed by quotient maps define its inverse-system maps. The symbol $R\\varprojlim_{D_{\\mathrm{QCoh}}}M_n$ denotes the homotopy inverse limit in this full derived subcategory: it fits into the product triangle $K\\to\\prod_{n\\geq1}M_n\\xrightarrow{1-\\mathrm{shift}}\\prod_{n\\geq1}M_n\\to K[1]$, with products taken in $D_{\\mathrm{QCoh}}$ and projections $q_n:K\\to M_n$ induced by the first arrow. Here the shift has $n$th component equal to the transition map composed with the $(n+1)$st projection. These products and this homotopy inverse limit exist. The resulting $K$ belongs to $D^b_{\\mathrm{QCoh}}(\\mathcal O_X)$ and $H^i(K)=0$ for every $i<0$. Its projections satisfy $q_{n-1}=t_nq_n$, where $t_n:M_n\\to M_{n-1}$ is the indicated transition map.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX5 (lemma-compute-what-it-should-be), via spaces-perfect.tex Tag 0CST (example-inverse-limit-quasi-coherent); projections of the defining product triangle."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-weil-abstract-derived-category",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-qcoh-derived-triangulation",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "The projection $A\\to A_n$ is surjective: lift any element of $A_n$ recursively through the surjective transitions for larger indices, and use its images for smaller indices. Thus $i_n:X_n\\hookrightarrow X$ is a closed immersion, hence quasi-compact and separated: after a scheme test it is a closed subscheme, whose inverse image of an affine is the spectrum of a quotient; its diagonal is an isomorphism. The quasi-compact separated pushforward theorem makes $i_{n,*}M_n$ quasi-coherent. Its ringed-topos direct image is the specified chart-limit direct image by the chart-limit comparison. From now on write $M_n$ for this module on $X$. The finite-presentation convention in the statement, over the affine base, makes $X$ quasi-compact and quasi-separated.",
+   "uses": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-space-chart-limit-enlarged-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CST (example-inverse-limit-quasi-coherent), applied in spaces-flat.tex Tag 0CX5 (lemma-compute-what-it-should-be)."
+   }
+  },
+  {
+   "text": "Work on the equivalent small ringed model. Resolve each object of $D(\\mathcal O_X)$ by a K-injective complex. Sectionwise module limits supply all termwise products; the product-of-K-injectives theorem says that these products represent products in the derived category. In particular $B=\\prod_nM_n$ exists in the ambient derived category. The derived-limit existence theorem gives a triangle $L\\to B\\xrightarrow{1-s}B\\to L[1]$ there.",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CST (example-inverse-limit-quasi-coherent), applied in spaces-flat.tex Tag 0CX5 (lemma-compute-what-it-should-be)."
+   }
+  },
+  {
+   "text": "Let $I=I_X$ and $DQ=DQ_X$ from the space coherator adjunction. For every $P\\in D_{\\mathrm{QCoh}}$, the natural equalities $$\\operatorname{Hom}(P,DQ B)=\\operatorname{Hom}(IP,B)=\\prod_n\\operatorname{Hom}(IP,M_n)=\\prod_n\\operatorname{Hom}(P,M_n)$$ show directly that $DQ B$ is the product in $D_{\\mathrm{QCoh}}$, its $n$th projection being $DQ(\\mathrm{pr}_n)$ followed by the inverse unit $DQ(IM_n)\\simeq M_n$. Naturality of this unit identifies $DQ(1-s)$ with one minus the transition shift for these projections. Since $DQ$ is triangulated, its image of the triangle in step 2 is the required product triangle, with first object $DQ L$. Any $K$ specified in the item is isomorphic to $DQ L$ by uniqueness up to isomorphism of derived limits.",
+   "uses": [
+    "lem-sfb-space-derived-coherator-adjunction",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CST (example-inverse-limit-quasi-coherent), applied in spaces-flat.tex Tag 0CX5 (lemma-compute-what-it-should-be)."
+   }
+  },
+  {
+   "text": "For an affine etale $u:U\\to X$, tensor pullback $u^*M_n$ is quasi-coherent. On the localized ringed site, sections and derived sections over the object $U$ are global sections and derived global sections of this restriction; this is the localization identification of the enlarged etale ringed model. The ringed-site derived-evaluation/slice comparison identifies the cohomology of $R\\Gamma(U,M_n)$ with abelian-sheaf cohomology on that slice. Enough injectives holds by step 2. The scheme Zariski/etale quasi-coherent equivalence realizes $u^*M_n$ as the associated etale sheaf of a quasi-coherent Zariski module. Affine etale acyclicity therefore gives $R\\Gamma(U,M_n)\\simeq\\Gamma(U,M_n)[0]$. The site derived-sections/derived-limit theorem, applied to step 2, identifies $R\\Gamma(U,L)$ with a derived limit of the tower $R\\Gamma(U,M_n)$.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-kun-site-rgamma-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CST (example-inverse-limit-quasi-coherent), applied in spaces-flat.tex Tag 0CX5 (lemma-compute-what-it-should-be)."
+   }
+  },
+  {
+   "text": "Apply the Milnor short exact sequence to the tower of abelian-group complexes in step 4. Its stage cohomology is zero except in degree zero. If $i<0$ or $i>1$, both $H^{i-1}(R\\Gamma(U,M_n))$ and $H^i(R\\Gamma(U,M_n))$ are zero for every $n$. Both outside terms of the Milnor sequence are therefore zero, giving $H^i(U,L)=0$ for $i\\notin[0,1]$, uniformly for all affine etale $U\\to X$. No Mittag-Leffler assertion or exactness of products of module sheaves is needed.",
+   "uses": [
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CST (example-inverse-limit-quasi-coherent), applied in spaces-flat.tex Tag 0CX5 (lemma-compute-what-it-should-be)."
+   }
+  },
+  {
+   "text": "The space coherator bound applied to $L$, with $a=0$ and $b=1$, gives an integer $N\\geq0$ with $H^i(DQ L)=0$ outside $[0,1+N]$. By step 3 the same holds for $K$. Its cohomology is quasi-coherent because it is an object of $D_{\\mathrm{QCoh}}$. Thus $K\\in D^b_{\\mathrm{QCoh}}(\\mathcal O_X)$ and it has no negative cohomology. The extra flatness, finite-presentation, nilpotence and proper-support assumptions on the tower were not used in steps 2--6.",
+   "uses": [
+    "lem-sfb-space-derived-coherator-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CST (example-inverse-limit-quasi-coherent), applied in spaces-flat.tex Tag 0CX5 (lemma-compute-what-it-should-be)."
+   }
+  },
+  {
+   "text": "Write the specified product triangle as $K\\xrightarrow{p}P\\xrightarrow{1-s}P\\to K[1]$. Consecutive arrows of a distinguished triangle have zero composite, so $(1-s)p=0$. Composing with $\\mathrm{pr}_{n-1}$ gives $0=\\mathrm{pr}_{n-1}p-t_n\\mathrm{pr}_np=q_{n-1}-t_nq_n$. Hence the projections of this very triangle satisfy the required identity; it does not require a canonical choice of derived limit.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CST (example-inverse-limit-quasi-coherent), applied in spaces-flat.tex Tag 0CX5 (lemma-compute-what-it-should-be)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "def-sfb-space-small-ringed-model",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-existence",
+  "lem-sfb-space-derived-coherator-adjunction",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-sfb-space-derived-coherator-bound",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CST (example-inverse-limit-quasi-coherent), applied in spaces-flat.tex Tag 0CX5 (lemma-compute-what-it-should-be)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse limit in the category of quasi coherent complexes of a tower of finitely presented flat modules with proper support over nilpotent ring quotients is bounded and has no negative cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf limits and t-structure bounds do not construct a bounded homotopy inverse limit in D_QCoh; adic completion flatness assumes a Noetherian ring and says nothing about this space-valued tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Boundedness of homotopy limits of compatible flat coherent sheaves on infinitesimal thickenings of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf limits and t-structure bounds do not construct a bounded homotopy inverse limit in D_QCoh; adic completion flatness assumes a Noetherian ring and says nothing about this space-valued tower."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of compatible flat quasi coherent modules on nilpotent thickenings is bounded below with quasi coherent cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"InverseSystem.limit\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"(i : ι) : Set (∀ l : Iio i, F l)\", \"doc\": \"The limit of an inverse system is the set of all compatible families $\\\\{F_j\\\\}$ where each $F_j$ belongs to the set $F(j)$, and for any indices $j \\\\leq k$, the transition map $f_{jk}$ satisfies $f_{jk}\"}\n  {\"name\": \"Module.DirectLimit.inhabited\", \"module\": \"Mathlib.Algebra.Colimit.Module\", \"type\": \"{R : Type u_1} →\\n  [inst : Semiring R] →\\n    {ι : Type u_2} →\\n      [inst_1 : Preorder ι] →\\n        (G : ι → Type u_3) →\\n          [inst_2 : DecidableEq ι] →\\n            [inst_3 : (i : ι) → AddCommMonoid (G i)] →\\n              [inst_4 : (i : ι) → Module R (G i)] →\\n                (f : (i j : ι) → i \", \"doc\": \"Given a semiring $ R $, a preorder $ \\\\iota $, and a direct system of $ R $-modules $ \\\\{G_i\\\\} $ indexed by $ \\\\iota $ with transition maps $ f_{ij} $, the direct limit module $ \\\\varinjlim G_i $ is const\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"InverseSystem.isNatEquiv_piEquivLim\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"[InverseSystem f] (H : ∀ x l, (equivLim x).1 l = f l.2.le x) : IsNatEquiv f (piEquivLim nat equivLim hi)\", \"doc\": \"For a linearly ordered index set $\\\\iota$ and an inverse system $F$ with transition maps satisfying a naturality condition, if $i \\\\in \\\\iota$ is a prelimit element (having no immediate predecessor), the\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfShape D (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits of shape $D$. This means that give\"}\n  {\"name\": \"InverseSystem.invLimEquiv_symm_apply_coe\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} {i : ι} [inst : LinearOrder ι]\\n  {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} {equiv : (j : ↑(Set.Iio i)) → F ↑j ≃ InverseSystem.piLT X ↑j}\\n  (nat : InverseSystem.IsNatEquiv f equiv) (t : ↑(InverseSystem.limit InverseSystem.piLTProj i)) (l : ↑(Set.Iio i)\", \"doc\": \"For an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, and equivalences $F_j \\\\simeq \\\\prod_{l < j} X_l$ satisfying naturality, the inverse of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf limits and t-structure bounds do not construct a bounded homotopy inverse limit in D_QCoh; adic completion flatness assumes a Noetherian ring and says nothing about this space-valued tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedLimit\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf limits and t-structure bounds do not construct a bounded homotopy inverse limit in D_QCoh; adic completion flatness assumes a Noetherian ring and says nothing about this space-valued tower."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedLimit|homotopyLimit|inverse.*quasi.?coherent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf limits and t-structure bounds do not construct a bounded homotopy inverse limit in D_QCoh; adic completion flatness assumes a Noetherian ring and says nothing about this space-valued tower."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedLimit|homotopyLimit|inverse.*quasi.?coherent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module limits, scheme limit continuity and abstract t-structure bounds do not give the bounded derived quasi-coherent limit on an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy inverse limit in D_QCoh of quasi coherent modules on a quasi compact quasi separated algebraic space is bounded below and bounded above",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"instHasLimitsOfSizeLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Limits\", \"type\": \"∀ (R : Type u) [inst : Ring R], CategoryTheory.Limits.HasLimitsOfSize.{u, u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules has all limits for diagrams indexed by categories of a specified size. This means that for every diagram $ D : \\\\mathcal{J} \\\\to \\\\text{L\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"instHasLimitsOfSizeLightCondMod_1\", \"module\": \"Mathlib/Condensed/Light/Limits\", \"type\": \"∀ (R : Type u) [inst : Ring R], CategoryTheory.Limits.HasLimitsOfSize.{0, 0, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules has all limits for diagrams indexed by categories of a specified size. That is, for every diagram $ D : \\\\mathcal{J} \\\\to \\\\text{LightCon\"}\n  {\"name\": \"instHasLimitsOfSizeCondensedMod\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.Limits.HasLimitsOfSize.{u, u + 1, u + 1, u + 2} (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ has all limits for diagrams indexed by categories of a specified size. That is, for every diagram $ D : \\\\mathcal{J} \\\\to \\\\text{Condensed\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"instHasLimitsCondensedMod\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.Limits.HasLimits (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ has all limits, meaning that every diagram in this category admits a limit object within the category.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module limits, scheme limit continuity and abstract t-structure bounds do not give the bounded derived quasi-coherent limit on an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limits of quasi coherent sheaves on quasi compact quasi separated algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"instHasLimitsOfShapeCondensed\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A J : Type*} [Category* A] [Category* J] [HasLimitsOfShape J A] : HasLimitsOfShape J (Condensed.{u} A)\", \"doc\": \"For any category $ \\\\mathcal{A} $ and any diagram shape $ \\\\mathcal{J} $, if $ \\\\mathcal{A} $ has all limits of shape $ \\\\mathcal{J} $, then the category of condensed objects over $ \\\\mathcal{A} $, defined\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"(J : Type w) [Category.{w'} J] [Small.{v} J] [HasLimitsOfShape Jᵒᵖ C] : HasColimitsOfShape J (SheafedSpace.{_, _, v} C)\", \"doc\": \"If $ \\\\mathcal{J} $ is a small category and the opposite category $ \\\\mathcal{J}^{\\\\text{op}} $ has all limits of shape $ \\\\mathcal{J} $, then the category of sheafed spaces over a category $ \\\\mathcal{C} \"}\n  {\"name\": \"InverseSystem.invLimEquiv_symm_apply_coe\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} {i : ι} [inst : LinearOrder ι]\\n  {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} {equiv : (j : ↑(Set.Iio i)) → F ↑j ≃ InverseSystem.piLT X ↑j}\\n  (nat : InverseSystem.IsNatEquiv f equiv) (t : ↑(InverseSystem.limit InverseSystem.piLTProj i)) (l : ↑(Set.Iio i)\", \"doc\": \"For an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, and equivalences $F_j \\\\simeq \\\\prod_{l < j} X_l$ satisfying naturality, the inverse of t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module limits, scheme limit continuity and abstract t-structure bounds do not give the bounded derived quasi-coherent limit on an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedLimit\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module limits, scheme limit continuity and abstract t-structure bounds do not give the bounded derived quasi-coherent limit on an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-modules-near-special-fibre",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX5 (lemma-compute-what-it-should-be), via spaces-perfect.tex Tag 0CST (example-inverse-limit-quasi-coherent); projections of the defining product triangle.",
+   "via": [
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-inverse-module-derived-limit",
+  "worker": "stage1",
+  "group": "Q38",
+  "summary": "Unchanged statement. Realized Stacks 0CX5 through the affine-evaluation calculation of 0CST, using two new general space coherator facts and existing K-injective products, site evaluation, affine acyclicity, Milnor sequence and triangle exactness. No termwise-product assertion for etale sheaves, no Noetherian or Mittag-Leffler assumption, and no new tower-boundedness restatement.",
+  "blueprint": "The inherited coherent-family/Quot effectivity prerequisite of proof (3) of det-thm-sf-ctf-stability-direct-images; specifically 0CX5 via 0CST. The latest sk-thm-sf-ctf-stability statement is retained; no chapter or unit route is changed. The nearest-ancestor command returns null, matching the inherited blueprint.from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic Quasi-compact separated direct image preserves quasi-coherence on spaces; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Generic All-chart module limits are enlarged-etale sections; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Generic Termwise products of K-injective complexes on a ringed space; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic Existence and computation of derived limits; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic Enlarged etale ringed-site models of algebraic spaces; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic Derived module evaluation is abelian cohomology on the slice; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic Etale acyclicity of a quasi-coherent module on an affine; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "Generic Derived sections on a ringed site preserve derived limits; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   },
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "Generic Milnor exact sequence for a derived inverse limit; used for the explicit ringed-site/derived-limit calculation of Stacks 0CST, with the same hypotheses as its statement, not as a replacement of the unit geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-existence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-de0c2ea2b",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-de0c2ea2b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, and the sources spaces-flat 0CX5 with Situation existence, spaces-perfect 0CST, 0CR4 (both proofs) and 0CSS, and derived 0A8D. Steps 1-7 follow 0CST and write out what it leaves implicit: closed immersion X_n into X plus 03M9 for quasi-coherence; K-injective products (0BK6) and the Roos triangle in D(O_X); DQ B is the D_QCoh product by the counit bijection, I checked the shift map via naturality of the unit, DQ is exact (0A8D), and K is isomorphic to DQ L because derived limits are unique up to isomorphism; affine acyclicity via 03FD slice, 03DX and the étale affine vanishing, then 0D6K and the Milnor sequence give H^i(U,L)=0 outside [0,1]; 0CSS with a=0, b=1; q_{n-1}=t_n q_n from (1-s)p=0, with the indexing matching the item. The new nodes are exact renderings of 0CR4 and 0CSS, statement-only, true on the empty and affine cases (N=0) and for E=0. They are not duplicates: grep over the DAG found only scheme, affine and stack coherators and the generation and Rf_* adjoint nodes. Neither restates a clause of the item. No repair note applies and no SGA is cited. Batch-5: every listed trf citation (algebraic-space definitions, fibre products, 03M9, chart-limit direct image, enlarged site, 03DX, 03GA, small ringed model) is generic algebraic-space foundation; the closures of the new citations reach neither sec-poincare-duality nor any trace-formula theorem. I accept them and the 11 tool_uses. Advisory only: step 4 identifies the slice of the small model with U_et without spelling it out (via 039Z, already inside def-sfb-space-small-ringed-model)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInverseModuleDerivedLimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.inverseModuleDerivedLimit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSpec",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSpecMap",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTest",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTestMap_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTestMap",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTransition",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleDerivedTerm",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleQCohTerm",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleDerivedTransition",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleDerivedLimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInverseModuleDerivedLimit.lean",
+  "statement": "theorem inverseModuleDerivedLimit (A : ℕ → CommRingCat.{u}) (r : ∀ n : ℕ, A (n + 1) ⟶ A n) (hsurj : ∀ n : ℕ, Function.Surjective (r n)) (hnil : ∀ (n : ℕ) (a : A (n + 1)), (r n) a = 0 → IsNilpotent a) (c : Cone (Functor.ofOpSequence r)) (hc : IsLimit c) (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) [HasDerivedCategory.{w} X.SmallModules] (f : X ⟶ schemeSpace (inverseModuleSpec c.pt)) (hsep : MapIsSeparated f) (hfp : ProperQuotFinitePresentation f) (M : ∀ n : ℕ, (properQuotFibre f (inverseModuleTest c n)).Modules) (hqc : ∀ n : ℕ, (M n).IsQuasicoherent) (hfin : ∀ n : ℕ, (M n).IsFinitePresentation) (hflat : ∀ (n : ℕ) (U : (properQuotFibre f (inverseModuleTest c n)).EtaleSite), ((schemeRestriction _ U).obj (M n)).IsFlatOver (yoneda.preimage (U.obj.hom ≫ (properQuotSnd f (inverseModuleTest c n)).hom.hom)).left) (hsupp : ∀ n : ℕ, ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : Z ⟶ properQuotFibre f (inverseModuleTest c n)), IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) i.hom.hom ∧ MapIsProper (i ≫ properQuotSnd f (inverseModuleTest c n)) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ M n)) (e : ∀ n : ℕ, (moduleTensorPullback (properQuotFibreMap f (inverseModuleTestMap c n))).obj (M (n + 1)) ≅ M n) : ∃ hq : ∀ n : ℕ, X.derivedQCohProperty (inverseModuleDerivedTerm f (inverseModuleTest c n) (M n)), HasProduct (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n)) ∧ ∀ [HasProduct (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))], (∃ (K : X.DerivedQCoh) (p : K ⟶ ∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) (δ : (∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) ⟶ K⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n : ℕ ↦ inverseModuleDerivedTransition f (inverseModuleTestMap c n) (M n) (M (n + 1)) (e n) (hq n) (hq (n + 1))) K p δ) ∧ ∀ (K : X.DerivedQCoh) (p : K ⟶ ∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) (δ : (∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) ⟶ K⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n : ℕ ↦ inverseModuleDerivedTransition f (inverseModuleTestMap c n) (M n) (M (n + 1)) (e n) (hq n) (hq (n + 1))) K p δ → (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj K.obj)) ∧ (∀ i : ℤ, i < 0 → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj K.obj)) ∧ ∀ n : ℕ, p ≫ Pi.π (fun m : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c m) (M m) (hq m)) n = p ≫ Pi.π (fun m : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c m) (M m) (hq m)) (n + 1) ≫ inverseModuleDerivedTransition f (inverseModuleTestMap c n) (M n) (M (n + 1)) (e n) (hq n) (hq (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The paper level n+1 is indexed by n : ℕ. Canonical Spec test maps and existing properQuotFibre give the actual infinitesimal fibres. The transition is the adjoint of the tensor-normalized pullback of the counit followed by the specified reduction iso. The theorem asserts quasi-coherence of the pushed degree-zero terms, product and Roos-triangle existence in the existing DerivedQCoh, and bounds and projection equations for every such triangle. All helper definitions have real data; only the cone-triangle equation and main theorem are postponed. Existing derived-module, inherited-triangulation and derived-limit definition nodes added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-514de4b54",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read node, Stacks situation-existence/0CX5, the delivered module, the report and the live dependency declarations (ProperQuot fibre/test/flat/properSupport, DerivedModules/derivedQCohProperty/DerivedQCoh, small model, moduleTensorAdjunction/Composition, IsDerivedLimitTriangle, towerTransitionEndomorphism, ofOpSequence). Hypotheses match clause by clause: reindexed tower, elementwise nilpotent kernels, limit cone, separated and ProperQuotFinitePresentation X, fibres X_n, hqc/hfin, flat and properSupport copied verbatim from the ProperQuotient fields, given e n. Transition is built canonically as the adjoint of the pulled-back counit followed by e. Conclusions: terms in D_QCoh, HasProduct in DerivedQCoh, a Roos triangle exists (1 − shift checked), and for every triangle K is bounded with no negative cohomology and p≫π n = p≫π(n+1)≫t n. lean.statement verbatim; 10 declarations present; stmt_deps gained only landed def nodes; all 14 dependency records identical to live; no hollow defs; sorries only in inverseModuleTestMap_w (true) and the main theorem; docstrings and 7 proof steps present; imports = proof_dep modules. Edge cases (empty X, zero ring, n=0) covered. No file changed, so no compile. Advisory: decls owned by small-ringed-model/scheme-restriction/scheme-algebraic-space/module-tensor-composition nodes are used outside stmt_deps; the second reading is the worker's own re-read but matches clauses."
+ }
+}

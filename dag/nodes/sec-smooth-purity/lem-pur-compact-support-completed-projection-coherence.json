@@ -13,76 +13,99 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-pur-completed-tensor-unit-insertion] for the unit-normalized tensor comparisons. Set $M=PH\\otimes_A^LK$, $N=H\\otimes_A^Lu^*K$. The induced adjunction [lem-sp-completed-pullback-adjunction] gives $\\varepsilon^c_H\\eta_{u^*PH}=\\varepsilon_H$. Consequently the completed projection transpose, restricted along the units, is $u^*M\\xrightarrow{\\mu}u^*PH\\otimes u^*K\\xrightarrow{\\varepsilon_H\\otimes1}N\\xrightarrow{\\eta_N}C_{\\mathcal X}N$: the first factor unit cancels by this counit equation and the second gives $\\eta_{u^*K}$. Transpose using [lem-weil-pbc-ringed-projection-mate-exact] to obtain $\\pi^c\\eta_M=P(\\eta_N)\\pi^o$. The target is complete; precomposition with $\\eta_M$ is bijective, proving uniqueness.",
+   "text": "Identify each given flat-term tensor model with the native derived tensor by fully faithful restriction to resolving representatives. Construct the finite ordinary tensor presentations and the scalar-extension edges from the canonical ordinary pure-tensor comparison and the normalized derived-extension counit, using the existing cochain-to-homotopy comparison theorem.",
    "uses": [
-    "lem-pur-completed-tensor-unit-insertion",
-    "lem-sp-completed-pullback-adjunction",
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-pur-cochain-coefficient-arrows",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-pc-kflat-resolution",
+    "lem-pur-cochain-homotopy-derived-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the extracted auxiliary statements; equation-projection-formula-map and algebraization.tex remark-completed-tensor-product"
+    "place": "Tags 07A4, 07A6, 0B56, 0941, 0A07; normalized finite ringed square and completion-unit mate calculation"
    }
   },
   {
-   "text": "Use [lem-pur-strict-quotient-diagonal-normalization] for $\\mathcal R=S\\Delta$, $U$, $i$, $\\ell$ and $\\mathcal L U\\mathcal R=C$ with $\\mathcal L(i)\\ell^{-1}=\\eta$, and [lem-weil-pbc-constant-tower-pushforward-normalization] for $\\chi:\\Delta P\\cong P^J\\Delta$, its limit normalization and strict counit equation $\\varepsilon^{J}_{\\Delta H}G(\\chi_H)=\\Delta(\\varepsilon_H)$. By [lem-pur-perfect-quotient-exchange-normalization], the coefficient mate $h_F:\\mathcal R(PF)\\to P_B\\mathcal R F$ and all $h_{F,n}$ are the specified perfect-coefficient isomorphisms, $d\\,U(h_F)=h^A_F$ is the constant-$A$ projection mate, and $\\rho_F=a^{-1}\\mathcal L(h^A_F)$ satisfies $\\rho_F\\eta_{PF}=P(\\eta_F)$. This applies to $H$ and to $N$, complete or not.",
+   "text": "Form the finite ringed square with quotient scalar edges. The insertion equation is the ordinaryFinitePull equation postcomposed with its inverse. Flat-term K-flat normalization and uniqueness identify its derivedComparison with finitePullIso inverse. The mate is therefore finiteProjection. Ringed exchange-tensor coherence, followed by inverse target balancing, identifies FiniteTensor.projection with finite reduction of the ordinary projection followed by finiteProjection.",
    "uses": [
-    "lem-pur-strict-quotient-diagonal-normalization",
-    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0B56, 0941, 0A07; normalized finite ringed square and completion-unit mate calculation"
+   }
+  },
+  {
+   "text": "Use completedTensorUnitInsertion and transport through the native tensor identification to invert the completed images of factor units. The reflective adjunction calculation using preservation of completeness by pushforward inverts completed pullback of the source completion unit. These isomorphisms construct CompletedTensor with the stated unit normalizations.",
+   "uses": [
+    "lem-pur-completed-tensor-unit-insertion",
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0B56, 0941, 0A07; normalized finite ringed square and completion-unit mate calculation"
+   }
+  },
+  {
+   "text": "The normalized completed adjunction gives the completed-counit/completion-unit identity. Transpose the completed projection, apply naturality of the unit, and cancel the two factor units to prove UnitEquation. Since its target is complete, injectivity of precomposition with the unit proves Unique.",
+   "uses": [
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0B56, 0941, 0A07; normalized finite ringed square and completion-unit mate calculation"
+   }
+  },
+  {
+   "text": "Apply perfectQuotientExchangeNormalization. Identify its strict exchange with towerProjection by transposing the counit mate; cancel its presentation isomorphisms. Its invertibility, finite evaluation, and completion augmentation equation give tower/finite invertibility, the finite coefficient evaluation equation, and rho times eta equals pushed eta.",
+   "uses": [
     "lem-pur-perfect-quotient-exchange-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the extracted auxiliary statements; lemma-derived-limit-is-ok and lemma-projection-formula"
+    "place": "Tags 07A4, 07A6, 0B56, 0941, 0A07; normalized finite ringed square and completion-unit mate calculation"
    }
   },
   {
-   "text": "On the quotient-ring diagram form $v=\\pi_B(h_H\\otimes1):\\mathcal R_{\\mathcal Y}M\\to P_B\\mathcal R_{\\mathcal X}N$ using [lem-pur-quotient-diagram-projection-evaluation]. Its evaluation is exactly $\\pi^{(n)}_{H_n,K_n}(h_{H,n}\\otimes1)$ with tensor balancing. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the diagram coefficient square, the object $\\Delta H$ and tensor argument $\\Delta K$. Its equality is $v=h_N\\mathcal R_{\\mathcal Y}(\\pi^o)$; the strict counit equation of [lem-weil-pbc-constant-tower-pushforward-normalization] identifies the constant-diagram projection with $\\Delta\\pi^o$. This equality holds before evaluation or inverse limit.",
+   "text": "Combine the finite square equality with the coefficient evaluation equation and naturality of finiteEvaluationIso to prove FiniteEquation. The rho unit equation and naturality make the limit arrow satisfy UnitEquation, so Unique gives LimitEquation. TransposeCompatibility follows directly from conjugateIsoEquiv for the two composite adjunctions defining directLimitIso. Ordinary projection naturality, UnitEquation, and unit injectivity give Natural.",
    "uses": [
-    "lem-pur-quotient-diagram-projection-evaluation",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-constant-tower-pushforward-normalization"
+    "lem-sp-completion-mate-comparison",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the extracted auxiliary statements; remark-compatible-with-diagram and equation-projection-formula-map"
-   }
-  },
-  {
-   "text": "Take $r=a^{-1}\\mathcal L_{\\mathcal Y}(d\\,Uv)$, with $a$ of [lem-weil-ringed-tower-pushforward-limit-comparison] and $d$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. By Steps 2-3, $d\\,Uv=h^A_N\\circ U\\mathcal R_{\\mathcal Y}(\\pi^o)$, so naturality of $\\mathcal L U\\mathcal R=C$ in [lem-pur-strict-quotient-diagonal-normalization] gives $r=\\rho_N C_{\\mathcal Y}(\\pi^o)$. Naturality of $\\eta$ and Step 2 give $r\\eta_M=\\rho_N\\eta_{PN}\\pi^o=P(\\eta_N)\\pi^o$; uniqueness in Step 1 gives $r=\\pi^c$. The finite evaluations in Step 3 and invertibility in Step 2 supply exactly the asserted source comparisons; $a^{-1}$ supplies the target comparison. [lem-pur-tower-limit-transpose-normalization] supplies the counit and augmented-transpose clause for these same comparisons. All maps are natural; no faithfulness of reductions is used.",
-   "uses": [
-    "lem-pur-tower-limit-transpose-normalization",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-pur-strict-quotient-diagonal-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the extracted auxiliary statements; lemma-Rf-commutes-with-Rlim"
+    "place": "Tags 07A4, 07A6, 0B56, 0941, 0A07; normalized finite ringed square and completion-unit mate calculation"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-completed-tensor-unit-insertion",
-  "lem-sp-completed-pullback-adjunction",
   "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-pur-strict-quotient-diagonal-normalization",
-  "lem-weil-pbc-constant-tower-pushforward-normalization",
-  "lem-pur-perfect-quotient-exchange-normalization",
-  "lem-pur-quotient-diagram-projection-evaluation",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "def-pur-cochain-coefficient-arrows",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-pc-kflat-resolution",
+  "lem-pur-cochain-homotopy-derived-comparison",
   "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-pur-tower-limit-transpose-normalization",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-sp-completion-mate-comparison",
+  "lem-pur-completed-tensor-unit-insertion",
+  "lem-pur-perfect-quotient-exchange-normalization",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Explicit completion-unit and diagram-site mate calculation from Tags 07A6, 0B56, 0E48, 0941, 0A07; algebraization.tex Tags 099A and 099G; proetale.tex Tags 099M and 099N. The combined coherence theorem is agent-formulated."
+  "place": "R7: direct finite ringed-square specialization, completion-unit uniqueness, and conjugation of the existing composite adjunctions. Uses the published perfect quotient exchange normalization for strict tower and augmentation identities."
  },
  "mathlib_match": null,
  "status": "split",
@@ -287,26 +310,10 @@
   ]
  },
  "tool_uses": [
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sf-ringed-rhom-derived-complete",
-  "lem-sp-completed-pullback-adjunction",
   "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-diagram-site-realization",
   "lem-pc-kflat-resolution",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "def-weil-pbc-projection-formula-arrows",
-  "lemma-weil-pbc-projection-formula-totalization",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-constant-tower-pushforward-normalization",
-  "lem-weil-pbc-augmented-diagram-projection-mate"
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -356,5 +363,26 @@
   "result": "fix",
   "note": "Read the node, the source places (Stacks 07A6/0B56/0941/0A07/099M/099N), the AdicSites declarations used and RingedTensorModel/Edge. Every clause matches: Noetherian A; PerfectQuotients on A/I^(n+1); the completed projection is the completedAdjunction homEquiv with comparisons fixed by their unit equations; UnitEquation, Unique, LimitEquation (Step 11, r = rho_N C(pi^o)), FiniteEquation, TransposeCompatibility, Natural; the tower/finite source comparisons are asserted invertible, not assumed. Edge cases are covered, no extra hypotheses, no hollow definitions, docstrings present, only the main theorem is sorry, lean.statement was verbatim. F1 (H3): the theorem made the ordinary tensor presentation existential (exists o : TensorData f A), so the coherence was only claimed for some unspecified derived-tensor model, while the landed ringedProjectionMateExact and ringedExchangeTensorCoherence take models as inputs. Fixed: o is now an explicit argument; b (unique, existence = Step-1 invertibility) and s stay existential. Fixes: the module, lean-record.json (new verbatim statement) and report.md. nt_compile --json: delivered 17.3 s and fixed 15.8 s, rc 0, no errors or warnings (dependency timeouts under load about 210 cleared on retry)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261026T002508-L-92293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

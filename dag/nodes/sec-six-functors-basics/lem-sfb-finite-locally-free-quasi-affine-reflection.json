@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-finite-locally-free-quasi-affine-reflection",
+ "kind": "statement",
+ "title": "Quasi-affineness reflects through a positive-degree finite locally free cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be schemes over $S$, and let $\\pi:X\\to Y$ be an $S$-morphism that is finite locally free of constant degree $d\\geq1$ [def-pc-finite-locally-free]. If $X\\to S$ is quasi-affine [def-nagata-quasi-affine-morphism], then $Y\\to S$ is quasi-affine. No Noetherianity or reducedness assumption is imposed, and $d$ need not be invertible on $S$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BD1 (lemma-norm-quasi-affine) and 0BD2 (lemma-finite-locally-free-has-norm), applied over each affine open of S. The norm has positive degree d, including noninvertible d."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-nagata-quasi-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $U\\subseteq S$ and write $X_U,Y_U$ for its inverse images and $f:X_U\\to Y_U$ for the restriction of $\\pi$. By the definition of a quasi-affine morphism, $X_U$ is quasi-affine. Restricting to an open of the target keeps the same finite, flat and locally finitely presented affine algebra charts, so $f$ is finite locally free of degree $d$; its fibres are the original fibres. It suffices to prove $Y_U$ quasi-affine for every such $U$.",
+   "uses": [
+    "def-nagata-quasi-affine-morphism",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD1 (divisors-lemma-norm-quasi-affine), applied over each affine open of S; restriction to target opens is elementary."
+   }
+  },
+  {
+   "text": "The function-norm node supplies multiplicative maps $\\nu$ preserving $1$ and satisfying $\\nu(f^\\sharp a)=a^d$. The finite map $f$ has closed image. If $y\\notin f(X_U)$, its open complement $V=Y_U\\setminus f(X_U)$ contains $y$ but $f^{-1}V=\\varnothing$. Its section ring is the zero ring, so $f^\\sharp(0)=f^\\sharp(1)$. Applying $\\nu_V$ gives $0=0^d=1$, since $d>0$, contradicting the nonzero local ring at $y$. Thus $f$ is surjective.",
+   "uses": [
+    "lem-sfb-finite-locally-free-function-norm",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Section 0BCX (divisors-section-norms), observation that condition (1) forces surjectivity; Tag 0BD2."
+   }
+  },
+  {
+   "text": "By the basic-open criterion, $X_U$ is quasi-compact and every point lies in an affine $(X_U)_a$ for a global function $a$. The multiplication identifications $\\mathcal O_{X_U}^{\\otimes n}\\cong\\mathcal O_{X_U}$ show, taking $n=1$, that $\\mathcal O_{X_U}$ is ample in the absolute affine-section definition. The line $L=\\mathcal O_{Y_U}$ is invertible (it is free of rank one). Its tensor pullback is $f^*L\\cong\\mathcal O_{X_U}$: locally the map is $b\\otimes a\\mapsto b f^\\sharp(a)$, inverse $b\\mapsto b\\otimes1$. Apply ampleness reflection to the surjective finite locally free map $f$ and this supplied line $L$. It gives $\\mathcal O_{Y_U}$ ample.",
+   "uses": [
+    "lem-sfb-quasiaffine-affine-basic-open-criterion",
+    "def-weil-pbc-ample-invertible-module",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-sfb-finite-locally-free-ample-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD1 (divisors-lemma-norm-quasi-affine): O_X ample and the norm proof for O_Y; specified-line reflection follows 0BD0, 0BCY and 0BD2. Properties 01QE."
+   }
+  },
+  {
+   "text": "Ampleness gives quasi-compactness of $Y_U$ and, at each $y$, an affine nonvanishing locus for a section of $\\mathcal O_{Y_U}^{\\otimes n}$ with $n>0$. Multiplication $a_1\\otimes\\cdots\\otimes a_n\\mapsto\\prod a_i$, inverse $a\\mapsto a\\otimes1\\otimes\\cdots\\otimes1$, identifies this sheaf with $\\mathcal O_{Y_U}$ and preserves its nonvanishing locus. Hence the basic-open criterion makes $Y_U$ quasi-affine. As $U$ was arbitrary, $Y\\to S$ is quasi-affine by definition. No division by $d$, reducedness or Noetherianity has been used.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sfb-quasiaffine-affine-basic-open-criterion",
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01PS (properties-definition-ample) and 01QE (properties-lemma-quasi-affine-O-ample); divisors 0BD1, final sentence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-quasi-affine-morphism",
+  "def-pc-finite-locally-free",
+  "lem-sfb-finite-locally-free-function-norm",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sfb-quasiaffine-affine-basic-open-criterion",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-sfb-finite-locally-free-ample-reflection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD1 (divisors-lemma-norm-quasi-affine), using the existing specified-line ampleness-reflection node for the norm argument, and 0BD2. Elementary reduction over affine opens of S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a finite locally free morphism of positive constant degree has quasi affine source then its target is quasi affine",
+   "results": "{\"t\": \"2026-10-24T11:35:34Z\", \"tool\": \"leanfinder\", \"query\": \"If a finite locally free morphism of positive constant degree has quasi affine source then its target is quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\"], \"digest\": \"36d6a9c1b6e89f1e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi affineness descends under a finite locally free surjective covering using the norm",
+   "results": "{\"t\": \"2026-10-24T11:35:31Z\", \"tool\": \"leansearch\", \"query\": \"Quasi affineness descends under a finite locally free surjective covering using the norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\"], \"digest\": \"9f44c3156f4a7e33\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.recOn, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.HasAffineProperty.iff_of_openCover; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-24T11:35:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*quasi.?affine|quasi.?affine.*norm|quasi.?affine.*descen|descen.*quasi.?affine",
+   "results": "{\"t\": \"2026-10-24T11:35:31Z\", \"tool\": \"grep\", \"query\": \"norm.*quasi.?affine|quasi.?affine.*norm|quasi.?affine.*descen|descen.*quasi.?affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with a finite flat cover of constant positive degree by a quasi affine scheme is quasi affine",
+   "results": "{\"t\": \"2026-10-24T11:35:35Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with a finite flat cover of constant positive degree by a quasi affine scheme is quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"79799d6cc45021df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free map of positive constant rank reflects quasi affineness of schemes",
+   "results": "{\"t\": \"2026-10-24T11:53:46Z\", \"tool\": \"leanfinder\", \"query\": \"A finite locally free map of positive constant rank reflects quasi affineness of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.HasRingHomProperty.HasAffineProperty\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\"], \"digest\": \"94082f6cd5526ad8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give preservation under affine morphisms in the opposite direction, or descent of unrelated morphism properties. No target-reflection statement."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?affine.*(descen|norm|reflect)|(descen|norm|reflect).*quasi.?affine",
+   "results": "{\"t\": \"2026-10-24T11:54:10Z\", \"tool\": \"grep\", \"query\": \"quasi.?affine.*(descen|norm|reflect)|(descen|norm|reflect).*quasi.?affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give preservation under affine morphisms in the opposite direction, or descent of unrelated morphism properties. No target-reflection statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi affine schemes descend through finite flat surjective morphisms",
+   "results": "{\"t\": \"2026-10-24T11:54:10Z\", \"tool\": \"leansearch\", \"query\": \"Quasi affine schemes descend through finite flat surjective morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\"], \"digest\": \"5bdf621fe90da5c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give preservation under affine morphisms in the opposite direction, or descent of unrelated morphism properties. No target-reflection statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-24T11:54:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give preservation under affine morphisms in the opposite direction, or descent of unrelated morphism properties. No target-reflection statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi affineness of the target of a finite faithfully flat morphism from a quasi affine scheme",
+   "results": "{\"t\": \"2026-10-24T11:54:40Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi affineness of the target of a finite faithfully flat morphism from a quasi affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.isAffine_of_isAffineHom\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\"], \"digest\": \"204b651de9d80989\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give preservation under affine morphisms in the opposite direction, or descent of unrelated morphism properties. No target-reflection statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-diagonalizable-subgroup-parameter",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2. Supporting input: Lemma 2.3.4 and proof, printed pp.69-70. The functor is written using fppf forms of H; the source equivalently uses multiplicative-type subgroups geometrically isomorphic to H. The proof constructs it from the open embedding locus in Hom(H,G) modulo the finite constant automorphism group; no assertion about the conjugacy orbit or a homogeneous quotient is included here. Supporting input: Conrad Lemma 2.3.4, quasi-affineness of the quotient from its finite etale cover V; Stacks norm replacement for the source EGA citation.",
+   "via": [
+    "lem-sfb-finite-diagonalizable-subgroup-parameter",
+    "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-quasi-affine-reflection",
+  "worker": "stage1",
+  "summary": "Verified Stacks 0BD1/0BD2 without additional hypotheses. Reused the existing specified-line ampleness-reflection and function-norm nodes. Added one Mathlib leaf for the global-function basic-open criterion; the structure-sheaf ampleness conversion and tensor identifications are written explicitly. Surjectivity follows directly from the positive-degree norm identity on the open complement of the finite image. Statement and statement dependencies unchanged.",
+  "blueprint": "Serves the inherited Conrad Lemma 2.3.4 quotient quasi-affineness input below the old direct-images (3) alteration branch. Read the latest sk-thm-sf-ctf-stability and direct-images proof: the current high-level route uses compactification. This split is the existing supporting geometric tool, not a change of unit route; ancestor returns None and the inherited ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Uses only closedness of a finite morphism to write the open complement of its image in the norm surjectivity argument; a generic geometric tool absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-20f8912f7",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-20f8912f7 (reviewer sub-agent of L); spot-checked: Read the item and the one new node in full, and checked them against Stacks divisors.tex 0BD1 (3773-3786), 0BD2 (3788) and properties.tex 01QE (4842). The item statement is the relative form of 0BD1+0BD2 with d>=1, unchanged and correct; d=0 is rightly excluded. Step 1 is elementary: the restriction over affine U follows from def-nagata-quasi-affine-morphism. Step 2 gets surjectivity from the function-norm node (nu(f#a)=a^d, preserves 1) on the open complement of the closed image, using the finite-closed-map node (a Mathlib leaf): 1=0^d=0 there, which is valid. Step 3: O_{X_U} is ample with n=1 because X_s equals the unit locus; f*O_Y=O_X by def-pc-module-pullback; lem-sfb-finite-locally-free-ample-reflection (same unit, read in full) gives O_{Y_U} ample, and its hypotheses are exactly met. Step 4: O^{⊗n}=O preserves nonvanishing loci, then the converse of the leaf gives Y_U quasi-affine. No cycle. The route stays in unit sk-thm-sf-ctf-stability; other citations are definitions or Mathlib leaves; no SGA. New node lem-sfb-quasiaffine-affine-basic-open-criterion is a self-contained Mathlib leaf with one declaration per clause, all read: IsQuasiAffine.toCompactSpace and isBasis_basicOpen (60-71) forward, of_forall_exists_mem_basicOpen (75-90) converse. Its 01P6 definition agrees with Mathlib's via the open-immersion instance (46-49) and of_isImmersion (51-57), the same convention as the existing leaves lem-sfb-affine-quasi-affine-affinization-square and lem-trf-quasi-affine-canonical-affine-embedding. The `how` field could name those two declarations, but this is advisory, not a fault. DAG search found no duplicate of the leaf; it is not a restatement of the item; edge cases (empty, affine) checked. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeQuasiAffineReflection",
+  "declaration": "AlgebraicGeometry.isQuasiAffineHom_of_finiteLocallyFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeQuasiAffineReflection.lean",
+  "statement": "theorem isQuasiAffineHom_of_finiteLocallyFree {S : Scheme.{u}} (X Y : Over S) (π : X ⟶ Y) (d : ℕ) (hd : 1 ≤ d) [π.left.IsFiniteLocallyFreeOfDegree d] [IsQuasiAffineHom X.hom] : IsQuasiAffineHom Y.hom",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c97e4c7c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Lean theorem isQuasiAffineHom_of_finiteLocallyFree {S : Scheme.{u}} (X Y : Over S) (π : X ⟶ Y) (d) (hd : 1 ≤ d) [π.left.IsFiniteLocallyFreeOfDegree d] [IsQuasiAffineHom X.hom] : IsQuasiAffineHom Y.hom matches the node clause by clause and Stacks 0BD1/0BD2 (divisors.tex, section 0BCX) in relative form over affine opens of S. IsFiniteLocallyFreeOfDegree (FiberDegree.lean:790, fibre degree = d) and IsQuasiAffineHom (QuasiAffine.lean:82) are the recorded owners. All 3 stmt_deps cited. No extra hypotheses; single universe. d=0 excluded, surjectivity forced by the degree, empty schemes allowed. Rule-7 imports correct (public for statement deps, plain for stated proof deps; ample-reflection has no lean record yet, so not imported). Docstrings give source place, blueprint tag and the 4 proof steps. sorry-only. lean.statement verbatim. Lines ≤100. No H4 clash. Node diff is only the lean record. Report has Worker report and Second reading sections. No change made, so no compile."
+ }
+}

@@ -146,17 +146,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ush2246 (reviewer sub-agent of L); spot-checked: Item is Tag 03Q9 first assertion (R^qf_*F stalk), statement true and matches source. Steps 1-2: 03Q8 presheaf + sheafification stalk, affine cofinality, strict-henselization limit, fibre-product limit; qcqs and affine transitions hold. FIX more, RETURN less: (1) class (b): new child lem-weil-pbc-etale-cohomology-continuity-unrestricted is a special case (sheaf in degree 0, T=X x_S V_0) of existing lem-weil-pbc-derived-etale-cohomology-limit (Tag 0GIT, no torsion) and of lem-weil-pbc-etale-cohomology-limit-complex-systems (0EZM); dropped it and cited the existing node in Step 3 with the degree-0 reduction folded as elementary text (def-weil-pbc-derived-inverse-image, lem-weil-pbc-inverse-image-composition, def-weil-pbc-etale-cohomology); uses/proof_deps/tool_uses updated. Checked no cycle (item not reachable from the cited node). Tool uses (generic Stacks tools) accepted. The J1 second reading missed this duplicate.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/UnrestrictedStrictHenselizationStalk.lean",
   "declaration": "AlgebraicGeometry.Etale.unrestricted_strictHenselization_stalk",
-  "file": "lean/Sheaf/AlgebraicGeometry/UnrestrictedStrictHenselizationStalk.lean",
-  "statement": "theorem unrestricted_strictHenselization_stalk {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type w} [Field Ω] [IsAlgClosed Ω] (xbar : Spec (.of Ω) ⟶ S) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{w + 1}) (q : ℕ) : ∃ r : (Scheme.pointSmallEtale xbar).sheafFiber.obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ⟶ (Sheaf.Γ (Scheme.strictHenselizationScheme xbar).smallEtaleTopology AddCommGrpCat.{w + 1}).obj ((upperStar AddCommGrpCat.{w + 1} (Scheme.strictHenselizationStructuralMap xbar)).obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))), IsStrictHenselizationStalkRestriction xbar ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) r ∧ IsIso (r ≫ strictHenselizationCohomologyComparison xbar f F q)",
+  "statement": "theorem unrestricted_strictHenselization_stalk\n    {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]\n    {Ω : Type w} [Field Ω] [IsAlgClosed Ω]\n    (xbar : Spec (.of Ω) ⟶ S)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{w + 1}) (q : ℕ) :\n    ∃ r : (Scheme.pointSmallEtale xbar).sheafFiber.obj\n        ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n          ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj\n            ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ⟶\n        (Sheaf.Γ (Scheme.strictLocalization xbar).smallEtaleTopology\n          AddCommGrpCat.{w + 1}).obj\n          ((upperStar AddCommGrpCat.{w + 1} (Scheme.strictLocalizationToBase xbar)).obj\n            ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n              ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj\n                ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))),\n      IsStrictHenselizationStalkRestriction xbar\n          ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n            ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj\n              ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) r ∧\n        IsIso (r ≫ strictHenselizationCohomologyComparison xbar f F q)",
   "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-11",
-  "existing": false,
-  "note": "The canonical map is the germ restriction r characterized by IsStrictHenselizationStalkRestriction, followed by the already-landed strictHenselizationCohomologyComparison; existence and uniqueness of r are already stated in StrictHenselizationRestriction."
+  "by": "M4",
+  "date": "2026-10-24",
+  "note": "Reconcile the explicit retirement assignment with the already withdrawn empty SHEAF module: the canonical unrestricted stalk formula is realized by the existing adopted theorem on strictLocalization. Its complete signature is copied verbatim. The small coordinate-ring-colimit model is canonically isomorphic over the base, not definitionally equal; its separately retained comparison theorem and all DAG dependencies are preserved. Existing consumers already use the adopted theorem or explicit model transport."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -167,13 +178,13 @@
   "note": "qcqs f, abelian F on X_et (AddCommGrpCat w+1), geometric point Ω alg. closed same universe, S_(x̄)=strictHenselizationScheme, p=pullback.fst along strictHenselizationStructuralMap, all q:ℕ, stalk via pointSmallEtale.sheafFiber of R^q f_*F, canonical map = r ≫ strictHenselizationCohomologyComparison with r tied by IsStrictHenselizationStalkRestriction (unique by existsUnique_), conclusion IsIso; stmt_deps gain two landed used nodes, check_dag 0 cycles"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261012T060745-L-2910928",
-  "kind": "interface",
+  "landing": "20261024T015224-L-2341644",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

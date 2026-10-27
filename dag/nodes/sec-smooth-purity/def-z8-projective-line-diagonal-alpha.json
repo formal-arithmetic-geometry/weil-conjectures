@@ -1,0 +1,128 @@
+{
+ "id": "def-z8-projective-line-diagonal-alpha",
+ "kind": "definition",
+ "title": "Projective Line Diagonal Maps",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ndef projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u}) (a : Bool) :\n    ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).obj\n        ((ordinaryFinitePushforward A (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n          (ordinaryFiniteUnit A (ProjectiveLine S)))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-sp-p1-diagonal-charts",
+  "def-weil-geometric-fibre",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-pc-projective-proper",
+  "lem-z8-etale-single-pullback-comparisons",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Retain the existing projections and projective-space chart isomorphisms. The source alpha specializes the identical pair of single-object derived units constructed in EtaleSinglePullbackComparisons; expanding the construction recovers the original composite of supportedDerivedUnit maps, with no choice or change in normalization.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "def-pc-fibre-product",
+    "def-sp-p1-diagonal-charts",
+    "def-weil-geometric-fibre",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-pc-projective-proper",
+    "lem-z8-etale-single-pullback-comparisons",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lemma-nagata-projective-space-base-change-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-sp-p1-diagonal-charts",
+  "def-weil-geometric-fibre",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-pc-projective-proper",
+  "lem-z8-etale-single-pullback-comparisons",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineDiagonalMaps.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha",
+  "declarations": [
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha"
+  ],
+  "statement": "def projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u}) (a : Bool) :\n    ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).obj\n        ((ordinaryFinitePushforward A (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n          (ordinaryFiniteUnit A (ProjectiveLine S)))",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

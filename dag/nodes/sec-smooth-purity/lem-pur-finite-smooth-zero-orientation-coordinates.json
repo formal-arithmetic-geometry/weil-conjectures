@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-finite-smooth-zero-orientation-coordinates",
+ "kind": "statement",
+ "title": "The geometric rank-zero orientation in graph-normalized unit coordinates",
+ "statement": "Let A be a finite commutative ring, N a positive integer annihilating A, and f:X→Y a separated quasi-compact compactifiable etale morphism between Noetherian schemes. Assume N is invertible in the global sections of X. Let d be a natural number with a supplied equality hd:d=0. Supply Geometry d for the diagonal section of the first projection, and an isomorphism alpha:omega_f≅line A N X d satisfying OrientationNormalized, with the actual Rees specialization and bundle-section adjoint [def-pur-finite-smooth-canonical-maps, def-pur-finite-smooth-adjunction-data]. For every graph/homotopy-normalized compact-support comparison family C [def-pur-finite-smooth-comparison-coordinates], alpha followed by zeroLineIso at d and hd equals finiteSmoothOmegaCoordinates A C f. This assertion concerns the orientation at the coefficient unit only; it contains no tensor mate at a variable complex.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "sk-prop-sp-orientation.proof.md, three-factor orientation formula; geometric part (steps 1--7) of lem-pur-finite-smooth-gamma-normalization, over arbitrary finite coefficients as in sk-thm-smooth-purity.proof.md, first paragraph."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-comparison-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Extract the normalized Rees comparison, the cone/bundle square, and the map equality from OrientationNormalized. Install the supplied Geometry so its compactification and conormal-rank proofs are used consistently.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the rank-zero etale section specialization/integration formula to the section Delta of p₁, and apply the diagonal coordinate identity to f.",
+   "uses": [
+    "lem-pur-finite-etale-section-integration",
+    "lem-pur-finite-etale-diagonal-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bundle-section adjunct is invertible by bundleAdjoint_isIso, and the normal-section mate is invertible by normalSectionMap_isIso. Substitute the two factor equations into the extracted orientation equation and cancel their composite. This proves alpha.hom = omegaCoordinates.hom followed by zeroLineIso.inv. Postcompose with zeroLineIso.hom and use Iso.ext to get the unchanged equality of isomorphisms.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-sp-finite-section-integrated-specialization-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-etale-diagonal-coordinates",
+  "lem-pur-finite-etale-section-integration",
+  "lem-sp-finite-section-integrated-specialization-base-change",
+  "lem-trf-finite-ring-section-deformation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "K1: Lean cancellation of the diagonal and rank-zero section-integration identities, following the original three-factor formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism the geometric rank zero purity orientation equals the unit component of the graph normalized sum adjunction",
+   "results": "{\"t\": \"2026-10-27T07:23:22Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale morphism the geometric rank zero purity orientation equals the unit component of the graph normalized sum adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.Etale\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.hasMap\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"RingHom.Etale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"47529da7f5349660\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; the existing categorical adjunction lemmas do not supply the specified geometric or tensor normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "{\"t\": \"2026-10-27T07:23:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightAdjointUniq\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointUniq\", \"CategoryTheory.Adjunction.rightAdjointUniq_refl\", \"CategoryTheory.Adjunction.rightAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.rightAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.unit_rightAdjointUniq_hom\", \"CategoryTheory.Adjunction.rightAdjointUniq_trans\", \"CategoryTheory.Adjunction.rightAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app\"], \"digest\": \"f4fb8ba5e3e409a4\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; the existing categorical adjunction lemmas do not supply the specified geometric or tensor normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "OrientationNormalized|finiteSmoothOmegaCoordinates|bundleSectionAdjoint",
+   "results": "{\"t\": \"2026-10-27T07:23:22Z\", \"tool\": \"grep\", \"query\": \"OrientationNormalized|finiteSmoothOmegaCoordinates|bundleSectionAdjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; the existing categorical adjunction lemmas do not supply the specified geometric or tensor normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The rank zero geometric smooth purity orientation for an etale morphism equals its normalized coefficient unit adjunction comparison",
+   "results": "{\"t\": \"2026-10-27T07:31:21Z\", \"tool\": \"leansearch\", \"query\": \"The rank zero geometric smooth purity orientation for an etale morphism equals its normalized coefficient unit adjunction comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\"], \"digest\": \"36c6929b1b709368\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: returned algebraic etale criteria or ordinary tensor duality, not this specified derived etale normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothIntrinsicLevelProperties",
+  "date": "2026-10-27",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-prop-sp-orientation.proof.md, three-factor orientation formula; geometric part (steps 1--7) of lem-pur-finite-smooth-gamma-normalization, over arbitrary finite coefficients as in sk-thm-smooth-purity.proof.md, first paragraph.",
+   "via": [
+    "lem-pur-finite-smooth-intrinsic-level-properties",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothZeroOrientationCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteSmoothZeroOrientationCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSmoothZeroOrientationCoordinates",
+  "statement": "theorem finiteSmoothZeroOrientationCoordinates\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] [Etale f]\n    (d : ℕ) (hd : d = 0)\n    (G : FiniteRingSectionDeformation.Geometry d\n      (pullback.fst f f) (pullback.diagonal f))\n    (hX : IsUnit (N : Γ(X, ⊤)))\n    (alpha : dualizingComplex (ModuleCat.{u + 1} A) f ≅ line A N hA X d)\n    (hAlpha : OrientationNormalized A N hN hA f d G hX alpha)\n    (C : FiniteSmoothCompactSupportComparisons A)\n    (hC : FiniteSmoothComparisonNormalized A C) :\n    alpha ≪≫ zeroLineIso A N hA X d hd = finiteSmoothOmegaCoordinates A C f",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T094445-L-230129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T103439-L-1079889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

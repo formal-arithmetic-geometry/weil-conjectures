@@ -67,7 +67,32 @@
   "lemma-weil-pbc-eight-curve-devissage"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      600,
+      634
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -95,11 +120,16 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X$ be a reduced separated curve of finite type over an algebraically\nclosed field $k$, and let $F$ be a constructible sheaf of\n$\\mathbf F_\\ell$-modules on $X_{\\Et}$. There is a dense open immersion\n$j:U\\hookrightarrow X$ with $U=\\coprod_aU_a$ a finite disjoint union of\nirreducible opens and $G=j^{-1}F$ finite locally constant. With\n$i:Z=X\\setminus U\\hookrightarrow X$, the complement $Z$ is a finite set of\nclosed points, and the sequence\n\n$$\n0\\longrightarrow j_!G\\longrightarrow F\n\\longrightarrow i_*i^{-1}F\\longrightarrow0\n$$\n\nis exact. The eight assertions $\\mathcal C_1,\\dots,\\mathcal C_8$ (vanishing,\nfiniteness, invariance under algebraically closed extension of $k$, and\nsurjectivity of $H^2$ onto opens) hold for $(X,F)$ if and only if they hold\nfor $(X,j_!G)$, and they hold for $(X,j_!G)$ if they hold for\n$(X,j_{a,!}(G|_{U_a}))$ for every $a$, where $j_a:U_a\\hookrightarrow X$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a reduced separated curve of finite type over an algebraically\nclosed field $k$, let $\\Lambda$ be a finite ring, $r$ a prime, and $F$ a\nconstructible sheaf of $\\Lambda$-modules on $X_{\\Et}$ with $rF=0$. There is\na dense open $j:U\\hookrightarrow X$ whose connected components are\nirreducible, such that $j^{-1}F$ is finite locally constant and the eight\nassertions $\\mathcal C_1,\\dots,\\mathcal C_8$ of\n[def-weil-pbc-eight-curve-assertions] (vanishing, finiteness, invariance\nunder algebraically closed extension of $k$, and surjectivity of $H^2$ onto\nopens) hold for $(X,F)$ if and only if they hold for $(X,j_!j^{-1}F)$.",
   "proof": [
    {
-    "text": "The partition witnessing constructibility of $F$ is a stratification in the\nsense of [def-constructible-stratification] with finite locally constant\npullbacks, so $F$ is constructible in the sense of\n[def-constructible-constructible], and [prop-constructible-generic-constancy]\ngives a dense open $U'\\subseteq X$ with $F|_{U'}$ finite locally constant.\nRemove from $U'$ all intersections of distinct irreducible components (a\nfinite set of closed points). The resulting dense open $U=\\coprod_aU_a$ meets\nevery component, each $U_a$ is irreducible, and $G=j^{-1}F$ is finite locally\nconstant.",
+    "text": "The partition witnessing constructibility of $F$ is a stratification in the\nsense of [def-constructible-stratification] with finite locally constant\npullbacks, so $F$ is constructible in the sense of\n[def-constructible-constructible], and [prop-constructible-generic-constancy]\ngives a dense open $U'\\subseteq X$ with $F|_{U'}$ finite locally constant.\nRemove from $U'$ all intersections of distinct irreducible components (a\nfinite set of closed points). The resulting dense open $U=\\coprod_aU_a$ meets\nevery component, its connected components $U_a$ are irreducible, and\n$G=j^{-1}F$ is finite locally constant. Let $i:Z=X\\setminus U\\hookrightarrow X$\nbe the complement, with its reduced structure; it is a finite set of closed points,\nsince $U$ contains every generic point of $X$.",
     "uses": [
      "def-constructible-stratification",
      "def-constructible-constructible",
@@ -126,13 +156,8 @@
     "text": "These maps separate the eight assertions as follows. Assertions (1)–(3)\nand (8) use the isomorphisms in degrees at least two, also after replacing\n$X$ by an open $W$ and $U$ by $W\\cap U$. Assertions (4) and (5) use the\ndisplayed five-term sequence and finiteness of the boundary-stalk sum.\nFor (6) and (7), base change preserves $Z$, its stalk groups, $\\epsilon$,\n$\\rho$, and the boundary map; the two five-term sequences form a commuting\ndiagram, and the five lemma handles degrees $0,1$, while the higher-degree\nmaps are already identified. Thus the eight assertions hold for $F$ if\nand only if they hold for $j_!G$.",
     "uses": [],
     "elementary": null
-   },
-   {
-    "text": "Finally $j_!G=\\bigoplus_a j_{a,!}(G|_{U_a})$. The inclusions and projections\nsplit this finite sum, and repeated split exact sequences\n$0\\to E_1\\to E_1\\oplus E_2\\to E_2\\to0$ together with short-exact devissage\nreduce to the individual irreducible components.",
-    "uses": [],
-    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

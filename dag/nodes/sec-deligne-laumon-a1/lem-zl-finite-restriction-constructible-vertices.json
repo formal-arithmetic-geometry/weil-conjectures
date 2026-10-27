@@ -1,0 +1,115 @@
+{
+ "id": "lem-zl-finite-restriction-constructible-vertices",
+ "kind": "statement",
+ "title": "Constructibility of completed semilinear restriction vertices",
+ "statement": "Fix finite-field datum F, prime ell different from its characteristic, a finite E/Q_ell, and a semilinear diagram G of separated finite-type F.k schemes, with f and f' finite [def-zl-finite-restriction-diagram-models]. Let K be an integral constructible complex on X', Q a flat-term K-flat representative of K, and T a strict quotient system with the specified compatible quotient comparisons and reduction presentation [lem-coef-derived-system-evaluation-calculus]. Every vertex of both completed exchange and restriction squares associated to T is integral constructible on Spec F.k. This asserts only the eight object properties and no equality of morphisms.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+  "place": "Finite-stalk formula and Frobenius-permutation sentences; semilinear diagram refinement, parent proof steps 1--6."
+ },
+ "stmt_deps": [
+  "def-zl-finite-restriction-diagram-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "The presentation identifies Q(T) with the derived reduction of K. Reindex along the diagram isomorphisms: this preserves flat terms, K-flatness and quotient maps. The reindexing completion comparison identifies the primed completed vertices pulled along c with the corresponding whole-system realizations on the transported input.",
+   "uses": [
+    "lem-pod-reindexing-completion-unit-tensor",
+    "lem-pod-isomorphism-field-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite integral fibre reconstruction to f and f'. Its comparisons identify completed B and C with point pullback of finite direct image and finite fibre direct image of pullback; its constructibility clauses give the object properties. Completed D is the finite biproduct of point pullbacks. Pullback preservation and closure of constructibility under finite biproducts give constructibility of D, including the empty zero biproduct. Transfer all properties through the comparison isomorphisms.",
+   "uses": [
+    "lem-zl-finite-integral-fibre-reconstruction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-completion-unit-tensor",
+  "lem-pod-isomorphism-field-transport",
+  "lem-zl-finite-integral-fibre-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+  "place": "Finite-stalk formula and Frobenius-permutation sentences; semilinear diagram refinement, parent proof steps 1--6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of finite geometric fibre base change counit and restriction maps under isomorphisms",
+   "results": "TopCat.Presheaf.map_restrict, Scheme.Modules.restrictFunctorAdjCounitIso, finite base change stability. These concern ordinary presheaf restrictions or geometry, not the specified strict coefficient systems.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of base change and counit under isomorphisms of commutative squares, pullback geometric fibre point permutation",
+   "results": "CategoricalPullback.CatCommSqOver.iso_hom_naturality and Scheme.Pullback comparison lemmas; none states the coefficient-system comparison or completed constructibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|pullback.mapIso|CommSq.map",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates supplies mateEquiv and its counit identities; Mathlib.CategoryTheory.CommSq supplies functorial preservation. No theorem about these strict coefficient-system arrows or constructibility. Searched DAG and Sheaf/WeilConjectures: no duplicate of the two argument steps; the completed Frobenius germ square is a different specialized statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRestrictionDiagramNaturality",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "Finite-stalk formula and Frobenius-permutation sentences; semilinear diagram refinement, parent proof steps 1--6.",
+   "via": [
+    "lem-zl-finite-restriction-diagram-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRestrictionConstructibleVertices",
+  "file": "lean/Sheaf/Paper/FiniteRestrictionConstructibleVertices.lean",
+  "declaration": "WeilConjectures.FiniteRestrictionNaturality.finiteRestrictionConstructibleVertices",
+  "statement": "theorem finiteRestrictionConstructibleVertices\n    (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ F.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (G : Diagram F.k)\n    [IsSeparated G.aX] [LocallyOfFiniteType G.aX] [QuasiCompact G.aX]\n    [IsSeparated G.aY] [LocallyOfFiniteType G.aY] [QuasiCompact G.aY]\n    [IsSeparated G.aX'] [LocallyOfFiniteType G.aX'] [QuasiCompact G.aX']\n    [IsSeparated G.aY'] [LocallyOfFiniteType G.aY'] [QuasiCompact G.aY']\n    [IsFinite G.f] [IsFinite G.f']\n    (K : sfIntegralConstructibleCategory l E G.X')\n      (Q : CochainComplex (scalarReductionSource.{u, u} l E G.X') ℤ)\n      (hQ : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        (J := Scheme.ProEt.topology G.X')\n        (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E G.X') Q)\n      (hflat : ∀ j : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n        (J := Scheme.ProEt.topology G.X')\n        (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E G.X') (Q.X j))\n      (eQ : DerivedCategory.Q.obj Q ≅ K.obj)\n      (T : CochainComplex (coefficientSequenceModules l E G.X') ℤ)\n      (κ : ∀ n : ℕ, (level l E G.X' n).obj T ≅\n        ((scalarReductionExtension.{u, u} l E G.X' n).mapHomologicalComplex (.up ℤ)).obj Q)\n      (eT : (coefficientDerivedSystemEvaluationCalculus.{u, u} l E G.X').choose.reduction.obj\n        (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj T)\n      (hT : CoefficientReductionPresentation.{u, u} l E G.X'\n        (CoefficientDerivedSystemFibers.toCoefficientDerivedSystemReduction.{u, u}\n          (CoefficientDerivedSystemCalculus.toCoefficientDerivedSystemFibers.{u, u}\n            (coefficientDerivedSystemEvaluationCalculus.{u, u} l E G.X').choose)) Q hQ T eT κ) :\n    (completed l E (exchangeSquare l E G T)).Vertices\n      (sfIntegralConstructible l E (Spec (.of F.k))) ∧\n    (completed l E (restrictionSquare l E G T)).Vertices\n      (sfIntegralConstructible l E (Spec (.of F.k)))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0bdbb",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164232-L-976036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0bdbb",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164232-L-976036",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs split nodes strict-transport/constructible-vertices; relocated Models block vs published FiniteRestrictionDiagramNaturality (identical bar docstring tags); node proof_deps vs Lean uses"
+ }
+}

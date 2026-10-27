@@ -1,0 +1,151 @@
+{
+ "id": "def-pur-canonical-tate-completed-comparisons",
+ "kind": "definition",
+ "title": "Completed integral Tate tensor and pullback comparisons",
+ "status": "split",
+ "statement": "Fix the unshifted flat Tate complexes and ordinary comparisons [def-pur-canonical-tate-complex-comparisons]. The actual completed integral tensor-operation unit on the two integral line complexes is invertible. Its ordinary normalized product therefore gives the completed tensor product isomorphism to exponent $r+s$. Under every scheme morphism on which $\\ell$ is invertible, the specified completed pullback augmentation on the integral single line is invertible; composing its inverse with ordinary line pullback gives the integral derived pullback comparison. The finite intrinsic tensor uses its existing K-flat model comparison and normalized ordinary product. All functors, augmentations and representatives are the previously specified ones [def-pur-completed-pullback-tensor-comparison], [lem-pur-integral-ambient-operation-models].",
+ "stmt_deps": [
+  "def-pur-canonical-tate-complex-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Canonical roots-of-unity Tate factors and their tensor, coefficient and pullback comparisons in the source-of-purity composite."
+ },
+ "proof": [
+  {
+   "text": "A proved private helper treats an arbitrary good intrinsically complete representative: use the legacy comparison, choose an auxiliary prime greater than l, apply the Roos intrinsic criterion, and use the representative normalization of completionUnit. Both operation-unit arguments instantiate this helper.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For integralTensorUnit_isIso, tensor_good gives a flat-term K-flat representative of the ordinary tensor. Its existing normalized integralProductComplex identifies its localization with the integral twisting object of exponent r+s, so intrinsic constructibility gives derived completeness. Convert this with sfDerivedComplete_iff_legacy, choose an auxiliary prime greater than l, and apply the Roos intrinsic completeness equivalence using the actual coefficient datum. The representative normalization of completionUnit identifies its composite with completionComparison with Q(roosUnit). Both factors are invertible. Finally tensorOperationUnit is roosUnit followed by the Roos image of tensorTowerIso, whose localization is invertible.",
+   "uses": [
+    "def-sf-orientation-integral-line-comparisons",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "def-pur-integral-derived-operations",
+    "def-coefficient-twists-detailed",
+    "def-pur-canonical-tate-complex-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For integralPullUnit_isIso, integralPullbackAugmentation_ambient identifies the specified augmentation with the termwise ordinary-pullback comparison followed by the ambient operation unit. The ordinary line comparison and singleMapHomologicalComplex identify the ambient pullback representative with the integral single line on the source. The constructibility of that line gives intrinsic completeness; transport it to the legacy criterion and apply roosIntrinsicCompletenessEquivalence with the coefficient datum and an auxiliary prime greater than l. The defining representative equation for completionUnit then makes Q(roosUnit) invertible. Compose with the localized Roos image of pullTowerIso, and then with the termwise pullback comparison. This proves invertibility of the specified augmentation.",
+   "uses": [
+    "lem-sf-integral-pullback-augmentation-ambient",
+    "def-sf-orientation-integral-line-comparisons",
+    "lem-pur-integral-ambient-operation-models",
+    "def-coefficient-twists-detailed",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "def-pur-integral-derived-operations",
+    "def-pur-canonical-tate-complex-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "def-pur-integral-derived-operations",
+  "def-sf-orientation-integral-line-comparisons",
+  "lem-pur-integral-ambient-operation-models",
+  "def-coefficient-twists-detailed",
+  "def-pur-canonical-tate-complex-comparisons",
+  "lem-sf-integral-pullback-augmentation-ambient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "E9: original comparison declarations grouped into a separate module after local definition-opacity and shared-completeness optimizations still left the original file over 60 seconds. No statement, data construction, or mathematical hole added."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product and pullback of single cochain complexes of Tate coefficient sheaves",
+   "results": "HomologicalComplex.tensorObj, HomologicalComplex.tensorHom, SheafOfModules.pullback, PresheafOfModules.Monoidal.tensorObj. No normalized Tate comparison package.",
+   "date": "2026-10-27",
+   "verdict": "The existing project declarations are retained; Mathlib supplies categorical infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of complexes concentrated in degree zero is the complex of the tensor product",
+   "results": "No exact normalized root-generator comparison; the proved private orientation helpers implement the single-complex tensor construction.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project comparison route, with unchanged statements."
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Tt]ensor|[Tt]ensor.*[Ss]ingle; rg on lean/WeilConjectures and lean/Sheaf",
+   "results": "The msearch grep of Mathlib found no exact normalized Tate comparison. Project rg finds proved singleTensorLift, singleTensorExtract_lift, singleTensorExtract_injective and rootTensorExtract_pure in OrientationIntegralCoefficientTwists; PositiveRootTensorProduct and IntegralPullbackAugmentationAmbient supply the specialized normalization statements.",
+   "date": "2026-10-27",
+   "verdict": "No new mathematics is introduced by relocating the existing declarations into compilation units."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalTateComparisons",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-tate-datum",
+   "place": "Completed integral Tate tensor and pullback comparisons in the canonical comparison construction.",
+   "via": [
+    "def-pur-canonical-tate-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalTateCompletedComparisons",
+  "file": "lean/Sheaf/Paper/CanonicalTateCompletedComparisons.lean",
+  "declaration": "WeilConjectures.CanonicalTate.integralPullUnit_isIso",
+  "declarations": [
+   "WeilConjectures.CanonicalTate.integralTensorUnit_isIso",
+   "WeilConjectures.CanonicalTate.integralProduct",
+   "WeilConjectures.CanonicalTate.finiteProduct",
+   "WeilConjectures.CanonicalTate.integralPullUnit_isIso",
+   "WeilConjectures.CanonicalTate.integralPull"
+  ],
+  "statement": "theorem integralPullUnit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] (r : ℕ) :\n    IsIso (DerivedCategory.Q.map ((pullbackAugmentation l E f).app\n      (integralComplex l E Y r)))",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "independent cc review: old CanonicalTateComparisons/CanonicalTateArrowNaturality/RationalPurityTraceCoherence (clone == delivery base) block-by-block against the 12 delivered modules; node lean records and stmt_deps against declaration usage; #print axioms of the new proofs and their cited helpers"
+ }
+}

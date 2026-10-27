@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-regular-conductor-fraction-normalization",
+ "kind": "statement",
+ "title": "A regular conductor element identifies total fractions and normalization",
+ "statement": "Let $m\\ge1$ be an integer. For $1\\le i\\le m$, let $D_i$ be a commutative integral domain, let $E_i=\\operatorname{Frac}(D_i)$ be its field of fractions, and suppose every element of $E_i$ satisfying a monic polynomial with coefficients in $D_i$ belongs to $D_i$. Put $B=\\prod_{i=1}^mD_i$, let $A\\subseteq B$ be a unital subring (a subset containing $0,1$ and closed under addition, negation and multiplication), and suppose there is $t\\in A$ such that multiplication by $t$ is injective on $B$ and $tB\\subseteq A$. A non-zero-divisor on a ring $C$ means an element $s$ such that multiplication by $s$ is injective; write $Q(C)$ for the localization of $C$ at all its non-zero-divisors [def-weil-pbc-module-localization, with $M=C$]. Ring maps use [def-weil-pbc-algebra-hom-quotient], and integrality and integral closure use [def-weil-pbc-integral-closure].\nEvery non-zero-divisor of $A$ remains a non-zero-divisor on $B$ and has nonzero image in each $D_i$. The formula\n$$\\iota:Q(A)\\longrightarrow\\prod_iE_i,\\qquad r/s\\longmapsto(r_i/s_i)_i$$\ndefines an injective ring map. There is a unique injective ring map\n$$k:B\\longrightarrow Q(A),\\qquad k(b)=(tb)/t,$$\nextending the localization map of $A$, and $\\iota(k(b))=(b_i)_i$. For every non-zero-divisor $s\\in B$, the element $ts\\in A$ is a non-zero-divisor of $A$ and $k(s)^{-1}=t/(ts)$. The inclusion $A\\subseteq B$ therefore induces an isomorphism $Q(A)\\cong Q(B)$ whose restriction on $k(B)$ is the localization map of $B$.\nEvery $w\\in Q(A)$ integral over $A$ lies in $k(B)$. Consequently, if every element of $B$ is integral over $A$, then\n$$\\operatorname{integralClosure}_{Q(A)}(A)=k(B).$$\nAll maps in these conclusions use the given inclusion $A\\subseteq B$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: generic regular-conductor argument justifying that the displayed series ring is the integral closure inside the total fraction ring. This general lemma is the agent extraction of the returned item steps 8-9, not a verbatim statement of the tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "In $B$, multiplication by $u=(u_i)$ is injective exactly when every $u_i\\ne0$: if all coordinates are nonzero, $u_ib_i=0$ forces $b_i=0$ in each domain; if $u_i=0$, the nonzero vector $e_i$ with coordinate $1$ at $i$ and $0$ elsewhere is killed. Products of non-zero-divisors are non-zero-divisors, since a composite of injective multiplication maps is injective. In particular every $t_i\\ne0$, and $t$ is also a non-zero-divisor on its subring $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "Let $s$ be a non-zero-divisor of $A$ and suppose $sb=0$ in $B$. Since $tb\\in A$, we have $s(tb)=0$ in $A$, hence $tb=0$, and injectivity of multiplication by $t$ on $B$ gives $b=0$. Thus $s$ is regular on $B$, and step 1 implies $s_i\\ne0$ for every $i$. This proves the first assertion without assuming that any coordinate projection $A\\to D_i$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "Apply the fraction construction of [def-weil-pbc-module-localization] to $C=A$ and $C=B$, with $S$ the non-zero-divisors. Its relation simplifies to $r/s=r^{\\prime}/s^{\\prime}$ if and only if $s^{\\prime}r=sr^{\\prime}$, because the extra factor in $S$ is cancellable. By steps 1–2, this is equivalent to equality of all $r_i/s_i$ and $r_i^{\\prime}/s_i^{\\prime}$ in $E_i$. The displayed fraction addition and multiplication formulas therefore give injective unital ring maps $\\iota:Q(A)\\to\\prod_iE_i$ and $J:Q(B)\\to\\prod_iE_i$. In particular the localization maps of $A$ and $B$ are injective.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "Define $k(b)=(tb)/t$; the numerator belongs to $A$ by the conductor hypothesis and the denominator is regular by step 1. Coordinate cancellation gives $\\iota(k(b))=(b_i)_i$. Hence $k$ is injective, and applying the injective map $\\iota$ to the addition, multiplication and unit identities proves that $k$ is a unital ring map. For $a\\in A$, the fraction relation of [def-weil-pbc-module-localization] gives $(ta)/t=a/1$, so $k$ extends the localization map.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "If $h:B\\to Q(A)$ is any unital ring map extending the localization map of $A$, then $h(t)h(b)=h(tb)=(tb)/1$. The element $h(t)=t/1$ has inverse $1/t$ in $Q(A)$ by the fraction formulas of [def-weil-pbc-module-localization]. Multiplying gives $h(b)=(tb)/t=k(b)$ for every $b$. This proves the claimed uniqueness even without imposing injectivity on $h$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "For regular $u\\in B$, the element $tu$ lies in $A$ and is regular on $B$ by step 1, hence on $A$. Thus $t/(tu)$ is a valid fraction in $Q(A)$. The fraction multiplication formula of [def-weil-pbc-module-localization] gives $k(u)\\,t/(tu)=((tu)t)/(t(tu))=1$. Commutativity gives the other inverse identity, proving the asserted formula $k(u)^{-1}=t/(tu)$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "The inclusion induces $F:Q(A)\\to Q(B)$ by $r/s\\mapsto r/s$: steps 1–2 make its denominators valid, and the relation and operation formulas of [def-weil-pbc-module-localization] make it a unital ring map. It satisfies $JF=\\iota$. In the other direction put $H(b/u)=(tb)/(tu)$ for regular $u\\in B$. Both numerator and denominator belong to $A$, and the latter is regular by step 6. If $b/u=b^{\\prime}/u^{\\prime}$, then $bu^{\\prime}=b^{\\prime}u$ in $B$, so $(tb)(tu^{\\prime})=(tb^{\\prime})(tu)$ in $A$. Thus $H$ is well-defined.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "For every $b/u\\in Q(B)$, cancellation in each field gives $\\iota(H(b/u))=(b_i/u_i)_i=J(b/u)$. Applying the injective $\\iota$ and the ring map $J$ to the three ring-operation identities proves that $H$ is a unital ring map. Now $\\iota HF=JF=\\iota$ and $JFH=\\iota H=J$; injectivity yields $HF=1$ and $FH=1$. Finally $F(k(b))=(tb)/t=b/1$ in $Q(B)$ by the fraction relation of [def-weil-pbc-module-localization]. The resulting isomorphism therefore has exactly the required compatibility with $B$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "Let $w\\in Q(A)$ be integral over $A$. By [def-weil-pbc-integral-closure] it satisfies $w^n+\\sum_{j<n}a_jw^j=0$ with $n\\ge1$ and $a_j\\in A$. Write $z_i=\\iota(w)_i$. Applying the ring map $\\iota$ and then the $i$th projection gives $z_i^n+\\sum_{j<n}(a_j)_iz_i^j=0$. The coefficients lie in $D_i$, so the stated hypothesis on $D_i$ gives $z_i\\in D_i$. Thus $b=(z_i)_i\\in B$ and $\\iota(w)=\\iota(k(b))$; injectivity gives $w=k(b)$. Conversely, if every $b\\in B$ is integral over $A$, applying the ring map $k$ to its monic equation gives a monic equation for $k(b)$ with the same coefficients in $A$, since $k(a)=a/1$. The definition of integral closure then gives exactly the asserted equality.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: explicit agent-supplied regular-conductor calculation; fraction arithmetic from Algebra Section 00CM (section-localization)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II. Explicit proof of the generic conductor calculation extracted by the parent; the tag displays the normalizations but omits this argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If A is a subring of a finite product B of integrally closed domains and contains tB for a non-zero-divisor t of B, then Q(A)=Q(B) and integral elements of Q(A) over A lie in B",
+   "results": "{\"t\": \"2026-10-22T06:09:25Z\", \"tool\": \"leanfinder\", \"query\": \"If A is a subring of a finite product B of integrally closed domains and contains tB for a non-zero-divisor t of B, then Q(A)=Q(B) and integral elements of Q(A) over A lie in B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegrallyClosed.of_localization_submonoid\", \"integralClosure.isFractionRing_of_finite_extension\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"isIntegrallyClosed_iff\", \"isIntegrallyClosed_iff_isIntegrallyClosedIn\", \"IsIntegralClosure.isFractionRing_of_algebraic\", \"integralClosure.isFractionRing_of_algebraic\", \"isIntegrallyClosed_of_isLocalization\"], \"digest\": \"3e0c56cef6d5ed1e\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: fraction-ring lifts, localization and normality criteria do not supply regular-conductor transfer for a possibly nondomain subring of a product, its compatible b -> tb/t embedding, and the integral-closure conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"nonZeroDivisors\"",
+   "results": "{\"t\": \"2026-10-22T06:09:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"nonZeroDivisors\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.isDomain_of_le_nonZeroDivisors\", \"IsLocalization.to_map_ne_zero_of_mem_nonZeroDivisors\", \"IsLocalization.map_nonZeroDivisors_le\", \"IsLocalization.nonZeroDivisors_le_comap\", \"Algebra.IsAlgebraic.instIsLocalizationAlgebraMapSubmonoidNonZeroDivisors\", \"FractionalIdeal.instHasUniqueRootsNonZeroDivisorsOfIsLocalizationOfIdeal\", \"QuadraticAlgebra.Int.instIsLocalizationIntAlgebraMapSubmonoidNonZeroDivisorsRatCast\", \"NumberField.RingOfIntegers.instIsLocalizationAlgebraMapSubmonoidIntNonZeroDivisors\"], \"digest\": \"64af8dda7d20e11b\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: fraction-ring lifts, localization and normality criteria do not supply regular-conductor transfer for a possibly nondomain subring of a product, its compatible b -> tb/t embedding, and the integral-closure conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "conductor.*(Fraction|fraction|[Ii]ntegral)|([Ii]ntegral|Fraction|fraction).*conductor",
+   "results": "{\"t\": \"2026-10-22T06:09:14Z\", \"tool\": \"grep\", \"query\": \"conductor.*(Fraction|fraction|[Ii]ntegral)|([Ii]ntegral|Fraction|fraction).*conductor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: fraction-ring lifts, localization and normality criteria do not supply regular-conductor transfer for a possibly nondomain subring of a product, its compatible b -> tb/t embedding, and the integral-closure conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular conductor element t for an inclusion A subset B gives the canonical embedding b maps to tb/t in the total fraction ring of A, identifies total fraction rings, and detects integral closure when B is a product of normal domains",
+   "results": "{\"t\": \"2026-10-22T06:10:05Z\", \"tool\": \"leanfinder\", \"query\": \"A regular conductor element t for an inclusion A subset B gives the canonical embedding b maps to tb/t in the total fraction ring of A, identifies total fraction rings, and detects integral closure when B is a product of normal domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.intTrace\", \"IsFractionRing.ideal_span_singleton_map_subset\", \"IsIntegralClosure.isLocalization\", \"IsIntegralClosure.isLocalization_of_isSeparable\", \"IsIntegralClosure.isFractionRing_of_algebraic\", \"IsLocalization.Away.integralClosure\", \"Algebra.intTrace_eq_of_isLocalization\", \"IsIntegralClosure.mk'_mul\"], \"digest\": \"13b5350de5cfe04a\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: fraction-ring lifts, localization and normality criteria do not supply regular-conductor transfer for a possibly nondomain subring of a product, its compatible b -> tb/t embedding, and the integral-closure conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral ring extension A subset B with a regular element t in the conductor and B a finite product of normal domains is the normalization of A in its total quotient ring",
+   "results": "{\"t\": \"2026-10-22T06:09:54Z\", \"tool\": \"leansearch\", \"query\": \"An integral ring extension A subset B with a regular element t in the conductor and B a finite product of normal domains is the normalization of A in its total quotient ring\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "(lift|map|injective).*|nonZeroDivisors",
+   "results": "{\"t\": \"2026-10-22T06:12:09Z\", \"tool\": \"grep\", \"query\": \"(lift|map|injective).*|nonZeroDivisors\", \"sub\": \"RingTheory/Localization/FractionRing\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid path: the subdirectory argument omitted .lean for a file, so this zero-hit search gives no coverage; replaced by the subsequent valid grep of RingTheory/Localization"
+  },
+  {
+   "tool": "grep",
+   "query": "FractionRing.*(lift|map)|nonZeroDivisors.*(lift|map)|map.*nonZeroDivisors",
+   "results": "{\"t\": \"2026-10-22T06:12:27Z\", \"tool\": \"grep\", \"query\": \"FractionRing.*(lift|map)|nonZeroDivisors.*(lift|map)|map.*nonZeroDivisors\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\"], \"digest\": \"8fad0abe59f25fa4\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: fraction-ring lifts, localization and normality criteria do not supply regular-conductor transfer for a possibly nondomain subring of a product, its compatible b -> tb/t embedding, and the integral-closure conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inclusion A into B with regular conductor element t has equal total quotient rings and identifies integral closure when B is a finite product of integrally closed domains",
+   "results": "{\"t\": \"2026-10-23T09:30:28Z\", \"tool\": \"leanfinder\", \"query\": \"An inclusion A into B with regular conductor element t has equal total quotient rings and identifies integral closure when B is a finite product of integrally closed domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.integralClosure\", \"Algebra.intTrace_eq_of_isLocalization\", \"IsLocalization.integralClosure\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"integralClosure.isFractionRing_of_finite_extension\", \"IsDedekindRing.toIsIntegralClosure\", \"IsDedekindDomain.range_sup_range_eq_top_of_isCoprime_differentIdeal\", \"KummerDedekind.quotMapEquivQuotQuotMap\"], \"digest\": \"c4d899dd5a93b276\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the located localization and fraction-field declarations do not derive the conductor embedding or regularity transfer; the item is proved by explicit fraction arithmetic and coordinate monic equations"
+  },
+  {
+   "tool": "grep",
+   "query": "conductor.*(Fraction|fraction|[Ii]ntegral)|([Ii]ntegral|Fraction|fraction).*conductor",
+   "results": "{\"t\": \"2026-10-23T09:33:09Z\", \"tool\": \"grep\", \"query\": \"conductor.*(Fraction|fraction|[Ii]ntegral)|([Ii]ntegral|Fraction|fraction).*conductor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the located localization and fraction-field declarations do not derive the conductor embedding or regularity transfer; the item is proved by explicit fraction arithmetic and coordinate monic equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If A is a subring of B and t is a nonzerodivisor in A with t B contained in A, then their total quotient rings are isomorphic",
+   "results": "{\"t\": \"2026-10-23T09:33:09Z\", \"tool\": \"leansearch\", \"query\": \"If A is a subring of B and t is a nonzerodivisor in A with t B contained in A, then their total quotient rings are isomorphic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.map\", \"IsFractionRing.isFractionRing_of_isLocalization\", \"IsFractionRing.ringEquivOfRingEquiv\", \"FractionRing.algEquiv\", \"IsFractionRing.algEquiv\", \"IsFractionRing.self_iff_nonZeroDivisors_le_isUnit\", \"IsFractionRing.self_iff_nonZeroDivisors_eq_isUnit\", \"IsFractionRing.algEquivOfAlgEquiv\"], \"digest\": \"d6fb008426be5385\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the located localization and fraction-field declarations do not derive the conductor embedding or regularity transfer; the item is proved by explicit fraction arithmetic and coordinate monic equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"nonZeroDivisors\"",
+   "results": "{\"t\": \"2026-10-23T09:33:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"nonZeroDivisors\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.isDomain_of_le_nonZeroDivisors\", \"IsLocalization.to_map_ne_zero_of_mem_nonZeroDivisors\", \"IsLocalization.map_nonZeroDivisors_le\", \"IsLocalization.nonZeroDivisors_le_comap\", \"Algebra.IsAlgebraic.instIsLocalizationAlgebraMapSubmonoidNonZeroDivisors\", \"FractionalIdeal.instHasUniqueRootsNonZeroDivisorsOfIsLocalizationOfIdeal\", \"QuadraticAlgebra.Int.instIsLocalizationIntAlgebraMapSubmonoidNonZeroDivisorsRatCast\", \"NumberField.RingOfIntegers.instIsLocalizationAlgebraMapSubmonoidIntNonZeroDivisors\"], \"digest\": \"64af8dda7d20e11b\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the located localization and fraction-field declarations do not derive the conductor embedding or regularity transfer; the item is proved by explicit fraction arithmetic and coordinate monic equations"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isFractionRing_of_isLocalization|def map|theorem integralClosure|theorem isFractionRing_of_finite_extension|def lift|theorem injective",
+   "results": "{\"t\": \"2026-10-23T09:33:57Z\", \"tool\": \"grep\", \"query\": \"theorem isFractionRing_of_isLocalization|def map|theorem integralClosure|theorem isFractionRing_of_finite_extension|def lift|theorem injective\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/Module.lean\"], \"digest\": \"4103b9607afca95a\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the located localization and fraction-field declarations do not derive the conductor embedding or regularity transfer; the item is proved by explicit fraction arithmetic and coordinate monic equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular element in the conductor ideal of a subring gives an embedding of the overring into its total ring of fractions by b maps to tb divided by t",
+   "results": "{\"t\": \"2026-10-23T09:34:08Z\", \"tool\": \"leanfinder\", \"query\": \"A regular element in the conductor ideal of a subring gives an embedding of the overring into its total ring of fractions by b maps to tb divided by t\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.ideal_span_singleton_map_subset\", \"FractionalIdeal.extendedHomₐ\", \"FractionalIdeal.coe_extendedHomₐ_eq_span\", \"FractionalIdeal.extendedHomₐ_eq_one_iff\", \"FractionalIdeal.extendedHomₐ_injective\", \"Localization.algebraMap_injective_of_span_eq_top\", \"FractionalIdeal.extendedHom\", \"Algebra.intTrace\"], \"digest\": \"4711aaa20c6a20bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the located localization and fraction-field declarations do not derive the conductor embedding or regularity transfer; the item is proved by explicit fraction arithmetic and coordinate monic equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quadratic-series-integral-closure",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Quadratic completed local-ring calculation filling the tangent-Proj/normalization comparison omitted in Stacks 0CBT. Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: generic regular-conductor argument justifying that the displayed series ring is the integral closure inside the total fraction ring. This general lemma is the agent extraction of the returned item steps 8-9, not a verbatim statement of the tag.",
+   "via": [
+    "lem-sfb-quadratic-series-integral-closure",
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-conductor-fraction-normalization",
+  "worker": "stage1",
+  "summary": "Q10: retained all hypotheses and conclusions; supplied nine elementary steps giving regularity transfer, the coordinate embeddings, the unique conductor embedding, explicit inverse fractions and compatible inverse maps of total quotient rings, then coordinatewise monic equations. Added the existing localization definition; no new nodes or hidden universal-property invocation. All new search records are copied verbatim from the command log.",
+  "blueprint": "The current blueprint det-thm-sf-ctf-stability-direct-images proof (3), beneath the alteration/normalization route recorded by the parent lem-sfb-quadratic-series-integral-closure: justify the two normalizations displayed in Stacks 0C4A. No blueprint node states this generic algebraic calculation; ancestor tool returns None, retained from the live item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-d0e001ccd",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-d0e001ccd (reviewer sub-agent of L); spot-checked: I read all nine steps in full. The item is still unsplit in live and side-live, and there is no repair note, so this is a fresh split. The statement is the base text plus one added citation, [def-weil-pbc-module-localization, M=C], which also joins stmt_deps; no hypothesis or conclusion changed. Source check: Stacks curves.tex 0C4A (lemma-2-branches-delta-1), proof of (1)=>(2), Cases I/II. The tag displays the normalizations but omits this conductor argument, so proof_origin.by=agent is correct. There is no SGA. Steps: 1-2 show regularity transfers from A to B with all coordinates nonzero, without assuming A->D_i injective. Step 3 cancels the extra factor u in the fraction relation and compares coordinates, which makes iota and J well defined and injective in one step. Steps 4-5 show k(b)=(tb)/t is a ring map via iota and is unique because h(t)=t/1 is a unit; h need not be injective. Step 6 checks t/(tu) as the inverse. Steps 7-8 show H is well defined by cross-multiplication, give HF=1 and FH=1 from the injectivity of iota and J, and check F(k(b))=b/1. Step 9 projects the monic equation to each D_i; the converse applies k to the equation. Each step uses only the stated formulas of the localization and integral-closure leaves, so elementary=true is justified, and proof_deps equals the union of uses. Edge cases: A=B=Z with t=2; A={(a,b): a=b mod 2} inside Z^2 with t=(2,2), where e=(1,0) is a root of the monic X^2-X; and k+xK[x] inside K[x], which shows the conditional integrality assumption is needed. The parent quadratic-series step 3 uses exactly these conclusions and supplies their hypotheses. Duplicate search over the DAG (conductor, total fractions): trf flat-birational comparison, sfb split-node conductor, normalization-affine-total-fractions and the pbc total-fraction lemmas all differ in setup. The Mathlib searches are recorded (one leansearch outage marked unavailable), and no leaf exists. blueprint.from.node is null, inherited from the live item. No route issue and no tool_uses. No fixes."
+ }
+}

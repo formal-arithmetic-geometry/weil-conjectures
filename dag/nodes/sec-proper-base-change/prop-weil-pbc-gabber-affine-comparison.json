@@ -90,7 +90,32 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      372,
+      433
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lead_note": "2026-10-09 L: false as stated (the relative form for affine X of finite type over the pair fails: see the review note of lemma-weil-pbc-injective-restriction-acyclicity and the docstring of AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing, Gabber.lean:217); the pair form X = Spec A is prop-weil-pbc-gabber-pair-comparison, which replaces this node on the route; no reviewed node uses this one; merge candidate for stage 3 (restate as the pair form or merge into prop-weil-pbc-gabber-pair-comparison).",
@@ -121,11 +146,16 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $(A,I)$ be an affine henselian pair, $T=\\operatorname{Spec}A$ and\n$T_0=\\operatorname{Spec}(A/I)$. For every torsion etale sheaf $F$ on $T$, with\nrestriction $F_0$ to $T_0$, restriction induces isomorphisms\n\n$$\n H^q(T,F)\\xrightarrow{\\sim}H^q(T_0,F_0)\n \\qquad(q\\geq0).\n$$\n\nConsequently, if $X$ is an affine scheme over $T$ with closed fibre\n$X_0=X\\times_TT_0$ and $F$ is a torsion etale sheaf on $X$, then\nrestriction induces isomorphisms\n\n$$\n \\varinjlim_{(U,U_0)}H^q(U,F|_U)\\xrightarrow{\\sim}H^q(X_0,F|_{X_0})\n \\qquad(q\\geq0),\n$$\n\nthe colimit running over the affine etale neighbourhoods $U\\to X$ of $X_0$\n(etale morphisms inducing an isomorphism $U\\times_XX_0\\cong X_0$). The map\n$H^q(X,F)\\to H^q(X_0,F|_{X_0})$ itself need not be an isomorphism when $X$\nis not a henselian pair: for $A=k[[t]]$, $I=(t)$ and\n$X=\\operatorname{Spec}k((t))$ the closed fibre is empty while\n$H^0(X,\\mathbf Z/n)=\\mathbf Z/n$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology],\n$T=\\operatorname{Spec}A$ and $T_0=\\operatorname{Spec}(A/I)$, and let $\\Lambda$ be a\ncommutative ring. For every sheaf $F$ of $\\Lambda$-modules on $T_{\\Et}$ which is\ntorsion [def-weil-pbc-torsion-etale-sheaf], with restriction $F_0$ to $T_0$,\nrestriction induces isomorphisms\n\n$$\n H^q(T,F)\\xrightarrow{\\sim}H^q(T_0,F_0)\n \\qquad(q\\geq0).\n$$\n\nConsequently, if $X$ is an affine scheme, $i:Z\\hookrightarrow X$ a closed\nimmersion and $F$ a torsion sheaf of $\\Lambda$-modules on $X_{\\Et}$, then there\nare a directed system of étale morphisms $v_a:U_a\\to X$ with compatible\nfactorizations $i=v_a\\circ s_a$ ($s_a:Z\\to U_a$), i.e. étale neighbourhoods of\n$Z$, such that the maps $s_a^*$ induce isomorphisms\n\n$$\n \\varinjlim_aH^q(U_a,v_a^{-1}F)\\xrightarrow{\\sim}H^q(Z,i^{-1}F)\n \\qquad(q\\geq0).\n$$\n\nThe map $H^q(X,F)\\to H^q(Z,i^{-1}F)$ itself need not be an isomorphism: for\n$X=\\operatorname{Spec}k((t))$, $Z=\\emptyset$ and $F=\\mathbf Z/n$ one has\n$H^0(X,F)=\\mathbf Z/n$ while $H^0(Z,i^{-1}F)=0$.",
   "proof": [
    {
-    "text": "*The pair.* Degree zero is the etale henselian restriction lemma\n[lemma-weil-pbc-etale-degree-zero]. Let $q>0$ and assume the comparison in\ndegrees $<q$ for all torsion sheaves.\n\nInjectivity. Both sides commute with filtered colimits of sheaves on the\nquasi-compact quasi-separated schemes $T$ and $T_0$, and $F$ is the filtered\nunion of its subsheaves $F[n]$, so we may assume $nF=0$ for some $n$. Embed\n$F$ into an injective sheaf $J$ of $\\mathbf Z/n$-modules; $J$ is torsion and\n$H^q(T,J)=0$. Put $Q=J/F$, again killed by $n$. Let $\\xi\\in H^q(T,F)$\nrestrict to $0$. Write $\\xi=\\delta(\\zeta)$ with $\\zeta\\in H^{q-1}(T,Q)$. Its\nrestriction $\\zeta_0$ satisfies $\\delta_0(\\zeta_0)=\\xi_0=0$, so $\\zeta_0$\ncomes from some $\\theta_0\\in H^{q-1}(T_0,J_0)$; by the induction hypothesis\n$\\theta_0$ is the restriction of some $\\theta\\in H^{q-1}(T,J)$. Then\n$\\zeta-\\bar\\theta$ (with $\\bar\\theta$ the image of $\\theta$ in\n$H^{q-1}(T,Q)$) restricts to $0$, hence is $0$ by injectivity in degree\n$q-1$. So $\\zeta=\\bar\\theta$ and $\\xi=\\delta(\\bar\\theta)=0$.\n\nSurjectivity. Let $\\eta\\in H^q(T_0,F_0)$. By\n[lemma-weil-pbc-gabber-effacement] there is a monomorphism $F\\hookrightarrow\nF'$ of torsion sheaves such that the image of $\\eta$ in $H^q(T_0,F'_0)$ is\nzero. Put $Q=F'/F$, a torsion sheaf. Then $\\eta=\\delta_0(\\theta_0)$ for some\n$\\theta_0\\in H^{q-1}(T_0,Q_0)$, which by the induction hypothesis is the\nrestriction of some $\\theta\\in H^{q-1}(T,Q)$; the boundary\n$\\delta(\\theta)\\in H^q(T,F)$ restricts to $\\delta_0(\\theta_0)=\\eta$, by\nnaturality of the boundary maps under restriction.",
+    "text": "*The pair.* Degree zero is the étale henselian restriction lemma\n[lemma-weil-pbc-etale-degree-zero]. Let $q>0$ and assume the comparison in\ndegrees $<q$ for all torsion sheaves.\n\nInjectivity. Both sides commute with filtered colimits of sheaves on the\nquasi-compact quasi-separated schemes $T$ and $T_0$, and $F$ is the filtered\nunion of its subsheaves $F[n]$, so we may assume $nF=0$ for some $n$. Embed\n$F$ into an injective sheaf $J$ of $\\Lambda/n\\Lambda$-modules; $J$ is torsion and\n$H^q(T,J)=0$. Put $Q=J/F$, again killed by $n$. Let $\\xi\\in H^q(T,F)$\nrestrict to $0$. Write $\\xi=\\delta(\\zeta)$ with $\\zeta\\in H^{q-1}(T,Q)$. Its\nrestriction $\\zeta_0$ satisfies $\\delta_0(\\zeta_0)=\\xi_0=0$, so $\\zeta_0$\ncomes from some $\\theta_0\\in H^{q-1}(T_0,J_0)$; by the induction hypothesis\n$\\theta_0$ is the restriction of some $\\theta\\in H^{q-1}(T,J)$. Then\n$\\zeta-\\bar\\theta$ (with $\\bar\\theta$ the image of $\\theta$ in\n$H^{q-1}(T,Q)$) restricts to $0$, hence is $0$ by injectivity in degree\n$q-1$. So $\\zeta=\\bar\\theta$ and $\\xi=\\delta(\\bar\\theta)=0$.\n\nSurjectivity. Let $\\eta\\in H^q(T_0,F_0)$. By\n[lemma-weil-pbc-gabber-effacement] there is a monomorphism $F\\hookrightarrow\nF'$ of torsion sheaves such that the image of $\\eta$ in $H^q(T_0,F'_0)$ is\nzero. Put $Q=F'/F$, a torsion sheaf. Then $\\eta=\\delta_0(\\theta_0)$ for some\n$\\theta_0\\in H^{q-1}(T_0,Q_0)$, which by the induction hypothesis is the\nrestriction of some $\\theta\\in H^{q-1}(T,Q)$; the boundary\n$\\delta(\\theta)\\in H^q(T,F)$ restricts to $\\delta_0(\\theta_0)=\\eta$, by\nnaturality of the boundary maps under restriction.",
     "uses": [
      "lemma-weil-pbc-etale-degree-zero",
      "lemma-weil-pbc-gabber-effacement"
@@ -133,11 +163,11 @@
     "elementary": false
    },
    {
-    "text": "*Affine schemes over the pair.* Let $X=\\operatorname{Spec}B$ over $A$, so\n$X_0=\\operatorname{Spec}(B/IB)$, and let $(B^h,IB^h)$ be the henselization of\nthe pair $(B,IB)$. It is a henselian pair with $B^h/IB^h=B/IB$, and\n$B^h=\\varinjlim B'$ over the etale $B$-algebras $B'$ with $B/IB\\cong\nB'/IB'$, i.e. over the affine etale neighbourhoods $U=\\operatorname{Spec}B'$\nof $X_0$. The first part applied to $(B^h,IB^h)$ gives\n$H^q(\\operatorname{Spec}B^h,F|)\\cong H^q(X_0,F|_{X_0})$, and by continuity of\netale cohomology along the cofiltered limit of affine schemes\n$\\operatorname{Spec}B^h=\\varprojlim U$,\n$H^q(\\operatorname{Spec}B^h,F|)=\\varinjlim_UH^q(U,F|_U)$.",
+    "text": "*Closed subschemes of affine schemes.* Let $X=\\operatorname{Spec}B$ and\n$Z=\\operatorname{Spec}(B/K)$, and let $(B^h,KB^h)$ be the henselization of the\npair $(B,K)$. It is a henselian pair with $B^h/KB^h=B/K$, and\n$B^h=\\varinjlim B'$ over the étale $B$-algebras $B'$ with $B/K\\cong B'/KB'$, i.e.\nover the affine étale neighbourhoods $U=\\operatorname{Spec}B'$ of $Z$; these\nform a directed system, and $Z\\to\\operatorname{Spec}B^h\\to U$ are the\nfactorizations of $i$. The first part, applied to the henselian pair\n$(B^h,KB^h)$ and the pullback of $F$ (which is again torsion), gives\n$H^q(\\operatorname{Spec}B^h,F|)\\cong H^q(Z,i^{-1}F)$, and by continuity of étale\ncohomology along the cofiltered limit of affine schemes\n$\\operatorname{Spec}B^h=\\varprojlim U$,\n$H^q(\\operatorname{Spec}B^h,F|)=\\varinjlim_UH^q(U,F|_U)$. All maps are pullback\nmaps, so the composite is the map induced by the $s_U^*$.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

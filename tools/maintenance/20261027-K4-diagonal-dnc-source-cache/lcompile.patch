@@ -1,0 +1,38 @@
+--- lcompile.py
++++ lcompile.py
+@@ -314,9 +314,24 @@
+         if ck: (CA.RES / f"{ck}.jid").unlink(missing_ok=True)
+ def _own_modules(jobs, root):
+     return {".".join(f.relative_to(root).with_suffix("").parts) for f, _o, _p in jobs}
++def _source_tree():
++    """Committed sources also supply unpublished dependencies in the private overlay."""
++    try:
++        p = subprocess.run(["git", "rev-parse", "HEAD:lean"], cwd=H / "weil-conjectures-sheaf-shared",
++                           capture_output=True, text=True, timeout=10)
++        if p.returncode == 0 and p.stdout.strip(): return p.stdout.strip()
++    except (OSError, subprocess.TimeoutExpired):
++        pass
++    # If the snapshot cannot be read, compile normally but do not reuse a result
++    # whose unpublished dependencies might have changed.
++    return f"unavailable:{time.time_ns()}"
+ def _dep(jobs, root, lb):
+-    """The dependency state of a call: the published build it compiles against (the mirror's stamp, copied with the
+-    oleans every minute) and the sandbox's own compiled modules other than the call's (name, size, mtime)."""
++    """Publication, committed Lean sources and the sandbox artifacts other than this call's.
++
++    The compile service supplies missing published objects from committed sources.
++    A source repair must invalidate old diagnostics even before a new green build.
++    Use the Lean tree, so metadata-only commits keep cached results reusable.
++    """
+     sig = []
+     try:
+         own = _own_modules(jobs, root)
+@@ -326,7 +341,7 @@
+                 st = os.stat(x); sig.append(f"{name}:{st.st_size}:{st.st_mtime_ns}")
+     except OSError:
+         sig.append("?")
+-    return CA.digest(CA.published_stamp(), *sig)
++    return CA.digest(CA.published_stamp(), _source_tree(), *sig)
+ NO_ANSWER = "no answer from the compile server"
+ def cacheable(result):
+     # a timeout is not stored (server load can cause it); it still reaches every caller attached to the request

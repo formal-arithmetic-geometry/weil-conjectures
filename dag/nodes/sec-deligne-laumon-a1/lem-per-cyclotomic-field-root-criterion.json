@@ -1,0 +1,82 @@
+{
+ "id": "lem-per-cyclotomic-field-root-criterion",
+ "kind": "statement",
+ "title": "Cyclotomic roots over a field of admissible characteristic",
+ "statement": "Let $K$ be a field, $N\\geq1$ an integer whose image in $K$ is nonzero, and $z\\in K$. Let $\\Phi_{N,K}\\in K[T]$ [def-weil-polynomial-ring] be the coefficientwise image of the integer cyclotomic polynomial, the monic family characterized by $T^n-1=\\prod_{d\\mid n}\\Phi_d(T)$ for $n\\geq1$. Then $\\Phi_{N,K}(z)=0$ if and only if $z$ is a primitive $N$th root of unity: $z^N=1$ and, for every natural number $b$, $z^b=1$ implies $N\\mid b$.",
+ "source": {
+  "document": "Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean",
+  "place": "Polynomial.isRoot_cyclotomic_iff, lines 98-103; primitive means IsPrimitiveRoot, Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean lines 59-65. Auxiliary field calculation for ILO VIII 5.3.7, p.124."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A root of the nth cyclotomic polynomial over a field of characteristic not dividing n is a primitive nth root of unity",
+   "results": "{\"t\": \"2026-10-24T01:27:31Z\", \"tool\": \"leansearch\", \"query\": \"A root of the nth cyclotomic polynomial over a field of characteristic not dividing n is a primitive nth root of unity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.cyclotomic.roots_to_finset_eq_primitiveRoots\", \"Polynomial.isRoot_cyclotomic_iff\", \"Polynomial.cyclotomic.roots_eq_primitiveRoots_val\", \"Polynomial.roots_of_cyclotomic\", \"IsPrimitiveRoot.isRoot_cyclotomic\", \"Polynomial.isRoot_cyclotomic_iff_charZero\", \"Polynomial.cyclotomic'\", \"IsCyclotomicExtension.zeta_isRoot\"], \"digest\": \"5e3f4dd1d236723d\"}; isRoot_cyclotomic_iff returned and its source was read.",
+   "date": "2026-10-24",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element of a field is a root of cyclotomic n if and only if it is a primitive nth root of unity when n is nonzero in the field",
+   "results": "{\"t\": \"2026-10-24T01:28:12Z\", \"tool\": \"leanfinder\", \"query\": \"An element of a field is a root of cyclotomic n if and only if it is a primitive nth root of unity when n is nonzero in the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.isRoot_cyclotomic_iff\", \"Polynomial.isRoot_cyclotomic_iff_charZero\", \"IsPrimitiveRoot.isRoot_cyclotomic\", \"Polynomial.cyclotomic.roots_eq_primitiveRoots_val\", \"isRoot_of_unity_iff\", \"Polynomial.cyclotomic.roots_to_finset_eq_primitiveRoots\", \"Polynomial.roots_of_cyclotomic\", \"isPrimitiveRoot_of_mem_primitiveRoots\"], \"digest\": \"dde6d51085faba87\"}; isRoot_cyclotomic_iff returned.",
+   "date": "2026-10-24",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.cyclotomic, Polynomial.IsRoot",
+   "results": "{\"t\": \"2026-10-24T01:28:11Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.cyclotomic, Polynomial.IsRoot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Polynomial.coprime_of_root_cyclotomic\", \"Polynomial.orderOf_root_cyclotomic_dvd\", \"IsPrimitiveRoot.isRoot_cyclotomic\", \"Polynomial.isRoot_cyclotomic_iff_charZero\", \"Polynomial.isRoot_cyclotomic_iff\", \"Polynomial.isRoot_of_unity_of_root_cyclotomic\", \"isRoot_of_unity_iff\", \"Polynomial.isRoot_cyclotomic_prime_pow_mul_iff_of_charP\"], \"digest\": \"ee30946c259a3364\"}; isRoot_cyclotomic_iff returned, including its NeZero cast hypothesis.",
+   "date": "2026-10-24",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isRoot_cyclotomic_iff|theorem map_cyclotomic|theorem.*cyclotomic.*map|theorem cyclotomic.*map",
+   "results": "{\"t\": \"2026-10-24T01:28:11Z\", \"tool\": \"grep\", \"query\": \"theorem isRoot_cyclotomic_iff|theorem map_cyclotomic|theorem.*cyclotomic.*map|theorem cyclotomic.*map\", \"sub\": \"RingTheory/Polynomial/Cyclotomic\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\"], \"digest\": \"098b33d8d266967e\"}; Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean line 98; surrounding hypotheses at lines 40, 54 were read.",
+   "date": "2026-10-24",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.isRoot_cyclotomic_iff",
+  "file": "Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean",
+  "line": 98,
+  "how": "specializes in one line: Polynomial.isRoot_cyclotomic_iff at lines 98-103 with R=K, its IsDomain instance and NeZero (N : K) supplied by the stated nonzero hypothesis. Polynomial.IsRoot is evaluation equal to zero. IsPrimitiveRoot has exactly the two fields pow_eq_one and dvd_of_pow_eq_one, PrimitiveRoots.lean lines 63-65."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-cyclotomic-finite-etale-cover",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), through the recorded rigidification ancestry: ILO VIII Lemma 5.3.7, printed p.124, the sentence adjoining Spec(Z[1/N,mu_N]) with trivial group action. Identifying field-valued cyclotomic roots as primitive roots to control all fibres and unit differences.",
+   "via": [
+    "lem-per-cyclotomic-finite-etale-cover",
+    "lem-per-abelian-inert-rigidification-cover",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

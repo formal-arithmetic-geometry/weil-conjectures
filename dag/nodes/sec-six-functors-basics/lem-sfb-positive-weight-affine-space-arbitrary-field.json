@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-positive-weight-affine-space-arbitrary-field",
+ "kind": "statement",
+ "title": "Positive tangent weights give affine-space coordinates over an arbitrary field",
+ "statement": "Let $k$ be any field [def-weil-field] and let $X$ be a smooth geometrically connected affine $k$-scheme of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $a:\\mathbf G_{m,k}\\times_k X\\to X$ be an algebraic action [def-sc-gm-ga], meaning a morphism satisfying $a(1,x)=x$ and $a(st,x)=a(s,a(t,x))$. Let $x\\in X(k)$ be fixed as a morphism: $a(t,x)=x$ after every commutative $k$-algebra extension. Let $T_xX$ be its relative tangent space [def-sc-scheme-tangent-space]. Assume the differentiated action decomposes $T_xX$ as a direct sum of character spaces on which $t$ acts by $t^{n_i}$ with integers $n_i>0$. These are algebraic characters, not their differentials, and the direct sum may be empty. Put $d=\\dim_kT_xX$. There is an isomorphism of $k$-schemes $X\\simeq\\mathbf A_k^d$ carrying $x$ to the origin, where $\\mathbf A_k^d=\\operatorname{Spec}k[T_1,\\ldots,T_d]$ [def-sbc-affine-space]. In particular if $d=0$, $X\\simeq\\operatorname{Spec}k$. The isomorphism is defined over $k$; no assumption that $k$ is algebraically closed, infinite or perfect is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.41 and Definition 13.40, printed pp.269-270; existence of Luna maps in Section 13e, pp.267-268. Only the genuinely strictly positive one-parameter case is used; no inference from absence of zero weights to positivity is asserted."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sc-scheme-tangent-space",
+  "def-sbc-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}A$ and let $\\epsilon:A\\to k$ be evaluation at the rational point $x$, with $\\mathfrak m=\\ker\\epsilon$. By [lem-pc-affine-finite-type-algebra], $A$ is a finitely generated $k$-algebra. By [lem-weil-pbc-smooth-scheme-over-field-regular], $X$ is regular, including locally Noetherian. Geometric connectedness implies connectedness over $k$, and $x$ ensures nonemptiness. Thus [lem-sc-regular-connected-integral] makes $X$ integral; by [def-pc-integral-scheme], its nonempty affine chart $X$ has domain $A$. Set $R=A_{\\mathfrak m}$ and $\\mathfrak n=\\mathfrak mR$ [def-weil-pbc-localization-at-prime]. The stalk identification in [lem-weil-pbc-spec-map-stalk-localization] identifies $R$ with $\\mathcal O_{X,x}$; it is therefore Noetherian regular local, with residue field $k$.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "def-pc-integral-scheme",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.41, p.269, irreducible case; smoothness everywhere permits the existing regular-connected-integral criterion, avoiding the reducible-case argument on p.270."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-gm-affine-action-grading] over $k$ to obtain $A=\\bigoplus_{q\\in\\mathbf Z}A_q$, with pullback of a weight-$q$ function equal to $z^q$ times that function. Scheme-theoretic fixedness of $x$ says $\\epsilon(f)z^q=\\epsilon(f)$ for $f\\in A_q$, as an identity in $k[z,z^{-1}]$. Uniqueness of Laurent coefficients gives $\\epsilon(f)=0$ if $q\\ne0$, even over a finite field. For $f=\\sum_q f_q$, consequently $\\epsilon(f)=\\epsilon(f_0)$. Hence $\\mathfrak m$ is homogeneous, $A_q=\\mathfrak m\\cap A_q$ for $q\\ne0$, and $A_0=k\\cdot1\\oplus(\\mathfrak m\\cap A_0)$. Each $\\mathfrak m^j$ is homogeneous, by expanding the factors of its generators into homogeneous parts. All quotients $\\mathfrak m^j/\\mathfrak m^{j+1}$ therefore inherit these gradings.",
+   "uses": [
+    "lem-sfb-gm-affine-action-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.41, p.269: A and m have weight decompositions and A_s=m_s for nonzero s; Stacks 0EKK (lemma-complete-reducibility-Gm), 0EKJ (example-Gm-on-affine), with universal Laurent parameter instead of k-points."
+   }
+  },
+  {
+   "text": "The map $\\mathfrak m/\\mathfrak m^2\\to\\mathfrak n/\\mathfrak n^2$, $u\\mapsto u/1$, is an isomorphism. Indeed, for $s\\notin\\mathfrak m$ set $c=\\epsilon(s)\\in k^\\times$. For $u\\in\\mathfrak m$, $u/s-c^{-1}u/1=u(c-s)/(cs)\\in\\mathfrak n^2$, proving surjectivity. If $u/1\\in\\mathfrak n^2$, the fraction equality criterion of [def-weil-pbc-localization-at-prime] gives $su\\in\\mathfrak m^2$ for some $s\\notin\\mathfrak m$. Since $(s-\\epsilon(s))u\\in\\mathfrak m^2$, we get $\\epsilon(s)u\\in\\mathfrak m^2$, hence $u\\in\\mathfrak m^2$. This proves injectivity. This canonical map commutes with pullback of functions fixing $x$, since both composites send $u$ to its pulled-back germ. In particular the induced weight decompositions agree. The vector space $V=\\mathfrak m/\\mathfrak m^2$ is finite dimensional: if $g_1,\\ldots,g_r$ generate $A$ over $k$, polynomial subtraction of the constant term expresses every element of $\\mathfrak m$ in the ideal generated by $g_i-\\epsilon(g_i)$, whose classes consequently span $V$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 13e, Lemmas 13.35--13.36, pp.267--268, identifying the affine and local cotangent spaces; explicit fraction calculation. Stacks 00CO (definition-localization)."
+   }
+  },
+  {
+   "text": "Use the natural duality [lem-sc-rational-tangent-cotangent-duality] and step 3 to identify $T_xX$ with $\\operatorname{Hom}_k(V,k)$. The operator on this dual space induced by $a_t$ sends $\\lambda$ to $\\lambda\\circ a_t^*$, where $a_t^*$ is pullback on $V$. Thus its matrix is the transpose of the matrix of $a_t^*$, with no inverse. Explicitly, a tangent vector $v$ corresponds to $f\\mapsto\\epsilon(f)+\\lambda_v([f-\\epsilon(f)])\\delta$ in $k[\\delta]/(\\delta^2)$; applying $a_t$ replaces $\\lambda_v$ by $\\lambda_v\\circ a_t^*$. Take a tangent eigenbasis $v_i$ of characters $t^{n_i}$, $n_i>0$, and its dual basis $u_i$ in $V$. Then $\\lambda_{v_j}(a_t^*u_i)=t^{n_j}\\lambda_{v_j}(u_i)$ gives $a_t^*u_i=t^{n_i}u_i$. These are identities for the algebraic action: the same dual-number calculation over the universal coefficient ring $k[z,z^{-1}]$ reads the coaction coefficientwise. It does not test only $k^\\times$. Consequently $V$ has only strictly positive graded degrees and $\\dim_kV=d$. Choose homogeneous lifts $b_i\\in\\mathfrak m$ of the $u_i$, by taking the degree-$n_i$ component of any lift.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemmas 13.35--13.36 and Example 13.37, pp.267--268: cotangent lifts and equality of tangent weights with function-pullback weights. The inverse-free transpose calculation fixes the convention explicitly; Stacks 0B2E, lemma-tangent-space-rational-point."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-krull-intersection-jacobson] to the Noetherian local ring $R$, its maximal ideal $\\mathfrak n$ and its rank-one module $R$. The maximal ideal is its Jacobson radical because it is the only maximal ideal, and the module is generated by $1$. Thus $\\bigcap_{j\\ge0}\\mathfrak n^j=0$. If $f\\in\\bigcap_{j\\ge0}\\mathfrak m^j$, its image in $R$ belongs to every $\\mathfrak n^j$, hence is zero. The map $A\\to R$ is injective: by the fraction criterion [def-weil-pbc-localization-at-prime], $f/1=0$ implies $sf=0$ for some $s\\notin\\mathfrak m$; such an $s$ is nonzero, and $A$ is a domain. Therefore $\\bigcap_{j\\ge0}\\mathfrak m^j=0$ in $A$ itself.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.41, p.269, Krull-intersection argument in the irreducible case; Stacks 00IQ, lemma-intersection-powers-ideal-module, part (2)."
+   }
+  },
+  {
+   "text": "For $j\\ge1$, products of $j$ classes in $V$ span $\\mathfrak m^j/\\mathfrak m^{j+1}$ over $k$: write an element of $\\mathfrak m^j$ as a finite sum $c\\,h_1\\cdots h_j$, $h_i\\in\\mathfrak m$; modulo $\\mathfrak m^{j+1}$ replace $c$ by $\\epsilon(c)$ and each $h_i$ by its linear combination of the $b_i$ modulo $\\mathfrak m^2$. Every resulting product has degree a sum of $j$ strictly positive integers. Hence these graded quotients have no components of degree $q\\le0$. Now let $f\\in\\mathfrak m\\cap A_q$ with $q\\le0$. Starting with $f\\in\\mathfrak m$, if $f\\in\\mathfrak m^j$, its homogeneous class in $\\mathfrak m^j/\\mathfrak m^{j+1}$ must vanish, so $f\\in\\mathfrak m^{j+1}$. Induction and step 5 force $f=0$. Step 2 then gives $A_q=0$ for $q<0$ and $A_0=k\\cdot1$. Thus the original grading is an $\\mathbf N$-grading and $\\mathfrak m=\\bigoplus_{q>0}A_q$. This includes the empty tangent basis: the same product expansion makes every positive-adic quotient zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.41, p.269: products of cotangent lifts span each adic quotient, and separatedness detects the weight of each nonzero homogeneous function; written as induction to include the empty basis."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sfb-positive-graded-regular-polynomial] now hold for $F=k$, $B=A$: finite generation is step 1, $A_0=k$ and nonnegative grading are step 6, regularity of $A_{\\mathfrak m}$ is step 1, and $b_1,\\ldots,b_d$ are homogeneous lifts of a basis by step 4. It follows that evaluation $k[T_1,\\ldots,T_d]\\to A$, $T_i\\mapsto b_i$, is an isomorphism of $k$-algebras. Taking spectra [def-weil-affine-spectrum] yields $X\\simeq\\operatorname{Spec}k[T_1,\\ldots,T_d]=\\mathbf A_k^d$ [def-sbc-affine-space]. Because $b_i\\in\\ker\\epsilon$, the composite evaluation to $k$ sends every $T_i$ to zero; this is precisely that $x$ maps to the origin. For $d=0$, the cited polynomial theorem gives $A=k$ and hence $X\\simeq\\operatorname{Spec}k$. All constructions and lifts were over $k$, with no scalar extension or descent of a chosen geometric isomorphism.",
+   "uses": [
+    "lem-sfb-positive-graded-regular-polynomial",
+    "def-weil-affine-spectrum",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.41, pp.269--270: graded Nakayama and the polynomial coordinate conclusion; reuse the existing algebra theorem extracted from Lemma 13.39 and Theorem 13.44."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-sfb-gm-affine-action-grading",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "def-sc-scheme-tangent-space",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-sfb-positive-graded-regular-polynomial",
+  "def-weil-affine-spectrum",
+  "def-sbc-affine-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.41, printed pp.269--270, irreducible-case argument, with Lemmas 13.35--13.39, pp.267--269. Smooth connected integrality is supplied by existing Stacks nodes. The argument is performed over k throughout using the split G_m grading."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Luna|positive.*weight|weight.*positive",
+   "results": "{\"t\": \"2026-10-24T05:04:47Z\", \"tool\": \"grep\", \"query\": \"Luna|positive.*weight|weight.*positive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometrically connected smooth affine scheme with a rational fixed point and positive Gm tangent weights has polynomial coordinate algebra over the ground field",
+   "results": "{\"t\": \"2026-10-24T05:04:47Z\", \"tool\": \"leansearch\", \"query\": \"A geometrically connected smooth affine scheme with a rational fixed point and positive Gm tangent weights has polynomial coordinate algebra over the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"Algebra.FormallySmooth.polynomial\", \"AlgebraicGeometry.IsAffine.recOn\"], \"digest\": \"c70404fadccac2b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.AffineSpace\"",
+   "results": "{\"t\": \"2026-10-24T05:04:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.AffineSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsIntegral\", \"AlgebraicGeometry.AffineSpace.instIsReduced\", \"AlgebraicGeometry.AffineSpace.functor\", \"AlgebraicGeometry.AffineSpace.reindex\", \"AlgebraicGeometry.AffineSpace.map\"], \"digest\": \"97e120449336ea9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth geometrically connected affine variety over any field with a multiplicative group action fixing a rational point and strictly positive tangent weights is affine space",
+   "results": "{\"t\": \"2026-10-24T05:04:49Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth geometrically connected affine variety over any field with a multiplicative group action fixing a rational point and strictly positive tangent weights is affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.SpecIso\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\"], \"digest\": \"c9ea37040d052dd0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant Luna coordinates at an attractive smooth rational fixed point give an isomorphism with its tangent space over an imperfect field",
+   "results": "{\"t\": \"2026-10-24T05:04:50Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant Luna coordinates at an attractive smooth rational fixed point give an isomorphism with its tangent space over an imperfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inCoordinates_tangent_bundle_core_model_space\", \"TangentBundle.symmL_model_space\", \"inTangentCoordinates_model_space\", \"tangentBundleCore_indexAt\", \"TangentBundle.chartAt_toPartialEquiv\", \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"tangentBundle_model_space_chartAt\", \"TangentBundle.coordChange_model_space\"], \"digest\": \"d781fe62b5044cfc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine scheme with a multiplicative group action and a rational fixed point with strictly positive tangent weights is isomorphic to affine space",
+   "results": "{\"t\": \"2026-10-24T06:59:55Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine scheme with a multiplicative group action and a rational fixed point with strictly positive tangent weights is isomorphic to affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.SpecIso\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\"], \"digest\": \"89347d2da26d1d46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, abstract fixed-point sets, Weierstrass coordinate rings, and polynomial action or smooth-presentation ingredients do not give this attractive affine-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine smooth variety with an attractive rational fixed point of a multiplicative group action is an affine space over the base field",
+   "results": "{\"t\": \"2026-10-24T07:00:35Z\", \"tool\": \"leansearch\", \"query\": \"An affine smooth variety with an attractive rational fixed point of a multiplicative group action is an affine space over the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.fixedPoints\", \"AffineBasis.instSMul\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AffineBasis.instMulAction\", \"AddAction.fixedPoints\", \"MulAction.smul_mem_fixedBy_iff_mem_fixedBy\", \"AffineBasis.basisOf_smul\", \"AddAction.fixedBy\"], \"digest\": \"6c33e76c8d030ca4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, abstract fixed-point sets, Weierstrass coordinate rings, and polynomial action or smooth-presentation ingredients do not give this attractive affine-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.AffineSpace\"",
+   "results": "{\"t\": \"2026-10-24T07:00:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.AffineSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsIntegral\", \"AlgebraicGeometry.AffineSpace.instIsReduced\", \"AlgebraicGeometry.AffineSpace.functor\", \"AlgebraicGeometry.AffineSpace.reindex\", \"AlgebraicGeometry.AffineSpace.map\"], \"digest\": \"97e120449336ea9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, abstract fixed-point sets, Weierstrass coordinate rings, and polynomial action or smooth-presentation ingredients do not give this attractive affine-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Luna|attractive|positive.*weight|weight.*positive",
+   "results": "{\"t\": \"2026-10-24T07:00:36Z\", \"tool\": \"grep\", \"query\": \"Luna|attractive|positive.*weight|weight.*positive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, abstract fixed-point sets, Weierstrass coordinate rings, and polynomial action or smooth-presentation ingredients do not give this attractive affine-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative group action with positive cotangent weights at a smooth fixed point makes the affine coordinate algebra a polynomial ring",
+   "results": "{\"t\": \"2026-10-24T07:01:09Z\", \"tool\": \"leanfinder\", \"query\": \"A multiplicative group action with positive cotangent weights at a smooth fixed point makes the affine coordinate algebra a polynomial ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.instAlgebraPolynomial\", \"prodXSubSMul\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"WeierstrassCurve.Affine.CoordinateRing.instAlgebra\", \"Algebra.Generators.cMulXSubOneCotangent_eq\", \"prodXSubSMul.eval\", \"WeierstrassCurve.Affine.CoordinateRing.smul_basis_eq_zero\", \"NoetherNormalization.T1\"], \"digest\": \"d69775368e17d61d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, abstract fixed-point sets, Weierstrass coordinate rings, and polynomial action or smooth-presentation ingredients do not give this attractive affine-scheme theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-no-invariants-unipotence",
+  "date": "2026-10-24",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 13.41 and Definition 13.40, printed pp.269-270; existence of Luna maps in Section 13e, pp.267-268. Only the genuinely strictly positive one-parameter case is used; no inference from absence of zero weights to positivity is asserted.",
+   "via": [
+    "lem-sfb-split-torus-no-invariants-unipotence",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-positive-weight-affine-space-arbitrary-field",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-field statement and all seeded metadata. Reused existing grading, polynomial-coordinate, geometric, cotangent and Krull-intersection nodes. Wrote the global separatedness and weight-detection arguments explicitly, with universal Laurent coefficients and the transpose convention for tangent versus pullback weights. No new nodes. Included d=0, finite fields and characteristic-p weights.",
+  "blueprint": "blueprint_refs ancestor returns None for this seed, whose existing from.place and via are preserved. Read latest sk-thm-sf-ctf-stability and det-thm-sf-ctf-stability-direct-images proof (3). This split realizes its already recorded remote algebraic-group prerequisite: Milne 13.41 for the strictly positive one-parameter input of lem-sfb-split-torus-no-invariants-unipotence. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic passage from an affine finite-type scheme to its finitely generated coordinate algebra; no six-functor or alteration step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic smooth-over-field regularity, needed for the local ring and the global integrality criterion, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic integrality criterion for a nonempty connected regular scheme, needed for injectivity into the local ring in Milne 13.41."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Generic natural tangent/cotangent duality at a rational point; needed to compare the stipulated algebraic tangent weights to function-pullback grading."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-sc-rational-tangent-cotangent-duality"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-0fd5a1693",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-0fd5a1693 (reviewer sub-agent of L); spot-checked: Read the item, the full proof and every cited node's statement; checked them against Milne Thm 13.41 and Def 13.40 (printed pp.269-270). No new nodes, no statement change, no fixes. Step 1: affine finite type gives a finitely generated algebra; smooth gives regular; geometrically connected plus the point x gives nonempty and connected, so integral and A is a domain; A_m = O_{X,x}. Step 2: the grading lemma with the universal Laurent parameter makes m homogeneous and nonzero weights lie in m, also for finite k. Step 3: m/m^2 = n/n^2, surjectivity and injectivity verified by hand. Step 4: the tangent operator is the transpose of a_t^*, so the weights have the same sign (checked on A^1 with weight 2); the computation is done over k[z^{±1}], so algebraic characters are detected, including weight p in characteristic p. Step 5: Krull intersection is applied in the local ring R (Jacobson hypothesis holds there), then pulled back to A because A is a domain; this matches Milne. Step 6: the spanning argument and the induction give A_0 = k, A_q = 0 for q < 0, and handle d = 0. Step 7: every hypothesis of lem-sfb-positive-graded-regular-polynomial checked; Spec and A^d_k give the isomorphism, and x goes to the origin. Edge cases tested: Spec k, weights (2,5), finite k, weight p in char p. No duplicate: the luna-coordinates, equivariant-inverse and cotangent-lifts nodes are over algebraically closed fields only, and the unipotence node needs this item over arbitrary k. The four declared tool_uses are generic and accepted. Batch 5: lem-trf-polynomial-nonzero-ideal-quotient-dimension-bound (dim k[t]/I <= n-1 for nonzero I) is pure commutative algebra and part of neither the trace formula nor Poincare duality, so the citation through positive-graded-regular-polynomial is acceptable. No SGA used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PositiveWeightAffineSpaceArbitraryField",
+  "declaration": "AlgebraicGeometry.positive_weight_affine_space_arbitrary_field",
+  "declarations": [
+   "AlgebraicGeometry.tangentLaurentUnit",
+   "AlgebraicGeometry.IsPositiveTangentCharacter",
+   "AlgebraicGeometry.positive_weight_affine_space_arbitrary_field"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PositiveWeightAffineSpaceArbitraryField.lean",
+  "statement": "theorem positive_weight_affine_space_arbitrary_field (k : Type u) [Field k] (X : Over (Spec (.of k))) [IsAffine X.left] [Smooth X.hom] [GeometricallyConnected X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (a : ModObj (StandardGroupSchemes.multiplicative k) X) (s : Over.mk (𝟙 (Spec (.of k))) ⟶ X) (hs : ∀ (W : Over (Spec (.of k))) (t : W ⟶ StandardGroupSchemes.multiplicative k), lift t (Over.homMk W.hom ≫ s) ≫ a.smul = Over.homMk W.hom ≫ s) (d : ℕ) (b : Module.Basis (Fin d) (X.left.residueField (s.left (IsLocalRing.closedPoint k))) (schemeTangentSpace k X.left X.hom (s.left (IsLocalRing.closedPoint k)))) (n : Fin d → ℤ) (hn : ∀ i : Fin d, IsPositiveTangentCharacter k X a (s.left (IsLocalRing.closedPoint k)) (b i) (n i)) : ∃ e : X.left ≅ AffineSpace (ULift.{u} (Fin d)) (Spec (.of k)), e.hom ≫ (AffineSpace (ULift.{u} (Fin d)) (Spec (.of k)) ↘ Spec (.of k)) = X.hom ∧ s.left ≫ e.hom = AffineSpace.homOfVector (𝟙 (Spec (.of k))) (fun _ ↦ 0)",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two auxiliary definitions spell out the universal Laurent-parameter character equation on the recorded dual-number tangent space. The tangent basis is over the residue field of the supplied rational section, canonically k. This avoids choosing a second tangent space or restricting character tests to k-points."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cb0721ea",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node (any field; affine, smooth, geometrically connected, finite type over k; ModObj G_m action; section fixed over every test scheme; basis of the recorded schemeTangentSpace over κ(x)≅k giving d; IsPositiveTangentCharacter = 0<n plus the universal Laurent equation d(a_z)v = z^n v, with q fixed by its pullback projections and always existing, so not arbitrary or vacuous; the iso to AffineSpace (ULift (Fin d)) commutes with the maps to Spec k and sends the section to the zero section; d=0 gives Spec k). Edge cases: finite k, weight p in char p, nonpositive weights excluded; no universe restriction. No duplicate (TorusCharacterTangentWeights covers group-scheme Lie algebras only). Helpers are real data, docstrings have source and blueprint, lean.statement matches the file verbatim, no statement change, report sections present. Not recompiled because no file was changed."
+ }
+}

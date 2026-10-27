@@ -1,0 +1,133 @@
+{
+ "id": "def-sp-tower-binary-counit-predicates",
+ "kind": "definition",
+ "title": "Five-term Hom exactness and outer counit comparison predicates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories, with integer shift functors on $\\mathcal C$ (using the shift notation of [def-weil-triangulated-category]); no triangulation or distinguished-triangle hypothesis is imposed. For the two exactness predicates below assume $\\mathcal C$ preadditive [def-weil-preadditive-category], and for the image-row predicate assume $\\mathcal D$ preadditive as well. Fix objects $A,B,M,G\\in\\mathcal C$, arrows $s:A\\to B$, $t:B\\to M$, $\\delta:M\\to A[1]$, a functor $F:\\mathcal C\\to\\mathcal D$, and $K\\in\\mathcal D$. Define $\\operatorname{HomFiveExact}(s,t,\\delta,G)$ to mean exactness at the three interior terms of the row\n$$\\operatorname{Hom}(B[1],G)\\xrightarrow{(-s[1])^*}\\operatorname{Hom}(A[1],G)\\xrightarrow{\\delta^*}\\operatorname{Hom}(M,G)\\xrightarrow{t^*}\\operatorname{Hom}(B,G)\\xrightarrow{s^*}\\operatorname{Hom}(A,G).$$\nEach arrow is precomposition by the displayed arrow, and exactness means that the range of the preceding homomorphism equals the kernel of the following one. Define $\\operatorname{ImageHomFiveExact}(F,s,t,\\delta,K)$ to mean exactness at the three interior terms of\n$$\\operatorname{Hom}(F(B[1]),K)\\xrightarrow{F(-s[1])^*}\\operatorname{Hom}(F(A[1]),K)\\xrightarrow{F(\\delta)^*}\\operatorname{Hom}(FM,K)\\xrightarrow{F(t)^*}\\operatorname{Hom}(FB,K)\\xrightarrow{F(s)^*}\\operatorname{Hom}(FA,K).$$\nNo additive or shift-commuting structure on $F$ is assumed in defining this predicate. Finally, for $\\epsilon:FG\\to K$, define $\\operatorname{OuterBijective}(F,A,B,\\epsilon)$ to mean that the four functions\n$$\\operatorname{Hom}(T,G)\\longrightarrow\\operatorname{Hom}(FT,K),\\qquad a\\longmapsto\\epsilon\\circ F(a),\\qquad T=B,A,A[1],B[1],$$\nare bijective. This last predicate requires only the categories and shifts, without preadditivity. These are definitions of propositions, with no assertion of exactness or bijectivity.",
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-preadditive-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Gluing and Levels: the two five-term contravariant Hom rows and four outer representing bijections. Existing generic predicate definitions in Sheaf/Paper/SmoothPurityTowerBinaryCounitRepresentability.lean, lines 127–165."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exactness predicates for the five term contravariant Hom sequence and its functor image with four outer counit comparison bijections",
+   "results": "OK 8 hits: AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective; CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂; CategoryTheory.Abelian.Ext.contravariantSequence; CategoryTheory.Functor.exact_tfae; HomologicalComplex.ExactAt; CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁; CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf; CategoryTheory.Functor.homologySequence_exact₂.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the three exact existing project definitions with existing:true; no separate definition node owns them. Generic Mathlib exactness and five-lemma APIs do not package these signed five-term rows and the four comparison functions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact five term Hom predicates outer bijective predicate",
+   "results": "OK 8 hits: AddMonoidHom.bijective_of_bijective_of_injective_of_left_exact; MonoidHom.bijective_of_bijective_of_injective_of_left_exact; AddMonoidHom.exact_iff_of_surjective_of_bijective_of_injective; AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact; MonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective; AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective; MonoidHom.bijective_of_surjective_of_bijective_of_right_exact; MonoidHom.mulExact_iff_of_surjective_of_bijective_of_injective.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the three exact existing project definitions with existing:true; no separate definition node owns them. Generic Mathlib exactness and five-lemma APIs do not package these signed five-term rows and the four comparison functions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, Function.Bijective, shiftFunctor",
+   "results": "OK 0 hits; loogle: unknown identifier 'shiftFunctor'.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the three exact existing project definitions with existing:true; no separate definition node owns them. Generic Mathlib exactness and five-lemma APIs do not package these signed five-term rows and the four comparison functions."
+  },
+  {
+   "tool": "grep",
+   "query": "HomFiveExact|ImageHomFiveExact|OuterBijective",
+   "results": "OK 0 Mathlib hits.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the three exact existing project definitions with existing:true; no separate definition node owns them. Generic Mathlib exactness and five-lemma APIs do not package these signed five-term rows and the four comparison functions."
+  },
+  {
+   "tool": "rg",
+   "query": "HomFiveExact|ImageHomFiveExact|OuterBijective in dag/nodes, lean/WeilConjectures and lean/Sheaf",
+   "results": "No WeilConjectures hit. Three definitions in Sheaf/Paper/SmoothPurityTowerBinaryCounitRepresentability.lean, lines 127,142,159, used there and owned only by the statement node lem-sp-tower-binary-counit-representability. DAG broad phrase search also hits unrelated five-term predicate descriptions in det-ambient-ind-derived-triangulated and det-lem-constructible-ext-continuity-devissage; neither records these three declarations. No definition owner.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the three exact existing project definitions with existing:true; no separate definition node owns them. Generic Mathlib exactness and five-lemma APIs do not package these signed five-term rows and the four comparison functions."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "five.term",
+   "results": "0 blueprint nodes match 'five.term'. ancestor lem-sp-tower-evaluated-representability returns det-sp-tower-gluing.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the three exact existing project definitions with existing:true; no separate definition node owns them. Generic Mathlib exactness and five-lemma APIs do not package these signed five-term rows and the four comparison functions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-tower-evaluated-representability",
+  "date": "2026-10-24",
+  "group": "NM"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Gluing and Levels: predicates for the five-term Hom ladder used by finite evaluated representability.",
+   "via": [
+    "lem-sp-tower-evaluated-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerBinaryCounitPredicates",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerBinaryCounit.HomFiveExact",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerBinaryCounit.HomFiveExact",
+   "AlgebraicGeometry.ProEtale.SpTowerBinaryCounit.ImageHomFiveExact",
+   "AlgebraicGeometry.ProEtale.SpTowerBinaryCounit.OuterBijective"
+  ],
+  "statement": "def HomFiveExact {C₀ : Type v₀} [Category.{w₀} C₀] [Preadditive C₀]\n    [HasShift C₀ ℤ] {A B M : C₀} (s : A ⟶ B) (t : B ⟶ M)\n    (d : M ⟶ (shiftFunctor C₀ (1 : ℤ)).obj A) (G : C₀) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definitions relocated verbatim to the public shared predicates module; the old item reexports them with the same public names and types.",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerBinaryCounitPredicates.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8410861df",
+  "group": "NM",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8410861df",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery fixes exactly the H2 fault of 1aafb427aeec: Lean modules byte-identical; item stmt_deps swap the theorem node lem-sp-tower-binary-counit-representability for new def-sp-tower-binary-counit-predicates (existing:true re-export of the landed HomFiveExact/ImageHomFiveExact/OuterBijective; H12 fields, searches, stmt_deps on base, TeX matches bodies incl. -s[1] sign; no H4 copy). §1(B) Models reproduces Construction's 29 witnesses verbatim; Nonempty theorem keeps the original hypotheses. Independent check of every clause: all finite ctf tests with no lift, naturality, ∃! counit-preserving iso for any finite adjunction, evaluation/open clauses, signed binary triangle and five-term rows, family/unit clauses; edge cases empty X, d=0, exponent 1. No hollow def, all theorems sorry, docstrings ok, statements verbatim, lines ≤99. Advisories: orphaned old Construction module; Models header says Q31."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-728da",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261025T163655-L-767613",
+  "kind": "interface",
+  "note": "independent cc review: item stmt + 17 relocated defs byte-identical vs clone; 3 new sorry lemmas vs item clauses (restricted pair = conjunct 1; lift & open comparison checked, no hidden need for dropped hyps); importer EvaluatedRepresentability compiled against delivered modules; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

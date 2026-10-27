@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-space-groupoid-presheaf-presentation",
+ "kind": "definition",
+ "title": "Realization of the original algebraic-space presheaf groupoid",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] with sizes as in [def-weil-size-convention], and let $U,R$ be algebraic spaces over $S$ [def-trf-algebraic-space]. Suppose natural transformations $s,t:R\\to U$, $e:U\\to R$, $j:R\\to R$ and $c:R\\times_{s,U,t}R\\to R$ satisfy the groupoid laws [def-sfb-algebraic-space-groupoid]. Use categories over $\\mathit{Sch}/S$, discrete fibred groupoids and vertical natural isomorphisms as in [def-sfb-stable-pointed-moduli-groupoids]. A presheaf-groupoid presentation on a category $P$ and a functor $a:h_U\\to P$ consists of: $P$ fibred in groupoids; a vertical natural isomorphism $\\eta:a s\\cong a t$; for every $T/S$ and $x,y\\in U(T)$ a bijection from the original arrows $\\{r\\in R(T):s(r)=x,t(r)=y\\}$ to the vertical arrows $a(x)\\to a(y)$ given by $\\eta$, with endpoint equalities transported; every object $z$ of $P$ over $T$ is isomorphic over the identity of $T$ to $a(x)$ for some $x\\in U(T)$; and the image of $c(q,r)$ is the composite of the images of $r$ and $q$. Thus $P$ realizes the original presheaf groupoid up to equivalence over the base, without imposing any stack condition. For any functor $i:P\\to Q$ over the base, the image relation is the vertical natural isomorphism whose component at $r$ is $i(\\eta_r)$. The canonical relation functor $h_R\\to h_U\\times_{a i,Q,a i}h_U$ sends $r$ to $(s(r),t(r),i(\\eta_r))$, and sends base arrows to their source and target pullbacks. The fibre product is the existing 2-fibre product of fibred groupoids.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "equation-quotient-stack immediately before Tag 044Q; Tags 044R, 044T and 04M9, canonical original-object and relation functors."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category fibered in groupoids associated to a groupoid object in presheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Grothendieck.fiber\", \"module\": \"Mathlib.CategoryTheory.Grothendieck\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Functor C CategoryTheory.Cat} → (self : CategoryTheory.Grothendieck F) → ↑(F.obj self.base)\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, the function maps an object $(c, x)$ in the Grothendieck category of $F$ to the category $F(c)$, which is the fiber ove\"}\n  {\"name\": \"HasFibers.Fib\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} →\\n      {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳} →\\n        (p : CategoryTheory.Functor 𝒳 𝒮) → [self : HasFibers p] → 𝒮 → Type u₃\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, the fiber category $ \\\\text{Fib}_p(S) $ over an object $ S \\\\in \\\\mathcal{S} $ consists of objects in $ \\\\mathcal{X} $ mapping to $ S $ under $ p\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.Grothendieck.fiber\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Grothendieck\", \"type\": \"{𝒮 : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete 𝒮) CategoryTheory.Cat} →\\n      (self : F.Grothendieck) → ↑(F.obj { as := self.base })\", \"doc\": \"For a category $\\\\mathcal{S}$ and a pseudofunctor $F : \\\\mathcal{S} \\\\to \\\\mathsf{Cat}$, the fiber of the Grothendieck category $\\\\int F$ over an object $X \\\\in \\\\mathcal{S}$ is the category $F(X)$ assigned \"}\n  {\"name\": \"HasFibers.category\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} →\\n      {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳} →\\n        {p : CategoryTheory.Functor 𝒳 𝒮} →\\n          [self : HasFibers p] → (S : 𝒮) → CategoryTheory.Category.{v₃, u₃} (HasFibers.Fib p S)\", \"doc\": \"Given a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, for each object $ S \\\\in \\\\mathcal{S} $, this constructs the category structure on the fiber category $ \\\\text{Fib}_p(S) $ consisting of objec\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.CoGrothendieck.fiber\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Grothendieck\", \"type\": \"{𝒮 : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete 𝒮ᵒᵖ) CategoryTheory.Cat} →\\n      (self : F.CoGrothendieck) → ↑(F.obj { as := Opposite.op self.base })\", \"doc\": \"Given a category $\\\\mathcal{S}$ and a pseudofunctor $F: (\\\\mathcal{S}^{\\\\text{op}})_{\\\\text{disc}} \\\\to \\\\mathsf{Cat}$ from the locally discrete opposite category of $\\\\mathcal{S}$ to the 2-category of small\"}\n  {\"name\": \"HasFibers.canonical\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"(p : 𝒳 ⥤ 𝒮) : HasFibers p\", \"doc\": \"Given a functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, this constructs the fibered category structure on $ p $ using the canonical fiber categories $ \\\\mathrm{Fib}(S) $ for each object $ S \\\\in \\\\mathcal{S\"}\n  {\"name\": \"HasFibers.mk\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] →\\n        {p : CategoryTheory.Functor 𝒳 𝒮} →\\n          (Fib : 𝒮 → Type u₃) →\\n            (category : autoParam ((S : 𝒮) → CategoryTheory.Category.{v₃, u₃} (Fib S)) \", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p : \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and for each object $S \\\\in \\\\mathcal{S}$: (1) a fiber category $\\\\mathrm{Fib}(S)$, (2) a functor $\\\\iota_S :\"}\n  {\"name\": \"CategoryTheory.Functor.Fiber\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fiber\", \"type\": \"(p : 𝒳 ⥤ 𝒮) (S : 𝒮)\", \"doc\": \"The fiber of the functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $ over an object $ S $ in $ \\\\mathcal{S} $ is the type of objects $ a $ in $ \\\\mathcal{X} $ such that $ p(a) = S $. It consists of all objects \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: generic fibre and Grothendieck constructions do not specify a realization with the original algebraic-space arrows; reuse the existing original groupoid laws and arrow-image helper"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic space groupoid original presheaf groupoid with all original objects arrows and composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Pregroupoid.groupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → Pregroupoid H → StructureGroupoid H\", \"doc\": \"The structure groupoid associated to a pregroupoid $\\\\mathcal{PG}$ on a topological space $H$ consists of open partial homeomorphisms $H \\rightleftharpoons H$ that satisfy $\\\\mathcal{PG}$'s local compati\"}\n  {\"name\": \"hasGroupoid_model_space\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ (H : Type u_5) [inst : TopologicalSpace H] (G : StructureGroupoid H), HasGroupoid H G\", \"doc\": \"For any topological space $ H $ and its structure groupoid $ G $, the natural charted space structure on $ H $ (where $ H $ serves as its own model space via the identity map) is compatible with $ G $\"}\n  {\"name\": \"idGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"(H : Type u_2) → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"For a topological space $ H $, this is the structure groupoid consisting of the identity open partial homeomorphism on $ H $ and all open partial homeomorphisms with empty source domain. It satisfies \"}\n  {\"name\": \"idRestrGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"The structure groupoid on a topological space $ H $ consisting of open partial homeomorphisms that are equivalent to identity maps on open subsets of $ H $. It is closed under composition, inverses, c\"}\n  {\"name\": \"instInhabitedStructureGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → Inhabited (StructureGroupoid H)\", \"doc\": \"For any topological space $ H $, the structure groupoid of $ H $ is inhabited, with the identity structure groupoid serving as an inhabitant.\"}\n  {\"name\": \"hasGroupoid_continuousGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M],\\n  HasGroupoid M (continuousGroupoid H)\", \"doc\": \"For a charted space $M$ over a topological space $H$, the continuous groupoid on $H$ is compatible with the charted space structure on $M$. This means that the structure groupoid of $M$ is the groupoi\"}\n  {\"name\": \"TopCat.of.hasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Basic\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H] {G : StructureGroupoid H} (M : Type u) [inst_1 : TopologicalSpace M]\\n  [inst_2 : ChartedSpace H M] [HasGroupoid M G], HasGroupoid (↑{ carrier := M, str := inst_1 }) G\", \"doc\": \"If a charted space $M$ over a topological space $H$ has a structure groupoid $G$, then the topological space obtained from $M$ via the canonical forgetful functor $\\\\text{TopCat.of}$ also has the struc\"}\n  {\"name\": \"CategoryTheory.groupoidOfElements\", \"module\": \"Mathlib/CategoryTheory/Elements\", \"type\": \"{G : Type u} →\\n  [inst : CategoryTheory.Groupoid G] → (F : CategoryTheory.Functor G (Type w)) → CategoryTheory.Groupoid F.Elements\", \"doc\": \"For any groupoid $\\\\mathcal{G}$ and functor $F : \\\\mathcal{G} \\\\to \\\\mathrm{Type}\\\\, w$, the category of elements $\\\\mathrm{Elements}\\\\, F$ forms a groupoid. This means that every morphism in $\\\\mathrm{Elemen\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: generic fibre and Grothendieck constructions do not specify a realization with the original algebraic-space arrows; reuse the existing original groupoid laws and arrow-image helper"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPresheafGroupoid|SpaceGroupoidRealization|GroupoidRealization",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: generic fibre and Grothendieck constructions do not specify a realization with the original algebraic-space arrows; reuse the existing original groupoid laws and arrow-image helper"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsPresheafGroupoid|SpaceGroupoidQuotientPresentation lean/Sheaf; rg -n lem-sfb-smooth-groupoid-fppf-quotient|spaceGroupoid|IsPresheafGroupoid lean/WeilConjectures; blueprint_refs.py search groupoid realization; DAG search presheaf of groupoids",
+   "results": "Upstream search: no hits. Project: AlgebraicSpaceGroupoid defines original pointwise laws; SpaceGroupoidQuotientPresentation defines an already stackified quotient, with local object surjectivity. Neither describes the original category before stackification. Blueprint search: 0 blueprint nodes match groupoid realization. DAG search found the algebraic-space groupoid laws, the scheme-only quotient presentation, action quotient and unrelated module/inertia definitions, but no general presheaf-groupoid realization.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse those existing laws and arrow maps, add only the original-category realization predicate and canonical image-relation construction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-groupoid-fppf-quotient",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Current blueprint sk-thm-sf-ctf-stability direct-images proof (3), inherited alteration/moduli prerequisite. The original presheaf groupoid in the smooth-groupoid quotient input, before its fppf stackification; the ancestor command returns None.",
+   "via": [
+    "lem-sfb-smooth-groupoid-fppf-quotient",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGroupoidPresheafPresentation",
+  "declaration": "CategoryTheory.SpaceGroupoidPresheafPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGroupoidPresheafPresentation.lean",
+  "statement": "structure SpaceGroupoidPresheafPresentation {S : Scheme.{u}} {U R : AlgebraicSpace S} (s t : R.obj.obj ⟶ U.obj.obj) (e : U.obj.obj ⟶ R.obj.obj) (j : R.obj.obj ⟶ R.obj.obj) (c : pullback s t ⟶ R.obj.obj) (P : BasedCategory.{v, w} (Over S)) (a : BasedFunctor (discreteModuli U.obj.obj) P)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SpaceGroupoidPresheafPresentation",
+   "CategoryTheory.spaceGroupoidImageRelation",
+   "CategoryTheory.spaceGroupoidKernelPairMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a090862a",
+  "group": "Q35",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a090862a",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Read item, all 7 stmt_deps, new node, both modules, report and every declaration used (SpaceMapIsSmooth, IsSmoothModuliAtlas, IsAlgebraicModuliStack, HasAlgebraicSpaceDiagonal, HasSpaceBaseChange, IsFppfStackification/IsFppfModuliStack, schemeSpace, IsPresheafGroupoid, spaceGroupoidPresentationArrow, moduliTwoFiberLift). Clause-by-clause match with 04TK/04WZ/04X0/04M9: groupoid laws, chartwise smooth s,t, P = presheaf groupoid up to equivalence (no stack condition, global objects), Q via 02ZP/0436 universal property, diagonal, atlas with actual projection, kernel-pair map r↦(s r,t r,i(η_r)) as equivalence, fppf+algebraic stack. No extra hypotheses; universes independent; edge cases ok. New node not a duplicate (existing quotient presentation assumes a stack), non-hollow, fields ok; lean.statement verbatim for both; item diff only lean+stmt_deps; one sorry; docstrings ok. No compile (nothing changed). Advisories: landed owners def-sfb-algebraic-moduli-stack, def-sfb-fppf-stackification, def-trf-scheme-algebraic-space, def-sfb-stable-pointed-moduli-groupoids not in item stmt_deps (new node also omits def-sfb-space-groupoid-quotient-presentation, def-sfb-moduli-chart-normalization); maintainer may add, as in Q61 artin-smooth-point-neighbourhood PASS. IsFppfModuliStack conjunct follows from hi. Second reading is a self-audit."
+ }
+}

@@ -82,7 +82,18 @@
   "thm-sp-grothendieck"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -135,5 +146,35 @@
   "landing": "20261018T062749-L-648834",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme and let $n\\geq1$ be invertible on $X$. The Kummer\nsequence of [def-sc-kummer-sequence] gives an exact sequence\n\n$$\n0\\longrightarrow\\operatorname{Pic}(X)/n\\cdot\\operatorname{Pic}(X)\\longrightarrow H^2(X_{\\Et},\\mu_n)\n\\longrightarrow\\operatorname{Br}(X)[n]\\longrightarrow0,\n$$\n\nwhere $\\operatorname{Pic}(X)=H^1(X_{\\Et},\\mathbf G_m)$ ([lem-sc-h1-gm-pic]),\n$\\operatorname{Br}(X)$ is the Brauer group of [def-br], the first map is the\nKummer coboundary and the second is induced by $\\mu_n\\subseteq\\mathbf G_m$.\n\nNow let $C$ be a curve over algebraically closed $k$ in the sense of\n[def-sc-curves]. It may be singular, non-reduced, disconnected or\nhave zero-dimensional components. Let $n>0$ be invertible in $k$.\nThen\n\n$$\nH^2(C,\\mu_n)\\simeq\\operatorname{Pic}(C)/n,\n$$\n\nwhere $\\mu_n$, the Picard group, and cohomology are as in\n[def-sc-kummer-sequence], [def-sc-picard-group], [def-weil-pbc-etale-cohomology].\nThe isomorphism is induced by the coboundary of the Kummer sequence,\n$\\operatorname{Pic}(C)=H^1(C,\\mathbf G_m)\\to H^2(C,\\mu_n)$\n([lem-sc-h1-gm-pic]). In particular $H^2(C_{\\Et},\\mathbf G_m)=0$\nfor every such $C$ ([lem-sc-brauer-zero-all-curves]).",
+  "proof": [
+   {
+    "text": "*General schemes.* Since $n$ is invertible on $X$, the Kummer sequence is\nexact on $X_{\\Et}$ ([lem-sc-kummer-exact]). In its long exact cohomology\nsequence\n$$\nH^1(X,\\mathbf G_m)\\xrightarrow{n}H^1(X,\\mathbf G_m)\\to H^2(X,\\mu_n)\\to\nH^2(X,\\mathbf G_m)\\xrightarrow{n}H^2(X,\\mathbf G_m)\n$$\nwe have $H^1(X,\\mathbf G_m)=\\operatorname{Pic}(X)$ ([lem-sc-h1-gm-pic]) and\n$H^2(X,\\mathbf G_m)=\\operatorname{Br}(X)$ ([def-br]). Exactness at the three\nmiddle terms gives the displayed short exact sequence: the kernel of the\ncoboundary is $n\\cdot\\operatorname{Pic}(X)$, and the image of\n$H^2(X,\\mu_n)\\to\\operatorname{Br}(X)$ is the kernel $\\operatorname{Br}(X)[n]$ of\nmultiplication by $n$.",
+    "uses": [
+     "lem-sc-kummer-exact",
+     "lem-sc-h1-gm-pic",
+     "def-br"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Curves.* By [lem-sc-brauer-zero-all-curves], $H^2(C_{\\Et},\\mathbf G_m)=0$.\nThis is exactly the hypothesis of [lem-sc-kummer-les]. That lemma\nidentifies $H^2(C,\\mu_n)$ with\n$\\operatorname{coker}(n:\\operatorname{Pic}(C)\\to\\operatorname{Pic}(C))\n=\\operatorname{Pic}(C)/n$, via the coboundary of the Kummer sequence\nand [lem-sc-h1-gm-pic].",
+    "uses": [
+     "lem-sc-brauer-zero-all-curves",
+     "lem-sc-kummer-les",
+     "lem-sc-h1-gm-pic"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

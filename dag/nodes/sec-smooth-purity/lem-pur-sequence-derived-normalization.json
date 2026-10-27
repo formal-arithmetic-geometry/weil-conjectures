@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-sequence-derived-normalization",
+ "kind": "statement",
+ "title": "Assembly of the normalized derived projection data",
+ "statement": "In the finite-field, l-invertible, finite-type setting of [def-weil-finite-field-fiber], let S be a supplied coherent coefficient calculus [lem-coef-derived-system-evaluation-calculus], O the ordinary quotient projection, and H its constant-ring factorization [def-pur-sequence-adjoint-resolution-data]. Then PurSequenceDerivedAdjoints(l,E,W,S,O) is inhabited: its universal left and right derived comparisons have the specified strict K-flat and K-injective models; its adjunction comparisons preserve the supplied unit and counit; and for every simultaneous tower replacement its canonical replacement isomorphism and lim(j) composition equation hold. The geometric factorization is an input, and this assertion supplies only the derived data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+ },
+ "stmt_deps": [
+  "def-pur-sequence-adjoint-resolution-data",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized K-injective comparison theorem to obtain RP, its universal comparison eta, and kappa to total inverse limit. Obtain a compatible K-flat comparison A and its chain-map transpose equation from the comparison-transpose lemma.",
+   "uses": [
+    "lem-pur-sequence-kinjective-comparison-shifts",
+    "lem-pur-sequence-comparison-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+   }
+  },
+  {
+   "text": "Take L to be the supplied reduction and R to be the supplied total limit. Use A.reductionCounit as the left comparison. Define the right comparison as the ordinary limit identification, followed by eta and kappa. Transport its left Kan universal property along these natural isomorphisms.",
+   "uses": [
+    "lem-pur-sequence-kflat-comparison-shifts",
+    "lem-pur-sequence-kinjective-comparison-shifts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Universal derived functors and uniqueness of Kan extensions."
+   }
+  },
+  {
+   "text": "Use the supplied coefficient adjunction and identity left and right isomorphisms. The representative field of A gives the left model; invertibility of eta on K-injectives gives the right model. The comparison-transpose equation gives hom_normalization, and identities give both unit and counit fields.",
+   "uses": [
+    "lem-pur-sequence-comparison-transpose",
+    "def-pur-sequence-adjoint-resolution-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+   }
+  },
+  {
+   "text": "Use the explicit arbitrary-replacement isomorphism of the K-injective comparison theorem. Functoriality of mapIso verifies model_eq. Prefix its lim(j) normalization by the localized ordinary limit isomorphism to get composition_model.",
+   "uses": [
+    "lem-pur-sequence-kinjective-comparison-shifts",
+    "def-pur-sequence-adjoint-resolution-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E; the normalized simultaneous replacement formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-kinjective-comparison-shifts",
+  "lem-pur-sequence-comparison-transpose",
+  "lem-pur-sequence-kflat-comparison-shifts",
+  "def-pur-sequence-adjoint-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ringed projection from a sequence site factors through the constant ring, with exact restriction of scalars and inverse limit direct image",
+   "results": "Read eight hits, including SheafOfModules.Presentation.map_π_eq and CondensedMod.ofSheafProfinite; none states the sequence-site factorization or its normalized coefficient interface.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Read leftAdjointUniq, unit_leftAdjointUniq_hom_app, leftAdjointUniq_hom_app_counit. These provide adjunction transport, not the sequence geometry or the supplied derived coefficient normalization.",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic transport API used in the assembly"
+  },
+  {
+   "tool": "grep",
+   "query": "Ringed.*[Ff]actor|homEquiv_ofNatIsoRight|derivedη_fac_app",
+   "results": "Read Mathlib/CategoryTheory/Adjunction/Basic.lean homEquiv_ofNatIsoRight_apply and Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean derivedη_fac_app. These are generic normalization formulas, with no actual quotient tower or coefficient calculus.",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurSequenceProjectionHomNormalization",
+  "date": "2026-10-24",
+  "group": "S6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-sequence-projection-hom-normalization",
+   "place": "Assembly of original proof steps 3–7 from the existing K-flat and K-injective comparisons."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurSequenceDerivedNormalization",
+  "file": "lean/Sheaf/Paper/PurSequenceDerivedNormalization.lean",
+  "declaration": "WeilConjectures.purSequenceDerivedNormalization",
+  "statement": "theorem purSequenceDerivedNormalization\n    (F : FiniteFieldDatum.{t}) (hl : l ≠ F.p)\n    [W.Over (Spec (.of F.k))]\n    [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))]\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (hS : CoefficientDerivedSystemCoherence l E W S)\n    (O : PurSequenceOrdinaryAdjoints l E W)\n    (H : PurSequenceRingedFactorization l E W O) :\n    Nonempty (PurSequenceDerivedAdjoints l E W S O)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261024T191050-L-238762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261024T191050-L-238762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

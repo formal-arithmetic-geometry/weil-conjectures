@@ -1,0 +1,353 @@
+{
+ "id": "lem-sfb-noetherian-scheme-cotangent-truncation",
+ "kind": "statement",
+ "title": "Coherent cotangent truncation for Noetherian schemes",
+ "statement": "Let $f:X\\to Y$ be a locally finitely presented morphism of schemes [def-pc-scheme, def-sbc-locally-finite-presentation], with $X,Y$ locally Noetherian [pqf-def-locnoeth]. Use the Zariski sheaf standard polynomial cotangent complex $L=L_{X/Y}$ [lem-trf-affine-cotangent-comparison] in $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Good truncation $N=\\tau_{\\geq-1}L$ means replacing degree $-1$ by the cokernel of the differential from degree $-2$, retaining degrees $\\geq0$ and discarding lower degrees. The complex $L$ has no positive-degree cohomology. The object $N$ has coherent cohomology sheaves, zero outside degrees $-1,0$, and $\\mathcal O_X$ is coherent [pqf-def-coherent]. Locally a presentation $R\\to P\\twoheadrightarrow A$, with $P$ a finite polynomial $R$-algebra and kernel $J$, identifies $N$ in the derived category with $[\\widetilde{J/J^2}\\to\\widetilde{\\Omega^1_{P/R}\\otimes_PA}]$ in degrees $-1,0$ [def-weil-pbc-kahler-differentials]. For every $\\mathcal O_X$-module $G$ in degree zero and $j=0,1$, precomposition with $L\\to N$ is an isomorphism\n$$\\operatorname{Hom}_{D(\\mathcal O_X)}(N,G[j])\\xrightarrow{\\sim}\\operatorname{Hom}_{D(\\mathcal O_X)}(L,G[j]).$$\nThe truncation and these maps commute with restriction to opens. No claim is made that $L$ itself has no cohomology below degree $-1$.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08UW (lemma-compare-cotangent-complex-with-naive-ringed-spaces); more-morphisms.tex Tags 0D0I (lemma-NL-affine), 0D0J (lemma-netherlander-quasi-coherent), 0D0K (lemma-netherlander-fp). Ext comparison from the truncation triangle and standard t-structure orthogonality, as used in Tag 08UZ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-locnoeth",
+  "lem-trf-affine-cotangent-comparison",
+  "def-weil-abstract-derived-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual standard sheaf complex in [lem-trf-affine-cotangent-comparison]. Its simplicial degree $n$ is placed in cochain degree $-n$ and there are zero positive terms, so $H^i(L)=0$ for $i>0$. Its good truncation $N$ therefore has only degrees $-1,0$: degree $-1$ is the incoming cokernel and degree $0$ is unchanged. The cohomology formula for good truncation gives $H^i(N)=H^i(L)$ for $i\\geq-1$ and zero for $i<-1$.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SS, 08UW; homology.tex Tag 0118"
+   }
+  },
+  {
+   "text": "Choose affine opens $U=\\operatorname{Spec}A\\subset X$, $V=\\operatorname{Spec}R\\subset Y$ with $f(U)\\subset V$. The ring map $R\\to(f^{-1}\\mathcal O_Y)(U)$ and the section maps of [lem-trf-affine-cotangent-comparison] give $L_{A/R}\\to L(U)$. The tilde/global-sections adjunction, applied degreewise, gives $\\widetilde{L_{A/R}}\\to L|_U$. At $x\\in U$ with primes $\\mathfrak p\\subset A$, $\\mathfrak q\\subset R$ this is the canonical map $L_{A/R}\\otimes_A A_{\\mathfrak p}\\to L_{A_{\\mathfrak p}/R_{\\mathfrak q}}$: the tilde stalk formula gives its source, and the cotangent stalk formula gives its target, using the inverse-image stalk isomorphism and the affine structure-sheaf stalk formula to identify $(f^{-1}\\mathcal O_Y)_x=R_{\\mathfrak q}$ and $\\mathcal O_{X,x}=A_{\\mathfrak p}$. The localization assertion of [lem-trf-affine-cotangent-comparison] says precisely that this map is a quasi-isomorphism. Exactness and detection of exactness by module stalks then show that the sheaf map is a quasi-isomorphism. All these maps are induced by the same section maps and hence commute with further restriction.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0I (lemma-NL-affine), stalk argument; cotangent.tex Tags 08SX, 08T0, 08SF"
+   }
+  },
+  {
+   "text": "For any polynomial presentation $R\\to P\\twoheadrightarrow A$ with kernel $J$, apply [lem-trf-lci-naive-cotangent-model] to get $\\tau_{\\geq-1}L_{A/R}\\simeq C(P)=[J/J^2\\to\\Omega^1_{P/R}\\otimes_PA]$. The associated-sheaf functor preserves kernels by [lem-sc-tilde-preserves-finite-limits] and cokernels by the colimit clause of [lem-weil-pbc-affine-tilde-gamma-adjunction]. It therefore preserves the kernel/image/quotient defining cohomology and the cokernel defining good truncation. Applying it to the ring comparison and using step 2 yields $N|_U\\simeq[\\widetilde{J/J^2}\\to\\widetilde{\\Omega^1_{P/R}\\otimes_PA}]$ in $D(\\mathcal O_U)$. This is the derived comparison, not merely an identification of its cohomology modules.",
+   "uses": [
+    "lem-trf-lci-naive-cotangent-model",
+    "lem-sc-tilde-preserves-finite-limits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08RB, 08UW; more-morphisms.tex Tag 0D0I; schemes.tex Tags 01HV, 01I7"
+   }
+  },
+  {
+   "text": "Choose the affine neighbourhoods in the definition of locally finite presentation: $A=R[x_1,\\ldots,x_n]/(g_1,\\ldots,g_m)$, so $P=R[x_1,\\ldots,x_n]$ and $J=(g_1,\\ldots,g_m)$. The classes of the $g_i$ generate $J/J^2$ over $A$: changing a coefficient by an element of $J$ changes its product with $g_i$ by an element of $J^2$. By the polynomial differential formula (with intermediate algebra $R$), $\\Omega^1_{P/R}\\otimes_PA\\simeq A^n$, since $\\Omega^1_{R/R}=0$ by the universal derivation definition. Thus both modules in step 3 are finite over $A$. Their associated sheaves are quasi-coherent and of finite type by the tilde-sections and affine finite-type assertions.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0K (lemma-netherlander-fp), explicit finite generators; algebra.tex Tag 00RX"
+   }
+  },
+  {
+   "text": "Every open $U$ used above is locally Noetherian, since $X$ is. By [pqf-lem-coherent-ft-locnoeth], both associated sheaves in step 3 are coherent. Their kernel and cokernel are coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]; these are exactly $H^{-1}(N)|_U$ and $H^0(N)|_U$. Coherence is local directly from its definition: at a point choose such a $U$, and test the finite generators and finite-type kernels after further restriction inside $U$. Hence the two global cohomology sheaves are coherent. Finally $\\mathcal O_X$ is quasi-coherent (locally $\\widetilde A$) and generated by $1$, so the same finite-type criterion makes it coherent.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ (lemma-coherent-Noetherian), 01Y0 (lemma-coherent-abelian-Noetherian)"
+   }
+  },
+  {
+   "text": "Put $T=\\tau_{\\leq-2}L$. The canonical truncation triangle is $T\\to L\\xrightarrow{q}N\\to T[1]$ by [lem-sf-derived-truncation-triangle] with $b=-1$. We have $T\\in D^{\\leq-2}$, $T[1]\\in D^{\\leq-3}$, and $G[j]\\in D^{\\geq-j}$ for $j=0,1$ under the shift convention of the standard t-structure. Orthogonality gives $\\operatorname{Hom}(T,G[j])=\\operatorname{Hom}(T[1],G[j])=0$, since $-2<-j$ and $-3<-j$. Apply [lem-weil-pbc-hom-out-of-triangle-exact]: every $L\\to G[j]$ factors through $q$ because its composite with $T\\to L$ is zero; two such factorizations differ by a map $N\\to G[j]$ factoring through $T[1]$, hence by zero. Therefore precomposition by $q$ is bijective, and is an isomorphism of abelian groups since composition is additive.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-derived-tstructure-orthogonality",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08J5 (remark-truncation-distinguished-triangle), 0149 (lemma-representable-homological); cotangent.tex Tag 08UZ"
+   }
+  },
+  {
+   "text": "For an open inclusion $j:W\\hookrightarrow X$, [lem-sc-derived-open-restriction-adjunction-exact] gives exact restriction of module sheaves. Termwise restriction therefore preserves the kernels and cokernels in good truncation and the kernel/image/quotient in cohomology; hence it preserves quasi-isomorphisms and induces a functor on the derived categories. It identifies $j^{-1}N$ with $\\tau_{\\geq-1}(j^{-1}L)$, including the quotient map $j^{-1}q$, while [lem-trf-affine-cotangent-comparison] identifies $j^{-1}L$ with the cotangent complex for the restricted morphism. For $a:N\\to G[j]$, restriction sends $a\\circ q$ to $(a|_W)\\circ(q|_W)$. This proves the commuting square of Hom restriction maps and the isomorphisms of step 6. An arbitrary $G$ is allowed; no coherence or flatness of $G$ was used.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category",
+    "lem-trf-affine-cotangent-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SV, 08UW; modules.tex Tag 01AK; good truncations in homology.tex Tag 0118"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kahler-differentials",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-sf-derived-truncation-triangle",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "pqf-def-coherent",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0D0I, 0D0K; cotangent.tex 08UW and 08UZ, with the truncation-triangle Hom argument expanded using derived.tex Tags 08J5 and 0149."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented morphism of locally noetherian schemes the truncation of the cotangent complex to degrees minus one and zero has coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.Extension.Cotangent.finite\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, P.ker.FG → Module.Finite S P.Cotangent\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if the kernel $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $ is finitely generated as an ideal, then t\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite ring H1Cotangent under projective differentials is only a ring-level special case; no Zariski cotangent truncation or coherent sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, Module.Finite",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]] : Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite ring H1Cotangent under projective differentials is only a ring-level special case; no Zariski cotangent truncation or coherent sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*coher|coher.*cotangent|H1Cotangent|naiveCotangent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite ring H1Cotangent under projective differentials is only a ring-level special case; no Zariski cotangent truncation or coherent sheaf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naive cotangent complex of noetherian schemes is the good truncation of the full cotangent complex and computes Ext zero and one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"HomologicalComplex.stupidTruncMap\", \"module\": \"Mathlib.Algebra.Homology.Embedding.StupidTrunc\", \"type\": \": K.stupidTrunc e ⟶ L.stupidTrunc e\", \"doc\": \"The homological complex obtained by first restricting the complex $ K $ via the embedding $ e $ and then extending it back using the same embedding, resulting in a complex where the original structure\"}\n  {\"name\": \"HomologicalComplex.stupidTrunc\", \"module\": \"Mathlib.Algebra.Homology.Embedding.StupidTrunc\", \"type\": \": HomologicalComplex C c'\", \"doc\": \"The homological complex obtained by first restricting the complex $ K $ via the embedding $ e $ and then extending it back using the same embedding, resulting in a complex where the original structure\"}\n  {\"name\": \"Ideal.instIsNoetherianCotangentOfSubtypeMem\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [IsNoetherian R ↥I], IsNoetherian R I.Cotangent\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, if $ I $ is a Noetherian $ R $-module, then the cotangent module $ I/I^2 $ is also Noetherian as an $ R $-module. This follows from the fact that quoti\"}\n  {\"name\": \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : Subsingleton (CotangentSpace R) ↔ IsField R\", \"doc\": \"For a Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ is trivial (i.e., a subsingleton) if and only if $ R $ is a field, where $ \\\\mathfrak{m} $ denotes the unique maxi\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"Algebra.Extension.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(P : Extension R S) : Subsingleton P.H1Cotangent ↔ Function.Injective P.cotangentComplex\", \"doc\": \"For an $ R $-algebra extension $ S $, the first cohomology group $ H^1 $ of the cotangent complex is trivial (i.e., all elements are equal) if and only if the canonical cotangent complex map $ \\\\ker(\\\\p\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite ring H1Cotangent under projective differentials is only a ring-level special case; no Zariski cotangent truncation or coherent sheaf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Truncated cotangent complex of finite presentation schemes is a bounded coherent complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation S Ω[S⁄R]\", \"doc\": \"If an $ R $-algebra $ S $ is finitely presented over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitely presented as an $ S $-module.\"}\n  {\"name\": \"Algebra.Extension.Cotangent.finite\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, P.ker.FG → Module.Finite S P.Cotangent\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if the kernel $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $ is finitely generated as an ideal, then t\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"KaehlerDifferential.finite\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S], Module.Finite S Ω[S⁄R]\", \"doc\": \"If $ S $ is a commutative ring that is finitely generated as an $ R $-algebra (essential finite type) over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitel\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Function.Injective ⇑P.toExtension.cotangentComplex\", \"doc\": \"The cotangent complex map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ is injective for a submersive presentation of an $R$-algebra $S$.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite ring H1Cotangent under projective differentials is only a ring-level special case; no Zariski cotangent truncation or coherent sheaf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The good truncation to degrees minus one and zero of the cotangent complex of a finite presentation morphism of locally Noetherian schemes has coherent cohomology and computes Ext zero and one",
+   "results": "8 hits; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.Extension.H1Cotangent, Algebra.H1Cotangent, Algebra.SubmersivePresentation.subsingleton_h1Cotangent, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.FormallySmooth.iff_subsingleton_and_projective",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring conormal modules, smoothness or stupid truncation, and do not state this Zariski derived cotangent/coherent truncation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, Module.Finite",
+   "results": "1 hits; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring conormal modules, smoothness or stupid truncation, and do not state this Zariski derived cotangent/coherent truncation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": "4 hits; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; directory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring conormal modules, smoothness or stupid truncation, and do not state this Zariski derived cotangent/coherent truncation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naive cotangent complex of noetherian schemes is the good truncation of the full cotangent complex and computes Ext zero and one",
+   "results": "8 hits; Algebra.Extension.H1Cotangent, HomologicalComplex.stupidTruncMap, HomologicalComplex.stupidTrunc, Ideal.instIsNoetherianCotangentOfSubtypeMem, IsLocalRing.subsingleton_cotangentSpace_iff, Algebra.Extension.cotangentComplex, Algebra.Extension.subsingleton_h1Cotangent, Algebra.H1Cotangent",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring conormal modules, smoothness or stupid truncation, and do not state this Zariski derived cotangent/coherent truncation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Truncated cotangent complex of finite presentation schemes is a bounded coherent complex",
+   "results": "8 hits; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, Algebra.Extension.Cotangent.finite, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.H1Cotangent, KaehlerDifferential.finite, Algebra.SubmersivePresentation.cotangentComplex_injective, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring conormal modules, smoothness or stupid truncation, and do not state this Zariski derived cotangent/coherent truncation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-scheme-deformation-hull",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: the passage from full cotangent Ext to a two-degree coherent complex in Tag 0DYA. Q127 split: affine localization and polynomial presentation realize the two-degree coherent replacement; the truncation triangle realizes its Ext^0 and Ext^1 comparison.",
+   "via": [
+    "lem-sfb-proper-scheme-deformation-hull",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-scheme-cotangent-truncation",
+  "worker": "Q127",
+  "summary": "Seven-step split using existing DAG nodes only. Explicitly construct the affine sheaf map and check its stalks, apply the natural ring naive comparison through exact associated sheaves, derive finite generators and coherence, and prove the Ext-zero/one comparison by separated t-structure bounds. No statement change and no new nodes.",
+  "blueprint": "The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/deformation support chain recorded in blueprint.from.place; this item supplies the coherent cotangent truncation used by Tag 0DYA for the proper-scheme deformation tangent space. The ancestor tool reports from.node=None, which is retained from the live node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-affine-cotangent-comparison",
+    "why": "Standard sheaf cotangent section/stalk/localization formulas, needed to establish the Zariski affine comparison without changing coefficient sites. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-trf-lci-naive-cotangent-model",
+    "why": "The general ring polynomial-presentation comparison, used without any regular-sequence assumption. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-sc-tilde-preserves-finite-limits",
+    "why": "Finite-limit preservation of the affine associated-sheaf functor, used for good truncation. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Affine tilde/global-sections adjunction and preservation of cokernels. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "The associated-sheaf stalk formula in the affine comparison. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Exact stalks and detection of exactness on the Zariski ringed space. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "why": "The polynomial differential basis in the finite presentation. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Quasi-coherence of associated modules. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Equivalence of module finite generation and finite type on an affine open. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "The locally Noetherian coherent iff quasi-coherent finite-type criterion. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Closure of coherent modules under the kernel and cokernel defining two-term cohomology. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Representable Hom exactness to prove surjectivity and injectivity separately. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Exact restriction of Zariski module sheaves, used for truncation and Hom naturality. No statement of this unit replaces this general algebra/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "The ring inverse-image stalk formula identifies the base ring in the cotangent stalk. No statement of this unit supplies this general sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Only clause (1), the affine structure-sheaf stalk formula; no domain hypothesis is used. No statement of this unit supplies this general sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-b18918fae",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-b18918fae (reviewer sub-agent of L); spot-checked: PASS. The delivery is a seven-step split with no new nodes. The statement and stmt_deps are unchanged and agree with Stacks 08UW (canonical map L→NL identifying τ_{≥-1}L) and 0D0I/0D0K (locally a two-term complex in the finitely presented case). Step checks: (1) is elementary, from def-kun-truncations with n=-1. (2) builds the affine map tilde(L_{A/R})→L|_U and checks it on stalks; the stalks are L_{A_p/R_q} by the inverse-image stalk lemma and clause (1) of spec-domain-stalks (the domain clause is not used); the localization clause applies because R∖q maps into A∖p; module-stalk-exact detects quasi-isomorphisms. (3) uses lci-naive-cotangent-model, which has no lci hypothesis and allows any polynomial P, and tilde is exact, so the result is a derived zig-zag and not only an identification of cohomology. (4) the classes of the g_i generate J/J^2 and Ω_{P/R}⊗A≅A^n by the polynomial-extension lemma with Ω_{R/R}=0. (5) uses the locally Noetherian coherence criterion and coherent kernel/cokernel closure, and coherence is local. (6) uses the truncation triangle with b=-1: the bounds T∈D^{≤-2}, T[1]∈D^{≤-3}, G[j]∈D^{≥-j} with j≤1 give the vanishing, and hom-out-of-triangle (i)/(ii) give surjectivity and injectivity. (7) uses exact restriction to opens. Edge cases tested: identity, polynomial algebra, closed immersion (Ext^1=Hom(I/I^2,G)), empty scheme. Batch-5: lem-trf-lci-naive-cotangent-model is a generic ring-theoretic comparison; its full closure has no nt-assume, Poincaré or trace-transport node, and neither assumption gives it, so the citation is accepted. All 13 declared tool_uses are generic and accepted. Maintainer note: Q119 delivered the same item in parallel (base cfb525d, one minute later); only one of the two should be merged."
+ }
+}

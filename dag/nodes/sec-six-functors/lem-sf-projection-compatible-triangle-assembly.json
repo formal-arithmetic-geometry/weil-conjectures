@@ -1,0 +1,281 @@
+{
+ "id": "lem-sf-projection-compatible-triangle-assembly",
+ "kind": "statement",
+ "title": "Compatible triangles realize the canonical compact-support projection compositor",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$; put $A_n=R/(t^n)$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Use the operation datum [def-fix-six-functor-datum], not a datum assuming projection invertibility. Schemes are finite type over $k$ and their structure morphisms need not be separated. Use the small pro-etale coefficient categories and the specified compactification projection map [def-exchange-projection], with compact-support functors [def-weil-integral-rational-qbar-compact-support]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be separated finite-type morphisms. Choose a compactification $Y\\xhookrightarrow{i}\\overline Y\\xrightarrow{s}Z$ of $g$. There is a compatible compactification triangle with open immersions $j:X\\hookrightarrow V$, $b:V\\hookrightarrow\\overline X$, proper maps $q:V\\to Y$, $p:\\overline X\\to\\overline Y$, $f=qj$, and $pb=iq$ Cartesian. All its schemes are finite-type, Noetherian and quasi-compact quasi-separated. At $A_n$, the direct-image and open comparisons of this triangle identify its normalized proper/open mate with the canonical compositor $\\alpha_{g,f}:Rg_!Rf_!\\xrightarrow{\\sim}R(gf)_!$ of [thm-sf-comp-composition] on bounded etale-origin inputs. For $K\\in D^b_c(X,A_n)$, $L\\in D^b_{ctf}(Z,A_n)$ the projection composites therefore satisfy, after inserting on the right the canonical pullback-composition identification $L(gf)^*L\\cong Lf^*Lg^*L$,\n$$\\alpha_{g,f,K\\otimes^LLf^*Lg^*L}\\,Rg_!(\\operatorname{PF}_{f,K,Lg^*L})\\,\\operatorname{PF}_{g,Rf_!K,L}=\\operatorname{PF}_{gf,K,L}(\\alpha_{g,f,K}\\otimes1_L).$$\nAll comparisons here are the specified counit-normalized direct-image, etale/pro-etale open-extension and open-composition maps. The identification respects threefold parenthesizations and identity morphisms. At the level of arbitrary strict semilinear system inputs, the same triangle and normalized operations give this equality before evaluation, with the system compositor of [lem-sf-composition-projection-mate].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete repair of fix-prop-projection-formula, former proof step(s) 10; Proof, repaired concrete step 10"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-fix-six-functor-datum",
+  "def-exchange-projection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "thm-sf-comp-composition",
+  "lem-sf-composition-projection-mate",
+  "def-sf-origin-candidate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the compatible compactification triangle existence theorem to the prescribed compactification (i,s). Construct V and W as the resulting pullback and ambient compactification, with their finite-type structure maps; properness and composition give finite type and quasi-compactness. Their Noetherianity follows from finite type over F.k. The pullback construction supplies both factorization equalities and Cartesianity. No separatedness of any structure morphism is used.",
+   "uses": [
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each supplied Cartesian triangle apply lem-sf-cartesian-compact-support-compositor. It uses the original candidateCompositor definition, now shared by public import; canonical is exactly its factor-compactification specialization. Thus the equality requires no comparison of independently inferred compactification instances. This yields equality of raw alpha and canonical at every plus-etale-origin input.",
+   "uses": [
+    "lem-sf-cartesian-compact-support-compositor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pull back constructibleFiniteTor L first along i s and then along j q using the source-library theorem constructibleFiniteTor_leftDerivedFunctor_upperStar_obj. For bounded constructible K and the pulled-back L, extract their bounded etale witnesses from the existing definition boundedConstructible. The comparison monoidality isomorphism provides the etale tensor as an origin witness for K tensor P_f P_g L. The source-library homologyConcentratedIn_tensor_of_torAmplitudeIn_right bounds its pro-etale image: choose bounds for K and use the given Tor interval of the second factor. Exact faithful comparison reflects boundedness by bounded_of_bounded_mapDerivedCategory_obj. Thus the etale tensor is bounded below. No finite Tor condition on K and no tensor constructibility theorem is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/LocalizationFiniteTor.lean",
+    "place": "constructibleFiniteTor_leftDerivedFunctor_upperStar_obj; ComparisonMonoidal comparison monoidality; DerivedCategory.FlatModel homology bounds and boundedness reflection"
+   }
+  },
+  {
+   "text": "Apply compositionProjectionMate to the supplied triangle and K,L. Expand leftMap and rightMap and rewrite raw alpha at K and at the tensor input by the preceding canonical identification. The resulting equality is exactly ProjectionEquation, with the specified trianglePull direction. The same theorem supplies ordinary and system associativity and the intrinsic system projection equation.",
+   "uses": [
+    "lem-sf-composition-projection-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Ordinary identity compatibility is the two gamma identity fields of ambientProperOpenPasting. For arbitrary realizations, their gamma is the mate of the inverse mate, hence the recorded gamma itself. The canonical bridge conjugates its square to the canonical semilinear square. Adjunction uniqueness transports sId and jId through push and shriek respectively. Cancel those bridge isomorphisms and use the canonical semilinear vertical and horizontal gamma identities to obtain the two actual system identity equations.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sf-cartesian-compact-support-compositor",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J--0F7K; explicit compatible triangle, tensor-origin construction and canonical-bridge identity transport; Cartesian compositor normalization isolated as a separate lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible compactification triangles identify the geometric compact support composition projection identity with the canonical compositor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"preStoneCechExtend_extends\", \"module\": \"Mathlib/Topology/Compactification/StoneCech\", \"type\": \"∀ {α : Type u} [inst : TopologicalSpace α] {β : Type v} [inst_1 : TopologicalSpace β] [inst_2 : T2Space β]\\n  [inst_3 : CompactSpace β] {g : α → β} (hg : Continuous g), preStoneCechExtend hg ∘ preStoneCechUnit = g\", \"doc\": \"For any continuous function $ g : \\\\alpha \\\\to \\\\beta $ where $ \\\\beta $ is a Hausdorff compact space, the composition of the Stone-Čech extension of $ g $ with the canonical unit map from $ \\\\alpha $ to i\"}\n  {\"name\": \"stoneCechExtend_extends\", \"module\": \"Mathlib/Topology/Compactification/StoneCech\", \"type\": \"∀ {α : Type u} [inst : TopologicalSpace α] {β : Type v} [inst_1 : TopologicalSpace β] [inst_2 : T2Space β] {g : α → β}\\n  (hg : Continuous g) [inst_3 : CompactSpace β], stoneCechExtend hg ∘ stoneCechUnit = g\", \"doc\": \"For any continuous function $ g : \\\\alpha \\\\to \\\\beta $ where $ \\\\beta $ is a compact Hausdorff space, the composition of the Stone-Čech extension $ \\\\beta\\\\alpha \\\\to \\\\beta $ with the unit map $ \\\\alpha \\\\to \"}\n  {\"name\": \"Profinite.lift_lifts_assoc\", \"module\": \"Mathlib/Topology/Category/Stonean/Basic\", \"type\": \"∀ {X Y : Profinite} {Z : Stonean} (e : Stonean.toProfinite.obj Z ⟶ Y) (f : X ⟶ Y) [inst : CategoryTheory.Epi f]\\n  {Z_1 : Profinite} (h : Y ⟶ Z_1),\\n  CategoryTheory.CategoryStruct.comp (Profinite.lift e f) (CategoryTheory.CategoryStruct.comp f h) =\\n    CategoryTheory.CategoryStruct.comp e h\", \"doc\": \"For any objects $X, Y$ in the category $\\\\mathbf{Profinite}$, a Stonean space $Z$, a morphism $e : \\\\text{Stonean.toProfinite}(Z) \\\\to Y$, an epimorphism $f : X \\\\to Y$ in $\\\\mathbf{Profinite}$, and a morp\"}\n  {\"name\": \"CompHaus.lift_lifts_assoc\", \"module\": \"Mathlib/Topology/Category/Stonean/Basic\", \"type\": \"∀ {X Y : CompHaus} {Z : Stonean} (e : Z.compHaus ⟶ Y) (f : X ⟶ Y) [inst : CategoryTheory.Epi f] {Z_1 : CompHaus}\\n  (h : Y ⟶ Z_1),\\n  CategoryTheory.CategoryStruct.comp (CompHaus.lift e f) (CategoryTheory.CategoryStruct.comp f h) =\\n    CategoryTheory.CategoryStruct.comp e h\", \"doc\": \"In the category of compact Hausdorff spaces, given an epimorphism $f: X \\to Y$, a morphism $e: Z \\to Y$ from a Stonean space $Z$, and a morphism $h: Y \\to Z_1$, the composition of the lift $\\\\text{CompHau\"}\n  {\"name\": \"OnePoint.map_comp\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/Basic\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} {Z : Type u_3} (f : Y → Z) (g : X → Y),\\n  OnePoint.map (f ∘ g) = OnePoint.map f ∘ OnePoint.map g\", \"doc\": \"For any functions $ f : Y \\\\to Z $ and $ g : X \\\\to Y $, the induced map on the one-point compactifications satisfies $ \\\\text{OnePoint.map}(f \\\\circ g) = \\\\text{OnePoint.map}(f) \\\\circ \\\\text{OnePoint.map}(\"}\n  {\"name\": \"CategoryTheory.SmallObject.ιObj_πObj\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [inst_3 : I.IsCardinalForSmallObjectArgument κ] {X Y : C}\\n  (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (CategoryTh\", \"doc\": \"For a morphism $f : X \\to Y$ in a category equipped with a morphism property satisfying cardinal constraints relative to a regular cardinal $\\\\kappa$, the composition of the embedding morphism $\\\\iota_{\\\\\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMapLE'\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) {n m : ℕ} (h : n ≤ m),\\n  ⇑(CategoryTheory.ConcreteCategory.hom (S.transitionMapLE h)) ∘ ⇑(CategoryTheory.ConcreteCategory.hom (S.proj m)) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (S.proj n))\", \"doc\": \"For natural numbers $n, m$ with $n \\\\leq m$, the composition of the transition map $S_m \\\\to S_n$ with the projection $S \\\\to S_m$ equals the direct projection $S \\\\to S_n$ in the inverse limit diagram of\"}\n  {\"name\": \"CompactlySupportedContinuousMap.comp_id\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"∀ {γ : Type u_4} {δ : Type u_5} [inst : TopologicalSpace γ] [inst_1 : TopologicalSpace δ] [inst_2 : Zero δ]\\n  (f : CompactlySupportedContinuousMap γ δ), f.comp (CocompactMap.id γ) = f\", \"doc\": \"For any compactly supported continuous function $ f : \\\\gamma \\\\to \\\\delta $, the composition of $ f $ with the identity map $ \\\\mathrm{id}_\\\\gamma : \\\\gamma \\\\to \\\\gamma $ satisfies $ f \\\\circ \\\\mathrm{id}_\\\\ga\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian finite type schemes admit compatible compactifications whose proper open mate is the compact support compositor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], CompactSpace ↥X\", \"doc\": \"Every Noetherian scheme is a compact space, meaning its underlying topological space satisfies the finite subcover property for open covers.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.OpenCover) [Finite 𝒰.I₀] [H : ∀ i, CompactSpace (𝒰.X i)] : CompactSpace X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that the index set is finite and each open subscheme $U_i$ is compact, then $X$ itself is a compact topological space.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsNoetherian X → Sort u} →\\n    (t : AlgebraicGeometry.IsNoetherian X) →\\n      ([toIsLocallyNoetherian : AlgebraicGeometry.IsLocallyNoetherian X] →\\n          [toCompactSpace : CompactSpace ↥X] → motive ⋯) →\\n        motive t\", \"doc\": \"Given a Noetherian scheme $X$ (i.e., locally Noetherian with compact underlying topological space), this recursor allows defining functions on $\\\\operatorname{IsNoetherian} X$ by specifying their behav\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} [Finite ι] {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) :\\n  IsNoetherian X ↔ ∀ i, IsNoetherianRing Γ(X, S i)\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [LocallyOfFiniteType f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsNoetherian X → Sort u} →\\n    (t : AlgebraicGeometry.IsNoetherian X) →\\n      ([toIsLocallyNoetherian : AlgebraicGeometry.IsLocallyNoetherian X] →\\n          [toCompactSpace : CompactSpace ↥X] → motive ⋯) →\\n        motive t\", \"doc\": \"Given a scheme $X$ that is Noetherian (i.e., locally Noetherian and with compact underlying topological space), this function allows defining functions on $\\\\operatorname{IsNoetherian} X$ by specifying\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} [NoetherianSpace X] (f : X ⟶ Y) : QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : Set ↥X}, IsCompact U ∧ IsOpen U ↔ ∃ s, s.Finite ∧ U = ⋃ i ∈ s, ↑↑i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both compact and open if and only if there exists a finite set $ s $ of affine open subsets of $ X $ such that $ U $ is the union of these affine open subsets.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"compactification\"",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry'\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "compactif.*(compo|triangle)|projection.*shriek",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible compactification triangle identifies the counit normalized proper open mate with the compact support compositor on derived etale origin complexes",
+   "results": "Hits: CategoryTheory.Adjunction.derivedε_fac_app, CompHausLike.LocallyConstant.adjunction_left_triangle, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, Condensed.profiniteSolidCounit, CategoryTheory.mateEquiv_counit, AlgebraicGeometry.ΓSpec.left_triangle, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, ordinary sheaf pushforward or unrelated adjunctions do not state the specified compact-support comparison on both coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "Hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, ordinary sheaf pushforward or unrelated adjunctions do not state the specified compact-support comparison on both coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "compactif.*(compo|triangle)|projection.*shriek",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, ordinary sheaf pushforward or unrelated adjunctions do not state the specified compact-support comparison on both coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of derived pushforward with compact support is compatible with tensor projection formula and normalized proper open interchange",
+   "results": "Hits: SheafOfModules.pushforwardComp, CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp', AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, TopCat.Presheaf.Pushforward.comp_eq, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, ordinary sheaf pushforward or unrelated adjunctions do not state the specified compact-support comparison on both coefficient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof: Proof, repaired concrete step 10; extracted former concrete step(s) 10",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-projection-compatible-triangle-assembly",
+  "worker": "stage1",
+  "summary": "Assembled the compatible triangle and normalized pro-etale compositor from existing geometry, proper/open mate and site-pasting statements; checked finite-Tor only on L, and used the intrinsic system identity before evaluation. No statement change, no new nodes. Searched project source and Mathlib; no exact finished project declaration or Mathlib specialization covers every clause.",
+  "blueprint": "Realizes the composition clause in fix-prop-projection-formula.proof.md: \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence].\" This item is the compatible-triangle and composition part, extracted as former concrete step 10. No purity or duality route is substituted.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherian permanence verifies the geometric domain of the site and triangle tools; this unit has no geometric substitute."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic qcqs criterion needed for the triangle existence theorem, without absolute separatedness."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Generic Nagata compatible-triangle existence; it supplies the geometry, not the projection identity of this unit."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Only the definition that proper includes finite type, to check ambient schemes."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic permanence supplies quasi-compactness of the open arrows."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open-unit normalization identifies beta and its restriction; no projection invertibility is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal double-adjunction calculation identifies the proper mate with the open adjunct; this unit does not replace the mates calculus."
+   },
+   {
+    "node": "lem-exc-proetale-derived-open-restriction",
+    "why": "Generic normalized open-restriction isomorphism defines lambda for the Cartesian square."
+   },
+   {
+    "node": "lem-exc-etale-origin-proper-open-interchange",
+    "why": "Generic site-transported proper/open normalization on bounded-below witnessed inputs, used only to identify the same actual arrow."
+   },
+   {
+    "node": "lem-sp-finite-site-tower-paste",
+    "why": "Generic equation for the computed tower arrow with the canonical site comparisons, used to identify this unit's compositor."
+   },
+   {
+    "node": "lem-pur-compact-support-site-coherence",
+    "why": "Generic composition/site comparison equation for the already canonical compositor; no purity or duality conclusion is used."
+   },
+   {
+    "node": "lem-sp-proper-open-coefficient-mate",
+    "why": "Its site square identifies the tower-paste pro-etale interchange with the etale-transported proper/open map, so it can be compared with Gamma_Q."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "States that the etale tower arrow of the tower-paste lemma restricts on bounded-below inputs to the etale compositor used by site coherence."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic finite-Tor pullback preservation checks the input domain of the canonical compositor."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Only clause (i), tensoring an arbitrary bounded constructible input with one finite-Tor factor, checks the domain."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic bounded constructible origin theorem supplies the witnesses required by the composition comparison."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "The specified definition identifies all projection components used in the mate formula."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "The already specified canonical compositor and its unital associative equations are the item's reference; this unit compares its projection map to them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-compatible-compactification-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-7146e17dc",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-7146e17dc (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, with every cited statement. There are no new nodes and the statement is unchanged. This is the item's first split: Q132 created it on 2026-10-22 from step 10 of fix-prop-projection-formula, and there is no repair note. No SGA source is used. The route is the blueprint composition sentence plus Stacks 0F7J lemma-shriek-composition (more-etale.tex l.3159; I checked its triangle construction). Cycle check: no closure of a cited node, including the two added ones, contains the item or its only citer fix-prop-projection-formula. Step 1: the qcqs and Noetherian hypotheses hold, and the triangle-lemma renaming U=V, c=j, p_Y=q is right. Step 2: I recomputed λ∘P_iΓ_Q∘u=1 from the base-change mate of θ, the open normalization of β and two triangle identities, so Γ_Q is the adjunct of λ⁻¹, which is the map C of lem-exc-etale-origin-proper-open-interchange (square matched with T=Ȳ, V=X̄, W=Y, U=V, k=b, r=q). Step 3: tower-paste letters (a,b,p,q,s)→(j,b,p,s,q); its B maps match site coherence and are invertible on D⁺, so the cancellation is valid. Two citations were missing (C3/C4), both fixed: (a) lem-amb-unbounded-compact-support-comparisons, needed because the tower lemma's A^e is the unbounded compositor and site coherence uses the bounded-below α^e of lem-amb-etale-compact-comparisons; (b) lem-sp-proper-open-coefficient-mate, whose site square identifies the tower Γ^p with the transported C and hence with Γ_Q. Step 3 now also cites the interchange lemma, and I added two tool_uses. Step 4: Tor pullback along g then f, tensor-ctf clause (i) with finite Tor only on L, and constructible-origin (ii) for the witnesses of K and K'. Step 5: the α of composition-projection-mate is the triangle mate A, so substituting A=α gives the formula. Step 6: units and associativity follow from thm-sf-comp-composition and the identity squares of ambient pasting (advisory: lem-sf-three-cell-compositor would be the direct citation). Step 7 is the system clause of composition-projection-mate. Small cases checked: identities, empty X, n=1, K without finite Tor, non-separated structure morphisms. Advisory overlap: lem-trf-proetale-composition-tower-normalization states A=α only for separated k-schemes, so the item generalizes it; not a duplicate. All declared tool uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProjectionCompatibleTriangleAssembly",
+  "declaration": "AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly.projectionCompatibleTriangleAssembly",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly.canonical",
+   "AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly.ProjectionEquation",
+   "AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly.IdentityCompatibility",
+   "AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly.SystemEquation",
+   "AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly.FiniteAssembly",
+   "AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly.projectionCompatibleTriangleAssembly"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProjectionCompatibleTriangleAssembly.lean",
+  "statement": "theorem projectionCompatibleTriangleAssembly (F : WeilConjectures.FiniteFieldDatum.{u}) (C : F.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (_S : WeilConjectures.SixFunctorOperationDatum F C E (n + 1) (Nat.le_add_left 1 n)) : (∀ {X Y B Z : Spaces F} (f : X ⟶ Y) (i : Y ⟶ B) (s : B ⟶ Z) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] [IsOpenImmersion ((geometry F).map i)] [IsProper ((geometry F).map s)], ∃ (V W : Spaces F) (j : X ⟶ V) (b : V ⟶ W) (q : V ⟶ Y) (p : W ⟶ B), IsOpenImmersion j.hom.left ∧ IsOpenImmersion b.hom.left ∧ IsProper q.hom.left ∧ IsProper p.hom.left ∧ f = j ≫ q ∧ b ≫ p = q ≫ i ∧ IsPullback b.hom.left q.hom.left p.hom.left i.hom.left ∧ IsNoetherian V.obj.left ∧ IsNoetherian W.obj.left ∧ QuasiCompact j.hom.left ∧ QuasiCompact b.hom.left ∧ QuasiCompact i.hom.left) ∧ FiniteAssembly F (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E (n + 1))) ∧ Associativity (ordinary F (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E (n + 1)))) ∧ IdentityCompatibility (ordinary F (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E (n + 1)))) ∧ ∀ (o : WeilConjectures.IntegralSystemRealization.Operations C.l E) (z : WeilConjectures.IntegralSystemRealization.Realizations C.l E F o), SystemEquation (realizedSystems F C.l E o z) (realizedTensor F C.l E o z) ∧ Associativity (realizedSystems F C.l E o z) ∧ IdentityCompatibility (realizedSystems F C.l E o z)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Component notation for the specified canonical compositor on chosen compactifications, its projection equation, and exact finite/system assembly. Definition dependency def-sf-origin-candidate-comparison owns the existing towerCandidateComparison; no separated-base normalization theorem is used. SystemEquation asserts no invertibility of system mates. H2 repair of fb8e5eb1b0db: Lean source unchanged, theorem-only added statement dependency replaced by its existing definition ownership node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-058388375",
+  "group": "Q124",
+  "result": "fix",
+  "note": "Re-delivery after H2 RETURN (fb8e5eb1b0db): item Lean byte-identical; the theorem stmt_dep lem-trf-proetale-composition-tower-normalization is replaced by new existing:true def node def-sf-origin-candidate-comparison owning towerCandidateComparison. Verified against the live body: Λ, universes, QuasiCompact f, c→d direction, fully faithful preimage of compactSupportSiteComparison / Etale PlusιIso / inverse; no choice, no separatedness; statement verbatim; no cycle. F1 FIXED: the new node cited theorem lem-sf-class-compact-support-comparison (K0/separated/A_{E,n} scope) for the plain def compactSupportSiteComparison, owned by def node def-sf-compact-support-site-comparison-construction; fixes/def-sf-origin-candidate-comparison.json swaps the citation in statement and stmt_deps (brackets = stmt_deps). Item clauses re-read (geometry, FiniteAssembly with an independent canonical compositor, Tor only on L, trianglePull direction, SystemEquation without IsIso, edge cases, gates): no fault. Advisories: _S unused; identity/associativity rendering; ρ^e cited via a lemma because it has no def owner. JSON-only fix, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9315d",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261025T201530-L-2565625",
+  "kind": "interface",
+  "note": "independent cc review: cartesianCompactSupportCompositor (new sorry) against the first conjunct of the unchanged FiniteAssembly and the tool signatures (all for any finite CommRing A); item proof and node proof/proof_deps against the Lean; candidateCompositor move against the clone and the change record; reader gate: OrderedAffineTransposeProjection compiled against the delivered modules"
+ }
+}

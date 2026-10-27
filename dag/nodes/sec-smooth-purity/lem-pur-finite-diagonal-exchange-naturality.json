@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-finite-diagonal-exchange-naturality",
+ "kind": "statement",
+ "title": "FiniteDiagonalExchangeNaturality",
+ "statement": "Naturality of the final canonical diagonal-unit isomorphism.\nSource: blueprint def-pur-td-datum, final unit isomorphism and canonical-map paragraph.\n(blueprint: lem-pur-finite-diagonal-exchange-naturality).\n\nLean signature:\ntheorem exchangeCore_naturality (c : Compactification f)\n    (K K' L : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))\n    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X K)\n    (hK' : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X K')\n    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X L)\n    (hP : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) (pullback f f)\n      ((pullFor A (pullback.fst f f)).obj K))\n    (hP' : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) (pullback f f)\n      ((pullFor A (pullback.fst f f)).obj K')) (a : K ⟶ K') :\n    (compactSupportFor A (c.ofIsPullback (IsPullback.of_hasPullback f f))).map\n        (((tensorFor A (pullback f f)).map ((pullFor A (pullback.fst f f)).map a)).app\n          ((pullFor A (pullback.snd f f)).obj L)) ≫\n      (exchangeCore A f c K' L hK' hL hP').hom =\n        (exchangeCore A f c K L hK hL hP).hom ≫\n          ((tensorFor A X).map ((pullFor A f).map ((compactSupportFor A c).map a))).app L",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.md",
+  "place": "Canonical-map paragraph and the displayed unit"
+ },
+ "stmt_deps": [
+  "def-pur-finite-trace-canonical-maps",
+  "lem-weil-derived-tensor-functorial",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "proof": [
+  {
+   "text": "set V = Lp1*, U = Lf*, S = Rf!, T = Rp2!, and B = Lp2*(L).\nThe exchange component is inverse projection\nT(V(K) tensor B) --> T(V(K)) tensor L followed by inverse self-square exchange\non the first tensor factor, giving U(S(K)) tensor L. Naturality of the projection\ntransformation in its first input gives its commuting square for V(a); invert its\nfinite-Tor isomorphism components by composing with their inverses on both sides.\nThe compact-support self-square base-change transformation is natural in K;\ninvert its finite-Tor components in exactly the same way. Apply the functor\n(- tensor L) to this second square. Composing these two squares, with functoriality\nand associativity, gives the displayed equation. The five finite-Tor hypotheses\ncertify the indicated projection and base-change inverses; no extra hypothesis on\na, K, or L is required. This also covers zero maps, the identity morphism, and\nempty schemes. The remaining formal work is categorical composition of these\nsquares with the native derived functors kept folded.",
+   "uses": [
+    "def-pur-finite-trace-canonical-maps",
+    "lem-weil-derived-tensor-functorial",
+    "lem-weil-finite-compact-projection-formula",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-trace-canonical-maps",
+  "lem-weil-derived-tensor-functorial",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.md",
+  "place": "Naturality of the specified canonical maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of canonical diagonal contraction and compact support self-square exchange in a derived category",
+   "results": "Generic categorical naturality results; no exact native diagonal contraction or compact-support self-square exchange match.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits, including CategoryTheory.NatTrans.naturality; no native canonical composite.",
+   "date": "2026-10-27",
+   "verdict": "component naturality only"
+  },
+  {
+   "tool": "grep",
+   "query": "contractionCore|exchangeCore",
+   "results": "Zero Mathlib hits; exact canonical maps are in the project source.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-td-datum",
+   "place": "FiniteDiagonalExchangeNaturality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-inv",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTraceDiagonalDatum",
+  "date": "2026-10-27",
+  "group": "V3"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteDiagonalExchangeNaturality",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.exchangeCore_naturality",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.exchangeCore_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteDiagonalExchangeNaturality.lean",
+  "statement": "theorem exchangeCore_naturality (c : Compactification f)\n    (K K' L : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))\n    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X K)\n    (hK' : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X K')\n    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X L)\n    (hP : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) (pullback f f)\n      ((pullFor A (pullback.fst f f)).obj K))\n    (hP' : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) (pullback f f)\n      ((pullFor A (pullback.fst f f)).obj K')) (a : K ⟶ K') :\n    (compactSupportFor A (c.ofIsPullback (IsPullback.of_hasPullback f f))).map\n        (((tensorFor A (pullback f f)).map ((pullFor A (pullback.fst f f)).map a)).app\n          ((pullFor A (pullback.snd f f)).obj L)) ≫\n      (exchangeCore A f c K' L hK' hL hP').hom =\n        (exchangeCore A f c K L hK hL hP).hom ≫\n          ((tensorFor A X).map\n            ((pullFor A f).map ((compactSupportFor A c).map a))).app L",
+  "by": "V3",
+  "date": "2026-10-27",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6565d",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T202718-L-3479550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6565d",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T202718-L-3479550",
+  "kind": "interface",
+  "note": "independent cc review: Item FiniteTraceDiagonalDatum and node def-pur-td-datum against the clone. The 15-declaration extraction is byte-identical; contraction/exchange naturality statements checked against contractionCore/exchangeCore (true; projection and base-change naturality partly checked in Lean)."
+ }
+}

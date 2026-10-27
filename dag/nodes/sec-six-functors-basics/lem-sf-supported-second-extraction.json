@@ -1,0 +1,171 @@
+{
+ "id": "lem-sf-supported-second-extraction",
+ "kind": "statement",
+ "title": "Second supported coordinate extraction before a trace",
+ "statement": "Let A be finite commutative, f:X→Y proper, L∈D_A(Y) with canonical swap(L,L)=id, B∈D_A(X), e:B≅f*L and K∈D_A(Y). Use [def-sf-supported-diagonal-calculus]. Put F=Rf!, H K=B⊗f*K and β2=f*F B≅Rp2!p1*B. Define χ(B,N,K):(B⊗f*K)⊗f*N≅B⊗f*(N⊗K) as the associator, then 1_B tensor swap(f*K,f*N), then the inverse pullback tensor comparison. This is extractionShuffle, with no choice of data. The two maps from Rp2!(p1*(HK)⊗p2*B) to B⊗f*(FB⊗K) agree:\nC_B(HK);H(Q_f(B,K)^(-1)) = Rp2!(coordinateTwisted(f,L,K,e)⊗1);π_(p2,HK,p2*B)^(-1);(1_(HK)⊗(Rp2!(coordinate(f,L,e)^(-1));β2^(-1)));χ(B,FB,K).\nNo scalar trace, diagonal class, integral or triangular identity is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second supported coordinate extraction before a trace; the coordinate triangle computation before applying its scalar trace"
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use the native right-coefficient compact projection/exchange identity projectionMap_rightDerivedLowerShriekBaseChangeMap for the canonical self-product square. Combine the pullback tensor comparison and inverse square comparison as coefficientSplit. Invert the exchange and projection isomorphisms by cancellation. This directly proves inverse_exchange, without passing through ordinary direct images or forget-supports comparisons. The compact operations are those of def-amb-etale-compact-support.",
+   "uses": [
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the inverted square with B. Apply projectionMapAssociativity (lem-route-projection-map-associativity), naturality in the base coefficient, braidedness of pullback, and the symmetric monoidal hexagons. The resulting cyclic_projection identity, specialized as projection_cycle, replaces successive inverse projections by the inverse ordered projection and cyclicShuffle.",
+   "uses": [
+    "lem-route-projection-map-associativity",
+    "lem-asd-derived-pullback-symmetry",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sf-supported-coefficient-braid: coefficientSplit tensored with p2*B followed by cyclicShuffle equals coordinateTwisted tensored with p2*B followed by the inverse coordinate comparison on B. This is the common coefficient and even-symmetry calculation, involving only inverse images and tensor products.",
+   "uses": [
+    "lem-sf-supported-coefficient-braid"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move the remaining inverse coordinate comparison through inverse ordered projection by naturality. Move inverse exchange on B through the associator and symmetry by naturality. The final three maps are exactly extractionShuffle. Expanding comparison at the start gives the required equality with the original canonical maps. These cancellations take place before any scalar trace or diagonal class is supplied. Generic tensor component equations and the component equations for composite functors identify the raw derived-functor presentation with the monoidal diagram chase, without changing any canonical map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "lem-route-projection-map-associativity",
+  "lem-asd-derived-pullback-symmetry",
+  "lem-kun-tensor-sym",
+  "lem-sf-supported-coefficient-braid"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle, common coefficient extraction; native supported projection/exchange square and projection associativity, with the coefficient braid proved separately by U4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical tensor projection map commutes with proper base change and composition of derived direct images",
+   "results": "TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange; LinearMap.baseChange_comp; IsBaseChange.of_comp. None states this identity of derived coordinate maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exchange and projection formula reassociation for a coefficient with identity self braiding before applying a trace",
+   "results": "CategoryTheory.MonoidalCategory.tensorδ; tensorμ; tensorδ_tensorμ; BraidedCategory.yang_baxter. These are tensor coherence, without the derived exchange/projection maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth|exchange.*projection|projection.*exchange in Mathlib/CategoryTheory/Monoidal; firstExtraction|secondExtraction|extractionShuffle in lean/Sheaf and lean/WeilConjectures",
+   "results": "No exact match. Existing project coordinateKunnethFactorization has ordinary supports and a pulled-back coefficient. Existing secondCoordinateContraction is after the scalar trace.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate pretrace supported identity. Blueprint search coordinate Kunneth and exchange tensor found zero imported blueprint nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfSupportedTraceContractions",
+  "date": "2026-10-27",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Second supported coordinate extraction before a trace before the trace; inherited null ancestor.",
+   "via": [
+    "lem-sf-supported-trace-contractions",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfSupportedSecondExtraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfSupportedSecondExtraction.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.secondExtraction",
+  "statement": "theorem secondExtraction {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    (L : DerivedCategoryModule A Y)\n    (hL : (CoordinateTrace.swap A Y L L).hom = 𝟙 _)\n    {B : DerivedCategoryModule A X} (e : B ≅ (CoordinateTrace.pull A f).obj L)\n    (K : DerivedCategoryModule A Y) :\n    (comparison A f B\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj\n          ((CoordinateTrace.pull A f).obj K))).hom ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) X).obj B).map\n          ((CoordinateTrace.pull A f).map ((projectionIso A f B).inv.app K)) =\n      (push A (pullback.snd f f)).map\n          (((derivedTensor (ModuleCat.{u + 1} A) (pullback f f)).map\n            (coordinateTwisted A f L K e).hom).app\n              ((CoordinateTrace.pull A (pullback.snd f f)).obj B)) ≫\n        (orderedProjection A (pullback.snd f f)\n          (((derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj\n            ((CoordinateTrace.pull A f).obj K))\n          ((CoordinateTrace.pull A (pullback.snd f f)).obj B)).inv ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) X).obj\n          (((derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj\n            ((CoordinateTrace.pull A f).obj K))).map\n          ((push A (pullback.snd f f)).map (SfDiagonalKernel.coordinate A f L e).inv ≫\n            (TraceDiagonalDatum.baseChangeIso (Λ := A) f).inv.app B) ≫\n        (extractionShuffle (ModuleCat.{u + 1} A) f B ((push A f).obj B) K).hom",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SupportedTrace.extractionShuffle",
+   "AlgebraicGeometry.Etale.SupportedTrace.secondExtraction"
+  ]
+ },
+ "split_report": {
+  "blueprint": "The second coordinate computation before applying the trace.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "def-sp-unbounded-proper-shriek-star-comparison",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-asd-source-proper-projection-coincidence",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T235918-L-1468120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T034752-L-3684687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

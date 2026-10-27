@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-affine-diagonal-raw-transpose-power",
+ "kind": "statement",
+ "title": "Root powers commute with the raw ordered affine trace transpose",
+ "statement": "In the finite setting [def-pur-conventions], let B be finite type over k and let r≤r' with both ell-powers annihilating A. For the rank-d ordered affine tower use [def-pur-affine-diagonal-integration-constructions]. Supply qB on the root sheaves and a scalar-extended line isomorphism eB, normalized by the kernel-inclusion power formula and its pure-generator formula. At each exponent let tr be inverse affineLinearCompactComparison followed by affineTraceCounit, and c the ordered coefficient descent. Let k=c'.hom followed by the projection pullback of the factorwise shifted tensor comparison induced by eB followed by c.inv. Then k followed by the exceptional transpose of tr equals the exceptional transpose of tr'. There is no external coordinate isomorphism, no integration existential and no dualizing base-change map in this assertion. The base need not be separated.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement"
+ },
+ "stmt_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The root inclusion is monic, so qB is the root-power map. The pure-generator formula fixes the scalar-extended line map by [lem-asd-etale-finite-twist-pullback]. Write N prime = qN. Map the N prime Kummer sequence to the N Kummer sequence by q-th power on the middle G_m and identity on the right G_m; the left map is qB. Both squares commute because Nq=N prime. Naturality of the connecting morphism [lem-weil-pbc-right-derived-universal-delta-functor] therefore sends each N prime boundary to the N boundary, for units and for Cartier transition functions. The coefficient insertion sends each pure root generator to the corresponding generator, so the same equality holds after scalar extension, without exactness of scalar extension. The normalized projective-line decomposition of [lem-asd-ordinary-finite-p1-adjunction] is consequently natural: the shifted line summand carries eB and the Chern summand identity. Invert that decomposition and project to the Chern summand to obtain the projective trace equation.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-kummer-any-base",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the projective trace by the affine open counit. Iterate in the specified coordinate order using the composite adjunction counits and compact-support comparisons of [def-pur-affine-diagonal-integration-constructions]. The resulting source transition is precisely the conjugation k by the two coefficient descents, so lowerShriek.map(k) followed by tr equals tr prime. At d=0 these are identity adjunctions.",
+   "uses": [
+    "def-pur-affine-diagonal-integration-constructions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the fixed exceptional Hom equivalence to that trace equation and its source naturality. The exceptional adjunction and lowerShriek functor depend on p, not on the exponent. This gives k followed by homEquiv(tr) = homEquiv(tr prime). The same construction applies on empty bases and uses no flatness of A over the root scalar ring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "def-pur-affine-diagonal-integration-constructions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized root power maps commute with derived coefficient pullback and affine space integration trace",
+   "results": "8 hits: Algebra.normalizedTrace and normalizedTrace_def, Polynomial.integralNormalization_map and related field-trace/polynomial normalization results. None concerns etale Tate coefficients, ordered integration or exceptional adjunctions.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root power comparison commutes with the exceptional transpose of ordered affine integration",
+   "results": "8 hits: RootPairing.RootPositiveForm.pairingIn_mul_eq_pairingIn_mul_swap, RootPairing.chainBotCoeff_mul_chainTopCoeff and root-system chain/reflection lemmas. No finite Tate comparison or derived trace equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv_apply, homEquiv_symm_apply and comp_homEquiv. These supply the generic adjunction API, not root-power trace compatibility. Local source homEquiv_naturality_left_symm gives the compact-support equation from the transpose equation.",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction glue only"
+  },
+  {
+   "tool": "grep",
+   "query": "root.*power|power.*root|homEquiv_naturality_left",
+   "results": "25 returned hits include rootsOfUnity.integer_power_of_ringEquiv, cyclotomic primitive-root power bases and number-field root-of-unity results. These concern algebraic roots and power bases, not sheaves, Tate scalar extension, compact-support integration or exceptional transposes. A separate local source search found the generic adjunction source-naturality lemma used in the assembly.",
+   "date": "2026-10-26",
+   "verdict": "no geometric match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalIntegrationOrientation",
+  "group": "F2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement",
+   "via": [
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalRawTransposePower",
+  "file": "lean/Sheaf/Paper/AffineDiagonalRawTransposePower.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalRawTranspose_power",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalRawTranspose_power"
+  ],
+  "statement": "theorem affineDiagonalRawTranspose_power (P : PurityFiniteSetting.{u})\n    (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (d r r' : ℕ) (hrr : r ≤ r')\n    (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : P.Coefficient) = 0)\n    (hA' : ((P.coefficients.l ^ (r' + 1) : ℕ) : P.Coefficient) = 0)\n    (qB : B.rootsOfUnitySheaf (P.coefficients.l ^ (r' + 1)) ⟶\n      B.rootsOfUnitySheaf (P.coefficients.l ^ (r + 1)))\n    (eB : Scheme.finiteEtaleTateLine B (P.coefficients.l ^ (r' + 1)) P.Coefficient hA' ≅\n      Scheme.finiteEtaleTateLine B (P.coefficients.l ^ (r + 1)) P.Coefficient hA)\n    (hqB : qB ≫ kernel.ι ((P.coefficients.l ^ (r + 1)) • 𝟙 B.gmSheaf) =\n      (P.coefficients.l ^ (r' + 1) / P.coefficients.l ^ (r + 1)) •\n        kernel.ι ((P.coefficients.l ^ (r' + 1)) • 𝟙 B.gmSheaf))\n    (heB : ∀ (V : B.Etaleᵒᵖ) (a : P.Coefficient)\n      (z : (B.rootsOfUnitySheaf (P.coefficients.l ^ (r' + 1))).obj.obj V),\n      eB.hom.hom.app V (Scheme.finiteEtaleTateOneGenerator P.Coefficient\n        (P.coefficients.l ^ (r' + 1)) B hA' V a z) =\n      Scheme.finiteEtaleTateOneGenerator P.Coefficient\n        (P.coefficients.l ^ (r + 1)) B hA V a (qB.hom.app V z)) :\n    letI := P.noetherian aB\n    let N := P.coefficients.l ^ (r + 1)\n    let N' := P.coefficients.l ^ (r' + 1)\n    let hN := pow_pos P.coefficients.prime.out.pos (r + 1)\n    let hN' := pow_pos P.coefficients.prime.out.pos (r' + 1)\n    let t := Etale.ambientAffineTraceTransport N hN P.Coefficient hA\n    let t' := Etale.ambientAffineTraceTransport N' hN' P.Coefficient hA'\n    let hB := WeilConjectures.PurityConventions.coefficientPower_isUnit P B aB r\n    let hB' := WeilConjectures.PurityConventions.coefficientPower_isUnit P B aB r'\n    let p := affineTraceProjection B d\n    let F := Etale.ordinaryFinitePullback P.Coefficient p\n    let c := Etale.affineLinearCoefficientDescent P.Coefficient N hA t B hB d\n    let c' := Etale.affineLinearCoefficientDescent P.Coefficient N' hA' t' B hB' d\n    let k := c'.hom ≫ F.map (P.affineDiagonalPowerComparison B r r' hA hA' eB d).hom ≫ c.inv\n    let tr := (Etale.affineLinearCompactComparison N hN P.Coefficient hA B hB d).inv ≫\n      Etale.affineTraceCounit P.Coefficient N hA t\n        (Etale.ambientAffineTraceDatum N hN P.Coefficient hA) B hB d\n    let tr' := (Etale.affineLinearCompactComparison N' hN' P.Coefficient hA' B hB' d).inv ≫\n      Etale.affineTraceCounit P.Coefficient N' hA' t'\n        (Etale.ambientAffineTraceDatum N' hN' P.Coefficient hA') B hB' d\n    k ≫ (Etale.rightDerivedUpperShriekAdjunction\n        (ModuleCat.{u + 1} P.Coefficient) p).homEquiv _ (𝟙_ _) tr =\n      (Etale.rightDerivedUpperShriekAdjunction\n        (ModuleCat.{u + 1} P.Coefficient) p).homEquiv _ (𝟙_ _) tr'",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T201830-L-2628638",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T201830-L-2628638",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
